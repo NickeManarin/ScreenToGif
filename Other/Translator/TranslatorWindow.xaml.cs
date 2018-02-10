@@ -276,7 +276,7 @@ namespace Translator
         {
             try
             {
-                var request = (HttpWebRequest) WebRequest.Create("https://api.github.com/scoutboy420/ScreenToGif/tree/language-codes/ScreenToGif/Resources/Localization");
+                var request = (HttpWebRequest) WebRequest.Create("https://api.github.com/repos/scoutboy420/ScreenToGif/contents/ScreenToGif/Resources/Localization");
                 request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
 
                 var response = (HttpWebResponse) await request.GetResponseAsync();
