@@ -517,13 +517,15 @@ namespace Translator
 
         private async Task<IEnumerable<CultureInfo>> GetOptimizedCultures()
         {
+            IEnumerable<CultureInfo> allCodes = CultureInfo.GetCultures(CultureTypes.AllCultures).Where(x => x != CultureInfo.InvariantCulture);
+
             IEnumerable<string> codes = await GetLanguageCodes();
             if (codes == null)
-                return CultureInfo.GetCultures(CultureTypes.AllCultures);
+                return allCodes;
 
             IEnumerable<CultureInfo> cultures = CultureInfo.GetCultures(CultureTypes.AllCultures).Where(x => codes.Contains(x.Name));
             if (cultures == null)
-                return CultureInfo.GetCultures(CultureTypes.AllCultures);
+                return allCodes;
 
             return cultures;
         }
@@ -563,7 +565,8 @@ namespace Translator
             }
             catch (Exception ex)
             {
-                Dispatcher.Invoke(() => Dialog.Ok("Translator", "Translator - Getting Language Codes", ex.Message));
+                Dispatcher.Invoke(() => Dialog.Ok("Translator", "Translator - Getting Language Codes", ex.Message +
+                    Environment.NewLine + "Loading all local language codes."));
             }
 
             GC.Collect();
@@ -599,7 +602,8 @@ namespace Translator
             }
             catch (Exception ex)
             {
-                Dispatcher.Invoke(() => Dialog.Ok("Translator", "Translator - Getting Language Codes Path", ex.Message));
+                Dispatcher.Invoke(() => Dialog.Ok("Translator", "Translator - Getting Language Codes Path", ex.Message +
+                    Environment.NewLine + "Loading all local language codes."));
             }
 
             GC.Collect();
