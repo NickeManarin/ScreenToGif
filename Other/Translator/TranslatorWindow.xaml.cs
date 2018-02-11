@@ -274,7 +274,7 @@ namespace Translator
         {
             try
             {
-                var request = (HttpWebRequest) WebRequest.Create("https://api.github.com/repos/scoutboy420/ScreenToGif/contents/ScreenToGif/Resources/Localization");
+                var request = (HttpWebRequest) WebRequest.Create("https://api.github.com/repos/NickeManarin/ScreenToGif/contents/ScreenToGif/Resources/Localization");
                 request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
 
                 var response = (HttpWebResponse) await request.GetResponseAsync();
@@ -519,9 +519,13 @@ namespace Translator
         {
             IEnumerable<string> codes = await GetLanguageCodes();
             if (codes == null)
-                return null;
+                return CultureInfo.GetCultures(CultureTypes.AllCultures);
 
-            return CultureInfo.GetCultures(CultureTypes.AllCultures).Where(x => codes.Contains(x.Name));
+            IEnumerable<CultureInfo> cultures = CultureInfo.GetCultures(CultureTypes.AllCultures).Where(x => codes.Contains(x.Name));
+            if (cultures == null)
+                return CultureInfo.GetCultures(CultureTypes.AllCultures);
+
+            return cultures;
         }
 
         private async Task<IEnumerable<string>> GetLanguageCodes()
