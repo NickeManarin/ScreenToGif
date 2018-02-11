@@ -89,7 +89,7 @@
     <s:String x:Key="Application.Shortcuts.StartPause">开始/暂停：</s:String>
     <s:String x:Key="Application.Shortcuts.Stop">停止：</s:String>
     <s:String x:Key="Application.Shortcuts.Discard">放弃：</s:String>
-    <s:String x:Key="Application.Shortcuts.Info">点击让键盘获取焦点，然后请按下所需的按键及其修饰键。有些组合键不可使用。</s:String>
+    <s:String x:Key="Application.Shortcuts.Info">在此处鼠标右键单击后,按下所需的修饰键(ctrl/alt/shift)和主按键来修改快捷键。有些组合键不可使用。</s:String>
 
     <s:String x:Key="Application.Other">其它</s:String>
     <s:String x:Key="Application.Other.NotifyFrameDeletion">删除帧前询问我</s:String>
@@ -160,7 +160,7 @@
     <s:String x:Key="TempFiles.LogsLocation.Choose">选择错误日志文件位置</s:String>
     <s:String x:Key="TempFiles.Location">文件夹位置</s:String>
     <s:String x:Key="TempFiles.Location.Choose">选择临时文件位置</s:String>
-    <s:String x:Key="TempFiles.Settings">设置位置</s:String>
+    <s:String x:Key="TempFiles.Settings">配置文件存放目录</s:String>
     <s:String x:Key="TempFiles.AppDataPath">AppData：</s:String>
     <s:String x:Key="TempFiles.LocalPath">本地：</s:String>
     <s:String x:Key="TempFiles.NotExists">不存在</s:String>
