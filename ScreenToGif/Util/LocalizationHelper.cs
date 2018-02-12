@@ -45,9 +45,9 @@ namespace ScreenToGif.Util
             #region Generic Branch Fallback
 
             //Fallback to a more generic version of the language. Example: pt-BR to pt.
-            if (requestedResource == null && culture.Length > 2 && !culture.StartsWith("en"))
+            while(requestedResource == null && !string.IsNullOrEmpty(culture))
             {
-                culture = culture.Substring(0, 2); //TODO: Support for language code like syr-SY (3 initial letters)
+                culture = CultureInfo.GetCultureInfo(culture).Parent.Name;
                 requestedCulture = $"/Resources/Localization/StringResources.{culture}.xaml";
                 requestedResource = dictionaryList.FirstOrDefault(d => d.Source?.OriginalString == requestedCulture);
             }
