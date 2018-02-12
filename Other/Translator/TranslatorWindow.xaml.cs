@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -18,7 +19,6 @@ using System.Windows.Navigation;
 using System.Windows.Threading;
 using System.Xml.Linq;
 using System.Xml.XPath;
-using Microsoft.Win32;
 using XamlReader = System.Windows.Markup.XamlReader;
 
 namespace Translator
@@ -50,8 +50,8 @@ namespace Translator
 
             StatusBand.Info("Loading language codes...");
 
-            var cultures = await GetOptimizedCultures();
-            var languageList = cultures.Select(x => new Culture { Code = x.Name, Name = x.DisplayName }).ToList();
+            var cultures = await GetProperCulturesAsync();
+            var languageList = await Task.Factory.StartNew(() => cultures.Select(x => new Culture { Code = x.Name, Name = x.DisplayName }).ToList());
             //var languageList = CultureInfo.GetCultures(CultureTypes.AllCultures).Select(x => new Culture { Code = x.IetfLanguageTag, Name = x.EnglishName }).ToList();
 
             FromComboBox.ItemsSource = languageList;
@@ -274,10 +274,10 @@ namespace Translator
         {
             try
             {
-                var request = (HttpWebRequest) WebRequest.Create("https://api.github.com/repos/NickeManarin/ScreenToGif/contents/ScreenToGif/Resources/Localization");
+                var request = (HttpWebRequest)WebRequest.Create("https://api.github.com/repos/NickeManarin/ScreenToGif/contents/ScreenToGif/Resources/Localization");
                 request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
 
-                var response = (HttpWebResponse) await request.GetResponseAsync();
+                var response = (HttpWebResponse)await request.GetResponseAsync();
 
                 using (var resultStream = response.GetResponseStream())
                 {
@@ -311,7 +311,7 @@ namespace Translator
             }
             catch (WebException web)
             {
-                Dispatcher.Invoke(() => Dialog.Ok("Translator", "Translator - Downloading Resources", web.Message + 
+                Dispatcher.Invoke(() => Dialog.Ok("Translator", "Translator - Downloading Resources", web.Message +
                     Environment.NewLine + "Trying to load files already downloaded."));
 
                 await LoadFilesAsync();
@@ -378,8 +378,8 @@ namespace Translator
                 if (name.EndsWith("en.xaml"))
                     _resourceTemplate = text;
 
-                var dictionary = new ResourceDictionary {Source = new Uri(Path.GetFullPath(file), UriKind.Absolute)};
-                
+                var dictionary = new ResourceDictionary { Source = new Uri(Path.GetFullPath(file), UriKind.Absolute) };
+
                 _resourceList.Add(dictionary);
 
                 //if (name.EndsWith("en.xaml"))
@@ -427,7 +427,7 @@ namespace Translator
         {
             //var baseCulture = FromComboBox.SelectionBoxItem as Culture;
             //var specificCulture = ToComboBox.SelectionBoxItem as Culture;
-           
+
             if (baseCulture == null)
             {
                 _translationList = null;
@@ -515,53 +515,18 @@ namespace Translator
             }
         }
 
-        private async Task<IEnumerable<CultureInfo>> GetOptimizedCultures()
+        private async Task<IEnumerable<CultureInfo>> GetProperCulturesAsync()
         {
-            IEnumerable<CultureInfo> allCodes = CultureInfo.GetCultures(CultureTypes.AllCultures).Where(x => x != CultureInfo.InvariantCulture);
+            IEnumerable<CultureInfo> allCodes = CultureInfo.GetCultures(CultureTypes.AllCultures).Where(x => !string.IsNullOrEmpty(x.Name));
 
-            IEnumerable<string> codes = await GetLanguageCodes();
-            if (codes == null)
-                return allCodes;
-
-            IEnumerable<CultureInfo> cultures = CultureInfo.GetCultures(CultureTypes.AllCultures).Where(x => codes.Contains(x.Name));
-            if (cultures == null)
-                return allCodes;
-
-            return cultures;
-        }
-
-        private async Task<IEnumerable<string>> GetLanguageCodes()
-        {
             try
             {
-                var path = await GetLanguageCodesPath();
+                IEnumerable<string> properCodes = await GetLanguageCodesAsync();
+                IEnumerable<CultureInfo> properCultures = allCodes.Where(x => properCodes.Contains(x.Name));
+                if (properCultures == null)
+                    return allCodes;
 
-                if (string.IsNullOrEmpty(path))
-                    return null;
-
-                var request = (HttpWebRequest)WebRequest.Create(path);
-                request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
-
-                var response = (HttpWebResponse)await request.GetResponseAsync();
-
-                using (var resultStream = response.GetResponseStream())
-                {
-                    if (resultStream == null)
-                        return null;
-
-                    using (var reader = new StreamReader(resultStream))
-                    {
-                        var result = reader.ReadToEnd();
-
-                        var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(result),
-                            new System.Xml.XmlDictionaryReaderQuotas());
-
-                        var json = await Task<XElement>.Factory.StartNew(() => XElement.Load(jsonReader));
-                        var languages = json.Elements();
-
-                        return languages.Where(x => x.XPathSelectElement("defs").Value != "0").Select(x => x.XPathSelectElement("lang").Value);
-                    }
-                }
+                return properCultures;
             }
             catch (Exception ex)
             {
@@ -570,44 +535,65 @@ namespace Translator
             }
 
             GC.Collect();
-            return null;
+            return allCodes;
         }
 
-        private async Task<string> GetLanguageCodesPath()
+        private async Task<IEnumerable<string>> GetLanguageCodesAsync()
         {
-            try
+            var path = await GetLanguageCodesPathAsync();
+
+            if (string.IsNullOrEmpty(path))
+                throw new WebException("Can't get language codes. Path to language codes is null");
+
+            var request = (HttpWebRequest)WebRequest.Create(path);
+            request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
+
+            var response = (HttpWebResponse)await request.GetResponseAsync();
+
+            using (var resultStream = response.GetResponseStream())
             {
-                var request = (HttpWebRequest)WebRequest.Create("https://datahub.io/core/language-codes/datapackage.json");
-                request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
+                if (resultStream == null)
+                    throw new WebException("Empty response from server when getting language codes");
 
-                var response = (HttpWebResponse)await request.GetResponseAsync();
-
-                using (var resultStream = response.GetResponseStream())
+                using (var reader = new StreamReader(resultStream))
                 {
-                    if (resultStream == null)
-                        return null;
+                    var result = reader.ReadToEnd();
 
-                    using (var reader = new StreamReader(resultStream))
-                    {
-                        var result = reader.ReadToEnd();
+                    var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(result),
+                        new System.Xml.XmlDictionaryReaderQuotas());
 
-                        var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(result),
-                            new System.Xml.XmlDictionaryReaderQuotas());
+                    var json = await Task<XElement>.Factory.StartNew(() => XElement.Load(jsonReader));
+                    var languages = json.Elements();
 
-                        var json = await Task<XElement>.Factory.StartNew(() => XElement.Load(jsonReader));
-
-                        return json.XPathSelectElement("resources").Elements().Where(x => x.XPathSelectElement("name").Value == "ietf-language-tags_json").First().XPathSelectElement("path").Value;
-                    }
+                    return languages.Where(x => x.XPathSelectElement("defs").Value != "0").Select(x => x.XPathSelectElement("lang").Value);
                 }
             }
-            catch (Exception ex)
-            {
-                Dispatcher.Invoke(() => Dialog.Ok("Translator", "Translator - Getting Language Codes Path", ex.Message +
-                    Environment.NewLine + "Loading all local language codes."));
-            }
+        }
 
-            GC.Collect();
-            return null;
+        private async Task<string> GetLanguageCodesPathAsync()
+        {
+            var request = (HttpWebRequest)WebRequest.Create("https://datahub.io/core/language-codes/datapackage.json");
+            request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
+
+            var response = (HttpWebResponse)await request.GetResponseAsync();
+
+            using (var resultStream = response.GetResponseStream())
+            {
+                if (resultStream == null)
+                    throw new WebException("Empty response from server when getting language codes path");
+
+                using (var reader = new StreamReader(resultStream))
+                {
+                    var result = reader.ReadToEnd();
+
+                    var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(result),
+                        new System.Xml.XmlDictionaryReaderQuotas());
+
+                    var json = await Task<XElement>.Factory.StartNew(() => XElement.Load(jsonReader));
+
+                    return json.XPathSelectElement("resources").Elements().Where(x => x.XPathSelectElement("name").Value == "ietf-language-tags_json").First().XPathSelectElement("path").Value;
+                }
+            }
         }
 
         #endregion
