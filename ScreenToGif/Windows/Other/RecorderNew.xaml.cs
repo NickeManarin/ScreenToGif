@@ -123,6 +123,8 @@ namespace ScreenToGif.Windows.Other
 
         #region Properties
 
+        public bool IsDialog { get; set; } = true;
+
         public bool IsPickingRegion
         {
             get => (bool)GetValue(IsPickingRegionProperty);
@@ -876,7 +878,11 @@ namespace ScreenToGif.Windows.Other
                     await Task.Delay(100);
 
                     ExitArg = ExitAction.Recorded;
-                    DialogResult = false;
+
+                    if (IsDialog)
+                        DialogResult = false;
+                    else
+                        Close();
 
                     #endregion
                 }

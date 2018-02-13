@@ -56,6 +56,8 @@ namespace ScreenToGif.Windows
         /// </summary>
         internal ProjectInfo Project { get; set; }
 
+        public bool IsDialog { get; set; } = true;
+
         /// <summary>
         /// The DPI of the current screen.
         /// </summary>
@@ -338,7 +340,11 @@ namespace ScreenToGif.Windows
                     #region Stop
 
                     ExitArg = ExitAction.Recorded;
-                    DialogResult = false;
+
+                    if (IsDialog)
+                        DialogResult = false;
+                    else
+                        Close();
 
                     #endregion
                 }
@@ -477,12 +483,18 @@ namespace ScreenToGif.Windows
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
+            if (IsDialog)
+                DialogResult = true;
+            else
+                Close();
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = false;
+            if (IsDialog)
+                DialogResult = false;
+            else
+                Close();
         }
 
         #endregion

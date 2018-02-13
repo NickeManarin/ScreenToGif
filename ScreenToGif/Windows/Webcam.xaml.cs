@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,7 +9,6 @@ using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
-using ScreenToGif.FileWriters;
 using ScreenToGif.Util;
 using ScreenToGif.Util.ActivityHook;
 using ScreenToGif.Util.Model;
@@ -28,6 +26,8 @@ namespace ScreenToGif.Windows
         /// The project information about the current recording.
         /// </summary>
         internal ProjectInfo Project { get; set; }
+
+        public bool IsDialog { get; set; } = true;
 
         //private CaptureWebcam _capture = null;
         private Filters _filters;
@@ -199,7 +199,7 @@ namespace ScreenToGif.Windows
 
             #region DPI
 
-            var source = PresentationSource.FromVisual(Application.Current.MainWindow);
+            var source = PresentationSource.FromVisual(this);
 
             if (source?.CompositionTarget != null)
                 _scale = source.CompositionTarget.TransformToDevice.M11;
@@ -458,7 +458,10 @@ namespace ScreenToGif.Windows
 
         private void BackButton_OnClick(object sender, RoutedEventArgs e)
         {
-            DialogResult = false;
+            if (IsDialog)
+                DialogResult = false;
+            else
+                Close();
         }
 
         private void ScaleButton_Click(object sender, RoutedEventArgs e)
@@ -582,7 +585,11 @@ namespace ScreenToGif.Windows
                     #region If not Already Stoped nor Pre Starting and FrameCount > 0, Stops
 
                     ExitArg = ExitAction.Recorded;
-                    DialogResult = false;
+
+                    if (IsDialog)
+                        DialogResult = false;
+                    else
+                        Close();
 
                     #endregion
                 }

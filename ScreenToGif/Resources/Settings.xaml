@@ -82,8 +82,8 @@
     <StylusTip x:Key="BoardEraserStylusTip">Rectangle</StylusTip>
 
     <!--Editor-->
-    <s:Double x:Key="EditorTop">-1.0</s:Double>
-    <s:Double x:Key="EditorLeft">-1.0</s:Double>
+    <s:Double x:Key="EditorTop">NaN</s:Double>
+    <s:Double x:Key="EditorLeft">NaN</s:Double>
     <s:Double x:Key="EditorWidth">NaN</s:Double>
     <s:Double x:Key="EditorHeight">NaN</s:Double>
     <WindowState x:Key="EditorWindowState">Normal</WindowState>

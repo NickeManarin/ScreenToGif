@@ -5,7 +5,6 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
-using ScreenToGif.FileWriters;
 
 namespace ScreenToGif.Util.Model
 {

@@ -53,7 +53,8 @@
     </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\ScreenToGif.XML</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
@@ -122,6 +123,7 @@
     <Compile Include="Controls\ExtendedUniformGrid.cs" />
     <Compile Include="Controls\ImageCard.cs" />
     <Compile Include="Controls\LabelSeparator.cs" />
+    <Compile Include="Controls\NotifyIcon.cs" />
     <Compile Include="Controls\SplitButton.cs" />
     <Compile Include="Controls\KeyBox.cs" />
     <Compile Include="Controls\HexadecimalBox.cs" />
@@ -150,7 +152,6 @@
     <Compile Include="Controls\StatusBand.cs" />
     <Compile Include="Controls\StatusList.cs" />
     <Compile Include="Controls\TextPath.cs" />
-    <Compile Include="Controls\TrayIcon.cs" />
     <Compile Include="Controls\WebcamControl.xaml.cs">
       <DependentUpon>WebcamControl.xaml</DependentUpon>
     </Compile>
@@ -266,6 +267,7 @@
     <Compile Include="Util\Enums.cs" />
     <Compile Include="Util\Extras.cs" />
     <Compile Include="Util\FastRandom.cs" />
+    <Compile Include="Util\Model\ApplicationViewModel.cs" />
     <Compile Include="Util\Model\FrameInfo.cs" />
     <Compile Include="Util\Glass.cs" />
     <Compile Include="Util\Global.cs" />
@@ -275,6 +277,7 @@
     <Compile Include="Util\LocalizationHelper.cs" />
     <Compile Include="Util\MathHelper.cs" />
     <Compile Include="Util\Model\ProjectInfo.cs" />
+    <Compile Include="Util\Model\StartupViewModel.cs" />
     <Compile Include="Util\Native.cs" />
     <Compile Include="ImageUtil\Video\AviWriter.cs" />
     <Compile Include="Util\LogWriter.cs" />
@@ -610,6 +613,7 @@
       <SubType>Code</SubType>
     </Compile>
     <AppDesigner Include="Properties\" />
+    <None Include="Graph1.dgml" />
     <None Include="Readme.md" />
   </ItemGroup>
   <ItemGroup>
@@ -632,6 +636,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Style.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Notification.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

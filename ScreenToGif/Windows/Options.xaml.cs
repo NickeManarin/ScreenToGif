@@ -1191,7 +1191,8 @@ namespace ScreenToGif.Windows
                 var temp = Path.Combine(Path.GetTempPath(), Path.GetTempFileName());
 
                 using (var client = new WebClient())
-                    await client.DownloadFileTaskAsync(new Uri("http://screentogif.com/downloads/Gifski.zip"), temp);
+                    await client.DownloadFileTaskAsync(new Uri("https://github.com/NickeManarin/ScreenToGif-Website/raw/master/downloads/Gifski.zip", UriKind.Absolute), temp);
+                    //await client.DownloadFileTaskAsync(new Uri("http://screentogif.com/downloads/Gifski.zip", UriKind.Absolute), temp);
 
                 using (var zip = ZipFile.Open(temp, ZipArchiveMode.Read))
                 {
@@ -1461,6 +1462,11 @@ namespace ScreenToGif.Windows
         #endregion
 
         #region Other
+
+        private void OkButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {

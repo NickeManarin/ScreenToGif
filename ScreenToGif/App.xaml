@@ -4,7 +4,9 @@
              xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
              xmlns:u="clr-namespace:ScreenToGif.Util"
              xmlns:n="clr-namespace:ScreenToGif.Controls"
+             xmlns:m="clr-namespace:ScreenToGif.Util.Model"
              Startup="Application_Startup" Exit="App_OnExit" DispatcherUnhandledException="App_OnDispatcherUnhandledException">
+
     <Application.Resources>
         <ResourceDictionary>
 
@@ -355,35 +357,9 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ToolTip}">
-                            <Grid>
-                                <Rectangle StrokeThickness="2" Margin="15,0,0,0" HorizontalAlignment="Left">
-                                    <Rectangle.Stroke>
-                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                            <GradientStop Color="#00BEBEBE" Offset="0"/>
-                                            <GradientStop Color="#00BEBEBE" Offset="1"/>
-                                            <GradientStop Color="#FFB1B1B1" Offset="0.2"/>
-                                            <GradientStop Color="#FFB1B1B1" Offset="0.8"/>
-                                        </LinearGradientBrush>
-                                    </Rectangle.Stroke>
-                                </Rectangle>
-
-                                <Rectangle StrokeThickness="2" Margin="0,0,15,0" HorizontalAlignment="Right" >
-                                    <Rectangle.Stroke>
-                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                            <GradientStop Color="#00BEBEBE" Offset="0"/>
-                                            <GradientStop Color="#00BEBEBE" Offset="1"/>
-                                            <GradientStop Color="#FFB1B1B1" Offset="0.2"/>
-                                            <GradientStop Color="#FFB1B1B1" Offset="0.8"/>
-                                        </LinearGradientBrush>
-                                    </Rectangle.Stroke>
-                                </Rectangle>
-
-                                <Border BorderBrush="#FFBEBEBE" BorderThickness="1" Effect="{DynamicResource Shadow.Border.Large}" Margin="5" Background="White" Padding="5">
-                                    <!--<TextBlock Text="{TemplateBinding Content}" Foreground="#FF5D5D5D" Padding="5" TextWrapping="WrapWithOverflow" 
-                                                   Width="Auto" HorizontalAlignment="Center" MinWidth="40" TextAlignment="Center" />-->
-                                    <ContentPresenter Content="{TemplateBinding Content}" Width="Auto" HorizontalAlignment="Center"/>
-                                </Border>
-                            </Grid>
+                            <Border BorderBrush="#FFBEBEBE" BorderThickness="1" Effect="{DynamicResource Shadow.Border.Large}" Margin="5" Background="White" Padding="5">
+                                <ContentPresenter Content="{TemplateBinding Content}" Width="Auto" HorizontalAlignment="Center"/>
+                            </Border>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
@@ -1102,6 +1078,38 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
+
+            <!--Notification Icon-->
+            <n:NotifyIcon x:Key="NotifyIcon" IconSource="/Resources/Notification.ico" NotifyToolTipText="ScreenToGif">
+                <n:NotifyIcon.NotifyToolTip>
+                    <Grid Background="White">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Text="ScreenToGif" FontSize="14" Foreground="Navy"/>
+                    </Grid>
+                </n:NotifyIcon.NotifyToolTip>
+
+                <n:NotifyIcon.ContextMenu>
+                    <ContextMenu>
+                        <n:ImageMenuItem Header="New recording" Image="{StaticResource Vector.Record.New}" InputGestureText="Ctrl + N" Command="{Binding OpenRecorder}"/>
+                        <n:ImageMenuItem Header="New webcam recording" Image="{StaticResource Vector.Camera.New}" Command="{Binding OpenWebcamRecorder}"/>
+                        <n:ImageMenuItem Header="New board recording" Image="{StaticResource Vector.Board.New}" Command="{Binding OpenBoardRecorder}"/>
+                        <Separator/>
+                        <n:ImageMenuItem Header="Editor" Image="{StaticResource Vector.Editor}" Command="{Binding OpenEditor}"/>
+                        <n:ImageMenuItem Header="Options" Image="{StaticResource Vector.Options}" Command="{Binding OpenOptions}"/>
+                        <Separator/>
+                        <n:ImageMenuItem Header="Exit" Image="{StaticResource Vector.Close}" Command="{Binding ExitApplication}"/>
+                    </ContextMenu>
+                </n:NotifyIcon.ContextMenu>
+
+                <n:NotifyIcon.DataContext>
+                    <m:ApplicationViewModel/>
+                </n:NotifyIcon.DataContext>
+            </n:NotifyIcon>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

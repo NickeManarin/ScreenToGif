@@ -440,4 +440,19 @@
         Average = 1,
         Sum = 2
     }
+
+    /// <summary>
+    /// Event flags for mouse-related events.
+    /// </summary>
+    public enum MouseEventType
+    {
+        MouseMove,
+        IconRightMouseDown,
+        IconLeftMouseDown,
+        IconRightMouseUp,
+        IconLeftMouseUp,
+        IconMiddleMouseDown,
+        IconMiddleMouseUp,
+        IconDoubleClick
+    }
 }

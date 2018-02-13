@@ -84,6 +84,8 @@ namespace ScreenToGif.Windows
         /// </summary>
         private IntPtr _lastHandle;
 
+        public bool IsDialog { get; set; } = true;
+        
         #region Flags
 
         public static readonly DependencyProperty StageProperty = DependencyProperty.Register("Stage", typeof(Stage), typeof(Recorder), new FrameworkPropertyMetadata(Stage.Stopped));
@@ -138,11 +140,9 @@ namespace ScreenToGif.Windows
 
             #region Adjust the position
 
+            //Tries to adjust the position/size of the window, centers on screen otherwise.
             if (!UpdatePositioning())
-            {
-                //If this is the first time opening the window (or someone reset the settings), let it center on the screen.
                 WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            }
 
             #endregion
 
@@ -171,7 +171,7 @@ namespace ScreenToGif.Windows
             #endregion
         }
 
-        private async void Recorder_Loaded(object sender, RoutedEventArgs e)
+        private void Recorder_Loaded(object sender, RoutedEventArgs e)
         {
             #region If Snapshot
 
@@ -179,8 +179,6 @@ namespace ScreenToGif.Windows
                 EnableSnapshot_Executed(null, null);
 
             #endregion
-
-            await Task.Factory.StartNew(UpdateScreenDpi);
 
             #region Timer
 
@@ -590,12 +588,18 @@ namespace ScreenToGif.Windows
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
+            if (IsDialog)
+                DialogResult = true;
+            else
+                Close();
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = false;
+            if (IsDialog)
+                DialogResult = false;
+            else
+                Close();
         }
 
         #endregion
@@ -1095,12 +1099,12 @@ namespace ScreenToGif.Windows
 
         private async void Window_LocationChanged(object sender, EventArgs e)
         {
-            _left = (int)Math.Round((Math.Round(Left, MidpointRounding.AwayFromZero) + Constants.LeftOffset) * _scale);
-            _top = (int)Math.Round((Math.Round(Top, MidpointRounding.AwayFromZero) + Constants.TopOffset) * _scale);
-
             //TestTextBlock.Text = $"{_left};{_top}";
 
             await Task.Factory.StartNew(UpdateScreenDpi);
+
+            _left = (int)Math.Round((Math.Round(Left, MidpointRounding.AwayFromZero) + Constants.LeftOffset) * _scale);
+            _top = (int)Math.Round((Math.Round(Top, MidpointRounding.AwayFromZero) + Constants.TopOffset) * _scale);
         }
 
         private void System_PowerModeChanged(object sender, PowerModeChangedEventArgs e)

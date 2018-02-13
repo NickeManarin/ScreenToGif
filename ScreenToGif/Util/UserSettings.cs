@@ -9,9 +9,12 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Ink;
 using System.Windows.Input;
-using System.Windows.Markup;
 using System.Windows.Media;
+using System.Xaml;
 using System.Xml;
+using XamlParseException = System.Windows.Markup.XamlParseException;
+using XamlReader = System.Windows.Markup.XamlReader;
+using XamlWriter = System.Windows.Markup.XamlWriter;
 
 namespace ScreenToGif.Util
 {
@@ -163,7 +166,7 @@ namespace ScreenToGif.Util
             All.OnPropertyChanged(key);
         }
 
-        private static ResourceDictionary LoadOrDefault(string path)
+        private static ResourceDictionary LoadOrDefault(string path, int trial = 0, XamlObjectWriterException exception = null)
         {
             ResourceDictionary resource = null;
 
@@ -172,10 +175,31 @@ namespace ScreenToGif.Util
                 if (!File.Exists(path))
                     return new ResourceDictionary();
 
+                if (exception != null)
+                {
+                    var content = File.ReadAllLines(path).ToList();
+                    content.RemoveAt(exception.LineNumber - 1);
+
+                    File.WriteAllLines(path, content);
+                }
+
                 using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                 {
+                    try
+                    {
                         //Read in ResourceDictionary File
                         resource = (ResourceDictionary)XamlReader.Load(fs);
+                    }
+                    catch (XamlParseException xx)
+                    {
+                        if (xx.InnerException is XamlObjectWriterException inner && trial < 5)
+                            return LoadOrDefault(path, trial + 1, inner);
+                    }
+                    catch (Exception ex)
+                    {
+                        //Sets a default value if null.
+                        resource = new ResourceDictionary();
+                    }
                 }
 
                 //Tries to load the resource from disk. 
@@ -308,7 +332,7 @@ namespace ScreenToGif.Util
 
         public bool NewRecorder
         {
-            get => (bool)GetValue();
+            get => (bool)GetValue(nameof(NewRecorder), true);
             set => SetValue(value);
         }
 

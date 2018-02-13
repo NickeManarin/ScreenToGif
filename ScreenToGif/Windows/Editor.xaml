@@ -10,11 +10,6 @@
         xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
         x:Name="EditorWindow" Title="{DynamicResource Editor.Title}" MinHeight="500" MinWidth="700" 
         Background="#FFF1F1F1" UseLayoutRounding="True" Icon="/Resources/Logo.ico"
-        Left="{Binding Source={x:Static u:UserSettings.All}, Path=EditorLeft, Mode=TwoWay}" 
-        Top="{Binding Source={x:Static u:UserSettings.All}, Path=EditorTop, Mode=TwoWay}"
-        Height="{Binding Source={x:Static u:UserSettings.All}, Path=EditorHeight}" 
-        Width="{Binding Source={x:Static u:UserSettings.All}, Path=EditorWidth}"
-        WindowState="{Binding Source={x:Static u:UserSettings.All}, Path=EditorWindowState}"
         FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}"
         Loaded="Window_Loaded" Closing="Window_Closing" Activated="Window_Activated" KeyUp="Window_KeyUp" Deactivated="Window_Deactivated">
 

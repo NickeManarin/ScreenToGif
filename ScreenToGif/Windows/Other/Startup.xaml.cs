@@ -34,11 +34,6 @@ namespace ScreenToGif.Windows.Other
                 CheckLatestRelease();
         }
 
-        private void Buttons_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
-        }
-
         private void Update_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = _newRelease != null;
@@ -110,70 +105,6 @@ namespace ScreenToGif.Windows.Other
             }
         }
 
-        private void WebcamRecorder_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            var webcam = new Webcam { Owner = this };
-            Application.Current.MainWindow = webcam;
-
-            Hide();
-
-            var result = webcam.ShowDialog();
-
-            if (result.HasValue && result.Value)
-            {
-                //If to close.
-                Environment.Exit(0);
-            }
-            else if (result.HasValue)
-            {
-                #region If Backbutton or Stop Clicked
-
-                if (webcam.ExitArg == ExitAction.Recorded)
-                {
-                    var editor = new Editor { Project = webcam.Project };
-
-                    GenericShowDialog(editor);
-                    return;
-                }
-
-                Show();
-
-                #endregion
-            }
-        }
-
-        private void Board_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            var board = new Board { Owner = this };
-            Application.Current.MainWindow = board;
-
-            Hide();
-
-            var result = board.ShowDialog();
-
-            if (result.HasValue && result.Value)
-            {
-                // If Close
-                Environment.Exit(0);
-            }
-            else if (result.HasValue)
-            {
-                #region If Backbutton or Stop Clicked
-
-                if (board.ExitArg == ExitAction.Recorded)
-                {
-                    var editor = new Editor { Project = board.Project };
-
-                    GenericShowDialog(editor);
-                    return;
-                }
-
-                Show();
-
-                #endregion
-            }
-        }
-
         private void Editor_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var editor = new Editor();
@@ -196,19 +127,7 @@ namespace ScreenToGif.Windows.Other
                     Environment.Exit(25);
             }
         }
-        
-        private void Options_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            var options = new Options { Owner = this };
-            options.ShowDialog();
-        }
-
-        private void TestButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            var test = new TestField();
-            test.ShowDialog();
-        }
-
+       
         #endregion
 
         #region Methods
@@ -220,9 +139,12 @@ namespace ScreenToGif.Windows.Other
             window.Owner = this;
             Application.Current.MainWindow = window;
 
-            window.ShowDialog();
+            window.Closed += (sender, args) =>
+            {
+                Close();
+            };
 
-            Close();
+            window.Show();
         }
 
         private async void CheckLatestRelease()

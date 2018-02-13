@@ -186,6 +186,14 @@ namespace ScreenToGif.Windows
         public Editor()
         {
             InitializeComponent();
+
+            #region Adjust the position
+
+            //Tries to adjust the position/size of the window, centers on screen otherwise.
+            if (!UpdatePositioning())
+                WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+            #endregion
         }
 
         #region Main Events
@@ -198,20 +206,6 @@ namespace ScreenToGif.Windows
 
             ScrollSynchronizer.SetScrollGroup(ZoomBoxControl.GetScrollViewer(), "Canvas");
             ScrollSynchronizer.SetScrollGroup(MainScrollViewer, "Canvas");
-
-            #region Window Positioning
-
-            if (Math.Abs(UserSettings.All.EditorLeft - -1) < 0.5)
-                UserSettings.All.EditorLeft = (SystemParameters.WorkArea.Width - SystemParameters.WorkArea.Left - Width) / 2;
-            if (Math.Abs(UserSettings.All.EditorTop - -1) < 0.5)
-                UserSettings.All.EditorTop = (SystemParameters.WorkArea.Height - SystemParameters.WorkArea.Top - Height) / 2;
-
-            if (UserSettings.All.EditorLeft > SystemParameters.WorkArea.Width)
-                UserSettings.All.EditorLeft = SystemParameters.WorkArea.Width - 100;
-            if (UserSettings.All.EditorTop > SystemParameters.WorkArea.Height)
-                UserSettings.All.EditorTop = SystemParameters.WorkArea.Height - 100;
-
-            #endregion
 
             #region Thumb Buttons
 
@@ -358,7 +352,12 @@ namespace ScreenToGif.Windows
                 ActionStack.Clear();
             }
 
-
+            //Manually get the position/size of the window, so it's possible opening multiple instances.
+            UserSettings.All.EditorTop = Top;
+            UserSettings.All.EditorLeft = Left;
+            UserSettings.All.EditorWidth = Width;
+            UserSettings.All.EditorHeight = Height;
+            UserSettings.All.EditorWindowState = WindowState;
             UserSettings.Save();
 
             Encoder.TryClose();
@@ -3440,7 +3439,7 @@ namespace ScreenToGif.Windows
 
         #endregion
 
-        #region Private Methods
+        #region Methods
 
         #region Load
 
@@ -3456,7 +3455,7 @@ namespace ScreenToGif.Windows
         /// <param name="project">The project to load.</param>
         /// <param name="isNew">True if this is a new project.</param>
         /// <param name="clear">True if should clear the current list of frames.</param>
-        private void LoadProject(ProjectInfo project, bool isNew = true, bool clear = true)
+        internal void LoadProject(ProjectInfo project, bool isNew = true, bool clear = true)
         {
             Cursor = Cursors.AppStarting;
             IsLoading = true;
@@ -4577,6 +4576,47 @@ namespace ScreenToGif.Windows
             return FrameListView.SelectedItems.OfType<FrameListBoxItem>().Select(x => FrameListView.Items.IndexOf(x)).OrderBy(y => y).ToList();
         }
 
+        private bool UpdatePositioning()
+        {
+            var top = UserSettings.All.EditorTop;
+            var left = UserSettings.All.EditorLeft;
+
+            //If the position was never set, let it center on screen. 
+            if (double.IsNaN(top) && double.IsNaN(left))
+                return false;
+
+            //The catch here is to get the closest monitor from current Top/Left point. 
+            var monitors = Monitor.AllMonitorsScaled(this.Scale());
+            var closest = monitors.FirstOrDefault(x => x.Bounds.Contains(new System.Windows.Point((int)left, (int)top))) ?? monitors.FirstOrDefault(x => x.IsPrimary);
+
+            if (closest == null)
+                return false;
+
+            //To much to the Left.
+            if (closest.WorkingArea.Left > UserSettings.All.EditorLeft + UserSettings.All.EditorWidth - 100)
+                left = closest.WorkingArea.Left;
+
+            //Too much to the top.
+            if (closest.WorkingArea.Top > UserSettings.All.EditorTop + UserSettings.All.EditorHeight - 100)
+                top = closest.WorkingArea.Top;
+
+            //Too much to the right.
+            if (closest.WorkingArea.Right < UserSettings.All.EditorLeft + 100)
+                left = closest.WorkingArea.Right - UserSettings.All.EditorWidth;
+
+            //Too much to the bottom.
+            if (closest.WorkingArea.Bottom < UserSettings.All.EditorTop + 100)
+                top = closest.WorkingArea.Bottom - UserSettings.All.EditorHeight;
+
+            Top = top;
+            Left = left;
+            Width = UserSettings.All.EditorWidth;
+            Height = UserSettings.All.EditorHeight;
+            WindowState = UserSettings.All.EditorWindowState;
+
+            return true;
+        }
+
         #endregion
 
         #region Other
@@ -5057,7 +5097,8 @@ namespace ScreenToGif.Windows
                 var drive = new DriveInfo(UserSettings.All.TemporaryFolder.Substring(0, 1));
                 var spaceLeft = drive.AvailableFreeSpace > 0 ? drive.AvailableFreeSpace * 100d / (double)drive.TotalSize : 100; //Get the percentage of space left.
 
-                if (spaceLeft < 10)
+                //If there's less than 2GB left.
+                if (drive.AvailableFreeSpace < 2000000000)
                     StatusList.Error(string.Format(this.TextResource("Editor.Warning.LowSpace"), (int)spaceLeft), null, () => { new Options(3).ShowDialog(); });
             }
             catch (Exception ex)
@@ -5363,8 +5404,6 @@ namespace ScreenToGif.Windows
                 //TODO: Should I delete the json file?
                 if (File.Exists(project.ProjectPath))
                     File.Delete(project.ProjectPath);
-
-                project.Clear();
             }
             catch (IOException io)
             {

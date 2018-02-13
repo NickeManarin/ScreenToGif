@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Media;
@@ -8,6 +9,8 @@ namespace ScreenToGif.Util
 {
     public static class VisualHelper
     {
+        public static readonly object LockObject = new object();
+
         public static TP GetParent<TP>(DependencyObject child, int i) where TP : DependencyObject
         {
             var parent = VisualTreeHelper.GetParent(child);
@@ -83,6 +86,45 @@ namespace ScreenToGif.Util
         internal static string DispatcherStringResource(this FrameworkElement visual, string key)
         {
             return visual.Dispatcher.Invoke(() => visual.FindResource(key).ToString());
+        }
+
+        internal static bool IsInDesignMode()
+        {
+            return (bool) DependencyPropertyDescriptor.FromProperty(DesignerProperties.IsInDesignModeProperty,
+                typeof(FrameworkElement)).Metadata.DefaultValue;
+        }
+
+        /// <summary>
+        /// Checks if the <see cref="FrameworkElement.DataContextProperty"/> is bound or not.
+        /// </summary>
+        /// <param name="element">The element to be checked.</param>
+        /// <returns>True if the data context property is being managed by a binding expression.</returns>
+        /// <exception cref="ArgumentNullException">If <paramref name="element"/> is a null reference.</exception>
+        internal static bool IsDataContextDataBound(this FrameworkElement element)
+        {
+            if (element == null)
+                throw new ArgumentNullException(nameof(element));
+
+            return element.GetBindingExpression(FrameworkElement.DataContextProperty) != null;
+        }
+
+        /// <summary>
+        /// Updates the taskbar icons.
+        /// </summary>
+        /// <param name="data">Configuration settings for the NotifyIcon.</param>
+        /// <param name="command">Operation on the icon (e.g. delete the icon).</param>
+        /// <param name="flags">Defines which members of the <paramref name="data"/> structure are set.</param>
+        /// <returns>True if the data was successfully written.</returns>
+        /// <remarks>See Shell_NotifyIcon documentation on MSDN for details.</remarks>
+        internal static bool WriteIconData(ref Native.NotifyIconData data, Native.NotifyCommand command, Native.IconDataMembers flags)
+        {
+            if (IsInDesignMode())
+                return true;
+
+            data.ValidMembers = flags;
+
+            lock (LockObject)
+                return Native.Shell_NotifyIcon(command, ref data);
         }
     }
 }
