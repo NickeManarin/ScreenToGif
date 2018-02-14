@@ -243,27 +243,22 @@ namespace Translator
             }
             catch(CultureNotFoundException)
             {
-                Dispatcher.Invoke(() => Dialog.Ok("Action Denied", "Unknown Language.", $"The \"{specificCulture}\" and its family were not recognized as a valid language codes."));
+                Dialog.Ok("Action Denied", "Unknown Language.", 
+                    $"The \"{specificCulture}\" and its family were not recognized as a valid language codes.");
 
                 return;
             }
             catch(Exception ex)
             {
-                Dispatcher.Invoke(() => Dialog.Ok("Action Denied", "Error checking culture.", ex.Message));
-
-                return;
-            }
-
-            if (properCulture == null)
-            {
-                Dispatcher.Invoke(() => Dialog.Ok("Action Denied", "Unknown Language.", $"The \"{specificCulture}\" and its family were not recognized as a valid language codes."));
+                Dialog.Ok("Action Denied", "Error checking culture.", ex.Message);
 
                 return;
             }
 
             if (properCulture.Name != specificCulture)
             {
-                Dispatcher.Invoke(() => Dialog.Ok("Action Denied", "Redundant Language Code.", $"The \"{specificCulture}\" code is redundant. Try using \'{properCulture.Name}\" instead"));
+                Dialog.Ok("Action Denied", "Redundant Language Code.", 
+                    $"The \"{specificCulture}\" code is redundant. Try using \'{properCulture.Name}\" instead");
 
                 return;
             }
@@ -624,9 +619,6 @@ namespace Translator
 
         private CultureInfo CheckSupportedCulture(CultureInfo culture)
         {
-            if (culture == null)
-                return null;
-
             if (_cultureList.Contains(culture))
                 return culture;
 
