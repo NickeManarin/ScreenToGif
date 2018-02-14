@@ -34,6 +34,11 @@ namespace ScreenToGif.Windows.Other
             StatusBand.Info("Getting resources...");
 
             AddButton.IsEnabled = false;
+            SaveButton.IsEnabled = false;
+            RemoveButton.IsEnabled = false;
+            DownButton.IsEnabled = false;
+            UpButton.IsEnabled = false;
+            OkButton.IsEnabled = false;
 
             foreach (var resourceDictionary in Application.Current.Resources.MergedDictionaries)
             {
@@ -81,6 +86,12 @@ namespace ScreenToGif.Windows.Other
 
             ResourceListBox.SelectedIndex = ResourceListBox.Items.Count - 1;
             ResourceListBox.ScrollIntoView(ResourceListBox.SelectedItem);
+
+            SaveButton.IsEnabled = true;
+            RemoveButton.IsEnabled = true;
+            DownButton.IsEnabled = true;
+            UpButton.IsEnabled = true;
+            OkButton.IsEnabled = true;
 
             StatusBand.Info("Getting language codes...");
 
