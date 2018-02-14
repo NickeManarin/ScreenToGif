@@ -180,22 +180,14 @@ namespace ScreenToGif.Util
 
     public static void SaveSelected(int selectedIndex, string path)
     {
-        try
-        {
-            if (selectedIndex < 0 || selectedIndex > Application.Current.Resources.MergedDictionaries.Count - 1)
-                throw new IndexOutOfRangeException("Index out of range while trying to save the resource dictionary.");
+         if (selectedIndex < 0 || selectedIndex > Application.Current.Resources.MergedDictionaries.Count - 1)
+             throw new IndexOutOfRangeException("Index out of range while trying to save the resource dictionary.");
 
-            var settings = new XmlWriterSettings { Indent = true };
+         var settings = new XmlWriterSettings { Indent = true };
 
-            using (var writer = XmlWriter.Create(path, settings))
-                System.Windows.Markup.XamlWriter.Save(Application.Current.Resources.MergedDictionaries[selectedIndex], writer);
-        }
-        catch (Exception ex)
-        {
-            LogWriter.Log(ex, "Save Xaml Resource Error");
+         using (var writer = XmlWriter.Create(path, settings))
+             System.Windows.Markup.XamlWriter.Save(Application.Current.Resources.MergedDictionaries[selectedIndex], writer);
 
-            Dialog.Ok("Impossible to Save", "Impossible to save the Xaml file", ex.Message, Dialog.Icons.Warning);
-        }
     }
 
     public static bool Remove(int selectedIndex)

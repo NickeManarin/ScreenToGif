@@ -31,6 +31,8 @@ namespace ScreenToGif.Windows.Other
         
         private async void Localization_OnLoaded(object sender, RoutedEventArgs e)
         {
+            StatusBand.Info("Getting resources...");
+
             AddButton.IsEnabled = false;
 
             foreach (var resourceDictionary in Application.Current.Resources.MergedDictionaries)
@@ -80,8 +82,11 @@ namespace ScreenToGif.Windows.Other
             ResourceListBox.SelectedIndex = ResourceListBox.Items.Count - 1;
             ResourceListBox.ScrollIntoView(ResourceListBox.SelectedItem);
 
+            StatusBand.Info("Getting language codes...");
+
             _cultureList = await GetProperCulturesAsync();
 
+            StatusBand.Hide();
             AddButton.IsEnabled = true;
 
             CommandManager.InvalidateRequerySuggested();
@@ -145,8 +150,10 @@ namespace ScreenToGif.Windows.Other
             CommandManager.InvalidateRequerySuggested();
         }
 
-        private void Save_Executed(object sender, ExecutedRoutedEventArgs e)
+        private async void Save_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            StatusBand.Info("Exporting resource...");
+
             var sfd = new SaveFileDialog
             {
                 AddExtension = true,
@@ -160,10 +167,21 @@ namespace ScreenToGif.Windows.Other
             sfd.FileName = subs;
 
             var result = sfd.ShowDialog();
+            int index = ResourceListBox.SelectedIndex;
 
             if (result.HasValue && result.Value)
-                LocalizationHelper.SaveSelected(ResourceListBox.SelectedIndex, sfd.FileName);
+            {
+                try
+                {
+                    await Task.Factory.StartNew(() => LocalizationHelper.SaveSelected(index, sfd.FileName));
+                }
+                catch (Exception ex)
+                {
+                    Dialog.Ok("Impossible to Save", "Impossible to save the Xaml file", ex.Message, Dialog.Icons.Warning);
+                }
+            }
 
+            StatusBand.Hide();
             CommandManager.InvalidateRequerySuggested();
         }
 
@@ -189,6 +207,8 @@ namespace ScreenToGif.Windows.Other
 
             if (!result.HasValue || !result.Value) return;
 
+            StatusBand.Info("Validating resource name...");
+
             #region Validation
 
             if (!ofd.FileName.Contains("StringResources"))
@@ -196,6 +216,7 @@ namespace ScreenToGif.Windows.Other
                 Dialog.Ok("Action Denied", "The name of file does not follow a valid pattern.",
                     "Try renaming like (without the []): StringResources.[Language Code].xaml");
 
+                StatusBand.Hide();
                 return;
             }
 
@@ -206,6 +227,7 @@ namespace ScreenToGif.Windows.Other
                 Dialog.Ok("Action Denied", "You can't add a resource with the same name.",
                     "Try renaming like: StringResources.[Language Code].xaml");
 
+                StatusBand.Hide();
                 return;
             }
 
@@ -216,6 +238,7 @@ namespace ScreenToGif.Windows.Other
                 Dialog.Ok("Action Denied", "Filename with wrong format.",
                     "Try renaming like: StringResources.[Language Code].xaml");
 
+                StatusBand.Hide();
                 return;
             }
             var cultureName = pieces[1];
@@ -230,12 +253,14 @@ namespace ScreenToGif.Windows.Other
                 Dialog.Ok("Action Denied", "Unknown Language.",
                     $"The \"{cultureName}\" and its family were not recognized as a valid language codes.");
 
+                StatusBand.Hide();
                 return;
             }
             catch (Exception ex)
             {
                 Dialog.Ok("Action Denied", "Error checking culture.", ex.Message);
 
+                StatusBand.Hide();
                 return;
             }
 
@@ -244,10 +269,13 @@ namespace ScreenToGif.Windows.Other
                 Dialog.Ok("Action Denied", "Redundant Language Code.", 
                     $"The \"{cultureName}\" code is redundant. Try using \'{properCulture}\" instead");
 
+                StatusBand.Hide();
                 return;
             }
 
             #endregion
+
+            StatusBand.Info("Importing resource...");
 
             try
             {
@@ -257,7 +285,8 @@ namespace ScreenToGif.Windows.Other
             {
                 Dialog.Ok("Localization", "Localization - Importing Xaml Resource", ex.Message);
 
-                GC.Collect();
+                StatusBand.Hide();
+                await Task.Factory.StartNew(() => GC.Collect());
                 return;
             }
 
@@ -270,6 +299,8 @@ namespace ScreenToGif.Windows.Other
                 Image = FindResource("Vector.Translate") as Canvas,
                 Author = "Recognized as " + pieces[1]
             };
+
+            StatusBand.Hide();
 
             ResourceListBox.Items.Add(imageItem);
             ResourceListBox.ScrollIntoView(imageItem);
