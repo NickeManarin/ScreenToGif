@@ -28,6 +28,7 @@ namespace Translator
         private string TempPath => Path.Combine(".", "ScreenToGif", "Resources");
 
         private readonly List<ResourceDictionary> _resourceList = new List<ResourceDictionary>();
+        private IEnumerable<CultureInfo> _cultureList;
         private ObservableCollection<Translation> _translationList = new ObservableCollection<Translation>();
         private string _resourceTemplate;
 
@@ -43,15 +44,23 @@ namespace Translator
             if (!Directory.Exists(TempPath))
                 Directory.CreateDirectory(TempPath);
 
+            OpenButton.IsEnabled = false;
+            RefreshButton.IsEnabled = false;
+            ToComboBox.IsEnabled = false;
+
             #region Languages
 
             FromComboBox.Text = "Loading...";
             ToComboBox.Text = "Loading...";
 
+            StatusBand.Info("Downloading English resource file...");
+
+            await DownloadSingleResourceAsync("en");
+
             StatusBand.Info("Loading language codes...");
 
-            var cultures = await GetProperCulturesAsync();
-            var languageList = await Task.Factory.StartNew(() => cultures.Select(x => new Culture { Code = x.Name, Name = x.DisplayName }).ToList());
+            _cultureList = await GetProperCulturesAsync();
+            var languageList = await Task.Factory.StartNew(() => _cultureList.Select(x => new Culture { Code = x.Name, Name = x.DisplayName }).ToList());
             //var languageList = CultureInfo.GetCultures(CultureTypes.AllCultures).Select(x => new Culture { Code = x.IetfLanguageTag, Name = x.EnglishName }).ToList();
 
             FromComboBox.ItemsSource = languageList;
@@ -62,6 +71,10 @@ namespace Translator
             StatusBand.Hide();
 
             #endregion
+
+            OpenButton.IsEnabled = true;
+            RefreshButton.IsEnabled = true;
+            ToComboBox.IsEnabled = true;
 
             ToComboBox.Focus();
         }
@@ -106,7 +119,7 @@ namespace Translator
             HeaderLabel.Content = "Downloading resources...";
             StatusBand.Info("Dowloading selected translations...");
 
-            await DownloadResources(baseCulture, specificCulture);
+            await DownloadResourcesAsync(baseCulture, specificCulture);
             ShowTranslations(baseCulture, specificCulture);
 
             HeaderLabel.Content = "Translator";
@@ -198,7 +211,7 @@ namespace Translator
             e.CanExecute = BaseDataGrid.IsEnabled && ToComboBox.SelectedValue != null && BaseDataGrid.Items.Count > 0;
         }
 
-        private void Load_Executed(object sender, ExecutedRoutedEventArgs e)
+        private async void Load_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var ofd = new OpenFileDialog
             {
@@ -214,18 +227,52 @@ namespace Translator
             if (!result.HasValue || !result.Value) return;
 
             //Replaces the special chars.
-            var text = File.ReadAllText(ofd.FileName, Encoding.UTF8).Replace("&#", "&amp;#");
-            File.WriteAllText(ofd.FileName, text, Encoding.UTF8);
+            var text = await Task.Factory.StartNew(() => File.ReadAllText(ofd.FileName, Encoding.UTF8).Replace("&#", "&amp;#"));
+            await Task.Factory.StartNew(() => File.WriteAllText(ofd.FileName, text, Encoding.UTF8));
 
-            var dictionary = new ResourceDictionary { Source = new Uri(Path.GetFullPath(ofd.FileName), UriKind.Absolute) };
+            var dictionary = await Task.Factory.StartNew(() => new ResourceDictionary { Source = new Uri(Path.GetFullPath(ofd.FileName), UriKind.Absolute) });
             _resourceList.Add(dictionary);
 
             var baseCulture = FromComboBox.SelectedValue as string;
             var specificCulture = Path.GetFileName(ofd.FileName).Replace("StringResources.", "").Replace(".xaml", "");
 
+            CultureInfo properCulture;
+            try
+            {
+                properCulture = await Task.Factory.StartNew(() => CheckSupportedCulture(CultureInfo.GetCultureInfo(specificCulture)));
+            }
+            catch(CultureNotFoundException)
+            {
+                Dispatcher.Invoke(() => Dialog.Ok("Action Denied", "Unknown Language.", $"The \"{specificCulture}\" and its family were not recognized as a valid language codes."));
+
+                return;
+            }
+            catch(Exception ex)
+            {
+                Dispatcher.Invoke(() => Dialog.Ok("Action Denied", "Error checking culture.", ex.Message));
+
+                return;
+            }
+
+            if (properCulture == null)
+            {
+                Dispatcher.Invoke(() => Dialog.Ok("Action Denied", "Unknown Language.", $"The \"{specificCulture}\" and its family were not recognized as a valid language codes."));
+
+                return;
+            }
+
+            if (properCulture.Name != specificCulture)
+            {
+                Dispatcher.Invoke(() => Dialog.Ok("Action Denied", "Redundant Language Code.", $"The \"{specificCulture}\" code is redundant. Try using \'{properCulture.Name}\" instead"));
+
+                return;
+            }
+
             ToComboBox.SelectedValue = specificCulture;
 
             ShowTranslations(baseCulture, specificCulture);
+
+            BaseDataGrid.IsEnabled = true;
         }
 
         private async void Export_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -270,7 +317,7 @@ namespace Translator
 
         #region Methods
 
-        private async Task DownloadResources(string baseCulture, string specificCulture)
+        private async Task DownloadSingleResourceAsync(string culture)
         {
             try
             {
@@ -286,7 +333,61 @@ namespace Translator
 
                     using (var reader = new StreamReader(resultStream))
                     {
-                        var result = reader.ReadToEnd();
+                        var result = await reader.ReadToEndAsync();
+
+                        var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(result),
+                            new System.Xml.XmlDictionaryReaderQuotas());
+
+                        var json = await Task<XElement>.Factory.StartNew(() => XElement.Load(jsonReader));
+
+                        var element = json.XPathSelectElement("/").Elements().Where(x =>
+                            x.XPathSelectElement("name").Value.EndsWith(culture + ".xaml")
+                        ).FirstOrDefault();
+
+                        if (element == null)
+                            throw new WebException("File not found");
+
+                        var name = element.XPathSelectElement("name").Value;
+                        var downloadUrl = element.XPathSelectElement("download_url").Value;
+
+                        await DownloadFileAsync(new Uri(downloadUrl), name);
+
+                        CommandManager.InvalidateRequerySuggested();
+                    }
+                }
+            }
+            catch (WebException web)
+            {
+                Dispatcher.Invoke(() => Dialog.Ok("Translator", "Translator - Downloading Single Resource", web.Message +
+                    Environment.NewLine + "Trying to load files already downloaded."));
+
+                await LoadFilesAsync();
+            }
+            catch (Exception ex)
+            {
+                Dispatcher.Invoke(() => Dialog.Ok("Translator", "Translator - Downloading Single Resource", ex.Message));
+            }
+
+            GC.Collect();
+        }
+
+        private async Task DownloadResourcesAsync(string baseCulture, string specificCulture)
+        {
+            try
+            {
+                var request = (HttpWebRequest)WebRequest.Create("https://api.github.com/repos/NickeManarin/ScreenToGif/contents/ScreenToGif/Resources/Localization");
+                request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
+
+                var response = (HttpWebResponse)await request.GetResponseAsync();
+
+                using (var resultStream = response.GetResponseStream())
+                {
+                    if (resultStream == null)
+                        return;
+
+                    using (var reader = new StreamReader(resultStream))
+                    {
+                        var result = await reader.ReadToEndAsync();
 
                         var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(result),
                             new System.Xml.XmlDictionaryReaderQuotas());
@@ -338,13 +439,18 @@ namespace Translator
 
                 //Saves the template for later, when exporting the translation.
                 if (name.EndsWith("en.xaml"))
-                    _resourceTemplate = File.ReadAllText(file);
+                {
+                    using (var sr = new StreamReader(file, Encoding.UTF8))
+                    {
+                        _resourceTemplate = await sr.ReadToEndAsync();
+                    }
+                }
 
                 using (var fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
-                    var dictionary = (ResourceDictionary)XamlReader.Load(fs, new ParserContext { XmlSpace = "preserve" });
+                    var dictionary = await Task.Factory.StartNew(() => (ResourceDictionary)XamlReader.Load(fs, new ParserContext { XmlSpace = "preserve" }));
                     //var dictionary = new ResourceDictionary();
-                    dictionary.Source = new Uri(Path.GetFullPath(file), UriKind.Absolute);
+                    dictionary.Source = await Task.Factory.StartNew(() => new Uri(Path.GetFullPath(file), UriKind.Absolute));
 
                     _resourceList.Add(dictionary);
 
@@ -371,14 +477,15 @@ namespace Translator
                     await webClient.DownloadFileTaskAsync(uri, file);
 
                 //Replaces the special chars.
-                var text = File.ReadAllText(file, Encoding.UTF8).Replace("&#", "&amp;#");
-                File.WriteAllText(file, text, Encoding.UTF8);
+                var text = await Task.Factory.StartNew(() => File.ReadAllText(file, Encoding.UTF8).Replace("&#", "&amp;#"));
+                await Task.Factory.StartNew(() => File.WriteAllText(file, text, Encoding.UTF8));
+
 
                 //Saves the template for later, when exporting the translation.
                 if (name.EndsWith("en.xaml"))
                     _resourceTemplate = text;
 
-                var dictionary = new ResourceDictionary { Source = new Uri(Path.GetFullPath(file), UriKind.Absolute) };
+                var dictionary = await Task.Factory.StartNew(() => new ResourceDictionary { Source = new Uri(Path.GetFullPath(file), UriKind.Absolute) });
 
                 _resourceList.Add(dictionary);
 
@@ -405,14 +512,14 @@ namespace Translator
                 foreach (var file in files)
                 {
                     //Replaces the special chars.
-                    var text = File.ReadAllText(file, Encoding.UTF8).Replace("&#", "&amp;#");
-                    File.WriteAllText(file, text, Encoding.UTF8);
+                    var text = await Task.Factory.StartNew(() => File.ReadAllText(file, Encoding.UTF8).Replace("&#", "&amp;#"));
+                    await Task.Factory.StartNew(() => File.WriteAllText(file, text, Encoding.UTF8));
 
                     //Saves the template for later, when exporting the translation.
                     if (file.EndsWith("en.xaml"))
                         _resourceTemplate = text;
 
-                    var dictionary = new ResourceDictionary { Source = new Uri(Path.GetFullPath(file), UriKind.Absolute) };
+                    var dictionary = await Task.Factory.StartNew(() => new ResourceDictionary { Source = new Uri(Path.GetFullPath(file), UriKind.Absolute) });
 
                     _resourceList.Add(dictionary);
                 }
@@ -515,9 +622,30 @@ namespace Translator
             }
         }
 
+        private CultureInfo CheckSupportedCulture(CultureInfo culture)
+        {
+            if (culture == null)
+                return null;
+
+            if (_cultureList.Contains(culture))
+                return culture;
+
+            CultureInfo t = culture;
+
+            while (t != CultureInfo.InvariantCulture)
+            {
+                if (_cultureList.Contains(t))
+                    return t;
+
+                t = t.Parent;
+            }
+
+            return null;
+        }
+
         private async Task<IEnumerable<CultureInfo>> GetProperCulturesAsync()
         {
-            IEnumerable<CultureInfo> allCodes = CultureInfo.GetCultures(CultureTypes.AllCultures).Where(x => !string.IsNullOrEmpty(x.Name));
+            IEnumerable<CultureInfo> allCodes = await Task.Factory.StartNew(() => CultureInfo.GetCultures(CultureTypes.AllCultures).Where(x => !string.IsNullOrEmpty(x.Name)));
 
             try
             {
@@ -557,7 +685,7 @@ namespace Translator
 
                 using (var reader = new StreamReader(resultStream))
                 {
-                    var result = reader.ReadToEnd();
+                    var result = await reader.ReadToEndAsync();
 
                     var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(result),
                         new System.Xml.XmlDictionaryReaderQuotas());
@@ -565,7 +693,9 @@ namespace Translator
                     var json = await Task<XElement>.Factory.StartNew(() => XElement.Load(jsonReader));
                     var languages = json.Elements();
 
-                    return languages.Where(x => x.XPathSelectElement("defs").Value != "0").Select(x => x.XPathSelectElement("lang").Value);
+                    return await Task.Factory.StartNew(() => languages.Where(x => 
+                    x.XPathSelectElement("defs").Value != "0"
+                    ).Select(x => x.XPathSelectElement("lang").Value));
                 }
             }
         }
@@ -584,14 +714,16 @@ namespace Translator
 
                 using (var reader = new StreamReader(resultStream))
                 {
-                    var result = reader.ReadToEnd();
+                    var result = await reader.ReadToEndAsync();
 
                     var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(result),
                         new System.Xml.XmlDictionaryReaderQuotas());
 
                     var json = await Task<XElement>.Factory.StartNew(() => XElement.Load(jsonReader));
 
-                    return json.XPathSelectElement("resources").Elements().Where(x => x.XPathSelectElement("name").Value == "ietf-language-tags_json").First().XPathSelectElement("path").Value;
+                    return await Task.Factory.StartNew(() => json.XPathSelectElement("resources").Elements().Where(x => 
+                    x.XPathSelectElement("name").Value == "ietf-language-tags_json"
+                    ).First().XPathSelectElement("path").Value);
                 }
             }
         }
