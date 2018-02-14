@@ -28,7 +28,7 @@ namespace Translator
         private string TempPath => Path.Combine(".", "ScreenToGif", "Resources");
 
         private readonly List<ResourceDictionary> _resourceList = new List<ResourceDictionary>();
-        private IEnumerable<string> _cultureList;
+        private IEnumerable<string> _cultures;
         private ObservableCollection<Translation> _translationList = new ObservableCollection<Translation>();
         private string _resourceTemplate;
 
@@ -55,12 +55,13 @@ namespace Translator
 
             StatusBand.Info("Downloading English resource file...");
 
+            //We have to get english resource first in case we import first without refreshing
             await DownloadSingleResourceAsync("en");
 
             StatusBand.Info("Loading language codes...");
 
-            _cultureList = await GetProperCulturesAsync();
-            var languageList = await Task.Factory.StartNew(() => _cultureList.Select(x => new Culture { Code = x, Name = CultureInfo.GetCultureInfo(x).DisplayName }).ToList());
+            _cultures = await GetProperCulturesAsync();
+            var languageList = await Task.Factory.StartNew(() => _cultures.Select(x => new Culture { Code = x, Name = CultureInfo.GetCultureInfo(x).DisplayName }).ToList());
             //var languageList = CultureInfo.GetCultures(CultureTypes.AllCultures).Select(x => new Culture { Code = x.IetfLanguageTag, Name = x.EnglishName }).ToList();
 
             FromComboBox.ItemsSource = languageList;
@@ -237,6 +238,8 @@ namespace Translator
             var specificCulture = Path.GetFileName(ofd.FileName).Replace("StringResources.", "").Replace(".xaml", "");
 
             string properCulture;
+
+            //Catching here, because we can access UI thread easily here to show dialogs
             try
             {
                 properCulture = await Task.Factory.StartNew(() => CheckSupportedCulture(specificCulture));
@@ -287,7 +290,8 @@ namespace Translator
             BaseDataGrid.IsEnabled = false;
             StatusBand.Info("Exporting translation...");
 
-            var saved = await Task.Factory.StartNew(() => ExportTranslation(sfd.FileName));
+            var fileName = sfd.FileName;
+            var saved = await Task.Factory.StartNew(() => ExportTranslation(fileName));
 
             BaseDataGrid.IsEnabled = true;
 
@@ -619,7 +623,10 @@ namespace Translator
 
         private string CheckSupportedCulture(string cultureName)
         {
-            HashSet<string> cultureHash = new HashSet<string>(_cultureList);
+            //Using HashSet, because we can check if it contains string in O(1) time
+            //Only creating it takes some time,
+            //but it's better than performing Contains multiple times on the list in the loop below
+            HashSet<string> cultureHash = new HashSet<string>(_cultures);
 
             if (cultureHash.Contains(cultureName))
                 return cultureName;
@@ -634,7 +641,7 @@ namespace Translator
                 t = t.Parent;
             }
 
-            return null;
+            throw new CultureNotFoundException();
         }
 
         private async Task<IEnumerable<string>> GetProperCulturesAsync()

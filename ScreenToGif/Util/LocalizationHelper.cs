@@ -145,6 +145,7 @@ namespace ScreenToGif.Util
             catch(Exception ex)
             {
                 LogWriter.Log(ex, "Import Resource");
+                //Rethrowing, because it's more useful to catch later
                 throw;
             }
         }
@@ -200,6 +201,7 @@ namespace ScreenToGif.Util
             catch(Exception ex)
             {
                 LogWriter.Log(ex, "Save Resource", selectedIndex);
+                //Rethrowing, because it's more useful to catch later
                 throw;
             }
         }

@@ -20,7 +20,7 @@ namespace ScreenToGif.Windows.Other
 {
     public partial class Localization : Window
     {
-        private IEnumerable<string> _cultureList;
+        private IEnumerable<string> _cultures;
 
         public Localization()
         {
@@ -95,7 +95,7 @@ namespace ScreenToGif.Windows.Other
 
             StatusBand.Info("Getting language codes...");
 
-            _cultureList = await GetProperCulturesAsync();
+            _cultures = await GetProperCulturesAsync();
 
             StatusBand.Hide();
             AddButton.IsEnabled = true;
@@ -178,13 +178,15 @@ namespace ScreenToGif.Windows.Other
             sfd.FileName = subs;
 
             var result = sfd.ShowDialog();
-            int index = ResourceListBox.SelectedIndex;
+            var fileName = sfd.FileName;
+            //We have to access UI components here (can't do that in the task below)
+            var index = ResourceListBox.SelectedIndex;
 
             if (result.HasValue && result.Value)
             {
                 try
                 {
-                    await Task.Factory.StartNew(() => LocalizationHelper.SaveSelected(index, sfd.FileName));
+                    await Task.Factory.StartNew(() => LocalizationHelper.SaveSelected(index, fileName));
                 }
                 catch (Exception ex)
                 {
@@ -327,7 +329,10 @@ namespace ScreenToGif.Windows.Other
 
         private string CheckSupportedCulture(string cultureName)
         {
-            HashSet<string> cultureHash = new HashSet<string>(_cultureList);
+            //Using HashSet, because we can check if it contains string in O(1) time
+            //Only creating it takes some time,
+            //but it's better than performing Contains multiple times on the list in the loop below
+            HashSet<string> cultureHash = new HashSet<string>(_cultures);
 
             if (cultureHash.Contains(cultureName))
                 return cultureName;
