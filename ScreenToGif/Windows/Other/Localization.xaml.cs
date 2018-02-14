@@ -288,9 +288,11 @@ namespace ScreenToGif.Windows.Other
 
             StatusBand.Info("Importing resource...");
 
+            var fileName = ofd.FileName;
+
             try
             {
-                await Task.Factory.StartNew(() => LocalizationHelper.ImportStringResource(ofd.FileName));
+                await Task.Factory.StartNew(() => LocalizationHelper.ImportStringResource(fileName));
             }
             catch(Exception ex)
             {
