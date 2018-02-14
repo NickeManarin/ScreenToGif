@@ -20,7 +20,7 @@ namespace ScreenToGif.Windows.Other
 {
     public partial class Localization : Window
     {
-        private IEnumerable<CultureInfo> _cultureList;
+        private IEnumerable<string> _cultureList;
 
         public Localization()
         {
@@ -220,10 +220,10 @@ namespace ScreenToGif.Windows.Other
             }
             var cultureName = pieces[1];
 
-            CultureInfo properCulture;
+            string properCulture;
             try
             {
-                properCulture = await Task.Factory.StartNew(() => CheckSupportedCulture(CultureInfo.GetCultureInfo(cultureName)));
+                properCulture = await Task.Factory.StartNew(() => CheckSupportedCulture(cultureName));
             }
             catch (CultureNotFoundException)
             {
@@ -239,10 +239,10 @@ namespace ScreenToGif.Windows.Other
                 return;
             }
 
-            if (properCulture.Name != cultureName)
+            if (properCulture != cultureName)
             {
                 Dialog.Ok("Action Denied", "Redundant Language Code.", 
-                    $"The \"{cultureName}\" code is redundant. Try using \'{properCulture.Name}\" instead");
+                    $"The \"{cultureName}\" code is redundant. Try using \'{properCulture}\" instead");
 
                 return;
             }
@@ -281,17 +281,19 @@ namespace ScreenToGif.Windows.Other
 
         #region Methods 
 
-        private CultureInfo CheckSupportedCulture(CultureInfo culture)
+        private string CheckSupportedCulture(string cultureName)
         {
-            if (_cultureList.Contains(culture))
-                return culture;
+            HashSet<string> cultureHash = new HashSet<string>(_cultureList);
 
-            CultureInfo t = culture;
+            if (cultureHash.Contains(cultureName))
+                return cultureName;
+
+            CultureInfo t = CultureInfo.GetCultureInfo(cultureName);
 
             while (t != CultureInfo.InvariantCulture)
             {
-                if (_cultureList.Contains(t))
-                    return t;
+                if (cultureHash.Contains(t.Name))
+                    return t.Name;
 
                 t = t.Parent;
             }
@@ -299,18 +301,18 @@ namespace ScreenToGif.Windows.Other
             return null;
         }
 
-        private async Task<IEnumerable<CultureInfo>> GetProperCulturesAsync()
+        private async Task<IEnumerable<string>> GetProperCulturesAsync()
         {
-            IEnumerable<CultureInfo> allCodes = await Task.Factory.StartNew(() => CultureInfo.GetCultures(CultureTypes.AllCultures).Where(x => !string.IsNullOrEmpty(x.Name)));
+            IEnumerable<string> allCodes = await Task.Factory.StartNew(() => CultureInfo.GetCultures(CultureTypes.AllCultures).Where(x => !string.IsNullOrEmpty(x.Name)).Select(x => x.Name));
 
             try
             {
-                IEnumerable<string> properCodes = await GetLanguageCodesAsync();
-                IEnumerable<CultureInfo> properCultures = allCodes.Where(x => properCodes.Contains(x.Name));
-                if (properCultures == null)
+                IEnumerable<string> downloadedCodes = await GetLanguageCodesAsync();
+                IEnumerable<string> properCodes = await Task.Factory.StartNew(() => allCodes.Where(x => downloadedCodes.Contains(x)));
+                if (properCodes == null)
                     return allCodes;
 
-                return properCultures;
+                return properCodes;
             }
             catch (Exception ex)
             {

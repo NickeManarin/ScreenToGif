@@ -28,7 +28,7 @@ namespace Translator
         private string TempPath => Path.Combine(".", "ScreenToGif", "Resources");
 
         private readonly List<ResourceDictionary> _resourceList = new List<ResourceDictionary>();
-        private IEnumerable<CultureInfo> _cultureList;
+        private IEnumerable<string> _cultureList;
         private ObservableCollection<Translation> _translationList = new ObservableCollection<Translation>();
         private string _resourceTemplate;
 
@@ -60,7 +60,7 @@ namespace Translator
             StatusBand.Info("Loading language codes...");
 
             _cultureList = await GetProperCulturesAsync();
-            var languageList = await Task.Factory.StartNew(() => _cultureList.Select(x => new Culture { Code = x.Name, Name = x.DisplayName }).ToList());
+            var languageList = await Task.Factory.StartNew(() => _cultureList.Select(x => new Culture { Code = x, Name = CultureInfo.GetCultureInfo(x).DisplayName }).ToList());
             //var languageList = CultureInfo.GetCultures(CultureTypes.AllCultures).Select(x => new Culture { Code = x.IetfLanguageTag, Name = x.EnglishName }).ToList();
 
             FromComboBox.ItemsSource = languageList;
@@ -236,29 +236,29 @@ namespace Translator
             var baseCulture = FromComboBox.SelectedValue as string;
             var specificCulture = Path.GetFileName(ofd.FileName).Replace("StringResources.", "").Replace(".xaml", "");
 
-            CultureInfo properCulture;
+            string properCulture;
             try
             {
-                properCulture = await Task.Factory.StartNew(() => CheckSupportedCulture(CultureInfo.GetCultureInfo(specificCulture)));
+                properCulture = await Task.Factory.StartNew(() => CheckSupportedCulture(specificCulture));
             }
-            catch(CultureNotFoundException)
+            catch (CultureNotFoundException)
             {
-                Dialog.Ok("Action Denied", "Unknown Language.", 
+                Dialog.Ok("Action Denied", "Unknown Language.",
                     $"The \"{specificCulture}\" and its family were not recognized as a valid language codes.");
 
                 return;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Dialog.Ok("Action Denied", "Error checking culture.", ex.Message);
 
                 return;
             }
 
-            if (properCulture.Name != specificCulture)
+            if (properCulture != specificCulture)
             {
-                Dialog.Ok("Action Denied", "Redundant Language Code.", 
-                    $"The \"{specificCulture}\" code is redundant. Try using \'{properCulture.Name}\" instead");
+                Dialog.Ok("Action Denied", "Redundant Language Code.",
+                    $"The \"{specificCulture}\" code is redundant. Try using \'{properCulture}\" instead");
 
                 return;
             }
@@ -617,17 +617,19 @@ namespace Translator
             }
         }
 
-        private CultureInfo CheckSupportedCulture(CultureInfo culture)
+        private string CheckSupportedCulture(string cultureName)
         {
-            if (_cultureList.Contains(culture))
-                return culture;
+            HashSet<string> cultureHash = new HashSet<string>(_cultureList);
 
-            CultureInfo t = culture;
+            if (cultureHash.Contains(cultureName))
+                return cultureName;
+
+            CultureInfo t = CultureInfo.GetCultureInfo(cultureName);
 
             while (t != CultureInfo.InvariantCulture)
             {
-                if (_cultureList.Contains(t))
-                    return t;
+                if (cultureHash.Contains(t.Name))
+                    return t.Name;
 
                 t = t.Parent;
             }
@@ -635,18 +637,18 @@ namespace Translator
             return null;
         }
 
-        private async Task<IEnumerable<CultureInfo>> GetProperCulturesAsync()
+        private async Task<IEnumerable<string>> GetProperCulturesAsync()
         {
-            IEnumerable<CultureInfo> allCodes = await Task.Factory.StartNew(() => CultureInfo.GetCultures(CultureTypes.AllCultures).Where(x => !string.IsNullOrEmpty(x.Name)));
+            IEnumerable<string> allCodes = await Task.Factory.StartNew(() => CultureInfo.GetCultures(CultureTypes.AllCultures).Where(x => !string.IsNullOrEmpty(x.Name)).Select(x => x.Name));
 
             try
             {
-                IEnumerable<string> properCodes = await GetLanguageCodesAsync();
-                IEnumerable<CultureInfo> properCultures = allCodes.Where(x => properCodes.Contains(x.Name));
-                if (properCultures == null)
+                IEnumerable<string> downloadedCodes = await GetLanguageCodesAsync();
+                IEnumerable<string> properCodes = await Task.Factory.StartNew(() => allCodes.Where(x => downloadedCodes.Contains(x)));
+                if (properCodes == null)
                     return allCodes;
 
-                return properCultures;
+                return properCodes;
             }
             catch (Exception ex)
             {
@@ -685,7 +687,7 @@ namespace Translator
                     var json = await Task<XElement>.Factory.StartNew(() => XElement.Load(jsonReader));
                     var languages = json.Elements();
 
-                    return await Task.Factory.StartNew(() => languages.Where(x => 
+                    return await Task.Factory.StartNew(() => languages.Where(x =>
                     x.XPathSelectElement("defs").Value != "0"
                     ).Select(x => x.XPathSelectElement("lang").Value));
                 }
@@ -713,7 +715,7 @@ namespace Translator
 
                     var json = await Task<XElement>.Factory.StartNew(() => XElement.Load(jsonReader));
 
-                    return await Task.Factory.StartNew(() => json.XPathSelectElement("resources").Elements().Where(x => 
+                    return await Task.Factory.StartNew(() => json.XPathSelectElement("resources").Elements().Where(x =>
                     x.XPathSelectElement("name").Value == "ietf-language-tags_json"
                     ).First().XPathSelectElement("path").Value);
                 }
