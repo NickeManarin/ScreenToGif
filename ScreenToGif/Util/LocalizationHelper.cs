@@ -5,7 +5,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Xml;
 
@@ -125,99 +124,108 @@ namespace ScreenToGif.Util
 
         public static void ImportStringResource(string path)
         {
-            if (string.IsNullOrEmpty(path))
-                throw new ArgumentException("Path is null");
-
-            using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read))
+            try
             {
-                if (fs.Length == 0)
-                    throw new InvalidDataException("File is empty");
+                if (string.IsNullOrEmpty(path))
+                    throw new ArgumentException("Path is null");
 
-                //Reads the ResourceDictionary file
-                var dictionary = (ResourceDictionary)System.Windows.Markup.XamlReader.Load(fs);
-                dictionary.Source = new Uri(path);
+                using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read))
+                {
+                    if (fs.Length == 0)
+                        throw new InvalidDataException("File is empty");
 
-                //Add in newly loaded Resource Dictionary.
-                Application.Current.Resources.MergedDictionaries.Add(dictionary);
+                    //Reads the ResourceDictionary file
+                    var dictionary = (ResourceDictionary)System.Windows.Markup.XamlReader.Load(fs);
+                    dictionary.Source = new Uri(path);
+
+                    //Add in newly loaded Resource Dictionary.
+                    Application.Current.Resources.MergedDictionaries.Add(dictionary);
+                }
+            }
+            catch(Exception ex)
+            {
+                LogWriter.Log(ex, "Import Resource");
+                //Rethrowing, because it's more useful to catch later
+                throw;
             }
         }
 
-    public static List<ResourceDictionary> GetLocalizations()
-    {
-        //Copy all MergedDictionarys into a auxiliar list.
-        var dictionaryList = Application.Current.Resources.MergedDictionaries.ToList();
-
-        return dictionaryList.Where(x => x.Source.OriginalString.Contains("StringResource")).ToList();
-    }
-
-    public static bool Move(int selectedIndex, bool toUp = true)
-    {
-        try
+        public static List<ResourceDictionary> GetLocalizations()
         {
-            if (toUp && selectedIndex < 1)
+            //Copy all MergedDictionarys into a auxiliar list.
+            var dictionaryList = Application.Current.Resources.MergedDictionaries.ToList();
+
+            return dictionaryList.Where(x => x.Source.OriginalString.Contains("StringResource")).ToList();
+        }
+
+        public static bool Move(int selectedIndex, bool toUp = true)
+        {
+            try
+            {
+                if (toUp && selectedIndex < 1)
+                    return false;
+
+                if (!toUp && selectedIndex > Application.Current.Resources.MergedDictionaries.Count - 1)
+                    return false;
+
+                //Recover selected dictionary.
+                var dictionaryAux = Application.Current.Resources.MergedDictionaries[selectedIndex];
+
+                //Remove from the current list.
+                Application.Current.Resources.MergedDictionaries.Remove(Application.Current.Resources.MergedDictionaries[selectedIndex]);
+
+                //Insert at the upper position.
+                Application.Current.Resources.MergedDictionaries.Insert(toUp ? selectedIndex - 1 : selectedIndex + 1, dictionaryAux);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Move Resource", selectedIndex);
                 return false;
-
-            if (!toUp && selectedIndex > Application.Current.Resources.MergedDictionaries.Count - 1)
-                return false;
-
-            //Recover selected dictionary.
-            var dictionaryAux = Application.Current.Resources.MergedDictionaries[selectedIndex];
-
-            //Remove from the current list.
-            Application.Current.Resources.MergedDictionaries.Remove(Application.Current.Resources.MergedDictionaries[selectedIndex]);
-
-            //Insert at the upper position.
-            Application.Current.Resources.MergedDictionaries.Insert(toUp ? selectedIndex - 1 : selectedIndex + 1, dictionaryAux);
-
-            return true;
+            }
         }
-        catch (Exception ex)
+
+        public static void SaveSelected(int selectedIndex, string path)
         {
-            LogWriter.Log(ex, "Move Resource", selectedIndex);
-            return false;
+            try
+            {
+                if (selectedIndex < 0 || selectedIndex > Application.Current.Resources.MergedDictionaries.Count - 1)
+                    throw new IndexOutOfRangeException("Index out of range while trying to save the resource dictionary.");
+
+                var settings = new XmlWriterSettings { Indent = true };
+
+                using (var writer = XmlWriter.Create(path, settings))
+                    System.Windows.Markup.XamlWriter.Save(Application.Current.Resources.MergedDictionaries[selectedIndex], writer);
+            }
+            catch(Exception ex)
+            {
+                LogWriter.Log(ex, "Save Resource", selectedIndex);
+                //Rethrowing, because it's more useful to catch later
+                throw;
+            }
+        }
+
+        public static bool Remove(int selectedIndex)
+        {
+            try
+            {
+                if (selectedIndex == -1 || selectedIndex > Application.Current.Resources.MergedDictionaries.Count - 1)
+                    return false;
+
+                if (Application.Current.Resources.MergedDictionaries[selectedIndex].Source.OriginalString.Contains("StringResources.xaml"))
+                    return false;
+
+                //Remove from the current list.
+                Application.Current.Resources.MergedDictionaries.RemoveAt(selectedIndex);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Remove Resource", selectedIndex);
+                return false;
+            }
         }
     }
-
-    public static void SaveSelected(int selectedIndex, string path)
-    {
-        try
-        {
-            if (selectedIndex < 0 || selectedIndex > Application.Current.Resources.MergedDictionaries.Count - 1)
-                throw new IndexOutOfRangeException("Index out of range while trying to save the resource dictionary.");
-
-            var settings = new XmlWriterSettings { Indent = true };
-
-            using (var writer = XmlWriter.Create(path, settings))
-                System.Windows.Markup.XamlWriter.Save(Application.Current.Resources.MergedDictionaries[selectedIndex], writer);
-        }
-        catch (Exception ex)
-        {
-            LogWriter.Log(ex, "Save Xaml Resource Error");
-
-            Dialog.Ok("Impossible to Save", "Impossible to save the Xaml file", ex.Message, Dialog.Icons.Warning);
-        }
-    }
-
-    public static bool Remove(int selectedIndex)
-    {
-        try
-        {
-            if (selectedIndex == -1 || selectedIndex > Application.Current.Resources.MergedDictionaries.Count - 1)
-                return false;
-
-            if (Application.Current.Resources.MergedDictionaries[selectedIndex].Source.OriginalString.Contains("StringResources.xaml"))
-                return false;
-
-            //Remove from the current list.
-            Application.Current.Resources.MergedDictionaries.RemoveAt(selectedIndex);
-
-            return true;
-        }
-        catch (Exception ex)
-        {
-            LogWriter.Log(ex, "Remove Resource", selectedIndex);
-            return false;
-        }
-    }
-}
 }

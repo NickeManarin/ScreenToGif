@@ -26,6 +26,8 @@
             <RowDefinition/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
+        
+        <c:StatusBand Grid.Row="0" x:Name="StatusBand"/>
 
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
