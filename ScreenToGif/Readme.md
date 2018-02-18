@@ -7,7 +7,9 @@ _VS 2017 and .Net 4.6.1 or newer required._
 
 ## What's new? (Version 2.13)
 
-•  
+• Added icon at the system tray, with the option to launch the recorders and editors from a context menu or from a keyboard shortcut.  
+• Added support to selecting the PrintScreen key for the keyboard shortcuts.  
+• 
 
 ### Fixed:
 
@@ -21,5 +23,6 @@ _VS 2017 and .Net 4.6.1 or newer required._
 
 ### To Test:
 
-• When removing a setting from the settings file, try removing from one unformatted file.  
+• When removing a setting from the settings file, try removing from a unformatted file.  
 • DoubleBox (decimals stuff).   
+• Progress percentage.

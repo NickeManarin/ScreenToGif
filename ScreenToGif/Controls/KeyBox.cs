@@ -9,6 +9,16 @@ namespace ScreenToGif.Controls
 {
     public class KeyBox : ContentControl
     {
+        #region Variable
+
+        private bool _finished;
+        private bool _ignore;
+        private Key _previousKey;
+        private ModifierKeys _previousModifier;
+        private ImageButton _removeButton;
+
+        #endregion
+
         #region Dependency Properties
 
         public static readonly DependencyProperty ModifierKeysProperty = DependencyProperty.Register("ModifierKeys", typeof(ModifierKeys), typeof(KeyBox),
@@ -29,6 +39,10 @@ namespace ScreenToGif.Controls
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(KeyBox), new PropertyMetadata(""));
 
         public static readonly DependencyProperty IsSelectionFinishedProperty = DependencyProperty.Register("IsSelectionFinished", typeof(bool), typeof(KeyBox), new PropertyMetadata(false));
+
+        public static readonly DependencyProperty CanRemoveProperty = DependencyProperty.Register("CanRemove", typeof(bool), typeof(KeyBox), new PropertyMetadata(false));
+
+        public static readonly DependencyProperty DisplayNoneProperty = DependencyProperty.Register("DisplayNone", typeof(bool), typeof(KeyBox), new PropertyMetadata(false));
 
         public static readonly RoutedEvent KeyChangedEvent = EventManager.RegisterRoutedEvent("KeyChanged", RoutingStrategy.Bubble, typeof(KeyChangedEventHandler), typeof(KeyBox));
 
@@ -90,17 +104,24 @@ namespace ScreenToGif.Controls
             set => SetValue(IsSelectionFinishedProperty, value);
         }
 
+        public bool CanRemove
+        {
+            get => (bool)GetValue(CanRemoveProperty);
+            set => SetValue(CanRemoveProperty, value);
+        }
+
+        public bool DisplayNone
+        {
+            get => (bool)GetValue(DisplayNoneProperty);
+            set => SetValue(DisplayNoneProperty, value);
+        }
+
         public event KeyChangedEventHandler KeyChanged
         {
             add => AddHandler(KeyChangedEvent, value);
             remove => RemoveHandler(KeyChangedEvent, value);
         }
-
-        private bool _finished;
-        private bool _ignore;
-        private Key _previousKey;
-        private ModifierKeys _previousModifier;
-
+       
         #endregion
 
         #region Events
@@ -110,7 +131,7 @@ namespace ScreenToGif.Controls
             if (!(o is KeyBox box) || box.MainKey == null)
                 return;
 
-            box.Text = Native.GetSelectKeyText(box.MainKey ?? Key.None, box.ModifierKeys, true);
+            box.Text = Native.GetSelectKeyText(box.MainKey ?? Key.None, box.ModifierKeys, true, !box.DisplayNone);
             box.IsSelectionFinished = true;
         }
 
@@ -135,20 +156,26 @@ namespace ScreenToGif.Controls
         {
             base.OnApplyTemplate();
 
+            _removeButton = Template.FindName("RemoveButton", this) as ImageButton;
+
+            if (_removeButton != null)
+                _removeButton.Click += (sender, args) =>
+                {
+                    MainKey = Key.None;
+                    ModifierKeys = ModifierKeys.None;
+
+                    RaiseKeyChangedEvent();
+
+                    _previousKey = Key.None;
+                    _previousModifier = ModifierKeys.None;
+                    IsSelectionFinished = true;
+                };
+
             _previousModifier = ModifierKeys;
             _previousKey = MainKey ?? Key.None;
         }
 
         protected override void OnMouseDown(MouseButtonEventArgs e)
-        {
-            Focus();
-            Keyboard.Focus(this);
-
-            e.Handled = true;
-            base.OnMouseDown(e);
-        }
-
-        protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
         {
             Focus();
             Keyboard.Focus(this);
@@ -169,7 +196,8 @@ namespace ScreenToGif.Controls
             //Clear current values.
             IsSelectionFinished = false;
             ModifierKeys = ModifierKeys.None;
-            MainKey = null;
+            MainKey = null; // Key.None;
+            Text = ""; 
             _finished = false;
             _ignore = false;
 
@@ -263,6 +291,13 @@ namespace ScreenToGif.Controls
         {
             if ((e.Key == Key.Enter || e.Key == Key.Tab) && !AllowAllKeys)
                 return;
+
+            if (e.Key == Key.PrintScreen)
+            {
+                ModifierKeys = Keyboard.Modifiers;
+                MainKey = e.Key;
+                _finished = true;
+            }
 
             if (_finished)
             {

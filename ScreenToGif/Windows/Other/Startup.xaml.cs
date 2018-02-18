@@ -27,9 +27,6 @@ namespace ScreenToGif.Windows.Other
 
         private void Startup_OnLoaded(object sender, RoutedEventArgs e)
         {
-            if (Argument.FileNames.Any())
-                Editor_Executed(sender, null);
-
             if (UserSettings.All.CheckForUpdates)
                 CheckLatestRelease();
         }
@@ -37,78 +34,6 @@ namespace ScreenToGif.Windows.Other
         private void Update_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = _newRelease != null;
-        }
-        
-        private void Recorder_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            if (UserSettings.All.NewRecorder)
-            {
-                var recorderNew = new RecorderNew(false) { Owner = this };
-                Application.Current.MainWindow = recorderNew;
-
-                Hide();
-
-                var result2 = recorderNew.ShowDialog();
-
-                if (result2.HasValue && result2.Value)
-                {
-                    //If to close.
-                    Environment.Exit(0);
-                }
-                else if (result2.HasValue)
-                {
-                    #region If Backbutton or Stop Clicked
-
-                    if (recorderNew.ExitArg == ExitAction.Recorded)
-                    {
-                        var editor = new Editor { Project = recorderNew.Project };
-
-                        GenericShowDialog(editor);
-                        return;
-                    }
-
-                    Show();
-
-                    #endregion
-                }
-
-                return;
-            }
-
-            var recorder = new Recorder { Owner = this };
-            Application.Current.MainWindow = recorder;
-
-            Hide();
-
-            var result = recorder.ShowDialog();
-
-            if (result.HasValue && result.Value)
-            {
-                //If to close.
-                Environment.Exit(0);
-            }
-            else if (result.HasValue)
-            {
-                #region If Backbutton or Stop Clicked
-
-                if (recorder.ExitArg == ExitAction.Recorded)
-                {
-                    var editor = new Editor { Project = recorder.Project };
-
-                    GenericShowDialog(editor);
-                    return;
-                }
-
-                Show();
-
-                #endregion
-            }
-        }
-
-        private void Editor_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            var editor = new Editor();
-            GenericShowDialog(editor);
         }
 
         private void Update_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -123,7 +48,7 @@ namespace ScreenToGif.Windows.Other
 
             if (result.HasValue && result.Value)
             {
-                if (Dialog.Ask("Screen To Gif", FindResource("Update.CloseThis").ToString(), FindResource("Update.CloseThis.Detail").ToString()))
+                if (Dialog.Ask("ScreenToGif", FindResource("Update.CloseThis").ToString(), FindResource("Update.CloseThis.Detail").ToString()))
                     Environment.Exit(25);
             }
         }
@@ -131,21 +56,6 @@ namespace ScreenToGif.Windows.Other
         #endregion
 
         #region Methods
-
-        private void GenericShowDialog(Window window)
-        {
-            Hide();
-
-            window.Owner = this;
-            Application.Current.MainWindow = window;
-
-            window.Closed += (sender, args) =>
-            {
-                Close();
-            };
-
-            window.Show();
-        }
 
         private async void CheckLatestRelease()
         {

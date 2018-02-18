@@ -41,6 +41,7 @@
     <!--Options Page-->
     <s:String x:Key="Title.Options">Screen To Gif - Configuración</s:String>
     <s:String x:Key="Application">Aplicación</s:String>
+    <s:String x:Key="S.Shortcuts">Atajos</s:String>
     <s:String x:Key="Interface">Interface</s:String>
     <s:String x:Key="Image">Imagen</s:String>
     <s:String x:Key="Language">Idioma</s:String>
@@ -70,10 +71,6 @@
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Habilitar grabación asincrónica</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(Ayuda a reducir el retraso de interface al grabar)</s:String>
     
-    <s:String x:Key="Application.Shortcuts">Atajos</s:String>
-    <s:String x:Key="Application.Shortcuts.StartPause">Iniciar/Pausar:</s:String>
-    <s:String x:Key="Application.Shortcuts.Stop">Detener:</s:String>
-
     <s:String x:Key="Application.Other">Otros</s:String>
     <s:String x:Key="Application.Other.CheckForUpdates">Buscar actualizaciones</s:String>
     
@@ -111,6 +108,9 @@
     <s:String x:Key="Interface.Other.HideTitleBar">Ocultar la barra de título (modo delgado)</s:String>
     <!--<s:String x:Key="Interface.Other.TripleClickSelection">Enable triple-click to select the text.</s:String>-->
   
+    <s:String x:Key="S.Shortcuts.Recorders.StartPause">Iniciar/Pausar:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Stop">Detener:</s:String>
+    
     <s:String x:Key="Language.AppLanguage">Idioma de la aplicación</s:String>
     
     <s:String x:Key="TempFiles.FilesAndFolders">Carpetas/archivos temporales</s:String>

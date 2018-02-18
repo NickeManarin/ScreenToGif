@@ -3,13 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         xmlns:u="clr-namespace:ScreenToGif.Util"
-        xmlns:m="clr-namespace:ScreenToGif.Util.Model"
         x:Name="StartupWindow" Title="{DynamicResource Title.StartUp}" Height="220" Width="500" Icon="/Resources/Logo.ico" 
-        WindowStartupLocation="CenterScreen" MinWidth="500" MinHeight="220" UseLayoutRounding="True" Loaded="Startup_OnLoaded">
-
-    <Window.DataContext>
-        <m:StartupViewModel/>
-    </Window.DataContext>
+        WindowStartupLocation="CenterScreen" MinWidth="500" MinHeight="220" DataContext="{StaticResource AppViewModel}"
+        UseLayoutRounding="True" Loaded="Startup_OnLoaded">
 
     <Window.InputBindings>
         <KeyBinding Command="{Binding OpenRecorder}" CommandParameter="{Binding ElementName=StartupWindow}" Modifiers="Control" Key="N"/>

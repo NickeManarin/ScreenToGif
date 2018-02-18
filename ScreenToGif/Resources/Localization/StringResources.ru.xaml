@@ -49,6 +49,7 @@
     <!--Options Page-->
     <s:String x:Key="Title.Options">Screen To Gif - Настройки</s:String>
     <s:String x:Key="Application">Приложение</s:String>
+    <s:String x:Key="S.Shortcuts">Горячие клавиши</s:String>
     <s:String x:Key="Interface">Внешний вид</s:String>
     <s:String x:Key="Image">Изображение</s:String>
     <s:String x:Key="Language">Язык</s:String>
@@ -84,12 +85,6 @@
     <s:String x:Key="Application.ScreenRecorder.Magnifier">Активировать увеличение экрана.</s:String>
     <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(это увеличивает экран при выборе зоны записи)</s:String>
     
-    <s:String x:Key="Application.Shortcuts">Горячие клавиши</s:String>
-    <s:String x:Key="Application.Shortcuts.StartPause">Старт/Пауза:</s:String>
-    <s:String x:Key="Application.Shortcuts.Stop">Стоп:</s:String>
-    <s:String x:Key="Application.Shortcuts.Discard">Отменить:</s:String>
-    <s:String x:Key="Application.Shortcuts.Info">Кликните чтобы установить вокус на клавиатуру, затем нажимайте желаемые клавиши. Не все комбинации поддерживаются.</s:String>
-
     <s:String x:Key="Application.Other">Прочее</s:String>
     <s:String x:Key="Application.Other.NotifyFrameDeletion">Спросить меня перед удалением кадров.</s:String>
     <s:String x:Key="Application.Other.NotifyProjectDiscard">Спросить меня перед удалением проекта.</s:String>
@@ -132,7 +127,12 @@
     <s:String x:Key="Interface.Other.TripleClickSelection">Тройной клик - выбор текста.</s:String>
     <s:String x:Key="Interface.Other.AutomaticallySizeOnContent">Автонастр. размера кадра на основе размеров кадра</s:String>
     <s:String x:Key="Interface.Other.AutomaticallyFitImage">Автонастр. размера кадра на основе размеров окна</s:String>
-  
+
+    <s:String x:Key="S.Shortcuts.Recorders.StartPause">Старт/Пауза:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Stop">Стоп:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Discard">Отменить:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Info">Кликните чтобы установить вокус на клавиатуру, затем нажимайте желаемые клавиши.&#10;Не все комбинации поддерживаются.</s:String>
+
     <s:String x:Key="Language.AppLanguage">Язык приложения</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect">Авто-определение</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect.Author">Язык системы (если доступно)</s:String>

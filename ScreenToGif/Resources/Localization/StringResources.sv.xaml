@@ -41,6 +41,7 @@
     <!--Options Page-->
     <s:String x:Key="Title.Options">Screen To Gif - Alternativ</s:String>
     <s:String x:Key="Application">Tillämpningar</s:String>
+    <s:String x:Key="S.Shortcuts">Snabbkommando</s:String>
     <s:String x:Key="Interface">Gränssnitt</s:String>
     <s:String x:Key="Image">Bild</s:String>
     <s:String x:Key="Language">Språk</s:String>
@@ -70,10 +71,6 @@
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Aktivera osynkroniserad inspelning</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(Hjälper mot interface störningar vid inspelning)</s:String>
     
-    <s:String x:Key="Application.Shortcuts">Snabbkommando</s:String>
-    <s:String x:Key="Application.Shortcuts.StartPause">Start/Paus:</s:String>
-    <s:String x:Key="Application.Shortcuts.Stop">Avbryt:</s:String>
-
     <s:String x:Key="Application.Other">Andra</s:String>
     <s:String x:Key="Application.Other.CheckForUpdates">Kolla efter uppdateringar.</s:String>
     
@@ -111,6 +108,9 @@
     <s:String x:Key="Interface.Other.HideTitleBar">Göm fönstrets titel (enkel läge).</s:String>
     <s:String x:Key="Interface.Other.TripleClickSelection">Aktivera trippel klickför att välja text.</s:String>
   
+    <s:String x:Key="S.Shortcuts.Recorders.StartPause">Start/Paus:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Stop">Avbryt:</s:String>
+
     <s:String x:Key="Language.AppLanguage">Applikations språk</s:String>
     
     <s:String x:Key="TempFiles.FilesAndFolders">Temporära filer och mappar</s:String>

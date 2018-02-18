@@ -69,48 +69,12 @@ namespace ScreenToGif.Windows
 
         private void ClickColorButton_Click(object sender, RoutedEventArgs e)
         {
-            var colorDialog = new ColorSelector(UserSettings.All.ClickColor)
-            {
-                Owner = this
-            };
+            var colorDialog = new ColorSelector(UserSettings.All.ClickColor) { Owner = this };
 
             var result = colorDialog.ShowDialog();
 
             if (result.HasValue && result.Value)
                 UserSettings.All.ClickColor = colorDialog.SelectedColor;
-        }
-
-        private void StartKeyBox_OnKeyChanged(object sender, KeyChangedEventArgs e)
-        {
-            if (UserSettings.All.StartPauseShortcut == UserSettings.All.StopShortcut && UserSettings.All.StartPauseModifiers == UserSettings.All.StopModifiers ||
-                UserSettings.All.StartPauseShortcut == UserSettings.All.DiscardShortcut && UserSettings.All.StartPauseModifiers == UserSettings.All.DiscardModifiers)
-            {
-                UserSettings.All.StartPauseShortcut = e.PreviousKey;
-                UserSettings.All.StartPauseModifiers = e.PreviousModifiers;
-                e.Cancel = true;
-            }
-        }
-
-        private void StopKeyBox_OnKeyChanged(object sender, KeyChangedEventArgs e)
-        {
-            if (UserSettings.All.StopShortcut == UserSettings.All.StartPauseShortcut && UserSettings.All.StopModifiers == UserSettings.All.StartPauseModifiers ||
-                UserSettings.All.StopShortcut == UserSettings.All.DiscardShortcut && UserSettings.All.StopModifiers == UserSettings.All.DiscardModifiers)
-            {
-                UserSettings.All.StopShortcut = e.PreviousKey;
-                UserSettings.All.StopModifiers = e.PreviousModifiers;
-                e.Cancel = true;
-            }
-        }
-
-        private void DiscardKeyBox_OnKeyChanged(object sender, KeyChangedEventArgs e)
-        {
-            if (UserSettings.All.DiscardShortcut == UserSettings.All.StartPauseShortcut && UserSettings.All.DiscardModifiers == UserSettings.All.StartPauseModifiers ||
-                UserSettings.All.DiscardShortcut == UserSettings.All.StopShortcut && UserSettings.All.DiscardModifiers == UserSettings.All.StopModifiers)
-            {
-                UserSettings.All.DiscardShortcut = e.PreviousKey;
-                UserSettings.All.DiscardModifiers = e.PreviousModifiers;
-                e.Cancel = true;
-            }
         }
 
         #endregion
@@ -653,6 +617,56 @@ namespace ScreenToGif.Windows
 
         #endregion
 
+        #region Shortcuts
+
+        private void ShortcutsPanel_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            Global.IgnoreHotKeys = ShortcutsPanel.IsVisible;
+        }
+
+        private void Globals_OnKeyChanged(object sender, KeyChangedEventArgs e)
+        {
+            Recorders_OnKeyChanged(sender, e);
+
+            if (e.Cancel)
+                return;
+
+            //Unregister old shortcut.
+            HotKeyCollection.Default.Remove(e.PreviousModifiers, e.PreviousKey);
+
+            //Registers all shortcuts and updates the input gesture text.
+            App.RegisterShortcuts();
+        }
+
+        private void Recorders_OnKeyChanged(object sender, KeyChangedEventArgs e)
+        {
+            if (!(sender is KeyBox box))
+                return;
+
+            var list = new List<Tuple<Key, ModifierKeys>>
+            {
+                new Tuple<Key, ModifierKeys>(UserSettings.All.RecorderShortcut, UserSettings.All.RecorderModifiers),
+                new Tuple<Key, ModifierKeys>(UserSettings.All.BoardRecorderShortcut, UserSettings.All.BoardRecorderModifiers),
+                new Tuple<Key, ModifierKeys>(UserSettings.All.WebcamRecorderShortcut, UserSettings.All.WebcamRecorderModifiers),
+                new Tuple<Key, ModifierKeys>(UserSettings.All.EditorShortcut, UserSettings.All.EditorModifiers),
+                new Tuple<Key, ModifierKeys>(UserSettings.All.OptionsShortcut, UserSettings.All.OptionsModifiers),
+                new Tuple<Key, ModifierKeys>(UserSettings.All.ExitShortcut, UserSettings.All.ExitModifiers),
+                new Tuple<Key, ModifierKeys>(UserSettings.All.StartPauseShortcut, UserSettings.All.StartPauseModifiers),
+                new Tuple<Key, ModifierKeys>(UserSettings.All.StopShortcut, UserSettings.All.StopModifiers),
+                new Tuple<Key, ModifierKeys>(UserSettings.All.DiscardShortcut, UserSettings.All.DiscardModifiers)
+            };
+
+            //If this new shortcut is already in use.
+            if (box.MainKey != Key.None && list.Count(c => c.Item1 == box.MainKey && c.Item2 == box.ModifierKeys) > 1)
+            {
+                box.MainKey = e.PreviousKey;
+                box.ModifierKeys = e.PreviousModifiers;
+                e.Cancel = true;
+            }
+        }
+
+        #endregion
+
         #region Language
 
         private void LanguagePanel_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -962,7 +976,7 @@ namespace ScreenToGif.Windows
             }
 
             var drive = new DriveInfo(UserSettings.All.TemporaryFolder.Substring(0, 1));
-            var spaceLeft = drive.AvailableFreeSpace > 0 ?  drive.AvailableFreeSpace * 100d / (double)drive.TotalSize : 100; //Get the percentage of usage.
+            var spaceLeft = drive.AvailableFreeSpace > 0 ? drive.AvailableFreeSpace * 100d / (double)drive.TotalSize : 100; //Get the percentage of usage.
 
             LowSpaceTextBlock.Visibility = spaceLeft > 90 ? Visibility.Visible : Visibility.Collapsed;
         }
@@ -1192,7 +1206,7 @@ namespace ScreenToGif.Windows
 
                 using (var client = new WebClient())
                     await client.DownloadFileTaskAsync(new Uri("https://github.com/NickeManarin/ScreenToGif-Website/raw/master/downloads/Gifski.zip", UriKind.Absolute), temp);
-                    //await client.DownloadFileTaskAsync(new Uri("http://screentogif.com/downloads/Gifski.zip", UriKind.Absolute), temp);
+                //await client.DownloadFileTaskAsync(new Uri("http://screentogif.com/downloads/Gifski.zip", UriKind.Absolute), temp);
 
                 using (var zip = ZipFile.Open(temp, ZipArchiveMode.Read))
                 {
@@ -1470,6 +1484,8 @@ namespace ScreenToGif.Windows
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            Global.IgnoreHotKeys = false;
+
             UserSettings.Save();
         }
 

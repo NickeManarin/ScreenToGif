@@ -83,12 +83,6 @@
     <s:String x:Key="Application.ScreenRecorder.Magnifier">Inschakelen scherm vergrootglas</s:String>
     <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(Schakelt scherm vergrootglas in tijdens selecteren van opname gebied)</s:String>
     
-    <s:String x:Key="Application.Shortcuts">Toetsenbord snelkoppelingen</s:String>
-    <s:String x:Key="Application.Shortcuts.StartPause">Start/Pauze:</s:String>
-    <s:String x:Key="Application.Shortcuts.Stop">Stop:</s:String>
-    <s:String x:Key="Application.Shortcuts.Discard">Leeghalen:</s:String>
-    <s:String x:Key="Application.Shortcuts.Info">Klik om toetsenbord focus te krijgen. Druk daarna op gewenste toetsen. Sommige toetscombinaties zijn niet toegestaan.</s:String>
-
     <s:String x:Key="Application.Other">Overig</s:String>
     <s:String x:Key="Application.Other.NotifyFrameDeletion">Stel vraag voordat alle frames worden verwijderd.</s:String>
     <s:String x:Key="Application.Other.NotifyProjectDiscard">Stel vraag voordat project wordt leeggehaald?</s:String>
@@ -132,6 +126,11 @@
     <s:String x:Key="Interface.Other.AutomaticallySizeOnContent">Automatisch aanpassen venstergrootte op basis van framegrootte, gelijk na laden</s:String>
     <s:String x:Key="Interface.Other.AutomaticallyFitImage">Automatisch aanpassen van zoomniveau frame op basis van schermgrootte, gelijk na laden</s:String>
   
+    <s:String x:Key="S.Shortcuts.Recorders.StartPause">Start/Pauze:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Stop">Stop:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Discard">Leeghalen:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Info">Klik om toetsenbord focus te krijgen. Druk daarna op gewenste toetsen.&#10;Sommige toetscombinaties zijn niet toegestaan.</s:String>
+
     <s:String x:Key="Language.AppLanguage">Taal applicatie</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect">Automatisch detecteren</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect.Author">Huidige taal OS (als beschikbaar)</s:String>

@@ -70,10 +70,6 @@
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Ввімкнути асинхронний запис.</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(Допомагає зменшити затримки інтерфейсу під час запису)</s:String>
     
-    <s:String x:Key="Application.Shortcuts">Клавіші швидкого доступу</s:String>
-    <s:String x:Key="Application.Shortcuts.StartPause">Старт/Пауза:</s:String>
-    <s:String x:Key="Application.Shortcuts.Stop">Зупинити:</s:String>
-
     <s:String x:Key="Application.Other">Інше</s:String>
     <!--<s:String x:Key="Application.Other.CheckForUpdates">Check for updates.</s:String>-->
     
@@ -111,6 +107,9 @@
     <s:String x:Key="Interface.Other.HideTitleBar">Приховати панель меню (полегшений режим).</s:String>
     <!--<s:String x:Key="Interface.Other.TripleClickSelection">Enable triple-click to select the text.</s:String>-->
   
+    <s:String x:Key="S.Shortcuts.Recorders.StartPause">Старт/Пауза:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Stop">Зупинити:</s:String>
+    
     <s:String x:Key="Language.AppLanguage">Мова</s:String>
     
     <s:String x:Key="TempFiles.FilesAndFolders">Тимчасові файли та папки</s:String>

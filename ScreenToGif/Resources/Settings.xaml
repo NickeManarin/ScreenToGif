@@ -20,12 +20,6 @@
     <s:Boolean x:Key="AsyncRecording">False</s:Boolean>
     <s:Boolean x:Key="NewRecorder">False</s:Boolean>
     <s:Boolean x:Key="Magnifier">True</s:Boolean>
-    <Key x:Key="StartPauseShortcut">F7</Key>
-    <ModifierKeys x:Key="StartPauseModifiers" xml:space="preserve"></ModifierKeys>
-    <Key x:Key="StopShortcut">F8</Key>
-    <ModifierKeys x:Key="StopModifiers" xml:space="preserve"></ModifierKeys>
-    <Key x:Key="DiscardShortcut">F9</Key>
-    <ModifierKeys x:Key="DiscardModifiers" xml:space="preserve"></ModifierKeys>
     <s:Boolean x:Key="CheckForUpdates">True</s:Boolean>
     <s:Boolean x:Key="NotifyFrameDeletion">True</s:Boolean>
     <s:Boolean x:Key="NotifyProjectDiscard">True</s:Boolean>
@@ -48,6 +42,26 @@
     <s:Boolean x:Key="AutomaticallySizeOnContent">False</s:Boolean>
     <s:Boolean x:Key="AutomaticallyFitImage">True</s:Boolean>
 
+    <!--Options • Shortcuts-->
+    <Key x:Key="RecorderShortcut">None</Key>
+    <ModifierKeys x:Key="RecorderModifiers" xml:space="preserve">Alt</ModifierKeys>
+    <Key x:Key="WebcamRecorderShortcut">None</Key>
+    <ModifierKeys x:Key="WebcamRecorderModifiers" xml:space="preserve"></ModifierKeys>
+    <Key x:Key="BoardRecorderShortcut">None</Key>
+    <ModifierKeys x:Key="BoardRecorderModifiers" xml:space="preserve"></ModifierKeys>
+    <Key x:Key="EditorShortcut">None</Key>
+    <ModifierKeys x:Key="EditorModifiers" xml:space="preserve"></ModifierKeys>
+    <Key x:Key="OptionsShortcut">None</Key>
+    <ModifierKeys x:Key="OptionsModifiers" xml:space="preserve"></ModifierKeys>
+    <Key x:Key="ExitShortcut">None</Key>
+    <ModifierKeys x:Key="ExitModifiers" xml:space="preserve"></ModifierKeys>
+    <Key x:Key="StartPauseShortcut">F7</Key>
+    <ModifierKeys x:Key="StartPauseModifiers" xml:space="preserve"></ModifierKeys>
+    <Key x:Key="StopShortcut">F8</Key>
+    <ModifierKeys x:Key="StopModifiers" xml:space="preserve"></ModifierKeys>
+    <Key x:Key="DiscardShortcut">F9</Key>
+    <ModifierKeys x:Key="DiscardModifiers" xml:space="preserve"></ModifierKeys>
+    
     <!--Options • Language-->
     <s:String x:Key="LanguageCode">auto</s:String>
 

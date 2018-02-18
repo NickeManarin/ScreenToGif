@@ -7,14 +7,19 @@ using System.Windows.Threading;
 using ScreenToGif.Controls;
 using ScreenToGif.Util;
 using ScreenToGif.Util.Model;
-using ScreenToGif.Windows;
 using ScreenToGif.Windows.Other;
 
 namespace ScreenToGif
 {
     public partial class App
     {
+        #region Properties
+
         private static NotifyIcon _notifyIcon;
+
+        private static ApplicationViewModel MainViewModel { get; set; }
+
+        #endregion
 
         #region Events
 
@@ -77,7 +82,13 @@ namespace ScreenToGif
 
             #endregion
 
+            #region Tray icon and view model
+
             _notifyIcon = (NotifyIcon)FindResource("NotifyIcon");
+
+            MainViewModel = (ApplicationViewModel)FindResource("AppViewModel") ?? new ApplicationViewModel();
+
+            #endregion
 
             //var select = new SelectFolderDialog(); select.ShowDialog(); return;
             //var select = new TestField(); select.ShowDialog(); return;
@@ -87,34 +98,32 @@ namespace ScreenToGif
             {
                 #region Startup
 
-                var vm = new ApplicationViewModel();
-
                 if (UserSettings.All.StartUp == 4 || Argument.FileNames.Any())
                 {
-                    vm.OpenEditor.Execute(null);
+                    MainViewModel.OpenEditor.Execute(null);
                     return;
                 }
 
                 if (UserSettings.All.StartUp == 0)
                 {
-                    vm.OpenLauncher.Execute(null);
+                    MainViewModel.OpenLauncher.Execute(null);
                     return;
                 }
 
                 if (UserSettings.All.StartUp == 1)
                 {
-                    vm.OpenRecorder.Execute(null);
+                    MainViewModel.OpenRecorder.Execute(null);
                     return;
                 }
 
                 if (UserSettings.All.StartUp == 2)
                 {
-                    vm.OpenWebcamRecorder.Execute(null);
+                    MainViewModel.OpenWebcamRecorder.Execute(null);
                     return;
                 }
 
                 if (UserSettings.All.StartUp == 3)
-                    vm.OpenBoardRecorder.Execute(null);
+                    MainViewModel.OpenBoardRecorder.Execute(null);
 
                 #endregion
             }
@@ -131,6 +140,8 @@ namespace ScreenToGif
             _notifyIcon?.Dispose();
 
             UserSettings.Save();
+
+            HotKeyCollection.Default.Dispose();
         }
 
         private void App_OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
@@ -163,6 +174,49 @@ namespace ScreenToGif
             {
                 //Ignored.
             }
+        }
+
+        #endregion
+
+        #region Methods
+
+        internal static void RegisterShortcuts()
+        {
+            //TODO: If startup/editor is open and focused, should I let the hotkeys work? 
+
+            //Registers all shortcuts. 
+            HotKeyCollection.Default.RegisterHotKey(UserSettings.All.RecorderModifiers, UserSettings.All.RecorderShortcut, () =>
+            {
+                if (!Global.IgnoreHotKeys && MainViewModel.OpenRecorder.CanExecute(null)) MainViewModel.OpenRecorder.Execute(null);
+            }, true);
+            HotKeyCollection.Default.RegisterHotKey(UserSettings.All.WebcamRecorderModifiers, UserSettings.All.WebcamRecorderShortcut, () =>
+            {
+                if (!Global.IgnoreHotKeys && MainViewModel.OpenWebcamRecorder.CanExecute(null)) MainViewModel.OpenWebcamRecorder.Execute(null);
+            }, true);
+            HotKeyCollection.Default.RegisterHotKey(UserSettings.All.BoardRecorderModifiers, UserSettings.All.BoardRecorderShortcut, () =>
+            {
+                if (!Global.IgnoreHotKeys && MainViewModel.OpenBoardRecorder.CanExecute(null)) MainViewModel.OpenBoardRecorder.Execute(null);
+            }, true);
+            HotKeyCollection.Default.RegisterHotKey(UserSettings.All.EditorModifiers, UserSettings.All.EditorShortcut, () =>
+            {
+                if (!Global.IgnoreHotKeys && MainViewModel.OpenEditor.CanExecute(null)) MainViewModel.OpenEditor.Execute(null);
+            }, true);
+            HotKeyCollection.Default.RegisterHotKey(UserSettings.All.OptionsModifiers, UserSettings.All.OptionsShortcut, () =>
+            {
+                if (!Global.IgnoreHotKeys && MainViewModel.OpenOptions.CanExecute(null)) MainViewModel.OpenOptions.Execute(null);
+            }, true);
+            HotKeyCollection.Default.RegisterHotKey(UserSettings.All.ExitModifiers, UserSettings.All.ExitShortcut, () =>
+            {
+                if (!Global.IgnoreHotKeys && MainViewModel.ExitApplication.CanExecute(null)) MainViewModel.ExitApplication.Execute(null);
+            }, true);
+
+            //Updates the input gesture text of each command.
+            MainViewModel.RecorderGesture = Native.GetSelectKeyText(UserSettings.All.RecorderShortcut, UserSettings.All.RecorderModifiers, true, true);
+            MainViewModel.WebcamRecorderGesture = Native.GetSelectKeyText(UserSettings.All.WebcamRecorderShortcut, UserSettings.All.WebcamRecorderModifiers, true, true);
+            MainViewModel.BoardRecorderGesture = Native.GetSelectKeyText(UserSettings.All.BoardRecorderShortcut, UserSettings.All.BoardRecorderModifiers, true, true);
+            MainViewModel.EditorGesture = Native.GetSelectKeyText(UserSettings.All.EditorShortcut, UserSettings.All.EditorModifiers, true, true);
+            MainViewModel.OptionsGesture = Native.GetSelectKeyText(UserSettings.All.OptionsShortcut, UserSettings.All.OptionsModifiers, true, true);
+            MainViewModel.ExitGesture = Native.GetSelectKeyText(UserSettings.All.ExitShortcut, UserSettings.All.ExitModifiers, true, true);
         }
 
         #endregion

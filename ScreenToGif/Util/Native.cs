@@ -16,6 +16,7 @@ using Size = System.Windows.Size;
 
 namespace ScreenToGif.Util
 {
+    //TODO: Organize this mess.
     public static class Native
     {
         #region Variables/Const
@@ -1952,7 +1953,7 @@ namespace ScreenToGif.Util
             return null;
         }
 
-        public static string GetSelectKeyText(Key key, ModifierKeys modifier = ModifierKeys.None, bool isUppercase = false)
+        public static string GetSelectKeyText(Key key, ModifierKeys modifier = ModifierKeys.None, bool isUppercase = false, bool ignoreNone = false)
         {
             //Key translation.
             switch (key)
@@ -1979,6 +1980,9 @@ namespace ScreenToGif.Util
                     key = Key.OemComma;
                     break;
             }
+
+            if (ignoreNone && key == Key.None)
+                return "";
 
             //Get the modifers as text.
             var modifiersText = Enum.GetValues(modifier.GetType()).OfType<Enum>().Where(x => (ModifierKeys)x != ModifierKeys.None && modifier.HasFlag(x)).Aggregate("", (current, mod) => current + (mod + " + "));

@@ -50,6 +50,7 @@
     <!--Options Page-->
     <s:String x:Key="Title.Options">ScreenToGif - Opções</s:String>
     <s:String x:Key="Application">Geral</s:String>
+    <s:String x:Key="S.Shortcuts">Atalhos de Teclado</s:String>
     <s:String x:Key="Interface">Interface</s:String>
     <s:String x:Key="Image">Imagem</s:String>
     <s:String x:Key="Language">Idioma</s:String>
@@ -83,12 +84,6 @@
     <s:String x:Key="Application.ScreenRecorder.Magnifier">Habilitar a lupa.</s:String>
     <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(a lupa garante um zoom durante a seleção da área de gravação)</s:String>
     
-    <s:String x:Key="Application.Shortcuts">Atalhos de Teclado</s:String>
-    <s:String x:Key="Application.Shortcuts.StartPause">Gravar/Pausar:</s:String>
-    <s:String x:Key="Application.Shortcuts.Stop">Parar:</s:String>
-    <s:String x:Key="Application.Shortcuts.Discard">Descartar:</s:String>
-    <s:String x:Key="Application.Shortcuts.Info">Clique para aplicar o foco do teclado, depois pressione as teclas e modificadores desejados. Algumas combinações de tecla não são permitidas.</s:String>
-
     <s:String x:Key="Application.Other">Outras Configurações</s:String>
     <s:String x:Key="Application.Other.NotifyFrameDeletion">Me pergunte antes de remover quadros.</s:String>
     <s:String x:Key="Application.Other.NotifyProjectDiscard">Me pergunte antes de descartar um projeto.</s:String>
@@ -132,6 +127,11 @@
     <s:String x:Key="Interface.Other.AutomaticallySizeOnContent">Ajustar automaticamente o tamanho da janela com base no tamanho do quadro, logo após carregar o projeto.</s:String>
     <s:String x:Key="Interface.Other.AutomaticallyFitImage">Ajustar automaticamente o zoom da imagem com base no tamanho da janela, logo após carregar o projeto.</s:String>
   
+    <s:String x:Key="S.Shortcuts.Recorders.StartPause">Gravar/Pausar:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Stop">Parar:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Discard">Descartar:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Info">Clique para aplicar o foco do teclado, depois pressione as teclas e modificadores desejados.&#10;Algumas combinações de tecla não são permitidas.</s:String>
+
     <s:String x:Key="Language.AppLanguage">Idioma do Aplicativo</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect">Detectar automáticamente</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect.Author">Idioma atual do Sistema Operacional (se disponível)</s:String>

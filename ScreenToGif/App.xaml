@@ -5,7 +5,8 @@
              xmlns:u="clr-namespace:ScreenToGif.Util"
              xmlns:n="clr-namespace:ScreenToGif.Controls"
              xmlns:m="clr-namespace:ScreenToGif.Util.Model"
-             Startup="Application_Startup" Exit="App_OnExit" DispatcherUnhandledException="App_OnDispatcherUnhandledException">
+             ShutdownMode="OnExplicitShutdown" Startup="Application_Startup" Exit="App_OnExit" 
+             DispatcherUnhandledException="App_OnDispatcherUnhandledException">
 
     <Application.Resources>
         <ResourceDictionary>
@@ -44,6 +45,8 @@
                 <ResourceDictionary Source="/Resources/Localization/StringResources.en.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
+            <m:ApplicationViewModel x:Key="AppViewModel"/>
+            
             <!--Converter-->
             <BooleanToVisibilityConverter x:Key="Bool2Visibility" />
             <c:CountToBool x:Key="CountToBoolConverter" />
@@ -62,6 +65,8 @@
             <DropShadowEffect x:Key="Shadow.Black.Dark" ShadowDepth="0" Color="#FF000000" Opacity=".5" BlurRadius="2" RenderingBias="Quality"/>
             <DropShadowEffect x:Key="Shadow.Black.Large" ShadowDepth="0" Color="#FF000000" Opacity=".35" BlurRadius="5" RenderingBias="Quality"/>
 
+            <DropShadowEffect x:Key="Shadow.Grey" ShadowDepth="0" Color="#FFBEBEBE" Opacity=".5" BlurRadius="2" RenderingBias="Quality"/>
+            
             <DropShadowEffect x:Key="Shadow.Foreground.Large" ShadowDepth="0" Color="{Binding ForegroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="5" RenderingBias="Quality"/>
             <DropShadowEffect x:Key="Shadow.Foreground" ShadowDepth="0" Color="{Binding ForegroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="3" RenderingBias="Quality"/>
             <DropShadowEffect x:Key="Shadow.Foreground.Normal" ShadowDepth="0" Color="{Binding ForegroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".2" BlurRadius="3" RenderingBias="Quality"/>
@@ -142,8 +147,6 @@
 
             <!--GroupBox Style-->
             <Style TargetType="{x:Type GroupBox}">
-
-                <!--Default Values-->
                 <Setter Property="BorderBrush" Value="#D5DFE5"/>
                 <Setter Property="BorderThickness" Value="1"/>
 
@@ -357,7 +360,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ToolTip}">
-                            <Border BorderBrush="#FFBEBEBE" BorderThickness="1" Effect="{DynamicResource Shadow.Border.Large}" Margin="5" Background="White" Padding="5">
+                            <Border BorderBrush="#FFBEBEBE" BorderThickness="1" Effect="{DynamicResource Shadow.Grey}" Margin="2" Background="White" Padding="5">
                                 <ContentPresenter Content="{TemplateBinding Content}" Width="Auto" HorizontalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
@@ -376,33 +379,9 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ContextMenu}">
-                            <Grid>
-                                <Rectangle StrokeThickness="2" Margin="15,0,0,0" HorizontalAlignment="Left">
-                                    <Rectangle.Stroke>
-                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                            <GradientStop Color="#00BEBEBE" Offset="0"/>
-                                            <GradientStop Color="#00BEBEBE" Offset="1"/>
-                                            <GradientStop Color="#FFB1B1B1" Offset="0.2"/>
-                                            <GradientStop Color="#FFB1B1B1" Offset="0.8"/>
-                                        </LinearGradientBrush>
-                                    </Rectangle.Stroke>
-                                </Rectangle>
-
-                                <Rectangle StrokeThickness="2" Margin="0,0,15,0" HorizontalAlignment="Right" >
-                                    <Rectangle.Stroke>
-                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                            <GradientStop Color="#00BEBEBE" Offset="0"/>
-                                            <GradientStop Color="#00BEBEBE" Offset="1"/>
-                                            <GradientStop Color="#FFB1B1B1" Offset="0.2"/>
-                                            <GradientStop Color="#FFB1B1B1" Offset="0.8"/>
-                                        </LinearGradientBrush>
-                                    </Rectangle.Stroke>
-                                </Rectangle>
-
-                                <Border x:Name="Border" BorderBrush="#FFBEBEBE" BorderThickness="1" Effect="{DynamicResource Shadow.Black.Large}" Margin="5,5,5,5" Background="White">
-                                    <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
-                                </Border>
-                            </Grid>
+                            <Border x:Name="Border" BorderBrush="#FFBEBEBE" BorderThickness="1" Effect="{DynamicResource Shadow.Grey}" Margin="2" Background="White">
+                                <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
+                            </Border>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
@@ -1080,8 +1059,8 @@
             </Style>
 
             <!--Notification Icon-->
-            <n:NotifyIcon x:Key="NotifyIcon" IconSource="/Resources/Notification.ico" NotifyToolTipText="ScreenToGif">
-                <n:NotifyIcon.NotifyToolTip>
+            <n:NotifyIcon x:Key="NotifyIcon" IconSource="/Resources/Notification.ico" DataContext="{StaticResource AppViewModel}" NotifyToolTipText="ScreenToGif">
+                <!--<n:NotifyIcon.NotifyToolTip>
                     <Grid Background="White">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
@@ -1090,24 +1069,20 @@
 
                         <TextBlock Grid.Row="0" Text="ScreenToGif" FontSize="14" Foreground="Navy"/>
                     </Grid>
-                </n:NotifyIcon.NotifyToolTip>
+                </n:NotifyIcon.NotifyToolTip>-->
 
                 <n:NotifyIcon.ContextMenu>
                     <ContextMenu>
-                        <n:ImageMenuItem Header="New recording" Image="{StaticResource Vector.Record.New}" InputGestureText="Ctrl + N" Command="{Binding OpenRecorder}"/>
-                        <n:ImageMenuItem Header="New webcam recording" Image="{StaticResource Vector.Camera.New}" Command="{Binding OpenWebcamRecorder}"/>
-                        <n:ImageMenuItem Header="New board recording" Image="{StaticResource Vector.Board.New}" Command="{Binding OpenBoardRecorder}"/>
+                        <n:ImageMenuItem Header="New recording" Image="{StaticResource Vector.Record.New}" Command="{Binding OpenRecorder}" InputGestureText="{Binding RecorderGesture, UpdateSourceTrigger=PropertyChanged}"/>
+                        <n:ImageMenuItem Header="New webcam recording" Image="{StaticResource Vector.Camera.New}" Command="{Binding OpenWebcamRecorder}" InputGestureText="{Binding WebcamRecorderGesture, UpdateSourceTrigger=PropertyChanged}"/>
+                        <n:ImageMenuItem Header="New board recording" Image="{StaticResource Vector.Board.New}" Command="{Binding OpenBoardRecorder}" InputGestureText="{Binding BoardRecorderGesture, UpdateSourceTrigger=PropertyChanged}"/>
                         <Separator/>
-                        <n:ImageMenuItem Header="Editor" Image="{StaticResource Vector.Editor}" Command="{Binding OpenEditor}"/>
-                        <n:ImageMenuItem Header="Options" Image="{StaticResource Vector.Options}" Command="{Binding OpenOptions}"/>
+                        <n:ImageMenuItem Header="Editor" Image="{StaticResource Vector.Editor}" Command="{Binding OpenEditor}" InputGestureText="{Binding EditorGesture, UpdateSourceTrigger=PropertyChanged}"/>
+                        <n:ImageMenuItem Header="Options" Image="{StaticResource Vector.Options}" Command="{Binding OpenOptions}" InputGestureText="{Binding OptionsGesture, UpdateSourceTrigger=PropertyChanged}"/>
                         <Separator/>
-                        <n:ImageMenuItem Header="Exit" Image="{StaticResource Vector.Close}" Command="{Binding ExitApplication}"/>
+                        <n:ImageMenuItem Header="Exit" Image="{StaticResource Vector.Close}" Command="{Binding ExitApplication}" InputGestureText="{Binding ExitGesture, UpdateSourceTrigger=PropertyChanged}"/>
                     </ContextMenu>
                 </n:NotifyIcon.ContextMenu>
-
-                <n:NotifyIcon.DataContext>
-                    <m:ApplicationViewModel/>
-                </n:NotifyIcon.DataContext>
             </n:NotifyIcon>
 
         </ResourceDictionary>

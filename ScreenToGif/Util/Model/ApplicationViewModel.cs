@@ -7,7 +7,7 @@ using ScreenToGif.Windows.Other;
 
 namespace ScreenToGif.Util.Model
 {
-    internal class ApplicationViewModel
+    internal class ApplicationViewModel : ApplicationModel
     {
         #region Commands
 
@@ -67,7 +67,7 @@ namespace ScreenToGif.Util.Model
                             {
                                 var window = sender as RecorderNew;
 
-                                if (window?.ExitArg == ExitAction.Recorded)
+                                if (window?.Project != null && window.Project.Any)
                                 {
                                     ShowEditor(window.Project);
                                     caller?.Close();
@@ -89,7 +89,7 @@ namespace ScreenToGif.Util.Model
                         {
                             var window = sender as Recorder;
 
-                            if (window?.ExitArg == ExitAction.Recorded)
+                            if (window?.Project != null && window.Project.Any)
                             {
                                 ShowEditor(window.Project);
                                 caller?.Close();
@@ -127,7 +127,7 @@ namespace ScreenToGif.Util.Model
                         {
                             var window = sender as Windows.Webcam;
 
-                            if (window?.ExitArg == ExitAction.Recorded)
+                            if (window?.Project != null && window.Project.Any)
                             {
                                 ShowEditor(window.Project);
                                 caller?.Close();
@@ -165,7 +165,7 @@ namespace ScreenToGif.Util.Model
                         {
                             var window = sender as Board;
 
-                            if (window?.ExitArg == ExitAction.Recorded)
+                            if (window?.Project != null && window.Project.Any)
                             {
                                 ShowEditor(window.Project);
                                 caller?.Close();
@@ -189,6 +189,7 @@ namespace ScreenToGif.Util.Model
             {
                 return new RelayCommand
                 {
+                    CanExecutePredicate = a => true, //TODO: Always let this window opens or check if there's any other recorder active?
                     ExecuteAction = a =>
                     {
                         var caller = a as Window;
@@ -208,7 +209,7 @@ namespace ScreenToGif.Util.Model
             {
                 return new RelayCommand
                 {
-                    //TODO: Always let this window opens or check if there's any other recorder active?
+                    CanExecutePredicate = a => true, //TODO: Always let this window opens or check if there's any other recorder active?
                     ExecuteAction = a =>
                     {
                         var options = Application.Current.Windows.OfType<Options>().FirstOrDefault();
@@ -285,6 +286,11 @@ namespace ScreenToGif.Util.Model
             }
 
             Application.Current.MainWindow = editor;
+        }
+
+        private void CloseOrNot()
+        {
+            
         }
     }
 

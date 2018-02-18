@@ -69,10 +69,6 @@
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Fotogramas constantes, não varia com atrasos da gravação)</s:String>
     <!--<s:String x:Key="Application.ScreenRecorder.AsyncRecording">Enable asynchronous recording.</s:String>-->
     <!--<s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(It helps reduce the interface lag when recording)</s:String>-->
-    
-    <s:String x:Key="Application.Shortcuts">Atalhos de Teclado</s:String>
-    <s:String x:Key="Application.Shortcuts.StartPause">Gravar/Pausar:</s:String>
-    <s:String x:Key="Application.Shortcuts.Stop">Parar:</s:String>
 
     <s:String x:Key="Application.Other">Outras Definições</s:String>
     <!--<s:String x:Key="Application.Other.CheckForUpdates">Check for updates.</s:String>-->
@@ -111,6 +107,9 @@
     <!--<s:String x:Key="Interface.Other.HideTitleBar">Hide the title bar (thin mode).</s:String>-->
     <!--<s:String x:Key="Interface.Other.TripleClickSelection">Enable triple-click to select the text.</s:String>-->
   
+    <s:String x:Key="S.Shortcuts.Recorders.StartPause">Gravar/Pausar:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Stop">Parar:</s:String>
+    
     <s:String x:Key="Language.AppLanguage">Idioma da Aplicação</s:String>
     
     <s:String x:Key="TempFiles.FilesAndFolders">Ficheiros e Pastas Temporárias</s:String>

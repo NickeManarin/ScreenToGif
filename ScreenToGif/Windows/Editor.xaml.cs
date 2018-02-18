@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -4773,8 +4774,8 @@ namespace ScreenToGif.Windows
                     break;
                 case 3: //Percentage
                     var count = (double)Project.Frames.Count;
-                    ProgressHorizontalTextBlock.Text = UserSettings.All.ProgressShowTotal ? (current / count * 100).ToString("##0.#") + "/100%"
-                        : (current / count * 100).ToString("##0.# %");
+                    ProgressHorizontalTextBlock.Text = UserSettings.All.ProgressShowTotal ? (current / count * 100).ToString("##0.#", CultureInfo.CurrentUICulture) + "/100%"
+                        : (current / count * 100).ToString("##0.# %", CultureInfo.CurrentUICulture);
                     break;
                 case 4: //Frame number
                     ProgressHorizontalTextBlock.Text = UserSettings.All.ProgressShowTotal ? current + "/" + Project.Frames.Count

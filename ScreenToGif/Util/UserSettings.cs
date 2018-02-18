@@ -342,42 +342,6 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
-        public Key StartPauseShortcut
-        {
-            get => (Key)GetValue();
-            set => SetValue(value);
-        }
-
-        public ModifierKeys StartPauseModifiers
-        {
-            get => (ModifierKeys)GetValue(defaultValue: ModifierKeys.None);
-            set => SetValue(value);
-        }
-
-        public Key StopShortcut
-        {
-            get => (Key)GetValue();
-            set => SetValue(value);
-        }
-
-        public ModifierKeys StopModifiers
-        {
-            get => (ModifierKeys)GetValue();
-            set => SetValue(value);
-        }
-
-        public Key DiscardShortcut
-        {
-            get => (Key)GetValue();
-            set => SetValue(value);
-        }
-
-        public ModifierKeys DiscardModifiers
-        {
-            get => (ModifierKeys)GetValue();
-            set => SetValue(value);
-        }
-
         public bool NotifyFrameDeletion
         {
             get => (bool)GetValue();
@@ -416,14 +380,131 @@ namespace ScreenToGif.Util
 
         #endregion
 
+        #region Options • Shortcuts
 
-        #region Properties
+        public Key RecorderShortcut
+        {
+            get => (Key)GetValue();
+            set => SetValue(value);
+        }
+
+        public ModifierKeys RecorderModifiers
+        {
+            get => (ModifierKeys)GetValue(defaultValue: ModifierKeys.None);
+            set => SetValue(value);
+        }
+
+        public Key WebcamRecorderShortcut
+        {
+            get => (Key)GetValue();
+            set => SetValue(value);
+        }
+
+        public ModifierKeys WebcamRecorderModifiers
+        {
+            get => (ModifierKeys)GetValue(defaultValue: ModifierKeys.None);
+            set => SetValue(value);
+        }
+
+        public Key BoardRecorderShortcut
+        {
+            get => (Key)GetValue();
+            set => SetValue(value);
+        }
+
+        public ModifierKeys BoardRecorderModifiers
+        {
+            get => (ModifierKeys)GetValue(defaultValue: ModifierKeys.None);
+            set => SetValue(value);
+        }
+
+        public Key EditorShortcut
+        {
+            get => (Key)GetValue();
+            set => SetValue(value);
+        }
+
+        public ModifierKeys EditorModifiers
+        {
+            get => (ModifierKeys)GetValue(defaultValue: ModifierKeys.None);
+            set => SetValue(value);
+        }
+
+        public Key OptionsShortcut
+        {
+            get => (Key)GetValue();
+            set => SetValue(value);
+        }
+
+        public ModifierKeys OptionsModifiers
+        {
+            get => (ModifierKeys)GetValue(defaultValue: ModifierKeys.None);
+            set => SetValue(value);
+        }
+
+        public Key ExitShortcut
+        {
+            get => (Key)GetValue();
+            set => SetValue(value);
+        }
+
+        public ModifierKeys ExitModifiers
+        {
+            get => (ModifierKeys)GetValue(defaultValue: ModifierKeys.None);
+            set => SetValue(value);
+        }
+
+
+        public Key StartPauseShortcut
+        {
+            get => (Key)GetValue();
+            set => SetValue(value);
+        }
+
+        public ModifierKeys StartPauseModifiers
+        {
+            get => (ModifierKeys)GetValue(defaultValue: ModifierKeys.None);
+            set => SetValue(value);
+        }
+
+        public Key StopShortcut
+        {
+            get => (Key)GetValue();
+            set => SetValue(value);
+        }
+
+        public ModifierKeys StopModifiers
+        {
+            get => (ModifierKeys)GetValue();
+            set => SetValue(value);
+        }
+
+        public Key DiscardShortcut
+        {
+            get => (Key)GetValue();
+            set => SetValue(value);
+        }
+
+        public ModifierKeys DiscardModifiers
+        {
+            get => (ModifierKeys)GetValue();
+            set => SetValue(value);
+        }
+
+        #endregion
+
+        #region Options • Language
 
         public string LanguageCode
         {
             get => (string)GetValue();
             set => SetValue(value);
         }
+
+        #endregion
+
+
+        #region Properties
 
         public int LatestFps
         {
@@ -478,6 +559,7 @@ namespace ScreenToGif.Util
             get => (Color)GetValue();
             set => SetValue(value);
         }
+
 
         public Rect GridSize
         {

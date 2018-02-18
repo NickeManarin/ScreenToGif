@@ -83,12 +83,6 @@
     <s:String x:Key="Application.ScreenRecorder.Magnifier">Activar el zoom de pantalla.</s:String>
     <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(Esto activa un zoom en una zona que selecciones de la grabación)</s:String>
     
-    <s:String x:Key="Application.Shortcuts">Atajos del Teclado</s:String>
-    <s:String x:Key="Application.Shortcuts.StartPause">Iniciar/Parar:</s:String>
-    <s:String x:Key="Application.Shortcuts.Stop">Parar:</s:String>
-    <s:String x:Key="Application.Shortcuts.Discard">Descartar:</s:String>
-    <s:String x:Key="Application.Shortcuts.Info">Haga clic para establecer el atajo del teclado, después de eso, presione las que usara. Algunas combinaciones de teclas no están permitidas.</s:String>
-
     <s:String x:Key="Application.Other">Otras opciones</s:String>
     <s:String x:Key="Application.Other.NotifyFrameDeletion">Preguntar antes de borrar los fotogramas.</s:String>
     <s:String x:Key="Application.Other.NotifyProjectDiscard">Preguntar antes de descartar un proyecto.</s:String>
@@ -132,6 +126,11 @@
     <s:String x:Key="Interface.Other.AutomaticallySizeOnContent">Ajustar automaticamente el tamaño de la ventana basado en el fotograma, justo después de cargarlo.</s:String>
     <s:String x:Key="Interface.Other.AutomaticallyFitImage">Ajustar automaticamente el zoom del fotograma basado en el tamaño de la ventana, justo después de cargar.</s:String>
   
+    <s:String x:Key="S.Shortcuts.Recorders.StartPause">Iniciar/Parar:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Stop">Parar:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Discard">Descartar:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Info">Haga clic para establecer el atajo del teclado, después de eso, presione las que usara. Algunas combinaciones de teclas no están permitidas.</s:String>
+    
     <s:String x:Key="Language.AppLanguage">Lenguaje de la App</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect">Auto-Detectar</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect.Author">Actual lenguaje (si esta disponible)</s:String>
