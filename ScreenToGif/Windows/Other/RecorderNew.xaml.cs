@@ -26,7 +26,7 @@ using Timer = System.Windows.Forms.Timer;
 
 namespace ScreenToGif.Windows.Other
 {
-    public partial class RecorderNew : Window
+    public partial class RecorderNew : RecorderWindow
     {
         #region Variables
 
@@ -34,11 +34,6 @@ namespace ScreenToGif.Windows.Other
         /// The object of the keyboard and mouse hooks.
         /// </summary>
         private readonly UserActivityHook _actHook;
-
-        /// <summary>
-        /// The project information about the current recording.
-        /// </summary>
-        internal ProjectInfo Project { get; set; }
 
         /// <summary>
         /// Lists of pressed keys.
@@ -76,11 +71,6 @@ namespace ScreenToGif.Windows.Other
         private bool _stopRequested;
 
         private Task<Image> _captureTask;
-
-        /// <summary>
-        /// The action to be executed after closing this Window.
-        /// </summary>
-        public ExitAction ExitArg = ExitAction.Return;
 
         private Point _latestPosition;
 
@@ -195,7 +185,7 @@ namespace ScreenToGif.Windows.Other
 
         #endregion
 
-        public RecorderNew(bool hideBackButton = false)
+        public RecorderNew(bool hideBackButton = true)
         {
             InitializeComponent();
 
@@ -285,7 +275,7 @@ namespace ScreenToGif.Windows.Other
 
             #endregion
         }
-        
+
         private void Window_StateChanged(object sender, EventArgs e)
         {
             //TODO: Detect that the window was minimized before. E01
@@ -577,7 +567,7 @@ namespace ScreenToGif.Windows.Other
         }
 
         #endregion
-        
+
         #region Methods
 
         protected override void OnKeyDown(KeyEventArgs e)
@@ -601,7 +591,7 @@ namespace ScreenToGif.Windows.Other
         {
             SelectControl.Mode = mode;
             SelectControl.BackImage = CaptureBackground();
-            
+
             //Reset the values.
             SelectControl.Scale = _scale;
             SelectControl.Retry();
@@ -672,7 +662,7 @@ namespace ScreenToGif.Windows.Other
         private BitmapSource CaptureBackground()
         {
             //A 7 pixel border is added to allow the crop by the magnifying glass.
-            return Native.CaptureBitmapSource((int)Math.Round((Width + 14) * _scale), (int)Math.Round((Height + 14) * _scale), 
+            return Native.CaptureBitmapSource((int)Math.Round((Width + 14) * _scale), (int)Math.Round((Height + 14) * _scale),
                 (int)Math.Round((Left - 7) * _scale), (int)Math.Round((Top - 7) * _scale));
         }
 
@@ -877,12 +867,7 @@ namespace ScreenToGif.Windows.Other
 
                     await Task.Delay(100);
 
-                    ExitArg = ExitAction.Recorded;
-
-                    if (IsDialog)
-                        DialogResult = false;
-                    else
-                        Close();
+                    Close();
 
                     #endregion
                 }

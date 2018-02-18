@@ -540,7 +540,7 @@ namespace ScreenToGif.Windows
 
         private void NewRecording_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = !IsLoading && !e.Handled;
+            e.CanExecute = !IsLoading && !e.Handled && Application.Current.Windows.OfType<Window>().All(a => !(a is RecorderWindow));
         }
 
         private void NewRecording_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -555,9 +555,9 @@ namespace ScreenToGif.Windows
             if (UserSettings.All.NewRecorder)
             {
                 var recorder = new RecorderNew();
-                var result = recorder.ShowDialog();
+                recorder.ShowDialog();
 
-                if (result.HasValue && !result.Value && recorder.ExitArg == ExitAction.Recorded && recorder.Project.Frames != null)
+                if (recorder.Project?.Frames != null)
                 {
                     LoadProject(recorder.Project);
                     ShowHint("Hint.NewRecording");
@@ -568,7 +568,7 @@ namespace ScreenToGif.Windows
                 var recorder = new Recorder();
                 var result = recorder.ShowDialog();
 
-                if (result.HasValue && !result.Value && recorder.ExitArg == ExitAction.Recorded && recorder.Project.Frames != null)
+                if (recorder.Project?.Frames != null)
                 {
                     LoadProject(recorder.Project);
                     ShowHint("Hint.NewRecording");
@@ -586,12 +586,12 @@ namespace ScreenToGif.Windows
             Pause();
             ClosePanel(removeEvent: true);
 
-            var webcam = new Webcam();
-            var result = webcam.ShowDialog();
+            var recorder = new Webcam();
+            recorder.ShowDialog();
 
-            if (result.HasValue && !result.Value && webcam.ExitArg == ExitAction.Recorded && webcam.Project.Frames != null)
+            if (recorder.Project?.Frames != null)
             {
-                LoadProject(webcam.Project);
+                LoadProject(recorder.Project);
                 ShowHint("Hint.NewWebcamRecording");
             }
         }
@@ -602,12 +602,12 @@ namespace ScreenToGif.Windows
             Pause();
             ClosePanel(removeEvent: true);
 
-            var board = new Board();
-            var result = board.ShowDialog();
+            var recorder = new Board();
+            recorder.ShowDialog();
 
-            if (result.HasValue && !result.Value && board.ExitArg == ExitAction.Recorded && board.Project.Frames != null)
+            if (recorder.Project?.Frames != null && recorder.Project.Any)
             {
-                LoadProject(board.Project);
+                LoadProject(recorder.Project);
                 ShowHint("Hint.NewBoardRecording");
             }
         }
@@ -692,7 +692,7 @@ namespace ScreenToGif.Windows
                 var result = recorder.ShowDialog();
                 project = recorder.Project;
 
-                if (!result.HasValue || recorder.ExitArg != ExitAction.Recorded || recorder.Project.Frames == null)
+                if (recorder.Project?.Frames == null)
                 {
                     GC.Collect();
 
@@ -707,7 +707,7 @@ namespace ScreenToGif.Windows
                 var result = recorder.ShowDialog();
                 project = recorder.Project;
 
-                if (!result.HasValue || recorder.ExitArg != ExitAction.Recorded || recorder.Project.Frames == null)
+                if (recorder.Project?.Frames == null)
                 {
                     GC.Collect();
 
@@ -744,7 +744,7 @@ namespace ScreenToGif.Windows
 
             #region If recording cancelled
 
-            if (!result.HasValue || recorder.ExitArg != ExitAction.Recorded || recorder.Project.Frames == null)
+            if (recorder.Project?.Frames == null)
             {
                 GC.Collect();
 
@@ -779,7 +779,7 @@ namespace ScreenToGif.Windows
 
             #region If recording cancelled
 
-            if (!result.HasValue || recorder.ExitArg != ExitAction.Recorded || recorder.Project.Frames == null)
+            if (recorder.Project?.Frames == null)
             {
                 GC.Collect();
 

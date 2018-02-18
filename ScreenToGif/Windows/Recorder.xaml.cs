@@ -45,11 +45,6 @@ namespace ScreenToGif.Windows
         private Task<Image> _captureTask;
 
         /// <summary>
-        /// The project information about the current recording.
-        /// </summary>
-        internal ProjectInfo Project { get; set; }
-
-        /// <summary>
         /// Lists of pressed keys.
         /// </summary>
         private readonly List<SimpleKeyGesture> _keyList = new List<SimpleKeyGesture>();
@@ -84,8 +79,6 @@ namespace ScreenToGif.Windows
         /// </summary>
         private IntPtr _lastHandle;
 
-        public bool IsDialog { get; set; } = true;
-        
         #region Flags
 
         public static readonly DependencyProperty StageProperty = DependencyProperty.Register("Stage", typeof(Stage), typeof(Recorder), new FrameworkPropertyMetadata(Stage.Stopped));
@@ -103,11 +96,6 @@ namespace ScreenToGif.Windows
         /// Indicates when the user is mouse-clicking.
         /// </summary>
         private bool _recordClicked = false;
-
-        /// <summary>
-        /// The action to be executed after closing this Window.
-        /// </summary>
-        public ExitAction ExitArg = ExitAction.Return;
 
         /// <summary>
         /// The delay of each frame took as snapshot.
@@ -130,7 +118,7 @@ namespace ScreenToGif.Windows
 
         #region Inicialization
 
-        public Recorder(bool hideBackButton = false)
+        public Recorder(bool hideBackButton = true)
         {
             InitializeComponent();
 
@@ -588,18 +576,12 @@ namespace ScreenToGif.Windows
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            if (IsDialog)
-                DialogResult = true;
-            else
-                Close();
+            Close();
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            if (IsDialog)
-                DialogResult = false;
-            else
-                Close();
+            Close();
         }
 
         #endregion
@@ -949,8 +931,6 @@ namespace ScreenToGif.Windows
 
                     await Task.Delay(100);
 
-                    ExitArg = ExitAction.Recorded;
-                    //DialogResult = false;
                     Close();
 
                     #endregion

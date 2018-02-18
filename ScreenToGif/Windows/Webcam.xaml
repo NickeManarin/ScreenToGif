@@ -1,12 +1,12 @@
-﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:n="clr-namespace:ScreenToGif.Controls"
-        xmlns:u="clr-namespace:ScreenToGif.Util"
-        xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
-        x:Class="ScreenToGif.Windows.Webcam" x:Name="WebcamWindow" 
-        Title="{DynamicResource Webcam.Title}" Height="400" Width="600" MinWidth="200" MinHeight="200" 
-        Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen"
-        Loaded="Window_Loaded" LocationChanged="Window_LocationChanged" Closing="Window_Closing">
+﻿<n:RecorderWindow xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:n="clr-namespace:ScreenToGif.Controls"
+                  xmlns:u="clr-namespace:ScreenToGif.Util"
+                  xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
+                  x:Class="ScreenToGif.Windows.Webcam" x:Name="WebcamWindow" 
+                  Title="{DynamicResource Webcam.Title}" Height="400" Width="600" MinWidth="200" MinHeight="200" 
+                  Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen"
+                  Loaded="Window_Loaded" LocationChanged="Window_LocationChanged" Closing="Window_Closing">
 
     <Window.Resources>
         <c:StageToButtonString x:Key="StageToButtonStringConverter"/>
@@ -178,4 +178,4 @@
             </Border>
         </Popup>
     </Grid>
-</Window>
+</n:RecorderWindow>

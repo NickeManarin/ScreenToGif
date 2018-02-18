@@ -9,7 +9,5 @@ namespace ScreenToGif.Controls
         /// The project information about the current recording.
         /// </summary>
         internal ProjectInfo Project { get; set; }
-
-
     }
 }

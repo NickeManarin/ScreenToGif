@@ -22,14 +22,6 @@ namespace ScreenToGif.Windows
     {
         #region Variables
 
-        /// <summary>
-        /// The project information about the current recording.
-        /// </summary>
-        internal ProjectInfo Project { get; set; }
-
-        public bool IsDialog { get; set; } = true;
-
-        //private CaptureWebcam _capture = null;
         private Filters _filters;
 
         /// <summary>
@@ -46,14 +38,9 @@ namespace ScreenToGif.Windows
         /// </summary>
         public Stage Stage
         {
-            get { return (Stage)GetValue(StageProperty); }
-            set { SetValue(StageProperty, value); }
+            get => (Stage)GetValue(StageProperty);
+            set => SetValue(StageProperty, value);
         }
-
-        /// <summary>
-        /// The action to be executed after closing this Window.
-        /// </summary>
-        public ExitAction ExitArg = ExitAction.Return;
 
         #endregion
 
@@ -162,7 +149,7 @@ namespace ScreenToGif.Windows
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public Webcam(bool hideBackButton = false)
+        public Webcam(bool hideBackButton = true)
         {
             InitializeComponent();
 
@@ -194,7 +181,7 @@ namespace ScreenToGif.Windows
         {
             if (_hideBackButton)
                 BackButton.Visibility = Visibility.Collapsed;
-            
+
             SystemEvents.PowerModeChanged += System_PowerModeChanged;
 
             #region DPI
@@ -416,7 +403,7 @@ namespace ScreenToGif.Windows
                     //Stage = Stage.Snapping;
                     //EnableSnapshot_Executed(null, null);
                 }
-                
+
                 GC.Collect();
             });
 
@@ -433,8 +420,8 @@ namespace ScreenToGif.Windows
             Project.Frames.Add(new FrameInfo(fileName, _timer.Interval));
 
             //Get the actual position of the form.
-            var lefttop = Dispatcher.Invoke(() => new System.Drawing.Point((int)Math.Round((Left + _offsetX) * _scale, MidpointRounding.AwayFromZero), 
-                (int)Math.Round((Top + _offsetY) * _scale,  MidpointRounding.AwayFromZero)));
+            var lefttop = Dispatcher.Invoke(() => new System.Drawing.Point((int)Math.Round((Left + _offsetX) * _scale, MidpointRounding.AwayFromZero),
+                (int)Math.Round((Top + _offsetY) * _scale, MidpointRounding.AwayFromZero)));
 
             //Take a screenshot of the area.
             var bt = Native.Capture(new System.Windows.Size((int)Math.Round(WebcamControl.ActualWidth * _scale, MidpointRounding.AwayFromZero),
@@ -458,10 +445,7 @@ namespace ScreenToGif.Windows
 
         private void BackButton_OnClick(object sender, RoutedEventArgs e)
         {
-            if (IsDialog)
-                DialogResult = false;
-            else
-                Close();
+            Close();
         }
 
         private void ScaleButton_Click(object sender, RoutedEventArgs e)
@@ -582,16 +566,8 @@ namespace ScreenToGif.Windows
 
                 if (Stage != Stage.Stopped && Stage != Stage.PreStarting && Project.Any)
                 {
-                    #region If not Already Stoped nor Pre Starting and FrameCount > 0, Stops
-
-                    ExitArg = ExitAction.Recorded;
-
-                    if (IsDialog)
-                        DialogResult = false;
-                    else
-                        Close();
-
-                    #endregion
+                    //If not Already Stoped nor Pre Starting and FrameCount > 0, Stops
+                    Close();
                 }
                 else if ((Stage == Stage.PreStarting || Stage == Stage.Snapping) && !Project.Any)
                 {

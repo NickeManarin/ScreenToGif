@@ -13,7 +13,7 @@ namespace ScreenToGif.Controls
     /// <summary>
     /// Light Window used by the Recorder.
     /// </summary>
-    public class LightWindow : Window
+    public class LightWindow : RecorderWindow
     {
         #region Dependency Property
 

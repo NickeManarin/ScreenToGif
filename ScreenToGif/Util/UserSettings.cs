@@ -384,7 +384,7 @@ namespace ScreenToGif.Util
 
         public Key RecorderShortcut
         {
-            get => (Key)GetValue();
+            get => (Key)GetValue(defaultValue: Key.None);
             set => SetValue(value);
         }
 
@@ -396,7 +396,7 @@ namespace ScreenToGif.Util
 
         public Key WebcamRecorderShortcut
         {
-            get => (Key)GetValue();
+            get => (Key)GetValue(defaultValue: Key.None);
             set => SetValue(value);
         }
 
@@ -408,7 +408,7 @@ namespace ScreenToGif.Util
 
         public Key BoardRecorderShortcut
         {
-            get => (Key)GetValue();
+            get => (Key)GetValue(defaultValue: Key.None);
             set => SetValue(value);
         }
 
@@ -420,7 +420,7 @@ namespace ScreenToGif.Util
 
         public Key EditorShortcut
         {
-            get => (Key)GetValue();
+            get => (Key)GetValue(defaultValue: Key.None);
             set => SetValue(value);
         }
 
@@ -432,7 +432,7 @@ namespace ScreenToGif.Util
 
         public Key OptionsShortcut
         {
-            get => (Key)GetValue();
+            get => (Key)GetValue(defaultValue: Key.None);
             set => SetValue(value);
         }
 
@@ -444,7 +444,7 @@ namespace ScreenToGif.Util
 
         public Key ExitShortcut
         {
-            get => (Key)GetValue();
+            get => (Key)GetValue(defaultValue: Key.None);
             set => SetValue(value);
         }
 

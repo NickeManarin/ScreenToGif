@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using ScreenToGif.Controls;
 using ScreenToGif.Windows;
 using ScreenToGif.Windows.Other;
 
@@ -52,8 +53,8 @@ namespace ScreenToGif.Util.Model
                 {
                     CanExecutePredicate = o =>
                     {
-                        var type = UserSettings.All.NewRecorder ? typeof(RecorderNew) : typeof(Recorder);
-                        return Application.Current.Windows.OfType<Window>().All(a => a.GetType() != type);
+                        //True if all windows are not Recorders.
+                        return Application.Current.Windows.OfType<Window>().All(a => !(a is RecorderWindow));
                     },
                     ExecuteAction = a =>
                     {
@@ -62,7 +63,7 @@ namespace ScreenToGif.Util.Model
 
                         if (UserSettings.All.NewRecorder)
                         {
-                            var recorderNew = new RecorderNew(true) { IsDialog = false };
+                            var recorderNew = new RecorderNew();
                             recorderNew.Closed += (sender, args) =>
                             {
                                 var window = sender as RecorderNew;
@@ -84,7 +85,7 @@ namespace ScreenToGif.Util.Model
                             return;
                         }
 
-                        var recorder = new Recorder(true) { IsDialog = false };
+                        var recorder = new Recorder();
                         recorder.Closed += (sender, args) =>
                         {
                             var window = sender as Recorder;
@@ -115,14 +116,15 @@ namespace ScreenToGif.Util.Model
                 {
                     CanExecutePredicate = o =>
                     {
-                        return Application.Current.Windows.OfType<Window>().All(a => a.GetType() != typeof(Windows.Webcam));
+                        //True if all windows are not Recorders.
+                        return Application.Current.Windows.OfType<Window>().All(a => !(a is RecorderWindow));
                     },
                     ExecuteAction = a =>
                     {
                         var caller = a as Window;
                         caller?.Hide();
 
-                        var recorder = new Windows.Webcam(true) { IsDialog = false };
+                        var recorder = new Windows.Webcam();
                         recorder.Closed += (sender, args) =>
                         {
                             var window = sender as Windows.Webcam;
@@ -153,14 +155,15 @@ namespace ScreenToGif.Util.Model
                 {
                     CanExecutePredicate = o =>
                     {
-                        return Application.Current.Windows.OfType<Window>().All(a => a.GetType() != typeof(Board));
+                        //True if all windows are not Recorders.
+                        return Application.Current.Windows.OfType<Window>().All(a => !(a is RecorderWindow));
                     },
                     ExecuteAction = a =>
                     {
                         var caller = a as Window;
                         caller?.Hide();
 
-                        var recorder = new Board(true) { IsDialog = false };
+                        var recorder = new Board();
                         recorder.Closed += (sender, args) =>
                         {
                             var window = sender as Board;
