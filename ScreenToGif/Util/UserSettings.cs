@@ -342,6 +342,18 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public bool ShowNotificationIcon
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool KeepOpen
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
         public bool NotifyFrameDeletion
         {
             get => (bool)GetValue();
@@ -369,12 +381,6 @@ namespace ScreenToGif.Util
         public bool CheckForUpdates 
         {
             get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
-        public string YandexDiskOAuthToken
-        {
-            get => (string)GetValue();
             set => SetValue(value);
         }
 
@@ -503,6 +509,15 @@ namespace ScreenToGif.Util
 
         #endregion
 
+        #region Options • Cloud
+
+        public string YandexDiskOAuthToken
+        {
+            get => (string)GetValue();
+            set => SetValue(value);
+        }
+
+        #endregion
 
         #region Properties
 

@@ -25,11 +25,7 @@ namespace ScreenToGif.Util.Model
                         if (startup == null)
                         {
                             startup = new Startup();
-                            startup.Closed += (sender, args) =>
-                            {
-                                //TODO: What should I do?
-                                //When closed, check if it's the last window, then close if it's the configured behavior.
-                            };
+                            startup.Closed += (sender, args) => { CloseOrNot(); };
 
                             startup.Show();
                         }
@@ -76,6 +72,7 @@ namespace ScreenToGif.Util.Model
                                 else
                                 {
                                     caller?.Show();
+                                    CloseOrNot();
                                 }
                             };
 
@@ -98,6 +95,7 @@ namespace ScreenToGif.Util.Model
                             else
                             {
                                 caller?.Show();
+                                CloseOrNot();
                             }
                         };
 
@@ -137,6 +135,7 @@ namespace ScreenToGif.Util.Model
                             else
                             {
                                 caller?.Show();
+                                CloseOrNot();
                             }
                         };
 
@@ -176,6 +175,7 @@ namespace ScreenToGif.Util.Model
                             else
                             {
                                 caller?.Show();
+                                CloseOrNot();
                             }
                         };
 
@@ -222,7 +222,7 @@ namespace ScreenToGif.Util.Model
                             options = new Options();
                             options.Closed += (sender, args) =>
                             {
-                                //TODO: What should I do?
+                                CloseOrNot();
                             };
 
                             //TODO: Open as dialog or not? Block other windows?
@@ -264,11 +264,10 @@ namespace ScreenToGif.Util.Model
         {
             var editor = Application.Current.Windows.OfType<Editor>().FirstOrDefault(f => f.Project == null || !f.Project.Any);
 
-            //TODO: Remove+Add Closed event. When the window closes, check if the app should leave the tray.
-
             if (editor == null)
             {
                 editor = new Editor { Project = project };
+                editor.Closed += (sender, args) => CloseOrNot();
                 editor.Show();
             }
             else
@@ -293,7 +292,12 @@ namespace ScreenToGif.Util.Model
 
         private void CloseOrNot()
         {
-            
+            //When closed, check if it's the last window, then close if it's the configured behavior.
+            if (!UserSettings.All.ShowNotificationIcon || !UserSettings.All.KeepOpen)
+            {
+                if (Application.Current.Windows.Count == 0)
+                    Application.Current.Shutdown(2);
+            }
         }
     }
 

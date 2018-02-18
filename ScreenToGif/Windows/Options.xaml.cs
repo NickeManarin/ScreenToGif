@@ -77,6 +77,12 @@ namespace ScreenToGif.Windows
                 UserSettings.All.ClickColor = colorDialog.SelectedColor;
         }
 
+        private void NotificationIconCheckBox_CheckedChanged(object sender, RoutedEventArgs e)
+        {
+            if (App.NotifyIcon != null)
+                App.NotifyIcon.Visibility = UserSettings.All.ShowNotificationIcon ? Visibility.Visible : Visibility.Collapsed;
+        }
+
         #endregion
 
         #region Interface

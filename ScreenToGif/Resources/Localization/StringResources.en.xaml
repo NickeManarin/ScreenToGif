@@ -85,6 +85,8 @@
     <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(It enables a magnifier while selecting the recording area)</s:String>
     
     <s:String x:Key="Application.Other">Other</s:String>
+    <s:String x:Key="Application.Other.SystemTray">Display the app on the system tray (notification area).</s:String>
+    <s:String x:Key="Application.Other.LeaveOpen">Keep the app open even if all windows are closed.</s:String>
     <s:String x:Key="Application.Other.NotifyFrameDeletion">Ask me before deleting frames.</s:String>
     <s:String x:Key="Application.Other.NotifyProjectDiscard">Ask me before discarding a project.</s:String>
     <s:String x:Key="Application.Other.NotifyWhileClosingEditor">Ask me before closing the Editor (if there's a project opened).</s:String>

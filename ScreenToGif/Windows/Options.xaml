@@ -112,6 +112,10 @@
                     </WrapPanel>
 
                     <n:LabelSeparator Text="{DynamicResource Application.Other}"/>
+                    <n:ExtendedCheckBox Text="{DynamicResource Application.Other.SystemTray}" Margin="15,3,5,3" IsChecked="{Binding Path=ShowNotificationIcon, Mode=TwoWay}"
+                                        CheckedChanged="NotificationIconCheckBox_CheckedChanged"/>
+                    <n:ExtendedCheckBox Text="{DynamicResource Application.Other.LeaveOpen}" Margin="30,3,5,3" IsChecked="{Binding Path=KeepOpen, Mode=TwoWay}"
+                                        Visibility="{Binding ShowNotificationIcon, Converter={StaticResource Bool2Visibility}}"/>
                     <n:ExtendedCheckBox Text="{DynamicResource Application.Other.NotifyFrameDeletion}" Margin="15,3,5,3" IsChecked="{Binding Path=NotifyFrameDeletion, Mode=TwoWay}"/>
                     <n:ExtendedCheckBox Text="{DynamicResource Application.Other.NotifyProjectDiscard}" Margin="15,3,5,3" IsChecked="{Binding Path=NotifyProjectDiscard, Mode=TwoWay}"/>
                     <n:ExtendedCheckBox Text="{DynamicResource Application.Other.NotifyWhileClosingEditor}" Margin="15,3,5,3" IsChecked="{Binding Path=NotifyWhileClosingEditor, Mode=TwoWay}"/>

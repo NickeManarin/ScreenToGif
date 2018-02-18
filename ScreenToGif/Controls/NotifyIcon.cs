@@ -318,8 +318,6 @@ namespace ScreenToGif.Controls
 
             _iconData = Native.NotifyIconData.CreateDefault(_messageSink.MessageWindowHandle);
 
-            CreateTaskbarIcon();
-
             _messageSink.MouseEventReceived += OnMouseEvent;
             _messageSink.TaskbarCreated += OnTaskbarCreated;
             _messageSink.ChangeToolTipStateRequest += OnToolTipChange;
@@ -448,6 +446,14 @@ namespace ScreenToGif.Controls
         #endregion
 
         #region Events
+
+        protected override void OnInitialized(EventArgs e)
+        {
+            if (Visibility == Visibility.Visible)
+                CreateTaskbarIcon();
+
+            base.OnInitialized(e);
+        }
 
         private void OnMouseEvent(MouseEventType type)
         {

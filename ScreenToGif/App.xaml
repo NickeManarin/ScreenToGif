@@ -1059,7 +1059,7 @@
             </Style>
 
             <!--Notification Icon-->
-            <n:NotifyIcon x:Key="NotifyIcon" IconSource="/Resources/Notification.ico" DataContext="{StaticResource AppViewModel}" NotifyToolTipText="ScreenToGif">
+            <n:NotifyIcon x:Key="NotifyIcon" IconSource="/Resources/Notification.ico" DataContext="{StaticResource AppViewModel}" NotifyToolTipText="ScreenToGif" Visibility="Collapsed">
                 <!--<n:NotifyIcon.NotifyToolTip>
                     <Grid Background="White">
                         <Grid.RowDefinitions>

@@ -15,7 +15,7 @@ namespace ScreenToGif
     {
         #region Properties
 
-        private static NotifyIcon _notifyIcon;
+        internal static NotifyIcon NotifyIcon { get; private set; }
 
         private static ApplicationViewModel MainViewModel { get; set; }
 
@@ -84,7 +84,10 @@ namespace ScreenToGif
 
             #region Tray icon and view model
 
-            _notifyIcon = (NotifyIcon)FindResource("NotifyIcon");
+            NotifyIcon = (NotifyIcon)FindResource("NotifyIcon");
+
+            if (NotifyIcon != null)
+                NotifyIcon.Visibility = UserSettings.All.ShowNotificationIcon ? Visibility.Visible : Visibility.Collapsed;
 
             MainViewModel = (ApplicationViewModel)FindResource("AppViewModel") ?? new ApplicationViewModel();
 
@@ -137,7 +140,7 @@ namespace ScreenToGif
 
         private void App_OnExit(object sender, ExitEventArgs e)
         {
-            _notifyIcon?.Dispose();
+            NotifyIcon?.Dispose();
 
             UserSettings.Save();
 
