@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
-using System.Windows.Input;
 
 namespace ScreenToGif.Util.Converters
 {
@@ -14,32 +13,11 @@ namespace ScreenToGif.Util.Converters
             switch (param)
             {
                 case "1": //Start/Pause
-                    var mod = UserSettings.All.StartPauseModifiers.HasFlag(ModifierKeys.Control) ? "Ctrl" : "";
-
-                    if (UserSettings.All.StartPauseModifiers.HasFlag(ModifierKeys.Shift))
-                        mod += ", Shift";
-                    if (UserSettings.All.StartPauseModifiers.HasFlag(ModifierKeys.Alt))
-                        mod += ", Alt";
-
-                    return mod.TrimStart(',').Trim() + " " + UserSettings.All.StartPauseShortcut;
+                    return Native.GetSelectKeyText(UserSettings.All.StartPauseShortcut, UserSettings.All.StartPauseModifiers, true, true);
                 case "2": //Stop
-                    var mod2 = UserSettings.All.StopModifiers.HasFlag(ModifierKeys.Control) ? "Ctrl" : "";
-
-                    if (UserSettings.All.StopModifiers.HasFlag(ModifierKeys.Shift))
-                        mod2 += ", Shift";
-                    if (UserSettings.All.StopModifiers.HasFlag(ModifierKeys.Alt))
-                        mod2 += ", Alt";
-
-                    return mod2.TrimStart(',').Trim() + " " + UserSettings.All.StopShortcut;
+                    return Native.GetSelectKeyText(UserSettings.All.StopShortcut, UserSettings.All.StopModifiers, true, true);
                 case "3": //Discard
-                    var mod3 = UserSettings.All.DiscardModifiers.HasFlag(ModifierKeys.Control) ? "Ctrl" : "";
-
-                    if (UserSettings.All.DiscardModifiers.HasFlag(ModifierKeys.Shift))
-                        mod3 += ", Shift";
-                    if (UserSettings.All.DiscardModifiers.HasFlag(ModifierKeys.Alt))
-                        mod3 += ", Alt";
-
-                    return mod3.TrimStart(',').Trim() + " " + UserSettings.All.DiscardShortcut;
+                    return Native.GetSelectKeyText(UserSettings.All.DiscardShortcut, UserSettings.All.DiscardModifiers, true, true);
             }
 
             return "";
