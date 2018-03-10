@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Management;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Markup;
 using System.Windows.Threading;
 using ScreenToGif.Controls;
 using ScreenToGif.Util;
@@ -82,6 +85,23 @@ namespace ScreenToGif
 
             #endregion
 
+            #region Net Framework HotFixes
+
+            if (Environment.OSVersion.Version.Major == 6 && Environment.OSVersion.Version.Minor == 1)
+            {
+                try
+                {
+                    var search = new ManagementObjectSearcher("SELECT HotFixID FROM Win32_QuickFixEngineering WHERE HotFixID = 'KB4055002'").Get();
+                    Global.IsHotFix4055002Installed = search.Count > 0;
+                }
+                catch (Exception ex)
+                {
+                    LogWriter.Log(ex, "Error while trying to know if a hot fix was installed.");
+                }
+            }
+            
+            #endregion
+
             #region Tray icon and view model
 
             NotifyIcon = (NotifyIcon)FindResource("NotifyIcon");
@@ -90,6 +110,8 @@ namespace ScreenToGif
                 NotifyIcon.Visibility = UserSettings.All.ShowNotificationIcon ? Visibility.Visible : Visibility.Collapsed;
 
             MainViewModel = (ApplicationViewModel)FindResource("AppViewModel") ?? new ApplicationViewModel();
+
+            RegisterShortcuts();
 
             #endregion
 
@@ -134,7 +156,7 @@ namespace ScreenToGif
             {
                 LogWriter.Log(ex, "Generic Exception - Root");
 
-                ErrorDialog.Ok("ScreenToGif", "Generic error", ex.Message, ex);
+                ShowException(ex);
             }
         }
 
@@ -153,7 +175,7 @@ namespace ScreenToGif
 
             try
             {
-                ErrorDialog.Ok("ScreenToGif", "Generic error - unknown", e.Exception.Message, e.Exception);
+                ShowException(e.Exception);
             }
             catch (Exception)
             {
@@ -171,7 +193,7 @@ namespace ScreenToGif
 
             try
             {
-                ErrorDialog.Ok("ScreenToGif", "Generic error - unhandled", exception.Message, exception);
+                ShowException(exception);
             }
             catch (Exception)
             {
@@ -220,6 +242,14 @@ namespace ScreenToGif
             MainViewModel.EditorGesture = Native.GetSelectKeyText(UserSettings.All.EditorShortcut, UserSettings.All.EditorModifiers, true, true);
             MainViewModel.OptionsGesture = Native.GetSelectKeyText(UserSettings.All.OptionsShortcut, UserSettings.All.OptionsModifiers, true, true);
             MainViewModel.ExitGesture = Native.GetSelectKeyText(UserSettings.All.ExitShortcut, UserSettings.All.ExitModifiers, true, true);
+        }
+
+        internal void ShowException(Exception exception)
+        {
+            if (Global.IsHotFix4055002Installed && exception is XamlParseException && exception.InnerException is TargetInvocationException)
+                ExceptionDialog.Ok(exception, "ScreenToGif", "Error while rendering visuals", exception.Message);
+            else
+                ExceptionDialog.Ok(exception, "ScreenToGif", "Unhandled exception", exception.Message);
         }
 
         #endregion

@@ -26,6 +26,8 @@ using System.Windows.Threading;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using Microsoft.Win32;
+using ScreenToGif.Cloud.Imgur;
+using ScreenToGif.Cloud.YandexDisk;
 using ScreenToGif.Controls;
 using ScreenToGif.ImageUtil;
 using ScreenToGif.ImageUtil.Gif.Decoder;
@@ -493,7 +495,7 @@ namespace ScreenToGif.Windows
                     current = focused;
                 else
                     current = FrameListView.Items.OfType<FrameListBoxItem>().FirstOrDefault(x => x.IsFocused || x.IsSelected);
-            }
+            } 
 
             //If there's no focused item.
             if (current == null)
@@ -900,6 +902,9 @@ namespace ScreenToGif.Windows
                     if (UserSettings.All.LatestProjectExtension != ".stg" && UserSettings.All.LatestProjectExtension != ".zip")
                         UserSettings.All.LatestProjectExtension = ".stg";
                     break;
+                case Export.Photoshop:
+                    UserSettings.All.LatestPhotoshopExtension = ".psd";
+                    break;
             }
 
             FilenameTextBox_TextChanged(null, null);
@@ -1058,7 +1063,7 @@ namespace ScreenToGif.Windows
             }
         }
 
-        private void SaveAsButton_Click(object sender, RoutedEventArgs e)
+        private async void SaveAsButton_Click(object sender, RoutedEventArgs e)
         {
             StatusList.Remove(StatusBand.StatusType.Warning);
 
@@ -1192,11 +1197,21 @@ namespace ScreenToGif.Windows
 
                 if (upload)
                 {
-                    //TODO: When custom upload services are allowed, check if upload service still exists.
-
-                    if (UserSettings.All.LatestUploadIndex == -1)
+                    if (UserSettings.All.LatestUploadService == UploadService.None)
                     {
                         StatusList.Warning(StringResource("S.SaveAs.Warning.Upload.None"));
+                        return;
+                    }
+
+                    if (UserSettings.All.LatestUploadService == UploadService.Imgur && !await Imgur.IsAuthorized())
+                    {
+                        StatusList.Warning(StringResource("S.SaveAs.Warning.Upload.NotAuthorized"));
+                        return;
+                    }
+
+                    if (UserSettings.All.LatestUploadService == UploadService.Yandex && !YandexDisk.IsAuthorized())
+                    {
+                        StatusList.Warning(StringResource("S.SaveAs.Warning.Upload.NotAuthorized"));
                         return;
                     }
                 }
@@ -1234,7 +1249,7 @@ namespace ScreenToGif.Windows
                     CopyToClipboard = saveToClipboard,
                     CopyType = copyType,
                     Upload = upload,
-                    UploadDestinationIndex = UserSettings.All.LatestUploadIndex,
+                    UploadDestination = UserSettings.All.LatestUploadService,
                     ExecuteCommands = executeCommands,
                     PostCommands = commands
                 };
@@ -1332,6 +1347,8 @@ namespace ScreenToGif.Windows
                     case Export.Project:
                         _saveProjectDel = SaveProjectAsync;
                         _saveProjectDel.BeginInvoke(filename, saveToClipboard, SaveProjectCallback, null);
+                        break;
+                    case Export.Photoshop:
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
@@ -6513,6 +6530,7 @@ namespace ScreenToGif.Windows
             {
                 var request = (HttpWebRequest)WebRequest.Create("https://api.github.com/repos/NickeManarin/ScreenToGif/releases/latest");
                 request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
+                request.Proxy = WebHelper.GetProxy();
 
                 var response = (HttpWebResponse)await request.GetResponseAsync();
 

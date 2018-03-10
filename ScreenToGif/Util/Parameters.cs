@@ -18,7 +18,7 @@ namespace ScreenToGif.Util
 
         public bool Upload { get; set; }
 
-        public int UploadDestinationIndex { get; set; }
+        public UploadService UploadDestination { get; set; }
 
         public bool ExecuteCommands { get; set; }
 

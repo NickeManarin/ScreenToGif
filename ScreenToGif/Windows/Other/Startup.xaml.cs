@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Runtime.Serialization.Json;
@@ -63,6 +62,7 @@ namespace ScreenToGif.Windows.Other
             {
                 var request = (HttpWebRequest)WebRequest.Create("https://api.github.com/repos/NickeManarin/ScreenToGif/releases/latest");
                 request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
+                request.Proxy = WebHelper.GetProxy();
 
                 var response = (HttpWebResponse) await request.GetResponseAsync();
 

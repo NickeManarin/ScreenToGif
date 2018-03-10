@@ -39,5 +39,11 @@ namespace ScreenToGif.Util
         /// When it's true, the global shortcuts won't work.
         /// </summary>
         public static bool IgnoreHotKeys { get; set; }
+
+        /// <summary>
+        /// When it's true, the hotfix with the bug is installed.
+        /// https://github.com/dotnet/announcements/issues/53
+        /// </summary>
+        public static bool IsHotFix4055002Installed { get; set; }
     }
 }

@@ -2,10 +2,9 @@
 using System.IO;
 using System.Net;
 using System.Net.Http;
-using System.Runtime.Serialization.Json;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using ScreenToGif.Util;
 
 namespace ScreenToGif.Cloud.YandexDisk
 {
@@ -20,8 +19,7 @@ namespace ScreenToGif.Cloud.YandexDisk
             _oauthToken = oauthToken;
         }
 
-        public async Task<UploadedFile> UploadFileAsync(string path, CancellationToken cancellationToken,
-            IProgress<double> progressCallback = null)
+        public async Task<UploadedFile> UploadFileAsync(string path, CancellationToken cancellationToken, IProgress<double> progressCallback = null)
         {
             if (string.IsNullOrEmpty(path)) throw new ArgumentException(nameof(path));
 
@@ -40,18 +38,16 @@ namespace ScreenToGif.Cloud.YandexDisk
             return new UploadedFile { Link = downloadLink.href };
         }
 
-        private T Deserialize<T>(string json)
-        {
-            var jsonSerializer = new DataContractJsonSerializer(typeof(T));
-            using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
-            {
-                return (T)jsonSerializer.ReadObject(stream);
-            }
-        }
-
         private async Task<T> GetAsync<T>(string url, CancellationToken cancellationToken)
         {
-            using (var client = new HttpClient())
+            var handler = new HttpClientHandler
+            {
+                Proxy = WebHelper.GetProxy(),
+                PreAuthenticate = true,
+                UseDefaultCredentials = false,
+            };
+
+            using (var client = new HttpClient(handler))
             {
                 var request = new HttpRequestMessage(HttpMethod.Get, url)
                 {
@@ -66,18 +62,26 @@ namespace ScreenToGif.Cloud.YandexDisk
                 {
                     responseBody = await response.Content.ReadAsStringAsync();
                 }
+                
+                var errorDescriptor = WebHelper.Deserialize<ErrorDescriptor>(responseBody);
 
+                if (errorDescriptor.error != null)
+                    throw new UploadingException($"{errorDescriptor.error}, {errorDescriptor.message}, {errorDescriptor.description}");
 
-                var errorDescriptor = Deserialize<ErrorDescriptor>(responseBody);
-                if (errorDescriptor.error != null) throw new UploadingException($"{errorDescriptor.error}, {errorDescriptor.message}, {errorDescriptor.description}");
-
-                return Deserialize<T>(responseBody);
+                return WebHelper.Deserialize<T>(responseBody);
             }
         }
 
         private async Task PutAsync(string url, HttpContent content, CancellationToken cancellationToken)
         {
-            using (var client = new HttpClient())
+            var handler = new HttpClientHandler
+            {
+                Proxy = WebHelper.GetProxy(),
+                PreAuthenticate = true,
+                UseDefaultCredentials = false,
+            };
+
+            using (var client = new HttpClient(handler))
             {
                 var request = new HttpRequestMessage(HttpMethod.Put, url)
                 {
@@ -93,6 +97,14 @@ namespace ScreenToGif.Cloud.YandexDisk
 
                 }
             }
+        }
+
+        public static bool IsAuthorized()
+        {
+            if (string.IsNullOrWhiteSpace(UserSettings.All.YandexDiskOAuthToken))
+                return false;
+
+            return true;
         }
     }
 }

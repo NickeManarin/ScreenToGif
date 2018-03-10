@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -132,7 +133,7 @@ namespace ScreenToGif.Util
                 return Default[key];
 
             if (Application.Current.Resources.Contains(key))
-                return Application.Current.FindResource(key);
+                return Application.Current.Resources[key];
 
             return Default[key] ?? defaultValue;
         }
@@ -194,6 +195,8 @@ namespace ScreenToGif.Util
                     {
                         if (xx.InnerException is XamlObjectWriterException inner && trial < 5)
                             return LoadOrDefault(path, trial + 1, inner);
+
+                        resource = new ResourceDictionary();
                     }
                     catch (Exception ex)
                     {
@@ -511,6 +514,106 @@ namespace ScreenToGif.Util
 
         #region Options • Cloud
 
+        //Proxy
+        public ProxyType ProxyMode
+        {
+            get => (ProxyType)GetValue(defaultValue:ProxyType.Disabled);
+            set => SetValue(value);
+        }
+
+        public string ProxyHost
+        {
+            get => (string)GetValue();
+            set => SetValue(value);
+        }
+
+        public int ProxyPort
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public string ProxyUsername
+        {
+            get => (string)GetValue();
+            set => SetValue(value);
+        }
+
+        public string ProxyPassword
+        {
+            get => (string)GetValue();
+            set => SetValue(value);
+        }
+
+        //Imgur (Anonymous)
+        public bool ImgurAnonymousUseDirectLinks
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool ImgurAnonymousUseGifvLink
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        //Imgur
+        public string ImgurOAuthToken
+        {
+            get => (string)GetValue();
+            set => SetValue(value);
+        }
+
+        public string ImgurAccessToken
+        {
+            get => (string)GetValue();
+            set => SetValue(value);
+        }
+
+        public string ImgurRefreshToken
+        {
+            get => (string)GetValue();
+            set => SetValue(value);
+        }
+
+        public DateTime? ImgurExpireDate
+        {
+            get => (DateTime?)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool ImgurUseDirectLinks
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool ImgurUseGifvLink
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool ImgurUploadToAlbum
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public string ImgurSelectedAlbum
+        {
+            get => (string)GetValue();
+            set => SetValue(value);
+        }
+
+        public ArrayList ImgurAlbumList
+        {
+            get => (ArrayList)GetValue();
+            set => SetValue(value);
+        }
+
+        //Yandex
         public string YandexDiskOAuthToken
         {
             get => (string)GetValue();
@@ -960,9 +1063,9 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
-        public int LatestUploadIndex
+        public UploadService LatestUploadService
         {
-            get => (int)GetValue();
+            get => (UploadService)GetValue();
             set => SetValue(value);
         }
 
@@ -1235,6 +1338,25 @@ namespace ScreenToGif.Util
         public bool OverwriteOnSaveImages
         {
             get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        //Photoshop.
+        public string LatestPhotoshopOutputFolder
+        {
+            get => (string)GetValue();
+            set => SetValue(value);
+        }
+
+        public string LatestPhotoshopFilename
+        {
+            get => (string)GetValue();
+            set => SetValue(value);
+        }
+
+        public string LatestPhotoshopExtension
+        {
+            get => (string)GetValue();
             set => SetValue(value);
         }
 
@@ -1995,6 +2117,13 @@ namespace ScreenToGif.Util
         public string ExtraParametersGifski
         {
             get => (string)GetValue();
+            set => SetValue(value);
+        }
+
+        [Obsolete]
+        public int LatestUploadIndex
+        {
+            get => (int)GetValue();
             set => SetValue(value);
         }
 

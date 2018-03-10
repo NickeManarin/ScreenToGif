@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -11,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Navigation;
+using ScreenToGif.Cloud.Imgur;
 using ScreenToGif.Controls;
 using ScreenToGif.Util;
 using ScreenToGif.Windows.Other;
@@ -434,8 +436,8 @@ namespace ScreenToGif.Windows
 
             #region If Settings Loaded
 
-            double sizeW = UserSettings.All.GridSize.Width;
-            double sizeH = UserSettings.All.GridSize.Height;
+            var sizeW = UserSettings.All.GridSize.Width;
+            var sizeH = UserSettings.All.GridSize.Height;
 
             if (sizeW != sizeH)
             {
@@ -982,9 +984,10 @@ namespace ScreenToGif.Windows
             }
 
             var drive = new DriveInfo(UserSettings.All.TemporaryFolder.Substring(0, 1));
-            var spaceLeft = drive.AvailableFreeSpace > 0 ? drive.AvailableFreeSpace * 100d / (double)drive.TotalSize : 100; //Get the percentage of usage.
+            //var spaceLeft = drive.AvailableFreeSpace > 0 ? drive.AvailableFreeSpace * 100d / (double)drive.TotalSize : 100; //Get the percentage of usage.
 
-            LowSpaceTextBlock.Visibility = spaceLeft > 90 ? Visibility.Visible : Visibility.Collapsed;
+            //If there's less than 2GB left.           
+            LowSpaceTextBlock.Visibility = drive.AvailableFreeSpace < 2000000000 ? Visibility.Visible : Visibility.Collapsed;
         }
 
         #region Async
@@ -1033,6 +1036,96 @@ namespace ScreenToGif.Windows
 
         #region Cloud Services
 
+        private void ImgurHyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                StatusBand.Hide();
+                Process.Start(Imgur.GetGetAuthorizationAdress());
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Creating the link and opening a Imgur related page");
+                StatusBand.Error(LocalizationHelper.Get("S.Upload.Imgur.Auth.NotPossible"));
+            }
+        }
+
+        private async void ImgurAuthorizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(UserSettings.All.ImgurOAuthToken))
+            {
+                StatusBand.Warning(LocalizationHelper.Get("S.Upload.Imgur.Auth.Missing"));
+                return;
+            }
+
+            try
+            {
+                ImgurExpander.IsEnabled = false;
+                StatusBand.Hide();
+
+                if (await Imgur.GetAccessToken())
+                {
+                    UserSettings.All.ImgurOAuthToken = null;
+                    StatusBand.Info(LocalizationHelper.Get("S.Upload.Imgur.Auth.Completed"));
+                }
+                else
+                    StatusBand.Warning(LocalizationHelper.Get("S.Upload.Imgur.Auth.Error"));
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Authorizing access - Imgur");
+                ErrorDialog.Ok("ScreenToGif - Options", "It was not possible to authorize the app", "It was not possible to authorize the app. Check if you provided the correct token and if you have an internet connection.", ex);
+            }
+
+            ImgurExpander.IsEnabled = true;
+            UpdateImgurStatus();
+            UpdateAlbumList();
+        }
+
+        private async void ImgurRefreshButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(UserSettings.All.ImgurRefreshToken))
+            {
+                StatusBand.Warning(LocalizationHelper.Get("S.Upload.Imgur.Refresh.None"));
+                return;
+            }
+
+            try
+            {
+                ImgurExpander.IsEnabled = false;
+                StatusBand.Hide();
+
+                if (await Imgur.RefreshToken())
+                    StatusBand.Info(LocalizationHelper.Get("S.Upload.Imgur.Auth.Completed"));
+                else
+                    StatusBand.Warning(LocalizationHelper.Get("S.Upload.Imgur.Auth.Error"));
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Refreshing authorization - Imgur");
+                ErrorDialog.Ok("ScreenToGif - Options", "It was not possible to authorize the app", "It was not possible to authorize the app. Check if you provided the correct token and if you have an internet connection.", ex);
+            }
+
+            ImgurExpander.IsEnabled = true;
+            UpdateImgurStatus();
+            UpdateAlbumList();
+        }
+
+        private void ImgurClearButton_Click(object sender, RoutedEventArgs e)
+        {
+            UserSettings.All.ImgurOAuthToken = null;
+            UserSettings.All.ImgurAccessToken = null;
+            UserSettings.All.ImgurRefreshToken = null;
+            UserSettings.All.ImgurExpireDate = null;
+            UserSettings.All.ImgurAlbumList = null;
+            UserSettings.All.ImgurSelectedAlbum = null;
+            ImgurAlbumComboBox.ItemsSource = null;
+
+            StatusBand.Info(LocalizationHelper.Get("S.Upload.Imgur.Removed"));
+            UpdateImgurStatus();
+            UpdateAlbumList();
+        }
+
         private void YandexOauth_OnRequestNavigate(object sender, RequestNavigateEventArgs e)
         {
             try
@@ -1043,6 +1136,37 @@ namespace ScreenToGif.Windows
             {
                 LogWriter.Log(ex, "Open Hyperlink");
             }
+        }
+
+        private void UpdateImgurStatus()
+        {
+            ImgurTextBlock.Text = UserSettings.All.ImgurAccessToken == null || !UserSettings.All.ImgurExpireDate.HasValue ? LocalizationHelper.Get("S.Upload.Imgur.NotAuthorized") :
+                UserSettings.All.ImgurExpireDate < DateTime.UtcNow ? string.Format(LocalizationHelper.Get("S.Upload.Imgur.Expired"), UserSettings.All.ImgurExpireDate.Value.ToLocalTime().ToString("g", CultureInfo.CurrentUICulture)) :
+                    string.Format(LocalizationHelper.Get("S.Upload.Imgur.Valid"), UserSettings.All.ImgurExpireDate.Value.ToLocalTime().ToString("g", CultureInfo.CurrentUICulture));
+        }
+
+        private async void UpdateAlbumList(bool offline = false)
+        {
+            if (!offline && !await Imgur.IsAuthorized())
+                return;
+
+            var list = offline && UserSettings.All.ImgurAlbumList != null ? UserSettings.All.ImgurAlbumList.Cast<ImgurAlbumData>().ToList() : offline ? null : await Imgur.GetAlbums();
+
+            if (list == null)
+            {
+                list = new List<ImgurAlbumData>();
+
+                if (!offline)
+                    StatusBand.Error(LocalizationHelper.Get("S.Upload.Imgur.Error.AlbumLoad"));
+            }
+
+            if (!offline || list.All(a => a.Id != "♥♦♣♠"))
+                list.Insert(0, new ImgurAlbumData { Id = "♥♦♣♠", Title = LocalizationHelper.Get("S.Upload.Imgur.AskMe") });
+
+            ImgurAlbumComboBox.ItemsSource = list;
+
+            if (ImgurAlbumComboBox.SelectedIndex == -1)
+                ImgurAlbumComboBox.SelectedIndex = 0;
         }
 
         #endregion
@@ -1118,7 +1242,7 @@ namespace ScreenToGif.Windows
                 //Save to a temp folder.
                 var temp = Path.Combine(Path.GetTempPath(), Path.GetTempFileName());
 
-                using (var client = new WebClient())
+                using (var client = new WebClient { Proxy = WebHelper.GetProxy() })
                     await client.DownloadFileTaskAsync(new Uri(string.Format("https://ffmpeg.zeranoe.com/builds/win{0}/static/ffmpeg-latest-win{0}-static.zip", Environment.Is64BitProcess ? "64" : "32")), temp);
 
                 using (var zip = ZipFile.Open(temp, ZipArchiveMode.Read))
@@ -1210,7 +1334,7 @@ namespace ScreenToGif.Windows
                 //Save to a temp folder.
                 var temp = Path.Combine(Path.GetTempPath(), Path.GetTempFileName());
 
-                using (var client = new WebClient())
+                using (var client = new WebClient { Proxy = WebHelper.GetProxy() })
                     await client.DownloadFileTaskAsync(new Uri("https://github.com/NickeManarin/ScreenToGif-Website/raw/master/downloads/Gifski.zip", UriKind.Absolute), temp);
                 //await client.DownloadFileTaskAsync(new Uri("http://screentogif.com/downloads/Gifski.zip", UriKind.Absolute), temp);
 
@@ -1483,6 +1607,14 @@ namespace ScreenToGif.Windows
 
         #region Other
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            ProxyPasswordBox.Password = WebHelper.Unprotect(UserSettings.All.ProxyPassword);
+
+            UpdateImgurStatus();
+            UpdateAlbumList(true);
+        }
+
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
@@ -1492,6 +1624,7 @@ namespace ScreenToGif.Windows
         {
             Global.IgnoreHotKeys = false;
 
+            UserSettings.All.ProxyPassword = WebHelper.Protect(ProxyPasswordBox.Password);
             UserSettings.Save();
         }
 

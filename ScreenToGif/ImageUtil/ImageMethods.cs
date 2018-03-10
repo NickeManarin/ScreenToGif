@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -1001,7 +1000,7 @@ namespace ScreenToGif.ImageUtil
                 var bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
                 bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-
+                
                 if (size.HasValue)
                     bitmapImage.DecodePixelHeight = size.Value;
 

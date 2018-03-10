@@ -5,15 +5,19 @@ namespace ScreenToGif.Cloud
 {
     public class CloudFactory
     {
-        public static ICloud CreateCloud(int id) // ToDo: Use name of cloud service
+        public static ICloud CreateCloud(UploadService service)
         {
-            switch (id)
+            switch (service)
             {
-                case 0:
-                    return new Imgur();
-                case 1:
+                case UploadService.ImgurAnonymous:
+                    return new Imgur.Imgur();
+                case UploadService.Imgur:
+                    return new Imgur.Imgur(false);
+                case UploadService.GyfcatAnonymous:
                     return new Gfycat();
-                case 2:
+                //case UploadService.Gyfcat:
+                //    return new Gfycat();
+                case UploadService.Yandex:
                     return new YandexDisk.YandexDisk(UserSettings.All.YandexDiskOAuthToken);
             }
 

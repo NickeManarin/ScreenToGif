@@ -171,7 +171,7 @@
     <s:String x:Key="TempFiles.LowSpace">Weinig hardeschijf ruimte beschikbaar. Schoon map tijdelijke bestanden of verander de opslaglokatie van tijdelijke bestanden ScreenToGif.</s:String>
     
     <s:String x:Key="S.Upload.Yandex.Token">OAuth token:</s:String>
-    <s:String x:Key="S.Upload.Yandex.Get">Haal OAuth token op</s:String>
+    <s:String x:Key="S.Upload.Get">Haal OAuth token op</s:String>
     
     <s:String x:Key="Extras.External">Beschikbare externe applicaties</s:String>
     <s:String x:Key="Extras.Download">Klik hier om te downloaden &#x0d;{0}</s:String>

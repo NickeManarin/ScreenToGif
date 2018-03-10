@@ -172,7 +172,7 @@
     <s:String x:Key="TempFiles.LowSpace">Pouco espaço na unidade de armazenamento atual. Por favor, apague os arquivos da pasta temporária ou utilize uma outra unidade.</s:String>
     
     <s:String x:Key="S.Upload.Yandex.Token">Token OAuth:</s:String>
-    <s:String x:Key="S.Upload.Yandex.Get">Obter token OAuth</s:String>
+    <s:String x:Key="S.Upload.Get">Obter token OAuth</s:String>
     
     <s:String x:Key="Extras.External">Ferramentas externas</s:String>
     <s:String x:Key="Extras.Download">Clique aqui para baixar&#x0d;{0}</s:String>

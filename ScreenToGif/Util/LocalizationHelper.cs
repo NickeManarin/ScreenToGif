@@ -44,7 +44,7 @@ namespace ScreenToGif.Util
             #region Generic Branch Fallback
 
             //Fallback to a more generic version of the language. Example: pt-BR to pt.
-            while(requestedResource == null && !string.IsNullOrEmpty(culture))
+            while (requestedResource == null && !string.IsNullOrEmpty(culture))
             {
                 culture = CultureInfo.GetCultureInfo(culture).Parent.Name;
                 requestedCulture = $"/Resources/Localization/StringResources.{culture}.xaml";
@@ -142,7 +142,7 @@ namespace ScreenToGif.Util
                     Application.Current.Resources.MergedDictionaries.Add(dictionary);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 LogWriter.Log(ex, "Import Resource");
                 //Rethrowing, because it's more useful to catch later
@@ -198,7 +198,7 @@ namespace ScreenToGif.Util
                 using (var writer = XmlWriter.Create(path, settings))
                     System.Windows.Markup.XamlWriter.Save(Application.Current.Resources.MergedDictionaries[selectedIndex], writer);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 LogWriter.Log(ex, "Save Resource", selectedIndex);
                 //Rethrowing, because it's more useful to catch later
@@ -226,6 +226,16 @@ namespace ScreenToGif.Util
                 LogWriter.Log(ex, "Remove Resource", selectedIndex);
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Gets a resource as string.
+        /// </summary>
+        /// <param name="key">The key of the string resource.</param>
+        /// <returns>A string resource, usually a localized string.</returns>
+        public static string Get(string key)
+        {
+            return Application.Current.TryFindResource(key) as string;
         }
     }
 }

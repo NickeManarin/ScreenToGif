@@ -1637,19 +1637,16 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:ZoomBox}">
-                    <ScrollViewer x:Name="ScrollViewer" ClipToBounds="True" Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True"
-                                  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" >
-                        <Grid x:Name="Grid" RenderTransformOrigin="0.5,0.5" Background="Transparent" 
-                              HorizontalAlignment="Center" VerticalAlignment="Center" SnapsToDevicePixels="True" UseLayoutRounding="True">
+                    <ScrollViewer x:Name="ScrollViewer" ClipToBounds="True" Background="Transparent" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" >
+                        <Grid x:Name="Grid" RenderTransformOrigin="0.5,0.5" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Grid.LayoutTransform>
                                 <TransformGroup>
                                     <ScaleTransform x:Name="ScaleTransform"/>
                                 </TransformGroup>
                             </Grid.LayoutTransform>
 
-                            <Viewbox Grid.Column="0" Grid.Row="0" SnapsToDevicePixels="True" UseLayoutRounding="True">
-                                <Image x:Name="ImageControl" Source="{TemplateBinding ImageSource, Converter={StaticResource UriToBitmapConverter}}" 
-                                       SnapsToDevicePixels="True" UseLayoutRounding="True"/>
+                            <Viewbox Grid.Column="0" Grid.Row="0">
+                                <Image x:Name="ImageControl" RenderOptions.BitmapScalingMode="NearestNeighbor" Source="{TemplateBinding ImageSource, Converter={StaticResource UriToBitmapConverter}}"/>
                             </Viewbox>
                         </Grid>
                     </ScrollViewer>
@@ -1779,6 +1776,10 @@
                                         <PowerEase Power="8" />
                                     </DoubleAnimation.EasingFunction>
                                 </DoubleAnimation>
+
+                                <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(Grid.IsHitTestVisible)" Duration="0:0:0.0">
+                                    <DiscreteBooleanKeyFrame Value="True" KeyTime="0:0:0.0"/>
+                                </BooleanAnimationUsingKeyFrames>
                             </Storyboard>
                         </Grid.Resources>
 

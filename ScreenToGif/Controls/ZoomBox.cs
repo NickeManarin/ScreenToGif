@@ -58,7 +58,7 @@ namespace ScreenToGif.Controls
             get => (string)GetValue(ImageSourceProperty);
             set => SetValue(ImageSourceProperty, value);
         }
-
+        
         /// <summary>
         /// The zoom level of the control.
         /// </summary>

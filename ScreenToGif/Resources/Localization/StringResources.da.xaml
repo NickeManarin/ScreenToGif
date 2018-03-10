@@ -172,7 +172,7 @@
     <s:String x:Key="TempFiles.LowSpace">Mangler plads på det aktuelle drev. Fjern midlertidige filer, eller skift placering.</s:String>
     
     <s:String x:Key="S.Upload.Yandex.Token">Autorisering:</s:String>
-    <s:String x:Key="S.Upload.Yandex.Get">Hent</s:String>
+    <s:String x:Key="S.Upload.Get">Hent</s:String>
     
     <s:String x:Key="Extras.External">Eksterne værktøjer</s:String>
     <s:String x:Key="Extras.Download">Hent&#10;{0}</s:String>

@@ -171,7 +171,7 @@
     <!--<s:String x:Key="TempFiles.LowSpace">Low on space on the current configurated hard drive. Please, clean the temp folder or change the location.</s:String>-->
     
     <!--<s:String x:Key="S.Upload.Yandex.Token">OAuth token:</s:String>-->
-    <!--<s:String x:Key="S.Upload.Yandex.Get">Get OAuth token</s:String>-->
+    <!--<s:String x:Key="S.Upload.Get">Get OAuth token</s:String>-->
     
     <s:String x:Key="Extras.External">Dostępne zewnętrzne narzędzia</s:String>
     <s:String x:Key="Extras.Download">Kliknij tutaj by pobrać&#x0d;{0}</s:String>
