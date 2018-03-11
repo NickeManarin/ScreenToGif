@@ -30,7 +30,7 @@ namespace ScreenToGif.Windows
         /// <summary>
         /// The actual stage of the program.
         /// </summary>
-        public Stage Stage { get; set; }
+        //public Stage Stage { get; set; }
 
         #region Counters
 
@@ -101,7 +101,7 @@ namespace ScreenToGif.Windows
 
             using (var stream = new FileStream(fileName, FileMode.Create))
             {
-                var encoder = new BmpBitmapEncoder();
+                var encoder = new PngBitmapEncoder();
                 encoder.Frames.Add(BitmapFrame.Create(bitmap));
                 encoder.Save(stream);
                 stream.Flush();

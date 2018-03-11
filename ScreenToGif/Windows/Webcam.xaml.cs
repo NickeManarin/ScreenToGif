@@ -31,16 +31,16 @@ namespace ScreenToGif.Windows
 
         #region Flags
 
-        public static readonly DependencyProperty StageProperty = DependencyProperty.Register("Stage", typeof(Stage), typeof(Webcam), new FrameworkPropertyMetadata(Stage.Stopped));
+        //public static readonly DependencyProperty StageProperty = DependencyProperty.Register("Stage", typeof(Stage), typeof(Webcam), new FrameworkPropertyMetadata(Stage.Stopped));
 
         /// <summary>
         /// The actual stage of the program.
         /// </summary>
-        public Stage Stage
-        {
-            get => (Stage)GetValue(StageProperty);
-            set => SetValue(StageProperty, value);
-        }
+        //public Stage Stage
+        //{
+        //    get => (Stage)GetValue(StageProperty);
+        //    set => SetValue(StageProperty, value);
+        //}
 
         #endregion
 

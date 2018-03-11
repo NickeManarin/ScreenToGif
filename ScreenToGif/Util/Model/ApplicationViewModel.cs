@@ -246,12 +246,17 @@ namespace ScreenToGif.Util.Model
             {
                 return new RelayCommand
                 {
-                    //TODO: If there's an active recording, disable this action.
+                    CanExecutePredicate = o =>
+                    {
+                        return Application.Current.Windows.OfType<RecorderWindow>().All(a => a.Stage != Stage.Recording);
+                    },
                     ExecuteAction = a =>
                     {
-                        //TODO: Check if there's any thing open.
-                        //TODO: Ask to close all windows.
-                        
+                        //TODO: Check if there's anything open or anything happening with editors.
+
+                        if (!Dialog.Ask(LocalizationHelper.Get("Application.Exiting.Title"), LocalizationHelper.Get("Application.Exiting.Instruction"), LocalizationHelper.Get("Application.Exiting.Message")))
+                            return;
+
                         Application.Current.Shutdown(69);
                     }
                 };

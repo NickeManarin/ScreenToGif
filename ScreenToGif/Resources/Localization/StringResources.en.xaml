@@ -27,6 +27,11 @@
     <s:String x:Key="S.NewBoardRecording">New board recording</s:String>
     <s:String x:Key="S.Exit">Exit</s:String>
 
+    <!--Application-->
+    <s:String x:Key="Application.Exiting.Title">Exiting ScreenToGif</s:String>
+    <s:String x:Key="Application.Exiting.Instruction">Are you sure that you want to exit?</s:String>
+    <s:String x:Key="Application.Exiting.Message">All windows will be closed and the tray icon will be removed.</s:String>   
+    
     <!--Error messages--> 
     <s:String x:Key="S.Crash">Oh no, the app crashed :(</s:String>
     

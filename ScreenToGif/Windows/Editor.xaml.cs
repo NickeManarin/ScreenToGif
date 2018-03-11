@@ -545,6 +545,11 @@ namespace ScreenToGif.Windows
             e.CanExecute = !IsLoading && !e.Handled && Application.Current.Windows.OfType<Window>().All(a => !(a is RecorderWindow));
         }
 
+        private void NewProject_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = !IsLoading && !e.Handled;
+        }
+
         private void NewRecording_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             e.Handled = true;
@@ -675,6 +680,11 @@ namespace ScreenToGif.Windows
         #region Insert
 
         private void Insert_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = Project != null && Project.Frames.Count > 0 && FrameListView.SelectedIndex != -1 && !IsLoading && !e.Handled && Application.Current.Windows.OfType<Window>().All(a => !(a is RecorderWindow));
+        }
+
+        private void InsertFromMedia_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = Project != null && Project.Frames.Count > 0 && FrameListView.SelectedIndex != -1 && !IsLoading && !e.Handled;
         }

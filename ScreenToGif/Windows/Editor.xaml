@@ -206,18 +206,18 @@
         <CommandBinding Command="u:Commands.NewRecording" CanExecute="NewRecording_CanExecute" Executed="NewRecording_Executed"/>
         <CommandBinding Command="u:Commands.NewWebcamRecording" CanExecute="NewRecording_CanExecute" Executed="NewWebcamRecording_Executed"/>
         <CommandBinding Command="u:Commands.NewBoardRecording" CanExecute="NewRecording_CanExecute" Executed="NewBoardRecording_Executed"/>
-        <CommandBinding Command="u:Commands.NewAnimation" CanExecute="NewRecording_CanExecute" Executed="NewProject_Executed"/>
+        <CommandBinding Command="u:Commands.NewAnimation" CanExecute="NewProject_CanExecute" Executed="NewProject_Executed"/>
 
         <!--Insert-->
         <CommandBinding Command="u:Commands.InsertRecording" CanExecute="Insert_CanExecute" Executed="InsertRecording_Executed"/>
         <CommandBinding Command="u:Commands.InsertWebcamRecording" CanExecute="Insert_CanExecute" Executed="InsertWebcamRecording_Executed"/>
         <CommandBinding Command="u:Commands.InsertBoardRecording" CanExecute="Insert_CanExecute" Executed="InsertBoardRecording_Executed"/>
-        <CommandBinding Command="u:Commands.InsertFromMedia" CanExecute="Insert_CanExecute" Executed="InsertFromMedia_Executed"/>
+        <CommandBinding Command="u:Commands.InsertFromMedia" CanExecute="InsertFromMedia_CanExecute" Executed="InsertFromMedia_Executed"/>
 
         <!--File-->
         <CommandBinding Command="u:Commands.SaveAs" CanExecute="File_CanExecute" Executed="SaveAs_Executed"/>
-        <CommandBinding Command="u:Commands.Load" CanExecute="NewRecording_CanExecute" Executed="Load_Executed"/>
-        <CommandBinding Command="u:Commands.LoadRecent" CanExecute="NewRecording_CanExecute" Executed="LoadRecent_Executed"/>
+        <CommandBinding Command="u:Commands.Load" CanExecute="NewProject_CanExecute" Executed="Load_Executed"/>
+        <CommandBinding Command="u:Commands.LoadRecent" CanExecute="NewProject_CanExecute" Executed="LoadRecent_Executed"/>
         <CommandBinding Command="u:Commands.DiscardProject" CanExecute="File_CanExecute" Executed="DiscardProject_Executed"/>
 
         <!--Action Stack-->
