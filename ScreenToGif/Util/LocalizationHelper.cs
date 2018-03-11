@@ -118,7 +118,7 @@ namespace ScreenToGif.Util
             {
                 LogWriter.Log(ex, "Save Xaml Resource Error");
 
-                Dialog.Ok("Impossible to Save", "Impossible to save the Xaml file", ex.Message, Dialog.Icons.Warning);
+                Dialog.Ok("Impossible to Save", "Impossible to save the Xaml file", ex.Message, Icons.Warning);
             }
         }
 

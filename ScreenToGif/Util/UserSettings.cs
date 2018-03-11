@@ -254,6 +254,39 @@ namespace ScreenToGif.Util
 
         #endregion
 
+        #region Startup
+
+        public double StartupTop
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        public double StartupLeft
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        public double StartupHeight
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        public double StartupWidth
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        public WindowState StartupWindowState
+        {
+            get => (WindowState)GetValue();
+            set => SetValue(value);
+        }
+
+        #endregion
 
         #region Recorder
 

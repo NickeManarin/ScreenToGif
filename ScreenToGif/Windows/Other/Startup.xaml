@@ -4,8 +4,8 @@
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         xmlns:u="clr-namespace:ScreenToGif.Util"
         x:Name="StartupWindow" Title="{DynamicResource Title.StartUp}" Height="220" Width="500" Icon="/Resources/Logo.ico" 
-        WindowStartupLocation="CenterScreen" MinWidth="500" MinHeight="220" DataContext="{StaticResource AppViewModel}"
-        UseLayoutRounding="True" Loaded="Startup_OnLoaded">
+        MinWidth="500" MinHeight="220" DataContext="{StaticResource AppViewModel}" UseLayoutRounding="True" 
+        Loaded="Startup_Loaded" Closing="Startup_Closing">
 
     <Window.InputBindings>
         <KeyBinding Command="{Binding OpenRecorder}" CommandParameter="{Binding ElementName=StartupWindow}" Modifiers="Control" Key="N"/>

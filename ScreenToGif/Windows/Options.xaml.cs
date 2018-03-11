@@ -875,7 +875,7 @@ namespace ScreenToGif.Windows
                 LogWriter.Log(ex, "Error while cleaning the Temp folder");
             }
 
-            TempSeparator.TextRight = string.Format(this.TextResource("TempFiles.FilesAndFolders.Count"), _folderList.Count.ToString("##,###"), _folderList.Sum(folder => Directory.EnumerateFiles(folder.FullName).Count()).ToString("##,###"));
+            TempSeparator.TextRight = string.Format(this.TextResource("TempFiles.FilesAndFolders.Count"), _folderList.Count.ToString("##,##0"), _folderList.Sum(folder => Directory.EnumerateFiles(folder.FullName).Count()).ToString("##,##0"));
 
             ClearTempButton.IsEnabled = _folderList.Any();
         }
@@ -1021,7 +1021,7 @@ namespace ScreenToGif.Windows
                 {
                     CheckDiskSpace();
 
-                    TempSeparator.TextRight = string.Format(this.TextResource("TempFiles.FilesAndFolders.Count"), _folderList.Count.ToString("##,###"), _fileCount.ToString("##,###"));
+                    TempSeparator.TextRight = string.Format(this.TextResource("TempFiles.FilesAndFolders.Count"), _folderList.Count.ToString("##,##0"), _fileCount.ToString("##,##0"));
 
                     ClearTempButton.IsEnabled = _folderList.Any();
                 });

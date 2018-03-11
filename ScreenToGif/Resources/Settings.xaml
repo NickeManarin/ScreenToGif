@@ -98,6 +98,13 @@
 
     <!--<s:String x:Key="YandexDiskOAuthToken"></s:String>-->
 
+    <!--Startup-->
+    <s:Double x:Key="StartupTop">NaN</s:Double>
+    <s:Double x:Key="StartupLeft">NaN</s:Double>
+    <s:Double x:Key="StartupWidth">NaN</s:Double>
+    <s:Double x:Key="StartupHeight">NaN</s:Double>
+    <WindowState x:Key="StartupWindowState">Normal</WindowState>
+    
     <!--Recorder-->
     <s:Int32 x:Key="RecorderWidth">518</s:Int32>
     <s:Int32 x:Key="RecorderHeight">269</s:Int32>

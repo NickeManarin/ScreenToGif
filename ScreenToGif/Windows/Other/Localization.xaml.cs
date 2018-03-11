@@ -190,7 +190,7 @@ namespace ScreenToGif.Windows.Other
                 }
                 catch (Exception ex)
                 {
-                    Dialog.Ok("Impossible to Save", "Impossible to save the Xaml file", ex.Message, Dialog.Icons.Warning);
+                    Dialog.Ok("Impossible to Save", "Impossible to save the Xaml file", ex.Message, Icons.Warning);
                 }
             }
 

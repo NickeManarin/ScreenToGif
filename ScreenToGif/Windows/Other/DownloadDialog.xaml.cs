@@ -82,7 +82,7 @@ namespace ScreenToGif.Windows.Other
 
             if (save.FileName == Assembly.GetExecutingAssembly().Location)
             {
-                Dialog.Ok(Title, this.TextResource("Update.Filename.Warning"), this.TextResource("Update.Filename.Warning2"), Dialog.Icons.Warning);
+                Dialog.Ok(Title, this.TextResource("Update.Filename.Warning"), this.TextResource("Update.Filename.Warning2"), Icons.Warning);
                 return;
             }
             

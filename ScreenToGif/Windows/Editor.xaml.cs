@@ -1548,7 +1548,7 @@ namespace ScreenToGif.Windows
             {
                 Dialog.Ok(FindResource("Editor.Clipboard.InvalidCut.Title").ToString(),
                     FindResource("Editor.Clipboard.InvalidCut.Instruction").ToString(),
-                    FindResource("Editor.Clipboard.InvalidCut.Message").ToString(), Dialog.Icons.Info);
+                    FindResource("Editor.Clipboard.InvalidCut.Message").ToString(), Icons.Info);
                 return;
             }
 
@@ -1987,7 +1987,7 @@ namespace ScreenToGif.Windows
                 {
                     //If the user wants to delete all frames, discard the project.
                     if (!UserSettings.All.NotifyProjectDiscard ||
-                        Dialog.Ask(this.TextResource("Editor.DeleteAll.Title"), this.TextResource("Editor.DeleteAll.Instruction"), this.TextResource("Editor.DeleteAll.Message")))
+                        Dialog.Ask(this.TextResource("Editor.DeleteAll.Title"), this.TextResource("Editor.DeleteAll.Instruction"), this.TextResource("Editor.DeleteAll.Message"), false))
                         Discard(false);
 
                     return;
@@ -3403,7 +3403,7 @@ namespace ScreenToGif.Windows
             {
                 Dialog.Ok(StringResource("Editor.DragDrop.Invalid.Title"),
                     StringResource("Editor.DragDrop.MultipleFiles.Instruction"),
-                    StringResource("Editor.DragDrop.MultipleFiles.Message"), Dialog.Icons.Warning);
+                    StringResource("Editor.DragDrop.MultipleFiles.Message"), Icons.Warning);
                 return;
             }
 
@@ -3411,7 +3411,7 @@ namespace ScreenToGif.Windows
             {
                 Dialog.Ok(StringResource("Editor.DragDrop.Invalid.Title"),
                     StringResource("Editor.DragDrop.Invalid.Instruction"),
-                    StringResource("Editor.DragDrop.Invalid.Message"), Dialog.Icons.Warning);
+                    StringResource("Editor.DragDrop.Invalid.Message"), Icons.Warning);
                 return;
             }
 
@@ -3496,7 +3496,7 @@ namespace ScreenToGif.Windows
                 Project.Persist();
 
                 if (!UserSettings.All.NotifyProjectDiscard || Dialog.Ask(this.TextResource("Editor.DiscardProject.Title"), this.TextResource("Editor.DiscardPreviousProject.Instruction"),
-                    this.TextResource("Editor.DiscardPreviousProject.Message")))
+                    this.TextResource("Editor.DiscardPreviousProject.Message"), false))
                 {
                     _discardFramesDel = Discard;
                     _discardFramesDel.BeginInvoke(Project, DiscardAndLoadCallback, null);
@@ -4644,7 +4644,7 @@ namespace ScreenToGif.Windows
             Pause();
 
             if (notify && !Dialog.Ask(this.TextResource("Editor.DiscardProject.Title"), this.TextResource("Editor.DiscardProject.Instruction"),
-                this.TextResource("Editor.DiscardProject.Message")))
+                this.TextResource("Editor.DiscardProject.Message"), false))
                 return;
 
             #region Prepare UI
@@ -6607,7 +6607,7 @@ namespace ScreenToGif.Windows
                     return;
 
                 var list = await Task.Factory.StartNew(() => Directory.GetDirectories(path).Select(x => new DirectoryInfo(x))
-                    .Where(w => (DateTime.Now - w.CreationTime).Days > (UserSettings.All.AutomaticCleanUpDays > 0 ? UserSettings.All.AutomaticCleanUpDays : 5)).ToList());
+                    .Where(w => (DateTime.Now - w.CreationTime).TotalDays > (UserSettings.All.AutomaticCleanUpDays > 0 ? UserSettings.All.AutomaticCleanUpDays : 5)).ToList());
 
                 //TODO: Avoid erasing the currently opened project or any other project after that one.
                 foreach (var folder in list)
