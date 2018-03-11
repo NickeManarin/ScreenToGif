@@ -11,7 +11,7 @@ _VS 2017 and .Net 4.6.1 or newer required._
 • Option to display an icon on the system tray, with the option to launch the recorders and editors from a context menu or from a keyboard shortcut.  
 • Added proxy support. 
 • Added support to selecting the PrintScreen key for the keyboard shortcuts.  
-• 
+• The position of the startup window is now remembered.  
 
 ### Fixed:
 
