@@ -27,10 +27,6 @@ namespace ScreenToGif.Windows
 
         #region Variables
 
-        /// <summary>
-        /// The actual stage of the program.
-        /// </summary>
-        //public Stage Stage { get; set; }
 
         #region Counters
 

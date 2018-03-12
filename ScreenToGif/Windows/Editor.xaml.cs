@@ -495,7 +495,7 @@ namespace ScreenToGif.Windows
                     current = focused;
                 else
                     current = FrameListView.Items.OfType<FrameListBoxItem>().FirstOrDefault(x => x.IsFocused || x.IsSelected);
-            } 
+            }
 
             //If there's no focused item.
             if (current == null)
@@ -701,10 +701,10 @@ namespace ScreenToGif.Windows
             if (UserSettings.All.NewRecorder)
             {
                 var recorder = new RecorderNew();
-                var result = recorder.ShowDialog();
+                recorder.ShowDialog();
                 project = recorder.Project;
 
-                if (recorder.Project?.Frames == null)
+                if (recorder.Project?.Frames == null || !recorder.Project.Any)
                 {
                     GC.Collect();
 
@@ -716,10 +716,10 @@ namespace ScreenToGif.Windows
             else
             {
                 var recorder = new Recorder();
-                var result = recorder.ShowDialog();
+                recorder.ShowDialog();
                 project = recorder.Project;
 
-                if (recorder.Project?.Frames == null)
+                if (recorder.Project?.Frames == null || !recorder.Project.Any)
                 {
                     GC.Collect();
 
@@ -732,9 +732,9 @@ namespace ScreenToGif.Windows
             #region Insert
 
             var insert = new Insert(Project.Frames.CopyList(), project.Frames, FrameListView.SelectedIndex) { Owner = this };
-            var result2 = insert.ShowDialog();
+            var result = insert.ShowDialog();
 
-            if (result2.HasValue && result2.Value)
+            if (result.HasValue && result.Value)
             {
                 Project.Frames = insert.ActualList;
                 LoadSelectedStarter(0);
@@ -752,11 +752,11 @@ namespace ScreenToGif.Windows
             Pause();
 
             var recorder = new Webcam();
-            var result = recorder.ShowDialog();
+            recorder.ShowDialog();
 
             #region If recording cancelled
 
-            if (recorder.Project?.Frames == null)
+            if (recorder.Project?.Frames == null || !recorder.Project.Any)
             {
                 GC.Collect();
 
@@ -767,10 +767,9 @@ namespace ScreenToGif.Windows
 
             #region Insert
 
-            var insert = new Insert(Project.Frames.CopyList(), recorder.Project.Frames, FrameListView.SelectedIndex);
-            insert.Owner = this;
+            var insert = new Insert(Project.Frames.CopyList(), recorder.Project.Frames, FrameListView.SelectedIndex) { Owner = this };
 
-            result = insert.ShowDialog();
+            var result = insert.ShowDialog();
 
             if (result.HasValue && result.Value)
             {
@@ -787,11 +786,11 @@ namespace ScreenToGif.Windows
             Pause();
 
             var recorder = new Board();
-            var result = recorder.ShowDialog();
+            recorder.ShowDialog();
 
             #region If recording cancelled
 
-            if (recorder.Project?.Frames == null)
+            if (recorder.Project?.Frames == null || !recorder.Project.Any)
             {
                 GC.Collect();
 
@@ -802,10 +801,9 @@ namespace ScreenToGif.Windows
 
             #region Insert
 
-            var insert = new Insert(Project.Frames.CopyList(), recorder.Project.Frames, FrameListView.SelectedIndex);
-            insert.Owner = this;
+            var insert = new Insert(Project.Frames.CopyList(), recorder.Project.Frames, FrameListView.SelectedIndex) { Owner = this };
 
-            result = insert.ShowDialog();
+            var result = insert.ShowDialog();
 
             if (result.HasValue && result.Value)
             {
@@ -1614,7 +1612,7 @@ namespace ScreenToGif.Windows
             ClipboardListBox.Items.Add(imageItem);
             ClipboardListBox.SelectedIndex = ClipboardListBox.Items.Count - 1;
 
-            ShowHint("Hint.Cut", selected.Count);
+            ShowHint("Hint.Cut", false, selected.Count);
 
             ShowPanel(PanelType.Clipboard, FindResource("Editor.Home.Clipboard").ToString(), "Vector.Paste");
         }
@@ -1655,7 +1653,7 @@ namespace ScreenToGif.Windows
             ClipboardListBox.Items.Add(imageItem);
             ClipboardListBox.SelectedIndex = ClipboardListBox.Items.Count - 1;
 
-            ShowHint("Hint.Copy", selected.Count);
+            ShowHint("Hint.Copy", false, selected.Count);
 
             ShowPanel(PanelType.Clipboard, FindResource("Editor.Home.Clipboard").ToString(), "Vector.Paste");
         }
@@ -1685,7 +1683,7 @@ namespace ScreenToGif.Windows
 
             LoadSelectedStarter(index, Project.Frames.Count - 1);
 
-            ShowHint("Hint.Paste", clipData.Count);
+            ShowHint("Hint.Paste", false, clipData.Count);
         }
 
         private void ShowClipboardButton_Click(object sender, RoutedEventArgs e)
@@ -1733,7 +1731,7 @@ namespace ScreenToGif.Windows
         {
             ZoomBoxControl.Zoom = 1.0;
 
-            ShowHint("Hint.Zoom", 100);
+            ShowHint("Hint.Zoom", false, 100);
         }
 
         private void SizeToContent_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -1821,7 +1819,7 @@ namespace ScreenToGif.Windows
 
             #endregion
 
-            ShowHint("Hint.Zoom", Convert.ToInt32(ZoomBoxControl.Zoom * 100));
+            ShowHint("Hint.Zoom", false, Convert.ToInt32(ZoomBoxControl.Zoom * 100));
 
             GC.Collect(1);
         }
@@ -1863,7 +1861,7 @@ namespace ScreenToGif.Windows
             FrameListView.ScrollIntoView(item);
             FrameListView.SelectedIndex = go.Selected;
 
-            ShowHint("Hint.SelectSingle", go.Selected);
+            ShowHint("Hint.SelectSingle", false, go.Selected);
         }
 
         private void InverseSelection_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -2030,7 +2028,7 @@ namespace ScreenToGif.Windows
 
                 Project.Persist();
                 UpdateStatistics();
-                ShowHint("Hint.DeleteFrames", selected.Count);
+                ShowHint("Hint.DeleteFrames", false, selected.Count);
             }
             catch (Exception ex)
             {
@@ -2063,7 +2061,7 @@ namespace ScreenToGif.Windows
 
             Project.Persist();
             UpdateStatistics();
-            ShowHint("Hint.DeleteFrames", count);
+            ShowHint("Hint.DeleteFrames", false, count);
         }
 
         private void DeleteNext_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -2092,7 +2090,7 @@ namespace ScreenToGif.Windows
 
             Project.Persist();
             UpdateStatistics();
-            ShowHint("Hint.DeleteFrames", count);
+            ShowHint("Hint.DeleteFrames", false, count);
         }
 
         private void RemoveDuplicates_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -2727,7 +2725,7 @@ namespace ScreenToGif.Windows
             FreeTextOverlayControl.CanMove = false;
 
             var render = FreeTextOverlayControl.GetScaledRender(ZoomBoxControl.ScaleDiff, ZoomBoxControl.ImageDpi, ZoomBoxControl.GetImageSize());
-            
+
             FreeTextOverlayControl.CanMove = true;
 
             Cursor = Cursors.AppStarting;
@@ -3089,7 +3087,7 @@ namespace ScreenToGif.Windows
                 geometry = Geometry.Combine(geometry, stroke.GetGeometry(), GeometryCombineMode.Union, null);
 
             geometry = Geometry.Combine(geometry, rectangle, GeometryCombineMode.Xor, null);
-           
+
             var clippedImage = new System.Windows.Controls.Image
             {
                 Height = image.Height,
@@ -3741,7 +3739,7 @@ namespace ScreenToGif.Windows
                         });
 
                         Project.Frames[index].Index = index;
-                        
+
                         #endregion
                     }
                     else
@@ -4429,11 +4427,11 @@ namespace ScreenToGif.Windows
                     break;
                 case PanelType.Resize:
                     ResizeGrid.Visibility = Visibility.Visible;
-                    ShowHint("Hint.ApplyAll");
+                    ShowHint("Hint.ApplyAll", true);
                     break;
                 case PanelType.FlipRotate:
                     FlipRotateGrid.Visibility = Visibility.Visible;
-                    ShowHint("Hint.FlipRotate2");
+                    ShowHint("Hint.FlipRotate2", true);
                     break;
                 case PanelType.Crop:
 
@@ -4451,32 +4449,32 @@ namespace ScreenToGif.Windows
                     RightCropNumericUpDown.Value = (int)(CaptionOverlayGrid.Width - (CaptionOverlayGrid.Width * .1));
                     LeftCropNumericUpDown.Value = (int)(CaptionOverlayGrid.Width * .1);
 
-                    ShowHint("Hint.ApplyAll");
+                    ShowHint("Hint.ApplyAll", true);
 
                     #endregion
 
                     break;
                 case PanelType.Caption:
                     CaptionGrid.Visibility = Visibility.Visible;
-                    ShowHint("Hint.ApplySelected");
+                    ShowHint("Hint.ApplySelected", true);
                     break;
                 case PanelType.FreeText:
                     FreeTextGrid.Visibility = Visibility.Visible;
-                    ShowHint("Hint.ApplySelected");
+                    ShowHint("Hint.ApplySelected", true);
                     break;
                 case PanelType.TitleFrame:
                     TitleFrameGrid.Visibility = Visibility.Visible;
-                    ShowHint("Hint.TitleFrame2");
+                    ShowHint("Hint.TitleFrame2", true);
                     break;
                 case PanelType.KeyStrokes:
                     KeyStrokesLabel.MinHeight = 0;
                     KeyStrokesLabel.Text = "Ctrl + c";
                     KeyStrokesGrid.Visibility = Visibility.Visible;
-                    ShowHint("Hint.ApplyAll");
+                    ShowHint("Hint.ApplyAll", true);
                     break;
                 case PanelType.FreeDrawing:
                     FreeDrawingGrid.Visibility = Visibility.Visible;
-                    ShowHint("Hint.ApplySelected");
+                    ShowHint("Hint.ApplySelected", true);
                     break;
                 case PanelType.Watermark:
 
@@ -4499,54 +4497,54 @@ namespace ScreenToGif.Windows
                     //#endregion
 
                     WatermarkGrid.Visibility = Visibility.Visible;
-                    ShowHint("Hint.ApplySelected");
+                    ShowHint("Hint.ApplySelected", true);
 
                     #endregion
 
                     break;
                 case PanelType.Border:
                     BorderGrid.Visibility = Visibility.Visible;
-                    ShowHint("Hint.ApplySelected");
+                    ShowHint("Hint.ApplySelected", true);
                     break;
                 case PanelType.Obfuscate:
                     ObfuscateOverlaySelectControl.Scale = this.Scale();
                     ObfuscateOverlaySelectControl.Retry();
                     ObfuscateGrid.Visibility = Visibility.Visible;
-                    ShowHint("Hint.ApplySelected");
+                    ShowHint("Hint.ApplySelected", true);
                     break;
                 case PanelType.Progress:
                     ProgressGrid.Visibility = Visibility.Visible;
 
                     ChangeProgressTextToCurrent();
-                    ShowHint("Hint.ApplyAll");
+                    ShowHint("Hint.ApplyAll", true);
                     break;
                 case PanelType.OverrideDelay:
                     OverrideDelayGrid.Visibility = Visibility.Visible;
-                    ShowHint("Hint.ApplySelected");
+                    ShowHint("Hint.ApplySelected", true);
                     break;
                 case PanelType.IncreaseDecreaseDelay:
                     IncreaseDecreaseDelayGrid.Visibility = Visibility.Visible;
-                    ShowHint("Hint.ApplySelected");
+                    ShowHint("Hint.ApplySelected", true);
                     break;
                 case PanelType.Cinemagraph:
                     CinemagraphGrid.Visibility = Visibility.Visible;
-                    ShowHint("Hint.Cinemagraph");
+                    ShowHint("Hint.Cinemagraph", true);
                     break;
                 case PanelType.Fade:
                     FadeGrid.Visibility = Visibility.Visible;
-                    ShowHint("Transitions.Info");
+                    ShowHint("Transitions.Info", true);
                     break;
                 case PanelType.Slide:
                     SlideGrid.Visibility = Visibility.Visible;
-                    ShowHint("Transitions.Info");
+                    ShowHint("Transitions.Info", true);
                     break;
                 case PanelType.ReduceFrames:
                     ReduceGrid.Visibility = Visibility.Visible;
-                    ShowHint("Hint.ApplyAll");
+                    ShowHint("Hint.ApplyAll", true);
                     break;
                 case PanelType.RemoveDuplicates:
                     RemoveDuplicatesGrid.Visibility = Visibility.Visible;
-                    ShowHint("Hint.ApplyAll");
+                    ShowHint("Hint.ApplyAll", true);
                     break;
             }
 
@@ -4580,6 +4578,10 @@ namespace ScreenToGif.Windows
             else if (OverlayGrid.Opacity > 0 && type > 0)
                 OverlayGrid.BeginStoryboard(this.FindStoryboard("HideOverlayGridStoryboard"), HandoffBehavior.Compose);
 
+            //For when panels don't need to show an overlay.
+            if (type > 0)
+                ZoomBoxControl.SetZoomAsPrevious();
+
             #endregion
 
             CommandManager.InvalidateRequerySuggested();
@@ -4588,6 +4590,11 @@ namespace ScreenToGif.Windows
         private void ClosePanel(bool isCancel = false, bool removeEvent = false)
         {
             StatusList.Remove(StatusBand.StatusType.Warning);
+
+            if (ActionGrid.ActualWidth > 0)
+                ZoomBoxControl.ResetToPrevious();
+
+            HideHint();
 
             if (isCancel)
                 SetFocusOnCurrentFrame();
@@ -4760,7 +4767,7 @@ namespace ScreenToGif.Windows
             FrameDpi = Project.Frames.Count > 0 ? Math.Round(Project.Frames[0].Path.DpiOf(), 0) : 0d;
         }
 
-        private void ShowHint(string hint, params object[] values)
+        private void ShowHint(string hint, bool isPermanent = false, params object[] values)
         {
             if (HintTextBlock.Visibility == Visibility.Visible)
                 BeginStoryboard(this.FindStoryboard("HideHintStoryboard"), HandoffBehavior.Compose);
@@ -4770,7 +4777,13 @@ namespace ScreenToGif.Windows
             else
                 HintTextBlock.Text = string.Format(TryFindResource(hint) + "", values);
 
-            BeginStoryboard(this.FindStoryboard("ShowHintStoryboard"), HandoffBehavior.Compose);
+            BeginStoryboard(this.FindStoryboard(isPermanent ? "ShowPermanentHintStoryboard" : "ShowHintStoryboard"), HandoffBehavior.Compose);
+        }
+
+        private void HideHint()
+        {
+            if (HintTextBlock.Visibility == Visibility.Visible)
+                BeginStoryboard(this.FindStoryboard("HideHintStoryboard"), HandoffBehavior.Compose);
         }
 
         private void SetFocusOnCurrentFrame()
@@ -5980,7 +5993,7 @@ namespace ScreenToGif.Windows
 
                     if (keyList.Count == 0)
                         return null;
-                    
+
                     //Update text with key strokes.
                     KeyStrokesLabel.Text = keyList.Select(x => "" + Native.GetSelectKeyText(x.Key, x.Modifiers, x.IsUppercase)).Aggregate((p, n) => p + UserSettings.All.KeyStrokesSeparator + n);
                     KeyStrokesLabel.UpdateLayout();
@@ -6480,12 +6493,12 @@ namespace ScreenToGif.Windows
             var size = frameList[0].Path.ScaledSize();
 
             rect = rect.Scale(screenScale).Limit(size.Width, size.Height);
-            
+
             var count = 0;
             foreach (var frame in frameList)
             {
                 var image = frame.Path.SourceFrom();
-                var render = ImageMethods.Pixelate(image, new Int32Rect((int)(rect.X + 1d * screenScale), (int)(rect.Y + 1 * screenScale), 
+                var render = ImageMethods.Pixelate(image, new Int32Rect((int)(rect.X + 1d * screenScale), (int)(rect.Y + 1 * screenScale),
                     (int)(rect.Width - 1 * screenScale), (int)(rect.Height - 1 * screenScale)), pixelSize, useMedian);
 
                 var drawingVisual = new DrawingVisual();

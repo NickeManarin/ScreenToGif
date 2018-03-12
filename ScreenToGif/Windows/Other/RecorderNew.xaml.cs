@@ -103,8 +103,6 @@ namespace ScreenToGif.Windows.Other
         public static readonly DependencyProperty RegionProperty = DependencyProperty.Register("Region", typeof(Rect), typeof(RecorderNew),
             new PropertyMetadata(Rect.Empty));
 
-        //public static readonly DependencyProperty StageProperty = DependencyProperty.Register("Stage", typeof(Stage), typeof(RecorderNew),
-        //    new FrameworkPropertyMetadata(Stage.Stopped));
 
         public static readonly DependencyProperty FrameCountProperty = DependencyProperty.Register("FrameCount", typeof(int), typeof(RecorderNew),
             new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.AffectsRender));
@@ -127,14 +125,6 @@ namespace ScreenToGif.Windows.Other
             set => SetValue(WasRegionPickedProperty, value);
         }
 
-        /// <summary>
-        /// The actual stage of the program.
-        /// </summary>
-        //public Stage Stage
-        //{
-        //    get => (Stage)GetValue(StageProperty);
-        //    set => SetValue(StageProperty, value);
-        //}
 
         public bool IsRecording
         {

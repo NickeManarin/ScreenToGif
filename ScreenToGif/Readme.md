@@ -16,7 +16,7 @@ _VS 2017 and .Net 4.6.1 or newer required._
 ### Fixed:
 
 ♦ The warning that apears when there's not enough space left on disk will only de displayed when there's less than 2GB left.  
-♦ Gifski was not able to saving board recordings.
+♦ Gifski was not able to saving board recordings.  
 
 ### Known Bugs:
 
