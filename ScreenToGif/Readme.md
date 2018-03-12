@@ -10,7 +10,9 @@ _VS 2017 and .Net 4.6.1 or newer required._
 • Option to upload to a Imgur personal account, you can also upload to albums.
 • Option to display an icon on the system tray, with the option to launch the recorders and editors from a context menu or from a keyboard shortcut.  
 • Added proxy support. 
-• Added support for selecting the PrintScreen key for the keyboard shortcuts.  
+• Added support for selecting the PrintScreen key for the keyboard shortcuts.
+• The hint that appears when a panel gets opened will stay visible until you close that panel.  
+• The zoom is restored to the previous value after closing the side panel.  
 • The position of the startup window is now remembered.  
 
 ### Fixed:
