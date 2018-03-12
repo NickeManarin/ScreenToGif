@@ -156,7 +156,7 @@
     <s:String x:Key="S.Shortcuts.Global.OpenEditor">Editor:</s:String>
     <s:String x:Key="S.Shortcuts.Global.OpenEditor.Info">(Opens another editor window)</s:String>
     <s:String x:Key="S.Shortcuts.Global.OpenOptions">Options:</s:String>
-    <s:String x:Key="S.Shortcuts.Global.OpenOptions.Info">(Opens the options window, you can only open one at once)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenOptions.Info">(Opens the options window. You can only open one at a time)</s:String>
     <s:String x:Key="S.Shortcuts.Global.Exit">Exit:</s:String>
     <s:String x:Key="S.Shortcuts.Global.Exit.Info">(Closes all windows and removes the app from the system tray)</s:String>
     <s:String x:Key="S.Shortcuts.Recorders">Recorders</s:String>
@@ -166,7 +166,7 @@
     <s:String x:Key="S.Shortcuts.Recorders.Stop.Info">(It stops the recording and opens the editor)</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.Discard">Discard:</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.Discard.Info">(Discards the active recording, when it's paused)</s:String>
-    <s:String x:Key="S.Shortcuts.Info">Click to set keyboard focus, after that, press the desired keys and modifiers.&#10;Some keys combinations are not allowed.</s:String>
+    <s:String x:Key="S.Shortcuts.Info">Click to set keyboard focus, then press the desired keys and modifiers.&#10;Some keys combinations are not allowed.</s:String>
     
     <s:String x:Key="Language.AppLanguage">App's Language</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect">Auto detect</s:String>
@@ -231,8 +231,8 @@
     <s:String x:Key="S.Upload.Imgur.Auth.NotPossible">It was not possible to open the page to get the Imgur authorization token.</s:String>
     <s:String x:Key="S.Upload.Imgur.Auth.Missing">In order to authorize this app, you need to provide the authorization token.</s:String>
     <s:String x:Key="S.Upload.Imgur.Auth.Completed">Imgur authorization completed.</s:String>
-    <s:String x:Key="S.Upload.Imgur.Auth.Error">Imgur authorization failed, try again in a few seconds or get a new token.</s:String>
-    <s:String x:Key="S.Upload.Imgur.Refresh.None">In order to refresh the authorization of this app, you need to first finish the authorization process.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.Error">Imgur authorization failed. Try again in a few seconds or get a new token.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Refresh.None">In order to refresh the authorization for this app, you need to first finish the authorization process.</s:String>
     <s:String x:Key="S.Upload.Imgur.NotAuthorized">Not authorized.</s:String>
     <s:String x:Key="S.Upload.Imgur.Expired">Authorization expired in {0}.</s:String>
     <s:String x:Key="S.Upload.Imgur.Valid">Authorization valid until {0}.</s:String>
