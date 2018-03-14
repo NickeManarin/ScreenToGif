@@ -17,6 +17,23 @@
     <s:String x:Key="Suppress">Suprimir</s:String>
     <s:String x:Key="Preview">Pré Visualização</s:String>
     <s:String x:Key="S.Add">Adicionar</s:String>
+    <s:String x:Key="S.Id">Cód.</s:String>
+    <s:String x:Key="S.Title">Título</s:String>
+    <s:String x:Key="S.Description">Descrição</s:String>
+
+    <!--Notification Icon-->
+    <s:String x:Key="S.NewRecording">Nova gravação de tela</s:String>
+    <s:String x:Key="S.NewWebcamRecording">Nova gravação da webcam</s:String>
+    <s:String x:Key="S.NewBoardRecording">Nova gravação de quadro</s:String>
+    <s:String x:Key="S.Exit">Fechar</s:String>
+
+    <!--Application-->
+    <s:String x:Key="Application.Exiting.Title">Fechando ScreenToGif</s:String>
+    <s:String x:Key="Application.Exiting.Instruction">Você tem certeza que deseja fechar?</s:String>
+    <s:String x:Key="Application.Exiting.Message">Todas as janela do ScreenToGif serão fechadas e o ícone da área de notificação será removido.</s:String>   
+    
+    <!--Error messages--> 
+    <s:String x:Key="S.Crash">Oh não, o aplicativo parou de funcionar :(</s:String>
 
     <!--StartUp Page-->
     <s:String x:Key="Title.StartUp">ScreenToGif - Início</s:String>
@@ -50,8 +67,8 @@
     <!--Options Page-->
     <s:String x:Key="Title.Options">ScreenToGif - Opções</s:String>
     <s:String x:Key="Application">Geral</s:String>
-    <s:String x:Key="S.Shortcuts">Atalhos de Teclado</s:String>
     <s:String x:Key="Interface">Interface</s:String>
+    <s:String x:Key="S.Shortcuts">Atalhos de Teclado</s:String>
     <s:String x:Key="Image">Imagem</s:String>
     <s:String x:Key="Language">Idioma</s:String>
     <s:String x:Key="TemporaryFiles">Arquivos Temp.</s:String>
@@ -85,6 +102,8 @@
     <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(a lupa garante um zoom durante a seleção da área de gravação)</s:String>
     
     <s:String x:Key="Application.Other">Outras Configurações</s:String>
+    <s:String x:Key="Application.Other.SystemTray">Exibir o aplicativo na área de notificação.</s:String>
+    <s:String x:Key="Application.Other.LeaveOpen">Manter o aplicativo aberto mesmo se todas as janelas estiverem fechadas.</s:String>
     <s:String x:Key="Application.Other.NotifyFrameDeletion">Me pergunte antes de remover quadros.</s:String>
     <s:String x:Key="Application.Other.NotifyProjectDiscard">Me pergunte antes de descartar um projeto.</s:String>
     <s:String x:Key="Application.Other.NotifyWhileClosingEditor">Me pergunte antes de fechar o Editor (se um projeto estiver aberto).</s:String>
@@ -127,11 +146,28 @@
     <s:String x:Key="Interface.Other.AutomaticallySizeOnContent">Ajustar automaticamente o tamanho da janela com base no tamanho do quadro, logo após carregar o projeto.</s:String>
     <s:String x:Key="Interface.Other.AutomaticallyFitImage">Ajustar automaticamente o zoom da imagem com base no tamanho da janela, logo após carregar o projeto.</s:String>
   
+    <s:String x:Key="S.Shortcuts.Global">Global</s:String>
+    <s:String x:Key="S.Shortcuts.Global.ScreenRecorder">Gravador de tela:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.ScreenRecorder.Info">(Abre o gravador de tela padrão)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.WebcamRecorder">Gravador de webcam:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.WebcamRecorder.Info">(Abre o gravador de webcam)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.BoardRecorder">Gravador de quadro:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.BoardRecorder.Info">(Abre o gravador de quadro)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenEditor">Editor:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenEditor.Info">(Abre outra janela do editor)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenOptions">Opções:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenOptions.Info">(Abre a janela de opções, você só pode abrir uma janela dessas por vez)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.Exit">Fechar:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.Exit.Info">(Fecha todas as janelas do sistema e remove o aplicativo da área de notificação)</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders">Gravadores</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.StartPause">Gravar/Pausar:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.StartPause.Info">(Inicia ou pausa a gravação)</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.Stop">Parar:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Stop.Info">(Para a gravação e abre o editor)</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.Discard">Descartar:</s:String>
-    <s:String x:Key="S.Shortcuts.Recorders.Info">Clique para aplicar o foco do teclado, depois pressione as teclas e modificadores desejados.&#10;Algumas combinações de tecla não são permitidas.</s:String>
-
+    <s:String x:Key="S.Shortcuts.Recorders.Discard.Info">(Descarta a gravação atual quando estiver pausado)</s:String>
+    <s:String x:Key="S.Shortcuts.Info">Clique para ganhar foco do teclado, depois pressione as teclas desejadas.&#10;Algumas combinações não são permitidas.</s:String>
+    
     <s:String x:Key="Language.AppLanguage">Idioma do Aplicativo</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect">Detectar automáticamente</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect.Author">Idioma atual do Sistema Operacional (se disponível)</s:String>
@@ -165,14 +201,48 @@
     <s:String x:Key="TempFiles.OpenSettingsFolder">Abra a pasta que contém o arquivo de configurações.&#x0d;Pressione a tecla Ctrl enquanto clicando para abrir diretamente o arquivo, se possível.</s:String>
     <s:String x:Key="TempFiles.SettingsInfo">• Padrão de carregamento de configurações: Configurações padrão ◄ AppData ◄ Local.&#x0d;• Se não existe arquivo de configurações presente na pasta Local, o aplicativo busca dentro da pasta AppData,&#10;&#x09;as Configurações padrão são usadas se nenhum arquivo de configuração presente.&#x0d;• Se não existir configurações locais, todas as configurações são salvas na pasta AppData.</s:String>
     <s:String x:Key="TempFiles.KeepRecent">Manter projetos antigos?</s:String>
-    <s:String x:Key="TempFiles.KeepRecent.Info">Se você desejar, todos os projetos recentes (com menos de 5 dias de idade) não serão apagados.</s:String>
+    <s:String x:Key="TempFiles.KeepRecent.Info">Se você desejar, todos os projetos recentes (depende da configuração) não serão apagados.</s:String>
     <s:String x:Key="TempFiles.AutomaticRemoval">Remover automaticamente projectos antigos.</s:String>
-    <s:String x:Key="TempFiles.AutomaticRemoval.Info">Quando o Editor abrir, uma tarefa em segundo plano vai apagar projetos antigos (com mais de 5 dias de idade).</s:String>
+    <s:String x:Key="TempFiles.AutomaticRemoval.Info">Quando o Editor abrir, uma tarefa em segundo plano vai apagar projetos antigos (depende da configuração).</s:String>
     <s:String x:Key="TempFiles.AutomaticRemovalDays.Info">(em dias, qualquer projeto mas antigo que isso será apagado/descartado após abrir o editor)</s:String>
     <s:String x:Key="TempFiles.LowSpace">Pouco espaço na unidade de armazenamento atual. Por favor, apague os arquivos da pasta temporária ou utilize uma outra unidade.</s:String>
     
-    <s:String x:Key="S.Upload.Yandex.Token">Token OAuth:</s:String>
+    <s:String x:Key="S.Upload.Proxy">Proxy</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode">Modo:</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.Disabled">Desativado</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.Manual">Manual</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.System">Sistema</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.System.Info">(Usa o proxy do sistema)</s:String>
+    <s:String x:Key="S.Upload.Proxy.Host">Endereço:</s:String>
+    <s:String x:Key="S.Upload.Proxy.Port">Porta:</s:String>
+    <s:String x:Key="S.Upload.Proxy.User">Usuário:</s:String>
+    <s:String x:Key="S.Upload.Proxy.Password">Senha:</s:String>
     <s:String x:Key="S.Upload.Get">Obter token OAuth</s:String>
+    <s:String x:Key="S.Upload.PasteToken">Cole o token de autorização aqui</s:String>    
+    <s:String x:Key="S.Upload.Authorize">Autorizar</s:String>
+    <s:String x:Key="S.Upload.Refresh">Atualizar</s:String>
+    <s:String x:Key="S.Upload.Clear">Limpar</s:String>
+    <s:String x:Key="S.Upload.Imgur.Anonymous">Imgur (Anônimo)</s:String>
+    <s:String x:Key="S.Upload.Imgur.Direct">Obter links diretos.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Gifv">Obter links com a extensão Gifv ao invés de Gif.</s:String>
+    <s:String x:Key="S.Upload.Imgur.ToAlbum">Fazer upload dos gifs para um álbum.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Album">Álbum:</s:String>
+    <s:String x:Key="S.Upload.Imgur.AskMe">Me pergunte antes de enviar</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.NotPossible">Não foi possível abrir a página para obter o token de autorização.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.Missing">Para autorizar este aplicativo, é necessário fornecer o token de autorização.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.Completed">Autorização do Imgur foi concluída.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.Error">A autorização do Imgur falhou. Tente novamente em alguns segundos ou obtenha um novo token.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Refresh.None">Para atualizar a autorização para este aplicativo, é necessário finalizar o processo de autorização primeiro.</s:String>
+    <s:String x:Key="S.Upload.Imgur.NotAuthorized">Não autorizado.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Expired">Autorização expirada em {0}.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Valid">Autorização válida até {0}.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Removed">A autorização do Imgur foi removida.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Error.AlbumLoad">Não foi possível carregar a lista de álbuns.</s:String>
+    <s:String x:Key="S.Upload.Gyfcat.Anonymous">Gyfcat (Anônimo)</s:String>
+    <s:String x:Key="S.Upload.Yandex.Token">Token OAuth:</s:String>
+    <s:String x:Key="S.Upload.Pick.Destination">Escolha um destino</s:String>
+    <s:String x:Key="S.Upload.Pick.Album">Escolha um álbum de destino (opcional)</s:String>
+    <s:String x:Key="S.Upload.Pick.Album.Info">Se você deseja, escolha um álbum de destino:</s:String>
     
     <s:String x:Key="Extras.External">Ferramentas externas</s:String>
     <s:String x:Key="Extras.Download">Clique aqui para baixar&#x0d;{0}</s:String>
@@ -193,9 +263,10 @@
     <s:String x:Key="Donate.Paypal.Dollar">Abre o site do Paypal. Moeda selecionada: Dólar</s:String>
     <s:String x:Key="Donate.Paypal.Euro">Abre o site do Paypal. Moeda selecionada: Euro</s:String>
     <s:String x:Key="Donate.Paypal.OwnCurrency">Abre o site do Paypal. Você deve selecionar a moeda.</s:String>
-    <s:String x:Key="Donate.Patreon">Clique aqui para here to abrir minha página no Patreon.</s:String>
-    <s:String x:Key="Donate.Steam.Link">Clique aqui para here to abrir minha página de jogos desejados na Steam.</s:String>
+    <s:String x:Key="Donate.Patreon">Clique aqui para abrir minha página no Patreon.</s:String>
+    <s:String x:Key="Donate.Steam.Link">Clique aqui para abrir minha página de jogos desejados na Steam.</s:String>
     <s:String x:Key="Donate.Steam.Text">Você pode me enviar jogos como presentes.</s:String>
+    <s:String x:Key="Donate.Crypto">Crypto moedas</s:String>
 
     <s:String x:Key="About.Version">Versão:</s:String>
     <s:String x:Key="About.Author">Autor: Nicke Manarin</s:String>
