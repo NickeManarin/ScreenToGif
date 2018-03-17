@@ -1559,6 +1559,16 @@ namespace ScreenToGif.Windows
             }
         }
 
+        private void BitcoinCashHyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Clipboard.SetText("1HN81cAwDo16tRtiYfkzvzFqikQUimM3S8");
+        }
+
+        private void MoneroHyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Clipboard.SetText("44yC9CkwHVfKPsKxg5RcA67GZEqiQH6QoBYtRKwkhDaE3tvRpiw1E5i6GShZYNsDq9eCtHnq49SrKjF4DG7NwjqWMoMueD4");
+        }
+
         private void SteamHyperlink_Click(object sender, RoutedEventArgs e)
         {
             try

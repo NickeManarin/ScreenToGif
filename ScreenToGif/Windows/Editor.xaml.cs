@@ -4074,67 +4074,66 @@ namespace ScreenToGif.Windows
         {
             ShowProgress(DispatcherStringResource("Editor.ImportingFrames"), 50, true);
 
-            GifFile gifMetadata;
             var listFrames = new List<FrameInfo>();
 
-            var decoder = ImageMethods.GetDecoder(sourceFileName, out gifMetadata) as GifBitmapDecoder;
+            var decoder = ImageMethods.GetDecoder(sourceFileName, out var gifMetadata) as GifBitmapDecoder;
 
             ShowProgress(DispatcherStringResource("Editor.ImportingFrames"), decoder.Frames.Count);
 
-            if (decoder.Frames.Count > 0)
+            if (decoder.Frames.Count <= 0)
+                return listFrames;
+
+            var fullSize = ImageMethods.GetFullSize(decoder, gifMetadata);
+            var index = 0;
+
+            BitmapSource baseFrame = null;
+            foreach (var rawFrame in decoder.Frames)
             {
-                var fullSize = ImageMethods.GetFullSize(decoder, gifMetadata);
-                var index = 0;
+                var metadata = ImageMethods.GetFrameMetadata(decoder, gifMetadata, index);
 
-                BitmapSource baseFrame = null;
-                foreach (var rawFrame in decoder.Frames)
+                var bitmapSource = ImageMethods.MakeFrame(fullSize, rawFrame, metadata, baseFrame);
+
+                #region Disposal Method
+
+                switch (metadata.DisposalMethod)
                 {
-                    var metadata = ImageMethods.GetFrameMetadata(decoder, gifMetadata, index);
-
-                    var bitmapSource = ImageMethods.MakeFrame(fullSize, rawFrame, metadata, baseFrame);
-
-                    #region Disposal Method
-
-                    switch (metadata.DisposalMethod)
-                    {
-                        case FrameDisposalMethod.None:
-                        case FrameDisposalMethod.DoNotDispose:
-                            baseFrame = bitmapSource;
-                            break;
-                        case FrameDisposalMethod.RestoreBackground:
-                            baseFrame = ImageMethods.IsFullFrame(metadata, fullSize) ? null : ImageMethods.ClearArea(bitmapSource, metadata);
-                            break;
-                        case FrameDisposalMethod.RestorePrevious:
-                            //Reuse same base frame.
-                            break;
-                    }
-
-                    #endregion
-
-                    #region Each Frame
-
-                    var fileName = Path.Combine(pathTemp, $"{index} {DateTime.Now.ToString("hh-mm-ss-FFFF")}.png");
-
-                    using (var stream = new FileStream(fileName, FileMode.Create))
-                    {
-                        var encoder = new PngBitmapEncoder();
-                        encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
-                        encoder.Save(stream);
-                        stream.Close();
-                    }
-
-                    //It should not throw a overflow exception because of the maximum value for the milliseconds.
-                    var frame = new FrameInfo(fileName, (int)metadata.Delay.TotalMilliseconds);
-                    listFrames.Add(frame);
-
-                    UpdateProgress(index);
-
-                    GC.Collect(1);
-
-                    #endregion
-
-                    index++;
+                    case FrameDisposalMethod.None:
+                    case FrameDisposalMethod.DoNotDispose:
+                        baseFrame = bitmapSource;
+                        break;
+                    case FrameDisposalMethod.RestoreBackground:
+                        baseFrame = ImageMethods.IsFullFrame(metadata, fullSize) ? null : ImageMethods.ClearArea(bitmapSource, metadata);
+                        break;
+                    case FrameDisposalMethod.RestorePrevious:
+                        //Reuse same base frame.
+                        break;
                 }
+
+                #endregion
+
+                #region Each Frame
+
+                var fileName = Path.Combine(pathTemp, $"{index} {DateTime.Now:hh-mm-ss-FFFF}.png");
+
+                using (var stream = new FileStream(fileName, FileMode.Create))
+                {
+                    var encoder = new PngBitmapEncoder();
+                    encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
+                    encoder.Save(stream);
+                    stream.Close();
+                }
+
+                //It should not throw a overflow exception because of the maximum value for the milliseconds.
+                var frame = new FrameInfo(fileName, (int)metadata.Delay.TotalMilliseconds);
+                listFrames.Add(frame);
+
+                UpdateProgress(index);
+
+                GC.Collect(1);
+
+                #endregion
+
+                index++;
             }
 
             return listFrames;

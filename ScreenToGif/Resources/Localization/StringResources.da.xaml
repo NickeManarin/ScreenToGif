@@ -17,7 +17,24 @@
     <s:String x:Key="Suppress">Undertryk</s:String>
     <s:String x:Key="Preview">Vis</s:String>
     <s:String x:Key="S.Add">Tilføj</s:String>
+    <s:String x:Key="S.Id">ID</s:String>
+    <s:String x:Key="S.Title">Titel</s:String>
+    <s:String x:Key="S.Description">Beskrivelse</s:String>
 
+    <!--Notification Icon-->
+    <s:String x:Key="S.NewRecording">Ny skærmoptagelse</s:String>
+    <s:String x:Key="S.NewWebcamRecording">Ny webcamoptagelse</s:String>
+    <s:String x:Key="S.NewBoardRecording">Ny tavleoptagelse</s:String>
+    <s:String x:Key="S.Exit">Luk</s:String>
+
+    <!--Application-->
+    <s:String x:Key="Application.Exiting.Title">Lukker ScreenToGif</s:String>
+    <s:String x:Key="Application.Exiting.Instruction">Vil du lukke?</s:String>
+    <s:String x:Key="Application.Exiting.Message">Alle vinduer lukkes og ikonet fjernes.</s:String>   
+    
+    <!--Error messages--> 
+    <s:String x:Key="S.Crash">Øv, programmet gik ned :(</s:String>
+    
     <!--StartUp Page-->
     <s:String x:Key="Title.StartUp">Screen To Gif - Opstart</s:String>
     <s:String x:Key="Recorder">Optag</s:String>
@@ -50,13 +67,13 @@
     <!--Options Page-->
     <s:String x:Key="Title.Options">Screen To Gif - Indstillinger</s:String>
     <s:String x:Key="Application">Program</s:String>
-    <s:String x:Key="S.Shortcuts">Tastaturgenveje</s:String>
     <s:String x:Key="Interface">Brugerflade</s:String>
+    <s:String x:Key="S.Shortcuts">Genveje</s:String>
     <s:String x:Key="Image">Billede</s:String>
     <s:String x:Key="Language">Sprog</s:String>
     <s:String x:Key="TemporaryFiles">Midlertidige filer</s:String>
     <s:String x:Key="Extras">Ekstra</s:String>
-    <s:String x:Key="Clouds">Værtstjenester</s:String>
+    <s:String x:Key="Clouds">Værter</s:String>
     <s:String x:Key="Donate">Donér</s:String>
     <s:String x:Key="About">Om...</s:String>
     
@@ -85,9 +102,11 @@
     <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(viser forstørrelsesglas ved valg af område)</s:String>
     
     <s:String x:Key="Application.Other">Andet</s:String>
+    <s:String x:Key="Application.Other.SystemTray">Vis ikon ved uret.</s:String>
+    <s:String x:Key="Application.Other.LeaveOpen">Luk ikke programmet, selv om alle vinduer lukkes.</s:String>
     <s:String x:Key="Application.Other.NotifyFrameDeletion">Bekræft sletning af rammer.</s:String>
     <s:String x:Key="Application.Other.NotifyProjectDiscard">Spørg før projekt kasseres.</s:String>
-    <s:String x:Key="Application.Other.NotifyWhileClosingEditor">Bekræft lukning af redigeringsvindue (hvis der er åbne projekter).</s:String>
+    <s:String x:Key="Application.Other.NotifyWhileClosingEditor">Bekræft lukning af redigering (hvis der er åbne projekter).</s:String>
     <s:String x:Key="Application.Other.DrawOutlineOutside">Tegn omkreds på titelbogstaver.</s:String>
     <s:String x:Key="Application.Other.CheckForUpdates">Søg efter opdatering.</s:String>
     
@@ -127,10 +146,27 @@
     <s:String x:Key="Interface.Other.AutomaticallySizeOnContent">Sæt automatisk vinduesstørrelsen til rammestørrelse.</s:String>
     <s:String x:Key="Interface.Other.AutomaticallyFitImage">Zoom automatisk rammer til vinduesstørrelse.</s:String>
   
+    <s:String x:Key="S.Shortcuts.Global">Globalt</s:String>
+    <s:String x:Key="S.Shortcuts.Global.ScreenRecorder">Skærmoptager:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.ScreenRecorder.Info">(Åbner standard skærmoptager)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.WebcamRecorder">Webcamoptager:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.WebcamRecorder.Info">(Åbner webcamoptager)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.BoardRecorder">Tavleoptager:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.BoardRecorder.Info">(Åbner tavleoptageren)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenEditor">Redigering:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenEditor.Info">(Åbner et redigeringsvindue mere)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenOptions">Indstillinger:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenOptions.Info">(Åbner indstillinger.)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.Exit">Luk:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.Exit.Info">(Lukker alle vinduer, og fjerner ikonet ved uret)</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders">Optagere</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.StartPause">Start/pause:</s:String>
-    <s:String x:Key="S.Shortcuts.Recorders.Stop">Stop:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.StartPause.Info">(Starter/stopper optagelsen. Bruges til snapshot, hvis aktiveret)</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Stop">Stop:</s:String>    
+    <s:String x:Key="S.Shortcuts.Recorders.Stop.Info">(Stopper optagelsen og åbner redigering)</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.Discard">Kassér:</s:String>
-    <s:String x:Key="S.Shortcuts.Recorders.Info">Klik og tryk på de ønskede taster.&#10;Visse kombinationer er ikke tilladt.</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Discard.Info">(Kasserer den aktive optagelse, når den pauses)</s:String>
+    <s:String x:Key="S.Shortcuts.Info">Klik og tast den ønskede genvej (visse kombinationer er ikke tilladt).</s:String>
     
     <s:String x:Key="Language.AppLanguage">Sprog</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect">Genkend</s:String>
@@ -171,8 +207,42 @@
     <s:String x:Key="TempFiles.AutomaticRemovalDays.Info">(dage, ældre projekter fjernes når redigering åbnes)</s:String>
     <s:String x:Key="TempFiles.LowSpace">Mangler plads på det aktuelle drev. Fjern midlertidige filer, eller skift placering.</s:String>
     
-    <s:String x:Key="S.Upload.Yandex.Token">Autorisering:</s:String>
+    <s:String x:Key="S.Upload.Proxy">Proxy</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode">Status:</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.Disabled">Deaktiveret</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.Manual">Manuel</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.System">System</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.System.Info">(Bruger systemets proxy)</s:String>
+    <s:String x:Key="S.Upload.Proxy.Host">Vært:</s:String>
+    <s:String x:Key="S.Upload.Proxy.Port">Port:</s:String>
+    <s:String x:Key="S.Upload.Proxy.User">Brugernavn:</s:String>
+    <s:String x:Key="S.Upload.Proxy.Password">Kodeord:</s:String>
     <s:String x:Key="S.Upload.Get">Hent</s:String>
+    <s:String x:Key="S.Upload.PasteToken">Indsæt godkendelse her</s:String>    
+    <s:String x:Key="S.Upload.Authorize">Godkend</s:String>
+    <s:String x:Key="S.Upload.Refresh">Opdatér</s:String>
+    <s:String x:Key="S.Upload.Clear">Ryd</s:String>
+    <s:String x:Key="S.Upload.Imgur.Anonymous">Imgur (anonymt)</s:String>
+    <s:String x:Key="S.Upload.Imgur.Direct">Direkte link</s:String>
+    <s:String x:Key="S.Upload.Imgur.Gifv">Gifv links i stedet for Gif links.</s:String>
+    <s:String x:Key="S.Upload.Imgur.ToAlbum">Upload til valgt album.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Album">Album:</s:String>
+    <s:String x:Key="S.Upload.Imgur.AskMe">Bekræft upload</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.NotPossible">Det var ikke muligt at hente godkendelsen.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.Missing">Angiv en godkendelse for at autorisere programmet.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.Completed">Imgur godkendelse gennemført.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.Error">Imgur godkendelse mislykkedes. Prøv igen, eller hent en ny godkendelse.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Refresh.None">Opdatering kræver at du først har gennemført godkendelsen.</s:String>
+    <s:String x:Key="S.Upload.Imgur.NotAuthorized">Ikke godkendt</s:String>
+    <s:String x:Key="S.Upload.Imgur.Expired">Godkendelse udløber om {0}.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Valid">Godkendelse gyldig til {0}.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Removed">Godkendelse fjernet.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Error.AlbumLoad">Albumlisten kunne ikke indlæses.</s:String>
+    <s:String x:Key="S.Upload.Gyfcat.Anonymous">Gyfcat (Anonymt)</s:String>
+    <s:String x:Key="S.Upload.Yandex.Token">Godkendelse:</s:String>
+    <s:String x:Key="S.Upload.Pick.Destination">Vælg destination</s:String>
+    <s:String x:Key="S.Upload.Pick.Album">Vælg album (optional)</s:String>
+    <s:String x:Key="S.Upload.Pick.Album.Info">Du kan vælge et destinationsalbum:</s:String>
     
     <s:String x:Key="Extras.External">Eksterne værktøjer</s:String>
     <s:String x:Key="Extras.Download">Hent&#10;{0}</s:String>
@@ -441,7 +511,7 @@
     <s:String x:Key="Editor.Image.SizePosition">Størrelse og placering</s:String>
     <s:String x:Key="Editor.Image.Resize">Størrelse</s:String>
     <s:String x:Key="Editor.Image.Crop">Beskær</s:String>
-    <s:String x:Key="Editor.Image.FlipRotate">Flip/Rotér</s:String>
+    <s:String x:Key="Editor.Image.FlipRotate">Flip/rotér</s:String>
     
     <!--Image • Text-->
     <s:String x:Key="Editor.Image.Text">Tekst</s:String>
@@ -766,6 +836,7 @@
     <s:String x:Key="S.SaveAs.Apng">Apng</s:String>
     <s:String x:Key="S.SaveAs.Images">Billeder (rammer)</s:String>
     <s:String x:Key="S.SaveAs.Project">Projekt</s:String>
+    <!--<s:String x:Key="S.SaveAs.Psd">PSD fil</s:String>-->
     <s:String x:Key="S.SaveAs.Video">Video</s:String>
     <s:String x:Key="S.SaveAs.Encoder">Kodning</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">2.0</s:String>
@@ -833,6 +904,7 @@
     <s:String x:Key="S.SaveAs.Warning.Type">Vælg hvor filen skal gemmes (mappe, udklipsholder,upload).</s:String>
     <s:String x:Key="S.SaveAs.Warning.Commands.Empty">Skriv i tekstfeltet, for at udføre efterfølgende kommando.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Upload.None">Ingen valgt upload vært. Vælg en destination.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Upload.NotAuthorized">Den valgte tjeneste er ikke godkendt. Gå til Indstillinger > Værter og hent en godkendelse.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Copy.Link">Du kan ikke vælge at kopiere linket, da du ikke har valgt at uploade filen.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">Du skal vælge en destinationsmappe.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">Destinationsmappen findes ikke.</s:String>

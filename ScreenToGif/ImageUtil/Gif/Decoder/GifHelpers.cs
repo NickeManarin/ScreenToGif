@@ -98,7 +98,7 @@ namespace ScreenToGif.ImageUtil.Gif.Decoder
         {
             var totalRead = 0;
 
-            while (totalRead < count)
+            while (totalRead < count && stream.Position < stream.Length)
                 totalRead += stream.Read(buffer, offset + totalRead, count - totalRead);
         }
     }

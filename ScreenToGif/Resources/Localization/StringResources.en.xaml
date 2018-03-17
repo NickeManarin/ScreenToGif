@@ -266,6 +266,7 @@
     <s:String x:Key="Donate.Patreon">Click here to open my Patreon page.</s:String>
     <s:String x:Key="Donate.Steam.Link">Click here to open my Steam wishlist page.</s:String>
     <s:String x:Key="Donate.Steam.Text">You can send games as gifts.</s:String>
+    <s:String x:Key="Donate.Crypto">Crypto currencies</s:String>
 
     <s:String x:Key="About.Version">Version:</s:String>
     <s:String x:Key="About.Author">Author: Nicke Manarin</s:String>

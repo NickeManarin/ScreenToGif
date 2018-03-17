@@ -40,7 +40,7 @@
 
             <!--Options-->
             <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="OptionsStackPanel" Margin="0">
-                <n:ImageRadioButton x:Name="AppRadio" Text="{DynamicResource Application}" Content="{StaticResource Vector.Application}" IsChecked="True"
+                <n:ImageRadioButton x:Name="AppRadio" Text="{DynamicResource Application}" Content="{StaticResource Vector.Application}" IsChecked="True" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
                 <n:ImageRadioButton x:Name="InterfaceRadio" Text="{DynamicResource Interface}" Content="{StaticResource Vector.Colors}"
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
@@ -54,7 +54,7 @@
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
                 <n:ImageRadioButton x:Name="ExtrasRadioButton" Text="{DynamicResource Extras}" Content="{StaticResource Vector.Extras}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
-                <n:ImageRadioButton x:Name="DonateRadio" Text="{DynamicResource Donate}" Content="{StaticResource Vector.Money}" 
+                <n:ImageRadioButton x:Name="DonateRadio" Text="{DynamicResource Donate}" Content="{StaticResource Vector.Money}"
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
                 <n:ImageRadioButton x:Name="AboutRadio" Text="{DynamicResource About}" Content="{StaticResource Vector.Info}" 
                                     Padding="1,3,5,3" FontSize="18" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="25" HorizontalContentAlignment="Left"/>
@@ -1174,24 +1174,37 @@
 
                         <Label Grid.Row="3" Content="Patreon" FontSize="16" Padding="1" Margin="10,0,0,0" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}"/>
                         <TextBlock Grid.Row="4" Margin="20,0,0,0" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}">
-                        <Hyperlink Click="PatreonHyperlink_Click">
-                            <Run Text="{DynamicResource Donate.Patreon}"/>
-                        </Hyperlink>
+                            <Hyperlink Click="PatreonHyperlink_Click">
+                                <Run Text="{DynamicResource Donate.Patreon}"/>
+                            </Hyperlink>
                         </TextBlock>
 
-                        <Label Grid.Row="5" Content="Steam" FontSize="16" Padding="1" Margin="10,0,0,0" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}"/>
-                        <TextBlock Grid.Row="6" Margin="20,0,0,0" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}">
-                        <Hyperlink Click="SteamHyperlink_Click">
-                            <Run Text="{DynamicResource Donate.Steam.Link}"/>
-                        </Hyperlink>
+                        <Label Grid.Row="5" Content="{DynamicResource Donate.Crypto}" FontSize="16" Padding="1" Margin="10,0,0,0" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}"/>
+                        <TextBlock Grid.Row="6" Margin="20,0,0,0" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}" TextWrapping="WrapWithOverflow">
+                            <Run Text="BitcoinCash:"/>
+                            <Hyperlink Click="BitcoinCashHyperlink_Click" ToolTip="{DynamicResource Editor.Home.Copy}">
+                                <Run Text="1HN81cAwDo16tRtiYfkzvzFqikQUimM3S8"/>
+                            </Hyperlink>
+                            <!--<LineBreak/>-->
+                            <!--<Run Text="Monero"/>
+                            <Hyperlink Click="MoneroHyperlink_Click" ToolTip="{DynamicResource Editor.Home.Copy}">
+                                <Run Text="44yC9CkwHVfKPsKxg5RcA67GZEqiQH6QoBYtRKwkhDaE3tvRpiw1E5i6GShZYNsDq9eCtHnq49SrKjF4DG7NwjqWMoMueD4"/>
+                            </Hyperlink>-->
+                        </TextBlock>
+
+                        <Label Grid.Row="7" Content="Steam" FontSize="16" Padding="1" Margin="10,0,0,0" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}"/>
+                        <TextBlock Grid.Row="8" Margin="20,0,0,0" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}">
+                            <Hyperlink Click="SteamHyperlink_Click">
+                                <Run Text="{DynamicResource Donate.Steam.Link}"/>
+                            </Hyperlink>
                             <Run Text="{DynamicResource Donate.Steam.Text}"/>
                         </TextBlock>
 
                         <Label Grid.Row="7" Content="Support" FontSize="16" Padding="1" Margin="10,0,0,0" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility, Converter={StaticResource InvertedVisibility}}"/>
                         <TextBlock Grid.Row="8" Margin="20,0,0,0" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility, Converter={StaticResource InvertedVisibility}}">
-                        <Hyperlink Click="ExtraSupportHyperlink_Click">
-                            <Run Text="If you wish to support the project, please click here to visit the screentogif.com/donate"/>
-                        </Hyperlink>
+                            <Hyperlink Click="ExtraSupportHyperlink_Click">
+                                <Run Text="If you wish to support the project, please click here to visit the screentogif.com/donate"/>
+                            </Hyperlink>
                         </TextBlock>
                     </Grid>
 
