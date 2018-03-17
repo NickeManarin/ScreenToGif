@@ -4,6 +4,9 @@ using ScreenToGif.Util.Model;
 
 namespace ScreenToGif.Controls
 {
+    /// <summary>
+    /// All recorders are derived from this class.
+    /// </summary>
     public class RecorderWindow : Window
     {
         public static readonly DependencyProperty StageProperty = DependencyProperty.Register("Stage", typeof(Stage), typeof(RecorderWindow), new FrameworkPropertyMetadata(Stage.Stopped));

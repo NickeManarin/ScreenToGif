@@ -11,11 +11,11 @@ namespace ScreenToGif.Controls
     {
         #region Variables
 
-        public readonly static DependencyProperty ImageProperty;
-        public readonly static DependencyProperty IsCheckedProperty;
-        public readonly static DependencyProperty MaxSizeProperty;
-        public readonly static DependencyProperty FrameNumberProperty;
-        public readonly static DependencyProperty DelayProperty;
+        public static readonly DependencyProperty ImageProperty;
+        public static readonly DependencyProperty IsCheckedProperty;
+        public static readonly DependencyProperty MaxSizeProperty;
+        public static readonly DependencyProperty FrameNumberProperty;
+        public static readonly DependencyProperty DelayProperty;
 
         #endregion
 
@@ -27,8 +27,8 @@ namespace ScreenToGif.Controls
         [Description("The Frame of the ListBoxItem.")]
         public string Image
         {
-            get { return (string)GetValue(ImageProperty); }
-            set { SetCurrentValue(ImageProperty, value); }
+            get => (string)GetValue(ImageProperty);
+            set => SetCurrentValue(ImageProperty, value);
         }
 
         /// <summary>
@@ -37,8 +37,8 @@ namespace ScreenToGif.Controls
         [Description("True if item is checked.")]
         public bool IsChecked
         {
-            get { return (bool)GetValue(IsCheckedProperty); }
-            set { SetCurrentValue(IsCheckedProperty, value); }
+            get => (bool)GetValue(IsCheckedProperty);
+            set => SetCurrentValue(IsCheckedProperty, value);
         }
 
         /// <summary>
@@ -47,8 +47,8 @@ namespace ScreenToGif.Controls
         [Description("The maximum size of the image.")]
         public double MaxSize
         {
-            get { return (double)GetValue(MaxSizeProperty); }
-            set { SetCurrentValue(MaxSizeProperty, value); }
+            get => (double)GetValue(MaxSizeProperty);
+            set => SetCurrentValue(MaxSizeProperty, value);
         }
 
         /// <summary>
@@ -57,8 +57,8 @@ namespace ScreenToGif.Controls
         [Description("The frame number.")]
         public int FrameNumber
         {
-            get { return (int)GetValue(FrameNumberProperty); }
-            set { SetCurrentValue(FrameNumberProperty, value); }
+            get => (int)GetValue(FrameNumberProperty);
+            set => SetCurrentValue(FrameNumberProperty, value);
         }
 
         /// <summary>
@@ -67,8 +67,8 @@ namespace ScreenToGif.Controls
         [Description("The frame delay.")]
         public int Delay
         {
-            get { return (int)GetValue(DelayProperty); }
-            set { SetCurrentValue(DelayProperty, value); }
+            get => (int)GetValue(DelayProperty);
+            set => SetCurrentValue(DelayProperty, value);
         }
 
         #endregion

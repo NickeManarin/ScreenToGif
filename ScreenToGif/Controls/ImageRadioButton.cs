@@ -11,9 +11,9 @@ namespace ScreenToGif.Controls
         public Viewbox _viewbox;
         public TextBlock _label;
 
-        public readonly static DependencyProperty ChildProperty;
-        public readonly static DependencyProperty TextProperty;
-        public readonly static DependencyProperty MaxSizeProperty;
+        public static readonly DependencyProperty ChildProperty;
+        public static readonly DependencyProperty TextProperty;
+        public static readonly DependencyProperty MaxSizeProperty;
 
         #endregion
 
@@ -25,8 +25,8 @@ namespace ScreenToGif.Controls
         [Description("The Image of the button.")]
         public UIElement Child
         {
-            get { return (UIElement)GetValue(ChildProperty); }
-            set { SetCurrentValue(ChildProperty, value); }
+            get => (UIElement)GetValue(ChildProperty);
+            set => SetCurrentValue(ChildProperty, value);
         }
 
         /// <summary>
@@ -35,8 +35,8 @@ namespace ScreenToGif.Controls
         [Description("The text of the button.")]
         public string Text
         {
-            get { return (string)GetValue(TextProperty); }
-            set { SetCurrentValue(TextProperty, value); }
+            get => (string)GetValue(TextProperty);
+            set => SetCurrentValue(TextProperty, value);
         }
 
         /// <summary>
@@ -45,8 +45,8 @@ namespace ScreenToGif.Controls
         [Description("The maximum size of the image.")]
         public double MaxSize
         {
-            get { return (double)GetValue(MaxSizeProperty); }
-            set { SetCurrentValue(MaxSizeProperty, value); }
+            get => (double)GetValue(MaxSizeProperty);
+            set => SetCurrentValue(MaxSizeProperty, value);
         }
 
         #endregion

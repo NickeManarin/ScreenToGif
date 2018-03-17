@@ -47,8 +47,8 @@ namespace ScreenToGif.Controls
         [Description("The full path."), Bindable(true), Category("Common")]
         public string FullPath
         {
-            get { return (string)GetValue(FullPathProperty); }
-            set { SetCurrentValue(FullPathProperty, value); }
+            get => (string)GetValue(FullPathProperty);
+            set => SetCurrentValue(FullPathProperty, value);
         }
 
         /// <summary>
@@ -57,8 +57,8 @@ namespace ScreenToGif.Controls
         [Description("True if it has folders inside."), Bindable(true), Category("Common")]
         public bool HasFolders
         {
-            get { return (bool)GetValue(HasFoldersProperty); }
-            set { SetCurrentValue(HasFoldersProperty, value); }
+            get => (bool)GetValue(HasFoldersProperty);
+            set => SetCurrentValue(HasFoldersProperty, value);
         }
 
         /// <summary>
@@ -67,8 +67,8 @@ namespace ScreenToGif.Controls
         [Description("True if it has files inside."), Bindable(true), Category("Common")]
         public bool HasFiles
         {
-            get { return (bool)GetValue(HasFilesProperty); }
-            set { SetCurrentValue(HasFilesProperty, value); }
+            get => (bool)GetValue(HasFilesProperty);
+            set => SetCurrentValue(HasFilesProperty, value);
         }
 
         /// <summary>
@@ -77,8 +77,8 @@ namespace ScreenToGif.Controls
         [Description("The type of the path."), Bindable(true), Category("Common")]
         public PathType Category
         {
-            get { return (PathType)GetValue(CategoryProperty); }
-            set { SetCurrentValue(CategoryProperty, value); }
+            get => (PathType)GetValue(CategoryProperty);
+            set => SetCurrentValue(CategoryProperty, value);
         }
 
         /// <summary>
@@ -87,8 +87,8 @@ namespace ScreenToGif.Controls
         [Description("If the path is inaccessible."), Bindable(true), Category("Common")]
         public bool IsInaccessible
         {
-            get { return (bool)GetValue(IsInaccessibleProperty); }
-            set { SetCurrentValue(IsInaccessibleProperty, value); }
+            get => (bool)GetValue(IsInaccessibleProperty);
+            set => SetCurrentValue(IsInaccessibleProperty, value);
         }
 
         /// <summary>
@@ -97,8 +97,8 @@ namespace ScreenToGif.Controls
         [Description("The display text."), Bindable(true), Category("Common")]
         public string Text
         {
-            get { return (string)GetValue(TextProperty); }
-            set { SetCurrentValue(TextProperty, value); }
+            get => (string)GetValue(TextProperty);
+            set => SetCurrentValue(TextProperty, value);
         }
 
         /// <summary>
@@ -107,8 +107,8 @@ namespace ScreenToGif.Controls
         [Description("The image/icon of the element."), Bindable(true), Category("Common")]
         public UIElement Image
         {
-            get { return (UIElement)GetValue(ImageProperty); }
-            set { SetValue(ImageProperty, value); }
+            get => (UIElement)GetValue(ImageProperty);
+            set => SetValue(ImageProperty, value);
         }
 
         /// <summary>
@@ -117,8 +117,8 @@ namespace ScreenToGif.Controls
         [Bindable(true), Category("Common")]
         public double MaxSize
         {
-            get { return (double)GetValue(MaxSizeProperty); }
-            set { SetValue(MaxSizeProperty, value); }
+            get => (double)GetValue(MaxSizeProperty);
+            set => SetValue(MaxSizeProperty, value);
         }
 
         #endregion

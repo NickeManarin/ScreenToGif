@@ -570,7 +570,7 @@
     <s:String x:Key="Editor.Exiting.Title">Fechando o Editor</s:String>
     <s:String x:Key="Editor.Exiting.Instruction">Você tem certeza que deseja sair?</s:String>
     <s:String x:Key="Editor.Exiting.Message">O projeto atual em que vocês estava trabalhando pode ser aberto novamente em 'Projetos Recentes'.</s:String>
-    <s:String x:Key="Editor.Exiting.Message2">O projeto atual em que vocês estava trabalhando pode ser aberto novamente em 'Projetos Recentes', mas não se esqueça que em 5 dias ele será apagado automaticamente.</s:String>
+    <s:String x:Key="Editor.Exiting.Message2">O projeto atual em que vocês estava trabalhando pode ser aberto novamente em 'Projetos Recentes', mas não se esqueça que em alguns dias ele será apagado automaticamente.</s:String>
     
     <s:String x:Key="Editor.Resize.Warning">Você precisa selecionar algum valor diferente para aplicar o redimensionamento.</s:String>
     <s:String x:Key="Editor.Crop.Warning">Para cortar, você precisa selecionar um retângulo menor do que o tamanho da imagem.</s:String>

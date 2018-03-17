@@ -20,11 +20,11 @@ namespace ScreenToGif.Controls
         private TextBox _textBox;
         private bool _ignore = false;
 
-        public readonly static DependencyProperty MinValueProperty;
-        public readonly static DependencyProperty ValueProperty;
-        public readonly static DependencyProperty MaxValueProperty;
-        public readonly static DependencyProperty IsHexProperty;
-        public readonly static DependencyProperty IsBoundProperty;
+        public static readonly DependencyProperty MinValueProperty;
+        public static readonly DependencyProperty ValueProperty;
+        public static readonly DependencyProperty MaxValueProperty;
+        public static readonly DependencyProperty IsHexProperty;
+        public static readonly DependencyProperty IsBoundProperty;
 
         #endregion
 
@@ -36,8 +36,8 @@ namespace ScreenToGif.Controls
         [Description("The minimum value of the numeric text box.")]
         public long MinValue
         {
-            get { return (long)GetValue(MinValueProperty); }
-            set { SetCurrentValue(MinValueProperty, value); }
+            get => (long)GetValue(MinValueProperty);
+            set => SetCurrentValue(MinValueProperty, value);
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace ScreenToGif.Controls
         [Description("The actual value of the numeric text box.")]
         public long Value
         {
-            get { return (long)GetValue(ValueProperty); }
+            get => (long)GetValue(ValueProperty);
             set
             {
                 SetCurrentValue(ValueProperty, value);
@@ -60,8 +60,8 @@ namespace ScreenToGif.Controls
         [Description("The maximum value of the numeric text box.")]
         public long MaxValue
         {
-            get { return (long)GetValue(MaxValueProperty); }
-            set { SetCurrentValue(MaxValueProperty, value); }
+            get => (long)GetValue(MaxValueProperty);
+            set => SetCurrentValue(MaxValueProperty, value);
         }
 
         /// <summary>
@@ -70,8 +70,8 @@ namespace ScreenToGif.Controls
         [Description("True if this TextBox is using the Hexadecimal format.")]
         public bool IsHex
         {
-            get { return (bool)GetValue(IsHexProperty); }
-            set { SetCurrentValue(IsHexProperty, value); }
+            get => (bool)GetValue(IsHexProperty);
+            set => SetCurrentValue(IsHexProperty, value);
         }
 
         /// <summary>
@@ -80,8 +80,8 @@ namespace ScreenToGif.Controls
         [Description("True if this TextBox is bound to the recording window size.")]
         public bool IsBound
         {
-            get { return (bool)GetValue(IsBoundProperty); }
-            set { SetCurrentValue(IsBoundProperty, value); }
+            get => (bool)GetValue(IsBoundProperty);
+            set => SetCurrentValue(IsBoundProperty, value);
         }
 
         #endregion
@@ -95,11 +95,12 @@ namespace ScreenToGif.Controls
 
         /// <summary>
         /// Event raised when the numeric value is changed.
+        /// Provide CLR accessors for the event.
         /// </summary>
         public event RoutedEventHandler ValueChanged
         {
-            add { AddHandler(ValueChangedEvent, value); }  //Provide CLR accessors for the event 
-            remove { RemoveHandler(ValueChangedEvent, value); }
+            add => AddHandler(ValueChangedEvent, value);
+            remove => RemoveHandler(ValueChangedEvent, value);
         }
 
         void RaiseValueChangedEvent()
@@ -207,7 +208,7 @@ namespace ScreenToGif.Controls
 
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (String.IsNullOrEmpty(e.Text))
+            if (string.IsNullOrEmpty(e.Text))
             {
                 e.Handled = true;
                 return;
@@ -221,9 +222,9 @@ namespace ScreenToGif.Controls
 
         private void PastingEvent(object sender, DataObjectPastingEventArgs e)
         {
-            if (e.DataObject.GetDataPresent(typeof(String)))
+            if (e.DataObject.GetDataPresent(typeof(string)))
             {
-                var text = (string)e.DataObject.GetData(typeof(String));
+                var text = (string)e.DataObject.GetData(typeof(string));
 
                 if (IsTextDisallowed(text))
                 {

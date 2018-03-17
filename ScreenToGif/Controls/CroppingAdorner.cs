@@ -56,8 +56,8 @@ namespace ScreenToGif.Controls
 
         public event RoutedEventHandler CropChanged
         {
-            add { AddHandler(CropChangedEvent, value); }
-            remove { RemoveHandler(CropChangedEvent, value); }
+            add => AddHandler(CropChangedEvent, value);
+            remove => RemoveHandler(CropChangedEvent, value);
         }
 
         #endregion
@@ -72,21 +72,14 @@ namespace ScreenToGif.Controls
 
         public Brush Fill
         {
-            get { return (Brush)GetValue(FillProperty); }
-            set { SetValue(FillProperty, value); }
+            get => (Brush)GetValue(FillProperty);
+            set => SetValue(FillProperty, value);
         }
 
         public Rect ClipRectangle
         {
-            get
-            {
-                return _cropMask.Interior;
-                //return (Rect)GetValue(ClipRectangleProperty);
-            }
-            set
-            {
-                SetValue(ClipRectangleProperty, value);
-            }
+            get => _cropMask.Interior;
+            set => SetValue(ClipRectangleProperty, value);
         }
 
         private static void FillPropChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -94,9 +87,7 @@ namespace ScreenToGif.Controls
             var crp = d as CroppingAdorner;
 
             if (crp != null)
-            {
-                crp._cropMask.Fill = (Brush)e.NewValue;
-            }
+                crp._cropMask.Fill = (Brush) e.NewValue;
         }
 
         private static void ClipRectanglePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
