@@ -365,7 +365,7 @@ namespace ScreenToGif.Controls
 
         public Native.PointW GetDeviceCoordinates(Native.PointW point)
         {
-            var dpi = this.Scale();
+            var dpi = Other.ScaleOfSystem();
             return new Native.PointW { X = (int)(point.X / dpi), Y = (int)(point.Y / dpi) };
         }
 

@@ -68,8 +68,8 @@
             <DropShadowEffect x:Key="Shadow.Black.Dark" ShadowDepth="0" Color="#FF000000" Opacity=".5" BlurRadius="2" RenderingBias="Quality"/>
             <DropShadowEffect x:Key="Shadow.Black.Large" ShadowDepth="0" Color="#FF000000" Opacity=".35" BlurRadius="5" RenderingBias="Quality"/>
 
-            <DropShadowEffect x:Key="Shadow.Grey" ShadowDepth="0" Color="#FFBEBEBE" Opacity=".5" BlurRadius="2" RenderingBias="Quality"/>
-            
+            <DropShadowEffect x:Key="Shadow.Grey" ShadowDepth="0" Color="#FFBEBEBE" Opacity=".5" BlurRadius="3" RenderingBias="Quality"/>
+
             <DropShadowEffect x:Key="Shadow.Foreground.Large" ShadowDepth="0" Color="{Binding ForegroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="5" RenderingBias="Quality"/>
             <DropShadowEffect x:Key="Shadow.Foreground" ShadowDepth="0" Color="{Binding ForegroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="3" RenderingBias="Quality"/>
             <DropShadowEffect x:Key="Shadow.Foreground.Normal" ShadowDepth="0" Color="{Binding ForegroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".2" BlurRadius="3" RenderingBias="Quality"/>
@@ -359,11 +359,12 @@
                 <Setter Property="Foreground" Value="#FF5D5D5D"/>
                 <Setter Property="MinWidth" Value="20"/>
                 <Setter Property="SnapsToDevicePixels" Value="True"/>
+                <Setter Property="Effect" Value="{DynamicResource Shadow.Grey}"/>
 
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ToolTip}">
-                            <Border BorderBrush="#FFBEBEBE" BorderThickness="1" Effect="{DynamicResource Shadow.Grey}" Margin="2" Background="White" Padding="5">
+                            <Border BorderBrush="#FFBEBEBE" BorderThickness="1" Margin="2" Background="White" Padding="5">
                                 <ContentPresenter Content="{TemplateBinding Content}" Width="Auto" HorizontalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
@@ -377,12 +378,13 @@
                 <Setter Property="OverridesDefaultStyle" Value="True" />
                 <Setter Property="Grid.IsSharedSizeScope" Value="true" />
                 <Setter Property="Placement" Value="Bottom"/>
-                <Setter Property="HorizontalOffset" Value="-5"/>
+                <Setter Property="HorizontalOffset" Value="-3"/>
+                <Setter Property="Effect" Value="{DynamicResource Shadow.Grey}"/>
 
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ContextMenu}">
-                            <Border x:Name="Border" BorderBrush="#FFBEBEBE" BorderThickness="1" Effect="{DynamicResource Shadow.Grey}" Margin="2" Background="White">
+                            <Border x:Name="Border" BorderBrush="#FFBEBEBE" BorderThickness="1" Margin="2" Background="White">
                                 <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
                             </Border>
                         </ControlTemplate>
@@ -1087,7 +1089,6 @@
                     </ContextMenu>
                 </n:NotifyIcon.ContextMenu>
             </n:NotifyIcon>
-
         </ResourceDictionary>
     </Application.Resources>
 </Application>

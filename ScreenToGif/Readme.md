@@ -25,11 +25,3 @@ _VS 2017 and .Net 4.6.1 or newer required._
 ♠ When saving a gif using the overwrite option while the output file has a usage lock, no error appears.  
 ♠ The Cinemagraph feature is broken for high DPI PCs.  
 ♠ The Gifski integration does not accept saving something in a path with Chinese characters, for example: "回复".  
-
-
-
-### To Test:
-
-• When removing a setting from the settings file, try removing from a unformatted file.  
-• DoubleBox (decimals stuff).   
-• Progress percentage (localization).
