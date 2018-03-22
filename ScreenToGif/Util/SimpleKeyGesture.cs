@@ -31,7 +31,10 @@ namespace ScreenToGif.Util
 
         [DataMember]
         public bool IsUppercase { get; set; }
-
+        
+        [DataMember]
+        public string StringKey { get; }
+        
         /// <summary>Gets a string representation of this <see cref="T:System.Windows.Input.KeyGesture" />.</summary>
         /// <returns>The display string for this <see cref="T:System.Windows.Input.KeyGesture" />. The default value is <see cref="F:System.String.Empty" />.</returns>
         [IgnoreDataMember]
@@ -50,7 +53,9 @@ namespace ScreenToGif.Util
         /// <exception cref="T:System.NotSupportedException">
         /// <paramref name="key" /> is not a valid <see cref="T:System.Windows.Input.KeyGesture" />.</exception>
         public SimpleKeyGesture(Key key) : this(key, ModifierKeys.None)
-        { }
+        {
+            StringKey = key.ToString();
+        }
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Windows.Input.KeyGesture" /> class with the specified <see cref="T:System.Windows.Input.Key" /> and <see cref="T:System.Windows.Input.ModifierKeys" />.</summary>
         /// <param name="key">The key associated with the gesture.</param>
@@ -60,7 +65,9 @@ namespace ScreenToGif.Util
         /// <exception cref="T:System.NotSupportedException">
         /// <paramref name="key" /> and <paramref name="modifiers" /> do not form a valid <see cref="T:System.Windows.Input.KeyGesture" />.</exception>
         public SimpleKeyGesture(Key key, ModifierKeys modifiers) : this(key, modifiers, string.Empty)
-        { }
+        { 
+            StringKey = key.ToString();
+        }
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Windows.Input.KeyGesture" /> class with the specified <see cref="T:System.Windows.Input.Key" /> and <see cref="T:System.Windows.Input.ModifierKeys" />.</summary>
         /// <param name="key">The key associated with the gesture.</param>
@@ -76,6 +83,7 @@ namespace ScreenToGif.Util
             //Remove the modifier key, if it's the same as the detected pressend key.
             if (key == Key.LeftCtrl || key == Key.LeftShift || key == Key.LeftAlt || key == Key.LWin || key == Key.RightCtrl || key == Key.RightShift || key == Key.RightAlt || key == Key.RWin)
                 Modifiers = ModifierKeys.None;
+            StringKey = key.ToString();
         }
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Windows.Input.KeyGesture" /> class with the specified <see cref="T:System.Windows.Input.Key" />, <see cref="T:System.Windows.Input.ModifierKeys" />, and display string.</summary>
@@ -98,6 +106,7 @@ namespace ScreenToGif.Util
             Key = key;
             IsUppercase = isUppercase;
             DisplayString = displayString ?? throw new ArgumentNullException("displayString");
+            StringKey = key.ToString();
         }
 
         /// <summary>Returns a string that can be used to display the <see cref="T:System.Windows.Input.KeyGesture" />.</summary>
