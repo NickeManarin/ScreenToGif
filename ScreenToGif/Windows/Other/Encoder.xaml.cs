@@ -661,7 +661,7 @@ namespace ScreenToGif.Windows.Other
                                 var fileInfo2 = new FileInfo(param.Filename);
 
                                 if (!fileInfo2.Exists || fileInfo2.Length == 0)
-                                    throw new Exception("Error while encoding the gif with Gifski.", new Win32Exception()) { HelpLink = $"Command:\n\r{param.Command}\n\rResult:\n\r{Marshal.GetLastWin32Error()}" };
+                                    throw new Exception("Error while encoding the gif with Gifski.", new Win32Exception()) { HelpLink = $"Result:\n\r{Marshal.GetLastWin32Error()}" };
 
                                 #endregion
 
@@ -889,7 +889,7 @@ namespace ScreenToGif.Windows.Other
 
                     try
                     {
-                        var cloud = CloudFactory.CreateCloud(param.UploadDestinationIndex);
+                        var cloud = CloudFactory.CreateCloud(param.UploadDestination);
 
                         var uploadedFile = await cloud.UploadFileAsync(param.Filename, CancellationToken.None);
 
@@ -897,7 +897,7 @@ namespace ScreenToGif.Windows.Other
                     }
                     catch (Exception e)
                     {
-                        LogWriter.Log(e, "It was not possible to run the post encoding command.");
+                        LogWriter.Log(e, "It was not possible to upload.");
                         InternalSetUpload(id, false, null, null, e);
                     }
                 }

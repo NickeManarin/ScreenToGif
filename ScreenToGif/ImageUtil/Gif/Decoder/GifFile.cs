@@ -46,17 +46,13 @@ namespace ScreenToGif.ImageUtil.Gif.Decoder
             Header = GifHeader.ReadHeader(stream);
 
             if (Header.LogicalScreenDescriptor.HasGlobalColorTable)
-                GlobalColorTable =
-                    GifHelpers.ReadColorTable(stream, Header.LogicalScreenDescriptor.GlobalColorTableSize);
+                GlobalColorTable = GifHelpers.ReadColorTable(stream, Header.LogicalScreenDescriptor.GlobalColorTableSize);
 
             ReadFrames(stream, metadataOnly);
 
             var netscapeExtension = Extensions.OfType<GifApplicationExtension>().FirstOrDefault(GifHelpers.IsNetscapeExtension);
 
-            if (netscapeExtension != null)
-                RepeatCount = GifHelpers.GetRepeatCount(netscapeExtension);
-            else
-                RepeatCount = 1;
+            RepeatCount = netscapeExtension != null ? GifHelpers.GetRepeatCount(netscapeExtension) : (ushort) 1;
         }
 
         private void ReadFrames(Stream stream, bool metadataOnly)
@@ -65,7 +61,7 @@ namespace ScreenToGif.ImageUtil.Gif.Decoder
             var controlExtensions = new List<GifExtension>();
             var specialExtensions = new List<GifExtension>();
 
-            while (true)
+            while (stream.Position < stream.Length)
             {
                 var block = GifBlock.ReadBlock(stream, controlExtensions, metadataOnly);
 

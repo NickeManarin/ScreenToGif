@@ -4,7 +4,10 @@
              xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
              xmlns:u="clr-namespace:ScreenToGif.Util"
              xmlns:n="clr-namespace:ScreenToGif.Controls"
-             Startup="Application_Startup" Exit="App_OnExit" DispatcherUnhandledException="App_OnDispatcherUnhandledException">
+             xmlns:m="clr-namespace:ScreenToGif.Util.Model"
+             ShutdownMode="OnExplicitShutdown" Startup="Application_Startup" Exit="App_OnExit" 
+             DispatcherUnhandledException="App_OnDispatcherUnhandledException">
+
     <Application.Resources>
         <ResourceDictionary>
 
@@ -42,6 +45,8 @@
                 <ResourceDictionary Source="/Resources/Localization/StringResources.en.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
+            <m:ApplicationViewModel x:Key="AppViewModel"/>
+            
             <!--Converter-->
             <BooleanToVisibilityConverter x:Key="Bool2Visibility" />
             <c:CountToBool x:Key="CountToBoolConverter" />
@@ -49,6 +54,9 @@
             <c:EnumToInt x:Key="EnumToInt"/>
             <c:ColorToBrush x:Key="ColorToBrushConverter"/>
             <c:ShortcutSelection x:Key="ShortcutSelectionConverter"/>
+            <c:IntToBool x:Key="BoolToInt"/>
+            <c:IntToVisibility x:Key="IntToVisibility"/>
+            <c:EnumToVisibility x:Key="EnumToVisibility"/>
 
             <!--Mask-->
             <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
@@ -59,6 +67,8 @@
             <DropShadowEffect x:Key="Shadow.Black" ShadowDepth="0" Color="#FF000000" Opacity="1" BlurRadius="2" RenderingBias="Quality"/>
             <DropShadowEffect x:Key="Shadow.Black.Dark" ShadowDepth="0" Color="#FF000000" Opacity=".5" BlurRadius="2" RenderingBias="Quality"/>
             <DropShadowEffect x:Key="Shadow.Black.Large" ShadowDepth="0" Color="#FF000000" Opacity=".35" BlurRadius="5" RenderingBias="Quality"/>
+
+            <DropShadowEffect x:Key="Shadow.Grey" ShadowDepth="0" Color="#FFBEBEBE" Opacity=".5" BlurRadius="3" RenderingBias="Quality"/>
 
             <DropShadowEffect x:Key="Shadow.Foreground.Large" ShadowDepth="0" Color="{Binding ForegroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="5" RenderingBias="Quality"/>
             <DropShadowEffect x:Key="Shadow.Foreground" ShadowDepth="0" Color="{Binding ForegroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="3" RenderingBias="Quality"/>
@@ -140,8 +150,6 @@
 
             <!--GroupBox Style-->
             <Style TargetType="{x:Type GroupBox}">
-
-                <!--Default Values-->
                 <Setter Property="BorderBrush" Value="#D5DFE5"/>
                 <Setter Property="BorderThickness" Value="1"/>
 
@@ -351,39 +359,14 @@
                 <Setter Property="Foreground" Value="#FF5D5D5D"/>
                 <Setter Property="MinWidth" Value="20"/>
                 <Setter Property="SnapsToDevicePixels" Value="True"/>
+                <Setter Property="Effect" Value="{DynamicResource Shadow.Grey}"/>
 
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ToolTip}">
-                            <Grid>
-                                <Rectangle StrokeThickness="2" Margin="15,0,0,0" HorizontalAlignment="Left">
-                                    <Rectangle.Stroke>
-                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                            <GradientStop Color="#00BEBEBE" Offset="0"/>
-                                            <GradientStop Color="#00BEBEBE" Offset="1"/>
-                                            <GradientStop Color="#FFB1B1B1" Offset="0.2"/>
-                                            <GradientStop Color="#FFB1B1B1" Offset="0.8"/>
-                                        </LinearGradientBrush>
-                                    </Rectangle.Stroke>
-                                </Rectangle>
-
-                                <Rectangle StrokeThickness="2" Margin="0,0,15,0" HorizontalAlignment="Right" >
-                                    <Rectangle.Stroke>
-                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                            <GradientStop Color="#00BEBEBE" Offset="0"/>
-                                            <GradientStop Color="#00BEBEBE" Offset="1"/>
-                                            <GradientStop Color="#FFB1B1B1" Offset="0.2"/>
-                                            <GradientStop Color="#FFB1B1B1" Offset="0.8"/>
-                                        </LinearGradientBrush>
-                                    </Rectangle.Stroke>
-                                </Rectangle>
-
-                                <Border BorderBrush="#FFBEBEBE" BorderThickness="1" Effect="{DynamicResource Shadow.Border.Large}" Margin="5" Background="White" Padding="5">
-                                    <!--<TextBlock Text="{TemplateBinding Content}" Foreground="#FF5D5D5D" Padding="5" TextWrapping="WrapWithOverflow" 
-                                                   Width="Auto" HorizontalAlignment="Center" MinWidth="40" TextAlignment="Center" />-->
-                                    <ContentPresenter Content="{TemplateBinding Content}" Width="Auto" HorizontalAlignment="Center"/>
-                                </Border>
-                            </Grid>
+                            <Border BorderBrush="#FFBEBEBE" BorderThickness="1" Margin="2" Background="White" Padding="5">
+                                <ContentPresenter Content="{TemplateBinding Content}" Width="Auto" HorizontalAlignment="Center"/>
+                            </Border>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
@@ -395,38 +378,15 @@
                 <Setter Property="OverridesDefaultStyle" Value="True" />
                 <Setter Property="Grid.IsSharedSizeScope" Value="true" />
                 <Setter Property="Placement" Value="Bottom"/>
-                <Setter Property="HorizontalOffset" Value="-5"/>
+                <Setter Property="HorizontalOffset" Value="-3"/>
+                <Setter Property="Effect" Value="{DynamicResource Shadow.Grey}"/>
 
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ContextMenu}">
-                            <Grid>
-                                <Rectangle StrokeThickness="2" Margin="15,0,0,0" HorizontalAlignment="Left">
-                                    <Rectangle.Stroke>
-                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                            <GradientStop Color="#00BEBEBE" Offset="0"/>
-                                            <GradientStop Color="#00BEBEBE" Offset="1"/>
-                                            <GradientStop Color="#FFB1B1B1" Offset="0.2"/>
-                                            <GradientStop Color="#FFB1B1B1" Offset="0.8"/>
-                                        </LinearGradientBrush>
-                                    </Rectangle.Stroke>
-                                </Rectangle>
-
-                                <Rectangle StrokeThickness="2" Margin="0,0,15,0" HorizontalAlignment="Right" >
-                                    <Rectangle.Stroke>
-                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                            <GradientStop Color="#00BEBEBE" Offset="0"/>
-                                            <GradientStop Color="#00BEBEBE" Offset="1"/>
-                                            <GradientStop Color="#FFB1B1B1" Offset="0.2"/>
-                                            <GradientStop Color="#FFB1B1B1" Offset="0.8"/>
-                                        </LinearGradientBrush>
-                                    </Rectangle.Stroke>
-                                </Rectangle>
-
-                                <Border x:Name="Border" BorderBrush="#FFBEBEBE" BorderThickness="1" Effect="{DynamicResource Shadow.Black.Large}" Margin="5,5,5,5" Background="White">
-                                    <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
-                                </Border>
-                            </Grid>
+                            <Border x:Name="Border" BorderBrush="#FFBEBEBE" BorderThickness="1" Margin="2" Background="White">
+                                <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
+                            </Border>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
@@ -1102,6 +1062,33 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
+
+            <!--Notification Icon-->
+            <n:NotifyIcon x:Key="NotifyIcon" IconSource="/Resources/Notification.ico" DataContext="{StaticResource AppViewModel}" NotifyToolTipText="ScreenToGif" Visibility="Collapsed">
+                <!--<n:NotifyIcon.NotifyToolTip>
+                    <Grid Background="White">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Text="ScreenToGif" FontSize="14" Foreground="Navy"/>
+                    </Grid>
+                </n:NotifyIcon.NotifyToolTip>-->
+
+                <n:NotifyIcon.ContextMenu>
+                    <ContextMenu>
+                        <n:ImageMenuItem Header="{DynamicResource S.NewRecording}" Image="{StaticResource Vector.Record.New}" Command="{Binding OpenRecorder}" InputGestureText="{Binding RecorderGesture, UpdateSourceTrigger=PropertyChanged}"/>
+                        <n:ImageMenuItem Header="{DynamicResource S.NewWebcamRecording}" Image="{StaticResource Vector.Camera.New}" Command="{Binding OpenWebcamRecorder}" InputGestureText="{Binding WebcamRecorderGesture, UpdateSourceTrigger=PropertyChanged}"/>
+                        <n:ImageMenuItem Header="{DynamicResource S.NewBoardRecording}" Image="{StaticResource Vector.Board.New}" Command="{Binding OpenBoardRecorder}" InputGestureText="{Binding BoardRecorderGesture, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Separator/>
+                        <n:ImageMenuItem Header="{DynamicResource Editor}" Image="{StaticResource Vector.Editor}" Command="{Binding OpenEditor}" InputGestureText="{Binding EditorGesture, UpdateSourceTrigger=PropertyChanged}"/>
+                        <n:ImageMenuItem Header="{DynamicResource Options}" Image="{StaticResource Vector.Options}" Command="{Binding OpenOptions}" InputGestureText="{Binding OptionsGesture, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Separator/>
+                        <n:ImageMenuItem Header="{DynamicResource S.Exit}" Image="{StaticResource Vector.Close}" Command="{Binding ExitApplication}" InputGestureText="{Binding ExitGesture, UpdateSourceTrigger=PropertyChanged}"/>
+                    </ContextMenu>
+                </n:NotifyIcon.ContextMenu>
+            </n:NotifyIcon>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

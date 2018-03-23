@@ -15,6 +15,8 @@ namespace ScreenToGif.Controls
         #region Variables
 
         private bool _ignore;
+        private string _baseFormat = "{0:###,###,###,###,##0.";
+        private string _format = "{0:###,###,###,###,##0.00}";
 
         #endregion
 
@@ -28,6 +30,9 @@ namespace ScreenToGif.Controls
 
         public static readonly DependencyProperty MinimumProperty = DependencyProperty.Register("Minimum", typeof(double), typeof(DoubleBox),
             new FrameworkPropertyMetadata(0D, OnMinimumPropertyChanged));
+
+        public static readonly DependencyProperty DecimalsProperty = DependencyProperty.Register("Decimals", typeof(int), typeof(DoubleBox),
+            new FrameworkPropertyMetadata(2, OnDecimalsPropertyChanged));
 
         public static readonly DependencyProperty StepProperty = DependencyProperty.Register("StepValue", typeof(double), typeof(DoubleUpDown), 
             new FrameworkPropertyMetadata(1d));
@@ -66,6 +71,13 @@ namespace ScreenToGif.Controls
         {
             get => (double)GetValue(MinimumProperty);
             set => SetValue(MinimumProperty, value);
+        }
+
+        [Bindable(true), Category("Common")]
+        public int Decimals
+        {
+            get => (int)GetValue(DecimalsProperty);
+            set => SetValue(DecimalsProperty, value);
         }
 
         /// <summary>
@@ -130,6 +142,8 @@ namespace ScreenToGif.Controls
             else if (doubleBox.Value < doubleBox.Minimum)
                 doubleBox.Value = doubleBox.Minimum;
 
+            doubleBox.Value = Math.Round(doubleBox.Value, doubleBox.Decimals);
+
             if (!doubleBox._ignore)
             {
                 var value = string.Format(CultureInfo.CurrentCulture, "{0:###,###,##0.0###}", doubleBox.Value * doubleBox.Scale);
@@ -150,6 +164,16 @@ namespace ScreenToGif.Controls
                 doubleBox.Value = doubleBox.Minimum;
         }
 
+        private static void OnDecimalsPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (!(d is DoubleBox doubleBox))
+                return;
+
+            doubleBox._format = doubleBox._baseFormat + "".PadRight(doubleBox.Decimals, '0') + "}";
+
+            doubleBox.Value = Math.Round(doubleBox.Value, doubleBox.Decimals);
+        }
+
         private static void OnUpdateOnInputPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             ((DoubleBox)d).UpdateOnInput = (bool)e.NewValue;
@@ -163,7 +187,7 @@ namespace ScreenToGif.Controls
             //For example, The value 600 and the scale 1.25 should display the text 750.
             //Text = Value * Scale.
 
-            doubleBox.Text = string.Format(CultureInfo.CurrentCulture, "{0:###,###,##0.0###}", doubleBox.Value * doubleBox.Scale);
+            doubleBox.Text = string.Format(CultureInfo.CurrentCulture, doubleBox._format, doubleBox.Value * doubleBox.Scale);
         }
 
         #endregion
@@ -208,7 +232,8 @@ namespace ScreenToGif.Controls
 
             AddHandler(DataObject.PastingEvent, new DataObjectPastingEventHandler(OnPasting));
 
-            Text = string.Format(CultureInfo.CurrentCulture, "{0:###,###,##0.0###}", Value);
+            _format = _baseFormat + "".PadRight(Decimals, '0') + "}";
+            Text = string.Format(CultureInfo.CurrentCulture, _format, Value);
         }
 
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
@@ -254,7 +279,7 @@ namespace ScreenToGif.Controls
 
             _ignore = true;
 
-            Value = Convert.ToDouble(Text, CultureInfo.CurrentCulture) / Scale;
+            Value = Math.Round(Convert.ToDouble(Text, CultureInfo.CurrentCulture) / Scale, Decimals);
 
             _ignore = false;
 
@@ -276,13 +301,13 @@ namespace ScreenToGif.Controls
                 _ignore = true;
 
                 Value = Convert.ToDouble(Text, CultureInfo.CurrentCulture);
-                Text = string.Format(CultureInfo.CurrentCulture, "{0:###,###,##0.0###}", Value);
+                Text = string.Format(CultureInfo.CurrentCulture, _format, Value);
 
                 _ignore = false;
                 return;
             }
 
-            Text = string.Format(CultureInfo.CurrentCulture, "{0:###,###,##0.0###}", Value);
+            Text = string.Format(CultureInfo.CurrentCulture, _format, Value);
         }
 
         //protected override void OnKeyDown(KeyEventArgs e)

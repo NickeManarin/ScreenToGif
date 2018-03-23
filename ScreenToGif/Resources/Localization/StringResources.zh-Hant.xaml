@@ -42,6 +42,7 @@
     <!--Options Page-->
     <s:String x:Key="Title.Options">Screen To Gif - 選項</s:String>
     <s:String x:Key="Application">應用程式</s:String>
+    <s:String x:Key="S.Shortcuts">鍵盤快速鍵</s:String>
     <s:String x:Key="Interface">介面</s:String>
     <s:String x:Key="Image">圖像</s:String>
     <s:String x:Key="Language">語言</s:String>
@@ -72,12 +73,6 @@
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording">啟用非同步錄影。</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(它能降低錄影時介面的延遲)</s:String>
     
-    <s:String x:Key="Application.Shortcuts">鍵盤快速鍵</s:String>
-    <s:String x:Key="Application.Shortcuts.StartPause">開始/暫停:</s:String>
-    <s:String x:Key="Application.Shortcuts.Stop">停止:</s:String>
-    <s:String x:Key="Application.Shortcuts.Discard">捨棄:</s:String>
-    <s:String x:Key="Application.Shortcuts.Info">按一下以設定鍵盤焦點，然後點選所需的按鍵和輔助按鍵。不允許使用某些按鍵組合。</s:String>
-
     <s:String x:Key="Application.Other">其它</s:String>
     <s:String x:Key="Application.Other.CheckForUpdates">檢查更新。</s:String>
     
@@ -114,7 +109,12 @@
     <s:String x:Key="Interface.Other.ExtendChrome">延伸標題列/Chrome。</s:String>
     <s:String x:Key="Interface.Other.HideTitleBar">隱藏標題列(瘦身模式)。</s:String>
     <s:String x:Key="Interface.Other.TripleClickSelection">啟用連按三下來選擇文字。</s:String>
-  
+
+    <s:String x:Key="S.Shortcuts.Recorders.StartPause">開始/暫停:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Stop">停止:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Discard">捨棄:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Info">按一下以設定鍵盤焦點，然後點選所需的按鍵和輔助按鍵。不允許使用某些按鍵組合。</s:String>
+
     <s:String x:Key="Language.AppLanguage">應用程式語言</s:String>
     
     <s:String x:Key="TempFiles.FilesAndFolders">暫存檔案和資料夾</s:String>

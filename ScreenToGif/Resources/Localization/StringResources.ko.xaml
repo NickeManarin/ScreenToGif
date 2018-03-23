@@ -41,6 +41,7 @@
     <!--Options Page-->
     <s:String x:Key="Title.Options">Screen To Gif - 설정</s:String>
     <s:String x:Key="Application">어플리케이션</s:String>
+    <s:String x:Key="S.Shortcuts">단축키</s:String>
     <s:String x:Key="Interface">인터페이스</s:String>
     <s:String x:Key="Image">이미지</s:String>
     <s:String x:Key="Language">언어</s:String>
@@ -70,10 +71,6 @@
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording">비동기 녹화를 활성화합니다.</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(녹화 중 인터페이스 렉을 줄이는 데 도움이 됩니다)</s:String>
     
-    <s:String x:Key="Application.Shortcuts">단축키</s:String>
-    <s:String x:Key="Application.Shortcuts.StartPause">시작/일시정지:</s:String>
-    <s:String x:Key="Application.Shortcuts.Stop">정지:</s:String>
-
     <s:String x:Key="Application.Other">기타</s:String>
     <!--<s:String x:Key="Application.Other.CheckForUpdates">Check for updates.</s:String>-->
     
@@ -111,6 +108,9 @@
     <!--<s:String x:Key="Interface.Other.HideTitleBar">Hide the title bar (thin mode).</s:String>-->
     <!--<s:String x:Key="Interface.Other.TripleClickSelection">Enable triple-click to select the text.</s:String>-->
   
+    <s:String x:Key="S.Shortcuts.Recorders.StartPause">시작/일시정지:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Stop">정지:</s:String>
+    
     <s:String x:Key="Language.AppLanguage">언어 설정</s:String>
     
     <s:String x:Key="TempFiles.FilesAndFolders">임시 파일 및 폴더</s:String>

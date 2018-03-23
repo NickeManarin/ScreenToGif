@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -1001,7 +1000,7 @@ namespace ScreenToGif.ImageUtil
                 var bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
                 bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-
+                
                 if (size.HasValue)
                     bitmapImage.DecodePixelHeight = size.Value;
 
@@ -1298,6 +1297,24 @@ namespace ScreenToGif.ImageUtil
             bitmapAux.Dispose();
 
             return size;
+        }
+
+        /// <summary>
+        /// Reads a given image resource into a WinForms icon.
+        /// </summary>
+        /// <param name="imageSource">Image source pointing to an icon file (*.ico).</param>
+        /// <returns>An icon object that can be used with the taskbar area.</returns>
+        public static Icon ToIcon(this ImageSource imageSource)
+        {
+            if (imageSource == null) return null;
+
+            var uri = new Uri(imageSource.ToString());
+            var streamInfo = Application.GetResourceStream(uri);
+
+            if (streamInfo == null)
+                throw new ArgumentException($"It was not possible to load the image source: '{imageSource}'.");
+
+            return new Icon(streamInfo.Stream);
         }
 
         #endregion

@@ -26,7 +26,7 @@ using Timer = System.Windows.Forms.Timer;
 
 namespace ScreenToGif.Windows.Other
 {
-    public partial class RecorderNew : Window
+    public partial class RecorderNew : RecorderWindow
     {
         #region Variables
 
@@ -34,11 +34,6 @@ namespace ScreenToGif.Windows.Other
         /// The object of the keyboard and mouse hooks.
         /// </summary>
         private readonly UserActivityHook _actHook;
-
-        /// <summary>
-        /// The project information about the current recording.
-        /// </summary>
-        internal ProjectInfo Project { get; set; }
 
         /// <summary>
         /// Lists of pressed keys.
@@ -77,11 +72,6 @@ namespace ScreenToGif.Windows.Other
 
         private Task<Image> _captureTask;
 
-        /// <summary>
-        /// The action to be executed after closing this Window.
-        /// </summary>
-        public ExitAction ExitArg = ExitAction.Return;
-
         private Point _latestPosition;
 
         #region Timer
@@ -113,8 +103,6 @@ namespace ScreenToGif.Windows.Other
         public static readonly DependencyProperty RegionProperty = DependencyProperty.Register("Region", typeof(Rect), typeof(RecorderNew),
             new PropertyMetadata(Rect.Empty));
 
-        public static readonly DependencyProperty StageProperty = DependencyProperty.Register("Stage", typeof(Stage), typeof(RecorderNew),
-            new FrameworkPropertyMetadata(Stage.Stopped));
 
         public static readonly DependencyProperty FrameCountProperty = DependencyProperty.Register("FrameCount", typeof(int), typeof(RecorderNew),
             new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.AffectsRender));
@@ -122,6 +110,8 @@ namespace ScreenToGif.Windows.Other
         #endregion
 
         #region Properties
+
+        public bool IsDialog { get; set; } = true;
 
         public bool IsPickingRegion
         {
@@ -135,14 +125,6 @@ namespace ScreenToGif.Windows.Other
             set => SetValue(WasRegionPickedProperty, value);
         }
 
-        /// <summary>
-        /// The actual stage of the program.
-        /// </summary>
-        public Stage Stage
-        {
-            get => (Stage)GetValue(StageProperty);
-            set => SetValue(StageProperty, value);
-        }
 
         public bool IsRecording
         {
@@ -193,7 +175,7 @@ namespace ScreenToGif.Windows.Other
 
         #endregion
 
-        public RecorderNew(bool hideBackButton = false)
+        public RecorderNew(bool hideBackButton = true)
         {
             InitializeComponent();
 
@@ -283,7 +265,7 @@ namespace ScreenToGif.Windows.Other
 
             #endregion
         }
-        
+
         private void Window_StateChanged(object sender, EventArgs e)
         {
             //TODO: Detect that the window was minimized before. E01
@@ -575,7 +557,7 @@ namespace ScreenToGif.Windows.Other
         }
 
         #endregion
-        
+
         #region Methods
 
         protected override void OnKeyDown(KeyEventArgs e)
@@ -599,7 +581,7 @@ namespace ScreenToGif.Windows.Other
         {
             SelectControl.Mode = mode;
             SelectControl.BackImage = CaptureBackground();
-            
+
             //Reset the values.
             SelectControl.Scale = _scale;
             SelectControl.Retry();
@@ -670,7 +652,7 @@ namespace ScreenToGif.Windows.Other
         private BitmapSource CaptureBackground()
         {
             //A 7 pixel border is added to allow the crop by the magnifying glass.
-            return Native.CaptureBitmapSource((int)Math.Round((Width + 14) * _scale), (int)Math.Round((Height + 14) * _scale), 
+            return Native.CaptureBitmapSource((int)Math.Round((Width + 14) * _scale), (int)Math.Round((Height + 14) * _scale),
                 (int)Math.Round((Left - 7) * _scale), (int)Math.Round((Top - 7) * _scale));
         }
 
@@ -875,8 +857,7 @@ namespace ScreenToGif.Windows.Other
 
                     await Task.Delay(100);
 
-                    ExitArg = ExitAction.Recorded;
-                    DialogResult = false;
+                    Close();
 
                     #endregion
                 }

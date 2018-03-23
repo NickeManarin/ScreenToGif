@@ -6,7 +6,7 @@ using System.Windows.Shapes;
 
 namespace ScreenToGif.Controls
 {
-    class CircularProgressBar : ProgressBar
+    internal class CircularProgressBar : ProgressBar
     {
         #region Variables
 
@@ -27,38 +27,38 @@ namespace ScreenToGif.Controls
 
         public double Radius
         {
-            get { return (double)GetValue(RadiusProperty); }
-            set { SetValue(RadiusProperty, value); }
+            get => (double)GetValue(RadiusProperty);
+            set => SetValue(RadiusProperty, value);
         }
 
         public Brush SegmentColor
         {
-            get { return (Brush)GetValue(SegmentColorProperty); }
-            set { SetValue(SegmentColorProperty, value); }
+            get => (Brush)GetValue(SegmentColorProperty);
+            set => SetValue(SegmentColorProperty, value);
         }
 
         public double StrokeThickness
         {
-            get { return (double)GetValue(StrokeThicknessProperty); }
-            set { SetValue(StrokeThicknessProperty, value); }
+            get => (double)GetValue(StrokeThicknessProperty);
+            set => SetValue(StrokeThicknessProperty, value);
         }
 
         public double Percentage
         {
-            get { return (double)GetValue(PercentageProperty); }
-            set { SetValue(PercentageProperty, value); }
+            get => (double)GetValue(PercentageProperty);
+            set => SetValue(PercentageProperty, value);
         }
 
         public double Angle
         {
-            get { return (double)GetValue(AngleProperty); }
-            set { SetValue(AngleProperty, value); }
+            get => (double)GetValue(AngleProperty);
+            set => SetValue(AngleProperty, value);
         }
 
         public bool IsInverted
         {
-            get { return (bool)GetValue(IsInvertedProperty); }
-            set { SetValue(IsInvertedProperty, value); }
+            get => (bool)GetValue(IsInvertedProperty);
+            set => SetValue(IsInvertedProperty, value);
         }
 
         #endregion
@@ -86,7 +86,7 @@ namespace ScreenToGif.Controls
             _pathFigure = Template.FindName("PathFigure", this) as PathFigure;
             _arcSegment = Template.FindName("ArcSegment", this) as ArcSegment;
 
-            if (Percentage == 0)
+            if (Math.Abs(Percentage) < 0.001)
             {
                 if (IsInverted)
                     Percentage = Math.Abs(100F * (Value - 1) / (Maximum - Minimum) - 100F);
@@ -114,7 +114,9 @@ namespace ScreenToGif.Controls
         private static void OnPercentageChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
         {
             var circle = sender as CircularProgressBar;
-            circle.Angle = (circle.Percentage * 360) / 100;
+
+            if (circle != null)
+                circle.Angle = (circle.Percentage * 360) / 100;
         }
 
         private static void OnPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
@@ -129,8 +131,8 @@ namespace ScreenToGif.Controls
 
         public void RenderArc()
         {
-            Point startPoint = new Point(Radius, 0);
-            Point endPoint = ComputeCartesianCoordinate(Angle, Radius);
+            var startPoint = new Point(Radius, 0);
+            var endPoint = ComputeCartesianCoordinate(Angle, Radius);
             endPoint.X += Radius;
             endPoint.Y += Radius;
 
@@ -141,9 +143,9 @@ namespace ScreenToGif.Controls
                 _pathRoot.Margin = new Thickness(StrokeThickness, StrokeThickness, 0, 0);
             }
 
-            bool largeArc = Angle > 180.0;
+            var largeArc = Angle > 180.0;
 
-            Size outerArcSize = new Size(Radius, Radius);
+            var outerArcSize = new Size(Radius, Radius);
 
             if (_pathFigure != null)
                 _pathFigure.StartPoint = startPoint;
@@ -162,10 +164,10 @@ namespace ScreenToGif.Controls
         private Point ComputeCartesianCoordinate(double angle, double radius)
         {
             //Convert to radians
-            double angleRad = (Math.PI / 180.0) * (angle - 90);
+            var angleRad = (Math.PI / 180.0) * (angle - 90);
 
-            double x = radius * Math.Cos(angleRad);
-            double y = radius * Math.Sin(angleRad);
+            var x = radius * Math.Cos(angleRad);
+            var y = radius * Math.Sin(angleRad);
 
             return new Point(x, y);
         }

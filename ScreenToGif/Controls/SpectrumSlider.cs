@@ -43,8 +43,8 @@ namespace ScreenToGif.Controls
         /// </summary>
         public Color SelectedColor
         {
-            get { return (Color)GetValue(SelectedColorProperty); }
-            set { SetValue(SelectedColorProperty, value); }
+            get => (Color)GetValue(SelectedColorProperty);
+            set => SetValue(SelectedColorProperty, value);
         }
 
         #endregion
@@ -105,7 +105,7 @@ namespace ScreenToGif.Controls
         protected override void OnValueChanged(double oldValue, double newValue)
         {
             base.OnValueChanged(oldValue, newValue);
-            Color theColor = ColorExtensions.ConvertHsvToRgb(360 - newValue, 1, 1, 255);
+            var theColor = ColorExtensions.ConvertHsvToRgb(360 - newValue, 1, 1, 255);
             SetValue(SelectedColorProperty, theColor);
         }
 
@@ -116,9 +116,7 @@ namespace ScreenToGif.Controls
         private void UpdateColorSpectrum()
         {
             if (_spectrumRectangle != null)
-            {
                 CreateSpectrum();
-            }
         }
 
         private void CreateSpectrum()
@@ -128,14 +126,12 @@ namespace ScreenToGif.Controls
             _pickerBrush.EndPoint = new Point(0.5, 1);
             _pickerBrush.ColorInterpolationMode = ColorInterpolationMode.SRgbLinearInterpolation;
 
-            List<Color> colorsList = ColorExtensions.GenerateHsvSpectrum();
-            double stopIncrement = (double)1 / colorsList.Count;
+            var colorsList = ColorExtensions.GenerateHsvSpectrum();
+            var stopIncrement = (double)1 / colorsList.Count;
 
             int i;
             for (i = 0; i < colorsList.Count; i++)
-            {
                 _pickerBrush.GradientStops.Add(new GradientStop(colorsList[i], i * stopIncrement));
-            }
 
             _pickerBrush.GradientStops[i - 1].Offset = 1.0;
             _spectrumRectangle.Fill = _pickerBrush;
@@ -165,7 +161,7 @@ namespace ScreenToGif.Controls
         }
     }
 
-    #endregion HsvColor
+    #endregion
 
     #region ColorThumb
 
@@ -197,41 +193,22 @@ namespace ScreenToGif.Controls
         /// </summary>
         public Color ThumbColor
         {
-            get
-            {
-                return (Color)GetValue(ThumbColorProperty);
-            }
-            set
-            {
-
-                SetValue(ThumbColorProperty, value);
-            }
+            get => (Color)GetValue(ThumbColorProperty);
+            set => SetValue(ThumbColorProperty, value);
         }
 
         public double PointerOutlineThickness
         {
-            get
-            {
-                return (double)GetValue(PointerOutlineThicknessProperty);
-            }
-            set
-            {
-                SetValue(PointerOutlineThicknessProperty, value);
-            }
+            get => (double)GetValue(PointerOutlineThicknessProperty);
+            set => SetValue(PointerOutlineThicknessProperty, value);
         }
 
         public Brush PointerOutlineBrush
         {
-            get
-            {
-                return (Brush)GetValue(PointerOutlineBrushProperty);
-            }
-            set
-            {
-                SetValue(PointerOutlineBrushProperty, value);
-            }
+            get => (Brush)GetValue(PointerOutlineBrushProperty);
+            set => SetValue(PointerOutlineBrushProperty, value);
         }
     }
 
-    #endregion ColorThumb
+    #endregion
 }

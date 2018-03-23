@@ -41,6 +41,7 @@
     <!--Options Page-->
     <s:String x:Key="Title.Options">Screen To Gif - Ayarlar</s:String>
     <s:String x:Key="Application">Uygulama</s:String>
+    <s:String x:Key="S.Shortcuts">Klavye Kısayolları</s:String>
     <s:String x:Key="Interface">Arayüz</s:String>
     <s:String x:Key="Image">Görüntü</s:String>
     <s:String x:Key="Language">Dil</s:String>
@@ -70,12 +71,11 @@
     <!--<s:String x:Key="Application.ScreenRecorder.AsyncRecording">Enable asynchronous recording.</s:String>-->
     <!--<s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(It helps reduce the interface lag when recording)</s:String>-->
     
-    <s:String x:Key="Application.Shortcuts">Klavye Kısayolları</s:String>
-    <s:String x:Key="Application.Shortcuts.StartPause">Başlat/Duraklat:</s:String>
-    <s:String x:Key="Application.Shortcuts.Stop">Durdur:</s:String>
-
     <s:String x:Key="Application.Other">Diğer</s:String>
     <!--<s:String x:Key="Application.Other.CheckForUpdates">Check for updates.</s:String>-->
+    
+    <s:String x:Key="S.Shortcuts.Recorders.StartPause">Başlat/Duraklat:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Stop">Durdur:</s:String>
     
     <s:String x:Key="Interface.EditorBackground">Editör Arkaplanı</s:String>
     <!--<s:String x:Key="Interface.Recorder">Recorder theme</s:String>-->

@@ -42,8 +42,8 @@ namespace ScreenToGif.Controls
         [Description("The header of the tooltip.")]
         public string Header
         {
-            get { return (string)GetValue(HeaderProperty); }
-            set { SetCurrentValue(HeaderProperty, value); }
+            get => (string)GetValue(HeaderProperty);
+            set => SetCurrentValue(HeaderProperty, value);
         }
 
         /// <summary>
@@ -52,8 +52,8 @@ namespace ScreenToGif.Controls
         [Description("The text of the description.")]
         public string Text
         {
-            get { return (string)GetValue(TextProperty); }
-            set { SetCurrentValue(TextProperty, value); }
+            get => (string)GetValue(TextProperty);
+            set => SetCurrentValue(TextProperty, value);
         }
 
         /// <summary>
@@ -62,8 +62,8 @@ namespace ScreenToGif.Controls
         [Description("The text alignment of the description.")]
         public TextAlignment TextAlignment
         {
-            get { return (TextAlignment)GetValue(TextAlignmentProperty); }
-            set { SetCurrentValue(TextAlignmentProperty, value); }
+            get => (TextAlignment)GetValue(TextAlignmentProperty);
+            set => SetCurrentValue(TextAlignmentProperty, value);
         }
 
         /// <summary>
@@ -72,8 +72,8 @@ namespace ScreenToGif.Controls
         [Description("The Image of the Tooltip.")]
         public UIElement Image
         {
-            get { return (UIElement)GetValue(ImageProperty); }
-            set { SetCurrentValue(ImageProperty, value); }
+            get => (UIElement)GetValue(ImageProperty);
+            set => SetCurrentValue(ImageProperty, value);
         }
 
         /// <summary>
@@ -82,16 +82,13 @@ namespace ScreenToGif.Controls
         [Description("The maximum size of the image.")]
         public double MaxSize
         {
-            get { return (double)GetValue(MaxSizeProperty); }
-            set { SetCurrentValue(MaxSizeProperty, value); }
+            get => (double)GetValue(MaxSizeProperty);
+            set => SetCurrentValue(MaxSizeProperty, value);
         }
 
         public Collection<Inline> Inlines
         {
-            get
-            {
-                return _inlines;
-            }
+            get => _inlines;
             set
             {
                 _inlines = value;

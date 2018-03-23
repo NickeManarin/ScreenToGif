@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
@@ -29,22 +28,22 @@ namespace ScreenToGif.Controls
         [Bindable(true), Category("Common")]
         public string ShortName
         {
-            get { return (string)GetValue(ShortNameProperty); }
-            private set { SetValue(ShortNameProperty, value); }
+            get => (string)GetValue(ShortNameProperty);
+            private set => SetValue(ShortNameProperty, value);
         }
 
         [Bindable(true), Category("Common")]
         public string Attachment
         {
-            get { return (string)GetValue(AttachmentProperty); }
-            private set { SetValue(AttachmentProperty, value); }
+            get => (string)GetValue(AttachmentProperty);
+            private set => SetValue(AttachmentProperty, value);
         }
 
         [Bindable(true), Category("Common")]
         public BitmapSource FileIcon
         {
-            get { return (BitmapSource)GetValue(FileIconProperty); }
-            private set { SetValue(FileIconProperty, value); }
+            get => (BitmapSource)GetValue(FileIconProperty);
+            private set => SetValue(FileIconProperty, value);
         }
 
         #endregion

@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:s="clr-namespace:System;assembly=mscorlib"
-                    xmlns:u="clr-namespace:ScreenToGif.Util">
+                    xmlns:u="clr-namespace:ScreenToGif.Util"
+                    xmlns:c="clr-namespace:System.Collections;assembly=mscorlib">
 
     <!--ScreenToGif default configuration resource dictionary-->
     <!--Empty String values are suppressed to avoid exceptions-->
@@ -20,18 +21,14 @@
     <s:Boolean x:Key="AsyncRecording">False</s:Boolean>
     <s:Boolean x:Key="NewRecorder">False</s:Boolean>
     <s:Boolean x:Key="Magnifier">True</s:Boolean>
-    <Key x:Key="StartPauseShortcut">F7</Key>
-    <ModifierKeys x:Key="StartPauseModifiers" xml:space="preserve"></ModifierKeys>
-    <Key x:Key="StopShortcut">F8</Key>
-    <ModifierKeys x:Key="StopModifiers" xml:space="preserve"></ModifierKeys>
-    <Key x:Key="DiscardShortcut">F9</Key>
-    <ModifierKeys x:Key="DiscardModifiers" xml:space="preserve"></ModifierKeys>
-    <s:Boolean x:Key="CheckForUpdates">True</s:Boolean>
+    <s:Boolean x:Key="ShowNotificationIcon">True</s:Boolean>
+    <s:Boolean x:Key="KeepOpen">False</s:Boolean>
     <s:Boolean x:Key="NotifyFrameDeletion">True</s:Boolean>
     <s:Boolean x:Key="NotifyProjectDiscard">True</s:Boolean>
     <s:Boolean x:Key="NotifyWhileClosingEditor">True</s:Boolean>
     <s:Boolean x:Key="DrawOutlineOutside">True</s:Boolean>
-    
+    <s:Boolean x:Key="CheckForUpdates">True</s:Boolean>
+
     <!--Options • Interface-->
     <Rect x:Key="GridSize">0,0,20,20</Rect>
     <Color x:Key="GridColor1">#FFF5F5F5</Color>
@@ -48,6 +45,26 @@
     <s:Boolean x:Key="AutomaticallySizeOnContent">False</s:Boolean>
     <s:Boolean x:Key="AutomaticallyFitImage">True</s:Boolean>
 
+    <!--Options • Shortcuts-->
+    <Key x:Key="RecorderShortcut">None</Key>
+    <ModifierKeys x:Key="RecorderModifiers" xml:space="preserve">Alt</ModifierKeys>
+    <Key x:Key="WebcamRecorderShortcut">None</Key>
+    <ModifierKeys x:Key="WebcamRecorderModifiers" xml:space="preserve"></ModifierKeys>
+    <Key x:Key="BoardRecorderShortcut">None</Key>
+    <ModifierKeys x:Key="BoardRecorderModifiers" xml:space="preserve"></ModifierKeys>
+    <Key x:Key="EditorShortcut">None</Key>
+    <ModifierKeys x:Key="EditorModifiers" xml:space="preserve"></ModifierKeys>
+    <Key x:Key="OptionsShortcut">None</Key>
+    <ModifierKeys x:Key="OptionsModifiers" xml:space="preserve"></ModifierKeys>
+    <Key x:Key="ExitShortcut">None</Key>
+    <ModifierKeys x:Key="ExitModifiers" xml:space="preserve"></ModifierKeys>
+    <Key x:Key="StartPauseShortcut">F7</Key>
+    <ModifierKeys x:Key="StartPauseModifiers" xml:space="preserve"></ModifierKeys>
+    <Key x:Key="StopShortcut">F8</Key>
+    <ModifierKeys x:Key="StopModifiers" xml:space="preserve"></ModifierKeys>
+    <Key x:Key="DiscardShortcut">F9</Key>
+    <ModifierKeys x:Key="DiscardModifiers" xml:space="preserve"></ModifierKeys>
+    
     <!--Options • Language-->
     <s:String x:Key="LanguageCode">auto</s:String>
 
@@ -59,6 +76,35 @@
     <s:Boolean x:Key="AutomaticCleanUp">True</s:Boolean>
     <s:Int32 x:Key="AutomaticCleanUpDays">5</s:Int32>
 
+    <!--Options • Cloud-->
+    <u:ProxyType x:Key="ProxyMode">Disabled</u:ProxyType>
+    <!--<s:String x:Key="ProxyHost"></s:String>-->
+    <s:Int32 x:Key="ProxyPort">0</s:Int32>
+    <!--<s:String x:Key="ProxyUsername"></s:String>-->
+    <!--<s:String x:Key="ProxyPassword"></s:String>-->
+
+    <s:Boolean x:Key="ImgurAnonymousUseDirectLinks">True</s:Boolean>
+    <s:Boolean x:Key="ImgurAnonymousUseGifvLink">False</s:Boolean>
+    
+    <!--<s:String x:Key="ImgurOAuthToken"></s:String>-->
+    <!--<s:String x:Key="ImgurAccessToken"></s:String>-->
+    <!--<s:String x:Key="ImgurRefreshToken"></s:String>-->
+    <!--<DateTime x:Key="ImgurExpireDate">(Nullable)</DateTime>-->
+    <s:Boolean x:Key="ImgurUseDirectLinks">True</s:Boolean>
+    <s:Boolean x:Key="ImgurUseGifvLink">False</s:Boolean>
+    <s:Boolean x:Key="ImgurUploadToAlbum">False</s:Boolean>
+    <!--<s:String x:Key="ImgurSelectedAlbum"></s:String>-->
+    <c:ArrayList x:Key="ImgurAlbumList"></c:ArrayList>
+
+    <!--<s:String x:Key="YandexDiskOAuthToken"></s:String>-->
+
+    <!--Startup-->
+    <s:Double x:Key="StartupTop">NaN</s:Double>
+    <s:Double x:Key="StartupLeft">NaN</s:Double>
+    <s:Double x:Key="StartupWidth">NaN</s:Double>
+    <s:Double x:Key="StartupHeight">NaN</s:Double>
+    <WindowState x:Key="StartupWindowState">Normal</WindowState>
+    
     <!--Recorder-->
     <s:Int32 x:Key="RecorderWidth">518</s:Int32>
     <s:Int32 x:Key="RecorderHeight">269</s:Int32>
@@ -82,8 +128,8 @@
     <StylusTip x:Key="BoardEraserStylusTip">Rectangle</StylusTip>
 
     <!--Editor-->
-    <s:Double x:Key="EditorTop">-1.0</s:Double>
-    <s:Double x:Key="EditorLeft">-1.0</s:Double>
+    <s:Double x:Key="EditorTop">NaN</s:Double>
+    <s:Double x:Key="EditorLeft">NaN</s:Double>
     <s:Double x:Key="EditorWidth">NaN</s:Double>
     <s:Double x:Key="EditorHeight">NaN</s:Double>
     <WindowState x:Key="EditorWindowState">Normal</WindowState>
@@ -125,7 +171,7 @@
     <s:Boolean x:Key="OverwriteOnSave">False</s:Boolean>
     <s:Boolean x:Key="SaveAsProjectToo">False</s:Boolean>
     <s:Boolean x:Key="UploadFile">False</s:Boolean>
-    <s:Int32 x:Key="LatestUploadIndex">0</s:Int32>
+    <u:UploadService x:Key="LatestUploadService">None</u:UploadService>
     <s:Boolean x:Key="SaveToClipboard">False</s:Boolean>
     <u:CopyType x:Key="LatestCopyType">FilePath</u:CopyType>
     <s:Boolean x:Key="ExecuteCustomCommands">False</s:Boolean>
@@ -186,7 +232,12 @@
 
     <!--Editor • Save As > Images > Save options-->
     <s:Boolean x:Key="OverwriteOnSaveImages">False</s:Boolean>
-    
+
+    <!--Editor • Save As > Photoshop-->
+    <!--<s:String x:Key="LatestPhotoshopOutputFolder"></s:String>-->
+    <!--<s:String x:Key="LatestPhotoshopFilename"></s:String>-->
+    <s:String x:Key="LatestPhotoshopExtension">.psd</s:String>
+
     <!--Editor • Reduce Frame Count-->
     <s:Int32 x:Key="ReduceFactor">1</s:Int32>
     <s:Int32 x:Key="ReduceCount">1</s:Int32>

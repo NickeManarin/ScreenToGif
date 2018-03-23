@@ -216,8 +216,12 @@ namespace ScreenToGif.Controls
         {
             //Shows only a white foreground when: 
 
-         
+            //var color = Glass.GlassColor;
+            //var ness = Glass.GlassColor.GetBrightness();
+            //var aa = color.ConvertRgbToHsv();
+
             var darkForeground = !SystemParameters.IsGlassEnabled || !Other.IsWin8OrHigher() || Glass.GlassColor.GetBrightness() > 973 || !isActivated;           
+            //var darkForeground = !SystemParameters.IsGlassEnabled || !Other.IsWin8OrHigher() || aa.V > 0.5 || !isActivated;           
             var showBackground = !Other.IsWin8OrHigher();
 
             //Console.WriteLine("!IsGlassEnabled: " + !SystemParameters.IsGlassEnabled);

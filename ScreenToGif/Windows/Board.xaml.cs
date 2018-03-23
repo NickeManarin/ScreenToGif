@@ -6,7 +6,6 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using ScreenToGif.FileWriters;
 using ScreenToGif.ImageUtil;
 using ScreenToGif.Util;
 using ScreenToGif.Util.Model;
@@ -28,19 +27,6 @@ namespace ScreenToGif.Windows
 
         #region Variables
 
-        #region Flags
-
-        /// <summary>
-        /// The actual stage of the program.
-        /// </summary>
-        public Stage Stage { get; set; }
-
-        /// <summary>
-        /// The action to be executed after closing this Window.
-        /// </summary>
-        public ExitAction ExitArg = ExitAction.Return;
-
-        #endregion
 
         #region Counters
 
@@ -50,11 +36,6 @@ namespace ScreenToGif.Windows
         private int? _snapDelay = null;
 
         #endregion
-
-        /// <summary>
-        /// The project information about the current recording.
-        /// </summary>
-        internal ProjectInfo Project { get; set; }
 
         /// <summary>
         /// The DPI of the current screen.
@@ -73,12 +54,12 @@ namespace ScreenToGif.Windows
 
         #region Inicialization
 
-        public Board(bool hideBackButton = false)
+        public Board(bool hideBackButton = true)
         {
             InitializeComponent();
 
             BackVisibility = hideBackButton ? Visibility.Collapsed : Visibility.Visible;
-            
+
             //Load
             _capture.Tick += Normal_Elapsed;
 
@@ -96,8 +77,8 @@ namespace ScreenToGif.Windows
         {
             _dpi = this.Dpi();
 
-            WidthIntegerBox.Scale = _dpi/96d;
-            HeightIntegerBox.Scale = _dpi/96d;
+            WidthIntegerBox.Scale = _dpi / 96d;
+            HeightIntegerBox.Scale = _dpi / 96d;
         }
 
         #endregion
@@ -116,7 +97,7 @@ namespace ScreenToGif.Windows
 
             using (var stream = new FileStream(fileName, FileMode.Create))
             {
-                var encoder = new BmpBitmapEncoder();
+                var encoder = new PngBitmapEncoder();
                 encoder.Frames.Add(BitmapFrame.Create(bitmap));
                 encoder.Save(stream);
                 stream.Flush();
@@ -245,17 +226,17 @@ namespace ScreenToGif.Windows
 
                     //if (!Settings.Default.Snapshot)
                     //{
-                        #region Normal Recording
+                    #region Normal Recording
 
-                        _capture.Tick += Normal_Elapsed;
-                        //Normal_Elapsed(null, null);
-                        _capture.Start();
+                    _capture.Tick += Normal_Elapsed;
+                    //Normal_Elapsed(null, null);
+                    _capture.Start();
 
-                        Stage = Stage.Recording;
+                    Stage = Stage.Recording;
 
-                        AutoFitButtons();
+                    AutoFitButtons();
 
-                        #endregion
+                    #endregion
                     //}
                     //else
                     //{
@@ -335,12 +316,7 @@ namespace ScreenToGif.Windows
 
                 if (Stage != Stage.Stopped && Stage != Stage.PreStarting && Project.Any)
                 {
-                    #region Stop
-
-                    ExitArg = ExitAction.Recorded;
-                    DialogResult = false;
-
-                    #endregion
+                    Close();
                 }
                 else if ((Stage == Stage.PreStarting || Stage == Stage.Snapping) && !Project.Any)
                 {
@@ -477,12 +453,12 @@ namespace ScreenToGif.Windows
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
+            Close();
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = false;
+            Close();
         }
 
         #endregion

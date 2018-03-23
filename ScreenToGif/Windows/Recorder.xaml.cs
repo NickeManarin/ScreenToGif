@@ -45,11 +45,6 @@ namespace ScreenToGif.Windows
         private Task<Image> _captureTask;
 
         /// <summary>
-        /// The project information about the current recording.
-        /// </summary>
-        internal ProjectInfo Project { get; set; }
-
-        /// <summary>
         /// Lists of pressed keys.
         /// </summary>
         private readonly List<SimpleKeyGesture> _keyList = new List<SimpleKeyGesture>();
@@ -86,26 +81,10 @@ namespace ScreenToGif.Windows
 
         #region Flags
 
-        public static readonly DependencyProperty StageProperty = DependencyProperty.Register("Stage", typeof(Stage), typeof(Recorder), new FrameworkPropertyMetadata(Stage.Stopped));
-
-        /// <summary>
-        /// The actual stage of the program.
-        /// </summary>
-        public Stage Stage
-        {
-            get => (Stage)GetValue(StageProperty);
-            set => SetValue(StageProperty, value);
-        }
-
         /// <summary>
         /// Indicates when the user is mouse-clicking.
         /// </summary>
         private bool _recordClicked = false;
-
-        /// <summary>
-        /// The action to be executed after closing this Window.
-        /// </summary>
-        public ExitAction ExitArg = ExitAction.Return;
 
         /// <summary>
         /// The delay of each frame took as snapshot.
@@ -128,7 +107,7 @@ namespace ScreenToGif.Windows
 
         #region Inicialization
 
-        public Recorder(bool hideBackButton = false)
+        public Recorder(bool hideBackButton = true)
         {
             InitializeComponent();
 
@@ -138,11 +117,9 @@ namespace ScreenToGif.Windows
 
             #region Adjust the position
 
+            //Tries to adjust the position/size of the window, centers on screen otherwise.
             if (!UpdatePositioning())
-            {
-                //If this is the first time opening the window (or someone reset the settings), let it center on the screen.
                 WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            }
 
             #endregion
 
@@ -171,7 +148,7 @@ namespace ScreenToGif.Windows
             #endregion
         }
 
-        private async void Recorder_Loaded(object sender, RoutedEventArgs e)
+        private void Recorder_Loaded(object sender, RoutedEventArgs e)
         {
             #region If Snapshot
 
@@ -179,8 +156,6 @@ namespace ScreenToGif.Windows
                 EnableSnapshot_Executed(null, null);
 
             #endregion
-
-            await Task.Factory.StartNew(UpdateScreenDpi);
 
             #region Timer
 
@@ -590,12 +565,12 @@ namespace ScreenToGif.Windows
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
+            Close();
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = false;
+            Close();
         }
 
         #endregion
@@ -945,8 +920,6 @@ namespace ScreenToGif.Windows
 
                     await Task.Delay(100);
 
-                    ExitArg = ExitAction.Recorded;
-                    //DialogResult = false;
                     Close();
 
                     #endregion
@@ -1095,12 +1068,12 @@ namespace ScreenToGif.Windows
 
         private async void Window_LocationChanged(object sender, EventArgs e)
         {
-            _left = (int)Math.Round((Math.Round(Left, MidpointRounding.AwayFromZero) + Constants.LeftOffset) * _scale);
-            _top = (int)Math.Round((Math.Round(Top, MidpointRounding.AwayFromZero) + Constants.TopOffset) * _scale);
-
             //TestTextBlock.Text = $"{_left};{_top}";
 
             await Task.Factory.StartNew(UpdateScreenDpi);
+
+            _left = (int)Math.Round((Math.Round(Left, MidpointRounding.AwayFromZero) + Constants.LeftOffset) * _scale);
+            _top = (int)Math.Round((Math.Round(Top, MidpointRounding.AwayFromZero) + Constants.TopOffset) * _scale);
         }
 
         private void System_PowerModeChanged(object sender, PowerModeChangedEventArgs e)

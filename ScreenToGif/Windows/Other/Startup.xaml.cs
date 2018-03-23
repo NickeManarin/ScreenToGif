@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -21,163 +22,27 @@ namespace ScreenToGif.Windows.Other
         public Startup()
         {
             InitializeComponent();
+
+            #region Adjust the position
+
+            //Tries to adjust the position/size of the window, centers on screen otherwise.
+            if (!UpdatePositioning())
+                WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+            #endregion
         }
 
         #region Events
 
-        private void Startup_OnLoaded(object sender, RoutedEventArgs e)
+        private void Startup_Loaded(object sender, RoutedEventArgs e)
         {
-            if (Argument.FileNames.Any())
-                Editor_Executed(sender, null);
-
             if (UserSettings.All.CheckForUpdates)
                 CheckLatestRelease();
-        }
-
-        private void Buttons_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
         }
 
         private void Update_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = _newRelease != null;
-        }
-        
-        private void Recorder_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            if (UserSettings.All.NewRecorder)
-            {
-                var recorderNew = new RecorderNew(false) { Owner = this };
-                Application.Current.MainWindow = recorderNew;
-
-                Hide();
-
-                var result2 = recorderNew.ShowDialog();
-
-                if (result2.HasValue && result2.Value)
-                {
-                    //If to close.
-                    Environment.Exit(0);
-                }
-                else if (result2.HasValue)
-                {
-                    #region If Backbutton or Stop Clicked
-
-                    if (recorderNew.ExitArg == ExitAction.Recorded)
-                    {
-                        var editor = new Editor { Project = recorderNew.Project };
-
-                        GenericShowDialog(editor);
-                        return;
-                    }
-
-                    Show();
-
-                    #endregion
-                }
-
-                return;
-            }
-
-            var recorder = new Recorder { Owner = this };
-            Application.Current.MainWindow = recorder;
-
-            Hide();
-
-            var result = recorder.ShowDialog();
-
-            if (result.HasValue && result.Value)
-            {
-                //If to close.
-                Environment.Exit(0);
-            }
-            else if (result.HasValue)
-            {
-                #region If Backbutton or Stop Clicked
-
-                if (recorder.ExitArg == ExitAction.Recorded)
-                {
-                    var editor = new Editor { Project = recorder.Project };
-
-                    GenericShowDialog(editor);
-                    return;
-                }
-
-                Show();
-
-                #endregion
-            }
-        }
-
-        private void WebcamRecorder_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            var webcam = new Webcam { Owner = this };
-            Application.Current.MainWindow = webcam;
-
-            Hide();
-
-            var result = webcam.ShowDialog();
-
-            if (result.HasValue && result.Value)
-            {
-                //If to close.
-                Environment.Exit(0);
-            }
-            else if (result.HasValue)
-            {
-                #region If Backbutton or Stop Clicked
-
-                if (webcam.ExitArg == ExitAction.Recorded)
-                {
-                    var editor = new Editor { Project = webcam.Project };
-
-                    GenericShowDialog(editor);
-                    return;
-                }
-
-                Show();
-
-                #endregion
-            }
-        }
-
-        private void Board_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            var board = new Board { Owner = this };
-            Application.Current.MainWindow = board;
-
-            Hide();
-
-            var result = board.ShowDialog();
-
-            if (result.HasValue && result.Value)
-            {
-                // If Close
-                Environment.Exit(0);
-            }
-            else if (result.HasValue)
-            {
-                #region If Backbutton or Stop Clicked
-
-                if (board.ExitArg == ExitAction.Recorded)
-                {
-                    var editor = new Editor { Project = board.Project };
-
-                    GenericShowDialog(editor);
-                    return;
-                }
-
-                Show();
-
-                #endregion
-            }
-        }
-
-        private void Editor_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            var editor = new Editor();
-            GenericShowDialog(editor);
         }
 
         private void Update_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -192,38 +57,25 @@ namespace ScreenToGif.Windows.Other
 
             if (result.HasValue && result.Value)
             {
-                if (Dialog.Ask("Screen To Gif", FindResource("Update.CloseThis").ToString(), FindResource("Update.CloseThis.Detail").ToString()))
+                if (Dialog.Ask("ScreenToGif", FindResource("Update.CloseThis").ToString(), FindResource("Update.CloseThis.Detail").ToString()))
                     Environment.Exit(25);
             }
         }
-        
-        private void Options_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            var options = new Options { Owner = this };
-            options.ShowDialog();
-        }
 
-        private void TestButton_OnClick(object sender, RoutedEventArgs e)
+        private void Startup_Closing(object sender, CancelEventArgs e)
         {
-            var test = new TestField();
-            test.ShowDialog();
+            //Manually get the position/size of the window, so it's possible opening multiple instances.
+            UserSettings.All.StartupTop = Top;
+            UserSettings.All.StartupLeft = Left;
+            UserSettings.All.StartupWidth = Width;
+            UserSettings.All.StartupHeight = Height;
+            UserSettings.All.StartupWindowState = WindowState;
+            UserSettings.Save();
         }
 
         #endregion
 
         #region Methods
-
-        private void GenericShowDialog(Window window)
-        {
-            Hide();
-
-            window.Owner = this;
-            Application.Current.MainWindow = window;
-
-            window.ShowDialog();
-
-            Close();
-        }
 
         private async void CheckLatestRelease()
         {
@@ -231,6 +83,7 @@ namespace ScreenToGif.Windows.Other
             {
                 var request = (HttpWebRequest)WebRequest.Create("https://api.github.com/repos/NickeManarin/ScreenToGif/releases/latest");
                 request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
+                request.Proxy = WebHelper.GetProxy();
 
                 var response = (HttpWebResponse) await request.GetResponseAsync();
 
@@ -276,6 +129,47 @@ namespace ScreenToGif.Windows.Other
             }
 
             GC.Collect();
+        }
+
+        private bool UpdatePositioning()
+        {
+            var top = UserSettings.All.StartupTop;
+            var left = UserSettings.All.StartupLeft;
+
+            //If the position was never set, let it center on screen. 
+            if (double.IsNaN(top) && double.IsNaN(left))
+                return false;
+
+            //The catch here is to get the closest monitor from current Top/Left point. 
+            var monitors = Monitor.AllMonitorsScaled(this.Scale());
+            var closest = monitors.FirstOrDefault(x => x.Bounds.Contains(new System.Windows.Point((int)left, (int)top))) ?? monitors.FirstOrDefault(x => x.IsPrimary);
+
+            if (closest == null)
+                return false;
+
+            //To much to the Left.
+            if (closest.WorkingArea.Left > UserSettings.All.StartupLeft + UserSettings.All.StartupWidth - 100)
+                left = closest.WorkingArea.Left;
+
+            //Too much to the top.
+            if (closest.WorkingArea.Top > UserSettings.All.StartupTop + UserSettings.All.StartupHeight - 100)
+                top = closest.WorkingArea.Top;
+
+            //Too much to the right.
+            if (closest.WorkingArea.Right < UserSettings.All.StartupLeft + 100)
+                left = closest.WorkingArea.Right - UserSettings.All.StartupWidth;
+
+            //Too much to the bottom.
+            if (closest.WorkingArea.Bottom < UserSettings.All.StartupTop + 100)
+                top = closest.WorkingArea.Bottom - UserSettings.All.StartupHeight;
+
+            Top = top;
+            Left = left;
+            Width = UserSettings.All.StartupWidth;
+            Height = UserSettings.All.StartupHeight;
+            WindowState = UserSettings.All.StartupWindowState;
+
+            return true;
         }
 
         #endregion

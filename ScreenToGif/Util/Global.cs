@@ -4,6 +4,9 @@ namespace ScreenToGif.Util
 {
     internal static class Global
     {
+        private static string _assemblyShortName;
+
+
         /// <summary>
         /// Helper method for generating a "pack://" URI for a given relative file based on the
         /// assembly that this class is in.
@@ -18,20 +21,29 @@ namespace ScreenToGif.Util
         {
             get
             {
-                if (_assemblyShortName == null)
-                {
-                    var a = typeof(Global).Assembly;
+                if (_assemblyShortName != null)
+                    return _assemblyShortName;
 
-                    // Pull out the short name.
-                    _assemblyShortName = a.ToString().Split(',')[0];
-                }
+                var a = typeof(Global).Assembly;
+
+                //Pull out the short name.
+                _assemblyShortName = a.ToString().Split(',')[0];
 
                 return _assemblyShortName;
             }
         }
 
-        private static string _assemblyShortName;
-
         public static DateTime StartupDateTime { get; set; }
+
+        /// <summary>
+        /// When it's true, the global shortcuts won't work.
+        /// </summary>
+        public static bool IgnoreHotKeys { get; set; }
+
+        /// <summary>
+        /// When it's true, the hotfix with the bug is installed.
+        /// https://github.com/dotnet/announcements/issues/53
+        /// </summary>
+        public static bool IsHotFix4055002Installed { get; set; }
     }
 }

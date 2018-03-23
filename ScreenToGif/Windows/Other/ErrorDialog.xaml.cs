@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -162,7 +163,7 @@ namespace ScreenToGif.Windows.Other
             if (feedback.ShowDialog() != true)
                 return;
 
-            var editor = Application.Current.MainWindow as Editor;
+            var editor = Application.Current?.Windows.OfType<Editor>().FirstOrDefault();
 
             if (editor != null)
                 await editor.SendFeedback();

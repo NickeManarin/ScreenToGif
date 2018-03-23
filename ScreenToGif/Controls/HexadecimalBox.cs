@@ -27,32 +27,32 @@ namespace ScreenToGif.Controls
 
         public int Red
         {
-            get { return (int)GetValue(RedProperty); }
-            set { SetValue(RedProperty, value); }
+            get => (int)GetValue(RedProperty);
+            set => SetValue(RedProperty, value);
         }
 
         public int Blue
         {
-            get { return (int)GetValue(BlueProperty); }
-            set { SetValue(BlueProperty, value); }
+            get => (int)GetValue(BlueProperty);
+            set => SetValue(BlueProperty, value);
         }
 
         public int Green
         {
-            get { return (int)GetValue(GreenProperty); }
-            set { SetValue(GreenProperty, value); }
+            get => (int)GetValue(GreenProperty);
+            set => SetValue(GreenProperty, value);
         }
 
         public int Alpha
         {
-            get { return (int)GetValue(AlphaProperty); }
-            set { SetValue(AlphaProperty, value); }
+            get => (int)GetValue(AlphaProperty);
+            set => SetValue(AlphaProperty, value);
         }
 
         public bool DisplayGlyph
         {
-            get { return (bool)GetValue(DisplayGlyphProperty); }
-            set { SetValue(DisplayGlyphProperty, value); }
+            get => (bool)GetValue(DisplayGlyphProperty);
+            set => SetValue(DisplayGlyphProperty, value);
         }
 
         #endregion
@@ -66,8 +66,6 @@ namespace ScreenToGif.Controls
 
             hexaBox.Text = $"{(hexaBox.DisplayGlyph ? "#" : "")}{hexaBox.Alpha:X2}{hexaBox.Red:X2}{hexaBox.Green:X2}{hexaBox.Blue:X2}";
         }
-
-        //input validation, 
 
         static HexadecimalBox()
         {

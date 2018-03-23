@@ -26,6 +26,8 @@ namespace ScreenToGif.Controls
         private ScaleTransform _scaleTransform;
         private Grid _grid;
 
+        private double _previousZoom = 1d;
+
         #endregion
 
         #region Dependency Properties
@@ -58,7 +60,7 @@ namespace ScreenToGif.Controls
             get => (string)GetValue(ImageSourceProperty);
             set => SetValue(ImageSourceProperty, value);
         }
-
+        
         /// <summary>
         /// The zoom level of the control.
         /// </summary>
@@ -183,6 +185,8 @@ namespace ScreenToGif.Controls
 
             if (!(e.NewValue is double value))
                 return;
+
+            box._previousZoom = e.OldValue as double? ?? 1;
 
             //Maximum and minimum.
             if (value < 0.1)
@@ -370,6 +374,23 @@ namespace ScreenToGif.Controls
             //var tt = GetTranslateTransform(_child);
             //tt.X = 0.0;
             //tt.Y = 0.0;
+        }
+
+        /// <summary>
+        /// Returns to the previous selected zoom.
+        /// </summary>
+        public void ResetToPrevious()
+        {
+            //Resets the zoom.
+            Zoom = _previousZoom;
+        }
+
+        /// <summary>
+        /// Sets the current zoom as the previous zoom.
+        /// </summary>
+        public void SetZoomAsPrevious()
+        {
+            _previousZoom = Zoom;
         }
 
         /// <summary>

@@ -2,21 +2,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         xmlns:u="clr-namespace:ScreenToGif.Util"
-        xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
         xmlns:s="clr-namespace:System;assembly=mscorlib"
         x:Class="ScreenToGif.Windows.Other.TestField" x:Name="ThisWindow"
         Title="Window Test" Height="500" Width="394" WindowStartupLocation="CenterScreen" Background="#FFFFFFFF" 
         Loaded="WindowTest_OnLoaded" LocationChanged="WindowTest_OnLocationChanged">
-
-    <Window.Resources>
-        <c:RoutedCommandToInputGestureTextConverter x:Key="CommandToInputGestureTextConverter"/>
-    </Window.Resources>
-
-    <Window.CommandBindings>
-        <CommandBinding Command="Print" CanExecute="CanExecute" Executed="Print_Executed"/>
-        <CommandBinding Command="Copy" CanExecute="CanExecute" Executed="Copy_Executed"/>
-        <CommandBinding Command="Save" CanExecute="CanExecute" Executed="Save_Executed"/>
-    </Window.CommandBindings>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -110,5 +99,8 @@
             <TextBox x:Name="InputTextBox" Margin="10,10,65,10" TextWrapping="Wrap" Text="M 1.81,7 C1.81,7 0,7 0,7 0,7 3.18,3.5 3.18,3.5 3.18,3.5 0,0 0,0 0,0 1.81,0 1.81,0 1.81,0 5,3.5 5,3.5 5,3.5 1.81,7 1.81,7 z" Grid.Row="1"/>
             <Button x:Name="RefreshButton" Content="Update" Margin="0,10,5,0" Grid.Row="1" Height="20" VerticalAlignment="Top" Click="RefreshButton_Click" HorizontalAlignment="Right" Width="55"/>
         </Grid>-->
+
+        <!--<n:KeyBox Grid.Row="2" Grid.Column="0" x:Name="DiscardKeyBox" Height="23" Margin="3" VerticalAlignment="Center" 
+                  MainKey="A" ModifierKeys="Control"/>-->
     </Grid>
 </Window>

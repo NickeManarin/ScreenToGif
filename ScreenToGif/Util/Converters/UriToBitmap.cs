@@ -16,7 +16,7 @@ namespace ScreenToGif.Util.Converters
             var size = parameter as string;
 
             if (string.IsNullOrEmpty(stringValue))
-                return null; 
+                return null;
 
             if (!File.Exists(stringValue))
                 return null;
@@ -24,7 +24,12 @@ namespace ScreenToGif.Util.Converters
             if (!string.IsNullOrEmpty(size))
                 return stringValue.SourceFrom(System.Convert.ToInt32(size));
 
-            return stringValue.SourceFrom();
+            var image = stringValue.SourceFrom();
+
+            if (image.PixelWidth < 3)
+                image = stringValue.SourceFrom();
+
+            return image;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

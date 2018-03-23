@@ -13,7 +13,7 @@ namespace ScreenToGif.Controls
     /// <summary>
     /// Light Window used by the Recorder.
     /// </summary>
-    public class LightWindow : Window
+    public class LightWindow : RecorderWindow
     {
         #region Dependency Property
 
@@ -154,21 +154,19 @@ namespace ScreenToGif.Controls
             {
                 WindowState = WindowState.Maximized;
 
-                var button = sender as Button;
-                if (button != null) button.Content = FindResource("Vector.Restore");
+                if (sender is Button button) button.Content = FindResource("Vector.Restore");
             }
             else
             {
                 WindowState = WindowState.Normal;
 
-                var button = sender as Button;
-                if (button != null) button.Content = FindResource("Vector.Maximize");
+                if (sender is Button button) button.Content = FindResource("Vector.Maximize");
             }
         }
 
         private void CloseClick(object sender, RoutedEventArgs e)
         {
-            DialogResult = true;
+            Close();
         }
 
         #endregion
@@ -177,29 +175,22 @@ namespace ScreenToGif.Controls
 
         public override void OnApplyTemplate()
         {
-            var backButton = GetTemplateChild("BackButton") as ImageButton;
-            if (backButton != null)
+            if (GetTemplateChild("BackButton") is ImageButton backButton)
                 backButton.Click += BackClick;
 
-            var minimizeButton = GetTemplateChild("MinimizeButton") as Button;
-            if (minimizeButton != null)
+            if (GetTemplateChild("MinimizeButton") is Button minimizeButton)
                 minimizeButton.Click += MinimizeClick;
 
-            var closeButton = GetTemplateChild("CloseButton") as Button;
-            if (closeButton != null)
+            if (GetTemplateChild("CloseButton") is Button closeButton)
                 closeButton.Click += CloseClick;
 
-            var moveGrid = GetTemplateChild("MoveGrid") as Grid;
-            if (moveGrid != null)
+            if (GetTemplateChild("MoveGrid") is Grid moveGrid)
                 moveGrid.PreviewMouseDown += MoveGrid_PreviewMouseDown;
 
-            var resizeGrid = GetTemplateChild("MainGrid") as Grid;
-            if (resizeGrid != null)
+            if (GetTemplateChild("MainGrid") is Grid resizeGrid)
             {
                 foreach (var element in resizeGrid.Children.OfType<Rectangle>())
-                {
                     element.PreviewMouseDown += ResizeRectangle_PreviewMouseDown;
-                }
             }
 
             base.OnApplyTemplate();
@@ -237,9 +228,7 @@ namespace ScreenToGif.Controls
         {
             if (e.ChangedButton != MouseButton.Left) return;
 
-            var rectangle = sender as Rectangle;
-
-            if (rectangle == null) return;
+            if (!(sender is Rectangle rectangle)) return;
 
             switch (rectangle.Name)
             {

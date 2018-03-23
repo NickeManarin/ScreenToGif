@@ -1,14 +1,14 @@
-﻿<Window x:Class="ScreenToGif.Windows.Other.RecorderNew"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:n="clr-namespace:ScreenToGif.Controls"
-        xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
-        xmlns:u="clr-namespace:ScreenToGif.Util"
-        x:Name="GhostWindow" Title="ScreenToGif" Height="Auto" Width="Auto" 
-        WindowStyle="None" AllowsTransparency="True" Topmost="True" ResizeMode="NoResize"
-        UseLayoutRounding="True" SnapsToDevicePixels="True" Background="Transparent"
-        Foreground="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderForeground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}"
-        Loaded="Window_Loaded" StateChanged="Window_StateChanged" Closing="Window_Closing">
+﻿<n:RecorderWindow x:Class="ScreenToGif.Windows.Other.RecorderNew"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:n="clr-namespace:ScreenToGif.Controls"
+                  xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
+                  xmlns:u="clr-namespace:ScreenToGif.Util"
+                  x:Name="GhostWindow" Title="ScreenToGif" Height="Auto" Width="Auto" 
+                  WindowStyle="None" AllowsTransparency="True" Topmost="True" ResizeMode="NoResize"
+                  UseLayoutRounding="True" SnapsToDevicePixels="True" Background="Transparent"
+                  Foreground="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderForeground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}"
+                  Loaded="Window_Loaded" StateChanged="Window_StateChanged" Closing="Window_Closing">
 
     <Window.CommandBindings>
         <CommandBinding Command="u:Commands.Options" CanExecute="Options_CanExecute" Executed="Options_Executed"/>
@@ -219,4 +219,4 @@
             </Canvas>
         </n:AdornedControl>
     </AdornerDecorator>
-</Window>
+</n:RecorderWindow>

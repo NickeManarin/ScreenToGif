@@ -8,12 +8,12 @@ namespace ScreenToGif.Util.Converters
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            return value.Equals(parameter) ? Visibility.Visible : Visibility.Collapsed;
+            return value?.Equals(parameter) == true ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            return value.Equals(Visibility.Visible) ? parameter : Binding.DoNothing;
+            return value?.Equals(Visibility.Visible) == true ? parameter : Binding.DoNothing;
         }
     }
 }

@@ -83,12 +83,6 @@
     <s:String x:Key="Application.ScreenRecorder.Magnifier">Włącz powiększanie ekranu.</s:String>
     <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(Włącza powiększanie ekranu podczas wybierania obszaru nagrywania)</s:String>
     
-    <s:String x:Key="Application.Shortcuts">Skróty klawiszowe</s:String>
-    <s:String x:Key="Application.Shortcuts.StartPause">Start/Pauza:</s:String>
-    <s:String x:Key="Application.Shortcuts.Stop">Stop:</s:String>
-    <s:String x:Key="Application.Shortcuts.Discard">Odrzuć:</s:String>
-    <s:String x:Key="Application.Shortcuts.Info">Kliknij aby zacząć monitorować klawiaturę, a następnie naciśnij żądane klawisze i modyfikatory. Niektóre kombinacje klawiszy są niedozwolone.</s:String>
-
     <s:String x:Key="Application.Other">Inne</s:String>
     <s:String x:Key="Application.Other.NotifyFrameDeletion">Potwierdź przed usunięciem klatek.</s:String>
     <s:String x:Key="Application.Other.NotifyProjectDiscard">Potwierdź przed odrzuceniem projektu.</s:String>
@@ -132,6 +126,11 @@
     <!--<s:String x:Key="Interface.Other.AutomaticallySizeOnContent">Automatically adjust the window size based on the frame size, right after loading.</s:String>-->
     <!--<s:String x:Key="Interface.Other.AutomaticallyFitImage">Automatically adjust the frame zoom based on the window size, right after loading.</s:String>-->
   
+    <s:String x:Key="S.Shortcuts.Recorders.StartPause">Start/Pauza:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Stop">Stop:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Discard">Odrzuć:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Info">Kliknij aby zacząć monitorować klawiaturę, a następnie naciśnij żądane klawisze i modyfikatory.&#10;Niektóre kombinacje klawiszy są niedozwolone.</s:String>
+    
     <s:String x:Key="Language.AppLanguage">Język aplikacji</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect">Wykryj automatycznie</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect.Author">Obecny język systemu (jeżeli dostępny)</s:String>
@@ -172,7 +171,7 @@
     <!--<s:String x:Key="TempFiles.LowSpace">Low on space on the current configurated hard drive. Please, clean the temp folder or change the location.</s:String>-->
     
     <!--<s:String x:Key="S.Upload.Yandex.Token">OAuth token:</s:String>-->
-    <!--<s:String x:Key="S.Upload.Yandex.Get">Get OAuth token</s:String>-->
+    <!--<s:String x:Key="S.Upload.Get">Get OAuth token</s:String>-->
     
     <s:String x:Key="Extras.External">Dostępne zewnętrzne narzędzia</s:String>
     <s:String x:Key="Extras.Download">Kliknij tutaj by pobrać&#x0d;{0}</s:String>

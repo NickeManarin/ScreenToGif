@@ -10,11 +10,6 @@
         xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
         x:Name="EditorWindow" Title="{DynamicResource Editor.Title}" MinHeight="500" MinWidth="700" 
         Background="#FFF1F1F1" UseLayoutRounding="True" Icon="/Resources/Logo.ico"
-        Left="{Binding Source={x:Static u:UserSettings.All}, Path=EditorLeft, Mode=TwoWay}" 
-        Top="{Binding Source={x:Static u:UserSettings.All}, Path=EditorTop, Mode=TwoWay}"
-        Height="{Binding Source={x:Static u:UserSettings.All}, Path=EditorHeight}" 
-        Width="{Binding Source={x:Static u:UserSettings.All}, Path=EditorWidth}"
-        WindowState="{Binding Source={x:Static u:UserSettings.All}, Path=EditorWindowState}"
         FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}"
         Loaded="Window_Loaded" Closing="Window_Closing" Activated="Window_Activated" KeyUp="Window_KeyUp" Deactivated="Window_Deactivated">
 
@@ -179,6 +174,18 @@
             </ObjectAnimationUsingKeyFrames>
         </Storyboard>
 
+        <Storyboard x:Key="ShowPermanentHintStoryboard">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HintStackPanel" Storyboard.TargetProperty="Visibility" Duration="0:0:0" >
+                <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" KeyTime="0:0:0"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <DoubleAnimation Storyboard.TargetName="HintStackPanel" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:1.5">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase Power="8" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
         <Storyboard x:Key="HideHintStoryboard">
             <DoubleAnimation Storyboard.TargetName="HintStackPanel" Storyboard.TargetProperty="(Grid.Opacity)" From="{Binding ElementName=HintStackPanel,Path=Opacity}" To="0" Duration="0:0:1">
                 <DoubleAnimation.EasingFunction>
@@ -211,18 +218,18 @@
         <CommandBinding Command="u:Commands.NewRecording" CanExecute="NewRecording_CanExecute" Executed="NewRecording_Executed"/>
         <CommandBinding Command="u:Commands.NewWebcamRecording" CanExecute="NewRecording_CanExecute" Executed="NewWebcamRecording_Executed"/>
         <CommandBinding Command="u:Commands.NewBoardRecording" CanExecute="NewRecording_CanExecute" Executed="NewBoardRecording_Executed"/>
-        <CommandBinding Command="u:Commands.NewAnimation" CanExecute="NewRecording_CanExecute" Executed="NewProject_Executed"/>
+        <CommandBinding Command="u:Commands.NewAnimation" CanExecute="NewProject_CanExecute" Executed="NewProject_Executed"/>
 
         <!--Insert-->
         <CommandBinding Command="u:Commands.InsertRecording" CanExecute="Insert_CanExecute" Executed="InsertRecording_Executed"/>
         <CommandBinding Command="u:Commands.InsertWebcamRecording" CanExecute="Insert_CanExecute" Executed="InsertWebcamRecording_Executed"/>
         <CommandBinding Command="u:Commands.InsertBoardRecording" CanExecute="Insert_CanExecute" Executed="InsertBoardRecording_Executed"/>
-        <CommandBinding Command="u:Commands.InsertFromMedia" CanExecute="Insert_CanExecute" Executed="InsertFromMedia_Executed"/>
+        <CommandBinding Command="u:Commands.InsertFromMedia" CanExecute="InsertFromMedia_CanExecute" Executed="InsertFromMedia_Executed"/>
 
         <!--File-->
         <CommandBinding Command="u:Commands.SaveAs" CanExecute="File_CanExecute" Executed="SaveAs_Executed"/>
-        <CommandBinding Command="u:Commands.Load" CanExecute="NewRecording_CanExecute" Executed="Load_Executed"/>
-        <CommandBinding Command="u:Commands.LoadRecent" CanExecute="NewRecording_CanExecute" Executed="LoadRecent_Executed"/>
+        <CommandBinding Command="u:Commands.Load" CanExecute="NewProject_CanExecute" Executed="Load_Executed"/>
+        <CommandBinding Command="u:Commands.LoadRecent" CanExecute="NewProject_CanExecute" Executed="LoadRecent_Executed"/>
         <CommandBinding Command="u:Commands.DiscardProject" CanExecute="File_CanExecute" Executed="DiscardProject_Executed"/>
 
         <!--Action Stack-->
@@ -1667,6 +1674,10 @@
                                     <n:ImageRadioButton Grid.Row="2" Grid.Column="0" x:Name="ImagesRadioButton" Content="{StaticResource Vector.ImageStack}" Text="{DynamicResource S.SaveAs.Images}" 
                                                         IsChecked="{Binding SaveType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:Export.Images}}"
                                                         Checked="SaveType_Checked"/>
+
+                                    <!--<n:ImageRadioButton Grid.Row="2" Grid.Column="1" x:Name="PsdRadioButton" Content="{StaticResource Vector.ImageStack}" Text="{DynamicResource S.SaveAs.Psd}" 
+                                                        IsChecked="{Binding SaveType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:Export.Photoshop}}"
+                                                        Checked="SaveType_Checked"/>-->
                                 </Grid>
                             </Expander>
 
@@ -1710,10 +1721,8 @@
                             </WrapPanel>
 
 
-                            <Label Grid.Row="3" Content="{DynamicResource S.SaveAs.ImagesOptions}" Style="{StaticResource LabelSeparator}" Height="27" 
-                                   Visibility="{Binding ElementName=ImagesRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}"/>
-                            <WrapPanel Grid.Row="4" Margin="10,0,0,0" Orientation="Vertical"
-                                       Visibility="{Binding ElementName=ImagesRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}">
+                            <n:LabelSeparator Grid.Row="3" Text="{DynamicResource S.SaveAs.ImagesOptions}" Height="27" Visibility="{Binding ElementName=ImagesRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}"/>
+                            <WrapPanel Grid.Row="4" Margin="10,0,0,0" Orientation="Vertical" Visibility="{Binding ElementName=ImagesRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}">
                                 <n:ExtendedCheckBox x:Name="ZipImagesCheckBox" Text="{DynamicResource S.SaveAs.ImageOptions.Zip}"
                                                     IsChecked="{Binding ZipImages, Source={x:Static u:UserSettings.All}}" Margin="3"
                                                     Checked="SaveType_Checked" Unchecked="SaveType_Checked"/>
@@ -1969,12 +1978,14 @@
                                                 <ColumnDefinition Width="30"/>
                                             </Grid.ColumnDefinitions>
 
-                                            <ComboBox Grid.Column="0" Name="UploadComboBox" Margin="20,3,3,3" Height="23" ToolTip="{DynamicResource S.SaveAs.SaveOptions.UploadDestination}"
-                                                      SelectedIndex="{Binding Source={x:Static u:UserSettings.All}, Path=LatestUploadIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                      Visibility="{Binding IsChecked, ElementName=UploadFileCheckBox, Converter={StaticResource Bool2Visibility}}">
-                                                <ComboBoxItem>Imgur</ComboBoxItem>
-                                                <ComboBoxItem>Gfycat</ComboBoxItem>
-                                                <ComboBoxItem>YandexDisk</ComboBoxItem>
+                                            <ComboBox Grid.Column="0" Name="UploadComboBox" Margin="20,3,3,3" Height="23" SelectedValuePath="Tag"
+                                                      SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=LatestUploadService, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                      Visibility="{Binding IsChecked, ElementName=UploadFileCheckBox, Converter={StaticResource Bool2Visibility}}" ToolTip="{DynamicResource S.SaveAs.SaveOptions.UploadDestination}">
+                                                <ComboBoxItem Tag="{x:Static u:UploadService.None}" Content="{DynamicResource S.Upload.Pick.Destination}"/>
+                                                <ComboBoxItem Tag="{x:Static u:UploadService.ImgurAnonymous}" Content="{DynamicResource S.Upload.Imgur.Anonymous}"/>
+                                                <ComboBoxItem Tag="{x:Static u:UploadService.Imgur}" Content="Imgur"/>
+                                                <ComboBoxItem Tag="{x:Static u:UploadService.GyfcatAnonymous}" Content="{DynamicResource S.Upload.Gyfcat.Anonymous}"/>
+                                                <ComboBoxItem Tag="{x:Static u:UploadService.Yandex}" Content="YandexDisk"/>
                                             </ComboBox>
                                         </Grid>
 
@@ -2342,7 +2353,7 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="{DynamicResource Recent.Projects}" Margin="5,0" Padding="0,5" Style="{StaticResource LabelSeparator}"/>
+                            <n:LabelSeparator Grid.Row="0" Text="{DynamicResource Recent.Projects}" Margin="5,0" Padding="0,5"/>
                             <DataGrid Grid.Row="1" x:Name="RecentDataGrid" Margin="10,5,5,5" MinHeight="60" SelectionMode="Single" SelectionUnit="FullRow" MouseDoubleClick="RecentDataGrid_MouseDoubleClick" PreviewKeyDown="RecentDataGrid_PreviewKeyDown">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="{DynamicResource Recent.CreationDate}" Width="*" IsReadOnly="True" Binding="{Binding Path=CreationDate, UpdateSourceTrigger=PropertyChanged, StringFormat='{}{0:G}', ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}"/>

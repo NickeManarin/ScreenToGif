@@ -5,15 +5,22 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
+using ScreenToGif.Util;
 
 namespace ScreenToGif.Cloud
 {
     public class Gfycat : ICloud
     {
-        public async Task<UploadedFile> UploadFileAsync(string path, CancellationToken cancellationToken,
-            IProgress<double> progressCallback = null)
+        public async Task<UploadedFile> UploadFileAsync(string path, CancellationToken cancellationToken, IProgress<double> progressCallback = null)
         {
-            using (var client = new HttpClient())
+            var handler = new HttpClientHandler
+            {
+                Proxy = WebHelper.GetProxy(),
+                PreAuthenticate = true,
+                UseDefaultCredentials = false,
+            };
+
+            using (var client = new HttpClient(handler))
             {
                 using (var res = await client.PostAsync(@"https://api.gfycat.com/v1/gfycats", null, cancellationToken))
                 {
@@ -59,7 +66,7 @@ namespace ScreenToGif.Cloud
                             }
 
                             if (res2.IsSuccessStatusCode)
-                                return new UploadedFile() {Link = "https://gfycat.com/" + name};
+                                return new UploadedFile {Link = "https://gfycat.com/" + name};
                         }
                     }
                 }

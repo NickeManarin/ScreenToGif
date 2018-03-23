@@ -233,34 +233,40 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:ImageButton}">
-                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
+                    <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
+                        <Border x:Name="InnerBorder" Background="Transparent">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
 
-                            <Viewbox Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,3" 
+                                <Viewbox Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,3" 
                                      Width="{TemplateBinding ContentWidth}" Height="{TemplateBinding ContentHeight}" Stretch="UniformToFill" StretchDirection="Both" Effect="{x:Null}">
-                                <ContentPresenter ContentSource="{TemplateBinding Content}"/>
-                            </Viewbox>
+                                    <ContentPresenter ContentSource="{TemplateBinding Content}"/>
+                                </Viewbox>
 
-                            <TextBlock Grid.Row="0" Grid.Column="1" x:Name="TextBlockInternal" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource TemplatedParent}}"
+                                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="TextBlockInternal" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource TemplatedParent}}"
                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" Foreground="{TemplateBinding Foreground}"
                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text}" TextWrapping="{TemplateBinding TextWrapping}" Effect="{TemplateBinding Effect}"/>
 
-                            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="KeyGestureTextBlock" Text="{TemplateBinding KeyGesture}" Foreground="#FF5D5D5D" FontSize="10" HorizontalAlignment="Center" 
+                                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="KeyGestureTextBlock" Text="{TemplateBinding KeyGesture}" Foreground="#FF5D5D5D" FontSize="10" HorizontalAlignment="Center" 
                                        Margin="0" Padding="0" Height="12"/>
-                        </Grid>
+                            </Grid>
+                        </Border>
                     </Border>
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="KeyGesture" Value="{x:Static s:String.Empty}">
                             <Setter TargetName="KeyGestureTextBlock" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter TargetName="MainBorder" Property="Margin" Value="-1"/>
+                            <Setter TargetName="InnerBorder" Property="Background" Value="#AACDE6F7"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -269,17 +275,20 @@
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#FFD5E1F2" />
+                <Setter Property="Background" Value="#AAD5E1F2" />
                 <Setter Property="BorderBrush" Value="#FFA3BDE3" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Background" Value="#FFA3BDE3" />
+                <Setter Property="Background" Value="#99A3BDE3" />
                 <Setter Property="BorderBrush" Value="#FF2A8DD4" />
             </Trigger>
+            <Trigger Property="IsKeyboardFocused" Value="True">
+                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                <Setter Property="BorderThickness" Value="1.5"/>
+                <Setter Property="BorderBrush" Value="#FF2A9BD4"/>
+            </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <!--<Setter Property="Foreground" Value="#FFB1B1B1" />-->
                 <Setter Property="Background" Value="#FFFDFDFD" />
-                <!--<Setter Property="BorderBrush" Value="#FFE1E1E1" />-->
                 <Setter Property="Opacity" Value=".6"/>
                 <Setter Property="Effect" Value="{x:Null}"/>
             </Trigger>
@@ -520,7 +529,7 @@
         </Style.Triggers>
     </Style>
 
-    <!--Double Numeric Up Down-->
+    <!--Double Up Down-->
     <Style TargetType="{x:Type n:DoubleUpDown}">
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -628,7 +637,7 @@
                                        Padding="2,0" VerticalAlignment="Center" Visibility="Collapsed"/>
                         </Grid>
                     </Border>
-                    
+
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Opacity" Value="0.56"/>
@@ -661,7 +670,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        
+
         <Style.Triggers>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
@@ -730,7 +739,7 @@
         <Setter Property="Background" Value="White"/>
         <Setter Property="BorderBrush" Value="#FFABABAB"/>
         <Setter Property="Focusable" Value="True"/>
-        <Setter Property="ToolTip" Value="{DynamicResource Application.Shortcuts.Info}"/>
+        <Setter Property="ToolTip" Value="{DynamicResource S.Shortcuts.Info}"/>
 
         <Setter Property="Template">
             <Setter.Value>
@@ -739,25 +748,29 @@
                             Height="{TemplateBinding Height}" MinWidth="{TemplateBinding MinWidth}" MinHeight="{TemplateBinding MinHeight}" 
                             Background="{TemplateBinding Background}" VerticalAlignment="{TemplateBinding VerticalAlignment}"
                             HorizontalAlignment="{TemplateBinding HorizontalAlignment}" SnapsToDevicePixels="True" Focusable="True">
-                        <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Focusable="True">
+                        <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition x:Name="AltColumn" Width="Auto"/>
-                                <ColumnDefinition x:Name="ControlColumn" Width="Auto"/>
-                                <ColumnDefinition x:Name="ShiftColumn" Width="Auto"/>
-                                <ColumnDefinition x:Name="WindowsColumn" Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Column="0" x:Name="AltTextBlock" Text="Alt +" Margin="2,0" IsHitTestVisible="False" Visibility="Collapsed"/>
-                            <TextBlock Grid.Column="1" x:Name="CtrlTextBlock" Text="Control +" Margin="2,0" IsHitTestVisible="False" Visibility="Collapsed"/>
-                            <TextBlock Grid.Column="2" x:Name="ShiftTextBlock" Text="Shift +" Margin="2,0" IsHitTestVisible="False" Visibility="Collapsed"/>
-                            <TextBlock Grid.Column="3" x:Name="WindowsTextBlock" Text="Windows +" Margin="2,0" IsHitTestVisible="False" Visibility="Collapsed"/>
+                            <TextBlock Grid.Column="1" x:Name="AltTextBlock" Text="Alt +" Margin="2,0" VerticalAlignment="Center" IsHitTestVisible="False" Visibility="Collapsed"/>
+                            <TextBlock Grid.Column="2" x:Name="CtrlTextBlock" Text="Control +" Margin="2,0" VerticalAlignment="Center" IsHitTestVisible="False" Visibility="Collapsed"/>
+                            <TextBlock Grid.Column="3" x:Name="ShiftTextBlock" Text="Shift +" Margin="2,0" VerticalAlignment="Center" IsHitTestVisible="False" Visibility="Collapsed"/>
+                            <TextBlock Grid.Column="4" x:Name="WindowsTextBlock" Text="Windows +" Margin="2,0" VerticalAlignment="Center" IsHitTestVisible="False" Visibility="Collapsed"/>
 
-                            <TextBlock Grid.Column="4" x:Name="KeyTextBlock" Text="{TemplateBinding MainKey, Converter={StaticResource KeysToString}}" Margin="2,0"
-                                       HorizontalAlignment="Center" IsHitTestVisible="False"/>
-
-                            <TextBlock Grid.Column="0" Grid.ColumnSpan="5" x:Name="CompleteKeyTextBlock" Text="{TemplateBinding Text}" Margin="2,0" 
+                            <TextBlock Grid.Column="0" Grid.ColumnSpan="8" x:Name="CompleteKeyTextBlock" Text="{TemplateBinding Text}" Margin="2,0" 
                                        VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" IsHitTestVisible="False" Visibility="Collapsed"/>
+
+                            <n:ImageButton Grid.Column="8" x:Name="RemoveButton" Content="{DynamicResource Vector.Close}" Style="{DynamicResource Style.Button.NoText.Border}" 
+                                           ContentWidth="12" Width="16" Margin="1,0,0,0" BorderThickness="1,0,0,0" Height="23" ToolTip="{DynamicResource KeyStrokes.Edit.Remove}"/>
                         </Grid>
                     </Border>
 
@@ -776,7 +789,6 @@
                         </Trigger>
                         <Trigger Property="IsSelectionFinished" Value="True">
                             <Setter TargetName="CompleteKeyTextBlock" Property="Visibility" Value="Visible"/>
-                            <Setter TargetName="KeyTextBlock" Property="Visibility" Value="Collapsed"/>
                             <Setter TargetName="AltTextBlock" Property="Visibility" Value="Collapsed"/>
                             <Setter TargetName="CtrlTextBlock" Property="Visibility" Value="Collapsed"/>
                             <Setter TargetName="ShiftTextBlock" Property="Visibility" Value="Collapsed"/>
@@ -1634,19 +1646,16 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:ZoomBox}">
-                    <ScrollViewer x:Name="ScrollViewer" ClipToBounds="True" Background="Transparent" SnapsToDevicePixels="True" UseLayoutRounding="True"
-                                  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" >
-                        <Grid x:Name="Grid" RenderTransformOrigin="0.5,0.5" Background="Transparent" 
-                              HorizontalAlignment="Center" VerticalAlignment="Center" SnapsToDevicePixels="True" UseLayoutRounding="True">
+                    <ScrollViewer x:Name="ScrollViewer" ClipToBounds="True" Background="Transparent" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" >
+                        <Grid x:Name="Grid" RenderTransformOrigin="0.5,0.5" Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Grid.LayoutTransform>
                                 <TransformGroup>
                                     <ScaleTransform x:Name="ScaleTransform"/>
                                 </TransformGroup>
                             </Grid.LayoutTransform>
 
-                            <Viewbox Grid.Column="0" Grid.Row="0" SnapsToDevicePixels="True" UseLayoutRounding="True">
-                                <Image x:Name="ImageControl" Source="{TemplateBinding ImageSource, Converter={StaticResource UriToBitmapConverter}}" 
-                                       SnapsToDevicePixels="True" UseLayoutRounding="True"/>
+                            <Viewbox Grid.Column="0" Grid.Row="0">
+                                <Image x:Name="ImageControl" RenderOptions.BitmapScalingMode="NearestNeighbor" Source="{TemplateBinding ImageSource, Converter={StaticResource UriToBitmapConverter}}"/>
                             </Viewbox>
                         </Grid>
                     </ScrollViewer>
@@ -1755,7 +1764,7 @@
                                         <PowerEase Power="8" />
                                     </DoubleAnimation.EasingFunction>
                                 </DoubleAnimation>
-                                
+
                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Grid.Visibility)" Duration="0:0:0.5">
                                     <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" KeyTime="0:0:0.2"/>
                                 </ObjectAnimationUsingKeyFrames>
@@ -1776,6 +1785,10 @@
                                         <PowerEase Power="8" />
                                     </DoubleAnimation.EasingFunction>
                                 </DoubleAnimation>
+
+                                <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(Grid.IsHitTestVisible)" Duration="0:0:0.0">
+                                    <DiscreteBooleanKeyFrame Value="True" KeyTime="0:0:0.0"/>
+                                </BooleanAnimationUsingKeyFrames>
                             </Storyboard>
                         </Grid.Resources>
 

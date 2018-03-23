@@ -175,10 +175,7 @@ namespace ScreenToGif.Webcam.DirectX
         /// <exception cref="ArgumentException">If no video device is provided.</exception>
         public CaptureWebcam(Filter videoDevice)
         {
-            if (videoDevice == null)
-                throw new ArgumentException("The videoDevice parameter must be set to a valid Filter.\n");
-
-            VideoDevice = videoDevice;
+            VideoDevice = videoDevice ?? throw new ArgumentException("The videoDevice parameter must be set to a valid Filter.\n");
 
             CreateGraph();
         }

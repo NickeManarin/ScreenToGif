@@ -83,12 +83,6 @@
     <!--<s:String x:Key="Application.ScreenRecorder.Magnifier">Enable the screen magnifier.</s:String>-->
     <!--<s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(It enables a magnifier while selecting the recording area)</s:String>-->
     
-    <s:String x:Key="Application.Shortcuts">Raccourcis clavier</s:String>
-    <s:String x:Key="Application.Shortcuts.StartPause">Démarrer/Pause:</s:String>
-    <s:String x:Key="Application.Shortcuts.Stop">Stop:</s:String>
-    <!--<s:String x:Key="Application.Shortcuts.Discard">Discard:</s:String>-->
-    <!--<s:String x:Key="Application.Shortcuts.Info">Click to set keyboard focus, after that, press the desired keys and modifiers. Some keys combinations are not allowed.</s:String>-->
-
     <s:String x:Key="Application.Other">Autre</s:String>
     <!--<s:String x:Key="Application.Other.NotifyFrameDeletion">Ask me before deleting frames.</s:String>-->
     <!--<s:String x:Key="Application.Other.NotifyProjectDiscard">Ask me before discarding a project.</s:String>-->
@@ -132,6 +126,11 @@
     <!--<s:String x:Key="Interface.Other.AutomaticallySizeOnContent">Automatically adjust the window size based on the frame size, right after loading.</s:String>-->
     <!--<s:String x:Key="Interface.Other.AutomaticallyFitImage">Automatically adjust the frame zoom based on the window size, right after loading.</s:String>-->
   
+    <s:String x:Key="S.Shortcuts.Recorders.StartPause">Démarrer/Pause:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Stop">Stop:</s:String>
+    <!--<s:String x:Key="S.Shortcuts.Recorders.Discard">Discard:</s:String>-->
+    <!--<s:String x:Key="S.Shortcuts.Recorders.Info">Click to set keyboard focus, after that, press the desired keys and modifiers. Some keys combinations are not allowed.</s:String>-->
+
     <s:String x:Key="Language.AppLanguage">Langue de l'application</s:String>
     <!--<s:String x:Key="Language.AppLanguage.AutoDetect">Auto detect</s:String>-->
     <!--<s:String x:Key="Language.AppLanguage.AutoDetect.Author">Current OS language (if available)</s:String>-->

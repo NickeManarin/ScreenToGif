@@ -50,6 +50,7 @@
     <!--Options Page-->
     <s:String x:Key="Title.Options">ScreenToGif - 选项</s:String>
     <s:String x:Key="Application">应用程序</s:String>
+    <s:String x:Key="S.Shortcuts">键盘快捷键</s:String>
     <s:String x:Key="Interface">界面</s:String>
     <s:String x:Key="Image">图像</s:String>
     <s:String x:Key="Language">语言</s:String>
@@ -85,12 +86,6 @@
     <s:String x:Key="Application.ScreenRecorder.Magnifier">启用屏幕放大镜</s:String>
     <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">（在选择录制区域时启用放大镜）</s:String>
     
-    <s:String x:Key="Application.Shortcuts">键盘快捷键</s:String>
-    <s:String x:Key="Application.Shortcuts.StartPause">开始/暂停：</s:String>
-    <s:String x:Key="Application.Shortcuts.Stop">停止：</s:String>
-    <s:String x:Key="Application.Shortcuts.Discard">放弃：</s:String>
-    <s:String x:Key="Application.Shortcuts.Info">在此处鼠标右键单击后,按下所需的修饰键(ctrl/alt/shift)和主按键来修改快捷键。有些组合键不可使用。</s:String>
-
     <s:String x:Key="Application.Other">其它</s:String>
     <s:String x:Key="Application.Other.NotifyFrameDeletion">删除帧前询问我</s:String>
     <s:String x:Key="Application.Other.NotifyProjectDiscard">放弃项目前询问我</s:String>
@@ -134,6 +129,11 @@
     <s:String x:Key="Interface.Other.AutomaticallySizeOnContent">加载后根据帧大小自动调整窗口大小</s:String>
     <s:String x:Key="Interface.Other.AutomaticallyFitImage">加载后根据窗口大小自动调整帧缩放级别</s:String>
   
+    <s:String x:Key="S.Shortcuts.Recorders.StartPause">开始/暂停：</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Stop">停止：</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Discard">放弃：</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Info">在此处鼠标右键单击后,按下所需的修饰键(ctrl/alt/shift)和主按键来修改快捷键。有些组合键不可使用。</s:String>
+
     <s:String x:Key="Language.AppLanguage">应用程序语言</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect">自动检测</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect.Author">当前操作系统语言（如果可用）</s:String>

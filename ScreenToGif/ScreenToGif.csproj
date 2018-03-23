@@ -53,7 +53,8 @@
     </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\ScreenToGif.XML</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
@@ -74,8 +75,11 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -98,6 +102,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Cloud\ICloud.cs" />
+    <Compile Include="Cloud\Imgur\ImgurAlbum.cs" />
+    <Compile Include="Cloud\Imgur\ImgurGetAlbumsResponse.cs" />
+    <Compile Include="Cloud\Imgur\ImgurUploadImageResponse.cs" />
+    <Compile Include="Cloud\Imgur\OAuth2Token.cs" />
     <Compile Include="Cloud\UploadedFile.cs" />
     <Compile Include="Cloud\UploadingException.cs" />
     <Compile Include="Cloud\YandexDisk\Error.cs" />
@@ -122,6 +130,8 @@
     <Compile Include="Controls\ExtendedUniformGrid.cs" />
     <Compile Include="Controls\ImageCard.cs" />
     <Compile Include="Controls\LabelSeparator.cs" />
+    <Compile Include="Controls\NotifyIcon.cs" />
+    <Compile Include="Controls\RecorderWindow.cs" />
     <Compile Include="Controls\SplitButton.cs" />
     <Compile Include="Controls\KeyBox.cs" />
     <Compile Include="Controls\HexadecimalBox.cs" />
@@ -150,7 +160,6 @@
     <Compile Include="Controls\StatusBand.cs" />
     <Compile Include="Controls\StatusList.cs" />
     <Compile Include="Controls\TextPath.cs" />
-    <Compile Include="Controls\TrayIcon.cs" />
     <Compile Include="Controls\WebcamControl.xaml.cs">
       <DependentUpon>WebcamControl.xaml</DependentUpon>
     </Compile>
@@ -198,7 +207,7 @@
     <Compile Include="ImageUtil\Gif\Encoder\Quantization\Quantizer.cs" />
     <Compile Include="Cloud\CloudFactory.cs" />
     <Compile Include="Cloud\Gfycat.cs" />
-    <Compile Include="Cloud\Imgur.cs" />
+    <Compile Include="Cloud\Imgur\Imgur.cs" />
     <Compile Include="Util\ActionStack.cs" />
     <Compile Include="Util\ActivityHook\CustomKeyEventArgs.cs" />
     <Compile Include="Util\ActivityHook\CustomKeyPressEventArgs.cs" />
@@ -266,6 +275,11 @@
     <Compile Include="Util\Enums.cs" />
     <Compile Include="Util\Extras.cs" />
     <Compile Include="Util\FastRandom.cs" />
+    <Compile Include="Util\HotKey.cs" />
+    <Compile Include="Util\HotKeyCollection.cs" />
+    <Compile Include="Util\WebHelper.cs" />
+    <Compile Include="Util\Model\ApplicationModel.cs" />
+    <Compile Include="Util\Model\ApplicationViewModel.cs" />
     <Compile Include="Util\Model\FrameInfo.cs" />
     <Compile Include="Util\Glass.cs" />
     <Compile Include="Util\Global.cs" />
@@ -306,6 +320,12 @@
     </Compile>
     <Compile Include="Windows\Editor.xaml.cs">
       <DependentUpon>Editor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Other\ExceptionDialog.xaml.cs">
+      <DependentUpon>ExceptionDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Other\PickAlbumDialog.xaml.cs">
+      <DependentUpon>PickAlbumDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Other\ErrorDialog.xaml.cs">
       <DependentUpon>ErrorDialog.xaml</DependentUpon>
@@ -524,6 +544,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\Other\ExceptionDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Other\PickAlbumDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Windows\Other\ErrorDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -632,6 +660,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Style.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Notification.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ImageUtil\Psd\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -17,7 +17,24 @@
     <s:String x:Key="Suppress">Suppress</s:String>
     <s:String x:Key="Preview">Preview</s:String>
     <s:String x:Key="S.Add">Add</s:String>
+    <s:String x:Key="S.Id">Id</s:String>
+    <s:String x:Key="S.Title">Title</s:String>
+    <s:String x:Key="S.Description">Description</s:String>
 
+    <!--Notification Icon-->
+    <s:String x:Key="S.NewRecording">New screen recording</s:String>
+    <s:String x:Key="S.NewWebcamRecording">New webcam recording</s:String>
+    <s:String x:Key="S.NewBoardRecording">New board recording</s:String>
+    <s:String x:Key="S.Exit">Exit</s:String>
+
+    <!--Application-->
+    <s:String x:Key="Application.Exiting.Title">Exiting ScreenToGif</s:String>
+    <s:String x:Key="Application.Exiting.Instruction">Are you sure that you want to exit?</s:String>
+    <s:String x:Key="Application.Exiting.Message">All windows will be closed and the tray icon will be removed.</s:String>   
+    
+    <!--Error messages--> 
+    <s:String x:Key="S.Crash">Oh no, the app crashed :(</s:String>
+    
     <!--StartUp Page-->
     <s:String x:Key="Title.StartUp">ScreenToGif - StartUp</s:String>
     <s:String x:Key="Recorder">Recorder</s:String>
@@ -51,6 +68,7 @@
     <s:String x:Key="Title.Options">ScreenToGif - Options</s:String>
     <s:String x:Key="Application">Application</s:String>
     <s:String x:Key="Interface">Interface</s:String>
+    <s:String x:Key="S.Shortcuts">Shortcuts</s:String>
     <s:String x:Key="Image">Image</s:String>
     <s:String x:Key="Language">Language</s:String>
     <s:String x:Key="TemporaryFiles">Temporary Files</s:String>
@@ -83,13 +101,9 @@
     <s:String x:Key="Application.ScreenRecorder.Magnifier">Enable the screen magnifier.</s:String>
     <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(It enables a magnifier while selecting the recording area)</s:String>
     
-    <s:String x:Key="Application.Shortcuts">Keyboard Shortcuts</s:String>
-    <s:String x:Key="Application.Shortcuts.StartPause">Start/Pause:</s:String>
-    <s:String x:Key="Application.Shortcuts.Stop">Stop:</s:String>
-    <s:String x:Key="Application.Shortcuts.Discard">Discard:</s:String>
-    <s:String x:Key="Application.Shortcuts.Info">Click to set keyboard focus, after that, press the desired keys and modifiers. Some keys combinations are not allowed.</s:String>
-
     <s:String x:Key="Application.Other">Other</s:String>
+    <s:String x:Key="Application.Other.SystemTray">Display the app on the system tray (notification area).</s:String>
+    <s:String x:Key="Application.Other.LeaveOpen">Keep the app open even if all windows are closed.</s:String>
     <s:String x:Key="Application.Other.NotifyFrameDeletion">Ask me before deleting frames.</s:String>
     <s:String x:Key="Application.Other.NotifyProjectDiscard">Ask me before discarding a project.</s:String>
     <s:String x:Key="Application.Other.NotifyWhileClosingEditor">Ask me before closing the Editor (if there's a project opened).</s:String>
@@ -132,6 +146,28 @@
     <s:String x:Key="Interface.Other.AutomaticallySizeOnContent">Automatically adjust the window size based on the frame size, right after loading.</s:String>
     <s:String x:Key="Interface.Other.AutomaticallyFitImage">Automatically adjust the frame zoom based on the window size, right after loading.</s:String>
   
+    <s:String x:Key="S.Shortcuts.Global">Global</s:String>
+    <s:String x:Key="S.Shortcuts.Global.ScreenRecorder">Screen recorder:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.ScreenRecorder.Info">(Opens the default screen recorder)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.WebcamRecorder">Webcam recorder:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.WebcamRecorder.Info">(Opens the webcam recorder)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.BoardRecorder">Board recorder:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.BoardRecorder.Info">(Opens the board recorder, so you can record your drawings)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenEditor">Editor:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenEditor.Info">(Opens another editor window)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenOptions">Options:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenOptions.Info">(Opens the options window. You can only open one at a time)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.Exit">Exit:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.Exit.Info">(Closes all windows and removes the app from the system tray)</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders">Recorders</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.StartPause">Start/Pause:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.StartPause.Info">(It starts or pauses the recording. It is used to take snapshots if the snapshot mode is activated)</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Stop">Stop:</s:String>    
+    <s:String x:Key="S.Shortcuts.Recorders.Stop.Info">(It stops the recording and opens the editor)</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Discard">Discard:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Discard.Info">(Discards the active recording, when it's paused)</s:String>
+    <s:String x:Key="S.Shortcuts.Info">Click to set keyboard focus, then press the desired keys and modifiers.&#10;Some keys combinations are not allowed.</s:String>
+    
     <s:String x:Key="Language.AppLanguage">App's Language</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect">Auto detect</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect.Author">Current OS language (if available)</s:String>
@@ -165,14 +201,48 @@
     <s:String x:Key="TempFiles.OpenSettingsFolder">Open the folder where the settings file is located.&#x0d;Hold Ctrl while clicking to open the file, if possible.</s:String>
     <s:String x:Key="TempFiles.SettingsInfo">• Settings loading pattern: Default ◄ AppData ◄ Local.&#x0d;• If there's no settings file present at the Local folder, the app searches inside the AppData folder, Default is used if no settings file present.&#x0d;• If there's no Local settings, all settings are saved on the AppData settings file.</s:String>
     <s:String x:Key="TempFiles.KeepRecent">Should we keep recent projects?</s:String>
-    <s:String x:Key="TempFiles.KeepRecent.Info">If you think so, all recent projects less than 5 days old will not be erased.</s:String>
+    <s:String x:Key="TempFiles.KeepRecent.Info">If you think so, all recent projects less than a few days old will not be erased.</s:String>
     <s:String x:Key="TempFiles.AutomaticRemoval">Automatically remove old projects.</s:String>
     <s:String x:Key="TempFiles.AutomaticRemoval.Info">When openning the Editor, a background task will erase projects older than the amount configured.</s:String>
     <s:String x:Key="TempFiles.AutomaticRemovalDays.Info">(in days, any project older than this will be erased/discarded after opening the editor)</s:String>
     <s:String x:Key="TempFiles.LowSpace">Low on space on the current configurated hard drive. Please, clean the temp folder or change the location.</s:String>
     
+    <s:String x:Key="S.Upload.Proxy">Proxy</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode">Mode:</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.Disabled">Disabled</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.Manual">Manual</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.System">System</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.System.Info">(Uses the system proxy)</s:String>
+    <s:String x:Key="S.Upload.Proxy.Host">Host:</s:String>
+    <s:String x:Key="S.Upload.Proxy.Port">Port:</s:String>
+    <s:String x:Key="S.Upload.Proxy.User">Username:</s:String>
+    <s:String x:Key="S.Upload.Proxy.Password">Password:</s:String>
+    <s:String x:Key="S.Upload.Get">Get OAuth token</s:String>
+    <s:String x:Key="S.Upload.PasteToken">Paste the authorization token here</s:String>    
+    <s:String x:Key="S.Upload.Authorize">Authorize</s:String>
+    <s:String x:Key="S.Upload.Refresh">Refresh</s:String>
+    <s:String x:Key="S.Upload.Clear">Clear</s:String>
+    <s:String x:Key="S.Upload.Imgur.Anonymous">Imgur (Anonymous)</s:String>
+    <s:String x:Key="S.Upload.Imgur.Direct">Use direct links.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Gifv">Get links with the Gifv extension instead of Gif.</s:String>
+    <s:String x:Key="S.Upload.Imgur.ToAlbum">Upload gifs to a selected album.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Album">Album:</s:String>
+    <s:String x:Key="S.Upload.Imgur.AskMe">Ask me before uploading</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.NotPossible">It was not possible to open the page to get the Imgur authorization token.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.Missing">In order to authorize this app, you need to provide the authorization token.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.Completed">Imgur authorization completed.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.Error">Imgur authorization failed. Try again in a few seconds or get a new token.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Refresh.None">In order to refresh the authorization for this app, you need to first finish the authorization process.</s:String>
+    <s:String x:Key="S.Upload.Imgur.NotAuthorized">Not authorized.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Expired">Authorization expired in {0}.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Valid">Authorization valid until {0}.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Removed">Imgur authorization removed.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Error.AlbumLoad">It was not possible to load the album list.</s:String>
+    <s:String x:Key="S.Upload.Gyfcat.Anonymous">Gyfcat (Anonymous)</s:String>
     <s:String x:Key="S.Upload.Yandex.Token">OAuth token:</s:String>
-    <s:String x:Key="S.Upload.Yandex.Get">Get OAuth token</s:String>
+    <s:String x:Key="S.Upload.Pick.Destination">Pick a destination</s:String>
+    <s:String x:Key="S.Upload.Pick.Album">Pick an album (optional)</s:String>
+    <s:String x:Key="S.Upload.Pick.Album.Info">If you wish so, you can select the destination album:</s:String>
     
     <s:String x:Key="Extras.External">Available external tools</s:String>
     <s:String x:Key="Extras.Download">Click here to download&#x0d;{0}</s:String>
@@ -196,6 +266,7 @@
     <s:String x:Key="Donate.Patreon">Click here to open my Patreon page.</s:String>
     <s:String x:Key="Donate.Steam.Link">Click here to open my Steam wishlist page.</s:String>
     <s:String x:Key="Donate.Steam.Text">You can send games as gifts.</s:String>
+    <s:String x:Key="Donate.Crypto">Crypto currencies</s:String>
 
     <s:String x:Key="About.Version">Version:</s:String>
     <s:String x:Key="About.Author">Author: Nicke Manarin</s:String>
@@ -499,7 +570,7 @@
     <s:String x:Key="Editor.Exiting.Title">Exiting the Editor</s:String>
     <s:String x:Key="Editor.Exiting.Instruction">Are you sure that you want to exit?</s:String>
     <s:String x:Key="Editor.Exiting.Message">The current project that you were working on can be opened again via 'Recent Projects'.</s:String>
-    <s:String x:Key="Editor.Exiting.Message2">The current project that you were working on can be opened again via 'Recent Projects', but don't forget that after 5 days, it will be automatically deleted.</s:String>
+    <s:String x:Key="Editor.Exiting.Message2">The current project that you were working on can be opened again via 'Recent Projects', but don't forget that after a few days, it will be automatically deleted.</s:String>
     
     <s:String x:Key="Editor.Resize.Warning">You have to select a different value to apply the Resize action to.</s:String>
     <s:String x:Key="Editor.Crop.Warning">The crop selection has to be smaller than the current frame size.</s:String>
@@ -766,6 +837,7 @@
     <s:String x:Key="S.SaveAs.Apng">Apng</s:String>
     <s:String x:Key="S.SaveAs.Images">Images (frames)</s:String>
     <s:String x:Key="S.SaveAs.Project">Project</s:String>
+    <!--<s:String x:Key="S.SaveAs.Psd">PSD file</s:String>-->
     <s:String x:Key="S.SaveAs.Video">Video</s:String>
     <s:String x:Key="S.SaveAs.Encoder">Encoder</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">2.0</s:String>
@@ -803,7 +875,7 @@
     <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Save the file to a folder of your choice.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Overwrite (if already exists).</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Save as project too (same folder, same filename).</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Upload the file (experimental feature).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Upload the file.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.UploadDestination">Upload destination.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">Copy to the clipboard.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File">File</s:String>
@@ -833,6 +905,7 @@
     <s:String x:Key="S.SaveAs.Warning.Type">You need to select where to save the file (to a folder, to the clipboard or upload somewhere else).</s:String>
     <s:String x:Key="S.SaveAs.Warning.Commands.Empty">To execute a post encoding command, you need to type something on the commands text field.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Upload.None">No upload service selected. You need to select a destination.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Upload.NotAuthorized">You can't upload to the selected service because it was not authorized. Head over to Options > Cloud Services to authorize this app.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Copy.Link">You can't select the option of copying the link because you didn't set to upload the file.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">You need to select an output folder.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">The output folder does not exist.</s:String>

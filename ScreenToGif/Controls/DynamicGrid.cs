@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Markup;
 
-[assembly: XmlnsDefinition("http://rmpdv.com.br/wpf/Controles", "RMSoftware.MDIControl.Controles")]
-
-namespace RMSoftware.MDIControl.Controles
+namespace ScreenToGif.Controls
 {
     public class DynamicGrid : Grid
     {
@@ -31,30 +28,30 @@ namespace RMSoftware.MDIControl.Controles
         ///<returns>The number of empty cells that are in the first row of the grid. The default is 0.</returns>
         public int FirstColumn
         {
-            get { return (int)GetValue(FirstColumnProperty); }
-            set { SetValue(FirstColumnProperty, value); }
+            get => (int)GetValue(FirstColumnProperty);
+            set => SetValue(FirstColumnProperty, value);
         }
 
         /// <summary>Gets or sets the number of columns that are in the grid.  </summary>
         /// <returns>The number of columns that are in the grid. The default is 0. </returns>
         public int Columns
         {
-            get { return (int)GetValue(ColumnsProperty); }
-            set { SetValue(ColumnsProperty, value); }
+            get => (int)GetValue(ColumnsProperty);
+            set => SetValue(ColumnsProperty, value);
         }
 
         /// <summary>Gets or sets the number of rows that are in the grid.  </summary>
         /// <returns>The number of rows that are in the grid. The default is 0.</returns>
         public int Rows
         {
-            get { return (int)GetValue(RowsProperty); }
-            set { SetValue(RowsProperty, value); }
+            get => (int)GetValue(RowsProperty);
+            set => SetValue(RowsProperty, value);
         }
 
         public bool IsReversed
         {
-            get { return (bool)GetValue(IsReversedProperty); }
-            set { SetValue(IsReversedProperty, value); }
+            get => (bool)GetValue(IsReversedProperty);
+            set => SetValue(IsReversedProperty, value);
         }
 
         #endregion

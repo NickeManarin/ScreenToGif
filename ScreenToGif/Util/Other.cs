@@ -8,7 +8,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media;
-using ScreenToGif.FileWriters;
 using ScreenToGif.Util.Model;
 
 namespace ScreenToGif.Util
@@ -187,6 +186,16 @@ namespace ScreenToGif.Util
         }
 
         /// <summary>
+        /// Gets the DPI of the system.
+        /// </summary>
+        /// <returns>The DPI of the system.</returns>
+        public static double DpiOfSystem()
+        {
+            using (var source = new HwndSource(new HwndSourceParameters()))
+                return 96d * (source.CompositionTarget?.TransformToDevice.M11 ?? 1D);
+        }
+
+        /// <summary>
         /// Gets the scale of the current window.
         /// </summary>
         /// <param name="window">The Window.</param>
@@ -201,10 +210,20 @@ namespace ScreenToGif.Util
             return 1d;
         }
 
+        /// <summary>
+        /// Gets the scale of the system.
+        /// </summary>
+        /// <returns>The scale of the system.</returns>
+        public static double ScaleOfSystem()
+        {
+            using (var source = new HwndSource(new HwndSourceParameters()))
+                return source.CompositionTarget?.TransformToDevice.M11 ?? 1D;
+        }
+
         public static string Remove(this string text, params string[] keys)
         {
             if (text == null)
-                throw new ArgumentNullException("text", "The text should not be null.");
+                throw new ArgumentNullException(nameof(text), "The text should not be null.");
 
             foreach (var key in keys)
                 text = text.Replace(key, string.Empty);

@@ -44,7 +44,12 @@
         /// <summary>
         /// Project file, .stg or .zip.
         /// </summary>
-        Project
+        Project,
+
+        /// <summary>
+        /// PSD file.
+        /// </summary>
+        Photoshop,
     }
 
     /// <summary>
@@ -439,5 +444,75 @@
         DontAdjust = 0,
         Average = 1,
         Sum = 2
+    }
+
+    /// <summary>
+    /// Event flags for mouse-related events.
+    /// </summary>
+    public enum MouseEventType
+    {
+        MouseMove,
+        IconRightMouseDown,
+        IconLeftMouseDown,
+        IconRightMouseUp,
+        IconLeftMouseUp,
+        IconMiddleMouseDown,
+        IconMiddleMouseUp,
+        IconDoubleClick
+    }
+
+
+    /// <summary>
+    /// Dialog Icons.
+    /// </summary>
+    public enum Icons
+    {
+        /// <summary>
+        /// Information. Blue.
+        /// </summary>
+        Info,
+
+        /// <summary>
+        /// Warning, yellow.
+        /// </summary>
+        Warning,
+
+        /// <summary>
+        /// Error, red.
+        /// </summary>
+        Error,
+
+        /// <summary>
+        /// Success, green.
+        /// </summary>
+        Success,
+
+        /// <summary>
+        /// A question mark, blue.
+        /// </summary>
+        Question,
+    }
+
+    /// <summary>
+    /// The proxy method, used for uploading files.
+    /// </summary>
+    public enum ProxyType
+    {
+        Disabled = 0,
+        Manual = 1,
+        System = 2
+    }
+
+    /// <summary>
+    /// The upload service.
+    /// </summary>
+    public enum UploadService
+    {
+        None = 0,
+        ImgurAnonymous = 1,
+        Imgur = 2,
+        GyfcatAnonymous = 3,
+        Gyfcat = 4,
+        Yandex = 5,
     }
 }

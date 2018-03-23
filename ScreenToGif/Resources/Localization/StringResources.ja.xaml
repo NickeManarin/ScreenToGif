@@ -81,12 +81,6 @@
     <s:String x:Key="Application.ScreenRecorder.NewRecorder">新ユーザインタフェース</s:String>
     <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(旧ユーザインタフェイスを置き換えます)</s:String>
     
-    <s:String x:Key="Application.Shortcuts">キーボードショートカット</s:String>
-    <s:String x:Key="Application.Shortcuts.StartPause">開始/ポーズ:</s:String>
-    <s:String x:Key="Application.Shortcuts.Stop">停止:</s:String>
-    <s:String x:Key="Application.Shortcuts.Discard">破棄:</s:String>
-    <s:String x:Key="Application.Shortcuts.Info">キーボードフォーカス設定をクリック後、目的のキーと修飾子を押します。 組み合わせできないキーの組合わせがあります。</s:String>
-
     <s:String x:Key="Application.Other">その他</s:String>
     <s:String x:Key="Application.Other.NotifyFrameDeletion">フレームを削除する前に確認</s:String>
     <s:String x:Key="Application.Other.NotifyProjectDiscard">プロジェクトを破棄する前に確認</s:String>
@@ -128,7 +122,12 @@
     <s:String x:Key="Interface.Other.TripleClickSelection">テキスト選択をトリプルクリックにする</s:String>
     <s:String x:Key="Interface.Other.AutomaticallySizeOnContent">フレームサイズに応じてウィンドウサイズを自動調整</s:String>
     <s:String x:Key="Interface.Other.AutomaticallyFitImage">ウィンドウサイズに応じてフレームサイズを自動調整</s:String>
-  
+
+    <s:String x:Key="S.Shortcuts.Recorders.StartPause">開始/ポーズ:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Stop">停止:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Discard">破棄:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Info">キーボードフォーカス設定をクリック後、目的のキーと修飾子を押します。 組み合わせできないキーの組合わせがあります。</s:String>
+
     <s:String x:Key="Language.AppLanguage">アプリケーションの言語</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect">自動検出</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect.Author">現在のOS言語 (利用可能なら)</s:String>

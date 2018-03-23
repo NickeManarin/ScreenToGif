@@ -8,7 +8,6 @@ using System.Reflection;
 using System.Windows;
 using System.Xml.Linq;
 using System.Xml.XPath;
-using ScreenToGif.FileWriters;
 using ScreenToGif.Util;
 
 namespace ScreenToGif.Windows.Other
@@ -83,7 +82,7 @@ namespace ScreenToGif.Windows.Other
 
             if (save.FileName == Assembly.GetExecutingAssembly().Location)
             {
-                Dialog.Ok(Title, this.TextResource("Update.Filename.Warning"), this.TextResource("Update.Filename.Warning2"), Dialog.Icons.Warning);
+                Dialog.Ok(Title, this.TextResource("Update.Filename.Warning"), this.TextResource("Update.Filename.Warning2"), Icons.Warning);
                 return;
             }
             
@@ -102,6 +101,8 @@ namespace ScreenToGif.Windows.Other
                 using (var webClient = new WebClient())
                 {
                     webClient.Credentials = CredentialCache.DefaultNetworkCredentials;
+                    webClient.Proxy = WebHelper.GetProxy();
+
                     await webClient.DownloadFileTaskAsync(new Uri((IsInstaller ? Element.XPathSelectElement("assets").LastNode : 
                         Element.XPathSelectElement("assets").FirstNode).XPathSelectElement("browser_download_url").Value), tempFilename);
                 }

@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -15,8 +11,8 @@ namespace ScreenToGif.Controls
     {
         #region Variables
 
-        public readonly static DependencyProperty ImageSourceProperty;
-        public readonly static DependencyProperty ZoomProperty;
+        public static readonly DependencyProperty ImageSourceProperty;
+        public static readonly DependencyProperty ZoomProperty;
 
         private Point? _lastCenterPositionOnTarget;
         private Point? _lastMousePositionOnTarget;
@@ -35,30 +31,26 @@ namespace ScreenToGif.Controls
         [Description("The image source.")]
         public string ImageSource
         {
-            get { return (string)GetValue(ImageSourceProperty); }
-            set { SetValue(ImageSourceProperty, value); }
+            get => (string)GetValue(ImageSourceProperty);
+            set => SetValue(ImageSourceProperty, value);
         }
 
         /// <summary>
         /// The zoom level of the control.
         /// </summary>
         [Description("The zoom level of the control.")]
-        public Double Zoom
+        public double Zoom
         {
-            get { return (Double)GetValue(ZoomProperty); }
+            get => (double)GetValue(ZoomProperty);
             set
             {
                 SetCurrentValue(ZoomProperty, value);
 
                 //Should I control the max-min here?
                 if (value < 0.1)
-                {
                     Zoom = 0.1;
-                }
                 if (value > 5.0)
-                {
                     Zoom = 5;
-                }
 
                 if (_scaleTransform != null)
                 {
@@ -84,7 +76,7 @@ namespace ScreenToGif.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ImageScrollViewer), new FrameworkPropertyMetadata(typeof(ImageScrollViewer)));
 
             ImageSourceProperty = DependencyProperty.Register("ImageSource", typeof(string), typeof(ImageScrollViewer), new FrameworkPropertyMetadata());
-            ZoomProperty = DependencyProperty.Register("Zoom", typeof(Double), typeof(ImageScrollViewer), new FrameworkPropertyMetadata(1.0, FrameworkPropertyMetadataOptions.None, ZoomPropertyChangedCallback));
+            ZoomProperty = DependencyProperty.Register("Zoom", typeof(double), typeof(ImageScrollViewer), new FrameworkPropertyMetadata(1.0, FrameworkPropertyMetadataOptions.None, ZoomPropertyChangedCallback));
         }
 
         public override void OnApplyTemplate()
@@ -126,10 +118,10 @@ namespace ScreenToGif.Controls
         {
             if (_lastDragPoint.HasValue)
             {
-                Point posNow = e.GetPosition(this);
+                var posNow = e.GetPosition(this);
 
-                double dX = posNow.X - _lastDragPoint.Value.X;
-                double dY = posNow.Y - _lastDragPoint.Value.Y;
+                var dX = posNow.X - _lastDragPoint.Value.X;
+                var dY = posNow.Y - _lastDragPoint.Value.Y;
 
                 _lastDragPoint = posNow;
 
@@ -142,7 +134,8 @@ namespace ScreenToGif.Controls
         {
             var mousePos = e.GetPosition(this);
 
-            if (mousePos.X <= ViewportWidth && mousePos.Y < ViewportHeight) //make sure we still can use the scrollbars
+            //Make sure we still can use the scrollbars.
+            if (mousePos.X <= ViewportWidth && mousePos.Y < ViewportHeight)
             {
                 Cursor = Cursors.Hand;
                 _lastDragPoint = mousePos;
@@ -190,14 +183,14 @@ namespace ScreenToGif.Controls
 
                 case ModifierKeys.Alt:
 
-                    double verDelta = e.Delta > 0 ? -10.5 : 10.5;
+                    var verDelta = e.Delta > 0 ? -10.5 : 10.5;
                     ScrollToVerticalOffset(VerticalOffset + verDelta);
 
                     break;
 
                 case ModifierKeys.Shift:
 
-                    double horDelta = e.Delta > 0 ? -10.5 : 10.5;
+                    var horDelta = e.Delta > 0 ? -10.5 : 10.5;
                     ScrollToHorizontalOffset(HorizontalOffset + horDelta);
 
                     break;
@@ -228,7 +221,7 @@ namespace ScreenToGif.Controls
                 if (_lastCenterPositionOnTarget.HasValue)
                 {
                     var centerOfViewport = new Point(ViewportWidth / 2, ViewportHeight / 2);
-                    Point centerOfTargetNow = TranslatePoint(centerOfViewport, _grid);
+                    var centerOfTargetNow = TranslatePoint(centerOfViewport, _grid);
 
                     targetBefore = _lastCenterPositionOnTarget;
                     targetNow = centerOfTargetNow;
@@ -244,14 +237,14 @@ namespace ScreenToGif.Controls
 
             if (targetBefore.HasValue)
             {
-                double dXInTargetPixels = targetNow.Value.X - targetBefore.Value.X;
-                double dYInTargetPixels = targetNow.Value.Y - targetBefore.Value.Y;
+                var dXInTargetPixels = targetNow.Value.X - targetBefore.Value.X;
+                var dYInTargetPixels = targetNow.Value.Y - targetBefore.Value.Y;
 
-                double multiplicatorX = e.ExtentWidth / _grid.ActualWidth;
-                double multiplicatorY = e.ExtentHeight / _grid.ActualHeight;
+                var multiplicatorX = e.ExtentWidth / _grid.ActualWidth;
+                var multiplicatorY = e.ExtentHeight / _grid.ActualHeight;
 
-                double newOffsetX = HorizontalOffset - dXInTargetPixels * multiplicatorX;
-                double newOffsetY = VerticalOffset - dYInTargetPixels * multiplicatorY;
+                var newOffsetX = HorizontalOffset - dXInTargetPixels * multiplicatorX;
+                var newOffsetY = VerticalOffset - dYInTargetPixels * multiplicatorY;
 
                 if (double.IsNaN(newOffsetX) || double.IsNaN(newOffsetY))
                 {

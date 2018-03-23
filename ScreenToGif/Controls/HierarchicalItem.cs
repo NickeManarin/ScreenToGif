@@ -42,50 +42,50 @@ namespace ScreenToGif.Controls
         [Bindable(true), Category("Common")]
         public string FullPath
         {
-            get { return (string)GetValue(FullPathProperty); }
-            set { SetValue(FullPathProperty, value); }
+            get => (string)GetValue(FullPathProperty);
+            set => SetValue(FullPathProperty, value);
         }
 
         [Bindable(true), Category("Common")]
         public bool HasFolders
         {
-            get { return (bool)GetValue(HasFoldersProperty); }
-            set { SetValue(HasFoldersProperty, value); }
+            get => (bool)GetValue(HasFoldersProperty);
+            set => SetValue(HasFoldersProperty, value);
         }
 
         [Bindable(true), Category("Common")]
         public DirectoryType Category
         {
-            get { return (DirectoryType)GetValue(CategoryProperty); }
-            set { SetValue(CategoryProperty, value); }
+            get => (DirectoryType)GetValue(CategoryProperty);
+            set => SetValue(CategoryProperty, value);
         }
 
         [Bindable(true), Category("Common")]
         public bool IsInaccessible
         {
-            get { return (bool)GetValue(IsInaccessibleProperty); }
-            set { SetValue(IsInaccessibleProperty, value); }
+            get => (bool)GetValue(IsInaccessibleProperty);
+            set => SetValue(IsInaccessibleProperty, value);
         }
 
         [Bindable(true), Category("Common")]
         public string Description
         {
-            get { return (string)GetValue(DescriptionProperty); }
-            set { SetValue(DescriptionProperty, value); }
+            get => (string)GetValue(DescriptionProperty);
+            set => SetValue(DescriptionProperty, value);
         }
 
         [Bindable(true), Category("Common")]
         public UIElement Image
         {
-            get { return (UIElement)GetValue(ImageProperty); }
-            set { SetValue(ImageProperty, value); }
+            get => (UIElement)GetValue(ImageProperty);
+            set => SetValue(ImageProperty, value);
         }
 
         [Bindable(true), Category("Common")]
         public double MaxSize
         {
-            get { return (double)GetValue(MaxSizeProperty); }
-            set { SetValue(MaxSizeProperty, value); }
+            get => (double)GetValue(MaxSizeProperty);
+            set => SetValue(MaxSizeProperty, value);
         }
 
         #endregion

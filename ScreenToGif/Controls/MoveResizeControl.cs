@@ -51,44 +51,44 @@ namespace ScreenToGif.Controls
 
         public bool CanMove
         {
-            get { return (bool) GetValue(CanMoveProperty); }
-            set { SetValue(CanMoveProperty, value); }
+            get => (bool) GetValue(CanMoveProperty);
+            set => SetValue(CanMoveProperty, value);
         }
 
         public bool CanResize
         {
-            get { return (bool)GetValue(CanResizeProperty); }
-            set { SetValue(CanResizeProperty, value); }
+            get => (bool)GetValue(CanResizeProperty);
+            set => SetValue(CanResizeProperty, value);
         }
 
         public Rect Selected
         {
-            get { return (Rect)GetValue(SelectedProperty); }
-            set { SetValue(SelectedProperty, value); }
+            get => (Rect)GetValue(SelectedProperty);
+            set => SetValue(SelectedProperty, value);
         }
 
         public double Left
         {
-            get { return (double)GetValue(LeftProperty); }
-            set { SetValue(LeftProperty, value); }
+            get => (double)GetValue(LeftProperty);
+            set => SetValue(LeftProperty, value);
         }
 
         public double Top
         {
-            get { return (double)GetValue(TopProperty); }
-            set { SetValue(TopProperty, value); }
+            get => (double)GetValue(TopProperty);
+            set => SetValue(TopProperty, value);
         }
 
         public bool RestrictMovement
         {
-            get { return (bool)GetValue(RestrictMovementProperty); }
-            set { SetValue(RestrictMovementProperty, value); }
+            get => (bool)GetValue(RestrictMovementProperty);
+            set => SetValue(RestrictMovementProperty, value);
         }
 
         public double ContentScale
         {
-            get { return (double)GetValue(ContentScaleProperty); }
-            set { SetValue(ContentScaleProperty, value); }
+            get => (double)GetValue(ContentScaleProperty);
+            set => SetValue(ContentScaleProperty, value);
         }
 
         #endregion

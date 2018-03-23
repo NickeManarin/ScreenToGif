@@ -81,12 +81,6 @@
     <s:String x:Key="Application.ScreenRecorder.Magnifier">Abilita la lente dello schermo.</s:String>
     <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(Aiuta a ridurre il ritardo nell'interfaccia durante la registrazione)</s:String>
     
-    <s:String x:Key="Application.Shortcuts">Tasti di scelta rapida</s:String>
-    <s:String x:Key="Application.Shortcuts.StartPause">Avvia/pausa:</s:String>
-    <s:String x:Key="Application.Shortcuts.Stop">Stop:</s:String>
-    <s:String x:Key="Application.Shortcuts.Discard">Scarta:</s:String>
-    <s:String x:Key="Application.Shortcuts.Info">Fare clic per attivare la tastiera, dopodiché premere i tasti e i modificatori desiderati. Alcune combinazioni di tasti sono inibite.</s:String>
-
     <s:String x:Key="Application.Other">Altro</s:String>
     <s:String x:Key="Application.Other.NotifyFrameDeletion">Chiedi conferma prima di eliminare fotogrammi.</s:String>
     <s:String x:Key="Application.Other.NotifyProjectDiscard">Chiedi conferma prima di scartare un progetto.</s:String>
@@ -129,7 +123,12 @@
     <s:String x:Key="Interface.Other.TripleClickSelection">Abilita il triplo clic per selezionare il testo.</s:String>
     <s:String x:Key="Interface.Other.AutomaticallySizeOnContent">Corregge automaicamente la dimensione della finestra in base alla dimensione dei fotogrammi, subito dopo il caricamento.</s:String>
     <s:String x:Key="Interface.Other.AutomaticallyFitImage">Corregge automaticamente l'ingrandimento dei fotogrammi in base alle dimensioni della finestra, subito dopo il caricamento.</s:String>
-  
+
+    <s:String x:Key="S.Shortcuts.Recorders.StartPause">Avvia/pausa:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Stop">Stop:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Discard">Scarta:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Info">Fare clic per attivare la tastiera, dopodiché premere i tasti e i modificatori desiderati.&#10;Alcune combinazioni di tasti sono inibite.</s:String>
+
     <s:String x:Key="Language.AppLanguage">Lingua dell'app</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect">Rileva automaticamente</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect.Author">Lingua del sistema operativo (se disponibile)</s:String>

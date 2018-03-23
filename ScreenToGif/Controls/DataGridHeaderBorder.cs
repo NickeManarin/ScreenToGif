@@ -28,8 +28,8 @@ namespace ScreenToGif.Controls
         /// </summary>
         public bool IsHovered
         {
-            get { return (bool)GetValue(IsHoveredProperty); }
-            set { SetValue(IsHoveredProperty, value); }
+            get => (bool)GetValue(IsHoveredProperty);
+            set => SetValue(IsHoveredProperty, value);
         }
 
         /// <summary>
@@ -43,8 +43,8 @@ namespace ScreenToGif.Controls
         /// </summary>
         public bool IsPressed
         {
-            get { return (bool)GetValue(IsPressedProperty); }
-            set { SetValue(IsPressedProperty, value); }
+            get => (bool)GetValue(IsPressedProperty);
+            set => SetValue(IsPressedProperty, value);
         }
 
         /// <summary>
@@ -58,8 +58,8 @@ namespace ScreenToGif.Controls
         /// </summary>
         public bool IsClickable
         {
-            get { return (bool)GetValue(IsClickableProperty); }
-            set { SetValue(IsClickableProperty, value); }
+            get => (bool)GetValue(IsClickableProperty);
+            set => SetValue(IsClickableProperty, value);
         }
 
         /// <summary>
@@ -73,8 +73,8 @@ namespace ScreenToGif.Controls
         /// </summary>
         public ListSortDirection? SortDirection
         {
-            get { return (ListSortDirection?)GetValue(SortDirectionProperty); }
-            set { SetValue(SortDirectionProperty, value); }
+            get => (ListSortDirection?)GetValue(SortDirectionProperty);
+            set => SetValue(SortDirectionProperty, value);
         }
 
         /// <summary>
@@ -88,8 +88,8 @@ namespace ScreenToGif.Controls
         /// </summary>
         public bool IsSelected
         {
-            get { return (bool)GetValue(IsSelectedProperty); }
-            set { SetValue(IsSelectedProperty, value); }
+            get => (bool)GetValue(IsSelectedProperty);
+            set => SetValue(IsSelectedProperty, value);
         }
 
         /// <summary>
@@ -104,8 +104,8 @@ namespace ScreenToGif.Controls
         /// </summary>
         public Orientation Orientation
         {
-            get { return (Orientation)GetValue(OrientationProperty); }
-            set { SetValue(OrientationProperty, value); }
+            get => (Orientation)GetValue(OrientationProperty);
+            set => SetValue(OrientationProperty, value);
         }
 
         /// <summary>
@@ -117,21 +117,15 @@ namespace ScreenToGif.Controls
         /// <summary>
         ///     When there is a Background or BorderBrush, revert to the Border implementation.
         /// </summary>
-        private bool UsingBorderImplementation
-        {
-            get
-            {
-                return (Background != null) || (BorderBrush != null);
-            }
-        }
+        private bool UsingBorderImplementation => (Background != null) || (BorderBrush != null);
 
         /// <summary>
         ///     Property that indicates the brush to use when drawing seperators between headers.
         /// </summary>
         public Brush SeparatorBrush
         {
-            get { return (Brush)GetValue(SeparatorBrushProperty); }
-            set { SetValue(SeparatorBrushProperty, value); }
+            get => (Brush)GetValue(SeparatorBrushProperty);
+            set => SetValue(SeparatorBrushProperty, value);
         }
 
         /// <summary>
@@ -145,8 +139,8 @@ namespace ScreenToGif.Controls
         /// </summary>
         public Visibility SeparatorVisibility
         {
-            get { return (Visibility)GetValue(SeparatorVisibilityProperty); }
-            set { SetValue(SeparatorVisibilityProperty, value); }
+            get => (Visibility)GetValue(SeparatorVisibilityProperty);
+            set => SetValue(SeparatorVisibilityProperty, value);
         }
 
         /// <summary>
@@ -170,38 +164,33 @@ namespace ScreenToGif.Controls
                 return base.MeasureOverride(constraint);
             }
 
-            UIElement child = Child;
-            if (child != null)
+            var child = Child;
+            if (child == null) return new Size();
+
+            // Use the public Padding property if it's set
+            var padding = Padding;
+            if (padding.Equals(new Thickness()))
+                padding = DefaultPadding;
+
+            var childWidth = constraint.Width;
+            var childHeight = constraint.Height;
+
+            // If there is an actual constraint, then reserve space for the chrome
+            if (!Double.IsInfinity(childWidth))
             {
-                // Use the public Padding property if it's set
-                Thickness padding = Padding;
-                if (padding.Equals(new Thickness()))
-                {
-                    padding = DefaultPadding;
-                }
-
-                double childWidth = constraint.Width;
-                double childHeight = constraint.Height;
-
-                // If there is an actual constraint, then reserve space for the chrome
-                if (!Double.IsInfinity(childWidth))
-                {
-                    childWidth = Math.Max(0.0, childWidth - padding.Left - padding.Right);
-                }
-
-                if (!Double.IsInfinity(childHeight))
-                {
-                    childHeight = Math.Max(0.0, childHeight - padding.Top - padding.Bottom);
-                }
-
-                child.Measure(new Size(childWidth, childHeight));
-                Size desiredSize = child.DesiredSize;
-
-                // Add on the reserved space for the chrome
-                return new Size(desiredSize.Width + padding.Left + padding.Right, desiredSize.Height + padding.Top + padding.Bottom);
+                childWidth = Math.Max(0.0, childWidth - padding.Left - padding.Right);
             }
 
-            return new Size();
+            if (!Double.IsInfinity(childHeight))
+            {
+                childHeight = Math.Max(0.0, childHeight - padding.Top - padding.Bottom);
+            }
+
+            child.Measure(new Size(childWidth, childHeight));
+            var desiredSize = child.DesiredSize;
+
+            // Add on the reserved space for the chrome
+            return new Size(desiredSize.Width + padding.Left + padding.Right, desiredSize.Height + padding.Top + padding.Bottom);
         }
 
         /// <summary>
@@ -215,19 +204,19 @@ namespace ScreenToGif.Controls
                 return base.ArrangeOverride(arrangeSize);
             }
 
-            UIElement child = Child;
+            var child = Child;
             if (child != null)
             {
                 // Use the public Padding property if it's set
-                Thickness padding = Padding;
+                var padding = Padding;
                 if (padding.Equals(new Thickness()))
                 {
                     padding = DefaultPadding;
                 }
 
                 // Reserve space for the chrome
-                double childWidth = Math.Max(0.0, arrangeSize.Width - padding.Left - padding.Right);
-                double childHeight = Math.Max(0.0, arrangeSize.Height - padding.Top - padding.Bottom);
+                var childWidth = Math.Max(0.0, arrangeSize.Width - padding.Left - padding.Right);
+                var childHeight = Math.Max(0.0, arrangeSize.Height - padding.Top - padding.Bottom);
 
                 child.Arrange(new Rect(padding.Left, padding.Top, childWidth, childHeight));
             }
@@ -247,8 +236,8 @@ namespace ScreenToGif.Controls
         {
             get
             {
-                Thickness padding = new Thickness(3.0); // The default padding
-                Thickness? themePadding = ThemeDefaultPadding;
+                var padding = new Thickness(3.0); // The default padding
+                var themePadding = ThemeDefaultPadding;
                 if (themePadding == null)
                 {
                     if (Orientation == Orientation.Vertical)
@@ -315,7 +304,7 @@ namespace ScreenToGif.Controls
                     if (_freezableCache == null)
                     {
                         _freezableCache = new List<Freezable>(size);
-                        for (int i = 0; i < size; i++)
+                        for (var i = 0; i < size; i++)
                         {
                             _freezableCache.Add(null);
                         }
@@ -349,7 +338,7 @@ namespace ScreenToGif.Controls
         {
             lock (_cacheAccess)
             {
-                Freezable freezable = _freezableCache[index];
+                var freezable = _freezableCache[index];
                 Debug.Assert((freezable == null) || freezable.IsFrozen, "Cached Freezables should have been frozen.");
                 return freezable;
             }
@@ -392,31 +381,31 @@ namespace ScreenToGif.Controls
 
         private void RenderTheme(DrawingContext dc)
         {
-            Size size = RenderSize;
-            bool horizontal = Orientation == Orientation.Horizontal;
-            bool isClickable = IsClickable && IsEnabled;
-            bool isHovered = isClickable && IsHovered;
-            bool isPressed = isClickable && IsPressed;
-            ListSortDirection? sortDirection = SortDirection;
-            bool isSorted = sortDirection != null;
-            bool isSelected = IsSelected;
-            bool hasBevel = (!isHovered && !isPressed && !isSorted && !isSelected);
+            var size = RenderSize;
+            var horizontal = Orientation == Orientation.Horizontal;
+            var isClickable = IsClickable && IsEnabled;
+            var isHovered = isClickable && IsHovered;
+            var isPressed = isClickable && IsPressed;
+            var sortDirection = SortDirection;
+            var isSorted = sortDirection != null;
+            var isSelected = IsSelected;
+            var hasBevel = (!isHovered && !isPressed && !isSorted && !isSelected);
 
             EnsureCache((int)AeroFreezables.NumFreezables);
 
             if (horizontal)
             {
                 // When horizontal, rotate the rendering by -90 degrees
-                Matrix m1 = new Matrix();
+                var m1 = new Matrix();
                 m1.RotateAt(-90.0, 0.0, 0.0);
-                Matrix m2 = new Matrix();
+                var m2 = new Matrix();
                 m2.Translate(0.0, size.Height);
 
-                MatrixTransform horizontalRotate = new MatrixTransform(m1 * m2);
+                var horizontalRotate = new MatrixTransform(m1 * m2);
                 horizontalRotate.Freeze();
                 dc.PushTransform(horizontalRotate);
 
-                double temp = size.Width;
+                var temp = size.Width;
                 size.Width = size.Height;
                 size.Height = temp;
             }
@@ -425,7 +414,7 @@ namespace ScreenToGif.Controls
             {
                 // This is a highlight that can be drawn by just filling the background with the color.
                 // It will be seen through the gab between the border and the background.
-                LinearGradientBrush bevel = (LinearGradientBrush)GetCachedFreezable((int)AeroFreezables.NormalBevel);
+                var bevel = (LinearGradientBrush)GetCachedFreezable((int)AeroFreezables.NormalBevel);
                 if (bevel == null)
                 {
                     bevel = new LinearGradientBrush();
@@ -444,7 +433,7 @@ namespace ScreenToGif.Controls
             }
 
             // Fill the background
-            AeroFreezables backgroundType = AeroFreezables.NormalBackground;
+            var backgroundType = AeroFreezables.NormalBackground;
             if (isPressed)
             {
                 backgroundType = AeroFreezables.PressedBackground;
@@ -458,7 +447,7 @@ namespace ScreenToGif.Controls
                 backgroundType = AeroFreezables.SortedBackground;
             }
 
-            LinearGradientBrush background = (LinearGradientBrush)GetCachedFreezable((int)backgroundType);
+            var background = (LinearGradientBrush)GetCachedFreezable((int)backgroundType);
             if (background == null)
             {
                 background = new LinearGradientBrush();
@@ -506,7 +495,7 @@ namespace ScreenToGif.Controls
             if (size.Width >= 2.0)
             {
                 // Draw the borders on the sides
-                AeroFreezables sideType = AeroFreezables.NormalSides;
+                var sideType = AeroFreezables.NormalSides;
                 if (isPressed)
                 {
                     sideType = AeroFreezables.PressedSides;
@@ -583,7 +572,7 @@ namespace ScreenToGif.Controls
             if (isPressed && (size.Width >= 4.0) && (size.Height >= 4.0))
             {
                 // When pressed, there are added borders on the left and top
-                LinearGradientBrush topBrush = (LinearGradientBrush)GetCachedFreezable((int)AeroFreezables.PressedTop);
+                var topBrush = (LinearGradientBrush)GetCachedFreezable((int)AeroFreezables.PressedTop);
                 if (topBrush == null)
                 {
                     topBrush = new LinearGradientBrush();
@@ -600,7 +589,7 @@ namespace ScreenToGif.Controls
 
                 dc.DrawRectangle(topBrush, null, new Rect(0.0, 0.0, size.Width, 2.0));
 
-                LinearGradientBrush pressedBevel = (LinearGradientBrush)GetCachedFreezable((int)AeroFreezables.PressedBevel);
+                var pressedBevel = (LinearGradientBrush)GetCachedFreezable((int)AeroFreezables.PressedBevel);
                 if (pressedBevel == null)
                 {
                     pressedBevel = new LinearGradientBrush();
@@ -622,7 +611,7 @@ namespace ScreenToGif.Controls
             if (size.Height >= 2.0)
             {
                 // Draw the bottom border
-                AeroFreezables bottomType = AeroFreezables.NormalBottom;
+                var bottomType = AeroFreezables.NormalBottom;
                 if (isPressed)
                 {
                     bottomType = AeroFreezables.PressedOrHoveredBottom;
@@ -636,7 +625,7 @@ namespace ScreenToGif.Controls
                     bottomType = AeroFreezables.SortedBottom;
                 }
 
-                SolidColorBrush bottomBrush = (SolidColorBrush)GetCachedFreezable((int)bottomType);
+                var bottomBrush = (SolidColorBrush)GetCachedFreezable((int)bottomType);
                 if (bottomBrush == null)
                 {
                     switch (bottomType)
@@ -665,22 +654,22 @@ namespace ScreenToGif.Controls
             if (isSorted && (size.Width > 14.0) && (size.Height > 10.0))
             {
                 // Draw the sort arrow
-                TranslateTransform positionTransform = new TranslateTransform((size.Width - 8.0) * 0.5, 1.0);
+                var positionTransform = new TranslateTransform((size.Width - 8.0) * 0.5, 1.0);
                 positionTransform.Freeze();
                 dc.PushTransform(positionTransform);
 
-                bool ascending = (sortDirection == ListSortDirection.Ascending);
-                PathGeometry arrowGeometry = (PathGeometry)GetCachedFreezable(ascending ? (int)AeroFreezables.ArrowUpGeometry : (int)AeroFreezables.ArrowDownGeometry);
+                var ascending = (sortDirection == ListSortDirection.Ascending);
+                var arrowGeometry = (PathGeometry)GetCachedFreezable(ascending ? (int)AeroFreezables.ArrowUpGeometry : (int)AeroFreezables.ArrowDownGeometry);
                 if (arrowGeometry == null)
                 {
                     arrowGeometry = new PathGeometry();
-                    PathFigure arrowFigure = new PathFigure();
+                    var arrowFigure = new PathFigure();
 
                     if (ascending)
                     {
                         arrowFigure.StartPoint = new Point(0.0, 4.0);
 
-                        LineSegment line = new LineSegment(new Point(4.0, 0.0), false);
+                        var line = new LineSegment(new Point(4.0, 0.0), false);
                         line.Freeze();
                         arrowFigure.Segments.Add(line);
 
@@ -692,7 +681,7 @@ namespace ScreenToGif.Controls
                     {
                         arrowFigure.StartPoint = new Point(0.0, 0.0);
 
-                        LineSegment line = new LineSegment(new Point(8.0, 0.0), false);
+                        var line = new LineSegment(new Point(8.0, 0.0), false);
                         line.Freeze();
                         arrowFigure.Segments.Add(line);
 
@@ -711,7 +700,7 @@ namespace ScreenToGif.Controls
                 }
 
                 // Draw two arrows, one inset in the other. This is to achieve a double gradient over both the border and the fill.
-                LinearGradientBrush arrowBorder = (LinearGradientBrush)GetCachedFreezable((int)AeroFreezables.ArrowBorder);
+                var arrowBorder = (LinearGradientBrush)GetCachedFreezable((int)AeroFreezables.ArrowBorder);
                 if (arrowBorder == null)
                 {
                     arrowBorder = new LinearGradientBrush();
@@ -726,7 +715,7 @@ namespace ScreenToGif.Controls
 
                 dc.DrawGeometry(arrowBorder, null, arrowGeometry);
 
-                LinearGradientBrush arrowFill = (LinearGradientBrush)GetCachedFreezable((int)AeroFreezables.ArrowFill);
+                var arrowFill = (LinearGradientBrush)GetCachedFreezable((int)AeroFreezables.ArrowFill);
                 if (arrowFill == null)
                 {
                     arrowFill = new LinearGradientBrush();
@@ -740,7 +729,7 @@ namespace ScreenToGif.Controls
                 }
 
                 // Inset the fill arrow inside the border arrow
-                ScaleTransform arrowScale = (ScaleTransform)GetCachedFreezable((int)AeroFreezables.ArrowFillScale);
+                var arrowScale = (ScaleTransform)GetCachedFreezable((int)AeroFreezables.ArrowFillScale);
                 if (arrowScale == null)
                 {
                     arrowScale = new ScaleTransform(0.75, 0.75, 3.5, 4.0);

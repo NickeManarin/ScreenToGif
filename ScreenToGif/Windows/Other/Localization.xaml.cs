@@ -20,6 +20,8 @@ namespace ScreenToGif.Windows.Other
 {
     public partial class Localization : Window
     {
+        private IEnumerable<string> _cultures;
+
         public Localization()
         {
             InitializeComponent();
@@ -27,8 +29,17 @@ namespace ScreenToGif.Windows.Other
 
         #region Events
         
-        private void Localization_OnLoaded(object sender, RoutedEventArgs e)
+        private async void Localization_OnLoaded(object sender, RoutedEventArgs e)
         {
+            StatusBand.Info("Getting resources...");
+
+            AddButton.IsEnabled = false;
+            SaveButton.IsEnabled = false;
+            RemoveButton.IsEnabled = false;
+            DownButton.IsEnabled = false;
+            UpButton.IsEnabled = false;
+            OkButton.IsEnabled = false;
+
             foreach (var resourceDictionary in Application.Current.Resources.MergedDictionaries)
             {
                 var imageItem = new ImageListBoxItem
@@ -75,6 +86,19 @@ namespace ScreenToGif.Windows.Other
 
             ResourceListBox.SelectedIndex = ResourceListBox.Items.Count - 1;
             ResourceListBox.ScrollIntoView(ResourceListBox.SelectedItem);
+
+            SaveButton.IsEnabled = true;
+            RemoveButton.IsEnabled = true;
+            DownButton.IsEnabled = true;
+            UpButton.IsEnabled = true;
+            OkButton.IsEnabled = true;
+
+            StatusBand.Info("Getting language codes...");
+
+            _cultures = await GetProperCulturesAsync();
+
+            StatusBand.Hide();
+            AddButton.IsEnabled = true;
 
             CommandManager.InvalidateRequerySuggested();
         }
@@ -137,8 +161,10 @@ namespace ScreenToGif.Windows.Other
             CommandManager.InvalidateRequerySuggested();
         }
 
-        private void Save_Executed(object sender, ExecutedRoutedEventArgs e)
+        private async void Save_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            StatusBand.Info("Exporting resource...");
+
             var sfd = new SaveFileDialog
             {
                 AddExtension = true,
@@ -152,10 +178,23 @@ namespace ScreenToGif.Windows.Other
             sfd.FileName = subs;
 
             var result = sfd.ShowDialog();
+            var fileName = sfd.FileName;
+            //We have to access UI components here (can't do that in the task below)
+            var index = ResourceListBox.SelectedIndex;
 
             if (result.HasValue && result.Value)
-                LocalizationHelper.SaveSelected(ResourceListBox.SelectedIndex, sfd.FileName);
+            {
+                try
+                {
+                    await Task.Factory.StartNew(() => LocalizationHelper.SaveSelected(index, fileName));
+                }
+                catch (Exception ex)
+                {
+                    Dialog.Ok("Impossible to Save", "Impossible to save the Xaml file", ex.Message, Icons.Warning);
+                }
+            }
 
+            StatusBand.Hide();
             CommandManager.InvalidateRequerySuggested();
         }
 
@@ -181,13 +220,16 @@ namespace ScreenToGif.Windows.Other
 
             if (!result.HasValue || !result.Value) return;
 
+            StatusBand.Info("Validating resource name...");
+
             #region Validation
 
             if (!ofd.FileName.Contains("StringResources"))
             {
-                Dispatcher.Invoke(() => Dialog.Ok("Action Denied", "The name of file does not follow a valid pattern.",
-                    "Try renaming like (without the []): StringResources.[Language Code].xaml"));
+                Dialog.Ok("Action Denied", "The name of file does not follow a valid pattern.",
+                    "Try renaming like (without the []): StringResources.[Language Code].xaml");
 
+                StatusBand.Hide();
                 return;
             }
 
@@ -195,9 +237,10 @@ namespace ScreenToGif.Windows.Other
 
             if (Application.Current.Resources.MergedDictionaries.Any(x => x.Source != null && x.Source.OriginalString.Contains(subs)))
             {
-                Dispatcher.Invoke(() => Dialog.Ok("Action Denied", "You can't add a resource with the same name.",
-                    "Try renaming like: StringResources.[Language Code].xaml"));
+                Dialog.Ok("Action Denied", "You can't add a resource with the same name.",
+                    "Try renaming like: StringResources.[Language Code].xaml");
 
+                StatusBand.Hide();
                 return;
             }
 
@@ -205,48 +248,60 @@ namespace ScreenToGif.Windows.Other
 
             if (pieces.Length != 3)
             {
-                Dispatcher.Invoke(() => Dialog.Ok("Action Denied", "Filename with wrong format.",
-                    "Try renaming like: StringResources.[Language Code].xaml"));
+                Dialog.Ok("Action Denied", "Filename with wrong format.",
+                    "Try renaming like: StringResources.[Language Code].xaml");
 
+                StatusBand.Hide();
+                return;
+            }
+            var cultureName = pieces[1];
+
+            string properCulture;
+            try
+            {
+                properCulture = await Task.Factory.StartNew(() => CheckSupportedCulture(cultureName));
+            }
+            catch (CultureNotFoundException)
+            {
+                Dialog.Ok("Action Denied", "Unknown Language.",
+                    $"The \"{cultureName}\" and its family were not recognized as a valid language codes.");
+
+                StatusBand.Hide();
+                return;
+            }
+            catch (Exception ex)
+            {
+                Dialog.Ok("Action Denied", "Error checking culture.", ex.Message);
+
+                StatusBand.Hide();
                 return;
             }
 
-            var culture = new CultureInfo(pieces[1]);
-
-            if (culture.EnglishName.Contains("Unknown"))
+            if (properCulture != cultureName)
             {
-                Dispatcher.Invoke(() => Dialog.Ok("Action Denied", "Unknown Language.", $"The \"{pieces[1]}\" was not recognized as a valid language code."));
+                Dialog.Ok("Action Denied", "Redundant Language Code.", 
+                    $"The \"{cultureName}\" code is redundant. Try using \'{properCulture}\" instead");
 
-                return;
-            }
-
-            var properCulture = await CheckSupportedCultureAsync(culture);
-
-            if(properCulture == null)
-            {
-                Dispatcher.Invoke(() => Dialog.Ok("Action Denied", "Unknown Language.", $"The \"{pieces[1]}\" and its family were not recognized as a valid language codes."));
-
-                return;
-            }
-
-            if(properCulture != culture)
-            {
-                Dispatcher.Invoke(() => Dialog.Ok("Action Denied", "Redundant Language Code.", $"The \"{pieces[1]}\" code is redundant. Try using \'{properCulture.Name}\" instead"));
-
+                StatusBand.Hide();
                 return;
             }
 
             #endregion
 
+            StatusBand.Info("Importing resource...");
+
+            var fileName = ofd.FileName;
+
             try
             {
-                await Task.Factory.StartNew(() => LocalizationHelper.ImportStringResource(ofd.FileName));
+                await Task.Factory.StartNew(() => LocalizationHelper.ImportStringResource(fileName));
             }
             catch(Exception ex)
             {
-                Dispatcher.Invoke(() => Dialog.Ok("Localization", "Localization - Importing Xaml Resource", ex.Message));
+                Dialog.Ok("Localization", "Localization - Importing Xaml Resource", ex.Message);
 
-                GC.Collect();
+                StatusBand.Hide();
+                await Task.Factory.StartNew(() => GC.Collect());
                 return;
             }
 
@@ -260,6 +315,8 @@ namespace ScreenToGif.Windows.Other
                 Author = "Recognized as " + pieces[1]
             };
 
+            StatusBand.Hide();
+
             ResourceListBox.Items.Add(imageItem);
             ResourceListBox.ScrollIntoView(imageItem);
 
@@ -270,19 +327,22 @@ namespace ScreenToGif.Windows.Other
 
         #region Methods 
 
-        private async Task<CultureInfo> CheckSupportedCultureAsync(CultureInfo culture)
+        private string CheckSupportedCulture(string cultureName)
         {
-            IEnumerable<CultureInfo> supportedCultures = await GetProperCulturesAsync();
+            //Using HashSet, because we can check if it contains string in O(1) time
+            //Only creating it takes some time,
+            //but it's better than performing Contains multiple times on the list in the loop below
+            HashSet<string> cultureHash = new HashSet<string>(_cultures);
 
-            if (supportedCultures.Contains(culture))
-                return culture;
+            if (cultureHash.Contains(cultureName))
+                return cultureName;
 
-            CultureInfo t = culture;
+            CultureInfo t = CultureInfo.GetCultureInfo(cultureName);
 
-            while(t != CultureInfo.InvariantCulture)
+            while (t != CultureInfo.InvariantCulture)
             {
-                if (supportedCultures.Contains(t))
-                    return t;
+                if (cultureHash.Contains(t.Name))
+                    return t.Name;
 
                 t = t.Parent;
             }
@@ -290,18 +350,18 @@ namespace ScreenToGif.Windows.Other
             return null;
         }
 
-        private async Task<IEnumerable<CultureInfo>> GetProperCulturesAsync()
+        private async Task<IEnumerable<string>> GetProperCulturesAsync()
         {
-            IEnumerable<CultureInfo> allCodes = CultureInfo.GetCultures(CultureTypes.AllCultures).Where(x => !string.IsNullOrEmpty(x.Name));
+            IEnumerable<string> allCodes = await Task.Factory.StartNew(() => CultureInfo.GetCultures(CultureTypes.AllCultures).Where(x => !string.IsNullOrEmpty(x.Name)).Select(x => x.Name));
 
             try
             {
-                IEnumerable<string> properCodes = await GetLanguageCodesAsync();
-                IEnumerable<CultureInfo> properCultures = allCodes.Where(x => properCodes.Contains(x.Name));
-                if (properCultures == null)
+                IEnumerable<string> downloadedCodes = await GetLanguageCodesAsync();
+                IEnumerable<string> properCodes = await Task.Factory.StartNew(() => allCodes.Where(x => downloadedCodes.Contains(x)));
+                if (properCodes == null)
                     return allCodes;
 
-                return properCultures;
+                return properCodes;
             }
             catch (Exception ex)
             {
@@ -332,7 +392,7 @@ namespace ScreenToGif.Windows.Other
 
                 using (var reader = new StreamReader(resultStream))
                 {
-                    var result = reader.ReadToEnd();
+                    var result = await reader.ReadToEndAsync();
 
                     var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(result),
                         new System.Xml.XmlDictionaryReaderQuotas());
@@ -340,7 +400,9 @@ namespace ScreenToGif.Windows.Other
                     var json = await Task<XElement>.Factory.StartNew(() => XElement.Load(jsonReader));
                     var languages = json.Elements();
 
-                    return languages.Where(x => x.XPathSelectElement("defs").Value != "0").Select(x => x.XPathSelectElement("lang").Value);
+                    return await Task.Factory.StartNew(() => languages.Where(x =>
+                    x.XPathSelectElement("defs").Value != "0"
+                    ).Select(x => x.XPathSelectElement("lang").Value));
                 }
             }
         }
@@ -359,14 +421,16 @@ namespace ScreenToGif.Windows.Other
 
                 using (var reader = new StreamReader(resultStream))
                 {
-                    var result = reader.ReadToEnd();
+                    var result = await reader.ReadToEndAsync();
 
                     var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(result),
                         new System.Xml.XmlDictionaryReaderQuotas());
 
                     var json = await Task<XElement>.Factory.StartNew(() => XElement.Load(jsonReader));
 
-                    return json.XPathSelectElement("resources").Elements().Where(x => x.XPathSelectElement("name").Value == "ietf-language-tags_json").First().XPathSelectElement("path").Value;
+                    return await Task.Factory.StartNew(() => json.XPathSelectElement("resources").Elements().Where(x =>
+                    x.XPathSelectElement("name").Value == "ietf-language-tags_json"
+                    ).First().XPathSelectElement("path").Value);
                 }
             }
         }

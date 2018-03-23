@@ -9,7 +9,9 @@ namespace ScreenToGif.Controls
     ///</summary>
     public class RadialPanel : Panel
     {
-        // Measure each children and give as much room as they want.
+        /// <summary>
+        /// Measure each children and give as much room as they want.
+        /// </summary>
         protected override Size MeasureOverride(Size availableSize)
         {
             foreach (UIElement elem in Children)
@@ -21,7 +23,9 @@ namespace ScreenToGif.Controls
             return base.MeasureOverride(availableSize);
         }
 
-        //Arrange all children based on the geometric equations for the circle.
+        /// <summary>
+        /// Arrange all children based on the geometric equations for the circle.
+        /// </summary>
         protected override Size ArrangeOverride(Size finalSize)
         {
             if (Children.Count == 0)

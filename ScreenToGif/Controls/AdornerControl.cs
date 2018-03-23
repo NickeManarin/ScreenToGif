@@ -39,8 +39,8 @@ namespace ScreenToGif.Controls
         /// </summary>
         public FrameworkElement AdornerContent
         {
-            get { return (FrameworkElement)GetValue(AdornerContentProperty); }
-            set { SetValue(AdornerContentProperty, value); }
+            get => (FrameworkElement)GetValue(AdornerContentProperty);
+            set => SetValue(AdornerContentProperty, value);
         }
 
         /// <summary>
@@ -48,8 +48,8 @@ namespace ScreenToGif.Controls
         /// </summary>
         public AdornerPlacement HorizontalAdornerPlacement
         {
-            get { return (AdornerPlacement)GetValue(HorizontalAdornerPlacementProperty); }
-            set { SetValue(HorizontalAdornerPlacementProperty, value); }
+            get => (AdornerPlacement)GetValue(HorizontalAdornerPlacementProperty);
+            set => SetValue(HorizontalAdornerPlacementProperty, value);
         }
 
         /// <summary>
@@ -57,8 +57,8 @@ namespace ScreenToGif.Controls
         /// </summary>
         public AdornerPlacement VerticalAdornerPlacement
         {
-            get { return (AdornerPlacement)GetValue(VerticalAdornerPlacementProperty); }
-            set { SetValue(VerticalAdornerPlacementProperty, value); }
+            get => (AdornerPlacement)GetValue(VerticalAdornerPlacementProperty);
+            set => SetValue(VerticalAdornerPlacementProperty, value);
         }
 
         /// <summary>
@@ -66,8 +66,8 @@ namespace ScreenToGif.Controls
         /// </summary>
         public double AdornerOffsetX
         {
-            get { return (double)GetValue(AdornerOffsetXProperty); }
-            set { SetValue(AdornerOffsetXProperty, value); }
+            get => (double)GetValue(AdornerOffsetXProperty);
+            set => SetValue(AdornerOffsetXProperty, value);
         }
 
         /// <summary>
@@ -75,8 +75,8 @@ namespace ScreenToGif.Controls
         /// </summary>
         public double AdornerOffsetY
         {
-            get { return (double)GetValue(AdornerOffsetYProperty); }
-            set { SetValue(AdornerOffsetYProperty, value); }
+            get => (double)GetValue(AdornerOffsetYProperty);
+            set => SetValue(AdornerOffsetYProperty, value);
         }
 
         #endregion
@@ -141,8 +141,8 @@ namespace ScreenToGif.Controls
         /// </summary>
         public bool IsAdornerVisible
         {
-            get { return (bool)GetValue(IsAdornerVisibleProperty); }
-            set { SetValue(IsAdornerVisibleProperty, value); }
+            get => (bool)GetValue(IsAdornerVisibleProperty);
+            set => SetValue(IsAdornerVisibleProperty, value);
         }
 
         #region Private Data Members

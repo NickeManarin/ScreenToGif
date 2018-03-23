@@ -48,8 +48,8 @@ namespace ScreenToGif.Controls
         /// </summary>
         public double Minimum
         {
-            get { return (double)GetValue(MinimumProperty); }
-            set { SetValue(MinimumProperty, value); }
+            get => (double)GetValue(MinimumProperty);
+            set => SetValue(MinimumProperty, value);
         }
 
         /// <summary>
@@ -57,8 +57,8 @@ namespace ScreenToGif.Controls
         /// </summary>
         public double Maximum
         {
-            get { return (double)GetValue(MaximumProperty); }
-            set { SetValue(MaximumProperty, value); }
+            get => (double)GetValue(MaximumProperty);
+            set => SetValue(MaximumProperty, value);
         }
 
         /// <summary>
@@ -66,8 +66,8 @@ namespace ScreenToGif.Controls
         /// </summary>
         public double LowerValue
         {
-            get { return (double)GetValue(LowerValueProperty); }
-            set { SetValue(LowerValueProperty, value); }
+            get => (double)GetValue(LowerValueProperty);
+            set => SetValue(LowerValueProperty, value);
         }
 
         /// <summary>
@@ -75,8 +75,8 @@ namespace ScreenToGif.Controls
         /// </summary>
         public double UpperValue
         {
-            get { return (double)GetValue(UpperValueProperty); }
-            set { SetValue(UpperValueProperty, value); }
+            get => (double)GetValue(UpperValueProperty);
+            set => SetValue(UpperValueProperty, value);
         }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace ScreenToGif.Controls
         /// </summary>
         public bool DisableLowerValue
         {
-            get { return (bool)GetValue(DisableLowerValueProperty); }
+            get => (bool)GetValue(DisableLowerValueProperty);
             set
             {
                 SetValue(DisableLowerValueProperty, value);
@@ -101,8 +101,8 @@ namespace ScreenToGif.Controls
         /// </summary>
         public TickPlacement TickPlacement
         {
-            get { return (TickPlacement)GetValue(TickPlacementProperty); }
-            set { SetValue(TickPlacementProperty, value); }
+            get => (TickPlacement)GetValue(TickPlacementProperty);
+            set => SetValue(TickPlacementProperty, value);
         }
 
         #endregion
@@ -135,14 +135,14 @@ namespace ScreenToGif.Controls
 
         public event RoutedEventHandler LowerValueChanged
         {
-            add { AddHandler(LowerValueChangedEvent, value); }
-            remove { RemoveHandler(LowerValueChangedEvent, value); }
+            add => AddHandler(LowerValueChangedEvent, value);
+            remove => RemoveHandler(LowerValueChangedEvent, value);
         }
 
         public event RoutedEventHandler UpperValueChanged
         {
-            add { AddHandler(UpperValueChangedEvent, value); }
-            remove { RemoveHandler(UpperValueChangedEvent, value); }
+            add => AddHandler(UpperValueChangedEvent, value);
+            remove => RemoveHandler(UpperValueChangedEvent, value);
         }
 
         public void RaiseLowerValueChangedEvent()
