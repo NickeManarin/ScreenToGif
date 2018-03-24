@@ -1482,7 +1482,23 @@ namespace ScreenToGif.Util
         /// consider the mouse action a double-click.</returns>
         [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
         public static extern int GetDoubleClickTime();
+        /// <summary> 
+        ///The number of pixels on either side of a mouse-down point that the mouse pointer can move before a drag operation begins. 
+        ///This allows the user to click and release the mouse button easily without unintentionally starting a drag operation. 
+        ///If this value is negative, it is subtracted from the left of the mouse-down point and added to the right of it.
+        ///url: https://msdn.microsoft.com/en-us/library/windows/desktop/ms724385(v=vs.85).aspx
+        /// </summary>
+        [DllImport("user32.dll")]
+        private static extern int GetSystemMetrics(int index);
+        public static int GetXDragThreshold()
+        {
+            return GetSystemMetrics(SM_CXDRAG);
+        }
 
+        public static int GetYDragThreshold()
+        {
+            return GetSystemMetrics(SM_CYDRAG);
+        }
         #endregion
 
         internal delegate bool MonitorEnumProc(IntPtr monitor, IntPtr hdc, IntPtr lprcMonitor, IntPtr lParam);
