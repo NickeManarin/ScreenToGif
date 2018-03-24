@@ -6,6 +6,8 @@ using System.Windows.Input;
 
 namespace ScreenToGif.Util.ActivityHook
 {
+    private readonly int m_xDragThreshold;
+    private readonly int m_yDragThreshold;
     /// <summary>
     /// This class allows you to tap keyboard and mouse and / or to detect their activity even when an 
     /// application runes in background or does not have any user interface at all. This class raises 
@@ -319,6 +321,8 @@ namespace ScreenToGif.Util.ActivityHook
             Extra2ButtonDown = 0x00AB,
             Extra2ButtonUp = 0x00AC,
             Extra2ButtonDoubleClick = 0x00AD,
+            MouseDragStart = 0x00AE,
+            MouseDragEnd   = 0x00AF
         }
 
         #region Windows constants from Winuser.h in Microsoft SDK.
@@ -388,6 +392,8 @@ namespace ScreenToGif.Util.ActivityHook
         public UserActivityHook()
         {
             Start();
+            m_xDragThreshold = Native.GetXDragThreshold();
+            m_yDragThreshold = Native.GetYDragThreshold();            
         }
 
         /// <summary>
@@ -622,6 +628,9 @@ namespace ScreenToGif.Util.ActivityHook
         private MouseButtonState _middleButton = MouseButtonState.Released;
         static DateTime lastClickTime;// for double click detection
         static int clickCount;// for double click detection
+        static bool isLeftMouseDown = false;//for drag detection
+        static bool IsDragging = false;
+        Native.PointW dragStartPoint;//for drag detection
         /// <summary>
         /// A callback function which will be called every time a mouse activity detected.
         /// </summary>
@@ -660,12 +669,29 @@ namespace ScreenToGif.Util.ActivityHook
             switch ((MouseEventType)wParam)
             {
                 case MouseEventType.MouseMove:
+                    clickCount = 0;//for double click detection
+                    if (isLeftMouseDown)// for drag detection
+                    {
+                        if (!IsDragging)// mouse left button down ,but don't drag ,then detect if drag start
+                        {
+                            var isXDragging = Math.Abs(mouse.pt.X - dragStartPoint.X) > m_xDragThreshold;
+                            var isYDragging = Math.Abs(mouse.pt.Y - dragStartPoint.Y) > m_yDragThreshold;
+                            IsDragging = isXDragging || isYDragging;
+                            if (IsDragging)
+                            {
+                                OnMouseActivity?.Invoke(this, new CustomMouseEventArgs(mouse.pt.X, mouse.pt.Y, MouseEventType.MouseDragStart, _leftButton, _rightButton, _middleButton));
+                                break;//should don't add?
+                            }
+                        }
+                    }
                     OnMouseActivity?.Invoke(this, new CustomMouseEventArgs(mouse.pt.X, mouse.pt.Y, MouseEventType.MouseMove, _leftButton, _rightButton, _middleButton));
                     break;
 
                 case MouseEventType.ExtraButtonDown:
                 case MouseEventType.LeftButtonDown:
-                   System.TimeSpan deltaMs = DateTime.Now - lastClickTime;
+                    isLeftMouseDown = true;// for drag detection
+                    dragStartPoint = mouse.pt;// fo drag detection                    
+                    System.TimeSpan deltaMs = DateTime.Now - lastClickTime;
                     lastClickTime = DateTime.Now;
                     if (deltaMs.TotalMilliseconds <= Native.GetDoubleClickTime())
                     {
@@ -686,6 +712,13 @@ namespace ScreenToGif.Util.ActivityHook
 
                 case MouseEventType.ExtraButtonUp:
                 case MouseEventType.LeftButtonUp:
+                    if (isLeftMouseDown)
+                        isLeftMouseDown = false;
+                    if (IsDragging)
+                    {
+                        OnMouseActivity?.Invoke(this, new CustomMouseEventArgs(mouse.pt.X, mouse.pt.Y, MouseEventType.MouseDragEnd, _leftButton, _rightButton, _middleButton));
+                        IsDragging = false;
+                    }
                     _leftButton = MouseButtonState.Released;
                     OnMouseActivity?.Invoke(this, new CustomMouseEventArgs(mouse.pt.X, mouse.pt.Y, MouseEventType.LeftButtonUp, _leftButton, _rightButton, _middleButton));
                     break;
