@@ -17,7 +17,24 @@
     <s:String x:Key="Suppress">隐藏</s:String>
     <s:String x:Key="Preview">预览</s:String>
     <s:String x:Key="S.Add">添加</s:String>
+    <s:String x:Key="S.Id">Id</s:String>
+    <s:String x:Key="S.Title">标题</s:String>
+    <s:String x:Key="S.Description">描述</s:String>
 
+    <!--Notification Icon-->
+    <s:String x:Key="S.NewRecording">新建屏幕录制</s:String>
+    <s:String x:Key="S.NewWebcamRecording">新建摄像头录制</s:String>
+    <s:String x:Key="S.NewBoardRecording">新建画板录制</s:String>
+    <s:String x:Key="S.Exit">退出</s:String>
+
+    <!--Application-->
+    <s:String x:Key="Application.Exiting.Title">退出 ScreenToGif</s:String>
+    <s:String x:Key="Application.Exiting.Instruction">你确定要退出吗?</s:String>
+    <s:String x:Key="Application.Exiting.Message">所有窗口将被关闭，托盘图标将被移除。</s:String>
+    
+    <!--Error messages--> 
+    <s:String x:Key="S.Crash">哦，不，应用程序崩溃了 :(</s:String>
+    
     <!--StartUp Page-->
     <s:String x:Key="Title.StartUp">ScreenToGif - 启动</s:String>
     <s:String x:Key="Recorder">录像机</s:String>
@@ -50,13 +67,13 @@
     <!--Options Page-->
     <s:String x:Key="Title.Options">ScreenToGif - 选项</s:String>
     <s:String x:Key="Application">应用程序</s:String>
-    <s:String x:Key="S.Shortcuts">键盘快捷键</s:String>
     <s:String x:Key="Interface">界面</s:String>
+    <s:String x:Key="S.Shortcuts">键盘快捷键</s:String>
     <s:String x:Key="Image">图像</s:String>
     <s:String x:Key="Language">语言</s:String>
     <s:String x:Key="TemporaryFiles">临时文件</s:String>
     <s:String x:Key="Extras">额外</s:String>
-    <!--<s:String x:Key="Clouds">Clouds</s:String>-->
+    <s:String x:Key="Clouds">上传服务</s:String>
     <s:String x:Key="Donate">捐赠</s:String>
     <s:String x:Key="About">关于</s:String>
     
@@ -75,8 +92,6 @@
     <s:String x:Key="Application.ScreenRecorder.PreStart.Info">（秒，开始录制前的延时）</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording">启用快照模式</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">（您需要手动捕获每一帧）</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FullRecording">启用全屏模式</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FullRecording.Info">（实验性功能，会捕获主屏幕）</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate">固定帧率</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">（恒定延迟，不会因为录制时的卡顿变化）</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording">启用异步录制</s:String>
@@ -87,6 +102,8 @@
     <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">（在选择录制区域时启用放大镜）</s:String>
     
     <s:String x:Key="Application.Other">其它</s:String>
+    <s:String x:Key="Application.Other.SystemTray">在系统托盘（通知区域）上显示应用程序。</s:String>
+    <s:String x:Key="Application.Other.LeaveOpen">即使所有窗口关闭，仍保持应用程序的打开状态。</s:String>
     <s:String x:Key="Application.Other.NotifyFrameDeletion">删除帧前询问我</s:String>
     <s:String x:Key="Application.Other.NotifyProjectDiscard">放弃项目前询问我</s:String>
     <s:String x:Key="Application.Other.NotifyWhileClosingEditor">关闭编辑器前询问我 （如果有打开的项目）</s:String>
@@ -129,11 +146,28 @@
     <s:String x:Key="Interface.Other.AutomaticallySizeOnContent">加载后根据帧大小自动调整窗口大小</s:String>
     <s:String x:Key="Interface.Other.AutomaticallyFitImage">加载后根据窗口大小自动调整帧缩放级别</s:String>
   
+    <s:String x:Key="S.Shortcuts.Global">全局</s:String>
+    <s:String x:Key="S.Shortcuts.Global.ScreenRecorder">屏幕录像机：</s:String>
+    <s:String x:Key="S.Shortcuts.Global.ScreenRecorder.Info">（打开默认屏幕录像机）</s:String>
+    <s:String x:Key="S.Shortcuts.Global.WebcamRecorder">摄像头录像机：</s:String>
+    <s:String x:Key="S.Shortcuts.Global.WebcamRecorder.Info">（打开摄像头录像机）</s:String>
+    <s:String x:Key="S.Shortcuts.Global.BoardRecorder">画板录像机：</s:String>
+    <s:String x:Key="S.Shortcuts.Global.BoardRecorder.Info">（打开画板板录像机，以便您可以录制您的绘画）</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenEditor">编辑器：</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenEditor.Info">（打开另一个编辑器窗口）</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenOptions">选项：</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenOptions.Info">（打开选项窗口，一次只能打开一个窗口）</s:String>
+    <s:String x:Key="S.Shortcuts.Global.Exit">退出：</s:String>
+    <s:String x:Key="S.Shortcuts.Global.Exit.Info">（关闭所有窗口并从系统托盘中删除应用程序）</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders">录像机</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.StartPause">开始/暂停：</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.StartPause.Info">（它启动或暂停录制，如果快照模式已激活，则用于拍摄快照）</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.Stop">停止：</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Stop.Info">（它会停止录制并打开编辑器）</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.Discard">放弃：</s:String>
-    <s:String x:Key="S.Shortcuts.Recorders.Info">在此处鼠标右键单击后,按下所需的修饰键(ctrl/alt/shift)和主按键来修改快捷键。有些组合键不可使用。</s:String>
-
+    <s:String x:Key="S.Shortcuts.Recorders.Discard.Info">（暂停时放弃活动录制）</s:String>
+    <s:String x:Key="S.Shortcuts.Info">单击以设置键盘焦点，然后按所需的键和修饰符。&#10;一些按键组合是不允许的。</s:String>
+    
     <s:String x:Key="Language.AppLanguage">应用程序语言</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect">自动检测</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect.Author">当前操作系统语言（如果可用）</s:String>
@@ -152,8 +186,6 @@
     <s:String x:Key="TempFiles.FilesAndFolders">临时文件和文件夹</s:String>
     <s:String x:Key="TempFiles.FilesAndFolders.Count">{0} 个文件夹和 {1} 个文件</s:String>
     <s:String x:Key="TempFiles.FilesAndFolders.None">未检测到任何文件夹或文件</s:String>
-    <s:String x:Key="TempFiles.Folders">文件夹：</s:String>
-    <s:String x:Key="TempFiles.Files">文件：</s:String>
     <s:String x:Key="TempFiles.OpenFolder">浏览文件夹</s:String>
     <s:String x:Key="TempFiles.Clear">清空临时文件夹</s:String>
     <s:String x:Key="TempFiles.LogsLocation">日志文件夹位置</s:String>
@@ -166,7 +198,8 @@
     <s:String x:Key="TempFiles.NotExists">不存在</s:String>
     <s:String x:Key="TempFiles.CreateSettings">创建一个空的本地设置文件</s:String>
     <s:String x:Key="TempFiles.RemoveSettings">删除设置文件</s:String>
-    <s:String x:Key="TempFiles.OpenSettingsFolder">打开设置文件所在的文件夹。&#x0d;在按住 Ctrl 键的同时，单击打开文件（如果可能）。</s:String>
+    <s:String x:Key="TempFiles.OpenSettingsFolder">打开设置文件所在的文件夹。
+在按住 Ctrl 键的同时，单击打开文件（如果可能）。</s:String>
     <s:String x:Key="TempFiles.SettingsInfo">• 设置加载模式：默认 ◄ AppData ◄ 本地
 • 如果本地文件夹中没有设置文件，此应用将在 AppData 文件夹中进行搜索。
 • 如果没有设置文件，则使用默认值。
@@ -178,10 +211,49 @@
     <s:String x:Key="TempFiles.AutomaticRemovalDays.Info">（在几天之内，打开编辑器后，任何旧项目都将被删除/丢弃）</s:String>
     <s:String x:Key="TempFiles.LowSpace">当前配置的硬盘驱动器上空间不足。请清理临时缓存文件夹或更改位置。</s:String>
     
+    <s:String x:Key="S.Upload.Proxy">代理</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode">模式：</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.Disabled">已禁用</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.Manual">手动</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.System">系统</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.System.Info">（使用系统代理）</s:String>
+    <s:String x:Key="S.Upload.Proxy.Host">主机：</s:String>
+    <s:String x:Key="S.Upload.Proxy.Port">端口：</s:String>
+    <s:String x:Key="S.Upload.Proxy.User">用户名：</s:String>
+    <s:String x:Key="S.Upload.Proxy.Password">密码：</s:String>
+    <s:String x:Key="S.Upload.Get">获取 OAuth 凭证</s:String>
+    <s:String x:Key="S.Upload.PasteToken">将授权凭证粘贴到此处</s:String>
+    <s:String x:Key="S.Upload.Authorize">授权</s:String>
+    <s:String x:Key="S.Upload.Refresh">刷新</s:String>
+    <s:String x:Key="S.Upload.Clear">清除</s:String>
+    <s:String x:Key="S.Upload.Imgur.Anonymous">Imgur（匿名）</s:String>
+    <s:String x:Key="S.Upload.Imgur.Direct">使用直接链接。</s:String>
+    <s:String x:Key="S.Upload.Imgur.Gifv">使用 Gifv 扩展名而不是 Gif 获取链接。</s:String>
+    <s:String x:Key="S.Upload.Imgur.ToAlbum">将 gif 上传到所选的相册。</s:String>
+    <s:String x:Key="S.Upload.Imgur.Album">相册：</s:String>
+    <s:String x:Key="S.Upload.Imgur.AskMe">上传前询问我</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.NotPossible">无法打开页面以获取 Imgur 授权凭证。</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.Missing">为了授权此应用程序，您需要提供授权令牌凭证。</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.Completed">Imgur 授权完成。</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.Error">Imgur 授权失败。 几秒钟后重试或获取新的凭证。</s:String>
+    <s:String x:Key="S.Upload.Imgur.Refresh.None">为了刷新此应用程序的授权，您需要先完成授权过程。</s:String>
+    <s:String x:Key="S.Upload.Imgur.NotAuthorized">未授权。</s:String>
+    <s:String x:Key="S.Upload.Imgur.Expired">授权已在{0}中过期。</s:String>
+    <s:String x:Key="S.Upload.Imgur.Valid">授权有效期至{0}。</s:String>
+    <s:String x:Key="S.Upload.Imgur.Removed">Imgur 授权被删除。</s:String>
+    <s:String x:Key="S.Upload.Imgur.Error.AlbumLoad">无法加载相册列表。</s:String>
+    <s:String x:Key="S.Upload.Gyfcat.Anonymous">Gfycat（匿名）</s:String>
+    <s:String x:Key="S.Upload.Yandex.Token">OAuth 凭证：</s:String>
+    <s:String x:Key="S.Upload.Pick.Destination">选择一个目标</s:String>
+    <s:String x:Key="S.Upload.Pick.Album">选择一个相册（可选）</s:String>
+    <s:String x:Key="S.Upload.Pick.Album.Info">如果您愿意，可以选择目标相册：</s:String>
+    
     <s:String x:Key="Extras.External">可用的外部工具</s:String>
-    <s:String x:Key="Extras.Download">点击此处下载&#x0d;{0}</s:String>
+    <s:String x:Key="Extras.Download">点击此处下载
+{0}</s:String>
     <s:String x:Key="Extras.Downloading">下载中...</s:String>
-    <s:String x:Key="Extras.Ready">已下载&#x0d;{0}</s:String>
+    <s:String x:Key="Extras.Ready">已下载
+{0}</s:String>
     <s:String x:Key="Extras.Ready.Info">点击这里打开文件的属性。</s:String>
     <s:String x:Key="Extras.FfmpegLocation">FFmpeg 位置</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Select">选择 FFmpeg 可执行文件的位置</s:String>
@@ -200,6 +272,7 @@
     <s:String x:Key="Donate.Patreon">点击这里打开我的 Patreon 页面</s:String>
     <s:String x:Key="Donate.Steam.Link">点击这里打开我的 Steam 心愿单页面</s:String>
     <s:String x:Key="Donate.Steam.Text">您可以向我赠送游戏。</s:String>
+    <s:String x:Key="Donate.Crypto">加密货币</s:String>
 
     <s:String x:Key="About.Version">版本：</s:String>
     <s:String x:Key="About.Author">作者：Nicke Manarin</s:String>
@@ -285,7 +358,8 @@
     <s:String x:Key="InsertFrames.Title">插入帧</s:String>
     <s:String x:Key="InsertFrames.Info">两侧应具有相同的大小，此窗口允许您重新定位和调整图像和画布的大小。点击选择并调整大小。</s:String>
     <s:String x:Key="InsertFrames.CanvasSize">画布大小：</s:String>
-    <s:String x:Key="InsertFrames.FitCanvas">调整画布&#10;以适合图像</s:String>
+    <s:String x:Key="InsertFrames.FitCanvas">调整画布
+以适合图像</s:String>
     <s:String x:Key="InsertFrames.FitCanvas.Info">调整画布大小以装下两个图像（左上角）</s:String>
     <s:String x:Key="InsertFrames.DifferentSizes">两者帧大小不同。您需要在插入帧之前解决此问题。</s:String>
     <s:String x:Key="InsertFrames.InsertedFrames">新增帧</s:String>
@@ -369,20 +443,23 @@
     
     <!--File • New-->
     <s:String x:Key="Editor.File.New.Recording">录制</s:String>
-    <s:String x:Key="Editor.File.New.Webcam">摄像头&#10;录制</s:String>
+    <s:String x:Key="Editor.File.New.Webcam">摄像头
+录制</s:String>
     <s:String x:Key="Editor.File.New.Board">画板录制</s:String>
     <s:String x:Key="Editor.File.Blank">空白动画</s:String>
     <s:String x:Key="Editor.File.New">新建</s:String>
     
     <!--File • Insert-->
     <s:String x:Key="Editor.File.Insert.Recording">录制</s:String>
-    <s:String x:Key="Editor.File.Insert.Webcam">摄像头&#10;录制</s:String>
+    <s:String x:Key="Editor.File.Insert.Webcam">摄像头
+录制</s:String>
     <s:String x:Key="Editor.File.Insert.Media">媒体</s:String>
     <s:String x:Key="Editor.File.Insert">插入</s:String>
     
     <!--File • Save/Discard-->
     <s:String x:Key="Editor.File.Save">另存为</s:String>
-    <s:String x:Key="Editor.File.Load">媒体或&#10;项目</s:String>
+    <s:String x:Key="Editor.File.Load">媒体或
+项目</s:String>
     <s:String x:Key="Editor.File.LoadRecent">最近项目</s:String>
     <s:String x:Key="Editor.File.SaveProject">另存为项目</s:String>
     <s:String x:Key="Editor.File.Discard">放弃项目</s:String>
@@ -402,7 +479,8 @@
     
     <!--Home • Zoom-->
     <s:String x:Key="Editor.Home.Zoom">缩放</s:String>
-    <s:String x:Key="Editor.Home.SizeToContent">根据内容&#10;调整窗口</s:String>
+    <s:String x:Key="Editor.Home.SizeToContent">根据内容
+调整窗口</s:String>
     <s:String x:Key="Editor.Home.FitImage">适合图像</s:String>
     
     <!--Home • Select-->
@@ -424,6 +502,7 @@
     <!--Edit • Frames-->  
     <s:String x:Key="Editor.Edit.Frames">帧</s:String>
     <s:String x:Key="Editor.Edit.Delete">删除</s:String>
+    <s:String x:Key="Editor.Edit.Frames.Duplicates">移除重复</s:String>
     <s:String x:Key="Editor.Edit.Frames.Reduce">减少帧数</s:String>
     <s:String x:Key="Editor.Edit.DeletePrevious">删除之前所有</s:String>
     <s:String x:Key="Editor.Edit.DeleteNext">删除之后所有</s:String>
@@ -613,6 +692,7 @@
     <s:String x:Key="Hint.Delay">已改变持续时间（延时）</s:String>
     <s:String x:Key="Hint.Transition">已插入过渡效果</s:String>
     <s:String x:Key="Hint.Reduce">已减少帧率</s:String>
+    <s:String x:Key="Hint.Duplicates">重复删除</s:String>
     
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">隐藏</s:String>
@@ -658,7 +738,19 @@
     <s:String x:Key="Reduce.Header">减少帧率</s:String>
     <s:String x:Key="Reduce.Factor">系数：</s:String>
     <s:String x:Key="Reduce.Count">删除帧数：</s:String>
-    <s:String x:Key="Reduce.Info">每隔 {1} 帧删除 {0} 帧。（不计算删除的帧）&#10;将调整帧率。</s:String>
+    <s:String x:Key="Reduce.Info">每隔 {1} 帧删除 {0} 帧。（不计算删除的帧）
+将调整帧率。</s:String>
+
+    <s:String x:Key="S.RemoveDuplicates.Header">删除重复项</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Similarity">相似度 (%)：</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal">帧删除：</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal.First">删除第一帧</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal.Last">删除最后一帧</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay">延迟调整：</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.NoAdjustment">不调整</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.Average">使用平均值</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.Sum">使用总和</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Info">此操作会分析每个帧（逐个像素），并删除至少为{0} %的类似于其最近邻的帧。&#x0d;您可以选择是否要调整帧的延迟（显示持续时间）。</s:String>
     
     <s:String x:Key="Caption.Text">文本</s:String>
     <s:String x:Key="Caption.Font">字体</s:String>
@@ -679,7 +771,7 @@
     <s:String x:Key="KeyStrokes.IgnoreModifiers">忽略 Ctrl、Alt、Shift 和 Windows 键，而不将其用作修饰符。</s:String>
     <s:String x:Key="KeyStrokes.IgnoreModifiers.Info">它将忽略诸如“Control”这样单独的按键, 但它不会忽略“Control + C”。</s:String>
     <s:String x:Key="KeyStrokes.Extend">延长按键显示时间</s:String>
-    <!--<s:String x:Key="KeyStrokes.Earlier">Start the exhibition of the key strokes earlier.</s:String>-->
+    <s:String x:Key="KeyStrokes.Earlier">早些时候开始展示击键。</s:String>
     <s:String x:Key="KeyStrokes.By">长度 (ms)</s:String>
     <s:String x:Key="KeyStrokes.Warning.None">您在此次录制中没有按过键。</s:String>
     <s:String x:Key="KeyStrokes.Edit.Title">ScreenToGif - 键盘按键编辑器</s:String>
@@ -741,7 +833,8 @@
     
     <s:String x:Key="Cinemagraph.Info">使用笔在不应保持静态（即在不同帧之间变化）的像素上描画来进行选择</s:String>
     <s:String x:Key="OverrideDelay.Info">此新值将替换所有选定帧的持续时间（延时）。该值应保持在 10ms 和 25500ms 之间。</s:String>
-    <s:String x:Key="IncreaseDecreaseDelay.Info">该值将增加或减少所选每帧的持续时间（延时）。&#10;您可以增加或减少介于 -10.000ms 和 10.000ms 之间的值，但每帧的持续时间将介于 10ms 和 25.500ms 之间</s:String>
+    <s:String x:Key="IncreaseDecreaseDelay.Info">该值将增加或减少所选每帧的持续时间（延时）。
+您可以增加或减少介于 -10.000ms 和 10.000ms 之间的值，但每帧的持续时间将介于 10ms 和 25.500ms 之间</s:String>
     
     <s:String x:Key="Transitions.Lenght">过渡长度</s:String>
     <s:String x:Key="Transitions.Delay">过渡延时</s:String>
@@ -757,6 +850,7 @@
     <s:String x:Key="S.SaveAs.Apng">Apng</s:String>
     <s:String x:Key="S.SaveAs.Images">图片（帧）</s:String>
     <s:String x:Key="S.SaveAs.Project">项目</s:String>
+    <s:String x:Key="S.SaveAs.Psd">PSD 文件</s:String>
     <s:String x:Key="S.SaveAs.Video">视频</s:String>
     <s:String x:Key="S.SaveAs.Encoder">编码器</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">2.0</s:String>
@@ -822,13 +916,13 @@
     <s:String x:Key="S.SaveAs.File.Increase">增加文件编号</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">减小文件编号</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">已存在同名文件</s:String>
-    <s:String x:Key="S.SaveAs.File.Overwrite">覆盖（如果已经存在）</s:String>
-    <s:String x:Key="S.SaveAs.File.ProjectToo">另存为项目（相同的文件夹，相同的文件名）。</s:String>
+    
     <s:String x:Key="S.SaveAs.File.Clipboard">保存到剪贴板</s:String>
 
     <s:String x:Key="S.SaveAs.Warning.Type">您需要选择保存文件的位置（文件夹、剪贴板或上传到某处）</s:String>
     <s:String x:Key="S.SaveAs.Warning.Commands.Empty">您需要在命令文本框中输入编码后置命令才能执行他们。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Upload.None">没有选择上传服务。你需要选择一个目的地。</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Upload.NotAuthorized">您无法上传到选定的服务，因为它没有被授权。 转到选项>云服务授权此应用程序。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Copy.Link">您不能选择复制链接的选项，因为您没有设置上传文件。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">您需要选择输出文件夹。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">输出目录不存在。</s:String>
