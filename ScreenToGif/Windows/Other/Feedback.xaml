@@ -191,7 +191,7 @@
                            Click="RemoveAllAttachmentButton_Click"/>
 
             <n:ImageButton Grid.Column="3" x:Name="OkButton" Text="{DynamicResource S.Feedback.Send}" Content="{StaticResource Vector.Ok}" ContentHeight="20" Padding="4,0" Margin="5" Click="SendButton_Click"/>
-            <n:ImageButton Grid.Column="4" x:Name="CancelButton" Text="{DynamicResource Cancel}" Content="{StaticResource Vector.Cancel}" ContentHeight="20" Padding="4,0" Margin="5" Click="CancelButton_Click"/>
+            <n:ImageButton Grid.Column="4" x:Name="CancelButton" Text="{DynamicResource Cancel}" Content="{StaticResource Vector.Cancel}" ContentHeight="20" Padding="4,0" Margin="5" Click="CancelButton_Click" IsCancel="True"/>
         </Grid>
     </Grid>
 </Window>

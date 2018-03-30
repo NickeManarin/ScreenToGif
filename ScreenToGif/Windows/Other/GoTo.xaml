@@ -33,7 +33,7 @@
                            MaxSize="20" MinWidth="90" Margin="5" Click="OkButton_Click"/>
             
             <n:ImageButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource Cancel}" Content="{StaticResource Vector.Cancel}" 
-                           MaxSize="20" MinWidth="90" Margin="5" Click="CancelButton_Click"/>
+                           MaxSize="20" MinWidth="90" Margin="5" Click="CancelButton_Click" IsCancel="True"/>
         </Grid>
     </Grid>
 </Window>

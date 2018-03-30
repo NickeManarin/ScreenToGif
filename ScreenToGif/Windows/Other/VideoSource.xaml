@@ -133,7 +133,7 @@
             <c:ImageButton x:Name="OkButton" Grid.Column="2" Text="{DynamicResource Ok}" Margin="5" IsEnabled="False" MaxSize="20"
                            MinWidth="90" MinHeight="20" Click="OkButton_Click" Content="{StaticResource Vector.Ok}" />
             <c:ImageButton x:Name="CancelButton" Grid.Column="3" Text="{DynamicResource Cancel}" Margin="5" MaxSize="20"
-                           MinWidth="90" MinHeight="20" Content="{StaticResource Vector.Cancel}" Click="CancelButton_Click"/>
+                           MinWidth="90" MinHeight="20" Content="{StaticResource Vector.Cancel}" Click="CancelButton_Click" IsCancel="True"/>
         </Grid>
     </Grid>
 </Window>
