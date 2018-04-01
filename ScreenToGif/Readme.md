@@ -11,11 +11,13 @@ _VS 2017 and .Net 4.6.1 or newer required._
 
 ### Fixed:
 
-♦ When there's a project open, open the recorder, close without recording, press no.  
-♦ When removing duplicates frames and not finding any frame to be removed, the app would crash.  
+♦ When there's a project open, when closing the recorder without recording, the app would crash.  
+♦ When removing duplicated frames and not finding any frame to be removed, the app would crash.  
 ♦ Issues related to the numerical input that accepts decimal values.  
 ♦ Some settings were not saved after closing the app.  
+♦ Files with uppercase extension were not being recognized by the app.  
 
 ### Known Bugs:
 
-♠ Cinemagraph feature does not work correctly when applying to a recording with a different dpi than the screen.  
+♠ Cinemagraph feature does not work correctly when applying to a project with a 
+different dpi than the screen.  
