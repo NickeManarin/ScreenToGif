@@ -564,7 +564,7 @@ namespace ScreenToGif.Windows
                 var recorder = new RecorderNew();
                 recorder.ShowDialog();
 
-                if (recorder.Project?.Frames != null)
+                if (recorder.Project?.Any == true)
                 {
                     LoadProject(recorder.Project);
                     ShowHint("Hint.NewRecording");
@@ -573,9 +573,9 @@ namespace ScreenToGif.Windows
             else
             {
                 var recorder = new Recorder();
-                var result = recorder.ShowDialog();
+                recorder.ShowDialog();
 
-                if (recorder.Project?.Frames != null)
+                if (recorder.Project?.Any == true)
                 {
                     LoadProject(recorder.Project);
                     ShowHint("Hint.NewRecording");
@@ -596,7 +596,7 @@ namespace ScreenToGif.Windows
             var recorder = new Webcam();
             recorder.ShowDialog();
 
-            if (recorder.Project?.Frames != null)
+            if (recorder.Project?.Any == true)
             {
                 LoadProject(recorder.Project);
                 ShowHint("Hint.NewWebcamRecording");
@@ -612,7 +612,7 @@ namespace ScreenToGif.Windows
             var recorder = new Board();
             recorder.ShowDialog();
 
-            if (recorder.Project?.Frames != null && recorder.Project.Any)
+            if (recorder.Project?.Any == true)
             {
                 LoadProject(recorder.Project);
                 ShowHint("Hint.NewBoardRecording");
@@ -2131,8 +2131,7 @@ namespace ScreenToGif.Windows
 
         private void Reordering_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = FrameListView != null && FrameListView.SelectedItem != null && !IsLoading &&
-            FrameListView.Items.Count > 1;
+            e.CanExecute = FrameListView?.SelectedItem != null && !IsLoading && FrameListView.Items.Count > 1;
         }
 
         private void Reverse_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -4825,7 +4824,7 @@ namespace ScreenToGif.Windows
                         .Replace("$ms", cumulative.ToString())
                         .Replace("$s", ((int)TimeSpan.FromMilliseconds(cumulative).TotalSeconds).ToString())
                         .Replace("$m", TimeSpan.FromMilliseconds(cumulative).ToString())
-                        .Replace("$p", (current / (double)Project.Frames.Count * 100).ToString("##0.#"))
+                        .Replace("$p", (current / (double)Project.Frames.Count * 100).ToString("##0.#", CultureInfo.CurrentUICulture))
                         .Replace("$f", current.ToString())
                         .Replace("@ms", total.ToString())
                         .Replace("@s", ((int)TimeSpan.FromMilliseconds(total).TotalSeconds).ToString())
@@ -6189,7 +6188,8 @@ namespace ScreenToGif.Windows
 
             if (delay == DuplicatesDelayType.DontAdjust)
             {
-                ActionStack.SaveState(ActionStack.EditAction.Remove, Project.Frames, removeList);
+                if (removeList.Count > 0) //TODO: Should I tell the user?
+                    ActionStack.SaveState(ActionStack.EditAction.Remove, Project.Frames, removeList);
             }
             else
             {
@@ -6220,7 +6220,7 @@ namespace ScreenToGif.Windows
             }
 
             //Gets the minimum index being altered.
-            return alterList.Count > 0 ? Math.Min(removeList.Min(), alterList.Min()) : removeList.Min();
+            return alterList.Count == 0 && removeList.Count == 0 ? Project.Frames.Count : alterList.Count > 0 ? Math.Min(removeList.Min(), alterList.Min()) : removeList.Min();
         }
 
         private void RemoveDuplicatesCallback(IAsyncResult ar)

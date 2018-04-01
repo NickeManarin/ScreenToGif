@@ -17,7 +17,7 @@
     <s:String x:Key="Suppress">隐藏</s:String>
     <s:String x:Key="Preview">预览</s:String>
     <s:String x:Key="S.Add">添加</s:String>
-    <s:String x:Key="S.Id">Id</s:String>
+    <s:String x:Key="S.Id">标识</s:String>
     <s:String x:Key="S.Title">标题</s:String>
     <s:String x:Key="S.Description">描述</s:String>
 

@@ -378,7 +378,7 @@
                 <Setter Property="OverridesDefaultStyle" Value="True" />
                 <Setter Property="Grid.IsSharedSizeScope" Value="true" />
                 <Setter Property="Placement" Value="Bottom"/>
-                <Setter Property="HorizontalOffset" Value="-3"/>
+                <Setter Property="HorizontalOffset" Value="-5"/>
                 <Setter Property="Effect" Value="{DynamicResource Shadow.Grey}"/>
 
                 <Setter Property="Template">
@@ -1064,7 +1064,7 @@
             </Style>
 
             <!--Notification Icon-->
-            <n:NotifyIcon x:Key="NotifyIcon" IconSource="/Resources/Notification.ico" DataContext="{StaticResource AppViewModel}" NotifyToolTipText="ScreenToGif" Visibility="Collapsed">
+            <n:NotifyIcon x:Key="NotifyIcon" IconSource="/Resources/Logo.ico" DataContext="{StaticResource AppViewModel}" NotifyToolTipText="ScreenToGif" Visibility="Collapsed">
                 <!--<n:NotifyIcon.NotifyToolTip>
                     <Grid Background="White">
                         <Grid.RowDefinitions>

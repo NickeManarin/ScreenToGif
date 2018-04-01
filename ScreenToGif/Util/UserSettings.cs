@@ -144,7 +144,13 @@ namespace ScreenToGif.Util
             if (_local != null)
             {
                 if (_local.Contains(key))
+                {
                     _local[key] = value;
+
+                    //If the value is being set to null, remove it.
+                    if (value == null && (!Default.Contains(key) || Default[key] == null))
+                        _local.Remove(key);
+                }
                 else
                     _local.Add(key, value);
             }
@@ -153,7 +159,13 @@ namespace ScreenToGif.Util
             if (_appData != null)
             {
                 if (_appData.Contains(key))
+                {
                     _appData[key] = value;
+
+                    //If the value is being set to null, remove it.
+                    if (value == null && (!Default.Contains(key) || Default[key] == null))
+                        _appData.Remove(key);
+                }
                 else
                     _appData.Add(key, value);
             }
