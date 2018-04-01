@@ -1401,11 +1401,11 @@ namespace ScreenToGif.Windows
 
             #region Validation
 
-            var extensionList = ofd.FileNames.Select(Path.GetExtension).ToList();
+            var extensionList = ofd.FileNames.Select(s => Path.GetExtension(s).ToLowerInvariant()).ToList();
 
-            var media = new[] { "jpg", "jpeg", "gif", "bmp", "png", "avi", "mp4", "wmv" };
+            var media = new[] { ".jpg", ".jpeg", ".gif", ".bmp", ".png", ".avi", ".mp4", ".wmv" };
 
-            var projectCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && (x.Equals("stg") || x.Equals("zip")));
+            var projectCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && (x.Equals(".stg") || x.Equals(".zip")));
             var mediaCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && media.Contains(x));
 
             if (projectCount != 0 && mediaCount != 0)
@@ -3399,8 +3399,8 @@ namespace ScreenToGif.Windows
 
             #region Validation
 
-            var extensionList = fileNames.Select(Path.GetExtension).ToList();
-
+            var extensionList = fileNames.Select(s => Path.GetExtension(s).ToLowerInvariant()).ToList();
+            
             var media = new[] { ".jpg", ".jpeg", ".gif", ".bmp", ".png", ".avi", ".mp4", ".wmv" };
 
             var projectCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && (x.Equals(".stg") || x.Equals(".zip")));
@@ -3830,7 +3830,7 @@ namespace ScreenToGif.Windows
 
             try
             {
-                switch (fileName.Split('.').Last())
+                switch (fileName.Split('.').Last().ToLowerInvariant())
                 {
                     case "stg":
                     case "zip":
@@ -3951,6 +3951,17 @@ namespace ScreenToGif.Windows
             //Adds each image to a list.
             foreach (var file in fileList)
                 project.Frames.AddRange(InsertInternal(file, project.FullPath) ?? new List<FrameInfo>());
+
+            if (!project.Any)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    Cursor = Cursors.Arrow;
+                    IsLoading = false;
+                });
+
+                return false;
+            }
 
             return Dispatcher.Invoke(() =>
             {
