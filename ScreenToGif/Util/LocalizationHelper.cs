@@ -36,7 +36,7 @@ namespace ScreenToGif.Util
             #region Selected Culture
 
             //Search for the specified culture.
-            string requestedCulture = $"/Resources/Localization/StringResources.{culture}.xaml";
+            var requestedCulture = $"/Resources/Localization/StringResources.{culture}.xaml";
             var requestedResource = dictionaryList.FirstOrDefault(d => d.Source?.OriginalString == requestedCulture);
 
             #endregion
