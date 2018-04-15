@@ -17,7 +17,24 @@
     <s:String x:Key="Suppress">Onderdrukken</s:String>
     <s:String x:Key="Preview">Voorbeschouwing</s:String>
     <s:String x:Key="S.Add">Toevoegen</s:String>
+    <s:String x:Key="S.Id">Id</s:String>
+    <s:String x:Key="S.Title">Titel</s:String>
+    <s:String x:Key="S.Description">Omschrijving</s:String>
 
+    <!--Notification Icon-->
+    <s:String x:Key="S.NewRecording">Nieuwe schermopname</s:String>
+    <s:String x:Key="S.NewWebcamRecording">Nieuwe webcam opname</s:String>
+    <s:String x:Key="S.NewBoardRecording">Nieuwe whiteboard opname</s:String>
+    <s:String x:Key="S.Exit">Afsluiten</s:String>
+
+    <!--Application-->
+    <s:String x:Key="Application.Exiting.Title">Afsluiten van ScreenToGif</s:String>
+    <s:String x:Key="Application.Exiting.Instruction">Weet je zeker dat je wilt afsluiten?</s:String>
+    <s:String x:Key="Application.Exiting.Message">Alle schermen zullen gesloten worden en pictogram op de taakbalk zal weggehaald worden.</s:String>
+    
+    <!--Error messages--> 
+    <s:String x:Key="S.Crash">O nee, de applicatie is vastgelopen :(</s:String>
+    
     <!--StartUp Page-->
     <s:String x:Key="Title.StartUp">ScreenToGif - Opstarten</s:String>
     <s:String x:Key="Recorder">Opname</s:String>
@@ -51,6 +68,7 @@
     <s:String x:Key="Title.Options">ScreenToGif - Instellingen</s:String>
     <s:String x:Key="Application">Applicatie</s:String>
     <s:String x:Key="Interface">Interface</s:String>
+    <s:String x:Key="S.Shortcuts">Snelkoppelingen</s:String>
     <s:String x:Key="Image">Afbeeldng</s:String>
     <s:String x:Key="Language">Taal</s:String>
     <s:String x:Key="TemporaryFiles">Tijdelijke bestanden</s:String>
@@ -84,6 +102,8 @@
     <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(Schakelt scherm vergrootglas in tijdens selecteren van opname gebied)</s:String>
     
     <s:String x:Key="Application.Other">Overig</s:String>
+    <s:String x:Key="Application.Other.SystemTray">Toon pictogram applicatie op de taakbalk (meldingen centrum).</s:String>
+    <s:String x:Key="Application.Other.LeaveOpen">Hou de applicatie open zelfs als alle schermen gesloten zijn.</s:String>
     <s:String x:Key="Application.Other.NotifyFrameDeletion">Stel vraag voordat alle frames worden verwijderd.</s:String>
     <s:String x:Key="Application.Other.NotifyProjectDiscard">Stel vraag voordat project wordt leeggehaald?</s:String>
     <s:String x:Key="Application.Other.NotifyWhileClosingEditor">Stel vraag voordat de editor wordt afgesoten (als er een project geopend is).</s:String>
@@ -126,11 +146,28 @@
     <s:String x:Key="Interface.Other.AutomaticallySizeOnContent">Automatisch aanpassen venstergrootte op basis van framegrootte, gelijk na laden</s:String>
     <s:String x:Key="Interface.Other.AutomaticallyFitImage">Automatisch aanpassen van zoomniveau frame op basis van schermgrootte, gelijk na laden</s:String>
   
+    <s:String x:Key="S.Shortcuts.Global">Globaal</s:String>
+    <s:String x:Key="S.Shortcuts.Global.ScreenRecorder">Scherm opname:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.ScreenRecorder.Info">(Opent de standaard scherm opname)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.WebcamRecorder">Webcam opname</s:String>
+    <s:String x:Key="S.Shortcuts.Global.WebcamRecorder.Info">(Opent de webcam opname)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.BoardRecorder">Whiteboard opname:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.BoardRecorder.Info">(Opent de whiteboard opanem, waardoor je je tekeningen kan opnemen)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenEditor">Editor:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenEditor.Info">(Opent een ander editor scherm)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenOptions">Opties:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenOptions.Info">(Opent scherm met optie. Je kan dit scherm maar 1 keer openen)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.Exit">Afsluiten:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.Exit.Info">(Sluit alle schermen en verwijdert de applicatie uit taakbalk)</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders">Opname</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.StartPause">Start/Pauze:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.StartPause.Info">(Deze optie start of pauzeert de opname. Dit wordt gebruikt om snapshots te maken als de snapshot modus is geactiveerd)</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.Stop">Stop:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Stop.Info">(Dit stopt de opname and opent de editor)</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.Discard">Leeghalen:</s:String>
-    <s:String x:Key="S.Shortcuts.Recorders.Info">Klik om toetsenbord focus te krijgen. Druk daarna op gewenste toetsen.&#10;Sommige toetscombinaties zijn niet toegestaan.</s:String>
-
+    <s:String x:Key="S.Shortcuts.Recorders.Discard.Info">(afbreken actieve maar gepauzeerde opname)</s:String>
+    <s:String x:Key="S.Shortcuts.Info">Klik om focus op toetsenbord te zetten, druk daarna op de gewenste toetsen of combinaties.&#10;Sommige toetscombinaties zijn niet toegestaan.</s:String>
+    
     <s:String x:Key="Language.AppLanguage">Taal applicatie</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect">Automatisch detecteren</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect.Author">Huidige taal OS (als beschikbaar)</s:String>
@@ -170,8 +207,42 @@
     <s:String x:Key="TempFiles.AutomaticRemovalDays.Info">(in dagen, elk project ouder dan deze instelling zal worden verwijderd/overgeslagen als geopend wordt in editor)</s:String>
     <s:String x:Key="TempFiles.LowSpace">Weinig hardeschijf ruimte beschikbaar. Schoon map tijdelijke bestanden of verander de opslaglokatie van tijdelijke bestanden ScreenToGif.</s:String>
     
-    <s:String x:Key="S.Upload.Yandex.Token">OAuth token:</s:String>
+    <s:String x:Key="S.Upload.Proxy">Proxy</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode">Modus:</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.Disabled">Uitgeschakeld</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.Manual">Manueel</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.System">Systeem</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.System.Info">(Gebruikt proxy server)</s:String>
+    <s:String x:Key="S.Upload.Proxy.Host">Host:</s:String>
+    <s:String x:Key="S.Upload.Proxy.Port">Poort:</s:String>
+    <s:String x:Key="S.Upload.Proxy.User">Gebruikersnaam:</s:String>
+    <s:String x:Key="S.Upload.Proxy.Password">Wachtwoord:</s:String>
     <s:String x:Key="S.Upload.Get">Haal OAuth token op</s:String>
+    <s:String x:Key="S.Upload.PasteToken">Plak autorisatiesleutel hier</s:String>
+    <s:String x:Key="S.Upload.Authorize">Autoriseren</s:String>
+    <s:String x:Key="S.Upload.Refresh">Verversen</s:String>
+    <s:String x:Key="S.Upload.Clear">Leegmaken</s:String>
+    <s:String x:Key="S.Upload.Imgur.Anonymous">Imgur (Anoniem)</s:String>
+    <s:String x:Key="S.Upload.Imgur.Direct">Gebruik directe links</s:String>
+    <s:String x:Key="S.Upload.Imgur.Gifv">Links verkrijgen met de Gifv extensie in plaats van Gif.</s:String>
+    <s:String x:Key="S.Upload.Imgur.ToAlbum">Uploaden gifs naar geselecteerd album</s:String>
+    <s:String x:Key="S.Upload.Imgur.Album">Album:</s:String>
+    <s:String x:Key="S.Upload.Imgur.AskMe">Vraag me voordat je gaat uploaden</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.NotPossible">Het was niet mogelijk om een pagina te openen om de Imgur autorisatiesleutel op te halen.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.Missing">Voordat deze applicatie geautoriseerd kan worden, dien je een geldige autorisatiesleutel op te geven.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.Completed">Imgur autorisate compleet gemaakt</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.Error">Imgur autorisatie mislukt. Probeer binnen enkele ogenblikken opnieuw or vraag een nieuwe sleutel aan.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Refresh.None">Voordat de autorisatie ververst kan worden, moet eerst autorisatie proces afgerond worden.</s:String>
+    <s:String x:Key="S.Upload.Imgur.NotAuthorized">Niet geautoriseerd</s:String>
+    <s:String x:Key="S.Upload.Imgur.Expired">Autorisatie loopt af in {0}.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Valid">Autorisatie geldig tot {0}.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Removed">Imgur autorisatie verwijderd.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Error.AlbumLoad">Het was niet mogelijk om album te laden</s:String>
+    <s:String x:Key="S.Upload.Gyfcat.Anonymous">Gyfcat (Anoniem)</s:String>
+    <s:String x:Key="S.Upload.Yandex.Token">OAuth token:</s:String>
+    <s:String x:Key="S.Upload.Pick.Destination">Selecteer bestemming</s:String>
+    <s:String x:Key="S.Upload.Pick.Album">Selecteer een album (optioneel)</s:String>
+    <s:String x:Key="S.Upload.Pick.Album.Info">Als je dat wilt, kan je een bestemming kiezen voor album:</s:String>
     
     <s:String x:Key="Extras.External">Beschikbare externe applicaties</s:String>
     <s:String x:Key="Extras.Download">Klik hier om te downloaden &#x0d;{0}</s:String>
@@ -195,6 +266,7 @@
     <s:String x:Key="Donate.Patreon">Klik hier om mijn Patreon pagina te openen</s:String>
     <s:String x:Key="Donate.Steam.Link">Klik hier om mijn Steam wensenlijst pagina te openen.</s:String>
     <s:String x:Key="Donate.Steam.Text">Je kunt games sturen als cadeau.</s:String>
+    <s:String x:Key="Donate.Crypto">Cryptomunten</s:String>
 
     <s:String x:Key="About.Version">Versie:</s:String>
     <s:String x:Key="About.Author">Auteur: Nicke Manarin</s:String>
@@ -765,6 +837,7 @@
     <s:String x:Key="S.SaveAs.Apng">Apng</s:String>
     <s:String x:Key="S.SaveAs.Images">Afbeeldingen (frames)</s:String>
     <s:String x:Key="S.SaveAs.Project">Project</s:String>
+    <!--<s:String x:Key="S.SaveAs.Psd">PSD file</s:String>-->
     <s:String x:Key="S.SaveAs.Video">Video</s:String>
     <s:String x:Key="S.SaveAs.Encoder">Encoder</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">2.0</s:String>
@@ -832,6 +905,7 @@
     <s:String x:Key="S.SaveAs.Warning.Type">Je dient aan te geven waar je uitvoerbestand wilt bewaren (naar een map, naar klembord of naar een uploadlokatie).</s:String>
     <s:String x:Key="S.SaveAs.Warning.Commands.Empty">Om commando's uit te laten voeren na genereren uitvoerbestand, zul je in commando's tekst veld iets moeten neerzetten</s:String>
     <s:String x:Key="S.SaveAs.Warning.Upload.None">Geen upload service geselecteerd. Je dient een bestemming op te geven.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Upload.NotAuthorized">Je kan niet uploaden naar geselecteerde dienst, want deze dienst was nog niet geautoriseerd. Ga naar Opties --> Upload diensten om deze dienst te autoriseren</s:String>
     <s:String x:Key="S.SaveAs.Warning.Copy.Link">Je kan niet een optie selecteren om link te kopieren, omdat je niet hebt aangegeven dat je een bestand gaat uploaden.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">Je dient een lokatie voor bestand op te geven.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">De lokatie voor exportbestand bestaat niet.</s:String>

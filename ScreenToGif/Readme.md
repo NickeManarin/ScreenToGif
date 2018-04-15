@@ -5,17 +5,13 @@ This is the current project of ScreenToGif.
 _VS 2017 and .Net 4.6.1 or newer required._
 
 
-## What's new? (Version 2.13.1)
+## What's new? (Version 2.13.2)
 
-• The Simplified Chinese and Japanese translations were updated.  
+• Updated the Dutch translation.
 
 ### Fixed:
 
-♦ When there's a project open, when closing the recorder without recording, the app would crash.  
-♦ When removing duplicated frames and not finding any frame to be removed, the app would crash.  
-♦ Issues related to the numerical input that accepts decimal values.  
-♦ Some settings were not saved after closing the app.  
-♦ Files with uppercase extension were not being recognized by the app.  
+♦ Performance issues with the startup of the app.  
 
 ### Known Bugs:
 
