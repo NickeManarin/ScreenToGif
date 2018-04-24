@@ -5,13 +5,13 @@ This is the current project of ScreenToGif.
 _VS 2017 and .Net 4.6.1 or newer required._
 
 
-## What's new? (Version 2.13.2)
+## What's new? (Version 2.13.3)
 
-• Updated the Dutch translation.
+• Updated the Dutch translation. 
 
 ### Fixed:
 
-♦ Performance issues with the startup of the app.  
+♦ The Imgur upload was not working. 
 
 ### Known Bugs:
 

@@ -677,7 +677,7 @@
                             <n:ImageListBoxItem Image="{StaticResource Flag.Denmark}" Tag="da" Content="Danish / Dansk" Author="Regmos"
                                                 MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=da, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ImageListBoxItem Image="{StaticResource Flag.Netherlands}" Tag="nl" Content="Dutch / Nederlands" Author="Jasper Verweij"
+                            <n:ImageListBoxItem Image="{StaticResource Flag.Netherlands}" Tag="nl" Content="Dutch / Nederlands" Author="Jasper Verweij, Stephan Paternotte"
                                                 MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=nl, Converter={StaticResource TagToSelection}}"/>
 
                             <n:ImageListBoxItem Image="{StaticResource Flag.UnitedKingdom}" Tag="en" Content="English" Author="Nicke Manarin" 
