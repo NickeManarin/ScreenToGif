@@ -46,6 +46,7 @@ using ListViewItem = System.Windows.Controls.ListViewItem;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 using Size = System.Windows.Size;
+using System.Text.RegularExpressions;
 
 namespace ScreenToGif.Windows
 {
@@ -1089,6 +1090,9 @@ namespace ScreenToGif.Windows
                 var copyType = GetCopyType();
                 var executeCommands = GetExecuteCustomCommands();
                 var commands = GetCustomCommands();
+
+                //put datetime into filename which is saved between two questions marks
+                GetOutputFilenameNoRegExp(ref name);
 
                 #region Common validations
 
@@ -4899,6 +4903,21 @@ namespace ScreenToGif.Windows
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        private string GetOutputFilenameNoRegExp(ref string name)
+        {
+            //put datetime into filename which is saved between two questions marks
+            string twoIllegalcharRegExp = @"[?$&+:|]";
+            string dateTimeFileNameRegEx = twoIllegalcharRegExp + @"([dyhms]+[-_ ]*)+" + twoIllegalcharRegExp;
+            if (Regex.IsMatch(name, dateTimeFileNameRegEx, RegexOptions.IgnoreCase))
+            {
+                var dateTimeRegExp = Regex.Match(name, dateTimeFileNameRegEx, RegexOptions.IgnoreCase);
+                var nameNoRegExp = name.Replace(dateTimeRegExp.ToString(), "");
+                var dateTimeConverted = DateTime.Now.ToString(Regex.Replace(dateTimeRegExp.Value, twoIllegalcharRegExp, ""));
+                name = nameNoRegExp + dateTimeConverted;
+            }
+            return name;
         }
 
         private string GetOutputExtension()
