@@ -4913,9 +4913,8 @@ namespace ScreenToGif.Windows
             if (Regex.IsMatch(name, dateTimeFileNameRegEx, RegexOptions.IgnoreCase))
             {
                 var dateTimeRegExp = Regex.Match(name, dateTimeFileNameRegEx, RegexOptions.IgnoreCase);
-                var nameNoRegExp = name.Replace(dateTimeRegExp.ToString(), "");
                 var dateTimeConverted = DateTime.Now.ToString(Regex.Replace(dateTimeRegExp.Value, twoIllegalcharRegExp, ""));
-                name = nameNoRegExp + dateTimeConverted;
+                name = name.Replace(dateTimeRegExp.ToString(),dateTimeConverted);
             }
             return name;
         }
