@@ -4908,12 +4908,11 @@ namespace ScreenToGif.Windows
         private string GetOutputFilenameNoRegExp(ref string name)
         {
             //put datetime into filename which is saved between two questions marks
-            string twoIllegalcharRegExp = @"[?$&+:|]";
-            string dateTimeFileNameRegEx = twoIllegalcharRegExp + @"([dyhms]+[-_ ]*)+" + twoIllegalcharRegExp;
+            string dateTimeFileNameRegEx = @"[?]([dyhms]+[-_ ]*)+[?]";
             if (Regex.IsMatch(name, dateTimeFileNameRegEx, RegexOptions.IgnoreCase))
             {
                 var dateTimeRegExp = Regex.Match(name, dateTimeFileNameRegEx, RegexOptions.IgnoreCase);
-                var dateTimeConverted = DateTime.Now.ToString(Regex.Replace(dateTimeRegExp.Value, twoIllegalcharRegExp, ""));
+                var dateTimeConverted = DateTime.Now.ToString(Regex.Replace(dateTimeRegExp.Value, "[?]", ""));
                 name = name.Replace(dateTimeRegExp.ToString(),dateTimeConverted);
             }
             return name;
