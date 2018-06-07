@@ -894,7 +894,7 @@
     <s:String x:Key="S.SaveAs.File.Location">Destination folder.</s:String>
     <s:String x:Key="S.SaveAs.File.Choose">Choose the location.</s:String>    
     <s:String x:Key="S.SaveAs.File.Format">File format</s:String>
-    <s:String x:Key="S.SaveAs.File.Name">Name of the file.</s:String>
+    <s:String x:Key="S.SaveAs.File.Name">Name of the file. Insert Date/Time format between '?'</s:String>
     <s:String x:Key="S.SaveAs.File.Animation">Animation</s:String>
     <s:String x:Key="S.SaveAs.File.Increase">Increase the file number</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">Decrease the file number</s:String>
