@@ -480,7 +480,16 @@ namespace ScreenToGif.Controls
             if (!point.HasValue)
                 return;
 
-            var monitor = Monitors.FirstOrDefault(x => x.Bounds.Contains(point.Value));
+            //If the main monitor is not the most left / top one, the bounds of monitors left to / above the main monitor are negative,
+            //But the cursor point is always starting from 0,0
+            //So, the cursor point may not fall into any monitor bounds (exceed the maximum right / bottom coordinate)
+            //As a result, convert the cursor point into the same axis of monitors by plusing the negative left / top coordinate
+            double minimumMonitorTop = Monitors.Min(x => x.Bounds.Top);
+            double minimumMonitorLeft = Monitors.Min(x => x.Bounds.Left);
+
+            Point absolutePoint = new Point(point.Value.X + minimumMonitorLeft, point.Value.Y + minimumMonitorTop);
+
+            var monitor = Monitors.FirstOrDefault(x => x.Bounds.Contains(absolutePoint));
 
             if (monitor == null)
                 return;
