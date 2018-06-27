@@ -114,14 +114,7 @@ namespace ScreenToGif.Windows
             BackVisibility = BackButton.Visibility = hideBackButton ? Visibility.Collapsed : Visibility.Visible;
 
             UpdateScreenDpi();
-
-            #region Adjust the position
-
-            //Tries to adjust the position/size of the window, centers on screen otherwise.
-            if (!UpdatePositioning())
-                WindowStartupLocation = WindowStartupLocation.CenterScreen;
-
-            #endregion
+            UpdatePositioning();
 
             //Config Timers - Todo: organize
             _preStartTimer.Tick += PreStart_Elapsed;
@@ -1020,35 +1013,10 @@ namespace ScreenToGif.Windows
             }
         }
 
-        private bool UpdatePositioning()
+        private void UpdatePositioning()
         {
-            if (UserSettings.All.RecorderLeft > -0.77 && UserSettings.All.RecorderLeft < -0.75)
-                return false;
-
-            //The catch here is to get the closest monitor from current Top/Left point. 
-            var monitors = Monitor.AllMonitorsScaled(_scale);
-            var closest = monitors.FirstOrDefault(x => x.Bounds.Contains(new System.Windows.Point((int)UserSettings.All.RecorderLeft, (int)UserSettings.All.RecorderTop))) ?? monitors.FirstOrDefault(x => x.IsPrimary);
-
-            if (closest == null)
-                return false;
-
-            //To much to the Left.
-            if (closest.WorkingArea.Left > UserSettings.All.RecorderLeft + UserSettings.All.RecorderWidth - 100)
-                UserSettings.All.RecorderLeft = closest.WorkingArea.Left;
-
-            //Too much to the top.
-            if (closest.WorkingArea.Top > UserSettings.All.RecorderTop + UserSettings.All.RecorderHeight - 100)
-                UserSettings.All.RecorderTop = closest.WorkingArea.Top;
-
-            //Too much to the right.
-            if (closest.WorkingArea.Right < UserSettings.All.RecorderLeft + 100)
-                UserSettings.All.RecorderLeft = closest.WorkingArea.Right - UserSettings.All.RecorderWidth;
-
-            //Too much to the bottom.
-            if (closest.WorkingArea.Bottom < UserSettings.All.RecorderTop + 100)
-                UserSettings.All.RecorderTop = closest.WorkingArea.Bottom - UserSettings.All.RecorderHeight;
-
-            return true;
+            if (!VisualHelper.IsOnScreen(this))
+                WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
 
         #endregion

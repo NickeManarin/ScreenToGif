@@ -1,7 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
@@ -81,6 +84,12 @@ namespace ScreenToGif.Util
                 return new Storyboard();
 
             return resource;
+        }
+
+        public static bool IsOnScreen(Window window)
+        {
+            var windowRect = new Rectangle((int)window.Left, (int)window.Top, (int)window.Width, (int)window.Height);
+            return Screen.AllScreens.Any(x => x.WorkingArea.IntersectsWith(windowRect));
         }
 
         internal static string DispatcherStringResource(this FrameworkElement visual, string key)
