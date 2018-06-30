@@ -865,6 +865,12 @@ namespace ScreenToGif.Windows.Other
                 {
                     #region if Pre-Starting or in Snapmode and no Frames, Stops
 
+                    if (Stage == Stage.PreStarting)
+                    {
+                        //Stop the pre-start timer to kill pre-start warming up
+                        _preStartTimer.Stop();
+                    }
+
                     //Only returns to the stopped stage if it was recording.
                     Stage = Stage == Stage.Snapping ? Stage.Snapping : Stage.Stopped;
 
