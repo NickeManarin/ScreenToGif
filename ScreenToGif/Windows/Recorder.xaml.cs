@@ -471,12 +471,15 @@ namespace ScreenToGif.Windows
                 Title = "ScreenToGif - " + FindResource("Recorder.Snapshot");
 
                 AutoFitButtons();
-
+                //snap function will create project folder ,so we skip it ,otherwise will create two project folder
+                //but one project folder is never used 
+                //Recorder_Loaded will call this function to create project folder
+                /*
                 if (Project == null || Project.Frames.Count == 0)
                 {
                     Project = new ProjectInfo().CreateProjectFolder();
                 }
-
+                */
                 #endregion
             }
             else
