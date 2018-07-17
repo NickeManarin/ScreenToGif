@@ -662,9 +662,6 @@
     <EmbeddedResource Include="Resources\Style.css" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Notification.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="ImageUtil\Psd\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

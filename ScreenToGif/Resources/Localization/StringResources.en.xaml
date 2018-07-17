@@ -894,7 +894,7 @@
     <s:String x:Key="S.SaveAs.File.Location">Destination folder.</s:String>
     <s:String x:Key="S.SaveAs.File.Choose">Choose the location.</s:String>    
     <s:String x:Key="S.SaveAs.File.Format">File format</s:String>
-    <s:String x:Key="S.SaveAs.File.Name">Name of the file.</s:String>
+    <s:String x:Key="S.SaveAs.File.Name">Name of the file. Insert Date/Time format between '?'</s:String>
     <s:String x:Key="S.SaveAs.File.Animation">Animation</s:String>
     <s:String x:Key="S.SaveAs.File.Increase">Increase the file number</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">Decrease the file number</s:String>
@@ -905,7 +905,7 @@
     <s:String x:Key="S.SaveAs.Warning.Type">You need to select where to save the file (to a folder, to the clipboard or upload somewhere else).</s:String>
     <s:String x:Key="S.SaveAs.Warning.Commands.Empty">To execute a post encoding command, you need to type something on the commands text field.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Upload.None">No upload service selected. You need to select a destination.</s:String>
-    <s:String x:Key="S.SaveAs.Warning.Upload.NotAuthorized">You can't upload to the selected service because it was not authorized. Head over to Options > Cloud Services to authorize this app.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Upload.NotAuthorized">You can't upload to the selected service because it was not authorized. Head over to Options > Upload Services to authorize this app.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Copy.Link">You can't select the option of copying the link because you didn't set to upload the file.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">You need to select an output folder.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">The output folder does not exist.</s:String>

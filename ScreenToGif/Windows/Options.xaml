@@ -677,7 +677,7 @@
                             <n:ImageListBoxItem Image="{StaticResource Flag.Denmark}" Tag="da" Content="Danish / Dansk" Author="Regmos"
                                                 MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=da, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ImageListBoxItem Image="{StaticResource Flag.Netherlands}" Tag="nl" Content="Dutch / Nederlands" Author="Jasper Verweij"
+                            <n:ImageListBoxItem Image="{StaticResource Flag.Netherlands}" Tag="nl" Content="Dutch / Nederlands" Author="Jasper Verweij, Stephan Paternotte"
                                                 MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=nl, Converter={StaticResource TagToSelection}}"/>
 
                             <n:ImageListBoxItem Image="{StaticResource Flag.UnitedKingdom}" Tag="en" Content="English" Author="Nicke Manarin" 
@@ -1364,7 +1364,7 @@
                 <ColumnDefinition Width="Auto" MinWidth="110"/>
             </Grid.ColumnDefinitions>
 
-            <n:ImageButton Grid.Column="2" x:Name="OkButton" Text="{DynamicResource Ok}" Margin="5" Padding="2,0" ContentHeight="20" Content="{StaticResource Vector.Ok}" Click="OkButton_Click"/>
+            <n:ImageButton Grid.Column="2" x:Name="OkButton" Text="{DynamicResource Ok}" Margin="5" Padding="2,0" ContentHeight="20" Content="{StaticResource Vector.Ok}" Click="OkButton_Click" IsCancel="True"/>
         </Grid>
     </Grid>
 </Window>

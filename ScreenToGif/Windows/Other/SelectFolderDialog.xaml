@@ -64,7 +64,7 @@
                            Margin="10,5,0,5" Command="u:Commands.OkAction"/>
 
             <n:ImageButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource Cancel}" Content="{StaticResource Vector.Cancel}" MaxSize="20" MinWidth="90" 
-                           Margin="5" Command="u:Commands.CancelAction"/>
+                           Margin="5" Command="u:Commands.CancelAction" IsCancel="True"/>
         </Grid>
     </Grid>
 </Window>

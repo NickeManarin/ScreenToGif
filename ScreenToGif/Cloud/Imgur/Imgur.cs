@@ -83,7 +83,7 @@ namespace ScreenToGif.Cloud.Imgur
                 {"client_id", Secret.ImgurId}, {"response_type", "pin"}
             };
 
-            return WebHelper.CreateQuery("https://api.imgur.com/oauth2/authorize", args);
+            return WebHelper.AppendQuery("https://api.imgur.com/oauth2/authorize", args);
         }
 
         public static async Task<bool> GetAccessToken()

@@ -56,11 +56,11 @@ namespace ScreenToGif.Windows.Other
             LeftImage.Source = left;
             RightImage.Source = right;
 
-            LeftImage.Width = left.PixelWidth;
-            LeftImage.Height = left.PixelHeight;
+            LeftImage.Width = left.Width;
+            LeftImage.Height = left.Height; //Pixel
 
-            RightImage.Width = right.PixelWidth;
-            RightImage.Height = right.PixelHeight;
+            RightImage.Width = right.Width;
+            RightImage.Height = right.Height;
 
             ActualList = actualList;
             NewList = newList;
@@ -139,9 +139,7 @@ namespace ScreenToGif.Windows.Other
             LeftCanvas.SizeChanged -= Canvas_SizeChanged;
             RightCanvas.SizeChanged -= Canvas_SizeChanged;
 
-            var canvas = sender as Canvas;
-
-            if (canvas != null)
+            if (sender is Canvas canvas)
             {
                 if (canvas.Name.StartsWith("Right"))
                 {
@@ -224,8 +222,8 @@ namespace ScreenToGif.Windows.Other
 
         private void ResetLeftButton_Click(object sender, RoutedEventArgs e)
         {
-            LeftImage.Width = NewList[0].Path.SourceFrom().PixelWidth;
-            LeftImage.Height = NewList[0].Path.SourceFrom().PixelHeight;
+            LeftImage.Width = NewList[0].Path.SourceFrom().Width;
+            LeftImage.Height = NewList[0].Path.SourceFrom().Height;
 
             Canvas.SetTop(LeftImage, 0);
             Canvas.SetLeft(LeftImage, 0);
@@ -233,8 +231,8 @@ namespace ScreenToGif.Windows.Other
 
         private void ResetRightButton_Click(object sender, RoutedEventArgs e)
         {
-            RightImage.Width = ActualList[0].Path.SourceFrom().PixelWidth;
-            RightImage.Height = ActualList[0].Path.SourceFrom().PixelHeight;
+            RightImage.Width = ActualList[0].Path.SourceFrom().Width;
+            RightImage.Height = ActualList[0].Path.SourceFrom().Height;
 
             Canvas.SetTop(RightImage, 0);
             Canvas.SetLeft(RightImage, 0);
@@ -362,13 +360,13 @@ namespace ScreenToGif.Windows.Other
                 #region Actual List
 
                 var actualFrame = ActualList[0].Path.SourceFrom();
-                double oldWidth = actualFrame.PixelWidth;
-                double oldHeight = actualFrame.PixelHeight;
+                double oldWidth = actualFrame.Width;
+                double oldHeight = actualFrame.Height;
                 //var scale = Math.Round(actualFrame.DpiX, MidpointRounding.AwayFromZero) / 96d;
 
                 //If the canvas size changed.
-                if (Math.Abs(RightCanvas.ActualWidth - oldWidth) > 0 || Math.Abs(RightCanvas.ActualHeight - oldHeight) > 0 ||
-                    Math.Abs(RightImage.ActualWidth - oldWidth) > 0 || Math.Abs(RightImage.ActualHeight - oldHeight) > 0)
+                if (Math.Abs(RightCanvas.ActualWidth - oldWidth) > 0.1 || Math.Abs(RightCanvas.ActualHeight - oldHeight) > 0.1 ||
+                    Math.Abs(RightImage.ActualWidth - oldWidth) > 0.1 || Math.Abs(RightImage.ActualHeight - oldHeight) > 0.1)
                 {
                     StartProgress(ActualList.Count, FindResource("Editor.UpdatingFrames").ToString());
 
@@ -396,8 +394,11 @@ namespace ScreenToGif.Windows.Other
                             //context.DrawText(new FormattedText("Hi!", CultureInfo.InvariantCulture, FlowDirection.LeftToRight, new Typeface("Segoe UI"), 32, Brushes.Black), new Point(0, 0));
                         }
 
+                        //var bmp = new RenderTargetBitmap((int)(RightCanvas.ActualWidth), (int)(RightCanvas.ActualHeight), actualFrame.DpiX, actualFrame.DpiX, PixelFormats.Pbgra32);
+
                         // Converts the Visual (DrawingVisual) into a BitmapSource
-                        var bmp = new RenderTargetBitmap((int)(RightCanvas.ActualWidth), (int)(RightCanvas.ActualHeight), actualFrame.DpiX, actualFrame.DpiX, PixelFormats.Pbgra32);
+                        var bmp = new RenderTargetBitmap((int)Math.Round(RightCanvas.ActualWidth * (actualFrame.DpiX / 96d), MidpointRounding.AwayFromZero),
+                            (int)Math.Round(RightCanvas.ActualHeight * (actualFrame.DpiY / 96d), MidpointRounding.AwayFromZero), actualFrame.DpiX, actualFrame.DpiX, PixelFormats.Pbgra32);
                         bmp.Render(drawingVisual);
 
                         #endregion
@@ -426,8 +427,8 @@ namespace ScreenToGif.Windows.Other
                 #region New List
 
                 var newFrame = NewList[0].Path.SourceFrom();
-                oldWidth = newFrame.PixelWidth;
-                oldHeight = newFrame.PixelHeight;
+                oldWidth = newFrame.Width;
+                oldHeight = newFrame.Height;
                 //scale = Math.Round(newFrame.DpiX, MidpointRounding.AwayFromZero) / 96d;
 
                 StartProgress(ActualList.Count, FindResource("Editor.ImportingFrames").ToString());
@@ -436,8 +437,8 @@ namespace ScreenToGif.Windows.Other
                 var insertFolder = Path.GetDirectoryName(NewList[0].Path);
 
                 //If the canvas size changed.
-                if (Math.Abs(LeftCanvas.ActualWidth - oldWidth) > 0 || Math.Abs(LeftCanvas.ActualHeight - oldHeight) > 0 ||
-                    Math.Abs(LeftImage.ActualWidth - oldWidth) > 0 || Math.Abs(LeftImage.ActualHeight - oldHeight) > 0)
+                if (Math.Abs(LeftCanvas.ActualWidth - oldWidth) > 0.1 || Math.Abs(LeftCanvas.ActualHeight - oldHeight) > 0.1 ||
+                    Math.Abs(LeftImage.ActualWidth - oldWidth) > 0.1 || Math.Abs(LeftImage.ActualHeight - oldHeight) > 0.1)
                 {
                     foreach (var frameInfo in NewList)
                     {
@@ -449,7 +450,8 @@ namespace ScreenToGif.Windows.Other
                         {
                             //The back canvas.
                             context.DrawRectangle(new SolidColorBrush(UserSettings.All.InsertFillColor), null,
-                                new Rect(new Point(0, 0), new Point(Math.Round(RightCanvas.ActualWidth, MidpointRounding.AwayFromZero), Math.Round(RightCanvas.ActualHeight, MidpointRounding.AwayFromZero))));
+                                new Rect(new Point(0, 0), new Point(Math.Round(RightCanvas.ActualWidth, MidpointRounding.AwayFromZero), 
+                                    Math.Round(RightCanvas.ActualHeight, MidpointRounding.AwayFromZero))));
 
                             var topPoint = Dispatcher.Invoke(() => Canvas.GetTop(LeftImage));
                             var leftPoint = Dispatcher.Invoke(() => Canvas.GetLeft(LeftImage));
@@ -460,7 +462,8 @@ namespace ScreenToGif.Windows.Other
 
                         //Converts the Visual (DrawingVisual) into a BitmapSource. Using the actual frame dpi.
                         //var bmp = new RenderTargetBitmap((int)(LeftCanvas.ActualWidth * scale), (int)(LeftCanvas.ActualHeight * scale), actualFrame.DpiX, actualFrame.DpiX, PixelFormats.Pbgra32);
-                        var bmp = new RenderTargetBitmap((int)(LeftCanvas.ActualWidth), (int)(LeftCanvas.ActualHeight), actualFrame.DpiX, actualFrame.DpiX, PixelFormats.Pbgra32);
+                        var bmp = new RenderTargetBitmap((int)Math.Round(LeftCanvas.ActualWidth * (newFrame.DpiX / 96d), MidpointRounding.AwayFromZero),
+                            (int)Math.Round(LeftCanvas.ActualHeight * (newFrame.DpiY / 96d), MidpointRounding.AwayFromZero), newFrame.DpiX, newFrame.DpiX, PixelFormats.Pbgra32);
                         bmp.Render(drawingVisual);
 
                         #endregion

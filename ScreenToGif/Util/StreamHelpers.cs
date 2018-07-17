@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 
 namespace ScreenToGif.Util
 {
@@ -172,6 +173,24 @@ namespace ScreenToGif.Util
             ms.Position = position;
             ms.Write(value, 0, value.Length);
             ms.Position = prevPosition;
+        }
+
+        /// <summary>
+        /// Writes one stream into another.
+        /// </summary>
+        /// <param name="ms">The stream that will receive the other stream.</param>
+        /// <param name="stream">The stream to be copied.</param>
+        internal static void WriteStream(this Stream ms, Stream stream)
+        {
+            stream.Position = 0;
+
+            stream.CopyTo(ms, (int)Math.Min(4096, stream.Length));
+        }
+
+        public static void WriteStringUtf8(this Stream ms, string value)
+        {
+            var bytes = Encoding.UTF8.GetBytes(value);
+            ms.Write(bytes, 0, bytes.Length);
         }
 
         public static void WriteInt16(this Stream ms, short value)

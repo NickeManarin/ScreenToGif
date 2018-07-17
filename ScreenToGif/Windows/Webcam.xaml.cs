@@ -406,7 +406,7 @@ namespace ScreenToGif.Windows
 
         private void Normal_Elapsed(object sender, EventArgs e)
         {
-            string fileName = $"{Project.FullPath}{_frameCount}.png";
+            var fileName = $"{Project.FullPath}{_frameCount}.png";
             Project.Frames.Add(new FrameInfo(fileName, _timer.Interval));
 
             //Get the actual position of the form.

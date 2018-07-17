@@ -46,6 +46,7 @@ using ListViewItem = System.Windows.Controls.ListViewItem;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 using Size = System.Windows.Size;
+using System.Text.RegularExpressions;
 
 namespace ScreenToGif.Windows
 {
@@ -564,7 +565,7 @@ namespace ScreenToGif.Windows
                 var recorder = new RecorderNew();
                 recorder.ShowDialog();
 
-                if (recorder.Project?.Frames != null)
+                if (recorder.Project?.Any == true)
                 {
                     LoadProject(recorder.Project);
                     ShowHint("Hint.NewRecording");
@@ -573,9 +574,9 @@ namespace ScreenToGif.Windows
             else
             {
                 var recorder = new Recorder();
-                var result = recorder.ShowDialog();
+                recorder.ShowDialog();
 
-                if (recorder.Project?.Frames != null)
+                if (recorder.Project?.Any == true)
                 {
                     LoadProject(recorder.Project);
                     ShowHint("Hint.NewRecording");
@@ -596,7 +597,7 @@ namespace ScreenToGif.Windows
             var recorder = new Webcam();
             recorder.ShowDialog();
 
-            if (recorder.Project?.Frames != null)
+            if (recorder.Project?.Any == true)
             {
                 LoadProject(recorder.Project);
                 ShowHint("Hint.NewWebcamRecording");
@@ -612,7 +613,7 @@ namespace ScreenToGif.Windows
             var recorder = new Board();
             recorder.ShowDialog();
 
-            if (recorder.Project?.Frames != null && recorder.Project.Any)
+            if (recorder.Project?.Any == true)
             {
                 LoadProject(recorder.Project);
                 ShowHint("Hint.NewBoardRecording");
@@ -1090,6 +1091,9 @@ namespace ScreenToGif.Windows
                 var executeCommands = GetExecuteCustomCommands();
                 var commands = GetCustomCommands();
 
+                //put datetime into filename which is saved between two questions marks
+                GetOutputFilenameNoRegExp(ref name);
+
                 #region Common validations
 
                 if (!pickLocation && !upload && !saveToClipboard)
@@ -1401,11 +1405,11 @@ namespace ScreenToGif.Windows
 
             #region Validation
 
-            var extensionList = ofd.FileNames.Select(Path.GetExtension).ToList();
+            var extensionList = ofd.FileNames.Select(s => Path.GetExtension(s).ToLowerInvariant()).ToList();
 
-            var media = new[] { "jpg", "jpeg", "gif", "bmp", "png", "avi", "mp4", "wmv" };
+            var media = new[] { ".jpg", ".jpeg", ".gif", ".bmp", ".png", ".avi", ".mp4", ".wmv" };
 
-            var projectCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && (x.Equals("stg") || x.Equals("zip")));
+            var projectCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && (x.Equals(".stg") || x.Equals(".zip")));
             var mediaCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && media.Contains(x));
 
             if (projectCount != 0 && mediaCount != 0)
@@ -2131,8 +2135,7 @@ namespace ScreenToGif.Windows
 
         private void Reordering_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = FrameListView != null && FrameListView.SelectedItem != null && !IsLoading &&
-            FrameListView.Items.Count > 1;
+            e.CanExecute = FrameListView?.SelectedItem != null && !IsLoading && FrameListView.Items.Count > 1;
         }
 
         private void Reverse_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -3400,8 +3403,8 @@ namespace ScreenToGif.Windows
 
             #region Validation
 
-            var extensionList = fileNames.Select(Path.GetExtension).ToList();
-
+            var extensionList = fileNames.Select(s => Path.GetExtension(s).ToLowerInvariant()).ToList();
+            
             var media = new[] { ".jpg", ".jpeg", ".gif", ".bmp", ".png", ".avi", ".mp4", ".wmv" };
 
             var projectCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && (x.Equals(".stg") || x.Equals(".zip")));
@@ -3831,7 +3834,7 @@ namespace ScreenToGif.Windows
 
             try
             {
-                switch (fileName.Split('.').Last())
+                switch (fileName.Split('.').Last().ToLowerInvariant())
                 {
                     case "stg":
                     case "zip":
@@ -3952,6 +3955,17 @@ namespace ScreenToGif.Windows
             //Adds each image to a list.
             foreach (var file in fileList)
                 project.Frames.AddRange(InsertInternal(file, project.FullPath) ?? new List<FrameInfo>());
+
+            if (!project.Any)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    Cursor = Cursors.Arrow;
+                    IsLoading = false;
+                });
+
+                return false;
+            }
 
             return Dispatcher.Invoke(() =>
             {
@@ -4825,7 +4839,7 @@ namespace ScreenToGif.Windows
                         .Replace("$ms", cumulative.ToString())
                         .Replace("$s", ((int)TimeSpan.FromMilliseconds(cumulative).TotalSeconds).ToString())
                         .Replace("$m", TimeSpan.FromMilliseconds(cumulative).ToString())
-                        .Replace("$p", (current / (double)Project.Frames.Count * 100).ToString("##0.#"))
+                        .Replace("$p", (current / (double)Project.Frames.Count * 100).ToString("##0.#", CultureInfo.CurrentUICulture))
                         .Replace("$f", current.ToString())
                         .Replace("@ms", total.ToString())
                         .Replace("@s", ((int)TimeSpan.FromMilliseconds(total).TotalSeconds).ToString())
@@ -4889,6 +4903,19 @@ namespace ScreenToGif.Windows
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        private string GetOutputFilenameNoRegExp(ref string name)
+        {
+            //put datetime into filename which is saved between two questions marks
+            string dateTimeFileNameRegEx = @"[?]([dyhms]+[-_ ]*)+[?]";
+            if (Regex.IsMatch(name, dateTimeFileNameRegEx, RegexOptions.IgnoreCase))
+            {
+                var dateTimeRegExp = Regex.Match(name, dateTimeFileNameRegEx, RegexOptions.IgnoreCase);
+                var dateTimeConverted = DateTime.Now.ToString(Regex.Replace(dateTimeRegExp.Value, "[?]", ""));
+                name = name.Replace(dateTimeRegExp.ToString(),dateTimeConverted);
+            }
+            return name;
         }
 
         private string GetOutputExtension()
@@ -6189,7 +6216,8 @@ namespace ScreenToGif.Windows
 
             if (delay == DuplicatesDelayType.DontAdjust)
             {
-                ActionStack.SaveState(ActionStack.EditAction.Remove, Project.Frames, removeList);
+                if (removeList.Count > 0) //TODO: Should I tell the user?
+                    ActionStack.SaveState(ActionStack.EditAction.Remove, Project.Frames, removeList);
             }
             else
             {
@@ -6220,7 +6248,7 @@ namespace ScreenToGif.Windows
             }
 
             //Gets the minimum index being altered.
-            return alterList.Count > 0 ? Math.Min(removeList.Min(), alterList.Min()) : removeList.Min();
+            return alterList.Count == 0 && removeList.Count == 0 ? Project.Frames.Count : alterList.Count > 0 ? Math.Min(removeList.Min(), alterList.Min()) : removeList.Min();
         }
 
         private void RemoveDuplicatesCallback(IAsyncResult ar)

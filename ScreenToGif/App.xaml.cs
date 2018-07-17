@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Management;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
@@ -45,9 +46,9 @@ namespace ScreenToGif
             }
             catch (Exception ex)
             {
-                LogWriter.Log(ex, "Generic Exception - Arguments");
+                LogWriter.Log(ex, "Parsing arguments");
 
-                ErrorDialog.Ok("ScreenToGif", "Generic error - arguments", ex.Message, ex);
+                ExceptionDialog.Ok(ex, "ScreenToGif", "Error while parsing arguments", ex.Message);
             }
 
             #endregion
@@ -60,9 +61,9 @@ namespace ScreenToGif
             }
             catch (Exception ex)
             {
-                LogWriter.Log(ex, "Language Settings Exception.");
+                LogWriter.Log(ex, "Language Settings Exception");
 
-                ErrorDialog.Ok("ScreenToGif", "Generic error - language", ex.Message, ex);
+                ExceptionDialog.Ok(ex, "ScreenToGif", "Error while detecting the app's language", ex.Message);
             }
 
             #endregion
@@ -89,15 +90,18 @@ namespace ScreenToGif
 
             if (Environment.OSVersion.Version.Major == 6 && Environment.OSVersion.Version.Minor == 1)
             {
-                try
+                Task.Factory.StartNew(() =>
                 {
-                    var search = new ManagementObjectSearcher("SELECT HotFixID FROM Win32_QuickFixEngineering WHERE HotFixID = 'KB4055002'").Get();
-                    Global.IsHotFix4055002Installed = search.Count > 0;
-                }
-                catch (Exception ex)
-                {
-                    LogWriter.Log(ex, "Error while trying to know if a hot fix was installed.");
-                }
+                    try
+                    {
+                        var search = new ManagementObjectSearcher("SELECT HotFixID FROM Win32_QuickFixEngineering WHERE HotFixID = 'KB4055002'").Get();
+                        Global.IsHotFix4055002Installed = search.Count > 0;
+                    }
+                    catch (Exception ex)
+                    {
+                        LogWriter.Log(ex, "Error while trying to know if a hot fix was installed.");
+                    }
+                });
             }
             
             #endregion

@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
@@ -14,25 +11,21 @@ namespace ScreenToGif.Util.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var list = value as IReadOnlyCollection<FontFamily>;
-
-            if (list == null)
+            if (!(value is IReadOnlyCollection<FontFamily> list))
                 return DependencyProperty.UnsetValue;
 
             var returnList = new List<FontFamily>();
-            foreach (FontFamily font in list)
+            
+            foreach (var font in list)
             {
                 try
                 {
-                    // Instantiate a TypeFace object with the font settings you want to use
-                    Typeface ltypFace = new Typeface(font, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal);
+                    //Instantiate a TypeFace object with the font settings you want to use.
+                    var ltypFace = new Typeface(font, FontStyles.Normal, FontWeights.Normal, FontStretches.Normal);
 
-                    // Try to create a GlyphTypeface object from the TypeFace object
-                    GlyphTypeface lglyphTypeFace;
-                    if (ltypFace.TryGetGlyphTypeface(out lglyphTypeFace))
-                    {
+                    //Try to create a GlyphTypeface object from the TypeFace object.
+                    if (ltypFace.TryGetGlyphTypeface(out var lglyphTypeFace))
                         returnList.Add(font);
-                    }
                 }
                 catch (Exception) {}
             }

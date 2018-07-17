@@ -16,7 +16,25 @@
     <s:String x:Key="Frame">フレーム</s:String>
     <s:String x:Key="Suppress">抑える</s:String>
     <s:String x:Key="Preview">プレビュー</s:String>
+    <s:String x:Key="S.Add">追加</s:String>
+    <s:String x:Key="S.Id">Id</s:String>
+    <s:String x:Key="S.Title">タイトル</s:String>
+    <s:String x:Key="S.Description">説明</s:String>
 
+    <!--Notification Icon-->
+    <s:String x:Key="S.NewRecording">新しいスクリーン録画</s:String>
+    <s:String x:Key="S.NewWebcamRecording">新規Webカメラ録画</s:String>
+    <s:String x:Key="S.NewBoardRecording">新規ボード録画</s:String>
+    <s:String x:Key="S.Exit">終了</s:String>
+
+    <!--Application-->
+    <s:String x:Key="Application.Exiting.Title">ScreenToGif 終了</s:String>
+    <s:String x:Key="Application.Exiting.Instruction">終了しますか？</s:String>
+    <s:String x:Key="Application.Exiting.Message">すべてのウィンドウを閉じ、トレイアイコンを終了します。</s:String>
+    
+    <!--Error messages--> 
+    <s:String x:Key="S.Crash">アプリのクラッシュ:(</s:String>
+    
     <!--StartUp Page-->
     <s:String x:Key="Title.StartUp">ScreenToGif - 起動画面</s:String>
     <s:String x:Key="Recorder">レコーダー</s:String>
@@ -50,10 +68,12 @@
     <s:String x:Key="Title.Options">ScreenToGif - オプション</s:String>
     <s:String x:Key="Application">アプリケーション</s:String>
     <s:String x:Key="Interface">インターフェース</s:String>
+    <s:String x:Key="S.Shortcuts">ショートカット</s:String>
     <s:String x:Key="Image">画像</s:String>
     <s:String x:Key="Language">言語</s:String>
     <s:String x:Key="TemporaryFiles">一時ファイル</s:String>
     <s:String x:Key="Extras">追加</s:String>
+    <s:String x:Key="Clouds">アップロードサービス</s:String>
     <s:String x:Key="Donate">寄付</s:String>
     <s:String x:Key="About">アプリ情報</s:String>
     
@@ -65,26 +85,29 @@
     <s:String x:Key="Application.Homepage.Editor">エディタウィンドウ</s:String>
     
     <s:String x:Key="Application.ScreenRecorder">スクリーンレコーダ</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordMouse">録画中にマウスカーソルを表示する</s:String>
+    <s:String x:Key="Application.ScreenRecorder.RecordMouse">録画中にマウスカーソルを表示</s:String>
     <s:String x:Key="Application.ScreenRecorder.RecordClicks">マウスのクリックを検出する</s:String>
     <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">カーソルの色を選択する</s:String>
     <s:String x:Key="Application.ScreenRecorder.PreStart">開始前にカウントダウン</s:String>
     <s:String x:Key="Application.ScreenRecorder.PreStart.Info">キャプチャ開始前に数秒待つ</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording">スナップショットモード</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(各フレームは手動でキャプチャされます)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FullRecording">フルスクリーンモード</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FullRecording.Info">(実験的にメイン画面をキャプチャします)</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate">固定フレームレート</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(録画時のラグによって変化しません)</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording">非同期録画</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(録画時の遅延減少に有効)</s:String>
     <s:String x:Key="Application.ScreenRecorder.NewRecorder">新ユーザインタフェース</s:String>
     <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(旧ユーザインタフェイスを置き換えます)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.Magnifier">拡大鏡を有効</s:String>
+    <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(記録領域を選択している間は拡大鏡を有効にします)</s:String>
     
     <s:String x:Key="Application.Other">その他</s:String>
+    <s:String x:Key="Application.Other.SystemTray">システムトレイ(通知領域)にアプリを表示</s:String>
+    <s:String x:Key="Application.Other.LeaveOpen">すべてのウィンドウを閉じてもアプリは閉じない</s:String>
     <s:String x:Key="Application.Other.NotifyFrameDeletion">フレームを削除する前に確認</s:String>
     <s:String x:Key="Application.Other.NotifyProjectDiscard">プロジェクトを破棄する前に確認</s:String>
     <s:String x:Key="Application.Other.NotifyWhileClosingEditor">エディタを閉じる前に確認 (プロジェクトが開かれている場合)</s:String>
+    <s:String x:Key="Application.Other.DrawOutlineOutside">文字の外側にキャプションのアウトラインを描く</s:String>
     <s:String x:Key="Application.Other.CheckForUpdates">アップデートを確認</s:String>
     
     <s:String x:Key="Interface.EditorBackground">エディター背景</s:String>
@@ -122,12 +145,29 @@
     <s:String x:Key="Interface.Other.TripleClickSelection">テキスト選択をトリプルクリックにする</s:String>
     <s:String x:Key="Interface.Other.AutomaticallySizeOnContent">フレームサイズに応じてウィンドウサイズを自動調整</s:String>
     <s:String x:Key="Interface.Other.AutomaticallyFitImage">ウィンドウサイズに応じてフレームサイズを自動調整</s:String>
-
+  
+    <s:String x:Key="S.Shortcuts.Global">グローバル</s:String>
+    <s:String x:Key="S.Shortcuts.Global.ScreenRecorder">スクリーンレコーダ:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.ScreenRecorder.Info">(標準スクリーンレコーダを開きます）</s:String>
+    <s:String x:Key="S.Shortcuts.Global.WebcamRecorder">Webカメラレコーダ:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.WebcamRecorder.Info">(Webカメラレコーダを開きます)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.BoardRecorder">ボードレコーダ:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.BoardRecorder.Info">(ボードレコーダでユーザの描画を記録できます)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenEditor">エディタ:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenEditor.Info">(別のエディタウィンドウを開きます)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenOptions">オプション:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenOptions.Info">(オプションウィンドウを開きます。多重起動はできません)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.Exit">終了:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.Exit.Info">(すべてのウィンドウを閉じてシステムトレイからアプリを削除します）</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders">レコーダ</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.StartPause">開始/ポーズ:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.StartPause.Info">(記録を開始/ポーズします。スナップショットモードが有効ならスナップショットを撮ります)</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.Stop">停止:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Stop.Info">(記録を停止してエディタを開きます)</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.Discard">破棄:</s:String>
-    <s:String x:Key="S.Shortcuts.Recorders.Info">キーボードフォーカス設定をクリック後、目的のキーと修飾子を押します。 組み合わせできないキーの組合わせがあります。</s:String>
-
+    <s:String x:Key="S.Shortcuts.Recorders.Discard.Info">(ポーズするとアクティブな録画を破棄します)</s:String>
+    <s:String x:Key="S.Shortcuts.Info">クリックしてキー(＋拡張キー)を押してください。&#10;一部使用できないキーの組み合わせがあります。</s:String>
+    
     <s:String x:Key="Language.AppLanguage">アプリケーションの言語</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect">自動検出</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect.Author">現在のOS言語 (利用可能なら)</s:String>
@@ -135,19 +175,19 @@
     <s:String x:Key="Language.AppLanguage.Translate.Sentence1.2">翻訳のガイドとアプリのダウンロード</s:String>
     <s:String x:Key="Language.AppLanguage.Translate.Sentence2.1">翻訳のテストはこちらから </s:String>
     <s:String x:Key="Language.AppLanguage.Translate.Sentence2.2">インポート</s:String>
-    <s:String x:Key="Language.AppLanguage.Translate.Sentence2.3">.</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence2.3">翻訳のテスト</s:String>
     <s:String x:Key="Language.AppLanguage.Translate.Sentence3.1">翻訳が完了したらこちらまでメールで送ってください</s:String>
     <s:String x:Key="Language.AppLanguage.Translate.Sentence3.2">E-mail: (nicke@outlook.com.br)</s:String>
-    <s:String x:Key="Language.AppLanguage.Translate.Sentence3.3">.</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence3.3">翻訳終了時</s:String>
     <s:String x:Key="Language.AppLanguage.Translate.ResourceLink.Tooltip">ガイドラインのウェブページが開く</s:String>
     <s:String x:Key="Language.AppLanguage.Translate.ImportLink.Tooltip">インポートページを開く</s:String>
     <s:String x:Key="Language.AppLanguage.Translate.EmailLink.Tooltip">メーラを起動</s:String>
     
-    <s:String x:Key="TempFiles.FilesAndFolders">一時ファイルとフォルダー</s:String>
-    <s:String x:Key="TempFiles.Folders">フォルダー:</s:String>
-    <s:String x:Key="TempFiles.Files">ファイル:</s:String>
-    <s:String x:Key="TempFiles.OpenFolder">フォルダーを開く</s:String>
-    <s:String x:Key="TempFiles.Clear">一時フォルダークリア</s:String>
+    <s:String x:Key="TempFiles.FilesAndFolders">一時ファイルとフォルダ</s:String>
+    <s:String x:Key="TempFiles.FilesAndFolders.Count">{0} フォルダ、 {1} ファイル</s:String>
+    <s:String x:Key="TempFiles.FilesAndFolders.None">フォルダ/ファイルが見つかりません</s:String>
+    <s:String x:Key="TempFiles.OpenFolder">フォルダを開く</s:String>
+    <s:String x:Key="TempFiles.Clear">一時フォルダクリア</s:String>
     <s:String x:Key="TempFiles.LogsLocation">ログフォルダ</s:String>
     <s:String x:Key="TempFiles.LogsLocation.Choose">エラーログファイルの場所を選択</s:String>
     <s:String x:Key="TempFiles.Location">場所フォルダ</s:String>
@@ -158,15 +198,63 @@
     <s:String x:Key="TempFiles.NotExists">存在しません。</s:String>
     <s:String x:Key="TempFiles.CreateSettings">空のローカル設定ファイルを作成</s:String>
     <s:String x:Key="TempFiles.RemoveSettings">設定ファイル削除</s:String>
+    <s:String x:Key="TempFiles.OpenSettingsFolder">設定ファイルの保存先フォルダを開きます。&#10;Ctrlキーを押しながらだと設定ファイルを開きます。(可能であれば)</s:String>
     <s:String x:Key="TempFiles.SettingsInfo">・ 設定ファイル検索順: ローカル ▶ AppData ▶ 標準設定&#10;　・ローカル、AppDataに設定ファイルがなければ標準設定が使用されます。&#10;　・標準設定が使用された場合、設定ファイルはAppDataに保存されます。</s:String>
     <s:String x:Key="TempFiles.KeepRecent">最近のプロジェクトを維持しますか？</s:String>
     <s:String x:Key="TempFiles.KeepRecent.Info">維持すると5日未満の最近のプロジェクトは消去されません。</s:String>
     <s:String x:Key="TempFiles.AutomaticRemoval">古いプロジェクトを自動削除</s:String>
     <s:String x:Key="TempFiles.AutomaticRemoval.Info">エディターを開いたときに ５日以上経過したプロジェクトは消去されます。</s:String>
+    <s:String x:Key="TempFiles.AutomaticRemovalDays.Info">(規定日数を超えると、これより古いプロジェクトはエディタを開いた後に消去/破棄されます)</s:String>
+    <s:String x:Key="TempFiles.LowSpace">ハードドライブのスペースが不足しています。 一時フォルダクリアするか場所を変更してください。</s:String>
     
+    <s:String x:Key="S.Upload.Proxy">プロクシ</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode">モード:</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.Disabled">無効</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.Manual">マニュアル</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.System">システム</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.System.Info">(システムプロクシを使用)</s:String>
+    <s:String x:Key="S.Upload.Proxy.Host">ホスト:</s:String>
+    <s:String x:Key="S.Upload.Proxy.Port">ポート:</s:String>
+    <s:String x:Key="S.Upload.Proxy.User">ユーザ名:</s:String>
+    <s:String x:Key="S.Upload.Proxy.Password">パスワード:</s:String>
+    <s:String x:Key="S.Upload.Get">OAuthトークン取得</s:String>
+    <s:String x:Key="S.Upload.PasteToken">ここに認証トークンを貼り付けます</s:String>
+    <s:String x:Key="S.Upload.Authorize">承認</s:String>
+    <s:String x:Key="S.Upload.Refresh">更新</s:String>
+    <s:String x:Key="S.Upload.Clear">クリア</s:String>
+    <s:String x:Key="S.Upload.Imgur.Anonymous">Imgur(匿名)</s:String>
+    <s:String x:Key="S.Upload.Imgur.Direct">直接リンクを使用</s:String>
+    <s:String x:Key="S.Upload.Imgur.Gifv">Gifの代わりにGifvリンクを取得</s:String>
+    <s:String x:Key="S.Upload.Imgur.ToAlbum">選択したアルバムにgifをアップロード</s:String>
+    <s:String x:Key="S.Upload.Imgur.Album">アルバム:</s:String>
+    <s:String x:Key="S.Upload.Imgur.AskMe">アップロードの前に確認</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.NotPossible">Imgurの認証トークン取得ページを開けませんでした。</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.Missing">このアプリを承認するには、認証トークンが必要です。</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.Completed">Imgur承認完了</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.Error">Imgurの承認に失敗しました。 間をおいて再試行するか、新しいトークンを取得してください。</s:String>
+    <s:String x:Key="S.Upload.Imgur.Refresh.None">このアプリの承認を更新するには、先に承認プロセスを完了する必要があります。</s:String>
+    <s:String x:Key="S.Upload.Imgur.NotAuthorized">未承認</s:String>
+    <s:String x:Key="S.Upload.Imgur.Expired">{0}で承認の期限が切れます。</s:String>
+    <s:String x:Key="S.Upload.Imgur.Valid">承認は{0}まで有効</s:String>
+    <s:String x:Key="S.Upload.Imgur.Removed">Imgurの承認が削除されました。</s:String>
+    <s:String x:Key="S.Upload.Imgur.Error.AlbumLoad">アルバムリストを読み込むことができませんでした。</s:String>
+    <s:String x:Key="S.Upload.Gyfcat.Anonymous">Gyfcat(匿名)</s:String>
+    <s:String x:Key="S.Upload.Yandex.Token">OAuth トークン:</s:String>
+    <s:String x:Key="S.Upload.Pick.Destination">宛先選択</s:String>
+    <s:String x:Key="S.Upload.Pick.Album">アルバム選択(オプション)</s:String>
+    <s:String x:Key="S.Upload.Pick.Album.Info">必要に応じて目的のアルバムを選択することができます:</s:String>
+    
+    <s:String x:Key="Extras.External">利用可能な外部ツール</s:String>
+    <s:String x:Key="Extras.Download">クリックでダウンロード&#10;{0}</s:String>
+    <s:String x:Key="Extras.Downloading">ダウンロード中...</s:String>
+    <s:String x:Key="Extras.Ready">ダウンロード済み&#10;{0}</s:String>
+    <s:String x:Key="Extras.Ready.Info">ファイルのプロパティを開くには、ここをクリックしてください。</s:String>
     <s:String x:Key="Extras.FfmpegLocation">FFmpegの場所</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Select">FFmpegの場所選択</s:String>
-    <s:String x:Key="Extras.FfmpegLocation.Invalid">FFmpegの場所の指定が間違っています。</s:String>
+    <s:String x:Key="Extras.FfmpegLocation.Invalid">FFmpeg実行ファイルのパスが無効です。ファイルの有効な場所を選択してください。</s:String>
+    <s:String x:Key="Extras.GifskiLocation">Gifskiの場所</s:String>
+    <s:String x:Key="Extras.GifskiLocation.Select">Gifski実行ファイルの場所を選択する</s:String>
+    <s:String x:Key="Extras.GifskiLocation.Invalid">Gifski実行ファイルのパスが無効です。ファイルの有効な場所を選択してください。</s:String>
     
     <s:String x:Key="Donate.IfYouWish">感謝したいとき</s:String>
     <s:String x:Key="Donate.DonateDollar">US$ で寄付</s:String>
@@ -178,6 +266,7 @@
     <s:String x:Key="Donate.Patreon">Patreon HPを開く</s:String>
     <s:String x:Key="Donate.Steam.Link">Steamの欲しいモノページを開く</s:String>
     <s:String x:Key="Donate.Steam.Text">ゲームをギフトとして送れます。</s:String>
+    <s:String x:Key="Donate.Crypto">暗号通貨</s:String>
 
     <s:String x:Key="About.Version">バージョン:</s:String>
     <s:String x:Key="About.Author">作者: Nicke Manarin</s:String>
@@ -209,6 +298,7 @@
     <s:String x:Key="Recorder.Height">高さ</s:String>
     <s:String x:Key="Recorder.Width">幅</s:String>
     <s:String x:Key="Recorder.Fps">最大フレーム/秒</s:String>
+    <s:String x:Key="Recorder.Fps.Short">fps</s:String>
     <s:String x:Key="Recorder.FpsRange">最低 - 最大 fps: 1-60 fps</s:String>
     <s:String x:Key="Recorder.SnapToWindow">ウィンドウに吸着する (スナップしたいところへドラッグして離す)</s:String>
     <s:String x:Key="Recorder.PreStart">開始まで</s:String>
@@ -218,6 +308,13 @@
     <s:String x:Key="S.Recorder.Area">エリア</s:String>
     <s:String x:Key="S.Recorder.Window">ウィンドウ</s:String>
     <s:String x:Key="S.Recorder.Screen">スクリーン</s:String>
+    <s:String x:Key="S.Recorder.Accept">受諾</s:String>
+    <s:String x:Key="S.Recorder.Retry">リトライ</s:String>
+    <s:String x:Key="S.Recorder.CancelSelection">選択キャンセル(Esc)</s:String>
+    <s:String x:Key="S.Recorder.SelectArea">クリック＆ドラッグで画面領域を選択</s:String>
+    <s:String x:Key="S.Recorder.SelectWindow">ウィンドウを選択するにはここをクリックしてください</s:String>
+    <s:String x:Key="S.Recorder.SelectScreen">画面を選択するにはここをクリックしてください</s:String>
+    
     <s:String x:Key="S.Recorder.EscToCancel">ESCを押してキャンセル</s:String>
     
     <!--Webcam Recorder-->
@@ -262,7 +359,7 @@
     <s:String x:Key="InsertFrames.CurrentFrames">現在のフレーム</s:String>
     <s:String x:Key="InsertFrames.ImageSize">画像サイズ:</s:String>
     <s:String x:Key="InsertFrames.ImagePosition">画像位置:</s:String>
-    <s:String x:Key="InsertFrames.ResetImageSizePosition">画像サイズリセット&#x0d;and Position</s:String>
+    <s:String x:Key="InsertFrames.ResetImageSizePosition">画像サイズ・位置リセット</s:String>
     <s:String x:Key="InsertFrames.Info2">新しいフレームが現在のフレームリストの位置に挿入されます。</s:String>
     <s:String x:Key="InsertFrames.Before">前へ</s:String>
     <s:String x:Key="InsertFrames.After">後ろへ</s:String>
@@ -277,7 +374,7 @@
     <s:String x:Key="ImportVideo.Height">高さ:</s:String>
     <s:String x:Key="ImportVideo.Width">幅:</s:String>
     <s:String x:Key="ImportVideo.Framerate">フレームレート:</s:String>
-    <!--<s:String x:Key="ImportVideo.Fps">fps</s:String>-->
+    <s:String x:Key="ImportVideo.Fps">fps</s:String>
     <s:String x:Key="ImportVideo.Start">始まり:</s:String>
     <s:String x:Key="ImportVideo.End">終わり:</s:String>
     <s:String x:Key="ImportVideo.Selection">選択範囲:</s:String>
@@ -290,9 +387,18 @@
     <s:String x:Key="Encoder.Starting">開始中</s:String>
     <s:String x:Key="Encoder.Completed">完了</s:String>
     <s:String x:Key="Encoder.Completed.Clipboard">クリップボードへコピー完了</s:String>
+    <s:String x:Key="Encoder.Completed.Clipboard.Fail">コピー失敗</s:String>
+    <s:String x:Key="Encoder.Completed.Command">コマンド実行</s:String>
+    <s:String x:Key="Encoder.Completed.Command.Output">コマンド出力を表示</s:String>
+    <s:String x:Key="Encoder.Completed.Command.Fail">コマンド実行失敗</s:String>
+    <s:String x:Key="Encoder.Completed.Upload.Fail">アップロード失敗</s:String>
+    <s:String x:Key="Encoder.Completed.Upload.Delete">Ctrl + クリックで画像削除のページを開きます。(可能な場合)</s:String>
     <s:String x:Key="Encoder.FileDeletedMoved">ファイル削除 / 移動</s:String>
     <s:String x:Key="Encoder.Canceled">キャンセル</s:String>
     <s:String x:Key="Encoder.Error">エラー</s:String>
+    <s:String x:Key="Encoder.Error.Info">エラーの詳細を表示するには、ここをクリックしてください。</s:String>
+    <s:String x:Key="Encoder.Uploading">アップロード中</s:String>
+    <s:String x:Key="Encoder.Executing">コマンド実行中</s:String>
     <s:String x:Key="Encoder.Processing">実行中 {0}</s:String>
     <s:String x:Key="Encoder.Analyzing">変更されていないピクセルを検出中</s:String>
     <s:String x:Key="Encoder.OpenFile">ファイルを開く</s:String>
@@ -302,7 +408,12 @@
     <s:String x:Key="Encoder.Copy.Image">画像としてコピー</s:String>
     <s:String x:Key="Encoder.Copy.Filename">ファイル名をコピー</s:String>
     <s:String x:Key="Encoder.Copy.Folder">フォルダパスをコピー</s:String>
+    <s:String x:Key="Encoder.Copy.Link">リンクをコピー</s:String>
 
+    <!--Command output-->
+    <s:String x:Key="Command.Title">ScreenToGif - コマンド出力</s:String>
+    <s:String x:Key="Command.Header">コマンド出力</s:String>
+    
     <!--Editor-->
     <s:String x:Key="Editor.Title">ScreenToGif - エディタ</s:String>
     <s:String x:Key="Editor.File">ファイル</s:String>
@@ -380,6 +491,7 @@
     <!--Edit • Frames-->  
     <s:String x:Key="Editor.Edit.Frames">フレーム</s:String>
     <s:String x:Key="Editor.Edit.Delete">削除</s:String>
+    <s:String x:Key="Editor.Edit.Frames.Duplicates">重複削除</s:String>
     <s:String x:Key="Editor.Edit.Frames.Reduce">フレーム数減少</s:String>
     <s:String x:Key="Editor.Edit.DeletePrevious">以前を削除</s:String>
     <s:String x:Key="Editor.Edit.DeleteNext">以後を削除</s:String>
@@ -416,6 +528,7 @@
     <s:String x:Key="Editor.Image.Cinemagraph">シネマグラフ</s:String>
     <s:String x:Key="Editor.Image.Border">境界</s:String>
     <s:String x:Key="Editor.Image.Progress">進捗</s:String>
+    <s:String x:Key="Editor.Image.Obfuscate">難読化</s:String>
 
     <!--Transitions • Styles-->
     <s:String x:Key="Editor.Transitions.Styles">スタイル</s:String>
@@ -428,6 +541,7 @@
     <s:String x:Key="Editor.Statistics.TotalDuration">全期間</s:String>
     <s:String x:Key="Editor.Statistics.FrameSize">フレームサイズ</s:String>
     <s:String x:Key="Editor.Statistics.AverageDuration">平均期間 (遅延)</s:String>
+    <s:String x:Key="Editor.Statistics.FrameDpi">フレームDPI,スケール</s:String>
     <s:String x:Key="Editor.Statistics.SelectedFrame">選択されたフレーム</s:String>
     
     <!--TODO: Organize-->
@@ -442,6 +556,9 @@
     <s:String x:Key="Editor.Clipboard.InvalidCut.Instruction">すべてのフレーム切り取ることはできません。</s:String>
     <s:String x:Key="Editor.Clipboard.InvalidCut.Message">録画には、少なくても一つ以上のフレームが必要です</s:String>
     
+    <s:String x:Key="Editor.DeleteAll.Title">すべて削除</s:String>
+    <s:String x:Key="Editor.DeleteAll.Instruction">すべてのフレームを削除しますか？</s:String>
+    <s:String x:Key="Editor.DeleteAll.Message">このアクションは現在開いているプロジェクトを破棄(元に戻せません)します。 続行しますか？</s:String>
     <s:String x:Key="Editor.DiscardProject.Title">プロジェクトを破棄</s:String>
     <s:String x:Key="Editor.DiscardProject.Instruction">すべてのフレームを削除してもよろしいですか？</s:String>
     <s:String x:Key="Editor.DiscardProject.Message">すべてのフレームを削除しようとしています。\r\nこの操作は取り消すことができません。</s:String>
@@ -496,7 +613,7 @@
     
     <s:String x:Key="Editor.ExportingRecording">録画をエクスポート中</s:String>
     <s:String x:Key="Editor.DiscardingFrames">フレームを破棄中</s:String>
-    <s:String x:Key="Editor.DiscardingFolders">フォルダーを破棄中</s:String>
+    <s:String x:Key="Editor.DiscardingFolders">フォルダを破棄中</s:String>
     <s:String x:Key="Editor.ResizingFrames">フレームをリサイズ中</s:String>
     <s:String x:Key="Editor.CroppingFrames">フレームをクロップ中</s:String>
     <s:String x:Key="Editor.ApplyingOverlay">フレームへオーバーレイを適用中</s:String>
@@ -504,6 +621,7 @@
     <s:String x:Key="Editor.ApplyingFlipRotate">フレームの反転/回転を適用中</s:String>
     <s:String x:Key="Editor.ChangingDelay">ディレイを変更中</s:String>
     <s:String x:Key="Editor.ApplyingTransition">トランジション効果を適用中</s:String>
+    <s:String x:Key="S.Editor.PreparingSaving">保存の準備中</s:String>
 
     <s:String x:Key="Editor.List.Frame">フレーム:</s:String>
     <s:String x:Key="Editor.List.OpenImage">イメージを開く</s:String>
@@ -526,6 +644,8 @@
     <!--Warnings-->
     <s:String x:Key="Editor.Warning.Selection">オーバーレイを適用するには少なくとも1つのフレームを選択する必要があります。</s:String>
     <s:String x:Key="Editor.Warning.Ffmpeg">FFmpegが見つかりません。パス環境変数に追加するか場所を指定してください。</s:String>
+    <s:String x:Key="Editor.Warning.Gifski">Gifskiが見つかりません。環境変数にパスを追加するか、設定で場所を指定してください。</s:String>
+    <s:String x:Key="Editor.Warning.LowSpace">ドライブに十分な空き容量がありません (残り {0}％)。 オプション > 一時ファイルでスペースを確保するにはここをクリックしてください。</s:String>
     
     <!--Hints-->
     <s:String x:Key="Hint.NewRecording">新規録画作成</s:String>
@@ -561,6 +681,7 @@
     <s:String x:Key="Hint.Delay">期間 (遅延)変更</s:String>
     <s:String x:Key="Hint.Transition">トランジション挿入</s:String>
     <s:String x:Key="Hint.Reduce">フレームレート減少</s:String>
+    <s:String x:Key="Hint.Duplicates">重複削除</s:String>
     
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">隠す</s:String>
@@ -606,7 +727,18 @@
     <s:String x:Key="Reduce.Header">フレームレート減少</s:String>
     <s:String x:Key="Reduce.Factor">要因:</s:String>
     <s:String x:Key="Reduce.Count">削除数:</s:String>
-    <!--<s:String x:Key="Reduce.Info">It will remove {0} frame(s) after every {1} frame(s), without counting the removed ones.&#10;Framerate will be adjusted.</s:String>-->
+    <s:String x:Key="Reduce.Info">削除されたフレームを勘定せずに、{1}フレームごとに{0}個のフレームを削除します。&#10;フレームレートは調整されます。</s:String>
+
+    <s:String x:Key="S.RemoveDuplicates.Header">重複削除</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Similarity">類似性 (%):</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal">フレーム除去:</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal.First">先頭フレーム削除</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal.Last">最終フレーム削除</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay">遅延調整:</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.NoAdjustment">調整しない</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.Average">平均を使用</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.Sum">合計を使用</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Info">このアクションは、各フレーム(ピクセル単位)を分析し、隣接フレームと少なくとも{0}％類似するものを削除します。&#10;フレームの遅延(展示時間)を調整するかどうかを選択できます 。</s:String>
     
     <s:String x:Key="Caption.Text">テキスト</s:String>
     <s:String x:Key="Caption.Font">フォント</s:String>
@@ -624,21 +756,30 @@
     <s:String x:Key="KeyStrokes.Keys">キー</s:String>
     <s:String x:Key="KeyStrokes.Separator">区切り</s:String>
     <s:String x:Key="KeyStrokes.Edit">キーストローク編集</s:String>
+    <s:String x:Key="KeyStrokes.IgnoreModifiers">Ctrl、Alt、Shift、Windowsキーを無視し修飾子として使用しないでください。</s:String>
+    <s:String x:Key="KeyStrokes.IgnoreModifiers.Info">"Control"単独のようなキーの押下は無視されますが、 "Control + C"は無視されません。</s:String>
     <s:String x:Key="KeyStrokes.Extend">キーストローク拡張:</s:String>
+    <s:String x:Key="KeyStrokes.Earlier">キーストロークの展開を先行する。</s:String>
     <s:String x:Key="KeyStrokes.By">(ミリ秒):</s:String>
     <s:String x:Key="KeyStrokes.Warning.None">録画にはキーストロークはありません。</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Title">ScreenToGif - キーストロークエディタ</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Number">フレーム番号</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Keys">キーストローク検出</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Remove">キーストローク削除</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Add">キーストローク追加:</s:String>
     
     <s:String x:Key="String.Delay">ディレイ</s:String>
     <s:String x:Key="String.DelayMs">ディレイ (ms):</s:String>
     <s:String x:Key="String.ValueMs">値 -+ (ミリ秒):</s:String>
     <s:String x:Key="String.Margin">マージン:</s:String>
+    <s:String x:Key="String.Padding">パディング:</s:String>
     <s:String x:Key="String.Background">背景</s:String>
     
     <s:String x:Key="FreeDrawing.Mode">モード</s:String>
     <s:String x:Key="FreeDrawing.Pen">ペン</s:String>
     <s:String x:Key="FreeDrawing.Eraser">消しゴム</s:String>
     <s:String x:Key="FreeDrawing.Select">選択</s:String>
-    <s:String x:Key="FreeDrawing.StrokeEraser">一筆消去</s:String>
+    <s:String x:Key="FreeDrawing.StrokeEraser">一筆分消去</s:String>
     <s:String x:Key="FreeDrawing.Width">幅:</s:String>
     <s:String x:Key="FreeDrawing.Height">高さ:</s:String>
     <s:String x:Key="FreeDrawing.Tip">先端:</s:String>
@@ -651,8 +792,15 @@
     <s:String x:Key="Watermark.Image">画像</s:String>
     <s:String x:Key="Watermark.File">ファイル:</s:String>
     <s:String x:Key="Watermark.Opacity">不透過率:</s:String>
+    
     <s:String x:Key="Border.Appearance">外観</s:String>
 
+    <s:String x:Key="S.Obfuscate.Options">難読化オプション</s:String>
+    <s:String x:Key="S.Obfuscate.PixelSize">ピクセルサイズ:</s:String>
+    <s:String x:Key="S.Obfuscate.UseAverage">ピクセル化された各ブロックの平均色を計算</s:String>
+    <s:String x:Key="S.Obfuscate.Info">選択ツールを使用して、ピクセル化すべき範囲を選択します。</s:String>
+    <s:String x:Key="S.Obfuscate.Warning">選択ツールを使用して、ピクセル化すべき範囲を選択してください。</s:String>
+    
     <s:String x:Key="Progress.Type">タイプ</s:String>
     <s:String x:Key="Progress.Type.Bar">バー</s:String>
     <s:String x:Key="Progress.Type.Text">テキスト</s:String>
@@ -685,21 +833,22 @@
 
     <!--Save As-->
     <s:String x:Key="S.SaveAs.Type">ファイルタイプ</s:String>
-    <!--<s:String x:Key="S.SaveAs.Gif">Gif</s:String>-->
+    <s:String x:Key="S.SaveAs.Gif">Gif</s:String>
+    <s:String x:Key="S.SaveAs.Apng">Apng</s:String>
     <s:String x:Key="S.SaveAs.Images">画像 (フレーム)</s:String>
     <s:String x:Key="S.SaveAs.Project">プロジェクト</s:String>
     <s:String x:Key="S.SaveAs.Video">ビデオ</s:String>
     <s:String x:Key="S.SaveAs.Encoder">エンコーダ</s:String>
-    <!--<s:String x:Key="S.SaveAs.Encoder.ScreenToGif">2.0</s:String>-->
+    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">2.0</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Tooltip">アルゴリズム: Octree.</s:String>
-    <!--<s:String x:Key="S.SaveAs.Encoder.Legacy">1.0</s:String>-->
+    <s:String x:Key="S.SaveAs.Encoder.Legacy">1.0</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Legacy.Tooltip">アルゴリズム: NeuQuant.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System">システム</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System.Tooltip">標準のパレットを使用</s:String>
-    <!--<s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>-->
+    <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
     <s:String x:Key="S.SaveAs.GifOptions">Gif オプション</s:String>
     <s:String x:Key="S.SaveAs.Quality">品質:</s:String>
-    <s:String x:Key="S.SaveAs.FlipVertically">ビデオを上下反転</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors">色:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">最大色数 (フレーム毎)</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Loop">繰り返し:</s:String>
@@ -710,10 +859,36 @@
     <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">未変更ピクセルの検出</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">未変更ピクセルをマーク</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">色を選択</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions">Apng オプション</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.LoopedApng">ループ型 Apng.</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.DetectUnchanged">変更されていないピクセルを検出</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.PaintTransparent">変更されていないすべてのピクセルを透明色でペイントします。</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions">ビデオオプション</s:String>
-    <!--<s:String x:Key="S.SaveAs.VideoOptions.Fps">Fps:</s:String>-->
+    <s:String x:Key="S.SaveAs.VideoOptions.Fps">Fps:</s:String>
+    <s:String x:Key="S.SaveAs.FlipVertically">ビデオを上下反転</s:String>
     <s:String x:Key="S.SaveAs.ImagesOptions">画像オプション</s:String>
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">画像を圧縮</s:String>
+    
+    <!--Save As • Save options-->
+    <s:String x:Key="S.SaveAs.SaveOptions">保存オプション</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">選択フォルダにファイルを保存</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">上書き (存在していたら)</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">プロジェクトとしても保存(同フォルダ、同ファイル名)</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">ファイルアップロード</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.UploadDestination">アップロード先</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">クリップボードにコピー</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File">ファイル</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File.Info">出力ファイルをクリップボードにコピー</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FolderPath">フォルダパス</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FolderPath.Info">出力フォルダパスをクリップボードにコピー</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath">ファイルパス</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath.Info">出力ファイルパスをクリップボードにコピー</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">リンク</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">アップロードサービスによって生成されたリンクをクリップボードにコピー</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">ポストエンコーディングコマンド実行</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">エンコード後に実行するコマンドを入力します。&#10;複数コマンドを実行するには行を分けて入力します。&#10;{p} = 出力ファイルパス&#10;{f} = 出力フォルダパス</s:String>
+    
+    <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">ファイル</s:String>
     <s:String x:Key="S.SaveAs.File.Location">保存先フォルダ</s:String>
     <s:String x:Key="S.SaveAs.File.Choose">場所の選択</s:String>
@@ -723,8 +898,14 @@
     <s:String x:Key="S.SaveAs.File.Increase">ファイル数増加</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">ファイル番号減少</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">同名ファイルが存在します。</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">上書き (存在していたら)</s:String>
+    
     <s:String x:Key="S.SaveAs.File.Clipboard">クリップボードへ保存</s:String>
+
+    <s:String x:Key="S.SaveAs.Warning.Type">ファイルの保存先(フォルダ、クリップボード、アップロード先)を選択する必要があります。</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Commands.Empty">ポストエンコーディングコマンドの実行にはフィールドに何か入力する必要があります。</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Upload.None">アップロードサービスが選択されていません。対象を選択する必要があります。</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Upload.NotAuthorized">未承認のため、選択したサービスにアップロードすることはできません。 オプション>クラウドサービスでアプリを承認してください。</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Copy.Link">ファイルをアップロードするように設定していないため、リンクをコピーするオプションを選択することはできません。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">出力フォルダを選択する必要があります。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">出力フォルダがありません。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.Invalid">出力フォルダに無効な文字が含まれています。有効なフォルダを選択してください。</s:String>
@@ -758,27 +939,27 @@
     <s:String x:Key="S.Feedback.LanguageInfo2">ポルトガル語</s:String>
     
     <!--FontStyles-->
-    <!--<s:String x:Key="S.FontStyles.Normal">Normal</s:String>-->
-    <!--<s:String x:Key="S.FontStyles.Italic">Italic</s:String>-->
-    <!--<s:String x:Key="S.FontStyles.Oblique">Oblique</s:String>-->
+    <s:String x:Key="S.FontStyles.Normal">Normal</s:String>
+    <s:String x:Key="S.FontStyles.Italic">Italic</s:String>
+    <s:String x:Key="S.FontStyles.Oblique">Oblique</s:String>
     
     <!--FontWeight-->
-    <!--<s:String x:Key="S.FontWeights.Black">Black</s:String>-->
-    <!--<s:String x:Key="S.FontWeights.Bold">Bold</s:String>-->
-    <!--<s:String x:Key="S.FontWeights.DemiBold">Demi Bold</s:String>-->
-    <!--<s:String x:Key="S.FontWeights.ExtraBlack">Extra Black</s:String>-->
-    <!--<s:String x:Key="S.FontWeights.ExtraBold">Extra Bold</s:String>-->
-    <!--<s:String x:Key="S.FontWeights.ExtraLight">Extra Light</s:String>-->
-    <!--<s:String x:Key="S.FontWeights.Heavy">Heavy</s:String>-->
-    <!--<s:String x:Key="S.FontWeights.Light">Light</s:String>-->
-    <!--<s:String x:Key="S.FontWeights.Medium">Medium</s:String>-->
-    <!--<s:String x:Key="S.FontWeights.Normal">Normal</s:String>-->
-    <!--<s:String x:Key="S.FontWeights.Regular">Regular</s:String>-->
-    <!--<s:String x:Key="S.FontWeights.SemiBold">Semi Bold</s:String>-->
-    <!--<s:String x:Key="S.FontWeights.Thin">Thin</s:String>-->
-    <!--<s:String x:Key="S.FontWeights.UltraBlack">Ultra Black</s:String>-->
-    <!--<s:String x:Key="S.FontWeights.UltraBold">Ultra Bold</s:String>-->
-    <!--<s:String x:Key="S.FontWeights.UltraLight">Ultra Light</s:String>-->
+    <s:String x:Key="S.FontWeights.Black">Black</s:String>
+    <s:String x:Key="S.FontWeights.Bold">Bold</s:String>
+    <s:String x:Key="S.FontWeights.DemiBold">Demi Bold</s:String>
+    <s:String x:Key="S.FontWeights.ExtraBlack">Extra Black</s:String>
+    <s:String x:Key="S.FontWeights.ExtraBold">Extra Bold</s:String>
+    <s:String x:Key="S.FontWeights.ExtraLight">Extra Light</s:String>
+    <s:String x:Key="S.FontWeights.Heavy">Heavy</s:String>
+    <s:String x:Key="S.FontWeights.Light">Light</s:String>
+    <s:String x:Key="S.FontWeights.Medium">Medium</s:String>
+    <s:String x:Key="S.FontWeights.Normal">Normal</s:String>
+    <s:String x:Key="S.FontWeights.Regular">Regular</s:String>
+    <s:String x:Key="S.FontWeights.SemiBold">Semi Bold</s:String>
+    <s:String x:Key="S.FontWeights.Thin">Thin</s:String>
+    <s:String x:Key="S.FontWeights.UltraBlack">Ultra Black</s:String>
+    <s:String x:Key="S.FontWeights.UltraBold">Ultra Bold</s:String>
+    <s:String x:Key="S.FontWeights.UltraLight">Ultra Light</s:String>
     
      <!--VerticalAligment-->
     <s:String x:Key="S.VerticalAlignment.Top">上</s:String>

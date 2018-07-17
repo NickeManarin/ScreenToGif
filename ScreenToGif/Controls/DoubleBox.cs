@@ -364,7 +364,7 @@ namespace ScreenToGif.Controls
         private bool IsEntryAllowed(TextBox textBox, string text)
         {
             //Digits, points or commas.
-            var regex = new Regex(@"^[0-9]|\.|\,$");
+            var regex = new Regex(@"^[0-9]|\.|\,$"); //TODO: Support for multiple cultures.
 
             //Checks if it's a valid char based on the context.
             return regex.IsMatch(text) && IsEntryAllowedInContext(textBox, text);
@@ -440,8 +440,10 @@ namespace ScreenToGif.Controls
 
         private bool IsTextAllowed(string text)
         {
-            var regex = new Regex(@"^((\d+)|(\d{1,3}(\.\d{3})+)|(\d{1,3}(\.\d{3})(\,\d{3})+))((\,\d{4})|(\,\d{3})|(\,\d{2})|(\,\d{1})|(\,))?$");
-            return regex.IsMatch(text);
+            return double.TryParse(text, out double result);
+
+            //var regex = new Regex(@"^((\d+)|(\d{1,3}(\.\d{3})+)|(\d{1,3}(\.\d{3})(\,\d{3})+))((\,\d{4})|(\,\d{3})|(\,\d{2})|(\,\d{1})|(\,))?$", RegexOptions.CultureInvariant);
+            //return regex.IsMatch(text);
         }
 
         #endregion
