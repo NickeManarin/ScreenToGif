@@ -698,7 +698,7 @@
                             <n:ImageListBoxItem Image="{StaticResource Flag.SouthKorea}" Tag="ko" Content="Korean / 한국어" Author="Lytie"
                                                 MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ko, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ImageListBoxItem Image="{StaticResource Flag.Poland}" Tag="pl" Content="Polish / Polski" Author="Jakub Bazgier" 
+                            <n:ImageListBoxItem Image="{StaticResource Flag.Poland}" Tag="pl" Content="Polish / Polski" Author="Jakub Bazgier, Sebastian Pietras" 
                                                 MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=pl, Converter={StaticResource TagToSelection}}"/>
 
                             <n:ImageListBoxItem Image="{StaticResource Flag.Brazil}" Tag="pt" Content="Portuguese / Português" Author="Nicke Manarin" 
