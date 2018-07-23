@@ -529,7 +529,7 @@ namespace ScreenToGif.Windows
 
             if (item != null)// && !WasChangingSelection)
             {
-                LastSelected = item.FrameNumber;
+                //LastSelected = item.FrameNumber; IF DO THIS ,lastSelected  will equal FrameListView.SelectedIndex in all time 
                 Keyboard.Focus(item);
             }
         }
