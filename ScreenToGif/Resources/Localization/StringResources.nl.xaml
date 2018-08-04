@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:s="clr-namespace:System;assembly=mscorlib"
                     xml:space="preserve">
@@ -15,7 +15,7 @@
     <s:String x:Key="No">Nee</s:String>
     <s:String x:Key="Frame">Frame</s:String>
     <s:String x:Key="Suppress">Onderdrukken</s:String>
-    <s:String x:Key="Preview">Voorbeschouwing</s:String>
+    <s:String x:Key="Preview">Voorvertoning</s:String>
     <s:String x:Key="S.Add">Toevoegen</s:String>
     <s:String x:Key="S.Id">ID</s:String>
     <s:String x:Key="S.Title">Titel</s:String>

@@ -404,7 +404,8 @@ namespace ScreenToGif.Model
             //When closed, check if it's the last window, then close if it's the configured behavior.
             if (!UserSettings.All.ShowNotificationIcon || !UserSettings.All.KeepOpen)
             {
-                if (Application.Current.Windows.Count == 0)
+                //We only need to check loaded windows that have content
+                if (Application.Current.Windows.Cast<Window>().Where(window => window.IsLoaded && window.HasContent).Count() == 0)
                     Application.Current.Shutdown(2);
             }
         }
