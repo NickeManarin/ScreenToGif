@@ -290,6 +290,7 @@
         <CommandBinding Command="u:Commands.KeyStrokes" CanExecute="Image_CanExecute" Executed="KeyStrokes_Executed"/>
 
         <CommandBinding Command="u:Commands.FreeDrawing" CanExecute="Image_CanExecute" Executed="FreeDrawing_Executed"/>
+        <CommandBinding Command="u:Commands.MouseClicks" CanExecute="Image_CanExecute" Executed="MouseClicks_Executed"/>
         <CommandBinding Command="u:Commands.Watermark" CanExecute="Image_CanExecute" Executed="Watermark_Executed"/>
         <CommandBinding Command="u:Commands.Border" CanExecute="Image_CanExecute" Executed="Border_Executed"/>
         <CommandBinding Command="u:Commands.Obfuscate" CanExecute="Image_CanExecute" Executed="Obfuscate_Executed"/>
@@ -423,7 +424,9 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <n:HideableTabControl Grid.Row="0" x:Name="RibbonTabControl" Effect="{StaticResource Shadow.Border.Tiny}" FontSize="13" IsTabStop="False" Focusable="False">
+        <n:HideableTabControl Grid.Row="0" x:Name="RibbonTabControl" Effect="{StaticResource Shadow.Border.Tiny}" FontSize="13" IsTabStop="False" Focusable="False"
+                              OptionsCommand="{Binding Source={StaticResource AppViewModel}, Path=OpenOptions}" FeedbackCommand="{Binding Source={StaticResource AppViewModel}, Path=OpenFeedback}"
+                              TroubleshootCommand="{Binding Source={StaticResource AppViewModel}, Path=OpenTroubleshoot}" HelpCommand="{Binding Source={StaticResource AppViewModel}, Path=OpenHelp}">
             <n:AwareTabItem Header="{DynamicResource Editor.File}" Image="{StaticResource Vector.Save}">
                 <Grid Height="94" Margin="2" Background="#FFFAFAFA" Effect="{StaticResource Shadow.Invariant}">
                     <Grid.ColumnDefinitions>
@@ -858,7 +861,7 @@
                                        MinWidth="55" ContentHeight="28" ContentWidth="28" Style="{StaticResource Style.Button.Vertical2}" Command="u:Commands.RemoveDuplicates"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
-                        
+
                         <n:ImageButton Grid.Row="0" Grid.Column="2" x:Name="ReduceButton" Text="{DynamicResource Editor.Edit.Frames.Reduce}" Content="{StaticResource Vector.RemoveImage}"
                                        MinWidth="55" ContentHeight="28" ContentWidth="28" Style="{StaticResource Style.Button.Vertical2}" Command="u:Commands.Reduce"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
@@ -1061,6 +1064,7 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
@@ -1081,17 +1085,22 @@
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                        <n:ImageButton Grid.Row="0" Grid.Column="2" x:Name="BorderButton" Text="{DynamicResource Editor.Image.Border}" Content="{StaticResource Vector.Border}"
+                        <n:ImageButton Grid.Row="0" Grid.Column="2" Text="{DynamicResource Editor.Image.Clicks}" Content="{StaticResource Vector.Cursor}"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="32" Command="u:Commands.MouseClicks" Style="{StaticResource Style.Button.Vertical2}"
+                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                        
+                        <n:ImageButton Grid.Row="0" Grid.Column="3" x:Name="BorderButton" Text="{DynamicResource Editor.Image.Border}" Content="{StaticResource Vector.Border}"
                                        MinWidth="55" ContentHeight="28" ContentWidth="32" Command="u:Commands.Border" Style="{StaticResource Style.Button.Vertical2}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                        <n:ImageButton Grid.Row="0" Grid.Column="3" x:Name="ObfuscateButton" Text="{DynamicResource Editor.Image.Obfuscate}" Content="{StaticResource Vector.Obfuscate}"
+                        <n:ImageButton Grid.Row="0" Grid.Column="4" x:Name="ObfuscateButton" Text="{DynamicResource Editor.Image.Obfuscate}" Content="{StaticResource Vector.Obfuscate}"
                                        MinWidth="55" ContentHeight="28" ContentWidth="32" Command="u:Commands.Obfuscate" Style="{StaticResource Style.Button.Vertical2}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                        <Grid Grid.Row="0" Grid.Column="4">
+                        <Grid Grid.Row="0" Grid.Column="5">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition/>
@@ -1122,9 +1131,9 @@
 
                         <n:DropDownButton Grid.Row="0" Grid.Column="0" x:Name="FilterButton"  Description="Filters" Content="{StaticResource Vector.Colors}" MaxSize="25" IsVertical="True"
                                           IsEnabled="{Binding ElementName=CropButton, Path=IsEnabled}">
-                            <n:ImageMenuItem Header="Grayscale" Image="{StaticResource Vector.Video}" IsHitTestVisible="False" MaxSize="20"/>
-                            <n:ImageMenuItem Header="Blur" Image="{StaticResource Vector.Video}" IsHitTestVisible="False" MaxSize="20"/>
-                            <n:ImageMenuItem Header="Sepia" Image="{StaticResource Vector.Video}" IsHitTestVisible="False" MaxSize="20"/>
+                            <n:ImageMenuItem Header="Grayscale" Image="{StaticResource Vector.Video}" IsHitTestVisible="False" ContentHeight="20" ContentWidth="16"/>
+                            <n:ImageMenuItem Header="Blur" Image="{StaticResource Vector.Video}" IsHitTestVisible="False" ContentHeight="20" ContentWidth="16"/>
+                            <n:ImageMenuItem Header="Sepia" Image="{StaticResource Vector.Video}" IsHitTestVisible="False" ContentHeight="20" ContentWidth="16"/>
                         </n:DropDownButton>
                     </Grid>
                 </Grid>
@@ -1204,7 +1213,7 @@
 
                         <Viewbox Grid.Row="0" Grid.Column="0" Child="{StaticResource Vector.Number}" Height="18" Width="18" VerticalAlignment="Center"/>
                         <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource Editor.Statistics.FrameCount}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="Black"/>
-                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ElementName=FrameListView, Path=(Items).Count}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ElementName=FrameListView, Path=Items.Count}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                         <Viewbox Grid.Row="2" Grid.Column="0" Child="{StaticResource Vector.Clock}" Height="18" Width="18" VerticalAlignment="Center"/>
                         <TextBlock Grid.Row="2" Grid.Column="1" Text="{DynamicResource Editor.Statistics.TotalDuration}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" Foreground="Black"/>
@@ -1295,15 +1304,15 @@
                        AllowDrop="True" Drop="Control_Drop" DragEnter="Control_DragEnter" PreviewMouseWheel="ZoomBox_MouseWheel">
                 <n:ZoomBox.ContextMenu>
                     <ContextMenu>
-                        <n:ImageMenuItem x:Name="PlayMenuItem" Header="{DynamicResource Editor.Playback.Play}" Image="{StaticResource Vector.Play}" MaxSize="16" Command="u:Commands.Play"/>
+                        <n:ImageMenuItem x:Name="PlayMenuItem" Header="{DynamicResource Editor.Playback.Play}" Image="{StaticResource Vector.Play}" ContentHeight="16" ContentWidth="16" Command="u:Commands.Play"/>
                         <Separator/>
-                        <n:ImageMenuItem Header="{DynamicResource Editor.Home.Undo}" Image="{StaticResource Vector.Undo}" MaxSize="16" Command="Undo"/>
-                        <n:ImageMenuItem Header="{DynamicResource Editor.Home.Redo}" Image="{StaticResource Vector.Redo}" MaxSize="16" Command="Redo"/>
+                        <n:ImageMenuItem Header="{DynamicResource Editor.Home.Undo}" Image="{StaticResource Vector.Undo}" ContentHeight="16" ContentWidth="16" Command="Undo"/>
+                        <n:ImageMenuItem Header="{DynamicResource Editor.Home.Redo}" Image="{StaticResource Vector.Redo}" ContentHeight="16" ContentWidth="16" Command="Redo"/>
                         <Separator/>
-                        <n:ImageMenuItem Header="{DynamicResource Context.SaveAs}" Image="{StaticResource Vector.Gif}" MaxSize="16" Command="u:Commands.SaveAs"/>
-                        <n:ImageMenuItem Header="{DynamicResource Recorder.Discard}" Image="{StaticResource Vector.Remove}" MaxSize="16" Command="u:Commands.DiscardProject"/>
+                        <n:ImageMenuItem Header="{DynamicResource Context.SaveAs}" Image="{StaticResource Vector.Gif}" ContentHeight="16" ContentWidth="16" Command="u:Commands.SaveAs"/>
+                        <n:ImageMenuItem Header="{DynamicResource Recorder.Discard}" Image="{StaticResource Vector.Remove}" ContentHeight="16" ContentWidth="16" Command="u:Commands.DiscardProject"/>
                         <Separator/>
-                        <n:ImageMenuItem Header="{DynamicResource Context.RemoveFrames}" Image="{StaticResource Vector.RemoveImage}" MaxSize="16" Command="Delete"/>
+                        <n:ImageMenuItem Header="{DynamicResource Context.RemoveFrames}" Image="{StaticResource Vector.RemoveImage}" ContentHeight="16" ContentWidth="16" Command="Delete"/>
                     </ContextMenu>
                 </n:ZoomBox.ContextMenu>
             </n:ZoomBox>
@@ -1328,8 +1337,8 @@
                                     FontStyle="{Binding ElementName=CaptionFontStyleComboBox, Path=SelectedValue}"
                                     FontWeight="{Binding ElementName=CaptionFontWeightComboBox, Path=SelectedValue}"
                                     FontSize="{Binding ElementName=CaptionFontSizeNumericUpDown, Path=Value}"
-                                    Fill="{Binding ElementName=CaptionFontColor, Path=Background}"
-                                    Stroke="{Binding ElementName=CaptionOutlineColor, Path=Background}"
+                                    Fill="{Binding ElementName=CaptionFontColorBox, Path=SelectedBrush}"
+                                    Stroke="{Binding ElementName=CaptionOutlineColorBox, Path=SelectedBrush}"
                                     StrokeThickness="{Binding ElementName=CaptionOutlineThicknessNumericUpDown, Path=Value}"
                                     VerticalAlignment="{Binding ElementName=CaptionVerticalAligmentComboBox, Path=SelectedValue}"
                                     HorizontalAlignment="{Binding ElementName=CaptionHorizontalAligmentComboBox, Path=SelectedValue}"
@@ -1347,21 +1356,21 @@
                                    FontStyle="{Binding ElementName=FreeTextFontStyleComboBox, Path=SelectedValue}"
                                    FontWeight="{Binding ElementName=FreeTextFontWeightComboBox, Path=SelectedValue}"
                                    FontSize="{Binding ElementName=FreeTextFontSizeNumericUpDown, Path=Value}"
-                                   Foreground="{Binding ElementName=FreeTextFontColor, Path=Background}"/>
+                                   Foreground="{Binding ElementName=FreeTextFontColorBox, Path=SelectedBrush}"/>
                     </n:MoveResizeControl>
 
                     <Grid x:Name="TitleFrameOverlayGrid" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True"
                           Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
                           Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}"
                           Visibility="{Binding ElementName=TitleFrameGrid, Path=Visibility}" 
-                          Background="{Binding ElementName=TitleFrameBackgroundColor, Path=Background}">
+                          Background="{Binding ElementName=TitleFrameBackgroundColorBox, Path=SelectedBrush}">
                         <TextBlock x:Name="TitleFrameTextBlock" Padding="0"
                                    Text="{Binding ElementName=TitleFrameTextBox, Path=Text}" 
                                    FontFamily="{Binding ElementName=TitleFrameFontComboBox, Path=SelectedItem}" 
                                    FontStyle="{Binding ElementName=TitleFrameFontStyleComboBox, Path=SelectedValue}"
                                    FontWeight="{Binding ElementName=TitleFrameFontWeightComboBox, Path=SelectedValue}"
                                    FontSize="{Binding ElementName=TitleFrameFontSizeNumericUpDown, Path=Value}"
-                                   Foreground="{Binding ElementName=TitleFrameFontColor, Path=Background}"
+                                   Foreground="{Binding ElementName=TitleFrameFontColorBox, Path=SelectedBrush}"
                                    VerticalAlignment="{Binding ElementName=TitleFrameVerticalAligmentComboBox, Path=SelectedValue}"
                                    HorizontalAlignment="{Binding ElementName=TitleFrameHorizontalAligmentComboBox, Path=SelectedValue}"
                                    Margin="{Binding ElementName=TitleFrameMarginNumericUpDown, Path=Value}"/>
@@ -1375,7 +1384,7 @@
                               VerticalAlignment="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesVerticalAligment}"
                               Background="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesBackgroundColor, Converter={StaticResource ColorToBrush}}"
                               Margin="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesMargin}">
-                            <n:TextPath x:Name="KeyStrokesLabel" Text="Ctrl + c" VerticalAlignment="Stretch" HorizontalAlignment="Center"
+                            <n:TextPath x:Name="KeyStrokesLabel" Text="Control + C" VerticalAlignment="Stretch" HorizontalAlignment="Center"
                                         FontFamily="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesFontFamily}" 
                                         FontStyle="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesFontStyle}"
                                         FontWeight="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesFontWeight}"
@@ -1405,7 +1414,7 @@
                             <MultiBinding Converter="{StaticResource SelectionToDrawingAttributesConverter}">
                                 <Binding ElementName="FreeDrawingHeightNumericUpDown" Path="Value"/>
                                 <Binding ElementName="FreeDrawingWidthNumericUpDown" Path="Value"/>
-                                <Binding ElementName="FreeDrawingColorBorder" Path="Background"/>
+                                <Binding ElementName="FreeDrawingColorBox" Path="SelectedColor"/>
                                 <Binding ElementName="FitToCurveCheckBox" Path="IsChecked"/>
                                 <Binding ElementName="IsHighLighterCheckBox" Path="IsChecked"/>
                                 <Binding ElementName="RectangleRadioButton" Path="IsChecked"/>
@@ -1437,7 +1446,7 @@
                             Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
                             Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}"
                             Visibility="{Binding ElementName=BorderGrid, Path=Visibility}"
-                            BorderBrush="{Binding ElementName=BorderColorBorder, Path=Background}">
+                            BorderBrush="{Binding ElementName=BorderColorBox, Path=SelectedBrush}">
                         <Border.BorderThickness>
                             <MultiBinding Converter="{StaticResource DoubleToThicknessConverter}">
                                 <Binding ElementName="BorderLeftThicknessNumericUpDown" Path="Value"/>
@@ -1523,11 +1532,11 @@
             <Grid Grid.Row="1" Grid.Column="0" x:Name="WelcomeGrid" Background="WhiteSmoke" Visibility="Visible" AllowDrop="True" Drop="Control_Drop" DragEnter="Control_DragEnter">
                 <Grid.ContextMenu>
                     <ContextMenu>
-                        <n:ImageMenuItem Header="{DynamicResource Context.NewRecording}" Image="{StaticResource Vector.Record.New}" MaxSize="16" Command="u:Commands.NewRecording"/>
-                        <n:ImageMenuItem Header="{DynamicResource Context.NewWebcamRecording}" Image="{StaticResource Vector.Camera.New}" MaxSize="16" Command="u:Commands.NewWebcamRecording"/>
-                        <n:ImageMenuItem Header="{DynamicResource Context.NewBoardRecording}" Image="{StaticResource Vector.Board.New}" MaxSize="16" Command="u:Commands.NewBoardRecording"/>
-                        <n:ImageMenuItem Header="{DynamicResource Context.NewBlankAnimation}" Image="{StaticResource Vector.File.New}" MaxSize="16" Command="u:Commands.NewAnimation"/>
-                        <n:ImageMenuItem Header="{DynamicResource Context.NewFromMediaProject}" Image="{StaticResource Vector.Open}" MaxSize="16" Command="u:Commands.Load"/>
+                        <n:ImageMenuItem Header="{DynamicResource Context.NewRecording}" Image="{StaticResource Vector.Record.New}" ContentHeight="16" ContentWidth="16" Command="u:Commands.NewRecording"/>
+                        <n:ImageMenuItem Header="{DynamicResource Context.NewWebcamRecording}" Image="{StaticResource Vector.Camera.New}" ContentHeight="16" ContentWidth="16" Command="u:Commands.NewWebcamRecording"/>
+                        <n:ImageMenuItem Header="{DynamicResource Context.NewBoardRecording}" Image="{StaticResource Vector.Board.New}" ContentHeight="16" ContentWidth="16" Command="u:Commands.NewBoardRecording"/>
+                        <n:ImageMenuItem Header="{DynamicResource Context.NewBlankAnimation}" Image="{StaticResource Vector.File.New}" ContentHeight="16" ContentWidth="16" Command="u:Commands.NewAnimation"/>
+                        <n:ImageMenuItem Header="{DynamicResource Context.NewFromMediaProject}" Image="{StaticResource Vector.Open}" ContentHeight="16" ContentWidth="16" Command="u:Commands.Load"/>
                     </ContextMenu>
                 </Grid.ContextMenu>
 
@@ -1590,7 +1599,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="{DynamicResource Size}" Style="{StaticResource LabelSeparator}"/>
+                            <n:LabelSeparator Grid.Row="0" Text="{DynamicResource Size}"/>
                             <Grid Grid.Row="1" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -1610,7 +1619,7 @@
                                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=NewAnimationHeight, Mode=TwoWay}"/>
                             </Grid>
 
-                            <Label Grid.Row="2" Content="{DynamicResource Background}" Style="{StaticResource LabelSeparator}"/>
+                            <n:LabelSeparator Grid.Row="2" Text="{DynamicResource Background}"/>
                             <Grid Grid.Row="3" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -1623,10 +1632,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Color}" VerticalAlignment="Center" Padding="0"/>
-                                <Border Grid.Row="1" Grid.Column="1" x:Name="NewImageBackgroundColor" Height="26" Margin="10,5" Cursor="Hand" 
-                                        BorderBrush="#FFABABAB" BorderThickness="1" Background="{Binding NewAnimationColor, Source={x:Static u:UserSettings.All}, 
-                                        Converter={StaticResourceExtension ColorToBrush}}" MinWidth="70" 
-                                        MouseLeftButtonDown="NewProjectBackgroundColor_MouseLeftButtonDown"/>
+                                <n:ColorBox Grid.Row="1" Grid.Column="1" SelectedColor="{Binding NewAnimationColor, Source={x:Static u:UserSettings.All}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5,3"/>
                             </Grid>
                         </Grid>
 
@@ -1675,9 +1681,9 @@
                                                         IsChecked="{Binding SaveType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:Export.Images}}"
                                                         Checked="SaveType_Checked"/>
 
-                                    <!--<n:ImageRadioButton Grid.Row="2" Grid.Column="1" x:Name="PsdRadioButton" Content="{StaticResource Vector.ImageStack}" Text="{DynamicResource S.SaveAs.Psd}" 
+                                    <n:ImageRadioButton Grid.Row="2" Grid.Column="1" x:Name="PsdRadioButton" Content="{StaticResource Vector.ImageStack}" Text="{DynamicResource S.SaveAs.Psd}" 
                                                         IsChecked="{Binding SaveType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:Export.Photoshop}}"
-                                                        Checked="SaveType_Checked"/>-->
+                                                        Checked="SaveType_Checked" Visibility="Collapsed"/>
                                 </Grid>
                             </Expander>
 
@@ -2187,6 +2193,60 @@
                                                                 IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=OverwriteOnSaveImages, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                         </Grid>
                                     </Grid>
+
+                                    <Grid Visibility="{Binding IsChecked, ElementName=PsdRadioButton, Converter={StaticResource Bool2Visibility}}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <n:ExtendedCheckBox Grid.Row="0" x:Name="SaveFilePsdCheckBox" Text="{DynamicResource S.SaveAs.SaveOptions.PickFolder}" Margin="10,3,3,3"
+                                                            IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=PickLocationPhotoshop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                            CheckedChanged="SaveType_Checked"/>
+
+                                        <Grid Grid.Row="1" Visibility="{Binding ElementName=SaveFilePsdCheckBox, Path=IsChecked, Converter={StaticResource Bool2Visibility}}">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <n:ExtendedCheckBox Grid.Row="0" Text="{DynamicResource S.SaveAs.SaveOptions.Overwrite}" Margin="20,3,3,3" 
+                                                                IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=OverwriteOnSavePhotoshop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                            <n:ExtendedCheckBox Grid.Row="1" Text="{DynamicResource S.SaveAs.SaveOptions.ProjectToo}" Margin="20,3,3,3"
+                                                                IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=SaveAsProjectTooPhotoshop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                        </Grid>
+
+                                        <n:ExtendedCheckBox Grid.Row="2" x:Name="CopyFilePsdCheckBox" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard}" Margin="10,3,3,3"
+                                                            IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=SaveToClipboardPhotoshop}" 
+                                                            Checked="SaveToClipboard_CheckedChanged"/>
+
+                                        <WrapPanel Grid.Row="3" Margin="20,0,0,0" Visibility="{Binding IsChecked, ElementName=CopyFilePsdCheckBox, Converter={StaticResource Bool2Visibility}}">
+                                            <n:ImageRadioButton x:Name="CopyFilePsdRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.File}" 
+                                                                IsChecked="{Binding LatestCopyTypePhotoshop, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.File}}"
+                                                                ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.File.Info}"/>
+                                            <Separator Width="1"/>
+                                            <n:ImageRadioButton x:Name="CopyFolderPathPsdRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FolderPath}" 
+                                                                IsChecked="{Binding LatestCopyTypePhotoshop, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.FolderPath}}"
+                                                                ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FolderPath.Info}"/>
+                                            <Separator Width="1"/>
+                                            <n:ImageRadioButton x:Name="CopyFilePathPsdRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FilePath}" 
+                                                                IsChecked="{Binding LatestCopyTypePhotoshop, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.FilePath}}"
+                                                                ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FilePath.Info}"/>
+                                        </WrapPanel>
+
+                                        <n:ExtendedCheckBox Grid.Row="4" x:Name="CustomCommandsPsdCheckBox" Text="{DynamicResource S.SaveAs.SaveOptions.ExecuteCommands}" Margin="10,3,3,3"
+                                                            IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=ExecuteCustomCommandsPhotoshop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                        <n:ExtendedTextBox Grid.Row="5" MinHeight="23" Margin="20,3,3,3" VerticalContentAlignment="Top" TextWrapping="WrapWithOverflow" AcceptsReturn="True"
+                                                           Text="{Binding Source={x:Static u:UserSettings.All}, Path=CustomCommandsPhotoshop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                           Visibility="{Binding IsChecked, ElementName=CustomCommandsPsdCheckBox, Converter={StaticResource Bool2Visibility}}"
+                                                           ToolTip="{DynamicResource S.SaveAs.SaveOptions.ExecuteCommands.Info}"/>
+                                    </Grid>
                                 </Grid>
                             </Expander>
 
@@ -2203,6 +2263,8 @@
                                         <Binding ElementName="SaveFileProjectCheckBox" Path="IsChecked"/>
                                         <Binding ElementName="ImagesRadioButton" Path="IsChecked"/>
                                         <Binding ElementName="SaveFileImagesCheckBox" Path="IsChecked"/>
+                                        <Binding ElementName="PsdRadioButton" Path="IsChecked"/>
+                                        <Binding ElementName="SaveFilePsdCheckBox" Path="IsChecked"/>
                                     </MultiBinding>
                                 </n:LabelSeparator.Visibility>
                             </n:LabelSeparator>
@@ -2252,6 +2314,12 @@
                                                        Visibility="{Binding IsChecked, ElementName=ProjectRadioButton, Converter={StaticResource Bool2Visibility}}"
                                                        TextChanged="FilenameTextBox_TextChanged"/>
 
+                                    <n:ExtendedTextBox Grid.Column="0" x:Name="OutputPsdFolderTextBox" Text="{Binding Source={x:Static u:UserSettings.All}, Path=LatestPhotoshopOutputFolder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                                       MinHeight="23" Height="Auto" Margin="1,3" VerticalContentAlignment="Top" ToolTipService.Placement="Top"
+                                                       ToolTip="{DynamicResource S.SaveAs.File.Location}" TextWrapping="Wrap"
+                                                       Visibility="{Binding IsChecked, ElementName=PsdRadioButton, Converter={StaticResource Bool2Visibility}}"
+                                                       TextChanged="FilenameTextBox_TextChanged"/>
+
                                     <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" ContentWidth="20"
                                                    Click="ChooseLocation_Click" ToolTip="{DynamicResource S.SaveAs.File.Choose}"
                                                    ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
@@ -2284,6 +2352,10 @@
                                     <n:ExtendedTextBox Grid.Column="0" x:Name="OutputProjectFilenameTextBox" Text="{Binding Source={x:Static u:UserSettings.All}, Path=LatestProjectFilename, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                                        MinHeight="23" Margin="1,3" VerticalContentAlignment="Center" ToolTip="{DynamicResource S.SaveAs.File.Name}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"
                                                        Visibility="{Binding IsChecked, ElementName=ProjectRadioButton, Converter={StaticResource Bool2Visibility}}" TextWrapping="Wrap" TextChanged="FilenameTextBox_TextChanged"/>
+
+                                    <n:ExtendedTextBox Grid.Column="0" x:Name="OutputPsdFilenameTextBox" Text="{Binding Source={x:Static u:UserSettings.All}, Path=LatestPhotoshopFilename, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                                       MinHeight="23" Margin="1,3" VerticalContentAlignment="Center" ToolTip="{DynamicResource S.SaveAs.File.Name}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"
+                                                       Visibility="{Binding IsChecked, ElementName=PsdRadioButton, Converter={StaticResource Bool2Visibility}}" TextWrapping="Wrap" TextChanged="FilenameTextBox_TextChanged"/>
 
                                     <ComboBox Grid.Column="1" Name="FileTypeComboBox" Margin="1,3" MinHeight="25" ToolTip="{DynamicResource S.SaveAs.File.Format}"
                                               SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=LatestExtension, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, TargetNullValue='.gif'}"
@@ -2319,6 +2391,12 @@
                                               Visibility="{Binding IsChecked, ElementName=ProjectRadioButton, Converter={StaticResource Bool2Visibility}}" SelectionChanged="SaveType_Checked">
                                         <s:String>.stg</s:String>
                                         <s:String>.zip</s:String>
+                                    </ComboBox>
+
+                                    <ComboBox Grid.Column="1" Name="FileTypePsdComboBox" Margin="1,3" MinHeight="25" ToolTip="{DynamicResource S.SaveAs.File.Format}"
+                                              SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=LatestPhotoshopExtension, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, TargetNullValue='.psd'}"
+                                              Visibility="{Binding IsChecked, ElementName=PsdRadioButton, Converter={StaticResource Bool2Visibility}}" SelectionChanged="SaveType_Checked">
+                                        <s:String>.psd</s:String>
                                     </ComboBox>
 
                                     <n:ImageButton Grid.Column="2" x:Name="IncreaseCountButton" Style="{StaticResource Style.Button.NoText}" 
@@ -2371,15 +2449,15 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="{DynamicResource Clipboard.Entries}" Margin="5,0" Padding="0,5" Style="{StaticResource LabelSeparator}"/>
+                            <n:LabelSeparator Grid.Row="0" Text="{DynamicResource Clipboard.Entries}"/>
                             <ListBox Grid.Row="1" x:Name="ClipboardListBox" Margin="10,5,5,5" MinHeight="60" VerticalAlignment="Stretch" 
                                      ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                                 <ListBox.Resources>
                                     <ContextMenu x:Key="ClipboardContextMenu">
-                                        <n:ImageMenuItem Header="{DynamicResource Clipboard.Entry}" Image="{StaticResource Vector.Paste}" MaxSize="16" IsHitTestVisible="False"/>
+                                        <n:ImageMenuItem Header="{DynamicResource Clipboard.Entry}" Image="{StaticResource Vector.Paste}" ContentHeight="16" ContentWidth="16" IsHitTestVisible="False"/>
                                         <Separator/>
-                                        <n:ImageMenuItem Header="{DynamicResource Clipboard.Explore}" Image="{StaticResource Vector.Open}" MaxSize="16" Command="u:Commands.ExploreClipboard"/>
-                                        <n:ImageMenuItem Header="{DynamicResource Clipboard.Remove}" Image="{StaticResource Vector.Remove}" MaxSize="16" Command="u:Commands.RemoveClipboardEntry"/>
+                                        <n:ImageMenuItem Header="{DynamicResource Clipboard.Explore}" Image="{StaticResource Vector.Open}" ContentHeight="16" ContentWidth="16" Command="u:Commands.ExploreClipboard"/>
+                                        <n:ImageMenuItem Header="{DynamicResource Clipboard.Remove}" Image="{StaticResource Vector.Remove}" ContentHeight="16" ContentWidth="16" Command="u:Commands.RemoveClipboardEntry"/>
                                     </ContextMenu>
                                 </ListBox.Resources>
                                 <ListBox.ItemContainerStyle>
@@ -2389,7 +2467,7 @@
                                 </ListBox.ItemContainerStyle>
                             </ListBox>
 
-                            <Label Grid.Row="2" Content="{DynamicResource Clipboard.Behavior}" Margin="5,0" Padding="0,5" Style="{StaticResource LabelSeparator}"/>
+                            <n:LabelSeparator Grid.Row="2" Text="{DynamicResource Clipboard.Behavior}"/>
                             <RadioButton Grid.Row="3" x:Name="PasteBeforeRadioButton" Content="{DynamicResource Clipboard.Before}" Margin="10,5,5,5" 
                                          IsChecked="{Binding PasteBehavior, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:PasteBehavior.BeforeSelected}}"/>
                             <RadioButton Grid.Row="4" x:Name="PasteAfterRadioButton" Content="{DynamicResource Clipboard.After}" Margin="10,5,5,5"
@@ -2405,7 +2483,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="{DynamicResource Resize.CurrentProperties}" Style="{StaticResource LabelSeparator}"/>
+                            <n:LabelSeparator Grid.Row="0" Text="{DynamicResource Resize.CurrentProperties}"/>
                             <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10,0,0,0">
                                 <Label x:Name="CurrentWidthLabel" Content="100"/>
                                 <Label Content="x"/>
@@ -2415,7 +2493,7 @@
                                 <Label Content="{DynamicResource Resize.Dpi}"/>
                             </StackPanel>
 
-                            <Label Grid.Row="2" Content="{DynamicResource Resize.NewProperties}" Style="{StaticResource LabelSeparator}"/>
+                            <n:LabelSeparator Grid.Row="2" Text="{DynamicResource Resize.NewProperties}"/>
                             <Grid Grid.Row="3" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -2457,11 +2535,11 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="{DynamicResource Preview}" Style="{StaticResource LabelSeparator}"/>
+                            <n:LabelSeparator Grid.Row="0" Text="{DynamicResource Preview}"/>
                             <Image Grid.Row="1" x:Name="CropImage" Height="120" Stretch="Uniform" Margin="10,5,5,5" Effect="{StaticResource Shadow.Black.Large}"/>
                             <Label Grid.Row="2" x:Name="CropSizeLabel" Content="0 × 0" HorizontalAlignment="Center" Padding="2"/>
 
-                            <Label Grid.Row="3" Content="{DynamicResource Crop.Points}" Style="{StaticResource LabelSeparator}"/>
+                            <n:LabelSeparator Grid.Row="3" Text="{DynamicResource Crop.Points}"/>
                             <Grid Grid.Row="4" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -2530,7 +2608,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="{DynamicResource Editor.Image.FlipRotate}" Style="{StaticResource LabelSeparator}"/>
+                            <n:LabelSeparator Grid.Row="0" Text="{DynamicResource Editor.Image.FlipRotate}"/>
                             <Grid Grid.Row="1" Margin="10,0" HorizontalAlignment="Center">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -2560,261 +2638,258 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="{DynamicResource Caption.Text}" Style="{StaticResource LabelSeparator}"/>
+                            <n:LabelSeparator Grid.Row="0" Text="{DynamicResource Caption.Text}"/>
                             <n:ExtendedTextBox Grid.Row="1" x:Name="CaptionTextBox" Margin="10,5,5,5" AcceptsReturn="True" AcceptsTab="True"
                                                Text="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionText}"/>
 
-                            <Label Grid.Row="2" Content="{DynamicResource Caption.Font}" Style="{StaticResource LabelSeparator}"/>
-                            <Grid Grid.Row="3" Margin="10,0,0,0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
+                            <Expander Grid.Row="2" Header="{DynamicResource Caption.Font}" IsExpanded="{Binding IsCaptionFontGroupExpanded, Source={x:Static u:UserSettings.All}}">
+                                <Grid Margin="10,0,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Family}" VerticalAlignment="Center" Padding="0"/>
-                                <ComboBox Grid.Row="0" Grid.Column="1" x:Name="CaptionFontComboBox" Margin="10,5" MinWidth="100" MaxWidth="150" IsEditable="True"
-                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionFontFamily}">
-                                    <ComboBox.ItemsSource>
-                                        <Binding Source="{StaticResource MyFonts}"/>
-                                    </ComboBox.ItemsSource>
+                                    <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Family}" VerticalAlignment="Center" Padding="0"/>
+                                    <ComboBox Grid.Row="0" Grid.Column="1" x:Name="CaptionFontComboBox" Margin="10,5" MinWidth="100" MaxWidth="150" IsEditable="True"
+                                              ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionFontFamily}">
+                                        <ComboBox.ItemsSource>
+                                            <Binding Source="{StaticResource MyFonts}"/>
+                                        </ComboBox.ItemsSource>
 
-                                    <ComboBox.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <VirtualizingStackPanel VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling"/>
-                                        </ItemsPanelTemplate>
-                                    </ComboBox.ItemsPanel>
-                                </ComboBox>
+                                        <ComboBox.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <VirtualizingStackPanel VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling"/>
+                                            </ItemsPanelTemplate>
+                                        </ComboBox.ItemsPanel>
+                                    </ComboBox>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Style}" VerticalAlignment="Center" Padding="0"/>
-                                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="CaptionFontStyleComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"
-                                          SelectedValuePath="FontStyle" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionFontStyle}">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
-                                                <TextBlock FontStyle="{Binding FontStyle}" FontSize="14" Text="{Binding Text}"/>
-                                            </VirtualizingStackPanel>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
+                                    <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Style}" VerticalAlignment="Center" Padding="0"/>
+                                    <ComboBox Grid.Row="1" Grid.Column="1" x:Name="CaptionFontStyleComboBox" Margin="10,5" MinWidth="100"
+                                              SelectedValuePath="FontStyle" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionFontStyle}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
+                                                    <TextBlock FontStyle="{Binding FontStyle}" FontSize="14" Text="{Binding Text}"/>
+                                                </VirtualizingStackPanel>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
 
-                                    <TextBlock FontStyle="Normal" Text="{DynamicResource S.FontStyles.Normal}"/>
-                                    <TextBlock FontStyle="Italic" Text="{DynamicResource S.FontStyles.Italic}"/>
-                                    <TextBlock FontStyle="Oblique" Text="{DynamicResource S.FontStyles.Oblique}"/>
-                                </ComboBox>
+                                        <TextBlock FontStyle="Normal" Text="{DynamicResource S.FontStyles.Normal}"/>
+                                        <TextBlock FontStyle="Italic" Text="{DynamicResource S.FontStyles.Italic}"/>
+                                        <TextBlock FontStyle="Oblique" Text="{DynamicResource S.FontStyles.Oblique}"/>
+                                    </ComboBox>
 
-                                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Weight}" VerticalAlignment="Center" Padding="0"/>
-                                <ComboBox Grid.Row="2" Grid.Column="1" x:Name="CaptionFontWeightComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" 
-                                          SelectedValuePath="FontWeight" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionFontWeight}">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
-                                                <TextBlock FontWeight="{Binding FontWeight}" FontSize="14" Text="{Binding Text}" />
-                                            </VirtualizingStackPanel>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
+                                    <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Weight}" VerticalAlignment="Center" Padding="0"/>
+                                    <ComboBox Grid.Row="2" Grid.Column="1" x:Name="CaptionFontWeightComboBox" Margin="10,5" MinWidth="100"
+                                              SelectedValuePath="FontWeight" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionFontWeight}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
+                                                    <TextBlock FontWeight="{Binding FontWeight}" FontSize="14" Text="{Binding Text}" />
+                                                </VirtualizingStackPanel>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
 
-                                    <TextBlock FontWeight="UltraLight" Text="{DynamicResource S.FontWeights.UltraLight}"/>
-                                    <TextBlock FontWeight="ExtraLight" Text="{DynamicResource S.FontWeights.ExtraLight}"/>
-                                    <TextBlock FontWeight="Light" Text="{DynamicResource S.FontWeights.Light}"/>
-                                    <TextBlock FontWeight="Thin" Text="{DynamicResource S.FontWeights.Thin}"/>
-                                    <TextBlock FontWeight="Normal" Text="{DynamicResource S.FontWeights.Normal}"/>
-                                    <TextBlock FontWeight="Regular" Text="{DynamicResource S.FontWeights.Regular}"/>
-                                    <TextBlock FontWeight="Medium" Text="{DynamicResource S.FontWeights.Medium}"/>
-                                    <TextBlock FontWeight="SemiBold" Text="{DynamicResource S.FontWeights.SemiBold}"/>
-                                    <TextBlock FontWeight="DemiBold" Text="{DynamicResource S.FontWeights.DemiBold}"/>
-                                    <TextBlock FontWeight="Bold" Text="{DynamicResource S.FontWeights.Bold}"/>
-                                    <TextBlock FontWeight="Black" Text="{DynamicResource S.FontWeights.Black}"/>
-                                    <TextBlock FontWeight="Heavy" Text="{DynamicResource S.FontWeights.Heavy}"/>
-                                    <TextBlock FontWeight="ExtraBold" Text="{DynamicResource S.FontWeights.ExtraBold}"/>
-                                    <TextBlock FontWeight="ExtraBlack" Text="{DynamicResource S.FontWeights.ExtraBlack}"/>
-                                    <TextBlock FontWeight="UltraBold" Text="{DynamicResource S.FontWeights.UltraBold}"/>
-                                    <TextBlock FontWeight="UltraBlack" Text="{DynamicResource S.FontWeights.UltraBlack}"/>
-                                </ComboBox>
+                                        <TextBlock FontWeight="UltraLight" Text="{DynamicResource S.FontWeights.UltraLight}"/>
+                                        <TextBlock FontWeight="ExtraLight" Text="{DynamicResource S.FontWeights.ExtraLight}"/>
+                                        <TextBlock FontWeight="Light" Text="{DynamicResource S.FontWeights.Light}"/>
+                                        <TextBlock FontWeight="Thin" Text="{DynamicResource S.FontWeights.Thin}"/>
+                                        <TextBlock FontWeight="Normal" Text="{DynamicResource S.FontWeights.Normal}"/>
+                                        <TextBlock FontWeight="Regular" Text="{DynamicResource S.FontWeights.Regular}"/>
+                                        <TextBlock FontWeight="Medium" Text="{DynamicResource S.FontWeights.Medium}"/>
+                                        <TextBlock FontWeight="SemiBold" Text="{DynamicResource S.FontWeights.SemiBold}"/>
+                                        <TextBlock FontWeight="DemiBold" Text="{DynamicResource S.FontWeights.DemiBold}"/>
+                                        <TextBlock FontWeight="Bold" Text="{DynamicResource S.FontWeights.Bold}"/>
+                                        <TextBlock FontWeight="Black" Text="{DynamicResource S.FontWeights.Black}"/>
+                                        <TextBlock FontWeight="Heavy" Text="{DynamicResource S.FontWeights.Heavy}"/>
+                                        <TextBlock FontWeight="ExtraBold" Text="{DynamicResource S.FontWeights.ExtraBold}"/>
+                                        <TextBlock FontWeight="ExtraBlack" Text="{DynamicResource S.FontWeights.ExtraBlack}"/>
+                                        <TextBlock FontWeight="UltraBold" Text="{DynamicResource S.FontWeights.UltraBold}"/>
+                                        <TextBlock FontWeight="UltraBlack" Text="{DynamicResource S.FontWeights.UltraBlack}"/>
+                                    </ComboBox>
 
-                                <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Caption.Size}" VerticalAlignment="Center" Padding="0"/>
-                                <n:IntegerUpDown Grid.Row="3" Grid.Column="1" x:Name="CaptionFontSizeNumericUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
-                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionFontSize, Mode=TwoWay}"/>
+                                    <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Caption.Size}" VerticalAlignment="Center" Padding="0"/>
+                                    <n:IntegerUpDown Grid.Row="3" Grid.Column="1" x:Name="CaptionFontSizeNumericUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
+                                                     Value="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionFontSize, Mode=TwoWay}"/>
 
-                                <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
-                                <Border Grid.Row="4" Grid.Column="1" x:Name="CaptionFontColor" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
-                                        Background="{Binding CaptionFontColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
-                                        MouseLeftButtonDown="CaptionFontColor_MouseLeftButtonDown"/>
-                            </Grid>
+                                    <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
+                                    <n:ColorBox Grid.Row="4" Grid.Column="1" x:Name="CaptionFontColorBox" Margin="10,5"
+                                                SelectedColor="{Binding CaptionFontColor, Source={x:Static u:UserSettings.All}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </Grid>
+                            </Expander>
 
-                            <Label Grid.Row="4" Content="{DynamicResource Caption.Outline}" Style="{StaticResource LabelSeparator}"/>
-                            <Grid Grid.Row="5" Margin="10,0,0,0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
+                            <Expander Grid.Row="3" Header="{DynamicResource Caption.Outline}" IsExpanded="{Binding IsCaptionOutlineGroupExpanded, Source={x:Static u:UserSettings.All}}">
+                                <Grid Margin="10,0,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Thickness}" VerticalAlignment="Center" Padding="0"/>
-                                <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="CaptionOutlineThicknessNumericUpDown" Minimum="0" Maximum="20" Margin="10,5" MinWidth="70" 
-                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionOutlineThickness, Mode=TwoWay}"/>
+                                    <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Thickness}" VerticalAlignment="Center" Padding="0"/>
+                                    <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="CaptionOutlineThicknessNumericUpDown" Minimum="0" Maximum="20" Margin="10,5" MinWidth="70" 
+                                                     Value="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionOutlineThickness, Mode=TwoWay}"/>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
-                                <Border Grid.Row="1" Grid.Column="1" x:Name="CaptionOutlineColor" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
-                                        Background="{Binding CaptionOutlineColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}"
-                                        MouseLeftButtonDown="CaptionOutlineColor_MouseLeftButtonDown"/>
-                            </Grid>
+                                    <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
+                                    <n:ColorBox Grid.Row="1" Grid.Column="1" x:Name="CaptionOutlineColorBox" Margin="10,5"
+                                                SelectedColor="{Binding CaptionOutlineColor, Source={x:Static u:UserSettings.All}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </Grid>
+                            </Expander>
 
-                            <Label Grid.Row="6" Content="{DynamicResource Caption.Layout}" Style="{StaticResource LabelSeparator}"/>
-                            <Grid Grid.Row="7" Margin="10,0,0,0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
+                            <Expander Grid.Row="4" Header="{DynamicResource Caption.Layout}" IsExpanded="{Binding IsCaptionLayoutGroupExpanded, Source={x:Static u:UserSettings.All}}">
+                                <Grid Margin="10,0,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Vertical}" VerticalAlignment="Center" Padding="0"/>
-                                <ComboBox Grid.Row="0" Grid.Column="1" x:Name="CaptionVerticalAligmentComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"
-                                          SelectedValuePath="VerticalAlignment" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionVerticalAligment, Mode=TwoWay}">
+                                    <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Vertical}" VerticalAlignment="Center" Padding="0"/>
+                                    <ComboBox Grid.Row="0" Grid.Column="1" x:Name="CaptionVerticalAligmentComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"
+                                              SelectedValuePath="VerticalAlignment" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionVerticalAligment, Mode=TwoWay}">
 
-                                    <TextBlock VerticalAlignment="Top" Text="{DynamicResource S.VerticalAlignment.Top}"/>
-                                    <TextBlock VerticalAlignment="Center" Text="{DynamicResource S.VerticalAlignment.Center}"/>
-                                    <TextBlock VerticalAlignment="Bottom" Text="{DynamicResource S.VerticalAlignment.Bottom}"/>
-                                </ComboBox>
+                                        <TextBlock VerticalAlignment="Top" Text="{DynamicResource S.VerticalAlignment.Top}"/>
+                                        <TextBlock VerticalAlignment="Center" Text="{DynamicResource S.VerticalAlignment.Center}"/>
+                                        <TextBlock VerticalAlignment="Bottom" Text="{DynamicResource S.VerticalAlignment.Bottom}"/>
+                                    </ComboBox>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Horizontal}" VerticalAlignment="Center" Padding="0"/>
-                                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="CaptionHorizontalAligmentComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" 
-                                          SelectedValuePath="HorizontalAlignment" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionHorizontalAligment, Mode=TwoWay}">
+                                    <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Horizontal}" VerticalAlignment="Center" Padding="0"/>
+                                    <ComboBox Grid.Row="1" Grid.Column="1" x:Name="CaptionHorizontalAligmentComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" 
+                                              SelectedValuePath="HorizontalAlignment" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionHorizontalAligment, Mode=TwoWay}">
 
-                                    <TextBlock HorizontalAlignment="Left" Text="{DynamicResource S.HorizontalAlignment.Left}"/>
-                                    <TextBlock HorizontalAlignment="Center" Text="{DynamicResource S.HorizontalAlignment.Center}"/>
-                                    <TextBlock HorizontalAlignment="Right" Text="{DynamicResource S.HorizontalAlignment.Right}"/>
-                                </ComboBox>
+                                        <TextBlock HorizontalAlignment="Left" Text="{DynamicResource S.HorizontalAlignment.Left}"/>
+                                        <TextBlock HorizontalAlignment="Center" Text="{DynamicResource S.HorizontalAlignment.Center}"/>
+                                        <TextBlock HorizontalAlignment="Right" Text="{DynamicResource S.HorizontalAlignment.Right}"/>
+                                    </ComboBox>
 
-                                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource String.Margin}" VerticalAlignment="Center" Padding="0"/>
-                                <n:IntegerUpDown Grid.Row="2" Grid.Column="1" x:Name="CaptionMarginNumericUpDown" Minimum="-100" Maximum="100" Margin="10,5" MinWidth="70" 
-                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionMargin, Mode=TwoWay}"/>
-                            </Grid>
+                                    <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource String.Margin}" VerticalAlignment="Center" Padding="0"/>
+                                    <n:IntegerUpDown Grid.Row="2" Grid.Column="1" x:Name="CaptionMarginNumericUpDown" Minimum="-100" Maximum="100" Margin="10,5" MinWidth="70" 
+                                                     Value="{Binding Source={x:Static u:UserSettings.All}, Path=CaptionMargin, Mode=TwoWay}"/>
+                                </Grid>
+                            </Expander>
                         </Grid>
 
                         <Grid x:Name="FreeTextGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="{DynamicResource Caption.Text}" Style="{StaticResource LabelSeparator}"/>
+                            <n:LabelSeparator Grid.Row="0" Text="{DynamicResource Caption.Text}"/>
                             <n:ExtendedTextBox Grid.Row="1" x:Name="FreeTextTextBox"  Margin="10,5,5,5" AcceptsReturn="True" AcceptsTab="True"
                                                Text="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextText, Mode=TwoWay}"
                                                TextChanged="FreeTextTextBox_OnTextChanged"/>
 
-                            <Label Grid.Row="2" Content="{DynamicResource Caption.Font}" Style="{StaticResource LabelSeparator}"/>
-                            <Grid Grid.Row="3" Margin="10,0,0,0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
+                            <Expander Grid.Row="2" Header="{DynamicResource Caption.Font}" IsExpanded="{Binding IsFreeTextFontGroupExpanded, Source={x:Static u:UserSettings.All}}">
+                                <Grid Margin="10,0,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Family}" VerticalAlignment="Center" Padding="0"/>
-                                <ComboBox Grid.Row="0" Grid.Column="1" x:Name="FreeTextFontComboBox" Margin="10,5" MinWidth="100" MaxWidth="150" IsEditable="True"
-                                          ItemTemplate="{DynamicResource FontTemplate}" 
-                                          SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextFontFamily, Mode=TwoWay}">
-                                    <ComboBox.ItemsSource>
-                                        <Binding Source="{StaticResource MyFonts}" />
-                                    </ComboBox.ItemsSource>
+                                    <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Family}" VerticalAlignment="Center" Padding="0"/>
+                                    <ComboBox Grid.Row="0" Grid.Column="1" x:Name="FreeTextFontComboBox" Margin="10,5" MinWidth="100" MaxWidth="150" IsEditable="True"
+                                              ItemTemplate="{DynamicResource FontTemplate}" 
+                                              SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextFontFamily, Mode=TwoWay}">
+                                        <ComboBox.ItemsSource>
+                                            <Binding Source="{StaticResource MyFonts}" />
+                                        </ComboBox.ItemsSource>
 
-                                    <ComboBox.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <VirtualizingStackPanel VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling"/>
-                                        </ItemsPanelTemplate>
-                                    </ComboBox.ItemsPanel>
-                                </ComboBox>
+                                        <ComboBox.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <VirtualizingStackPanel VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling"/>
+                                            </ItemsPanelTemplate>
+                                        </ComboBox.ItemsPanel>
+                                    </ComboBox>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Style}" VerticalAlignment="Center" Padding="0"/>
-                                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="FreeTextFontStyleComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"
-                                          SelectedValuePath="FontStyle" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextFontStyle, Mode=TwoWay}">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
-                                                <TextBlock FontStyle="{Binding FontStyle}" FontSize="14" Text="{Binding Text}"/>
-                                            </VirtualizingStackPanel>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
+                                    <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Style}" VerticalAlignment="Center" Padding="0"/>
+                                    <ComboBox Grid.Row="1" Grid.Column="1" x:Name="FreeTextFontStyleComboBox" Margin="10,5" MinWidth="100"
+                                              SelectedValuePath="FontStyle" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextFontStyle, Mode=TwoWay}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
+                                                    <TextBlock FontStyle="{Binding FontStyle}" FontSize="14" Text="{Binding Text}"/>
+                                                </VirtualizingStackPanel>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
 
-                                    <TextBlock FontStyle="Normal" Text="{DynamicResource S.FontStyles.Normal}"/>
-                                    <TextBlock FontStyle="Italic" Text="{DynamicResource S.FontStyles.Italic}"/>
-                                    <TextBlock FontStyle="Oblique" Text="{DynamicResource S.FontStyles.Oblique}"/>
-                                </ComboBox>
+                                        <TextBlock FontStyle="Normal" Text="{DynamicResource S.FontStyles.Normal}"/>
+                                        <TextBlock FontStyle="Italic" Text="{DynamicResource S.FontStyles.Italic}"/>
+                                        <TextBlock FontStyle="Oblique" Text="{DynamicResource S.FontStyles.Oblique}"/>
+                                    </ComboBox>
 
-                                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Weight}" VerticalAlignment="Center" Padding="0"/>
-                                <ComboBox Grid.Row="2" Grid.Column="1" x:Name="FreeTextFontWeightComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"
-                                          SelectedValuePath="FontWeight" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextFontWeight, Mode=TwoWay}">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
-                                                <TextBlock FontWeight="{Binding FontWeight}" FontSize="14" Text="{Binding Text}"/>
-                                            </VirtualizingStackPanel>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
+                                    <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Weight}" VerticalAlignment="Center" Padding="0"/>
+                                    <ComboBox Grid.Row="2" Grid.Column="1" x:Name="FreeTextFontWeightComboBox" Margin="10,5" MinWidth="100"
+                                              SelectedValuePath="FontWeight" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextFontWeight, Mode=TwoWay}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
+                                                    <TextBlock FontWeight="{Binding FontWeight}" FontSize="14" Text="{Binding Text}"/>
+                                                </VirtualizingStackPanel>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
 
-                                    <TextBlock FontWeight="UltraLight" Text="{DynamicResource S.FontWeights.UltraLight}"/>
-                                    <TextBlock FontWeight="ExtraLight" Text="{DynamicResource S.FontWeights.ExtraLight}"/>
-                                    <TextBlock FontWeight="Light" Text="{DynamicResource S.FontWeights.Light}"/>
-                                    <TextBlock FontWeight="Thin" Text="{DynamicResource S.FontWeights.Thin}"/>
-                                    <TextBlock FontWeight="Normal" Text="{DynamicResource S.FontWeights.Normal}"/>
-                                    <TextBlock FontWeight="Regular" Text="{DynamicResource S.FontWeights.Regular}"/>
-                                    <TextBlock FontWeight="Medium" Text="{DynamicResource S.FontWeights.Medium}"/>
-                                    <TextBlock FontWeight="SemiBold" Text="{DynamicResource S.FontWeights.SemiBold}"/>
-                                    <TextBlock FontWeight="DemiBold" Text="{DynamicResource S.FontWeights.DemiBold}"/>
-                                    <TextBlock FontWeight="Bold" Text="{DynamicResource S.FontWeights.Bold}"/>
-                                    <TextBlock FontWeight="Black" Text="{DynamicResource S.FontWeights.Black}"/>
-                                    <TextBlock FontWeight="Heavy" Text="{DynamicResource S.FontWeights.Heavy}"/>
-                                    <TextBlock FontWeight="ExtraBold" Text="{DynamicResource S.FontWeights.ExtraBold}"/>
-                                    <TextBlock FontWeight="ExtraBlack" Text="{DynamicResource S.FontWeights.ExtraBlack}"/>
-                                    <TextBlock FontWeight="UltraBold" Text="{DynamicResource S.FontWeights.UltraBold}"/>
-                                    <TextBlock FontWeight="UltraBlack" Text="{DynamicResource S.FontWeights.UltraBlack}"/>
-                                </ComboBox>
+                                        <TextBlock FontWeight="UltraLight" Text="{DynamicResource S.FontWeights.UltraLight}"/>
+                                        <TextBlock FontWeight="ExtraLight" Text="{DynamicResource S.FontWeights.ExtraLight}"/>
+                                        <TextBlock FontWeight="Light" Text="{DynamicResource S.FontWeights.Light}"/>
+                                        <TextBlock FontWeight="Thin" Text="{DynamicResource S.FontWeights.Thin}"/>
+                                        <TextBlock FontWeight="Normal" Text="{DynamicResource S.FontWeights.Normal}"/>
+                                        <TextBlock FontWeight="Regular" Text="{DynamicResource S.FontWeights.Regular}"/>
+                                        <TextBlock FontWeight="Medium" Text="{DynamicResource S.FontWeights.Medium}"/>
+                                        <TextBlock FontWeight="SemiBold" Text="{DynamicResource S.FontWeights.SemiBold}"/>
+                                        <TextBlock FontWeight="DemiBold" Text="{DynamicResource S.FontWeights.DemiBold}"/>
+                                        <TextBlock FontWeight="Bold" Text="{DynamicResource S.FontWeights.Bold}"/>
+                                        <TextBlock FontWeight="Black" Text="{DynamicResource S.FontWeights.Black}"/>
+                                        <TextBlock FontWeight="Heavy" Text="{DynamicResource S.FontWeights.Heavy}"/>
+                                        <TextBlock FontWeight="ExtraBold" Text="{DynamicResource S.FontWeights.ExtraBold}"/>
+                                        <TextBlock FontWeight="ExtraBlack" Text="{DynamicResource S.FontWeights.ExtraBlack}"/>
+                                        <TextBlock FontWeight="UltraBold" Text="{DynamicResource S.FontWeights.UltraBold}"/>
+                                        <TextBlock FontWeight="UltraBlack" Text="{DynamicResource S.FontWeights.UltraBlack}"/>
+                                    </ComboBox>
 
-                                <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Caption.Size}" VerticalAlignment="Center" Padding="0"/>
-                                <n:IntegerUpDown Grid.Row="3" Grid.Column="1" x:Name="FreeTextFontSizeNumericUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
-                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextFontSize, Mode=TwoWay}"/>
+                                    <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Caption.Size}" VerticalAlignment="Center" Padding="0"/>
+                                    <n:IntegerUpDown Grid.Row="3" Grid.Column="1" x:Name="FreeTextFontSizeNumericUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
+                                                     Value="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextFontSize, Mode=TwoWay}"/>
 
-                                <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
-                                <Border Grid.Row="4" Grid.Column="1" x:Name="FreeTextFontColor" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
-                                        Background="{Binding FreeTextFontColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
-                                        MouseLeftButtonDown="FreeTextFontColor_MouseLeftButtonDown"/>
-                            </Grid>
+                                    <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
+                                    <n:ColorBox Grid.Row="4" Grid.Column="1" x:Name="FreeTextFontColorBox" Margin="10,5"
+                                                SelectedColor="{Binding FreeTextFontColor, Source={x:Static u:UserSettings.All}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </Grid>
+                            </Expander>
 
-                            <Label Grid.Row="4" Content="{DynamicResource Caption.Layout}" Style="{StaticResource LabelSeparator}"/>
-                            <Grid Grid.Row="5" Margin="10,0,0,0">
+                            <n:LabelSeparator Grid.Row="3" Text="{DynamicResource Caption.Layout}"/>
+                            <Grid Grid.Row="4" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
@@ -2840,7 +2915,6 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
@@ -2850,94 +2924,94 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="{DynamicResource Caption.Text}" Style="{StaticResource LabelSeparator}"/>
-                            <n:ExtendedTextBox Grid.Row="1" x:Name="TitleFrameTextBox"  Margin="10,5,5,5" AcceptsReturn="True" AcceptsTab="True"
+                            <n:LabelSeparator Grid.Row="0" Text="{DynamicResource Caption.Text}"/>
+                            <n:ExtendedTextBox Grid.Row="1" x:Name="TitleFrameTextBox" Margin="10,5,5,5" AcceptsReturn="True" AcceptsTab="True"
                                                Text="{Binding Source={x:Static u:UserSettings.All}, Path=TitleFrameText, Mode=TwoWay}"/>
 
-                            <Label Grid.Row="2" Content="{DynamicResource Caption.Font}" Style="{StaticResource LabelSeparator}"/>
-                            <Grid Grid.Row="3" Margin="10,0,0,0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
+                            <Expander Grid.Row="2" Header="{DynamicResource Caption.Font}" IsExpanded="{Binding IsTitleFrameFontGroupExpanded, Source={x:Static u:UserSettings.All}}">
+                                <Grid Margin="10,0,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Family}" VerticalAlignment="Center" Padding="0"/>
-                                <ComboBox Grid.Row="0" Grid.Column="1" x:Name="TitleFrameFontComboBox" Margin="10,5" MinWidth="100" MaxWidth="150" IsEditable="True"
-                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=TitleFrameFontFamily, Mode=TwoWay}">
-                                    <ComboBox.ItemsSource>
-                                        <Binding Source="{StaticResource MyFonts}" />
-                                    </ComboBox.ItemsSource>
-                                    <ComboBox.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <VirtualizingStackPanel VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling"/>
-                                        </ItemsPanelTemplate>
-                                    </ComboBox.ItemsPanel>
-                                </ComboBox>
+                                    <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Family}" VerticalAlignment="Center" Padding="0"/>
+                                    <ComboBox Grid.Row="0" Grid.Column="1" x:Name="TitleFrameFontComboBox" Margin="10,5" MinWidth="100" MaxWidth="150" IsEditable="True"
+                                              ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=TitleFrameFontFamily, Mode=TwoWay}">
+                                        <ComboBox.ItemsSource>
+                                            <Binding Source="{StaticResource MyFonts}" />
+                                        </ComboBox.ItemsSource>
+                                        <ComboBox.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <VirtualizingStackPanel VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling"/>
+                                            </ItemsPanelTemplate>
+                                        </ComboBox.ItemsPanel>
+                                    </ComboBox>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Style}" VerticalAlignment="Center" Padding="0"/>
-                                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="TitleFrameFontStyleComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"
-                                          SelectedValuePath="FontStyle" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=TitleFrameFontStyle, Mode=TwoWay}">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
-                                                <TextBlock FontStyle="{Binding FontStyle}" FontSize="14" Text="{Binding Text}"/>
-                                            </VirtualizingStackPanel>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
+                                    <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Style}" VerticalAlignment="Center" Padding="0"/>
+                                    <ComboBox Grid.Row="1" Grid.Column="1" x:Name="TitleFrameFontStyleComboBox" Margin="10,5" MinWidth="100"
+                                              SelectedValuePath="FontStyle" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=TitleFrameFontStyle, Mode=TwoWay}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
+                                                    <TextBlock FontStyle="{Binding FontStyle}" FontSize="14" Text="{Binding Text}"/>
+                                                </VirtualizingStackPanel>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
 
-                                    <TextBlock FontStyle="Normal" Text="{DynamicResource S.FontStyles.Normal}"/>
-                                    <TextBlock FontStyle="Italic" Text="{DynamicResource S.FontStyles.Italic}"/>
-                                    <TextBlock FontStyle="Oblique" Text="{DynamicResource S.FontStyles.Oblique}"/>
-                                </ComboBox>
+                                        <TextBlock FontStyle="Normal" Text="{DynamicResource S.FontStyles.Normal}"/>
+                                        <TextBlock FontStyle="Italic" Text="{DynamicResource S.FontStyles.Italic}"/>
+                                        <TextBlock FontStyle="Oblique" Text="{DynamicResource S.FontStyles.Oblique}"/>
+                                    </ComboBox>
 
-                                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Weight}" VerticalAlignment="Center" Padding="0"/>
-                                <ComboBox Grid.Row="2" Grid.Column="1" x:Name="TitleFrameFontWeightComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"
-                                          SelectedValuePath="FontWeight" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=TitleFrameFontWeight, Mode=TwoWay}">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
-                                                <TextBlock FontWeight="{Binding FontWeight}" FontSize="14" Text="{Binding Text}" />
-                                            </VirtualizingStackPanel>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
+                                    <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Weight}" VerticalAlignment="Center" Padding="0"/>
+                                    <ComboBox Grid.Row="2" Grid.Column="1" x:Name="TitleFrameFontWeightComboBox" Margin="10,5" MinWidth="100"
+                                              SelectedValuePath="FontWeight" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=TitleFrameFontWeight, Mode=TwoWay}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
+                                                    <TextBlock FontWeight="{Binding FontWeight}" FontSize="14" Text="{Binding Text}" />
+                                                </VirtualizingStackPanel>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
 
-                                    <TextBlock FontWeight="UltraLight" Text="{DynamicResource S.FontWeights.UltraLight}"/>
-                                    <TextBlock FontWeight="ExtraLight" Text="{DynamicResource S.FontWeights.ExtraLight}"/>
-                                    <TextBlock FontWeight="Light" Text="{DynamicResource S.FontWeights.Light}"/>
-                                    <TextBlock FontWeight="Thin" Text="{DynamicResource S.FontWeights.Thin}"/>
-                                    <TextBlock FontWeight="Normal" Text="{DynamicResource S.FontWeights.Normal}"/>
-                                    <TextBlock FontWeight="Regular" Text="{DynamicResource S.FontWeights.Regular}"/>
-                                    <TextBlock FontWeight="Medium" Text="{DynamicResource S.FontWeights.Medium}"/>
-                                    <TextBlock FontWeight="SemiBold" Text="{DynamicResource S.FontWeights.SemiBold}"/>
-                                    <TextBlock FontWeight="DemiBold" Text="{DynamicResource S.FontWeights.DemiBold}"/>
-                                    <TextBlock FontWeight="Bold" Text="{DynamicResource S.FontWeights.Bold}"/>
-                                    <TextBlock FontWeight="Black" Text="{DynamicResource S.FontWeights.Black}"/>
-                                    <TextBlock FontWeight="Heavy" Text="{DynamicResource S.FontWeights.Heavy}"/>
-                                    <TextBlock FontWeight="ExtraBold" Text="{DynamicResource S.FontWeights.ExtraBold}"/>
-                                    <TextBlock FontWeight="ExtraBlack" Text="{DynamicResource S.FontWeights.ExtraBlack}"/>
-                                    <TextBlock FontWeight="UltraBold" Text="{DynamicResource S.FontWeights.UltraBold}"/>
-                                    <TextBlock FontWeight="UltraBlack" Text="{DynamicResource S.FontWeights.UltraBlack}"/>
-                                </ComboBox>
+                                        <TextBlock FontWeight="UltraLight" Text="{DynamicResource S.FontWeights.UltraLight}"/>
+                                        <TextBlock FontWeight="ExtraLight" Text="{DynamicResource S.FontWeights.ExtraLight}"/>
+                                        <TextBlock FontWeight="Light" Text="{DynamicResource S.FontWeights.Light}"/>
+                                        <TextBlock FontWeight="Thin" Text="{DynamicResource S.FontWeights.Thin}"/>
+                                        <TextBlock FontWeight="Normal" Text="{DynamicResource S.FontWeights.Normal}"/>
+                                        <TextBlock FontWeight="Regular" Text="{DynamicResource S.FontWeights.Regular}"/>
+                                        <TextBlock FontWeight="Medium" Text="{DynamicResource S.FontWeights.Medium}"/>
+                                        <TextBlock FontWeight="SemiBold" Text="{DynamicResource S.FontWeights.SemiBold}"/>
+                                        <TextBlock FontWeight="DemiBold" Text="{DynamicResource S.FontWeights.DemiBold}"/>
+                                        <TextBlock FontWeight="Bold" Text="{DynamicResource S.FontWeights.Bold}"/>
+                                        <TextBlock FontWeight="Black" Text="{DynamicResource S.FontWeights.Black}"/>
+                                        <TextBlock FontWeight="Heavy" Text="{DynamicResource S.FontWeights.Heavy}"/>
+                                        <TextBlock FontWeight="ExtraBold" Text="{DynamicResource S.FontWeights.ExtraBold}"/>
+                                        <TextBlock FontWeight="ExtraBlack" Text="{DynamicResource S.FontWeights.ExtraBlack}"/>
+                                        <TextBlock FontWeight="UltraBold" Text="{DynamicResource S.FontWeights.UltraBold}"/>
+                                        <TextBlock FontWeight="UltraBlack" Text="{DynamicResource S.FontWeights.UltraBlack}"/>
+                                    </ComboBox>
 
-                                <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Caption.Size}" VerticalAlignment="Center" Padding="0"/>
-                                <n:IntegerUpDown Grid.Row="3" Grid.Column="1" x:Name="TitleFrameFontSizeNumericUpDown" Minimum="5" Maximum="200" Margin="10,5" MinWidth="70" 
-                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=TitleFrameFontSize, Mode=TwoWay}"/>
+                                    <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Caption.Size}" VerticalAlignment="Center" Padding="0"/>
+                                    <n:IntegerUpDown Grid.Row="3" Grid.Column="1" x:Name="TitleFrameFontSizeNumericUpDown" Minimum="5" Maximum="200" Margin="10,5" MinWidth="70" 
+                                                     Value="{Binding Source={x:Static u:UserSettings.All}, Path=TitleFrameFontSize, Mode=TwoWay}"/>
 
-                                <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
-                                <Border Grid.Row="4" Grid.Column="1" x:Name="TitleFrameFontColor" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
-                                        Background="{Binding TitleFrameFontColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
-                                        MouseLeftButtonDown="TitleFrameFontColor_MouseLeftButtonDown"/>
-                            </Grid>
+                                    <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
+                                    <n:ColorBox Grid.Row="4" Grid.Column="1" x:Name="TitleFrameFontColorBox" Margin="10,5"
+                                                SelectedColor="{Binding TitleFrameFontColor, Source={x:Static u:UserSettings.All}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </Grid>
+                            </Expander>
 
-                            <Label Grid.Row="4" Content="{DynamicResource String.Delay}" Style="{StaticResource LabelSeparator}"/>
-                            <Grid Grid.Row="5" Margin="10,0,0,0">
+                            <n:LabelSeparator Grid.Row="3" Text="{DynamicResource String.Delay}"/>
+                            <Grid Grid.Row="4" Margin="10,0,0,0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
@@ -2948,8 +3022,8 @@
                                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=TitleFrameDelay, Mode=TwoWay}"/>
                             </Grid>
 
-                            <Label Grid.Row="6" Content="{DynamicResource Caption.Layout}" Style="{StaticResource LabelSeparator}"/>
-                            <Grid Grid.Row="7" Margin="10,0,0,0">
+                            <n:LabelSeparator Grid.Row="5" Text="{DynamicResource Caption.Layout}"/>
+                            <Grid Grid.Row="6" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
@@ -2961,7 +3035,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Vertical}" VerticalAlignment="Center" Padding="0"/>
-                                <ComboBox Grid.Row="0" Grid.Column="1" x:Name="TitleFrameVerticalAligmentComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"
+                                <ComboBox Grid.Row="0" Grid.Column="1" x:Name="TitleFrameVerticalAligmentComboBox" Margin="10,5" MinWidth="100" MaxWidth="150"
                                           SelectedValuePath="VerticalAlignment" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=TitleFrameVerticalAligment, Mode=TwoWay}">
 
                                     <TextBlock VerticalAlignment="Top" Text="{DynamicResource S.VerticalAlignment.Top}"/>
@@ -2970,7 +3044,7 @@
                                 </ComboBox>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Horizontal}" VerticalAlignment="Center" Padding="0"/>
-                                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="TitleFrameHorizontalAligmentComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" 
+                                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="TitleFrameHorizontalAligmentComboBox" Margin="10,5" MinWidth="100" MaxWidth="150" 
                                           SelectedValuePath="HorizontalAlignment" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=TitleFrameHorizontalAligment, Mode=TwoWay}">
 
                                     <TextBlock HorizontalAlignment="Left" Text="{DynamicResource S.HorizontalAlignment.Left}"/>
@@ -2983,8 +3057,8 @@
                                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=TitleFrameMargin, Mode=TwoWay}"/>
                             </Grid>
 
-                            <Label Grid.Row="8" Content="{DynamicResource String.Background}" Style="{StaticResource LabelSeparator}"/>
-                            <Grid Grid.Row="9" Margin="10,0,0,0">
+                            <n:LabelSeparator Grid.Row="7" Text="{DynamicResource String.Background}"/>
+                            <Grid Grid.Row="8" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
@@ -2994,9 +3068,8 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
-                                <Border Grid.Row="0" Grid.Column="1" x:Name="TitleFrameBackgroundColor" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
-                                        Background="{Binding TitleFrameBackgroundColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
-                                        MouseLeftButtonDown="TitleFrameBackgroundColor_MouseLeftButtonDown" MinWidth="100"/>
+                                <n:ColorBox Grid.Row="0" Grid.Column="1" x:Name="TitleFrameBackgroundColorBox" Margin="10,5"
+                                            SelectedColor="{Binding TitleFrameBackgroundColor, Source={x:Static u:UserSettings.All}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             </Grid>
                         </Grid>
 
@@ -3031,7 +3104,7 @@
                                     <n:ExtendedCheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="{DynamicResource KeyStrokes.IgnoreModifiers}" Margin="0,5"
                                                         IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesIgnoreNonModifiers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         ToolTip="{DynamicResource KeyStrokes.IgnoreModifiers.Info}"/>
-                                    
+
                                     <n:ExtendedCheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Text="{DynamicResource KeyStrokes.Extend}" Margin="0,5"
                                                         IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesExtended, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
@@ -3086,7 +3159,7 @@
                                     </ComboBox>
 
                                     <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Style}" VerticalAlignment="Center" Padding="0"/>
-                                    <ComboBox Grid.Row="1" Grid.Column="1" Margin="10,5" MinWidth="100" MaxWidth="110" SelectedValuePath="FontStyle" 
+                                    <ComboBox Grid.Row="1" Grid.Column="1" Margin="10,5" MinWidth="100" SelectedValuePath="FontStyle" 
                                               SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesFontStyle}">
                                         <ComboBox.ItemTemplate>
                                             <DataTemplate>
@@ -3102,7 +3175,7 @@
                                     </ComboBox>
 
                                     <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Weight}" VerticalAlignment="Center" Padding="0"/>
-                                    <ComboBox Grid.Row="2" Grid.Column="1" Margin="10,5" MinWidth="100" MaxWidth="110" SelectedValuePath="FontWeight" 
+                                    <ComboBox Grid.Row="2" Grid.Column="1" Margin="10,5" MinWidth="100" SelectedValuePath="FontWeight" 
                                               SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesFontWeight}">
                                         <ComboBox.ItemTemplate>
                                             <DataTemplate>
@@ -3135,9 +3208,7 @@
                                                      Value="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesFontSize, Mode=TwoWay}"/>
 
                                     <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
-                                    <Border Grid.Row="4" Grid.Column="1" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
-                                            Background="{Binding KeyStrokesFontColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}" 
-                                            MouseLeftButtonDown="KeyStrokesFontColor_MouseLeftButtonDown"/>
+                                    <n:ColorBox Grid.Row="4" Grid.Column="1" SelectedColor="{Binding KeyStrokesFontColor, Source={x:Static u:UserSettings.All}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10,5"/>
                                 </Grid>
                             </Expander>
 
@@ -3159,14 +3230,10 @@
                                                      Value="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesOutlineThickness, Mode=TwoWay}"/>
 
                                     <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
-                                    <Border Grid.Row="1" Grid.Column="1" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
-                                            Background="{Binding KeyStrokesOutlineColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}"
-                                            MouseLeftButtonDown="KeyStrokesOutlineColor_MouseLeftButtonDown"/>
+                                    <n:ColorBox Grid.Row="1" Grid.Column="1" SelectedColor="{Binding KeyStrokesOutlineColor, Source={x:Static u:UserSettings.All}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10,5"/>
 
                                     <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Background}" VerticalAlignment="Center" Padding="0"/>
-                                    <Border Grid.Row="2" Grid.Column="1" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
-                                            Background="{Binding KeyStrokesBackgroundColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}, Mode=TwoWay}"
-                                            MouseLeftButtonDown="KeyStrokesBackgroundColor_MouseLeftButtonDown"/>
+                                    <n:ColorBox Grid.Row="2" Grid.Column="1" SelectedColor="{Binding KeyStrokesBackgroundColor, Source={x:Static u:UserSettings.All}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10,5"/>
                                 </Grid>
                             </Expander>
 
@@ -3184,7 +3251,7 @@
                                     </Grid.ColumnDefinitions>
 
                                     <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Vertical}" VerticalAlignment="Center" Padding="0"/>
-                                    <ComboBox Grid.Row="0" Grid.Column="1" Margin="10,5" MinWidth="100" MaxWidth="110" SelectedValuePath="VerticalAlignment" 
+                                    <ComboBox Grid.Row="0" Grid.Column="1" Margin="10,5" MinWidth="100" MaxWidth="150" SelectedValuePath="VerticalAlignment" 
                                               SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesVerticalAligment, Mode=TwoWay}">
 
                                         <TextBlock VerticalAlignment="Top" Text="{DynamicResource S.VerticalAlignment.Top}"/>
@@ -3194,7 +3261,7 @@
                                     </ComboBox>
 
                                     <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Horizontal}" VerticalAlignment="Center" Padding="0"/>
-                                    <ComboBox Grid.Row="1" Grid.Column="1" Margin="10,5" MinWidth="100" MaxWidth="110" SelectedValuePath="HorizontalAlignment" 
+                                    <ComboBox Grid.Row="1" Grid.Column="1" Margin="10,5" MinWidth="100" MaxWidth="150" SelectedValuePath="HorizontalAlignment" 
                                               SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesHorizontalAligment, Mode=TwoWay}">
 
                                         <TextBlock HorizontalAlignment="Left" Text="{DynamicResource S.HorizontalAlignment.Left}"/>
@@ -3224,7 +3291,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="{DynamicResource FreeDrawing.Mode}" Style="{StaticResource LabelSeparator}"/>
+                            <n:LabelSeparator Grid.Row="0" Text="{DynamicResource FreeDrawing.Mode}"/>
                             <Grid Grid.Row="1" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
@@ -3246,10 +3313,8 @@
                                                     Text="{DynamicResource FreeDrawing.StrokeEraser}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
                             </Grid>
 
-                            <Label Grid.Row="2" Content="{DynamicResource FreeDrawing.Pen}" Style="{StaticResource LabelSeparator}" 
-                                   Visibility="{Binding ElementName=PenModeRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}"/>
-                            <Grid Grid.Row="3" Margin="10,0,0,0" 
-                                  Visibility="{Binding ElementName=PenModeRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}">
+                            <n:LabelSeparator Grid.Row="2" Text="{DynamicResource FreeDrawing.Pen}" Visibility="{Binding ElementName=PenModeRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}"/>
+                            <Grid Grid.Row="3" Margin="10,0,0,0" Visibility="{Binding ElementName=PenModeRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
@@ -3273,9 +3338,8 @@
                                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=FreeDrawingPenHeight, Mode=TwoWay}"/>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
-                                <Border Grid.Row="2" Grid.Column="1" x:Name="FreeDrawingColorBorder" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
-                                        Background="{Binding FreeDrawingColor, Source={x:Static u:UserSettings.All}, Converter={StaticResource ColorToBrush}}" 
-                                        MouseLeftButtonDown="FreeDrawingColorBorder_MouseLeftButtonDown"/>
+                                <n:ColorBox Grid.Row="2" Grid.Column="1" x:Name="FreeDrawingColorBox" Margin="10,5"
+                                            SelectedColor="{Binding FreeDrawingColor, Source={x:Static u:UserSettings.All}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                                 <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource FreeDrawing.Tip}" VerticalAlignment="Center" Padding="0"/>
                                 <Grid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2">
@@ -3301,10 +3365,8 @@
                                           IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=FreeDrawingFitToCurve, Mode=TwoWay}"/>
                             </Grid>
 
-                            <Label Grid.Row="4" Content="{DynamicResource FreeDrawing.Eraser}" Style="{StaticResource LabelSeparator}"
-                                   Visibility="{Binding ElementName=EraserModeRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}"/>
-                            <Grid Grid.Row="5" Margin="10,0,0,0"
-                                  Visibility="{Binding ElementName=EraserModeRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}">
+                            <n:LabelSeparator Grid.Row="4" Text="{DynamicResource FreeDrawing.Eraser}" Visibility="{Binding ElementName=EraserModeRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}"/>
+                            <Grid Grid.Row="5" Margin="10,0,0,0" Visibility="{Binding ElementName=EraserModeRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
@@ -3343,6 +3405,64 @@
                             </Grid>
                         </Grid>
 
+                        <Grid x:Name="MouseClicksGrid" Visibility="Collapsed">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="27"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <n:LabelSeparator Grid.Row="0" Text="{DynamicResource Border.Appearance}"/>
+                            <Grid Grid.Row="1" Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!--Format(rectangle, circle, perforated circle), edit clicks? -->
+                                <!--<TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource Caption.Style}" VerticalAlignment="Center"/>
+                                <ComboBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="10,5" MinWidth="100" SelectedValuePath="FontStyle" 
+                                          SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesFontStyle}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="20"/>
+                                                    <ColumnDefinition/>
+                                                </Grid.ColumnDefinitions>
+                                                
+                                                <Viewbox Margin="2">
+                                                    <ContentPresenter Content="{Binding Tag}"/>
+                                                </Viewbox>
+
+                                                <TextBlock Grid.Column="1" FontSize="14" Text="{Binding Text}"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+
+                                    <TextBlock Text="Ellipse" Tag="{StaticResource Vector.Ellipse}"/>
+                                    <TextBlock Text="Rectangle" Tag="{StaticResource Vector.Rectangle}"/>
+                                </ComboBox>-->
+
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource Caption.Color}" VerticalAlignment="Center"/>
+                                <n:ColorBox Grid.Row="1" Grid.Column="1" SelectedColor="{Binding Source={x:Static u:UserSettings.All}, Path=MouseClicksColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10,5"/>
+
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource FreeDrawing.Width}" VerticalAlignment="Center"/>
+                                <n:DoubleUpDown Grid.Row="2" Grid.Column="1" x:Name="ClickWidthDoubleUpDown" Minimum="1" Maximum="1000" Margin="10,5" MinWidth="70" 
+                                                Value="{Binding Source={x:Static u:UserSettings.All}, Path=MouseClicksWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource FreeDrawing.Height}" VerticalAlignment="Center"/>
+                                <n:DoubleUpDown Grid.Row="3" Grid.Column="1" x:Name="ClickHeightDoubleUpDown" Minimum="1" Maximum="1000" Margin="10,5" MinWidth="70"
+                                                Value="{Binding Source={x:Static u:UserSettings.All}, Path=MouseClicksHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            </Grid>
+                        </Grid>
+                        
                         <Grid x:Name="WatermarkGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
@@ -3352,7 +3472,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="{DynamicResource Watermark.Image}" Style="{StaticResource LabelSeparator}"/>
+                            <n:LabelSeparator Grid.Row="0" Text="{DynamicResource Watermark.Image}"/>
                             <Grid Grid.Row="1" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" MinHeight="35"/>
@@ -3399,7 +3519,7 @@
                                 <Label Grid.Row="1" Grid.Column="2" Content="%" VerticalAlignment="Center" Padding="0"/>
                             </Grid>
 
-                            <Label Grid.Row="3" Content="{DynamicResource Crop.Points}" Style="{StaticResource LabelSeparator}"/>
+                            <n:LabelSeparator Grid.Row="3" Text="{DynamicResource Crop.Points}"/>
                             <Grid Grid.Row="4" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -3409,9 +3529,6 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-
-                                <!--Value="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"-->
-                                <!--Value="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"-->
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Crop.Top}" VerticalAlignment="Center" Padding="0"/>
                                 <n:DoubleUpDown Grid.Row="0" Grid.Column="1" x:Name="TopWatermarkDoubleUpDown" Minimum="-999" Margin="10,3" MinWidth="70"
@@ -3429,7 +3546,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="{DynamicResource Border.Appearance}" Style="{StaticResource LabelSeparator}"/>
+                            <n:LabelSeparator Grid.Row="0" Text="{DynamicResource Border.Appearance}"/>
                             <Grid Grid.Row="1" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -3441,9 +3558,8 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
-                                <Border Grid.Row="0" Grid.Column="1" x:Name="BorderColorBorder" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
-                                        Background="{Binding BorderColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}}" 
-                                        MouseLeftButtonDown="BorderColor_MouseLeftButtonDown" MinWidth="100"/>
+                                <n:ColorBox Grid.Row="0" Grid.Column="1" x:Name="BorderColorBox" Margin="10,5"
+                                            SelectedColor="{Binding BorderColor, Source={x:Static u:UserSettings.All}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Thickness}" VerticalAlignment="Center" Padding="0"/>
                                 <Grid Grid.Row="1" Grid.Column="1">
@@ -3499,7 +3615,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="{DynamicResource S.Obfuscate.Options}" Style="{StaticResource LabelSeparator}"/>
+                            <n:LabelSeparator Grid.Row="0" Text="{DynamicResource S.Obfuscate.Options}"/>
                             <Grid Grid.Row="1" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -3536,14 +3652,13 @@
                                 <RowDefinition Height="23"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="23"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="23"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="{DynamicResource Progress.Type}" Style="{StaticResource LabelSeparator}"/>
+                            <n:LabelSeparator Grid.Row="0" Text="{DynamicResource Progress.Type}"/>
                             <Grid Grid.Row="1" Margin="10,0,0,0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
@@ -3559,93 +3674,91 @@
                                                     ConverterParameter={x:Static u:ProgressType.Text}}"/>
                             </Grid>
 
-                            <Label Grid.Row="2" Content="{DynamicResource Caption.Font}" Style="{StaticResource LabelSeparator}"
-                                   Visibility="{Binding IsChecked, ElementName=TextRadioButton, Converter={StaticResource Bool2Visibility}}"/>
-                            <Grid Grid.Row="3" Margin="10,0,0,0" 
-                                  Visibility="{Binding IsChecked, ElementName=TextRadioButton, Converter={StaticResource Bool2Visibility}}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
+                            <Expander Grid.Row="2" Header="{DynamicResource Caption.Font}" IsExpanded="{Binding IsProgressFontGroupExpanded, Source={x:Static u:UserSettings.All}}"
+                                      Visibility="{Binding IsChecked, ElementName=TextRadioButton, Converter={StaticResource Bool2Visibility}}">
+                                <Grid Margin="10,0,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Family}" VerticalAlignment="Center" Padding="0"/>
-                                <ComboBox Grid.Row="0" Grid.Column="1" x:Name="ProgressFontComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"  IsEditable="True"
-                                          ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressFontFamily, Mode=TwoWay}">
-                                    <ComboBox.ItemsSource>
-                                        <Binding Source="{StaticResource MyFonts}" />
-                                    </ComboBox.ItemsSource>
+                                    <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Family}" VerticalAlignment="Center" Padding="0"/>
+                                    <ComboBox Grid.Row="0" Grid.Column="1" x:Name="ProgressFontComboBox" Margin="10,5" MinWidth="100" MaxWidth="150" IsEditable="True"
+                                              ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressFontFamily, Mode=TwoWay}">
+                                        <ComboBox.ItemsSource>
+                                            <Binding Source="{StaticResource MyFonts}" />
+                                        </ComboBox.ItemsSource>
 
-                                    <ComboBox.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <VirtualizingStackPanel VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling"/>
-                                        </ItemsPanelTemplate>
-                                    </ComboBox.ItemsPanel>
-                                </ComboBox>
+                                        <ComboBox.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <VirtualizingStackPanel VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling"/>
+                                            </ItemsPanelTemplate>
+                                        </ComboBox.ItemsPanel>
+                                    </ComboBox>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Style}" VerticalAlignment="Center" Padding="0"/>
-                                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="ProgressFontStyleComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"
-                                          SelectedValuePath="FontStyle" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressFontStyle, Mode=TwoWay}">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
-                                                <TextBlock FontStyle="{Binding FontStyle}" FontSize="14" Text="{Binding Text}"/>
-                                            </VirtualizingStackPanel>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
+                                    <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Style}" VerticalAlignment="Center" Padding="0"/>
+                                    <ComboBox Grid.Row="1" Grid.Column="1" x:Name="ProgressFontStyleComboBox" Margin="10,5" MinWidth="100"
+                                              SelectedValuePath="FontStyle" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressFontStyle, Mode=TwoWay}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
+                                                    <TextBlock FontStyle="{Binding FontStyle}" FontSize="14" Text="{Binding Text}"/>
+                                                </VirtualizingStackPanel>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
 
-                                    <TextBlock FontStyle="Normal" Text="{DynamicResource S.FontStyles.Normal}"/>
-                                    <TextBlock FontStyle="Italic" Text="{DynamicResource S.FontStyles.Italic}"/>
-                                    <TextBlock FontStyle="Oblique" Text="{DynamicResource S.FontStyles.Oblique}"/>
-                                </ComboBox>
+                                        <TextBlock FontStyle="Normal" Text="{DynamicResource S.FontStyles.Normal}"/>
+                                        <TextBlock FontStyle="Italic" Text="{DynamicResource S.FontStyles.Italic}"/>
+                                        <TextBlock FontStyle="Oblique" Text="{DynamicResource S.FontStyles.Oblique}"/>
+                                    </ComboBox>
 
-                                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Weight}" VerticalAlignment="Center" Padding="0"/>
-                                <ComboBox Grid.Row="2" Grid.Column="1" x:Name="ProgressFontWeightComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"
-                                          SelectedValuePath="FontWeight" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressFontWeight, Mode=TwoWay}">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
-                                                <TextBlock FontWeight="{Binding FontWeight}" FontSize="14" Text="{Binding Text}" />
-                                            </VirtualizingStackPanel>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
+                                    <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Weight}" VerticalAlignment="Center" Padding="0"/>
+                                    <ComboBox Grid.Row="2" Grid.Column="1" x:Name="ProgressFontWeightComboBox" Margin="10,5" MinWidth="100"
+                                              SelectedValuePath="FontWeight" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressFontWeight, Mode=TwoWay}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
+                                                    <TextBlock FontWeight="{Binding FontWeight}" FontSize="14" Text="{Binding Text}" />
+                                                </VirtualizingStackPanel>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
 
-                                    <TextBlock FontWeight="UltraLight" Text="{DynamicResource S.FontWeights.UltraLight}"/>
-                                    <TextBlock FontWeight="ExtraLight" Text="{DynamicResource S.FontWeights.ExtraLight}"/>
-                                    <TextBlock FontWeight="Light" Text="{DynamicResource S.FontWeights.Light}"/>
-                                    <TextBlock FontWeight="Thin" Text="{DynamicResource S.FontWeights.Thin}"/>
-                                    <TextBlock FontWeight="Normal" Text="{DynamicResource S.FontWeights.Normal}"/>
-                                    <TextBlock FontWeight="Regular" Text="{DynamicResource S.FontWeights.Regular}"/>
-                                    <TextBlock FontWeight="Medium" Text="{DynamicResource S.FontWeights.Medium}"/>
-                                    <TextBlock FontWeight="SemiBold" Text="{DynamicResource S.FontWeights.SemiBold}"/>
-                                    <TextBlock FontWeight="DemiBold" Text="{DynamicResource S.FontWeights.DemiBold}"/>
-                                    <TextBlock FontWeight="Bold" Text="{DynamicResource S.FontWeights.Bold}"/>
-                                    <TextBlock FontWeight="Black" Text="{DynamicResource S.FontWeights.Black}"/>
-                                    <TextBlock FontWeight="Heavy" Text="{DynamicResource S.FontWeights.Heavy}"/>
-                                    <TextBlock FontWeight="ExtraBold" Text="{DynamicResource S.FontWeights.ExtraBold}"/>
-                                    <TextBlock FontWeight="ExtraBlack" Text="{DynamicResource S.FontWeights.ExtraBlack}"/>
-                                    <TextBlock FontWeight="UltraBold" Text="{DynamicResource S.FontWeights.UltraBold}"/>
-                                    <TextBlock FontWeight="UltraBlack" Text="{DynamicResource S.FontWeights.UltraBlack}"/>
-                                </ComboBox>
+                                        <TextBlock FontWeight="UltraLight" Text="{DynamicResource S.FontWeights.UltraLight}"/>
+                                        <TextBlock FontWeight="ExtraLight" Text="{DynamicResource S.FontWeights.ExtraLight}"/>
+                                        <TextBlock FontWeight="Light" Text="{DynamicResource S.FontWeights.Light}"/>
+                                        <TextBlock FontWeight="Thin" Text="{DynamicResource S.FontWeights.Thin}"/>
+                                        <TextBlock FontWeight="Normal" Text="{DynamicResource S.FontWeights.Normal}"/>
+                                        <TextBlock FontWeight="Regular" Text="{DynamicResource S.FontWeights.Regular}"/>
+                                        <TextBlock FontWeight="Medium" Text="{DynamicResource S.FontWeights.Medium}"/>
+                                        <TextBlock FontWeight="SemiBold" Text="{DynamicResource S.FontWeights.SemiBold}"/>
+                                        <TextBlock FontWeight="DemiBold" Text="{DynamicResource S.FontWeights.DemiBold}"/>
+                                        <TextBlock FontWeight="Bold" Text="{DynamicResource S.FontWeights.Bold}"/>
+                                        <TextBlock FontWeight="Black" Text="{DynamicResource S.FontWeights.Black}"/>
+                                        <TextBlock FontWeight="Heavy" Text="{DynamicResource S.FontWeights.Heavy}"/>
+                                        <TextBlock FontWeight="ExtraBold" Text="{DynamicResource S.FontWeights.ExtraBold}"/>
+                                        <TextBlock FontWeight="ExtraBlack" Text="{DynamicResource S.FontWeights.ExtraBlack}"/>
+                                        <TextBlock FontWeight="UltraBold" Text="{DynamicResource S.FontWeights.UltraBold}"/>
+                                        <TextBlock FontWeight="UltraBlack" Text="{DynamicResource S.FontWeights.UltraBlack}"/>
+                                    </ComboBox>
 
-                                <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Caption.Size}" VerticalAlignment="Center" Padding="0"/>
-                                <n:IntegerUpDown Grid.Row="3" Grid.Column="1" x:Name="ProgressFontSizeNumericUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
-                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressFontSize, Mode=TwoWay}"/>
+                                    <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Caption.Size}" VerticalAlignment="Center" Padding="0"/>
+                                    <n:IntegerUpDown Grid.Row="3" Grid.Column="1" x:Name="ProgressFontSizeNumericUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
+                                                     Value="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressFontSize, Mode=TwoWay}"/>
 
-                                <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
-                                <Border Grid.Row="4" Grid.Column="1" x:Name="ProgressFontColor" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
-                                        Background="{Binding ProgressFontColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}}" 
-                                        MouseLeftButtonDown="ProgressFontColor_MouseLeftButtonDown"/>
-                            </Grid>
+                                    <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
+                                    <n:ColorBox Grid.Row="4" Grid.Column="1" SelectedColor="{Binding ProgressFontColor, Source={x:Static u:UserSettings.All}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10,5"/>
+                                </Grid>
+                            </Expander>
 
-                            <Label Grid.Row="4" Content="{DynamicResource Border.Appearance}" Style="{StaticResource LabelSeparator}"/>
-                            <Grid Grid.Row="5" Margin="10,0,0,0">
+                            <n:LabelSeparator Grid.Row="3" Text="{DynamicResource Border.Appearance}"/>
+                            <Grid Grid.Row="4" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
@@ -3659,9 +3772,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Color}" VerticalAlignment="Center" Padding="0"/>
-                                <Border Grid.Row="0" Grid.Column="1" x:Name="ProgressColorBorder" Height="26" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
-                                        Background="{Binding ProgressColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}}" 
-                                        MouseLeftButtonDown="ProgressColor_MouseLeftButtonDown" MinWidth="100"/>
+                                <n:ColorBox Grid.Row="0" Grid.Column="1" SelectedColor="{Binding ProgressColor, Source={x:Static u:UserSettings.All}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10,5"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Progress.Precision}" VerticalAlignment="Center" Padding="0"
                                        Visibility="{Binding IsChecked, ElementName=TextRadioButton, Converter={StaticResource Bool2Visibility}}"/>
@@ -3721,8 +3832,8 @@
                                                  Visibility="{Binding IsChecked, ElementName=BarRadioButton, Converter={StaticResource Bool2Visibility}}"/>
                             </Grid>
 
-                            <Label Grid.Row="6" Content="{DynamicResource Caption.Layout}" Style="{StaticResource LabelSeparator}"/>
-                            <Grid Grid.Row="7" Margin="10,0,0,0">
+                            <n:LabelSeparator Grid.Row="5" Text="{DynamicResource Caption.Layout}"/>
+                            <Grid Grid.Row="6" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
@@ -3734,7 +3845,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Vertical}" VerticalAlignment="Center" Padding="0"/>
-                                <ComboBox Grid.Row="0" Grid.Column="1" x:Name="ProgressVerticalComboBox" Margin="10,5" MinWidth="100" MaxWidth="110"
+                                <ComboBox Grid.Row="0" Grid.Column="1" x:Name="ProgressVerticalComboBox" Margin="10,5" MinWidth="100" MaxWidth="150"
                                           SelectedValuePath="VerticalAlignment" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressVerticalAligment, Mode=TwoWay}">
 
                                     <TextBlock VerticalAlignment="Top" Text="{DynamicResource S.VerticalAlignment.Top}"/>
@@ -3743,7 +3854,7 @@
                                 </ComboBox>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Horizontal}" VerticalAlignment="Center" Padding="0"/>
-                                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="ProgressHorizontalComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" 
+                                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="ProgressHorizontalComboBox" Margin="10,5" MinWidth="100" MaxWidth="150" 
                                           SelectedValuePath="HorizontalAlignment" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressHorizontalAligment, Mode=TwoWay}">
 
                                     <TextBlock HorizontalAlignment="Left" Text="{DynamicResource S.HorizontalAlignment.Left}"/>
@@ -3780,7 +3891,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="{DynamicResource FreeDrawing.Mode}" Style="{StaticResource LabelSeparator}"/>
+                            <n:LabelSeparator Grid.Row="0" Text="{DynamicResource FreeDrawing.Mode}"/>
                             <Grid Grid.Row="1" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
@@ -3802,8 +3913,7 @@
                                                     Text="{DynamicResource FreeDrawing.StrokeEraser}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
                             </Grid>
 
-                            <Label Grid.Row="2" Content="{DynamicResource FreeDrawing.Pen}" Style="{StaticResource LabelSeparator}" 
-                                   Visibility="{Binding ElementName=PenMode2RadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}"/>
+                            <n:LabelSeparator Grid.Row="2" Text="{DynamicResource FreeDrawing.Pen}" Visibility="{Binding ElementName=PenMode2RadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}"/>
                             <Grid Grid.Row="3" Margin="10,0,0,0" 
                                   Visibility="{Binding ElementName=PenMode2RadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}">
                                 <Grid.RowDefinitions>
@@ -3848,8 +3958,7 @@
                                           IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=CinemagraphFitToCurve, Mode=TwoWay}"/>
                             </Grid>
 
-                            <Label Grid.Row="2" Content="{DynamicResource FreeDrawing.Eraser}" Style="{StaticResource LabelSeparator}"
-                                   Visibility="{Binding ElementName=EraserMode2RadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}"/>
+                            <n:LabelSeparator Grid.Row="2" Text="{DynamicResource FreeDrawing.Eraser}" Visibility="{Binding ElementName=EraserMode2RadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}"/>
                             <Grid Grid.Row="3" Margin="10,0,0,0"
                                   Visibility="{Binding ElementName=EraserMode2RadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}">
                                 <Grid.RowDefinitions>
@@ -3908,7 +4017,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="{DynamicResource Delay.NewValue}" Style="{StaticResource LabelSeparator}"/>
+                            <n:LabelSeparator Grid.Row="0" Text="{DynamicResource Delay.NewValue}"/>
                             <Grid Grid.Row="1" Margin="10,0,0,0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -3939,7 +4048,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="{DynamicResource Delay.DecreaseIncrease}" Style="{StaticResource LabelSeparator}"/>
+                            <n:LabelSeparator Grid.Row="0" Text="{DynamicResource Delay.DecreaseIncrease}"/>
                             <Grid Grid.Row="1" Margin="10,0,0,0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -3977,7 +4086,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="{DynamicResource Transitions.FadeTo}" Style="{StaticResource LabelSeparator}"/>
+                            <n:LabelSeparator Grid.Row="0" Text="{DynamicResource Transitions.FadeTo}"/>
                             <Grid Grid.Row="1" Margin="10,0,0,0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
@@ -3993,8 +4102,7 @@
                                                     Text="{DynamicResource Transitions.FadeTo.Color}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
                             </Grid>
 
-                            <Label Grid.Row="2" Content="{DynamicResource Transitions.Color}" Style="{StaticResource LabelSeparator}" Height="27"
-                                   Visibility="{Binding ElementName=FadeToColorRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}"/>
+                            <n:LabelSeparator Grid.Row="2" Text="{DynamicResource Transitions.Color}" Visibility="{Binding ElementName=FadeToColorRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}"/>
                             <Grid Grid.Row="3" Margin="10,0,0,0" Visibility="{Binding ElementName=FadeToColorRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -4003,17 +4111,15 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
-                                <Border Grid.Row="0" Grid.Column="1" x:Name="FadeToColorBorder" Height="26" Width="80" Margin="10,5" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
-                                        Background="{Binding FadeToColor, Source={x:Static u:UserSettings.All}, Converter={StaticResourceExtension ColorToBrush}}"
-                                        MouseLeftButtonDown="FadeToColor_MouseLeftButtonDown"/>
+                                <n:ColorBox Grid.Row="0" Grid.Column="1" SelectedColor="{Binding FadeToColor, Source={x:Static u:UserSettings.All}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10,5"/>
                             </Grid>
 
-                            <Label Grid.Row="4" Content="{DynamicResource Transitions.Lenght}" Style="{StaticResource LabelSeparator}"/>
+                            <n:LabelSeparator Grid.Row="4" Text="{DynamicResource Transitions.Lenght}"/>
                             <Slider Grid.Row="5" Grid.Column="0" x:Name="FadeSlider" Margin="10,5,5,5" Minimum="1" Maximum="25" 
                                     AutoToolTipPlacement="TopLeft" SmallChange="1" IsSnapToTickEnabled="True"
                                     Value="{Binding Source={x:Static u:UserSettings.All}, Path=FadeTransitionLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                            <Label Grid.Row="6" Content="{DynamicResource Transitions.Delay}" Style="{StaticResource LabelSeparator}"/>
+                            <n:LabelSeparator Grid.Row="6" Text="{DynamicResource Transitions.Delay}"/>
                             <Grid Grid.Row="7" Margin="10,0,0,0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -4078,11 +4184,11 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="{DynamicResource Transitions.Lenght}" Style="{StaticResource LabelSeparator}"/>
+                            <n:LabelSeparator Grid.Row="0" Text="{DynamicResource Transitions.Lenght}"/>
                             <Slider Grid.Row="1" Grid.Column="0" x:Name="SlideSlider" Minimum="1" Maximum="20" 
                                     AutoToolTipPlacement="TopLeft" SmallChange="1" IsSnapToTickEnabled="True" Margin="10,5,5,5"/>
 
-                            <Label Grid.Row="2" Content="{DynamicResource Transitions.Delay}" Style="{StaticResource LabelSeparator}"/>
+                            <n:LabelSeparator Grid.Row="2" Text="{DynamicResource Transitions.Delay}"/>
                             <Grid Grid.Row="3" Margin="10,0,0,0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -4181,7 +4287,6 @@
                                 <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Reduce.Count}" VerticalAlignment="Center" Padding="0"/>
                                 <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="ReduceCountIntegerUpDown" Minimum="1" Maximum="20" Margin="10,5" MinWidth="80" 
                                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=ReduceCount, Mode=TwoWay}"/>
-
                             </Grid>
 
                             <Grid Grid.Row="2" Grid.Column="0" Margin="10,10,5,0">
@@ -4223,7 +4328,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                
+
                                 <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource S.RemoveDuplicates.Similarity}" VerticalAlignment="Center" Padding="0"/>
                                 <n:DoubleUpDown Grid.Row="0" Grid.Column="1" x:Name="DuplicatesSimilarityDoubleUpDown" Minimum="0.1" Maximum="100" Margin="10,5" MinWidth="80" 
                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=DuplicatesSimilarity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -4341,9 +4446,9 @@
                 </Style>
 
                 <ContextMenu x:Key="FrameListContextMenu">
-                    <n:ImageMenuItem Header="{DynamicResource Editor.List.OpenImage}" Image="{StaticResource Vector.Image}" MaxSize="16" Command="u:Commands.OpenImage"/>
-                    <n:ImageMenuItem Header="{DynamicResource Editor.List.ExploreFolder}" Image="{StaticResource Vector.Open}" MaxSize="16" Command="u:Commands.ExploreFolder"/>
-                    <n:ImageMenuItem Header="{DynamicResource Editor.List.ExportImage}" Image="{StaticResource Vector.Save}" MaxSize="16" Command="u:Commands.ExportImages"/>
+                    <n:ImageMenuItem Header="{DynamicResource Editor.List.OpenImage}" Image="{StaticResource Vector.Image}" ContentHeight="16" ContentWidth="16" Command="u:Commands.OpenImage"/>
+                    <n:ImageMenuItem Header="{DynamicResource Editor.List.ExploreFolder}" Image="{StaticResource Vector.Open}" ContentHeight="16" ContentWidth="16" Command="u:Commands.ExploreFolder"/>
+                    <n:ImageMenuItem Header="{DynamicResource Editor.List.ExportImage}" Image="{StaticResource Vector.Save}" ContentHeight="16" ContentWidth="16" Command="u:Commands.ExportImages"/>
                 </ContextMenu>
             </ListView.Resources>
 

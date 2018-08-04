@@ -286,8 +286,13 @@ namespace ScreenToGif.ImageUtil.Video
             if (_aviStream != IntPtr.Zero)
             {
                 AVIStreamRelease(_aviStream);
-                AVIStreamRelease(_compStream);
                 _aviStream = IntPtr.Zero;
+            }
+
+            if (_compStream != IntPtr.Zero)
+            {
+                AVIStreamRelease(_compStream);
+                _compStream = IntPtr.Zero;
             }
 
             if (_aviFile != IntPtr.Zero)

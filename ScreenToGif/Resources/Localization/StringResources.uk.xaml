@@ -49,12 +49,12 @@
     <s:String x:Key="Donate">Пожертва</s:String>
     <s:String x:Key="About">Про</s:String>
     
-    <s:String x:Key="Application.Homepage">Домашня сторінка</s:String>
-    <s:String x:Key="Application.Homepage.StartUp">Стартове вікно</s:String>
-    <s:String x:Key="Application.Homepage.Recorder">Запис з екрану</s:String>
-    <s:String x:Key="Application.Homepage.Webcam">Запис з вебкамери</s:String>
-    <s:String x:Key="Application.Homepage.Board">Запис з дошки</s:String>
-    <s:String x:Key="Application.Homepage.Editor">Вікно редактора</s:String>
+    <s:String x:Key="S.Application.Other.Homepage">Домашня сторінка:</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.StartUp">Стартове вікно</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Recorder">Запис з екрану</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Webcam">Запис з вебкамери</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Board">Запис з дошки</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Editor">Вікно редактора</s:String>
     
     <s:String x:Key="Application.ScreenRecorder">Запис з екрану</s:String>
     <s:String x:Key="Application.ScreenRecorder.RecordMouse">Показувати курсор миші під час запису.</s:String>

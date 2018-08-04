@@ -5,8 +5,9 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
+using ScreenToGif.Util;
 
-namespace ScreenToGif.Util.Model
+namespace ScreenToGif.Model
 {
     [DataContract]
     public class ProjectInfo
@@ -28,6 +29,18 @@ namespace ScreenToGif.Util.Model
         /// </summary>
         [DataMember(Order = 2)]
         public List<FrameInfo> Frames { get; set; } = new List<FrameInfo>();
+        
+        /// <summary>
+        /// True if this project was recently created and was not yet loaded by the editor.
+        /// </summary>
+        [DataMember(Order = 3)]
+        public bool IsNew { get; set; }
+
+        /// <summary>
+        /// Where this project was created?
+        /// </summary>
+        [DataMember(Order = 4)]
+        public ProjectByType CreatedBy { get; set; } = ProjectByType.Unknown;
 
         ///// <summary>
         ///// The dpi of the project.
@@ -78,13 +91,15 @@ namespace ScreenToGif.Util.Model
 
         #region Methods
 
-        public ProjectInfo CreateProjectFolder()
+        public ProjectInfo CreateProjectFolder(ProjectByType creator)
         {
             //Check if the parameter exists.
             if (string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder))
                 UserSettings.All.TemporaryFolder = Path.GetTempPath();
 
+            IsNew = true;
             RelativePath = DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + Path.DirectorySeparatorChar;
+            CreatedBy = creator;
 
             Directory.CreateDirectory(FullPath);
 
@@ -100,6 +115,8 @@ namespace ScreenToGif.Util.Model
                 Directory.CreateDirectory(RedoStackPath);
 
             #endregion
+
+            CreateMutex();
 
             return this;
         }
@@ -126,6 +143,8 @@ namespace ScreenToGif.Util.Model
         public void Clear()
         {
             Frames?.Clear();
+
+            MutexList.Remove(RelativePath);
         }
 
         public string FilenameOf(int index)
@@ -144,6 +163,19 @@ namespace ScreenToGif.Util.Model
                 index = 0;
 
             return LatestIndex >= index ? index : LatestIndex;
+        }
+
+        public void CreateMutex()
+        {
+            //TODO: Validate the possibility of openning this project.
+            //I need to make sure that i'll release the mutexes.
+
+            MutexList.Add(RelativePath);
+        }
+
+        public void ReleaseMutex()
+        {
+            MutexList.Remove(RelativePath);
         }
 
         #endregion

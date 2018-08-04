@@ -2,7 +2,6 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:n="clr-namespace:ScreenToGif.Controls"
-        xmlns:model="clr-namespace:ScreenToGif.Util.Model"
         xmlns:util="clr-namespace:ScreenToGif.Util"
         Title="{DynamicResource KeyStrokes.Edit.Title}" MinWidth="350" MinHeight="250" Height="500" Width="450" WindowStartupLocation="CenterScreen"
         Loaded="KeyStrokes_Loaded">
@@ -66,7 +65,7 @@
 
                         <TextBlock Grid.Column="1" Text="{DynamicResource KeyStrokes.Edit.Add}" VerticalAlignment="Center" Margin="2,3,5,3"/>
                         
-                        <n:KeyBox Grid.Column="2" x:Name="AddKeyBox" MinWidth="100" AllowAllKeys="True"/>
+                        <n:KeyBox Grid.Column="2" x:Name="AddKeyBox" MinWidth="100" AllowAllKeys="True" CanRemove="False"/>
 
                         <n:ImageButton Grid.Column="3" x:Name="AddButton" Text="{DynamicResource S.Add}" Content="{StaticResource Vector.Add}" ContentHeight="14" Height="23" Padding="5,0" Margin="5,3"
                                        Click="AddButton_Click"/>

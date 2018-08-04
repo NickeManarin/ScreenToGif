@@ -127,7 +127,7 @@ namespace ScreenToGif.Controls
             if (!(d is DoubleBox doubleBox))
                 return;
 
-            if (doubleBox.Value > doubleBox?.Maximum)
+            if (doubleBox.Value > doubleBox.Maximum)
                 doubleBox.Value = doubleBox.Maximum;
         }
 
@@ -146,7 +146,7 @@ namespace ScreenToGif.Controls
 
             if (!doubleBox._ignore)
             {
-                var value = string.Format(CultureInfo.CurrentCulture, "{0:###,###,##0.0###}", doubleBox.Value * doubleBox.Scale);
+                var value = string.Format(CultureInfo.CurrentCulture, doubleBox._format, doubleBox.Value * doubleBox.Scale);
 
                 if (!string.Equals(doubleBox.Text, value))
                     doubleBox.Text = value;
@@ -233,11 +233,21 @@ namespace ScreenToGif.Controls
             AddHandler(DataObject.PastingEvent, new DataObjectPastingEventHandler(OnPasting));
 
             _format = _baseFormat + "".PadRight(Decimals, '0') + "}";
+        }
+
+        protected override void OnInitialized(EventArgs e)
+        {
+            base.OnInitialized(e);
+
             Text = string.Format(CultureInfo.CurrentCulture, _format, Value);
         }
 
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
+            //Only sets the focus if not clicking on the Up/Down buttons of a IntegerUpDown.
+            if (e.OriginalSource is TextBlock || e.OriginalSource is Border)
+                return;
+
             if (!IsKeyboardFocusWithin)
             {
                 e.Handled = true;
@@ -249,7 +259,8 @@ namespace ScreenToGif.Controls
         {
             base.OnGotFocus(e);
 
-            SelectAll();
+            if (e.Source is DoubleBox)
+                SelectAll();
         }
 
         protected override void OnPreviewTextInput(TextCompositionEventArgs e)
@@ -271,7 +282,7 @@ namespace ScreenToGif.Controls
 
         protected override void OnTextChanged(TextChangedEventArgs e)
         {
-            if (!UpdateOnInput)
+            if (!UpdateOnInput || _ignore)
                 return;
 
             if (string.IsNullOrEmpty(Text)) return;

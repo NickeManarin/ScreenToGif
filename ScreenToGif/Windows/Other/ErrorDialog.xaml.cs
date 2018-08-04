@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -163,10 +163,8 @@ namespace ScreenToGif.Windows.Other
             if (feedback.ShowDialog() != true)
                 return;
 
-            var editor = Application.Current?.Windows.OfType<Editor>().FirstOrDefault();
-
-            if (editor != null)
-                await editor.SendFeedback();
+            if (App.MainViewModel != null)
+                await Task.Factory.StartNew(App.MainViewModel.SendFeedback, TaskCreationOptions.LongRunning);
         }
 
         #endregion

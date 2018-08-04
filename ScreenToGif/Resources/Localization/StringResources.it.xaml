@@ -57,12 +57,12 @@
     <s:String x:Key="Donate">Donazione</s:String>
     <s:String x:Key="About">Informazioni su...</s:String>
     
-    <s:String x:Key="Application.Homepage">Homepage</s:String>
-    <s:String x:Key="Application.Homepage.StartUp">Finestra di avvio</s:String>
-    <s:String x:Key="Application.Homepage.Recorder">Registratore schermo</s:String>
-    <s:String x:Key="Application.Homepage.Webcam">Registratore webcam</s:String>
-    <s:String x:Key="Application.Homepage.Board">Registratore lavagna</s:String>
-    <s:String x:Key="Application.Homepage.Editor">Finestra dell'editor</s:String>
+    <s:String x:Key="S.Application.Other.Homepage">Homepage:</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.StartUp">Finestra di avvio</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Recorder">Registratore schermo</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Webcam">Registratore webcam</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Board">Registratore lavagna</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Editor">Finestra dell'editor</s:String>
     
     <s:String x:Key="Application.ScreenRecorder">Registratore schermo</s:String>
     <s:String x:Key="Application.ScreenRecorder.RecordMouse">Mostra il cursore nella registrazione.</s:String>

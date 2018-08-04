@@ -6,7 +6,6 @@ using ScreenToGif.ImageUtil.Gif.Encoder;
 using ScreenToGif.ImageUtil.Gif.LegacyEncoder;
 using ScreenToGif.ImageUtil.Video;
 using ScreenToGif.Util;
-using ScreenToGif.Util.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -23,6 +22,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using ScreenToGif.ImageUtil.Psd;
+using ScreenToGif.Model;
 using Clipboard = System.Windows.Clipboard;
 using Point = System.Windows.Point;
 
@@ -746,6 +747,52 @@ namespace ScreenToGif.Windows.Other
                         }
 
                         #endregion
+
+                        #endregion
+
+                        break;
+                    case Export.Photoshop:
+
+                        #region Psd
+
+                        using (var stream = new MemoryStream())
+                        {
+                            //var frameCount = listFrames.Count(x => x.HasArea);
+
+                            using (var encoder = new Psd(stream, param.RepeatCount, param.Height, param.Width))
+                            {
+                                for (var i = 0; i < listFrames.Count; i++)
+                                {
+                                    if (listFrames[i].Delay == 0)
+                                        listFrames[i].Delay = 10;
+
+                                    encoder.AddFrame(listFrames[i].Path, listFrames[i].Delay);
+
+                                    Update(id, i, string.Format(processing, i));
+
+                                    #region Cancellation
+
+                                    if (tokenSource.Token.IsCancellationRequested)
+                                    {
+                                        SetStatus(Status.Canceled, id);
+                                        break;
+                                    }
+
+                                    #endregion
+                                }
+                            }
+
+                            try
+                            {
+                                using (var fileStream = new FileStream(param.Filename, FileMode.Create, FileAccess.Write, FileShare.None, 4096))
+                                    stream.WriteTo(fileStream);
+                            }
+                            catch (Exception ex)
+                            {
+                                SetStatus(Status.Error, id);
+                                LogWriter.Log(ex, "Psd Encoding");
+                            }
+                        }
 
                         #endregion
 

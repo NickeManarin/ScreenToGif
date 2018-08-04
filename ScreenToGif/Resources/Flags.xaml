@@ -256,4 +256,10 @@
         <Path Fill="#ff006ab6" Data="F1 M 30.125,20.125 L 0.125,20.125 L 0.125,13.458 L 30.125,13.458 L 30.125,20.125 Z"/>
         <Path Fill="#ffffffff" Data="F1 M 30.125,13.458 L 0.125,13.458 L 0.125,6.792 L 30.125,6.792 L 30.125,13.458 Z"/>
     </Canvas>
+
+    <Canvas x:Shared="False" x:Key="Flag.CzechRepublic" HorizontalAlignment="Center" UseLayoutRounding="False" VerticalAlignment="Center" Width="40" Height="26.6">
+        <Path Fill="#ffee3d42" Data="F1 M 40,26.6 L 0,26.6 L 0,13.3 L 40,13.3 L 40,26.6 Z"/>
+        <Path Fill="#ffffffff" Data="F1 M 0,13.3 L 40,13.3 L 40,0 L 0,0 L 0,13.3 Z"/>
+        <Path Fill="#ff0066a5" Data="F1 M 0,26.6 L 20,13.3 L 0,0 L 0,26.6 Z"/>
+    </Canvas>
 </ResourceDictionary>

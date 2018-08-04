@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Mail;
-using System.Threading.Tasks;
 
 namespace ScreenToGif.Util
 {
     internal static class FeedbackHelper
     {
-        internal static async Task<bool> Send(string html, List<string> files = null)
+        internal static bool Send(string html, List<string> files = null)
         {
             //Please, don't try to log with this e-mail and password. :/
             //Everytime someone does this, I have to change the password and the Feedback feature stops working until I update the app.
@@ -16,14 +15,14 @@ namespace ScreenToGif.Util
 
             foreach (var t in passList)
             {
-                if (await SendInternal(t, html, files ?? new List<string>()))
+                if (SendInternal(t, html, files ?? new List<string>()))
                     return true;
             }
 
             return false;
         }
 
-        private static async Task<bool> SendInternal(string pass, string html, List<string> files)
+        private static bool SendInternal(string pass, string html, List<string> files)
         {
             try
             {
@@ -56,7 +55,7 @@ namespace ScreenToGif.Util
                         //        throw args.Error;
                         //};
 
-                        await Task.Factory.StartNew(() => smtp.Send(mail));
+                        smtp.Send(mail);
                     }
                 }
 

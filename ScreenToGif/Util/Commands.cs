@@ -468,6 +468,16 @@ namespace ScreenToGif.Util
 
         #endregion
 
+        #region Mouse Clicks
+
+        /// <summary>
+        /// Mouse Clicks Command, Alt + I
+        /// </summary>
+        public static RoutedUICommand MouseClicks { get; set; } = new RoutedUICommand("Mouse Clicks", "MouseClicks", typeof(Commands),
+            new InputGestureCollection { new KeyGesture(Key.I, ModifierKeys.Alt, "Alt + I") });
+
+        #endregion
+
         #region Watermark
 
         /// <summary>
@@ -739,6 +749,40 @@ namespace ScreenToGif.Util
         /// </summary>
         public static RoutedUICommand RemoveLocalization { get; set; } = new RoutedUICommand("Remove Localization", "RemoveLocalization", typeof(Commands), 
             new InputGestureCollection {new KeyGesture(Key.Delete, ModifierKeys.None, "Delete") });
+
+        #endregion
+
+        #region List of entries
+
+        /// <summary>
+        /// Move Up Entry Command, Alt + Up
+        /// </summary>
+        public static RoutedUICommand MoveUp { get; set; } = new RoutedUICommand("Move Upwards", "MoveUp", typeof(Commands),
+            new InputGestureCollection { new KeyGesture(Key.Up, ModifierKeys.Alt, "Alt + Up") });
+
+        /// <summary>
+        /// Move Down Entry Command, Alt + Down
+        /// </summary>
+        public static RoutedUICommand MoveDown { get; set; } = new RoutedUICommand("Move Downwards", "MoveDown", typeof(Commands),
+            new InputGestureCollection { new KeyGesture(Key.Down, ModifierKeys.Alt, "Alt + Down") });
+
+        /// <summary>
+        /// Add Entry Command, Ctrl + N
+        /// </summary>
+        public static RoutedUICommand Add { get; set; } = new RoutedUICommand("Add", "AddNew", typeof(Commands),
+            new InputGestureCollection { new KeyGesture(Key.N, ModifierKeys.Control, "Ctrl + N") });
+
+        /// <summary>
+        /// Add Entry Command, Ctrl + E
+        /// </summary>
+        public static RoutedUICommand Edit { get; set; } = new RoutedUICommand("Edit", "Edit", typeof(Commands),
+            new InputGestureCollection { new KeyGesture(Key.E, ModifierKeys.Control, "Ctrl + E") });
+
+        /// <summary>
+        /// Remove Entry Command, Delete
+        /// </summary>
+        public static RoutedUICommand Remove { get; set; } = new RoutedUICommand("Remove", "Remove", typeof(Commands),
+            new InputGestureCollection { new KeyGesture(Key.Delete, ModifierKeys.None, "Delete") });
 
         #endregion
 

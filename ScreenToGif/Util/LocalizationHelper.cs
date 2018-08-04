@@ -4,9 +4,17 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Reflection;
+using System.Runtime.Serialization.Json;
+using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Markup;
 using System.Xml;
+using System.Xml.Linq;
+using System.Xml.XPath;
 
 namespace ScreenToGif.Util
 {
@@ -19,8 +27,9 @@ namespace ScreenToGif.Util
         {
             #region Validation
 
+            //If none selected, fallback to english.
             if (string.IsNullOrEmpty(culture))
-                return;
+                culture = "en";
 
             if (culture.Equals("auto") || culture.Length < 2)
             {
@@ -70,9 +79,13 @@ namespace ScreenToGif.Util
             Application.Current.Resources.MergedDictionaries.Remove(requestedResource);
             Application.Current.Resources.MergedDictionaries.Add(requestedResource);
 
+            //Inform the threads of the new culture.
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
+
             #region English Fallback of the Current Language
 
-            //Only non-English resources need a fallback, because the English resource is evergreen.
+            //Only non-English resources need a fallback, because the English resource is evergreen. TODO
             if (culture.StartsWith("en"))
                 return;
 
@@ -86,11 +99,166 @@ namespace ScreenToGif.Util
 
             #endregion
 
-            //Inform the threads of the new culture.
-            Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
+            GC.Collect(0);
 
-            GC.Collect(2);
+            if (!UserSettings.All.CheckForTranslationUpdates)
+                return;
+
+            //Async, fire and forget.
+            Task.Factory.StartNew(() => CheckForUpdates(culture));
+        }
+
+        /// <summary>
+        /// This is what happens:
+        /// 
+        ///Get date of available resource
+        ///  if resource available is newer than assembly
+        ///      if there is already a translation downloaded
+        ///          if current translation is older than available
+        ///              Download latest, overwriting current
+        ///          if current translation is newer
+        ///              Don't download
+        ///      if there no translation downloaded already
+        ///          Download latest
+        ///  if resource available is older than assembly
+        ///      Don't download, erase current translation
+        /// </summary>
+        /// <param name="culture">The culture that should be searched for updates.</param>
+        internal static void CheckForUpdates(string culture)
+        {
+            try
+            {
+                var folder = Path.Combine(UserSettings.All.TemporaryFolder, "ScreenToGif", "Localization");
+                var file = Path.Combine(folder, $"StringResources.{culture}.new.xaml");
+
+                Directory.CreateDirectory(folder);
+
+                //Get when the available resource was updated.
+                var updated = GetWhenResourceWasUpdated(culture);
+
+                //If resource available is older than assembly.
+                if (!updated.HasValue || updated <= File.GetLastWriteTime(Assembly.GetExecutingAssembly().Location))
+                {
+                    File.Delete(file);
+                    return;
+                }
+
+                //If a translation was previously downloaded.
+                if (File.Exists(file))
+                {
+                    //If current translation is older than the available one.
+                    if (new FileInfo(file).LastWriteTimeUtc > updated.Value.ToUniversalTime())
+                        DownloadLatest(file, culture);
+                }
+                else
+                {
+                    DownloadLatest(file, culture);
+                }
+
+                //If a new translation was not downloaded (now or previously), ignore the following code. 
+                if (!File.Exists(file))
+                    return;
+
+                //Removes any resource that was added by this updater.
+                var listToRemove = Application.Current.Resources.MergedDictionaries.Where(w => w.Source?.OriginalString.EndsWith(".new.xaml") == true).ToList();
+
+                foreach (var rem in listToRemove)
+                    Application.Current.Resources.MergedDictionaries.Remove(rem);
+
+                //Load the resource from the file, not replacing the current resource, but putting right after it.
+                using (var fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))
+                {
+                    if (fs.Length == 0)
+                        throw new InvalidDataException("File is empty");
+
+                    //Reads the ResourceDictionary file
+                    var dictionary = (ResourceDictionary)XamlReader.Load(fs);
+                    dictionary.Source = new Uri(Path.Combine(file));
+
+                    //Add in newly loaded Resource Dictionary.
+                    Application.Current.Resources.MergedDictionaries.Add(dictionary);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Check for an updated localization recource");
+            }
+        }
+
+        /// <summary>
+        /// Checks when the available resource file was updated.
+        /// </summary>
+        /// <param name="culture">The culture of the resource to be checked.</param>
+        /// <returns>The date when the resource file was last updated.</returns>
+        private static DateTime? GetWhenResourceWasUpdated(string culture)
+        {
+            //Gets the latest commit that changed the translation resource.
+            var req = (HttpWebRequest)WebRequest.Create($"https://api.github.com/repos/NickeManarin/ScreenToGif/commits?path=ScreenToGif/Resources/Localization/StringResources.{culture}.xaml&page=1&per_page=1");
+            req.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
+            req.Proxy = WebHelper.GetProxy();
+
+            var res = (HttpWebResponse)req.GetResponse();
+
+            using (var resultStream = res.GetResponseStream())
+            {
+                if (resultStream == null)
+                    return null;
+
+                using (var reader = new StreamReader(resultStream))
+                {
+                    var result = reader.ReadToEnd();
+                    var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(result), new XmlDictionaryReaderQuotas());
+                    var release = XElement.Load(jsonReader);
+
+                    //Gets the date of of the last commit that changed the translation file.
+                    var dateText = release.FirstNode.XPathSelectElement("commit")?.XPathSelectElement("committer")?.XPathSelectElement("date")?.Value;
+
+                    //If was not possible to convert the time, keep using the current resource.
+                    if (!DateTime.TryParse(dateText, out DateTime modificationDate))
+                        return null;
+
+                    //If the current resource is newer then the available one, keep using the current.
+                    return modificationDate;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Downloads the available localization resource.
+        /// </summary>
+        /// <param name="file">The destination path of the recource.</param>
+        /// <param name="culture">The culture of the resource to be downloaded.</param>
+        private static void DownloadLatest(string file, string culture)
+        {
+            var request = (HttpWebRequest)WebRequest.Create($"https://api.github.com/repos/NickeManarin/ScreenToGif/contents/ScreenToGif/Resources/Localization/StringResources.{culture}.xaml");
+            request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
+            request.Proxy = WebHelper.GetProxy();
+
+            var response = (HttpWebResponse)request.GetResponse();
+
+            using (var resultStream = response.GetResponseStream())
+            {
+                if (resultStream == null)
+                    return;
+
+                using (var reader = new StreamReader(resultStream))
+                {
+                    var result = reader.ReadToEnd();
+                    var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(result), new XmlDictionaryReaderQuotas());
+                    var release = XElement.Load(jsonReader);
+
+                    //When creating a GET request with a direct path, the 'content' element is available as a base64 string.
+                    var contentBase64 = release.XPathSelectElement("content")?.Value;
+
+                    if (string.IsNullOrWhiteSpace(contentBase64))
+                        return;
+
+                    if (File.Exists(file))
+                        File.Delete(file);
+
+                    File.WriteAllText(file, Encoding.UTF8.GetString(Convert.FromBase64String(contentBase64)).Replace("&#x0d;", "\r"));
+                }
+            }
         }
 
         public static void SaveDefaultResource(string path)
@@ -129,14 +297,21 @@ namespace ScreenToGif.Util
                 if (string.IsNullOrEmpty(path))
                     throw new ArgumentException("Path is null");
 
-                using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read))
+                var destination = Path.Combine(Path.GetTempPath(), Path.GetFileName(path));
+
+                if (File.Exists(destination))
+                    File.Delete(destination);
+
+                File.WriteAllText(destination, File.ReadAllText(path).Replace("&#x0d;", "\r"));
+
+                using (var fs = new FileStream(destination, FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
                     if (fs.Length == 0)
                         throw new InvalidDataException("File is empty");
 
                     //Reads the ResourceDictionary file
-                    var dictionary = (ResourceDictionary)System.Windows.Markup.XamlReader.Load(fs);
-                    dictionary.Source = new Uri(path);
+                    var dictionary = (ResourceDictionary)XamlReader.Load(fs);
+                    dictionary.Source = new Uri(destination);
 
                     //Add in newly loaded Resource Dictionary.
                     Application.Current.Resources.MergedDictionaries.Add(dictionary);
@@ -232,10 +407,52 @@ namespace ScreenToGif.Util
         /// Gets a resource as string.
         /// </summary>
         /// <param name="key">The key of the string resource.</param>
+        /// <param name="removeNewLines">If true, it removes any kind of new lines.</param>
         /// <returns>A string resource, usually a localized string.</returns>
-        public static string Get(string key)
+        public static string Get(string key, bool removeNewLines = false)
         {
+            if (removeNewLines)
+                return (Application.Current.TryFindResource(key) as string ?? "").Replace("\n", " ").Replace("\\n", " ").Replace("\r", " ").Replace("&#10;", " ").Replace("&#x0d;", " ");
+
             return Application.Current.TryFindResource(key) as string;
+        }
+
+        /// <summary>
+        /// Gets a resource as string and applies the format.
+        /// </summary>
+        /// <param name="key">The key of the string resource.</param>
+        /// <param name="values">The values for the string format.</param>
+        /// <returns>A string resource, usually a localized string.</returns>
+        public static string GetWithFormat(string key, params object[] values)
+        {
+            return string.Format(Thread.CurrentThread.CurrentUICulture, Application.Current.TryFindResource(key) as string ?? "", values);
+        }
+
+        /// <summary>
+        /// Gets a resource as string.
+        /// </summary>
+        /// <param name="key">The key of the string resource.</param>
+        /// <param name="defaultValue">The default value in english.</param>
+        /// <param name="removeNewLines">If true, it removes any kind of new lines.</param>
+        /// <returns>A string resource, usually a localized string.</returns>
+        public static string Get(string key, string defaultValue, bool removeNewLines = false)
+        {
+            if (removeNewLines)
+                return (Application.Current.TryFindResource(key) as string ?? defaultValue).Replace("\n", " ").Replace("\\n", " ").Replace("\r", " ").Replace("&#10;", " ").Replace("&#x0d;", " ");
+
+            return Application.Current.TryFindResource(key) as string ?? defaultValue;
+        }
+
+        /// <summary>
+        /// Gets a resource as string and applies the format.
+        /// </summary>
+        /// <param name="key">The key of the string resource.</param>
+        /// <param name="defaultValue">The default value in english.</param>
+        /// <param name="values">The values for the string format.</param>
+        /// <returns>A string resource, usually a localized string.</returns>
+        public static string GetWithFormat(string key, string defaultValue, params object[] values)
+        {
+            return string.Format(Thread.CurrentThread.CurrentUICulture, Application.Current.TryFindResource(key) as string ?? defaultValue, values);
         }
     }
 }

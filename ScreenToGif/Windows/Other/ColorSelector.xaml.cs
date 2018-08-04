@@ -5,7 +5,7 @@ using System.Windows.Media;
 using ScreenToGif.Controls;
 using ScreenToGif.Util;
 
-//Code by Nicke Manarin - ScreenToGif - 26/02/2014, Updated 16/10/2016
+//Code by Nicke Manarin - ScreenToGif - 26/02/2014, Updated 16/10/2016, Updated 31/05/2018
 
 namespace ScreenToGif.Windows.Other
 {
@@ -48,84 +48,10 @@ namespace ScreenToGif.Windows.Other
             {
                 AlphaIntegerUpDown.Visibility = Visibility.Collapsed;
                 AlphaLabel.Visibility = Visibility.Collapsed;
+                ColorHexadecimalBox.DisplayAlpha = false;
             }
 
             InitialColor.Background = CurrentColor.Background = LastColor.Background = new SolidColorBrush(selectedColor);
-        }
-
-        #endregion
-
-        #region Input Events
-
-        private void ValueBox_MouseWheel(object sender, MouseWheelEventArgs e)
-        {
-            var textBox = sender as NumericTextBox;
-
-            if (textBox == null) return;
-
-            textBox.Value = textBox.IsHex ? Convert.ToInt64(textBox.Text.Replace("#",""), 16) : Convert.ToInt32(textBox.Text);
-
-            textBox.Value = e.Delta > 0 ? textBox.Value + 1 : textBox.Value - 1;
-        }
-
-        private void ValueText_LostFocus(object sender, RoutedEventArgs e)
-        {
-            CheckValues(sender);
-        }
-
-        private void ValueText_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                CheckValues(sender);
-            }
-        }
-
-        private void CheckValues(object sender)
-        {
-            var textBox = sender as NumericTextBox;
-
-            if (textBox == null) return;
-
-            #region If Hexadecimal TextBox
-
-            if (textBox.IsHex)
-            {
-                if (Convert.ToInt64(textBox.Text.Replace("#", ""), 16) > textBox.MaxValue)
-                {
-                    textBox.Value = textBox.MaxValue;
-                    return;
-                }
-
-                if (Convert.ToInt64(textBox.Text.Replace("#", ""), 16) < textBox.MinValue)
-                {
-                    textBox.Value = textBox.MinValue;
-                    return;
-                }
-
-                textBox.Value = Convert.ToInt64(textBox.Text.Replace("#", ""), 16);
-                return;
-            }
-
-            #endregion
-
-            #region If Decimal
-
-            if (Convert.ToInt32(textBox.Text) > textBox.MaxValue)
-            {
-                textBox.Value = textBox.MaxValue;
-                return;
-            }
-
-            if (Convert.ToInt32(textBox.Text) < textBox.MinValue)
-            {
-                textBox.Value = textBox.MinValue;
-                return;
-            }
-
-            textBox.Value = Convert.ToInt32(textBox.Text);
-
-            #endregion
         }
 
         #endregion
@@ -141,37 +67,33 @@ namespace ScreenToGif.Windows.Other
             GreenIntegerUpDown.Value = SelectedColor.G;
             BlueIntegerUpDown.Value = SelectedColor.B;
 
-            HexadecimalTextBox.Text = SelectedColor.ToString();
-
             _isUpdating = false;
         }
 
         private void ColorSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (_colorPosition != null)
-            {
-                DetermineColor((Point)_colorPosition);
-            }
+                DetermineColor((Point) _colorPosition);
         }
 
         private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Mouse.Capture(ColorDetail);
             var p = e.GetPosition(ColorDetail);
+
             UpdateMarkerPosition(p);
         }
 
         private void OnMouseMove(object sender, MouseEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                var p = e.GetPosition(ColorDetail);
-                var withinBoundaries = new Point(
-                    Math.Max(0, Math.Min(p.X, ColorDetail.ActualWidth)),
-                    Math.Max(0, Math.Min(p.Y, ColorDetail.ActualHeight)));
-                UpdateMarkerPosition(withinBoundaries);
-                Mouse.Synchronize();
-            }
+            if (e.LeftButton != MouseButtonState.Pressed)
+                return;
+
+            var p = e.GetPosition(ColorDetail);
+            var withinBoundaries = new Point(Math.Max(0, Math.Min(p.X, ColorDetail.ActualWidth)), Math.Max(0, Math.Min(p.Y, ColorDetail.ActualHeight)));
+
+            UpdateMarkerPosition(withinBoundaries);
+            Mouse.Synchronize();
         }
 
         private void ColorDetailSizeChanged(object sender, SizeChangedEventArgs args)
@@ -192,7 +114,7 @@ namespace ScreenToGif.Windows.Other
 
         private void ColorDetail_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Mouse.Capture(null); // Release
+            Mouse.Capture(null); //Release it.
             LastColor.Background = CurrentColor.Background;
         }
 
@@ -203,7 +125,7 @@ namespace ScreenToGif.Windows.Other
 
             UpdateMarkerPosition(SelectedColor);
 
-            #region Update TextBoxes
+            #region Update the values
 
             _isUpdating = true;
 
@@ -211,8 +133,6 @@ namespace ScreenToGif.Windows.Other
             RedIntegerUpDown.Value = SelectedColor.R;
             GreenIntegerUpDown.Value = SelectedColor.G;
             BlueIntegerUpDown.Value = SelectedColor.B;
-
-            HexadecimalTextBox.Text = SelectedColor.ToString();
 
             _isUpdating = false;
 
@@ -224,53 +144,24 @@ namespace ScreenToGif.Windows.Other
             LastColor.Background = CurrentColor.Background;
         }
 
-        #region Text Changed
-
         private void ArgbText_ValueChanged(object sender, RoutedEventArgs e)
         {
-            if (AlphaIntegerUpDown == null) return;
-            if (_isUpdating) return;
+            if (AlphaIntegerUpDown == null || _isUpdating)
+                return;
 
-            SelectedColor = Color.FromArgb(
-                            (byte)AlphaIntegerUpDown.Value,
-                            (byte)RedIntegerUpDown.Value,
-                            (byte)GreenIntegerUpDown.Value,
-                            (byte)BlueIntegerUpDown.Value);
-
-            _isUpdating = true;
-
-            HexadecimalTextBox.Text = SelectedColor.ToString();
-
-            _isUpdating = false;
+            SelectedColor = Color.FromArgb((byte)AlphaIntegerUpDown.Value, (byte)RedIntegerUpDown.Value, (byte)GreenIntegerUpDown.Value, (byte)BlueIntegerUpDown.Value);
 
             UpdateMarkerPosition(SelectedColor);
         }
 
-        private void HexadecimalText_ValueChanged(object sender, RoutedEventArgs e)
+        private void ValueBox_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            if (HexadecimalTextBox == null) return;
-            if (HexadecimalTextBox.Text == null) return;
-            if (_isUpdating) return;
+            var textBox = sender as IntegerUpDown;
 
-            var converted = ColorConverter.ConvertFromString(HexadecimalTextBox.Text.PadRight(9, '0'));
+            if (textBox == null) return;
 
-            if (converted == null) return;
-
-            SelectedColor = (Color)converted;
-
-            UpdateMarkerPosition(SelectedColor);
-
-            _isUpdating = true;
-
-            AlphaIntegerUpDown.Value = SelectedColor.A;
-            RedIntegerUpDown.Value = SelectedColor.R;
-            GreenIntegerUpDown.Value = SelectedColor.G;
-            BlueIntegerUpDown.Value = SelectedColor.B;
-
-            _isUpdating = false;
+            textBox.Value = e.Delta > 0 ? textBox.Value + 1 : textBox.Value - 1;
         }
-
-        #endregion
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
@@ -331,8 +222,6 @@ namespace ScreenToGif.Windows.Other
             RedIntegerUpDown.Value = SelectedColor.R;
             GreenIntegerUpDown.Value = SelectedColor.G;
             BlueIntegerUpDown.Value = SelectedColor.B;
-
-            HexadecimalTextBox.Text = SelectedColor.ToString();
 
             _isUpdating = false;
 

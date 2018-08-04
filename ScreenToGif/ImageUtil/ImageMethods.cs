@@ -19,7 +19,7 @@ using Image = System.Drawing.Image;
 using PixelFormat = System.Windows.Media.PixelFormat;
 using Size = System.Drawing.Size;
 using ScreenToGif.ImageUtil.Gif.LegacyEncoder;
-using ScreenToGif.Util.Model;
+using ScreenToGif.Model;
 using GifFile = ScreenToGif.ImageUtil.Gif.Decoder.GifFile;
 
 namespace ScreenToGif.ImageUtil
@@ -1052,7 +1052,15 @@ namespace ScreenToGif.ImageUtil
 
                 var scale = Math.Round(bitmapImage.DpiX / 96d, 2);
 
-                rect = new Int32Rect((int)Math.Round(rect.X * scale), (int)Math.Round(rect.Y * scale), (int)Math.Round(rect.Width * scale), (int)Math.Round(rect.Height * scale));
+                var x = Math.Min(bitmapImage.PixelWidth - 1, Math.Max(0, (int)(rect.X * scale)));
+                var y = Math.Min(bitmapImage.PixelHeight - 1, Math.Max(0, (int)(rect.Y * scale)));
+                var width = (int)(rect.Width * scale);
+                var height = (int)(rect.Height * scale);
+
+                width = Math.Min(width, bitmapImage.PixelWidth - x);
+                height = Math.Min(height, bitmapImage.PixelHeight - y);
+
+                rect = new Int32Rect(x, y, width, height);
 
                 if (!new Int32Rect(0, 0, bitmapImage.PixelWidth, bitmapImage.PixelHeight).Contains(rect))
                     return null;

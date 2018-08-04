@@ -77,12 +77,12 @@
     <s:String x:Key="Donate">Doneren</s:String>
     <s:String x:Key="About">Over</s:String>
     
-    <s:String x:Key="Application.Homepage">Homepage</s:String>
-    <s:String x:Key="Application.Homepage.StartUp">Startscherm</s:String>
-    <s:String x:Key="Application.Homepage.Recorder">Schermopname</s:String>
-    <s:String x:Key="Application.Homepage.Webcam">Webcam-opname</s:String>
-    <s:String x:Key="Application.Homepage.Board">Whiteboard-opname</s:String>
-    <s:String x:Key="Application.Homepage.Editor">Editorscherm</s:String>
+    <s:String x:Key="S.Application.Other.Homepage">Homepage:</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.StartUp">Startscherm</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Recorder">Schermopname</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Webcam">Webcam-opname</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Board">Whiteboard-opname</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Editor">Editorscherm</s:String>
     
     <s:String x:Key="Application.ScreenRecorder">Schermopname</s:String>
     <s:String x:Key="Application.ScreenRecorder.RecordMouse">Muiscursor tijdens opname weergeven.</s:String>

@@ -7,8 +7,8 @@ using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using ScreenToGif.ImageUtil;
+using ScreenToGif.Model;
 using ScreenToGif.Util;
-using ScreenToGif.Util.Model;
 using ScreenToGif.Windows.Other;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 using Timer = System.Windows.Forms.Timer;
@@ -26,7 +26,6 @@ namespace ScreenToGif.Windows
         //There will be some exceptions to the automatic recording, such as holding the Ctrl key, etc
 
         #region Variables
-
 
         #region Counters
 
@@ -68,7 +67,7 @@ namespace ScreenToGif.Windows
             if (string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder))
                 UserSettings.All.TemporaryFolder = Path.GetTempPath();
 
-            Project = new ProjectInfo().CreateProjectFolder();
+            //Project = new ProjectInfo().CreateProjectFolder();
 
             #endregion
         }
@@ -211,7 +210,8 @@ namespace ScreenToGif.Windows
                     _capture = new Timer { Interval = 1000 / FpsNumericUpDown.Value };
                     _snapDelay = null;
 
-                    Project = new ProjectInfo().CreateProjectFolder();
+                    Project?.Clear();
+                    Project = new ProjectInfo().CreateProjectFolder(ProjectByType.BoardRecorder);
 
                     HeightIntegerBox.IsEnabled = false;
                     WidthIntegerBox.IsEnabled = false;
@@ -396,21 +396,6 @@ namespace ScreenToGif.Windows
         private void LightWindow_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             AutoFitButtons();
-        }
-
-        #endregion
-
-        #region Upper Grid Events
-
-        private void BoardTipColorBorder_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            var colorPicker = new ColorSelector(UserSettings.All.BoardColor) { Owner = this };
-            var result = colorPicker.ShowDialog();
-
-            if (result.HasValue && result.Value)
-            {
-                UserSettings.All.BoardColor = colorPicker.SelectedColor;
-            }
         }
 
         #endregion

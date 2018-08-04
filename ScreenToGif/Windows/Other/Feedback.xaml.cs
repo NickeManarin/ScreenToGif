@@ -2,6 +2,8 @@
 using ScreenToGif.Controls;
 using ScreenToGif.Util;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.IO.Compression;
@@ -11,12 +13,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using ScreenToGif.FileWriters;
 
 namespace ScreenToGif.Windows.Other
 {
     public partial class Feedback : Window
     {
+        private ObservableCollection<AttachmentListBoxItem> _fileList = new ObservableCollection<AttachmentListBoxItem>();
+
         public Feedback()
         {
             InitializeComponent();
@@ -26,7 +29,7 @@ namespace ScreenToGif.Windows.Other
 
         private async void Feedback_Loaded(object sender, RoutedEventArgs e)
         {
-            StatusBand.Info(TryFindResource("S.Feedback.IssueBug.Info") as string ?? "");
+            StatusBand.Warning(LocalizationHelper.Get("S.Feedback.IssueBug.Info"));
             Cursor = Cursors.AppStarting;
             MainGrid.IsEnabled = false;
 
@@ -51,14 +54,20 @@ namespace ScreenToGif.Windows.Other
 
             foreach (var fileName in ofd.FileNames)
             {
-                if (!AttachmentListBox.Items.Cast<AttachmentListBoxItem>().Any(x => x.Attachment.Equals(fileName)))
-                    AttachmentListBox.Items.Add(new AttachmentListBoxItem(fileName));
+                if (!_fileList.Any(x => x.Attachment.Equals(fileName)))
+                    _fileList.Add(new AttachmentListBoxItem(fileName));
             }
         }
 
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
             Send();
+        }
+
+        private void PreviewButton_Click(object sender, RoutedEventArgs e)
+        {
+            var preview = new FeedbackPreview { Html = BuildBody(TitleTextBox.Text, MessageTextBox.Text, MailTextBox.Text, IssueCheckBox.IsChecked == true, SuggestionCheckBox.IsChecked == true) };
+            preview.ShowDialog();
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -68,12 +77,12 @@ namespace ScreenToGif.Windows.Other
 
         private void RemoveButton_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            AttachmentListBox.Items.RemoveAt(AttachmentListBox.SelectedIndex);
+            _fileList.RemoveAt(AttachmentListBox.SelectedIndex);
         }
 
         private void RemoveAllAttachmentButton_Click(object sender, RoutedEventArgs e)
         {
-            AttachmentListBox.Items.Clear();
+            _fileList.Clear();
         }
 
         #endregion
@@ -84,18 +93,28 @@ namespace ScreenToGif.Windows.Other
         {
             try
             {
-                //Search for a Log folder and add the txt files as attachment.
                 var logFolder = Path.Combine(UserSettings.All.LogsFolder, "ScreenToGif", "Logs");
+                var local = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Settings.xaml");
+                var appData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ScreenToGif", "Settings.xaml");
 
-                if (!Directory.Exists(logFolder)) return;
+                var list = new List<string>();
 
-                var list = await Task.Factory.StartNew(() => Directory.GetFiles(logFolder).Select(s => Dispatcher.Invoke(() => new AttachmentListBoxItem(s))).ToList());
+                //Search for file inside the log folder.
+                if (Directory.Exists(logFolder))
+                    list.AddRange(await Task.Factory.StartNew(() => Directory.GetFiles(logFolder).ToList()));
 
-                Dispatcher.Invoke(() => list.ForEach(x => AttachmentListBox.Items.Add(x)));
+                //Add the Settings file too.
+                if (File.Exists(local))
+                    list.Add(local);
+
+                if (File.Exists(appData))
+                    list.Add(appData);
+
+                Dispatcher.Invoke(() => AttachmentListBox.ItemsSource = _fileList = new ObservableCollection<AttachmentListBoxItem>(list.Select(s => new AttachmentListBoxItem(s))));
             }
             catch (Exception ex)
             {
-                LogWriter.Log(ex, "Impossible to search for the logs folder");
+                LogWriter.Log(ex, "Impossible to load the default attachments");
             }
         }
 

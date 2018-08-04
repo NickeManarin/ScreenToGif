@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace ScreenToGif.Util.Model
+namespace ScreenToGif.Model
 {
     internal class ApplicationModel : INotifyPropertyChanged
     {

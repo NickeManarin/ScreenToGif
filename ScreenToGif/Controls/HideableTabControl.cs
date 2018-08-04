@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
 using ScreenToGif.Util;
-using ScreenToGif.Windows;
-using ScreenToGif.Windows.Other;
 
 namespace ScreenToGif.Controls
 {
@@ -21,11 +17,51 @@ namespace ScreenToGif.Controls
         #region Variables
 
         private Button _hideButton;
-        private Button _optionsButton;
-        private Button _feedbackButton;
-        private Button _helpButton;
+        private ImageMenuItem _extrasMenuItem;
         private TabPanel _tabPanel;
         private Border _border;
+        private ImageToggleButton _notificationButton;
+        private NotificationListControl _notificationList;
+
+        #endregion
+
+        #region Dependency Properties
+
+        public static DependencyProperty OptionsCommandProperty = DependencyProperty.Register("OptionsCommand", typeof(ICommand), typeof(HideableTabControl), new PropertyMetadata(null));
+
+        public static DependencyProperty FeedbackCommandProperty = DependencyProperty.Register("FeedbackCommand", typeof(ICommand), typeof(HideableTabControl), new PropertyMetadata(null));
+
+        public static DependencyProperty TroubleshootCommandProperty = DependencyProperty.Register("TroubleshootCommand", typeof(ICommand), typeof(HideableTabControl), new PropertyMetadata(null));
+
+        public static DependencyProperty HelpCommandProperty = DependencyProperty.Register("HelpCommand", typeof(ICommand), typeof(HideableTabControl), new PropertyMetadata(null));
+
+        #endregion
+
+        #region Properties
+
+        public ICommand OptionsCommand
+        {
+            get => (ICommand)GetValue(OptionsCommandProperty);
+            set => SetValue(OptionsCommandProperty, value);
+        }
+
+        public ICommand FeedbackCommand
+        {
+            get => (ICommand)GetValue(FeedbackCommandProperty);
+            set => SetValue(FeedbackCommandProperty, value);
+        }
+
+        public ICommand TroubleshootCommand
+        {
+            get => (ICommand)GetValue(TroubleshootCommandProperty);
+            set => SetValue(TroubleshootCommandProperty, value);
+        }
+
+        public ICommand HelpCommand
+        {
+            get => (ICommand)GetValue(HelpCommandProperty);
+            set => SetValue(HelpCommandProperty, value);
+        }
 
         #endregion
 
@@ -41,47 +77,11 @@ namespace ScreenToGif.Controls
             _tabPanel = Template.FindName("TabPanel", this) as TabPanel;
             _border = Template.FindName("ContentBorder", this) as Border;
 
-            _optionsButton = Template.FindName("OptionsButton", this) as ImageButton;
-            _feedbackButton = Template.FindName("FeedbackButton", this) as ImageButton;
-            _helpButton = Template.FindName("HelpButton", this) as ImageButton;
+            _notificationButton = Template.FindName("NotificationsButton", this) as ImageToggleButton;
+            _notificationList = Template.FindName("NotificationList", this) as NotificationListControl;
+            _extrasMenuItem = Template.FindName("ExtrasMenuItem", this) as ImageMenuItem;
+
             _hideButton = Template.FindName("HideGridButton", this) as Button;
-
-            //Options
-            if (_optionsButton != null)
-                _optionsButton.Click += (sender, args) =>
-                {
-                    var options = new Options { Owner = Window.GetWindow(this) };
-                    options.ShowDialog();
-                };
-
-            //Feedback
-            if (_feedbackButton != null)
-                _feedbackButton.Click += async (sender, args) =>
-                {
-                    var feed = new Feedback { Owner = Window.GetWindow(this) };
-
-                    if (feed.ShowDialog() != true)
-                        return;
-
-                    var window = feed.Owner as Editor;
-
-                    if (window != null)
-                        await window.SendFeedback();
-                };
-
-            //Help
-            if (_helpButton != null)
-                _helpButton.Click += (sender, args) =>
-                {
-                    try
-                    {
-                        Process.Start("https://github.com/NickeManarin/ScreenToGif/wiki/Help");
-                    }
-                    catch (Exception ex)
-                    {
-                        LogWriter.Log(ex, "Openning the Help");
-                    }
-                };
 
             //Hide tab
             if (_hideButton != null)
@@ -97,6 +97,7 @@ namespace ScreenToGif.Controls
             }
 
             UpdateVisual();
+            UpdateNotificationButton();
         }
 
         #region Events
@@ -246,14 +247,31 @@ namespace ScreenToGif.Controls
             }
 
             //Update the buttons.
-            if (_optionsButton != null)
-                _optionsButton.Foreground = !darkForeground && UserSettings.All.EditorExtendChrome ? Brushes.GhostWhite : Brushes.Black;
+            if (_notificationButton != null)
+                _notificationButton.DarkMode = !darkForeground && UserSettings.All.EditorExtendChrome;
+            
+            if (_extrasMenuItem != null)
+                _extrasMenuItem.DarkMode = !darkForeground && UserSettings.All.EditorExtendChrome;
+        }
 
-            if (_feedbackButton != null)
-                _feedbackButton.Foreground = !darkForeground && UserSettings.All.EditorExtendChrome ? Brushes.GhostWhite : Brushes.Black;
+        public void UpdateNotifications()
+        {
+            _notificationList?.UpdateList();
 
-            if (_helpButton != null)
-                _helpButton.Foreground = !darkForeground && UserSettings.All.EditorExtendChrome ? Brushes.GhostWhite : Brushes.Black;
+            UpdateNotificationButton();
+        }
+
+        public void UpdateNotificationButton()
+        {
+            if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
+                return;
+
+            var most = NotificationManager.Notifications.Select(s => s.Kind).OrderByDescending(a => (int)a).FirstOrDefault();
+            
+            _notificationButton.Content =  FindResource(StatusBand.KindToString(most)) as Canvas;
+
+            if (most != StatusType.None)
+                (_notificationButton.FindResource("NotificationStoryboard") as Storyboard)?.Begin();
         }
     }
 }

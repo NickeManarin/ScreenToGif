@@ -92,8 +92,7 @@
     <AdornerDecorator>
         <n:AdornedControl x:Name="AdornedControl" IsAdornerVisible="{Binding ElementName=GhostWindow, Path=IsPickingRegion}">
             <n:AdornedControl.AdornerContent>
-                <n:SelectControl x:Name="SelectControl" Width="{Binding ElementName=GhostWindow, Path=Width}" Height="{Binding ElementName=GhostWindow, Path=Height}" 
-                                 IsPickingRegion="{Binding ElementName=GhostWindow, Path=IsPickingRegion}" Focusable="True"
+                <n:SelectControl x:Name="SelectControl" Focusable="True" IsPickingRegion="{Binding ElementName=GhostWindow, Path=IsPickingRegion, UpdateSourceTrigger=PropertyChanged}" 
                                  SelectionAccepted="SelectControl_SelectionAccepted" SelectionCanceled="SelectControl_SelectionCanceled"/>
             </n:AdornedControl.AdornerContent>
 
@@ -189,9 +188,9 @@
                             <n:SplitButton Grid.Column="5" x:Name="ReselectSplitButton" Style="{StaticResource SplitButton.NoTextNoBorder}" ContentHeight="20" Padding="3"
                                            SelectedIndex="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderModeIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                            Foreground="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderForeground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}">
-                                <n:ImageMenuItem Image="{StaticResource Vector.Crop}" Header="{DynamicResource S.Recorder.Area}" Click="RegionButton_Click"/>
-                                <n:ImageMenuItem Image="{StaticResource Vector.Application}" Header="{DynamicResource S.Recorder.Window}" Click="WindowButton_Click"/>
-                                <n:ImageMenuItem Image="{StaticResource Vector.Monitor}" Header="{DynamicResource S.Recorder.Screen}" Click="FullScreenButton_Click"/>
+                                <n:ImageMenuItem Image="{StaticResource Vector.Crop}" Header="{DynamicResource S.Recorder.Area}" ContentHeight="16" ContentWidth="16" Click="RegionButton_Click"/>
+                                <n:ImageMenuItem Image="{StaticResource Vector.Application}" Header="{DynamicResource S.Recorder.Window}" ContentHeight="16" ContentWidth="16" Click="WindowButton_Click"/>
+                                <n:ImageMenuItem Image="{StaticResource Vector.Monitor}" Header="{DynamicResource S.Recorder.Screen}" ContentHeight="16" ContentWidth="16" Click="FullScreenButton_Click"/>
                             </n:SplitButton>
 
                             <n:ImageButton Grid.Column="6" x:Name="DiscardButton" Content="{DynamicResource Vector.Remove}" Visibility="Collapsed" 

@@ -50,12 +50,12 @@
     <s:String x:Key="Donate">Donera</s:String>
     <s:String x:Key="About">Om</s:String>
     
-    <s:String x:Key="Application.Homepage">Öppningsfönster</s:String>
-    <s:String x:Key="Application.Homepage.StartUp">Flerval fönster (Standard)</s:String>
-    <s:String x:Key="Application.Homepage.Recorder">Skärm inspelning</s:String>
-    <s:String x:Key="Application.Homepage.Webcam">Webbkamera inspelning</s:String>
-    <s:String x:Key="Application.Homepage.Board">Notis inspelning</s:String>
-    <s:String x:Key="Application.Homepage.Editor">Redigerings fönster</s:String>
+    <s:String x:Key="S.Application.Other.Homepage">Öppningsfönster:</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.StartUp">Flerval fönster (Standard)</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Recorder">Skärm inspelning</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Webcam">Webbkamera inspelning</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Board">Notis inspelning</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Editor">Redigerings fönster</s:String>
     
     <s:String x:Key="Application.ScreenRecorder">Skärm inspelning</s:String>
     <s:String x:Key="Application.ScreenRecorder.RecordMouse">Visa muspekaren i inspelningen.</s:String>

@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Windows;
+using ScreenToGif.Util;
 
-namespace ScreenToGif.Util.Model
+namespace ScreenToGif.Model
 {
     [DataContract]
     public class FrameInfo
@@ -44,29 +45,18 @@ namespace ScreenToGif.Util.Model
         /// </summary>
         /// <param name="path">The Bitmap.</param>
         /// <param name="delay">The delay.</param>
-        /// <param name="keyList">The list of pressed keys.</param>
-        /// <param name="index">The index</param>
-        public FrameInfo(string path, int delay, List<SimpleKeyGesture> keyList, int index) : this(path, delay)
-        {
-            KeyList = keyList != null ? new List<SimpleKeyGesture>(keyList) : new List<SimpleKeyGesture>();
-            Index = index;
-        }
-
-        /// <summary>
-        /// Initialises a FrameInfo instance.
-        /// </summary>
-        /// <param name="path">The Bitmap.</param>
-        /// <param name="delay">The delay.</param>
         /// <param name="cursorX">Cursor X position.</param>
         /// <param name="cursorY">Cursor Y positiob</param>
         /// <param name="clicked">True if clicked.</param>
         /// <param name="keyList">The list of pressed keys.</param>
-        public FrameInfo(string path, int delay, int cursorX, int cursorY, bool clicked, List<SimpleKeyGesture> keyList = null) : this(path, delay)
+        /// <param name="index">The index of the frame.</param>
+        public FrameInfo(string path, int delay, int cursorX, int cursorY, bool clicked, List<SimpleKeyGesture> keyList = null, int index = 0) : this(path, delay)
         {
             CursorX = cursorX;
             CursorY = cursorY;
             WasClicked = clicked;
-            KeyList = keyList ?? new List<SimpleKeyGesture>();
+            KeyList = keyList != null ? new List<SimpleKeyGesture>(keyList) : new List<SimpleKeyGesture>();
+            Index = index;
         }
 
         #endregion

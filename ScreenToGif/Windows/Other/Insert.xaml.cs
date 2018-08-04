@@ -11,8 +11,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using ScreenToGif.Controls;
 using ScreenToGif.ImageUtil;
+using ScreenToGif.Model;
 using ScreenToGif.Util;
-using ScreenToGif.Util.Model;
 
 namespace ScreenToGif.Windows.Other
 {

@@ -199,12 +199,12 @@
                                KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='1'}">
                     <n:ImageButton.ContextMenu>
                         <ContextMenu>
-                            <n:ImageMenuItem Header="{DynamicResource Recorder.RecordingOptions}" IsHitTestVisible="False" Image="{StaticResource Vector.Record}" MaxSize="16"/>
+                            <n:ImageMenuItem Header="{DynamicResource Recorder.RecordingOptions}" IsHitTestVisible="False" Image="{StaticResource Vector.Record}" ContentHeight="16" ContentWidth="16"/>
                             <Separator/>
-                            <n:ImageMenuItem Header="{DynamicResource Recorder.Snapshot}" IsCheckable="True" Image="{StaticResource Vector.Camera.Add}" MaxSize="16" 
+                            <n:ImageMenuItem Header="{DynamicResource Recorder.Snapshot}" IsCheckable="True" Image="{StaticResource Vector.Camera.Add}" ContentHeight="16" ContentWidth="16" 
                                              IsChecked="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Mode=TwoWay}" Command="u:Commands.EnableSnapshot"/>
 
-                            <n:ImageMenuItem x:Name="ThinModeMenuItem" Header="{DynamicResource Recorder.ThinMode}" IsCheckable="True" Image="{StaticResource Vector.Application}" MaxSize="16" 
+                            <n:ImageMenuItem x:Name="ThinModeMenuItem" Header="{DynamicResource Recorder.ThinMode}" IsCheckable="True" Image="{StaticResource Vector.Application}" ContentHeight="16" ContentWidth="16"
                                              IsChecked="{Binding RecorderThinMode, Source={x:Static u:UserSettings.All}, Mode=TwoWay}" Command="u:Commands.EnableThinMode"/>
                         </ContextMenu>
                     </n:ImageButton.ContextMenu>

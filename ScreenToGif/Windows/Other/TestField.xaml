@@ -3,10 +3,12 @@
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         xmlns:u="clr-namespace:ScreenToGif.Util"
         xmlns:s="clr-namespace:System;assembly=mscorlib"
+        xmlns:t="clr-namespace:ScreenToGif"
         x:Class="ScreenToGif.Windows.Other.TestField" x:Name="ThisWindow"
         Title="Window Test" Height="500" Width="394" WindowStartupLocation="CenterScreen" Background="#FFFFFFFF" 
         Loaded="WindowTest_OnLoaded" LocationChanged="WindowTest_OnLocationChanged">
 
+    <!--DataContext="{StaticResource AppViewModel}"-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -14,6 +16,30 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
+        <!--<ToggleButton Grid.Column="0" Name="EmpresaButton" Width="22" Content="{StaticResource Vector.Arrow.Blue.Top}" Padding="4" ToolTipService.Placement="Top" />
+        
+        <Popup Grid.Row="1" Placement="Bottom" Margin="0" StaysOpen="False" Width="400" Height="Auto" MinHeight="100" MaxHeight="400" SnapsToDevicePixels="True" AllowsTransparency="True"
+               IsOpen="{Binding IsChecked, ElementName=EmpresaButton}" PlacementTarget="{Binding ElementName=EmpresaButton}" HorizontalOffset="-2">
+            <n:NotificationListControl x:Name="NotificationList"/>
+        </Popup>-->
+        
+        <!--<Button Grid.Row="1" Width="80" Command="{Binding Source={StaticResource AppViewModel}, Path=OpenOptions}"/>-->
+        
+        <!--<Menu x:Name="GridSizeContextMenu">
+            <n:ImageMenuItem Header="Example" StaysOpenOnClick="True">
+                <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Height}" IsHitTestVisible="False" Image="{StaticResource Vector.WidthHeight}" ContentHeight="16" ContentWidth="16"/>
+                <n:IntegerBox x:Name="GridHeightIntegerBox" Minimum="1" Maximum="1000" MinWidth="130" Margin="-10,0,-70,0"
+                              UpdateOnInput="True" Value="{Binding GridSize.Height}" Tag="Editor"/>
+
+                <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Width}" IsHitTestVisible="False" Image="{StaticResource Vector.WidthHeight}" ContentHeight="16" ContentWidth="16"/>
+                <n:IntegerBox x:Name="GridWidthIntegerBox" Minimum="1" Maximum="1000" MinWidth="80" Margin="-10,0,0,0"
+                          UpdateOnInput="True" Value="{Binding GridSize.Width}" Tag="Editor"/>
+                <Separator/>
+
+                <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Apply}" Image="{StaticResource Vector.Ok}" ContentHeight="16" ContentWidth="16"/>
+            </n:ImageMenuItem>
+        </Menu>-->
+        
         <!--<Grid.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>

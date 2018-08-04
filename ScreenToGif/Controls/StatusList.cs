@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using ScreenToGif.Util;
 
 namespace ScreenToGif.Controls
 {
@@ -26,7 +27,7 @@ namespace ScreenToGif.Controls
 
         #endregion
 
-        private void Add(StatusBand.StatusType type, string text, UIElement image = null, Action action = null)
+        private void Add(StatusType type, string text, UIElement image = null, Action action = null)
         {
             var current = Children.OfType<StatusBand>().FirstOrDefault(x => x.Type == type && x.Text == text);
 
@@ -43,13 +44,13 @@ namespace ScreenToGif.Controls
 
             switch (type)
             {
-                case StatusBand.StatusType.Info:
+                case StatusType.Info:
                     band.Info(text, image, action);
                     break;
-                case StatusBand.StatusType.Warning:
+                case StatusType.Warning:
                     band.Warning(text, image, action);
                     break;
-                case StatusBand.StatusType.Error:
+                case StatusType.Error:
                     band.Error(text, image, action);
                     break;
             }
@@ -57,20 +58,20 @@ namespace ScreenToGif.Controls
 
         public void Info(string text, UIElement image = null, Action action = null)
         {
-            Add(StatusBand.StatusType.Info, text, image, action);
+            Add(StatusType.Info, text, image, action);
         }
 
         public void Warning(string text, UIElement image = null, Action action = null)
         {
-            Add(StatusBand.StatusType.Warning, text, image, action);
+            Add(StatusType.Warning, text, image, action);
         }
 
         public void Error(string text, UIElement image = null, Action action = null)
         {
-            Add(StatusBand.StatusType.Error, text, image, action);
+            Add(StatusType.Error, text, image, action);
         }
 
-        public void Remove(StatusBand.StatusType type)
+        public void Remove(StatusType type)
         {
             var list = Children.OfType<StatusBand>().Where(x => x.Type == type).ToList();
 

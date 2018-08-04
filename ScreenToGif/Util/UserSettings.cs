@@ -31,6 +31,8 @@ namespace ScreenToGif.Util
 
         public static UserSettings All { get; } = new UserSettings();
 
+        public string Version => Assembly.GetEntryAssembly().GetName().Version?.ToStringShort() ?? "0.0";
+
         #endregion
 
         static UserSettings()
@@ -314,10 +316,119 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public int LatestFps
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public double RecorderLeft
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        public double RecorderTop
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        public int RecorderWidth
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public int RecorderHeight
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        #endregion
+
+        #region Board
+
+        public int BoardWidth
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public int BoardHeight
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color BoardColor
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public int BoardStylusHeight
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public int BoardStylusWidth
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public StylusTip BoardStylusTip
+        {
+            get => (StylusTip)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool BoardFitToCurve
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool BoardIsHighlighter
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public int BoardEraserHeight
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public int BoardEraserWidth
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public StylusTip BoardEraserStylusTip
+        {
+            get => (StylusTip)GetValue();
+            set => SetValue(value);
+        }
+
         #endregion
 
         #region Options • Application
 
+        /// <summary>
+        /// The homepage of the app:
+        /// 0 - StartUp window.
+        /// 1 - Recorder window.
+        /// 2 - Webcam window.
+        /// 3 - Board window.
+        /// 4 - Editor window.
+        /// 5 - Open minimized.
+        /// </summary>
         public int StartUp
         {
             get => (int)GetValue();
@@ -333,12 +444,6 @@ namespace ScreenToGif.Util
         public bool DetectMouseClicks
         {
             get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
-        public Color ClickColor
-        {
-            get => (Color)GetValue();
             set => SetValue(value);
         }
 
@@ -420,7 +525,25 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public bool NotifyWhileClosingApp
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
         public bool DrawOutlineOutside
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool DisableHardwareAcceleration
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool CheckForTranslationUpdates
         {
             get => (bool)GetValue();
             set => SetValue(value);
@@ -429,6 +552,104 @@ namespace ScreenToGif.Util
         public bool CheckForUpdates 
         {
             get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        #endregion
+
+        #region Options • Interface
+
+        public Color GridColor1
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color GridColor2
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public Rect GridSize
+        {
+            get => (Rect)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color RecorderBackground
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color RecorderForeground
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color BoardGridBackground
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color BoardGridColor1
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color BoardGridColor2
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public Rect BoardGridSize
+        {
+            get => (Rect)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool EditorExtendChrome
+        {
+            get => (bool)GetValue(defaultValue: false);
+            set => SetValue(value);
+        }
+
+        public bool RecorderThinMode
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool TripleClickSelection
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool AutomaticallySizeOnContent
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool AutomaticallyFitImage
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        #endregion
+
+        #region Options • Default Effects
+
+        public ArrayList AutomatedTasksList
+        {
+            get => (ArrayList)GetValue();
             set => SetValue(value);
         }
 
@@ -557,6 +778,34 @@ namespace ScreenToGif.Util
 
         #endregion
 
+        #region Options • Temporary Files
+
+        public string LogsFolder
+        {
+            get => (string)GetValue();
+            set => SetValue(value);
+        }
+
+        public string TemporaryFolder
+        {
+            get => (string)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool AutomaticCleanUp
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public int AutomaticCleanUpDays
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        #endregion
+
         #region Options • Cloud
 
         //Proxy
@@ -667,69 +916,23 @@ namespace ScreenToGif.Util
 
         #endregion
 
-        #region Properties
+        #region Options • Extras
 
-        public int LatestFps
+        public string FfmpegLocation
         {
-            get => (int)GetValue();
+            get => (string)GetValue();
             set => SetValue(value);
         }
 
-        public double RecorderLeft
+        public string GifskiLocation
         {
-            get => (double)GetValue();
+            get => (string)GetValue();
             set => SetValue(value);
         }
 
-        public double RecorderTop
-        {
-            get => (double)GetValue();
-            set => SetValue(value);
-        }
+        #endregion
 
-        public int RecorderWidth
-        {
-            get => (int)GetValue();
-            set => SetValue(value);
-        }
-
-        public int RecorderHeight
-        {
-            get => (int)GetValue();
-            set => SetValue(value);
-        }
-
-        public Color GridColor1
-        {
-            get => (Color)GetValue();
-            set => SetValue(value);
-        }
-
-        public Color GridColor2
-        {
-            get => (Color)GetValue();
-            set => SetValue(value);
-        }
-
-        public Color RecorderBackground
-        {
-            get => (Color)GetValue();
-            set => SetValue(value);
-        }
-
-        public Color RecorderForeground
-        {
-            get => (Color)GetValue();
-            set => SetValue(value);
-        }
-
-
-        public Rect GridSize
-        {
-            get => (Rect)GetValue();
-            set => SetValue(value);
-        }
-
+        #region Editor
 
         public double EditorTop
         {
@@ -761,6 +964,656 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public PasteBehavior PasteBehavior
+        {
+            get => (PasteBehavior)GetValue();
+            set => SetValue(value);
+        }
+
+        #endregion
+
+        #region Editor • New Animation
+
+        public int NewAnimationWidth
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public int NewAnimationHeight
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color NewAnimationColor
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        #endregion
+
+        #region Editor • Caption
+
+        public string CaptionText
+        {
+            get => (string)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool IsCaptionFontGroupExpanded
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public FontFamily CaptionFontFamily
+        {
+            get => (FontFamily)GetValue();
+            set => SetValue(value);
+        }
+
+        public FontStyle CaptionFontStyle
+        {
+            get => (FontStyle)GetValue();
+            set => SetValue(value);
+        }
+
+        public FontWeight CaptionFontWeight
+        {
+            get => (FontWeight)GetValue();
+            set => SetValue(value);
+        }
+
+        public double CaptionFontSize
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color CaptionFontColor
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool IsCaptionOutlineGroupExpanded
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public double CaptionOutlineThickness
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color CaptionOutlineColor
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool IsCaptionLayoutGroupExpanded
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public VerticalAlignment CaptionVerticalAligment
+        {
+            get => (VerticalAlignment)GetValue();
+            set => SetValue(value);
+        }
+
+        public HorizontalAlignment CaptionHorizontalAligment
+        {
+            get => (HorizontalAlignment)GetValue();
+            set => SetValue(value);
+        }
+
+        public double CaptionMargin
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        #endregion
+
+        #region Editor • Key Strokes
+
+        public bool IsKeyStrokesKeysExpanded
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool KeyStrokesIgnoreNonModifiers
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool KeyStrokesEarlier
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public double KeyStrokesEarlierBy
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        public string KeyStrokesSeparator
+        {
+            get => (string)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool KeyStrokesExtended
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public double KeyStrokesDelay
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool IsKeyStrokesFontExpanded
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public FontFamily KeyStrokesFontFamily
+        {
+            get => (FontFamily)GetValue();
+            set => SetValue(value);
+        }
+
+        public FontStyle KeyStrokesFontStyle
+        {
+            get => (FontStyle)GetValue();
+            set => SetValue(value);
+        }
+
+        public FontWeight KeyStrokesFontWeight
+        {
+            get => (FontWeight)GetValue();
+            set => SetValue(value);
+        }
+
+        public double KeyStrokesFontSize
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color KeyStrokesFontColor
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool IsKeyStrokesOutlineExpanded
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public double KeyStrokesOutlineThickness
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color KeyStrokesOutlineColor
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color KeyStrokesBackgroundColor
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool IsKeyStrokesLayoutExpanded
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public VerticalAlignment KeyStrokesVerticalAligment
+        {
+            get => (VerticalAlignment)GetValue();
+            set => SetValue(value);
+        }
+
+        public HorizontalAlignment KeyStrokesHorizontalAligment
+        {
+            get => (HorizontalAlignment)GetValue();
+            set => SetValue(value);
+        }
+
+        public double KeyStrokesMargin
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        public double KeyStrokesPadding
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        #endregion
+
+        #region Editor • Free Text
+
+        public string FreeTextText
+        {
+            get => (string)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool IsFreeTextFontGroupExpanded
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public FontFamily FreeTextFontFamily
+        {
+            get => (FontFamily)GetValue();
+            set => SetValue(value);
+        }
+
+        public FontStyle FreeTextFontStyle
+        {
+            get => (FontStyle)GetValue();
+            set => SetValue(value);
+        }
+
+        public FontWeight FreeTextFontWeight
+        {
+            get => (FontWeight)GetValue();
+            set => SetValue(value);
+        }
+
+        public double FreeTextFontSize
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color FreeTextFontColor
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        #endregion
+
+        #region Editor • Title Frame
+
+        public string TitleFrameText
+        {
+            get => (string)GetValue();
+            set => SetValue(value);
+        }
+        
+        public bool IsTitleFrameFontGroupExpanded
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public int TitleFrameDelay
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public FontFamily TitleFrameFontFamily
+        {
+            get => (FontFamily)GetValue();
+            set => SetValue(value);
+        }
+
+        public FontStyle TitleFrameFontStyle
+        {
+            get => (FontStyle)GetValue();
+            set => SetValue(value);
+        }
+
+        public FontWeight TitleFrameFontWeight
+        {
+            get => (FontWeight)GetValue();
+            set => SetValue(value);
+        }
+
+        public double TitleFrameFontSize
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color TitleFrameFontColor
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public VerticalAlignment TitleFrameVerticalAligment
+        {
+            get => (VerticalAlignment)GetValue();
+            set => SetValue(value);
+        }
+
+        public HorizontalAlignment TitleFrameHorizontalAligment
+        {
+            get => (HorizontalAlignment)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color TitleFrameBackgroundColor
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public double TitleFrameMargin
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        #endregion
+
+        #region Editor • Free Drawing
+
+        public int FreeDrawingPenWidth
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public int FreeDrawingPenHeight
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color FreeDrawingColor
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public StylusTip FreeDrawingStylusTip
+        {
+            get => (StylusTip)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool FreeDrawingIsHighlighter
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool FreeDrawingFitToCurve
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public int FreeDrawingEraserWidth
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public int FreeDrawingEraserHeight
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public StylusTip FreeDrawingEraserStylusTip
+        {
+            get => (StylusTip)GetValue();
+            set => SetValue(value);
+        }
+
+        #endregion
+
+        #region Editor • Mouse Clicks
+
+        public Color MouseClicksColor
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public double MouseClicksWidth
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        public double MouseClicksHeight
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        #endregion
+
+        #region Editor • Progress
+
+        public ProgressType ProgressType
+        {
+            get => (ProgressType)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool IsProgressFontGroupExpanded
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public FontFamily ProgressFontFamily
+        {
+            get => (FontFamily)GetValue();
+            set => SetValue(value);
+        }
+
+        public FontStyle ProgressFontStyle
+        {
+            get => (FontStyle)GetValue();
+            set => SetValue(value);
+        }
+
+        public FontWeight ProgressFontWeight
+        {
+            get => (FontWeight)GetValue();
+            set => SetValue(value);
+        }
+
+        public double ProgressFontSize
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color ProgressFontColor
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color ProgressColor
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public int ProgressPrecision
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool ProgressShowTotal
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public string ProgressFormat
+        {
+            get => (string)GetValue();
+            set => SetValue(value);
+        }
+
+        public double ProgressThickness
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        public VerticalAlignment ProgressVerticalAligment
+        {
+            get => (VerticalAlignment)GetValue();
+            set => SetValue(value);
+        }
+
+        public HorizontalAlignment ProgressHorizontalAligment
+        {
+            get => (HorizontalAlignment)GetValue();
+            set => SetValue(value);
+        }
+
+        public Orientation ProgressOrientation
+        {
+            get => (Orientation)GetValue();
+            set => SetValue(value);
+        }
+
+        #endregion
+
+        #region Editor • Cinemagraph
+
+        public Color CinemagraphColor
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public int CinemagraphEraserWidth
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public int CinemagraphEraserHeight
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public StylusTip CinemagraphEraserStylusTip
+        {
+            get => (StylusTip)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool CinemagraphIsHighlighter
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool CinemagraphFitToCurve
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public int CinemagraphPenWidth
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public int CinemagraphPenHeight
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public StylusTip CinemagraphStylusTip
+        {
+            get => (StylusTip)GetValue();
+            set => SetValue(value);
+        }
+
+        #endregion
+
+        #region Editor • Transitions
+
+        public FadeToType FadeToType
+        {
+            get => (FadeToType)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color FadeToColor
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public int FadeTransitionLength
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public int FadeTransitionDelay
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public int SlideTransitionLength
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public int SlideTransitionDelay
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        #endregion
+
+        #region Insert
+
         public Color InsertFillColor
         {
             get => (Color)GetValue();
@@ -773,180 +1626,11 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
-        #region Options
-
-
-
-        public Color BoardGridBackground
-        {
-            get => (Color)GetValue();
-            set => SetValue(value);
-        }
-
-        public Color BoardGridColor1
-        {
-            get => (Color)GetValue();
-            set => SetValue(value);
-        }
-
-        public Color BoardGridColor2
-        {
-            get => (Color)GetValue();
-            set => SetValue(value);
-        }
-
-        public Rect BoardGridSize
-        {
-            get => (Rect)GetValue();
-            set => SetValue(value);
-        }
-
-        public bool EditorExtendChrome
-        {
-            get => (bool)GetValue(defaultValue: false);
-            set => SetValue(value);
-        }
-
-        public bool RecorderThinMode
-        {
-            get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
-        public bool TripleClickSelection
-        {
-            get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
-        public bool AutomaticallySizeOnContent
-        {
-            get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
-        public bool AutomaticallyFitImage
-        {
-            get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
-        public string LogsFolder
-        {
-            get => (string)GetValue();
-            set => SetValue(value);
-        }
-
-        public string TemporaryFolder
-        {
-            get => (string)GetValue();
-            set => SetValue(value);
-        }
-
-        public bool AutomaticCleanUp
-        {
-            get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
-        public int AutomaticCleanUpDays
-        {
-            get => (int)GetValue();
-            set => SetValue(value);
-        }
-
-        public string FfmpegLocation
-        {
-            get => (string)GetValue();
-            set => SetValue(value);
-        }
-
-        public string GifskiLocation
-        {
-            get => (string)GetValue();
-            set => SetValue(value);
-        }
-
         #endregion
-
-        #region Board
-
-        public int BoardWidth
-        {
-            get => (int)GetValue();
-            set => SetValue(value);
-        }
-
-        public int BoardHeight
-        {
-            get => (int)GetValue();
-            set => SetValue(value);
-        }
-
-        public Color BoardColor
-        {
-            get => (Color)GetValue();
-            set => SetValue(value);
-        }
-
-        public int BoardStylusHeight
-        {
-            get => (int)GetValue();
-            set => SetValue(value);
-        }
-
-        public int BoardStylusWidth
-        {
-            get => (int)GetValue();
-            set => SetValue(value);
-        }
-
-        public StylusTip BoardStylusTip
-        {
-            get => (StylusTip)GetValue();
-            set => SetValue(value);
-        }
-
-        public bool BoardFitToCurve
-        {
-            get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
-        public bool BoardIsHighlighter
-        {
-            get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
-        public int BoardEraserHeight
-        {
-            get => (int)GetValue();
-            set => SetValue(value);
-        }
-
-        public int BoardEraserWidth
-        {
-            get => (int)GetValue();
-            set => SetValue(value);
-        }
-
-        public StylusTip BoardEraserStylusTip
-        {
-            get => (StylusTip)GetValue();
-            set => SetValue(value);
-        }
-
-        #endregion
+        
 
         #region Editor
-
-        public PasteBehavior PasteBehavior
-        {
-            get => (PasteBehavior)GetValue();
-            set => SetValue(value);
-        }
-
+        
         #region Save As
 
         //Type and encoder.
@@ -1405,345 +2089,52 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
-        #endregion
+        //Photoshop > Save options.
+        public bool PickLocationPhotoshop
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
 
-        #region Caption
+        public bool OverwriteOnSavePhotoshop
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
 
-        public string CaptionText
+        public bool SaveAsProjectTooPhotoshop
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool SaveToClipboardPhotoshop
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public CopyType LatestCopyTypePhotoshop
+        {
+            get => (CopyType)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool ExecuteCustomCommandsPhotoshop
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public string CustomCommandsPhotoshop
         {
             get => (string)GetValue();
             set => SetValue(value);
         }
 
-        public FontFamily CaptionFontFamily
-        {
-            get => (FontFamily)GetValue();
-            set => SetValue(value);
-        }
-
-        public FontStyle CaptionFontStyle
-        {
-            get => (FontStyle)GetValue();
-            set => SetValue(value);
-        }
-
-        public FontWeight CaptionFontWeight
-        {
-            get => (FontWeight)GetValue();
-            set => SetValue(value);
-        }
-
-        public double CaptionFontSize
-        {
-            get => (double)GetValue();
-            set => SetValue(value);
-        }
-
-        public Color CaptionFontColor
-        {
-            get => (Color)GetValue();
-            set => SetValue(value);
-        }
-
-        public double CaptionOutlineThickness
-        {
-            get => (double)GetValue();
-            set => SetValue(value);
-        }
-
-        public Color CaptionOutlineColor
-        {
-            get => (Color)GetValue();
-            set => SetValue(value);
-        }
-
-        public VerticalAlignment CaptionVerticalAligment
-        {
-            get => (VerticalAlignment)GetValue();
-            set => SetValue(value);
-        }
-
-        public HorizontalAlignment CaptionHorizontalAligment
-        {
-            get => (HorizontalAlignment)GetValue();
-            set => SetValue(value);
-        }
-
-        public double CaptionMargin
-        {
-            get => (double)GetValue();
-            set => SetValue(value);
-        }
-
         #endregion
+        
 
-        #region Free Text
-
-        public string FreeTextText
-        {
-            get => (string)GetValue();
-            set => SetValue(value);
-        }
-
-        public FontFamily FreeTextFontFamily
-        {
-            get => (FontFamily)GetValue();
-            set => SetValue(value);
-        }
-
-        public FontStyle FreeTextFontStyle
-        {
-            get => (FontStyle)GetValue();
-            set => SetValue(value);
-        }
-
-        public FontWeight FreeTextFontWeight
-        {
-            get => (FontWeight)GetValue();
-            set => SetValue(value);
-        }
-
-        public double FreeTextFontSize
-        {
-            get => (double)GetValue();
-            set => SetValue(value);
-        }
-
-        public Color FreeTextFontColor
-        {
-            get => (Color)GetValue();
-            set => SetValue(value);
-        }
-
-        #endregion
-
-        #region New Animation
-
-        public int NewAnimationWidth
-        {
-            get => (int)GetValue();
-            set => SetValue(value);
-        }
-
-        public int NewAnimationHeight
-        {
-            get => (int)GetValue();
-            set => SetValue(value);
-        }
-
-        public Color NewAnimationColor
-        {
-            get => (Color)GetValue();
-            set => SetValue(value);
-        }
-
-        #endregion
-
-        #region Title Frame
-
-        public string TitleFrameText
-        {
-            get => (string)GetValue();
-            set => SetValue(value);
-        }
-
-        public int TitleFrameDelay
-        {
-            get => (int)GetValue();
-            set => SetValue(value);
-        }
-
-        public FontFamily TitleFrameFontFamily
-        {
-            get => (FontFamily)GetValue();
-            set => SetValue(value);
-        }
-
-        public FontStyle TitleFrameFontStyle
-        {
-            get => (FontStyle)GetValue();
-            set => SetValue(value);
-        }
-
-        public FontWeight TitleFrameFontWeight
-        {
-            get => (FontWeight)GetValue();
-            set => SetValue(value);
-        }
-
-        public double TitleFrameFontSize
-        {
-            get => (double)GetValue();
-            set => SetValue(value);
-        }
-
-        public Color TitleFrameFontColor
-        {
-            get => (Color)GetValue();
-            set => SetValue(value);
-        }
-
-        public VerticalAlignment TitleFrameVerticalAligment
-        {
-            get => (VerticalAlignment)GetValue();
-            set => SetValue(value);
-        }
-
-        public HorizontalAlignment TitleFrameHorizontalAligment
-        {
-            get => (HorizontalAlignment)GetValue();
-            set => SetValue(value);
-        }
-
-        public Color TitleFrameBackgroundColor
-        {
-            get => (Color)GetValue();
-            set => SetValue(value);
-        }
-
-        public double TitleFrameMargin
-        {
-            get => (double)GetValue();
-            set => SetValue(value);
-        }
-
-        #endregion
-
-        #region Key Strokes
-
-        public bool IsKeyStrokesKeysExpanded
-        {
-            get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
-        public bool KeyStrokesIgnoreNonModifiers
-        {
-            get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
-        public bool KeyStrokesEarlier
-        {
-            get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
-        public double KeyStrokesEarlierBy
-        {
-            get => (double)GetValue();
-            set => SetValue(value);
-        }
-
-        public string KeyStrokesSeparator
-        {
-            get => (string)GetValue();
-            set => SetValue(value);
-        }
-
-        public bool KeyStrokesExtended
-        {
-            get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
-        public double KeyStrokesDelay
-        {
-            get => (double)GetValue();
-            set => SetValue(value);
-        }
-
-        public bool IsKeyStrokesFontExpanded
-        {
-            get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
-        public FontFamily KeyStrokesFontFamily
-        {
-            get => (FontFamily)GetValue();
-            set => SetValue(value);
-        }
-
-        public FontStyle KeyStrokesFontStyle
-        {
-            get => (FontStyle)GetValue();
-            set => SetValue(value);
-        }
-
-        public FontWeight KeyStrokesFontWeight
-        {
-            get => (FontWeight)GetValue();
-            set => SetValue(value);
-        }
-
-        public double KeyStrokesFontSize
-        {
-            get => (double)GetValue();
-            set => SetValue(value);
-        }
-
-        public Color KeyStrokesFontColor
-        {
-            get => (Color)GetValue();
-            set => SetValue(value);
-        }
-
-        public bool IsKeyStrokesOutlineExpanded
-        {
-            get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
-        public double KeyStrokesOutlineThickness
-        {
-            get => (double)GetValue();
-            set => SetValue(value);
-        }
-
-        public Color KeyStrokesOutlineColor
-        {
-            get => (Color)GetValue();
-            set => SetValue(value);
-        }
-
-        public Color KeyStrokesBackgroundColor
-        {
-            get => (Color)GetValue();
-            set => SetValue(value);
-        }
-
-        public bool IsKeyStrokesLayoutExpanded
-        {
-            get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
-        public VerticalAlignment KeyStrokesVerticalAligment
-        {
-            get => (VerticalAlignment)GetValue();
-            set => SetValue(value);
-        }
-
-        public HorizontalAlignment KeyStrokesHorizontalAligment
-        {
-            get => (HorizontalAlignment)GetValue();
-            set => SetValue(value);
-        }
-
-        public double KeyStrokesMargin
-        {
-            get => (double)GetValue();
-            set => SetValue(value);
-        }
-
-        public double KeyStrokesPadding
-        {
-            get => (double)GetValue();
-            set => SetValue(value);
-        }
-
-        #endregion
 
         #region Watermark
 
@@ -1829,64 +2220,6 @@ namespace ScreenToGif.Util
 
         #endregion
 
-        #region Free Drawing
-
-        public int FreeDrawingPenWidth
-        {
-            get => (int)GetValue();
-            set => SetValue(value);
-        }
-
-        public int FreeDrawingPenHeight
-        {
-            get => (int)GetValue();
-            set => SetValue(value);
-        }
-
-        public Color FreeDrawingColor
-        {
-            get => (Color)GetValue();
-            set => SetValue(value);
-        }
-
-        public StylusTip FreeDrawingStylusTip
-        {
-            get => (StylusTip)GetValue();
-            set => SetValue(value);
-        }
-
-        public bool FreeDrawingIsHighlighter
-        {
-            get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
-        public bool FreeDrawingFitToCurve
-        {
-            get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
-        public int FreeDrawingEraserWidth
-        {
-            get => (int)GetValue();
-            set => SetValue(value);
-        }
-
-        public int FreeDrawingEraserHeight
-        {
-            get => (int)GetValue();
-            set => SetValue(value);
-        }
-
-        public StylusTip FreeDrawingEraserStylusTip
-        {
-            get => (StylusTip)GetValue();
-            set => SetValue(value);
-        }
-
-        #endregion
-
         #region Reduce 
 
         public int ReduceFactor
@@ -1941,215 +2274,18 @@ namespace ScreenToGif.Util
 
         #endregion
 
-        #region Cinemagraph
-
-        public Color CinemagraphColor
-        {
-            get => (Color)GetValue();
-            set => SetValue(value);
-        }
-
-        public int CinemagraphEraserWidth
-        {
-            get => (int)GetValue();
-            set => SetValue(value);
-        }
-
-        public int CinemagraphEraserHeight
-        {
-            get => (int)GetValue();
-            set => SetValue(value);
-        }
-
-        public StylusTip CinemagraphEraserStylusTip
-        {
-            get => (StylusTip)GetValue();
-            set => SetValue(value);
-        }
-
-        public bool CinemagraphIsHighlighter
-        {
-            get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
-        public bool CinemagraphFitToCurve
-        {
-            get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
-        public int CinemagraphPenWidth
-        {
-            get => (int)GetValue();
-            set => SetValue(value);
-        }
-
-        public int CinemagraphPenHeight
-        {
-            get => (int)GetValue();
-            set => SetValue(value);
-        }
-
-        public StylusTip CinemagraphStylusTip
-        {
-            get => (StylusTip)GetValue();
-            set => SetValue(value);
-        }
-
         #endregion
 
-        #region Progress
-
-        public Color ProgressColor
-        {
-            get => (Color)GetValue();
-            set => SetValue(value);
-        }
-
-        public Color ProgressFontColor
-        {
-            get => (Color)GetValue();
-            set => SetValue(value);
-        }
-
-        public FontFamily ProgressFontFamily
-        {
-            get => (FontFamily)GetValue();
-            set => SetValue(value);
-        }
-
-        public FontStyle ProgressFontStyle
-        {
-            get => (FontStyle)GetValue();
-            set => SetValue(value);
-        }
-
-        public FontWeight ProgressFontWeight
-        {
-            get => (FontWeight)GetValue();
-            set => SetValue(value);
-        }
-
-        public double ProgressFontSize
-        {
-            get => (double)GetValue();
-            set => SetValue(value);
-        }
-
-        public VerticalAlignment ProgressVerticalAligment
-        {
-            get => (VerticalAlignment)GetValue();
-            set => SetValue(value);
-        }
-
-        public HorizontalAlignment ProgressHorizontalAligment
-        {
-            get => (HorizontalAlignment)GetValue();
-            set => SetValue(value);
-        }
-
-        public Orientation ProgressOrientation
-        {
-            get => (Orientation)GetValue();
-            set => SetValue(value);
-        }
-
-        public int ProgressPrecision
-        {
-            get => (int)GetValue();
-            set => SetValue(value);
-        }
-
-        public string ProgressFormat
-        {
-            get => (string)GetValue();
-            set => SetValue(value);
-        }
-
-        public double ProgressThickness
-        {
-            get => (double)GetValue();
-            set => SetValue(value);
-        }
-
-        public bool ProgressShowTotal
-        {
-            get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
-        public ProgressType ProgressType
-        {
-            get => (ProgressType)GetValue();
-            set => SetValue(value);
-        }
-
-        #endregion
-
-        #region Transitions
-
-        public FadeToType FadeToType
-        {
-            get => (FadeToType)GetValue();
-            set => SetValue(value);
-        }
-
-        public Color FadeToColor
-        {
-            get => (Color)GetValue();
-            set => SetValue(value);
-        }
-
-        public int FadeTransitionLength
-        {
-            get => (int)GetValue();
-            set => SetValue(value);
-        }
-
-        public int FadeTransitionDelay
-        {
-            get => (int)GetValue();
-            set => SetValue(value);
-        }
-
-        public int SlideTransitionLength
-        {
-            get => (int)GetValue();
-            set => SetValue(value);
-        }
-
-        public int SlideTransitionDelay
-        {
-            get => (int)GetValue();
-            set => SetValue(value);
-        }
-
-        #endregion
-
-        #endregion
-
-        public string Version
-        {
-            get
-            {
-                var version = Assembly.GetEntryAssembly().GetName().Version;
-                var result = $"{version.Major}.{version.Minor}";
-
-                if (version.Build > 0)
-                    result += $".{version.Build}";
-
-                if (version.Revision > 0)
-                    result += $".{version.Revision}";
-
-                return result;
-            }
-        }
-
-        #endregion
 
 
         #region Obsolete
+
+        [Obsolete]
+        public Color ClickColor
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
 
         [Obsolete]
         public bool FullScreenMode

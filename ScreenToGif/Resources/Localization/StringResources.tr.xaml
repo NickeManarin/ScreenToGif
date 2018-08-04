@@ -50,12 +50,12 @@
     <s:String x:Key="Donate">Bağış Yap</s:String>
     <s:String x:Key="About">Hakkında</s:String>
     
-    <s:String x:Key="Application.Homepage">Anasayfa</s:String>
-    <s:String x:Key="Application.Homepage.StartUp">Başlangıç Ekranı</s:String>
-    <s:String x:Key="Application.Homepage.Recorder">Ekran Kaydedici</s:String>
-    <s:String x:Key="Application.Homepage.Webcam">Webcam Kaydedici</s:String>
-    <s:String x:Key="Application.Homepage.Board">Pano Kaydedici</s:String>
-    <s:String x:Key="Application.Homepage.Editor">Editör Penceresi</s:String>
+    <s:String x:Key="S.Application.Other.Homepage">Anasayfa:</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.StartUp">Başlangıç Ekranı</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Recorder">Ekran Kaydedici</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Webcam">Webcam Kaydedici</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Board">Pano Kaydedici</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Editor">Editör Penceresi</s:String>
     
     <s:String x:Key="Application.ScreenRecorder">Ekran Kaydedici</s:String>
     <s:String x:Key="Application.ScreenRecorder.RecordMouse">Fare imlecini kayıtta göster.</s:String>

@@ -59,12 +59,12 @@
     <s:String x:Key="Donate">Donate</s:String>
     <s:String x:Key="About">О программе</s:String>
     
-    <s:String x:Key="Application.Homepage">Стартовая страница</s:String>
-    <s:String x:Key="Application.Homepage.StartUp">Окно приветствия</s:String>
-    <s:String x:Key="Application.Homepage.Recorder">Запись с экрана</s:String>
-    <s:String x:Key="Application.Homepage.Webcam">Запись с вебкамеры</s:String>
-    <s:String x:Key="Application.Homepage.Board">Запись с доски</s:String>
-    <s:String x:Key="Application.Homepage.Editor">Окно редактора</s:String>
+    <s:String x:Key="S.Application.Other.Homepage">Стартовая страница:</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.StartUp">Окно приветствия</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Recorder">Запись с экрана</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Webcam">Запись с вебкамеры</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Board">Запись с доски</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Editor">Окно редактора</s:String>
     
     <s:String x:Key="Application.ScreenRecorder">Запись с экрана</s:String>
     <s:String x:Key="Application.ScreenRecorder.RecordMouse">Показывать курсор на записи</s:String>

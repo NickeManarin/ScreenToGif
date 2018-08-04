@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Windows.Input;
@@ -89,6 +90,7 @@ namespace ScreenToGif.Util
             }
         }
 
+        [DebuggerStepThrough]
         private void ThreadPreprocessMessageMethod(ref MSG msg, ref bool handled)
         {
             if (handled || msg.message != WmHotKey || (int)msg.wParam != _id)

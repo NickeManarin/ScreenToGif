@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using ScreenToGif.Util.Model;
+using ScreenToGif.Model;
 
 namespace ScreenToGif.Util
 {
@@ -41,7 +41,7 @@ namespace ScreenToGif.Util
                     File.Copy(frameInfo.Path, filename, true);
 
                     //Create the new object and add to the list.
-                    newList.Add(new FrameInfo(filename, frameInfo.Delay, frameInfo.KeyList));
+                    newList.Add(new FrameInfo(filename, frameInfo.Delay, frameInfo.CursorX, frameInfo.CursorY, frameInfo.WasClicked, frameInfo.KeyList, frameInfo.Index));
                 }
 
                 //Adds the current copied list to the clipboard.
@@ -78,7 +78,7 @@ namespace ScreenToGif.Util
                     File.Delete(frameInfo.Path);
 
                     //Create the new object and add to the list.
-                    newList.Add(new FrameInfo(filename, frameInfo.Delay, frameInfo.KeyList));
+                    newList.Add(new FrameInfo(filename, frameInfo.Delay, frameInfo.CursorX, frameInfo.CursorY, frameInfo.WasClicked, frameInfo.KeyList, frameInfo.Index));
                 }
 
                 //Adds the current cut list to the clipboard.
@@ -111,7 +111,7 @@ namespace ScreenToGif.Util
                 File.Copy(frameInfo.Path, filename, true);
 
                 //Create the new object and add to the list.
-                newList.Add(new FrameInfo(filename, frameInfo.Delay, frameInfo.KeyList));
+                newList.Add(new FrameInfo(filename, frameInfo.Delay, frameInfo.CursorX, frameInfo.CursorY, frameInfo.WasClicked, frameInfo.KeyList, frameInfo.Index));
             }
 
             return newList;

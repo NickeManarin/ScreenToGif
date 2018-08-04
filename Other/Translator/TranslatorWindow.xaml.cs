@@ -228,7 +228,7 @@ namespace Translator
             if (!result.HasValue || !result.Value) return;
 
             //Replaces the special chars.
-            var text = await Task.Factory.StartNew(() => File.ReadAllText(ofd.FileName, Encoding.UTF8).Replace("&#", "&amp;#"));
+            var text = await Task.Factory.StartNew(() => File.ReadAllText(ofd.FileName, Encoding.UTF8).Replace("&#", "&amp;#").Replace("<!--<!--", "<!--").Replace("-->-->", "-->"));
             await Task.Factory.StartNew(() => File.WriteAllText(ofd.FileName, text, Encoding.UTF8));
 
             var dictionary = await Task.Factory.StartNew(() => new ResourceDictionary { Source = new Uri(Path.GetFullPath(ofd.FileName), UriKind.Absolute) });
@@ -339,9 +339,7 @@ namespace Translator
 
                         var json = await Task<XElement>.Factory.StartNew(() => XElement.Load(jsonReader));
 
-                        var element = json.XPathSelectElement("/").Elements().Where(x =>
-                            x.XPathSelectElement("name").Value.EndsWith(culture + ".xaml")
-                        ).FirstOrDefault();
+                        var element = json.XPathSelectElement("/").Elements().FirstOrDefault(x => x.XPathSelectElement("name").Value.EndsWith(culture + ".xaml"));
 
                         if (element == null)
                             throw new WebException("File not found");
@@ -593,7 +591,7 @@ namespace Translator
                 {
                     var keyIndex = lines[i].IndexOf(":Key=", StringComparison.Ordinal);
 
-                    if (keyIndex == -1)
+                    if (lines[i].TrimStart().StartsWith("<!--") || keyIndex == -1)
                         continue;
 
                     var keyAux = lines[i].Substring(keyIndex + 6);
@@ -626,12 +624,12 @@ namespace Translator
             //Using HashSet, because we can check if it contains string in O(1) time
             //Only creating it takes some time,
             //but it's better than performing Contains multiple times on the list in the loop below
-            HashSet<string> cultureHash = new HashSet<string>(_cultures);
+            var cultureHash = new HashSet<string>(_cultures);
 
             if (cultureHash.Contains(cultureName))
                 return cultureName;
 
-            CultureInfo t = CultureInfo.GetCultureInfo(cultureName);
+            var t = CultureInfo.GetCultureInfo(cultureName);
 
             while (t != CultureInfo.InvariantCulture)
             {
@@ -646,12 +644,12 @@ namespace Translator
 
         private async Task<IEnumerable<string>> GetProperCulturesAsync()
         {
-            IEnumerable<string> allCodes = await Task.Factory.StartNew(() => CultureInfo.GetCultures(CultureTypes.AllCultures).Where(x => !string.IsNullOrEmpty(x.Name)).Select(x => x.Name));
+            var allCodes = await Task.Factory.StartNew(() => CultureInfo.GetCultures(CultureTypes.AllCultures).Where(x => !string.IsNullOrEmpty(x.Name)).Select(x => x.Name));
 
             try
             {
-                IEnumerable<string> downloadedCodes = await GetLanguageCodesAsync();
-                IEnumerable<string> properCodes = await Task.Factory.StartNew(() => allCodes.Where(x => downloadedCodes.Contains(x)));
+                var downloadedCodes = await GetLanguageCodesAsync();
+                var properCodes = await Task.Factory.StartNew(() => allCodes.Where(x => downloadedCodes.Contains(x)));
                 if (properCodes == null)
                     return allCodes;
 
@@ -694,9 +692,7 @@ namespace Translator
                     var json = await Task<XElement>.Factory.StartNew(() => XElement.Load(jsonReader));
                     var languages = json.Elements();
 
-                    return await Task.Factory.StartNew(() => languages.Where(x =>
-                    x.XPathSelectElement("defs").Value != "0"
-                    ).Select(x => x.XPathSelectElement("lang").Value));
+                    return await Task.Factory.StartNew(() => languages.Where(x => x.XPathSelectElement("defs").Value != "0").Select(x => x.XPathSelectElement("lang").Value));
                 }
             }
         }
@@ -722,9 +718,7 @@ namespace Translator
 
                     var json = await Task<XElement>.Factory.StartNew(() => XElement.Load(jsonReader));
 
-                    return await Task.Factory.StartNew(() => json.XPathSelectElement("resources").Elements().Where(x =>
-                    x.XPathSelectElement("name").Value == "ietf-language-tags_json"
-                    ).First().XPathSelectElement("path").Value);
+                    return await Task.Factory.StartNew(() => json.XPathSelectElement("resources").Elements().First(x => x.XPathSelectElement("name").Value == "ietf-language-tags_json").XPathSelectElement("path").Value);
                 }
             }
         }

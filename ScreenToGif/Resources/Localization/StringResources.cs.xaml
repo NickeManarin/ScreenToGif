@@ -1,0 +1,979 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="clr-namespace:System;assembly=mscorlib"
+                    xml:space="preserve">
+    
+    <!--To use a new line: &#x0d;-->
+    <!--Or CarriageReturn + NewLine: &#x0d;&#x0a; or &#10;--> 
+    <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
+    
+    <!--General-->
+    <s:String x:Key="Ok">Ok</s:String>
+    <s:String x:Key="Back">Zpět</s:String>
+    <s:String x:Key="Cancel">Zrušit</s:String>
+    <s:String x:Key="Yes">Ano</s:String>
+    <s:String x:Key="No">Ne</s:String>
+    <s:String x:Key="Frame">Snímek</s:String>
+    <s:String x:Key="Suppress">Potlačit</s:String>
+    <s:String x:Key="Preview">Náhled</s:String>
+    <s:String x:Key="S.Add">Přidat</s:String>
+    <s:String x:Key="S.Id">Id</s:String>
+    <s:String x:Key="S.Title">Název</s:String>
+    <s:String x:Key="S.Description">Popis</s:String>
+
+    <!--Notification Icon-->
+    <s:String x:Key="S.NewRecording">Nový záznam obrazovky</s:String>
+    <s:String x:Key="S.NewWebcamRecording">Nový záznam webové kamery</s:String>
+    <s:String x:Key="S.NewBoardRecording">Nový záznam plátna</s:String>
+    <s:String x:Key="S.Exit">Ukončení</s:String>
+
+    <!--Application-->
+    <s:String x:Key="Application.Exiting.Title">Ukončení ScreenToGif</s:String>
+    <s:String x:Key="Application.Exiting.Instruction">Jste si jisti, že chcete aplikaci ukončit?</s:String>
+    <s:String x:Key="Application.Exiting.Message">Všechna okna budou uzavřena a ikona bude odstraněna z hlavní lišty.</s:String>
+    
+    <!--Error messages--> 
+    <s:String x:Key="S.Crash">Ach ne, aplikace přestala pracovat :(</s:String>
+    
+    <!--StartUp Page-->
+    <s:String x:Key="Title.StartUp">ScreenToGif - StartUp</s:String>
+    <s:String x:Key="Recorder">Záznamník</s:String>
+    <s:String x:Key="Webcam">Webová kamera</s:String>
+    <s:String x:Key="Board">Plátno</s:String>
+    <s:String x:Key="Editor">Editor</s:String>
+    <s:String x:Key="Options">Nastavení</s:String>
+    <s:String x:Key="Help">Nápověda</s:String>
+    <s:String x:Key="NewRelease">K dispozici je nová verze • {0}</s:String>
+    <s:String x:Key="NewRelease.Tooltip">Stáhnout nejnovější verzi ScreenToGif.</s:String>
+    <s:String x:Key="Tooltip.Recorder">Otevře záznamník plochy, který umožňuje nahrát vybranou plochu.</s:String>
+    <s:String x:Key="Tooltip.Webcam">Otevře záznamník webové kamery.</s:String>
+    <s:String x:Key="Tooltip.Board">Otevře záznamník plátna, který umožňuje nahrát kresbu.</s:String>
+    <s:String x:Key="Tooltip.Editor">Otevře okno editoru, centrální bod aplikace, ve kterém lze editovat nové záznamy.</s:String>
+
+    <!--Update Page-->
+    <s:String x:Key="Update">Aktualizace</s:String>
+    <s:String x:Key="Update.NewRelease">Nová verze!</s:String>
+    <s:String x:Key="Update.NewRelease.Verbose">Je k dispozici nová verze {0}! Klikněte zde pro více informací.</s:String>
+    <s:String x:Key="Download">Stáhnout</s:String>
+    <s:String x:Key="Update.Portable">Přenosný</s:String>
+    <s:String x:Key="Update.Installer">Instalační program</s:String>
+    <s:String x:Key="Update.Filename.Warning">Vyberte jiné umístění nebo jiný název souboru</s:String>
+    <s:String x:Key="Update.Filename.Warning2">Nelze přepsat spustitelný soubor novou verzí, vyberte jiný název souboru.</s:String>
+    <s:String x:Key="Update.Install.Header">Chcete nainstalovat novou verzi?</s:String>
+    <s:String x:Key="Update.Install.Description">Aplikace bude uzavřena a instalační soubor spuštěn.</s:String>
+    <s:String x:Key="Update.CloseThis">Chcete aplikaci uzavřít?</s:String>
+    <s:String x:Key="Update.CloseThis.Detail">Toto je starší verze. Nová verze již byla stažena.</s:String>
+    
+    <!--Options Page-->
+    <s:String x:Key="Title.Options">ScreenToGif - Nastavení</s:String>
+    <s:String x:Key="Application">Aplikace</s:String>
+    <s:String x:Key="Interface">Rozhraní</s:String>
+    <s:String x:Key="S.Shortcuts">Klávesové zkratky</s:String>
+    <s:String x:Key="Image">Obrázek</s:String>
+    <s:String x:Key="Language">Jazyk</s:String>
+    <s:String x:Key="TemporaryFiles">Dočasné soubory</s:String>
+    <s:String x:Key="Extras">Doplňky</s:String>
+    <s:String x:Key="Clouds">Přenos dat</s:String>
+    <s:String x:Key="Donate">Přispět</s:String>
+    <s:String x:Key="About">O aplikaci</s:String>
+    
+    <s:String x:Key="S.Application.Other.Homepage">Domovská stránka:</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.StartUp">Úvodní nabídka</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Recorder">Záznamník plochy</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Webcam">Záznamník web. kamery</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Board">Záznamník plátna</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Editor">Okno editoru</s:String>
+    
+    <s:String x:Key="Application.ScreenRecorder">Záznamník plochy</s:String>
+    <s:String x:Key="Application.ScreenRecorder.RecordMouse">Zobrazit kurzor myši v nahraném záznamu.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.RecordClicks">Rozpoznání kliknutí myší.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">Zvolte barvu kurzoru</s:String>
+    <s:String x:Key="Application.ScreenRecorder.PreStart">Použít odpočítávání před nahráváním.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.PreStart.Info">(v sekundách, čeká než začne nahrávat)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.StepRecording">Povolit režim snímků.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Každý snímek bude zachycen ručně)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Pevná rychlost snímků.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Konstantní zpoždění, které se při nahrávání nemění)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Povolit asynchroní nahrávání.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(Snižuje opoždění rozhraní při nahrávání)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.NewRecorder">Povolit nové UI.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(Nahradí staré uživatelské rozhraní)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.Magnifier">Povolit lupu obrazovky.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(Umožňuje zvětšování při výběru v nahrávané oblasti)</s:String>
+    
+    <s:String x:Key="Application.Other">Další</s:String>
+    <s:String x:Key="Application.Other.SystemTray">Zobraz aplikaci v systémové liště (oznamovací oblast).</s:String>
+    <s:String x:Key="Application.Other.LeaveOpen">Nechej aplikaci otevřenou i v případě, že jsou všechna okna zavřena.</s:String>
+    <s:String x:Key="Application.Other.NotifyFrameDeletion">Vyžaduj potvrzení před smazáním snímků.</s:String>
+    <s:String x:Key="Application.Other.NotifyProjectDiscard">Vyžaduj potvrzení před odstraněním projektu.</s:String>
+    <s:String x:Key="Application.Other.NotifyWhileClosingEditor">Vyžaduj potvrzení před uzavřením Editoru (v případě, že existuje otevřený projekt).</s:String>
+    <s:String x:Key="Application.Other.DrawOutlineOutside">Přidání obrysu okolo textu.</s:String>
+    <s:String x:Key="Application.Other.CheckForUpdates">Kontrola aktualizací.</s:String>
+    
+    <s:String x:Key="Interface.EditorBackground">Pozadí editoru</s:String>
+    <s:String x:Key="Interface.Recorder">Motiv záznamníku</s:String>
+    <s:String x:Key="Interface.Background">Pozadí</s:String>
+    <s:String x:Key="Interface.Foreground">Popředí</s:String>
+    <s:String x:Key="Interface.BoardBackground">Pozadí plátna</s:String>
+    <s:String x:Key="Interface.EditorBackground.Scheme">Barevné schéma</s:String>
+    <s:String x:Key="Interface.EditorBackground.Scheme.VeryLight">Světlejší</s:String>
+    <s:String x:Key="Interface.EditorBackground.Scheme.Light">Světlé</s:String>
+    <s:String x:Key="Interface.EditorBackground.Scheme.Medium">Střední</s:String>
+    <s:String x:Key="Interface.EditorBackground.Scheme.Dark">Tmavé</s:String>
+    <s:String x:Key="Interface.EditorBackground.Scheme.Custom">Vlastní</s:String>
+    
+    <s:String x:Key="Interface.EditorBackground.GridSize">Velikost mřížky</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.VerySmall">Velmi malé</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.Small">Malé</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.Medium">Střední</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.Large">Velké</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.VeryLarge">Ještě větší</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.ILikeBigSquares">Libí se mi velké čtverce</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.ImBlind">Jsem slepý</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.Custom">Vlastní</s:String>
+
+    <s:String x:Key="Interface.EditorBackground.BaseColor">Základní barva</s:String>
+    <s:String x:Key="Interface.EditorBackground.EvenColor">Barva sudá</s:String>
+    <s:String x:Key="Interface.EditorBackground.OddColor">Barva lichá</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.Height">Výška</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.Width">Šířka</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.Apply">Uložit</s:String>
+
+    <s:String x:Key="Interface.Other">Další</s:String>
+    <s:String x:Key="Interface.Other.ExtendChrome">Rozšířit záhlaví (okno chrome).</s:String>
+    <s:String x:Key="Interface.Other.HideTitleBar">Skrýt záhlaví (tenký režim).</s:String>
+    <s:String x:Key="Interface.Other.TripleClickSelection">Povolit trojklik pro výběr textu.</s:String>
+    <s:String x:Key="Interface.Other.AutomaticallySizeOnContent">Automatické nastavení velikosti okna dle velikosti snímku.</s:String>
+    <s:String x:Key="Interface.Other.AutomaticallyFitImage">Automatické nastavení přiblížení snímku dle velikosti okna.</s:String>
+  
+    <s:String x:Key="S.Shortcuts.Global">Globální</s:String>
+    <s:String x:Key="S.Shortcuts.Global.ScreenRecorder">Záznam plochy:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.ScreenRecorder.Info">(Otevře záznamník obrazovky)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.WebcamRecorder">Záznam webové kamery:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.WebcamRecorder.Info">(Otevře záznamník webové kamery)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.BoardRecorder">Záznam plátna:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.BoardRecorder.Info">(Otevře záznamník plátna a umožňuje nahrát kresby)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenEditor">Editor:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenEditor.Info">(Otevře další okno editoru)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenOptions">Nastavení:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenOptions.Info">(Otevře okno nastavení. Lze otevřít pouze jedno)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.Exit">Ukončení:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.Exit.Info">(Uzavře všechna okna a odstraní aplikaci ze systémové lišty)</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders">Záznamníky</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.StartPause">Spustit/Pozastavit:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.StartPause.Info">(Spustí nebo pozastaví nahrávání. Používá se k pořízení snímků, pokud je režim snímků aktivován)</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Stop">Zastavit:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Stop.Info">(Zastaví nahrávání a otevře editor)</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Discard">Zahodit:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Discard.Info">(Zahodit aktivní záznam, pokud je pozastaven)</s:String>
+    <s:String x:Key="S.Shortcuts.Info">Kliknutím nastavíte zaměření na klávesnici, a poté stiskněte požadované klávesy a modifikátory.&#10;Některé kombinace kláves nejsou povoleny.</s:String>
+    
+    <s:String x:Key="Language.AppLanguage">Jazyk aplikace</s:String>
+    <s:String x:Key="Language.AppLanguage.AutoDetect">Zjištěný automaticky</s:String>
+    <s:String x:Key="Language.AppLanguage.AutoDetect.Author">Aktuální jazyk OS (pokud je k dispozici)</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence1.1">Chtěli byste přeložit mou aplikaci?</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence1.2">Kliknutím sem přejdete na stránku obsahující pokyny a odkaz na stažení aplikace pro překlad.</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence2.1">Následně</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence2.2">klikněte sem k importu</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence2.3">a testu nového překladu.</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence3.1">Po dokončení překladu jej odešlete</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence3.2">emailem (nicke@outlook.com.br)</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence3.3">.</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.ResourceLink.Tooltip">Kliknutím otevřete webovou stránku s pokyny.</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.ImportLink.Tooltip">Otevře okno pro import</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.EmailLink.Tooltip">Otevře vaši e-mailovou aplikaci</s:String>
+    
+    <s:String x:Key="TempFiles.FilesAndFolders">Dočasné soubory a složky</s:String>
+    <s:String x:Key="TempFiles.FilesAndFolders.Count">{0} složky a {1} soubory</s:String>
+    <s:String x:Key="TempFiles.FilesAndFolders.None">Nenalezena žádná složka nebo soubor</s:String>
+    <s:String x:Key="TempFiles.OpenFolder">Procházet složku</s:String>
+    <s:String x:Key="TempFiles.Clear">Vyčistit dočasnou složku</s:String>
+    <s:String x:Key="TempFiles.LogsLocation">Složka protokolů</s:String>
+    <s:String x:Key="TempFiles.LogsLocation.Choose">Zvolte umístění chybových protokolů</s:String>
+    <s:String x:Key="TempFiles.Location">Složka umístění</s:String>
+    <s:String x:Key="TempFiles.Location.Choose">Zvolte umístění dočasných souborů</s:String>
+    <s:String x:Key="TempFiles.Settings">Umístění konfiguračního souboru</s:String>
+    <s:String x:Key="TempFiles.AppDataPath">AppData:</s:String>
+    <s:String x:Key="TempFiles.LocalPath">Lokální:</s:String>
+    <s:String x:Key="TempFiles.NotExists">Neexistuje</s:String>
+    <s:String x:Key="TempFiles.CreateSettings">Vytvořit prázdný soubor pro lokální nastavení.</s:String>
+    <s:String x:Key="TempFiles.RemoveSettings">Odstranit konfigurační soubor.</s:String>
+    <s:String x:Key="TempFiles.OpenSettingsFolder">Otevřít složku s konfiguračním souborem.&#x0d;Podržte klávesu Ctrl při kliknutí na soubor.</s:String>
+    <s:String x:Key="TempFiles.SettingsInfo">• Struktura nastaveného načítání: Default ◄ AppData ◄ Local.&#x0d;• Pokud v lokálním adresáři není žádní konfigurační soubor, aplikace prohledá složku AppData a případně složku Default.&#x0d;• Pokud neexistuje lokální nastavení, jsou všechna nastavení uložena v konfiguračním souboru ve složce AppData.</s:String>
+    <s:String x:Key="TempFiles.KeepRecent">Chcete zachovat nedávné projekty?</s:String>
+    <s:String x:Key="TempFiles.KeepRecent.Info">Chcete-li nedojde k odstranění žádného nedávného projektu staršího několik dní.</s:String>
+    <s:String x:Key="TempFiles.AutomaticRemoval">Automaticky odstraňte staré projekty.</s:String>
+    <s:String x:Key="TempFiles.AutomaticRemoval.Info">Při otevření editoru se na pozadí spustí úloha pro odstranění starších projektů dle nastavení.</s:String>
+    <s:String x:Key="TempFiles.AutomaticRemovalDays.Info">(ve dnech. Starší projekty budou odstraněny po otevření editoru)</s:String>
+    <s:String x:Key="TempFiles.LowSpace">Nedostatek místa na zvoleném disku. Vyčistěte složku temp nebo změňte umístění.</s:String>
+    
+    <s:String x:Key="S.Upload.Proxy">Proxy</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode">Režim:</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.Disabled">Vypnuto</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.Manual">Manuál</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.System">Systém</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.System.Info">(Používá systém proxy)</s:String>
+    <s:String x:Key="S.Upload.Proxy.Host">Host:</s:String>
+    <s:String x:Key="S.Upload.Proxy.Port">Port:</s:String>
+    <s:String x:Key="S.Upload.Proxy.User">Uživatelské jméno:</s:String>
+    <s:String x:Key="S.Upload.Proxy.Password">Heslo:</s:String>
+    <s:String x:Key="S.Upload.Get">Získat klíč OAuth</s:String>
+    <s:String x:Key="S.Upload.PasteToken">Zde vložte autorizační klíč.</s:String>
+    <s:String x:Key="S.Upload.Authorize">Povolit</s:String>
+    <s:String x:Key="S.Upload.Refresh">Obnovit</s:String>
+    <s:String x:Key="S.Upload.Clear">Smazat</s:String>
+    <s:String x:Key="S.Upload.Imgur.Anonymous">Imgur (anonymní)</s:String>
+    <s:String x:Key="S.Upload.Imgur.Direct">Použijte přímé odkazy.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Gifv">Získejte odkazy s rozšířením Gifv namísto Gif.</s:String>
+    <s:String x:Key="S.Upload.Imgur.ToAlbum">Odeslat soubory gif do vybraného alba.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Album">Album:</s:String>
+    <s:String x:Key="S.Upload.Imgur.AskMe">Dotázat se před nahráním</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.NotPossible">Stránku pro získání autorizačního klíče nebylo možné otevřít.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.Missing">Pro autorizaci této aplikace zadejte autorizační klíč.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.Completed">Autorizace Imgur byla dokončena.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.Error">Autorizace Imgur se nepovedla. Zkuste to znovu za pár sekun nebo si opatřete nový klíč.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Refresh.None">Pro obnovení autorizace aplikace, je potřeba nejprve dokončit autorizační proces.</s:String>
+    <s:String x:Key="S.Upload.Imgur.NotAuthorized">Neautorizovaný.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Expired">Autorizace vyprší za {0}.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Valid">Autorizace je platná do {0}.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Removed">Autorizace Imgur odstraněna.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Error.AlbumLoad">Nelze načíst seznam alb.</s:String>
+    <s:String x:Key="S.Upload.Gyfcat.Anonymous">Gyfcat (anonymní)</s:String>
+    <s:String x:Key="S.Upload.Yandex.Token">OAuth klíč:</s:String>
+    <s:String x:Key="S.Upload.Pick.Destination">Vyberte cíl</s:String>
+    <s:String x:Key="S.Upload.Pick.Album">Vyberte album (volitelné)</s:String>
+    <s:String x:Key="S.Upload.Pick.Album.Info">Lze vybrat cílové album:</s:String>
+    
+    <s:String x:Key="Extras.External">Dostupné externí nástroje</s:String>
+    <s:String x:Key="Extras.Download">Kliknutím sem stáhněte&#x0d;{0}</s:String>
+    <s:String x:Key="Extras.Downloading">Stahování...</s:String>
+    <s:String x:Key="Extras.Ready">Staženo&#x0d;{0}</s:String>
+    <s:String x:Key="Extras.Ready.Info">Kliknutím sem otevřete vlastnosti souboru.</s:String>
+    <s:String x:Key="Extras.FfmpegLocation">FFmpeg umístění</s:String>
+    <s:String x:Key="Extras.FfmpegLocation.Select">Vyberte umístění spustitelného souboru FFmpeg</s:String>
+    <s:String x:Key="Extras.FfmpegLocation.Invalid">Cesta spustitelného souboru FFMpeg obsahuje neplatné znaky. Prosím zvolte platné umístění souboru.</s:String>
+    <s:String x:Key="Extras.GifskiLocation">Gifski umístění</s:String>
+    <s:String x:Key="Extras.GifskiLocation.Select">Vyberte umístění spustitelného souboru Gifski</s:String>
+    <s:String x:Key="Extras.GifskiLocation.Invalid">Cesta spustitelného souboru Gifski obsahuje neplatné znaky. Prosím zvolte platné umístění souboru.</s:String>
+    
+    <s:String x:Key="Donate.IfYouWish">Pokud mi chcete poděkovat :D</s:String>
+    <s:String x:Key="Donate.DonateDollar">Přispět US$</s:String>
+    <s:String x:Key="Donate.DonateEuro">Přispět €</s:String>
+    <s:String x:Key="Donate.Donate">Přispět</s:String>
+    <s:String x:Key="Donate.Paypal.Dollar">Otevře stránku Paypal s vybranou měnou: Dolar</s:String>
+    <s:String x:Key="Donate.Paypal.Euro">Otevře stránku Paypal s vybranou měnou: Euro</s:String>
+    <s:String x:Key="Donate.Paypal.OwnCurrency">Otevře stránku Paypal. Je třeba vybrat měnu.</s:String>
+    <s:String x:Key="Donate.Patreon">Klikněte zde pro otevření mé stránky Patreon.</s:String>
+    <s:String x:Key="Donate.Steam.Link">Klikněte zde pro otevřený mého seznamu přání na Stream.</s:String>
+    <s:String x:Key="Donate.Steam.Text">Můžete posílat hry jako dárky.</s:String>
+    <s:String x:Key="Donate.Crypto">Krypto měny</s:String>
+
+    <s:String x:Key="About.Version">Verze:</s:String>
+    <s:String x:Key="About.Author">Autor: Nicke Manarin</s:String>
+    <s:String x:Key="About.Contact">Kontakt</s:String>
+    <s:String x:Key="About.Technical">Technické informace</s:String>
+    <s:String x:Key="About.Technical.License">Licence:</s:String>
+    <s:String x:Key="About.Technical.Free">(Tato aplikace je zcela zdarma)</s:String>
+    <s:String x:Key="About.Technical.SourceCode">Zdrojový kód:</s:String>
+    <s:String x:Key="About.ABigThanksTo">Velké díky patří</s:String>
+    <s:String x:Key="About.ABigThanksTo.Everyone">Všem mým podporovatelů a lidem kteří mi poskytlí zpětnou vazbu a/nebo finanční podporu.</s:String>
+    
+    <!--Localization-->
+    <s:String x:Key="Localization">Lokalizace</s:String>
+    <s:String x:Key="Localization.ResourcePositionUsed">Poslední zdroj je tím právě používaným.</s:String>
+    <s:String x:Key="Localization.MoveRosourcePosition">Pro použití vlastního zdroje proveďte jeho přesun do dolní části seznamu.</s:String>
+
+    <!--Recorder-->
+    <s:String x:Key="Recorder.RecordingOptions">Možnosti nahrávání:</s:String>
+    <s:String x:Key="Recorder.Snapshot">Režim snímků</s:String>
+    <s:String x:Key="Recorder.ThinMode">Skrýt záhlaví</s:String>
+    <s:String x:Key="Recorder.Fullscreen">Režim celé obrazovky</s:String>
+
+    <s:String x:Key="Recorder.Record">Záznam</s:String>
+    <s:String x:Key="Recorder.Pause">Pozastavit</s:String>
+    <s:String x:Key="Recorder.Continue">Pokračovat</s:String>
+    <s:String x:Key="Recorder.Stop">Zastavit</s:String>
+    <s:String x:Key="Recorder.Discard">Zahodit</s:String>
+    <s:String x:Key="Recorder.Snap">Přichycení</s:String>
+    <s:String x:Key="Recorder.Height">Výška</s:String>
+    <s:String x:Key="Recorder.Width">Šířka</s:String>
+    <s:String x:Key="Recorder.Fps">Maximální počet snímků za sekundu</s:String>
+    <s:String x:Key="Recorder.Fps.Short">fps</s:String>
+    <s:String x:Key="Recorder.FpsRange">Rozmezí fps: 1-60fps</s:String>
+    <s:String x:Key="Recorder.SnapToWindow">Přichytit k oknu (přetáhnout a uvolnit)</s:String>
+    <s:String x:Key="Recorder.PreStart">Před zahájením</s:String>
+    <s:String x:Key="Recorder.Paused">ScreenToGif (pozastaven)</s:String>
+    
+    <!--New Recorder-->
+    <s:String x:Key="S.Recorder.Area">Oblast</s:String>
+    <s:String x:Key="S.Recorder.Window">Okno</s:String>
+    <s:String x:Key="S.Recorder.Screen">Plocha</s:String>
+    <s:String x:Key="S.Recorder.Accept">Přijmout</s:String>
+    <s:String x:Key="S.Recorder.Retry">Znovu</s:String>
+    <s:String x:Key="S.Recorder.CancelSelection">Zrušit výběr (Esc)</s:String>
+    <s:String x:Key="S.Recorder.SelectArea">Kliknutím a tažením vyberte oblast obrazovky</s:String>
+    <s:String x:Key="S.Recorder.SelectWindow">Klikněte sem pro výběr tohoto okna</s:String>
+    <s:String x:Key="S.Recorder.SelectScreen">Klikněte sem pro výběr této obrazovky</s:String>
+    
+    <s:String x:Key="S.Recorder.EscToCancel">Stisknout Esc pro zrušení</s:String>
+    
+    <!--Webcam Recorder-->
+    <s:String x:Key="Webcam.Title">ScreenToGif - Záznamník webové kamery</s:String>
+    <s:String x:Key="Webcam.NoVideo">Nebylo nalezeno žádné zařízení pro video :(</s:String>
+    <s:String x:Key="Webcam.CheckVideoDevices">Zkontrolovat zařízení pro video.</s:String>
+    <s:String x:Key="Webcam.Scale">Rozsah: {0:0.##}x</s:String>
+    <s:String x:Key="Webcam.ChangeScale">Změnit rozsah videa.</s:String>
+    
+    <!--Board Recorder-->
+    <s:String x:Key="Board.Title">ScreenToGif - Záznamník plátna</s:String>
+    <s:String x:Key="Board.AutoRecord">Automatické nahrávání</s:String>
+    <s:String x:Key="Board.AutoRecordToolTip">Povoluje nahrávání během kreslení.</s:String>
+    <s:String x:Key="Board.CtrlHold">Ctrl [podržet]</s:String>
+    
+    <!--Color Selector-->
+    <s:String x:Key="ColorSelector.Title">Výběr barev</s:String>
+    <s:String x:Key="ColorSelector.Select">Vyberte barvu</s:String>
+    <s:String x:Key="ColorSelector.Red">Červená</s:String>
+    <s:String x:Key="ColorSelector.Green">Zelená</s:String>
+    <s:String x:Key="ColorSelector.Blue">Modrá</s:String>
+    <s:String x:Key="ColorSelector.Alpha">Alfa:</s:String>
+    <s:String x:Key="ColorSelector.Hexadecimal">Hex</s:String>
+    <s:String x:Key="ColorSelector.Initial">Počáteční barva</s:String>
+    <s:String x:Key="ColorSelector.Current">Aktuální barva</s:String>
+    <s:String x:Key="ColorSelector.Latest">Nejnovější barva</s:String>
+    
+    <!--Exception Viewer, Optional-->
+    <s:String x:Key="ExceptionViewer.Title">Prohlížeč výjimek</s:String>
+    <s:String x:Key="ExceptionViewer.OpenInner">Otevřít vnitřní výjimku</s:String>
+    <s:String x:Key="ErrorDialog.Observation">Něco je špatně.</s:String>
+    <s:String x:Key="ErrorDialog.Send">Poslat zprávu</s:String>
+
+    <!--Insert Frames-->
+    <s:String x:Key="InsertFrames.Title">Vložit snímky</s:String>
+    <s:String x:Key="InsertFrames.Info">Obě strany by měly mít stejnou velikost, toto okno umožňuje změnit umístění a velikost obrázku a plátna. Kliknutím vyberte a změňte velikost.</s:String>
+    <s:String x:Key="InsertFrames.CanvasSize">Velikost plátna:</s:String>
+    <s:String x:Key="InsertFrames.FitCanvas">Přizpůsobit obrázek plátnu</s:String>
+    <s:String x:Key="InsertFrames.FitCanvas.Info">Přizpůsobit velikost plátna dle obrázků uvnitř (z levého horního rohu).</s:String>
+    <s:String x:Key="InsertFrames.DifferentSizes">Existuje rozdíl ve velikosti snímků. Před vložením snímků je třeba tento rozdíl odstranit.</s:String>
+    <s:String x:Key="InsertFrames.InsertedFrames">Nové snímky</s:String>
+    <s:String x:Key="InsertFrames.CurrentFrames">Aktuální snímek</s:String>
+    <s:String x:Key="InsertFrames.ImageSize">Velikost obrázku:</s:String>
+    <s:String x:Key="InsertFrames.ImagePosition">Umístění obrázku:</s:String>
+    <s:String x:Key="InsertFrames.ResetImageSizePosition">Obnovit velikost obrázku&#x0d;a jeho pozici</s:String>
+    <s:String x:Key="InsertFrames.Info2">Nové snímky bude vloženy do aktuálního listu snímků na pozici:</s:String>
+    <s:String x:Key="InsertFrames.Before">Za</s:String>
+    <s:String x:Key="InsertFrames.After">Před</s:String>
+    <s:String x:Key="InsertFrames.Importing">Importování</s:String>
+    <s:String x:Key="InsertFrames.SelectColorFill">Vyberte barvu výplně plátna</s:String>
+
+    <!--Import Frames From Video-->
+    <s:String x:Key="ImportVideo.Title">Importovat snímky z videa</s:String>
+    <s:String x:Key="ImportVideo.Loading">Nahrávání...</s:String>
+    <s:String x:Key="ImportVideo.Scale">Rozsah</s:String>
+    <s:String x:Key="ImportVideo.Size">Velikost</s:String>
+    <s:String x:Key="ImportVideo.Height">Výška:</s:String>
+    <s:String x:Key="ImportVideo.Width">Šířka</s:String>
+    <s:String x:Key="ImportVideo.Framerate">Frekvence snímků:</s:String>
+    <s:String x:Key="ImportVideo.Fps">fps</s:String>
+    <s:String x:Key="ImportVideo.Start">Start:</s:String>
+    <s:String x:Key="ImportVideo.End">Konec:</s:String>
+    <s:String x:Key="ImportVideo.Selection">Výběr:</s:String>
+    <s:String x:Key="ImportVideo.Frames">Snímky:</s:String>
+    <s:String x:Key="ImportVideo.Duration">Trvání:</s:String>
+    
+    <!--Encoder-->
+    <s:String x:Key="Encoder.Title">Kódování</s:String>
+    <s:String x:Key="Encoder.ClearAllCompleted">Odstranit vše dokončené</s:String>
+    <s:String x:Key="Encoder.Starting">Spuštění</s:String>
+    <s:String x:Key="Encoder.Completed">Dokončeno</s:String>
+    <s:String x:Key="Encoder.Completed.Clipboard">Zkopírováno do schránky</s:String>
+    <s:String x:Key="Encoder.Completed.Clipboard.Fail">Kopírování se nezdařilo</s:String>
+    <s:String x:Key="Encoder.Completed.Command">Příkaz byl spuštěn</s:String>
+    <s:String x:Key="Encoder.Completed.Command.Output">Zobrazit výstup příkazu/ů.</s:String>
+    <s:String x:Key="Encoder.Completed.Command.Fail">Spuštění příkazu se nezdařilo</s:String>
+    <s:String x:Key="Encoder.Completed.Upload.Fail">Odeslání se nezdařilo.</s:String>
+    <s:String x:Key="Encoder.Completed.Upload.Delete">Ctrl + Kliknutím otevřete stránku pro odstranění obrázku (je-li k dispozici).</s:String>
+    <s:String x:Key="Encoder.FileDeletedMoved">Soubor odstraněn nebo přesunut</s:String>
+    <s:String x:Key="Encoder.Canceled">Zrušeno</s:String>
+    <s:String x:Key="Encoder.Error">Chyba</s:String>
+    <s:String x:Key="Encoder.Error.Info">Kliknutím sem zobrazíte detail této chyby.</s:String>
+    <s:String x:Key="Encoder.Uploading">Nahrávání</s:String>
+    <s:String x:Key="Encoder.Executing">Provádění příkazů</s:String>
+    <s:String x:Key="Encoder.Processing">Zpracování {0}</s:String>
+    <s:String x:Key="Encoder.Analyzing">Analýza nezměněných pixelů</s:String>
+    <s:String x:Key="Encoder.OpenFile">Otevřít soubor</s:String>
+    <s:String x:Key="Encoder.ExploreFolder">Prozkoumat složku</s:String>
+    <s:String x:Key="Encoder.Remove">Odstranit ze seznamu</s:String>
+    <s:String x:Key="Encoder.Details">Zobrazit detaily</s:String>
+    <s:String x:Key="Encoder.Copy.Image">Zkopírovat jako obrázek</s:String>
+    <s:String x:Key="Encoder.Copy.Filename">Zkopírovat název souboru</s:String>
+    <s:String x:Key="Encoder.Copy.Folder">Zkopírovat cestu složky</s:String>
+    <s:String x:Key="Encoder.Copy.Link">Zkopírovat odkaz</s:String>
+
+    <!--Command output-->
+    <s:String x:Key="Command.Title">ScreenToGif - Výstupní povely</s:String>
+    <s:String x:Key="Command.Header">Výstupní povely</s:String>
+    
+    <!--Editor-->
+    <s:String x:Key="Editor.Title">ScreenToGif - Editor</s:String>
+    <s:String x:Key="Editor.File">Soubor</s:String>
+    <s:String x:Key="Editor.Home">Domů</s:String>
+    <s:String x:Key="Editor.Playback">Přehrávání</s:String>
+    <s:String x:Key="Editor.Edit">Upravit</s:String>
+    <s:String x:Key="Editor.Image">Obrázek</s:String>
+    <s:String x:Key="Editor.Transitions">Přechody</s:String>
+    <s:String x:Key="Editor.Statistics">Statistika</s:String>
+    <s:String x:Key="Editor.Options">Nastavení</s:String>
+    
+    <!--Welcome-->
+    <s:String x:Key="Welcome.New">Pro spuštění nového záznamu přejděte na "Soubor > Nový"</s:String>
+    <s:String x:Key="Welcome.Import">Pro import přetáhněte obrázky, videa nebo projekty</s:String>
+    <s:String x:Key="Welcome.ThankYou">Děkuji, že používáte tuto aplikaci!</s:String>
+    <s:String x:Key="Welcome.Size">Čím nižší je frekvence snímků, počet barev nebo množství změn mezi snímky, tím menší je velikost.</s:String>
+    <s:String x:Key="Welcome.Contact">Máte dotazy či připomínky? Otevřete "Nastavení > O aplikaci" pro možnosti kontaktu</s:String>
+    <s:String x:Key="Welcome.Trouble">Máte potíže? Kontaktujte mě přes volbu Zpětná vazba</s:String>
+    <s:String x:Key="Welcome.NewRecorder">Pro vyzkoušení nového záznamníku přejděte do "Nastavení > Aplikace" a zapněte jej.</s:String>
+    
+    <!--File • New-->
+    <s:String x:Key="Editor.File.New.Recording">Nahrávání</s:String>
+    <s:String x:Key="Editor.File.New.Webcam">Nahrávání&#x0d;web. kamery</s:String>
+    <s:String x:Key="Editor.File.New.Board">Nahrávání&#x0d;plátna</s:String>
+    <s:String x:Key="Editor.File.Blank">Prázný&#x0d;projekt</s:String>
+    <s:String x:Key="Editor.File.New">Nový</s:String>
+    
+    <!--File • Insert-->
+    <s:String x:Key="Editor.File.Insert.Recording">Nahrávání</s:String>
+    <s:String x:Key="Editor.File.Insert.Webcam">Nahrávání&#x0d;web. kamery</s:String>
+    <s:String x:Key="Editor.File.Insert.Media">Média</s:String>
+    <s:String x:Key="Editor.File.Insert">Vložit</s:String>
+    
+    <!--File • Save/Discard-->
+    <s:String x:Key="Editor.File.Save">Uložit jako</s:String>
+    <s:String x:Key="Editor.File.Load">Vložit</s:String>
+    <s:String x:Key="Editor.File.LoadRecent">Nedávné&#x0d;Projekty</s:String>
+    <s:String x:Key="Editor.File.SaveProject">Uložit jako&#x0d;projekt</s:String>
+    <s:String x:Key="Editor.File.Discard">Zahodit&#x0d;Projekt</s:String>
+    
+    <!--Home • Action Stack-->
+    <s:String x:Key="Editor.Home.ActionStack">Úpravy</s:String>
+    <s:String x:Key="Editor.Home.Undo">Zpět</s:String>
+    <s:String x:Key="Editor.Home.Redo">Vpřed</s:String>
+    <s:String x:Key="Editor.Home.Reset">Reset</s:String>
+    
+    <!--Home • Clipboard-->
+    <s:String x:Key="Editor.Home.Clipboard">Schránka</s:String>
+    <s:String x:Key="Editor.Home.Clipboard.Show">Zobrazit schránku</s:String>
+    <s:String x:Key="Editor.Home.Paste">Vložit</s:String>
+    <s:String x:Key="Editor.Home.Cut">Vyjmout</s:String>
+    <s:String x:Key="Editor.Home.Copy">Kopírovat</s:String>
+    
+    <!--Home • Zoom-->
+    <s:String x:Key="Editor.Home.Zoom">Zvětšení</s:String>
+    <s:String x:Key="Editor.Home.SizeToContent">Přizpůsobit&#x0d;obsahu</s:String>
+    <s:String x:Key="Editor.Home.FitImage">Přizpůsobit obrazovce</s:String>
+    
+    <!--Home • Select-->
+    <s:String x:Key="Editor.Home.Select">Výběr</s:String>
+    <s:String x:Key="Editor.Home.SelectAll">Vybrat&#x0d;vše</s:String>
+    <s:String x:Key="Editor.Home.GoTo">Přejít</s:String>
+    <s:String x:Key="Editor.Home.Inverse">Opačně</s:String>
+    <s:String x:Key="Editor.Home.Deselect">Zrušit výběr</s:String>
+    
+    <!--Playback • Playback-->
+    <s:String x:Key="Editor.Playback.Playback">Přehrávání</s:String>
+    <s:String x:Key="Editor.Playback.First">První</s:String>
+    <s:String x:Key="Editor.Playback.Previous">Předchozí</s:String>
+    <s:String x:Key="Editor.Playback.Play">Přehrát</s:String>
+    <s:String x:Key="Editor.Playback.Pause">Pozastavit</s:String>
+    <s:String x:Key="Editor.Playback.Next">Další</s:String>
+    <s:String x:Key="Editor.Playback.Last">Poslední</s:String>
+    
+    <!--Edit • Frames-->  
+    <s:String x:Key="Editor.Edit.Frames">Snímky</s:String>
+    <s:String x:Key="Editor.Edit.Delete">Smazat</s:String>
+    <s:String x:Key="Editor.Edit.Frames.Duplicates">Odstranit&#x0d;duplicity</s:String>
+    <s:String x:Key="Editor.Edit.Frames.Reduce">Snížit&#x0d;počet snímků</s:String>
+    <s:String x:Key="Editor.Edit.DeletePrevious">Odstranit všechny předchozí</s:String>
+    <s:String x:Key="Editor.Edit.DeleteNext">Odstranit všechny následující</s:String>
+    
+    <!--Edit • Reordering-->
+    <s:String x:Key="Editor.Edit.Reordering">Přeskupení</s:String>
+    <s:String x:Key="Editor.Edit.Reverse">Obrátit</s:String>
+    <s:String x:Key="Editor.Edit.Yoyo">Jojo</s:String>
+    <s:String x:Key="Editor.Edit.MoveLeft">Posunout&#x0d;vlevo</s:String>
+    <s:String x:Key="Editor.Edit.MoveRight">Posunout&#x0d;vpravo</s:String>
+    
+    <!--Edit • Delay/Duration-->
+    <s:String x:Key="Editor.Edit.Delay">Zpoždění (trvání)</s:String>
+    <s:String x:Key="Editor.Edit.Delay.Override">Přechod</s:String>
+    <s:String x:Key="Editor.Edit.Delay.IncreaseDecrease">Zvýšit nebo&#x0d;snížit</s:String>
+    
+    <!--Image • Size and Rotation-->
+    <s:String x:Key="Editor.Image.SizePosition">Velikost a rotace</s:String>
+    <s:String x:Key="Editor.Image.Resize">Změnit&#x0d;velikost</s:String>
+    <s:String x:Key="Editor.Image.Crop">Oříznout</s:String>
+    <s:String x:Key="Editor.Image.FlipRotate">Převrátit/Otočit</s:String>
+    
+    <!--Image • Text-->
+    <s:String x:Key="Editor.Image.Text">Text</s:String>
+    <s:String x:Key="Editor.Image.Caption">Nadpis</s:String>
+    <s:String x:Key="Editor.Image.FreeText">Libovolný text</s:String>
+    <s:String x:Key="Editor.Image.TitleFrame">Titulní strana</s:String>
+    <s:String x:Key="Editor.Image.KeyStrokes">Stisknuté&#x0d;klávesy</s:String>
+    
+    <!--Image • Overlay-->
+    <s:String x:Key="Editor.Image.Overlay">Vrstvy</s:String>
+    <s:String x:Key="Editor.Image.FreeDrawing">Kreslení</s:String>
+    <s:String x:Key="Editor.Image.Watermark">Vodoznak</s:String>
+    <s:String x:Key="Editor.Image.Cinemagraph">Kinematograf</s:String>
+    <s:String x:Key="Editor.Image.Border">Ohraničení</s:String>
+    <s:String x:Key="Editor.Image.Progress">Průběh</s:String>
+    <s:String x:Key="Editor.Image.Obfuscate">Rozostřit</s:String>
+
+    <!--Transitions • Styles-->
+    <s:String x:Key="Editor.Transitions.Styles">Způsoby</s:String>
+    <s:String x:Key="Editor.Transitions.Fade">Prolnutí</s:String>
+    <s:String x:Key="Editor.Transitions.Slide">Prolnutí&#x0d;ze strany</s:String>
+    
+    <!--Statistics-->
+    <s:String x:Key="Editor.Statistics.General">Základní</s:String>
+    <s:String x:Key="Editor.Statistics.FrameCount">Počet snímků</s:String>
+    <s:String x:Key="Editor.Statistics.TotalDuration">Celková doba trvání</s:String>
+    <s:String x:Key="Editor.Statistics.FrameSize">Velikost snímku</s:String>
+    <s:String x:Key="Editor.Statistics.AverageDuration">Průměrná doba trvání (zpoždění)</s:String>
+    <s:String x:Key="Editor.Statistics.FrameDpi">DPI snímku a rozsah</s:String>
+    <s:String x:Key="Editor.Statistics.SelectedFrame">Vybraný snímek</s:String>
+    
+    <!--TODO: Organize-->
+    <!--Editor, Continuation-->
+    <s:String x:Key="Editor.Preparing">Příprava snímků</s:String>
+    <s:String x:Key="Editor.InvalidLoadingFiles">Chyba při nahrávání - Nelze importovat více souborů najednou. Vyberte pouze jeden soubor.</s:String>
+    <s:String x:Key="Editor.InvalidLoadingProjects">Chyba při nahrávání - Nelze nahrávat více projektů najednou. Vyberte pouze jeden projekt.</s:String>
+    <s:String x:Key="Editor.OpenMediaProject">Otevřít soubor médií (obrázek nebo video) nebo soubor projektu</s:String>
+    <s:String x:Key="Editor.OpenMedia">Otevřít soubor médií (obrázek nebo video)</s:String>
+    
+    <s:String x:Key="Editor.Clipboard.InvalidCut.Title">Vyříznutí</s:String>
+    <s:String x:Key="Editor.Clipboard.InvalidCut.Instruction">Nelze vyjmout všechny snímky.</s:String>
+    <s:String x:Key="Editor.Clipboard.InvalidCut.Message">Záznam vyžaduje alespoň jeden snímek.</s:String>
+    
+    <s:String x:Key="Editor.DeleteAll.Title">Odstranit vše</s:String>
+    <s:String x:Key="Editor.DeleteAll.Instruction">Opravdu chcete odstranit všechny snímky?</s:String>
+    <s:String x:Key="Editor.DeleteAll.Message">Tato akce smaže aktuálně otevřený projekt a nebude možné se vrátit zpět. Chcete pokračovat?</s:String>
+    <s:String x:Key="Editor.DiscardProject.Title">Zahodit projekt</s:String>
+    <s:String x:Key="Editor.DiscardProject.Instruction">Opravdu chcete projekt odstranit?</s:String>
+    <s:String x:Key="Editor.DiscardProject.Message">Tato akce odstraní projekt a smaže všechny snímky.\n\rAkci nebude možné vrátit zpět.</s:String>
+    <s:String x:Key="Editor.DiscardPreviousProject.Instruction">Chcete odstranit předchozí projekt?</s:String>
+    <s:String x:Key="Editor.DiscardPreviousProject.Message">Pokud tak neučiníte, bude možné předchozí projekt otevřít prostřednictvím volby Nedávné projekty.</s:String>
+    <s:String x:Key="Editor.DeleteFrames.Title">Odstranit snímky</s:String>
+    <s:String x:Key="Editor.DeleteFrames.Instruction">Opravdu chcete smazat?</s:String>
+    <s:String x:Key="Editor.DeleteFrames.Message">Tato akce odstraní {0} snímků.\n\rAkci nebude možné vrátit zpět.</s:String>
+    <s:String x:Key="Editor.Exiting.Title">Ukončit editor</s:String>
+    <s:String x:Key="Editor.Exiting.Instruction">Opravdu chcete ukončit?</s:String>
+    <s:String x:Key="Editor.Exiting.Message">Aktuální projekt bude možné znovu otevřít přes volbu "Nedávné projekty".</s:String>
+    <s:String x:Key="Editor.Exiting.Message2">Aktuální projekt bude možné znovu otevřít přes volbu "Nedávné projekty", ale nezapomeňte, že po několika dnech bude projekt automaticky odstraněn.</s:String>
+    
+    <s:String x:Key="Editor.Resize.Warning">Vyberte jinou hodnotu pro změnu velikosti.</s:String>
+    <s:String x:Key="Editor.Crop.Warning">Oblast k oříznutí musí být menší než aktuální velikost snímku.</s:String>
+    <s:String x:Key="Editor.Crop.Warning2">Oblast k oříznutí musí být větší než 10x10 pixelů.</s:String>
+    <s:String x:Key="Editor.Caption.WarningNoText">Neexistuje text k použití.</s:String>
+    <s:String x:Key="Editor.Caption.WarningSelection">Vyberte alespoň jeden snímek pro uložení textu.</s:String>
+    <s:String x:Key="Editor.FreeText.WarningSelection">Vyberte alespoň jeden snímek, na který se použije text.</s:String>
+    <s:String x:Key="Editor.TitleFrame.WarningSelection">Vyberte alespoň jeden snímek vedle kterého se má vložit titulní strana.</s:String>
+    <s:String x:Key="Editor.FreeDrawing.WarningNoDrawing">Neexistují žádné výkresy, které by měly být aplikovány na zvolené snímky.</s:String>
+    <s:String x:Key="Editor.FreeDrawing.WarningSelection">Vyberte alespoň jeden snímek, na který se použije kresba.</s:String>
+    
+    <s:String x:Key="Editor.Watermark.Select">Vyberte obrázek</s:String>
+    <s:String x:Key="Editor.Watermark.WarningNoImage">Vyberte obrázek pro uložení na vybraný snímek.</s:String>
+    <s:String x:Key="Editor.Watermark.WarningSelection">Vyberte alespoň jeden snímek pro uložení Vodoznaku.</s:String>
+    <s:String x:Key="Editor.Border.WarningThickness">Zvolte tloušťku ohraničení větší než 0 alespoň na jedné straně.</s:String>
+    <s:String x:Key="Editor.Border.WarningSelection">Vyberte alespoň jeden snímek pro uložení ohraničení.</s:String>
+    <s:String x:Key="Editor.Cinemagraph.WarningNoDrawing">Vyberte alespoň jeden pixel pro použití Cinemagraph. Pixely vyberete jejich obkreslením.</s:String>
+    
+    <s:String x:Key="Editor.Fade.Title">Prolnutí</s:String>
+    <s:String x:Key="Editor.Fade.WarningSelection">Vyberte alespoň jeden snímek pro uložení prolnutí.</s:String>
+    <s:String x:Key="Editor.Slide.Title">Prolnutí ze strany</s:String>
+    <s:String x:Key="Editor.Slide.WarningSelection">Vyberte alespoň jeden snímek pro použití funkce přechodu snímků.</s:String>
+
+    <s:String x:Key="Editor.DragDrop.Invalid.Title">Neplatné přetažení</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Instruction">Není možné načíst více souborů najednou</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Message">Vyberte pouze jeden soubor.</s:String>
+    <s:String x:Key="Editor.DragDrop.Invalid.Instruction">Soubor nelze načíst</s:String>
+    <s:String x:Key="Editor.DragDrop.Invalid.Message">Soubor není možné načíst, jelikož má neplatný formát.</s:String>
+    <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">Není možné importovat více projektů najednou</s:String>
+    <s:String x:Key="Editor.DragDrop.InvalidProject.Message">Vyberte pouze jeden projekt.</s:String>
+    
+    <s:String x:Key="Editor.LoadingFrames">Nahrávání snímků</s:String>
+    <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Instruction">Není možné načíst projekt</s:String>
+    <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Message">Nebylo možné načíst snímky, jelikož jsou poškozeny nebo obrázky nejsou tam, kde se očekávají.</s:String>
+    <s:String x:Key="Editor.LoadingFrames.FramesCorrupted.Instruction">Některé snímky nemohly být načteny</s:String>
+    <s:String x:Key="Editor.LoadingFrames.FramesCorrupted.Message">Nebylo možné načíst snímky, jelikož nebyly nalezeny nebo byly poškozeny.</s:String>
+    <s:String x:Key="Editor.UpdatingFrames">Aktualizace snímků</s:String>
+    <s:String x:Key="Editor.PreparingImport">Příprava k importu</s:String>
+    <s:String x:Key="Editor.ImportingFrames">Import snímků</s:String>
+    
+    <s:String x:Key="Editor.ExportingRecording">Exportovat záznam</s:String>
+    <s:String x:Key="Editor.DiscardingFrames">Zahodit snímky</s:String>
+    <s:String x:Key="Editor.DiscardingFolders">Zahodit adresáře</s:String>
+    <s:String x:Key="Editor.ResizingFrames">Změna velikosti snímků</s:String>
+    <s:String x:Key="Editor.CroppingFrames">Oříznutí snímků</s:String>
+    <s:String x:Key="Editor.ApplyingOverlay">Použít překryv snímků</s:String>
+    <s:String x:Key="Editor.CreatingTitleFrame">Vytvoření úvodního snímku</s:String>
+    <s:String x:Key="Editor.ApplyingFlipRotate">Použít otočení/Otočení snímků</s:String>
+    <s:String x:Key="Editor.ChangingDelay">Změna zpoždění</s:String>
+    <s:String x:Key="Editor.ApplyingTransition">Použít efekt přechodu</s:String>
+    <s:String x:Key="S.Editor.PreparingSaving">Příprava k uložení</s:String>
+
+    <s:String x:Key="Editor.List.Frame">Snímek:</s:String>
+    <s:String x:Key="Editor.List.OpenImage">Otevřít obrázek</s:String>
+    <s:String x:Key="Editor.List.ExploreFolder">Prozkoumat složku</s:String>
+    <s:String x:Key="Editor.List.ExportImage">Exportovat obrázek</s:String>
+    
+    <s:String x:Key="Editor.FrameNumbersInfo">Celkový počet, počet vybraných, index výběru</s:String>
+    
+    <s:String x:Key="GoTo.Title">Přejít na snímek</s:String>
+    <s:String x:Key="GoTo.Instruction">Přejít na snímek (0 z {0})</s:String>
+    
+    <s:String x:Key="Context.SaveAs">Uložit jako</s:String>
+    <s:String x:Key="Context.RemoveFrames">Odstranit vybrané snímky</s:String>
+    <s:String x:Key="Context.NewRecording">Nový záznam obrazovky</s:String>
+    <s:String x:Key="Context.NewWebcamRecording">Nový záznam webové kamery</s:String>
+    <s:String x:Key="Context.NewBoardRecording">Nový záznam plátna</s:String>
+    <s:String x:Key="Context.NewBlankAnimation">Nový projekt</s:String>
+    <s:String x:Key="Context.NewFromMediaProject">Nový záznam z média nebo projektu</s:String>
+    
+    <!--Warnings-->
+    <s:String x:Key="Editor.Warning.Selection">Vyberte alespoň jeden snímek k uložení vrstvy.</s:String>
+    <s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg nenalezen. Přidejte jej do cesty a proměnných prostředí nebo nastavte jeho umístění v Nastavení.</s:String>
+    <s:String x:Key="Editor.Warning.Gifski">Gifski nenalezen. Přidejte jej do cesty a proměnných prostředí nebo nastavte jeho umístění v Nastavení.</s:String>
+    <s:String x:Key="Editor.Warning.LowSpace">Nedostatek místa na disku, na kterém si tato aplikace ukládá svou vyrovnávací paměť (zbývá {0}%). Kliknutí sem otevřete Volby > Dočasné soubory k uvolnění místa.</s:String>
+    
+    <!--Hints-->
+    <s:String x:Key="Hint.NewRecording">Vytvořen nový záznam</s:String>
+    <s:String x:Key="Hint.NewWebcamRecording">Vytvořen nový záznam webové kamery</s:String>
+    <s:String x:Key="Hint.NewBoardRecording">Vytvořen nový záznam plátna</s:String>
+    <s:String x:Key="Hint.NewAnimation">Vytvořen nový projekt</s:String>
+    <s:String x:Key="Hint.Undo">Vráceno zpět</s:String>
+    <s:String x:Key="Hint.Reset">Proveden reset</s:String>
+    <s:String x:Key="Hint.Redo">Znovu provedeno</s:String>
+    <s:String x:Key="Hint.Cut">{0} snímků vyjmuto</s:String>
+    <s:String x:Key="Hint.Copy">{0} snímků zkopírováno</s:String>
+    <s:String x:Key="Hint.Paste">{0} snímků vloženo</s:String>
+    <s:String x:Key="Hint.Zoom">Zvětšení nastaveno na {0}%</s:String>
+    <s:String x:Key="Hint.SelectAll">Vybrány všechny snímky</s:String>
+    <s:String x:Key="Hint.SelectSingle">Vybrán snímek #{0}</s:String>
+    <s:String x:Key="Hint.SelectInverse">Výběr obrácen</s:String>
+    <s:String x:Key="Hint.Deselect">Vybrání všech snímků zrušeno</s:String>
+    <s:String x:Key="Hint.DeleteFrames">{0} snímku smazáno</s:String>
+    <s:String x:Key="Hint.Reverse">Obrácen seznam snímků</s:String>
+    <s:String x:Key="Hint.Yoyo">Jojo efekt uložen</s:String>
+    <s:String x:Key="Hint.MoveLeft">Snímky posunuty vlevo</s:String>
+    <s:String x:Key="Hint.MoveRight">Snímky posunuty vpravo</s:String>
+    <s:String x:Key="Hint.Resize">Změněna velikost snímků</s:String>
+    <s:String x:Key="Hint.Crop">Snímky oříznuty</s:String>
+    <s:String x:Key="Hint.FlipRotate">Snímky převráceny/otočeny</s:String>
+    <s:String x:Key="Hint.FlipRotate2">Převrácení se vztahuje na vybrané snímky a otočení platí pro všechny.</s:String>
+    <s:String x:Key="Hint.ApplyAll">Tato akce se uloží na všechny snímky</s:String>
+    <s:String x:Key="Hint.ApplySelected">Tato akce se uloží na vybrané snímky</s:String>
+    <s:String x:Key="Hint.Cinemagraph">Kinematograf upraví všechny snímky dle prvního snímku</s:String>
+    <s:String x:Key="Hint.Overlay">Použita vrstva</s:String>
+    <s:String x:Key="Hint.TitleFrame">Vytvořen titulní snímek</s:String>
+    <s:String x:Key="Hint.TitleFrame2">Titulní snímek bude uložen před vybraný snímek</s:String>
+    <s:String x:Key="Hint.Delay">Změněno trvání (zpoždění)</s:String>
+    <s:String x:Key="Hint.Transition">Vložen přechod</s:String>
+    <s:String x:Key="Hint.Reduce">Frekvence snímků snížena</s:String>
+    <s:String x:Key="Hint.Duplicates">Duplicity odstraněny</s:String>
+    
+    <!--Action Grid-->
+    <s:String x:Key="Action.Hide">Skrýt</s:String>
+    <s:String x:Key="Action.Apply">Uložit změny</s:String>
+    <s:String x:Key="Action.Open">Otevřít</s:String>
+    <s:String x:Key="Action.Save">Uložit</s:String>
+    <s:String x:Key="Action.Cancel">Zrušit</s:String>
+    <s:String x:Key="Size">Velikost</s:String>
+    <s:String x:Key="Background">Pozadí</s:String>
+    <s:String x:Key="Color">Barva:</s:String>
+    
+    <s:String x:Key="Recent.Projects">Nedávné projekty</s:String>
+    <s:String x:Key="Recent.EnumeratingProjects">Vyhledávám nedávné projekty...</s:String>
+    <s:String x:Key="Recent.CreationDate">Datum vytvoření</s:String>
+    <s:String x:Key="Recent.FrameCount">Počet snímku</s:String>
+    <s:String x:Key="Recent.Warning.NothingSelected">Nebyl vybrán žádny projekt. K načtení vyberte projekt ze seznamu.</s:String>
+    
+    <s:String x:Key="Clipboard.Entries">Položky schránky</s:String>
+    <s:String x:Key="Clipboard.Entry">Položka schránky:</s:String>
+    <s:String x:Key="Clipboard.Explore">Prozkoumat obsah</s:String>
+    <s:String x:Key="Clipboard.Remove">Odstranit</s:String>
+    <s:String x:Key="Clipboard.Behavior">Vložit akci</s:String>
+    <s:String x:Key="Clipboard.Before">Na předchozí snímek</s:String>
+    <s:String x:Key="Clipboard.After">Na následující snímek</s:String>
+    
+    <s:String x:Key="Resize.CurrentProperties">Aktuální vlastnosti</s:String>
+    <s:String x:Key="Resize.Dpi">Dpi</s:String>
+    <s:String x:Key="Resize.NewProperties">Nové vlastnosti</s:String>
+    <s:String x:Key="Resize.Dpi2">DPI:</s:String>
+    <s:String x:Key="Resize.KeepAspect">Udržovat poměr stran.</s:String>
+    
+    <s:String x:Key="Crop.Points">Body</s:String>
+    <s:String x:Key="Crop.Top">Zhora:</s:String>
+    <s:String x:Key="Crop.Left">Zleva:</s:String>
+    <s:String x:Key="Crop.Bottom">Zdola:</s:String>
+    <s:String x:Key="Crop.Right">Zprava:</s:String>
+    
+    <s:String x:Key="FlipRotate.FlipHorizontal">Převrátit horizontálně</s:String>
+    <s:String x:Key="FlipRotate.FlipVertical">Převrátit vertikálně</s:String>
+    <s:String x:Key="FlipRotate.RotateLeft">Otočit 90º vlevo</s:String>
+    <s:String x:Key="FlipRotate.RotateRight">Otočit 90º vpravo</s:String>
+    
+    <s:String x:Key="Reduce.Header">Snížit rychlost snímků</s:String>
+    <s:String x:Key="Reduce.Factor">Faktor:</s:String>
+    <s:String x:Key="Reduce.Count">Odstranit počet:</s:String>
+    <s:String x:Key="Reduce.Info">Odstraní {0} snímků po každém {1} snímku bez počítání odstraněných snímků.&#10;Rychlost snímků bude upraveno.</s:String>
+
+    <s:String x:Key="S.RemoveDuplicates.Header">Odstranit duplicity</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Similarity">Podobnost (%):</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal">Odstranění snímku:</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal.First">Odstranit první snímek</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal.Last">Odstranit poslední snímek</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay">Nastavit spoždění:</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.NoAdjustment">Neupravovat</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.Average">Použít průměr</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.Sum">Použít součet</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Info">Tato akce analyzuje každý snímek (pixel po pixelu) a odstraňuje ty, které jsou nejméně z {0} % podobné bezprostředně sousedícím snímkům.&#x0d;Je možné nastavit zpoždění (trvání záznamu) snímků.</s:String>
+    
+    <s:String x:Key="Caption.Text">Text</s:String>
+    <s:String x:Key="Caption.Font">Písmo</s:String>
+    <s:String x:Key="Caption.Family">Rodina:</s:String>
+    <s:String x:Key="Caption.Style">Styl:</s:String>
+    <s:String x:Key="Caption.Weight">Tloušťka:</s:String>
+    <s:String x:Key="Caption.Size">Velikost:</s:String>
+    <s:String x:Key="Caption.Color">Barva:</s:String>
+    <s:String x:Key="Caption.Outline">Obrys</s:String>
+    <s:String x:Key="Caption.Thickness">Tloušťka:</s:String>
+    <s:String x:Key="Caption.Layout">Uspořádání</s:String>
+    <s:String x:Key="Caption.Vertical">Svisle:</s:String>
+    <s:String x:Key="Caption.Horizontal">Vodorovně:</s:String>
+
+    <s:String x:Key="KeyStrokes.Keys">Klávesy</s:String>
+    <s:String x:Key="KeyStrokes.Separator">Oddělovač:</s:String>
+    <s:String x:Key="KeyStrokes.Edit">Uprav stisknuté klávesy</s:String>
+    <s:String x:Key="KeyStrokes.IgnoreModifiers">Ignorovat Ctrl, Alt, Shift, a tlačítko Windows pokud nejsou používány jako modifikátory.</s:String>
+    <s:String x:Key="KeyStrokes.IgnoreModifiers.Info">Ignorovat stisknutí tlačítka Ctrl, pokud není použito v kombinaci s další klávesou (Ctrl + C).</s:String>
+    <s:String x:Key="KeyStrokes.Extend">Prodloužit dobu zobrazení stisknutých kláves.</s:String>
+    <s:String x:Key="KeyStrokes.Earlier">Zobrazovat stisknuté klávesy dříve.</s:String>
+    <s:String x:Key="KeyStrokes.By">V (ms):</s:String>
+    <s:String x:Key="KeyStrokes.Warning.None">Záznam neobsahuje žádné stisknuté klávesy.</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Title">ScreenToGif - Editor stisknutých kláves</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Number">Číslo snímku</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Keys">Zaznamenané klávesy</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Remove">Odstranit klávesu</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Add">Přidat klávesu:</s:String>
+    
+    <s:String x:Key="String.Delay">Zpoždění</s:String>
+    <s:String x:Key="String.DelayMs">Zpoždění (ms):</s:String>
+    <s:String x:Key="String.ValueMs">Hodnota -+ (ms):</s:String>
+    <s:String x:Key="String.Margin">Vnější okraj:</s:String>
+    <s:String x:Key="String.Padding">Vnitřní okraj:</s:String>
+    <s:String x:Key="String.Background">Pozadí</s:String>
+    
+    <s:String x:Key="FreeDrawing.Mode">Způsob</s:String>
+    <s:String x:Key="FreeDrawing.Pen">Pero</s:String>
+    <s:String x:Key="FreeDrawing.Eraser">Guma</s:String>
+    <s:String x:Key="FreeDrawing.Select">Výběr</s:String>
+    <s:String x:Key="FreeDrawing.StrokeEraser">Smazání tahu</s:String>
+    <s:String x:Key="FreeDrawing.Width">Šířka:</s:String>
+    <s:String x:Key="FreeDrawing.Height">Výška:</s:String>
+    <s:String x:Key="FreeDrawing.Tip">Hrot:</s:String>
+    <s:String x:Key="FreeDrawing.Rectangle">Obdélník</s:String>
+    <s:String x:Key="FreeDrawing.Ellipse">Elipsa</s:String>
+    <s:String x:Key="FreeDrawing.Other">Další:</s:String>
+    <s:String x:Key="FreeDrawing.Highlighter">Zvýrazňovač</s:String>
+    <s:String x:Key="FreeDrawing.FitToCurve">Přizpůsobit křivce</s:String>
+    
+    <s:String x:Key="Watermark.Image">Obrázek</s:String>
+    <s:String x:Key="Watermark.File">Soubor:</s:String>
+    <s:String x:Key="Watermark.Opacity">Neprůhlednost:</s:String>
+    
+    <s:String x:Key="Border.Appearance">Vzhled</s:String>
+
+    <s:String x:Key="S.Obfuscate.Options">Možnosti Rozostření</s:String>
+    <s:String x:Key="S.Obfuscate.PixelSize">Velikost pixelů:</s:String>
+    <s:String x:Key="S.Obfuscate.UseAverage">Vypočítat průměrnou barvu pro každý blok rozdělený do pixelů.</s:String>
+    <s:String x:Key="S.Obfuscate.Info">Pomocí nástroje vyberte obdélník, který má být rozdělen do pixelů.</s:String>
+    <s:String x:Key="S.Obfuscate.Warning">Nebyl proveden žádný výběr. Pomocí nástroje vyberte obdélník, který má být rozdělen do pixelů.</s:String>
+    
+    <s:String x:Key="Progress.Type">Typ</s:String>
+    <s:String x:Key="Progress.Type.Bar">Bar</s:String>
+    <s:String x:Key="Progress.Type.Text">Text</s:String>
+    <s:String x:Key="Progress.Precision">Přesnost:</s:String>
+    <s:String x:Key="Progress.Precision.Minutes">Minuty</s:String>
+    <s:String x:Key="Progress.Precision.Seconds">Sekundy</s:String>
+    <s:String x:Key="Progress.Precision.Miliseconds">Milisekundy</s:String>
+    <s:String x:Key="Progress.Precision.Percentage">Procento</s:String>
+    <s:String x:Key="Progress.Precision.Count">Číslo snímku</s:String>
+    <s:String x:Key="Progress.Precision.Custom">Vlastní</s:String>
+    <s:String x:Key="Progress.Precision.ShowTotal">Zobrazit celkem.</s:String>
+    <s:String x:Key="Progress.Format">Formát:</s:String>
+    <s:String x:Key="Progress.Orientation">Orientace:</s:String>
+    
+    <s:String x:Key="Delay.NewValue">Nová hodnota</s:String>
+    <s:String x:Key="Delay.Minimum10Ms">Minimálně 10ms na snímek.</s:String>
+    <s:String x:Key="Delay.DecreaseIncrease">Zmenšení/Zvětšení hodnoty</s:String>
+    
+    <s:String x:Key="Cinemagraph.Info">Použijte pero k výběru pixelů, které by neměli zůstat statické (které by se měli měnit mezi snímky) malováním na ně.</s:String>
+    <s:String x:Key="OverrideDelay.Info">Nová hodnota nahradí trvání (zpožení) všech vybraných snímků. Hodnota musí být v rozmezí 10ms až 25500ms.</s:String>
+    <s:String x:Key="IncreaseDecreaseDelay.Info">Tato hodnota zkrátí/prodlouží trvání (zpoždění) každého vybraného snímku.&#x0d;Tuto dobu lze zkrátit/prodloužit výběrem hodnoty mezi -10000ms a 10000ms, ale výsledná délka každého snímku bude omezena mezi 10ms a 25500ms</s:String>
+    
+    <s:String x:Key="Transitions.Lenght">Délka přechodu</s:String>
+    <s:String x:Key="Transitions.Delay">Zpoždění přechodu</s:String>
+    <s:String x:Key="Transitions.FadeTo">Přechod do...</s:String>
+    <s:String x:Key="Transitions.FadeTo.Frame">Další snímek</s:String>
+    <s:String x:Key="Transitions.FadeTo.Color">Barva</s:String>
+    <s:String x:Key="Transitions.Color">Barva</s:String>
+    <s:String x:Key="Transitions.Info">Přechod bude použit mezi vybraným a následujícím snímkem.</s:String>
+
+    <!--Save As-->
+    <s:String x:Key="S.SaveAs.Type">Typ souboru</s:String>
+    <s:String x:Key="S.SaveAs.Gif">Gif</s:String>
+    <s:String x:Key="S.SaveAs.Apng">Apng</s:String>
+    <s:String x:Key="S.SaveAs.Images">Obrázky (snímky)</s:String>
+    <s:String x:Key="S.SaveAs.Project">Projekt</s:String>
+    <!--<s:String x:Key="S.SaveAs.Psd">PSD file</s:String>-->
+    <s:String x:Key="S.SaveAs.Video">Video</s:String>
+    <s:String x:Key="S.SaveAs.Encoder">Kódování</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">2.0</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Tooltip">Algoritmus: Octree.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Legacy">1.0</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Legacy.Tooltip">Algoritmus: NeuQuant.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.System">Systém</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.System.Tooltip">Použití výchozí palety.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions">Nastavení Gif</s:String>
+    <s:String x:Key="S.SaveAs.Quality">Kvalita:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Colors">Barvy:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">Maximální počet barev (na každý snímek).</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Loop">Smyčka:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">Smyčka Gif.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Nekonečné opakování.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Opakovat počet.</s:String>
+    <s:String x:Key="S.SaveAs.Extras">Doplňky:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">Zjištění nezměněných pixelů.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">Označit nezměněné pixely fiktivní barvou.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">Vybrat barvu</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions">Nastavení Apng</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.LoopedApng">Smyčka Apng.</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.DetectUnchanged">Zjištění nezměněných pixelů.</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.PaintTransparent">Použít průhlednou barvu na všechny nezměněné pixely.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions">Nastavení videa</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Fps">Fps:</s:String>
+    <s:String x:Key="S.SaveAs.FlipVertically">Převrátit video (vertikálně).</s:String>
+    <s:String x:Key="S.SaveAs.ImagesOptions">Nastavení obrázků</s:String>
+    <s:String x:Key="S.SaveAs.ImageOptions.Zip">Zazipovat obrázky.</s:String>
+    
+    <!--Save As • Save options-->
+    <s:String x:Key="S.SaveAs.SaveOptions">Možnosti uložení</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Uložit soubor do adresáře dle vlastního výběru.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Přepsat (pokud již existuje).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Uložit také jako projekt (stejný adresář, stejný název souboru).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Přenést soubor.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.UploadDestination">Přenést cíl.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">Zkopírovat do schránky</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File">Soubor</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File.Info">Zkopírovat výstupní soubor do schránky.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FolderPath">Cesta složky</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FolderPath.Info">Zkopírovat cestu složky výstupního souboru do schránky.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath">Cesta souboru</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath.Info">Zkopírovat cestu výstupního souboru do schránky.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">Odkaz</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">Zkopírovat odkaz vygenerovaný službou pro přenos do schránky.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Po kódování provést zapsané příkazy.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Zadejte příkazy, které mají být provedeny po kódování.&#x0d;Po spuštění více příkazů, zadejte každý na samostatný řádek.&#x0d;Makra:&#x0d;{p} = Cesta výstupního souboru.&#x0d;{f} = Cesta výstupní složky.</s:String>
+    
+    <!--Save As • File-->
+    <s:String x:Key="S.SaveAs.File">Soubor</s:String>
+    <s:String x:Key="S.SaveAs.File.Location">Cílová složka.</s:String>
+    <s:String x:Key="S.SaveAs.File.Choose">Vybrat umístění.</s:String>
+    <s:String x:Key="S.SaveAs.File.Format">Formát souboru</s:String>
+    <s:String x:Key="S.SaveAs.File.Name">Název souboru. Vložte formát data a času mezi '?'</s:String>
+    <s:String x:Key="S.SaveAs.File.Animation">Animace</s:String>
+    <s:String x:Key="S.SaveAs.File.Increase">Zvýšit číslo souboru</s:String>
+    <s:String x:Key="S.SaveAs.File.Decrease">Snížit číslo souboru</s:String>
+    <s:String x:Key="S.SaveAs.File.Exists">Soubor se stejným názvem již existuje.</s:String>
+    
+    <s:String x:Key="S.SaveAs.File.Clipboard">Uložit do schránky.</s:String>
+
+    <s:String x:Key="S.SaveAs.Warning.Type">Vyberte místo, kam chcete soubor uložit (do adresáře, do schránky nebo přeneste někam jinam).</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Commands.Empty">Pro provedení příkazů je třeba napsat něco do textového pole pro příkazy.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Upload.None">Nebyla vybrána žádná služba pro přenos. Vyberte cíl.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Upload.NotAuthorized">Nelze přenést na vybranou službu, jelikož nebyla povolena. Přejděte do Nastavení > Přenos dat a povolte tuto aplikaci.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Copy.Link">Nelze vybrat možnost kopírování odkazu, jelikož nebyl nastaven soubor pro přenos.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Folder">Vyberte výstupní adresář.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">Výstupní adresář neexistuje.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Folder.Invalid">Výstupní adresář obsahuje neplatné znaky. Prosím, zvolte platný adresář.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Filename">Vyberte název souboru.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Filename.Invalid">Název výstupního souboru obsahuje neplatné znaky. Prosím, zvolte platný název souboru.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Overwrite">Název souboru již existuje. Nastavte možnost přepsání nebo vyberte jiný název souboru.</s:String>
+    
+    <!--SaveAs • Export-->
+    <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">Export snímků</s:String>
+    <s:String x:Key="S.SaveAs.Frames.Confirmation.Instruction">Opravdu chcete exportovat snímky?</s:String>
+    <s:String x:Key="S.SaveAs.Frames.Confirmation.Message">Tato akce provede export {0} snímků přímo do vybraného adresáře.</s:String>
+    
+    <!--Feedback-->
+    <s:String x:Key="S.Feedback.Feedback">Zpětná vazba</s:String>
+    <s:String x:Key="S.Feedback.Send">Odeslat</s:String>
+    <s:String x:Key="S.Feedback.Header">Odeslat zpětnou vazbu</s:String>
+    <s:String x:Key="S.Feedback.Title">Předmět *</s:String>
+    <s:String x:Key="S.Feedback.Message">Zpráva *</s:String>
+    <s:String x:Key="S.Feedback.Type">Typ zpětné vazby</s:String>
+    <s:String x:Key="S.Feedback.Suggestion">Návrh</s:String>
+    <s:String x:Key="S.Feedback.IssueBug">Problém/Chyba</s:String>
+    <s:String x:Key="S.Feedback.IssueBug.Info">V případě nalezení chyby: nezapomeňte uvést svůj e-mail. Někdy nevíme jak chybu nasimulovat a proto potřebujeme další podrobností.</s:String>
+    <s:String x:Key="S.Feedback.YourEmail">Váš email (volitelně)</s:String>
+    <s:String x:Key="S.Feedback.Warning.Title">Uveďte předmět zpětné vazby.</s:String>
+    <s:String x:Key="S.Feedback.Warning.Message">Zadejte zprávu zpětné vazby.</s:String>
+    <s:String x:Key="S.Feedback.Sending">Probíhá odesílání na pozadí... Toto okno bude brzy zavřeno.</s:String>
+    <s:String x:Key="S.Feedback.Attachments">Přílohy (volitelné, 20MB maximálně)</s:String>
+    <s:String x:Key="S.Feedback.AddAttachments">Přidat přílohy</s:String>
+    <s:String x:Key="S.Feedback.RemoveAttachments">Odstranit všechny přílohy</s:String>
+    <s:String x:Key="S.Feedback.LanguageInfo1">Rozumím anglicky.</s:String>
+    <s:String x:Key="S.Feedback.LanguageInfo2">a portugalsky (brazilská a evropská).</s:String>
+    
+    <!--FontStyles-->
+    <s:String x:Key="S.FontStyles.Normal">Obyčejné</s:String>
+    <s:String x:Key="S.FontStyles.Italic">Kurzíva</s:String>
+    <s:String x:Key="S.FontStyles.Oblique">Zkosené</s:String>
+    
+    <!--FontWeight-->
+    <s:String x:Key="S.FontWeights.Black">Tučné</s:String>
+    <s:String x:Key="S.FontWeights.Bold">Silné</s:String>
+    <s:String x:Key="S.FontWeights.DemiBold">Polotučné</s:String>
+    <s:String x:Key="S.FontWeights.ExtraBlack">Extra silné</s:String>
+    <s:String x:Key="S.FontWeights.ExtraBold">Extra tučné</s:String>
+    <s:String x:Key="S.FontWeights.ExtraLight">Extra slabé</s:String>
+    <s:String x:Key="S.FontWeights.Heavy">Tlusté</s:String>
+    <s:String x:Key="S.FontWeights.Light">Slabé</s:String>
+    <s:String x:Key="S.FontWeights.Medium">Průměrné</s:String>
+    <s:String x:Key="S.FontWeights.Normal">Normální</s:String>
+    <s:String x:Key="S.FontWeights.Regular">Obvyklé</s:String>
+    <s:String x:Key="S.FontWeights.SemiBold">Polotučné</s:String>
+    <s:String x:Key="S.FontWeights.Thin">Tenké</s:String>
+    <s:String x:Key="S.FontWeights.UltraBlack">Ultra silné</s:String>
+    <s:String x:Key="S.FontWeights.UltraBold">Ultra tučné</s:String>
+    <s:String x:Key="S.FontWeights.UltraLight">Ultra tenké</s:String>
+    
+     <!--VerticalAligment-->
+    <s:String x:Key="S.VerticalAlignment.Top">Dolů</s:String>
+    <s:String x:Key="S.VerticalAlignment.Center">Na střed</s:String>
+    <s:String x:Key="S.VerticalAlignment.Bottom">Nahoru</s:String>
+    <s:String x:Key="S.Alignment.Stretch">Roztáhnutí</s:String>
+
+     <!--HorizontalAlignment-->
+    <s:String x:Key="S.HorizontalAlignment.Left">Vlevo</s:String>
+    <s:String x:Key="S.HorizontalAlignment.Center">Na střed</s:String>
+    <s:String x:Key="S.HorizontalAlignment.Right">Vpravo</s:String>
+    
+    <!--Orientation-->
+    <s:String x:Key="S.Orientation.Horizontal">Vodorovně</s:String>
+    <s:String x:Key="S.Orientation.Vertical">Svisle</s:String>
+</ResourceDictionary>

@@ -119,6 +119,11 @@
         RemoveDuplicates = 12,
 
         /// <summary>
+        /// Mouse Clicks Panel.
+        /// </summary>
+        MouseClicks = 13,
+
+        /// <summary>
         /// Crop Panel.
         /// </summary>
         Crop = -1,
@@ -514,5 +519,26 @@
         GyfcatAnonymous = 3,
         Gyfcat = 4,
         Yandex = 5,
+    }
+
+    public enum StatusType : int
+    {
+        None = 0,
+        Info,
+        Update,
+        Warning,
+        Error
+    }
+
+    /// <summary>
+    /// The types of source of project creation.
+    /// </summary>
+    public enum ProjectByType
+    {
+        Unknown = 0,
+        ScreenRecorder = 1,
+        WebcamRecorder = 2,
+        BoardRecorder = 3,
+        Editor = 4,
     }
 }

@@ -57,12 +57,12 @@
     <s:String x:Key="Donate">Faire un don</s:String>
     <s:String x:Key="About">À propos</s:String>
     
-    <s:String x:Key="Application.Homepage">Accueil</s:String>
-    <s:String x:Key="Application.Homepage.StartUp">Fenêtre de démarrage</s:String>
-    <s:String x:Key="Application.Homepage.Recorder">Enregistreur d'écran</s:String>
-    <s:String x:Key="Application.Homepage.Webcam">Enregistreur de Webcam</s:String>
-    <s:String x:Key="Application.Homepage.Board">Enregistreur de Board</s:String>
-    <s:String x:Key="Application.Homepage.Editor">Fenêtre de l'éditeur</s:String>
+    <s:String x:Key="S.Application.Other.Homepage">Accueil:</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.StartUp">Fenêtre de démarrage</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Recorder">Enregistreur d'écran</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Webcam">Enregistreur de Webcam</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Board">Enregistreur de Board</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Editor">Fenêtre de l'éditeur</s:String>
     
     <s:String x:Key="Application.ScreenRecorder">Enregistreur d'écran</s:String>
     <s:String x:Key="Application.ScreenRecorder.RecordMouse">Afficher le curseur de la souris dans l'enregistrement.</s:String>

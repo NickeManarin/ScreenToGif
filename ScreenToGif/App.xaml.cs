@@ -6,11 +6,13 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Interop;
 using System.Windows.Markup;
+using System.Windows.Media;
 using System.Windows.Threading;
 using ScreenToGif.Controls;
+using ScreenToGif.Model;
 using ScreenToGif.Util;
-using ScreenToGif.Util.Model;
 using ScreenToGif.Windows.Other;
 
 namespace ScreenToGif
@@ -21,7 +23,7 @@ namespace ScreenToGif
 
         internal static NotifyIcon NotifyIcon { get; private set; }
 
-        private static ApplicationViewModel MainViewModel { get; set; }
+        internal static ApplicationViewModel MainViewModel { get; set; }
 
         #endregion
 
@@ -37,36 +39,14 @@ namespace ScreenToGif
             //Increases the duration of the tooltip display.
             ToolTipService.ShowDurationProperty.OverrideMetadata(typeof(DependencyObject), new FrameworkPropertyMetadata(int.MaxValue));
 
-            #region Arguments
+            //Parse arguments.
+            if (e.Args.Length > 0)
+                Argument.Prepare(e.Args);
 
-            try
-            {
-                if (e.Args.Length > 0)
-                    Argument.Prepare(e.Args);
-            }
-            catch (Exception ex)
-            {
-                LogWriter.Log(ex, "Parsing arguments");
+            LocalizationHelper.SelectCulture(UserSettings.All.LanguageCode);
 
-                ExceptionDialog.Ok(ex, "ScreenToGif", "Error while parsing arguments", ex.Message);
-            }
-
-            #endregion
-
-            #region Language
-
-            try
-            {
-                LocalizationHelper.SelectCulture(UserSettings.All.LanguageCode);
-            }
-            catch (Exception ex)
-            {
-                LogWriter.Log(ex, "Language Settings Exception");
-
-                ExceptionDialog.Ok(ex, "ScreenToGif", "Error while detecting the app's language", ex.Message);
-            }
-
-            #endregion
+            if (UserSettings.All.DisableHardwareAcceleration)
+                RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
 
             #region Net Framework
 
@@ -88,6 +68,7 @@ namespace ScreenToGif
 
             #region Net Framework HotFixes
 
+            //Only runs on Windows 7 SP1.
             if (Environment.OSVersion.Version.Major == 6 && Environment.OSVersion.Version.Minor == 1)
             {
                 Task.Factory.StartNew(() =>
@@ -103,7 +84,7 @@ namespace ScreenToGif
                     }
                 });
             }
-            
+
             #endregion
 
             #region Tray icon and view model
@@ -111,7 +92,7 @@ namespace ScreenToGif
             NotifyIcon = (NotifyIcon)FindResource("NotifyIcon");
 
             if (NotifyIcon != null)
-                NotifyIcon.Visibility = UserSettings.All.ShowNotificationIcon ? Visibility.Visible : Visibility.Collapsed;
+                NotifyIcon.Visibility = UserSettings.All.ShowNotificationIcon || UserSettings.All.StartUp == 5 ? Visibility.Visible : Visibility.Collapsed;
 
             MainViewModel = (ApplicationViewModel)FindResource("AppViewModel") ?? new ApplicationViewModel();
 
@@ -123,49 +104,52 @@ namespace ScreenToGif
             //var select = new TestField(); select.ShowDialog(); return;
             //var select = new Encoder(); select.ShowDialog(); return;
 
-            try
+            #region Tasks
+
+            Task.Factory.StartNew(MainViewModel.ClearTemporaryFilesTask, TaskCreationOptions.LongRunning);
+            Task.Factory.StartNew(MainViewModel.UpdateTask, TaskCreationOptions.LongRunning);
+            Task.Factory.StartNew(MainViewModel.SendFeedback, TaskCreationOptions.LongRunning);
+
+            #endregion
+
+            #region Startup
+
+            if (UserSettings.All.StartUp == 4 || Argument.FileNames.Any())
             {
-                #region Startup
-
-                if (UserSettings.All.StartUp == 4 || Argument.FileNames.Any())
-                {
-                    MainViewModel.OpenEditor.Execute(null);
-                    return;
-                }
-
-                if (UserSettings.All.StartUp == 0)
-                {
-                    MainViewModel.OpenLauncher.Execute(null);
-                    return;
-                }
-
-                if (UserSettings.All.StartUp == 1)
-                {
-                    MainViewModel.OpenRecorder.Execute(null);
-                    return;
-                }
-
-                if (UserSettings.All.StartUp == 2)
-                {
-                    MainViewModel.OpenWebcamRecorder.Execute(null);
-                    return;
-                }
-
-                if (UserSettings.All.StartUp == 3)
-                    MainViewModel.OpenBoardRecorder.Execute(null);
-
-                #endregion
+                MainViewModel.OpenEditor.Execute(null);
+                return;
             }
-            catch (Exception ex)
+
+            if (UserSettings.All.StartUp == 0)
             {
-                LogWriter.Log(ex, "Generic Exception - Root");
-
-                ShowException(ex);
+                MainViewModel.OpenLauncher.Execute(null);
+                return;
             }
+
+            if (UserSettings.All.StartUp == 1)
+            {
+                MainViewModel.OpenRecorder.Execute(null);
+                return;
+            }
+
+            if (UserSettings.All.StartUp == 2)
+            {
+                MainViewModel.OpenWebcamRecorder.Execute(null);
+                return;
+            }
+
+            if (UserSettings.All.StartUp == 3)
+                MainViewModel.OpenBoardRecorder.Execute(null);
+
+            #endregion
         }
 
         private void App_OnExit(object sender, ExitEventArgs e)
         {
+            //TODO: Use a try catch for each one.
+
+            MutexList.RemoveAll();
+
             NotifyIcon?.Dispose();
 
             UserSettings.Save();
@@ -181,8 +165,9 @@ namespace ScreenToGif
             {
                 ShowException(e.Exception);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                LogWriter.Log(ex, "Error while displaying the error.");
                 //Ignored.
             }
 
@@ -214,38 +199,31 @@ namespace ScreenToGif
             //TODO: If startup/editor is open and focused, should I let the hotkeys work? 
 
             //Registers all shortcuts. 
-            HotKeyCollection.Default.RegisterHotKey(UserSettings.All.RecorderModifiers, UserSettings.All.RecorderShortcut, () =>
-            {
-                if (!Global.IgnoreHotKeys && MainViewModel.OpenRecorder.CanExecute(null)) MainViewModel.OpenRecorder.Execute(null);
-            }, true);
-            HotKeyCollection.Default.RegisterHotKey(UserSettings.All.WebcamRecorderModifiers, UserSettings.All.WebcamRecorderShortcut, () =>
-            {
-                if (!Global.IgnoreHotKeys && MainViewModel.OpenWebcamRecorder.CanExecute(null)) MainViewModel.OpenWebcamRecorder.Execute(null);
-            }, true);
-            HotKeyCollection.Default.RegisterHotKey(UserSettings.All.BoardRecorderModifiers, UserSettings.All.BoardRecorderShortcut, () =>
-            {
-                if (!Global.IgnoreHotKeys && MainViewModel.OpenBoardRecorder.CanExecute(null)) MainViewModel.OpenBoardRecorder.Execute(null);
-            }, true);
-            HotKeyCollection.Default.RegisterHotKey(UserSettings.All.EditorModifiers, UserSettings.All.EditorShortcut, () =>
-            {
-                if (!Global.IgnoreHotKeys && MainViewModel.OpenEditor.CanExecute(null)) MainViewModel.OpenEditor.Execute(null);
-            }, true);
-            HotKeyCollection.Default.RegisterHotKey(UserSettings.All.OptionsModifiers, UserSettings.All.OptionsShortcut, () =>
-            {
-                if (!Global.IgnoreHotKeys && MainViewModel.OpenOptions.CanExecute(null)) MainViewModel.OpenOptions.Execute(null);
-            }, true);
-            HotKeyCollection.Default.RegisterHotKey(UserSettings.All.ExitModifiers, UserSettings.All.ExitShortcut, () =>
-            {
-                if (!Global.IgnoreHotKeys && MainViewModel.ExitApplication.CanExecute(null)) MainViewModel.ExitApplication.Execute(null);
-            }, true);
+            var screen = HotKeyCollection.Default.TryRegisterHotKey(UserSettings.All.RecorderModifiers, UserSettings.All.RecorderShortcut, () =>
+                { if (!Global.IgnoreHotKeys && MainViewModel.OpenRecorder.CanExecute(null)) MainViewModel.OpenRecorder.Execute(null); }, true);
+
+            var webcam = HotKeyCollection.Default.TryRegisterHotKey(UserSettings.All.WebcamRecorderModifiers, UserSettings.All.WebcamRecorderShortcut, () =>
+                { if (!Global.IgnoreHotKeys && MainViewModel.OpenWebcamRecorder.CanExecute(null)) MainViewModel.OpenWebcamRecorder.Execute(null); }, true);
+
+            var board = HotKeyCollection.Default.TryRegisterHotKey(UserSettings.All.BoardRecorderModifiers, UserSettings.All.BoardRecorderShortcut, () =>
+                { if (!Global.IgnoreHotKeys && MainViewModel.OpenBoardRecorder.CanExecute(null)) MainViewModel.OpenBoardRecorder.Execute(null); }, true);
+
+            var editor = HotKeyCollection.Default.TryRegisterHotKey(UserSettings.All.EditorModifiers, UserSettings.All.EditorShortcut, () =>
+                { if (!Global.IgnoreHotKeys && MainViewModel.OpenEditor.CanExecute(null)) MainViewModel.OpenEditor.Execute(null); }, true);
+
+            var options = HotKeyCollection.Default.TryRegisterHotKey(UserSettings.All.OptionsModifiers, UserSettings.All.OptionsShortcut, () =>
+                { if (!Global.IgnoreHotKeys && MainViewModel.OpenOptions.CanExecute(null)) MainViewModel.OpenOptions.Execute(null); }, true);
+
+            var exit = HotKeyCollection.Default.TryRegisterHotKey(UserSettings.All.ExitModifiers, UserSettings.All.ExitShortcut, () =>
+                { if (!Global.IgnoreHotKeys && MainViewModel.ExitApplication.CanExecute(null)) MainViewModel.ExitApplication.Execute(null); }, true);
 
             //Updates the input gesture text of each command.
-            MainViewModel.RecorderGesture = Native.GetSelectKeyText(UserSettings.All.RecorderShortcut, UserSettings.All.RecorderModifiers, true, true);
-            MainViewModel.WebcamRecorderGesture = Native.GetSelectKeyText(UserSettings.All.WebcamRecorderShortcut, UserSettings.All.WebcamRecorderModifiers, true, true);
-            MainViewModel.BoardRecorderGesture = Native.GetSelectKeyText(UserSettings.All.BoardRecorderShortcut, UserSettings.All.BoardRecorderModifiers, true, true);
-            MainViewModel.EditorGesture = Native.GetSelectKeyText(UserSettings.All.EditorShortcut, UserSettings.All.EditorModifiers, true, true);
-            MainViewModel.OptionsGesture = Native.GetSelectKeyText(UserSettings.All.OptionsShortcut, UserSettings.All.OptionsModifiers, true, true);
-            MainViewModel.ExitGesture = Native.GetSelectKeyText(UserSettings.All.ExitShortcut, UserSettings.All.ExitModifiers, true, true);
+            MainViewModel.RecorderGesture = screen ? Native.GetSelectKeyText(UserSettings.All.RecorderShortcut, UserSettings.All.RecorderModifiers, true, true) : "";
+            MainViewModel.WebcamRecorderGesture = webcam ? Native.GetSelectKeyText(UserSettings.All.WebcamRecorderShortcut, UserSettings.All.WebcamRecorderModifiers, true, true) : "";
+            MainViewModel.BoardRecorderGesture = board ? Native.GetSelectKeyText(UserSettings.All.BoardRecorderShortcut, UserSettings.All.BoardRecorderModifiers, true, true) : "";
+            MainViewModel.EditorGesture = editor ? Native.GetSelectKeyText(UserSettings.All.EditorShortcut, UserSettings.All.EditorModifiers, true, true) : "";
+            MainViewModel.OptionsGesture = options ? Native.GetSelectKeyText(UserSettings.All.OptionsShortcut, UserSettings.All.OptionsModifiers, true, true) : "";
+            MainViewModel.ExitGesture = exit ? Native.GetSelectKeyText(UserSettings.All.ExitShortcut, UserSettings.All.ExitModifiers, true, true) : "";
         }
 
         internal void ShowException(Exception exception)

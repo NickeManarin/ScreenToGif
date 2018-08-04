@@ -102,8 +102,8 @@
 
             <Grid Grid.Column="2" Visibility="{Binding IsChecked, ElementName=PenModeRadioButton, Converter={StaticResource Bool2Visibility}}">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -114,9 +114,8 @@
 
                 <Separator Grid.Column="0" Width="1" Margin="0,1,10,1"/>
 
-                <Border Grid.Column="1" x:Name="BoardTipColorBorder" Width="30" Margin="5,3" Cursor="Hand" BorderBrush="#FFABABAB" BorderThickness="1"
-                        Background="{Binding BoardColor, Source={x:Static u:UserSettings.All}, Converter={StaticResource ColorToBrush}}" 
-                        MouseLeftButtonDown="BoardTipColorBorder_MouseLeftButtonDown"/>
+                <n:ColorBox Grid.Column="1" x:Name="TipColorBox" Width="40" MinWidth="40" Margin="5,3"
+                            SelectedColor="{Binding BoardColor, Source={x:Static u:UserSettings.All}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <n:IntegerUpDown Grid.Column="2" x:Name="FreeDrawingHeightNumericUpDown" Minimum="1" Maximum="100" Margin="2,2" MinWidth="50" 
                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=BoardStylusHeight, Mode=TwoWay}"
@@ -200,7 +199,7 @@
                         <MultiBinding Converter="{StaticResource SelectionToDrawingAttributesConverter}">
                             <Binding Source="{x:Static u:UserSettings.All}" Path="BoardStylusHeight"/>
                             <Binding Source="{x:Static u:UserSettings.All}" Path="BoardStylusWidth"/>
-                            <Binding ElementName="BoardTipColorBorder" Path="Background"/>
+                            <Binding ElementName="TipColorBox" Path="SelectedColor"/>
                             <Binding ElementName="FitToCurveRadioButton" Path="IsChecked"/>
                             <Binding ElementName="IsHighlighterRadioButton" Path="IsChecked"/>
                             <Binding ElementName="RectangleRadioButton" Path="IsChecked"/>
@@ -306,12 +305,12 @@
                                Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}"
                                UseLayoutRounding="True" MaxSize="16" TabIndex="4" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"/>
 
-                <n:ImageToggleButton x:Name="AutoRecordToggleButton" Text="{DynamicResource Board.AutoRecord}" IsChecked="True" Content="{StaticResource Vector.Record}" MaxSize="16"
-                                     Style="{StaticResource Style.ToggleButton.Horizontal}" TabIndex="5" TextWrapping="NoWrap" KeyGesture="{DynamicResource Board.CtrlHold}"
-                                     ToolTip="{DynamicResource Board.AutoRecordToolTip}" ToolTipService.Placement="Bottom"/>
+                <n:ImageToggleButton x:Name="AutoRecordToggleButton" Text="{DynamicResource Board.AutoRecord}" IsChecked="True" Content="{StaticResource Vector.Record}" 
+                                     ContentHeight="16" ContentWidth="16" Style="{StaticResource Style.ToggleButton.Horizontal}" TabIndex="5" TextWrapping="NoWrap" 
+                                     KeyGesture="{DynamicResource Board.CtrlHold}" ToolTip="{DynamicResource Board.AutoRecordToolTip}" ToolTipService.Placement="Bottom"/>
 
                 <n:ImageButton x:Name="StopButton" Text="{DynamicResource Recorder.Stop}" Content="{StaticResource Vector.Stop}" MaxSize="16"
-                               Style="{StaticResource Style.Button.Horizontal}" TabIndex="5"
+                               Style="{StaticResource Style.Button.Horizontal}" TabIndex="5" ContentHeight="18" ContentWidth="18" 
                                KeyGesture="{Binding Source={x:Static u:UserSettings.All}, Path=StopShortcut, Converter={StaticResource KeysToStringConverter}}" 
                                Click="StopButton_Click"/>
             </StackPanel>

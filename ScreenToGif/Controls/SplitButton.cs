@@ -28,6 +28,8 @@ namespace ScreenToGif.Controls
         public static readonly DependencyProperty SelectedIndexProperty = DependencyProperty.Register("SelectedIndex", typeof(int), typeof(SplitButton), new FrameworkPropertyMetadata(0,
             FrameworkPropertyMetadataOptions.AffectsRender, SelectedIndex_ChangedCallback));
 
+        public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(SplitButton), new FrameworkPropertyMetadata(""));
+
         #endregion
 
         #region Properties

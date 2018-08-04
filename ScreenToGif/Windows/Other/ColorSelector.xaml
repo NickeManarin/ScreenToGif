@@ -6,8 +6,8 @@
         xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
         Title="{DynamicResource ColorSelector.Title}" Height="350" Width="600" MinWidth="555" MinHeight="275"
         Background="White" Icon="/ScreenToGif;component/Resources/Logo.ico" UseLayoutRounding="True" SnapsToDevicePixels="True"
-        WindowStartupLocation="CenterOwner" Topmost="True" SizeToContent="Width" Loaded="Window_Loaded">
-    
+        WindowStartupLocation="CenterScreen" Topmost="True" SizeToContent="Width" Loaded="Window_Loaded">
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" MinWidth="330"/>
@@ -42,11 +42,11 @@
         <Border Grid.Column="0" x:Name="ColorDetail" HorizontalAlignment="Stretch" Cursor="Cross" Margin="5,5,5,29" SizeChanged="ColorDetailSizeChanged"
                 PreviewMouseMove="OnMouseMove" PreviewMouseLeftButtonDown="OnMouseLeftButtonDown" ClipToBounds="True" MouseLeftButtonUp="ColorDetail_MouseLeftButtonUp" 
                 IsEnabled="False">
-            
+
             <Border.Resources>
                 <c:AlphaToOpacity x:Key="AlphaToOpacity"/>
             </Border.Resources>
-            
+
             <Border.Background>
                 <DrawingBrush Opacity="{Binding Path=Value, ElementName=AlphaIntegerUpDown, Converter={StaticResource AlphaToOpacity}}">
                     <DrawingBrush.Drawing>
@@ -158,13 +158,13 @@
                     <ToolTip Content="{DynamicResource ColorSelector.Initial}" Placement="Bottom" HorizontalOffset="-5"/>
                 </Border.ToolTip>
             </Border>
-            
+
             <Border Name="CurrentColor" Grid.Column="1" Background="White">
                 <Border.ToolTip>
                     <ToolTip Content="{DynamicResource ColorSelector.Current}" Placement="Bottom" HorizontalOffset="-5"/>
                 </Border.ToolTip>
             </Border>
-            
+
             <Border Name="LastColor" Grid.Column="2" Background="White">
                 <Border.ToolTip>
                     <ToolTip Content="{DynamicResource ColorSelector.Latest}" Placement="Bottom" HorizontalOffset="-5"/>
@@ -184,7 +184,7 @@
                 <RowDefinition Height="32"/>
                 <RowDefinition Height="32"/>
                 <RowDefinition Height="5"/>
-                <RowDefinition Height="32"/>
+                <RowDefinition Height="33"/>
                 <RowDefinition/>
                 <RowDefinition Height="38"/>
             </Grid.RowDefinitions>
@@ -196,36 +196,29 @@
             <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="{DynamicResource ColorSelector.Select}" FontSize="14" Effect="{StaticResource Shadow.Foreground.Small}"/>
 
             <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource ColorSelector.Red}" Margin="5" VerticalContentAlignment="Center" Padding="3" />
-            <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="RedIntegerUpDown" Margin="5,3" 
-                             Text="100" MaxLength="4" MaxLines="1" Padding="2,0" Minimum="0" Maximum="255" 
-                             MouseWheel="ValueBox_MouseWheel" LostFocus="ValueText_LostFocus" KeyDown="ValueText_KeyDown" ValueChanged="ArgbText_ValueChanged" 
-                             VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+            <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="RedIntegerUpDown" Margin="5,3" MaxLength="4" Padding="2,0" Maximum="255" 
+                             MouseWheel="ValueBox_MouseWheel" ValueChanged="ArgbText_ValueChanged"/>
 
             <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource ColorSelector.Green}" Margin="5" VerticalContentAlignment="Center" Padding="3" />
-            <n:IntegerUpDown Grid.Row="2" Grid.Column="1" x:Name="GreenIntegerUpDown" Margin="5,3"
-                             Text="100" MaxLength="4" MaxLines="1" Padding="2,0" Minimum="0" Maximum="255"
-                             MouseWheel="ValueBox_MouseWheel" LostFocus="ValueText_LostFocus" KeyDown="ValueText_KeyDown" ValueChanged="ArgbText_ValueChanged"
-                             HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+            <n:IntegerUpDown Grid.Row="2" Grid.Column="1" x:Name="GreenIntegerUpDown" Margin="5,3" MaxLength="4" Padding="2,0" Maximum="255" 
+                             MouseWheel="ValueBox_MouseWheel" ValueChanged="ArgbText_ValueChanged"/>
 
             <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource ColorSelector.Blue}" Margin="5" VerticalContentAlignment="Center" Padding="3" />
-            <n:IntegerUpDown Grid.Row="3" Grid.Column="1" x:Name="BlueIntegerUpDown" Margin="5,3" TextWrapping="Wrap" Minimum="0" Maximum="255" 
-                             Text="100" MaxLength="4" MaxLines="1" Padding="2,0" 
-                             MouseWheel="ValueBox_MouseWheel" LostFocus="ValueText_LostFocus" KeyDown="ValueText_KeyDown" ValueChanged="ArgbText_ValueChanged" 
-                             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <n:IntegerUpDown Grid.Row="3" Grid.Column="1" x:Name="BlueIntegerUpDown" Margin="5,3" MaxLength="4" Padding="2,0" Maximum="255"
+                             MouseWheel="ValueBox_MouseWheel" ValueChanged="ArgbText_ValueChanged"/>
 
             <Label Grid.Row="4" Grid.Column="0" x:Name="AlphaLabel" Content="{DynamicResource ColorSelector.Alpha}" Margin="5" VerticalContentAlignment="Center" Padding="3" />
-            <n:IntegerUpDown Grid.Row="4" Grid.Column="1" x:Name="AlphaIntegerUpDown" Margin="5,3"
-                             Text="100" MaxLength="4" MaxLines="1" Padding="2,0" Minimum="0" Maximum="255"
-                             MouseWheel="ValueBox_MouseWheel" LostFocus="ValueText_LostFocus" KeyDown="ValueText_KeyDown" ValueChanged="ArgbText_ValueChanged"
-                             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <n:IntegerUpDown Grid.Row="4" Grid.Column="1" x:Name="AlphaIntegerUpDown" Margin="5,3" MaxLength="4" Padding="2,0" Maximum="255" 
+                             MouseWheel="ValueBox_MouseWheel" ValueChanged="ArgbText_ValueChanged"/>
 
             <Separator Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Height="1"/>
 
             <Label Grid.Row="6" Grid.Column="0" Content="{DynamicResource ColorSelector.Hexadecimal}" Margin="5" VerticalContentAlignment="Center" Padding="3" />
-            <n:NumericTextBox Grid.Row="6" Grid.Column="1" x:Name="HexadecimalTextBox" Margin="5" TextWrapping="Wrap" IsHex="True" 
-                              Text="#FFFFFFFF" MaxLength="9" MaxLines="1" Padding="2,0" MinValue="0" MaxValue="4294967295"
-                              LostFocus="ValueText_LostFocus" KeyDown="ValueText_KeyDown" MouseWheel="ValueBox_MouseWheel" ValueChanged="HexadecimalText_ValueChanged"
-                              HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <n:HexadecimalBox Grid.Row="6" Grid.Column="1" x:Name="ColorHexadecimalBox" Margin="5" Padding="2,0" 
+                              Alpha="{Binding ElementName=AlphaIntegerUpDown, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              Red="{Binding ElementName=RedIntegerUpDown, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              Green="{Binding ElementName=GreenIntegerUpDown, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              Blue="{Binding ElementName=BlueIntegerUpDown, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <Grid Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Margin="3,0,0,0" Background="WhiteSmoke">
                 <Grid.ColumnDefinitions>

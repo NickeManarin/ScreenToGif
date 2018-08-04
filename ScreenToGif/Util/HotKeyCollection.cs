@@ -9,10 +9,7 @@ namespace ScreenToGif.Util
     {
         internal static readonly HotKeyCollection Default = new HotKeyCollection();
 
-        
-        private readonly List<HotKey> _hotKeys = new List<HotKey>();
-
-        internal List<HotKey> HotKeys => _hotKeys;
+        internal List<HotKey> HotKeys { get; } = new List<HotKey>();
 
         /// <summary>
         /// Registers the given keyboard shortcut with a given callback.
@@ -27,7 +24,7 @@ namespace ScreenToGif.Util
             if (key == Key.None)
                 return;
 
-            _hotKeys.Add(new HotKey(modifier, key, windowsHandle, callback));
+            HotKeys.Add(new HotKey(modifier, key, windowsHandle, callback));
         }
 
         /// <summary>
@@ -43,7 +40,32 @@ namespace ScreenToGif.Util
             if (key == Key.None)
                 return;
 
-            _hotKeys.Add(new HotKey(modifier, key, callback, unregisterFirst));
+            HotKeys.Add(new HotKey(modifier, key, callback, unregisterFirst));
+        }
+
+        /// <summary>
+        /// Tries to register the given keyboard shortcut with a given callback.
+        /// </summary>
+        /// <param name="modifier">The modifier of the keyboard command.</param>
+        /// <param name="key">The key of the keyboard command.</param>
+        /// <param name="callback">The callback that will be invoked when the keyboard command is pressed.</param>
+        /// <param name="unregisterFirst">Tries to unregister first, before trying to register the hotkey.</param>
+        /// <exception cref="InvalidOperationException">If the key is already in use.</exception>
+        internal bool TryRegisterHotKey(ModifierKeys modifier, Key key, Action callback, bool unregisterFirst = false)
+        {
+            if (key == Key.None)
+                return true;
+
+            try
+            {
+                HotKeys.Add(new HotKey(modifier, key, callback, unregisterFirst));
+                return true;
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Key already registered: " + key);
+                return false;
+            }
         }
 
         internal void Remove(ModifierKeys modifier, Key key)

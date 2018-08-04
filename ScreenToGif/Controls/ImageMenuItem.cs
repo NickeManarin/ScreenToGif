@@ -11,20 +11,18 @@ namespace ScreenToGif.Controls
     {
         #region Variables
 
-        public static readonly DependencyProperty ImageProperty = DependencyProperty.Register("Image", typeof(UIElement), typeof(ImageMenuItem), new FrameworkPropertyMetadata());
+        public static readonly DependencyProperty ImageProperty = DependencyProperty.Register("Image", typeof(UIElement), typeof(ImageMenuItem), new FrameworkPropertyMetadata(Image_Changed));
 
-        public static readonly DependencyProperty ContentHeightProperty = DependencyProperty.Register("ContentHeight", typeof(double), typeof(ImageMenuItem), new FrameworkPropertyMetadata(double.NaN));
+        public static readonly DependencyProperty ContentHeightProperty = DependencyProperty.Register("ContentHeight", typeof(double), typeof(ImageMenuItem), new FrameworkPropertyMetadata(16d));
 
-        public static readonly DependencyProperty ContentWidthProperty = DependencyProperty.Register("ContentWidth", typeof(double), typeof(ImageMenuItem), new FrameworkPropertyMetadata(double.NaN));
-
-        public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(ImageMenuItem), new FrameworkPropertyMetadata(""));
+        public static readonly DependencyProperty ContentWidthProperty = DependencyProperty.Register("ContentWidth", typeof(double), typeof(ImageMenuItem), new FrameworkPropertyMetadata(16d));
 
         public static readonly DependencyProperty TextWrappingProperty = DependencyProperty.Register("TextWrapping", typeof(TextWrapping), typeof(ImageMenuItem), new FrameworkPropertyMetadata(TextWrapping.NoWrap,
             FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender));
 
-        public static readonly DependencyProperty MaxSizeProperty = DependencyProperty.Register("MaxSize", typeof(double), typeof(ImageMenuItem), new FrameworkPropertyMetadata(15.0));
-
         public static readonly DependencyProperty HasImageProperty = DependencyProperty.Register("HasImage", typeof(bool), typeof(ImageMenuItem), new FrameworkPropertyMetadata(false));
+
+        public static readonly DependencyProperty DarkModeProperty = DependencyProperty.Register("DarkMode", typeof(bool), typeof(ImageMenuItem), new FrameworkPropertyMetadata(false));
 
         #endregion
 
@@ -67,23 +65,32 @@ namespace ScreenToGif.Controls
         }
 
         /// <summary>
-        /// The maximum size of the image.
+        /// True if the menu item contains an image.
         /// </summary>
-        [Description("The maximum size of the image.")]
-        public double MaxSize
-        {
-            get => (double)GetValue(MaxSizeProperty);
-            set => SetCurrentValue(MaxSizeProperty, value);
-        }
-
-        /// <summary>
-        /// The maximum size of the image.
-        /// </summary>
-        [Description("The maximum size of the image.")]
+        [Description("True if the menu item contains an image.")]
         public bool HasImage
         {
             get => (bool)GetValue(HasImageProperty);
             set => SetCurrentValue(HasImageProperty, value);
+        }
+
+        /// <summary>
+        /// True if the menu should ajust itself for dark mode.
+        /// </summary>
+        [Description("True if the menu should ajust itself for dark mode.")]
+        public bool DarkMode
+        {
+            get => (bool)GetValue(DarkModeProperty);
+            set => SetCurrentValue(DarkModeProperty, value);
+        }
+
+        #endregion
+
+        #region Property Changed
+
+        private static void Image_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ((ImageMenuItem)d).HasImage = e.NewValue != null;
         }
 
         #endregion

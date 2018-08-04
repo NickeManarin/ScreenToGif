@@ -33,14 +33,14 @@ namespace ScreenToGif.Windows.Other
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                //ExamplePath.Data = Geometry.Parse(InputTextBox.Text);
-            }
-            catch (Exception ex)
-            {
-                //LogWriter.Log(ex, "Geometry Parse error", InputTextBox.Text);
-            }
+            //try
+            //{
+            //    ExamplePath.Data = Geometry.Parse(InputTextBox.Text);
+            //}
+            //catch (Exception ex)
+            //{
+            //    LogWriter.Log(ex, "Geometry Parse error", InputTextBox.Text);
+            //}
         }
 
         private void Print_Executed(object sender, ExecutedRoutedEventArgs e)

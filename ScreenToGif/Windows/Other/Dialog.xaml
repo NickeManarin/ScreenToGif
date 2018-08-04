@@ -7,7 +7,7 @@
         KeyDown="DialogKeyDown">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="48"/>
+            <RowDefinition MinHeight="48" Height="Auto"/>
             <RowDefinition Height="*" MinHeight="100"/>
             <RowDefinition Height="40" />
         </Grid.RowDefinitions>
@@ -18,10 +18,9 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Viewbox x:Name="IconViewbox" Margin="5" Child="{StaticResource Vector.Error}"/>
+            <Viewbox x:Name="IconViewbox" Margin="5" Child="{StaticResource Vector.Error}" Height="33" Width="33" VerticalAlignment="Center"/>
             
-            <Label x:Name="InstructionLabel" Content="Instruction" Margin="5" Grid.Column="1" VerticalContentAlignment="Center" 
-                   FontFamily="Segoe UI Semilight" FontSize="18" Foreground="#FF003399"/>
+            <TextBlock x:Name="InstructionLabel" Text="Instruction" Margin="5,1" Grid.Column="1" VerticalAlignment="Center" TextWrapping="Wrap" FontFamily="Segoe UI Semilight" FontSize="18" Foreground="#FF003399"/>
         </Grid>
 
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">

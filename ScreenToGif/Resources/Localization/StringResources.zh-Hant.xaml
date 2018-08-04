@@ -51,12 +51,12 @@
     <s:String x:Key="Donate">捐贈</s:String>
     <s:String x:Key="About">關於</s:String>
     
-    <s:String x:Key="Application.Homepage">首頁</s:String>
-    <s:String x:Key="Application.Homepage.StartUp">啟動視窗</s:String>
-    <s:String x:Key="Application.Homepage.Recorder">螢幕錄影</s:String>
-    <s:String x:Key="Application.Homepage.Webcam">網路攝影機錄影</s:String>
-    <s:String x:Key="Application.Homepage.Board">繪圖板錄影</s:String>
-    <s:String x:Key="Application.Homepage.Editor">編輯器視窗</s:String>
+    <s:String x:Key="S.Application.Other.Homepage">首頁:</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.StartUp">啟動視窗</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Recorder">螢幕錄影</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Webcam">網路攝影機錄影</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Board">繪圖板錄影</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Editor">編輯器視窗</s:String>
     
     <s:String x:Key="Application.ScreenRecorder">螢幕錄影</s:String>
     <s:String x:Key="Application.ScreenRecorder.RecordMouse">錄影時顯示滑鼠游標。</s:String>

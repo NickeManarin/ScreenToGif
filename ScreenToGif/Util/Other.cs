@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media;
-using ScreenToGif.Util.Model;
+using ScreenToGif.Model;
 
 namespace ScreenToGif.Util
 {
@@ -17,6 +17,47 @@ namespace ScreenToGif.Util
     /// </summary>
     public static class Other
     {
+        private static string _assemblyShortName;
+
+        /// <summary>
+        /// Helper method for generating a "pack://" URI for a given relative file based on the
+        /// assembly that this class is in.
+        /// </summary>
+        public static Uri MakePackUri(string relativeFile)
+        {
+            var uriString = "pack://application:,,,/" + AssemblyShortName + ";component/" + relativeFile;
+            return new Uri(uriString);
+        }
+
+        private static string AssemblyShortName
+        {
+            get
+            {
+                if (_assemblyShortName != null)
+                    return _assemblyShortName;
+
+                var a = typeof(Global).Assembly;
+
+                //Pull out the short name.
+                _assemblyShortName = a.ToString().Split(',')[0];
+
+                return _assemblyShortName;
+            }
+        }
+
+        internal static string ToStringShort(this Version version)
+        {
+            var result = $"{version.Major}.{version.Minor}";
+
+            if (version.Build > 0)
+                result += $".{version.Build}";
+
+            if (version.Revision > 0)
+                result += $".{version.Revision}";
+
+            return result;
+        }
+
         public static Point TransformToScreen(Point point, Visual relativeTo)
         {
             var hwndSource = PresentationSource.FromVisual(relativeTo) as HwndSource;
@@ -99,6 +140,14 @@ namespace ScreenToGif.Util
             }
 
             return result;
+        }
+
+        public static string Truncate(this string text, int size)
+        {
+            if (string.IsNullOrEmpty(text))
+                return string.Empty;
+
+            return text.Length <= size ? text : text.Substring(0, size);
         }
 
         /// <summary>
@@ -247,6 +296,7 @@ namespace ScreenToGif.Util
             return list;
         }
 
+        [Obsolete("Use LocalizationHelper.Get() instead")]
         public static string TextResource(this FrameworkElement visual, string key, string defaultValue = "")
         {
             return visual.TryFindResource(key) as string ?? defaultValue;
@@ -299,8 +349,7 @@ namespace ScreenToGif.Util
 
         public static List<FrameInfo> CopyList(this List<FrameInfo> target)
         {
-            return new List<FrameInfo>(target.Select(item => new FrameInfo(item.Path, item.Delay,
-                new List<SimpleKeyGesture>(item.KeyList.Select(y => new SimpleKeyGesture(y.Key, y.Modifiers, y.IsUppercase))), item.Index)));
+            return new List<FrameInfo>(target.Select(s => new FrameInfo(s.Path, s.Delay, s.CursorX, s.CursorY, s.WasClicked, new List<SimpleKeyGesture>(s.KeyList.Select(y => new SimpleKeyGesture(y.Key, y.Modifiers, y.IsUppercase))), s.Index)));
         }
 
         /// <summary>
@@ -400,9 +449,7 @@ namespace ScreenToGif.Util
 
                 File.Copy(frame.Path, newPath);
 
-                var newFrame = new FrameInfo(newPath, frame.Delay, frame.KeyList);
-
-                list.Add(newFrame);
+                list.Add(new FrameInfo(newPath, frame.Delay, frame.CursorX, frame.CursorY, frame.WasClicked, frame.KeyList, frame.Index));
             }
 
             return list;

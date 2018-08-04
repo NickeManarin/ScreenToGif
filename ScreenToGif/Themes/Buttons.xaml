@@ -629,14 +629,12 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:ImageToggleButton}">
-                    <StackPanel Orientation="Horizontal" MinHeight="{TemplateBinding MinHeight}" SnapsToDevicePixels="True" Background="{TemplateBinding Background}">
+                    <StackPanel Orientation="Horizontal" MinHeight="{TemplateBinding MinHeight}" MinWidth="{TemplateBinding MinWidth}" Background="{TemplateBinding Background}">
 
                         <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="{TemplateBinding IsEnabled}"
                                  Margin="2" Stretch="Uniform" StretchDirection="Both" Effect="{x:Null}"
-                                 Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}" 
-                                 MaxHeight="{TemplateBinding MaxSize}" MaxWidth="{TemplateBinding MaxSize}">
-                            <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" 
-                                              HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                 Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" >
+                            <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Viewbox>
 
                         <Grid>
@@ -646,7 +644,7 @@
                             </Grid.RowDefinitions>
 
                             <TextBlock Grid.Row="0" x:Name="TextBlockInternal" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" 
-                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="2,0,2,0" 
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="2,0,2,0" Padding="{TemplateBinding Padding}"
                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text}" 
                                        TextWrapping="{TemplateBinding TextWrapping}" Effect="{TemplateBinding Effect}"/>
 
@@ -667,6 +665,7 @@
         <!--Default Values-->
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
 
         <Setter Property="FocusVisualStyle">
             <Setter.Value>
@@ -704,10 +703,31 @@
                 <Setter Property="Background" Value="#FFA3BDE3" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <!--<Setter Property="Foreground" Value="Gray"/>-->
                 <Setter Property="Opacity" Value=".6"/>
                 <Setter Property="Effect" Value="{x:Null}"/>
             </Trigger>
+
+            <Trigger Property="DarkMode" Value="True">
+                <Setter Property="Foreground" Value="WhiteSmoke"/>
+            </Trigger>
+
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="DarkMode" Value="True"/>
+                    <Condition Property="IsMouseOver" Value="True"/>
+                </MultiTrigger.Conditions>
+
+                <Setter Property="Foreground" Value="Black"/>
+            </MultiTrigger>
+
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="DarkMode" Value="True"/>
+                    <Condition Property="IsPressed" Value="True"/>
+                </MultiTrigger.Conditions>
+
+                <Setter Property="Foreground" Value="Black"/>
+            </MultiTrigger>
         </Style.Triggers>
     </Style>
 
@@ -841,7 +861,6 @@
                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="3,5,3,0"
                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text}" TextWrapping="WrapWithOverflow" 
                                    Effect="{TemplateBinding Effect}" TextAlignment="Center"/>
-
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -858,7 +877,6 @@
                 <Setter Property="Background" Value="#FFA3BDE3" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <!--<Setter Property="Background" Value="Gray"/>-->
                 <Setter Property="Opacity" Value=".6"/>
                 <Setter Property="Effect" Value="{x:Null}"/>
             </Trigger>

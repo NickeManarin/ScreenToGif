@@ -40,7 +40,7 @@ namespace ScreenToGif.Controls
 
         public static readonly DependencyProperty IsSelectionFinishedProperty = DependencyProperty.Register("IsSelectionFinished", typeof(bool), typeof(KeyBox), new PropertyMetadata(false));
 
-        public static readonly DependencyProperty CanRemoveProperty = DependencyProperty.Register("CanRemove", typeof(bool), typeof(KeyBox), new PropertyMetadata(false));
+        public static readonly DependencyProperty CanRemoveProperty = DependencyProperty.Register("CanRemove", typeof(bool), typeof(KeyBox), new PropertyMetadata(true));
 
         public static readonly DependencyProperty DisplayNoneProperty = DependencyProperty.Register("DisplayNone", typeof(bool), typeof(KeyBox), new PropertyMetadata(false));
 

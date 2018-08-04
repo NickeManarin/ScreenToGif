@@ -50,12 +50,12 @@
     <s:String x:Key="Donate">후원</s:String>
     <s:String x:Key="About">더 보기</s:String>
     
-    <s:String x:Key="Application.Homepage">홈페이지</s:String>
-    <s:String x:Key="Application.Homepage.StartUp">시작 화면</s:String>
-    <s:String x:Key="Application.Homepage.Recorder">화면 녹화기</s:String>
-    <s:String x:Key="Application.Homepage.Webcam">웹캠 녹화기</s:String>
-    <s:String x:Key="Application.Homepage.Board">칠판 녹화기</s:String>
-    <s:String x:Key="Application.Homepage.Editor">편집기</s:String>
+    <s:String x:Key="S.Application.Other.Homepage">홈페이지:</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.StartUp">시작 화면</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Recorder">화면 녹화기</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Webcam">웹캠 녹화기</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Board">칠판 녹화기</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Editor">편집기</s:String>
     
     <s:String x:Key="Application.ScreenRecorder">화면 녹화기</s:String>
     <s:String x:Key="Application.ScreenRecorder.RecordMouse">녹화 중 마우스 커서를 같이 녹화합니다.</s:String>

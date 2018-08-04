@@ -69,6 +69,42 @@
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -115,6 +151,7 @@
     <Compile Include="Controls\AttachmentListBoxItem.cs" />
     <Compile Include="Controls\AwareTabItem.cs" />
     <Compile Include="Controls\CircularProgressBar.cs" />
+    <Compile Include="Controls\ColorBox.cs" />
     <Compile Include="Controls\CroppingAdorner.cs" />
     <Compile Include="Controls\DataGridHeaderBorder.cs" />
     <Compile Include="Controls\DoubleBox.cs" />
@@ -130,6 +167,7 @@
     <Compile Include="Controls\ExtendedUniformGrid.cs" />
     <Compile Include="Controls\ImageCard.cs" />
     <Compile Include="Controls\LabelSeparator.cs" />
+    <Compile Include="Controls\NotificationListControl.cs" />
     <Compile Include="Controls\NotifyIcon.cs" />
     <Compile Include="Controls\RecorderWindow.cs" />
     <Compile Include="Controls\SplitButton.cs" />
@@ -208,6 +246,17 @@
     <Compile Include="Cloud\CloudFactory.cs" />
     <Compile Include="Cloud\Gfycat.cs" />
     <Compile Include="Cloud\Imgur\Imgur.cs" />
+    <Compile Include="ImageUtil\Psd\Psd.cs" />
+    <Compile Include="Model\BindableBase.cs" />
+    <Compile Include="Model\DefaultTaskModel.cs" />
+    <Compile Include="Model\KeyStrokesModel.cs" />
+    <Compile Include="Model\MouseClicksModel.cs" />
+    <Compile Include="UserControls\KeyStrokesPanel.xaml.cs">
+      <DependentUpon>KeyStrokesPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MouseClicksPanel.xaml.cs">
+      <DependentUpon>MouseClicksPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Util\ActionStack.cs" />
     <Compile Include="Util\ActivityHook\CustomKeyEventArgs.cs" />
     <Compile Include="Util\ActivityHook\CustomKeyPressEventArgs.cs" />
@@ -277,10 +326,13 @@
     <Compile Include="Util\FastRandom.cs" />
     <Compile Include="Util\HotKey.cs" />
     <Compile Include="Util\HotKeyCollection.cs" />
+    <Compile Include="Model\UpdateModel.cs" />
+    <Compile Include="Util\MutexList.cs" />
+    <Compile Include="Util\NotificationManager.cs" />
     <Compile Include="Util\WebHelper.cs" />
-    <Compile Include="Util\Model\ApplicationModel.cs" />
-    <Compile Include="Util\Model\ApplicationViewModel.cs" />
-    <Compile Include="Util\Model\FrameInfo.cs" />
+    <Compile Include="Model\ApplicationModel.cs" />
+    <Compile Include="Model\ApplicationViewModel.cs" />
+    <Compile Include="Model\FrameInfo.cs" />
     <Compile Include="Util\Glass.cs" />
     <Compile Include="Util\Global.cs" />
     <Compile Include="Util\Humanizer.cs" />
@@ -288,7 +340,7 @@
     <Compile Include="Util\ListBoxSelector.cs" />
     <Compile Include="Util\LocalizationHelper.cs" />
     <Compile Include="Util\MathHelper.cs" />
-    <Compile Include="Util\Model\ProjectInfo.cs" />
+    <Compile Include="Model\ProjectInfo.cs" />
     <Compile Include="Util\Native.cs" />
     <Compile Include="ImageUtil\Video\AviWriter.cs" />
     <Compile Include="Util\LogWriter.cs" />
@@ -321,8 +373,14 @@
     <Compile Include="Windows\Editor.xaml.cs">
       <DependentUpon>Editor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Other\AutomatedTask.xaml.cs">
+      <DependentUpon>AutomatedTask.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Other\ExceptionDialog.xaml.cs">
       <DependentUpon>ExceptionDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Other\FeedbackPreview.xaml.cs">
+      <DependentUpon>FeedbackPreview.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Other\PickAlbumDialog.xaml.cs">
       <DependentUpon>PickAlbumDialog.xaml</DependentUpon>
@@ -362,6 +420,9 @@
     </Compile>
     <Compile Include="Windows\Other\TextDialog.xaml.cs">
       <DependentUpon>TextDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Other\Troubleshoot.xaml.cs">
+      <DependentUpon>Troubleshoot.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Other\VideoSource.xaml.cs">
       <DependentUpon>VideoSource.xaml</DependentUpon>
@@ -408,6 +469,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\Localization\StringResources.ar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Localization\StringResources.cs.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -536,6 +601,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\KeyStrokesPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\MouseClicksPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\Other\ColorSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -544,7 +617,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\Other\AutomatedTask.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\Other\ExceptionDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Other\FeedbackPreview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -597,6 +678,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\Other\TextDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Other\Troubleshoot.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -661,9 +746,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\Style.css" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ImageUtil\Psd\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -682,7 +765,9 @@
     <Copy SourceFiles="@(Win32Binaries)" DestinationFolder="$(TargetUWP)" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>if exist "$(DevEnvDir)..\..\VC\Auxiliary\Build\vsvars32.bat" (
+   call "$(DevEnvDir)..\..\VC\Auxiliary\Build\vsvars32.bat"
+   editbin /largeaddressaware "$(TargetPath)"
+)</PostBuildEvent>
   </PropertyGroup>
 </Project>

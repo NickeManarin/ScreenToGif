@@ -57,12 +57,12 @@
     <s:String x:Key="Donate">Donar</s:String>
     <s:String x:Key="About">Información</s:String>
     
-    <s:String x:Key="Application.Homepage">Inicio</s:String>
-    <s:String x:Key="Application.Homepage.StartUp">Ventana de Inicio</s:String>
-    <s:String x:Key="Application.Homepage.Recorder">Grabar Pantalla</s:String>
-    <s:String x:Key="Application.Homepage.Webcam">Grabar Webcam</s:String>
-    <s:String x:Key="Application.Homepage.Board">Grabar Tablero</s:String>
-    <s:String x:Key="Application.Homepage.Editor">Ventana de Edición</s:String>
+    <s:String x:Key="S.Application.Other.Homepage">Inicio:</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.StartUp">Ventana de Inicio</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Recorder">Grabar Pantalla</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Webcam">Grabar Webcam</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Board">Grabar Tablero</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Editor">Ventana de Edición</s:String>
     
     <s:String x:Key="Application.ScreenRecorder">Grabación de Pantalla</s:String>
     <s:String x:Key="Application.ScreenRecorder.RecordMouse">Mostrar el cursor en la grabación.</s:String>

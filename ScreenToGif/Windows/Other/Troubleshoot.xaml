@@ -1,0 +1,75 @@
+﻿<Window x:Class="ScreenToGif.Windows.Other.Troubleshoot"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:n="clr-namespace:ScreenToGif.Controls"
+        Title="{DynamicResource S.Troubleshoot.Title}" Height="450" Width="800" MinHeight="350" MinWidth="700"
+        Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition MinHeight="35" Height="Auto" MaxHeight="70"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="#FFF9F9FF">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Viewbox Grid.Column="0" Margin="6" Child="{StaticResource Vector.Warning}" MaxWidth="25" MaxHeight="25"/>
+
+            <TextBlock Grid.Column="1" x:Name="TypeLabel" Text="{DynamicResource S.Troubleshoot.Windows}" Margin="5" VerticalAlignment="Center" 
+                       FontFamily="Segoe UI Semilight" FontSize="18" Foreground="#FF003399"/>
+
+            <TextBlock Grid.Column="2" Text="{DynamicResource S.Troubleshoot.Windows.Info}" FontSize="12" Foreground="#FF003399" TextAlignment="Center" VerticalAlignment="Center" Margin="3" TextWrapping="Wrap"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <n:ImageRadioButton Grid.Column="0" x:Name="NowRadioButton" Text="Here's where each window is currently located:" TextWrapping="Wrap" Checked="KindRadioButton_Checked"/>
+            <n:ImageRadioButton Grid.Column="1" x:Name="LaterRadioButton" Text="Here's where each window will open next time:" TextWrapping="Wrap" Checked="KindRadioButton_Checked"/>
+        </Grid>
+
+        <Viewbox Grid.Row="2" Stretch="Uniform" StretchDirection="Both" Margin="3" VerticalAlignment="Center">
+            <Canvas x:Name="MainCanvas"/>
+        </Viewbox>
+        
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock Grid.Column="0" x:Name="CurrentTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3" FontSize="14">
+                <Hyperlink Click="HyperlinkMove_Click">
+                    <Run x:Name="Recorder1Run" Text="{DynamicResource S.Troubleshoot.Windows.BringBack}"/>
+                </Hyperlink>
+            </TextBlock>
+
+            <TextBlock Grid.Column="1" x:Name="NextTextBlock" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3" FontSize="14">
+                <Hyperlink Click="HyperlinkReset_Click">
+                    <Run x:Name="Recorder2Run" Text="{DynamicResource S.Troubleshoot.Windows.Reset}"/>
+                </Hyperlink>
+            </TextBlock>
+        </Grid>
+
+        <Grid Grid.Row="4" Background="WhiteSmoke" UseLayoutRounding="False">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto" MinWidth="110"/>
+            </Grid.ColumnDefinitions>
+
+            <n:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource Ok}" Margin="5" Padding="2,0" ContentHeight="20" Content="{StaticResource Vector.Ok}" Click="OkButton_Click" IsCancel="True"/>
+        </Grid>
+    </Grid>
+</Window>

@@ -17,11 +17,13 @@
     <s:String x:Key="Suppress">Suprimir</s:String>
     <s:String x:Key="Preview">Pré Visualização</s:String>
     <s:String x:Key="S.Add">Adicionar</s:String>
+    <s:String x:Key="S.Edit">Editar</s:String>
     <s:String x:Key="S.Id">Cód.</s:String>
     <s:String x:Key="S.Title">Título</s:String>
     <s:String x:Key="S.Description">Descrição</s:String>
+    <s:String x:Key="S.SelectColor">Clique aqui para selecionar a cor.</s:String>
 
-    <!--Notification Icon-->
+    <!--Tray Icon-->
     <s:String x:Key="S.NewRecording">Nova gravação de tela</s:String>
     <s:String x:Key="S.NewWebcamRecording">Nova gravação da webcam</s:String>
     <s:String x:Key="S.NewBoardRecording">Nova gravação de quadro</s:String>
@@ -50,7 +52,7 @@
     <s:String x:Key="Tooltip.Board">Abre o gravador de quadro.</s:String>
     <s:String x:Key="Tooltip.Editor">Abre o editor. O local central deste aplicativo.</s:String>
 
-    <!--Update Page-->
+    <!--Update Window-->
     <s:String x:Key="Update">Atualização</s:String>
     <s:String x:Key="Update.NewRelease">Nova versão!</s:String>
     <s:String x:Key="Update.NewRelease.Verbose">Nova versão disponível, Versão {0}! Clique aqui para mais detalhes.</s:String>
@@ -64,10 +66,11 @@
     <s:String x:Key="Update.CloseThis">Você deseja fechar este aplicativo?</s:String>
     <s:String x:Key="Update.CloseThis.Detail">Esta é a versão antiga. Você já baixou a versão nova.</s:String>
     
-    <!--Options Page-->
+    <!--Options Window-->
     <s:String x:Key="Title.Options">ScreenToGif - Opções</s:String>
     <s:String x:Key="Application">Geral</s:String>
     <s:String x:Key="Interface">Interface</s:String>
+    <s:String x:Key="S.AutoTasks">Tarefas Automáticas</s:String>
     <s:String x:Key="S.Shortcuts">Atalhos de Teclado</s:String>
     <s:String x:Key="Image">Imagem</s:String>
     <s:String x:Key="Language">Idioma</s:String>
@@ -76,14 +79,7 @@
     <s:String x:Key="Clouds">Serviços de Upload</s:String>
     <s:String x:Key="Donate">Doação</s:String>
     <s:String x:Key="About">Sobre</s:String>
-    
-    <s:String x:Key="Application.Homepage">Página Inicial</s:String>
-    <s:String x:Key="Application.Homepage.StartUp">Janela de Início</s:String>
-    <s:String x:Key="Application.Homepage.Recorder">Gravador de Tela</s:String>
-    <s:String x:Key="Application.Homepage.Webcam">Gravador de Câmera</s:String>
-    <s:String x:Key="Application.Homepage.Board">Gravador de Quadro</s:String>
-    <s:String x:Key="Application.Homepage.Editor">Janela do Editor</s:String>
-    
+       
     <s:String x:Key="Application.ScreenRecorder">Gravador de Tela</s:String>
     <s:String x:Key="Application.ScreenRecorder.RecordMouse">Mostre o cursor na gravação.</s:String>
     <s:String x:Key="Application.ScreenRecorder.RecordClicks">Detecte cliques do mouse.</s:String>
@@ -107,8 +103,26 @@
     <s:String x:Key="Application.Other.NotifyFrameDeletion">Me pergunte antes de remover quadros.</s:String>
     <s:String x:Key="Application.Other.NotifyProjectDiscard">Me pergunte antes de descartar um projeto.</s:String>
     <s:String x:Key="Application.Other.NotifyWhileClosingEditor">Me pergunte antes de fechar o Editor (se um projeto estiver aberto).</s:String>
+    <s:String x:Key="Application.Other.NotifyWhileClosingApp">Me pergunte antes de fechar o aplicativo (via o comando 'Sair').</s:String>
     <s:String x:Key="Application.Other.DrawOutlineOutside">Aplique a borda das legendas por fora das letras.</s:String>
+    <s:String x:Key="Application.Other.DisableHardwareAcceleration">Disabilite a aceleração por hardware.</s:String>
+    <s:String x:Key="Application.Other.CheckForTranslationUpdates">Buscar atualizações das traduções.</s:String>
     <s:String x:Key="Application.Other.CheckForUpdates">Buscar atualizações.</s:String>
+    <s:String x:Key="S.Application.Other.Homepage">Página Inicial:</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.StartUp">Janela de Início</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Recorder">Gravador de Tela</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Webcam">Gravador de Câmera</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Board">Gravador de Quadro</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Editor">Janela do Editor</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Minimized">Minimizado (área de notificação)</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Info">(Isso controla como o aplicativo abre. Quando iniciando minimizado, o ícone da área de trabalho estará visível)</s:String>
+    
+    <s:String x:Key="S.AutomatedTasks.Title">Tarefas Automáticas</s:String>
+    <s:String x:Key="S.AutomatedTasks.List">Lista de tarefas automáticas</s:String>
+    <s:String x:Key="S.AutomatedTasks.List.Task">Tarefa</s:String>
+    <s:String x:Key="S.AutomatedTasks.List.Details">Detalhes</s:String>
+    <s:String x:Key="S.AutomatedTasks.SelectType">(Selecione uma tarefa)</s:String>
+    <s:String x:Key="S.AutomatedTasks.Info">Essas tarefas são executadas sequencialmente do topo da lista para o último elemento.&#10;Isso acontece quando o projeto é aberto pela primeira vez no editor.</s:String>
     
     <s:String x:Key="Interface.EditorBackground">Plano de Fundo do Editor</s:String>
     <s:String x:Key="Interface.Recorder">Tema do Gravador</s:String>
@@ -201,10 +215,10 @@
     <s:String x:Key="TempFiles.OpenSettingsFolder">Abra a pasta que contém o arquivo de configurações.&#x0d;Pressione a tecla Ctrl enquanto clicando para abrir diretamente o arquivo, se possível.</s:String>
     <s:String x:Key="TempFiles.SettingsInfo">• Padrão de carregamento de configurações: Configurações padrão ◄ AppData ◄ Local.&#x0d;• Se não existe arquivo de configurações presente na pasta Local, o aplicativo busca dentro da pasta AppData,&#10;&#x09;as Configurações padrão são usadas se nenhum arquivo de configuração presente.&#x0d;• Se não existir configurações locais, todas as configurações são salvas na pasta AppData.</s:String>
     <s:String x:Key="TempFiles.KeepRecent">Manter projetos antigos?</s:String>
-    <s:String x:Key="TempFiles.KeepRecent.Info">Se você desejar, todos os projetos recentes (depende da configuração) não serão apagados.</s:String>
+    <s:String x:Key="TempFiles.KeepRecent.Info">Se você desejar, todos os projetos recentes (depende da configuração) não serão apagados.&#x0d;&#x0d;De qualquer forma, projetos abertos não serão apagados.</s:String>
     <s:String x:Key="TempFiles.AutomaticRemoval">Remover automaticamente projectos antigos.</s:String>
-    <s:String x:Key="TempFiles.AutomaticRemoval.Info">Quando o Editor abrir, uma tarefa em segundo plano vai apagar projetos antigos (depende da configuração).</s:String>
-    <s:String x:Key="TempFiles.AutomaticRemovalDays.Info">(em dias, qualquer projeto mas antigo que isso será apagado/descartado após abrir o editor)</s:String>
+    <s:String x:Key="TempFiles.AutomaticRemoval.Info">Quando o aplicativo abrir, uma tarefa em segundo plano vai apagar projetos antigos que não estão abertos (depende da configuração).</s:String>
+    <s:String x:Key="TempFiles.AutomaticRemovalDays.Info">(em dias, qualquer projeto mas antigo que isso e que esteja fechado será apagado/descartado após abrir o aplicativo)</s:String>
     <s:String x:Key="TempFiles.LowSpace">Pouco espaço na unidade de armazenamento atual. Por favor, apague os arquivos da pasta temporária ou utilize uma outra unidade.</s:String>
     
     <s:String x:Key="S.Upload.Proxy">Proxy</s:String>
@@ -255,7 +269,9 @@
     <s:String x:Key="Extras.GifskiLocation">Localização do Gifski</s:String>
     <s:String x:Key="Extras.GifskiLocation.Select">Selecione a localização do executável Gifski</s:String>
     <s:String x:Key="Extras.GifskiLocation.Invalid">O caminho do executável Gifski contém um ou mais caracteres inválidos. Por favor, selecione um caminho válido para o executável.</s:String>
-    
+    <s:String x:Key="Extras.License.Ffmpeg">Licença do FFmpeg</s:String>
+    <s:String x:Key="Extras.License.Gifski">Licença do Gifski</s:String>
+
     <s:String x:Key="Donate.IfYouWish">Se você quiser me agradecer :D</s:String>
     <s:String x:Key="Donate.DonateDollar">Doar US$</s:String>
     <s:String x:Key="Donate.DonateEuro">Doar €</s:String>
@@ -414,6 +430,10 @@
     <s:String x:Key="Command.Title">ScreenToGif - Resultado do comando</s:String>
     <s:String x:Key="Command.Header">Resultado do comando</s:String>
     
+    <!--Notifications-->
+    <s:String x:Key="S.Notifications">Notificações</s:String>
+    <s:String x:Key="S.Notifications.Dismiss">Limpar todas as notificações</s:String>
+    
     <!--Editor-->
     <s:String x:Key="Editor.Title">ScreenToGif - Editor</s:String>
     <s:String x:Key="Editor.File">Arquivo</s:String>
@@ -524,6 +544,7 @@
     <!--Image • Overlay-->
     <s:String x:Key="Editor.Image.Overlay">Sobreposição</s:String>
     <s:String x:Key="Editor.Image.FreeDrawing">Desenho&#x0d;Livre</s:String>
+    <s:String x:Key="Editor.Image.Clicks">Cliques&#x0d;do Mouse</s:String>
     <s:String x:Key="Editor.Image.Watermark">Marca D'água</s:String>
     <s:String x:Key="Editor.Image.Cinemagraph">Cinemagrafia</s:String>
     <s:String x:Key="Editor.Image.Border">Borda</s:String>
@@ -591,6 +612,7 @@
     
     <s:String x:Key="Editor.Fade.Title">Esmaecer</s:String>
     <s:String x:Key="Editor.Fade.WarningSelection">Você deve selecionar no mínimo um quadro para aplicar a transição de esmaecimento.</s:String>
+    <s:String x:Key="Editor.Fade.WarningColor">Uma cor totalmente transparente não criar efeito algum na transição.</s:String>
     <s:String x:Key="Editor.Slide.Title">Deslizar</s:String>
     <s:String x:Key="Editor.Slide.WarningSelection">Você deve selecionar no mínimo um quadro para aplicar a transição de deslizamento.</s:String>
 
@@ -643,8 +665,8 @@
     
     <!--Warnings-->
     <s:String x:Key="Editor.Warning.Selection">Você deve selecionar no mínimo um quadro para aplicar a camada.</s:String>
-    <s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg não está presente no seu sistema ou não foi encontrado. Adicione-o para as variáveis do sistema (Path) ou configure a localização nas opções deste aplicativo.</s:String>
-    <s:String x:Key="Editor.Warning.Gifski">Gifski não está presente no seu sistema ou não foi encontrado. Adicione-o para as variáveis do sistema (Path) ou configure a localização nas opções deste aplicativo.</s:String>
+    <s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg não está presente no seu sistema ou não foi encontrado. Adicione-o para as variáveis do sistema (Path) ou clique aqui para abrir Opções > Extras para configurar a localização.</s:String>
+    <s:String x:Key="Editor.Warning.Gifski">Gifski não está presente no seu sistema ou não foi encontrado. Adicione-o para as variáveis do sistema (Path) ou clique aqui para abrir Opções > Extras para configurar a localização.</s:String>
     <s:String x:Key="Editor.Warning.LowSpace">Não há espaço suficiente na unidade de armazenamento em que este aplicativo guarda seu cache ({0}% restantes). Clique aqui para abrir Opções > Arquivos Temporarios para liberar algum espaço.</s:String>
     
     <!--Hints-->
@@ -698,6 +720,8 @@
     <s:String x:Key="Recent.CreationDate">Data de criação</s:String>
     <s:String x:Key="Recent.FrameCount">Nº de quadros</s:String>
     <s:String x:Key="Recent.Warning.NothingSelected">Nenhum projeto selecionado. Selecione um projeto da lista para carregar.</s:String>
+    <s:String x:Key="Recent.Warning.SameOpened">Esse projeto já está aberto neste editor.</s:String>
+    <s:String x:Key="Recent.Warning.AlreadyOpened">Esse projeto já foi aberto por outra instância do editor. Um projeto não pode ser aberto ao mesmo tempo por mais de um editor.</s:String>
     
     <s:String x:Key="Clipboard.Entries">Área de Transferência</s:String>
     <s:String x:Key="Clipboard.Entry">Item:</s:String>
@@ -753,6 +777,7 @@
     <s:String x:Key="Caption.Vertical">Vertical:</s:String>
     <s:String x:Key="Caption.Horizontal">Horizontal:</s:String>
 
+    <s:String x:Key="S.KeyStrokes">Teclas Pressionadas</s:String>
     <s:String x:Key="KeyStrokes.Keys">Teclas</s:String>
     <s:String x:Key="KeyStrokes.Separator">Separador</s:String>
     <s:String x:Key="KeyStrokes.Edit">Edite suas teclas pressionadas</s:String>
@@ -788,6 +813,9 @@
     <s:String x:Key="FreeDrawing.Other">Outros:</s:String>
     <s:String x:Key="FreeDrawing.Highlighter">Marcador</s:String>
     <s:String x:Key="FreeDrawing.FitToCurve">Ajustar à Curva</s:String>
+    
+    <s:String x:Key="S.MouseClicks">Cliques do Mouse</s:String>
+    <s:String x:Key="S.MouseClicks.Warning.None">Não há cliques de mouse detectados no seu projeto.</s:String>
     
     <s:String x:Key="Watermark.Image">Imagem</s:String>
     <s:String x:Key="Watermark.File">Arquivo:</s:String>
@@ -837,6 +865,7 @@
     <s:String x:Key="S.SaveAs.Apng">Apng</s:String>
     <s:String x:Key="S.SaveAs.Images">Imagens (Quadros)</s:String>
     <s:String x:Key="S.SaveAs.Project">Projeto</s:String>
+    <s:String x:Key="S.SaveAs.Psd">PSD</s:String>
     <s:String x:Key="S.SaveAs.Video">Video</s:String>
     <s:String x:Key="S.SaveAs.Encoder">Codificador</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">2.0</s:String>
@@ -920,14 +949,15 @@
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">Comentários</s:String>
     <s:String x:Key="S.Feedback.Send">Enviar</s:String>
-    <s:String x:Key="S.Feedback.Header">Enviar Comentário</s:String>
+    <s:String x:Key="S.Feedback.Header">Enviar comentário</s:String>
     <s:String x:Key="S.Feedback.Title">Título</s:String>
+    <s:String x:Key="S.Feedback.Preview">Pré-visualização</s:String>
     <s:String x:Key="S.Feedback.Message">Mensagem</s:String>
-    <s:String x:Key="S.Feedback.Type">Tipo de Comentário</s:String>
+    <s:String x:Key="S.Feedback.Type">Tipo de comentário</s:String>
     <s:String x:Key="S.Feedback.Suggestion">Sugestão</s:String>
     <s:String x:Key="S.Feedback.IssueBug">Problema/Bug</s:String>
     <s:String x:Key="S.Feedback.IssueBug.Info">Por favor, se você estiver sofrendo com algum problema com o aplicativo: Não esqueça de informar o seu e-mail. Às vezes eu não consigo saber exatamento como o erro aconteceu e acabo precisando de mais detalhes.</s:String>
-    <s:String x:Key="S.Feedback.YourEmail">Seu E-mail (Opcional)</s:String>
+    <s:String x:Key="S.Feedback.YourEmail">Seu e-mail</s:String>
     <s:String x:Key="S.Feedback.Warning.Title">Voce precisa informar o título do comentário.</s:String>
     <s:String x:Key="S.Feedback.Warning.Message">Voce precisa informar a mensagem do comentário.</s:String>
     <s:String x:Key="S.Feedback.Sending">Enviando em plano de fundo... Esta janela fechará logo.</s:String>
@@ -936,7 +966,15 @@
     <s:String x:Key="S.Feedback.RemoveAttachments">Remover Todos Anexos</s:String>
     <s:String x:Key="S.Feedback.LanguageInfo1">Eu consigo entender Inglês</s:String>
     <s:String x:Key="S.Feedback.LanguageInfo2">e Português (Brasileiro e Europeu).</s:String>
+    <s:String x:Key="S.Feedback.Preview.Info">Isso é o que você vai me enviar, incluindo todos os anexos.</s:String>
     
+    <!--Troubleshoot-->
+    <s:String x:Key="S.Troubleshoot.Title">Solucionar problemas</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows">Alguma janela está escondida?</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Info">Se qualquer uma das janelas está escondida (fora da tela),&#x0d;use as opções abaixo para redefinir sua posição atual e de inicialização.</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.BringBack">Mova todas as janelas para a tela principal.</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Reset">Redefinir a posição de inicialização de todas as janelas.</s:String>
+   
     <!--FontStyles-->
     <s:String x:Key="S.FontStyles.Normal">Normal</s:String>
     <s:String x:Key="S.FontStyles.Italic">Itálico</s:String>

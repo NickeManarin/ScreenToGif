@@ -8,12 +8,11 @@ namespace ScreenToGif.Controls
     {
         #region Variables
 
-        public Viewbox _viewbox;
-        public TextBlock _label;
-
-        public static readonly DependencyProperty ChildProperty;
-        public static readonly DependencyProperty TextProperty;
-        public static readonly DependencyProperty MaxSizeProperty;
+        public static readonly DependencyProperty ChildProperty = DependencyProperty.Register("Child", typeof(UIElement), typeof(ImageRadioButton), new FrameworkPropertyMetadata());
+        public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(ImageRadioButton), new FrameworkPropertyMetadata("Button"));
+        public static readonly DependencyProperty MaxSizeProperty = DependencyProperty.Register("MaxSize", typeof(double), typeof(ImageRadioButton), new FrameworkPropertyMetadata(26.0));
+        public static readonly DependencyProperty TextWrappingProperty = DependencyProperty.Register("TextWrapping", typeof(TextWrapping), typeof(ImageRadioButton), new FrameworkPropertyMetadata(TextWrapping.NoWrap,
+            FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender));
 
         #endregion
 
@@ -49,23 +48,21 @@ namespace ScreenToGif.Controls
             set => SetCurrentValue(MaxSizeProperty, value);
         }
 
+        /// <summary>
+        /// The TextWrapping property controls whether or not text wraps 
+        /// when it reaches the flow edge of its containing block box. 
+        /// </summary>
+        public TextWrapping TextWrapping
+        {
+            get => (TextWrapping)GetValue(TextWrappingProperty);
+            set => SetValue(TextWrappingProperty, value);
+        }
+
         #endregion
 
         static ImageRadioButton()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ImageRadioButton), new FrameworkPropertyMetadata(typeof(ImageRadioButton)));
-
-            ChildProperty = DependencyProperty.Register("Child", typeof(UIElement), typeof(ImageRadioButton), new FrameworkPropertyMetadata());
-            TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(ImageRadioButton), new FrameworkPropertyMetadata("Button"));
-            MaxSizeProperty = DependencyProperty.Register("MaxSize", typeof(double), typeof(ImageRadioButton), new FrameworkPropertyMetadata(26.0));
-        }
-
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-
-            _viewbox = Template.FindName("ViewBoxInternal", this) as Viewbox;
-            _label = Template.FindName("TextBlockInternal", this) as TextBlock;
         }
     }
 }

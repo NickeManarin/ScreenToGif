@@ -77,12 +77,12 @@
     <s:String x:Key="Donate">捐赠</s:String>
     <s:String x:Key="About">关于</s:String>
     
-    <s:String x:Key="Application.Homepage">起始页面</s:String>
-    <s:String x:Key="Application.Homepage.StartUp">启动窗口</s:String>
-    <s:String x:Key="Application.Homepage.Recorder">屏幕录像机</s:String>
-    <s:String x:Key="Application.Homepage.Webcam">摄像头录像机</s:String>
-    <s:String x:Key="Application.Homepage.Board">画板录像机</s:String>
-    <s:String x:Key="Application.Homepage.Editor">编辑器窗口</s:String>
+    <s:String x:Key="S.Application.Other.Homepage">起始页面:</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.StartUp">启动窗口</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Recorder">屏幕录像机</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Webcam">摄像头录像机</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Board">画板录像机</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Editor">编辑器窗口</s:String>
     
     <s:String x:Key="Application.ScreenRecorder">屏幕录像机</s:String>
     <s:String x:Key="Application.ScreenRecorder.RecordMouse">录制时显示鼠标光标</s:String>

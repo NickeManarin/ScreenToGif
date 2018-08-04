@@ -45,7 +45,7 @@ namespace ScreenToGif.Windows.Other
 
             IconViewbox.Child = GetIcon(icon);
 
-            InstructionLabel.Content = instruction;
+            InstructionLabel.Text = instruction;
             ObservationTextBlock.Text = observation;
             Title = title;
         }
@@ -59,7 +59,7 @@ namespace ScreenToGif.Windows.Other
 
             IconViewbox.Child = GetIcon(icon);
 
-            InstructionLabel.Content = instruction;
+            InstructionLabel.Text = instruction;
             ObservationTextBlock.Text = observation;
             Title = title;
         }
@@ -76,7 +76,7 @@ namespace ScreenToGif.Windows.Other
 
             IconViewbox.Child = GetIcon(icon);
 
-            InstructionLabel.Content = instruction;
+            InstructionLabel.Text = instruction;
             ObservationTextBlock.Text = observation;
             Title = title;
         }

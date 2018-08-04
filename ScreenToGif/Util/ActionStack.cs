@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using ScreenToGif.Util.Model;
+using ScreenToGif.Model;
 
 namespace ScreenToGif.Util
 {
@@ -67,7 +67,7 @@ namespace ScreenToGif.Util
                         //Copy to a folder.
                         File.Copy(frame.Path, savedFrame);
 
-                        savedFrames.Add(new FrameInfo(savedFrame, frame.Delay, frame.KeyList, frame.Index));
+                        savedFrames.Add(new FrameInfo(savedFrame, frame.Delay, frame.CursorX, frame.CursorY, frame.WasClicked, frame.KeyList, frame.Index));
                     }
 
                     //Create a StageChange object with the saved frames and push to the undo stack.
@@ -91,7 +91,7 @@ namespace ScreenToGif.Util
                         //Copy to a folder.
                         File.Copy(frame.Path, savedFrame);
 
-                        savedFrames.Add(new FrameInfo(savedFrame, frame.Delay, frame.KeyList, frame.Index)); //TODO: Save state of keypresses and also return the values.
+                        savedFrames.Add(new FrameInfo(savedFrame, frame.Delay, frame.CursorX, frame.CursorY, frame.WasClicked, frame.KeyList, frame.Index));
                     }
 
                     //Create a StageChange object with the saved frames and push to the undo stack.
@@ -111,7 +111,7 @@ namespace ScreenToGif.Util
                     {
                         var frame = frames[position];
 
-                        savedFrames.Add(new FrameInfo(frame.Path, frame.Delay, frame.KeyList, frame.Index));
+                        savedFrames.Add(new FrameInfo(frame.Path, frame.Delay, frame.CursorX, frame.CursorY, frame.WasClicked, frame.KeyList, frame.Index));
                     }
 
                     //Create a StageChange object with the saved frames and push to the undo stack.
@@ -150,7 +150,7 @@ namespace ScreenToGif.Util
                 //Copy to a folder.
                 File.Copy(frame.Path, savedFrame);
 
-                savedFrames.Add(new FrameInfo(savedFrame, frame.Delay, frame.KeyList, frame.Index));
+                savedFrames.Add(new FrameInfo(savedFrame, frame.Delay, frame.CursorX, frame.CursorY, frame.WasClicked, frame.KeyList, frame.Index));
             }
 
             #endregion
@@ -162,7 +162,7 @@ namespace ScreenToGif.Util
             {
                 var frame = frames[position];
 
-                savedFrames.Add(new FrameInfo(frame.Path, frame.Delay, frame.KeyList, frame.Index));
+                savedFrames.Add(new FrameInfo(frame.Path, frame.Delay, frame.CursorX, frame.CursorY, frame.WasClicked, frame.KeyList, frame.Index));
             }
 
             #endregion
@@ -267,7 +267,7 @@ namespace ScreenToGif.Util
                             //Copy to a folder.
                             File.Copy(frame.Path, savedFrame);
 
-                            savedFrames.Add(new FrameInfo(savedFrame, frame.Delay, frame.KeyList, frame.Index));
+                            savedFrames.Add(new FrameInfo(savedFrame, frame.Delay, frame.CursorX, frame.CursorY, frame.WasClicked, frame.KeyList, frame.Index));
                         }
 
                         redoStateChange.Frames = savedFrames;
@@ -294,7 +294,7 @@ namespace ScreenToGif.Util
                             //Copy to a folder.
                             File.Copy(frame.Path, savedFrame);
 
-                            savedFrames2.Add(new FrameInfo(savedFrame, frame.Delay, frame.KeyList, frame.Index));
+                            savedFrames2.Add(new FrameInfo(savedFrame, frame.Delay, frame.CursorX, frame.CursorY, frame.WasClicked, frame.KeyList, frame.Index));
                         }
 
                         redoStateChange.Frames = savedFrames2;
@@ -357,14 +357,14 @@ namespace ScreenToGif.Util
                             //Copy to a folder.
                             File.Copy(frame.Path, savedFrame);
 
-                            savedFrames3.Add(new FrameInfo(savedFrame, frame.Delay, frame.KeyList, frame.Index));
+                            savedFrames3.Add(new FrameInfo(savedFrame, frame.Delay, frame.CursorX, frame.CursorY, frame.WasClicked, frame.KeyList, frame.Index));
                         }
 
                         //Saves the altered frames, without saving the images.
                         foreach (var position in latestUndo.Indexes2)
                         {
                             var frame = current[position];
-                            savedFrames3.Add(new FrameInfo(frame.Path, frame.Delay, frame.KeyList, frame.Index));
+                            savedFrames3.Add(new FrameInfo(frame.Path, frame.Delay, frame.CursorX, frame.CursorY, frame.WasClicked, frame.KeyList, frame.Index));
                         }
 
                         redoStateChange.Frames = savedFrames3;
@@ -402,7 +402,7 @@ namespace ScreenToGif.Util
                         File.Copy(frame.Path, file);
 
                         //Add to list.
-                        current.Insert(index, new FrameInfo(file, frame.Delay, frame.KeyList, frame.Index));
+                        current.Insert(index, new FrameInfo(file, frame.Delay, frame.CursorX, frame.CursorY, frame.WasClicked, frame.KeyList, frame.Index));
 
                         currentIndex++;
                     }
@@ -426,7 +426,7 @@ namespace ScreenToGif.Util
                         //Get the current frame before or after returning the properties values?
                         var currentFrame = current[latestUndo.Indexes[alteredIndex2]];
 
-                        current[latestUndo.Indexes[alteredIndex2]] = new FrameInfo(currentFrame.Path, frame.Delay, frame.KeyList, frame.Index); //Image location stays the same.
+                        current[latestUndo.Indexes[alteredIndex2]] = new FrameInfo(currentFrame.Path, frame.Delay, frame.CursorX, frame.CursorY, frame.WasClicked, frame.KeyList, frame.Index); //Image location stays the same.
 
                         //Copy file to folder.
                         File.Copy(frame.Path, currentFrame.Path, true);
@@ -450,7 +450,7 @@ namespace ScreenToGif.Util
                     var alteredIndex = 0;
                     foreach (var frame in latestUndo.Frames)
                     {
-                        current[latestUndo.Indexes[alteredIndex]] = new FrameInfo(frame.Path, frame.Delay, frame.KeyList, frame.Index);
+                        current[latestUndo.Indexes[alteredIndex]] = new FrameInfo(frame.Path, frame.Delay, frame.CursorX, frame.CursorY, frame.WasClicked, frame.KeyList, frame.Index);
 
                         alteredIndex++;
                     }
@@ -520,7 +520,7 @@ namespace ScreenToGif.Util
                         File.Copy(frame.Path, file);
 
                         //Add to list.
-                        current.Insert(index, new FrameInfo(file, frame.Delay, frame.KeyList, frame.Index));
+                        current.Insert(index, new FrameInfo(file, frame.Delay, frame.CursorX, frame.CursorY, frame.WasClicked, frame.KeyList, frame.Index));
 
                         currentIndex2++;
                     }
@@ -535,7 +535,7 @@ namespace ScreenToGif.Util
                     var alteredIndex3 = 0;
                     foreach (var frame in latestUndo.Frames.Skip(latestUndo.Indexes.Count))
                     {
-                        current[latestUndo.Indexes2[alteredIndex3]] = new FrameInfo(frame.Path, frame.Delay, frame.KeyList, frame.Index);
+                        current[latestUndo.Indexes2[alteredIndex3]] = new FrameInfo(frame.Path, frame.Delay, frame.CursorX, frame.CursorY, frame.WasClicked, frame.KeyList, frame.Index);
 
                         alteredIndex3++;
                     }
@@ -594,7 +594,7 @@ namespace ScreenToGif.Util
                         //Copy to a folder.
                         File.Copy(frame.Path, savedFrame);
 
-                        savedFrames.Add(new FrameInfo(savedFrame, frame.Delay, frame.KeyList, frame.Index));
+                        savedFrames.Add(new FrameInfo(savedFrame, frame.Delay, frame.CursorX, frame.CursorY, frame.WasClicked, frame.KeyList, frame.Index));
                     }
 
                     undoStateChange.Frames = savedFrames;
@@ -621,7 +621,7 @@ namespace ScreenToGif.Util
                         //Copy to a folder.
                         File.Copy(frame.Path, savedFrame);
 
-                        savedFrames2.Add(new FrameInfo(savedFrame, frame.Delay, frame.KeyList, frame.Index));
+                        savedFrames2.Add(new FrameInfo(savedFrame, frame.Delay, frame.CursorX, frame.CursorY, frame.WasClicked, frame.KeyList, frame.Index));
                     }
 
                     undoStateChange.Frames = savedFrames2;
@@ -686,14 +686,14 @@ namespace ScreenToGif.Util
                         //Copy to a folder.
                         File.Copy(frame.Path, savedFrame);
 
-                        savedFrames3.Add(new FrameInfo(savedFrame, frame.Delay, frame.KeyList, frame.Index));
+                        savedFrames3.Add(new FrameInfo(savedFrame, frame.Delay, frame.CursorX, frame.CursorY, frame.WasClicked, frame.KeyList, frame.Index));
                     }
 
                     //Saves the altered frames, without saving the images.
                     foreach (var position in latestRedo.Indexes2)
                     {
                         var frame = current[position];
-                        savedFrames3.Add(new FrameInfo(frame.Path, frame.Delay, frame.KeyList, frame.Index));
+                        savedFrames3.Add(new FrameInfo(frame.Path, frame.Delay, frame.CursorX, frame.CursorY, frame.WasClicked, frame.KeyList, frame.Index));
                     }
 
                     undoStateChange.Frames = savedFrames3;
@@ -730,7 +730,7 @@ namespace ScreenToGif.Util
                         File.Copy(frame.Path, file);
 
                         //Add to list.
-                        current.Insert(index, new FrameInfo(file, frame.Delay, frame.KeyList, frame.Index));
+                        current.Insert(index, new FrameInfo(file, frame.Delay, frame.CursorX, frame.CursorY, frame.WasClicked, frame.KeyList, frame.Index));
 
                         currentIndex++;
                     }
@@ -774,7 +774,7 @@ namespace ScreenToGif.Util
                     var alteredIndex = 0;
                     foreach (var frame in latestRedo.Frames)
                     {
-                        current[latestRedo.Indexes[alteredIndex]] = new FrameInfo(frame.Path, frame.Delay, frame.KeyList, frame.Index);
+                        current[latestRedo.Indexes[alteredIndex]] = new FrameInfo(frame.Path, frame.Delay, frame.CursorX, frame.CursorY, frame.WasClicked, frame.KeyList, frame.Index);
 
                         alteredIndex++;
                     }
@@ -845,7 +845,7 @@ namespace ScreenToGif.Util
                         File.Copy(frame.Path, file);
 
                         //Add to list.
-                        current.Insert(index, new FrameInfo(file, frame.Delay, frame.KeyList, frame.Index));
+                        current.Insert(index, new FrameInfo(file, frame.Delay, frame.CursorX, frame.CursorY, frame.WasClicked, frame.KeyList, frame.Index));
 
                         currentIndex2++;
                     }
@@ -860,7 +860,7 @@ namespace ScreenToGif.Util
                     var alteredIndex3 = 0;
                     foreach (var frame in latestRedo.Frames.Skip(latestRedo.Indexes.Count))
                     {
-                        current[latestRedo.Indexes2[alteredIndex3]] = new FrameInfo(frame.Path, frame.Delay, frame.KeyList, frame.Index);
+                        current[latestRedo.Indexes2[alteredIndex3]] = new FrameInfo(frame.Path, frame.Delay, frame.CursorX, frame.CursorY, frame.WasClicked, frame.KeyList, frame.Index);
 
                         alteredIndex3++;
                     }

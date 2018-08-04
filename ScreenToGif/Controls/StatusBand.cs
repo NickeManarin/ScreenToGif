@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media.Animation;
+using ScreenToGif.Util;
 using Button = System.Windows.Controls.Button;
 using Control = System.Windows.Controls.Control;
 
@@ -13,19 +14,15 @@ namespace ScreenToGif.Controls
     {
         #region Variables
 
-        public enum StatusType
-        {
-            Info,
-            Warning,
-            Error
-        }
-
         private Grid _warningGrid;
         private Button _supressButton;
 
         #endregion
 
         #region Dependency Properties/Events
+
+        public static readonly DependencyProperty IdProperty = DependencyProperty.Register("Id", typeof(int), typeof(StatusBand),
+            new FrameworkPropertyMetadata(0));
 
         public static readonly DependencyProperty TypeProperty = DependencyProperty.Register("Type", typeof(StatusType), typeof(StatusBand),
             new FrameworkPropertyMetadata(StatusType.Warning, OnTypePropertyChanged));
@@ -47,6 +44,13 @@ namespace ScreenToGif.Controls
         #endregion
 
         #region Properties
+
+        [Bindable(true), Category("Common")]
+        public int Id
+        {
+            get => (int)GetValue(IdProperty);
+            set => SetValue(IdProperty, value);
+        }
 
         [Bindable(true), Category("Common")]
         public StatusType Type
@@ -95,7 +99,7 @@ namespace ScreenToGif.Controls
             remove => RemoveHandler(DismissedEvent, value);
         }
 
-        private Action Action { get; set; }
+        public Action Action { get; set; }
 
         #endregion
 
@@ -175,6 +179,11 @@ namespace ScreenToGif.Controls
                 BeginStoryboard(show);
         }
 
+        public void Update(string text, UIElement image = null, Action action = null)
+        {
+            Show(StatusType.Update, text, image ?? (Canvas)FindResource("Vector.Synchronize"), action);
+        }
+
         public void Info(string text, UIElement image = null, Action action = null)
         {
             Show(StatusType.Info, text, image ?? (Canvas)FindResource("Vector.Info"), action);
@@ -210,6 +219,11 @@ namespace ScreenToGif.Controls
 
             var newEventArgs = new RoutedEventArgs(DismissedEvent);
             RaiseEvent(newEventArgs);
+        }
+
+        public static string KindToString(StatusType kind)
+        {
+            return "Vector." + (kind == StatusType.None ? "Tag" : kind == StatusType.Info ? "Info" : kind == StatusType.Update ? "Synchronize" : kind == StatusType.Warning ? "Warning" : "Error");
         }
 
         #endregion

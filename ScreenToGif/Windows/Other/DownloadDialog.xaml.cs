@@ -7,7 +7,7 @@ using System.Net;
 using System.Reflection;
 using System.Windows;
 using System.Xml.Linq;
-using System.Xml.XPath;
+using ScreenToGif.Model;
 using ScreenToGif.Util;
 
 namespace ScreenToGif.Windows.Other
@@ -15,6 +15,8 @@ namespace ScreenToGif.Windows.Other
     public partial class DownloadDialog : Window
     {
         public XElement Element { get; set; }
+
+        internal UpdateModel Details { get; set; }
 
         public bool IsChocolatey { get; set; }
 
@@ -29,7 +31,7 @@ namespace ScreenToGif.Windows.Other
         {
             #region Validation
 
-            if (Element == null)
+            if (Global.UpdateModel == null)
             {
                 WhatsNewParagraph.Inlines.Add("Something wrong happened.");
                 return;
@@ -41,20 +43,17 @@ namespace ScreenToGif.Windows.Other
             {
                 //Detect if this is portable or installed. Download the proper file.
                 IsChocolatey = AppDomain.CurrentDomain.BaseDirectory.EndsWith(@"Chocolatey\lib\screentogif\content\");
-                IsInstaller = Directory.EnumerateFiles(AppDomain.CurrentDomain.BaseDirectory).Any(x => x.EndsWith("ScreenToGif.visualelementsmanifest.xml"));
+                IsInstaller = Directory.EnumerateFiles(AppDomain.CurrentDomain.BaseDirectory).Any(x => x.ToLowerInvariant().EndsWith("screentogif.visualelementsmanifest.xml"));
 
-                VersionRun.Text = "Version " + Element.XPathSelectElement("tag_name").Value;
-                SizeRun.Text = Humanizer.BytesToString(Convert.ToInt32((IsInstaller ? Element.XPathSelectElement("assets").LastNode : 
-                    Element.XPathSelectElement("assets").FirstNode).XPathSelectElement("size").Value));
+                VersionRun.Text = "Version " + Global.UpdateModel.Version;
+                SizeRun.Text = Humanizer.BytesToString(IsInstaller ? Global.UpdateModel.InstallerSize : Global.UpdateModel.PortableSize);
 
-                TypeRun.Text = IsInstaller ? this.TextResource("Update.Installer") : this.TextResource("Update.Portable");
+                TypeRun.Text = IsInstaller ? LocalizationHelper.Get("Update.Installer") : LocalizationHelper.Get("Update.Portable");
 
-                var body = Element.XPathSelectElement("body").Value;
-
-                var splited = body.Split(new[] { '#' }, StringSplitOptions.RemoveEmptyEntries);
+                var splited = Global.UpdateModel.Description.Split(new[] { '#' }, StringSplitOptions.RemoveEmptyEntries);
 
                 WhatsNewParagraph.Inlines.Add(splited[0].Replace(" What's new?\r\n\r\n", ""));
-                FixesParagraph.Inlines.Add(splited.Length > 1 ? splited[1].Replace(" Bug fixes:\r\n\r\n", "") : "Aparently, nothing.");
+                FixesParagraph.Inlines.Add(splited.Length > 1 ? splited[1].Replace(" Bug fixes:\r\n\r\n", "") : "Aparently nothing.");
             }
             catch (Exception ex)
             {
@@ -70,9 +69,9 @@ namespace ScreenToGif.Windows.Other
 
             var save = new Microsoft.Win32.SaveFileDialog
             {
-                FileName = "ScreenToGif" + (IsInstaller ? " Setup " + Element.XPathSelectElement("tag_name").Value : ""),
+                FileName = "ScreenToGif " + Global.UpdateModel.Version + (IsInstaller ? " Setup" : ""),
                 DefaultExt = IsInstaller ? ".msi" : ".exe",
-                Filter = IsInstaller ? "ScreenToGif setup (.msi)|*.msi" : "ScreenToGif executable (.exe)|*.exe"
+                Filter = IsInstaller ? "ScreenToGif setup|*.msi" : "ScreenToGif executable|*.exe"
             };
 
             var result = save.ShowDialog();
@@ -82,11 +81,13 @@ namespace ScreenToGif.Windows.Other
 
             if (save.FileName == Assembly.GetExecutingAssembly().Location)
             {
-                Dialog.Ok(Title, this.TextResource("Update.Filename.Warning"), this.TextResource("Update.Filename.Warning2"), Icons.Warning);
+                Dialog.Ok(Title, LocalizationHelper.Get("Update.Filename.Warning"), LocalizationHelper.Get("Update.Filename.Warning2"), Icons.Warning);
                 return;
             }
-            
+
             #endregion
+
+            //After downloading, remove the notification and set the global variable to null;
 
             DownloadButton.IsEnabled = false;
             StatusBand.Info("Downloading...");
@@ -103,8 +104,7 @@ namespace ScreenToGif.Windows.Other
                     webClient.Credentials = CredentialCache.DefaultNetworkCredentials;
                     webClient.Proxy = WebHelper.GetProxy();
 
-                    await webClient.DownloadFileTaskAsync(new Uri((IsInstaller ? Element.XPathSelectElement("assets").LastNode : 
-                        Element.XPathSelectElement("assets").FirstNode).XPathSelectElement("browser_download_url").Value), tempFilename);
+                    await webClient.DownloadFileTaskAsync(new Uri(IsInstaller ? Global.UpdateModel.InstallerDownloadUrl : Global.UpdateModel.PortableDownloadUrl), tempFilename);
                 }
             }
             catch (Exception ex)
@@ -113,6 +113,7 @@ namespace ScreenToGif.Windows.Other
 
                 DownloadButton.IsEnabled = true;
                 DownloadProgressBar.Visibility = Visibility.Hidden;
+                StatusBand.Hide();
 
                 Dialog.Ok("Update", "Error while downloading", ex.Message);
                 return;
@@ -122,13 +123,16 @@ namespace ScreenToGif.Windows.Other
 
             //If cancelled.
             if (!IsLoaded)
+            {
+                StatusBand.Hide();
                 return;
+            }
 
             #region Installer
 
             if (IsInstaller)
             {
-                if (!Dialog.Ask(Title, this.TextResource("Update.Install.Header"), this.TextResource("Update.Install.Description")))
+                if (!Dialog.Ask(Title, LocalizationHelper.Get("Update.Install.Header"), LocalizationHelper.Get("Update.Install.Description")))
                     return;
 
                 try
@@ -138,10 +142,13 @@ namespace ScreenToGif.Windows.Other
                 catch (Exception ex)
                 {
                     LogWriter.Log(ex, "Starting the installer");
+                    StatusBand.Hide();
+
                     Dialog.Ok(Title, "Error while starting the installer", ex.Message);
                     return;
                 }
 
+                Global.UpdateModel = null;
                 Environment.Exit(25);
             }
 
@@ -151,13 +158,9 @@ namespace ScreenToGif.Windows.Other
 
             try
             {
-                //Deletes if already exists.
-                if (File.Exists(save.FileName))
-                    File.Delete(save.FileName);
-
                 //Unzips the only file.
                 using (var zipArchive = ZipFile.Open(tempFilename, ZipArchiveMode.Read))
-                    zipArchive.Entries.First(x => x.Name.EndsWith(".exe")).ExtractToFile(save.FileName);
+                    zipArchive.Entries.First(x => x.Name.EndsWith(".exe")).ExtractToFile(save.FileName, true);
             }
             catch (Exception ex)
             {
@@ -165,12 +168,15 @@ namespace ScreenToGif.Windows.Other
 
                 DownloadButton.IsEnabled = true;
                 DownloadProgressBar.Visibility = Visibility.Hidden;
+                StatusBand.Hide();
 
                 Dialog.Ok("Update", "Error while unzipping", ex.Message);
                 return;
             }
 
             #endregion
+
+            Global.UpdateModel = null;
 
             #region Delete temporary zip and run
 
@@ -186,6 +192,7 @@ namespace ScreenToGif.Windows.Other
 
                 DownloadButton.IsEnabled = true;
                 DownloadProgressBar.Visibility = Visibility.Hidden;
+                StatusBand.Hide();
 
                 Dialog.Ok(Title, "Error while finishing the update", ex.Message);
                 return;

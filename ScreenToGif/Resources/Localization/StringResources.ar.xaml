@@ -49,12 +49,12 @@
     <s:String x:Key="Donate">تبرع</s:String>
     <s:String x:Key="About">حول</s:String>
     
-    <s:String x:Key="Application.Homepage">الصفحة الرئيسية</s:String>
-    <s:String x:Key="Application.Homepage.StartUp">نافذة بدء التشغيل</s:String>
-    <s:String x:Key="Application.Homepage.Recorder">مسجل الشاشة</s:String>
-    <s:String x:Key="Application.Homepage.Webcam">مسجل كاميرا ويب</s:String>
-    <s:String x:Key="Application.Homepage.Board">مسجل لوح</s:String>
-    <s:String x:Key="Application.Homepage.Editor">نافذة المحرر</s:String>
+    <s:String x:Key="S.Application.Other.Homepage">الصفحة الرئيسية:</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.StartUp">نافذة بدء التشغيل</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Recorder">مسجل الشاشة</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Webcam">مسجل كاميرا ويب</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Board">مسجل لوح</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Editor">نافذة المحرر</s:String>
     
     <s:String x:Key="Application.ScreenRecorder">مسجل الشاشة</s:String>
     <s:String x:Key="Application.ScreenRecorder.RecordMouse">عرض مؤشر الماوس في التسجيل.</s:String>

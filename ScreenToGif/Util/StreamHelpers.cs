@@ -193,6 +193,12 @@ namespace ScreenToGif.Util
             ms.Write(bytes, 0, bytes.Length);
         }
 
+        public static void WriteString1252(this Stream ms, string value)
+        {
+            var bytes = Encoding.GetEncoding(1252).GetBytes(value);
+            ms.Write(bytes, 0, bytes.Length);
+        }
+
         public static void WriteInt16(this Stream ms, short value)
         {
             ms.Write(BitConverter.GetBytes(value), 0, 2);

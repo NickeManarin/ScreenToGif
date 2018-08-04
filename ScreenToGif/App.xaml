@@ -4,7 +4,7 @@
              xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
              xmlns:u="clr-namespace:ScreenToGif.Util"
              xmlns:n="clr-namespace:ScreenToGif.Controls"
-             xmlns:m="clr-namespace:ScreenToGif.Util.Model"
+             xmlns:m="clr-namespace:ScreenToGif.Model"
              ShutdownMode="OnExplicitShutdown" Startup="Application_Startup" Exit="App_OnExit" 
              DispatcherUnhandledException="App_OnDispatcherUnhandledException">
 
@@ -24,6 +24,7 @@
 
                 <!--Localizations-->
                 <ResourceDictionary Source="/Resources/Localization/StringResources.ar.xaml"/>
+                <ResourceDictionary Source="/Resources/Localization/StringResources.cs.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.da.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.de.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.es-AR.xaml"/>
@@ -1084,6 +1085,8 @@
                         <Separator/>
                         <n:ImageMenuItem Header="{DynamicResource Editor}" Image="{StaticResource Vector.Editor}" Command="{Binding OpenEditor}" InputGestureText="{Binding EditorGesture, UpdateSourceTrigger=PropertyChanged}"/>
                         <n:ImageMenuItem Header="{DynamicResource Options}" Image="{StaticResource Vector.Options}" Command="{Binding OpenOptions}" InputGestureText="{Binding OptionsGesture, UpdateSourceTrigger=PropertyChanged}"/>
+                        <n:ImageMenuItem Header="{DynamicResource S.Feedback.Feedback}" Image="{StaticResource Vector.Application}" Command="{Binding OpenFeedback}"/>
+                        <n:ImageMenuItem Header="{DynamicResource S.Troubleshoot.Title}" Image="{StaticResource Vector.Warning}" Command="{Binding OpenTroubleshoot}"/>
                         <Separator/>
                         <n:ImageMenuItem Header="{DynamicResource S.Exit}" Image="{StaticResource Vector.Close}" Command="{Binding ExitApplication}" InputGestureText="{Binding ExitGesture, UpdateSourceTrigger=PropertyChanged}"/>
                     </ContextMenu>

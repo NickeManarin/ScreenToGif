@@ -262,7 +262,7 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
 
             //Write the packed fields.
             WriteByte(ConvertToByte(bitArray));
-            WriteShort(delay / 10); //Delay x 1/100 seconds. Minimum of 10ms. Centiseconds.
+            WriteShort((int)Math.Round(delay / 10.0f, MidpointRounding.AwayFromZero)); //Delay x 1/100 seconds. Minimum of 10ms. Centiseconds.
             WriteByte(FindTransparentColorIndex()); //Transparency Index.
             WriteByte(0); //Terminator.
         }

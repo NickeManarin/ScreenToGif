@@ -45,10 +45,7 @@ namespace ScreenToGif.Controls
 
         public static readonly DependencyProperty DefaultValueIfEmptyProperty = DependencyProperty.Register("DefaultValueIfEmpty", typeof(int), typeof(IntegerBox),
             new FrameworkPropertyMetadata(0));
-
-        public static readonly DependencyProperty IsHexadecimalProperty = DependencyProperty.Register("IsHexadecimal", typeof(bool), typeof(IntegerBox),
-            new FrameworkPropertyMetadata(false));
-
+        
         #endregion
 
         #region Property Accessor
@@ -118,14 +115,7 @@ namespace ScreenToGif.Controls
             get => (int)GetValue(DefaultValueIfEmptyProperty);
             set => SetValue(DefaultValueIfEmptyProperty, value);
         }
-
-        [Bindable(true), Category("Common")]
-        public bool IsHexadecimal
-        {
-            get => (bool)GetValue(IsHexadecimalProperty);
-            set => SetValue(DefaultValueIfEmptyProperty, value);
-        }
-
+        
         #endregion
 
         #region Properties Changed
@@ -380,9 +370,7 @@ namespace ScreenToGif.Controls
                 var text = e.DataObject.GetData(typeof(string)) as string;
 
                 if (!IsTextAllowed(text))
-                {
                     e.CancelCommand();
-                }
             }
             else
             {
@@ -405,9 +393,7 @@ namespace ScreenToGif.Controls
 
         private bool IsTextAllowed(string text)
         {
-            return IsHexadecimal ? 
-                Regex.IsMatch(text, "^#([A-Fa-f0-9]{8})$") : Minimum < 0 ? 
-                Regex.IsMatch(text, @"^[-]?(?:\d{1,9})?$") : Regex.IsMatch(text, @"^(?:\d{1,9})?$");
+            return Minimum < 0 ? Regex.IsMatch(text, @"^[-]?(?:\d{1,9})?$") : Regex.IsMatch(text, @"^(?:\d{1,9})?$");
         }
 
         #endregion

@@ -21,6 +21,10 @@ namespace ScreenToGif.Controls
 
         public static readonly DependencyProperty DisplayGlyphProperty = DependencyProperty.Register("DisplayGlyph", typeof(bool), typeof(HexadecimalBox), new PropertyMetadata(true));
 
+        public static readonly DependencyProperty DisplayAlphaProperty = DependencyProperty.Register("DisplayAlpha", typeof(bool), typeof(HexadecimalBox), new PropertyMetadata(true));
+
+        public static readonly RoutedEvent ValueChangedEvent = EventManager.RegisterRoutedEvent("ValueChanged", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(HexadecimalBox));
+
         #endregion
 
         #region Properties
@@ -55,6 +59,18 @@ namespace ScreenToGif.Controls
             set => SetValue(DisplayGlyphProperty, value);
         }
 
+        public bool DisplayAlpha
+        {
+            get => (bool)GetValue(DisplayAlphaProperty);
+            set => SetValue(DisplayAlphaProperty, value);
+        }
+
+        public event RoutedEventHandler ValueChanged
+        {
+            add => AddHandler(ValueChangedEvent, value);
+            remove => RemoveHandler(ValueChangedEvent, value);
+        }
+
         #endregion
 
         private static void Value_PropertyChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
@@ -64,7 +80,9 @@ namespace ScreenToGif.Controls
             if (hexaBox == null)
                 return;
 
-            hexaBox.Text = $"{(hexaBox.DisplayGlyph ? "#" : "")}{hexaBox.Alpha:X2}{hexaBox.Red:X2}{hexaBox.Green:X2}{hexaBox.Blue:X2}";
+            hexaBox.RaiseValueChangedEvent();
+
+            hexaBox.Text = $"{(hexaBox.DisplayGlyph ? "#" : "")}{(hexaBox.DisplayAlpha ? hexaBox.Alpha.ToString("X2") : "")}{hexaBox.Red:X2}{hexaBox.Green:X2}{hexaBox.Blue:X2}";
         }
 
         static HexadecimalBox()
@@ -80,7 +98,7 @@ namespace ScreenToGif.Controls
 
             AddHandler(DataObject.PastingEvent, new DataObjectPastingEventHandler(OnPasting));
 
-            Text = $"{(DisplayGlyph ? "#" : "")}{Alpha:X2}{Red:X2}{Green:X2}{Blue:X2}";
+            Text = $"{(DisplayGlyph ? "#" : "")}{(DisplayAlpha ? Alpha.ToString("X2") : "")}{Red:X2}{Green:X2}{Blue:X2}";
         }
 
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
@@ -136,7 +154,7 @@ namespace ScreenToGif.Controls
                 Green = 0;
                 Blue = 0;
 
-                Text = $"{(DisplayGlyph ? "#" : "")}{Alpha:X2}{Red:X2}{Green:X2}{Blue:X2}";
+                Text = $"{(DisplayGlyph ? "#" : "")}{(DisplayAlpha ? Alpha.ToString("X2") : "")}{Red:X2}{Green:X2}{Blue:X2}";
                 return;
             }
 
@@ -144,17 +162,38 @@ namespace ScreenToGif.Controls
 
             try
             {
-                Alpha = Convert.ToInt32(Text.Replace("#", "").Substring(0, 2), 16);
-                Red = Convert.ToInt32(Text.Replace("#", "").Substring(2, 2), 16);
-                Green = Convert.ToInt32(Text.Replace("#", "").Substring(4, 2), 16);
-                Blue = Convert.ToInt32(Text.Replace("#", "").Substring(6, 2), 16);
+                var source = Text.Replace("#", "");
+
+                switch (source.Length)
+                {
+                    case 2:
+                        Alpha = 255;
+                        Blue = Green = Red = Convert.ToInt32(source.Substring(0, 2), 16);
+                        break;
+                    case 4:
+                        Alpha = Convert.ToInt32(source.Substring(0, 2), 16);
+                        Blue = Green = Red = Convert.ToInt32(source.Substring(2, 2), 16);
+                        break;
+                    case 6:
+                        Alpha = 255;
+                        Red = Convert.ToInt32(source.Substring(0, 2), 16);
+                        Green = Convert.ToInt32(source.Substring(2, 2), 16);
+                        Blue = Convert.ToInt32(source.Substring(4, 2), 16);
+                        break;
+                    case 8:
+                        Alpha = Convert.ToInt32(source.Substring(0, 2), 16);
+                        Red = Convert.ToInt32(source.Substring(2, 2), 16);
+                        Green = Convert.ToInt32(source.Substring(4, 2), 16);
+                        Blue = Convert.ToInt32(source.Substring(6, 2), 16);
+                        break;
+                }
             }
             catch
             {}
 
             #endregion
 
-            Text = $"{(DisplayGlyph ? "#" : "")}{Alpha:X2}{Red:X2}{Green:X2}{Blue:X2}";
+            Text = $"{(DisplayGlyph ? "#" : "")}{(DisplayAlpha ? Alpha.ToString("X2") : "")}{Red:X2}{Green:X2}{Blue:X2}";
         }
 
         #endregion
@@ -168,9 +207,7 @@ namespace ScreenToGif.Controls
                 var text = e.DataObject.GetData(typeof(string)) as string;
 
                 if (!IsTextAllowed(text))
-                {
                     e.CancelCommand();
-                }
             }
             else
             {
@@ -181,6 +218,12 @@ namespace ScreenToGif.Controls
         #endregion
 
         #region Methods
+
+        void RaiseValueChangedEvent()
+        {
+            var newEventArgs = new RoutedEventArgs(ValueChangedEvent);
+            RaiseEvent(newEventArgs);
+        }
 
         private bool IsEntryAllowed(TextBox textBox, string text)
         {
@@ -222,7 +265,8 @@ namespace ScreenToGif.Controls
 
         private bool IsTextAllowed(string text)
         {
-            return Regex.IsMatch(text, "^#([A-Fa-f0-9]{8})$");
+            //Allows: #FF, #FF11, #FF1122, #FF112233
+            return Regex.IsMatch(text, @"^#{0,1}(([0-9a-fA-F]{2}){1,4})$");
         }
 
         #endregion

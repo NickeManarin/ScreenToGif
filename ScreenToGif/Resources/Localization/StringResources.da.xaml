@@ -77,12 +77,12 @@
     <s:String x:Key="Donate">Donér</s:String>
     <s:String x:Key="About">Om...</s:String>
     
-    <s:String x:Key="Application.Homepage">Opstart</s:String>
-    <s:String x:Key="Application.Homepage.StartUp">Opstartsvindue</s:String>
-    <s:String x:Key="Application.Homepage.Recorder">Optag</s:String>
-    <s:String x:Key="Application.Homepage.Webcam">Webcam</s:String>
-    <s:String x:Key="Application.Homepage.Board">Tavle</s:String>
-    <s:String x:Key="Application.Homepage.Editor">Redigér</s:String>
+    <s:String x:Key="S.Application.Other.Homepage">Opstart:</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.StartUp">Opstartsvindue</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Recorder">Optag</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Webcam">Webcam</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Board">Tavle</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Editor">Redigér</s:String>
     
     <s:String x:Key="Application.ScreenRecorder">Optager</s:String>
     <s:String x:Key="Application.ScreenRecorder.RecordMouse">Optag musemarkøren.</s:String>
