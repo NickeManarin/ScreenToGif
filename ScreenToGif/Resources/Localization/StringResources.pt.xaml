@@ -38,7 +38,7 @@
     <s:String x:Key="S.Crash">Oh não, o aplicativo parou de funcionar :(</s:String>
 
     <!--StartUp Page-->
-    <s:String x:Key="Title.StartUp">ScreenToGif - Início</s:String>
+    <s:String x:Key="Title.StartUp">ScreenToGif - Início!</s:String>
     <s:String x:Key="Recorder">Gravador</s:String>
     <s:String x:Key="Webcam">Câmera</s:String>
     <s:String x:Key="Board">Quadro</s:String>
