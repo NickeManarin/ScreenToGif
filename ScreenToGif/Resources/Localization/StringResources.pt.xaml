@@ -95,7 +95,7 @@
     <s:String x:Key="Application.ScreenRecorder.NewRecorder">Ativar novo gravador de tela.</s:String>
     <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(Vai substituir o gravador antigo)</s:String>
     <s:String x:Key="Application.ScreenRecorder.Magnifier">Habilitar a lupa.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(a lupa garante um zoom durante a seleção da área de gravação)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(A lupa garante um zoom durante a seleção da área de gravação)</s:String>
     
     <s:String x:Key="Application.Other">Outras Configurações</s:String>
     <s:String x:Key="Application.Other.SystemTray">Exibir o aplicativo na área de notificação.</s:String>
@@ -972,6 +972,8 @@
     <s:String x:Key="S.Troubleshoot.Title">Solucionar problemas</s:String>
     <s:String x:Key="S.Troubleshoot.Windows">Alguma janela está escondida?</s:String>
     <s:String x:Key="S.Troubleshoot.Windows.Info">Se qualquer uma das janelas está escondida (fora da tela),&#x0d;use as opções abaixo para redefinir sua posição atual e de inicialização.</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Current">Essa é a posição atual das janelas:</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Next">Essa é posição onde as janelas irão abrir na próxima vez:</s:String>
     <s:String x:Key="S.Troubleshoot.Windows.BringBack">Mova todas as janelas para a tela principal.</s:String>
     <s:String x:Key="S.Troubleshoot.Windows.Reset">Redefinir a posição de inicialização de todas as janelas.</s:String>
    

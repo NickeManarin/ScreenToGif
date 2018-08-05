@@ -974,6 +974,8 @@
     <s:String x:Key="S.Troubleshoot.Title">Troubleshoot</s:String>
     <s:String x:Key="S.Troubleshoot.Windows">Is there any window missing?</s:String>
     <s:String x:Key="S.Troubleshoot.Windows.Info">If any of the windows is missing (outside of the screen),&#x0d;use the options below to reset its current and startup position.</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Current">Here's where each window is currently located:</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Next">Here's where each window will open next time:</s:String>
     <s:String x:Key="S.Troubleshoot.Windows.BringBack">Move all windows to the main screen.</s:String>
     <s:String x:Key="S.Troubleshoot.Windows.Reset">Reset the startup position of all windows.</s:String>
    

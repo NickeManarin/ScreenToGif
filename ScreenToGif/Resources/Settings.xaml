@@ -398,4 +398,7 @@
     <!--Other-->
     <Color x:Key="InsertFillColor">#FFFFFFFF</Color>
     <s:Int32 x:Key="LatestFpsImport">15</s:Int32>
+    
+    <!--Obsolete-->
+    <Color x:Key="ClickColor">#78FFFF00</Color>
 </ResourceDictionary>

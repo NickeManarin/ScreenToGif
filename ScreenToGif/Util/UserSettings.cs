@@ -2283,7 +2283,7 @@ namespace ScreenToGif.Util
         [Obsolete]
         public Color ClickColor
         {
-            get => (Color)GetValue();
+            get => (Color)(GetValue() ?? Color.FromRgb(0,0,0));
             set => SetValue(value);
         }
 

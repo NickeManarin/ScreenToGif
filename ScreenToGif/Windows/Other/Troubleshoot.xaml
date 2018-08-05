@@ -36,8 +36,8 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <n:ImageRadioButton Grid.Column="0" x:Name="NowRadioButton" Text="Here's where each window is currently located:" TextWrapping="Wrap" Checked="KindRadioButton_Checked"/>
-            <n:ImageRadioButton Grid.Column="1" x:Name="LaterRadioButton" Text="Here's where each window will open next time:" TextWrapping="Wrap" Checked="KindRadioButton_Checked"/>
+            <n:ImageRadioButton Grid.Column="0" x:Name="NowRadioButton" Text="{DynamicResource S.Troubleshoot.Windows.Current}" TextWrapping="Wrap" Checked="KindRadioButton_Checked"/>
+            <n:ImageRadioButton Grid.Column="1" x:Name="LaterRadioButton" Text="{DynamicResource S.Troubleshoot.Windows.Next}" TextWrapping="Wrap" Checked="KindRadioButton_Checked"/>
         </Grid>
 
         <Viewbox Grid.Row="2" Stretch="Uniform" StretchDirection="Both" Margin="3" VerticalAlignment="Center">
