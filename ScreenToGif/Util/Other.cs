@@ -541,11 +541,12 @@ namespace ScreenToGif.Util
             var variable = Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.Machine) + ";" +
                 Environment.GetEnvironmentVariable("Path", EnvironmentVariableTarget.User);
 
-            foreach (var path in variable.Split(';'))
+            foreach (var path in variable.Split(';').Where(w => !string.IsNullOrWhiteSpace(w)))
             {
                 try
                 {
-                    if (!File.Exists(Path.Combine(path, "ffmpeg.exe"))) continue;
+                    if (!File.Exists(Path.Combine(path, "ffmpeg.exe")))
+                        continue;
                 }
                 catch (Exception ex)
                 {
@@ -573,11 +574,12 @@ namespace ScreenToGif.Util
             var variable = Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.Machine) + ";" +
                 Environment.GetEnvironmentVariable("Path", EnvironmentVariableTarget.User);
 
-            foreach (var path in variable.Split(';'))
+            foreach (var path in variable.Split(';').Where(w => !string.IsNullOrWhiteSpace(w)))
             {
                 try
                 {
-                    if (!File.Exists(Path.Combine(path, "gifski.dll"))) continue;
+                    if (!File.Exists(Path.Combine(path, "gifski.dll")))
+                        continue;
                 }
                 catch (Exception ex)
                 {

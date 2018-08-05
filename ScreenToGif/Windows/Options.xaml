@@ -971,7 +971,7 @@
                                 <ColumnDefinition Width="30"/>
                             </Grid.ColumnDefinitions>
 
-                            <n:ExtendedTextBox Grid.Column="0" x:Name="FfmpegLocationTextBox" Margin="10,3,0,3" Text="{Binding FfmpegLocation, Source={x:Static u:UserSettings.All}}" 
+                            <n:ExtendedTextBox Grid.Column="0" x:Name="FfmpegLocationTextBox" Margin="10,3,0,3" Text="{Binding FfmpegLocation, Source={x:Static u:UserSettings.All}, UpdateSourceTrigger=PropertyChanged}" 
                                                LostKeyboardFocus="LocationTextBox_LostKeyboardFocus"/>
 
                             <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" ContentWidth="20"
@@ -986,7 +986,7 @@
                                 <ColumnDefinition Width="30"/>
                             </Grid.ColumnDefinitions>
 
-                            <n:ExtendedTextBox Grid.Column="0" x:Name="GifskiLocationTextBox" Margin="10,3,0,3" Text="{Binding GifskiLocation, Source={x:Static u:UserSettings.All}}" 
+                            <n:ExtendedTextBox Grid.Column="0" x:Name="GifskiLocationTextBox" Margin="10,3,0,3" Text="{Binding GifskiLocation, Source={x:Static u:UserSettings.All}, UpdateSourceTrigger=PropertyChanged}" 
                                                LostKeyboardFocus="LocationTextBox_LostKeyboardFocus"/>
 
                             <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" ContentWidth="20"

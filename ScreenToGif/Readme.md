@@ -16,8 +16,7 @@ _VS 2017 and .Net 4.6.1 or newer required._
 • You can now create some tasks to be executed after each recording. (More to come)   
 • Troubleshooter: If any window is missing (outside of the screen bounds), you can use the troubleshooter to reset its current or startup position.  
 • Added the option to disable hardware acceleration.  
-• Now the app warns when trying to open a project that is already opened in another editor instance. 
-Also, the task that clears the temporary folder will not delete any project that is open.    
+• Now the app warns when trying to open a project that is already opened in another editor instance. Also, the task that clears the temporary folder will not delete any project that is open.    
 
 ### Fixed:
 

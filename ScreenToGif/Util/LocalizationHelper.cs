@@ -139,7 +139,9 @@ namespace ScreenToGif.Util
                 //If resource available is older than assembly.
                 if (!updated.HasValue || updated <= File.GetLastWriteTime(Assembly.GetExecutingAssembly().Location))
                 {
-                    File.Delete(file);
+                    if (File.Exists(file))
+                        File.Delete(file);
+
                     return;
                 }
 
@@ -147,7 +149,7 @@ namespace ScreenToGif.Util
                 if (File.Exists(file))
                 {
                     //If current translation is older than the available one.
-                    if (new FileInfo(file).LastWriteTimeUtc > updated.Value.ToUniversalTime())
+                    if (new FileInfo(file).LastWriteTimeUtc < updated.Value.ToUniversalTime())
                         DownloadLatest(file, culture);
                 }
                 else
@@ -178,6 +180,10 @@ namespace ScreenToGif.Util
                     //Add in newly loaded Resource Dictionary.
                     Application.Current.Resources.MergedDictionaries.Add(dictionary);
                 }
+            }
+            catch (WebException)
+            {
+                //Ignore it.
             }
             catch (Exception ex)
             {
