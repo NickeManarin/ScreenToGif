@@ -31,7 +31,7 @@ namespace ScreenToGif.Windows.Other
 
         private void HyperlinkMove_Click(object sender, RoutedEventArgs e)
         {
-            var monitor = Monitor.AllMonitors.FirstOrDefault(f => f.IsPrimary);
+            var monitor = Monitor.AllMonitorsScaled(this.Scale()).FirstOrDefault(f => f.IsPrimary);
 
             if (monitor == null)
             {
@@ -98,6 +98,7 @@ namespace ScreenToGif.Windows.Other
 
                 window.Top = top;
                 window.Left = left;
+                window.WindowState = WindowState.Normal;
                 //window.Width = width;
                 //window.Height = height;
             }
@@ -149,7 +150,7 @@ namespace ScreenToGif.Windows.Other
 
             if (NowRadioButton.IsChecked == true)
             {
-                foreach (var window in Application.Current.Windows.OfType<Window>().Where(w => w.GetType() != typeof(Troubleshoot)).OrderBy(o => o.Width).ThenBy(o => o.Height))
+                foreach (var window in Application.Current.Windows.OfType<Window>().Where(w => w.GetType() != typeof(Troubleshoot) && w.IsVisible).OrderBy(o => o.Width).ThenBy(o => o.Height))
                 {
                     var top = window.Top;
                     var left = window.Left;

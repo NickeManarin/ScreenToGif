@@ -1273,7 +1273,7 @@
                         </Popup>
 
                         <Menu Grid.Row="0" Grid.Column="2" Effect="{x:Null}" Background="Transparent" VerticalAlignment="Center">
-                            <n:ImageMenuItem x:Name="ExtrasMenuItem" Header="Extras" Image="{DynamicResource Vector.Editor}" ContentHeight="16" ContentWidth="16" BorderThickness="0">
+                            <n:ImageMenuItem x:Name="ExtrasMenuItem" Header="{DynamicResource S.Editor.Extras}" Image="{DynamicResource Vector.Editor}" ContentHeight="16" ContentWidth="16" BorderThickness="0">
                                 <n:ImageMenuItem x:Name="OptionsMenuItem" Header="{DynamicResource Options}" Image="{DynamicResource Vector.Options}" 
                                                  ContentHeight="16" ContentWidth="16" Command="{TemplateBinding OptionsCommand}"/>
                                 <n:ImageMenuItem x:Name="FeedbackMenuItem" Header="{DynamicResource S.Feedback.Feedback}" Image="{DynamicResource Vector.Application}" 

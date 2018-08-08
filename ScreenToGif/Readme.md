@@ -32,8 +32,7 @@ _VS 2017 and .Net 4.6.1 or newer required._
 ♦ When trying to crop, the app could crash (because of a high DPI issue).  
 ♦ When selecting a screen region (using the new recorder UI), the app could crash (also a high DPI issue).  
 ♦ The slide transition was getting the amount of frames from a wrong slider (this caused a crash when undoing the transition).  
-♦ When entering snapshot mode with the recorder UI, without having any region selected and pressing "Record", 
-the app would crash. Now it prompts for a region of the screen to be selected.  
+♦ When entering snapshot mode with the recorder UI, without having any region selected and pressing "Record", the app would crash. Now it prompts for a region of the screen to be selected.  
 ♦ Editing the key strokes of the last frame was not possible. The key input was being ignored.  
 ♦ When a screen gets disconected, all Editor windows will be moved to an available screen.  
 ♦ When cancelling the selection of the compression method used by the system encoder (video export), the app would crash.  

@@ -445,6 +445,8 @@
     <s:String x:Key="Editor.Statistics">Statistics</s:String>
     <s:String x:Key="Editor.Options">Options</s:String>
     
+    <s:String x:Key="S.Editor.Extras">Extras</s:String>
+    
     <!--Welcome-->
     <s:String x:Key="Welcome.New">Head over to "File > New" to start a new recording</s:String>
     <s:String x:Key="Welcome.Import">Drag and drop images, videos or projects to import</s:String>

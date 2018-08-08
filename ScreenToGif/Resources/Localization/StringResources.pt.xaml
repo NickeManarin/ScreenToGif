@@ -445,6 +445,8 @@
     <s:String x:Key="Editor.Statistics">Estatísticas</s:String>
     <s:String x:Key="Editor.Options">Opções</s:String>
     
+    <s:String x:Key="S.Editor.Extras">Extras</s:String>
+
     <!--Welcome-->
     <s:String x:Key="Welcome.New">Para iniciar uma nova gravação, navegue até "Arquivo > Novo"</s:String>
     <s:String x:Key="Welcome.Import">Arraste e largue imagens, vídeos ou projetos para importar</s:String>
