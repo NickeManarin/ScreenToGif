@@ -116,8 +116,8 @@
     <!--Recorder-->
     <s:Int32 x:Key="RecorderWidth">518</s:Int32>
     <s:Int32 x:Key="RecorderHeight">269</s:Int32>
-    <s:Double x:Key="RecorderTop">-0.76</s:Double>
-    <s:Double x:Key="RecorderLeft">-0.76</s:Double>
+    <s:Double x:Key="RecorderTop">NaN</s:Double>
+    <s:Double x:Key="RecorderLeft">NaN</s:Double>
     <s:Int32 x:Key="LatestFps">15</s:Int32>
     <Rect x:Key="SelectedRegion">Empty</Rect>
     <s:Int32 x:Key="RecorderModeIndex">0</s:Int32>
