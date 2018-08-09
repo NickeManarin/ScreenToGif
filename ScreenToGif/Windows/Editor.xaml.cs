@@ -3501,7 +3501,7 @@ namespace ScreenToGif.Windows
                     Project.IsNew = false;
                     Project.Persist();
 
-                    var tasks = UserSettings.All.AutomatedTasksList.Cast<DefaultTaskModel>().ToList();
+                    var tasks = UserSettings.All.AutomatedTasksList?.Cast<DefaultTaskModel>().ToList() ?? new List<DefaultTaskModel>();
 
                     if (tasks.Any())
                     {
