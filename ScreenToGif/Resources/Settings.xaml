@@ -2,7 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:s="clr-namespace:System;assembly=mscorlib"
                     xmlns:u="clr-namespace:ScreenToGif.Util"
-                    xmlns:c="clr-namespace:System.Collections;assembly=mscorlib">
+                    xmlns:c="clr-namespace:System.Collections;assembly=mscorlib"
+                    xmlns:model="clr-namespace:ScreenToGif.Model">
 
     <!--ScreenToGif default configuration resource dictionary-->
     <!--Empty String values are suppressed to avoid exceptions-->
@@ -46,6 +47,11 @@
     <s:Boolean x:Key="TripleClickSelection">False</s:Boolean>
     <s:Boolean x:Key="AutomaticallySizeOnContent">False</s:Boolean>
     <s:Boolean x:Key="AutomaticallyFitImage">True</s:Boolean>
+
+    <!--Options • Automated Tasks-->
+    <c:ArrayList Capacity="1" x:Key="AutomatedTasksList">
+        <model:MouseClicksModel ForegroundColor="#78FFFF00" Width="12" Height="12" TaskType="MouseClicks" />
+    </c:ArrayList>
 
     <!--Options • Shortcuts-->
     <Key x:Key="RecorderShortcut">None</Key>
