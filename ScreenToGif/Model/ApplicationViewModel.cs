@@ -405,7 +405,7 @@ namespace ScreenToGif.Model
             if (!UserSettings.All.ShowNotificationIcon || !UserSettings.All.KeepOpen)
             {
                 //We only need to check loaded windows that have content
-                if (Application.Current.Windows.Cast<Window>().Where(window => window.IsLoaded && window.HasContent).Count() == 0)
+                if (Application.Current.Windows.Cast<Window>().Count(window => window.HasContent) == 0)
                     Application.Current.Shutdown(2);
             }
         }

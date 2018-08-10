@@ -17,11 +17,13 @@
     <s:String x:Key="Suppress">Supresión</s:String>
     <s:String x:Key="Preview">Vista previa</s:String>
     <s:String x:Key="S.Add">Agregar</s:String>
+    <s:String x:Key="S.Edit">Editar</s:String>
     <s:String x:Key="S.Id">Id</s:String>
     <s:String x:Key="S.Title">Título</s:String>
     <s:String x:Key="S.Description">Descripción</s:String>
+    <s:String x:Key="S.SelectColor">Hacé clic acá para seleccionar el color</s:String>
 
-    <!--Notification Icon-->
+    <!--Tray Icon-->
     <s:String x:Key="S.NewRecording">Nueva grabación de pantalla</s:String>
     <s:String x:Key="S.NewWebcamRecording">Nueva grabación de webcam</s:String>
     <s:String x:Key="S.NewBoardRecording">Nueva grabación de pizarra</s:String>
@@ -50,7 +52,7 @@
     <s:String x:Key="Tooltip.Board">Abre el grabador de pizarra, en donde podés comenzar a grabar tus dibujos.</s:String>
     <s:String x:Key="Tooltip.Editor">Abre la ventana del editor, el punto central de esta aplicación, en donde podés iniciar y editar una nueva grabación.</s:String>
 
-    <!--Update Page-->
+    <!--Update Window-->
     <s:String x:Key="Update">Actualizar</s:String>
     <s:String x:Key="Update.NewRelease">¡Nuevo lanzamiento!</s:String>
     <s:String x:Key="Update.NewRelease.Verbose">¡Nuevo lanzamiento disponible: versión {0}! Hacé clic acá para más detalles.</s:String>
@@ -64,10 +66,11 @@
     <s:String x:Key="Update.CloseThis">¿Querés cerrar esta aplicación?</s:String>
     <s:String x:Key="Update.CloseThis.Detail">Esta es una versión vieja. Ya bajaste la versión nueva.</s:String>
     
-    <!--Options Page-->
+    <!--Options Window-->
     <s:String x:Key="Title.Options">Screen To Gif: Configuración</s:String>
     <s:String x:Key="Application">Aplicación</s:String>
     <s:String x:Key="Interface">Interface</s:String>
+    <s:String x:Key="S.AutoTasks">Tareas automatizadas</s:String>
     <s:String x:Key="S.Shortcuts">Atajos</s:String>
     <s:String x:Key="Image">Imagen</s:String>
     <s:String x:Key="Language">Idioma</s:String>
@@ -76,13 +79,6 @@
     <s:String x:Key="Clouds">Servicios de subida</s:String>
     <s:String x:Key="Donate">Donar</s:String>
     <s:String x:Key="About">Acerca de ScreenToGif</s:String>
-    
-    <s:String x:Key="S.Application.Other.Homepage">Pantalla principal:</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.StartUp">Ventana de inicio</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Recorder">Grabador de pantalla</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Webcam">Grabador de webcam</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Board">Grabador de pizarra</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Editor">Ventana de edición</s:String>
     
     <s:String x:Key="Application.ScreenRecorder">Grabador de pantalla</s:String>
     <s:String x:Key="Application.ScreenRecorder.RecordMouse">Mostrar el cursor del mouse en la grabación</s:String>
@@ -107,8 +103,26 @@
     <s:String x:Key="Application.Other.NotifyFrameDeletion">Preguntarme antes de borrar los fotogramas</s:String>
     <s:String x:Key="Application.Other.NotifyProjectDiscard">Preguntarme antes de descartar un proyecto</s:String>
     <s:String x:Key="Application.Other.NotifyWhileClosingEditor">Preguntarme antes de cerrar el editor (si hay un proyecto abierto)</s:String>
+    <s:String x:Key="Application.Other.NotifyWhileClosingApp">Preguntarme antes de cerrar el programa (vía el comando "Exit")</s:String>
     <s:String x:Key="Application.Other.DrawOutlineOutside">Dibujar el contorno del texto por fuera de las letras</s:String>
+    <s:String x:Key="Application.Other.DisableHardwareAcceleration">Deshabilitar aceleración por hardware</s:String>
+    <s:String x:Key="Application.Other.CheckForTranslationUpdates">Buscar actualizaciones de localización</s:String>
     <s:String x:Key="Application.Other.CheckForUpdates">Buscar actualizaciones</s:String>
+    <s:String x:Key="S.Application.Other.Homepage">Pantalla principal:</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.StartUp">Ventana de inicio</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Recorder">Grabador de pantalla</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Webcam">Grabador de webcam</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Board">Grabador de pizarra</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Editor">Ventana de edición</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Minimized">Minimizado (bandeja de notificaciones)</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Info">(Controla cómo se abre el programa. Cuando se inicia minimizado, el ícono de la bandeja de notificaciones será visible.)</s:String>
+    
+    <s:String x:Key="S.AutomatedTasks.Title">Tarea automatizada</s:String>
+    <s:String x:Key="S.AutomatedTasks.List">Lista de tareas automatizadas</s:String>
+    <s:String x:Key="S.AutomatedTasks.List.Task">Tarea</s:String>
+    <s:String x:Key="S.AutomatedTasks.List.Details">Detalles</s:String>
+    <s:String x:Key="S.AutomatedTasks.SelectType">(Elegí una tarea)</s:String>
+    <s:String x:Key="S.AutomatedTasks.Info">Estas tareas se ejecutan secuencialmente desde arriba de la lista hacia abajo.&#10;Esto sucede cuando abrís un proyecto por primera vez usando el editor.</s:String>
     
     <s:String x:Key="Interface.EditorBackground">Fondo del editor</s:String>
     <s:String x:Key="Interface.Recorder">Tema del grabador</s:String>
@@ -255,6 +269,8 @@
     <s:String x:Key="Extras.GifskiLocation">Ubicación de Gifski</s:String>
     <s:String x:Key="Extras.GifskiLocation.Select">Seleccioná la ubicación del Gifski ejecutable</s:String>
     <s:String x:Key="Extras.GifskiLocation.Invalid">La ruta del Gifski ejecutable contiene uno o más caracteres no válidos. Por favor, seleccioná una ubicación válida para dicho ejecutable.</s:String>
+    <s:String x:Key="Extras.License.Ffmpeg">Licencia de FFmpeg</s:String>
+    <s:String x:Key="Extras.License.Gifski">Licencia de Gifski</s:String>
     
     <s:String x:Key="Donate.IfYouWish">Si querés agradecerme :D</s:String>
     <s:String x:Key="Donate.DonateDollar">Doná US$</s:String>
@@ -414,6 +430,10 @@
     <s:String x:Key="Command.Title">ScreenToGif: Destino de comando</s:String>
     <s:String x:Key="Command.Header">Salida de comando</s:String>
     
+    <!--Notifications-->
+    <s:String x:Key="S.Notifications">Notificaciones</s:String>
+    <s:String x:Key="S.Notifications.Dismiss">Omitir todas las notificaciones</s:String>
+    
     <!--Editor-->
     <s:String x:Key="Editor.Title">ScreenToGif: Editor</s:String>
     <s:String x:Key="Editor.File">Archivo</s:String>
@@ -424,6 +444,8 @@
     <s:String x:Key="Editor.Transitions">Transiciones</s:String>
     <s:String x:Key="Editor.Statistics">Estadísticas</s:String>
     <s:String x:Key="Editor.Options">Configuración</s:String>
+    
+    <s:String x:Key="S.Editor.Extras">Extras</s:String>
     
     <!--Welcome-->
     <s:String x:Key="Welcome.New">Andá a "Archivo" > "Nuevo" para comenzar una nueva grabación</s:String>
@@ -524,6 +546,7 @@
     <!--Image • Overlay-->
     <s:String x:Key="Editor.Image.Overlay">Capa superpuesta</s:String>
     <s:String x:Key="Editor.Image.FreeDrawing">Dibujo&#x0d;libre</s:String>
+    <!--<s:String x:Key="Editor.Image.Clicks">Mouse&#x0d;Clicks</s:String>-->
     <s:String x:Key="Editor.Image.Watermark">Marca de agua</s:String>
     <s:String x:Key="Editor.Image.Cinemagraph">Cinematografía</s:String>
     <s:String x:Key="Editor.Image.Border">Borde</s:String>
@@ -591,6 +614,7 @@
     
     <s:String x:Key="Editor.Fade.Title">Desvanecer transición</s:String>
     <s:String x:Key="Editor.Fade.WarningSelection">Tenés que seleccionar al menos un fotograma para aplicar la transición de desvanecimiento.</s:String>
+    <s:String x:Key="Editor.Fade.WarningColor">Un color totalmente transparente no creará ningún efecto en esta transición</s:String>
     <s:String x:Key="Editor.Slide.Title">Transición de diapositivas</s:String>
     <s:String x:Key="Editor.Slide.WarningSelection">Tenés que seleccionar al menos un fotograma para aplicar la transición de diapositiva.</s:String>
 
@@ -698,6 +722,8 @@
     <s:String x:Key="Recent.CreationDate">Fecha de creación</s:String>
     <s:String x:Key="Recent.FrameCount">Conteo de fotogramas</s:String>
     <s:String x:Key="Recent.Warning.NothingSelected">No hay ningún proyecto seleccionado. Seleccioná un proyecto de la lista para cargarlo.</s:String>
+    <s:String x:Key="Recent.Warning.SameOpened">Este proyecto ya se está mostrando en esta instancia del editor</s:String>
+    <s:String x:Key="Recent.Warning.AlreadyOpened">Este proyecto ya fue abierto por otra instancia del editor. No se puede abrir un proyecto por segunda vez si ya está abierto en otro editor.</s:String>
     
     <s:String x:Key="Clipboard.Entries">Entradas del portapapeles</s:String>
     <s:String x:Key="Clipboard.Entry">Entrada del portapapeles:</s:String>
@@ -753,6 +779,7 @@
     <s:String x:Key="Caption.Vertical">Vertical:</s:String>
     <s:String x:Key="Caption.Horizontal">Horizontal:</s:String>
 
+    <s:String x:Key="S.KeyStrokes">Golpes de teclas</s:String>
     <s:String x:Key="KeyStrokes.Keys">Teclas</s:String>
     <s:String x:Key="KeyStrokes.Separator">Separador</s:String>
     <s:String x:Key="KeyStrokes.Edit">Editá tus golpes de teclas</s:String>
@@ -788,6 +815,9 @@
     <s:String x:Key="FreeDrawing.Other">Otros:</s:String>
     <s:String x:Key="FreeDrawing.Highlighter">Resaltador</s:String>
     <s:String x:Key="FreeDrawing.FitToCurve">Ajustar a la curva</s:String>
+    
+    <s:String x:Key="S.MouseClicks">Clics del mouse</s:String>
+    <s:String x:Key="S.MouseClicks.Warning.None">No se detectaron clics del mouse en tu proyecto</s:String>
     
     <s:String x:Key="Watermark.Image">Imagen</s:String>
     <s:String x:Key="Watermark.File">Archivo:</s:String>
@@ -837,7 +867,7 @@
     <s:String x:Key="S.SaveAs.Apng">Apng</s:String>
     <s:String x:Key="S.SaveAs.Images">Imágenes (fotogramas)</s:String>
     <s:String x:Key="S.SaveAs.Project">Proyecto</s:String>
-    <!--<s:String x:Key="S.SaveAs.Psd">PSD file</s:String>-->
+    <s:String x:Key="S.SaveAs.Psd">PSD</s:String>
     <s:String x:Key="S.SaveAs.Video">Video</s:String>
     <s:String x:Key="S.SaveAs.Encoder">Codificador</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">2.0</s:String>
@@ -913,6 +943,7 @@
     <s:String x:Key="S.SaveAs.Warning.Filename">Necesitás elegir un nombre de archivo.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Filename.Invalid">El nombre del archivo de destino contiene uno o más caracteres no válidos. Por favor, ingresá un nombre de archivo válido.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Overwrite">Nombre de archivo ya en uso. Elegí sobreescribir o elegí otro nombre de archivo.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Canceled">Se canceló la operación.</s:String>
     
     <!--SaveAs • Export-->
     <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">Exportar fotogramas</s:String>
@@ -922,6 +953,7 @@
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">Comentario</s:String>
     <s:String x:Key="S.Feedback.Send">Enviar</s:String>
+    <s:String x:Key="S.Feedback.Preview">Previsualización</s:String>
     <s:String x:Key="S.Feedback.Header">Enviar comentario</s:String>
     <s:String x:Key="S.Feedback.Title">Título *</s:String>
     <s:String x:Key="S.Feedback.Message">Mensaje *</s:String>
@@ -938,7 +970,17 @@
     <s:String x:Key="S.Feedback.RemoveAttachments">Quitar todos los archivos adjuntos</s:String>
     <s:String x:Key="S.Feedback.LanguageInfo1">Entiendo inglés</s:String>
     <s:String x:Key="S.Feedback.LanguageInfo2">y portugués (brasilero y europeo).</s:String>
+    <s:String x:Key="S.Feedback.Preview.Info">Esto es lo que vas a enviar, más todos los adjuntos.</s:String>
     
+    <!--Troubleshoot-->
+    <s:String x:Key="S.Troubleshoot.Title">Solución de problemas</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows">¿Falta alguna ventana?</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Info">Si falta cualquiera de las ventanas (fuera de la pantalla),&#x0d;usá las opciones debajo para restablecer su posición actual y de inicio.</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Current">Acá es en donde cada ventana está ubicada actualmente:</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Next">Acá es en donde cada ventana estará abierta la próxima vez:</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.BringBack">Mové todas las ventanas a la pantalla principal.</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Reset">Restablecer la posición inicial de todas las ventanas.</s:String>
+   
     <!--FontStyles-->
     <s:String x:Key="S.FontStyles.Normal">Normal</s:String>
     <s:String x:Key="S.FontStyles.Italic">Cursiva</s:String>
