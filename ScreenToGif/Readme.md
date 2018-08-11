@@ -7,11 +7,12 @@ _VS 2017 and .Net 4.6.1 or newer required._
 
 ## What's new? (Version 2.14.1)
 
-• Updated the Spanish (Argentinian) translation.   
+• Updated the Chinese (Simplified) translation.   
+• Updated the Danish translation.   
 
 ### Fixed:
 
-♦ For some users, the app would simply close when stopping the recording and opening the Editor.  
+♦ 
 
 ### Known Bugs:
 

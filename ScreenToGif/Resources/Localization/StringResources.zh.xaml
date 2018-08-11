@@ -17,11 +17,13 @@
     <s:String x:Key="Suppress">隐藏</s:String>
     <s:String x:Key="Preview">预览</s:String>
     <s:String x:Key="S.Add">添加</s:String>
+    <s:String x:Key="S.Edit">编辑</s:String>
     <s:String x:Key="S.Id">标识</s:String>
     <s:String x:Key="S.Title">标题</s:String>
     <s:String x:Key="S.Description">描述</s:String>
+    <s:String x:Key="S.SelectColor">单击此处选择颜色。</s:String>
 
-    <!--Notification Icon-->
+    <!--Tray Icon-->
     <s:String x:Key="S.NewRecording">新建屏幕录制</s:String>
     <s:String x:Key="S.NewWebcamRecording">新建摄像头录制</s:String>
     <s:String x:Key="S.NewBoardRecording">新建画板录制</s:String>
@@ -50,7 +52,7 @@
     <s:String x:Key="Tooltip.Board">打开画板录像机，您可以在其中录制您的绘图。</s:String>
     <s:String x:Key="Tooltip.Editor">打开编辑器窗口，您可以在其中开始或编辑新的录制视频。</s:String>
 
-    <!--Update Page-->
+    <!--Update Window-->
     <s:String x:Key="Update">更新</s:String>
     <s:String x:Key="Update.NewRelease">新版本发布！</s:String>
     <s:String x:Key="Update.NewRelease.Verbose">新版本 {0} 可用！点击此处查看。</s:String>
@@ -64,10 +66,11 @@
     <s:String x:Key="Update.CloseThis">是否关闭应用？</s:String>
     <s:String x:Key="Update.CloseThis.Detail">现在是旧版本，发现新版本并且已下载。</s:String>
     
-    <!--Options Page-->
+    <!--Options Window-->
     <s:String x:Key="Title.Options">ScreenToGif - 选项</s:String>
     <s:String x:Key="Application">应用程序</s:String>
     <s:String x:Key="Interface">界面</s:String>
+    <s:String x:Key="S.AutoTasks">自动化任务</s:String>
     <s:String x:Key="S.Shortcuts">键盘快捷键</s:String>
     <s:String x:Key="Image">图像</s:String>
     <s:String x:Key="Language">语言</s:String>
@@ -76,13 +79,6 @@
     <s:String x:Key="Clouds">上传服务</s:String>
     <s:String x:Key="Donate">捐赠</s:String>
     <s:String x:Key="About">关于</s:String>
-    
-    <s:String x:Key="S.Application.Other.Homepage">起始页面:</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.StartUp">启动窗口</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Recorder">屏幕录像机</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Webcam">摄像头录像机</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Board">画板录像机</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Editor">编辑器窗口</s:String>
     
     <s:String x:Key="Application.ScreenRecorder">屏幕录像机</s:String>
     <s:String x:Key="Application.ScreenRecorder.RecordMouse">录制时显示鼠标光标</s:String>
@@ -107,8 +103,26 @@
     <s:String x:Key="Application.Other.NotifyFrameDeletion">删除帧前询问我</s:String>
     <s:String x:Key="Application.Other.NotifyProjectDiscard">放弃项目前询问我</s:String>
     <s:String x:Key="Application.Other.NotifyWhileClosingEditor">关闭编辑器前询问我 （如果有打开的项目）</s:String>
+    <s:String x:Key="Application.Other.NotifyWhileClosingApp">关闭应用程序之前询问我（通过'退出'命令）</s:String>
     <s:String x:Key="Application.Other.DrawOutlineOutside">绘制标题文字的外轮廓</s:String>
+    <s:String x:Key="Application.Other.DisableHardwareAcceleration">禁用硬件加速</s:String>
+    <s:String x:Key="Application.Other.CheckForTranslationUpdates">检查翻译更新</s:String>
     <s:String x:Key="Application.Other.CheckForUpdates">检查更新</s:String>
+    <s:String x:Key="S.Application.Other.Homepage">起始页面:</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.StartUp">启动窗口</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Recorder">屏幕录像机</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Webcam">摄像头录像机</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Board">画板录像机</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Editor">编辑器窗口</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Minimized">最小化（系统托盘）</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Info">（它控制应用程序的打开方式。最小化时，系统托盘图标将可见）</s:String>
+    
+    <s:String x:Key="S.AutomatedTasks.Title">自动化任务</s:String>
+    <s:String x:Key="S.AutomatedTasks.List">自动化任务列表</s:String>
+    <s:String x:Key="S.AutomatedTasks.List.Task">任务</s:String>
+    <s:String x:Key="S.AutomatedTasks.List.Details">详细信息</s:String>
+    <s:String x:Key="S.AutomatedTasks.SelectType">（选择一个任务）</s:String>
+    <s:String x:Key="S.AutomatedTasks.Info">这些任务从列表顶部到底部顺序执行。&#10;当您第一次使用编辑器打开项目时会发生这种情况。</s:String>
     
     <s:String x:Key="Interface.EditorBackground">编辑器背景</s:String>
     <s:String x:Key="Interface.Recorder">录像机主题</s:String>
@@ -166,7 +180,8 @@
     <s:String x:Key="S.Shortcuts.Recorders.Stop.Info">（它会停止录制并打开编辑器）</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.Discard">放弃：</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.Discard.Info">（暂停时放弃活动录制）</s:String>
-    <s:String x:Key="S.Shortcuts.Info">单击以设置键盘焦点，然后按所需的键和修饰符。&#10;一些按键组合是不允许的。</s:String>
+    <s:String x:Key="S.Shortcuts.Info">单击以设置键盘焦点，然后按所需的键和修饰符。
+一些按键组合是不允许的。</s:String>
     
     <s:String x:Key="Language.AppLanguage">应用程序语言</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect">自动检测</s:String>
@@ -261,6 +276,8 @@
     <s:String x:Key="Extras.GifskiLocation">Gifski 位置</s:String>
     <s:String x:Key="Extras.GifskiLocation.Select">选择 Gifski 可执行文件的位置</s:String>
     <s:String x:Key="Extras.GifskiLocation.Invalid">Gifski 可执行文件的路径包含一个或多个无效字符。请为该可执行文件选择一个有效的位置。</s:String>
+    <s:String x:Key="Extras.License.Ffmpeg">FFmpeg 许可证</s:String>
+    <s:String x:Key="Extras.License.Gifski">Gifski 许可证</s:String>
     
     <s:String x:Key="Donate.IfYouWish">如果您愿意感谢我 :D</s:String>
     <s:String x:Key="Donate.DonateDollar">捐赠美元 (US$)</s:String>
@@ -421,6 +438,10 @@
     <s:String x:Key="Command.Title">ScreenToGif - 命令输出</s:String>
     <s:String x:Key="Command.Header">命令输出</s:String>
     
+    <!--Notifications-->
+    <s:String x:Key="S.Notifications">通知</s:String>
+    <s:String x:Key="S.Notifications.Dismiss">关闭所有通知</s:String>
+    
     <!--Editor-->
     <s:String x:Key="Editor.Title">ScreenToGif - 编辑器</s:String>
     <s:String x:Key="Editor.File">文件</s:String>
@@ -431,6 +452,8 @@
     <s:String x:Key="Editor.Transitions">过渡</s:String>
     <s:String x:Key="Editor.Statistics">统计</s:String>
     <s:String x:Key="Editor.Options">选项</s:String>
+    
+    <s:String x:Key="S.Editor.Extras">附加</s:String>
     
     <!--Welcome-->
     <s:String x:Key="Welcome.New">转到“文件 > 新录制”来开始新录制</s:String>
@@ -535,6 +558,7 @@
     <!--Image • Overlay-->
     <s:String x:Key="Editor.Image.Overlay">叠加层</s:String>
     <s:String x:Key="Editor.Image.FreeDrawing">自由绘制</s:String>
+    <s:String x:Key="Editor.Image.Clicks">鼠标点击</s:String>
     <s:String x:Key="Editor.Image.Watermark">水印</s:String>
     <s:String x:Key="Editor.Image.Cinemagraph">微动</s:String>
     <s:String x:Key="Editor.Image.Border">边框</s:String>
@@ -602,6 +626,7 @@
     
     <s:String x:Key="Editor.Fade.Title">淡出过渡</s:String>
     <s:String x:Key="Editor.Fade.WarningSelection">您必须至少选择一帧才能应用“淡出过渡”。</s:String>
+    <s:String x:Key="Editor.Fade.WarningColor">完全透明的颜色不会对此过渡产生任何影响。</s:String>
     <s:String x:Key="Editor.Slide.Title">滑动过渡</s:String>
     <s:String x:Key="Editor.Slide.WarningSelection">您必须至少选择一帧才能应用“滑动过渡”。</s:String>
 
@@ -709,6 +734,8 @@
     <s:String x:Key="Recent.CreationDate">创建日期</s:String>
     <s:String x:Key="Recent.FrameCount">总帧数</s:String>
     <s:String x:Key="Recent.Warning.NothingSelected">未选择任何项目。请从列表中选择并载入。</s:String>
+    <s:String x:Key="Recent.Warning.SameOpened">此编辑器实例已在显示该项目。</s:String>
+    <s:String x:Key="Recent.Warning.AlreadyOpened">该项目已由另一个编辑器实例打开。 如果项目已在另一个编辑器上打开，则无法再次打开该项目。</s:String>
     
     <s:String x:Key="Clipboard.Entries">剪贴板条目</s:String>
     <s:String x:Key="Clipboard.Entry">剪贴板条目：</s:String>
@@ -750,7 +777,8 @@
     <s:String x:Key="S.RemoveDuplicates.Delay.NoAdjustment">不调整</s:String>
     <s:String x:Key="S.RemoveDuplicates.Delay.Average">使用平均值</s:String>
     <s:String x:Key="S.RemoveDuplicates.Delay.Sum">使用总和</s:String>
-    <s:String x:Key="S.RemoveDuplicates.Info">此操作会分析每个帧（逐个像素），并删除至少为{0} %的类似于其最近邻的帧。&#x0d;您可以选择是否要调整帧的延迟（显示持续时间）。</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Info">此操作会分析每个帧（逐个像素），并删除至少为{0} %的类似于其最近邻的帧。
+您可以选择是否要调整帧的延迟（显示持续时间）。</s:String>
     
     <s:String x:Key="Caption.Text">文本</s:String>
     <s:String x:Key="Caption.Font">字体</s:String>
@@ -765,6 +793,7 @@
     <s:String x:Key="Caption.Vertical">垂直：</s:String>
     <s:String x:Key="Caption.Horizontal">水平：</s:String>
 
+    <s:String x:Key="S.KeyStrokes">击键</s:String>
     <s:String x:Key="KeyStrokes.Keys">按键</s:String>
     <s:String x:Key="KeyStrokes.Separator">分隔符</s:String>
     <s:String x:Key="KeyStrokes.Edit">编辑键盘按键</s:String>
@@ -800,6 +829,9 @@
     <s:String x:Key="FreeDrawing.Other">其它：</s:String>
     <s:String x:Key="FreeDrawing.Highlighter">荧光笔</s:String>
     <s:String x:Key="FreeDrawing.FitToCurve">转为曲线</s:String>
+    
+    <s:String x:Key="S.MouseClicks">鼠标点击</s:String>
+    <s:String x:Key="S.MouseClicks.Warning.None">您的项目没有检测到鼠标点击。</s:String>
     
     <s:String x:Key="Watermark.Image">图像</s:String>
     <s:String x:Key="Watermark.File">文件：</s:String>
@@ -930,6 +962,7 @@
     <s:String x:Key="S.SaveAs.Warning.Filename">您需要选择一个文件名。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Filename.Invalid">输出文件名包含一个或多个无效字符。请选择有效的文件名。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Overwrite">文件名已被使用。请设置“覆盖”或选择另外的文件名。</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Canceled">该操作被取消。</s:String>
     
     <!--SaveAs • Export-->
     <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">导出帧</s:String>
@@ -939,6 +972,7 @@
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">反馈</s:String>
     <s:String x:Key="S.Feedback.Send">发送</s:String>
+    <s:String x:Key="S.Feedback.Preview">预览</s:String>
     <s:String x:Key="S.Feedback.Header">发送反馈</s:String>
     <s:String x:Key="S.Feedback.Title">标题*</s:String>
     <s:String x:Key="S.Feedback.Message">信息*</s:String>
@@ -955,7 +989,17 @@
     <s:String x:Key="S.Feedback.RemoveAttachments">删除所有附件</s:String>
     <s:String x:Key="S.Feedback.LanguageInfo1">我可以理解英语</s:String>
     <s:String x:Key="S.Feedback.LanguageInfo2">和葡萄牙语（巴西和欧洲）。</s:String>
+    <s:String x:Key="S.Feedback.Preview.Info">这是您要发送的内容，以及所有附件。</s:String>
     
+    <!--Troubleshoot-->
+    <s:String x:Key="S.Troubleshoot.Title">疑难解答</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows">是否有任何窗口不见了?</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Info">如果缺少任何窗口（屏幕外），&#x0d;使用下面的选项重置其当前和启动位置。</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Current">这是每个窗口当前所在的位置：</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Next">以下是每个窗口下次打开的位置：</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.BringBack">将所有窗口移动到主屏幕。</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Reset">重置所有窗口的启动位置。</s:String>
+   
     <!--FontStyles-->
     <s:String x:Key="S.FontStyles.Normal">正常</s:String>
     <s:String x:Key="S.FontStyles.Italic">斜体</s:String>
