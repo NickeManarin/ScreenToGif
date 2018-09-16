@@ -278,6 +278,7 @@
         <!--Delay (Duration)-->
         <CommandBinding Command="u:Commands.OverrideDelay" CanExecute="Image_CanExecute" Executed="OverrideDelay_Executed"/>
         <CommandBinding Command="u:Commands.ChangeDelay" CanExecute="Image_CanExecute" Executed="IncreaseDecreaseDelay_Executed"/>
+        <CommandBinding Command="u:Commands.ScaleDelay" CanExecute="Image_CanExecute" Executed="ScaleDelay_Executed"/>
 
         <!--Image-->
         <CommandBinding Command="u:Commands.Resize" CanExecute="Image_CanExecute" Executed="Resize_Executed"/>
@@ -940,9 +941,10 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="{DynamicResource Editor.Edit.Delay}" 
+                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Content="{DynamicResource Editor.Edit.Delay}" 
 						       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 						       FontSize="12" Foreground="#FF707070"/>
 
@@ -953,6 +955,11 @@
 
                         <n:ImageButton Grid.Column="1" Grid.Row="0" x:Name="ChangeDelayButton" Text="{DynamicResource Editor.Edit.Delay.IncreaseDecrease}" Content="{StaticResource Vector.IncreaseDecreaseDelay}" 
                                        MinWidth="55" ContentHeight="28" ContentWidth="28" Command="u:Commands.ChangeDelay" Style="{StaticResource Style.Button.Vertical2}"
+                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                        
+                        <n:ImageButton Grid.Column="2" Grid.Row="0" x:Name="ScaleDelayButton" Text="{DynamicResource Editor.Edit.Delay.Scale}" Content="{StaticResource Vector.ScaleDelay}" 
+                                       MinWidth="55" ContentHeight="28" ContentWidth="28" Command="u:Commands.ScaleDelay" Style="{StaticResource Style.Button.Vertical2}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                     </Grid>
@@ -4068,6 +4075,38 @@
 
                                 <Viewbox Grid.Column="0" MinWidth="15" MaxHeight="15" Stretch="Uniform" Child="{StaticResource Vector.Info}" />
                                 <TextBlock Grid.Column="1" Text="{DynamicResource IncreaseDecreaseDelay.Info}" Foreground="#FF289746" 
+                                           FontStyle="Italic" FontSize="12" Padding="3" TextWrapping="WrapWithOverflow"/>
+                            </Grid>
+                        </Grid>
+                        <Grid x:Name="ScaleDelayGrid" Visibility="Collapsed">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="27"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <n:LabelSeparator Grid.Row="0" Text="{DynamicResource Delay.Scale}"/>
+                            <Grid Grid.Row="1" Margin="10,0,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource String.ScaleValue}" VerticalAlignment="Center" Padding="0"/>
+                                <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="ScaleDelayIntegerUpDown" Minimum="1" Maximum="1000" Margin="10,5" MinWidth="80" 
+                                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=ScaleDelay, Mode=TwoWay}"/>
+                                <Label Grid.Row="0" Grid.Column="2" Content="%" VerticalAlignment="Center" HorizontalAlignment="Left"  Padding="0"/>
+                            </Grid>
+
+                            <Grid Grid.Row="2" Grid.Column="0" Margin="10,10,5,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Viewbox Grid.Column="0" MinWidth="15" MaxHeight="15" Stretch="Uniform" Child="{StaticResource Vector.Info}" />
+                                <TextBlock Grid.Column="1" Text="{DynamicResource ScaleDelay.Info}" Foreground="#FF289746" 
                                            FontStyle="Italic" FontSize="12" Padding="3" TextWrapping="WrapWithOverflow"/>
                             </Grid>
                         </Grid>

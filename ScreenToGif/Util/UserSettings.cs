@@ -2272,15 +2272,21 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
-        #endregion
+        public int ScaleDelay
+        {
+           get => (int)GetValue();
+           set => SetValue(value);
+        }
 
-        #endregion
+      #endregion
+
+      #endregion
 
 
 
-        #region Obsolete
+      #region Obsolete
 
-        [Obsolete]
+      [Obsolete]
         public Color ClickColor
         {
             get => (Color)(GetValue() ?? Color.FromRgb(0,0,0));

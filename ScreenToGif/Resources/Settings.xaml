@@ -267,6 +267,7 @@
     <!--Editor • Delay/Duration-->
     <s:Int32 x:Key="OverrideDelay">66</s:Int32>
     <s:Int32 x:Key="IncrementDecrementDelay">10</s:Int32>
+    <s:Int32 x:Key="ScaleDelay">100</s:Int32>
 
     <!--Editor • Border-->
     <Color x:Key="BorderColor">#FF000000</Color>
