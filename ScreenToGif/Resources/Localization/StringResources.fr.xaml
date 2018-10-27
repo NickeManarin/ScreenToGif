@@ -12,13 +12,13 @@
     <s:String x:Key="Back">Retour</s:String>
     <s:String x:Key="Cancel">Annuler</s:String>
     <s:String x:Key="Yes">Oui</s:String>
-    <s:String x:Key="No">No</s:String>
+    <s:String x:Key="No">Non</s:String>
     <s:String x:Key="Frame">Frame</s:String>
     <s:String x:Key="Suppress">Supprimer</s:String>
     <s:String x:Key="Preview">Aperçu</s:String>
 
     <!--StartUp Page-->
-    <s:String x:Key="Title.StartUp">Screen To Gif - Démarrage</s:String>
+    <s:String x:Key="Title.StartUp">ScreenToGif - Démarrage</s:String>
     <s:String x:Key="Recorder">Enregistreur</s:String>
     <s:String x:Key="Webcam">Webcam</s:String>
     <s:String x:Key="Board">Board</s:String>
@@ -26,7 +26,7 @@
     <s:String x:Key="Options">Options</s:String>
     <s:String x:Key="Help">Aide</s:String>
     <s:String x:Key="NewRelease">Nouvelle version disponible • {0}</s:String>
-    <!--<s:String x:Key="NewRelease.Tooltip">Downloads the latest version of ScreenToGif.</s:String>-->
+    <s:String x:Key="NewRelease.Tooltip">Télécharger la dernière version de ScreenToGif.</s:String>
     <s:String x:Key="Tooltip.Recorder">Ouvre l'enregistreur d'écran, où vous pouvez facilement commencer à enregistrer votre écran.</s:String>
     <s:String x:Key="Tooltip.Webcam">Ouvre l'enregistreur de webcam.</s:String>
     <s:String x:Key="Tooltip.Board">Ouvre l'enregistreur de Board, où vous pouvez commencer à enregistrer vos dessins.</s:String>
