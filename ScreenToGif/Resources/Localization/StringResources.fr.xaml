@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:s="clr-namespace:System;assembly=mscorlib"
                     xml:space="preserve">
@@ -12,89 +12,123 @@
     <s:String x:Key="Back">Retour</s:String>
     <s:String x:Key="Cancel">Annuler</s:String>
     <s:String x:Key="Yes">Oui</s:String>
-    <s:String x:Key="No">No</s:String>
+    <s:String x:Key="No">Non</s:String>
     <s:String x:Key="Frame">Frame</s:String>
     <s:String x:Key="Suppress">Supprimer</s:String>
     <s:String x:Key="Preview">Aperçu</s:String>
-
+    <s:String x:Key="S.Add">Ajouter</s:String>
+    <s:String x:Key="S.Edit">Éditer</s:String>
+    <s:String x:Key="S.Id">Id</s:String>
+    <s:String x:Key="S.Title">Titre</s:String>
+    <s:String x:Key="S.Description">Description</s:String>
+    <s:String x:Key="S.SelectColor">Cliquez ici pour choisir la couleur</s:String>
+    
+    <!--Tray Icon-->
+    <s:String x:Key="S.NewRecording">Nouvel enregistrement d'écran</s:String>
+    <s:String x:Key="S.NewWebcamRecording">New webcam recording</s:String>
+    <s:String x:Key="S.NewBoardRecording">New board recording</s:String>
+    <s:String x:Key="S.Exit">Exit</s:String>
+    
+    <!--Application-->
+    <s:String x:Key="Application.Exiting.Title">Quitter ScreenToGif</s:String>
+    <s:String x:Key="Application.Exiting.Instruction">Êtes-vous sûr de vouloir quitter ?</s:String>
+    <s:String x:Key="Application.Exiting.Message">Toutes les fenêtres seront fermées et l'icône dans la barre des tâches va disparaitre</s:String>   
+    
+    <!--Error messages--> 
+    <s:String x:Key="S.Crash">Oh non, l'application a planté :(</s:String>
+    
     <!--StartUp Page-->
-    <s:String x:Key="Title.StartUp">Screen To Gif - Démarrage</s:String>
+    <s:String x:Key="Title.StartUp">ScreenToGif - Démarrage</s:String>
     <s:String x:Key="Recorder">Enregistreur</s:String>
     <s:String x:Key="Webcam">Webcam</s:String>
     <s:String x:Key="Board">Board</s:String>
-    <s:String x:Key="Editor">Editeur</s:String>
+    <s:String x:Key="Editor">Éditeur</s:String>
     <s:String x:Key="Options">Options</s:String>
     <s:String x:Key="Help">Aide</s:String>
     <s:String x:Key="NewRelease">Nouvelle version disponible • {0}</s:String>
-    <!--<s:String x:Key="NewRelease.Tooltip">Downloads the latest version of ScreenToGif.</s:String>-->
+    <s:String x:Key="NewRelease.Tooltip">Télécharger la dernière version de ScreenToGif.</s:String>
     <s:String x:Key="Tooltip.Recorder">Ouvre l'enregistreur d'écran, où vous pouvez facilement commencer à enregistrer votre écran.</s:String>
     <s:String x:Key="Tooltip.Webcam">Ouvre l'enregistreur de webcam.</s:String>
     <s:String x:Key="Tooltip.Board">Ouvre l'enregistreur de Board, où vous pouvez commencer à enregistrer vos dessins.</s:String>
     <s:String x:Key="Tooltip.Editor">Ouvre la fenêtre de l'éditeur, le point central de cette application, où vous pouvez démarrer et éditer un nouvel enregistrement.</s:String>
 
-    <!--Update Page-->
+    <!--Update Window-->
     <s:String x:Key="Update">Mettre à jour</s:String>
     <s:String x:Key="Update.NewRelease">Nouvelle version !</s:String>
-    <!--<s:String x:Key="Update.NewRelease.Verbose">New release available, Version {0}! Click here for more details.</s:String>-->
+    <s:String x:Key="Update.NewRelease.Verbose">Version {0} disponible ! Cliquez ici pour plus de détails.</s:String>-->
     <s:String x:Key="Download">Télécharger</s:String>
-    <!--<s:String x:Key="Update.Portable">Portable</s:String>-->
-    <!--<s:String x:Key="Update.Installer">Installer</s:String>-->
-    <!--<s:String x:Key="Update.Filename.Warning">You need to pick another location or another file name</s:String>-->
-    <!--<s:String x:Key="Update.Filename.Warning2">You cannot overwrite the executable with a new version right now, please select another name for the file.</s:String>-->
-    <!--<s:String x:Key="Update.Install.Header">Do you wish to install the new version right now?</s:String>-->
-    <!--<s:String x:Key="Update.Install.Description">The app will be closed and the installer will be executed.</s:String>-->
-    <!--<s:String x:Key="Update.CloseThis">Do you want to close this app?</s:String>-->
-    <!--<s:String x:Key="Update.CloseThis.Detail">This is an older version. You have already downloaded a new version.</s:String>-->
+    <s:String x:Key="Update.Portable">Portable</s:String>
+    <s:String x:Key="Update.Installer">Installeur</s:String>
+    <s:String x:Key="Update.Filename.Warning">Vous devez choisir un autre emplacement ou un autre nom de fichier.</s:String>
+    <s:String x:Key="Update.Filename.Warning2">Vous ne pouvez pas écraser l'exécutable avec une nouvelle version pour l'instant, veuillez sélectionner un autre nom pour le fichier.</s:String>
+    <s:String x:Key="Update.Install.Header">Souhaitez-vous installer la nouvelle version maintenant ?</s:String>
+    <s:String x:Key="Update.Install.Description">L'application va être fermée et le programme d'installation va se lancer.</s:String>-->
+    <s:String x:Key="Update.CloseThis">Voulez-vous fermer cette application ?</s:String>
+    <s:String x:Key="Update.CloseThis.Detail">Ceci est une version plus ancienne. Vous avez déjà téléchargé une nouvelle version.</s:String>
     
-    <!--Options Page-->
-    <s:String x:Key="Title.Options">Screen To Gif - Options</s:String>
+    <!--Options Window-->
+    <s:String x:Key="Title.Options">ScreenToGif - Options</s:String>
     <s:String x:Key="Application">Application</s:String>
     <s:String x:Key="Interface">Interface</s:String>
+    <s:String x:Key="S.AutoTasks">Tâches automatisées</s:String>
+    <s:String x:Key="S.Shortcuts">Raccourcis</s:String>
     <s:String x:Key="Image">Image</s:String>
     <s:String x:Key="Language">Langage</s:String>
     <s:String x:Key="TemporaryFiles">Fichiers temporaires</s:String>
-    <!--<s:String x:Key="Extras">Extras</s:String>-->
+    <s:String x:Key="Extras">Extras</s:String>
+    <s:String x:Key="Clouds">Services de téléchargement</s:String>
     <s:String x:Key="Donate">Faire un don</s:String>
     <s:String x:Key="About">À propos</s:String>
     
+    <s:String x:Key="Application.ScreenRecorder">Enregistreur d'écran</s:String>
+    <s:String x:Key="Application.ScreenRecorder.RecordMouse">Afficher le curseur de la souris dans l'enregistrement</s:String>
+    <s:String x:Key="Application.ScreenRecorder.RecordClicks">Détecter clics de souris</s:String>
+    <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">Sélectionnez la couleur du curseur</s:String>
+    <s:String x:Key="Application.ScreenRecorder.PreStart">Utiliser un compte à rebours au démarrage</s:String>
+    <s:String x:Key="Application.ScreenRecorder.PreStart.Info">(Attente avant de commencer à capturer en secondes)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.StepRecording">Activer le mode instantané</s:String>
+    <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Chaque image doit être capturée manuellement par vous-même)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Fréquence d'images fixe</s:String>
+    <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Retard constant qui ne tient pas compte fes latences lors de l'enregistrement)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Activer l'enregistrement asynchrone</s:String>
+    <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(Permet de réduire le retard dû à l'interface lors de l'enregistrement)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.NewRecorder">Activer le nouvel enregistreur</s:String>
+    <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(Remplacera l'ancien enregistreur d'interface)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.Magnifier">Activer la loupe sur l'écran</s:String>
+    <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(Active une loupe lors de la sélection de la zone d'enregistrement)</s:String>
+    
+    <s:String x:Key="Application.Other">Autre</s:String>
+    <s:String x:Key="Application.Other.SystemTray">Afficher l'application sur la barre d'état du système (zone de notification)</s:String>
+    <s:String x:Key="Application.Other.LeaveOpen">Gardez l'application ouverte même si toutes les fenêtres sont fermées</s:String>
+    <s:String x:Key="Application.Other.NotifyFrameDeletion">Confirmer avant de supprimer des frames</s:String>
+    <s:String x:Key="Application.Other.NotifyProjectDiscard">Confirmer avant d'annuler un projet</s:String>
+    <s:String x:Key="Application.Other.NotifyWhileClosingEditor">Confirmer avant de fermer l'éditeur (en cas de projet ouvert)</s:String>
+    <s:String x:Key="Application.Other.NotifyWhileClosingApp">Confirmer avant de fermer l'application (via la commande 'Quitter')</s:String>
+    <s:String x:Key="Application.Other.DrawOutlineOutside">Dessinez le contour des textes en dehors des lettres</s:String>
+    <s:String x:Key="Application.Other.DisableHardwareAcceleration">Désactiver l'accélération matérielle</s:String>
+    <s:String x:Key="Application.Other.CheckForTranslationUpdates">Vérifier les mises à jour de traduction</s:String>
+    <s:String x:Key="Application.Other.CheckForUpdates">Vérifier les mises à jour</s:String>
     <s:String x:Key="S.Application.Other.Homepage">Accueil:</s:String>
     <s:String x:Key="S.Application.Other.Homepage.StartUp">Fenêtre de démarrage</s:String>
     <s:String x:Key="S.Application.Other.Homepage.Recorder">Enregistreur d'écran</s:String>
     <s:String x:Key="S.Application.Other.Homepage.Webcam">Enregistreur de Webcam</s:String>
     <s:String x:Key="S.Application.Other.Homepage.Board">Enregistreur de Board</s:String>
     <s:String x:Key="S.Application.Other.Homepage.Editor">Fenêtre de l'éditeur</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Minimized">Minimiser (barre d'état du système)</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Info">(Contrôle la façon dont l'application s'ouvre. Démarrage minimisé, l'icône sera visible depuis la barre d'état du système)</s:String>
     
-    <s:String x:Key="Application.ScreenRecorder">Enregistreur d'écran</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordMouse">Afficher le curseur de la souris dans l'enregistrement.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordClicks">Détecter clics de souris.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">Sélectionnez la Couleur du curseur</s:String>
-    <s:String x:Key="Application.ScreenRecorder.PreStart">Utiliser un compte à rebours au départ</s:String>
-    <!--<s:String x:Key="Application.ScreenRecorder.PreStart.Info">(in seconds, waits before starting to capture)</s:String>-->
-    <!--<s:String x:Key="Application.ScreenRecorder.StepRecording">Enable snapshot mode.</s:String>-->
-    <!--<s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Each frame will be captured manually by you)</s:String>-->
-    <s:String x:Key="Application.ScreenRecorder.FullRecording">Activer le mode plein écran.</s:String>
-    <!--<s:String x:Key="Application.ScreenRecorder.FullRecording.Info">(Experimental, will capture the main screen)</s:String>-->
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Fréquence d'images fixe.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Retard constant, ne change pas avec les latence d'enregistrement)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Activer l'enregistrement asynchrone.</s:String>
-    <!--<s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(It helps reduce the interface lag when recording)</s:String>    -->
-    <!--<s:String x:Key="Application.ScreenRecorder.NewRecorder">Enable the new recorder UI.</s:String>-->
-    <!--<s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(It will replace the old recorder UI)</s:String>-->
-    <!--<s:String x:Key="Application.ScreenRecorder.Magnifier">Enable the screen magnifier.</s:String>-->
-    <!--<s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(It enables a magnifier while selecting the recording area)</s:String>-->
-    
-    <s:String x:Key="Application.Other">Autre</s:String>
-    <!--<s:String x:Key="Application.Other.NotifyFrameDeletion">Ask me before deleting frames.</s:String>-->
-    <!--<s:String x:Key="Application.Other.NotifyProjectDiscard">Ask me before discarding a project.</s:String>-->
-    <!--<s:String x:Key="Application.Other.NotifyWhileClosingEditor">Ask me before closing the Editor (if there's a project opened).</s:String>-->
-    <!--<s:String x:Key="Application.Other.DrawOutlineOutside">Draw the outline of captions outside the letters.</s:String>-->
-    <s:String x:Key="Application.Other.CheckForUpdates">Vérifier les mises à jour.</s:String>
-    
-    <s:String x:Key="Interface.EditorBackground">Fond de l'éditeur</s:String>
-    <!--<s:String x:Key="Interface.Recorder">Recorder theme</s:String>-->
-    <!--<s:String x:Key="Interface.Background">Background</s:String>-->
-    <!--<s:String x:Key="Interface.Foreground">Foreground</s:String>-->
-    <s:String x:Key="Interface.BoardBackground">Fond de la planche</s:String>
+    <s:String x:Key="S.AutomatedTasks.Title">Tâche automatisée</s:String>
+    <s:String x:Key="S.AutomatedTasks.List">Liste des tâches automatisées</s:String>
+    <s:String x:Key="S.AutomatedTasks.List.Task">Tâche</s:String>
+    <s:String x:Key="S.AutomatedTasks.List.Details">Détails</s:String>
+    <s:String x:Key="S.AutomatedTasks.SelectType">(Choisissez une tâche)</s:String>
+    <s:String x:Key="S.AutomatedTasks.Info">Ces tâches sont exécutées séquentiellement du haut vers le bas de la liste.&#10;Cela se produit lorsque vous ouvrez un projet pour la première fois à l'aide de l'éditeur.</s:String>
+
+    <s:String x:Key="Interface.EditorBackground">Arrière-plan de l'éditeur</s:String>
+    <s:String x:Key="Interface.Recorder">Thème de l'enregistreur</s:String>
+    <s:String x:Key="Interface.Background">Arrière-plan</s:String>
+    <s:String x:Key="Interface.Foreground">Premier plan</s:String>
+    <s:String x:Key="Interface.BoardBackground">Arrière-plan du Board</s:String>
     <s:String x:Key="Interface.EditorBackground.Scheme">Schéma de couleur</s:String>
     <s:String x:Key="Interface.EditorBackground.Scheme.VeryLight">Très clair</s:String>
     <s:String x:Key="Interface.EditorBackground.Scheme.Light">Clair</s:String>
