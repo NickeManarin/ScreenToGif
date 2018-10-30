@@ -93,35 +93,37 @@
         /// </summary>
         IncreaseDecreaseDelay = 7,
 
+        ScaleDelay = 8,
+
         /// <summary>
         /// Fade Transition Panel.
         /// </summary>
-        Fade = 8,
+        Fade = 9,
 
         /// <summary>
         /// Slide Transition Panel.
         /// </summary>
-        Slide = 9,
+        Slide = 10,
 
         /// <summary>
         /// Reduce Frame Count Panel.
         /// </summary>
-        ReduceFrames = 10,
+        ReduceFrames = 11,
 
         /// <summary>
         /// Load Recent Panel.
         /// </summary>
-        LoadRecent = 11,
+        LoadRecent = 12,
 
         /// <summary>
         /// Remove Duplicates Panel.
         /// </summary>
-        RemoveDuplicates = 12,
+        RemoveDuplicates = 13,
 
         /// <summary>
         /// Mouse Clicks Panel.
         /// </summary>
-        MouseClicks = 13,
+        MouseClicks = 14,
 
         /// <summary>
         /// Crop Panel.
@@ -316,8 +318,9 @@
     public enum DelayChangeType
     {
         Override,
-        IncreaseDecrease
-    }
+        IncreaseDecrease,
+      Scale
+   }
 
     /// <summary>
     /// Type of the gif encoder.
