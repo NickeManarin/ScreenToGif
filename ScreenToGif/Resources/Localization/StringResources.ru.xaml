@@ -16,7 +16,27 @@
     <s:String x:Key="Frame">Кадр</s:String>
     <s:String x:Key="Suppress">Подавить</s:String>
     <s:String x:Key="Preview">Предпросмотр</s:String>
+    <s:String x:Key="S.Add">Добавить</s:String>
+    <s:String x:Key="S.Edit">Редактировать</s:String>
+    <s:String x:Key="S.Id">ID</s:String>
+    <s:String x:Key="S.Title">Заголовок</s:String>
+    <s:String x:Key="S.Description">Описание</s:String>
+    <s:String x:Key="S.SelectColor">Нажмите здесь, чтобы выбрать цвет.</s:String>
 
+    <!--Tray Icon-->
+    <s:String x:Key="S.NewRecording">Новая запись экрана</s:String>
+    <s:String x:Key="S.NewWebcamRecording">Новая запись вэб-камеры</s:String>
+    <s:String x:Key="S.NewBoardRecording">Новая запись доски</s:String>
+    <s:String x:Key="S.Exit">Выход</s:String>
+
+    <!--Application-->
+    <s:String x:Key="Application.Exiting.Title">Выход из ScreenToGif</s:String>
+    <s:String x:Key="Application.Exiting.Instruction">Вы уверены, что хотите выйти?</s:String>
+    <s:String x:Key="Application.Exiting.Message">Все окна будут закрыты, и значок в трее будет удален.</s:String>
+    
+    <!--Error messages--> 
+    <s:String x:Key="S.Crash">О нет, приложение рухнуло :(</s:String>
+    
     <!--StartUp Page-->
     <s:String x:Key="Title.StartUp">Screen To Gif - Запуск</s:String>
     <s:String x:Key="Recorder">Запись</s:String>
@@ -32,7 +52,7 @@
     <s:String x:Key="Tooltip.Board">Открывает запись с доски, где Вы можете записать Ваши рисунки.</s:String>
     <s:String x:Key="Tooltip.Editor">Открывает окно редактора, самое главное в этом приложении, где вы можете начать новую запись и редактировать ее.</s:String>
 
-    <!--Update Page-->
+    <!--Update Window-->
     <s:String x:Key="Update">Обновление</s:String>
     <s:String x:Key="Update.NewRelease">Новая версия!</s:String>
     <s:String x:Key="Update.NewRelease.Verbose">Доступна новая версия ({0})! Показать детали.</s:String>
@@ -46,11 +66,12 @@
     <s:String x:Key="Update.CloseThis">Вы хотите закрыть приложение?</s:String>
     <s:String x:Key="Update.CloseThis.Detail">Текущая версия программы устарела. Новая версия уже загружена.</s:String>
     
-    <!--Options Page-->
+    <!--Options Window-->
     <s:String x:Key="Title.Options">Screen To Gif - Настройки</s:String>
     <s:String x:Key="Application">Приложение</s:String>
-    <s:String x:Key="S.Shortcuts">Горячие клавиши</s:String>
     <s:String x:Key="Interface">Внешний вид</s:String>
+    <s:String x:Key="S.AutoTasks">Автоматизированные задачи</s:String>
+    <s:String x:Key="S.Shortcuts">Горячие клавиши</s:String>
     <s:String x:Key="Image">Изображение</s:String>
     <s:String x:Key="Language">Язык</s:String>
     <s:String x:Key="TemporaryFiles">Временные файлы</s:String>
@@ -58,13 +79,6 @@
     <s:String x:Key="Clouds">Облака</s:String>
     <s:String x:Key="Donate">Donate</s:String>
     <s:String x:Key="About">О программе</s:String>
-    
-    <s:String x:Key="S.Application.Other.Homepage">Стартовая страница:</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.StartUp">Окно приветствия</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Recorder">Запись с экрана</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Webcam">Запись с вебкамеры</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Board">Запись с доски</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Editor">Окно редактора</s:String>
     
     <s:String x:Key="Application.ScreenRecorder">Запись с экрана</s:String>
     <s:String x:Key="Application.ScreenRecorder.RecordMouse">Показывать курсор на записи</s:String>
@@ -74,8 +88,6 @@
     <s:String x:Key="Application.ScreenRecorder.PreStart.Info">(в секундах)</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording">Вкл. ручной режим записи</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Каждый кадр будет записан вами вручную)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FullRecording">Вкл. полноэкранный режим.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FullRecording.Info">(Экспериментальная функция, будет записывать главный экран)</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Постоянная частота кадров</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Постоянная задержка, не изменяется с задержкой записи)</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Включить асинхронную запись.</s:String>
@@ -86,11 +98,31 @@
     <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(это увеличивает экран при выборе зоны записи)</s:String>
     
     <s:String x:Key="Application.Other">Прочее</s:String>
+    <s:String x:Key="Application.Other.SystemTray">Отображать приложение на системном трее (области уведомлений).</s:String>
+    <s:String x:Key="Application.Other.LeaveOpen">Сохранять приложение открытым, даже если все окна закрыты.</s:String>
     <s:String x:Key="Application.Other.NotifyFrameDeletion">Спросить меня перед удалением кадров.</s:String>
     <s:String x:Key="Application.Other.NotifyProjectDiscard">Спросить меня перед удалением проекта.</s:String>
     <s:String x:Key="Application.Other.NotifyWhileClosingEditor">Просить подтверждение перед выходом из редактора (если открыт проект).</s:String>
+    <s:String x:Key="Application.Other.NotifyWhileClosingApp">Спросить меня перед закрытием приложения (с помощью команды «Выход»).</s:String>
     <s:String x:Key="Application.Other.DrawOutlineOutside">Рисовать контур вокруг букв.</s:String>
+    <s:String x:Key="Application.Other.DisableHardwareAcceleration">Отключить аппаратное ускорение.</s:String>
+    <s:String x:Key="Application.Other.CheckForTranslationUpdates">Проверять наличие обновлений для перевода.</s:String>
     <s:String x:Key="Application.Other.CheckForUpdates">Проверять обновления при старте программы.</s:String>
+    <s:String x:Key="S.Application.Other.Homepage">Стартовая страница:</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.StartUp">Окно приветствия</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Recorder">Запись с экрана</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Webcam">Запись с вебкамеры</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Board">Запись с доски</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Editor">Окно редактора</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Minimized">Минимизировать (в системный трей)</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Info">(Это контролирует, как открывается приложение. При запуске с минимальным значением отображается значок в системном трее)</s:String>
+    
+    <s:String x:Key="S.AutomatedTasks.Title">Автоматизированная задача</s:String>
+    <s:String x:Key="S.AutomatedTasks.List">Список автоматизированных задач</s:String>
+    <s:String x:Key="S.AutomatedTasks.List.Task">Задача</s:String>
+    <s:String x:Key="S.AutomatedTasks.List.Details">Подробности</s:String>
+    <s:String x:Key="S.AutomatedTasks.SelectType">(Выбор задачи)</s:String>
+    <s:String x:Key="S.AutomatedTasks.Info">Эти задачи выполняются последовательно от верхней части списка до нижней.&#10;Это происходит, когда вы сначала открываете проект с помощью редактора.</s:String>
     
     <s:String x:Key="Interface.EditorBackground">Фон редактора</s:String>
     <s:String x:Key="Interface.Recorder">Тема рекордера</s:String>
@@ -127,12 +159,29 @@
     <s:String x:Key="Interface.Other.TripleClickSelection">Тройной клик - выбор текста.</s:String>
     <s:String x:Key="Interface.Other.AutomaticallySizeOnContent">Автонастр. размера кадра на основе размеров кадра</s:String>
     <s:String x:Key="Interface.Other.AutomaticallyFitImage">Автонастр. размера кадра на основе размеров окна</s:String>
-
+  
+    <s:String x:Key="S.Shortcuts.Global">Общий</s:String>
+    <s:String x:Key="S.Shortcuts.Global.ScreenRecorder">Рекордер экрана:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.ScreenRecorder.Info">(Открывает рекордер экрана по умолчанию)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.WebcamRecorder">Рекордер вэб-камеры:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.WebcamRecorder.Info">(Открывает рекордер веб-камеры)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.BoardRecorder">Рекордер доски</s:String>
+    <s:String x:Key="S.Shortcuts.Global.BoardRecorder.Info">(Открывает рекордер доски, поэтому вы можете записывать свои рисунки)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenEditor">Редактор:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenEditor.Info">(Открывает другое окно редактора)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenOptions">Параметры:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenOptions.Info">(Открывает окно параметров. Вы можете открывать только одно за раз)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.Exit">Выход:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.Exit.Info">(Закрывает все окна и удаляет приложение из системного трея)</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders">Рекордеры</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.StartPause">Старт/Пауза:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.StartPause.Info">(Он запускает или приостанавливает запись. Используется для создания моментальных снимков, если активирован режим моментального снимка)</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.Stop">Стоп:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Stop.Info">(Останавливает запись и открывает редактор)</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.Discard">Отменить:</s:String>
-    <s:String x:Key="S.Shortcuts.Recorders.Info">Кликните чтобы установить вокус на клавиатуру, затем нажимайте желаемые клавиши.&#10;Не все комбинации поддерживаются.</s:String>
-
+    <s:String x:Key="S.Shortcuts.Recorders.Discard.Info">(Отменяет активную запись, когда она приостановлена)</s:String>
+    <s:String x:Key="S.Shortcuts.Info">Нажмите, чтобы установить фокус клавиатуры, затем нажмите нужные клавиши и модификаторы.&#10;Некоторые комбинации клавиш недоступны.</s:String>
+    
     <s:String x:Key="Language.AppLanguage">Язык приложения</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect">Авто-определение</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect.Author">Язык системы (если доступно)</s:String>
@@ -149,8 +198,8 @@
     <s:String x:Key="Language.AppLanguage.Translate.EmailLink.Tooltip">Откр. ваш почтовый клиент</s:String>
     
     <s:String x:Key="TempFiles.FilesAndFolders">Временные файлы и папки</s:String>
-    <s:String x:Key="TempFiles.Folders">Папки:</s:String>
-    <s:String x:Key="TempFiles.Files">Файлы:</s:String>
+    <s:String x:Key="TempFiles.FilesAndFolders.Count">{0} папок и {1} файлов</s:String>
+    <s:String x:Key="TempFiles.FilesAndFolders.None">Папка или файл не обнаружены</s:String>
     <s:String x:Key="TempFiles.OpenFolder">Открыть папку</s:String>
     <s:String x:Key="TempFiles.Clear">Очистить временную папку</s:String>
     <s:String x:Key="TempFiles.LogsLocation">Папка с журналами</s:String>
@@ -163,26 +212,77 @@
     <s:String x:Key="TempFiles.NotExists">Не существует</s:String>
     <s:String x:Key="TempFiles.CreateSettings">Создать пустой файл настроек.</s:String>
     <s:String x:Key="TempFiles.RemoveSettings">Удалить файл настроек.</s:String>
+    <s:String x:Key="TempFiles.OpenSettingsFolder">Откройте папку, в которой находится файл настроек.&#X0d;удерживая Ctrl, щелкните, чтобы открыть файл, если это возможно.</s:String>
     <s:String x:Key="TempFiles.SettingsInfo">• Если файл настроек не найден рядом с EXE, программа будет искать их в папке AppData и в дальнейшем туда же и сохранять.&#10;• Иначе все настройки будут храниться в файле рядом с приложением.</s:String>
     <s:String x:Key="TempFiles.KeepRecent">Сохранять недавние проекты?</s:String>
     <s:String x:Key="TempFiles.KeepRecent.Info">Если вы так считаете, то все недавние проекты, что старше 5 дней, не будут удалены.</s:String>
     <s:String x:Key="TempFiles.AutomaticRemoval">Авто-удаление старых проектов</s:String>
     <s:String x:Key="TempFiles.AutomaticRemoval.Info">При открытии редактора, все проекты старше 5 дней буду стерты.</s:String>
+    <s:String x:Key="TempFiles.AutomaticRemovalDays.Info">(в днях любой закрытый проект старше этого будет стерт/отброшен после открытия приложения)</s:String>
+    <s:String x:Key="TempFiles.LowSpace">Мало места на текущем выбранном жестком диске. Пожалуйста, очистите временную папку или измените местоположение.</s:String>
     
+    <s:String x:Key="S.Upload.Proxy">Прокси</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode">Режим:</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.Disabled">Отключено</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.Manual">Вручную</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.System">Система</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.System.Info">(Использовать системное прокси)</s:String>
+    <s:String x:Key="S.Upload.Proxy.Host">Хост:</s:String>
+    <s:String x:Key="S.Upload.Proxy.Port">Порт:</s:String>
+    <s:String x:Key="S.Upload.Proxy.User">Имя пользователя:</s:String>
+    <s:String x:Key="S.Upload.Proxy.Password">Пароль:</s:String>
+    <s:String x:Key="S.Upload.Get">Получить токен OAuth</s:String>
+    <s:String x:Key="S.Upload.PasteToken">Вставьте токен авторизации здесь</s:String>
+    <s:String x:Key="S.Upload.Authorize">Авторизация</s:String>
+    <s:String x:Key="S.Upload.Refresh">Обновить</s:String>
+    <s:String x:Key="S.Upload.Clear">Очистить</s:String>
+    <s:String x:Key="S.Upload.Imgur.Anonymous">Imgur (анонимный)</s:String>
+    <s:String x:Key="S.Upload.Imgur.Direct">Используйте прямые ссылки.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Gifv">Получите ссылки с расширением Gifv вместо Gif.</s:String>
+    <s:String x:Key="S.Upload.Imgur.ToAlbum">Загрузите gif в выбранный альбом.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Album">Альбом:</s:String>
+    <s:String x:Key="S.Upload.Imgur.AskMe">Спросить меня перед выгрузкой</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.NotPossible">Не удалось открыть страницу, чтобы получить токен авторизации Imgur.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.Missing">Чтобы авторизовать это приложение, вам необходимо предоставить токен авторизации.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.Completed">Авторизация на Imgur завершена.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.Error">Ошибка авторизации на Imgur. Повторите попытку через несколько секунд или получите новый токен.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Refresh.None">Чтобы обновить авторизацию для этого приложения, вам нужно сначала завершить процесс авторизации.</s:String>
+    <s:String x:Key="S.Upload.Imgur.NotAuthorized">Не авторизовано.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Expired">Срок действия полномочий истек в {0}.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Valid">Авторизация действительна до {0}.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Removed">Авторизация на Imgur удалена.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Error.AlbumLoad">Не удалось загрузить список альбомов.</s:String>
+    <s:String x:Key="S.Upload.Gyfcat.Anonymous">Gfycat (анонимный)</s:String>
+    <s:String x:Key="S.Upload.Yandex.Token">Токен OAuth:</s:String>
+    <s:String x:Key="S.Upload.Pick.Destination">Выберите пункт назначения</s:String>
+    <s:String x:Key="S.Upload.Pick.Album">Выберите альбом (необязательно)</s:String>
+    <s:String x:Key="S.Upload.Pick.Album.Info">Если вы этого хотите, вы можете выбрать целевой альбом:</s:String>
+    
+    <s:String x:Key="Extras.External">Доступные внешние инструменты</s:String>
+    <s:String x:Key="Extras.Download">Нажмите здесь, чтобы загрузить&#x0d;{0} </s:String>
+    <s:String x:Key="Extras.Downloading">Загрузка...</s:String>
+    <s:String x:Key="Extras.Ready">Скачано&#x0d;{0}</s:String>
+    <s:String x:Key="Extras.Ready.Info">Нажмите здесь, чтобы открыть свойства файла.</s:String>
     <s:String x:Key="Extras.FfmpegLocation">Путь к FFmpeg кодеку</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Select">Выбрать путь к FFmpeg кодеку</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Invalid">Путь к FFMpeg содержит недопустимые символы. Выберите правильное расположение файла.</s:String>
+    <s:String x:Key="Extras.GifskiLocation">Расположение Gifski</s:String>
+    <s:String x:Key="Extras.GifskiLocation.Select">Выберите местоположение исполняемого файла Gifski</s:String>
+    <s:String x:Key="Extras.GifskiLocation.Invalid">Путь к исполняемому файлу Gifski содержит один или несколько недопустимых символов. Пожалуйста, укажите корректное расположение этого исполняемого файла.</s:String>
+    <s:String x:Key="Extras.License.Ffmpeg">Лицензия FFmpeg</s:String>
+    <s:String x:Key="Extras.License.Gifski">Лицензия Gifski</s:String>
     
     <s:String x:Key="Donate.IfYouWish">Поддержать проект можно следующим образом:</s:String>
     <s:String x:Key="Donate.DonateDollar">USD</s:String>
     <s:String x:Key="Donate.DonateEuro">EUR</s:String>
-    <s:String x:Key="Donate.Donate">Выбрать...</s:String>
+    <s:String x:Key="Donate.Donate">Пожертвовать</s:String>
     <s:String x:Key="Donate.Paypal.Dollar">Откр. сайт PayPal. Валюта: USD</s:String>
     <s:String x:Key="Donate.Paypal.Euro">Откр. сайт PayPal. Валюта: EUR</s:String>
     <s:String x:Key="Donate.Paypal.OwnCurrency">Откр. сайт PayPal. Необходимо выбрать валюту.</s:String>
     <s:String x:Key="Donate.Patreon">Открыть мою страницу на Patreon.</s:String>
     <s:String x:Key="Donate.Steam.Link">Открыть мой Steam wishlist.</s:String>
     <s:String x:Key="Donate.Steam.Text">Можно послать игры в подарок.</s:String>
+    <s:String x:Key="Donate.Crypto">Криптовалюты</s:String>
 
     <s:String x:Key="About.Version">Версия:</s:String>
     <s:String x:Key="About.Author">Автор: Nicke Manarin</s:String>
@@ -303,9 +403,18 @@
     <s:String x:Key="Encoder.Starting">Запуск</s:String>
     <s:String x:Key="Encoder.Completed">Готово</s:String>
     <s:String x:Key="Encoder.Completed.Clipboard">Скопировано в буфер обмена.</s:String>
+    <s:String x:Key="Encoder.Completed.Clipboard.Fail">Не удалось скопировать</s:String>
+    <s:String x:Key="Encoder.Completed.Command">Команда выполнена</s:String>
+    <s:String x:Key="Encoder.Completed.Command.Output">Показывать вывод команд(ы).</s:String>
+    <s:String x:Key="Encoder.Completed.Command.Fail">Не удалось выполнить команду</s:String>
+    <s:String x:Key="Encoder.Completed.Upload.Fail">Не удалось загрузить</s:String>
+    <s:String x:Key="Encoder.Completed.Upload.Delete">Ctrl + Click, чтобы открыть страницу для удаления изображения (если доступно).</s:String>
     <s:String x:Key="Encoder.FileDeletedMoved">Файл удален или перемещен</s:String>
     <s:String x:Key="Encoder.Canceled">Отменено</s:String>
     <s:String x:Key="Encoder.Error">Ошибка</s:String>
+    <s:String x:Key="Encoder.Error.Info">Нажмите сюда, чтобы показать подробности ошибки</s:String>
+    <s:String x:Key="Encoder.Uploading">Загрузка</s:String>
+    <s:String x:Key="Encoder.Executing">Выполненные команды</s:String>
     <s:String x:Key="Encoder.Processing">Обработка {0}</s:String>
     <s:String x:Key="Encoder.Analyzing">Анализ неизменных пикселей</s:String>
     <s:String x:Key="Encoder.OpenFile">Открыть файл</s:String>
@@ -317,6 +426,14 @@
     <s:String x:Key="Encoder.Copy.Folder">Скопировать путь к папке</s:String>
     <s:String x:Key="Encoder.Copy.Link">Скопировать ссылку</s:String>
 
+    <!--Command output-->
+    <s:String x:Key="Command.Title">ScreenToGif - вывод команды</s:String>
+    <s:String x:Key="Command.Header">Вывод команд</s:String>
+    
+    <!--Notifications-->
+    <s:String x:Key="S.Notifications">Уведомления</s:String>
+    <s:String x:Key="S.Notifications.Dismiss">Отклонить все уведомления</s:String>
+    
     <!--Editor-->
     <s:String x:Key="Editor.Title">Screen To Gif - Редактор</s:String>
     <s:String x:Key="Editor.File">Файл</s:String>
@@ -327,6 +444,8 @@
     <s:String x:Key="Editor.Transitions">Переходы</s:String>
     <s:String x:Key="Editor.Statistics">Статистика</s:String>
     <s:String x:Key="Editor.Options">Настройки</s:String>
+    
+    <s:String x:Key="S.Editor.Extras">Дополнительно</s:String>
     
     <!--Welcome-->
     <s:String x:Key="Welcome.New">Перейдите в "Файл > Создать запись" чтобы начать новую запись.</s:String>
@@ -394,6 +513,7 @@
     <!--Edit • Frames-->  
     <s:String x:Key="Editor.Edit.Frames">Кадры</s:String>
     <s:String x:Key="Editor.Edit.Delete">Удалить&#10;текущий</s:String>
+    <s:String x:Key="Editor.Edit.Frames.Duplicates">Удалить&#x0d;дубликаты</s:String>
     <s:String x:Key="Editor.Edit.Frames.Reduce">Удалить&#10;часть кадров...</s:String>
     <s:String x:Key="Editor.Edit.DeletePrevious">Удалить&#10;все предыдущие</s:String>
     <s:String x:Key="Editor.Edit.DeleteNext">Удалить&#10;все следующие</s:String>
@@ -409,6 +529,7 @@
     <s:String x:Key="Editor.Edit.Delay">Задержка (Время кадра)</s:String>
     <s:String x:Key="Editor.Edit.Delay.Override">Изменить</s:String>
     <s:String x:Key="Editor.Edit.Delay.IncreaseDecrease">Увеличить\&#10;Уменьшить</s:String>
+    <s:String x:Key="Editor.Edit.Delay.Scale">Шкала</s:String>
     
     <!--Image • Size and Rotation-->
     <s:String x:Key="Editor.Image.SizePosition">Размер и Поворот</s:String>
@@ -426,10 +547,12 @@
     <!--Image • Overlay-->
     <s:String x:Key="Editor.Image.Overlay">Наложение</s:String>
     <s:String x:Key="Editor.Image.FreeDrawing">Свободное&#10;рисование</s:String>
+    <s:String x:Key="Editor.Image.Clicks">Клик&#x0d;мышкой</s:String>
     <s:String x:Key="Editor.Image.Watermark">Водяной знак</s:String>
     <s:String x:Key="Editor.Image.Cinemagraph">Синемограф(маска)</s:String>
     <s:String x:Key="Editor.Image.Border">Рамка</s:String>
     <s:String x:Key="Editor.Image.Progress">Прогресс</s:String>
+    <s:String x:Key="Editor.Image.Obfuscate">Затемнение</s:String>
 
     <!--Transitions • Styles-->
     <s:String x:Key="Editor.Transitions.Styles">Стили переходов</s:String>
@@ -442,6 +565,7 @@
     <s:String x:Key="Editor.Statistics.TotalDuration">Общее время</s:String>
     <s:String x:Key="Editor.Statistics.FrameSize">Размер кадра</s:String>
     <s:String x:Key="Editor.Statistics.AverageDuration">Средняя продолжительность (задержка)</s:String>
+    <!--<s:String x:Key="Editor.Statistics.FrameDpi">Frame DPI and scale</s:String>-->
     <s:String x:Key="Editor.Statistics.SelectedFrame">Выбранный кадр</s:String>
     
     <!--TODO: Organize-->
@@ -491,6 +615,7 @@
     
     <s:String x:Key="Editor.Fade.Title">Наложение</s:String>
     <s:String x:Key="Editor.Fade.WarningSelection">Выберите хотя бы один кадр, чтобы добавить Наложение.</s:String>
+    <s:String x:Key="Editor.Fade.WarningColor">Полностью прозрачный цвет не будет оказывать никакого влияния на этот переход.</s:String>
     <s:String x:Key="Editor.Slide.Title">Смещение</s:String>
     <s:String x:Key="Editor.Slide.WarningSelection">Выберите хотя бы один кадр, чтобы применить Смещение.</s:String>
 
@@ -521,6 +646,7 @@
     <s:String x:Key="Editor.ApplyingFlipRotate">Применение Отражения/Поворота к кадрам</s:String>
     <s:String x:Key="Editor.ChangingDelay">Изменение задержки</s:String>
     <s:String x:Key="Editor.ApplyingTransition">Применение эффекта перехода</s:String>
+    <s:String x:Key="S.Editor.PreparingSaving">Подготовка к сохранению</s:String>
 
     <s:String x:Key="Editor.List.Frame">Кадр:</s:String>
     <s:String x:Key="Editor.List.OpenImage">Открыть изображение</s:String>
@@ -543,6 +669,8 @@
     <!--Warnings-->
     <s:String x:Key="Editor.Warning.Selection">Вы должны выбрать, по крайней мере, один кадр, чтобы применить наложение.</s:String>
     <s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg отсутствует. Добавьте его к переменным средам или установите расположение в настройках.</s:String>
+    <s:String x:Key="Editor.Warning.Gifski">Гифски нет. Добавьте его в переменные окружения Path или нажмите здесь, чтобы открыть Options> Extras для установки местоположения.</s:String>
+    <s:String x:Key="Editor.Warning.LowSpace">На диске недостаточно места для хранения файлов кеша ({0}%). Нажмите здесь, чтобы открыть Функции> Временные файлы для освобождения места.</s:String>
     
     <!--Hints-->
     <s:String x:Key="Hint.NewRecording">Создана новая запись с экрана</s:String>
@@ -578,6 +706,7 @@
     <s:String x:Key="Hint.Delay">Продолжительность (задержка) изменена</s:String>
     <s:String x:Key="Hint.Transition">Переход вставлен</s:String>
     <s:String x:Key="Hint.Reduce">Частота кадров снижена</s:String>
+    <s:String x:Key="Hint.Duplicates">Дубликаты удалены</s:String>
     
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">Скрыть</s:String>
@@ -594,6 +723,8 @@
     <s:String x:Key="Recent.CreationDate">Дата создания</s:String>
     <s:String x:Key="Recent.FrameCount">Кол-во кадров</s:String>
     <s:String x:Key="Recent.Warning.NothingSelected">Проект не выбран. Выберите проект из списка для его загрузки.</s:String>
+    <s:String x:Key="Recent.Warning.SameOpened">Этот проект уже отображается этим экземпляром редактора.</s:String>
+    <s:String x:Key="Recent.Warning.AlreadyOpened">Этот проект уже был открыт другим экземпляром редактора. Проект не может быть открыт второй раз, если он уже открыт в другом редакторе.</s:String>
     
     <s:String x:Key="Clipboard.Entries">Содержание буфера</s:String>
     <s:String x:Key="Clipboard.Entry">ДЕЙСТВИЯ</s:String>
@@ -624,6 +755,17 @@
     <s:String x:Key="Reduce.Factor">Фактор:</s:String>
     <s:String x:Key="Reduce.Count">Удалить счетчик:</s:String>
     <s:String x:Key="Reduce.Info">Будут удалено {0} кадров после {1} кадров без посчета уже удаленных.&#10;Частота кадров будет изменена.</s:String>
+
+    <s:String x:Key="S.RemoveDuplicates.Header">Удалить дубликаты</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Similarity">Сходство (%):</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal">Удаление кадра:</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal.First">Удалить первый кадр</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal.Last">Удалить последний кадр</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay">Регулировка задержки:</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.NoAdjustment">Не настраивать</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.Average">Использовать среднее значение</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.Sum">Использовать сумму</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Info">Это действие анализирует каждый кадр (пиксель за пикселем) и удаляет те, которые не менее {0}% похожи на ближайшего соседа.& # X0d; Вы можете выбрать, хотите ли вы отрегулировать задержку (продолжительность показа) кадров.</s:String>
     
     <s:String x:Key="Caption.Text">Текст</s:String>
     <s:String x:Key="Caption.Font">Шрифт</s:String>
@@ -638,17 +780,28 @@
     <s:String x:Key="Caption.Vertical">По вертикали:</s:String>
     <s:String x:Key="Caption.Horizontal">По горизонтали:</s:String>
 
+    <s:String x:Key="S.KeyStrokes">Ключевые кадры</s:String>
     <s:String x:Key="KeyStrokes.Keys">Клавиши</s:String>
     <s:String x:Key="KeyStrokes.Separator">Разделитель</s:String>
     <s:String x:Key="KeyStrokes.Edit">Редактировать ваши нажатия клавиш</s:String>
-    <s:String x:Key="KeyStrokes.Extend">Растянуть показ клавиш:</s:String>
+    <s:String x:Key="KeyStrokes.IgnoreModifiers">Игнорировать клавиши Ctrl, Alt, Shift и Win, пока они не используются в качестве модификаторов.</s:String>
+    <s:String x:Key="KeyStrokes.IgnoreModifiers.Info">Это будет игнорировать одиночные нажатия клавиш, таких как "Control", но он не будет игнорировать "Control + C".</s:String>
+    <s:String x:Key="KeyStrokes.Extend">Растянуть показ ключевых кадров</s:String>
+    <s:String x:Key="KeyStrokes.Earlier">Начать показ ключевых кадров раньше</s:String>
     <s:String x:Key="KeyStrokes.By">на (мс):</s:String>
-    <s:String x:Key="KeyStrokes.Warning.None">Вы ничего не нажимали во время записи.!</s:String>
+    <s:String x:Key="KeyStrokes.Warning.None">В вашей записи нет ключевых кадров</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Title">ScreenToGif - Редактор ключевых кадров</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Number">Номера кадров</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Keys">Обнаружение ключевых кадров</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Remove">Удаление ключевых кадров</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Add">Добавление ключевых кадров</s:String>
     
     <s:String x:Key="String.Delay">Задержка</s:String>
     <s:String x:Key="String.DelayMs">Задержка (мс):</s:String>
     <s:String x:Key="String.ValueMs">Знач. +- (мс):</s:String>
+    <s:String x:Key="String.ScaleValue">Значение шкалы:</s:String>
     <s:String x:Key="String.Margin">Отступ:</s:String>
+    <s:String x:Key="String.Padding">Наполнение:</s:String>
     <s:String x:Key="String.Background">Фон</s:String>
     
     <s:String x:Key="FreeDrawing.Mode">Режим</s:String>
@@ -665,11 +818,21 @@
     <s:String x:Key="FreeDrawing.Highlighter">Цветовыделитель</s:String>
     <s:String x:Key="FreeDrawing.FitToCurve">Сгладить линии</s:String>
     
+    <s:String x:Key="S.MouseClicks">Нажатия мыши</s:String>
+    <s:String x:Key="S.MouseClicks.Warning.None">В вашем проекте нет обнаруженных нажатий кнопок мыши.</s:String>
+    
     <s:String x:Key="Watermark.Image">Изображение</s:String>
     <s:String x:Key="Watermark.File">Файл:</s:String>
     <s:String x:Key="Watermark.Opacity">Прозр.:</s:String>
+    
     <s:String x:Key="Border.Appearance">Внешний вид</s:String>
 
+    <s:String x:Key="S.Obfuscate.Options">Опции обфускации</s:String>
+    <s:String x:Key="S.Obfuscate.PixelSize">Размер пикселя:</s:String>
+    <s:String x:Key="S.Obfuscate.UseAverage">Вычисление среднего цвета для каждого пикселизированного блока.</s:String>
+    <s:String x:Key="S.Obfuscate.Info">Используйте инструмент выделения, чтобы выбрать прямоугольник, который должен быть разбит на пикселы.</s:String>
+    <s:String x:Key="S.Obfuscate.Warning">Вы ничего не выбрали. Используйте инструмент выделения, чтобы выбрать прямоугольник, который должен быть разбит на пикселы.</s:String>
+    
     <s:String x:Key="Progress.Type">Тип</s:String>
     <s:String x:Key="Progress.Type.Bar">Гистограмма</s:String>
     <s:String x:Key="Progress.Type.Text">Текст</s:String>
@@ -687,11 +850,13 @@
     <s:String x:Key="Delay.NewValue">Новое значение</s:String>
     <s:String x:Key="Delay.Minimum10Ms">Минимум 10мс/кадр.</s:String>
     <s:String x:Key="Delay.DecreaseIncrease">Уменьшить/Увеличить значение</s:String>
+    <s:String x:Key="Delay.Scale">Значение шкалы</s:String>
     
     <s:String x:Key="Cinemagraph.Info">Исп. карандаш чтобы выбрать пиксели, которые не должны быть статичными (изм. между кадрами), рисуя поверх них.</s:String>
     <s:String x:Key="OverrideDelay.Info">Новое значение изменит продолжительность (задержку) всех выбранных кадров. Пределы: от 10мс до 25500мс.</s:String>
     <s:String x:Key="IncreaseDecreaseDelay.Info">Данное значение увеличит\уменьшит продолжительность(задержку) каждого кадра.&#10;Вы можете выбрать значения от 10мс до 25500мс.</s:String>
-    
+    <s:String x:Key="ScaleDelay.Info">Масштабируйте продолжительность (задержку) каждого выбранного кадра на этот процент.&#X0d;Вы можете масштабировать продолжительность каждого кадра, выбирая значение от 1% до 1000%, но конечная продолжительность каждого кадра будет ограничена между 10 мс и 25500ms</s:String>
+
     <s:String x:Key="Transitions.Lenght">Продолжительность перехода</s:String>
     <s:String x:Key="Transitions.Delay">Задержка перехода</s:String>
     <s:String x:Key="Transitions.FadeTo">Затухать в...</s:String>
@@ -703,8 +868,10 @@
     <!--Save As-->
     <s:String x:Key="S.SaveAs.Type">Тип файла</s:String>
     <s:String x:Key="S.SaveAs.Gif">GIF</s:String>
+    <s:String x:Key="S.SaveAs.Apng">Apng</s:String>
     <s:String x:Key="S.SaveAs.Images">Изобр. (кадры)</s:String>
     <s:String x:Key="S.SaveAs.Project">Проект</s:String>
+    <s:String x:Key="S.SaveAs.Psd">PSD</s:String>
     <s:String x:Key="S.SaveAs.Video">Видео</s:String>
     <s:String x:Key="S.SaveAs.Encoder">Кодер</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">2.0</s:String>
@@ -714,9 +881,9 @@
     <s:String x:Key="S.SaveAs.Encoder.System">Системный</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System.Tooltip">Исп. палитры по-умолчанию.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
     <s:String x:Key="S.SaveAs.GifOptions">Настройки GIF</s:String>
     <s:String x:Key="S.SaveAs.Quality">Качество:</s:String>
-    <s:String x:Key="S.SaveAs.FlipVertically">Отразить видео (по-вертикали)</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors">Цвета:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">Макс. кол-во кадров (для каждого кадра):</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Loop">Повторения:</s:String>
@@ -727,10 +894,36 @@
     <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">Определять неизменные&#10;пиксели</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">Закрашивать неизменные&#10;пиксели фиктивным цветом</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">Выбрать фиктивный&#10;цвет</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions">Настройки Apng</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.LoopedApng">Зацикленный Apng.</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.DetectUnchanged">Обнаруживать неизмененные пиксели.</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.PaintTransparent">Рисовать все неизмененные пиксели прозрачным цветом.</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions">Настройки видео</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.Fps">Fps:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Fps">Кадров в секунду:</s:String>
+    <s:String x:Key="S.SaveAs.FlipVertically">Отразить видео (по-вертикали)</s:String>
     <s:String x:Key="S.SaveAs.ImagesOptions">Свойства изображения</s:String>
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">Создать ZIP архив.</s:String>
+    
+    <!--Save As • Save options-->
+    <s:String x:Key="S.SaveAs.SaveOptions">Сохранить параметры</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Сохраните файл в папку по вашему выбору.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Перезаписать (если существует).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Сохранить и как проект (в той же папке, с тем же именем).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Загрузить файл.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.UploadDestination">Загрузить пункт назначения.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">Копировать в буфер обмена</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File">Файл</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File.Info">Копировать выходной файл в буфер обмена.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FolderPath">Путь к папке</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FolderPath.Info">Копировать путь к папке выходного файла в буфер обмена.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath">Путь к файлу</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath.Info">Копировать путь к выходному файлу в буфер обмена.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">Ссылка</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">Копировать ссылку, сгенерированную службой загрузки, в буфер обмена.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Выполнять команды посткодирования.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Введите команды, которые будут выполняться после кодирования.&#X0d;Чтобы выполнить несколько команд, введите их в отдельной строке.&#X0d;Макросы:&#x0d;{p} = Выходной путь файла.&#X0d;{f } = Путь к папке вывода.</s:String>
+    
+    <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">Файл</s:String>
     <s:String x:Key="S.SaveAs.File.Location">Папка назначения.</s:String>
     <s:String x:Key="S.SaveAs.File.Choose">Выберите расположение.</s:String>
@@ -740,15 +933,21 @@
     <s:String x:Key="S.SaveAs.File.Increase">Повысить номер файла</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">Понизить номер файла</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">Файл с таким именем уже существует.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Перезаписать (если существует).</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Сохранить и как проект (в той же папке, с тем же именем).</s:String>
+    
     <s:String x:Key="S.SaveAs.File.Clipboard">Сохр. в буфере обмена.</s:String>
+
+    <s:String x:Key="S.SaveAs.Warning.Type">Вам нужно выбрать, где сохранить файл (в папку, в буфер обмена или загрузить в другое место).</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Commands.Empty">Для выполнения команды послекодирования вам нужно ввести что-то в текстовое поле команды.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Upload.None">Не выбрано приложение для загрузки. Вам нужно выбрать пункт назначения.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Upload.NotAuthorized">Вы не можете загрузить выбранную услугу, потому что она не авторизована. Перейдите к "Параметры" > "Загрузить службы", чтобы разрешить это приложение.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Copy.Link">Вы не можете выбрать вариант копирования ссылки, потому что вы не загрузили файл.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">Вы должны выбрать папку назначения.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">Папка назначения не существует.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.Invalid">Имя папки содержит недопустимые символы. Введите правильное имя файла.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Filename">Вы должна выбрать имя файла.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Filename.Invalid">Имя файла содержит недопустимые символы. Введите правильное имя файла.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Overwrite">Имя файла уже используется. Перезапишите его или выберите другое имя файла.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Canceled">Операция была отменена.</s:String>
     
     <!--SaveAs • Export-->
     <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">Экспорт кадров</s:String>
@@ -758,6 +957,7 @@
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">Отзыв</s:String>
     <s:String x:Key="S.Feedback.Send">Послать</s:String>
+    <s:String x:Key="S.Feedback.Preview">Предосмотр</s:String>
     <s:String x:Key="S.Feedback.Header">Послать отзыв</s:String>
     <s:String x:Key="S.Feedback.Title">Заголовок *</s:String>
     <s:String x:Key="S.Feedback.Message">Сообщение *</s:String>
@@ -774,7 +974,17 @@
     <s:String x:Key="S.Feedback.RemoveAttachments">Удалить все вложения</s:String>
     <s:String x:Key="S.Feedback.LanguageInfo1">Я знаю Английский</s:String>
     <s:String x:Key="S.Feedback.LanguageInfo2">и Португальский (Бразильский\Европейский)</s:String>
+    <s:String x:Key="S.Feedback.Preview.Info">Это то, что вы отправите, плюс все вложения.</s:String>
     
+    <!--Troubleshoot-->
+    <s:String x:Key="S.Troubleshoot.Title">Устранение проблем</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows">Нет ли какого-либо окна?</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Info">Если какое-либо из окон отсутствует (вне экрана),&#x0d;используйте приведенные ниже параметры, чтобы сбросить текущую и начальную позицию.</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Current">Здесь каждое окно находится в настоящее время:</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Next">Здесь каждое окно откроется в следующий раз:</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.BringBack">Переместите все окна на главный экран.</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Reset">Сбросить начальную позицию всех окон.</s:String>
+   
     <!--FontStyles-->
     <s:String x:Key="S.FontStyles.Normal">Нормальный</s:String>
     <s:String x:Key="S.FontStyles.Italic">Курсив</s:String>
