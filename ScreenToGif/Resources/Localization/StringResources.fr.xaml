@@ -13,7 +13,7 @@
     <s:String x:Key="Cancel">Annuler</s:String>
     <s:String x:Key="Yes">Oui</s:String>
     <s:String x:Key="No">Non</s:String>
-    <s:String x:Key="Frame">Frame</s:String>
+    <s:String x:Key="Frame">Image</s:String>
     <s:String x:Key="Suppress">Supprimer</s:String>
     <s:String x:Key="Preview">Aperçu</s:String>
     <s:String x:Key="S.Add">Ajouter</s:String>
@@ -81,7 +81,7 @@
     <s:String x:Key="About">À propos</s:String>
     
     <s:String x:Key="Application.ScreenRecorder">Enregistreur d'écran</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordMouse">Afficher le curseur de la souris dans l'enregistrement</s:String>
+    <s:String x:Key="Application.ScreenRecorder.RecordMouse">Inclure le curseur de la souris dans l'enregistrement</s:String>
     <s:String x:Key="Application.ScreenRecorder.RecordClicks">Détecter clics de souris</s:String>
     <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">Sélectionnez la couleur du curseur</s:String>
     <s:String x:Key="Application.ScreenRecorder.PreStart">Utiliser un compte à rebours au démarrage</s:String>
@@ -89,21 +89,21 @@
     <s:String x:Key="Application.ScreenRecorder.StepRecording">Activer le mode instantané</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Chaque image doit être capturée manuellement par vous-même)</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Fréquence d'images fixe</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Retard constant qui ne tient pas compte fes latences lors de l'enregistrement)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Retard constant qui ne tient pas compte des latences lors de l'enregistrement)</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Activer l'enregistrement asynchrone</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(Permet de réduire le retard dû à l'interface lors de l'enregistrement)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.NewRecorder">Activer le nouvel enregistreur</s:String>
-    <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(Remplacera l'ancien enregistreur d'interface)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.NewRecorder">Activer la nouvelle interface utilisateur de l'enregistreur</s:String>
+    <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(Remplacera l'ancienne interface utilisateur de l'enregistreur)</s:String>
     <s:String x:Key="Application.ScreenRecorder.Magnifier">Activer la loupe sur l'écran</s:String>
     <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(Active une loupe lors de la sélection de la zone d'enregistrement)</s:String>
     
     <s:String x:Key="Application.Other">Autre</s:String>
     <s:String x:Key="Application.Other.SystemTray">Afficher l'application sur la barre d'état du système (zone de notification)</s:String>
     <s:String x:Key="Application.Other.LeaveOpen">Gardez l'application ouverte même si toutes les fenêtres sont fermées</s:String>
-    <s:String x:Key="Application.Other.NotifyFrameDeletion">Confirmer avant de supprimer des frames</s:String>
+    <s:String x:Key="Application.Other.NotifyFrameDeletion">Confirmer avant de supprimer des images</s:String>
     <s:String x:Key="Application.Other.NotifyProjectDiscard">Confirmer avant d'annuler un projet</s:String>
     <s:String x:Key="Application.Other.NotifyWhileClosingEditor">Confirmer avant de fermer l'éditeur (en cas de projet ouvert)</s:String>
-    <s:String x:Key="Application.Other.NotifyWhileClosingApp">Confirmer avant de fermer l'application (via la commande 'Quitter')</s:String>
+    <s:String x:Key="Application.Other.NotifyWhileClosingApp">Confirmer avant de fermer l'application (via la commande "Quitter")</s:String>
     <s:String x:Key="Application.Other.DrawOutlineOutside">Dessinez le contour des textes en dehors des lettres</s:String>
     <s:String x:Key="Application.Other.DisableHardwareAcceleration">Désactiver l'accélération matérielle</s:String>
     <s:String x:Key="Application.Other.CheckForTranslationUpdates">Vérifier les mises à jour de traduction</s:String>
@@ -258,14 +258,14 @@
     <!--<s:String x:Key="S.Upload.Pick.Album">Pick an album (optional)</s:String>-->
     <!--<s:String x:Key="S.Upload.Pick.Album.Info">If you wish so, you can select the destination album:</s:String>-->
     
-    <!--<s:String x:Key="Extras.External">Available external tools</s:String>-->
-    <!--<s:String x:Key="Extras.Download">Click here to download&#x0d;{0}</s:String>-->
-    <!--<s:String x:Key="Extras.Downloading">Downloading...</s:String>-->
+    <s:String x:Key="Extras.External">Outils externes disponibles</s:String>
+    <s:String x:Key="Extras.Download">Cliquez ici pour télécharger\n\r{0}</s:String>
+    <s:String x:Key="Extras.Downloading">Téléchargement...</s:String>
     <!--<s:String x:Key="Extras.Ready">Downloaded&#x0d;{0}</s:String>-->
     <!--<s:String x:Key="Extras.Ready.Info">Click here to open the properties of the file.</s:String>-->
-    <!--<s:String x:Key="Extras.FfmpegLocation">FFmpeg location</s:String>-->
+    <s:String x:Key="Extras.FfmpegLocation">Emplacement FFmpeg</s:String>
     <!--<s:String x:Key="Extras.FfmpegLocation.Select">Select the location of the FFmpeg executable</s:String>-->
-    <!--<s:String x:Key="Extras.FfmpegLocation.Invalid">The path of FFMpeg executable contains one or more invalid characters. Please, select a valid location for that executable.</s:String>-->
+    <s:String x:Key="Extras.FfmpegLocation.Invalid">Le chemin vers l'exécutable FFMpeg contient un ou plusieurs caractères non valides. Veuillez sélectionner un emplacement valide pour cet exécutable.</s:String>
     <!--<s:String x:Key="Extras.GifskiLocation">Gifski location</s:String>-->
     <!--<s:String x:Key="Extras.GifskiLocation.Select">Select the location of the Gifski executable</s:String>-->
     <!--<s:String x:Key="Extras.GifskiLocation.Invalid">The path of Gifski executable contains one or more invalid characters. Please, select a valid location for that executable.</s:String>-->
@@ -276,13 +276,13 @@
     <s:String x:Key="Donate.DonateDollar">Faire un don US$</s:String>
     <s:String x:Key="Donate.DonateEuro">Faire un don €</s:String>
     <s:String x:Key="Donate.Donate">Faire un don</s:String>
-    <!--<s:String x:Key="Donate.Paypal.Dollar">Opens the Paypal website. Selected currency: Dollar</s:String>-->
-    <!--<s:String x:Key="Donate.Paypal.Euro">Opens the Paypal website. Selected currency: Euro</s:String>-->
-    <!--<s:String x:Key="Donate.Paypal.OwnCurrency">Opens the Paypal website. You must select the currency.</s:String>-->
-    <!--<s:String x:Key="Donate.Patreon">Click here to open my Patreon page.</s:String>-->
-    <!--<s:String x:Key="Donate.Steam.Link">Click here to open my Steam wishlist page.</s:String>-->
-    <!--<s:String x:Key="Donate.Steam.Text">You can send games as gifts.</s:String>-->
-    <!--<s:String x:Key="Donate.Crypto">Crypto currencies</s:String>-->
+    <s:String x:Key="Donate.Paypal.Dollar">Ouvre le site Paypal. Monnaie sélectionnée: Dollar</s:String>
+    <s:String x:Key="Donate.Paypal.Euro">Ouvre le site Paypal. Monnaie sélectionnée: Euro</s:String>
+    <s:String x:Key="Donate.Paypal.OwnCurrency">Ouvre le site Paypal. Vous devez sélectionner la devise</s:String>
+    <s:String x:Key="Donate.Patreon">Cliquez ici pour ouvrir ma page Patreon</s:String>
+    <s:String x:Key="Donate.Steam.Link">Cliquez ici pour ouvrir ma page de liste de souhaits Steam</s:String>
+    <s:String x:Key="Donate.Steam.Text">Vous pouvez envoyer des jeux comme cadeaux</s:String>
+    <s:String x:Key="Donate.Crypto">Crypto monnaies</s:String>
 
     <s:String x:Key="About.Version">Version:</s:String>
     <s:String x:Key="About.Author">Auteur: Nicke Manarin</s:String>
@@ -292,7 +292,7 @@
     <s:String x:Key="About.Technical.Free">(Ceci est une application totalement gratuite)</s:String>
     <s:String x:Key="About.Technical.SourceCode">Code source:</s:String>
     <s:String x:Key="About.ABigThanksTo">Un grand Merci à</s:String>
-    <s:String x:Key="About.ABigThanksTo.Everyone">Tous les personnes qui ont participé, qui ont fais un retour, un commentaire et/ou des dons.</s:String>
+    <s:String x:Key="About.ABigThanksTo.Everyone">Tous les personnes qui ont participé, qui ont fais un retour, un commentaire et/ou des dons</s:String>
     
     <!--Localization-->
     <!--<s:String x:Key="Localization">Localization</s:String>-->
@@ -313,7 +313,7 @@
     <s:String x:Key="Recorder.Snap">Snap</s:String>
     <s:String x:Key="Recorder.Height">Hauteur</s:String>
     <s:String x:Key="Recorder.Width">Largeur</s:String>
-    <s:String x:Key="Recorder.Fps">Frames maximum par seconde</s:String>
+    <s:String x:Key="Recorder.Fps">Images maximum par seconde</s:String>
     <!--<s:String x:Key="Recorder.Fps.Short">fps</s:String>-->
     <!--<s:String x:Key="Recorder.FpsRange">Minimum to maximum fps: 1-60 fps</s:String>-->
     <s:String x:Key="Recorder.SnapToWindow">Accrocher à la fenêtre (Prendre et relâchez pour accrocher)</s:String>
@@ -356,23 +356,23 @@
     <s:String x:Key="ColorSelector.Hexadecimal">Hex</s:String>
     <s:String x:Key="ColorSelector.Initial">Couleur initiale</s:String>
     <s:String x:Key="ColorSelector.Current">Couleur actuelle</s:String>
-    <s:String x:Key="ColorSelector.Latest">Dernières couleur</s:String>
+    <s:String x:Key="ColorSelector.Latest">Dernière couleur</s:String>
     
     <!--Exception Viewer, Optional-->
     <s:String x:Key="ExceptionViewer.Title">Visualisation d'exception</s:String>
-    <s:String x:Key="ExceptionViewer.OpenInner">Ouvrir exception technique</s:String>
-    <!--<s:String x:Key="ErrorDialog.Observation">Something wrong happened.</s:String>-->
-    <!--<s:String x:Key="ErrorDialog.Send">Send report</s:String>-->
+    <s:String x:Key="ExceptionViewer.OpenInner">Ouvrir l'exception interne</s:String>
+    <s:String x:Key="ErrorDialog.Observation">Quelque chose s'est mal passé.</s:String>
+    <s:String x:Key="ErrorDialog.Send">Envoyer un rapport</s:String>
 
     <!--Insert Frames-->
-    <s:String x:Key="InsertFrames.Title">Insérer des frames</s:String>
+    <s:String x:Key="InsertFrames.Title">Insérer des images</s:String>
     <!--<s:String x:Key="InsertFrames.Info">Both sides should have the same size, this window allows you to reposition and resize the image and the canvas. Click to select and resize.</s:String>-->
     <!--<s:String x:Key="InsertFrames.CanvasSize">Canvas size:</s:String>-->
     <!--<s:String x:Key="InsertFrames.FitCanvas">Fit Image on Canvas</s:String>-->
     <!--<s:String x:Key="InsertFrames.FitCanvas.Info">Resizes the canvas to fit both images inside (from the top left corner).</s:String>-->
     <s:String x:Key="InsertFrames.DifferentSizes">Il existe une différence entre les tailles d'image. Vous devez résoudre ce avant d'insérer les images.</s:String>
-    <s:String x:Key="InsertFrames.InsertedFrames">Frame(s) ajoutée(s)</s:String>
-    <s:String x:Key="InsertFrames.CurrentFrames">Frame(s) actuelle(s)</s:String>
+    <s:String x:Key="InsertFrames.InsertedFrames">Image(s) ajoutée(s)</s:String>
+    <s:String x:Key="InsertFrames.CurrentFrames">Image(s) actuelle(s)</s:String>
     <!--<s:String x:Key="InsertFrames.ImageSize">Image size:</s:String>-->
     <!--<s:String x:Key="InsertFrames.ImagePosition">Image position:</s:String>-->
     <!--<s:String x:Key="InsertFrames.ResetImageSizePosition">Reset Image Size&#x0d;and Position</s:String>-->
@@ -394,37 +394,37 @@
     <s:String x:Key="ImportVideo.Start">Start:</s:String>
     <s:String x:Key="ImportVideo.End">Fin:</s:String>
     <s:String x:Key="ImportVideo.Selection">Selection:</s:String>
-    <s:String x:Key="ImportVideo.Frames">Frames:</s:String>
+    <s:String x:Key="ImportVideo.Frames">Images:</s:String>
     <s:String x:Key="ImportVideo.Duration">Durée:</s:String>
     
     <!--Encoder-->
-    <s:String x:Key="Encoder.Title">Encoder</s:String>
-    <s:String x:Key="Encoder.ClearAllCompleted">Effacer toutes les Terminés</s:String>
-    <s:String x:Key="Encoder.Starting">Départ</s:String>
+    <s:String x:Key="Encoder.Title">Encodeur</s:String>
+    <s:String x:Key="Encoder.ClearAllCompleted">"Effacer tout" terminé</s:String>
+    <s:String x:Key="Encoder.Starting">Démarrage</s:String>
     <s:String x:Key="Encoder.Completed">Terminé</s:String>
-    <!--<s:String x:Key="Encoder.Completed.Clipboard">Copied to the clipboard</s:String>-->
-    <!--<s:String x:Key="Encoder.Completed.Clipboard.Fail">Failed to copy</s:String>-->
-    <!--<s:String x:Key="Encoder.Completed.Command">Command executed</s:String>-->
-    <!--<s:String x:Key="Encoder.Completed.Command.Output">Show the output of the command(s).</s:String>-->
-    <!--<s:String x:Key="Encoder.Completed.Command.Fail">Failed to execute command</s:String>-->
-    <!--<s:String x:Key="Encoder.Completed.Upload.Fail">Failed to upload</s:String>-->
-    <!--<s:String x:Key="Encoder.Completed.Upload.Delete">Ctrl + Click to open the page to delete the image (if available).</s:String>-->
+    <s:String x:Key="Encoder.Completed.Clipboard">Copié dans le presse-papier</s:String>
+    <s:String x:Key="Encoder.Completed.Clipboard.Fail">Échec de la copie</s:String>
+    <s:String x:Key="Encoder.Completed.Command">Commande exécutée</s:String>
+    <s:String x:Key="Encoder.Completed.Command.Output">Affiche le résultat de la ou des commandes.</s:String>
+    <s:String x:Key="Encoder.Completed.Command.Fail">Impossible d'exécuter la commande</s:String>
+    <s:String x:Key="Encoder.Completed.Upload.Fail">Échec du téléchargement</s:String>
+    <s:String x:Key="Encoder.Completed.Upload.Delete">Ctrl + Clic pour ouvrir la page afin de supprimer l'image (si disponible).</s:String>
     <s:String x:Key="Encoder.FileDeletedMoved">Fichier supprimé ou déplacé</s:String>
     <s:String x:Key="Encoder.Canceled">Annulé</s:String>
     <s:String x:Key="Encoder.Error">Erreur</s:String>
-    <!--<s:String x:Key="Encoder.Error.Info">Click here to show the details of this error.</s:String>-->
-    <!--<s:String x:Key="Encoder.Uploading">Uploading</s:String>-->
-    <!--<s:String x:Key="Encoder.Executing">Executing commmands</s:String>-->
-    <s:String x:Key="Encoder.Processing">En traitement {0}</s:String>
-    <!--<s:String x:Key="Encoder.Analyzing">Analyzing Unchanged Pixels</s:String>-->
-    <!--<s:String x:Key="Encoder.OpenFile">Open file</s:String>-->
-    <!--<s:String x:Key="Encoder.ExploreFolder">Explore folder</s:String>-->
-    <!--<s:String x:Key="Encoder.Remove">Remove from the list</s:String>-->
-    <!--<s:String x:Key="Encoder.Details">Show details</s:String>-->
-    <!--<s:String x:Key="Encoder.Copy.Image">Copy as image</s:String>-->
-    <!--<s:String x:Key="Encoder.Copy.Filename">Copy filename</s:String>-->
-    <!--<s:String x:Key="Encoder.Copy.Folder">Copy folder path</s:String>-->
-    <!--<s:String x:Key="Encoder.Copy.Link">Copy link</s:String>-->
+    <s:String x:Key="Encoder.Error.Info">Cliquez ici pour afficher les détails de cette erreur.</s:String>
+    <s:String x:Key="Encoder.Uploading">Téléchargement</s:String>
+    <s:String x:Key="Encoder.Executing">Exécution des commandes</s:String>
+    <s:String x:Key="Encoder.Processing">Traitement en cours {0}</s:String>
+    <s:String x:Key="Encoder.Analyzing">Analyse des pixels inchangés</s:String>
+    <s:String x:Key="Encoder.OpenFile">Ouvrir le fichier</s:String>
+    <s:String x:Key="Encoder.ExploreFolder">Explorer le dossier</s:String>
+    <s:String x:Key="Encoder.Remove">Supprimer de la liste</s:String>
+    <s:String x:Key="Encoder.Details">Afficher les détails</s:String>
+    <s:String x:Key="Encoder.Copy.Image">Copier comme image</s:String>
+    <s:String x:Key="Encoder.Copy.Filename">Copier le nom de fichier</s:String>
+    <s:String x:Key="Encoder.Copy.Folder">Copier le chemin du dossier</s:String>
+    <s:String x:Key="Encoder.Copy.Link">Copier le lien</s:String>
 
     <!--Command output-->
     <s:String x:Key="Command.Title">ScreenToGif - Sortie de commande</s:String>
@@ -435,7 +435,7 @@
     <!--<s:String x:Key="S.Notifications.Dismiss">Dismiss all notifications</s:String>-->
     
     <!--Editor-->
-    <s:String x:Key="Editor.Title">Screen To Gif - Éditeur</s:String>
+    <s:String x:Key="Editor.Title">ScreenToGif - Éditeur</s:String>
     <s:String x:Key="Editor.File">Fichier</s:String>
     <s:String x:Key="Editor.Home">Accueil</s:String>
     <s:String x:Key="Editor.Playback">Lecture</s:String>
@@ -460,217 +460,217 @@
     <s:String x:Key="Editor.File.New.Recording">Enregistrement</s:String>
     <s:String x:Key="Editor.File.New.Webcam">Webcam\nEnregistrement</s:String>
     <s:String x:Key="Editor.File.New.Board">Planche à dessin\nEnregistrement</s:String>
-    <s:String x:Key="Editor.File.Blank">Vide\nAnimation</s:String>
+    <s:String x:Key="Editor.File.Blank">Vide\nProjet</s:String>
     <s:String x:Key="Editor.File.New">Nouveau</s:String>
     
     <!--File • Insert-->
     <s:String x:Key="Editor.File.Insert.Recording">Enregistrement</s:String>
     <s:String x:Key="Editor.File.Insert.Webcam">Webcam\nEnregistrement</s:String>
-    <s:String x:Key="Editor.File.Insert.Media">Media</s:String>
+    <s:String x:Key="Editor.File.Insert.Media">Multimédia</s:String>
     <s:String x:Key="Editor.File.Insert">Insérer</s:String>
     
     <!--File • Save/Discard-->
-    <!--<s:String x:Key="Editor.File.Save">Save as</s:String>-->
-    <s:String x:Key="Editor.File.Load">Media ou\nProjet</s:String>
-    <!--<s:String x:Key="Editor.File.LoadRecent">Recent&#x0d;Projects</s:String>-->
-    <s:String x:Key="Editor.File.SaveProject">Enregistrer en tant&#x0d;que Project</s:String>
+    <s:String x:Key="Editor.File.Save">Enregistrer sous</s:String>
+    <s:String x:Key="Editor.File.Load">Charger</s:String>
+    <s:String x:Key="Editor.File.LoadRecent">Projet récents</s:String>
+    <s:String x:Key="Editor.File.SaveProject">Enregistrer sous\nProjet</s:String>
     <s:String x:Key="Editor.File.Discard">Abandonner\nProjet</s:String>
     
     <!--Home • Action Stack-->
-    <!--<s:String x:Key="Editor.Home.ActionStack">Action Stack</s:String>-->
-    <!--<s:String x:Key="Editor.Home.Undo">Undo</s:String>-->
-    <!--<s:String x:Key="Editor.Home.Redo">Redo</s:String>-->
-    <!--<s:String x:Key="Editor.Home.Reset">Reset</s:String>-->
+    <s:String x:Key="Editor.Home.ActionStack">Pile d'action</s:String>
+    <s:String x:Key="Editor.Home.Undo">Annuler</s:String>
+    <s:String x:Key="Editor.Home.Redo">Refaire</s:String>
+    <s:String x:Key="Editor.Home.Reset">Réinitialiser</s:String>
     
     <!--Home • Clipboard-->
-    <!--<s:String x:Key="Editor.Home.Clipboard">Clipboard</s:String>-->
-    <!--<s:String x:Key="Editor.Home.Clipboard.Show">Show Clipboard</s:String>-->
-    <!--<s:String x:Key="Editor.Home.Paste">Paste</s:String>-->
-    <!--<s:String x:Key="Editor.Home.Cut">Cut</s:String>-->
-    <!--<s:String x:Key="Editor.Home.Copy">Copy</s:String>-->
+    <s:String x:Key="Editor.Home.Clipboard">Presse-papiers</s:String>
+    <s:String x:Key="Editor.Home.Clipboard.Show">Afficher le presse-papier</s:String>
+    <s:String x:Key="Editor.Home.Paste">Coller</s:String>
+    <s:String x:Key="Editor.Home.Cut">Couper</s:String>
+    <s:String x:Key="Editor.Home.Copy">Copier</s:String>
     
     <!--Home • Zoom-->
-    <!--<s:String x:Key="Editor.Home.Zoom">Zoom</s:String>-->
-    <!--<s:String x:Key="Editor.Home.SizeToContent">Adjust to&#x0d;Content</s:String>-->
-    <!--<s:String x:Key="Editor.Home.FitImage">Fit Image</s:String>-->
+    <s:String x:Key="Editor.Home.Zoom">Zoom</s:String>
+    <s:String x:Key="Editor.Home.SizeToContent">Ajuster au\n\rcontenu</s:String>
+    <s:String x:Key="Editor.Home.FitImage">Ajuster l'image</s:String>
     
     <!--Home • Select-->
-    <!--<s:String x:Key="Editor.Home.Select">Select</s:String>-->
-    <!--<s:String x:Key="Editor.Home.SelectAll">Select&#x0d;All</s:String>-->
-    <!--<s:String x:Key="Editor.Home.GoTo">Go To</s:String>-->
-    <!--<s:String x:Key="Editor.Home.Inverse">Inverse</s:String>-->
-    <!--<s:String x:Key="Editor.Home.Deselect">Deselect</s:String>-->
+    <s:String x:Key="Editor.Home.Select">Sélectionner</s:String>
+    <s:String x:Key="Editor.Home.SelectAll">Sélectionner\n\rTout</s:String>
+    <s:String x:Key="Editor.Home.GoTo">Aller à</s:String>
+    <s:String x:Key="Editor.Home.Inverse">Inverser</s:String>
+    <s:String x:Key="Editor.Home.Deselect">Désélectionner</s:String>
     
     <!--Playback • Playback-->
-    <!--<s:String x:Key="Editor.Playback.Playback">Playback</s:String>-->
-    <!--<s:String x:Key="Editor.Playback.First">First</s:String>-->
-    <!--<s:String x:Key="Editor.Playback.Previous">Previous</s:String>-->
-    <!--<s:String x:Key="Editor.Playback.Play">Play</s:String>-->
-    <!--<s:String x:Key="Editor.Playback.Pause">Pause</s:String>-->
-    <!--<s:String x:Key="Editor.Playback.Next">Next</s:String>-->
-    <!--<s:String x:Key="Editor.Playback.Last">Last</s:String>-->
+    <s:String x:Key="Editor.Playback.Playback">Lecture</s:String>
+    <s:String x:Key="Editor.Playback.First">Premier</s:String>
+    <s:String x:Key="Editor.Playback.Previous">Précédent</s:String>
+    <s:String x:Key="Editor.Playback.Play">Jouer</s:String>
+    <s:String x:Key="Editor.Playback.Pause">Pause</s:String>
+    <s:String x:Key="Editor.Playback.Next">Suivant</s:String>
+    <s:String x:Key="Editor.Playback.Last">Dernier</s:String>
     
     <!--Edit • Frames-->  
-    <s:String x:Key="Editor.Edit.Frames">Frames</s:String>
+    <s:String x:Key="Editor.Edit.Frames">Images</s:String>
     <s:String x:Key="Editor.Edit.Delete">Effacer</s:String>
-    <!--<s:String x:Key="Editor.Edit.Frames.Duplicates">Remove&#x0d;Duplicates</s:String>-->
-    <!--<s:String x:Key="Editor.Edit.Frames.Reduce">Reduce&#x0d;Frame Count</s:String>-->
-    <s:String x:Key="Editor.Edit.DeletePrevious">Supprimer Précédent</s:String>
-    <s:String x:Key="Editor.Edit.DeleteNext">Supprimer Suivant</s:String>
+    <s:String x:Key="Editor.Edit.Frames.Duplicates">Supprimer les doublons</s:String>
+    <s:String x:Key="Editor.Edit.Frames.Reduce">Réduire le nombre d'images</s:String>
+    <s:String x:Key="Editor.Edit.DeletePrevious">Supprimer tous Précédent</s:String>
+    <s:String x:Key="Editor.Edit.DeleteNext">Supprimer tous Suivant</s:String>
     
     <!--Edit • Reordering-->
-    <s:String x:Key="Editor.Edit.Reordering">réorganisation</s:String>
+    <s:String x:Key="Editor.Edit.Reordering">Réorganisation</s:String>
     <s:String x:Key="Editor.Edit.Reverse">Sens inverse</s:String>
     <s:String x:Key="Editor.Edit.Yoyo">Yoyo</s:String>
     <s:String x:Key="Editor.Edit.MoveLeft">Déplacer\nGauche</s:String>
     <s:String x:Key="Editor.Edit.MoveRight">Déplacer\nDroite</s:String>
     
     <!--Edit • Delay/Duration-->
-    <!--<s:String x:Key="Editor.Edit.Delay">Delay (Duration)</s:String>-->
-    <!--<s:String x:Key="Editor.Edit.Delay.Override">Override</s:String>-->
-    <!--<s:String x:Key="Editor.Edit.Delay.IncreaseDecrease">Increase or&#x0d;Decrease</s:String>-->
-    <!--<s:String x:Key="Editor.Edit.Delay.Scale">Scale</s:String>-->
+    <s:String x:Key="Editor.Edit.Delay">Délai (Durée)</s:String>
+    <s:String x:Key="Editor.Edit.Delay.Override">Écraser</s:String>
+    <s:String x:Key="Editor.Edit.Delay.IncreaseDecrease">Augmenter ou diminuer</s:String>
+    <s:String x:Key="Editor.Edit.Delay.Scale">Mise à l'échelle</s:String>
     
     <!--Image • Size and Rotation-->
     <s:String x:Key="Editor.Image.SizePosition">Taille et position</s:String>
     <s:String x:Key="Editor.Image.Resize">Redimensionner</s:String>
-    <s:String x:Key="Editor.Image.Crop">Couper</s:String>
+    <s:String x:Key="Editor.Image.Crop">Recadrer</s:String>
     <s:String x:Key="Editor.Image.FlipRotate">Retourner/Rotation</s:String>
     
     <!--Image • Text-->
     <s:String x:Key="Editor.Image.Text">Texte</s:String>
     <s:String x:Key="Editor.Image.Caption">Légende</s:String>
     <s:String x:Key="Editor.Image.FreeText">Texte libre</s:String>
-    <s:String x:Key="Editor.Image.TitleFrame">Titre de la Frame</s:String>
-    <!--<s:String x:Key="Editor.Image.KeyStrokes">Key&#x0d;Strokes</s:String>-->
+    <s:String x:Key="Editor.Image.TitleFrame">Titre de l'image</s:String>
+    <s:String x:Key="Editor.Image.KeyStrokes">Frappes</s:String>
     
     <!--Image • Overlay-->
     <s:String x:Key="Editor.Image.Overlay">Superposition</s:String>
-    <s:String x:Key="Editor.Image.FreeDrawing">Dessin libre</s:String>
-    <!--<s:String x:Key="Editor.Image.Clicks">Mouse&#x0d;Clicks</s:String>-->
+    <s:String x:Key="Editor.Image.FreeDrawing">Dessin\n\rlibre</s:String>
+    <s:String x:Key="Editor.Image.Clicks">Clics de\n\rsouris</s:String>
     <s:String x:Key="Editor.Image.Watermark">Filigrane</s:String>
     <s:String x:Key="Editor.Image.Cinemagraph">Cinemagraphe</s:String>
     <s:String x:Key="Editor.Image.Border">Bordure</s:String>
-    <!--<s:String x:Key="Editor.Image.Progress">Progress</s:String>-->
-    <!--<s:String x:Key="Editor.Image.Obfuscate">Obfuscate</s:String>-->
+    <s:String x:Key="Editor.Image.Progress">Progression</s:String>
+    <s:String x:Key="Editor.Image.Obfuscate">Obscurcir</s:String>
 
     <!--Transitions • Styles-->
     <s:String x:Key="Editor.Transitions.Styles">Styles</s:String>
     <s:String x:Key="Editor.Transitions.Fade">Fondu</s:String>
-    <s:String x:Key="Editor.Transitions.Slide">Faire glisser</s:String>
+    <s:String x:Key="Editor.Transitions.Slide">Diapositive</s:String>
     
     <!--Statistics-->
-    <!--<s:String x:Key="Editor.Statistics.General">General</s:String>-->
-    <!--<s:String x:Key="Editor.Statistics.FrameCount">Frame count</s:String>-->
-    <!--<s:String x:Key="Editor.Statistics.TotalDuration">Total duration</s:String>-->
-    <!--<s:String x:Key="Editor.Statistics.FrameSize">Frame size</s:String>-->
-    <!--<s:String x:Key="Editor.Statistics.AverageDuration">Average duration (delay)</s:String>-->
-    <!--<s:String x:Key="Editor.Statistics.FrameDpi">Frame DPI and scale</s:String>-->
-    <!--<s:String x:Key="Editor.Statistics.SelectedFrame">Selected Frame</s:String>-->
+    <s:String x:Key="Editor.Statistics.General">Général</s:String>
+    <s:String x:Key="Editor.Statistics.FrameCount">Nombre d'images</s:String>
+    <s:String x:Key="Editor.Statistics.TotalDuration">Durée totale</s:String>
+    <s:String x:Key="Editor.Statistics.FrameSize">Taille d'image</s:String>
+    <s:String x:Key="Editor.Statistics.AverageDuration">Durée moyenne (délai)</s:String>
+    <s:String x:Key="Editor.Statistics.FrameDpi">Image DPI et mise à l'échelle</s:String>
+    <s:String x:Key="Editor.Statistics.SelectedFrame">Image sélectionnée</s:String>
     
     <!--TODO: Organize-->
     <!--Editor, Continuation-->
-    <s:String x:Key="Editor.Preparing">Préparation des Frames</s:String>
+    <s:String x:Key="Editor.Preparing">Préparation des images</s:String>
     <s:String x:Key="Editor.InvalidLoadingFiles">Chargement non valide - Vous ne pouvez pas importer plusieurs fichiers à la fois. Essayez de choisir un seul fichier.</s:String>
     <s:String x:Key="Editor.InvalidLoadingProjects">Chargement non valide - Vous ne pouvez pas charger plusieurs projets à la fois. Essayez de choisir un seul projet.</s:String>
-    <s:String x:Key="Editor.OpenMediaProject">Ouvrez un média (image ou vidéo) ou un fichier de projet</s:String>
-    <s:String x:Key="Editor.OpenMedia">Ouvrir un Média (Image ou Video)</s:String>
+    <s:String x:Key="Editor.OpenMediaProject">Ouvrir un fichier multimédia (image ou vidéo) ou un fichier de projet</s:String>
+    <s:String x:Key="Editor.OpenMedia">Ouvrir un fichier multimédia (image ou vidéo)</s:String>
     
     <s:String x:Key="Editor.Clipboard.InvalidCut.Title">Action coupé</s:String>
-    <s:String x:Key="Editor.Clipboard.InvalidCut.Instruction">Vous ne pouvez pas couper toutes les frames.</s:String>
-    <s:String x:Key="Editor.Clipboard.InvalidCut.Message">L'enregistrement a besoin d'au moins une frame.</s:String>
+    <s:String x:Key="Editor.Clipboard.InvalidCut.Instruction">Vous ne pouvez pas couper toutes les images</s:String>
+    <s:String x:Key="Editor.Clipboard.InvalidCut.Message">L'enregistrement nécessite au moins une image</s:String>
     
-    <!--<s:String x:Key="Editor.DeleteAll.Title">Remove All</s:String>-->
-    <!--<s:String x:Key="Editor.DeleteAll.Instruction">Are you sure that you want to remove all frames?</s:String>-->
-    <!--<s:String x:Key="Editor.DeleteAll.Message">This action will discard the current open project and cannot be undone. Would you like to continue?</s:String>-->
+    <s:String x:Key="Editor.DeleteAll.Title">Supprimer tout</s:String>
+    <s:String x:Key="Editor.DeleteAll.Instruction">Êtes-vous sûr de vouloir supprimer tous les images ?</s:String>
+    <s:String x:Key="Editor.DeleteAll.Message">Cette action supprimera le projet actuellement ouvert et ne pourra pas être annulée. Voulez-vous continuer ?</s:String>
     <s:String x:Key="Editor.DiscardProject.Title">Enlever tout</s:String>
-    <s:String x:Key="Editor.DiscardProject.Instruction">Voulez-vous supprimer toutes les frames?</s:String>
-    <s:String x:Key="Editor.DiscardProject.Message">Vous essayez de supprimer toutes les frames. \n\rVous ne pourrez pas annuler cette opération.</s:String>
-    <!--<s:String x:Key="Editor.DiscardPreviousProject.Instruction">Do you want to discard the previous project?</s:String>-->
-    <!--<s:String x:Key="Editor.DiscardPreviousProject.Message">If you choose not to do so, the previous project will be available to open via Recents Projects.</s:String>-->
-    <!--<s:String x:Key="Editor.DeleteFrames.Title">Delete Frames</s:String>-->
-    <!--<s:String x:Key="Editor.DeleteFrames.Instruction">Are you sure that you want to delete?</s:String>-->
-    <!--<s:String x:Key="Editor.DeleteFrames.Message">This action will delete {0} frames(s).\n\rYou'll be able to undo this later.</s:String>-->
-    <!--<s:String x:Key="Editor.Exiting.Title">Exiting the Editor</s:String>-->
-    <!--<s:String x:Key="Editor.Exiting.Instruction">Are you sure that you want to exit?</s:String>-->
-    <!--<s:String x:Key="Editor.Exiting.Message">The current project that you were working on can be opened again via 'Recent Projects'.</s:String>-->
-    <!--<s:String x:Key="Editor.Exiting.Message2">The current project that you were working on can be opened again via 'Recent Projects', but don't forget that after a few days, it will be automatically deleted.</s:String>-->
+    <s:String x:Key="Editor.DiscardProject.Instruction">Êtes-vous sûr de vouloir supprimer le projet ?</s:String>
+    <s:String x:Key="Editor.DiscardProject.Message">Cette action supprimera le projet et toutes ses images.\n\rVous ne pouvez pas annuler cette opération.</s:String>
+    <s:String x:Key="Editor.DiscardPreviousProject.Instruction">Voulez-vous supprimer le projet précédent ?</s:String>
+    <s:String x:Key="Editor.DiscardPreviousProject.Message">Si vous choisissez de ne pas le faire, le projet précédent pourra être ouvert depuis les "Projets récents".</s:String>
+    <s:String x:Key="Editor.DeleteFrames.Title">Supprimer des images</s:String>
+    <s:String x:Key="Editor.DeleteFrames.Instruction">Êtes-vous sûr de vouloir supprimer ?</s:String>
+    <s:String x:Key="Editor.DeleteFrames.Message">Cette action supprimera {0} image(s).\n\rVous pourrez annuler cette opération ultérieurement.</s:String>
+    <s:String x:Key="Editor.Exiting.Title">Quitter l'éditeur</s:String>
+    <s:String x:Key="Editor.Exiting.Instruction">Êtes-vous sûr de vouloir quitter ?</s:String>
+    <s:String x:Key="Editor.Exiting.Message">Le projet actuel sur lequel vous travailliez peut être rouvert via "Projets récents".</s:String>
+    <s:String x:Key="Editor.Exiting.Message2">Le projet actuel sur lequel vous travailliez peut être rouvert via "Projets récents", mais n'oubliez pas qu'après quelques jours, il sera automatiquement supprimé.</s:String>
     
     <s:String x:Key="Editor.Resize.Warning">Vous devez sélectionner une valeur différente pour appliquer l'action Redimensionner</s:String>
-    <s:String x:Key="Editor.Crop.Warning">La sélection doit être  petite que la taille de l'image actuelle.</s:String>
-    <!--<s:String x:Key="Editor.Crop.Warning2">The crop selection has to be bigger than 10x10 pixels.</s:String>-->
-    <s:String x:Key="Editor.Caption.WarningNoText">Il n'y a pas de texte à appliquer.</s:String>
-    <s:String x:Key="Editor.Caption.WarningSelection">Vous devez sélectionner au moins un cadre pour appliquer la légende à.</s:String>
-    <s:String x:Key="Editor.FreeText.WarningSelection">Vous devez sélectionner au moins une frame pour appliquer le texte.</s:String>
-    <s:String x:Key="Editor.TitleFrame.WarningSelection">Vous devez sélectionner au moins une frame pour appliquer le titre de frame à côté de lui.</s:String>
+    <s:String x:Key="Editor.Crop.Warning">La sélection de recadrage doit être inférieure à la taille de l'image actuelle</s:String>
+    <s:String x:Key="Editor.Crop.Warning2">La sélection du recadrage doit être supérieure à 10 x 10 pixels</s:String>
+    <s:String x:Key="Editor.Caption.WarningNoText">Il n'y a pas de texte à appliquer</s:String>
+    <s:String x:Key="Editor.Caption.WarningSelection">Vous devez sélectionner au moins une image pour lui appliquer une légende</s:String>
+    <s:String x:Key="Editor.FreeText.WarningSelection">Vous devez sélectionner au moins une image auquelle appliquer le texte.</s:String>
+    <s:String x:Key="Editor.TitleFrame.WarningSelection">Vous devez sélectionner au moins une image pour appliquer le titre de l'image précédente.</s:String>
     <s:String x:Key="Editor.FreeDrawing.WarningNoDrawing">Il n'y a pas de dessins à appliquer aux images que vous avez sélectionnée.</s:String>
-    <s:String x:Key="Editor.FreeDrawing.WarningSelection">Vous devez sélectionner au moins un cadre pour appliquer le dessin gratuit.</s:String>
+    <s:String x:Key="Editor.FreeDrawing.WarningSelection">Vous devez sélectionner au moins une image auquelle appliquer le dessin.</s:String>
     
     <s:String x:Key="Editor.Watermark.Select">Sélectionnez une image</s:String>
-    <s:String x:Key="Editor.Watermark.WarningNoImage">Vous devez sélectionner une image à appliquer au frame(s) sélectionnée(s).</s:String>
-    <s:String x:Key="Editor.Watermark.WarningSelection">Vous devez sélectionner au moins une frame pour appliquer un filigrane</s:String>
-    <s:String x:Key="Editor.Border.WarningThickness">Vous devez informer une épaisseur de bordure supérieure à zéro sur au moins un côté.</s:String>
-    <s:String x:Key="Editor.Border.WarningSelection">Vous devez sélectionner au moins une frame pour appliquer la bordure.</s:String>
-    <s:String x:Key="Editor.Cinemagraph.WarningNoDrawing">Vous devez sélectionner au moins un pixel pour appliquer la Cinemagraph à. Sélectionnez les pixels en tirant sur eux.</s:String>
+    <s:String x:Key="Editor.Watermark.WarningNoImage">Vous devez sélectionner une image filigrane à appliquer sur les image(s) sélectionnée(s).</s:String>
+    <s:String x:Key="Editor.Watermark.WarningSelection">Vous devez sélectionner au moins une image pour appliquer un filigrane.</s:String>
+    <s:String x:Key="Editor.Border.WarningThickness">Vous devez sélectionner une épaisseur de bordure supérieure à zéro sur au moins un côté</s:String>
+    <s:String x:Key="Editor.Border.WarningSelection">Vous devez sélectionner au moins une image pour appliquer la bordure</s:String>
+    <s:String x:Key="Editor.Cinemagraph.WarningNoDrawing">Vous devez sélectionner au moins un pixel auquel appliquer le Cinemagraph. Sélectionnez les pixels en dessinant dessus.</s:String>
     
-    <s:String x:Key="Editor.Fade.Title">Transition d'éffacement</s:String>
-    <s:String x:Key="Editor.Fade.WarningSelection">Vous devez sélectionner au moins une frame pour appliquer la Transition fondu</s:String>
-    <!--<s:String x:Key="Editor.Fade.WarningColor">A fully transparent color won't create any effect on this transition.</s:String>-->
-    <s:String x:Key="Editor.Slide.Title">Transition de slide</s:String>
-    <s:String x:Key="Editor.Slide.WarningSelection">Vous devez sélectionner au moins une frame pour appliquer la transition de diapositive à.</s:String>
+    <s:String x:Key="Editor.Fade.Title">Transition en fondu</s:String>
+    <s:String x:Key="Editor.Fade.WarningSelection">Vous devez sélectionner au moins une image auquelle appliquer la transition de fondu.</s:String>
+    <s:String x:Key="Editor.Fade.WarningColor">Une couleur entièrement transparente ne créera aucun effet sur cette transition.</s:String>
+    <s:String x:Key="Editor.Slide.Title">Transition de diapositive</s:String>
+    <s:String x:Key="Editor.Slide.WarningSelection">Vous devez sélectionner au moins une image auquelle appliquer la transition de diapositive.</s:String>
 
-    <s:String x:Key="Editor.DragDrop.Invalid.Title">Drag and Drop non valide</s:String>
+    <s:String x:Key="Editor.DragDrop.Invalid.Title">Glisser-déposer non valide</s:String>
     <s:String x:Key="Editor.DragDrop.MultipleFiles.Instruction">Vous ne pouvez pas importer plusieurs fichiers à la fois</s:String>
-    <s:String x:Key="Editor.DragDrop.MultipleFiles.Message">Essayez de choisir un seul fichier.</s:String>
-    <!--<s:String x:Key="Editor.DragDrop.Invalid.Instruction">Impossible to load file</s:String>-->
-    <!--<s:String x:Key="Editor.DragDrop.Invalid.Message">The file could not be loaded because it has an invalid format.</s:String>-->
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Message">Essayez de choisir un seul fichier</s:String>
+    <s:String x:Key="Editor.DragDrop.Invalid.Instruction">Impossible de charger le fichier</s:String>
+    <s:String x:Key="Editor.DragDrop.Invalid.Message">Le fichier n'a pas pu être chargé car son format est incorrect</s:String>
     <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">Vous ne pouvez pas importer plusieurs projets à la fois</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidProject.Message">Essayez de choisir un seul projet.</s:String>
+    <s:String x:Key="Editor.DragDrop.InvalidProject.Message">Essayez de choisir un seul projet</s:String>
     
-    <s:String x:Key="Editor.LoadingFrames">Chargement des Frames</s:String>
-    <!--<s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Instruction">Impossible to load project</s:String>-->
-    <!--<s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Message">It was not possible to load the frames because they are all corrupted or the images are not present where they are expected to.</s:String>-->
-    <!--<s:String x:Key="Editor.LoadingFrames.FramesCorrupted.Instruction">Some frames could not be loaded</s:String>-->
-    <!--<s:String x:Key="Editor.LoadingFrames.FramesCorrupted.Message">It was not possible to load the frames because they could not be found or because they are corrupted.</s:String>-->
-    <s:String x:Key="Editor.UpdatingFrames">Mise à jour des frames</s:String>
+    <s:String x:Key="Editor.LoadingFrames">Chargement des images</s:String>
+    <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Instruction">Impossible de charger le projet</s:String>
+    <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Message">Il n'a pas été possible de charger les images car elles sont toutes corrompues ou les images ne sont pas présentes là où elles sont censées l'être.</s:String>
+    <s:String x:Key="Editor.LoadingFrames.FramesCorrupted.Instruction">Certaines images n'ont pas pu être chargées</s:String>
+    <s:String x:Key="Editor.LoadingFrames.FramesCorrupted.Message">Il n'était pas possible de charger les images car elles étaient introuvables ou corrompues.</s:String>
+    <s:String x:Key="Editor.UpdatingFrames">Mise à jour des images</s:String>
     <s:String x:Key="Editor.PreparingImport">Préparation à l'importation</s:String>
-    <s:String x:Key="Editor.ImportingFrames">Importation des Frames</s:String>
+    <s:String x:Key="Editor.ImportingFrames">Importation des images</s:String>
     
-    <s:String x:Key="Editor.ExportingRecording">Exportation de l'enregistrement</s:String>
-    <s:String x:Key="Editor.DiscardingFrames">Supprimer les Frames</s:String>
-    <s:String x:Key="Editor.DiscardingFolders">Rejeter dossiers</s:String>
-    <s:String x:Key="Editor.ResizingFrames">Redimensionnement des Frames</s:String>
-    <s:String x:Key="Editor.CroppingFrames">Recadrage des Frames</s:String>
-    <s:String x:Key="Editor.ApplyingOverlay">Application de superposition pour les Frames</s:String>
-    <s:String x:Key="Editor.CreatingTitleFrame">Création Titre Frame</s:String>
-    <s:String x:Key="Editor.ApplyingFlipRotate">Application Retourner/Rotation sur les Frames</s:String>
-    <s:String x:Key="Editor.ChangingDelay">Modification du délai</s:String>
+    <s:String x:Key="Editor.ExportingRecording">Exporter l'enregistrement</s:String>
+    <s:String x:Key="Editor.DiscardingFrames">Enlever les images</s:String>
+    <s:String x:Key="Editor.DiscardingFolders">Enlever les dossiers</s:String>
+    <s:String x:Key="Editor.ResizingFrames">Redimensionnement des images</s:String>
+    <s:String x:Key="Editor.CroppingFrames">Recadrage des images</s:String>
+    <s:String x:Key="Editor.ApplyingOverlay">Appliquer une superposition aux images</s:String>
+    <s:String x:Key="Editor.CreatingTitleFrame">Création Titre image</s:String>
+    <s:String x:Key="Editor.ApplyingFlipRotate">Appliquer Retourner/Rotation sur les images</s:String>
+    <s:String x:Key="Editor.ChangingDelay">Changer le délai</s:String>
     <s:String x:Key="Editor.ApplyingTransition">Appliquer un effet de transition</s:String>
     <!--<s:String x:Key="S.Editor.PreparingSaving">Preparing to save</s:String>-->
 
-    <!--<s:String x:Key="Editor.List.Frame">Frame:</s:String>-->
-    <!--<s:String x:Key="Editor.List.OpenImage">Open Image</s:String>-->
-    <!--<s:String x:Key="Editor.List.ExploreFolder">Explore Folder</s:String>-->
-    <!--<s:String x:Key="Editor.List.ExportImage">Export Image</s:String>-->
+    <s:String x:Key="Editor.List.Frame">Image:</s:String>
+    <s:String x:Key="Editor.List.OpenImage">Ouvrir l'image</s:String>
+    <s:String x:Key="Editor.List.ExploreFolder">Explorer le dossier</s:String>
+    <s:String x:Key="Editor.List.ExportImage">Exporter l'image</s:String>
     
-    <!--<s:String x:Key="Editor.FrameNumbersInfo">Total Count, Selection Count, Selection Index</s:String>-->
+    <s:String x:Key="Editor.FrameNumbersInfo">Nombre total, Nombre de sélection, Index de sélection</s:String>
     
-    <s:String x:Key="GoTo.Title">Aller à la frame</s:String>
-    <s:String x:Key="GoTo.Instruction">Aller à la Frame (0/{0})</s:String>
+    <s:String x:Key="GoTo.Title">Aller à la image</s:String>
+    <s:String x:Key="GoTo.Instruction">Aller à la image (0/{0})</s:String>
     
-    <s:String x:Key="Context.SaveAs">Enregistrer</s:String>
-    <s:String x:Key="Context.RemoveFrames">Supprimer les frames sélectionnées</s:String>
+    <s:String x:Key="Context.SaveAs">Enregistrer sous</s:String>
+    <s:String x:Key="Context.RemoveFrames">Supprimer les images sélectionnées</s:String>
     <s:String x:Key="Context.NewRecording">Nouvel enregistrement</s:String>
     <s:String x:Key="Context.NewWebcamRecording">Nouvel enregistrement de la Webcam</s:String>
     <s:String x:Key="Context.NewBoardRecording">Nouvelle planche à dessin</s:String>
     <s:String x:Key="Context.NewBlankAnimation">Nouveau projet</s:String>
-    <s:String x:Key="Context.NewFromMediaProject">Nouveau a partir d'un média ou un projet</s:String>
+    <s:String x:Key="Context.NewFromMediaProject">Nouveau à partir d'un média ou un projet</s:String>
     
     <!--Warnings-->
-    <!--<s:String x:Key="Editor.Warning.Selection">You have to select at least one frame to apply the overlay to.</s:String>-->
-    <!--<s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg not present. Add it to the Path environment variables or click here to open Options > Extras to set the location.</s:String>-->
-    <!--<s:String x:Key="Editor.Warning.Gifski">Gifski not present. Add it to the Path environment variables or click here to open Options > Extras to set the location.</s:String>-->
-    <!--<s:String x:Key="Editor.Warning.LowSpace">There's not enough space left on the drive where this app stores its cache ({0}% left). Click here to open Options > Temporary Files to free some space.</s:String>-->
+    <s:String x:Key="Editor.Warning.Selection">Vous devez sélectionner au moins une image auquelle appliquer la superposition.</s:String>
+    <s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg non présent. Ajoutez-le aux variables d'environnement "Path" ou cliquez ici pour ouvrir "Options>Extras" afin de définir son emplacement.</s:String>
+    <s:String x:Key="Editor.Warning.Gifski">Gifski non présent. Ajoutez-le aux variables d'environnement "Path" ou cliquez ici pour ouvrir "Options>Extras" afin de définir son emplacement.</s:String>
+    <s:String x:Key="Editor.Warning.LowSpace">Il n'y a pas assez d'espace libre sur le lecteur où cette application stocke son cache ({0}% restant). Cliquez ici pour ouvrir "Options>Fichiers temporaires" afin de libérer de l'espace.</s:String>
     
     <!--Hints-->
     <!--<s:String x:Key="Hint.NewRecording">New recording created</s:String>-->
@@ -730,9 +730,9 @@
     <s:String x:Key="Clipboard.Entry">Entrée du Presse-papiers:</s:String>
     <s:String x:Key="Clipboard.Explore">Explorer le contenu</s:String>
     <s:String x:Key="Clipboard.Remove">Supprimer</s:String>
-    <s:String x:Key="Clipboard.Behavior">Coller Comportement</s:String>
-    <s:String x:Key="Clipboard.Before">Avant la frame sélectionnée</s:String>
-    <s:String x:Key="Clipboard.After">Après la frame sélectionnée</s:String>
+    <s:String x:Key="Clipboard.Behavior">Coller le comportement</s:String>
+    <s:String x:Key="Clipboard.Before">Avant l'image sélectionnée</s:String>
+    <s:String x:Key="Clipboard.After">Après l'image sélectionnée</s:String>
     
     <s:String x:Key="Resize.CurrentProperties">Propriétés actuelles</s:String>
     <s:String x:Key="Resize.Dpi">Dpi</s:String>
@@ -777,7 +777,7 @@
     <s:String x:Key="Caption.Outline">Contour</s:String>
     <s:String x:Key="Caption.Thickness">Épaisseur:</s:String>
     <s:String x:Key="Caption.Layout">Disposition</s:String>
-    <s:String x:Key="Caption.Vertical">Vertical:</s:String>
+    <s:String x:Key="Caption.Vertical">Verticale:</s:String>
     <s:String x:Key="Caption.Horizontal">Horizontal:</s:String>
 
     <!--<s:String x:Key="S.KeyStrokes">Key Strokes</s:String>-->
@@ -850,9 +850,9 @@
     <s:String x:Key="Delay.NewValue">Nouvelle valeur</s:String>
     <s:String x:Key="Delay.Minimum10Ms">Minimum de 10ms par image.</s:String>
     <s:String x:Key="Delay.DecreaseIncrease">Diminuer/Augmenter Valeur</s:String>
-    <!--<s:String x:Key="Delay.Scale">Scale Value</s:String>-->
+    <s:String x:Key="Delay.Scale">Valeur de mise à l'échelle</s:String>
     
-    <s:String x:Key="Cinemagraph.Info">Utilisez le stylo pour sélectionner les pixels qui ne doivent pas rester statiques (qui doivent changer d’une frame à l’autre), en les peignant par dessus</s:String>
+    <s:String x:Key="Cinemagraph.Info">Utilisez le stylo pour sélectionner les pixels qui ne doivent pas rester statiques (qui doivent changer d’une image à l’autre), en les peignant par dessus</s:String>
     <!--<s:String x:Key="OverrideDelay.Info">This new value will replace the duration (delay) of all selected frames. The value can be from 10ms to 25500ms.</s:String>-->
     <!--<s:String x:Key="IncreaseDecreaseDelay.Info">This value will decrease/increase the duration (delay) of each selected frame.&#x0d;You can decrement/increment by selecting a value between -10000ms and 10000ms, but the final duration of each frame will be restricted to between 10ms and 25500ms</s:String>-->
     <!--<s:String x:Key="ScaleDelay.Info">Scale the duration (delay) of each selected frame by the this percent.&#x0d;You can scale each frame's duration by selecting a value between 1% and 1000%, but the final duration of each frame will be restricted to between 10ms and 25500ms</s:String>-->
