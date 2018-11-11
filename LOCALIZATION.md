@@ -13,6 +13,8 @@ As this project always are moving forward, new strings get added from time to ti
 
 Use the [Translator](https://github.com/NickeManarin/ScreenToGif/tree/master/Other/Translator) application to help you.
 
+You can get more information on the [wiki](https://github.com/NickeManarin/ScreenToGif/wiki/Localization).
+
 ## Creating a new language
 If you want to begin translating ScreenToGif for a new language, create a new file in the ``./Resources/Localization`` directory with the correct two letter [language](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes#Partial_ISO_639_table) and [country codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Decoding_table) (e.g. `es-AR`), then paste the contents of the ScreenToGif's base language file into it and start translating the strings.
 
