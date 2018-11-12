@@ -148,13 +148,13 @@
 
     <s:String x:Key="Interface.EditorBackground.BaseColor">Couleur de base</s:String>
     <s:String x:Key="Interface.EditorBackground.EvenColor">Even Color</s:String>
-    <s:String x:Key="Interface.EditorBackground.OddColor">Couleur secondaire</s:String>
+    <s:String x:Key="Interface.EditorBackground.OddColor">Couleur impair</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Height">Taille</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Width">Largeur</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Apply">Appliquer</s:String>
 
     <s:String x:Key="Interface.Other">Autre</s:String>
-    <s:String x:Key="Interface.Other.ExtendChrome">Étendre la barre de titre/Chrome.</s:String>
+    <s:String x:Key="Interface.Other.ExtendChrome">Étendre la barre de titre (fenêtre chrome).</s:String>
     <!--<s:String x:Key="Interface.Other.HideTitleBar">Hide the title bar (thin mode).</s:String>-->
     <!--<s:String x:Key="Interface.Other.TripleClickSelection">Enable triple-click to select the text.</s:String>-->
     <!--<s:String x:Key="Interface.Other.AutomaticallySizeOnContent">Automatically adjust the window size based on the frame size, right after loading.</s:String>-->
@@ -370,7 +370,7 @@
     <!--<s:String x:Key="InsertFrames.CanvasSize">Canvas size:</s:String>-->
     <!--<s:String x:Key="InsertFrames.FitCanvas">Fit Image on Canvas</s:String>-->
     <!--<s:String x:Key="InsertFrames.FitCanvas.Info">Resizes the canvas to fit both images inside (from the top left corner).</s:String>-->
-    <s:String x:Key="InsertFrames.DifferentSizes">Il existe une différence entre les tailles d'image. Vous devez résoudre ce avant d'insérer les images.</s:String>
+    <s:String x:Key="InsertFrames.DifferentSizes">Il y a une différence entre les tailles des images. Vous devez corriger ce problème avant d'insérer les images.</s:String>
     <s:String x:Key="InsertFrames.InsertedFrames">Image(s) ajoutée(s)</s:String>
     <s:String x:Key="InsertFrames.CurrentFrames">Image(s) actuelle(s)</s:String>
     <!--<s:String x:Key="InsertFrames.ImageSize">Image size:</s:String>-->
@@ -380,7 +380,7 @@
     <s:String x:Key="InsertFrames.Before">Avant</s:String>
     <s:String x:Key="InsertFrames.After">Après</s:String>
     <s:String x:Key="InsertFrames.Importing">Importation</s:String>
-    <s:String x:Key="InsertFrames.SelectColorFill">Sélectionnez la couleur de remplissage</s:String>
+    <s:String x:Key="InsertFrames.SelectColorFill">Sélectionnez la couleur de remplissage du canevas</s:String>
 
     <!--Import Frames From Video-->
     <s:String x:Key="ImportVideo.Title">Importer à partir d'une vidéo</s:String>
@@ -391,7 +391,7 @@
     <s:String x:Key="ImportVideo.Width">Largeur:</s:String>
     <s:String x:Key="ImportVideo.Framerate">Fréquence d'image:</s:String>
     <s:String x:Key="ImportVideo.Fps">fps</s:String>
-    <s:String x:Key="ImportVideo.Start">Start:</s:String>
+    <s:String x:Key="ImportVideo.Start">Début:</s:String>
     <s:String x:Key="ImportVideo.End">Fin:</s:String>
     <s:String x:Key="ImportVideo.Selection">Selection:</s:String>
     <s:String x:Key="ImportVideo.Frames">Images:</s:String>
@@ -746,10 +746,10 @@
     <s:String x:Key="Crop.Bottom">Bas:</s:String>
     <s:String x:Key="Crop.Right">À droite:</s:String>
     
-    <s:String x:Key="FlipRotate.FlipHorizontal">Retournement horizontal</s:String>
+    <s:String x:Key="FlipRotate.FlipHorizontal">Retourner horizontalement</s:String>
     <s:String x:Key="FlipRotate.FlipVertical">Retourner verticalement</s:String>
-    <s:String x:Key="FlipRotate.RotateLeft">Rotation à gauche 90º</s:String>
-    <s:String x:Key="FlipRotate.RotateRight">Rotation à droite 90º</s:String>
+    <s:String x:Key="FlipRotate.RotateLeft">Tourner à gauche de 90º</s:String>
+    <s:String x:Key="FlipRotate.RotateRight">Tourner à droite de 90º</s:String>
     
     <!--<s:String x:Key="Reduce.Header">Reduce framerate</s:String>-->
     <!--<s:String x:Key="Reduce.Factor">Factor:</s:String>-->
@@ -806,16 +806,16 @@
     
     <s:String x:Key="FreeDrawing.Mode">Mode</s:String>
     <s:String x:Key="FreeDrawing.Pen">Stylo</s:String>
-    <s:String x:Key="FreeDrawing.Eraser">Effaçeur</s:String>
+    <s:String x:Key="FreeDrawing.Eraser">Gomme</s:String>
     <s:String x:Key="FreeDrawing.Select">Sélectionner</s:String>
-    <s:String x:Key="FreeDrawing.StrokeEraser">Effaçeur de trait</s:String>
+    <s:String x:Key="FreeDrawing.StrokeEraser">Gomme à effacer</s:String>
     <s:String x:Key="FreeDrawing.Width">Largeur:</s:String>
     <s:String x:Key="FreeDrawing.Height">Hauteur:</s:String>
     <s:String x:Key="FreeDrawing.Tip">Astuce:</s:String>
     <s:String x:Key="FreeDrawing.Rectangle">Rectangle</s:String>
     <s:String x:Key="FreeDrawing.Ellipse">Ellipse</s:String>
     <s:String x:Key="FreeDrawing.Other">Autre:</s:String>
-    <s:String x:Key="FreeDrawing.Highlighter">Est surligneur</s:String>
+    <s:String x:Key="FreeDrawing.Highlighter">Surligneur</s:String>
     <s:String x:Key="FreeDrawing.FitToCurve">Ajuster à la courbe</s:String>
     
     <!--<s:String x:Key="S.MouseClicks">Mouse Clicks</s:String>-->
