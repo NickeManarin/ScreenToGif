@@ -464,8 +464,8 @@
     <s:String x:Key="Editor.File.New">Nouveau</s:String>
     
     <!--File • Insert-->
-    <s:String x:Key="Editor.File.Insert.Recording">Insérer\nune capture d'écran</s:String>
-    <s:String x:Key="Editor.File.Insert.Webcam">Insérer\nune capture de Webcam</s:String>
+    <s:String x:Key="Editor.File.Insert.Recording">Insérer une\ncapture d'écran</s:String>
+    <s:String x:Key="Editor.File.Insert.Webcam">Insérer une\ncapture de Webcam</s:String>
     <s:String x:Key="Editor.File.Insert.Media">Multimédia</s:String>
     <s:String x:Key="Editor.File.Insert">Insérer</s:String>
     
@@ -513,8 +513,8 @@
     <!--Edit • Frames-->  
     <s:String x:Key="Editor.Edit.Frames">Images</s:String>
     <s:String x:Key="Editor.Edit.Delete">Effacer</s:String>
-    <s:String x:Key="Editor.Edit.Frames.Duplicates">Supprimer les doublons</s:String>
-    <s:String x:Key="Editor.Edit.Frames.Reduce">Réduire le nombre d'images</s:String>
+    <s:String x:Key="Editor.Edit.Frames.Duplicates">Supprimer&#x0d;les doublons</s:String>
+    <s:String x:Key="Editor.Edit.Frames.Reduce">Réduire&#x0d;le nombre d'images</s:String>
     <s:String x:Key="Editor.Edit.DeletePrevious">Supprimer toutes les précédentes</s:String>
     <s:String x:Key="Editor.Edit.DeleteNext">Supprimer toutes les suivantes</s:String>
     
