@@ -26,7 +26,7 @@
     <!--Tray Icon-->
     <s:String x:Key="S.NewRecording">Nouvelle capture d'écran</s:String>
     <s:String x:Key="S.NewWebcamRecording">Nouvelle capture de Webcam</s:String>
-    <s:String x:Key="S.NewBoardRecording">Nouvel enregistrement depuis la planche à dessin</s:String>
+    <s:String x:Key="S.NewBoardRecording">Nouvelle planche à dessin</s:String>
     <s:String x:Key="S.Exit">Quitter</s:String>
 
     <!--Application-->
@@ -309,7 +309,7 @@
     <s:String x:Key="Recorder.Pause">Pause</s:String>
     <s:String x:Key="Recorder.Continue">Continuer</s:String>
     <s:String x:Key="Recorder.Stop">Arrêter</s:String>
-    <s:String x:Key="Recorder.Discard">Effaçer</s:String>
+    <s:String x:Key="Recorder.Discard">Abandonner</s:String>
     <s:String x:Key="Recorder.Snap">Instantané</s:String>
     <s:String x:Key="Recorder.Height">Hauteur</s:String>
     <s:String x:Key="Recorder.Width">Largeur</s:String>
@@ -317,7 +317,7 @@
     <!--<s:String x:Key="Recorder.Fps.Short">fps</s:String>-->
     <!--<s:String x:Key="Recorder.FpsRange">Minimum to maximum fps: 1-60 fps</s:String>-->
     <s:String x:Key="Recorder.SnapToWindow">Accrocher à la fenêtre (Prendre et relâchez pour accrocher)</s:String>
-    <s:String x:Key="Recorder.PreStart">Délai de démarrage</s:String>
+    <s:String x:Key="Recorder.PreStart">Démarrage dans...</s:String>
     <s:String x:Key="Recorder.Paused">ScreenToGif (en pause)</s:String>
     
     <!--New Recorder-->
@@ -336,7 +336,7 @@
     <!--Webcam Recorder-->
     <s:String x:Key="Webcam.Title">ScreenToGif - Capture de WebCam</s:String>
     <s:String x:Key="Webcam.NoVideo">Aucun périphérique vidéo détecté :(</s:String>
-    <s:String x:Key="Webcam.CheckVideoDevices">Vérifiez vos périphériques vidéo.</s:String>
+    <s:String x:Key="Webcam.CheckVideoDevices">Rechercher vos périphériques vidéo</s:String>
     <!--<s:String x:Key="Webcam.Scale">Scale: {0:0.##}x</s:String>-->
     <!--<s:String x:Key="Webcam.ChangeScale">Change the scale of the video.</s:String>-->
     
@@ -474,7 +474,7 @@
     <s:String x:Key="Editor.File.Load">Charger</s:String>
     <s:String x:Key="Editor.File.LoadRecent">Projet récents</s:String>
     <s:String x:Key="Editor.File.SaveProject">Enregistrer sous\nProjet</s:String>
-    <s:String x:Key="Editor.File.Discard">Abandonner\nProjet</s:String>
+    <s:String x:Key="Editor.File.Discard">Abandonner\nle projet</s:String>
     
     <!--Home • Action Stack-->
     <s:String x:Key="Editor.Home.ActionStack">Pile d'action</s:String>
@@ -583,8 +583,8 @@
     <s:String x:Key="Editor.DeleteAll.Title">Supprimer tout</s:String>
     <s:String x:Key="Editor.DeleteAll.Instruction">Êtes-vous sûr de vouloir supprimer tous les images ?</s:String>
     <s:String x:Key="Editor.DeleteAll.Message">Cette action supprimera le projet actuellement ouvert et ne pourra pas être annulée. Voulez-vous continuer ?</s:String>
-    <s:String x:Key="Editor.DiscardProject.Title">Enlever tout</s:String>
-    <s:String x:Key="Editor.DiscardProject.Instruction">Êtes-vous sûr de vouloir supprimer le projet ?</s:String>
+    <s:String x:Key="Editor.DiscardProject.Title">Abandonner l'ensemble du projet</s:String>
+    <s:String x:Key="Editor.DiscardProject.Instruction">Êtes-vous sûr de vouloir supprimer définitivement le projet ?</s:String>
     <s:String x:Key="Editor.DiscardProject.Message">Cette action supprimera le projet et toutes ses images.&#x0d;Vous ne pouvez pas annuler cette opération.</s:String>
     <s:String x:Key="Editor.DiscardPreviousProject.Instruction">Voulez-vous supprimer le projet précédent ?</s:String>
     <s:String x:Key="Editor.DiscardPreviousProject.Message">Si vous choisissez de ne pas le faire, le projet précédent pourra être ouvert depuis les "Projets récents".</s:String>
@@ -816,7 +816,7 @@
     <s:String x:Key="FreeDrawing.Ellipse">Ellipse</s:String>
     <s:String x:Key="FreeDrawing.Other">Autre:</s:String>
     <s:String x:Key="FreeDrawing.Highlighter">Surligneur</s:String>
-    <s:String x:Key="FreeDrawing.FitToCurve">Ajuster à la courbe</s:String>
+    <s:String x:Key="FreeDrawing.FitToCurve">Ajuster la courbe</s:String>
     
     <!--<s:String x:Key="S.MouseClicks">Mouse Clicks</s:String>-->
     <!--<s:String x:Key="S.MouseClicks.Warning.None">There's no detected mouse clicks on your project.</s:String>-->
