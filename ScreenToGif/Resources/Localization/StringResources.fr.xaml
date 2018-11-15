@@ -25,9 +25,9 @@
 
     <!--Tray Icon-->
     <s:String x:Key="S.NewRecording">Nouvelle capture d'écran</s:String>
-    <s:String x:Key="S.NewWebcamRecording">New webcam recording</s:String>
-    <s:String x:Key="S.NewBoardRecording">New board recording</s:String>
-    <s:String x:Key="S.Exit">Exit</s:String>
+    <s:String x:Key="S.NewWebcamRecording">Nouvelle capture de Webcam</s:String>
+    <s:String x:Key="S.NewBoardRecording">Nouvel enregistrement depuis la planche à dessin</s:String>
+    <s:String x:Key="S.Exit">Quitter</s:String>
 
     <!--Application-->
     <s:String x:Key="Application.Exiting.Title">Quitter ScreenToGif</s:String>
@@ -197,11 +197,11 @@
     <!--<s:String x:Key="Language.AppLanguage.Translate.ImportLink.Tooltip">Opens the import page</s:String>-->
     <!--<s:String x:Key="Language.AppLanguage.Translate.EmailLink.Tooltip">Opens your email app</s:String>-->
     
-    <s:String x:Key="TempFiles.FilesAndFolders">Fichiers temporaires et dossiers</s:String>
+    <s:String x:Key="TempFiles.FilesAndFolders">Fichiers et dossiers temporaires</s:String>
     <!--<s:String x:Key="TempFiles.FilesAndFolders.Count">{0} folders and {1} files</s:String>-->
     <!--<s:String x:Key="TempFiles.FilesAndFolders.None">No folder or file detected</s:String>-->
-    <s:String x:Key="TempFiles.OpenFolder">Ouvrir Dossier</s:String>
-    <s:String x:Key="TempFiles.Clear">Effacer Dossier Temp.</s:String>
+    <s:String x:Key="TempFiles.OpenFolder">Parcourir le dossier</s:String>
+    <s:String x:Key="TempFiles.Clear">Nettoyer le dossier Temp.</s:String>
     <!--<s:String x:Key="TempFiles.LogsLocation">Logs folder</s:String>-->
     <!--<s:String x:Key="TempFiles.LogsLocation.Choose">Choose the location for the error logs files</s:String>-->
     <!--<s:String x:Key="TempFiles.Location">Location folder</s:String>-->
@@ -301,16 +301,16 @@
 
     <!--Recorder-->
     <s:String x:Key="Recorder.RecordingOptions">Options d'enregistrement</s:String>
-    <s:String x:Key="Recorder.Snapshot">Mode Snapshot</s:String>
+    <s:String x:Key="Recorder.Snapshot">Mode Instantané</s:String>
     <s:String x:Key="Recorder.ThinMode">Cacher la barre de titre</s:String>
     <s:String x:Key="Recorder.Fullscreen">Mode plein écran</s:String>
 
     <s:String x:Key="Recorder.Record">Enregistrement</s:String>
     <s:String x:Key="Recorder.Pause">Pause</s:String>
     <s:String x:Key="Recorder.Continue">Continuer</s:String>
-    <s:String x:Key="Recorder.Stop">Stop</s:String>
-    <s:String x:Key="Recorder.Discard">Jeter</s:String>
-    <s:String x:Key="Recorder.Snap">Snap</s:String>
+    <s:String x:Key="Recorder.Stop">Arrêter</s:String>
+    <s:String x:Key="Recorder.Discard">Effaçer</s:String>
+    <s:String x:Key="Recorder.Snap">Instantané</s:String>
     <s:String x:Key="Recorder.Height">Hauteur</s:String>
     <s:String x:Key="Recorder.Width">Largeur</s:String>
     <s:String x:Key="Recorder.Fps">Nombre d'images maximum par seconde</s:String>
@@ -318,7 +318,7 @@
     <!--<s:String x:Key="Recorder.FpsRange">Minimum to maximum fps: 1-60 fps</s:String>-->
     <s:String x:Key="Recorder.SnapToWindow">Accrocher à la fenêtre (Prendre et relâchez pour accrocher)</s:String>
     <s:String x:Key="Recorder.PreStart">Délai de démarrage</s:String>
-    <s:String x:Key="Recorder.Paused">Screen To Gif (en pause)</s:String>
+    <s:String x:Key="Recorder.Paused">ScreenToGif (en pause)</s:String>
     
     <!--New Recorder-->
     <!--<s:String x:Key="S.Recorder.Area">Area</s:String>-->
@@ -336,7 +336,7 @@
     <!--Webcam Recorder-->
     <s:String x:Key="Webcam.Title">ScreenToGif - Capture de WebCam</s:String>
     <s:String x:Key="Webcam.NoVideo">Aucun périphérique vidéo détecté :(</s:String>
-    <s:String x:Key="Webcam.CheckVideoDevices">Vérifiez pour les appareils vidéo.</s:String>
+    <s:String x:Key="Webcam.CheckVideoDevices">Vérifiez vos périphériques vidéo.</s:String>
     <!--<s:String x:Key="Webcam.Scale">Scale: {0:0.##}x</s:String>-->
     <!--<s:String x:Key="Webcam.ChangeScale">Change the scale of the video.</s:String>-->
     
@@ -656,7 +656,7 @@
     <s:String x:Key="Editor.FrameNumbersInfo">Nombre total, Nombre de sélection, Index de sélection</s:String>
     
     <s:String x:Key="GoTo.Title">Aller à la image</s:String>
-    <s:String x:Key="GoTo.Instruction">Aller à la image (0/{0})</s:String>
+    <s:String x:Key="GoTo.Instruction">Aller à la image (de 0 à {0})</s:String>
     
     <s:String x:Key="Context.SaveAs">Enregistrer sous</s:String>
     <s:String x:Key="Context.RemoveFrames">Supprimer les images sélectionnées</s:String>
@@ -883,7 +883,7 @@
     <!--<s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>-->
     <!--<s:String x:Key="S.SaveAs.GifOptions">Gif options</s:String>-->
-    <s:String x:Key="S.SaveAs.Quality">Qualité</s:String>
+    <s:String x:Key="S.SaveAs.Quality">Qualité:</s:String>
     <!--<s:String x:Key="S.SaveAs.GifOptions.Colors">Colors:</s:String>-->
     <!--<s:String x:Key="S.SaveAs.GifOptions.Colors.Info">Maximum number of colors (for each frame).</s:String>    -->
     <s:String x:Key="S.SaveAs.GifOptions.Loop">Boucle</s:String>
@@ -893,7 +893,7 @@
     <!--<s:String x:Key="S.SaveAs.Extras">Extras:</s:String>-->
     <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">Détecter les pixels inchangés</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">Peindre les pixels inchangés avec une couleur factice</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">Sélectionnez la couleur factice</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">Sélectionnez la couleur</s:String>
     <!--<s:String x:Key="S.SaveAs.ApngOptions">Apng options</s:String>-->
     <!--<s:String x:Key="S.SaveAs.GifOptions.LoopedApng">Looped Apng.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.ApngOptions.DetectUnchanged">Detect unchanged pixels.</s:String>-->
