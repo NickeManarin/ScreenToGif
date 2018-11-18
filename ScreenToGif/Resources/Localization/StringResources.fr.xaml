@@ -366,17 +366,17 @@
 
     <!--Insert Frames-->
     <s:String x:Key="InsertFrames.Title">Insérer des images</s:String>
-    <!--<s:String x:Key="InsertFrames.Info">Both sides should have the same size, this window allows you to reposition and resize the image and the canvas. Click to select and resize.</s:String>-->
-    <!--<s:String x:Key="InsertFrames.CanvasSize">Canvas size:</s:String>-->
-    <!--<s:String x:Key="InsertFrames.FitCanvas">Fit Image on Canvas</s:String>-->
-    <!--<s:String x:Key="InsertFrames.FitCanvas.Info">Resizes the canvas to fit both images inside (from the top left corner).</s:String>-->
+    <s:String x:Key="InsertFrames.Info">Les deux côtés doivent avoir la même taille. Cette fenêtre vous permet de repositionner et de redimensionner l’image et le Canevas. Cliquez pour sélectionner et redimensionner.</s:String>
+    <s:String x:Key="InsertFrames.CanvasSize">Taille du Canvas:</s:String>
+    <s:String x:Key="InsertFrames.FitCanvas">Ajuster à l'image du Canvas</s:String>
+    <s:String x:Key="InsertFrames.FitCanvas.Info">Redimensionne le Canvas pour l’adapter aux deux images (à partir du coin supérieur gauche).</s:String>
     <s:String x:Key="InsertFrames.DifferentSizes">Il y a une différence entre les tailles des images. Vous devez corriger ce problème avant d'insérer les images.</s:String>
     <s:String x:Key="InsertFrames.InsertedFrames">Image(s) ajoutée(s)</s:String>
     <s:String x:Key="InsertFrames.CurrentFrames">Image(s) actuelle(s)</s:String>
-    <!--<s:String x:Key="InsertFrames.ImageSize">Image size:</s:String>-->
-    <!--<s:String x:Key="InsertFrames.ImagePosition">Image position:</s:String>-->
-    <!--<s:String x:Key="InsertFrames.ResetImageSizePosition">Reset Image Size&#x0d;and Position</s:String>-->
-    <!--<s:String x:Key="InsertFrames.Info2">New frames will be inserted into the current list of frames at the position:</s:String>-->
+    <s:String x:Key="InsertFrames.ImageSize">Taille de l'image:</s:String>
+    <s:String x:Key="InsertFrames.ImagePosition">Position de l'image:</s:String>
+    <s:String x:Key="InsertFrames.ResetImageSizePosition">Réinitialiser la taille&#x0d;et la position de l'image</s:String>
+    <s:String x:Key="InsertFrames.Info2">De nouvelles images seront insérées dans la liste actuelle des images à cette position:</s:String>
     <s:String x:Key="InsertFrames.Before">Avant</s:String>
     <s:String x:Key="InsertFrames.After">Après</s:String>
     <s:String x:Key="InsertFrames.Importing">Importation</s:String>
@@ -854,7 +854,7 @@
     
     <s:String x:Key="Cinemagraph.Info">Utilisez le stylo pour sélectionner les pixels qui ne doivent pas rester statiques (qui doivent changer d’une image à l’autre), en les peignant par dessus</s:String>
     <!--<s:String x:Key="OverrideDelay.Info">This new value will replace the duration (delay) of all selected frames. The value can be from 10ms to 25500ms.</s:String>-->
-    <!--<s:String x:Key="IncreaseDecreaseDelay.Info">This value will decrease/increase the duration (delay) of each selected frame.&#x0d;You can decrement/increment by selecting a value between -10000ms and 10000ms, but the final duration of each frame will be restricted to between 10ms and 25500ms</s:String>-->
+    <s:String x:Key="IncreaseDecreaseDelay.Info">Cette valeur diminuera/augmentera la durée (délai) de chaque image sélectionnée.&#x0d;Vous pouvez décrémenter/incrémenter en sélectionnant une valeur comprise entre -10000ms et 10000ms, mais la durée finale de chaque image sera limitée à 10ms à 25500ms.</s:String>
     <!--<s:String x:Key="ScaleDelay.Info">Scale the duration (delay) of each selected frame by the this percent.&#x0d;You can scale each frame's duration by selecting a value between 1% and 1000%, but the final duration of each frame will be restricted to between 10ms and 25500ms</s:String>-->
 
     <s:String x:Key="Transitions.Lenght">Longueur de transition</s:String>
