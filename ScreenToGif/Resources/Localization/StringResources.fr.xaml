@@ -261,16 +261,16 @@
     <s:String x:Key="Extras.External">Outils externes disponibles</s:String>
     <s:String x:Key="Extras.Download">Cliquez ici pour télécharger&#x0d;{0}</s:String>
     <s:String x:Key="Extras.Downloading">Téléchargement...</s:String>
-    <!--<s:String x:Key="Extras.Ready">Downloaded&#x0d;{0}</s:String>-->
-    <!--<s:String x:Key="Extras.Ready.Info">Click here to open the properties of the file.</s:String>-->
+    <s:String x:Key="Extras.Ready">{0}&#x0d;Téléchargé</s:String>
+    <s:String x:Key="Extras.Ready.Info">Cliquez ici pour ouvrir les propriétés du fichier</s:String>
     <s:String x:Key="Extras.FfmpegLocation">Emplacement FFmpeg</s:String>
-    <!--<s:String x:Key="Extras.FfmpegLocation.Select">Select the location of the FFmpeg executable</s:String>-->
+    <s:String x:Key="Extras.FfmpegLocation.Select">Sélectionnez l'emplacement de l'exécutable FFmpeg</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Invalid">Le chemin vers l'exécutable FFMpeg contient un ou plusieurs caractères non valides. Veuillez sélectionner un emplacement valide pour cet exécutable.</s:String>
-    <!--<s:String x:Key="Extras.GifskiLocation">Gifski location</s:String>-->
-    <!--<s:String x:Key="Extras.GifskiLocation.Select">Select the location of the Gifski executable</s:String>-->
-    <!--<s:String x:Key="Extras.GifskiLocation.Invalid">The path of Gifski executable contains one or more invalid characters. Please, select a valid location for that executable.</s:String>-->
-    <!--<s:String x:Key="Extras.License.Ffmpeg">FFmpeg license</s:String>-->
-    <!--<s:String x:Key="Extras.License.Gifski">Gifski license</s:String>-->
+    <s:String x:Key="Extras.GifskiLocation">Emplacement Gifski</s:String>
+    <s:String x:Key="Extras.GifskiLocation.Select">Sélectionnez l'emplacement de l'exécutable Gifski</s:String>
+    <s:String x:Key="Extras.GifskiLocation.Invalid">Le chemin de l'exécutable Gifski contient un ou plusieurs caractères non valides. Veuillez sélectionner un emplacement valide pour cet exécutable.</s:String>
+    <s:String x:Key="Extras.License.Ffmpeg">Licence FFmpeg</s:String>
+    <s:String x:Key="Extras.License.Gifski">Licence Gifski</s:String>
     
     <s:String x:Key="Donate.IfYouWish">Si vous souhaitez me remercier :D</s:String>
     <s:String x:Key="Donate.DonateDollar">Faire un don en US$</s:String>
@@ -541,8 +541,8 @@
     <s:String x:Key="Editor.Image.Text">Texte</s:String>
     <s:String x:Key="Editor.Image.Caption">Légende</s:String>
     <s:String x:Key="Editor.Image.FreeText">Texte libre</s:String>
-    <s:String x:Key="Editor.Image.TitleFrame">Titre de l'image</s:String>
-    <s:String x:Key="Editor.Image.KeyStrokes">Frappes</s:String>
+    <s:String x:Key="Editor.Image.TitleFrame">Image avec titre</s:String>
+    <s:String x:Key="Editor.Image.KeyStrokes">Touches</s:String>
     
     <!--Image • Overlay-->
     <s:String x:Key="Editor.Image.Overlay">Superposition</s:String>
@@ -593,8 +593,8 @@
     <s:String x:Key="Editor.DeleteFrames.Message">Cette action supprimera {0} image(s).&#x0d;Vous pourrez annuler cette opération ultérieurement.</s:String>
     <s:String x:Key="Editor.Exiting.Title">Quitter l'éditeur</s:String>
     <s:String x:Key="Editor.Exiting.Instruction">Êtes-vous sûr de vouloir quitter ?</s:String>
-    <s:String x:Key="Editor.Exiting.Message">Le projet actuel sur lequel vous travailliez peut être rouvert via "Projets récents".</s:String>
-    <s:String x:Key="Editor.Exiting.Message2">Le projet actuel sur lequel vous travailliez peut être rouvert via "Projets récents", mais n'oubliez pas qu'après quelques jours, il sera automatiquement supprimé.</s:String>
+    <s:String x:Key="Editor.Exiting.Message">Le projet sur lequel vous travailliez peut être rouvert via "Projets récents".</s:String>
+    <s:String x:Key="Editor.Exiting.Message2">Le projet sur lequel vous travailliez peut être rouvert via "Projets récents", mais n'oubliez pas qu'après quelques jours, il sera automatiquement supprimé.</s:String>
     
     <s:String x:Key="Editor.Resize.Warning">Vous devez sélectionner une valeur différente pour appliquer l'action Redimensionner</s:String>
     <s:String x:Key="Editor.Crop.Warning">La sélection de recadrage doit être inférieure à la taille de l'image actuelle</s:String>
@@ -642,7 +642,7 @@
     <s:String x:Key="Editor.ResizingFrames">Redimensionnement des images</s:String>
     <s:String x:Key="Editor.CroppingFrames">Recadrage des images</s:String>
     <s:String x:Key="Editor.ApplyingOverlay">Appliquer une superposition aux images</s:String>
-    <s:String x:Key="Editor.CreatingTitleFrame">Création Titre image</s:String>
+    <s:String x:Key="Editor.CreatingTitleFrame">Création d'une image avec un titre</s:String>
     <s:String x:Key="Editor.ApplyingFlipRotate">Appliquer Retourner/Rotation sur les images</s:String>
     <s:String x:Key="Editor.ChangingDelay">Changer le délai</s:String>
     <s:String x:Key="Editor.ApplyingTransition">Appliquer un effet de transition</s:String>
@@ -673,40 +673,40 @@
     <s:String x:Key="Editor.Warning.LowSpace">Il n'y a pas assez d'espace libre sur le lecteur où cette application stocke son cache ({0}% restant). Cliquez ici pour ouvrir "Options>Fichiers temporaires" afin de libérer de l'espace.</s:String>
     
     <!--Hints-->
-    <!--<s:String x:Key="Hint.NewRecording">New recording created</s:String>-->
-    <!--<s:String x:Key="Hint.NewWebcamRecording">New webcam recording created</s:String>-->
-    <!--<s:String x:Key="Hint.NewBoardRecording">New board recording created</s:String>-->
-    <!--<s:String x:Key="Hint.NewAnimation">New project created</s:String>-->
-    <!--<s:String x:Key="Hint.Undo">Undo executed</s:String>-->
-    <!--<s:String x:Key="Hint.Reset">Reset executed</s:String>-->
-    <!--<s:String x:Key="Hint.Redo">Redo executed</s:String>-->
-    <!--<s:String x:Key="Hint.Cut">{0} frame(s) cut</s:String>-->
-    <!--<s:String x:Key="Hint.Copy">{0} frame(s) copied</s:String>-->
-    <!--<s:String x:Key="Hint.Paste">{0} frame(s) pasted</s:String>-->
-    <!--<s:String x:Key="Hint.Zoom">Zoom set to {0}%</s:String>-->
-    <!--<s:String x:Key="Hint.SelectAll">All frames were selected</s:String>-->
-    <!--<s:String x:Key="Hint.SelectSingle">Frame #{0} selected</s:String>-->
-    <!--<s:String x:Key="Hint.SelectInverse">Selection inversed</s:String>-->
-    <!--<s:String x:Key="Hint.Deselect">All frames were deselected</s:String>-->
-    <!--<s:String x:Key="Hint.DeleteFrames">{0} frame(s) deleted</s:String>-->
-    <!--<s:String x:Key="Hint.Reverse">Frame list reversed</s:String>-->
-    <!--<s:String x:Key="Hint.Yoyo">Yoyo effect applied</s:String>-->
-    <!--<s:String x:Key="Hint.MoveLeft">Frame(s) moved to the left</s:String>-->
-    <!--<s:String x:Key="Hint.MoveRight">Frame(s) moved to the right</s:String>-->
-    <!--<s:String x:Key="Hint.Resize">Frames resized</s:String>-->
-    <!--<s:String x:Key="Hint.Crop">Frames cropped</s:String>-->
-    <!--<s:String x:Key="Hint.FlipRotate">Frames flipped/rotated</s:String>-->
-    <!--<s:String x:Key="Hint.FlipRotate2">The flip action applies to the selected frames and the rotate applies to all frames</s:String>-->
-    <!--<s:String x:Key="Hint.ApplyAll">This action applies to all frames</s:String>-->
-    <!--<s:String x:Key="Hint.ApplySelected">This action applies to selected frames</s:String>-->
-    <!--<s:String x:Key="Hint.Cinemagraph">The cinemagraph applies to all frames based on the first frame</s:String>-->
-    <!--<s:String x:Key="Hint.Overlay">Overlay applied</s:String>-->
-    <!--<s:String x:Key="Hint.TitleFrame">Title frame created</s:String>-->
-    <!--<s:String x:Key="Hint.TitleFrame2">The title frame will be inserted before the selected frame</s:String>-->
-    <!--<s:String x:Key="Hint.Delay">Duration (delay) altered</s:String>-->
-    <!--<s:String x:Key="Hint.Transition">Transition inserted</s:String>-->
-    <!--<s:String x:Key="Hint.Reduce">Framerate reduced</s:String>-->
-    <!--<s:String x:Key="Hint.Duplicates">Duplicates removed</s:String>-->
+    <s:String x:Key="Hint.NewRecording">Nouvel enregistrement d'écran créé</s:String>
+    <s:String x:Key="Hint.NewWebcamRecording">Nouvel enregistrement de Webcam créé</s:String>
+    <s:String x:Key="Hint.NewBoardRecording">Nouvelle planche à dessin créée</s:String>
+    <s:String x:Key="Hint.NewAnimation">Nouveau projet créé</s:String>
+    <s:String x:Key="Hint.Undo">Annuler exécuté</s:String>
+    <s:String x:Key="Hint.Reset">Réinitialiser exécuté</s:String>
+    <s:String x:Key="Hint.Redo">Rétablir exécuté</s:String>
+    <s:String x:Key="Hint.Cut">{0} image(s) coupée(s)</s:String>
+    <s:String x:Key="Hint.Copy">{0} image(s) copiée(s)</s:String>
+    <s:String x:Key="Hint.Paste">{0} image(s) collée(s)</s:String>
+    <s:String x:Key="Hint.Zoom">Zoom défini sur {0}%</s:String>
+    <s:String x:Key="Hint.SelectAll">Tous les images ont été sélectionnées</s:String>
+    <s:String x:Key="Hint.SelectSingle">Image #{0} sélectionnée</s:String>
+    <s:String x:Key="Hint.SelectInverse">Sélection inversée</s:String>
+    <s:String x:Key="Hint.Deselect">Toutes les images ont été désélectionnées</s:String>
+    <s:String x:Key="Hint.DeleteFrames">{0} image(s) supprimée(s)</s:String>
+    <s:String x:Key="Hint.Reverse">Liste des images inversée</s:String>
+    <s:String x:Key="Hint.Yoyo">Effet Yoyo appliqué</s:String>
+    <s:String x:Key="Hint.MoveLeft">Image(s) déplacée(s) vers la gauche</s:String>
+    <s:String x:Key="Hint.MoveRight">Image(s) déplacée(s) vers la droite</s:String>
+    <s:String x:Key="Hint.Resize">Images redimensionnées</s:String>
+    <s:String x:Key="Hint.Crop">Images recadrées</s:String>
+    <s:String x:Key="Hint.FlipRotate">Images retournées/pivotées</s:String>
+    <s:String x:Key="Hint.FlipRotate2">L'action de retournement s'applique aux images sélectionnées et la rotation s'applique à toutes les images</s:String>
+    <s:String x:Key="Hint.ApplyAll">Cette action s'applique à toutes les images</s:String>
+    <s:String x:Key="Hint.ApplySelected">Cette action s'applique aux images sélectionnées</s:String>
+    <s:String x:Key="Hint.Cinemagraph">Le cinemagraph s'applique à toutes les images basées sur la première image</s:String>
+    <s:String x:Key="Hint.Overlay">Superposition appliquée</s:String>
+    <s:String x:Key="Hint.TitleFrame">Image avec titre créée</s:String>
+    <s:String x:Key="Hint.TitleFrame2">Le titre d'image sera inséré avant l'image sélectionnée</s:String>
+    <s:String x:Key="Hint.Delay">Durée modifiée</s:String>
+    <s:String x:Key="Hint.Transition">Transition insérée</s:String>
+    <s:String x:Key="Hint.Reduce">Fréquence d'image réduite</s:String>
+    <s:String x:Key="Hint.Duplicates">Doublons enlevés</s:String>
     
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">Cacher</s:String>
