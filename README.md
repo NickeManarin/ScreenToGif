@@ -47,7 +47,7 @@
  * Patreon subscription: [![Patreon subscription](https://img.shields.io/badge/subscribe-Patreon-orange.svg)](https://www.patreon.com/nicke)
  * Steam wishlist: [![Steam wishlist](https://img.shields.io/badge/donate-Steam-171a21.svg)](http://steamcommunity.com/id/nickesm/wishlist)
  * Feedback (reporting bugs, ideas, etc) [![Author's Twitter](https://img.shields.io/badge/Twitter-%40NickeManarin-blue.svg)](https://twitter.com/NickeManarin)
- * [Anyone can still contribute to the languages](https://github.com/NickeManarin/ScreenToGif/tree/master/ScreenToGif/LOCALIZATION.md)
+ * [Anyone can still contribute to the languages](https://github.com/NickeManarin/ScreenToGif/blob/master/LOCALIZATION.md)
  * Create a review. :)
 
 <h2>Screenshots (and other images)</h2>
