@@ -41,6 +41,10 @@
 </a>
 </p>
 
+<h2>Please, avoid selling this app as yours</h2>
+I don't care if you copy the source code to use in your project, but please avoid simply changing the name and selling as your work. 
+That's not why I'm sharing the source code, at all.
+
 <h2>Would you like to help the project?</h2>
 
  * Paypal donation: [![Paypal page](https://img.shields.io/badge/donate-Paypal-fd8200.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=JCY2BGLULSWVJ&lc=US&item_name=ScreenToGif&item_number=screentogif&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
