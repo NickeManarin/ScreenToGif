@@ -227,11 +227,16 @@ namespace Translator
 
             if (!result.HasValue || !result.Value) return;
 
+            //Will save the file to other folder.
+            var tempFile = Path.Combine(TempPath, "Temp", Path.GetFileName(ofd.FileName));
+
+            Directory.CreateDirectory(Path.Combine(TempPath, "Temp"));
+
             //Replaces the special chars.
             var text = await Task.Factory.StartNew(() => File.ReadAllText(ofd.FileName, Encoding.UTF8).Replace("&#", "&amp;#").Replace("<!--<!--", "<!--").Replace("-->-->", "-->"));
-            await Task.Factory.StartNew(() => File.WriteAllText(ofd.FileName, text, Encoding.UTF8));
+            await Task.Factory.StartNew(() => File.WriteAllText(tempFile, text, Encoding.UTF8));
 
-            var dictionary = await Task.Factory.StartNew(() => new ResourceDictionary { Source = new Uri(Path.GetFullPath(ofd.FileName), UriKind.Absolute) });
+            var dictionary = await Task.Factory.StartNew(() => new ResourceDictionary { Source = new Uri(Path.GetFullPath(tempFile), UriKind.Absolute) });
             _resourceList.Add(dictionary);
 
             var baseCulture = FromComboBox.SelectedValue as string;
