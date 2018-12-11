@@ -3645,7 +3645,7 @@ namespace ScreenToGif.Windows
                                 switch (task.TaskType)
                                 {
                                     case DefaultTaskModel.TaskTypeEnum.MouseClicks:
-                                        if (Project.CreatedBy == ProjectByType.ScreenRecorder)
+                                        if (Project.CreatedBy == ProjectByType.ScreenRecorder && UserSettings.All.DetectMouseClicks)
                                             MouseClicksAsync(task as MouseClicksModel ?? MouseClicksModel.FromSettings());
                                         break;
 
