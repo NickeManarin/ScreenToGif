@@ -41,12 +41,17 @@
 </a>
 </p>
 
+<h2>Please, avoid selling this app as yours</h2>
+I don't care if you copy the source code to use in your project, but please avoid simply changing the name and selling as your work. 
+That's not why I'm sharing the source code, at all.
+
 <h2>Would you like to help the project?</h2>
 
  * Paypal donation: [![Paypal page](https://img.shields.io/badge/donate-Paypal-fd8200.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=JCY2BGLULSWVJ&lc=US&item_name=ScreenToGif&item_number=screentogif&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
  * Patreon subscription: [![Patreon subscription](https://img.shields.io/badge/subscribe-Patreon-orange.svg)](https://www.patreon.com/nicke)
  * Steam wishlist: [![Steam wishlist](https://img.shields.io/badge/donate-Steam-171a21.svg)](http://steamcommunity.com/id/nickesm/wishlist)
  * Feedback (reporting bugs, ideas, etc) [![Author's Twitter](https://img.shields.io/badge/Twitter-%40NickeManarin-blue.svg)](https://twitter.com/NickeManarin)
+ * [Anyone can still contribute to the languages](https://github.com/NickeManarin/ScreenToGif/blob/master/LOCALIZATION.md)
  * Create a review. :)
 
 <h2>Screenshots (and other images)</h2>

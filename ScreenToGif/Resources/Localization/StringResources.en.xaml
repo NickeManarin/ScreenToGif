@@ -529,6 +529,7 @@
     <s:String x:Key="Editor.Edit.Delay">Delay (Duration)</s:String>
     <s:String x:Key="Editor.Edit.Delay.Override">Override</s:String>
     <s:String x:Key="Editor.Edit.Delay.IncreaseDecrease">Increase or&#x0d;Decrease</s:String>
+    <s:String x:Key="Editor.Edit.Delay.Scale">Scale</s:String>
     
     <!--Image • Size and Rotation-->
     <s:String x:Key="Editor.Image.SizePosition">Size and Rotation</s:String>
@@ -799,6 +800,7 @@
     <s:String x:Key="String.Delay">Delay</s:String>
     <s:String x:Key="String.DelayMs">Delay (ms):</s:String>
     <s:String x:Key="String.ValueMs">Value -+ (ms):</s:String>
+    <s:String x:Key="String.ScaleValue">Scale Value:</s:String>
     <s:String x:Key="String.Margin">Margin:</s:String>
     <s:String x:Key="String.Padding">Padding:</s:String>
     <s:String x:Key="String.Background">Background</s:String>
@@ -855,11 +857,13 @@
     <s:String x:Key="Delay.NewValue">New Value</s:String>
     <s:String x:Key="Delay.Minimum10Ms">Minimum of 10ms per frame.</s:String>
     <s:String x:Key="Delay.DecreaseIncrease">Decrease/Increase Value</s:String>
+    <s:String x:Key="Delay.Scale">Scale Value</s:String>
     
     <s:String x:Key="Cinemagraph.Info">Use the pen to select the pixels that should not remain static (that should change among frames), by painting on top of them.</s:String>
     <s:String x:Key="OverrideDelay.Info">This new value will replace the duration (delay) of all selected frames. The value can be from 10ms to 25500ms.</s:String>
     <s:String x:Key="IncreaseDecreaseDelay.Info">This value will decrease/increase the duration (delay) of each selected frame.&#x0d;You can decrement/increment by selecting a value between -10000ms and 10000ms, but the final duration of each frame will be restricted to between 10ms and 25500ms</s:String>
-    
+    <s:String x:Key="ScaleDelay.Info">Scale the duration (delay) of each selected frame by the this percent.&#x0d;You can scale each frame's duration by selecting a value between 1% and 1000%, but the final duration of each frame will be restricted to between 10ms and 25500ms</s:String>
+
     <s:String x:Key="Transitions.Lenght">Transition Length</s:String>
     <s:String x:Key="Transitions.Delay">Transition Delay</s:String>
     <s:String x:Key="Transitions.FadeTo">Fade To...</s:String>

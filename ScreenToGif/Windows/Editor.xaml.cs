@@ -2351,13 +2351,37 @@ namespace ScreenToGif.Windows
             ClosePanel();
         }
 
-        #endregion
+        private void ScaleDelay_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Pause();
+            ShowPanel(PanelType.ScaleDelay, StringResource("Editor.Edit.Delay.Scale"), "Vector.ScaleDelay", ApplyScaleDelayButtonClick);
+        }
 
-        #endregion
+        private void ApplyScaleDelayButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (ScaleDelayIntegerUpDown.Value == 0 || ScaleDelayIntegerUpDown.Value == 100)
+            {
+                ClosePanel();
+                return;
+            }
 
-        #region Image Tab
+            ActionStack.SaveState(ActionStack.EditAction.Properties, Project.Frames, SelectedFramesIndex());
 
-        private void Image_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+            Cursor = Cursors.AppStarting;
+
+            _delayFramesDel = Delay;
+            _delayFramesDel.BeginInvoke(DelayChangeType.Scale, ScaleDelayIntegerUpDown.Value, DelayCallback, null);
+
+            ClosePanel();
+        }
+
+      #endregion
+
+      #endregion
+
+      #region Image Tab
+
+      private void Image_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = FrameListView != null && FrameListView.SelectedItem != null && !IsLoading;
         }
@@ -4621,6 +4645,10 @@ namespace ScreenToGif.Windows
                     IncreaseDecreaseDelayGrid.Visibility = Visibility.Visible;
                     ShowHint("Hint.ApplySelected", true);
                     break;
+                case PanelType.ScaleDelay:
+                    ScaleDelayGrid.Visibility = Visibility.Visible;
+                    ShowHint("Hint.ApplySelected", true);
+                    break;
                 case PanelType.Cinemagraph:
                     CinemagraphGrid.Visibility = Visibility.Visible;
                     ShowHint("Hint.Cinemagraph", true);
@@ -6422,9 +6450,16 @@ namespace ScreenToGif.Windows
                 {
                     frameInfo.Delay = delay;
                 }
-                else
+                else if (type == DelayChangeType.IncreaseDecrease)
                 {
                     frameInfo.Delay += delay;
+
+                    if (frameInfo.Delay < 10)
+                        frameInfo.Delay = 10;
+                }
+                else
+                {
+                    frameInfo.Delay = frameInfo.Delay * delay / 100;
 
                     if (frameInfo.Delay < 10)
                         frameInfo.Delay = 10;
