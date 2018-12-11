@@ -78,6 +78,11 @@ namespace ScreenToGif.Controls
         /// </summary>
         private readonly List<Rect> _blindSpots = new List<Rect>();
 
+        /// <summary>
+        /// The latest window that contains the mouse cursor on top of it.
+        /// </summary>
+        private DetectedRegion _hitTestWindow;
+
 
         public enum ModeType
         {
@@ -241,14 +246,14 @@ namespace ScreenToGif.Controls
             _retryButton.Click += (sender, e) => { Retry(); };
             _cancelButton.Click += (sender, e) => { Cancel(); };
 
-            Monitors = Monitor.AllMonitorsScaled(Scale);
+            Monitors = Monitor.AllMonitorsScaled(Scale, true);
         }
 
         private void SystemEvents_DisplaySettingsChanged(object o, EventArgs eventArgs)
         {
             Scale = this.Scale();
 
-            Monitors = Monitor.AllMonitorsScaled(Scale);
+            Monitors = Monitor.AllMonitorsScaled(Scale, true);
 
             //TODO: Adjust the selection and the UI when this happens.
         }
@@ -270,6 +275,9 @@ namespace ScreenToGif.Controls
             }
             else
             {
+                if (Mode == ModeType.Window && _hitTestWindow != null)
+                    Native.SetForegroundWindow(_hitTestWindow.Handle);
+
                 if (Selected.Width > 0 && Selected.Height > 0)
                     RaiseAcceptedEvent();
             }
@@ -318,8 +326,9 @@ namespace ScreenToGif.Controls
             {
                 var current = e.GetPosition(this);
 
-                Selected = Windows.FirstOrDefault(x => x.Bounds.Contains(current))?.Bounds ?? Rect.Empty;
-
+                _hitTestWindow = Windows.FirstOrDefault(x => x.Bounds.Contains(current));
+                Selected = _hitTestWindow?.Bounds ?? Rect.Empty;
+                
                 AdjustInfo(current);
             }
 
@@ -460,7 +469,7 @@ namespace ScreenToGif.Controls
             Canvas.SetLeft(_zoomGrid, left);
             Canvas.SetTop(_zoomGrid, top);
 
-            _zoomTextBlock.Text = $"X: {scaledPoint.X} ◇ Y: {scaledPoint.Y}";
+            _zoomTextBlock.Text = $"X: {scaledPoint.X + SystemParameters.VirtualScreenLeft} ◇ Y: {scaledPoint.Y + SystemParameters.VirtualScreenTop}";
 
             _zoomGrid.Visibility = Visibility.Visible;
         }
@@ -486,10 +495,10 @@ namespace ScreenToGif.Controls
             //But the cursor point is always starting from 0,0
             //So, the cursor point may not fall into any monitor bounds (exceed the maximum right / bottom coordinate)
             //As a result, convert the cursor point into the same axis of monitors by plusing the negative left / top coordinate
-            double minimumMonitorTop = Monitors.Min(x => x.Bounds.Top);
-            double minimumMonitorLeft = Monitors.Min(x => x.Bounds.Left);
+            //double minimumMonitorTop = Monitors.Min(x => x.Bounds.Top);
+            //double minimumMonitorLeft = Monitors.Min(x => x.Bounds.Left);
 
-            Point absolutePoint = new Point(point.Value.X + minimumMonitorLeft, point.Value.Y + minimumMonitorTop);
+            var absolutePoint = new Point(point.Value.X, point.Value.Y);
 
             var monitor = Monitors.FirstOrDefault(x => x.Bounds.Contains(absolutePoint));
 
@@ -707,7 +716,7 @@ namespace ScreenToGif.Controls
             if (Selected.IsEmpty)// || !FinishedSelection)
             {
                 foreach (var monitor in Monitors)
-                    _blindSpots.Add(new Rect(new Point(monitor.Bounds.Right - 40, 0), new Size(40, 40)));
+                    _blindSpots.Add(new Rect(new Point(monitor.Bounds.Right - 40, monitor.Bounds.Top), new Size(40, 40)));
 
                 return;
             }
@@ -769,7 +778,7 @@ namespace ScreenToGif.Controls
             if (Mode == ModeType.Window)
                 Windows = Native.EnumerateWindows(Scale).AdjustPosition(SystemParameters.VirtualScreenLeft, SystemParameters.VirtualScreenTop);
             else if (Mode == ModeType.Fullscreen)
-                Windows = Monitor.AllMonitorsScaled(Scale).Select(x => new DetectedRegion(x.Handle, x.Bounds.Offset(-1), x.Name)).ToList().AdjustPosition(SystemParameters.VirtualScreenLeft, SystemParameters.VirtualScreenTop);
+                Windows = Monitor.AllMonitorsScaled(Scale, true).Select(x => new DetectedRegion(x.Handle, x.Bounds.Offset(-1), x.Name)).ToList();
             else
                 Windows.Clear();
         }
@@ -795,6 +804,8 @@ namespace ScreenToGif.Controls
 
         public void OnLoaded(object o, RoutedEventArgs routedEventArgs)
         {
+            Keyboard.Focus(this);
+
             _blindSpots.Clear();
 
             if (EmbeddedMode)
@@ -866,7 +877,7 @@ namespace ScreenToGif.Controls
                 Canvas.SetTop(button, monitor.Bounds.Top);
                 Panel.SetZIndex(button, 8);
 
-                _blindSpots.Add(new Rect(new Point(monitor.Bounds.Right - 40, 0), new Size(40, 40)));
+                _blindSpots.Add(new Rect(new Point(monitor.Bounds.Right - 40, monitor.Bounds.Top), new Size(40, 40)));
             }
 
             #endregion
@@ -1110,7 +1121,7 @@ namespace ScreenToGif.Controls
         {
             if (Mode != ModeType.Region || !_rectangle.IsMouseCaptured || e.LeftButton != MouseButtonState.Pressed) return;
 
-            //A quick double quick will fire this event, whe it should fire the OnMouseLeftButtonUp.
+            //A quick double click will fire this event, whe it should fire the OnMouseLeftButtonUp.
             if (Selected.IsEmpty || Selected.Width < 10 || Selected.Height < 10)
                 return;
 

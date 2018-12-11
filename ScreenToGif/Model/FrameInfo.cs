@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Windows;
+using System.Windows.Media;
 using ScreenToGif.Util;
 
 namespace ScreenToGif.Model
@@ -110,6 +111,12 @@ namespace ScreenToGif.Model
         /// </summary>
         [IgnoreDataMember]
         public Int32Rect Rect { get; set; }
+
+        /// <summary>
+        /// The color that will be treated as transparent on this frame.
+        /// </summary>
+        [IgnoreDataMember]
+        public Color ColorKey { get; set; }
 
         /// <summary>
         /// True if the frame has area, width and height > 0.

@@ -89,7 +89,7 @@ namespace ScreenToGif.ImageUtil.Video
                 var aviStreamInfo = new AVISTREAMINFOW
                 {
                     fccType = GetFourCc("vids"),
-                    fccHandler = GetFourCc("CVID"), // 808810089, //IV50
+                    fccHandler = GetFourCc("CVID"), //CVID// 808810089, //IV50 //'DIB '//MJPG
                     dwScale = 1,
                     dwRate = (uint)frameRate,
                     dwSuggestedBufferSize = (uint)(_height * _stride),
@@ -144,7 +144,8 @@ namespace ScreenToGif.ImageUtil.Video
                     biHeight = _height,
                     biPlanes = 1,
                     biBitCount = 24,
-                    biSizeImage = (uint)(_stride * _height)
+                    biSizeImage = (uint)(_stride * _height),
+                    biCompression = 0 //BI_RGB
                 };
 
                 rv = AVIStreamSetFormat(_compStream, 0, ref streamFormat, 40);
@@ -154,7 +155,7 @@ namespace ScreenToGif.ImageUtil.Video
             }
             catch
             {
-                // Clean up
+                //Clean up.
                 Dispose(false);
 
                 try

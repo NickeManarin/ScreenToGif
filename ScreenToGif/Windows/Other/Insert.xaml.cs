@@ -100,18 +100,15 @@ namespace ScreenToGif.Windows.Other
             {
                 var adornerList = _adornerLayer.GetAdorners(_selectedElement);
 
-                if (adornerList != null)
+                var adorner = adornerList?.OfType<ResizingAdorner>().FirstOrDefault();
+
+                if (adorner != null)
                 {
-                    var adorner = adornerList.OfType<ResizingAdorner>().FirstOrDefault();
+                    adorner.Destroy();
 
-                    if (adorner != null)
-                    {
-                        adorner.Destroy();
-
-                        //Remove the adorner from the selected element
-                        _adornerLayer.Remove(adorner);
-                        _selectedElement = null;
-                    }
+                    //Remove the adorner from the selected element
+                    _adornerLayer.Remove(adorner);
+                    _selectedElement = null;
                 }
             }
 

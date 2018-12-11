@@ -4,42 +4,23 @@
         xmlns:u="clr-namespace:ScreenToGif.Util"
         xmlns:s="clr-namespace:System;assembly=mscorlib"
         xmlns:t="clr-namespace:ScreenToGif"
+        xmlns:h="clr-namespace:ScreenToGif.Controls.Shapes"
         x:Class="ScreenToGif.Windows.Other.TestField" x:Name="ThisWindow"
-        Title="Window Test" Height="500" Width="394" WindowStartupLocation="CenterScreen" Background="#FFFFFFFF" 
+        Title="Window Test" Height="500" Width="400" WindowStartupLocation="CenterScreen" Background="#FFFFFFFF" 
         Loaded="WindowTest_OnLoaded" LocationChanged="WindowTest_OnLocationChanged">
 
-    <!--DataContext="{StaticResource AppViewModel}"-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="25"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-        <!--<ToggleButton Grid.Column="0" Name="EmpresaButton" Width="22" Content="{StaticResource Vector.Arrow.Blue.Top}" Padding="4" ToolTipService.Placement="Top" />
-        
-        <Popup Grid.Row="1" Placement="Bottom" Margin="0" StaysOpen="False" Width="400" Height="Auto" MinHeight="100" MaxHeight="400" SnapsToDevicePixels="True" AllowsTransparency="True"
-               IsOpen="{Binding IsChecked, ElementName=EmpresaButton}" PlacementTarget="{Binding ElementName=EmpresaButton}" HorizontalOffset="-2">
-            <n:NotificationListControl x:Name="NotificationList"/>
-        </Popup>-->
-        
-        <!--<Button Grid.Row="1" Width="80" Command="{Binding Source={StaticResource AppViewModel}, Path=OpenOptions}"/>-->
-        
-        <!--<Menu x:Name="GridSizeContextMenu">
-            <n:ImageMenuItem Header="Example" StaysOpenOnClick="True">
-                <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Height}" IsHitTestVisible="False" Image="{StaticResource Vector.WidthHeight}" ContentHeight="16" ContentWidth="16"/>
-                <n:IntegerBox x:Name="GridHeightIntegerBox" Minimum="1" Maximum="1000" MinWidth="130" Margin="-10,0,-70,0"
-                              UpdateOnInput="True" Value="{Binding GridSize.Height}" Tag="Editor"/>
-
-                <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Width}" IsHitTestVisible="False" Image="{StaticResource Vector.WidthHeight}" ContentHeight="16" ContentWidth="16"/>
-                <n:IntegerBox x:Name="GridWidthIntegerBox" Minimum="1" Maximum="1000" MinWidth="80" Margin="-10,0,0,0"
-                          UpdateOnInput="True" Value="{Binding GridSize.Width}" Tag="Editor"/>
-                <Separator/>
-
-                <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Apply}" Image="{StaticResource Vector.Ok}" ContentHeight="16" ContentWidth="16"/>
-            </n:ImageMenuItem>
-        </Menu>-->
-        
         <!--<Grid.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
@@ -48,85 +29,24 @@
             </ResourceDictionary>
         </Grid.Resources>-->
 
-        <!--<n:SplitButton Grid.Row="1" Grid.Column="2" x:Name="MainSplitButton" Style="{StaticResource SplitButton.NoText}" ContentHeight="20">
-            <n:ImageMenuItem Image="{StaticResource Vector.Crop}" Header="Region" Command="Print" Click="MenuItem_OnClick"/>
-            <n:ImageMenuItem Image="{StaticResource Vector.Application}" Header="Window" Command="Copy" Click="MenuItem2_OnClick"/>
-            <n:ImageMenuItem Image="{StaticResource Vector.WidthHeight}" Header="Screen" Command="Save" Click="MenuItem3_OnClick"/>
-        </n:SplitButton>-->
+        <Button Grid.Row="0" Grid.Column="0" Content="Select" Click="Select_Click"/>
+        <Button Grid.Row="0" Grid.Column="1" Content="Shape" Click="Shape_Click"/>
+        <Button Grid.Row="0" Grid.Column="2" Content="Ink" Click="Ink_Click"/>
 
-        <!--<r:RadialPanel Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4">
-            <RadioButton Content="1"/>
-            <RadioButton Content="2"/>
-            <RadioButton Content="3"/>
-            <RadioButton Content="4"/>
-            <RadioButton Content="5"/>
-            <RadioButton Content="6"/>
-            <RadioButton Content="7"/>
-            <RadioButton Content="8"/>
-            <RadioButton Content="9"/>
-            <RadioButton Content="10"/>
-            <RadioButton Content="11"/>
-        </r:RadialPanel>-->
+        <Button Grid.Row="1" Grid.Column="0" Content="Thickness" Click="Thickness_Click"/>
+        <Button Grid.Row="1" Grid.Column="1" Content="Color" Click="Color_Click"/>
+        <Button Grid.Row="1" Grid.Column="2" Content="DashArray" Click="DashArray_Click"/>
 
-        <!--<n:StatusList Grid.Row="0" Grid.Column="0" x:Name="StatusList"/>
-        
-        <Button Grid.Row="1" Content="Add" Click="AddButton_OnClick"/>-->
-        
-        <!--<ListView Grid.Row="0" Grid.RowSpan="3" Grid.Column="0">
-            <n:EncoderListViewItem OutputType="Apng" CurrentFrame="10" Text="Encoding" Status="Processing" FrameCount="100" Percentage="20"/>
-            <n:EncoderListViewItem Status="Completed" SizeInBytes="2000000" OutputType="Gif" CopiedToClipboard="True" CommandExecuted="True" Uploaded="True" UploadLink="www.imgur.com"/>
-        </ListView>-->
+        <!--<Canvas Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" x:Name="MainCanvas">
+            <h:Triangle x:Name="TestTriangle" Height="100" Width="100" Stroke="Black" StrokeThickness="5" Canvas.Left="100" Canvas.Top="100"/>
+        </Canvas>-->
 
-        <!--<r:HexadecimalBox Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" Width="100"/>-->
-        <!--<n:KeyBox Grid.Row="1" HorizontalAlignment="Center" MinWidth="100" AllowAllKeys="True"/>-->
+        <!--<n:MoveResizeControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" x:Name="FreeTextOverlayControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" ClipToBounds="True" CanResize="True">
+            <TextBlock x:Name="FreeTextTextBlock" Padding="0" Text="LALALA"  FontSize="20" Foreground="Black"/>
+        </n:MoveResizeControl>-->
 
-        <!--<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
-            <r:ImageButton x:Name="SnapButton" Content="{StaticResource Vector.Crop}" Margin="0" Style="{StaticResource Style.Button.NoText}" 
-                               HorizontalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}" MaxSize="20" FlowDirection="LeftToRight" 
-                               Padding="2" TabIndex="2">
-                <r:ImageButton.ToolTip>
-                    <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Recorder.SnapToWindow}"/>
-                </r:ImageButton.ToolTip>
-            </r:ImageButton>
-
-            <r:ImageButton Content="{StaticResource Vector.Crop}" Margin="0" Style="{StaticResource Style.Button.NoText}" 
-                               HorizontalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}" MaxSize="20" FlowDirection="LeftToRight" 
-                               Padding="2" TabIndex="2">
-                <r:ImageButton.ToolTip>
-                    <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Recorder.SnapToWindow}"/>
-                </r:ImageButton.ToolTip>
-            </r:ImageButton>
-
-            <r:ImageButton Content="{StaticResource Vector.Crop}" Margin="0" Style="{StaticResource Style.Button.NoText}" 
-                               HorizontalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}" MaxSize="20" FlowDirection="LeftToRight" 
-                               Padding="2" TabIndex="2">
-                <r:ImageButton.ToolTip>
-                    <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Recorder.SnapToWindow}"/>
-                </r:ImageButton.ToolTip>
-            </r:ImageButton>
-        </StackPanel>-->
-
-        <!--<Label Grid.Row="0" Grid.Column="0" Name="LeftLabel" Content="{Binding Left, ElementName=ThisWindow}"/>
-        <Label Grid.Row="1" Grid.Column="0" Name="LeftLabel2" Content="{Binding Left, ElementName=ThisWindow}"/>
-        
-        <Label Grid.Row="0" Grid.Column="1" Name="TopLabel" Content="{Binding Top, ElementName=ThisWindow}" HorizontalAlignment="Center"/>
-        <Label Grid.Row="1" Grid.Column="1" Name="TopLabel2" Content="{Binding Top, ElementName=ThisWindow}" HorizontalAlignment="Center"/>
-
-        <Label Grid.Row="0" Grid.Column="3" Name="RightLabel" Content="{Binding Width, ElementName=ThisWindow}"/>
-        <Label Grid.Row="1" Grid.Column="3" Name="RightLabel2" Content="{Binding Width, ElementName=ThisWindow}"/>-->
-
-        <!--<Grid Grid.Row="2" Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="75*"/>
-                <RowDefinition Height="40*"/>
-            </Grid.RowDefinitions>
-
-
-            <TextBox x:Name="InputTextBox" Margin="10,10,65,10" TextWrapping="Wrap" Text="M 1.81,7 C1.81,7 0,7 0,7 0,7 3.18,3.5 3.18,3.5 3.18,3.5 0,0 0,0 0,0 1.81,0 1.81,0 1.81,0 5,3.5 5,3.5 5,3.5 1.81,7 1.81,7 z" Grid.Row="1"/>
-            <Button x:Name="RefreshButton" Content="Update" Margin="0,10,5,0" Grid.Row="1" Height="20" VerticalAlignment="Top" Click="RefreshButton_Click" HorizontalAlignment="Right" Width="55"/>
-        </Grid>-->
-
-        <!--<n:KeyBox Grid.Row="2" Grid.Column="0" x:Name="DiscardKeyBox" Height="23" Margin="3" VerticalAlignment="Center" 
-                  MainKey="A" ModifierKeys="Control"/>-->
+        <n:DrawingCanvas Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" x:Name="MainDrawingCanvas" DrawingMode="Select">
+            <!--<h:Triangle x:Name="TestTriangle" Height="100" Width="100" Stroke="Black" StrokeThickness="5" Canvas.Left="100" Canvas.Top="100"/>-->
+        </n:DrawingCanvas>
     </Grid>
 </Window>

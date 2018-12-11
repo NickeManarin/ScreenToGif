@@ -546,6 +546,7 @@
     <!--Image • Overlay-->
     <s:String x:Key="Editor.Image.Overlay">Sobreposição</s:String>
     <s:String x:Key="Editor.Image.FreeDrawing">Desenho&#x0d;Livre</s:String>
+    <s:String x:Key="Editor.Image.Shape">Formas&#x0d;Geométricas</s:String>
     <s:String x:Key="Editor.Image.Clicks">Cliques&#x0d;do Mouse</s:String>
     <s:String x:Key="Editor.Image.Watermark">Marca D'água</s:String>
     <s:String x:Key="Editor.Image.Cinemagraph">Cinemagrafia</s:String>
@@ -589,7 +590,7 @@
     <s:String x:Key="Editor.DiscardPreviousProject.Message">Se você optar por não fazer isso, o projeto anterior estará disponível para abrir via Projetos Recentes.</s:String>
     <s:String x:Key="Editor.DeleteFrames.Title">Remover Quadros</s:String>
     <s:String x:Key="Editor.DeleteFrames.Instruction">Tem certeza de que deseja excluir?</s:String>
-    <s:String x:Key="Editor.DeleteFrames.Message">Esta ação vai remover {0} quadros(s).\n\rVocê poderá desfazer esta ação depois.</s:String>
+    <s:String x:Key="Editor.DeleteFrames.Message">Esta ação vai remover {0} quadro(s).\n\rVocê poderá desfazer esta ação depois.</s:String>
     <s:String x:Key="Editor.Exiting.Title">Fechando o Editor</s:String>
     <s:String x:Key="Editor.Exiting.Instruction">Você tem certeza que deseja sair?</s:String>
     <s:String x:Key="Editor.Exiting.Message">O projeto atual em que vocês estava trabalhando pode ser aberto novamente em 'Projetos Recentes'.</s:String>
@@ -816,6 +817,12 @@
     <s:String x:Key="FreeDrawing.Highlighter">Marcador</s:String>
     <s:String x:Key="FreeDrawing.FitToCurve">Ajustar à Curva</s:String>
     
+    <s:String x:Key="S.Shapes.Mode.Insert">Inserir</s:String>
+    <s:String x:Key="S.Shapes.Shapes">Formas Geométricas</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Radius">Raio:</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Dashes">Traços:</s:String>
+    <s:String x:Key="S.Shapes.Fill">Preenchimento</s:String>
+
     <s:String x:Key="S.MouseClicks">Cliques do Mouse</s:String>
     <s:String x:Key="S.MouseClicks.Warning.None">Não há cliques de mouse detectados no seu projeto.</s:String>
     
@@ -899,7 +906,12 @@
     <s:String x:Key="S.SaveAs.FlipVertically">Inverter o vídeo (verticalmente).</s:String>
     <s:String x:Key="S.SaveAs.ImagesOptions">Opções de Imagem</s:String>
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">Compactar em um zip.</s:String>
-    
+    <s:String x:Key="S.SaveAs.PsdOptions">Opções do Psd</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress">Comprimir a imagem.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">Comprime os dados da imagem usando o algoritmo RLE.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Timeline">Exportar os dados da timeline.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">Exporta os tempos de cada frame, ao invés de exportar apenas as imagens.</s:String>
+
     <!--Save As • Save options-->
     <s:String x:Key="S.SaveAs.SaveOptions">Opções de salvamento</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Salvar o arquivo em uma pasta de sua escolha.</s:String>

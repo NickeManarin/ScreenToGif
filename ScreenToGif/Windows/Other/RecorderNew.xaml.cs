@@ -610,7 +610,7 @@ namespace ScreenToGif.Windows.Other
                 MainBorder.Arrange(new Rect(MainBorder.DesiredSize));
             }
 
-            var monitors = Monitor.AllMonitors;
+            var monitors = Monitor.AllMonitorsScaled(1, true); //TODO: Scale it?
 
             //Calculates how much space left at all sides of the current selected region.
             var bottom = new Rect(Region.Left + Left + Region.Width / 2 - MainBorder.ActualWidth / 2, Region.Bottom + Top + 10, MainBorder.ActualWidth, MainBorder.ActualHeight);
@@ -618,7 +618,8 @@ namespace ScreenToGif.Windows.Other
             var left = new Rect(Region.Left + Left - MainBorder.ActualWidth - 10, Region.Top + Top + Region.Height / 2 - MainBorder.ActualHeight / 2, MainBorder.ActualWidth, MainBorder.ActualHeight);
             var right = new Rect(Region.Right + Left + 10, Region.Top + Top + Region.Height / 2 - MainBorder.ActualHeight / 2, MainBorder.ActualWidth, MainBorder.ActualHeight);
 
-            if (SystemParameters.VirtualScreenHeight - (Region.Top + Region.Height) > 100 && monitors.Any(x => x.Bounds.Contains(bottom)))
+            //SystemParameters.VirtualScreenHeight - 
+            if ((Region.Top + Region.Height) > 100 && monitors.Any(x => x.Bounds.Contains(bottom)))
             {
                 //Show at the bottom of the main rectangle.
                 Canvas.SetLeft(MainBorder, Region.Left + Region.Width / 2 - MainBorder.ActualWidth / 2);
@@ -642,7 +643,8 @@ namespace ScreenToGif.Windows.Other
                 return;
             }
 
-            if (SystemParameters.VirtualScreenWidth - (Region.Left + Region.Width) > 100 && monitors.Any(x => x.Bounds.Contains(right)))
+            //SystemParameters.VirtualScreenWidth -
+            if ((Region.Left + Region.Width) > 100 && monitors.Any(x => x.Bounds.Contains(right)))
             {
                 //Show to the right of the main rectangle.
                 Canvas.SetLeft(MainBorder, Region.Right + 10);
@@ -928,14 +930,8 @@ namespace ScreenToGif.Windows.Other
         /// <param name="bitmap">The Bitmap to save in the disk.</param>
         private void AddFrames(string filename, Bitmap bitmap)
         {
-            //var mutexLock = new Mutex(false, bitmap.GetHashCode().ToString());
-            //mutexLock.WaitOne();
-
             bitmap.Save(filename);
             bitmap.Dispose();
-
-            //GC.Collect(1);
-            //mutexLock.ReleaseMutex();
         }
 
         private void UpdateScreenDpi()
@@ -964,7 +960,7 @@ namespace ScreenToGif.Windows.Other
 
             #endregion
 
-            var monitors = Monitor.AllMonitorsScaled(_scale);
+            var monitors = Monitor.AllMonitorsScaled(_scale, true);
 
             //When loading the recorder, the status controls are not well positioned.
             //When loading, if the selection extends top to bottom or if it crosses between two monitors, the selection will be lost.

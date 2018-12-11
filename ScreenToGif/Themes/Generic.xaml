@@ -2880,4 +2880,39 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style TargetType="{x:Type n:DrawingCanvas}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Focusable" Value="True"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type n:DrawingCanvas}">
+                    <Grid>
+                        <Canvas x:Name="MainCanvas" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Background="{TemplateBinding Background}">
+                            <Rectangle x:Name="SelectionRectangle" Fill="#80737373" Panel.ZIndex="{Binding RelativeSource={RelativeSource TemplatedParent}, Path= ControlsZIndex}" Stroke="#FF737373" StrokeThickness="1" Tag="0"
+                                       Canvas.Left="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selection.Left}" Canvas.Top="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selection.Top}"
+                                       Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selection.Width}" Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selection.Height}"/>
+                        </Canvas>
+
+                        <InkCanvas x:Name="MainInkCanvas" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Background="Transparent" Visibility="Collapsed"/>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="DrawingMode" Value="Shape">
+                            <Setter Property="Cursor" Value="Cross"/>
+                            <Setter TargetName="SelectionRectangle" Property="Cursor" Value="SizeAll"/>
+                        </Trigger>
+                        <Trigger Property="DrawingMode" Value="Select">
+                            <Setter TargetName="SelectionRectangle" Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

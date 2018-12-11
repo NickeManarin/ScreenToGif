@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -105,10 +106,63 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
 
             //Unlock bitmap data.
             _data.Unlock();
+            
+            GC.Collect(1);
+
+            return _data;
+        }
+
+        public WriteableBitmap UnlockBitsWithoutCommit()
+        {
+            //Unlock bitmap data.
+            _data.Unlock();
 
             GC.Collect(1);
 
             return _data;
+        }
+
+        public WriteableBitmap UnlockBitsAndCrop(Int32Rect rect)
+        {
+            #region Crop
+
+            var sourceWidth = _data.PixelWidth;
+            var blockSize = _source.Format.BitsPerPixel / 8;
+            var outputPixels = new byte[rect.Width * rect.Height * blockSize];
+
+            //Create the array of bytes.
+            for (var line = 0; line <= rect.Height - 1; line++)
+            {
+                var sourceIndex = ((rect.Y + line) * sourceWidth + rect.X) * blockSize;
+                var destinationIndex = line * rect.Width * blockSize;
+
+                Array.Copy(Pixels, sourceIndex, outputPixels, destinationIndex, rect.Width * blockSize);
+            }
+
+            #endregion
+
+            //Get the resultant image as WriteableBitmap with specified size.
+            var result = new WriteableBitmap(rect.Width, rect.Height, _source.DpiX, _source.DpiY, _source.Format, _source.Palette);
+            result.Lock();
+
+            //for (var line = 0; line <= rect.Height - 1; line++)
+            //{
+            //    var sourceIndex = ((rect.Y + line) * sourceWidth + rect.X) * blockSize;
+            //    var destinationIndex = line * rect.Width * blockSize;
+
+            //    //Native.MemoryCopy(Marshal.UnsafeAddrOfPinnedArrayElement(outputPixels, destinationIndex), IntPtr.Add(result.BackBuffer, sourceIndex), new UIntPtr((uint) rect.Width * (uint) blockSize));
+
+            //    //Array.Copy(Pixels, sourceIndex, outputPixels, destinationIndex, rect.Width * blockSize);
+            //    //Marshal.Copy(outputPixels, sourceIndex, result.BackBuffer, rect.Width * blockSize); //Errado.
+            //}
+
+            Marshal.Copy(outputPixels, 0, result.BackBuffer, outputPixels.Length);
+
+            result.Unlock();
+            _data.Unlock();
+
+            GC.Collect(1);
+            return result;
         }
 
         /// <summary>
@@ -213,13 +267,6 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
                 //list = Pixels.Select((x, i) => new { x, i }).GroupBy(x => x.i / 3).Select(g => g.ToList()).Select(g => new Color { R = g[0].x, G = g[1].x, B = g[2].x }).ToList();
                 //list = Enumerable.Range(0, Pixels.Length / 3).ToLookup(i => new Color { B = Pixels[i * 3], G = Pixels[i * 3 + 1], R = Pixels[i * 3 + 2]}).Cast<Color>().ToList();
             }
-
-            return list;
-        }
-
-        public List<Color> GetAllPixels(bool sim)
-        {
-            var list = new List<Color>();
 
             return list;
         }

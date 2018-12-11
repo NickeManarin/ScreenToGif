@@ -1398,6 +1398,40 @@ namespace ScreenToGif.Util
 
         #endregion
 
+        #region Editor • Shapes
+
+        public double ShapesThickness
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color ShapesOutlineColor
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public double ShapesRadius
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        public int ShapesDashes
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color ShapesFillColor
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        #endregion
+
         #region Editor • Mouse Clicks
 
         public Color MouseClicksColor
@@ -1676,6 +1710,12 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public bool IsPsdOptionsExpanded
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
         public bool IsSaveOptionsExpanded
         {
             get => (bool)GetValue();
@@ -1914,7 +1954,7 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
-        //Video.
+        //Video
         public int AviQuality
         {
             get => (int)GetValue();
@@ -2071,6 +2111,24 @@ namespace ScreenToGif.Util
         }
 
         //Photoshop.
+        public bool CompressImage
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool SaveTimeline
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool MaximizeCompatibility
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
         public string LatestPhotoshopOutputFolder
         {
             get => (string)GetValue();

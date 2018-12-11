@@ -25,7 +25,7 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn Header="{DynamicResource KeyStrokes.Edit.Keys}" IsReadOnly="False" Width="*" CanUserSort="False">
+                <DataGridTemplateColumn Header="{DynamicResource KeyStrokes.Edit.Keys}" IsReadOnly="True" Width="*" CanUserSort="False">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ItemsControl x:Name="MainItemsControl" ItemsSource="{Binding Path=KeyList, UpdateSourceTrigger=PropertyChanged}">

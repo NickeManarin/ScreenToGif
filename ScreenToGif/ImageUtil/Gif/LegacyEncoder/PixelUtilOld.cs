@@ -68,9 +68,7 @@ namespace ScreenToGif.ImageUtil.Gif.LegacyEncoder
 
             // Check if bpp (Bits Per Pixel) is 8, 24, or 32
             if (Depth != 8 && Depth != 24 && Depth != 32)
-            {
                 throw new ArgumentException("Only 8, 24 and 32 bpp images are supported.");
-            }
 
             // Lock bitmap and return bitmap data
             _bitmapData = _source.LockBits(rect, ImageLockMode.ReadWrite,

@@ -55,21 +55,15 @@ namespace ScreenToGif.Windows
         public Options()
         {
             InitializeComponent();
-
+            
 #if UWP
                 PaypalLabel.Visibility = Visibility.Collapsed;
 #endif
         }
 
-        public Options(int index)
+        public Options(int index) : this()
         {
-            InitializeComponent();
-
             SelectTab(index);
-
-#if UWP
-                PaypalLabel.Visibility = Visibility.Collapsed;
-#endif
         }
 
         #region App Settings
@@ -1738,7 +1732,15 @@ namespace ScreenToGif.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            ProxyPasswordBox.Password = WebHelper.Unprotect(UserSettings.All.ProxyPassword);
+            try
+            {
+                ProxyPasswordBox.Password = WebHelper.Unprotect(UserSettings.All.ProxyPassword);
+            }
+            catch (Exception ex)
+            {
+                StatusBand.Warning("It was not possible to corectly load your proxy password. This usually happens when sharing the app settings with different computers.");
+                LogWriter.Log(ex, "Unprotect data");
+            }
 
             UpdateImgurStatus();
             UpdateAlbumList(true);

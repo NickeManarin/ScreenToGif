@@ -149,34 +149,39 @@
         FreeDrawing = -5,
 
         /// <summary>
+        /// Shapes Panel.
+        /// </summary>
+        Shapes = -6,
+
+        /// <summary>
         /// Watermark Panel.
         /// </summary>
-        Watermark = -6,
+        Watermark = -7,
 
         /// <summary>
         /// Border Panel.
         /// </summary>
-        Border = -7,
+        Border = -8,
 
         /// <summary>
         /// Cinemagraph Panel.
         /// </summary>
-        Cinemagraph = -8,
+        Cinemagraph = -9,
 
         /// <summary>
         /// Progress Panel.
         /// </summary>
-        Progress = -9,
+        Progress = -10,
 
         /// <summary>
         /// Key Strokes Panel.
         /// </summary>
-        KeyStrokes = -10,
+        KeyStrokes = -11,
 
         /// <summary>
         /// Obfuscate Panel.
         /// </summary>
-        Obfuscate = -11,
+        Obfuscate = -12,
     }
 
     /// <summary>
@@ -540,5 +545,22 @@
         WebcamRecorder = 2,
         BoardRecorder = 3,
         Editor = 4,
+    }
+
+    /// <summary>
+    /// The types of drawings.
+    /// </summary>
+    public enum DrawingModeType
+    {
+        None = 0,
+        Ink,
+        Select,
+        EraseByPoint,
+        EraseByObject,
+        Rectangle,
+        Circle,
+        Triangle,
+        Arrow,
+        Baloon,
     }
 }

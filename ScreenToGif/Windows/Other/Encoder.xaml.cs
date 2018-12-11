@@ -403,15 +403,9 @@ namespace ScreenToGif.Windows.Other
                                 Update(id, 0, FindResource("Encoder.Analyzing").ToString());
 
                                 if (param.DummyColor.HasValue)
-                                {
-                                    var color = Color.FromArgb(param.DummyColor.Value.R, param.DummyColor.Value.G, param.DummyColor.Value.B);
-
-                                    listFrames = ImageMethods.PaintTransparentAndCut(listFrames, color, id, tokenSource);
-                                }
+                                    listFrames = ImageMethods.PaintTransparentAndCut(listFrames, param.DummyColor.Value, id, tokenSource);
                                 else
-                                {
                                     listFrames = ImageMethods.CutUnchanged(listFrames, id, tokenSource);
-                                }
                             }
                             else
                             {
@@ -483,10 +477,7 @@ namespace ScreenToGif.Windows.Other
                                 {
                                     if (param.DummyColor.HasValue)
                                     {
-                                        var color = Color.FromArgb(param.DummyColor.Value.R,
-                                            param.DummyColor.Value.G, param.DummyColor.Value.B);
-
-                                        encoder.SetTransparent(color);
+                                        encoder.SetTransparent(param.DummyColor.Value);
                                         encoder.SetDispose(1); //Undraw Method, "Leave".
                                     }
 
@@ -639,11 +630,11 @@ namespace ScreenToGif.Windows.Other
 
                                 if (File.Exists(param.Filename))
                                     File.Delete(param.Filename);
-                                
+
                                 var gifski = new GifskiInterop();
                                 var handle = gifski.Start(UserSettings.All.GifskiQuality, UserSettings.All.Looped);
 
-                                ThreadPool.QueueUserWorkItem(delegate 
+                                ThreadPool.QueueUserWorkItem(delegate
                                 {
                                     Thread.Sleep(500);
                                     SetStatus(Status.Processing, id, null, false);
@@ -685,14 +676,9 @@ namespace ScreenToGif.Windows.Other
                             Update(id, 0, FindResource("Encoder.Analyzing").ToString());
 
                             if (param.DummyColor.HasValue)
-                            {
-                                var color = Color.FromArgb(param.DummyColor.Value.A, param.DummyColor.Value.R, param.DummyColor.Value.G, param.DummyColor.Value.B);
-                                listFrames = ImageMethods.PaintTransparentAndCut(listFrames, color, id, tokenSource);
-                            }
+                                listFrames = ImageMethods.PaintTransparentAndCut(listFrames, param.DummyColor.Value, id, tokenSource);
                             else
-                            {
                                 listFrames = ImageMethods.CutUnchanged(listFrames, id, tokenSource);
-                            }
                         }
                         else
                         {
@@ -757,16 +743,14 @@ namespace ScreenToGif.Windows.Other
 
                         using (var stream = new MemoryStream())
                         {
-                            //var frameCount = listFrames.Count(x => x.HasArea);
-
-                            using (var encoder = new Psd(stream, param.RepeatCount, param.Height, param.Width))
+                            using (var encoder = new Psd(stream, param.RepeatCount, param.Height, param.Width, param.Compress, param.SaveTimeline))
                             {
                                 for (var i = 0; i < listFrames.Count; i++)
                                 {
                                     if (listFrames[i].Delay == 0)
                                         listFrames[i].Delay = 10;
 
-                                    encoder.AddFrame(listFrames[i].Path, listFrames[i].Delay);
+                                    encoder.AddFrame(i, listFrames[i].Path, listFrames[i].Delay);
 
                                     Update(id, i, string.Format(processing, i));
 
@@ -782,16 +766,8 @@ namespace ScreenToGif.Windows.Other
                                 }
                             }
 
-                            try
-                            {
-                                using (var fileStream = new FileStream(param.Filename, FileMode.Create, FileAccess.Write, FileShare.None, 4096))
-                                    stream.WriteTo(fileStream);
-                            }
-                            catch (Exception ex)
-                            {
-                                SetStatus(Status.Error, id);
-                                LogWriter.Log(ex, "Psd Encoding");
-                            }
+                            using (var fileStream = new FileStream(param.Filename, FileMode.Create, FileAccess.Write, FileShare.None, 4096))
+                                stream.WriteTo(fileStream);
                         }
 
                         #endregion
@@ -1000,7 +976,7 @@ namespace ScreenToGif.Windows.Other
 
                                 Thread.Sleep(100);
                             }
-                            
+
                             InternalSetCopy(id, true);
                         }
                         catch (Exception e)

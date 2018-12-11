@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -31,16 +32,7 @@ namespace ScreenToGif.ImageUtil
     {
         #region Paint Transparent
 
-        /// <summary>
-        /// Analizes all frames (from the end to the start) and paints all unchanged pixels with a given color, 
-        /// after, it cuts the image to reduce filesize.
-        /// </summary>
-        /// <param name="listToEncode">The list of frames to analize.</param>
-        /// <param name="transparent">The color to paint the unchanged pixels.</param>
-        /// <param name="id">The Id of the current Task.</param>
-        /// <param name="tokenSource">The cancelation token source.</param>
-        /// <returns>A List contaning all frames and its cut points</returns>
-        public static List<FrameInfo> PaintTransparentAndCut(List<FrameInfo> listToEncode, Color transparent, int id, CancellationTokenSource tokenSource)
+        public static List<FrameInfo> PaintTransparentAndCut(List<FrameInfo> listToEncode, System.Windows.Media.Color transparent, int id, CancellationTokenSource tokenSource)
         {
             //First frame rect.
             var size = listToEncode[0].Path.ScaledSize();
@@ -67,6 +59,222 @@ namespace ScreenToGif.ImageUtil
                 //First frame is ignored.
                 if (index <= 0) continue;
 
+                //var watch = Stopwatch.StartNew();
+
+                #region Get Image Info
+
+                var imageAux1 = listToEncode[index - 1].Path.SourceFrom();
+                var imageAux2 = listToEncode[index].Path.SourceFrom();
+
+                var startY = new bool[imageAux1.PixelHeight];
+                var startX = new bool[imageAux1.PixelWidth];
+
+                var image1 = new PixelUtil(imageAux1); //Previous image
+                var image2 = new PixelUtil(imageAux2); //Actual image
+
+                image1.LockBits();
+                image2.LockBits();
+
+                var height = imageAux1.PixelHeight;
+                var width = imageAux1.PixelWidth;
+                var blockCount = image1.Depth / 8;
+
+                #endregion
+
+                //Console.WriteLine("Lock: " + watch.Elapsed);
+
+                //Only use Parallel if the image is big enough.
+                if (width * height > 150000)
+                {
+                    #region Parallel Loop
+
+                    //x - width - sides
+                    Parallel.For(0, image1.Pixels.Length / blockCount, i =>
+                    {
+                        i = i * blockCount;
+
+                        if (image1.Pixels[i] != image2.Pixels[i] || image1.Pixels[i + 1] != image2.Pixels[i + 1] || image1.Pixels[i + 2] != image2.Pixels[i + 2])
+                        {
+                            var y = i / blockCount / image1.Width;
+                            var x = i / blockCount - (y * image1.Width);
+
+                            //var current = (y * image1.Width + x) * blockCount == i;
+
+                            startX[x] = true;
+                            startY[y] = true;
+                        }
+                        else
+                        {
+                            image2.Pixels[i] = transparent.B;
+                            image2.Pixels[i + 1] = transparent.G;
+                            image2.Pixels[i + 2] = transparent.R;
+
+                            if (blockCount == 4)
+                                image2.Pixels[i + 3] = 255;
+                        }
+                    });
+
+                    #endregion
+                }
+                else
+                {
+                    #region Sequential loop
+
+                    for (var i = 0; i < image1.Pixels.Length; i += blockCount)
+                    {
+                        if (image1.Pixels[i] != image2.Pixels[i] || image1.Pixels[i + 1] != image2.Pixels[i + 1] || image1.Pixels[i + 2] != image2.Pixels[i + 2])
+                        {
+                            var y = i / blockCount / image1.Width;
+                            var x = i / blockCount - (y * image1.Width);
+
+                            //var current = (y * image1.Width + x) * blockCount == i;
+
+                            startX[x] = true;
+                            startY[y] = true;
+                        }
+                        else
+                        {
+                            image2.Pixels[i] = transparent.B;
+                            image2.Pixels[i + 1] = transparent.G;
+                            image2.Pixels[i + 2] = transparent.R;
+
+                            if (blockCount == 4)
+                                image2.Pixels[i + 3] = 255;
+                        }
+                    }
+
+                    #endregion
+                }
+
+                //Console.WriteLine("Change: " + watch.Elapsed);
+
+                image1.UnlockBitsWithoutCommit();
+
+                //Console.WriteLine("Unlock: " + watch.Elapsed);
+
+                #region Verify positions
+
+                var firstX = startX.ToList().FindIndex(x => x);
+                var lastX = startX.ToList().FindLastIndex(x => x);
+
+                if (firstX == -1)
+                    firstX = 0;
+                if (lastX == -1)
+                    lastX = imageAux1.PixelWidth;
+
+                var firstY = startY.ToList().FindIndex(x => x);
+                var lastY = startY.ToList().FindLastIndex(x => x);
+
+                if (lastY == -1)
+                    lastY = imageAux1.PixelHeight;
+                if (firstY == -1)
+                    firstY = 0;
+
+                if (lastX < firstX)
+                {
+                    var aux = lastX;
+                    lastX = firstX;
+                    firstX = aux;
+                }
+
+                if (lastY < firstY)
+                {
+                    var aux = lastY;
+                    lastY = firstY;
+                    firstY = aux;
+                }
+
+                #endregion
+
+                #region Get the Width and Height
+
+                var heightCut = Math.Abs(lastY - firstY);
+                var widthCut = Math.Abs(lastX - firstX);
+
+                //If nothing changed, shift the delay.
+                if (heightCut + widthCut == height + width)
+                {
+                    //TODO: Maximum of 2 bytes, 255 x 100: 25.500 ms
+                    listToEncode[index - 1].Delay += listToEncode[index].Delay;
+                    listToEncode[index].Rect = new Int32Rect(0, 0, 0, 0);
+
+                    GC.Collect(1);
+                    continue;
+                }
+
+                if (heightCut != height)
+                    heightCut++;
+
+                if (widthCut != width)
+                    widthCut++;
+
+                listToEncode[index].Rect = new Int32Rect(firstX, firstY, widthCut, heightCut);
+
+                #endregion
+
+                #region Update Image
+
+                using (var fileStream = new FileStream(listToEncode[index].Path, FileMode.Create))
+                {
+                    BitmapEncoder encoder = new PngBitmapEncoder();
+                    encoder.Frames.Add(BitmapFrame.Create(image2.UnlockBitsAndCrop(new Int32Rect(firstX, firstY, widthCut, heightCut))));
+                    encoder.Save(fileStream);
+                }
+
+                imageAux1 = null;
+                imageAux2 = null;
+
+                #endregion
+
+                //Console.WriteLine("Save: " + watch.Elapsed);
+                //Console.WriteLine();
+
+                GC.Collect(1);
+
+                #endregion
+            }
+
+            return listToEncode;
+        }
+
+        /// <summary>
+        /// Analizes all frames (from the end to the start) and paints all unchanged pixels with a given color, 
+        /// after, it cuts the image to reduce filesize.
+        /// </summary>
+        /// <param name="listToEncode">The list of frames to analize.</param>
+        /// <param name="transparent">The color to paint the unchanged pixels.</param>
+        /// <param name="id">The Id of the current Task.</param>
+        /// <param name="tokenSource">The cancelation token source.</param>
+        /// <returns>A List contaning all frames and its cut points</returns>
+        public static List<FrameInfo> PaintTransparentAndCutOld(List<FrameInfo> listToEncode, Color transparent, int id, CancellationTokenSource tokenSource)
+        {
+            //First frame rect.
+            var size = listToEncode[0].Path.ScaledSize();
+            listToEncode[0].Rect = new Int32Rect(0, 0, (int)size.Width, (int)size.Height);
+
+            //End to start FOR
+            for (var index = listToEncode.Count - 1; index > 0; index--)
+            {
+                #region Cancellation
+
+                if (tokenSource.Token.IsCancellationRequested)
+                {
+                    Windows.Other.Encoder.SetStatus(Status.Canceled, id);
+
+                    break;
+                }
+
+                #endregion
+
+                #region For each Frame, from the end to the start
+
+                Windows.Other.Encoder.Update(id, listToEncode.Count - index - 1);
+
+                //First frame is ignored.
+                if (index <= 0) continue;
+
+                //var watch = Stopwatch.StartNew();
+
                 #region Get Image Info
 
                 var imageAux1 = listToEncode[index - 1].Path.From();
@@ -85,6 +293,8 @@ namespace ScreenToGif.ImageUtil
                 var width = imageAux1.Width;
 
                 #endregion
+
+                //Console.WriteLine("Lock: " + watch.Elapsed);
 
                 //Only use Parallel if the image is big enough.
                 if (width * height > 150000)
@@ -152,8 +362,12 @@ namespace ScreenToGif.ImageUtil
                     #endregion
                 }
 
+                //Console.WriteLine("Change: " + watch.Elapsed);
+
                 image1.UnlockBits();
                 image2.UnlockBits();
+
+                //Console.WriteLine("Unlock: " + watch.Elapsed);
 
                 #region Verify positions
 
@@ -226,6 +440,9 @@ namespace ScreenToGif.ImageUtil
                 imageSave2.Save(listToEncode[index].Path);
 
                 #endregion
+
+                //Console.WriteLine("Save: " + watch.Elapsed);
+                //Console.WriteLine();
 
                 GC.Collect(1);
 
@@ -471,7 +688,7 @@ namespace ScreenToGif.ImageUtil
 
                         //equalCount = equalCount + (image1.GetPixel(x, y) == image2.GetPixel(x, y) ? 1 : 0);
                     }
-                }); 
+                });
 
                 #endregion
             }
@@ -875,60 +1092,6 @@ namespace ScreenToGif.ImageUtil
         }
 
         /// <summary>
-        /// Crops a given image.
-        /// </summary>
-        /// <param name="source">The BitmapSource.</param>
-        /// <param name="rect">The crop rectangle.</param>
-        /// <returns>The Cropped image.</returns>
-        public static BitmapFrame CropImage(BitmapSource source, Int32Rect rect)
-        {
-            var croppedImage = new CroppedBitmap(source, rect);
-
-            return BitmapFrame.Create(croppedImage);
-        }
-
-        /// <summary>
-        /// Applies the pixelate effect in given frame.
-        /// </summary>
-        /// <param name="image">The image to pixelate.</param>
-        /// <param name="rectangle">The area to pixelate.</param>
-        /// <param name="pixelateSize">The size of the pixel.</param>
-        /// <returns>A pixelated Bitmap.</returns>
-        public static Bitmap Pixelate2(Bitmap image, Rectangle rectangle, int pixelateSize)
-        {
-            var pixelated = new Bitmap(image);
-
-            var pixelUtil = new PixelUtilOld(pixelated);
-            pixelUtil.LockBits();
-
-            // look at every pixel in the rectangle while making sure we're within the image bounds
-            for (var xx = rectangle.X; xx < rectangle.X + rectangle.Width && xx < image.Width; xx += pixelateSize)
-            {
-                for (var yy = rectangle.Y; yy < rectangle.Y + rectangle.Height && yy < image.Height; yy += pixelateSize)
-                {
-                    var offsetX = pixelateSize / 2;
-                    var offsetY = pixelateSize / 2;
-
-                    // make sure that the offset is within the boundry of the image
-                    while (xx + offsetX >= image.Width) offsetX--;
-                    while (yy + offsetY >= image.Height) offsetY--;
-
-                    // get the pixel color in the center of the soon to be pixelated area
-                    var pixel = pixelUtil.GetPixel(xx + offsetX, yy + offsetY);
-
-                    // for each pixel in the pixelate size, set it to the center color
-                    for (var x = xx; x < xx + pixelateSize && x < image.Width; x++)
-                        for (var y = yy; y < yy + pixelateSize && y < image.Height; y++)
-                            pixelUtil.SetPixel(x, y, pixel);
-                }
-            }
-
-            pixelUtil.UnlockBits();
-
-            return pixelated;
-        }
-
-        /// <summary>
         /// Applies the pixelate effect in given frame.
         /// </summary>
         /// <param name="image">The image to pixelate.</param>
@@ -961,8 +1124,8 @@ namespace ScreenToGif.ImageUtil
 
                     //For each pixel in the pixelate size, set it to the center color.
                     for (var x = xx; x < xx + pixelateSize && x < croppedImage.PixelWidth; x++)
-                    for (var y = yy; y < yy + pixelateSize && y < croppedImage.PixelHeight; y++)
-                        pixelUtil.SetPixel(x, y, pixel);
+                        for (var y = yy; y < yy + pixelateSize && y < croppedImage.PixelHeight; y++)
+                            pixelUtil.SetPixel(x, y, pixel);
                 }
             }
 
@@ -1000,7 +1163,7 @@ namespace ScreenToGif.ImageUtil
                 var bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
                 bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                
+
                 if (size.HasValue)
                     bitmapImage.DecodePixelHeight = size.Value;
 
@@ -1203,7 +1366,7 @@ namespace ScreenToGif.ImageUtil
 
                 if (bounds.Y < 0)
                     bounds.Y = 0;
-                
+
                 var locationRect = new System.Windows.Point(bounds.X * scale, bounds.Y * scale);
                 var sizeRect = new System.Windows.Size(bounds.Width * scale, bounds.Height * scale);
 
@@ -1213,7 +1376,7 @@ namespace ScreenToGif.ImageUtil
             rtb.Render(dv);
 
             //source.Clip = null;
-            
+
             return (RenderTargetBitmap)rtb.GetAsFrozen();
         }
 

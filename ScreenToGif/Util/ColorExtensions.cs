@@ -11,8 +11,7 @@ namespace ScreenToGif.Util
     {
         public static bool IsEnoughContrast(this Color color1, Color color2)
         {
-            Console.WriteLine(GetBrightness(color1) + ": " + GetBrightness2(color1) + " - " + GetBrightness2(color2) + " = " +
-                Math.Abs(GetBrightness2(color1) - GetBrightness2(color2)));
+            Console.WriteLine(GetBrightness(color1) + ": " + GetBrightness2(color1) + " - " + GetBrightness2(color2) + " = " + Math.Abs(GetBrightness2(color1) - GetBrightness2(color2)));
 
             return Math.Abs(GetBrightness2(color1) - GetBrightness2(color2)) > 125;
         }
@@ -268,9 +267,7 @@ namespace ScreenToGif.Util
             var delta = v - min;
 
             if (v == 0.0)
-            {
                 s = 0;
-            }
             else
                 s = delta / v;
 
@@ -314,9 +311,7 @@ namespace ScreenToGif.Util
             var delta = v - min;
 
             if (v == 0.0)
-            {
                 s = 0;
-            }
             else
                 s = delta / v;
 
@@ -428,14 +423,10 @@ namespace ScreenToGif.Util
             var colorsList = new List<Color>(8);
 
             for (var i = 0; i < 29; i++)
-            {
                 colorsList.Add(ConvertHsvToRgb(i * 12, 1, 1, 255));
-            }
 
             colorsList.Add(ConvertHsvToRgb(0, 1, 1, 255));
-
             return colorsList;
         }
     }
-
 }

@@ -61,6 +61,27 @@ namespace ScreenToGif.Controls
                 return;
 
             box.SelectedBrush = new SolidColorBrush(box.SelectedColor);
+            box.RaiseColorChangedEvent();
         }
+
+        #region Custom Events
+
+        public static readonly RoutedEvent ColorChangedEvent = EventManager.RegisterRoutedEvent("ColorChanged", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(ColorBox));
+
+        public event RoutedEventHandler ColorChanged
+        {
+            add => AddHandler(ColorChangedEvent, value);
+            remove => RemoveHandler(ColorChangedEvent, value);
+        }
+
+        public void RaiseColorChangedEvent()
+        {
+            if (ColorChangedEvent == null)
+                return;
+
+            RaiseEvent(new RoutedEventArgs(ColorChangedEvent));
+        }
+
+        #endregion
     }
 }

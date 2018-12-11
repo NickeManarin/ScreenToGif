@@ -468,8 +468,7 @@ namespace ScreenToGif.Windows
                 var focused = Keyboard.FocusedElement as FrameListBoxItem;
 
                 //current = FrameListView.Items.GetItemAt(LastSelected) as FrameListBoxItem;
-                if (focused != null && focused.IsVisible &&
-                    (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift) || Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
+                if (focused != null && focused.IsVisible && (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift) || Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
                     current = focused;
                 else
                     current = FrameListView.Items.OfType<FrameListBoxItem>().FirstOrDefault(x => x.IsFocused || x.IsSelected);
@@ -506,9 +505,7 @@ namespace ScreenToGif.Windows
 
         private void Item_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var item = sender as FrameListBoxItem;
-
-            if (item != null)// && !WasChangingSelection)
+            if (sender is FrameListBoxItem item)// && !WasChangingSelection)
             {
                 LastSelected = item.FrameNumber;
                 Keyboard.Focus(item);
@@ -1340,7 +1337,12 @@ namespace ScreenToGif.Windows
                         _saveProjectDel.BeginInvoke(filename, saveToClipboard, SaveProjectCallback, null);
                         break;
                     case Export.Photoshop:
-                        //??
+                        var size2 = Project.Frames[0].Path.SizeOf();
+
+                        param.Height = size2.Height;
+                        param.Width = size2.Width;
+                        param.Compress = UserSettings.All.CompressImage;
+                        param.SaveTimeline = UserSettings.All.SaveTimeline;
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
@@ -1474,7 +1476,7 @@ namespace ScreenToGif.Windows
 
         private void DiscardProject_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            Discard();
+            Discard(UserSettings.All.NotifyProjectDiscard);
         }
 
         #endregion
@@ -2825,6 +2827,83 @@ namespace ScreenToGif.Windows
         }
 
 
+        private void Shapes_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Pause();
+            ShowPanel(PanelType.Shapes, StringResource("Editor.Image.Shape"), "Vector.Ellipse", ApplyShapesButton_Click);
+        }
+        
+        private void ShapeModes_Checked(object sender, RoutedEventArgs e)
+        {
+            ShapeDrawingCanvas.DrawingMode = AddModeRadioButton.IsChecked == true ? DrawingCanvas.DrawingModes.Shape : DrawingCanvas.DrawingModes.Select;
+        }
+
+        private void ShapeType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var listBox = sender as ListBox;
+
+            if (listBox == null)
+                return;
+
+            switch (listBox.SelectedIndex)
+            {
+                case 0:
+                    ShapeDrawingCanvas.CurrentShape = DrawingCanvas.Shapes.Rectangle;
+                    break;
+                case 1:
+                    ShapeDrawingCanvas.CurrentShape = DrawingCanvas.Shapes.Ellipse;
+                    break;
+                case 2:
+                    ShapeDrawingCanvas.CurrentShape = DrawingCanvas.Shapes.Triangle;
+                    break;
+                case 3:
+                    ShapeDrawingCanvas.CurrentShape = DrawingCanvas.Shapes.Arrow;
+                    break;
+            }
+        }
+
+        private void ShapeProperties_Changed(object sender, RoutedEventArgs e)
+        {
+            if (!IsLoaded)
+                return;
+
+            ShapeDrawingCanvas.StrokeThickness = ShapeOutlineDoubleUpDown.Value;
+            ShapeDrawingCanvas.Stroke = ShapeOutlineColorBox.SelectedBrush;
+            ShapeDrawingCanvas.Radius = ShapeRadiusDoubleUpDown.Value;
+            ShapeDrawingCanvas.Fill = ShapesFillColorBox.SelectedBrush;
+        }
+
+        private void ApplyShapesButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ShapeDrawingCanvas.ShapesCount == 0)
+            {
+                StatusList.Warning(FindResource("Editor.FreeDrawing.WarningNoDrawing").ToString()); //TODO
+                return;
+            }
+
+            if (FrameListView.SelectedIndex == -1)
+            {
+                StatusList.Warning(FindResource("Editor.FreeDrawing.WarningSelection").ToString()); //TODO
+                return;
+            }
+
+            ShapeDrawingCanvas.DeselectAll();
+
+            ActionStack.SaveState(ActionStack.EditAction.ImageAndProperties, Project.Frames, SelectedFramesIndex());
+
+            var render = ShapeDrawingCanvas.GetScaledRender(ZoomBoxControl.ScaleDiff, ZoomBoxControl.ImageDpi, ZoomBoxControl.GetImageSize());
+
+            Cursor = Cursors.AppStarting;
+
+            ShapeDrawingCanvas.RemoveAllShapes();
+
+            _overlayFramesDel = OverlayAsync;
+            _overlayFramesDel.BeginInvoke(render, ZoomBoxControl.ImageDpi, false, OverlayCallback, null);
+
+            ClosePanel();
+        }
+
+
         private void MouseClicks_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
@@ -3271,13 +3350,9 @@ namespace ScreenToGif.Windows
             _timerPreview.Tick -= TimerPreview_Tick;
 
             if (Project.Frames.Count - 1 == FrameListView.SelectedIndex)
-            {
                 FrameListView.SelectedIndex = 0;
-            }
             else
-            {
                 FrameListView.SelectedIndex++;
-            }
 
             if (Project.Frames[FrameListView.SelectedIndex].Delay == 0)
                 Project.Frames[FrameListView.SelectedIndex].Delay = 10;
@@ -4487,6 +4562,13 @@ namespace ScreenToGif.Windows
                 case PanelType.FreeDrawing:
                     FreeDrawingGrid.Visibility = Visibility.Visible;
                     ShowHint("Hint.ApplySelected", true);
+                    break;
+                case PanelType.Shapes:
+                    ShapesGrid.Visibility = Visibility.Visible;
+                    ShowHint("Hint.ApplySelected", true);
+
+                    ShapeProperties_Changed(this, null);
+                    ShapeType_SelectionChanged(ShapesListBox, null);
                     break;
                 case PanelType.Watermark:
 
@@ -6277,6 +6359,10 @@ namespace ScreenToGif.Windows
                                 (Project.Frames[index - mode].Delay + Project.Frames[index].Delay) / 2;
                     }
                 }
+            }
+            else
+            {
+                ActionStack.SaveState(ActionStack.EditAction.Remove, Project.Frames, removeList);
             }
 
             for (var i = removeList.Count - 1; i >= 0; i--)

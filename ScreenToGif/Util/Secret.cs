@@ -18,5 +18,7 @@
         public static string GfycatId { get; set; }
 
         public static string GfycatSecret { get; set; }
+
+        public static string YandexId { get; set; }
     }
 }

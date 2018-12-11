@@ -337,7 +337,7 @@ namespace ScreenToGif.Util
                 return (percentage.Value * 100d) / variable.Value;
 
             if (!percentage.HasValue && total.HasValue && variable.HasValue)
-                return (variable.Value * 100d) / total.Value;
+                return total > 0 || total < 0 ? (variable.Value * 100d) / total.Value : 0;
 
             if (!variable.HasValue && total.HasValue && percentage.HasValue)
                 return (percentage.Value * total.Value) / 100d;
@@ -532,8 +532,15 @@ namespace ScreenToGif.Util
 
         public static bool IsFfmpegPresent()
         {
+            var realPath = "";
+
+            //If the path is relative, File.Exists() was returning C:\\Windows\\System32\Gifski.dll when the app was lauched from the "Open with" context menu.
+            //So, in order to get the correct location, I need to combine the current base directory with the relative path.
+            if (!string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation) && !Path.IsPathRooted(UserSettings.All.FfmpegLocation))
+                realPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, UserSettings.All.FfmpegLocation.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar));
+
             //File location already choosen or detected.
-            if (!string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation) && File.Exists(UserSettings.All.FfmpegLocation))
+            if (!string.IsNullOrWhiteSpace(realPath) && File.Exists(realPath))
                 return true;
 
             #region Check Environment Variables
@@ -565,8 +572,15 @@ namespace ScreenToGif.Util
 
         public static bool IsGifskiPresent()
         {
+            var realPath = "";
+
+            //If the path is relative, File.Exists() was returning C:\\Windows\\System32\Gifski.dll when the app was lauched from the "Open with" context menu.
+            //So, in order to get the correct location, I need to combine the current base directory with the relative path.
+            if (!string.IsNullOrWhiteSpace(UserSettings.All.GifskiLocation) && !Path.IsPathRooted(UserSettings.All.GifskiLocation))
+                realPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, UserSettings.All.GifskiLocation.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar));
+
             //File location already choosen or detected.
-            if (!string.IsNullOrWhiteSpace(UserSettings.All.GifskiLocation) && File.Exists(UserSettings.All.GifskiLocation))
+            if (!string.IsNullOrWhiteSpace(realPath) && File.Exists(realPath))
                 return true;
 
             #region Check Environment Variables

@@ -665,21 +665,20 @@ namespace ScreenToGif.Util.ActivityHook
 
                 case MouseEventType.ExtraButtonDown:
                 case MouseEventType.LeftButtonDown:
-                   System.TimeSpan deltaMs = DateTime.Now - lastClickTime;
+                    var deltaMs = DateTime.Now - lastClickTime;
                     lastClickTime = DateTime.Now;
+
                     if (deltaMs.TotalMilliseconds <= Native.GetDoubleClickTime())
-                    {
                         clickCount++;
-                    }
                     else
-                    {
                         clickCount = 1;
-                    }
+
                     if (clickCount == 2)
                     {
                         OnMouseActivity?.Invoke(this, new CustomMouseEventArgs(mouse.pt.X, mouse.pt.Y, MouseEventType.LeftButtonDoubleClick, _leftButton, _rightButton, _middleButton));
                         clickCount = 0;
                     }
+
                     _leftButton = MouseButtonState.Pressed;
                     OnMouseActivity?.Invoke(this, new CustomMouseEventArgs(mouse.pt.X, mouse.pt.Y, MouseEventType.LeftButtonDown, _leftButton, _rightButton, _middleButton));
                     break;

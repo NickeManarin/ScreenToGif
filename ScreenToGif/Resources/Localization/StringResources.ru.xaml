@@ -212,7 +212,7 @@
     <s:String x:Key="TempFiles.NotExists">Не существует</s:String>
     <s:String x:Key="TempFiles.CreateSettings">Создать пустой файл настроек.</s:String>
     <s:String x:Key="TempFiles.RemoveSettings">Удалить файл настроек.</s:String>
-    <s:String x:Key="TempFiles.OpenSettingsFolder">Откройте папку, в которой находится файл настроек.&#X0d;удерживая Ctrl, щелкните, чтобы открыть файл, если это возможно.</s:String>
+    <s:String x:Key="TempFiles.OpenSettingsFolder">Откройте папку, в которой находится файл настроек.&#x0d;удерживая Ctrl, щелкните, чтобы открыть файл, если это возможно.</s:String>
     <s:String x:Key="TempFiles.SettingsInfo">• Если файл настроек не найден рядом с EXE, программа будет искать их в папке AppData и в дальнейшем туда же и сохранять.&#10;• Иначе все настройки будут храниться в файле рядом с приложением.</s:String>
     <s:String x:Key="TempFiles.KeepRecent">Сохранять недавние проекты?</s:String>
     <s:String x:Key="TempFiles.KeepRecent.Info">Если вы так считаете, то все недавние проекты, что старше 5 дней, не будут удалены.</s:String>
@@ -765,7 +765,7 @@
     <s:String x:Key="S.RemoveDuplicates.Delay.NoAdjustment">Не настраивать</s:String>
     <s:String x:Key="S.RemoveDuplicates.Delay.Average">Использовать среднее значение</s:String>
     <s:String x:Key="S.RemoveDuplicates.Delay.Sum">Использовать сумму</s:String>
-    <s:String x:Key="S.RemoveDuplicates.Info">Это действие анализирует каждый кадр (пиксель за пикселем) и удаляет те, которые не менее {0}% похожи на ближайшего соседа.& # X0d; Вы можете выбрать, хотите ли вы отрегулировать задержку (продолжительность показа) кадров.</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Info">Это действие анализирует каждый кадр (пиксель за пикселем) и удаляет те, которые не менее {0}% похожи на ближайшего соседа.&#x0d; Вы можете выбрать, хотите ли вы отрегулировать задержку (продолжительность показа) кадров.</s:String>
     
     <s:String x:Key="Caption.Text">Текст</s:String>
     <s:String x:Key="Caption.Font">Шрифт</s:String>
@@ -855,7 +855,7 @@
     <s:String x:Key="Cinemagraph.Info">Исп. карандаш чтобы выбрать пиксели, которые не должны быть статичными (изм. между кадрами), рисуя поверх них.</s:String>
     <s:String x:Key="OverrideDelay.Info">Новое значение изменит продолжительность (задержку) всех выбранных кадров. Пределы: от 10мс до 25500мс.</s:String>
     <s:String x:Key="IncreaseDecreaseDelay.Info">Данное значение увеличит\уменьшит продолжительность(задержку) каждого кадра.&#10;Вы можете выбрать значения от 10мс до 25500мс.</s:String>
-    <s:String x:Key="ScaleDelay.Info">Масштабируйте продолжительность (задержку) каждого выбранного кадра на этот процент.&#X0d;Вы можете масштабировать продолжительность каждого кадра, выбирая значение от 1% до 1000%, но конечная продолжительность каждого кадра будет ограничена между 10 мс и 25500ms</s:String>
+    <s:String x:Key="ScaleDelay.Info">Масштабируйте продолжительность (задержку) каждого выбранного кадра на этот процент.&#x0d;Вы можете масштабировать продолжительность каждого кадра, выбирая значение от 1% до 1000%, но конечная продолжительность каждого кадра будет ограничена между 10 мс и 25500ms</s:String>
 
     <s:String x:Key="Transitions.Lenght">Продолжительность перехода</s:String>
     <s:String x:Key="Transitions.Delay">Задержка перехода</s:String>
@@ -921,7 +921,7 @@
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">Ссылка</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">Копировать ссылку, сгенерированную службой загрузки, в буфер обмена.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Выполнять команды посткодирования.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Введите команды, которые будут выполняться после кодирования.&#X0d;Чтобы выполнить несколько команд, введите их в отдельной строке.&#X0d;Макросы:&#x0d;{p} = Выходной путь файла.&#X0d;{f } = Путь к папке вывода.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Введите команды, которые будут выполняться после кодирования.&#x0d;Чтобы выполнить несколько команд, введите их в отдельной строке.&#x0d;Макросы:&#x0d;{p} = Выходной путь файла.&#x0d;{f } = Путь к папке вывода.</s:String>
     
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">Файл</s:String>

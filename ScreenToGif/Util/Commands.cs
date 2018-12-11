@@ -468,6 +468,16 @@ namespace ScreenToGif.Util
 
         #endregion
 
+        #region Shapes
+
+        /// <summary>
+        /// Shapes Command, Alt + J
+        /// </summary>
+        public static RoutedUICommand Shapes { get; set; } = new RoutedUICommand("Shapes", "Shapes", typeof(Commands),
+            new InputGestureCollection { new KeyGesture(Key.J, ModifierKeys.Alt, "Alt + J") });
+
+        #endregion
+
         #region Mouse Clicks
 
         /// <summary>

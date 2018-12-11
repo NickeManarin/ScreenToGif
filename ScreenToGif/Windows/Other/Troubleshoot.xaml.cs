@@ -160,8 +160,8 @@ namespace ScreenToGif.Windows.Other
 
                     if (window is RecorderNew newRecorder)
                     {
-                        top = Canvas.GetTop(newRecorder.MainBorder) - newRecorder.Top;
-                        left = Canvas.GetLeft(newRecorder.MainBorder) - newRecorder.Left;
+                        top = Canvas.GetTop(newRecorder.MainBorder) + newRecorder.Top;
+                        left = Canvas.GetLeft(newRecorder.MainBorder) + newRecorder.Left;
                         width = newRecorder.MainBorder.ActualWidth;
                         height = newRecorder.MainBorder.ActualHeight;
                         title = LocalizationHelper.Get("Recorder");
@@ -236,10 +236,10 @@ namespace ScreenToGif.Windows.Other
 
                 if (!UserSettings.All.SelectedRegion.IsEmpty)
                 {
-                    minLeft = Math.Min(minLeft, UserSettings.All.SelectedRegion.Left);
-                    minTop = Math.Min(minTop, UserSettings.All.SelectedRegion.Top);
-                    maxRight = Math.Max(maxRight, UserSettings.All.SelectedRegion.Right);
-                    maxBottom = Math.Max(maxBottom, UserSettings.All.SelectedRegion.Bottom);
+                    minLeft = Math.Min(minLeft, UserSettings.All.SelectedRegion.Left + SystemParameters.VirtualScreenLeft);
+                    minTop = Math.Min(minTop, UserSettings.All.SelectedRegion.Top + SystemParameters.VirtualScreenTop);
+                    maxRight = Math.Max(maxRight, UserSettings.All.SelectedRegion.Right + SystemParameters.VirtualScreenLeft);
+                    maxBottom = Math.Max(maxBottom, UserSettings.All.SelectedRegion.Bottom + SystemParameters.VirtualScreenTop);
 
                     var rect = new Border
                     {
@@ -262,8 +262,8 @@ namespace ScreenToGif.Windows.Other
 
                     MainCanvas.Children.Add(rect);
 
-                    Canvas.SetLeft(rect, UserSettings.All.SelectedRegion.Left);
-                    Canvas.SetTop(rect, UserSettings.All.SelectedRegion.Top);
+                    Canvas.SetLeft(rect, UserSettings.All.SelectedRegion.Left + SystemParameters.VirtualScreenLeft);
+                    Canvas.SetTop(rect, UserSettings.All.SelectedRegion.Top + SystemParameters.VirtualScreenTop);
                 }
 
                 #endregion

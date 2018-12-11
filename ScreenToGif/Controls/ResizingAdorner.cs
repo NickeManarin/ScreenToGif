@@ -376,7 +376,7 @@ namespace ScreenToGif.Controls
             _middleBottom.Arrange(new Rect(0, adornerHeight / 2, adornerWidth, adornerHeight));
             _middleTop.Arrange(new Rect(0, -adornerHeight / 2, adornerWidth, adornerHeight));
             _leftMiddle.Arrange(new Rect(-adornerWidth / 2, 0, adornerWidth, adornerHeight));
-            _rightMiddle.Arrange(new Rect(+adornerWidth / 2, 0, adornerWidth, adornerHeight));
+            _rightMiddle.Arrange(new Rect(adornerWidth / 2, 0, adornerWidth, adornerHeight));
 
             var zoomFactor = GetCanvasZoom(AdornedElement);
 

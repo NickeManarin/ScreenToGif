@@ -414,7 +414,7 @@ namespace ScreenToGif.Model
         {
             try
             {
-                if (!UserSettings.All.AutomaticCleanUp || Global.IsCurrentlyDeletingFiles)
+                if (!UserSettings.All.AutomaticCleanUp || Global.IsCurrentlyDeletingFiles || string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder))
                     return;
 
                 Global.IsCurrentlyDeletingFiles = true;
@@ -478,6 +478,9 @@ namespace ScreenToGif.Model
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder))
+                    return;
+
                 var path = Path.Combine(UserSettings.All.TemporaryFolder, "ScreenToGif", "Feedback");
 
                 if (!Directory.Exists(path))

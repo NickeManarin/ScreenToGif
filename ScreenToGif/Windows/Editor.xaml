@@ -8,6 +8,7 @@
         xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
         xmlns:s="clr-namespace:System;assembly=mscorlib"
         xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
+        xmlns:h="clr-namespace:ScreenToGif.Controls.Shapes"
         x:Name="EditorWindow" Title="{DynamicResource Editor.Title}" MinHeight="500" MinWidth="700" 
         Background="#FFF1F1F1" UseLayoutRounding="True" Icon="/Resources/Logo.ico"
         FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}"
@@ -290,6 +291,7 @@
         <CommandBinding Command="u:Commands.KeyStrokes" CanExecute="Image_CanExecute" Executed="KeyStrokes_Executed"/>
 
         <CommandBinding Command="u:Commands.FreeDrawing" CanExecute="Image_CanExecute" Executed="FreeDrawing_Executed"/>
+        <CommandBinding Command="u:Commands.Shapes" CanExecute="Image_CanExecute" Executed="Shapes_Executed"/>
         <CommandBinding Command="u:Commands.MouseClicks" CanExecute="Image_CanExecute" Executed="MouseClicks_Executed"/>
         <CommandBinding Command="u:Commands.Watermark" CanExecute="Image_CanExecute" Executed="Watermark_Executed"/>
         <CommandBinding Command="u:Commands.Border" CanExecute="Image_CanExecute" Executed="Border_Executed"/>
@@ -1065,13 +1067,14 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition Height="16"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5" Content="{DynamicResource Editor.Image.Overlay}" 
+                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="7" Content="{DynamicResource Editor.Image.Overlay}" 
 						       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 						       FontSize="12" Foreground="#FF707070"/>
 
@@ -1080,27 +1083,32 @@
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                        <n:ImageButton Grid.Row="0" Grid.Column="1" x:Name="ProgressButton" Text="{DynamicResource Editor.Image.Progress}" Content="{StaticResource Vector.Progress}"
+                        <n:ImageButton x:Name="ShapesButton" Grid.Row="0" Grid.Column="1" Text="{DynamicResource Editor.Image.Shape}" Content="{StaticResource Vector.Ellipse}"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="32" Command="u:Commands.Shapes" Style="{StaticResource Style.Button.Vertical2}"
+                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                       ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+
+                        <n:ImageButton Grid.Row="0" Grid.Column="2" x:Name="ProgressButton" Text="{DynamicResource Editor.Image.Progress}" Content="{StaticResource Vector.Progress}"
                                        MinWidth="55" ContentHeight="28" ContentWidth="32" Command="u:Commands.Progress" Style="{StaticResource Style.Button.Vertical2}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                        <n:ImageButton Grid.Row="0" Grid.Column="2" Text="{DynamicResource Editor.Image.Clicks}" Content="{StaticResource Vector.Cursor}"
+                        <n:ImageButton Grid.Row="0" Grid.Column="3" Text="{DynamicResource Editor.Image.Clicks}" Content="{StaticResource Vector.Cursor}"
                                        MinWidth="55" ContentHeight="28" ContentWidth="32" Command="u:Commands.MouseClicks" Style="{StaticResource Style.Button.Vertical2}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                         
-                        <n:ImageButton Grid.Row="0" Grid.Column="3" x:Name="BorderButton" Text="{DynamicResource Editor.Image.Border}" Content="{StaticResource Vector.Border}"
+                        <n:ImageButton Grid.Row="0" Grid.Column="4" x:Name="BorderButton" Text="{DynamicResource Editor.Image.Border}" Content="{StaticResource Vector.Border}"
                                        MinWidth="55" ContentHeight="28" ContentWidth="32" Command="u:Commands.Border" Style="{StaticResource Style.Button.Vertical2}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                        <n:ImageButton Grid.Row="0" Grid.Column="4" x:Name="ObfuscateButton" Text="{DynamicResource Editor.Image.Obfuscate}" Content="{StaticResource Vector.Obfuscate}"
+                        <n:ImageButton Grid.Row="0" Grid.Column="5" x:Name="ObfuscateButton" Text="{DynamicResource Editor.Image.Obfuscate}" Content="{StaticResource Vector.Obfuscate}"
                                        MinWidth="55" ContentHeight="28" ContentWidth="32" Command="u:Commands.Obfuscate" Style="{StaticResource Style.Button.Vertical2}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                        <Grid Grid.Row="0" Grid.Column="5">
+                        <Grid Grid.Row="0" Grid.Column="6">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition/>
@@ -1430,6 +1438,11 @@
                         </n:InkCanvasExtended.EraserShape>
                     </n:InkCanvasExtended>
 
+                    <n:DrawingCanvas x:Name="ShapeDrawingCanvas" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True" DrawingMode="Shape"
+                                     Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" MinWidth="10" CurrentShape="Arrow"
+                                     Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}" MinHeight="10"
+                                     Visibility="{Binding ElementName=ShapesGrid, Path=Visibility}" Background="Transparent"/>
+
                     <n:MoveResizeControl x:Name="WatermarkOverlayCanvas" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True" CanResize="True"
                                          Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
                                          Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}"
@@ -1681,9 +1694,9 @@
                                                         IsChecked="{Binding SaveType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:Export.Images}}"
                                                         Checked="SaveType_Checked"/>
 
-                                    <n:ImageRadioButton Grid.Row="2" Grid.Column="1" x:Name="PsdRadioButton" Content="{StaticResource Vector.ImageStack}" Text="{DynamicResource S.SaveAs.Psd}" 
+                                    <n:ImageRadioButton Grid.Row="2" Grid.Column="1" x:Name="PsdRadioButton" Content="{StaticResource Vector.Psd}" Text="{DynamicResource S.SaveAs.Psd}" 
                                                         IsChecked="{Binding SaveType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:Export.Photoshop}}"
-                                                        Checked="SaveType_Checked" Visibility="Collapsed"/>
+                                                        Checked="SaveType_Checked"/>
                                 </Grid>
                             </Expander>
 
@@ -1939,6 +1952,26 @@
                                     <n:ExtendedTextBox Grid.Row="3" Grid.Column="1" MinHeight="23" Margin="5,3" Text="{Binding Source={x:Static u:UserSettings.All}, Path=ExtraParameters}"
                                                        Visibility="{Binding IsChecked, ElementName=FfmpegEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"
                                                        VerticalContentAlignment="Top" TextWrapping="WrapWithOverflow"/>
+                                </Grid>
+                            </Expander>
+
+
+                            <Expander Grid.Row="3" Header="{DynamicResource S.SaveAs.PsdOptions}" Visibility="{Binding IsChecked, ElementName=PsdRadioButton, Converter={StaticResource Bool2Visibility}}"
+                                      IsExpanded="{Binding IsPsdOptionsExpanded, Source={x:Static u:UserSettings.All}}">
+                                <Grid Margin="10,0,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <n:ExtendedCheckBox Grid.Row="0" x:Name="CompressPsdCheckBox" Text="{DynamicResource S.SaveAs.PsdOptions.Compress}" 
+                                                        IsChecked="{Binding CompressImage, Source={x:Static u:UserSettings.All}}" Margin="10,3,3,3"
+                                                        ToolTip="{DynamicResource S.SaveAs.PsdOptions.Compress.Tooltip}"/>
+
+                                    <n:ExtendedCheckBox Grid.Row="1" x:Name="TimelinePsdCheckBox" Text="{DynamicResource S.SaveAs.PsdOptions.Timeline}" 
+                                                        IsChecked="{Binding SaveTimeline, Source={x:Static u:UserSettings.All}}" Margin="10,3,3,3"
+                                                        ToolTip="{DynamicResource S.SaveAs.PsdOptions.Timeline.Tooltip}" Visibility="Collapsed"/>
                                 </Grid>
                             </Expander>
 
@@ -3402,6 +3435,97 @@
                                                         IsChecked="{Binding FreeDrawingEraserStylusTip, Source={x:Static u:UserSettings.All},
                                                         Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
                                 </Grid>
+                            </Grid>
+                        </Grid>
+
+                        <Grid x:Name="ShapesGrid" Visibility="Collapsed">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="27"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <n:LabelSeparator Grid.Row="0" Text="{DynamicResource FreeDrawing.Mode}"/>
+                            <Grid Grid.Row="1" Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="AddModeRadioButton" Content="{StaticResource Vector.Add}" Margin="0,3" 
+                                                    Text="{DynamicResource S.Shapes.Mode.Insert}" Cursor="Hand" MaxSize="20" Padding="0,5" IsChecked="True" Checked="ShapeModes_Checked"/>
+
+                                <n:ImageRadioButton Grid.Row="0" Grid.Column="1" x:Name="SelectModeRadioButton" Content="{StaticResource Vector.Select}" Margin="0,3"
+                                                    Text="{DynamicResource FreeDrawing.Select}" Cursor="Hand" MaxSize="20" Padding="0,5" Checked="ShapeModes_Checked"/>
+                            </Grid>
+
+                            <n:LabelSeparator Grid.Row="2" Text="{DynamicResource S.Shapes.Shapes}" Visibility="{Binding ElementName=AddModeRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}"/>
+                            <Grid Grid.Row="3" Margin="10,0,5,0" Visibility="{Binding ElementName=AddModeRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}">
+                                <ListBox x:Name="ShapesListBox" SelectedIndex="0" SelectionChanged="ShapeType_SelectionChanged">
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel/>
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
+
+                                    <Rectangle Width="25" Height="20" Stroke="DarkSlateGray" Fill="White"/>
+                                    <Ellipse Width="25" Height="20" Stroke="DarkSlateGray" Fill="White"/>
+                                    <h:Triangle Width="25" Height="20" Stroke="DarkSlateGray" Fill="White"/>
+                                    <h:Arrow Width="25" Height="20" Stroke="DarkSlateGray" Fill="White" X1="1" Y1="1" X2="10" Y2="10"/>
+                                </ListBox>
+                            </Grid>
+
+                            <n:LabelSeparator Grid.Row="4" Text="{DynamicResource Caption.Outline}"/>
+                            <Grid Grid.Row="5" Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Thickness}" VerticalAlignment="Center" Padding="0"/>
+                                <n:DoubleUpDown Grid.Row="0" Grid.Column="1" x:Name="ShapeOutlineDoubleUpDown" Minimum="0" Maximum="100" Margin="10,5" MinWidth="70" 
+                                                Value="{Binding Source={x:Static u:UserSettings.All}, Path=ShapesThickness, Mode=TwoWay}" UpdateOnInput="True" ValueChanged="ShapeProperties_Changed"/>
+
+                                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
+                                <n:ColorBox Grid.Row="1" Grid.Column="1" x:Name="ShapeOutlineColorBox" Margin="10,5"
+                                            SelectedColor="{Binding ShapesOutlineColor, Source={x:Static u:UserSettings.All}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            ColorChanged="ShapeProperties_Changed"/>
+
+                                <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource S.Shapes.Shapes.Radius}" VerticalAlignment="Center" Padding="0"/>
+                                <n:DoubleUpDown Grid.Row="3" Grid.Column="1" x:Name="ShapeRadiusDoubleUpDown" Minimum="0" Maximum="100" Margin="10,5" MinWidth="70" 
+                                                Value="{Binding Source={x:Static u:UserSettings.All}, Path=ShapesRadius, Mode=TwoWay}" UpdateOnInput="True" ValueChanged="ShapeProperties_Changed"/>
+                            </Grid>
+
+                            <n:LabelSeparator Grid.Row="6" Text="{DynamicResource S.Shapes.Fill}"/>
+                            <Grid Grid.Row="7" Margin="10,0,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
+                                <n:ColorBox Grid.Row="0" Grid.Column="1" x:Name="ShapesFillColorBox" Margin="10,5"
+                                            SelectedColor="{Binding ShapesFillColor, Source={x:Static u:UserSettings.All}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                            ColorChanged="ShapeProperties_Changed"/>
                             </Grid>
                         </Grid>
 

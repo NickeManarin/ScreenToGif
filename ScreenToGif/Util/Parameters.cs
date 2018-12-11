@@ -70,5 +70,13 @@ namespace ScreenToGif.Util
         public int Framerate { get; set; }
 
         #endregion
+
+        #region Psd
+
+        public bool Compress { get; set; }
+
+        public bool SaveTimeline { get; set; }
+
+        #endregion
     }
 }

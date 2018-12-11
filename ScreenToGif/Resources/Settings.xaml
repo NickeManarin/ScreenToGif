@@ -156,6 +156,7 @@
     <s:Boolean x:Key="IsGifOptionsExpanded">False</s:Boolean>
     <s:Boolean x:Key="IsApngOptionsExpanded">False</s:Boolean>
     <s:Boolean x:Key="IsVideoOptionsExpanded">True</s:Boolean>
+    <s:Boolean x:Key="IsPsdOptionsExpanded">True</s:Boolean>
     <s:Boolean x:Key="IsSaveOptionsExpanded">True</s:Boolean>
       
     <!--Editor • Save As > Gif options-->
@@ -242,6 +243,9 @@
     <s:Boolean x:Key="OverwriteOnSaveImages">False</s:Boolean>
 
     <!--Editor • Save As > Photoshop-->
+    <s:Boolean x:Key="CompressImage">True</s:Boolean>
+    <s:Boolean x:Key="SaveTimeline">True</s:Boolean>
+    <s:Boolean x:Key="MaximizeCompatibility">False</s:Boolean>
     <!--<s:String x:Key="LatestPhotoshopOutputFolder"></s:String>-->
     <!--<s:String x:Key="LatestPhotoshopFilename"></s:String>-->
     <s:String x:Key="LatestPhotoshopExtension">.psd</s:String>
@@ -328,6 +332,13 @@
     <s:Int32 x:Key="FreeDrawingPenWidth">5</s:Int32>
     <s:Int32 x:Key="FreeDrawingPenHeight">5</s:Int32>
     <StylusTip x:Key="FreeDrawingStylusTip">Ellipse</StylusTip>
+
+    <!--Editor • Shapes-->
+    <s:Double x:Key="ShapesThickness">4</s:Double>
+    <Color x:Key="ShapesOutlineColor">#FF000000</Color>
+    <s:Double x:Key="ShapesRadius">0</s:Double>
+    <s:Int32 x:Key="ShapesDashes">1</s:Int32>
+    <Color x:Key="ShapesFillColor">#00000000</Color>
 
     <!--Editor • Mouse Clicks-->
     <Color x:Key="MouseClicksColor">#78FFFF00</Color>

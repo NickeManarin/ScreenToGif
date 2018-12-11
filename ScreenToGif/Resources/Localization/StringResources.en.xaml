@@ -546,6 +546,7 @@
     <!--Image • Overlay-->
     <s:String x:Key="Editor.Image.Overlay">Overlay</s:String>
     <s:String x:Key="Editor.Image.FreeDrawing">Free&#x0d;Drawing</s:String>
+    <s:String x:Key="Editor.Image.Shape">Shapes</s:String>
     <s:String x:Key="Editor.Image.Clicks">Mouse&#x0d;Clicks</s:String>
     <s:String x:Key="Editor.Image.Watermark">Watermark</s:String>
     <s:String x:Key="Editor.Image.Cinemagraph">Cinemagraph</s:String>
@@ -589,7 +590,7 @@
     <s:String x:Key="Editor.DiscardPreviousProject.Message">If you choose not to do so, the previous project will be available to open via Recents Projects.</s:String>
     <s:String x:Key="Editor.DeleteFrames.Title">Delete Frames</s:String>
     <s:String x:Key="Editor.DeleteFrames.Instruction">Are you sure that you want to delete?</s:String>
-    <s:String x:Key="Editor.DeleteFrames.Message">This action will delete {0} frames(s).\n\rYou'll be able to undo this later.</s:String>
+    <s:String x:Key="Editor.DeleteFrames.Message">This action will delete {0} frame(s).\n\rYou'll be able to undo this later.</s:String>
     <s:String x:Key="Editor.Exiting.Title">Exiting the Editor</s:String>
     <s:String x:Key="Editor.Exiting.Instruction">Are you sure that you want to exit?</s:String>
     <s:String x:Key="Editor.Exiting.Message">The current project that you were working on can be opened again via 'Recent Projects'.</s:String>
@@ -816,6 +817,12 @@
     <s:String x:Key="FreeDrawing.Highlighter">Highlighter.</s:String>
     <s:String x:Key="FreeDrawing.FitToCurve">Fit To Curve.</s:String>
     
+    <s:String x:Key="S.Shapes.Mode.Insert">Insert</s:String>
+    <s:String x:Key="S.Shapes.Shapes">Shapes</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Radius">Radius:</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Dashes">Dashes:</s:String>
+    <s:String x:Key="S.Shapes.Fill">Fill</s:String>
+
     <s:String x:Key="S.MouseClicks">Mouse Clicks</s:String>
     <s:String x:Key="S.MouseClicks.Warning.None">There's no detected mouse clicks on your project.</s:String>
     
@@ -899,7 +906,12 @@
     <s:String x:Key="S.SaveAs.FlipVertically">Flip the video (vertically).</s:String>
     <s:String x:Key="S.SaveAs.ImagesOptions">Image options</s:String>
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">Zip the images.</s:String>
-    
+    <s:String x:Key="S.SaveAs.PsdOptions">Psd options</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress">Compress the image.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">Compress the image data using the RLE algorithm.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Timeline">Save the timeline data.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">Exports the timings of the frames, instead of just the frames.</s:String>
+
     <!--Save As • Save options-->
     <s:String x:Key="S.SaveAs.SaveOptions">Save options</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Save the file to a folder of your choice.</s:String>

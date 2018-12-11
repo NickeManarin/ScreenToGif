@@ -156,6 +156,7 @@
     <Compile Include="Controls\DataGridHeaderBorder.cs" />
     <Compile Include="Controls\DoubleBox.cs" />
     <Compile Include="Controls\DragScrollGrid.cs" />
+    <Compile Include="Controls\DrawingCanvas.cs" />
     <Compile Include="Controls\DropDownButton.cs" />
     <Compile Include="Controls\DynamicGrid.cs" />
     <Compile Include="Controls\EncoderListViewItem.cs" />
@@ -167,9 +168,12 @@
     <Compile Include="Controls\ExtendedUniformGrid.cs" />
     <Compile Include="Controls\ImageCard.cs" />
     <Compile Include="Controls\LabelSeparator.cs" />
+    <Compile Include="Controls\ElementAdorner.cs" />
     <Compile Include="Controls\NotificationListControl.cs" />
     <Compile Include="Controls\NotifyIcon.cs" />
     <Compile Include="Controls\RecorderWindow.cs" />
+    <Compile Include="Controls\Shapes\Arrow.cs" />
+    <Compile Include="Controls\Shapes\Triangle.cs" />
     <Compile Include="Controls\SplitButton.cs" />
     <Compile Include="Controls\KeyBox.cs" />
     <Compile Include="Controls\HexadecimalBox.cs" />
@@ -246,10 +250,26 @@
     <Compile Include="Cloud\CloudFactory.cs" />
     <Compile Include="Cloud\Gfycat.cs" />
     <Compile Include="Cloud\Imgur\Imgur.cs" />
+    <Compile Include="ImageUtil\Psd\AditionalLayers\IAditionalLayerInfo.cs" />
+    <Compile Include="ImageUtil\Psd\AditionalLayers\IMetadata.cs" />
+    <Compile Include="ImageUtil\Psd\AditionalLayers\Metadata.cs" />
+    <Compile Include="ImageUtil\Psd\AditionalLayers\MetadataContent.cs" />
+    <Compile Include="ImageUtil\Psd\Channel.cs" />
+    <Compile Include="ImageUtil\Psd\Image.cs" />
+    <Compile Include="ImageUtil\Psd\ImageChannelData.cs" />
+    <Compile Include="ImageUtil\Psd\ImageData.cs" />
+    <Compile Include="ImageUtil\Psd\ImageResourceBlocks\AnimationBlock.cs" />
+    <Compile Include="ImageUtil\Psd\ImageResourceBlocks\IImageResource.cs" />
+    <Compile Include="ImageUtil\Psd\ImageResourceBlocks\ImageResources.cs" />
+    <Compile Include="ImageUtil\Psd\IPsdContent.cs" />
+    <Compile Include="ImageUtil\Psd\LayerAndMask.cs" />
+    <Compile Include="ImageUtil\Psd\LayerInfo.cs" />
+    <Compile Include="ImageUtil\Psd\LayerRecord.cs" />
     <Compile Include="ImageUtil\Psd\Psd.cs" />
     <Compile Include="Model\BindableBase.cs" />
     <Compile Include="Model\DefaultTaskModel.cs" />
     <Compile Include="Model\KeyStrokesModel.cs" />
+    <Compile Include="Model\ManipulatedEventArgs.cs" />
     <Compile Include="Model\MouseClicksModel.cs" />
     <Compile Include="UserControls\KeyStrokesPanel.xaml.cs">
       <DependentUpon>KeyStrokesPanel.xaml</DependentUpon>

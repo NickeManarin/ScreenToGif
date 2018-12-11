@@ -1092,6 +1092,36 @@
                     </ContextMenu>
                 </n:NotifyIcon.ContextMenu>
             </n:NotifyIcon>
+
+            <!--Round Thumb-->
+            <Style x:Key="Style.Thumb.Ellipse" TargetType="{x:Type Thumb}">
+                <Setter Property="SnapsToDevicePixels" Value="True"/>
+                <Setter Property="IsTabStop" Value="False"/>
+                <Setter Property="Focusable" Value="False"/>
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="BorderBrush" Value="#FFAAAAAA"/>
+
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Thumb}">
+                            <Grid Background="Transparent">
+                                <Ellipse Fill="{TemplateBinding Background}" Margin="{TemplateBinding Padding}" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="1" />
+                            </Grid>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#FFF2F2F2"/>
+                                    <Setter Property="BorderBrush" Value="#FFAAAAAA"/>
+                                </Trigger>
+                                <Trigger Property="IsDragging" Value="True">
+                                    <Setter Property="Background" Value="#FFF2F2F2"/>
+                                    <Setter Property="BorderBrush" Value="#FF777777"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

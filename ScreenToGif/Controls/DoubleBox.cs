@@ -194,10 +194,7 @@ namespace ScreenToGif.Controls
 
         #region Custom Events
 
-        /// <summary>
-        /// Create a custom routed event by first registering a RoutedEventID, this event uses the bubbling routing strategy.
-        /// </summary>
-        public static readonly RoutedEvent ValueChangedEvent;
+        public static readonly RoutedEvent ValueChangedEvent = EventManager.RegisterRoutedEvent("ValueChanged", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(DoubleBox));
 
         /// <summary>
         /// Event raised when the numeric value is changed.
@@ -213,8 +210,7 @@ namespace ScreenToGif.Controls
             if (ValueChangedEvent == null)
                 return;
 
-            var newEventArgs = new RoutedEventArgs(ValueChangedEvent);
-            RaiseEvent(newEventArgs);
+            RaiseEvent(new RoutedEventArgs(ValueChangedEvent));
         }
 
         #endregion

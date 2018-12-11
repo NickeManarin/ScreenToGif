@@ -1483,6 +1483,9 @@ namespace ScreenToGif.Util
         [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
         public static extern int GetDoubleClickTime();
 
+        [DllImport("msvcrt.dll", EntryPoint = "memcpy", CallingConvention = CallingConvention.Cdecl, SetLastError = false)]
+        public static extern IntPtr MemoryCopy(IntPtr dest, IntPtr src, UIntPtr count);
+
         #endregion
 
         internal delegate bool MonitorEnumProc(IntPtr monitor, IntPtr hdc, IntPtr lprcMonitor, IntPtr lParam);
@@ -2589,10 +2592,21 @@ namespace ScreenToGif.Util
             }
         }
 
-        public static List<Monitor> AllMonitorsScaled(double scale)
+        public static List<Monitor> AllMonitorsScaled(double scale, bool offset = false)
         {
             //TODO: I should probably take each monitor scale.
             var monitors = AllMonitors;
+
+            if (offset)
+            {
+                foreach (var monitor in monitors)
+                {
+                    monitor.Bounds = new Rect(monitor.Bounds.X / scale - SystemParameters.VirtualScreenLeft, monitor.Bounds.Y / scale - SystemParameters.VirtualScreenTop, monitor.Bounds.Width / scale, monitor.Bounds.Height / scale);
+                    monitor.WorkingArea = new Rect(monitor.WorkingArea.X / scale - SystemParameters.VirtualScreenLeft, monitor.WorkingArea.Y / scale - SystemParameters.VirtualScreenTop, monitor.WorkingArea.Width / scale, monitor.WorkingArea.Height / scale);
+                }
+
+                return monitors;
+            }
 
             foreach (var monitor in monitors)
             {

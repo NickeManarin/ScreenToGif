@@ -121,6 +121,9 @@ namespace ScreenToGif.Windows
             {
                 #region Remove all the files
 
+                if (Project == null)
+                    return;
+
                 foreach (var frame in Project.Frames)
                 {
                     try
