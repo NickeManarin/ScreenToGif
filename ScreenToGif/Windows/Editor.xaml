@@ -2060,8 +2060,8 @@
                                         <n:ExtendedCheckBox Grid.Row="6" x:Name="CustomCommandsCheckBox" Text="{DynamicResource S.SaveAs.SaveOptions.ExecuteCommands}" Margin="10,3,3,3"
                                                             IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=ExecuteCustomCommands, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                                        <n:ExtendedTextBox Grid.Row="7" MinHeight="23" Margin="20,3,3,3" VerticalContentAlignment="Top" TextWrapping="WrapWithOverflow" AcceptsReturn="True"
-                                                           Text="{Binding Source={x:Static u:UserSettings.All}, Path=CustomCommands, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        <n:ExtendedTextBox Grid.Row="7" x:Name="CustomCommandsTextBox" MinHeight="23" Margin="20,3,3,3" VerticalContentAlignment="Top" TextWrapping="WrapWithOverflow" 
+                                                           AcceptsReturn="True" Text="{Binding Source={x:Static u:UserSettings.All}, Path=CustomCommands, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                            Visibility="{Binding IsChecked, ElementName=CustomCommandsCheckBox, Converter={StaticResource Bool2Visibility}}"
                                                            ToolTip="{DynamicResource S.SaveAs.SaveOptions.ExecuteCommands.Info}"/>
                                     </Grid>
@@ -2114,8 +2114,8 @@
                                         <n:ExtendedCheckBox Grid.Row="4" x:Name="CustomCommandsApngCheckBox" Text="{DynamicResource S.SaveAs.SaveOptions.ExecuteCommands}" Margin="10,3,3,3"
                                                             IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=ExecuteCustomCommandsApng, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                                        <n:ExtendedTextBox Grid.Row="5" MinHeight="23" Margin="20,3,3,3" VerticalContentAlignment="Top" TextWrapping="WrapWithOverflow" AcceptsReturn="True"
-                                                           Text="{Binding Source={x:Static u:UserSettings.All}, Path=CustomCommandsApng, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        <n:ExtendedTextBox Grid.Row="5" x:Name="CustomCommandsApngTextBox" MinHeight="23" Margin="20,3,3,3" VerticalContentAlignment="Top" TextWrapping="WrapWithOverflow" 
+                                                           AcceptsReturn="True" Text="{Binding Source={x:Static u:UserSettings.All}, Path=CustomCommandsApng, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                            Visibility="{Binding IsChecked, ElementName=CustomCommandsApngCheckBox, Converter={StaticResource Bool2Visibility}}"
                                                            ToolTip="{DynamicResource S.SaveAs.SaveOptions.ExecuteCommands.Info}"/>
                                     </Grid>
@@ -2168,8 +2168,8 @@
                                         <n:ExtendedCheckBox Grid.Row="4" x:Name="CustomCommandsVideoCheckBox" Text="{DynamicResource S.SaveAs.SaveOptions.ExecuteCommands}" Margin="10,3,3,3"
                                                             IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=ExecuteCustomCommandsVideo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                                        <n:ExtendedTextBox Grid.Row="5" MinHeight="23" Margin="20,3,3,3" VerticalContentAlignment="Top" TextWrapping="WrapWithOverflow" AcceptsReturn="True"
-                                                           Text="{Binding Source={x:Static u:UserSettings.All}, Path=CustomCommandsVideo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        <n:ExtendedTextBox Grid.Row="5" x:Name="CustomCommandsVideoTextBox" MinHeight="23" Margin="20,3,3,3" VerticalContentAlignment="Top" TextWrapping="WrapWithOverflow" 
+                                                           AcceptsReturn="True" Text="{Binding Source={x:Static u:UserSettings.All}, Path=CustomCommandsVideo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                            Visibility="{Binding IsChecked, ElementName=CustomCommandsVideoCheckBox, Converter={StaticResource Bool2Visibility}}"
                                                            ToolTip="{DynamicResource S.SaveAs.SaveOptions.ExecuteCommands.Info}"/>
                                     </Grid>
@@ -2282,8 +2282,8 @@
                                         <n:ExtendedCheckBox Grid.Row="4" x:Name="CustomCommandsPsdCheckBox" Text="{DynamicResource S.SaveAs.SaveOptions.ExecuteCommands}" Margin="10,3,3,3"
                                                             IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=ExecuteCustomCommandsPhotoshop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                                        <n:ExtendedTextBox Grid.Row="5" MinHeight="23" Margin="20,3,3,3" VerticalContentAlignment="Top" TextWrapping="WrapWithOverflow" AcceptsReturn="True"
-                                                           Text="{Binding Source={x:Static u:UserSettings.All}, Path=CustomCommandsPhotoshop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        <n:ExtendedTextBox Grid.Row="5" x:Name="CustomCommandsPsdTextBox"  MinHeight="23" Margin="20,3,3,3" VerticalContentAlignment="Top" TextWrapping="WrapWithOverflow" 
+                                                           AcceptsReturn="True" Text="{Binding Source={x:Static u:UserSettings.All}, Path=CustomCommandsPhotoshop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                            Visibility="{Binding IsChecked, ElementName=CustomCommandsPsdCheckBox, Converter={StaticResource Bool2Visibility}}"
                                                            ToolTip="{DynamicResource S.SaveAs.SaveOptions.ExecuteCommands.Info}"/>
                                     </Grid>

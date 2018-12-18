@@ -55,9 +55,11 @@ namespace ScreenToGif.Windows
         public Options()
         {
             InitializeComponent();
-            
+
 #if UWP
-                PaypalLabel.Visibility = Visibility.Collapsed;
+                //PaypalLabel.Visibility = Visibility.Collapsed;
+                UpdatesCheckBox.Visibility = Visibility.Collapsed;
+                StoreTextBlock.Visibility = Visibility.Visible;
 #endif
         }
 
@@ -990,7 +992,7 @@ namespace ScreenToGif.Windows
                 App.MainViewModel.CheckDiskSpace();
             }
 
-            TempSeparator.TextRight = string.Format(LocalizationHelper.Get("TempFiles.FilesAndFolders.Count") ?? "{0} folders and {1} files", _folderList.Count.ToString("##,##0"),
+            TempSeparator.TextRight = string.Format(LocalizationHelper.Get("TempFiles.FilesAndFolders.Count", "{0} folders and {1} files"), _folderList.Count.ToString("##,##0"),
                 _folderList.Sum(folder => Directory.EnumerateFiles(folder.FullName).Count()).ToString("##,##0"));
 
             ClearTempButton.IsEnabled = _folderList.Any();
@@ -1122,7 +1124,7 @@ namespace ScreenToGif.Windows
                 {
                     App.MainViewModel.CheckDiskSpace();
 
-                    TempSeparator.TextRight = string.Format(LocalizationHelper.Get("TempFiles.FilesAndFolders.Count") ?? "{0} folders and {1} files", _folderList.Count.ToString("##,##0"), _fileCount.ToString("##,##0"));
+                    TempSeparator.TextRight = string.Format(LocalizationHelper.Get("TempFiles.FilesAndFolders.Count", "{0} folders and {1} files"), _folderList.Count.ToString("##,##0"), _fileCount.ToString("##,##0"));
 
                     ClearTempButton.IsEnabled = _folderList.Any();
                 });
@@ -1289,6 +1291,10 @@ namespace ScreenToGif.Windows
                 return;
             }
 
+#if UWP
+            StatusBand.Warning(LocalizationHelper.Get("S.Extras.DownloadRestriction"));
+            return;
+#else
             #region Save as
 
             var output = UserSettings.All.FfmpegLocation ?? "";
@@ -1336,7 +1342,7 @@ namespace ScreenToGif.Windows
             ExtrasGrid.IsEnabled = false;
             Cursor = Cursors.AppStarting;
             FfmpegImageCard.Status = ExtrasStatus.Processing;
-            FfmpegImageCard.Description = FindResource("Extras.Downloading") as string;
+            FfmpegImageCard.Description = LocalizationHelper.Get("Extras.Downloading");
 
             try
             {
@@ -1369,6 +1375,7 @@ namespace ScreenToGif.Windows
             }
 
             #endregion
+#endif
         }
 
         private async void GifskiImageCard_Click(object sender, RoutedEventArgs e)
@@ -1381,6 +1388,10 @@ namespace ScreenToGif.Windows
                 return;
             }
 
+#if UWP
+            StatusBand.Warning(LocalizationHelper.Get("S.Extras.DownloadRestriction"));
+            return;
+#else
             #region Save as
 
             var output = UserSettings.All.GifskiLocation ?? "";
@@ -1428,7 +1439,7 @@ namespace ScreenToGif.Windows
             ExtrasGrid.IsEnabled = false;
             Cursor = Cursors.AppStarting;
             GifskiImageCard.Status = ExtrasStatus.Processing;
-            GifskiImageCard.Description = FindResource("Extras.Downloading") as string;
+            GifskiImageCard.Description = LocalizationHelper.Get("Extras.Downloading");
 
             try
             {
@@ -1462,6 +1473,7 @@ namespace ScreenToGif.Windows
             }
 
             #endregion
+#endif
         }
 
         private void LocationTextBox_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
@@ -1480,7 +1492,12 @@ namespace ScreenToGif.Windows
             var isRelative = !string.IsNullOrWhiteSpace(output) && !Path.IsPathRooted(output);
             var notAlt = !string.IsNullOrWhiteSpace(output) && (UserSettings.All.FfmpegLocation ?? "").Contains(Path.DirectorySeparatorChar);
 
+            //Gets the current directory folder, where the file is located. If empty, it means that the path is relative.
             var directory = !string.IsNullOrWhiteSpace(output) ? Path.GetDirectoryName(output) : "";
+
+            if (!string.IsNullOrWhiteSpace(output) && string.IsNullOrWhiteSpace(directory))
+                directory = AppDomain.CurrentDomain.BaseDirectory;
+
             var initial = Directory.Exists(directory) ? directory : Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
 
             var ofd = new OpenFileDialog
@@ -1523,7 +1540,12 @@ namespace ScreenToGif.Windows
             var isRelative = !string.IsNullOrWhiteSpace(output) && !Path.IsPathRooted(output);
             var notAlt = !string.IsNullOrWhiteSpace(output) && (UserSettings.All.GifskiLocation ?? "").Contains(Path.DirectorySeparatorChar);
 
+            //Gets the current directory folder, where the file is located. If empty, it means that the path is relative.
             var directory = !string.IsNullOrWhiteSpace(output) ? Path.GetDirectoryName(output) : "";
+
+            if (!string.IsNullOrWhiteSpace(output) && string.IsNullOrWhiteSpace(directory))
+                directory = AppDomain.CurrentDomain.BaseDirectory;
+
             var initial = Directory.Exists(directory) ? directory : Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
 
             var ofd = new OpenFileDialog
@@ -1544,7 +1566,7 @@ namespace ScreenToGif.Windows
             //Converts to a relative path again.
             if (isRelative && !string.IsNullOrWhiteSpace(UserSettings.All.GifskiLocation))
             {
-                var selected = new Uri(UserSettings.All.FfmpegLocation);
+                var selected = new Uri(UserSettings.All.GifskiLocation);
                 var baseFolder = new Uri(AppDomain.CurrentDomain.BaseDirectory);
                 var relativeFolder = Uri.UnescapeDataString(baseFolder.MakeRelativeUri(selected).ToString());
 
@@ -1574,37 +1596,38 @@ namespace ScreenToGif.Windows
 
             try
             {
-                if (Util.Other.IsFfmpegPresent())
+                if (Util.Other.IsFfmpegPresent(true))
                 {
                     var info = new FileInfo(UserSettings.All.FfmpegLocation);
                     info.Refresh();
 
                     FfmpegImageCard.Status = ExtrasStatus.Ready;
-                    FfmpegImageCard.Description = string.Format(TryFindResource("Extras.Ready") as string ?? "{0}", Humanizer.BytesToString(info.Length));
+                    FfmpegImageCard.Description = string.Format(LocalizationHelper.Get("Extras.Ready", "{0}"), Humanizer.BytesToString(info.Length));
                 }
                 else
                 {
                     FfmpegImageCard.Status = ExtrasStatus.Available;
-                    FfmpegImageCard.Description = string.Format(TryFindResource("Extras.Download") as string ?? "{0}", "~ 43,7 MB");
+                    FfmpegImageCard.Description = string.Format(LocalizationHelper.Get("Extras.Download", "{0}"), "~ 43,7 MB");
                 }
 
-                if (Util.Other.IsGifskiPresent())
+                if (Util.Other.IsGifskiPresent(true))
                 {
                     var info = new FileInfo(UserSettings.All.GifskiLocation);
                     info.Refresh();
 
                     GifskiImageCard.Status = ExtrasStatus.Ready;
-                    GifskiImageCard.Description = string.Format(TryFindResource("Extras.Ready") as string ?? "{0}", Humanizer.BytesToString(info.Length));
+                    GifskiImageCard.Description = string.Format(LocalizationHelper.Get("Extras.Ready", "{0}"), Humanizer.BytesToString(info.Length));
                 }
                 else
                 {
                     GifskiImageCard.Status = ExtrasStatus.Available;
-                    GifskiImageCard.Description = string.Format(TryFindResource("Extras.Download") as string ?? "{0}", "~ 1 MB");
+                    GifskiImageCard.Description = string.Format(LocalizationHelper.Get("Extras.Download", "{0}"), "~ 1 MB");
                 }
             }
             catch (Exception ex)
             {
                 LogWriter.Log(ex, "Checking the existance of external tools.");
+                StatusBand.Error("It was not possible to check the existence of the external tools.");
             }
         }
 
@@ -1622,7 +1645,7 @@ namespace ScreenToGif.Windows
             {
                 LogWriter.Log(ex, "Error • Openning the Donation website");
 
-                ErrorDialog.Ok(FindResource("Title.Options") as string, "Error openning the donation website", ex.Message, ex);
+                ErrorDialog.Ok(LocalizationHelper.Get("Title.Options"), "Error openning the donation website", ex.Message, ex);
             }
         }
 
@@ -1636,7 +1659,7 @@ namespace ScreenToGif.Windows
             {
                 LogWriter.Log(ex, "Error • Openning the Donation website");
 
-                ErrorDialog.Ok(FindResource("Title.Options") as string, "Error openning the donation website", ex.Message, ex);
+                ErrorDialog.Ok(LocalizationHelper.Get("Title.Options"), "Error openning the donation website", ex.Message, ex);
             }
         }
 
@@ -1654,7 +1677,7 @@ namespace ScreenToGif.Windows
             {
                 LogWriter.Log(ex, "Error • Openning the Donation website");
 
-                ErrorDialog.Ok(FindResource("Title.Options") as string, "Error openning the donation website", ex.Message, ex);
+                ErrorDialog.Ok(LocalizationHelper.Get("Title.Options"), "Error openning the donation website", ex.Message, ex);
             }
         }
 
@@ -1668,7 +1691,7 @@ namespace ScreenToGif.Windows
             {
                 LogWriter.Log(ex, "Error • Openning the Patreon website");
 
-                ErrorDialog.Ok(FindResource("Title.Options") as string, "Error openning the patreon website", ex.Message, ex);
+                ErrorDialog.Ok(LocalizationHelper.Get("Title.Options"), "Error openning the patreon website", ex.Message, ex);
             }
         }
 
@@ -1692,7 +1715,7 @@ namespace ScreenToGif.Windows
             {
                 LogWriter.Log(ex, "Error • Openning the Steam website");
 
-                ErrorDialog.Ok(FindResource("Title.Options") as string, "Error openning the steam website", ex.Message, ex);
+                ErrorDialog.Ok(LocalizationHelper.Get("Title.Options"), "Error openning the steam website", ex.Message, ex);
             }
         }
 
@@ -1706,7 +1729,7 @@ namespace ScreenToGif.Windows
             {
                 LogWriter.Log(ex, "Error • Openning the donation website");
 
-                ErrorDialog.Ok(FindResource("Title.Options") as string, "Error openning the donation website", ex.Message, ex);
+                ErrorDialog.Ok(LocalizationHelper.Get("Title.Options"), "Error openning the donation website", ex.Message, ex);
             }
         }
 

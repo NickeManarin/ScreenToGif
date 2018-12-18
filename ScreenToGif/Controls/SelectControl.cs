@@ -83,6 +83,11 @@ namespace ScreenToGif.Controls
         /// </summary>
         private DetectedRegion _hitTestWindow;
 
+        /// <summary>
+        /// True when this control is ready to process mouse input when using the Screen/Window selection mode.
+        /// This was added because the event MouseMove was being fired before the method that adjusts the other controls finished. (TL;DR It was a race condition)
+        /// </summary>
+        private bool _ready;
 
         public enum ModeType
         {
@@ -322,7 +327,7 @@ namespace ScreenToGif.Controls
 
                 AdjustInfo(current);
             }
-            else
+            else if (_ready)
             {
                 var current = e.GetPosition(this);
 
@@ -804,6 +809,8 @@ namespace ScreenToGif.Controls
 
         public void OnLoaded(object o, RoutedEventArgs routedEventArgs)
         {
+            _ready = false;
+
             Keyboard.Focus(this);
 
             _blindSpots.Clear();
@@ -1060,6 +1067,8 @@ namespace ScreenToGif.Controls
             }
 
             AdjustSelection();
+
+            _ready = true;
         }
 
         private void OnUnloaded(object sender, RoutedEventArgs e)

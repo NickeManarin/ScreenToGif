@@ -60,7 +60,7 @@
                                     Padding="1,3,5,3" FontSize="17" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="24" HorizontalContentAlignment="Left"/>
                 <n:ImageRadioButton x:Name="CloudRadioButton" Text="{DynamicResource Clouds}" Content="{StaticResource Vector.Web}" TextWrapping="Wrap"
                                     Padding="1,3,5,3" FontSize="17" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="24" HorizontalContentAlignment="Left"/>
-                <n:ImageRadioButton x:Name="ExtrasRadioButton" Text="{DynamicResource Extras}" Content="{StaticResource Vector.Extras}"  TextWrapping="Wrap" 
+                <n:ImageRadioButton x:Name="ExtrasRadioButton" Text="{DynamicResource Extras}" Content="{StaticResource Vector.Extras}" TextWrapping="Wrap"
                                     Padding="1,3,5,3" FontSize="17" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="24" HorizontalContentAlignment="Left"/>
                 <n:ImageRadioButton x:Name="DonateRadio" Text="{DynamicResource Donate}" Content="{StaticResource Vector.Money}" TextWrapping="Wrap"
                                     Padding="1,3,5,3" FontSize="17" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="24" HorizontalContentAlignment="Left"/>
@@ -142,7 +142,7 @@
                         <n:ExtendedCheckBox Text="{DynamicResource Application.Other.DrawOutlineOutside}" Margin="15,3,5,3" IsChecked="{Binding Path=DrawOutlineOutside, Mode=TwoWay}"/>
                         <n:ExtendedCheckBox Text="{DynamicResource Application.Other.DisableHardwareAcceleration}" Margin="15,3,5,3" IsChecked="{Binding Path=DisableHardwareAcceleration, Mode=TwoWay}"/>
                         <n:ExtendedCheckBox Text="{DynamicResource Application.Other.CheckForTranslationUpdates}" Margin="15,3,5,3" IsChecked="{Binding Path=CheckForTranslationUpdates, Mode=TwoWay}"/>
-                        <n:ExtendedCheckBox Text="{DynamicResource Application.Other.CheckForUpdates}" Margin="15,3,5,3" IsChecked="{Binding Path=CheckForUpdates, Mode=TwoWay}"/>
+                        <n:ExtendedCheckBox x:Name="UpdatesCheckBox" Text="{DynamicResource Application.Other.CheckForUpdates}" Margin="15,3,5,3" IsChecked="{Binding Path=CheckForUpdates, Mode=TwoWay}"/>
                     </StackPanel>
 
                     <!--Interface-->
@@ -605,7 +605,7 @@
                                        Style="{StaticResource Style.Button.NoText.Border}" MinWidth="30" MinHeight="30" Command="u:Commands.Edit"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
                                        ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-5"/>
-                        
+
                         <n:ImageButton Grid.Row="5" Grid.Column="1" x:Name="RemoveButton" Margin="3,5" Content="{StaticResource Vector.Remove}" ContentWidth="18"
                                        Style="{StaticResource Style.Button.NoText.Border}" MinWidth="30" MinHeight="30" Command="u:Commands.Remove"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
@@ -993,10 +993,10 @@
                                            Click="SelectGifski_Click" ToolTip="{DynamicResource Extras.GifskiLocation.Select}"
                                            ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
                         </Grid>
-                        
+
                         <StackPanel Grid.Row="7" Orientation="Horizontal">
                             <Viewbox Child="{StaticResource Vector.Info}" Height="16" Width="16" Margin="2"/>
-                            
+
                             <TextBlock Margin="2" VerticalAlignment="Center">
                                 <Hyperlink NavigateUri="https://ffmpeg.org/legal.html" RequestNavigate="ExtrasHyperlink_OnRequestNavigate">
                                     <Run Text="{DynamicResource Extras.License.Ffmpeg}"/>
@@ -1306,8 +1306,9 @@
 
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="34"/>
-                                <RowDefinition Height="34"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -1331,15 +1332,19 @@
                                 </Hyperlink>
                             </Label>
 
-                            <Label Grid.Row="1" Grid.Column="1" Content="{DynamicResource About.Author}" FontSize="16" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center"
-                                   Effect="{StaticResource Shadow.Foreground}"/>
+                            <Label Grid.Row="1" Grid.Column="1" Content="{DynamicResource About.Author}" FontSize="16" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground}"/>
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" x:Name="StoreTextBlock" Text="{DynamicResource S.About.StoreVersion}" Foreground="#882200" Margin="5"
+                                   VerticalAlignment="Center" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground}" Visibility="Collapsed"/>
                         </Grid>
 
                         <n:LabelSeparator Text="{DynamicResource About.Contact}"/>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition />
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -1347,31 +1352,47 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Grid.Column="0" Content="Email:" FontSize="12" VerticalContentAlignment="Center" Margin="15,0,0,0"/>
-
-                            <Label Grid.Row="0" Grid.Column="1" FontSize="12" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Email:" FontSize="12" VerticalAlignment="Center" Margin="15,0,5,0"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" FontSize="12" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
                                 <Hyperlink NavigateUri="mailto:nicke@outlook.com.br" RequestNavigate="Hyperlink_OnRequestNavigate">
                                     nicke@outlook.com.br
                                 </Hyperlink>
-                            </Label>
+                            </TextBlock>
 
-                            <Label Grid.Row="1" Grid.Column="0" Content="Subreddit:" FontSize="12" VerticalContentAlignment="Center" Margin="15,0,0,0"/>
-
-                            <Label Grid.Row="1" Grid.Column="1" FontSize="12" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
-                                <Hyperlink NavigateUri="https://www.reddit.com/r/screentogif/" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
-                                           RequestNavigate="Hyperlink_OnRequestNavigate">
-                                    /r/screentogif/
+                            <TextBlock Grid.Row="0" Grid.Column="2" Text="Discord:" FontSize="12" VerticalAlignment="Center" Margin="15,0,5,0"/>
+                            <TextBlock Grid.Row="0" Grid.Column="3" FontSize="12" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
+                                <Hyperlink NavigateUri="https://discord.gg/XgEqDHX" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" RequestNavigate="Hyperlink_OnRequestNavigate">
+                                    <Run Text="{StaticResource S.About.Contact.Discord}"/>
                                 </Hyperlink>
-                            </Label>
+                            </TextBlock>
 
-                            <Label Grid.Row="2" Grid.Column="0" Content="Twitter:" FontSize="12" VerticalContentAlignment="Center" Margin="15,0,0,0"/>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Reddit:" FontSize="12" VerticalAlignment="Center" Margin="15,0,5,0"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" FontSize="12" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
+                                <Hyperlink NavigateUri="https://www.reddit.com/r/screentogif/" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" RequestNavigate="Hyperlink_OnRequestNavigate">
+                                    /r/ScreenToGif/
+                                </Hyperlink>
+                            </TextBlock>
 
-                            <Label Grid.Row="2" Grid.Column="1" FontSize="12" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
-                                <Hyperlink NavigateUri="https://www.twitter.com/NickeManarin" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
-                                           RequestNavigate="Hyperlink_OnRequestNavigate">
+                            <TextBlock Grid.Row="1" Grid.Column="2" Text="Facebook:" FontSize="12" VerticalAlignment="Center" Margin="15,0,5,0"/>
+                            <TextBlock Grid.Row="1" Grid.Column="3" FontSize="12" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
+                                <Hyperlink NavigateUri="https://www.facebook.com/ScreenToGif" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" RequestNavigate="Hyperlink_OnRequestNavigate">
+                                    <Run Text="{StaticResource S.About.Contact.Facebook}"/>
+                                </Hyperlink>
+                            </TextBlock>
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Twitter:" FontSize="12" VerticalAlignment="Center" Margin="15,0,5,0"/>
+                            <TextBlock Grid.Row="2" Grid.Column="1" FontSize="12" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
+                                <Hyperlink NavigateUri="https://www.twitter.com/NickeManarin" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" RequestNavigate="Hyperlink_OnRequestNavigate">
                                     @NickeManarin
                                 </Hyperlink>
-                            </Label>
+                            </TextBlock>
+
+                            <TextBlock Grid.Row="2" Grid.Column="2" Text="Gitter:" FontSize="12" VerticalAlignment="Center" Margin="15,0,5,0"/>
+                            <TextBlock Grid.Row="2" Grid.Column="3" FontSize="12" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
+                                <Hyperlink NavigateUri="https://www.facebook.com/ScreenToGif" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" RequestNavigate="Hyperlink_OnRequestNavigate">
+                                    <Run Text="{StaticResource S.About.Contact.Gitter}"/>
+                                </Hyperlink>
+                            </TextBlock>
                         </Grid>
 
                         <n:LabelSeparator Text="{DynamicResource About.Technical}"/>
@@ -1389,25 +1410,25 @@
                             <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource About.Technical.License}" FontSize="12" VerticalContentAlignment="Center" Margin="15,0,0,0"/>
 
                             <TextBlock Grid.Row="0" Grid.Column="1" FontSize="12" FontFamily="Segoe UI Semilight" HorizontalAlignment="Left" Padding="3,5">
-                            <Hyperlink NavigateUri="https://github.com/NickeManarin/ScreenToGif/blob/master/LICENSE.txt" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
-                                       Cursor="Hand" RequestNavigate="Hyperlink_OnRequestNavigate">
-                                MS-PL
-                            </Hyperlink>
-                            <Run Text="/"/>
-                            <Hyperlink NavigateUri="https://tldrlegal.com/license/microsoft-public-license-(ms-pl)" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
-                                       Cursor="Hand" RequestNavigate="Hyperlink_OnRequestNavigate">
-                                TL;DR Legal
-                            </Hyperlink>
-                            <Run Text="{DynamicResource About.Technical.Free}" Foreground="#FF969696"/>
+                                <Hyperlink NavigateUri="https://github.com/NickeManarin/ScreenToGif/blob/master/LICENSE.txt" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
+                                           Cursor="Hand" RequestNavigate="Hyperlink_OnRequestNavigate">
+                                    MS-PL
+                                </Hyperlink>
+                                <Run Text="/"/>
+                                <Hyperlink NavigateUri="https://tldrlegal.com/license/microsoft-public-license-(ms-pl)" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
+                                           Cursor="Hand" RequestNavigate="Hyperlink_OnRequestNavigate">
+                                    TL;DR Legal
+                                </Hyperlink>
+                                <Run Text="{DynamicResource About.Technical.Free}" Foreground="#FF969696"/>
                             </TextBlock>
 
                             <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource About.Technical.SourceCode}" FontSize="12" VerticalContentAlignment="Center" Margin="15,0,0,0"/>
 
                             <TextBlock Grid.Row="1" Grid.Column="1" FontSize="12" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
-                            <Hyperlink NavigateUri="https://github.com/NickeManarin/ScreenToGif" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
-                                       RequestNavigate="Hyperlink_OnRequestNavigate">
-                                github.com/NickeManarin/ScreenToGif
-                            </Hyperlink>
+                                <Hyperlink NavigateUri="https://github.com/NickeManarin/ScreenToGif" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
+                                           RequestNavigate="Hyperlink_OnRequestNavigate">
+                                    github.com/NickeManarin/ScreenToGif
+                                </Hyperlink>
                             </TextBlock>
                         </Grid>
 

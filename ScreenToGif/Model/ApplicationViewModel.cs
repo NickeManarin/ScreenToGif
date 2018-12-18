@@ -520,6 +520,8 @@ namespace ScreenToGif.Model
             if (!UserSettings.All.CheckForUpdates)
                 return;
 
+#if !UWP
+
             try
             {
                 var request = (HttpWebRequest)WebRequest.Create("https://api.github.com/repos/NickeManarin/ScreenToGif/releases/latest");
@@ -564,6 +566,8 @@ namespace ScreenToGif.Model
             {
                 LogWriter.Log(ex, "Check for update task");
             }
+
+#endif
 
             GC.Collect();
         }

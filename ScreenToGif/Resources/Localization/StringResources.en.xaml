@@ -263,6 +263,7 @@
     <s:String x:Key="Extras.Downloading">Downloading...</s:String>
     <s:String x:Key="Extras.Ready">Downloaded&#x0d;{0}</s:String>
     <s:String x:Key="Extras.Ready.Info">Click here to open the properties of the file.</s:String>
+    <s:String x:Key="S.Extras.DownloadRestriction">Apps distributed by the Microsoft Store cannot download other apps. You'll have to download it manually.</s:String>
     <s:String x:Key="Extras.FfmpegLocation">FFmpeg location</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Select">Select the location of the FFmpeg executable</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Invalid">The path of FFMpeg executable contains one or more invalid characters. Please, select a valid location for that executable.</s:String>
@@ -271,7 +272,7 @@
     <s:String x:Key="Extras.GifskiLocation.Invalid">The path of Gifski executable contains one or more invalid characters. Please, select a valid location for that executable.</s:String>
     <s:String x:Key="Extras.License.Ffmpeg">FFmpeg license</s:String>
     <s:String x:Key="Extras.License.Gifski">Gifski license</s:String>
-    
+
     <s:String x:Key="Donate.IfYouWish">If you wish to thank me :D</s:String>
     <s:String x:Key="Donate.DonateDollar">Donate US$</s:String>
     <s:String x:Key="Donate.DonateEuro">Donate €</s:String>
@@ -286,7 +287,11 @@
 
     <s:String x:Key="About.Version">Version:</s:String>
     <s:String x:Key="About.Author">Author: Nicke Manarin</s:String>
+    <s:String x:Key="S.About.StoreVersion">Microsoft Store version. Some features are disabled due to enforced policies.</s:String>
     <s:String x:Key="About.Contact">Contact</s:String>
+    <s:String x:Key="S.About.Contact.Discord">Join server</s:String>
+    <s:String x:Key="S.About.Contact.Facebook">Visit page</s:String>
+    <s:String x:Key="S.About.Contact.Gitter">Join room</s:String>
     <s:String x:Key="About.Technical">Technical</s:String>
     <s:String x:Key="About.Technical.License">License:</s:String>
     <s:String x:Key="About.Technical.Free">(This is a completely free app)</s:String>

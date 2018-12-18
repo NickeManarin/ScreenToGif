@@ -530,11 +530,11 @@ namespace ScreenToGif.Util
 
         #region Dependencies
 
-        public static bool IsFfmpegPresent()
+        public static bool IsFfmpegPresent(bool ignoreEnvironment = false)
         {
             var realPath = "";
 
-            //If the path is relative, File.Exists() was returning C:\\Windows\\System32\Gifski.dll when the app was lauched from the "Open with" context menu.
+            //If the path is relative, File.Exists() was returning C:\\Windows\\System32\ffmpeg.exe when the app was lauched from the "Open with" context menu.
             //So, in order to get the correct location, I need to combine the current base directory with the relative path.
             if (!string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation) && !Path.IsPathRooted(UserSettings.All.FfmpegLocation))
                 realPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, UserSettings.All.FfmpegLocation.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar));
@@ -542,6 +542,10 @@ namespace ScreenToGif.Util
             //File location already choosen or detected.
             if (!string.IsNullOrWhiteSpace(realPath) && File.Exists(realPath))
                 return true;
+
+            //If not found by direct/relative path, ignore the environment variables.
+            if (ignoreEnvironment)
+                return false;
 
             #region Check Environment Variables
 
@@ -570,7 +574,7 @@ namespace ScreenToGif.Util
             return false;
         }
 
-        public static bool IsGifskiPresent()
+        public static bool IsGifskiPresent(bool ignoreEnvironment = false)
         {
             var realPath = "";
 
@@ -582,6 +586,10 @@ namespace ScreenToGif.Util
             //File location already choosen or detected.
             if (!string.IsNullOrWhiteSpace(realPath) && File.Exists(realPath))
                 return true;
+
+            //If not found by direct/relative path, ignore the environment variables.
+            if (ignoreEnvironment)
+                return false;
 
             #region Check Environment Variables
 

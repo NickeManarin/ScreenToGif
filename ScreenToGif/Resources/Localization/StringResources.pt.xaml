@@ -263,6 +263,7 @@
     <s:String x:Key="Extras.Downloading">Baixando...</s:String>
     <s:String x:Key="Extras.Ready">Presente&#x0d;{0}</s:String>
     <s:String x:Key="Extras.Ready.Info">Clique aqui para abrir as propriedades do arquivo.</s:String>
+    <s:String x:Key="S.Extras.DownloadRestriction">Aplicativos distribuídos pela Microsoft Store não podem baixar outros aplicativos. Você vai ter que baixar manualmente.</s:String>
     <s:String x:Key="Extras.FfmpegLocation">Localização do FFmpeg</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Select">Selecione a pasta de localização do executável do FFmpeg.</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Invalid">O caminho do executável FFMpeg contém um ou mais caracteres inválidos. Por favor, selecione um caminho válido para o executável.</s:String>
@@ -286,7 +287,11 @@
 
     <s:String x:Key="About.Version">Versão:</s:String>
     <s:String x:Key="About.Author">Autor: Nicke Manarin</s:String>
+    <s:String x:Key="S.About.StoreVersion">Versão da Microsoft Store. Alguns recursos estão desabilitadas devido a politicas aplicadas.</s:String>
     <s:String x:Key="About.Contact">Contato</s:String>
+    <s:String x:Key="S.About.Contact.Discord">Entrar no servidor</s:String>
+    <s:String x:Key="S.About.Contact.Facebook">Visitar página</s:String>
+    <s:String x:Key="S.About.Contact.Gitter">Entrar na sala</s:String>
     <s:String x:Key="About.Technical">Técnico</s:String>
     <s:String x:Key="About.Technical.License">Licença:</s:String>
     <s:String x:Key="About.Technical.Free">(Este aplicativo é completamente gratuíto)</s:String>
@@ -917,7 +922,7 @@
     <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Salvar o arquivo em uma pasta de sua escolha.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Sobrescrever (caso já exista).</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Salvar como projeto também (mesma pasta, mesmo nome).</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Fazer upload do arquivo (experimental).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Fazer upload do arquivo.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.UploadDestination">Destino do upload.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">Copiar para a área de transferência.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File">Arquivo</s:String>

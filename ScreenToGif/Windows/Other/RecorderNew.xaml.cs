@@ -576,7 +576,7 @@ namespace ScreenToGif.Windows.Other
         }
 
         private void PickRegion(SelectControl.ModeType mode)
-        {
+        {           
             SelectControl.Mode = mode;
             SelectControl.BackImage = CaptureBackground();
 
@@ -610,7 +610,7 @@ namespace ScreenToGif.Windows.Other
                 MainBorder.Arrange(new Rect(MainBorder.DesiredSize));
             }
 
-            var monitors = Monitor.AllMonitorsScaled(1, true); //TODO: Scale it?
+            var monitors = Monitor.AllMonitorsScaled(_scale, true); //TODO: Scale it?
 
             //Calculates how much space left at all sides of the current selected region.
             var bottom = new Rect(Region.Left + Left + Region.Width / 2 - MainBorder.ActualWidth / 2, Region.Bottom + Top + 10, MainBorder.ActualWidth, MainBorder.ActualHeight);

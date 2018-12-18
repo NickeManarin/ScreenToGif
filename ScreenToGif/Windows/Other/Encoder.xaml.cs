@@ -991,6 +991,8 @@ namespace ScreenToGif.Windows.Other
 
                 #region Execute commands
 
+#if !UWP
+
                 if (param.ExecuteCommands && !string.IsNullOrWhiteSpace(param.PostCommands))
                 {
                     InternalUpdate(id, "Encoder.Executing", true, true);
@@ -1039,6 +1041,8 @@ namespace ScreenToGif.Windows.Other
                         InternalSetCommand(id, false, command, output, e);
                     }
                 }
+
+#endif
 
                 #endregion
 

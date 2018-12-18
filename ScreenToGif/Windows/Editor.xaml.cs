@@ -193,6 +193,23 @@ namespace ScreenToGif.Windows
                 WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
             #endregion
+
+            #region UWP restrictions
+
+#if UWP
+
+            CustomCommandsCheckBox.Visibility = Visibility.Collapsed;
+            CustomCommandsTextBox.Visibility = Visibility.Collapsed;
+            CustomCommandsApngCheckBox.Visibility = Visibility.Collapsed;
+            CustomCommandsApngTextBox.Visibility = Visibility.Collapsed;
+            CustomCommandsVideoCheckBox.Visibility = Visibility.Collapsed;
+            CustomCommandsVideoTextBox.Visibility = Visibility.Collapsed;
+            CustomCommandsPsdCheckBox.Visibility = Visibility.Collapsed;
+            CustomCommandsPsdTextBox.Visibility = Visibility.Collapsed;
+
+#endif
+
+            #endregion
         }
 
         #region Main Events
