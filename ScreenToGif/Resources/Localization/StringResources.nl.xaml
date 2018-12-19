@@ -95,7 +95,7 @@
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Vaste framerate.</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Constante framerate die niet verandert bij opnamevertraging)</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Asynchrone opnamemodus inschakelen.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(deze optie vermindert vertragingen in de opname)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(Deze optie vermindert vertragingen in de opname)</s:String>
     <s:String x:Key="Application.ScreenRecorder.NewRecorder">Nieuwe opname-UI inschakelen.</s:String>
     <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(Dit vervangt de oude opname-UI)</s:String>
     <s:String x:Key="Application.ScreenRecorder.Magnifier">Vergrootglas inschakelen.</s:String>
@@ -237,7 +237,7 @@
     <s:String x:Key="S.Upload.Imgur.Expired">Autorisatie loopt af in {0}.</s:String>
     <s:String x:Key="S.Upload.Imgur.Valid">Autorisatie geldig tot {0}.</s:String>
     <s:String x:Key="S.Upload.Imgur.Removed">Imgur-autorisatie verwijderd.</s:String>
-    <s:String x:Key="S.Upload.Imgur.Error.AlbumLoad">Het was niet mogelijk om album te laden</s:String>
+    <s:String x:Key="S.Upload.Imgur.Error.AlbumLoad">Het was niet mogelijk om het album te laden</s:String>
     <s:String x:Key="S.Upload.Gyfcat.Anonymous">Gyfcat (Anoniem)</s:String>
     <s:String x:Key="S.Upload.Yandex.Token">OAuth token:</s:String>
     <s:String x:Key="S.Upload.Pick.Destination">Selecteer bestemming</s:String>
@@ -273,7 +273,7 @@
     <s:String x:Key="About.Contact">Contact</s:String>
     <s:String x:Key="About.Technical">Technisch</s:String>
     <s:String x:Key="About.Technical.License">Licentie:</s:String>
-    <s:String x:Key="About.Technical.Free">(Dit programma is een geheel gratis)</s:String>
+    <s:String x:Key="About.Technical.Free">(Dit programma is geheel gratis)</s:String>
     <s:String x:Key="About.Technical.SourceCode">Broncode:</s:String>
     <s:String x:Key="About.ABigThanksTo">Veel dank verschuldigd aan</s:String>
     <s:String x:Key="About.ABigThanksTo.Everyone">Alle supporters en mensen die reacties en/of donaties hebben gegeven.</s:String>
