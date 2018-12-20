@@ -70,7 +70,10 @@
             <Trigger Property="OutputType" Value="Video">
                 <Setter Property="Image" Value="{DynamicResource Vector.Video}"/>
             </Trigger>
-
+            <Trigger Property="OutputType" Value="Photoshop">
+                <Setter Property="Image" Value="{DynamicResource Vector.Psd}"/>
+            </Trigger>
+          
             <Trigger Property="IsIndeterminate" Value="True">
                 <Setter TargetName="PercentageLabel" Property="Content" Value="~"/>
             </Trigger>
