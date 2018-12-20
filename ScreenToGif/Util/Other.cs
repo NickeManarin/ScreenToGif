@@ -532,7 +532,7 @@ namespace ScreenToGif.Util
 
         public static bool IsFfmpegPresent(bool ignoreEnvironment = false)
         {
-            var realPath = "";
+            var realPath = UserSettings.All.FfmpegLocation;
 
             //If the path is relative, File.Exists() was returning C:\\Windows\\System32\ffmpeg.exe when the app was lauched from the "Open with" context menu.
             //So, in order to get the correct location, I need to combine the current base directory with the relative path.
@@ -576,7 +576,7 @@ namespace ScreenToGif.Util
 
         public static bool IsGifskiPresent(bool ignoreEnvironment = false)
         {
-            var realPath = "";
+            var realPath = UserSettings.All.GifskiLocation;
 
             //If the path is relative, File.Exists() was returning C:\\Windows\\System32\Gifski.dll when the app was lauched from the "Open with" context menu.
             //So, in order to get the correct location, I need to combine the current base directory with the relative path.
