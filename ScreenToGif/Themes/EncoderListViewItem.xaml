@@ -208,7 +208,10 @@
             <Trigger Property="OutputType" Value="Video">
                 <Setter TargetName="FileButton" Property="Content" Value="{DynamicResource Vector.Video}"/>
             </Trigger>
-
+            <Trigger Property="OutputType" Value="Photoshop">
+                <Setter TargetName="FileButton" Property="Content" Value="{DynamicResource Vector.Psd}"/>
+            </Trigger>
+          
             <Trigger Property="CopiedToClipboard" Value="True">
                 <Setter TargetName="CopiedTextBlock" Property="Visibility" Value="Visible"/>
             </Trigger>
