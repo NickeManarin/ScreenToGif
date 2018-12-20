@@ -333,7 +333,7 @@ namespace ScreenToGif.Controls
 
                 _hitTestWindow = Windows.FirstOrDefault(x => x.Bounds.Contains(current));
                 Selected = _hitTestWindow?.Bounds ?? Rect.Empty;
-                
+
                 AdjustInfo(current);
             }
 
@@ -1073,6 +1073,8 @@ namespace ScreenToGif.Controls
 
         private void OnUnloaded(object sender, RoutedEventArgs e)
         {
+            SystemEvents.DisplaySettingsChanged -= SystemEvents_DisplaySettingsChanged;
+
             if (_mainCanvas == null)
                 return;
 
