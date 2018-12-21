@@ -70,11 +70,11 @@
     <s:String x:Key="Title.Options">ScreenToGif - Instellingen</s:String>
     <s:String x:Key="Application">Programma</s:String>
     <s:String x:Key="Interface">Interface</s:String>
-    <s:String x:Key="S.AutoTasks">Automatische taken</s:String>
+    <s:String x:Key="S.AutoTasks">Automatisering</s:String>
     <s:String x:Key="S.Shortcuts">Sneltoetsen</s:String>
     <s:String x:Key="Image">Afbeelding</s:String>
     <s:String x:Key="Language">Taal</s:String>
-    <s:String x:Key="TemporaryFiles">Tijdelijke bestanden</s:String>
+    <s:String x:Key="TemporaryFiles">Tijdelijke opslag</s:String>
     <s:String x:Key="Extras">Extra's</s:String>
     <s:String x:Key="Clouds">Upload-diensten</s:String>
     <s:String x:Key="Donate">Doneren</s:String>
@@ -117,7 +117,7 @@
     <s:String x:Key="S.Application.Other.Homepage.Minimized">Geminimaliseerd (systeemvak)</s:String>
     <s:String x:Key="S.Application.Other.Homepage.Info">(Het bepaalt hoe het programma opent. Bij geminimaliseerd starten, zal het systeemvakpictogram zichtbaar zijn)</s:String>
     
-    <s:String x:Key="S.AutomatedTasks.Title">Automatische taak</s:String>
+    <s:String x:Key="S.AutomatedTasks.Title">Taak</s:String>
     <s:String x:Key="S.AutomatedTasks.List">Lijst met automatische taken</s:String>
     <s:String x:Key="S.AutomatedTasks.List.Task">Taak</s:String>
     <s:String x:Key="S.AutomatedTasks.List.Details">Details</s:String>
