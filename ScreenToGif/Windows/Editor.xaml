@@ -1902,10 +1902,10 @@
                                         </Grid.RowDefinitions>
 
                                         <n:ExtendedCheckBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" x:Name="RepeatForeverApngCheckBox" Margin="20,3,3,3"
-                                                            Text="{DynamicResource S.SaveAs.GifOptions.RepeatForever}" IsChecked="{Binding RepeatForever, Source={x:Static u:UserSettings.All}}"/>
+                                                            Text="{DynamicResource S.SaveAs.GifOptions.RepeatForever}" IsChecked="{Binding RepeatForeverApng, Source={x:Static u:UserSettings.All}}"/>
 
                                         <n:IntegerUpDown Grid.Row="1" Grid.Column="0" x:Name="RepeatCountApngIntegerUpDown" Margin="20,3,3,3" StepValue="1" Minimum="1" Maximum="100" 
-                                                         Value="{Binding Source={x:Static u:UserSettings.All}, Path=RepeatCount, Mode=TwoWay}" MinWidth="45" 
+                                                         Value="{Binding Source={x:Static u:UserSettings.All}, Path=RepeatCountApng, Mode=TwoWay}" MinWidth="45" 
                                                          IsEnabled="{Binding IsChecked, ElementName=RepeatForeverApngCheckBox, Converter={StaticResource InvertedBool}}"/>
                                         <Label Margin="0,3" Grid.Column="1" Content="{DynamicResource S.SaveAs.GifOptions.RepeatCount}" Grid.Row="1" Foreground="#FF444444" 
                                                IsEnabled="{Binding IsChecked, ElementName=RepeatForeverApngCheckBox, Converter={StaticResource InvertedBool}}"/>

@@ -952,7 +952,7 @@ namespace ScreenToGif.Windows
                         sfd.DefaultExt = ".gif";
                         break;
                     case Export.Apng:
-                        sfd.Filter = UserSettings.All.ZipImages ? "Animated PNG (.png)|*.png" : "Animated PNG (.apng)|*.apng";
+                        sfd.Filter = "Animated PNG|*.png|Animated PNG|*.apng";
                         sfd.DefaultExt = UserSettings.All.LatestApngExtension ?? ".png";
                         break;
                     case Export.Video:

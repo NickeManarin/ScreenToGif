@@ -5,14 +5,15 @@ This is the current project of ScreenToGif.
 _VS 2017 and .Net 4.6.1 or newer required._
 
 
-## What's new? (Version 2.15)
+## What's new? (Version 2.15.2)
 
-• Updated the Dutch and French translations.  
+• Updated the XXX translations.  
 
 ### Fixed:
 
-♦ The FFmpeg/Gifski integration was not working.  
-♦ Some minor visual tweaks. 
+♦ The Apng export option was not working properly, the transparency and the repeat mode were broken.
+♦ When selecting a folder to save a Apng file, only the extension *.apng was being displayed (the extension *.png was left behind).  
+♦ The keyboard shortcuts for the recording were not working when in fullscreen mode. 
 
 ### Known Bugs:
 

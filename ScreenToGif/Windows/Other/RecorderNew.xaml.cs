@@ -360,7 +360,7 @@ namespace ScreenToGif.Windows.Other
         /// </summary>
         private void KeyHookTarget(object sender, CustomKeyEventArgs e)
         {
-            if (Stage == Stage.SelectingRegion || WindowState == WindowState.Minimized || Region.IsEmpty || !WasRegionPicked)
+            if (Stage == Stage.SelectingRegion || (WindowState == WindowState.Minimized && SelectControl.Mode != SelectControl.ModeType.Fullscreen) || Region.IsEmpty || !WasRegionPicked)
                 return;
 
             if (Stage != Stage.Discarding && Keyboard.Modifiers.HasFlag(UserSettings.All.StartPauseModifiers) && e.Key == UserSettings.All.StartPauseShortcut)

@@ -110,7 +110,7 @@ namespace ScreenToGif.ImageUtil
                             image2.Pixels[i + 2] = transparent.R;
 
                             if (blockCount == 4)
-                                image2.Pixels[i + 3] = 255;
+                                image2.Pixels[i + 3] = transparent.A; //255;
                         }
                     });
 
@@ -139,7 +139,7 @@ namespace ScreenToGif.ImageUtil
                             image2.Pixels[i + 2] = transparent.R;
 
                             if (blockCount == 4)
-                                image2.Pixels[i + 3] = 255;
+                                image2.Pixels[i + 3] = transparent.A; //255;
                         }
                     }
 
