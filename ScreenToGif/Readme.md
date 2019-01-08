@@ -7,7 +7,7 @@ _VS 2017 and .Net 4.6.1 or newer required._
 
 ## What's new? (Version 2.15.2)
 
-• Updated the XXX translations.  
+• Updated the Russian, Italian and Dutch translations.  
 
 ### Fixed:
 
