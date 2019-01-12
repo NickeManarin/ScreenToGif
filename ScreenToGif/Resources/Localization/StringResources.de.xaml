@@ -55,8 +55,8 @@
     <!--Update Window-->
     <s:String x:Key="Update">Neue Version verfügbar</s:String>
     <s:String x:Key="Update.NewRelease">Neue Version!</s:String>
-    <s:String x:Key="Update.NewRelease.Verbose">Neue Version {0} kann heruntergeladen werden! Bitte hier klicken für weitere Details.</s:String>
-    <s:String x:Key="Download">Download</s:String>
+    <s:String x:Key="Update.NewRelease.Verbose">Neue Version {0} kann heruntergeladen werden! Für weitere Details bitte hier klicken.</s:String>
+    <s:String x:Key="Download">Herunterladen</s:String>
     <s:String x:Key="Update.Portable">Portabel</s:String>
     <s:String x:Key="Update.Installer">Installation</s:String>
     <s:String x:Key="Update.Filename.Warning">Sie müssen einen anderen Pfad oder Dateinamen auswählen</s:String>
@@ -239,7 +239,7 @@
     <s:String x:Key="S.Upload.Imgur.Anonymous">Imgur (anonym)</s:String>
     <s:String x:Key="S.Upload.Imgur.Direct">Direkt-Links verwenden</s:String>
     <s:String x:Key="S.Upload.Imgur.Gifv">Links anhand der Gifv-Erweiterung anstatt Gif erhalten</s:String>
-    <s:String x:Key="S.Upload.Imgur.ToAlbum">GIFs in ein ausgewähltes Album hochladen</s:String>
+    <s:String x:Key="S.Upload.Imgur.ToAlbum">GIFs in ausgewähltes Album hochladen</s:String>
     <s:String x:Key="S.Upload.Imgur.Album">Album:</s:String>
     <s:String x:Key="S.Upload.Imgur.AskMe">Vor dem Hochladen fragen</s:String>
     <s:String x:Key="S.Upload.Imgur.Auth.NotPossible">Öffnen der Seite und Erhalt der Imgur-Zugriffsberechtigung (Token) fehlgeschlagen.</s:String>
@@ -260,9 +260,10 @@
     
     <s:String x:Key="Extras.External">Externe Programme</s:String>
     <s:String x:Key="Extras.Download">Hier klicken, um herunterzuladen&#x0a;{0}</s:String>
-    <s:String x:Key="Extras.Downloading">Es wird heruntergeladen...</s:String>
+    <s:String x:Key="Extras.Downloading">Es wird heruntergeladen ...</s:String>
     <s:String x:Key="Extras.Ready">Heruntergeladen&#x0a;{0}</s:String>
     <s:String x:Key="Extras.Ready.Info">Hier klicken, um die Datei-Eigenschaften zu öffnen</s:String>
+    <s:String x:Key="S.Extras.DownloadRestriction">Aplikationen vertrieben von Microsoft Store können andere Programme nicht herunterladen. Sie müssen sie manuell herunterladen.</s:String>
     <s:String x:Key="Extras.FfmpegLocation">Speicherort für FFmpeg</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Select">FFmpeg-Programmpfad öffnen</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Invalid">Programmpfad beinhaltet mindestens ein ungültiges Zeichen. Bitte wählen Sie korrekte Adresse aus.</s:String>
@@ -271,7 +272,7 @@
     <s:String x:Key="Extras.GifskiLocation.Invalid">Programmpfad beinhaltet mindestens ein ungültiges Zeichen. Bitte wählen Sie korrekte Adresse aus.</s:String>
     <s:String x:Key="Extras.License.Ffmpeg">FFmpeg-Lizenz</s:String>
     <s:String x:Key="Extras.License.Gifski">Gifski-Lizenz</s:String>
-    
+
     <s:String x:Key="Donate.IfYouWish">Wenn Sie mir danken wollen :D</s:String>
     <s:String x:Key="Donate.DonateDollar">US $ spenden</s:String>
     <s:String x:Key="Donate.DonateEuro">€ spenden</s:String>
@@ -286,7 +287,11 @@
 
     <s:String x:Key="About.Version">Version:</s:String>
     <s:String x:Key="About.Author">Autor: Nicke Manarin</s:String>
+    <s:String x:Key="S.About.StoreVersion">Microsoft Store Version. Einige Optionen sind aufgrund verstärkter Richtlinie deaktiviert.</s:String>
     <s:String x:Key="About.Contact">Kontakt:</s:String>
+    <s:String x:Key="S.About.Contact.Discord">Treten Sie discord bei!</s:String>
+    <s:String x:Key="S.About.Contact.Facebook">Besuchen Sie Facebook-Seite!</s:String>
+    <s:String x:Key="S.About.Contact.Gitter">Machen Sie bei Gitter mit!</s:String>
     <s:String x:Key="About.Technical">Allgemein</s:String>
     <s:String x:Key="About.Technical.License">Lizenz:</s:String>
     <s:String x:Key="About.Technical.Free">(Dieses Programm ist freie Software)</s:String>
@@ -419,7 +424,7 @@
     <s:String x:Key="Encoder.Analyzing">Unveränderte Pixel werden analysiert</s:String>
     <s:String x:Key="Encoder.OpenFile">Datei öffnen</s:String>
     <s:String x:Key="Encoder.ExploreFolder">Verzeichnis durchsuchen</s:String>
-    <s:String x:Key="Encoder.Remove">Aus der Liste entfernen</s:String>
+    <s:String x:Key="Encoder.Remove">Aus Liste entfernen</s:String>
     <s:String x:Key="Encoder.Details">Details anzeigen</s:String>
     <s:String x:Key="Encoder.Copy.Image">Als Bild kopieren</s:String>
     <s:String x:Key="Encoder.Copy.Filename">Dateinamen kopieren</s:String>
@@ -529,6 +534,7 @@
     <s:String x:Key="Editor.Edit.Delay">Verzögerung</s:String>
     <s:String x:Key="Editor.Edit.Delay.Override">Überschreiben</s:String>
     <s:String x:Key="Editor.Edit.Delay.IncreaseDecrease">Erhöhen oder&#10;verringern</s:String>
+    <s:String x:Key="Editor.Edit.Delay.Scale">Prozentual &#10;anpassen</s:String>
     
     <!--Image • Size and Rotation-->
     <s:String x:Key="Editor.Image.SizePosition">Größe und Rotation</s:String>
@@ -546,6 +552,7 @@
     <!--Image • Overlay-->
     <s:String x:Key="Editor.Image.Overlay">Überlagerung</s:String>
     <s:String x:Key="Editor.Image.FreeDrawing">Zeichnen</s:String>
+    <s:String x:Key="Editor.Image.Shape">Formen</s:String>
     <s:String x:Key="Editor.Image.Clicks">Mausklicks</s:String>
     <s:String x:Key="Editor.Image.Watermark">Wasserzeichen</s:String>
     <s:String x:Key="Editor.Image.Cinemagraph">Cinemagraph</s:String>
@@ -797,7 +804,8 @@
     
     <s:String x:Key="String.Delay">Verzögerung</s:String>
     <s:String x:Key="String.DelayMs">Dauer (ms):</s:String>
-    <s:String x:Key="String.ValueMs">Wert +/- (ms):</s:String>
+    <s:String x:Key="String.ValueMs">Dauer (ms):</s:String>
+    <s:String x:Key="String.ScaleValue">Dauer (%):</s:String>
     <s:String x:Key="String.Margin">Seitenrand:</s:String>
     <s:String x:Key="String.Padding">Padding:</s:String>
     <s:String x:Key="String.Background">Hintergrund</s:String>
@@ -816,6 +824,12 @@
     <s:String x:Key="FreeDrawing.Highlighter">Textmarker</s:String>
     <s:String x:Key="FreeDrawing.FitToCurve">An Pfad ausrichten</s:String>
     
+    <s:String x:Key="S.Shapes.Mode.Insert">Einfügen</s:String>
+    <s:String x:Key="S.Shapes.Shapes">Formen</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Radius">Radius:</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Dashes">Striche:</s:String>
+    <s:String x:Key="S.Shapes.Fill">Füllung</s:String>
+
     <s:String x:Key="S.MouseClicks">Mausklicks</s:String>
     <s:String x:Key="S.MouseClicks.Warning.None">Es gibt keine erkennbaren Mausklicks in Ihrem Projekt.</s:String>
     
@@ -845,13 +859,15 @@
     <s:String x:Key="Progress.Format">Format:</s:String>
     <s:String x:Key="Progress.Orientation">Ausrichtung:</s:String>
     
-    <s:String x:Key="Delay.NewValue">Neuer Wert</s:String>
+    <s:String x:Key="Delay.NewValue">Vorgabe</s:String>
     <s:String x:Key="Delay.Minimum10Ms">Minimum 10 ms pro Frame</s:String>
-    <s:String x:Key="Delay.DecreaseIncrease">Wert erhöhen/verringern um</s:String>
+    <s:String x:Key="Delay.DecreaseIncrease">Vorgabe</s:String>
+    <s:String x:Key="Delay.Scale">Vorgabe</s:String>
     
     <s:String x:Key="Cinemagraph.Info">Verwenden Sie den Stift, um Bereiche auszuwählen, die beweglich bleiben, indem Sie darauf malen.</s:String>
-    <s:String x:Key="OverrideDelay.Info">Der eingegebene Wert wird die aktuelle Länge aller markierten Frames ersetzen und sollte zwischen 10 ms und 25.500 ms liegen.</s:String>
-    <s:String x:Key="IncreaseDecreaseDelay.Info">Aktuelle Länge des markierten Frames wird um den eingegebenen Wert erhöht bzw. verringert. Sie können einen Wert zwischen -10.000 ms und 10.000 ms eingeben. Die Framelänge muss jedoch immer im Bereich zwischen 10 ms und 25.500 ms liegen.</s:String>
+    <s:String x:Key="OverrideDelay.Info">Aktuelle Länge markierter Frames wird durch den eingegebenen Wert ersetzt und sollte zwischen 10 ms und 25500 ms liegen.</s:String>
+    <s:String x:Key="IncreaseDecreaseDelay.Info">Aktuelle Länge markierter Frames wird um den eingegebenen Wert erhöht bzw. verringert. Sie können einen Wert zwischen -10000 ms und 10000 ms eingeben. Die Framelänge wird jedoch immer im Bereich zwischen 10 ms und 25500 ms liegen.</s:String>
+    <s:String x:Key="ScaleDelay.Info">Aktuelle Länge markierter Frames wird um den eingegebenen Prozentsatz verändert.&#x0d;Sie können Dauer der Frames anpassen indem Sie einen Wert zwischen 1 % und 1000 % wählen. Die Framelänge wird jedoch immer im Bereich zwischen 10 ms und 25500 ms liegen.</s:String>
     
     <s:String x:Key="Transitions.Lenght">Übergangsdauer</s:String>
     <s:String x:Key="Transitions.Delay">Übergang-Verzögerung</s:String>
@@ -899,10 +915,15 @@
     <s:String x:Key="S.SaveAs.FlipVertically">Video vertikal spiegeln</s:String>
     <s:String x:Key="S.SaveAs.ImagesOptions">Bildoptionen</s:String>
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">Bilder komprimieren</s:String>
-    
+    <s:String x:Key="S.SaveAs.PsdOptions">PSD-Optionen</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress">Bilder komprimieren</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">Bildmaterial mit Hilfe des RLE-Algorithmus komprimieren</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Timeline">Zeitachsedaten speichern</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">Exportiert zusätzlich Zeitachsen der Frames</s:String>
+
     <!--Save As • Save options-->
     <s:String x:Key="S.SaveAs.SaveOptions">Speichern-Optionen</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Datei in ausgewähltem Verzeichnis speichern</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Datei in ausgewähltes Verzeichnis speichern</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Überschreiben (falls bereits existiert)</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Auch als Projekt speichern (gleiches Verzeichnis, gleicher Dateiname)</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Datei hochladen (experimentelle Option)</s:String>
