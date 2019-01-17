@@ -76,7 +76,7 @@
     <s:String x:Key="Language">Язык</s:String>
     <s:String x:Key="TemporaryFiles">Файлы и папки</s:String>
     <s:String x:Key="Extras">Дополнительно</s:String>
-    <s:String x:Key="Clouds">Облака</s:String>
+    <s:String x:Key="Clouds">Онлайн сервисы</s:String>
     <s:String x:Key="Donate">Donate</s:String>
     <s:String x:Key="About">О программе</s:String>
     
@@ -272,7 +272,7 @@
     <s:String x:Key="Extras.GifskiLocation.Invalid">Путь к Gifski содержит недопустимые символы. Выберите правильное расположение файла.</s:String>
     <s:String x:Key="Extras.License.Ffmpeg">Лицензия FFmpeg</s:String>
     <s:String x:Key="Extras.License.Gifski">Лицензия Gifski</s:String>
-    
+
     <s:String x:Key="Donate.IfYouWish">Поддержать проект можно следующим образом:</s:String>
     <s:String x:Key="Donate.DonateDollar">USD</s:String>
     <s:String x:Key="Donate.DonateEuro">EUR</s:String>
@@ -381,7 +381,7 @@
     <s:String x:Key="InsertFrames.ImageSize">Размер изображения:</s:String>
     <s:String x:Key="InsertFrames.ImagePosition">Позиция изображения:</s:String>
     <s:String x:Key="InsertFrames.ResetImageSizePosition">Сбросить размер&#x0d;и положение</s:String>
-    <s:String x:Key="InsertFrames.Info2">Новый кадр будет добавлен :</s:String>
+    <s:String x:Key="InsertFrames.Info2">Новый кадр будет добавлен:</s:String>
     <s:String x:Key="InsertFrames.Before">Перед</s:String>
     <s:String x:Key="InsertFrames.After">После</s:String>
     <s:String x:Key="InsertFrames.Importing">Импорт</s:String>
@@ -455,9 +455,9 @@
     <!--Welcome-->
     <s:String x:Key="Welcome.New">Перейдите в "Файл > Создать запись" чтобы начать новую запись.</s:String>
     <s:String x:Key="Welcome.Import">Перетащите сюда файл для импорта в редактор.</s:String>
-    <s:String x:Key="Welcome.ThankYou">Большое спасибо за использование программы.!</s:String>
+    <s:String x:Key="Welcome.ThankYou">Большое спасибо за использование программы!</s:String>
     <s:String x:Key="Welcome.Size">Чем меньше частота кадров, кол-во цветов и\или число изменений между кадрами, тем меньше размер файла.</s:String>
-    <s:String x:Key="Welcome.Contact">Вы хотите поговорить? Откройте "Настройки > О программе" чтобы узнать мои контакты.</s:String>
+    <s:String x:Key="Welcome.Contact">Хотите поговорить? Откройте "Настройки > О программе" чтобы узнать мои контакты.</s:String>
     <s:String x:Key="Welcome.Trouble">Нашли ошибку? Свяжитесь со мной через Feedback tool.</s:String>
     <s:String x:Key="Welcome.NewRecorder">Хотите попробовать новый рекордер? Перейдите в "Настройки > Программа" и активируйте его.</s:String>
     
@@ -546,7 +546,7 @@
     <s:String x:Key="Editor.Image.Text">Текст</s:String>
     <s:String x:Key="Editor.Image.Caption">Заголовок&#x0d;кадра</s:String>
     <s:String x:Key="Editor.Image.FreeText">Текст</s:String>
-    <s:String x:Key="Editor.Image.TitleFrame">Кадр&#x0d;титул</s:String>
+    <s:String x:Key="Editor.Image.TitleFrame">Титульный&#x0d;кадр</s:String>
     <s:String x:Key="Editor.Image.KeyStrokes">Нажатия&#x0d;клавиш</s:String>
     
     <!--Image • Overlay-->
@@ -558,7 +558,7 @@
     <s:String x:Key="Editor.Image.Cinemagraph">Синемаграф</s:String>
     <s:String x:Key="Editor.Image.Border">Рамка</s:String>
     <s:String x:Key="Editor.Image.Progress">Прогресс</s:String>
-    <s:String x:Key="Editor.Image.Obfuscate">Блюр</s:String>
+    <s:String x:Key="Editor.Image.Obfuscate">Пикселизация</s:String>
 
     <!--Transitions • Styles-->
     <s:String x:Key="Editor.Transitions.Styles">Стили переходов</s:String>
@@ -625,7 +625,7 @@
     <s:String x:Key="Editor.Slide.Title">Переход слайдом</s:String>
     <s:String x:Key="Editor.Slide.WarningSelection">Выберите хотя бы один кадр, чтобы применить слайд.</s:String>
 
-    <s:String x:Key="Editor.DragDrop.Invalid.Title">Ошибка перетягивания</s:String>
+    <s:String x:Key="Editor.DragDrop.Invalid.Title">Ошибка перетаскивания</s:String>
     <s:String x:Key="Editor.DragDrop.MultipleFiles.Instruction">Нельзя импортировать несколько файлов за раз</s:String>
     <s:String x:Key="Editor.DragDrop.MultipleFiles.Message">Выберите только один файл.</s:String>
     <s:String x:Key="Editor.DragDrop.Invalid.Instruction">Невозможно открыть файл</s:String>
@@ -736,8 +736,8 @@
     <s:String x:Key="Clipboard.Entry">Запись в буфере:</s:String>
     <s:String x:Key="Clipboard.Explore">Обзор содержимого</s:String>
     <s:String x:Key="Clipboard.Remove">Удалить</s:String>
-    <s:String x:Key="Clipboard.Behavior">Поведение вставки</s:String>
-    <s:String x:Key="Clipboard.Before">До текущего кадра</s:String>
+    <s:String x:Key="Clipboard.Behavior">Режим вставки</s:String>
+    <s:String x:Key="Clipboard.Before">Перед текущим кадром</s:String>
     <s:String x:Key="Clipboard.After">После текущего кадра</s:String>
     
     <s:String x:Key="Resize.CurrentProperties">Текущие свойства</s:String>
@@ -829,7 +829,7 @@
     <s:String x:Key="S.Shapes.Shapes.Radius">Радиус:</s:String>
     <s:String x:Key="S.Shapes.Shapes.Dashes">Штрихи:</s:String>
     <s:String x:Key="S.Shapes.Fill">Заливка</s:String>
-    
+
     <s:String x:Key="S.MouseClicks">Нажатия мыши</s:String>
     <s:String x:Key="S.MouseClicks.Warning.None">В вашем проекте не обнаружено щелчков мыши.</s:String>
     
@@ -839,7 +839,7 @@
     
     <s:String x:Key="Border.Appearance">Внешний вид</s:String>
 
-    <s:String x:Key="S.Obfuscate.Options">Параметры обфускации</s:String>
+    <s:String x:Key="S.Obfuscate.Options">Параметры пикселизации</s:String>
     <s:String x:Key="S.Obfuscate.PixelSize">Размер пикселя:</s:String>
     <s:String x:Key="S.Obfuscate.UseAverage">Вычисление среднего цвета для каждого пикселизированного блока.</s:String>
     <s:String x:Key="S.Obfuscate.Info">Выберите прямоугольную область, которая должна быть пикселизирована.</s:String>
@@ -920,7 +920,7 @@
     <s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">Сжатие изображения по алгоритму RLE.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline">Сохранить данные шкалы времени.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">Экспортирует еще и время кадров, а не только кадры.</s:String>
-    
+
     <!--Save As • Save options-->
     <s:String x:Key="S.SaveAs.SaveOptions">Сохранить параметры</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Сохраните файл в папку по вашему выбору.</s:String>
