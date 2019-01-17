@@ -8,12 +8,13 @@ _VS 2017 and .Net 4.6.1 or newer required._
 ## What's new? (Version 2.16)
 
 • Added FFmpeg as an optional encoder for Apng.  
-• Updated the German, X and X translations.  
+• Updated the German and Russian translations.  
 
 ### Fixed:
 
 ♦ A message about a missing FFmpeg instance was not clickable. 
 ♦ When loading images, if those images were not in the correct format, the app would not encode properly as apng.  
+♦ There was an issue with one of the numerical input fields not working as expected (with numbers being typed).  
 
 ### Known Bugs:
 

@@ -777,7 +777,7 @@
     <s:String x:Key="Caption.Font">Шрифт</s:String>
     <s:String x:Key="Caption.Family">Семейство:</s:String>
     <s:String x:Key="Caption.Style">Стиль:</s:String>
-    <s:String x:Key="Caption.Weight">Жирность:</s:String>
+    <s:String x:Key="Caption.Weight">Начертание:</s:String>
     <s:String x:Key="Caption.Size">Размер:</s:String>
     <s:String x:Key="Caption.Color">Цвет:</s:String>
     <s:String x:Key="Caption.Outline">Обводка</s:String>
