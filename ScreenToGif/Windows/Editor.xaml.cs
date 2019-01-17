@@ -1147,6 +1147,25 @@ namespace ScreenToGif.Windows
                         }
                     }
                 }
+                else if (UserSettings.All.SaveType == Export.Apng)
+                {
+                    if (UserSettings.All.ApngEncoder == ApngEncoderType.FFmpeg)
+                    {
+                        if (!Util.Other.IsFfmpegPresent())
+                        {
+                            StatusList.Warning(StringResource("Editor.Warning.Ffmpeg"), null, () => App.MainViewModel.OpenOptions.Execute(7));
+                            return;
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation) && UserSettings.All.FfmpegLocation.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
+                        {
+                            StatusList.Warning(StringResource("Extras.FfmpegLocation.Invalid"));
+                            return;
+                        }
+                    }
+
+                    extension = GetOutputExtension();
+                }
 
                 if (pickLocation)
                 {
@@ -1270,9 +1289,12 @@ namespace ScreenToGif.Windows
                         param.ExtraParameters = UserSettings.All.ExtraParametersGif;
                         break;
                     case Export.Apng:
+                        param.ApngEncoder = UserSettings.All.ApngEncoder;
                         param.DetectUnchangedPixels = UserSettings.All.DetectUnchangedApng;
                         param.DummyColor = UserSettings.All.DetectUnchangedApng && UserSettings.All.PaintTransparentApng ? Colors.Transparent : new Color?();
                         param.RepeatCount = UserSettings.All.LoopedApng ? (UserSettings.All.RepeatForeverApng ? 0 : UserSettings.All.RepeatCountApng) : -1;
+                        param.Command = "-vsync 2 -safe 0 -f concat -i \"{0}\" {1} -plays {2} -f apng -y \"{3}\"";
+                        param.ExtraParameters = UserSettings.All.ExtraParametersApngFFmpeg;
                         break;
                     case Export.Video:
                         var size = Project.Frames[0].Path.SizeOf();
@@ -2396,9 +2418,9 @@ namespace ScreenToGif.Windows
 
       #endregion
 
-      #region Image Tab
+        #region Image Tab
 
-      private void Image_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        private void Image_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = FrameListView != null && FrameListView.SelectedItem != null && !IsLoading;
         }
@@ -4274,7 +4296,10 @@ namespace ScreenToGif.Windows
 
             #region Save the Image to the Recording Folder
 
-            var bitmap = new BitmapImage(new Uri(sourceFileName));
+            BitmapSource bitmap = new BitmapImage(new Uri(sourceFileName));
+
+            if (bitmap.Format != PixelFormats.Bgra32)
+                bitmap = new FormatConvertedBitmap(bitmap, PixelFormats.Bgra32, null, 0);
 
             using (var stream = new FileStream(fileName, FileMode.Create))
             {

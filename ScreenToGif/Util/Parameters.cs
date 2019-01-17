@@ -49,6 +49,12 @@ namespace ScreenToGif.Util
 
         #endregion
 
+        #region Apng
+
+        public ApngEncoderType ApngEncoder { get; set; }
+
+        #endregion
+
         #region Video
 
         public VideoEncoderType VideoEncoder { get; set; }

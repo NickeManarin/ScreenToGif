@@ -669,71 +669,137 @@ namespace ScreenToGif.Windows.Other
 
                         #region Apng
 
-                        #region Cut/Paint Unchanged Pixels
-
-                        if (param.DetectUnchangedPixels)
+                        switch (param.ApngEncoder)
                         {
-                            Update(id, 0, FindResource("Encoder.Analyzing").ToString());
-
-                            if (param.DummyColor.HasValue)
-                                listFrames = ImageMethods.PaintTransparentAndCut(listFrames, param.DummyColor.Value, id, tokenSource);
-                            else
-                                listFrames = ImageMethods.CutUnchanged(listFrames, id, tokenSource);
-                        }
-                        else
-                        {
-                            var size = listFrames[0].Path.ScaledSize();
-                            listFrames.ForEach(x => x.Rect = new Int32Rect(0, 0, (int)size.Width, (int)size.Height));
-                        }
-
-                        #endregion
-
-                        #region Encoding
-
-                        using (var stream = new MemoryStream())
-                        {
-                            var frameCount = listFrames.Count(x => x.HasArea);
-
-                            using (var encoder = new Apng(stream, frameCount, param.RepeatCount))
+                            case ApngEncoderType.ScreenToGif:
                             {
-                                for (var i = 0; i < listFrames.Count; i++)
+                                #region Cut/Paint Unchanged Pixels
+
+                                if (param.DetectUnchangedPixels)
                                 {
-                                    if (!listFrames[i].HasArea && param.DetectUnchangedPixels)
-                                        continue;
+                                    Update(id, 0, FindResource("Encoder.Analyzing").ToString());
 
-                                    if (listFrames[i].Delay == 0)
-                                        listFrames[i].Delay = 10;
+                                    if (param.DummyColor.HasValue)
+                                        listFrames = ImageMethods.PaintTransparentAndCut(listFrames, param.DummyColor.Value, id, tokenSource);
+                                    else
+                                        listFrames = ImageMethods.CutUnchanged(listFrames, id, tokenSource);
+                                }
+                                else
+                                {
+                                    var size = listFrames[0].Path.ScaledSize();
+                                    listFrames.ForEach(x => x.Rect = new Int32Rect(0, 0, (int)size.Width, (int)size.Height));
+                                }
 
-                                    encoder.AddFrame(listFrames[i].Path, listFrames[i].Rect, listFrames[i].Delay);
+                                #endregion
 
-                                    Update(id, i, string.Format(processing, i));
+                                #region Encoding
 
-                                    #region Cancellation
+                                using (var stream = new MemoryStream())
+                                {
+                                    var frameCount = listFrames.Count(x => x.HasArea);
 
-                                    if (tokenSource.Token.IsCancellationRequested)
+                                    using (var encoder = new Apng(stream, frameCount, param.RepeatCount))
                                     {
-                                        SetStatus(Status.Canceled, id);
-                                        break;
+                                        for (var i = 0; i < listFrames.Count; i++)
+                                        {
+                                            if (!listFrames[i].HasArea && param.DetectUnchangedPixels)
+                                                continue;
+
+                                            if (listFrames[i].Delay == 0)
+                                                listFrames[i].Delay = 10;
+
+                                            encoder.AddFrame(listFrames[i].Path, listFrames[i].Rect, listFrames[i].Delay);
+
+                                            Update(id, i, string.Format(processing, i));
+
+                                            #region Cancellation
+
+                                            if (tokenSource.Token.IsCancellationRequested)
+                                            {
+                                                SetStatus(Status.Canceled, id);
+                                                break;
+                                            }
+
+                                            #endregion
+                                        }
                                     }
 
-                                    #endregion
+                                    try
+                                    {
+                                        using (var fileStream = new FileStream(param.Filename, FileMode.Create, FileAccess.Write, FileShare.None, 4096))
+                                            stream.WriteTo(fileStream);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        SetStatus(Status.Error, id);
+                                        LogWriter.Log(ex, "Apng Encoding");
+                                    }
                                 }
+
+                                #endregion
+                                break;
                             }
 
-                            try
+                            case ApngEncoderType.FFmpeg:
                             {
-                                using (var fileStream = new FileStream(param.Filename, FileMode.Create, FileAccess.Write, FileShare.None, 4096))
-                                    stream.WriteTo(fileStream);
-                            }
-                            catch (Exception ex)
-                            {
-                                SetStatus(Status.Error, id);
-                                LogWriter.Log(ex, "Apng Encoding");
+                                #region FFmpeg encoding
+
+                                SetStatus(Status.Processing, id, null, true);
+
+                                if (!Util.Other.IsFfmpegPresent())
+                                    throw new ApplicationException("FFmpeg not present.");
+
+                                if (File.Exists(param.Filename))
+                                    File.Delete(param.Filename);
+
+                                #region Generate concat
+
+                                var concat = new StringBuilder();
+                                foreach (var frame in listFrames)
+                                {
+                                    concat.AppendLine("file '" + frame.Path + "'");
+                                    concat.AppendLine("duration " + (frame.Delay / 1000d).ToString(CultureInfo.InvariantCulture));
+                                }
+
+                                var concatPath = Path.GetDirectoryName(listFrames[0].Path) ?? Path.GetTempPath();
+                                var concatFile = Path.Combine(concatPath, "concat.txt");
+
+                                if (!Directory.Exists(concatPath))
+                                    Directory.CreateDirectory(concatPath);
+
+                                if (File.Exists(concatFile))
+                                    File.Delete(concatFile);
+
+                                File.WriteAllText(concatFile, concat.ToString());
+
+                                #endregion
+
+                                param.Command = string.Format(param.Command, concatFile, param.ExtraParameters.Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString()), param.RepeatCount, param.Filename);
+
+                                var process = new ProcessStartInfo(UserSettings.All.FfmpegLocation)
+                                {
+                                    Arguments = param.Command,
+                                    CreateNoWindow = true,
+                                    ErrorDialog = false,
+                                    UseShellExecute = false,
+                                    RedirectStandardError = true
+                                };
+
+                                var pro = Process.Start(process);
+
+                                var str = pro.StandardError.ReadToEnd();
+
+                                var fileInfo = new FileInfo(param.Filename);
+
+                                if (!fileInfo.Exists || fileInfo.Length == 0)
+                                    throw new Exception("Error while encoding the apng with FFmpeg.") { HelpLink = $"Command:\n\r{param.Command}\n\rResult:\n\r{str}" };
+
+                                #endregion
+
+                                break;
                             }
                         }
-
-                        #endregion
-
+                        
                         #endregion
 
                         break;

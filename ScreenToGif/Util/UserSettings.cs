@@ -1686,6 +1686,12 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public ApngEncoderType ApngEncoder
+        {
+            get => (ApngEncoderType)GetValue();
+            set => SetValue(value);
+        }
+
         public VideoEncoderType VideoEncoder
         {
             get => (VideoEncoderType)GetValue();
@@ -1890,6 +1896,12 @@ namespace ScreenToGif.Util
         public bool RepeatForeverApng
         {
             get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public string ExtraParametersApngFFmpeg
+        {
+            get => (string)GetValue();
             set => SetValue(value);
         }
 

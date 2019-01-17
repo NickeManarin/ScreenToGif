@@ -1712,6 +1712,7 @@
                                 <n:LabelSeparator.Visibility>
                                     <MultiBinding Converter="{StaticResource BoolOrToVisibility}">
                                         <Binding ElementName="GifRadioButton" Path="IsChecked"/>
+                                        <Binding ElementName="ApngRadioButton" Path="IsChecked"/>
                                         <Binding ElementName="VideoRadioButton" Path="IsChecked"/>
                                     </MultiBinding>
                                 </n:LabelSeparator.Visibility>
@@ -1734,6 +1735,15 @@
                                 <Separator Width="1"/>
                                 <n:ImageRadioButton x:Name="GifskiGifEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.Gifski}"
                                                     IsChecked="{Binding GifEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.Gifski}}"/>
+                            </WrapPanel>
+
+                            <WrapPanel Grid.Row="2" Margin="10,0,0,0" Visibility="{Binding IsChecked, ElementName=ApngRadioButton, Converter={StaticResource Bool2Visibility}}">
+                                <n:ImageRadioButton x:Name="NormalApngEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.Apng}" 
+                                                    IsChecked="{Binding ApngEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:ApngEncoderType.ScreenToGif}}"
+                                                    ToolTip="{DynamicResource S.SaveAs.Encoder.Apng.Tooltip}"/>
+                                <Separator Width="1"/>
+                                <n:ImageRadioButton x:Name="FfmpegApngEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.Ffmpeg}"
+                                                    IsChecked="{Binding ApngEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:ApngEncoderType.FFmpeg}}"/>
                             </WrapPanel>
 
                             <WrapPanel Grid.Row="2" Margin="10,0,0,0" Visibility="{Binding IsChecked, ElementName=VideoRadioButton, Converter={StaticResource Bool2Visibility}}">
@@ -1794,7 +1804,7 @@
 
                                     <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource S.SaveAs.GifOptions.Colors}" VerticalAlignment="Center" Padding="0" Margin="10,3,3,3"
                                            Visibility="{Binding IsChecked, ElementName=NewEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
-                                    <n:IntegerUpDown Grid.Row="1" Grid.Column="1" Margin="5" Width="80" Minimum="2" Maximum="256" HorizontalAlignment="Left" UpdateOnInput="True"
+                                    <n:IntegerUpDown Grid.Row="1" Grid.Column="1" Margin="5" Width="80" Minimum="2" Maximum="256" HorizontalAlignment="Left"
                                                      Value="{Binding MaximumColors, Source={x:Static u:UserSettings.All}, Mode=TwoWay}" ToolTip="{DynamicResource S.SaveAs.GifOptions.Colors.Info}"
                                                      Visibility="{Binding IsChecked, ElementName=NewEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
 
@@ -1886,12 +1896,17 @@
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
 
-                                    <n:ExtendedCheckBox Grid.Row="0" x:Name="LoopedApngCheckBox" Text="{DynamicResource S.SaveAs.GifOptions.LoopedApng}" 
+                                    <n:ExtendedCheckBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" x:Name="LoopedApngCheckBox" Text="{DynamicResource S.SaveAs.GifOptions.LoopedApng}" 
                                                         IsChecked="{Binding Looped, Source={x:Static u:UserSettings.All}}" Margin="10,3,3,3"/>
 
-                                    <Grid Grid.Row="1" Visibility="{Binding IsChecked, ElementName=LoopedApngCheckBox, Converter={StaticResource Bool2Visibility}}">
+                                    <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Visibility="{Binding IsChecked, ElementName=LoopedApngCheckBox, Converter={StaticResource Bool2Visibility}}">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="1*"/>
@@ -1911,12 +1926,26 @@
                                                IsEnabled="{Binding IsChecked, ElementName=RepeatForeverApngCheckBox, Converter={StaticResource InvertedBool}}"/>
                                     </Grid>
 
-                                    <n:ExtendedCheckBox Grid.Row="2" x:Name="DetectApngCheckBox" Margin="10,3,3,3" Text="{DynamicResource S.SaveAs.ApngOptions.DetectUnchanged}" 
-                                                        IsChecked="{Binding DetectUnchanged, Source={x:Static u:UserSettings.All}}"/>
+                                    <n:ExtendedCheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" x:Name="DetectApngCheckBox" Margin="10,3,3,3" Text="{DynamicResource S.SaveAs.ApngOptions.DetectUnchanged}" 
+                                                        IsChecked="{Binding DetectUnchanged, Source={x:Static u:UserSettings.All}}"
+                                                        Visibility="{Binding IsChecked, ElementName=NormalApngEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
 
-                                    <n:ExtendedCheckBox Grid.Row="3" x:Name="PaintTransparentApngCheckBox" Margin="20,3,3,3" Text="{DynamicResource S.SaveAs.ApngOptions.PaintTransparent}" 
-                                                        IsChecked="{Binding PaintTransparent, Source={x:Static u:UserSettings.All}}" 
-                                                        Visibility="{Binding IsChecked, ElementName=DetectApngCheckBox, Converter={StaticResource Bool2Visibility}}"/>
+                                    <n:ExtendedCheckBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" x:Name="PaintTransparentApngCheckBox" Margin="20,3,3,3" Text="{DynamicResource S.SaveAs.ApngOptions.PaintTransparent}" 
+                                                        IsChecked="{Binding PaintTransparent, Source={x:Static u:UserSettings.All}}">
+                                        <n:ExtendedCheckBox.Visibility>
+                                            <MultiBinding Converter="{StaticResource BoolAndToVisibility}">
+                                                <Binding ElementName="DetectApngCheckBox" Path="IsChecked" />
+                                                <Binding ElementName="NormalApngEncoderRadioButton" Path="IsChecked"/>
+                                            </MultiBinding>
+                                        </n:ExtendedCheckBox.Visibility>
+                                    </n:ExtendedCheckBox>
+
+                                    <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource S.SaveAs.Extras}" VerticalAlignment="Center" Padding="0" Margin="10,3,3,3"
+                                           Visibility="{Binding IsChecked, ElementName=FfmpegApngEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
+
+                                    <n:ExtendedTextBox Grid.Row="4" Grid.Column="1" MinHeight="23" Margin="5,3" Text="{Binding Source={x:Static u:UserSettings.All}, Path=ExtraParametersApngFFmpeg}"
+                                                       Visibility="{Binding IsChecked, ElementName=FfmpegApngEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"
+                                                       VerticalContentAlignment="Top" TextWrapping="WrapWithOverflow"/>
                                 </Grid>
                             </Expander>
 

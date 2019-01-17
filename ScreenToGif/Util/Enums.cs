@@ -340,6 +340,15 @@
     }
 
     /// <summary>
+    /// Type of the apng encoder.
+    /// </summary>
+    public enum ApngEncoderType
+    {
+        ScreenToGif,
+        FFmpeg,
+    }
+
+    /// <summary>
     /// Type of color quantization methods of the gif encoder.
     /// </summary>
     public enum ColorQuantizationType

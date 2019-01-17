@@ -152,6 +152,7 @@
     <s:Boolean x:Key="IsSaveTypeExpanded">True</s:Boolean>
     <u:Export x:Key="SaveType">Gif</u:Export>
     <u:GifEncoderType x:Key="GifEncoder">Legacy</u:GifEncoderType>
+    <u:ApngEncoderType x:Key="ApngEncoder">ScreenToGif</u:ApngEncoderType>
     <u:VideoEncoderType x:Key="VideoEncoder">AviStandalone</u:VideoEncoderType>
     <s:Boolean x:Key="IsGifOptionsExpanded">False</s:Boolean>
     <s:Boolean x:Key="IsApngOptionsExpanded">False</s:Boolean>
@@ -192,6 +193,7 @@
     <s:Int32 x:Key="RepeatCountApng">2</s:Int32>
     <s:Boolean x:Key="DetectUnchangedApng">True</s:Boolean>
     <s:Boolean x:Key="PaintTransparentApng">True</s:Boolean>
+    <!--<s:String x:Key="ExtraParametersApngFFmpeg"></s:String>-->
     <!--<s:String x:Key="LatestApngOutputFolder"></s:String>-->
     <!--<s:String x:Key="LatestApngFilename"></s:String>-->
     <s:String x:Key="LatestApngExtension">.png</s:String>
