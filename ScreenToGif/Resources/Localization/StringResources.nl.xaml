@@ -219,7 +219,7 @@
     <s:String x:Key="TempFiles.AutomaticRemoval">Oude projecten automatisch verwijderen.</s:String>
     <s:String x:Key="TempFiles.AutomaticRemoval.Info">Bij de start zal een achtergrondtaak van het programma alle gesloten projecten wissen die ouder zijn dan een ingestelde tijd.</s:String>
     <s:String x:Key="TempFiles.AutomaticRemovalDays.Info">(in dagen, oudere projecten worden verwijderd bij het openen van de Editor)</s:String>
-    <s:String x:Key="TempFiles.LowSpace">Weinig schijfruimte beschikbaar. Ruim tijdelijke bestanden op of verander de opslaglocatie van tijdelijke bestanden.</s:String>
+    <s:String x:Key="TempFiles.LowSpace">Beperkte schijfruimte. Ruim tijdelijke bestanden op of verander de opslaglocatie van tijdelijke bestanden.</s:String>
     
     <s:String x:Key="S.Upload.Proxy">Proxy</s:String>
     <s:String x:Key="S.Upload.Proxy.Mode">Modus:</s:String>
@@ -867,7 +867,7 @@
     <s:String x:Key="Cinemagraph.Info">Gebruik de pen om de pixels te selecteren die niet ongewijzgd moeten blijven (oftewel veranderen tussen frames), </s:String>
     <s:String x:Key="OverrideDelay.Info">Deze nieuwe waarde zal de duur (vertraging) vervangen van alle geselecteerde frames. De waarde dient tussen 10ms tot en met 25500ms te liggen.</s:String>
     <s:String x:Key="IncreaseDecreaseDelay.Info">Deze waarde zal de duur (vertraging) van elke geselecteerde frame toe of af laten nemen.&#10;U kunt een hogere of lagere waarde kiezen tussen -10000ms en 10000ms, maar de totale duur van elke frame is beperkt tot een waarde tussen 10ms en 25500ms.</s:String>
-    <s:String x:Key="ScaleDelay.Info">Scale the duration (delay) of each selected frame by the this percent.&#10;You can scale each frame's duration by selecting a value between 1% and 1000%, but the final duration of each frame will be restricted to between 10ms and 25500ms</s:String>
+    <s:String x:Key="ScaleDelay.Info">De duur (vertraging) van elk geselecteerd frame procentueel verlengen.&#10;U kunt de duur van elk frame verlengen met 1-10000% , maar de uiteindelijke duur van elk frame blijft beperkt tot een waarde tussen 10ms en 25500ms</s:String>
 
     <s:String x:Key="Transitions.Lenght">Overgangsduur</s:String>
     <s:String x:Key="Transitions.Delay">Overgangsvertraging</s:String>
@@ -892,6 +892,8 @@
     <s:String x:Key="S.SaveAs.Encoder.Legacy.Tooltip">Algoritme: NeuQuant</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System">Systeem</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System.Tooltip">Gebruikt een standaard-palet.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Apng">1.0</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Apng.Tooltip">Encoder ontwikkeld door ScreenToGif.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
     <s:String x:Key="S.SaveAs.GifOptions">Gif-opties</s:String>
@@ -985,7 +987,7 @@
     <s:String x:Key="S.Feedback.YourEmail">Uw e-mailadres (optioneel)</s:String>
     <s:String x:Key="S.Feedback.Warning.Title">Geef uw bericht een onderwerp.</s:String>
     <s:String x:Key="S.Feedback.Warning.Message">Stel een bericht op.</s:String>
-    <s:String x:Key="S.Feedback.Sending">Verzending gebeurt in de achtergrond… Dit scherm sluit binnenkort.</s:String>
+    <s:String x:Key="S.Feedback.Sending">Verzending in de achtergrond… Dit scherm sluit binnenkort.</s:String>
     <s:String x:Key="S.Feedback.Attachments">Bijlagen (optioneel, 20MB maximum)</s:String>
     <s:String x:Key="S.Feedback.AddAttachments">Bijlagen toevoegen</s:String>
     <s:String x:Key="S.Feedback.RemoveAttachments">Alle bijlagen verwijderen</s:String>
@@ -1026,7 +1028,7 @@
     <s:String x:Key="S.FontWeights.UltraLight">Ultra licht</s:String>
     
      <!--VerticalAligment-->
-    <s:String x:Key="S.VerticalAlignment.Top">Top</s:String>
+    <s:String x:Key="S.VerticalAlignment.Top">Boven</s:String>
     <s:String x:Key="S.VerticalAlignment.Center">Midden</s:String>
     <s:String x:Key="S.VerticalAlignment.Bottom">Onder</s:String>
     <s:String x:Key="S.Alignment.Stretch">Uitrekken</s:String>
