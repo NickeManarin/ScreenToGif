@@ -263,6 +263,7 @@
     <s:String x:Key="Extras.Downloading">Downloader..</s:String>
     <s:String x:Key="Extras.Ready">Eksisterer&#10;{0}</s:String>
     <s:String x:Key="Extras.Ready.Info">Klik for at se filens egenskaber.</s:String>
+    <s:String x:Key="S.Extras.DownloadRestriction">Apps distribueret af Microsoft Store kan ikke downloade andre apps. Download manuelt.</s:String>
     <s:String x:Key="Extras.FfmpegLocation">FFmpeg</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Select">Vælg FFmpeg placering</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Invalid">Stien til FFMpeg er ugyldig. Vælg en ny placering.</s:String>
@@ -286,7 +287,11 @@
 
     <s:String x:Key="About.Version">Udgave:</s:String>
     <s:String x:Key="About.Author">Udvikler: Nicke Manarin</s:String>
+	<s:String x:Key="S.About.StoreVersion">Microsoft Store udgave. Nogle funktioner er deaktiveret p.g.a. tilladelser.</s:String>
     <s:String x:Key="About.Contact">Kontakt</s:String>
+    <s:String x:Key="S.About.Contact.Discord">Besøg server</s:String>
+    <s:String x:Key="S.About.Contact.Facebook">Besøg side</s:String>
+    <s:String x:Key="S.About.Contact.Gitter">Besøg rum</s:String>
     <s:String x:Key="About.Technical">Teknisk</s:String>
     <s:String x:Key="About.Technical.License">Licens:</s:String>
     <s:String x:Key="About.Technical.Free">(programmet er helt gratis)</s:String>
@@ -453,7 +458,7 @@
     <s:String x:Key="Welcome.ThankYou">Tak fordi du bruger mit program!</s:String>
     <s:String x:Key="Welcome.Size">Jo lavere rammerate, farveantal eller ændringer mellem rammerne er, jo mindre filstørrelse</s:String>
     <s:String x:Key="Welcome.Contact">Vil du snakke? Åben "Indstillinger > Om..." for kontaktmuligheder</s:String>
-    <s:String x:Key="Welcome.Trouble">Problemer? Kontant mig via Feedback</s:String>
+    <s:String x:Key="Welcome.Trouble">Problemer? Kontant mig via kritik</s:String>
     <s:String x:Key="Welcome.NewRecorder">Vil du prøve den nye optager? Så gå til "Indstillinger > Program" og aktiver den</s:String>
     
     <!--File • New-->
@@ -529,6 +534,7 @@
     <s:String x:Key="Editor.Edit.Delay">Rammetid</s:String>
     <s:String x:Key="Editor.Edit.Delay.Override">Sæt</s:String>
     <s:String x:Key="Editor.Edit.Delay.IncreaseDecrease">Forøg&#10;formindsk</s:String>
+    <s:String x:Key="Editor.Edit.Delay.Scale">Skalér</s:String>
     
     <!--Image • Size and Rotation-->
     <s:String x:Key="Editor.Image.SizePosition">Størrelse og placering</s:String>
@@ -546,6 +552,7 @@
     <!--Image • Overlay-->
     <s:String x:Key="Editor.Image.Overlay">Overlæg</s:String>
     <s:String x:Key="Editor.Image.FreeDrawing">Fri&#10;hånd</s:String>
+    <s:String x:Key="Editor.Image.Shape">Figur</s:String>
     <s:String x:Key="Editor.Image.Clicks">Klik</s:String>
     <s:String x:Key="Editor.Image.Watermark">Vandmærke</s:String>
     <s:String x:Key="Editor.Image.Cinemagraph">Cinemagraf</s:String>
@@ -798,6 +805,7 @@
     <s:String x:Key="String.Delay">Tid</s:String>
     <s:String x:Key="String.DelayMs">Tid (ms):</s:String>
     <s:String x:Key="String.ValueMs">Værdi -+ (ms):</s:String>
+    <s:String x:Key="String.ScaleValue">Værdi:</s:String>
     <s:String x:Key="String.Margin">Margen:</s:String>
     <s:String x:Key="String.Padding">Polstring:</s:String>
     <s:String x:Key="String.Background">Baggrund</s:String>
@@ -816,6 +824,12 @@
     <s:String x:Key="FreeDrawing.Highlighter">Fremhævning</s:String>
     <s:String x:Key="FreeDrawing.FitToCurve">Pas til kurve</s:String>
     
+    <s:String x:Key="S.Shapes.Mode.Insert">Indsæt</s:String>
+    <s:String x:Key="S.Shapes.Shapes">Figur</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Radius">Radius:</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Dashes">Streger:</s:String>
+    <s:String x:Key="S.Shapes.Fill">Fyld</s:String>
+
     <s:String x:Key="S.MouseClicks">Klik</s:String>
     <s:String x:Key="S.MouseClicks.Warning.None">Projektet indeholder ingen museklik.</s:String>
     
@@ -848,10 +862,12 @@
     <s:String x:Key="Delay.NewValue">Ny værdi</s:String>
     <s:String x:Key="Delay.Minimum10Ms">Minimum 10 ms pr. ramme.</s:String>
     <s:String x:Key="Delay.DecreaseIncrease">Tilpas værdi</s:String>
+    <s:String x:Key="Delay.Scale">Værdi</s:String>
     
     <s:String x:Key="Cinemagraph.Info">Brug pennen til at vælge de pixel der ikke skal være statiske (ænders fra ramme til ramme), ved at tegne på dem.</s:String>
     <s:String x:Key="OverrideDelay.Info">Denne værdi erstatter varigheden af alle valgte rammer. Værdien bør være mellem 10ms og 25.500ms.</s:String>
     <s:String x:Key="IncreaseDecreaseDelay.Info">Værdien øger/mindsker varigheden af hver enkelt valgt ramme.&#10;Du kan vælge en værdi mellem -10.000ms og 10.000ms, men varigheden af de enkelt rammer vil være mellem 10ms og 25.500ms</s:String>
+    <s:String x:Key="ScaleDelay.Info">Tilpas længde (forsinkelse) af hver valgt ramme med denne procent.&#x0d;Du kan vælge fra 1% til 1000%, men resultatet begrænses til mellem 10ms og 25500ms</s:String>
     
     <s:String x:Key="Transitions.Lenght">Varighed</s:String>
     <s:String x:Key="Transitions.Delay">Forsinkelse</s:String>
@@ -876,6 +892,8 @@
     <s:String x:Key="S.SaveAs.Encoder.Legacy.Tooltip">Algoritme: NeuQuant.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System">System</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System.Tooltip">Bruger standardpalette.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Apng">1.0</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Apng.Tooltip">ScreenToGif kodning.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
     <s:String x:Key="S.SaveAs.GifOptions">Gifindstillinger</s:String>
@@ -899,6 +917,11 @@
     <s:String x:Key="S.SaveAs.FlipVertically">Flip video (lodret).</s:String>
     <s:String x:Key="S.SaveAs.ImagesOptions">Billedvalg</s:String>
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">Zip billederne.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions">Psd valg</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress">Komprimér billedet.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">Komprimér billedet med RLE algoritme.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Timeline">Gem tidsdata.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">Eksportér både rammer og rammetid.</s:String>
     
     <!--Save As • Save options-->
     <s:String x:Key="S.SaveAs.SaveOptions">Indstillinger</s:String>
@@ -946,15 +969,15 @@
     <s:String x:Key="S.SaveAs.Warning.Canceled">Handlingen blev annulleret.</s:String>
     
     <!--SaveAs • Export-->
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">Ekaporter rammer</s:String>
+    <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">Eksporter rammer</s:String>
     <s:String x:Key="S.SaveAs.Frames.Confirmation.Instruction">Vil du eksportere rammerne?</s:String>
     <s:String x:Key="S.SaveAs.Frames.Confirmation.Message">Dette eksporterer {0} rammer til den valgte mappe.</s:String>
     
     <!--Feedback-->
-    <s:String x:Key="S.Feedback.Feedback">Feedback</s:String>
+    <s:String x:Key="S.Feedback.Feedback">Kritik</s:String>
     <s:String x:Key="S.Feedback.Send">Send</s:String>
     <s:String x:Key="S.Feedback.Preview">Vis</s:String>
-    <s:String x:Key="S.Feedback.Header">Send feedback</s:String>
+    <s:String x:Key="S.Feedback.Header">Send kritik</s:String>
     <s:String x:Key="S.Feedback.Title">Titel *</s:String>
     <s:String x:Key="S.Feedback.Message">Besked</s:String>
     <s:String x:Key="S.Feedback.Type">Feedbacktype</s:String>
@@ -975,11 +998,11 @@
     <!--Troubleshoot-->
     <s:String x:Key="S.Troubleshoot.Title">Problemer</s:String>
     <s:String x:Key="S.Troubleshoot.Windows">Mangler der et vindue?</s:String>
-    <s:String x:Key="S.Troubleshoot.Windows.Info">If any of the windows is missing (outside of the screen),&#x0d;use the options below to reset its current and startup position.</s:String>
-    <s:String x:Key="S.Troubleshoot.Windows.Current">Here's where each window is currently located:</s:String>
-    <s:String x:Key="S.Troubleshoot.Windows.Next">Here's where each window will open next time:</s:String>
-    <s:String x:Key="S.Troubleshoot.Windows.BringBack">Move all windows to the main screen.</s:String>
-    <s:String x:Key="S.Troubleshoot.Windows.Reset">Reset the startup position of all windows.</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Info">Mangler der et vindue (udenfor skærmen),&#x0d;så brug mulighederne nedenfor, til at rette placeringen.</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Current">Vinduernes aktuelle placering:</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Next">Vinduernes placering ved næste start:</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.BringBack">Flyt alle vinduer til hovedskærm.</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Reset">Nulstil alle vinduers startplacering.</s:String>
    
     <!--FontStyles-->
     <s:String x:Key="S.FontStyles.Normal">Normal</s:String>
