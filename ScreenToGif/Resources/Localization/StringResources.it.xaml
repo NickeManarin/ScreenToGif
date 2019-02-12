@@ -553,7 +553,7 @@
     <s:String x:Key="Editor.Image.Overlay">Sovrimpressione</s:String>
     <s:String x:Key="Editor.Image.FreeDrawing">Disegno&#x0a;libero</s:String>
     <s:String x:Key="Editor.Image.Shape">Forme</s:String>
-    <!--<s:String x:Key="Editor.Image.Clicks">Mouse&#x0d;Clicks</s:String>-->
+    <s:String x:Key="Editor.Image.Clicks">Clic del&#x0d;mouse</s:String>
     <s:String x:Key="Editor.Image.Watermark">Filigrana</s:String>
     <s:String x:Key="Editor.Image.Cinemagraph">Cinemagraph</s:String>
     <s:String x:Key="Editor.Image.Border">Bordo</s:String>
@@ -892,6 +892,8 @@
     <s:String x:Key="S.SaveAs.Encoder.Legacy.Tooltip">Algoritmo: NeuQuant.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System">Sistema</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System.Tooltip">Usa una tavolozza predefinita.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Apng">1.0</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Apng.Tooltip">Codificatore creato dallo sviluppatore di ScreenToGif.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
     <s:String x:Key="S.SaveAs.GifOptions">Opzioni gif</s:String>
