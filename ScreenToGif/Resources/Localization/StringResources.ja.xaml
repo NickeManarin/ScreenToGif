@@ -21,7 +21,7 @@
     <s:String x:Key="S.Id">Id</s:String>
     <s:String x:Key="S.Title">タイトル</s:String>
     <s:String x:Key="S.Description">説明</s:String>
-    <s:String x:Key="S.SelectColor">色を選択するにはここをクリックしてください</s:String>
+    <s:String x:Key="S.SelectColor">色を選択するには、ここをクリックしてください。</s:String>
 
     <!--Tray Icon-->
     <s:String x:Key="S.NewRecording">新しいスクリーン録画</s:String>
@@ -35,22 +35,22 @@
     <s:String x:Key="Application.Exiting.Message">すべてのウィンドウを閉じ、トレイアイコンを終了します。</s:String>
     
     <!--Error messages--> 
-    <s:String x:Key="S.Crash">アプリのクラッシュ:(</s:String>
+    <s:String x:Key="S.Crash">アプリのクラッシュ(・へ・)</s:String>
     
     <!--StartUp Page-->
     <s:String x:Key="Title.StartUp">ScreenToGif - 起動画面</s:String>
     <s:String x:Key="Recorder">レコーダー</s:String>
     <s:String x:Key="Webcam">Webカメラ</s:String>
     <s:String x:Key="Board">ボード</s:String>
-    <s:String x:Key="Editor">エディタ</s:String>
+    <s:String x:Key="Editor">エディター</s:String>
     <s:String x:Key="Options">オプション</s:String>
     <s:String x:Key="Help">ヘルプ</s:String>
     <s:String x:Key="NewRelease">新しいリリースがあります • {0}</s:String>
     <s:String x:Key="NewRelease.Tooltip">ScreenToGifの最新バージョンをダウンロードします。</s:String>
-    <s:String x:Key="Tooltip.Recorder">スクリーンレコーダで簡単に画面の録画ができます。</s:String>
-    <s:String x:Key="Tooltip.Webcam">Webカメラレコーダを開きます。</s:String>
-    <s:String x:Key="Tooltip.Board">描画を記録するボードレコーダを開きます。</s:String>
-    <s:String x:Key="Tooltip.Editor">エディタウィンドウで新しい録画を開始したり編集したりできます。</s:String>
+    <s:String x:Key="Tooltip.Recorder">スクリーンレコーダーで簡単に画面の録画ができます。</s:String>
+    <s:String x:Key="Tooltip.Webcam">Webカメラレコーダーを開きます。</s:String>
+    <s:String x:Key="Tooltip.Board">描画を記録するボードレコーダーを開きます。</s:String>
+    <s:String x:Key="Tooltip.Editor">エディターウィンドウで新しい録画を開始したり編集したりできます。</s:String>
 
     <!--Update Window-->
     <s:String x:Key="Update">更新</s:String>
@@ -58,11 +58,11 @@
     <s:String x:Key="Update.NewRelease.Verbose">新しいリリース バージョン {0}! ここをクリックして詳細表示</s:String>
     <s:String x:Key="Download">ダウンロード</s:String>
     <s:String x:Key="Update.Portable">ポータブル</s:String>
-    <s:String x:Key="Update.Installer">インストーラ</s:String>
-    <s:String x:Key="Update.Filename.Warning">別の場所か別のファイル名を選択する必要があります。</s:String>
+    <s:String x:Key="Update.Installer">インストーラー</s:String>
+    <s:String x:Key="Update.Filename.Warning">別の場所か、別のファイル名を選択する必要があります。</s:String>
     <s:String x:Key="Update.Filename.Warning2">実行ファイルを直ちに新しいバージョンに上書きすることはできません。別のファイル名を選択してください。</s:String>
     <s:String x:Key="Update.Install.Header">すぐに最新バージョンをインストールしますか？</s:String>
-    <s:String x:Key="Update.Install.Description">アプリ終了後インストーラが実行されます。</s:String>
+    <s:String x:Key="Update.Install.Description">アプリ終了後インストーラーが実行されます。</s:String>
     <s:String x:Key="Update.CloseThis">アプリを終了しますか？</s:String>
     <s:String x:Key="Update.CloseThis.Detail">これは旧バージョンです。既に新しいバージョンをダウンロードしました。</s:String>
     
@@ -80,7 +80,7 @@
     <s:String x:Key="Donate">寄付</s:String>
     <s:String x:Key="About">アプリ情報</s:String>
     
-    <s:String x:Key="Application.ScreenRecorder">スクリーンレコーダ</s:String>
+    <s:String x:Key="Application.ScreenRecorder">スクリーンレコーダー</s:String>
     <s:String x:Key="Application.ScreenRecorder.RecordMouse">録画中にマウスカーソルを表示</s:String>
     <s:String x:Key="Application.ScreenRecorder.RecordClicks">マウスのクリックを検出</s:String>
     <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">カーソルの色を選択する</s:String>
@@ -89,11 +89,11 @@
     <s:String x:Key="Application.ScreenRecorder.StepRecording">スナップショットモード</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(各フレームは手動でキャプチャされます)</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate">固定フレームレート</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(録画時のラグで変化せず一定します)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(録画時のラグによる変動をせず一定します)</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording">非同期録画</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(録画時のラグ低減に有効)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.NewRecorder">新ユーザインタフェース</s:String>
-    <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(旧ユーザインタフェイスを置き換えます)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.NewRecorder">新ユーザーインタフェース</s:String>
+    <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(旧ユーザーインタフェースを置き換えます)</s:String>
     <s:String x:Key="Application.ScreenRecorder.Magnifier">拡大鏡を有効</s:String>
     <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(記録領域を選択している間は拡大鏡を有効にします)</s:String>
     
@@ -102,7 +102,7 @@
     <s:String x:Key="Application.Other.LeaveOpen">すべてのウィンドウを閉じてもアプリは閉じない</s:String>
     <s:String x:Key="Application.Other.NotifyFrameDeletion">フレームを削除する前に確認</s:String>
     <s:String x:Key="Application.Other.NotifyProjectDiscard">プロジェクトを破棄する前に確認</s:String>
-    <s:String x:Key="Application.Other.NotifyWhileClosingEditor">エディタを閉じる前に確認 (プロジェクトが開かれている場合)</s:String>
+    <s:String x:Key="Application.Other.NotifyWhileClosingEditor">エディターを閉じる前に確認 (プロジェクトが開かれている場合)</s:String>
     <s:String x:Key="Application.Other.NotifyWhileClosingApp">(Exitコマンドで)アプリ終了する前に確認</s:String>
     <s:String x:Key="Application.Other.DrawOutlineOutside">文字の外側にキャプションのアウトラインを描く</s:String>
     <s:String x:Key="Application.Other.DisableHardwareAcceleration">ハードウェア・アクセラレーションを使用しない</s:String>
@@ -110,10 +110,10 @@
     <s:String x:Key="Application.Other.CheckForUpdates">アップデートを確認</s:String>
     <s:String x:Key="S.Application.Other.Homepage">起動時のウィンドウ:</s:String>
     <s:String x:Key="S.Application.Other.Homepage.StartUp">ランチャー</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Recorder">スクリーンレコーダ</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Recorder">スクリーンレコーダー</s:String>
     <s:String x:Key="S.Application.Other.Homepage.Webcam">Webカメラ録画</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Board">ボードレコーダ</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Editor">エディタウィンドウ</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Board">ボードレコーダー</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Editor">エディターウィンドウ</s:String>
     <s:String x:Key="S.Application.Other.Homepage.Minimized">最小化(システムトレイ)</s:String>
     <s:String x:Key="S.Application.Other.Homepage.Info">起動時のウィンドウを選択します。最小化起動時は、システムトレイにアイコンが表示されます。</s:String>
     
@@ -122,13 +122,13 @@
     <s:String x:Key="S.AutomatedTasks.List.Task">タスク</s:String>
     <s:String x:Key="S.AutomatedTasks.List.Details">詳細</s:String>
     <s:String x:Key="S.AutomatedTasks.SelectType">タスクを選択</s:String>
-    <s:String x:Key="S.AutomatedTasks.Info">タスクは一覧の上から下へ順番に実行されます。&#10;エディタでプロジェクトを開いたときにタスクが実行されます。</s:String>
+    <s:String x:Key="S.AutomatedTasks.Info">タスクは一覧の上から下へ順番に実行されます。&#10;エディターでプロジェクトを開いたときにタスクが実行されます。</s:String>
     
-    <s:String x:Key="Interface.EditorBackground">エディター背景</s:String>
-    <s:String x:Key="Interface.Recorder">レコーダーテーマ</s:String>
+    <s:String x:Key="Interface.EditorBackground">エディター 背景</s:String>
+    <s:String x:Key="Interface.Recorder">レコーダー テーマ</s:String>
     <s:String x:Key="Interface.Background">背景</s:String>
     <s:String x:Key="Interface.Foreground">前面</s:String>
-    <s:String x:Key="Interface.BoardBackground">ボード背景</s:String>
+    <s:String x:Key="Interface.BoardBackground">ボード 背景</s:String>
     <s:String x:Key="Interface.EditorBackground.Scheme">配色</s:String>
     <s:String x:Key="Interface.EditorBackground.Scheme.VeryLight">非常に明るい</s:String>
     <s:String x:Key="Interface.EditorBackground.Scheme.Light">明るい</s:String>
@@ -161,26 +161,26 @@
     <s:String x:Key="Interface.Other.AutomaticallyFitImage">ウィンドウサイズに応じてフレームサイズを自動調整</s:String>
   
     <s:String x:Key="S.Shortcuts.Global">グローバル</s:String>
-    <s:String x:Key="S.Shortcuts.Global.ScreenRecorder">スクリーンレコーダ:</s:String>
-    <s:String x:Key="S.Shortcuts.Global.ScreenRecorder.Info">(標準スクリーンレコーダを開きます）</s:String>
-    <s:String x:Key="S.Shortcuts.Global.WebcamRecorder">Webカメラレコーダ:</s:String>
-    <s:String x:Key="S.Shortcuts.Global.WebcamRecorder.Info">(Webカメラレコーダを開きます)</s:String>
-    <s:String x:Key="S.Shortcuts.Global.BoardRecorder">ボードレコーダ:</s:String>
-    <s:String x:Key="S.Shortcuts.Global.BoardRecorder.Info">(ボードレコーダでユーザの描画を記録できます)</s:String>
-    <s:String x:Key="S.Shortcuts.Global.OpenEditor">エディタ:</s:String>
-    <s:String x:Key="S.Shortcuts.Global.OpenEditor.Info">(別のエディタウィンドウを開きます)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.ScreenRecorder">スクリーンレコーダー:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.ScreenRecorder.Info">(標準スクリーンレコーダーを開きます）</s:String>
+    <s:String x:Key="S.Shortcuts.Global.WebcamRecorder">Webカメラレコーダー:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.WebcamRecorder.Info">(Webカメラレコーダーを開きます)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.BoardRecorder">ボードレコーダー:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.BoardRecorder.Info">(ボードレコーダーでユーザーの描画を記録できます)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenEditor">エディター:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenEditor.Info">(別のエディターウィンドウを開きます)</s:String>
     <s:String x:Key="S.Shortcuts.Global.OpenOptions">オプション:</s:String>
     <s:String x:Key="S.Shortcuts.Global.OpenOptions.Info">(オプションウィンドウを開きます。多重起動はできません)</s:String>
     <s:String x:Key="S.Shortcuts.Global.Exit">終了:</s:String>
     <s:String x:Key="S.Shortcuts.Global.Exit.Info">(すべてのウィンドウを閉じてシステムトレイからアプリを削除します）</s:String>
-    <s:String x:Key="S.Shortcuts.Recorders">レコーダ</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders">レコーダー</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.StartPause">開始/ポーズ:</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.StartPause.Info">(記録を開始/ポーズします。スナップショットモードが有効ならスナップショットを撮ります)</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.Stop">停止:</s:String>
-    <s:String x:Key="S.Shortcuts.Recorders.Stop.Info">(記録を停止してエディタを開きます)</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Stop.Info">(記録を停止してエディターを開きます)</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.Discard">破棄:</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.Discard.Info">(ポーズするとアクティブな録画を破棄します)</s:String>
-    <s:String x:Key="S.Shortcuts.Info">クリックしてキー(＋拡張キー)を押してください。&#10;一部使用できないキーの組み合わせがあります。</s:String>
+    <s:String x:Key="S.Shortcuts.Info">クリックしてから、(修飾子キーと)希望するキーを押してください。&#10;一部使用できないキーの組み合わせがあります。</s:String>
     
     <s:String x:Key="Language.AppLanguage">アプリケーションの言語</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect">自動検出</s:String>
@@ -195,16 +195,16 @@
     <s:String x:Key="Language.AppLanguage.Translate.Sentence3.3">翻訳終了時</s:String>
     <s:String x:Key="Language.AppLanguage.Translate.ResourceLink.Tooltip">ガイドラインのウェブページを開く</s:String>
     <s:String x:Key="Language.AppLanguage.Translate.ImportLink.Tooltip">インポートページを開く</s:String>
-    <s:String x:Key="Language.AppLanguage.Translate.EmailLink.Tooltip">メーラを起動</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.EmailLink.Tooltip">メーラーを起動</s:String>
     
-    <s:String x:Key="TempFiles.FilesAndFolders">一時ファイルとフォルダ</s:String>
-    <s:String x:Key="TempFiles.FilesAndFolders.Count">フォルダ数: {0}、ファイル数: {1}</s:String>
-    <s:String x:Key="TempFiles.FilesAndFolders.None">フォルダ/ファイルが見つかりません</s:String>
-    <s:String x:Key="TempFiles.OpenFolder">フォルダを開く</s:String>
-    <s:String x:Key="TempFiles.Clear">一時フォルダクリア</s:String>
-    <s:String x:Key="TempFiles.LogsLocation">ログフォルダ</s:String>
+    <s:String x:Key="TempFiles.FilesAndFolders">一時ファイルとフォルダー</s:String>
+    <s:String x:Key="TempFiles.FilesAndFolders.Count">フォルダー数: {0}、ファイル数: {1}</s:String>
+    <s:String x:Key="TempFiles.FilesAndFolders.None">フォルダー/ファイルが見つかりません</s:String>
+    <s:String x:Key="TempFiles.OpenFolder">フォルダーを開く</s:String>
+    <s:String x:Key="TempFiles.Clear">一時フォルダークリア</s:String>
+    <s:String x:Key="TempFiles.LogsLocation">ログフォルダー</s:String>
     <s:String x:Key="TempFiles.LogsLocation.Choose">エラーログファイルの場所を選択</s:String>
-    <s:String x:Key="TempFiles.Location">場所フォルダ</s:String>
+    <s:String x:Key="TempFiles.Location">場所フォルダー</s:String>
     <s:String x:Key="TempFiles.Location.Choose">一時ファイルの場所を選択</s:String>
     <s:String x:Key="TempFiles.Settings">設定ファイルの場所</s:String>
     <s:String x:Key="TempFiles.AppDataPath">アプリデータ:</s:String>
@@ -212,24 +212,24 @@
     <s:String x:Key="TempFiles.NotExists">存在しません。</s:String>
     <s:String x:Key="TempFiles.CreateSettings">空のローカル設定ファイルを作成</s:String>
     <s:String x:Key="TempFiles.RemoveSettings">設定ファイル削除</s:String>
-    <s:String x:Key="TempFiles.OpenSettingsFolder">設定ファイルの保存先フォルダを開きます。&#10;Ctrlキーを押しながらだと設定ファイルを開きます。(可能であれば)</s:String>
+    <s:String x:Key="TempFiles.OpenSettingsFolder">設定ファイルの保存先フォルダーを開きます。&#10;Ctrlキーを押しながらだと設定ファイルを開きます。(可能であれば)</s:String>
     <s:String x:Key="TempFiles.SettingsInfo">・ 設定ファイル検索順: ローカル ▶ AppData ▶ 標準設定&#10;　・ローカル、AppDataに設定ファイルがなければ標準設定が使用されます。&#10;　・標準設定が使用された場合、設定ファイルはAppDataに保存されます。</s:String>
     <s:String x:Key="TempFiles.KeepRecent">最近のプロジェクトを維持しますか？</s:String>
-    <s:String x:Key="TempFiles.KeepRecent.Info">維持すると、「オプション」－「一時ファイル」で設定した日数を経過していない最近のプロジェクトは消去されません。</s:String>
+    <s:String x:Key="TempFiles.KeepRecent.Info">維持すると、「オプション」 - 「一時ファイル」で設定した日数を経過していない最近のプロジェクトは消去されません。</s:String>
     <s:String x:Key="TempFiles.AutomaticRemoval">古いプロジェクトを自動削除</s:String>
-    <s:String x:Key="TempFiles.AutomaticRemoval.Info">アプリを起動時に 「オプション」－「一時ファイル」で設定した日数を経過したプロジェクトは消去されます。</s:String>
+    <s:String x:Key="TempFiles.AutomaticRemoval.Info">アプリを起動時に 「オプション」 - 「一時ファイル」で設定した日数を経過したプロジェクトは消去されます。</s:String>
     <s:String x:Key="TempFiles.AutomaticRemovalDays.Info">(この日数を経過した古いプロジェクトは、アプリ起動時に消去/破棄されます)</s:String>
-    <s:String x:Key="TempFiles.LowSpace">ハードドライブのスペースが不足しています。 一時フォルダをクリアするか場所を変更してください。</s:String>
+    <s:String x:Key="TempFiles.LowSpace">ハードドライブのスペースが不足しています。 一時フォルダーをクリアするか場所を変更してください。</s:String>
     
-    <s:String x:Key="S.Upload.Proxy">プロクシ</s:String>
+    <s:String x:Key="S.Upload.Proxy">プロキシ</s:String>
     <s:String x:Key="S.Upload.Proxy.Mode">モード:</s:String>
     <s:String x:Key="S.Upload.Proxy.Mode.Disabled">無効</s:String>
     <s:String x:Key="S.Upload.Proxy.Mode.Manual">マニュアル</s:String>
     <s:String x:Key="S.Upload.Proxy.Mode.System">システム</s:String>
-    <s:String x:Key="S.Upload.Proxy.Mode.System.Info">(システムプロクシを使用)</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.System.Info">(システムプロキシを使用)</s:String>
     <s:String x:Key="S.Upload.Proxy.Host">ホスト:</s:String>
     <s:String x:Key="S.Upload.Proxy.Port">ポート:</s:String>
-    <s:String x:Key="S.Upload.Proxy.User">ユーザ名:</s:String>
+    <s:String x:Key="S.Upload.Proxy.User">ユーザー名:</s:String>
     <s:String x:Key="S.Upload.Proxy.Password">パスワード:</s:String>
     <s:String x:Key="S.Upload.Get">OAuthトークン取得</s:String>
     <s:String x:Key="S.Upload.PasteToken">ここに認証トークンを貼り付けます</s:String>
@@ -273,7 +273,7 @@
     <s:String x:Key="Extras.License.Ffmpeg">FFmpeg ライセンス</s:String>
     <s:String x:Key="Extras.License.Gifski">Gifski ライセンス</s:String>
 
-    <s:String x:Key="Donate.IfYouWish">感謝したいとき</s:String>
+    <s:String x:Key="Donate.IfYouWish">感謝したいとき(•◡•)</s:String>
     <s:String x:Key="Donate.DonateDollar">US$ で寄付</s:String>
     <s:String x:Key="Donate.DonateEuro">€ で寄付</s:String>
     <s:String x:Key="Donate.Donate">寄付</s:String>
@@ -291,7 +291,7 @@
     <s:String x:Key="About.Contact">連絡先</s:String>
     <s:String x:Key="S.About.Contact.Discord">サーバーに接続</s:String>
     <s:String x:Key="S.About.Contact.Facebook">ページ訪問</s:String>
-    <s:String x:Key="S.About.Contact.Gitter">入室</s:String>
+    <s:String x:Key="S.About.Contact.Gitter">入室する</s:String>
     <s:String x:Key="About.Technical">技術情報</s:String>
     <s:String x:Key="About.Technical.License">ライセンス:</s:String>
     <s:String x:Key="About.Technical.Free">(フリーウェア)</s:String>
@@ -339,14 +339,14 @@
     <s:String x:Key="S.Recorder.EscToCancel">Escキーを押してキャンセル</s:String>
     
     <!--Webcam Recorder-->
-    <s:String x:Key="Webcam.Title">ScreenToGif - Webカメラレコーダ</s:String>
-    <s:String x:Key="Webcam.NoVideo">ビデオデバイスが見つかりません。</s:String>
-    <s:String x:Key="Webcam.CheckVideoDevices">ビデオデバイスを確認してください</s:String>
+    <s:String x:Key="Webcam.Title">ScreenToGif - Webカメラレコーダー</s:String>
+    <s:String x:Key="Webcam.NoVideo">ビデオデバイスが見つかりません。(・へ・)</s:String>
+    <s:String x:Key="Webcam.CheckVideoDevices">ビデオデバイスを確認してください。</s:String>
     <s:String x:Key="Webcam.Scale">スケール: {0:0.##}倍</s:String>
     <s:String x:Key="Webcam.ChangeScale">ビデオスケール変更</s:String>
     
     <!--Board Recorder-->
-    <s:String x:Key="Board.Title">ScreenToGif - ボードレコーダ</s:String>
+    <s:String x:Key="Board.Title">ScreenToGif - ボードレコーダー</s:String>
     <s:String x:Key="Board.AutoRecord">自動録画</s:String>
     <s:String x:Key="Board.AutoRecordToolTip">描画中も録画する</s:String>
     <s:String x:Key="Board.CtrlHold">Ctrl [保持]</s:String>
@@ -403,7 +403,7 @@
     <s:String x:Key="ImportVideo.Duration">時間:</s:String>
     
     <!--Encoder-->
-    <s:String x:Key="Encoder.Title">エンコーダ</s:String>
+    <s:String x:Key="Encoder.Title">エンコーダー</s:String>
     <s:String x:Key="Encoder.ClearAllCompleted">すべての「完了」をクリアする</s:String>
     <s:String x:Key="Encoder.Starting">開始中</s:String>
     <s:String x:Key="Encoder.Completed">完了</s:String>
@@ -423,12 +423,12 @@
     <s:String x:Key="Encoder.Processing">実行中 {0}</s:String>
     <s:String x:Key="Encoder.Analyzing">変更されていないピクセルを検出中</s:String>
     <s:String x:Key="Encoder.OpenFile">ファイルを開く</s:String>
-    <s:String x:Key="Encoder.ExploreFolder">フォルダを開く</s:String>
+    <s:String x:Key="Encoder.ExploreFolder">フォルダーを開く</s:String>
     <s:String x:Key="Encoder.Remove">リストから削除</s:String>
     <s:String x:Key="Encoder.Details">詳細を表示</s:String>
     <s:String x:Key="Encoder.Copy.Image">画像としてコピー</s:String>
     <s:String x:Key="Encoder.Copy.Filename">ファイル名をコピー</s:String>
-    <s:String x:Key="Encoder.Copy.Folder">フォルダパスをコピー</s:String>
+    <s:String x:Key="Encoder.Copy.Folder">フォルダーパスをコピー</s:String>
     <s:String x:Key="Encoder.Copy.Link">リンクをコピー</s:String>
 
     <!--Command output-->
@@ -437,10 +437,10 @@
     
     <!--Notifications-->
     <s:String x:Key="S.Notifications">通知</s:String>
-    <s:String x:Key="S.Notifications.Dismiss">全ての通知を消去</s:String>
+    <s:String x:Key="S.Notifications.Dismiss">すべての通知を消去</s:String>
     
     <!--Editor-->
-    <s:String x:Key="Editor.Title">ScreenToGif - エディタ</s:String>
+    <s:String x:Key="Editor.Title">ScreenToGif - エディター</s:String>
     <s:String x:Key="Editor.File">ファイル</s:String>
     <s:String x:Key="Editor.Home">ホーム</s:String>
     <s:String x:Key="Editor.Playback">プレイバック</s:String>
@@ -453,11 +453,11 @@
     <s:String x:Key="S.Editor.Extras">その他</s:String>
     
     <!--Welcome-->
-    <s:String x:Key="Welcome.New">新しい録画を開始するには [ファイル] - [新規] から</s:String>
+    <s:String x:Key="Welcome.New">新しい録画を開始するには 「ファイル」 - 「新規」 から</s:String>
     <s:String x:Key="Welcome.Import">ドラッグ＆ドロップで画像、ビデオ、プロジェクトをインポート</s:String>
     <s:String x:Key="Welcome.ThankYou">このアプリをご使用頂き、ありがとうございます！</s:String>
     <s:String x:Key="Welcome.Size">低フレームレート、フレーム間の色数または変化量が小さいほどサイズは小さくなります。</s:String>
-    <s:String x:Key="Welcome.Contact">作者とコンタクトしますか？ [オプション] - [アプリ情報]から</s:String>
+    <s:String x:Key="Welcome.Contact">作者とコンタクトしますか？ 「オプション」 - 「アプリ情報」から</s:String>
     <s:String x:Key="Welcome.Trouble">不具合があったらフィードバックツールで報告してください。</s:String>
     <s:String x:Key="Welcome.NewRecorder">新しいレコーダーを試してみませんか？</s:String>
     
@@ -577,14 +577,14 @@
     <!--TODO: Organize-->
     <!--Editor, Continuation-->
     <s:String x:Key="Editor.Preparing">フレームを準備中</s:String>
-    <s:String x:Key="Editor.InvalidLoadingFiles">不正な読み込み - 一度に複数のファイルをインポートすることはできません。1つのファイルのみを選択してみてください。</s:String>
-    <s:String x:Key="Editor.InvalidLoadingProjects">不正な読み込み - 一度に複数のプロジェクトを読み込むことはできません。 1つのプロジェクトだけを選択してみてください。</s:String>
+    <s:String x:Key="Editor.InvalidLoadingFiles">不正な読み込み - 一度に複数のファイルをインポートすることはできません。1つのファイルのみ選択してみてください。</s:String>
+    <s:String x:Key="Editor.InvalidLoadingProjects">不正な読み込み - 一度に複数のプロジェクトを読み込むことはできません。 1つのプロジェクトのみ選択してみてください。</s:String>
     <s:String x:Key="Editor.OpenMediaProject">メディア(画像,ビデオ)またはプロジェクトファイルを開く </s:String>
     <s:String x:Key="Editor.OpenMedia">メディア(画像,ビデオ)を開く </s:String>
     
     <s:String x:Key="Editor.Clipboard.InvalidCut.Title">切り取り処理</s:String>
     <s:String x:Key="Editor.Clipboard.InvalidCut.Instruction">すべてのフレームを切り取ることはできません。</s:String>
-    <s:String x:Key="Editor.Clipboard.InvalidCut.Message">録画には、少なくとも一つ以上のフレームが必要です</s:String>
+    <s:String x:Key="Editor.Clipboard.InvalidCut.Message">録画には、少なくとも一つ以上のフレームが必要です。</s:String>
     
     <s:String x:Key="Editor.DeleteAll.Title">すべて削除</s:String>
     <s:String x:Key="Editor.DeleteAll.Instruction">すべてのフレームを削除しますか？</s:String>
@@ -593,14 +593,14 @@
     <s:String x:Key="Editor.DiscardProject.Instruction">すべてのフレームを削除してもよろしいですか？</s:String>
     <s:String x:Key="Editor.DiscardProject.Message">すべてのフレームを削除しようとしています。\r\nこの操作は取り消すことができません。</s:String>
     <s:String x:Key="Editor.DiscardPreviousProject.Instruction">以前のプロジェクトを削除しますか？</s:String>
-    <s:String x:Key="Editor.DiscardPreviousProject.Message">選択しない場合、以前のプロジェクトは「最近のプロジェクト」から開くことができます。</s:String>
+    <s:String x:Key="Editor.DiscardPreviousProject.Message">「いいえ」を選択すると、以前のプロジェクトを「最近のプロジェクト」から開くことができます。</s:String>
     <s:String x:Key="Editor.DeleteFrames.Title">フレームを削除</s:String>
     <s:String x:Key="Editor.DeleteFrames.Instruction">削除してよろしいですか？</s:String>
     <s:String x:Key="Editor.DeleteFrames.Message">この操作は {0}個のフレームを削除します。後で元に戻すことができます。</s:String>
-    <s:String x:Key="Editor.Exiting.Title">エディタ終了中</s:String>
+    <s:String x:Key="Editor.Exiting.Title">エディター終了中</s:String>
     <s:String x:Key="Editor.Exiting.Instruction">終了してよろしいですか？</s:String>
     <s:String x:Key="Editor.Exiting.Message">作業中のプロジェクトは、「最近のプロジェクト」から再度開くことができます。</s:String>
-    <s:String x:Key="Editor.Exiting.Message2">現在作業中のプロジェクトは、「最近のプロジェクト」から開くことができますが、\r\n「オプション」ー「一時ファイル」で設定した日数経過後に自動削除されます。</s:String>
+    <s:String x:Key="Editor.Exiting.Message2">現在作業中のプロジェクトは、「最近のプロジェクト」から開くことができますが、\r\n「オプション」 - 「一時ファイル」で設定した日数経過後に自動削除されます。</s:String>
     
     <s:String x:Key="Editor.Resize.Warning">リサイズ処理を適用するには、別の値を選択する必要があります。</s:String>
     <s:String x:Key="Editor.Crop.Warning">クロップ選択は、現在のフレームサイズよりも小さくなければなりません。</s:String>
@@ -615,7 +615,7 @@
     <s:String x:Key="Editor.Watermark.Select">画像の選択</s:String>
     <s:String x:Key="Editor.Watermark.WarningNoImage">選択したフレームに適用する画像を選択する必要があります。</s:String>
     <s:String x:Key="Editor.Watermark.WarningSelection">透かしを適用するには、少なくとも1つのフレームを選択する必要があります。</s:String>
-    <s:String x:Key="Editor.Border.WarningThickness">少なくとも一辺は、ボーダー太さを1以上にする必要があります。</s:String>
+    <s:String x:Key="Editor.Border.WarningThickness">少なくとも一辺は、ボーダー太さ(厚さ)を1以上にする必要があります。</s:String>
     <s:String x:Key="Editor.Border.WarningSelection">境界(ボーダー)を適用するには、少なくとも1つのフレームを選択する必要があります。</s:String>
     <s:String x:Key="Editor.Cinemagraph.WarningNoDrawing">シネマグラフを適用するには、少なくとも1つの画素を選択する必要があります。それらの上に描画されるピクセルを選択します。</s:String>
     
@@ -627,11 +627,11 @@
 
     <s:String x:Key="Editor.DragDrop.Invalid.Title">不正なドラッグ＆ドロップ</s:String>
     <s:String x:Key="Editor.DragDrop.MultipleFiles.Instruction">一度に複数のファイルをインポートすることはできません。</s:String>
-    <s:String x:Key="Editor.DragDrop.MultipleFiles.Message">1ファイルだけ選択してください。</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Message">1ファイルのみ選択してみてください。</s:String>
     <s:String x:Key="Editor.DragDrop.Invalid.Instruction">ファイルをロードできません。</s:String>
     <s:String x:Key="Editor.DragDrop.Invalid.Message">ファイルの形式が無効であるため、ファイルを読み込めませんでした。</s:String>
     <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">一度に複数のプロジェクトをインポートすることはできません。</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidProject.Message">1プロジェクトだけ選択してみてください。</s:String>
+    <s:String x:Key="Editor.DragDrop.InvalidProject.Message">1プロジェクトのみ選択してみてください。</s:String>
     
     <s:String x:Key="Editor.LoadingFrames">フレームをロード中</s:String>
     <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Instruction">プロジェクトをロードできません。</s:String>
@@ -644,7 +644,7 @@
     
     <s:String x:Key="Editor.ExportingRecording">録画をエクスポート中</s:String>
     <s:String x:Key="Editor.DiscardingFrames">フレームを破棄中</s:String>
-    <s:String x:Key="Editor.DiscardingFolders">フォルダを破棄中</s:String>
+    <s:String x:Key="Editor.DiscardingFolders">フォルダーを破棄中</s:String>
     <s:String x:Key="Editor.ResizingFrames">フレームをリサイズ中</s:String>
     <s:String x:Key="Editor.CroppingFrames">フレームをクロップ中</s:String>
     <s:String x:Key="Editor.ApplyingOverlay">フレームへオーバーレイを適用中</s:String>
@@ -656,7 +656,7 @@
 
     <s:String x:Key="Editor.List.Frame">フレーム:</s:String>
     <s:String x:Key="Editor.List.OpenImage">イメージを開く</s:String>
-    <s:String x:Key="Editor.List.ExploreFolder">フォルダ表示</s:String>
+    <s:String x:Key="Editor.List.ExploreFolder">フォルダーを表示</s:String>
     <s:String x:Key="Editor.List.ExportImage">イメージをエクスポート</s:String>
     
     <s:String x:Key="Editor.FrameNumbersInfo">総数、選択数、選択インデックス</s:String>
@@ -674,9 +674,9 @@
     
     <!--Warnings-->
     <s:String x:Key="Editor.Warning.Selection">オーバーレイを適用するには、少なくとも1つのフレームを選択する必要があります。</s:String>
-    <s:String x:Key="Editor.Warning.Ffmpeg">FFmpegが見つかりません。環境変数Pathに追加するか、設定で場所を指定してください。</s:String>
-    <s:String x:Key="Editor.Warning.Gifski">Gifskiが見つかりません。環境変数Pathに追加するか、設定で場所を指定してください。</s:String>
-    <s:String x:Key="Editor.Warning.LowSpace">ドライブに十分な空き容量がありません (残り {0}％)。 オプション > 一時ファイルでスペースを確保するにはここをクリックしてください。</s:String>
+    <s:String x:Key="Editor.Warning.Ffmpeg">FFmpegが見つかりません。環境変数Pathにパスを追加するか、ここをクリックして「オプション」 - 「外部ツール」を開き、場所を指定してください。</s:String>
+    <s:String x:Key="Editor.Warning.Gifski">Gifskiが見つかりません。環境変数Pathにパスを追加するか、ここをクリックして「オプション」 - 「外部ツール」を開き、場所を指定してください。</s:String>
+    <s:String x:Key="Editor.Warning.LowSpace">ドライブに十分な空き容量がありません (残り {0}％)。 「オプション」 - 「一時ファイル」でスペースを確保するには、ここをクリックしてください。</s:String>
     
     <!--Hints-->
     <s:String x:Key="Hint.NewRecording">新規録画作成</s:String>
@@ -695,14 +695,14 @@
     <s:String x:Key="Hint.SelectInverse">選択反転</s:String>
     <s:String x:Key="Hint.Deselect">全フレーム選択解除</s:String>
     <s:String x:Key="Hint.DeleteFrames">{0} フレーム削除</s:String>
-    <s:String x:Key="Hint.Reverse">フレームのリストを逆順にしました</s:String>
+    <s:String x:Key="Hint.Reverse">フレームのリストを逆順</s:String>
     <s:String x:Key="Hint.Yoyo">反復効果適用</s:String>
     <s:String x:Key="Hint.MoveLeft">フレーム左移動</s:String>
     <s:String x:Key="Hint.MoveRight">フレーム右移動</s:String>
     <s:String x:Key="Hint.Resize">フレームリサイズ</s:String>
     <s:String x:Key="Hint.Crop">フレーム切り取り</s:String>
     <s:String x:Key="Hint.FlipRotate">フレームの反転/回転</s:String>
-    <s:String x:Key="Hint.FlipRotate2">反転処理は選択したフレームに適用され、回転はすべてのフレームに適用されます。</s:String>
+    <s:String x:Key="Hint.FlipRotate2">反転は選択したフレームに適用され、回転はすべてのフレームに適用されます。</s:String>
     <s:String x:Key="Hint.ApplyAll">この処理はすべてのフレームに適用されます。</s:String>
     <s:String x:Key="Hint.ApplySelected">この処理は選択されたフレームに適用されます。</s:String>
     <s:String x:Key="Hint.Cinemagraph">シネマグラフは先頭フレームに基づくすべてのフレームに適用されます。</s:String>
@@ -729,8 +729,8 @@
     <s:String x:Key="Recent.CreationDate">作成日</s:String>
     <s:String x:Key="Recent.FrameCount">フレーム数</s:String>
     <s:String x:Key="Recent.Warning.NothingSelected">プロジェクトが選択されていません。リストからロードするプロジェクトを選択してください。</s:String>
-    <s:String x:Key="Recent.Warning.SameOpened">このプロジェクトは既にこのエディタにより表示されています。</s:String>
-    <s:String x:Key="Recent.Warning.AlreadyOpened">別エディタでプロジェクト編集している場合、プロジェクトを開くことはできません。</s:String>
+    <s:String x:Key="Recent.Warning.SameOpened">このプロジェクトは既にこのエディターにより表示されています。</s:String>
+    <s:String x:Key="Recent.Warning.AlreadyOpened">別エディターでプロジェクト編集している場合、プロジェクトを開くことはできません。</s:String>
     
     <s:String x:Key="Clipboard.Entries">クリップボード</s:String>
     <s:String x:Key="Clipboard.Entry">クリップボード:</s:String>
@@ -781,7 +781,7 @@
     <s:String x:Key="Caption.Size">サイズ:</s:String>
     <s:String x:Key="Caption.Color">色:</s:String>
     <s:String x:Key="Caption.Outline">アウトライン</s:String>
-    <s:String x:Key="Caption.Thickness">太さ:</s:String>
+    <s:String x:Key="Caption.Thickness">太さ(厚さ):</s:String>
     <s:String x:Key="Caption.Layout">レイアウト</s:String>
     <s:String x:Key="Caption.Vertical">縦位置:</s:String>
     <s:String x:Key="Caption.Horizontal">横位置:</s:String>
@@ -796,7 +796,7 @@
     <s:String x:Key="KeyStrokes.Earlier">キーストロークの表示を先行して開始</s:String>
     <s:String x:Key="KeyStrokes.By">(ミリ秒):</s:String>
     <s:String x:Key="KeyStrokes.Warning.None">録画にはキーストロークはありません。</s:String>
-    <s:String x:Key="KeyStrokes.Edit.Title">ScreenToGif - キーストロークエディタ</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Title">ScreenToGif - キーストロークエディター</s:String>
     <s:String x:Key="KeyStrokes.Edit.Number">フレーム番号</s:String>
     <s:String x:Key="KeyStrokes.Edit.Keys">キーストローク検出</s:String>
     <s:String x:Key="KeyStrokes.Edit.Remove">キーストローク削除</s:String>
@@ -885,7 +885,7 @@
     <s:String x:Key="S.SaveAs.Project">プロジェクト</s:String>
     <s:String x:Key="S.SaveAs.Psd">PSD</s:String>
     <s:String x:Key="S.SaveAs.Video">ビデオ</s:String>
-    <s:String x:Key="S.SaveAs.Encoder">エンコーダ</s:String>
+    <s:String x:Key="S.SaveAs.Encoder">エンコーダー</s:String>
     <!--<s:String x:Key="S.SaveAs.Encoder.ScreenToGif">2.0</s:String>-->
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Tooltip">アルゴリズム: Octree.</s:String>
     <!--<s:String x:Key="S.SaveAs.Encoder.Legacy">1.0</s:String>-->
@@ -893,7 +893,7 @@
     <s:String x:Key="S.SaveAs.Encoder.System">システム</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System.Tooltip">標準のパレットを使用</s:String>
     <!--<s:String x:Key="S.SaveAs.Encoder.Apng">1.0</s:String>-->
-    <s:String x:Key="S.SaveAs.Encoder.Apng.Tooltip">エンコーダはScreenToGifの開発者により作成されました。</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Apng.Tooltip">エンコーダーはScreenToGifの開発者により作成されました。</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
     <s:String x:Key="S.SaveAs.GifOptions">Gif オプション</s:String>
@@ -921,30 +921,30 @@
     <s:String x:Key="S.SaveAs.PsdOptions.Compress">画像を圧縮</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">ランレングス圧縮アルゴリズムで画像データを圧縮</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline">タイムラインデータを保存</s:String>
-    <!--<s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">Exports the timings of the frames, instead of just the frames.</s:String>-->
+    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">時間調整してエクスポート</s:String>
 
     <!--Save As • Save options-->
     <s:String x:Key="S.SaveAs.SaveOptions">保存オプション</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">選択フォルダにファイルを保存</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">選択フォルダーにファイルを保存</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">上書き (存在していたら)</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">プロジェクトとしても保存(同フォルダ、同ファイル名)</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">プロジェクトとしても保存(同フォルダー、同ファイル名)</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">ファイルアップロード</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.UploadDestination">アップロード先</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">クリップボードにコピー</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File">ファイル</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File.Info">出力ファイルをクリップボードにコピー</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FolderPath">フォルダパス</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FolderPath.Info">出力フォルダパスをクリップボードにコピー</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FolderPath">フォルダーパス</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FolderPath.Info">出力フォルダーパスをクリップボードにコピー</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath">ファイルパス</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath.Info">出力ファイルパスをクリップボードにコピー</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">リンク</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">アップロードサービスによって生成されたリンクをクリップボードにコピー</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">エンコード後コマンド実行</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">エンコード後に実行するコマンドを入力します。&#10;複数コマンドを実行するには行を分けて入力します。&#10;{p} = 出力ファイルパス&#10;{f} = 出力フォルダパス</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">エンコード後に実行するコマンドを入力します。&#10;複数コマンドを実行するには行を分けて入力します。&#10;{p} = 出力ファイルパス&#10;{f} = 出力フォルダーパス</s:String>
     
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">ファイル</s:String>
-    <s:String x:Key="S.SaveAs.File.Location">保存先フォルダ</s:String>
+    <s:String x:Key="S.SaveAs.File.Location">保存先フォルダー</s:String>
     <s:String x:Key="S.SaveAs.File.Choose">場所の選択</s:String>
     <s:String x:Key="S.SaveAs.File.Format">ファイルフォーマット</s:String>
     <s:String x:Key="S.SaveAs.File.Name">ファイル名</s:String>
@@ -955,14 +955,14 @@
     
     <s:String x:Key="S.SaveAs.File.Clipboard">クリップボードへ保存</s:String>
 
-    <s:String x:Key="S.SaveAs.Warning.Type">ファイルの保存先(フォルダ、クリップボード、アップロード先)を選択する必要があります。</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Type">ファイルの保存先(フォルダー、クリップボード、アップロード先)を選択する必要があります。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Commands.Empty">エンコード後コマンド実行にはフィールドに何か入力する必要があります。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Upload.None">アップロードサービスが選択されていません。対象を選択する必要があります。</s:String>
-    <s:String x:Key="S.SaveAs.Warning.Upload.NotAuthorized">未承認のため、選択したサービスにアップロードすることはできません。 オプション>アップロードサービスでアプリを承認してください。</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Upload.NotAuthorized">未承認のため、選択したサービスにアップロードすることはできません。 「オプション」 - 「アップロードサービス」でアプリを承認してください。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Copy.Link">ファイルをアップロードするように設定していないため、リンクをコピーするオプションを選択することはできません。</s:String>
-    <s:String x:Key="S.SaveAs.Warning.Folder">出力フォルダを選択する必要があります。</s:String>
-    <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">出力フォルダがありません。</s:String>
-    <s:String x:Key="S.SaveAs.Warning.Folder.Invalid">出力フォルダに無効な文字が含まれています。有効なフォルダを選択してください。</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Folder">出力フォルダーを選択する必要があります。</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">出力フォルダーがありません。</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Folder.Invalid">出力フォルダーに無効な文字が含まれています。有効なフォルダーを選択してください。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Filename">ファイル名を選択する必要があります。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Filename.Invalid">出力ファイル名に無効な文字が含まれています。有効なファイル名を選択してください。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Overwrite">ファイルが存在します。上書きを選択するか別の名前を使ってください。</s:String>
@@ -971,7 +971,7 @@
     <!--SaveAs • Export-->
     <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">フレームをエクスポート</s:String>
     <s:String x:Key="S.SaveAs.Frames.Confirmation.Instruction">フレームをエクスポートしますか？</s:String>
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Message">この操作は、{0}個のフレームを選択したフォルダに直接エクスポートします。</s:String>
+    <s:String x:Key="S.SaveAs.Frames.Confirmation.Message">この操作は、{0}個のフレームを選択したフォルダーに直接エクスポートします。</s:String>
     
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">フィードバック</s:String>
@@ -984,16 +984,16 @@
     <s:String x:Key="S.Feedback.Suggestion">提案</s:String>
     <s:String x:Key="S.Feedback.IssueBug">問題点/バグ</s:String>
     <s:String x:Key="S.Feedback.IssueBug.Info">バグを発見したら電子メールで報告してください。</s:String>
-    <s:String x:Key="S.Feedback.YourEmail">メールアドレス (オプション)</s:String>
+    <s:String x:Key="S.Feedback.YourEmail">メールアドレス (返信希望の場合)</s:String>
     <s:String x:Key="S.Feedback.Warning.Title">タイトルを入力する必要があります。</s:String>
     <s:String x:Key="S.Feedback.Warning.Message">メッセージを入力する必要があります。</s:String>
     <s:String x:Key="S.Feedback.Sending">送信中... このウィンドウはまもなく閉じます。</s:String>
-    <s:String x:Key="S.Feedback.Attachments">添付ファイル (任意、最大 20MB)</s:String>
+    <s:String x:Key="S.Feedback.Attachments">添付ファイル (任意、最大20MB)</s:String>
     <s:String x:Key="S.Feedback.AddAttachments">添付を追加</s:String>
     <s:String x:Key="S.Feedback.RemoveAttachments">すべての添付を削除</s:String>
     <s:String x:Key="S.Feedback.LanguageInfo1">英語ならわかります。</s:String>
     <s:String x:Key="S.Feedback.LanguageInfo2">あとポルトガル語も(ブラジルとヨーロッパ系)</s:String>
-    <s:String x:Key="S.Feedback.Preview.Info">これは送信する内容です。これに全ての添付ファイルを加えます。</s:String>
+    <s:String x:Key="S.Feedback.Preview.Info">これは送信する内容です。これにすべての添付ファイルを加えます。</s:String>
     
     <!--Troubleshoot-->
     <s:String x:Key="S.Troubleshoot.Title">トラブルシュート</s:String>
@@ -1001,7 +1001,7 @@
     <s:String x:Key="S.Troubleshoot.Windows.Info">(スクリーン外に)ウィンドウを見失ってしまったら&#x0d;下にある現在位置と次回開始位置をリセットする機能を使ってください。</s:String>
     <s:String x:Key="S.Troubleshoot.Windows.Current">ウィンドウの現在位置設定はこちらです。</s:String>
     <s:String x:Key="S.Troubleshoot.Windows.Next">次回のウィンドウ開始位置設定はこちらです。</s:String>
-    <s:String x:Key="S.Troubleshoot.Windows.BringBack">メイン画面へ全てのウィンドウを移動</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.BringBack">メイン画面へ全ウィンドウを移動</s:String>
     <s:String x:Key="S.Troubleshoot.Windows.Reset">全ウィンドウの開始位置をリセット</s:String>
    
     <!--FontStyles-->
@@ -1039,6 +1039,6 @@
     <s:String x:Key="S.HorizontalAlignment.Right">右</s:String>
     
     <!--Orientation-->
-    <s:String x:Key="S.Orientation.Horizontal">横</s:String>
-    <s:String x:Key="S.Orientation.Vertical">縦</s:String>
+    <s:String x:Key="S.Orientation.Horizontal">横(水平)</s:String>
+    <s:String x:Key="S.Orientation.Vertical">縦(垂直)</s:String>
 </ResourceDictionary>
