@@ -33,6 +33,7 @@
     <s:Boolean x:Key="CheckForUpdates">True</s:Boolean>
 
     <!--Options • Interface-->
+    <u:AppTheme x:Key="MainTheme">Light</u:AppTheme>
     <Rect x:Key="GridSize">0,0,20,20</Rect>
     <Color x:Key="GridColor1">#FFF5F5F5</Color>
     <Color x:Key="GridColor2">#FFF0F0F0</Color>
@@ -401,6 +402,7 @@
     <Color x:Key="ProgressColor">#FF000000</Color>
     <s:Int32 x:Key="ProgressPrecision">0</s:Int32>
     <s:String x:Key="ProgressFormat"> $s/@s s</s:String>
+    <s:String x:Key="ProgressDateFormat">G</s:String>
     <s:Double x:Key="ProgressThickness">10.0</s:Double>
     <s:Boolean x:Key="ProgressShowTotal">True</s:Boolean>
     <HorizontalAlignment x:Key="ProgressHorizontalAligment">Left</HorizontalAlignment>

@@ -4,12 +4,10 @@
                xmlns:n="clr-namespace:ScreenToGif.Controls"
                xmlns:u="clr-namespace:ScreenToGif.Util"
                xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
-               x:Name="BoardLightWindow" Title="{DynamicResource Board.Title}" 
-               Width="{Binding BoardWidth, Source={x:Static u:UserSettings.All}, Mode=TwoWay}" 
-               Height="{Binding BoardHeight, Source={x:Static u:UserSettings.All},  Mode=TwoWay}"
-               ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterScreen" IsThin="{Binding RecorderThinMode, Source={x:Static u:UserSettings.All}}" 
-               IsFullScreen="False" Background="White" Icon="../Resources/Logo.ico" Child="{StaticResource Vector.Back}" 
-               AllowsTransparency="True" WindowStyle="None" SnapsToDevicePixels="True" UseLayoutRounding="True"
+               x:Name="BoardLightWindow" Title="{DynamicResource Board.Title}" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterScreen" 
+               Width="{Binding BoardWidth, Source={x:Static u:UserSettings.All}, Mode=TwoWay}" Height="{Binding BoardHeight, Source={x:Static u:UserSettings.All},  Mode=TwoWay}"
+               IsThin="{Binding RecorderThinMode, Source={x:Static u:UserSettings.All}}" IsFullScreen="False" Icon="../Resources/Logo.ico" 
+               Child="{StaticResource Vector.Back}" AllowsTransparency="True" WindowStyle="None" SnapsToDevicePixels="True" UseLayoutRounding="True" 
                SizeChanged="LightWindow_SizeChanged" Loaded="Board_OnLoaded" KeyDown="Board_KeyDown" 
                KeyUp="Board_KeyUp" Deactivated="Board_Deactivated" Closing="LightWindow_Closing">
 
@@ -46,7 +44,7 @@
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
-        
+
         <c:KeysToString x:Key="KeysToStringConverter"/>
         <c:InvertedBoolToVisibility x:Key="InvertedBoolToVisibility"/>
         <c:IntToString x:Key="IntToStringConverter"/>
@@ -61,7 +59,7 @@
         <CommandBinding Command="u:Commands.Options" CanExecute="Options_CanExecute" Executed="Options_Executed"/>
     </n:LightWindow.CommandBindings>
 
-    <Grid Name="MainGrid">
+    <Grid Name="MainGrid" Background="{DynamicResource Panel.Background}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
@@ -69,7 +67,7 @@
         </Grid.RowDefinitions>
 
         <!--Top-->
-        <Grid Grid.Row="0" MinHeight="30" Background="White" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+        <Grid Grid.Row="0" MinHeight="30" MouseLeftButtonDown="Grid_MouseLeftButtonDown" Background="{DynamicResource Panel.Background}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -78,7 +76,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="1" Background="GhostWhite">
+            <Grid Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -141,11 +139,11 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <CheckBox Grid.Row="0" x:Name="FitToCurveRadioButton" Content="{DynamicResource FreeDrawing.FitToCurve}" Cursor="Hand" Padding="0" Margin="3,0,0,0" VerticalAlignment="Center"
-                              IsChecked="{Binding BoardFitToCurve, Source={x:Static u:UserSettings.All}}" FontSize="11"/>
+                    <n:ExtendedCheckBox Grid.Row="0" x:Name="FitToCurveRadioButton" Text="{DynamicResource FreeDrawing.FitToCurve}" Cursor="Hand" Padding="0" Margin="3,0,0,0" VerticalAlignment="Center"
+                                        IsChecked="{Binding BoardFitToCurve, Source={x:Static u:UserSettings.All}}" FontSize="11"/>
 
-                    <CheckBox Grid.Row="1" x:Name="IsHighlighterRadioButton" Content="{DynamicResource FreeDrawing.Highlighter}" Cursor="Hand" Padding="0" Margin="3,0,0,0" VerticalAlignment="Center"
-                              IsChecked="{Binding BoardIsHighlighter, Source={x:Static u:UserSettings.All}}" FontSize="11"/>
+                    <n:ExtendedCheckBox Grid.Row="1" x:Name="IsHighlighterRadioButton" Text="{DynamicResource FreeDrawing.Highlighter}" Cursor="Hand" Padding="0" Margin="3,0,0,0" VerticalAlignment="Center"
+                                        IsChecked="{Binding BoardIsHighlighter, Source={x:Static u:UserSettings.All}}" FontSize="11"/>
                 </Grid>
             </Grid>
 
@@ -182,10 +180,11 @@
         </Grid>
 
         <!--Background="{StaticResource Checker.DrawingBrush}"-->
-        <Border Grid.Row="1" BorderThickness="1" BorderBrush="Gainsboro">
+        <Border Grid.Row="1" BorderThickness="1" BorderBrush="{DynamicResource Element.Border.Weak}">
             <Border x:Name="MainBorder">
                 <!--Background="{StaticResource Background.Lines}"-->
-                <n:InkCanvasExtended x:Name="MainInkCanvas" PreviewMouseDown="MainInkCanvas_OnPreviewMouseDown" PreviewMouseUp="MainInkCanvas_OnPreviewMouseUp">
+                <n:InkCanvasExtended x:Name="MainInkCanvas"
+                                     PreviewMouseDown="MainInkCanvas_OnPreviewMouseDown" PreviewMouseUp="MainInkCanvas_OnPreviewMouseUp">
 
                     <n:InkCanvasExtended.EditingMode>
                         <MultiBinding Converter="{StaticResource SelectionToEditingModeConverter}">
@@ -217,7 +216,7 @@
             </Border>
         </Border>
 
-        <Grid Grid.Row="2" x:Name="LowerGrid" Height="31" Background="White" KeyboardNavigation.TabNavigation="Cycle" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+        <Grid Grid.Row="2" x:Name="LowerGrid" Height="31" Background="{DynamicResource Panel.Background}" KeyboardNavigation.TabNavigation="Cycle" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
@@ -240,10 +239,10 @@
                                ContentHeight="10" Padding="4,1" TabIndex="1" Click="CloseButton_Click"/>
 
                 <TextBlock Grid.Row="0" Grid.Column="1" x:Name="CaptionText" Text="{Binding Title, ElementName=BoardLightWindow}" FontFamily="Segoe UI" FontSize="12"
-                           FontWeight="Regular" Margin="5,0,0,0" Foreground="#FF6F5252" Effect="{DynamicResource Shadow.Foreground.Small}"/>
+                           FontWeight="Regular" Margin="5,0,0,0" Foreground="{DynamicResource Element.Foreground.Medium}" Effect="{DynamicResource Shadow.Foreground.Small}"/>
 
                 <TextBlock Grid.Row="1" Grid.Column="1" x:Name="FrameCountTextBlock" Text="{Binding FrameCount, ElementName=BoardLightWindow, Converter={StaticResource IntToStringConverter}}" 
-                           FontFamily="Segoe UI" FontSize="12" FontWeight="Regular" Margin="5,0,0,0" Foreground="#FF061E87" Effect="{DynamicResource Shadow.Foreground.Small}"/>
+                           FontFamily="Segoe UI" FontSize="12" FontWeight="Regular" Margin="5,0,0,0" Foreground="{DynamicResource Element.Foreground.Header}" Effect="{DynamicResource Shadow.Foreground.Small}"/>
             </Grid>
 
             <StackPanel Grid.Column="1" x:Name="ControlStackPanel" Orientation="Horizontal" HorizontalAlignment="Right" ScrollViewer.VerticalScrollBarVisibility="Disabled" >
@@ -257,7 +256,7 @@
                 <Separator Width="1" Margin="5,3"/>
 
                 <Viewbox Stretch="UniformToFill" ClipToBounds="True" Focusable="False" Visibility="{Binding RecorderThinMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}">
-                    <Grid MaxHeight="30" MaxWidth="30">
+                    <Grid MaxHeight="30" MaxWidth="30" Opacity="{DynamicResource Element.Opacity}">
                         <n:CircularProgressBar StrokeThickness="1" Percentage="100" SegmentColor="Gray" Radius="12"/>
                         <n:CircularProgressBar StrokeThickness="10" Percentage="100" SegmentColor="#FFF0F1F1" Radius="5" />
 
@@ -279,8 +278,7 @@
                     </n:IntegerUpDown.ToolTip>
                 </n:IntegerUpDown>
 
-                <Label Content="fps" FontSize="12" FontFamily="Segoe UI" Margin="1,0,0,0" VerticalContentAlignment="Center" Padding="0" 
-                       Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}"/>
+                <TextBlock Text="fps" FontSize="12" FontFamily="Segoe UI" Margin="1,0,0,0" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
 
                 <Separator Width="1" Margin="5,3"/>
 
@@ -288,25 +286,22 @@
                               Offset="{x:Static u:Constants.HorizontalBoardOffset}" Minimum="100" Maximum="3000" TabIndex="2" Height="Auto" Padding="4,0" Margin="1,3"
                               ToolTip="{DynamicResource Recorder.Width}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                <Label Content="×" FontSize="16" FontFamily="Segoe Script" Margin="1" VerticalContentAlignment="Center" Padding="0" 
-                       Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}"/>
+                <TextBlock Text="×" FontSize="16" FontFamily="Segoe Script" Margin="1" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
 
                 <n:IntegerBox x:Name="HeightIntegerBox" Value="{Binding Source={x:Static u:UserSettings.All}, Path=BoardHeight, Mode=TwoWay}"
                               Offset="{x:Static u:Constants.VerticalBoardOffset}" Minimum="100" Maximum="3000" TabIndex="3" Height="Auto" Padding="4,0" Margin="1,3"
                               ToolTip="{DynamicResource Recorder.Height}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                <Label Content="px" FontSize="12" FontFamily="Segoe UI" Margin="1,0,0,0" VerticalContentAlignment="Center" Padding="0" 
-                       Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}"/>
+                <TextBlock Text="px" FontSize="12" FontFamily="Segoe UI" Margin="1,0,0,0" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
 
                 <Separator Width="1" Margin="3,2"/>
 
                 <n:ImageButton x:Name="DiscardButton" Text="{DynamicResource Recorder.Discard}" Content="{StaticResource Vector.Remove}" Visibility="Collapsed" 
                                Click="DiscardButton_Click" Style="{StaticResource Style.Button.Horizontal}"
-                               Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}"
                                UseLayoutRounding="True" MaxSize="16" TabIndex="4" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"/>
 
                 <n:ImageToggleButton x:Name="AutoRecordToggleButton" Text="{DynamicResource Board.AutoRecord}" IsChecked="True" Content="{StaticResource Vector.Record}" 
-                                     ContentHeight="16" ContentWidth="16" Style="{StaticResource Style.ToggleButton.Horizontal}" TabIndex="5" TextWrapping="NoWrap" 
+                                     ContentHeight="16" ContentWidth="16" Style="{StaticResource Style.ToggleButton.NoBorder}" TabIndex="5" TextWrapping="NoWrap" 
                                      KeyGesture="{DynamicResource Board.CtrlHold}" ToolTip="{DynamicResource Board.AutoRecordToolTip}" ToolTipService.Placement="Bottom"/>
 
                 <n:ImageButton x:Name="StopButton" Text="{DynamicResource Recorder.Stop}" Content="{StaticResource Vector.Stop}" MaxSize="16"

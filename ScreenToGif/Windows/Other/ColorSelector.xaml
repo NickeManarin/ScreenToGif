@@ -5,7 +5,7 @@
         xmlns:presentationOptions="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
         xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
         Title="{DynamicResource ColorSelector.Title}" Height="350" Width="600" MinWidth="555" MinHeight="275"
-        Background="White" Icon="/ScreenToGif;component/Resources/Logo.ico" UseLayoutRounding="True" SnapsToDevicePixels="True"
+        Background="{DynamicResource Panel.Background}" Icon="/ScreenToGif;component/Resources/Logo.ico" UseLayoutRounding="True" SnapsToDevicePixels="True"
         WindowStartupLocation="CenterScreen" Topmost="True" SizeToContent="Width" Loaded="Window_Loaded">
 
     <Grid>
@@ -22,14 +22,14 @@
                         <DrawingGroup>
                             <GeometryDrawing Brush="White">
                                 <GeometryDrawing.Geometry>
-                                    <RectangleGeometry Rect="0,0 100,100" />
+                                    <RectangleGeometry Rect="0,0 100,100"/>
                                 </GeometryDrawing.Geometry>
                             </GeometryDrawing>
                             <GeometryDrawing Brush="LightGray">
                                 <GeometryDrawing.Geometry>
                                     <GeometryGroup>
-                                        <RectangleGeometry Rect="0,0 50,50" />
-                                        <RectangleGeometry Rect="50,50 50,50" />
+                                        <RectangleGeometry Rect="0,0 50,50"/>
+                                        <RectangleGeometry Rect="50,50 50,50"/>
                                     </GeometryGroup>
                                 </GeometryDrawing.Geometry>
                             </GeometryDrawing>
@@ -53,38 +53,38 @@
                         <DrawingGroup>
                             <GeometryDrawing>
                                 <GeometryDrawing.Geometry>
-                                    <RectangleGeometry Rect="0,0,100,100" />
+                                    <RectangleGeometry Rect="0,0,100,100"/>
                                 </GeometryDrawing.Geometry>
                                 <GeometryDrawing.Brush>
-                                    <SolidColorBrush Color="{Binding SelectedColor, ElementName=ColorSlider}" />
+                                    <SolidColorBrush Color="{Binding SelectedColor, ElementName=ColorSlider}"/>
                                 </GeometryDrawing.Brush>
                             </GeometryDrawing>
                             <GeometryDrawing>
                                 <GeometryDrawing.Geometry>
-                                    <RectangleGeometry Rect="0,0,100,100" />
+                                    <RectangleGeometry Rect="0,0,100,100"/>
                                 </GeometryDrawing.Geometry>
                                 <GeometryDrawing.Brush>
                                     <LinearGradientBrush StartPoint="0.5,1" EndPoint="0.5,0">
-                                        <GradientStop Offset="0.0" Color="Black" />
-                                        <GradientStop Offset="1.0" Color="{Binding SelectedColor, ElementName=ColorSlider}" />
+                                        <GradientStop Offset="0.0" Color="Black"/>
+                                        <GradientStop Offset="1.0" Color="{Binding SelectedColor, ElementName=ColorSlider}"/>
                                     </LinearGradientBrush>
                                 </GeometryDrawing.Brush>
                             </GeometryDrawing>
                             <DrawingGroup presentationOptions:Freeze="True">
                                 <DrawingGroup.OpacityMask>
                                     <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
-                                        <GradientStop Offset="0.0" Color="#FF000000" />
-                                        <GradientStop Offset="1" Color="#00000000" />
+                                        <GradientStop Offset="0.0" Color="#FF000000"/>
+                                        <GradientStop Offset="1" Color="#00000000"/>
                                     </LinearGradientBrush>
                                 </DrawingGroup.OpacityMask>
                                 <GeometryDrawing>
                                     <GeometryDrawing.Geometry>
-                                        <RectangleGeometry Rect="0,0,100,100" />
+                                        <RectangleGeometry Rect="0,0,100,100"/>
                                     </GeometryDrawing.Geometry>
                                     <GeometryDrawing.Brush>
                                         <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                                            <GradientStop Offset="0.0" Color="White" />
-                                            <GradientStop Offset="1" Color="Black" />
+                                            <GradientStop Offset="0.0" Color="White"/>
+                                            <GradientStop Offset="1" Color="Black"/>
                                         </LinearGradientBrush>
                                     </GeometryDrawing.Brush>
                                 </GeometryDrawing>
@@ -93,13 +93,14 @@
                     </DrawingBrush.Drawing>
                 </DrawingBrush>
             </Border.Background>
+
             <Border.Triggers>
                 <!--To prevent false MouseUps during load. xD-->
                 <EventTrigger RoutedEvent="Border.Loaded">
                     <BeginStoryboard>
                         <Storyboard BeginTime="00:00:00" Storyboard.TargetName="ColorDetail" Storyboard.TargetProperty="(IsEnabled)">
                             <BooleanAnimationUsingKeyFrames>
-                                <DiscreteBooleanKeyFrame Value="True" KeyTime="0:0:0.2" />
+                                <DiscreteBooleanKeyFrame Value="True" KeyTime="0:0:0.2"/>
                             </BooleanAnimationUsingKeyFrames>
                         </Storyboard>
                     </BeginStoryboard>
@@ -108,8 +109,9 @@
 
             <Path x:Name="ColorMarker" StrokeThickness="2" Cursor="Cross" Fill="Transparent" RenderTransformOrigin="0.5,0.5" Effect="{DynamicResource Shadow.Black.Small}">
                 <Path.Data>
-                    <EllipseGeometry RadiusX="7" RadiusY="7"  />
+                    <EllipseGeometry RadiusX="7" RadiusY="7"/>
                 </Path.Data>
+
                 <Path.Stroke>
                     <RadialGradientBrush>
                         <GradientStop Color="Black" Offset="0.5"/>
@@ -136,14 +138,14 @@
                             <DrawingGroup>
                                 <GeometryDrawing Brush="White">
                                     <GeometryDrawing.Geometry>
-                                        <RectangleGeometry Rect="0,0 100,100" />
+                                        <RectangleGeometry Rect="0,0 100,100"/>
                                     </GeometryDrawing.Geometry>
                                 </GeometryDrawing>
                                 <GeometryDrawing Brush="LightGray">
                                     <GeometryDrawing.Geometry>
                                         <GeometryGroup>
-                                            <RectangleGeometry Rect="0,0 50,50" />
-                                            <RectangleGeometry Rect="50,50 50,50" />
+                                            <RectangleGeometry Rect="0,0 50,50"/>
+                                            <RectangleGeometry Rect="50,50 50,50"/>
                                         </GeometryGroup>
                                     </GeometryDrawing.Geometry>
                                 </GeometryDrawing>
@@ -173,8 +175,8 @@
         </Grid>
 
         <n:SpectrumSlider Grid.Column="1" x:Name="ColorSlider" Value="0" IsMoveToPointEnabled="True" IsSnapToTickEnabled="False" Maximum="360" 
-                          Orientation="Vertical" Background="#00000000" HorizontalAlignment="Right" Width="36" ValueChanged="ColorSlider_ValueChanged" 
-                          Margin="0,5" AfterSelecting="ColorSlider_OnAfterSelecting"/>
+                          Orientation="Vertical" Background="#00000000" HorizontalAlignment="Right" Width="36" Margin="0,5" 
+                          ValueChanged="ColorSlider_ValueChanged" AfterSelecting="ColorSlider_OnAfterSelecting"/>
 
         <Grid Grid.Column="2">
             <Grid.RowDefinitions>
@@ -193,34 +195,34 @@
                 <ColumnDefinition MinWidth="90"/>
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="{DynamicResource ColorSelector.Select}" FontSize="14" Effect="{StaticResource Shadow.Foreground.Small}"/>
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="{DynamicResource ColorSelector.Select}" FontSize="14" Foreground="{DynamicResource Element.Foreground.Header}" Effect="{StaticResource Shadow.Foreground.Small}"/>
 
-            <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource ColorSelector.Red}" Margin="5" VerticalContentAlignment="Center" Padding="3" />
+            <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource ColorSelector.Red}" Foreground="{DynamicResource Element.Foreground.Medium}" Margin="5" VerticalContentAlignment="Center" Padding="3"/>
             <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="RedIntegerUpDown" Margin="5,3" MaxLength="4" Padding="2,0" Maximum="255" 
                              MouseWheel="ValueBox_MouseWheel" ValueChanged="ArgbText_ValueChanged"/>
 
-            <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource ColorSelector.Green}" Margin="5" VerticalContentAlignment="Center" Padding="3" />
+            <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource ColorSelector.Green}" Foreground="{DynamicResource Element.Foreground.Medium}" Margin="5" VerticalContentAlignment="Center" Padding="3"/>
             <n:IntegerUpDown Grid.Row="2" Grid.Column="1" x:Name="GreenIntegerUpDown" Margin="5,3" MaxLength="4" Padding="2,0" Maximum="255" 
                              MouseWheel="ValueBox_MouseWheel" ValueChanged="ArgbText_ValueChanged"/>
 
-            <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource ColorSelector.Blue}" Margin="5" VerticalContentAlignment="Center" Padding="3" />
+            <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource ColorSelector.Blue}" Foreground="{DynamicResource Element.Foreground.Medium}" Margin="5" VerticalContentAlignment="Center" Padding="3"/>
             <n:IntegerUpDown Grid.Row="3" Grid.Column="1" x:Name="BlueIntegerUpDown" Margin="5,3" MaxLength="4" Padding="2,0" Maximum="255"
                              MouseWheel="ValueBox_MouseWheel" ValueChanged="ArgbText_ValueChanged"/>
 
-            <Label Grid.Row="4" Grid.Column="0" x:Name="AlphaLabel" Content="{DynamicResource ColorSelector.Alpha}" Margin="5" VerticalContentAlignment="Center" Padding="3" />
+            <Label Grid.Row="4" Grid.Column="0" x:Name="AlphaLabel" Content="{DynamicResource ColorSelector.Alpha}" Foreground="{DynamicResource Element.Foreground.Medium}" Margin="5" VerticalContentAlignment="Center" Padding="3"/>
             <n:IntegerUpDown Grid.Row="4" Grid.Column="1" x:Name="AlphaIntegerUpDown" Margin="5,3" MaxLength="4" Padding="2,0" Maximum="255" 
                              MouseWheel="ValueBox_MouseWheel" ValueChanged="ArgbText_ValueChanged"/>
 
             <Separator Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Height="1"/>
 
-            <Label Grid.Row="6" Grid.Column="0" Content="{DynamicResource ColorSelector.Hexadecimal}" Margin="5" VerticalContentAlignment="Center" Padding="3" />
+            <Label Grid.Row="6" Grid.Column="0" Content="{DynamicResource ColorSelector.Hexadecimal}" Foreground="{DynamicResource Element.Foreground.Medium}" Margin="5" VerticalContentAlignment="Center" Padding="3"/>
             <n:HexadecimalBox Grid.Row="6" Grid.Column="1" x:Name="ColorHexadecimalBox" Margin="5" Padding="2,0" 
                               Alpha="{Binding ElementName=AlphaIntegerUpDown, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               Red="{Binding ElementName=RedIntegerUpDown, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               Green="{Binding ElementName=GreenIntegerUpDown, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               Blue="{Binding ElementName=BlueIntegerUpDown, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-            <Grid Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Margin="3,0,0,0" Background="WhiteSmoke">
+            <Grid Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Margin="3,0,0,0" Background="{DynamicResource Panel.Background.Level3}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>

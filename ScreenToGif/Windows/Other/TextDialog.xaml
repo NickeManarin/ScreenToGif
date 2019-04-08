@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         Title="{DynamicResource Command.Title}" Height="300" Width="500" MinHeight="200" MinWidth="350"
-        Loaded="Window_Loaded" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
+        SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" Background="{DynamicResource Panel.Background}" Loaded="Window_Loaded" >
 
     <Grid>
         <Grid.RowDefinitions>
@@ -13,22 +13,22 @@
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Background="#FFF9F9FF">
+        <Grid Grid.Row="0" Background="{DynamicResource Panel.Background.Level4}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Viewbox x:Name="IconViewbox" Margin="5" Child="{StaticResource Vector.Text}"/>
+            <Viewbox x:Name="IconViewbox" Margin="5" Child="{StaticResource Vector.Text}" Opacity="{DynamicResource Element.Opacity}"/>
 
             <Label x:Name="InstructionLabel" Content="{DynamicResource Command.Header}" Margin="3" Grid.Column="1" VerticalContentAlignment="Center" 
-                   FontFamily="Segoe UI Semilight" FontSize="18" Foreground="#FF003399"/>
+                   FontFamily="Segoe UI Semilight" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
         </Grid>
 
-        <TextBox Grid.Row="1" x:Name="CommandTextBox" Margin="3" FontFamily="Consolas" IsReadOnly="True" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"/>
-        <TextBox Grid.Row="2" x:Name="OutputTextBox" Margin="3" FontFamily="Consolas" IsReadOnly="True" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"/>
+        <n:ExtendedTextBox Grid.Row="1" x:Name="CommandTextBox" Margin="3" FontFamily="Consolas" IsReadOnly="True" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto"/>
+        <n:ExtendedTextBox Grid.Row="2" x:Name="OutputTextBox" Margin="3" FontFamily="Consolas" IsReadOnly="True" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"/>
 
-        <Grid Grid.Row="3" Background="WhiteSmoke">
+        <Grid Grid.Row="3" Background="{DynamicResource Panel.Background.Level3}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="Auto"/>

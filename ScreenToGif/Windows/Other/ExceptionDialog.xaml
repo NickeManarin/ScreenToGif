@@ -4,7 +4,7 @@
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         Title="ScreenToGif - Error" WindowStartupLocation="CenterScreen" Topmost="True" SnapsToDevicePixels="True"
         Height="300" Width="560" MinHeight="250" MinWidth="560" SizeToContent="Height"
-        Loaded="Window_Loaded">
+        Background="{DynamicResource Panel.Background}" Loaded="Window_Loaded">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -13,14 +13,14 @@
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Background="#FFF9F9FF">
+        <Grid Grid.Row="0" Background="{DynamicResource Panel.Background.Level4}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="40"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto" MinWidth="110"/>
             </Grid.ColumnDefinitions>
 
-            <Viewbox x:Name="IconViewbox" Margin="6" Child="{StaticResource Vector.Error.Round}"/>
+            <Viewbox x:Name="IconViewbox" Margin="6" Child="{StaticResource Vector.Error.Round}" Opacity="{DynamicResource Element.Opacity}"/>
 
             <TextBlock Grid.Column="1" x:Name="TypeTextBlock" Text="" Margin="5" VerticalAlignment="Center" 
                        FontFamily="Segoe UI Semilight" FontSize="18" Foreground="#FF003399" Padding="0"
@@ -42,7 +42,7 @@
             <TextBlock Grid.Row="1" x:Name="DetailsTextBlock" FontSize="16" Margin="6,6,6,15" TextWrapping="Wrap" Foreground="#E0000000" ScrollViewer.CanContentScroll="True"/>
         </Grid>
 
-        <Grid Grid.Row="2" Background="WhiteSmoke">
+        <Grid Grid.Row="2" Background="{DynamicResource Panel.Background.Level3}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="Auto"/>

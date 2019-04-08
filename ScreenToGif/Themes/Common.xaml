@@ -1,48 +1,95 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!--Office RepeatButton Style -->
-    <Style TargetType="{x:Type RepeatButton}" x:Key="OfficeRepeatButtonStyle">
+    <!--Office RepeatButton Style-->
+    <Style TargetType="{x:Type RepeatButton}" x:Key="Style.RepeatButton">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource Element.Glyph}"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="6"/>
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ButtonBase}">
-                    <Border x:Name="Chrome" BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            Margin="0" Background="{TemplateBinding Background}"
-                            SnapsToDevicePixels="True">
-                        <ContentPresenter
-                                ContentTemplate="{TemplateBinding ContentTemplate}"
-                                Content="{TemplateBinding Content}"
-                                ContentStringFormat="{TemplateBinding ContentStringFormat}"
-                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                Margin="{TemplateBinding Padding}"
-                                RecognizesAccessKey="True"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    <Border x:Name="Chrome" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+                            Margin="0" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                        <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}"
+                                          ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
 
-        <!--Default Values-->
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="Transparent"/>
-        <Setter Property="Foreground" Value="#FF777777" />
-        <Setter Property="FontFamily" Value="Segoe UI"/>
-        <Setter Property="FontSize" Value="6"/>
-
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#FFD5E1F2" />
-                <Setter Property="BorderBrush" Value="#FFA3BDE3" />
-                <Setter Property="Foreground" Value="#FF444444" />
+                <Setter Property="Background" Value="{DynamicResource Brush.Button.Background.Hover}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource Brush.Button.Border.Hover}"/>
+                <Setter Property="Foreground" Value="{DynamicResource Element.Glyph.Hover}"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Background" Value="#FFA3BDE3" />
-                <Setter Property="BorderBrush" Value="#FFA3BDE3" />
-                <Setter Property="Foreground" Value="Black" />
+                <Setter Property="Background" Value="{DynamicResource Brush.Button.Background.Pressed}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource Brush.Button.Border.Pressed}"/>
+                <Setter Property="Foreground" Value="{DynamicResource Element.Glyph.Pressed}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
-    
+
+    <!--Slider Styles and Templates-->
+    <ControlTemplate x:Key="Template.RepeatButton.Simple" TargetType="RepeatButton">
+        <Grid/>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="Template.Slider.Thumb.Horizontal" TargetType="{x:Type Thumb}">
+        <Border Background="{DynamicResource Element.Background}" Margin="{TemplateBinding Padding}" BorderBrush="{DynamicResource Element.Border}" BorderThickness="1" />
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource Element.Background.Hover}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource Element.Border.Hover}"/>
+            </Trigger>
+            <Trigger Property="IsDragging" Value="True">
+                <Setter Property="Background" Value="{DynamicResource Element.Background.Pressed}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource Element.Border.Pressed}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="Template.Slider.Thumb.Top" TargetType="{x:Type Thumb}">
+        <Grid HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center" Focusable="False" Margin="{TemplateBinding Padding}">
+            <Path Data="M 0,6 C0,6 5.5,0 5.5,0 5.5,0 11,6 11,6 11,6 11,18 11,18 11,18 0,18 0,18 0,18 0,6 0,6 z" 
+                          Fill="{DynamicResource Element.Background}" Stretch="Fill" SnapsToDevicePixels="True" Stroke="{DynamicResource Element.Border}" StrokeThickness="1" VerticalAlignment="Center"/>
+        </Grid>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource Element.Background.Hover}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource Element.Border.Hover}"/>
+            </Trigger>
+            <Trigger Property="IsDragging" Value="True">
+                <Setter Property="Background" Value="{DynamicResource Element.Background.Pressed}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource Element.Border.Pressed}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="Template.Slider.Thumb.Bottom" TargetType="{x:Type Thumb}">
+        <Grid HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center">
+            <Path Data="M 0,12 C0,12 5.5,18 5.5,18 5.5,18 11,12 11,12 11,12 11,0 11,0 11,0 0,0 0,0 0,0 0,12 0,12 z" 
+                          Fill="{DynamicResource Element.Background}" Stretch="Fill" SnapsToDevicePixels="True" Stroke="{DynamicResource Element.Border}" StrokeThickness="1" VerticalAlignment="Center"/>
+        </Grid>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource Element.Background.Hover}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource Element.Border.Hover}"/>
+            </Trigger>
+            <Trigger Property="IsDragging" Value="True">
+                <Setter Property="Background" Value="{DynamicResource Element.Background.Pressed}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource Element.Border.Pressed}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
 </ResourceDictionary>

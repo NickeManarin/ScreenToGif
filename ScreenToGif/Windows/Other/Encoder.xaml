@@ -4,12 +4,12 @@
         xmlns:c="clr-namespace:ScreenToGif.Controls"
         xmlns:u="clr-namespace:ScreenToGif.Util"
         Title="{DynamicResource Encoder.Title}" Icon="/Resources/Logo.ico" Width="320" Height="400" 
-        MinWidth="300" MinHeight="300" Closing="Window_Closing" Activated="Window_Activated">
+        MinWidth="300" MinHeight="300" Background="{DynamicResource Panel.Background}" Closing="Window_Closing" Activated="Window_Activated">
 
     <Window.CommandBindings>
         <CommandBinding Command="u:Commands.ClearAll" CanExecute="ClearAll_CanExecute" Executed="ClearAll_Executed"/>
     </Window.CommandBindings>
-       
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -17,18 +17,17 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" Background="{DynamicResource Panel.Background.Level4}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Viewbox Grid.Column="0" x:Name="IconViewBox" Margin="5,5,0,5" HorizontalAlignment="Left" Width="35" Height="35" 
-                     VerticalAlignment="Top" Stretch="Uniform" Child="{StaticResource Vector.ImageStack}"/>
+            <Viewbox Grid.Column="0" x:Name="IconViewBox" Child="{StaticResource Vector.ImageStack}" Margin="5" Height="33" Width="33" Opacity="{DynamicResource Element.Opacity}"/>
 
             <Label Grid.Column="1" x:Name="EncoderLabel" Content="{DynamicResource Encoder.Title}" Margin="10,0,10,0" VerticalAlignment="Center" Padding="2" 
-                   FontSize="24" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground.Small}">
+                   FontSize="24" FontFamily="Segoe UI Semilight" Foreground="{DynamicResource Element.Foreground.Header}" Effect="{StaticResource Shadow.Foreground.Small}">
                 <Label.Triggers>
                     <EventTrigger RoutedEvent="Label.Loaded">
                         <BeginStoryboard>
@@ -50,8 +49,6 @@
                            ToolTip="{DynamicResource Encoder.ClearAllCompleted}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
         </Grid>
 
-        <Separator Grid.Row="1" Height="1"/>
-        
         <c:StatusBand Grid.Row="1" x:Name="StatusBand"/>
 
         <ListView Grid.Row="2" x:Name="EncodingListView" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled"

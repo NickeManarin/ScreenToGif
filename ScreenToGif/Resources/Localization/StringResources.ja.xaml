@@ -129,12 +129,12 @@
     <s:String x:Key="Interface.Background">背景</s:String>
     <s:String x:Key="Interface.Foreground">前面</s:String>
     <s:String x:Key="Interface.BoardBackground">ボード 背景</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme">配色</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.VeryLight">非常に明るい</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Light">明るい</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Medium">中間</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Dark">暗い</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Custom">カスタム</s:String>
+    <s:String x:Key="Interface.Theme.Scheme">配色</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.VeryLight">非常に明るい</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Light">明るい</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Medium">中間</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Dark">暗い</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Custom">カスタム</s:String>
     
     <s:String x:Key="Interface.EditorBackground.GridSize">グリッドサイズ</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.VerySmall">非常に小さい</s:String>

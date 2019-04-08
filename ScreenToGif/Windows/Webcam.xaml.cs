@@ -158,13 +158,6 @@ namespace ScreenToGif.Windows
             catch (Exception) { }
 
             #endregion
-
-            #region Temporary folder
-
-            if (string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder))
-                UserSettings.All.TemporaryFolder = Path.GetTempPath();
-
-            #endregion
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

@@ -81,12 +81,12 @@
     <s:String x:Key="Interface.Background">背景</s:String>
     <s:String x:Key="Interface.Foreground">前景</s:String>
     <s:String x:Key="Interface.BoardBackground">繪圖板背景</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme">顏色配置</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.VeryLight">非常淺</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Light">淺</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Medium">中</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Dark">深</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Custom">自訂</s:String>
+    <s:String x:Key="Interface.Theme.Scheme">顏色配置</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.VeryLight">非常淺</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Light">淺</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Medium">中</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Dark">深</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Custom">自訂</s:String>
     
     <s:String x:Key="Interface.EditorBackground.GridSize">網格大小</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.VerySmall">非常小</s:String>

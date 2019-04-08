@@ -129,12 +129,12 @@
     <s:String x:Key="Interface.Background">Sfondo</s:String>
     <s:String x:Key="Interface.Foreground">Primo piano</s:String>
     <s:String x:Key="Interface.BoardBackground">Sfondo lavagna</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme">Schema di colori</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.VeryLight">Molto chiaro</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Light">Chiaro</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Medium">Medio</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Dark">Scuro</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Custom">Personalizzato</s:String>
+    <s:String x:Key="Interface.Theme.Scheme">Schema di colori</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.VeryLight">Molto chiaro</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Light">Chiaro</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Medium">Medio</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Dark">Scuro</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Custom">Personalizzato</s:String>
     
     <s:String x:Key="Interface.EditorBackground.GridSize">Dimensione griglia</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.VerySmall">Molto piccola</s:String>

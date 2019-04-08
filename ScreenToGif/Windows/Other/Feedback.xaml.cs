@@ -242,15 +242,7 @@ namespace ScreenToGif.Windows.Other
         {
             try
             {
-                #region Temporary folder
-
-                //If never configurated.
-                if (string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder))
-                    UserSettings.All.TemporaryFolder = Path.GetTempPath();
-
-                #endregion
-
-                var path = Path.Combine(UserSettings.All.TemporaryFolder, "ScreenToGif", "Feedback");
+                var path = Path.Combine(UserSettings.All.TemporaryFolderResolved, "ScreenToGif", "Feedback");
 
                 if (!Directory.Exists(path))
                     Directory.CreateDirectory(path);

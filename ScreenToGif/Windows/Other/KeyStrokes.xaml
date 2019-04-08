@@ -2,9 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:n="clr-namespace:ScreenToGif.Controls"
-        xmlns:util="clr-namespace:ScreenToGif.Util"
         Title="{DynamicResource KeyStrokes.Edit.Title}" MinWidth="350" MinHeight="250" Height="500" Width="450" WindowStartupLocation="CenterScreen"
-        Loaded="KeyStrokes_Loaded">
+        Background="{DynamicResource Panel.Background}" Loaded="KeyStrokes_Loaded">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -63,7 +62,7 @@
 
                         <Viewbox Child="{StaticResource Vector.Arrow.Blue.Top}" Margin="5,0"/>
 
-                        <TextBlock Grid.Column="1" Text="{DynamicResource KeyStrokes.Edit.Add}" VerticalAlignment="Center" Margin="2,3,5,3"/>
+                        <TextBlock Grid.Column="1" Text="{DynamicResource KeyStrokes.Edit.Add}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" Margin="2,3,5,3"/>
                         
                         <n:KeyBox Grid.Column="2" x:Name="AddKeyBox" MinWidth="100" AllowAllKeys="True" CanRemove="False"/>
 
@@ -87,7 +86,7 @@
             <!--<model:FrameInfo Delay="10" Index="1"/>-->
         </DataGrid>
 
-        <Grid Grid.Row="2" Grid.Column="0" Background="WhiteSmoke" UseLayoutRounding="False">
+        <Grid Grid.Row="2" Grid.Column="0" Background="{DynamicResource Panel.Background.Level3}" UseLayoutRounding="False">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="Auto"/>

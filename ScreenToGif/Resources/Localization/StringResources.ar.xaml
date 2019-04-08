@@ -78,12 +78,12 @@
     <!--<s:String x:Key="Interface.Background">Background</s:String>-->
     <!--<s:String x:Key="Interface.Foreground">Foreground</s:String>-->
     <s:String x:Key="Interface.BoardBackground">خلفية لوحات</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme">مخطط ألوان</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.VeryLight">فاتح جدا</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Light">فاتح</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Medium">متوسط</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Dark">مظلم</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Custom">تخصيص</s:String>
+    <s:String x:Key="Interface.Theme.Scheme">مخطط ألوان</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.VeryLight">فاتح جدا</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Light">فاتح</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Medium">متوسط</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Dark">مظلم</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Custom">تخصيص</s:String>
     
     <s:String x:Key="Interface.EditorBackground.GridSize">حجم الشبكة</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.VerySmall">صغير جدا</s:String>

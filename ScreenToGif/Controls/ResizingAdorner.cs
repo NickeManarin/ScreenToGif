@@ -397,7 +397,7 @@ namespace ScreenToGif.Controls
 
             cornerThumb = new Thumb { Cursor = customizedCursor };
             cornerThumb.Height = cornerThumb.Width = 10;
-            cornerThumb.Style = (Style)FindResource("ScrollBarThumbVertical");
+            cornerThumb.Style = (Style)FindResource("ScrollBar.Thumb");
 
             _visualChildren.Add(cornerThumb);
         }

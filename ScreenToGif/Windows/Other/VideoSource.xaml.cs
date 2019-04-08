@@ -339,7 +339,7 @@ namespace ScreenToGif.Windows.Other
         private void SeekNextFrame()
         {
             //If more frames remain to capture...
-            if (!_cancelled && 0 < _positions.Count)
+            if (0 < _positions.Count)
             {
                 //Seek to next position and start watchdog timer
                 _lowerPlayer.Position = _positions.Dequeue();
@@ -353,8 +353,7 @@ namespace ScreenToGif.Windows.Other
 
                 GC.Collect();
 
-                if (!_cancelled)
-                    DialogResult = true;
+                DialogResult = true;
             }
         }
 
@@ -375,14 +374,13 @@ namespace ScreenToGif.Windows.Other
 
         private void CaptureCurrentFrame(MediaPlayer player)
         {
-            var thumbBit = CaptureFrame(player) as BitmapFrame;
-
-            if (thumbBit != null)
+            if (CaptureFrame(player) is BitmapFrame thumbBit)
                 FrameList.Add(thumbBit);
 
             GC.Collect();
 
-            SeekNextFrame();
+            if (!_cancelled)
+                SeekNextFrame();
         }
 
         private Freezable CaptureFrame(MediaPlayer player)

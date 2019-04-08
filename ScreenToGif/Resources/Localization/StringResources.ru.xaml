@@ -129,12 +129,12 @@
     <s:String x:Key="Interface.Background">Фон</s:String>
     <s:String x:Key="Interface.Foreground">Передний план</s:String>
     <s:String x:Key="Interface.BoardBackground">Фон доски</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme">Цветовая схема</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.VeryLight">Очень светлая</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Light">Светлая</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Medium">Средняя</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Dark">Темная</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Custom">Своя</s:String>
+    <s:String x:Key="Interface.Theme.Scheme">Цветовая схема</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.VeryLight">Очень светлая</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Light">Светлая</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Medium">Средняя</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Dark">Темная</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Custom">Своя</s:String>
     
     <s:String x:Key="Interface.EditorBackground.GridSize">Размер сетки</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.VerySmall">Очень маленький</s:String>

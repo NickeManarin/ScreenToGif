@@ -307,6 +307,14 @@ namespace ScreenToGif.Windows.Other
             });
         }
 
+        private Status? InternalGetStatus(int id)
+        {
+            return Dispatcher.Invoke(() =>
+            {
+                return EncodingListView.Items.Cast<EncoderListViewItem>().FirstOrDefault(x => x.Id == id)?.Status;
+            });
+        }
+
         private void InternalSetUpload(int id, bool uploaded, string link, string deleteLink = null, Exception exception = null)
         {
             Dispatcher.Invoke(() =>
@@ -637,6 +645,10 @@ namespace ScreenToGif.Windows.Other
                                 ThreadPool.QueueUserWorkItem(delegate
                                 {
                                     Thread.Sleep(500);
+
+                                    if (GetStatus(id) == Status.Error)
+                                        return;
+
                                     SetStatus(Status.Processing, id, null, false);
 
                                     for (var i = 0; i < listFrames.Count; i++)
@@ -774,7 +786,7 @@ namespace ScreenToGif.Windows.Other
 
                                 #endregion
 
-                                param.Command = string.Format(param.Command, concatFile, param.ExtraParameters.Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString()), param.RepeatCount, param.Filename);
+                                param.Command = string.Format(param.Command, concatFile, (param.ExtraParameters ?? "").Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString()), param.RepeatCount, param.Filename);
 
                                 var process = new ProcessStartInfo(UserSettings.All.FfmpegLocation)
                                 {
@@ -1241,6 +1253,15 @@ namespace ScreenToGif.Windows.Other
         public static void Update(int id, int currentFrame)
         {
             _encoder?.InternalUpdate(id, currentFrame);
+        }
+
+        /// <summary>
+        /// Gets the current Status of the encoding of a current item.
+        /// </summary>
+        /// <param name="id">The unique ID of the item.</param>
+        public static Status? GetStatus(int id)
+        {
+            return _encoder?.InternalGetStatus(id);
         }
 
         /// <summary>

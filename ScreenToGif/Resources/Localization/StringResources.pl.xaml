@@ -115,12 +115,12 @@
     <s:String x:Key="Interface.Background">Tło</s:String>
     <s:String x:Key="Interface.Foreground">Pierwszy plan</s:String>
     <s:String x:Key="Interface.BoardBackground">Tło tablicy</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme">Schemat kolorów</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.VeryLight">Bardzo jasny</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Light">Jasny</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Medium">Średni</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Dark">Ciemny</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Custom">Niestandardowy...</s:String>
+    <s:String x:Key="Interface.Theme.Scheme">Schemat kolorów</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.VeryLight">Bardzo jasny</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Light">Jasny</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Medium">Średni</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Dark">Ciemny</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Custom">Niestandardowy...</s:String>
     
     <s:String x:Key="Interface.EditorBackground.GridSize">Wielkość siatki</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.VerySmall">Bardzo mały</s:String>

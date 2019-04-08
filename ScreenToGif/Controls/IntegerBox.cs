@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace ScreenToGif.Controls
 {
-    public class IntegerBox : TextBox
+    public class IntegerBox : ExtendedTextBox
     {
         private static bool _ignore;
 
@@ -40,8 +40,6 @@ namespace ScreenToGif.Controls
 
         public static readonly DependencyProperty UpdateOnInputProperty = DependencyProperty.Register("UpdateOnInput", typeof(bool), typeof(IntegerBox),
             new FrameworkPropertyMetadata(false, OnUpdateOnInputPropertyChanged));
-
-        public static readonly DependencyProperty IsObligatoryProperty = DependencyProperty.Register("IsObligatory", typeof(bool), typeof(IntegerBox));
 
         public static readonly DependencyProperty DefaultValueIfEmptyProperty = DependencyProperty.Register("DefaultValueIfEmpty", typeof(int), typeof(IntegerBox),
             new FrameworkPropertyMetadata(0));
@@ -100,13 +98,6 @@ namespace ScreenToGif.Controls
         {
             get => (bool)GetValue(UpdateOnInputProperty);
             set => SetValue(UpdateOnInputProperty, value);
-        }
-
-        [Bindable(true), Category("Common")]
-        public bool IsObligatory
-        {
-            get => (bool)GetValue(IsObligatoryProperty);
-            set => SetValue(IsObligatoryProperty, value);
         }
 
         [Bindable(true), Category("Common")]

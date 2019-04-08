@@ -110,17 +110,14 @@ namespace ScreenToGif.Controls
 
             _inlinesPresenter = GetTemplateChild("PART_InlinesPresenter") as TextBlock;
 
-            if (_inlinesPresenter != null && Inlines.Any())
-            {
-                Text = "";
+            if (_inlinesPresenter == null || !Inlines.Any())
+                return;
 
-                var targetInlines = _inlinesPresenter.Inlines;
+            Text = "";
 
-                foreach (var inline in Inlines)
-                {
-                    targetInlines.Add(inline);
-                }
-            }
+            var targetInlines = _inlinesPresenter.Inlines;
+
+            foreach (var inline in Inlines) targetInlines.Add(inline);
         }
 
         public void Clear()

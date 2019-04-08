@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         Title="{DynamicResource S.Feedback.Feedback}" MinHeight="500" MinWidth="700" Height="500" Width="750"
-        Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterScreen" UseLayoutRounding="True" Loaded="Feedback_Loaded">
+        Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterScreen" UseLayoutRounding="True" 
+        Background="{DynamicResource Panel.Background}" Loaded="Feedback_Loaded">
 
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
@@ -14,19 +15,19 @@
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Background="#FFF9F9FF">
+        <Grid Grid.Row="0" Background="{DynamicResource Panel.Background.Level4}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Viewbox Grid.Column="0" Margin="6" Child="{StaticResource Vector.Application}"/>
+            <Viewbox Grid.Column="0" Margin="6" Child="{StaticResource Vector.Application}" Opacity="{DynamicResource Element.Opacity}"/>
 
             <TextBlock Grid.Column="1" x:Name="TypeLabel" Text="{DynamicResource S.Feedback.Header}" Margin="5" VerticalAlignment="Center" 
-                       FontFamily="Segoe UI Semilight" FontSize="18" Foreground="#FF003399"/>
+                       FontFamily="Segoe UI Semilight" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
 
-            <TextBlock Grid.Column="2" FontSize="13" Foreground="#FF003399" TextAlignment="Center" VerticalAlignment="Center" Margin="3">
+            <TextBlock Grid.Column="2" FontSize="13" Foreground="{DynamicResource Element.Foreground.Header}" TextAlignment="Center" VerticalAlignment="Center" Margin="3">
                 <TextBlock Text="{DynamicResource S.Feedback.LanguageInfo1}"/>
                 <LineBreak></LineBreak>
                 <TextBlock Text="{DynamicResource S.Feedback.LanguageInfo2}"/>
@@ -49,42 +50,32 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <n:LabelSeparator Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{DynamicResource S.Feedback.Title}" Foreground="#FF444444"/>
+            <n:LabelSeparator Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{DynamicResource S.Feedback.Title}"/>
             <n:ExtendedTextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" x:Name="TitleTextBox" Margin="5" Height="24" MaxLength="255" TextWrapping="Wrap"/>
 
-            <n:LabelSeparator Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="{DynamicResource S.Feedback.Message}" Foreground="#FF444444"/>
+            <n:LabelSeparator Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="{DynamicResource S.Feedback.Message}"/>
             <n:ExtendedTextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" x:Name="MessageTextBox" Margin="5" AcceptsReturn="True" TextWrapping="Wrap" VerticalContentAlignment="Top"
                                AcceptsTab="True" VerticalScrollBarVisibility="Auto" Watermark="If you are experiencing a bug, don't forget to explain how you got it, step by step."/>
 
-            <n:LabelSeparator Grid.Row="4" Grid.Column="0" Text="{DynamicResource S.Feedback.Type}" Foreground="#FF444444"/>
+            <n:LabelSeparator Grid.Row="4" Grid.Column="0" Text="{DynamicResource S.Feedback.Type}"/>
             <StackPanel Grid.Row="5" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <CheckBox x:Name="IssueCheckBox" Content="{DynamicResource S.Feedback.IssueBug}" Margin="5,3" IsChecked="True"/>
-                <CheckBox x:Name="SuggestionCheckBox" Content="{DynamicResource S.Feedback.Suggestion}" Margin="5,3" IsChecked="True"/>
+                <n:ExtendedCheckBox x:Name="IssueCheckBox" Text="{DynamicResource S.Feedback.IssueBug}" Margin="5,3" IsChecked="True"/>
+                <n:ExtendedCheckBox x:Name="SuggestionCheckBox" Text="{DynamicResource S.Feedback.Suggestion}" Margin="5,3" IsChecked="True"/>
             </StackPanel>
 
-            <n:LabelSeparator Grid.Row="4" Grid.Column="1" Text="{DynamicResource S.Feedback.YourEmail}" BorderThickness="0,1,0,0" Foreground="#FF444444"/>
+            <n:LabelSeparator Grid.Row="4" Grid.Column="1" Text="{DynamicResource S.Feedback.YourEmail}" BorderThickness="0,1,0,0"/>
             <n:ExtendedTextBox Grid.Row="5" Grid.Column="1" x:Name="MailTextBox" Margin="5" Height="24" MaxLength="255" VerticalContentAlignment="Center" Watermark="Type your email here if you wish to recieve a reply"/>
         </Grid>
 
-        <Grid Grid.Row="3" x:Name="AttachmentsGrid" Background="Azure">
+        <Grid Grid.Row="3" x:Name="AttachmentsGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <n:LabelSeparator Grid.Row="0" Text="{DynamicResource S.Feedback.Attachments}" Foreground="#FF444444"/>
-
+            <n:LabelSeparator Grid.Row="0" Text="{DynamicResource S.Feedback.Attachments}"/>
             <ListBox Grid.Row="1" x:Name="AttachmentListBox" Margin="3" MaxHeight="100" MinHeight="30" BorderThickness="0"
                      Background="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False">
-                <ListBox.Resources>
-                    <SolidColorBrush x:Key="Item.MouseOver.Background" Color="#1F26A0DA"/>
-                    <SolidColorBrush x:Key="Item.MouseOver.Border" Color="#a826A0Da"/>
-                    <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="#3DDADADA"/>
-                    <SolidColorBrush x:Key="Item.SelectedInactive.Border" Color="#FFDADADA"/>
-                    <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="#3D26A0DA"/>
-                    <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="#FF26A0DA"/>
-                </ListBox.Resources>
-
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel Orientation="Horizontal" IsItemsHost="True"/>
@@ -100,14 +91,13 @@
                         <Setter Property="Background" Value="Transparent"/>
                         <Setter Property="BorderBrush" Value="Transparent"/>
                         <Setter Property="BorderThickness" Value="1"/>
-                        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualStyle}"/>
+                        <Setter Property="FocusVisualStyle" Value="{StaticResource Style.FocusVisual.NoMargin}"/>
 
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="{x:Type n:AttachmentListBoxItem}">
                                     <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" 
-                                            Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true"
-                                            ToolTip="{TemplateBinding Attachment}">
+                                            Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" ToolTip="{TemplateBinding Attachment}">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="Auto"/>
@@ -117,12 +107,11 @@
 
                                             <Viewbox Grid.Column="0" x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                                      Stretch="Uniform" StretchDirection="Both" MaxWidth="20" MaxHeight="20" Effect="{x:Null}">
-                                                <Image Source="{TemplateBinding FileIcon}" Width="Auto" Height="Auto"/>
+                                                <Image Source="{TemplateBinding FileIcon}" Width="Auto" Height="Auto" Opacity="{DynamicResource Element.Opacity}"/>
                                             </Viewbox>
 
-                                            <Label Grid.Column="1" x:Name="ShortNameLabel" Content="{TemplateBinding ShortName}" Foreground="#FF003399" 
-                                                   HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" 
-                                                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="1" />
+                                            <Label Grid.Column="1" x:Name="ShortNameLabel" Content="{TemplateBinding ShortName}" Foreground="{DynamicResource Element.Foreground.Medium}" 
+                                                   HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="1"/>
 
                                             <n:ImageButton Grid.Column="2" x:Name="RemoveButton" Content="{StaticResource Vector.Close}" VerticalAlignment="Stretch"
                                                            Style="{StaticResource Style.Button.NoText}" ContentWidth="12" Width="12" Visibility="Collapsed" 
@@ -135,32 +124,31 @@
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="IsMouseOver" Value="True"/>
                                             </MultiTrigger.Conditions>
-                                            <Setter Property="Background" TargetName="Bd" Value="{StaticResource Item.MouseOver.Background}"/>
-                                            <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource Item.MouseOver.Border}"/>
+                                            <Setter Property="Background" TargetName="Bd" Value="{DynamicResource Item.MouseOver.Background}"/>
+                                            <Setter Property="BorderBrush" TargetName="Bd" Value="{DynamicResource Item.MouseOver.Border}"/>
                                         </MultiTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="Selector.IsSelectionActive" Value="False"/>
                                                 <Condition Property="IsSelected" Value="True"/>
                                             </MultiTrigger.Conditions>
 
-                                            <Setter Property="Background" TargetName="Bd" Value="{StaticResource Item.SelectedInactive.Background}"/>
-                                            <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource Item.SelectedInactive.Border}"/>
+                                            <Setter Property="Background" TargetName="Bd" Value="{DynamicResource Item.SelectedInactive.Background}"/>
+                                            <Setter Property="BorderBrush" TargetName="Bd" Value="{DynamicResource Item.SelectedInactive.Border}"/>
                                             <Setter Property="Visibility" TargetName="RemoveButton" Value="Visible"/>
                                         </MultiTrigger>
+
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition Property="Selector.IsSelectionActive" Value="True"/>
                                                 <Condition Property="IsSelected" Value="True"/>
                                             </MultiTrigger.Conditions>
-                                            <Setter Property="Background" TargetName="Bd" Value="{StaticResource Item.SelectedActive.Background}"/>
-                                            <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource Item.SelectedActive.Border}"/>
+
+                                            <Setter Property="Background" TargetName="Bd" Value="{DynamicResource Item.SelectedActive.Background}"/>
+                                            <Setter Property="BorderBrush" TargetName="Bd" Value="{DynamicResource Item.SelectedActive.Border}"/>
                                             <Setter Property="Visibility" TargetName="RemoveButton" Value="Visible"/>
                                         </MultiTrigger>
-
-                                        <Trigger Property="IsEnabled" Value="False">
-                                            <Setter Property="TextElement.Foreground" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                                        </Trigger>
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -170,7 +158,7 @@
             </ListBox>
         </Grid>
 
-        <Grid Grid.Row="4" Background="WhiteSmoke" Height="40">
+        <Grid Grid.Row="4" Background="{DynamicResource Panel.Background.Level3}" Height="40">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" MinWidth="100"/>
                 <ColumnDefinition Width="Auto" MinWidth="100"/>
@@ -187,7 +175,7 @@
 
             <n:ImageButton Grid.Column="3" x:Name="OkButton" Text="{DynamicResource S.Feedback.Send}" Content="{StaticResource Vector.Ok}" ContentHeight="20" Padding="4,0" Margin="5" Click="SendButton_Click"/>
             <n:ImageButton Grid.Column="4" x:Name="PreviewButton" Text="{DynamicResource S.Feedback.Preview}" Content="{StaticResource Vector.Report}" ContentHeight="20" Padding="4,0" Margin="5" Click="PreviewButton_Click"/>
-            <n:ImageButton Grid.Column="5" x:Name="CancelButton" Text="{DynamicResource Cancel}" Content="{StaticResource Vector.Cancel}" ContentHeight="20" Padding="4,0" Margin="5" Click="CancelButton_Click" IsCancel="True"/>
+            <n:ImageButton Grid.Column="5" x:Name="CancelButton" Text="{DynamicResource Cancel}" Content="{StaticResource Vector.Cancel}" ContentHeight="20" Padding="4,0" Margin="5" IsCancel="True" Click="CancelButton_Click"/>
         </Grid>
     </Grid>
 </Window>

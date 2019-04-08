@@ -269,9 +269,13 @@
     <Compile Include="Model\DefaultTaskModel.cs" />
     <Compile Include="Model\KeyStrokesModel.cs" />
     <Compile Include="Model\ManipulatedEventArgs.cs" />
+    <Compile Include="Model\DelayModel.cs" />
     <Compile Include="Model\MouseClicksModel.cs" />
     <Compile Include="UserControls\KeyStrokesPanel.xaml.cs">
       <DependentUpon>KeyStrokesPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DelayPanel.xaml.cs">
+      <DependentUpon>DelayPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\MouseClicksPanel.xaml.cs">
       <DependentUpon>MouseClicksPanel.xaml</DependentUpon>
@@ -348,6 +352,7 @@
     <Compile Include="Model\UpdateModel.cs" />
     <Compile Include="Util\MutexList.cs" />
     <Compile Include="Util\NotificationManager.cs" />
+    <Compile Include="Util\ThemeHelper.cs" />
     <Compile Include="Util\WebHelper.cs" />
     <Compile Include="Model\ApplicationModel.cs" />
     <Compile Include="Model\ApplicationViewModel.cs" />
@@ -575,11 +580,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Themes\Buttons.xaml">
+    <Page Include="Themes\Button.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Themes\Colors.xaml">
+    <Page Include="Themes\Colors\Dark.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Colors\Light.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Colors\Medium.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Colors\VeryDark.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -587,7 +604,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Themes\DataGridStyle.xaml">
+    <Page Include="Themes\DataGrid.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -604,23 +621,19 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controls\LightWindow.cs" />
-    <Page Include="Themes\ProgressBar.xaml">
+    <None Include="Themes\Old.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
+    </None>
     <Page Include="Themes\Common.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\RangeSlider.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Slider.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="UserControls\KeyStrokesPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\DelayPanel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

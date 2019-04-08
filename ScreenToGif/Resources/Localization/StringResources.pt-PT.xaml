@@ -78,12 +78,12 @@
     <!--<s:String x:Key="Interface.Background">Background</s:String>-->
     <!--<s:String x:Key="Interface.Foreground">Foreground</s:String>-->
     <!--<s:String x:Key="Interface.BoardBackground">Board background</s:String>-->
-    <s:String x:Key="Interface.EditorBackground.Scheme">Esquema de Cores</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.VeryLight">Muito Claro</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Light">Claro</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Medium">Médio</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Dark">Escuro</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Custom">Personalizado</s:String>
+    <s:String x:Key="Interface.Theme.Scheme">Esquema de Cores</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.VeryLight">Muito Claro</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Light">Claro</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Medium">Médio</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Dark">Escuro</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Custom">Personalizado</s:String>
     
     <s:String x:Key="Interface.EditorBackground.GridSize">Tamanho da Grelha</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.VerySmall">Muito Pequeno</s:String>

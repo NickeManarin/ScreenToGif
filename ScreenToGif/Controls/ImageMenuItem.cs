@@ -24,6 +24,8 @@ namespace ScreenToGif.Controls
 
         public static readonly DependencyProperty DarkModeProperty = DependencyProperty.Register("DarkMode", typeof(bool), typeof(ImageMenuItem), new FrameworkPropertyMetadata(false));
 
+        public static readonly DependencyProperty IsOverNonClientAreaProperty = DependencyProperty.Register("IsOverNonClientArea", typeof(bool), typeof(ImageMenuItem), new FrameworkPropertyMetadata(false));
+
         #endregion
 
         #region Properties
@@ -82,6 +84,16 @@ namespace ScreenToGif.Controls
         {
             get => (bool)GetValue(DarkModeProperty);
             set => SetCurrentValue(DarkModeProperty, value);
+        }
+
+        /// <summary>
+        /// True if the button is being drawn on top of the non client area.
+        /// </summary>
+        [Description("True if the button is being drawn on top of the non client area.")]
+        public bool IsOverNonClientArea
+        {
+            get => (bool)GetValue(IsOverNonClientAreaProperty);
+            set => SetCurrentValue(IsOverNonClientAreaProperty, value);
         }
 
         #endregion

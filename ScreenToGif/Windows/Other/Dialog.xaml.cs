@@ -84,7 +84,7 @@ namespace ScreenToGif.Windows.Other
         /// <summary>
         /// Handle all pressed keys that get sent to this Window
         /// </summary>
-        private void DialogKeyDown(object sender, KeyEventArgs e)
+        private void Dialog_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.Key)
             {

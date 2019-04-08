@@ -7,7 +7,6 @@
                   x:Name="GhostWindow" Title="ScreenToGif" Height="Auto" Width="Auto" 
                   WindowStyle="None" AllowsTransparency="True" Topmost="True" ResizeMode="NoResize"
                   UseLayoutRounding="True" SnapsToDevicePixels="True" Background="Transparent"
-                  Foreground="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderForeground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}"
                   Loaded="Window_Loaded" StateChanged="Window_StateChanged" Closing="Window_Closing">
 
     <Window.CommandBindings>
@@ -101,9 +100,8 @@
                     <c:InvertedBoolToVisibility x:Key="InvertedBoolToVisibility"/>
                 </Canvas.Resources>
 
-                <Border x:Name="MainBorder" Width="Auto" Height="Auto" BorderThickness="1" BorderBrush="#35000000"
+                <Border x:Name="MainBorder" Width="Auto" Height="Auto" Background="{DynamicResource Panel.Background}" BorderThickness="1" BorderBrush="{DynamicResource Element.Border.Weak}"
                         Visibility="{Binding ElementName=GhostWindow, Path=IsPickingRegion, Converter={StaticResource InvertedBoolToVisibility}}"
-                        Background="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderBackground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}"
                         MouseLeftButtonDown="MainBorder_MouseLeftButtonDown" MouseMove="MainBorder_MouseMove" MouseLeftButtonUp="MainBorder_MouseLeftButtonUp">
                     <Grid>
                         <Grid.RowDefinitions>
@@ -124,15 +122,11 @@
                                            Foreground="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderForeground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}"
                                            ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource Back}" Click="BackButton_Click"/>
 
-                            <!--Foreground="{Binding ElementName=GhostWindow, Path=Foreground}"-->
                             <TextBlock Grid.Column="1" x:Name="CaptionText" Text="{Binding ElementName=GhostWindow, Path=Title}" FontFamily="Segoe UI" FontSize="11" VerticalAlignment="Center"
-                                       FontWeight="Regular" Margin="2,0,0,0" Effect="{StaticResource Shadow.Foreground.Small}"
-                                       Foreground="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderForeground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}"/>
+                                       FontWeight="Regular" Margin="2,0,0,0" Effect="{StaticResource Shadow.Foreground.Small}" Foreground="{DynamicResource Element.Foreground.Header}"/>
 
-                            <!--Foreground="{Binding ElementName=GhostWindow, Path=Foreground}"-->
                             <TextBlock Grid.Column="2" x:Name="NumberText" Text="{Binding ElementName=GhostWindow, Path=FrameCount, Converter={StaticResource IntToStringConverter}}" FontFamily="Segoe UI" FontSize="11" 
-                                       VerticalAlignment="Center" FontWeight="Regular" Margin="2,0,0,0"  HorizontalAlignment="Right"
-                                       Foreground="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderForeground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}"
+                                       VerticalAlignment="Center" FontWeight="Regular" Margin="2,0,0,0" HorizontalAlignment="Right" Foreground="{DynamicResource Element.Foreground.Medium}" 
                                        Effect="{StaticResource Shadow.Foreground.Small}"/>
                             
                             <n:ImageButton Grid.Column="3" Grid.RowSpan="2" x:Name="CloseButton" Content="{DynamicResource Vector.Close}" Margin="0" 
@@ -157,7 +151,7 @@
                                            Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" ContentHeight="22"
                                            ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource Options}"/>
 
-                            <Viewbox Grid.Column="1" Stretch="UniformToFill" ClipToBounds="True" Focusable="False"
+                            <Viewbox Grid.Column="1" Stretch="UniformToFill" ClipToBounds="True" Focusable="False" Opacity="{DynamicResource Element.Opacity}"
                                      Visibility="{Binding Path=SnapshotMode, Source={x:Static u:UserSettings.All}}"
                                      ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource Recorder.FpsRange}">
 
@@ -178,14 +172,13 @@
                                              ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource Recorder.Fps}"/>
 
                             <Label Grid.Column="3" Content="{StaticResource Recorder.Fps.Short}" FontSize="12" FontFamily="Segoe UI" Margin="1,0,0,0" 
-                                   VerticalContentAlignment="Center" Padding="0" 
-                                   Foreground="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderForeground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}"
+                                   VerticalContentAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}" 
                                    Visibility="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}"/>
 
                             <Separator Grid.Column="4" Width="1" Margin="5,2" HorizontalAlignment="Left"
                                        Visibility="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}"/>
 
-                            <n:SplitButton Grid.Column="5" x:Name="ReselectSplitButton" Style="{StaticResource SplitButton.NoTextNoBorder}" ContentHeight="20" Padding="3"
+                            <n:SplitButton Grid.Column="5" x:Name="ReselectSplitButton" Style="{StaticResource Style.SplitButton.NoBorder.NoText}" ContentHeight="20" Padding="3"
                                            SelectedIndex="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderModeIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                            Foreground="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderForeground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}">
                                 <n:ImageMenuItem Image="{StaticResource Vector.Crop}" Header="{DynamicResource S.Recorder.Area}" ContentHeight="16" ContentWidth="16" Click="RegionButton_Click"/>

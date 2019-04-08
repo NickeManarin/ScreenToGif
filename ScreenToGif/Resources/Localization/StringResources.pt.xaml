@@ -36,6 +36,7 @@
     
     <!--Error messages--> 
     <s:String x:Key="S.Crash">Oh não, o aplicativo parou de funcionar :(</s:String>
+    <s:String x:Key="S.Required">Preenchimento obrigatório.</s:String>
 
     <!--StartUp Page-->
     <s:String x:Key="Title.StartUp">ScreenToGif - Início</s:String>
@@ -124,17 +125,19 @@
     <s:String x:Key="S.AutomatedTasks.SelectType">(Selecione uma tarefa)</s:String>
     <s:String x:Key="S.AutomatedTasks.Info">Essas tarefas são executadas sequencialmente do topo da lista para o último elemento.&#10;Isso acontece quando o projeto é aberto pela primeira vez no editor.</s:String>
     
+    <s:String x:Key="Interface.Theme">Tema do aplicativo</s:String>
+    <s:String x:Key="Interface.Theme.Scheme">Esquema de cores</s:String>
     <s:String x:Key="Interface.EditorBackground">Plano de Fundo do Editor</s:String>
     <s:String x:Key="Interface.Recorder">Tema do Gravador</s:String>
     <s:String x:Key="Interface.Background">Plano de Fundo</s:String>
     <s:String x:Key="Interface.Foreground">Plano de Foco</s:String>
     <s:String x:Key="Interface.BoardBackground">Plano de Fundo do Quadro</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme">Esquema de Cores</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.VeryLight">Muito Claro</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Light">Claro</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Medium">Médio</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Dark">Escuro</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Custom">Personalizado</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.VeryLight">Muito Claro</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Light">Claro</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Medium">Médio</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Dark">Escuro</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.VeryDark">Muito Escuro</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Custom">Personalizado</s:String>
     
     <s:String x:Key="Interface.EditorBackground.GridSize">Tamanho da Grade</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.VerySmall">Muito Pequeno</s:String>
@@ -332,7 +335,8 @@
     <s:String x:Key="S.Recorder.Accept">Aceitar</s:String>
     <s:String x:Key="S.Recorder.Retry">Limpar</s:String>
     <s:String x:Key="S.Recorder.CancelSelection">Cancelar a seleção (Esc)</s:String>
-    <s:String x:Key="S.Recorder.SelectArea">Clique e arraste para selecionar uma área dessa janela</s:String>
+    <s:String x:Key="S.Recorder.SelectArea">Clique e arraste para selecionar uma área deste monitor</s:String>
+    <s:String x:Key="S.Recorder.SelectArea.Embedded">Clique e arraste para selecionar uma área</s:String>
     <s:String x:Key="S.Recorder.SelectWindow">Clique aqui para selecionar essa janela</s:String>
     <s:String x:Key="S.Recorder.SelectScreen">Clique aqui para selecionar essa tela</s:String>
     
@@ -472,6 +476,7 @@
     <s:String x:Key="Editor.File.Insert.Recording">Gravação</s:String>
     <s:String x:Key="Editor.File.Insert.Webcam">Câmera</s:String>
     <s:String x:Key="Editor.File.Insert.Media">Mídia</s:String>
+    <s:String x:Key="Editor.File.Insert.Board">Quadro</s:String>
     <s:String x:Key="Editor.File.Insert">Inserir</s:String>
     
     <!--File • Save/Discard-->
@@ -534,7 +539,8 @@
     <s:String x:Key="Editor.Edit.Delay">Atraso (Duração)</s:String>
     <s:String x:Key="Editor.Edit.Delay.Override">Substituir</s:String>
     <s:String x:Key="Editor.Edit.Delay.IncreaseDecrease">Incrementar ou&#x0d;Decrementar</s:String>
-    
+    <s:String x:Key="Editor.Edit.Delay.Scale">Escala</s:String>
+
     <!--Image • Size and Rotation-->
     <s:String x:Key="Editor.Image.SizePosition">Tamanho e Posição</s:String>
     <s:String x:Key="Editor.Image.Resize">Redimensionar</s:String>
@@ -641,16 +647,19 @@
     <s:String x:Key="Editor.PreparingImport">Preparando para Importar</s:String>
     <s:String x:Key="Editor.ImportingFrames">Importando Quadros</s:String>
     
-    <s:String x:Key="Editor.ExportingRecording">Exportando a Gravação</s:String>
-    <s:String x:Key="Editor.DiscardingFrames">Descartando Quadros</s:String>
-    <s:String x:Key="Editor.DiscardingFolders">Descartando Pastas</s:String>
-    <s:String x:Key="Editor.ResizingFrames">Redimensionando Quadros</s:String>
-    <s:String x:Key="Editor.CroppingFrames">Cortando Quadros</s:String>
-    <s:String x:Key="Editor.ApplyingOverlay">Aplicando Sobreposição nos Quadros</s:String>
-    <s:String x:Key="Editor.CreatingTitleFrame">Criando o Quadro Título</s:String>
-    <s:String x:Key="Editor.ApplyingFlipRotate">Aplicando Girar/Espelhar nos Quadros</s:String>
-    <s:String x:Key="Editor.ChangingDelay">Trocando o Atraso</s:String>
-    <s:String x:Key="Editor.ApplyingTransition">Aplicando Efeito de Transição</s:String>
+    <s:String x:Key="Editor.ExportingRecording">Exportando a gravação</s:String>
+    <s:String x:Key="S.Editor.AnalyzingDuplicates">Analisando quadros duplicados</s:String>
+    <s:String x:Key="S.Editor.AdjustingDuplicatesDelay">Ajustando o atraso dos quadros</s:String>
+    <s:String x:Key="S.Editor.DiscardingDuplicates">Descartando quadros duplicados</s:String>
+    <s:String x:Key="Editor.DiscardingFrames">Descartando quadros</s:String>
+    <s:String x:Key="Editor.DiscardingFolders">Descartando pastas</s:String>
+    <s:String x:Key="Editor.ResizingFrames">Redimensionando quadros</s:String>
+    <s:String x:Key="Editor.CroppingFrames">Cortando quadros</s:String>
+    <s:String x:Key="Editor.ApplyingOverlay">Aplicando sobreposição nos quadros</s:String>
+    <s:String x:Key="Editor.CreatingTitleFrame">Criando o quadro título</s:String>
+    <s:String x:Key="Editor.ApplyingFlipRotate">Aplicando girar/espelhar nos quadros</s:String>
+    <s:String x:Key="Editor.ChangingDelay">Trocando o atraso</s:String>
+    <s:String x:Key="Editor.ApplyingTransition">Aplicando efeito de transição</s:String>
     <s:String x:Key="S.Editor.PreparingSaving">Preparando para salvar</s:String>
 
     <s:String x:Key="Editor.List.Frame">Quadro:</s:String>
@@ -802,8 +811,9 @@
     <s:String x:Key="KeyStrokes.Edit.Add">Adicione um comando:</s:String>
     
     <s:String x:Key="String.Delay">Atraso</s:String>
-    <s:String x:Key="String.DelayMs">Atraso (ms):</s:String>
-    <s:String x:Key="String.ValueMs">Valor -+ (ms):</s:String>
+    <s:String x:Key="String.DelayMs">Atraso:</s:String>
+    <s:String x:Key="String.ValueMs">Valor -+:</s:String>
+    <s:String x:Key="String.ScaleValue">Valor de Escala:</s:String>
     <s:String x:Key="String.Margin">Margem:</s:String>
     <s:String x:Key="String.Padding">Preenchimento:</s:String>
     <s:String x:Key="String.Background">Plano de Fundo</s:String>
@@ -852,19 +862,30 @@
     <s:String x:Key="Progress.Precision.Miliseconds">Milisegundos</s:String>
     <s:String x:Key="Progress.Precision.Percentage">Percentagem</s:String>
     <s:String x:Key="Progress.Precision.Count">Número do Quadro</s:String>
+    <s:String x:Key="Progress.Precision.DateOfRecording">Data/horário atual</s:String>
     <s:String x:Key="Progress.Precision.Custom">Personalizado</s:String>
     <s:String x:Key="Progress.Precision.ShowTotal">Exibir o total</s:String>
     <s:String x:Key="Progress.Format">Formato:</s:String>
+    <s:String x:Key="S.Progress.Format.Date">Você pode usar os formatos de data e horário do .Net Framework.&#x0d;A especificação está disponível nesses dois links abaixo.</s:String>
+    <s:String x:Key="S.Progress.Format.Date.Standard">Formatos padrão</s:String>
+    <s:String x:Key="S.Progress.Format.Date.Custom">Formatos personalizados</s:String>
     <s:String x:Key="Progress.Orientation">Orientação:</s:String>
     
+    <s:String x:Key="S.DelayUpdate">Atualização de atraso</s:String>
+    <s:String x:Key="Delay.Mode">Modo de atraso:</s:String>
+    <s:String x:Key="Delay.Mode.Override">Substituir (in ms)</s:String>
+    <s:String x:Key="Delay.Mode.IncreaseDecrease">Incrementar ou decrementar (em ms)</s:String>
+    <s:String x:Key="Delay.Mode.Scale">Escala (em %)</s:String>
     <s:String x:Key="Delay.NewValue">Novo Valor</s:String>
     <s:String x:Key="Delay.Minimum10Ms">Mínimo de 10 ms por quadro.</s:String>
     <s:String x:Key="Delay.DecreaseIncrease">Diminuir/Aumentar Valor</s:String>
-    
+    <s:String x:Key="Delay.Scale">Valor de Escala</s:String>
+
     <s:String x:Key="Cinemagraph.Info">Use a caneta para selecionar os pixels que não devem permanecer estáticos (que devem mudar entre quadros), ao pintar em cima deles.</s:String>
     <s:String x:Key="OverrideDelay.Info">Este novo valor substituirá a duração (atraso) de todos os quadros selecionados. O valor deve ficar entre 10 ms e 25.500ms.</s:String>
-    <s:String x:Key="IncreaseDecreaseDelay.Info">Esse valor irá aumentar/diminuir a duração (atraso) de cada quadro selecionado.&#x0d;Você pode incrementar/decrementar, selecionando um valor entre -10.000ms e 10.000ms, mas a duração de cada quadro deve permanecer entre 10 ms e 25.500ms</s:String>
-    
+    <s:String x:Key="IncreaseDecreaseDelay.Info">Esse valor irá aumentar/diminuir a duração (atraso) de cada quadro selecionado.&#x0d;Você pode incrementar/decrementar, selecionando um valor entre -10.000ms e 10.000ms, mas a duração de cada quadro deve permanecer entre 10 ms e 25.500ms.</s:String>
+    <s:String x:Key="ScaleDelay.Info">Altere a escala de duração de cada quadro selecionado pelo valor em percentual.&#x0d;Você alterar a escala de duração de cada quadro selecionando um valor entre 1% e 1000%, mas a duração de cada quadro deve permanecer entre 10 ms e 25.500ms.</s:String>
+
     <s:String x:Key="Transitions.Lenght">Duração da Transição</s:String>
     <s:String x:Key="Transitions.Delay">Atraso da Transição</s:String>
     <s:String x:Key="Transitions.FadeTo">Esmaecer para...</s:String>
@@ -888,6 +909,8 @@
     <s:String x:Key="S.SaveAs.Encoder.Legacy.Tooltip">Algoritmo: NeuQuant.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System">Sistema</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System.Tooltip">Utiliza uma tabela de cores padrão.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Apng">1.0</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Apng.Tooltip">Codificador desenvolvido pelo desenvolvedor do ScreenToGif.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
     <s:String x:Key="S.SaveAs.GifOptions">Opções do Gif</s:String>
@@ -952,6 +975,7 @@
     <s:String x:Key="S.SaveAs.Warning.Type">Você precisa selecionar onde salvar o arquivo (em uma pasta, na área de transferência ou para fazer upload).</s:String>
     <s:String x:Key="S.SaveAs.Warning.Commands.Empty">Para executar um comando após a codificação, você precisa escrever o comando na caixa de texto.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Upload.None">Nenhum serviço de upload selecionado. Você precisa selecionar um destino.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Upload.NotAuthorized">Você não pode enviar para o serviço selecionado porque você não foi autorizado. Navegue até Opções > Serviços de Upload para autorizar este aplicativo.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Copy.Link">Você não pode selecionar a opção de copiar o link porque você não escolheu para fazer o upload do arquivo.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">Você precisa selecionar uma pasta de destino.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">A pasta de destino não existe.</s:String>
@@ -959,7 +983,8 @@
     <s:String x:Key="S.SaveAs.Warning.Filename">Você precisa informar um nome para o arquivo.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Filename.Invalid">O nome do arquivo de destino contém um ou mais caracteres inválidos. Por favor, informe um nome válido para o arquivo.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Overwrite">Nome do arquivo já em uso. Habilite a opção de sobrescrever ou escolha um outro nome para o arquivo.</s:String>
-    
+    <s:String x:Key="S.SaveAs.Warning.Canceled">A operação foi cancelada.</s:String>
+
     <!--SaveAs • Export-->
     <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">Exportar Quadros</s:String>
     <s:String x:Key="S.SaveAs.Frames.Confirmation.Instruction">Tem certeza de que deseja exportar os quadros?</s:String>

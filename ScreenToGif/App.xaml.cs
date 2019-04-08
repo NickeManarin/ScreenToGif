@@ -44,6 +44,7 @@ namespace ScreenToGif
                 Argument.Prepare(e.Args);
 
             LocalizationHelper.SelectCulture(UserSettings.All.LanguageCode);
+            ThemeHelper.SelectTheme(UserSettings.All.MainTheme.ToString());
 
             if (UserSettings.All.DisableHardwareAcceleration)
                 RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;

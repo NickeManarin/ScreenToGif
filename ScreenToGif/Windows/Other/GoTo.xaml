@@ -4,12 +4,12 @@
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         xmlns:util="clr-namespace:ScreenToGif.Util"
         Title="{DynamicResource GoTo.Title}" SizeToContent="WidthAndHeight" MinHeight="130" MinWidth="300" ResizeMode="CanMinimize"
-        Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterOwner" Loaded="GoTo_OnLoaded">
-    
+        Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterOwner" Background="{DynamicResource Panel.Background}" Loaded="GoTo_OnLoaded">
+
     <Window.CommandBindings>
         <CommandBinding Command="util:Commands.CancelAction" CanExecute="Cancel_CanExecute" Executed="Cancel_Executed"/>
     </Window.CommandBindings>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -17,12 +17,12 @@
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" x:Name="GoToLabel" Content="{DynamicResource GoTo.Instruction}" HorizontalAlignment="Stretch"/>
+        <Label Grid.Row="0" x:Name="GoToLabel" Content="{DynamicResource GoTo.Instruction}" HorizontalAlignment="Stretch" Foreground="{DynamicResource Element.Foreground.Header}"/>
 
         <n:IntegerUpDown Grid.Row="1" x:Name="NumberIntegerUpDown" Margin="5" Padding="3" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Left" 
                          Height="26" Minimum="0" Maximum="100" KeyDown="IntegerUpDown_OnKeyDown"/>
 
-        <Grid Grid.Row="2" Background="WhiteSmoke" Height="40">
+        <Grid Grid.Row="2" Background="{DynamicResource Panel.Background.Level3}" Height="40">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="Auto"/>
@@ -31,7 +31,7 @@
 
             <n:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource Ok}" Content="{StaticResource Vector.Ok}" 
                            MaxSize="20" MinWidth="90" Margin="5" Click="OkButton_Click"/>
-            
+
             <n:ImageButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource Cancel}" Content="{StaticResource Vector.Cancel}" 
                            MaxSize="20" MinWidth="90" Margin="5" Click="CancelButton_Click" IsCancel="True"/>
         </Grid>

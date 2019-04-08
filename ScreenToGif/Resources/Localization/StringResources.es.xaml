@@ -95,12 +95,12 @@
     <s:String x:Key="Interface.Background">Fondo</s:String>
     <s:String x:Key="Interface.Foreground">Primer plano</s:String>
     <s:String x:Key="Interface.BoardBackground">Fondo del Tablero</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme">Esquema de colores</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.VeryLight">Muy claro</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Light">Claro</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Medium">Medio</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Dark">Oscuro</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Custom">Personalizar</s:String>
+    <s:String x:Key="Interface.Theme.Scheme">Esquema de colores</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.VeryLight">Muy claro</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Light">Claro</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Medium">Medio</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Dark">Oscuro</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Custom">Personalizar</s:String>
     
     <s:String x:Key="Interface.EditorBackground.GridSize">Tamaño de la cuadrícula</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.VerySmall">Muy pequeño</s:String>

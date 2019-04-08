@@ -82,12 +82,12 @@
     <!--<s:String x:Key="Interface.Background">Background</s:String>-->
     <!--<s:String x:Key="Interface.Foreground">Foreground</s:String>-->
     <s:String x:Key="Interface.BoardBackground">Pano Arkaplanı</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme">Renk Düzeni</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.VeryLight">Çok Açık</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Light">Açık</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Medium">Orta</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Dark">Koyu</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Custom">Özel</s:String>
+    <s:String x:Key="Interface.Theme.Scheme">Renk Düzeni</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.VeryLight">Çok Açık</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Light">Açık</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Medium">Orta</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Dark">Koyu</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Custom">Özel</s:String>
     
     <s:String x:Key="Interface.EditorBackground.GridSize">Izgara Boyutu</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.VerySmall">Çok Küçük</s:String>

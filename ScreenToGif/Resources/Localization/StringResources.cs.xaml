@@ -115,12 +115,12 @@
     <s:String x:Key="Interface.Background">Pozadí</s:String>
     <s:String x:Key="Interface.Foreground">Popředí</s:String>
     <s:String x:Key="Interface.BoardBackground">Pozadí plátna</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme">Barevné schéma</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.VeryLight">Světlejší</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Light">Světlé</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Medium">Střední</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Dark">Tmavé</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Custom">Vlastní</s:String>
+    <s:String x:Key="Interface.Theme.Scheme">Barevné schéma</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.VeryLight">Světlejší</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Light">Světlé</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Medium">Střední</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Dark">Tmavé</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Custom">Vlastní</s:String>
     
     <s:String x:Key="Interface.EditorBackground.GridSize">Velikost mřížky</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.VerySmall">Velmi malé</s:String>

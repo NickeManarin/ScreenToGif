@@ -223,14 +223,6 @@ namespace ScreenToGif.Windows
             ScrollSynchronizer.SetScrollGroup(ZoomBoxControl.GetScrollViewer(), "Canvas");
             ScrollSynchronizer.SetScrollGroup(MainScrollViewer, "Canvas");
 
-            #region Temporary folder
-
-            //If never configurated.
-            if (string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder))
-                UserSettings.All.TemporaryFolder = Path.GetTempPath();
-
-            #endregion
-
             #region Load
 
             if (Project != null)
@@ -625,10 +617,6 @@ namespace ScreenToGif.Windows
         {
             Pause();
 
-            //Temporary folder.
-            if (string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder))
-                UserSettings.All.TemporaryFolder = Path.GetTempPath();
-
             //Start new project.
             var project = new ProjectInfo().CreateProjectFolder(ProjectByType.Editor);
 
@@ -638,11 +626,12 @@ namespace ScreenToGif.Windows
 
             using (var stream = new FileStream(fileName, FileMode.Create))
             {
-                //var scale = this.Scale();
-
                 var bitmapSource = ImageMethods.CreateEmtpyBitmapSource(UserSettings.All.NewAnimationColor, UserSettings.All.NewAnimationWidth, UserSettings.All.NewAnimationHeight, this.Dpi(), PixelFormats.Indexed1);
-                var bitmapFrame = BitmapFrame.Create(bitmapSource);
 
+                if (bitmapSource.Format != PixelFormats.Bgra32)
+                    bitmapSource = new FormatConvertedBitmap(bitmapSource, PixelFormats.Bgra32, null, 0);
+
+                var bitmapFrame = BitmapFrame.Create(bitmapSource);
                 var encoder = new PngBitmapEncoder();
                 encoder.Frames.Add(bitmapFrame);
                 encoder.Save(stream);
@@ -2359,8 +2348,8 @@ namespace ScreenToGif.Windows
 
             Cursor = Cursors.AppStarting;
 
-            _delayFramesDel = Delay;
-            _delayFramesDel.BeginInvoke(DelayChangeType.Override, NewDelayIntegerUpDown.Value, DelayCallback, null);
+            _delayFramesDel = DelayAsync;
+            _delayFramesDel.BeginInvoke(DelayModel.FromSettings(DelayUpdateType.Override), false, DelayCallback, null); //NewDelayIntegerUpDown.Value
 
             ClosePanel();
         }
@@ -2384,8 +2373,8 @@ namespace ScreenToGif.Windows
 
             Cursor = Cursors.AppStarting;
 
-            _delayFramesDel = Delay;
-            _delayFramesDel.BeginInvoke(DelayChangeType.IncreaseDecrease, IncreaseDecreaseDelayIntegerUpDown.Value, DelayCallback, null);
+            _delayFramesDel = DelayAsync;
+            _delayFramesDel.BeginInvoke(DelayModel.FromSettings(DelayUpdateType.IncreaseDecrease), false, DelayCallback, null); //IncreaseDecreaseDelayIntegerUpDown.Value
 
             ClosePanel();
         }
@@ -2408,15 +2397,15 @@ namespace ScreenToGif.Windows
 
             Cursor = Cursors.AppStarting;
 
-            _delayFramesDel = Delay;
-            _delayFramesDel.BeginInvoke(DelayChangeType.Scale, ScaleDelayIntegerUpDown.Value, DelayCallback, null);
+            _delayFramesDel = DelayAsync;
+            _delayFramesDel.BeginInvoke(DelayModel.FromSettings(DelayUpdateType.Scale), false, DelayCallback, null); //ScaleDelayIntegerUpDown.Value
 
             ClosePanel();
         }
 
-      #endregion
+        #endregion
 
-      #endregion
+        #endregion
 
         #region Image Tab
 
@@ -2435,9 +2424,9 @@ namespace ScreenToGif.Windows
             #region Info
 
             var image = Project.Frames[0].Path.SourceFrom();
-            CurrentDpiLabel.Content = DpiNumericUpDown.Value = (int)Math.Round(image.DpiX, MidpointRounding.AwayFromZero);
-            CurrentWidthLabel.Content = WidthResizeNumericUpDown.Value = image.PixelWidth;
-            CurrentHeightLabel.Content = HeightResizeNumericUpDown.Value = image.PixelHeight;
+            CurrentDpiRun.Text = (DpiNumericUpDown.Value = (int)Math.Round(image.DpiX, MidpointRounding.AwayFromZero)).ToString();
+            CurrentWidthRun.Text = (WidthResizeNumericUpDown.Value = image.PixelWidth).ToString();
+            CurrentHeightRun.Text = (HeightResizeNumericUpDown.Value = image.PixelHeight).ToString();
 
             #endregion
 
@@ -2577,7 +2566,7 @@ namespace ScreenToGif.Windows
             RightCropNumericUpDown.Value = (int)_cropAdorner.ClipRectangle.Right;
 
             var scale = this.Scale();
-            CropSizeLabel.Content = $"{(int)Math.Round(_cropAdorner.ClipRectangle.Width * scale)} × {(int)Math.Round(_cropAdorner.ClipRectangle.Height * scale)}";
+            CropSizeTextBlock.Text = $"{(int)Math.Round(_cropAdorner.ClipRectangle.Width * scale)} × {(int)Math.Round(_cropAdorner.ClipRectangle.Height * scale)}";
 
             _resizing = false;
         }
@@ -2895,7 +2884,7 @@ namespace ScreenToGif.Windows
             Pause();
             ShowPanel(PanelType.Shapes, StringResource("Editor.Image.Shape"), "Vector.Ellipse", ApplyShapesButton_Click);
         }
-        
+
         private void ShapeModes_Checked(object sender, RoutedEventArgs e)
         {
             ShapeDrawingCanvas.DrawingMode = AddModeRadioButton.IsChecked == true ? DrawingCanvas.DrawingModes.Shape : DrawingCanvas.DrawingModes.Select;
@@ -3222,12 +3211,32 @@ namespace ScreenToGif.Windows
             ChangeProgressTextToCurrent();
         }
 
+        private void ExtendedCheckBox_CheckedChanged(object sender, RoutedEventArgs e)
+        {
+            if (!IsLoaded || !ProgressGrid.IsVisible || TextRadioButton.IsChecked == false)
+                return;
+
+            ChangeProgressTextToCurrent();
+        }
+
         private void CustomProgressTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (!IsLoaded || !ProgressGrid.IsVisible || TextRadioButton.IsChecked == false)
                 return;
 
             ChangeProgressTextToCurrent();
+        }
+
+        private void Hyperlink_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
+        {
+            try
+            {
+                Process.Start(e.Uri.AbsoluteUri);
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, $"Error while trying to navigate to a given URI: '{e?.Uri?.AbsoluteUri}'.");
+            }
         }
 
         private void ApplyProgressButton_Click(object sender, RoutedEventArgs e)
@@ -3684,11 +3693,15 @@ namespace ScreenToGif.Windows
                                 switch (task.TaskType)
                                 {
                                     case DefaultTaskModel.TaskTypeEnum.MouseClicks:
+                                    {
                                         if (Project.CreatedBy == ProjectByType.ScreenRecorder && UserSettings.All.DetectMouseClicks)
                                             MouseClicksAsync(task as MouseClicksModel ?? MouseClicksModel.FromSettings());
+
                                         break;
+                                    }
 
                                     case DefaultTaskModel.TaskTypeEnum.KeyStrokes:
+                                    {
                                         if (Project.CreatedBy == ProjectByType.ScreenRecorder)
                                         {
                                             Dispatcher.Invoke(() =>
@@ -3700,7 +3713,17 @@ namespace ScreenToGif.Windows
                                             KeyStrokesAsync(task as KeyStrokesModel ?? KeyStrokesModel.FromSettings());
                                             Dispatcher.Invoke(() => KeyStrokesGrid.Visibility = Visibility.Collapsed);
                                         }
+
                                         break;
+                                    }
+
+                                    case DefaultTaskModel.TaskTypeEnum.Delay:
+                                    {
+                                        if (Project.CreatedBy == ProjectByType.ScreenRecorder)
+                                            DelayAsync(task as DelayModel ?? DelayModel.FromSettings());
+
+                                        break;
+                                    }
                                 }
                             }
                             catch (Exception e)
@@ -4159,6 +4182,7 @@ namespace ScreenToGif.Windows
                 {
                     Cursor = Cursors.Arrow;
                     IsLoading = false;
+                    HideProgress();
 
                     ClosePanel(removeEvent: true);
 
@@ -4534,7 +4558,7 @@ namespace ScreenToGif.Windows
 
             #region Commons
 
-            ActionTitleLabel.Content = title;
+            ActionTitleTextBlock.Text = title;
             ActionViewBox.Child = FindResource(vector) as Canvas;
 
             Util.Other.RemoveRoutedEventHandlers(ApplyButton, ButtonBase.ClickEvent);
@@ -4829,6 +4853,11 @@ namespace ScreenToGif.Windows
 
         #region Other
 
+        public void NotificationUpdated()
+        {
+            RibbonTabControl.UpdateNotifications();
+        }
+
         private void Discard(bool notify = true)
         {
             Pause();
@@ -4971,40 +5000,52 @@ namespace ScreenToGif.Windows
 
         private void ChangeProgressText(long cumulative, long total, int current)
         {
-            switch (ProgressPrecisionComboBox.SelectedIndex)
+            try
             {
-                case 0: //Minutes
-                    ProgressHorizontalTextBlock.Text = UserSettings.All.ProgressShowTotal ? TimeSpan.FromMilliseconds(cumulative).ToString(@"m\:ss") + "/" + TimeSpan.FromMilliseconds(total).ToString(@"m\:ss")
-                        : TimeSpan.FromMilliseconds(cumulative).ToString(@"m\:ss");
-                    break;
-                case 1: //Seconds
-                    ProgressHorizontalTextBlock.Text = UserSettings.All.ProgressShowTotal ? (int)TimeSpan.FromMilliseconds(cumulative).TotalSeconds + "/" + TimeSpan.FromMilliseconds(total).TotalSeconds + " s"
-                        : (int)TimeSpan.FromMilliseconds(cumulative).TotalSeconds + " s";
-                    break;
-                case 2: //Milliseconds
-                    ProgressHorizontalTextBlock.Text = UserSettings.All.ProgressShowTotal ? cumulative + "/" + total + " ms" : cumulative + " ms";
-                    break;
-                case 3: //Percentage
-                    var count = (double)Project.Frames.Count;
-                    ProgressHorizontalTextBlock.Text = (current / count * 100).ToString("##0.#", CultureInfo.CurrentUICulture) + (UserSettings.All.ProgressShowTotal ? "/100%" : " %");
-                    break;
-                case 4: //Frame number
-                    ProgressHorizontalTextBlock.Text = UserSettings.All.ProgressShowTotal ? current + "/" + Project.Frames.Count
-                        : current.ToString();
-                    break;
-                case 5: //Custom
-                    ProgressHorizontalTextBlock.Text = CustomProgressTextBox.Text
-                        .Replace("$ms", cumulative.ToString())
-                        .Replace("$s", ((int)TimeSpan.FromMilliseconds(cumulative).TotalSeconds).ToString())
-                        .Replace("$m", TimeSpan.FromMilliseconds(cumulative).ToString())
-                        .Replace("$p", (current / (double)Project.Frames.Count * 100).ToString("##0.#", CultureInfo.CurrentUICulture))
-                        .Replace("$f", current.ToString())
-                        .Replace("@ms", total.ToString())
-                        .Replace("@s", ((int)TimeSpan.FromMilliseconds(total).TotalSeconds).ToString())
-                        .Replace("@m", TimeSpan.FromMilliseconds(total).ToString(@"m\:ss"))
-                        .Replace("@p", "100")
-                        .Replace("@f", Project.Frames.Count.ToString());
-                    break;
+                switch (ProgressPrecisionComboBox.SelectedIndex)
+                {
+                    case 0: //Minutes
+                        ProgressHorizontalTextBlock.Text = UserSettings.All.ProgressShowTotal ? TimeSpan.FromMilliseconds(cumulative).ToString(@"m\:ss") + "/" + TimeSpan.FromMilliseconds(total).ToString(@"m\:ss")
+                            : TimeSpan.FromMilliseconds(cumulative).ToString(@"m\:ss");
+                        break;
+                    case 1: //Seconds
+                        ProgressHorizontalTextBlock.Text = UserSettings.All.ProgressShowTotal ? (int)TimeSpan.FromMilliseconds(cumulative).TotalSeconds + "/" + TimeSpan.FromMilliseconds(total).TotalSeconds + " s"
+                            : (int)TimeSpan.FromMilliseconds(cumulative).TotalSeconds + " s";
+                        break;
+                    case 2: //Milliseconds
+                        ProgressHorizontalTextBlock.Text = UserSettings.All.ProgressShowTotal ? cumulative + "/" + total + " ms" : cumulative + " ms";
+                        break;
+                    case 3: //Percentage
+                        var count = (double)Project.Frames.Count;
+                        ProgressHorizontalTextBlock.Text = (current / count * 100).ToString("##0.#", CultureInfo.CurrentUICulture) + (UserSettings.All.ProgressShowTotal ? "/100%" : " %");
+                        break;
+                    case 4: //Frame number
+                        ProgressHorizontalTextBlock.Text = UserSettings.All.ProgressShowTotal ? current + "/" + Project.Frames.Count
+                            : current.ToString();
+                        break;
+                    case 5: //Custom
+                        ProgressHorizontalTextBlock.Text = CustomProgressTextBox.Text
+                            .Replace("$ms", cumulative.ToString())
+                            .Replace("$s", ((int)TimeSpan.FromMilliseconds(cumulative).TotalSeconds).ToString())
+                            .Replace("$m", TimeSpan.FromMilliseconds(cumulative).ToString())
+                            .Replace("$p", (current / (double)Project.Frames.Count * 100).ToString("##0.#", CultureInfo.CurrentUICulture))
+                            .Replace("$f", current.ToString())
+                            .Replace("@ms", total.ToString())
+                            .Replace("@s", ((int)TimeSpan.FromMilliseconds(total).TotalSeconds).ToString())
+                            .Replace("@m", TimeSpan.FromMilliseconds(total).ToString(@"m\:ss"))
+                            .Replace("@p", "100")
+                            .Replace("@f", Project.Frames.Count.ToString());
+                        break;
+                    case 6: //Actual date/time
+                        ProgressHorizontalTextBlock.Text = UserSettings.All.ProgressShowTotal ? $"{Project.CreationDate.AddMilliseconds(cumulative).ToString(UserSettings.All.ProgressDateFormat)} -> {Project.CreationDate.AddMilliseconds(total).ToString(UserSettings.All.ProgressDateFormat)}"
+                            : Project.CreationDate.AddMilliseconds(cumulative).ToString(UserSettings.All.ProgressDateFormat);
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+                LogWriter.Log(e, "Invalid progress format.");
+                ProgressHorizontalTextBlock.Text = "Invalid";
             }
         }
 
@@ -5069,14 +5110,16 @@ namespace ScreenToGif.Windows
 
         private string GetOutputFilenameNoRegExp(ref string name)
         {
-            //put datetime into filename which is saved between two questions marks
-            string dateTimeFileNameRegEx = @"[?]([dyhms]+[-_ ]*)+[?]";
+            //Put datetime into filename which is saved between two questions marks.
+            var dateTimeFileNameRegEx = @"[?]([dyhms]+[-_ ]*)+[?]";
+
             if (Regex.IsMatch(name, dateTimeFileNameRegEx, RegexOptions.IgnoreCase))
             {
                 var dateTimeRegExp = Regex.Match(name, dateTimeFileNameRegEx, RegexOptions.IgnoreCase);
                 var dateTimeConverted = DateTime.Now.ToString(Regex.Replace(dateTimeRegExp.Value, "[?]", ""));
-                name = name.Replace(dateTimeRegExp.ToString(),dateTimeConverted);
+                name = name.Replace(dateTimeRegExp.ToString(), dateTimeConverted);
             }
+
             return name;
         }
 
@@ -5368,7 +5411,7 @@ namespace ScreenToGif.Windows
             {
                 Dispatcher.Invoke(() => RecentDataGrid.ItemsSource = null);
 
-                var path = Path.Combine(UserSettings.All.TemporaryFolder, "ScreenToGif", "Recording");
+                var path = Path.Combine(UserSettings.All.TemporaryFolderResolved, "ScreenToGif", "Recording");
 
                 if (!Directory.Exists(path))
                 {
@@ -6053,7 +6096,7 @@ namespace ScreenToGif.Windows
             Dispatcher.Invoke(() =>
             {
                 IsLoading = true;
-                KeyStrokesInternalGrid.MinHeight = model.KeyStrokesFontFamily.LineSpacing * model.KeyStrokesFontSize + model.KeyStrokesMargin * 2;
+                //KeyStrokesInternalGrid.MinHeight = model.KeyStrokesFontFamily.LineSpacing * model.KeyStrokesFontSize + model.KeyStrokesMargin * 2; //I don't remember why this was in here.
             });
 
             ShowProgress(DispatcherStringResource("Editor.ApplyingOverlay"), Project.Frames.Count);
@@ -6183,12 +6226,12 @@ namespace ScreenToGif.Windows
                         if (i + 1 > frame.KeyList.Count - 1 || !(frame.KeyList[i].Key != Key.Left && frame.KeyList[i].Key != Key.Right && frame.KeyList[i + 1].Modifiers.ToString().Contains(frame.KeyList[i].Key.ToString().Remove("Left", "Right").Replace("Ctrl", "Control").TrimStart('L').TrimStart('R'))))
                             keyList.Add(frame.KeyList[i]);
                     }
-                    
+
                     #endregion
 
                     if (keyList.Count == 0)
                         return null;
-
+                    
                     //Update text with key strokes.
                     KeyStrokesLabel.Text = keyList.Select(x => "" + Native.GetSelectKeyText(x.Key, x.Modifiers, x.IsUppercase)).Aggregate((p, n) => p + model.KeyStrokesSeparator + n);
                     KeyStrokesLabel.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
@@ -6202,7 +6245,6 @@ namespace ScreenToGif.Windows
 
                     return KeyStrokesOverlayGrid.GetScaledRender(ZoomBoxControl.ScaleDiff, ZoomBoxControl.ImageDpi, ZoomBoxControl.GetImageSize());
 
-                    
                 }, DispatcherPriority.Normal);
 
                 if (render == null)
@@ -6377,8 +6419,16 @@ namespace ScreenToGif.Windows
 
         private int RemoveDuplicatesAsync(double similarity, DuplicatesRemovalType removal, DuplicatesDelayType delay)
         {
+            Dispatcher.Invoke(() =>
+            {
+                IsLoading = true;
+                Cursor = Cursors.AppStarting;
+            });
+
             var removeList = new List<int>();
             var alterList = new List<int>();
+
+            ShowProgress(DispatcherStringResource("S.Editor.AnalyzingDuplicates"), Project.Frames.Count - 1);
 
             //Gets the list of similar frames.
             for (var i = 0; i < Project.Frames.Count - 2; i++)
@@ -6387,6 +6437,8 @@ namespace ScreenToGif.Windows
 
                 if (sim >= similarity)
                     removeList.Add(removal == DuplicatesRemovalType.First ? i : i + 1);
+
+                UpdateProgress(i + 1);
             }
 
             if (removeList.Count == 0)
@@ -6395,8 +6447,11 @@ namespace ScreenToGif.Windows
                 return Project.Frames.Count;
             }
 
+            var count = 0;
             if (delay != DuplicatesDelayType.DontAdjust)
             {
+                ShowProgress(DispatcherStringResource("S.Editor.AdjustingDuplicatesDelay"), removeList.Count);
+
                 //Gets the list of frames that will be altered (if the delay will be adjusted).
                 var mode = removal == DuplicatesRemovalType.First ? 1 : -1;
                 alterList = (from item in removeList where item + mode >= 0 select item + mode).ToList();
@@ -6413,8 +6468,9 @@ namespace ScreenToGif.Windows
                         if (delay == DuplicatesDelayType.Sum)
                             Project.Frames[index].Delay += Project.Frames[index - mode].Delay;
                         else
-                            Project.Frames[index].Delay =
-                                (Project.Frames[index - mode].Delay + Project.Frames[index].Delay) / 2;
+                            Project.Frames[index].Delay = (Project.Frames[index - mode].Delay + Project.Frames[index].Delay) / 2;
+
+                        UpdateProgress(count++);
                     }
                 }
                 else
@@ -6425,8 +6481,9 @@ namespace ScreenToGif.Windows
                         if (delay == DuplicatesDelayType.Sum)
                             Project.Frames[index].Delay += Project.Frames[index - mode].Delay;
                         else
-                            Project.Frames[index].Delay =
-                                (Project.Frames[index - mode].Delay + Project.Frames[index].Delay) / 2;
+                            Project.Frames[index].Delay = (Project.Frames[index - mode].Delay + Project.Frames[index].Delay) / 2;
+
+                        UpdateProgress(count++);
                     }
                 }
             }
@@ -6435,12 +6492,16 @@ namespace ScreenToGif.Windows
                 ActionStack.SaveState(ActionStack.EditAction.Remove, Project.Frames, removeList);
             }
 
+            ShowProgress(DispatcherStringResource("S.Editor.DiscardingDuplicates"), removeList.Count);
+
             for (var i = removeList.Count - 1; i >= 0; i--)
             {
                 var removeIndex = removeList[i];
 
                 File.Delete(Project.Frames[removeIndex].Path);
                 Project.Frames.RemoveAt(removeIndex);
+
+                UpdateProgress(count++);
             }
 
             //Gets the minimum index being altered.
@@ -6469,13 +6530,13 @@ namespace ScreenToGif.Windows
 
         #region Async Delay
 
-        private delegate void DelayFrames(DelayChangeType type, int delay);
+        private delegate void DelayFrames(DelayModel model, bool forAll = false);
 
         private DelayFrames _delayFramesDel;
 
-        private void Delay(DelayChangeType type, int delay)
+        private void DelayAsync(DelayModel model, bool forAll = false)
         {
-            var frameList = SelectedFrames();
+            var frameList = forAll ? Project.Frames : SelectedFrames();
 
             Dispatcher.Invoke(() =>
             {
@@ -6488,23 +6549,29 @@ namespace ScreenToGif.Windows
             var count = 0;
             foreach (var frameInfo in frameList)
             {
-                if (type == DelayChangeType.Override)
+                switch (model.Type)
                 {
-                    frameInfo.Delay = delay;
-                }
-                else if (type == DelayChangeType.IncreaseDecrease)
-                {
-                    frameInfo.Delay += delay;
+                    case DelayUpdateType.Override:
+                    {
+                        frameInfo.Delay = model.NewDelay;
+                        break;
+                    }
+                    case DelayUpdateType.IncreaseDecrease:
+                    {
+                        frameInfo.Delay += model.IncreaseDecreaseDelay;
 
-                    if (frameInfo.Delay < 10)
-                        frameInfo.Delay = 10;
-                }
-                else
-                {
-                    frameInfo.Delay = frameInfo.Delay * delay / 100;
+                        if (frameInfo.Delay < 10)
+                            frameInfo.Delay = 10;
+                        break;
+                    }
+                    default:
+                    {
+                        frameInfo.Delay = (int)Math.Round(frameInfo.Delay * model.Percent / 100m, 0);
 
-                    if (frameInfo.Delay < 10)
-                        frameInfo.Delay = 10;
+                        if (frameInfo.Delay < 10)
+                            frameInfo.Delay = 10;
+                        break;
+                    }
                 }
 
                 #region Update UI
@@ -6841,10 +6908,5 @@ namespace ScreenToGif.Windows
         #endregion
 
         #endregion
-
-        public void NotificationUpdated()
-        {
-            RibbonTabControl.UpdateNotifications();
-        }
     }
 }

@@ -36,6 +36,7 @@
     
     <!--Error messages--> 
     <s:String x:Key="S.Crash">Oh no, the app crashed :(</s:String>
+    <s:String x:Key="S.Required">Required field.</s:String>
     
     <!--StartUp Page-->
     <s:String x:Key="Title.StartUp">ScreenToGif - StartUp</s:String>
@@ -124,17 +125,19 @@
     <s:String x:Key="S.AutomatedTasks.SelectType">(Pick a task)</s:String>
     <s:String x:Key="S.AutomatedTasks.Info">These tasks are executed sequentially from the top of the list to the bottom.&#10;It happens when you first open a project using the editor.</s:String>
     
+    <s:String x:Key="Interface.Theme">App's theme</s:String>
+    <s:String x:Key="Interface.Theme.Scheme">Color scheme</s:String>
     <s:String x:Key="Interface.EditorBackground">Editor background</s:String>
     <s:String x:Key="Interface.Recorder">Recorder theme</s:String>
     <s:String x:Key="Interface.Background">Background</s:String>
     <s:String x:Key="Interface.Foreground">Foreground</s:String>
     <s:String x:Key="Interface.BoardBackground">Board background</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme">Color Scheme</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.VeryLight">Very Light</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Light">Light</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Medium">Medium</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Dark">Dark</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Custom">Custom</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.VeryLight">Very Light</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Light">Light</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Medium">Medium</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Dark">Dark</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.VeryDark">Very Dark</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Custom">Custom</s:String>
     
     <s:String x:Key="Interface.EditorBackground.GridSize">Grid Size</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.VerySmall">Very Small</s:String>
@@ -333,6 +336,7 @@
     <s:String x:Key="S.Recorder.Retry">Retry</s:String>
     <s:String x:Key="S.Recorder.CancelSelection">Cancel the selection (Esc)</s:String>
     <s:String x:Key="S.Recorder.SelectArea">Click and drag to select an area of this screen</s:String>
+    <s:String x:Key="S.Recorder.SelectArea.Embedded">Click and drag to select an area</s:String>
     <s:String x:Key="S.Recorder.SelectWindow">Click here to select this window</s:String>
     <s:String x:Key="S.Recorder.SelectScreen">Click here to select this screen</s:String>
     
@@ -471,6 +475,7 @@
     <!--File • Insert-->
     <s:String x:Key="Editor.File.Insert.Recording">Recording</s:String>
     <s:String x:Key="Editor.File.Insert.Webcam">Webcam&#x0d;Recording</s:String>
+    <s:String x:Key="Editor.File.Insert.Board">Board&#x0d;Recording</s:String>
     <s:String x:Key="Editor.File.Insert.Media">Media</s:String>
     <s:String x:Key="Editor.File.Insert">Insert</s:String>
     
@@ -642,16 +647,19 @@
     <s:String x:Key="Editor.PreparingImport">Preparing to Import</s:String>
     <s:String x:Key="Editor.ImportingFrames">Importing Frames</s:String>
     
-    <s:String x:Key="Editor.ExportingRecording">Exporting the Recording</s:String>
-    <s:String x:Key="Editor.DiscardingFrames">Discarding Frames</s:String>
-    <s:String x:Key="Editor.DiscardingFolders">Discarding Folders</s:String>
-    <s:String x:Key="Editor.ResizingFrames">Resizing Frames</s:String>
-    <s:String x:Key="Editor.CroppingFrames">Cropping Frames</s:String>
-    <s:String x:Key="Editor.ApplyingOverlay">Applying Overlay to Frames</s:String>
-    <s:String x:Key="Editor.CreatingTitleFrame">Creating Title Frame</s:String>
-    <s:String x:Key="Editor.ApplyingFlipRotate">Applying Flip/Rotate to Frames</s:String>
-    <s:String x:Key="Editor.ChangingDelay">Changing the Delay</s:String>
-    <s:String x:Key="Editor.ApplyingTransition">Applying Transition Effect</s:String>
+    <s:String x:Key="Editor.ExportingRecording">Exporting the recording</s:String>
+    <s:String x:Key="S.Editor.AnalyzingDuplicates">Analyzing duplicates</s:String>
+    <s:String x:Key="S.Editor.AdjustingDuplicatesDelay">Adjusting the delay</s:String>
+    <s:String x:Key="S.Editor.DiscardingDuplicates">Discarding duplicates</s:String>
+    <s:String x:Key="Editor.DiscardingFrames">Discarding frames</s:String>
+    <s:String x:Key="Editor.DiscardingFolders">Discarding folders</s:String>
+    <s:String x:Key="Editor.ResizingFrames">Resizing frames</s:String>
+    <s:String x:Key="Editor.CroppingFrames">Cropping frames</s:String>
+    <s:String x:Key="Editor.ApplyingOverlay">Applying overlay to frames</s:String>
+    <s:String x:Key="Editor.CreatingTitleFrame">Creating title frame</s:String>
+    <s:String x:Key="Editor.ApplyingFlipRotate">Applying Flip/Rotate to frames</s:String>
+    <s:String x:Key="Editor.ChangingDelay">Changing the delay</s:String>
+    <s:String x:Key="Editor.ApplyingTransition">Applying the transition effect</s:String>
     <s:String x:Key="S.Editor.PreparingSaving">Preparing to save</s:String>
 
     <s:String x:Key="Editor.List.Frame">Frame:</s:String>
@@ -803,8 +811,8 @@
     <s:String x:Key="KeyStrokes.Edit.Add">Add a key stroke:</s:String>
     
     <s:String x:Key="String.Delay">Delay</s:String>
-    <s:String x:Key="String.DelayMs">Delay (ms):</s:String>
-    <s:String x:Key="String.ValueMs">Value -+ (ms):</s:String>
+    <s:String x:Key="String.DelayMs">Delay:</s:String>
+    <s:String x:Key="String.ValueMs">Value -+:</s:String>
     <s:String x:Key="String.ScaleValue">Scale Value:</s:String>
     <s:String x:Key="String.Margin">Margin:</s:String>
     <s:String x:Key="String.Padding">Padding:</s:String>
@@ -854,11 +862,20 @@
     <s:String x:Key="Progress.Precision.Miliseconds">Milliseconds</s:String>
     <s:String x:Key="Progress.Precision.Percentage">Percentage</s:String>
     <s:String x:Key="Progress.Precision.Count">Frame Number</s:String>
+    <s:String x:Key="Progress.Precision.DateOfRecording">Actual date/time</s:String>
     <s:String x:Key="Progress.Precision.Custom">Custom</s:String>
     <s:String x:Key="Progress.Precision.ShowTotal">Show the total.</s:String>
     <s:String x:Key="Progress.Format">Format:</s:String>
+    <s:String x:Key="S.Progress.Format.Date">You can use the date and time format from .Net Framework.&#x0d;The specification is available in these two links below.</s:String>
+    <s:String x:Key="S.Progress.Format.Date.Standard">Standard formats</s:String>
+    <s:String x:Key="S.Progress.Format.Date.Custom">Custom formats</s:String>
     <s:String x:Key="Progress.Orientation">Orientation:</s:String>
     
+    <s:String x:Key="S.DelayUpdate">Delay update</s:String>
+    <s:String x:Key="Delay.Mode">Delay mode:</s:String>
+    <s:String x:Key="Delay.Mode.Override">Override (in ms)</s:String>
+    <s:String x:Key="Delay.Mode.IncreaseDecrease">Increase or decrease (in ms)</s:String>
+    <s:String x:Key="Delay.Mode.Scale">Scale (in %)</s:String>
     <s:String x:Key="Delay.NewValue">New Value</s:String>
     <s:String x:Key="Delay.Minimum10Ms">Minimum of 10ms per frame.</s:String>
     <s:String x:Key="Delay.DecreaseIncrease">Decrease/Increase Value</s:String>
@@ -867,7 +884,7 @@
     <s:String x:Key="Cinemagraph.Info">Use the pen to select the pixels that should not remain static (that should change among frames), by painting on top of them.</s:String>
     <s:String x:Key="OverrideDelay.Info">This new value will replace the duration (delay) of all selected frames. The value can be from 10ms to 25500ms.</s:String>
     <s:String x:Key="IncreaseDecreaseDelay.Info">This value will decrease/increase the duration (delay) of each selected frame.&#x0d;You can decrement/increment by selecting a value between -10000ms and 10000ms, but the final duration of each frame will be restricted to between 10ms and 25500ms</s:String>
-    <s:String x:Key="ScaleDelay.Info">Scale the duration (delay) of each selected frame by the this percent.&#x0d;You can scale each frame's duration by selecting a value between 1% and 1000%, but the final duration of each frame will be restricted to between 10ms and 25500ms</s:String>
+    <s:String x:Key="ScaleDelay.Info">Scale the duration (delay) of each selected frame by the percent value.&#x0d;You can scale each frame's duration by selecting a value between 1% and 1000%, but the final duration of each frame will be restricted to between 10ms and 25500ms</s:String>
 
     <s:String x:Key="Transitions.Lenght">Transition Length</s:String>
     <s:String x:Key="Transitions.Delay">Transition Delay</s:String>

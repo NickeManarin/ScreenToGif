@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         Title="Dialog" Height="230" Width="500" MinHeight="230" MinWidth="400" SizeToContent="Height" Topmost="True" WindowStartupLocation="CenterScreen" 
-        Icon="/ScreenToGif;component/Resources/Logo.ico">
-    
+        Icon="/ScreenToGif;component/Resources/Logo.ico" Background="{DynamicResource Panel.Background}">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
@@ -12,27 +12,27 @@
             <RowDefinition Height="40" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Background="#FFF9F9FF">
+        <Grid Grid.Row="0" Background="{DynamicResource Panel.Background.Level4}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Viewbox x:Name="IconViewbox" Margin="5" Child="{StaticResource Vector.Error}"/>
-            
+            <Viewbox x:Name="IconViewbox" Margin="5" Child="{StaticResource Vector.Error}" Opacity="{DynamicResource Element.Opacity}"/>
+
             <Label x:Name="InstructionLabel" Content="Instruction" Margin="5" Grid.Column="1" VerticalContentAlignment="Center" 
-                   FontFamily="Segoe UI Semilight" FontSize="18" Foreground="#FF003399"/>
+                   FontFamily="Segoe UI Semilight" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
         </Grid>
 
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
             <TextBlock x:Name="ObservationTextBlock" Margin="25,5,10,5" FontSize="14" TextWrapping="WrapWithOverflow">
-                <Run Text="{DynamicResource ErrorDialog.Observation}"/>
+                <Run Text="{DynamicResource ErrorDialog.Observation}" Foreground="{DynamicResource Element.Foreground}"/>
                 <LineBreak/>
-                <Run x:Name="DetailsRun"/>
+                <Run x:Name="DetailsRun" Foreground="{DynamicResource Element.Foreground}"/>
             </TextBlock>
         </ScrollViewer>
-        
-        <Grid Grid.Row="2" Background="WhiteSmoke" Height="40">
+
+        <Grid Grid.Row="2" Background="{DynamicResource Panel.Background.Level3}" Height="40">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="Auto"/>

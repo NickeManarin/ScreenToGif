@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         Title="{DynamicResource S.Troubleshoot.Title}" Height="450" Width="800" MinHeight="350" MinWidth="700"
-        Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen"
+        Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" Background="{DynamicResource Panel.Background}"
         Loaded="Window_Loaded">
 
     <Grid>
@@ -15,19 +15,20 @@
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Background="#FFF9F9FF">
+        <Grid Grid.Row="0" Background="{DynamicResource Panel.Background.Level4}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Viewbox Grid.Column="0" Margin="6" Child="{StaticResource Vector.Warning}" MaxWidth="25" MaxHeight="25"/>
+            <Viewbox Grid.Column="0" Margin="6" Child="{StaticResource Vector.Warning}" MaxWidth="25" MaxHeight="25" Opacity="{DynamicResource Element.Opacity}"/>
 
             <TextBlock Grid.Column="1" x:Name="TypeLabel" Text="{DynamicResource S.Troubleshoot.Windows}" Margin="5" VerticalAlignment="Center" 
-                       FontFamily="Segoe UI Semilight" FontSize="18" Foreground="#FF003399"/>
+                       FontFamily="Segoe UI Semilight" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
 
-            <TextBlock Grid.Column="2" Text="{DynamicResource S.Troubleshoot.Windows.Info}" FontSize="12" Foreground="#FF003399" TextAlignment="Center" VerticalAlignment="Center" Margin="3" TextWrapping="Wrap"/>
+            <TextBlock Grid.Column="2" Text="{DynamicResource S.Troubleshoot.Windows.Info}" FontSize="12" Foreground="{DynamicResource Element.Foreground.Header}" 
+                       TextAlignment="Center" VerticalAlignment="Center" Margin="3" TextWrapping="Wrap"/>
         </Grid>
 
         <Grid Grid.Row="1">
@@ -63,7 +64,7 @@
             </TextBlock>
         </Grid>
 
-        <Grid Grid.Row="4" Background="WhiteSmoke" UseLayoutRounding="False">
+        <Grid Grid.Row="4" Background="{DynamicResource Panel.Background.Level3}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="Auto" MinWidth="110"/>

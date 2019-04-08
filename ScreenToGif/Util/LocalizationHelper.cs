@@ -128,10 +128,10 @@ namespace ScreenToGif.Util
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder))
+                if (string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolderResolved))
                     return;
 
-                var folder = Path.Combine(UserSettings.All.TemporaryFolder, "ScreenToGif", "Localization");
+                var folder = Path.Combine(UserSettings.All.TemporaryFolderResolved, "ScreenToGif", "Localization");
                 var file = Path.Combine(folder, $"StringResources.{culture}.new.xaml");
 
                 Directory.CreateDirectory(folder);

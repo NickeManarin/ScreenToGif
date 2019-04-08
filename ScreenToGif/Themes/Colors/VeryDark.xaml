@@ -1,0 +1,129 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="clr-namespace:System;assembly=mscorlib">
+
+    <s:Double x:Key="Element.Opacity">0.7</s:Double>
+
+    <SolidColorBrush x:Key="Panel.Background" Color="#FF101010"/>
+    <SolidColorBrush x:Key="Panel.Background.Level2" Color="#FF161616"/>
+    <SolidColorBrush x:Key="Panel.Background.Level3" Color="#FF1A1A1A"/>
+    <SolidColorBrush x:Key="Panel.Background.Level4" Color="#FF222120"/>
+
+    <SolidColorBrush x:Key="Element.Background" Color="#FF1F1F1F"/>
+    <SolidColorBrush x:Key="Element.Background.Hover" Color="#FF222225"/>
+    <SolidColorBrush x:Key="Element.Background.Focused" Color="#FF212121"/>
+    <SolidColorBrush x:Key="Element.Background.Pressed" Color="#FF303030"/>
+    <SolidColorBrush x:Key="Element.Background.Checked" Color="#FF32302f"/>
+    <SolidColorBrush x:Key="Element.Background.Back" Color="#FF212121"/>
+    <SolidColorBrush x:Key="Element.Background.ReadOnly" Color="#FF262626"/>
+
+    <SolidColorBrush x:Key="Element.Foreground" Color="#FF999999"/>
+    <SolidColorBrush x:Key="Element.Foreground.Medium" Color="#FF787878"/>
+    <SolidColorBrush x:Key="Element.Foreground.Gray112" Color="#FF7D7D7D"/>
+    <SolidColorBrush x:Key="Element.Foreground.Gray150" Color="#FF5C5C5C"/>
+    <SolidColorBrush x:Key="Element.Foreground.Watermark" Color="#FF4D4D4D"/>
+    <SolidColorBrush x:Key="Element.Foreground.Gray192" Color="#FF454545"/>
+    <SolidColorBrush x:Key="Element.Foreground.Gray208" Color="#FF383838"/>
+    <SolidColorBrush x:Key="Element.Foreground.Header" Color="#FF485A7F"/>
+    <SolidColorBrush x:Key="Element.Foreground.Detail" Color="#FF155125"/>
+    <SolidColorBrush x:Key="Element.Foreground.Hint" Color="#FF007000"/>
+
+    <SolidColorBrush x:Key="Element.Border" Color="#FF474747"/>
+    <SolidColorBrush x:Key="Element.Border.Medium" Color="#FF142742"/>
+    <SolidColorBrush x:Key="Element.Border.Light" Color="#FF393F47"/>
+    <SolidColorBrush x:Key="Element.Border.Weak" Color="#30FFFFFF"/>
+    <SolidColorBrush x:Key="Element.Border.Hover" Color="#FF292E32"/>
+    <SolidColorBrush x:Key="Element.Border.Pressed" Color="#FF0d3054"/>
+    <SolidColorBrush x:Key="Element.Border.Required" Color="#FF00004D"/>
+
+    <SolidColorBrush x:Key="Element.Glyph" Color="#FF696969"/>
+    <SolidColorBrush x:Key="Element.Glyph.Strong" Color="#FF9E9E9E"/>
+    <SolidColorBrush x:Key="Element.Glyph.Hover" Color="#FF9C9C9C"/>
+    <SolidColorBrush x:Key="Element.Glyph.Pressed" Color="#FFADADAD"/>
+
+    <SolidColorBrush x:Key="Element.Selection" Color="#FF003C6B"/>
+    <SolidColorBrush x:Key="Element.Selection.Inactive" Color="#FFB3B3B3"/>
+
+    <!--Buttons-->
+    <SolidColorBrush x:Key="Brush.Button.Background" Color="#FF1A1A1A"/>
+    <SolidColorBrush x:Key="Brush.Button.Background.Hover" Color="#AA34373B"/>
+    <SolidColorBrush x:Key="Brush.Button.Background.Checked" Color="#802D3D54"/>
+    <SolidColorBrush x:Key="Brush.Button.Background.Pressed" Color="#F02A313B"/>
+    <SolidColorBrush x:Key="Brush.Button.Background.Focused" Color="#AA373E42"/>
+
+    <SolidColorBrush x:Key="Brush.Button.Border" Color="#FF303030"/>
+    <SolidColorBrush x:Key="Brush.Button.Border.Hover" Color="#FF333B47"/>
+    <SolidColorBrush x:Key="Brush.Button.Border.Pressed" Color="#FF113854"/>
+    <SolidColorBrush x:Key="Brush.Button.Border.Focused" Color="#FF113E54"/>
+
+    <!--Button • Paypal-->
+    <SolidColorBrush x:Key="Brush.Button.Paypal.Background" Color="#70FFF8EB"/>
+    <SolidColorBrush x:Key="Brush.Button.Paypal.Background.Hover" Color="#80F9E7C3"/>
+    <SolidColorBrush x:Key="Brush.Button.Paypal.Background.Pressed" Color="#80EEB860"/>
+
+    <SolidColorBrush x:Key="Brush.Button.Paypal.Border" Color="#70FBDBA6"/>
+    <SolidColorBrush x:Key="Brush.Button.Paypal.Border.Hover" Color="#80EEB860"/>
+    <SolidColorBrush x:Key="Brush.Button.Paypal.Border.Pressed" Color="#80FFB437"/>
+
+    <SolidColorBrush x:Key="Brush.Button.Paypal.Foreground" Color="#FF143A61"/>
+
+    <!--ScrollBar-->
+    <SolidColorBrush x:Key="Brush.ScrollBar.Background" Color="#FF101010"/>
+    <SolidColorBrush x:Key="Brush.ScrollBar.Background.Back" Color="#FF202020"/>
+    <SolidColorBrush x:Key="Brush.ScrollBar.Background.Hover" Color="#FF303030"/>
+    <SolidColorBrush x:Key="Brush.ScrollBar.Background.Pressed" Color="#FF404040"/>
+    <SolidColorBrush x:Key="Brush.ScrollBar.Border" Color="#FF303030"/>
+    <SolidColorBrush x:Key="Brush.ScrollBar.Border.Hover" Color="#FF353535"/>
+    <SolidColorBrush x:Key="Brush.ScrollBar.Border.Pressed" Color="#FF454545"/>
+
+    <!--DataGrid-->
+    <SolidColorBrush x:Key="Brush.DataGrid.RowHeader.Background" Color="#FF21292B"/>
+    <SolidColorBrush x:Key="Brush.DataGrid.RowHeader.Background.Hovered" Color="#FF112E37"/>
+
+    <SolidColorBrush x:Key="Brush.DataGrid.Foreground.Selected" Color="#FF050505"/>
+    <SolidColorBrush x:Key="Brush.DataGrid.Background.Selected" Color="#FF5F5888"/>
+    <SolidColorBrush x:Key="Brush.DataGrid.Background.Alternation1" Color="#FF333333"/>
+    <SolidColorBrush x:Key="Brush.DataGrid.Background.Alternation2" Color="#FF2E2E2E"/>
+
+    <SolidColorBrush x:Key="Brush.DataGrid.Border" Color="#F0006185"/>
+
+    <SolidColorBrush x:Key="Brush.DataGrid.Header.Border" Color="#FF326181"/>
+
+    <SolidColorBrush x:Key="Brush.DataGrid.Header.Foreground" Color="#FF000000"/>
+    <SolidColorBrush x:Key="Brush.DataGrid.Header.Foreground.Hover" Color="#FFC2C2C2"/>
+    <SolidColorBrush x:Key="Brush.DataGrid.Header.Foreground.Pressed" Color="#FFC2C2C2"/>
+
+    <SolidColorBrush x:Key="Brush.DataGrid.Header.Background" Color="#FF376D90"/>
+    <SolidColorBrush x:Key="Brush.DataGrid.Header.Background.Hover" Color="#FF2C5772"/>
+    <SolidColorBrush x:Key="Brush.DataGrid.Header.Background.Pressed" Color="#FF203E51"/>
+
+    <SolidColorBrush x:Key="Brush.DataGrid.Header.Glyph" Color="Black"/>
+    <SolidColorBrush x:Key="Brush.DataGrid.Header.Glyph.Hover" Color="#FFC2C2C2"/>
+    <SolidColorBrush x:Key="Brush.DataGrid.Header.Glyph.Pressed" Color="#FFC2C2C2"/>
+
+    <!--MenuItem-->
+    <SolidColorBrush x:Key="Brush.MenuItem.Background.Hover" Color="#FF303030"/>
+    <SolidColorBrush x:Key="Brush.MenuItem.Border.Hover" Color="#FF303030"/>
+    <SolidColorBrush x:Key="Brush.MenuItem.Background.Pressed" Color="#FF404040"/>
+
+    <!--StatusBand-->
+    <SolidColorBrush x:Key="Brush.StatusBand.Info" Color="#60D4D4F8"/>
+    <SolidColorBrush x:Key="Brush.StatusBand.Warning" Color="#60FCF7B6"/>
+    <SolidColorBrush x:Key="Brush.StatusBand.Error" Color="#60F8D4D4"/>
+
+    <!--Hyperlink-->
+    <SolidColorBrush x:Key="Brush.Hyperlink" Color="#FF61618C"/>
+    <SolidColorBrush x:Key="Brush.Hyperlink.Hover" Color="#FF873B3B"/>
+    <SolidColorBrush x:Key="Brush.Hyperlink.Disabled" Color="#FF355A5A"/>
+
+    <!--ListBoxItem-->
+    <SolidColorBrush x:Key="Item.MouseOver.Background" Color="#1226A0DA"/>
+    <SolidColorBrush x:Key="Item.MouseOver.Border" Color="#6826A0DA"/>
+    <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="#2026A0DA"/>
+    <SolidColorBrush x:Key="Item.SelectedInactive.Border" Color="#3126A0DA"/>
+    <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="#3526A0DA"/>
+    <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="#E01D7DAA"/>
+
+    <!--ProgressBar-->
+    <SolidColorBrush x:Key="Brush.ProgressBar.Progress" Color="#FF035312"/>
+</ResourceDictionary>

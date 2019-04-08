@@ -414,12 +414,12 @@ namespace ScreenToGif.Model
         {
             try
             {
-                if (!UserSettings.All.AutomaticCleanUp || Global.IsCurrentlyDeletingFiles || string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder))
+                if (!UserSettings.All.AutomaticCleanUp || Global.IsCurrentlyDeletingFiles || string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolderResolved))
                     return;
 
                 Global.IsCurrentlyDeletingFiles = true;
 
-                var path = Path.Combine(UserSettings.All.TemporaryFolder, "ScreenToGif", "Recording");
+                var path = Path.Combine(UserSettings.All.TemporaryFolderResolved, "ScreenToGif", "Recording");
 
                 if (!Directory.Exists(path))
                     return;
@@ -450,13 +450,13 @@ namespace ScreenToGif.Model
 
         internal void CheckDiskSpace()
         {
-            if (string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder))
+            if (string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolderResolved))
                 return;
 
             try
             {
-                var isRelative = !string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder) && !Path.IsPathRooted(UserSettings.All.TemporaryFolder);
-                var drive = new DriveInfo((isRelative ? Path.GetFullPath(UserSettings.All.TemporaryFolder) : UserSettings.All.TemporaryFolder).Substring(0, 1));
+                var isRelative = !string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolderResolved) && !Path.IsPathRooted(UserSettings.All.TemporaryFolderResolved);
+                var drive = new DriveInfo((isRelative ? Path.GetFullPath(UserSettings.All.TemporaryFolderResolved) : UserSettings.All.TemporaryFolderResolved).Substring(0, 1));
 
                 Global.AvailableDiskSpacePercentage = drive.AvailableFreeSpace * 100d / drive.TotalSize; //Get the percentage of space left.
                 Global.AvailableDiskSpace = drive.AvailableFreeSpace;
@@ -478,10 +478,10 @@ namespace ScreenToGif.Model
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder))
+                if (string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolderResolved))
                     return;
 
-                var path = Path.Combine(UserSettings.All.TemporaryFolder, "ScreenToGif", "Feedback");
+                var path = Path.Combine(UserSettings.All.TemporaryFolderResolved, "ScreenToGif", "Feedback");
 
                 if (!Directory.Exists(path))
                     return;

@@ -110,5 +110,10 @@ namespace ScreenToGif.Windows.Other
         {
             MainDrawingCanvas.StrokeDashArray = MainDrawingCanvas.StrokeDashArray.Count == 0 ? new DoubleCollection() { 5 } : new DoubleCollection();
         }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            Environment.Exit(1);
+        }
     }
 }

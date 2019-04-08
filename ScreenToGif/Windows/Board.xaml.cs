@@ -61,15 +61,6 @@ namespace ScreenToGif.Windows
 
             //Load
             _capture.Tick += Normal_Elapsed;
-
-            #region Temporary folder
-
-            if (string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder))
-                UserSettings.All.TemporaryFolder = Path.GetTempPath();
-
-            //Project = new ProjectInfo().CreateProjectFolder();
-
-            #endregion
         }
 
         private void Board_OnLoaded(object sender, RoutedEventArgs e)
@@ -379,7 +370,7 @@ namespace ScreenToGif.Windows
 
         private void Normal_Elapsed(object sender, EventArgs e)
         {
-            string fileName = $"{Project.FullPath}{FrameCount}.png";
+            var fileName = $"{Project.FullPath}{FrameCount}.png";
 
             //TODO: GetRender fails to create useful image when the control has decimals values as size.
 

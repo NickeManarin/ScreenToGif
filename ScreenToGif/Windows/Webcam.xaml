@@ -5,7 +5,7 @@
                   xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
                   x:Class="ScreenToGif.Windows.Webcam" x:Name="WebcamWindow" 
                   Title="{DynamicResource Webcam.Title}" Height="400" Width="600" MinWidth="200" MinHeight="200" 
-                  Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen"
+                  Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" Background="{DynamicResource Panel.Background}"
                   Loaded="Window_Loaded" LocationChanged="Window_LocationChanged" Closing="Window_Closing">
 
     <Window.Resources>
@@ -13,7 +13,7 @@
         <c:StageToCanvas x:Key="StageToCanvasConverter"/>
         <c:KeysToString x:Key="KeysToStringConverter"/>
         <c:ShortcutKeys x:Key="ShortcutKeys"/>
-        
+
         <Storyboard x:Key="ShowDiscardStoryboard">
             <BooleanAnimationUsingKeyFrames Storyboard.TargetName="DiscardButton" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
                 <DiscreteBooleanKeyFrame Value="True" KeyTime="0:0:0"/>
@@ -47,7 +47,7 @@
             </DoubleAnimation>
         </Storyboard>
     </Window.Resources>
-    
+
     <Window.CommandBindings>
         <CommandBinding Command="u:Commands.Options" CanExecute="NotRecording_CanExecute" Executed="Options_Executed"/>
         <CommandBinding Command="u:Commands.CheckVideoDevices" CanExecute="NotRecording_CanExecute" Executed="CheckVideoDevices_Executed"/>
@@ -59,13 +59,13 @@
             <RowDefinition/>
             <RowDefinition Height="31"/>
         </Grid.RowDefinitions>
-        
-        <n:WebcamControl Grid.Row="0" x:Name="WebcamControl"/>
-        
-        <Label Grid.Row="0" x:Name="NoVideoLabel" Content="{DynamicResource Webcam.NoVideo}" Margin="0,0,0,36" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
-               Visibility="Hidden" FontSize="24" Foreground="#FF250B99" FontFamily="Segoe WP Light" Effect="{StaticResource Shadow.Foreground.Small}"/>
 
-        <Grid Grid.Row="1" x:Name="LowerGrid" Height="31" VerticalAlignment="Bottom" Background="White" UseLayoutRounding="True" SnapsToDevicePixels="True">
+        <n:WebcamControl Grid.Row="0" x:Name="WebcamControl"/>
+
+        <Label Grid.Row="0" x:Name="NoVideoLabel" Content="{DynamicResource Webcam.NoVideo}" Margin="0,0,0,36" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
+               Visibility="Hidden" FontSize="24" Foreground="{DynamicResource Element.Foreground.Header}" FontFamily="Segoe WP Light" Effect="{StaticResource Shadow.Foreground.Small}"/>
+
+        <Grid Grid.Row="1" x:Name="LowerGrid" Height="31" VerticalAlignment="Bottom" UseLayoutRounding="True" SnapsToDevicePixels="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="30"/>
                 <ColumnDefinition Width="26"/>
@@ -115,19 +115,19 @@
                 </n:ImageButton.ToolTip>
             </n:ImageButton>
 
-            <ComboBox Grid.Column="4" x:Name="VideoDevicesComboBox" SelectionChanged="VideoDevicesComboBox_SelectionChanged" MinWidth="120" Margin="0,3" TabIndex="2" IsEnabled="False"/>
+            <ComboBox Grid.Column="4" x:Name="VideoDevicesComboBox" MinWidth="120" Margin="0,3" TabIndex="2" IsEnabled="False" SelectionChanged="VideoDevicesComboBox_SelectionChanged"/>
 
             <Separator Grid.Column="5" Width="1" Margin="5,2"/>
 
             <Viewbox Grid.Column="6" ClipToBounds="True" Focusable="False">
-                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-4">
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-4" Opacity="{DynamicResource Element.Opacity}">
                     <n:CircularProgressBar StrokeThickness="2" Percentage="100" SegmentColor="Gray" Radius="24"/>
                     <n:CircularProgressBar StrokeThickness="22" Percentage="100" SegmentColor="#FFF0F1F1" Radius="10"/>
 
                     <n:CircularProgressBar StrokeThickness="2" Value="{Binding ElementName=FpsNumericUpDown, Path=Value, Mode=OneWay}" 
-                                               IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="24"/>
+                                           IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="24"/>
                     <n:CircularProgressBar StrokeThickness="22" Value="{Binding ElementName=FpsNumericUpDown, Path=Value, Mode=OneWay}" 
-                                               IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="10" />
+                                           IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="10" />
                 </Grid>
 
                 <Viewbox.ToolTip>
@@ -142,8 +142,7 @@
                 </n:IntegerUpDown.ToolTip>
             </n:IntegerUpDown>
 
-            <Label Grid.Column="8" Content="fps" FontSize="12" FontFamily="Segoe UI" Margin="1,0,0,0" VerticalContentAlignment="Center" Padding="0" 
-                   Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}"/>
+            <TextBlock Grid.Column="8" Text="fps" FontSize="12" FontFamily="Segoe UI" Margin="1,0,0,0" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
 
             <Separator Grid.Column="9" Width="1" Margin="5,2"/>
 
@@ -157,23 +156,23 @@
                            Content="{Binding Path=Stage, ElementName=WebcamWindow, Converter={StaticResource StageToCanvasConverter}, FallbackValue={StaticResource Vector.Record}}" 
 					       KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='1'}"
                            MaxSize="16" Click="RecordPauseButton_Click" Style="{StaticResource Style.Button.Horizontal}"/>
-            
+
             <n:ImageButton Grid.Column="12" x:Name="StopButton" Text="{DynamicResource Recorder.Stop}" Content="{StaticResource Vector.Stop}" MaxSize="16" Margin="0" 
                            Command="Stop" Style="{StaticResource Style.Button.Horizontal}" UseLayoutRounding="True" TabIndex="6"
                            KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='2'}"/>
         </Grid>
-        
+
         <Popup Grid.Row="0" x:Name="ScalePopup" Placement="Bottom" PlacementTarget="{Binding ElementName=ScaleButton}" StaysOpen="False" Width="200" Height="50">
-            <Border BorderThickness="1" BorderBrush="DarkSlateGray" Background="White">
+            <Border BorderThickness="1" BorderBrush="{DynamicResource Element.Border}" Background="{DynamicResource Panel.Background}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <Label Grid.Row="0" Content="{Binding ElementName=ScaleSlider, Path=Value}" ContentStringFormat="{DynamicResource Webcam.Scale}" Padding="2" Margin="5,0" Style="{StaticResource LabelSeparator}"/>
-                    
-                    <Slider Grid.Row="1" x:Name="ScaleSlider" Margin="5" Minimum="0.4" Maximum="1.5" Value="0.5" LargeChange="0.1" TickFrequency="0.1" TickPlacement="None" ValueChanged="Slider_ValueChanged"/>
+                    <n:LabelSeparator Grid.Row="0" Text="{Binding ElementName=ScaleSlider, Path=Value, StringFormat={StaticResource Webcam.Scale}}"/>
+
+                    <Slider Grid.Row="1" x:Name="ScaleSlider" Margin="5,3" Minimum="0.4" Maximum="1.5" Value="0.5" LargeChange="0.1" TickFrequency="0.1" TickPlacement="None" ValueChanged="Slider_ValueChanged"/>
                 </Grid>
             </Border>
         </Popup>

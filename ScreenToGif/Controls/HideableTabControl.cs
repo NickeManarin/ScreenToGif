@@ -248,10 +248,16 @@ namespace ScreenToGif.Controls
 
             //Update the buttons.
             if (_notificationButton != null)
-                _notificationButton.DarkMode = !darkForeground && UserSettings.All.EditorExtendChrome;
+            {
+                _notificationButton.DarkMode = !darkForeground;
+                _notificationButton.IsOverNonClientArea = UserSettings.All.EditorExtendChrome;
+            }
             
             if (_extrasMenuItem != null)
-                _extrasMenuItem.DarkMode = !darkForeground && UserSettings.All.EditorExtendChrome;
+            {
+                _extrasMenuItem.DarkMode = !darkForeground;
+                _extrasMenuItem.IsOverNonClientArea = UserSettings.All.EditorExtendChrome;
+            }
         }
 
         public void UpdateNotifications()

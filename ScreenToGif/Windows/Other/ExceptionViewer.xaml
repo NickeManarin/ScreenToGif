@@ -4,8 +4,8 @@
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         Title="{DynamicResource ExceptionViewer.Title}" WindowStartupLocation="CenterScreen" 
         UseLayoutRounding="True" Topmost="True" SnapsToDevicePixels="True"
-        MinWidth="640" MinHeight="490" Width="640" Height="490">
-    
+        MinWidth="640" MinHeight="490" Width="640" Height="490" Background="{DynamicResource Panel.Background}">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -15,17 +15,17 @@
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Background="#FFF9F9FF">
+        <Grid Grid.Row="0" Background="{DynamicResource Panel.Background.Level4}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Viewbox Grid.Column="0" Margin="4" Child="{StaticResource Vector.Error}"/>
+            <Viewbox Grid.Column="0" Margin="4" Child="{StaticResource Vector.Error}" Opacity="{DynamicResource Element.Opacity}"/>
 
             <Label Grid.Column="1" x:Name="TypeLabel" Content="Exception Type" Margin="5" VerticalContentAlignment="Center" 
-                   FontFamily="Segoe UI Semilight" FontSize="16" Foreground="#FF003399">
+                   FontFamily="Segoe UI Semilight" FontSize="16" Foreground="{DynamicResource Element.Foreground.Header}">
                 <Label.ToolTip>
                     <ToolTip Content="Exception Type" Placement="Top" HorizontalOffset="-5"/>
                 </Label.ToolTip>
@@ -55,7 +55,7 @@
             </TextBox.ToolTip>
         </TextBox>
 
-        <Grid Grid.Row="4" Background="WhiteSmoke">
+        <Grid Grid.Row="4" Background="{DynamicResource Panel.Background.Level3}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="Auto"/>

@@ -57,7 +57,7 @@ namespace ScreenToGif.Model
         /// <summary>
         /// The full path of project based on current settings.
         /// </summary>
-        public string FullPath => Path.Combine(UserSettings.All.TemporaryFolder, "ScreenToGif", "Recording", RelativePath);
+        public string FullPath => Path.Combine(UserSettings.All.TemporaryFolderResolved, "ScreenToGif", "Recording", RelativePath);
 
         /// <summary>
         /// Full path to the serialized project file. 
@@ -93,9 +93,6 @@ namespace ScreenToGif.Model
 
         public ProjectInfo CreateProjectFolder(ProjectByType creator)
         {
-            //Check if the parameter exists.
-            if (string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder))
-                UserSettings.All.TemporaryFolder = Path.GetTempPath();
 
             IsNew = true;
             RelativePath = DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + Path.DirectorySeparatorChar;

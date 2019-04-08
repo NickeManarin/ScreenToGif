@@ -4,7 +4,7 @@
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         xmlns:u="clr-namespace:ScreenToGif.Util"
         Title="{DynamicResource S.AutomatedTasks.Title}" Width="350" Height="400" MinWidth="300" MinHeight="300" 
-        WindowStartupLocation="CenterScreen" SnapsToDevicePixels="True" Loaded="Window_Loaded">
+        WindowStartupLocation="CenterScreen" SnapsToDevicePixels="True" Background="{DynamicResource Panel.Background}" Loaded="Window_Loaded">
 
     <Window.CommandBindings>
         <CommandBinding Command="u:Commands.OkAction" CanExecute="Ok_CanExecute" Executed="Ok_Executed"/>
@@ -17,30 +17,31 @@
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Background="#FFF9F9FF">
+        <Grid Grid.Row="0" Background="{DynamicResource Panel.Background.Level4}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Viewbox Grid.Column="0" x:Name="MainViewbox" Margin="6" Child="{StaticResource Vector.Add}"/>
+            <Viewbox Grid.Column="0" x:Name="MainViewbox" Margin="6" Child="{StaticResource Vector.Add}" Opacity="{DynamicResource Element.Opacity}"/>
 
             <TextBlock Grid.Column="1" x:Name="TypeTextBlock" Text="{DynamicResource S.Add}" Margin="5" VerticalAlignment="Center" 
-                       FontFamily="Segoe UI Semilight" FontSize="18" Foreground="#FF003399"/>
+                       FontFamily="Segoe UI Semilight" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
             
             <ComboBox Grid.Column="2" x:Name="TypeComboBox" Margin="5,3" SelectedIndex="0" SelectionChanged="TypeComboBox_Selected">
                 <ComboBoxItem Content="{DynamicResource S.AutomatedTasks.SelectType}"/>
                 <ComboBoxItem Content="{DynamicResource S.MouseClicks}"/>
                 <ComboBoxItem Content="{DynamicResource S.KeyStrokes}"/>
+                <ComboBoxItem Content="{DynamicResource S.DelayUpdate}"/>
             </ComboBox>
         </Grid>
 
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <ContentControl  x:Name="MainPresenter"/>
+            <ContentControl x:Name="MainPresenter" Focusable="False"/>
         </ScrollViewer>
-        
-        <Grid Grid.Row="2" Background="WhiteSmoke">
+
+        <Grid Grid.Row="2" Background="{DynamicResource Panel.Background.Level3}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="Auto" MinWidth="100"/>

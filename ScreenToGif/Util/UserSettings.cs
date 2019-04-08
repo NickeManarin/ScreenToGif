@@ -549,7 +549,7 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
-        public bool CheckForUpdates 
+        public bool CheckForUpdates
         {
             get => (bool)GetValue();
             set => SetValue(value);
@@ -558,6 +558,12 @@ namespace ScreenToGif.Util
         #endregion
 
         #region Options • Interface
+
+        public AppTheme MainTheme
+        {
+            get => (AppTheme)GetValue();
+            set => SetValue(value);
+        }
 
         public Color GridColor1
         {
@@ -792,6 +798,17 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public string TemporaryFolderResolved
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(TemporaryFolder))
+                    TemporaryFolder = "%temp%";
+
+                return Environment.ExpandEnvironmentVariables(TemporaryFolder);
+            }
+        }
+
         public bool AutomaticCleanUp
         {
             get => (bool)GetValue();
@@ -811,7 +828,7 @@ namespace ScreenToGif.Util
         //Proxy
         public ProxyType ProxyMode
         {
-            get => (ProxyType)GetValue(defaultValue:ProxyType.Disabled);
+            get => (ProxyType)GetValue(defaultValue: ProxyType.Disabled);
             set => SetValue(value);
         }
 
@@ -1271,7 +1288,7 @@ namespace ScreenToGif.Util
             get => (string)GetValue();
             set => SetValue(value);
         }
-        
+
         public bool IsTitleFrameFontGroupExpanded
         {
             get => (bool)GetValue();
@@ -1522,6 +1539,12 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public string ProgressDateFormat
+        {
+            get => (string)GetValue();
+            set => SetValue(value);
+        }
+
         public double ProgressThickness
         {
             get => (double)GetValue();
@@ -1661,10 +1684,10 @@ namespace ScreenToGif.Util
         }
 
         #endregion
-        
+
 
         #region Editor
-        
+
         #region Save As
 
         //Type and encoder.
@@ -1727,7 +1750,7 @@ namespace ScreenToGif.Util
             get => (bool)GetValue();
             set => SetValue(value);
         }
-        
+
         //Gif.
         public int Quality
         {
@@ -2203,7 +2226,7 @@ namespace ScreenToGif.Util
         }
 
         #endregion
-        
+
 
 
         #region Watermark
@@ -2344,43 +2367,43 @@ namespace ScreenToGif.Util
 
         public int ScaleDelay
         {
-           get => (int)GetValue();
-           set => SetValue(value);
+            get => (int)GetValue();
+            set => SetValue(value);
         }
 
-      #endregion
+        #endregion
 
-      #endregion
+        #endregion
 
 
 
-      #region Obsolete
+        #region Obsolete
 
-      [Obsolete]
+        [Obsolete]
         public Color ClickColor
         {
-            get => (Color)(GetValue() ?? Color.FromRgb(0,0,0));
+            get => Color.FromRgb(0, 0, 0);
             set => SetValue(value);
         }
 
         [Obsolete]
         public bool FullScreenMode
         {
-            get => (bool)GetValue();
+            get => false;
             set => SetValue(value);
         }
 
         [Obsolete]
         public string ExtraParametersGifski
         {
-            get => (string)GetValue();
+            get => "";
             set => SetValue(value);
         }
 
         [Obsolete]
         public int LatestUploadIndex
         {
-            get => (int)GetValue();
+            get => 0;
             set => SetValue(value);
         }
 

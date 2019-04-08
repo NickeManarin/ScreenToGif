@@ -7,7 +7,8 @@
              xmlns:u="clr-namespace:ScreenToGif.Util"
              xmlns:cm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
-             mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="300">
+             mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="300"
+             SnapsToDevicePixels="True">
     
     <Grid>
         <Grid.RowDefinitions>
@@ -28,7 +29,7 @@
 
             <DataTemplate x:Key="FontTemplate">
                 <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
-                    <TextBlock FontFamily="{Binding .}" FontSize="16" Text="{Binding .}" ToolTip="{Binding Path=.Source}" />
+                    <TextBlock FontFamily="{Binding .}" FontSize="16" Text="{Binding .}" ToolTip="{Binding Path=.Source}"/>
                 </VirtualizingStackPanel>
             </DataTemplate>
         </Grid.Resources>
@@ -59,7 +60,7 @@
 
                 <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" Margin="10,0,0,0" 
                             Visibility="{Binding KeyStrokesExtended, Converter={StaticResource Bool2Visibility}}">
-                    <Label Content="{DynamicResource KeyStrokes.By}" VerticalAlignment="Center" Padding="0"/>
+                    <TextBlock Text="{DynamicResource KeyStrokes.By}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                     <n:IntegerUpDown Minimum="10" Maximum="1000" Margin="5" MinWidth="70" Value="{Binding KeyStrokesDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
 
@@ -68,13 +69,12 @@
 
                 <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" Margin="10,0,0,0" 
                             Visibility="{Binding KeyStrokesEarlier, Converter={StaticResource Bool2Visibility}}">
-                    <Label Content="{DynamicResource KeyStrokes.By}" VerticalAlignment="Center" Padding="0"/>
+                    <TextBlock Text="{DynamicResource KeyStrokes.By}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                     <n:IntegerUpDown Minimum="10" Maximum="1000" Margin="5" MinWidth="70" Value="{Binding KeyStrokesEarlierBy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
 
-                <Label Grid.Row="6" Grid.Column="0" Content="{DynamicResource KeyStrokes.Separator}" VerticalAlignment="Center" Padding="0"/>
-                <n:ExtendedTextBox Grid.Row="6" Grid.Column="1" Margin="5,3" MinWidth="70"
-                                   Text="{Binding KeyStrokesSeparator, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Grid.Row="6" Grid.Column="0" Text="{DynamicResource KeyStrokes.Separator}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                <n:ExtendedTextBox Grid.Row="6" Grid.Column="1" Margin="5,3" MinWidth="70" Text="{Binding KeyStrokesSeparator, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
         </Expander>
 
@@ -93,7 +93,7 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Family}" VerticalAlignment="Center" Padding="0"/>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource Caption.Family}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                 <ComboBox Grid.Row="0" Grid.Column="1" Margin="10,5" MinWidth="100" MaxWidth="150" IsEditable="True"
                           ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding KeyStrokesFontFamily, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <ComboBox.ItemsSource>
@@ -107,7 +107,7 @@
                     </ComboBox.ItemsPanel>
                 </ComboBox>
 
-                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Style}" VerticalAlignment="Center" Padding="0"/>
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource Caption.Style}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                 <ComboBox Grid.Row="1" Grid.Column="1" Margin="10,5" MinWidth="100" SelectedValuePath="FontStyle" 
                           SelectedValue="{Binding KeyStrokesFontStyle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <ComboBox.ItemTemplate>
@@ -123,7 +123,7 @@
                     <TextBlock FontStyle="Oblique" Text="{DynamicResource S.FontStyles.Oblique}"/>
                 </ComboBox>
 
-                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Caption.Weight}" VerticalAlignment="Center" Padding="0"/>
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource Caption.Weight}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                 <ComboBox Grid.Row="2" Grid.Column="1" Margin="10,5" MinWidth="100" SelectedValuePath="FontWeight" 
                           SelectedValue="{Binding KeyStrokesFontWeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <ComboBox.ItemTemplate>
@@ -152,11 +152,11 @@
                     <TextBlock FontWeight="UltraBlack" Text="{DynamicResource S.FontWeights.UltraBlack}"/>
                 </ComboBox>
 
-                <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Caption.Size}" VerticalAlignment="Center" Padding="0"/>
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource Caption.Size}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                 <n:IntegerUpDown Grid.Row="3" Grid.Column="1" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
                                  Value="{Binding KeyStrokesFontSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="{DynamicResource Caption.Color}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                 <n:ColorBox Grid.Row="4" Grid.Column="1" SelectedColor="{Binding KeyStrokesFontColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10,5"/>
             </Grid>
         </Expander>
@@ -174,14 +174,14 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Thickness}" VerticalAlignment="Center" Padding="0"/>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource Caption.Thickness}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                 <n:IntegerUpDown Grid.Row="0" Grid.Column="1" Minimum="0" Maximum="20" Margin="10,5" MinWidth="70" 
                                  Value="{Binding KeyStrokesOutlineThickness, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Color}" VerticalAlignment="Center" Padding="0"/>
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource Caption.Color}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                 <n:ColorBox Grid.Row="1" Grid.Column="1" SelectedColor="{Binding KeyStrokesOutlineColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10,5"/>
 
-                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource Background}" VerticalAlignment="Center" Padding="0"/>
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource Background}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                 <n:ColorBox Grid.Row="2" Grid.Column="1" SelectedColor="{Binding KeyStrokesBackgroundColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10,5"/>
             </Grid>
         </Expander>
@@ -199,7 +199,7 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource Caption.Vertical}" VerticalAlignment="Center" Padding="0"/>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource Caption.Vertical}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                 <ComboBox Grid.Row="0" Grid.Column="1" Margin="10,5" MinWidth="100" MaxWidth="150" SelectedValuePath="VerticalAlignment" 
                           SelectedValue="{Binding KeyStrokesVerticalAligment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
@@ -209,7 +209,7 @@
                     <TextBlock VerticalAlignment="Stretch" Text="{DynamicResource S.Alignment.Stretch}"/>
                 </ComboBox>
 
-                <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource Caption.Horizontal}" VerticalAlignment="Center" Padding="0"/>
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource Caption.Horizontal}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                 <ComboBox Grid.Row="1" Grid.Column="1" Margin="10,5" MinWidth="100" MaxWidth="150" SelectedValuePath="HorizontalAlignment" 
                           SelectedValue="{Binding KeyStrokesHorizontalAligment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
@@ -219,11 +219,11 @@
                     <TextBlock HorizontalAlignment="Stretch" Text="{DynamicResource S.Alignment.Stretch}"/>
                 </ComboBox>
 
-                <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource String.Margin}" VerticalAlignment="Center" Padding="0"/>
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource String.Margin}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                 <n:IntegerUpDown Grid.Row="2" Grid.Column="1" Minimum="-100" Maximum="100" Margin="10,5" MinWidth="70" 
                                  Value="{Binding KeyStrokesMargin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource String.Padding}" VerticalAlignment="Center" Padding="0"/>
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource String.Padding}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                 <n:IntegerUpDown Grid.Row="3" Grid.Column="1" Minimum="0" Maximum="100" Margin="10,5" MinWidth="70" 
                                  Value="{Binding KeyStrokesPadding, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>

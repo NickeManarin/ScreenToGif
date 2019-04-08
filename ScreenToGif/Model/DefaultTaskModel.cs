@@ -11,9 +11,10 @@ namespace ScreenToGif.Model
             NotDeclared = 0,
             MouseClicks = 1,
             KeyStrokes = 2,
-            ProgressBar = 3,
-            RemoveDuplicates = 4,
-            Watermark = 5
+            Delay = 3,
+            ProgressBar = 4,
+            RemoveDuplicates = 5,
+            Watermark = 6,
         }
 
         private TaskTypeEnum _taskType = TaskTypeEnum.NotDeclared;
@@ -36,6 +37,8 @@ namespace ScreenToGif.Model
                         return LocalizationHelper.Get("Editor.Image.Clicks", true);
                     case TaskTypeEnum.KeyStrokes:
                         return LocalizationHelper.Get("Editor.Image.KeyStrokes", true);
+                    case TaskTypeEnum.Delay:
+                        return LocalizationHelper.Get("S.DelayUpdate", true);
                 }
 
                 return "";

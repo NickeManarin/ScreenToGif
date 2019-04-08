@@ -374,8 +374,88 @@ namespace ScreenToGif.Controls
                 Accept();
 
             e.Handled = true;
-
             base.OnPreviewKeyDown(e);
+
+            if (Mode != ModeType.Region || Selected.IsEmpty)
+                return;
+
+            //Control + Shift: Expand both ways.
+            if ((Keyboard.Modifiers & ModifierKeys.Control) != 0 && (Keyboard.Modifiers & ModifierKeys.Shift) != 0)
+            {
+                switch (e.Key)
+                {
+                    case Key.Up:
+                        HandleBottom(_bottom, new DragDeltaEventArgs(0, 1));
+                        HandleTop(_top, new DragDeltaEventArgs(0, -1));
+                        break;
+                    case Key.Down:
+                        HandleBottom(_bottom, new DragDeltaEventArgs(0, -1));
+                        HandleTop(_top, new DragDeltaEventArgs(0, 1));
+                        break;
+                    case Key.Left:
+                        HandleRight(_right, new DragDeltaEventArgs(-1, 0));
+                        HandleLeft(_left, new DragDeltaEventArgs(1, 0));
+                        break;
+                    case Key.Right:
+                        HandleRight(_right, new DragDeltaEventArgs(1, 0));
+                        HandleLeft(_left, new DragDeltaEventArgs(-1, 0));
+                        break;
+                }
+            }
+            else if ((Keyboard.Modifiers & ModifierKeys.Shift) != 0) //If the Shift key is pressed, the sizing mode is enabled (bottom right).
+            {
+                switch (e.Key)
+                {
+                    case Key.Up:
+                        HandleBottom(_bottom, new DragDeltaEventArgs(0, -1));
+                        break;
+                    case Key.Down:
+                        HandleBottom(_bottom, new DragDeltaEventArgs(0, 1));
+                        break;
+                    case Key.Left:
+                        HandleRight(_right, new DragDeltaEventArgs(-1, 0));
+                        break;
+                    case Key.Right:
+                        HandleRight(_right, new DragDeltaEventArgs(1, 0));
+                        break;
+                }
+            }
+            else if ((Keyboard.Modifiers & ModifierKeys.Control) != 0) //If the Control key is pressed, the sizing mode is enabled (top left).
+            {
+                switch (e.Key)
+                {
+                    case Key.Up:
+                        HandleTop(_top, new DragDeltaEventArgs(0, -1));
+                        break;
+                    case Key.Down:
+                        HandleTop(_top, new DragDeltaEventArgs(0, 1));
+                        break;
+                    case Key.Left:
+                        HandleLeft(_left, new DragDeltaEventArgs(-1, 0));
+                        break;
+                    case Key.Right:
+                        HandleLeft(_left, new DragDeltaEventArgs(1, 0));
+                        break;
+                }
+            }
+            else
+            {
+                switch (e.Key) //If no other key is pressed, the movement mode is enabled.
+                {
+                    case Key.Up:
+                        HandleCenter(new DragDeltaEventArgs(0, -1));
+                        break;
+                    case Key.Down:
+                        HandleCenter(new DragDeltaEventArgs(0, 1));
+                        break;
+                    case Key.Left:
+                        HandleCenter(new DragDeltaEventArgs(-1, 0));
+                        break;
+                    case Key.Right:
+                        HandleCenter(new DragDeltaEventArgs(1, 0));
+                        break;
+                }
+            }
         }
 
         #endregion
@@ -829,7 +909,7 @@ namespace ScreenToGif.Controls
                     Child = new TextPath
                     {
                         IsHitTestVisible = false,
-                        Text = LocalizationHelper.Get("S.Recorder.SelectArea"),
+                        Text = LocalizationHelper.Get("S.Recorder.SelectArea.Embedded"),
                         Fill = new SolidColorBrush(Color.FromArgb(200, 0, 0, 0)),
                         Stroke = new SolidColorBrush(Color.FromArgb(200, 255, 255, 255)),
                         StrokeThickness = 1.6,
@@ -1132,7 +1212,7 @@ namespace ScreenToGif.Controls
         {
             if (Mode != ModeType.Region || !_rectangle.IsMouseCaptured || e.LeftButton != MouseButtonState.Pressed) return;
 
-            //A quick double click will fire this event, whe it should fire the OnMouseLeftButtonUp.
+            //A quick double click will fire this event, when it should fire the OnMouseLeftButtonUp.
             if (Selected.IsEmpty || Selected.Width < 10 || Selected.Height < 10)
                 return;
 
@@ -1423,6 +1503,41 @@ namespace ScreenToGif.Controls
                 height = ActualHeight - Selected.Top;
 
             Selected = new Rect(Selected.Left, Selected.Top, Selected.Width, height);
+
+            var point = Mouse.GetPosition(this);
+
+            AdjustThumbs();
+            AdjustStatusControls(point);
+            DetectBlindSpots();
+            AdjustInfo(point);
+        }
+
+        /// <summary>
+        /// Handler for moving the selection.
+        /// </summary>
+        private void HandleCenter(DragDeltaEventArgs e)
+        {
+            e.Handled = true;
+
+            var sel = new Rect(Selected.Left + e.HorizontalChange, Selected.Top + e.VerticalChange, Selected.Width, Selected.Height);
+
+            #region Limit the drag to inside the bounds
+
+            if (sel.Left < 0)
+                sel.X = 0;
+
+            if (sel.Top < 0)
+                sel.Y = 0;
+
+            if (sel.Right > ActualWidth)
+                sel.X = ActualWidth - sel.Width;
+
+            if (sel.Bottom > ActualHeight)
+                sel.Y = ActualHeight - sel.Height;
+
+            #endregion
+
+            Selected = new Rect(sel.Left, sel.Top, sel.Width, sel.Height);
 
             var point = Mouse.GetPosition(this);
 

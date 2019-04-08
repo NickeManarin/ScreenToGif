@@ -6,11 +6,13 @@
         xmlns:t="clr-namespace:ScreenToGif"
         xmlns:h="clr-namespace:ScreenToGif.Controls.Shapes"
         x:Class="ScreenToGif.Windows.Other.TestField" x:Name="ThisWindow"
-        Title="Window Test" Height="500" Width="400" WindowStartupLocation="CenterScreen" Background="#FFFFFFFF" 
-        Loaded="WindowTest_OnLoaded" LocationChanged="WindowTest_OnLocationChanged">
+        Title="Window Test" Height="200" Width="400" WindowStartupLocation="CenterScreen" Background="{DynamicResource Panel.Background}" 
+        Loaded="WindowTest_OnLoaded" LocationChanged="WindowTest_OnLocationChanged" Closed="Window_Closed" SnapsToDevicePixels="True">
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
@@ -48,5 +50,74 @@
         <n:DrawingCanvas Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" x:Name="MainDrawingCanvas" DrawingMode="Select">
             <!--<h:Triangle x:Name="TestTriangle" Height="100" Width="100" Stroke="Black" StrokeThickness="5" Canvas.Left="100" Canvas.Top="100"/>-->
         </n:DrawingCanvas>
+
+        <!--<Viewbox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
+            <StackPanel>
+                <RadioButton Content="Abc" IsChecked="True" IsEnabled="True" ToolTip="Hello, how are you?"/>
+                <RadioButton Content="Def" IsEnabled="True" ToolTip=""/>
+            </StackPanel>
+        </Viewbox>-->
+
+        <!--<n:StatusBand Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Visibility="Visible" Type="Warning" Text="Example"/>-->
+
+        <DataGrid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="2" HeadersVisibility="All" SelectedIndex="0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="LALALA" Width="100" IsReadOnly="True" Binding="{Binding Tag}" CellStyle="{StaticResource Style.Cell.Center}" HeaderStyle="{StaticResource Style.Header.Center}"/>
+                <DataGridTextColumn Header="LILILI" Width="100" IsReadOnly="True" Binding="{Binding Content}"/>
+                <DataGridTextColumn Header="LALALA" Width="100" IsReadOnly="True" Binding="{Binding Width}" CellStyle="{StaticResource Style.Cell.Right}" HeaderStyle="{StaticResource Style.Header.Right}"/>
+            </DataGrid.Columns>
+
+            <Label Content="LALA" Tag="Hello" Width="20"/>
+            <Label Content="LILI" Tag="Hello 2" Width="10"/>
+        </DataGrid>
+
+        <!--<n:ImageButton Grid.Row="2" Grid.Column="0" Margin="3" Content="{StaticResource Vector.Ok}" Style="{StaticResource Style.Button.Vertical.Border}" ContentHeight="20" ContentWidth="20"/>
+        <n:ImageButton Grid.Row="2" Grid.Column="1" Margin="3" Content="{StaticResource Vector.Ok}" Style="{StaticResource Style.Button.Vertical.Border}" ContentHeight="20" ContentWidth="20" IsEnabled="False"/>
+        <n:ImageButton Grid.Row="2" Grid.Column="2" Margin="3" Content="{StaticResource Vector.Ok}" ContentHeight="20" ContentWidth="20" KeyGesture="Ctrl + Z"/>-->
+
+        <!--<Menu Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
+            <n:ImageMenuItem Header="TopLevel" InputGestureText="Ctrl">
+                <n:ImageMenuItem Header="Sub" InputGestureText="Ctrl + Z" Image="{StaticResource Vector.Add}">
+                    <n:ImageMenuItem Header="SubSub" InputGestureText="Ctrl + A"/>
+                    <n:ImageMenuItem Header="SubSub" InputGestureText="Ctrl + A"/>
+                    <n:ImageMenuItem Header="SubSub" InputGestureText="Ctrl + A"/>
+                </n:ImageMenuItem>
+
+                <n:ImageMenuItem Header="Sub" InputGestureText="Ctrl + Z">
+                    <n:ImageMenuItem Header="SubSub" InputGestureText="Ctrl + A"/>
+                    <n:ImageMenuItem Header="SubSub" InputGestureText="Ctrl + A"/>
+                    <n:ImageMenuItem Header="SubSub" InputGestureText="Ctrl + A"/>
+                </n:ImageMenuItem>
+
+                <n:ImageMenuItem Header="Sub" InputGestureText="Ctrl + A" Image="{StaticResource Vector.Add}"/>
+                <n:ImageMenuItem Header="Sub" InputGestureText="Ctrl + A"/>
+            </n:ImageMenuItem>
+
+            <n:ImageMenuItem Header="TopLevel"/>
+            <n:ImageMenuItem Header="TopLevel"/>
+        </Menu>-->
+
+        <!--<n:ImageButton Grid.Row="3" Grid.Column="0" Margin="5" Content="{StaticResource Vector.Save}" ContentHeight="20" Style="{StaticResource Style.Button.Horizontal.Fade}"/>
+        <n:ImageButton Grid.Row="3" Grid.Column="1" Margin="5" Content="{StaticResource Vector.Save}" ContentHeight="20" Style="{StaticResource Style.Button.Horizontal.Fade}"/>
+        <n:ImageButton Grid.Row="3" Grid.Column="2" Margin="5" Content="{StaticResource Vector.Save}" ContentHeight="20" IsEnabled="False" Style="{StaticResource Style.Button.Horizontal.Fade}"/>-->
+
+        <!--<n:ImageToggleButton Grid.Row="3" Grid.Column="0" Margin="5" Content="{StaticResource Vector.Save}" ContentHeight="20" />
+        <n:ImageToggleButton Grid.Row="3" Grid.Column="1" Margin="5" Content="{StaticResource Vector.Save}" ContentHeight="20" Style="{StaticResource Style.ToggleButton.NoBorder}"/>
+        <n:ImageToggleButton Grid.Row="3" Grid.Column="2" Margin="5" Content="{StaticResource Vector.Save}" ContentHeight="20" IsEnabled="False" Style="{StaticResource Style.ToggleButton.NoBorder}"/>-->
+
+        <ComboBox Grid.Row="2" Grid.Column="0" Margin="10,5" MinWidth="100" MaxWidth="150" IsEditable="True" SelectedIndex="0">
+            <ComboBoxItem Content="ABC"/>
+            <ComboBoxItem Content="DEF"/>
+        </ComboBox>
+
+        <ComboBox Grid.Row="2" Grid.Column="1" Margin="10,5" MinWidth="100" MaxWidth="150" IsEditable="True" IsEnabled="False" SelectedIndex="0">
+            <ComboBoxItem Content="ABC"/>
+            <ComboBoxItem Content="DEF"/>
+        </ComboBox>
+
+        <ComboBox Grid.Row="2" Grid.Column="2" Margin="10,5" MinWidth="100" MaxWidth="150" IsEditable="False" IsEnabled="True" SelectedIndex="0">
+            <ComboBoxItem Content="ABC"/>
+            <ComboBoxItem Content="DEF"/>
+        </ComboBox>
     </Grid>
 </Window>

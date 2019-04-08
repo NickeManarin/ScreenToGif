@@ -79,12 +79,12 @@
     <s:String x:Key="Interface.Background">Bakgrund</s:String>
     <s:String x:Key="Interface.Foreground">Förgrund</s:String>
     <s:String x:Key="Interface.BoardBackground">Notis Baakgrund</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme">Färg schema</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.VeryLight">Mycket Ljus</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Light">Ljus</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Medium">Medium</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Dark">Mörk</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Custom">Egen</s:String>
+    <s:String x:Key="Interface.Theme.Scheme">Färg schema</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.VeryLight">Mycket Ljus</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Light">Ljus</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Medium">Medium</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Dark">Mörk</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Custom">Egen</s:String>
     
     <s:String x:Key="Interface.EditorBackground.GridSize">Rutnätsstorlek</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.VerySmall">Väldigt liten</s:String>

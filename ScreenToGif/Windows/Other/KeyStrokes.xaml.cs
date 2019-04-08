@@ -23,7 +23,7 @@ namespace ScreenToGif.Windows.Other
                 return;
 
             KeysDataGrid.ItemsSource = InternalList;
-            KeysDataGrid.SelectedIndex = 0;
+            KeysDataGrid.FocusOnFirstCell();
         }
 
         private void RemoveButton_OnMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)

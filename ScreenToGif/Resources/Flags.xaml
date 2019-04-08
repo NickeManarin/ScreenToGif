@@ -1,6 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <Canvas x:Shared="False" x:Key="Flag.White" HorizontalAlignment="Center" Height="12.5" UseLayoutRounding="False" VerticalAlignment="Center" Width="20">
+        <Path Data="F1M0,12.5 L20,12.5 20,0 0,0z" Fill="#FFFEFEFE" Height="12.5" Canvas.Left="0" Canvas.Top="0" Width="20"/>
+    </Canvas>
+
     <Canvas x:Shared="False" x:Key="Flag.Brazil" Height="147" UseLayoutRounding="False" Width="207"  HorizontalAlignment="Center" VerticalAlignment="Center">
         <Path Data="F1M205.827,144.117L205.827,0.125 0.125,0.125 0.125,144.117z" Fill="#FF3DB84E" Height="144.241" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="2.379" Width="205.952"/>
         <Path Data="F1M85.6,0.148L171.293,54.659 85.926,108.827 0.234,54.659z" Fill="#FFFCE136" Height="108.976" Canvas.Left="17.213" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="19.837" Width="171.525"/>

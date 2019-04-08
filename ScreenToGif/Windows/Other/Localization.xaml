@@ -5,8 +5,8 @@
         xmlns:util="clr-namespace:ScreenToGif.Util"
         xmlns:v="clr-namespace:ScreenToGif.Util.Converters"
         Title="{DynamicResource Localization}" MinHeight="300" MinWidth="500" MaxHeight="500" SizeToContent="WidthAndHeight"
-        Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterOwner"
-        SnapsToDevicePixels="True" Loaded="Localization_OnLoaded">
+        Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterOwner" SnapsToDevicePixels="True" 
+        Background="{DynamicResource Panel.Background}" Loaded="Localization_OnLoaded">
 
     <Window.Resources>
         <v:RoutedCommandToInputGestureTextConverter x:Key="CommandToInputGestureTextConverter"/>
@@ -71,13 +71,13 @@
                            ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-5"/>
         </Grid>
 
-        <Grid Grid.Row="2" Background="WhiteSmoke" UseLayoutRounding="False">
+        <Grid Grid.Row="2" Background="{DynamicResource Panel.Background.Level3}" UseLayoutRounding="False">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" TextAlignment="Center" VerticalAlignment="Center" FontSize="13" Foreground="#FF003399" Margin="0">
+            <TextBlock Grid.Column="0" TextAlignment="Center" VerticalAlignment="Center" FontSize="13" Foreground="{DynamicResource Element.Foreground.Header}" Margin="0">
                 <Run Text="{DynamicResource Localization.ResourcePositionUsed}"/><LineBreak/>
                 <Run Text="{DynamicResource Localization.MoveRosourcePosition}"/>
             </TextBlock>

@@ -55,6 +55,9 @@ namespace ScreenToGif.Windows.Other
                     case DefaultTaskModel.TaskTypeEnum.KeyStrokes:
                         CurrentTask = KeyStrokesModel.Default();
                         break;
+                    case DefaultTaskModel.TaskTypeEnum.Delay:
+                        CurrentTask = DelayModel.Default();
+                        break;
                 }
             }
 
@@ -66,6 +69,9 @@ namespace ScreenToGif.Windows.Other
                 case DefaultTaskModel.TaskTypeEnum.KeyStrokes:
                     MainPresenter.Content = new KeyStrokesPanel { DataContext = CurrentTask };
                     break;
+                case DefaultTaskModel.TaskTypeEnum.Delay:
+                    MainPresenter.Content = new DelayPanel { DataContext = CurrentTask };
+                    break;
             }
         }
 
@@ -76,6 +82,8 @@ namespace ScreenToGif.Windows.Other
 
         private void Ok_Executed(object sender, RoutedEventArgs e)
         {
+            OkButton.Focus();
+
             DialogResult = true;
         }
 

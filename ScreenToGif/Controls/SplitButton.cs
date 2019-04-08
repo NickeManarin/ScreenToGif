@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 using ScreenToGif.Util;
 
 namespace ScreenToGif.Controls
@@ -100,6 +101,13 @@ namespace ScreenToGif.Controls
                             SelectedIndex = index;
                     }
                 };
+        }
+
+        protected override void OnMouseEnter(MouseEventArgs e)
+        {
+            //For some reason (maybe because this control extends a MenuItem), a focus was being set to this control on mouse enter/hover.
+            //So, I had to override this method, avoiding to call the base method.
+            //base.OnMouseEnter(e);
         }
 
         private static void SelectedIndex_ChangedCallback(DependencyObject o, DependencyPropertyChangedEventArgs e)

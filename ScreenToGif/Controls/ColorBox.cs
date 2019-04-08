@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls.Primitives;
-using System.Windows.Input;
 using System.Windows.Media;
 using ScreenToGif.Windows.Other;
 
@@ -11,6 +10,8 @@ namespace ScreenToGif.Controls
         public static readonly DependencyProperty SelectedColorProperty = DependencyProperty.Register("SelectedColor", typeof(Color), typeof(ColorBox), new PropertyMetadata(default(Color), SelectedColor_Changed));
 
         public static readonly DependencyProperty SelectedBrushProperty = DependencyProperty.Register("SelectedBrush", typeof(SolidColorBrush), typeof(ColorBox), new PropertyMetadata(default(SolidColorBrush)));
+
+        public static readonly DependencyProperty IgnoreEventProperty = DependencyProperty.Register("IgnoreEvent", typeof(bool), typeof(ColorBox), new PropertyMetadata(false));
 
         public Color SelectedColor
         {
@@ -24,6 +25,12 @@ namespace ScreenToGif.Controls
             set => SetValue(SelectedBrushProperty, value);
         }
 
+        public bool IgnoreEvent
+        {
+            get => (bool)GetValue(IgnoreEventProperty);
+            set => SetValue(IgnoreEventProperty, value);
+        }
+
         static ColorBox()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ColorBox), new FrameworkPropertyMetadata(typeof(ColorBox)));
@@ -34,16 +41,6 @@ namespace ScreenToGif.Controls
             SelectColor();
 
             base.OnClick();
-        }
-
-        protected override void OnKeyDown(KeyEventArgs e)
-        {
-            if (e.Key != Key.Return && e.Key != Key.Space)
-                return;
-
-            SelectColor();
-
-            base.OnKeyDown(e);
         }
 
         private void SelectColor()
@@ -76,7 +73,7 @@ namespace ScreenToGif.Controls
 
         public void RaiseColorChangedEvent()
         {
-            if (ColorChangedEvent == null)
+            if (ColorChangedEvent == null || IgnoreEvent)
                 return;
 
             RaiseEvent(new RoutedEventArgs(ColorChangedEvent));

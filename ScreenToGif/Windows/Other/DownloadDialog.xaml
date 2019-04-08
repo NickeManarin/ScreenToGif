@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         Title="{DynamicResource Update}" Height="400" Width="600" MinHeight="300" MinWidth="450"
-        Loaded="Window_Loaded" SizeToContent="Height" WindowStartupLocation="CenterScreen">
+        Loaded="Window_Loaded" SizeToContent="Height" WindowStartupLocation="CenterScreen" Background="{DynamicResource Panel.Background}">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -13,16 +13,16 @@
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Background="#FFF9F9FF">
+        <Grid Grid.Row="0" Background="{DynamicResource Panel.Background.Level4}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Viewbox x:Name="IconViewbox" Margin="5" Child="{StaticResource Vector.Synchronize}"/>
+            <Viewbox x:Name="IconViewbox" Margin="5" Child="{StaticResource Vector.Synchronize}" Opacity="{DynamicResource Element.Opacity}"/>
 
             <Label x:Name="InstructionLabel" Content="{DynamicResource Update}" Margin="3" Grid.Column="1" VerticalContentAlignment="Center" 
-                   FontFamily="Segoe UI Semilight" FontSize="18" Foreground="#FF003399"/>
+                   FontFamily="Segoe UI Semilight" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
         </Grid>
 
         <n:StatusBand Grid.Row="1" x:Name="StatusBand"/>
@@ -31,23 +31,23 @@
             <FlowDocumentScrollViewer VerticalScrollBarVisibility="Auto">
                 <FlowDocument FontFamily="Segoe UI" TextAlignment="Left">
                     <Paragraph TextAlignment="Center" FontWeight="Light">
-                        <Run Text="{DynamicResource Update.NewRelease}" FontSize="30"/>
-                        <Run Name="VersionRun" Text="Version 2.8.1" FontSize="20"/>
-                        <Run Name="SizeRun" Text="610 KB" FontSize="14" Foreground="Gray"/>
+                        <Run Text="{DynamicResource Update.NewRelease}" FontSize="30" Foreground="{DynamicResource Element.Foreground}"/>
+                        <Run Name="VersionRun" Text="Version 2.17" FontSize="20" Foreground="{DynamicResource Element.Foreground}"/>
+                        <Run Name="SizeRun" Text="800 KB" FontSize="14" Foreground="{DynamicResource Element.Foreground.Gray112}"/>
                         <LineBreak/>
-                        <Run Name="TypeRun" Text="Portable" FontSize="15" Foreground="Gray"/>
+                        <Run Name="TypeRun" Text="Portable" FontSize="15" Foreground="{DynamicResource Element.Foreground.Gray112}"/>
                     </Paragraph>
 
-                    <Paragraph FontSize="20" FontWeight="Regular" Margin="0">What's new?</Paragraph>
-                    <Paragraph Name="WhatsNewParagraph" FontSize="12" FontWeight="Regular" Margin="5"/>
+                    <Paragraph FontSize="20" FontWeight="Regular" Margin="0" Foreground="{DynamicResource Element.Foreground}">What's new?</Paragraph>
+                    <Paragraph Name="WhatsNewParagraph" FontSize="12" FontWeight="Regular" Margin="5" Foreground="{DynamicResource Element.Foreground}"/>
 
-                    <Paragraph FontSize="16" FontWeight="Regular" Margin="0">Bug fixes:</Paragraph>
-                    <Paragraph Name="FixesParagraph" FontSize="12" FontWeight="Regular" Margin="5"/>
+                    <Paragraph FontSize="16" FontWeight="Regular" Margin="0" Foreground="{DynamicResource Element.Foreground}">Bug fixes:</Paragraph>
+                    <Paragraph Name="FixesParagraph" FontSize="12" FontWeight="Regular" Margin="5" Foreground="{DynamicResource Element.Foreground}"/>
                 </FlowDocument>
             </FlowDocumentScrollViewer>
         </Grid>
 
-        <Grid Grid.Row="3" Background="WhiteSmoke">
+        <Grid Grid.Row="3" Background="{DynamicResource Panel.Background.Level3}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="Auto"/>

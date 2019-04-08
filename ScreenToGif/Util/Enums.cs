@@ -1,6 +1,17 @@
 ﻿namespace ScreenToGif.Util
 {
     /// <summary>
+    /// Determines the app's theme.
+    /// </summary>
+    public enum AppTheme
+    {
+        Light,
+        Medium,
+        Dark,
+        VeryDark,
+    }
+
+    /// <summary>
     /// Determines how the past bahaves.
     /// </summary>
     public enum PasteBehavior
@@ -574,5 +585,15 @@
         Triangle,
         Arrow,
         Baloon,
+    }
+
+    /// <summary>
+    /// Delay update type.
+    /// </summary>
+    public enum DelayUpdateType
+    {
+        Override = 0,
+        IncreaseDecrease = 1,
+        Scale = 2,
     }
 }

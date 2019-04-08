@@ -93,27 +93,27 @@
 
     <Canvas x:Shared="False" x:Key="Vector.Back" HorizontalAlignment="Center" Height="32" UseLayoutRounding="False" VerticalAlignment="Center" Width="32">
         <Canvas  Height="22.578" Canvas.Left="3.087" Canvas.Top="4.317" Width="25.89">
-            <Path Data="F1M2.272,11.974L11.45,21.412C11.71,21.677 11.71,22.113 11.45,22.378 11.191,22.644 10.767,22.644 10.507,22.378L0.192,11.775C0.186,11.767 0.18,11.763 0.176,11.755 0.164,11.74 0.148,11.724 0.138,11.708 0.13,11.697 0.119,11.683 0.113,11.674 0.101,11.657 0.094,11.641 0.084,11.625 0.075,11.611 0.07,11.597 0.059,11.582 0.057,11.573 0.053,11.562 0.048,11.553 0.045,11.546 0.045,11.539 0.043,11.534 0.037,11.519 0.031,11.504 0.028,11.488 0.022,11.471 0.018,11.455 0.013,11.437 0.01,11.422 0.007,11.408 0.007,11.391 0.004,11.374 0.001,11.357 0,11.341L0,11.289 0,11.24C0.001,11.224 0.004,11.205 0.007,11.188 0.007,11.175 0.01,11.158 0.013,11.141 0.018,11.124 0.022,11.106 0.028,11.09 0.031,11.075 0.037,11.059 0.04,11.047 0.045,11.04 0.045,11.033 0.048,11.028 0.053,11.016 0.057,11.006 0.064,10.996 0.07,10.982 0.075,10.97 0.084,10.955 0.094,10.937 0.101,10.922 0.113,10.907 0.119,10.894 0.13,10.882 0.138,10.871 0.148,10.855 0.159,10.84 0.173,10.828 0.179,10.82 0.183,10.813 0.192,10.805L10.507,0.2C10.638,0.066 10.809,0 10.98,0 11.151,0 11.321,0.066 11.45,0.2 11.71,0.467 11.71,0.902 11.45,1.169L2.272,10.605 25.222,10.601C25.59,10.601 25.89,10.908 25.89,11.286 25.89,11.663 25.59,11.97 25.222,11.97" Fill="#FF231F20" Height="22.578" Canvas.Left="0" Canvas.Top="0" Width="25.89"/>
+            <Path Data="F1M2.272,11.974L11.45,21.412C11.71,21.677 11.71,22.113 11.45,22.378 11.191,22.644 10.767,22.644 10.507,22.378L0.192,11.775C0.186,11.767 0.18,11.763 0.176,11.755 0.164,11.74 0.148,11.724 0.138,11.708 0.13,11.697 0.119,11.683 0.113,11.674 0.101,11.657 0.094,11.641 0.084,11.625 0.075,11.611 0.07,11.597 0.059,11.582 0.057,11.573 0.053,11.562 0.048,11.553 0.045,11.546 0.045,11.539 0.043,11.534 0.037,11.519 0.031,11.504 0.028,11.488 0.022,11.471 0.018,11.455 0.013,11.437 0.01,11.422 0.007,11.408 0.007,11.391 0.004,11.374 0.001,11.357 0,11.341L0,11.289 0,11.24C0.001,11.224 0.004,11.205 0.007,11.188 0.007,11.175 0.01,11.158 0.013,11.141 0.018,11.124 0.022,11.106 0.028,11.09 0.031,11.075 0.037,11.059 0.04,11.047 0.045,11.04 0.045,11.033 0.048,11.028 0.053,11.016 0.057,11.006 0.064,10.996 0.07,10.982 0.075,10.97 0.084,10.955 0.094,10.937 0.101,10.922 0.113,10.907 0.119,10.894 0.13,10.882 0.138,10.871 0.148,10.855 0.159,10.84 0.173,10.828 0.179,10.82 0.183,10.813 0.192,10.805L10.507,0.2C10.638,0.066 10.809,0 10.98,0 11.151,0 11.321,0.066 11.45,0.2 11.71,0.467 11.71,0.902 11.45,1.169L2.272,10.605 25.222,10.601C25.59,10.601 25.89,10.908 25.89,11.286 25.89,11.663 25.59,11.97 25.222,11.97" Fill="{DynamicResource Element.Glyph.Strong}" Height="22.578" Canvas.Left="0" Canvas.Top="0" Width="25.89"/>
         </Canvas>
     </Canvas>
 
     <Canvas x:Shared="False" x:Key="Vector.Maximize" HorizontalAlignment="Left" Height="15" UseLayoutRounding="False" VerticalAlignment="Top" Width="15">
-        <Path Data="F1M0,15L15,15 15,0 0,0z M0.997,1.002L14.004,1.002 14.004,13.998 0.997,13.998z" Fill="#FF161717" Height="15" Canvas.Left="0" Canvas.Top="0" Width="15"/>
+        <Path Data="F1M0,15L15,15 15,0 0,0z M0.997,1.002L14.004,1.002 14.004,13.998 0.997,13.998z" Fill="{DynamicResource Element.Glyph.Strong}" Height="15" Canvas.Left="0" Canvas.Top="0" Width="15"/>
     </Canvas>
 
     <Canvas x:Shared="False" x:Key="Vector.Minimize" HorizontalAlignment="Center" Height="15" UseLayoutRounding="False" VerticalAlignment="Center" Width="15">
         <Canvas Height="0.976" Canvas.Left="0" Canvas.Top="6.611" Width="15">
-            <Path Data="F1M0,0.004L0,0.976 15,0.973 15,0z" Fill="#FF040707" Height="0.976" Canvas.Left="0" Canvas.Top="0" Width="15"/>
+            <Path Data="F1M0,0.004L0,0.976 15,0.973 15,0z" Fill="{DynamicResource Element.Glyph.Strong}" Height="0.976" Canvas.Left="0" Canvas.Top="0" Width="15"/>
         </Canvas>
     </Canvas>
 
     <Canvas x:Shared="False" x:Key="Vector.Restore" HorizontalAlignment="Center" Height="15" UseLayoutRounding="False" VerticalAlignment="Center" Width="15">
-        <Path Data="F1M2.5,0L2.5,2.499 0,2.499 0,15 12.499,15 12.499,12.499 15,12.499 15,0z M3.75,1.25L13.747,1.25 13.747,11.248 12.499,11.248 12.499,2.499 3.75,2.499z M1.249,3.749L11.248,3.749 11.248,13.747 1.249,13.747z" Fill="#FF040707" Height="15" Canvas.Left="0" Canvas.Top="0" Width="15"/>
+        <Path Data="F1M2.5,0L2.5,2.499 0,2.499 0,15 12.499,15 12.499,12.499 15,12.499 15,0z M3.75,1.25L13.747,1.25 13.747,11.248 12.499,11.248 12.499,2.499 3.75,2.499z M1.249,3.749L11.248,3.749 11.248,13.747 1.249,13.747z" Fill="{DynamicResource Element.Glyph.Strong}" Height="15" Canvas.Left="0" Canvas.Top="0" Width="15"/>
     </Canvas>
 
     <Canvas x:Shared="False" x:Key="Vector.Close" HorizontalAlignment="Center" Height="15" UseLayoutRounding="False" VerticalAlignment="Center" Width="15">
-        <Path Data="M0.354,0.354L14.707,14.707" Height="15" Canvas.Left="0" Stroke="#FF231F20" Canvas.Top="0" Width="15"/>
-        <Path Data="M14.707,0.354L0.354,14.707" Height="15" Canvas.Left="0" Stroke="#FF231F20" Canvas.Top="0" Width="15"/>
+        <Path Data="M0.354,0.354L14.707,14.707" Height="15" Canvas.Left="0" Stroke="{DynamicResource Element.Glyph.Strong}" Canvas.Top="0" Width="15"/>
+        <Path Data="M14.707,0.354L0.354,14.707" Height="15" Canvas.Left="0" Stroke="{DynamicResource Element.Glyph.Strong}" Canvas.Top="0" Width="15"/>
     </Canvas>
 
     <Canvas x:Shared="False" x:Key="Vector.Options" HorizontalAlignment="Center" Height="48" UseLayoutRounding="False" VerticalAlignment="Center" Width="40">

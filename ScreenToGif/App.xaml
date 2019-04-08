@@ -15,10 +15,16 @@
                 <ResourceDictionary Source="/Resources/IconSet.xaml"/>
                 <ResourceDictionary Source="/Resources/Glyphs.xaml"/>
                 <ResourceDictionary Source="/Resources/Backgrounds.xaml"/>
-                <ResourceDictionary Source="/Themes/DataGridStyle.xaml"/>
                 <ResourceDictionary Source="/Resources/Settings.xaml"/>
 
-                <ResourceDictionary Source="/Themes/Buttons.xaml"/>
+                <!--Themes-->
+                <ResourceDictionary Source="/Themes/Colors/VeryDark.xaml"/>
+                <ResourceDictionary Source="/Themes/Colors/Dark.xaml"/>
+                <ResourceDictionary Source="/Themes/Colors/Medium.xaml"/>
+                <ResourceDictionary Source="/Themes/Colors/Light.xaml"/>
+
+                <ResourceDictionary Source="/Themes/DataGrid.xaml"/>
+                <ResourceDictionary Source="/Themes/Button.xaml"/>
                 <ResourceDictionary Source="/Themes/Common.xaml"/>
                 <ResourceDictionary Source="/Themes/ComboBox.xaml"/>
 
@@ -59,10 +65,7 @@
             <c:IntToVisibility x:Key="IntToVisibility"/>
             <c:EnumToVisibility x:Key="EnumToVisibility"/>
 
-            <!--Mask-->
-            <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
-
-            <!--DropShadow Effects-->
+            <!--Effects-->
             <DropShadowEffect x:Key="Shadow.Black.Tiny" ShadowDepth="0" Color="#FF000000" Opacity=".15" BlurRadius="2" RenderingBias="Quality"/>
             <DropShadowEffect x:Key="Shadow.Black.Small" ShadowDepth="0" Color="#FF000000" Opacity=".2" BlurRadius="2" RenderingBias="Performance"/>
             <DropShadowEffect x:Key="Shadow.Black" ShadowDepth="0" Color="#FF000000" Opacity="1" BlurRadius="2" RenderingBias="Quality"/>
@@ -88,216 +91,46 @@
             <DropShadowEffect x:Key="Shadow.Border.Dark" ShadowDepth="0" Color="{Binding BorderColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".5" BlurRadius="3" RenderingBias="Quality"/>
 
             <DropShadowEffect x:Key="Glow.Foreground.Large" ShadowDepth="0" Color="WhiteSmoke" Opacity="1" BlurRadius="5" RenderingBias="Quality"/>
-
             <DropShadowEffect x:Key="Shadow.Invariant" ShadowDepth="0" Color="Transparent" Opacity="0" BlurRadius="0" RenderingBias="Performance"/>
-
             <BlurEffect x:Key="Blur" Radius="1" RenderingBias="Quality" KernelType="Gaussian"/>
 
-            <Style x:Key="FocusVisualStyle">
+            <!--Notification Icon-->
+            <n:NotifyIcon x:Key="NotifyIcon" IconSource="/Resources/Logo.ico" DataContext="{StaticResource AppViewModel}" NotifyToolTipText="ScreenToGif" Visibility="Collapsed">
+                <n:NotifyIcon.ContextMenu>
+                    <ContextMenu>
+                        <n:ImageMenuItem Header="{DynamicResource S.NewRecording}" Image="{StaticResource Vector.Record.New}" Command="{Binding OpenRecorder}" InputGestureText="{Binding RecorderGesture, UpdateSourceTrigger=PropertyChanged}"/>
+                        <n:ImageMenuItem Header="{DynamicResource S.NewWebcamRecording}" Image="{StaticResource Vector.Camera.New}" Command="{Binding OpenWebcamRecorder}" InputGestureText="{Binding WebcamRecorderGesture, UpdateSourceTrigger=PropertyChanged}"/>
+                        <n:ImageMenuItem Header="{DynamicResource S.NewBoardRecording}" Image="{StaticResource Vector.Board.New}" Command="{Binding OpenBoardRecorder}" InputGestureText="{Binding BoardRecorderGesture, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Separator/>
+                        <n:ImageMenuItem Header="{DynamicResource Editor}" Image="{StaticResource Vector.Editor}" Command="{Binding OpenEditor}" InputGestureText="{Binding EditorGesture, UpdateSourceTrigger=PropertyChanged}"/>
+                        <n:ImageMenuItem Header="{DynamicResource Options}" Image="{StaticResource Vector.Options}" Command="{Binding OpenOptions}" InputGestureText="{Binding OptionsGesture, UpdateSourceTrigger=PropertyChanged}"/>
+                        <n:ImageMenuItem Header="{DynamicResource S.Feedback.Feedback}" Image="{StaticResource Vector.Application}" Command="{Binding OpenFeedback}"/>
+                        <n:ImageMenuItem Header="{DynamicResource S.Troubleshoot.Title}" Image="{StaticResource Vector.Warning}" Command="{Binding OpenTroubleshoot}"/>
+                        <Separator/>
+                        <n:ImageMenuItem Header="{DynamicResource S.Exit}" Image="{StaticResource Vector.Close}" Command="{Binding ExitApplication}" InputGestureText="{Binding ExitGesture, UpdateSourceTrigger=PropertyChanged}"/>
+                    </ContextMenu>
+                </n:NotifyIcon.ContextMenu>
+            </n:NotifyIcon>
+
+            <Style x:Key="Style.FocusVisual.NoMargin">
                 <Setter Property="Control.Template">
                     <Setter.Value>
                         <ControlTemplate>
-                            <Rectangle Margin="1" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-
-            <Style TargetType="{x:Type TextBox}">
-                <Setter Property="Background" Value="White"/>
-                <Setter Property="BorderBrush" Value="#FFABAdB3"/>
-                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-                <Setter Property="BorderThickness" Value="1"/>
-                <Setter Property="Padding" Value="1"/>
-                <Setter Property="MinHeight" Value="23"/>
-                <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
-                <Setter Property="HorizontalContentAlignment" Value="Left"/>
-                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-                <Setter Property="AllowDrop" Value="true"/>
-                <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
-                <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
-
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type TextBox}">
-                            <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" 
-                                    Background="{TemplateBinding Background}" SnapsToDevicePixels="True" Padding="{TemplateBinding Padding}">
-                                <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                            <Border>
+                                <Rectangle Margin="0" SnapsToDevicePixels="True" Stroke="{DynamicResource Element.Foreground}" StrokeThickness="1" StrokeDashArray="1,2"/>
                             </Border>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsEnabled" Value="false">
-                                    <Setter Property="Opacity" TargetName="border" Value="0.56"/>
-                                </Trigger>
-                                <Trigger Property="IsMouseOver" Value="true">
-                                    <Setter Property="BorderBrush" TargetName="border" Value="#FF7EB4EA"/>
-                                </Trigger>
-                                <Trigger Property="IsKeyboardFocused" Value="true">
-                                    <Setter Property="BorderBrush" TargetName="border" Value="#FF569DE5"/>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-                <Style.Triggers>
-                    <MultiTrigger>
-                        <MultiTrigger.Conditions>
-                            <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
-                            <Condition Property="IsSelectionActive" Value="false"/>
-                        </MultiTrigger.Conditions>
-                        <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
-                    </MultiTrigger>
-                </Style.Triggers>
-            </Style>
-
-            <!--GroupBox Style-->
-            <Style TargetType="{x:Type GroupBox}">
-                <Setter Property="BorderBrush" Value="#D5DFE5"/>
-                <Setter Property="BorderThickness" Value="1"/>
-
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type GroupBox}">
-                            <Grid SnapsToDevicePixels="true">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="6"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="6"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="6"/>
-                                </Grid.RowDefinitions>
-
-                                <Border BorderBrush="Transparent" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.ColumnSpan="4" Grid.Column="0" Grid.Row="1" Grid.RowSpan="3"/>
-                                <Border BorderBrush="White" BorderThickness="{TemplateBinding BorderThickness}" Grid.ColumnSpan="4"
-            						Grid.Column="0" Grid.Row="1" Grid.RowSpan="3">
-                                    <Border.OpacityMask>
-                                        <MultiBinding ConverterParameter="7" Converter="{StaticResource BorderGapMaskConverter}">
-                                            <Binding ElementName="Header" Path="ActualWidth"/>
-                                            <Binding Path="ActualWidth" RelativeSource="{RelativeSource Self}"/>
-                                            <Binding Path="ActualHeight" RelativeSource="{RelativeSource Self}"/>
-                                        </MultiBinding>
-                                    </Border.OpacityMask>
-                                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                                        <Border BorderBrush="White" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2"/>
-                                    </Border>
-                                </Border>
-                                <Border x:Name="Header" Grid.Column="1" Padding="3,1" Grid.Row="0" Grid.RowSpan="2">
-                                    <ContentPresenter ContentSource="Header" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                                </Border>
-                                <ContentPresenter Grid.ColumnSpan="2" Grid.Column="1" Margin="{TemplateBinding Padding}" Grid.Row="2" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                            </Grid>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
             </Style>
 
-            <!--CheckBox Style-->
-            <Style TargetType="{x:Type CheckBox}">
-                <Setter Property="Background" Value="White"/>
-                <Setter Property="BorderBrush" Value="#FFABABAB"/>
-                <Setter Property="Foreground" Value="#FF444444"/>
-                <Setter Property="BorderThickness" Value="1"/>
-                <Setter Property="VerticalContentAlignment" Value="Center"/>
 
-                <!--Default Values-->
-                <Setter Property="FocusVisualStyle">
-                    <Setter.Value>
-                        <Style>
-                            <Setter Property="Control.Template">
-                                <Setter.Value>
-                                    <ControlTemplate>
-                                        <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </Setter.Value>
-                </Setter>
-
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type CheckBox}">
-                            <Grid x:Name="templateRoot" Background="Transparent">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-
-                                <Border x:Name="checkBoxBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" 
-                                        Background="{TemplateBinding Background}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                        Margin="1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                                    <Grid x:Name="markGrid">
-                                        <!--<Path x:Name="optionMark" Data="F1 M 9.97498,1.22334L 4.6983,9.09834L 4.52164,9.09834L 0,5.19331L 1.27664,3.52165L 4.255,6.08833L 8.33331,1.52588e-005L 9.97498,1.22334 Z " Fill="#FF858585" Margin="1" Opacity="0" Stretch="None"/>-->
-                                        <!--<Path x:Name="optionMark" Data="F1 M 0,58            L 2,56           L 6,60            L 13,51     L 15,53           L 6,64          Z" Fill="#FF858585" Margin="1" Opacity="0" Stretch="None"/>-->
-                                        <Path x:Name="optionMark"     Data="F1 M 9.97498,.8 L 4.6983,9.09834  L 1,5.19331 L 1.27664,3.52165 L 4.255,6.08833 L 9.33331,1.288e-005 Z" Fill="#FF858585" Margin="1" Opacity="0" Stretch="None"/>
-                                        <Rectangle x:Name="indeterminateMark" Fill="#FF858585" Margin="2" Opacity="0"/>
-                                    </Grid>
-                                </Border>
-
-                                <ContentPresenter x:Name="contentPresenter" Grid.Column="1" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                                  Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                            </Grid>
-
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="HasContent" Value="true">
-                                    <Setter Property="FocusVisualStyle">
-                                        <Setter.Value>
-                                            <Style>
-                                                <Setter Property="Control.Template">
-                                                    <Setter.Value>
-                                                        <ControlTemplate>
-                                                            <Rectangle Margin="14,0,0,0" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
-                                                        </ControlTemplate>
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </Style>
-                                        </Setter.Value>
-                                    </Setter>
-                                    <Setter Property="Padding" Value="4,-1,0,0"/>
-                                </Trigger>
-                                <Trigger Property="IsMouseOver" Value="true">
-                                    <Setter Property="Background" TargetName="checkBoxBorder" Value="#FFD5E1F2"/>
-                                    <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="#FFA3BDE3"/>
-                                    <Setter Property="Fill" TargetName="optionMark" Value="#FF212121"/>
-                                    <Setter Property="Fill" TargetName="indeterminateMark" Value="#FF212121"/>
-                                </Trigger>
-                                <Trigger Property="IsEnabled" Value="false">
-                                    <Setter Property="Background" TargetName="checkBoxBorder" Value="#FFE6E6E6"/>
-                                    <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="#FFBCBCBC"/>
-                                    <Setter Property="Fill" TargetName="optionMark" Value="#FF707070"/>
-                                    <Setter Property="Fill" TargetName="indeterminateMark" Value="#FF707070"/>
-                                </Trigger>
-                                <Trigger Property="IsPressed" Value="true">
-                                    <Setter Property="Background" TargetName="checkBoxBorder" Value="#FFA3BDE3"/>
-                                    <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="#FFA3BDE3"/>
-                                    <Setter Property="Fill" TargetName="optionMark" Value="#FF212121"/>
-                                    <Setter Property="Fill" TargetName="indeterminateMark" Value="#FF212121"/>
-                                </Trigger>
-                                <Trigger Property="IsChecked" Value="true">
-                                    <Setter Property="Opacity" TargetName="optionMark" Value="1"/>
-                                    <Setter Property="Opacity" TargetName="indeterminateMark" Value="0"/>
-                                </Trigger>
-                                <Trigger Property="IsChecked" Value="{x:Null}">
-                                    <Setter Property="Opacity" TargetName="optionMark" Value="0"/>
-                                    <Setter Property="Opacity" TargetName="indeterminateMark" Value="1"/>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-
-            <!--RadioButton Style-->
+            <!--RadioButton-->
             <Style TargetType="{x:Type RadioButton}">
-                <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualStyle}"/>
-                <Setter Property="Background" Value="White"/>
-                <Setter Property="BorderBrush" Value="#FFACACAC"/>
-                <Setter Property="Foreground" Value="#FF444444"/>
+                <Setter Property="FocusVisualStyle" Value="{StaticResource Style.FocusVisual.NoMargin}"/>
+                <Setter Property="Background" Value="{DynamicResource Element.Background}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource Element.Border}"/>
+                <Setter Property="Foreground" Value="{DynamicResource Element.Foreground.Medium}"/>
                 <Setter Property="HorizontalContentAlignment" Value="Left"/>
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
                 <Setter Property="Padding" Value="2,0,0,0"/>
@@ -316,7 +149,7 @@
                                         Background="{TemplateBinding Background}" CornerRadius="100" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                         Margin="1,1,2,1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                                     <Grid x:Name="markGrid" Margin="2">
-                                        <Ellipse x:Name="optionMark" Fill="#FF777777" MinWidth="6" MinHeight="6" Opacity="0"/>
+                                        <Ellipse x:Name="optionMark" Fill="{DynamicResource Element.Glyph}" MinWidth="6" MinHeight="6" Opacity="0"/>
                                     </Grid>
                                 </Border>
 
@@ -324,30 +157,27 @@
                                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
                                                   RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-
                             </Grid>
+
                             <ControlTemplate.Triggers>
-                                <Trigger Property="IsMouseOver" Value="true">
-                                    <Setter Property="Background" TargetName="radioButtonBorder" Value="#FFD5E1F2"/>
-                                    <Setter Property="BorderBrush" TargetName="radioButtonBorder" Value="#FFA7C0E4"/>
-                                    <Setter Property="Fill" TargetName="optionMark" Value="#FF444444"/>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" TargetName="radioButtonBorder" Value="{DynamicResource Element.Background.Hover}"/>
+                                    <Setter Property="BorderBrush" TargetName="radioButtonBorder" Value="{DynamicResource Element.Border.Hover}"/>
+                                    <Setter Property="Fill" TargetName="optionMark" Value="{DynamicResource Element.Glyph.Hover}"/>
                                 </Trigger>
-                                <Trigger Property="IsPressed" Value="true">
-                                    <Setter Property="Background" TargetName="radioButtonBorder" Value="#FFA7C0E4"/>
-                                    <Setter Property="BorderBrush" TargetName="radioButtonBorder" Value="#FFA7C0E4"/>
-                                    <Setter Property="Fill" TargetName="optionMark" Value="#FF444444"/>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter Property="Background" TargetName="radioButtonBorder" Value="{DynamicResource Element.Background.Pressed}"/>
+                                    <Setter Property="BorderBrush" TargetName="radioButtonBorder" Value="{DynamicResource Element.Border.Pressed}"/>
+                                    <Setter Property="Fill" TargetName="optionMark" Value="{DynamicResource Element.Glyph.Pressed}"/>
                                 </Trigger>
-                                <Trigger Property="IsChecked" Value="true">
+                                <Trigger Property="IsChecked" Value="True">
                                     <Setter Property="Opacity" TargetName="optionMark" Value="1"/>
                                 </Trigger>
                                 <Trigger Property="IsChecked" Value="{x:Null}">
                                     <Setter Property="Opacity" TargetName="optionMark" Value="0.56"/>
                                 </Trigger>
-                                <Trigger Property="IsEnabled" Value="false">
-                                    <Setter Property="Background" TargetName="radioButtonBorder" Value="#FFE6E6E6"/>
-                                    <Setter Property="BorderBrush" TargetName="radioButtonBorder" Value="#FFBCBCBC"/>
-                                    <Setter Property="Fill" TargetName="optionMark" Value="#FF707070"/>
-                                    <Setter Property="Foreground" Value="#FFB1B1B1"/>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Opacity" Value="0.6"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
@@ -355,9 +185,9 @@
                 </Setter>
             </Style>
 
-            <!--Tooltip Style-->
+            <!--ToolTip-->
             <Style TargetType="{x:Type ToolTip}">
-                <Setter Property="Foreground" Value="#FF5D5D5D"/>
+                <Setter Property="Foreground" Value="{DynamicResource Element.Foreground.Medium}"/>
                 <Setter Property="MinWidth" Value="20"/>
                 <Setter Property="SnapsToDevicePixels" Value="True"/>
                 <Setter Property="Effect" Value="{DynamicResource Shadow.Grey}"/>
@@ -365,7 +195,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ToolTip}">
-                            <Border BorderBrush="#FFBEBEBE" BorderThickness="1" Margin="2" Background="White" Padding="5">
+                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1" Margin="2" Background="{DynamicResource Element.Background}" Padding="5">
                                 <ContentPresenter Content="{TemplateBinding Content}" Width="Auto" HorizontalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
@@ -373,11 +203,11 @@
                 </Setter>
             </Style>
 
-            <!--Context Menu-->
+            <!--ContextMenu-->
             <Style TargetType="{x:Type ContextMenu}">
-                <Setter Property="SnapsToDevicePixels" Value="True" />
-                <Setter Property="OverridesDefaultStyle" Value="True" />
-                <Setter Property="Grid.IsSharedSizeScope" Value="true" />
+                <Setter Property="SnapsToDevicePixels" Value="True"/>
+                <Setter Property="OverridesDefaultStyle" Value="True"/>
+                <Setter Property="Grid.IsSharedSizeScope" Value="True"/>
                 <Setter Property="Placement" Value="Bottom"/>
                 <Setter Property="HorizontalOffset" Value="-5"/>
                 <Setter Property="Effect" Value="{DynamicResource Shadow.Grey}"/>
@@ -385,7 +215,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ContextMenu}">
-                            <Border x:Name="Border" BorderBrush="#FFBEBEBE" BorderThickness="1" Margin="2" Background="White">
+                            <Border x:Name="Border" BorderBrush="{DynamicResource Element.Border}" BorderThickness="1" Margin="2" Background="{DynamicResource Element.Background}">
                                 <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
                             </Border>
                         </ControlTemplate>
@@ -395,7 +225,7 @@
 
             <!-- Separator-->
             <Style TargetType="{x:Type Separator}">
-                <Setter Property="BorderBrush" Value="#FFE0E3E6"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource Element.Border.Light}"/>
 
                 <Setter Property="Template">
                     <Setter.Value>
@@ -406,12 +236,13 @@
                 </Setter>
             </Style>
 
-            <!--Label Separator-->
+            <!--LabelSeparator-->
             <Style x:Key="LabelSeparator" TargetType="{x:Type Label}">
                 <Setter Property="Height" Value="Auto" />
                 <Setter Property="Padding" Value="3,1"/>
-                <Setter Property="Background" Value="#FFE0E3E6"/>
-                <Setter Property="Foreground" Value="#FF000000"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource Element.Border.Light}"/>
+                <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
+                <Setter Property="BorderThickness" Value="1"/>
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
 
                 <Setter Property="Template">
@@ -427,99 +258,39 @@
                                        ContentStringFormat="{TemplateBinding ContentStringFormat}" ContentTemplate="{TemplateBinding ContentTemplate}"
                                        ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" Content="{TemplateBinding Content}"/>
 
-                                <Rectangle Grid.Column="1" Height="1" Fill="{TemplateBinding Background}" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                <Rectangle Grid.Column="1" Height="{TemplateBinding BorderThickness}" Fill="{TemplateBinding BorderBrush}" VerticalAlignment="Center" Margin="5,0,0,0"/>
                             </Grid>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
-            </Style>
-
-            <!--TabItem Style-->
-            <Style TargetType="{x:Type TabItem}">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type TabItem}">
-                            <Grid Name="Panel" Background="Transparent">
-                                <Border Name="ContentBorder" BorderBrush="#FFD4D4D4" BorderThickness="0">
-                                    <ContentPresenter x:Name="ContentSite" ContentStringFormat="{TemplateBinding ContentStringFormat}" ContentTemplate="{TemplateBinding ContentTemplate}" 
-                                                      ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" Content="{TemplateBinding Content}"
-                                                      VerticalAlignment="Center" Effect="{x:Null}" HorizontalAlignment="Center" ContentSource="Header" Margin="10,2"/>
-                                </Border>
-                            </Grid>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsSelected" Value="True">
-                                    <Setter TargetName="Panel" Property="Background" Value="#FFFAFAFA" />
-                                    <Setter Property="Foreground" Value="#FF2B579A" />
-                                    <Setter TargetName="ContentBorder" Property="BorderThickness" Value="1,1,1,0" />
-                                </Trigger>
-
-                                <DataTrigger Binding="{Binding Source={x:Static u:UserSettings.All}, Path=EditorExtendChrome, FallbackValue=False}" Value="True">
-                                    <Setter TargetName="ContentBorder" Property="Effect" Value="{StaticResource Glow.Foreground.Large}" />
-                                    <Setter TargetName="ContentBorder" Property="Background">
-                                        <Setter.Value>
-                                            <RadialGradientBrush>
-                                                <GradientStop Color="#47FFFFFF" Offset="0"/>
-                                                <GradientStop Color="#33FFFFFF" Offset="0.3"/>
-                                                <GradientStop Offset="1"/>
-                                            </RadialGradientBrush>
-                                        </Setter.Value>
-                                    </Setter>
-                                </DataTrigger>
-
-                                <Trigger Property="IsSelected" Value="False">
-                                    <Setter Property="Effect" Value="{StaticResource Glow.Foreground.Large}" />
-                                    <!--<Setter Property="Margin" Value="10,2,10,10" TargetName="ContentSite"/>-->
-                                </Trigger>
-                                <Trigger Property="IsMouseOver" Value="True" SourceName="Panel">
-                                    <Setter Property="Foreground" Value="#FF2B579A" />
-                                    <Setter Property="Background" Value="#FFFAFAFA" />
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-
-                <!--Default Values-->
-                <Setter Property="FontFamily" Value="Segoe UI Semilight"/>
-                <!--<Setter Property="Background" Value="#7FFFFFFF"/>-->
             </Style>
 
             <!--ScrollBar Styles-->
-            <Style x:Key="ScrollBarButton" TargetType="{x:Type RepeatButton}">
-                <Setter Property="OverridesDefaultStyle" Value="true"/>
-                <Setter Property="Focusable" Value="false"/>
-                <Setter Property="IsTabStop" Value="false"/>
-                <Setter Property="FocusVisualStyle">
-                    <Setter.Value>
-                        <Style>
-                            <Setter Property="Control.Template">
-                                <Setter.Value>
-                                    <ControlTemplate>
-                                        <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </Setter.Value>
-                </Setter>
+            <Style x:Key="ScrollBar.Button" TargetType="{x:Type RepeatButton}">
+                <Setter Property="OverridesDefaultStyle" Value="True"/>
+                <Setter Property="Focusable" Value="False"/>
+                <Setter Property="IsTabStop" Value="False"/>
+                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
 
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type RepeatButton}">
                             <Grid x:Name="Root" Margin="0">
-                                <Border x:Name="BackgroundBorder" Background="White" BorderBrush="#FFAAAAAA" BorderThickness="1"/>
-                                <Path x:Name="Arrow" Stretch="None" Data="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}" Fill="#FF777777" HorizontalAlignment="Center"  VerticalAlignment="Center" SnapsToDevicePixels="True"/>
+                                <Border x:Name="BackgroundBorder" Background="{DynamicResource Brush.ScrollBar.Background}" BorderBrush="{DynamicResource Brush.ScrollBar.Border}" BorderThickness="1"/>
+                                <Path x:Name="Arrow" Stretch="None" Data="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}" Fill="{DynamicResource Element.Glyph}" 
+                                      HorizontalAlignment="Center" VerticalAlignment="Center" SnapsToDevicePixels="True"/>
                             </Grid>
+
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter TargetName="BackgroundBorder" Property="Background" Value="White"/>
-                                    <Setter TargetName="BackgroundBorder" Property="BorderBrush" Value="#FF777777"/>
-                                    <Setter TargetName="Arrow" Property="Fill" Value="#FF777777"/>
+                                    <Setter TargetName="BackgroundBorder" Property="Background" Value="{DynamicResource Brush.ScrollBar.Background.Hover}"/>
+                                    <Setter TargetName="BackgroundBorder" Property="BorderBrush" Value="{DynamicResource Brush.ScrollBar.Border.Hover}"/>
+                                    <Setter TargetName="Arrow" Property="Fill" Value="{DynamicResource Element.Glyph.Hover}"/>
                                 </Trigger>
                                 <Trigger Property="IsPressed" Value="True">
-                                    <Setter TargetName="BackgroundBorder" Property="Background" Value="#FFF2F2F2"/>
-                                    <Setter TargetName="BackgroundBorder" Property="BorderBrush" Value="#FF777777"/>
-                                    <Setter TargetName="Arrow" Property="Fill" Value="#FF777777"/>
+                                    <Setter TargetName="BackgroundBorder" Property="Background" Value="{DynamicResource Brush.ScrollBar.Background.Pressed}"/>
+                                    <Setter TargetName="BackgroundBorder" Property="BorderBrush" Value="{DynamicResource Brush.ScrollBar.Border.Pressed}"/>
+                                    <Setter TargetName="Arrow" Property="Fill" Value="{DynamicResource Element.Glyph.Pressed}"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
@@ -527,26 +298,29 @@
                 </Setter>
             </Style>
 
-            <Style x:Key="ScrollBarThumbVertical" TargetType="{x:Type Thumb}">
+            <Style x:Key="ScrollBar.Thumb" TargetType="{x:Type Thumb}">
                 <Setter Property="SnapsToDevicePixels" Value="True"/>
-                <Setter Property="IsTabStop" Value="false"/>
-                <Setter Property="Focusable" Value="false"/>
-                <Setter Property="Background" Value="White"/>
-                <Setter Property="BorderBrush" Value="#FFAAAAAA"/>
+                <Setter Property="Focusable" Value="False"/>
+                <Setter Property="IsTabStop" Value="False"/>
+                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                <Setter Property="Background" Value="{DynamicResource Brush.ScrollBar.Background}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource Brush.ScrollBar.Border}"/>
+
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Thumb}">
                             <Grid Background="Transparent">
-                                <Border Background="{TemplateBinding Background}" Margin="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" />
+                                <Border Background="{TemplateBinding Background}" Margin="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1"/>
                             </Grid>
+
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#FFF2F2F2"/>
-                                    <Setter Property="BorderBrush" Value="#FFAAAAAA"/>
+                                    <Setter Property="Background" Value="{DynamicResource Brush.ScrollBar.Background.Hover}"/>
+                                    <Setter Property="BorderBrush" Value="{DynamicResource Brush.ScrollBar.Border.Hover}"/>
                                 </Trigger>
                                 <Trigger Property="IsDragging" Value="True">
-                                    <Setter Property="Background" Value="#FFF2F2F2"/>
-                                    <Setter Property="BorderBrush" Value="#FF777777"/>
+                                    <Setter Property="Background" Value="{DynamicResource Brush.ScrollBar.Background.Pressed}"/>
+                                    <Setter Property="BorderBrush" Value="{DynamicResource Brush.ScrollBar.Border.Pressed}"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
@@ -554,11 +328,13 @@
                 </Setter>
             </Style>
 
-            <Style x:Key="RepeatButtonTransparent" TargetType="{x:Type RepeatButton}">
-                <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Style x:Key="ScrollBar.Transparent" TargetType="{x:Type RepeatButton}">
+                <Setter Property="OverridesDefaultStyle" Value="True"/>
                 <Setter Property="Background" Value="Transparent"/>
-                <Setter Property="Focusable" Value="false"/>
-                <Setter Property="IsTabStop" Value="false"/>
+                <Setter Property="Focusable" Value="False"/>
+                <Setter Property="IsTabStop" Value="False"/>
+                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type RepeatButton}">
@@ -569,11 +345,11 @@
             </Style>
 
             <Style TargetType="{x:Type ScrollBar}">
-                <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false"/>
-                <Setter Property="Stylus.IsFlicksEnabled" Value="false"/>
-                <Setter Property="Background" Value="#FFEFEFEF"/>
-                <Setter Property="BorderBrush" Value="#F0F0F0"/>
-                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                <Setter Property="Stylus.IsPressAndHoldEnabled" Value="False"/>
+                <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+                <Setter Property="Background" Value="{DynamicResource Brush.ScrollBar.Background.Back}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource Brush.ScrollBar.Background.Back}"/>
+                <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
                 <Setter Property="BorderThickness" Value="1,0"/>
                 <Setter Property="Width" Value="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}"/>
                 <Setter Property="MinWidth" Value="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}"/>
@@ -581,30 +357,36 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ScrollBar}">
-                            <Grid x:Name="Bg" SnapsToDevicePixels="true">
+                            <Grid x:Name="Bg" SnapsToDevicePixels="True">
                                 <Grid.RowDefinitions>
                                     <RowDefinition MaxHeight="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}"/>
                                     <RowDefinition Height="0.00001*"/>
                                     <RowDefinition MaxHeight="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}"/>
                                 </Grid.RowDefinitions>
-                                <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.Row="1"/>
-                                <RepeatButton Grid.Row="0" x:Name="PART_LineUpButton" Command="{x:Static ScrollBar.LineUpCommand}" IsEnabled="{TemplateBinding IsMouseOver}" Style="{StaticResource ScrollBarButton}" Content="M 0,4 C0,4 0,6 0,6 0,6 3.5,2.5 3.5,2.5 3.5,2.5 7,6 7,6 7,6 7,4 7,4 7,4 3.5,0.5 3.5,0.5 3.5,0.5 0,4 0,4 z" />
-                                <Track x:Name="PART_Track" IsDirectionReversed="true" IsEnabled="{TemplateBinding IsMouseOver}" Grid.Row="1">
+
+                                <RepeatButton Grid.Row="0" x:Name="PART_LineUpButton" Command="{x:Static ScrollBar.LineUpCommand}" IsEnabled="{TemplateBinding IsMouseOver}" Style="{StaticResource ScrollBar.Button}" 
+                                              Content="M 0,4 C0,4 0,6 0,6 0,6 3.5,2.5 3.5,2.5 3.5,2.5 7,6 7,6 7,6 7,4 7,4 7,4 3.5,0.5 3.5,0.5 3.5,0.5 0,4 0,4 z"/>
+
+                                <Border Grid.Row="1" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"/>
+                                <Track Grid.Row="1" x:Name="PART_Track" IsDirectionReversed="True" IsEnabled="{TemplateBinding IsMouseOver}">
                                     <Track.DecreaseRepeatButton>
-                                        <RepeatButton Command="{x:Static ScrollBar.PageUpCommand}" Style="{StaticResource RepeatButtonTransparent}"/>
+                                        <RepeatButton Command="{x:Static ScrollBar.PageUpCommand}" Style="{StaticResource ScrollBar.Transparent}"/>
                                     </Track.DecreaseRepeatButton>
                                     <Track.IncreaseRepeatButton>
-                                        <RepeatButton Command="{x:Static ScrollBar.PageDownCommand}" Style="{StaticResource RepeatButtonTransparent}"/>
+                                        <RepeatButton Command="{x:Static ScrollBar.PageDownCommand}" Style="{StaticResource ScrollBar.Transparent}"/>
                                     </Track.IncreaseRepeatButton>
                                     <Track.Thumb>
-                                        <Thumb Style="{StaticResource ScrollBarThumbVertical}"/>
+                                        <Thumb Style="{StaticResource ScrollBar.Thumb}"/>
                                     </Track.Thumb>
                                 </Track>
-                                <RepeatButton x:Name="PART_LineDownButton" Command="{x:Static ScrollBar.LineDownCommand}" IsEnabled="{TemplateBinding IsMouseOver}" Grid.Row="2" Style="{StaticResource ScrollBarButton}" Content="M 0,2.5 C0,2.5 0,0.5 0,0.5 0,0.5 3.5,4 3.5,4 3.5,4 7,0.5 7,0.5 7,0.5 7,2.5 7,2.5 7,2.5 3.5,6 3.5,6 3.5,6 0,2.5 0,2.5 z" />
+
+                                <RepeatButton Grid.Row="2" x:Name="PART_LineDownButton" Command="{x:Static ScrollBar.LineDownCommand}" IsEnabled="{TemplateBinding IsMouseOver}" Style="{StaticResource ScrollBar.Button}" 
+                                              Content="M 0,2.5 C0,2.5 0,0.5 0,0.5 0,0.5 3.5,4 3.5,4 3.5,4 7,0.5 7,0.5 7,0.5 7,2.5 7,2.5 7,2.5 3.5,6 3.5,6 3.5,6 0,2.5 0,2.5 z"/>
                             </Grid>
+                            
                             <ControlTemplate.Triggers>
-                                <Trigger Property="IsEnabled" Value="false">
-                                    <Setter Property="Background" TargetName="Bg" Value="#FFF2F2F2"/>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter TargetName="Bg" Property="Opacity" Value="0.6"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
@@ -618,33 +400,40 @@
                         <Setter Property="Height" Value="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarHeightKey}}"/>
                         <Setter Property="MinHeight" Value="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarHeightKey}}"/>
                         <Setter Property="BorderThickness" Value="0,1"/>
+
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="{x:Type ScrollBar}">
-                                    <Grid x:Name="Bg" SnapsToDevicePixels="true">
+                                    <Grid x:Name="Bg" SnapsToDevicePixels="True">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition MaxWidth="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarButtonWidthKey}}"/>
                                             <ColumnDefinition Width="0.00001*"/>
                                             <ColumnDefinition MaxWidth="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarButtonWidthKey}}"/>
                                         </Grid.ColumnDefinitions>
-                                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.Column="1"/>
-                                        <RepeatButton Grid.Column="0" x:Name="PART_LineLeftButton" Command="{x:Static ScrollBar.LineLeftCommand}" IsEnabled="{TemplateBinding IsMouseOver}" Style="{StaticResource ScrollBarButton}" Content="M 3.18,7 C3.18,7 5,7 5,7 5,7 1.81,3.5 1.81,3.5 1.81,3.5 5,0 5,0 5,0 3.18,0 3.18,0 3.18,0 0,3.5 0,3.5 0,3.5 3.18,7 3.18,7 z" />
-                                        <Track x:Name="PART_Track" Grid.Column="1" IsEnabled="{TemplateBinding IsMouseOver}">
+
+                                        <RepeatButton Grid.Column="0" x:Name="PART_LineLeftButton" Command="{x:Static ScrollBar.LineLeftCommand}" IsEnabled="{TemplateBinding IsMouseOver}" Style="{StaticResource ScrollBar.Button}" 
+                                                      Content="M 3.18,7 C3.18,7 5,7 5,7 5,7 1.81,3.5 1.81,3.5 1.81,3.5 5,0 5,0 5,0 3.18,0 3.18,0 3.18,0 0,3.5 0,3.5 0,3.5 3.18,7 3.18,7 z" />
+
+                                        <Border Grid.Column="1" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"/>
+                                        <Track Grid.Column="1" x:Name="PART_Track" IsEnabled="{TemplateBinding IsMouseOver}">
                                             <Track.DecreaseRepeatButton>
-                                                <RepeatButton Command="{x:Static ScrollBar.PageLeftCommand}" Style="{StaticResource RepeatButtonTransparent}"/>
+                                                <RepeatButton Command="{x:Static ScrollBar.PageLeftCommand}" Style="{StaticResource ScrollBar.Transparent}"/>
                                             </Track.DecreaseRepeatButton>
                                             <Track.IncreaseRepeatButton>
-                                                <RepeatButton Command="{x:Static ScrollBar.PageRightCommand}" Style="{StaticResource RepeatButtonTransparent}"/>
+                                                <RepeatButton Command="{x:Static ScrollBar.PageRightCommand}" Style="{StaticResource ScrollBar.Transparent}"/>
                                             </Track.IncreaseRepeatButton>
                                             <Track.Thumb>
-                                                <Thumb Style="{StaticResource ScrollBarThumbVertical}"/>
+                                                <Thumb Style="{StaticResource ScrollBar.Thumb}"/>
                                             </Track.Thumb>
                                         </Track>
-                                        <RepeatButton x:Name="PART_LineRightButton" Grid.Column="2" Command="{x:Static ScrollBar.LineRightCommand}" IsEnabled="{TemplateBinding IsMouseOver}" Style="{StaticResource ScrollBarButton}" Content="M 1.81,7 C1.81,7 0,7 0,7 0,7 3.18,3.5 3.18,3.5 3.18,3.5 0,0 0,0 0,0 1.81,0 1.81,0 1.81,0 5,3.5 5,3.5 5,3.5 1.81,7 1.81,7 z" />
+
+                                        <RepeatButton Grid.Column="2" x:Name="PART_LineRightButton" Command="{x:Static ScrollBar.LineRightCommand}" IsEnabled="{TemplateBinding IsMouseOver}" Style="{StaticResource ScrollBar.Button}" 
+                                                      Content="M 1.81,7 C1.81,7 0,7 0,7 0,7 3.18,3.5 3.18,3.5 3.18,3.5 0,0 0,0 0,0 1.81,0 1.81,0 1.81,0 5,3.5 5,3.5 5,3.5 1.81,7 1.81,7 z" />
                                     </Grid>
+
                                     <ControlTemplate.Triggers>
-                                        <Trigger Property="IsEnabled" Value="false">
-                                            <Setter Property="Background" TargetName="Bg" Value="#FFF2F2F2"/>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter TargetName="Bg" Property="Opacity" Value="0.6"/>
                                         </Trigger>
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>
@@ -654,9 +443,9 @@
                 </Style.Triggers>
             </Style>
 
-            <!--Scroll Viewer Style-->
+            <!--ScrollViewer-->
             <Style TargetType="{x:Type ScrollViewer}">
-                <Setter Property="Template" >
+                <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ScrollViewer}">
                             <Grid x:Name="Grid" Background="{TemplateBinding Background}">
@@ -668,52 +457,24 @@
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                <Rectangle x:Name="Corner" Grid.Column="1" Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Grid.Row="1"/>
-                                <ScrollContentPresenter x:Name="PART_ScrollContentPresenter" CanContentScroll="{TemplateBinding CanContentScroll}" CanHorizontallyScroll="False" CanVerticallyScroll="False" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Grid.Column="0" Margin="{TemplateBinding Padding}" Grid.Row="0"/>
-                                <ScrollBar x:Name="PART_VerticalScrollBar" AutomationProperties.AutomationId="VerticalScrollBar" Cursor="Arrow" Grid.Column="1" Maximum="{TemplateBinding ScrollableHeight}" Minimum="0" Grid.Row="0" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" ViewportSize="{TemplateBinding ViewportHeight}"/>
-                                <ScrollBar x:Name="PART_HorizontalScrollBar" AutomationProperties.AutomationId="HorizontalScrollBar" Cursor="Arrow" Grid.Column="0" Maximum="{TemplateBinding ScrollableWidth}" Minimum="0" Orientation="Horizontal" Grid.Row="1" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" ViewportSize="{TemplateBinding ViewportWidth}"/>
+
+                                <ScrollContentPresenter Grid.Row="0" Grid.Column="0" x:Name="PART_ScrollContentPresenter" CanContentScroll="{TemplateBinding CanContentScroll}" CanHorizontallyScroll="False" 
+                                                        CanVerticallyScroll="False" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Margin="{TemplateBinding Padding}"/>
+
+                                <ScrollBar Grid.Row="0" Grid.Column="1" x:Name="PART_VerticalScrollBar" AutomationProperties.AutomationId="VerticalScrollBar" Cursor="Arrow"
+                                           Maximum="{TemplateBinding ScrollableHeight}" Minimum="0" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" 
+                                           Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" ViewportSize="{TemplateBinding ViewportHeight}"/>
+
+                                <Rectangle Grid.Row="1" Grid.Column="1" x:Name="Corner" Fill="{DynamicResource Element.Background.Back}"/>
+
+                                <ScrollBar Grid.Row="1" Grid.Column="0" x:Name="PART_HorizontalScrollBar" AutomationProperties.AutomationId="HorizontalScrollBar" Cursor="Arrow" 
+                                           Maximum="{TemplateBinding ScrollableWidth}" Minimum="0" Orientation="Horizontal" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" 
+                                           Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" ViewportSize="{TemplateBinding ViewportWidth}"/>
                             </Grid>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-                <Style.Triggers>
-                    <Trigger Property="IsEnabled" Value="false">
-                        <Setter Property="Foreground" Value="White"/>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
 
-            <Style x:Key="ViewBoxStyle" TargetType="{x:Type Viewbox}">
-                <Style.Triggers>
-                    <Trigger Property="IsEnabled" Value="False">
-                        <Setter Property="Opacity" Value=".6"/>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-
-            <!-- Transparent Thumb Style, used by the cropping adorner-->
-            <Style x:Key="ThumbTranparent" TargetType="{x:Type Thumb}">
-                <Setter Property="SnapsToDevicePixels" Value="True"/>
-                <Setter Property="IsTabStop" Value="False"/>
-                <Setter Property="Focusable" Value="False"/>
-                <Setter Property="Background" Value="Transparent"/>
-                <Setter Property="BorderBrush" Value="Transparent"/>
-                <Setter Property="BorderThickness" Value="0"/>
-
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type Thumb}">
-                            <Grid Background="Transparent">
-                                <Border Background="{TemplateBinding Background}" Margin="{TemplateBinding Padding}"
-                                        BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" />
-                            </Grid>
                             <ControlTemplate.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Cursor" Value="SizeAll"/>
-                                </Trigger>
-                                <Trigger Property="IsDragging" Value="True">
-                                    <Setter Property="Background" Value="#10000000"/>
-                                    <!--<Setter Property="Cursor" Value="Hand"/>-->
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter TargetName="Corner" Property="Opacity" Value="0.6"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
@@ -722,23 +483,6 @@
             </Style>
 
             <!--Expander Style-->
-            <SolidColorBrush x:Key="Expander.MouseOver.Circle.Fill" Color="#FFF3F9FF"/>
-            <SolidColorBrush x:Key="Expander.Pressed.Circle.Fill" Color="#FFD9ECFF"/>
-            <SolidColorBrush x:Key="Expander.Disabled.Arrow.Stroke" Color="#FF707070"/>
-            <SolidColorBrush x:Key="Expander.Static.Arrow.Stroke" Color="#FF333333"/>
-
-            <Style x:Key="ExpanderHeaderFocusVisual">
-                <Setter Property="Control.Template">
-                    <Setter.Value>
-                        <ControlTemplate>
-                            <Border>
-                                <Rectangle Margin="0" SnapsToDevicePixels="true" Stroke="Black" StrokeThickness="1" StrokeDashArray="1 2"/>
-                            </Border>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-
             <Style x:Key="ExpanderRightHeaderStyle" TargetType="{x:Type ToggleButton}">
                 <Setter Property="Padding" Value="0"/>
                 <Setter Property="Background" Value="Transparent"/>
@@ -758,11 +502,11 @@
                                     <Label Grid.Row="0" Content="{TemplateBinding Content}" Padding="{TemplateBinding Padding}" Foreground="{TemplateBinding Foreground}"
                                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
 
-                                    <Rectangle Grid.Row="1" x:Name="HorizontalRectangle" MinHeight="1" Fill="#FFE0E3E6" 
-                                           Height="Auto" HorizontalAlignment="Center" Margin="3,0,3,0"/>
+                                    <Rectangle Grid.Row="1" x:Name="HorizontalRectangle" MinHeight="1" Fill="{DynamicResource Element.Border.Light}" 
+                                               Height="Auto" HorizontalAlignment="Center" Margin="3,0,3,0"/>
 
-                                    <Path Grid.Row="2" x:Name="ArrowPath" Data="M 1,1  L 4.5,4.5  L 1,8" HorizontalAlignment="Center" SnapsToDevicePixels="false" 
-                                          Stroke="{StaticResource Expander.Static.Arrow.Stroke}" StrokeThickness="2" VerticalAlignment="Center"/>
+                                    <Path Grid.Row="2" x:Name="ArrowPath" Data="M 1,1  L 4.5,4.5  L 1,8" HorizontalAlignment="Center" SnapsToDevicePixels="False" 
+                                          Stroke="{DynamicResource Element.Glyph}" StrokeThickness="2" VerticalAlignment="Center"/>
                                 </Grid>
                             </Border>
 
@@ -772,17 +516,14 @@
                                 </Trigger>
                                 <Trigger Property="IsMouseOver" Value="True">
                                     <Setter Property="Cursor" Value="Hand"/>
-                                    <Setter Property="Background" Value="{StaticResource Expander.MouseOver.Circle.Fill}"/>
-                                    <Setter Property="Stroke" TargetName="HorizontalRectangle" Value="#FFB3B5B8"/>
-                                    <Setter Property="Stroke" TargetName="ArrowPath" Value="Black"/>
+                                    <Setter Property="Background" Value="{DynamicResource Element.Background.Hover}"/>
+                                    <Setter Property="Stroke" TargetName="HorizontalRectangle" Value="{DynamicResource Element.Border.Hover}"/>
+                                    <Setter Property="Stroke" TargetName="ArrowPath" Value="{DynamicResource Element.Glyph.Hover}"/>
                                 </Trigger>
                                 <Trigger Property="IsPressed" Value="True">
-                                    <Setter Property="Stroke" TargetName="HorizontalRectangle" Value="#FFB3B5B8"/>
-                                    <Setter Property="Background" Value="{StaticResource Expander.Pressed.Circle.Fill}"/>
-                                    <Setter Property="Stroke" TargetName="ArrowPath" Value="Black"/>
-                                </Trigger>
-                                <Trigger Property="IsEnabled" Value="False">
-                                    <Setter Property="Stroke" TargetName="ArrowPath" Value="{StaticResource Expander.Disabled.Arrow.Stroke}"/>
+                                    <Setter Property="Stroke" TargetName="HorizontalRectangle" Value="{DynamicResource Element.Border.Pressed}"/>
+                                    <Setter Property="Background" Value="{DynamicResource Element.Background.Focused}"/>
+                                    <Setter Property="Stroke" TargetName="ArrowPath" Value="{DynamicResource Element.Glyph.Pressed}"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
@@ -807,13 +548,13 @@
                                     </Grid.RowDefinitions>
 
                                     <Label Grid.Row="0" Content="{TemplateBinding Content}" Padding="{TemplateBinding Padding}" Foreground="{TemplateBinding Foreground}"
-                                       HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                                           HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
 
-                                    <Rectangle Grid.Row="1" x:Name="HorizontalRectangle" MinHeight="1" Fill="#FFE0E3E6" 
-                                           Height="Auto" HorizontalAlignment="Center" Margin="3,0,3,0"/>
+                                    <Rectangle Grid.Row="1" x:Name="HorizontalRectangle" MinHeight="1" Fill="{DynamicResource Element.Border.Light}" 
+                                               Height="Auto" HorizontalAlignment="Center" Margin="3,0,3,0"/>
 
-                                    <Path Grid.Row="2" x:Name="ArrowPath" Data="M 4.5,1  L 1,4.5  L 4.5,8" HorizontalAlignment="Center" SnapsToDevicePixels="false" 
-                                      Stroke="{StaticResource Expander.Static.Arrow.Stroke}" StrokeThickness="2" VerticalAlignment="Center"/>
+                                    <Path Grid.Row="2" x:Name="ArrowPath" Data="M 4.5,1  L 1,4.5  L 4.5,8" HorizontalAlignment="Center" SnapsToDevicePixels="False" 
+                                          Stroke="{DynamicResource Element.Glyph}" StrokeThickness="2" VerticalAlignment="Center"/>
                                 </Grid>
                             </Border>
 
@@ -823,17 +564,14 @@
                                 </Trigger>
                                 <Trigger Property="IsMouseOver" Value="True">
                                     <Setter Property="Cursor" Value="Hand"/>
-                                    <Setter Property="Background" Value="{StaticResource Expander.MouseOver.Circle.Fill}"/>
-                                    <Setter Property="Stroke" TargetName="HorizontalRectangle" Value="#FFB3B5B8"/>
-                                    <Setter Property="Stroke" TargetName="ArrowPath" Value="Black"/>
+                                    <Setter Property="Background" Value="{DynamicResource Element.Background.Hover}"/>
+                                    <Setter Property="Stroke" TargetName="HorizontalRectangle" Value="{DynamicResource Element.Border.Hover}"/>
+                                    <Setter Property="Stroke" TargetName="ArrowPath" Value="{DynamicResource Element.Glyph.Hover}"/>
                                 </Trigger>
                                 <Trigger Property="IsPressed" Value="True">
-                                    <Setter Property="Stroke" TargetName="HorizontalRectangle" Value="#FFB3B5B8"/>
-                                    <Setter Property="Background" Value="{StaticResource Expander.Pressed.Circle.Fill}"/>
-                                    <Setter Property="Stroke" TargetName="ArrowPath" Value="Black"/>
-                                </Trigger>
-                                <Trigger Property="IsEnabled" Value="False">
-                                    <Setter Property="Stroke" TargetName="ArrowPath" Value="{StaticResource Expander.Disabled.Arrow.Stroke}"/>
+                                    <Setter Property="Stroke" TargetName="HorizontalRectangle" Value="{DynamicResource Element.Border.Pressed}"/>
+                                    <Setter Property="Background" Value="{DynamicResource Element.Background.Focused}"/>
+                                    <Setter Property="Stroke" TargetName="ArrowPath" Value="{DynamicResource Element.Glyph.Pressed}"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
@@ -860,11 +598,11 @@
                                     <Label Grid.Column="0" Content="{TemplateBinding Content}" Padding="3" Foreground="{TemplateBinding Foreground}"
                                            VerticalContentAlignment="Center"/>
 
-                                    <Rectangle Grid.Column="1" x:Name="HorizontalRectangle" MinHeight="1" Fill="#FFE0E3E6" 
+                                    <Rectangle Grid.Column="1" x:Name="HorizontalRectangle" MinHeight="1" Fill="{DynamicResource Element.Border.Light}" 
                                                Height="Auto" VerticalAlignment="Center" Margin="3,0,3,0"/>
 
-                                    <Path Grid.Column="2" x:Name="ArrowPath" Data="M 1,4.5 L 4.5,1 L 8,4.5" HorizontalAlignment="Center" SnapsToDevicePixels="false" 
-                                          Stroke="{StaticResource Expander.Static.Arrow.Stroke}" StrokeThickness="2" VerticalAlignment="Center"/>
+                                    <Path Grid.Column="2" x:Name="ArrowPath" Data="M 1,4.5 L 4.5,1 L 8,4.5" HorizontalAlignment="Center" SnapsToDevicePixels="False" 
+                                          Stroke="{DynamicResource Element.Glyph}" StrokeThickness="2" VerticalAlignment="Center"/>
                                 </Grid>
                             </Border>
 
@@ -874,17 +612,14 @@
                                 </Trigger>
                                 <Trigger Property="IsMouseOver" Value="True">
                                     <Setter Property="Cursor" Value="Hand"/>
-                                    <Setter Property="Background" Value="{StaticResource Expander.MouseOver.Circle.Fill}"/>
-                                    <Setter Property="Stroke" TargetName="HorizontalRectangle" Value="#FFB3B5B8"/>
-                                    <Setter Property="Stroke" TargetName="ArrowPath" Value="Black"/>
+                                    <Setter Property="Background" Value="{DynamicResource Element.Background.Hover}"/>
+                                    <Setter Property="Stroke" TargetName="HorizontalRectangle" Value="{DynamicResource Element.Border.Hover}"/>
+                                    <Setter Property="Stroke" TargetName="ArrowPath" Value="{DynamicResource Element.Glyph.Hover}"/>
                                 </Trigger>
                                 <Trigger Property="IsPressed" Value="True">
-                                    <Setter Property="Stroke" TargetName="HorizontalRectangle" Value="#FFB3B5B8"/>
-                                    <Setter Property="Background" Value="{StaticResource Expander.Pressed.Circle.Fill}"/>
-                                    <Setter Property="Stroke" TargetName="ArrowPath" Value="Black"/>
-                                </Trigger>
-                                <Trigger Property="IsEnabled" Value="False">
-                                    <Setter Property="Stroke" TargetName="ArrowPath" Value="{StaticResource Expander.Disabled.Arrow.Stroke}"/>
+                                    <Setter Property="Stroke" TargetName="HorizontalRectangle" Value="{DynamicResource Element.Border.Pressed}"/>
+                                    <Setter Property="Background" Value="{DynamicResource Element.Background.Focused}"/>
+                                    <Setter Property="Stroke" TargetName="ArrowPath" Value="{DynamicResource Element.Glyph.Pressed}"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
@@ -911,11 +646,11 @@
                                     <Label Grid.Column="0" Content="{TemplateBinding Content}" Padding="3" Foreground="{TemplateBinding Foreground}"
                                            VerticalContentAlignment="Center"/>
 
-                                    <Rectangle Grid.Column="1" x:Name="HorizontalRectangle" MinHeight="1" Fill="#FFE0E3E6" 
+                                    <Rectangle Grid.Column="1" x:Name="HorizontalRectangle" MinHeight="1" Fill="{DynamicResource Element.Border.Light}" 
                                                Height="Auto" VerticalAlignment="Center" Margin="3,0,3,0"/>
 
                                     <Path Grid.Column="2" x:Name="ArrowPath" Data="M 1,1.5 L 4.5,5 L 8,1.5" HorizontalAlignment="Center" SnapsToDevicePixels="False" 
-                                          Stroke="{StaticResource Expander.Static.Arrow.Stroke}" StrokeThickness="2" VerticalAlignment="Center"/>
+                                          Stroke="{DynamicResource Element.Glyph}" StrokeThickness="2" VerticalAlignment="Center"/>
                                 </Grid>
                             </Border>
 
@@ -925,17 +660,14 @@
                                 </Trigger>
                                 <Trigger Property="IsMouseOver" Value="True">
                                     <Setter Property="Cursor" Value="Hand"/>
-                                    <Setter Property="Background" Value="{StaticResource Expander.MouseOver.Circle.Fill}"/>
-                                    <Setter Property="Stroke" TargetName="HorizontalRectangle" Value="#FFB3B5B8"/>
-                                    <Setter Property="Stroke" TargetName="ArrowPath" Value="Black"/>
+                                    <Setter Property="Background" Value="{DynamicResource Element.Background.Hover}"/>
+                                    <Setter Property="Stroke" TargetName="HorizontalRectangle" Value="{DynamicResource Element.Border.Hover}"/>
+                                    <Setter Property="Stroke" TargetName="ArrowPath" Value="{DynamicResource Element.Glyph.Hover}"/>
                                 </Trigger>
                                 <Trigger Property="IsPressed" Value="True">
-                                    <Setter Property="Stroke" TargetName="HorizontalRectangle" Value="#FFB3B5B8"/>
-                                    <Setter Property="Background" Value="{StaticResource Expander.Pressed.Circle.Fill}"/>
-                                    <Setter Property="Stroke" TargetName="ArrowPath" Value="Black"/>
-                                </Trigger>
-                                <Trigger Property="IsEnabled" Value="False">
-                                    <Setter Property="Stroke" TargetName="ArrowPath" Value="{StaticResource Expander.Disabled.Arrow.Stroke}"/>
+                                    <Setter Property="Stroke" TargetName="HorizontalRectangle" Value="{DynamicResource Element.Border.Pressed}"/>
+                                    <Setter Property="Background" Value="{DynamicResource Element.Background.Focused}"/>
+                                    <Setter Property="Stroke" TargetName="ArrowPath" Value="{DynamicResource Element.Glyph.Pressed}"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
@@ -944,7 +676,7 @@
             </Style>
 
             <Style TargetType="{x:Type Expander}">
-                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
                 <Setter Property="Background" Value="Transparent"/>
                 <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                 <Setter Property="VerticalContentAlignment" Value="Stretch"/>
@@ -954,11 +686,11 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Expander}">
-                            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
                                 <DockPanel>
                                     <ToggleButton x:Name="HeaderSite" ContentTemplate="{TemplateBinding HeaderTemplate}" ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}" 
                                                   Content="{TemplateBinding Header}" DockPanel.Dock="Top" Foreground="{TemplateBinding Foreground}" FontWeight="{TemplateBinding FontWeight}" 
-                                                  FocusVisualStyle="{StaticResource ExpanderHeaderFocusVisual}" FontStyle="{TemplateBinding FontStyle}" FontStretch="{TemplateBinding FontStretch}" 
+                                                  FocusVisualStyle="{StaticResource Style.FocusVisual.NoMargin}" FontStyle="{TemplateBinding FontStyle}" FontStretch="{TemplateBinding FontStretch}" 
                                                   FontSize="{TemplateBinding FontSize}" FontFamily="{TemplateBinding FontFamily}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                                   IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Margin="0"
                                                   Padding="{TemplateBinding Padding}" Style="{StaticResource ExpanderDownHeaderStyle}" 
@@ -989,8 +721,379 @@
                                     <Setter Property="Style" TargetName="HeaderSite" Value="{StaticResource ExpanderLeftHeaderStyle}"/>
                                 </Trigger>
                                 <Trigger Property="IsEnabled" Value="False">
-                                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                                    <Setter TargetName="HeaderSite" Property="Opacity" Value="0.6"/>
                                 </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!--Slider-->
+            <Style TargetType="{x:Type Slider}">
+                <Setter Property="TickPlacement" Value="BottomRight"/>
+                <Setter Property="Background" Value="{DynamicResource Element.Background}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource Element.Border}"/>
+
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Slider">
+                            <Grid x:Name="Root">
+                                <Grid x:Name="HorizontalTemplate">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <TickBar x:Name="TopTick" Grid.Row="0" Fill="{TemplateBinding BorderBrush}" TickFrequency="1" Height="4" Margin="0,0,0,2" Placement="Top" Visibility="Collapsed"/>
+                                    <TickBar x:Name="BottomTick" Grid.Row="2" Fill="{TemplateBinding BorderBrush}" TickFrequency="1" Height="4" Margin="0,1,0,0" Placement="Bottom" Visibility="Collapsed"/>
+
+                                    <Border x:Name="TrackBorder" Grid.Row="1" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" Height="3" VerticalAlignment="Center" Margin="4,0"/>
+
+                                    <Track Grid.Row="1" x:Name="PART_Track">
+                                        <Track.DecreaseRepeatButton>
+                                            <RepeatButton x:Name="HorizontalTrackLargeChangeDecreaseRepeatButton" Template="{StaticResource Template.RepeatButton.Simple}" Background="Transparent"/>
+                                        </Track.DecreaseRepeatButton>
+                                        <Track.IncreaseRepeatButton>
+                                            <RepeatButton x:Name="HorizontalTrackLargeChangeIncreaseRepeatButton" Template="{StaticResource Template.RepeatButton.Simple}" Background="Transparent"/>
+                                        </Track.IncreaseRepeatButton>
+
+                                        <Track.Thumb>
+                                            <Thumb x:Name="HorizontalThumb" Height="18" IsTabStop="True" Width="10" Template="{StaticResource Template.Slider.Thumb.Horizontal}"/>
+                                        </Track.Thumb>
+                                    </Track>
+                                </Grid>
+                            </Grid>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="TickPlacement" Value="BottomRight">
+                                    <Setter TargetName="HorizontalThumb" Property="Template" Value="{StaticResource Template.Slider.Thumb.Bottom}"/>
+                                    <Setter Property="Visibility" TargetName="BottomTick" Value="Visible"/>
+                                </Trigger>
+                                <Trigger Property="TickPlacement" Value="TopLeft">
+                                    <Setter TargetName="HorizontalThumb" Property="Template" Value="{StaticResource Template.Slider.Thumb.Top}"/>
+                                    <Setter Property="Visibility" TargetName="TopTick" Value="Visible"/>
+                                </Trigger>
+                                <Trigger Property="TickPlacement" Value="Both">
+                                    <Setter Property="Visibility" TargetName="TopTick" Value="Visible"/>
+                                    <Setter Property="Visibility" TargetName="BottomTick" Value="Visible"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Opacity" Value="0.7"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!--Hyperlink-->
+            <Style x:Key="{x:Type Hyperlink}" TargetType="{x:Type Hyperlink}">
+                <Setter Property="Foreground" Value="{DynamicResource Brush.Hyperlink}"/>
+                <Setter Property="TextDecorations" Value="Underline"/>
+
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Foreground" Value="{DynamicResource Brush.Hyperlink.Hover}"/>
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Foreground" Value="{DynamicResource Brush.Hyperlink.Disabled}"/>
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="True">
+                        <Setter Property="Cursor" Value="Hand"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <!--ProgressBar-->
+            <Style TargetType="{x:Type ProgressBar}">
+                <Setter Property="Foreground" Value="{DynamicResource Brush.ProgressBar.Progress}"/>
+                <Setter Property="Background" Value="{DynamicResource Element.Background.Back}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource Element.Border}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ProgressBar}">
+                            <Grid x:Name="TemplateRoot">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Determinate"/>
+                                        <VisualState x:Name="Indeterminate">
+                                            <Storyboard RepeatBehavior="Forever">
+                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="Animation">
+                                                    <EasingDoubleKeyFrame KeyTime="0" Value="0.25"/>
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.25"/>
+                                                    <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0.25"/>
+                                                </DoubleAnimationUsingKeyFrames>
+                                                <PointAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransformOrigin)" Storyboard.TargetName="Animation">
+                                                    <EasingPointKeyFrame KeyTime="0" Value="-0.5,0.5"/>
+                                                    <EasingPointKeyFrame KeyTime="0:0:1" Value="0.5,0.5"/>
+                                                    <EasingPointKeyFrame KeyTime="0:0:2" Value="1.5,0.5"/>
+                                                </PointAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+
+                                <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"/>
+                                <Rectangle x:Name="PART_Track"/>
+
+                                <Grid x:Name="PART_Indicator" ClipToBounds="True" HorizontalAlignment="Left">
+                                    <Rectangle x:Name="Indicator" Fill="{TemplateBinding Foreground}"/>
+                                    <Rectangle x:Name="Animation" Fill="{TemplateBinding Foreground}" RenderTransformOrigin="0.5,0.5">
+                                        <Rectangle.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform/>
+                                                <RotateTransform/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </Rectangle.RenderTransform>
+                                    </Rectangle>
+                                </Grid>
+                            </Grid>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="Orientation" Value="Vertical">
+                                    <Setter Property="LayoutTransform" TargetName="TemplateRoot">
+                                        <Setter.Value>
+                                            <RotateTransform Angle="-90"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                                <Trigger Property="IsIndeterminate" Value="True">
+                                    <Setter Property="Visibility" TargetName="Indicator" Value="Collapsed"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!--ListBox-->
+            <Style TargetType="{x:Type ListBox}">
+                <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
+                <Setter Property="Background" Value="{DynamicResource Element.Background}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource Element.Border}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+                <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
+                <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+                <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ListBox}">
+                            <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="1" SnapsToDevicePixels="True">
+                                <ScrollViewer Focusable="False" Padding="{TemplateBinding Padding}">
+                                    <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                </ScrollViewer>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Opacity" Value="0.7"/>
+                                </Trigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsGrouping" Value="True"/>
+                                        <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="False"/>
+                                    </MultiTrigger.Conditions>
+
+                                    <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
+                                </MultiTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!--ListView-->
+            <Style TargetType="{x:Type ListView}">
+                <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
+                <Setter Property="Background" Value="{DynamicResource Element.Background}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource Element.Border}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+                <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
+                <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+                <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ListView}">
+                            <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="1" SnapsToDevicePixels="True">
+                                <ScrollViewer Focusable="False" Padding="{TemplateBinding Padding}">
+                                    <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                </ScrollViewer>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Opacity" Value="0.7"/>
+                                </Trigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsGrouping" Value="True"/>
+                                        <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="False"/>
+                                    </MultiTrigger.Conditions>
+
+                                    <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
+                                </MultiTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!--ComboBoxItem-->
+            <Style TargetType="{x:Type ComboBoxItem}">
+                <Setter Property="SnapsToDevicePixels" Value="True"/>
+                <Setter Property="Padding" Value="4,1"/>
+                <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+                <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderBrush" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="FocusVisualStyle" Value="{StaticResource Style.FocusVisual.NoMargin}"/>
+                <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
+
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                            <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" 
+                                    Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Opacity" TargetName="Bd" Value="0.7"/>
+                                </Trigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsSelected" Value="False"/>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                        <Condition Property="IsKeyboardFocused" Value="False"/>
+                                    </MultiTrigger.Conditions>
+
+                                    <Setter Property="Background" TargetName="Bd" Value="{DynamicResource Item.MouseOver.Background}"/>
+                                    <Setter Property="BorderBrush" TargetName="Bd" Value="{DynamicResource Item.MouseOver.Border}"/>
+                                </MultiTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                        <Condition Property="IsMouseOver" Value="False"/>
+                                        <Condition Property="IsKeyboardFocused" Value="True"/>
+                                    </MultiTrigger.Conditions>
+
+                                    <Setter Property="Background" TargetName="Bd" Value="{DynamicResource Item.SelectedActive.Background}"/>
+                                    <Setter Property="BorderBrush" TargetName="Bd" Value="{DynamicResource Item.SelectedActive.Border}"/>
+                                </MultiTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                    </MultiTrigger.Conditions>
+
+                                    <Setter Property="Background" TargetName="Bd" Value="{DynamicResource Item.SelectedActive.Background}"/>
+                                    <Setter Property="BorderBrush" TargetName="Bd" Value="{DynamicResource Item.SelectedActive.Border}"/>
+                                </MultiTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                        <Condition Property="IsMouseOver" Value="False"/>
+                                        <Condition Property="IsKeyboardFocused" Value="False"/>
+                                    </MultiTrigger.Conditions>
+
+                                    <Setter Property="Background" TargetName="Bd" Value="{DynamicResource Item.SelectedInactive.Background}"/>
+                                    <Setter Property="BorderBrush" TargetName="Bd" Value="{DynamicResource Item.SelectedInactive.Border}"/>
+                                </MultiTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsSelected" Value="False"/>
+                                        <Condition Property="IsMouseOver" Value="False"/>
+                                        <Condition Property="IsKeyboardFocused" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="BorderBrush" TargetName="Bd" Value="{DynamicResource Item.MouseOver.Border}"/>
+                                </MultiTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsSelected" Value="False"/>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                        <Condition Property="IsKeyboardFocused" Value="True"/>
+                                    </MultiTrigger.Conditions>
+
+                                    <Setter Property="Background" TargetName="Bd" Value="{DynamicResource Item.MouseOver.Background}"/>
+                                    <Setter Property="BorderBrush" TargetName="Bd" Value="{DynamicResource Item.MouseOver.Border}"/>
+                                </MultiTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+
+            <!--Custom styles-->
+
+            <!--ListView - Frames-->
+            <Style x:Key="Style.ListView.Frames" TargetType="{x:Type ListView}">
+                <Setter Property="Background" Value="{StaticResource Element.Background}"/>
+                <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource Element.Border}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+                <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
+                <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+                <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+                <Setter Property="ItemsPanel">
+                    <Setter.Value>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Orientation="Horizontal" MinHeight="0" VirtualizationMode="Recycling" IsVirtualizing="True"/>
+                        </ItemsPanelTemplate>
+                    </Setter.Value>
+                </Setter>
+
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ListView}">
+                            <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="2" SnapsToDevicePixels="True">
+                                <ScrollViewer Focusable="False" Padding="{TemplateBinding Padding}" CanContentScroll="True">
+                                    <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                </ScrollViewer>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Opacity" Value="0.7"/>
+                                </Trigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsGrouping" Value="True"/>
+                                        <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="False"/>
+                                    </MultiTrigger.Conditions>
+
+                                    <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
+                                </MultiTrigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </Setter.Value>
@@ -1002,15 +1105,15 @@
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
                 <Setter Property="HorizontalContentAlignment" Value="Center"/>
                 <Setter Property="Background" Value="Transparent"/>
-                <Setter Property="Foreground" Value="Black"/>
-                <Setter Property="BorderBrush" Value="#FFABABAB"/>
+                <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource Element.Border}"/>
                 <Setter Property="BorderThickness" Value="0"/>
 
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type n:IntegerUpDown}">
                             <Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" MinWidth="{TemplateBinding MinWidth}"
-                                BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                                    BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
                                 <Grid Background="{TemplateBinding Background}">
                                     <Grid.RowDefinitions>
                                         <RowDefinition/>
@@ -1022,29 +1125,23 @@
                                     </Grid.ColumnDefinitions>
 
                                     <ScrollViewer Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="PART_ContentHost" Focusable="False" 
-                                              HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"
-                                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                                                  HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"
+                                                  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
 
                                     <RepeatButton Grid.Row="0" Grid.Column="1" x:Name="UpButton" Content="▲" IsTabStop="False" Focusable="False"
-                                              Style="{StaticResource OfficeRepeatButtonStyle}" FontSize="7" VerticalContentAlignment="Center" 
-                                              BorderThickness="0" Padding="0" Margin="0"/>
+                                                  Style="{StaticResource Style.RepeatButton}" FontSize="7" VerticalContentAlignment="Center" 
+                                                  BorderThickness="0" Padding="0" Margin="0"/>
 
                                     <RepeatButton Grid.Row="1" Grid.Column="1" x:Name="DownButton" Content="▼" IsTabStop="False" Focusable="False"
-                                              Style="{StaticResource OfficeRepeatButtonStyle}" FontSize="7" VerticalContentAlignment="Center" 
-                                              BorderThickness="0" Padding="0" Margin="0"/>
+                                                  Style="{StaticResource Style.RepeatButton}" FontSize="7" VerticalContentAlignment="Center" 
+                                                  BorderThickness="0" Padding="0" Margin="0"/>
                                 </Grid>
                             </Border>
 
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="White"/>
-                                </Trigger>
-                                <Trigger Property="IsEnabled" Value="False">
-                                    <Setter Property="Visibility" TargetName="UpButton" Value="Hidden"/>
-                                    <Setter Property="Visibility" TargetName="DownButton" Value="Hidden"/>
-                                    <Setter Property="MinWidth" TargetName="SecondColumn" Value="0"/>
-                                    <Setter Property="Width" TargetName="SecondColumn" Value="6"/>
+                                    <Setter Property="Background" Value="{DynamicResource Element.Background}"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
@@ -1053,69 +1150,80 @@
 
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="BorderBrush" Value="#FFA3BDE3"/>
+                        <Setter Property="BorderBrush" Value="{DynamicResource Element.Border.Hover}"/>
                     </Trigger>
                     <Trigger Property="IsKeyboardFocused" Value="True">
-                        <Setter Property="Background" Value="WhiteSmoke"/>
+                        <Setter Property="Background" Value="{DynamicResource Element.Background.Focused}"/>
                     </Trigger>
                     <Trigger Property="IsEnabled" Value="False">
-                        <Setter Property="Opacity" Value="0.56"/>
+                        <Setter Property="Opacity" Value="0.6"/>
                     </Trigger>
                 </Style.Triggers>
             </Style>
-
-            <!--Notification Icon-->
-            <n:NotifyIcon x:Key="NotifyIcon" IconSource="/Resources/Logo.ico" DataContext="{StaticResource AppViewModel}" NotifyToolTipText="ScreenToGif" Visibility="Collapsed">
-                <!--<n:NotifyIcon.NotifyToolTip>
-                    <Grid Background="White">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Grid.Row="0" Text="ScreenToGif" FontSize="14" Foreground="Navy"/>
-                    </Grid>
-                </n:NotifyIcon.NotifyToolTip>-->
-
-                <n:NotifyIcon.ContextMenu>
-                    <ContextMenu>
-                        <n:ImageMenuItem Header="{DynamicResource S.NewRecording}" Image="{StaticResource Vector.Record.New}" Command="{Binding OpenRecorder}" InputGestureText="{Binding RecorderGesture, UpdateSourceTrigger=PropertyChanged}"/>
-                        <n:ImageMenuItem Header="{DynamicResource S.NewWebcamRecording}" Image="{StaticResource Vector.Camera.New}" Command="{Binding OpenWebcamRecorder}" InputGestureText="{Binding WebcamRecorderGesture, UpdateSourceTrigger=PropertyChanged}"/>
-                        <n:ImageMenuItem Header="{DynamicResource S.NewBoardRecording}" Image="{StaticResource Vector.Board.New}" Command="{Binding OpenBoardRecorder}" InputGestureText="{Binding BoardRecorderGesture, UpdateSourceTrigger=PropertyChanged}"/>
-                        <Separator/>
-                        <n:ImageMenuItem Header="{DynamicResource Editor}" Image="{StaticResource Vector.Editor}" Command="{Binding OpenEditor}" InputGestureText="{Binding EditorGesture, UpdateSourceTrigger=PropertyChanged}"/>
-                        <n:ImageMenuItem Header="{DynamicResource Options}" Image="{StaticResource Vector.Options}" Command="{Binding OpenOptions}" InputGestureText="{Binding OptionsGesture, UpdateSourceTrigger=PropertyChanged}"/>
-                        <n:ImageMenuItem Header="{DynamicResource S.Feedback.Feedback}" Image="{StaticResource Vector.Application}" Command="{Binding OpenFeedback}"/>
-                        <n:ImageMenuItem Header="{DynamicResource S.Troubleshoot.Title}" Image="{StaticResource Vector.Warning}" Command="{Binding OpenTroubleshoot}"/>
-                        <Separator/>
-                        <n:ImageMenuItem Header="{DynamicResource S.Exit}" Image="{StaticResource Vector.Close}" Command="{Binding ExitApplication}" InputGestureText="{Binding ExitGesture, UpdateSourceTrigger=PropertyChanged}"/>
-                    </ContextMenu>
-                </n:NotifyIcon.ContextMenu>
-            </n:NotifyIcon>
 
             <!--Round Thumb-->
             <Style x:Key="Style.Thumb.Ellipse" TargetType="{x:Type Thumb}">
                 <Setter Property="SnapsToDevicePixels" Value="True"/>
                 <Setter Property="IsTabStop" Value="False"/>
                 <Setter Property="Focusable" Value="False"/>
-                <Setter Property="Background" Value="White"/>
-                <Setter Property="BorderBrush" Value="#FFAAAAAA"/>
+                <Setter Property="Background" Value="{DynamicResource Element.Background}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource Element.Border}"/>
 
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Thumb}">
                             <Grid Background="Transparent">
-                                <Ellipse Fill="{TemplateBinding Background}" Margin="{TemplateBinding Padding}" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="1" />
+                                <Ellipse Fill="{TemplateBinding Background}" Margin="{TemplateBinding Padding}" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="1"/>
                             </Grid>
 
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#FFF2F2F2"/>
-                                    <Setter Property="BorderBrush" Value="#FFAAAAAA"/>
+                                    <Setter Property="Background" Value="{DynamicResource Element.Background.Hover}"/>
+                                    <Setter Property="BorderBrush" Value="{DynamicResource Element.Border.Hover}"/>
                                 </Trigger>
                                 <Trigger Property="IsDragging" Value="True">
-                                    <Setter Property="Background" Value="#FFF2F2F2"/>
-                                    <Setter Property="BorderBrush" Value="#FF777777"/>
+                                    <Setter Property="Background" Value="{DynamicResource Element.Background.Focused}"/>
+                                    <Setter Property="BorderBrush" Value="{DynamicResource Element.Border.Pressed}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!--Viewbox-->
+            <Style x:Key="Style.ViewBox" TargetType="{x:Type Viewbox}">
+                <Setter Property="Opacity" Value="{DynamicResource Element.Opacity}"/>
+
+                <Style.Triggers>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Opacity" Value="0.7"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <!--Transparent Thumb Style, used by the cropping adorner-->
+            <Style x:Key="ThumbTranparent" TargetType="{x:Type Thumb}">
+                <Setter Property="SnapsToDevicePixels" Value="True"/>
+                <Setter Property="IsTabStop" Value="False"/>
+                <Setter Property="Focusable" Value="False"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderBrush" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="0"/>
+
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Thumb}">
+                            <Grid Background="Transparent">
+                                <Border Background="{TemplateBinding Background}" Margin="{TemplateBinding Padding}"
+                                        BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" />
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Cursor" Value="SizeAll"/>
+                                </Trigger>
+                                <Trigger Property="IsDragging" Value="True">
+                                    <Setter Property="Background" Value="#10000000"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>

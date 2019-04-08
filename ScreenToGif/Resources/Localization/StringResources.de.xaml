@@ -129,12 +129,12 @@
     <s:String x:Key="Interface.Background">Hintergrund</s:String>
     <s:String x:Key="Interface.Foreground">Vordergrund</s:String>
     <s:String x:Key="Interface.BoardBackground">Zeichenbrett-Hintergrund</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme">Farbschema:</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.VeryLight">Sehr hell</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Light">Hell</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Medium">Mittel</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Dark">Dunkel</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Custom">Benutzerdefiniert</s:String>
+    <s:String x:Key="Interface.Theme.Scheme">Farbschema:</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.VeryLight">Sehr hell</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Light">Hell</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Medium">Mittel</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Dark">Dunkel</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Custom">Benutzerdefiniert</s:String>
     
     <s:String x:Key="Interface.EditorBackground.GridSize">Rastermustergröße:</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.VerySmall">Sehr klein</s:String>

@@ -12,10 +12,11 @@
                Left="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderLeft, Mode=TwoWay}"
                Top="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderTop, Mode=TwoWay}"
                FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}"
-               Foreground="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderForeground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}"
-               Background="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderBackground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}"
                SizeChanged="LightWindow_SizeChanged" Loaded="Recorder_Loaded" Closing="Window_Closing" LocationChanged="Window_LocationChanged">
-    
+
+    <!--Foreground="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderForeground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}"
+               Background="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderBackground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}"-->
+
     <Window.Resources>
         <Storyboard x:Key="ShowDiscardStoryboard">
             <BooleanAnimationUsingKeyFrames Storyboard.TargetName="DiscardButton" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
@@ -99,19 +100,17 @@
                                ContentHeight="10" Padding="4,1" TabIndex="1" Click="CloseButton_Click"/>
 
                 <TextBlock Grid.Row="0" Grid.Column="1" x:Name="CaptionText" Text="{Binding Title, ElementName=RecorderLightWindow}" FontFamily="Segoe UI" FontSize="12"
-                           FontWeight="Regular" Margin="5,0,0,0" Foreground="#FF6F5252" Effect="{DynamicResource Shadow.Foreground.Small}"/>
+                           FontWeight="Regular" Margin="5,0,0,0" Foreground="{DynamicResource Element.Foreground}" Effect="{DynamicResource Shadow.Foreground.Small}"/>
 
                 <TextBlock Grid.Row="1" Grid.Column="1" x:Name="FrameCountTextBlock" Text="{Binding FrameCount, ElementName=RecorderLightWindow, Converter={StaticResource IntToStringConverter}}" 
-                           FontFamily="Segoe UI" FontSize="12" FontWeight="Regular" Margin="5,0,0,0" Foreground="#FF061E87" Effect="{DynamicResource Shadow.Foreground.Small}"/>
+                           FontFamily="Segoe UI" FontSize="12" FontWeight="Regular" Margin="5,0,0,0" Foreground="{DynamicResource Element.Foreground.Header}" Effect="{DynamicResource Shadow.Foreground.Small}"/>
             </Grid>
 
             <StackPanel Grid.Column="1" x:Name="ControlStackPanel" Height="31" Orientation="Horizontal" HorizontalAlignment="Right"
                         ScrollViewer.VerticalScrollBarVisibility="Disabled">
 
-                <!--<TextBlock x:Name="TestTextBlock" Text="0;0" VerticalAlignment="Center" Margin="5"/>-->
-
                 <n:ImageButton x:Name="SnapButton" Content="{StaticResource Vector.Crosshair}" Margin="0" Style="{StaticResource Style.Button.NoText}" 
-                               HorizontalContentAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}" ContentHeight="20" ContentWidth="20"
+                               HorizontalContentAlignment="Center" ContentHeight="20" ContentWidth="20"
                                Command="u:Commands.EnableSnapToWindow" Padding="3" TabIndex="2" PreviewMouseDown="SnapButton_PreviewMouseDown">
                     <n:ImageButton.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Recorder.SnapToWindow}"/>
@@ -119,7 +118,7 @@
                 </n:ImageButton>
 
                 <n:ImageButton x:Name="OptionsButton" Content="{StaticResource Vector.Options}" Margin="0" Style="{StaticResource Style.Button.NoText}" 
-                               Effect="{StaticResource Shadow.Foreground.Small}" ContentHeight="20" ContentWidth="20" Command="u:Commands.Options" Padding="3" TabIndex="3">
+                               ContentHeight="20" ContentWidth="20" Command="u:Commands.Options" Padding="3" TabIndex="3">
                     <n:ImageButton.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Options}"/>
                     </n:ImageButton.ToolTip>
@@ -134,8 +133,8 @@
                             <Binding Path="SnapshotMode" Source="{x:Static u:UserSettings.All}"/>
                         </MultiBinding>
                     </Viewbox.Visibility>
-                    
-                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" FlowDirection="LeftToRight" Margin="-4">
+
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" FlowDirection="LeftToRight" Margin="-4" Opacity="{DynamicResource Element.Opacity}">
                         <n:CircularProgressBar StrokeThickness="2" Percentage="100" SegmentColor="Gray" Radius="24" IsTabStop="False"/>
                         <n:CircularProgressBar StrokeThickness="22" Percentage="100" SegmentColor="#FFF0F1F1" Radius="10" IsTabStop="False"/>
 

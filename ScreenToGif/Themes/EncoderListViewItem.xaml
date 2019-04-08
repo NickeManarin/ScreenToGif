@@ -3,16 +3,11 @@
                     xmlns:n="clr-namespace:ScreenToGif.Controls"
                     xmlns:c="clr-namespace:ScreenToGif.Util.Converters">
 
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/ScreenToGif;component/Themes/Colors.xaml"/>
-    </ResourceDictionary.MergedDictionaries>
-    
     <c:DoubleToPercentage x:Key="DoubleToPercentageConverter"/>
     <c:BytesToSize x:Key="BytesToSizeConverter"/>
 
-    <ControlTemplate x:Key="EncodingControlTemplate" TargetType="{x:Type n:EncoderListViewItem}">
-        <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"
-                Padding="{TemplateBinding Padding}">
+    <ControlTemplate x:Key="Template.Encoding" TargetType="{x:Type n:EncoderListViewItem}">
+        <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -26,27 +21,25 @@
 
                 <Viewbox Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="InternalViewBox" VerticalAlignment="Center" HorizontalAlignment="Center" 
                          Stretch="Uniform" StretchDirection="Both" Margin="1" Visibility="Visible" Effect="{x:Null}">
-                    <ContentPresenter Content="{TemplateBinding Image}"/>
+                    <ContentPresenter Content="{TemplateBinding Image}" Opacity="{DynamicResource Element.Opacity}"/>
                 </Viewbox>
 
                 <n:ImageButton Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="CancelButton" Padding="2" Content="{DynamicResource Vector.Close}" ContentWidth="15" ContentHeight="15"
                                VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch"
-                               Visibility="Hidden" MaxWidth="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}" 
-                               Style="{DynamicResource Style.Button.NoText}">
+                               Visibility="Hidden" MaxWidth="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}" Style="{DynamicResource Style.Button.NoText}">
                     <n:ImageButton.ToolTip>
                         <ToolTip x:Name="CancelToolTip" Content="{DynamicResource Action.Cancel}" Placement="Left" VerticalOffset="-5"/>
                     </n:ImageButton.ToolTip>
                 </n:ImageButton>
 
                 <Label Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" x:Name="PercentageLabel" Content="{TemplateBinding Percentage, Converter={StaticResource DoubleToPercentageConverter}}" 
-                       Foreground="#FF858585" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center"
+                       Foreground="{DynamicResource Element.Foreground.Gray112}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center"
                        FontFamily="Segoe UI Semilight" BorderThickness="0" MinWidth="45"/>
 
-                <Label Grid.Row="0" Grid.Column="2" Content="{TemplateBinding Text}" HorizontalAlignment="Stretch" Padding="0,1,0,0"/>
+                <Label Grid.Row="0" Grid.Column="2" Content="{TemplateBinding Text}" HorizontalAlignment="Stretch" Padding="0,1,0,0" Foreground="{DynamicResource Element.Foreground}"/>
 
                 <ProgressBar Grid.Row="1" Grid.Column="2" Value="{TemplateBinding Percentage}" IsIndeterminate="{TemplateBinding IsIndeterminate}"
-                             Minimum="0" Maximum="100" Height="4" HorizontalAlignment="Stretch"
-                             Orientation="Horizontal" HorizontalContentAlignment="Stretch"/>
+                             Minimum="0" Maximum="100" Height="4" HorizontalAlignment="Stretch" Orientation="Horizontal" HorizontalContentAlignment="Stretch"/>
             </Grid>
         </Border>
 
@@ -73,14 +66,14 @@
             <Trigger Property="OutputType" Value="Photoshop">
                 <Setter Property="Image" Value="{DynamicResource Vector.Psd}"/>
             </Trigger>
-          
+
             <Trigger Property="IsIndeterminate" Value="True">
                 <Setter TargetName="PercentageLabel" Property="Content" Value="~"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <ControlTemplate x:Key="CompletedControlTemplate" TargetType="{x:Type n:EncoderListViewItem}">
+    <ControlTemplate x:Key="Template.Completed" TargetType="{x:Type n:EncoderListViewItem}">
         <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"
                 Padding="{TemplateBinding Padding}">
             <Grid>
@@ -94,28 +87,27 @@
 
                 <Viewbox Grid.Row="0" Grid.Column="0" x:Name="InternalViewBox" VerticalAlignment="Center" HorizontalAlignment="Center" 
                          Stretch="Uniform" StretchDirection="Both" Margin="1" Visibility="Visible" Effect="{x:Null}">
-                    <ContentPresenter Content="{DynamicResource Vector.Success}"/>
+                    <ContentPresenter Content="{DynamicResource Vector.Success}" Opacity="{DynamicResource Element.Opacity}"/>
                 </Viewbox>
 
                 <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="CancelButton" Padding="2" Content="{DynamicResource Vector.Eraser}" ContentWidth="15" ContentHeight="15"
                                VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch"
-                               Visibility="Hidden" MaxWidth="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}" 
-                               Style="{DynamicResource Style.Button.NoText}">
+                               Visibility="Hidden" MaxWidth="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}" Style="{DynamicResource Style.Button.NoText}">
                     <n:ImageButton.ToolTip>
                         <ToolTip x:Name="CancelToolTip" Content="{DynamicResource Encoder.Remove}" Placement="Left" VerticalOffset="-5"/>
                     </n:ImageButton.ToolTip>
                 </n:ImageButton>
 
                 <Label Grid.Row="0" Grid.Column="1" x:Name="FileSizeLabel" Content="{TemplateBinding SizeInBytes, Converter={StaticResource BytesToSizeConverter}}" 
-                       Foreground="#FF858585" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0"
+                       Foreground="{DynamicResource Element.Foreground.Gray112}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0"
                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontStyle="Italic" BorderThickness="0" MinWidth="45"/>
 
                 <StackPanel Grid.Column="2"  HorizontalAlignment="Stretch" VerticalAlignment="Center">
                     <WrapPanel Orientation="Horizontal">
-                        <TextBlock Text="{DynamicResource Encoder.Completed}" Margin="0,0,5,0"/>
+                        <TextBlock Text="{DynamicResource Encoder.Completed}" Margin="0,0,5,0" Foreground="{DynamicResource Element.Foreground}"/>
 
                         <TextBlock x:Name="CopiedTextBlock" Visibility="Collapsed" Margin="0,0,5,0">
-                            <Run Text="{DynamicResource Encoder.Completed.Clipboard}"/>
+                            <Run Text="{DynamicResource Encoder.Completed.Clipboard}" Foreground="{DynamicResource Element.Foreground}"/>
                         </TextBlock>
 
                         <TextBlock x:Name="CopyFailedTextBlock" Visibility="Visible" Margin="0,0,5,0">
@@ -150,11 +142,11 @@
                         </TextBlock>
                     </StackPanel>
                 </StackPanel>
-                               
+
                 <n:ImageButton Grid.Column="3" x:Name="FileButton" Style="{DynamicResource Style.Button.NoText}" Content="{DynamicResource Vector.Gif}" 
                                Padding="2,0" ContentWidth="20" ContentHeight="20" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5">
                     <n:ImageButton.ToolTip>
-                        <TextBlock>
+                        <TextBlock Foreground="{DynamicResource Element.Foreground}">
                             <Run Text="{DynamicResource Encoder.OpenFile}"/>
                             <LineBreak/>
                             <Run Text="{TemplateBinding OutputFilename}"/>
@@ -165,15 +157,15 @@
                 <n:ImageButton Grid.Column="4" x:Name="FolderButton" Style="{DynamicResource Style.Button.NoText}" Content="{DynamicResource Vector.Open}" 
                                Padding="2,0" ContentWidth="20" ContentHeight="20" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5">
                     <n:ImageButton.ToolTip>
-                            <TextBlock>
-                                <Run Text="{DynamicResource Encoder.ExploreFolder}"/>
-                                <LineBreak/>
-                                <Run Text="{TemplateBinding OutputPath}"/>
-                            </TextBlock>
+                        <TextBlock Foreground="{DynamicResource Element.Foreground}">
+                            <Run Text="{DynamicResource Encoder.ExploreFolder}"/>
+                            <LineBreak/>
+                            <Run Text="{TemplateBinding OutputPath}"/>
+                        </TextBlock>
                     </n:ImageButton.ToolTip>
                 </n:ImageButton>
             </Grid>
-            
+
             <Border.ContextMenu>
                 <ContextMenu>
                     <n:ImageMenuItem x:Name="CopyMenuItem" Header="{DynamicResource Editor.Home.Copy}" Image="{DynamicResource Vector.Copy}"/>
@@ -211,7 +203,7 @@
             <Trigger Property="OutputType" Value="Photoshop">
                 <Setter TargetName="FileButton" Property="Content" Value="{DynamicResource Vector.Psd}"/>
             </Trigger>
-          
+
             <Trigger Property="CopiedToClipboard" Value="True">
                 <Setter TargetName="CopiedTextBlock" Property="Visibility" Value="Visible"/>
             </Trigger>
@@ -219,7 +211,7 @@
             <Trigger Property="CopyTaskException" Value="{x:Null}">
                 <Setter TargetName="CopyFailedTextBlock" Property="Visibility" Value="Collapsed"/>
             </Trigger>
-            
+
             <Trigger Property="CommandExecuted" Value="True">
                 <Setter TargetName="ExecutedTextBlock" Property="Visibility" Value="Visible"/>
             </Trigger>
@@ -245,9 +237,8 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <ControlTemplate x:Key="ErrorControlTemplate" TargetType="{x:Type n:EncoderListViewItem}">
-        <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"
-                Padding="{TemplateBinding Padding}">
+    <ControlTemplate x:Key="Template.Error" TargetType="{x:Type n:EncoderListViewItem}">
+        <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="30"/>
@@ -258,19 +249,19 @@
 
                 <Viewbox Grid.Row="0" Grid.Column="0" x:Name="InternalViewBox" VerticalAlignment="Center" HorizontalAlignment="Center" 
                          Stretch="Uniform" StretchDirection="Both" Margin="1" Visibility="Visible" Effect="{x:Null}">
-                    <ContentPresenter Content="{DynamicResource Vector.Error}"/>
+                    <ContentPresenter Content="{DynamicResource Vector.Error}" Opacity="{DynamicResource Element.Opacity}"/>
                 </Viewbox>
 
                 <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="CancelButton" Padding="2" Content="{DynamicResource Vector.Eraser}" ContentWidth="15" ContentHeight="15" 
                                VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch"
-                               Visibility="Hidden" MaxWidth="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}" 
-                               Style="{DynamicResource Style.Button.NoText}">
+                               Visibility="Hidden" MaxWidth="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}" Style="{DynamicResource Style.Button.NoText}">
                     <n:ImageButton.ToolTip>
                         <ToolTip Content="{DynamicResource Encoder.Remove}" Placement="Left" VerticalOffset="-5"/>
                     </n:ImageButton.ToolTip>
                 </n:ImageButton>
 
-                <Label Grid.Row="0" Grid.Column="2" Content="{DynamicResource Encoder.Error}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="0,1,0,0"/>
+                <Label Grid.Row="0" Grid.Column="2" Content="{DynamicResource Encoder.Error}" Foreground="{DynamicResource Element.Foreground}" 
+                       HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="0,1,0,0"/>
 
                 <n:ImageButton Grid.Column="3" x:Name="DetailsButton" Style="{DynamicResource Style.Button.NoText}" Content="{DynamicResource Vector.Application}" 
                                Padding="2,0" ContentWidth="20" ContentHeight="20">
@@ -294,9 +285,8 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <ControlTemplate x:Key="CanceledControlTemplate" TargetType="{x:Type n:EncoderListViewItem}">
-        <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"
-                Padding="{TemplateBinding Padding}">
+    <ControlTemplate x:Key="Template.Canceled" TargetType="{x:Type n:EncoderListViewItem}">
+        <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -317,21 +307,18 @@
                 </n:ImageButton>
 
                 <Label Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" x:Name="PercentageLabel" Content="{TemplateBinding Percentage, Converter={StaticResource DoubleToPercentageConverter}}" 
-                       Foreground="#FF858585" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center"
+                       Foreground="{DynamicResource Element.Foreground.Gray112}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center"
                        FontFamily="Segoe UI Semilight" BorderThickness="0" MinWidth="45"/>
 
-                <Label Grid.Row="0" Grid.Column="2" Content="{DynamicResource Encoder.Canceled}" HorizontalAlignment="Stretch" Padding="0,1,0,0"/>
+                <Label Grid.Row="0" Grid.Column="2" Content="{DynamicResource Encoder.Canceled}" Foreground="{DynamicResource Element.Foreground}" HorizontalAlignment="Stretch" Padding="0,1,0,0"/>
 
-                <ProgressBar Grid.Row="1" Grid.Column="2" Value="{TemplateBinding Percentage}" Foreground="YellowGreen"
-                             Minimum="0" Maximum="100" Height="4" HorizontalAlignment="Stretch"
-                             Orientation="Horizontal" HorizontalContentAlignment="Stretch"/>
+                <ProgressBar Grid.Row="1" Grid.Column="2" Value="{TemplateBinding Percentage}" Minimum="0" Maximum="100" Height="4" HorizontalAlignment="Stretch" Orientation="Horizontal" HorizontalContentAlignment="Stretch"/>
             </Grid>
         </Border>
     </ControlTemplate>
 
-    <ControlTemplate x:Key="FileControlTemplate" TargetType="{x:Type n:EncoderListViewItem}">
-        <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"
-                Padding="{TemplateBinding Padding}">
+    <ControlTemplate x:Key="Template.File" TargetType="{x:Type n:EncoderListViewItem}">
+        <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="30"/>
@@ -341,7 +328,7 @@
 
                 <Viewbox Grid.Row="0" Grid.Column="0" x:Name="InternalViewBox" VerticalAlignment="Center" HorizontalAlignment="Center" 
                          Stretch="Uniform" StretchDirection="Both" Margin="1" Visibility="Visible" Effect="{x:Null}">
-                    <ContentPresenter Content="{DynamicResource Vector.FilePermission}"/>
+                    <ContentPresenter Content="{DynamicResource Vector.FilePermission}" Opacity="{DynamicResource Element.Opacity}"/>
                 </Viewbox>
 
                 <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="CancelButton" Padding="2" Content="{DynamicResource Vector.Eraser}" ContentWidth="15" ContentHeight="15" 
@@ -353,7 +340,8 @@
                     </n:ImageButton.ToolTip>
                 </n:ImageButton>
 
-                <Label Grid.Row="0" Grid.Column="2" Content="{DynamicResource Encoder.FileDeletedMoved}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="0,1,0,0"/>
+                <Label Grid.Row="0" Grid.Column="2" Content="{DynamicResource Encoder.FileDeletedMoved}" Foreground="{DynamicResource Element.Foreground}" 
+                       HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="0,1,0,0"/>
             </Grid>
         </Border>
 
@@ -381,19 +369,19 @@
 
         <Style.Triggers>
             <Trigger Property="Status" Value="Processing">
-                <Setter Property="Template" Value="{StaticResource EncodingControlTemplate}"/>
+                <Setter Property="Template" Value="{StaticResource Template.Encoding}"/>
             </Trigger>
             <Trigger Property="Status" Value="Completed">
-                <Setter Property="Template" Value="{StaticResource CompletedControlTemplate}"/>
+                <Setter Property="Template" Value="{StaticResource Template.Completed}"/>
             </Trigger>
             <Trigger Property="Status" Value="Error">
-                <Setter Property="Template" Value="{StaticResource ErrorControlTemplate}"/>
+                <Setter Property="Template" Value="{StaticResource Template.Error}"/>
             </Trigger>
             <Trigger Property="Status" Value="Canceled">
-                <Setter Property="Template" Value="{StaticResource CanceledControlTemplate}"/>
+                <Setter Property="Template" Value="{StaticResource Template.Canceled}"/>
             </Trigger>
             <Trigger Property="Status" Value="FileDeletedOrMoved">
-                <Setter Property="Template" Value="{StaticResource FileControlTemplate}"/>
+                <Setter Property="Template" Value="{StaticResource Template.File}"/>
             </Trigger>
 
             <MultiTrigger>
@@ -402,8 +390,8 @@
                     <Condition Property="IsEnabled" Value="True"/>
                 </MultiTrigger.Conditions>
 
-                <Setter Property="Background" Value="{StaticResource Item.MouseOver.Background}"/>
-                <Setter Property="BorderBrush" Value="{StaticResource Item.MouseOver.Border}"/>
+                <Setter Property="Background" Value="{DynamicResource Item.MouseOver.Background}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource Item.MouseOver.Border}"/>
             </MultiTrigger>
 
             <MultiTrigger>
@@ -412,8 +400,8 @@
                     <Condition Property="IsSelected" Value="True"/>
                 </MultiTrigger.Conditions>
 
-                <Setter Property="Background" Value="{StaticResource Item.SelectedInactive.Background}"/>
-                <Setter Property="BorderBrush" Value="{StaticResource Item.SelectedInactive.Border}"/>
+                <Setter Property="Background" Value="{DynamicResource Item.SelectedInactive.Background}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource Item.SelectedInactive.Border}"/>
             </MultiTrigger>
 
             <MultiTrigger>
@@ -422,8 +410,8 @@
                     <Condition Property="IsSelected" Value="True"/>
                 </MultiTrigger.Conditions>
 
-                <Setter Property="Background" Value="{StaticResource Item.SelectedActive.Background}"/>
-                <Setter Property="BorderBrush" Value="{StaticResource Item.SelectedActive.Border}"/>
+                <Setter Property="Background" Value="{DynamicResource Item.SelectedActive.Background}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource Item.SelectedActive.Border}"/>
             </MultiTrigger>
 
             <Trigger Property="IsEnabled" Value="False">

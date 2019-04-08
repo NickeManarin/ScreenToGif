@@ -129,12 +129,12 @@
     <s:String x:Key="Interface.Background">Achtergrond</s:String>
     <s:String x:Key="Interface.Foreground">Voorgrond</s:String>
     <s:String x:Key="Interface.BoardBackground">Whiteboard-achtergrond</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme">Kleurenschema</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.VeryLight">Zeer licht</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Light">Licht</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Medium">Gemiddeld</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Dark">Donker</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Custom">Aangepast</s:String>
+    <s:String x:Key="Interface.Theme.Scheme">Kleurenschema</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.VeryLight">Zeer licht</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Light">Licht</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Medium">Gemiddeld</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Dark">Donker</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Custom">Aangepast</s:String>
     
     <s:String x:Key="Interface.EditorBackground.GridSize">Rastergrootte</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.VerySmall">Zeer klein</s:String>

@@ -207,14 +207,7 @@ namespace ScreenToGif.Windows.Other
 
             #endregion
 
-            #region Temporary folder
-
-            //If never configurated.
-            if (string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder))
-                UserSettings.All.TemporaryFolder = Path.GetTempPath();
-
-            #endregion
-
+            
             SystemEvents.PowerModeChanged += System_PowerModeChanged;
             SystemEvents.DisplaySettingsChanged += SystemEvents_DisplaySettingsChanged;
         }

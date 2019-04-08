@@ -9,9 +9,7 @@ namespace ScreenToGif.Util.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var stage = value as Stage?;
-
-            if (!stage.HasValue)
+            if (!(value is Stage stage))
                 return Application.Current.FindResource("Recorder.Record");
 
             switch (stage)

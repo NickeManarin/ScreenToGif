@@ -78,12 +78,12 @@
     <s:String x:Key="Interface.Background">Тло</s:String>
     <s:String x:Key="Interface.Foreground">Передній план</s:String>
     <s:String x:Key="Interface.BoardBackground">Тло дошки</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme">Кольорова схема</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.VeryLight">Дуже світлий</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Light">Світлий</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Medium">Середній</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Dark">Темний</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Custom">Вибірковий</s:String>
+    <s:String x:Key="Interface.Theme.Scheme">Кольорова схема</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.VeryLight">Дуже світлий</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Light">Світлий</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Medium">Середній</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Dark">Темний</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Custom">Вибірковий</s:String>
     
     <s:String x:Key="Interface.EditorBackground.GridSize">Розмір комірки</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.VerySmall">Дуже малий</s:String>

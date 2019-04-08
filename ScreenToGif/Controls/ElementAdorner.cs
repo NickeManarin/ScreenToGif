@@ -349,7 +349,7 @@ namespace ScreenToGif.Controls
                 Cursor = cursor,
                 Height = 10,
                 Width = 10,
-                Style = (Style)FindResource("ScrollBarThumbVertical"),
+                Style = (Style)FindResource("ScrollBar.Thumb"),
             };
 
             _visualChildren.Add(thumb);

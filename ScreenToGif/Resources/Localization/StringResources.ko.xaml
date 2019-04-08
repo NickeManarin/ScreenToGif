@@ -79,12 +79,12 @@
     <!--<s:String x:Key="Interface.Background">Background</s:String>-->
     <!--<s:String x:Key="Interface.Foreground">Foreground</s:String>-->
     <s:String x:Key="Interface.BoardBackground">칠판 배경 설정</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme">색 설정</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.VeryLight">매우 밝게</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Light">밝게</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Medium">중간</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Dark">어둡게</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Custom">사용자 설정</s:String>
+    <s:String x:Key="Interface.Theme.Scheme">색 설정</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.VeryLight">매우 밝게</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Light">밝게</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Medium">중간</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Dark">어둡게</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Custom">사용자 설정</s:String>
     
     <s:String x:Key="Interface.EditorBackground.GridSize">격자 크기</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.VerySmall">매우 작게</s:String>

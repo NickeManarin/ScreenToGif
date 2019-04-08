@@ -129,12 +129,12 @@
     <s:String x:Key="Interface.Background">Arrière-plan</s:String>
     <s:String x:Key="Interface.Foreground">Premier plan</s:String>
     <s:String x:Key="Interface.BoardBackground">Arrière-plan de la planche à dessin</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme">Schéma de couleur</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.VeryLight">Très clair</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Light">Clair</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Medium">Moyen</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Dark">Sombre</s:String>
-    <s:String x:Key="Interface.EditorBackground.Scheme.Custom">Personnalisée</s:String>
+    <s:String x:Key="Interface.Theme.Scheme">Schéma de couleur</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.VeryLight">Très clair</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Light">Clair</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Medium">Moyen</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Dark">Sombre</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Custom">Personnalisée</s:String>
     
     <s:String x:Key="Interface.EditorBackground.GridSize">Taille de la grille</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.VerySmall">Très petit</s:String>

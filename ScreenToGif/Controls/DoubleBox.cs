@@ -317,16 +317,16 @@ namespace ScreenToGif.Controls
             Text = string.Format(CultureInfo.CurrentCulture, _format, Value);
         }
 
-        //protected override void OnKeyDown(KeyEventArgs e)
-        //{
-        //    if (e.Key == Key.Enter || e.Key == Key.Return)
-        //    {
-        //        e.Handled = true;
-        //        MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
-        //    }
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter || e.Key == Key.Return)
+            {
+                e.Handled = true;
+                MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+            }
 
-        //    base.OnKeyDown(e);
-        //}
+            base.OnKeyDown(e);
+        }
 
         protected override void OnMouseWheel(MouseWheelEventArgs e)
         {
