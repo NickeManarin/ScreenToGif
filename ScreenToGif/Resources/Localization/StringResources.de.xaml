@@ -869,7 +869,7 @@
     <s:String x:Key="IncreaseDecreaseDelay.Info">Aktuelle Länge markierter Frames wird um den eingegebenen Wert erhöht bzw. verringert. Sie können einen Wert zwischen -10000 ms und 10000 ms eingeben. Die Framelänge wird jedoch immer im Bereich zwischen 10 ms und 25500 ms liegen.</s:String>
     <s:String x:Key="ScaleDelay.Info">Aktuelle Länge markierter Frames wird um den eingegebenen Prozentsatz verändert.&#x0d;Sie können Dauer der Frames anpassen indem Sie einen Wert zwischen 1 % und 1000 % wählen. Die Framelänge wird jedoch immer im Bereich zwischen 10 ms und 25500 ms liegen.</s:String>
     
-    <s:String x:Key="Transitions.Lenght">Übergangsdauer</s:String>
+    <s:String x:Key="Transitions.Length">Übergangsdauer</s:String>
     <s:String x:Key="Transitions.Delay">Übergang-Verzögerung</s:String>
     <s:String x:Key="Transitions.FadeTo">Ausblenden zu ...</s:String>
     <s:String x:Key="Transitions.FadeTo.Frame">Nächster Frame</s:String>

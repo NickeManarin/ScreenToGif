@@ -853,7 +853,7 @@
     <s:String x:Key="OverrideDelay.Info">Este nuevo valor reemplazará la duración (retraso) de todos los fotogramas seleccionados. Este valor puede ir de 10 ms a 25.500 ms.</s:String>
     <s:String x:Key="IncreaseDecreaseDelay.Info">Este valor disminuirá/aumentará la duración (retraso) de cada fotograma será restringido entre 10 ms y 25.500 ms</s:String>
     
-    <s:String x:Key="Transitions.Lenght">Longitud de la transición</s:String>
+    <s:String x:Key="Transitions.Length">Longitud de la transición</s:String>
     <s:String x:Key="Transitions.Delay">Retraso de transición</s:String>
     <s:String x:Key="Transitions.FadeTo">Desvanecer a</s:String>
     <s:String x:Key="Transitions.FadeTo.Frame">El próximo fotograma</s:String>

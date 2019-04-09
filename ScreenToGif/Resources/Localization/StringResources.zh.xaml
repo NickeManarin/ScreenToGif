@@ -868,7 +868,7 @@
     <s:String x:Key="IncreaseDecreaseDelay.Info">该值将增加或减少所选每帧的持续时间（延时）。
 您可以增加或减少介于 -10.000ms 和 10.000ms 之间的值，但每帧的持续时间将介于 10ms 和 25.500ms 之间</s:String>
     
-    <s:String x:Key="Transitions.Lenght">过渡长度</s:String>
+    <s:String x:Key="Transitions.Length">过渡长度</s:String>
     <s:String x:Key="Transitions.Delay">过渡延时</s:String>
     <s:String x:Key="Transitions.FadeTo">淡出到...</s:String>
     <s:String x:Key="Transitions.FadeTo.Frame">下一帧</s:String>

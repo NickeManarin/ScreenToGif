@@ -4312,7 +4312,7 @@
                                 <n:ColorBox Grid.Row="0" Grid.Column="1" SelectedColor="{Binding FadeToColor, Source={x:Static u:UserSettings.All}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10,5"/>
                             </Grid>
 
-                            <n:LabelSeparator Grid.Row="4" Text="{DynamicResource Transitions.Lenght}"/>
+                            <n:LabelSeparator Grid.Row="4" Text="{DynamicResource Transitions.Length}"/>
                             <Slider Grid.Row="5" Grid.Column="0" x:Name="FadeSlider" Margin="10,5,5,5" Minimum="1" Maximum="25" 
                                     AutoToolTipPlacement="TopLeft" SmallChange="1" IsSnapToTickEnabled="True"
                                     Value="{Binding Source={x:Static u:UserSettings.All}, Path=FadeTransitionLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -4382,7 +4382,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <n:LabelSeparator Grid.Row="0" Text="{DynamicResource Transitions.Lenght}"/>
+                            <n:LabelSeparator Grid.Row="0" Text="{DynamicResource Transitions.Length}"/>
                             <Slider Grid.Row="1" Grid.Column="0" x:Name="SlideSlider" Minimum="1" Maximum="20" 
                                     AutoToolTipPlacement="TopLeft" SmallChange="1" IsSnapToTickEnabled="True" Margin="10,5,5,5"/>
 

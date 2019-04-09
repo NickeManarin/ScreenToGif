@@ -857,7 +857,7 @@
     <s:String x:Key="IncreaseDecreaseDelay.Info">Cette valeur diminuera/augmentera la durée (délai) de chaque image sélectionnée.&#x0d;Vous pouvez décrémenter/incrémenter en sélectionnant une valeur comprise entre -10000ms et 10000ms, mais la durée finale de chaque image sera limitée à 10ms à 25500ms.</s:String>
     <s:String x:Key="ScaleDelay.Info">Ajustez la durée (délai) de chaque image sélectionnée en fonction de ce pourcentage. &#x0d; Vous pouvez mettre à l’échelle la durée de chaque image en sélectionnant une valeur comprise entre 1% et 1000%, mais la durée finale de chaque image sera limitée entre 10 ms et 25500ms.</s:String>
 
-    <s:String x:Key="Transitions.Lenght">Longueur de transition</s:String>
+    <s:String x:Key="Transitions.Length">Longueur de transition</s:String>
     <s:String x:Key="Transitions.Delay">Délai de transition</s:String>
     <s:String x:Key="Transitions.FadeTo">Fondu vers...</s:String>
     <s:String x:Key="Transitions.FadeTo.Frame">La prochaine image</s:String>

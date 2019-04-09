@@ -8,9 +8,9 @@ namespace ScreenToGif.Util
     public class Humanizer
     {
         /// <summary>
-        /// Converts a lenght value to a readable size.
+        /// Converts a length value to a readable size.
         /// </summary>
-        /// <param name="byteCount">The lenght of the file.</param>
+        /// <param name="byteCount">The length of the file.</param>
         /// <returns>A string representation of a file size.</returns>
         public static string BytesToString(long byteCount)
         {
@@ -27,9 +27,9 @@ namespace ScreenToGif.Util
         }
 
         /// <summary>
-        /// Converts a lenght value to a readable size.
+        /// Converts a length value to a readable size.
         /// </summary>
-        /// <param name="byteCount">The lenght of the file.</param>
+        /// <param name="byteCount">The length of the file.</param>
         /// <returns>A string representation of a file size.</returns>
         public static string BytesToString(ulong byteCount)
         {

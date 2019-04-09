@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 
@@ -13,12 +9,10 @@ namespace ScreenToGif.Util.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var lenght = value as long?;
-
-            if (!lenght.HasValue)
+            if (!(value is long length))
                 return DependencyProperty.UnsetValue;
 
-            return Humanizer.BytesToString(lenght.Value);
+            return Humanizer.BytesToString(length);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

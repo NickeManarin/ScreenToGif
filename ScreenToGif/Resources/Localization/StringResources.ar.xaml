@@ -586,7 +586,7 @@
     <!--<s:String x:Key="OverrideDelay.Info">This new value will replace the duration (delay) of all selected frames. The value can be from 10ms to 25500ms.</s:String>-->
     <!--<s:String x:Key="IncreaseDecreaseDelay.Info">This value will decrease/increase the duration (delay) of each selected frame.&#x0d;You can decrement/increment by selecting a value between -10000ms and 10000ms, but the final duration of each frame will be restricted to between 10ms and 25500ms</s:String>-->
     
-    <s:String x:Key="Transitions.Lenght">طول الانتقال</s:String>
+    <s:String x:Key="Transitions.Length">طول الانتقال</s:String>
     <!--<s:String x:Key="Transitions.FadeTo">Fade To...</s:String>-->
     <!--<s:String x:Key="Transitions.FadeTo.Frame">The next frame</s:String>-->
     <!--<s:String x:Key="Transitions.FadeTo.Color">A color</s:String>-->

@@ -869,7 +869,7 @@
     <s:String x:Key="IncreaseDecreaseDelay.Info">Уменьшит / увеличит продолжительность каждого кадра.&#x0d;&#x0d;Можно выбрать от 10 мс до 25500 мс.</s:String>
     <s:String x:Key="ScaleDelay.Info">Изменяет продолжительность каждого выбранного кадра на указанный процент.&#x0d;&#x0d;Допустимо от 1% до 1000%, но конечная продолжительность каждого кадра будет ограничена 10 - 25500 мс</s:String>
 
-    <s:String x:Key="Transitions.Lenght">Время перехода</s:String>
+    <s:String x:Key="Transitions.Length">Время перехода</s:String>
     <s:String x:Key="Transitions.Delay">Задержка перехода</s:String>
     <s:String x:Key="Transitions.FadeTo">Замещать этим...</s:String>
     <s:String x:Key="Transitions.FadeTo.Frame">След. кадр</s:String>

@@ -869,7 +869,7 @@
     <s:String x:Key="IncreaseDecreaseDelay.Info">Questo valore ridurrà/aumenterà la durata (ritardo) di ogni fotogramma selezionato.&#x0a;È possibile ridurre/aumentare selezionando un valore tra -10000ms e 10000ms, tuttavia la durata finale di ciascun fotogramma verrà forzata tra 10ms e 25500ms</s:String>
     <s:String x:Key="ScaleDelay.Info">Ridimensiona la durata (ritardo) di ciascun fotogramma selezionato per questa percentuale.&#x0d;Puoi ridimensionare la durata di ciascun fotogramma selezionando un valore compreso tra 1% e 1000%, ma la durata finale di ciascun fotogramma sarà limitata tra 10 ms e 25500 ms</s:String>
 
-    <s:String x:Key="Transitions.Lenght">Durata transizione</s:String>
+    <s:String x:Key="Transitions.Length">Durata transizione</s:String>
     <s:String x:Key="Transitions.Delay">Ritardo transizione</s:String>
     <s:String x:Key="Transitions.FadeTo">Dissolvi a...</s:String>
     <s:String x:Key="Transitions.FadeTo.Frame">Al fotogramma successivo</s:String>

@@ -869,7 +869,7 @@
     <s:String x:Key="IncreaseDecreaseDelay.Info">この値は選択されたフレーム毎の持続時間 (遅延)を減少/増加させます。-10000ms〜10000msの間の値を選択することによって減少/増加できますが、各フレームの最終的な持続時間は10ms〜25500msに制限されます。</s:String>
     <s:String x:Key="ScaleDelay.Info">この比率(%)でフレーム毎の持続期間(遅延)を拡大します。&#x0d;1%～1000%の範囲で持続時間(遅延)を拡大できます。最終的な持続時間(遅延)の値は、10ms～25500msの範囲に制限されます。</s:String>
 
-    <s:String x:Key="Transitions.Lenght">トランジションの長さ</s:String>
+    <s:String x:Key="Transitions.Length">トランジションの長さ</s:String>
     <s:String x:Key="Transitions.Delay">トランジション遅延</s:String>
     <s:String x:Key="Transitions.FadeTo">フェード...</s:String>
     <s:String x:Key="Transitions.FadeTo.Frame">次のフレーム</s:String>

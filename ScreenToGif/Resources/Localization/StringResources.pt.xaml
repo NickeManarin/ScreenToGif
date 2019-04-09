@@ -886,7 +886,7 @@
     <s:String x:Key="IncreaseDecreaseDelay.Info">Esse valor irá aumentar/diminuir a duração (atraso) de cada quadro selecionado.&#x0d;Você pode incrementar/decrementar, selecionando um valor entre -10.000ms e 10.000ms, mas a duração de cada quadro deve permanecer entre 10 ms e 25.500ms.</s:String>
     <s:String x:Key="ScaleDelay.Info">Altere a escala de duração de cada quadro selecionado pelo valor em percentual.&#x0d;Você alterar a escala de duração de cada quadro selecionando um valor entre 1% e 1000%, mas a duração de cada quadro deve permanecer entre 10 ms e 25.500ms.</s:String>
 
-    <s:String x:Key="Transitions.Lenght">Duração da Transição</s:String>
+    <s:String x:Key="Transitions.Length">Duração da Transição</s:String>
     <s:String x:Key="Transitions.Delay">Atraso da Transição</s:String>
     <s:String x:Key="Transitions.FadeTo">Esmaecer para...</s:String>
     <s:String x:Key="Transitions.FadeTo.Frame">O próximo&#10;quadro</s:String>

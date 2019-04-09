@@ -612,7 +612,7 @@
     <s:String x:Key="OverrideDelay.Info">此新值將取代所有選定幀的持續時間(延遲)。該值可以從 10ms 到 25500ms。</s:String>
     <s:String x:Key="IncreaseDecreaseDelay.Info">該值將減少/增加每個所選幀的持續時間(延遲)。\n您可以透過選擇 -10000 和 10000ms 之間的值進行遞減/遞增，但每幀的最終持續時間將限制在 10ms 到 25500ms 之間</s:String>
     
-    <s:String x:Key="Transitions.Lenght">轉場長度</s:String>
+    <s:String x:Key="Transitions.Length">轉場長度</s:String>
     <s:String x:Key="Transitions.Delay">轉換延遲</s:String>
     <s:String x:Key="Transitions.FadeTo">淡入...</s:String>
     <s:String x:Key="Transitions.FadeTo.Frame">下一幀</s:String>

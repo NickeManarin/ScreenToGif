@@ -823,7 +823,7 @@
     <s:String x:Key="OverrideDelay.Info">Nová hodnota nahradí trvání (zpožení) všech vybraných snímků. Hodnota musí být v rozmezí 10ms až 25500ms.</s:String>
     <s:String x:Key="IncreaseDecreaseDelay.Info">Tato hodnota zkrátí/prodlouží trvání (zpoždění) každého vybraného snímku.&#x0d;Tuto dobu lze zkrátit/prodloužit výběrem hodnoty mezi -10000ms a 10000ms, ale výsledná délka každého snímku bude omezena mezi 10ms a 25500ms</s:String>
     
-    <s:String x:Key="Transitions.Lenght">Délka přechodu</s:String>
+    <s:String x:Key="Transitions.Length">Délka přechodu</s:String>
     <s:String x:Key="Transitions.Delay">Zpoždění přechodu</s:String>
     <s:String x:Key="Transitions.FadeTo">Přechod do...</s:String>
     <s:String x:Key="Transitions.FadeTo.Frame">Další snímek</s:String>

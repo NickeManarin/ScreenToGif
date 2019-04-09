@@ -589,7 +589,7 @@
     <s:String x:Key="OverrideDelay.Info">Detta nya värde kommer att ersätta varaktighet (fördröjning) av alla valda ramar. Värdet kan vara från 10 ms till 25500ms.</s:String>
     <s:String x:Key="IncreaseDecreaseDelay.Info">Detta värde kommer att minska / öka varaktigheten (fördröjning) av varje vald ram. Du kan stega / ökning genom att välja ett värde mellan -10000ms och 10000ms, men den slutliga längden på varje ram kommer att begränsas till mellan 10ms och 25500ms</s:String>
     
-    <s:String x:Key="Transitions.Lenght">Övergångs längd</s:String>
+    <s:String x:Key="Transitions.Length">Övergångs längd</s:String>
     <s:String x:Key="Transitions.FadeTo">Blekna till...</s:String>
     <s:String x:Key="Transitions.FadeTo.Frame">Nästa bildruta</s:String>
     <s:String x:Key="Transitions.FadeTo.Color">En färg</s:String>

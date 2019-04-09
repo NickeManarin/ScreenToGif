@@ -678,9 +678,9 @@ namespace ScreenToGif.ImageUtil.Gif.LegacyEncoder
             _fs.WriteByte(0x21);
             _fs.WriteByte(0xfe);
 
-            //byte[] lenght = StringToByteArray(comment.Length.ToString("X"));
+            //byte[] length = StringToByteArray(comment.Length.ToString("X"));
 
-            //foreach (byte b in lenght)
+            //foreach (byte b in length)
             //{
             //    fs.WriteByte(b);
             //}

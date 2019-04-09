@@ -55,7 +55,7 @@ namespace ScreenToGif.ImageUtil.Psd
                     var name = StreamHelpers.GetPascalStringAsBytes(Encoding.GetEncoding(1252).GetBytes(Name));
                     var aditionalLayerInfo = AditionalInfo.SelectMany(s => s.Content).ToArray();
 
-                    stream.WriteUInt32(BitHelper.ConvertEndian((uint)(4 + 4 + name.Length + aditionalLayerInfo.Length))); //Extra data lenght, 4 bytes.
+                    stream.WriteUInt32(BitHelper.ConvertEndian((uint)(4 + 4 + name.Length + aditionalLayerInfo.Length))); //Extra data length, 4 bytes.
                     stream.WriteInt32(BitHelper.ConvertEndian(0)); //Layer mask size, 4 bytes.
                     stream.WriteInt32(BitHelper.ConvertEndian(0)); //Blending ranges size, 4 bytes.
 

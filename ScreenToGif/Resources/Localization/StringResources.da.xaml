@@ -869,7 +869,7 @@
     <s:String x:Key="IncreaseDecreaseDelay.Info">Værdien øger/mindsker varigheden af hver enkelt valgt ramme.&#10;Du kan vælge en værdi mellem -10.000ms og 10.000ms, men varigheden af de enkelt rammer vil være mellem 10ms og 25.500ms</s:String>
     <s:String x:Key="ScaleDelay.Info">Tilpas længde (forsinkelse) af hver valgt ramme med denne procent.&#x0d;Du kan vælge fra 1% til 1000%, men resultatet begrænses til mellem 10ms og 25500ms</s:String>
     
-    <s:String x:Key="Transitions.Lenght">Varighed</s:String>
+    <s:String x:Key="Transitions.Length">Varighed</s:String>
     <s:String x:Key="Transitions.Delay">Forsinkelse</s:String>
     <s:String x:Key="Transitions.FadeTo">Udton til...</s:String>
     <s:String x:Key="Transitions.FadeTo.Frame">Næste ramme</s:String>

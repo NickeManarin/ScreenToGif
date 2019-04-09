@@ -823,7 +823,7 @@
     <s:String x:Key="OverrideDelay.Info">Ta nowa wartość zastąpi czas trwania (opóźnienie) wszystkich wybranych klatek. Wartość może zawierać się w przedziale od 10 ms do 25500 ms.</s:String>
     <s:String x:Key="IncreaseDecreaseDelay.Info">Ta wartość zmniejszy/zwiększy czas trwania (opóźnienie) każdej wybranej klatki.&#x0d;Możesz zmniejszyć/zwiększyć poprzez wybranie wartości z przedziału od -10000ms do 10000ms, ale ostateczna długość trwania każdej klatki będzie ograniczona to przedziału od 10ms do 25500ms</s:String>
     
-    <s:String x:Key="Transitions.Lenght">Długość przejścia</s:String>
+    <s:String x:Key="Transitions.Length">Długość przejścia</s:String>
     <s:String x:Key="Transitions.Delay">Opóźnienie przejścia</s:String>
     <s:String x:Key="Transitions.FadeTo">Wygaś do...</s:String>
     <s:String x:Key="Transitions.FadeTo.Frame">Następnej klatki</s:String>
