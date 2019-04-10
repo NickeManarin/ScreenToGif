@@ -107,9 +107,9 @@
     <SolidColorBrush x:Key="Brush.MenuItem.Background.Pressed" Color="#FF404040"/>
 
     <!--StatusBand-->
-    <SolidColorBrush x:Key="Brush.StatusBand.Info" Color="#60D4D4F8"/>
-    <SolidColorBrush x:Key="Brush.StatusBand.Warning" Color="#60FCF7B6"/>
-    <SolidColorBrush x:Key="Brush.StatusBand.Error" Color="#60F8D4D4"/>
+    <SolidColorBrush x:Key="Brush.StatusBand.Info" Color="#FF353554"/>
+    <SolidColorBrush x:Key="Brush.StatusBand.Warning" Color="#FF5D5704"/>
+    <SolidColorBrush x:Key="Brush.StatusBand.Error" Color="#FF5C0A0A"/>
 
     <!--Hyperlink-->
     <SolidColorBrush x:Key="Brush.Hyperlink" Color="#FF61618C"/>

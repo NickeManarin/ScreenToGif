@@ -113,6 +113,8 @@ namespace ScreenToGif.Windows
                     throw new Exception("No theme was selected.");
 
                 ThemeHelper.SelectTheme(selected);
+
+                App.NotifyIcon?.RefreshVisual();
             }
             catch (Exception ex)
             {

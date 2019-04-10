@@ -9,7 +9,7 @@
     <SolidColorBrush x:Key="Panel.Background.Level3" Color="#FFD6D6D6"/>
     <SolidColorBrush x:Key="Panel.Background.Level4" Color="#FFD7D7E4"/>
 
-    <SolidColorBrush x:Key="Element.Background" Color="#FFE8E8E8"/>
+    <SolidColorBrush x:Key="Element.Background" Color="#FFE9E9E9"/>
     <SolidColorBrush x:Key="Element.Background.Hover" Color="#FFD5E1F2"/>
     <SolidColorBrush x:Key="Element.Background.Focused" Color="#FFF1F1F1"/>
     <SolidColorBrush x:Key="Element.Background.Pressed" Color="#FFA3BDE3"/>
@@ -49,7 +49,7 @@
     <SolidColorBrush x:Key="Brush.Button.Background.Hover" Color="#AAD5E1F2"/>
     <SolidColorBrush x:Key="Brush.Button.Background.Checked" Color="#806F96CF"/>
     <SolidColorBrush x:Key="Brush.Button.Background.Pressed" Color="#F0A3BDE3"/>
-    <SolidColorBrush x:Key="Brush.Button.Background.Focused" Color="#AACDE6F7"/>
+    <SolidColorBrush x:Key="Brush.Button.Background.Focused" Color="#AAABC0CF"/>
 
     <SolidColorBrush x:Key="Brush.Button.Border" Color="#FFABABAB"/>
     <SolidColorBrush x:Key="Brush.Button.Border.Hover" Color="#FFA3BDE3"/>

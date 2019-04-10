@@ -80,36 +80,36 @@ namespace ScreenToGif.Windows.Other
             //StatusList.Error("Nicke!");
         }
 
-        private void Select_Click(object sender, RoutedEventArgs e)
-        {
-            MainDrawingCanvas.DrawingMode = DrawingCanvas.DrawingModes.Select;
-        }
+        //private void Select_Click(object sender, RoutedEventArgs e)
+        //{
+        //    MainDrawingCanvas.DrawingMode = DrawingCanvas.DrawingModes.Select;
+        //}
 
-        private void Shape_Click(object sender, RoutedEventArgs e)
-        {
-            MainDrawingCanvas.DrawingMode = DrawingCanvas.DrawingModes.Shape;
-        }
+        //private void Shape_Click(object sender, RoutedEventArgs e)
+        //{
+        //    MainDrawingCanvas.DrawingMode = DrawingCanvas.DrawingModes.Shape;
+        //}
 
-        private void Ink_Click(object sender, RoutedEventArgs e)
-        {
-            MainDrawingCanvas.DrawingMode = DrawingCanvas.DrawingModes.Ink;
-        }
+        //private void Ink_Click(object sender, RoutedEventArgs e)
+        //{
+        //    MainDrawingCanvas.DrawingMode = DrawingCanvas.DrawingModes.Ink;
+        //}
 
-        private void Thickness_Click(object sender, RoutedEventArgs e)
-        {
-            MainDrawingCanvas.StrokeThickness = MainDrawingCanvas.StrokeThickness == 5 ? 8 : 5;
-        }
+        //private void Thickness_Click(object sender, RoutedEventArgs e)
+        //{
+        //    MainDrawingCanvas.StrokeThickness = MainDrawingCanvas.StrokeThickness == 5 ? 8 : 5;
+        //}
 
-        private void Color_Click(object sender, RoutedEventArgs e)
-        {
-            MainDrawingCanvas.Stroke = MainDrawingCanvas.Stroke == Brushes.Black ? Brushes.DarkBlue : Brushes.Black;
-            MainDrawingCanvas.Fill = MainDrawingCanvas.Fill == Brushes.Transparent ? Brushes.LightBlue : Brushes.Transparent;
-        }
+        //private void Color_Click(object sender, RoutedEventArgs e)
+        //{
+        //    MainDrawingCanvas.Stroke = MainDrawingCanvas.Stroke == Brushes.Black ? Brushes.DarkBlue : Brushes.Black;
+        //    MainDrawingCanvas.Fill = MainDrawingCanvas.Fill == Brushes.Transparent ? Brushes.LightBlue : Brushes.Transparent;
+        //}
 
-        private void DashArray_Click(object sender, RoutedEventArgs e)
-        {
-            MainDrawingCanvas.StrokeDashArray = MainDrawingCanvas.StrokeDashArray.Count == 0 ? new DoubleCollection() { 5 } : new DoubleCollection();
-        }
+        //private void DashArray_Click(object sender, RoutedEventArgs e)
+        //{
+        //    MainDrawingCanvas.StrokeDashArray = MainDrawingCanvas.StrokeDashArray.Count == 0 ? new DoubleCollection() { 5 } : new DoubleCollection();
+        //}
 
         private void Window_Closed(object sender, EventArgs e)
         {

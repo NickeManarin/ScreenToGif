@@ -211,11 +211,14 @@
                 <Setter Property="Placement" Value="Bottom"/>
                 <Setter Property="HorizontalOffset" Value="-5"/>
                 <Setter Property="Effect" Value="{DynamicResource Shadow.Grey}"/>
+                <Setter Property="Background" Value="{DynamicResource Element.Background}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource Element.Border}"/>
+                <Setter Property="Foreground" Value="{DynamicResource Element.Foreground.Medium}"/>
 
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ContextMenu}">
-                            <Border x:Name="Border" BorderBrush="{DynamicResource Element.Border}" BorderThickness="1" Margin="2" Background="{DynamicResource Element.Background}">
+                            <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" Margin="2" Background="{TemplateBinding Background}">
                                 <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
                             </Border>
                         </ControlTemplate>
