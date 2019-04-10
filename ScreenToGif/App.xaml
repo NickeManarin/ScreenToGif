@@ -1056,9 +1056,9 @@
 
             <!--ListView - Frames-->
             <Style x:Key="Style.ListView.Frames" TargetType="{x:Type ListView}">
-                <Setter Property="Background" Value="{StaticResource Element.Background}"/>
+                <Setter Property="Background" Value="{DynamicResource Element.Background}"/>
                 <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
-                <Setter Property="BorderBrush" Value="{StaticResource Element.Border}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource Element.Border}"/>
                 <Setter Property="BorderThickness" Value="1"/>
                 <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
                 <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
