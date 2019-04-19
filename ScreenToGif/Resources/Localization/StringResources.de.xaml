@@ -36,6 +36,7 @@
     
     <!--Error messages--> 
     <s:String x:Key="S.Crash">Ach nee, das Programm ist abgestürzt! :(</s:String>
+    <s:String x:Key="S.Required">Pflichtfeld</s:String>
     
     <!--StartUp Page-->
     <s:String x:Key="Title.StartUp">ScreenToGif - Start</s:String>
@@ -59,8 +60,8 @@
     <s:String x:Key="Download">Herunterladen</s:String>
     <s:String x:Key="Update.Portable">Portabel</s:String>
     <s:String x:Key="Update.Installer">Installation</s:String>
-    <s:String x:Key="Update.Filename.Warning">Sie müssen einen anderen Pfad oder Dateinamen auswählen</s:String>
-    <s:String x:Key="Update.Filename.Warning2">Sie können jetzt die ausführbare Datei nicht mit einer neuer Version überschreiben. Bitte anderen Dateinamen auswählen.</s:String>
+    <s:String x:Key="Update.Filename.Warning">Sie müssen anderen Pfad oder Dateinamen auswählen</s:String>
+    <s:String x:Key="Update.Filename.Warning2">Sie können die ausführbare Datei nicht mit einer neuer Version überschreiben. Bitte anderen Dateinamen auswählen.</s:String>
     <s:String x:Key="Update.Install.Header">Wollen Sie die neue Version jetzt installieren?</s:String>
     <s:String x:Key="Update.Install.Description">Programm und Installation werden geschlossen.</s:String>
     <s:String x:Key="Update.CloseThis">Wollen Sie das Programm beenden?</s:String>
@@ -124,16 +125,18 @@
     <s:String x:Key="S.AutomatedTasks.SelectType">(Aufgabe auswählen)</s:String>
     <s:String x:Key="S.AutomatedTasks.Info">Aufgaben werden sequentiell von oben nach unten abgearbeitet.&#10;Sie werden beim Öffnen des Editors gestartet.</s:String>
     
+    <s:String x:Key="Interface.Theme">Layout</s:String>
+    <s:String x:Key="Interface.Theme.Scheme">Farbschema</s:String>
     <s:String x:Key="Interface.EditorBackground">Editor-Hintergrund</s:String>
     <s:String x:Key="Interface.Recorder">Rekorder-Fenster</s:String>
     <s:String x:Key="Interface.Background">Hintergrund</s:String>
     <s:String x:Key="Interface.Foreground">Vordergrund</s:String>
     <s:String x:Key="Interface.BoardBackground">Zeichenbrett-Hintergrund</s:String>
-    <s:String x:Key="Interface.Theme.Scheme">Farbschema:</s:String>
-    <s:String x:Key="Interface.Theme.Scheme.VeryLight">Sehr hell</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.VeryLight">Sehr Hell</s:String>
     <s:String x:Key="Interface.Theme.Scheme.Light">Hell</s:String>
     <s:String x:Key="Interface.Theme.Scheme.Medium">Mittel</s:String>
     <s:String x:Key="Interface.Theme.Scheme.Dark">Dunkel</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.VeryDark">Sehr dunkel</s:String>
     <s:String x:Key="Interface.Theme.Scheme.Custom">Benutzerdefiniert</s:String>
     
     <s:String x:Key="Interface.EditorBackground.GridSize">Rastermustergröße:</s:String>
@@ -332,7 +335,8 @@
     <s:String x:Key="S.Recorder.Accept">Übernehmen</s:String>
     <s:String x:Key="S.Recorder.Retry">Wiederholen</s:String>
     <s:String x:Key="S.Recorder.CancelSelection">Auswahl abbrechen (Esc-Taste)</s:String>
-    <s:String x:Key="S.Recorder.SelectArea">Durch Klicken und Ziehen Aufnahmebereich bestimmen</s:String>
+    <s:String x:Key="S.Recorder.SelectArea">Durch Klicken und Ziehen Aufnahmebereich auf diesem Bildschirm bestimmen</s:String>
+    <s:String x:Key="S.Recorder.SelectArea.Embedded">Durch Klicken und Ziehen Aufnahmebereich bestimmen</s:String>
     <s:String x:Key="S.Recorder.SelectWindow">Hier klicken, um dieses Fenster zu wählen</s:String>
     <s:String x:Key="S.Recorder.SelectScreen">Hier klicken, um diesen Bildschirm zu wählen</s:String>
     
@@ -471,6 +475,7 @@
     <!--File • Insert-->
     <s:String x:Key="Editor.File.Insert.Recording">Bildschirm&#10;Aufnahme</s:String>
     <s:String x:Key="Editor.File.Insert.Webcam">Webcam&#10;Aufnahme</s:String>
+    <s:String x:Key="Editor.File.Insert.Board">Zeichenbrett&#10;Aufnahme</s:String>
     <s:String x:Key="Editor.File.Insert.Media">Mediendatei</s:String>
     <s:String x:Key="Editor.File.Insert">Hinzufügen</s:String>
     
@@ -643,7 +648,10 @@
     <s:String x:Key="Editor.ImportingFrames">Bildsequenz wird importiert</s:String>
     
     <s:String x:Key="Editor.ExportingRecording">Aufnahme wird exportiert</s:String>
-    <s:String x:Key="Editor.DiscardingFrames">Frames werden entfernt</s:String>
+    <s:String x:Key="S.Editor.AnalyzingDuplicates">Duplikate werden analysiert</s:String>
+    <s:String x:Key="S.Editor.AdjustingDuplicatesDelay">Verzögerung wird angepasst</s:String>
+    <s:String x:Key="S.Editor.DiscardingDuplicates">Duplikate werden gelöscht</s:String>
+    <s:String x:Key="Editor.DiscardingFrames">Frames werden gelöscht</s:String>
     <s:String x:Key="Editor.DiscardingFolders">Verzeichnisse werden gelöscht</s:String>
     <s:String x:Key="Editor.ResizingFrames">Framegröße wird geändert</s:String>
     <s:String x:Key="Editor.CroppingFrames">Frames werden zugeschnitten</s:String>
@@ -771,7 +779,7 @@
     <s:String x:Key="S.RemoveDuplicates.Delay.NoAdjustment">Keine Feineinstellung</s:String>
     <s:String x:Key="S.RemoveDuplicates.Delay.Average">Durchschnitt verwenden</s:String>
     <s:String x:Key="S.RemoveDuplicates.Delay.Sum">Summe verwenden</s:String>
-    <s:String x:Key="S.RemoveDuplicates.Info">Diese Aktion analysiert jeden einzelnen Pixel und entfernt denjenigen, der gegenüber dem direkten Nachbar eine {0} %-ige Ähnlichkeit aufweist.&#x0d; Falls Sie wollen, können Sie die Verzögerung (Dauer der Anzeige) der Frames einstellen.</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Info">Diese Aktion analysiert jeden einzelnen Pixel und entfernt denjenigen, der gegenüber dem direkten Nachbar eine {0} %-ige Ähnlichkeit aufweist.&#x0d;Falls Sie wollen, können Sie die Verzögerung (Dauer der Anzeige) der Frames einstellen.</s:String>
     
     <s:String x:Key="Caption.Text">Text</s:String>
     <s:String x:Key="Caption.Font">Schrift</s:String>
@@ -803,11 +811,11 @@
     <s:String x:Key="KeyStrokes.Edit.Add">Tastatureingabe hinzufügen:</s:String>
     
     <s:String x:Key="String.Delay">Verzögerung</s:String>
-    <s:String x:Key="String.DelayMs">Dauer (ms):</s:String>
-    <s:String x:Key="String.ValueMs">Dauer (ms):</s:String>
-    <s:String x:Key="String.ScaleValue">Dauer (%):</s:String>
+    <s:String x:Key="String.DelayMs">Dauer:</s:String>
+    <s:String x:Key="String.ValueMs">Wert:</s:String>
+    <s:String x:Key="String.ScaleValue">Dauer:</s:String>
     <s:String x:Key="String.Margin">Seitenrand:</s:String>
-    <s:String x:Key="String.Padding">Padding:</s:String>
+    <s:String x:Key="String.Padding">Innenabstand:</s:String>
     <s:String x:Key="String.Background">Hintergrund</s:String>
     
     <s:String x:Key="FreeDrawing.Mode">Modus</s:String>
@@ -854,11 +862,20 @@
     <s:String x:Key="Progress.Precision.Miliseconds">Millisekunden</s:String>
     <s:String x:Key="Progress.Precision.Percentage">Prozent</s:String>
     <s:String x:Key="Progress.Precision.Count">Frames-Anzahl</s:String>
+    <s:String x:Key="Progress.Precision.DateOfRecording">Aufnahmedatum</s:String>
     <s:String x:Key="Progress.Precision.Custom">Benutzerdefiniert</s:String>
     <s:String x:Key="Progress.Precision.ShowTotal">Gesamt anzeigen</s:String>
     <s:String x:Key="Progress.Format">Format:</s:String>
+    <s:String x:Key="S.Progress.Format.Date">Sie können das Zeitformat aus .NET Framework verwenden.&#x0d;Genaue Beschreibung hinter den beiden Links.</s:String>
+    <s:String x:Key="S.Progress.Format.Date.Standard">Standard-Formate</s:String>
+    <s:String x:Key="S.Progress.Format.Date.Custom">Benutzerdefinierte-Formate</s:String>
     <s:String x:Key="Progress.Orientation">Ausrichtung:</s:String>
     
+    <s:String x:Key="S.DelayUpdate">Verzögerung-Update</s:String>
+    <s:String x:Key="Delay.Mode">Verzögerung-Modus:</s:String>
+    <s:String x:Key="Delay.Mode.Override">Überschreiben (ms)</s:String>
+    <s:String x:Key="Delay.Mode.IncreaseDecrease">Erhöhen oder verringen (ms)</s:String>
+    <s:String x:Key="Delay.Mode.Scale">Skalierung (in %)</s:String>
     <s:String x:Key="Delay.NewValue">Vorgabe</s:String>
     <s:String x:Key="Delay.Minimum10Ms">Minimum 10 ms pro Frame</s:String>
     <s:String x:Key="Delay.DecreaseIncrease">Vorgabe</s:String>
@@ -892,6 +909,8 @@
     <s:String x:Key="S.SaveAs.Encoder.Legacy.Tooltip">Algorithmus: NeuQuant</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System">System</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System.Tooltip">Verwendet Standard-Palette</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Apng">1.0</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Apng.Tooltip">Enkoder vom ScreenToGif-Entwickler programmiert</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
     <s:String x:Key="S.SaveAs.GifOptions">GIF-Optionen</s:String>

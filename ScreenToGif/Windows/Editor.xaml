@@ -38,6 +38,7 @@
         <c:BoolOrToVisibility x:Key="BoolOrToVisibility"/>
         <c:BoolAndToVisibility x:Key="BoolAndToVisibility"/>
         <c:BoolOrAndToVisibility x:Key="BoolOrAndToVisibility"/>
+        <c:IntToBool x:Key="IntToBool"/>
 
         <Storyboard x:Key="ShowPanelStoryboard">
             <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
@@ -3935,8 +3936,14 @@
                                                     Visibility="{Binding IsChecked, ElementName=TextRadioButton, Converter={StaticResource Bool2Visibility}}"
                                                     CheckedChanged="ExtendedCheckBox_CheckedChanged"/>
 
-                                <TextBlock Grid.Row="2" Grid.Column="0" x:Name="ProgressFormatTextBlock" Text="{DynamicResource Progress.Format}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"
-                                       Visibility="{Binding ElementName=ProgressPrecisionComboBox, Path=SelectedIndex, Converter={StaticResource IntToVisibility}, ConverterParameter=5}"/>
+                                <TextBlock Grid.Row="2" Grid.Column="0" x:Name="ProgressFormatTextBlock" Text="{DynamicResource Progress.Format}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}">
+                                    <TextBlock.Visibility>
+                                        <MultiBinding Converter="{StaticResource BoolAndToVisibility}">
+                                            <Binding ElementName="ProgressPrecisionComboBox" Path="SelectedIndex" Converter="{StaticResource IntToBool}" ConverterParameter="5"/>
+                                            <Binding ElementName="TextRadioButton" Path="IsChecked"/>
+                                        </MultiBinding>
+                                    </TextBlock.Visibility>
+                                </TextBlock>
                                 <n:ExtendedTextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" x:Name="CustomProgressTextBox" Margin="10,5"
                                                    Text="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressFormat, Mode=TwoWay}"
                                                    Visibility="{Binding ElementName=ProgressFormatTextBlock, Path=Visibility}" TextChanged="CustomProgressTextBox_TextChanged">
@@ -3967,16 +3974,22 @@
                                     </n:ExtendedTextBox.ToolTip>
                                 </n:ExtendedTextBox>
 
-                                <TextBlock Grid.Row="3" Grid.Column="0" x:Name="ProgressDateFormatTextBlock" Text="{DynamicResource Progress.Format}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"
-                                           Visibility="{Binding ElementName=ProgressPrecisionComboBox, Path=SelectedIndex, Converter={StaticResource IntToVisibility}, ConverterParameter=6}"/>
+                                <TextBlock Grid.Row="3" Grid.Column="0" x:Name="ProgressDateFormatTextBlock" Text="{DynamicResource Progress.Format}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}">
+                                    <TextBlock.Visibility>
+                                        <MultiBinding Converter="{StaticResource BoolAndToVisibility}">
+                                            <Binding ElementName="ProgressPrecisionComboBox" Path="SelectedIndex" Converter="{StaticResource IntToBool}" ConverterParameter="6"/>
+                                            <Binding ElementName="TextRadioButton" Path="IsChecked"/>
+                                        </MultiBinding>
+                                    </TextBlock.Visibility>
+                                </TextBlock>
                                 <n:ExtendedTextBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" x:Name="CustomProgressDateTextBox" Margin="10,5"
                                                    Text="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressDateFormat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                    Visibility="{Binding ElementName=ProgressDateFormatTextBlock, Path=Visibility}" ToolTip="{DynamicResource S.Progress.Format.Date}" 
-                                                   TextChanged="CustomProgressTextBox_TextChanged">
-                                </n:ExtendedTextBox>
+                                                   TextChanged="CustomProgressTextBox_TextChanged"/>
 
-                                <TextBlock Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="docs.microsoft.com" 
+                                <TextBlock Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="docs.microsoft.com"
                                            Visibility="{Binding ElementName=ProgressDateFormatTextBlock, Path=Visibility}">
+
                                     <Hyperlink NavigateUri="https://docs.microsoft.com/en-us/dotnet/standard/base-types/standard-date-and-time-format-strings" RequestNavigate="Hyperlink_RequestNavigate">
                                         <Run Text="{DynamicResource S.Progress.Format.Date.Standard}"/>
                                     </Hyperlink>
@@ -3988,7 +4001,7 @@
 
                                 <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource Caption.Thickness}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"
                                            Visibility="{Binding IsChecked, ElementName=BarRadioButton, Converter={StaticResource Bool2Visibility}}"/>
-                                <n:IntegerUpDown Grid.Row="4" Grid.Column="1" x:Name="ProgressThicknessNumericUpDown" Minimum="1" Maximum="30" Margin="10,5" MinWidth="70" 
+                                <n:IntegerUpDown Grid.Row="3" Grid.Column="1" x:Name="ProgressThicknessNumericUpDown" Minimum="1" Maximum="30" Margin="10,5" MinWidth="70" 
                                                  Value="{Binding ProgressThickness, Source={x:Static u:UserSettings.All}, Mode=TwoWay}"
                                                  Visibility="{Binding IsChecked, ElementName=BarRadioButton, Converter={StaticResource Bool2Visibility}}"/>
                             </Grid>

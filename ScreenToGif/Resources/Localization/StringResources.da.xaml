@@ -32,10 +32,11 @@
     <!--Application-->
     <s:String x:Key="Application.Exiting.Title">Lukker ScreenToGif</s:String>
     <s:String x:Key="Application.Exiting.Instruction">Vil du lukke?</s:String>
-    <s:String x:Key="Application.Exiting.Message">Alle vinduer lukkes og ikonet fjernes.</s:String>   
+    <s:String x:Key="Application.Exiting.Message">Alle vinduer lukkes og ikonet fjernes.</s:String>
     
     <!--Error messages--> 
-    <s:String x:Key="S.Crash">Øv, programmet gik ned :(</s:String>
+    <s:String x:Key="S.Crash">Oh no, the app crashed :(</s:String>
+    <s:String x:Key="S.Required">Krævet felt.</s:String>
     
     <!--StartUp Page-->
     <s:String x:Key="Title.StartUp">Screen To Gif - Opstart</s:String>
@@ -124,16 +125,18 @@
     <s:String x:Key="S.AutomatedTasks.SelectType">(Vælg)</s:String>
     <s:String x:Key="S.AutomatedTasks.Info">Opgaverne udføres i rækkefølge fra toppen, ved første projektredigering.</s:String>
     
+    <s:String x:Key="Interface.Theme">Tema</s:String>
+    <s:String x:Key="Interface.Theme.Scheme">Farveskema</s:String>
     <s:String x:Key="Interface.EditorBackground">Redigeringsbaggrund</s:String>
     <s:String x:Key="Interface.Recorder">Optager</s:String>
     <s:String x:Key="Interface.Background">Baggrund</s:String>
     <s:String x:Key="Interface.Foreground">Forgrund</s:String>
     <s:String x:Key="Interface.BoardBackground">Tavlebaggrund</s:String>
-    <s:String x:Key="Interface.Theme.Scheme">Farveskema</s:String>
     <s:String x:Key="Interface.Theme.Scheme.VeryLight">Meget lys</s:String>
     <s:String x:Key="Interface.Theme.Scheme.Light">Lys</s:String>
     <s:String x:Key="Interface.Theme.Scheme.Medium">Medium</s:String>
     <s:String x:Key="Interface.Theme.Scheme.Dark">Mørk</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.VeryDark">Meget mørk</s:String>
     <s:String x:Key="Interface.Theme.Scheme.Custom">Tilpasset</s:String>
     
     <s:String x:Key="Interface.EditorBackground.GridSize">Gitterstørrelse</s:String>
@@ -176,7 +179,7 @@
     <s:String x:Key="S.Shortcuts.Recorders">Optagere</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.StartPause">Start/pause:</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.StartPause.Info">(Starter/stopper optagelsen. Bruges til snapshot, hvis aktiveret)</s:String>
-    <s:String x:Key="S.Shortcuts.Recorders.Stop">Stop:</s:String>    
+    <s:String x:Key="S.Shortcuts.Recorders.Stop">Stop:</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.Stop.Info">(Stopper optagelsen og åbner redigering)</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.Discard">Kassér:</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.Discard.Info">(Kasserer den aktive optagelse, når den pauses)</s:String>
@@ -198,8 +201,8 @@
     <s:String x:Key="Language.AppLanguage.Translate.EmailLink.Tooltip">Åbner dit mailprogram</s:String>
     
     <s:String x:Key="TempFiles.FilesAndFolders">Midlertidige filer og mapper</s:String>
-    <s:String x:Key="TempFiles.Folders">Mapper:</s:String>
-    <s:String x:Key="TempFiles.Files">Filer:</s:String>
+    <s:String x:Key="TempFiles.FilesAndFolders.Count">{0} mapper og {1} filer</s:String>
+    <s:String x:Key="TempFiles.FilesAndFolders.None">Ingen mapper eller filer fundet</s:String>
     <s:String x:Key="TempFiles.OpenFolder">Åben mappe</s:String>
     <s:String x:Key="TempFiles.Clear">Tøm mappe</s:String>
     <s:String x:Key="TempFiles.LogsLocation">Logmappe</s:String>
@@ -207,7 +210,7 @@
     <s:String x:Key="TempFiles.Location">Mappeplacering</s:String>
     <s:String x:Key="TempFiles.Location.Choose">Vælg mappe til midlertidige filer</s:String>
     <s:String x:Key="TempFiles.Settings">Indstillinger</s:String>
-    <s:String x:Key="TempFiles.AppDataPath">AppData:</s:String>
+    <s:String x:Key="TempFiles.AppDataPath">Appdata:</s:String>
     <s:String x:Key="TempFiles.LocalPath">Lokal:</s:String>
     <s:String x:Key="TempFiles.NotExists">Findes ikke</s:String>
     <s:String x:Key="TempFiles.CreateSettings">Opret ny lokal indstillingsfil.</s:String>
@@ -232,7 +235,7 @@
     <s:String x:Key="S.Upload.Proxy.User">Brugernavn:</s:String>
     <s:String x:Key="S.Upload.Proxy.Password">Kodeord:</s:String>
     <s:String x:Key="S.Upload.Get">Hent</s:String>
-    <s:String x:Key="S.Upload.PasteToken">Indsæt godkendelse her</s:String>    
+    <s:String x:Key="S.Upload.PasteToken">Indsæt godkendelse her</s:String>
     <s:String x:Key="S.Upload.Authorize">Godkend</s:String>
     <s:String x:Key="S.Upload.Refresh">Opdatér</s:String>
     <s:String x:Key="S.Upload.Clear">Ryd</s:String>
@@ -272,7 +275,7 @@
     <s:String x:Key="Extras.GifskiLocation.Invalid">Stien til Gifski er ugyldig. Vælg en anden placering.</s:String>
     <s:String x:Key="Extras.License.Ffmpeg">FFmpeg licens</s:String>
     <s:String x:Key="Extras.License.Gifski">Gifski licens</s:String>
-    
+
     <s:String x:Key="Donate.IfYouWish">Hvis jeg har fortjent det :D</s:String>
     <s:String x:Key="Donate.DonateDollar">Donér US$</s:String>
     <s:String x:Key="Donate.DonateEuro">Donér €</s:String>
@@ -287,7 +290,7 @@
 
     <s:String x:Key="About.Version">Udgave:</s:String>
     <s:String x:Key="About.Author">Udvikler: Nicke Manarin</s:String>
-	<s:String x:Key="S.About.StoreVersion">Microsoft Store udgave. Nogle funktioner er deaktiveret p.g.a. tilladelser.</s:String>
+    <s:String x:Key="S.About.StoreVersion">Microsoft Store udgave. Nogle funktioner er deaktiveret p.g.a. tilladelser.</s:String>
     <s:String x:Key="About.Contact">Kontakt</s:String>
     <s:String x:Key="S.About.Contact.Discord">Besøg server</s:String>
     <s:String x:Key="S.About.Contact.Facebook">Besøg side</s:String>
@@ -333,6 +336,7 @@
     <s:String x:Key="S.Recorder.Retry">Ny</s:String>
     <s:String x:Key="S.Recorder.CancelSelection">Annuller valg (Esc)</s:String>
     <s:String x:Key="S.Recorder.SelectArea">Klik og træk for at vælge et område</s:String>
+    <s:String x:Key="S.Recorder.SelectArea.Embedded">Klik og træk for at vælge et område</s:String>
     <s:String x:Key="S.Recorder.SelectWindow">Klik her for at vælge et vindue</s:String>
     <s:String x:Key="S.Recorder.SelectScreen">Klik her for at vælge hele skærmen</s:String>
     
@@ -471,6 +475,7 @@
     <!--File • Insert-->
     <s:String x:Key="Editor.File.Insert.Recording">Optagelse</s:String>
     <s:String x:Key="Editor.File.Insert.Webcam">Fra\nwebcam</s:String>
+    <s:String x:Key="Editor.File.Insert.Board">Tavle&#x0d;optager</s:String>
     <s:String x:Key="Editor.File.Insert.Media">Medie</s:String>
     <s:String x:Key="Editor.File.Insert">Indsæt</s:String>
     
@@ -643,6 +648,9 @@
     <s:String x:Key="Editor.ImportingFrames">Importerer...</s:String>
     
     <s:String x:Key="Editor.ExportingRecording">Eksporterer optagelsen</s:String>
+    <s:String x:Key="S.Editor.AnalyzingDuplicates">Analyserer duplikater</s:String>
+    <s:String x:Key="S.Editor.AdjustingDuplicatesDelay">Justerer forsinkelse</s:String>
+    <s:String x:Key="S.Editor.DiscardingDuplicates">Kaserer duplikater</s:String>
     <s:String x:Key="Editor.DiscardingFrames">Kasserer rammer</s:String>
     <s:String x:Key="Editor.DiscardingFolders">Kasserer mapper</s:String>
     <s:String x:Key="Editor.ResizingFrames">Tilpasser størrelse</s:String>
@@ -854,11 +862,20 @@
     <s:String x:Key="Progress.Precision.Miliseconds">Millisekunder</s:String>
     <s:String x:Key="Progress.Precision.Percentage">Procent</s:String>
     <s:String x:Key="Progress.Precision.Count">Rammenummer</s:String>
+    <s:String x:Key="Progress.Precision.DateOfRecording">Aktuel dato/tid</s:String>
     <s:String x:Key="Progress.Precision.Custom">Tilpasset</s:String>
     <s:String x:Key="Progress.Precision.ShowTotal">Vis total.</s:String>
     <s:String x:Key="Progress.Format">Format:</s:String>
+    <s:String x:Key="S.Progress.Format.Date">Du kan bruge dato-/tidsformat fra .Net Framework.&#x0d;Link herunder viser specifikationerne.</s:String>
+    <s:String x:Key="S.Progress.Format.Date.Standard">Standardformats</s:String>
+    <s:String x:Key="S.Progress.Format.Date.Custom">Tilpassede formater</s:String>
     <s:String x:Key="Progress.Orientation">Orientering:</s:String>
     
+    <s:String x:Key="S.DelayUpdate">Ny forsinkelse</s:String>
+    <s:String x:Key="Delay.Mode">Metode:</s:String>
+    <s:String x:Key="Delay.Mode.Override">Overskriv (i ms)</s:String>
+    <s:String x:Key="Delay.Mode.IncreaseDecrease">Forøg/formindsk (i ms)</s:String>
+    <s:String x:Key="Delay.Mode.Scale">Skalér (i %)</s:String>
     <s:String x:Key="Delay.NewValue">Ny værdi</s:String>
     <s:String x:Key="Delay.Minimum10Ms">Minimum 10 ms pr. ramme.</s:String>
     <s:String x:Key="Delay.DecreaseIncrease">Tilpas værdi</s:String>
@@ -868,8 +885,8 @@
     <s:String x:Key="OverrideDelay.Info">Denne værdi erstatter varigheden af alle valgte rammer. Værdien bør være mellem 10ms og 25.500ms.</s:String>
     <s:String x:Key="IncreaseDecreaseDelay.Info">Værdien øger/mindsker varigheden af hver enkelt valgt ramme.&#10;Du kan vælge en værdi mellem -10.000ms og 10.000ms, men varigheden af de enkelt rammer vil være mellem 10ms og 25.500ms</s:String>
     <s:String x:Key="ScaleDelay.Info">Tilpas længde (forsinkelse) af hver valgt ramme med denne procent.&#x0d;Du kan vælge fra 1% til 1000%, men resultatet begrænses til mellem 10ms og 25500ms</s:String>
-    
-    <s:String x:Key="Transitions.Length">Varighed</s:String>
+
+    <s:String x:Key="Transitions.Length">Oversættelseslængde</s:String>
     <s:String x:Key="Transitions.Delay">Forsinkelse</s:String>
     <s:String x:Key="Transitions.FadeTo">Udton til...</s:String>
     <s:String x:Key="Transitions.FadeTo.Frame">Næste ramme</s:String>
@@ -883,7 +900,7 @@
     <s:String x:Key="S.SaveAs.Apng">Apng</s:String>
     <s:String x:Key="S.SaveAs.Images">Billeder (rammer)</s:String>
     <s:String x:Key="S.SaveAs.Project">Projekt</s:String>
-    <!--<s:String x:Key="S.SaveAs.Psd">PSD fil</s:String>-->
+    <s:String x:Key="S.SaveAs.Psd">PSD</s:String>
     <s:String x:Key="S.SaveAs.Video">Video</s:String>
     <s:String x:Key="S.SaveAs.Encoder">Kodning</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">2.0</s:String>
@@ -922,7 +939,7 @@
     <s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">Komprimér billedet med RLE algoritme.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline">Gem tidsdata.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">Eksportér både rammer og rammetid.</s:String>
-    
+
     <!--Save As • Save options-->
     <s:String x:Key="S.SaveAs.SaveOptions">Indstillinger</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Gem til valgt mappe.</s:String>

@@ -49,7 +49,7 @@
     <SolidColorBrush x:Key="Brush.Button.Background.Hover" Color="#AAD5E1F2"/>
     <SolidColorBrush x:Key="Brush.Button.Background.Checked" Color="#806F96CF"/>
     <SolidColorBrush x:Key="Brush.Button.Background.Pressed" Color="#F0A3BDE3"/>
-    <SolidColorBrush x:Key="Brush.Button.Background.Focused" Color="#AACDE6F7"/>
+    <SolidColorBrush x:Key="Brush.Button.Background.Focused" Color="#80CDE6F7"/>
 
     <SolidColorBrush x:Key="Brush.Button.Border" Color="#FFABABAB"/>
     <SolidColorBrush x:Key="Brush.Button.Border.Hover" Color="#FFA3BDE3"/>

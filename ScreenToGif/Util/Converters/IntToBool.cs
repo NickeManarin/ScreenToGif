@@ -12,19 +12,15 @@ namespace ScreenToGif.Util.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var integer = value as int?;
-
-            if (!integer.HasValue)
+            if (!(value is int integer))
                 return DependencyProperty.UnsetValue;
 
-            return integer == int.Parse(parameter.ToString());
+            return (int?) integer == int.Parse(parameter.ToString());
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var parameterString = parameter as string;
-
-            if (parameterString == null || value.Equals(false)) 
+            if (!(parameter is string parameterString) || value.Equals(false)) 
                 return DependencyProperty.UnsetValue;
 
             return parameter;
