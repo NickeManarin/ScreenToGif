@@ -5,13 +5,13 @@ This is the current project of ScreenToGif.
 _VS 2017 and .Net 4.6.1 or newer required._
 
 
-## What's new? (Version 2.17.1)
+## What's new? (Version 2.18)
 
-• Updated the Germand and Danish translations.  
+• Keystrokes: The app will display "Ctrl" instead of diplaying "Control".
 
 ### Fixed:
 
-♦ There was a couple of overlapped visual elements on the Progress panel.   
+♦   
 
 ### Known Bugs:
 
