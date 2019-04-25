@@ -1988,7 +1988,19 @@ namespace ScreenToGif.Util
                 return "";
 
             //Get the modifers as text.
-            var modifiersText = Enum.GetValues(modifier.GetType()).OfType<Enum>().Where(x => (ModifierKeys)x != ModifierKeys.None && modifier.HasFlag(x)).Aggregate("", (current, mod) => current + (mod + " + "));
+            var modifiersText = Enum.GetValues(modifier.GetType()).OfType<ModifierKeys>()
+                .Where(x => x != ModifierKeys.None && modifier.HasFlag(x))
+                .Aggregate("", (current, mod) =>
+                {
+                    if (mod == ModifierKeys.Control)
+                    {
+                        return current + "Ctrl" + " + ";
+                    }
+                    else
+                    {
+                        return current + mod + " + ";
+                    }
+                });
 
             var result = GetCharFromKey(key);
 
@@ -2001,7 +2013,7 @@ namespace ScreenToGif.Util
                 {
                     case Key.LeftCtrl:
                     case Key.RightCtrl:
-                        keyText = "Control";
+                        keyText = "Ctrl";
                         break;
                     case Key.LeftShift:
                     case Key.RightShift:
@@ -2066,6 +2078,10 @@ namespace ScreenToGif.Util
                 #endregion
             }
 
+            if (modifiersText.Length > 0)
+            {
+                isUppercase = true;
+            }
             return modifiersText + (isUppercase ? char.ToUpper(result.Value) : result);
         }
 
