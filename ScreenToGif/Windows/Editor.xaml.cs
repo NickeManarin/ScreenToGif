@@ -175,6 +175,7 @@ namespace ScreenToGif.Windows
         private bool Slept { get; set; }
 
         private readonly System.Windows.Forms.Timer _timerPreview = new System.Windows.Forms.Timer();
+        private readonly DispatcherTimer _searchTimer;
 
         private Action<object, RoutedEventArgs> _applyAction = null;
 
@@ -185,6 +186,14 @@ namespace ScreenToGif.Windows
         public Editor()
         {
             InitializeComponent();
+
+            #region Initialize timers
+
+            _searchTimer = new DispatcherTimer(DispatcherPriority.Background);
+            _searchTimer.Interval = TimeSpan.FromMilliseconds(500);
+            _searchTimer.Tick += SearchTimer_Tick;
+
+            #endregion
 
             #region Adjust the position
 
@@ -342,6 +351,9 @@ namespace ScreenToGif.Windows
                 ActionStack.Clear();
             }
 
+            //Stop all timers.
+            _searchTimer?.Stop();
+            
             //Manually get the position/size of the window, so it's possible opening multiple instances.
             UserSettings.All.EditorTop = Top;
             UserSettings.All.EditorLeft = Left;
@@ -417,6 +429,38 @@ namespace ScreenToGif.Windows
             }
         }
 
+        private async void SearchTimer_Tick(object sender, EventArgs e)
+        {
+            if (!IsLoaded)
+                return;
+
+            _searchTimer.Stop();
+
+            await Task.Run(() =>
+            {
+                try
+                {
+                    //Check if there's a file with the same path.
+                    var exists = File.Exists(Path.Combine(GetOutputFolder(), GetOutputFilename() + GetOutputExtension()));
+
+                    Dispatcher.Invoke(() =>
+                    {
+                        FileExistsGrid.Visibility = exists ? Visibility.Visible : Visibility.Collapsed;
+                        StatusList.Remove(StatusType.Warning);
+                    });
+                }
+                catch (Exception ex)
+                {
+                    LogWriter.Log(ex, "Check if exists");
+
+                    Dispatcher.Invoke(() =>
+                    {
+                        StatusList.Warning("Filename inconsistency: " + ex.Message);
+                        FileExistsGrid.Visibility = Visibility.Collapsed;
+                    });
+                }
+            });
+        }
 
         private void System_PowerModeChanged(object sender, PowerModeChangedEventArgs e)
         {
@@ -1015,19 +1059,16 @@ namespace ScreenToGif.Windows
             if (!IsLoaded)
                 return;
 
-            try
-            {
-                var exists = File.Exists(Path.Combine(GetOutputFolder(), GetOutputFilename() + GetOutputExtension()));
+            _searchTimer?.Stop();
 
-                FileExistsGrid.Visibility = exists && GetPickLocation() ? Visibility.Visible : Visibility.Collapsed;
-                StatusList.Remove(StatusType.Warning);
-            }
-            catch (Exception ex)
+            //If no file will be saved, there's no need to verify.
+            if (!GetPickLocation())
             {
-                LogWriter.Log(ex, "Check if exists");
-                StatusList.Warning("Filename inconsistency: " + ex.Message);
-                FileExistsGrid.Visibility = Visibility.Collapsed;
+                StatusList.Remove(StatusType.Warning);
+                return;
             }
+
+            _searchTimer?.Start();
         }
 
         private void SaveToClipboard_CheckedChanged(object sender, RoutedEventArgs e)
@@ -2349,7 +2390,7 @@ namespace ScreenToGif.Windows
             Cursor = Cursors.AppStarting;
 
             _delayFramesDel = DelayAsync;
-            _delayFramesDel.BeginInvoke(DelayModel.FromSettings(DelayUpdateType.Override), false, DelayCallback, null); //NewDelayIntegerUpDown.Value
+            _delayFramesDel.BeginInvoke(DelayModel.FromSettings(DelayUpdateType.Override), false, false, DelayCallback, null); //NewDelayIntegerUpDown.Value
 
             ClosePanel();
         }
@@ -2374,7 +2415,7 @@ namespace ScreenToGif.Windows
             Cursor = Cursors.AppStarting;
 
             _delayFramesDel = DelayAsync;
-            _delayFramesDel.BeginInvoke(DelayModel.FromSettings(DelayUpdateType.IncreaseDecrease), false, DelayCallback, null); //IncreaseDecreaseDelayIntegerUpDown.Value
+            _delayFramesDel.BeginInvoke(DelayModel.FromSettings(DelayUpdateType.IncreaseDecrease), false, false, DelayCallback, null); //IncreaseDecreaseDelayIntegerUpDown.Value
 
             ClosePanel();
         }
@@ -2398,7 +2439,7 @@ namespace ScreenToGif.Windows
             Cursor = Cursors.AppStarting;
 
             _delayFramesDel = DelayAsync;
-            _delayFramesDel.BeginInvoke(DelayModel.FromSettings(DelayUpdateType.Scale), false, DelayCallback, null); //ScaleDelayIntegerUpDown.Value
+            _delayFramesDel.BeginInvoke(DelayModel.FromSettings(DelayUpdateType.Scale), false, false, DelayCallback, null); //ScaleDelayIntegerUpDown.Value
 
             ClosePanel();
         }
@@ -3720,7 +3761,7 @@ namespace ScreenToGif.Windows
                                     case DefaultTaskModel.TaskTypeEnum.Delay:
                                     {
                                         if (Project.CreatedBy == ProjectByType.ScreenRecorder)
-                                            DelayAsync(task as DelayModel ?? DelayModel.FromSettings());
+                                            DelayAsync(task as DelayModel ?? DelayModel.FromSettings(), true, true);
 
                                         break;
                                     }
@@ -6530,11 +6571,11 @@ namespace ScreenToGif.Windows
 
         #region Async Delay
 
-        private delegate void DelayFrames(DelayModel model, bool forAll = false);
+        private delegate void DelayFrames(DelayModel model, bool forAll = false, bool ignoreUi = false);
 
         private DelayFrames _delayFramesDel;
 
-        private void DelayAsync(DelayModel model, bool forAll = false)
+        private void DelayAsync(DelayModel model, bool forAll = false, bool ignoreUi = false)
         {
             var frameList = forAll ? Project.Frames : SelectedFrames();
 
@@ -6576,8 +6617,11 @@ namespace ScreenToGif.Windows
 
                 #region Update UI
 
-                var index = Project.Frames.IndexOf(frameInfo);
-                Dispatcher.Invoke(() => ((FrameListBoxItem)FrameListView.Items[index]).Delay = frameInfo.Delay);
+                if (!ignoreUi)
+                {
+                    var index = Project.Frames.IndexOf(frameInfo);
+                    Dispatcher.Invoke(() => ((FrameListBoxItem)FrameListView.Items[index]).Delay = frameInfo.Delay);
+                }
 
                 #endregion
 
@@ -6618,8 +6662,8 @@ namespace ScreenToGif.Windows
 
             Dispatcher.Invoke(() => IsLoading = true);
 
-            //Calculate opacity increment.
-            var increment = 1F / (frameCount + 1);
+            //Calculate opacity increment. When fading to a color, it will add a frame with a 100% opacity at the end. 
+            var increment = 1F / (frameCount + (UserSettings.All.FadeToType == FadeToType.NextFrame ? 1: 0));
             var previousName = Path.GetFileNameWithoutExtension(Project.Frames[selected].Path);
             var previousFolder = Path.GetDirectoryName(Project.Frames[selected].Path);
 
@@ -6655,7 +6699,7 @@ namespace ScreenToGif.Windows
                     drawingContext.DrawRectangle(nextBrush, null, new Rect(0, 0, nextImage.Width, nextImage.Height));
                 }
 
-                // Converts the Visual (DrawingVisual) into a BitmapSource
+                //Converts the Visual (DrawingVisual) into a BitmapSource.
                 var bmp = new RenderTargetBitmap(previousImage.PixelWidth, previousImage.PixelHeight, previousImage.DpiX, previousImage.DpiY, PixelFormats.Pbgra32);
                 bmp.Render(drawingVisual);
 
@@ -6667,11 +6711,11 @@ namespace ScreenToGif.Windows
                 var fileName = Path.Combine(previousFolder, $"{previousName} T {index} {DateTime.Now:hh-mm-ss fff}.png");
                 Project.Frames.Insert(selected + index + 1, new FrameInfo(fileName, UserSettings.All.FadeTransitionDelay));
 
-                // Creates a PngBitmapEncoder and adds the BitmapSource to the frames of the encoder
+                //Creates a PngBitmapEncoder and adds the BitmapSource to the frames of the encoder.
                 var encoder = new PngBitmapEncoder();
                 encoder.Frames.Add(BitmapFrame.Create(bmp));
 
-                // Saves the image into a file using the encoder
+                //Saves the image into a file using the encoder.
                 using (Stream stream = File.Create(fileName))
                     encoder.Save(stream);
 
@@ -6679,7 +6723,7 @@ namespace ScreenToGif.Windows
             }
 
             #endregion
-
+            
             return selected;
         }
 

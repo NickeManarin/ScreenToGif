@@ -1419,7 +1419,7 @@
 
                             <TextBlock Grid.Row="2" Grid.Column="2" Text="Gitter:" FontSize="12" VerticalAlignment="Center" Margin="15,0,5,0" Foreground="{DynamicResource Element.Foreground}"/>
                             <TextBlock Grid.Row="2" Grid.Column="3" FontSize="12" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
-                                <Hyperlink NavigateUri="https://www.facebook.com/ScreenToGif" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" RequestNavigate="Hyperlink_OnRequestNavigate">
+                                <Hyperlink NavigateUri="https://gitter.im/ScreenToGif/Lobby" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" RequestNavigate="Hyperlink_OnRequestNavigate">
                                     <Run Text="{StaticResource S.About.Contact.Gitter}"/>
                                 </Hyperlink>
                             </TextBlock>

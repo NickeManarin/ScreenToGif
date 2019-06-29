@@ -405,6 +405,7 @@
     <s:String x:Key="ImportVideo.Selection">Selection:</s:String>
     <s:String x:Key="ImportVideo.Frames">Frames:</s:String>
     <s:String x:Key="ImportVideo.Duration">Duration:</s:String>
+    <s:String x:Key="S.ImportVideo.Error">It was not possible to load the video.</s:String>
     
     <!--Encoder-->
     <s:String x:Key="Encoder.Title">Encoder</s:String>

@@ -10,6 +10,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -24,11 +25,13 @@
                    FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground.Small}" Foreground="{DynamicResource Element.Foreground.Header}"/>
         </StackPanel>
 
-        <Label x:Name="LoadingLabel" Grid.Row="1" Content="{DynamicResource ImportVideo.Loading}" Margin="0" VerticalContentAlignment="Center" 
+        <c:StatusBand Grid.Row="1" x:Name="StatusBand"/>
+
+        <Label x:Name="LoadingLabel" Grid.Row="2" Content="{DynamicResource ImportVideo.Loading}" Margin="0" VerticalContentAlignment="Center" 
                HorizontalContentAlignment="Center" FontSize="24" Foreground="{DynamicResource Element.Foreground.Header}" FontFamily="Segoe UI Semilight" 
                Effect="{StaticResource Shadow.Foreground.Small}"/>
 
-        <Grid Grid.Row="1" Margin="5">
+        <Grid Grid.Row="2" Margin="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition MinWidth="50"/>
                 <ColumnDefinition Width="Auto"/>
@@ -43,11 +46,11 @@
                           Effect="{StaticResource Shadow.Background.Small}" Opacity="0.8" Margin="-2,0" Visibility="Hidden"/>
         </Grid>
 
-        <c:RangeSlider x:Name="SelectionSlider" Grid.Row="2" Height="Auto" MinHeight="20" 
+        <c:RangeSlider x:Name="SelectionSlider" Grid.Row="3" Height="Auto" MinHeight="20" 
                        UpperValue="100" LowerValue="0" TickPlacement="BottomRight" Margin="5,5" IsEnabled="False"
                        UpperValueChanged="SelectionSlider_UpperValueChanged" LowerValueChanged="SelectionSlider_LowerValueChanged"/>
 
-        <Grid x:Name="DetailsGrid" Grid.Row="3" Margin="0,0,0,5" Visibility="Visible">
+        <Grid x:Name="DetailsGrid" Grid.Row="4" Margin="0,0,0,5" Visibility="Visible">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -118,7 +121,7 @@
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Row="4" Background="{DynamicResource Panel.Background.Level3}">
+        <Grid Grid.Row="5" Background="{DynamicResource Panel.Background.Level3}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>

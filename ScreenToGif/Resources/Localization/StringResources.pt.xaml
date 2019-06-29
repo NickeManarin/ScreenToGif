@@ -405,7 +405,8 @@
     <s:String x:Key="ImportVideo.Selection">Seleção:</s:String>
     <s:String x:Key="ImportVideo.Frames">Quadros:</s:String>
     <s:String x:Key="ImportVideo.Duration">Duração:</s:String>
-    
+    <s:String x:Key="S.ImportVideo.Error">Não foi possível carregar o vídeo.</s:String>
+
     <!--Encoder-->
     <s:String x:Key="Encoder.Title">Codificador</s:String>
     <s:String x:Key="Encoder.ClearAllCompleted">Remover Todos os Completos</s:String>

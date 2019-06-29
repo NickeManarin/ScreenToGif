@@ -1992,14 +1992,10 @@ namespace ScreenToGif.Util
                 .Where(x => x != ModifierKeys.None && modifier.HasFlag(x))
                 .Aggregate("", (current, mod) =>
                 {
-                    if (mod == ModifierKeys.Control)
-                    {
+                    if (mod == ModifierKeys.Control) //TODO: Custom mod.ToString();
                         return current + "Ctrl" + " + ";
-                    }
-                    else
-                    {
-                        return current + mod + " + ";
-                    }
+
+                    return current + mod + " + ";
                 });
 
             var result = GetCharFromKey(key);
@@ -2078,10 +2074,10 @@ namespace ScreenToGif.Util
                 #endregion
             }
 
+            //If there's any modifiers, it means that it's a command. So it should be treated as uppercase.
             if (modifiersText.Length > 0)
-            {
                 isUppercase = true;
-            }
+
             return modifiersText + (isUppercase ? char.ToUpper(result.Value) : result);
         }
 

@@ -3,7 +3,6 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
-using ScreenToGif.Controls;
 
 namespace ScreenToGif.Windows.Other
 {
@@ -27,9 +26,7 @@ namespace ScreenToGif.Windows.Other
         }
 
         private void OnChange()
-        {
-
-        }
+        {}
 
         private void WindowTest_OnLocationChanged(object sender, EventArgs e)
         {
