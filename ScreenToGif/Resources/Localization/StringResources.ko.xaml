@@ -16,8 +16,8 @@
     <s:String x:Key="Frame">프레임</s:String>
     <s:String x:Key="Suppress">Suppress</s:String>
     <s:String x:Key="Preview">미리보기</s:String>
-    <!--<s:String x:Key="S.Add">Add</s:String>-->
-    <!--<s:String x:Key="S.Edit">Edit</s:String>-->
+    <s:String x:Key="S.Add">추가</s:String>
+    <s:String x:Key="S.Edit">편집</s:String>
     <!--<s:String x:Key="S.Id">Id</s:String>-->
     <s:String x:Key="S.Title">제목</s:String>
     <s:String x:Key="S.Description">설명</s:String>
@@ -263,7 +263,7 @@
 
     <!--<s:String x:Key="Extras.External">Available external tools</s:String>-->
     <!--<s:String x:Key="Extras.Download">Click here to download&#x0d;{0}</s:String>-->
-    <!--<s:String x:Key="Extras.Downloading">Downloading...</s:String>-->
+    <s:String x:Key="Extras.Downloading">다운로드중...</s:String>
     <!--<s:String x:Key="Extras.Ready">Downloaded&#x0d;{0}</s:String>-->
     <!--<s:String x:Key="Extras.Ready.Info">Click here to open the properties of the file.</s:String>-->
     <!--<s:String x:Key="S.Extras.DownloadRestriction">Apps distributed by the Microsoft Store cannot download other apps. You'll have to download it manually.</s:String>-->
@@ -422,7 +422,7 @@
     <s:String x:Key="Encoder.FileDeletedMoved">존재하지 않거나 이동된 파일</s:String>
     <s:String x:Key="Encoder.Canceled">취소됨</s:String>
     <s:String x:Key="Encoder.Error">에러</s:String>
-    <!--<s:String x:Key="Encoder.Error.Info">Click here to show the details of this error.</s:String>-->
+    <s:String x:Key="Encoder.Error.Info">이 오류의 세부 정보를 표시하려면 여기를 클릭하십시오.</s:String>
     <!--<s:String x:Key="Encoder.Uploading">Uploading</s:String>-->
     <!--<s:String x:Key="Encoder.Executing">Executing commmands</s:String>-->
     <s:String x:Key="Encoder.Processing">처리중 {0}</s:String>
@@ -430,19 +430,19 @@
     <s:String x:Key="Encoder.OpenFile">파일 열기</s:String>
     <s:String x:Key="Encoder.ExploreFolder">폴더 탐색</s:String>
     <s:String x:Key="Encoder.Remove">기록 삭제</s:String>
-    <!--<s:String x:Key="Encoder.Details">Show details</s:String>-->
+    <s:String x:Key="Encoder.Details">세부사항 보기</s:String>
     <!--<s:String x:Key="Encoder.Copy.Image">Copy as image</s:String>-->
-    <!--<s:String x:Key="Encoder.Copy.Filename">Copy filename</s:String>-->
-    <!--<s:String x:Key="Encoder.Copy.Folder">Copy folder path</s:String>-->
-    <!--<s:String x:Key="Encoder.Copy.Link">Copy link</s:String>-->
+    <s:String x:Key="Encoder.Copy.Filename">파일명 복사</s:String>
+    <s:String x:Key="Encoder.Copy.Folder">폴더 경로 복사</s:String>
+    <s:String x:Key="Encoder.Copy.Link">링크 복사</s:String>
 
     <!--Command output-->
     <!--<s:String x:Key="Command.Title">ScreenToGif - Command Output</s:String>-->
     <!--<s:String x:Key="Command.Header">Command output</s:String>-->
 
     <!--Notifications-->
-    <!--<s:String x:Key="S.Notifications">Notifications</s:String>-->
-    <!--<s:String x:Key="S.Notifications.Dismiss">Dismiss all notifications</s:String>-->
+    <s:String x:Key="S.Notifications">알림</s:String>
+    <s:String x:Key="S.Notifications.Dismiss">모든 알림 삭제</s:String>
 
     <!--Editor-->
     <s:String x:Key="Editor.Title">Screen To Gif - 편집기</s:String>
@@ -476,14 +476,14 @@
     <!--File • Insert-->
     <s:String x:Key="Editor.File.Insert.Recording">녹화하기</s:String>
     <s:String x:Key="Editor.File.Insert.Webcam">웹캠\n녹화하기</s:String>
-    <!--<s:String x:Key="Editor.File.Insert.Board">Board&#x0d;Recording</s:String>-->
+    <s:String x:Key="Editor.File.Insert.Board">칠판&#x0d;녹화하기</s:String>
     <s:String x:Key="Editor.File.Insert.Media">파일\n불러오기</s:String>
     <s:String x:Key="Editor.File.Insert">삽입</s:String>
 
     <!--File • Save/Discard-->
     <s:String x:Key="Editor.File.Save">저장하기</s:String>
     <s:String x:Key="Editor.File.Load">파일\n불러오기</s:String>
-    <!--<s:String x:Key="Editor.File.LoadRecent">Recent&#x0d;Projects</s:String>-->
+    <s:String x:Key="Editor.File.LoadRecent">최근&#x0d;프로젝트</s:String>
     <s:String x:Key="Editor.File.SaveProject">프로젝트\n로 저장</s:String>
     <s:String x:Key="Editor.File.Discard">프로젝트\n삭제</s:String>
 
@@ -524,7 +524,7 @@
     <!--Edit • Frames-->
     <s:String x:Key="Editor.Edit.Frames">프레임</s:String>
     <s:String x:Key="Editor.Edit.Delete">현재 프레임\n삭제</s:String>
-    <!--<s:String x:Key="Editor.Edit.Frames.Duplicates">Remove&#x0d;Duplicates</s:String>-->
+    <s:String x:Key="Editor.Edit.Frames.Duplicates">사본&#x0d;삭제</s:String>
     <s:String x:Key="Editor.Edit.Frames.Reduce">프레임 수&#x0d;줄이기</s:String>
     <s:String x:Key="Editor.Edit.DeletePrevious">앞쪽 프레임 전부 삭제</s:String>
     <s:String x:Key="Editor.Edit.DeleteNext">뒤쪽 프레임 전부 삭제</s:String>
@@ -735,10 +735,11 @@
 
     <s:String x:Key="Recent.Projects">최근 프로젝트</s:String>
     <!--<s:String x:Key="Recent.EnumeratingProjects">Looking for recent projects...</s:String>-->
-    <!--<s:String x:Key="Recent.CreationDate">Creation date</s:String>-->
-    <!--<s:String x:Key="Recent.FrameCount">Frame count</s:String>-->
+    <s:String x:Key="Recent.CreationDate">생성일</s:String>
+    <s:String x:Key="Recent.FrameCount">프레임 카운트</s:String>
     <!--<s:String x:Key="Recent.Warning.NothingSelected">There's no project selected. Select a project of the list to load.</s:String>-->
-    <!--<s:String x:Key="Recent.Warning.SameOpened">This project is already being displayed by this editor instance.</s:String>-->
+    <s:String x:Key="Recent.Warning.NothingSelected">프로젝트가 선택되지 않았습니다. 로드할 프로젝트를 선택하세요.</s:String>
+    <s:String x:Key="Recent.Warning.SameOpened">이 프로젝트는 이미 이 편집기에서 로드된 프로젝트입니다.</s:String>
     <!--<s:String x:Key="Recent.Warning.AlreadyOpened">This project was already opened by another editor instance. A project cannot be opened a second time if it's already open on another editor.</s:String>-->
 
     <s:String x:Key="Clipboard.Entries">클립보드 항목</s:String>
@@ -766,7 +767,7 @@
     <s:String x:Key="FlipRotate.RotateLeft">좌측 90º 회전</s:String>
     <s:String x:Key="FlipRotate.RotateRight">우측 90º 회전</s:String>
 
-    <!--<s:String x:Key="Reduce.Header">Reduce framerate</s:String>-->
+    <s:String x:Key="Reduce.Header">프레임 감소</s:String>
     <!--<s:String x:Key="Reduce.Factor">Factor:</s:String>-->
     <!--<s:String x:Key="Reduce.Count">Remove Count:</s:String>-->
     <!--<s:String x:Key="Reduce.Info">It will remove {0} frame(s) after every {1} frame(s), without counting the removed ones.&#10;Framerate will be adjusted.</s:String>-->
@@ -900,9 +901,9 @@
     <s:String x:Key="S.SaveAs.Gif">Gif</s:String>
     <!--<s:String x:Key="S.SaveAs.Apng">Apng</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Images">Images (frames)</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.Project">Project</s:String>-->
+    <s:String x:Key="S.SaveAs.Project">프로젝트</s:String>
     <!--<s:String x:Key="S.SaveAs.Psd">PSD</s:String>-->
-    <s:String x:Key="S.SaveAs.Video">Video</s:String>
+    <s:String x:Key="S.SaveAs.Video">비디오</s:String>
     <s:String x:Key="S.SaveAs.Encoder">인코더</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">ScreenToGif</s:String>
     <!--<s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Tooltip">Algorithm: Octree.</s:String>-->
@@ -913,7 +914,7 @@
     <!--<s:String x:Key="S.SaveAs.Encoder.Apng">1.0</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Encoder.Apng.Tooltip">Encoder made by the ScreenToGif developer.</s:String>-->
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
-    <!--<s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>-->
+    <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
     <s:String x:Key="S.SaveAs.GifOptions">Gif 설정</s:String>
     <s:String x:Key="S.SaveAs.Quality">품질:</s:String>
     <!--<s:String x:Key="S.SaveAs.GifOptions.Colors">Colors:</s:String>-->
@@ -933,9 +934,9 @@
     <s:String x:Key="S.SaveAs.VideoOptions">비디오 설정</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Fps">Fps:</s:String>
     <!--<s:String x:Key="S.SaveAs.FlipVertically">Flip the video (vertically).</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.ImagesOptions">Image options</s:String>-->
+    <s:String x:Key="S.SaveAs.ImagesOptions">이미지 설정</s:String>
     <!--<s:String x:Key="S.SaveAs.ImageOptions.Zip">Zip the images.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.PsdOptions">Psd options</s:String>-->
+    <s:String x:Key="S.SaveAs.PsdOptions">Psd 설정</s:String>
     <!--<s:String x:Key="S.SaveAs.PsdOptions.Compress">Compress the image.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">Compress the image data using the RLE algorithm.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.PsdOptions.Timeline">Save the timeline data.</s:String>-->
@@ -987,8 +988,8 @@
     <!--<s:String x:Key="S.SaveAs.Warning.Canceled">The operation was canceled.</s:String>-->
 
     <!--SaveAs • Export-->
-    <!--<s:String x:Key="S.SaveAs.Frames.Confirmation.Title">Export Frames</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.Frames.Confirmation.Instruction">Are you sure that you want to export the frames?</s:String>-->
+    <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">프레임 내보내기</s:String>
+    <s:String x:Key="S.SaveAs.Frames.Confirmation.Instruction">이 프레임을 정말 내보내시겠습니까?</s:String>
     <!--<s:String x:Key="S.SaveAs.Frames.Confirmation.Message">This action will export {0} frames directly into the selected folder.</s:String>-->
 
     <!--Feedback-->
@@ -1003,13 +1004,13 @@
     <s:String x:Key="S.Feedback.IssueBug">버그/문제</s:String>
     <!--<s:String x:Key="S.Feedback.IssueBug.Info">Please, if you are experiencing any bug: Don't forget to type your e-mail. Sometimes I'm not able to know how exactly the problem happened and I need further details.</s:String>-->
     <s:String x:Key="S.Feedback.YourEmail">이메일 (선택)</s:String>
-    <!--<s:String x:Key="S.Feedback.Warning.Title">You need to input a title for the feedback.</s:String>-->
-    <!--<s:String x:Key="S.Feedback.Warning.Message">You need to input a message in the feedback.</s:String>-->
+    <s:String x:Key="S.Feedback.Warning.Title">피드백의 제목을 입력해주세요.</s:String>
+    <s:String x:Key="S.Feedback.Warning.Message">피드백의 내용을 입력해주세요.</s:String>
     <s:String x:Key="S.Feedback.Sending">보내는 중... 끝난 후 창이 닫힙니다.</s:String>
     <s:String x:Key="S.Feedback.Attachments">첨부 파일 선택 (최대 20MB까지)</s:String>
     <s:String x:Key="S.Feedback.AddAttachments">파일 첨부하기</s:String>
     <s:String x:Key="S.Feedback.RemoveAttachments">첨부 파일 모두 삭제</s:String>
-    <!--<s:String x:Key="S.Feedback.LanguageInfo1">I can understand English</s:String>-->
+    <s:String x:Key="S.Feedback.LanguageInfo1">영어를 이해할 수 있습니다.</s:String>
     <!--<s:String x:Key="S.Feedback.LanguageInfo2">and Portuguese (Brazillian and European).</s:String>-->
     <!--<s:String x:Key="S.Feedback.Preview.Info">This is what you'll send, plus all the attachments.</s:String>-->
 
