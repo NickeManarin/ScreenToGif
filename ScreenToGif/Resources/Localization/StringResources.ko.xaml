@@ -170,9 +170,9 @@
     <!--<s:String x:Key="S.Shortcuts.Global.WebcamRecorder.Info">(Opens the webcam recorder)</s:String>-->
     <!--<s:String x:Key="S.Shortcuts.Global.BoardRecorder">Board recorder:</s:String>-->
     <!--<s:String x:Key="S.Shortcuts.Global.BoardRecorder.Info">(Opens the board recorder, so you can record your drawings)</s:String>-->
-    <!--<s:String x:Key="S.Shortcuts.Global.OpenEditor">Editor:</s:String>-->
+    <s:String x:Key="S.Shortcuts.Global.OpenEditor">편집기:</s:String>
     <!--<s:String x:Key="S.Shortcuts.Global.OpenEditor.Info">(Opens another editor window)</s:String>-->
-    <!--<s:String x:Key="S.Shortcuts.Global.OpenOptions">Options:</s:String>-->
+    <s:String x:Key="S.Shortcuts.Global.OpenOptions">설정:</s:String>
     <!--<s:String x:Key="S.Shortcuts.Global.OpenOptions.Info">(Opens the options window. You can only open one at a time)</s:String>-->
     <!--<s:String x:Key="S.Shortcuts.Global.Exit">Exit:</s:String>-->
     <!--<s:String x:Key="S.Shortcuts.Global.Exit.Info">(Closes all windows and removes the app from the system tray)</s:String>-->
@@ -212,7 +212,7 @@
     <s:String x:Key="TempFiles.Settings">설정 파일 경로</s:String>
     <!--<s:String x:Key="TempFiles.AppDataPath">AppData:</s:String>-->
     <!--<s:String x:Key="TempFiles.LocalPath">Local:</s:String>-->
-    <!--<s:String x:Key="TempFiles.NotExists">It doesn't exist</s:String>-->
+    <s:String x:Key="TempFiles.NotExists">존재하지 않습니다.</s:String>
     <s:String x:Key="TempFiles.CreateSettings">빈 설정 파일을 새로 만듭니다.</s:String>
     <s:String x:Key="TempFiles.RemoveSettings">설정 파일을 삭제합니다.</s:String>
     <!--<s:String x:Key="TempFiles.OpenSettingsFolder">Open the folder where the settings file is located.&#x0d;Hold Ctrl while clicking to open the file, if possible.</s:String>-->
@@ -280,9 +280,9 @@
     <s:String x:Key="Donate.DonateDollar">미화 달러 기부</s:String>
     <s:String x:Key="Donate.DonateEuro">유로화 기부</s:String>
     <s:String x:Key="Donate.Donate">기부</s:String>
-    <!--<s:String x:Key="Donate.Paypal.Dollar">Opens the Paypal website. Selected currency: Dollar</s:String>-->
-    <!--<s:String x:Key="Donate.Paypal.Euro">Opens the Paypal website. Selected currency: Euro</s:String>-->
-    <!--<s:String x:Key="Donate.Paypal.OwnCurrency">Opens the Paypal website. You must select the currency.</s:String>-->
+    <s:String x:Key="Donate.Paypal.Dollar">페이팔 사이트 열기. 선택된 화폐: 미화</s:String>
+    <s:String x:Key="Donate.Paypal.Euro">페이팔 사이트 열기. 선택된 화폐: 유로</s:String>
+    <s:String x:Key="Donate.Paypal.OwnCurrency">페이팔 사이트 열기. 화폐를 선택하세요.</s:String>
     <!--<s:String x:Key="Donate.Patreon">Click here to open my Patreon page.</s:String>-->
     <!--<s:String x:Key="Donate.Steam.Link">Click here to open my Steam wishlist page.</s:String>-->
     <!--<s:String x:Key="Donate.Steam.Text">You can send games as gifts.</s:String>-->
@@ -292,8 +292,8 @@
     <s:String x:Key="About.Author">개발자: Nicke Manarin</s:String>
     <!--<s:String x:Key="S.About.StoreVersion">Microsoft Store version. Some features are disabled due to enforced policies.</s:String>-->
     <s:String x:Key="About.Contact">연락처</s:String>
-    <!--<s:String x:Key="S.About.Contact.Discord">Join server</s:String>-->
-    <!--<s:String x:Key="S.About.Contact.Facebook">Visit page</s:String>-->
+    <s:String x:Key="S.About.Contact.Discord">서버 접속</s:String>
+    <s:String x:Key="S.About.Contact.Facebook">페이지 방문</s:String>
     <!--<s:String x:Key="S.About.Contact.Gitter">Join room</s:String>-->
     <s:String x:Key="About.Technical">프로젝트 정보</s:String>
     <s:String x:Key="About.Technical.License">소프트웨어 라이선스:</s:String>
@@ -350,8 +350,8 @@
     <!--<s:String x:Key="Webcam.ChangeScale">Change the scale of the video.</s:String>-->
 
     <!--Board Recorder-->
-    <!--<s:String x:Key="Board.Title">ScreenToGif - Board Recorder</s:String>-->
-    <!--<s:String x:Key="Board.AutoRecord">Auto Record</s:String>-->
+    <s:String x:Key="Board.Title">ScreenToGif - 칠판 녹화기</s:String>
+    <s:String x:Key="Board.AutoRecord">자동 녹화</s:String>
     <!--<s:String x:Key="Board.AutoRecordToolTip">Enables recording while drawing.</s:String>-->
     <!--<s:String x:Key="Board.CtrlHold">Ctrl [Hold]</s:String>-->
 
@@ -371,7 +371,7 @@
     <s:String x:Key="ExceptionViewer.Title">예외가 발생했습니다!</s:String>
     <s:String x:Key="ExceptionViewer.OpenInner">Open Inner Exception</s:String>
     <!--<s:String x:Key="ErrorDialog.Observation">Something wrong happened.</s:String>-->
-    <!--<s:String x:Key="ErrorDialog.Send">Send report</s:String>-->
+    <s:String x:Key="ErrorDialog.Send">보고서 전송</s:String>
 
     <!--Insert Frames-->
     <s:String x:Key="InsertFrames.Title">프레임 삽입</s:String>
@@ -692,9 +692,9 @@
     <!--<s:String x:Key="Hint.NewWebcamRecording">New webcam recording created</s:String>-->
     <!--<s:String x:Key="Hint.NewBoardRecording">New board recording created</s:String>-->
     <!--<s:String x:Key="Hint.NewAnimation">New project created</s:String>-->
-    <!--<s:String x:Key="Hint.Undo">Undo executed</s:String>-->
-    <!--<s:String x:Key="Hint.Reset">Reset executed</s:String>-->
-    <!--<s:String x:Key="Hint.Redo">Redo executed</s:String>-->
+    <!--<s:String x:Key="Hint.Undo">되돌리기</s:String>-->
+    <!--<s:String x:Key="Hint.Reset">실행 초기화</s:String>-->
+    <!--<s:String x:Key="Hint.Redo">다시 실행</s:String>-->
     <!--<s:String x:Key="Hint.Cut">{0} frame(s) cut</s:String>-->
     <!--<s:String x:Key="Hint.Copy">{0} frame(s) copied</s:String>-->
     <!--<s:String x:Key="Hint.Paste">{0} frame(s) pasted</s:String>-->
@@ -705,7 +705,7 @@
     <!--<s:String x:Key="Hint.Deselect">All frames were deselected</s:String>-->
     <!--<s:String x:Key="Hint.DeleteFrames">{0} frame(s) deleted</s:String>-->
     <!--<s:String x:Key="Hint.Reverse">Frame list reversed</s:String>-->
-    <!--<s:String x:Key="Hint.Yoyo">Yoyo effect applied</s:String>-->
+    <s:String x:Key="Hint.Yoyo">적용 효과 되돌리기</s:String>
     <!--<s:String x:Key="Hint.MoveLeft">Frame(s) moved to the left</s:String>-->
     <!--<s:String x:Key="Hint.MoveRight">Frame(s) moved to the right</s:String>-->
     <!--<s:String x:Key="Hint.Resize">Frames resized</s:String>-->
