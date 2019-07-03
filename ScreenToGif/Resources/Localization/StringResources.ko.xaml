@@ -93,10 +93,10 @@
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(프레임 간격을 일정하게 유지합니다)</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording">비동기 녹화를 활성화합니다.</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(녹화 중 인터페이스 렉을 줄이는 데 도움이 됩니다)</s:String>
-    <!--<s:String x:Key="Application.ScreenRecorder.NewRecorder">Enable the new recorder UI.</s:String>-->
-    <!--<s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(It will replace the old recorder UI)</s:String>-->
-    <!--<s:String x:Key="Application.ScreenRecorder.Magnifier">Enable the screen magnifier.</s:String>-->
-    <!--<s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(It enables a magnifier while selecting the recording area)</s:String>-->
+    <s:String x:Key="Application.ScreenRecorder.NewRecorder">새로운 레코더 UI를 사용합니다.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(예전 UI를 대체합니다.)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.Magnifier">화면 확대기능 사용</s:String>
+    <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(사각형 녹화 구역 선택 중에 표시됩니다)</s:String>
 
     <s:String x:Key="Application.Other">기타</s:String>
     <!--<s:String x:Key="Application.Other.SystemTray">Display the app on the system tray (notification area).</s:String>-->
@@ -329,16 +329,17 @@
     <s:String x:Key="Recorder.Paused">Screen To Gif (일시 정지)</s:String>
 
     <!--New Recorder-->
-    <!--<s:String x:Key="S.Recorder.Area">Area</s:String>-->
-    <!--<s:String x:Key="S.Recorder.Window">Window</s:String>-->
-    <!--<s:String x:Key="S.Recorder.Screen">Screen</s:String>-->
-    <s:String x:Key="S.Recorder.Accept">수락</s:String>
-    <!--<s:String x:Key="S.Recorder.Retry">Retry</s:String>-->
-    <!--<s:String x:Key="S.Recorder.CancelSelection">Cancel the selection (Esc)</s:String>-->
+    <s:String x:Key="S.Recorder.Area">사각형</s:String>
+    <s:String x:Key="S.Recorder.Window">창</s:String>
+    <s:String x:Key="S.Recorder.Screen">전체 화면</s:String>
+    <s:String x:Key="S.Recorder.Accept">확인</s:String>
+    <s:String x:Key="S.Recorder.Retry">다시실행</s:String>
+    <s:String x:Key="S.Recorder.CancelSelection">선택 취소 (Esc)</s:String>
     <!--<s:String x:Key="S.Recorder.SelectArea">Click and drag to select an area of this screen</s:String>-->
-    <!--<s:String x:Key="S.Recorder.SelectArea.Embedded">Click and drag to select an area</s:String>-->
-    <!--<s:String x:Key="S.Recorder.SelectWindow">Click here to select this window</s:String>-->
-    <!--<s:String x:Key="S.Recorder.SelectScreen">Click here to select this screen</s:String>-->
+    <s:String x:Key="S.Recorder.SelectArea">클릭 후 드래그하여 녹화할 구역을 선택하세요.</s:String>
+    <s:String x:Key="S.Recorder.SelectArea.Embedded">클릭 후 드래그하여 녹화할 구역 선택하기</s:String>
+    <s:String x:Key="S.Recorder.SelectWindow">이 창 선택하기</s:String>
+    <s:String x:Key="S.Recorder.SelectScreen">이 화면 선택하기</s:String>
 
     <!--<s:String x:Key="S.Recorder.EscToCancel">Press Esc to cancel</s:String>-->
 
@@ -734,13 +735,12 @@
     <s:String x:Key="Color">색:</s:String>
 
     <s:String x:Key="Recent.Projects">최근 프로젝트</s:String>
-    <!--<s:String x:Key="Recent.EnumeratingProjects">Looking for recent projects...</s:String>-->
+    <s:String x:Key="Recent.EnumeratingProjects">최근 프로젝트 탐색중...</s:String>
     <s:String x:Key="Recent.CreationDate">생성일</s:String>
     <s:String x:Key="Recent.FrameCount">프레임 카운트</s:String>
-    <!--<s:String x:Key="Recent.Warning.NothingSelected">There's no project selected. Select a project of the list to load.</s:String>-->
     <s:String x:Key="Recent.Warning.NothingSelected">프로젝트가 선택되지 않았습니다. 로드할 프로젝트를 선택하세요.</s:String>
     <s:String x:Key="Recent.Warning.SameOpened">이 프로젝트는 이미 이 편집기에서 로드된 프로젝트입니다.</s:String>
-    <!--<s:String x:Key="Recent.Warning.AlreadyOpened">This project was already opened by another editor instance. A project cannot be opened a second time if it's already open on another editor.</s:String>-->
+    <s:String x:Key="Recent.Warning.AlreadyOpened">이 프로젝트는 이미 다른 편집기에서 작업중인 프로젝트입니다. 다른 편집기에서 이미 열려있는 경우 프로젝트를 열 수 없습니다.</s:String>
 
     <s:String x:Key="Clipboard.Entries">클립보드 항목</s:String>
     <s:String x:Key="Clipboard.Entry">클립보드 항목:</s:String>
@@ -769,7 +769,7 @@
 
     <s:String x:Key="Reduce.Header">프레임 감소</s:String>
     <!--<s:String x:Key="Reduce.Factor">Factor:</s:String>-->
-    <!--<s:String x:Key="Reduce.Count">Remove Count:</s:String>-->
+    <s:String x:Key="Reduce.Count">카운트 제거:</s:String>
     <!--<s:String x:Key="Reduce.Info">It will remove {0} frame(s) after every {1} frame(s), without counting the removed ones.&#10;Framerate will be adjusted.</s:String>-->
 
     <!--<s:String x:Key="S.RemoveDuplicates.Header">Remove duplicates</s:String>-->
