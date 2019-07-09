@@ -2,11 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:s="clr-namespace:System;assembly=mscorlib"
                     xml:space="preserve">
-    
+
     <!--To use a new line: &#x0d;-->
-    <!--Or CarriageReturn + NewLine: &#x0d;&#x0a; or &#10;--> 
+    <!--Or CarriageReturn + NewLine: &#x0d;&#x0a; or &#10;-->
     <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
-    
+
     <!--General-->
     <s:String x:Key="Ok">확인</s:String>
     <s:String x:Key="Back">뒤로</s:String>
@@ -16,6 +16,27 @@
     <s:String x:Key="Frame">프레임</s:String>
     <s:String x:Key="Suppress">Suppress</s:String>
     <s:String x:Key="Preview">미리보기</s:String>
+    <s:String x:Key="S.Add">추가</s:String>
+    <s:String x:Key="S.Edit">편집</s:String>
+    <!--<s:String x:Key="S.Id">Id</s:String>-->
+    <s:String x:Key="S.Title">제목</s:String>
+    <s:String x:Key="S.Description">설명</s:String>
+    <s:String x:Key="S.SelectColor">클릭하여 색을 선택하세요.</s:String>
+
+    <!--Tray Icon-->
+    <s:String x:Key="S.NewRecording">새로운 화면 녹화하기</s:String>
+    <s:String x:Key="S.NewWebcamRecording">새로운 웹캠 녹화하기</s:String>
+    <s:String x:Key="S.NewBoardRecording">새로운 칠판 녹화하기</s:String>
+    <s:String x:Key="S.Exit">종료</s:String>
+
+    <!--Application-->
+    <s:String x:Key="Application.Exiting.Title">ScreenToGif 종료</s:String>
+    <s:String x:Key="Application.Exiting.Instruction">종료하시겠습니까?</s:String>
+    <s:String x:Key="Application.Exiting.Message">모든 창이 종료되며 트레이아이콘 또한 사라집니다.</s:String>
+
+    <!--Error messages-->
+    <!--<s:String x:Key="S.Crash">Oh no, the app crashed :(</s:String>-->
+    <!--<s:String x:Key="S.Required">Required field.</s:String>-->
 
     <!--StartUp Page-->
     <s:String x:Key="Title.StartUp">Screen To Gif - 시작</s:String>
@@ -26,66 +47,98 @@
     <s:String x:Key="Options">설정</s:String>
     <!--<s:String x:Key="Help">Help</s:String>-->
     <!--<s:String x:Key="NewRelease">New release available • {0}</s:String>-->
+    <!--<s:String x:Key="NewRelease.Tooltip">Downloads the latest version of ScreenToGif.</s:String>-->
     <s:String x:Key="Tooltip.Recorder">화면을 손쉽게 녹화할 수 있는 화면 녹화기를 시작합니다.</s:String>
     <s:String x:Key="Tooltip.Webcam">웹캠 녹화기를 시작합니다..</s:String>
     <s:String x:Key="Tooltip.Board">그림 그리는 과정을 녹화할 수 있는 칠판 녹화기를 시작합니다.</s:String>
     <s:String x:Key="Tooltip.Editor">편집기를 시작합니다.</s:String>
 
-    <!--Update Page-->
+    <!--Update Window-->
     <s:String x:Key="Update">업데이트</s:String>
-    <!--<s:String x:Key="Update.NewRelease">New release!</s:String>-->
+    <s:String x:Key="Update.NewRelease">새로운 버전 출시!</s:String>
+    <!--<s:String x:Key="Update.NewRelease.Verbose">New release available, Version {0}! Click here for more details.</s:String>-->
     <s:String x:Key="Download">다운로드</s:String>
+    <!--<s:String x:Key="Update.Portable">Portable</s:String>-->
+    <!--<s:String x:Key="Update.Installer">Installer</s:String>-->
+    <!--<s:String x:Key="Update.Filename.Warning">You need to pick another location or another file name</s:String>-->
+    <!--<s:String x:Key="Update.Filename.Warning2">You cannot overwrite the executable with a new version right now, please select another name for the file.</s:String>-->
+    <!--<s:String x:Key="Update.Install.Header">Do you wish to install the new version right now?</s:String>-->
+    <!--<s:String x:Key="Update.Install.Description">The app will be closed and the installer will be executed.</s:String>-->
     <!--<s:String x:Key="Update.CloseThis">Do you want to close this app?</s:String>-->
     <!--<s:String x:Key="Update.CloseThis.Detail">This is an older version. You have already downloaded a new version.</s:String>-->
-    
-    <!--Options Page-->
+
+    <!--Options Window-->
     <s:String x:Key="Title.Options">Screen To Gif - 설정</s:String>
     <s:String x:Key="Application">어플리케이션</s:String>
-    <s:String x:Key="S.Shortcuts">단축키</s:String>
     <s:String x:Key="Interface">인터페이스</s:String>
+    <!--<s:String x:Key="S.AutoTasks">Automated Tasks</s:String>-->
+    <s:String x:Key="S.Shortcuts">단축키</s:String>
     <s:String x:Key="Image">이미지</s:String>
     <s:String x:Key="Language">언어</s:String>
     <s:String x:Key="TemporaryFiles">임시 파일</s:String>
     <s:String x:Key="Extras">기타</s:String>
+    <!--<s:String x:Key="Clouds">Upload Services</s:String>-->
     <s:String x:Key="Donate">후원</s:String>
     <s:String x:Key="About">더 보기</s:String>
-    
+
+    <s:String x:Key="Application.ScreenRecorder">화면 녹화기</s:String>
+    <s:String x:Key="Application.ScreenRecorder.RecordMouse">녹화 중 마우스 커서를 같이 녹화합니다.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.RecordClicks">마우스 클릭을 같이 녹화합니다.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">커서의 색을 지정합니다.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.PreStart">녹화 시작 카운트다운을 사용합니다.</s:String>
+    <!--<s:String x:Key="Application.ScreenRecorder.PreStart.Info">(in seconds, waits before starting to capture)</s:String>-->
+    <s:String x:Key="Application.ScreenRecorder.StepRecording">스냅샷 모드를 활성화합니다.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(각 프레임을 수동으로 캡처할 수 있습니다.)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.FixedFramerate">프레임레이트 고정</s:String>
+    <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(프레임 간격을 일정하게 유지합니다)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.AsyncRecording">비동기 녹화를 활성화합니다.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(녹화 중 인터페이스 렉을 줄이는 데 도움이 됩니다)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.NewRecorder">새로운 레코더 UI를 사용합니다.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(예전 UI를 대체합니다.)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.Magnifier">화면 확대기능 사용</s:String>
+    <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(사각형 녹화 구역 선택 중에 표시됩니다)</s:String>
+
+    <s:String x:Key="Application.Other">기타</s:String>
+    <!--<s:String x:Key="Application.Other.SystemTray">Display the app on the system tray (notification area).</s:String>-->
+    <!-- <s:String x:Key="Application.Other.LeaveOpen">Keep the app open even if all windows are closed.</s:String> -->
+    <s:String x:Key="Application.Other.NotifyFrameDeletion">프레임 삭제전 물어보기</s:String>
+    <s:String x:Key="Application.Other.NotifyProjectDiscard">프로젝트 삭제전 물어보기</s:String>
+    <!--<s:String x:Key="Application.Other.NotifyWhileClosingEditor">Ask me before closing the Editor (if there's a project opened).</s:String>-->
+    <s:String x:Key="Application.Other.NotifyWhileClosingApp">앱 종료전에 물어보기</s:String>
+    <!--<s:String x:Key="Application.Other.DrawOutlineOutside">Draw the outline of captions outside the letters.</s:String>-->
+    <s:String x:Key="Application.Other.DisableHardwareAcceleration">하드웨어 가속 끄기</s:String>
+    <s:String x:Key="Application.Other.CheckForTranslationUpdates">번역 업데이트를 자동으로 확인합니다.</s:String>
+    <s:String x:Key="Application.Other.CheckForUpdates">업데이트를 자동으로 확인합니다.</s:String>
     <s:String x:Key="S.Application.Other.Homepage">홈페이지:</s:String>
     <s:String x:Key="S.Application.Other.Homepage.StartUp">시작 화면</s:String>
     <s:String x:Key="S.Application.Other.Homepage.Recorder">화면 녹화기</s:String>
     <s:String x:Key="S.Application.Other.Homepage.Webcam">웹캠 녹화기</s:String>
     <s:String x:Key="S.Application.Other.Homepage.Board">칠판 녹화기</s:String>
     <s:String x:Key="S.Application.Other.Homepage.Editor">편집기</s:String>
-    
-    <s:String x:Key="Application.ScreenRecorder">화면 녹화기</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordMouse">녹화 중 마우스 커서를 같이 녹화합니다.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordClicks">마우스 클릭을 같이 녹화합니다.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">커서의 색을 지정합니다.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.PreStart">녹화 시작 카운트다운을 사용합니다.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.StepRecording">스냅샷 모드를 활성화합니다.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(각 프레임을 수동으로 캡처할 수 있습니다.)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FullRecording">전체 화면 모드를 활성화합니다.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FullRecording.Info">(실험적 기능. 전체 화면을 녹화합니다.)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate">프레임레이트 고정</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(프레임 간격을 일정하게 유지합니다)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.AsyncRecording">비동기 녹화를 활성화합니다.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(녹화 중 인터페이스 렉을 줄이는 데 도움이 됩니다)</s:String>
-    
-    <s:String x:Key="Application.Other">기타</s:String>
-    <s:String x:Key="Application.Other.CheckForUpdates">업데이트를 자동으로 확인합니다.</s:String>
-    
-    <s:String x:Key="Interface.EditorBackground">편집기 배경 설정</s:String>
-    <!--<s:String x:Key="Interface.Recorder">Recorder theme</s:String>-->
-    <!--<s:String x:Key="Interface.Background">Background</s:String>-->
-    <!--<s:String x:Key="Interface.Foreground">Foreground</s:String>-->
-    <s:String x:Key="Interface.BoardBackground">칠판 배경 설정</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Minimized">최소화 (시스템 트레이)</s:String>
+    <!--<s:String x:Key="S.Application.Other.Homepage.Info">(It controls how the app opens. When starting minimized, the system tray icon will be visible)</s:String>-->
+
+    <!--<s:String x:Key="S.AutomatedTasks.Title">Automated Task</s:String>-->
+    <!--<s:String x:Key="S.AutomatedTasks.List">List of automated tasks</s:String>-->
+    <!--<s:String x:Key="S.AutomatedTasks.List.Task">Task</s:String>-->
+    <!--<s:String x:Key="S.AutomatedTasks.List.Details">Details</s:String>-->
+    <!--<s:String x:Key="S.AutomatedTasks.SelectType">(Pick a task)</s:String>-->
+    <!--<s:String x:Key="S.AutomatedTasks.Info">These tasks are executed sequentially from the top of the list to the bottom.&#10;It happens when you first open a project using the editor.</s:String>-->
+
+    <!--<s:String x:Key="Interface.Theme">App's theme</s:String>-->
     <s:String x:Key="Interface.Theme.Scheme">색 설정</s:String>
+    <s:String x:Key="Interface.EditorBackground">편집기 배경 설정</s:String>
+    <s:String x:Key="Interface.Recorder">레코더 테마</s:String>
+    <s:String x:Key="Interface.Background">배경</s:String>
+    <s:String x:Key="Interface.Foreground">전경</s:String>
+    <s:String x:Key="Interface.BoardBackground">칠판 배경 설정</s:String>
     <s:String x:Key="Interface.Theme.Scheme.VeryLight">매우 밝게</s:String>
     <s:String x:Key="Interface.Theme.Scheme.Light">밝게</s:String>
     <s:String x:Key="Interface.Theme.Scheme.Medium">중간</s:String>
     <s:String x:Key="Interface.Theme.Scheme.Dark">어둡게</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.VeryDark">매우 어둡게</s:String>
     <s:String x:Key="Interface.Theme.Scheme.Custom">사용자 설정</s:String>
-    
+
     <s:String x:Key="Interface.EditorBackground.GridSize">격자 크기</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.VerySmall">매우 작게</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Small">작게</s:String>
@@ -107,15 +160,49 @@
     <s:String x:Key="Interface.Other.ExtendChrome">제목 표시줄 / 메뉴 확장</s:String>
     <s:String x:Key="Interface.Other.HideTitleBar">제목 표시줄을 숨깁니다.</s:String>
     <!--<s:String x:Key="Interface.Other.TripleClickSelection">Enable triple-click to select the text.</s:String>-->
-  
+    <!--<s:String x:Key="Interface.Other.AutomaticallySizeOnContent">Automatically adjust the window size based on the frame size, right after loading.</s:String>-->
+    <!--<s:String x:Key="Interface.Other.AutomaticallyFitImage">Automatically adjust the frame zoom based on the window size, right after loading.</s:String>-->
+
+    <!--<s:String x:Key="S.Shortcuts.Global">Global</s:String>-->
+    <!--<s:String x:Key="S.Shortcuts.Global.ScreenRecorder">Screen recorder:</s:String>-->
+    <!--<s:String x:Key="S.Shortcuts.Global.ScreenRecorder.Info">(Opens the default screen recorder)</s:String>-->
+    <!--<s:String x:Key="S.Shortcuts.Global.WebcamRecorder">Webcam recorder:</s:String>-->
+    <!--<s:String x:Key="S.Shortcuts.Global.WebcamRecorder.Info">(Opens the webcam recorder)</s:String>-->
+    <!--<s:String x:Key="S.Shortcuts.Global.BoardRecorder">Board recorder:</s:String>-->
+    <!--<s:String x:Key="S.Shortcuts.Global.BoardRecorder.Info">(Opens the board recorder, so you can record your drawings)</s:String>-->
+    <s:String x:Key="S.Shortcuts.Global.OpenEditor">편집기:</s:String>
+    <!--<s:String x:Key="S.Shortcuts.Global.OpenEditor.Info">(Opens another editor window)</s:String>-->
+    <s:String x:Key="S.Shortcuts.Global.OpenOptions">설정:</s:String>
+    <!--<s:String x:Key="S.Shortcuts.Global.OpenOptions.Info">(Opens the options window. You can only open one at a time)</s:String>-->
+    <!--<s:String x:Key="S.Shortcuts.Global.Exit">Exit:</s:String>-->
+    <!--<s:String x:Key="S.Shortcuts.Global.Exit.Info">(Closes all windows and removes the app from the system tray)</s:String>-->
+    <!--<s:String x:Key="S.Shortcuts.Recorders">Recorders</s:String>-->
     <s:String x:Key="S.Shortcuts.Recorders.StartPause">시작 / 일시정지:</s:String>
+    <!--<s:String x:Key="S.Shortcuts.Recorders.StartPause.Info">(It starts or pauses the recording. It is used to take snapshots if the snapshot mode is activated)</s:String>-->
     <s:String x:Key="S.Shortcuts.Recorders.Stop">정지:</s:String>
-    
+    <!--<s:String x:Key="S.Shortcuts.Recorders.Stop.Info">(It stops the recording and opens the editor)</s:String>-->
+    <!--<s:String x:Key="S.Shortcuts.Recorders.Discard">Discard:</s:String>-->
+    <!--<s:String x:Key="S.Shortcuts.Recorders.Discard.Info">(Discards the active recording, when it's paused)</s:String>-->
+    <!--<s:String x:Key="S.Shortcuts.Info">Click to set keyboard focus, then press the desired keys and modifiers.&#10;Some keys combinations are not allowed.</s:String>-->
+
     <s:String x:Key="Language.AppLanguage">언어 설정</s:String>
-    
+    <!--<s:String x:Key="Language.AppLanguage.AutoDetect">Auto detect</s:String>-->
+    <!--<s:String x:Key="Language.AppLanguage.AutoDetect.Author">Current OS language (if available)</s:String>-->
+    <!--<s:String x:Key="Language.AppLanguage.Translate.Sentence1.1">Would you like to translate my app?</s:String>-->
+    <!--<s:String x:Key="Language.AppLanguage.Translate.Sentence1.2">Click here to read the translation guidelines and to download the Translator app.</s:String>-->
+    <!--<s:String x:Key="Language.AppLanguage.Translate.Sentence2.1">Afterwards,</s:String>-->
+    <!--<s:String x:Key="Language.AppLanguage.Translate.Sentence2.2">click here to import</s:String>-->
+    <!--<s:String x:Key="Language.AppLanguage.Translate.Sentence2.3">and test your translation.</s:String>-->
+    <!--<s:String x:Key="Language.AppLanguage.Translate.Sentence3.1">Send it to me via</s:String>-->
+    <!--<s:String x:Key="Language.AppLanguage.Translate.Sentence3.2">email (nicke@outlook.com.br)</s:String>-->
+    <!--<s:String x:Key="Language.AppLanguage.Translate.Sentence3.3">when you finish translating it.</s:String>-->
+    <!--<s:String x:Key="Language.AppLanguage.Translate.ResourceLink.Tooltip">Click to open a webpage with the guidelines.</s:String>-->
+    <!--<s:String x:Key="Language.AppLanguage.Translate.ImportLink.Tooltip">Opens the import page</s:String>-->
+    <!--<s:String x:Key="Language.AppLanguage.Translate.EmailLink.Tooltip">Opens your email app</s:String>-->
+
     <s:String x:Key="TempFiles.FilesAndFolders">임시 파일 및 폴더</s:String>
-    <s:String x:Key="TempFiles.Folders">폴더:</s:String>
-    <s:String x:Key="TempFiles.Files">파일:</s:String>
+    <!--<s:String x:Key="TempFiles.FilesAndFolders.Count">{0} folders and {1} files</s:String>-->
+    <!--<s:String x:Key="TempFiles.FilesAndFolders.None">No folder or file detected</s:String>-->
     <s:String x:Key="TempFiles.OpenFolder">폴더 열기</s:String>
     <s:String x:Key="TempFiles.Clear">임시 파일 삭제</s:String>
     <s:String x:Key="TempFiles.LogsLocation">로그 파일 저장 폴더</s:String>
@@ -125,28 +212,100 @@
     <s:String x:Key="TempFiles.Settings">설정 파일 경로</s:String>
     <!--<s:String x:Key="TempFiles.AppDataPath">AppData:</s:String>-->
     <!--<s:String x:Key="TempFiles.LocalPath">Local:</s:String>-->
-    <!--<s:String x:Key="TempFiles.NotExists">It doesn't exist</s:String>-->
+    <s:String x:Key="TempFiles.NotExists">존재하지 않습니다.</s:String>
     <s:String x:Key="TempFiles.CreateSettings">빈 설정 파일을 새로 만듭니다.</s:String>
     <s:String x:Key="TempFiles.RemoveSettings">설정 파일을 삭제합니다.</s:String>
+    <!--<s:String x:Key="TempFiles.OpenSettingsFolder">Open the folder where the settings file is located.&#x0d;Hold Ctrl while clicking to open the file, if possible.</s:String>-->
     <!--<s:String x:Key="TempFiles.SettingsInfo">• Settings loading pattern: Default ◄ AppData ◄ Local.&#x0d;• If there's no settings file present at the Local folder, the app searches inside the AppData folder, Default is used if no settings file present.&#x0d;• If there's no Local settings, all settings are saved on the AppData settings file.</s:String>-->
+    <!--<s:String x:Key="TempFiles.KeepRecent">Should we keep recent projects?</s:String>-->
+    <!--<s:String x:Key="TempFiles.KeepRecent.Info">If you think so, all recent projects less than a few days old will not be erased.&#x0d;&#x0d;Anyway, any project open will not be erased.</s:String>-->
+    <s:String x:Key="TempFiles.AutomaticRemoval">오래된 프로젝트를 자동으로 삭제합니다.</s:String>
+    <!--<s:String x:Key="TempFiles.AutomaticRemoval.Info">When opening the app, a background task will erase any closed projects older than the amount of time configured.</s:String>-->
+    <!--<s:String x:Key="TempFiles.AutomaticRemovalDays.Info">(in days, any closed project older than this will be erased/discarded after opening the app)</s:String>-->
+    <!--<s:String x:Key="TempFiles.LowSpace">Low on space on the current selected hard drive. Please, clean the temp folder or change the location.</s:String>-->
 
+    <s:String x:Key="S.Upload.Proxy">프록시</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode">모드:</s:String>
+    <!--<s:String x:Key="S.Upload.Proxy.Mode.Disabled">Disabled</s:String>-->
+    <!--<s:String x:Key="S.Upload.Proxy.Mode.Manual">Manual</s:String>-->
+    <s:String x:Key="S.Upload.Proxy.Mode.System">시스템</s:String>
+    <!--<s:String x:Key="S.Upload.Proxy.Mode.System.Info">(Uses the system proxy)</s:String>-->
+    <s:String x:Key="S.Upload.Proxy.Host">호스트:</s:String>
+    <!--<s:String x:Key="S.Upload.Proxy.Port">Port:</s:String>-->
+    <!--<s:String x:Key="S.Upload.Proxy.User">Username:</s:String>-->
+    <!--<s:String x:Key="S.Upload.Proxy.Password">Password:</s:String>-->
+    <!--<s:String x:Key="S.Upload.Get">Get OAuth token</s:String>-->
+    <s:String x:Key="S.Upload.PasteToken">인증된 토큰을 여기 붙여넣으세요.</s:String>   
+    <!--<s:String x:Key="S.Upload.Authorize">Authorize</s:String>-->
+    <s:String x:Key="S.Upload.Refresh">새로고침</s:String>
+    <!--<s:String x:Key="S.Upload.Clear">Clear</s:String>-->
+    <!--<s:String x:Key="S.Upload.Imgur.Anonymous">Imgur (Anonymous)</s:String>-->
+    <!--<s:String x:Key="S.Upload.Imgur.Direct">Use direct links.</s:String>-->
+    <!--<s:String x:Key="S.Upload.Imgur.Gifv">Get links with the Gifv extension instead of Gif.</s:String>-->
+    <!--<s:String x:Key="S.Upload.Imgur.ToAlbum">Upload gifs to a selected album.</s:String>-->
+    <!--<s:String x:Key="S.Upload.Imgur.Album">Album:</s:String>-->
+    <!--<s:String x:Key="S.Upload.Imgur.AskMe">Ask me before uploading</s:String>-->
+    <!--<s:String x:Key="S.Upload.Imgur.Auth.NotPossible">It was not possible to open the page to get the Imgur authorization token.</s:String>-->
+    <!--<s:String x:Key="S.Upload.Imgur.Auth.Missing">In order to authorize this app, you need to provide the authorization token.</s:String>-->
+    <!--<s:String x:Key="S.Upload.Imgur.Auth.Completed">Imgur authorization completed.</s:String>-->
+    <!--<s:String x:Key="S.Upload.Imgur.Auth.Error">Imgur authorization failed. Try again in a few seconds or get a new token.</s:String>-->
+    <!--<s:String x:Key="S.Upload.Imgur.Refresh.None">In order to refresh the authorization for this app, you need to first finish the authorization process.</s:String>-->
+    <!--<s:String x:Key="S.Upload.Imgur.NotAuthorized">Not authorized.</s:String>-->
+    <!--<s:String x:Key="S.Upload.Imgur.Expired">Authorization expired in {0}.</s:String>-->
+    <!--<s:String x:Key="S.Upload.Imgur.Valid">Authorization valid until {0}.</s:String>-->
+    <!--<s:String x:Key="S.Upload.Imgur.Removed">Imgur authorization removed.</s:String>-->
+    <!--<s:String x:Key="S.Upload.Imgur.Error.AlbumLoad">It was not possible to load the album list.</s:String>-->
+    <!--<s:String x:Key="S.Upload.Gyfcat.Anonymous">Gyfcat (Anonymous)</s:String>-->
+    <!--<s:String x:Key="S.Upload.Yandex.Token">OAuth token:</s:String>-->
+    <!--<s:String x:Key="S.Upload.Pick.Destination">Pick a destination</s:String>-->
+    <!--<s:String x:Key="S.Upload.Pick.Album">Pick an album (optional)</s:String>-->
+    <!--<s:String x:Key="S.Upload.Pick.Album.Info">If you wish so, you can select the destination album:</s:String>-->
+
+    <!--<s:String x:Key="Extras.External">Available external tools</s:String>-->
+    <!--<s:String x:Key="Extras.Download">Click here to download&#x0d;{0}</s:String>-->
+    <s:String x:Key="Extras.Downloading">다운로드중...</s:String>
+    <!--<s:String x:Key="Extras.Ready">Downloaded&#x0d;{0}</s:String>-->
+    <!--<s:String x:Key="Extras.Ready.Info">Click here to open the properties of the file.</s:String>-->
+    <!--<s:String x:Key="S.Extras.DownloadRestriction">Apps distributed by the Microsoft Store cannot download other apps. You'll have to download it manually.</s:String>-->
     <s:String x:Key="Extras.FfmpegLocation">FFmpeg 경로</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Select">FFmpeg 파일의 경로를 지정합니다.</s:String>
-    
+    <!--<s:String x:Key="Extras.FfmpegLocation.Invalid">The path of FFMpeg executable contains one or more invalid characters. Please, select a valid location for that executable.</s:String>-->
+    <s:String x:Key="Extras.GifskiLocation">Gifski 경로</s:String>
+    <!--<s:String x:Key="Extras.GifskiLocation.Select">Select the location of the Gifski executable</s:String>-->
+    <!--<s:String x:Key="Extras.GifskiLocation.Invalid">The path of Gifski executable contains one or more invalid characters. Please, select a valid location for that executable.</s:String>-->
+    <!--<s:String x:Key="Extras.License.Ffmpeg">FFmpeg license</s:String>-->
+    <!--<s:String x:Key="Extras.License.Gifski">Gifski license</s:String>-->
+
     <s:String x:Key="Donate.IfYouWish">개발자에게 감사를 표하고 싶다면</s:String>
     <s:String x:Key="Donate.DonateDollar">미화 달러 기부</s:String>
     <s:String x:Key="Donate.DonateEuro">유로화 기부</s:String>
     <s:String x:Key="Donate.Donate">기부</s:String>
+    <s:String x:Key="Donate.Paypal.Dollar">페이팔 사이트 열기. 선택된 화폐: 미화</s:String>
+    <s:String x:Key="Donate.Paypal.Euro">페이팔 사이트 열기. 선택된 화폐: 유로</s:String>
+    <s:String x:Key="Donate.Paypal.OwnCurrency">페이팔 사이트 열기. 화폐를 선택하세요.</s:String>
+    <!--<s:String x:Key="Donate.Patreon">Click here to open my Patreon page.</s:String>-->
+    <!--<s:String x:Key="Donate.Steam.Link">Click here to open my Steam wishlist page.</s:String>-->
+    <!--<s:String x:Key="Donate.Steam.Text">You can send games as gifts.</s:String>-->
+    <!--<s:String x:Key="Donate.Crypto">Crypto currencies</s:String>-->
 
     <s:String x:Key="About.Version">버전:</s:String>
     <s:String x:Key="About.Author">개발자: Nicke Manarin</s:String>
+    <!--<s:String x:Key="S.About.StoreVersion">Microsoft Store version. Some features are disabled due to enforced policies.</s:String>-->
     <s:String x:Key="About.Contact">연락처</s:String>
+    <s:String x:Key="S.About.Contact.Discord">서버 접속</s:String>
+    <s:String x:Key="S.About.Contact.Facebook">페이지 방문</s:String>
+    <!--<s:String x:Key="S.About.Contact.Gitter">Join room</s:String>-->
     <s:String x:Key="About.Technical">프로젝트 정보</s:String>
     <s:String x:Key="About.Technical.License">소프트웨어 라이선스:</s:String>
     <s:String x:Key="About.Technical.Free">(이 소프트웨어는 무료 소프트웨어입니다.)</s:String>
     <s:String x:Key="About.Technical.SourceCode">소스 코드 (GitHub):</s:String>
     <s:String x:Key="About.ABigThanksTo">도움을 준 사람들</s:String>
-    <!--<s:String x:Key="About.ABigThanksTo.Everyone">All my supporters, people who provided feedback and/or donations.</s:String>-->
+    <s:String x:Key="About.ABigThanksTo.Everyone">모든 지지자들과, 피드백 또는 후원을 제공한 사람들</s:String>
+
+    <!--Localization-->
+    <!--<s:String x:Key="Localization">Localization</s:String>-->
+    <!--<s:String x:Key="Localization.ResourcePositionUsed">The bottom-most resource is the current one being used.</s:String>-->
+    <!--<s:String x:Key="Localization.MoveRosourcePosition">To apply your custom resource, move it to the bottom of the list.</s:String>-->
 
     <!--Recorder-->
     <s:String x:Key="Recorder.RecordingOptions">녹화 설정</s:String>
@@ -163,24 +322,40 @@
     <s:String x:Key="Recorder.Height">높이</s:String>
     <s:String x:Key="Recorder.Width">폭</s:String>
     <s:String x:Key="Recorder.Fps">최대 초당 프레임 수</s:String>
+    <!--<s:String x:Key="Recorder.Fps.Short">fps</s:String>-->
     <!--<s:String x:Key="Recorder.FpsRange">Minimum to maximum fps: 1-60 fps</s:String>-->
     <s:String x:Key="Recorder.SnapToWindow">창 맞춤(끌어서 창에 놓으세요)</s:String>
     <s:String x:Key="Recorder.PreStart">타이머</s:String>
     <s:String x:Key="Recorder.Paused">Screen To Gif (일시 정지)</s:String>
-    
+
+    <!--New Recorder-->
+    <s:String x:Key="S.Recorder.Area">사각형</s:String>
+    <s:String x:Key="S.Recorder.Window">창</s:String>
+    <s:String x:Key="S.Recorder.Screen">전체 화면</s:String>
+    <s:String x:Key="S.Recorder.Accept">확인</s:String>
+    <s:String x:Key="S.Recorder.Retry">다시실행</s:String>
+    <s:String x:Key="S.Recorder.CancelSelection">선택 취소 (Esc)</s:String>
+    <!--<s:String x:Key="S.Recorder.SelectArea">Click and drag to select an area of this screen</s:String>-->
+    <s:String x:Key="S.Recorder.SelectArea">클릭 후 드래그하여 녹화할 구역을 선택하세요.</s:String>
+    <s:String x:Key="S.Recorder.SelectArea.Embedded">클릭 후 드래그하여 녹화할 구역 선택하기</s:String>
+    <s:String x:Key="S.Recorder.SelectWindow">이 창 선택하기</s:String>
+    <s:String x:Key="S.Recorder.SelectScreen">이 화면 선택하기</s:String>
+
+    <!--<s:String x:Key="S.Recorder.EscToCancel">Press Esc to cancel</s:String>-->
+
     <!--Webcam Recorder-->
     <s:String x:Key="Webcam.Title">Screen To Gif - 웹캠 녹화기</s:String>
     <s:String x:Key="Webcam.NoVideo">감지된 장치가 없습니다 :(</s:String>
     <s:String x:Key="Webcam.CheckVideoDevices">장치 목록 새로고침</s:String>
-    <!--<s:String x:Key="Webcam.Scale">Scale: x{0:0.##}</s:String>-->
+    <!--<s:String x:Key="Webcam.Scale">Scale: {0:0.##}x</s:String>-->
     <!--<s:String x:Key="Webcam.ChangeScale">Change the scale of the video.</s:String>-->
-    
+
     <!--Board Recorder-->
-    <!--<s:String x:Key="Board.Title">ScreenToGif - Board Recorder</s:String>-->
-    <!--<s:String x:Key="Board.AutoRecord">Auto Record</s:String>-->
+    <s:String x:Key="Board.Title">ScreenToGif - 칠판 녹화기</s:String>
+    <s:String x:Key="Board.AutoRecord">자동 녹화</s:String>
     <!--<s:String x:Key="Board.AutoRecordToolTip">Enables recording while drawing.</s:String>-->
     <!--<s:String x:Key="Board.CtrlHold">Ctrl [Hold]</s:String>-->
-    
+
     <!--Color Selector-->
     <s:String x:Key="ColorSelector.Title">색 선택기</s:String>
     <s:String x:Key="ColorSelector.Select">색을 선택하세요</s:String>
@@ -192,12 +367,12 @@
     <s:String x:Key="ColorSelector.Initial">기존 색</s:String>
     <s:String x:Key="ColorSelector.Current">현재 색</s:String>
     <s:String x:Key="ColorSelector.Latest">선택 색</s:String>
-    
+
     <!--Exception Viewer, Optional-->
     <s:String x:Key="ExceptionViewer.Title">예외가 발생했습니다!</s:String>
     <s:String x:Key="ExceptionViewer.OpenInner">Open Inner Exception</s:String>
     <!--<s:String x:Key="ErrorDialog.Observation">Something wrong happened.</s:String>-->
-    <!--<s:String x:Key="ErrorDialog.Send">Send report</s:String>-->
+    <s:String x:Key="ErrorDialog.Send">보고서 전송</s:String>
 
     <!--Insert Frames-->
     <s:String x:Key="InsertFrames.Title">프레임 삽입</s:String>
@@ -231,25 +406,44 @@
     <s:String x:Key="ImportVideo.Selection">선택됨:</s:String>
     <s:String x:Key="ImportVideo.Frames">프레임:</s:String>
     <s:String x:Key="ImportVideo.Duration">길이:</s:String>
-    
+    <!--<s:String x:Key="S.ImportVideo.Error">It was not possible to load the video.</s:String>-->
+
     <!--Encoder-->
     <s:String x:Key="Encoder.Title">인코더</s:String>
     <s:String x:Key="Encoder.ClearAllCompleted">기록 정리</s:String>
     <s:String x:Key="Encoder.Starting">시작하는 중</s:String>
     <s:String x:Key="Encoder.Completed">완료</s:String>
-    <!--<s:String x:Key="Encoder.Completed.Clipboard">Completed&#x0d;Copied to the Clipboard</s:String>-->
+    <!--<s:String x:Key="Encoder.Completed.Clipboard">Copied to the clipboard</s:String>-->
+    <!--<s:String x:Key="Encoder.Completed.Clipboard.Fail">Failed to copy</s:String>-->
+    <!--<s:String x:Key="Encoder.Completed.Command">Command executed</s:String>-->
+    <!--<s:String x:Key="Encoder.Completed.Command.Output">Show the output of the command(s).</s:String>-->
+    <!--<s:String x:Key="Encoder.Completed.Command.Fail">Failed to execute command</s:String>-->
+    <!--<s:String x:Key="Encoder.Completed.Upload.Fail">Failed to upload</s:String>-->
+    <!--<s:String x:Key="Encoder.Completed.Upload.Delete">Ctrl + Click to open the page to delete the image (if available).</s:String>-->
     <s:String x:Key="Encoder.FileDeletedMoved">존재하지 않거나 이동된 파일</s:String>
     <s:String x:Key="Encoder.Canceled">취소됨</s:String>
     <s:String x:Key="Encoder.Error">에러</s:String>
+    <s:String x:Key="Encoder.Error.Info">이 오류의 세부 정보를 표시하려면 여기를 클릭하십시오.</s:String>
+    <!--<s:String x:Key="Encoder.Uploading">Uploading</s:String>-->
+    <!--<s:String x:Key="Encoder.Executing">Executing commmands</s:String>-->
     <s:String x:Key="Encoder.Processing">처리중 {0}</s:String>
     <s:String x:Key="Encoder.Analyzing">중복 픽셀 분석중</s:String>
     <s:String x:Key="Encoder.OpenFile">파일 열기</s:String>
     <s:String x:Key="Encoder.ExploreFolder">폴더 탐색</s:String>
     <s:String x:Key="Encoder.Remove">기록 삭제</s:String>
-    <!--<s:String x:Key="Encoder.Details">Show details</s:String>-->
+    <s:String x:Key="Encoder.Details">세부사항 보기</s:String>
     <!--<s:String x:Key="Encoder.Copy.Image">Copy as image</s:String>-->
-    <!--<s:String x:Key="Encoder.Copy.Filename">Copy filename</s:String>-->
-    <!--<s:String x:Key="Encoder.Copy.Folder">Copy folder path</s:String>-->
+    <s:String x:Key="Encoder.Copy.Filename">파일명 복사</s:String>
+    <s:String x:Key="Encoder.Copy.Folder">폴더 경로 복사</s:String>
+    <s:String x:Key="Encoder.Copy.Link">링크 복사</s:String>
+
+    <!--Command output-->
+    <!--<s:String x:Key="Command.Title">ScreenToGif - Command Output</s:String>-->
+    <!--<s:String x:Key="Command.Header">Command output</s:String>-->
+
+    <!--Notifications-->
+    <s:String x:Key="S.Notifications">알림</s:String>
+    <s:String x:Key="S.Notifications.Dismiss">모든 알림 삭제</s:String>
 
     <!--Editor-->
     <s:String x:Key="Editor.Title">Screen To Gif - 편집기</s:String>
@@ -261,50 +455,63 @@
     <s:String x:Key="Editor.Transitions">전환 효과</s:String>
     <s:String x:Key="Editor.Statistics">통계</s:String>
     <s:String x:Key="Editor.Options">설정</s:String>
-    
+    <!--<s:String x:Key="S.Editor.Extras">Extras</s:String>-->
+
+    <!--Welcome-->
+    <!--<s:String x:Key="Welcome.New">Head over to "File > New" to start a new recording</s:String>-->
+    <!--<s:String x:Key="Welcome.Import">Drag and drop images, videos or projects to import</s:String>-->
+    <!--<s:String x:Key="Welcome.ThankYou">Thank you so much for using my app!</s:String>-->
+    <!--<s:String x:Key="Welcome.Size">The lower the framerate, the color count or the amount of changes between frames, the smaller the size</s:String>-->
+    <!--<s:String x:Key="Welcome.Contact">Do you want to talk? Open "Options > About" for contact methods</s:String>-->
+    <!--<s:String x:Key="Welcome.Trouble">Having trouble? Contact me via the Feedback tool</s:String>-->
+    <!--<s:String x:Key="Welcome.NewRecorder">Would you like to try out the new recorder? Head over to "Options > Application" to enable it</s:String>-->
+
     <!--File • New-->
     <s:String x:Key="Editor.File.New.Recording">녹화하기</s:String>
     <s:String x:Key="Editor.File.New.Webcam">웹캠\n녹화하기</s:String>
     <s:String x:Key="Editor.File.New.Board">칠판\n녹화하기</s:String>
     <s:String x:Key="Editor.File.Blank">빈\n프로젝트</s:String>
     <s:String x:Key="Editor.File.New">새로 만들기</s:String>
-    
+
     <!--File • Insert-->
     <s:String x:Key="Editor.File.Insert.Recording">녹화하기</s:String>
     <s:String x:Key="Editor.File.Insert.Webcam">웹캠\n녹화하기</s:String>
+    <s:String x:Key="Editor.File.Insert.Board">칠판&#x0d;녹화하기</s:String>
     <s:String x:Key="Editor.File.Insert.Media">파일\n불러오기</s:String>
     <s:String x:Key="Editor.File.Insert">삽입</s:String>
-    
+
     <!--File • Save/Discard-->
     <s:String x:Key="Editor.File.Save">저장하기</s:String>
     <s:String x:Key="Editor.File.Load">파일\n불러오기</s:String>
+    <s:String x:Key="Editor.File.LoadRecent">최근&#x0d;프로젝트</s:String>
     <s:String x:Key="Editor.File.SaveProject">프로젝트\n로 저장</s:String>
     <s:String x:Key="Editor.File.Discard">프로젝트\n삭제</s:String>
-    
+
     <!--Home • Action Stack-->
     <s:String x:Key="Editor.Home.ActionStack">Action Stack</s:String>
     <s:String x:Key="Editor.Home.Undo">실행 취소</s:String>
     <s:String x:Key="Editor.Home.Redo">다시 실행</s:String>
     <s:String x:Key="Editor.Home.Reset">초기화</s:String>
-    
+
     <!--Home • Clipboard-->
     <s:String x:Key="Editor.Home.Clipboard">클립보드</s:String>
     <s:String x:Key="Editor.Home.Clipboard.Show">클립보드 확인하기</s:String>
     <s:String x:Key="Editor.Home.Paste">붙여넣기</s:String>
     <s:String x:Key="Editor.Home.Cut">잘라내기</s:String>
     <s:String x:Key="Editor.Home.Copy">복사</s:String>
-    
+
     <!--Home • Zoom-->
     <s:String x:Key="Editor.Home.Zoom">확대 / 축소</s:String>
+    <!--<s:String x:Key="Editor.Home.SizeToContent">Adjust to&#x0d;Content</s:String>-->
     <s:String x:Key="Editor.Home.FitImage">창에 맞게 조정</s:String>
-    
+
     <!--Home • Select-->
     <s:String x:Key="Editor.Home.Select">선택</s:String>
     <s:String x:Key="Editor.Home.SelectAll">모두&#x0d;선택</s:String>
     <s:String x:Key="Editor.Home.GoTo">프레임으로&#x0d;이동</s:String>
     <s:String x:Key="Editor.Home.Inverse">선택 반전</s:String>
     <s:String x:Key="Editor.Home.Deselect">선택 해제</s:String>
-    
+
     <!--Playback • Playback-->
     <s:String x:Key="Editor.Playback.Playback">재생</s:String>
     <s:String x:Key="Editor.Playback.First">맨 처음으로</s:String>
@@ -313,60 +520,66 @@
     <s:String x:Key="Editor.Playback.Pause">일시정지</s:String>
     <s:String x:Key="Editor.Playback.Next">다음 프레임</s:String>
     <s:String x:Key="Editor.Playback.Last">맨 마지막으로</s:String>
-    
-    <!--Edit • Frames-->  
+
+    <!--Edit • Frames-->
     <s:String x:Key="Editor.Edit.Frames">프레임</s:String>
     <s:String x:Key="Editor.Edit.Delete">현재 프레임\n삭제</s:String>
+    <s:String x:Key="Editor.Edit.Frames.Duplicates">사본&#x0d;삭제</s:String>
     <s:String x:Key="Editor.Edit.Frames.Reduce">프레임 수&#x0d;줄이기</s:String>
     <s:String x:Key="Editor.Edit.DeletePrevious">앞쪽 프레임 전부 삭제</s:String>
     <s:String x:Key="Editor.Edit.DeleteNext">뒤쪽 프레임 전부 삭제</s:String>
-    
+
     <!--Edit • Reordering-->
     <s:String x:Key="Editor.Edit.Reordering">이동</s:String>
     <s:String x:Key="Editor.Edit.Reverse">역재생</s:String>
     <s:String x:Key="Editor.Edit.Yoyo">역재생 프레임 뒤에 추가</s:String>
     <s:String x:Key="Editor.Edit.MoveLeft">좌측으로\n이동</s:String>
     <s:String x:Key="Editor.Edit.MoveRight">우측으로\n이동</s:String>
-    
+
     <!--Edit • Delay/Duration-->
     <!--<s:String x:Key="Editor.Edit.Delay">Delay (Duration)</s:String>-->
     <!--<s:String x:Key="Editor.Edit.Delay.Override">Override</s:String>-->
     <!--<s:String x:Key="Editor.Edit.Delay.IncreaseDecrease">Increase or&#x0d;Decrease</s:String>-->
-    
+    <!--<s:String x:Key="Editor.Edit.Delay.Scale">Scale</s:String>-->
+
     <!--Image • Size and Rotation-->
     <s:String x:Key="Editor.Image.SizePosition">사이즈 및 위치</s:String>
     <s:String x:Key="Editor.Image.Resize">사이즈</s:String>
     <s:String x:Key="Editor.Image.Crop">자르기</s:String>
     <s:String x:Key="Editor.Image.FlipRotate">뒤집기/회전</s:String>
-    
+
     <!--Image • Text-->
     <s:String x:Key="Editor.Image.Text">문자</s:String>
     <s:String x:Key="Editor.Image.Caption">자막</s:String>
     <s:String x:Key="Editor.Image.FreeText">문자 추가</s:String>
     <s:String x:Key="Editor.Image.TitleFrame">제목 프레임 추가</s:String>
     <s:String x:Key="Editor.Image.KeyStrokes">입력한 키&#x0d;보여주기</s:String>
-    
+
     <!--Image • Overlay-->
     <s:String x:Key="Editor.Image.Overlay">오버레이</s:String>
     <s:String x:Key="Editor.Image.FreeDrawing">그리기</s:String>
+    <!--<s:String x:Key="Editor.Image.Shape">Shapes</s:String>-->
+    <!--<s:String x:Key="Editor.Image.Clicks">Mouse&#x0d;Clicks</s:String>-->
     <s:String x:Key="Editor.Image.Watermark">워터마크</s:String>
     <s:String x:Key="Editor.Image.Cinemagraph">시네마그래프</s:String>
     <s:String x:Key="Editor.Image.Border">경계선</s:String>
     <s:String x:Key="Editor.Image.Progress">진행도</s:String>
+    <!--<s:String x:Key="Editor.Image.Obfuscate">Obfuscate</s:String>-->
 
     <!--Transitions • Styles-->
     <s:String x:Key="Editor.Transitions.Styles">화면 전환</s:String>
     <s:String x:Key="Editor.Transitions.Fade">페이드</s:String>
     <s:String x:Key="Editor.Transitions.Slide">넘기기</s:String>
-    
+
     <!--Statistics-->
     <s:String x:Key="Editor.Statistics.General">일반</s:String>
     <s:String x:Key="Editor.Statistics.FrameCount">프레임 수</s:String>
     <s:String x:Key="Editor.Statistics.TotalDuration">총 길이</s:String>
     <s:String x:Key="Editor.Statistics.FrameSize">프레임 크기</s:String>
-    <!--<s:String x:Key="Editor.Statistics.AverageDuration">Average duration (delay)</s:String>-->
+    <s:String x:Key="Editor.Statistics.AverageDuration">평균 지속기간 (지연)</s:String>
+    <!--<s:String x:Key="Editor.Statistics.FrameDpi">Frame DPI and scale</s:String>-->
     <s:String x:Key="Editor.Statistics.SelectedFrame">선택한 프레임 길이</s:String>
-    
+
     <!--TODO: Organize-->
     <!--Editor, Continuation-->
     <s:String x:Key="Editor.Preparing">프레임 준비 중...</s:String>
@@ -374,49 +587,71 @@
     <s:String x:Key="Editor.InvalidLoadingProjects">한번에 여러 프로젝트를 불러올 수 없습니다. 하나만 선택하세요.</s:String>
     <s:String x:Key="Editor.OpenMediaProject">미디어 파일 (사진이나 동영상) 이나 프로젝트 파일 열기</s:String>
     <s:String x:Key="Editor.OpenMedia">미디어 파일 열기 (사진이나 동영상)</s:String>
-    
+
     <s:String x:Key="Editor.Clipboard.InvalidCut.Title">잘라내기</s:String>
     <s:String x:Key="Editor.Clipboard.InvalidCut.Instruction">모든 프레임을 잘라낼 수 없습니다.</s:String>
     <s:String x:Key="Editor.Clipboard.InvalidCut.Message">적어도 한 프레임 이상 남아있어야 합니다.</s:String>
-    
+
+    <s:String x:Key="Editor.DeleteAll.Title">모두 지우기</s:String>
+    <!--<s:String x:Key="Editor.DeleteAll.Instruction">Are you sure that you want to remove all frames?</s:String>-->
+    <!--<s:String x:Key="Editor.DeleteAll.Message">This action will discard the current open project and cannot be undone. Would you like to continue?</s:String>-->
     <s:String x:Key="Editor.DiscardProject.Title">모두 제거</s:String>
     <s:String x:Key="Editor.DiscardProject.Instruction">모든 프레임을 제거합니까?</s:String>
     <s:String x:Key="Editor.DiscardProject.Message">모든 프레임을 제거합니다.\n\r이 작업은 되돌릴 수 없습니다.</s:String>
+    <!--<s:String x:Key="Editor.DiscardPreviousProject.Instruction">Do you want to discard the previous project?</s:String>-->
+    <!--<s:String x:Key="Editor.DiscardPreviousProject.Message">If you choose not to do so, the previous project will be available to open via Recents Projects.</s:String>-->
+    <s:String x:Key="Editor.DeleteFrames.Title">프레임 삭제</s:String>
+    <!--<s:String x:Key="Editor.DeleteFrames.Instruction">Are you sure that you want to delete?</s:String>-->
+    <!--<s:String x:Key="Editor.DeleteFrames.Message">This action will delete {0} frame(s).\n\rYou'll be able to undo this later.</s:String>-->
+    <!--<s:String x:Key="Editor.Exiting.Title">Exiting the Editor</s:String>-->
+    <!--<s:String x:Key="Editor.Exiting.Instruction">Are you sure that you want to exit?</s:String>-->
+    <!--<s:String x:Key="Editor.Exiting.Message">The current project that you were working on can be opened again via 'Recent Projects'.</s:String>-->
+    <!--<s:String x:Key="Editor.Exiting.Message2">The current project that you were working on can be opened again via 'Recent Projects', but don't forget that after a few days, it will be automatically deleted.</s:String>-->
 
     <s:String x:Key="Editor.Resize.Warning">사이즈 조정을 위해선 다른 값을 입력해야 합니다.</s:String>
     <s:String x:Key="Editor.Crop.Warning">자를 부분이 현재 프레임 사이즈보다 크게 설정될 수 없습니다.</s:String>
+    <!--<s:String x:Key="Editor.Crop.Warning2">The crop selection has to be bigger than 10x10 pixels.</s:String>-->
     <s:String x:Key="Editor.Caption.WarningNoText">적용될 문자가 없습니다.</s:String>
     <s:String x:Key="Editor.Caption.WarningSelection">자막을 적용할 프레임이 하나 이상 선택되어야 합니다.</s:String>
     <s:String x:Key="Editor.FreeText.WarningSelection">문자를 적용할 프레임이 하나 이상 선택되어야 합니다.</s:String>
     <s:String x:Key="Editor.TitleFrame.WarningSelection">제목 프레임 앞에 설정될 프레임이 하나 이상 선택되어야 합니다.</s:String>
     <s:String x:Key="Editor.FreeDrawing.WarningNoDrawing">적용될 그림이 없습니다.</s:String>
     <s:String x:Key="Editor.FreeDrawing.WarningSelection">그림을 적용할 프레임이 하나 이상 선택되어야 합니다.</s:String>
-    
+
     <s:String x:Key="Editor.Watermark.Select">이미지 선택</s:String>
     <s:String x:Key="Editor.Watermark.WarningNoImage">선택된 프레임(들)에 적용될 이미지를 선택해야 합니다.</s:String>
     <s:String x:Key="Editor.Watermark.WarningSelection">워터마크를 적용할 프레임이 하나 이상 선택되어야 합니다.</s:String>
     <s:String x:Key="Editor.Border.WarningThickness">적어도 한 면의 모서리 굵기가 1 이상이여야 합니다.</s:String>
     <s:String x:Key="Editor.Border.WarningSelection">모서리를 적용할 프레임이 하나 이상 선택되어야 합니다.</s:String>
     <s:String x:Key="Editor.Cinemagraph.WarningNoDrawing">시네마그래프를 적용할 픽셀이 하나 이상 선택되어야 합니다. 마우스로 그려서 선택하십시오.</s:String>
-    
+
     <s:String x:Key="Editor.Fade.Title">페이드 효과</s:String>
     <s:String x:Key="Editor.Fade.WarningSelection">페이드 효과가 적용될 프레임이 하나 이상 선택되어야 합니다.</s:String>
+    <!--<s:String x:Key="Editor.Fade.WarningColor">A fully transparent color won't create any effect on this transition.</s:String>-->
     <s:String x:Key="Editor.Slide.Title">넘기기 효과</s:String>
     <s:String x:Key="Editor.Slide.WarningSelection">넘기기 효과가 적용될 프레임이 하나 이상 선택되어야 합니다.</s:String>
 
     <s:String x:Key="Editor.DragDrop.Invalid.Title">올바르지 않은 드래그 앤 드랍</s:String>
     <s:String x:Key="Editor.DragDrop.MultipleFiles.Instruction">여러 파일을 한번에 불러올 수 없습니다.</s:String>
     <s:String x:Key="Editor.DragDrop.MultipleFiles.Message">한번에 한 개의 파일만 불러오세요.</s:String>
-
+    <!--<s:String x:Key="Editor.DragDrop.Invalid.Instruction">Impossible to load file</s:String>-->
+    <!--<s:String x:Key="Editor.DragDrop.Invalid.Message">The file could not be loaded because it has an invalid format.</s:String>-->
     <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">여러 프로젝트를 한번에 불러올 수 없습니다.</s:String>
     <s:String x:Key="Editor.DragDrop.InvalidProject.Message">한번에 한 개의 프로젝트만 불러오세요.</s:String>
-    
+
     <s:String x:Key="Editor.LoadingFrames">프레임 로드중</s:String>
+    <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Instruction">프로젝트를 불러올 수 없습니다.</s:String>
+    <!--<s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Message">It was not possible to load the frames because they are all corrupted or the images are not present where they are expected to.</s:String>-->
+    <s:String x:Key="Editor.LoadingFrames.FramesCorrupted.Instruction">몇 프레임이 로드되지 않았습니다.</s:String>
+    <!--<s:String x:Key="Editor.LoadingFrames.FramesCorrupted.Message">It was not possible to load the frames because they could not be found or because they are corrupted.</s:String>-->
     <s:String x:Key="Editor.UpdatingFrames">프레임 업데이트중</s:String>
     <s:String x:Key="Editor.PreparingImport">불러오기 준비 중</s:String>
     <s:String x:Key="Editor.ImportingFrames">프레임 불러오는 중</s:String>
-    
+
     <s:String x:Key="Editor.ExportingRecording">녹화 내보내는 중</s:String>
+    <!--<s:String x:Key="S.Editor.AnalyzingDuplicates">Analyzing duplicates</s:String>-->
+    <!--<s:String x:Key="S.Editor.AdjustingDuplicatesDelay">Adjusting the delay</s:String>-->
+    <!--<s:String x:Key="S.Editor.DiscardingDuplicates">Discarding duplicates</s:String>-->
     <s:String x:Key="Editor.DiscardingFrames">프레임 삭제 중</s:String>
     <s:String x:Key="Editor.DiscardingFolders">폴더 삭제 중</s:String>
     <s:String x:Key="Editor.ResizingFrames">프레임 크기 조정 중</s:String>
@@ -426,34 +661,40 @@
     <s:String x:Key="Editor.ApplyingFlipRotate">뒤집기/회전 적용 중</s:String>
     <s:String x:Key="Editor.ChangingDelay">딜레이 변경 중</s:String>
     <s:String x:Key="Editor.ApplyingTransition">화면 전환 효과 적용 중</s:String>
+    <!--<s:String x:Key="S.Editor.PreparingSaving">Preparing to save</s:String>-->
 
     <s:String x:Key="Editor.List.Frame">프레임:</s:String>
     <s:String x:Key="Editor.List.OpenImage">이미지 열기</s:String>
     <s:String x:Key="Editor.List.ExploreFolder">폴더 열기</s:String>
     <s:String x:Key="Editor.List.ExportImage">이미지 내보내기</s:String>
-    
+
+    <!--<s:String x:Key="Editor.FrameNumbersInfo">Total Count, Selection Count, Selection Index</s:String>-->
+
     <s:String x:Key="GoTo.Title">프레임 찾기</s:String>
     <s:String x:Key="GoTo.Instruction">이동할 프레임을 지정하십시오 (0 to {0})</s:String>
-    
+
     <s:String x:Key="Context.SaveAs">저장하기</s:String>
     <s:String x:Key="Context.RemoveFrames">선택된 프레임 삭제</s:String>
     <s:String x:Key="Context.NewRecording">새로 녹화하기</s:String>
     <s:String x:Key="Context.NewWebcamRecording">웹캠 새로 녹화하기</s:String>
+    <!--<s:String x:Key="Context.NewBoardRecording">New Board Recording</s:String>-->
     <s:String x:Key="Context.NewBlankAnimation">새로 칠판 녹화하기</s:String>
     <s:String x:Key="Context.NewFromMediaProject">새로 파일 불러오기</s:String>
-    
+
     <!--Warnings-->
     <s:String x:Key="Editor.Warning.Selection">오버레이를 적용할 프레임이 하나 이상 선택되어야 합니다.</s:String>
     <s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg가 존재하지 않습니다. 경로 환경 변수에 추가하거나 설정에서 경로를 지정하십시오..</s:String>
-    
+    <!--<s:String x:Key="Editor.Warning.Gifski">Gifski not present. Add it to the Path environment variables or click here to open Options > Extras to set the location.</s:String>-->
+    <!--<s:String x:Key="Editor.Warning.LowSpace">There's not enough space left on the drive where this app stores its cache ({0}% left). Click here to open Options > Temporary Files to free some space.</s:String>-->
+
     <!--Hints-->
     <!--<s:String x:Key="Hint.NewRecording">New recording created</s:String>-->
     <!--<s:String x:Key="Hint.NewWebcamRecording">New webcam recording created</s:String>-->
     <!--<s:String x:Key="Hint.NewBoardRecording">New board recording created</s:String>-->
     <!--<s:String x:Key="Hint.NewAnimation">New project created</s:String>-->
-    <!--<s:String x:Key="Hint.Undo">Undo executed</s:String>-->
-    <!--<s:String x:Key="Hint.Reset">Reset executed</s:String>-->
-    <!--<s:String x:Key="Hint.Redo">Redo executed</s:String>-->
+    <s:String x:Key="Hint.Undo">되돌리기</s:String>
+    <s:String x:Key="Hint.Reset">실행 초기화</s:String>
+    <s:String x:Key="Hint.Redo">다시 실행</s:String>
     <!--<s:String x:Key="Hint.Cut">{0} frame(s) cut</s:String>-->
     <!--<s:String x:Key="Hint.Copy">{0} frame(s) copied</s:String>-->
     <!--<s:String x:Key="Hint.Paste">{0} frame(s) pasted</s:String>-->
@@ -464,7 +705,7 @@
     <!--<s:String x:Key="Hint.Deselect">All frames were deselected</s:String>-->
     <!--<s:String x:Key="Hint.DeleteFrames">{0} frame(s) deleted</s:String>-->
     <!--<s:String x:Key="Hint.Reverse">Frame list reversed</s:String>-->
-    <!--<s:String x:Key="Hint.Yoyo">Yoyo effect applied</s:String>-->
+    <s:String x:Key="Hint.Yoyo">적용 효과 되돌리기</s:String>
     <!--<s:String x:Key="Hint.MoveLeft">Frame(s) moved to the left</s:String>-->
     <!--<s:String x:Key="Hint.MoveRight">Frame(s) moved to the right</s:String>-->
     <!--<s:String x:Key="Hint.Resize">Frames resized</s:String>-->
@@ -480,16 +721,26 @@
     <!--<s:String x:Key="Hint.Delay">Duration (delay) altered</s:String>-->
     <!--<s:String x:Key="Hint.Transition">Transition inserted</s:String>-->
     <!--<s:String x:Key="Hint.Reduce">Framerate reduced</s:String>-->
-    
+    <!--<s:String x:Key="Hint.Duplicates">Duplicates removed</s:String>-->
+
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">숨기기</s:String>
     <s:String x:Key="Action.Apply">적용</s:String>
+    <s:String x:Key="Action.Open">열기</s:String>
     <s:String x:Key="Action.Save">저장</s:String>
     <s:String x:Key="Action.Cancel">취소</s:String>
     <s:String x:Key="Size">크기</s:String>
     <s:String x:Key="Background">배경</s:String>
     <s:String x:Key="Color">색:</s:String>
-    
+
+    <s:String x:Key="Recent.Projects">최근 프로젝트</s:String>
+    <s:String x:Key="Recent.EnumeratingProjects">최근 프로젝트 탐색중...</s:String>
+    <s:String x:Key="Recent.CreationDate">생성일</s:String>
+    <s:String x:Key="Recent.FrameCount">프레임 카운트</s:String>
+    <s:String x:Key="Recent.Warning.NothingSelected">프로젝트가 선택되지 않았습니다. 로드할 프로젝트를 선택하세요.</s:String>
+    <s:String x:Key="Recent.Warning.SameOpened">이 프로젝트는 이미 이 편집기에서 로드된 프로젝트입니다.</s:String>
+    <s:String x:Key="Recent.Warning.AlreadyOpened">이 프로젝트는 이미 다른 편집기에서 작업중인 프로젝트입니다. 다른 편집기에서 이미 열려있는 경우 프로젝트를 열 수 없습니다.</s:String>
+
     <s:String x:Key="Clipboard.Entries">클립보드 항목</s:String>
     <s:String x:Key="Clipboard.Entry">클립보드 항목:</s:String>
     <s:String x:Key="Clipboard.Explore">항목 확인하기</s:String>
@@ -497,29 +748,40 @@
     <s:String x:Key="Clipboard.Behavior">붙여넣을 위치</s:String>
     <s:String x:Key="Clipboard.Before">선택된 프레임 앞</s:String>
     <s:String x:Key="Clipboard.After">선택된 프레임 뒤</s:String>
-    
+
     <s:String x:Key="Resize.CurrentProperties">현재 설정</s:String>
     <s:String x:Key="Resize.Dpi">Dpi</s:String>
     <s:String x:Key="Resize.NewProperties">새 설정</s:String>
     <s:String x:Key="Resize.Dpi2">DPI:</s:String>
     <s:String x:Key="Resize.KeepAspect">비율 유지.</s:String>
-    
+
     <s:String x:Key="Crop.Points">크기</s:String>
     <s:String x:Key="Crop.Top">상:</s:String>
     <s:String x:Key="Crop.Left">좌:</s:String>
     <s:String x:Key="Crop.Bottom">하:</s:String>
     <s:String x:Key="Crop.Right">우:</s:String>
-    
+
     <s:String x:Key="FlipRotate.FlipHorizontal">좌우 반전</s:String>
     <s:String x:Key="FlipRotate.FlipVertical">상하 반전</s:String>
     <s:String x:Key="FlipRotate.RotateLeft">좌측 90º 회전</s:String>
     <s:String x:Key="FlipRotate.RotateRight">우측 90º 회전</s:String>
-    
-    <!--<s:String x:Key="Reduce.Header">Reduce framerate</s:String>-->
+
+    <s:String x:Key="Reduce.Header">프레임 감소</s:String>
     <!--<s:String x:Key="Reduce.Factor">Factor:</s:String>-->
-    <!--<s:String x:Key="Reduce.Count">Remove Count:</s:String>-->
+    <s:String x:Key="Reduce.Count">카운트 제거:</s:String>
     <!--<s:String x:Key="Reduce.Info">It will remove {0} frame(s) after every {1} frame(s), without counting the removed ones.&#10;Framerate will be adjusted.</s:String>-->
-    
+
+    <!--<s:String x:Key="S.RemoveDuplicates.Header">Remove duplicates</s:String>-->
+    <!--<s:String x:Key="S.RemoveDuplicates.Similarity">Similarity (%):</s:String>-->
+    <!--<s:String x:Key="S.RemoveDuplicates.Removal">Frame removal:</s:String>-->
+    <!--<s:String x:Key="S.RemoveDuplicates.Removal.First">Remove the first frame</s:String>-->
+    <!--<s:String x:Key="S.RemoveDuplicates.Removal.Last">Remove the last frame</s:String>-->
+    <!--<s:String x:Key="S.RemoveDuplicates.Delay">Delay adjustment:</s:String>-->
+    <!--<s:String x:Key="S.RemoveDuplicates.Delay.NoAdjustment">Don't adjust</s:String>-->
+    <!--<s:String x:Key="S.RemoveDuplicates.Delay.Average">Use the average</s:String>-->
+    <!--<s:String x:Key="S.RemoveDuplicates.Delay.Sum">Use the sum</s:String>-->
+    <!--<s:String x:Key="S.RemoveDuplicates.Info">This action analyzes each frame (pixel by pixel) and removes the ones that are at least {0} % similar to its immediate neighbor.&#x0d;You can choose if you want to adjust the delay (duration of exhibition) of the frames.</s:String>-->
+
     <s:String x:Key="Caption.Text">문자</s:String>
     <s:String x:Key="Caption.Font">글꼴</s:String>
     <s:String x:Key="Caption.Family">글꼴:</s:String>
@@ -533,19 +795,30 @@
     <s:String x:Key="Caption.Vertical">수직:</s:String>
     <s:String x:Key="Caption.Horizontal">수평:</s:String>
 
+    <!--<s:String x:Key="S.KeyStrokes">Key Strokes</s:String>-->
     <!--<s:String x:Key="KeyStrokes.Keys">Keys</s:String>-->
-    <!--<s:String x:Key="KeyStrokes.Separator">Separator</s:String>-->
+    <!--<s:String x:Key="KeyStrokes.Separator">Separator:</s:String>-->
     <!--<s:String x:Key="KeyStrokes.Edit">Edit your key strokes</s:String>-->
-    <!--<s:String x:Key="KeyStrokes.Extend">Extend the exhibition of the key strokes:</s:String>-->
+    <!--<s:String x:Key="KeyStrokes.IgnoreModifiers">Ignore Ctrl, Alt, Shift, and Windows keys while not being used as modifiers.</s:String>-->
+    <!--<s:String x:Key="KeyStrokes.IgnoreModifiers.Info">It will ignore lone key presses such as "Control", but it will not ignore "Control + C".</s:String>-->
+    <!--<s:String x:Key="KeyStrokes.Extend">Extend the exhibition of the key strokes.</s:String>-->
+    <!--<s:String x:Key="KeyStrokes.Earlier">Start the exhibition of the key strokes earlier.</s:String>-->
     <!--<s:String x:Key="KeyStrokes.By">By (ms):</s:String>-->
     <!--<s:String x:Key="KeyStrokes.Warning.None">There's no keystrokes on your recording.</s:String>-->
-    
+    <!--<s:String x:Key="KeyStrokes.Edit.Title">ScreenToGif - Key Strokes Editor</s:String>-->
+    <!--<s:String x:Key="KeyStrokes.Edit.Number">Frame number</s:String>-->
+    <!--<s:String x:Key="KeyStrokes.Edit.Keys">Detected key strokes</s:String>-->
+    <!--<s:String x:Key="KeyStrokes.Edit.Remove">Remove key stroke</s:String>-->
+    <!--<s:String x:Key="KeyStrokes.Edit.Add">Add a key stroke:</s:String>-->
+
     <s:String x:Key="String.Delay">딜레이</s:String>
     <s:String x:Key="String.DelayMs">딜레이 (ms):</s:String>
-    <!--<s:String x:Key="String.ValueMs">Value -+ (ms):</s:String>-->
+    <!--<s:String x:Key="String.ValueMs">Value -+:</s:String>-->
+    <!--<s:String x:Key="String.ScaleValue">Scale Value:</s:String>-->
     <s:String x:Key="String.Margin">위치:</s:String>
+    <!--<s:String x:Key="String.Padding">Padding:</s:String>-->
     <s:String x:Key="String.Background">배경</s:String>
-    
+
     <s:String x:Key="FreeDrawing.Mode">도구</s:String>
     <s:String x:Key="FreeDrawing.Pen">펜</s:String>
     <s:String x:Key="FreeDrawing.Eraser">지우개</s:String>
@@ -559,11 +832,27 @@
     <s:String x:Key="FreeDrawing.Other">기타:</s:String>
     <s:String x:Key="FreeDrawing.Highlighter">형광펜</s:String>
     <s:String x:Key="FreeDrawing.FitToCurve">곡선 보정</s:String>
-    
+
+    <!--<s:String x:Key="S.Shapes.Mode.Insert">Insert</s:String>-->
+    <!--<s:String x:Key="S.Shapes.Shapes">Shapes</s:String>-->
+    <!--<s:String x:Key="S.Shapes.Shapes.Radius">Radius:</s:String>-->
+    <!--<s:String x:Key="S.Shapes.Shapes.Dashes">Dashes:</s:String>-->
+    <s:String x:Key="S.Shapes.Fill">채우기</s:String>
+
+    <!--<s:String x:Key="S.MouseClicks">Mouse Clicks</s:String>-->
+    <!--<s:String x:Key="S.MouseClicks.Warning.None">There's no detected mouse clicks on your project.</s:String>-->
+
     <s:String x:Key="Watermark.Image">이미지</s:String>
     <s:String x:Key="Watermark.File">파일:</s:String>
     <s:String x:Key="Watermark.Opacity">투명도:</s:String>
+
     <s:String x:Key="Border.Appearance">설정</s:String>
+
+    <!--<s:String x:Key="S.Obfuscate.Options">Obfuscation options</s:String>-->
+    <!--<s:String x:Key="S.Obfuscate.PixelSize">Pixel size:</s:String>-->
+    <!--<s:String x:Key="S.Obfuscate.UseAverage">Calculate the average color for each pixelated block.</s:String>-->
+    <!--<s:String x:Key="S.Obfuscate.Info">Use the selection tool to select the rectangle that should be pixelated.</s:String>-->
+    <!--<s:String x:Key="S.Obfuscate.Warning">You didn't select anything. Please use the selection tool to select the rectangle that should be pixelated.</s:String>-->
 
     <s:String x:Key="Progress.Type">종류</s:String>
     <s:String x:Key="Progress.Type.Bar">막대</s:String>
@@ -574,20 +863,32 @@
     <s:String x:Key="Progress.Precision.Miliseconds">밀리초</s:String>
     <s:String x:Key="Progress.Precision.Percentage">퍼센트</s:String>
     <s:String x:Key="Progress.Precision.Count">프레임 숫자</s:String>
+    <!--<s:String x:Key="Progress.Precision.DateOfRecording">Actual date/time</s:String>-->
     <!--<s:String x:Key="Progress.Precision.Custom">Custom</s:String>-->
     <!--<s:String x:Key="Progress.Precision.ShowTotal">Show the total.</s:String>-->
     <!--<s:String x:Key="Progress.Format">Format:</s:String>-->
+    <!--<s:String x:Key="S.Progress.Format.Date">You can use the date and time format from .Net Framework.&#x0d;The specification is available in these two links below.</s:String>-->
+    <!--<s:String x:Key="S.Progress.Format.Date.Standard">Standard formats</s:String>-->
+    <!--<s:String x:Key="S.Progress.Format.Date.Custom">Custom formats</s:String>-->
     <s:String x:Key="Progress.Orientation">방향:</s:String>
-    
+
+    <!--<s:String x:Key="S.DelayUpdate">Delay update</s:String>-->
+    <!--<s:String x:Key="Delay.Mode">Delay mode:</s:String>-->
+    <!--<s:String x:Key="Delay.Mode.Override">Override (in ms)</s:String>-->
+    <!--<s:String x:Key="Delay.Mode.IncreaseDecrease">Increase or decrease (in ms)</s:String>-->
+    <!--<s:String x:Key="Delay.Mode.Scale">Scale (in %)</s:String>-->
     <s:String x:Key="Delay.NewValue">새 값</s:String>
     <s:String x:Key="Delay.Minimum10Ms">프레임 길이는 10ms 이하일 수 없습니다.</s:String>
     <s:String x:Key="Delay.DecreaseIncrease">증가/감소 값</s:String>
-    
+    <!--<s:String x:Key="Delay.Scale">Scale Value</s:String>-->
+
     <!--<s:String x:Key="Cinemagraph.Info">Use the pen to select the pixels that should not remain static (that should change among frames), by painting on top of them.</s:String>-->
     <!--<s:String x:Key="OverrideDelay.Info">This new value will replace the duration (delay) of all selected frames. The value can be from 10ms to 25500ms.</s:String>-->
     <!--<s:String x:Key="IncreaseDecreaseDelay.Info">This value will decrease/increase the duration (delay) of each selected frame.&#x0d;You can decrement/increment by selecting a value between -10000ms and 10000ms, but the final duration of each frame will be restricted to between 10ms and 25500ms</s:String>-->
-    
+    <!--<s:String x:Key="ScaleDelay.Info">Scale the duration (delay) of each selected frame by the percent value.&#x0d;You can scale each frame's duration by selecting a value between 1% and 1000%, but the final duration of each frame will be restricted to between 10ms and 25500ms</s:String>-->
+
     <s:String x:Key="Transitions.Length">효과 길이</s:String>
+    <!--<s:String x:Key="Transitions.Delay">Transition Delay</s:String>-->
     <!--<s:String x:Key="Transitions.FadeTo">Fade To...</s:String>-->
     <!--<s:String x:Key="Transitions.FadeTo.Frame">The next frame</s:String>-->
     <!--<s:String x:Key="Transitions.FadeTo.Color">A color</s:String>-->
@@ -597,14 +898,22 @@
     <!--Save As-->
     <s:String x:Key="S.SaveAs.Type">파일 종류</s:String>
     <s:String x:Key="S.SaveAs.Gif">Gif</s:String>
+    <!--<s:String x:Key="S.SaveAs.Apng">Apng</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Images">Images (frames)</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.Project">Project</s:String>-->
-    <s:String x:Key="S.SaveAs.Video">Video</s:String>
+    <s:String x:Key="S.SaveAs.Project">프로젝트</s:String>
+    <!--<s:String x:Key="S.SaveAs.Psd">PSD</s:String>-->
+    <s:String x:Key="S.SaveAs.Video">비디오</s:String>
     <s:String x:Key="S.SaveAs.Encoder">인코더</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">ScreenToGif</s:String>
+    <!--<s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Tooltip">Algorithm: Octree.</s:String>-->
     <s:String x:Key="S.SaveAs.Encoder.Legacy">프로그램 내장</s:String>
+    <!--<s:String x:Key="S.SaveAs.Encoder.Legacy.Tooltip">Algorithm: NeuQuant.</s:String>-->
     <s:String x:Key="S.SaveAs.Encoder.System">시스템</s:String>
+    <!--<s:String x:Key="S.SaveAs.Encoder.System.Tooltip">Uses a default palette.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Encoder.Apng">1.0</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Encoder.Apng.Tooltip">Encoder made by the ScreenToGif developer.</s:String>-->
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
     <s:String x:Key="S.SaveAs.GifOptions">Gif 설정</s:String>
     <s:String x:Key="S.SaveAs.Quality">품질:</s:String>
     <!--<s:String x:Key="S.SaveAs.GifOptions.Colors">Colors:</s:String>-->
@@ -617,10 +926,41 @@
     <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">중복 픽셀을 감지합니다.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">중복된 픽셀을 더미 색으로 표시합니다.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">색상 선택</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions">Apng 설정</s:String>
+    <!--<s:String x:Key="S.SaveAs.GifOptions.LoopedApng">Looped Apng.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.ApngOptions.DetectUnchanged">Detect unchanged pixels.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.ApngOptions.PaintTransparent">Paint all unchanged pixels with a transparent color.</s:String>-->
     <s:String x:Key="S.SaveAs.VideoOptions">비디오 설정</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Fps">Fps:</s:String>
-    <!--<s:String x:Key="S.SaveAs.ImagesOptions">Image options</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.FlipVertically">Flip the video (vertically).</s:String>-->
+    <s:String x:Key="S.SaveAs.ImagesOptions">이미지 설정</s:String>
     <!--<s:String x:Key="S.SaveAs.ImageOptions.Zip">Zip the images.</s:String>-->
+    <s:String x:Key="S.SaveAs.PsdOptions">Psd 설정</s:String>
+    <!--<s:String x:Key="S.SaveAs.PsdOptions.Compress">Compress the image.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">Compress the image data using the RLE algorithm.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.PsdOptions.Timeline">Save the timeline data.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">Exports the timings of the frames, instead of just the frames.</s:String>-->
+
+    <!--Save As • Save options-->
+    <!--<s:String x:Key="S.SaveAs.SaveOptions">Save options</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Save the file to a folder of your choice.</s:String>-->
+    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">덮어쓰기 (이미 존재할 경우).</s:String>
+    <!--<s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Save as project too (same folder, same filename).</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Upload the file.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.SaveOptions.UploadDestination">Upload destination.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">Copy to the clipboard.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File">File</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File.Info">Copies the output file into the clipboard.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FolderPath">Folder path</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FolderPath.Info">Copies the folder path of the output file into the clipboard.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath">File path</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath.Info">Copies the path of the output file into the clipboard.</s:String>-->
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">링크</s:String>
+    <!--<s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">Copies the link generated by the upload service into the clipboard.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Execute post encoding commands.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Type commands to be executed after the encoding.&#x0d;To execute multiple commands, type each one on a separated line.&#x0d;Macros:&#x0d;{p} = Output file path.&#x0d;{f} = Output folder path.</s:String>-->
+
+    <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">파일</s:String>
     <s:String x:Key="S.SaveAs.File.Location">저장 경로.</s:String>
     <s:String x:Key="S.SaveAs.File.Choose">경로를 선택하십시오.</s:String>
@@ -630,35 +970,63 @@
     <s:String x:Key="S.SaveAs.File.Increase">파일 번호 증가</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">파일 번호 감소</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">같은 이름을 가진 파일이 이미 존재합니다.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">덮어쓰기 (이미 존재할 경우).</s:String>
+
     <s:String x:Key="S.SaveAs.File.Clipboard">클립보드에 저장합니다.</s:String>
+
+    <!--<s:String x:Key="S.SaveAs.Warning.Type">You need to select where to save the file (to a folder, to the clipboard or upload somewhere else).</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Warning.Commands.Empty">To execute a post encoding command, you need to type something on the commands text field.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Warning.Upload.None">No upload service selected. You need to select a destination.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Warning.Upload.NotAuthorized">You can't upload to the selected service because it was not authorized. Head over to Options > Upload Services to authorize this app.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Warning.Copy.Link">You can't select the option of copying the link because you didn't set to upload the file.</s:String>-->
     <s:String x:Key="S.SaveAs.Warning.Folder">저장 경로를 설정해야 합니다.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">선택한 저장 경로가 존재하지 않습니다.</s:String>
+    <!--<s:String x:Key="S.SaveAs.Warning.Folder.Invalid">The output folder contains one or more invalid characters. Please, select a valid folder.</s:String>-->
     <s:String x:Key="S.SaveAs.Warning.Filename">파일 이름을 설정해야 합니다.</s:String>
+    <!--<s:String x:Key="S.SaveAs.Warning.Filename.Invalid">The output file name contains one or more invalid characters. Please, select a valid file name.</s:String>-->
     <s:String x:Key="S.SaveAs.Warning.Overwrite">이미 사용 중인 이름입니다. 덮어쓰기를 설정하거나 다른 이름으로 설정하세요.</s:String>
-    
+    <!--<s:String x:Key="S.SaveAs.Warning.Canceled">The operation was canceled.</s:String>-->
+
+    <!--SaveAs • Export-->
+    <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">프레임 내보내기</s:String>
+    <s:String x:Key="S.SaveAs.Frames.Confirmation.Instruction">이 프레임을 정말 내보내시겠습니까?</s:String>
+    <!--<s:String x:Key="S.SaveAs.Frames.Confirmation.Message">This action will export {0} frames directly into the selected folder.</s:String>-->
+
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">피드백</s:String>
     <s:String x:Key="S.Feedback.Send">전송</s:String>
+    <s:String x:Key="S.Feedback.Preview">미리보기</s:String>
     <s:String x:Key="S.Feedback.Header">피드백 내용 보내기</s:String>
     <s:String x:Key="S.Feedback.Title">제목 *</s:String>
     <s:String x:Key="S.Feedback.Message">내용 *</s:String>
     <s:String x:Key="S.Feedback.Type">피드백 종류</s:String>
     <s:String x:Key="S.Feedback.Suggestion">제안</s:String>
     <s:String x:Key="S.Feedback.IssueBug">버그/문제</s:String>
+    <!--<s:String x:Key="S.Feedback.IssueBug.Info">Please, if you are experiencing any bug: Don't forget to type your e-mail. Sometimes I'm not able to know how exactly the problem happened and I need further details.</s:String>-->
     <s:String x:Key="S.Feedback.YourEmail">이메일 (선택)</s:String>
-    <!--<s:String x:Key="S.Feedback.Warning.Title">You need to input a title for the feedback.</s:String>-->
-    <!--<s:String x:Key="S.Feedback.Warning.Message">You need to input a message in the feedback.</s:String>-->
+    <s:String x:Key="S.Feedback.Warning.Title">피드백의 제목을 입력해주세요.</s:String>
+    <s:String x:Key="S.Feedback.Warning.Message">피드백의 내용을 입력해주세요.</s:String>
     <s:String x:Key="S.Feedback.Sending">보내는 중... 끝난 후 창이 닫힙니다.</s:String>
     <s:String x:Key="S.Feedback.Attachments">첨부 파일 선택 (최대 20MB까지)</s:String>
     <s:String x:Key="S.Feedback.AddAttachments">파일 첨부하기</s:String>
     <s:String x:Key="S.Feedback.RemoveAttachments">첨부 파일 모두 삭제</s:String>
-    
+    <s:String x:Key="S.Feedback.LanguageInfo1">영어를 이해할 수 있습니다.</s:String>
+    <!--<s:String x:Key="S.Feedback.LanguageInfo2">and Portuguese (Brazillian and European).</s:String>-->
+    <!--<s:String x:Key="S.Feedback.Preview.Info">This is what you'll send, plus all the attachments.</s:String>-->
+
+    <!--Troubleshoot-->
+    <!--<s:String x:Key="S.Troubleshoot.Title">Troubleshoot</s:String>-->
+    <!--<s:String x:Key="S.Troubleshoot.Windows">Is there any window missing?</s:String>-->
+    <!--<s:String x:Key="S.Troubleshoot.Windows.Info">If any of the windows is missing (outside of the screen),&#x0d;use the options below to reset its current and startup position.</s:String>-->
+    <!--<s:String x:Key="S.Troubleshoot.Windows.Current">Here's where each window is currently located:</s:String>-->
+    <!--<s:String x:Key="S.Troubleshoot.Windows.Next">Here's where each window will open next time:</s:String>-->
+    <!--<s:String x:Key="S.Troubleshoot.Windows.BringBack">Move all windows to the main screen.</s:String>-->
+    <!--<s:String x:Key="S.Troubleshoot.Windows.Reset">Reset the startup position of all windows.</s:String>-->
+
     <!--FontStyles-->
     <s:String x:Key="S.FontStyles.Normal">기본</s:String>
     <s:String x:Key="S.FontStyles.Italic">이탤릭체</s:String>
     <s:String x:Key="S.FontStyles.Oblique">기본 서체 기울임</s:String>
-    
+
     <!--FontWeight-->
     <!--<s:String x:Key="S.FontWeights.Black">Black</s:String>-->
     <!--<s:String x:Key="S.FontWeights.Bold">Bold</s:String>-->
@@ -676,7 +1044,7 @@
     <!--<s:String x:Key="S.FontWeights.UltraBlack">Ultra Black</s:String>-->
     <!--<s:String x:Key="S.FontWeights.UltraBold">Ultra Bold</s:String>-->
     <!--<s:String x:Key="S.FontWeights.UltraLight">Ultra Light</s:String>-->
-    
+
      <!--VerticalAligment-->
     <!--<s:String x:Key="S.VerticalAlignment.Top">Top</s:String>-->
     <!--<s:String x:Key="S.VerticalAlignment.Center">Center</s:String>-->
@@ -687,7 +1055,7 @@
     <!--<s:String x:Key="S.HorizontalAlignment.Left">Left</s:String>-->
     <!--<s:String x:Key="S.HorizontalAlignment.Center">Center</s:String>-->
     <!--<s:String x:Key="S.HorizontalAlignment.Right">Right</s:String>-->
-    
+
     <!--Orientation-->
     <!--<s:String x:Key="S.Orientation.Horizontal">Horizontal</s:String>-->
     <!--<s:String x:Key="S.Orientation.Vertical">Vertical</s:String>-->
