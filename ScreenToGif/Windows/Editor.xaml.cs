@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Collections.ObjectModel;
@@ -920,6 +921,10 @@ namespace ScreenToGif.Windows
 
                         if (FileTypeVideoComboBox.Items == null || !FileTypeVideoComboBox.Items.OfType<string>().Contains(UserSettings.All.LatestVideoExtension))
                             UserSettings.All.LatestVideoExtension = ".mp4";
+
+                        //Change the preset selection.
+                        UpdateFfmpegPresetsList();
+                        SelectDefaultFfmpegPreset();
                     }
 
                     break;
@@ -953,6 +958,76 @@ namespace ScreenToGif.Windows
 
             if (result.HasValue && result.Value)
                 UserSettings.All.ChromaKey = colorDialog.SelectedColor;
+        }
+
+        private void FfmpegPresetsComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selected = FfmpegPresetsComboBox.SelectedItem as FfmpegPreset;
+
+            FfmpegParameterTextBox.IsEnabled = selected != null;
+            FfmpegParameterTextBox.Text = selected?.Parameters ?? "";
+        }
+
+        private void AddPreset_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new FfmpegPresetDialog
+            {
+                Extension = UserSettings.All.LatestVideoExtension,
+                Owner = this
+            };
+
+            var result = dialog.ShowDialog();
+
+            if (!result.HasValue || !result.Value)
+                return;
+
+            UpdateFfmpegPresetsList();
+            SelectDefaultFfmpegPreset();
+        }
+
+        private void SavePreset_Click(object sender, RoutedEventArgs e)
+        {
+            PersistFfmpegPreset();
+        }
+
+        private void EditPreset_Click(object sender, RoutedEventArgs e)
+        {
+            var preset = FfmpegPresetsComboBox.SelectedItem as FfmpegPreset;
+
+            if (preset == null)
+                return;
+
+            var dialog = new FfmpegPresetDialog
+            {
+                IsEditing = true,
+                CurrentPreset = preset,
+                Extension = UserSettings.All.LatestVideoExtension,
+                Owner = this
+            };
+
+            var result = dialog.ShowDialog();
+
+            if (!result.HasValue || !result.Value)
+                return;
+
+            UpdateFfmpegPresetsList();
+            SelectDefaultFfmpegPreset();
+        }
+
+        private void RemovePreset_Click(object sender, RoutedEventArgs e)
+        {
+            if (!Dialog.Ask(LocalizationHelper.Get("S.SaveAs.Presets.Remove.Title"), LocalizationHelper.Get("S.SaveAs.Presets.Remove.Header"), LocalizationHelper.Get("S.SaveAs.Presets.Remove.Message")))
+                return;
+
+            RemoveFfmpegPreset();
+        }
+
+        private void ResetPreset_Click(object sender, RoutedEventArgs e)
+        {
+            if (!Dialog.Ask(LocalizationHelper.Get("S.SaveAs.Presets.Reset.Title"), LocalizationHelper.Get("S.SaveAs.Presets.Reset.Header"), LocalizationHelper.Get("S.SaveAs.Presets.Reset.Message")))
+                return;
+
+            ResetFfmpegPreset();
         }
 
         private void ChooseLocation_Click(object sender, RoutedEventArgs e)
@@ -989,7 +1064,7 @@ namespace ScreenToGif.Windows
                         sfd.DefaultExt = UserSettings.All.LatestApngExtension ?? ".png";
                         break;
                     case Export.Video:
-                        sfd.Filter = FfmpegEncoderRadioButton.IsChecked == true ? "Avi video (.avi)|*.avi|Mp4 video (.mp4)|*.mp4|WebM video|*.webm|Windows media video|*.wmv" : "Avi video (.avi)|*.avi";
+                        sfd.Filter = FfmpegEncoderRadioButton.IsChecked == true ? "Avi video (.avi)|*.avi|Matroska video (.mkv)|*.mkv|Mp4 video (.mp4)|*.mp4|WebM video|*.webm|Windows media video|*.wmv" : "Avi video (.avi)|*.avi";
                         sfd.DefaultExt = FfmpegEncoderRadioButton.IsChecked == true ? FileTypeVideoComboBox.SelectedItem as string : ".avi";
                         sfd.FilterIndex = FfmpegEncoderRadioButton.IsChecked == true ? FileTypeVideoComboBox.SelectedIndex + 1 : 0;
                         break;
@@ -1135,6 +1210,12 @@ namespace ScreenToGif.Windows
                         if (!string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation) && UserSettings.All.FfmpegLocation.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
                         {
                             StatusList.Warning(StringResource("Extras.FfmpegLocation.Invalid"));
+                            return;
+                        }
+
+                        if (FfmpegPresetsComboBox.SelectionBoxItem == null)
+                        {
+                            StatusList.Warning(StringResource("S.SaveAs.Presets.Warning.NoSelection"));
                             return;
                         }
                     }
@@ -1335,7 +1416,7 @@ namespace ScreenToGif.Windows
                         param.Command = "-vsync 2 -safe 0 -f concat -i \"{0}\" {1} -y \"{2}\"";
                         param.Height = size.Height.DivisibleByTwo();
                         param.Width = size.Width.DivisibleByTwo();
-                        param.ExtraParameters = UserSettings.All.ExtraParameters;
+                        param.ExtraParameters = FfmpegParameterTextBox.Text;
                         param.Framerate = UserSettings.All.OutputFramerate;
                         break;
                     case Export.Images:
@@ -4629,6 +4710,11 @@ namespace ScreenToGif.Windows
                 case PanelType.SaveAs:
                     ApplyButton.Text = StringResource("Action.Save");
                     ApplyButton.Content = FindResource("Vector.Save") as Canvas;
+
+                    //Change the preset selection.
+                    UpdateFfmpegPresetsList();
+                    SelectDefaultFfmpegPreset();
+
                     SaveGrid.Visibility = Visibility.Visible;
                     break;
                 case PanelType.LoadRecent:
@@ -4888,6 +4974,163 @@ namespace ScreenToGif.Windows
             WindowState = state;
 
             return true;
+        }
+
+        #endregion
+
+        #region FFmpeg presets
+
+        private void UpdateFfmpegPresetsList()
+        {
+            //Make sure it's not null first.
+            UserSettings.All.FfmpegPresets = UserSettings.All.FfmpegPresets ?? new ArrayList();
+
+            var list = UserSettings.All.FfmpegPresets.Cast<FfmpegPreset>().ToList();
+
+            //For each currently available FFmpeg output extension, make sure that a default preset is available.
+            foreach (var ext in FileTypeVideoComboBox.Items.OfType<string>())
+            {
+                var current = list.FirstOrDefault(f => f.Extension == ext);
+
+                if (current != null)
+                    continue;
+
+                //Creates a default preset.
+                current = new FfmpegPreset
+                {
+                    Extension = ext,
+                    LastSelected = true,
+                    IsDefault = true,
+                    Parameters = GetDefaultPresetParameters(ext),
+                };
+
+                list.Add(current);
+            }
+
+            //Persist the changes to the settings.
+            UserSettings.All.FfmpegPresets = new ArrayList(list.ToArray());
+
+            //Update the list.
+            FfmpegPresetsComboBox.ItemsSource = list.Where(w => w.Extension == UserSettings.All.LatestVideoExtension).OrderBy(o => o.IsDefault).ThenBy(t => t.Name).ToList();
+        }
+
+        private void SelectDefaultFfmpegPreset()
+        {
+            FfmpegPresetsComboBox.SelectedItem = null;
+            FfmpegPresetsComboBox.SelectedItem = UserSettings.All.FfmpegPresets?.Cast<FfmpegPreset>().FirstOrDefault(w => w.Extension == UserSettings.All.LatestVideoExtension && w.LastSelected);
+        }
+
+        /// <summary>
+        /// Persists changes to the current preset and sets it as the default for the current extension.
+        /// </summary>
+        private void PersistFfmpegPreset()
+        {
+            //Get the current preset.
+            var selected = FfmpegPresetsComboBox.SelectedItem as FfmpegPreset;
+
+            if (selected == null)
+                return;
+
+            //Get all presets, so we can persist later.
+            var list = UserSettings.All.FfmpegPresets.Cast<FfmpegPreset>().ToList();
+            list.Remove(selected);
+
+            selected.Parameters = FfmpegParameterTextBox.Text;
+            list.Add(selected);
+
+            //Set the current preset as last selected.
+            foreach (var preset in list)
+            {
+                if (preset.Extension != selected.Extension)
+                    continue;
+
+                preset.LastSelected = preset.Name == selected.Name;
+            }
+
+            //Persist the changes to the settings.
+            UserSettings.All.FfmpegPresets = new ArrayList(list.ToArray());
+
+            FfmpegPresetsComboBox.ItemsSource = list.Where(w => w.Extension == UserSettings.All.LatestVideoExtension).OrderBy(o => o.IsDefault).ThenBy(t => t.Name).ToList();
+        }
+
+        private void RemoveFfmpegPreset()
+        {
+            //Get the current preset.
+            var selected = FfmpegPresetsComboBox.SelectedItem as FfmpegPreset;
+
+            if (selected == null)
+                return;
+
+            //Get all presets, so we can persist later.
+            var list = UserSettings.All.FfmpegPresets.Cast<FfmpegPreset>().ToList();
+            list.Remove(selected);
+
+            //Set other preset as last selected.
+            foreach (var preset in list)
+            {
+                if (preset.Extension != selected.Extension)
+                    continue;
+
+                preset.LastSelected = true;
+                break;
+            }
+
+            //Persist the changes to the settings.
+            UserSettings.All.FfmpegPresets = new ArrayList(list.ToArray());
+
+            FfmpegPresetsComboBox.ItemsSource = list.Where(w => w.Extension == UserSettings.All.LatestVideoExtension).OrderBy(o => o.IsDefault).ThenBy(t => t.Name).ToList();
+            SelectDefaultFfmpegPreset();
+        }
+
+        private void ResetFfmpegPreset()
+        {
+            //Get the current preset.
+            var selected = FfmpegPresetsComboBox.SelectedItem as FfmpegPreset;
+
+            if (selected == null)
+                return;
+
+            //Get all presets, so we can persist later.
+            var list = UserSettings.All.FfmpegPresets.Cast<FfmpegPreset>().ToList();
+            list.Remove(selected);
+
+            //Reset its parameters.
+            selected.Parameters = GetDefaultPresetParameters(selected.Extension);
+            list.Add(selected);
+
+            //Set the current preset as last selected.
+            foreach (var preset in list)
+            {
+                if (preset.Extension != selected.Extension)
+                    continue;
+
+                preset.LastSelected = preset.Name == selected.Name;
+            }
+
+            //Persist the changes to the settings.
+            UserSettings.All.FfmpegPresets = new ArrayList(list.ToArray());
+
+            FfmpegPresetsComboBox.ItemsSource = list.Where(w => w.Extension == UserSettings.All.LatestVideoExtension).OrderBy(o => o.IsDefault).ThenBy(t => t.Name).ToList();
+            SelectDefaultFfmpegPreset();
+        }
+
+        private string GetDefaultPresetParameters(string extension)
+        {
+            switch (extension)
+            {
+                case ".avi":
+                    return "-c:v libx264 -pix_fmt yuv420p -vf \"pad=width={W}:height={H}:x=0:y=0:color=black\"";
+                case ".mkv":
+                    return "-f matroska -c:v libx265 -pix_fmt yuv420p -vf \"pad=width={W}:height={H}:x=0:y=0:color=black\"";
+                case ".mp4":
+                    return "-c:v libx264 -pix_fmt yuv420p -vf \"pad=width={W}:height={H}:x=0:y=0:color=black\"";
+                case ".webm":
+                     return "-c:v libvpx -pix_fmt yuv420p -vf \"pad=width={W}:height={H}:x=0:y=0:color=black\"";
+                case ".wmv":
+                    return "-c:v wmv2 -pix_fmt yuv420p -vf \"pad=width={W}:height={H}:x=0:y=0:color=black\"";
+                default:
+                    return "";
+            }
         }
 
         #endregion

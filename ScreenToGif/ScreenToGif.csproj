@@ -266,8 +266,19 @@
     <Compile Include="ImageUtil\Psd\LayerInfo.cs" />
     <Compile Include="ImageUtil\Psd\LayerRecord.cs" />
     <Compile Include="ImageUtil\Psd\Psd.cs" />
+    <Compile Include="ModelEx\FrameModel.cs" />
+    <Compile Include="ModelEx\LayerModel.cs" />
+    <Compile Include="ModelEx\Layers\CinemagraphLayer.cs" />
+    <Compile Include="ModelEx\Layers\DrawingLayer.cs" />
+    <Compile Include="ModelEx\Layers\MouseClickLayer.cs" />
+    <Compile Include="ModelEx\Layers\ObfuscationLayer.cs" />
+    <Compile Include="ModelEx\Layers\ProgressLayer.cs" />
+    <Compile Include="ModelEx\Layers\ShapeLayer.cs" />
+    <Compile Include="ModelEx\Layers\TextLayer.cs" />
+    <Compile Include="ModelEx\ProjectModel.cs" />
     <Compile Include="Model\BindableBase.cs" />
     <Compile Include="Model\DefaultTaskModel.cs" />
+    <Compile Include="Model\FfmpegPreset.cs" />
     <Compile Include="Model\KeyStrokesModel.cs" />
     <Compile Include="Model\ManipulatedEventArgs.cs" />
     <Compile Include="Model\DelayModel.cs" />
@@ -380,6 +391,8 @@
     <Compile Include="Util\UiElementsExtension.cs" />
     <Compile Include="Util\UserSettings.cs" />
     <Compile Include="Util\VisualHelper.cs" />
+    <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\EditorViewModel.cs" />
     <Compile Include="Webcam\DirectShow\ControlStreaming.cs" />
     <Compile Include="Webcam\DirectShow\CoreStreaming.cs" />
     <Compile Include="Webcam\DirectShow\Devices.cs" />
@@ -392,6 +405,12 @@
     <Compile Include="Webcam\DirectX\Filter.cs" />
     <Compile Include="Webcam\DirectX\FilterCollection.cs" />
     <Compile Include="Webcam\DirectX\Filters.cs" />
+    <Compile Include="Windows\EditorEx.xaml.cs">
+      <DependentUpon>EditorEx.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Other\FfmpegPresetDialog.xaml.cs">
+      <DependentUpon>FfmpegPresetDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Other\ColorSelector.xaml.cs">
       <DependentUpon>ColorSelector.xaml</DependentUpon>
     </Compile>
@@ -641,6 +660,14 @@
     <Page Include="UserControls\MouseClicksPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\EditorEx.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Other\FfmpegPresetDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\Other\ColorSelector.xaml">
       <SubType>Designer</SubType>

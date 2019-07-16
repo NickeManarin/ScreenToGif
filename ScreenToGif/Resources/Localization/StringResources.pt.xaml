@@ -373,6 +373,14 @@
     <s:String x:Key="ErrorDialog.Observation">Algo de errado aconteceu.</s:String>
     <s:String x:Key="ErrorDialog.Send">Enviar relatório</s:String>
 
+    <!--FFmpeg Preset-->
+    <s:String x:Key="S.FfmpegPreset.Title">Pré-definições do FFmpeg</s:String>
+    <s:String x:Key="S.FfmpegPreset.Name">Nome</s:String>
+    <s:String x:Key="S.FfmpegPreset.Parameters">Parâmetros</s:String>
+    <s:String x:Key="S.FfmpegPreset.Warning.Name">Você deve escrever o nome da pré-definição.</s:String>
+    <s:String x:Key="S.FfmpegPreset.Warning.Parameter">Você deve escrever algum parâmetro para essa pré-definição.</s:String>
+    <s:String x:Key="S.FfmpegPreset.Warning.SameName">Já existe uma pré-definição com o mesmo nome.</s:String>
+
     <!--Insert Frames-->
     <s:String x:Key="InsertFrames.Title">Inserir Quadros</s:String>
     <s:String x:Key="InsertFrames.Info">Ambos os lados devem ter o mesmo tamanho, esta janela permite o reposicionamento e redimensionamento da imagem e o plano de fundo. Clique para selecionar e redimensionar.</s:String>
@@ -922,6 +930,20 @@
     <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">Gif com repetições.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Repetir para sempre.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">repetições.</s:String>
+    <s:String x:Key="S.SaveAs.Presets">Pré-definições:</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Default">Padrão</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Add">Adicionar</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Save">Salvar</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Edit">Editar</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Remove">Remover</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Remove.Title">Remover Pré-definição</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Remove.Header">Você deseja remover a pré-definição?</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Remove.Message">Você não poderá desfazer essa operação, mas você poderá adicionar a pré-definição de novo depois.</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Reset">Redefinir</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Reset.Title">Redefinir Pré-definição</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Reset.Header">Você deseja redefinir a pré-definição para parâmetros padrões?</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Reset.Message">Você não poderá desfazer essa operação, mas você poderá editar a pré-definição de novo depois.</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Warning.NoSelection">Nenhuma pré-definição do FFmpeg selecionada, selecione uma para continuar.</s:String>
     <s:String x:Key="S.SaveAs.Extras">Extras:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">Detectar pixels não modificados.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">Pinte os pixels não modificados com uma cor de marcação (transparente).</s:String>

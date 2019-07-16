@@ -1,0 +1,12 @@
+﻿<Window x:Class="ScreenToGif.Windows.EditorEx"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Name="EditorWindow" Title="{DynamicResource Editor.Title}" MinHeight="500" MinWidth="700" 
+        Background="{DynamicResource Panel.Background.Level3}" UseLayoutRounding="True" Icon="/Resources/Logo.ico"
+        FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}"
+        Loaded="Editor_Loaded">
+
+    <Grid>
+        
+    </Grid>
+</Window>

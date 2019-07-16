@@ -373,6 +373,14 @@
     <s:String x:Key="ErrorDialog.Observation">Something wrong happened.</s:String>
     <s:String x:Key="ErrorDialog.Send">Send report</s:String>
 
+    <!--FFmpeg Preset-->
+    <s:String x:Key="S.FfmpegPreset.Title">FFmpeg Preset</s:String>
+    <s:String x:Key="S.FfmpegPreset.Name">Name</s:String>
+    <s:String x:Key="S.FfmpegPreset.Parameters">Parameters</s:String>
+    <s:String x:Key="S.FfmpegPreset.Warning.Name">You must give a name to this preset.</s:String>
+    <s:String x:Key="S.FfmpegPreset.Warning.Parameter">You must type some parameters for this preset.</s:String>
+    <s:String x:Key="S.FfmpegPreset.Warning.SameName">There's already a preset with the same name.</s:String>
+
     <!--Insert Frames-->
     <s:String x:Key="InsertFrames.Title">Insert Frames</s:String>
     <s:String x:Key="InsertFrames.Info">Both sides should have the same size, this window allows you to reposition and resize the image and the canvas. Click to select and resize.</s:String>
@@ -922,6 +930,20 @@
     <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">Looped Gif.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Repeat Forever.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Repeat Count.</s:String>
+    <s:String x:Key="S.SaveAs.Presets">Presets:</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Default">Default</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Add">Add</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Save">Save</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Edit">Edit</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Remove">Remove</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Remove.Title">Remove Preset</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Remove.Header">Do you wish to remove the preset?</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Remove.Message">You can't undo this operation, but you can add the preset again later.</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Reset">Reset</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Reset.Title">Reset Preset</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Reset.Header">Do you wish to reset the preset to its default parameters?</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Reset.Message">You can't undo this operation, but you can edit back the preset again later.</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Warning.NoSelection">No FFmpeg preset selected, please select one.</s:String>
     <s:String x:Key="S.SaveAs.Extras">Extras:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">Detect unchanged pixels.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">Mark the unchanged pixels with a dummy color.</s:String>

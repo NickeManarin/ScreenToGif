@@ -78,5 +78,20 @@ namespace ScreenToGif.Controls
             if (!UserSettings.All.TripleClickSelection)
                 SelectAll();
         }
+
+        public bool IsNullOrWhiteSpace()
+        {
+            return string.IsNullOrWhiteSpace(Text);
+        }
+
+        public bool IsNullOrEmpty()
+        {
+            return string.IsNullOrEmpty(Text);
+        }
+
+        public string Trim()
+        {
+            return Text.Trim();
+        }
     }
 }

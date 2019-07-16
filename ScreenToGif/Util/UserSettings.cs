@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -13,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Xaml;
 using System.Xml;
+using ScreenToGif.Model;
 using XamlParseException = System.Windows.Markup.XamlParseException;
 using XamlReader = System.Windows.Markup.XamlReader;
 using XamlWriter = System.Windows.Markup.XamlWriter;
@@ -2008,9 +2011,9 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
-        public string ExtraParameters
+        public ArrayList FfmpegPresets
         {
-            get => (string)GetValue();
+            get => (ArrayList)GetValue();
             set => SetValue(value);
         }
 
@@ -2404,6 +2407,13 @@ namespace ScreenToGif.Util
         public int LatestUploadIndex
         {
             get => 0;
+            set => SetValue(value);
+        }
+
+        [Obsolete]
+        public string ExtraParameters
+        {
+            get => null;
             set => SetValue(value);
         }
 

@@ -1786,7 +1786,7 @@
                                             Visibility="{Binding IsChecked, ElementName=GifskiGifEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
 
                                     <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.SaveAs.GifOptions.Colors}" VerticalAlignment="Center" Padding="0" Margin="10,3,3,3"
-                                           Visibility="{Binding IsChecked, ElementName=NewEncoderRadioButton, Converter={StaticResource Bool2Visibility}}" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                               Visibility="{Binding IsChecked, ElementName=NewEncoderRadioButton, Converter={StaticResource Bool2Visibility}}" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                                     <n:IntegerUpDown Grid.Row="1" Grid.Column="1" Margin="5" Width="80" Minimum="2" Maximum="256" HorizontalAlignment="Left"
                                                      Value="{Binding MaximumColors, Source={x:Static u:UserSettings.All}, Mode=TwoWay}" ToolTip="{DynamicResource S.SaveAs.GifOptions.Colors.Info}"
                                                      Visibility="{Binding IsChecked, ElementName=NewEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
@@ -1941,6 +1941,8 @@
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="35"/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
@@ -1966,11 +1968,47 @@
                                                      HorizontalAlignment="Left" Value="{Binding Source={x:Static u:UserSettings.All}, Path=OutputFramerate, Mode=TwoWay}"
                                                      Visibility="{Binding IsChecked, ElementName=SystemEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
 
-                                    <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource S.SaveAs.Extras}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"
+                                    <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource S.SaveAs.Presets}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"
                                                Visibility="{Binding IsChecked, ElementName=FfmpegEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
-                                    <n:ExtendedTextBox Grid.Row="3" Grid.Column="1" MinHeight="23" Margin="5,3" Text="{Binding Source={x:Static u:UserSettings.All}, Path=ExtraParameters}"
+                                    <ComboBox Grid.Row="3" Grid.Column="1" Name="FfmpegPresetsComboBox" Margin="5,3" Height="23" SelectedValuePath="ActualName" DisplayMemberPath="ActualName"
+                                              Visibility="{Binding IsChecked, ElementName=FfmpegEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"
+                                              SelectionChanged="FfmpegPresetsComboBox_SelectionChanged"/>
+
+                                    <TextBlock Grid.Row="4" Grid.Column="0" Text="{DynamicResource S.SaveAs.Extras}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"
+                                               Visibility="{Binding IsChecked, ElementName=FfmpegEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
+                                    <n:ExtendedTextBox Grid.Row="4" Grid.Column="1" x:Name="FfmpegParameterTextBox" MinHeight="23" Margin="5,3"
                                                        Visibility="{Binding IsChecked, ElementName=FfmpegEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"
                                                        VerticalContentAlignment="Top" TextWrapping="WrapWithOverflow"/>
+
+                                    <Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="5,0"
+                                          Visibility="{Binding IsChecked, ElementName=FfmpegEncoderRadioButton, Converter={StaticResource Bool2Visibility}}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="30"/>
+                                            <ColumnDefinition Width="30"/>
+                                            <ColumnDefinition Width="30"/>
+                                            <ColumnDefinition Width="30"/>
+                                            <ColumnDefinition Width="30"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <n:ImageButton Grid.Column="0" x:Name="AddPresetButton" Style="{StaticResource Style.Button.NoText}" 
+                                                       Content="{StaticResource Vector.Add}" ContentWidth="15" Click="AddPreset_Click"
+                                                       ToolTip="{DynamicResource S.SaveAs.Presets.Add}" ToolTipService.Placement="Bottom"/>
+                                        <n:ImageButton Grid.Column="1" x:Name="SavePresetButton" Style="{StaticResource Style.Button.NoText}" 
+                                                       Content="{StaticResource Vector.Save}" ContentWidth="15" Click="SavePreset_Click"
+                                                       ToolTip="{DynamicResource S.SaveAs.Presets.Save}" ToolTipService.Placement="Bottom"/>
+                                        <n:ImageButton Grid.Column="2" x:Name="EditPresetButton" Style="{StaticResource Style.Button.NoText}" 
+                                                       Content="{StaticResource Vector.Pen}" ContentWidth="15" Click="EditPreset_Click"
+                                                       ToolTip="{DynamicResource S.SaveAs.Presets.Save}" ToolTipService.Placement="Bottom"
+                                                       IsEnabled="{Binding ElementName=FfmpegPresetsComboBox, Path=SelectedItem.IsDefault, FallbackValue=True, Converter={StaticResource InvertedBool}}"/>
+                                        <n:ImageButton Grid.Column="3" x:Name="RemovePresetButton" Style="{StaticResource Style.Button.NoText}" 
+                                                       Content="{StaticResource Vector.Remove}" ContentWidth="15" Click="RemovePreset_Click"
+                                                       ToolTip="{DynamicResource S.SaveAs.Presets.Remove}" ToolTipService.Placement="Bottom"
+                                                       IsEnabled="{Binding ElementName=FfmpegPresetsComboBox, Path=SelectedItem.IsDefault, FallbackValue=True, Converter={StaticResource InvertedBool}}"/>
+                                        <n:ImageButton Grid.Column="4" x:Name="ResetPresetButton" Style="{StaticResource Style.Button.NoText}" 
+                                                       Content="{StaticResource Vector.Repeat}" ContentWidth="15" Click="ResetPreset_Click"
+                                                       ToolTip="{DynamicResource S.SaveAs.Presets.Reset}" ToolTipService.Placement="Bottom"
+                                                       IsEnabled="{Binding ElementName=FfmpegPresetsComboBox, Path=SelectedItem.IsDefault, FallbackValue=False}"/>
+                                    </Grid>
                                 </Grid>
                             </Expander>
 
@@ -2426,6 +2464,7 @@
                                               SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=LatestVideoExtension, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, TargetNullValue='.mp4'}"
                                               Visibility="{Binding IsChecked, ElementName=VideoRadioButton, Converter={StaticResource Bool2Visibility}}" SelectionChanged="SaveType_Checked">
                                         <s:String>.avi</s:String>
+                                        <s:String>.mkv</s:String>
                                         <s:String>.mp4</s:String>
                                         <s:String>.webm</s:String>
                                         <s:String>.wmv</s:String>

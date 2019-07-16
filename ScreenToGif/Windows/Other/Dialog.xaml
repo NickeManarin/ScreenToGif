@@ -15,7 +15,7 @@
         <Grid Grid.Row="0" Background="{DynamicResource Panel.Background.Level4}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <Viewbox x:Name="IconViewbox" Child="{StaticResource Vector.Error}" Margin="5" Height="33" Width="33" Opacity="{DynamicResource Element.Opacity}"/>
