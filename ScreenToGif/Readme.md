@@ -7,11 +7,16 @@ _VS 2017 and .Net 4.6.1 or newer required._
 
 ## What's new? (Version 2.18)
 
+• Added support for presets/profiles for FFmpeg video encoding feature, separated by file type.  
 • Keystrokes: The app will display "Ctrl" instead of diplaying "Control".
+• Updated the Korean translation.  
 
 ### Fixed:
 
-♦   
+♦ The process that checks if there's already a file with the same name was changed. Now it should be smoother.  
+♦ In Options > About, the Gitter link was openning other site by mistake.  
+♦ The task that alters the delay of frames was not working.  
+♦ The transition "Fade to color" was ending with a frame not 100% of the selected color.  
 
 ### Known Bugs:
 
