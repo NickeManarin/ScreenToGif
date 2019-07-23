@@ -373,6 +373,14 @@
     <s:String x:Key="ErrorDialog.Observation">Ein Fehler ist aufgetreten</s:String>
     <s:String x:Key="ErrorDialog.Send">Fehlerbericht senden</s:String>
 
+    <!--FFmpeg Preset-->
+    <s:String x:Key="S.FfmpegPreset.Title">FFmpeg-Voreinstellung</s:String>
+    <s:String x:Key="S.FfmpegPreset.Name">Name</s:String>
+    <s:String x:Key="S.FfmpegPreset.Parameters">Parameter</s:String>
+    <s:String x:Key="S.FfmpegPreset.Warning.Name">Vergeben Sie dieser Voreinstellung einen Namen.</s:String>
+    <s:String x:Key="S.FfmpegPreset.Warning.Parameter">Fügen Sie dieser Voreinstellung Parameter hinzu.</s:String>
+    <s:String x:Key="S.FfmpegPreset.Warning.SameName">Eine Voreinstellung mit diesem Namen existiert bereits.</s:String>
+
     <!--Insert Frames-->
     <s:String x:Key="InsertFrames.Title">Frames hinzufügen</s:String>
     <s:String x:Key="InsertFrames.Info">Beide Seiten müssen die gleiche Höhe/Breite haben. Dieses Fenster erlaubt es Ihnen, den Arbeitsbereich und das Bild neu zu positionieren und zu vergrößern bzw. zu verkleinern. Klicken Sie, um auszuwählen und die Größe zu ändern.</s:String>
@@ -405,6 +413,7 @@
     <s:String x:Key="ImportVideo.Selection">Auswahl:</s:String>
     <s:String x:Key="ImportVideo.Frames">Frames:</s:String>
     <s:String x:Key="ImportVideo.Duration">Dauer:</s:String>
+    <s:String x:Key="S.ImportVideo.Error">Beim Laden der Video-Datei ist ein Fehler aufgetreten.</s:String>
     
     <!--Encoder-->
     <s:String x:Key="Encoder.Title">Enkoder</s:String>
@@ -921,7 +930,21 @@
     <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">Wiederholtes GIF</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Endlosschleife</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Mal wiederholen</s:String>
-    <s:String x:Key="S.SaveAs.Extras">Extras:</s:String>
+    <s:String x:Key="S.SaveAs.Presets">Voreinstellung:</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Default">Standard</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Add">Hinzufügen</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Save">Speichern</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Edit">Bearbeiten</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Remove">Entfernen</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Remove.Title">Voreinstellung entfernen</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Remove.Header">Möchten Sie die Voreinstellung entfernen?</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Remove.Message">Diese Operation kann nicht rückgängig gemacht werden. Sie können aber diese Voreinstellung später erneut hinzufügen.</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Reset">Zurücksetzen</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Reset.Title">Voreinstellung zurücksetzen</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Reset.Header">Möchten Sie die Voreinstellung auf Standardwerte zurücksetzen?</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Reset.Message">Diese Operation kann nicht rückgängig gemacht werden. Sie können aber diese Voreinstellung später erneut bearbeiten.</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Warning.NoSelection">Keine FFmpeg-Voreinstellung gewählt. Bitte eine aussuchen.</s:String>
+    <s:String x:Key="S.SaveAs.Extras">Parameter:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">Unveränderte Pixel erkennen</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">Unveränderte Pixel mit&#10;einer Platzhalter-Farbe&#10;kennzeichnen</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">Farbwert bestimmen</s:String>

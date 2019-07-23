@@ -1998,7 +1998,7 @@
                                                        ToolTip="{DynamicResource S.SaveAs.Presets.Save}" ToolTipService.Placement="Bottom"/>
                                         <n:ImageButton Grid.Column="2" x:Name="EditPresetButton" Style="{StaticResource Style.Button.NoText}" 
                                                        Content="{StaticResource Vector.Pen}" ContentWidth="15" Click="EditPreset_Click"
-                                                       ToolTip="{DynamicResource S.SaveAs.Presets.Save}" ToolTipService.Placement="Bottom"
+                                                       ToolTip="{DynamicResource S.SaveAs.Presets.Edit}" ToolTipService.Placement="Bottom"
                                                        IsEnabled="{Binding ElementName=FfmpegPresetsComboBox, Path=SelectedItem.IsDefault, FallbackValue=True, Converter={StaticResource InvertedBool}}"/>
                                         <n:ImageButton Grid.Column="3" x:Name="RemovePresetButton" Style="{StaticResource Style.Button.NoText}" 
                                                        Content="{StaticResource Vector.Remove}" ContentWidth="15" Click="RemovePreset_Click"
