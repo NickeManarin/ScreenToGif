@@ -96,14 +96,14 @@ That's not why I'm sharing the source code, at all.
 	</tr>
 </table>
 
-<h3>Lists</h3>
+<!--<h3>Lists</h3>
 <table>
 	<tr>
 		<th>Maintainer</th>
 		<th>Repo</th>
 	<tr>
 	<tr>
-		<td><a href="http://amazingapps.org">Amazing Apps</a></td>
-		<td><a href="https://github.com/AmazingApps/Amazing-Windows-Apps">Amazing-Windows-Apps</a></td>
+		<td><a href="http://">Name</a></td>
+		<td><a href="https://">Name</a></td>
 	</tr>
-</table>
+</table>-->
