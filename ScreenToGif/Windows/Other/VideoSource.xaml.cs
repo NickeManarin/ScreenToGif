@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -25,7 +27,7 @@ namespace ScreenToGif.Windows.Other
         /// <summary>
         /// The generated frame list.
         /// </summary>
-        public List<BitmapFrame> FrameList { get; set; }
+        public List<String> FrameList { get; set; }
 
         /// <summary>
         /// The delay of each frame.
@@ -37,17 +39,23 @@ namespace ScreenToGif.Windows.Other
         /// </summary>
         private double Scale { get; set; }
 
+        private string fileName { get; set; }
+        private string pathTemp { get; set; }
+
+
         #endregion
 
         /// <summary>
         /// Default contructor.
         /// </summary>
         /// <param name="fileName">The name of the video.</param>
-        public VideoSource(string fileName)
+        public VideoSource(string fileName, string pathTemp)
         {
             InitializeComponent();
 
             Cursor = Cursors.AppStarting;
+            this.fileName = fileName;
+            this.pathTemp = pathTemp;
 
             _loadVideoDel = LoadVideoAsync;
             _loadVideoDel.BeginInvoke(new Uri(fileName), LoadFramesCallback, null);
@@ -190,7 +198,7 @@ namespace ScreenToGif.Windows.Other
         {
             Scale = ScaleNumericUpDown.Value * 0.01f;
             Delay = 1000 / FpsNumericUpDown.Value;
-            FrameList = new List<BitmapFrame>();
+            FrameList = new List<String>();
 
             _width = (int)Math.Round(_lowerPlayer.NaturalVideoWidth * Scale);
             _height = (int)Math.Round(_lowerPlayer.NaturalVideoHeight * Scale);
@@ -284,6 +292,9 @@ namespace ScreenToGif.Windows.Other
                 SelectionSlider.LowerValue = 0;
                 SelectionSlider.UpperValue = SelectionSlider.Maximum;
 
+                StartNumericUpDown.Value = Convert.ToInt32(SelectionSlider.LowerValue);
+                EndNumericUpDown.Value = Convert.ToInt32(SelectionSlider.UpperValue);
+
                 Dispatcher.InvokeAsync(() => { LowerSelectionImage.Source = PreviewFrame(_lowerPlayer); });
                 Dispatcher.InvokeAsync(() => { UpperSelectionImage.Source = PreviewFrame(_upperPlayer); });
 
@@ -327,46 +338,63 @@ namespace ScreenToGif.Windows.Other
 
         #region Capture Frames Methods/Events
 
-        private void CapturePlayer_Changed(object sender, EventArgs e)
-        {
-            Dispatcher.InvokeAsync(() => { CaptureCurrentFrame(_lowerPlayer); }); //TODO: fix bad async
-        }
 
         private void CaptureFrames()
         {
-            _lowerPlayer.Changed -= LowerPlayer_Changed;
-            _lowerPlayer.Changed += CapturePlayer_Changed;
-
-            //Calculate all positions.
-            for (var span = SelectionSlider.LowerValue + Delay; span <= SelectionSlider.UpperValue; span += Delay)
-                _positions.Enqueue(TimeSpan.FromMilliseconds(span));
-
-            CaptureProgressBar.Maximum = _positions.Count;
+            CaptureProgressBar.Maximum = CountFrames();
             CaptureProgressBar.Value = 0;
 
-            CaptureCurrentFrame(_lowerPlayer);
+            var param = new Parameters();
+            var fps = FpsNumericUpDown.Value;
+            var startTime = TimeSpan.FromMilliseconds(SelectionSlider.LowerValue);
+            var endTime = TimeSpan.FromMilliseconds(SelectionSlider.UpperValue);
+
+            param.Command = "-vsync 2 -i \"{0}\" {1} -y \"{2}\"";
+            param.ExtraParameters = $"-r {fps} -ss {startTime} -to {endTime} -progress pipe:1";
+            param.Filename = Path.Combine(pathTemp, "frame%05d.png");
+            param.Command = string.Format(param.Command, fileName, param.ExtraParameters.Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString()), param.Filename);
+
+            var process = new Process();
+            var startInfo = new ProcessStartInfo(UserSettings.All.FfmpegLocation)
+            {
+                Arguments = param.Command,
+                CreateNoWindow = true,
+                ErrorDialog = false,
+                UseShellExecute = false,
+                RedirectStandardError = true,
+                RedirectStandardOutput = true
+            };
+
+            process.OutputDataReceived += new DataReceivedEventHandler((sender, e) =>
+            {
+                if (!String.IsNullOrEmpty(e.Data))
+                {
+                    var parsed = e.Data.Split('=');
+                    switch (parsed[0])
+                    {
+                        case "frame":
+                            Dispatcher.InvokeAsync(() => { CaptureProgressBar.Value = Convert.ToDouble(parsed[1]); });
+                            break;
+                        case "progress":
+                            if (parsed[1] == "end")
+                            {
+                                Dispatcher.InvokeAsync(() => {
+                                    FrameList = new List<string>(Directory.GetFiles(pathTemp, "*.png"));
+                                    DialogResult = true; });
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            });
+
+            process.StartInfo = startInfo;
+            process.Start();
+            process.BeginOutputReadLine();
+            //process.WaitForExit();
         }
 
-        private void SeekNextFrame()
-        {
-            //If more frames remain to capture...
-            if (0 < _positions.Count)
-            {
-                //Seek to next position and start watchdog timer
-                _lowerPlayer.Position = _positions.Dequeue();
-
-                Dispatcher.Invoke(() => { UpdateProgressBar(_positions.Count); });
-            }
-            else
-            {
-                _lowerPlayer.Changed -= CapturePlayer_Changed;
-                _lowerPlayer.Close();
-
-                GC.Collect();
-
-                DialogResult = true;
-            }
-        }
 
         private Freezable GenerateFrame(MediaPlayer player)
         {
@@ -383,32 +411,16 @@ namespace ScreenToGif.Windows.Other
             return BitmapFrame.Create(target).GetCurrentValueAsFrozen();
         }
 
-        private void CaptureCurrentFrame(MediaPlayer player)
-        {
-            if (CaptureFrame(player) is BitmapFrame thumbBit)
-                FrameList.Add(thumbBit);
-
-            GC.Collect();
-
-            if (!_cancelled)
-                SeekNextFrame();
-        }
-
-        private Freezable CaptureFrame(MediaPlayer player)
-        {
-            var target = new RenderTargetBitmap(_width, _height, 96, 96, PixelFormats.Pbgra32);
-            var drawingVisual = new DrawingVisual();
-
-            using (var dc = drawingVisual.RenderOpen())
-                dc.DrawVideo(player, new Rect(0, 0, _width, _height));
-
-            target.Render(drawingVisual);
-
-            GC.Collect(2);
-
-            return BitmapFrame.Create(target).GetCurrentValueAsFrozen();
-        }
 
         #endregion
+
+        private void SelectionSlider_MouseUp(object sender, RoutedEventArgs e)
+        {
+            StartNumericUpDown.Value = Convert.ToInt32(SelectionSlider.LowerValue);
+            EndNumericUpDown.Value = Convert.ToInt32(SelectionSlider.UpperValue);
+
+            MeasureDuration();
+            CountFrames();
+        }
     }
 }

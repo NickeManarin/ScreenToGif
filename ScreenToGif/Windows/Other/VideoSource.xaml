@@ -48,7 +48,7 @@
 
         <c:RangeSlider x:Name="SelectionSlider" Grid.Row="3" Height="Auto" MinHeight="20" 
                        UpperValue="100" LowerValue="0" TickPlacement="BottomRight" Margin="5,5" IsEnabled="False"
-                       UpperValueChanged="SelectionSlider_UpperValueChanged" LowerValueChanged="SelectionSlider_LowerValueChanged"/>
+                       SliderMouseUp="SelectionSlider_MouseUp"/>
 
         <Grid x:Name="DetailsGrid" Grid.Row="4" Margin="0,0,0,5" Visibility="Visible">
             <Grid.RowDefinitions>
@@ -97,7 +97,7 @@
             <StackPanel Grid.Row="1" Grid.Column="6" Orientation="Horizontal" HorizontalAlignment="Left">
                 <c:IntegerUpDown x:Name="StartNumericUpDown" MinWidth="60" Margin="5" StepValue="10" Padding="2,0"
                                  Maximum="{Binding Value, ElementName=EndNumericUpDown}" Minimum="{Binding Minimum, ElementName=SelectionSlider}" 
-                                 Value="{Binding LowerValue, ElementName=SelectionSlider, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                 Value="{Binding LowerValue, ElementName=SelectionSlider, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" 
                                  ValueChanged="StartNumericUpDown_ValueChanged"/>
                 <Label Content="ms" Padding="0,0,5,0" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
             </StackPanel>
@@ -106,7 +106,7 @@
             <StackPanel Grid.Row="1" Grid.Column="7" Orientation="Horizontal" HorizontalAlignment="Left">
                 <c:IntegerUpDown x:Name="EndNumericUpDown" MinWidth="60" Margin="5" StepValue="10" Padding="2,0"
                                  Maximum="{Binding Maximum, ElementName=SelectionSlider}" Minimum="{Binding Value, ElementName=StartNumericUpDown}" 
-                                 Value="{Binding UpperValue, ElementName=SelectionSlider, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                 Value="{Binding UpperValue, ElementName=SelectionSlider, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" 
                                  ValueChanged="EndNumericUpDown_ValueChanged"/>
                 <Label Content="ms" Padding="0,0,5,0" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
             </StackPanel>

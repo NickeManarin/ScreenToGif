@@ -354,7 +354,7 @@ namespace ScreenToGif.Windows
 
             //Stop all timers.
             _searchTimer?.Stop();
-            
+
             //Manually get the position/size of the window, so it's possible opening multiple instances.
             UserSettings.All.EditorTop = Top;
             UserSettings.All.EditorLeft = Left;
@@ -3815,37 +3815,37 @@ namespace ScreenToGif.Windows
                                 switch (task.TaskType)
                                 {
                                     case DefaultTaskModel.TaskTypeEnum.MouseClicks:
-                                    {
-                                        if (Project.CreatedBy == ProjectByType.ScreenRecorder && UserSettings.All.DetectMouseClicks)
-                                            MouseClicksAsync(task as MouseClicksModel ?? MouseClicksModel.FromSettings());
-
-                                        break;
-                                    }
-
-                                    case DefaultTaskModel.TaskTypeEnum.KeyStrokes:
-                                    {
-                                        if (Project.CreatedBy == ProjectByType.ScreenRecorder)
                                         {
-                                            Dispatcher.Invoke(() =>
-                                            {
-                                                KeyStrokesGrid.Visibility = Visibility.Visible;
-                                                KeyStrokesLabel.Text = "Ctrl + C";
-                                                KeyStrokesLabel.MinHeight = 0;
-                                            });
-                                            KeyStrokesAsync(task as KeyStrokesModel ?? KeyStrokesModel.FromSettings());
-                                            Dispatcher.Invoke(() => KeyStrokesGrid.Visibility = Visibility.Collapsed);
+                                            if (Project.CreatedBy == ProjectByType.ScreenRecorder && UserSettings.All.DetectMouseClicks)
+                                                MouseClicksAsync(task as MouseClicksModel ?? MouseClicksModel.FromSettings());
+
+                                            break;
                                         }
 
-                                        break;
-                                    }
+                                    case DefaultTaskModel.TaskTypeEnum.KeyStrokes:
+                                        {
+                                            if (Project.CreatedBy == ProjectByType.ScreenRecorder)
+                                            {
+                                                Dispatcher.Invoke(() =>
+                                                {
+                                                    KeyStrokesGrid.Visibility = Visibility.Visible;
+                                                    KeyStrokesLabel.Text = "Ctrl + C";
+                                                    KeyStrokesLabel.MinHeight = 0;
+                                                });
+                                                KeyStrokesAsync(task as KeyStrokesModel ?? KeyStrokesModel.FromSettings());
+                                                Dispatcher.Invoke(() => KeyStrokesGrid.Visibility = Visibility.Collapsed);
+                                            }
+
+                                            break;
+                                        }
 
                                     case DefaultTaskModel.TaskTypeEnum.Delay:
-                                    {
-                                        if (Project.CreatedBy == ProjectByType.ScreenRecorder)
-                                            DelayAsync(task as DelayModel ?? DelayModel.FromSettings(), true, true);
+                                        {
+                                            if (Project.CreatedBy == ProjectByType.ScreenRecorder)
+                                                DelayAsync(task as DelayModel ?? DelayModel.FromSettings(), true, true);
 
-                                        break;
-                                    }
+                                            break;
+                                        }
                                 }
                             }
                             catch (Exception e)
@@ -4128,6 +4128,14 @@ namespace ScreenToGif.Windows
                     case "mp4":
                     case "wmv":
                     case "avi":
+                        if (!Util.Other.IsFfmpegPresent())
+                        {
+                            Dispatcher.Invoke(() =>
+                            {
+                                StatusList.Warning(StringResource("Editor.Warning.Ffmpeg"), null, () => App.MainViewModel.OpenOptions.Execute(7));
+                            });
+                            throw new ApplicationException("FFmpeg not present.");
+                        }
 
                         listFrames = ImportFromVideo(fileName, pathTemp);
                         break;
@@ -4468,7 +4476,7 @@ namespace ScreenToGif.Windows
 
             var frameList = Dispatcher.Invoke(() =>
             {
-                var videoSource = new VideoSource(fileName) { Owner = this };
+                var videoSource = new VideoSource(fileName, pathTemp) { Owner = this };
                 var result = videoSource.ShowDialog();
 
                 delay = videoSource.Delay;
@@ -4493,17 +4501,7 @@ namespace ScreenToGif.Windows
 
             foreach (var frame in frameList)
             {
-                var frameName = Path.Combine(pathTemp, $"{count} {DateTime.Now:hh-mm-ss-FFFF}.png");
-
-                using (var stream = new FileStream(frameName, FileMode.Create))
-                {
-                    var encoder = new PngBitmapEncoder();
-                    encoder.Frames.Add(frame);
-                    encoder.Save(stream);
-                    stream.Close();
-                }
-
-                var frameInfo = new FrameInfo(frameName, delay);
+                var frameInfo = new FrameInfo(frame, delay);
                 frameInfoList.Add(frameInfo);
 
                 GC.Collect(1, GCCollectionMode.Forced);
@@ -4909,7 +4907,7 @@ namespace ScreenToGif.Windows
 
         private void ClosePanel(bool isCancel = false, bool removeEvent = false)
         {
-            StatusList.Remove(StatusType.Warning);
+            //StatusList.Remove(StatusType.Warning);
 
             if (ActionGrid.ActualWidth > 0)
                 ZoomBoxControl.ResetToPrevious();
@@ -5125,7 +5123,7 @@ namespace ScreenToGif.Windows
                 case ".mp4":
                     return "-c:v libx264 -pix_fmt yuv420p -vf \"pad=width={W}:height={H}:x=0:y=0:color=black\"";
                 case ".webm":
-                     return "-c:v libvpx -pix_fmt yuv420p -vf \"pad=width={W}:height={H}:x=0:y=0:color=black\"";
+                    return "-c:v libvpx -pix_fmt yuv420p -vf \"pad=width={W}:height={H}:x=0:y=0:color=black\"";
                 case ".wmv":
                     return "-c:v wmv2 -pix_fmt yuv420p -vf \"pad=width={W}:height={H}:x=0:y=0:color=black\"";
                 default:
@@ -6515,7 +6513,7 @@ namespace ScreenToGif.Windows
 
                     if (keyList.Count == 0)
                         return null;
-                    
+
                     //Update text with key strokes.
                     KeyStrokesLabel.Text = keyList.Select(x => "" + Native.GetSelectKeyText(x.Key, x.Modifiers, x.IsUppercase)).Aggregate((p, n) => p + model.KeyStrokesSeparator + n);
                     KeyStrokesLabel.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
@@ -6836,26 +6834,26 @@ namespace ScreenToGif.Windows
                 switch (model.Type)
                 {
                     case DelayUpdateType.Override:
-                    {
-                        frameInfo.Delay = model.NewDelay;
-                        break;
-                    }
+                        {
+                            frameInfo.Delay = model.NewDelay;
+                            break;
+                        }
                     case DelayUpdateType.IncreaseDecrease:
-                    {
-                        frameInfo.Delay += model.IncreaseDecreaseDelay;
+                        {
+                            frameInfo.Delay += model.IncreaseDecreaseDelay;
 
-                        if (frameInfo.Delay < 10)
-                            frameInfo.Delay = 10;
-                        break;
-                    }
+                            if (frameInfo.Delay < 10)
+                                frameInfo.Delay = 10;
+                            break;
+                        }
                     default:
-                    {
-                        frameInfo.Delay = (int)Math.Round(frameInfo.Delay * model.Percent / 100m, 0);
+                        {
+                            frameInfo.Delay = (int)Math.Round(frameInfo.Delay * model.Percent / 100m, 0);
 
-                        if (frameInfo.Delay < 10)
-                            frameInfo.Delay = 10;
-                        break;
-                    }
+                            if (frameInfo.Delay < 10)
+                                frameInfo.Delay = 10;
+                            break;
+                        }
                 }
 
                 #region Update UI
@@ -6966,7 +6964,7 @@ namespace ScreenToGif.Windows
             }
 
             #endregion
-            
+
             return selected;
         }
 

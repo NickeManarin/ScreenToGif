@@ -133,6 +133,9 @@ namespace ScreenToGif.Controls
         public static readonly RoutedEvent UpperValueChangedEvent = EventManager.RegisterRoutedEvent("UpperValueChanged", RoutingStrategy.Bubble, 
             typeof(RoutedEventHandler), typeof(RangeSlider));
 
+        public static readonly RoutedEvent SliderMouseUpEvent = EventManager.RegisterRoutedEvent("SliderMouseUp", RoutingStrategy.Bubble,
+            typeof(RoutedEventHandler), typeof(RangeSlider));
+
         public event RoutedEventHandler LowerValueChanged
         {
             add => AddHandler(LowerValueChangedEvent, value);
@@ -143,6 +146,12 @@ namespace ScreenToGif.Controls
         {
             add => AddHandler(UpperValueChangedEvent, value);
             remove => RemoveHandler(UpperValueChangedEvent, value);
+        }
+
+        public event RoutedEventHandler SliderMouseUp
+        {
+            add => AddHandler(SliderMouseUpEvent, value);
+            remove => RemoveHandler(SliderMouseUpEvent, value);
         }
 
         public void RaiseLowerValueChangedEvent()
@@ -160,6 +169,15 @@ namespace ScreenToGif.Controls
                 return;
 
             var newEventArgs = new RoutedEventArgs(UpperValueChangedEvent);
+            RaiseEvent(newEventArgs);
+        }
+
+        public void RaiseSliderMouseUp()
+        {
+            if (SliderMouseUpEvent == null || !IsLoaded)
+                return;
+
+            var newEventArgs = new RoutedEventArgs(SliderMouseUpEvent);
             RaiseEvent(newEventArgs);
         }
 
@@ -182,7 +200,7 @@ namespace ScreenToGif.Controls
             if (_lowerSlider != null)
             {
                 _lowerSlider.Value = LowerValue;
-                _lowerSlider.PreviewMouseUp += LowerSlider_MouseUp;
+                _lowerSlider.PreviewMouseUp += LowerSlider_PreviewMouseUp;
             }
 
             if (_upperSlider != null)
@@ -206,12 +224,14 @@ namespace ScreenToGif.Controls
         private void UpperSlider_PreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
             UpperValue = Math.Max(_upperSlider.Value, _lowerSlider.Value);
+            this.RaiseSliderMouseUp();
             SetProgressBorder();
         }
 
-        private void LowerSlider_MouseUp(object sender, MouseButtonEventArgs e)
+        private void LowerSlider_PreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
             LowerValue = Math.Min(_upperSlider.Value, _lowerSlider.Value);
+            this.RaiseSliderMouseUp();
             SetProgressBorder();
         }
 
