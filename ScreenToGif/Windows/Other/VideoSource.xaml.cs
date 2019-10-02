@@ -156,12 +156,18 @@ namespace ScreenToGif.Windows.Other
         {
             //_previewVideoDel.BeginInvoke(true, SelectionSlider.LowerValue, PreviewVideoCallback, null);
             _lowerPlayer.Position = TimeSpan.FromMilliseconds(SelectionSlider.LowerValue);
+
+            MeasureDuration();
+            CountFrames();
         }
 
         private void EndNumericUpDown_ValueChanged(object sender, RoutedEventArgs e)
         {
             //_previewVideoDel.BeginInvoke(false, SelectionSlider.UpperValue, PreviewVideoCallback, null);
             _upperPlayer.Position = TimeSpan.FromMilliseconds(SelectionSlider.UpperValue);
+
+            MeasureDuration();
+            CountFrames();
         }
 
         private void ScaleNumericUpDown_ValueChanged(object sender, RoutedEventArgs e)
@@ -284,7 +290,24 @@ namespace ScreenToGif.Windows.Other
                 _lowerPlayer.Changed += LowerPlayer_Changed;
                 _upperPlayer.Changed += UpperPlayer_Changed;
 
-                SelectionSlider.Maximum = _upperPlayer.NaturalDuration.TimeSpan.TotalMilliseconds;
+                var param = new Parameters();
+                param.Command = $"-i {fileName}";
+                var startInfo = new ProcessStartInfo(UserSettings.All.FfmpegLocation)
+                {
+                    Arguments = param.Command,
+                    CreateNoWindow = true,
+                    ErrorDialog = false,
+                    UseShellExecute = false,
+                    RedirectStandardError = true,
+                    RedirectStandardOutput = true
+                };
+                Process process = Process.Start(startInfo);
+                StreamReader DurationReader = process.StandardError;
+                process.WaitForExit();
+                var result = DurationReader.ReadToEnd();
+                TimeSpan duration = TimeSpan.Parse(System.Text.RegularExpressions.Regex.Replace(result, @"(.|\n)*Duration: (.*?),(.|\n)*", "$2"));
+
+                SelectionSlider.Maximum = duration.TotalMilliseconds;
 
                 LowerSelectionImage.Source = PreviewFrame(_lowerPlayer);
                 UpperSelectionImage.Source = PreviewFrame(_upperPlayer);
@@ -294,6 +317,9 @@ namespace ScreenToGif.Windows.Other
 
                 StartNumericUpDown.Value = Convert.ToInt32(SelectionSlider.LowerValue);
                 EndNumericUpDown.Value = Convert.ToInt32(SelectionSlider.UpperValue);
+
+                MeasureDuration();
+                CountFrames();
 
                 Dispatcher.InvokeAsync(() => { LowerSelectionImage.Source = PreviewFrame(_lowerPlayer); });
                 Dispatcher.InvokeAsync(() => { UpperSelectionImage.Source = PreviewFrame(_upperPlayer); });
@@ -350,7 +376,7 @@ namespace ScreenToGif.Windows.Other
             var endTime = TimeSpan.FromMilliseconds(SelectionSlider.UpperValue);
 
             param.Command = "-vsync 2 -i \"{0}\" {1} -y \"{2}\"";
-            param.ExtraParameters = $"-r {fps} -ss {startTime} -to {endTime} -progress pipe:1";
+            param.ExtraParameters = $"-r {fps} -vf scale={_width}:{_height} -ss {startTime} -to {endTime} -progress pipe:1";
             param.Filename = Path.Combine(pathTemp, "frame%05d.png");
             param.Command = string.Format(param.Command, fileName, param.ExtraParameters.Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString()), param.Filename);
 
@@ -359,9 +385,7 @@ namespace ScreenToGif.Windows.Other
             {
                 Arguments = param.Command,
                 CreateNoWindow = true,
-                ErrorDialog = false,
                 UseShellExecute = false,
-                RedirectStandardError = true,
                 RedirectStandardOutput = true
             };
 
