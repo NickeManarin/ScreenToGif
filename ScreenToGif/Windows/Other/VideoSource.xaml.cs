@@ -367,56 +367,72 @@ namespace ScreenToGif.Windows.Other
 
         private void CaptureFrames()
         {
-            CaptureProgressBar.Maximum = CountFrames();
-            CaptureProgressBar.Value = 0;
-
-            var param = new Parameters();
-            var fps = FpsNumericUpDown.Value;
-            var startTime = TimeSpan.FromMilliseconds(SelectionSlider.LowerValue);
-            var endTime = TimeSpan.FromMilliseconds(SelectionSlider.UpperValue);
-
-            param.Command = "-vsync 2 -i \"{0}\" {1} -y \"{2}\"";
-            param.ExtraParameters = $"-r {fps} -vf scale={_width}:{_height} -ss {startTime} -to {endTime} -progress pipe:1";
-            param.Filename = Path.Combine(pathTemp, "frame%05d.png");
-            param.Command = string.Format(param.Command, fileName, param.ExtraParameters.Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString()), param.Filename);
-
-            var process = new Process();
-            var startInfo = new ProcessStartInfo(UserSettings.All.FfmpegLocation)
+            try
             {
-                Arguments = param.Command,
-                CreateNoWindow = true,
-                UseShellExecute = false,
-                RedirectStandardOutput = true
-            };
+                CaptureProgressBar.Maximum = CountFrames();
+                CaptureProgressBar.Value = 0;
 
-            process.OutputDataReceived += new DataReceivedEventHandler((sender, e) =>
-            {
-                if (!String.IsNullOrEmpty(e.Data))
+                var param = new Parameters();
+                var fps = FpsNumericUpDown.Value;
+                var startTime = TimeSpan.FromMilliseconds(SelectionSlider.LowerValue);
+                var endTime = TimeSpan.FromMilliseconds(SelectionSlider.UpperValue);
+
+                param.Command = "-vsync 2 -progress pipe:1 -i \"{0}\" {1} -y \"{2}\"";
+                param.ExtraParameters = $"-r {fps} -vf scale={_width}:{_height} -ss {startTime} -to {endTime}";
+                param.Filename = Path.Combine(pathTemp, "frame%05d.png");
+                param.Command = string.Format(param.Command, fileName, param.ExtraParameters.Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString()), param.Filename);
+
+                var process = new Process();
+                var startInfo = new ProcessStartInfo(UserSettings.All.FfmpegLocation)
                 {
-                    var parsed = e.Data.Split('=');
-                    switch (parsed[0])
-                    {
-                        case "frame":
-                            Dispatcher.InvokeAsync(() => { CaptureProgressBar.Value = Convert.ToDouble(parsed[1]); });
-                            break;
-                        case "progress":
-                            if (parsed[1] == "end")
-                            {
-                                Dispatcher.InvokeAsync(() => {
-                                    FrameList = new List<string>(Directory.GetFiles(pathTemp, "*.png"));
-                                    DialogResult = true; });
-                            }
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            });
+                    Arguments = param.Command,
+                    CreateNoWindow = true,
+                    ErrorDialog = false,
+                    UseShellExecute = false,
+                    RedirectStandardError = true,
+                    RedirectStandardOutput = true
+                };
 
-            process.StartInfo = startInfo;
-            process.Start();
-            process.BeginOutputReadLine();
-            //process.WaitForExit();
+                process.OutputDataReceived += new DataReceivedEventHandler((sender, e) =>
+                {
+                    if (!String.IsNullOrEmpty(e.Data))
+                    {
+                        var parsed = e.Data.Split('=');
+                        switch (parsed[0])
+                        {
+                            case "frame":
+                                Dispatcher.InvokeAsync(() => { CaptureProgressBar.Value = Convert.ToDouble(parsed[1]); });
+                                break;
+                            case "progress":
+                                if (parsed[1] == "end")
+                                {
+                                    Dispatcher.InvokeAsync(() =>
+                                    {
+                                        FrameList = new List<string>(Directory.GetFiles(pathTemp, "*.png"));
+                                        DialogResult = true;
+                                    });
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                });
+
+                process.StartInfo = startInfo;
+                process.Start();
+                process.BeginOutputReadLine();
+
+                var str = process.StandardError.ReadToEnd();
+                var fileInfo = new FileInfo(param.Filename);
+                if (!fileInfo.Exists || fileInfo.Length == 0)
+                    throw new Exception("Error while capturing frames with FFmpeg.") { HelpLink = $"Command:\n\r{param.Command}\n\rResult:\n\r{str}" };
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Capturing Video error");
+                StatusBand.Error(LocalizationHelper.Get("S.ImportVideo.Error") + Environment.NewLine + ex.Message + Environment.NewLine + ex.HelpLink);
+            }
         }
 
 

@@ -1396,7 +1396,7 @@ namespace ScreenToGif.Windows
                         param.UseGlobalColorTable = false;
                         param.MaximumNumberColors = UserSettings.All.MaximumColors;
                         param.RepeatCount = UserSettings.All.Looped ? (UserSettings.All.RepeatForever ? 0 : UserSettings.All.RepeatCount) : -1;
-                        param.Command = "-vsync 2 -safe 0 -f concat -i \"{0}\" {1} -y \"{2}\"";
+                        param.Command = "-vsync 2 -progress pipe:1 -safe 0 -f concat -i \"{0}\" {1} -y \"{2}\"";
                         param.ExtraParameters = UserSettings.All.ExtraParametersGif;
                         break;
                     case Export.Apng:

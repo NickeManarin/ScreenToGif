@@ -574,7 +574,7 @@ namespace ScreenToGif.Windows.Other
 
                                 #region FFmpeg encoding
 
-                                SetStatus(Status.Processing, id, null, true);
+                                SetStatus(Status.Processing, id, null, false);
 
                                 if (!Util.Other.IsFfmpegPresent())
                                     throw new ApplicationException("FFmpeg not present.");
@@ -606,18 +606,48 @@ namespace ScreenToGif.Windows.Other
 
                                 param.Command = string.Format(param.Command, concatFile, param.ExtraParameters.Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString()), param.Filename);
 
-                                var process = new ProcessStartInfo(UserSettings.All.FfmpegLocation)
+                                var process = new Process();
+                                var startInfo = new ProcessStartInfo(UserSettings.All.FfmpegLocation)
                                 {
                                     Arguments = param.Command,
                                     CreateNoWindow = true,
                                     ErrorDialog = false,
                                     UseShellExecute = false,
-                                    RedirectStandardError = true
+                                    RedirectStandardError = true,
+                                    RedirectStandardOutput = true
                                 };
 
-                                var pro = Process.Start(process);
+                                process.OutputDataReceived += new DataReceivedEventHandler((sender, e) =>
+                                {
+                                    if (!String.IsNullOrEmpty(e.Data))
+                                    {
+                                        var parsed = e.Data.Split('=');
+                                        switch (parsed[0])
+                                        {
+                                            case "frame":
+                                                var currentFrame = Convert.ToInt32(parsed[1]);
+                                                Dispatcher.InvokeAsync(() => { Update(id, currentFrame, string.Format(processing, currentFrame));});
+                                                break;
+                                            case "progress":
+                                                //if (parsed[1] == "end")
+                                                //{
+                                                //    Dispatcher.InvokeAsync(() => {
+                                                //        FrameList = new List<string>(Directory.GetFiles(pathTemp, "*.png"));
+                                                //        DialogResult = true;
+                                                //    });
+                                                //}
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    }
+                                });
 
-                                var str = pro.StandardError.ReadToEnd();
+                                process.StartInfo = startInfo;
+                                process.Start();
+                                process.BeginOutputReadLine();
+
+                                var str = process.StandardError.ReadToEnd();
 
                                 var fileInfo = new FileInfo(param.Filename);
 
