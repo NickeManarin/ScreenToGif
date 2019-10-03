@@ -82,6 +82,9 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
         /// </summary>
         private int ColorTableSize { get; set; }
 
+        private int cumulativeTime { get; set; } = 0;
+        private int cumulativePrevDelay { get; set; } = 0;
+
         #endregion
 
         public GifFile(Stream stream, Color? transparent, int repeatCount = 0)
@@ -102,6 +105,10 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
         public void AddFrame(string path, Int32Rect rect, int delay = 66)
         {
             CurrentTransparentColor = TransparentColor;
+
+            cumulativeTime += delay;
+            delay = (int)Math.Round((cumulativeTime > delay ? cumulativeTime - cumulativePrevDelay*10 : delay) / 10.0f, MidpointRounding.AwayFromZero);
+            cumulativePrevDelay += delay;
 
             ReadPixels(path);
             //HandleTransparency();
@@ -262,7 +269,8 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
 
             //Write the packed fields.
             WriteByte(ConvertToByte(bitArray));
-            WriteShort((int)Math.Round(delay / 10.0f, MidpointRounding.AwayFromZero)); //Delay x 1/100 seconds. Minimum of 10ms. Centiseconds.
+
+            WriteShort(delay);
             WriteByte(FindTransparentColorIndex()); //Transparency Index.
             WriteByte(0); //Terminator.
         }
