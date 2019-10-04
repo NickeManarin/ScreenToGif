@@ -99,12 +99,12 @@
     <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(녹화 영역을 선택할 때 돋보기를 활성화합니다)</s:String>
     
     <s:String x:Key="Application.Other">기타</s:String>
-    <s:String x:Key="Application.Other.SystemTray">작업 표시줄에 아이콘을 표시합니다.</s:String>
-    <s:String x:Key="Application.Other.LeaveOpen">모든 윈도우가 닫혀 있어도 프로그램을 종료하지 않습니다.</s:String>
+    <s:String x:Key="Application.Other.SystemTray">작업 표시줄에 트레이 아이콘을 표시합니다.</s:String>
+    <s:String x:Key="Application.Other.LeaveOpen">모든 창이 닫혀 있어도 프로그램을 종료하지 않습니다.</s:String>
     <s:String x:Key="Application.Other.NotifyFrameDeletion">프레임을 삭제하기 전 확인합니다.</s:String>
     <s:String x:Key="Application.Other.NotifyProjectDiscard">프로젝트를 삭제하기 전 확인합니다.</s:String>
-    <s:String x:Key="Application.Other.NotifyWhileClosingEditor">편집기를 닫기 전 확인합니다 (프로젝트가 열려있을 때에만).</s:String>
-    <s:String x:Key="Application.Other.NotifyWhileClosingApp">프로그램을 닫기 전 확인합니다 ('종료' 명령을 통하여).</s:String>
+    <s:String x:Key="Application.Other.NotifyWhileClosingEditor">프로젝트가 열려있을 때 편집기를 닫기 전 확인합니다.</s:String>
+    <s:String x:Key="Application.Other.NotifyWhileClosingApp">'Exit' 명령어를 사용해 프로그램을 닫기 전 확인합니다.</s:String>
     <s:String x:Key="Application.Other.DrawOutlineOutside">자막에서 글자 바깥에 외곽선을 그립니다.</s:String>
     <s:String x:Key="Application.Other.DisableHardwareAcceleration">하드웨어 가속을 비활성화합니다.</s:String>
     <s:String x:Key="Application.Other.CheckForTranslationUpdates">번역 업데이트를 확인합니다.</s:String>
