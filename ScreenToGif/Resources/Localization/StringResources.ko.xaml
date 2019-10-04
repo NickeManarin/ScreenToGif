@@ -103,8 +103,8 @@
     <s:String x:Key="Application.Other.LeaveOpen">모든 창이 닫혀 있어도 프로그램을 종료하지 않습니다.</s:String>
     <s:String x:Key="Application.Other.NotifyFrameDeletion">프레임을 삭제하기 전 확인합니다.</s:String>
     <s:String x:Key="Application.Other.NotifyProjectDiscard">프로젝트를 삭제하기 전 확인합니다.</s:String>
-    <s:String x:Key="Application.Other.NotifyWhileClosingEditor">프로젝트가 열려있을 때 편집기를 닫기 전 확인합니다.</s:String>
-    <s:String x:Key="Application.Other.NotifyWhileClosingApp">'Exit' 명령어를 사용해 프로그램을 닫기 전 확인합니다.</s:String>
+    <s:String x:Key="Application.Other.NotifyWhileClosingEditor">프로젝트가 열려있을 때, 편집기를 닫기 전 확인합니다.</s:String>
+    <s:String x:Key="Application.Other.NotifyWhileClosingApp">'트레이 > 종료' 버튼으로 프로그램을 닫기 전 확인합니다.</s:String>
     <s:String x:Key="Application.Other.DrawOutlineOutside">자막에서 글자 바깥에 외곽선을 그립니다.</s:String>
     <s:String x:Key="Application.Other.DisableHardwareAcceleration">하드웨어 가속을 비활성화합니다.</s:String>
     <s:String x:Key="Application.Other.CheckForTranslationUpdates">번역 업데이트를 확인합니다.</s:String>
