@@ -44,6 +44,10 @@ namespace ScreenToGif.Controls
 
         public static readonly DependencyProperty DisplayNoneProperty = DependencyProperty.Register("DisplayNone", typeof(bool), typeof(KeyBox), new PropertyMetadata(false));
 
+        public static readonly DependencyProperty OnlyModifiersProperty = DependencyProperty.Register(nameof(OnlyModifiers), typeof(bool), typeof(KeyBox), new PropertyMetadata(false));
+
+        public static readonly DependencyProperty IsSingleLetterLowerCaseProperty = DependencyProperty.Register(nameof(IsSingleLetterLowerCase), typeof(bool), typeof(KeyBox), new PropertyMetadata(false, Keys_PropertyChanged));
+
         public static readonly RoutedEvent KeyChangedEvent = EventManager.RegisterRoutedEvent("KeyChanged", RoutingStrategy.Bubble, typeof(KeyChangedEventHandler), typeof(KeyBox));
 
         #endregion
@@ -116,6 +120,18 @@ namespace ScreenToGif.Controls
             set => SetValue(DisplayNoneProperty, value);
         }
 
+        public bool OnlyModifiers
+        {
+            get => (bool)GetValue(OnlyModifiersProperty);
+            set => SetValue(OnlyModifiersProperty, value);
+        }
+
+        public bool IsSingleLetterLowerCase
+        {
+            get => (bool)GetValue(IsSingleLetterLowerCaseProperty);
+            set => SetValue(IsSingleLetterLowerCaseProperty, value);
+        }
+
         public event KeyChangedEventHandler KeyChanged
         {
             add => AddHandler(KeyChangedEvent, value);
@@ -128,10 +144,20 @@ namespace ScreenToGif.Controls
 
         private static void Keys_PropertyChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
-            if (!(o is KeyBox box) || box.MainKey == null)
+            if (!(o is KeyBox box))
                 return;
 
-            box.Text = Native.GetSelectKeyText(box.MainKey ?? Key.None, box.ModifierKeys, true, !box.DisplayNone);
+            if (box.OnlyModifiers && box.ModifierKeys != ModifierKeys.None)
+            {
+                box.Text = Native.GetSelectKeyText(box.ModifierKeys);
+                box.IsSelectionFinished = true;
+                return;
+            }
+
+            if (box.MainKey == null)
+                return;
+
+            box.Text = Native.GetSelectKeyText(box.MainKey ?? Key.None, box.ModifierKeys, !(box.IsSingleLetterLowerCase && box.ModifierKeys == ModifierKeys.None), !box.DisplayNone);
             box.IsSelectionFinished = true;
         }
 
@@ -208,6 +234,14 @@ namespace ScreenToGif.Controls
 
             if (AllowAllKeys)
                 IsWindowsDown = Keyboard.IsKeyDown(Key.LWin) || Keyboard.IsKeyDown(Key.RWin);
+
+            if (OnlyModifiers)
+            {
+                ModifierKeys = Keyboard.Modifiers;
+                MainKey = null;
+                _finished = true;
+                return;
+            }
 
             var key = e.Key != Key.System ? e.Key : e.SystemKey;
 
@@ -292,7 +326,7 @@ namespace ScreenToGif.Controls
             if ((e.Key == Key.Enter || e.Key == Key.Tab) && !AllowAllKeys)
                 return;
 
-            if (e.Key == Key.PrintScreen)
+            if (e.Key == Key.PrintScreen && !OnlyModifiers)
             {
                 ModifierKeys = Keyboard.Modifiers;
                 MainKey = e.Key;

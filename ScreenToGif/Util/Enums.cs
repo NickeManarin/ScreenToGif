@@ -12,6 +12,21 @@
     }
 
     /// <summary>
+    /// The direction in which the window should be resized.
+    /// </summary>
+    public enum ResizeDirection
+    {
+        Left = 1,
+        Right = 2,
+        Top = 3,
+        TopLeft = 4,
+        TopRight = 5,
+        Bottom = 6,
+        BottomLeft = 7,
+        BottomRight = 8
+    }
+
+    /// <summary>
     /// Determines how the past bahaves.
     /// </summary>
     public enum PasteBehavior
@@ -195,6 +210,11 @@
         /// Obfuscate Panel.
         /// </summary>
         Obfuscate = -12,
+
+        /// <summary>
+        /// Shadow Panel.
+        /// </summary>
+        Shadow = -13,
     }
 
     /// <summary>
@@ -544,8 +564,8 @@
         None = 0,
         ImgurAnonymous = 1,
         Imgur = 2,
-        GyfcatAnonymous = 3,
-        Gyfcat = 4,
+        GfycatAnonymous = 3,
+        Gfycat = 4,
         Yandex = 5,
     }
 

@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="ScreenToGif.UserControls.ShadowPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:n="clr-namespace:ScreenToGif.Controls"
+             xmlns:v="clr-namespace:ScreenToGif.Util.Converters"
+             mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="300"
+             SnapsToDevicePixels="True">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="27"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="27"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.Resources>
+            <v:PercentageToOpacity x:Key="PercentageToOpacity"/>
+        </Grid.Resources>
+
+        <n:LabelSeparator Grid.Row="0" Text="{DynamicResource Border.Appearance}"/>
+        <Grid Grid.Row="1" Margin="10,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Shadow.ShadowColor}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+            <n:ColorBox Grid.Row="0" Grid.Column="1" x:Name="ShadowColorBox" Margin="10,5" SelectedColor="{Binding Color, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AllowTransparency="False"/>
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.Shadow.BackgroundColor}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+            <n:ColorBox Grid.Row="1" Grid.Column="1" x:Name="BackgroundColorBox" Margin="10,5" SelectedColor="{Binding BackgroundColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AllowTransparency="False"/>
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.Shadow.BlurRadius}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+            <n:DoubleUpDown Grid.Row="2" Grid.Column="1" Minimum="0" Maximum="100" Margin="10,5" Value="{Binding BlurRadius, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ValueChanged="Properties_ValueChanged"/>
+
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource S.Shadow.Direction}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+            <n:DoubleUpDown Grid.Row="3" Grid.Column="1" Minimum="0" Maximum="360" Margin="10,5" Value="{Binding Direction, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ValueChanged="Properties_ValueChanged"/>
+            
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="{DynamicResource Watermark.Opacity}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+            <n:DoubleUpDown Grid.Row="4" Grid.Column="1" Minimum="0" Maximum="100" Margin="10,5" Value="{Binding Opacity, Mode=TwoWay, Converter={StaticResource PercentageToOpacity}, UpdateSourceTrigger=PropertyChanged}"
+                            ValueChanged="Properties_ValueChanged"/>
+            
+            <TextBlock Grid.Row="5" Grid.Column="0" Text="{DynamicResource S.Shadow.Depth}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+            <n:DoubleUpDown Grid.Row="5" Grid.Column="1" Minimum="0" Maximum="100" Margin="10,5" Value="{Binding Depth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            ValueChanged="Properties_ValueChanged"/>
+        </Grid>
+
+        <n:LabelSeparator Grid.Row="2" Text="{DynamicResource Preview}"/>
+        <Grid Grid.Row="3" x:Name="PreviewGrid" Margin="10,5" Background="{Binding BackgroundColor, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ColorToBrush}}">
+            <Viewbox x:Name="PreviewViewBox" Child="{StaticResource Vector.Image}" Height="50" Width="50" Stretch="Uniform">
+                <Viewbox.Effect>
+                    <DropShadowEffect Color="{Binding Color, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                      BlurRadius="{Binding BlurRadius, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                      Direction="{Binding Direction, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                      Opacity="{Binding Opacity, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                      ShadowDepth="{Binding Depth, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </Viewbox.Effect>
+            </Viewbox>
+        </Grid>
+    </Grid>
+</UserControl>

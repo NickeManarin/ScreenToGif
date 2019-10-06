@@ -1,4 +1,5 @@
-﻿using ScreenToGif.Util;
+﻿using System.Runtime.Serialization;
+using ScreenToGif.Util;
 
 namespace ScreenToGif.Model
 {
@@ -12,12 +13,17 @@ namespace ScreenToGif.Model
             MouseClicks = 1,
             KeyStrokes = 2,
             Delay = 3,
-            ProgressBar = 4,
-            RemoveDuplicates = 5,
-            Watermark = 6,
+            Progress = 4,
+            Border = 5,
+            Shadow = 6,
+            RemoveDuplicates = 7,
+            Watermark = 8,
+            TitleFrame = 9,
+            Resize = 10,
         }
 
         private TaskTypeEnum _taskType = TaskTypeEnum.NotDeclared;
+        private string _image = null;
 
         #endregion
 
@@ -39,13 +45,26 @@ namespace ScreenToGif.Model
                         return LocalizationHelper.Get("Editor.Image.KeyStrokes", true);
                     case TaskTypeEnum.Delay:
                         return LocalizationHelper.Get("S.DelayUpdate", true);
+                    case TaskTypeEnum.Progress:
+                        return LocalizationHelper.Get("Editor.Image.Progress", true);
+                    case TaskTypeEnum.Border:
+                        return LocalizationHelper.Get("Editor.Image.Border", true);
+                    case TaskTypeEnum.Shadow:
+                        return LocalizationHelper.Get("Editor.Image.Shadow", true);
+                    default:
+                        return LocalizationHelper.Get("S.AutomatedTasks.SelectType");
                 }
-
-                return "";
             }
         }
 
         public string Details => ToString();
+
+        [IgnoreDataMember]
+        public string Image
+        {
+            get => _image;
+            set => SetProperty(ref _image, value);
+        }
 
 
         public DefaultTaskModel ShallowCopy()

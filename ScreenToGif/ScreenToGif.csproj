@@ -172,6 +172,9 @@
     <Compile Include="Controls\NotificationListControl.cs" />
     <Compile Include="Controls\NotifyIcon.cs" />
     <Compile Include="Controls\RecorderWindow.cs" />
+    <Compile Include="Controls\Ribbon\Ribbon.cs" />
+    <Compile Include="Controls\Ribbon\RibbonGroup.cs" />
+    <Compile Include="Controls\Ribbon\RibbonTab.cs" />
     <Compile Include="Controls\Shapes\Arrow.cs" />
     <Compile Include="Controls\Shapes\Triangle.cs" />
     <Compile Include="Controls\SplitButton.cs" />
@@ -277,12 +280,24 @@
     <Compile Include="ModelEx\Layers\TextLayer.cs" />
     <Compile Include="ModelEx\ProjectModel.cs" />
     <Compile Include="Model\BindableBase.cs" />
+    <Compile Include="Model\ShadowModel.cs" />
     <Compile Include="Model\DefaultTaskModel.cs" />
     <Compile Include="Model\FfmpegPreset.cs" />
+    <Compile Include="Model\BorderModel.cs" />
+    <Compile Include="Model\ProgressModel.cs" />
     <Compile Include="Model\KeyStrokesModel.cs" />
     <Compile Include="Model\ManipulatedEventArgs.cs" />
     <Compile Include="Model\DelayModel.cs" />
     <Compile Include="Model\MouseClicksModel.cs" />
+    <Compile Include="UserControls\ShadowPanel.xaml.cs">
+      <DependentUpon>ShadowPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\BorderPanel.xaml.cs">
+      <DependentUpon>BorderPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ProgressPanel.xaml.cs">
+      <DependentUpon>ProgressPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\KeyStrokesPanel.xaml.cs">
       <DependentUpon>KeyStrokesPanel.xaml</DependentUpon>
     </Compile>
@@ -299,12 +314,15 @@
     <Compile Include="Util\ActivityHook\UserActivityHook.cs" />
     <Compile Include="Util\Argument.cs" />
     <Compile Include="Util\BitHelper.cs" />
+    <Compile Include="Util\Converters\PercentageToOpacity.cs" />
     <Compile Include="Util\Converters\BoolAndToVisibility.cs" />
     <Compile Include="Util\Converters\BoolOrAndToVisibility.cs" />
+    <Compile Include="Util\Converters\BoolAndOrOrToVisibility.cs" />
     <Compile Include="Util\Converters\EnumToInt.cs" />
     <Compile Include="Util\Converters\FormatConverter.cs" />
     <Compile Include="Util\Converters\IntToVisibility.cs" />
     <Compile Include="Util\Converters\ShortcutKeys.cs" />
+    <Compile Include="Util\Converters\StringToStaticResource.cs" />
     <Compile Include="Util\CrcHelper.cs" />
     <Compile Include="Util\DataGridHelper.cs" />
     <Compile Include="Util\DynamicResourceBinding.cs" />
@@ -312,7 +330,6 @@
     <Compile Include="Util\Framerate.cs" />
     <Compile Include="Util\Clipboard.cs" />
     <Compile Include="Util\ColorExtensions.cs" />
-    <Compile Include="Util\Commands.cs" />
     <Compile Include="Util\Constants.cs" />
     <Compile Include="Util\ControlArgs\RangeArgs.cs" />
     <Compile Include="Util\Converters\AlphaToOpacity.cs" />
@@ -500,6 +517,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources\Commands.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Flags.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -576,6 +597,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Resources\Localization\StringResources.vi.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Resources\Localization\StringResources.zh.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -646,6 +671,18 @@
       <Generator>MSBuild:Compile</Generator>
     </None>
     <Page Include="Themes\Common.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\ShadowPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\BorderPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\ProgressPanel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

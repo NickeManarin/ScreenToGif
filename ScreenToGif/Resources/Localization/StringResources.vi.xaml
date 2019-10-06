@@ -1,0 +1,1061 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="clr-namespace:System;assembly=mscorlib"
+                    xml:space="preserve">
+    
+    <!--To use a new line: &#x0d;-->
+    <!--Or CarriageReturn + NewLine: &#x0d;&#x0a; or &#10;--> 
+    <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
+    
+    <!--General-->
+    <s:String x:Key="Ok">Đồng ý</s:String>
+    <s:String x:Key="Back">Quay lại</s:String>
+    <s:String x:Key="Cancel">Hủy bỏ</s:String>
+    <s:String x:Key="Yes">Có</s:String>
+    <s:String x:Key="No">Không</s:String>
+    <s:String x:Key="Frame">Khung hình</s:String>
+    <s:String x:Key="Suppress">Xóa bỏ</s:String>
+    <s:String x:Key="Preview">Xem trước</s:String>
+    <s:String x:Key="S.Add">Thêm</s:String>
+    <s:String x:Key="S.Edit">Chỉnh sửa</s:String>
+    <s:String x:Key="S.Id">Id</s:String>
+    <s:String x:Key="S.Title">Tiêu đề</s:String>
+    <s:String x:Key="S.Description">Mô tả</s:String>
+    <s:String x:Key="S.SelectColor">Click vào đây để chọn màu sắc.</s:String>
+
+    <!--Tray Icon-->
+    <s:String x:Key="S.NewRecording">Quay màn hình mới</s:String>
+    <s:String x:Key="S.NewWebcamRecording">Ghi hình webcam mới</s:String>
+    <s:String x:Key="S.NewBoardRecording">Bảng ghi mới</s:String>
+    <s:String x:Key="S.Exit">Thoát</s:String>
+
+    <!--Application-->
+    <s:String x:Key="Application.Exiting.Title">Đang thoát ScreenToGif</s:String>
+    <s:String x:Key="Application.Exiting.Instruction">Bạn chắc chắn muốn thoát chứ?</s:String>
+    <s:String x:Key="Application.Exiting.Message">Tất cả cửa sổ sẽ bị đóng lại và thanh ứng dụng sẽ biến mất.</s:String>
+    
+    <!--Error messages--> 
+    <s:String x:Key="S.Crash">Ôi không, ứng dụng gặp sự cố :(</s:String>
+    <s:String x:Key="S.Required">Trường yêu cầu.</s:String>
+    
+    <!--StartUp Page-->
+    <s:String x:Key="Title.StartUp">ScreenToGif - Bắt đầu</s:String>
+    <s:String x:Key="Recorder">Quay</s:String>
+    <s:String x:Key="Webcam">Webcam</s:String>
+    <s:String x:Key="Board">Bảng</s:String>
+    <s:String x:Key="Editor">Chỉnh sửa</s:String>
+    <s:String x:Key="Options">Các tùy chọn</s:String>
+    <s:String x:Key="Help">Trợ giúp</s:String>
+    <s:String x:Key="NewRelease">Phát hành mới đã sẵn sàng • {0}</s:String>
+    <s:String x:Key="NewRelease.Tooltip">Tải về phiên bản mới nhất của ScreenToGif.</s:String>
+    <s:String x:Key="Tooltip.Recorder">Mở quay màn hình, nơi bạn có thể dễ dàng bắt đầu quay màn hình của bạn.</s:String>
+    <s:String x:Key="Tooltip.Webcam">Mở ghi hình webcam.</s:String>
+    <s:String x:Key="Tooltip.Board">Mở bảng ghi, nơi bạn có thể bắt đầu quay màn hình các hình vẽ của mình.</s:String>
+    <s:String x:Key="Tooltip.Editor">Mở cửa sổ chỉnh sửa, trung tâm của ứng dụng này, nơi bạn có thể bắt đầu và chỉnh sửa quay màn hình mới.</s:String>
+
+    <!--Update Window-->
+    <s:String x:Key="Update">Cập nhật</s:String>
+    <s:String x:Key="Update.NewRelease">Phát hành mới!</s:String>
+    <s:String x:Key="Update.NewRelease.Verbose">Phát hành mới đã sẵn sàng, Phiên bản {0}! Click vào đây để biết thêm chi tiết.</s:String>
+    <s:String x:Key="Download">Tải về</s:String>
+    <s:String x:Key="Update.Portable">Bản Portable</s:String>
+    <s:String x:Key="Update.Installer">Tiến trình cài đặt</s:String>
+    <s:String x:Key="Update.Filename.Warning">Bạn cần chọn 1 địa chỉ khác hoặc 1 tên tệp khác</s:String>
+    <s:String x:Key="Update.Filename.Warning2">Bạn không thể thực hiện ghi đè với 1 phiên bản mới ngay lúc này, hãy chọn 1 tên khác cho tệp này.</s:String>
+    <s:String x:Key="Update.Install.Header">Bạn muốn cài đặt phiên bản mới ngay lúc này không?</s:String>
+    <s:String x:Key="Update.Install.Description">Ứng dụng sẽ đóng lại và tiến trình cài đặt sẽ được tiến hành.</s:String>
+    <s:String x:Key="Update.CloseThis">Bạn muốn đóng ứng dụng không?</s:String>
+    <s:String x:Key="Update.CloseThis.Detail">Đây là 1 phiên bản cũ hơn. Bạn đã tải về phiên bản mới rồi.</s:String>
+    
+    <!--Options Window-->
+    <s:String x:Key="Title.Options">ScreenToGif - Các tùy chọn</s:String>
+    <s:String x:Key="Application">Ứng dụng</s:String>
+    <s:String x:Key="Interface">Giao diện</s:String>
+    <s:String x:Key="S.AutoTasks">Tự động hóa các nhiệm vụ</s:String>
+    <s:String x:Key="S.Shortcuts">Biểu tượng tắt</s:String>
+    <s:String x:Key="Image">Hình ảnh</s:String>
+    <s:String x:Key="Language">Ngôn ngữ</s:String>
+    <s:String x:Key="TemporaryFiles">Các tệp tạm thời</s:String>
+    <s:String x:Key="Extras">Mục bổ sung</s:String>
+    <s:String x:Key="Clouds">Dịch vụ tải lên</s:String>
+    <s:String x:Key="Donate">Quyên góp</s:String>
+    <s:String x:Key="About">Giới thiệu</s:String>
+    
+    <s:String x:Key="Application.ScreenRecorder">Quay màn hình</s:String>
+    <s:String x:Key="Application.ScreenRecorder.RecordMouse">Hiển thị con trỏ chuột trong khi đang quay.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.RecordClicks">Phát hiện click chuột.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">Lựa chọn màu sắc con trỏ chuột</s:String>
+    <s:String x:Key="Application.ScreenRecorder.PreStart">Sử dụng đếm ngược trước khi bắt đầu.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.PreStart.Info">(vài giây, chờ trước khi bắt đầu quay)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.StepRecording">Cho phép chế độ chụp ảnh nhanh.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Mỗi khung hình sẽ được chụp thủ công bởi bạn)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Tỉ lệ khung hình cố định.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Làm chậm ổn định mà không thay đổi dịch chuyển chậm khi quay)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Cho phép quay không đồng thời.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(Điều này giúp giảm lag giữa các mặt phân cách khi quay)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.NewRecorder">Cho phép giao diện quay mới.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(Điều này sẽ thay thế giao diện quay cũ)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.Magnifier">Cho phép phóng to màn hình.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(Điều này cho phép 1 kính lúp trong khi chọn 1 vùng đang quay)</s:String>
+    
+    <s:String x:Key="Application.Other">Khác</s:String>
+    <s:String x:Key="Application.Other.SystemTray">Hiển thị ứng dụng ở khay hệ thống (Khu vực thông báo).</s:String>
+    <s:String x:Key="Application.Other.LeaveOpen">Giữ ứng dụng mở ngay cả khi tất cả các cửa sổ bị đóng.</s:String>
+    <s:String x:Key="Application.Other.NotifyFrameDeletion">Hỏi tôi trước khi xóa các khung hình.</s:String>
+    <s:String x:Key="Application.Other.NotifyProjectDiscard">Hỏi tôi trước khi hủy bỏ kế hoạch.</s:String>
+    <s:String x:Key="Application.Other.NotifyWhileClosingEditor">Hỏi tôi trước khi đóng chỉnh sửa (nếu có 1 dự án đang mở).</s:String>
+    <s:String x:Key="Application.Other.NotifyWhileClosingApp">Hỏi tôi trước khi đóng ứng dụng (Thông qua lệnh 'Thoát').</s:String>
+    <s:String x:Key="Application.Other.DrawOutlineOutside">Vẽ đường bao ngoài của phụ đề bên ngoài các chữ cái.</s:String>
+    <s:String x:Key="Application.Other.DisableHardwareAcceleration">Loại bỏ tăng tốc phần cứng.</s:String>
+    <s:String x:Key="Application.Other.CheckForTranslationUpdates">Kiểm tra cập nhật bản dịch.</s:String>
+    <s:String x:Key="Application.Other.CheckForUpdates">Kiểm tra cập nhật.</s:String>
+    <s:String x:Key="S.Application.Other.Homepage">Trang chủ:</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.StartUp">Cửa sổ khởi động</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Recorder">Quay màn hình</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Webcam">Ghi hình webcam</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Board">Bảng ghi</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Editor">Cửa sổ chỉnh sửa</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Minimized">Thu nhỏ xuống (khay hệ thống)</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Info">(Nó điều khiển cách ứng dụng mở. Khi bắt đầu thu nhỏ, biểu tượng ở khay hệ thống sẽ hiện lên)</s:String>
+    
+    <s:String x:Key="S.AutomatedTasks.Title">Tự động hóa nhiệm vụ</s:String>
+    <s:String x:Key="S.AutomatedTasks.List">Danh sách các nhiệm vụ tự động</s:String>
+    <s:String x:Key="S.AutomatedTasks.List.Task">Nhiệm vụ</s:String>
+    <s:String x:Key="S.AutomatedTasks.List.Details">Các chi tiết</s:String>
+    <s:String x:Key="S.AutomatedTasks.SelectType">(Chọn 1 nhiệm vụ)</s:String>
+    <s:String x:Key="S.AutomatedTasks.Info">Các nhiệm vụ này được thực thi tuần tự từ đầu đến cuối danh sách.&#10;Nó xảy ra khi bạn lần đầu mở 1 dự án sử dụng trình chỉnh sửa.</s:String>
+    
+    <s:String x:Key="Interface.Theme">Chủ đề ứng dụng</s:String>
+    <s:String x:Key="Interface.Theme.Scheme">Sơ đồ màu</s:String>
+    <s:String x:Key="Interface.EditorBackground">Chỉnh sửa dưới nền</s:String>
+    <s:String x:Key="Interface.Recorder">Chủ đề máy quay</s:String>
+    <s:String x:Key="Interface.Background">Nền</s:String>
+    <s:String x:Key="Interface.Foreground">Ưu tiên</s:String>
+    <s:String x:Key="Interface.BoardBackground">Bảng ghi dưới nền</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.VeryLight">Rất sáng</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Light">Sáng</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Medium">Bình thường</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Dark">Tối</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.VeryDark">Rất tối</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.Custom">Tùy chỉnh</s:String>
+    
+    <s:String x:Key="Interface.EditorBackground.GridSize">Kích thước lưới</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.VerySmall">Rất nhỏ</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.Small">Nhỏ</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.Medium">Bình thường</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.Large">Rộng</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.VeryLarge">Rất rộng</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.ILikeBigSquares">Tôi thích hình vuông lớn</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.ImBlind">Tôi không biết</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.Custom">Tùy chỉnh</s:String>
+
+    <s:String x:Key="Interface.EditorBackground.BaseColor">Màu cơ bản</s:String>
+    <s:String x:Key="Interface.EditorBackground.EvenColor">Màu chẵn</s:String>
+    <s:String x:Key="Interface.EditorBackground.OddColor">Màu lẻ</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.Height">Cao</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.Width">Rộng</s:String>
+    <s:String x:Key="Interface.EditorBackground.GridSize.Apply">Áp dụng</s:String>
+
+    <s:String x:Key="Interface.Other">Khác</s:String>
+    <s:String x:Key="Interface.Other.ExtendChrome">Mở rộng thanh tiêu đề (cửa sổ chrome).</s:String>
+    <s:String x:Key="Interface.Other.HideTitleBar">Ẩn thanh tiêu đề (chế độ mờ).</s:String>
+    <s:String x:Key="Interface.Other.TripleClickSelection">Cho phép 3 click chuột để lựa chọn văn bản.</s:String>
+    <s:String x:Key="Interface.Other.AutomaticallySizeOnContent">Tự động điều chỉnh kích thước cửa sổ dựa trên kích thước khung hình, ngay sau khi nạp.</s:String>
+    <s:String x:Key="Interface.Other.AutomaticallyFitImage">Tự động điều chỉnh thu phóng khung hình dựa trên kích thước cửa sổ, ngay sau khi nạp.</s:String>
+  
+    <s:String x:Key="S.Shortcuts.Global">Toàn thể</s:String>
+    <s:String x:Key="S.Shortcuts.Global.ScreenRecorder">Quay màn hình:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.ScreenRecorder.Info">(Mở quay màn hình mặc định)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.WebcamRecorder">Ghi hình webcam:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.WebcamRecorder.Info">(Mở ghi hình webcam)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.BoardRecorder">Bảng ghi:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.BoardRecorder.Info">(Mở bảng ghi, bạn có thể quay những gì mình vẽ)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenEditor">Chỉnh sửa:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenEditor.Info">(Mở cửa sổ chỉnh sửa khác)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenOptions">Các tùy chọn:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.OpenOptions.Info">(Mở cửa sổ các tùy chọn. Bạn chỉ có thể mở 1 cửa sổ 1 lần)</s:String>
+    <s:String x:Key="S.Shortcuts.Global.Exit">Thoát:</s:String>
+    <s:String x:Key="S.Shortcuts.Global.Exit.Info">(Đóng tất cả cửa sổ và loại bỏ ứng dụng ở khay hệ thống)</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders">Quay</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.StartPause">Bắt đầu/Tạm dừng:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.StartPause.Info">(Điều này bắt đầu hoặc dừng quay. Nó được dùng để chụp màn hình nhanh nếu chế độ chụp màn hình nhanh được kích hoạt)</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Stop">Dừng:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Stop.Info">(Điều này dừng quay và mở chỉnh sửa)</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Discard">Hủy:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Discard.Info">(Hủy bỏ kích hoạt quay, khi nó được tạm dừng)</s:String>
+    <s:String x:Key="S.Shortcuts.Info">Click để thiết lập phím mong muốn, khi nhấn các phím muốn có hoặc chỉnh sửa.&#10;Một vài phím bao gồm không được phép.</s:String>
+    
+    <s:String x:Key="Language.AppLanguage">Ngôn ngữ của ứng dụng</s:String>
+    <s:String x:Key="Language.AppLanguage.AutoDetect">Tự nhận diện</s:String>
+    <s:String x:Key="Language.AppLanguage.AutoDetect.Author">Ngôn ngữ hiện thời của hệ điều hành (nếu sẵn có)</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence1.1">Bạn có muốn dịch ứng dụng của tôi không?</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence1.2">Click vào đây để đọc hướng dẫn dịch và tải về ứng dụng trình biên dịch.</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence2.1">Sau đó,</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence2.2">click vào đây để nhập vào</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence2.3">và kiểm tra bản dịch của bạn.</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence3.1">Gửi cho tôi thông qua</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence3.2">email (nicke@outlook.com.br)</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.Sentence3.3">khi bạn kết thúc bản dịch.</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.ResourceLink.Tooltip">Click để mở trang web với hướng dẫn dịch.</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.ImportLink.Tooltip">Mở trang nhập vào</s:String>
+    <s:String x:Key="Language.AppLanguage.Translate.EmailLink.Tooltip">Mở ứng dụng email của bạn</s:String>
+    
+    <s:String x:Key="TempFiles.FilesAndFolders">Các tệp tạm thời và thư mục</s:String>
+    <s:String x:Key="TempFiles.FilesAndFolders.Count">{0} thư mục và {1} tệp</s:String>
+    <s:String x:Key="TempFiles.FilesAndFolders.None">Không thư mục hoặc tệp nào được phát hiện</s:String>
+    <s:String x:Key="TempFiles.OpenFolder">Truy cập thư mục</s:String>
+    <s:String x:Key="TempFiles.Clear">Xóa thư mục Temp.</s:String>
+    <s:String x:Key="TempFiles.LogsLocation">Các thư mục nhật kí</s:String>
+    <s:String x:Key="TempFiles.LogsLocation.Choose">Chọn vị trí cho tệp nhật kí ghi lỗi</s:String>
+    <s:String x:Key="TempFiles.Location">Thư mục vị trí</s:String>
+    <s:String x:Key="TempFiles.Location.Choose">Chọn vị trí cho các tệp tạm thời</s:String>
+    <s:String x:Key="TempFiles.Settings">Các cài đặt vị trí</s:String>
+    <s:String x:Key="TempFiles.AppDataPath">AppData:</s:String>
+    <s:String x:Key="TempFiles.LocalPath">Local:</s:String>
+    <s:String x:Key="TempFiles.NotExists">Tệp không tồn tại</s:String>
+    <s:String x:Key="TempFiles.CreateSettings">Tạo một thiết lập tệp địa phương trống</s:String>
+    <s:String x:Key="TempFiles.RemoveSettings">Loại bỏ các tệp cài đặt.</s:String>
+    <s:String x:Key="TempFiles.OpenSettingsFolder">Mở thư mục nơi chứa tệp cài đặt.&#x0d;Giữ Ctrl trong khi click vào để mở tệp, nếu có thể.</s:String>
+    <s:String x:Key="TempFiles.SettingsInfo">• Các cài đặt nạp mẫu: Mặc định ◄ AppData ◄ Local.&#x0d;• Nếu không có các cài đặt tệp hiện thời ở thư mục Local, ứng dụng sẽ tìm trong thư mục AppData, Mặc định được sử dụng nếu không có các cài đặt tệp hiện tại.&#x0d;• Nếu không có các cài đặt Local, tất cả các cài đặt lưu vào file cài đặt AppData.</s:String>
+    <s:String x:Key="TempFiles.KeepRecent">Chúng tôi nên giữ dự án gần đây?</s:String>
+    <s:String x:Key="TempFiles.KeepRecent.Info">Nếu bạn nghĩ vậy, tất cả dự án gần đây ít nhất vài ngày trước đó sẽ bị xóa.&#x0d;&#x0d;Dù sao, bất kì dự án đang mở sẽ không bị xóa.</s:String>
+    <s:String x:Key="TempFiles.AutomaticRemoval">Tự động loại bỏ các dự án cũ.</s:String>
+    <s:String x:Key="TempFiles.AutomaticRemoval.Info">Khi mở ứng dụng, 1 nhiệm vụ nền sẽ xóa bất kì dự án đã đóng lâu hơn tổng thời gian được thiết lập.</s:String>
+    <s:String x:Key="TempFiles.AutomaticRemovalDays.Info">(trong các ngày, bất kì dự án đã đóng cũ hơn dự án này sẽ bị xóa/hủy bỏ sau khi đang mở ứng dụng)</s:String>
+    <s:String x:Key="TempFiles.LowSpace">Không gian lưu trữ ít trên ổ đĩa đã chọn. Vui lòng xóa thư mục tạm hoặc thay đổi vị trí lưu trữ.</s:String>
+    
+    <s:String x:Key="S.Upload.Proxy">Proxy</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode">Chế độ:</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.Disabled">Bất hoạt</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.Manual">Thủ công</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.System">Hệ thống</s:String>
+    <s:String x:Key="S.Upload.Proxy.Mode.System.Info">(Sử dụng proxy hệ thống)</s:String>
+    <s:String x:Key="S.Upload.Proxy.Host">Host:</s:String>
+    <s:String x:Key="S.Upload.Proxy.Port">Cổng:</s:String>
+    <s:String x:Key="S.Upload.Proxy.User">Tài khoản:</s:String>
+    <s:String x:Key="S.Upload.Proxy.Password">Mật khẩu:</s:String>
+    <s:String x:Key="S.Upload.Get">Nhận thẻ OAuth</s:String>
+    <s:String x:Key="S.Upload.PasteToken">Dán thẻ được cho phép tại đây</s:String>
+    <s:String x:Key="S.Upload.Authorize">Cho phép</s:String>
+    <s:String x:Key="S.Upload.Refresh">Làm mới</s:String>
+    <s:String x:Key="S.Upload.Clear">Xóa</s:String>
+    <s:String x:Key="S.Upload.Imgur.Anonymous">Imgur (Khuyết danh)</s:String>
+    <s:String x:Key="S.Upload.Imgur.Direct">Sử dụng liên kết trực tiếp.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Gifv">Nhận các liên kết với tiện ích Gifv thay vì Gif.</s:String>
+    <s:String x:Key="S.Upload.Imgur.ToAlbum">Tải lên gifs tới 1 album được chọn.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Album">Album:</s:String>
+    <s:String x:Key="S.Upload.Imgur.AskMe">Hỏi tôi trước khi tải lên</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.NotPossible">Không thể mở trang để nhận thẻ ủy quyền Imgur.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.Missing">Để đặt trước cho phép của ứng dụng này, bạn cần cung cấp đầy đủ thẻ ủy quyền.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.Completed">Cho phép Imgur hoàn tất.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Auth.Error">Ủy quyền Imgur thất bại. Thử lại sau vài giây hoặc nhận thẻ mới.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Refresh.None">Để làm mới cho phép cho ứng dụng này, bạn cần trước tiên kết thúc thực thi cho phép.</s:String>
+    <s:String x:Key="S.Upload.Imgur.NotAuthorized">Không được cho phép.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Expired">Cho phép hết hạn trong {0}.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Valid">Cho phép không hợp lệ cho tới khi {0}.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Removed">Ủy quyền Imgur bị loại bỏ.</s:String>
+    <s:String x:Key="S.Upload.Imgur.Error.AlbumLoad">Không thể nạp danh sách album.</s:String>
+    <s:String x:Key="S.Upload.Gfycat.Anonymous">Gfycat (Khuyết danh)</s:String>
+    <s:String x:Key="S.Upload.Yandex.Token">Thẻ OAuth:</s:String>
+    <s:String x:Key="S.Upload.Pick.Destination">Chọn 1 điểm đến</s:String>
+    <s:String x:Key="S.Upload.Pick.Album">Chọn 1 album (tùy chọn)</s:String>
+    <s:String x:Key="S.Upload.Pick.Album.Info">Nếu bạn muốn, bạn có thể chọn điểm đến là một album:</s:String>
+    
+    <s:String x:Key="Extras.External">Các công cụ có sẵn bên ngoài</s:String>
+    <s:String x:Key="Extras.Download">Click vào đây để tải về&#x0d;{0}</s:String>
+    <s:String x:Key="Extras.Downloading">Đang tải về...</s:String>
+    <s:String x:Key="Extras.Ready">Đã tải về&#x0d;{0}</s:String>
+    <s:String x:Key="Extras.Ready.Info">Click vào đây để mở các thuộc tính của tệp.</s:String>
+    <s:String x:Key="S.Extras.DownloadRestriction">Các ứng dụng được cung cấp bởi cửa hàng Microsoft không thể tải về các ứng dụng khác. Bạn sẽ phải tải về nó thủ công.</s:String>
+    <s:String x:Key="Extras.FfmpegLocation">Vị trí FFmpeg</s:String>
+    <s:String x:Key="Extras.FfmpegLocation.Select">Chọn vị trí của thực hiện FFmpeg</s:String>
+    <s:String x:Key="Extras.FfmpegLocation.Invalid">Đường dẫn của thực hiện FFMpeg chứa một hoặc nhiều kí tự không hợp lệ. Vui lòng chọn 1 vị trí hợp lệ để có thể thực hiện được.</s:String>
+    <s:String x:Key="Extras.GifskiLocation">Vị trí Gifski</s:String>
+    <s:String x:Key="Extras.GifskiLocation.Select">Chọn vị trí của thực hiện Gifski</s:String>
+    <s:String x:Key="Extras.GifskiLocation.Invalid">Đường dẫn của thực hiện Gifski chứa một hoặc nhiều kí tự không hợp lệ. Vui lòng chọn 1 vị trí hợp lệ để có thể thực hiện được.</s:String>
+    <s:String x:Key="Extras.License.Ffmpeg">Giấy phép FFmpeg</s:String>
+    <s:String x:Key="Extras.License.Gifski">Giấy phép Gifski</s:String>
+
+    <s:String x:Key="Donate.IfYouWish">Nếu bạn muốn cảm ơn tôi :D</s:String>
+    <s:String x:Key="Donate.DonateDollar">Quyên góp (US$)</s:String>
+    <s:String x:Key="Donate.DonateEuro">Quyên góp (€)</s:String>
+    <s:String x:Key="Donate.Donate">Quyên góp</s:String>
+    <s:String x:Key="Donate.Paypal.Dollar">Mở trang web Paypal. Chọn tiền tệ: Dollar</s:String>
+    <s:String x:Key="Donate.Paypal.Euro">Mở trang web Paypal. Chọn tiền tệ: Euro</s:String>
+    <s:String x:Key="Donate.Paypal.OwnCurrency">Mở trang web Paypal. Bạn phải chọn loại tiền tệ.</s:String>
+    <s:String x:Key="Donate.Patreon">Click vào đây để mở trang Patreon.</s:String>
+    <s:String x:Key="Donate.Steam.Link">Click vào đây để mở danh sách trang Steam mong muốn.</s:String>
+    <s:String x:Key="Donate.Steam.Text">Bạn có thể gửi các trò chơi điện tử thay cho quà.</s:String>
+    <s:String x:Key="Donate.Crypto">Tiền mã hóa</s:String>
+
+    <s:String x:Key="About.Version">Phiên bản:</s:String>
+    <s:String x:Key="About.Author">Tác giả: Nicke Manarin</s:String>
+    <s:String x:Key="S.About.StoreVersion">Phiên bản cửa hàng Microsoft. Một vài tính năng không hoạt động do chính sách bắt buộc.</s:String>
+    <s:String x:Key="About.Contact">Liên hệ</s:String>
+    <s:String x:Key="S.About.Contact.Discord">Vào máy chủ</s:String>
+    <s:String x:Key="S.About.Contact.Facebook">Ghé thăm trang</s:String>
+    <s:String x:Key="S.About.Contact.Gitter">Vào phòng</s:String>
+    <s:String x:Key="About.Technical">Kỹ thuật</s:String>
+    <s:String x:Key="About.Technical.License">Bản quyền:</s:String>
+    <s:String x:Key="About.Technical.Free">(Đây là ứng dụng miễn phí hoàn toàn)</s:String>
+    <s:String x:Key="About.Technical.SourceCode">Mã nguồn:</s:String>
+    <s:String x:Key="About.ABigThanksTo">Trân trọng cảm ơn</s:String>
+    <s:String x:Key="About.ABigThanksTo.Everyone">Tất cả mọi người ủng hộ tôi, những người đã gửi phản hồi và quyên góp.</s:String>
+    
+    <!--Localization-->
+    <s:String x:Key="Localization">Định vị</s:String>
+    <s:String x:Key="Localization.ResourcePositionUsed">Nguồn tài nguyên cuối hiện thời đang được sử dụng.</s:String>
+    <s:String x:Key="Localization.MoveRosourcePosition">Để áp dụng nguồn tài nguyên tùy chỉnh, di chuyển nó đến cuối danh sách.</s:String>
+
+    <!--Recorder-->
+    <s:String x:Key="Recorder.RecordingOptions">Các tùy chọn quay:</s:String>
+    <s:String x:Key="Recorder.Snapshot">Chế độ chụp ảnh nhanh</s:String>
+    <s:String x:Key="Recorder.ThinMode">Ẩn thanh tiêu đề</s:String>
+    <s:String x:Key="Recorder.Fullscreen">Chế độ toàn màn hình</s:String>
+
+    <s:String x:Key="Recorder.Record">Quay</s:String>
+    <s:String x:Key="Recorder.Pause">Tạm dừng</s:String>
+    <s:String x:Key="Recorder.Continue">Tiếp tục</s:String>
+    <s:String x:Key="Recorder.Stop">Dừng</s:String>
+    <s:String x:Key="Recorder.Discard">Hủy bỏ</s:String>
+    <s:String x:Key="Recorder.Snap">Chụp</s:String>
+    <s:String x:Key="Recorder.Height">Chiều cao</s:String>
+    <s:String x:Key="Recorder.Width">Chiều rộng</s:String>
+    <s:String x:Key="Recorder.Fps">Tối đa khung hình/giây</s:String>
+    <s:String x:Key="Recorder.Fps.Short">khung hình/giây</s:String>
+    <s:String x:Key="Recorder.FpsRange">Tối thiểu đến tối đa khung hình/giây: 1-60 khung hình/giây</s:String>
+    <s:String x:Key="Recorder.SnapToWindow">Chụp cửa sổ (Rê và thả chuột để chụp)</s:String>
+    <s:String x:Key="Recorder.PreStart">Bắt đầu trước</s:String>
+    <s:String x:Key="Recorder.Paused">ScreenToGif (Dừng hẳn)</s:String>
+    
+    <!--New Recorder-->
+    <s:String x:Key="S.Recorder.Area">Vùng</s:String>
+    <s:String x:Key="S.Recorder.Window">Cửa sổ</s:String>
+    <s:String x:Key="S.Recorder.Screen">Màn hình</s:String>
+    <s:String x:Key="S.Recorder.Accept">Chấp nhận</s:String>
+    <s:String x:Key="S.Recorder.Retry">Thử lại</s:String>
+    <s:String x:Key="S.Recorder.CancelSelection">(Esc) Thoát khỏi vùng lựa chọn</s:String>
+    <s:String x:Key="S.Recorder.SelectArea">Click và rê chuột để chọn 1 vùng của màn hình này</s:String>
+    <s:String x:Key="S.Recorder.SelectArea.Embedded">Click và rê chuột để chọn 1 vùng</s:String>
+    <s:String x:Key="S.Recorder.SelectWindow">Click vào đây để chọn cửa sổ này</s:String>
+    <s:String x:Key="S.Recorder.SelectScreen">Click vào đây để chọn màn hình này</s:String>
+    
+    <s:String x:Key="S.Recorder.EscToCancel">Nhấn Esc để thoát</s:String>
+    
+    <!--Webcam Recorder-->
+    <s:String x:Key="Webcam.Title">ScreenToGif - Ghi hình webcam</s:String>
+    <s:String x:Key="Webcam.NoVideo">Không có thiết bị ghi hình được tìm thấy :(</s:String>
+    <s:String x:Key="Webcam.CheckVideoDevices">Kiểm tra thiết bị ghi hình.</s:String>
+    <s:String x:Key="Webcam.Scale">Thu phóng: {0:0.##}x</s:String>
+    <s:String x:Key="Webcam.ChangeScale">Thay đổi tỉ lệ của video.</s:String>
+    
+    <!--Board Recorder-->
+    <s:String x:Key="Board.Title">ScreenToGif - Bảng ghi</s:String>
+    <s:String x:Key="Board.AutoRecord">Quay tự động</s:String>
+    <s:String x:Key="Board.AutoRecordToolTip">Cho phép quay trong khi đang vẽ</s:String>
+    <s:String x:Key="Board.CtrlHold">[Giữ] Ctrl </s:String>
+    
+    <!--Color Selector-->
+    <s:String x:Key="ColorSelector.Title">Chọn màu sắc</s:String>
+    <s:String x:Key="ColorSelector.Select">Lựa chọn 1 màu sắc</s:String>
+    <s:String x:Key="ColorSelector.Red">Đỏ</s:String>
+    <s:String x:Key="ColorSelector.Green">Xanh lá cây</s:String>
+    <s:String x:Key="ColorSelector.Blue">Xanh da trời</s:String>
+    <s:String x:Key="ColorSelector.Alpha">Tổ hợp Alpha</s:String>
+    <s:String x:Key="ColorSelector.Hexadecimal">Mã Hex</s:String>
+    <s:String x:Key="ColorSelector.Initial">Màu sắc ban đầu</s:String>
+    <s:String x:Key="ColorSelector.Current">Màu sắc hiện tại</s:String>
+    <s:String x:Key="ColorSelector.Latest">Màu sắc cuối cùng</s:String>
+    
+    <!--Exception Viewer, Optional-->
+    <s:String x:Key="ExceptionViewer.Title">Ngoại trừ trình xem</s:String>
+    <s:String x:Key="ExceptionViewer.OpenInner">Mở ngoại lệ bên trong</s:String>
+    <s:String x:Key="ErrorDialog.Observation">Vài lỗi sai đã xảy ra.</s:String>
+    <s:String x:Key="ErrorDialog.Send">Gửi thông báo</s:String>
+
+    <!--Insert Frames-->
+    <s:String x:Key="InsertFrames.Title">Chèn khung hình</s:String>
+    <s:String x:Key="InsertFrames.Info">Cả 2 chiều sẽ có cùng kích thước, cửa sổ này cho phép bạn đặt lại vị trí và thay đổi kích thước của ảnh và khung. Click để chọn và thay đổi kích thước</s:String>
+    <s:String x:Key="InsertFrames.CanvasSize">Kích thước khung ảnh:</s:String>
+    <s:String x:Key="InsertFrames.FitCanvas">Làm vừa ảnh trong các khung</s:String>
+    <s:String x:Key="InsertFrames.FitCanvas.Info">Thay đổi kích thước khung để vừa với cả các ảnh bên trong (từ góc trên bên trái).</s:String>
+    <s:String x:Key="InsertFrames.DifferentSizes">Có sự khác nhau giữa các kích thước của khung. Bạn cần giải quyết nó trước khi chèn các khung.</s:String>
+    <s:String x:Key="InsertFrames.InsertedFrames">Các khung hình mới</s:String>
+    <s:String x:Key="InsertFrames.CurrentFrames">Các khung hình hiện tại</s:String>
+    <s:String x:Key="InsertFrames.ImageSize">Kích thước ảnh:</s:String>
+    <s:String x:Key="InsertFrames.ImagePosition">Vị trí ảnh:</s:String>
+    <s:String x:Key="InsertFrames.ResetImageSizePosition">Đặt lại kích thước hình ảnh&#x0d;và vị trí</s:String>
+    <s:String x:Key="InsertFrames.Info2">Các khung hình mới sẽ được chèn vào vị trí hiện thời của danh sách khung hình:</s:String>
+    <s:String x:Key="InsertFrames.Before">Trước</s:String>
+    <s:String x:Key="InsertFrames.After">Sau</s:String>
+    <s:String x:Key="InsertFrames.Importing">Đang nhập</s:String>
+    <s:String x:Key="InsertFrames.SelectColorFill">Lựa chọn bức vẽ đầy màu</s:String>
+
+    <!--Import Frames From Video-->
+    <s:String x:Key="ImportVideo.Title">Nhập các khung hình từ Video</s:String>
+    <s:String x:Key="ImportVideo.Loading">Đang nạp...</s:String>
+    <s:String x:Key="ImportVideo.Scale">Tỉ lệ:</s:String>
+    <s:String x:Key="ImportVideo.Size">Kích thước:</s:String>
+    <s:String x:Key="ImportVideo.Height">Chiều cao:</s:String>
+    <s:String x:Key="ImportVideo.Width">Chiều rộng:</s:String>
+    <s:String x:Key="ImportVideo.Framerate">Tỉ lệ khung hình:</s:String>
+    <s:String x:Key="ImportVideo.Fps">Khung hình/giây</s:String>
+    <s:String x:Key="ImportVideo.Start">Bắt đầu:</s:String>
+    <s:String x:Key="ImportVideo.End">Kết thúc:</s:String>
+    <s:String x:Key="ImportVideo.Selection">Vùng lựa chọn:</s:String>
+    <s:String x:Key="ImportVideo.Frames">Các khung hình:</s:String>
+    <s:String x:Key="ImportVideo.Duration">Thời gian:</s:String>
+    
+    <!--Encoder-->
+    <s:String x:Key="Encoder.Title">Mã hóa</s:String>
+    <s:String x:Key="Encoder.ClearAllCompleted">Xóa tất cả đã hoàn thành</s:String>
+    <s:String x:Key="Encoder.Starting">Bắt đầu</s:String>
+    <s:String x:Key="Encoder.Completed">Đã hoàn thành</s:String>
+    <s:String x:Key="Encoder.Completed.Clipboard">Đã sao chép vào bộ nhớ đệm</s:String>
+    <s:String x:Key="Encoder.Completed.Clipboard.Fail">Thất bại khi sao chép</s:String>
+    <s:String x:Key="Encoder.Completed.Command">Đã thực hiện lệnh</s:String>
+    <s:String x:Key="Encoder.Completed.Command.Output">Hiển thị kết quả của các lệnh.</s:String>
+    <s:String x:Key="Encoder.Completed.Command.Fail">Thất bại khi thực hiện lệnh</s:String>
+    <s:String x:Key="Encoder.Completed.Upload.Fail">Thất bị khi tải lên</s:String>
+    <s:String x:Key="Encoder.Completed.Upload.Delete">Ctrl + Click chuột để mở trang xóa hình ảnh (nếu có).</s:String>
+    <s:String x:Key="Encoder.FileDeletedMoved">Tệp bị xóa hoặc di chuyển</s:String>
+    <s:String x:Key="Encoder.Canceled">Đã hủy bỏ</s:String>
+    <s:String x:Key="Encoder.Error">Lỗi</s:String>
+    <s:String x:Key="Encoder.Error.Info">Click vào đây để hiển thị các chi tiết của lỗi này.</s:String>
+    <s:String x:Key="Encoder.Uploading">Tải lên</s:String>
+    <s:String x:Key="Encoder.Executing">Thực hiện các lệnh</s:String>
+    <s:String x:Key="Encoder.Processing">Tiến hành {0}</s:String>
+    <s:String x:Key="Encoder.Analyzing">Phân tích không thay đổi các điểm ảnh</s:String>
+    <s:String x:Key="Encoder.OpenFile">Mở tệp</s:String>
+    <s:String x:Key="Encoder.ExploreFolder">Truy cập thư mục</s:String>
+    <s:String x:Key="Encoder.Remove">Loại bỏ từ danh sách</s:String>
+    <s:String x:Key="Encoder.Details">Hiển thị các chi tiết</s:String>
+    <s:String x:Key="Encoder.Copy.Image">Sao chép như ảnh</s:String>
+    <s:String x:Key="Encoder.Copy.Filename">Sao chép tên tệp</s:String>
+    <s:String x:Key="Encoder.Copy.Folder">Sao chép đường dẫn thư mục</s:String>
+    <s:String x:Key="Encoder.Copy.Link">Sao chép liên kết</s:String>
+
+    <!--Command output-->
+    <s:String x:Key="Command.Title">ScreenToGif - Thoát lệnh</s:String>
+    <s:String x:Key="Command.Header">Thoát lệnh</s:String>
+    
+    <!--Notifications-->
+    <s:String x:Key="S.Notifications">Các thông báo</s:String>
+    <s:String x:Key="S.Notifications.Dismiss">Bỏ qua tất cả thông báo</s:String>
+    
+    <!--Editor-->
+    <s:String x:Key="Editor.Title">ScreenToGif - Chỉnh sửa</s:String>
+    <s:String x:Key="Editor.File">Tệp</s:String>
+    <s:String x:Key="Editor.Home">Trang chính</s:String>
+    <s:String x:Key="Editor.Playback">Phát lại</s:String>
+    <s:String x:Key="Editor.Edit">Chỉnh sửa</s:String>
+    <s:String x:Key="Editor.Image">Hình ảnh</s:String>
+    <s:String x:Key="Editor.Transitions">Các chuyển tiếp</s:String>
+    <s:String x:Key="Editor.Statistics">Các thống kê</s:String>
+    <s:String x:Key="Editor.Options">Các tùy chọn</s:String>
+    
+    <s:String x:Key="S.Editor.Extras">Mục bổ sung</s:String>
+    
+    <!--Welcome-->
+    <s:String x:Key="Welcome.New">Đi tới "Tệp > Mới" để bắt đầu 1 quay màn hình mới</s:String>
+    <s:String x:Key="Welcome.Import">Kéo và thả hình ảnh, video hoặc các dự án để nhập vào</s:String>
+    <s:String x:Key="Welcome.ThankYou">Cám ơn bạn nhiều vì đã sử dụng ứng dụng của tôi!</s:String>
+    <s:String x:Key="Welcome.Size">Tỉ lệ khung hình thấp hơn, tính toán màu sắc hoặc số lượng thay đổi giữa các khung hình càng bé hơn</s:String>
+    <s:String x:Key="Welcome.Contact">Bạn muốn trò chuyện? Mở "Các tùy chọn > Giới thiệu" để chọn các hình thức liên lạc</s:String>
+    <s:String x:Key="Welcome.Trouble">Gặp vấn đề? Liên hệ với tôi thông qua công cụ phản hồi</s:String>
+    <s:String x:Key="Welcome.NewRecorder">Bạn muốn thử quay màn hình mới? Đi đến "Tùy chọn > Ứng dụng" để kích hoạt.</s:String>
+    
+    <!--File • New-->
+    <s:String x:Key="Editor.File.New.Recording">Quay màn hình</s:String>
+    <s:String x:Key="Editor.File.New.Webcam">Ghi hình&#x0d;webcam</s:String>
+    <s:String x:Key="Editor.File.New.Board">Ghi hình&#x0d;bảng</s:String>
+    <s:String x:Key="Editor.File.Blank">Dự án&#x0d;trắng</s:String>
+    <s:String x:Key="Editor.File.New">Mới</s:String>
+    
+    <!--File • Insert-->
+    <s:String x:Key="Editor.File.Insert.Recording">Quay màn hình</s:String>
+    <s:String x:Key="Editor.File.Insert.Webcam">Ghi hình&#x0d;webcam</s:String>
+    <s:String x:Key="Editor.File.Insert.Board">Ghi hình&#x0d;bảng</s:String>
+    <s:String x:Key="Editor.File.Insert.Media">Phương tiện</s:String>
+    <s:String x:Key="Editor.File.Insert">Chèn</s:String>
+    
+    <!--File • Save/Discard-->
+    <s:String x:Key="Editor.File.Save">Lưu mới</s:String>
+    <s:String x:Key="Editor.File.Load">Nạp</s:String>
+    <s:String x:Key="Editor.File.LoadRecent">Các dự án&#x0d;gần đây</s:String>
+    <s:String x:Key="Editor.File.SaveProject">Lưu mới&#x0d;dự án</s:String>
+    <s:String x:Key="Editor.File.Discard">Hủy bỏ&#x0d;dự án</s:String>
+    
+    <!--Home • Action Stack-->
+    <s:String x:Key="Editor.Home.ActionStack">Hành động xếp</s:String>
+    <s:String x:Key="Editor.Home.Undo">Hủy</s:String>
+    <s:String x:Key="Editor.Home.Redo">Thực hiện lại</s:String>
+    <s:String x:Key="Editor.Home.Reset">Thiết lập lại</s:String>
+    
+    <!--Home • Clipboard-->
+    <s:String x:Key="Editor.Home.Clipboard">Bộ nhớ đệm</s:String>
+    <s:String x:Key="Editor.Home.Clipboard.Show">Hiển thị bộ nhớ đệm</s:String>
+    <s:String x:Key="Editor.Home.Paste">Dán</s:String>
+    <s:String x:Key="Editor.Home.Cut">Cắt</s:String>
+    <s:String x:Key="Editor.Home.Copy">Sao chép</s:String>
+    
+    <!--Home • Zoom-->
+    <s:String x:Key="Editor.Home.Zoom">Thu phóng</s:String>
+    <s:String x:Key="Editor.Home.SizeToContent">Điều chỉnh&#x0d;nội dung</s:String>
+    <s:String x:Key="Editor.Home.FitImage">Làm vừa hình ảnh</s:String>
+    
+    <!--Home • Select-->
+    <s:String x:Key="Editor.Home.Select">Chọn</s:String>
+    <s:String x:Key="Editor.Home.SelectAll">Chọn&#x0d;tất cả</s:String>
+    <s:String x:Key="Editor.Home.GoTo">Đi tới</s:String>
+    <s:String x:Key="Editor.Home.Inverse">Đảo ngược</s:String>
+    <s:String x:Key="Editor.Home.Deselect">Bỏ chọn</s:String>
+    
+    <!--Playback • Playback-->
+    <s:String x:Key="Editor.Playback.Playback">Phát lại</s:String>
+    <s:String x:Key="Editor.Playback.First">Đầu</s:String>
+    <s:String x:Key="Editor.Playback.Previous">Trước</s:String>
+    <s:String x:Key="Editor.Playback.Play">Phát</s:String>
+    <s:String x:Key="Editor.Playback.Pause">Tạm dừng</s:String>
+    <s:String x:Key="Editor.Playback.Next">Tiếp theo</s:String>
+    <s:String x:Key="Editor.Playback.Last">Cuối</s:String>
+    
+    <!--Edit • Frames-->  
+    <s:String x:Key="Editor.Edit.Frames">Các khung hình</s:String>
+    <s:String x:Key="Editor.Edit.Delete">Xóa</s:String>
+    <s:String x:Key="Editor.Edit.Frames.Duplicates">Loại bỏ&#x0d;Nhân đôi</s:String>
+    <s:String x:Key="Editor.Edit.Frames.Reduce">Giảm&#x0d;khung hình</s:String>
+    <s:String x:Key="Editor.Edit.DeletePrevious">Xóa tất cả trước đó</s:String>
+    <s:String x:Key="Editor.Edit.DeleteNext">Xóa tất cả sau đó</s:String>
+    
+    <!--Edit • Reordering-->
+    <s:String x:Key="Editor.Edit.Reordering">Sắp xếp lại</s:String>
+    <s:String x:Key="Editor.Edit.Reverse">Nghịch đảo</s:String>
+    <s:String x:Key="Editor.Edit.Yoyo">Yoyo</s:String>
+    <s:String x:Key="Editor.Edit.MoveLeft">Di chuyển&#x0d;sang trái</s:String>
+    <s:String x:Key="Editor.Edit.MoveRight">Di chuyển&#x0d;sang phải</s:String>
+    
+    <!--Edit • Delay/Duration-->
+    <s:String x:Key="Editor.Edit.Delay">Làm chậm (Khoảng thời gian)</s:String>
+    <s:String x:Key="Editor.Edit.Delay.Override">Ghi đè</s:String>
+    <s:String x:Key="Editor.Edit.Delay.IncreaseDecrease">Tăng hoặc&#x0d;giảm</s:String>
+    <s:String x:Key="Editor.Edit.Delay.Scale">Thu phóng</s:String>
+    
+    <!--Image • Size and Rotation-->
+    <s:String x:Key="Editor.Image.SizePosition">Kích thước và xoay</s:String>
+    <s:String x:Key="Editor.Image.Resize">Thay đổi kích cỡ</s:String>
+    <s:String x:Key="Editor.Image.Crop">Xén</s:String>
+    <s:String x:Key="Editor.Image.FlipRotate">Lật/Xoay</s:String>
+    
+    <!--Image • Text-->
+    <s:String x:Key="Editor.Image.Text">Văn bản</s:String>
+    <s:String x:Key="Editor.Image.Caption">Phụ đề</s:String>
+    <s:String x:Key="Editor.Image.FreeText">Chữ tự do</s:String>
+    <s:String x:Key="Editor.Image.TitleFrame">Tiêu đề khung</s:String>
+    <s:String x:Key="Editor.Image.KeyStrokes">Phím&#x0d;chính</s:String>
+    
+    <!--Image • Overlay-->
+    <s:String x:Key="Editor.Image.Overlay">Che phủ</s:String>
+    <s:String x:Key="Editor.Image.FreeDrawing">Vẽ&#x0d;tự do</s:String>
+    <s:String x:Key="Editor.Image.Shape">Hình dạng</s:String>
+    <s:String x:Key="Editor.Image.Clicks">Click&#x0d;chuột</s:String>
+    <s:String x:Key="Editor.Image.Watermark">Dấu mờ</s:String>
+    <s:String x:Key="Editor.Image.Cinemagraph">Cinemagraph</s:String>
+    <s:String x:Key="Editor.Image.Border">Đường viền</s:String>
+    <s:String x:Key="Editor.Image.Progress">Phát triển</s:String>
+    <s:String x:Key="Editor.Image.Obfuscate">Làm rối</s:String>
+
+    <!--Transitions • Styles-->
+    <s:String x:Key="Editor.Transitions.Styles">Các kiểu</s:String>
+    <s:String x:Key="Editor.Transitions.Fade">Mờ dần</s:String>
+    <s:String x:Key="Editor.Transitions.Slide">Trượt</s:String>
+    
+    <!--Statistics-->
+    <s:String x:Key="Editor.Statistics.General">Tổng quan</s:String>
+    <s:String x:Key="Editor.Statistics.FrameCount">Số lượng khung hình</s:String>
+    <s:String x:Key="Editor.Statistics.TotalDuration">Tổng thời gian</s:String>
+    <s:String x:Key="Editor.Statistics.FrameSize">Kích thước khung hình</s:String>
+    <s:String x:Key="Editor.Statistics.AverageDuration">Thời gian trung bình (làm chậm)</s:String>
+    <s:String x:Key="Editor.Statistics.FrameDpi">DPI và thu phóng khung hình</s:String>
+    <s:String x:Key="Editor.Statistics.SelectedFrame">Khung hình đã chọn</s:String>
+    
+    <!--TODO: Organize-->
+    <!--Editor, Continuation-->
+    <s:String x:Key="Editor.Preparing">Chuẩn bị các khung hình</s:String>
+    <s:String x:Key="Editor.InvalidLoadingFiles">Nạp không hợp lệ - Bạn không thể nạp nhiều tệp cùng 1 lúc. Thử chọn 1 tệp duy nhất.</s:String>
+    <s:String x:Key="Editor.InvalidLoadingProjects">Nạp không hợp lệ - Bạn không thể nạp nhiều dự án cùng 1 lúc. Thử chọn 1 dự án duy nhất.</s:String>
+    <s:String x:Key="Editor.OpenMediaProject">Mở 1 tập đa phương tiện (Hình ảnh hoặc Video) hoặc 1 dự án</s:String>
+    <s:String x:Key="Editor.OpenMedia">Mở 1 tập đa phương tiện (Hình ảnh hoặc Video)</s:String>
+    
+    <s:String x:Key="Editor.Clipboard.InvalidCut.Title">Hành động cắt</s:String>
+    <s:String x:Key="Editor.Clipboard.InvalidCut.Instruction">Bạn không thể cắt bỏ tất cả khung hình.</s:String>
+    <s:String x:Key="Editor.Clipboard.InvalidCut.Message">Cần ít nhất 1 khung hình để quay.</s:String>
+    
+    <s:String x:Key="Editor.DeleteAll.Title">Loại bỏ tất cả</s:String>
+    <s:String x:Key="Editor.DeleteAll.Instruction">Bạn chắc rằng muốn loại bỏ tất cả khung hình?</s:String>
+    <s:String x:Key="Editor.DeleteAll.Message">Hành động này sẽ hủy bỏ dự án đang mở hiện thời và không thể quay lại. Bạn có muốn tiếp tục?</s:String>
+    <s:String x:Key="Editor.DiscardProject.Title">Hủy bỏ dự án</s:String>
+    <s:String x:Key="Editor.DiscardProject.Instruction">Bạn chắc rằng muốn hủy bỏ dự án?</s:String>
+    <s:String x:Key="Editor.DiscardProject.Message">Hành động này sẽ hủy bỏ dự án, loại bỏ tất cả các khung hình.\n\r Bạn không thể quay lại hành động này nữa.</s:String>
+    <s:String x:Key="Editor.DiscardPreviousProject.Instruction">Bạn có muốn hủy bỏ dự án trước đó?</s:String>
+    <s:String x:Key="Editor.DiscardPreviousProject.Message">Nếu bạn chọn không làm như vậy, dự án trước đó sẽ sẵn có để mở thông qua các dự án gần đây.</s:String>
+    <s:String x:Key="Editor.DeleteFrames.Title">Xóa các khung hình</s:String>
+    <s:String x:Key="Editor.DeleteFrames.Instruction">Bạn chắc rằng mình muốn xóa?</s:String>
+    <s:String x:Key="Editor.DeleteFrames.Message">Hành động này sẽ xóa {0} frame(s).\n\ Sau này bạn sẽ không thể quay lại như trước đó.</s:String>
+    <s:String x:Key="Editor.Exiting.Title">Thoát chỉnh sửa</s:String>
+    <s:String x:Key="Editor.Exiting.Instruction">Bạn chắc rằng muốn thoát?</s:String>
+    <s:String x:Key="Editor.Exiting.Message">Dự án hiện thời bạn đang thực hiện có thể mở lại thông qua "Các dự án gần đây".</s:String>
+    <s:String x:Key="Editor.Exiting.Message2">Dự án hiện thời bạn đang thực hiện có thể mở lại thông qua "Các dự án gần đây", nhưng đừng quên sau vài ngày, chúng sẽ bị xóa tự động.</s:String>
+    
+    <s:String x:Key="Editor.Resize.Warning">Bạn phải chọn 1 giá trị khác để áp dụng hành động thay đổi kích thước.</s:String>
+    <s:String x:Key="Editor.Crop.Warning">Vùng lựa chọn để xén phải nhỏ hơn kích thước khung hình hiện tại.</s:String>
+    <s:String x:Key="Editor.Crop.Warning2">Vùng lựa chọn để xén phải lớn hơn 10x10 pixels.</s:String>
+    <s:String x:Key="Editor.Caption.WarningNoText">Không có văn bản nào được áp dụng.</s:String>
+    <s:String x:Key="Editor.Caption.WarningSelection">Bạn phải chọn ít nhất 1 khung hình để áp dụng Phụ đề vào.</s:String>
+    <s:String x:Key="Editor.FreeText.WarningSelection">Bạn phải chọn ít nhất 1 khung hình để áp dụng văn bản vào.</s:String>
+    <s:String x:Key="Editor.TitleFrame.WarningSelection">Bạn phải chọn ít nhất 1 khung hình để áp dụng tiêu đề khung hình vào nó.</s:String>
+    <s:String x:Key="Editor.FreeDrawing.WarningNoDrawing">Không có hình vẽ nào để áp dụng cho các khung hình đã chọn.</s:String>
+    <s:String x:Key="Editor.FreeDrawing.WarningSelection">Bạn phải chọn ít nhất 1 khung hình để áp dụng hình vẽ tự do vào.</s:String>
+    
+    <s:String x:Key="Editor.Watermark.Select">Chọn 1 hình ảnh</s:String>
+    <s:String x:Key="Editor.Watermark.WarningNoImage">Bạn phải chọn 1 hình ảnh để áp dụng các khung hình đã chọn.</s:String>
+    <s:String x:Key="Editor.Watermark.WarningSelection">Bạn phải chọn ít nhất 1 khung hình để đóng dấu mờ.</s:String>
+    <s:String x:Key="Editor.Border.WarningThickness">Bạn phải chọn chiều dày đường viền ít nhất 1 chiều lớn hơn 0.</s:String>
+    <s:String x:Key="Editor.Border.WarningSelection">Bạn phải chọn ít nhất 1 khung hình để áp dụng đường viền.</s:String>
+    <s:String x:Key="Editor.Cinemagraph.WarningNoDrawing">Bạn phải chọn ít nhất 1 điểm ảnh để áp dụng ảnh động. Lựa chọn các điểm ảnh bằng cách kéo lên trên chúng.</s:String>
+    
+    <s:String x:Key="Editor.Fade.Title">Chuyển tiếp mờ dần</s:String>
+    <s:String x:Key="Editor.Fade.WarningSelection">Bạn phải chọn ít nhất 1 khung hình để thực hiện chuyển tiếp mờ dần.</s:String>
+    <s:String x:Key="Editor.Fade.WarningColor">1 màu trong suốt hoàn toàn sẽ không tạo ra bất kì hiệu ứng nào trong khi chuyển đổi.</s:String>
+    <s:String x:Key="Editor.Slide.Title">Chuyển tiếp trượt</s:String>
+    <s:String x:Key="Editor.Slide.WarningSelection">Bạn phải chọn ít nhất 1 khung hình để áp dụng chuyển tiếp trượt.</s:String>
+
+    <s:String x:Key="Editor.DragDrop.Invalid.Title">Kéo và thả không có hiệu lực</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Instruction">Bạn không thể nhập nhiều tệp cùng 1 lúc</s:String>
+    <s:String x:Key="Editor.DragDrop.MultipleFiles.Message">Thử chọn 1 tệp duy nhất.</s:String>
+    <s:String x:Key="Editor.DragDrop.Invalid.Instruction">Không thể nạp các tệp</s:String>
+    <s:String x:Key="Editor.DragDrop.Invalid.Message">Tệp không thể nạp bởi định dạng không hợp lệ.</s:String>
+    <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">Bạn không thể nhập nhiều dự án cùng 1 lúc</s:String>
+    <s:String x:Key="Editor.DragDrop.InvalidProject.Message">Thử chọn 1 dự án duy nhất.</s:String>
+    
+    <s:String x:Key="Editor.LoadingFrames">Nạp các khung hình</s:String>
+    <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Instruction">Không thể nạp dự án</s:String>
+    <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Message">Không thể nạp các khung hình do tất cả chúng bị lỗi hoặc các hình ảnh hiện tại không có ở đây.</s:String>
+    <s:String x:Key="Editor.LoadingFrames.FramesCorrupted.Instruction">1 vài khung hình không thể nạp.</s:String>
+    <s:String x:Key="Editor.LoadingFrames.FramesCorrupted.Message">Không thể nạp các khung hình do chúng không tìm thấy hoặc chúng bị lỗi.</s:String>
+    <s:String x:Key="Editor.UpdatingFrames">Cập nhật các khung hình</s:String>
+    <s:String x:Key="Editor.PreparingImport">Chuẩn bị nhập</s:String>
+    <s:String x:Key="Editor.ImportingFrames">Nhập các khung hình</s:String>
+    
+    <s:String x:Key="Editor.ExportingRecording">Xuất quay màn hình</s:String>
+    <s:String x:Key="S.Editor.AnalyzingDuplicates">Phân tích nhân đôi</s:String>
+    <s:String x:Key="S.Editor.AdjustingDuplicatesDelay">Điều chỉnh độ trễ</s:String>
+    <s:String x:Key="S.Editor.DiscardingDuplicates">Hùy bỏ nhân đôi</s:String>
+    <s:String x:Key="Editor.DiscardingFrames">Hủy bỏ các khung hình</s:String>
+    <s:String x:Key="Editor.DiscardingFolders">Hủy bỏ các thư mục</s:String>
+    <s:String x:Key="Editor.ResizingFrames">Thay đổi kích thước các khung hình.</s:String>
+    <s:String x:Key="Editor.CroppingFrames">Xén khung hình</s:String>
+    <s:String x:Key="Editor.ApplyingOverlay">Áp dụng ghi đè các khung hình</s:String>
+    <s:String x:Key="Editor.CreatingTitleFrame">Tạo tiêu đề khung hình</s:String>
+    <s:String x:Key="Editor.ApplyingFlipRotate">Áp dụng Lật/Xoay khung hình</s:String>
+    <s:String x:Key="Editor.ChangingDelay">Thay đổi làm chậm</s:String>
+    <s:String x:Key="Editor.ApplyingTransition">Áp dụng hiệu ứng chuyển tiếp</s:String>
+    <s:String x:Key="S.Editor.PreparingSaving">Chuẩn bị lưu lại</s:String>
+
+    <s:String x:Key="Editor.List.Frame">Khung hình:</s:String>
+    <s:String x:Key="Editor.List.OpenImage">Mở hình ảnh</s:String>
+    <s:String x:Key="Editor.List.ExploreFolder">Truy cập thư mục</s:String>
+    <s:String x:Key="Editor.List.ExportImage">Xuất hình ảnh</s:String>
+    
+    <s:String x:Key="Editor.FrameNumbersInfo">Tính tổng, Tính các lựa chọn, Các mục lựa chọn</s:String>
+    
+    <s:String x:Key="GoTo.Title">Đi tới khung hình</s:String>
+    <s:String x:Key="GoTo.Instruction">Đi tới khung hình (0 tới {0})</s:String>
+    
+    <s:String x:Key="Context.SaveAs">Lưu mới</s:String>
+    <s:String x:Key="Context.RemoveFrames">Loại bỏ các khung hình đã chọn</s:String>
+    <s:String x:Key="Context.NewRecording">Quay màn hình mới</s:String>
+    <s:String x:Key="Context.NewWebcamRecording">Ghi hình webcam mới</s:String>
+    <s:String x:Key="Context.NewBoardRecording">Bảng ghi mới</s:String>
+    <s:String x:Key="Context.NewBlankAnimation">Dự án mới</s:String>
+    <s:String x:Key="Context.NewFromMediaProject">Phương tiện hoặc dự án mới</s:String>
+    
+    <!--Warnings-->
+    <s:String x:Key="Editor.Warning.Selection">Bạn phải chọn ít nhất 1 khung hình để áp dụng xếp chồng.</s:String>
+    <s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg không khả dụng. Thêm vào biến môi trường đường dẫn hoặc click vào đây để mở Các tùy chọn > Mục bổ sung để thiết lập vị trí.</s:String>
+    <s:String x:Key="Editor.Warning.Gifski">Gifski không khả dụng. Thêm vào biến môi trường đường dẫn hoặc click vào đây để mở Các tùy chọn > Mục bổ sung để thiết lập vị trí.</s:String>
+    <s:String x:Key="Editor.Warning.LowSpace">Không đủ không gian lưu trữ trên ổ đĩa nơi ứng dụng này lưu các vùng nhớ đệm ({0}% bên trái). Click vào đây để mở Các tùy chọn > Các tệp tạm thời để giải phóng không gian.</s:String>
+    
+    <!--Hints-->
+    <s:String x:Key="Hint.NewRecording">Quay màn hình mới được tạo</s:String>
+    <s:String x:Key="Hint.NewWebcamRecording">Ghi hình webcam mới được tạo</s:String>
+    <s:String x:Key="Hint.NewBoardRecording">Bảng ghi mới được tạo</s:String>
+    <s:String x:Key="Hint.NewAnimation">Dự án mới được tạo</s:String>
+    <s:String x:Key="Hint.Undo">Thực thi hoàn tác</s:String>
+    <s:String x:Key="Hint.Reset">Thực thi thiết lập lại</s:String>
+    <s:String x:Key="Hint.Redo">Thực thi thực hiện lại</s:String>
+    <s:String x:Key="Hint.Cut">{0} khung hình được cắt</s:String>
+    <s:String x:Key="Hint.Copy">{0} khung hình được sao chép</s:String>
+    <s:String x:Key="Hint.Paste">{0} khung hình được dán</s:String>
+    <s:String x:Key="Hint.Zoom">Phóng to đến {0}%</s:String>
+    <s:String x:Key="Hint.SelectAll">Tất cả khung hình được chọn</s:String>
+    <s:String x:Key="Hint.SelectSingle">Đã chọn #{0} khung hình</s:String>
+    <s:String x:Key="Hint.SelectInverse">Vùng lựa chọn bị đảo ngược</s:String>
+    <s:String x:Key="Hint.Deselect">Tất cả các khung hình được bỏ chọn</s:String>
+    <s:String x:Key="Hint.DeleteFrames">{0} khung hình được xóa</s:String>
+    <s:String x:Key="Hint.Reverse">Danh sách khung hình được nghịch đảo</s:String>
+    <s:String x:Key="Hint.Yoyo">Hiệu ứng Yoyo được áp dụng</s:String>
+    <s:String x:Key="Hint.MoveLeft">Các khung hình được chuyển sang trái</s:String>
+    <s:String x:Key="Hint.MoveRight">Các khung hình được chuyển sang phải</s:String>
+    <s:String x:Key="Hint.Resize">Các khung hình được điều chỉnh kích thước</s:String>
+    <s:String x:Key="Hint.Crop">Các khung hình đã xén</s:String>
+    <s:String x:Key="Hint.FlipRotate">Các khung hình được lật/xoay</s:String>
+    <s:String x:Key="Hint.FlipRotate2">Hành động lật áp dụng cho các khung hình được chọn và xoay áp dụng cho tất cả các khung hình</s:String>
+    <s:String x:Key="Hint.ApplyAll">Hành động này áp dụng cho tất cả khung hình</s:String>
+    <s:String x:Key="Hint.ApplySelected">Hành động này áp dụng cho tất cả khung hình được chọn</s:String>
+    <s:String x:Key="Hint.Cinemagraph">Cinemagraph áp dụng cho tất cả khung hình dựa trên khung hình đầu tiên</s:String>
+    <s:String x:Key="Hint.Overlay">Xếp chồng được áp dụng</s:String>
+    <s:String x:Key="Hint.TitleFrame">Tiêu đề khung hình được tạo</s:String>
+    <s:String x:Key="Hint.TitleFrame2">Tiêu đề khung hình sẽ được chèn trước khi lựa chọn khung hình</s:String>
+    <s:String x:Key="Hint.Delay">Thời gian (làm chậm) được thay đổi</s:String>
+    <s:String x:Key="Hint.Transition">Chuyển tiếp được chèn</s:String>
+    <s:String x:Key="Hint.Reduce">Tỉ lệ khung hình được giảm</s:String>
+    <s:String x:Key="Hint.Duplicates">Các nhân đôi bị loại bỏ</s:String>
+    
+    <!--Action Grid-->
+    <s:String x:Key="Action.Hide">Ẩn</s:String>
+    <s:String x:Key="Action.Apply">Áp dụng</s:String>
+    <s:String x:Key="Action.Open">Mở</s:String>
+    <s:String x:Key="Action.Save">Lưu</s:String>
+    <s:String x:Key="Action.Cancel">Hủy bỏ</s:String>
+    <s:String x:Key="Size">Kích thước</s:String>
+    <s:String x:Key="Background">Nền</s:String>
+    <s:String x:Key="Color">Màu sắc:</s:String>
+    
+    <s:String x:Key="Recent.Projects">Các dự án gần đây</s:String>
+    <s:String x:Key="Recent.EnumeratingProjects">Tìm kiếm các dự án gần đây...</s:String>
+    <s:String x:Key="Recent.CreationDate">Ngày tháng tạo</s:String>
+    <s:String x:Key="Recent.FrameCount">Tính toán khung hình</s:String>
+    <s:String x:Key="Recent.Warning.NothingSelected">Không có dự án được chọn. Chọn 1 dự án từ danh sách để nạp.</s:String>
+    <s:String x:Key="Recent.Warning.SameOpened">Dự án này đã được hiển thị lập tức bởi trình chỉnh sửa này.</s:String>
+    <s:String x:Key="Recent.Warning.AlreadyOpened">Dự án này đã được mở bởi trình chỉnh sửa khác ngay lúc này. 1 dự án không thể được mở 2 lần nếu nó đã được mở bởi trình chỉnh sửa khác.</s:String>
+    
+    <s:String x:Key="Clipboard.Entries">Các mục nhớ đệm</s:String>
+    <s:String x:Key="Clipboard.Entry">Truy cập vùng nhớ đệm:</s:String>
+    <s:String x:Key="Clipboard.Explore">Truy cập nội dung</s:String>
+    <s:String x:Key="Clipboard.Remove">Loại bỏ</s:String>
+    <s:String x:Key="Clipboard.Behavior">Thao tác dán</s:String>
+    <s:String x:Key="Clipboard.Before">Trước khi lựa chọn khung hình</s:String>
+    <s:String x:Key="Clipboard.After">Sau khi lựa chọn khung hình</s:String>
+    
+    <s:String x:Key="Resize.CurrentProperties">Các thuộc tính hiện tại</s:String>
+    <s:String x:Key="Resize.Dpi">Dpi</s:String>
+    <s:String x:Key="Resize.NewProperties">Các thuộc tính mới</s:String>
+    <s:String x:Key="Resize.Dpi2">DPI:</s:String>
+    <s:String x:Key="Resize.KeepAspect">Giữ nguyên tỉ lệ khung hình.</s:String>
+    
+    <s:String x:Key="Crop.Points">Các điểm</s:String>
+    <s:String x:Key="Crop.Top">Trên:</s:String>
+    <s:String x:Key="Crop.Left">Trái:</s:String>
+    <s:String x:Key="Crop.Bottom">Dưới:</s:String>
+    <s:String x:Key="Crop.Right">Phải:</s:String>
+    
+    <s:String x:Key="FlipRotate.FlipHorizontal">Lật ngang</s:String>
+    <s:String x:Key="FlipRotate.FlipVertical">Lật dọc</s:String>
+    <s:String x:Key="FlipRotate.RotateLeft">Xoay trái 90º</s:String>
+    <s:String x:Key="FlipRotate.RotateRight">Xoay phải 90º</s:String>
+    
+    <s:String x:Key="Reduce.Header">Giảm tỉ lệ khung hình</s:String>
+    <s:String x:Key="Reduce.Factor">Hệ số:</s:String>
+    <s:String x:Key="Reduce.Count">Số lượng loại bỏ:</s:String>
+    <s:String x:Key="Reduce.Info">Điều này sẽ loại bỏ {0} khung hình sau mỗi {1} khung hình, mà không đếm các khung hình đã loại bỏ.&#10;Tỉ lệ khung hình sẽ bị điều chỉnh.</s:String>
+
+    <s:String x:Key="S.RemoveDuplicates.Header">Loại bỏ nhân đôi</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Similarity">Tương tự (%):</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal">Loại bỏ khung hình:</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal.First">Loại bỏ khung hình đầu</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal.Last">Loại bỏ khung hình cuối</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay">Điều chỉnh độ trễ</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.NoAdjustment">Đừng điều chỉnh</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.Average">Sử dụng trung bình</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.Sum">Sử dụng tổng</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Info">Hành động này phân tích mỗi khung hình (hình trong hình) và loại bỏ cái mà có ít nhất {0} % tương tự với gần nó ngay lập tức.&#x0d;Bạn có thể chọn nếu muốn điều chỉnh độ trễ (thời gian thể hiện) của các khung hình.</s:String>
+    
+    <s:String x:Key="Caption.Text">Văn bản</s:String>
+    <s:String x:Key="Caption.Font">Phông chữ</s:String>
+    <s:String x:Key="Caption.Family">Hệ thống:</s:String>
+    <s:String x:Key="Caption.Style">Kiểu chữ:</s:String>
+    <s:String x:Key="Caption.Weight">Độ đậm nét:</s:String>
+    <s:String x:Key="Caption.Size">Cỡ chữ:</s:String>
+    <s:String x:Key="Caption.Color">Màu sắc:</s:String>
+    <s:String x:Key="Caption.Outline">Đường bao</s:String>
+    <s:String x:Key="Caption.Thickness">Chiều dày:</s:String>
+    <s:String x:Key="Caption.Layout">Bố trí</s:String>
+    <s:String x:Key="Caption.Vertical">Dọc:</s:String>
+    <s:String x:Key="Caption.Horizontal">Ngang:</s:String>
+
+    <s:String x:Key="S.KeyStrokes">Các phím chính</s:String>
+    <s:String x:Key="KeyStrokes.Keys">Các phím</s:String>
+    <s:String x:Key="KeyStrokes.Separator">Ngăn cách:</s:String>
+    <s:String x:Key="KeyStrokes.Edit">Chỉnh sửa tổ hợp phím của bạn</s:String>
+    <s:String x:Key="KeyStrokes.IgnoreModifiers">Bỏ qua Ctrl, Alt, Shift, và phím Windows trong khi người sử dụng chỉnh sửa.</s:String>
+    <s:String x:Key="KeyStrokes.IgnoreModifiers.Info">Điều này sẽ bỏ qua phím đơn ví dụ "Control", nhưng nó không bỏ qua "Ctrl + C".</s:String>
+    <s:String x:Key="KeyStrokes.Extend">Mở rộng trình bày của các tổ hợp phím.</s:String>
+    <s:String x:Key="KeyStrokes.Earlier">Bắt đầu thể hiện các tổ hợp phím sớm hơn.</s:String>
+    <s:String x:Key="KeyStrokes.By">Bằng (ms):</s:String>
+    <s:String x:Key="KeyStrokes.Warning.None">Không có tổ hợp phím trong khi đang quay.</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Title">ScreenToGif - Trình chỉnh sửa tổ hợp phím</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Number">Số khung hình</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Keys">Đã nhận diện các tổ hợp phím </s:String>
+    <s:String x:Key="KeyStrokes.Edit.Remove">Loại bỏ tổ hợp phím</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Add">Thêm 1 tổ hợp phím:</s:String>
+    
+    <s:String x:Key="String.Delay">Trễ</s:String>
+    <s:String x:Key="String.DelayMs">Trễ:</s:String>
+    <s:String x:Key="String.ValueMs">Giá trị -+:</s:String>
+    <s:String x:Key="String.ScaleValue">Giá trị thu phóng:</s:String>
+    <s:String x:Key="String.Margin">Lề:</s:String>
+    <s:String x:Key="String.Padding">Đệm:</s:String>
+    <s:String x:Key="String.Background">Nền</s:String>
+    
+    <s:String x:Key="FreeDrawing.Mode">Chế độ</s:String>
+    <s:String x:Key="FreeDrawing.Pen">Bút</s:String>
+    <s:String x:Key="FreeDrawing.Eraser">Xóa</s:String>
+    <s:String x:Key="FreeDrawing.Select">Lựa chọn</s:String>
+    <s:String x:Key="FreeDrawing.StrokeEraser">Xóa chính</s:String>
+    <s:String x:Key="FreeDrawing.Width">Chiều rộng:</s:String>
+    <s:String x:Key="FreeDrawing.Height">Chiều cao:</s:String>
+    <s:String x:Key="FreeDrawing.Tip">Đỉnh:</s:String>
+    <s:String x:Key="FreeDrawing.Rectangle">Hình chữ nhật</s:String>
+    <s:String x:Key="FreeDrawing.Ellipse">Hình Elip</s:String>
+    <s:String x:Key="FreeDrawing.Other">Khác:</s:String>
+    <s:String x:Key="FreeDrawing.Highlighter">Làm nổi bật.</s:String>
+    <s:String x:Key="FreeDrawing.FitToCurve">Vừa với đường cong.</s:String>
+    
+    <s:String x:Key="S.Shapes.Mode.Insert">Chèn</s:String>
+    <s:String x:Key="S.Shapes.Shapes">Hình dạng</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Radius">Bán kính:</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Dashes">Bảng điều khiển:</s:String>
+    <s:String x:Key="S.Shapes.Fill">Làm đầy</s:String>
+
+    <s:String x:Key="S.MouseClicks">Các click chuột</s:String>
+    <s:String x:Key="S.MouseClicks.Warning.None">Không có phát hiện click chuột trong dự án của bạn.</s:String>
+    
+    <s:String x:Key="Watermark.Image">Hình ảnh</s:String>
+    <s:String x:Key="Watermark.File">Tệp:</s:String>
+    <s:String x:Key="Watermark.Opacity">Mờ đục:</s:String>
+    
+    <s:String x:Key="Border.Appearance">Xuất hiện</s:String>
+
+    <s:String x:Key="S.Obfuscate.Options">Các tùy chọn làm rối</s:String>
+    <s:String x:Key="S.Obfuscate.PixelSize">Kích cỡ điểm ảnh:</s:String>
+    <s:String x:Key="S.Obfuscate.UseAverage">Tính toán màu sắc chuẩn cho mỗi khối hình ảnh.</s:String>
+    <s:String x:Key="S.Obfuscate.Info">Sử dụng các công cụ lựa chọn để lựa chọn hình chữ nhật mà sẽ thành hình ảnh tạo bởi các điểm ảnh.</s:String>
+    <s:String x:Key="S.Obfuscate.Warning">Bạn không chọn bất cứ gì. Vui lòng sử dụng công cụ lựa chọn để chọn hình chữ nhật mà sẽ thành hình ảnh tạo bởi các điểm ảnh.</s:String>
+    
+    <s:String x:Key="Progress.Type">Soạn thảo</s:String>
+    <s:String x:Key="Progress.Type.Bar">Thanh</s:String>
+    <s:String x:Key="Progress.Type.Text">Văn bản</s:String>
+    <s:String x:Key="Progress.Precision">Chính xác:</s:String>
+    <s:String x:Key="Progress.Precision.Minutes">Phút</s:String>
+    <s:String x:Key="Progress.Precision.Seconds">Giây</s:String>
+    <s:String x:Key="Progress.Precision.Miliseconds">1/1000 giây</s:String>
+    <s:String x:Key="Progress.Precision.Percentage">Phần trăm</s:String>
+    <s:String x:Key="Progress.Precision.Count">Số khung hình</s:String>
+    <s:String x:Key="Progress.Precision.DateOfRecording">Ngày/giờ hiện tại</s:String>
+    <s:String x:Key="Progress.Precision.Custom">Tùy chỉnh</s:String>
+    <s:String x:Key="Progress.Precision.ShowTotal">Hiển thị tổng.</s:String>
+    <s:String x:Key="Progress.Format">Định dạng:</s:String>
+    <s:String x:Key="S.Progress.Format.Date">Bạn có thể sử dụng định dạng ngày và giờ từ .Net Framework.&#x0d;Liệt kê có sẵn ở 2 liên kết dưới đây.</s:String>
+    <s:String x:Key="S.Progress.Format.Date.Standard">Các định dạng chuẩn</s:String>
+    <s:String x:Key="S.Progress.Format.Date.Custom">Các định dạng người dùng</s:String>
+    <s:String x:Key="Progress.Orientation">Định hướng:</s:String>
+    
+    <s:String x:Key="S.DelayUpdate">Tạm hoãn cập nhật</s:String>
+    <s:String x:Key="Delay.Mode">Chế độ làm chậm:</s:String>
+    <s:String x:Key="Delay.Mode.Override">Ghi đè (theo ms)</s:String>
+    <s:String x:Key="Delay.Mode.IncreaseDecrease">Tăng hoặc giảm (theo ms)</s:String>
+    <s:String x:Key="Delay.Mode.Scale">Thu phóng (theo %)</s:String>
+    <s:String x:Key="Delay.NewValue">Giá trị mới</s:String>
+    <s:String x:Key="Delay.Minimum10Ms">Tối thiểu 10ms mỗi khung hình.</s:String>
+    <s:String x:Key="Delay.DecreaseIncrease">Giảm/tăng dần giá trị</s:String>
+    <s:String x:Key="Delay.Scale">Giá trị thu phóng</s:String>
+    
+    <s:String x:Key="Cinemagraph.Info">Sử dụng bút để lựa chọn phần tử ảnh không phải ảnh tĩnh còn lại (chúng sẽ thay đổi giữa các khung hình), bằng cách quét lên trên chúng.</s:String>
+    <s:String x:Key="OverrideDelay.Info">Giá trị mới sẽ thay thế thời gian (làm chậm) của tất cả khung hình được chọn. Giá trị có thể từ 10ms đến 25500ms.</s:String>
+    <s:String x:Key="IncreaseDecreaseDelay.Info">Giá trị này sẽ giảm/tăng thời gian (làm chậm) của mỗi khung hình được chọn.&#x0d;Bạn có thể làm giảm/tăng bằng cách chọn giá trị từ -10000ms đến 10000ms, nhưng thời gian cuối của mỗi khung hình sẽ bị giới hạn từ 10ms đến 25500ms</s:String>
+    <s:String x:Key="ScaleDelay.Info">Thu phóng thời gian (làm chậm) của mỗi khung hình được chọn bằng giá trị phần trăm.&#x0d;Bạn có thể thu phóng thời gian mỗi khung hình bằng cách chọn giá trị từ 1% đến 1000%, nhưng giá trị thời gian cuối của mỗi khung được giới hạn từ 10ms đến 25500ms</s:String>
+
+    <s:String x:Key="Transitions.Length">Độ dài chuyển tiếp</s:String>
+    <s:String x:Key="Transitions.Delay">Chuyển tiếp làm chậm</s:String>
+    <s:String x:Key="Transitions.FadeTo">Làm mờ dần đến...</s:String>
+    <s:String x:Key="Transitions.FadeTo.Frame">Khung hình kế tiếp</s:String>
+    <s:String x:Key="Transitions.FadeTo.Color">1 màu sắc</s:String>
+    <s:String x:Key="Transitions.Color">Màu sắc</s:String>
+    <s:String x:Key="Transitions.Info">Chuyển tiếp này sẽ được áp dụng giữa các khung hình đã chọn và khung hình kế tiếp nó.</s:String>
+
+    <!--Save As-->
+    <s:String x:Key="S.SaveAs.Type">Kiểu tệp</s:String>
+    <s:String x:Key="S.SaveAs.Gif">Gif</s:String>
+    <s:String x:Key="S.SaveAs.Apng">Apng</s:String>
+    <s:String x:Key="S.SaveAs.Images">Các hình ảnh (khung hình)</s:String>
+    <s:String x:Key="S.SaveAs.Project">Dự án</s:String>
+    <s:String x:Key="S.SaveAs.Psd">PSD</s:String>
+    <s:String x:Key="S.SaveAs.Video">Video</s:String>
+    <s:String x:Key="S.SaveAs.Encoder">Mã hóa</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">2.0</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Tooltip">Thuật toán: Octree.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Legacy">1.0</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Legacy.Tooltip">Thuật toán: NeuQuant.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.System">Hệ thống</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.System.Tooltip">Sử dụng bảng màu mặc định.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Apng">1.0</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Apng.Tooltip">Mã hóa bởi nhà phát triển ScreenToGif .</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions">Các tùy chọn Gif </s:String>
+    <s:String x:Key="S.SaveAs.Quality">Chất lượng:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Colors">Các màu sắc:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">Tối đa số màu (cho mỗi khung hình).</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Loop">Lặp:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">Vòng lặp Gif.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Lặp lại mãi mãi.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Lặp lại số lần.</s:String>
+    <s:String x:Key="S.SaveAs.Extras">Mục bổ sung:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">Xác định các điểm ảnh không đổi.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">Đánh dấu các điểm ảnh không đổi với màu sắc giả.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">Chọn màu sắc</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions">Các tùy chọn Apng</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.LoopedApng">Vòng lặp Apng.</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.DetectUnchanged">Xác định điểm ảnh không đổi.</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.PaintTransparent">Tô màu tất cả điểm ảnh không đổi với màu trong suốt.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions">Các tùy chọn video</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Fps">Khung hình/giây:</s:String>
+    <s:String x:Key="S.SaveAs.FlipVertically">Lật video (theo chiều dọc).</s:String>
+    <s:String x:Key="S.SaveAs.ImagesOptions">Các tùy chọn hình ảnh</s:String>
+    <s:String x:Key="S.SaveAs.ImageOptions.Zip">Khóa các hình ảnh.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions">Các tùy chọn Psd</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress">Nén ảnh.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">Nén dữ liệu ảnh sử dụng thuật toán RLE.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Timeline">Lưu dữ liệu dòng thời gian.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">Xuất thiết đặt thời gian của khung hình, thay vì chỉ khung hình.</s:String>
+
+    <!--Save As • Save options-->
+    <s:String x:Key="S.SaveAs.SaveOptions">Các tùy chọn lưu</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Lưu tệp tới 1 thư mục do bạn chọn.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Ghi đè (nếu đã tồn tại).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Lưu mới dự án như (cùng thư mục, cùng tên tệp).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Tải tệp lên</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.UploadDestination">Vị trí tải lên.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">Sao chép vào bộ nhớ đệm.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File">Tệp</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File.Info">Sao chép tệp đầu ra vào bộ nhớ đệm.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FolderPath">Đường dẫn thư mục</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FolderPath.Info">Sao chép đường dẫn thư mục của tệp đầu ra vào bộ nhớ đệm.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath">Đường dẫn tệp</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath.Info">Sao chép đường dẫn của tệp đầu ra vào bộ nhớ đệm.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">Liên kết</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">Sao chép liên kết phát sinh bởi dịch vụ tải lên vào bộ nhớ đệm.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Thực thi gửi các lệnh mã hóa.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Viết các lệnh để thực thi sau khi mã hóa.&#x0d;Để thực thi nhiều lệnh, viết mỗi lệnh 1 dòng riêng.&#x0d;Các lệnh đơn:&#x0d;{p} = Đường dẫn tệp đầu ra.&#x0d;{f} = Đường dẫn thư mục đầu ra.</s:String>
+    
+    <!--Save As • File-->
+    <s:String x:Key="S.SaveAs.File">Tệp</s:String>
+    <s:String x:Key="S.SaveAs.File.Location">Thư mục đích.</s:String>
+    <s:String x:Key="S.SaveAs.File.Choose">Chọn 1 vị trí.</s:String>
+    <s:String x:Key="S.SaveAs.File.Format">Định dạng tệp</s:String>
+    <s:String x:Key="S.SaveAs.File.Name">Tên file. Chèn định dạng ngày/giờ giữa '?'</s:String>
+    <s:String x:Key="S.SaveAs.File.Animation">Hoạt ảnh</s:String>
+    <s:String x:Key="S.SaveAs.File.Increase">Tăng số tệp</s:String>
+    <s:String x:Key="S.SaveAs.File.Decrease">Giảm số tệp</s:String>
+    <s:String x:Key="S.SaveAs.File.Exists">1 tệp với cùng tên đã tồn tại.</s:String>
+    
+    <s:String x:Key="S.SaveAs.File.Clipboard">Lưu vào bộ nhớ đệm.</s:String>
+
+    <s:String x:Key="S.SaveAs.Warning.Type">Bạn cần chọn vị trí lưu các tệp (vào 1 thư mục, vào bộ nhớ đệm hoặc tải lên nơi nào đó).</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Commands.Empty">Để thực thi lệnh gửi mã hóa, bạn cần viết gì đó vào trường dữ liệu của câu lệnh.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Upload.None">Không dịch vụ tải lên nào được chọn. Bạn cần chọn 1 điểm đến.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Upload.NotAuthorized">Bạn không thể tải lên các dịch vụ đã chọn vì chúng không được cho phép. Đi tới Các tùy chọn > Các dịch vụ tải lên để cho phép ứng dụng này.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Copy.Link">Bạn không thể chọn tùy chọn sao chép đường dẫn vì bạn đã không thiết đặt để tải tệp lên.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Folder">Bạn cần chọn 1 thư mục đầu ra.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">Thư mục đầu ra không tồn tại.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Folder.Invalid">Thư mục đầu ra chứa 1 hoặc vài kí tự không hợp lệ. Vui lòng chọn 1 thư mục hợp lệ.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Filename">Bạn cần chọn 1 tên tệp.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Filename.Invalid">Tệp đầu ra chứa 1 hoặc vài kí tự không hợp lệ. Vui lòng chọn 1 tệp hợp lệ.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Overwrite">Tên tệp đã được sử dụng. Ghi đè lên hoặc đặt 1 tên khác.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Canceled">Hành động đã bị hủy bỏ.</s:String>
+    
+    <!--SaveAs • Export-->
+    <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">Xuất các khung hình</s:String>
+    <s:String x:Key="S.SaveAs.Frames.Confirmation.Instruction">Bạn chắc rằng muốn xuất các khung hình?</s:String>
+    <s:String x:Key="S.SaveAs.Frames.Confirmation.Message">Hành động này sẽ xuất {0} khung hình trực tiếp vào thư mục được chọn.</s:String>
+    
+    <!--Feedback-->
+    <s:String x:Key="S.Feedback.Feedback">Phản hồi</s:String>
+    <s:String x:Key="S.Feedback.Send">Gửi</s:String>
+    <s:String x:Key="S.Feedback.Preview">Xem trước</s:String>
+    <s:String x:Key="S.Feedback.Header">Gửi phản hồi</s:String>
+    <s:String x:Key="S.Feedback.Title">Tiêu đề</s:String>
+    <s:String x:Key="S.Feedback.Message">Tin nhắn</s:String>
+    <s:String x:Key="S.Feedback.Type">Viết phản hồi</s:String>
+    <s:String x:Key="S.Feedback.Suggestion">Gợi ý</s:String>
+    <s:String x:Key="S.Feedback.IssueBug">Vấn đề/Trục trặc</s:String>
+    <s:String x:Key="S.Feedback.IssueBug.Info">Vui lòng, nếu bạn gặp bất cứ trải nghiệm không tốt nào: Đừng quên viết e-mail phản hồi. Thỉnh thoảng tôi không biết chính xác vấn đề xảy đến là gì và tôi cần chi tiết thêm nữa.</s:String>
+    <s:String x:Key="S.Feedback.YourEmail">Email của bạn</s:String>
+    <s:String x:Key="S.Feedback.Warning.Title">Bạn cần nhập tiêu đề cho phản hồi.</s:String>
+    <s:String x:Key="S.Feedback.Warning.Message">Bạn cần nhập tin nhắn cho phản hồi.</s:String>
+    <s:String x:Key="S.Feedback.Sending">Đang gửi dưới nền... Cửa sổ này sẽ đóng lại trong chốc lát.</s:String>
+    <s:String x:Key="S.Feedback.Attachments">Các đính kèm (Tùy chọn, không quá 20MB)</s:String>
+    <s:String x:Key="S.Feedback.AddAttachments">Thêm đính kèm</s:String>
+    <s:String x:Key="S.Feedback.RemoveAttachments">Loại bỏ tất cả đính kèm</s:String>
+    <s:String x:Key="S.Feedback.LanguageInfo1">Tôi có thể biết Tiếng Anh</s:String>
+    <s:String x:Key="S.Feedback.LanguageInfo2">và tiếng Bồ Đào Nha (Brazil và Châu Âu).</s:String>
+    <s:String x:Key="S.Feedback.Preview.Info">Đây là những gì bạn sẽ gửi, cộng thêm tất cả đính kèm.</s:String>
+    
+    <!--Troubleshoot-->
+    <s:String x:Key="S.Troubleshoot.Title">Sửa chữa</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows">Có cửa sổ nào bị mất không?</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Info">Nếu bất kì cửa sổ nào bị mất (ngoài màn hình),&#x0d;sử dụng các tùy chọn dưới đây để đặt lại vị trí hiện thời và khởi động.</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Current">Đây là vị trí mỗi cửa sổ hiện thời được lưu:</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Next">Đây là vị trí mỗi cửa sổ sẽ mở vào lần tới:</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.BringBack">Chuyển tất cả cửa sổ vào màn hình chính.</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Reset">Thiết lập tại vị trí khởi động cho tất cả cửa sổ.</s:String>
+   
+    <!--FontStyles-->
+    <s:String x:Key="S.FontStyles.Normal">Chuẩn</s:String>
+    <s:String x:Key="S.FontStyles.Italic">Nghiêng</s:String>
+    <s:String x:Key="S.FontStyles.Oblique">Xiên</s:String>
+    
+    <!--FontWeight-->
+    <s:String x:Key="S.FontWeights.Black">Đen</s:String>
+    <s:String x:Key="S.FontWeights.Bold">Đậm</s:String>
+    <s:String x:Key="S.FontWeights.DemiBold">Một phần đậm</s:String>
+    <s:String x:Key="S.FontWeights.ExtraBlack">Quá đen</s:String>
+    <s:String x:Key="S.FontWeights.ExtraBold">Quá đậm</s:String>
+    <s:String x:Key="S.FontWeights.ExtraLight">Quá nhạt</s:String>
+    <s:String x:Key="S.FontWeights.Heavy">Nặng</s:String>
+    <s:String x:Key="S.FontWeights.Light">Nhạt</s:String>
+    <s:String x:Key="S.FontWeights.Medium">Trung bình</s:String>
+    <s:String x:Key="S.FontWeights.Normal">Chuẩn</s:String>
+    <s:String x:Key="S.FontWeights.Regular">Đều</s:String>
+    <s:String x:Key="S.FontWeights.SemiBold">Đậm vừa</s:String>
+    <s:String x:Key="S.FontWeights.Thin">Mảnh</s:String>
+    <s:String x:Key="S.FontWeights.UltraBlack">Siêu đen</s:String>
+    <s:String x:Key="S.FontWeights.UltraBold">Siêu đậm</s:String>
+    <s:String x:Key="S.FontWeights.UltraLight">Siêu nhạt</s:String>
+    
+     <!--VerticalAligment-->
+    <s:String x:Key="S.VerticalAlignment.Top">Trên</s:String>
+    <s:String x:Key="S.VerticalAlignment.Center">Giữa</s:String>
+    <s:String x:Key="S.VerticalAlignment.Bottom">Dưới</s:String>
+    <s:String x:Key="S.Alignment.Stretch">Kéo dãn</s:String>
+
+     <!--HorizontalAlignment-->
+    <s:String x:Key="S.HorizontalAlignment.Left">Trái</s:String>
+    <s:String x:Key="S.HorizontalAlignment.Center">Giữa</s:String>
+    <s:String x:Key="S.HorizontalAlignment.Right">Phải</s:String>
+    
+    <!--Orientation-->
+    <s:String x:Key="S.Orientation.Horizontal">Ngang</s:String>
+    <s:String x:Key="S.Orientation.Vertical">Dọc</s:String>
+</ResourceDictionary>

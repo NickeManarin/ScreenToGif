@@ -12,6 +12,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Resources;
 using ScreenToGif.ImageUtil.Gif.Decoder;
 using ScreenToGif.ImageUtil.Gif.Encoder;
 using ScreenToGif.Util;
@@ -1477,15 +1478,30 @@ namespace ScreenToGif.ImageUtil
         /// <returns>An icon object that can be used with the taskbar area.</returns>
         public static Icon ToIcon(this ImageSource imageSource)
         {
-            if (imageSource == null) return null;
+            if (imageSource == null)
+                return null;
 
-            var uri = new Uri(imageSource.ToString());
-            var streamInfo = Application.GetResourceStream(uri);
+            StreamResourceInfo streamInfo = null;
 
-            if (streamInfo == null)
-                throw new ArgumentException($"It was not possible to load the image source: '{imageSource}'.");
+            try
+            {
+                var uri = new Uri(imageSource.ToString());
+                streamInfo = Application.GetResourceStream(uri);
 
-            return new Icon(streamInfo.Stream);
+                if (streamInfo == null)
+                    throw new ArgumentException($"It was not possible to load the image source: '{imageSource}'.");
+
+                return new Icon(streamInfo.Stream);
+            }
+            catch (Exception e)
+            {
+                LogWriter.Log(e, "It was not possible to load the notification area icon.", $"StreamInfo is null? {streamInfo == null}");
+                return null;
+            }
+            finally
+            {
+                streamInfo?.Stream?.Dispose();
+            }
         }
 
         #endregion

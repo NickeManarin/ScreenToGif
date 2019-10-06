@@ -4,6 +4,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Threading;
 
 namespace ScreenToGif.Util
 {
@@ -125,6 +126,13 @@ namespace ScreenToGif.Util
 
             lock (LockObject)
                 return Native.Shell_NotifyIcon(command, ref data);
+        }
+
+        private static readonly Action EmptyDelegate = delegate { };
+
+        public static void Refresh(this UIElement uiElement)
+        {
+            uiElement?.Dispatcher?.Invoke(DispatcherPriority.Render, EmptyDelegate);
         }
     }
 }

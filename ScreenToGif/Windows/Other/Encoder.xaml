@@ -2,12 +2,11 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:c="clr-namespace:ScreenToGif.Controls"
-        xmlns:u="clr-namespace:ScreenToGif.Util"
         Title="{DynamicResource Encoder.Title}" Icon="/Resources/Logo.ico" Width="320" Height="400" 
         MinWidth="300" MinHeight="300" Background="{DynamicResource Panel.Background}" Closing="Window_Closing" Activated="Window_Activated">
 
     <Window.CommandBindings>
-        <CommandBinding Command="u:Commands.ClearAll" CanExecute="ClearAll_CanExecute" Executed="ClearAll_Executed"/>
+        <CommandBinding Command="{StaticResource Command.ClearAll}" CanExecute="ClearAll_CanExecute" Executed="ClearAll_Executed"/>
     </Window.CommandBindings>
 
     <Grid>
@@ -45,8 +44,9 @@
 
             <c:ImageButton Grid.Column="2" x:Name="ClearAllButton" Content="{DynamicResource Vector.Eraser}" ContentHeight="20" MinWidth="30"
                            HorizontalContentAlignment="Center" HorizontalAlignment="Center" Style="{DynamicResource Style.Button.NoText}" 
-                           Command="u:Commands.ClearAll" IsEnabled="{Binding Path=HasItems, ElementName=EncodingListView}"
-                           ToolTip="{DynamicResource Encoder.ClearAllCompleted}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                           Command="{StaticResource Command.ClearAll}" IsEnabled="{Binding Path=HasItems, ElementName=EncodingListView}"
+                           ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}"
+                           ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
         </Grid>
 
         <c:StatusBand Grid.Row="1" x:Name="StatusBand"/>

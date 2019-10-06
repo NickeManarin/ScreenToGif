@@ -56,7 +56,7 @@
     </n:LightWindow.Resources>
 
     <n:LightWindow.CommandBindings>
-        <CommandBinding Command="u:Commands.Options" CanExecute="Options_CanExecute" Executed="Options_Executed"/>
+        <CommandBinding Command="{StaticResource Command.Options}" CanExecute="Options_CanExecute" Executed="Options_Executed"/>
     </n:LightWindow.CommandBindings>
 
     <Grid Name="MainGrid" Background="{DynamicResource Panel.Background}">
@@ -247,7 +247,7 @@
 
             <StackPanel Grid.Column="1" x:Name="ControlStackPanel" Orientation="Horizontal" HorizontalAlignment="Right" ScrollViewer.VerticalScrollBarVisibility="Disabled" >
                 <n:ImageButton x:Name="OptionsButton" Content="{StaticResource Vector.Options}" Style="{StaticResource Style.Button.NoText}" 
-                               Effect="{StaticResource Shadow.Foreground.Small}" MaxSize="20" Command="u:Commands.Options" Padding="3" TabIndex="0">
+                               Effect="{StaticResource Shadow.Foreground.Small}" MaxSize="20" Command="{StaticResource Command.Options}" Padding="3" TabIndex="0">
                     <n:ImageButton.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Options}"/>
                     </n:ImageButton.ToolTip>

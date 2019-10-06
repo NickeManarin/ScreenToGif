@@ -5,7 +5,7 @@
         xmlns:u="clr-namespace:ScreenToGif.Util"
         x:Name="StartupWindow" Title="{DynamicResource Title.StartUp}" Height="220" Width="500" Icon="/Resources/Logo.ico" 
         MinWidth="500" MinHeight="220" DataContext="{StaticResource AppViewModel}" UseLayoutRounding="True" 
-        Background="{DynamicResource Panel.Background}" Loaded="Startup_Loaded" Closing="Startup_Closing">
+        Background="{DynamicResource Panel.Background}" Initialized="Startup_Initialized" Loaded="Startup_Loaded" Closing="Startup_Closing">
 
     <Window.InputBindings>
         <KeyBinding Command="{Binding OpenRecorder}" CommandParameter="{Binding ElementName=StartupWindow}" Modifiers="Control" Key="N"/>
@@ -16,7 +16,7 @@
     </Window.InputBindings>
 
     <Window.CommandBindings>
-        <CommandBinding Command="u:Commands.Update" CanExecute="Update_CanExecute" Executed="Update_Executed"/>
+        <CommandBinding Command="{StaticResource Command.Update}" CanExecute="Update_CanExecute" Executed="Update_Executed"/>
     </Window.CommandBindings>
 
     <Grid>
@@ -36,7 +36,7 @@
             <TextBlock Grid.Column="0" Text="ScreenToGif" Margin="10" FontSize="18" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}" Effect="{DynamicResource Shadow.Black.Small}"/>
 
             <TextBlock Grid.Column="1" Name="UpdateTextBlock" VerticalAlignment="Center" Visibility="Hidden" Effect="{StaticResource Shadow.Black.Small}">
-                <Hyperlink Command="u:Commands.Update" ToolTip="{DynamicResource NewRelease.Tooltip}" Cursor="Hand">
+                <Hyperlink Command="{StaticResource Command.Update}" ToolTip="{DynamicResource NewRelease.Tooltip}" Cursor="Hand">
                     <Run Name="UpdateRun" Text="{DynamicResource NewRelease}"/>
                 </Hyperlink>
             </TextBlock>

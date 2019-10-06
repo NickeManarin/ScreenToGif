@@ -4,13 +4,14 @@
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         xmlns:presentationOptions="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
         xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
-        Title="{DynamicResource ColorSelector.Title}" Height="350" Width="600" MinWidth="555" MinHeight="275"
+        Title="{DynamicResource ColorSelector.Title}" Height="350" Width="640" MinWidth="640" MinHeight="350"
         Background="{DynamicResource Panel.Background}" Icon="/ScreenToGif;component/Resources/Logo.ico" UseLayoutRounding="True" SnapsToDevicePixels="True"
         WindowStartupLocation="CenterScreen" Topmost="True" SizeToContent="Width" Loaded="Window_Loaded">
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" MinWidth="330"/>
+            <ColumnDefinition Width="*" MinWidth="330"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
@@ -175,10 +176,14 @@
         </Grid>
 
         <n:SpectrumSlider Grid.Column="1" x:Name="ColorSlider" Value="0" IsMoveToPointEnabled="True" IsSnapToTickEnabled="False" Maximum="360" 
-                          Orientation="Vertical" Background="#00000000" HorizontalAlignment="Right" Width="36" Margin="0,5" 
+                          Orientation="Vertical" HorizontalAlignment="Right" Width="36" Margin="0,5" 
                           ValueChanged="ColorSlider_ValueChanged" AfterSelecting="ColorSlider_OnAfterSelecting"/>
 
-        <Grid Grid.Column="2">
+        <n:SpectrumSlider Grid.Column="2" x:Name="AlphaSlider" Value="0" IsMoveToPointEnabled="True" IsSnapToTickEnabled="False" Maximum="255" 
+                          Orientation="Vertical" HorizontalAlignment="Right" Width="36" Margin="5,5,0,5" IsAlphaSpectrum="True" ToolTip="{DynamicResource ColorSelector.Alpha}"
+                          ValueChanged="ColorSlider_ValueChanged" AfterSelecting="ColorSlider_OnAfterSelecting"/>
+
+        <Grid Grid.Column="3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="29"/>
                 <RowDefinition Height="32"/>
@@ -192,7 +197,7 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" MinWidth="50"/>
-                <ColumnDefinition MinWidth="90"/>
+                <ColumnDefinition Width="*" MinWidth="90"/>
             </Grid.ColumnDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="{DynamicResource ColorSelector.Select}" FontSize="14" Foreground="{DynamicResource Element.Foreground.Header}" Effect="{StaticResource Shadow.Foreground.Small}"/>
@@ -221,6 +226,21 @@
                               Red="{Binding ElementName=RedIntegerUpDown, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               Green="{Binding ElementName=GreenIntegerUpDown, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               Blue="{Binding ElementName=BlueIntegerUpDown, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <Grid Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" >
+                <n:ImageButton x:Name="EyeDropperButton" Content="{StaticResource Vector.Crosshair}" Margin="5" Style="{StaticResource Style.Button.Vertical}" 
+                               Text="{DynamicResource ColorSelector.Sample}" HorizontalContentAlignment="Center" ContentHeight="20" ContentWidth="20" Padding="3" TabIndex="2" PreviewMouseDown="EyeDropperButton_PreviewMouseDown">
+                    <n:ImageButton.ToolTip>
+                        <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource ColorSelector.Sample.Info}"/>
+                    </n:ImageButton.ToolTip>
+                </n:ImageButton>
+
+                <Image x:Name="EyeDropperImage" Margin="5" Opacity="0" IsHitTestVisible="False" RenderOptions.BitmapScalingMode="NearestNeighbor" Effect="{StaticResource Shadow.Black.Large}" 
+                       Stretch="Uniform" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                <Viewbox Opacity="{Binding ElementName=EyeDropperImage, Path=Opacity}" Child="{StaticResource Vector.Crosshair.Color}" VerticalAlignment="Center" HorizontalAlignment="Center" IsHitTestVisible="False"
+                         Height="50" Width="50"/>
+            </Grid>
 
             <Grid Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Margin="3,0,0,0" Background="{DynamicResource Panel.Background.Level3}">
                 <Grid.ColumnDefinitions>

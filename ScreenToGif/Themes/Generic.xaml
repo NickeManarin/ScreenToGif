@@ -75,7 +75,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:LightWindow}">
-                    <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                    <Border x:Name="MainBorder" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
                         <AdornerDecorator>
                             <Grid x:Name="MainGrid" Background="{x:Null}">
                                 <Grid.RowDefinitions>
@@ -1797,7 +1797,7 @@
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate>
+                <ControlTemplate TargetType="{x:Type Thumb}">
                     <Viewbox>
                         <Grid Background="Transparent" Cursor="Hand">
                             <Grid.ColumnDefinitions>
@@ -1806,10 +1806,27 @@
                                 <ColumnDefinition Width="4*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Polygon Grid.Column="0" Fill="{DynamicResource Element.Foreground}" Points="0.5,0  5.5,4.5  0.5,9" Effect="{DynamicResource Shadow.Black.Large}"/>
-                            <Polygon Grid.Column="2" Fill="{DynamicResource Element.Foreground}" Points="5.5,0  0.5,4.5  5.5,9" Effect="{DynamicResource Shadow.Black.Large}"/>
+                            <Polygon Grid.Column="0" x:Name="LeftPolygon" Fill="{DynamicResource Element.Background}" Stroke="{DynamicResource Element.Border}" 
+                                     StrokeThickness="0.5" Points="0.5,0  5.5,4.5  0.5,9" UseLayoutRounding="True" SnapsToDevicePixels="True"/>
+                            <Polygon Grid.Column="2" x:Name="RightPolygon" Fill="{DynamicResource Element.Background}" Stroke="{DynamicResource Element.Border}" 
+                                     StrokeThickness="0.5" Points="5.5,0  0.5,4.5  5.5,9" UseLayoutRounding="True" SnapsToDevicePixels="True"/>
                         </Grid>
                     </Viewbox>
+                    
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="LeftPolygon" Property="Fill" Value="{DynamicResource Element.Background.Hover}"/>
+                            <Setter TargetName="RightPolygon" Property="Fill" Value="{DynamicResource Element.Background.Hover}"/>
+                            <Setter TargetName="LeftPolygon" Property="Stroke" Value="{DynamicResource Element.Border.Hover}"/>
+                            <Setter TargetName="RightPolygon" Property="Stroke" Value="{DynamicResource Element.Border.Hover}"/>
+                        </Trigger>
+                        <Trigger Property="IsDragging" Value="True">
+                            <Setter TargetName="LeftPolygon" Property="Fill" Value="{DynamicResource Element.Background.Pressed}"/>
+                            <Setter TargetName="RightPolygon" Property="Fill" Value="{DynamicResource Element.Background.Pressed}"/>
+                            <Setter TargetName="LeftPolygon" Property="Stroke" Value="{DynamicResource Element.Border.Pressed}"/>
+                            <Setter TargetName="RightPolygon" Property="Stroke" Value="{DynamicResource Element.Border.Pressed}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -1818,7 +1835,6 @@
     <Style x:Key="{x:Type n:SpectrumSlider}" TargetType="{x:Type n:SpectrumSlider}">
         <Setter Property="Orientation" Value="Vertical"/>
         <Setter Property="Stylus.IsPressAndHoldEnabled" Value="False"/>
-        <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
         <Setter Property="Minimum" Value="0"/>
         <Setter Property="Maximum" Value="100"/>
@@ -1826,6 +1842,29 @@
         <Setter Property="IsSnapToTickEnabled" Value="True"/>
         <Setter Property="IsDirectionReversed" Value="False"/>
         <Setter Property="Value" Value="1"/>
+        <Setter Property="Background">
+            <Setter.Value>
+                <DrawingBrush Viewport="0,0,10,10" ViewportUnits="Absolute" TileMode="Tile">
+                    <DrawingBrush.Drawing>
+                        <DrawingGroup>
+                            <GeometryDrawing Brush="White">
+                                <GeometryDrawing.Geometry>
+                                    <RectangleGeometry Rect="0,0 100,100"/>
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                            <GeometryDrawing Brush="LightGray">
+                                <GeometryDrawing.Geometry>
+                                    <GeometryGroup>
+                                        <RectangleGeometry Rect="0,0 50,50"/>
+                                        <RectangleGeometry Rect="50,50 50,50"/>
+                                    </GeometryGroup>
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                        </DrawingGroup>
+                    </DrawingBrush.Drawing>
+                </DrawingBrush>
+            </Setter.Value>
+        </Setter>
 
         <Setter Property="Template">
             <Setter.Value>

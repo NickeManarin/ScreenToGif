@@ -93,6 +93,40 @@ namespace ScreenToGif.Windows
 
         #endregion
 
+        #region Mouse cursor follow up
+
+        /// <summary>
+        /// The previous position of the cursor in the X axis.
+        /// </summary>
+        private int _prevPosX = 0;
+
+        /// <summary>
+        /// The previous position of the cursor in the Y axis.
+        /// </summary>
+        private int _prevPosY = 0;
+
+        /// <summary>
+        /// The latest position of the cursor in the X axis.
+        /// </summary>
+        private int _posX = 0;
+
+        /// <summary>
+        /// The latest position of the cursor in the Y axis.
+        /// </summary>
+        private int _posY = 0;
+
+        /// <summary>
+        /// The offset in pixels. Used for moving the recorder around the X axis.
+        /// </summary>
+        private double _offsetX = 0;
+
+        /// <summary>
+        /// The offset in pixels. Used for moving the recorder around the Y axis.
+        /// </summary>
+        private double _offsetY = 0;
+
+        #endregion
+
         #endregion
 
         #region Timer
@@ -102,6 +136,9 @@ namespace ScreenToGif.Windows
         private readonly System.Timers.Timer _garbageTimer = new System.Timers.Timer();
 
         private readonly Timer _preStartTimer = new Timer();
+
+        private readonly Timer _followTimer = new Timer();
+        private readonly Timer _showBorderTimer = new Timer();
 
         #endregion
 
@@ -140,8 +177,16 @@ namespace ScreenToGif.Windows
             #endregion
         }
 
-        private void Recorder_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            #region Adjust the position
+
+            //Tries to adjust the position/size of the window, centers on screen otherwise.
+            if (!UpdatePositioning(true))
+                WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+            #endregion
+
             #region If Snapshot
 
             if (UserSettings.All.SnapshotMode)
@@ -149,11 +194,16 @@ namespace ScreenToGif.Windows
 
             #endregion
 
-            #region Timer
+            #region Timers
 
             _garbageTimer.Interval = 3000;
             _garbageTimer.Elapsed += GarbageTimer_Tick;
             _garbageTimer.Start();
+
+            _showBorderTimer.Interval = 500;
+            _showBorderTimer.Tick += ShowBorderTimer_Tick;
+
+            _followTimer.Tick += FollowTimer_Tick;
 
             #endregion
 
@@ -163,6 +213,17 @@ namespace ScreenToGif.Windows
             SystemEvents.DisplaySettingsChanged += SystemEvents_DisplaySettingsChanged;
 
             RecordPauseButton.Focus();
+        }
+
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            if (IsFollowing && UserSettings.All.FollowShortcut == Key.None)
+            {
+                IsFollowing = false;
+
+                Dialog.Ok(LocalizationHelper.Get("Recorder"), LocalizationHelper.Get("S.Options.Warning.Follow.Header"),
+                    LocalizationHelper.Get("S.Options.Warning.Follow.Message"), Icons.Warning);
+            }
         }
 
         #endregion
@@ -183,6 +244,8 @@ namespace ScreenToGif.Windows
                 StopButton_Click(null, null);
             else if ((Stage == Stage.Paused || Stage == Stage.Snapping) && Keyboard.Modifiers.HasFlag(UserSettings.All.DiscardModifiers) && e.Key == UserSettings.All.DiscardShortcut)
                 DiscardButton_Click(null, null);
+            else if (Keyboard.Modifiers.HasFlag(UserSettings.All.FollowModifiers) && e.Key == UserSettings.All.FollowShortcut)
+                IsFollowing = !IsFollowing;
             else
                 _keyList.Add(new SimpleKeyGesture(e.Key, Keyboard.Modifiers, e.IsUppercase));
         }
@@ -196,6 +259,9 @@ namespace ScreenToGif.Windows
                 return;
 
             _recordClicked = args.LeftButton == MouseButtonState.Pressed || args.RightButton == MouseButtonState.Pressed || args.MiddleButton == MouseButtonState.Pressed;
+
+            _posX = args.PosX;
+            _posY = args.PosY;
 
             if (!IsMouseCaptured || Mouse.Captured == null)
                 return;
@@ -229,8 +295,7 @@ namespace ScreenToGif.Windows
             {
                 #region Try to get the process
 
-                uint id = 0;
-                Native.GetWindowThreadProcessId(handle, out id);
+                Native.GetWindowThreadProcessId(handle, out var id);
                 var target = Process.GetProcesses().FirstOrDefault(p => p.Id == id);
 
                 #endregion
@@ -727,6 +792,68 @@ namespace ScreenToGif.Windows
             GC.Collect(UserSettings.All.LatestFps > 30 ? 6 : 2);
         }
 
+
+        private void FollowTimer_Tick(object sender, EventArgs e)
+        {
+            if (WindowState != WindowState.Normal || _prevPosX == _posX && _prevPosY == _posY || Keyboard.Modifiers == UserSettings.All.DisableFollowModifiers)
+                return;
+
+            _prevPosX = _posX;
+            _prevPosY = _posY;
+            
+            //TODO: Test with 2 monitors.
+            //if (isCentered)
+            //{
+            //    //Hide the UI.
+            //    _showBorderTimer.Stop();
+            //    BeginStoryboard(this.FindStoryboard("HideRectangleStoryboard"), HandoffBehavior.SnapshotAndReplace);
+            //    _showBorderTimer.Start();
+
+            //    //_offsetX = _posX - Region.Width / 2d;
+            //    //_offsetY = _posY - Region.Height / 2d;
+
+            //    //Region = new Rect(new Point(_offsetX.Clamp(-1, Width - Region.Width + 1), _offsetY.Clamp(-1, Height - Region.Height + 1)), Region.Size);
+            //    //DashedRectangle.Refresh();
+            //}
+            //else
+            {
+                if (_size.Width < 1)
+                    _size = new Size((int)Math.Round((Width - Constants.HorizontalOffset) * _scale), (int)Math.Round((Height - Constants.VerticalOffset) * _scale));
+
+                //Only move to the left if 'Mouse.X < Rect.L' and only move to the right if 'Mouse.X > Rect.R'
+                _offsetX = _posX - UserSettings.All.FollowBuffer < _left ? _posX - _left - UserSettings.All.FollowBuffer : _posX + UserSettings.All.FollowBuffer > _left + _size.Width ? 
+                    _posX - (_left + _size.Width) + UserSettings.All.FollowBuffer : 0;
+                _offsetY = _posY - UserSettings.All.FollowBuffer < _top ? _posY - _top - UserSettings.All.FollowBuffer : _posY + UserSettings.All.FollowBuffer > _top + _size.Height ? 
+                    _posY - (_top + _size.Height) + UserSettings.All.FollowBuffer : 0;
+
+                //Hide the UI when moving.
+                if (_posX - UserSettings.All.FollowBuffer - UserSettings.All.FollowBufferInvisible < _left || _posX + UserSettings.All.FollowBuffer + UserSettings.All.FollowBufferInvisible > _left + _size.Width || 
+                    _posY - UserSettings.All.FollowBuffer - UserSettings.All.FollowBufferInvisible < _top || _posY + UserSettings.All.FollowBuffer + UserSettings.All.FollowBufferInvisible > _top + _size.Height)
+                {
+                    _showBorderTimer.Stop();
+                    HideInternals();
+                    BeginStoryboard(this.FindStoryboard("HideWindowStoryboard"), HandoffBehavior.Compose);
+                    _showBorderTimer.Start();
+                }
+
+                this.Refresh();
+            }
+
+            //Rearrange the window.
+            Left = (Left + _offsetX / _scale).Clamp(0 - Constants.LeftOffset, SystemParameters.VirtualScreenWidth - Width + Constants.RightOffset);
+            Top = (Top + _offsetY / _scale).Clamp(0 - Constants.TopOffset, SystemParameters.VirtualScreenHeight - Height + Constants.BottomOffset);
+        }
+
+        private void ShowBorderTimer_Tick(object sender, EventArgs e)
+        {
+            _showBorderTimer.Stop();
+
+            this.Refresh();
+            ShowInternals();
+
+            BeginStoryboard(this.FindStoryboard("ShowWindowStoryboard"), HandoffBehavior.Compose);
+        }
+
         #endregion
 
         #region Methods
@@ -1058,10 +1185,29 @@ namespace ScreenToGif.Windows
             if (closest.WorkingArea.Bottom < UserSettings.All.RecorderTop + 100)
                 top = closest.WorkingArea.Bottom - UserSettings.All.RecorderHeight;
 
-            UserSettings.All.RecorderTop = top;
-            UserSettings.All.RecorderLeft = left;
+            Top = UserSettings.All.RecorderTop = top;
+            Left = UserSettings.All.RecorderLeft = left;
             
             return true;
+        }
+
+        internal override void OnFollowingChanged()
+        {
+            Follow();
+
+            base.OnFollowingChanged();
+        }
+
+        private void Follow()
+        {
+            if (IsFollowing && UserSettings.All.FollowShortcut != Key.None)
+            {
+                _followTimer.Interval = (1000 / UserSettings.All.LatestFps) / 2;
+                _followTimer.Start();
+                return;
+            }
+
+            _followTimer.Stop();
         }
 
         #endregion
@@ -1110,6 +1256,8 @@ namespace ScreenToGif.Windows
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             //Save Settings
+            UserSettings.All.RecorderTop = Top;
+            UserSettings.All.RecorderLeft = Left;
             UserSettings.Save();
 
             #region Remove Hooks

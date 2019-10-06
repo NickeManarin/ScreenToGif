@@ -255,7 +255,7 @@
     <s:String x:Key="S.Upload.Imgur.Valid">Zugriffsberechtigung gültig bis {0}.</s:String>
     <s:String x:Key="S.Upload.Imgur.Removed">Imgur-Zugriffsberechtigung gelöscht.</s:String>
     <s:String x:Key="S.Upload.Imgur.Error.AlbumLoad">Laden der Album-Liste fehlgeschlagen.</s:String>
-    <s:String x:Key="S.Upload.Gyfcat.Anonymous">Gyfcat (anonym)</s:String>
+    <s:String x:Key="S.Upload.Gfycat.Anonymous">Gfycat (anonym)</s:String>
     <s:String x:Key="S.Upload.Yandex.Token">OAuth-Token:</s:String>
     <s:String x:Key="S.Upload.Pick.Destination">Ziel wählen</s:String>
     <s:String x:Key="S.Upload.Pick.Album">Album wählen (optional)</s:String>

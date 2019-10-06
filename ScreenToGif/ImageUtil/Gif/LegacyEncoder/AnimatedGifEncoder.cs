@@ -284,7 +284,9 @@ namespace ScreenToGif.ImageUtil.Gif.LegacyEncoder
         /// <param name="quality">Quality value greater than 0.</param>
         public void SetQuality(int quality)
         {
-            if (quality < 1) quality = 1;
+            if (quality < 1)
+                quality = 1;
+
             _sample = quality;
         }
 
@@ -370,10 +372,10 @@ namespace ScreenToGif.ImageUtil.Gif.LegacyEncoder
             var nPix = _pixels.Length / 3;
             _indexedPixels = new byte[nPix];
 
-            var colorTable = _colorList.AsParallel().GroupBy(x => x) //Grouping based on its value
-                .OrderByDescending(g => g.Count()) //Order by most frequent values
-                .Select(g => g.FirstOrDefault()) //take the first among the group
-                .ToList(); //Could use .Take(256)
+            var colorTable = _colorList.AsParallel().GroupBy(x => x) //Grouping based on its value.
+                .OrderByDescending(g => g.Count()) //Order by most frequent values.
+                .Select(g => g.FirstOrDefault()) //Take the first among the group.
+                .ToList(); //Could use .Take(256).
 
             _usedEntry = new bool[256];
 
@@ -383,7 +385,7 @@ namespace ScreenToGif.ImageUtil.Gif.LegacyEncoder
 
                 _colorTab = new byte[768];
 
-                int indexAux = 0;
+                var indexAux = 0;
                 foreach (var color in colorTable)
                 {
                     _colorTab[indexAux++] = color.R;
@@ -429,7 +431,7 @@ namespace ScreenToGif.ImageUtil.Gif.LegacyEncoder
                 #region Quantitizer needed
 
                 //Neural quantitizer.
-                var nq = new NeuQuant(_pixels, _sample);
+                var nq = new NeuQuant(_pixels, _sample, _firstFrame ? null : _transparent);
 
                 //Create reduced palette.
                 _colorTab = nq.Process();
@@ -445,7 +447,7 @@ namespace ScreenToGif.ImageUtil.Gif.LegacyEncoder
                 }
 
                 //Get closest match to transparent color if specified.
-                if (_transparent != null)
+                if (_transparent != null && !_firstFrame)
                     _transIndex = nq.Map(_transparent.Value.B, _transparent.Value.G, _transparent.Value.R);
 
                 #endregion

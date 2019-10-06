@@ -79,5 +79,21 @@ namespace ScreenToGif.Util
 
             return true;
         }
+
+        /// <summary>
+        /// Forces an integer to be between two values.
+        /// </summary>
+        public static int Clamp(this int value, int min, int max)
+        {
+            return (value <= min) ? min : (value >= max) ? max : value;
+        }
+
+        /// <summary>
+        /// Forces a double to be between two values.
+        /// </summary>
+        public static double Clamp(this double value, double min, double max)
+        {
+            return (value <= min) ? min : (value >= max) ? max : value;
+        }
     }
 }

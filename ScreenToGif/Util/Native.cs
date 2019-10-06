@@ -32,7 +32,7 @@ namespace ScreenToGif.Util
 
         internal const int DiNormal = 0x0003;
 
-        internal const int MonitorinfofPrimary = 0x00000001;
+        internal const int MonitorinfoPrimary = 0x00000001;
 
         internal const int StateSystemUnavailable = 0x0001;
         internal const int StateSystemInvisible = 0x8000;
@@ -1437,7 +1437,7 @@ namespace ScreenToGif.Util
         internal static extern bool Shell_NotifyIcon(NotifyCommand cmd, [In] ref NotifyIconData data);
 
         [DllImport("user32.dll", EntryPoint = "CreateWindowExW", SetLastError = true)]
-        internal static extern IntPtr CreateWindowEx(int dwExStyle, [MarshalAs(UnmanagedType.LPWStr)] string lpClassName, [MarshalAs(UnmanagedType.LPWStr)] string lpWindowName, 
+        internal static extern IntPtr CreateWindowEx(int dwExStyle, [MarshalAs(UnmanagedType.LPWStr)] string lpClassName, [MarshalAs(UnmanagedType.LPWStr)] string lpWindowName,
             int dwStyle, int x, int y, int nWidth, int nHeight, IntPtr hWndParent, IntPtr hMenu, IntPtr hInstance, IntPtr lpParam);
 
         /// <summary>
@@ -1933,11 +1933,13 @@ namespace ScreenToGif.Util
             return windows.OrderBy(o => o.Order).ToList();
         }
 
-        public static char? GetCharFromKey(Key key)
+        public static char? GetCharFromKey(Key key, bool ignoreState = true)
         {
             var virtualKey = KeyInterop.VirtualKeyFromKey(key);
             var keyboardState = new byte[256];
-            GetKeyboardState(keyboardState);
+
+            if (!ignoreState)
+                GetKeyboardState(keyboardState);
 
             var scanCode = MapVirtualKey((uint)virtualKey, MapType.MapvkVkToVsc);
             var stringBuilder = new StringBuilder(2);
@@ -2079,6 +2081,22 @@ namespace ScreenToGif.Util
                 isUppercase = true;
 
             return modifiersText + (isUppercase ? char.ToUpper(result.Value) : result);
+        }
+
+        public static string GetSelectKeyText(ModifierKeys modifier = ModifierKeys.None)
+        {
+            //Get the modifers as text.
+            var modifiersText = Enum.GetValues(modifier.GetType()).OfType<ModifierKeys>()
+                .Where(x => x != ModifierKeys.None && modifier.HasFlag(x))
+                .Aggregate("", (current, mod) =>
+                {
+                    if (mod == ModifierKeys.Control) //TODO: Custom mod.ToString();
+                        return current + (string.IsNullOrWhiteSpace(current) ? "" : " + ") + "Ctrl";
+
+                    return current + (string.IsNullOrWhiteSpace(current) ? "" : " + ") + mod;
+                });
+
+            return modifiersText;
         }
 
         public static int GetZOrder(IntPtr hWnd)
@@ -2542,7 +2560,7 @@ namespace ScreenToGif.Util
                 return;
 
             IsDisposed = true;
-            
+
             Native.DestroyWindow(MessageWindowHandle);
             _messageHandler = null;
         }
@@ -2577,7 +2595,7 @@ namespace ScreenToGif.Util
                         info.rcWork.Right - info.rcWork.Left,
                         info.rcWork.Bottom - info.rcWork.Top);
 
-            IsPrimary = (info.dwFlags & Native.MonitorinfofPrimary) != 0;
+            IsPrimary = (info.dwFlags & Native.MonitorinfoPrimary) != 0;
 
             Name = new string(info.szDevice).TrimEnd((char)0);
 

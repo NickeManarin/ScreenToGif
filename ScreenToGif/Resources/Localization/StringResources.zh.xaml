@@ -257,7 +257,7 @@
     <s:String x:Key="S.Upload.Imgur.Valid">授权有效期至{0}。</s:String>
     <s:String x:Key="S.Upload.Imgur.Removed">Imgur 授权被删除。</s:String>
     <s:String x:Key="S.Upload.Imgur.Error.AlbumLoad">无法加载相册列表。</s:String>
-    <s:String x:Key="S.Upload.Gyfcat.Anonymous">Gfycat（匿名）</s:String>
+    <s:String x:Key="S.Upload.Gfycat.Anonymous">Gfycat（匿名）</s:String>
     <s:String x:Key="S.Upload.Yandex.Token">OAuth 凭证：</s:String>
     <s:String x:Key="S.Upload.Pick.Destination">选择一个目标</s:String>
     <s:String x:Key="S.Upload.Pick.Album">选择一个相册（可选）</s:String>
