@@ -77,7 +77,7 @@
     <s:String x:Key="Language">Språk</s:String>
     <s:String x:Key="TemporaryFiles">Temporära filer</s:String>
     <s:String x:Key="Extras">Extra</s:String>
-    <s:String x:Key="Clouds">Uppladdningstjänster</s:String>
+    <s:String x:Key="Clouds">Uppladdnings&#173;tjänster</s:String>
     <s:String x:Key="Donate">Donera</s:String>
     <s:String x:Key="About">Om</s:String>
     
