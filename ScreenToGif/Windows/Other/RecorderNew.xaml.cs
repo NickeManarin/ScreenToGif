@@ -1409,7 +1409,7 @@ namespace ScreenToGif.Windows.Other
 
         private void FollowTimer_Tick(object sender, EventArgs e)
         {
-            if (Region.IsEmpty || _prevPosX == _posX && _prevPosY == _posY || Keyboard.Modifiers == UserSettings.All.DisableFollowModifiers)
+            if (Region.IsEmpty || _prevPosX == _posX && _prevPosY == _posY || (Keyboard.Modifiers != ModifierKeys.None && Keyboard.Modifiers == UserSettings.All.DisableFollowModifiers))
                 return;
 
             _prevPosX = _posX;
