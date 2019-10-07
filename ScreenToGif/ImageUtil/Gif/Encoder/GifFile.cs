@@ -82,8 +82,15 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
         /// </summary>
         private int ColorTableSize { get; set; }
 
-        private int cumulativeTime { get; set; } = 0;
-        private int cumulativePrevDelay { get; set; } = 0;
+        /// <summary>
+        /// Cumulative non adjusted time.
+        /// </summary>
+        private int OrganicTime { get; set; }
+        
+        /// <summary>
+        /// Adjusted and rounded off time.
+        /// </summary>
+        private int AdjustedTime { get; set; }
 
         #endregion
 
@@ -105,10 +112,6 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
         public void AddFrame(string path, Int32Rect rect, int delay = 66)
         {
             CurrentTransparentColor = TransparentColor;
-
-            cumulativeTime += delay;
-            delay = (int)Math.Round((cumulativeTime > delay ? cumulativeTime - cumulativePrevDelay*10 : delay) / 10.0f, MidpointRounding.AwayFromZero);
-            cumulativePrevDelay += delay;
 
             ReadPixels(path);
             //HandleTransparency();
@@ -269,6 +272,12 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
 
             //Write the packed fields.
             WriteByte(ConvertToByte(bitArray));
+
+            //Calculates the delay, taking into consideration overall rounding.
+            OrganicTime += delay;
+            delay = (int)Math.Round((OrganicTime > delay ? OrganicTime - AdjustedTime * 10 : delay) / 10.0f, MidpointRounding.AwayFromZero);
+            AdjustedTime += delay;
+            //WriteShort((int)Math.Round(delay / 10.0f, MidpointRounding.AwayFromZero));
 
             WriteShort(delay);
             WriteByte(FindTransparentColorIndex()); //Transparency Index.

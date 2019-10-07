@@ -118,16 +118,31 @@ namespace ScreenToGif.ImageUtil.Gif.LegacyEncoder
         /// </summary>
         private int _sample = 10;
 
+        /// <summary>
+        /// Cumulative non adjusted time.
+        /// </summary>
+        private int _organicTime;
+
+        /// <summary>
+        /// Adjusted and rounded off time.
+        /// </summary>
+        private int _adjustedTime;
+
         #endregion
 
         /// <summary>
         /// Sets the delay time between each frame, or changes it
         /// for subsequent frames (applies to last frame added).
         /// </summary>
-        /// <param name="ms">Delay time in milliseconds</param>
-        public void SetDelay(int ms)
+        /// <param name="delay">Delay time in milliseconds</param>
+        public void SetDelay(int delay)
         {
-            _delay = (int)Math.Round(ms / 10.0f, MidpointRounding.AwayFromZero);
+            //Calculates the delay, taking into consideration overall rounding.
+            _organicTime += delay;
+            _delay = (int)Math.Round((_organicTime > delay ? _organicTime - _adjustedTime * 10 : delay) / 10.0f, MidpointRounding.AwayFromZero);
+            _adjustedTime += _delay;
+
+            //_delay = (int)Math.Round(delay / 10.0f, MidpointRounding.AwayFromZero);
         }
 
         /// <summary>
