@@ -404,6 +404,7 @@
     <RoutedUICommand x:Key="Command.Ok" Text="S.Command.Ok">
         <RoutedUICommand.InputGestures>
             <KeyGesture>Alt + E</KeyGesture>
+            <KeyGesture>Enter</KeyGesture>
         </RoutedUICommand.InputGestures>
     </RoutedUICommand>
 
