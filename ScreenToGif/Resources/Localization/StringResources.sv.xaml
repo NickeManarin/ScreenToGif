@@ -3,8 +3,8 @@
                     xmlns:s="clr-namespace:System;assembly=mscorlib"
                     xml:space="preserve">
     
-    <!--To use a new line: &#x0d;-->
-    <!--Or CarriageReturn + NewLine: &#x0d;&#x0a; or &#10;--> 
+    <!--To use a new line: &#x0d; or CarriageReturn + NewLine: &#x0d;&#x0a; or &#10;--> 
+    <!--You can use the zero-width-divider to suggest where the word should be divided when there's no space &#8203;-->
     <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
     
     <!--General-->
@@ -37,6 +37,69 @@
     <!--Error messages--> 
     <s:String x:Key="S.Crash">Oh nej, appen kraschade :(</s:String>
     <s:String x:Key="S.Required">Obligatoriskt fält.</s:String>
+    
+    <!--Commands-->
+    <s:String x:Key="S.Command.NewRecording">Ny skärminspelning</s:String>
+    <s:String x:Key="S.Command.NewWebcamRecording">Ny webbkamerainspelning</s:String>
+    <s:String x:Key="S.Command.NewBoardRecording">Ny ritbordinspelning</s:String>
+    <s:String x:Key="S.Command.NewAnimation">Ny animering</s:String>
+    <s:String x:Key="S.Command.InsertRecording">Infoga skärminspelning</s:String>
+    <s:String x:Key="S.Command.InsertWebcamRecording">Infoga webbkamerainspelning</s:String>
+    <s:String x:Key="S.Command.InsertBoardRecording">Infoga ritbordsinspelning</s:String>
+    <s:String x:Key="S.Command.InsertFromMedia">Infoga från media (bilder och videor)</s:String>
+    <s:String x:Key="S.Command.SaveAs">Spara som...</s:String>
+    <s:String x:Key="S.Command.Load">Ladda filer (bilder, videor och projekt)</s:String>
+    <s:String x:Key="S.Command.LoadRecent">Ladda de senaste projekten</s:String>
+    <s:String x:Key="S.Command.DiscardProject">Förkasta aktuellt projekt</s:String>
+    <s:String x:Key="S.Command.OverrideDelay">Åsidosätt fördröjning av bildrutor</s:String>
+    <s:String x:Key="S.Command.IncreaseDecreaseDelay">Öka/Minska fördröjningen av bildrutor</s:String>
+    <s:String x:Key="S.Command.ScaleDelay">Skala fördröjning av bildrutor</s:String>
+    <s:String x:Key="S.Command.Zoom100">Ställ zoom till 100%</s:String>
+    <s:String x:Key="S.Command.SizeToContent">Justera fönstret till bildrutsstorlek</s:String>
+    <s:String x:Key="S.Command.FitImage">Anpassa bilden till den tillgängliga fönsterstorleken</s:String>
+    <s:String x:Key="S.Command.FirstFrame">Välj den första bildruta</s:String>
+    <s:String x:Key="S.Command.PreviousFrame">Välj föregående bildruta</s:String>
+    <s:String x:Key="S.Command.Play">Spela upp animeringen</s:String>
+    <s:String x:Key="S.Command.NextFrame">Välj nästa bildruta</s:String>
+    <s:String x:Key="S.Command.LastFrame">Välj den sista bildrutan</s:String>
+    <s:String x:Key="S.Command.Reset">Ångra all ändringar i projektet</s:String>
+    <s:String x:Key="S.Command.DeletePrevious">Radera alla föregående bildrutor</s:String>
+    <s:String x:Key="S.Command.DeleteNext">Radera alla efterföljande bildrutor</s:String>
+    <s:String x:Key="S.Command.RemoveDuplicates">Ta bort dubbletter</s:String>
+    <s:String x:Key="S.Command.Reduce">Minska antalet bildrutor</s:String>
+    <s:String x:Key="S.Command.Reverse">Omvänd animation</s:String>
+    <s:String x:Key="S.Command.Yoyo">Yoyo, får animationen att gå framåt och bakåt</s:String>
+    <s:String x:Key="S.Command.MoveLeft">Flytta markerad bildruta till vänster</s:String>
+    <s:String x:Key="S.Command.MoveRight">Flytta markerad bildruta till höger</s:String>
+    <s:String x:Key="S.Command.Resize">Ändra storlek på alla bildrutor</s:String>
+    <s:String x:Key="S.Command.Crop">Beskär alla bildrutor</s:String>
+    <s:String x:Key="S.Command.FlipRotate">Vänd eller rotera bildrutorna</s:String>
+    <s:String x:Key="S.Command.Caption">Lägg till en bildtext</s:String>
+    <s:String x:Key="S.Command.FreeText">Lägg till en fritt flytande text</s:String>
+    <s:String x:Key="S.Command.TitleFrame">Lägg till en bildruta som har en titel</s:String>
+    <s:String x:Key="S.Command.KeyStrokes">Tangenttryckningar: infogar knapptryckningar i inspelningen</s:String>
+    <s:String x:Key="S.Command.FreeDrawing">Rita fritt</s:String>
+    <s:String x:Key="S.Command.Shapes">Lägg till former</s:String>
+    <s:String x:Key="S.Command.MouseClicks">Musklick</s:String>
+    <s:String x:Key="S.Command.Watermark">Välj en bild och lägg till den som vattenstämpel</s:String>
+    <s:String x:Key="S.Command.Border">Lägg till kant</s:String>
+    <s:String x:Key="S.Command.Shadow">Lägg till skugga</s:String>
+    <s:String x:Key="S.Command.Obfuscate">Förvrängning: dölj känsliga delar på dina bildrutor</s:String>
+    <s:String x:Key="S.Command.Progress">Förloppsindikator eller text med uppspelningsdetaljer</s:String>
+    <s:String x:Key="S.Command.SelectAll">Markera alla bildrutor</s:String>
+    <s:String x:Key="S.Command.GoTo">Navigera till bildruta efter index</s:String>
+    <s:String x:Key="S.Command.InverseSelection">Omvänd markering av bildrutor</s:String>
+    <s:String x:Key="S.Command.Unselect">Avmarkera alla bildrutor</s:String>
+    <s:String x:Key="S.Command.Fade">Tona övergången</s:String>
+    <s:String x:Key="S.Command.Slide">Glidövergång</s:String>
+    <s:String x:Key="S.Command.ClearAll">Rensa alla slutförda kodningar</s:String>
+    <s:String x:Key="S.Command.MoveUp">Flytta upp</s:String>
+    <s:String x:Key="S.Command.MoveDown">Flytta ner</s:String>
+    <s:String x:Key="S.Command.Add">Lägg till</s:String>
+    <s:String x:Key="S.Command.Open">Öppna</s:String>
+    <s:String x:Key="S.Command.Edit">Redigera valt objekt</s:String>
+    <s:String x:Key="S.Command.Save">Spara markerade objekt</s:String>
+    <s:String x:Key="S.Command.Remove">Ta bort markerade objekt</s:String>
     
     <!--StartUp Page-->
     <s:String x:Key="Title.StartUp">ScreenToGif - Uppstart</s:String>
@@ -81,6 +144,9 @@
     <s:String x:Key="Donate">Donera</s:String>
     <s:String x:Key="About">Om</s:String>
     
+    <s:String x:Key="S.Options.Warning.Follow.Header">Snabbkommando saknas till följ markören</s:String>
+    <s:String x:Key="S.Options.Warning.Follow.Message">För att du ska kunna använda följ markören, måste du ange ett snabbkommando för att kunna aktivera/inaktivera funktionen</s:String>
+    
     <s:String x:Key="Application.ScreenRecorder">Skärminspelning</s:String>
     <s:String x:Key="Application.ScreenRecorder.RecordMouse">Visa muspekaren i inspelningen.</s:String>
     <s:String x:Key="Application.ScreenRecorder.RecordClicks">Detektera musklick.</s:String>
@@ -89,7 +155,7 @@
     <s:String x:Key="Application.ScreenRecorder.PreStart.Info">(i sekunder, väntar med att starta inspelningen)</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording">Aktivera skärmbildtagningsläge.</s:String>
     <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Varje bildruta kommer att fångas manuellt av dig)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Fast bildhastighet.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Konstant bildhastighet.</s:String>
     <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Konstant fördröjning, förändras inte med inspelningseftersläpning)</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Aktivera osynkroniserad inspelning</s:String>
     <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(Hjälper till att minska gränssnittseftersläpningar vid inspelning)</s:String>
@@ -97,8 +163,12 @@
     <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(Det ersätter det gamla inspelningsgränssnittet)</s:String>
     <s:String x:Key="Application.ScreenRecorder.Magnifier">Aktivera skärmförstorning.</s:String>
     <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(När du markerar inspelningsområdet aktiveras ett förstorningsglas)</s:String>
-    
-    <s:String x:Key="Application.Other">Andra</s:String>
+    <s:String x:Key="Application.ScreenRecorder.CursorFollowing">Aktivera följ markören.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.CursorFollowing.Info">(Inspelningsområdet förflyttar sig själv efter markörens placering)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.FollowMargin.Info">(Buffertmarginal där inspelningsområdet börjar förflyttas)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.FollowMarginInvisible.Info">(Ytterligare buffertmarginal där användargränssnittet börjar bli dold)</s:String>
+
+    <s:String x:Key="Application.Other">Övrigt</s:String>
     <s:String x:Key="Application.Other.SystemTray">Visa appen i systemfältet (aviseringsområdet)</s:String>
     <s:String x:Key="Application.Other.LeaveOpen">Håll appen öppen även om alla fönster är stängda.</s:String>
     <s:String x:Key="Application.Other.NotifyFrameDeletion">Fråga mig innan jag raderar bildrutor.</s:String>
@@ -108,6 +178,7 @@
     <s:String x:Key="Application.Other.DrawOutlineOutside">Rita konturerna med bildtexter utanför bokstäverna.</s:String>
     <s:String x:Key="Application.Other.DisableHardwareAcceleration">Inaktivera maskinvaruacceleration.</s:String>
     <s:String x:Key="Application.Other.CheckForTranslationUpdates">Sök efter översättningsuppdateringar.</s:String>
+    <s:String x:Key="Application.Other.CheckForTranslationUpdates.Info">(Uppdaterade språkfiler kommer att laddas ner och installeras automatiskt.)</s:String>
     <s:String x:Key="Application.Other.CheckForUpdates">Sök efter uppdateringar.</s:String>
     <s:String x:Key="S.Application.Other.Homepage">Hemsida:</s:String>
     <s:String x:Key="S.Application.Other.Homepage.StartUp">Uppstartsfönster</s:String>
@@ -161,7 +232,7 @@
     <s:String x:Key="Interface.Other.HideTitleBar">Dölj titelraden (tunt läge).</s:String>
     <s:String x:Key="Interface.Other.TripleClickSelection">Aktivera trippelklicka för att välja text.</s:String>
     <s:String x:Key="Interface.Other.AutomaticallySizeOnContent">Justera automatiskt fönsterstorleken baserat på bildrutans storlek, direkt efter laddning.</s:String>
-    <s:String x:Key="Interface.Other.AutomaticallyFitImage">Justera automatiskt bildrutans zoomning baserat på fönsterstorleken, direkt efter laddning.</s:String>
+    <s:String x:Key="Interface.Other.AutomaticallyFitImage">Justera automatiskt bildrutans zoom baserat på fönsterstorleken, direkt efter laddning.</s:String>
   
     <s:String x:Key="S.Shortcuts.Global">Globalt</s:String>
     <s:String x:Key="S.Shortcuts.Global.ScreenRecorder">Skärminspelare:</s:String>
@@ -183,6 +254,10 @@
     <s:String x:Key="S.Shortcuts.Recorders.Stop.Info">(Stoppar inspelningen och öppnar redigeraren)</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.Discard">Förkasta:</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.Discard.Info">(Förkastar den aktiva inspelningen när den är pausad)</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Follow">Följ markören:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Follow.Info">(Växlar justering av inspelningsområdet baserat på markörens position)</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.DisableFollow">Inaktivera följ markören</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.DisableFollow.Info">(Inaktiverar tillfälligt justeringen av inspelningsområdet baserat på markörens position av markören, endast modifieringstangenter accepteras)</s:String>
     <s:String x:Key="S.Shortcuts.Info">Klicka för att ställa in tangentbordsfokus, tryck sedan på önskade knappar och modifierare.&#10;Vissa tangentkombinationer är inte tillåtna.</s:String>
     
     <s:String x:Key="Language.AppLanguage">Applikationsspråk</s:String>
@@ -301,7 +376,7 @@
     <s:String x:Key="About.Technical.SourceCode">Källkod:</s:String>
     <s:String x:Key="About.ABigThanksTo">Ett stort tack till</s:String>
     <s:String x:Key="About.ABigThanksTo.Everyone">Alla de som stöder mig, de som skickat och/eller donerat.</s:String>
-
+    
     <!--Localization-->
     <s:String x:Key="Localization">Lokalisering</s:String>
     <s:String x:Key="Localization.ResourcePositionUsed">Den nedersta filen är den som används.</s:String>
@@ -366,6 +441,8 @@
     <s:String x:Key="ColorSelector.Initial">Inledande färg</s:String>
     <s:String x:Key="ColorSelector.Current">Nuvarande färg</s:String>
     <s:String x:Key="ColorSelector.Latest">Senaste färg</s:String>
+    <s:String x:Key="ColorSelector.Sample">Dra detta till&#10;provfärgerna</s:String>
+    <s:String x:Key="ColorSelector.Sample.Info">Tryck och dra för att plocka&#10;färger från din skärm.</s:String>
     
     <!--Exception Viewer, Optional-->
     <s:String x:Key="ExceptionViewer.Title">Undantagsvisare</s:String>
@@ -417,7 +494,6 @@
     
     <!--Encoder-->
     <s:String x:Key="Encoder.Title">Kodare</s:String>
-    <s:String x:Key="Encoder.ClearAllCompleted">Rensa alla klara</s:String>
     <s:String x:Key="Encoder.Starting">Startar</s:String>
     <s:String x:Key="Encoder.Completed">Klara</s:String>
     <s:String x:Key="Encoder.Completed.Clipboard">Kopierad till urklippet</s:String>
@@ -529,6 +605,11 @@
     <s:String x:Key="Editor.Playback.Next">Nästa</s:String>
     <s:String x:Key="Editor.Playback.Last">Sista</s:String>
     
+    <!--Playback • Playback Options-->
+    <s:String x:Key="Editor.PlaybackOptions.Header">Uppspelningsalternativ</s:String>
+    <s:String x:Key="Editor.PlaybackOptions.Loop">Spela upp i slinga.</s:String>
+    <s:String x:Key="Editor.PlaybackOptions.Loop.Info">Används endast under uppspelning.&#10;Om du vill ändra slinginställningarna för att exportera Gifs och Apngs,&#10;kommer de att finnas tillgängliga i panelen 'Spara som' för vissa kodare.</s:String>
+    
     <!--Edit • Frames-->  
     <s:String x:Key="Editor.Edit.Frames">Bildrutor</s:String>
     <s:String x:Key="Editor.Edit.Delete">Radera</s:String>
@@ -539,7 +620,7 @@
     
     <!--Edit • Reordering-->
     <s:String x:Key="Editor.Edit.Reordering">Flytta om</s:String>
-    <s:String x:Key="Editor.Edit.Reverse">Baklänges</s:String>
+    <s:String x:Key="Editor.Edit.Reverse">Omvänd</s:String>
     <s:String x:Key="Editor.Edit.Yoyo">Yoyo</s:String>
     <s:String x:Key="Editor.Edit.MoveLeft">Flytta&#10;vänster</s:String>
     <s:String x:Key="Editor.Edit.MoveRight">Flytta&#10;höger</s:String>
@@ -559,7 +640,7 @@
     <!--Image • Text-->
     <s:String x:Key="Editor.Image.Text">Text</s:String>
     <s:String x:Key="Editor.Image.Caption">Rubrik</s:String>
-    <s:String x:Key="Editor.Image.FreeText">Fri text</s:String>
+    <s:String x:Key="Editor.Image.FreeText">Fritext</s:String>
     <s:String x:Key="Editor.Image.TitleFrame">Titelbildruta</s:String>
     <s:String x:Key="Editor.Image.KeyStrokes">Tangent-&#10;nertryckningar</s:String>
     
@@ -571,6 +652,7 @@
     <s:String x:Key="Editor.Image.Watermark">Vattenmärke</s:String>
     <s:String x:Key="Editor.Image.Cinemagraph">Cinemagrafi</s:String>
     <s:String x:Key="Editor.Image.Border">Kant</s:String>
+    <s:String x:Key="Editor.Image.Shadow">Skugga</s:String>
     <s:String x:Key="Editor.Image.Progress">Framsteg</s:String>
     <s:String x:Key="Editor.Image.Obfuscate">Förmörka</s:String>
 
@@ -585,6 +667,8 @@
     <s:String x:Key="Editor.Statistics.TotalDuration">Total varaktighet</s:String>
     <s:String x:Key="Editor.Statistics.FrameSize">Bildrutsstorlek</s:String>
     <s:String x:Key="Editor.Statistics.AverageDuration">Genomsnittlig varaktighet (fördröjning)</s:String>
+    <s:String x:Key="Editor.Statistics.CurrentTime">Aktuell tid</s:String>
+    <s:String x:Key="Editor.Statistics.CurrentTime.Info">Den aktuella tiden (kumulativ) baserat på den aktuella bildrutan som visas.</s:String>
     <s:String x:Key="Editor.Statistics.FrameDpi">Bildruts-DPI och skala</s:String>
     <s:String x:Key="Editor.Statistics.SelectedFrame">Markerad bildruta</s:String>
     
@@ -630,7 +714,9 @@
     <s:String x:Key="Editor.Watermark.WarningNoImage">Du måste välja en bild som gäller för de(n) valda bildrut(orna|an).</s:String>
     <s:String x:Key="Editor.Watermark.WarningSelection">Du måste välja åtminstone en bildruta för att tillämpa en vattenstämpel till.</s:String>
     <s:String x:Key="Editor.Border.WarningThickness">Du måste ange en gräns för ramtjockleken, större än noll på åtminstone en sida.</s:String>
-    <s:String x:Key="Editor.Border.WarningSelection">Du måste välja åtminstone en bildruta att tillämpa ramen till</s:String>
+    <s:String x:Key="Editor.Border.WarningSelection">Du måste välja åtminstone en bildruta att tillämpa bildrutan till</s:String>
+    <s:String x:Key="Editor.Shadow.Warning.Invisible">Genomskinligheten måste vara större än noll för att göra någon skillnad i bildrutan.</s:String>
+    <s:String x:Key="Editor.Shadow.Warning.Behind">När du använder skuggdjupet och oskärpradien som noll, kommer det inte att göra någon skillnad eftersom det kommer att döljas bakom bildrutan.</s:String>
     <s:String x:Key="Editor.Cinemagraph.WarningNoDrawing">Du måste välja åtminstone en bildpunkt att tillämpa cinemagrafin till. Markera bildpunkterna genom att rita ovanpå dem.</s:String>
     
     <s:String x:Key="Editor.Fade.Title">Toningsövergång</s:String>
@@ -706,7 +792,7 @@
     <s:String x:Key="Hint.Cut">{0} bildrutor beskurna</s:String>
     <s:String x:Key="Hint.Copy">{0} bildrutor kopierade</s:String>
     <s:String x:Key="Hint.Paste">{0} bildrutor klistrades in</s:String>
-    <s:String x:Key="Hint.Zoom">Zoomning satt till {0}%</s:String>
+    <s:String x:Key="Hint.Zoom">Zoom satt till {0}%</s:String>
     <s:String x:Key="Hint.SelectAll">Alla bildrutor har markerats</s:String>
     <s:String x:Key="Hint.SelectSingle">Bildruta #{0} markerad</s:String>
     <s:String x:Key="Hint.SelectInverse">Välj invers</s:String>
@@ -721,7 +807,8 @@
     <s:String x:Key="Hint.FlipRotate">Bildrutor vända/roterade</s:String>
     <s:String x:Key="Hint.FlipRotate2">Vändåtgärden tillämpas på de markerade bildrutorna och roteringen tillämpas på alla bildrutor</s:String>
     <s:String x:Key="Hint.ApplyAll">Denna åtgärd tillämpas på alla bildrutor</s:String>
-    <s:String x:Key="Hint.ApplySelected">Denna åtgärd tillämpas på den valda bildrutan</s:String>
+    <s:String x:Key="Hint.ApplySelected">Denna åtgärd tillämpas på de valda bildrutorna</s:String>
+    <s:String x:Key="Hint.ApplySelectedOrAll">Denna åtgärd tillämpas på alla eller på de valda bildrutorna, beroende på dina inställningar</s:String>
     <s:String x:Key="Hint.Cinemagraph">Cinemagrafin tillämpas på alla bildrutor som bygger på den första bildrutan</s:String>
     <s:String x:Key="Hint.Overlay">Överlägg applicerades</s:String>
     <s:String x:Key="Hint.TitleFrame">Titelram skapad</s:String>
@@ -806,18 +893,20 @@
     <s:String x:Key="S.KeyStrokes">Tangenttryckningar</s:String>
     <s:String x:Key="KeyStrokes.Keys">Tangenter</s:String>
     <s:String x:Key="KeyStrokes.Separator">Avskiljare:</s:String>
-    <s:String x:Key="KeyStrokes.Edit">Redigera dina tangenttryckningar</s:String>
+    <s:String x:Key="KeyStrokes.Edit">Redigera dina tangentkombinationer</s:String>
     <s:String x:Key="KeyStrokes.IgnoreModifiers">Ignorera tangenterna Ctrl, Alt, Skift och Windows-tangenten medan de inte används som modifierare.</s:String>
     <s:String x:Key="KeyStrokes.IgnoreModifiers.Info">Ensamma tangenttryckningar kommer att ignoreras, men inte "Kontroll + C".</s:String>
     <s:String x:Key="KeyStrokes.Extend">Förläng utställning av tangenttryckningarna.</s:String>
-    <s:String x:Key="KeyStrokes.Earlier">Starta utställningen av tangenttryckningar tidigare.</s:String>
+    <s:String x:Key="KeyStrokes.Earlier">Starta utställningen av tangentkombinationer tidigare.</s:String>
     <s:String x:Key="KeyStrokes.By">Med (ms):</s:String>
     <s:String x:Key="KeyStrokes.Warning.None">Det finns inga tangenttryckningar på din inspelning.</s:String>
     <s:String x:Key="KeyStrokes.Edit.Title">ScreenToGif - Tangenttrycksredigerare</s:String>
     <s:String x:Key="KeyStrokes.Edit.Number">Bildrutenummer</s:String>
-    <s:String x:Key="KeyStrokes.Edit.Keys">Upptäckta tangenttryckningar</s:String>
-    <s:String x:Key="KeyStrokes.Edit.Remove">Ta bort tangenttryckning</s:String>
-    <s:String x:Key="KeyStrokes.Edit.Add">Lägg till en tangenttryckning</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Keys">Upptäckta tangentkombinationer</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Remove">Ta bort tangentkombinationer</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Add">Lägg till en tangentkombinationer:</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Lower">Gemena bokstäver.</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Lower.Info">Det låter dig infoga gemena bokstäver.</s:String>
     
     <s:String x:Key="String.Delay">Fördröjning</s:String>
     <s:String x:Key="String.DelayMs">Fördröjning:</s:String>
@@ -826,6 +915,7 @@
     <s:String x:Key="String.Margin">Marginal:</s:String>
     <s:String x:Key="String.Padding">Spaltfyllnad:</s:String>
     <s:String x:Key="String.Background">Bakgrund</s:String>
+    <s:String x:Key="String.MinHeight">Minsta höjd:</s:String>
     
     <s:String x:Key="FreeDrawing.Mode">Läge</s:String>
     <s:String x:Key="FreeDrawing.Pen">Penna</s:String>
@@ -855,7 +945,14 @@
     <s:String x:Key="Watermark.Opacity">Genomskinlighet:</s:String>
     
     <s:String x:Key="Border.Appearance">Utseende</s:String>
+    <s:String x:Key="S.Border.Info">Använd negativa värden för att gränsen ska expandera bilden. När du gör det kommer gränsen att tillämpas på alla bildrutorna. Om inget negativt värde används kommer gränsen att tillämpas endast på de valda bildrutorna.</s:String>
 
+    <s:String x:Key="S.Shadow.ShadowColor">Skuggfärg:</s:String>
+    <s:String x:Key="S.Shadow.BackgroundColor">Bakgrundsfärg:</s:String>
+    <s:String x:Key="S.Shadow.Direction">Riktning:</s:String>
+    <s:String x:Key="S.Shadow.BlurRadius">Oskärperadie:</s:String>
+    <s:String x:Key="S.Shadow.Depth">Djup:</s:String>
+    
     <s:String x:Key="S.Obfuscate.Options">Förvrängningsalternativ</s:String>
     <s:String x:Key="S.Obfuscate.PixelSize">Bildpunktsstorlek:</s:String>
     <s:String x:Key="S.Obfuscate.UseAverage">Beräkna medelfärgen för varje pixelat block.</s:String>
@@ -878,6 +975,8 @@
     <s:String x:Key="S.Progress.Format.Date">Du kan använda datum- och tidsformatet från .Net Framework.&#10;Specifikationen finns i dessa två länkar nedan.</s:String>
     <s:String x:Key="S.Progress.Format.Date.Standard">Standardformat</s:String>
     <s:String x:Key="S.Progress.Format.Date.Custom">Anpassat format</s:String>
+    <s:String x:Key="S.Progress.Precision.StartNumber">Räkna från:</s:String>
+    <s:String x:Key="S.Progress.Precision.StartNumber.ToolTip">Börja räkna bildrutsnummer från det markerade numret.</s:String>
     <s:String x:Key="Progress.Orientation">Orientering:</s:String>
     
     <s:String x:Key="S.DelayUpdate">Fördröj uppdatering</s:String>
@@ -926,10 +1025,10 @@
     <s:String x:Key="S.SaveAs.Quality">Kvalitet:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors">Färger:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">Maximala antalet färger (för varje bildruta).</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Loop">Upprepa:</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">Upprepa Gif.</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Upprepa för alltid.</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Antal upprepningar</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Loop">Slinga:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">Slinga Gif.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Slinga för alltid.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Antal slingor</s:String>
     <s:String x:Key="S.SaveAs.Presets">Förinställningar:</s:String>
     <s:String x:Key="S.SaveAs.Presets.Default">Standard</s:String>
     <s:String x:Key="S.SaveAs.Presets.Add">Lägg till</s:String>
@@ -949,7 +1048,7 @@
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">Markera de oförändrade pixlarna med en dummy-färg.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">Välj färg</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions">Apng-alternativ</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.LoopedApng">Upprepa Apng.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.LoopedApng">Slinga Apng.</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions.DetectUnchanged">Upptäck oförändrade pixlar.</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions.PaintTransparent">Måla alla oförändrade pixlar med en transparent färg.</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions">Videoalternativ</s:String>
