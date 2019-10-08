@@ -105,7 +105,7 @@ namespace ScreenToGif.Util
             foreach (var frameInfo in Items[index])
             {
                 //Changes the path of the image.
-                var filename = Path.Combine(recordingFolder, $"{pasteIndex} - {Path.GetFileNameWithoutExtension(frameInfo.Path)} {DateTime.Now:hh-mm-ss-FFFF}.png");
+                var filename = Path.Combine(recordingFolder, $"{pasteIndex} - {Path.GetFileNameWithoutExtension(frameInfo.Path)} {DateTime.Now:hh-mm-ss-ffff}.png");
 
                 //Copy the image to the folder.
                 File.Copy(frameInfo.Path, filename, true);

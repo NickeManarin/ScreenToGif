@@ -4410,7 +4410,7 @@ namespace ScreenToGif.Windows
 
                 #region Each Frame
 
-                var fileName = Path.Combine(pathTemp, $"{index} {DateTime.Now:hh-mm-ss-FFFF}.png");
+                var fileName = Path.Combine(pathTemp, $"{index} {DateTime.Now:hh-mm-ss-ffff}.png");
 
                 using (var stream = new FileStream(fileName, FileMode.Create))
                 {
@@ -4438,7 +4438,7 @@ namespace ScreenToGif.Windows
 
         private List<FrameInfo> ImportFromImage(string sourceFileName, string pathTemp)
         {
-            var fileName = Path.Combine(pathTemp, $"{0} {DateTime.Now:hh-mm-ss-FFFF}.png");
+            var fileName = Path.Combine(pathTemp, $"{0} {DateTime.Now:hh-mm-ss-ffff}.png");
 
             #region Save the Image to the Recording Folder
 
@@ -4493,7 +4493,7 @@ namespace ScreenToGif.Windows
 
             foreach (var frame in frameList)
             {
-                var frameName = Path.Combine(pathTemp, $"{count} {DateTime.Now:hh-mm-ss-FFFF}.png");
+                var frameName = Path.Combine(pathTemp, $"{count} {DateTime.Now:hh-mm-ss-ffff}.png");
 
                 using (var stream = new FileStream(frameName, FileMode.Create))
                 {
