@@ -795,7 +795,8 @@ namespace ScreenToGif.Windows
 
         private void FollowTimer_Tick(object sender, EventArgs e)
         {
-            if (WindowState != WindowState.Normal || _prevPosX == _posX && _prevPosY == _posY || (Keyboard.Modifiers != ModifierKeys.None && Keyboard.Modifiers == UserSettings.All.DisableFollowModifiers))
+            if (WindowState != WindowState.Normal || _prevPosX == _posX && _prevPosY == _posY || Stage == Stage.Paused || Stage == Stage.Stopped || Stage == Stage.Discarding || 
+                (Keyboard.Modifiers != ModifierKeys.None && Keyboard.Modifiers == UserSettings.All.DisableFollowModifiers))
                 return;
 
             _prevPosX = _posX;

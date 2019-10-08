@@ -145,7 +145,7 @@
     <s:String x:Key="About">About</s:String>
     
     <s:String x:Key="S.Options.Warning.Follow.Header">Missing shortcut key for cursor following</s:String>
-    <s:String x:Key="S.Options.Warning.Follow.Message">In order to use the mouse cursor following feature, you must set a shortcut key to disable it when needed.</s:String>
+    <s:String x:Key="S.Options.Warning.Follow.Message">In order to use the mouse cursor following feature, you must set a shortcut key to toggle it when needed.</s:String>
     
     <s:String x:Key="Application.ScreenRecorder">Screen Recorder</s:String>
     <s:String x:Key="Application.ScreenRecorder.RecordMouse">Show the mouse cursor in the recording.</s:String>
@@ -166,7 +166,7 @@
     <s:String x:Key="Application.ScreenRecorder.CursorFollowing">Enable cursor following.</s:String>
     <s:String x:Key="Application.ScreenRecorder.CursorFollowing.Info">(The recording area will reposition itself based on the location of the cursor)</s:String>
     <s:String x:Key="Application.ScreenRecorder.FollowMargin.Info">(Buffer margin where the recording area starts getting reposition)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FollowMarginInvisible.Info">(Aditional buffer margin where the UI starts getting hidden)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.FollowMarginInvisible.Info">(Additional buffer margin where the UI starts getting hidden)</s:String>
 
     <s:String x:Key="Application.Other">Other</s:String>
     <s:String x:Key="Application.Other.SystemTray">Display the app on the system tray (notification area).</s:String>
