@@ -4777,6 +4777,8 @@ namespace ScreenToGif.Windows
 
         private void ShowPanel(PanelType type, string title, string vector, Action<object, RoutedEventArgs> apply = null)
         {
+            var focusFirstVisibleChild = true;
+
             #region Hide all visible grids
 
             foreach (var child in ActionInternalGrid.Children.OfType<Grid>().Where(x => x.Visibility == Visibility.Visible))
@@ -4837,6 +4839,11 @@ namespace ScreenToGif.Windows
                     SelectDefaultFfmpegPreset();
 
                     SaveGrid.Visibility = Visibility.Visible;
+
+                    // Focus the filename text box instead of automatically 
+                    // focusing the first child control in the panel.
+                    FocusSaveAsFilenameTextBox();
+                    focusFirstVisibleChild = false;
                     break;
                 case PanelType.LoadRecent:
                     ApplyButton.Text = StringResource("Action.Open");
@@ -4996,12 +5003,15 @@ namespace ScreenToGif.Windows
 
             #region Focus
 
-            var visible = ActionInternalGrid.Children.OfType<Grid>().FirstOrDefault(x => x.Visibility == Visibility.Visible);
-
-            if (visible != null)
+            if (focusFirstVisibleChild)
             {
-                visible.Focus();
-                visible.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+                var visible = ActionInternalGrid.Children.OfType<Grid>().FirstOrDefault(x => x.Visibility == Visibility.Visible);
+
+                if (visible != null)
+                {
+                    visible.Focus();
+                    visible.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+                }
             }
 
             #endregion
@@ -5025,6 +5035,24 @@ namespace ScreenToGif.Windows
             #endregion
 
             CommandManager.InvalidateRequerySuggested();
+        }
+
+        private void FocusSaveAsFilenameTextBox()
+        {
+            // Find the first visible filename text box and select it.
+            ExtendedTextBox box = new ExtendedTextBox[] {
+                OutputFilenameTextBox,
+                OutputApngFilenameTextBox,
+                OutputVideoFilenameTextBox,
+                OutputImagesFilenameTextBox,
+                OutputProjectFilenameTextBox,
+                OutputPsdFilenameTextBox
+            }.FirstOrDefault(x => x.Visibility == Visibility.Visible);
+
+            if (box != null)
+            {
+                box.Focus();
+            }
         }
 
         private void ClosePanel(bool isCancel = false, bool removeEvent = false)
