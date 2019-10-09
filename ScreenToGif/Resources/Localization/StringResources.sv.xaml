@@ -57,11 +57,11 @@
     <s:String x:Key="S.Command.Zoom100">Ställ zoom till 100%</s:String>
     <s:String x:Key="S.Command.SizeToContent">Justera fönstret till bildrutsstorlek</s:String>
     <s:String x:Key="S.Command.FitImage">Anpassa bilden till den tillgängliga fönsterstorleken</s:String>
-    <s:String x:Key="S.Command.FirstFrame">Välj den första bildruta</s:String>
-    <s:String x:Key="S.Command.PreviousFrame">Välj föregående bildruta</s:String>
+    <s:String x:Key="S.Command.FirstFrame">Gå till första bildrutan</s:String>
+    <s:String x:Key="S.Command.PreviousFrame">Gå till föregående bildruta</s:String>
     <s:String x:Key="S.Command.Play">Spela upp animeringen</s:String>
-    <s:String x:Key="S.Command.NextFrame">Välj nästa bildruta</s:String>
-    <s:String x:Key="S.Command.LastFrame">Välj den sista bildrutan</s:String>
+    <s:String x:Key="S.Command.NextFrame">Gå till nästa bildruta</s:String>
+    <s:String x:Key="S.Command.LastFrame">Gå till sista bildrutan</s:String>
     <s:String x:Key="S.Command.Reset">Ångra all ändringar i projektet</s:String>
     <s:String x:Key="S.Command.DeletePrevious">Radera alla föregående bildrutor</s:String>
     <s:String x:Key="S.Command.DeleteNext">Radera alla efterföljande bildrutor</s:String>
@@ -84,7 +84,7 @@
     <s:String x:Key="S.Command.Watermark">Välj en bild och lägg till den som vattenstämpel</s:String>
     <s:String x:Key="S.Command.Border">Lägg till kant</s:String>
     <s:String x:Key="S.Command.Shadow">Lägg till skugga</s:String>
-    <s:String x:Key="S.Command.Obfuscate">Förvrängning: dölj känsliga delar på dina bildrutor</s:String>
+    <s:String x:Key="S.Command.Obfuscate">Mosaik: dölj känsliga delar på dina bildrutor</s:String>
     <s:String x:Key="S.Command.Progress">Förloppsindikator eller text med uppspelningsdetaljer</s:String>
     <s:String x:Key="S.Command.SelectAll">Markera alla bildrutor</s:String>
     <s:String x:Key="S.Command.GoTo">Navigera till bildruta efter index</s:String>
@@ -140,7 +140,7 @@
     <s:String x:Key="Language">Språk</s:String>
     <s:String x:Key="TemporaryFiles">Temporära filer</s:String>
     <s:String x:Key="Extras">Extra</s:String>
-    <s:String x:Key="Clouds">Uppladdnings&#173;tjänster</s:String>
+    <s:String x:Key="Clouds">Uppladdnings-&#10;tjänster</s:String>
     <s:String x:Key="Donate">Donera</s:String>
     <s:String x:Key="About">Om</s:String>
     
@@ -572,7 +572,7 @@
     <s:String x:Key="Editor.File.Discard">Förkasta&#10;projekt</s:String>
     
     <!--Home • Action Stack-->
-    <s:String x:Key="Editor.Home.ActionStack">Action Stack</s:String>
+    <s:String x:Key="Editor.Home.ActionStack">Åtgärder</s:String>
     <s:String x:Key="Editor.Home.Undo">Ångra</s:String>
     <s:String x:Key="Editor.Home.Redo">Gör om</s:String>
     <s:String x:Key="Editor.Home.Reset">Återställ</s:String>
@@ -654,7 +654,7 @@
     <s:String x:Key="Editor.Image.Border">Kant</s:String>
     <s:String x:Key="Editor.Image.Shadow">Skugga</s:String>
     <s:String x:Key="Editor.Image.Progress">Framsteg</s:String>
-    <s:String x:Key="Editor.Image.Obfuscate">Förmörka</s:String>
+    <s:String x:Key="Editor.Image.Obfuscate">Mosaik</s:String>
 
     <!--Transitions • Styles-->
     <s:String x:Key="Editor.Transitions.Styles">Stilar</s:String>
