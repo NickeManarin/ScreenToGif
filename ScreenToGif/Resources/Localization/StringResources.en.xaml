@@ -68,7 +68,7 @@
     <s:String x:Key="S.Command.RemoveDuplicates">Remove duplicates</s:String>
     <s:String x:Key="S.Command.Reduce">Reduce frame count</s:String>
     <s:String x:Key="S.Command.Reverse">Reverse animation</s:String>
-    <s:String x:Key="S.Command.Yoyo">Yoyo, makes the animation go forward and backwards</s:String>
+    <s:String x:Key="S.Command.Yoyo">Makes the animation go forward and backwards</s:String>
     <s:String x:Key="S.Command.MoveLeft">Move the selected frame to the left</s:String>
     <s:String x:Key="S.Command.MoveRight">Move the selected frame to the right</s:String>
     <s:String x:Key="S.Command.Resize">Resize all frames</s:String>
@@ -77,14 +77,15 @@
     <s:String x:Key="S.Command.Caption">Add a caption</s:String>
     <s:String x:Key="S.Command.FreeText">Add a free-floating text</s:String>
     <s:String x:Key="S.Command.TitleFrame">Add a frame with a title on it</s:String>
-    <s:String x:Key="S.Command.KeyStrokes">Key strokes: inserts keys pressed during the recording</s:String>
+    <s:String x:Key="S.Command.KeyStrokes">Inserts keys pressed during the recording</s:String>
     <s:String x:Key="S.Command.FreeDrawing">Draw free forms</s:String>
     <s:String x:Key="S.Command.Shapes">Add shapes</s:String>
     <s:String x:Key="S.Command.MouseClicks">Mouse clicks</s:String>
     <s:String x:Key="S.Command.Watermark">Select an image and add as watermark</s:String>
     <s:String x:Key="S.Command.Border">Add borders</s:String>
     <s:String x:Key="S.Command.Shadow">Add drop shadow</s:String>
-    <s:String x:Key="S.Command.Obfuscate">Obfuscate: hide sensitive parts on your frames</s:String>
+    <s:String x:Key="S.Command.Obfuscate">Hide sensitive parts on your frames</s:String>
+    <s:String x:Key="S.Command.Cinemagraph">Use the drawing tools to select which parts of the frame should remain static throughout the animation</s:String>
     <s:String x:Key="S.Command.Progress">Progress bar or text with playback details</s:String>
     <s:String x:Key="S.Command.SelectAll">Select all frames</s:String>
     <s:String x:Key="S.Command.GoTo">Navigate to frame by index</s:String>
@@ -1149,33 +1150,33 @@
     <s:String x:Key="S.FontStyles.Oblique">Oblique</s:String>
     
     <!--FontWeight-->
-     <s:String x:Key="S.FontWeights.Black">Black</s:String>
-     <s:String x:Key="S.FontWeights.Bold">Bold</s:String>
-     <s:String x:Key="S.FontWeights.DemiBold">Demi Bold</s:String>
-     <s:String x:Key="S.FontWeights.ExtraBlack">Extra Black</s:String>
-     <s:String x:Key="S.FontWeights.ExtraBold">Extra Bold</s:String>
-     <s:String x:Key="S.FontWeights.ExtraLight">Extra Light</s:String>
-     <s:String x:Key="S.FontWeights.Heavy">Heavy</s:String>
-     <s:String x:Key="S.FontWeights.Light">Light</s:String>
-     <s:String x:Key="S.FontWeights.Medium">Medium</s:String>
-     <s:String x:Key="S.FontWeights.Normal">Normal</s:String>
-     <s:String x:Key="S.FontWeights.Regular">Regular</s:String>
-     <s:String x:Key="S.FontWeights.SemiBold">Semi Bold</s:String>
-     <s:String x:Key="S.FontWeights.Thin">Thin</s:String>
-     <s:String x:Key="S.FontWeights.UltraBlack">Ultra Black</s:String>
-     <s:String x:Key="S.FontWeights.UltraBold">Ultra Bold</s:String>
-     <s:String x:Key="S.FontWeights.UltraLight">Ultra Light</s:String>
+    <s:String x:Key="S.FontWeights.Black">Black</s:String>
+    <s:String x:Key="S.FontWeights.Bold">Bold</s:String>
+    <s:String x:Key="S.FontWeights.DemiBold">Demi Bold</s:String>
+    <s:String x:Key="S.FontWeights.ExtraBlack">Extra Black</s:String>
+    <s:String x:Key="S.FontWeights.ExtraBold">Extra Bold</s:String>
+    <s:String x:Key="S.FontWeights.ExtraLight">Extra Light</s:String>
+    <s:String x:Key="S.FontWeights.Heavy">Heavy</s:String>
+    <s:String x:Key="S.FontWeights.Light">Light</s:String>
+    <s:String x:Key="S.FontWeights.Medium">Medium</s:String>
+    <s:String x:Key="S.FontWeights.Normal">Normal</s:String>
+    <s:String x:Key="S.FontWeights.Regular">Regular</s:String>
+    <s:String x:Key="S.FontWeights.SemiBold">Semi Bold</s:String>
+    <s:String x:Key="S.FontWeights.Thin">Thin</s:String>
+    <s:String x:Key="S.FontWeights.UltraBlack">Ultra Black</s:String>
+    <s:String x:Key="S.FontWeights.UltraBold">Ultra Bold</s:String>
+    <s:String x:Key="S.FontWeights.UltraLight">Ultra Light</s:String>
     
-     <!--VerticalAligment-->
-     <s:String x:Key="S.VerticalAlignment.Top">Top</s:String>
-     <s:String x:Key="S.VerticalAlignment.Center">Center</s:String>
-     <s:String x:Key="S.VerticalAlignment.Bottom">Bottom</s:String>
-     <s:String x:Key="S.Alignment.Stretch">Stretch</s:String>
+    <!--VerticalAlignment-->
+    <s:String x:Key="S.VerticalAlignment.Top">Top</s:String>
+    <s:String x:Key="S.VerticalAlignment.Center">Center</s:String>
+    <s:String x:Key="S.VerticalAlignment.Bottom">Bottom</s:String>
+    <s:String x:Key="S.Alignment.Stretch">Stretch</s:String>
 
-     <!--HorizontalAlignment-->
-     <s:String x:Key="S.HorizontalAlignment.Left">Left</s:String>
-     <s:String x:Key="S.HorizontalAlignment.Center">Center</s:String>
-     <s:String x:Key="S.HorizontalAlignment.Right">Right</s:String>
+    <!--HorizontalAlignment-->
+    <s:String x:Key="S.HorizontalAlignment.Left">Left</s:String>
+    <s:String x:Key="S.HorizontalAlignment.Center">Center</s:String>
+    <s:String x:Key="S.HorizontalAlignment.Right">Right</s:String>
     
     <!--Orientation-->
     <s:String x:Key="S.Orientation.Horizontal">Horizontal</s:String>
