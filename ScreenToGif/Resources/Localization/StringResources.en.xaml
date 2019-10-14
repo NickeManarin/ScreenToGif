@@ -85,7 +85,7 @@
     <s:String x:Key="S.Command.Border">Add borders</s:String>
     <s:String x:Key="S.Command.Shadow">Add drop shadow</s:String>
     <s:String x:Key="S.Command.Obfuscate">Hide sensitive parts on your frames</s:String>
-    <s:String x:Key="S.Command.Cinemagraph">Use the drawing tools to select which parts of the frame should remain static throughout the animation</s:String>
+    <s:String x:Key="S.Command.Cinemagraph">Use the drawing tools to select which parts of the frame should not remain static throughout the animation</s:String>
     <s:String x:Key="S.Command.Progress">Progress bar or text with playback details</s:String>
     <s:String x:Key="S.Command.SelectAll">Select all frames</s:String>
     <s:String x:Key="S.Command.GoTo">Navigate to frame by index</s:String>
