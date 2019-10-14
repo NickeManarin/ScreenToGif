@@ -452,7 +452,7 @@
     <s:String x:Key="ErrorDialog.Send">Отправить отчет.</s:String>
 
     <!--FFmpeg Preset-->
-    <s:String x:Key="S.FfmpegPreset.Title">FFmpeg пресет</s:String>
+    <s:String x:Key="S.FfmpegPreset.Title">Пресет FFmpeg</s:String>
     <s:String x:Key="S.FfmpegPreset.Name">Имя</s:String>
     <s:String x:Key="S.FfmpegPreset.Parameters">Параметры</s:String>
     <s:String x:Key="S.FfmpegPreset.Warning.Name">Необходимо дать имя пресету.</s:String>
@@ -976,8 +976,8 @@
     <s:String x:Key="S.Progress.Format.Date">Вы можете использовать формат даты и времени из .Net Framework.&#x0d;Спецификация доступна по ссылкам ниже.</s:String>
     <s:String x:Key="S.Progress.Format.Date.Standard">Пресеты форматов</s:String>
     <s:String x:Key="S.Progress.Format.Date.Custom">Свои форматы</s:String>
-    <s:String x:Key="S.Progress.Precision.StartNumber">Count from:</s:String>
-    <s:String x:Key="S.Progress.Precision.StartNumber.ToolTip">Starts counting the frame number from this selected number.</s:String>
+    <s:String x:Key="S.Progress.Precision.StartNumber">Отсчет от:</s:String>
+    <s:String x:Key="S.Progress.Precision.StartNumber.ToolTip">Начинает отсчет кадров от выбранного номера.</s:String>
     <s:String x:Key="Progress.Orientation">Ориентация:</s:String>
     
     <s:String x:Key="S.DelayUpdate">Задержка обновления</s:String>
@@ -1005,7 +1005,7 @@
 
     <!--Save As-->
     <s:String x:Key="S.SaveAs.Type">Тип файла</s:String>
-    <s:String x:Key="S.SaveAs.Gif">GIF</s:String>
+    <s:String x:Key="S.SaveAs.Gif">Gif</s:String>
     <s:String x:Key="S.SaveAs.Apng">Apng</s:String>
     <s:String x:Key="S.SaveAs.Images">Изобр. (кадры)</s:String>
     <s:String x:Key="S.SaveAs.Project">Проект</s:String>
@@ -1042,8 +1042,8 @@
     <s:String x:Key="S.SaveAs.Presets.Reset">Сброс</s:String>
     <s:String x:Key="S.SaveAs.Presets.Reset.Title">Сброс пресета</s:String>
     <s:String x:Key="S.SaveAs.Presets.Reset.Header">Сбросить пресет до параметров по умолчанию?</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Reset.Message">You can't undo this operation, but you can edit back the preset again later.</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Warning.NoSelection">No FFmpeg preset selected, please select one.</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Reset.Message">Вы не можете отменить эту операцию, но вы можете изменить пересет позже.</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Warning.NoSelection">Пресет FFmpeg не выбран, выберите один.</s:String>
     <s:String x:Key="S.SaveAs.Extras">Дополнительно:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">Определять неизменные&#x0d;пиксели</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">Закрашивать неизменные&#x0d;пиксели фиктивным цветом</s:String>
@@ -1164,7 +1164,7 @@
     <s:String x:Key="S.FontWeights.SemiBold">Полу-полужирный</s:String>
     <s:String x:Key="S.FontWeights.Thin">Тонкий</s:String>
     <s:String x:Key="S.FontWeights.UltraBlack">Сверх-жирный</s:String>
-    <s:String x:Key="S.FontWeights.UltraBold">Серх-полужирный</s:String>
+    <s:String x:Key="S.FontWeights.UltraBold">Сверх-полужирный</s:String>
     <s:String x:Key="S.FontWeights.UltraLight">Сверх-светлый</s:String>
     
      <!--VerticalAligment-->
