@@ -11,9 +11,10 @@ namespace ScreenToGif.Controls
     {
         #region Variables
 
-        public static readonly DependencyProperty ImageProperty;
-        public static readonly DependencyProperty AuthorProperty;
-        public static readonly DependencyProperty MaxSizeProperty;
+        public static readonly DependencyProperty ImageProperty = DependencyProperty.Register(nameof(Image), typeof(UIElement), typeof(ImageListBoxItem), new FrameworkPropertyMetadata());
+        public static readonly DependencyProperty MainAuthorProperty = DependencyProperty.Register(nameof(MainAuthor), typeof(string), typeof(ImageListBoxItem), new FrameworkPropertyMetadata(""));
+        public static readonly DependencyProperty AuthorProperty = DependencyProperty.Register(nameof(Author), typeof(string), typeof(ImageListBoxItem), new FrameworkPropertyMetadata(""));
+        public static readonly DependencyProperty MaxSizeProperty = DependencyProperty.Register(nameof(MaxSize), typeof(double), typeof(ImageListBoxItem), new FrameworkPropertyMetadata(20.0));
 
         #endregion
 
@@ -27,6 +28,16 @@ namespace ScreenToGif.Controls
         {
             get => (UIElement)GetValue(ImageProperty);
             set => SetCurrentValue(ImageProperty, value);
+        }
+
+        /// <summary>
+        /// The author of the ListBoxItem.
+        /// </summary>
+        [Description("The main author of the ListBoxItem.")]
+        public string MainAuthor
+        {
+            get => (string)GetValue(MainAuthorProperty);
+            set => SetCurrentValue(MainAuthorProperty, value);
         }
 
         /// <summary>
@@ -54,10 +65,6 @@ namespace ScreenToGif.Controls
         static ImageListBoxItem()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ImageListBoxItem), new FrameworkPropertyMetadata(typeof(ImageListBoxItem)));
-
-            ImageProperty = DependencyProperty.Register("Image", typeof(UIElement), typeof(ImageListBoxItem), new FrameworkPropertyMetadata());
-            AuthorProperty = DependencyProperty.Register("Author", typeof(string), typeof(ImageListBoxItem), new FrameworkPropertyMetadata());
-            MaxSizeProperty = DependencyProperty.Register("MaxSize", typeof(double), typeof(ImageListBoxItem), new FrameworkPropertyMetadata(20.0));
         }
     }
 }

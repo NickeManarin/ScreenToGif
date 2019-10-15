@@ -62,7 +62,13 @@
     <s:String x:Key="S.Command.Play">Pré-visualize a animação</s:String>
     <s:String x:Key="S.Command.NextFrame">Selecione o próximo quadro</s:String>
     <s:String x:Key="S.Command.LastFrame">Selecione o último quadro</s:String>
+    <s:String x:Key="S.Command.Undo">Desfazer</s:String>
+    <s:String x:Key="S.Command.Redo">Refazer</s:String>
     <s:String x:Key="S.Command.Reset">Desfaça todas as alterações no projeto</s:String>
+    <s:String x:Key="S.Command.Copy">Copie os quadros selecionados e armazene-os na área de transferência</s:String>
+    <s:String x:Key="S.Command.Cut">Corte os quadros selecionados e armazene-os na área de transferência</s:String>
+    <s:String x:Key="S.Command.Paste">Cole os quadros da área de transferência</s:String>
+    <s:String x:Key="S.Command.Delete">Remover todos os quadros selecionados</s:String>
     <s:String x:Key="S.Command.DeletePrevious">Remover todos os quadros anteriores</s:String>
     <s:String x:Key="S.Command.DeleteNext">Remover todos os próximos quadros</s:String>
     <s:String x:Key="S.Command.RemoveDuplicates">Remover quadros duplicados</s:String>

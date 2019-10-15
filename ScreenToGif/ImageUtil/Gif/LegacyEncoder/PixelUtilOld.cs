@@ -71,9 +71,8 @@ namespace ScreenToGif.ImageUtil.Gif.LegacyEncoder
                 throw new ArgumentException("Only 8, 24 and 32 bpp images are supported.");
 
             // Lock bitmap and return bitmap data
-            _bitmapData = _source.LockBits(rect, ImageLockMode.ReadWrite,
-                _source.PixelFormat);
-
+            _bitmapData = _source.LockBits(rect, ImageLockMode.ReadWrite, _source.PixelFormat);
+            
             // Create byte array to copy pixel values
             var step = Depth / 8;
             Pixels = new byte[pixelCount * step];

@@ -141,16 +141,52 @@
     </RoutedUICommand>
     
     <!--Edit-->
+    <RoutedUICommand x:Key="Command.Undo" Text="S.Command.Undo">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + Z</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.Redo" Text="S.Command.Redo">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + Y</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+    
     <RoutedUICommand x:Key="Command.Reset" Text="S.Command.Reset">
         <RoutedUICommand.InputGestures>
             <KeyGesture>Ctrl + R</KeyGesture>
         </RoutedUICommand.InputGestures>
     </RoutedUICommand>
 
+    <RoutedUICommand x:Key="Command.Copy" Text="S.Command.Copy">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + C</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.Cut" Text="S.Command.Cut">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + X</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.Paste" Text="S.Command.Paste">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + V</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+    
     <RoutedUICommand x:Key="Command.ExploreClipboard" Text="S.Command.ExploreClipboard"/>
 
     <RoutedUICommand x:Key="Command.RemoveClipboardEntry" Text="S.Command.RemoveClipboardEntry"/>
 
+    <RoutedUICommand x:Key="Command.Delete" Text="S.Command.Delete">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Delete</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+    
     <RoutedUICommand x:Key="Command.DeletePrevious" Text="S.Command.DeletePrevious">
         <RoutedUICommand.InputGestures>
             <KeyGesture>Alt + Left</KeyGesture>

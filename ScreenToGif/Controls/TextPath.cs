@@ -115,7 +115,12 @@ namespace ScreenToGif.Controls
 
         protected override void OnRender(DrawingContext drawingContext)
         {
-            _textGeometry.Transform = new TranslateTransform(-_textGeometry.Bounds.X, -_textGeometry.Bounds.Y + 1);
+            try
+            {
+                _textGeometry.Transform = new TranslateTransform(-_textGeometry.Bounds.X, -_textGeometry.Bounds.Y + 1);
+            }
+            catch (Exception)
+            {}
 
             //If the outline of the text should not be rendered outside, use the base OnRender method.
             if (!UserSettings.All.DrawOutlineOutside)

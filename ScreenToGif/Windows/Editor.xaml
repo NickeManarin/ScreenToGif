@@ -234,14 +234,14 @@
         <CommandBinding Command="{StaticResource Command.DiscardProject}" CanExecute="File_CanExecute" Executed="DiscardProject_Executed"/>
 
         <!--Action Stack-->
-        <CommandBinding Command="Undo" CanExecute="Undo_CanExecute" Executed="Undo_Executed"/>
+        <CommandBinding Command="{StaticResource Command.Undo}" CanExecute="Undo_CanExecute" Executed="Undo_Executed"/>
         <CommandBinding Command="{StaticResource Command.Reset}" CanExecute="Reset_CanExecute" Executed="Reset_Executed"/>
-        <CommandBinding Command="Redo" CanExecute="Redo_CanExecute" Executed="Redo_Executed"/>
+        <CommandBinding Command="{StaticResource Command.Redo}" CanExecute="Redo_CanExecute" Executed="Redo_Executed"/>
 
         <!--Clipboard-->
-        <CommandBinding Command="Cut" CanExecute="ClipBoard_CanExecute" Executed="Cut_Executed"/>
-        <CommandBinding Command="Copy" CanExecute="ClipBoard_CanExecute" Executed="Copy_Executed"/>
-        <CommandBinding Command="Paste" CanExecute="Paste_CanExecute" Executed="Paste_Executed"/>
+        <CommandBinding Command="{StaticResource Command.Cut}" CanExecute="ClipBoard_CanExecute" Executed="Cut_Executed"/>
+        <CommandBinding Command="{StaticResource Command.Copy}" CanExecute="ClipBoard_CanExecute" Executed="Copy_Executed"/>
+        <CommandBinding Command="{StaticResource Command.Paste}" CanExecute="Paste_CanExecute" Executed="Paste_Executed"/>
         <CommandBinding Command="{StaticResource Command.ExploreClipboard}" CanExecute="ClipBoardSelection_CanExecute" Executed="ExploreClipBoard_Executed"/>
         <CommandBinding Command="{StaticResource Command.RemoveClipboardEntry}" CanExecute="ClipBoardSelection_CanExecute" Executed="RemoveClipboard_Executed"/>
 
@@ -264,7 +264,7 @@
         <CommandBinding Command="{StaticResource Command.LastFrame}" CanExecute="Playback_CanExecute" Executed="LastFrame_Executed"/>
 
         <!--Frames-->
-        <CommandBinding Command="Delete" CanExecute="Delete_CanExecute" Executed="Delete_Executed"/>
+        <CommandBinding Command="{StaticResource Command.Delete}" CanExecute="Delete_CanExecute" Executed="Delete_Executed"/>
         <CommandBinding Command="{StaticResource Command.DeletePrevious}" CanExecute="DeletePrevious_CanExecute" Executed="DeletePrevious_Executed"/>
         <CommandBinding Command="{StaticResource Command.DeleteNext}" CanExecute="DeleteNext_CanExecute" Executed="DeleteNext_Executed"/>
         <CommandBinding Command="{StaticResource Command.RemoveDuplicates}" CanExecute="RemoveDuplicates_CanExecute" Executed="RemoveDuplicates_Executed"/>
@@ -596,7 +596,7 @@
 						       FontSize="12" Foreground="{DynamicResource Element.Foreground.Gray112}"/>
 
                         <n:ImageButton x:Name="UndoButton" Grid.Row="0" Grid.Column="0" Text="{DynamicResource Editor.Home.Undo}" Content="{StaticResource Vector.Undo}"
-                                       MinWidth="55" ContentHeight="28" ContentWidth="28" Style="{StaticResource Style.Button.Vertical}" Command="Undo"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="28" Style="{StaticResource Style.Button.Vertical}" Command="{StaticResource Command.Undo}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
@@ -612,7 +612,7 @@
                                            ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
                             <n:ImageButton x:Name="RedoButton" Grid.Row="1" Text="{DynamicResource Editor.Home.Redo}" Content="{StaticResource Vector.Redo}"
-                                           Padding="2" MinWidth="60" MaxSize="25" Style="{StaticResource Style.Button.Horizontal}" Command="Redo"
+                                           Padding="2" MinWidth="60" MaxSize="25" Style="{StaticResource Style.Button.Horizontal}" Command="{StaticResource Command.Redo}"
                                            ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
                                            ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                         </Grid>
@@ -647,7 +647,7 @@
                         </Grid>
 
                         <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="PasteButton" Text="{DynamicResource Editor.Home.Paste}" Content="{StaticResource Vector.Paste}"
-                                       MinWidth="55" ContentHeight="28" ContentWidth="28" Style="{StaticResource Style.Button.Vertical}" Command="Paste"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="28" Style="{StaticResource Style.Button.Vertical}" Command="{StaticResource Command.Paste}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
@@ -658,12 +658,12 @@
                             </Grid.RowDefinitions>
 
                             <n:ImageButton x:Name="CopyButton" Grid.Row="0" Grid.Column="0" Text="{DynamicResource Editor.Home.Copy}" Content="{StaticResource Vector.Copy}"
-						                   Padding="2" MinWidth="60" MaxSize="28" Style="{StaticResource Style.Button.Horizontal}" Command="Copy"
+						                   Padding="2" MinWidth="60" MaxSize="28" Style="{StaticResource Style.Button.Horizontal}" Command="{StaticResource Command.Copy}"
                                            ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
                                            ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
                             <n:ImageButton x:Name="CutButton" Grid.Row="1" Text="{DynamicResource Editor.Home.Cut}" Content="{StaticResource Vector.Cut}"
-						                   Padding="2" MinWidth="60" MaxSize="28" Style="{StaticResource Style.Button.Horizontal}" Command="Cut"
+						                   Padding="2" MinWidth="60" MaxSize="28" Style="{StaticResource Style.Button.Horizontal}" Command="{StaticResource Command.Cut}"
                                            ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
                                            ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                         </Grid>
@@ -873,7 +873,7 @@
 						       FontSize="12" Foreground="{DynamicResource Element.Foreground.Gray112}"/>
 
                         <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="DeleteButton" Text="{DynamicResource Editor.Edit.Delete}" Content="{StaticResource Vector.RemoveImage}"
-                                       MinWidth="55" ContentHeight="28" ContentWidth="28" Style="{StaticResource Style.Button.Vertical}" Command="Delete"
+                                       MinWidth="55" ContentHeight="28" ContentWidth="28" Style="{StaticResource Style.Button.Vertical}" Command="{StaticResource Command.Delete}"
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
                                        ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 

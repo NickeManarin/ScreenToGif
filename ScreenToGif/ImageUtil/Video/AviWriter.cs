@@ -433,7 +433,6 @@ namespace ScreenToGif.ImageUtil.Video
             public uint biClrImportant;
         }
 
-
         /// <summary>Open mode value for AVIs to create and write to the file.</summary>
         private const int AVI_OPEN_MODE_CREATEWRITE = 0x00001000 | 0x00000001;
 
@@ -545,9 +544,7 @@ namespace ScreenToGif.ImageUtil.Video
             UserAbort = 0x800440C6,
             Error = 0x800440C7
         }
-
-
-
+        
         #endregion
     }
 }

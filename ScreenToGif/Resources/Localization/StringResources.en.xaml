@@ -62,7 +62,13 @@
     <s:String x:Key="S.Command.Play">Play the animation</s:String>
     <s:String x:Key="S.Command.NextFrame">Select the next frame</s:String>
     <s:String x:Key="S.Command.LastFrame">Select the last frame</s:String>
+    <s:String x:Key="S.Command.Undo">Undo</s:String>
+    <s:String x:Key="S.Command.Redo">Redo</s:String>
     <s:String x:Key="S.Command.Reset">Undo all changes in the project</s:String>
+    <s:String x:Key="S.Command.Copy">Copy the selected frames and store them in the clipboard</s:String>
+    <s:String x:Key="S.Command.Cut">Cut the selected frames and store them in the clipboard</s:String>
+    <s:String x:Key="S.Command.Paste">Paste the frames from the clipboard</s:String>
+    <s:String x:Key="S.Command.Delete">Delete all selected frames</s:String>
     <s:String x:Key="S.Command.DeletePrevious">Delete all previous frames</s:String>
     <s:String x:Key="S.Command.DeleteNext">Delete all next frames</s:String>
     <s:String x:Key="S.Command.RemoveDuplicates">Remove duplicates</s:String>
@@ -166,8 +172,8 @@
     <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(It enables a magnifier while selecting the recording area)</s:String>
     <s:String x:Key="Application.ScreenRecorder.CursorFollowing">Enable cursor following.</s:String>
     <s:String x:Key="Application.ScreenRecorder.CursorFollowing.Info">(The recording area will reposition itself based on the location of the cursor)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FollowMargin.Info">(Buffer margin where the recording area starts getting repositioned)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FollowMarginInvisible.Info">(Additional buffer margin where the UI starts getting hidden)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.FollowMargin.Info">(Buffer margin in pixels, where the recording area starts getting repositioned)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.FollowMarginInvisible.Info">(Additional buffer margin in pixels, where the UI starts getting hidden)</s:String>
 
     <s:String x:Key="Application.Other">Other</s:String>
     <s:String x:Key="Application.Other.SystemTray">Display the app on the system tray (notification area).</s:String>
