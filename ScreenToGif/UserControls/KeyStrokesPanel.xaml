@@ -193,6 +193,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -201,7 +202,7 @@
 
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource Caption.Vertical}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                 <ComboBox Grid.Row="0" Grid.Column="1" Margin="10,5" MinWidth="100" MaxWidth="150" SelectedValuePath="VerticalAlignment" 
-                          SelectedValue="{Binding KeyStrokesVerticalAligment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                          SelectedValue="{Binding KeyStrokesVerticalAlignment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
                     <TextBlock VerticalAlignment="Top" Text="{DynamicResource S.VerticalAlignment.Top}"/>
                     <TextBlock VerticalAlignment="Center" Text="{DynamicResource S.VerticalAlignment.Center}"/>
@@ -211,7 +212,7 @@
 
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource Caption.Horizontal}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                 <ComboBox Grid.Row="1" Grid.Column="1" Margin="10,5" MinWidth="100" MaxWidth="150" SelectedValuePath="HorizontalAlignment" 
-                          SelectedValue="{Binding KeyStrokesHorizontalAligment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                          SelectedValue="{Binding KeyStrokesHorizontalAlignment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
                     <TextBlock HorizontalAlignment="Left" Text="{DynamicResource S.HorizontalAlignment.Left}"/>
                     <TextBlock HorizontalAlignment="Center" Text="{DynamicResource S.HorizontalAlignment.Center}"/>
@@ -226,6 +227,10 @@
                 <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource String.Padding}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                 <n:IntegerUpDown Grid.Row="3" Grid.Column="1" Minimum="0" Maximum="100" Margin="10,5" MinWidth="70" 
                                  Value="{Binding KeyStrokesPadding, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="{DynamicResource String.MinHeight}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                <n:IntegerUpDown Grid.Row="4" Grid.Column="1" Minimum="0" Maximum="100" Margin="10,5" MinWidth="70" 
+                                 Value="{Binding KeyStrokesMinHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
         </Expander>
     </Grid>

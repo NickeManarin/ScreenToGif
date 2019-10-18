@@ -61,7 +61,7 @@ namespace ScreenToGif.Windows.Other
             if (!box.MainKey.HasValue)
                 return;
 
-            InternalList[KeysDataGrid.SelectedIndex].KeyList.Add(new SimpleKeyGesture(box.MainKey.Value, box.ModifierKeys, true));
+            InternalList[KeysDataGrid.SelectedIndex].KeyList.Add(new SimpleKeyGesture(box.MainKey.Value, box.ModifierKeys, !box.IsSingleLetterLowerCase));
             KeysDataGrid.Items.Refresh();
         }
 

@@ -72,10 +72,8 @@ namespace ScreenToGif.Windows.Other
             //TODO: Check for memmory leaks.
 
             foreach (var tokenSource in CancellationTokenList)
-            {
                 tokenSource.Cancel();
-            }
-
+            
             _encoder = null;
             GC.Collect();
         }
@@ -389,6 +387,104 @@ namespace ScreenToGif.Windows.Other
             });
         }
 
+        private void EncodeWithFfmpeg(string name, List<FrameInfo> listFrames, int id, Parameters param, CancellationTokenSource tokenSource, string processing)
+        {
+            #region FFmpeg encoding
+
+            SetStatus(Status.Processing, id, null, true);
+
+            if (!Util.Other.IsFfmpegPresent())
+                throw new ApplicationException("FFmpeg not present.");
+
+            if (File.Exists(param.Filename))
+                File.Delete(param.Filename);
+
+            #region Generate concat
+
+            var concat = new StringBuilder();
+            foreach (var frame in listFrames)
+            {
+                concat.AppendLine("file '" + frame.Path + "'");
+                concat.AppendLine("duration " + (frame.Delay / 1000d).ToString(CultureInfo.InvariantCulture));
+            }
+
+            var concatPath = Path.GetDirectoryName(listFrames[0].Path) ?? Path.GetTempPath();
+            var concatFile = Path.Combine(concatPath, "concat.txt");
+
+            if (!Directory.Exists(concatPath))
+                Directory.CreateDirectory(concatPath);
+
+            if (File.Exists(concatFile))
+                File.Delete(concatFile);
+
+            File.WriteAllText(concatFile, concat.ToString());
+
+            #endregion
+
+            if (name.Equals("apng"))
+                param.Command = string.Format(param.Command, concatFile, (param.ExtraParameters ?? "").Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString()), param.RepeatCount, param.Filename);
+            else
+                param.Command = string.Format(param.Command, concatFile, (param.ExtraParameters ?? "").Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString()), param.Filename);
+
+            var process = new ProcessStartInfo(UserSettings.All.FfmpegLocation)
+            {
+                Arguments = param.Command,
+                CreateNoWindow = true,
+                ErrorDialog = false,
+                UseShellExecute = false,
+                RedirectStandardError = true
+            };
+
+            var pro = Process.Start(process);
+            var log = "";
+            var indeterminate = true;
+
+            Update(id, 0, FindResource("Encoder.Analyzing").ToString());
+
+            while (!pro.StandardError.EndOfStream)
+            {
+                if (tokenSource.IsCancellationRequested)
+                {
+                    pro.Kill();
+                    return;
+                }
+
+                var line = pro.StandardError.ReadLine() ?? "";
+                log += Environment.NewLine + line;
+
+                var split = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+                for (var block = 0; block < split.Length; block++)
+                {
+                    //frame=  321 fps=170 q=-0.0 Lsize=      57kB time=00:00:14.85 bitrate=  31.2kbits/s speed=7.87x    
+                    if (!split[block].StartsWith("frame="))
+                        continue;
+
+                    if (int.TryParse(split[block + 1], out var frame))
+                    {
+                        if (frame > 0)
+                        {
+                            if (indeterminate)
+                            {
+                                SetStatus(Status.Processing, id, null, false);
+                                indeterminate = false;
+                            }
+
+                            Update(id, frame, string.Format(processing, frame));
+                        }
+                    }
+
+                    break;
+                }
+            }
+
+            var fileInfo = new FileInfo(param.Filename);
+
+            if (!fileInfo.Exists || fileInfo.Length == 0)
+                throw new Exception($"Error while encoding the {name} with FFmpeg.") { HelpLink = $"Command:\n\r{param.Command}\n\rResult:\n\r{log}" };
+
+            #endregion
+        }
 
         private async void Encode(List<FrameInfo> listFrames, int id, Parameters param, CancellationTokenSource tokenSource)
         {
@@ -571,60 +667,7 @@ namespace ScreenToGif.Windows.Other
 
                                 break;
                             case GifEncoderType.FFmpeg:
-
-                                #region FFmpeg encoding
-
-                                SetStatus(Status.Processing, id, null, true);
-
-                                if (!Util.Other.IsFfmpegPresent())
-                                    throw new ApplicationException("FFmpeg not present.");
-
-                                if (File.Exists(param.Filename))
-                                    File.Delete(param.Filename);
-
-                                #region Generate concat
-
-                                var concat = new StringBuilder();
-                                foreach (var frame in listFrames)
-                                {
-                                    concat.AppendLine("file '" + frame.Path + "'");
-                                    concat.AppendLine("duration " + (frame.Delay / 1000d).ToString(CultureInfo.InvariantCulture));
-                                }
-
-                                var concatPath = Path.GetDirectoryName(listFrames[0].Path) ?? Path.GetTempPath();
-                                var concatFile = Path.Combine(concatPath, "concat.txt");
-
-                                if (!Directory.Exists(concatPath))
-                                    Directory.CreateDirectory(concatPath);
-
-                                if (File.Exists(concatFile))
-                                    File.Delete(concatFile);
-
-                                File.WriteAllText(concatFile, concat.ToString());
-
-                                #endregion
-
-                                param.Command = string.Format(param.Command, concatFile, param.ExtraParameters.Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString()), param.Filename);
-
-                                var process = new ProcessStartInfo(UserSettings.All.FfmpegLocation)
-                                {
-                                    Arguments = param.Command,
-                                    CreateNoWindow = true,
-                                    ErrorDialog = false,
-                                    UseShellExecute = false,
-                                    RedirectStandardError = true
-                                };
-
-                                var pro = Process.Start(process);
-
-                                var str = pro.StandardError.ReadToEnd();
-
-                                var fileInfo = new FileInfo(param.Filename);
-
-                                if (!fileInfo.Exists || fileInfo.Length == 0)
-                                    throw new Exception("Error while encoding the gif with FFmpeg.") { HelpLink = $"Command:\n\r{param.Command}\n\rResult:\n\r{str}" };
-
-                                #endregion
+                                EncodeWithFfmpeg("gif", listFrames, id, param, tokenSource, processing);
 
                                 break;
                             case GifEncoderType.Gifski:
@@ -754,64 +797,11 @@ namespace ScreenToGif.Windows.Other
 
                             case ApngEncoderType.FFmpeg:
                             {
-                                #region FFmpeg encoding
-
-                                SetStatus(Status.Processing, id, null, true);
-
-                                if (!Util.Other.IsFfmpegPresent())
-                                    throw new ApplicationException("FFmpeg not present.");
-
-                                if (File.Exists(param.Filename))
-                                    File.Delete(param.Filename);
-
-                                #region Generate concat
-
-                                var concat = new StringBuilder();
-                                foreach (var frame in listFrames)
-                                {
-                                    concat.AppendLine("file '" + frame.Path + "'");
-                                    concat.AppendLine("duration " + (frame.Delay / 1000d).ToString(CultureInfo.InvariantCulture));
-                                }
-
-                                var concatPath = Path.GetDirectoryName(listFrames[0].Path) ?? Path.GetTempPath();
-                                var concatFile = Path.Combine(concatPath, "concat.txt");
-
-                                if (!Directory.Exists(concatPath))
-                                    Directory.CreateDirectory(concatPath);
-
-                                if (File.Exists(concatFile))
-                                    File.Delete(concatFile);
-
-                                File.WriteAllText(concatFile, concat.ToString());
-
-                                #endregion
-
-                                param.Command = string.Format(param.Command, concatFile, (param.ExtraParameters ?? "").Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString()), param.RepeatCount, param.Filename);
-
-                                var process = new ProcessStartInfo(UserSettings.All.FfmpegLocation)
-                                {
-                                    Arguments = param.Command,
-                                    CreateNoWindow = true,
-                                    ErrorDialog = false,
-                                    UseShellExecute = false,
-                                    RedirectStandardError = true
-                                };
-
-                                var pro = Process.Start(process);
-
-                                var str = pro.StandardError.ReadToEnd();
-
-                                var fileInfo = new FileInfo(param.Filename);
-
-                                if (!fileInfo.Exists || fileInfo.Length == 0)
-                                    throw new Exception("Error while encoding the apng with FFmpeg.") { HelpLink = $"Command:\n\r{param.Command}\n\rResult:\n\r{str}" };
-
-                                #endregion
-
+                                EncodeWithFfmpeg("apng", listFrames, id, param, tokenSource, processing);
                                 break;
                             }
                         }
-                        
+
                         #endregion
 
                         break;
@@ -858,7 +848,7 @@ namespace ScreenToGif.Windows.Other
                         switch (param.VideoEncoder)
                         {
                             case VideoEncoderType.AviStandalone:
-
+                            {
                                 #region Avi Standalone
 
                                 var image = listFrames[0].Path.SourceFrom();
@@ -904,63 +894,12 @@ namespace ScreenToGif.Windows.Other
                                 #endregion
 
                                 break;
+                            }
                             case VideoEncoderType.Ffmpg:
-
-                                #region Video using FFmpeg
-
-                                SetStatus(Status.Processing, id, null, true);
-
-                                if (!Util.Other.IsFfmpegPresent())
-                                    throw new ApplicationException("FFmpeg not present.");
-
-                                if (File.Exists(param.Filename))
-                                    File.Delete(param.Filename);
-
-                                #region Generate concat
-
-                                var concat = new StringBuilder();
-                                foreach (var frame in listFrames)
-                                {
-                                    concat.AppendLine("file '" + frame.Path + "'");
-                                    concat.AppendLine("duration " + (frame.Delay / 1000d).ToString(CultureInfo.InvariantCulture));
-                                }
-
-                                var concatPath = Path.GetDirectoryName(listFrames[0].Path) ?? Path.GetTempPath();
-                                var concatFile = Path.Combine(concatPath, "concat.txt");
-
-                                if (!Directory.Exists(concatPath))
-                                    Directory.CreateDirectory(concatPath);
-
-                                if (File.Exists(concatFile))
-                                    File.Delete(concatFile);
-
-                                File.WriteAllText(concatFile, concat.ToString());
-
-                                #endregion
-
-                                param.Command = string.Format(param.Command, concatFile, param.ExtraParameters.Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString()), param.Filename);
-
-                                var process = new ProcessStartInfo(UserSettings.All.FfmpegLocation)
-                                {
-                                    Arguments = param.Command,
-                                    CreateNoWindow = true,
-                                    ErrorDialog = false,
-                                    UseShellExecute = false,
-                                    RedirectStandardError = true
-                                };
-
-                                var pro = Process.Start(process);
-
-                                var str = pro.StandardError.ReadToEnd();
-
-                                var fileInfo = new FileInfo(param.Filename);
-
-                                if (!fileInfo.Exists || fileInfo.Length == 0)
-                                    throw new Exception("Error while encoding with FFmpeg.") { HelpLink = str };
-
-                                #endregion
-
+                            {
+                                EncodeWithFfmpeg("video", listFrames, id, param, tokenSource, processing);
                                 break;
+                            }
                             default:
                                 throw new Exception("Undefined video encoder");
                         }
@@ -1155,7 +1094,7 @@ namespace ScreenToGif.Windows.Other
                 GC.Collect();
             }
         }
-
+        
         #endregion
 
         #region Public Static

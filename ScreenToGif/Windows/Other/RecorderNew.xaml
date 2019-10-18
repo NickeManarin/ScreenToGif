@@ -4,14 +4,14 @@
                   xmlns:n="clr-namespace:ScreenToGif.Controls"
                   xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
                   xmlns:u="clr-namespace:ScreenToGif.Util"
-                  x:Name="GhostWindow" Title="ScreenToGif" Height="Auto" Width="Auto" 
+                  x:Name="GhostWindow" Title="ScreenToGif" Height="Auto" Width="Auto"
                   WindowStyle="None" AllowsTransparency="True" Topmost="True" ResizeMode="NoResize"
                   UseLayoutRounding="True" SnapsToDevicePixels="True" Background="Transparent"
-                  Loaded="Window_Loaded" StateChanged="Window_StateChanged" Closing="Window_Closing">
+                  Activated="Window_Activated" Loaded="Window_Loaded" StateChanged="Window_StateChanged" Closing="Window_Closing">
 
     <Window.CommandBindings>
-        <CommandBinding Command="u:Commands.Options" CanExecute="Options_CanExecute" Executed="Options_Executed"/>
-        <CommandBinding Command="u:Commands.EnableSnapshot" CanExecute="EnableSnapshot_CanExecute" Executed="EnableSnapshot_Executed"/>
+        <CommandBinding Command="{StaticResource Command.Options}" CanExecute="Options_CanExecute" Executed="Options_Executed"/>
+        <CommandBinding Command="{StaticResource Command.EnableSnapshot}" CanExecute="EnableSnapshot_CanExecute" Executed="EnableSnapshot_Executed"/>
     </Window.CommandBindings>
 
     <Window.Resources>
@@ -81,6 +81,31 @@
             </DoubleAnimation>
         </Storyboard>
 
+        <Storyboard x:Key="HideRectangleStoryboard" FillBehavior="Stop" DesiredFrameRate="60" SpeedRatio="2">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="DashedRectangle" Storyboard.TargetProperty="(Rectangle.Opacity)" Duration="0:0:0.1" FillBehavior="Stop">
+                <DiscreteDoubleKeyFrame Value="0" KeyTime="0:0:0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MainBorder" Storyboard.TargetProperty="(Border.Opacity)" Duration="0:0:0.1" FillBehavior="Stop">
+                <DiscreteDoubleKeyFrame Value="0" KeyTime="0:0:0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="ShowRectangleStoryboard" FillBehavior="Stop" DesiredFrameRate="60">
+            <DoubleAnimation Storyboard.TargetName="DashedRectangle" Storyboard.TargetProperty="(Rectangle.Opacity)" 
+                             From="{Binding ElementName=DashedRectangle,Path=Opacity}" To="1" Duration="0:0:1" FillBehavior="Stop">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase Power="8"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+
+            <DoubleAnimation Storyboard.TargetName="MainBorder" Storyboard.TargetProperty="(Border.Opacity)" 
+                             From="{Binding ElementName=MainBorder,Path=Opacity}" To="1" Duration="0:0:1" FillBehavior="Stop">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase Power="8"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
         <c:StageToButtonString x:Key="StageToButtonStringConverter"/>
         <c:StageToCanvas x:Key="StageToCanvasConverter"/>
         <c:ShortcutKeys x:Key="ShortcutKeys"/>
@@ -114,6 +139,7 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="30"/>
                             </Grid.ColumnDefinitions>
 
@@ -128,8 +154,11 @@
                             <TextBlock Grid.Column="2" x:Name="NumberText" Text="{Binding ElementName=GhostWindow, Path=FrameCount, Converter={StaticResource IntToStringConverter}}" FontFamily="Segoe UI" FontSize="11" 
                                        VerticalAlignment="Center" FontWeight="Regular" Margin="2,0,0,0" HorizontalAlignment="Right" Foreground="{DynamicResource Element.Foreground.Medium}" 
                                        Effect="{StaticResource Shadow.Foreground.Small}"/>
-                            
-                            <n:ImageButton Grid.Column="3" Grid.RowSpan="2" x:Name="CloseButton" Content="{DynamicResource Vector.Close}" Margin="0" 
+
+                            <Viewbox Grid.Column="3" Child="{StaticResource Vector.Cursor}" Margin="3,5" ToolTip="Cursor following is enabled!" 
+                                     Visibility="{Binding ElementName=GhostWindow, Path=IsFollowing, Converter={StaticResource Bool2Visibility}}"/>
+
+                            <n:ImageButton Grid.Column="4" Grid.RowSpan="2" x:Name="CloseButton" Content="{DynamicResource Vector.Close}" Margin="0" 
                                            Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" 
                                            ContentHeight="18" Padding="2" Click="CloseButton_Click"/>
                         </Grid>
@@ -147,7 +176,7 @@
                                 <ColumnDefinition Width="26"/>
                             </Grid.ColumnDefinitions>
 
-                            <n:ImageButton Grid.Column="0" x:Name="OptionsButton" Content="{DynamicResource Vector.Options}" Margin="0" Padding="3" Command="u:Commands.Options"
+                            <n:ImageButton Grid.Column="0" x:Name="OptionsButton" Content="{DynamicResource Vector.Options}" Margin="0" Padding="3" Command="{StaticResource Command.Options}"
                                            Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" ContentHeight="22"
                                            ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource Options}"/>
 

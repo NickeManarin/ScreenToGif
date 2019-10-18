@@ -1704,7 +1704,7 @@ namespace ScreenToGif.Windows
             }
             catch (Exception ex)
             {
-                StatusBand.Warning("It was not possible to corectly load your proxy password. This usually happens when sharing the app settings with different computers.");
+                StatusBand.Warning("It was not possible to correctly load your proxy password. This usually happens when sharing the app settings with different computers.");
                 LogWriter.Log(ex, "Unprotect data");
             }
 
@@ -1719,6 +1719,18 @@ namespace ScreenToGif.Windows
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            if (UserSettings.All.CursorFollowing && UserSettings.All.FollowShortcut == Key.None)
+            {
+                Dialog.Ok(LocalizationHelper.Get("Title.Options"), LocalizationHelper.Get("S.Options.Warning.Follow.Header"),
+                    LocalizationHelper.Get("S.Options.Warning.Follow.Message"), Icons.Warning);
+
+                ShortcutsRadio.IsChecked = true;
+                FollowKeyBox.Focus();
+
+                e.Cancel = true;
+                return;
+            }
+
             Global.IgnoreHotKeys = false;
 
             RenderOptions.ProcessRenderMode = UserSettings.All.DisableHardwareAcceleration ? RenderMode.SoftwareOnly : RenderMode.Default;

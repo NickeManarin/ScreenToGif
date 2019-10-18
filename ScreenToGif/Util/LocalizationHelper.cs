@@ -463,5 +463,17 @@ namespace ScreenToGif.Util
         {
             return string.Format(Thread.CurrentThread.CurrentUICulture, Application.Current.TryFindResource(key) as string ?? defaultValue, values);
         }
+
+        /// <summary>
+        /// Gets a resource as string.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="key">The key of the string resource.</param>
+        /// <param name="values">The possible values that composite the key name.</param>
+        /// <returns>A string resource, usually a localized string.</returns>
+        public static string GetWithIndex(int index, string key, params string[] values)
+        {
+            return Application.Current.TryFindResource(key + values[index]) as string;
+        }
     }
 }

@@ -252,7 +252,7 @@
     <s:String x:Key="S.Upload.Imgur.Valid">承認は{0}まで有効</s:String>
     <s:String x:Key="S.Upload.Imgur.Removed">Imgurの承認が削除されました。</s:String>
     <s:String x:Key="S.Upload.Imgur.Error.AlbumLoad">アルバムリストを読み込むことができませんでした。</s:String>
-    <s:String x:Key="S.Upload.Gyfcat.Anonymous">Gyfcat(匿名)</s:String>
+    <s:String x:Key="S.Upload.Gfycat.Anonymous">Gfycat(匿名)</s:String>
     <s:String x:Key="S.Upload.Yandex.Token">OAuth トークン:</s:String>
     <s:String x:Key="S.Upload.Pick.Destination">宛先選択</s:String>
     <s:String x:Key="S.Upload.Pick.Album">アルバム選択(オプション)</s:String>

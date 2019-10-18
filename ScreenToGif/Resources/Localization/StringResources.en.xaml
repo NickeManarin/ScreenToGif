@@ -3,8 +3,8 @@
                     xmlns:s="clr-namespace:System;assembly=mscorlib"
                     xml:space="preserve">
     
-    <!--To use a new line: &#x0d;-->
-    <!--Or CarriageReturn + NewLine: &#x0d;&#x0a; or &#10;--> 
+    <!--To use a new line: &#x0d; or CarriageReturn + NewLine: &#x0d;&#x0a; or &#10;--> 
+    <!--You can use the zero-width-divider to suggest where the word should be divided when there's no space &#8203;-->
     <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
     
     <!--General-->
@@ -37,6 +37,76 @@
     <!--Error messages--> 
     <s:String x:Key="S.Crash">Oh no, the app crashed :(</s:String>
     <s:String x:Key="S.Required">Required field.</s:String>
+    
+    <!--Commands-->
+    <s:String x:Key="S.Command.NewRecording">New screen recording</s:String>
+    <s:String x:Key="S.Command.NewWebcamRecording">New webcam recording</s:String>
+    <s:String x:Key="S.Command.NewBoardRecording">New board recording</s:String>
+    <s:String x:Key="S.Command.NewAnimation">New animation</s:String>
+    <s:String x:Key="S.Command.InsertRecording">Insert screen recording</s:String>
+    <s:String x:Key="S.Command.InsertWebcamRecording">Insert webcam recording</s:String>
+    <s:String x:Key="S.Command.InsertBoardRecording">Insert board recording</s:String>
+    <s:String x:Key="S.Command.InsertFromMedia">Insert from media (images and videos)</s:String>
+    <s:String x:Key="S.Command.SaveAs">Save as...</s:String>
+    <s:String x:Key="S.Command.Load">Load files (images, videos and projects)</s:String>
+    <s:String x:Key="S.Command.LoadRecent">Load recent projects</s:String>
+    <s:String x:Key="S.Command.DiscardProject">Discard current project</s:String>
+    <s:String x:Key="S.Command.OverrideDelay">Override delay of frames</s:String>
+    <s:String x:Key="S.Command.IncreaseDecreaseDelay">Increase/Decrease delay of frames</s:String>
+    <s:String x:Key="S.Command.ScaleDelay">Scale delay of frames</s:String>
+    <s:String x:Key="S.Command.Zoom100">Set zoom to 100%</s:String>
+    <s:String x:Key="S.Command.SizeToContent">Adjust the window to the frame size</s:String>
+    <s:String x:Key="S.Command.FitImage">Fit image to the available window size</s:String>
+    <s:String x:Key="S.Command.FirstFrame">Select the first frame</s:String>
+    <s:String x:Key="S.Command.PreviousFrame">Select the previous frame</s:String>
+    <s:String x:Key="S.Command.Play">Play the animation</s:String>
+    <s:String x:Key="S.Command.NextFrame">Select the next frame</s:String>
+    <s:String x:Key="S.Command.LastFrame">Select the last frame</s:String>
+    <s:String x:Key="S.Command.Undo">Undo</s:String>
+    <s:String x:Key="S.Command.Redo">Redo</s:String>
+    <s:String x:Key="S.Command.Reset">Undo all changes in the project</s:String>
+    <s:String x:Key="S.Command.Copy">Copy the selected frames and store them in the clipboard</s:String>
+    <s:String x:Key="S.Command.Cut">Cut the selected frames and store them in the clipboard</s:String>
+    <s:String x:Key="S.Command.Paste">Paste the frames from the clipboard</s:String>
+    <s:String x:Key="S.Command.Delete">Delete all selected frames</s:String>
+    <s:String x:Key="S.Command.DeletePrevious">Delete all previous frames</s:String>
+    <s:String x:Key="S.Command.DeleteNext">Delete all next frames</s:String>
+    <s:String x:Key="S.Command.RemoveDuplicates">Remove duplicates</s:String>
+    <s:String x:Key="S.Command.Reduce">Reduce frame count</s:String>
+    <s:String x:Key="S.Command.Reverse">Reverse animation</s:String>
+    <s:String x:Key="S.Command.Yoyo">Makes the animation go forward and backwards</s:String>
+    <s:String x:Key="S.Command.MoveLeft">Move the selected frame to the left</s:String>
+    <s:String x:Key="S.Command.MoveRight">Move the selected frame to the right</s:String>
+    <s:String x:Key="S.Command.Resize">Resize all frames</s:String>
+    <s:String x:Key="S.Command.Crop">Crop all frames</s:String>
+    <s:String x:Key="S.Command.FlipRotate">Flip or rotate the frames</s:String>
+    <s:String x:Key="S.Command.Caption">Add a caption</s:String>
+    <s:String x:Key="S.Command.FreeText">Add a free-floating text</s:String>
+    <s:String x:Key="S.Command.TitleFrame">Add a frame with a title on it</s:String>
+    <s:String x:Key="S.Command.KeyStrokes">Inserts keys pressed during the recording</s:String>
+    <s:String x:Key="S.Command.FreeDrawing">Draw free forms</s:String>
+    <s:String x:Key="S.Command.Shapes">Add shapes</s:String>
+    <s:String x:Key="S.Command.MouseClicks">Mouse clicks</s:String>
+    <s:String x:Key="S.Command.Watermark">Select an image and add as watermark</s:String>
+    <s:String x:Key="S.Command.Border">Add borders</s:String>
+    <s:String x:Key="S.Command.Shadow">Add drop shadow</s:String>
+    <s:String x:Key="S.Command.Obfuscate">Hide sensitive parts on your frames</s:String>
+    <s:String x:Key="S.Command.Cinemagraph">Use the drawing tools to select which parts of the frame should not remain static throughout the animation</s:String>
+    <s:String x:Key="S.Command.Progress">Progress bar or text with playback details</s:String>
+    <s:String x:Key="S.Command.SelectAll">Select all frames</s:String>
+    <s:String x:Key="S.Command.GoTo">Navigate to frame by index</s:String>
+    <s:String x:Key="S.Command.InverseSelection">Inverse the selection of frames</s:String>
+    <s:String x:Key="S.Command.Unselect">Unselect all frames</s:String>
+    <s:String x:Key="S.Command.Fade">Fade transition</s:String>
+    <s:String x:Key="S.Command.Slide">Slide transition</s:String>
+    <s:String x:Key="S.Command.ClearAll">Clear all completed encodings</s:String>
+    <s:String x:Key="S.Command.MoveUp">Move up</s:String>
+    <s:String x:Key="S.Command.MoveDown">Move down</s:String>
+    <s:String x:Key="S.Command.Add">Add</s:String>
+    <s:String x:Key="S.Command.Open">Open</s:String>
+    <s:String x:Key="S.Command.Edit">Edit selected item</s:String>
+    <s:String x:Key="S.Command.Save">Save selected item</s:String>
+    <s:String x:Key="S.Command.Remove">Remove selected item</s:String>
     
     <!--StartUp Page-->
     <s:String x:Key="Title.StartUp">ScreenToGif - StartUp</s:String>
@@ -81,6 +151,9 @@
     <s:String x:Key="Donate">Donate</s:String>
     <s:String x:Key="About">About</s:String>
     
+    <s:String x:Key="S.Options.Warning.Follow.Header">Missing shortcut key for cursor following</s:String>
+    <s:String x:Key="S.Options.Warning.Follow.Message">In order to use the mouse cursor following feature, you must set a shortcut key to toggle it when needed.</s:String>
+    
     <s:String x:Key="Application.ScreenRecorder">Screen Recorder</s:String>
     <s:String x:Key="Application.ScreenRecorder.RecordMouse">Show the mouse cursor in the recording.</s:String>
     <s:String x:Key="Application.ScreenRecorder.RecordClicks">Detect mouse clicks.</s:String>
@@ -97,7 +170,11 @@
     <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(It will replace the old recorder UI)</s:String>
     <s:String x:Key="Application.ScreenRecorder.Magnifier">Enable the screen magnifier.</s:String>
     <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(It enables a magnifier while selecting the recording area)</s:String>
-    
+    <s:String x:Key="Application.ScreenRecorder.CursorFollowing">Enable cursor following.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.CursorFollowing.Info">(The recording area will reposition itself based on the location of the cursor)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.FollowMargin.Info">(Buffer margin in pixels, where the recording area starts getting repositioned)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.FollowMarginInvisible.Info">(Additional buffer margin in pixels, where the UI starts getting hidden)</s:String>
+
     <s:String x:Key="Application.Other">Other</s:String>
     <s:String x:Key="Application.Other.SystemTray">Display the app on the system tray (notification area).</s:String>
     <s:String x:Key="Application.Other.LeaveOpen">Keep the app open even if all windows are closed.</s:String>
@@ -108,6 +185,7 @@
     <s:String x:Key="Application.Other.DrawOutlineOutside">Draw the outline of captions outside the letters.</s:String>
     <s:String x:Key="Application.Other.DisableHardwareAcceleration">Disable hardware acceleration.</s:String>
     <s:String x:Key="Application.Other.CheckForTranslationUpdates">Check for translation updates.</s:String>
+    <s:String x:Key="Application.Other.CheckForTranslationUpdates.Info">(Updated translations will be downloaded and installed automatically)</s:String>
     <s:String x:Key="Application.Other.CheckForUpdates">Check for updates.</s:String>
     <s:String x:Key="S.Application.Other.Homepage">Homepage:</s:String>
     <s:String x:Key="S.Application.Other.Homepage.StartUp">StartUp Window</s:String>
@@ -183,6 +261,10 @@
     <s:String x:Key="S.Shortcuts.Recorders.Stop.Info">(It stops the recording and opens the editor)</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.Discard">Discard:</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.Discard.Info">(Discards the active recording, when it's paused)</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Follow">Cursor following:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Follow.Info">(Toggles the adjustment of the recording area based on the position of the cursor)</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.DisableFollow">Disable following:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.DisableFollow.Info">(Temporarily disables the adjustment of the recording area based on the position of the cursor, only modifier keys accepted)</s:String>
     <s:String x:Key="S.Shortcuts.Info">Click to set keyboard focus, then press the desired keys and modifiers.&#10;Some keys combinations are not allowed.</s:String>
     
     <s:String x:Key="Language.AppLanguage">App's Language</s:String>
@@ -206,7 +288,7 @@
     <s:String x:Key="TempFiles.OpenFolder">Browse Folder</s:String>
     <s:String x:Key="TempFiles.Clear">Clear Temp. Folder</s:String>
     <s:String x:Key="TempFiles.LogsLocation">Logs folder</s:String>
-    <s:String x:Key="TempFiles.LogsLocation.Choose">Choose the location for the error logs files</s:String>
+    <s:String x:Key="TempFiles.LogsLocation.Choose">Choose the location for the error log files</s:String>
     <s:String x:Key="TempFiles.Location">Location folder</s:String>
     <s:String x:Key="TempFiles.Location.Choose">Choose the location for the temporary files</s:String>
     <s:String x:Key="TempFiles.Settings">Settings location</s:String>
@@ -255,7 +337,7 @@
     <s:String x:Key="S.Upload.Imgur.Valid">Authorization valid until {0}.</s:String>
     <s:String x:Key="S.Upload.Imgur.Removed">Imgur authorization removed.</s:String>
     <s:String x:Key="S.Upload.Imgur.Error.AlbumLoad">It was not possible to load the album list.</s:String>
-    <s:String x:Key="S.Upload.Gyfcat.Anonymous">Gyfcat (Anonymous)</s:String>
+    <s:String x:Key="S.Upload.Gfycat.Anonymous">Gfycat (Anonymous)</s:String>
     <s:String x:Key="S.Upload.Yandex.Token">OAuth token:</s:String>
     <s:String x:Key="S.Upload.Pick.Destination">Pick a destination</s:String>
     <s:String x:Key="S.Upload.Pick.Album">Pick an album (optional)</s:String>
@@ -366,6 +448,8 @@
     <s:String x:Key="ColorSelector.Initial">Initial Color</s:String>
     <s:String x:Key="ColorSelector.Current">Current Color</s:String>
     <s:String x:Key="ColorSelector.Latest">Latest Color</s:String>
+    <s:String x:Key="ColorSelector.Sample">Drag this to&#x0d;sample colors</s:String>
+    <s:String x:Key="ColorSelector.Sample.Info">Click and drag to pick&#x0d;colors from your screen.</s:String>
     
     <!--Exception Viewer, Optional-->
     <s:String x:Key="ExceptionViewer.Title">Exception Viewer</s:String>
@@ -417,7 +501,6 @@
     
     <!--Encoder-->
     <s:String x:Key="Encoder.Title">Encoder</s:String>
-    <s:String x:Key="Encoder.ClearAllCompleted">Clear All Completed</s:String>
     <s:String x:Key="Encoder.Starting">Starting</s:String>
     <s:String x:Key="Encoder.Completed">Completed</s:String>
     <s:String x:Key="Encoder.Completed.Clipboard">Copied to the clipboard</s:String>
@@ -529,6 +612,11 @@
     <s:String x:Key="Editor.Playback.Next">Next</s:String>
     <s:String x:Key="Editor.Playback.Last">Last</s:String>
     
+    <!--Playback • Playback Options-->
+    <s:String x:Key="Editor.PlaybackOptions.Header">Playback Options</s:String>
+    <s:String x:Key="Editor.PlaybackOptions.Loop">Loop during playback.</s:String>
+    <s:String x:Key="Editor.PlaybackOptions.Loop.Info">Only used during playback.&#x0d;If you wish to change the loop settings for exporting Gifs and Apngs,&#x0d;it will be available inside the 'Save As' panel for some encoders.</s:String>
+    
     <!--Edit • Frames-->  
     <s:String x:Key="Editor.Edit.Frames">Frames</s:String>
     <s:String x:Key="Editor.Edit.Delete">Delete</s:String>
@@ -571,6 +659,7 @@
     <s:String x:Key="Editor.Image.Watermark">Watermark</s:String>
     <s:String x:Key="Editor.Image.Cinemagraph">Cinemagraph</s:String>
     <s:String x:Key="Editor.Image.Border">Border</s:String>
+    <s:String x:Key="Editor.Image.Shadow">Shadow</s:String>
     <s:String x:Key="Editor.Image.Progress">Progress</s:String>
     <s:String x:Key="Editor.Image.Obfuscate">Obfuscate</s:String>
 
@@ -585,6 +674,8 @@
     <s:String x:Key="Editor.Statistics.TotalDuration">Total duration</s:String>
     <s:String x:Key="Editor.Statistics.FrameSize">Frame size</s:String>
     <s:String x:Key="Editor.Statistics.AverageDuration">Average duration (delay)</s:String>
+    <s:String x:Key="Editor.Statistics.CurrentTime">Current time</s:String>
+    <s:String x:Key="Editor.Statistics.CurrentTime.Info">The current time (cumulative) based on the current frame being displayed.</s:String>
     <s:String x:Key="Editor.Statistics.FrameDpi">Frame DPI and scale</s:String>
     <s:String x:Key="Editor.Statistics.SelectedFrame">Selected Frame</s:String>
     
@@ -605,12 +696,12 @@
     <s:String x:Key="Editor.DeleteAll.Message">This action will discard the current open project and cannot be undone. Would you like to continue?</s:String>
     <s:String x:Key="Editor.DiscardProject.Title">Discard Project</s:String>
     <s:String x:Key="Editor.DiscardProject.Instruction">Are you sure that you want to discard the project?</s:String>
-    <s:String x:Key="Editor.DiscardProject.Message">This action will discard the project, removing all frames.\n\rYou can't undo this operation.</s:String>
+    <s:String x:Key="Editor.DiscardProject.Message">This action will discard the project, removing all frames.&#x0d;You can't undo this operation.</s:String>
     <s:String x:Key="Editor.DiscardPreviousProject.Instruction">Do you want to discard the previous project?</s:String>
     <s:String x:Key="Editor.DiscardPreviousProject.Message">If you choose not to do so, the previous project will be available to open via Recents Projects.</s:String>
     <s:String x:Key="Editor.DeleteFrames.Title">Delete Frames</s:String>
     <s:String x:Key="Editor.DeleteFrames.Instruction">Are you sure that you want to delete?</s:String>
-    <s:String x:Key="Editor.DeleteFrames.Message">This action will delete {0} frame(s).\n\rYou'll be able to undo this later.</s:String>
+    <s:String x:Key="Editor.DeleteFrames.Message">This action will delete {0} frame(s).&#x0d;You'll be able to undo this later.</s:String>
     <s:String x:Key="Editor.Exiting.Title">Exiting the Editor</s:String>
     <s:String x:Key="Editor.Exiting.Instruction">Are you sure that you want to exit?</s:String>
     <s:String x:Key="Editor.Exiting.Message">The current project that you were working on can be opened again via 'Recent Projects'.</s:String>
@@ -631,6 +722,8 @@
     <s:String x:Key="Editor.Watermark.WarningSelection">You have to select at least one frame to apply the Watermark to.</s:String>
     <s:String x:Key="Editor.Border.WarningThickness">You have to select a border thickness greater than zero on at least one side.</s:String>
     <s:String x:Key="Editor.Border.WarningSelection">You have to select at least one frame to apply the Border to.</s:String>
+    <s:String x:Key="Editor.Shadow.Warning.Invisible">The opacity must be greater than zero in order to make any difference in the frame.</s:String>
+    <s:String x:Key="Editor.Shadow.Warning.Behind">When using the shadow depth and blur radius as zero, it won't make any difference because it will be hidden behind the frame.</s:String>
     <s:String x:Key="Editor.Cinemagraph.WarningNoDrawing">You have to select at least one pixel to apply the Cinemagraph to. Select the pixels by drawing on top of them.</s:String>
     
     <s:String x:Key="Editor.Fade.Title">Fade Transition</s:String>
@@ -722,6 +815,7 @@
     <s:String x:Key="Hint.FlipRotate2">The flip action applies to the selected frames and the rotate applies to all frames</s:String>
     <s:String x:Key="Hint.ApplyAll">This action applies to all frames</s:String>
     <s:String x:Key="Hint.ApplySelected">This action applies to selected frames</s:String>
+    <s:String x:Key="Hint.ApplySelectedOrAll">This action applies to all or selected frames, depending on your settings</s:String>
     <s:String x:Key="Hint.Cinemagraph">The cinemagraph applies to all frames based on the first frame</s:String>
     <s:String x:Key="Hint.Overlay">Overlay applied</s:String>
     <s:String x:Key="Hint.TitleFrame">Title frame created</s:String>
@@ -818,6 +912,8 @@
     <s:String x:Key="KeyStrokes.Edit.Keys">Detected key strokes</s:String>
     <s:String x:Key="KeyStrokes.Edit.Remove">Remove key stroke</s:String>
     <s:String x:Key="KeyStrokes.Edit.Add">Add a key stroke:</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Lower">Lowercase lettering.</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Lower.Info">It lets you insert lower case single letters.</s:String>
     
     <s:String x:Key="String.Delay">Delay</s:String>
     <s:String x:Key="String.DelayMs">Delay:</s:String>
@@ -826,6 +922,7 @@
     <s:String x:Key="String.Margin">Margin:</s:String>
     <s:String x:Key="String.Padding">Padding:</s:String>
     <s:String x:Key="String.Background">Background</s:String>
+    <s:String x:Key="String.MinHeight">Min height:</s:String>
     
     <s:String x:Key="FreeDrawing.Mode">Mode</s:String>
     <s:String x:Key="FreeDrawing.Pen">Pen</s:String>
@@ -855,7 +952,14 @@
     <s:String x:Key="Watermark.Opacity">Opacity:</s:String>
     
     <s:String x:Key="Border.Appearance">Appearance</s:String>
+    <s:String x:Key="S.Border.Info">Use negative values to make the border expand the image. When doing so, the border will be applied to all frames.&#x0d;If no negative value being used, the border will be applied only to the selected frames.</s:String>
 
+    <s:String x:Key="S.Shadow.ShadowColor">Shadow color:</s:String>
+    <s:String x:Key="S.Shadow.BackgroundColor">Background color:</s:String>
+    <s:String x:Key="S.Shadow.Direction">Direction:</s:String>
+    <s:String x:Key="S.Shadow.BlurRadius">Blur radius:</s:String>
+    <s:String x:Key="S.Shadow.Depth">Depth:</s:String>
+    
     <s:String x:Key="S.Obfuscate.Options">Obfuscation options</s:String>
     <s:String x:Key="S.Obfuscate.PixelSize">Pixel size:</s:String>
     <s:String x:Key="S.Obfuscate.UseAverage">Calculate the average color for each pixelated block.</s:String>
@@ -878,6 +982,8 @@
     <s:String x:Key="S.Progress.Format.Date">You can use the date and time format from .Net Framework.&#x0d;The specification is available in these two links below.</s:String>
     <s:String x:Key="S.Progress.Format.Date.Standard">Standard formats</s:String>
     <s:String x:Key="S.Progress.Format.Date.Custom">Custom formats</s:String>
+    <s:String x:Key="S.Progress.Precision.StartNumber">Count from:</s:String>
+    <s:String x:Key="S.Progress.Precision.StartNumber.ToolTip">Starts counting the frame number from this selected number.</s:String>
     <s:String x:Key="Progress.Orientation">Orientation:</s:String>
     
     <s:String x:Key="S.DelayUpdate">Delay update</s:String>
@@ -1050,33 +1156,33 @@
     <s:String x:Key="S.FontStyles.Oblique">Oblique</s:String>
     
     <!--FontWeight-->
-     <s:String x:Key="S.FontWeights.Black">Black</s:String>
-     <s:String x:Key="S.FontWeights.Bold">Bold</s:String>
-     <s:String x:Key="S.FontWeights.DemiBold">Demi Bold</s:String>
-     <s:String x:Key="S.FontWeights.ExtraBlack">Extra Black</s:String>
-     <s:String x:Key="S.FontWeights.ExtraBold">Extra Bold</s:String>
-     <s:String x:Key="S.FontWeights.ExtraLight">Extra Light</s:String>
-     <s:String x:Key="S.FontWeights.Heavy">Heavy</s:String>
-     <s:String x:Key="S.FontWeights.Light">Light</s:String>
-     <s:String x:Key="S.FontWeights.Medium">Medium</s:String>
-     <s:String x:Key="S.FontWeights.Normal">Normal</s:String>
-     <s:String x:Key="S.FontWeights.Regular">Regular</s:String>
-     <s:String x:Key="S.FontWeights.SemiBold">Semi Bold</s:String>
-     <s:String x:Key="S.FontWeights.Thin">Thin</s:String>
-     <s:String x:Key="S.FontWeights.UltraBlack">Ultra Black</s:String>
-     <s:String x:Key="S.FontWeights.UltraBold">Ultra Bold</s:String>
-     <s:String x:Key="S.FontWeights.UltraLight">Ultra Light</s:String>
+    <s:String x:Key="S.FontWeights.Black">Black</s:String>
+    <s:String x:Key="S.FontWeights.Bold">Bold</s:String>
+    <s:String x:Key="S.FontWeights.DemiBold">Demi Bold</s:String>
+    <s:String x:Key="S.FontWeights.ExtraBlack">Extra Black</s:String>
+    <s:String x:Key="S.FontWeights.ExtraBold">Extra Bold</s:String>
+    <s:String x:Key="S.FontWeights.ExtraLight">Extra Light</s:String>
+    <s:String x:Key="S.FontWeights.Heavy">Heavy</s:String>
+    <s:String x:Key="S.FontWeights.Light">Light</s:String>
+    <s:String x:Key="S.FontWeights.Medium">Medium</s:String>
+    <s:String x:Key="S.FontWeights.Normal">Normal</s:String>
+    <s:String x:Key="S.FontWeights.Regular">Regular</s:String>
+    <s:String x:Key="S.FontWeights.SemiBold">Semi Bold</s:String>
+    <s:String x:Key="S.FontWeights.Thin">Thin</s:String>
+    <s:String x:Key="S.FontWeights.UltraBlack">Ultra Black</s:String>
+    <s:String x:Key="S.FontWeights.UltraBold">Ultra Bold</s:String>
+    <s:String x:Key="S.FontWeights.UltraLight">Ultra Light</s:String>
     
-     <!--VerticalAligment-->
-     <s:String x:Key="S.VerticalAlignment.Top">Top</s:String>
-     <s:String x:Key="S.VerticalAlignment.Center">Center</s:String>
-     <s:String x:Key="S.VerticalAlignment.Bottom">Bottom</s:String>
-     <s:String x:Key="S.Alignment.Stretch">Stretch</s:String>
+    <!--VerticalAlignment-->
+    <s:String x:Key="S.VerticalAlignment.Top">Top</s:String>
+    <s:String x:Key="S.VerticalAlignment.Center">Center</s:String>
+    <s:String x:Key="S.VerticalAlignment.Bottom">Bottom</s:String>
+    <s:String x:Key="S.Alignment.Stretch">Stretch</s:String>
 
-     <!--HorizontalAlignment-->
-     <s:String x:Key="S.HorizontalAlignment.Left">Left</s:String>
-     <s:String x:Key="S.HorizontalAlignment.Center">Center</s:String>
-     <s:String x:Key="S.HorizontalAlignment.Right">Right</s:String>
+    <!--HorizontalAlignment-->
+    <s:String x:Key="S.HorizontalAlignment.Left">Left</s:String>
+    <s:String x:Key="S.HorizontalAlignment.Center">Center</s:String>
+    <s:String x:Key="S.HorizontalAlignment.Right">Right</s:String>
     
     <!--Orientation-->
     <s:String x:Key="S.Orientation.Horizontal">Horizontal</s:String>

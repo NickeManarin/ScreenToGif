@@ -64,13 +64,14 @@ namespace ScreenToGif.Util
                         writer.WriteLine($"▲ Source - {Environment.NewLine}\t{ex.Source}");
                         writer.WriteLine($"▼ TargetSite - {Environment.NewLine}\t{ex.TargetSite}");
 
-                        var bad = ex as BadImageFormatException;
-
-                        if (bad != null)
+                        if (ex is BadImageFormatException bad)
                             writer.WriteLine($"► Fuslog - {Environment.NewLine}\t{bad.FusionLog}");
 
                         if (aditional != null)
                             writer.WriteLine($"◄ Aditional - {Environment.NewLine}\t{aditional}");
+
+                        if (ex.HelpLink != null)
+                            writer.WriteLine($"◘ Other - {Environment.NewLine}\t{ex.HelpLink}");
 
                         writer.WriteLine($"♠ StackTrace - {Environment.NewLine}{ex.StackTrace}");
 

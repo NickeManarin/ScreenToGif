@@ -23,6 +23,7 @@
 #endregion
 
 using System;
+using System.Windows.Media;
 
 namespace ScreenToGif.ImageUtil.Gif.LegacyEncoder
 {
@@ -67,7 +68,7 @@ namespace ScreenToGif.ImageUtil.Gif.LegacyEncoder
         /// </summary>
         private const int MinPictureBytes = (3 * Prime4);
 
-        #region  Network Definitions
+        #region Network Definitions
 
         private const int Maxnetpos = Netsize - 1;
 
@@ -137,6 +138,11 @@ namespace ScreenToGif.ImageUtil.Gif.LegacyEncoder
         private readonly byte[] _thepicture;
 
         /// <summary>
+        /// The input image itself as a byte Array.
+        /// </summary>
+        private readonly Color? _transparent;
+
+        /// <summary>
         /// Height * Width *3 (H*W*3).
         /// </summary>
         private readonly int _lengthCount;
@@ -180,11 +186,12 @@ namespace ScreenToGif.ImageUtil.Gif.LegacyEncoder
         /// </summary>
         /// <param name="thePic">The image in bytes.</param>
         /// <param name="sample">Sample interval for the quantitizer.</param>
-        public NeuQuant(byte[] thePic, int sample)
+        public NeuQuant(byte[] thePic, int sample, Color? transparent)
         {
             _thepicture = thePic;
             _lengthCount = thePic.Length; // len;
             _samplefac = sample;
+            _transparent = transparent;
 
             _network = new int[Netsize][];
 
@@ -223,6 +230,14 @@ namespace ScreenToGif.ImageUtil.Gif.LegacyEncoder
                 map[k++] = (byte)_network[j][1];
                 map[k++] = (byte)_network[j][0];
             }
+
+            //Tests
+            //if (_transparent.HasValue)
+            //{
+            //    map[k++] = _transparent.Value.R;
+            //    map[k++] = _transparent.Value.G;
+            //    map[k++] = _transparent.Value.B;
+            //}
 
             return map;
         }
@@ -369,9 +384,7 @@ namespace ScreenToGif.ImageUtil.Gif.LegacyEncoder
                 Altersingle(alpha, neuronIndex, b, g, r);
 
                 if (rad != 0)
-                {
                     AlterNeighbour(rad, neuronIndex, b, g, r);
-                }
 
                 pix += step;
                 if (pix >= lim)
@@ -391,8 +404,7 @@ namespace ScreenToGif.ImageUtil.Gif.LegacyEncoder
                         rad = 0;
 
                     for (neuronIndex = 0; neuronIndex < rad; neuronIndex++)
-                        _radPower[neuronIndex] =
-                            alpha * (((rad * rad - neuronIndex * neuronIndex) * RadBias) / (rad * rad));
+                        _radPower[neuronIndex] = alpha * (((rad * rad - neuronIndex * neuronIndex) * RadBias) / (rad * rad));
                 }
             }
 

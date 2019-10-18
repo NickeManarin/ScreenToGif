@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Net.Mail;
 
 namespace ScreenToGif.Util
@@ -9,7 +12,16 @@ namespace ScreenToGif.Util
     {
         internal static bool Send(string html, List<string> files = null)
         {
-            //Please, don't try to log with this e-mail and password. :/
+            //If returns null, try sending via email.
+            var response = SendToServer(html, files?.FirstOrDefault());
+
+            if (response == true)
+                return true;
+
+            if (response == false)
+                return false;
+
+            //Please, don't try to log with this email and password. :/
             //Everytime someone does this, I have to change the password and the Feedback feature stops working until I update the app.
             var passList = (Secret.Password ?? "").Split(new[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
 
@@ -65,6 +77,43 @@ namespace ScreenToGif.Util
             {
                 LogWriter.Log(ex, "Error while sending email");
                 return false;
+            }
+        }
+
+        /// <summary>
+        /// Tries to send the feedback message to the api.
+        /// </summary>
+        /// <returns>If null, the app should try sending the feedback via email.</returns>
+        private static bool? SendToServer(string message, string file)
+        {
+            if (string.IsNullOrWhiteSpace(Secret.ServerAddress))
+                return null;
+
+            using (var client = new HttpClient
+            {
+                BaseAddress = new Uri(Secret.ServerAddress)
+            })
+            {
+                try
+                {
+                    var multiContent = new MultipartFormDataContent
+                    {
+                        {new StringContent(message), "message"},
+                        {new ByteArrayContent(File.ReadAllBytes(file)), "file", file}
+                    };
+
+                    var result = client.PostAsync("api/v1/relay/send", multiContent).Result;
+
+                    if (result == null || result.StatusCode == HttpStatusCode.BadRequest)
+                        return null;
+
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    return null;
+                }
             }
         }
     }

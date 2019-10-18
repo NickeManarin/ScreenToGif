@@ -66,8 +66,11 @@ namespace ScreenToGif.Model
                     ExecuteAction = a =>
                     {
                         var caller = a as Window;
-                        caller?.Hide();
+                        var editor = a as Editor;
 
+                        if (editor == null)
+                            caller?.Hide();
+                        
                         if (UserSettings.All.NewRecorder)
                         {
                             var recorderNew = new RecorderNew();
@@ -77,13 +80,23 @@ namespace ScreenToGif.Model
 
                                 if (window?.Project != null && window.Project.Any)
                                 {
-                                    ShowEditor(window.Project);
-                                    caller?.Close();
+                                    if (editor == null)
+                                    {
+                                        ShowEditor(window.Project);
+                                        caller?.Close();
+                                    }
+                                    else
+                                        editor.RecorderCallback(window.Project);
                                 }
                                 else
                                 {
-                                    caller?.Show();
-                                    CloseOrNot();
+                                    if (editor == null)
+                                    {
+                                        caller?.Show();
+                                        CloseOrNot();
+                                    }
+                                    else
+                                        editor.RecorderCallback(null);
                                 }
                             };
 
@@ -100,13 +113,23 @@ namespace ScreenToGif.Model
 
                             if (window?.Project != null && window.Project.Any)
                             {
-                                ShowEditor(window.Project);
-                                caller?.Close();
+                                if (editor == null)
+                                {
+                                    ShowEditor(window.Project);
+                                    caller?.Close();
+                                }
+                                else
+                                    editor.RecorderCallback(window.Project);
                             }
                             else
                             {
-                                caller?.Show();
-                                CloseOrNot();
+                                if (editor == null)
+                                {
+                                    caller?.Show();
+                                    CloseOrNot();
+                                }
+                                else
+                                    editor.RecorderCallback(null);
                             }
                         };
 
@@ -131,7 +154,10 @@ namespace ScreenToGif.Model
                     ExecuteAction = a =>
                     {
                         var caller = a as Window;
-                        caller?.Hide();
+                        var editor = a as Editor;
+
+                        if (editor == null)
+                            caller?.Hide();
 
                         var recorder = new Windows.Webcam();
                         recorder.Closed += (sender, args) =>
@@ -140,13 +166,23 @@ namespace ScreenToGif.Model
 
                             if (window?.Project != null && window.Project.Any)
                             {
-                                ShowEditor(window.Project);
-                                caller?.Close();
+                                if (editor == null)
+                                {
+                                    ShowEditor(window.Project);
+                                    caller?.Close();
+                                }
+                                else
+                                    editor.RecorderCallback(window.Project);
                             }
                             else
                             {
-                                caller?.Show();
-                                CloseOrNot();
+                                if (editor == null)
+                                {
+                                    caller?.Show();
+                                    CloseOrNot();
+                                }
+                                else
+                                    editor.RecorderCallback(null);
                             }
                         };
 
@@ -171,7 +207,10 @@ namespace ScreenToGif.Model
                     ExecuteAction = a =>
                     {
                         var caller = a as Window;
-                        caller?.Hide();
+                        var editor = a as Editor;
+
+                        if (editor == null)
+                            caller?.Hide();
 
                         var recorder = new Board();
                         recorder.Closed += (sender, args) =>
@@ -180,13 +219,23 @@ namespace ScreenToGif.Model
 
                             if (window?.Project != null && window.Project.Any)
                             {
-                                ShowEditor(window.Project);
-                                caller?.Close();
+                                if (editor == null)
+                                {
+                                    ShowEditor(window.Project);
+                                    caller?.Close();
+                                }
+                                else
+                                    editor.RecorderCallback(window.Project);
                             }
                             else
                             {
-                                caller?.Show();
-                                CloseOrNot();
+                                if (editor == null)
+                                {
+                                    caller?.Show();
+                                    CloseOrNot();
+                                }
+                                else
+                                    editor.RecorderCallback(null);
                             }
                         };
 

@@ -7,7 +7,7 @@
         WindowStartupLocation="CenterScreen" SnapsToDevicePixels="True" Background="{DynamicResource Panel.Background}" Loaded="Window_Loaded">
 
     <Window.CommandBindings>
-        <CommandBinding Command="u:Commands.OkAction" CanExecute="Ok_CanExecute" Executed="Ok_Executed"/>
+        <CommandBinding Command="{StaticResource Command.Ok}" CanExecute="Ok_CanExecute" Executed="Ok_Executed"/>
     </Window.CommandBindings>
     
     <Grid>
@@ -58,7 +58,7 @@
                 <ColumnDefinition Width="Auto" MinWidth="100"/>
             </Grid.ColumnDefinitions>
 
-            <n:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource Ok}" Content="{StaticResource Vector.Ok}" ContentHeight="20" Padding="4,0" Margin="5" Command="u:Commands.OkAction"/>
+            <n:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource Ok}" Content="{StaticResource Vector.Ok}" ContentHeight="20" Padding="4,0" Margin="5" Command="{StaticResource Command.Ok}"/>
             <n:ImageButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource Cancel}" Content="{StaticResource Vector.Cancel}" ContentHeight="20" Padding="4,0" Margin="5" Click="CancelButton_Click" IsCancel="True"/>
         </Grid>
     </Grid>

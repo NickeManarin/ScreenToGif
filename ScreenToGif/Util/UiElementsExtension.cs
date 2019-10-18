@@ -87,8 +87,7 @@ namespace ScreenToGif.Util
 
                 var sourceProperty = property.GetValue(source);
 
-                var element = sourceProperty as UIElement;
-                if (element != null)
+                if (sourceProperty is UIElement element)
                 {
                     var propertyClone = element.DeepClone();
                     property.SetValue(result, propertyClone);

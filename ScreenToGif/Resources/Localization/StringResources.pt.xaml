@@ -3,8 +3,8 @@
                     xmlns:s="clr-namespace:System;assembly=mscorlib"
                     xml:space="preserve">
     
-    <!--To use a new line: &#x0d;-->
-    <!--Or CarriageReturn + NewLine: &#x0d;&#x0a; or &#10;--> 
+    <!--To use a new line: &#x0d; or CarriageReturn + NewLine: &#x0d;&#x0a; or &#10;--> 
+    <!--You can use the zero-width-divider to suggest where the word should be divided when there's no space &#8203;-->
     <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
     
     <!--General-->
@@ -38,6 +38,75 @@
     <s:String x:Key="S.Crash">Oh não, o aplicativo parou de funcionar :(</s:String>
     <s:String x:Key="S.Required">Preenchimento obrigatório.</s:String>
 
+    <!--Commands-->
+    <s:String x:Key="S.Command.NewRecording">Nova gravação de tela</s:String>
+    <s:String x:Key="S.Command.NewWebcamRecording">Nova gravação de webcam</s:String>
+    <s:String x:Key="S.Command.NewBoardRecording">Nova gravação de quadro</s:String>
+    <s:String x:Key="S.Command.NewAnimation">Nova animação</s:String>
+    <s:String x:Key="S.Command.InsertRecording">Inserir gravação de tela</s:String>
+    <s:String x:Key="S.Command.InsertWebcamRecording">Inserir gravação de webcam</s:String>
+    <s:String x:Key="S.Command.InsertBoardRecording">Inserir gravação de quadro</s:String>
+    <s:String x:Key="S.Command.InsertFromMedia">Inserir mídia (imagens e vídeos)</s:String>
+    <s:String x:Key="S.Command.SaveAs">Salvar como...</s:String>
+    <s:String x:Key="S.Command.Load">Carregar arquivos (imagens, vídeos e projetos)</s:String>
+    <s:String x:Key="S.Command.LoadRecent">Carregar projetos recentes</s:String>
+    <s:String x:Key="S.Command.DiscardProject">Descartar projeto atual</s:String>
+    <s:String x:Key="S.Command.OverrideDelay">Alterar tempo de exibição dos quadros</s:String>
+    <s:String x:Key="S.Command.IncreaseDecreaseDelay">Aumentar/Diminuir tempo de exibição dos quadros</s:String>
+    <s:String x:Key="S.Command.ScaleDelay">Escalar o tempo de exibição dos quadros</s:String>
+    <s:String x:Key="S.Command.Zoom100">Colocar o zoom em 100%</s:String>
+    <s:String x:Key="S.Command.SizeToContent">Ajustar a janela do editor para o tamanho do quadro</s:String>
+    <s:String x:Key="S.Command.FitImage">Fazer a imagem caber no espaço disponível na janela do editor</s:String>
+    <s:String x:Key="S.Command.FirstFrame">Selecione o primeiro quadro</s:String>
+    <s:String x:Key="S.Command.PreviousFrame">Selecione o quadro anterior</s:String>
+    <s:String x:Key="S.Command.Play">Pré-visualize a animação</s:String>
+    <s:String x:Key="S.Command.NextFrame">Selecione o próximo quadro</s:String>
+    <s:String x:Key="S.Command.LastFrame">Selecione o último quadro</s:String>
+    <s:String x:Key="S.Command.Undo">Desfazer</s:String>
+    <s:String x:Key="S.Command.Redo">Refazer</s:String>
+    <s:String x:Key="S.Command.Reset">Desfaça todas as alterações no projeto</s:String>
+    <s:String x:Key="S.Command.Copy">Copie os quadros selecionados e armazene-os na área de transferência</s:String>
+    <s:String x:Key="S.Command.Cut">Corte os quadros selecionados e armazene-os na área de transferência</s:String>
+    <s:String x:Key="S.Command.Paste">Cole os quadros da área de transferência</s:String>
+    <s:String x:Key="S.Command.Delete">Remover todos os quadros selecionados</s:String>
+    <s:String x:Key="S.Command.DeletePrevious">Remover todos os quadros anteriores</s:String>
+    <s:String x:Key="S.Command.DeleteNext">Remover todos os próximos quadros</s:String>
+    <s:String x:Key="S.Command.RemoveDuplicates">Remover quadros duplicados</s:String>
+    <s:String x:Key="S.Command.Reduce">Reduzir a quantidade de quadros</s:String>
+    <s:String x:Key="S.Command.Reverse">Reverse animation</s:String>
+    <s:String x:Key="S.Command.Yoyo">Yoyo, makes the animation go forward and backwards</s:String>
+    <s:String x:Key="S.Command.MoveLeft">Move the selected frame to the left</s:String>
+    <s:String x:Key="S.Command.MoveRight">Move the selected frame to the right</s:String>
+    <s:String x:Key="S.Command.Resize">Resize all frames</s:String>
+    <s:String x:Key="S.Command.Crop">Cortar todos os quadros</s:String>
+    <s:String x:Key="S.Command.FlipRotate">Girar ou rotacionar os quadros</s:String>
+    <s:String x:Key="S.Command.Caption">Adicionar uma legenda</s:String>
+    <s:String x:Key="S.Command.FreeText">Adicionar um texto</s:String>
+    <s:String x:Key="S.Command.TitleFrame">Adicionar um quadros com um título</s:String>
+    <s:String x:Key="S.Command.KeyStrokes">Pressionamentos de tecla: inserir teclas pressionadas durante a gravação</s:String>
+    <s:String x:Key="S.Command.FreeDrawing">Desenhe livremente</s:String>
+    <s:String x:Key="S.Command.Shapes">Adicione formas geométricas</s:String>
+    <s:String x:Key="S.Command.MouseClicks">Cliques do mouse</s:String>
+    <s:String x:Key="S.Command.Watermark">Selecione uma imagem e adicione como marca d'água</s:String>
+    <s:String x:Key="S.Command.Border">Adicionar bordas</s:String>
+    <s:String x:Key="S.Command.Shadow">Adicionar sombra</s:String>
+    <s:String x:Key="S.Command.Obfuscate">Ofuscar: esconda partes de seus quadros</s:String>
+    <s:String x:Key="S.Command.Progress">Barra de progresso ou texto com detalhes de execução</s:String>
+    <s:String x:Key="S.Command.SelectAll">Selecione todos os quadros</s:String>
+    <s:String x:Key="S.Command.GoTo">Navegue até o quadro a partir do número</s:String>
+    <s:String x:Key="S.Command.InverseSelection">Inverta a seleção de quadros</s:String>
+    <s:String x:Key="S.Command.Unselect">Deselecione todos os quadros</s:String>
+    <s:String x:Key="S.Command.Fade">Transição de esmaecimento</s:String>
+    <s:String x:Key="S.Command.Slide">Transição de deslizamento</s:String>
+    <s:String x:Key="S.Command.ClearAll">Limpe todas as codificações finalizadas</s:String>
+    <s:String x:Key="S.Command.MoveUp">Mover para cima</s:String>
+    <s:String x:Key="S.Command.MoveDown">Mover para baixo</s:String>
+    <s:String x:Key="S.Command.Add">Adicionar</s:String>
+    <s:String x:Key="S.Command.Open">Abrir</s:String>
+    <s:String x:Key="S.Command.Edit">Editar item selecionado</s:String>
+    <s:String x:Key="S.Command.Save">Salvar item selecionado</s:String>
+    <s:String x:Key="S.Command.Remove">Remover item selecionado</s:String>
+    
     <!--StartUp Page-->
     <s:String x:Key="Title.StartUp">ScreenToGif - Início</s:String>
     <s:String x:Key="Recorder">Gravador</s:String>
@@ -81,6 +150,9 @@
     <s:String x:Key="Donate">Doação</s:String>
     <s:String x:Key="About">Sobre</s:String>
        
+    <s:String x:Key="S.Options.Warning.Follow.Header">Atalho de teclado ausente para a gravação via cursor</s:String>
+    <s:String x:Key="S.Options.Warning.Follow.Message">Em ordem para usar o cursor do mouse como guia para mover a área de gravação, você deve definir uma tecla de atalho para poder desabilitar quando necessário.</s:String>
+    
     <s:String x:Key="Application.ScreenRecorder">Gravador de Tela</s:String>
     <s:String x:Key="Application.ScreenRecorder.RecordMouse">Mostre o cursor na gravação.</s:String>
     <s:String x:Key="Application.ScreenRecorder.RecordClicks">Detecte cliques do mouse.</s:String>
@@ -97,7 +169,11 @@
     <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(Vai substituir o gravador antigo)</s:String>
     <s:String x:Key="Application.ScreenRecorder.Magnifier">Habilitar a lupa.</s:String>
     <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(A lupa garante um zoom durante a seleção da área de gravação)</s:String>
-    
+    <s:String x:Key="Application.ScreenRecorder.CursorFollowing">Habilitar gravação via cursor.</s:String>
+    <s:String x:Key="Application.ScreenRecorder.CursorFollowing.Info">(A área de gravação vai se posicionar conforme a posição do cursor)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.FollowMargin.Info">(Margem onde a área de gravação começará a se ajustar)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.FollowMarginInvisible.Info">(Margem adicional onde a interface começará a ser escondida para ser movida)</s:String>
+
     <s:String x:Key="Application.Other">Outras Configurações</s:String>
     <s:String x:Key="Application.Other.SystemTray">Exibir o aplicativo na área de notificação.</s:String>
     <s:String x:Key="Application.Other.LeaveOpen">Manter o aplicativo aberto mesmo se todas as janelas estiverem fechadas.</s:String>
@@ -108,6 +184,7 @@
     <s:String x:Key="Application.Other.DrawOutlineOutside">Aplique a borda das legendas por fora das letras.</s:String>
     <s:String x:Key="Application.Other.DisableHardwareAcceleration">Disabilite a aceleração por hardware.</s:String>
     <s:String x:Key="Application.Other.CheckForTranslationUpdates">Buscar atualizações das traduções.</s:String>
+    <s:String x:Key="Application.Other.CheckForTranslationUpdates.Info">(Traduções atualizadas serão baixadas e instaladas automaticamente)</s:String>
     <s:String x:Key="Application.Other.CheckForUpdates">Buscar atualizações.</s:String>
     <s:String x:Key="S.Application.Other.Homepage">Página Inicial:</s:String>
     <s:String x:Key="S.Application.Other.Homepage.StartUp">Janela de Início</s:String>
@@ -183,6 +260,10 @@
     <s:String x:Key="S.Shortcuts.Recorders.Stop.Info">(Para a gravação e abre o editor)</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.Discard">Descartar:</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.Discard.Info">(Descarta a gravação atual quando estiver pausado)</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Follow">Gravação via cursor:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Follow.Info">(Habilita/Desabilita o reposicionamento da área de gravação conforme a posição do cursor)</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.DisableFollow">Desabilitar grav. via cursor:</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.DisableFollow.Info">(Temporariamente desabilita o reposicionamento da área de gravação conforme a posição do cursor. Apenas teclas de modificação são aceitas)</s:String>
     <s:String x:Key="S.Shortcuts.Info">Clique para ganhar foco do teclado, depois pressione as teclas desejadas.&#10;Algumas combinações não são permitidas.</s:String>
     
     <s:String x:Key="Language.AppLanguage">Idioma do Aplicativo</s:String>
@@ -255,7 +336,7 @@
     <s:String x:Key="S.Upload.Imgur.Valid">Autorização válida até {0}.</s:String>
     <s:String x:Key="S.Upload.Imgur.Removed">A autorização do Imgur foi removida.</s:String>
     <s:String x:Key="S.Upload.Imgur.Error.AlbumLoad">Não foi possível carregar a lista de álbuns.</s:String>
-    <s:String x:Key="S.Upload.Gyfcat.Anonymous">Gyfcat (Anônimo)</s:String>
+    <s:String x:Key="S.Upload.Gfycat.Anonymous">Gfycat (Anônimo)</s:String>
     <s:String x:Key="S.Upload.Yandex.Token">Token OAuth:</s:String>
     <s:String x:Key="S.Upload.Pick.Destination">Escolha um destino</s:String>
     <s:String x:Key="S.Upload.Pick.Album">Escolha um álbum de destino (opcional)</s:String>
@@ -366,6 +447,8 @@
     <s:String x:Key="ColorSelector.Initial">Cor Inicial</s:String>
     <s:String x:Key="ColorSelector.Current">Cor Atual</s:String>
     <s:String x:Key="ColorSelector.Latest">Última Cor</s:String>
+    <s:String x:Key="ColorSelector.Sample">Arraste isso para&#x0d;escolher cores</s:String>
+    <s:String x:Key="ColorSelector.Sample.Info">Clique e arraste para escolher&#x0d;cores de outras partes da sua tela.</s:String>
     
     <!--Exception Viewer, Optional-->
     <s:String x:Key="ExceptionViewer.Title">Visualizador de Exceções</s:String>
@@ -417,7 +500,6 @@
 
     <!--Encoder-->
     <s:String x:Key="Encoder.Title">Codificador</s:String>
-    <s:String x:Key="Encoder.ClearAllCompleted">Remover Todos os Completos</s:String>
     <s:String x:Key="Encoder.Starting">Iniciando</s:String>
     <s:String x:Key="Encoder.Completed">Finalizado</s:String>
     <s:String x:Key="Encoder.Completed.Clipboard">Copiado</s:String>
@@ -529,6 +611,11 @@
     <s:String x:Key="Editor.Playback.Next">Próximo</s:String>
     <s:String x:Key="Editor.Playback.Last">Último</s:String>
     
+     <!--Playback • Playback Options-->
+    <s:String x:Key="Editor.PlaybackOptions.Header">Opções de Reprodução</s:String>
+    <s:String x:Key="Editor.PlaybackOptions.Loop">Loop durante a reprodução.</s:String>
+    <s:String x:Key="Editor.PlaybackOptions.Loop.Info">Opção apenas válida para a reprodução do pré-visualizador.&#x0d;Se você deseja alterar as opções de loop para gifs e apngs exportados,&#x0d;isso estará disponível dentro do painel de 'Salvar Como' para alguns codificadores.</s:String>
+  
     <!--Edit • Frames-->  
     <s:String x:Key="Editor.Edit.Frames">Quadros</s:String>
     <s:String x:Key="Editor.Edit.Delete">Remover</s:String>
@@ -571,6 +658,7 @@
     <s:String x:Key="Editor.Image.Watermark">Marca D'água</s:String>
     <s:String x:Key="Editor.Image.Cinemagraph">Cinemagrafia</s:String>
     <s:String x:Key="Editor.Image.Border">Borda</s:String>
+    <s:String x:Key="Editor.Image.Shadow">Sombra</s:String>
     <s:String x:Key="Editor.Image.Progress">Indicador de&#x0d;Progresso</s:String>
     <s:String x:Key="Editor.Image.Obfuscate">Ofuscar</s:String>
 
@@ -585,6 +673,8 @@
     <s:String x:Key="Editor.Statistics.TotalDuration">Duração total</s:String>
     <s:String x:Key="Editor.Statistics.FrameSize">Tamanho do quadro</s:String>
     <s:String x:Key="Editor.Statistics.AverageDuration">Duração média (atraso)</s:String>
+    <s:String x:Key="Editor.Statistics.CurrentTime">Tempo atual</s:String>
+    <s:String x:Key="Editor.Statistics.CurrentTime.Info">O tempo atual (cumulativo) baseado no quadro selecionado.</s:String>
     <s:String x:Key="Editor.Statistics.FrameDpi">DPI e escala da imagem</s:String>
     <s:String x:Key="Editor.Statistics.SelectedFrame">Quadro selecionado</s:String>
     
@@ -605,12 +695,12 @@
     <s:String x:Key="Editor.DeleteAll.Message">Esta ação vai descartar o projeto aberto e não pode ser desfeita. Deseja continuar?</s:String>
     <s:String x:Key="Editor.DiscardProject.Title">Descartar o Projeto</s:String>
     <s:String x:Key="Editor.DiscardProject.Instruction">Tem certeza de que deseja descartar o projeto?</s:String>
-    <s:String x:Key="Editor.DiscardProject.Message">Esta ação vai remover todos os quadros.\n\rVocê não pode desfazer essa operação.</s:String>
+    <s:String x:Key="Editor.DiscardProject.Message">Esta ação vai remover todos os quadros.&#x0d;Você não pode desfazer essa operação.</s:String>
     <s:String x:Key="Editor.DiscardPreviousProject.Instruction">Você quer descartar o projeto anterior?</s:String>
     <s:String x:Key="Editor.DiscardPreviousProject.Message">Se você optar por não fazer isso, o projeto anterior estará disponível para abrir via Projetos Recentes.</s:String>
     <s:String x:Key="Editor.DeleteFrames.Title">Remover Quadros</s:String>
     <s:String x:Key="Editor.DeleteFrames.Instruction">Tem certeza de que deseja excluir?</s:String>
-    <s:String x:Key="Editor.DeleteFrames.Message">Esta ação vai remover {0} quadro(s).\n\rVocê poderá desfazer esta ação depois.</s:String>
+    <s:String x:Key="Editor.DeleteFrames.Message">Esta ação vai remover {0} quadro(s).&#x0d;Você poderá desfazer esta ação depois.</s:String>
     <s:String x:Key="Editor.Exiting.Title">Fechando o Editor</s:String>
     <s:String x:Key="Editor.Exiting.Instruction">Você tem certeza que deseja sair?</s:String>
     <s:String x:Key="Editor.Exiting.Message">O projeto atual em que vocês estava trabalhando pode ser aberto novamente em 'Projetos Recentes'.</s:String>
@@ -631,6 +721,8 @@
     <s:String x:Key="Editor.Watermark.WarningSelection">Você precisa selecionar no mínimo um quadro para aplicar a Marca D'água.</s:String>
     <s:String x:Key="Editor.Border.WarningThickness">Você deve informar uma espessura de borda maior do que zero no mínimo em um dos lados.</s:String>
     <s:String x:Key="Editor.Border.WarningSelection">Você deve selecionar no mínimo um quadro para aplicar a Borda.</s:String>
+    <s:String x:Key="Editor.Shadow.Warning.Invisible">A opacidade deve ser maior que zero para fazer alguma diferença no quadro.</s:String>
+    <s:String x:Key="Editor.Shadow.Warning.Behind">Ao usar a profundidade da sombra e raio do borrado como zero, não fará diferença alguma porque a sombra estará escondida atrás do quadro.</s:String>
     <s:String x:Key="Editor.Cinemagraph.WarningNoDrawing">Você deve selecionar no mínimo um pixel para aplicar a Cinemagrafia. Selecione os pixels desenhando em cima deles.</s:String>
     
     <s:String x:Key="Editor.Fade.Title">Esmaecer</s:String>
@@ -722,6 +814,7 @@
     <s:String x:Key="Hint.FlipRotate2">A ação de espelhar se aplica para os quadros selecionados e a ação de girar se aplica a todos os quadros</s:String>
     <s:String x:Key="Hint.ApplyAll">Esta ação se aplica a todos os quadros</s:String>
     <s:String x:Key="Hint.ApplySelected">Esta ação se aplica a os quadros selecionados</s:String>
+    <s:String x:Key="Hint.ApplySelectedOrAll">Esta ação se aplica a todos os quadros ou apenas os selecionados, dependendo da sua configuração</s:String>
     <s:String x:Key="Hint.Cinemagraph">A cinemagrafia se aplica a todos os quadros, baseando-se no primeiro quadro</s:String>
     <s:String x:Key="Hint.Overlay">Sobreposição aplicada</s:String>
     <s:String x:Key="Hint.TitleFrame">Quadro de título criado</s:String>
@@ -818,7 +911,9 @@
     <s:String x:Key="KeyStrokes.Edit.Keys">Teclas pressionadas</s:String>
     <s:String x:Key="KeyStrokes.Edit.Remove">Remover o comando de tecla</s:String>
     <s:String x:Key="KeyStrokes.Edit.Add">Adicione um comando:</s:String>
-    
+    <s:String x:Key="KeyStrokes.Edit.Lower">Letras minúsculas.</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Lower.Info">Permite você inserir letras em minúsculo (apenas letras sem teclas de modificação).</s:String>
+        
     <s:String x:Key="String.Delay">Atraso</s:String>
     <s:String x:Key="String.DelayMs">Atraso:</s:String>
     <s:String x:Key="String.ValueMs">Valor -+:</s:String>
@@ -826,6 +921,7 @@
     <s:String x:Key="String.Margin">Margem:</s:String>
     <s:String x:Key="String.Padding">Preenchimento:</s:String>
     <s:String x:Key="String.Background">Plano de Fundo</s:String>
+    <s:String x:Key="String.MinHeight">Altura mínima:</s:String>
     
     <s:String x:Key="FreeDrawing.Mode">Modo</s:String>
     <s:String x:Key="FreeDrawing.Pen">Caneta</s:String>
@@ -855,7 +951,14 @@
     <s:String x:Key="Watermark.Opacity">Opacidade:</s:String>
     
     <s:String x:Key="Border.Appearance">Aparência</s:String>
+    <s:String x:Key="S.Border.Info">Use valores negativos para fazer a borda expandir a imagem. Quando fazendo isso, a borda vai ser aplicada para todos os quadros.&#x0d;Se nenhum valor negativo for utilizado, a borda vai ser aplicada apenas nos quadros selecionados.</s:String>
 
+    <s:String x:Key="S.Shadow.ShadowColor">Cor da sombra:</s:String>
+    <s:String x:Key="S.Shadow.BackgroundColor">Cor de fundo:</s:String>
+    <s:String x:Key="S.Shadow.Direction">Direção:</s:String>
+    <s:String x:Key="S.Shadow.BlurRadius">Raio do borrado:</s:String>
+    <s:String x:Key="S.Shadow.Depth">Profundidade:</s:String>
+    
     <s:String x:Key="S.Obfuscate.Options">Opções de ofuscação</s:String>
     <s:String x:Key="S.Obfuscate.PixelSize">Tamanho do pixel:</s:String>
     <s:String x:Key="S.Obfuscate.UseAverage">Calcular a cor média para cada bloco de pixels.</s:String>
@@ -878,6 +981,8 @@
     <s:String x:Key="S.Progress.Format.Date">Você pode usar os formatos de data e horário do .Net Framework.&#x0d;A especificação está disponível nesses dois links abaixo.</s:String>
     <s:String x:Key="S.Progress.Format.Date.Standard">Formatos padrão</s:String>
     <s:String x:Key="S.Progress.Format.Date.Custom">Formatos personalizados</s:String>
+    <s:String x:Key="S.Progress.Precision.StartNumber">Contar a partir de:</s:String>
+    <s:String x:Key="S.Progress.Precision.StartNumber.ToolTip">Começa a contar o número do quadro a partir deste número.</s:String>
     <s:String x:Key="Progress.Orientation">Orientação:</s:String>
     
     <s:String x:Key="S.DelayUpdate">Atualização de atraso</s:String>

@@ -8,7 +8,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using ScreenToGif.Controls;
-using ScreenToGif.FileWriters;
 using ScreenToGif.Util;
 
 namespace ScreenToGif.Windows.Other

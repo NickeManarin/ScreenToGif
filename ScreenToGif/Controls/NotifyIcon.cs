@@ -273,7 +273,7 @@ namespace ScreenToGif.Controls
             var owner = d as NotifyIcon;
             var value = (ImageSource)e.NewValue;
 
-            if (owner != null && !VisualHelper.IsInDesignMode())
+            if (owner != null && value != null && !VisualHelper.IsInDesignMode())
                 owner.Icon = value.ToIcon();
         }
 

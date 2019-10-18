@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Threading;
 using System.Windows;
 using System.Windows.Documents;
@@ -10,8 +11,7 @@ namespace ScreenToGif.Controls
 {
     /// <inheritdoc />
     /// <summary>
-    /// This class generates a Geometry from a block of text in a specific font, weight, etc.
-    /// and renders it to WPF as a shape.
+    /// This class generates a Geometry from a block of text in a specific font, weight, etc. and renders it to WPF as a shape.
     /// </summary>
     public class TextPath : Shape
     {
@@ -19,7 +19,6 @@ namespace ScreenToGif.Controls
         /// Data member that holds the generated geometry
         /// </summary>
         private Geometry _textGeometry;
-
         private Pen _pen;
 
         #region Dependency Properties
@@ -27,7 +26,7 @@ namespace ScreenToGif.Controls
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(TextPath), new FrameworkPropertyMetadata(string.Empty,
             FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsArrange));
 
-        public static readonly DependencyProperty OriginPointProperty = DependencyProperty.Register("Origin", typeof(Point), typeof(TextPath), new FrameworkPropertyMetadata(new Point(0, 0),
+        public static readonly DependencyProperty OriginPointProperty = DependencyProperty.Register("Origin", typeof(Point), typeof(TextPath), new FrameworkPropertyMetadata(new Point(0.5, 0.5),
             FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         public static readonly DependencyProperty FontFamilyProperty = TextElement.FontFamilyProperty.AddOwner(typeof(TextPath), new FrameworkPropertyMetadata(SystemFonts.MessageFontFamily, 
@@ -116,6 +115,13 @@ namespace ScreenToGif.Controls
 
         protected override void OnRender(DrawingContext drawingContext)
         {
+            try
+            {
+                _textGeometry.Transform = new TranslateTransform(-_textGeometry.Bounds.X, -_textGeometry.Bounds.Y + 1);
+            }
+            catch (Exception)
+            {}
+
             //If the outline of the text should not be rendered outside, use the base OnRender method.
             if (!UserSettings.All.DrawOutlineOutside)
             {
@@ -130,26 +136,42 @@ namespace ScreenToGif.Controls
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
-            CreateTextGeometry();
-
-            base.OnPropertyChanged(e);
-        }
-
-        /// <summary>
-        /// This method creates the text geometry.
-        /// </summary>
-        private void CreateTextGeometry()
-        {
-            _textGeometry = new FormattedText(Text ?? "", Thread.CurrentThread.CurrentUICulture, FlowDirection.LeftToRight, new Typeface(FontFamily, FontStyle, FontWeight, FontStretch), 
-                FontSize, Brushes.Black).BuildGeometry(Origin);
+            _textGeometry = new FormattedText(Text ?? "", Thread.CurrentThread.CurrentUICulture, FlowDirection.LeftToRight, 
+                new Typeface(FontFamily, FontStyle, FontWeight, FontStretch), FontSize, Brushes.Black).BuildGeometry(Origin);
 
             _pen = new Pen(Stroke, StrokeThickness)
             {
                 DashCap = PenLineCap.Round,
                 EndLineCap = PenLineCap.Round,
                 LineJoin = PenLineJoin.Round,
-                StartLineCap = PenLineCap.Round
+                StartLineCap = PenLineCap.Round,
+                MiterLimit = StrokeMiterLimit
             };
+
+            InvalidateVisual();
+
+            base.OnPropertyChanged(e);
+        }
+        
+        protected override Size MeasureOverride(Size constraint)
+        {
+            var definingGeometry = DefiningGeometry;
+            var dashStyle = (DashStyle)null;
+
+            if (_pen != null)
+            {
+                dashStyle = _pen.DashStyle;
+
+                if (dashStyle != null)
+                    _pen.DashStyle = null;
+            }
+
+            var renderBounds = definingGeometry.GetRenderBounds(_pen);
+
+            if (dashStyle != null)
+                _pen.DashStyle = dashStyle;
+
+            return new Size(Math.Max(renderBounds.Right - renderBounds.X, 0.0), Math.Max(MinHeight, Math.Max(renderBounds.Bottom - renderBounds.Y + 1, 0.0)));
         }
     }
 }

@@ -7,11 +7,12 @@ namespace ScreenToGif.Controls
 {
     public class ColorBox : ButtonBase
     {
-        public static readonly DependencyProperty SelectedColorProperty = DependencyProperty.Register("SelectedColor", typeof(Color), typeof(ColorBox), new PropertyMetadata(default(Color), SelectedColor_Changed));
+        #region Properties
 
-        public static readonly DependencyProperty SelectedBrushProperty = DependencyProperty.Register("SelectedBrush", typeof(SolidColorBrush), typeof(ColorBox), new PropertyMetadata(default(SolidColorBrush)));
-
-        public static readonly DependencyProperty IgnoreEventProperty = DependencyProperty.Register("IgnoreEvent", typeof(bool), typeof(ColorBox), new PropertyMetadata(false));
+        public static readonly DependencyProperty SelectedColorProperty = DependencyProperty.Register(nameof(SelectedColor), typeof(Color), typeof(ColorBox), new PropertyMetadata(default(Color), SelectedColor_Changed));
+        public static readonly DependencyProperty SelectedBrushProperty = DependencyProperty.Register(nameof(SelectedBrush), typeof(SolidColorBrush), typeof(ColorBox), new PropertyMetadata(default(SolidColorBrush)));
+        public static readonly DependencyProperty AllowTransparencyProperty = DependencyProperty.Register(nameof(AllowTransparency), typeof(bool), typeof(ColorBox), new PropertyMetadata(true));
+        public static readonly DependencyProperty IgnoreEventProperty = DependencyProperty.Register(nameof(IgnoreEvent), typeof(bool), typeof(ColorBox), new PropertyMetadata(false));
 
         public Color SelectedColor
         {
@@ -25,11 +26,19 @@ namespace ScreenToGif.Controls
             set => SetValue(SelectedBrushProperty, value);
         }
 
+        public bool AllowTransparency
+        {
+            get => (bool)GetValue(AllowTransparencyProperty);
+            set => SetValue(AllowTransparencyProperty, value);
+        }
+
         public bool IgnoreEvent
         {
             get => (bool)GetValue(IgnoreEventProperty);
             set => SetValue(IgnoreEventProperty, value);
         }
+
+        #endregion
 
         static ColorBox()
         {
@@ -45,7 +54,7 @@ namespace ScreenToGif.Controls
 
         private void SelectColor()
         {
-            var colorPicker = new ColorSelector(SelectedColor);
+            var colorPicker = new ColorSelector(SelectedColor, AllowTransparency);
             var result = colorPicker.ShowDialog();
 
             if (result.HasValue && result.Value)
@@ -63,7 +72,7 @@ namespace ScreenToGif.Controls
 
         #region Custom Events
 
-        public static readonly RoutedEvent ColorChangedEvent = EventManager.RegisterRoutedEvent("ColorChanged", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(ColorBox));
+        public static readonly RoutedEvent ColorChangedEvent = EventManager.RegisterRoutedEvent(nameof(ColorChanged), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(ColorBox));
 
         public event RoutedEventHandler ColorChanged
         {

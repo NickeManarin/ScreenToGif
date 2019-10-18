@@ -189,8 +189,6 @@ namespace ScreenToGif.Controls
             if (!(e.NewValue is double value))
                 return;
 
-            box._previousZoom = e.OldValue as double? ?? 1;
-
             //Maximum and minimum.
             if (value < 0.1)
                 box.Zoom = 0.1;
@@ -396,20 +394,20 @@ namespace ScreenToGif.Controls
         }
 
         /// <summary>
-        /// Returns to the previous selected zoom.
+        /// Save the current zoom level.
         /// </summary>
-        public void ResetToPrevious()
+        public void SaveCurrentZoom()
         {
-            //Resets the zoom.
-            Zoom = _previousZoom;
+            _previousZoom = Zoom;
         }
 
         /// <summary>
-        /// Sets the current zoom as the previous zoom.
+        /// Returns to the previously saved zoom level.
         /// </summary>
-        public void SetZoomAsPrevious()
+        public void RestoreSavedZoom()
         {
-            _previousZoom = Zoom;
+            //Resets the zoom.
+            Zoom = _previousZoom;
         }
 
         /// <summary>

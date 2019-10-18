@@ -255,7 +255,7 @@
     <s:String x:Key="S.Upload.Imgur.Valid">Godkendelse gyldig til {0}.</s:String>
     <s:String x:Key="S.Upload.Imgur.Removed">Godkendelse fjernet.</s:String>
     <s:String x:Key="S.Upload.Imgur.Error.AlbumLoad">Albumlisten kunne ikke indlæses.</s:String>
-    <s:String x:Key="S.Upload.Gyfcat.Anonymous">Gyfcat (Anonymt)</s:String>
+    <s:String x:Key="S.Upload.Gfycat.Anonymous">Gfycat (Anonymt)</s:String>
     <s:String x:Key="S.Upload.Yandex.Token">Godkendelse:</s:String>
     <s:String x:Key="S.Upload.Pick.Destination">Vælg destination</s:String>
     <s:String x:Key="S.Upload.Pick.Album">Vælg album (optional)</s:String>

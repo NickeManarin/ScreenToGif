@@ -21,6 +21,9 @@
     <s:Boolean x:Key="AsyncRecording">False</s:Boolean>
     <s:Boolean x:Key="NewRecorder">False</s:Boolean>
     <s:Boolean x:Key="Magnifier">True</s:Boolean>
+    <s:Boolean x:Key="CursorFollowing">False</s:Boolean>
+    <s:Int32 x:Key="FollowBuffer">20</s:Int32>
+    <s:Int32 x:Key="FollowBufferInvisible">20</s:Int32>
     <s:Boolean x:Key="ShowNotificationIcon">True</s:Boolean>
     <s:Boolean x:Key="KeepOpen">False</s:Boolean>
     <s:Boolean x:Key="NotifyFrameDeletion">True</s:Boolean>
@@ -73,7 +76,10 @@
     <ModifierKeys x:Key="StopModifiers" xml:space="preserve"></ModifierKeys>
     <Key x:Key="DiscardShortcut">F9</Key>
     <ModifierKeys x:Key="DiscardModifiers" xml:space="preserve"></ModifierKeys>
-    
+    <Key x:Key="FollowShortcut">None</Key>
+    <ModifierKeys x:Key="FollowModifiers" xml:space="preserve"></ModifierKeys>
+    <ModifierKeys x:Key="DisableFollowModifiers" xml:space="preserve"></ModifierKeys>
+
     <!--Options • Language-->
     <s:String x:Key="LanguageCode">auto</s:String>
 
@@ -143,7 +149,8 @@
     <s:Double x:Key="EditorHeight">NaN</s:Double>
     <WindowState x:Key="EditorWindowState">Normal</WindowState>
     <u:PasteBehavior x:Key="PasteBehavior">AfterSelected</u:PasteBehavior>
-
+    <s:Boolean x:Key="LoopedPlayback">True</s:Boolean>
+    
     <!--Editor • New Animation-->
     <Color x:Key="NewAnimationColor">#FFFFFFFF</Color>
     <s:Int32 x:Key="NewAnimationWidth">500</s:Int32>
@@ -285,6 +292,14 @@
     <s:Double x:Key="BorderRightThickness">1.0</s:Double>
     <s:Double x:Key="BorderTopThickness">1.0</s:Double>
 
+    <!--Editor • Shadow-->
+    <Color x:Key="ShadowColor">#FF000000</Color>
+    <Color x:Key="ShadowBackgroundColor">#FFFFFFFF</Color>
+    <s:Double x:Key="ShadowDirection">270.0</s:Double>
+    <s:Double x:Key="ShadowBlurRadius">20.0</s:Double>
+    <s:Double x:Key="ShadowOpacity">60.0</s:Double>
+    <s:Double x:Key="ShadowDepth">5.0</s:Double>
+    
     <!--Editor • Obfuscate-->
     <s:Int32 x:Key="PixelSize">5</s:Int32>
     <s:Boolean x:Key="UseMedian">True</s:Boolean>
@@ -374,6 +389,7 @@
     <VerticalAlignment x:Key="KeyStrokesVerticalAligment">Bottom</VerticalAlignment>
     <s:Double x:Key="KeyStrokesMargin">0</s:Double>
     <s:Double x:Key="KeyStrokesPadding">10</s:Double>
+    <s:Double x:Key="KeyStrokesMinHeight">40</s:Double>
 
     <!--Editor • Watermark-->
     <!--<s:String x:Key="WatermarkFilePath"></s:String>-->
@@ -403,6 +419,7 @@
     <Color x:Key="ProgressFontColor">#FFFFFFFF</Color>
     <Color x:Key="ProgressColor">#FF000000</Color>
     <s:Int32 x:Key="ProgressPrecision">0</s:Int32>
+    <s:Int32 x:Key="ProgressStartNumber">1</s:Int32>
     <s:String x:Key="ProgressFormat"> $s/@s s</s:String>
     <s:String x:Key="ProgressDateFormat">G</s:String>
     <s:Double x:Key="ProgressThickness">10.0</s:Double>
@@ -422,4 +439,5 @@
     <!--Other-->
     <Color x:Key="InsertFillColor">#FFFFFFFF</Color>
     <s:Int32 x:Key="LatestFpsImport">15</s:Int32>
+    <!--<s:String x:Key="LatestFeedbackEmail"></s:String>-->
 </ResourceDictionary>

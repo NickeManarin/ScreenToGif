@@ -7,15 +7,12 @@
                Title="ScreenToGif" SnapsToDevicePixels="True" UseLayoutRounding="True" AllowsTransparency="True" WindowStyle="None" 
                Topmost="True" Icon="../Resources/Logo.ico" Child="{StaticResource Vector.Back}"
                IsThin="{Binding RecorderThinMode, Source={x:Static u:UserSettings.All}}"
+               IsFollowing="{Binding CursorFollowing, Source={x:Static u:UserSettings.All}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                Width="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderWidth, Mode=TwoWay}" 
                Height="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderHeight, Mode=TwoWay}" 
-               Left="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderLeft, Mode=TwoWay}"
-               Top="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderTop, Mode=TwoWay}"
                FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}"
-               SizeChanged="LightWindow_SizeChanged" Loaded="Recorder_Loaded" Closing="Window_Closing" LocationChanged="Window_LocationChanged">
-
-    <!--Foreground="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderForeground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}"
-               Background="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderBackground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}"-->
+               SizeChanged="LightWindow_SizeChanged" Loaded="Window_Loaded" Closing="Window_Closing" 
+               LocationChanged="Window_LocationChanged" Activated="Window_Activated">
 
     <Window.Resources>
         <Storyboard x:Key="ShowDiscardStoryboard">
@@ -51,6 +48,21 @@
             </DoubleAnimation>
         </Storyboard>
 
+        <Storyboard x:Key="HideWindowStoryboard" FillBehavior="Stop" DesiredFrameRate="60" SpeedRatio="2">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="RecorderLightWindow" Storyboard.TargetProperty="(Window.Opacity)" Duration="0:0:0.1" FillBehavior="Stop">
+                <DiscreteDoubleKeyFrame Value="0" KeyTime="0:0:0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="ShowWindowStoryboard" FillBehavior="Stop" DesiredFrameRate="60">
+            <DoubleAnimation Storyboard.TargetName="RecorderLightWindow" Storyboard.TargetProperty="(Window.Opacity)" 
+                             From="{Binding ElementName=DashedRectangle,Path=Opacity}" To="1" Duration="0:0:1" FillBehavior="Stop">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase Power="8"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        
         <c:StageToButtonString x:Key="StageToButtonStringConverter"/>
         <c:StageToCanvas x:Key="StageToCanvasConverter"/>
         <c:ShortcutKeys x:Key="ShortcutKeys"/>
@@ -60,10 +72,10 @@
     </Window.Resources>
 
     <Window.CommandBindings>
-        <CommandBinding Command="u:Commands.Options" CanExecute="Options_CanExecute" Executed="Options_Executed"/>
-        <CommandBinding Command="u:Commands.EnableSnapshot" CanExecute="EnableSnapshot_CanExecute" Executed="EnableSnapshot_Executed"/>
-        <CommandBinding Command="u:Commands.EnableThinMode" CanExecute="EnableThinMode_CanExecute" Executed="EnableThinMode_Executed"/>
-        <CommandBinding Command="u:Commands.EnableSnapToWindow" CanExecute="SnapToWindow_CanExecute"/>
+        <CommandBinding Command="{StaticResource Command.Options}" CanExecute="Options_CanExecute" Executed="Options_Executed"/>
+        <CommandBinding Command="{StaticResource Command.EnableSnapshot}" CanExecute="EnableSnapshot_CanExecute" Executed="EnableSnapshot_Executed"/>
+        <CommandBinding Command="{StaticResource Command.EnableThinMode}" CanExecute="EnableThinMode_CanExecute" Executed="EnableThinMode_Executed"/>
+        <CommandBinding Command="{StaticResource Command.EnableSnapToWindow}" CanExecute="SnapToWindow_CanExecute"/>
     </Window.CommandBindings>
 
     <Grid x:Name="OutterGrid" UseLayoutRounding="True">
@@ -109,16 +121,19 @@
             <StackPanel Grid.Column="1" x:Name="ControlStackPanel" Height="31" Orientation="Horizontal" HorizontalAlignment="Right"
                         ScrollViewer.VerticalScrollBarVisibility="Disabled">
 
+                <Viewbox Child="{StaticResource Vector.Cursor}" Margin="5,4" ToolTip="Cursor following is enabled!" 
+                         Visibility="{Binding ElementName=RecorderLightWindow, Path=IsFollowing, Converter={StaticResource Bool2Visibility}, FallbackValue=False}"/>
+
                 <n:ImageButton x:Name="SnapButton" Content="{StaticResource Vector.Crosshair}" Margin="0" Style="{StaticResource Style.Button.NoText}" 
                                HorizontalContentAlignment="Center" ContentHeight="20" ContentWidth="20"
-                               Command="u:Commands.EnableSnapToWindow" Padding="3" TabIndex="2" PreviewMouseDown="SnapButton_PreviewMouseDown">
+                               Command="{StaticResource Command.EnableSnapToWindow}" Padding="3" TabIndex="2" PreviewMouseDown="SnapButton_PreviewMouseDown">
                     <n:ImageButton.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Recorder.SnapToWindow}"/>
                     </n:ImageButton.ToolTip>
                 </n:ImageButton>
 
                 <n:ImageButton x:Name="OptionsButton" Content="{StaticResource Vector.Options}" Margin="0" Style="{StaticResource Style.Button.NoText}" 
-                               ContentHeight="20" ContentWidth="20" Command="u:Commands.Options" Padding="3" TabIndex="3">
+                               ContentHeight="20" ContentWidth="20" Command="{StaticResource Command.Options}" Padding="3" TabIndex="3">
                     <n:ImageButton.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Options}"/>
                     </n:ImageButton.ToolTip>
@@ -201,10 +216,10 @@
                             <n:ImageMenuItem Header="{DynamicResource Recorder.RecordingOptions}" IsHitTestVisible="False" Image="{StaticResource Vector.Record}" ContentHeight="16" ContentWidth="16"/>
                             <Separator/>
                             <n:ImageMenuItem Header="{DynamicResource Recorder.Snapshot}" IsCheckable="True" Image="{StaticResource Vector.Camera.Add}" ContentHeight="16" ContentWidth="16" 
-                                             IsChecked="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Mode=TwoWay}" Command="u:Commands.EnableSnapshot"/>
+                                             IsChecked="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Mode=TwoWay}" Command="{StaticResource Command.EnableSnapshot}"/>
 
                             <n:ImageMenuItem x:Name="ThinModeMenuItem" Header="{DynamicResource Recorder.ThinMode}" IsCheckable="True" Image="{StaticResource Vector.Application}" ContentHeight="16" ContentWidth="16"
-                                             IsChecked="{Binding RecorderThinMode, Source={x:Static u:UserSettings.All}, Mode=TwoWay}" Command="u:Commands.EnableThinMode"/>
+                                             IsChecked="{Binding RecorderThinMode, Source={x:Static u:UserSettings.All}, Mode=TwoWay}" Command="{StaticResource Command.EnableThinMode}"/>
                         </ContextMenu>
                     </n:ImageButton.ContextMenu>
                 </n:ImageButton>

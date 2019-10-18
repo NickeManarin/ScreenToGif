@@ -233,7 +233,6 @@
     
     <!--Encoder-->
     <s:String x:Key="Encoder.Title">أداة الترميز</s:String>
-    <s:String x:Key="Encoder.ClearAllCompleted">مسح جميع المنجزة</s:String>
     <s:String x:Key="Encoder.Starting">جار بداية</s:String>
     <s:String x:Key="Encoder.Completed">أكملت</s:String>
     <!--<s:String x:Key="Encoder.Completed.Clipboard">Completed&#x0d;Copied to the Clipboard</s:String>-->

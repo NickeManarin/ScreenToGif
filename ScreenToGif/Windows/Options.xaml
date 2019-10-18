@@ -9,23 +9,22 @@
         Loaded="Window_Loaded" Closing="Window_Closing">
 
     <Window.CommandBindings>
-        <CommandBinding Command="u:Commands.RemoveAppDataSettings" CanExecute="RemoveAppDataSettings_CanExecute" Executed="RemoveAppDataSettings_Executed"/>
-        <CommandBinding Command="u:Commands.OpenAppDataSettings" CanExecute="RemoveAppDataSettings_CanExecute" Executed="OpenAppDataSettings_Execute"/>
+        <CommandBinding Command="{StaticResource Command.RemoveAppDataSettings}" CanExecute="RemoveAppDataSettings_CanExecute" Executed="RemoveAppDataSettings_Executed"/>
+        <CommandBinding Command="{StaticResource Command.OpenAppDataSettings}" CanExecute="RemoveAppDataSettings_CanExecute" Executed="OpenAppDataSettings_Execute"/>
 
-        <CommandBinding Command="u:Commands.CreateLocalSettings" CanExecute="CreateLocalSettings_CanExecute" Executed="CreateLocalSettings_Execute"/>
-        <CommandBinding Command="u:Commands.OpenLocalSettings" CanExecute="RemoveLocalSettings_CanExecute" Executed="OpenLocalSettings_Execute"/>
-        <CommandBinding Command="u:Commands.RemoveLocalSettings" CanExecute="RemoveLocalSettings_CanExecute" Executed="RemoveLocalSettings_Execute"/>
+        <CommandBinding Command="{StaticResource Command.CreateLocalSettings}" CanExecute="CreateLocalSettings_CanExecute" Executed="CreateLocalSettings_Execute"/>
+        <CommandBinding Command="{StaticResource Command.OpenLocalSettings}" CanExecute="RemoveLocalSettings_CanExecute" Executed="OpenLocalSettings_Execute"/>
+        <CommandBinding Command="{StaticResource Command.RemoveLocalSettings}" CanExecute="RemoveLocalSettings_CanExecute" Executed="RemoveLocalSettings_Execute"/>
 
-        <CommandBinding Command="u:Commands.MoveUp" CanExecute="MoveUp_CanExecute" Executed="MoveUp_Executed"/>
-        <CommandBinding Command="u:Commands.MoveDown" CanExecute="MoveDown_CanExecute" Executed="MoveDown_Executed"/>
-        <CommandBinding Command="u:Commands.Add" CanExecute="Add_CanExecute" Executed="Add_Executed"/>
-        <CommandBinding x:Name="EditCommandBinding" Command="u:Commands.Edit" CanExecute="Remove_CanExecute" Executed="Edit_Executed"/>
-        <CommandBinding Command="u:Commands.Remove" CanExecute="Remove_CanExecute" Executed="Remove_Executed"/>
+        <CommandBinding Command="{StaticResource Command.MoveUp}" CanExecute="MoveUp_CanExecute" Executed="MoveUp_Executed"/>
+        <CommandBinding Command="{StaticResource Command.MoveDown}" CanExecute="MoveDown_CanExecute" Executed="MoveDown_Executed"/>
+        <CommandBinding Command="{StaticResource Command.Add}" CanExecute="Add_CanExecute" Executed="Add_Executed"/>
+        <CommandBinding x:Name="EditCommandBinding" Command="{StaticResource Command.Edit}" CanExecute="Remove_CanExecute" Executed="Edit_Executed"/>
+        <CommandBinding Command="{StaticResource Command.Remove}" CanExecute="Remove_CanExecute" Executed="Remove_Executed"/>
     </Window.CommandBindings>
 
     <Window.Resources>
         <c:InvertedVisibility x:Key="InvertedVisibility"/>
-        <c:RoutedCommandToInputGestureTextConverter x:Key="CommandToInputGestureTextConverter"/>
     </Window.Resources>
 
     <Grid DataContext="{x:Static u:UserSettings.All}">
@@ -111,6 +110,19 @@
                             <TextBlock Text="{DynamicResource Application.ScreenRecorder.Magnifier.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
                         </WrapPanel>
 
+                        <WrapPanel Margin="10,0,5,0">
+                            <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.CursorFollowing}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=CursorFollowing, Mode=TwoWay}"/>
+                            <TextBlock Text="{DynamicResource Application.ScreenRecorder.CursorFollowing.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                        </WrapPanel>
+                        <WrapPanel Margin="30,3,5,3" Visibility="{Binding CursorFollowing, Converter={StaticResource Bool2Visibility}}">
+                            <n:IntegerUpDown Minimum="2" Maximum="100" MinWidth="50" Value="{Binding Source={x:Static u:UserSettings.All}, Path=FollowBuffer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Text="{DynamicResource Application.ScreenRecorder.FollowMargin.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                        </WrapPanel>
+                        <WrapPanel Margin="30,3,5,3" Visibility="{Binding CursorFollowing, Converter={StaticResource Bool2Visibility}}">
+                            <n:IntegerUpDown Minimum="2" Maximum="100" MinWidth="50" Value="{Binding Source={x:Static u:UserSettings.All}, Path=FollowBufferInvisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Text="{DynamicResource Application.ScreenRecorder.FollowMarginInvisible.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                        </WrapPanel>
+
                         <n:LabelSeparator Text="{DynamicResource Application.Other}"/>
                         <Grid Margin="15,3,5,3">
                             <Grid.ColumnDefinitions>
@@ -142,7 +154,12 @@
                         <n:ExtendedCheckBox Text="{DynamicResource Application.Other.NotifyWhileClosingApp}" Margin="15,3,5,3" IsChecked="{Binding Path=NotifyWhileClosingApp, Mode=TwoWay}"/>
                         <n:ExtendedCheckBox Text="{DynamicResource Application.Other.DrawOutlineOutside}" Margin="15,3,5,3" IsChecked="{Binding Path=DrawOutlineOutside, Mode=TwoWay}"/>
                         <n:ExtendedCheckBox Text="{DynamicResource Application.Other.DisableHardwareAcceleration}" Margin="15,3,5,3" IsChecked="{Binding Path=DisableHardwareAcceleration, Mode=TwoWay}"/>
-                        <n:ExtendedCheckBox Text="{DynamicResource Application.Other.CheckForTranslationUpdates}" Margin="15,3,5,3" IsChecked="{Binding Path=CheckForTranslationUpdates, Mode=TwoWay}"/>
+                        
+                        <WrapPanel Margin="10,0,5,0">
+                            <n:ExtendedCheckBox Text="{DynamicResource Application.Other.CheckForTranslationUpdates}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=CheckForTranslationUpdates, Mode=TwoWay}"/>
+                            <TextBlock Text="{DynamicResource Application.Other.CheckForTranslationUpdates.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                        </WrapPanel>
+
                         <n:ExtendedCheckBox x:Name="UpdatesCheckBox" Text="{DynamicResource Application.Other.CheckForUpdates}" Margin="15,3,5,3" IsChecked="{Binding Path=CheckForUpdates, Mode=TwoWay}"/>
                     </StackPanel>
 
@@ -612,28 +629,28 @@
                         </DataGrid>
 
                         <n:ImageButton Grid.Row="1" Grid.Column="1" x:Name="UpButton" Margin="3,5" Content="{StaticResource Vector.Arrow.Blue.Top}" ContentWidth="18"
-                                       Style="{StaticResource Style.Button.NoText.Border}" MinWidth="30" MinHeight="30" Command="u:Commands.MoveUp"
-                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                       Style="{StaticResource Style.Button.NoText.Border}" MinWidth="30" MinHeight="30" Command="{StaticResource Command.MoveUp}"
+                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
                                        ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-5"/>
 
                         <n:ImageButton Grid.Row="2" Grid.Column="1" x:Name="DownButton" Margin="3,5" Content="{StaticResource Vector.Arrow.Blue.Bottom}" ContentWidth="18"
-                                       Style="{StaticResource Style.Button.NoText.Border}" MinWidth="30" MinHeight="30" Command="u:Commands.MoveDown"
-                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                       Style="{StaticResource Style.Button.NoText.Border}" MinWidth="30" MinHeight="30" Command="{StaticResource Command.MoveDown}"
+                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
                                        ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-5"/>
 
                         <n:ImageButton Grid.Row="3" Grid.Column="1" x:Name="AddButton" Margin="3,5" Content="{StaticResource Vector.Add}" ContentWidth="18"
-                                       Style="{StaticResource Style.Button.NoText.Border}" MinWidth="30" MinHeight="30" Command="u:Commands.Add"
-                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                       Style="{StaticResource Style.Button.NoText.Border}" MinWidth="30" MinHeight="30" Command="{StaticResource Command.Add}"
+                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
                                        ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-5"/>
 
                         <n:ImageButton Grid.Row="4" Grid.Column="1" x:Name="EditButton" Margin="3,5" Content="{StaticResource Vector.Pen}" ContentWidth="18"
-                                       Style="{StaticResource Style.Button.NoText.Border}" MinWidth="30" MinHeight="30" Command="u:Commands.Edit"
-                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                       Style="{StaticResource Style.Button.NoText.Border}" MinWidth="30" MinHeight="30" Command="{StaticResource Command.Edit}"
+                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
                                        ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-5"/>
 
                         <n:ImageButton Grid.Row="5" Grid.Column="1" x:Name="RemoveButton" Margin="3,5" Content="{StaticResource Vector.Remove}" ContentWidth="18"
-                                       Style="{StaticResource Style.Button.NoText.Border}" MinWidth="30" MinHeight="30" Command="u:Commands.Remove"
-                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureTextConverter}}" 
+                                       Style="{StaticResource Style.Button.NoText.Border}" MinWidth="30" MinHeight="30" Command="{StaticResource Command.Remove}"
+                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
                                        ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-5"/>
 
                         <TextBlock Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Text="{DynamicResource S.AutomatedTasks.Info}" Padding="0" Margin="3" HorizontalAlignment="Center" TextWrapping="Wrap" 
@@ -702,6 +719,8 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -729,6 +748,19 @@
                                       ModifierKeys="{Binding DiscardModifiers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                       KeyChanged="Recorders_OnKeyChanged"/>
                             <TextBlock Grid.Row="2" Grid.Column="2" Text="{DynamicResource S.Shortcuts.Recorders.Discard.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+
+                            <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource S.Shortcuts.Recorders.Follow}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,4" VerticalAlignment="Center"/>
+                            <n:KeyBox Grid.Row="3" Grid.Column="1" x:Name="FollowKeyBox" Height="23" Margin="3" VerticalAlignment="Center" 
+                                      MainKey="{Binding FollowShortcut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      ModifierKeys="{Binding FollowModifiers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                      KeyChanged="Recorders_OnKeyChanged"/>
+                            <TextBlock Grid.Row="3" Grid.Column="2" Text="{DynamicResource S.Shortcuts.Recorders.Follow.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+
+                            <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource S.Shortcuts.Recorders.DisableFollow}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,4" VerticalAlignment="Center"/>
+                            <n:KeyBox Grid.Row="4" Grid.Column="1" x:Name="DisableFollowKeyBox" Height="23" Margin="3" VerticalAlignment="Center" 
+                                      ModifierKeys="{Binding DisableFollowModifiers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" OnlyModifiers="True"
+                                      KeyChanged="Recorders_OnKeyChanged"/>
+                            <TextBlock Grid.Row="4" Grid.Column="2" Text="{DynamicResource S.Shortcuts.Recorders.DisableFollow.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
                         </Grid>
                     </StackPanel>
 
@@ -795,7 +827,7 @@
                             <n:ImageListBoxItem Image="{StaticResource Flag.Japan}" Tag="ja" Content="Japanese / 日本語" Author="Chihiro Watanabe, Winston, Toshio"
                                                 MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ja, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ImageListBoxItem Image="{StaticResource Flag.SouthKorea}" Tag="ko" Content="Korean / 한국어" Author="Lytie"
+                            <n:ImageListBoxItem Image="{StaticResource Flag.SouthKorea}" Tag="ko" Content="Korean / 한국어" Author="Lytie, Manbok"
                                                 MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ko, Converter={StaticResource TagToSelection}}"/>
 
                             <n:ImageListBoxItem Image="{StaticResource Flag.Poland}" Tag="pl" Content="Polish / Polski" Author="Jakub Bazgier, Sebastian Pietras" 
@@ -816,7 +848,7 @@
                             <n:ImageListBoxItem Image="{StaticResource Flag.Spain}" Tag="es" Content="Spanish / Español" Author="Zabb"
                                                 MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=es, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ImageListBoxItem Image="{StaticResource Flag.Sweden}" Tag="sv" Content="Swedish / Svenska" Author="Andreas Johansson"
+                            <n:ImageListBoxItem Image="{StaticResource Flag.Sweden}" Tag="sv" Content="Swedish / Svenska" Author="Andreas Johansson, Sopor"
                                                 MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=sv, Converter={StaticResource TagToSelection}}"/>
 
                             <n:ImageListBoxItem Image="{StaticResource Flag.Russia}" Tag="ru" Content="Russian / Русский" Author="Vadim Velezhenko/Yuri Komar/Nivalis/ralienpp/Qwitriy/Zoltanleo/wvxwxvw"
@@ -825,6 +857,9 @@
                             <n:ImageListBoxItem Image="{StaticResource Flag.Ukraine}" Tag="uk" Content="Ukrainian / українська" Author="Andrey Ìlečko"
                                                 MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=uk, Converter={StaticResource TagToSelection}}"/>
 
+                            <n:ImageListBoxItem Image="{StaticResource Flag.Vietnam}" Tag="vi" Content="Vietnamese / Tiếng Việt" Author="Đỗ Quang Hưng"
+                                                MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=vi, Converter={StaticResource TagToSelection}}"/>
+
                             <!--<n:ImageListBoxItem Image="{StaticResource Greece}" Tag="el" Content="Greek" Author="No Author"
                                                     MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=el, Converter={StaticResource TagToSelection}}"/>
 
@@ -832,10 +867,7 @@
                                                 MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ro, Converter={StaticResource TagToSelection}}"/>
  
                             <n:ImageListBoxItem Image="{StaticResource India}" Tag="ta" Content="Tamil" Author="No Author"
-                                                MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ta, Converter={StaticResource TagToSelection}}"/>
-                            
-                            <n:ImageListBoxItem Image="{StaticResource Vietnam}" Tag="vi" Content="Vietnamese" Author="No Author"
-                                                MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=vi, Converter={StaticResource TagToSelection}}"/>-->
+                                                MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ta, Converter={StaticResource TagToSelection}}"/>-->
                         </ListBox>
 
                         <TextBlock Grid.Row="2" x:Name="TranslateHyperlink" FontSize="12" FontFamily="Segoe UI Semilight" TextWrapping="WrapWithOverflow" Padding="2">
@@ -948,22 +980,22 @@
                             <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" x:Name="AppDataPathTextBlock" Text="..." Foreground="{DynamicResource Element.Foreground.Medium}" Padding="3" TextWrapping="Wrap" FontStyle="Italic"/>
 
                             <n:ImageButton Grid.Row="0" Grid.Column="3" x:Name="OpenAppDataButton" ToolTip="{DynamicResource TempFiles.OpenSettingsFolder}" Style="{StaticResource Style.Button.NoText}"
-                                           Content="{StaticResource Vector.Open}" Padding="3" ContentHeight="14" Command="u:Commands.OpenAppDataSettings"/>
+                                           Content="{StaticResource Vector.Open}" Padding="3" ContentHeight="14" Command="{StaticResource Command.OpenAppDataSettings}"/>
 
                             <n:ImageButton Grid.Row="0" Grid.Column="4" x:Name="RemoveAppDataButton" ToolTip="{DynamicResource TempFiles.RemoveSettings}" Style="{StaticResource Style.Button.NoText}"
-                                           Content="{StaticResource Vector.Remove}" Padding="3" ContentHeight="14" Command="u:Commands.RemoveAppDataSettings"/>
+                                           Content="{StaticResource Vector.Remove}" Padding="3" ContentHeight="14" Command="{StaticResource Command.RemoveAppDataSettings}"/>
 
                             <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource TempFiles.LocalPath}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="3"/>
                             <TextBlock Grid.Row="1" Grid.Column="1" x:Name="LocalPathTextBlock" Text="..." Foreground="{DynamicResource Element.Foreground.Medium}" Padding="3" TextWrapping="Wrap" FontStyle="Italic"/>
 
                             <n:ImageButton Grid.Row="1" Grid.Column="2" x:Name="CreateLocalButton" ToolTip="{DynamicResource TempFiles.CreateSettings}" Style="{StaticResource Style.Button.NoText}"
-                                           Content="{StaticResource Vector.Add}" Padding="3" ContentHeight="14" Command="u:Commands.CreateLocalSettings"/>
+                                           Content="{StaticResource Vector.Add}" Padding="3" ContentHeight="14" Command="{StaticResource Command.CreateLocalSettings}"/>
 
                             <n:ImageButton Grid.Row="1" Grid.Column="3" x:Name="OpenLocalButton" ToolTip="{DynamicResource TempFiles.OpenSettingsFolder}" Style="{StaticResource Style.Button.NoText}"
-                                           Content="{StaticResource Vector.Open}" Padding="3" ContentHeight="14" Command="u:Commands.OpenLocalSettings"/>
+                                           Content="{StaticResource Vector.Open}" Padding="3" ContentHeight="14" Command="{StaticResource Command.OpenLocalSettings}"/>
 
                             <n:ImageButton Grid.Row="1" Grid.Column="4" x:Name="RemoveLocalButton" ToolTip="{DynamicResource TempFiles.RemoveSettings}" Style="{StaticResource Style.Button.NoText}"
-                                           Content="{StaticResource Vector.Remove}" Padding="3" ContentHeight="14" Command="u:Commands.RemoveLocalSettings"/>
+                                           Content="{StaticResource Vector.Remove}" Padding="3" ContentHeight="14" Command="{StaticResource Command.RemoveLocalSettings}"/>
 
                             <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" Text="{DynamicResource TempFiles.SettingsInfo}" Foreground="{DynamicResource Element.Foreground.Medium}" TextWrapping="Wrap" Padding="4,2" Margin="0,10,0,0"/>
                         </Grid>

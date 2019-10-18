@@ -118,16 +118,31 @@ namespace ScreenToGif.ImageUtil.Gif.LegacyEncoder
         /// </summary>
         private int _sample = 10;
 
+        /// <summary>
+        /// Cumulative non adjusted time.
+        /// </summary>
+        private int _organicTime;
+
+        /// <summary>
+        /// Adjusted and rounded off time.
+        /// </summary>
+        private int _adjustedTime;
+
         #endregion
 
         /// <summary>
         /// Sets the delay time between each frame, or changes it
         /// for subsequent frames (applies to last frame added).
         /// </summary>
-        /// <param name="ms">Delay time in milliseconds</param>
-        public void SetDelay(int ms)
+        /// <param name="delay">Delay time in milliseconds</param>
+        public void SetDelay(int delay)
         {
-            _delay = (int)Math.Round(ms / 10.0f, MidpointRounding.AwayFromZero);
+            //Calculates the delay, taking into consideration overall rounding.
+            _organicTime += delay;
+            _delay = (int)Math.Round((_organicTime > delay ? _organicTime - _adjustedTime * 10 : delay) / 10.0f, MidpointRounding.AwayFromZero);
+            _adjustedTime += _delay;
+
+            //_delay = (int)Math.Round(delay / 10.0f, MidpointRounding.AwayFromZero);
         }
 
         /// <summary>
@@ -284,7 +299,9 @@ namespace ScreenToGif.ImageUtil.Gif.LegacyEncoder
         /// <param name="quality">Quality value greater than 0.</param>
         public void SetQuality(int quality)
         {
-            if (quality < 1) quality = 1;
+            if (quality < 1)
+                quality = 1;
+
             _sample = quality;
         }
 
@@ -370,10 +387,10 @@ namespace ScreenToGif.ImageUtil.Gif.LegacyEncoder
             var nPix = _pixels.Length / 3;
             _indexedPixels = new byte[nPix];
 
-            var colorTable = _colorList.AsParallel().GroupBy(x => x) //Grouping based on its value
-                .OrderByDescending(g => g.Count()) //Order by most frequent values
-                .Select(g => g.FirstOrDefault()) //take the first among the group
-                .ToList(); //Could use .Take(256)
+            var colorTable = _colorList.AsParallel().GroupBy(x => x) //Grouping based on its value.
+                .OrderByDescending(g => g.Count()) //Order by most frequent values.
+                .Select(g => g.FirstOrDefault()) //Take the first among the group.
+                .ToList(); //Could use .Take(256).
 
             _usedEntry = new bool[256];
 
@@ -383,7 +400,7 @@ namespace ScreenToGif.ImageUtil.Gif.LegacyEncoder
 
                 _colorTab = new byte[768];
 
-                int indexAux = 0;
+                var indexAux = 0;
                 foreach (var color in colorTable)
                 {
                     _colorTab[indexAux++] = color.R;
@@ -429,7 +446,7 @@ namespace ScreenToGif.ImageUtil.Gif.LegacyEncoder
                 #region Quantitizer needed
 
                 //Neural quantitizer.
-                var nq = new NeuQuant(_pixels, _sample);
+                var nq = new NeuQuant(_pixels, _sample, _firstFrame ? null : _transparent);
 
                 //Create reduced palette.
                 _colorTab = nq.Process();
@@ -445,7 +462,7 @@ namespace ScreenToGif.ImageUtil.Gif.LegacyEncoder
                 }
 
                 //Get closest match to transparent color if specified.
-                if (_transparent != null)
+                if (_transparent != null && !_firstFrame)
                     _transIndex = nq.Map(_transparent.Value.B, _transparent.Value.G, _transparent.Value.R);
 
                 #endregion

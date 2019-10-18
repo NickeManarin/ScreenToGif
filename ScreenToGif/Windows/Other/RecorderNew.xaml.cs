@@ -75,38 +75,62 @@ namespace ScreenToGif.Windows.Other
 
         private Point _latestPosition;
 
+        #region Mouse cursor follow up
+
+        /// <summary>
+        /// The previous position of the cursor in the X axis.
+        /// </summary>
+        private int _prevPosX = 0;
+
+        /// <summary>
+        /// The previous position of the cursor in the Y axis.
+        /// </summary>
+        private int _prevPosY = 0;
+
+        /// <summary>
+        /// The latest position of the cursor in the X axis.
+        /// </summary>
+        private int _posX = 0;
+
+        /// <summary>
+        /// The latest position of the cursor in the Y axis.
+        /// </summary>
+        private int _posY = 0;
+
+        /// <summary>
+        /// The offset in pixels. Used for moving the recorder around the X axis.
+        /// </summary>
+        private double _offsetX = 0;
+
+        /// <summary>
+        /// The offset in pixels. Used for moving the recorder around the Y axis.
+        /// </summary>
+        private double _offsetY = 0;
+
+        #endregion
+
         #region Timer
 
+        private readonly Timer _preStartTimer = new Timer();
         private Timer _capture = new Timer();
 
         private readonly System.Timers.Timer _garbageTimer = new System.Timers.Timer();
-
-        private readonly Timer _preStartTimer = new Timer();
-
+        private readonly Timer _followTimer = new Timer();
+        private readonly Timer _showBorderTimer = new Timer();
+        
         #endregion
 
         #endregion
 
         #region Dependency Properties
 
-        public static readonly DependencyProperty IsPickingRegionProperty = DependencyProperty.Register("IsPickingRegion", typeof(bool), typeof(RecorderNew),
-            new PropertyMetadata(false));
-
-        public static readonly DependencyProperty WasRegionPickedProperty = DependencyProperty.Register("WasRegionPicked", typeof(bool), typeof(RecorderNew),
-            new PropertyMetadata(false));
-
-        public static readonly DependencyProperty IsRecordingProperty = DependencyProperty.Register("IsRecording", typeof(bool), typeof(RecorderNew),
-            new PropertyMetadata(false));
-
-        public static readonly DependencyProperty IsDraggingProperty = DependencyProperty.Register("IsDragging", typeof(bool), typeof(RecorderNew),
-            new PropertyMetadata(false));
-
-        public static readonly DependencyProperty RegionProperty = DependencyProperty.Register("Region", typeof(Rect), typeof(RecorderNew),
-            new PropertyMetadata(Rect.Empty));
-
-
-        public static readonly DependencyProperty FrameCountProperty = DependencyProperty.Register("FrameCount", typeof(int), typeof(RecorderNew),
-            new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.AffectsRender));
+        public static readonly DependencyProperty IsPickingRegionProperty = DependencyProperty.Register(nameof(IsPickingRegion), typeof(bool), typeof(RecorderNew), new PropertyMetadata(false));
+        public static readonly DependencyProperty WasRegionPickedProperty = DependencyProperty.Register(nameof(WasRegionPicked), typeof(bool), typeof(RecorderNew), new PropertyMetadata(false));
+        public static readonly DependencyProperty IsRecordingProperty = DependencyProperty.Register(nameof(IsRecording), typeof(bool), typeof(RecorderNew), new PropertyMetadata(false));
+        public static readonly DependencyProperty IsDraggingProperty = DependencyProperty.Register(nameof(IsDragging), typeof(bool), typeof(RecorderNew), new PropertyMetadata(false));
+        public static readonly DependencyProperty IsFollowingProperty = DependencyProperty.Register(nameof(IsFollowing), typeof(bool), typeof(RecorderNew), new PropertyMetadata(false, IsFollowing_PropertyChanged));
+        public static readonly DependencyProperty RegionProperty = DependencyProperty.Register(nameof(Region), typeof(Rect), typeof(RecorderNew), new PropertyMetadata(Rect.Empty));
+        public static readonly DependencyProperty FrameCountProperty = DependencyProperty.Register(nameof(FrameCount), typeof(int), typeof(RecorderNew), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.AffectsRender));
 
         #endregion
 
@@ -137,6 +161,12 @@ namespace ScreenToGif.Windows.Other
         {
             get => (bool)GetValue(IsDraggingProperty);
             set => SetValue(IsDraggingProperty, value);
+        }
+
+        public bool IsFollowing
+        {
+            get => (bool)GetValue(IsFollowingProperty);
+            set => SetValue(IsFollowingProperty, value);
         }
 
         /// <summary>
@@ -206,7 +236,6 @@ namespace ScreenToGif.Windows.Other
             catch (Exception) { }
 
             #endregion
-
             
             SystemEvents.PowerModeChanged += System_PowerModeChanged;
             SystemEvents.DisplaySettingsChanged += SystemEvents_DisplaySettingsChanged;
@@ -214,17 +243,35 @@ namespace ScreenToGif.Windows.Other
 
         #region Events
 
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            IsFollowing = UserSettings.All.CursorFollowing;
+
+            if (IsFollowing && UserSettings.All.FollowShortcut == Key.None)
+            {
+                UserSettings.All.CursorFollowing = IsFollowing = false;
+
+                Dialog.Ok(LocalizationHelper.Get("Recorder"), LocalizationHelper.Get("S.Options.Warning.Follow.Header"),
+                    LocalizationHelper.Get("S.Options.Warning.Follow.Message"), Icons.Warning);
+            }
+        }
+
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             await Task.Factory.StartNew(UpdateScreenDpi);
 
             UpdatePositioning(true);
             
-            #region Garbage collector
+            #region Timers
 
             _garbageTimer.Interval = 3000;
             _garbageTimer.Elapsed += GarbageTimer_Tick;
             _garbageTimer.Start();
+
+            _showBorderTimer.Interval = 500;
+            _showBorderTimer.Tick += ShowBorderTimer_Tick;
+
+            _followTimer.Tick += FollowTimer_Tick;
 
             #endregion
 
@@ -232,6 +279,9 @@ namespace ScreenToGif.Windows.Other
 
             if (UserSettings.All.SnapshotMode)
                 EnableSnapshot_Executed(null, null);
+
+            if (UserSettings.All.CursorFollowing)
+                Follow();
 
             #endregion
         }
@@ -362,6 +412,8 @@ namespace ScreenToGif.Windows.Other
                 StopButton_Click(null, null);
             else if ((Stage == Stage.Paused || Stage == Stage.Snapping) && Keyboard.Modifiers.HasFlag(UserSettings.All.DiscardModifiers) && e.Key == UserSettings.All.DiscardShortcut)
                 DiscardButton_Click(null, null);
+            else if (Keyboard.Modifiers.HasFlag(UserSettings.All.FollowModifiers) && e.Key == UserSettings.All.FollowShortcut)
+                UserSettings.All.CursorFollowing = IsFollowing = !IsFollowing;
             else
                 _keyList.Add(new SimpleKeyGesture(e.Key, Keyboard.Modifiers, e.IsUppercase));
         }
@@ -375,6 +427,9 @@ namespace ScreenToGif.Windows.Other
                 return;
 
             _recordClicked = args.LeftButton == MouseButtonState.Pressed || args.RightButton == MouseButtonState.Pressed || args.MiddleButton == MouseButtonState.Pressed;
+
+            _posX = (int)Math.Round(args.PosX / _scale, MidpointRounding.AwayFromZero);
+            _posY = (int)Math.Round(args.PosY / _scale, MidpointRounding.AwayFromZero);
         }
 
         private void RecordPauseButton_Click(object sender, RoutedEventArgs e)
@@ -414,6 +469,14 @@ namespace ScreenToGif.Windows.Other
             e.CanExecute = (Stage == Stage.Stopped || Stage == Stage.Snapping || Stage == Stage.Paused) && RecordControlsGrid.IsVisible;
         }
 
+
+        private static void IsFollowing_PropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (!(d is RecorderNew rec))
+                return;
+
+            rec.Follow();
+        }
 
         private void Options_Executed(object sender, ExecutedRoutedEventArgs e)
         {
@@ -541,6 +604,7 @@ namespace ScreenToGif.Windows.Other
 
             //Garbage Collector Timer.
             _garbageTimer.Stop();
+            _followTimer.Stop();
 
             #endregion
 
@@ -1092,6 +1156,18 @@ namespace ScreenToGif.Windows.Other
             }
         }
 
+        private void Follow()
+        {
+            if (IsFollowing && UserSettings.All.FollowShortcut != Key.None)
+            {
+                _followTimer.Interval = (1000 / UserSettings.All.LatestFps) / 2;
+                _followTimer.Start();
+                return;
+            }
+
+            _followTimer.Stop();
+        }
+
         #endregion
 
         #region Discard Async
@@ -1329,6 +1405,68 @@ namespace ScreenToGif.Windows.Other
         private void GarbageTimer_Tick(object sender, EventArgs e)
         {
             GC.Collect(UserSettings.All.LatestFps > 30 ? 6 : 2);
+        }
+
+        private void FollowTimer_Tick(object sender, EventArgs e)
+        {
+            if (Region.IsEmpty || _prevPosX == _posX && _prevPosY == _posY || Stage == Stage.Paused || Stage == Stage.Stopped || Stage == Stage.Discarding || Stage == Stage.SelectingRegion ||
+                (Keyboard.Modifiers != ModifierKeys.None && Keyboard.Modifiers == UserSettings.All.DisableFollowModifiers))
+                return;
+
+            _prevPosX = _posX;
+            _prevPosY = _posY;
+
+            //TODO: Test with 2 monitors.
+            //if (isCentered)
+            //{
+            //    //Hide the UI.
+            //    _showBorderTimer.Stop();
+            //    BeginStoryboard(this.FindStoryboard("HideRectangleStoryboard"), HandoffBehavior.SnapshotAndReplace);
+            //    _showBorderTimer.Start();
+
+            //    _offsetX = _posX - Region.Width / 2d;
+            //    _offsetY = _posY - Region.Height / 2d;
+
+            //    Region = new Rect(new Point(_offsetX.Clamp(-1, Width - Region.Width + 1), _offsetY.Clamp(-1, Height - Region.Height + 1)), Region.Size);
+            //    DashedRectangle.Refresh();
+            //}
+            //else
+            {
+                //Only move to the left if 'Mouse.X < Rect.L' and only move to the right if 'Mouse.X > Rect.R'
+                _offsetX = _posX - UserSettings.All.FollowBuffer < Region.X ? _posX - Region.X - UserSettings.All.FollowBuffer :
+                    _posX + UserSettings.All.FollowBuffer > Region.Right ? _posX - Region.Right + UserSettings.All.FollowBuffer : 0;
+
+                _offsetY = _posY - UserSettings.All.FollowBuffer < Region.Y ? _posY - Region.Y - UserSettings.All.FollowBuffer :
+                    _posY + UserSettings.All.FollowBuffer > Region.Bottom ? _posY - Region.Bottom + UserSettings.All.FollowBuffer : 0;
+
+                //Hide the UI when moving.
+                if (_posX - UserSettings.All.FollowBuffer - UserSettings.All.FollowBufferInvisible < Region.X || _posX + UserSettings.All.FollowBuffer + UserSettings.All.FollowBufferInvisible > Region.Right || 
+                    _posY - UserSettings.All.FollowBuffer - UserSettings.All.FollowBufferInvisible < Region.Y || _posY + UserSettings.All.FollowBuffer + UserSettings.All.FollowBufferInvisible > Region.Bottom)
+                {
+                    _showBorderTimer.Stop();
+                    MainCanvas.Visibility = Visibility.Hidden;
+                    BeginStoryboard(this.FindStoryboard("HideRectangleStoryboard"), HandoffBehavior.SnapshotAndReplace);
+                    _showBorderTimer.Start();
+                }
+
+                Region = new Rect(new Point((Region.X + _offsetX).Clamp(-1, Width - Region.Width + 1), (Region.Y + _offsetY).Clamp(-1, Height - Region.Height + 1)), Region.Size);
+                DashedRectangle.Refresh();
+            }
+            
+            //Rearrange the rectangles.
+            _rect = ScreenRegion.Scale(_scale).Offset(Util.Other.RoundUpValue(_scale));
+        }
+
+        private void ShowBorderTimer_Tick(object sender, EventArgs e)
+        {
+            _showBorderTimer.Stop();
+
+            AdjustControls();
+
+            MainCanvas.Refresh();
+            MainCanvas.Visibility = Visibility.Visible;
+
+            BeginStoryboard(this.FindStoryboard("ShowRectangleStoryboard"), HandoffBehavior.Compose);
         }
 
         #endregion

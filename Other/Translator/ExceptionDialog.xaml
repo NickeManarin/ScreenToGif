@@ -1,0 +1,55 @@
+﻿<Window x:Class="Translator.ExceptionDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:c="clr-namespace:Translator.Controls"
+        Title="ScreenToGif - Error" WindowStartupLocation="CenterScreen" Topmost="True" SnapsToDevicePixels="True"
+        Height="300" Width="560" MinHeight="250" MinWidth="560" SizeToContent="Height"
+        Background="{DynamicResource Panel.Background}" Loaded="Window_Loaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="{DynamicResource Panel.Background.Level4}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto" MinWidth="110"/>
+            </Grid.ColumnDefinitions>
+
+            <Viewbox x:Name="IconViewbox" Margin="6" Child="{StaticResource Vector.Error.Round}"/>
+
+            <TextBlock Grid.Column="1" x:Name="TypeTextBlock" Text="" Margin="5" VerticalAlignment="Center" 
+                       FontFamily="Segoe UI Semilight" FontSize="18" Foreground="#FF003399" Padding="0"
+                       ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+
+            <c:ImageButton Grid.Column="2" x:Name="DetailsButton" Text="Show details" Content="{StaticResource Vector.Table}" MaxSize="20" 
+                           Margin="3" Padding="2" Style="{StaticResource Style.Button.Horizontal}" TextWrapping="NoWrap"
+                           Click="DetailsButton_Click" FontSize="14" FontFamily="Segoe UI Semilight"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" x:Name="HeaderTextBlock" Text="Oh no, the app crashed :(" Foreground="#E0000060" FontSize="22" Margin="10" HorizontalAlignment="Center"/>
+
+            <TextBlock Grid.Row="1" x:Name="DetailsTextBlock" FontSize="16" Margin="6,6,6,15" TextWrapping="Wrap" Foreground="#E0000000" ScrollViewer.CanContentScroll="True"/>
+        </Grid>
+
+        <Grid Grid.Row="2" Background="{DynamicResource Panel.Background.Level3}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <c:ImageButton Grid.Column="1" x:Name="OkButton" Text="Ok" Content="{StaticResource Vector.Ok}" MaxSize="18" 
+                           Margin="5" Padding="5,0" MinWidth="90" IsDefault="True" Click="OkButton_Click"/>
+        </Grid>
+    </Grid>
+</Window>

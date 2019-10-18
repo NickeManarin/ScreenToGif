@@ -11,13 +11,10 @@ namespace ScreenToGif.Controls
     {
         #region Variables
 
-        public static readonly DependencyProperty ContentProperty = DependencyProperty.Register("Content", typeof(UIElement), typeof(DropDownButton), new FrameworkPropertyMetadata());
-
-        public static readonly DependencyProperty DescriptionProperty = DependencyProperty.Register("Description", typeof(string), typeof(DropDownButton), new FrameworkPropertyMetadata());
-
-        public static readonly DependencyProperty MaxSizeProperty = DependencyProperty.Register("MaxSize", typeof(double), typeof(DropDownButton), new FrameworkPropertyMetadata(26.0));
-
-        public static readonly DependencyProperty IsVerticalProperty = DependencyProperty.Register("IsVertical", typeof(bool), typeof(DropDownButton), new FrameworkPropertyMetadata(false));
+        public static readonly DependencyProperty ContentProperty = DependencyProperty.Register(nameof(Content), typeof(UIElement), typeof(DropDownButton), new FrameworkPropertyMetadata());
+        public static readonly DependencyProperty DescriptionProperty = DependencyProperty.Register(nameof(Description), typeof(string), typeof(DropDownButton), new FrameworkPropertyMetadata());
+        public static readonly DependencyProperty MaxSizeProperty = DependencyProperty.Register(nameof(MaxSize), typeof(double), typeof(DropDownButton), new FrameworkPropertyMetadata(26.0));
+        public static readonly DependencyProperty IsVerticalProperty = DependencyProperty.Register(nameof(IsVertical), typeof(bool), typeof(DropDownButton), new FrameworkPropertyMetadata(false));
 
         #endregion
 

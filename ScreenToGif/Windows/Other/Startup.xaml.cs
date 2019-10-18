@@ -13,7 +13,12 @@ namespace ScreenToGif.Windows.Other
         public Startup()
         {
             InitializeComponent();
+        }
 
+        #region Events
+
+        private void Startup_Initialized(object sender, EventArgs e)
+        {
             #region Adjust the position
 
             //Tries to adjust the position/size of the window, centers on screen otherwise.
@@ -23,11 +28,17 @@ namespace ScreenToGif.Windows.Other
             #endregion
         }
 
-        #region Events
-
         private void Startup_Loaded(object sender, RoutedEventArgs e)
         {
             SystemEvents.DisplaySettingsChanged += System_DisplaySettingsChanged;
+
+            #region Adjust the position
+
+            //Tries to adjust the position/size of the window, centers on screen otherwise.
+            if (!UpdatePositioning())
+                WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+            #endregion
 
             NotificationUpdated();
         }

@@ -3,8 +3,8 @@
                     xmlns:s="clr-namespace:System;assembly=mscorlib"
                     xml:space="preserve">
     
-    <!--To use a new line: &#x0d;-->
-    <!--Or CarriageReturn + NewLine: &#x0d;&#x0a; or &#10;--> 
+    <!--To use a new line: &#x0d; or CarriageReturn + NewLine: &#x0d;&#x0a; or &#10;--> 
+    <!--You can use the zero-width-divider to suggest where the word should be divided when there's no space &#8203;-->
     <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
     
     <!--General-->
@@ -17,11 +17,13 @@
     <s:String x:Key="Suppress">Zwolnij</s:String>
     <s:String x:Key="Preview">Podgląd</s:String>
     <s:String x:Key="S.Add">Dodaj</s:String>
+    <s:String x:Key="S.Edit">Edytuj</s:String>
     <s:String x:Key="S.Id">Id</s:String>
     <s:String x:Key="S.Title">Tytuł</s:String>
     <s:String x:Key="S.Description">Opis</s:String>
-    
-    <!--Notification Icon-->
+    <s:String x:Key="S.SelectColor">Kliknij tutaj, aby wybrać kolor.</s:String>
+
+    <!--Tray Icon-->
     <s:String x:Key="S.NewRecording">Nowe nagranie ekranu</s:String>
     <s:String x:Key="S.NewWebcamRecording">Nowe nagranie kamerki</s:String>
     <s:String x:Key="S.NewBoardRecording">Nowe nagranie tablicy</s:String>
@@ -30,11 +32,82 @@
     <!--Application-->
     <s:String x:Key="Application.Exiting.Title">Zamykanie ScreenToGif</s:String>
     <s:String x:Key="Application.Exiting.Instruction">Czy jesteś pewien, że chcesz zakończyć?</s:String>
-    <s:String x:Key="Application.Exiting.Message">Wszystkie okna zostaną zamknięte i ikonka programu zniknie z zasobnika.</s:String>   
+    <s:String x:Key="Application.Exiting.Message">Wszystkie okna zostaną zamknięte i ikonka programu zniknie z zasobnika.</s:String>
     
     <!--Error messages--> 
     <s:String x:Key="S.Crash">O nie, aplikacja przestała działać :(</s:String>
-
+    <s:String x:Key="S.Required">Pole wymagane.</s:String>
+    
+    <!--Commands-->
+    <s:String x:Key="S.Command.NewRecording">Nowe nagranie ekranu</s:String>
+    <s:String x:Key="S.Command.NewWebcamRecording">Nowe nagranie z kamery internetowej</s:String>
+    <!--<s:String x:Key="S.Command.NewBoardRecording">New board recording</s:String>-->
+    <s:String x:Key="S.Command.NewAnimation">Nowa animacja</s:String>
+    <s:String x:Key="S.Command.InsertRecording">Dodaj nagranie ekranu</s:String>
+    <s:String x:Key="S.Command.InsertWebcamRecording">Dodaj nagranie z kamery internetowej</s:String>
+    <!--<s:String x:Key="S.Command.InsertBoardRecording">Insert board recording</s:String>-->
+    <!--<s:String x:Key="S.Command.InsertFromMedia">Insert from media (images and videos)</s:String>-->
+    <s:String x:Key="S.Command.SaveAs">Zapisz jako...</s:String>
+    <s:String x:Key="S.Command.Load">Otwórz pliki (obrazy, wideo i projekty)</s:String>
+    <s:String x:Key="S.Command.LoadRecent">Wczytaj ostatni projekt</s:String>
+    <s:String x:Key="S.Command.DiscardProject">Anuluj obecny projekt</s:String>
+    <!--<s:String x:Key="S.Command.OverrideDelay">Override delay of frames</s:String>-->
+    <s:String x:Key="S.Command.IncreaseDecreaseDelay">Zwiększ/zmniejsz opóźnienie klatek</s:String>
+    <s:String x:Key="S.Command.ScaleDelay">Skaluj opóźnienie klatek</s:String>
+    <s:String x:Key="S.Command.Zoom100">Ustaw zoom na 100%</s:String>
+    <!--<s:String x:Key="S.Command.SizeToContent">Adjust the window to the frame size</s:String>-->
+    <!--<s:String x:Key="S.Command.FitImage">Fit image to the available window size</s:String>-->
+    <s:String x:Key="S.Command.FirstFrame">Wybierz pierwszą ramkę</s:String>
+    <s:String x:Key="S.Command.PreviousFrame">Wybierz poprzednią klatkę</s:String>
+    <s:String x:Key="S.Command.Play">Odtwórz animację</s:String>
+    <s:String x:Key="S.Command.NextFrame">Wybierz następną klatkę</s:String>
+    <s:String x:Key="S.Command.LastFrame">Wybierz ostatnią klatkę</s:String>
+    <s:String x:Key="S.Command.Undo">Cofnij</s:String>
+    <s:String x:Key="S.Command.Redo">Powtórz</s:String>
+    <s:String x:Key="S.Command.Reset">Cofnij wszystkie zmiany w projekcie</s:String>
+    <s:String x:Key="S.Command.Copy">Kopiuj wybrane klatki i przechowuj je w schowku systemowym</s:String>
+    <s:String x:Key="S.Command.Cut">Wytnij wybrane klatki i przechowuj je w schowu systemowym</s:String>
+    <s:String x:Key="S.Command.Paste">Wklej klatki ze schowka</s:String>
+    <s:String x:Key="S.Command.Delete">Usuń wszystkie wybrane klatki</s:String>
+    <s:String x:Key="S.Command.DeletePrevious">Usuń wszystkie poprzednie klatki</s:String>
+    <s:String x:Key="S.Command.DeleteNext">Usuń wszystkie następne klatki</s:String>
+    <s:String x:Key="S.Command.RemoveDuplicates">Usuń duplikaty</s:String>
+    <s:String x:Key="S.Command.Reduce">Zmniejsz liczebność klatek</s:String>
+    <s:String x:Key="S.Command.Reverse">Odwróć animację</s:String>
+    <!--<s:String x:Key="S.Command.Yoyo">Makes the animation go forward and backwards</s:String>-->
+    <s:String x:Key="S.Command.MoveLeft">Przesuń wybraną klatkę w lewo</s:String>
+    <s:String x:Key="S.Command.MoveRight">Przesuń wybraną klatkę w prawo</s:String>
+    <s:String x:Key="S.Command.Resize">Przeskaluj wszystkie klatki</s:String>
+    <s:String x:Key="S.Command.Crop">Przytnij wszystkie klatki</s:String>
+    <s:String x:Key="S.Command.FlipRotate">Przerzuć lub obróć klatki</s:String>
+    <s:String x:Key="S.Command.Caption">Dodaj napis</s:String>
+    <!--<s:String x:Key="S.Command.FreeText">Add a free-floating text</s:String>-->
+    <s:String x:Key="S.Command.TitleFrame">Dodaj klatkę z tytułem</s:String>
+    <!--<s:String x:Key="S.Command.KeyStrokes">Inserts keys pressed during the recording</s:String>-->
+    <!--<s:String x:Key="S.Command.FreeDrawing">Draw free forms</s:String>-->
+    <s:String x:Key="S.Command.Shapes">Dodaj kształt</s:String>
+    <s:String x:Key="S.Command.MouseClicks">Kliknięcia myszy</s:String>
+    <s:String x:Key="S.Command.Watermark">Wybierz obraz i dodaj jako znak wodny</s:String>
+    <s:String x:Key="S.Command.Border">Dodaj obramowanie</s:String>
+    <!--<s:String x:Key="S.Command.Shadow">Add drop shadow</s:String>-->
+    <s:String x:Key="S.Command.Obfuscate">Ukryj wrażliwe elementy na klatkach</s:String>
+    <!--<s:String x:Key="S.Command.Cinemagraph">Use the drawing tools to select which parts of the frame should not remain static throughout the animation</s:String>-->
+    <!--<s:String x:Key="S.Command.Progress">Progress bar or text with playback details</s:String>-->
+    <s:String x:Key="S.Command.SelectAll">Wybierz wszystkie klatki</s:String>
+    <s:String x:Key="S.Command.GoTo">Przejdź do klatki według indeksu</s:String>
+    <s:String x:Key="S.Command.InverseSelection">Odwróć zaznaczenie klatek</s:String>
+    <s:String x:Key="S.Command.Unselect">Odznacz wszystkie klatki</s:String>
+    <!--<s:String x:Key="S.Command.Fade">Fade transition</s:String>-->
+    <!--<s:String x:Key="S.Command.Slide">Slide transition</s:String>-->
+    <s:String x:Key="S.Command.ClearAll">Usuń wszystkie skończone enkodowania.</s:String>
+    <s:String x:Key="S.Command.MoveUp">Przesuń w góre</s:String>
+    <s:String x:Key="S.Command.MoveDown">Przesuń w dół</s:String>
+    <s:String x:Key="S.Command.Add">Dodaj</s:String>
+    <s:String x:Key="S.Command.Open">Otwórz</s:String>
+    <s:String x:Key="S.Command.Edit">Edytuj wybrany przedmiot</s:String>
+    <s:String x:Key="S.Command.Save">Zapisz wybrany element</s:String>
+    <s:String x:Key="S.Command.Remove">Usuń wybrany element</s:String>
+    
     <!--StartUp Page-->
     <s:String x:Key="Title.StartUp">Screen To Gif - uruchomienie</s:String>
     <s:String x:Key="Recorder">Nagrywanie</s:String>
@@ -50,7 +123,7 @@
     <s:String x:Key="Tooltip.Board">Otwiera tablicę, gdzie możesz nagrywać swoje rysunki.</s:String>
     <s:String x:Key="Tooltip.Editor">Otwiera okno edytora, głównego narzędzia tej aplikacji, gdzie łatwo możesz nagrywać i edytować.</s:String>
 
-    <!--Update Page-->
+    <!--Update Window-->
     <s:String x:Key="Update">Aktualizacja</s:String>
     <s:String x:Key="Update.NewRelease">Nowa wersja!</s:String>
     <s:String x:Key="Update.NewRelease.Verbose">Nowa wersja dostępna, numer {0}! Kliknij tu po więcej informacji.</s:String>
@@ -64,10 +137,11 @@
     <s:String x:Key="Update.CloseThis">Czy chcesz zamknąć aplikację?</s:String>
     <s:String x:Key="Update.CloseThis.Detail">To jest starsza wersja. Pobrałeś już nową wersję.</s:String>
     
-    <!--Options Page-->
+    <!--Options Window-->
     <s:String x:Key="Title.Options">Screen To Gif - Opcje</s:String>
     <s:String x:Key="Application">Aplikacja</s:String>
     <s:String x:Key="Interface">Interfejs</s:String>
+    <s:String x:Key="S.AutoTasks">Zautomatyzowane zadania</s:String>
     <s:String x:Key="S.Shortcuts">Skróty klawiszowe</s:String>
     <s:String x:Key="Image">Obraz</s:String>
     <s:String x:Key="Language">Język</s:String>
@@ -77,12 +151,8 @@
     <s:String x:Key="Donate">Dotacja</s:String>
     <s:String x:Key="About">O programie</s:String>
     
-    <s:String x:Key="S.Application.Other.Homepage">Strona główna:</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.StartUp">Okno uruchomienia</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Recorder">Nagrywanie ekranu</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Webcam">Nagrywanie z kamerki</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Board">Tablica</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Editor">Okno edytora</s:String>
+    <!--<s:String x:Key="S.Options.Warning.Follow.Header">Missing shortcut key for cursor following</s:String>-->
+    <!--<s:String x:Key="S.Options.Warning.Follow.Message">In order to use the mouse cursor following feature, you must set a shortcut key to toggle it when needed.</s:String>-->
     
     <s:String x:Key="Application.ScreenRecorder">Nagrywanie ekranu</s:String>
     <s:String x:Key="Application.ScreenRecorder.RecordMouse">Pokaż kursor myszy na nagraniu.</s:String>
@@ -100,26 +170,51 @@
     <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(Zastąpi stary interfejs okna nagrywania)</s:String>
     <s:String x:Key="Application.ScreenRecorder.Magnifier">Włącz powiększanie ekranu.</s:String>
     <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(Włącza powiększanie ekranu podczas wybierania obszaru nagrywania)</s:String>
-    
+    <s:String x:Key="Application.ScreenRecorder.CursorFollowing">Włącz śledzenie kursora</s:String>
+    <s:String x:Key="Application.ScreenRecorder.CursorFollowing.Info">(Obszar nagrywania zostanie przepozycjonowany do lokalizacji kursora)</s:String>
+    <!--<s:String x:Key="Application.ScreenRecorder.FollowMargin.Info">(Buffer margin in pixels, where the recording area starts getting repositioned)</s:String>-->
+    <!--<s:String x:Key="Application.ScreenRecorder.FollowMarginInvisible.Info">(Additional buffer margin in pixels, where the UI starts getting hidden)</s:String>-->
+
     <s:String x:Key="Application.Other">Inne</s:String>
     <s:String x:Key="Application.Other.SystemTray">Wyświetl aplikację w zasobniku (obszar powiadomień).</s:String>
     <s:String x:Key="Application.Other.LeaveOpen">Pozostaw aplikację otwartą, nawet jeżeli wszystkie okna są zamknięte.</s:String>
     <s:String x:Key="Application.Other.NotifyFrameDeletion">Potwierdź przed usunięciem klatek.</s:String>
     <s:String x:Key="Application.Other.NotifyProjectDiscard">Potwierdź przed odrzuceniem projektu.</s:String>
     <s:String x:Key="Application.Other.NotifyWhileClosingEditor">Potwierdź przed zamknięciem edytora (gdy jest otwarty projekt).</s:String>
+    <s:String x:Key="Application.Other.NotifyWhileClosingApp">Potwierdź przed zamknięciem aplikacji (poprzez komende 'Wyjdź').</s:String>
     <s:String x:Key="Application.Other.DrawOutlineOutside">Rysuj kontur napisów na zewnątrz liter.</s:String>
+    <s:String x:Key="Application.Other.DisableHardwareAcceleration">Wyłącz akcelerację sprzętową.</s:String>
+    <s:String x:Key="Application.Other.CheckForTranslationUpdates">Sprawdź dostępność aktualizacji.</s:String>
+    <s:String x:Key="Application.Other.CheckForTranslationUpdates.Info">(Zaktualizowane tłumaczenia zostaną pobrane i zainstalowane automatycznie)</s:String>
     <s:String x:Key="Application.Other.CheckForUpdates">Sprawdzaj aktualizacje.</s:String>
+    <s:String x:Key="S.Application.Other.Homepage">Strona główna:</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.StartUp">Okno uruchomienia</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Recorder">Nagrywanie ekranu</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Webcam">Nagrywanie z kamerki</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Board">Tablica</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Editor">Okno edytora</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Minimized">Zminimalizowany (zasobnik systemowy)</s:String>
+    <s:String x:Key="S.Application.Other.Homepage.Info">(Kontroluje sposób, w jaki aplikacja startuje. Kiedy uruchamia się zminimalizowana, ikona zasobnika systemowego, będzie widoczna)</s:String>
     
+    <s:String x:Key="S.AutomatedTasks.Title">Zautomatyzowane zadanie</s:String>
+    <s:String x:Key="S.AutomatedTasks.List">Lista zautomatyzowanych zadań</s:String>
+    <s:String x:Key="S.AutomatedTasks.List.Task">Zadanie</s:String>
+    <s:String x:Key="S.AutomatedTasks.List.Details">Szczegóły</s:String>
+    <s:String x:Key="S.AutomatedTasks.SelectType">(Wybierz zadnie)</s:String>
+    <!--<s:String x:Key="S.AutomatedTasks.Info">These tasks are executed sequentially from the top of the list to the bottom.&#10;It happens when you first open a project using the editor.</s:String>-->
+    
+    <s:String x:Key="Interface.Theme">Motyw aplikacji</s:String>
+    <s:String x:Key="Interface.Theme.Scheme">Schemat kolorów</s:String>
     <s:String x:Key="Interface.EditorBackground">Tło edytora</s:String>
     <s:String x:Key="Interface.Recorder">Wygląd okna nagrywania</s:String>
     <s:String x:Key="Interface.Background">Tło</s:String>
     <s:String x:Key="Interface.Foreground">Pierwszy plan</s:String>
     <s:String x:Key="Interface.BoardBackground">Tło tablicy</s:String>
-    <s:String x:Key="Interface.Theme.Scheme">Schemat kolorów</s:String>
     <s:String x:Key="Interface.Theme.Scheme.VeryLight">Bardzo jasny</s:String>
     <s:String x:Key="Interface.Theme.Scheme.Light">Jasny</s:String>
     <s:String x:Key="Interface.Theme.Scheme.Medium">Średni</s:String>
     <s:String x:Key="Interface.Theme.Scheme.Dark">Ciemny</s:String>
+    <s:String x:Key="Interface.Theme.Scheme.VeryDark">Bardzo ciemny</s:String>
     <s:String x:Key="Interface.Theme.Scheme.Custom">Niestandardowy...</s:String>
     
     <s:String x:Key="Interface.EditorBackground.GridSize">Wielkość siatki</s:String>
@@ -166,7 +261,11 @@
     <s:String x:Key="S.Shortcuts.Recorders.Stop.Info">(Zatrzymuje nagrywanie i otwiera edytor)</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.Discard">Odrzuć:</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.Discard.Info">(Odrzuca aktywne nagrywanie, jeśli jest zapauzowane)</s:String>
-    <s:String x:Key="S.Shortcuts.Info">Kliknij, aby ustawić aktywne pole, a potem naciśnij żądane klawisze i modyfikatory.&#10;Niektóre kombinacje klawiszy nie są dozwolone.</s:String>    
+    <!--<s:String x:Key="S.Shortcuts.Recorders.Follow">Cursor following:</s:String>-->
+    <!--<s:String x:Key="S.Shortcuts.Recorders.Follow.Info">(Toggles the adjustment of the recording area based on the position of the cursor)</s:String>-->
+    <s:String x:Key="S.Shortcuts.Recorders.DisableFollow">Wyłącz następujące:</s:String>
+    <!--<s:String x:Key="S.Shortcuts.Recorders.DisableFollow.Info">(Temporarily disables the adjustment of the recording area based on the position of the cursor, only modifier keys accepted)</s:String>-->
+    <s:String x:Key="S.Shortcuts.Info">Kliknij, aby ustawić aktywne pole, a potem naciśnij żądane klawisze i modyfikatory.&#10;Niektóre kombinacje klawiszy nie są dozwolone.</s:String>
     
     <s:String x:Key="Language.AppLanguage">Język aplikacji</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect">Wykryj automatycznie</s:String>
@@ -218,7 +317,7 @@
     <s:String x:Key="S.Upload.Proxy.User">Nazwa użytkownika:</s:String>
     <s:String x:Key="S.Upload.Proxy.Password">Hasło:</s:String>
     <s:String x:Key="S.Upload.Get">Uzyskaj token OAuth</s:String>
-    <s:String x:Key="S.Upload.PasteToken">Wklej token autoryzacyjny tutaj</s:String>    
+    <s:String x:Key="S.Upload.PasteToken">Wklej token autoryzacyjny tutaj</s:String>
     <s:String x:Key="S.Upload.Authorize">Autoryzuj</s:String>
     <s:String x:Key="S.Upload.Refresh">Odśwież</s:String>
     <s:String x:Key="S.Upload.Clear">Wyczyść</s:String>
@@ -238,7 +337,7 @@
     <s:String x:Key="S.Upload.Imgur.Valid">Autoryzacja ważna do: {0}.</s:String>
     <s:String x:Key="S.Upload.Imgur.Removed">Autoryzacja usunięta.</s:String>
     <s:String x:Key="S.Upload.Imgur.Error.AlbumLoad">Nie można było załadować listy albumów.</s:String>
-    <s:String x:Key="S.Upload.Gyfcat.Anonymous">Gyfcat (Anonimowo)</s:String>
+    <s:String x:Key="S.Upload.Gfycat.Anonymous">Gfycat (Anonimowo)</s:String>
     <s:String x:Key="S.Upload.Yandex.Token">Token OAuth:</s:String>
     <s:String x:Key="S.Upload.Pick.Destination">Wybierz miejsce</s:String>
     <s:String x:Key="S.Upload.Pick.Album">Wybierz album (opcjonalne)</s:String>
@@ -249,13 +348,16 @@
     <s:String x:Key="Extras.Downloading">Pobieranie...</s:String>
     <s:String x:Key="Extras.Ready">Pobrano&#x0d;{0}</s:String>
     <s:String x:Key="Extras.Ready.Info">Kliknij tutaj by otworzyć właściwości pliku</s:String>
+    <s:String x:Key="S.Extras.DownloadRestriction">Aplikacje dostarczane przez Microsoft Store, nie mogą pobierać innych aplikacji. Musisz pobrać je ręcznie.</s:String>
     <s:String x:Key="Extras.FfmpegLocation">Lokalizacja FFmpeg</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Select">Wybierz lokalizację FFmpeg</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Invalid">Ścieżka do FFMpeg zawiera jeden lub więcej nieprawidłowych znaków. Wybierz właściwą lokalizację FFMpeg.</s:String>
     <s:String x:Key="Extras.GifskiLocation">Lokalizacja Gifski</s:String>
     <s:String x:Key="Extras.GifskiLocation.Select">Wybierz lokalizację Gifski</s:String>
     <s:String x:Key="Extras.GifskiLocation.Invalid">Ścieżka do Gifski zawiera jeden lub więcej nieprawidłowych znaków. Proszę, wybierz właściwą ścieżkę.</s:String>
-    
+    <s:String x:Key="Extras.License.Ffmpeg">Licencja FFmpeg</s:String>
+    <s:String x:Key="Extras.License.Gifski">Licencja Gifski</s:String>
+
     <s:String x:Key="Donate.IfYouWish">Podziękuj autorowi :D</s:String>
     <s:String x:Key="Donate.DonateDollar">Wesprzyj autora - $</s:String>
     <s:String x:Key="Donate.DonateEuro">Wesprzyj autora - €</s:String>
@@ -270,7 +372,11 @@
 
     <s:String x:Key="About.Version">Wersja:</s:String>
     <s:String x:Key="About.Author">Autor: Nicke Manarin</s:String>
+    <s:String x:Key="S.About.StoreVersion">Wersja z Microsoft Store. Niektóre funkcjonalności wyłączone ze względu na wymuszane polityki.</s:String>
     <s:String x:Key="About.Contact">Kontakt</s:String>
+    <s:String x:Key="S.About.Contact.Discord">Dołącz do serwera</s:String>
+    <s:String x:Key="S.About.Contact.Facebook">Odwiedź stronę</s:String>
+    <s:String x:Key="S.About.Contact.Gitter">Dołącz do pokoju</s:String>
     <s:String x:Key="About.Technical">Sprawy techniczne</s:String>
     <s:String x:Key="About.Technical.License">Licencja:</s:String>
     <s:String x:Key="About.Technical.Free">(Ta aplikacja jest kompletnie darmowa)</s:String>
@@ -312,6 +418,7 @@
     <s:String x:Key="S.Recorder.Retry">Ponów</s:String>
     <s:String x:Key="S.Recorder.CancelSelection">Anuluj zaznaczenie (Esc)</s:String>
     <s:String x:Key="S.Recorder.SelectArea">Kliknij i przeciągnij aby zaznaczyć obszar tego ekranu</s:String>
+    <s:String x:Key="S.Recorder.SelectArea.Embedded">Kliknij i przeciągnij aby wybrać obszar</s:String>
     <s:String x:Key="S.Recorder.SelectWindow">Kliknij tutaj by wybrać te okno</s:String>
     <s:String x:Key="S.Recorder.SelectScreen">Kliknij tutaj by wybrać ten ekran</s:String>
     
@@ -341,12 +448,22 @@
     <s:String x:Key="ColorSelector.Initial">Kolor początkowy</s:String>
     <s:String x:Key="ColorSelector.Current">Aktualny kolor</s:String>
     <s:String x:Key="ColorSelector.Latest">Ostatni kolor</s:String>
+    <!--<s:String x:Key="ColorSelector.Sample">Drag this to&#x0d;sample colors</s:String>-->
+    <s:String x:Key="ColorSelector.Sample.Info">Kliknij i przeciągnij&#x0d;kolory ze swojego ekranu</s:String>
     
     <!--Exception Viewer, Optional-->
     <s:String x:Key="ExceptionViewer.Title">Podgląd wyjątków</s:String>
     <s:String x:Key="ExceptionViewer.OpenInner">Otwórz wewnętrzne wyjątki</s:String>
     <s:String x:Key="ErrorDialog.Observation">Coś złego się stało.</s:String>
     <s:String x:Key="ErrorDialog.Send">Zgłoś</s:String>
+
+    <!--FFmpeg Preset-->
+    <s:String x:Key="S.FfmpegPreset.Title">Ustawienia FFmpeg</s:String>
+    <s:String x:Key="S.FfmpegPreset.Name">Imię</s:String>
+    <s:String x:Key="S.FfmpegPreset.Parameters">Parametry</s:String>
+    <s:String x:Key="S.FfmpegPreset.Warning.Name">Musisz nadać nazwę dla tych ustawień.</s:String>
+    <s:String x:Key="S.FfmpegPreset.Warning.Parameter">Musisz ustawić parametry dla tych ustawień.</s:String>
+    <s:String x:Key="S.FfmpegPreset.Warning.SameName">Istnieją ustawienia z tą samą nazwą.</s:String>
 
     <!--Insert Frames-->
     <s:String x:Key="InsertFrames.Title">Wstawianie klatek</s:String>
@@ -380,10 +497,10 @@
     <s:String x:Key="ImportVideo.Selection">Zaznaczenie:</s:String>
     <s:String x:Key="ImportVideo.Frames">Klatki:</s:String>
     <s:String x:Key="ImportVideo.Duration">Długość trwania:</s:String>
+    <s:String x:Key="S.ImportVideo.Error">Nie jest możliwe wczytanie wideo.</s:String>
     
     <!--Encoder-->
     <s:String x:Key="Encoder.Title">Enkoder</s:String>
-    <s:String x:Key="Encoder.ClearAllCompleted">Wyczyść wszystkie zakończone.</s:String>
     <s:String x:Key="Encoder.Starting">Startowanie</s:String>
     <s:String x:Key="Encoder.Completed">Zakończone</s:String>
     <s:String x:Key="Encoder.Completed.Clipboard">Skopiowano do schowka</s:String>
@@ -414,6 +531,10 @@
     <s:String x:Key="Command.Title">ScreenToGif - Wyjście Polecenia</s:String>
     <s:String x:Key="Command.Header">Wyjście Polecenia</s:String>
     
+    <!--Notifications-->
+    <s:String x:Key="S.Notifications">Powiadomienia</s:String>
+    <s:String x:Key="S.Notifications.Dismiss">Anuluj wszystkie powiadomienia</s:String>
+    
     <!--Editor-->
     <s:String x:Key="Editor.Title">Screen To Gif - Edytor</s:String>
     <s:String x:Key="Editor.File">Plik</s:String>
@@ -424,6 +545,8 @@
     <s:String x:Key="Editor.Transitions">Przejścia</s:String>
     <s:String x:Key="Editor.Statistics">Statystyki</s:String>
     <s:String x:Key="Editor.Options">Opcje</s:String>
+    
+    <s:String x:Key="S.Editor.Extras">Dodatki</s:String>
     
     <!--Welcome-->
     <s:String x:Key="Welcome.New">Przejdź do "Plik > Nowy", aby zacząć nowe nagrywanie</s:String>
@@ -444,6 +567,7 @@
     <!--File • Insert-->
     <s:String x:Key="Editor.File.Insert.Recording">Wstaw nowe&#x0d;nagranie</s:String>
     <s:String x:Key="Editor.File.Insert.Webcam">Nagranie z &#x0d;kamerki</s:String>
+    <!--<s:String x:Key="Editor.File.Insert.Board">Board&#x0d;Recording</s:String>-->
     <s:String x:Key="Editor.File.Insert.Media">Media</s:String>
     <s:String x:Key="Editor.File.Insert">Wstaw</s:String>
     
@@ -488,6 +612,11 @@
     <s:String x:Key="Editor.Playback.Next">Następny</s:String>
     <s:String x:Key="Editor.Playback.Last">Ostatni</s:String>
     
+    <!--Playback • Playback Options-->
+    <s:String x:Key="Editor.PlaybackOptions.Header">Opcje odtwarzania</s:String>
+    <s:String x:Key="Editor.PlaybackOptions.Loop">Pętla podczas odtwarzania.</s:String>
+    <s:String x:Key="Editor.PlaybackOptions.Loop.Info">Używane tylko podczas odtwarzania.&#x0d;Jeżeli chcesz zmienić ustawienia pętli dla exportu Gif i Apngs,&#x0d;ustawienie będzie dostępne wewnątrz panelu 'Zapisz jako' dla niektórych enkoderów.</s:String>
+    
     <!--Edit • Frames-->  
     <s:String x:Key="Editor.Edit.Frames">Klatki</s:String>
     <s:String x:Key="Editor.Edit.Delete">Usuń</s:String>
@@ -507,6 +636,7 @@
     <s:String x:Key="Editor.Edit.Delay">Opóźnienie (czas trwania)</s:String>
     <s:String x:Key="Editor.Edit.Delay.Override">Nadpisz</s:String>
     <s:String x:Key="Editor.Edit.Delay.IncreaseDecrease">Zwiększ lub&#x0d;zmniejsz</s:String>
+    <s:String x:Key="Editor.Edit.Delay.Scale">Skaluj</s:String>
     
     <!--Image • Size and Rotation-->
     <s:String x:Key="Editor.Image.SizePosition">Rozmiar i pozycja</s:String>
@@ -524,9 +654,12 @@
     <!--Image • Overlay-->
     <s:String x:Key="Editor.Image.Overlay">Nakładka</s:String>
     <s:String x:Key="Editor.Image.FreeDrawing">Rysowanie</s:String>
+    <s:String x:Key="Editor.Image.Shape">Kształty</s:String>
+    <s:String x:Key="Editor.Image.Clicks">Kliknięcia&#x0d;myszy</s:String>
     <s:String x:Key="Editor.Image.Watermark">Znak wodny</s:String>
     <s:String x:Key="Editor.Image.Cinemagraph">Cinemagraph</s:String>
     <s:String x:Key="Editor.Image.Border">Ramka</s:String>
+    <s:String x:Key="Editor.Image.Shadow">Cień</s:String>
     <s:String x:Key="Editor.Image.Progress">Postęp</s:String>
     <s:String x:Key="Editor.Image.Obfuscate">Zaciemnij</s:String>
 
@@ -541,6 +674,8 @@
     <s:String x:Key="Editor.Statistics.TotalDuration">Całkowity czas trwania</s:String>
     <s:String x:Key="Editor.Statistics.FrameSize">Rozmiar klatki</s:String>
     <s:String x:Key="Editor.Statistics.AverageDuration">Średni czas trwania (opóźnienie)</s:String>
+    <s:String x:Key="Editor.Statistics.CurrentTime">Aktualny czas</s:String>
+    <s:String x:Key="Editor.Statistics.CurrentTime.Info">Aktualny czas (łącznie) bazuje na obecnie widocznych klatkach.</s:String>
     <s:String x:Key="Editor.Statistics.FrameDpi">DPI i skala klatki</s:String>
     <s:String x:Key="Editor.Statistics.SelectedFrame">Wybrana klatka</s:String>
     
@@ -587,10 +722,13 @@
     <s:String x:Key="Editor.Watermark.WarningSelection">Musisz wybrać co najmniej jedną klatkę, aby dodać znak wodny.</s:String>
     <s:String x:Key="Editor.Border.WarningThickness">Wielkość ramki powinna wynosić więcej niż 0 na co najmniej 1 stronie.</s:String>
     <s:String x:Key="Editor.Border.WarningSelection">Musisz wybrać co najmniej jedną klatkę, by dodać ramkę.</s:String>
+    <s:String x:Key="Editor.Shadow.Warning.Invisible">Nieprzezroczystość musi być większa od zera, aby miała wpływ na klatki.</s:String>
+    <!--<s:String x:Key="Editor.Shadow.Warning.Behind">When using the shadow depth and blur radius as zero, it won't make any difference because it will be hidden behind the frame.</s:String>-->
     <s:String x:Key="Editor.Cinemagraph.WarningNoDrawing">Musisz wybrać co najmniej jeden piksel, aby dodać Cinemagraph. Wybierz piksele rysując na nich.</s:String>
     
     <s:String x:Key="Editor.Fade.Title">Przejście z wygaszeniem</s:String>
     <s:String x:Key="Editor.Fade.WarningSelection">Musisz wybrać co najmniej jedną klatkę, aby dodać przejście z wygaszeniem.</s:String>
+    <s:String x:Key="Editor.Fade.WarningColor">W pełni przezroczysty kolor, nie wpyłnie na to przejście.</s:String>
     <s:String x:Key="Editor.Slide.Title">Przejście z przesunięciem</s:String>
     <s:String x:Key="Editor.Slide.WarningSelection">Musisz wybrać co najmniej jedną klatkę, aby dodać przejście z przesunięciem.</s:String>
 
@@ -612,6 +750,9 @@
     <s:String x:Key="Editor.ImportingFrames">Importowanie klatek</s:String>
     
     <s:String x:Key="Editor.ExportingRecording">Wyeksportuj nagranie</s:String>
+    <s:String x:Key="S.Editor.AnalyzingDuplicates">Analizowanie duplikatów</s:String>
+    <s:String x:Key="S.Editor.AdjustingDuplicatesDelay">Dopasowywanie opóźnienia</s:String>
+    <s:String x:Key="S.Editor.DiscardingDuplicates">Pozbywanie się duplikatów</s:String>
     <s:String x:Key="Editor.DiscardingFrames">Odrzucanie klatek</s:String>
     <s:String x:Key="Editor.DiscardingFolders">Odrzucanie folderów</s:String>
     <s:String x:Key="Editor.ResizingFrames">Zmiana rozmiaru klatek</s:String>
@@ -674,6 +815,7 @@
     <s:String x:Key="Hint.FlipRotate2">Odbicie dotyczy zaznaczonych klatek a obrócenie dotyczy wszystkich klatek</s:String>
     <s:String x:Key="Hint.ApplyAll">Ta akcja dotyczy wszystkich klatek</s:String>
     <s:String x:Key="Hint.ApplySelected">Ta akcja dotyczy wybranych klatek</s:String>
+    <s:String x:Key="Hint.ApplySelectedOrAll">Ta akcja dotyczy wszystkich lub wybranych klatek, w zależności od ustawień</s:String>
     <s:String x:Key="Hint.Cinemagraph">Cinemagraph dotyczy wszystkich klatek na podstawie pierwszej klatki</s:String>
     <s:String x:Key="Hint.Overlay">Zastosowano nakładkę</s:String>
     <s:String x:Key="Hint.TitleFrame">Utworzono klatkę tytułową</s:String>
@@ -698,6 +840,8 @@
     <s:String x:Key="Recent.CreationDate">Data utworzenia</s:String>
     <s:String x:Key="Recent.FrameCount">Liczba klatek</s:String>
     <s:String x:Key="Recent.Warning.NothingSelected">Żaden projekt nie jest wybrany. Zaznacz projekt z listy, żeby go załadować.</s:String>
+    <s:String x:Key="Recent.Warning.SameOpened">Ten projekt jest już wyświetlany poprzez tą instację edytora.</s:String>
+    <s:String x:Key="Recent.Warning.AlreadyOpened">Projekt jest już otwarty w innej instacji edytora. Projekt nie może być otwarty drugi raz, jeżeli jest już otwart w innym edytorze.</s:String>
     
     <s:String x:Key="Clipboard.Entries">Wpisy ze schowka</s:String>
     <s:String x:Key="Clipboard.Entry">Wpis schowka:</s:String>
@@ -753,6 +897,7 @@
     <s:String x:Key="Caption.Vertical">Pionowy:</s:String>
     <s:String x:Key="Caption.Horizontal">Poziomy:</s:String>
 
+    <s:String x:Key="S.KeyStrokes">Uderzenia klawiszy</s:String>
     <s:String x:Key="KeyStrokes.Keys">Klawisze</s:String>
     <s:String x:Key="KeyStrokes.Separator">Separator</s:String>
     <s:String x:Key="KeyStrokes.Edit">Edytuj twoje wciśnięcia klawiszy</s:String>
@@ -767,13 +912,17 @@
     <s:String x:Key="KeyStrokes.Edit.Keys">Wykryte wciśnięcia klawiszy</s:String>
     <s:String x:Key="KeyStrokes.Edit.Remove">Usuń wciśnięcie klawisza</s:String>
     <s:String x:Key="KeyStrokes.Edit.Add">Dodaj wciśnięcie klawisza:</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Lower">Małe litery.</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Lower.Info">Pozwala wstawić pojedyncze małe litery.</s:String>
     
     <s:String x:Key="String.Delay">Opóźnienie</s:String>
     <s:String x:Key="String.DelayMs">Opóźnienie (ms):</s:String>
     <s:String x:Key="String.ValueMs">Wartość -+ (ms):</s:String>
+    <s:String x:Key="String.ScaleValue">Wartość skali</s:String>
     <s:String x:Key="String.Margin">Margines:</s:String>
     <s:String x:Key="String.Padding">Padding:</s:String>
     <s:String x:Key="String.Background">Tło</s:String>
+    <s:String x:Key="String.MinHeight">Minimalna wysokość:</s:String>
     
     <s:String x:Key="FreeDrawing.Mode">Tryb</s:String>
     <s:String x:Key="FreeDrawing.Pen">Długopis</s:String>
@@ -789,12 +938,28 @@
     <s:String x:Key="FreeDrawing.Highlighter">Zakreślacz</s:String>
     <s:String x:Key="FreeDrawing.FitToCurve">Dopasuj do krzywej</s:String>
     
+    <s:String x:Key="S.Shapes.Mode.Insert">Wstaw</s:String>
+    <s:String x:Key="S.Shapes.Shapes">Kształty</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Radius">Promień:</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Dashes">Kreski:</s:String>
+    <s:String x:Key="S.Shapes.Fill">Wypełnij</s:String>
+
+    <s:String x:Key="S.MouseClicks">Kliknięcia myszy</s:String>
+    <s:String x:Key="S.MouseClicks.Warning.None">Nie wykryto kliknięć myszy w Twoim projekcie.</s:String>
+    
     <s:String x:Key="Watermark.Image">Obraz</s:String>
     <s:String x:Key="Watermark.File">Plik:</s:String>
     <s:String x:Key="Watermark.Opacity">Przezroczystość:</s:String>
     
     <s:String x:Key="Border.Appearance">Wygląd</s:String>
+    <!--<s:String x:Key="S.Border.Info">Use negative values to make the border expand the image. When doing so, the border will be applied to all frames.&#x0d;If no negative value being used, the border will be applied only to the selected frames.</s:String>-->
 
+    <s:String x:Key="S.Shadow.ShadowColor">Kolor cienia:</s:String>
+    <s:String x:Key="S.Shadow.BackgroundColor">Kolor tła:</s:String>
+    <s:String x:Key="S.Shadow.Direction">Kierunek:</s:String>
+    <s:String x:Key="S.Shadow.BlurRadius">Promień rozmycia:</s:String>
+    <s:String x:Key="S.Shadow.Depth">Głębia:</s:String>
+    
     <s:String x:Key="S.Obfuscate.Options">Opcje zaciemniania</s:String>
     <s:String x:Key="S.Obfuscate.PixelSize">Rozmiar piksela:</s:String>
     <s:String x:Key="S.Obfuscate.UseAverage">Oblicz średni kolor dla każdego wypikselowanego bloku.</s:String>
@@ -810,19 +975,32 @@
     <s:String x:Key="Progress.Precision.Miliseconds">Milisekundy</s:String>
     <s:String x:Key="Progress.Precision.Percentage">Procent</s:String>
     <s:String x:Key="Progress.Precision.Count">Numer klatki</s:String>
+    <s:String x:Key="Progress.Precision.DateOfRecording">Aktualna data/czas</s:String>
     <s:String x:Key="Progress.Precision.Custom">Własna</s:String>
     <s:String x:Key="Progress.Precision.ShowTotal">Pokaż całość.</s:String>
     <s:String x:Key="Progress.Format">Format:</s:String>
+    <!--<s:String x:Key="S.Progress.Format.Date">You can use the date and time format from .Net Framework.&#x0d;The specification is available in these two links below.</s:String>-->
+    <s:String x:Key="S.Progress.Format.Date.Standard">Domyślne formaty</s:String>
+    <s:String x:Key="S.Progress.Format.Date.Custom">Własne formaty</s:String>
+    <s:String x:Key="S.Progress.Precision.StartNumber">Licz od:</s:String>
+    <s:String x:Key="S.Progress.Precision.StartNumber.ToolTip">Zacznij zliczać klatki od wybranej liczby.</s:String>
     <s:String x:Key="Progress.Orientation">Orientacja:</s:String>
     
+    <!--<s:String x:Key="S.DelayUpdate">Delay update</s:String>-->
+    <s:String x:Key="Delay.Mode">Tryb opóźnienia</s:String>
+    <s:String x:Key="Delay.Mode.Override">Zastąp (w ms)</s:String>
+    <s:String x:Key="Delay.Mode.IncreaseDecrease">Zwiększ lub zmniejsz (w ms):</s:String>
+    <s:String x:Key="Delay.Mode.Scale">Skala (w %)</s:String>
     <s:String x:Key="Delay.NewValue">Nowa wartość</s:String>
     <s:String x:Key="Delay.Minimum10Ms">Minimalnie 10ms na klatkę.</s:String>
     <s:String x:Key="Delay.DecreaseIncrease">Zmniejsz/Zwiększ wartość</s:String>
+    <s:String x:Key="Delay.Scale">Wartość skali</s:String>
     
     <s:String x:Key="Cinemagraph.Info">Użyj długopisu, aby wybrać piksele, które nie są statyczne (które powinny się zmieniać w kolejnych klatkach), poprzez rysowanie nad nimi.</s:String>
     <s:String x:Key="OverrideDelay.Info">Ta nowa wartość zastąpi czas trwania (opóźnienie) wszystkich wybranych klatek. Wartość może zawierać się w przedziale od 10 ms do 25500 ms.</s:String>
     <s:String x:Key="IncreaseDecreaseDelay.Info">Ta wartość zmniejszy/zwiększy czas trwania (opóźnienie) każdej wybranej klatki.&#x0d;Możesz zmniejszyć/zwiększyć poprzez wybranie wartości z przedziału od -10000ms do 10000ms, ale ostateczna długość trwania każdej klatki będzie ograniczona to przedziału od 10ms do 25500ms</s:String>
-    
+    <s:String x:Key="ScaleDelay.Info">Skaluj czas trwania (opóźnienia) każdej wybranej klatki o wartość procentową.&#x0d;Możesz skalować czas trwania każdej ramki poprzez wybór wartości pomiędzy 1% a 1000%, lecz finalny czas trwania każdej ramki będzie się mieścił pomiędzy 10ms a 25500ms</s:String>
+
     <s:String x:Key="Transitions.Length">Długość przejścia</s:String>
     <s:String x:Key="Transitions.Delay">Opóźnienie przejścia</s:String>
     <s:String x:Key="Transitions.FadeTo">Wygaś do...</s:String>
@@ -846,6 +1024,8 @@
     <s:String x:Key="S.SaveAs.Encoder.Legacy.Tooltip">Algorytm: NeuQuant.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System">System</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System.Tooltip">Korzysta ze standardowej palety.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Apng">1.0</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Apng.Tooltip">Enkoder stworzony przez developera ScreenToGif.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
     <s:String x:Key="S.SaveAs.GifOptions">Opcje gifu</s:String>
@@ -856,6 +1036,20 @@
     <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">Zapętlony GIF.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Powtarzaj w nieskończoność.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Ilość powtórzeń.</s:String>
+    <s:String x:Key="S.SaveAs.Presets">Przedstawia</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Default">Domyślny</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Add">Dodaj</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Save">Zapisz</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Edit">Edytuj</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Remove">Usuń</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Remove.Title">Usuń ustawienia</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Remove.Header">Czy chcesz usunąć ustawienia?</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Remove.Message">Nie możesz cofnąć tej operacji, ale możesz dodać ustawienia ponownie później.</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Reset">Reset</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Reset.Title">Resetuj ustawienia</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Reset.Header">Czy chcesz przywrócić ustawienia do domyślnych wartości?</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Reset.Message">Nie możesz cofnąć tej operacji, ale możesz dodać ustawienia ponownie później.</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Warning.NoSelection">Nie wybrana ustawień FFmpeg, proszę wybrać.</s:String>
     <s:String x:Key="S.SaveAs.Extras">Dodatki:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">Wyszukaj niezmienione piksele.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">Zamaluj niezmienione piksele kolorem obojętnym.</s:String>
@@ -869,7 +1063,12 @@
     <s:String x:Key="S.SaveAs.FlipVertically">Odwróć wideo (pionowo).</s:String>
     <s:String x:Key="S.SaveAs.ImagesOptions">Opcje obrazu</s:String>
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">Zarchiwizuj obrazy.</s:String>
-    
+    <s:String x:Key="S.SaveAs.PsdOptions">Opcej pliku PSD</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress">Kompresuj obraz.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">Kompresuj obraz używając algorytmu RLE.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Timeline">Zapisz dane osi czasu.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">Eksportuj czasy klatek, zamiast tylko klatki.</s:String>
+
     <!--Save As • Save options-->
     <s:String x:Key="S.SaveAs.SaveOptions">Opcje zapisu</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Zapisz plik do wybranego folderu.</s:String>
@@ -913,6 +1112,7 @@
     <s:String x:Key="S.SaveAs.Warning.Filename">Musisz wybrać nazwę pliku.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Filename.Invalid">Nazwa pliku zawiera jeden lub więcej nieprawidłowych znaków. Wybierz prawidłową nazwę pliku.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Overwrite">Istnieje już plik o tej nazwie. Zaznacz, aby nadpisać lub wybierz inną nazwę.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Canceled">Operacja została anulowana.</s:String>
     
     <!--SaveAs • Export-->
     <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">Eksportuj klatki</s:String>
@@ -922,6 +1122,7 @@
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">Wsparcie</s:String>
     <s:String x:Key="S.Feedback.Send">Wyślij</s:String>
+    <s:String x:Key="S.Feedback.Preview">Podgląd</s:String>
     <s:String x:Key="S.Feedback.Header">Wyślij wsparcie</s:String>
     <s:String x:Key="S.Feedback.Title">Tytuł *</s:String>
     <s:String x:Key="S.Feedback.Message">Wiadomość *</s:String>
@@ -938,7 +1139,17 @@
     <s:String x:Key="S.Feedback.RemoveAttachments">Usuń wszystkie załączniki</s:String>
     <s:String x:Key="S.Feedback.LanguageInfo1">Rozumiem język angielski</s:String>
     <s:String x:Key="S.Feedback.LanguageInfo2">lub portugalski (brazylijski lub europejski).</s:String>
+    <s:String x:Key="S.Feedback.Preview.Info">To zostanie wysłane, łącznie ze wszystkimi załącznikami.</s:String>
     
+    <!--Troubleshoot-->
+    <s:String x:Key="S.Troubleshoot.Title">Rozwiązywanie problemów</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows">Czy brakuje jakiegoś okna?</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Info">Jeżeli brakuje któregokolwiek z oknien (są po za ekranem),&#x0d;użyj opcji poniżej aby resetować aktualną pozycję do pozycji domyślnej.</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Current">Oto gdzie każde okno jest aktualnie położone:</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Next">Oto gdzie każde okno zostanie otwarte następnym razem:</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.BringBack">Przenieś wszystkie okna do ekranu głównego.</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Reset">Resetuj pozycję startową wszystkich okien.</s:String>
+   
     <!--FontStyles-->
     <s:String x:Key="S.FontStyles.Normal">Normalny</s:String>
     <s:String x:Key="S.FontStyles.Italic">Kursywa</s:String>
@@ -962,13 +1173,13 @@
     <s:String x:Key="S.FontWeights.UltraBold">Ultra pogrubiona</s:String>
     <s:String x:Key="S.FontWeights.UltraLight">Ultra lekka</s:String>
     
-     <!--VerticalAligment-->
+    <!--VerticalAlignment-->
     <s:String x:Key="S.VerticalAlignment.Top">Góra</s:String>
     <s:String x:Key="S.VerticalAlignment.Center">Środek</s:String>
     <s:String x:Key="S.VerticalAlignment.Bottom">Dół</s:String>
     <s:String x:Key="S.Alignment.Stretch">Rozciągnięcie</s:String>
 
-     <!--HorizontalAlignment-->
+    <!--HorizontalAlignment-->
     <s:String x:Key="S.HorizontalAlignment.Left">Lewo</s:String>
     <s:String x:Key="S.HorizontalAlignment.Center">Środek</s:String>
     <s:String x:Key="S.HorizontalAlignment.Right">Prawo</s:String>

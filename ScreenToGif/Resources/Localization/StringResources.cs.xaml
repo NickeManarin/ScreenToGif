@@ -238,7 +238,7 @@
     <s:String x:Key="S.Upload.Imgur.Valid">Autorizace je platná do {0}.</s:String>
     <s:String x:Key="S.Upload.Imgur.Removed">Autorizace Imgur odstraněna.</s:String>
     <s:String x:Key="S.Upload.Imgur.Error.AlbumLoad">Nelze načíst seznam alb.</s:String>
-    <s:String x:Key="S.Upload.Gyfcat.Anonymous">Gyfcat (anonymní)</s:String>
+    <s:String x:Key="S.Upload.Gfycat.Anonymous">Gfycat (anonymní)</s:String>
     <s:String x:Key="S.Upload.Yandex.Token">OAuth klíč:</s:String>
     <s:String x:Key="S.Upload.Pick.Destination">Vyberte cíl</s:String>
     <s:String x:Key="S.Upload.Pick.Album">Vyberte album (volitelné)</s:String>
@@ -383,7 +383,6 @@
     
     <!--Encoder-->
     <s:String x:Key="Encoder.Title">Kódování</s:String>
-    <s:String x:Key="Encoder.ClearAllCompleted">Odstranit vše dokončené</s:String>
     <s:String x:Key="Encoder.Starting">Spuštění</s:String>
     <s:String x:Key="Encoder.Completed">Dokončeno</s:String>
     <s:String x:Key="Encoder.Completed.Clipboard">Zkopírováno do schránky</s:String>

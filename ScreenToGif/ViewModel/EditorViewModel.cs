@@ -6,6 +6,22 @@ namespace ScreenToGif.ViewModel
 {
     public class EditorViewModel : BaseViewModel
     {
+        #region Variables
+
+        private int _selectedIndex = -1;
+
+        #endregion
+
+        #region Properties
+
+        public int SelectedIndex
+        {
+            get => _selectedIndex;
+            set => SetProperty(ref _selectedIndex, value);
+        }
+
+        #endregion
+
         //MainImageViewer = receives the RenderedImage.
         //The project viewer has an index
         //Each 

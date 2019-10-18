@@ -49,8 +49,8 @@
     </Window.Resources>
 
     <Window.CommandBindings>
-        <CommandBinding Command="u:Commands.Options" CanExecute="NotRecording_CanExecute" Executed="Options_Executed"/>
-        <CommandBinding Command="u:Commands.CheckVideoDevices" CanExecute="NotRecording_CanExecute" Executed="CheckVideoDevices_Executed"/>
+        <CommandBinding Command="{StaticResource Command.Options}" CanExecute="NotRecording_CanExecute" Executed="Options_Executed"/>
+        <CommandBinding Command="{StaticResource Command.CheckVideoDevices}" CanExecute="NotRecording_CanExecute" Executed="CheckVideoDevices_Executed"/>
         <CommandBinding Command="Stop" CanExecute="Stop_CanExecute" Executed="Stop_Executed"/>
     </Window.CommandBindings>
 
@@ -92,7 +92,7 @@
 
             <n:ImageButton Grid.Column="1" x:Name="OptionsButton" Text="" Content="{StaticResource Vector.Options}" TabIndex="0"
                            Style="{StaticResource Style.Button.NoText}" Effect="{StaticResource Shadow.Background.Small}"
-                           HorizontalContentAlignment="Center" ContentHeight="20" Padding="3" Command="u:Commands.Options">
+                           HorizontalContentAlignment="Center" ContentHeight="20" Padding="3" Command="{StaticResource Command.Options}">
                 <n:ImageButton.ToolTip>
                     <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Options}"/>
                 </n:ImageButton.ToolTip>
@@ -109,7 +109,7 @@
 
             <n:ImageButton Grid.Column="3" x:Name="RefreshButton" Content="{StaticResource Vector.Repeat}" TabIndex="1"
                            Style="{StaticResource Style.Button.NoText}" Effect="{StaticResource Shadow.Border}" 
-                           HorizontalContentAlignment="Center" ContentHeight="20" Padding="3" Command="u:Commands.CheckVideoDevices">
+                           HorizontalContentAlignment="Center" ContentHeight="20" Padding="3" Command="{StaticResource Command.CheckVideoDevices}">
                 <n:ImageButton.ToolTip>
                     <ToolTip Placement="Bottom" HorizontalOffset="-5" Content="{DynamicResource Webcam.CheckVideoDevices}" />
                 </n:ImageButton.ToolTip>

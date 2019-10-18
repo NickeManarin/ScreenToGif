@@ -1,9 +1,16 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <SolidColorBrush x:Key="Panel.Background" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="Panel.Background.Level2" Color="#FFFAFAFA"/>
+    <SolidColorBrush x:Key="Panel.Background.Level3" Color="WhiteSmoke"/>
+    <SolidColorBrush x:Key="Panel.Background.Level4" Color="#FFF9F9FF"/>
+    
     <SolidColorBrush x:Key="Button.Background" Color="White"/>
     <SolidColorBrush x:Key="Button.Background.Hover" Color="#FFD5E1F2"/>
     <SolidColorBrush x:Key="Button.Background.Pressed" Color="#FFA3BDE3"/>
+
+    <SolidColorBrush x:Key="Element.Foreground.Header" Color="#FF003399"/>
     
     <SolidColorBrush x:Key="Button.Border" Color="#FFABABAB"/>
     <SolidColorBrush x:Key="Button.Border.Hover" Color="#FFA3BDE3"/>

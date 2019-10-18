@@ -2,7 +2,6 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
-             xmlns:u="clr-namespace:ScreenToGif.Util"
              xmlns:n="clr-namespace:ScreenToGif.Controls"
              xmlns:m="clr-namespace:ScreenToGif.Model"
              ShutdownMode="OnExplicitShutdown" Startup="Application_Startup" Exit="App_OnExit" 
@@ -15,6 +14,7 @@
                 <ResourceDictionary Source="/Resources/IconSet.xaml"/>
                 <ResourceDictionary Source="/Resources/Glyphs.xaml"/>
                 <ResourceDictionary Source="/Resources/Backgrounds.xaml"/>
+                <ResourceDictionary Source="/Resources/Commands.xaml"/>
                 <ResourceDictionary Source="/Resources/Settings.xaml"/>
 
                 <!--Themes-->
@@ -47,13 +47,14 @@
                 <ResourceDictionary Source="/Resources/Localization/StringResources.sv.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.tr.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.uk.xaml"/>
+                <ResourceDictionary Source="/Resources/Localization/StringResources.vi.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.zh.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.zh-Hant.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.en.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <m:ApplicationViewModel x:Key="AppViewModel"/>
-            
+
             <!--Converter-->
             <BooleanToVisibilityConverter x:Key="Bool2Visibility" />
             <c:CountToBool x:Key="CountToBoolConverter" />
@@ -64,6 +65,8 @@
             <c:IntToBool x:Key="BoolToInt"/>
             <c:IntToVisibility x:Key="IntToVisibility"/>
             <c:EnumToVisibility x:Key="EnumToVisibility"/>
+            <c:InvertedBool x:Key="InvertedBool"/>
+            <c:CommandToInputGestureText x:Key="CommandToInputGestureText"/>
 
             <!--Effects-->
             <DropShadowEffect x:Key="Shadow.Black.Tiny" ShadowDepth="0" Color="#FF000000" Opacity=".15" BlurRadius="2" RenderingBias="Quality"/>

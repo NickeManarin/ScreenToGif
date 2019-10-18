@@ -1,0 +1,504 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <RoutedUICommand x:Key="Command.NewRecording" Text="S.Command.NewRecording">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + N</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.NewWebcamRecording" Text="S.Command.NewWebcamRecording">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + W</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.NewBoardRecording" Text="S.Command.NewBoardRecording">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + B</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.NewAnimation" Text="S.Command.NewAnimation">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + Alt + A</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.InsertRecording" Text="S.Command.InsertRecording">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + Shift + N</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.InsertWebcamRecording" Text="S.Command.InsertWebcamRecording">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + Shift + W</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.InsertBoardRecording" Text="S.Command.InsertBoardRecording">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + Shift + B</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.InsertFromMedia" Text="S.Command.InsertFromMedia">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + Shift + O</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.SaveAs" Text="S.Command.SaveAs">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + S</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.Load" Text="S.Command.Load">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + O</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.LoadRecent" Text="S.Command.LoadRecent">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + L</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.DiscardProject" Text="S.Command.DiscardProject">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + Delete</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.OverrideDelay" Text="S.Command.OverrideDelay">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Alt + O</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.IncreaseDecreaseDelay" Text="S.Command.IncreaseDecreaseDelay">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Alt + Y</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.ScaleDelay" Text="S.Command.ScaleDelay">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Alt + 5</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.Zoom100" Text="S.Command.Zoom100">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Alt + 0</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.SizeToContent" Text="S.Command.SizeToContent">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Alt + 1</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.FitImage" Text="S.Command.FitImage">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Alt + OemMinus</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <!--Playback-->
+    <RoutedUICommand x:Key="Command.FirstFrame" Text="S.Command.FirstFrame">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Home</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.PreviousFrame" Text="S.Command.PreviousFrame">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>PageUp</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.Play" Text="S.Command.Play">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Alt + P</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.NextFrame" Text="S.Command.NextFrame">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>PageDown</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.LastFrame" Text="S.Command.LastFrame">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>End</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+    
+    <!--Edit-->
+    <RoutedUICommand x:Key="Command.Undo" Text="S.Command.Undo">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + Z</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.Redo" Text="S.Command.Redo">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + Y</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+    
+    <RoutedUICommand x:Key="Command.Reset" Text="S.Command.Reset">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + R</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.Copy" Text="S.Command.Copy">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + C</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.Cut" Text="S.Command.Cut">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + X</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.Paste" Text="S.Command.Paste">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + V</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+    
+    <RoutedUICommand x:Key="Command.ExploreClipboard" Text="S.Command.ExploreClipboard"/>
+
+    <RoutedUICommand x:Key="Command.RemoveClipboardEntry" Text="S.Command.RemoveClipboardEntry"/>
+
+    <RoutedUICommand x:Key="Command.Delete" Text="S.Command.Delete">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Delete</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+    
+    <RoutedUICommand x:Key="Command.DeletePrevious" Text="S.Command.DeletePrevious">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Alt + Left</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.DeleteNext" Text="S.Command.DeleteNext">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Alt + Right</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.RemoveDuplicates" Text="S.Command.RemoveDuplicates">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Alt + Delete</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.Reduce" Text="S.Command.Reduce">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + Shift + Delete</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.Reverse" Text="S.Command.Reverse">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + Alt + R</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.Yoyo" Text="S.Command.Yoyo">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + Y</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.MoveLeft" Text="S.Command.MoveLeft">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + Shift + Left</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.MoveRight" Text="S.Command.MoveRight">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + Shift + Right</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <!--Image-->
+    <RoutedUICommand x:Key="Command.Resize" Text="S.Command.Resize">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Alt + R</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.Crop" Text="S.Command.Crop">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Alt + C</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.FlipRotate" Text="S.Command.FlipRotate">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Alt + L</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.Caption" Text="S.Command.Caption">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Alt + S</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.FreeText" Text="S.Command.FreeText">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Alt + F</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.TitleFrame" Text="S.Command.TitleFrame">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Alt + T</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.KeyStrokes" Text="S.Command.KeyStrokes">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Alt + H</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.FreeDrawing" Text="S.Command.FreeDrawing">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Alt + D</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.Shapes" Text="S.Command.Shapes">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Alt + J</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.MouseClicks" Text="S.Command.MouseClicks">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Alt + I</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.Watermark" Text="S.Command.Watermark">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Alt + W</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.Border" Text="S.Command.Border">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Alt + B</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.Shadow" Text="S.Command.Shadow">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + M</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.Obfuscate" Text="S.Command.Obfuscate">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + H</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.Cinemagraph" Text="S.Command.Cinemagraph">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Alt + G</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.Progress" Text="S.Command.Progress">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Alt + K</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+    
+    <!--Selection-->
+    <RoutedUICommand x:Key="Command.SelectAll" Text="S.Command.SelectAll">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + A</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.GoTo" Text="S.Command.GoTo">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + G</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.InverseSelection" Text="S.Command.InverseSelection">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + I</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.Unselect" Text="S.Command.Unselect">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + U</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <!--Transitions-->
+    <RoutedUICommand x:Key="Command.Fade" Text="S.Command.Fade">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + Alt + T</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.Slide" Text="S.Command.Slide">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + Alt + Y</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+    
+    <!--Other-->
+    <RoutedUICommand x:Key="Command.Options" Text="S.Command.Options">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + Alt + O</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.Update" Text="S.Command.Update">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + Alt + U</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.CreateLocalSettings" Text="S.Command.CreateLocalSettings">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + Alt + C</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.RemoveLocalSettings" Text="S.Command.RemoveLocalSettings">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + Alt + D</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.OpenLocalSettings" Text="S.Command.OpenLocalSettings">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + Shift + A</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.RemoveAppDataSettings" Text="S.Command.RemoveAppDataSettings">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + Alt + F</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.OpenAppDataSettings" Text="S.Command.OpenAppDataSettings">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + Alt + A</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.ClearAll" Text="S.Command.ClearAll">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + D</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.OpenImage" Text="S.Command.OpenImage"/>
+
+    <RoutedUICommand x:Key="Command.ExploreFolder" Text="S.Command.ExploreFolder"/>
+
+    <RoutedUICommand x:Key="Command.ExportImages" Text="S.Command.ExportImages"/>
+
+    <RoutedUICommand x:Key="Command.CheckVideoDevices" Text="S.Command.CheckVideoDevices">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + Alt + F5</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.EnableSnapToWindow" Text="S.Command.EnableSnapToWindow">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + Alt + Z</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.Ok" Text="S.Command.Ok">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Alt + E</KeyGesture>
+            <KeyGesture>Enter</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.Cancel" Text="S.Command.Cancel">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Escape</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <!--Localization-->
+    <RoutedUICommand x:Key="Command.MoveUp" Text="S.Command.MoveUp">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Alt + Up</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.MoveDown" Text="S.Command.MoveDown">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Alt + Down</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.Add" Text="S.Command.Add">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + N</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.Open" Text="S.Command.Open">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + O</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.Edit" Text="S.Command.Edit">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + E</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+    
+    <RoutedUICommand x:Key="Command.Save" Text="S.Command.Save">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + S</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.Remove" Text="S.Command.Remove">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Delete</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.Exit" Text="S.Command.Exit">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Alt + F4</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.EnableSnapshot" Text="S.Command.EnableSnapshot"/>
+    <RoutedUICommand x:Key="Command.EnableThinMode" Text="S.Command.EnableThinMode"/>
+</ResourceDictionary>

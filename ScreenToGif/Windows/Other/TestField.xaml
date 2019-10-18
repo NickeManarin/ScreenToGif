@@ -11,10 +11,8 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -30,6 +28,12 @@
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
         </Grid.Resources>-->
+
+        <!--<Button Grid.Column="1" Grid.Row="1" Content="Text">
+            <Button.Effect>
+                <DropShadowEffect RenderingBias="Quality" Direction="270" BlurRadius="20" Color="#00FF0000" Opacity="1" ShadowDepth="5"/>
+            </Button.Effect>
+        </Button>-->
 
         <!--<Button Grid.Row="0" Grid.Column="0" Content="Select" Click="Select_Click"/>
         <Button Grid.Row="0" Grid.Column="1" Content="Shape" Click="Shape_Click"/>
@@ -48,7 +52,9 @@
         </n:MoveResizeControl>-->
 
         <!--<n:DrawingCanvas Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" x:Name="MainDrawingCanvas" DrawingMode="Select">
-            --><!--<h:Triangle x:Name="TestTriangle" Height="100" Width="100" Stroke="Black" StrokeThickness="5" Canvas.Left="100" Canvas.Top="100"/>--><!--
+            -->
+        <!--<h:Triangle x:Name="TestTriangle" Height="100" Width="100" Stroke="Black" StrokeThickness="5" Canvas.Left="100" Canvas.Top="100"/>-->
+        <!--
         </n:DrawingCanvas>-->
 
         <!--<Viewbox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">

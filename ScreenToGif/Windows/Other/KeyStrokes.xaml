@@ -31,7 +31,8 @@
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <DockPanel>
-                                            <n:KeyBox x:Name="KeyBox" MainKey="{Binding Key, Mode=TwoWay}" ModifierKeys="{Binding Modifiers, Mode=TwoWay}" AllowAllKeys="True" CanRemove="False" Margin="1,1,0,1" Padding="0"/>
+                                            <n:KeyBox x:Name="KeyBox" MainKey="{Binding Key, Mode=TwoWay}" ModifierKeys="{Binding Modifiers, Mode=TwoWay}" Margin="1,1,0,1" Padding="0" 
+                                                      AllowAllKeys="True" CanRemove="False" IsSingleLetterLowerCase="{Binding IsUppercase, Mode=TwoWay, Converter={StaticResource InvertedBool}}"/>
 
                                             <n:ImageButton DockPanel.Dock="Right" x:Name="RemoveButton" Content="{StaticResource Vector.Close}" Style="{StaticResource Style.Button.NoText.Border}" 
                                                            ContentWidth="12" Width="16" Margin="0,1,1,1" BorderThickness="0,1,1,1" Height="23" ToolTip="{DynamicResource KeyStrokes.Edit.Remove}"
@@ -63,8 +64,8 @@
                         <Viewbox Child="{StaticResource Vector.Arrow.Blue.Top}" Margin="5,0"/>
 
                         <TextBlock Grid.Column="1" Text="{DynamicResource KeyStrokes.Edit.Add}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" Margin="2,3,5,3"/>
-                        
-                        <n:KeyBox Grid.Column="2" x:Name="AddKeyBox" MinWidth="100" AllowAllKeys="True" CanRemove="False"/>
+
+                        <n:KeyBox Grid.Column="2" x:Name="AddKeyBox" MinWidth="100" AllowAllKeys="True" CanRemove="False" IsSingleLetterLowerCase="{Binding ElementName=LowercaseCheckBox, Path=IsChecked}"/>
 
                         <n:ImageButton Grid.Column="3" x:Name="AddButton" Text="{DynamicResource S.Add}" Content="{StaticResource Vector.Add}" ContentHeight="14" Height="23" Padding="5,0" Margin="5,3"
                                        Click="AddButton_Click"/>
@@ -92,6 +93,9 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
+
+            <n:ExtendedCheckBox Grid.Column="0" x:Name="LowercaseCheckBox" Text="{DynamicResource KeyStrokes.Edit.Lower}" Margin="3,0" HorizontalAlignment="Center"
+                                ToolTip="{DynamicResource KeyStrokes.Edit.Lower.Info}"/>
 
             <n:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource Ok}" Margin="5" Content="{StaticResource Vector.Ok}" IsDefault="True" MaxSize="15"
                            HorizontalAlignment="Right" MinWidth="100" MinHeight="27" VerticalAlignment="Bottom" Click="OkButton_Click"/>

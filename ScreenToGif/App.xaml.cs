@@ -93,7 +93,15 @@ namespace ScreenToGif
             NotifyIcon = (NotifyIcon)FindResource("NotifyIcon");
 
             if (NotifyIcon != null)
+            {
                 NotifyIcon.Visibility = UserSettings.All.ShowNotificationIcon || UserSettings.All.StartUp == 5 ? Visibility.Visible : Visibility.Collapsed;
+
+                //using (var iconStream = GetResourceStream(new Uri("pack://application:,,,/Resources/Logo.ico"))?.Stream)
+                //{
+                //    if (iconStream != null)
+                //        NotifyIcon.Icon = new System.Drawing.Icon(iconStream);
+                //}
+            }
 
             MainViewModel = (ApplicationViewModel)FindResource("AppViewModel") ?? new ApplicationViewModel();
 

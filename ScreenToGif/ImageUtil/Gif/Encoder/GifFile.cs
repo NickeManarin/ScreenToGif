@@ -82,6 +82,16 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
         /// </summary>
         private int ColorTableSize { get; set; }
 
+        /// <summary>
+        /// Cumulative non adjusted time.
+        /// </summary>
+        private int OrganicTime { get; set; }
+        
+        /// <summary>
+        /// Adjusted and rounded off time.
+        /// </summary>
+        private int AdjustedTime { get; set; }
+
         #endregion
 
         public GifFile(Stream stream, Color? transparent, int repeatCount = 0)
@@ -262,7 +272,14 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
 
             //Write the packed fields.
             WriteByte(ConvertToByte(bitArray));
-            WriteShort((int)Math.Round(delay / 10.0f, MidpointRounding.AwayFromZero)); //Delay x 1/100 seconds. Minimum of 10ms. Centiseconds.
+
+            //Calculates the delay, taking into consideration overall rounding.
+            OrganicTime += delay;
+            delay = (int)Math.Round((OrganicTime > delay ? OrganicTime - AdjustedTime * 10 : delay) / 10.0f, MidpointRounding.AwayFromZero);
+            AdjustedTime += delay;
+            //WriteShort((int)Math.Round(delay / 10.0f, MidpointRounding.AwayFromZero));
+
+            WriteShort(delay);
             WriteByte(FindTransparentColorIndex()); //Transparency Index.
             WriteByte(0); //Terminator.
         }
