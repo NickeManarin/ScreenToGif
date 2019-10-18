@@ -62,13 +62,19 @@
     <s:String x:Key="S.Command.Play">Animation abspielen</s:String>
     <s:String x:Key="S.Command.NextFrame">Nächsten Frame auswählen</s:String>
     <s:String x:Key="S.Command.LastFrame">Letzten Frame auswählen</s:String>
+    <s:String x:Key="S.Command.Undo">Rückgängig</s:String>
+    <s:String x:Key="S.Command.Redo">Wiederherstellen</s:String>
     <s:String x:Key="S.Command.Reset">Alle Änderungen im Projekt rückgängig machen</s:String>
+    <s:String x:Key="S.Command.Copy">Ausgewählte Frames kopieren und in Zwischenablage speichern</s:String>
+    <s:String x:Key="S.Command.Cut">Ausgewählte Frames ausschneiden und in Zwischenablage speichern</s:String>
+    <s:String x:Key="S.Command.Paste">Frames aus Zwischenablage hinzufügen</s:String>
+    <s:String x:Key="S.Command.Delete">Alle ausgewählten Frames löschen</s:String>
     <s:String x:Key="S.Command.DeletePrevious">Alle vorherigen Frames löschen</s:String>
     <s:String x:Key="S.Command.DeleteNext">Alle darauf folgenden Frames löschen</s:String>
     <s:String x:Key="S.Command.RemoveDuplicates">Duplikate entfernen</s:String>
     <s:String x:Key="S.Command.Reduce">Bildwiederholungsrate reduzieren</s:String>
     <s:String x:Key="S.Command.Reverse">Animation rückwärts abspielen</s:String>
-    <s:String x:Key="S.Command.Yoyo">Jo-Jo-Effekt spielt Animation vorwärts bis zum Ende und dann rückwärts ab</s:String>
+    <s:String x:Key="S.Command.Yoyo">Animation vorwärts bis zum Ende und dann rückwärts abspielen</s:String>
     <s:String x:Key="S.Command.MoveLeft">Ausgewählten Frame nach links verschieben</s:String>
     <s:String x:Key="S.Command.MoveRight">Ausgewählten Frame nach rechts verschieben</s:String>
     <s:String x:Key="S.Command.Resize">Alle Frames vergrößern</s:String>
@@ -77,14 +83,15 @@
     <s:String x:Key="S.Command.Caption">Überschrift hinzufügen</s:String>
     <s:String x:Key="S.Command.FreeText">Frei schwebenden Text hinzufügen</s:String>
     <s:String x:Key="S.Command.TitleFrame">Frame mit Titel hinzufügen</s:String>
-    <s:String x:Key="S.Command.KeyStrokes">Tastatureingabe: Tastenschläge werden während der Aufnahme hinzugefügt</s:String>
+    <s:String x:Key="S.Command.KeyStrokes">Tastenschläge während der Aufnahme hinzufügen</s:String>
     <s:String x:Key="S.Command.FreeDrawing">Freie Zeichnungen erstellen</s:String>
     <s:String x:Key="S.Command.Shapes">Formen hinzufügen</s:String>
     <s:String x:Key="S.Command.MouseClicks">Mausklicks</s:String>
     <s:String x:Key="S.Command.Watermark">Bild auswählen und als Wasserzeichen hinzufügen</s:String>
     <s:String x:Key="S.Command.Border">Ränder hinzufügen</s:String>
     <s:String x:Key="S.Command.Shadow">Schatten hinzufügen</s:String>
-    <s:String x:Key="S.Command.Obfuscate">In Pixel auflösen: sensible Bildbereiche unkenntlich machen</s:String>
+    <s:String x:Key="S.Command.Obfuscate">Sensible Bildbereiche unkenntlich machen</s:String>
+    <s:String x:Key="S.Command.Cinemagraph">Ausgewählte Bereiche in Animation als Bewegung festhalten</s:String>
     <s:String x:Key="S.Command.Progress">Fortschritt-Balken oder Text mit Wiedergabe-Details</s:String>
     <s:String x:Key="S.Command.SelectAll">Alle Frames auswählen</s:String>
     <s:String x:Key="S.Command.GoTo">Zu Frame durch Index-Eingabe navigieren</s:String>
@@ -162,11 +169,11 @@
     <s:String x:Key="Application.ScreenRecorder.NewRecorder">Neue Aufnahme-Benutzeroberfläche aktivieren</s:String>
     <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(Bisherige Aufnahme-Benutzeroberfläche wird ersetzt)</s:String>
     <s:String x:Key="Application.ScreenRecorder.Magnifier">Bildschirmlupe aktivieren</s:String>
-    <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(Aktiviert Bildschirmlupe während der Auswahl des Aufnahmebereichs)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(Aktiviert Bildschirmlupe während der Auswahl des Aufnahme-Bereichs)</s:String>
     <s:String x:Key="Application.ScreenRecorder.CursorFollowing">Mauszeiger-Verfolgung aktivieren</s:String>
-    <s:String x:Key="Application.ScreenRecorder.CursorFollowing.Info">(Aufnahme-Bereich folgt der Mauszeiger-Position)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FollowMargin.Info">(Sicherheitsabstand bei Änderung der Position des Aufnahme-Bereichs)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FollowMarginInvisible.Info">(Zusätzlicher Sicherheitsabstand falls die Benutzeroberfläche unsichtbar wird)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.CursorFollowing.Info">(Aufnahme-Bereich folgt Mauszeiger)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.FollowMargin.Info">(Sicherheitsabstand (in Pixeln) bei Bewegungen des Aufnahme-Bereichs)</s:String>
+    <s:String x:Key="Application.ScreenRecorder.FollowMarginInvisible.Info">(Zusätzlicher Sicherheitsabstand (in Pixeln) falls die Aufnahme-Benutzeroberfläche unsichtbar wird)</s:String>
 
     <s:String x:Key="Application.Other">Sonstiges</s:String>
     <s:String x:Key="Application.Other.SystemTray">Programm-Symbol im Infobereich der Taskleiste anzeigen</s:String>
@@ -255,9 +262,9 @@
     <s:String x:Key="S.Shortcuts.Recorders.Discard">Verwerfen:</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.Discard.Info">(Löscht aktuelle Aufnahme, wenn sie unterbrochen wurde)</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.Follow">Mauszeiger-Verfolgung:</s:String>
-    <s:String x:Key="S.Shortcuts.Recorders.Follow.Info">(Schaltet Ausrichtung des Aufnahme-Bereichs anhand der Mauszeiger-Position um)</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.Follow.Info">(Schaltet das Nachziehen des Aufnahme-Bereichs gemäß der Mauszeiger-Position ein und aus)</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.DisableFollow">Mauszeiger-Verfolgung deaktivieren:</s:String>
-    <s:String x:Key="S.Shortcuts.Recorders.DisableFollow.Info">Schaltet vorläufig Ausrichtung des Aufnahme-Bereichs ab, nur Zusatztasten sind erlaubt</s:String>
+    <s:String x:Key="S.Shortcuts.Recorders.DisableFollow.Info">(Schaltet vorläufig das Nachziehen des Aufnahme-Bereichs ab, nur Zusatztasten sind hier erlaubt - Strg, Umschalt, Alt, Windows)</s:String>
     <s:String x:Key="S.Shortcuts.Info">Betätigen Sie eine Taste, damit Tastatureingabe im Fokus steht.&#x0a;Anschließend drücken Sie gewünschte Tastenkombination.&#x0a;Einige Tastenkombinationen sind nicht zulässig.</s:String>
     
     <s:String x:Key="Language.AppLanguage">Sprache</s:String>
@@ -357,7 +364,7 @@
     <s:String x:Key="Donate.Donate">spenden</s:String>
     <s:String x:Key="Donate.Paypal.Dollar">Öffnet Paypal Webseite. Gewählte Währung: US Dollar</s:String>
     <s:String x:Key="Donate.Paypal.Euro">Öffnet Paypal Website. Gewählte Währung: Euro</s:String>
-    <s:String x:Key="Donate.Paypal.OwnCurrency">Öffnet Paypal Webseite. Sie müssen die Währung auswählen.</s:String>
+    <s:String x:Key="Donate.Paypal.OwnCurrency">Öffnet Paypal Webseite. Sie müssen Währung auswählen.</s:String>
     <s:String x:Key="Donate.Patreon">Hier klicken, um meine Patreon-Seite zu öffnen.</s:String>
     <s:String x:Key="Donate.Steam.Link">Hier klicken, um meine Steam-Wishlist zu öffnen.</s:String>
     <s:String x:Key="Donate.Steam.Text">Sie können Spiele als Geschenk schicken.</s:String>
@@ -441,7 +448,7 @@
     <s:String x:Key="ColorSelector.Initial">Anfangsfarbe</s:String>
     <s:String x:Key="ColorSelector.Current">Aktuelle Farbe</s:String>
     <s:String x:Key="ColorSelector.Latest">Letzte Farbe</s:String>
-    <s:String x:Key="ColorSelector.Sample">Farbpipette verwenden</s:String>
+    <s:String x:Key="ColorSelector.Sample">Farbpipette</s:String>
     <s:String x:Key="ColorSelector.Sample.Info">Durch Klicken und Ziehen Farben&#x0d; auf dem Bildschirm auswählen</s:String>
     
     <!--Exception Viewer, Optional-->
@@ -668,7 +675,7 @@
     <s:String x:Key="Editor.Statistics.FrameSize">Abmessungen:</s:String>
     <s:String x:Key="Editor.Statistics.AverageDuration">Durchschnittliche Framelänge:</s:String>
     <s:String x:Key="Editor.Statistics.CurrentTime">Aktuelle Zeit:</s:String>
-    <s:String x:Key="Editor.Statistics.CurrentTime.Info">Berechnet anhand des gerade angezeigten Frames</s:String>
+    <s:String x:Key="Editor.Statistics.CurrentTime.Info">Wird anhand des gerade angezeigten Frames berechnet</s:String>
     <s:String x:Key="Editor.Statistics.FrameDpi">Frame-dpi und Skalierung:</s:String>
     <s:String x:Key="Editor.Statistics.SelectedFrame">Aktueller Frame</s:String>
     
@@ -1142,7 +1149,7 @@
     <s:String x:Key="S.Troubleshoot.Windows.Next">Positionen aller Fenster beim nächsten Öffnen:</s:String>
     <s:String x:Key="S.Troubleshoot.Windows.BringBack">Alle Fenster zum Hauptmonitor verschieben</s:String>
     <s:String x:Key="S.Troubleshoot.Windows.Reset">Positionen aller Fenster zurücksetzen</s:String>
-  
+    
     <!--FontStyles-->
     <s:String x:Key="S.FontStyles.Normal">Normal</s:String>
     <s:String x:Key="S.FontStyles.Italic">Kursiv</s:String>
