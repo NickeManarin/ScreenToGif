@@ -45,8 +45,6 @@ namespace ScreenToGif.Controls
 
         private Image InkingImage { get; }
 
-        private double _prevHeight;
-        private double _prevWidth;
         /// <summary>
         /// Updates the inking overlay from the real-time inking thread
         /// </summary>
