@@ -1504,6 +1504,43 @@ namespace ScreenToGif.ImageUtil
             }
         }
 
+        /// <summary>
+        /// Visits all the descendents of the visual using DFS and adds frozen copies 
+        /// of their drawing objects as children to the drawingGroup argument.
+        /// </summary>
+        /// <param name="visual">The visual to convert to a DrawingGroup</param>
+        /// <param name="drawingGroup">The target DrawingGroup to be populated</param>
+        static public void visualToFrozenDrawingGroup(this Visual visual, DrawingGroup drawingGroup)
+        {
+            if (visual == null)
+            {
+                return;
+            }
+            Queue<Visual> visualQueue = new Queue<Visual>(new[] { visual });
+            while (visualQueue.Count > 0)
+            {
+                Visual visualDescendent = visualQueue.Dequeue();
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(visualDescendent); i++)
+                {
+                    visualQueue.Enqueue(VisualTreeHelper.GetChild(visualDescendent, i) as Visual);
+                }
+                DrawingGroup vdg = VisualTreeHelper.GetDrawing(visualDescendent);
+                if (vdg != null)
+                {
+                    drawingGroup.Children.Add(vdg.GetAsFrozen() as DrawingGroup);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets a DrawingGroup  with frozen copies of all the visual's descendent DrawingGroups
+        /// </summary>
+        static public DrawingGroup visualToFrozenDrawingGroup(this Visual visual)
+        {
+            DrawingGroup dg = new DrawingGroup();
+            visual.visualToFrozenDrawingGroup(dg);
+            return dg;
+        }
         #endregion
     }
 }

@@ -3,7 +3,9 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using ScreenToGif.ImageUtil;
@@ -51,7 +53,7 @@ namespace ScreenToGif.Windows
 
         #endregion
 
-        #region Inicialization
+        #region Initialization
 
         public Board(bool hideBackButton = true)
         {
@@ -371,6 +373,9 @@ namespace ScreenToGif.Windows
         private void Normal_Elapsed(object sender, EventArgs e)
         {
             var fileName = $"{Project.FullPath}{FrameCount}.png";
+            
+            // We call this only when we do a capture for efficiency's sake.
+            MainInkCanvas.UpdateInkOverlay();
 
             //TODO: GetRender fails to create useful image when the control has decimals values as size.
 
