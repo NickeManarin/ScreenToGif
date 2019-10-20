@@ -403,6 +403,8 @@ namespace ScreenToGif.Windows
 
         private void DiscardButton_Click(object sender, RoutedEventArgs e)
         {
+            MainInkCanvas.ResetInkOverlay();
+
             _capture.Stop();
             FrameRate.Stop();
             FrameCount = 0;
