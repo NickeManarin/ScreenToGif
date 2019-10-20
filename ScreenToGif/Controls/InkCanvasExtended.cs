@@ -16,6 +16,9 @@ namespace ScreenToGif.Controls
     /// </summary>
     public class InkCanvasExtended : InkCanvas
     {
+        /// <summary>
+        /// Base Constructor pluse creation of the Inking Overlay
+        /// </summary>
         public InkCanvasExtended()
             : base()
         {
@@ -43,7 +46,18 @@ namespace ScreenToGif.Controls
         public static readonly DependencyProperty EraserShapeProperty = DependencyProperty.Register("EraserShape", typeof (StylusShape), typeof (InkCanvasExtended), 
             new UIPropertyMetadata(new RectangleStylusShape(10, 10), OnEraserShapePropertyChanged));
 
+        /// <summary>
+        /// Overlay Image that receives DrawingGroup contents from the real-time inking thread upon UpdateInkOverlay()
+        /// </summary>
         private Image InkingImage { get; }
+
+        /// <summary>
+        /// Re-initializes InkingImage (the overlay that receives DrawingGroups from the inking thread)
+        /// </summary>
+        public void ResetInkOverlay()
+        {
+            InkingImage.Source = new DrawingImage(new DrawingGroup());
+        }
 
         /// <summary>
         /// Updates the inking overlay from the real-time inking thread
@@ -55,12 +69,12 @@ namespace ScreenToGif.Controls
             // momentarily when adjusting the margins later on. 
             // Also good for when returning when no inking exists, but could do immediately
             // before the return in that case.
-            InkingImage.Source = new DrawingImage(new DrawingGroup());
+            ResetInkOverlay();
 
             // The following two HostVisuals are children of the _mainContainerVisual in this thread,
             // and these won't normally get composed into the UI thread from the inking thread's
             // element tree until a stroke is complete.
-            var myArgs = new[]
+            var rawInkHostVisuals = new[]
             {
                 typeof(DynamicRenderer).GetField("_rawInkHostVisual1", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(this.DynamicRenderer ),
                 typeof(DynamicRenderer).GetField("_rawInkHostVisual2", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(this.DynamicRenderer )
@@ -78,7 +92,7 @@ namespace ScreenToGif.Controls
 
             // The ThreadDispatcher derives from System.Windows.Threading.Dispatcher, 
             // which is a little simpler than using more reflection to get the derived type.
-            System.Windows.Threading.Dispatcher lDispatcher = lDynamicDispProperty.GetValue(lRenderingThread, null) as System.Windows.Threading.Dispatcher;
+            Dispatcher dispatcher = lDynamicDispProperty.GetValue(lRenderingThread, null) as Dispatcher;
             if (lRenderingThread == null)
             {
                 return;
@@ -87,27 +101,27 @@ namespace ScreenToGif.Controls
             // We invoke the inking thread to get the visual targets from the real time host visuals, then
             // use BFS to grab all the DrawingGroups as frozen into a new DrawingGroup, which we return
             // as frozen to the UI thread.
-            DrawingGroup inkDrawingGroup = lDispatcher.Invoke(DispatcherPriority.Send,
-                (DispatcherOperationCallback)delegate (object args)
+            DrawingGroup inkDrawingGroup = dispatcher.Invoke(DispatcherPriority.Send,
+                (DispatcherOperationCallback)delegate (object rawInkHVs)
                 {
                     // We've got the field references from the other thread now, so we just get their
                     // VisualTarget properties, which is where we'll make a magical RootVisual call.
-                    object[] lObjects = args as object[];
-                    PropertyInfo lVtProperty = lObjects[0].GetType().GetProperty("VisualTarget", BindingFlags.Instance |
+                    object[] lObjects = rawInkHVs as object[];
+                    PropertyInfo vtProperty = lObjects[0].GetType().GetProperty("VisualTarget", BindingFlags.Instance |
                         BindingFlags.NonPublic |
                         BindingFlags.Public);
-                    VisualTarget VisualTarget1 = lVtProperty.GetValue(lObjects[0], null) as VisualTarget;
-                    VisualTarget VisualTarget2 = lVtProperty.GetValue(lObjects[1], null) as VisualTarget;
+                    VisualTarget visualTarget1 = vtProperty.GetValue(lObjects[0], null) as VisualTarget;
+                    VisualTarget visualTarget2 = vtProperty.GetValue(lObjects[1], null) as VisualTarget;
 
                     // The RootVisual builds the visual when property get is called. We then
                     // all all its descendent DrawingGroups to this DrawingGroup that we are
                     // just using as a collection to return from the thread.
                     DrawingGroup drawingGroups = new DrawingGroup();
-                    VisualTarget1?.RootVisual?.visualToFrozenDrawingGroup(drawingGroups);
-                    VisualTarget1?.RootVisual?.visualToFrozenDrawingGroup(drawingGroups);
+                    visualTarget1?.RootVisual?.visualToFrozenDrawingGroup(drawingGroups);
+                    visualTarget2?.RootVisual?.visualToFrozenDrawingGroup(drawingGroups);
                     return drawingGroups.GetAsFrozen();
                 },
-                myArgs) as DrawingGroup;
+                rawInkHostVisuals) as DrawingGroup;
 
 
             // This is a little jenky, but we need to set the image margins otherwise 

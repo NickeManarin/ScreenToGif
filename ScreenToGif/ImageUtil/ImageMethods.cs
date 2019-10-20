@@ -1531,16 +1531,6 @@ namespace ScreenToGif.ImageUtil
                 }
             }
         }
-
-        /// <summary>
-        /// Gets a DrawingGroup  with frozen copies of all the visual's descendent DrawingGroups
-        /// </summary>
-        static public DrawingGroup visualToFrozenDrawingGroup(this Visual visual)
-        {
-            DrawingGroup dg = new DrawingGroup();
-            visual.visualToFrozenDrawingGroup(dg);
-            return dg;
-        }
         #endregion
     }
 }
