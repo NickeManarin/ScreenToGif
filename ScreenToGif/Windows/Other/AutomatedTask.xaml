@@ -56,8 +56,8 @@
                 
                 <m:DefaultTaskModel Image="Vector.Info"/>
                 <m:MouseClicksModel Image="Vector.Cursor"/>
-                <m:DelayModel Image="Vector.Clock"/>
                 <m:KeyStrokesModel Image="Vector.Keyboard"/>
+                <m:DelayModel Image="Vector.Clock"/>
                 <m:ProgressModel Image="Vector.Progress"/>
                 <m:BorderModel Image="Vector.Border"/>
                 <m:ShadowModel Image="Vector.Shadow"/>

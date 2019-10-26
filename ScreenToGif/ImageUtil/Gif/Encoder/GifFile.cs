@@ -273,13 +273,13 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
             //Write the packed fields.
             WriteByte(ConvertToByte(bitArray));
 
-            //Calculates the delay, taking into consideration overall rounding.
-            OrganicTime += delay;
-            delay = (int)Math.Round((OrganicTime > delay ? OrganicTime - AdjustedTime * 10 : delay) / 10.0f, MidpointRounding.AwayFromZero);
-            AdjustedTime += delay;
-            //WriteShort((int)Math.Round(delay / 10.0f, MidpointRounding.AwayFromZero));
+            //Calculates the delay, taking into consideration overall rounding. Bug!
+            //OrganicTime += delay;
+            //delay = (int)Math.Round((OrganicTime > delay ? OrganicTime - AdjustedTime * 10 : delay) / 10.0f, MidpointRounding.AwayFromZero);
+            //AdjustedTime += delay;
+            //WriteShort(delay);
 
-            WriteShort(delay);
+            WriteShort((int)Math.Round(delay / 10.0f, MidpointRounding.AwayFromZero));
             WriteByte(FindTransparentColorIndex()); //Transparency Index.
             WriteByte(0); //Terminator.
         }

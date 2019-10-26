@@ -5,14 +5,14 @@ This is the current project of ScreenToGif.
 _VS 2019 and .Net 4.6.1 or newer required._
 
 
-## What's new? (Version 2.19.2)
+## What's new? (Version 2.19.3)
 
-• German, Korean, Polish, Sweedish, and Russian translations were updated.
+• German translation was updated.
 
 ### Fixed:
 
-♦ For some users, a crash was happening when trying to use Caption or KeyStrokes features.    
-♦ Some tooltips were not translatable.  
+♦ The KeyStrokes and MouseClicks tasks were not in the correct place when adding a new task.  
+♦ The gif encoders had an issue with the timings of the frames.  
 
 ### Known Bugs:
 

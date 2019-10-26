@@ -112,6 +112,7 @@ namespace ScreenToGif
             //var select = new SelectFolderDialog(); select.ShowDialog(); return;
             //var select = new TestField(); select.ShowDialog(); return;
             //var select = new Encoder(); select.ShowDialog(); return;
+            //var select = new EditorEx(); select.ShowDialog(); return;
 
             #region Tasks
 

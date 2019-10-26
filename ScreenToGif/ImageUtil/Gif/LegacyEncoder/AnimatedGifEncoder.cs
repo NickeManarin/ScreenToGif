@@ -137,12 +137,12 @@ namespace ScreenToGif.ImageUtil.Gif.LegacyEncoder
         /// <param name="delay">Delay time in milliseconds</param>
         public void SetDelay(int delay)
         {
-            //Calculates the delay, taking into consideration overall rounding.
-            _organicTime += delay;
-            _delay = (int)Math.Round((_organicTime > delay ? _organicTime - _adjustedTime * 10 : delay) / 10.0f, MidpointRounding.AwayFromZero);
-            _adjustedTime += _delay;
+            //Calculates the delay, taking into consideration overall rounding. Bug!
+            //_organicTime += delay;
+            //_delay = (int)Math.Round((_organicTime > delay ? _organicTime - _adjustedTime * 10 : delay) / 10.0f, MidpointRounding.AwayFromZero);
+            //_adjustedTime += _delay;
 
-            //_delay = (int)Math.Round(delay / 10.0f, MidpointRounding.AwayFromZero);
+            _delay = (int)Math.Round(delay / 10.0f, MidpointRounding.AwayFromZero);
         }
 
         /// <summary>
