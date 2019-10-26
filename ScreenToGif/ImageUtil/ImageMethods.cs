@@ -1510,7 +1510,7 @@ namespace ScreenToGif.ImageUtil
         /// </summary>
         /// <param name="visual">The visual to convert to a DrawingGroup</param>
         /// <param name="drawingGroup">The target DrawingGroup to be populated</param>
-        public static void visualToFrozenDrawingGroup(this Visual visual, DrawingGroup drawingGroup)
+        public static void VisualToFrozenDrawingGroup(this Visual visual, DrawingGroup drawingGroup)
         {
             if (visual == null)
             {
