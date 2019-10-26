@@ -59,7 +59,7 @@ namespace ScreenToGif.Controls
             new GeometryDrawing(
                 new SolidColorBrush(Color.FromArgb(0, 255, 255, 255)),
                 new Pen(Brushes.White, 0.1),
-                new EllipseGeometry(new Point(0, 0), 0.1, 0.1)
+                new LineGeometry(new Point(0, 0), new Point(0.1,0.1))
             ).GetAsFrozen() as GeometryDrawing;
 
         /// <summary>
