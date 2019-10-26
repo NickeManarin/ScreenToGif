@@ -31,6 +31,7 @@ namespace ScreenToGif.Controls
             // element and once its stroke is brought over to the UI thread it will
             // be in front of previous strokes. 
             Canvas.SetZIndex(InkingImage, 99);
+            
         }
         /// <summary>
         /// Gets or set the eraser shape
@@ -50,6 +51,16 @@ namespace ScreenToGif.Controls
         /// Overlay Image that receives DrawingGroup contents from the real-time inking thread upon UpdateInkOverlay()
         /// </summary>
         private Image InkingImage { get; }
+
+        /// <summary>
+        /// Tiny transparent corner point to prevent whitespace before DrawingGroup.TopLeft being cropped by Image control
+        /// </summary>
+        private readonly GeometryDrawing TransparentCornerPoint =
+            new GeometryDrawing(
+                new SolidColorBrush(Color.FromArgb(0, 255, 255, 255)),
+                new Pen(Brushes.White, 0.1),
+                new EllipseGeometry(new Point(0, 0), 0.1, 0.1)
+            ).GetAsFrozen() as GeometryDrawing;
 
         /// <summary>
         /// Re-initializes InkingImage (the overlay that receives DrawingGroups from the inking thread)
@@ -117,27 +128,19 @@ namespace ScreenToGif.Controls
                     // all all its descendent DrawingGroups to this DrawingGroup that we are
                     // just using as a collection to return from the thread.
                     DrawingGroup drawingGroups = new DrawingGroup();
+
+                    // This is a little jenky:
+                    // We add a point in the top left so the DrawingGroup will be 
+                    // appropriately offset from the top left of the Image container.
+                    drawingGroups.Children.Add(TransparentCornerPoint);
+
+                    // We try to add both the visualTagets (in case both are active)
                     visualTarget1?.RootVisual?.visualToFrozenDrawingGroup(drawingGroups);
                     visualTarget2?.RootVisual?.visualToFrozenDrawingGroup(drawingGroups);
+
                     return drawingGroups.GetAsFrozen();
                 },
                 rawInkHostVisuals) as DrawingGroup;
-
-
-            // This is a little jenky, but we need to set the image margins otherwise 
-            // the drawing content will be cropped and aligned top-left despite inking 
-            // very far from origin. Because we set image to an empty drawingImage 
-            // earlier, we don't need to worry about things visibly jumping on screen.
-            // Important note: Negatives are okay. If we set X,Y = (0,0), then the 
-            // DrawingGroup.Bounds.TopLeft = (-3,0) [because user inked off the canvas
-            // for instance], then the point starting at (-3,0) will be shifted to (0,0)
-            // and our entire drawing will be moved over by 3 pixels, so here we just 
-            // set the margin to whatever *negative* number the TopLeft has in that case,
-            // and we care only about going over the actual width/height (e.g. infinity)
-            var bounds = inkDrawingGroup.Bounds.TopLeft;
-            var w = System.Math.Min(bounds.X, this.ActualWidth);
-            var h = System.Math.Min(bounds.Y, this.ActualHeight);
-            InkingImage.Margin = new System.Windows.Thickness(w, h, 0, 0);
 
             // At this point, just update the image source with the drawing image.
             InkingImage.Source = new DrawingImage(inkDrawingGroup);
