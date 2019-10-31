@@ -62,7 +62,13 @@
     <s:String x:Key="S.Command.Play">Воспроизвести анимацию</s:String>
     <s:String x:Key="S.Command.NextFrame">Выбрать следующий кадр</s:String>
     <s:String x:Key="S.Command.LastFrame">Выбрать последний кадр</s:String>
+    <s:String x:Key="S.Command.Undo">Отменить</s:String>
+    <s:String x:Key="S.Command.Redo">Вернуть</s:String>
     <s:String x:Key="S.Command.Reset">Отменить все изменения в проекте</s:String>
+    <s:String x:Key="S.Command.Copy">Копировать выбранные кадры в буфер обмена</s:String>
+    <s:String x:Key="S.Command.Cut">Вырезать выбранные кадры в буфер обмена</s:String>
+    <s:String x:Key="S.Command.Paste">Вставить кадры из буфера обмена</s:String>
+    <s:String x:Key="S.Command.Delete">Удалить выбранные кадры</s:String>
     <s:String x:Key="S.Command.DeletePrevious">Удалить все предыдущие кадры</s:String>
     <s:String x:Key="S.Command.DeleteNext">Удалить все следующие кадры</s:String>
     <s:String x:Key="S.Command.RemoveDuplicates">Удалить дубликаты</s:String>
@@ -85,6 +91,7 @@
     <s:String x:Key="S.Command.Border">Добавить границы</s:String>
     <s:String x:Key="S.Command.Shadow">Добавить тень</s:String>
     <s:String x:Key="S.Command.Obfuscate">Пикселизация: скрыть нежелательные части кадров</s:String>
+    <s:String x:Key="S.Command.Cinemagraph">Используйте инструменты рисования, чтобы выбрать, какие части кадра не должны оставаться статичными на протяжении всей анимации</s:String>
     <s:String x:Key="S.Command.Progress">Прогресс бар или текст с деталями воспроизведения</s:String>
     <s:String x:Key="S.Command.SelectAll">Выбрать все кадры</s:String>
     <s:String x:Key="S.Command.GoTo">Переход к кадру по индексу</s:String>
@@ -100,7 +107,6 @@
     <s:String x:Key="S.Command.Edit">Изменить выбранный элемент</s:String>
     <s:String x:Key="S.Command.Save">Сохранить выбранный элемент</s:String>
     <s:String x:Key="S.Command.Remove">Удалить выбранный элемент</s:String>
-    <s:String x:Key="S.Command.Cinemagraph">Выбор нестатичных областей</s:String>
     
     <!--StartUp Page-->
     <s:String x:Key="Title.StartUp">Screen To Gif - Запуск</s:String>
@@ -485,7 +491,7 @@
     <s:String x:Key="ImportVideo.Height">Высота:</s:String>
     <s:String x:Key="ImportVideo.Width">Ширина:</s:String>
     <s:String x:Key="ImportVideo.Framerate">Частота кадров:</s:String>
-    <s:String x:Key="ImportVideo.Fps">fps</s:String>
+    <s:String x:Key="ImportVideo.Fps">FPS</s:String>
     <s:String x:Key="ImportVideo.Start">Старт:</s:String>
     <s:String x:Key="ImportVideo.End">Конец:</s:String>
     <s:String x:Key="ImportVideo.Selection">Выделение:</s:String>
@@ -1167,13 +1173,13 @@
     <s:String x:Key="S.FontWeights.UltraBold">Сверх-полужирный</s:String>
     <s:String x:Key="S.FontWeights.UltraLight">Сверх-светлый</s:String>
     
-     <!--VerticalAligment-->
+    <!--VerticalAligment-->
     <s:String x:Key="S.VerticalAlignment.Top">Сверху</s:String>
     <s:String x:Key="S.VerticalAlignment.Center">По центру</s:String>
     <s:String x:Key="S.VerticalAlignment.Bottom">Снизу</s:String>
     <s:String x:Key="S.Alignment.Stretch">Растянуть</s:String>
 
-     <!--HorizontalAlignment-->
+    <!--HorizontalAlignment-->
     <s:String x:Key="S.HorizontalAlignment.Left">Слева</s:String>
     <s:String x:Key="S.HorizontalAlignment.Center">По центру</s:String>
     <s:String x:Key="S.HorizontalAlignment.Right">Справа</s:String>
