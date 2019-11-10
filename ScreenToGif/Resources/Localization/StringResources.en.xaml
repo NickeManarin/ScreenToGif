@@ -140,6 +140,7 @@
     <!--Options Window-->
     <s:String x:Key="Title.Options">ScreenToGif - Options</s:String>
     <s:String x:Key="Application">Application</s:String>
+    <s:String x:Key="S.Options.Recorder">Recorder</s:String>
     <s:String x:Key="Interface">Interface</s:String>
     <s:String x:Key="S.AutoTasks">Automated Tasks</s:String>
     <s:String x:Key="S.Shortcuts">Shortcuts</s:String>
@@ -153,28 +154,45 @@
     
     <s:String x:Key="S.Options.Warning.Follow.Header">Missing shortcut key for cursor following</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Message">In order to use the mouse cursor following feature, you must set a shortcut key to toggle it when needed.</s:String>
+    <s:String x:Key="S.Options.Warning.DesktopDuplication.Header">Missing dependencies for screen capture</s:String>
+    <s:String x:Key="S.Options.Warning.DesktopDuplication.Message">In order to capture the screen with the Desktop Duplication API, you must download the SharpDx libraries.</s:String>
     
-    <s:String x:Key="Application.ScreenRecorder">Screen Recorder</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordMouse">Show the mouse cursor in the recording.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordClicks">Detect mouse clicks.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">Select the Cursor Color</s:String>
-    <s:String x:Key="Application.ScreenRecorder.PreStart">Use a pre start countdown.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.PreStart.Info">(in seconds, waits before starting to capture)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.StepRecording">Enable snapshot mode.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Each frame will be captured manually by you)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Fixed frame rate.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Constant delay that does not change with recording lag)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Enable asynchronous recording.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(It helps reduce the interface lag when recording)</s:String>    
-    <s:String x:Key="Application.ScreenRecorder.NewRecorder">Enable the new recorder UI.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(It will replace the old recorder UI)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.Magnifier">Enable the screen magnifier.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(It enables a magnifier while selecting the recording area)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.CursorFollowing">Enable cursor following.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.CursorFollowing.Info">(The recording area will reposition itself based on the location of the cursor)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FollowMargin.Info">(Buffer margin in pixels, where the recording area starts getting repositioned)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FollowMarginInvisible.Info">(Additional buffer margin in pixels, where the UI starts getting hidden)</s:String>
-
+    <s:String x:Key="S.Options.Recorder.Interface">Interface</s:String>
+    <s:String x:Key="S.Options.Recorder.Interface.Old">Old</s:String>
+    <s:String x:Key="S.Options.Recorder.Interface.New">New</s:String>
+    <s:String x:Key="S.Options.Recorder.Mode">Capture mode</s:String>
+    <s:String x:Key="S.Options.Recorder.Bitblt.Info">Use the older capture method, which is slower and may not work capturing games,&#10;but requires no aditional plug-ins.</s:String>
+    <s:String x:Key="S.Options.Recorder.DirectX.Info">Use the Desktop Duplication API capture method, which is faster and&#10;is able to capture fullscreen games, but requires the SharpDx plug-in and Windows 8 or newer.</s:String>
+    <s:String x:Key="S.Options.Recorder.File">Save to&#10;file</s:String>
+    <s:String x:Key="S.Options.Recorder.File.Info">Each frame captured will be saved directly as an image on disk.</s:String>
+    <s:String x:Key="S.Options.Recorder.Cache">Memory&#10;cache</s:String>
+    <s:String x:Key="S.Options.Recorder.Cache.Info">Each frame captured will be stored as a pixel array on memory first (may be compressed before).</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression">Compression:</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.Optimal">Optimal</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.Optimal.Info">(Slower but likely more optimal compression)</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.Fastest">Fastest</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.Fastest.Info">(Faster but likely less optimal compression)</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.NoCompression">No compression</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.NoCompression.Info">(No compression should be performed while capturing frames)</s:String>
+    <s:String x:Key="S.Options.Recorder.CacheSize">Cache size (in MB):</s:String>
+    <s:String x:Key="S.Options.Recorder.CacheSize.Info">(After reaching this size, the data will be written/flushed to the disk)</s:String>
+    <s:String x:Key="S.Options.Recorder.RecordMouse">Show the mouse cursor in the recording.</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectCursorColor">Select the cursor color</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart">Use a pre start countdown.</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart.Info">(in seconds, waits before starting to capture)</s:String>
+    <s:String x:Key="S.Options.Recorder.StepRecording">Enable snapshot mode.</s:String>
+    <s:String x:Key="S.Options.Recorder.StepRecording.Info">(Each frame will be captured manually by you)</s:String>
+    <s:String x:Key="S.Options.Recorder.FixedFramerate">Fixed frame rate.</s:String>
+    <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Constant delay that does not change with recording lag)</s:String>
+    <s:String x:Key="S.Options.Recorder.AsyncRecording">Enable asynchronous recording.</s:String>
+    <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(It helps reduce the interface lag when recording)</s:String>    
+    <s:String x:Key="S.Options.Recorder.Magnifier">Enable the screen magnifier.</s:String>
+    <s:String x:Key="S.Options.Recorder.Magnifier.Info">(It enables a magnifier while selecting the recording area)</s:String>
+    <s:String x:Key="S.Options.Recorder.CursorFollowing">Enable cursor following.</s:String>
+    <s:String x:Key="S.Options.Recorder.CursorFollowing.Info">(The recording area will reposition itself based on the location of the cursor)</s:String>
+    <s:String x:Key="S.Options.Recorder.FollowMargin.Info">(Buffer margin in pixels, where the recording area starts getting repositioned)</s:String>
+    <s:String x:Key="S.Options.Recorder.FollowMarginInvisible.Info">(Additional buffer margin in pixels, where the UI starts getting hidden)</s:String>
+    
     <s:String x:Key="Application.Other">Other</s:String>
     <s:String x:Key="Application.Other.SystemTray">Display the app on the system tray (notification area).</s:String>
     <s:String x:Key="Application.Other.LeaveOpen">Keep the app open even if all windows are closed.</s:String>
@@ -353,10 +371,14 @@
     <s:String x:Key="Extras.FfmpegLocation.Select">Select the location of the FFmpeg executable</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Invalid">The path of FFMpeg executable contains one or more invalid characters. Please, select a valid location for that executable.</s:String>
     <s:String x:Key="Extras.GifskiLocation">Gifski location</s:String>
-    <s:String x:Key="Extras.GifskiLocation.Select">Select the location of the Gifski executable</s:String>
-    <s:String x:Key="Extras.GifskiLocation.Invalid">The path of Gifski executable contains one or more invalid characters. Please, select a valid location for that executable.</s:String>
+    <s:String x:Key="Extras.GifskiLocation.Select">Select the location of the Gifski library</s:String>
+    <s:String x:Key="Extras.GifskiLocation.Invalid">The path of Gifski library contains one or more invalid characters. Please, select a valid location for that library.</s:String>
+    <s:String x:Key="Extras.SharpDxLocation">SharpDx folder (SharpDX.dll, SharpDX.Direct3D11.dll and SharpDX.DXGI.dll)</s:String>
+    <s:String x:Key="Extras.SharpDxLocation.Select">Select the location of the SharpDx libraries</s:String>
+    <s:String x:Key="Extras.SharpDxLocation.Invalid">The path for the SharpDx libraries contains one or more invalid characters. Please, select a valid folder for those libraries.</s:String>
     <s:String x:Key="Extras.License.Ffmpeg">FFmpeg license</s:String>
     <s:String x:Key="Extras.License.Gifski">Gifski license</s:String>
+    <s:String x:Key="Extras.License.SharpDx">SharpDx license</s:String>
 
     <s:String x:Key="Donate.IfYouWish">If you wish to thank me :D</s:String>
     <s:String x:Key="Donate.DonateDollar">Donate US$</s:String>
@@ -409,6 +431,12 @@
     <s:String x:Key="Recorder.SnapToWindow">Snap to Window (Drag and release to snap)</s:String>
     <s:String x:Key="Recorder.PreStart">Pre Start</s:String>
     <s:String x:Key="Recorder.Paused">ScreenToGif (Paused)</s:String>
+    
+    <s:String x:Key="S.Recorder.Warning.CaptureNotPossible">It was not possible to capture the screen</s:String>
+    <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">It was not possible to capture the screen. The capture method returned no frame after 5 tries.</s:String>
+    <s:String x:Key="S.Recorder.Warning.StartPauseNotPossible">It was not possible to start/pause capturing the screen</s:String>
+    <s:String x:Key="S.Recorder.Warning.Windows8">Windows 8 or newer is required for capturing the screen using the Desktop Duplication API.</s:String>
+    <s:String x:Key="S.Recorder.Warning.MissingSharpDx">The SharpDx libraries are required in order to capture the screen using the Desktop Duplication API. Go to Options > Extras to download it.</s:String>
     
     <!--New Recorder-->
     <s:String x:Key="S.Recorder.Area">Area</s:String>
@@ -517,6 +545,7 @@
     <s:String x:Key="Encoder.Uploading">Uploading</s:String>
     <s:String x:Key="Encoder.Executing">Executing commmands</s:String>
     <s:String x:Key="Encoder.Processing">Processing {0}</s:String>
+    <s:String x:Key="Encoder.CreatingFile">Creating file</s:String>
     <s:String x:Key="Encoder.Analyzing">Analyzing Unchanged Pixels</s:String>
     <s:String x:Key="Encoder.OpenFile">Open file</s:String>
     <s:String x:Key="Encoder.ExploreFolder">Explore folder</s:String>
@@ -740,16 +769,16 @@
     <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">You can't import multiple projects at once</s:String>
     <s:String x:Key="Editor.DragDrop.InvalidProject.Message">Try choosing only one project.</s:String>
     
-    <s:String x:Key="Editor.LoadingFrames">Loading Frames</s:String>
+    <s:String x:Key="Editor.RetrievingFromCache">Retrieving frames from the cache</s:String>
+    <s:String x:Key="Editor.LoadingFrames">Loading frames</s:String>
     <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Instruction">Impossible to load project</s:String>
     <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Message">It was not possible to load the frames because they are all corrupted or the images are not present where they are expected to.</s:String>
     <s:String x:Key="Editor.LoadingFrames.FramesCorrupted.Instruction">Some frames could not be loaded</s:String>
     <s:String x:Key="Editor.LoadingFrames.FramesCorrupted.Message">It was not possible to load the frames because they could not be found or because they are corrupted.</s:String>
-    <s:String x:Key="Editor.UpdatingFrames">Updating Frames</s:String>
-    <s:String x:Key="Editor.PreparingImport">Preparing to Import</s:String>
-    <s:String x:Key="Editor.ImportingFrames">Importing Frames</s:String>
+    <s:String x:Key="Editor.UpdatingFrames">Updating frames</s:String>
+    <s:String x:Key="Editor.PreparingImport">Preparing to import</s:String>
+    <s:String x:Key="Editor.ImportingFrames">Importing frames</s:String>
     
-    <s:String x:Key="Editor.ExportingRecording">Exporting the recording</s:String>
     <s:String x:Key="S.Editor.AnalyzingDuplicates">Analyzing duplicates</s:String>
     <s:String x:Key="S.Editor.AdjustingDuplicatesDelay">Adjusting the delay</s:String>
     <s:String x:Key="S.Editor.DiscardingDuplicates">Discarding duplicates</s:String>
@@ -1068,7 +1097,8 @@
     <s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">Compress the image data using the RLE algorithm.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline">Save the timeline data.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">Exports the timings of the frames, instead of just the frames.</s:String>
-
+    <s:String x:Key="S.SaveAs.ProjectOptions">Project options</s:String>
+    
     <!--Save As • Save options-->
     <s:String x:Key="S.SaveAs.SaveOptions">Save options</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Save the file to a folder of your choice.</s:String>

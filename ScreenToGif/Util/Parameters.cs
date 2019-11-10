@@ -1,4 +1,5 @@
-﻿using System.Windows.Media;
+﻿using System.IO.Compression;
+using System.Windows.Media;
 
 namespace ScreenToGif.Util
 {
@@ -82,6 +83,12 @@ namespace ScreenToGif.Util
         public bool Compress { get; set; }
 
         public bool SaveTimeline { get; set; }
+
+        #endregion
+
+        #region Project / Image
+
+        public CompressionLevel CompressionLevel { get; set; }
 
         #endregion
     }

@@ -38,7 +38,7 @@
     <s:String x:Key="S.Crash">Ufa, el programa se cerró inesperadamente :(</s:String>
     
     <!--StartUp Page-->
-    <s:String x:Key="Title.StartUp">Screen To Gif: Inicio</s:String>
+    <s:String x:Key="Title.StartUp">ScreenToGif: Inicio</s:String>
     <s:String x:Key="Recorder">Grabador</s:String>
     <s:String x:Key="Webcam">Webcam</s:String>
     <s:String x:Key="Board">Pizarra</s:String>
@@ -67,7 +67,7 @@
     <s:String x:Key="Update.CloseThis.Detail">Esta es una versión vieja. Ya bajaste la versión nueva.</s:String>
     
     <!--Options Window-->
-    <s:String x:Key="Title.Options">Screen To Gif: Configuración</s:String>
+    <s:String x:Key="Title.Options">ScreenToGif: Configuración</s:String>
     <s:String x:Key="Application">Aplicación</s:String>
     <s:String x:Key="Interface">Interface</s:String>
     <s:String x:Key="S.AutoTasks">Tareas automatizadas</s:String>
@@ -80,22 +80,21 @@
     <s:String x:Key="Donate">Donar</s:String>
     <s:String x:Key="About">Acerca de ScreenToGif</s:String>
     
-    <s:String x:Key="Application.ScreenRecorder">Grabador de pantalla</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordMouse">Mostrar el cursor del mouse en la grabación</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordClicks">Detectar clics del mouse</s:String>
-    <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">Seleccionar el color del cursor</s:String>
-    <s:String x:Key="Application.ScreenRecorder.PreStart">Usar cuenta regresiva</s:String>
-    <s:String x:Key="Application.ScreenRecorder.PreStart.Info">(en segundos, el programa espera antes de iniciar una captura)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.StepRecording">Habilitar el modo de fotograma</s:String>
-    <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Cada fotograma será capturado manualmente por vos)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Tasa fija de fotogramas</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Retraso constante, no cambia con la latencia de grabación)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Habilitar grabación asincrónica</s:String>
-    <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(Ayuda a reducir el retraso de interface al grabar)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.NewRecorder">Habilitar la nueva interface de grabación</s:String>
-    <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(reemplazará la vieja interface)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.Magnifier">Habilitar la lupa</s:String>
-    <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(habilita una lupa al seleccionar el área de grabación)</s:String>
+    <s:String x:Key="S.Options.Recorder.RecordMouse">Mostrar el cursor del mouse en la grabación</s:String>
+    <s:String x:Key="S.Options.Recorder.RecordClicks">Detectar clics del mouse</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectCursorColor">Seleccionar el color del cursor</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart">Usar cuenta regresiva</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart.Info">(en segundos, el programa espera antes de iniciar una captura)</s:String>
+    <s:String x:Key="S.Options.Recorder.StepRecording">Habilitar el modo de fotograma</s:String>
+    <s:String x:Key="S.Options.Recorder.StepRecording.Info">(Cada fotograma será capturado manualmente por vos)</s:String>
+    <s:String x:Key="S.Options.Recorder.FixedFramerate">Tasa fija de fotogramas</s:String>
+    <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Retraso constante, no cambia con la latencia de grabación)</s:String>
+    <s:String x:Key="S.Options.Recorder.AsyncRecording">Habilitar grabación asincrónica</s:String>
+    <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(Ayuda a reducir el retraso de interface al grabar)</s:String>
+    <s:String x:Key="S.Options.Recorder.NewRecorder">Habilitar la nueva interface de grabación</s:String>
+    <s:String x:Key="S.Options.Recorder.NewRecorder.Info">(reemplazará la vieja interface)</s:String>
+    <s:String x:Key="S.Options.Recorder.Magnifier">Habilitar la lupa</s:String>
+    <s:String x:Key="S.Options.Recorder.Magnifier.Info">(habilita una lupa al seleccionar el área de grabación)</s:String>
     
     <s:String x:Key="Application.Other">Otros</s:String>
     <s:String x:Key="Application.Other.SystemTray">Mostrar el programa en la bandeja de notificaciones del sistema (el área de notificaciones)</s:String>
@@ -334,7 +333,7 @@
     <s:String x:Key="S.Recorder.EscToCancel">Presioná la tecla "Esc" para cancelar</s:String>
     
     <!--Webcam Recorder-->
-    <s:String x:Key="Webcam.Title">Screen To Gif - Grabador de webcam</s:String>
+    <s:String x:Key="Webcam.Title">ScreenToGif - Grabador de webcam</s:String>
     <s:String x:Key="Webcam.NoVideo">No se detectó ningún dispositivo de video :(</s:String>
     <s:String x:Key="Webcam.CheckVideoDevices">Revisar dispositivos de video</s:String>
     <s:String x:Key="Webcam.Scale">Escala: x{0:0.##}</s:String>

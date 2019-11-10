@@ -39,7 +39,7 @@
     <!--<s:String x:Key="Update.CloseThis.Detail">This is an older version. You have already downloaded a new version.</s:String>-->
     
     <!--Options Page-->
-    <s:String x:Key="Title.Options">Screen To Gif - Opções</s:String>
+    <s:String x:Key="Title.Options">ScreenToGif - Opções</s:String>
     <s:String x:Key="Application">Geral</s:String>
     <s:String x:Key="Interface">Interface</s:String>
     <s:String x:Key="Image">Imagem</s:String>
@@ -56,19 +56,18 @@
     <s:String x:Key="S.Application.Other.Homepage.Board">Gravador de Tela</s:String>
     <s:String x:Key="S.Application.Other.Homepage.Editor">Janela do Editor</s:String>
     
-    <s:String x:Key="Application.ScreenRecorder">Gravador de Ecrã</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordMouse">Mostar o cursor na gravação.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordClicks">Mostrar cliques do rato.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">Seleccione a cor do cursor</s:String>
-    <s:String x:Key="Application.ScreenRecorder.PreStart">Iniciar com contagem decrescente.</s:String>
-    <!--<s:String x:Key="Application.ScreenRecorder.StepRecording">Enable snapshot mode.</s:String>-->
-    <!--<s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Each frame will be captured manually by you)</s:String>-->
-    <!--<s:String x:Key="Application.ScreenRecorder.FullRecording">Enable fullscreen mode.</s:String>-->
-    <!--<s:String x:Key="Application.ScreenRecorder.FullRecording.Info">(Experimental, will capture the main screen)</s:String>-->
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Velocidade de fotogramas por segundo fixa.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Fotogramas constantes, não varia com atrasos da gravação)</s:String>
-    <!--<s:String x:Key="Application.ScreenRecorder.AsyncRecording">Enable asynchronous recording.</s:String>-->
-    <!--<s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(It helps reduce the interface lag when recording)</s:String>-->
+    <s:String x:Key="S.Options.Recorder.RecordMouse">Mostar o cursor na gravação.</s:String>
+    <s:String x:Key="S.Options.Recorder.RecordClicks">Mostrar cliques do rato.</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectCursorColor">Seleccione a cor do cursor</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart">Iniciar com contagem decrescente.</s:String>
+    <!--<s:String x:Key="S.Options.Recorder.StepRecording">Enable snapshot mode.</s:String>-->
+    <!--<s:String x:Key="S.Options.Recorder.StepRecording.Info">(Each frame will be captured manually by you)</s:String>-->
+    <!--<s:String x:Key="S.Options.Recorder.FullRecording">Enable fullscreen mode.</s:String>-->
+    <!--<s:String x:Key="S.Options.Recorder.FullRecording.Info">(Experimental, will capture the main screen)</s:String>-->
+    <s:String x:Key="S.Options.Recorder.FixedFramerate">Velocidade de fotogramas por segundo fixa.</s:String>
+    <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Fotogramas constantes, não varia com atrasos da gravação)</s:String>
+    <!--<s:String x:Key="S.Options.Recorder.AsyncRecording">Enable asynchronous recording.</s:String>-->
+    <!--<s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(It helps reduce the interface lag when recording)</s:String>-->
 
     <s:String x:Key="Application.Other">Outras Definições</s:String>
     <!--<s:String x:Key="Application.Other.CheckForUpdates">Check for updates.</s:String>-->
@@ -165,10 +164,10 @@
     <!--<s:String x:Key="Recorder.FpsRange">Minimum to maximum fps: 1-60 fps</s:String>-->
     <s:String x:Key="Recorder.SnapToWindow">Aderir a Janela (Arraste e large para enquadrar)</s:String>
     <s:String x:Key="Recorder.PreStart">Contagem Decrescente</s:String>
-    <s:String x:Key="Recorder.Paused">Screen To Gif (Pausado)</s:String>
+    <s:String x:Key="Recorder.Paused">ScreenToGif (Pausado)</s:String>
     
     <!--Webcam Recorder-->
-    <s:String x:Key="Webcam.Title">Screen To Gif - Gravador de Câmara</s:String>
+    <s:String x:Key="Webcam.Title">ScreenToGif - Gravador de Câmara</s:String>
     <s:String x:Key="Webcam.NoVideo">Nenhum dispositivo de vídeo encontrado :(</s:String>
     <s:String x:Key="Webcam.CheckVideoDevices">Verificar dispositivos de vídeo.</s:String>
     <!--<s:String x:Key="Webcam.Scale">Scale: x{0:0.##}</s:String>-->
@@ -251,7 +250,7 @@
     <!--<s:String x:Key="Encoder.Copy.Folder">Copy folder path</s:String>-->
 
     <!--Editor-->
-    <s:String x:Key="Editor.Title">Screen To Gif - Editor</s:String>
+    <s:String x:Key="Editor.Title">ScreenToGif - Editor</s:String>
     <s:String x:Key="Editor.File">Ficheiro</s:String>
     <!--<s:String x:Key="Editor.Home">Home</s:String>-->
     <s:String x:Key="Editor.Playback">Reprodução</s:String>

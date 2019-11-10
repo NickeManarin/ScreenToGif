@@ -2,7 +2,6 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:n="clr-namespace:ScreenToGif.Controls"
-        xmlns:u="clr-namespace:ScreenToGif.Util"
         Title="{DynamicResource S.FfmpegPreset.Title}" Width="350" Height="260" MinWidth="300" MinHeight="250" 
         WindowStartupLocation="CenterScreen" SnapsToDevicePixels="True" Background="{DynamicResource Panel.Background}" Loaded="Window_Loaded">
 
@@ -48,7 +47,7 @@
             <n:ExtendedTextBox Grid.Row="1" x:Name="NameTextBox" Margin="5,3"/>
 
             <n:LabelSeparator Grid.Row="2" Text="{DynamicResource S.FfmpegPreset.Parameters}"/>
-            <n:ExtendedTextBox Grid.Row="3" x:Name="ParametersTextBox" MinHeight="23" Margin="5,3" VerticalContentAlignment="Top" TextWrapping="WrapWithOverflow"/>
+            <n:ExtendedTextBox Grid.Row="3" x:Name="ParametersTextBox" MinHeight="23" Margin="5,3" VerticalContentAlignment="Top" TextWrapping="Wrap"/>
         </Grid>
 
         <Grid Grid.Row="3" Background="{DynamicResource Panel.Background.Level3}">

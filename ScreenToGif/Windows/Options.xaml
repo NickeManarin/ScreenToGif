@@ -45,26 +45,29 @@
 
             <!--Options-->
             <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="OptionsStackPanel" Margin="0" MaxWidth="180">
-                <n:ImageRadioButton x:Name="AppRadio" Text="{DynamicResource Application}" Content="{StaticResource Vector.Application}" TextWrapping="WrapWithOverflow" IsChecked="True"
-                                    Padding="1,3,5,3" FontSize="17" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="24" HorizontalContentAlignment="Left"/>
-                <n:ImageRadioButton x:Name="InterfaceRadio" Text="{DynamicResource Interface}" Content="{StaticResource Vector.Colors}" TextWrapping="WrapWithOverflow"
-                                    Padding="1,3,5,3" FontSize="17" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="24" HorizontalContentAlignment="Left"/>
-                <n:ImageRadioButton x:Name="AutomaticRadio" Text="{DynamicResource S.AutoTasks}" Content="{StaticResource Vector.Encoder}" TextWrapping="WrapWithOverflow"
-                                    Padding="1,3,5,3" FontSize="17" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="24" HorizontalContentAlignment="Left"/>
-                <n:ImageRadioButton x:Name="ShortcutsRadio" Text="{DynamicResource S.Shortcuts}" Content="{StaticResource Vector.Keyboard}" TextWrapping="Wrap"
-                                    Padding="1,3,5,3" FontSize="17" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="24" HorizontalContentAlignment="Left"/>
-                <n:ImageRadioButton x:Name="LanguageRadio" Text="{DynamicResource Language}" Content="{StaticResource Vector.Translate}" TextWrapping="Wrap"
-                                    Padding="1,3,5,3" FontSize="17" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="24" HorizontalContentAlignment="Left"/>
-                <n:ImageRadioButton x:Name="TempRadio" Text="{DynamicResource TemporaryFiles}" Content="{StaticResource Vector.Temporary}" TextWrapping="Wrap"
-                                    Padding="1,3,5,3" FontSize="17" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="24" HorizontalContentAlignment="Left"/>
-                <n:ImageRadioButton x:Name="CloudRadioButton" Text="{DynamicResource Clouds}" Content="{StaticResource Vector.Web}" TextWrapping="Wrap"
-                                    Padding="1,3,5,3" FontSize="17" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="24" HorizontalContentAlignment="Left"/>
-                <n:ImageRadioButton x:Name="ExtrasRadioButton" Text="{DynamicResource Extras}" Content="{StaticResource Vector.Extras}" TextWrapping="Wrap"
-                                    Padding="1,3,5,3" FontSize="17" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="24" HorizontalContentAlignment="Left"/>
-                <n:ImageRadioButton x:Name="DonateRadio" Text="{DynamicResource Donate}" Content="{StaticResource Vector.Money}" TextWrapping="Wrap"
-                                    Padding="1,3,5,3" FontSize="17" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="24" HorizontalContentAlignment="Left"/>
-                <n:ImageRadioButton x:Name="AboutRadio" Text="{DynamicResource About}" Content="{StaticResource Vector.Info}"  TextWrapping="Wrap"
-                                    Padding="1,3,5,3" FontSize="17" FontFamily="Segoe UI Semilight" Cursor="Hand" MaxSize="24" HorizontalContentAlignment="Left"/>
+                <StackPanel.Resources>
+                    <Style BasedOn="{StaticResource {x:Type n:ImageRadioButton}}" TargetType="{x:Type n:ImageRadioButton}">
+                        <Setter Property="Padding" Value="2,2,2,2"/>
+                        <Setter Property="FontSize" Value="17"/>
+                        <Setter Property="FontFamily" Value="Segoe UI Semilight"/>
+                        <Setter Property="Cursor" Value="Hand"/>
+                        <Setter Property="ContentWidth" Value="24"/>
+                        <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                    </Style>
+                </StackPanel.Resources>
+
+                <n:ImageRadioButton x:Name="AppRadio" Text="{DynamicResource Application}" Content="{StaticResource Vector.Application}" IsChecked="True"/>
+                <n:ImageRadioButton x:Name="RecorderRadio" Text="{DynamicResource S.Options.Recorder}" Content="{StaticResource Vector.Record}"/>
+                <n:ImageRadioButton x:Name="InterfaceRadio" Text="{DynamicResource Interface}" Content="{StaticResource Vector.Colors}"/>
+                <n:ImageRadioButton x:Name="AutomaticRadio" Text="{DynamicResource S.AutoTasks}" Content="{StaticResource Vector.Encoder}"/>
+                <n:ImageRadioButton x:Name="ShortcutsRadio" Text="{DynamicResource S.Shortcuts}" Content="{StaticResource Vector.Keyboard}"/>
+                <n:ImageRadioButton x:Name="LanguageRadio" Text="{DynamicResource Language}" Content="{StaticResource Vector.Translate}"/>
+                <n:ImageRadioButton x:Name="TempRadio" Text="{DynamicResource TemporaryFiles}" Content="{StaticResource Vector.Temporary}"/>
+                <n:ImageRadioButton x:Name="CloudRadioButton" Text="{DynamicResource Clouds}" Content="{StaticResource Vector.Web}"/>
+                <n:ImageRadioButton x:Name="ExtrasRadioButton" Text="{DynamicResource Extras}" Content="{StaticResource Vector.Extras}"/>
+                <n:ImageRadioButton x:Name="DonateRadio" Text="{DynamicResource Donate}" Content="{StaticResource Vector.Money}"/>
+                <n:ImageRadioButton x:Name="AboutRadio" Text="{DynamicResource About}" Content="{StaticResource Vector.Info}"/>
             </StackPanel>
 
             <n:StatusBand Grid.Row="0" Grid.Column="1" x:Name="StatusBand"/>
@@ -74,56 +77,7 @@
                     <!--Application-->
                     <StackPanel x:Name="ApplicationPanel" Visibility="{Binding IsChecked, ElementName=AppRadio, Converter={StaticResource Bool2Visibility}}" 
                                 CanVerticallyScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True">
-                        <n:LabelSeparator Text="{DynamicResource Application.ScreenRecorder}" Margin="0,0,0,5"/>
-
-                        <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.RecordMouse}" Margin="15,3,5,3" IsChecked="{Binding Path=ShowCursor, Mode=TwoWay}"/>
-                        <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.RecordClicks}" Margin="30,3,5,3" IsChecked="{Binding Path=DetectMouseClicks, Mode=TwoWay}" IsEnabled="{Binding Path=ShowCursor}"/>
-
-                        <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.PreStart}" Margin="15,3,5,3" IsChecked="{Binding Path=UsePreStart, Mode=TwoWay}"/>
-                        <WrapPanel Margin="30,3,5,3" Visibility="{Binding UsePreStart, Converter={StaticResource Bool2Visibility}}">
-                            <n:IntegerUpDown Minimum="2" Maximum="15" MinWidth="50" Value="{Binding Source={x:Static u:UserSettings.All}, Path=PreStartValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                            <TextBlock Text="{DynamicResource Application.ScreenRecorder.PreStart.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
-                        </WrapPanel>
-
-                        <WrapPanel Margin="10,0,5,0">
-                            <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.StepRecording}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=SnapshotMode, Mode=TwoWay}"/>
-                            <TextBlock Text="{DynamicResource Application.ScreenRecorder.StepRecording.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
-                        </WrapPanel>
-
-                        <WrapPanel Margin="10,0,5,0">
-                            <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.FixedFramerate}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=FixedFrameRate, Mode=TwoWay}"/>
-                            <TextBlock Text="{DynamicResource Application.ScreenRecorder.FixedFramerate.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
-                        </WrapPanel>
-
-                        <WrapPanel Margin="10,0,5,0">
-                            <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.AsyncRecording}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=AsyncRecording, Mode=TwoWay}"/>
-                            <TextBlock Text="{DynamicResource Application.ScreenRecorder.AsyncRecording.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
-                        </WrapPanel>
-
-                        <WrapPanel Margin="10,0,5,0">
-                            <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.NewRecorder}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=NewRecorder, Mode=TwoWay}"/>
-                            <TextBlock Text="{DynamicResource Application.ScreenRecorder.NewRecorder.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
-                        </WrapPanel>
-
-                        <WrapPanel Margin="10,0,5,0">
-                            <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.Magnifier}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=Magnifier, Mode=TwoWay}"/>
-                            <TextBlock Text="{DynamicResource Application.ScreenRecorder.Magnifier.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
-                        </WrapPanel>
-
-                        <WrapPanel Margin="10,0,5,0">
-                            <n:ExtendedCheckBox Text="{DynamicResource Application.ScreenRecorder.CursorFollowing}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=CursorFollowing, Mode=TwoWay}"/>
-                            <TextBlock Text="{DynamicResource Application.ScreenRecorder.CursorFollowing.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
-                        </WrapPanel>
-                        <WrapPanel Margin="30,3,5,3" Visibility="{Binding CursorFollowing, Converter={StaticResource Bool2Visibility}}">
-                            <n:IntegerUpDown Minimum="2" Maximum="100" MinWidth="50" Value="{Binding Source={x:Static u:UserSettings.All}, Path=FollowBuffer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                            <TextBlock Text="{DynamicResource Application.ScreenRecorder.FollowMargin.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
-                        </WrapPanel>
-                        <WrapPanel Margin="30,3,5,3" Visibility="{Binding CursorFollowing, Converter={StaticResource Bool2Visibility}}">
-                            <n:IntegerUpDown Minimum="2" Maximum="100" MinWidth="50" Value="{Binding Source={x:Static u:UserSettings.All}, Path=FollowBufferInvisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                            <TextBlock Text="{DynamicResource Application.ScreenRecorder.FollowMarginInvisible.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
-                        </WrapPanel>
-
-                        <n:LabelSeparator Text="{DynamicResource Application.Other}"/>
+                        <n:LabelSeparator Text="{DynamicResource Application}"/>
                         <Grid Margin="15,3,5,3">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -154,13 +108,184 @@
                         <n:ExtendedCheckBox Text="{DynamicResource Application.Other.NotifyWhileClosingApp}" Margin="15,3,5,3" IsChecked="{Binding Path=NotifyWhileClosingApp, Mode=TwoWay}"/>
                         <n:ExtendedCheckBox Text="{DynamicResource Application.Other.DrawOutlineOutside}" Margin="15,3,5,3" IsChecked="{Binding Path=DrawOutlineOutside, Mode=TwoWay}"/>
                         <n:ExtendedCheckBox Text="{DynamicResource Application.Other.DisableHardwareAcceleration}" Margin="15,3,5,3" IsChecked="{Binding Path=DisableHardwareAcceleration, Mode=TwoWay}"/>
-                        
+
                         <WrapPanel Margin="10,0,5,0">
                             <n:ExtendedCheckBox Text="{DynamicResource Application.Other.CheckForTranslationUpdates}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=CheckForTranslationUpdates, Mode=TwoWay}"/>
                             <TextBlock Text="{DynamicResource Application.Other.CheckForTranslationUpdates.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
                         </WrapPanel>
 
                         <n:ExtendedCheckBox x:Name="UpdatesCheckBox" Text="{DynamicResource Application.Other.CheckForUpdates}" Margin="15,3,5,3" IsChecked="{Binding Path=CheckForUpdates, Mode=TwoWay}"/>
+                    </StackPanel>
+
+                    <!--Recorder-->
+                    <StackPanel x:Name="RecorderPanel" Visibility="{Binding IsChecked, ElementName=RecorderRadio, Converter={StaticResource Bool2Visibility}}" 
+                                CanVerticallyScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True">
+                        <n:LabelSeparator Text="{DynamicResource S.Options.Recorder.Interface}"/>
+
+                        <Grid Margin="10,0,5,5" HorizontalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <n:ImageRadioButton Grid.Column="0" ContentWidth="60" Text="{DynamicResource S.Options.Recorder.Interface.Old}" Padding="5" IsChecked="{Binding Path=NewRecorder, Mode=TwoWay, Converter={StaticResource InvertedBool}}">
+                                <n:ImageRadioButton.Content>
+                                    <Canvas Width="40" Height="27">
+                                        <Path StrokeThickness="0.8" Stroke="#ffaaaaaa" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 40.000,27.000 L -0.000,27.000 L -0.000,0.000 L 40.000,0.000 L 40.000,27.000 Z"/>
+                                        <Path StrokeThickness="0.8" Stroke="#ffaaaaaa" StrokeMiterLimit="1.0" Data="F1 M 38.000,23.000 L 2.000,23.000 L 2.000,4.000 L 38.000,4.000 L 38.000,23.000 Z"/>
+                                        <Path StrokeThickness="0.3" Stroke="#ffffffff" StrokeMiterLimit="1.0" Fill="#ff9f2821" Data="F1 M 29.000,24.750 C 29.000,25.578 28.328,26.250 27.500,26.250 C 26.672,26.250 26.000,25.578 26.000,24.750 C 26.000,23.922 26.672,23.250 27.500,23.250 C 28.328,23.250 29.000,23.922 29.000,24.750 Z"/>
+                                        <Path StrokeThickness="0.3" Stroke="#ffffffff" StrokeMiterLimit="1.0" Fill="#ff3f7db7" Data="F1 M 35.000,26.250 L 32.000,26.250 L 32.000,23.250 L 35.000,23.250 L 35.000,26.250 Z"/>
+                                        <Path Fill="#ff221e1f" Data="F1 M 37.137,3.600 L 34.750,1.213 L 34.863,1.100 L 37.250,3.487 L 37.137,3.600 Z"/>
+                                        <Path Fill="#ff221e1f" Data="F1 M 34.863,3.600 L 34.750,3.487 L 37.137,1.100 L 37.250,1.213 L 34.863,3.600 Z"/>
+                                    </Canvas>
+                                </n:ImageRadioButton.Content>
+                            </n:ImageRadioButton>
+
+                            <n:ImageRadioButton Grid.Column="1" ContentWidth="60" Text="{DynamicResource S.Options.Recorder.Interface.New}" Padding="5" IsChecked="{Binding Path=NewRecorder, Mode=TwoWay}">
+                                <n:ImageRadioButton.Content>
+                                    <Canvas Width="36.750" Height="36.875">
+                                        <Path StrokeThickness="0.8" Stroke="#ffaaaaaa" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 36.375,36.875 L 8.375,36.875 L 8.375,27.375 L 36.375,27.375 L 36.375,36.875 Z"/>
+                                        <Path StrokeThickness="0.8" Stroke="#ffaaaaaa" StrokeMiterLimit="1.0" StrokeDashArray="6.67,2.67" Fill="#ffffffff" Data="F1 M 36.375,25.375 L 0.375,25.375 L 0.375,0.375 L 36.375,0.375 L 36.375,25.375 Z"/>
+                                        <Path StrokeThickness="0.3" Stroke="#ffffffff" StrokeMiterLimit="1.0" Fill="#ff9f2821" Data="F1 M 29.375,33.875 C 29.375,34.703 28.703,35.375 27.875,35.375 C 27.047,35.375 26.375,34.703 26.375,33.875 C 26.375,33.047 27.047,32.375 27.875,32.375 C 28.703,32.375 29.375,33.047 29.375,33.875 Z"/>
+                                        <Path StrokeThickness="0.3" Stroke="#ffffffff" StrokeMiterLimit="1.0" Fill="#ff3f7db7" Data="F1 M 34.375,35.375 L 31.375,35.375 L 31.375,32.375 L 34.375,32.375 L 34.375,35.375 Z"/>
+                                        <Path Fill="#ff221e1f" Data="F1 M 34.512,31.475 L 32.125,29.088 L 32.238,28.975 L 34.625,31.362 L 34.512,31.475 Z"/>
+                                        <Path Fill="#ff221e1f" Data="F1 M 32.238,31.475 L 32.125,31.362 L 34.512,28.975 L 34.625,29.088 L 32.238,31.475 Z"/>
+                                    </Canvas>
+                                </n:ImageRadioButton.Content>
+                            </n:ImageRadioButton>
+                        </Grid>
+
+                        <WrapPanel Margin="10,0,5,0" Visibility="{Binding Path=NewRecorder, Mode=OneWay, Converter={StaticResource Bool2Visibility}}">
+                            <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.Magnifier}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=Magnifier, Mode=TwoWay}"/>
+                            <TextBlock Text="{DynamicResource S.Options.Recorder.Magnifier.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                        </WrapPanel>
+
+                        <n:LabelSeparator Text="{DynamicResource S.Options.Recorder.Mode}"/>
+                        <WrapPanel Margin="10,0,5,5" HorizontalAlignment="Center">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <n:ImageRadioButton Grid.Column="0" ContentWidth="40" Text="BitBlt" Padding="5" IsChecked="{Binding Path=UseDesktopDuplication, Mode=TwoWay, Converter={StaticResource InvertedBool}}"
+                                                    ToolTip="{DynamicResource S.Options.Recorder.Bitblt.Info}">
+                                    <n:ImageRadioButton.Content>
+                                        <Canvas Width="40" Height="39">
+                                            <Path StrokeThickness="2.0" Stroke="#ffcd5833" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 19.000,28.000 L 1.000,28.000 L 1.000,11.000 L 19.000,11.000 L 19.000,28.000 Z"/>
+                                            <Path StrokeThickness="2.0" Stroke="#ff2d9ddd" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 24.000,38.000 L 8.000,38.000 L 8.000,22.000 L 24.000,22.000 L 24.000,38.000 Z"/>
+                                            <Path StrokeThickness="2.0" Stroke="#ff82a65e" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 26.000,20.000 L 12.000,20.000 L 12.000,6.000 L 26.000,6.000 L 26.000,20.000 Z"/>
+                                            <Path StrokeThickness="2.0" Stroke="#fff2cf42" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 39.000,21.000 L 19.000,21.000 L 19.000,1.000 L 39.000,1.000 L 39.000,21.000 Z"/>
+                                            <TextBlock Foreground="#ff000000" Canvas.Left="20.776" Canvas.Top="5.736" FontSize="9.00" FontFamily="Franklin Gothic Heavy">GDI</TextBlock>
+                                        </Canvas>
+                                    </n:ImageRadioButton.Content>
+                                </n:ImageRadioButton>
+
+                                <n:ImageRadioButton Grid.Column="1" ContentWidth="40" Text="DirectX" Padding="5" IsChecked="{Binding Path=UseDesktopDuplication, Mode=TwoWay}"
+                                                    ToolTip="{DynamicResource S.Options.Recorder.DirectX.Info}">
+                                    <n:ImageRadioButton.Content>
+                                        <Canvas Width="40" Height="29">
+                                            <Path Fill="#ff789639" Data="F1 M 13.333,4.626 L 0.000,4.626 L 0.000,0.000 L 13.333,0.000 L 13.333,4.626 Z"/>
+                                            <Path Fill="#ff789639" Data="F1 M 26.667,0.000 L 40.000,0.000 L 40.000,4.626 L 26.667,4.626 L 26.667,0.000 Z"/>
+                                            <Path Fill="#ff789639" Data="F1 M 0.000,24.374 L 13.333,24.374 L 13.333,29.000 L 0.000,29.000 L 0.000,24.374 Z"/>
+                                            <Path Fill="#ff789639" Data="F1 M 40.000,24.374 L 26.667,24.374 L 26.667,29.000 L 40.000,29.000 L 40.000,24.374 Z"/>
+                                            <Path Fill="#ff88a847" Data="F1 M 15.200,2.313 L 2.044,2.313 L 2.044,6.939 L 15.200,6.939 L 15.200,2.313 Z"/>
+                                            <Path Fill="#ff88a847" Data="F1 M 24.622,2.313 L 37.778,2.313 L 37.778,6.939 L 24.622,6.939 L 24.622,2.313 Z"/>
+                                            <Path Fill="#ff88a847" Data="F1 M 37.778,22.239 L 24.622,22.239 L 24.622,26.865 L 37.778,26.865 L 37.778,22.239 Z"/>
+                                            <Path Fill="#ff88a847" Data="F1 M 2.044,22.239 L 15.200,22.239 L 15.200,26.865 L 2.044,26.865 L 2.044,22.239 Z"/>
+                                            <Path Fill="#ff9fbc63" Data="F1 M 17.067,4.448 L 4.444,4.448 L 4.444,9.074 L 17.067,9.074 L 17.067,4.448 Z"/>
+                                            <Path Fill="#ff9fbc63" Data="F1 M 22.933,4.448 L 35.556,4.448 L 35.556,9.074 L 22.933,9.074 L 22.933,4.448 Z"/>
+                                            <Path Fill="#ff9fbc63" Data="F1 M 4.444,20.104 L 17.067,20.104 L 17.067,24.730 L 4.444,24.730 L 4.444,20.104 Z"/>
+                                            <Path Fill="#ff9fbc63" Data="F1 M 35.911,20.104 L 23.289,20.104 L 23.289,24.730 L 35.911,24.730 L 35.911,20.104 Z"/>
+                                            <Path Fill="#ffbed098" Data="F1 M 6.578,17.791 L 18.844,17.791 L 18.844,22.417 L 6.578,22.417 L 6.578,17.791 Z"/>
+                                            <Path Fill="#ffbed098" Data="F1 M 33.422,17.791 L 21.156,17.791 L 21.156,22.417 L 33.422,22.417 L 33.422,17.791 Z"/>
+                                            <Path Fill="#ffbed098" Data="F1 M 21.156,6.583 L 33.422,6.583 L 33.422,11.209 L 21.156,11.209 L 21.156,6.583 Z"/>
+                                            <Path Fill="#ffbed098" Data="F1 M 18.844,6.583 L 6.578,6.583 L 6.578,11.209 L 18.844,11.209 L 18.844,6.583 Z"/>
+                                            <Path Fill="#ffdce7c4" Data="F1 M 31.289,8.807 L 8.711,8.807 L 8.711,13.255 L 31.289,13.255 L 31.289,8.807 Z"/>
+                                            <Path Fill="#ffdce7c4" Data="F1 M 31.289,20.193 L 8.711,20.193 L 8.711,15.745 L 31.289,15.745 L 31.289,20.193 Z"/>
+                                            <Path Fill="#ffebf2de" Data="F1 M 28.889,15.834 L 11.111,15.834 L 11.111,13.166 L 28.889,13.166 L 28.889,15.834 Z"/>
+                                        </Canvas>
+                                    </n:ImageRadioButton.Content>
+                                </n:ImageRadioButton>
+                            </Grid>
+
+                            <Separator Width="1" Margin="3"/>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <n:ImageRadioButton Grid.Column="0" ContentWidth="40" Text="{DynamicResource S.Options.Recorder.File}" Padding="5" Content="{StaticResource Vector.ImageStack}" 
+                                                    IsChecked="{Binding Path=UseMemoryCache, Mode=TwoWay, Converter={StaticResource InvertedBool}}"
+                                                    ToolTip="{DynamicResource S.Options.Recorder.File.Info}"/>
+                                <n:ImageRadioButton Grid.Column="1" ContentWidth="40" Text="{DynamicResource S.Options.Recorder.Cache}" Padding="5" Content="{StaticResource Vector.Cabinet}" 
+                                                    IsChecked="{Binding Path=UseMemoryCache, Mode=TwoWay}"
+                                                    ToolTip="{DynamicResource S.Options.Recorder.Cache.Info}"/>
+                            </Grid>
+                        </WrapPanel>
+
+                        <WrapPanel Margin="10,0,5,5" Visibility="{Binding Path=UseMemoryCache, Mode=OneWay, Converter={StaticResource Bool2Visibility}}">
+                            <TextBlock Text="{DynamicResource S.Options.Recorder.Compression}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,0" VerticalAlignment="Center"/>
+                            <ComboBox x:Name="CompressionComboBox" MinWidth="120" VerticalAlignment="Center"
+                                      SelectedIndex="{Binding Path=CaptureCompression, Converter={StaticResource EnumToInt}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <ComboBoxItem Content="{DynamicResource S.Options.Recorder.Compression.Optimal}"/>
+                                <ComboBoxItem Content="{DynamicResource S.Options.Recorder.Compression.Fastest}"/>
+                                <ComboBoxItem Content="{DynamicResource S.Options.Recorder.Compression.NoCompression}"/>
+                            </ComboBox>
+
+                            <TextBlock Text="{DynamicResource S.Options.Recorder.Compression.Optimal.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="WrapWithOverflow" 
+                                       Foreground="{DynamicResource Element.Foreground.Gray150}" Visibility="{Binding ElementName=CompressionComboBox, Path=SelectedIndex, Converter={StaticResource IntToVisibility}, ConverterParameter=0}"/>
+                            <TextBlock Text="{DynamicResource S.Options.Recorder.Compression.Fastest.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="WrapWithOverflow" 
+                                       Foreground="{DynamicResource Element.Foreground.Gray150}" Visibility="{Binding ElementName=CompressionComboBox, Path=SelectedIndex, Converter={StaticResource IntToVisibility}, ConverterParameter=1}"/>
+                            <TextBlock Text="{DynamicResource S.Options.Recorder.Compression.NoCompression.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="WrapWithOverflow" 
+                                       Foreground="{DynamicResource Element.Foreground.Gray150}" Visibility="{Binding ElementName=CompressionComboBox, Path=SelectedIndex, Converter={StaticResource IntToVisibility}, ConverterParameter=2}"/>
+                        </WrapPanel>
+
+                        <WrapPanel Margin="10,0,5,5" Visibility="{Binding Path=UseMemoryCache, Mode=OneWay, Converter={StaticResource Bool2Visibility}}">
+                            <TextBlock Text="{DynamicResource S.Options.Recorder.CacheSize}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,0" VerticalAlignment="Center"/>
+                            <n:DoubleUpDown Minimum="1" Maximum="200" Value="{Binding Path=MemoryCacheSize, Mode=TwoWay}" MinWidth="80"/>
+                            <TextBlock Text="{DynamicResource S.Options.Recorder.CacheSize.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="WrapWithOverflow" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                        </WrapPanel>
+
+                        <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.RecordMouse}" Margin="15,3,5,3" IsChecked="{Binding Path=ShowCursor, Mode=TwoWay}"/>
+
+                        <WrapPanel Margin="10,0,5,0">
+                            <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.StepRecording}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=SnapshotMode, Mode=TwoWay}"/>
+                            <TextBlock Text="{DynamicResource S.Options.Recorder.StepRecording.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                        </WrapPanel>
+
+                        <WrapPanel Margin="10,0,5,0">
+                            <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.AsyncRecording}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=AsyncRecording, Mode=TwoWay}"/>
+                            <TextBlock Text="{DynamicResource S.Options.Recorder.AsyncRecording.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                        </WrapPanel>
+
+                        <WrapPanel Margin="10,0,5,0">
+                            <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.FixedFramerate}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=FixedFrameRate, Mode=TwoWay}"/>
+                            <TextBlock Text="{DynamicResource S.Options.Recorder.FixedFramerate.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                        </WrapPanel>
+
+                        <n:LabelSeparator Text="{DynamicResource Application.Other}"/>
+
+                        <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.PreStart}" Margin="15,3,5,3" IsChecked="{Binding Path=UsePreStart, Mode=TwoWay}"/>
+                        <WrapPanel Margin="30,3,5,3" Visibility="{Binding UsePreStart, Converter={StaticResource Bool2Visibility}}">
+                            <n:IntegerUpDown Minimum="2" Maximum="15" MinWidth="50" Value="{Binding Source={x:Static u:UserSettings.All}, Path=PreStartValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Text="{DynamicResource S.Options.Recorder.PreStart.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                        </WrapPanel>
+
+                        <WrapPanel Margin="10,0,5,0">
+                            <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.CursorFollowing}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=CursorFollowing, Mode=TwoWay}"/>
+                            <TextBlock Text="{DynamicResource S.Options.Recorder.CursorFollowing.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                        </WrapPanel>
+                        <WrapPanel Margin="30,3,5,3" Visibility="{Binding CursorFollowing, Converter={StaticResource Bool2Visibility}}">
+                            <n:IntegerUpDown Minimum="2" Maximum="100" MinWidth="50" Value="{Binding Source={x:Static u:UserSettings.All}, Path=FollowBuffer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Text="{DynamicResource S.Options.Recorder.FollowMargin.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                        </WrapPanel>
+                        <WrapPanel Margin="30,3,5,3" Visibility="{Binding CursorFollowing, Converter={StaticResource Bool2Visibility}}">
+                            <n:IntegerUpDown Minimum="2" Maximum="100" MinWidth="50" Value="{Binding Source={x:Static u:UserSettings.All}, Path=FollowBufferInvisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Text="{DynamicResource S.Options.Recorder.FollowMarginInvisible.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                        </WrapPanel>
                     </StackPanel>
 
                     <!--Interface-->
@@ -839,7 +964,7 @@
                             <n:ImageListBoxItem Image="{StaticResource Flag.Portugal}" Tag="pt-PT" Content="Portuguese (Portugal) / Português (Portugal)" Author="Duarte Ramos" 
                                                 MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=pt-PT, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ImageListBoxItem Image="{StaticResource Flag.Turkey}" Tag="tr" Content="Turkish / Türkçe" Author="Bekir/Omer Mollamehmetoglu"
+                            <n:ImageListBoxItem Image="{StaticResource Flag.Turkey}" Tag="tr" Content="Turkish / Türkçe" Author="Bekir, Omer Mollamehmetoglu, seferciogluecce"
                                                 MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=tr, Converter={StaticResource TagToSelection}}"/>
 
                             <n:ImageListBoxItem Image="{StaticResource Flag.Argentina}" Tag="es-AR" Content="Spanish (Argentina) / Español (Argentina)" Author="KNTRO (kntro@msn.com)"
@@ -1009,6 +1134,8 @@
                             <RowDefinition Height="21"/>
                             <RowDefinition MinHeight="29" Height="Auto"/>
                             <RowDefinition Height="21"/>
+                            <RowDefinition MinHeight="29" Height="Auto"/>                            
+                            <RowDefinition Height="21"/>
                             <RowDefinition MinHeight="29" Height="Auto"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
@@ -1018,6 +1145,7 @@
                         <WrapPanel Grid.Row="1" Margin="5,0">
                             <n:ImageCard x:Name="FfmpegImageCard" Header="FFmpeg" Click="FfmpegImageCard_Click"/>
                             <n:ImageCard x:Name="GifskiImageCard" Header="Gifski" Click="GifskiImageCard_Click"/>
+                            <n:ImageCard x:Name="SharpDxImageCard" Header="SharpDx" Click="SharpDxImageCard_Click"/>
                         </WrapPanel>
 
                         <n:LabelSeparator Grid.Row="2" Text="{DynamicResource Extras.FfmpegLocation}"/>
@@ -1050,7 +1178,22 @@
                                            ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
                         </Grid>
 
-                        <StackPanel Grid.Row="7" Orientation="Horizontal">
+                        <n:LabelSeparator Grid.Row="6" Text="{DynamicResource Extras.SharpDxLocation}"/>
+                        <Grid Grid.Row="7">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="30"/>
+                            </Grid.ColumnDefinitions>
+
+                            <n:ExtendedTextBox Grid.Column="0" x:Name="SharpDxLocationTextBox" Margin="10,3,0,3" Text="{Binding SharpDxLocationFolder, Source={x:Static u:UserSettings.All}, UpdateSourceTrigger=PropertyChanged}" 
+                                               LostKeyboardFocus="LocationTextBox_LostKeyboardFocus"/>
+
+                            <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" ContentWidth="20"
+                                           Click="SelectSharpDx_Click" ToolTip="{DynamicResource Extras.SharpDxLocation.Select}"
+                                           ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                        </Grid>
+
+                        <StackPanel Grid.Row="9" Orientation="Horizontal">
                             <Viewbox Child="{StaticResource Vector.Info}" Height="16" Width="16" Margin="2" Opacity="{DynamicResource Element.Opacity}"/>
 
                             <TextBlock Margin="2" VerticalAlignment="Center">
@@ -1062,6 +1205,12 @@
 
                                 <Hyperlink NavigateUri="https://github.com/ImageOptim/gifski/blob/master/LICENSE" RequestNavigate="ExtrasHyperlink_OnRequestNavigate">
                                     <Run Text="{DynamicResource Extras.License.Gifski}"/>
+                                </Hyperlink>
+                                
+                                <Run Text="/" Foreground="{DynamicResource Element.Foreground}"/>
+
+                                <Hyperlink NavigateUri="https://github.com/sharpdx/SharpDX/blob/master/LICENSE" RequestNavigate="ExtrasHyperlink_OnRequestNavigate">
+                                    <Run Text="{DynamicResource Extras.License.SharpDx}"/>
                                 </Hyperlink>
                             </TextBlock>
                         </StackPanel>

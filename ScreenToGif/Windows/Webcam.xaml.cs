@@ -407,8 +407,8 @@ namespace ScreenToGif.Windows
                 (int)Math.Round((Top + _offsetY) * _scale, MidpointRounding.AwayFromZero)));
 
             //Take a screenshot of the area.
-            var bt = Native.Capture(new System.Windows.Size((int)Math.Round(WebcamControl.ActualWidth * _scale, MidpointRounding.AwayFromZero),
-                (int)Math.Round(WebcamControl.ActualHeight * _scale, MidpointRounding.AwayFromZero)), lefttop.X, lefttop.Y);
+            var bt = Native.Capture((int)Math.Round(WebcamControl.ActualWidth * _scale, MidpointRounding.AwayFromZero),
+                (int)Math.Round(WebcamControl.ActualHeight * _scale, MidpointRounding.AwayFromZero), lefttop.X, lefttop.Y);
 
             _addDel.BeginInvoke(fileName, new Bitmap(bt), null, null); //CallBack
             //_addDel.BeginInvoke(fileName, new Bitmap(WebcamControl.Capture.GetFrame()), CallBack, null);
@@ -416,7 +416,7 @@ namespace ScreenToGif.Windows
 
             //ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(_capture.GetFrame())); });
 
-            Dispatcher.Invoke(() => Title = $"Screen To Gif • {_frameCount}");
+            Dispatcher.Invoke(() => Title = $"ScreenToGif • {_frameCount}");
 
             _frameCount++;
             GC.Collect(1);
@@ -476,7 +476,7 @@ namespace ScreenToGif.Windows
                     #region SnapShot Recording
 
                     Stage = Stage.Snapping;
-                    Title = "Screen To Gif - " + FindResource("Recorder.Snapshot");
+                    Title = "ScreenToGif - " + FindResource("Recorder.Snapshot");
 
                     Normal_Elapsed(null, null);
 
@@ -505,7 +505,7 @@ namespace ScreenToGif.Windows
                 #region To Record Again
 
                 Stage = Stage.Recording;
-                Title = "Screen To Gif";
+                Title = "ScreenToGif";
 
                 _timer.Start();
 
@@ -565,7 +565,7 @@ namespace ScreenToGif.Windows
                     VideoDevicesComboBox.IsEnabled = true;
                     Topmost = true;
 
-                    Title = "Screen To Gif";
+                    Title = "ScreenToGif";
 
                     #endregion
                 }

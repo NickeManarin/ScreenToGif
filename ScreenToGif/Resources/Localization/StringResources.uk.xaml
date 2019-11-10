@@ -18,7 +18,7 @@
     <s:String x:Key="Preview">Попередній перегляд</s:String>
 
     <!--StartUp Page-->
-    <s:String x:Key="Title.StartUp">Screen To Gif - Запуск</s:String>
+    <s:String x:Key="Title.StartUp">ScreenToGif - Запуск</s:String>
     <s:String x:Key="Recorder">Запис</s:String>
     <s:String x:Key="Webcam">Вебкамера</s:String>
     <s:String x:Key="Board">Дошка</s:String>
@@ -39,7 +39,7 @@
     <!--<s:String x:Key="Update.CloseThis.Detail">This is an older version. You have already downloaded a new version.</s:String>-->
     
     <!--Options Page-->
-    <s:String x:Key="Title.Options">Налаштування Screen To Gif</s:String>
+    <s:String x:Key="Title.Options">Налаштування ScreenToGif</s:String>
     <s:String x:Key="Application">Програма</s:String>
     <s:String x:Key="Interface">Інтерфейс</s:String>
     <s:String x:Key="Image">Зображення</s:String>
@@ -56,19 +56,18 @@
     <s:String x:Key="S.Application.Other.Homepage.Board">Запис з дошки</s:String>
     <s:String x:Key="S.Application.Other.Homepage.Editor">Вікно редактора</s:String>
     
-    <s:String x:Key="Application.ScreenRecorder">Запис з екрану</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordMouse">Показувати курсор миші під час запису.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordClicks">Позначати кліки миші.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">Вибрати колір курсору</s:String>
-    <!--<s:String x:Key="Application.ScreenRecorder.PreStart">Use a pre start countdown.</s:String>-->
-    <s:String x:Key="Application.ScreenRecorder.StepRecording">Ввімкнути режим моментального знімку.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Кожен кадр буде захоплений вручну вами)</s:String>
-    <!--<s:String x:Key="Application.ScreenRecorder.FullRecording">Enable fullscreen mode.</s:String>-->
-    <!--<s:String x:Key="Application.ScreenRecorder.FullRecording.Info">(Experimental, will capture the main screen)</s:String>-->
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Фіксована частота кадрів.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Постійна затримка, яка не змінюється відносно затримок запису)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Ввімкнути асинхронний запис.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(Допомагає зменшити затримки інтерфейсу під час запису)</s:String>
+    <s:String x:Key="S.Options.Recorder.RecordMouse">Показувати курсор миші під час запису.</s:String>
+    <s:String x:Key="S.Options.Recorder.RecordClicks">Позначати кліки миші.</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectCursorColor">Вибрати колір курсору</s:String>
+    <!--<s:String x:Key="S.Options.Recorder.PreStart">Use a pre start countdown.</s:String>-->
+    <s:String x:Key="S.Options.Recorder.StepRecording">Ввімкнути режим моментального знімку.</s:String>
+    <s:String x:Key="S.Options.Recorder.StepRecording.Info">(Кожен кадр буде захоплений вручну вами)</s:String>
+    <!--<s:String x:Key="S.Options.Recorder.FullRecording">Enable fullscreen mode.</s:String>-->
+    <!--<s:String x:Key="S.Options.Recorder.FullRecording.Info">(Experimental, will capture the main screen)</s:String>-->
+    <s:String x:Key="S.Options.Recorder.FixedFramerate">Фіксована частота кадрів.</s:String>
+    <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Постійна затримка, яка не змінюється відносно затримок запису)</s:String>
+    <s:String x:Key="S.Options.Recorder.AsyncRecording">Ввімкнути асинхронний запис.</s:String>
+    <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(Допомагає зменшити затримки інтерфейсу під час запису)</s:String>
     
     <s:String x:Key="Application.Other">Інше</s:String>
     <!--<s:String x:Key="Application.Other.CheckForUpdates">Check for updates.</s:String>-->
@@ -165,10 +164,10 @@
     <!--<s:String x:Key="Recorder.FpsRange">Minimum to maximum fps: 1-60 fps</s:String>-->
     <s:String x:Key="Recorder.SnapToWindow">Захопити у Вікно (Drag and release to snap)</s:String>
     <s:String x:Key="Recorder.PreStart">Pre Start</s:String>
-    <s:String x:Key="Recorder.Paused">Screen To Gif (призупинено)</s:String>
+    <s:String x:Key="Recorder.Paused">ScreenToGif (призупинено)</s:String>
     
     <!--Webcam Recorder-->
-    <s:String x:Key="Webcam.Title">Screen To Gif - Webcam Recorder</s:String>
+    <s:String x:Key="Webcam.Title">ScreenToGif - Webcam Recorder</s:String>
     <s:String x:Key="Webcam.NoVideo">Не знайдено відеопристрою :(</s:String>
     <s:String x:Key="Webcam.CheckVideoDevices">Пошук відеопристроїв.</s:String>
     <!--<s:String x:Key="Webcam.Scale">Scale: x{0:0.##}</s:String>-->
@@ -251,7 +250,7 @@
     <!--<s:String x:Key="Encoder.Copy.Folder">Copy folder path</s:String>-->
 
     <!--Editor-->
-    <s:String x:Key="Editor.Title">Screen To Gif - Редактор</s:String>
+    <s:String x:Key="Editor.Title">ScreenToGif - Редактор</s:String>
     <s:String x:Key="Editor.File">Файл</s:String>
     <!--<s:String x:Key="Editor.Home">Home</s:String>-->
     <s:String x:Key="Editor.Playback">Відтворення</s:String>

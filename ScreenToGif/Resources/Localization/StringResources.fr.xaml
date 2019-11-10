@@ -80,22 +80,21 @@
     <s:String x:Key="Donate">Faire un don</s:String>
     <s:String x:Key="About">À propos</s:String>
     
-    <s:String x:Key="Application.ScreenRecorder">Capture d'écran</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordMouse">Inclure le curseur de la souris dans l'enregistrement</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordClicks">Détecter clics de souris</s:String>
-    <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">Sélectionnez la couleur du curseur</s:String>
-    <s:String x:Key="Application.ScreenRecorder.PreStart">Utiliser un compte à rebours au démarrage</s:String>
-    <s:String x:Key="Application.ScreenRecorder.PreStart.Info">(Temps d'attente, en seconde, avant de commencer la capture)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.StepRecording">Activer le mode instantané</s:String>
-    <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Chaque image doit être capturée manuellement)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Fréquence d'images fixe</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Retard constant qui ne tient pas compte des latences lors de l'enregistrement)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Activer l'enregistrement asynchrone</s:String>
-    <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(Permet de réduire le retard dû à l'interface lors de l'enregistrement)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.NewRecorder">Activer la nouvelle interface utilisateur de l'enregistreur</s:String>
-    <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(Remplacera l'ancienne interface utilisateur de l'enregistreur)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.Magnifier">Activer la loupe sur l'écran</s:String>
-    <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(Affiche une loupe lors de la sélection de la zone d'enregistrement)</s:String>
+    <s:String x:Key="S.Options.Recorder.RecordMouse">Inclure le curseur de la souris dans l'enregistrement</s:String>
+    <s:String x:Key="S.Options.Recorder.RecordClicks">Détecter clics de souris</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectCursorColor">Sélectionnez la couleur du curseur</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart">Utiliser un compte à rebours au démarrage</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart.Info">(Temps d'attente, en seconde, avant de commencer la capture)</s:String>
+    <s:String x:Key="S.Options.Recorder.StepRecording">Activer le mode instantané</s:String>
+    <s:String x:Key="S.Options.Recorder.StepRecording.Info">(Chaque image doit être capturée manuellement)</s:String>
+    <s:String x:Key="S.Options.Recorder.FixedFramerate">Fréquence d'images fixe</s:String>
+    <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Retard constant qui ne tient pas compte des latences lors de l'enregistrement)</s:String>
+    <s:String x:Key="S.Options.Recorder.AsyncRecording">Activer l'enregistrement asynchrone</s:String>
+    <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(Permet de réduire le retard dû à l'interface lors de l'enregistrement)</s:String>
+    <s:String x:Key="S.Options.Recorder.NewRecorder">Activer la nouvelle interface utilisateur de l'enregistreur</s:String>
+    <s:String x:Key="S.Options.Recorder.NewRecorder.Info">(Remplacera l'ancienne interface utilisateur de l'enregistreur)</s:String>
+    <s:String x:Key="S.Options.Recorder.Magnifier">Activer la loupe sur l'écran</s:String>
+    <s:String x:Key="S.Options.Recorder.Magnifier.Info">(Affiche une loupe lors de la sélection de la zone d'enregistrement)</s:String>
     
     <s:String x:Key="Application.Other">Autre</s:String>
     <s:String x:Key="Application.Other.SystemTray">Afficher l'application sur la barre d'état du système (zone de notification)</s:String>

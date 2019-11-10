@@ -146,6 +146,7 @@ namespace ScreenToGif.Util
         ///source rectangle is to be combined with the color data for the destination
         ///rectangle to achieve the final color.
         ///</summary>
+        [Flags]
         internal enum CopyPixelOperation
         {
             NoMirrorBitmap = -2147483648,
@@ -967,7 +968,6 @@ namespace ScreenToGif.Util
         /// </summary>
         public delegate IntPtr WindowProcedureHandler(IntPtr hwnd, uint uMsg, IntPtr wparam, IntPtr lparam);
 
-
         /// <summary>
         /// Win API WNDCLASS struct - represents a single window.
         /// Used to receive window messages.
@@ -985,6 +985,116 @@ namespace ScreenToGif.Util
             public IntPtr hbrBackground;
             [MarshalAs(UnmanagedType.LPWStr)] public string lpszMenuName;
             [MarshalAs(UnmanagedType.LPWStr)] public string lpszClassName;
+        }
+
+        public enum BitmapCompressionMode : uint
+        {
+            BI_RGB = 0,
+            BI_RLE8 = 1,
+            BI_RLE4 = 2,
+            BI_BITFIELDS = 3,
+            BI_JPEG = 4,
+            BI_PNG = 5
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct BitmapInfoHeader
+        {
+            public uint biSize;
+            public int biWidth;
+            public int biHeight;
+            public ushort biPlanes;
+            public ushort biBitCount;
+            public BitmapCompressionMode biCompression;
+            public uint biSizeImage;
+            public int biXPelsPerMeter;
+            public int biYPelsPerMeter;
+            public uint biClrUsed;
+            public uint biClrImportant;
+
+            public BitmapInfoHeader Init()
+            {
+                return new BitmapInfoHeader { biSize = (uint)Marshal.SizeOf(this) };
+            }
+        }
+
+        /// <summary>
+        /// The BITMAP structure defines the type, width, height, color format, and bit values of a bitmap.
+        /// </summary>
+        [Serializable]
+        [StructLayout(LayoutKind.Sequential)]
+        public struct Bitmap
+        {
+            /// <summary>
+            /// The bitmap type. This member must be zero.
+            /// </summary>
+            public int bmType;
+
+            /// <summary>
+            /// The width, in pixels, of the bitmap. The width must be greater than zero.
+            /// </summary>
+            public int bmWidth;
+
+            /// <summary>
+            /// The height, in pixels, of the bitmap. The height must be greater than zero.
+            /// </summary>
+            public int bmHeight;
+
+            /// <summary>
+            /// The number of bytes in each scan line. This value must be divisible by 2, because the system assumes that the bit 
+            /// values of a bitmap form an array that is word aligned.
+            /// </summary>
+            public int bmWidthBytes;
+
+            /// <summary>
+            /// The count of color planes.
+            /// </summary>
+            public int bmPlanes;
+
+            /// <summary>
+            /// The number of bits required to indicate the color of a pixel.
+            /// </summary>
+            public int bmBitsPixel;
+
+            /// <summary>
+            /// A pointer to the location of the bit values for the bitmap. The bmBits member must be a pointer to an array of 
+            /// character (1-byte) values.
+            /// </summary>
+            public IntPtr bmBits;
+        }
+
+        [Flags]
+        public enum LocalMemoryFlags
+        {
+            LMEM_FIXED = 0x0000,
+            LMEM_MOVEABLE = 0x0002,
+            LMEM_NOCOMPACT = 0x0010,
+            LMEM_NODISCARD = 0x0020,
+            LMEM_ZEROINIT = 0x0040,
+            LMEM_MODIFY = 0x0080,
+            LMEM_DISCARDABLE = 0x0F00,
+            LMEM_VALID_FLAGS = 0x0F72,
+            LMEM_INVALID_HANDLE = 0x8000,
+            LHND = (LMEM_MOVEABLE | LMEM_ZEROINIT),
+            LPTR = (LMEM_FIXED | LMEM_ZEROINIT),
+            NONZEROLHND = (LMEM_MOVEABLE),
+            NONZEROLPTR = (LMEM_FIXED)
+        }
+
+        [StructLayout(LayoutKind.Sequential, Pack = 2)]
+        public struct BitmapFileHeader
+        {
+            public ushort bfType;
+            public uint bfSize;
+            public ushort bfReserved1;
+            public ushort bfReserved2;
+            public uint bfOffBits;
+        }
+
+        public enum DibColorMode : uint
+        {
+            DibRgbColors = 0,
+            DibPalColors = 1
         }
 
         #endregion
@@ -1071,8 +1181,41 @@ namespace ScreenToGif.Util
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool BitBlt([In] IntPtr hdc, int nXDest, int nYDest, int nWidth, int nHeight, [In] IntPtr hdcSrc, int nXSrc, int nYSrc, CopyPixelOperation dwRop);
 
+        /// <summary>
+        /// pbmi was BitmapInfo.
+        /// </summary>
+        /// <param name="hdc"></param>
+        /// <param name="pbmi"></param>
+        /// <param name="pila"></param>
+        /// <param name="ppvBits"></param>
+        /// <param name="hSection"></param>
+        /// <param name="dwOffset"></param>
+        /// <returns></returns>
+        [DllImport("gdi32.dll")]
+        internal static extern IntPtr CreateDIBSection(IntPtr hdc, [In] ref IntPtr pbmi, uint pila, out IntPtr ppvBits, IntPtr hSection, uint dwOffset);
+
+        /// <summary>
+        /// Retrieves the bits of the specified compatible bitmap and copies them into a buffer as a DIB using the specified format.
+        /// </summary>
+        /// <param name="hdc">A handle to the device context.</param>
+        /// <param name="hbmp">A handle to the bitmap. This must be a compatible bitmap (DDB).</param>
+        /// <param name="uStartScan">The first scan line to retrieve.</param>
+        /// <param name="cScanLines">The number of scan lines to retrieve.</param>
+        /// <param name="lpvBits">A pointer to a buffer to receive the bitmap data. If this parameter is <see cref="IntPtr.Zero"/>, the function passes the dimensions and format of the bitmap to the <see cref="BITMAPINFO"/> structure pointed to by the <paramref name="lpbi"/> parameter.</param>
+        /// <param name="lpbi">A pointer to a <see cref="BITMAPINFO"/> structure that specifies the desired format for the DIB data.</param>
+        /// <param name="uUsage">The format of the bmiColors member of the <see cref="BITMAPINFO"/> structure. It must be one of the following values.</param>
+        /// <returns>If the lpvBits parameter is non-NULL and the function succeeds, the return value is the number of scan lines copied from the bitmap.
+        /// If the lpvBits parameter is NULL and GetDIBits successfully fills the <see cref="BITMAPINFO"/> structure, the return value is nonzero.
+        /// If the function fails, the return value is zero.
+        /// This function can return the following value: ERROR_INVALID_PARAMETER (87 (0×57))</returns>
+        [DllImport("gdi32.dll", EntryPoint = "GetDIBits")]
+        public static extern int GetDIBits([In] IntPtr hdc, [In] IntPtr hbmp, uint uStartScan, uint cScanLines, [Out] byte[] lpvBits, ref BitmapInfoHeader lpbi, DibColorMode uUsage);
+
         [DllImport("user32.dll", SetLastError = true)]
         internal static extern bool DrawIconEx(IntPtr hdc, int xLeft, int yTop, IntPtr hIcon, int cxWidth, int cyHeight, int istepIfAniCur, IntPtr hbrFlickerFreeDraw, int diFlags);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        internal static extern IntPtr GetCursorFrameInfo(IntPtr hCursor, IntPtr reserved, int step, ref int rate, ref int numSteps);
 
         ///<summary>Deletes the specified device context (DC).</summary>
         ///<param name="hdc">A handle to the device context.</param>
@@ -1080,6 +1223,9 @@ namespace ScreenToGif.Util
         ///<remarks>An application must not delete a DC whose handle was obtained by calling the <c>GetDC</c> function. Instead, it must call the <c>ReleaseDC</c> function to free the DC.</remarks>
         [DllImport("gdi32.dll", EntryPoint = "DeleteDC")]
         internal static extern bool DeleteDC([In] IntPtr hdc);
+
+        [DllImport("gdi32.dll")]
+        internal static extern int GetObject(IntPtr hgdiobj, int cbBuffer, IntPtr lpvObject);
 
         ///<summary>Deletes a logical pen, brush, font, bitmap, region, or palette, freeing all system resources associated with the object. After the object is deleted, the specified handle is no longer valid.</summary>
         ///<param name="hObject">A handle to a logical pen, brush, font, bitmap, region, or palette.</param>
@@ -1486,6 +1632,12 @@ namespace ScreenToGif.Util
         [DllImport("msvcrt.dll", EntryPoint = "memcpy", CallingConvention = CallingConvention.Cdecl, SetLastError = false)]
         public static extern IntPtr MemoryCopy(IntPtr dest, IntPtr src, UIntPtr count);
 
+        [DllImport("kernel32.dll")]
+        public static extern IntPtr LocalAlloc(uint uFlags, UIntPtr uBytes);
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        public static extern IntPtr LocalFree(IntPtr hMem);
+
         #endregion
 
         internal delegate bool MonitorEnumProc(IntPtr monitor, IntPtr hdc, IntPtr lprcMonitor, IntPtr lParam);
@@ -1501,7 +1653,7 @@ namespace ScreenToGif.Util
         /// <param name="height">The size of the final image.</param>
         /// <param name="positionX">Source capture Left position.</param>
         /// <param name="positionY">Source capture Top position.</param>
-        /// <returns>A bitmap withe the capture rectangle.</returns>
+        /// <returns>A bitmap with the capture rectangle.</returns>
         public static BitmapSource CaptureBitmapSource(int width, int height, int positionX, int positionY)
         {
             var hDesk = GetDesktopWindow();
@@ -1538,20 +1690,20 @@ namespace ScreenToGif.Util
         /// <param name="size">The size of the final image.</param>
         /// <param name="positionX">Source capture Left position.</param>
         /// <param name="positionY">Source capture Top position.</param>
-        /// <returns>A bitmap withe the capture rectangle.</returns>
-        public static Image Capture(Size size, int positionX, int positionY)
+        /// <returns>A bitmap with the capture rectangle.</returns>
+        public static Image Capture(int width, int height, int positionX, int positionY)
         {
             var hDesk = GetDesktopWindow();
             var hSrce = GetWindowDC(hDesk);
             var hDest = CreateCompatibleDC(hSrce);
-            var hBmp = CreateCompatibleBitmap(hSrce, (int)size.Width, (int)size.Height);
+            var hBmp = CreateCompatibleBitmap(hSrce, width, height);
             var hOldBmp = SelectObject(hDest, hBmp);
 
             try
             {
                 new System.Security.Permissions.UIPermission(System.Security.Permissions.UIPermissionWindow.AllWindows).Demand();
 
-                var b = BitBlt(hDest, 0, 0, (int)size.Width, (int)size.Height, hSrce, positionX, positionY, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
+                var b = BitBlt(hDest, 0, 0, width, height, hSrce, positionX, positionY, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
 
                 return b ? Image.FromHbitmap(hBmp) : null;
             }
@@ -1606,8 +1758,7 @@ namespace ScreenToGif.Util
 
                             if (hicon != IntPtr.Zero)
                             {
-                                Iconinfo iconInfo;
-                                if (GetIconInfo(hicon, out iconInfo))
+                                if (GetIconInfo(hicon, out var iconInfo))
                                 {
                                     cursorPosX = cursorInfo.ptScreenPos.X - positionX;
                                     cursorPosY = cursorInfo.ptScreenPos.Y - positionY;
@@ -1686,7 +1837,7 @@ namespace ScreenToGif.Util
             return null;
         }
 
-        public static Bitmap CaptureImageCursor(ref Point point, double scale)
+        public static System.Drawing.Bitmap CaptureImageCursor(ref Point point, double scale)
         {
             try
             {
@@ -1703,8 +1854,7 @@ namespace ScreenToGif.Util
                 if (hicon == IntPtr.Zero)
                     return null;
 
-                Iconinfo iconInfo;
-                if (!GetIconInfo(hicon, out iconInfo))
+                if (!GetIconInfo(hicon, out var iconInfo))
                 {
                     DeleteObject(hicon);
                     return null;
@@ -1718,7 +1868,7 @@ namespace ScreenToGif.Util
                     //Is this a monochrome cursor?  
                     if (maskBitmap.Height == maskBitmap.Width * 2 && iconInfo.hbmColor == IntPtr.Zero)
                     {
-                        var final = new Bitmap(maskBitmap.Width, maskBitmap.Width);
+                        var final = new System.Drawing.Bitmap(maskBitmap.Width, maskBitmap.Width);
                         var hDesktop = GetDesktopWindow();
                         var dcDesktop = GetWindowDC(hDesktop);
 
@@ -1763,6 +1913,7 @@ namespace ScreenToGif.Util
 
             return null;
         }
+
 
         /// <summary>
         /// Draws a rectangle over a Window.
@@ -2139,11 +2290,11 @@ namespace ScreenToGif.Util
             return z;
         }
 
-        public static Point GetMousePosition(double scale = 1)
+        public static Point GetMousePosition(double scale = 1, double offsetX = 0, double offsetY = 0)
         {
             var point = new PointW();
             GetCursorPos(ref point);
-            return new Point(point.X / scale, point.Y / scale);
+            return new Point(point.X / scale - offsetX, point.Y / scale - offsetY);
         }
 
         internal static bool ShowFileProperties(string filename)
@@ -2166,187 +2317,6 @@ namespace ScreenToGif.Util
         }
 
         #endregion
-    }
-
-    internal static class FunctionLoader
-    {
-        [DllImport("Kernel32.dll")]
-        private static extern IntPtr LoadLibrary(string path);
-
-        [DllImport("Kernel32.dll")]
-        private static extern IntPtr GetProcAddress(IntPtr hModule, string procName);
-
-        internal static Delegate LoadFunction<T>(string dllPath, string functionName)
-        {
-            var hModule = LoadLibrary(dllPath);
-            var functionAddress = GetProcAddress(hModule, functionName);
-            return Marshal.GetDelegateForFunctionPointer(functionAddress, typeof(T));
-        }
-    }
-
-    internal class GifskiInterop
-    {
-        [StructLayout(LayoutKind.Sequential)]
-        internal struct GifskiSettings
-        {
-            public GifskiSettings(byte quality, bool looped, bool fast)
-            {
-                Width = 0;
-                Height = 0;
-                Quality = quality;
-                Once = !looped;
-                Fast = fast;
-            }
-
-            /// <summary>
-            /// Resize to max this width if non-0.
-            /// </summary>
-            internal uint Width;
-
-            /// <summary>
-            /// Resize to max this height if width is non-0. Note that aspect ratio is not preserved.
-            /// </summary>
-            internal uint Height;
-
-            /// <summary>
-            /// 1-100. Recommended to set to 100.
-            /// </summary>
-            internal byte Quality;
-
-            /// <summary>
-            /// If true, looping is disabled.
-            /// </summary>
-            internal bool Once;
-
-            /// <summary>
-            /// Lower quality, but faster encode.
-            /// </summary>
-            internal bool Fast;
-        }
-
-        internal enum GifskiError
-        {
-            /// <summary>
-            /// Alright.
-            /// </summary>
-            Ok = 0,
-
-            /// <summary>
-            /// One of input arguments was NULL.
-            /// </summary>
-            NullArgument,
-
-            /// <summary>
-            /// A one-time function was called twice, or functions were called in wrong order.
-            /// </summary>
-            InvalidState,
-
-            /// <summary>
-            /// Internal error related to palette quantization.
-            /// </summary>
-            QuantizationError,
-
-            /// <summary>
-            /// Internal error related to gif composing.
-            /// </summary>
-            GifError,
-
-            /// <summary>
-            /// Internal error related to multithreading.
-            /// </summary>
-            ThreadLost,
-
-            /// <summary>
-            /// I/O error: file or directory not found.
-            /// </summary>
-            NotFound,
-
-            /// <summary>
-            /// I/O error: permission denied.
-            /// </summary>
-            PermissionDenied,
-
-            /// <summary>
-            /// I/O error: File already exists.
-            /// </summary>
-            AlreadyExists,
-
-            /// <summary>
-            /// Misc I/O error.
-            /// </summary>
-            InvalidInput,
-
-            /// <summary>
-            /// Misc I/O error.
-            /// </summary>
-            TimedOut,
-
-            /// <summary>
-            /// Misc I/O error.
-            /// </summary>
-            WriteZero,
-
-            /// <summary>
-            /// Misc I/O error.
-            /// </summary>
-            Interrupted,
-
-            /// <summary>
-            /// Misc I/O error.
-            /// </summary>
-            UnexpectedEof,
-
-            /// <summary>
-            /// Should not happen, file a bug.
-            /// </summary>
-            OtherError
-        }
-
-        private delegate IntPtr NewDelegate(GifskiSettings settings);
-        private delegate GifskiError AddPngFrameDelegate(IntPtr handle, uint index, string path, ushort delay);
-        private delegate GifskiError EndAddingFramesDelegate(IntPtr handle);
-        private delegate GifskiError WriteDelegate(IntPtr handle, string destination);
-        private delegate void DropDelegate(IntPtr handle);
-
-        private static readonly NewDelegate New = (NewDelegate)FunctionLoader.LoadFunction<NewDelegate>(UserSettings.All.GifskiLocation, "gifski_new");
-        private static readonly AddPngFrameDelegate AddPngFrame = (AddPngFrameDelegate)FunctionLoader.LoadFunction<AddPngFrameDelegate>(UserSettings.All.GifskiLocation, "gifski_add_frame_png_file");
-        private static readonly EndAddingFramesDelegate EndAddingFrames = (EndAddingFramesDelegate)FunctionLoader.LoadFunction<EndAddingFramesDelegate>(UserSettings.All.GifskiLocation, "gifski_end_adding_frames");
-        private static readonly WriteDelegate Write = (WriteDelegate)FunctionLoader.LoadFunction<WriteDelegate>(UserSettings.All.GifskiLocation, "gifski_write");
-        private static readonly DropDelegate Drop = (DropDelegate)FunctionLoader.LoadFunction<DropDelegate>(UserSettings.All.GifskiLocation, "gifski_drop");
-
-        internal IntPtr Start(int quality, bool looped = true, bool fast = false)
-        {
-            return New(new GifskiSettings((byte)quality, looped, fast));
-        }
-
-        internal GifskiError AddFrame(IntPtr handle, uint index, string path, int delay)
-        {
-            return AddPngFrame(handle, index, path, (ushort)(delay / 10));
-        }
-
-        internal GifskiError EndAdding(IntPtr handle)
-        {
-            return EndAddingFrames(handle);
-        }
-
-        internal GifskiError WriteFrame(IntPtr handle, string destination)
-        {
-            return Write(handle, destination);
-        }
-
-        internal GifskiError End(IntPtr handle, string destination)
-        {
-            var status = Write(handle, destination);
-
-            if (status != GifskiError.Ok)
-            {
-                Drop(handle);
-                return status;
-            }
-
-            Drop(handle);
-            return GifskiError.Ok;
-        }
     }
 
     internal class WindowMessageSink : IDisposable

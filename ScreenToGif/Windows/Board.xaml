@@ -85,16 +85,16 @@
                 </Grid.ColumnDefinitions>
 
                 <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="PenModeRadioButton" Content="{StaticResource Vector.Pen}" IsChecked="True"
-                                    Cursor="Hand" MaxSize="20" Padding="0,5" Style="{StaticResource Style.ImageRadioButton.NoText}"
+                                    Cursor="Hand" ContentWidth="20" Padding="0,5" Style="{StaticResource Style.ImageRadioButton.NoText}"
                                     ToolTip="{DynamicResource FreeDrawing.Pen}" ToolTipService.Placement="Top"/>
                 <n:ImageRadioButton Grid.Column="1" x:Name="EraserModeRadioButton" Content="{StaticResource Vector.Eraser}" 
-                                    Cursor="Hand" MaxSize="20" Padding="0,5" Style="{StaticResource Style.ImageRadioButton.NoText}"
+                                    Cursor="Hand" ContentWidth="20" Padding="0,5" Style="{StaticResource Style.ImageRadioButton.NoText}"
                                     ToolTip="{DynamicResource FreeDrawing.Eraser}" ToolTipService.Placement="Top"/>
                 <n:ImageRadioButton Grid.Column="2" x:Name="SelectorModeRadioButton" Content="{StaticResource Vector.Select}" 
-                                    Cursor="Hand" MaxSize="20" Padding="0,5" Style="{StaticResource Style.ImageRadioButton.NoText}"
+                                    Cursor="Hand" ContentWidth="20" Padding="0,5" Style="{StaticResource Style.ImageRadioButton.NoText}"
                                     ToolTip="{DynamicResource FreeDrawing.Select}" ToolTipService.Placement="Top"/>
                 <n:ImageRadioButton Grid.Column="3" x:Name="EraserStrokeModeRadioButton" Content="{StaticResource Vector.StrokeEraser}" 
-                                    Cursor="Hand" MaxSize="20" Padding="0,5" Style="{StaticResource Style.ImageRadioButton.NoText}"
+                                    Cursor="Hand" ContentWidth="20" Padding="0,5" Style="{StaticResource Style.ImageRadioButton.NoText}"
                                     ToolTip="{DynamicResource FreeDrawing.StrokeEraser}" ToolTipService.Placement="Top"/>
             </Grid>
 
@@ -124,12 +124,12 @@
                                  ToolTip="{DynamicResource Recorder.Width}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                 <n:ImageRadioButton Grid.Column="4" x:Name="EllipseRadioButton" Content="{StaticResource Vector.Ellipse}" 
-                                    Cursor="Hand" MaxSize="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
+                                    Cursor="Hand" ContentWidth="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
                                     IsChecked="{Binding BoardStylusTip, Source={x:Static u:UserSettings.All}, 
                                     Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
 
                 <n:ImageRadioButton Grid.Column="5" x:Name="RectangleRadioButton" Content="{StaticResource Vector.Rectangle}" 
-                                    Cursor="Hand" MaxSize="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
+                                    Cursor="Hand" ContentWidth="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
                                     IsChecked="{Binding BoardStylusTip, Source={x:Static u:UserSettings.All}, 
                                     Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
 
@@ -168,12 +168,12 @@
                                  ToolTip="{DynamicResource Recorder.Width}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                 <n:ImageRadioButton Grid.Column="4" x:Name="EraserEllipseRadioButton" Content="{StaticResource Vector.Ellipse}" 
-                                    Cursor="Hand" MaxSize="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
+                                    Cursor="Hand" ContentWidth="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
                                     IsChecked="{Binding BoardEraserStylusTip, Source={x:Static u:UserSettings.All}, 
                                     Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
 
                 <n:ImageRadioButton Grid.Column="5" x:Name="EraserRectangleRadioButton" Content="{StaticResource Vector.Rectangle}" 
-                                    Cursor="Hand" MaxSize="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
+                                    Cursor="Hand" ContentWidth="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
                                     IsChecked="{Binding BoardEraserStylusTip, Source={x:Static u:UserSettings.All}, 
                                     Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
             </Grid>

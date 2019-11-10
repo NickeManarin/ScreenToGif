@@ -33,7 +33,19 @@ namespace ScreenToGif.Windows
 {
     public partial class Options : Window, INotification
     {
-        #region Variables
+        #region Constants and variables
+
+        internal const int ApplicationIndex = 0;
+        internal const int RecorderIndex = 1;
+        internal const int InterfaceIndex = 2;
+        internal const int AutomatedTasksIndex = 3;
+        internal const int ShortcutsIndex = 4;
+        internal const int LanguageIndex = 5;
+        internal const int TempFilesIndex = 6;
+        internal const int UploadIndex = 7;
+        internal const int ExtrasIndex = 8;
+        internal const int DonateIndex = 9;
+        internal const int AboutIndex = 10;
 
         /// <summary>
         /// The Path of the Temp folder.
@@ -1421,6 +1433,101 @@ namespace ScreenToGif.Windows
 #endif
         }
 
+        private async void SharpDxImageCard_Click(object sender, RoutedEventArgs e)
+        {
+            CheckTools();
+
+            if (!string.IsNullOrWhiteSpace(UserSettings.All.SharpDxLocationFolder) && File.Exists(Path.Combine(UserSettings.All.SharpDxLocationFolder, "SharpDX.dll")))
+            {
+                Native.ShowFileProperties(Path.GetFullPath(Path.Combine(UserSettings.All.SharpDxLocationFolder, "SharpDX.dll")));
+                return;
+            }
+
+#if UWP
+            StatusBand.Warning(LocalizationHelper.Get("S.Extras.DownloadRestriction"));
+            return;
+#else
+            #region Save as
+
+            var output = UserSettings.All.SharpDxLocationFolder ?? "";
+
+            if (output.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
+                output = "";
+
+            //It's only a relative path if not null/empty and there's no root folder declared.
+            var isRelative = !string.IsNullOrWhiteSpace(output) && !Path.IsPathRooted(output);
+            var notAlt = !string.IsNullOrWhiteSpace(output) && output.Contains(Path.DirectorySeparatorChar);
+
+            var directory = !string.IsNullOrWhiteSpace(output) ? Path.GetDirectoryName(output) : "";
+            var initial = Directory.Exists(directory) ? directory : Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+
+            var fbd = new System.Windows.Forms.FolderBrowserDialog
+            {
+                Description = LocalizationHelper.Get("Extras.SharpDxLocation.Select"),
+                SelectedPath = isRelative ? Path.GetFullPath(initial) : initial
+            };
+            var result = fbd.ShowDialog();
+
+            if (result != DialogResultWinForms.OK)
+                return;
+
+            UserSettings.All.SharpDxLocationFolder = fbd.SelectedPath;
+
+            //Converts to a relative path again.
+            if (isRelative && !string.IsNullOrWhiteSpace(UserSettings.All.SharpDxLocationFolder))
+            {
+                var selected = new Uri(UserSettings.All.SharpDxLocationFolder);
+                var baseFolder = new Uri(AppDomain.CurrentDomain.BaseDirectory);
+                var relativeFolder = Uri.UnescapeDataString(baseFolder.MakeRelativeUri(selected).ToString());
+
+                //This app even returns you the correct slashes/backslashes.
+                UserSettings.All.SharpDxLocationFolder = notAlt ? relativeFolder : relativeFolder.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+            }
+
+            #endregion
+
+            #region Download
+
+            ExtrasGrid.IsEnabled = false;
+            Cursor = Cursors.AppStarting;
+            SharpDxImageCard.Status = ExtrasStatus.Processing;
+            SharpDxImageCard.Description = LocalizationHelper.Get("Extras.Downloading");
+
+            try
+            {
+                //Save to a temp folder.
+                var temp = Path.Combine(Path.GetTempPath(), Path.GetTempFileName());
+
+                using (var client = new WebClient { Proxy = WebHelper.GetProxy() })
+                    await client.DownloadFileTaskAsync(new Uri("https://github.com/NickeManarin/ScreenToGif-Website/raw/master/downloads/SharpDx.zip", UriKind.Absolute), temp);
+                
+                using (var zip = ZipFile.Open(temp, ZipArchiveMode.Read))
+                {
+                    foreach (var entry in zip.Entries)
+                    {
+                        if (File.Exists(Path.Combine(UserSettings.All.SharpDxLocationFolder, entry.Name)))
+                            File.Delete(Path.Combine(UserSettings.All.SharpDxLocationFolder, entry.Name));
+
+                        entry?.ExtractToFile(Path.Combine(UserSettings.All.SharpDxLocationFolder, entry.Name), true);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Error while downloading SharpDx");
+                ErrorDialog.Ok("Downloading SharpDx", "It was not possible to download SharpDx", ex.Message, ex);
+            }
+            finally
+            {
+                ExtrasGrid.IsEnabled = true;
+                Cursor = Cursors.Arrow;
+                CheckTools();
+            }
+
+            #endregion
+#endif
+        }
+
         private void LocationTextBox_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             CheckTools();
@@ -1522,6 +1629,51 @@ namespace ScreenToGif.Windows
             CheckTools();
         }
 
+        private void SelectSharpDx_Click(object sender, RoutedEventArgs e)
+        {
+            var output = UserSettings.All.SharpDxLocationFolder ?? "";
+
+            if (output.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
+                output = "";
+
+            //It's only a relative path if not null/empty and there's no root folder declared.
+            var isRelative = !string.IsNullOrWhiteSpace(output) && !Path.IsPathRooted(output);
+            var notAlt = !string.IsNullOrWhiteSpace(output) && (UserSettings.All.SharpDxLocationFolder ?? "").Contains(Path.DirectorySeparatorChar);
+
+            //Gets the current directory folder, where the file is located. If empty, it means that the path is relative.
+            var directory = !string.IsNullOrWhiteSpace(output) ? Path.GetDirectoryName(output) : "";
+
+            if (!string.IsNullOrWhiteSpace(output) && string.IsNullOrWhiteSpace(directory))
+                directory = AppDomain.CurrentDomain.BaseDirectory;
+
+            var initial = Directory.Exists(directory) ? directory : Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+
+            var fbd = new System.Windows.Forms.FolderBrowserDialog
+            {
+                Description = LocalizationHelper.Get("Extras.SharpDxLocation.Select"),
+                SelectedPath = isRelative ? Path.GetFullPath(initial) : initial
+            };
+            var result = fbd.ShowDialog();
+
+            if (result != DialogResultWinForms.OK) 
+                return;
+
+            UserSettings.All.SharpDxLocationFolder = fbd.SelectedPath;
+
+            //Converts to a relative path again.
+            if (isRelative && !string.IsNullOrWhiteSpace(UserSettings.All.SharpDxLocationFolder))
+            {
+                var selected = new Uri(UserSettings.All.SharpDxLocationFolder);
+                var baseFolder = new Uri(AppDomain.CurrentDomain.BaseDirectory);
+                var relativeFolder = Uri.UnescapeDataString(baseFolder.MakeRelativeUri(selected).ToString());
+
+                //This app even returns you the correct slashes/backslashes.
+                UserSettings.All.SharpDxLocationFolder = notAlt ? relativeFolder : relativeFolder.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+            }
+
+            CheckTools();
+        }
+
         private void ExtrasHyperlink_OnRequestNavigate(object sender, RequestNavigateEventArgs e)
         {
             try
@@ -1567,6 +1719,24 @@ namespace ScreenToGif.Windows
                 {
                     GifskiImageCard.Status = ExtrasStatus.Available;
                     GifskiImageCard.Description = string.Format(LocalizationHelper.Get("Extras.Download", "{0}"), "~ 1 MB");
+                }
+
+                if (Util.Other.IsSharpDxPresent(true))
+                {
+                    var info1 = new FileInfo(Path.Combine(UserSettings.All.SharpDxLocationFolder, "SharpDX.dll"));
+                    info1.Refresh();
+                    var info2 = new FileInfo(Path.Combine(UserSettings.All.SharpDxLocationFolder, "SharpDX.DXGI.dll"));
+                    info2.Refresh();
+                    var info3 = new FileInfo(Path.Combine(UserSettings.All.SharpDxLocationFolder, "SharpDX.Direct3D11.dll"));
+                    info3.Refresh();
+
+                    SharpDxImageCard.Status = ExtrasStatus.Ready;
+                    SharpDxImageCard.Description = string.Format(LocalizationHelper.Get("Extras.Ready", "{0}"), Humanizer.BytesToString(info1.Length + info2.Length + info3.Length));
+                }
+                else
+                {
+                    SharpDxImageCard.Status = ExtrasStatus.Available;
+                    SharpDxImageCard.Description = string.Format(LocalizationHelper.Get("Extras.Download", "{0}"), "~ 242 KB");
                 }
             }
             catch (Exception ex)
@@ -1719,6 +1889,8 @@ namespace ScreenToGif.Windows
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            #region Validation
+
             if (UserSettings.All.CursorFollowing && UserSettings.All.FollowShortcut == Key.None)
             {
                 Dialog.Ok(LocalizationHelper.Get("Title.Options"), LocalizationHelper.Get("S.Options.Warning.Follow.Header"),
@@ -1730,6 +1902,20 @@ namespace ScreenToGif.Windows
                 e.Cancel = true;
                 return;
             }
+
+            if (UserSettings.All.UseDesktopDuplication && !Util.Other.IsSharpDxPresent())
+            {
+                Dialog.Ok(LocalizationHelper.Get("Title.Options"), LocalizationHelper.Get("S.Options.Warning.DesktopDuplication.Header"),
+                    LocalizationHelper.Get("S.Options.Warning.DesktopDuplication.Message"), Icons.Warning);
+
+                ExtrasRadioButton.IsChecked = true;
+                SharpDxLocationTextBox.Focus();
+
+                e.Cancel = true;
+                return;
+            }
+
+            #endregion
 
             Global.IgnoreHotKeys = false;
 
@@ -1759,7 +1945,8 @@ namespace ScreenToGif.Windows
 
         internal void SelectTab(int index)
         {
-            if (index <= -1 || index >= OptionsStackPanel.Children.Count - 1) return;
+            if (index <= -1 || index >= OptionsStackPanel.Children.Count - 1) 
+                return;
 
             if (OptionsStackPanel.Children[index] is RadioButton radio)
                 radio.IsChecked = true;

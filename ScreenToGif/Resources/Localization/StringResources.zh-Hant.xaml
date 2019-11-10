@@ -18,7 +18,7 @@
     <s:String x:Key="Preview">預覽</s:String>
 
     <!--StartUp Page-->
-    <s:String x:Key="Title.StartUp">Screen To Gif - 啟動</s:String>
+    <s:String x:Key="Title.StartUp">ScreenToGif - 啟動</s:String>
     <s:String x:Key="Recorder">螢幕錄影</s:String>
     <s:String x:Key="Webcam">網路攝影機錄影</s:String>
     <s:String x:Key="Board">繪圖板錄影</s:String>
@@ -40,7 +40,7 @@
     <s:String x:Key="Update.CloseThis.Detail">這是較舊的版本。您早已下載過新的版本。</s:String>
     
     <!--Options Page-->
-    <s:String x:Key="Title.Options">Screen To Gif - 選項</s:String>
+    <s:String x:Key="Title.Options">ScreenToGif - 選項</s:String>
     <s:String x:Key="Application">應用程式</s:String>
     <s:String x:Key="S.Shortcuts">鍵盤快速鍵</s:String>
     <s:String x:Key="Interface">介面</s:String>
@@ -58,20 +58,19 @@
     <s:String x:Key="S.Application.Other.Homepage.Board">繪圖板錄影</s:String>
     <s:String x:Key="S.Application.Other.Homepage.Editor">編輯器視窗</s:String>
     
-    <s:String x:Key="Application.ScreenRecorder">螢幕錄影</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordMouse">錄影時顯示滑鼠游標。</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordClicks">偵測滑鼠點擊。</s:String>
-    <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">選擇游標顏色</s:String>
-    <s:String x:Key="Application.ScreenRecorder.PreStart">使用前開始倒數計時。</s:String>
-    <s:String x:Key="Application.ScreenRecorder.PreStart.Info">(以秒為單位，在開始擷取之前等待時間)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.StepRecording">啟用快照模式。</s:String>
-    <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(每個幀將由您手動擷取)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FullRecording">啟用全螢幕模式。</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FullRecording.Info">(實驗性，將擷取主畫面)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate">固定幀率。</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(固定延遲，不會導致錄影時間延長)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.AsyncRecording">啟用非同步錄影。</s:String>
-    <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(它能降低錄影時介面的延遲)</s:String>
+    <s:String x:Key="S.Options.Recorder.RecordMouse">錄影時顯示滑鼠游標。</s:String>
+    <s:String x:Key="S.Options.Recorder.RecordClicks">偵測滑鼠點擊。</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectCursorColor">選擇游標顏色</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart">使用前開始倒數計時。</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart.Info">(以秒為單位，在開始擷取之前等待時間)</s:String>
+    <s:String x:Key="S.Options.Recorder.StepRecording">啟用快照模式。</s:String>
+    <s:String x:Key="S.Options.Recorder.StepRecording.Info">(每個幀將由您手動擷取)</s:String>
+    <s:String x:Key="S.Options.Recorder.FullRecording">啟用全螢幕模式。</s:String>
+    <s:String x:Key="S.Options.Recorder.FullRecording.Info">(實驗性，將擷取主畫面)</s:String>
+    <s:String x:Key="S.Options.Recorder.FixedFramerate">固定幀率。</s:String>
+    <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(固定延遲，不會導致錄影時間延長)</s:String>
+    <s:String x:Key="S.Options.Recorder.AsyncRecording">啟用非同步錄影。</s:String>
+    <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(它能降低錄影時介面的延遲)</s:String>
     
     <s:String x:Key="Application.Other">其它</s:String>
     <s:String x:Key="Application.Other.CheckForUpdates">檢查更新。</s:String>
@@ -174,10 +173,10 @@
     <s:String x:Key="Recorder.FpsRange">最小到最大 fps: 1-60 fps</s:String>
     <s:String x:Key="Recorder.SnapToWindow">貼齊視窗(拖曳後放下來貼齊)</s:String>
     <s:String x:Key="Recorder.PreStart">啟動前</s:String>
-    <s:String x:Key="Recorder.Paused">Screen To Gif (已暫停)</s:String>
+    <s:String x:Key="Recorder.Paused">ScreenToGif (已暫停)</s:String>
     
     <!--Webcam Recorder-->
-    <s:String x:Key="Webcam.Title">Screen To Gif - 網路攝影機錄影</s:String>
+    <s:String x:Key="Webcam.Title">ScreenToGif - 網路攝影機錄影</s:String>
     <s:String x:Key="Webcam.NoVideo">未偵測到視訊裝置:(</s:String>
     <s:String x:Key="Webcam.CheckVideoDevices">檢查視訊裝置。</s:String>
     <s:String x:Key="Webcam.Scale">比例: x{0:0.##}</s:String>
@@ -260,7 +259,7 @@
     <s:String x:Key="Encoder.Copy.Folder">複製資料夾路徑</s:String>
 
     <!--Editor-->
-    <s:String x:Key="Editor.Title">Screen To Gif - 編輯器</s:String>
+    <s:String x:Key="Editor.Title">ScreenToGif - 編輯器</s:String>
     <s:String x:Key="Editor.File">檔案</s:String>
     <s:String x:Key="Editor.Home">首頁</s:String>
     <s:String x:Key="Editor.Playback">播放</s:String>

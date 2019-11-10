@@ -103,7 +103,7 @@
     <s:String x:Key="S.Command.Cinemagraph">Выбор нестатичных областей</s:String>
     
     <!--StartUp Page-->
-    <s:String x:Key="Title.StartUp">Screen To Gif - Запуск</s:String>
+    <s:String x:Key="Title.StartUp">ScreenToGif - Запуск</s:String>
     <s:String x:Key="Recorder">Запись</s:String>
     <s:String x:Key="Webcam">Веб-камера</s:String>
     <s:String x:Key="Board">Доска</s:String>
@@ -132,7 +132,7 @@
     <s:String x:Key="Update.CloseThis.Detail">Текущая версия программы устарела. Новая версия уже загружена.</s:String>
     
     <!--Options Window-->
-    <s:String x:Key="Title.Options">Screen To Gif - Настройки</s:String>
+    <s:String x:Key="Title.Options">ScreenToGif - Настройки</s:String>
     <s:String x:Key="Application">Программа</s:String>
     <s:String x:Key="Interface">Внешний вид</s:String>
     <s:String x:Key="S.AutoTasks">Авто-задачи</s:String>
@@ -148,26 +148,25 @@
     <s:String x:Key="S.Options.Warning.Follow.Header">Нет сочетания клавиш - следовать за курсором</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Message">Необходимо установить сочетание клавиш для переключения этой функции.</s:String>
     
-    <s:String x:Key="Application.ScreenRecorder">Запись с экрана</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordMouse">Показывать курсор на записи.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordClicks">Записывать щелчки мыши.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">Выберите цвет курсора</s:String>
-    <s:String x:Key="Application.ScreenRecorder.PreStart">Задержка начала записи.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.PreStart.Info">(в секундах)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.StepRecording">Включить ручной режим записи.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Каждый кадр должен быть записан вручную)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Постоянная частота кадров.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Постоянная задержка, не изменяется с задержкой записи)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Включить асинхронную запись.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(Это поможет снизить "лаги" интерфейса во время записи)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.NewRecorder">Использовать новый рекордер.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(Изменить интерфейс старого рекордера)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.Magnifier">Активировать увеличение экрана.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(Увеличивает регион записи с экрана)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.CursorFollowing">Включить следование за курсором</s:String>
-    <s:String x:Key="Application.ScreenRecorder.CursorFollowing.Info">(Область записи перемещается центрируясь по курсору)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FollowMargin.Info">(Буферное поле, где область записи получает репозицию)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FollowMarginInvisible.Info">(Дополнительное поле буфера, где UI скрывается)</s:String>
+    <s:String x:Key="S.Options.Recorder.RecordMouse">Показывать курсор на записи.</s:String>
+    <s:String x:Key="S.Options.Recorder.RecordClicks">Записывать щелчки мыши.</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectCursorColor">Выберите цвет курсора</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart">Задержка начала записи.</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart.Info">(в секундах)</s:String>
+    <s:String x:Key="S.Options.Recorder.StepRecording">Включить ручной режим записи.</s:String>
+    <s:String x:Key="S.Options.Recorder.StepRecording.Info">(Каждый кадр должен быть записан вручную)</s:String>
+    <s:String x:Key="S.Options.Recorder.FixedFramerate">Постоянная частота кадров.</s:String>
+    <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Постоянная задержка, не изменяется с задержкой записи)</s:String>
+    <s:String x:Key="S.Options.Recorder.AsyncRecording">Включить асинхронную запись.</s:String>
+    <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(Это поможет снизить "лаги" интерфейса во время записи)</s:String>
+    <s:String x:Key="S.Options.Recorder.NewRecorder">Использовать новый рекордер.</s:String>
+    <s:String x:Key="S.Options.Recorder.NewRecorder.Info">(Изменить интерфейс старого рекордера)</s:String>
+    <s:String x:Key="S.Options.Recorder.Magnifier">Активировать увеличение экрана.</s:String>
+    <s:String x:Key="S.Options.Recorder.Magnifier.Info">(Увеличивает регион записи с экрана)</s:String>
+    <s:String x:Key="S.Options.Recorder.CursorFollowing">Включить следование за курсором</s:String>
+    <s:String x:Key="S.Options.Recorder.CursorFollowing.Info">(Область записи перемещается центрируясь по курсору)</s:String>
+    <s:String x:Key="S.Options.Recorder.FollowMargin.Info">(Буферное поле, где область записи получает репозицию)</s:String>
+    <s:String x:Key="S.Options.Recorder.FollowMarginInvisible.Info">(Дополнительное поле буфера, где UI скрывается)</s:String>
 
     <s:String x:Key="Application.Other">Прочее</s:String>
     <s:String x:Key="Application.Other.SystemTray">Показывать значок в системном трее.</s:String>
@@ -402,7 +401,7 @@
     <s:String x:Key="Recorder.FpsRange">Пределы: 1-60 fps</s:String>
     <s:String x:Key="Recorder.SnapToWindow">Снимок окна (потяните и отпустите над окном)</s:String>
     <s:String x:Key="Recorder.PreStart">Подготовка</s:String>
-    <s:String x:Key="Recorder.Paused">Screen To Gif (Пауза)</s:String>
+    <s:String x:Key="Recorder.Paused">ScreenToGif (Пауза)</s:String>
     
     <!--New Recorder-->
     <s:String x:Key="S.Recorder.Area">Регион</s:String>
@@ -419,7 +418,7 @@
     <s:String x:Key="S.Recorder.EscToCancel">Нажмите ESC для отмены</s:String>
     
     <!--Webcam Recorder-->
-    <s:String x:Key="Webcam.Title">Screen To Gif - запись с веб-камеры</s:String>
+    <s:String x:Key="Webcam.Title">ScreenToGif - запись с веб-камеры</s:String>
     <s:String x:Key="Webcam.NoVideo">У вас нет веб-камеры :(</s:String>
     <s:String x:Key="Webcam.CheckVideoDevices">Поиск видео устройств.</s:String>
     <s:String x:Key="Webcam.Scale">Масштаб: {0:0.##}x</s:String>
@@ -530,7 +529,7 @@
     <s:String x:Key="S.Notifications.Dismiss">Отклонить все</s:String>
     
     <!--Editor-->
-    <s:String x:Key="Editor.Title">Screen To Gif - Редактор</s:String>
+    <s:String x:Key="Editor.Title">ScreenToGif - Редактор</s:String>
     <s:String x:Key="Editor.File">Файл</s:String>
     <s:String x:Key="Editor.Home">Редактор</s:String>
     <s:String x:Key="Editor.Playback">Воспроизведение</s:String>

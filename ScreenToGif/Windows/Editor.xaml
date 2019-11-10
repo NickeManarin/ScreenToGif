@@ -1772,40 +1772,40 @@
                                 </n:LabelSeparator.Visibility>
                             </n:LabelSeparator>
                             <WrapPanel Grid.Row="2" Margin="10,0,0,0" Visibility="{Binding IsChecked, ElementName=GifRadioButton, Converter={StaticResource Bool2Visibility}}">
-                                <n:ImageRadioButton x:Name="NewEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.ScreenToGif}" 
+                                <n:ImageRadioButton x:Name="NewEncoderRadioButton" ContentWidth="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.ScreenToGif}" 
                                                     IsChecked="{Binding GifEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.ScreenToGif}}"
                                                     ToolTip="{DynamicResource S.SaveAs.Encoder.ScreenToGif.Tooltip}"/>
                                 <Separator Width="1"/>
-                                <n:ImageRadioButton x:Name="LegacyEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.Legacy}" 
+                                <n:ImageRadioButton x:Name="LegacyEncoderRadioButton" ContentWidth="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.Legacy}" 
                                                     IsChecked="{Binding GifEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.Legacy}}"
                                                     ToolTip="{DynamicResource S.SaveAs.Encoder.Legacy.Tooltip}"/>
                                 <Separator Width="1"/>
-                                <n:ImageRadioButton x:Name="PaintNetEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.System}"
+                                <n:ImageRadioButton x:Name="PaintNetEncoderRadioButton" ContentWidth="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.System}"
                                                     IsChecked="{Binding GifEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.PaintNet}}"
                                                     ToolTip="{DynamicResource S.SaveAs.Encoder.System.Tooltip}"/>
                                 <Separator Width="1"/>
-                                <n:ImageRadioButton x:Name="FfmpegGifEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.Ffmpeg}"
+                                <n:ImageRadioButton x:Name="FfmpegGifEncoderRadioButton" ContentWidth="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.Ffmpeg}"
                                                     IsChecked="{Binding GifEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.FFmpeg}}"/>
                                 <Separator Width="1"/>
-                                <n:ImageRadioButton x:Name="GifskiGifEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.Gifski}"
+                                <n:ImageRadioButton x:Name="GifskiGifEncoderRadioButton" ContentWidth="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.Gifski}"
                                                     IsChecked="{Binding GifEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:GifEncoderType.Gifski}}"/>
                             </WrapPanel>
 
                             <WrapPanel Grid.Row="2" Margin="10,0,0,0" Visibility="{Binding IsChecked, ElementName=ApngRadioButton, Converter={StaticResource Bool2Visibility}}">
-                                <n:ImageRadioButton x:Name="NormalApngEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.Apng}" 
+                                <n:ImageRadioButton x:Name="NormalApngEncoderRadioButton" ContentWidth="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.Apng}" 
                                                     IsChecked="{Binding ApngEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:ApngEncoderType.ScreenToGif}}"
                                                     ToolTip="{DynamicResource S.SaveAs.Encoder.Apng.Tooltip}"/>
                                 <Separator Width="1"/>
-                                <n:ImageRadioButton x:Name="FfmpegApngEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.Ffmpeg}"
+                                <n:ImageRadioButton x:Name="FfmpegApngEncoderRadioButton" ContentWidth="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.Ffmpeg}"
                                                     IsChecked="{Binding ApngEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:ApngEncoderType.FFmpeg}}"/>
                             </WrapPanel>
 
                             <WrapPanel Grid.Row="2" Margin="10,0,0,0" Visibility="{Binding IsChecked, ElementName=VideoRadioButton, Converter={StaticResource Bool2Visibility}}">
-                                <n:ImageRadioButton x:Name="SystemEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.System}"
+                                <n:ImageRadioButton x:Name="SystemEncoderRadioButton" ContentWidth="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.System}"
                                                     IsChecked="{Binding VideoEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:VideoEncoderType.AviStandalone}}"
                                                     Checked="VideoEncoderRadioButton_Checked"/>
                                 <Separator Width="1"/>
-                                <n:ImageRadioButton x:Name="FfmpegEncoderRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.Ffmpeg}"
+                                <n:ImageRadioButton x:Name="FfmpegEncoderRadioButton" ContentWidth="0" Padding="0,2" Text="{DynamicResource S.SaveAs.Encoder.Ffmpeg}"
                                                     IsChecked="{Binding VideoEncoder, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:VideoEncoderType.Ffmpg}}"
                                                     Checked="VideoEncoderRadioButton_Checked"/>
                             </WrapPanel>
@@ -1817,7 +1817,6 @@
                                                     IsChecked="{Binding ZipImages, Source={x:Static u:UserSettings.All}}" Margin="3"
                                                     Checked="SaveType_Checked" Unchecked="SaveType_Checked"/>
                             </WrapPanel>
-
 
                             <Expander Grid.Row="3" Header="{DynamicResource S.SaveAs.GifOptions}" Visibility="{Binding IsChecked, ElementName=GifRadioButton, Converter={StaticResource Bool2Visibility}}"
                                       IsExpanded="{Binding IsGifOptionsExpanded, Source={x:Static u:UserSettings.All}}">
@@ -1941,7 +1940,6 @@
                                 </Grid>
                             </Expander>
 
-
                             <Expander Grid.Row="3" Header="{DynamicResource S.SaveAs.ApngOptions}" Visibility="{Binding IsChecked, ElementName=ApngRadioButton, Converter={StaticResource Bool2Visibility}}"
                                       IsExpanded="{Binding IsApngOptionsExpanded, Source={x:Static u:UserSettings.All}}">
                                 <Grid>
@@ -2003,7 +2001,6 @@
                                 </Grid>
                             </Expander>
 
-
                             <Expander Grid.Row="3" Header="{DynamicResource S.SaveAs.VideoOptions}" Visibility="{Binding IsChecked, ElementName=VideoRadioButton, Converter={StaticResource Bool2Visibility}}"
                                       IsExpanded="{Binding IsVideoOptionsExpanded, Source={x:Static u:UserSettings.All}}">
                                 <Grid Margin="10,0,0,0">
@@ -2049,7 +2046,7 @@
                                                Visibility="{Binding IsChecked, ElementName=FfmpegEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
                                     <n:ExtendedTextBox Grid.Row="4" Grid.Column="1" x:Name="FfmpegParameterTextBox" MinHeight="23" Margin="5,3"
                                                        Visibility="{Binding IsChecked, ElementName=FfmpegEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"
-                                                       VerticalContentAlignment="Top" TextWrapping="WrapWithOverflow"/>
+                                                       VerticalContentAlignment="Top" TextWrapping="Wrap"/>
 
                                     <Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="5,0"
                                           Visibility="{Binding IsChecked, ElementName=FfmpegEncoderRadioButton, Converter={StaticResource Bool2Visibility}}">
@@ -2083,6 +2080,27 @@
                                 </Grid>
                             </Expander>
 
+                            <Expander Grid.Row="3" Header="{DynamicResource S.SaveAs.ProjectOptions}" Visibility="{Binding IsChecked, ElementName=ProjectRadioButton, Converter={StaticResource Bool2Visibility}}"
+                                      IsExpanded="{Binding IsProjectOptionsExpanded, Source={x:Static u:UserSettings.All}}">
+                                <Grid Margin="10,0,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Grid.Column="0" Text="{DynamicResource S.Options.Recorder.Compression}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="0" VerticalAlignment="Center"/>
+                                    <ComboBox Grid.Column="1" x:Name="ProjectCompressionComboBox" MinWidth="120" VerticalAlignment="Center" Margin="5,3"
+                                              SelectedIndex="{Binding Path=CompressionLevelProject, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToInt}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                        <ComboBoxItem Content="{DynamicResource S.Options.Recorder.Compression.Optimal}"/>
+                                        <ComboBoxItem Content="{DynamicResource S.Options.Recorder.Compression.Fastest}"/>
+                                        <ComboBoxItem Content="{DynamicResource S.Options.Recorder.Compression.NoCompression}"/>
+                                    </ComboBox>
+                                </Grid>
+                            </Expander>
 
                             <Expander Grid.Row="3" Header="{DynamicResource S.SaveAs.PsdOptions}" Visibility="{Binding IsChecked, ElementName=PsdRadioButton, Converter={StaticResource Bool2Visibility}}"
                                       IsExpanded="{Binding IsPsdOptionsExpanded, Source={x:Static u:UserSettings.All}}">
@@ -2103,7 +2121,7 @@
                                 </Grid>
                             </Expander>
 
-
+                            
                             <Expander Grid.Row="5" Header="{DynamicResource S.SaveAs.SaveOptions}" IsExpanded="{Binding IsSaveOptionsExpanded, Source={x:Static u:UserSettings.All}}">
                                 <Grid>
                                     <Grid Visibility="{Binding IsChecked, ElementName=GifRadioButton, Converter={StaticResource Bool2Visibility}}">
@@ -2161,19 +2179,19 @@
                                                             Checked="SaveToClipboard_CheckedChanged"/>
 
                                         <WrapPanel Grid.Row="5" Margin="20,0,0,0" Visibility="{Binding IsChecked, ElementName=CopyFileCheckBox, Converter={StaticResource Bool2Visibility}}">
-                                            <n:ImageRadioButton x:Name="CopyFileRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.File}" 
+                                            <n:ImageRadioButton x:Name="CopyFileRadioButton" ContentWidth="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.File}" 
                                                                 IsChecked="{Binding LatestCopyType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.File}}"
                                                                 ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.File.Info}"/>
                                             <Separator Width="1"/>
-                                            <n:ImageRadioButton x:Name="CopyFolderPathRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FolderPath}" 
+                                            <n:ImageRadioButton x:Name="CopyFolderPathRadioButton" ContentWidth="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FolderPath}" 
                                                                 IsChecked="{Binding LatestCopyType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.FolderPath}}"
                                                                 ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FolderPath.Info}"/>
                                             <Separator Width="1"/>
-                                            <n:ImageRadioButton x:Name="CopyFilePathRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FilePath}" 
+                                            <n:ImageRadioButton x:Name="CopyFilePathRadioButton" ContentWidth="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FilePath}" 
                                                                 IsChecked="{Binding LatestCopyType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.FilePath}}"
                                                                 ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FilePath.Info}"/>
                                             <Separator Width="1"/>
-                                            <n:ImageRadioButton x:Name="CopyLinkRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.Link}"
+                                            <n:ImageRadioButton x:Name="CopyLinkRadioButton" ContentWidth="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.Link}"
                                                                 IsChecked="{Binding LatestCopyType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.Link}}"
                                                                 ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.Link.Info}"/>
                                         </WrapPanel>
@@ -2219,15 +2237,15 @@
                                                             Checked="SaveToClipboard_CheckedChanged"/>
 
                                         <WrapPanel Grid.Row="3" Margin="20,0,0,0" Visibility="{Binding IsChecked, ElementName=CopyFileApngCheckBox, Converter={StaticResource Bool2Visibility}}">
-                                            <n:ImageRadioButton x:Name="CopyFileApngRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.File}" 
+                                            <n:ImageRadioButton x:Name="CopyFileApngRadioButton" ContentWidth="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.File}" 
                                                                 IsChecked="{Binding LatestCopyTypeApng, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.File}}"
                                                                 ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.File.Info}"/>
                                             <Separator Width="1"/>
-                                            <n:ImageRadioButton x:Name="CopyFolderPathApngRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FolderPath}" 
+                                            <n:ImageRadioButton x:Name="CopyFolderPathApngRadioButton" ContentWidth="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FolderPath}" 
                                                                 IsChecked="{Binding LatestCopyTypeApng, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.FolderPath}}"
                                                                 ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FolderPath.Info}"/>
                                             <Separator Width="1"/>
-                                            <n:ImageRadioButton x:Name="CopyFilePathApngRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FilePath}" 
+                                            <n:ImageRadioButton x:Name="CopyFilePathApngRadioButton" ContentWidth="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FilePath}" 
                                                                 IsChecked="{Binding LatestCopyTypeApng, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.FilePath}}"
                                                                 ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FilePath.Info}"/>
                                         </WrapPanel>
@@ -2273,15 +2291,15 @@
                                                             Checked="SaveToClipboard_CheckedChanged"/>
 
                                         <WrapPanel Grid.Row="3" Margin="20,0,0,0" Visibility="{Binding IsChecked, ElementName=CopyFileVideoCheckBox, Converter={StaticResource Bool2Visibility}}">
-                                            <n:ImageRadioButton x:Name="CopyFileVideoRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.File}" 
+                                            <n:ImageRadioButton x:Name="CopyFileVideoRadioButton" ContentWidth="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.File}" 
                                                                 IsChecked="{Binding LatestCopyTypeVideo, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.File}}"
                                                                 ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.File.Info}"/>
                                             <Separator Width="1"/>
-                                            <n:ImageRadioButton x:Name="CopyFolderPathVideoRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FolderPath}" 
+                                            <n:ImageRadioButton x:Name="CopyFolderPathVideoRadioButton" ContentWidth="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FolderPath}" 
                                                                 IsChecked="{Binding LatestCopyTypeVideo, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.FolderPath}}"
                                                                 ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FolderPath.Info}"/>
                                             <Separator Width="1"/>
-                                            <n:ImageRadioButton x:Name="CopyFilePathVideoRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FilePath}" 
+                                            <n:ImageRadioButton x:Name="CopyFilePathVideoRadioButton" ContentWidth="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FilePath}" 
                                                                 IsChecked="{Binding LatestCopyTypeVideo, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.FilePath}}"
                                                                 ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FilePath.Info}"/>
                                         </WrapPanel>
@@ -2321,15 +2339,15 @@
                                                             Checked="SaveToClipboard_CheckedChanged"/>
 
                                         <WrapPanel Grid.Row="3" Margin="20,0,0,0" Visibility="{Binding IsChecked, ElementName=CopyFileProjectCheckBox, Converter={StaticResource Bool2Visibility}}">
-                                            <n:ImageRadioButton x:Name="CopyFileProjectRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.File}" 
+                                            <n:ImageRadioButton x:Name="CopyFileProjectRadioButton" ContentWidth="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.File}" 
                                                                 IsChecked="{Binding LatestCopyTypeProject, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.File}}"
                                                                 ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.File.Info}"/>
                                             <Separator Width="1"/>
-                                            <n:ImageRadioButton x:Name="CopyFolderPathProjectRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FolderPath}" 
+                                            <n:ImageRadioButton x:Name="CopyFolderPathProjectRadioButton" ContentWidth="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FolderPath}" 
                                                                 IsChecked="{Binding LatestCopyTypeProject, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.FolderPath}}"
                                                                 ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FolderPath.Info}"/>
                                             <Separator Width="1"/>
-                                            <n:ImageRadioButton x:Name="CopyFilePathProjectRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FilePath}" 
+                                            <n:ImageRadioButton x:Name="CopyFilePathProjectRadioButton" ContentWidth="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FilePath}" 
                                                                 IsChecked="{Binding LatestCopyTypeProject, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.FilePath}}"
                                                                 ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FilePath.Info}"/>
                                         </WrapPanel>
@@ -2387,15 +2405,15 @@
                                                             Checked="SaveToClipboard_CheckedChanged"/>
 
                                         <WrapPanel Grid.Row="3" Margin="20,0,0,0" Visibility="{Binding IsChecked, ElementName=CopyFilePsdCheckBox, Converter={StaticResource Bool2Visibility}}">
-                                            <n:ImageRadioButton x:Name="CopyFilePsdRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.File}" 
+                                            <n:ImageRadioButton x:Name="CopyFilePsdRadioButton" ContentWidth="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.File}" 
                                                                 IsChecked="{Binding LatestCopyTypePhotoshop, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.File}}"
                                                                 ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.File.Info}"/>
                                             <Separator Width="1"/>
-                                            <n:ImageRadioButton x:Name="CopyFolderPathPsdRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FolderPath}" 
+                                            <n:ImageRadioButton x:Name="CopyFolderPathPsdRadioButton" ContentWidth="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FolderPath}" 
                                                                 IsChecked="{Binding LatestCopyTypePhotoshop, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.FolderPath}}"
                                                                 ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FolderPath.Info}"/>
                                             <Separator Width="1"/>
-                                            <n:ImageRadioButton x:Name="CopyFilePathPsdRadioButton" MaxSize="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FilePath}" 
+                                            <n:ImageRadioButton x:Name="CopyFilePathPsdRadioButton" ContentWidth="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FilePath}" 
                                                                 IsChecked="{Binding LatestCopyTypePhotoshop, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.FilePath}}"
                                                                 ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FilePath.Info}"/>
                                         </WrapPanel>
@@ -2781,19 +2799,19 @@
                                 </Grid.RowDefinitions>
 
                                 <n:ImageRadioButton Grid.Row="0" x:Name="FlipHorizontalRadioButton" Text="{DynamicResource FlipRotate.FlipHorizontal}"
-                                                    Content="{StaticResource Vector.FlipHorizontal}" Cursor="Hand" MaxSize="25" Padding="0,5"
+                                                    Content="{StaticResource Vector.FlipHorizontal}" Cursor="Hand" ContentWidth="25" Padding="0,5"
                                                     IsChecked="True"/>
 
                                 <n:ImageRadioButton Grid.Row="1" x:Name="FlipVerticalRadioButton" Text="{DynamicResource FlipRotate.FlipVertical}"
-                                                    Content="{StaticResource Vector.FlipVertical}" Cursor="Hand" MaxSize="25" Padding="0,5"/>
+                                                    Content="{StaticResource Vector.FlipVertical}" Cursor="Hand" ContentWidth="25" Padding="0,5"/>
 
 
                                 <n:ImageRadioButton Grid.Row="2" x:Name="RotateLeftRadioButton" Text="{DynamicResource FlipRotate.RotateLeft}"
-                                                    Content="{StaticResource Vector.RotateLeft90}" Cursor="Hand" MaxSize="25" Padding="0,5"/>
+                                                    Content="{StaticResource Vector.RotateLeft90}" Cursor="Hand" ContentWidth="25" Padding="0,5"/>
 
 
                                 <n:ImageRadioButton Grid.Row="3" x:Name="RotateRightRadioButton" Text="{DynamicResource FlipRotate.RotateRight}"
-                                                    Content="{StaticResource Vector.RotateRight90}" Cursor="Hand" MaxSize="25" Padding="0,5"/>
+                                                    Content="{StaticResource Vector.RotateRight90}" Cursor="Hand" ContentWidth="25" Padding="0,5"/>
                             </Grid>
                         </Grid>
 
@@ -3471,14 +3489,14 @@
                                 </Grid.ColumnDefinitions>
 
                                 <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="PenModeRadioButton" Content="{StaticResource Vector.Pen}" 
-                                                    Text="{DynamicResource FreeDrawing.Pen}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5" IsChecked="True"/>
+                                                    Text="{DynamicResource FreeDrawing.Pen}" Cursor="Hand" ContentWidth="20" Margin="0,3" Padding="0,5" IsChecked="True"/>
                                 <n:ImageRadioButton Grid.Row="0" Grid.Column="1" x:Name="EraserModeRadioButton" Content="{StaticResource Vector.Eraser}" 
-                                                    Text="{DynamicResource FreeDrawing.Eraser}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
+                                                    Text="{DynamicResource FreeDrawing.Eraser}" Cursor="Hand" ContentWidth="20" Margin="0,3" Padding="0,5"/>
 
                                 <n:ImageRadioButton Grid.Row="1" Grid.Column="0" x:Name="SelectorModeRadioButton" Content="{StaticResource Vector.Select}" 
-                                                    Text="{DynamicResource FreeDrawing.Select}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
+                                                    Text="{DynamicResource FreeDrawing.Select}" Cursor="Hand" ContentWidth="20" Margin="0,3" Padding="0,5"/>
                                 <n:ImageRadioButton Grid.Row="1" Grid.Column="1" x:Name="EraserStrokeModeRadioButton" Content="{StaticResource Vector.StrokeEraser}" 
-                                                    Text="{DynamicResource FreeDrawing.StrokeEraser}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
+                                                    Text="{DynamicResource FreeDrawing.StrokeEraser}" Cursor="Hand" ContentWidth="20" Margin="0,3" Padding="0,5"/>
                             </Grid>
 
                             <n:LabelSeparator Grid.Row="2" Text="{DynamicResource FreeDrawing.Pen}" Visibility="{Binding ElementName=PenModeRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}"/>
@@ -3517,11 +3535,11 @@
                                     </Grid.ColumnDefinitions>
 
                                     <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="RectangleRadioButton" Content="{StaticResource Vector.Rectangle}" 
-                                                        Text="{DynamicResource FreeDrawing.Rectangle}" Cursor="Hand" MaxSize="20" Margin="3,3" Padding="0,5"
+                                                        Text="{DynamicResource FreeDrawing.Rectangle}" Cursor="Hand" ContentWidth="20" Margin="3,3" Padding="0,5"
                                                         IsChecked="{Binding FreeDrawingStylusTip, Source={x:Static u:UserSettings.All},
                                                         Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
                                     <n:ImageRadioButton Grid.Row="0" Grid.Column="1" x:Name="EllipseRadioButton" Content="{StaticResource Vector.Ellipse}" 
-                                                        Text="{DynamicResource FreeDrawing.Ellipse}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"
+                                                        Text="{DynamicResource FreeDrawing.Ellipse}" Cursor="Hand" ContentWidth="20" Margin="0,3" Padding="0,5"
                                                         IsChecked="{Binding FreeDrawingStylusTip, Source={x:Static u:UserSettings.All},
                                                         Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
                                 </Grid>
@@ -3562,11 +3580,11 @@
                                     </Grid.ColumnDefinitions>
 
                                     <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="RectangleEraserRadioButton" Content="{StaticResource Vector.Rectangle}" 
-                                                        Text="{DynamicResource FreeDrawing.Rectangle}" Cursor="Hand" MaxSize="20" Margin="3,3" Padding="0,5"
+                                                        Text="{DynamicResource FreeDrawing.Rectangle}" Cursor="Hand" ContentWidth="20" Margin="3,3" Padding="0,5"
                                                         IsChecked="{Binding FreeDrawingEraserStylusTip, Source={x:Static u:UserSettings.All},
                                                         Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
                                     <n:ImageRadioButton Grid.Row="0" Grid.Column="1" x:Name="ElipseEraserRadioButton" Content="{StaticResource Vector.Ellipse}" 
-                                                        Text="{DynamicResource FreeDrawing.Ellipse}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"
+                                                        Text="{DynamicResource FreeDrawing.Ellipse}" Cursor="Hand" ContentWidth="20" Margin="0,3" Padding="0,5"
                                                         IsChecked="{Binding FreeDrawingEraserStylusTip, Source={x:Static u:UserSettings.All},
                                                         Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
                                 </Grid>
@@ -3597,10 +3615,10 @@
                                 </Grid.ColumnDefinitions>
 
                                 <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="AddModeRadioButton" Content="{StaticResource Vector.Add}" Margin="0,3" 
-                                                    Text="{DynamicResource S.Shapes.Mode.Insert}" Cursor="Hand" MaxSize="20" Padding="0,5" IsChecked="True" Checked="ShapeModes_Checked"/>
+                                                    Text="{DynamicResource S.Shapes.Mode.Insert}" Cursor="Hand" ContentWidth="20" Padding="0,5" IsChecked="True" Checked="ShapeModes_Checked"/>
 
                                 <n:ImageRadioButton Grid.Row="0" Grid.Column="1" x:Name="SelectModeRadioButton" Content="{StaticResource Vector.Select}" Margin="0,3"
-                                                    Text="{DynamicResource FreeDrawing.Select}" Cursor="Hand" MaxSize="20" Padding="0,5" Checked="ShapeModes_Checked"/>
+                                                    Text="{DynamicResource FreeDrawing.Select}" Cursor="Hand" ContentWidth="20" Padding="0,5" Checked="ShapeModes_Checked"/>
                             </Grid>
 
                             <n:LabelSeparator Grid.Row="2" Text="{DynamicResource S.Shapes.Shapes}" Visibility="{Binding ElementName=AddModeRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}"/>
@@ -4293,14 +4311,14 @@
                                 </Grid.ColumnDefinitions>
 
                                 <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="PenMode2RadioButton" Content="{StaticResource Vector.Pen}" 
-                                                    Text="{DynamicResource FreeDrawing.Pen}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5" IsChecked="True"/>
+                                                    Text="{DynamicResource FreeDrawing.Pen}" Cursor="Hand" ContentWidth="20" Margin="0,3" Padding="0,5" IsChecked="True"/>
                                 <n:ImageRadioButton Grid.Row="0" Grid.Column="1" x:Name="EraserMode2RadioButton" Content="{StaticResource Vector.Eraser}" 
-                                                    Text="{DynamicResource FreeDrawing.Eraser}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
+                                                    Text="{DynamicResource FreeDrawing.Eraser}" Cursor="Hand" ContentWidth="20" Margin="0,3" Padding="0,5"/>
 
                                 <n:ImageRadioButton Grid.Row="1" Grid.Column="0" x:Name="SelectorMode2RadioButton" Content="{StaticResource Vector.Select}" 
-                                                    Text="{DynamicResource FreeDrawing.Select}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
+                                                    Text="{DynamicResource FreeDrawing.Select}" Cursor="Hand" ContentWidth="20" Margin="0,3" Padding="0,5"/>
                                 <n:ImageRadioButton Grid.Row="1" Grid.Column="1" x:Name="EraserStrokeMode2RadioButton" Content="{StaticResource Vector.StrokeEraser}" 
-                                                    Text="{DynamicResource FreeDrawing.StrokeEraser}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
+                                                    Text="{DynamicResource FreeDrawing.StrokeEraser}" Cursor="Hand" ContentWidth="20" Margin="0,3" Padding="0,5"/>
                             </Grid>
 
                             <n:LabelSeparator Grid.Row="2" Text="{DynamicResource FreeDrawing.Pen}" Visibility="{Binding ElementName=PenMode2RadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}"/>
@@ -4334,11 +4352,11 @@
                                     </Grid.ColumnDefinitions>
 
                                     <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="Rectangle2RadioButton" Content="{StaticResource Vector.Rectangle}" 
-                                                        Text="{DynamicResource FreeDrawing.Rectangle}" Cursor="Hand" MaxSize="20" Margin="3,3" Padding="0,5"
+                                                        Text="{DynamicResource FreeDrawing.Rectangle}" Cursor="Hand" ContentWidth="20" Margin="3,3" Padding="0,5"
                                                         IsChecked="{Binding CinemagraphStylusTip, Source={x:Static u:UserSettings.All}, 
                                                         Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
                                     <n:ImageRadioButton Grid.Row="0" Grid.Column="1" x:Name="Ellipse2RadioButton" Content="{StaticResource Vector.Ellipse}" 
-                                                        Text="{DynamicResource FreeDrawing.Ellipse}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"
+                                                        Text="{DynamicResource FreeDrawing.Ellipse}" Cursor="Hand" ContentWidth="20" Margin="0,3" Padding="0,5"
                                                         IsChecked="{Binding CinemagraphStylusTip, Source={x:Static u:UserSettings.All}, 
                                                         Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
                                 </Grid>
@@ -4378,11 +4396,11 @@
                                     </Grid.ColumnDefinitions>
 
                                     <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="RectangleEraser2RadioButton" Content="{StaticResource Vector.Rectangle}" 
-                                                        Text="{DynamicResource FreeDrawing.Rectangle}" Cursor="Hand" MaxSize="20" Margin="3,3" Padding="0,5"
+                                                        Text="{DynamicResource FreeDrawing.Rectangle}" Cursor="Hand" ContentWidth="20" Margin="3,3" Padding="0,5"
                                                         IsChecked="{Binding CinemagraphEraserStylusTip, Source={x:Static u:UserSettings.All}, 
                                                         Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
                                     <n:ImageRadioButton Grid.Row="0" Grid.Column="1" x:Name="ElipseEraser2RadioButton" Content="{StaticResource Vector.Ellipse}" 
-                                                        Text="{DynamicResource FreeDrawing.Ellipse}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"
+                                                        Text="{DynamicResource FreeDrawing.Ellipse}" Cursor="Hand" ContentWidth="20" Margin="0,3" Padding="0,5"
                                                         IsChecked="{Binding CinemagraphEraserStylusTip, Source={x:Static u:UserSettings.All}, 
                                                         Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
                                 </Grid>
@@ -4522,11 +4540,11 @@
 
                                 <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="FadeToFrameRadioButton" Content="{StaticResource Vector.Image}" 
                                                     IsChecked="{Binding FadeToType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:FadeToType.NextFrame}}"
-                                                    Text="{DynamicResource Transitions.FadeTo.Frame}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
+                                                    Text="{DynamicResource Transitions.FadeTo.Frame}" Cursor="Hand" ContentWidth="20" Margin="0,3" Padding="0,5"/>
 
                                 <n:ImageRadioButton Grid.Row="0" Grid.Column="1" x:Name="FadeToColorRadioButton" Content="{StaticResource Vector.Colors}" 
                                                     IsChecked="{Binding FadeToType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:FadeToType.Color}}"
-                                                    Text="{DynamicResource Transitions.FadeTo.Color}" Cursor="Hand" MaxSize="20" Margin="0,3" Padding="0,5"/>
+                                                    Text="{DynamicResource Transitions.FadeTo.Color}" Cursor="Hand" ContentWidth="20" Margin="0,3" Padding="0,5"/>
                             </Grid>
 
                             <n:LabelSeparator Grid.Row="2" Text="{DynamicResource Transitions.Color}" Visibility="{Binding ElementName=FadeToColorRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}"/>

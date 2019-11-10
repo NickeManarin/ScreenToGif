@@ -80,22 +80,21 @@
     <s:String x:Key="Donate">寄付</s:String>
     <s:String x:Key="About">アプリ情報</s:String>
     
-    <s:String x:Key="Application.ScreenRecorder">スクリーンレコーダー</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordMouse">録画中にマウスカーソルを表示</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordClicks">マウスのクリックを検出</s:String>
-    <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">カーソルの色を選択する</s:String>
-    <s:String x:Key="Application.ScreenRecorder.PreStart">開始前にカウントダウン</s:String>
-    <s:String x:Key="Application.ScreenRecorder.PreStart.Info">キャプチャ開始前に数秒待つ</s:String>
-    <s:String x:Key="Application.ScreenRecorder.StepRecording">スナップショットモード</s:String>
-    <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(各フレームは手動でキャプチャされます)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate">固定フレームレート</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(録画時のラグによる変動をせず一定します)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.AsyncRecording">非同期録画</s:String>
-    <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(録画時のラグ低減に有効)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.NewRecorder">新ユーザーインタフェース</s:String>
-    <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(旧ユーザーインタフェースを置き換えます)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.Magnifier">拡大鏡を有効</s:String>
-    <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(記録領域を選択している間は拡大鏡を有効にします)</s:String>
+    <s:String x:Key="S.Options.Recorder.RecordMouse">録画中にマウスカーソルを表示</s:String>
+    <s:String x:Key="S.Options.Recorder.RecordClicks">マウスのクリックを検出</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectCursorColor">カーソルの色を選択する</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart">開始前にカウントダウン</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart.Info">キャプチャ開始前に数秒待つ</s:String>
+    <s:String x:Key="S.Options.Recorder.StepRecording">スナップショットモード</s:String>
+    <s:String x:Key="S.Options.Recorder.StepRecording.Info">(各フレームは手動でキャプチャされます)</s:String>
+    <s:String x:Key="S.Options.Recorder.FixedFramerate">固定フレームレート</s:String>
+    <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(録画時のラグによる変動をせず一定します)</s:String>
+    <s:String x:Key="S.Options.Recorder.AsyncRecording">非同期録画</s:String>
+    <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(録画時のラグ低減に有効)</s:String>
+    <s:String x:Key="S.Options.Recorder.NewRecorder">新ユーザーインタフェース</s:String>
+    <s:String x:Key="S.Options.Recorder.NewRecorder.Info">(旧ユーザーインタフェースを置き換えます)</s:String>
+    <s:String x:Key="S.Options.Recorder.Magnifier">拡大鏡を有効</s:String>
+    <s:String x:Key="S.Options.Recorder.Magnifier.Info">(記録領域を選択している間は拡大鏡を有効にします)</s:String>
     
     <s:String x:Key="Application.Other">その他</s:String>
     <s:String x:Key="Application.Other.SystemTray">システムトレイ(通知領域)にアプリを表示</s:String>

@@ -16,7 +16,8 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
 
         private readonly BitmapSource _source = null;
         private WriteableBitmap _data = null;
-        private IntPtr _iptr = IntPtr.Zero;
+
+        public IntPtr BackBuffer { get; set; } = IntPtr.Zero;
 
         /// <summary>
         /// Byte Array containing all pixel information.
@@ -90,10 +91,10 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
             var step = Depth / 8;
 
             Pixels = new byte[pixelCount * step];
-            _iptr = _data.BackBuffer;
+            BackBuffer = _data.BackBuffer;
 
             //Copy data from pointer to array.
-            Marshal.Copy(_iptr, Pixels, 0, Pixels.Length);
+            Marshal.Copy(BackBuffer, Pixels, 0, Pixels.Length);
         }
 
         /// <summary>
@@ -102,11 +103,11 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
         public WriteableBitmap UnlockBits()
         {
             //Copy data from byte array to pointer.
-            Marshal.Copy(Pixels, 0, _iptr, Pixels.Length);
+            Marshal.Copy(Pixels, 0, BackBuffer, Pixels.Length);
 
             //Unlock bitmap data.
             _data.Unlock();
-            
+
             GC.Collect(1);
 
             return _data;
@@ -235,7 +236,7 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
                 }
             }
 
-            return Color.FromArgb(255, (byte)(r / mult), (byte)(g/mult), (byte)(b/mult));
+            return Color.FromArgb(255, (byte)(r / mult), (byte)(g / mult), (byte)(b / mult));
         }
 
         public List<Color> GetAllPixels()

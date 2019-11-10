@@ -513,7 +513,7 @@ namespace ScreenToGif.Model
                 //If there's less than 2GB left.
                 if (drive.AvailableFreeSpace < 2000000000)
                     Application.Current.Dispatcher.Invoke(() => NotificationManager.AddNotification(LocalizationHelper.GetWithFormat("Editor.Warning.LowSpace", Math.Round(Global.AvailableDiskSpacePercentage, 2)),
-                        StatusType.Warning, "disk", () => App.MainViewModel.OpenOptions.Execute(5)));
+                        StatusType.Warning, "disk", () => App.MainViewModel.OpenOptions.Execute(Options.TempFilesIndex)));
                 else
                     Application.Current.Dispatcher.Invoke(() => NotificationManager.RemoveNotification(r => r.Tag == "disk"));
             }

@@ -26,6 +26,14 @@ namespace ScreenToGif.Util
             return GetParent<TP>(parent, i + 1);
         }
 
+        public static T GetVisualParent<T>(this DependencyObject child) where T : Visual
+        {
+            while (child != null && !(child is T))
+                child = VisualTreeHelper.GetParent(child);
+
+            return child as T;
+        }
+
         public static TP GetParent<TP>(DependencyObject child, Type stopWhen) where TP : Visual
         {
             var parent = VisualTreeHelper.GetParent(child);

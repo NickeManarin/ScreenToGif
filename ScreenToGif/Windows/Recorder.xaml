@@ -11,8 +11,8 @@
                Width="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderWidth, Mode=TwoWay}" 
                Height="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderHeight, Mode=TwoWay}" 
                FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}"
-               SizeChanged="LightWindow_SizeChanged" Loaded="Window_Loaded" Closing="Window_Closing" 
-               LocationChanged="Window_LocationChanged" Activated="Window_Activated">
+               SizeChanged="Window_SizeChanged" Loaded="Window_Loaded" Closing="Window_Closing" 
+               LocationChanged="Window_LocationChanged" Activated="Window_Activated" DpiChanged="Window_DpiChanged">
 
     <Window.Resources>
         <Storyboard x:Key="ShowDiscardStoryboard">

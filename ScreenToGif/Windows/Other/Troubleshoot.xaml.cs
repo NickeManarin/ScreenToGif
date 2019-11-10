@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using ScreenToGif.Util;
@@ -373,7 +372,7 @@ namespace ScreenToGif.Windows.Other
             var height = maxY - minY;
 
             var group = new TransformGroup();
-            group.Children.Add(new TranslateTransform(-minX, minY));
+            group.Children.Add(new TranslateTransform(-minX, -minY));
             group.Children.Add(new ScaleTransform(canvas.ActualWidth / width, canvas.ActualHeight / height));
             canvas.RenderTransform = group;
         }

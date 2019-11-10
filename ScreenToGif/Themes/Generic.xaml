@@ -8,11 +8,13 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/ScreenToGif;component/Themes/Common.xaml"/>
         <ResourceDictionary Source="/ScreenToGif;component/Themes/EncoderListViewItem.xaml"/>
+        <ResourceDictionary Source="/ScreenToGif;component/Themes/Ribbon.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <!--Converter-->
     <BooleanToVisibilityConverter x:Key="Bool2VisibilityConverterGeneric"/>
     <c:StringToInt x:Key="StringToInt"/>
+    <c:ContentToVisibility x:Key="ContentToVisibility"/>
     <c:UriToBitmap x:Key="UriToBitmapConverter"/>
     <c:IntToDelayString x:Key="IntToDelayStringConverter"/>
     <c:DoubleToPercentage x:Key="DoubleToPercentageConverter"/>
@@ -384,7 +386,7 @@
                 <Setter Property="Background" Value="{DynamicResource Element.Background.Focused}"/>
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="Opacity" Value="0.7"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -533,13 +535,13 @@
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="BorderBrush" Value="#FFA3BDE3"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource Element.Border.Hover}"/>
             </Trigger>
             <Trigger Property="IsKeyboardFocused" Value="True">
-                <Setter Property="Background" Value="WhiteSmoke"/>
+                <Setter Property="Background" Value="{DynamicResource Element.Background.Focused}"/>
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Opacity" Value="0.56"/>
+                <Setter Property="Opacity" Value="0.7"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -773,22 +775,23 @@
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
+        <Setter Property="Padding" Value="0,0,0,0"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="FocusVisualStyle" Value="{DynamicResource Style.FocusVisual.NoMargin}"/>
 
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:ImageRadioButton}">
-                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
-                        <Grid MinHeight="{TemplateBinding MinHeight}" SnapsToDevicePixels="True" Background="{TemplateBinding Background}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" BorderThickness="1" Padding="{TemplateBinding Padding}">
+                        <Grid MinHeight="{TemplateBinding MinHeight}" SnapsToDevicePixels="True" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
                             <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                     Margin="2,0,2,0" Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}" 
-                                     Stretch="Uniform" StretchDirection="Both" MaxHeight="{TemplateBinding MaxSize}" Effect="{x:Null}">
+                                     Margin="2,0,2,0" Width="{TemplateBinding ContentWidth}" Height="{TemplateBinding ContentWidth}" 
+                                     Stretch="Uniform" StretchDirection="Both" MaxHeight="{TemplateBinding ContentWidth}" Effect="{x:Null}">
                                 <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" Opacity="{DynamicResource Element.Opacity}"/>
                             </Viewbox>
 
@@ -2124,6 +2127,14 @@
 
                             <ContentPresenter Grid.Column="1" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
                                               Margin="5,0,0,0" VerticalAlignment="Center"/>
+
+                            <!--<TextBlock Grid.Column="2" Margin="5,5,5,3" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <Run Text="•" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <Run Text="{TemplateBinding MainAuthor}" Foreground="{DynamicResource Element.Foreground.Medium}" FontWeight="Bold" ToolTip="Current translator"/>
+                                <Run Text="-" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <Run Text="{TemplateBinding Author}" Foreground="{DynamicResource Element.Foreground.Gray112}"/>
+                            </TextBlock>-->
+                            
                             <Label Grid.Column="2" Content="{TemplateBinding Author}" Foreground="{DynamicResource Element.Foreground.Gray112}" Margin="5,0,0,0" HorizontalAlignment="Left"/>
                             
                             <Viewbox Grid.Column="3" x:Name="SelectionMark" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="2,0" Stretch="UniformToFill" StretchDirection="Both" 
@@ -2306,7 +2317,28 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:SelectControl}">
                     <Canvas x:Name="MainCanvas" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
-                        <Path Grid.ZIndex="0" StrokeDashArray="5" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}" 
+                        <Canvas.Resources>
+                            <Storyboard x:Key="StrokeDashStoryboard" x:Name="StrokeDashStoryboard">
+                                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="MainPath" Storyboard.TargetProperty="(Shape.StrokeDashOffset)" RepeatBehavior="Forever">
+                                    <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                                    <SplineDoubleKeyFrame KeyTime="00:00:00.6000000" Value="10"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </Canvas.Resources>
+
+                        <Canvas.Triggers>
+                            <EventTrigger RoutedEvent="n:SelectControl.Loaded">
+                                <BeginStoryboard Storyboard="{StaticResource StrokeDashStoryboard}"/>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="n:SelectControl.SelectionAccepted">
+                                <StopStoryboard BeginStoryboardName="StrokeDashStoryboard"/>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="n:SelectControl.SelectionCanceled">
+                                <StopStoryboard BeginStoryboardName="StrokeDashStoryboard"/>
+                            </EventTrigger>
+                        </Canvas.Triggers>
+
+                        <Path x:Name="MainPath" Grid.ZIndex="0" StrokeDashArray="5" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}" 
                               Fill="{TemplateBinding Background}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
                             <Path.Data>
                                 <CombinedGeometry GeometryCombineMode="Exclude">

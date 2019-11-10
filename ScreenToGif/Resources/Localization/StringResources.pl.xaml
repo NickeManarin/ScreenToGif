@@ -109,7 +109,7 @@
     <s:String x:Key="S.Command.Remove">Usuń wybrany element</s:String>
     
     <!--StartUp Page-->
-    <s:String x:Key="Title.StartUp">Screen To Gif - uruchomienie</s:String>
+    <s:String x:Key="Title.StartUp">ScreenToGif - uruchomienie</s:String>
     <s:String x:Key="Recorder">Nagrywanie</s:String>
     <s:String x:Key="Webcam">Kamerka</s:String>
     <s:String x:Key="Board">Tablica</s:String>
@@ -138,7 +138,7 @@
     <s:String x:Key="Update.CloseThis.Detail">To jest starsza wersja. Pobrałeś już nową wersję.</s:String>
     
     <!--Options Window-->
-    <s:String x:Key="Title.Options">Screen To Gif - Opcje</s:String>
+    <s:String x:Key="Title.Options">ScreenToGif - Opcje</s:String>
     <s:String x:Key="Application">Aplikacja</s:String>
     <s:String x:Key="Interface">Interfejs</s:String>
     <s:String x:Key="S.AutoTasks">Zautomatyzowane zadania</s:String>
@@ -154,26 +154,25 @@
     <!--<s:String x:Key="S.Options.Warning.Follow.Header">Missing shortcut key for cursor following</s:String>-->
     <!--<s:String x:Key="S.Options.Warning.Follow.Message">In order to use the mouse cursor following feature, you must set a shortcut key to toggle it when needed.</s:String>-->
     
-    <s:String x:Key="Application.ScreenRecorder">Nagrywanie ekranu</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordMouse">Pokaż kursor myszy na nagraniu.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordClicks">Wykryj kliknięcia myszą.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">Wybierz kolor kursora</s:String>
-    <s:String x:Key="Application.ScreenRecorder.PreStart">Użyj odliczania przed startem.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.PreStart.Info">(w sekundach, czeka przed zaczynaniem nagrywania)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.StepRecording">Włącz tryb migawki.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Każda klatka będzie ręcznie przechwytywana przez ciebie)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Stała częstotliwość klatek.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Stałe opóźnienie, które nie zmienia się podczas opóźnienia nagrywania)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Włącz asynchroniczne nagrywanie.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(Pozwala zmniejszyć lag interfejsu podczas nagrywania)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.NewRecorder">Włącz nowy interfejs okna nagrywania.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(Zastąpi stary interfejs okna nagrywania)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.Magnifier">Włącz powiększanie ekranu.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(Włącza powiększanie ekranu podczas wybierania obszaru nagrywania)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.CursorFollowing">Włącz śledzenie kursora</s:String>
-    <s:String x:Key="Application.ScreenRecorder.CursorFollowing.Info">(Obszar nagrywania zostanie przepozycjonowany do lokalizacji kursora)</s:String>
-    <!--<s:String x:Key="Application.ScreenRecorder.FollowMargin.Info">(Buffer margin in pixels, where the recording area starts getting repositioned)</s:String>-->
-    <!--<s:String x:Key="Application.ScreenRecorder.FollowMarginInvisible.Info">(Additional buffer margin in pixels, where the UI starts getting hidden)</s:String>-->
+    <s:String x:Key="S.Options.Recorder.RecordMouse">Pokaż kursor myszy na nagraniu.</s:String>
+    <s:String x:Key="S.Options.Recorder.RecordClicks">Wykryj kliknięcia myszą.</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectCursorColor">Wybierz kolor kursora</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart">Użyj odliczania przed startem.</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart.Info">(w sekundach, czeka przed zaczynaniem nagrywania)</s:String>
+    <s:String x:Key="S.Options.Recorder.StepRecording">Włącz tryb migawki.</s:String>
+    <s:String x:Key="S.Options.Recorder.StepRecording.Info">(Każda klatka będzie ręcznie przechwytywana przez ciebie)</s:String>
+    <s:String x:Key="S.Options.Recorder.FixedFramerate">Stała częstotliwość klatek.</s:String>
+    <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Stałe opóźnienie, które nie zmienia się podczas opóźnienia nagrywania)</s:String>
+    <s:String x:Key="S.Options.Recorder.AsyncRecording">Włącz asynchroniczne nagrywanie.</s:String>
+    <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(Pozwala zmniejszyć lag interfejsu podczas nagrywania)</s:String>
+    <s:String x:Key="S.Options.Recorder.NewRecorder">Włącz nowy interfejs okna nagrywania.</s:String>
+    <s:String x:Key="S.Options.Recorder.NewRecorder.Info">(Zastąpi stary interfejs okna nagrywania)</s:String>
+    <s:String x:Key="S.Options.Recorder.Magnifier">Włącz powiększanie ekranu.</s:String>
+    <s:String x:Key="S.Options.Recorder.Magnifier.Info">(Włącza powiększanie ekranu podczas wybierania obszaru nagrywania)</s:String>
+    <s:String x:Key="S.Options.Recorder.CursorFollowing">Włącz śledzenie kursora</s:String>
+    <s:String x:Key="S.Options.Recorder.CursorFollowing.Info">(Obszar nagrywania zostanie przepozycjonowany do lokalizacji kursora)</s:String>
+    <!--<s:String x:Key="S.Options.Recorder.FollowMargin.Info">(Buffer margin in pixels, where the recording area starts getting repositioned)</s:String>-->
+    <!--<s:String x:Key="S.Options.Recorder.FollowMarginInvisible.Info">(Additional buffer margin in pixels, where the UI starts getting hidden)</s:String>-->
 
     <s:String x:Key="Application.Other">Inne</s:String>
     <s:String x:Key="Application.Other.SystemTray">Wyświetl aplikację w zasobniku (obszar powiadomień).</s:String>
@@ -408,7 +407,7 @@
     <s:String x:Key="Recorder.FpsRange">Minimalna-maksymalna ilość klatek na sekundę: 1-60 fps</s:String>
     <s:String x:Key="Recorder.SnapToWindow">Zrzut selektywny (Przeciągnij i upuść, by zrobić zrzut)</s:String>
     <s:String x:Key="Recorder.PreStart">Przed startem</s:String>
-    <s:String x:Key="Recorder.Paused">Screen To Gif (Zapauzowane)</s:String>
+    <s:String x:Key="Recorder.Paused">ScreenToGif (Zapauzowane)</s:String>
     
     <!--New Recorder-->
     <s:String x:Key="S.Recorder.Area">Obszar</s:String>
@@ -425,7 +424,7 @@
     <s:String x:Key="S.Recorder.EscToCancel">Naciśnij ESC, aby anulować</s:String>
     
     <!--Webcam Recorder-->
-    <s:String x:Key="Webcam.Title">Screen To Gif - Nagrywanie z kamerki</s:String>
+    <s:String x:Key="Webcam.Title">ScreenToGif - Nagrywanie z kamerki</s:String>
     <s:String x:Key="Webcam.NoVideo">Nie znaleziono urządzeń wideo :c</s:String>
     <s:String x:Key="Webcam.CheckVideoDevices">Sprawdzanie urządzeń wideo.</s:String>
     <s:String x:Key="Webcam.Scale">Skala: x{0:0.##}</s:String>
@@ -536,7 +535,7 @@
     <s:String x:Key="S.Notifications.Dismiss">Anuluj wszystkie powiadomienia</s:String>
     
     <!--Editor-->
-    <s:String x:Key="Editor.Title">Screen To Gif - Edytor</s:String>
+    <s:String x:Key="Editor.Title">ScreenToGif - Edytor</s:String>
     <s:String x:Key="Editor.File">Plik</s:String>
     <s:String x:Key="Editor.Home">Strona główna</s:String>
     <s:String x:Key="Editor.Playback">Odtwarzanie</s:String>

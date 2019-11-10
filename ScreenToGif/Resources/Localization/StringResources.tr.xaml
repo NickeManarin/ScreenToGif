@@ -18,7 +18,7 @@
     <s:String x:Key="Preview">Önizleme</s:String>
 
     <!--StartUp Page-->
-    <s:String x:Key="Title.StartUp">Screen To Gif - Başlangıç</s:String>
+    <s:String x:Key="Title.StartUp">ScreenToGif - Başlangıç</s:String>
     <s:String x:Key="Recorder">Kaydedici</s:String>
     <s:String x:Key="Webcam">Webcam</s:String>
     <s:String x:Key="Board">Pano</s:String>
@@ -39,7 +39,7 @@
     <!--<s:String x:Key="Update.CloseThis.Detail">This is an older version. You have already downloaded a new version.</s:String>-->
     
     <!--Options Page-->
-    <s:String x:Key="Title.Options">Screen To Gif - Ayarlar</s:String>
+    <s:String x:Key="Title.Options">ScreenToGif - Ayarlar</s:String>
     <s:String x:Key="Application">Uygulama</s:String>
     <s:String x:Key="S.Shortcuts">Klavye Kısayolları</s:String>
     <s:String x:Key="Interface">Arayüz</s:String>
@@ -57,19 +57,18 @@
     <s:String x:Key="S.Application.Other.Homepage.Board">Pano Kaydedici</s:String>
     <s:String x:Key="S.Application.Other.Homepage.Editor">Editör Penceresi</s:String>
     
-    <s:String x:Key="Application.ScreenRecorder">Ekran Kaydedici</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordMouse">Fare imlecini kayıtta göster.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordClicks">Fare tıklamalarını kayıtta göster.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">Fare İmleci Rengini Seç</s:String>
-    <s:String x:Key="Application.ScreenRecorder.PreStart">Başlama için geri-sayım kullan.</s:String>
-    <!--<s:String x:Key="Application.ScreenRecorder.StepRecording">Enable snapshot mode.</s:String>-->
-    <!--<s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Each frame will be captured manually by you)</s:String>-->
-    <!--<s:String x:Key="Application.ScreenRecorder.FullRecording">Enable fullscreen mode.</s:String>-->
-    <!--<s:String x:Key="Application.ScreenRecorder.FullRecording.Info">(Experimental, will capture the main screen)</s:String>-->
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Sabit kare hızı.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Sabit gecikme, kayıt gecikmesini değiştirmez)</s:String>
-    <!--<s:String x:Key="Application.ScreenRecorder.AsyncRecording">Enable asynchronous recording.</s:String>-->
-    <!--<s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(It helps reduce the interface lag when recording)</s:String>-->
+    <s:String x:Key="S.Options.Recorder.RecordMouse">Fare imlecini kayıtta göster.</s:String>
+    <s:String x:Key="S.Options.Recorder.RecordClicks">Fare tıklamalarını kayıtta göster.</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectCursorColor">Fare İmleci Rengini Seç</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart">Başlama için geri-sayım kullan.</s:String>
+    <!--<s:String x:Key="S.Options.Recorder.StepRecording">Enable snapshot mode.</s:String>-->
+    <!--<s:String x:Key="S.Options.Recorder.StepRecording.Info">(Each frame will be captured manually by you)</s:String>-->
+    <!--<s:String x:Key="S.Options.Recorder.FullRecording">Enable fullscreen mode.</s:String>-->
+    <!--<s:String x:Key="S.Options.Recorder.FullRecording.Info">(Experimental, will capture the main screen)</s:String>-->
+    <s:String x:Key="S.Options.Recorder.FixedFramerate">Sabit kare hızı.</s:String>
+    <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Sabit gecikme, kayıt gecikmesini değiştirmez)</s:String>
+    <!--<s:String x:Key="S.Options.Recorder.AsyncRecording">Enable asynchronous recording.</s:String>-->
+    <!--<s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(It helps reduce the interface lag when recording)</s:String>-->
     
     <s:String x:Key="Application.Other">Diğer</s:String>
     <!--<s:String x:Key="Application.Other.CheckForUpdates">Check for updates.</s:String>-->
@@ -166,10 +165,10 @@
     <s:String x:Key="Recorder.FpsRange">Minimum Maksimum Kare Sayısı: 1-60 fps</s:String>
     <s:String x:Key="Recorder.SnapToWindow">Pencereye Tuttur(Tutturmak için sürükleyip bırakın)</s:String>
     <s:String x:Key="Recorder.PreStart">Ön Başlangıç</s:String>
-    <s:String x:Key="Recorder.Paused">Screen To Gif (Duraklatıldı)</s:String>
+    <s:String x:Key="Recorder.Paused">ScreenToGif (Duraklatıldı)</s:String>
     
     <!--Webcam Recorder-->
-    <s:String x:Key="Webcam.Title">Screen To Gif - Webcam Kaydedicisi</s:String>
+    <s:String x:Key="Webcam.Title">ScreenToGif - Webcam Kaydedicisi</s:String>
     <s:String x:Key="Webcam.NoVideo">Video aygıtı bulunamadı :(</s:String>
     <s:String x:Key="Webcam.CheckVideoDevices">Video aygıtlarını kontrol et.</s:String>
     <s:String x:Key="Webcam.Scale">Ölçek: x{0:0.##}</s:String>
@@ -252,7 +251,7 @@
     <s:String x:Key="Encoder.Copy.Folder">Dosya Yolunu Kopyala</s:String>
 
     <!--Editor-->
-    <s:String x:Key="Editor.Title">Screen To Gif - Editör</s:String>
+    <s:String x:Key="Editor.Title">ScreenToGif - Editör</s:String>
     <s:String x:Key="Editor.File">Dosya</s:String>
     <s:String x:Key="Editor.Home">Editör Ekranı</s:String>
     <s:String x:Key="Editor.Playback">Yürütme</s:String>

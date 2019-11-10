@@ -14,6 +14,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -73,7 +74,7 @@ namespace ScreenToGif.Windows.Other
 
             foreach (var tokenSource in CancellationTokenList)
                 tokenSource.Cancel();
-            
+
             _encoder = null;
             GC.Collect();
         }
@@ -206,7 +207,7 @@ namespace ScreenToGif.Windows.Other
             var encoderItem = new EncoderListViewItem
             {
                 OutputType = param.Type,
-                Text = FindResource("Encoder.Starting").ToString(),
+                Text = LocalizationHelper.Get("Encoder.Starting"),
                 FrameCount = listFrames.Count,
                 Id = a,
                 TokenSource = cancellationTokenSource
@@ -237,11 +238,11 @@ namespace ScreenToGif.Windows.Other
             {
                 var item = EncodingListView.Items.Cast<EncoderListViewItem>().FirstOrDefault(x => x.Id == id);
 
-                if (item != null)
-                {
-                    item.CurrentFrame = currentFrame;
-                    item.Text = status;
-                }
+                if (item == null)
+                    return;
+
+                item.CurrentFrame = currentFrame;
+                item.Text = status;
             });
         }
 
@@ -265,7 +266,7 @@ namespace ScreenToGif.Windows.Other
                 if (item == null)
                     return;
 
-                item.Text = !findText ? text : FindResource(text).ToString();
+                item.Text = !findText ? text : LocalizationHelper.Get(text);
                 item.IsIndeterminate = isIndeterminate;
             });
         }
@@ -342,10 +343,7 @@ namespace ScreenToGif.Windows.Other
 
                 var item = EncodingListView.Items.Cast<EncoderListViewItem>().FirstOrDefault(x => x.Id == id);
 
-                if (item == null)
-                    return "";
-
-                return item.UploadLink;
+                return item == null ? "" : item.UploadLink;
             });
         }
 
@@ -439,7 +437,7 @@ namespace ScreenToGif.Windows.Other
             var log = "";
             var indeterminate = true;
 
-            Update(id, 0, FindResource("Encoder.Analyzing").ToString());
+            Update(id, 0, LocalizationHelper.Get("Encoder.Analyzing"));
 
             while (!pro.StandardError.EndOfStream)
             {
@@ -486,7 +484,7 @@ namespace ScreenToGif.Windows.Other
             #endregion
         }
 
-        private async void Encode(List<FrameInfo> listFrames, int id, Parameters param, CancellationTokenSource tokenSource)
+        private async void Encode(List<FrameInfo> frames, int id, Parameters param, CancellationTokenSource tokenSource)
         {
             var processing = this.DispatcherStringResource("Encoder.Processing");
 
@@ -495,7 +493,7 @@ namespace ScreenToGif.Windows.Other
                 switch (param.Type)
                 {
                     case Export.Gif:
-
+                    {
                         #region Gif
 
                         #region Cut/Paint Unchanged Pixels
@@ -504,17 +502,17 @@ namespace ScreenToGif.Windows.Other
                         {
                             if (param.DetectUnchangedPixels)
                             {
-                                Update(id, 0, FindResource("Encoder.Analyzing").ToString());
+                                Update(id, 0, LocalizationHelper.Get("Encoder.Analyzing"));
 
                                 if (param.DummyColor.HasValue)
-                                    listFrames = ImageMethods.PaintTransparentAndCut(listFrames, param.DummyColor.Value, id, tokenSource);
+                                    frames = ImageMethods.PaintTransparentAndCut(frames, param.DummyColor.Value, id, tokenSource);
                                 else
-                                    listFrames = ImageMethods.CutUnchanged(listFrames, id, tokenSource);
+                                    frames = ImageMethods.CutUnchanged(frames, id, tokenSource);
                             }
                             else
                             {
-                                var size = listFrames[0].Path.ScaledSize();
-                                listFrames.ForEach(x => x.Rect = new Int32Rect(0, 0, (int)size.Width, (int)size.Height));
+                                var size = frames[0].Path.ScaledSize();
+                                frames.ForEach(x => x.Rect = new Int32Rect(0, 0, (int)size.Width, (int)size.Height));
                             }
                         }
 
@@ -534,15 +532,15 @@ namespace ScreenToGif.Windows.Other
                                         encoder.TransparentColor = param.DummyColor;
                                         encoder.MaximumNumberColor = param.MaximumNumberColors;
 
-                                        for (var i = 0; i < listFrames.Count; i++)
+                                        for (var i = 0; i < frames.Count; i++)
                                         {
-                                            if (!listFrames[i].HasArea && param.DetectUnchangedPixels)
+                                            if (!frames[i].HasArea && param.DetectUnchangedPixels)
                                                 continue;
 
-                                            if (listFrames[i].Delay == 0)
-                                                listFrames[i].Delay = 10;
+                                            if (frames[i].Delay == 0)
+                                                frames[i].Delay = 10;
 
-                                            encoder.AddFrame(listFrames[i].Path, listFrames[i].Rect, listFrames[i].Delay);
+                                            encoder.AddFrame(frames[i].Path, frames[i].Rect, frames[i].Delay);
 
                                             Update(id, i, string.Format(processing, i));
 
@@ -590,7 +588,7 @@ namespace ScreenToGif.Windows.Other
                                     encoder.SetRepeat(param.RepeatCount);
 
                                     var numImage = 0;
-                                    foreach (var frame in listFrames)
+                                    foreach (var frame in frames)
                                     {
                                         #region Cancellation
 
@@ -628,10 +626,10 @@ namespace ScreenToGif.Windows.Other
                                 {
                                     using (var encoder = new GifEncoder(stream, null, null, param.RepeatCount))
                                     {
-                                        for (var i = 0; i < listFrames.Count; i++)
+                                        for (var i = 0; i < frames.Count; i++)
                                         {
-                                            var bitmapAux = new Bitmap(listFrames[i].Path);
-                                            encoder.AddFrame(bitmapAux, 0, 0, TimeSpan.FromMilliseconds(listFrames[i].Delay));
+                                            var bitmapAux = new Bitmap(frames[i].Path);
+                                            encoder.AddFrame(bitmapAux, 0, 0, TimeSpan.FromMilliseconds(frames[i].Delay));
                                             bitmapAux.Dispose();
 
                                             Update(id, i, string.Format(processing, i));
@@ -667,7 +665,7 @@ namespace ScreenToGif.Windows.Other
 
                                 break;
                             case GifEncoderType.FFmpeg:
-                                EncodeWithFfmpeg("gif", listFrames, id, param, tokenSource, processing);
+                                EncodeWithFfmpeg("gif", frames, id, param, tokenSource, processing);
 
                                 break;
                             case GifEncoderType.Gifski:
@@ -685,8 +683,60 @@ namespace ScreenToGif.Windows.Other
                                 var gifski = new GifskiInterop();
                                 var handle = gifski.Start(UserSettings.All.GifskiQuality, UserSettings.All.Looped);
 
-                                ThreadPool.QueueUserWorkItem(delegate
+                                if (gifski.Version.Major == 0 && gifski.Version.Minor < 9)
                                 {
+                                    #region Older
+
+                                    ThreadPool.QueueUserWorkItem(delegate
+                                    {
+                                        Thread.Sleep(500);
+
+                                        if (GetStatus(id) == Status.Error)
+                                            return;
+
+                                        SetStatus(Status.Processing, id, null, false);
+
+                                        GifskiInterop.GifskiError res;
+
+                                        for (var i = 0; i < frames.Count; i++)
+                                        {
+                                            #region Cancellation
+
+                                            if (tokenSource.Token.IsCancellationRequested)
+                                            {
+                                                SetStatus(Status.Canceled, id);
+                                                break;
+                                            }
+
+                                            #endregion
+
+                                            Update(id, i, string.Format(processing, i));
+
+                                            res = gifski.AddFrame(handle, (uint)i, frames[i].Path, frames[i].Delay);
+
+                                            if (res != GifskiInterop.GifskiError.Ok)
+                                                throw new Exception("Error while adding frames with Gifski. " + res, new Win32Exception(res.ToString())) { HelpLink = $"Result:\n\r{Marshal.GetLastWin32Error()}" };
+                                        }
+
+                                        res = gifski.EndAdding(handle);
+
+                                        if (res != GifskiInterop.GifskiError.Ok)
+                                            throw new Exception("Error while finishing adding frames with Gifski. " + res, new Win32Exception(res.ToString())) { HelpLink = $"Result:\n\r{Marshal.GetLastWin32Error()}" };
+                                    }, null);
+
+                                    gifski.End(handle, param.Filename);
+
+                                    #endregion
+                                }
+                                else
+                                {
+                                    #region Version 0.9.3
+
+                                    var res = gifski.SetOutput(handle, param.Filename);
+
+                                    if (res != GifskiInterop.GifskiError.Ok)
+                                        throw new Exception("Error while setting output with Gifski. " + res, new Win32Exception()) { HelpLink = $"Result:\n\r{Marshal.GetLastWin32Error()}" };
+
                                     Thread.Sleep(500);
 
                                     if (GetStatus(id) == Status.Error)
@@ -694,21 +744,35 @@ namespace ScreenToGif.Windows.Other
 
                                     SetStatus(Status.Processing, id, null, false);
 
-                                    for (var i = 0; i < listFrames.Count; i++)
+                                    for (var i = 0; i < frames.Count; i++)
                                     {
+                                        #region Cancellation
+
+                                        if (tokenSource.Token.IsCancellationRequested)
+                                        {
+                                            SetStatus(Status.Canceled, id);
+                                            break;
+                                        }
+
+                                        #endregion
+
                                         Update(id, i, string.Format(processing, i));
-                                        gifski.AddFrame(handle, (uint)i, listFrames[i].Path, listFrames[i].Delay);
+
+                                        res = gifski.AddFrame(handle, (uint)i, frames[i].Path, frames[i].Delay);
+
+                                        if (res != GifskiInterop.GifskiError.Ok)
+                                            throw new Exception("Error while adding frames with Gifski. " + res, new Win32Exception(res.ToString())) { HelpLink = $"Result:\n\r{Marshal.GetLastWin32Error()}" };
                                     }
 
                                     gifski.EndAdding(handle);
-                                }, null);
 
-                                gifski.End(handle, param.Filename);
+                                    #endregion
+                                }
 
                                 var fileInfo2 = new FileInfo(param.Filename);
 
                                 if (!fileInfo2.Exists || fileInfo2.Length == 0)
-                                    throw new Exception("Error while encoding the gif with Gifski.", new Win32Exception()) { HelpLink = $"Result:\n\r{Marshal.GetLastWin32Error()}" };
+                                    throw new Exception("Error while encoding the gif with Gifski. Empty output file.", new Win32Exception()) { HelpLink = $"Result:\n\r{Marshal.GetLastWin32Error()}" };
 
                                 #endregion
 
@@ -717,11 +781,12 @@ namespace ScreenToGif.Windows.Other
                                 throw new Exception("Undefined Gif encoder type");
                         }
 
-                        #endregion
-
                         break;
-                    case Export.Apng:
 
+                        #endregion
+                    }
+                    case Export.Apng:
+                    {
                         #region Apng
 
                         switch (param.ApngEncoder)
@@ -732,17 +797,17 @@ namespace ScreenToGif.Windows.Other
 
                                 if (param.DetectUnchangedPixels)
                                 {
-                                    Update(id, 0, FindResource("Encoder.Analyzing").ToString());
+                                    Update(id, 0, LocalizationHelper.Get("Encoder.Analyzing"));
 
                                     if (param.DummyColor.HasValue)
-                                        listFrames = ImageMethods.PaintTransparentAndCut(listFrames, param.DummyColor.Value, id, tokenSource);
+                                        frames = ImageMethods.PaintTransparentAndCut(frames, param.DummyColor.Value, id, tokenSource);
                                     else
-                                        listFrames = ImageMethods.CutUnchanged(listFrames, id, tokenSource);
+                                        frames = ImageMethods.CutUnchanged(frames, id, tokenSource);
                                 }
                                 else
                                 {
-                                    var size = listFrames[0].Path.ScaledSize();
-                                    listFrames.ForEach(x => x.Rect = new Int32Rect(0, 0, (int)size.Width, (int)size.Height));
+                                    var size = frames[0].Path.ScaledSize();
+                                    frames.ForEach(x => x.Rect = new Int32Rect(0, 0, (int)size.Width, (int)size.Height));
                                 }
 
                                 #endregion
@@ -751,19 +816,19 @@ namespace ScreenToGif.Windows.Other
 
                                 using (var stream = new MemoryStream())
                                 {
-                                    var frameCount = listFrames.Count(x => x.HasArea);
+                                    var frameCount = frames.Count(x => x.HasArea);
 
                                     using (var encoder = new Apng(stream, frameCount, param.RepeatCount))
                                     {
-                                        for (var i = 0; i < listFrames.Count; i++)
+                                        for (var i = 0; i < frames.Count; i++)
                                         {
-                                            if (!listFrames[i].HasArea && param.DetectUnchangedPixels)
+                                            if (!frames[i].HasArea && param.DetectUnchangedPixels)
                                                 continue;
 
-                                            if (listFrames[i].Delay == 0)
-                                                listFrames[i].Delay = 10;
+                                            if (frames[i].Delay == 0)
+                                                frames[i].Delay = 10;
 
-                                            encoder.AddFrame(listFrames[i].Path, listFrames[i].Rect, listFrames[i].Delay);
+                                            encoder.AddFrame(frames[i].Path, frames[i].Rect, frames[i].Delay);
 
                                             Update(id, i, string.Format(processing, i));
 
@@ -797,28 +862,29 @@ namespace ScreenToGif.Windows.Other
 
                             case ApngEncoderType.FFmpeg:
                             {
-                                EncodeWithFfmpeg("apng", listFrames, id, param, tokenSource, processing);
+                                EncodeWithFfmpeg("apng", frames, id, param, tokenSource, processing);
                                 break;
                             }
                         }
 
-                        #endregion
-
                         break;
-                    case Export.Photoshop:
 
+                        #endregion
+                    }
+                    case Export.Photoshop:
+                    {
                         #region Psd
 
                         using (var stream = new MemoryStream())
                         {
                             using (var encoder = new Psd(stream, param.RepeatCount, param.Height, param.Width, param.Compress, param.SaveTimeline))
                             {
-                                for (var i = 0; i < listFrames.Count; i++)
+                                for (var i = 0; i < frames.Count; i++)
                                 {
-                                    if (listFrames[i].Delay == 0)
-                                        listFrames[i].Delay = 10;
+                                    if (frames[i].Delay == 0)
+                                        frames[i].Delay = 10;
 
-                                    encoder.AddFrame(i, listFrames[i].Path, listFrames[i].Delay);
+                                    encoder.AddFrame(i, frames[i].Path, frames[i].Delay);
 
                                     Update(id, i, string.Format(processing, i));
 
@@ -838,11 +904,12 @@ namespace ScreenToGif.Windows.Other
                                 stream.WriteTo(fileStream);
                         }
 
-                        #endregion
-
                         break;
-                    case Export.Video:
 
+                        #endregion
+                    }
+                    case Export.Video:
+                    {
                         #region Video
 
                         switch (param.VideoEncoder)
@@ -851,16 +918,16 @@ namespace ScreenToGif.Windows.Other
                             {
                                 #region Avi Standalone
 
-                                var image = listFrames[0].Path.SourceFrom();
+                                var image = frames[0].Path.SourceFrom();
 
                                 if (File.Exists(param.Filename))
                                     File.Delete(param.Filename);
 
-                                //1000 / listFrames[0].Delay
+                                //1000 / frames[0].Delay
                                 using (var aviWriter = new AviWriter(param.Filename, param.Framerate, image.PixelWidth, image.PixelHeight, param.VideoQuality))
                                 {
                                     var numImage = 0;
-                                    foreach (var frame in listFrames)
+                                    foreach (var frame in frames)
                                     {
                                         using (var outStream = new MemoryStream())
                                         {
@@ -897,16 +964,34 @@ namespace ScreenToGif.Windows.Other
                             }
                             case VideoEncoderType.Ffmpg:
                             {
-                                EncodeWithFfmpeg("video", listFrames, id, param, tokenSource, processing);
+                                EncodeWithFfmpeg("video", frames, id, param, tokenSource, processing);
                                 break;
                             }
                             default:
                                 throw new Exception("Undefined video encoder");
                         }
 
+                        break;
+
                         #endregion
+                    }
+                    case Export.Project:
+                    {
+                        #region Project
+
+                        SetStatus(Status.Processing, id, null, true);
+                        Update(id, 0, LocalizationHelper.Get("Encoder.CreatingFile"));
+
+                        if (File.Exists(param.Filename))
+                            File.Delete(param.Filename);
+
+                        ZipFile.CreateFromDirectory(Path.GetDirectoryName(frames[0].Path), param.Filename, param.CompressionLevel, false);
 
                         break;
+
+                        #endregion
+                    }
+
                     default:
                         throw new ArgumentOutOfRangeException(nameof(param));
                 }
@@ -957,7 +1042,7 @@ namespace ScreenToGif.Windows.Other
                             switch (param.CopyType)
                             {
                                 case CopyType.File:
-                                    if (param.Type != Export.Video)
+                                    if (param.Type != Export.Video && param.Type != Export.Project)
                                         data.SetImage(param.Filename.SourceFrom());
 
                                     data.SetText(param.Filename, TextDataFormat.Text);
@@ -1074,11 +1159,11 @@ namespace ScreenToGif.Windows.Other
             }
             finally
             {
-                #region Delete Encoder Folder
+                #region Delete the encoder folder
 
                 try
                 {
-                    var encoderFolder = Path.GetDirectoryName(listFrames[0].Path);
+                    var encoderFolder = Path.GetDirectoryName(frames[0].Path);
 
                     if (!string.IsNullOrEmpty(encoderFolder))
                         if (Directory.Exists(encoderFolder))
@@ -1094,7 +1179,7 @@ namespace ScreenToGif.Windows.Other
                 GC.Collect();
             }
         }
-        
+
         #endregion
 
         #region Public Static

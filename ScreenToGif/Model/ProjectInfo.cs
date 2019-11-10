@@ -42,17 +42,31 @@ namespace ScreenToGif.Model
         [DataMember(Order = 4)]
         public ProjectByType CreatedBy { get; set; } = ProjectByType.Unknown;
 
-        ///// <summary>
-        ///// The dpi of the project.
-        ///// </summary>
-        //[DataMember(Order = 3)]
-        //public double Dpi { get; set; } = 96;
+        /// <summary>
+        /// The width of the canvas.
+        /// </summary>
+        [DataMember(Order = 5)]
+        public int Width { get; set; }
 
-        ////// <summary>
-        ///// The size of the images.
-        ///// </summary>
-        //[DataMember(Order = 4)]
-        //public Size Size { get; set; } = new Size(0, 0);
+        /// <summary>
+        /// The height of the canvas.
+        /// </summary>
+        [DataMember(Order = 6)]
+        public int Height { get; set; }
+
+        /// <summary>
+        /// The base dpi of the project.
+        /// </summary>
+        [DataMember(Order = 7)]
+        public double Dpi { get; set; } = 96;
+
+        /// <summary>
+        /// The base bit depth of the project.
+        /// 32 is RGBA
+        /// 24 is RGB
+        /// </summary>
+        [DataMember(Order = 8)]
+        public double BitDepth { get; set; } = 32;
 
         /// <summary>
         /// The full path of project based on current settings.
@@ -80,6 +94,11 @@ namespace ScreenToGif.Model
         public string RedoStackPath => Path.Combine(ActionStackPath, "Redo");
 
         /// <summary>
+        /// The full path to the blob file, used by the recorder to write all frames pixels as a byte array, separated by a delimiter.
+        /// </summary>
+        public string CachePath => Path.Combine(UserSettings.All.TemporaryFolderResolved, "ScreenToGif", "Recording", RelativePath, "Frames.cache");
+
+        /// <summary>
         /// Check if there's any frame on this project.
         /// </summary>
         public bool Any => Frames != null && Frames.Any();
@@ -88,6 +107,7 @@ namespace ScreenToGif.Model
         /// The latest index of the current list of frames, or -1.
         /// </summary>
         public int LatestIndex => Frames?.Count - 1 ?? -1;
+
 
         #region Methods
 
@@ -173,6 +193,73 @@ namespace ScreenToGif.Model
         public void ReleaseMutex()
         {
             MutexList.Remove(RelativePath);
+        }
+
+        /// <summary>
+        /// Copy all necessary files to a new encode folder.
+        /// </summary>
+        /// <param name="usePadding">True if the file names should have a left pad, to preserve the file ordering.</param>
+        /// <param name="copyJson">True if the Project.json file should be copied too.</param>
+        /// <returns>A list of frames with the new path.</returns>
+        internal List<FrameInfo> CopyToExport(bool usePadding = false, bool copyJson = false)
+        {
+            #region Output folder
+
+            var folder = Path.Combine(FullPath, "Encode " + DateTime.Now.ToString("yyyy-MM-dd hh-mm-ss"));
+
+            if (!Directory.Exists(folder))
+                Directory.CreateDirectory(folder);
+
+            #endregion
+
+            var newList = new List<FrameInfo>();
+
+            try
+            {
+                #region If it's being exported as project, maintain file naming
+
+                if (copyJson)
+                {
+                    foreach (var info in Frames)
+                    {
+                        var filename = Path.Combine(folder, Path.GetFileName(info.Path));
+
+                        //Copy the image to the folder.
+                        File.Copy(info.Path, filename, true);
+
+                        //Create the new object and add to the list.
+                        newList.Add(new FrameInfo(filename, info.Delay));
+                    }
+
+                    File.Copy(ProjectPath, Path.Combine(folder, "Project.json"), true);
+                    
+                    return newList;
+                }
+
+                #endregion
+
+                //Detect pad size.
+                var pad = usePadding ? (Frames.Count - 1).ToString().Length : 0;
+
+                foreach (var info in Frames)
+                {
+                    //Changes the path of the image. Writes as an ordered list of files, replacing the old filenames.
+                    var filename = Path.Combine(folder, newList.Count.ToString().PadLeft(pad, '0') + ".png");
+
+                    //Copy the image to the folder.
+                    File.Copy(info.Path, filename, true);
+
+                    //Create the new object and add to the list.
+                    newList.Add(new FrameInfo(filename, info.Delay));
+                }
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "It was impossible to copy the files to encode.");
+                throw;
+            }
+
+            return newList;
         }
 
         #endregion

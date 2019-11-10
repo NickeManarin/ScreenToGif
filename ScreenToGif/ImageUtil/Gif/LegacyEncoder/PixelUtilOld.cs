@@ -14,8 +14,15 @@ namespace ScreenToGif.ImageUtil.Gif.LegacyEncoder
         #region Variables and Properties
 
         private readonly Bitmap _source = null;
-        private IntPtr _iptr = IntPtr.Zero;
         private BitmapData _bitmapData = null;
+
+        /// <summary>
+        /// Gets or sets the address of the first pixel data in the bitmap. This can also be thought of as the first scan line in the bitmap.
+        /// </summary>
+        /// <returns>
+        /// The address of the first pixel data in the bitmap.
+        /// </returns>
+        public IntPtr Scan0 { get; set; } = IntPtr.Zero;
 
         /// <summary>
         /// Byte Array containing all pixel information.
@@ -72,14 +79,14 @@ namespace ScreenToGif.ImageUtil.Gif.LegacyEncoder
 
             // Lock bitmap and return bitmap data
             _bitmapData = _source.LockBits(rect, ImageLockMode.ReadWrite, _source.PixelFormat);
-            
+
             // Create byte array to copy pixel values
             var step = Depth / 8;
             Pixels = new byte[pixelCount * step];
-            _iptr = _bitmapData.Scan0;
+            Scan0 = _bitmapData.Scan0;
 
             // Copy data from pointer to array
-            Marshal.Copy(_iptr, Pixels, 0, Pixels.Length);
+            Marshal.Copy(Scan0, Pixels, 0, Pixels.Length);
         }
 
         /// <summary>
@@ -88,7 +95,7 @@ namespace ScreenToGif.ImageUtil.Gif.LegacyEncoder
         public void UnlockBits()
         {
             // Copy data from byte array to pointer
-            Marshal.Copy(Pixels, 0, _iptr, Pixels.Length);
+            Marshal.Copy(Pixels, 0, Scan0, Pixels.Length);
 
             // Unlock bitmap data
             _source.UnlockBits(_bitmapData);

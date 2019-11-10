@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ScreenToGif</RootNamespace>
     <AssemblyName>ScreenToGif</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -106,6 +106,18 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SharpDX, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SharpDx\Desktop\Direct3D11.1\ScreenCapture\bin\Debug\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D11, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SharpDx\Desktop\Direct3D11.1\ScreenCapture\bin\Debug\SharpDX.Direct3D11.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DXGI, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SharpDx\Desktop\Direct3D11.1\ScreenCapture\bin\Debug\SharpDX.DXGI.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -172,8 +184,13 @@
     <Compile Include="Controls\NotificationListControl.cs" />
     <Compile Include="Controls\NotifyIcon.cs" />
     <Compile Include="Controls\RecorderWindow.cs" />
+    <Compile Include="Controls\Ribbon\GroupSizeDefinition.cs" />
+    <Compile Include="Controls\Ribbon\ItemSizeDefinition.cs" />
     <Compile Include="Controls\Ribbon\Ribbon.cs" />
+    <Compile Include="Controls\Ribbon\RibbonGroupPanel.cs" />
+    <Compile Include="Controls\Ribbon\RibbonPanel.cs" />
     <Compile Include="Controls\Ribbon\RibbonGroup.cs" />
+    <Compile Include="Controls\Ribbon\RibbonItem.cs" />
     <Compile Include="Controls\Ribbon\RibbonTab.cs" />
     <Compile Include="Controls\Shapes\Arrow.cs" />
     <Compile Include="Controls\Shapes\Triangle.cs" />
@@ -314,6 +331,13 @@
     <Compile Include="Util\ActivityHook\UserActivityHook.cs" />
     <Compile Include="Util\Argument.cs" />
     <Compile Include="Util\BitHelper.cs" />
+    <Compile Include="Util\Capture\BaseCapture.cs" />
+    <Compile Include="Util\Capture\DirectCachedCapture.cs" />
+    <Compile Include="Util\Capture\DirectImageCapture.cs" />
+    <Compile Include="Util\Capture\ICapture.cs" />
+    <Compile Include="Util\Capture\CachedCapture.cs" />
+    <Compile Include="Util\ComboBoxItemTemplateSelector.cs" />
+    <Compile Include="Util\Converters\ContentToVisibility.cs" />
     <Compile Include="Util\Converters\PercentageToOpacity.cs" />
     <Compile Include="Util\Converters\BoolAndToVisibility.cs" />
     <Compile Include="Util\Converters\BoolOrAndToVisibility.cs" />
@@ -322,6 +346,7 @@
     <Compile Include="Util\Converters\FormatConverter.cs" />
     <Compile Include="Util\Converters\IntToVisibility.cs" />
     <Compile Include="Util\Converters\ShortcutKeys.cs" />
+    <Compile Include="Util\Converters\StringArrayTypeConverter.cs" />
     <Compile Include="Util\Converters\StringToStaticResource.cs" />
     <Compile Include="Util\CrcHelper.cs" />
     <Compile Include="Util\DataGridHelper.cs" />
@@ -376,11 +401,15 @@
     <Compile Include="Util\Enums.cs" />
     <Compile Include="Util\Extras.cs" />
     <Compile Include="Util\FastRandom.cs" />
+    <Compile Include="Util\FrameworkHelper.cs" />
+    <Compile Include="Util\FunctionLoader.cs" />
+    <Compile Include="Util\GifskiInterop.cs" />
     <Compile Include="Util\HotKey.cs" />
     <Compile Include="Util\HotKeyCollection.cs" />
     <Compile Include="Model\UpdateModel.cs" />
     <Compile Include="Util\MutexList.cs" />
     <Compile Include="Util\NotificationManager.cs" />
+    <Compile Include="Util\Capture\ImageCapture.cs" />
     <Compile Include="Util\ThemeHelper.cs" />
     <Compile Include="Util\WebHelper.cs" />
     <Compile Include="Model\ApplicationModel.cs" />
@@ -648,6 +677,10 @@
     <Page Include="Themes\ComboBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Ribbon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\DataGrid.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -80,22 +80,21 @@
     <s:String x:Key="Donate">Donazione</s:String>
     <s:String x:Key="About">Informazioni su...</s:String>
     
-    <s:String x:Key="Application.ScreenRecorder">Registratore schermo</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordMouse">Mostra il cursore nella registrazione.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordClicks">Rileva clic del mouse.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">Seleziona il colore del cursore</s:String>
-    <s:String x:Key="Application.ScreenRecorder.PreStart">Usa conto alla rovescia prima dell'avvio.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.PreStart.Info">(in secondi, attende prima di avviare la cattura)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.StepRecording">Abilita modalità istantanea.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Ciascun frame dovrà essere catturato manualmente)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Frequenza fotogrammi fissa.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Ritardo costante che non cambia con il ritardo della registrazione)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Abilita registrazione asincrona.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(Aiuta a ridurre il ritardo dell'interfaccia durante la registrazione)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.NewRecorder">Abilita la nuova interfaccia del registratore.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(Sostituirà la vecchia interfaccia del registratore)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.Magnifier">Abilita la lente dello schermo.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(Aiuta a ridurre il ritardo nell'interfaccia durante la registrazione)</s:String>
+    <s:String x:Key="S.Options.Recorder.RecordMouse">Mostra il cursore nella registrazione.</s:String>
+    <s:String x:Key="S.Options.Recorder.RecordClicks">Rileva clic del mouse.</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectCursorColor">Seleziona il colore del cursore</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart">Usa conto alla rovescia prima dell'avvio.</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart.Info">(in secondi, attende prima di avviare la cattura)</s:String>
+    <s:String x:Key="S.Options.Recorder.StepRecording">Abilita modalità istantanea.</s:String>
+    <s:String x:Key="S.Options.Recorder.StepRecording.Info">(Ciascun frame dovrà essere catturato manualmente)</s:String>
+    <s:String x:Key="S.Options.Recorder.FixedFramerate">Frequenza fotogrammi fissa.</s:String>
+    <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Ritardo costante che non cambia con il ritardo della registrazione)</s:String>
+    <s:String x:Key="S.Options.Recorder.AsyncRecording">Abilita registrazione asincrona.</s:String>
+    <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(Aiuta a ridurre il ritardo dell'interfaccia durante la registrazione)</s:String>
+    <s:String x:Key="S.Options.Recorder.NewRecorder">Abilita la nuova interfaccia del registratore.</s:String>
+    <s:String x:Key="S.Options.Recorder.NewRecorder.Info">(Sostituirà la vecchia interfaccia del registratore)</s:String>
+    <s:String x:Key="S.Options.Recorder.Magnifier">Abilita la lente dello schermo.</s:String>
+    <s:String x:Key="S.Options.Recorder.Magnifier.Info">(Aiuta a ridurre il ritardo nell'interfaccia durante la registrazione)</s:String>
     
     <s:String x:Key="Application.Other">Altro</s:String>
     <s:String x:Key="Application.Other.SystemTray">Visualizza l'app nella system tray (area di notifica).</s:String>

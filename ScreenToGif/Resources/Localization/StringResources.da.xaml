@@ -39,7 +39,7 @@
     <s:String x:Key="S.Required">Krævet felt.</s:String>
     
     <!--StartUp Page-->
-    <s:String x:Key="Title.StartUp">Screen To Gif - Opstart</s:String>
+    <s:String x:Key="Title.StartUp">ScreenToGif - Opstart</s:String>
     <s:String x:Key="Recorder">Optag</s:String>
     <s:String x:Key="Webcam">Webcam</s:String>
     <s:String x:Key="Board">Tavle</s:String>
@@ -68,7 +68,7 @@
     <s:String x:Key="Update.CloseThis.Detail">Dette er en ældre version. Du har allerede hentet en ny.</s:String>
     
     <!--Options Window-->
-    <s:String x:Key="Title.Options">Screen To Gif - Indstillinger</s:String>
+    <s:String x:Key="Title.Options">ScreenToGif - Indstillinger</s:String>
     <s:String x:Key="Application">Program</s:String>
     <s:String x:Key="Interface">Brugerflade</s:String>
     <s:String x:Key="S.AutoTasks">Automatisering</s:String>
@@ -81,22 +81,21 @@
     <s:String x:Key="Donate">Donér</s:String>
     <s:String x:Key="About">Om...</s:String>
     
-    <s:String x:Key="Application.ScreenRecorder">Skærmoptager</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordMouse">Optag musemarkøren.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordClicks">Vis klik.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">Klikfarve</s:String>
-    <s:String x:Key="Application.ScreenRecorder.PreStart">Brug nedtælling til start.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.PreStart.Info">(sekunder før optagelse starter)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.StepRecording">Snapshottilstand.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(optag selv enkelte rammer)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Fast rammerate.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(konstant forsinkelse der ikke ændres)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Asynkron optagelse.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(reducerer sløring ved optagelse)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.NewRecorder">Aktiver ny optagerbrugerflade.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(erstatter den gamle)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.Magnifier">Aktiver lup.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(viser forstørrelsesglas ved valg af område)</s:String>
+    <s:String x:Key="S.Options.Recorder.RecordMouse">Optag musemarkøren.</s:String>
+    <s:String x:Key="S.Options.Recorder.RecordClicks">Vis klik.</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectCursorColor">Klikfarve</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart">Brug nedtælling til start.</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart.Info">(sekunder før optagelse starter)</s:String>
+    <s:String x:Key="S.Options.Recorder.StepRecording">Snapshottilstand.</s:String>
+    <s:String x:Key="S.Options.Recorder.StepRecording.Info">(optag selv enkelte rammer)</s:String>
+    <s:String x:Key="S.Options.Recorder.FixedFramerate">Fast rammerate.</s:String>
+    <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(konstant forsinkelse der ikke ændres)</s:String>
+    <s:String x:Key="S.Options.Recorder.AsyncRecording">Asynkron optagelse.</s:String>
+    <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(reducerer sløring ved optagelse)</s:String>
+    <s:String x:Key="S.Options.Recorder.NewRecorder">Aktiver ny optagerbrugerflade.</s:String>
+    <s:String x:Key="S.Options.Recorder.NewRecorder.Info">(erstatter den gamle)</s:String>
+    <s:String x:Key="S.Options.Recorder.Magnifier">Aktiver lup.</s:String>
+    <s:String x:Key="S.Options.Recorder.Magnifier.Info">(viser forstørrelsesglas ved valg af område)</s:String>
     
     <s:String x:Key="Application.Other">Andet</s:String>
     <s:String x:Key="Application.Other.SystemTray">Vis ikon ved uret.</s:String>
@@ -326,7 +325,7 @@
     <s:String x:Key="Recorder.FpsRange">Minimum til maksimum fps: 1-60 fps</s:String>
     <s:String x:Key="Recorder.SnapToWindow">Snap til vindue (træk til vindue og slip)</s:String>
     <s:String x:Key="Recorder.PreStart">Nedtælling</s:String>
-    <s:String x:Key="Recorder.Paused">Screen To Gif (pauset)</s:String>
+    <s:String x:Key="Recorder.Paused">ScreenToGif (pauset)</s:String>
     
     <!--New Recorder-->
     <s:String x:Key="S.Recorder.Area">Område</s:String>
@@ -343,7 +342,7 @@
     <s:String x:Key="S.Recorder.EscToCancel">Tast Esc for at annullere</s:String>
     
     <!--Webcam Recorder-->
-    <s:String x:Key="Webcam.Title">Screen To Gif - Webcam</s:String>
+    <s:String x:Key="Webcam.Title">ScreenToGif - Webcam</s:String>
     <s:String x:Key="Webcam.NoVideo">Enhed ikke fundet :(</s:String>
     <s:String x:Key="Webcam.CheckVideoDevices">Søg efter enheder.</s:String>
     <s:String x:Key="Webcam.Scale">Skala: x{0:0.##}</s:String>
@@ -444,7 +443,7 @@
     <s:String x:Key="S.Notifications.Dismiss">Afvis alle beskeder</s:String>
     
     <!--Editor-->
-    <s:String x:Key="Editor.Title">Screen To Gif - Redigering</s:String>
+    <s:String x:Key="Editor.Title">ScreenToGif - Redigering</s:String>
     <s:String x:Key="Editor.File">Fil</s:String>
     <s:String x:Key="Editor.Home">Hjem</s:String>
     <s:String x:Key="Editor.Playback">Afspil</s:String>

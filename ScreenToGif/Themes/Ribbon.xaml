@@ -1,0 +1,383 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:r="clr-namespace:ScreenToGif.Controls.Ribbon"
+                    xmlns:c="clr-namespace:ScreenToGif.Controls"
+                    xmlns:u="clr-namespace:ScreenToGif.Util"
+                    xmlns:v="clr-namespace:ScreenToGif.Util.Converters">
+
+    <v:ColorToAlpha x:Key="ColorToAlphaConverter"/>
+    <v:InvertedBool x:Key="InvertedBool"/>
+
+
+
+    <!--RibbonItem-->
+    <Style TargetType="{x:Type r:RibbonItem}">
+        <Setter Property="Background" Value="Transparent"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type r:RibbonItem}">
+                    <c:ImageButton x:Name="RootButton" Text="{TemplateBinding Text}" Content="{TemplateBinding Image}" Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}"
+                                   ContentHeight="28" ContentWidth="28"/>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IconSize" Value="Small">
+                            <Setter TargetName="RootButton" Property="ContentHeight" Value="18"/>
+                            <Setter TargetName="RootButton" Property="ContentWidth" Value="18"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Source={RelativeSource FindAncestor, AncestorType={x:Type r:RibbonPanel}}, Path=Mode}" Value="Ribbon"/>
+                    <Condition Binding="{Binding Source={RelativeSource Self}, Path=Mode}" Value="DropDownButton"/>
+                </MultiDataTrigger.Conditions>
+
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type r:RibbonItem}">
+                            <c:DropDownButton x:Name="RootDropDownButton" Text="{TemplateBinding Text}" Content="{TemplateBinding Image}" ItemsSource="{TemplateBinding Menu}" MaxSize="28"/>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IconSize" Value="Small">
+                                    <Setter TargetName="RootDropDownButton" Property="MaxSize" Value="18"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </MultiDataTrigger>
+
+            <DataTrigger Binding="{Binding Source={RelativeSource FindAncestor, AncestorType={x:Type r:RibbonPanel}}, Path=Mode}" Value="Menu">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type r:RibbonItem}">
+                            <c:ImageMenuItem Header="{TemplateBinding Text}" Image="{TemplateBinding Image}" ItemsSource="{TemplateBinding Menu}"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--Ribbon Group-->
+    <Style TargetType="r:RibbonGroup">
+        <Setter Property="KeyboardNavigation.IsTabStop" Value="False"/>
+        <Setter Property="KeyboardNavigation.ControlTabNavigation" Value="Continue"/>
+        <Setter Property="KeyboardNavigation.DirectionalNavigation" Value="Continue"/>
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="Continue"/>
+
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <r:RibbonGroupPanel/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="r:RibbonGroup">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="16"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <ItemsPresenter Grid.Row="0" Grid.Column="0"/>
+                        <ContentPresenter Grid.Row="1" Grid.Column="0" ContentSource="Header" HorizontalAlignment="Center" />
+
+                        <Separator Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Margin="1,3" Width="1" BorderBrush="{DynamicResource Element.Border.Light}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <!--<Trigger Property="cr:RibbonBarPanel.GroupSizeIndex" Value="0"/>-->
+
+            <Trigger Property="IsCollapsed" Value="True">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="r:RibbonGroup">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <r:RibbonItem Text="{TemplateBinding Header}" Image="{Binding LargeIcon, RelativeSource={RelativeSource TemplatedParent}}">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="16"/>
+                                        </Grid.RowDefinitions>
+
+                                        <ItemsPresenter MaxHeight="74" />
+                                        <ContentPresenter Grid.Row="1" ContentSource="Header" HorizontalAlignment="Center" />
+                                    </Grid>
+                                </r:RibbonItem>
+
+                                <Separator Grid.Row="0" Grid.Column="1" Margin="1,3" Width="1" BorderBrush="{DynamicResource Element.Border.Light}"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <ControlTemplate x:Key="Template.Ribbon.TabItem.Menu" TargetType="{x:Type r:RibbonTab}">
+
+    </ControlTemplate>
+
+    <!--Ribbon Tab/Menu-->
+    <Style TargetType="{x:Type r:RibbonTab}">
+        <Setter Property="FontFamily" Value="Segoe UI Semilight"/>
+        <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type r:RibbonTab}">
+                    <Grid Name="Panel" Background="Transparent">
+                        <Border Name="ContentBorder" BorderBrush="{DynamicResource Element.Border.Light}" Background="{TemplateBinding Background}" BorderThickness="0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Viewbox Grid.Column="0" x:Name="ImageViewBox" Visibility="Visible" Stretch="Uniform" Margin="10,2,2,2" MaxHeight="14" Opacity=".6">
+                                    <ContentPresenter Content="{TemplateBinding Image}" VerticalAlignment="Center"/>
+                                </Viewbox>
+
+                                <ContentPresenter Grid.Column="1" x:Name="ContentSite" VerticalAlignment="Center" Effect="{x:Null}" 
+                                                  HorizontalAlignment="Center" ContentSource="Header" Margin="2,2,10,2"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger SourceName="ImageViewBox" Property="Visibility" Value="Collapsed">
+                            <Setter TargetName="ContentSite" Property="Margin" Value="10,2"/>
+                        </Trigger>
+
+                        <Trigger Property="Image" Value="{x:Null}">
+                            <Setter TargetName="ImageViewBox" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="ContentSite" Property="Margin" Value="10,2"/>
+                        </Trigger>
+
+                        <DataTrigger Binding="{Binding Path=IsMouseOver, ElementName=Panel}" Value="True">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="ImageViewBox" To="1"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="ImageViewBox"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.ExitActions>
+
+                            <Setter Property="Foreground" Value="{DynamicResource Element.Foreground.Header}"/>
+                            <Setter Property="Background" Value="{DynamicResource Element.Background.Hover}"/>
+                        </DataTrigger>
+
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Foreground" Value="{DynamicResource Element.Foreground.Header}"/>
+                            <Setter Property="Background" Value="{DynamicResource Panel.Background.Level2}"/>
+                            <Setter TargetName="ContentBorder" Property="BorderThickness" Value="1,1,1,0"/>
+                            <Setter TargetName="ImageViewBox" Property="Opacity" Value="1"/>
+                        </Trigger>
+
+                        <!--When ExtendChrome, !IsDark, !IsSelected-->
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Source={x:Static u:UserSettings.All}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsDark}" Value="False"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="False"/>
+                            </MultiDataTrigger.Conditions>
+
+                            <Setter Property="Foreground" Value="#FF000000"/>
+                            <Setter TargetName="ContentBorder" Property="Background" Value="#90FFFFFF"/>
+                        </MultiDataTrigger>
+
+                        <!--When ExtendChrome, !IsDark, IsMouseOver-->
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Source={x:Static u:UserSettings.All}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsDark}" Value="False"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+
+                            <Setter Property="Foreground" Value="{DynamicResource Element.Foreground.Header}"/>
+                        </MultiDataTrigger>
+
+                        <!--When ExtendChrome, !IsDark, IsSelected-->
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Source={x:Static u:UserSettings.All}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsDark}" Value="False"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+
+                            <Setter TargetName="Panel" Property="Background" Value="{DynamicResource Panel.Background.Level2}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource Element.Foreground.Header}"/>
+                            <Setter TargetName="ContentBorder" Property="BorderThickness" Value="1,1,1,0"/>
+                        </MultiDataTrigger>
+
+                        <!--When ExtendChrome, IsDark, !IsSelected-->
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Source={x:Static u:UserSettings.All}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsDark}" Value="True"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="False"/>
+                            </MultiDataTrigger.Conditions>
+
+                            <Setter Property="Foreground" Value="#FFF8F8FF"/>
+
+                            <Setter TargetName="ContentBorder" Property="Background">
+                                <Setter.Value>
+                                    <RadialGradientBrush>
+                                        <GradientStop Color="{Binding Source={x:Static SystemParameters.WindowGlassColor}, 
+                                                      Converter={StaticResource ColorToAlphaConverter}, ConverterParameter=6E}" Offset="0"/>
+                                        <GradientStop Color="{Binding Source={x:Static SystemParameters.WindowGlassColor}, 
+                                                      Converter={StaticResource ColorToAlphaConverter}, ConverterParameter=50}" Offset="0.4"/>
+                                        <GradientStop Offset="1"/>
+                                    </RadialGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                        </MultiDataTrigger>
+
+                        <!--When ExtendChrome, IsDark, IsMouseOver-->
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Source={x:Static u:UserSettings.All}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsDark}" Value="True"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+
+                            <Setter Property="Foreground" Value="#FFBFEFFF"/>
+                        </MultiDataTrigger>
+
+                        <!--When ExtendChrome, IsDark, IsSelected-->
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Source={x:Static u:UserSettings.All}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsDark}" Value="True"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+
+                            <Setter TargetName="Panel" Property="Background" Value="{DynamicResource Panel.Background.Level2}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource Element.Foreground.Header}"/>
+                            <Setter TargetName="ContentBorder" Property="BorderThickness" Value="1,1,1,0"/>
+                        </MultiDataTrigger>
+
+                        <!--When !ShowBackground, !IsSelected-->
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=ShowBackground}" Value="False"/>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="False"/>
+                            </MultiDataTrigger.Conditions>
+
+                            <Setter TargetName="ContentBorder" Property="Background" Value="Transparent"/>
+                        </MultiDataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ControlTemplate x:Key="Template.Ribbon.Menu" TargetType="{x:Type r:Ribbon}">
+        <Menu x:Name="MainMenu" ItemsSource="{TemplateBinding ItemsSource}"/>
+
+        <!--<ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource Element.Background.Hover}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource Element.Border.Hover}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>-->
+    </ControlTemplate>
+
+    <!--Ribbon-->
+    <Style TargetType="{x:Type r:Ribbon}">
+        <Setter Property="Background" Value="Transparent"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type r:Ribbon}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <c:ImageToggleButton Grid.Row="0" Grid.Column="1" x:Name="NotificationsButton" MinHeight="26" Text="{DynamicResource S.Notifications}" Style="{DynamicResource Style.ToggleButton.NoBorder}"
+                                             ContentHeight="16" ContentWidth="16" BorderThickness="0" Padding="2,2,4,2" TextWrapping="NoWrap" VerticalAlignment="Center" IsOverNonClientArea="True"
+                                             IsHitTestVisible="{Binding ElementName=MainPopup, Path=IsOpen, Mode=OneWay, Converter={StaticResource InvertedBool}}">
+                            <c:ImageToggleButton.Resources>
+                                <Storyboard x:Key="NotificationStoryboard">
+                                    <DoubleAnimation Storyboard.TargetName="NotificationsButton" Storyboard.TargetProperty="Opacity" From="1" To="0.3"
+                                                     RepeatBehavior="2x" AutoReverse="True" Duration="0:0:0.4"/>
+                                </Storyboard>
+                            </c:ImageToggleButton.Resources>
+                        </c:ImageToggleButton>
+
+                        <Popup Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" x:Name="MainPopup" Placement="Bottom" Margin="0" StaysOpen="False" 
+                               PopupAnimation="Fade" Width="400" Height="Auto" MinHeight="100" MaxHeight="400" SnapsToDevicePixels="True" AllowsTransparency="True" HorizontalOffset="-2"
+                               IsOpen="{Binding ElementName=NotificationsButton, Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" PlacementTarget="{Binding ElementName=NotificationsButton}">
+                            <c:NotificationListControl x:Name="NotificationList"/>
+                        </Popup>
+
+                        <Menu Grid.Row="0" Grid.Column="2" Effect="{x:Null}" Background="Transparent" VerticalAlignment="Center" ItemsSource="{TemplateBinding ExtrasMenu}"/>
+
+                        <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" x:Name="ContentBorder" BorderBrush="{DynamicResource Element.Border.Light}" BorderThickness="0,1" Background="{DynamicResource Panel.Background.Level2}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <ContentPresenter Grid.Column="0" Grid.ColumnSpan="2" ContentSource="SelectedContent"/>
+
+                                <c:ImageButton Grid.Row="0" Grid.Column="1" x:Name="HideGridButton" Content="{DynamicResource Glyph.Up}" 
+                                               HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                                               HorizontalAlignment="Center" VerticalAlignment="Bottom" ContentWidth="16" MinWidth="28"
+                                               Margin="0,0,1,1" Padding="2" Style="{DynamicResource Style.Button.NoText}"/>
+                            </Grid>
+                        </Border>
+
+                        <TabPanel Grid.Row="0" Grid.Column="0" Name="TabPanel" Margin="5,5,0,-2" IsItemsHost="True" Background="Transparent"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <!--<Trigger Property="Mode" Value="Ribbon">
+                <Setter Property="Template" Value="{DynamicResource Brush.Button.Background.Hover}"/>
+            </Trigger>-->
+            <Trigger Property="Mode" Value="Menu">
+                <Setter Property="Template" Value="{StaticResource Template.Ribbon.Menu}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

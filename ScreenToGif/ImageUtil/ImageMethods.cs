@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -1050,17 +1049,30 @@ namespace ScreenToGif.ImageUtil
         {
             var format = PixelFormats.Default;
 
-            if (ch == 1) format = PixelFormats.Gray8; //grey scale image 0-255
-            if (ch == 3) format = PixelFormats.Bgr24; //RGB
-            if (ch == 4) format = PixelFormats.Bgr32; //RGB + alpha
+            if (ch == 1) 
+                format = PixelFormats.Gray8; //Grey scale image 0-255.
+            else if (ch == 3) 
+                format = PixelFormats.Bgr24; //RGB.
+            else if (ch == 4) 
+                format = PixelFormats.Bgr32; //RGB + alpha.
 
-            for (int i = data.Count - 1; i < w * h * ch; i++)
+            for (var i = data.Count - 1; i < w * h * ch; i++)
                 data.Add(0);
 
             var wbm = new WriteableBitmap(w, h, 96, 96, format, null);
-            wbm.WritePixels(new Int32Rect(0, 0, w, h), data.ToArray().ToArray(), ch * w, 0);
+            wbm.WritePixels(new Int32Rect(0, 0, w, h), data.ToArray(), ch * w, 0);
 
             return wbm;
+        }
+
+        public static void SavePixelArrayToFile(byte[] pixels, int width, int height, int channels, string filePath)
+        {
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                BitmapEncoder encoder = new PngBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(FromArray(pixels.ToList(), width, height, channels)));
+                encoder.Save(fileStream);
+            }
         }
 
         #endregion

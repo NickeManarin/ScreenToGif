@@ -81,22 +81,21 @@
     <s:String x:Key="Donate">Quyên góp</s:String>
     <s:String x:Key="About">Giới thiệu</s:String>
     
-    <s:String x:Key="Application.ScreenRecorder">Quay màn hình</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordMouse">Hiển thị con trỏ chuột trong khi đang quay.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordClicks">Phát hiện click chuột.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">Lựa chọn màu sắc con trỏ chuột</s:String>
-    <s:String x:Key="Application.ScreenRecorder.PreStart">Sử dụng đếm ngược trước khi bắt đầu.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.PreStart.Info">(vài giây, chờ trước khi bắt đầu quay)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.StepRecording">Cho phép chế độ chụp ảnh nhanh.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Mỗi khung hình sẽ được chụp thủ công bởi bạn)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Tỉ lệ khung hình cố định.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Làm chậm ổn định mà không thay đổi dịch chuyển chậm khi quay)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Cho phép quay không đồng thời.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(Điều này giúp giảm lag giữa các mặt phân cách khi quay)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.NewRecorder">Cho phép giao diện quay mới.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(Điều này sẽ thay thế giao diện quay cũ)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.Magnifier">Cho phép phóng to màn hình.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(Điều này cho phép 1 kính lúp trong khi chọn 1 vùng đang quay)</s:String>
+    <s:String x:Key="S.Options.Recorder.RecordMouse">Hiển thị con trỏ chuột trong khi đang quay.</s:String>
+    <s:String x:Key="S.Options.Recorder.RecordClicks">Phát hiện click chuột.</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectCursorColor">Lựa chọn màu sắc con trỏ chuột</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart">Sử dụng đếm ngược trước khi bắt đầu.</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart.Info">(vài giây, chờ trước khi bắt đầu quay)</s:String>
+    <s:String x:Key="S.Options.Recorder.StepRecording">Cho phép chế độ chụp ảnh nhanh.</s:String>
+    <s:String x:Key="S.Options.Recorder.StepRecording.Info">(Mỗi khung hình sẽ được chụp thủ công bởi bạn)</s:String>
+    <s:String x:Key="S.Options.Recorder.FixedFramerate">Tỉ lệ khung hình cố định.</s:String>
+    <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Làm chậm ổn định mà không thay đổi dịch chuyển chậm khi quay)</s:String>
+    <s:String x:Key="S.Options.Recorder.AsyncRecording">Cho phép quay không đồng thời.</s:String>
+    <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(Điều này giúp giảm lag giữa các mặt phân cách khi quay)</s:String>
+    <s:String x:Key="S.Options.Recorder.NewRecorder">Cho phép giao diện quay mới.</s:String>
+    <s:String x:Key="S.Options.Recorder.NewRecorder.Info">(Điều này sẽ thay thế giao diện quay cũ)</s:String>
+    <s:String x:Key="S.Options.Recorder.Magnifier">Cho phép phóng to màn hình.</s:String>
+    <s:String x:Key="S.Options.Recorder.Magnifier.Info">(Điều này cho phép 1 kính lúp trong khi chọn 1 vùng đang quay)</s:String>
     
     <s:String x:Key="Application.Other">Khác</s:String>
     <s:String x:Key="Application.Other.SystemTray">Hiển thị ứng dụng ở khay hệ thống (Khu vực thông báo).</s:String>

@@ -257,7 +257,7 @@ namespace ScreenToGif.Windows
 
             if (Project != null)
             {
-                ShowProgress(FindResource("Editor.Preparing").ToString(), Project.Frames.Count, true);
+                ShowProgress(LocalizationHelper.Get("Editor.Preparing"), Project.Frames.Count, true);
 
                 Cursor = Cursors.AppStarting;
                 IsLoading = true;
@@ -1195,13 +1195,14 @@ namespace ScreenToGif.Windows
                     return;
                 }
 
+                //Check external tools (Gifski, FFmpeg).
                 if (UserSettings.All.SaveType == Export.Video)
                 {
                     if (UserSettings.All.VideoEncoder == VideoEncoderType.Ffmpg)
                     {
                         if (!Util.Other.IsFfmpegPresent())
                         {
-                            StatusList.Warning(StringResource("Editor.Warning.Ffmpeg"), null, () => App.MainViewModel.OpenOptions.Execute(7));
+                            StatusList.Warning(StringResource("Editor.Warning.Ffmpeg"), null, () => App.MainViewModel.OpenOptions.Execute(Options.ExtrasIndex));
                             return;
                         }
 
@@ -1231,7 +1232,7 @@ namespace ScreenToGif.Windows
                     {
                         if (!Util.Other.IsFfmpegPresent())
                         {
-                            StatusList.Warning(StringResource("Editor.Warning.Ffmpeg"), null, () => App.MainViewModel.OpenOptions.Execute(7));
+                            StatusList.Warning(StringResource("Editor.Warning.Ffmpeg"), null, () => App.MainViewModel.OpenOptions.Execute(Options.ExtrasIndex));
                             return;
                         }
 
@@ -1245,7 +1246,7 @@ namespace ScreenToGif.Windows
                     {
                         if (!Util.Other.IsGifskiPresent())
                         {
-                            StatusList.Warning(StringResource("Editor.Warning.Gifski"), null, () => App.MainViewModel.OpenOptions.Execute(7));
+                            StatusList.Warning(StringResource("Editor.Warning.Gifski"), null, () => App.MainViewModel.OpenOptions.Execute(Options.ExtrasIndex));
                             return;
                         }
 
@@ -1262,7 +1263,7 @@ namespace ScreenToGif.Windows
                     {
                         if (!Util.Other.IsFfmpegPresent())
                         {
-                            StatusList.Warning(StringResource("Editor.Warning.Ffmpeg"), null, () => App.MainViewModel.OpenOptions.Execute(7));
+                            StatusList.Warning(StringResource("Editor.Warning.Ffmpeg"), null, () => App.MainViewModel.OpenOptions.Execute(Options.ExtrasIndex));
                             return;
                         }
 
@@ -1387,6 +1388,7 @@ namespace ScreenToGif.Windows
                 switch (UserSettings.All.SaveType)
                 {
                     case Export.Gif:
+                    {
                         param.EncoderType = UserSettings.All.GifEncoder;
                         param.DetectUnchangedPixels = UserSettings.All.DetectUnchanged;
                         param.DummyColor = UserSettings.All.DetectUnchanged && UserSettings.All.PaintTransparent ? UserSettings.All.ChromaKey : new Color?();
@@ -1397,7 +1399,10 @@ namespace ScreenToGif.Windows
                         param.Command = "-vsync 2 -safe 0 -f concat -i \"{0}\" {1} -y \"{2}\"";
                         param.ExtraParameters = UserSettings.All.ExtraParametersGif;
                         break;
+                    }
+
                     case Export.Apng:
+                    {
                         param.ApngEncoder = UserSettings.All.ApngEncoder;
                         param.DetectUnchangedPixels = UserSettings.All.DetectUnchangedApng;
                         param.DummyColor = UserSettings.All.DetectUnchangedApng && UserSettings.All.PaintTransparentApng ? Colors.Transparent : new Color?();
@@ -1405,7 +1410,10 @@ namespace ScreenToGif.Windows
                         param.Command = "-vsync 2 -safe 0 -f concat -i \"{0}\" {1} -plays {2} -f apng -y \"{3}\"";
                         param.ExtraParameters = UserSettings.All.ExtraParametersApngFFmpeg;
                         break;
+                    }
+
                     case Export.Video:
+                    {
                         var size = Project.Frames[0].Path.SizeOf();
 
                         param.VideoEncoder = FfmpegEncoderRadioButton.IsChecked == true ? VideoEncoderType.Ffmpg : VideoEncoderType.AviStandalone;
@@ -1417,7 +1425,11 @@ namespace ScreenToGif.Windows
                         param.ExtraParameters = FfmpegParameterTextBox.Text;
                         param.Framerate = UserSettings.All.OutputFramerate;
                         break;
+                    }
+
                     case Export.Images:
+                    {
+                        param.CompressionLevel = CompressionLevel.Optimal;
 
                         if (!UserSettings.All.ZipImages)
                         {
@@ -1479,12 +1491,20 @@ namespace ScreenToGif.Windows
 
                             Directory.Delete(dir.FullName, true);
                         }
+
                         break;
+                    }
+
                     case Export.Project:
-                        _saveProjectDel = SaveProjectAsync;
-                        _saveProjectDel.BeginInvoke(filename, saveToClipboard, SaveProjectCallback, null);
+                    {
+                        Project.Persist();
+
+                        param.CompressionLevel = UserSettings.All.CompressionLevelProject;
                         break;
+                    }
+
                     case Export.Photoshop:
+                    {
                         var size2 = Project.Frames[0].Path.SizeOf();
 
                         param.Height = size2.Height;
@@ -1492,23 +1512,23 @@ namespace ScreenToGif.Windows
                         param.Compress = UserSettings.All.CompressImage;
                         param.SaveTimeline = UserSettings.All.SaveTimeline;
                         break;
+                    }
+
                     default:
-                        throw new ArgumentOutOfRangeException();
+                        throw new ArgumentOutOfRangeException(nameof(UserSettings.All.SaveType), "Export type not selected.");
                 }
 
                 //Save, using the encoder.
-                if (UserSettings.All.SaveType != Export.Images && UserSettings.All.SaveType != Export.Project)
+                if (UserSettings.All.SaveType != Export.Images)
                 {
                     _saveDel = SaveAsync;
-                    _saveDel.BeginInvoke(Project.Frames, param, this.Scale(), projectToo, UserSettings.All.SaveType == Export.Gif && UserSettings.All.GifEncoder == GifEncoderType.Gifski, SaveCallback, null);
+                    _saveDel.BeginInvoke(Project.Frames, param, this.Scale(), projectToo, false, SaveCallback, null);
                 }
             }
             catch (Exception ex)
             {
                 LogWriter.Log(ex, "Save As");
-
-                ErrorDialog.Ok("ScreenToGif", "Error while trying to save", ex.Message, ex);
-                ClosePanel();
+                ErrorDialog.Ok("ScreenToGif", "Error while trying to save", ex.Message, ex); //TODO: Translate
             }
 
             ClosePanel();
@@ -3825,13 +3845,68 @@ namespace ScreenToGif.Windows
         {
             try
             {
-                ShowProgress(DispatcherStringResource("Editor.LoadingFrames"), Project.Frames.Count);
-
                 if (!Project.IsNew)
                     Project.Persist();
 
                 var corruptedList = new List<FrameInfo>();
                 var count = 0;
+
+                #region Get images from cache
+
+                if (File.Exists(Project.CachePath))
+                {
+                    ShowProgress(DispatcherStringResource("Editor.RetrievingFromCache"), Project.Frames.Count);
+
+                    using (var fileStream = new FileStream(Project.CachePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+                    {
+                        using (var deflateStream = new DeflateStream(fileStream, CompressionMode.Decompress))
+                        {
+                            var number = 0;
+
+                            foreach (var frame in Project.Frames)
+                            {
+                                if (_abortLoading)
+                                {
+                                    _abortLoading = false;
+                                    return false;
+                                }
+
+                                Dispatcher.Invoke(() => { UpdateProgress(number++); });
+
+                                var array = deflateStream.ReadBytes((int)frame.DataLength);
+
+                                BitmapSource source;
+                                if (Project.BitDepth == 24)
+                                {
+                                    //24 bits: ((Project.Width * 24 + 31) / 32) * 4
+                                    source = BitmapSource.Create(Project.Width, Project.Height, Project.Dpi, Project.Dpi, PixelFormats.Bgr24, null, array, ((Project.Width * 24 + 31) / 32) * 4);
+                                    source = new FormatConvertedBitmap(source, PixelFormats.Bgra32, null, 0);
+                                }
+                                else
+                                {
+                                    //32 bits: 4 * Project.Width
+                                    source = BitmapSource.Create(Project.Width, Project.Height, Project.Dpi, Project.Dpi, PixelFormats.Bgra32, null, array, 4 * Project.Width);
+                                }
+
+                                using (var stream = new FileStream(frame.Path, FileMode.Create))
+                                {
+                                    var encoder = new PngBitmapEncoder();
+                                    encoder.Frames.Add(BitmapFrame.Create(source));
+                                    encoder.Save(stream);
+                                    stream.Close();
+                                }
+                            }
+
+                            GC.Collect();
+                        }
+                    }
+
+                    File.Delete(Project.CachePath);
+                }
+
+                #endregion
+
+                ShowProgress(DispatcherStringResource("Editor.LoadingFrames"), Project.Frames.Count);
 
                 #region Check if there's any missing frames (and remove them)
 
@@ -3918,7 +3993,7 @@ namespace ScreenToGif.Windows
                                 {
                                     case DefaultTaskModel.TaskTypeEnum.MouseClicks:
                                     {
-                                        if (Project.CreatedBy == ProjectByType.ScreenRecorder && UserSettings.All.DetectMouseClicks)
+                                        if (Project.CreatedBy == ProjectByType.ScreenRecorder)
                                             MouseClicksAsync(task as MouseClicksModel ?? MouseClicksModel.FromSettings());
 
                                         break;
@@ -4032,6 +4107,7 @@ namespace ScreenToGif.Windows
             catch (Exception ex)
             {
                 LogWriter.Log(ex, "Frame Loading");
+                Dispatcher.Invoke(() => ErrorDialog.Ok(Title, "Error loading frames", "It was not possible to load all the frames.", ex));
 
                 return false;
             }
@@ -5245,7 +5321,7 @@ namespace ScreenToGif.Windows
                 case ".mp4":
                     return "-c:v libx264 -pix_fmt yuv420p -vf \"pad=width={W}:height={H}:x=0:y=0:color=black\"";
                 case ".webm":
-                    return "-c:v libvpx -pix_fmt yuv420p -vf \"pad=width={W}:height={H}:x=0:y=0:color=black\"";
+                    return "-c:v libvpx-vp9 -pix_fmt yuv420p -vf \"pad=width={W}:height={H}:x=0:y=0:color=black\"";
                 case ".wmv":
                     return "-c:v wmv2 -pix_fmt yuv420p -vf \"pad=width={W}:height={H}:x=0:y=0:color=black\"";
                 default:
@@ -5793,7 +5869,7 @@ namespace ScreenToGif.Windows
         #endregion
 
         #endregion
-        
+
 
         #region Async
 
@@ -5896,7 +5972,7 @@ namespace ScreenToGif.Windows
 
         private SaveDelegate _saveDel;
 
-        private bool SaveAsync(List<FrameInfo> listFrames, Parameters param, double scale, bool projectToo, bool usePadding = false)
+        private bool SaveAsync(List<FrameInfo> frames, Parameters param, double scale, bool projectToo, bool usePadding = false)
         {
             ShowProgress(DispatcherStringResource("S.Editor.PreparingSaving"), Project.Frames.Count, true);
 
@@ -5906,20 +5982,31 @@ namespace ScreenToGif.Windows
 
             try
             {
-                Dispatcher.Invoke(() => Encoder.AddItem(listFrames.CopyToEncode(usePadding), param, scale));
+                //Copy the frames, so it can be manipulated without problem.
+                var copied = Project.CopyToExport(usePadding, param.Type == Export.Project);
+
+                Dispatcher.Invoke(() => Encoder.AddItem(copied, param, scale));
+
+                if (projectToo)
+                {
+                    var proParam = new Parameters
+                    {
+                        Type = Export.Project,
+                        Filename = Path.Combine(GetOutputFolder(), GetOutputFilename() + (UserSettings.All.LatestProjectExtension ?? ".stg")),
+                        CompressionLevel = UserSettings.All.CompressionLevelProject,
+                    };
+
+                    //Copy the frames, so it can be manipulated without problem.
+                    var copied2 = Project.CopyToExport(usePadding, true);
+
+                    Dispatcher.Invoke(() => Encoder.AddItem(copied2, proParam, scale));
+                }
             }
             catch (Exception ex)
             {
                 LogWriter.Log(ex, "Preparing to save the recording");
 
-                Dispatcher.Invoke(() => Dialog.Ok("Error While Saving", "Error while preparing to save", ex.Message));
-            }
-
-            //Save as project too.
-            if (projectToo)
-            {
-                _saveProjectDel = SaveProjectAsync;
-                _saveProjectDel.BeginInvoke(Path.Combine(GetOutputFolder(), GetOutputFilename() + (UserSettings.All.LatestProjectExtension ?? ".stg")), false, SaveProjectCallback, null);
+                Dispatcher.Invoke(() => Dialog.Ok("Error While Saving", "Error while preparing to save", ex.Message)); //TODO: Translate
             }
 
             return projectToo;
@@ -5930,110 +6017,6 @@ namespace ScreenToGif.Windows
         private void SaveCallback(IAsyncResult ar)
         {
             var result = _saveDel.EndInvoke(ar);
-
-            if (!result)
-                Dispatcher.Invoke(() =>
-                {
-                    Cursor = Cursors.Arrow;
-                    IsLoading = false;
-
-                    HideProgress();
-
-                    CommandManager.InvalidateRequerySuggested();
-                });
-
-            GC.Collect();
-        }
-
-        #endregion
-
-        #region Async Project
-
-        private delegate void SaveProjectDelegate(string fileName, bool copyToClipboard = false);
-
-        private SaveProjectDelegate _saveProjectDel;
-
-        private void SaveProjectAsync(string fileName, bool copyToClipboard = false)
-        {
-            ShowProgress(DispatcherStringResource("Editor.ExportingRecording"), Project.Frames.Count);
-
-            Dispatcher.Invoke(() => IsLoading = true);
-
-            #region Export as Project
-
-            try
-            {
-                //Serialize the current list of frames.
-                Project.Persist();
-
-                if (File.Exists(fileName))
-                    File.Delete(fileName);
-
-                var exportDir = Path.Combine(Project.FullPath, "Export");
-
-                if (Directory.Exists(exportDir))
-                    Directory.Delete(exportDir, true);
-
-                var dir = Directory.CreateDirectory(exportDir);
-
-                File.Copy(Project.ProjectPath, Path.Combine(exportDir, "Project.json"));
-
-                var count = 0;
-                foreach (var frameInfo in Project.Frames)
-                {
-                    File.Copy(frameInfo.Path, Path.Combine(dir.FullName, Path.GetFileName(frameInfo.Path)), true);
-                    UpdateProgress(count++);
-                }
-
-                ZipFile.CreateFromDirectory(dir.FullName, fileName);
-
-                Directory.Delete(dir.FullName, true);
-
-                #region Copy
-
-                Dispatcher.Invoke(() =>
-                {
-                    try
-                    {
-                        var data = new DataObject();
-
-                        switch (UserSettings.All.LatestCopyTypeProject)
-                        {
-                            case CopyType.File:
-                                data.SetText(fileName, TextDataFormat.Text);
-                                data.SetFileDropList(new StringCollection { fileName });
-                                break;
-                            case CopyType.FolderPath:
-                                data.SetText(Path.GetDirectoryName(fileName) ?? fileName, TextDataFormat.Text);
-                                break;
-                            default:
-                                data.SetText(fileName, TextDataFormat.Text);
-                                break;
-                        }
-
-                        System.Windows.Clipboard.SetDataObject(data, true);
-                    }
-                    catch (Exception e)
-                    {
-                        LogWriter.Log(e, "It was not possible to copy the project.");
-                    }
-                });
-
-                #endregion
-            }
-            catch (Exception ex)
-            {
-                LogWriter.Log(ex, "Exporting Recording as a Project");
-
-                Dispatcher.Invoke(() => Dialog.Ok("Error While Saving", "Error while Saving as Project", ex.Message));
-            }
-
-            #endregion
-        }
-
-        private void SaveProjectCallback(IAsyncResult ar)
-        {
-            _saveProjectDel.EndInvoke(ar);
 
             Dispatcher.Invoke(() =>
             {
@@ -6806,7 +6789,7 @@ namespace ScreenToGif.Windows
 
             var frames = model.LeftThickness < 0 || model.TopThickness < 0 || model.RightThickness < 0 || model.BottomThickness < 0 ? Project.Frames : SelectedFrames();
             var scale = Math.Round(ZoomBoxControl.ImageDpi / 96d, 2); //ZoomBoxControl.ImageScale;
-            
+
             //Since there could be a difference in the DPI of the UI vs the one from the image, I need to adjust the scale of the thickness.
             var leftThick = model.LeftThickness * ZoomBoxControl.ScaleDiff;
             var topThick = model.TopThickness * ZoomBoxControl.ScaleDiff;
@@ -6822,7 +6805,7 @@ namespace ScreenToGif.Windows
                 using (var drawingContext = drawingVisual.RenderOpen())
                 {
                     #region Draws the white rectangle behind with full size
-                    
+
                     var marginHorizontal = Math.Abs((int)Math.Min(leftThick, 0) + Math.Min(rightThick, 0)); //Left and right negative margins as a positive number.
                     var marginVertical = Math.Abs((int)Math.Min(topThick, 0) + Math.Min(bottomThick, 0)); //Top and bottom negative margins as a positive number.
 
@@ -6980,7 +6963,7 @@ namespace ScreenToGif.Windows
                     var offsetBottom = offsetY < 0 ? offsetY * -1 : 0;
 
                     //Measure drop shadow space.
-                    var marginLeft = offsetLeft > 0 ? offsetLeft + blur /2d : Math.Max(blur / 2d - offsetLeft, 0); //- offsetX
+                    var marginLeft = offsetLeft > 0 ? offsetLeft + blur / 2d : Math.Max(blur / 2d - offsetLeft, 0); //- offsetX
                     var marginTop = offsetTop > 0 ? offsetTop + blur / 2d : Math.Max(blur / 2d - offsetTop, 0); //- offsetY
                     var marginRight = offsetRight > 0 ? offsetRight + blur / 2d : Math.Max(blur / 2d - offsetRight, 0); //+ offsetX
                     var marginBottom = offsetBottom > 0 ? offsetBottom + blur / 2d : Math.Max(blur / 2d - offsetBottom, 0); //+ offsetY

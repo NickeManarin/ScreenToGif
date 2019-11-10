@@ -84,22 +84,21 @@
     <s:String x:Key="S.Application.Other.Homepage.Board">Záznamník plátna</s:String>
     <s:String x:Key="S.Application.Other.Homepage.Editor">Okno editoru</s:String>
     
-    <s:String x:Key="Application.ScreenRecorder">Záznamník plochy</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordMouse">Zobrazit kurzor myši v nahraném záznamu.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordClicks">Rozpoznání kliknutí myší.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">Zvolte barvu kurzoru</s:String>
-    <s:String x:Key="Application.ScreenRecorder.PreStart">Použít odpočítávání před nahráváním.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.PreStart.Info">(v sekundách, čeká než začne nahrávat)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.StepRecording">Povolit režim snímků.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Každý snímek bude zachycen ručně)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Pevná rychlost snímků.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Konstantní zpoždění, které se při nahrávání nemění)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Povolit asynchroní nahrávání.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(Snižuje opoždění rozhraní při nahrávání)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.NewRecorder">Povolit nové UI.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(Nahradí staré uživatelské rozhraní)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.Magnifier">Povolit lupu obrazovky.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(Umožňuje zvětšování při výběru v nahrávané oblasti)</s:String>
+    <s:String x:Key="S.Options.Recorder.RecordMouse">Zobrazit kurzor myši v nahraném záznamu.</s:String>
+    <s:String x:Key="S.Options.Recorder.RecordClicks">Rozpoznání kliknutí myší.</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectCursorColor">Zvolte barvu kurzoru</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart">Použít odpočítávání před nahráváním.</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart.Info">(v sekundách, čeká než začne nahrávat)</s:String>
+    <s:String x:Key="S.Options.Recorder.StepRecording">Povolit režim snímků.</s:String>
+    <s:String x:Key="S.Options.Recorder.StepRecording.Info">(Každý snímek bude zachycen ručně)</s:String>
+    <s:String x:Key="S.Options.Recorder.FixedFramerate">Pevná rychlost snímků.</s:String>
+    <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Konstantní zpoždění, které se při nahrávání nemění)</s:String>
+    <s:String x:Key="S.Options.Recorder.AsyncRecording">Povolit asynchroní nahrávání.</s:String>
+    <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(Snižuje opoždění rozhraní při nahrávání)</s:String>
+    <s:String x:Key="S.Options.Recorder.NewRecorder">Povolit nové UI.</s:String>
+    <s:String x:Key="S.Options.Recorder.NewRecorder.Info">(Nahradí staré uživatelské rozhraní)</s:String>
+    <s:String x:Key="S.Options.Recorder.Magnifier">Povolit lupu obrazovky.</s:String>
+    <s:String x:Key="S.Options.Recorder.Magnifier.Info">(Umožňuje zvětšování při výběru v nahrávané oblasti)</s:String>
     
     <s:String x:Key="Application.Other">Další</s:String>
     <s:String x:Key="Application.Other.SystemTray">Zobraz aplikaci v systémové liště (oznamovací oblast).</s:String>

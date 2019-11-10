@@ -66,6 +66,9 @@
             <Trigger Property="OutputType" Value="Photoshop">
                 <Setter Property="Image" Value="{DynamicResource Vector.Psd}"/>
             </Trigger>
+            <Trigger Property="OutputType" Value="Project">
+                <Setter Property="Image" Value="{DynamicResource Vector.Project}"/>
+            </Trigger>
 
             <Trigger Property="IsIndeterminate" Value="True">
                 <Setter TargetName="PercentageLabel" Property="Content" Value="~"/>
@@ -202,6 +205,9 @@
             </Trigger>
             <Trigger Property="OutputType" Value="Photoshop">
                 <Setter TargetName="FileButton" Property="Content" Value="{DynamicResource Vector.Psd}"/>
+            </Trigger>
+            <Trigger Property="OutputType" Value="Project">
+                <Setter TargetName="FileButton" Property="Content" Value="{DynamicResource Vector.Project}"/>
             </Trigger>
 
             <Trigger Property="CopiedToClipboard" Value="True">

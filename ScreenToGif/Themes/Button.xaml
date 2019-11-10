@@ -955,8 +955,8 @@
                     <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
                         <Grid MinHeight="{TemplateBinding MinHeight}" SnapsToDevicePixels="True" Background="{TemplateBinding Background}">
                             <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                     Margin="2,0,2,0" Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}" 
-                                     Stretch="Uniform" StretchDirection="Both" MaxHeight="{TemplateBinding MaxSize}" Effect="{x:Null}">
+                                     Margin="2,0,2,0" Width="{TemplateBinding ContentWidth}" Height="{TemplateBinding ContentWidth}" 
+                                     Stretch="Uniform" StretchDirection="Both" MaxHeight="{TemplateBinding ContentWidth}" Effect="{x:Null}">
                                 <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" Opacity="{DynamicResource Element.Opacity}"/>
                             </Viewbox>
                         </Grid>

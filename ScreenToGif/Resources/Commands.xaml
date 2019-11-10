@@ -124,6 +124,7 @@
 
     <RoutedUICommand x:Key="Command.Play" Text="S.Command.Play">
         <RoutedUICommand.InputGestures>
+            <KeyGesture>Space</KeyGesture>
             <KeyGesture>Alt + P</KeyGesture>
         </RoutedUICommand.InputGestures>
     </RoutedUICommand>

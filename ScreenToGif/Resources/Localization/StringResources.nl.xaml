@@ -80,22 +80,21 @@
     <s:String x:Key="Donate">Doneren</s:String>
     <s:String x:Key="About">Over</s:String>
     
-    <s:String x:Key="Application.ScreenRecorder">Schermopname</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordMouse">Muiscursor tijdens opname weergeven.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.RecordClicks">Muisklikken detecteren.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.SelectCursorColor">Kleur muiscursor selecteren.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.PreStart">Aftellen voor opname.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.PreStart.Info">(de wachttijd [sec] voordat de opname wordt gestart)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.StepRecording">Foto-modus inschakelen.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.StepRecording.Info">(Elk frame moet handmatig gefotografeerd worden)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate">Vaste framerate.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.FixedFramerate.Info">(Constante framerate die niet verandert bij opnamevertraging)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.AsyncRecording">Asynchrone opnamemodus inschakelen.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.AsyncRecording.Info">(Deze optie vermindert vertragingen in de opname)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.NewRecorder">Nieuwe opname-UI inschakelen.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.NewRecorder.Info">(Dit vervangt de oude opname-UI)</s:String>
-    <s:String x:Key="Application.ScreenRecorder.Magnifier">Vergrootglas inschakelen.</s:String>
-    <s:String x:Key="Application.ScreenRecorder.Magnifier.Info">(Bij het vastleggen van het opnamegebied)</s:String>
+    <s:String x:Key="S.Options.Recorder.RecordMouse">Muiscursor tijdens opname weergeven.</s:String>
+    <s:String x:Key="S.Options.Recorder.RecordClicks">Muisklikken detecteren.</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectCursorColor">Kleur muiscursor selecteren.</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart">Aftellen voor opname.</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart.Info">(de wachttijd [sec] voordat de opname wordt gestart)</s:String>
+    <s:String x:Key="S.Options.Recorder.StepRecording">Foto-modus inschakelen.</s:String>
+    <s:String x:Key="S.Options.Recorder.StepRecording.Info">(Elk frame moet handmatig gefotografeerd worden)</s:String>
+    <s:String x:Key="S.Options.Recorder.FixedFramerate">Vaste framerate.</s:String>
+    <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Constante framerate die niet verandert bij opnamevertraging)</s:String>
+    <s:String x:Key="S.Options.Recorder.AsyncRecording">Asynchrone opnamemodus inschakelen.</s:String>
+    <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(Deze optie vermindert vertragingen in de opname)</s:String>
+    <s:String x:Key="S.Options.Recorder.NewRecorder">Nieuwe opname-UI inschakelen.</s:String>
+    <s:String x:Key="S.Options.Recorder.NewRecorder.Info">(Dit vervangt de oude opname-UI)</s:String>
+    <s:String x:Key="S.Options.Recorder.Magnifier">Vergrootglas inschakelen.</s:String>
+    <s:String x:Key="S.Options.Recorder.Magnifier.Info">(Bij het vastleggen van het opnamegebied)</s:String>
     
     <s:String x:Key="Application.Other">Overige</s:String>
     <s:String x:Key="Application.Other.SystemTray">Pictogram in het systeemvak van de taakbalk (meldingencentrum) weergeven.</s:String>

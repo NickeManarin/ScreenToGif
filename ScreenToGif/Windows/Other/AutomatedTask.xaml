@@ -4,6 +4,7 @@
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         xmlns:m="clr-namespace:ScreenToGif.Model"
         xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
+        xmlns:u="clr-namespace:ScreenToGif.Util"
         Title="{DynamicResource S.AutomatedTasks.Title}" Width="350" Height="400" MinWidth="300" MinHeight="300" 
         WindowStartupLocation="CenterScreen" SnapsToDevicePixels="True" Background="{DynamicResource Panel.Background}" Loaded="Window_Loaded">
 
@@ -13,6 +14,7 @@
     
     <Window.Resources>
         <c:StringToStaticResource x:Key="StringToStaticResource"/>
+        <u:ComboBoxItemTemplateSelector x:Key="ItemSelector"/>
     </Window.Resources>
     
     <Grid>
@@ -33,9 +35,9 @@
 
             <TextBlock Grid.Column="1" x:Name="TypeTextBlock" Text="{DynamicResource S.Add}" Margin="5" VerticalAlignment="Center" 
                        FontFamily="Segoe UI Semilight" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
-            
-            <ComboBox Grid.Column="2" x:Name="TypeComboBox" Margin="5,3" SelectedIndex="0" SelectionChanged="TypeComboBox_Selected">
-                <ComboBox.ItemTemplate>
+
+            <ComboBox Grid.Column="2" x:Name="TypeComboBox" Margin="5,3" SelectedIndex="0" ItemTemplateSelector="{StaticResource ItemSelector}" SelectionChanged="TypeComboBox_Selected">
+                <u:ComboBoxItemTemplateSelector.SelectedTemplate>
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -44,16 +46,35 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <Viewbox Grid.Column="0" Margin="3,3,6,3" Stretch="Uniform" MaxHeight="24">
+                            <Viewbox Grid.Column="0" x:Name="IconViewBox" Margin="3,3,6,3" Stretch="Uniform" MaxHeight="24">
                                 <ContentPresenter Content="{Binding Image, Converter={StaticResource StringToStaticResource}}" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </Viewbox>
-                            
+
                             <Separator Grid.Column="1" Width="1" Margin="0"/>
                             <TextBlock Grid.Column="2" Text="{Binding Kind}" Margin="10,0,2,0" Foreground="{DynamicResource Element.Foreground.Medium}" VerticalAlignment="Center"/>
                         </Grid>
                     </DataTemplate>
-                </ComboBox.ItemTemplate>
-                
+                </u:ComboBoxItemTemplateSelector.SelectedTemplate>
+
+                <u:ComboBoxItemTemplateSelector.DropDownTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="1"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Viewbox Grid.Column="0" x:Name="IconViewBox" Margin="3,3,6,3" Stretch="Uniform" Height="24">
+                                <ContentPresenter Content="{Binding Image, Converter={StaticResource StringToStaticResource}}" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Viewbox>
+
+                            <Separator Grid.Column="1" Width="1" Margin="0"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Kind}" Margin="10,0,2,0" Foreground="{DynamicResource Element.Foreground.Medium}" VerticalAlignment="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                </u:ComboBoxItemTemplateSelector.DropDownTemplate>
+
                 <m:DefaultTaskModel Image="Vector.Info"/>
                 <m:MouseClicksModel Image="Vector.Cursor"/>
                 <m:KeyStrokesModel Image="Vector.Keyboard"/>

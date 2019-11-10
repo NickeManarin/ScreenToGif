@@ -124,7 +124,7 @@ namespace ScreenToGif.Windows.Other
             sb.Append("<html xmlns:msxsl=\"urn:schemas-microsoft-com:xslt\">");
             sb.Append("<head><meta content=\"en-us\" http-equiv=\"Content-Language\" />" +
                       "<meta content=\"text/html; charset=utf-16\" http-equiv=\"Content-Type\" />" +
-                      "<title>Screen To Gif - Feedback</title>" +
+                      "<title>ScreenToGif - Feedback</title>" +
                       "</head>");
 
             sb.AppendFormat("<style>{0}</style>", Util.Other.GetTextResource("ScreenToGif.Resources.Style.css"));
@@ -169,11 +169,13 @@ namespace ScreenToGif.Windows.Other
             sb.AppendFormat("<td class=\"textcentered\">{0}</td></tr>", Humanizer.BytesToString(status.TotalPhysicalMemory));
 
             //Third overview row.
-            sb.Append("<tr><th colspan=\"4\">E-mail</th>");
+            sb.Append("<tr><th colspan=\"3\">E-mail</th>");
+            sb.Append("<th>.Net Version</th>");
             sb.Append("<th>Issue?</th>");
             sb.Append("<th>Suggestion?</th></tr>");
 
-            sb.AppendFormat("<td colspan=\"4\" class=\"textcentered\">{0}</td>", email);
+            sb.AppendFormat("<td colspan=\"3\" class=\"textcentered\">{0}</td>", email);
+            sb.AppendFormat("<td class=\"textcentered\">{0}</td>", FrameworkHelper.QueryFrameworkVersion());
             sb.AppendFormat("<td class=\"textcentered\">{0}</td>", issue ? "Yes" : "No");
             sb.AppendFormat("<td class=\"textcentered\">{0}</td></tr></table></div></div>", suggestion ? "Yes" : "No");
 
@@ -193,6 +195,12 @@ namespace ScreenToGif.Windows.Other
             }
 
             sb.Append("<table>");
+
+            //TODO: Show drawing of monitors, with the position of each window.
+            //sb.Append("<svg>" +
+            //          "<circle cx=\"40\" cy=\"40\" r=\"24\" style=\"stroke:#006600; fill:#00cc00\"/>" +
+            //          "<rect id=\"box\" x=\"0\" y=\"0\" width=\"50\" height=\"50\" style=\"stroke:#006600; fill:#00cc00\"/>" +
+            //          "</svg>");
 
             //Details.
             sb.Append("<br><h2>Details</h2><div><div><table>");
