@@ -24,19 +24,19 @@
     <s:String x:Key="Board">Pano</s:String>
     <s:String x:Key="Editor">Editör</s:String>
     <s:String x:Key="Options">Ayarlar</s:String>
-    <!--<s:String x:Key="Help">Help</s:String>-->
-    <!--<s:String x:Key="NewRelease">New release available • {0}</s:String>-->
+    <s:String x:Key="Help">Yardım</s:String>
+    <s:String x:Key="NewRelease">Yeni sürüm mevcut • {0}</s:String>
     <s:String x:Key="Tooltip.Recorder">Ekran kaydediciyi açar, kolayca ekranınızı kaydetmeye başlayabilirsiniz.</s:String>
     <s:String x:Key="Tooltip.Webcam">Webcam kaydediciyi açar.</s:String>
     <s:String x:Key="Tooltip.Board">Pano kaydedicisini açar, çizimlerinizi kaydetmeye başlayacağınız yer.</s:String>
     <s:String x:Key="Tooltip.Editor">Düzenleme penceresini açar, bu uygulamanın merkezi, yeni kayıt başlatıp düzenleyebileceğiniz bir yer.</s:String>
 
     <!--Update Page-->
-    <!--<s:String x:Key="Update">Update</s:String>-->
-    <!--<s:String x:Key="Update.NewRelease">New release!</s:String>-->
-    <!--<s:String x:Key="Download">Download</s:String>-->
-    <!--<s:String x:Key="Update.CloseThis">Do you want to close this app?</s:String>-->
-    <!--<s:String x:Key="Update.CloseThis.Detail">This is an older version. You have already downloaded a new version.</s:String>-->
+    <s:String x:Key="Update">Güncelle</s:String>
+    <s:String x:Key="Update.NewRelease">Yeni sürüm!</s:String>
+    <s:String x:Key="Download">İndir</s:String>
+    <s:String x:Key="Update.CloseThis">Bu uygulamayı kapatmak istiyor musunuz?</s:String>
+    <s:String x:Key="Update.CloseThis.Detail">Bu eski bir sürüm. Yeni sürüm zaten indirildi.</s:String>
     
     <!--Options Page-->
     <s:String x:Key="Title.Options">ScreenToGif - Ayarlar</s:String>
@@ -46,7 +46,7 @@
     <s:String x:Key="Image">Görüntü</s:String>
     <s:String x:Key="Language">Dil</s:String>
     <s:String x:Key="TemporaryFiles">Geçici Dosyalar</s:String>
-    <!--<s:String x:Key="Extras">Extras</s:String>-->
+    <s:String x:Key="Extras">Ekstralar</s:String>
     <s:String x:Key="Donate">Bağış Yap</s:String>
     <s:String x:Key="About">Hakkında</s:String>
     
@@ -62,8 +62,8 @@
     <s:String x:Key="S.Options.Recorder.SelectCursorColor">Fare İmleci Rengini Seç</s:String>
     <s:String x:Key="S.Options.Recorder.PreStart">Başlama için geri-sayım kullan.</s:String>
     <!--<s:String x:Key="S.Options.Recorder.StepRecording">Enable snapshot mode.</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.StepRecording.Info">(Each frame will be captured manually by you)</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.FullRecording">Enable fullscreen mode.</s:String>-->
+    <s:String x:Key="S.Options.Recorder.StepRecording.Info">(Her kare tarafınızca kaydedilecektir)</s:String>
+    <s:String x:Key="S.Options.Recorder.FullRecording">Tam ekran modunu aç.</s:String>
     <!--<s:String x:Key="S.Options.Recorder.FullRecording.Info">(Experimental, will capture the main screen)</s:String>-->
     <s:String x:Key="S.Options.Recorder.FixedFramerate">Sabit kare hızı.</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Sabit gecikme, kayıt gecikmesini değiştirmez)</s:String>
@@ -71,15 +71,15 @@
     <!--<s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(It helps reduce the interface lag when recording)</s:String>-->
     
     <s:String x:Key="Application.Other">Diğer</s:String>
-    <!--<s:String x:Key="Application.Other.CheckForUpdates">Check for updates.</s:String>-->
+    <s:String x:Key="Application.Other.CheckForUpdates">Güncellemeleri kontrol et.</s:String>
     
     <s:String x:Key="S.Shortcuts.Recorders.StartPause">Başlat/Duraklat:</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.Stop">Durdur:</s:String>
     
     <s:String x:Key="Interface.EditorBackground">Editör Arkaplanı</s:String>
-    <!--<s:String x:Key="Interface.Recorder">Recorder theme</s:String>-->
-    <!--<s:String x:Key="Interface.Background">Background</s:String>-->
-    <!--<s:String x:Key="Interface.Foreground">Foreground</s:String>-->
+    <s:String x:Key="Interface.Recorder">Kayıt teması</s:String>
+    <s:String x:Key="Interface.Background">Arkaplan</s:String>
+    <s:String x:Key="Interface.Foreground">Önplan</s:String>
     <s:String x:Key="Interface.BoardBackground">Pano Arkaplanı</s:String>
     <s:String x:Key="Interface.Theme.Scheme">Renk Düzeni</s:String>
     <s:String x:Key="Interface.Theme.Scheme.VeryLight">Çok Açık</s:String>
@@ -107,8 +107,8 @@
 
     <s:String x:Key="Interface.Other">Diğer</s:String>
     <s:String x:Key="Interface.Other.ExtendChrome">Başlık Çubuğunu Uzat/Chrome.</s:String>
-    <!--<s:String x:Key="Interface.Other.HideTitleBar">Hide the title bar (thin mode).</s:String>-->
-    <!--<s:String x:Key="Interface.Other.TripleClickSelection">Enable triple-click to select the text.</s:String>-->
+    <s:String x:Key="Interface.Other.HideTitleBar">Başlık çubuğunu gizle (ince mod).</s:String>
+    <s:String x:Key="Interface.Other.TripleClickSelection"> Metin seçmek için üçlü tıklamayı aç.</s:String>
   
     <s:String x:Key="Language.AppLanguage">Uygulama Dili</s:String>
     
@@ -141,9 +141,9 @@
     <s:String x:Key="About.Author">Yazar: Nicke Manarin</s:String>
     <s:String x:Key="About.Contact">İletişim</s:String>
     <!--<s:String x:Key="About.Technical">Technical</s:String>-->
-    <!--<s:String x:Key="About.Technical.License">License:</s:String>-->
+    <s:String x:Key="About.Technical.License">Lisans:</s:String>
     <!--<s:String x:Key="About.Technical.Free">(This is a completely free app)</s:String>-->
-    <!--<s:String x:Key="About.Technical.SourceCode">Source code:</s:String>-->
+    <s:String x:Key="About.Technical.SourceCode">Kaynak kodu:</s:String>
     <s:String x:Key="About.ABigThanksTo">Çok teşekkürler ></s:String>
     <!--<s:String x:Key="About.ABigThanksTo.Everyone">All my supporters, people who provided feedback and/or donations.</s:String>-->
 
@@ -281,7 +281,7 @@
     <s:String x:Key="Editor.File.Discard">Projeyi\nİptal et</s:String>
     
     <!--Home • Action Stack-->
-    <!--<s:String x:Key="Editor.Home.ActionStack">Action Stack</s:String>-->
+    <s:String x:Key="Editor.Home.ActionStack">Eylemler</s:String>
     <s:String x:Key="Editor.Home.Undo">Geri</s:String>
     <s:String x:Key="Editor.Home.Redo">İleri</s:String>
     <s:String x:Key="Editor.Home.Reset">Sıfırla</s:String>
@@ -426,10 +426,10 @@
     <s:String x:Key="Editor.ChangingDelay">Gecikme Değiştiriliyor</s:String>
     <s:String x:Key="Editor.ApplyingTransition">Geçiş Efekti Uygulanıyor</s:String>
 
-    <!--<s:String x:Key="Editor.List.Frame">Frame:</s:String>-->
-    <!--<s:String x:Key="Editor.List.OpenImage">Open Image</s:String>-->
+    <s:String x:Key="Editor.List.Frame">Kare:</s:String>
+    <s:String x:Key="Editor.List.OpenImage">Resim Aç</s:String>
     <!--<s:String x:Key="Editor.List.ExploreFolder">Explore Folder</s:String>-->
-    <!--<s:String x:Key="Editor.List.ExportImage">Export Image</s:String>-->
+    <s:String x:Key="Editor.List.ExportImage">İçe Resim Aktar</s:String>
     
     <s:String x:Key="GoTo.Title">Kareye Git</s:String>
     <s:String x:Key="GoTo.Instruction">Kareye git (0 to {0})</s:String>
@@ -446,28 +446,28 @@
     <!--<s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg not present. Add it to the Path environment variables or set the location on Settings.</s:String>-->
     
     <!--Hints-->
-    <!--<s:String x:Key="Hint.NewRecording">New recording created</s:String>-->
-    <!--<s:String x:Key="Hint.NewWebcamRecording">New webcam recording created</s:String>-->
+    <s:String x:Key="Hint.NewRecording">Yeni kayıt oluşturuldu</s:String>
+    <s:String x:Key="Hint.NewWebcamRecording">Yeni webcam kaydı oluşturuldu</s:String>
     <!--<s:String x:Key="Hint.NewBoardRecording">New board recording created</s:String>-->
-    <!--<s:String x:Key="Hint.NewAnimation">New project created</s:String>-->
+    <s:String x:Key="Hint.NewAnimation">Yeni proje oluşturuldu</s:String>
     <!--<s:String x:Key="Hint.Undo">Undo executed</s:String>-->
     <!--<s:String x:Key="Hint.Reset">Reset executed</s:String>-->
     <!--<s:String x:Key="Hint.Redo">Redo executed</s:String>-->
-    <!--<s:String x:Key="Hint.Cut">{0} frame(s) cut</s:String>-->
-    <!--<s:String x:Key="Hint.Copy">{0} frame(s) copied</s:String>-->
-    <!--<s:String x:Key="Hint.Paste">{0} frame(s) pasted</s:String>-->
+    <s:String x:Key="Hint.Cut">{0} kare kesildi</s:String>
+    <s:String x:Key="Hint.Copy">{0} kare kopyalandı</s:String>
+    <s:String x:Key="Hint.Paste">{0} kare yapıştırıldı</s:String>
     <!--<s:String x:Key="Hint.Zoom">Zoom set to {0}%</s:String>-->
-    <!--<s:String x:Key="Hint.SelectAll">All frames were selected</s:String>-->
-    <!--<s:String x:Key="Hint.SelectSingle">Frame #{0} selected</s:String>-->
-    <!--<s:String x:Key="Hint.SelectInverse">Selection inversed</s:String>-->
-    <!--<s:String x:Key="Hint.Deselect">All frames were deselected</s:String>-->
-    <!--<s:String x:Key="Hint.DeleteFrames">{0} frame(s) deleted</s:String>-->
-    <!--<s:String x:Key="Hint.Reverse">Frame list reversed</s:String>-->
-    <!--<s:String x:Key="Hint.Yoyo">Yoyo effect applied</s:String>-->
-    <!--<s:String x:Key="Hint.MoveLeft">Frame(s) moved to the left</s:String>-->
-    <!--<s:String x:Key="Hint.MoveRight">Frame(s) moved to the right</s:String>-->
+    <s:String x:Key="Hint.SelectAll">Tüm kareler seçildi</s:String>
+    <s:String x:Key="Hint.SelectSingle">Kare #{0} seçildi</s:String>
+    <s:String x:Key="Hint.SelectInverse">Seçim tersine çevrilirdi</s:String>
+    <s:String x:Key="Hint.Deselect">Tüm kareler bırakıldı</s:String>
+    <s:String x:Key="Hint.DeleteFrames">{0} kare silindi</s:String>
+    <s:String x:Key="Hint.Reverse">Kare listesi tersine çevrilirdi</s:String>
+    <s:String x:Key="Hint.Yoyo">Yoyo etkisi uygulandı</s:String>
+    <s:String x:Key="Hint.MoveLeft">Kare(ler) sola taşındı</s:String>
+    <s:String x:Key="Hint.MoveRight">Kare(ler) sağa taşındı</s:String>
     <!--<s:String x:Key="Hint.Resize">Frames resized</s:String>-->
-    <!--<s:String x:Key="Hint.Crop">Frames cropped</s:String>-->
+    <s:String x:Key="Hint.Crop">Kareler kesildi</s:String>
     <!--<s:String x:Key="Hint.FlipRotate">Frames flipped/rotated</s:String>-->
     <!--<s:String x:Key="Hint.FlipRotate2">The flip action applies to the selected frames and the rotate applies to all frames</s:String>-->
     <!--<s:String x:Key="Hint.ApplyAll">This action applies to all frames</s:String>-->
@@ -477,7 +477,7 @@
     <!--<s:String x:Key="Hint.TitleFrame">Title frame created</s:String>-->
     <!--<s:String x:Key="Hint.TitleFrame2">The title frame will be inserted before the selected frame</s:String>-->
     <!--<s:String x:Key="Hint.Delay">Duration (delay) altered</s:String>-->
-    <!--<s:String x:Key="Hint.Transition">Transition inserted</s:String>-->
+    <s:String x:Key="Hint.Transition">Geçiş eklendi</s:String>
     <!--<s:String x:Key="Hint.Reduce">Framerate reduced</s:String>-->
     
     <!--Action Grid-->
@@ -533,7 +533,7 @@
     <s:String x:Key="Caption.Horizontal">Yatay:</s:String>
 
     <!--<s:String x:Key="KeyStrokes.Keys">Keys</s:String>-->
-    <!--<s:String x:Key="KeyStrokes.Separator">Separator</s:String>-->
+    <s:String x:Key="KeyStrokes.Separator">Ayraç</s:String>
     <!--<s:String x:Key="KeyStrokes.Edit">Edit your key strokes</s:String>-->
     <!--<s:String x:Key="KeyStrokes.Extend">Extend the exhibition of the key strokes:</s:String>-->
     <!--<s:String x:Key="KeyStrokes.By">By (ms):</s:String>-->
@@ -564,17 +564,17 @@
     <s:String x:Key="Watermark.Opacity">Saydamlık:</s:String>
     <s:String x:Key="Border.Appearance">Görünüm</s:String>
 
-    <!--<s:String x:Key="Progress.Type">Type</s:String>-->
+    <s:String x:Key="Progress.Type">Tür</s:String>
     <!--<s:String x:Key="Progress.Type.Bar">Bar</s:String>-->
-    <!--<s:String x:Key="Progress.Type.Text">Text</s:String>-->
+    <s:String x:Key="Progress.Type.Text">Metin</s:String>
     <!--<s:String x:Key="Progress.Precision">Precision:</s:String>-->
-    <!--<s:String x:Key="Progress.Precision.Minutes">Minutes</s:String>-->
-    <!--<s:String x:Key="Progress.Precision.Seconds">Seconds</s:String>-->
-    <!--<s:String x:Key="Progress.Precision.Miliseconds">Milliseconds</s:String>-->
-    <!--<s:String x:Key="Progress.Precision.Percentage">Percentage</s:String>-->
-    <!--<s:String x:Key="Progress.Precision.Count">Frame Number</s:String>-->
+    <s:String x:Key="Progress.Precision.Minutes">Dakika</s:String>
+    <s:String x:Key="Progress.Precision.Seconds">Saniye</s:String>
+    <s:String x:Key="Progress.Precision.Miliseconds">Salise</s:String>
+    <s:String x:Key="Progress.Precision.Percentage">Oran</s:String>
+    <s:String x:Key="Progress.Precision.Count">Kare Sayısı</s:String>
     <!--<s:String x:Key="Progress.Precision.Custom">Custom</s:String>-->
-    <!--<s:String x:Key="Progress.Precision.ShowTotal">Show the total.</s:String>-->
+    <s:String x:Key="Progress.Precision.ShowTotal">Toplamı göster.</s:String>
     <!--<s:String x:Key="Progress.Format">Format:</s:String>-->
     <!--<s:String x:Key="Progress.Orientation">Orientation:</s:String>-->
     
@@ -618,14 +618,14 @@
     <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">Sahte Rengi Seç</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions">Video ayarları</s:String>
     <!--<s:String x:Key="S.SaveAs.VideoOptions.Fps">Fps:</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.ImagesOptions">Image options</s:String>-->
+    <s:String x:Key="S.SaveAs.ImagesOptions">Resim seçenekleri</s:String>
     <!--<s:String x:Key="S.SaveAs.ImageOptions.Zip">Zip the images.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.File">File</s:String>-->
     <!--<s:String x:Key="S.SaveAs.File.Location">Destination folder.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.File.Choose">Choose the location.</s:String>    -->
     <!--<s:String x:Key="S.SaveAs.File.Format">File format</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.File.Name">Name of the file.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.File.Animation">Animation</s:String>-->
+    <s:String x:Key="S.SaveAs.File.Name">Dosya ismi.</s:String>
+    <s:String x:Key="S.SaveAs.File.Animation">Animasyon</s:String>
     <!--<s:String x:Key="S.SaveAs.File.Increase">Increase the file number</s:String>-->
     <!--<s:String x:Key="S.SaveAs.File.Decrease">Decrease the file number</s:String>-->
     <!--<s:String x:Key="S.SaveAs.File.Exists">A file with the same name already exists.</s:String>-->
@@ -637,21 +637,21 @@
     <!--<s:String x:Key="S.SaveAs.Warning.Overwrite">Filename already in use. Set to overwrite or pick another filename.</s:String>-->
     
     <!--Feedback-->
-    <!--<s:String x:Key="S.Feedback.Feedback">Feedback</s:String>-->
-    <!--<s:String x:Key="S.Feedback.Send">Send</s:String>-->
-    <!--<s:String x:Key="S.Feedback.Header">Send Feedback</s:String>-->
-    <!--<s:String x:Key="S.Feedback.Title">Title *</s:String>-->
-    <!--<s:String x:Key="S.Feedback.Message">Message *</s:String>-->
-    <!--<s:String x:Key="S.Feedback.Type">Type of Feedback</s:String>-->
-    <!--<s:String x:Key="S.Feedback.Suggestion">Suggestion</s:String>-->
-    <!--<s:String x:Key="S.Feedback.IssueBug">Issue/Bug</s:String>-->
-    <!--<s:String x:Key="S.Feedback.YourEmail">Your Email (Optional)</s:String>-->
+    <s:String x:Key="S.Feedback.Feedback">Geri Bildirim</s:String>
+    <s:String x:Key="S.Feedback.Send">Gönder</s:String>
+    <s:String x:Key="S.Feedback.Header">Geri Bildirim Gönder</s:String>
+    <s:String x:Key="S.Feedback.Title">Başlık *</s:String>
+    <s:String x:Key="S.Feedback.Message">Mesaj *</s:String>
+    <s:String x:Key="S.Feedback.Type">Geri Bildirim Türü</s:String>
+    <s:String x:Key="S.Feedback.Suggestion">Öneri</s:String>
+    <s:String x:Key="S.Feedback.IssueBug">Durum/Hata</s:String>
+    <s:String x:Key="S.Feedback.YourEmail">Mailiniz (Opsiyonel)</s:String>
     <!--<s:String x:Key="S.Feedback.Warning.Title">You need to input a title for the feedback.</s:String>-->
     <!--<s:String x:Key="S.Feedback.Warning.Message">You need to input a message in the feedback.</s:String>-->
     <!--<s:String x:Key="S.Feedback.Sending">Sending... This window will close shortly after that.</s:String>-->
     <!--<s:String x:Key="S.Feedback.Attachments">Attachments (Optional, 20MB Maximum)</s:String>-->
-    <!--<s:String x:Key="S.Feedback.AddAttachments">Add Attachments</s:String>-->
-    <!--<s:String x:Key="S.Feedback.RemoveAttachments">Remove All Attachments</s:String>-->
+    <s:String x:Key="S.Feedback.AddAttachments">Eklenti Ekle</s:String>
+    <s:String x:Key="S.Feedback.RemoveAttachments">Tüm Eklentileri Kaldır</s:String>
     
     <!--FontStyles-->
     <!--<s:String x:Key="S.FontStyles.Normal">Normal</s:String>-->
@@ -667,7 +667,7 @@
     <!--<s:String x:Key="S.FontWeights.ExtraLight">Extra Light</s:String>-->
     <!--<s:String x:Key="S.FontWeights.Heavy">Heavy</s:String>-->
     <!--<s:String x:Key="S.FontWeights.Light">Light</s:String>-->
-    <!--<s:String x:Key="S.FontWeights.Medium">Medium</s:String>-->
+    <s:String x:Key="S.FontWeights.Medium">Orta</s:String>
     <!--<s:String x:Key="S.FontWeights.Normal">Normal</s:String>-->
     <!--<s:String x:Key="S.FontWeights.Regular">Regular</s:String>-->
     <!--<s:String x:Key="S.FontWeights.SemiBold">Semi Bold</s:String>-->
@@ -677,17 +677,17 @@
     <!--<s:String x:Key="S.FontWeights.UltraLight">Ultra Light</s:String>-->
     
      <!--VerticalAligment-->
-    <!--<s:String x:Key="S.VerticalAlignment.Top">Top</s:String>-->
-    <!--<s:String x:Key="S.VerticalAlignment.Center">Center</s:String>-->
-    <!--<s:String x:Key="S.VerticalAlignment.Bottom">Bottom</s:String>-->
+    <s:String x:Key="S.VerticalAlignment.Top">Üst</s:String>
+    <s:String x:Key="S.VerticalAlignment.Center">Merkez</s:String>
+    <s:String x:Key="S.VerticalAlignment.Bottom">Alt</s:String>
     <!--<s:String x:Key="S.Alignment.Stretch">Stretch</s:String>-->
 
      <!--HorizontalAlignment-->
-    <!--<s:String x:Key="S.HorizontalAlignment.Left">Left</s:String>-->
-    <!--<s:String x:Key="S.HorizontalAlignment.Center">Center</s:String>-->
-    <!--<s:String x:Key="S.HorizontalAlignment.Right">Right</s:String>-->
+    <s:String x:Key="S.HorizontalAlignment.Left">Sol</s:String>
+    <s:String x:Key="S.HorizontalAlignment.Center">Merkez</s:String>
+    <s:String x:Key="S.HorizontalAlignment.Right">Sağ</s:String>
     
     <!--Orientation-->
-    <!--<s:String x:Key="S.Orientation.Horizontal">Horizontal</s:String>-->
-    <!--<s:String x:Key="S.Orientation.Vertical">Vertical</s:String>-->
+    <s:String x:Key="S.Orientation.Horizontal">Yatay</s:String>
+    <s:String x:Key="S.Orientation.Vertical">Düşey</s:String>
 </ResourceDictionary>
