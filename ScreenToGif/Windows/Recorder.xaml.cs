@@ -978,7 +978,7 @@ namespace ScreenToGif.Windows
             try
             {
                 StopButton.IsEnabled = false;
-
+                
                 _captureTimer.Stop();
                 FrameRate.Stop();
                 _capture?.Stop();
