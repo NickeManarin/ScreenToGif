@@ -1,6 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using ScreenToGif.ImageUtil;
+using ScreenToGif.ImageUtil.Gif.Encoder;
 
 namespace ScreenToGif.Util
 {
@@ -56,77 +60,78 @@ namespace ScreenToGif.Util
             /// <summary>
             /// One of input arguments was NULL.
             /// </summary>
-            NullArgument,
+            NullArgument = 1,
 
             /// <summary>
             /// A one-time function was called twice, or functions were called in wrong order.
             /// </summary>
-            InvalidState,
+            InvalidState = 2,
 
             /// <summary>
             /// Internal error related to palette quantization.
             /// </summary>
-            QuantizationError,
+            QuantizationError = 4,
 
             /// <summary>
             /// Internal error related to gif composing.
             /// </summary>
-            GifError,
+            GifError = 5,
 
             /// <summary>
             /// Internal error related to multithreading.
             /// </summary>
-            ThreadLost,
+            ThreadLost = 6,
 
             /// <summary>
             /// I/O error: file or directory not found.
             /// </summary>
-            NotFound,
+            NotFound = 7,
 
             /// <summary>
             /// I/O error: permission denied.
             /// </summary>
-            PermissionDenied,
+            PermissionDenied = 8,
 
             /// <summary>
             /// I/O error: File already exists.
             /// </summary>
-            AlreadyExists,
+            AlreadyExists = 9,
 
             /// <summary>
             /// Misc I/O error.
             /// </summary>
-            InvalidInput,
+            InvalidInput = 10,
 
             /// <summary>
             /// Misc I/O error.
             /// </summary>
-            TimedOut,
+            TimedOut = 11,
 
             /// <summary>
             /// Misc I/O error.
             /// </summary>
-            WriteZero,
+            WriteZero = 12,
 
             /// <summary>
             /// Misc I/O error.
             /// </summary>
-            Interrupted,
+            Interrupted = 13,
 
             /// <summary>
             /// Misc I/O error.
             /// </summary>
-            UnexpectedEof,
+            UnexpectedEof = 14,
 
             /// <summary>
             /// Should not happen, file a bug.
             /// </summary>
-            OtherError
+            OtherError = 15
         }
 
         private delegate IntPtr NewDelegate(GifskiSettings settings);
         private delegate GifskiError AddPngFrameDelegate(IntPtr handle, uint index, [MarshalAs(UnmanagedType.LPUTF8Str)] string path, ushort delay);
-        private delegate GifskiError AddRgbaFrameDelegate(IntPtr handle, uint index, uint width, uint height, IntPtr pixels, int delay);
+        private delegate GifskiError AddRgbaFrameDelegate(IntPtr handle, uint index, uint width, uint height, IntPtr pixels, ushort delay);
+        private delegate GifskiError AddRgbFrameDelegate(IntPtr handle, uint index, uint width, uint bytesPerRow, uint height, IntPtr pixels, ushort delay);
 
         private delegate GifskiError SetFileOutputDelegate(IntPtr handle, [MarshalAs(UnmanagedType.LPUTF8Str)] string path);
         private delegate GifskiError FinishDelegate(IntPtr handle);
@@ -137,6 +142,7 @@ namespace ScreenToGif.Util
 
         private readonly NewDelegate _new;
         private readonly AddPngFrameDelegate _addPngFrame;
+        private readonly AddRgbFrameDelegate _addRgbFrame;
         private readonly AddRgbaFrameDelegate _addRgbaFrame;
 
         private readonly SetFileOutputDelegate _setFileOutput;
@@ -162,6 +168,7 @@ namespace ScreenToGif.Util
             _new = (NewDelegate)FunctionLoader.LoadFunction<NewDelegate>(UserSettings.All.GifskiLocation, "gifski_new");
             _addPngFrame = (AddPngFrameDelegate)FunctionLoader.LoadFunction<AddPngFrameDelegate>(UserSettings.All.GifskiLocation, "gifski_add_frame_png_file");
             _addRgbaFrame = (AddRgbaFrameDelegate)FunctionLoader.LoadFunction<AddRgbaFrameDelegate>(UserSettings.All.GifskiLocation, "gifski_add_frame_rgba");
+            _addRgbFrame = (AddRgbFrameDelegate)FunctionLoader.LoadFunction<AddRgbFrameDelegate>(UserSettings.All.GifskiLocation, "gifski_add_frame_rgb");
 
             if (Version.Major == 0 && Version.Minor < 9)
             {
@@ -187,24 +194,22 @@ namespace ScreenToGif.Util
 
         internal GifskiError AddFrame(IntPtr handle, uint index, string path, int delay)
         {
-            //if (Version > 0)
-            //{
-            //    var util = new PixelUtil(path.SourceFrom());
-            //    util.LockBits();
+            if (Version.Major == 0 && Version.Minor < 9)
+                return _addPngFrame(handle, index, path, (ushort)(delay / 10));
 
-            //    var result = AddFramePixels(handle, index, (uint)util.Width, (uint)util.Height, util.BackBuffer, delay);
+            var util = new PixelUtil(new FormatConvertedBitmap(path.SourceFrom(), PixelFormats.Rgb24, null, 0));
+            util.LockBits();
 
-            //    util.UnlockBitsWithoutCommit();
+            var result = AddFramePixels(handle, index, (uint) util.Width, (uint)((util.Width * 24 + 31) / 32) * 4, (uint) util.Height, util.BackBuffer, (ushort)delay);
 
-            //    return result;
-            //}
+            util.UnlockBitsWithoutCommit();
 
-            return _addPngFrame(handle, index, path, (ushort)(delay / 10));
+            return result;
         }
 
-        internal GifskiError AddFramePixels(IntPtr handle, uint index, uint width, uint height, IntPtr pixels, int delay)
+        internal GifskiError AddFramePixels(IntPtr handle, uint index, uint width, uint bitsPerRow, uint height, IntPtr pixels, int delay)
         {
-            return _addRgbaFrame(handle, index, width, height, pixels, (ushort)(delay / 10));
+            return _addRgbFrame(handle, index, width, bitsPerRow, height, pixels, (ushort)(delay / 10));
         }
 
         internal GifskiError EndAdding(IntPtr handle)

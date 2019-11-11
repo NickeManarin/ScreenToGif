@@ -1559,6 +1559,12 @@ namespace ScreenToGif.Windows.Other
             
             //Rearrange the rectangles.
             _rect = ScreenRegion.Scale(_scale).Offset(Util.Other.RoundUpValue(_scale));
+
+            if (_capture != null)
+            {
+                _capture.Left = (int)_rect.Left;
+                _capture.Top = (int)_rect.Top;
+            }
         }
 
         private void ShowBorderTimer_Tick(object sender, EventArgs e)

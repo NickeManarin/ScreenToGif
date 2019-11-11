@@ -185,6 +185,9 @@ namespace ScreenToGif.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            UpdateSize();
+            UpdateLocation();
+
             #region Adjust the position
 
             //Tries to adjust the position/size of the window, centers on screen otherwise.
@@ -1114,6 +1117,20 @@ namespace ScreenToGif.Windows
             _height = (int)Math.Round((Height - Constants.VerticalOffset) * _scale);
         }
 
+        private void UpdateLocation()
+        {
+            //TestTextBlock.Text = $"{_left};{_top}";
+
+            _left = (int)Math.Round((Math.Round(Left, MidpointRounding.AwayFromZero) + Constants.LeftOffset) * _scale);
+            _top = (int)Math.Round((Math.Round(Top, MidpointRounding.AwayFromZero) + Constants.TopOffset) * _scale);
+
+            if (_capture == null)
+                return;
+
+            _capture.Left = _left;
+            _capture.Top = _top;
+        }
+
         private bool UpdatePositioning(bool startup = false)
         {
             var top = UserSettings.All.RecorderTop;
@@ -1239,16 +1256,7 @@ namespace ScreenToGif.Windows
 
         private void Window_LocationChanged(object sender, EventArgs e)
         {
-            //TestTextBlock.Text = $"{_left};{_top}";
-
-            _left = (int)Math.Round((Math.Round(Left, MidpointRounding.AwayFromZero) + Constants.LeftOffset) * _scale);
-            _top = (int)Math.Round((Math.Round(Top, MidpointRounding.AwayFromZero) + Constants.TopOffset) * _scale);
-
-            if (_capture == null)
-                return;
-
-            _capture.Left = _left;
-            _capture.Top = _top;
+            UpdateLocation();
         }
 
         private void System_PowerModeChanged(object sender, PowerModeChangedEventArgs e)

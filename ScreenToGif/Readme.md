@@ -2,17 +2,28 @@
 
 This is the current project of ScreenToGif.  
 
-_VS 2019 and .Net 4.6.1 or newer required._
+_VS 2019 and .Net 4.8 or newer required._
 
 
-## What's new? (Version 2.19.3)
+## What's new? (Version 2.20)
 
-• German translation was updated.
+• The app now uses/requires .Net Framework 4.8.  
+• Screen capture via DirectX 11.1 (Desktop Duplication API, requires Windows 8 or newer).   
+• Screen capture can use a configurable memory cache with support for compression.  
+• The default FFmpeg Webm encoder is now set to VP9.  
+• Added support for version 0.9.3 of Gifski (delete the older DLL and download again via Options > Extras).  
+• You can now cancel the gif encoding that uses Gifski.  
+• When exporting as project, the app will use the encoder window instead of locking down the editor.  
+• Turkish and Russian translation were updated.  
 
 ### Fixed:
 
-♦ The KeyStrokes and MouseClicks tasks were not in the correct place when adding a new task.  
-♦ The gif encoders had an issue with the timings of the frames.  
+♦ The new recorder had issues with the positioning of the record controls while using multiple screens.  
+♦ The troubleshooter had issues displaying the correct position of the screens.  
+♦ The screen recorder was not capturing animated cursors correctly.  
+♦ The space bar was not set as the Play/Pause button anymore.  
+♦ The Gifski encoder now accepts saving gifs to a path (also loading frames from a temporary path) that contains non-latin characters.  
+♦ The text was overflowing and not wrapping properly in the FFmpeg command text boxes.  
 
 ### Known Bugs:
 

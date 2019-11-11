@@ -205,7 +205,7 @@ namespace ScreenToGif.Model
         {
             #region Output folder
 
-            var folder = Path.Combine(FullPath, "Encode " + DateTime.Now.ToString("yyyy-MM-dd hh-mm-ss"));
+            var folder = Path.Combine(FullPath, "Encode " + DateTime.Now.ToString("yyyy-MM-dd hh-mm-ss-ff"));
 
             if (!Directory.Exists(folder))
                 Directory.CreateDirectory(folder);
