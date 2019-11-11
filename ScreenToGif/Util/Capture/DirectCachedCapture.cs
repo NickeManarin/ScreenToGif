@@ -247,7 +247,8 @@ namespace ScreenToGif.Util.Capture
 
         public override void Stop()
         {
-            base.Stop();
+            if (!WasStarted)
+                return;
 
             _compressStream.Flush();
             _bufferedStream.Flush();
@@ -256,6 +257,8 @@ namespace ScreenToGif.Util.Capture
             _compressStream.Dispose();
             _bufferedStream.Dispose();
             _fileStream.Dispose();
+
+            base.Stop();
         }
     }
 }

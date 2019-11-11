@@ -711,15 +711,17 @@ namespace ScreenToGif.Util.Capture
 
         public override void Stop()
         {
-            base.Stop();
+            if (!WasStarted)
+                return;
 
-            //TODO: What to dispose?
             Device.Dispose();
             BackingTexture.Dispose();
             StagingTexture.Dispose();
+            DuplicatedOutput.Dispose();
+
             CursorStagingTexture?.Dispose();
 
-            DuplicatedOutput.Dispose();
+            base.Stop();
         }
     }
 }

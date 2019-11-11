@@ -1044,8 +1044,7 @@ namespace ScreenToGif.Windows.Other
 
                 _captureTimer.Stop();
                 FrameRate.Stop();
-
-                _capture.Stop();
+                _capture?.Stop();
 
                 if (Stage != Stage.Stopped && Stage != Stage.PreStarting && Project.Any)
                 {

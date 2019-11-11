@@ -160,7 +160,8 @@ namespace ScreenToGif.Util.Capture
 
         public override void Stop()
         {
-            base.Stop();
+            if (!WasStarted)
+                return;
 
             try
             {
@@ -173,6 +174,8 @@ namespace ScreenToGif.Util.Capture
             {
                 LogWriter.Log(e, "Impossible to stop and clean resources used by the recording.");
             }
+
+            base.Stop();
         }
     }
 }

@@ -99,6 +99,9 @@ namespace ScreenToGif.Util.Capture
 
         public virtual void Stop()
         {
+            if (!WasStarted)
+                return;
+
             //Stop the consumer thread.
             BlockingCollection.CompleteAdding();
 
