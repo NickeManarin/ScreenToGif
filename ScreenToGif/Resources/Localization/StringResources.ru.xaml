@@ -140,7 +140,8 @@
     <!--Options Window-->
     <s:String x:Key="Title.Options">ScreenToGif - Настройки</s:String>
     <s:String x:Key="Application">Программа</s:String>
-    <s:String x:Key="Interface">Внешний вид</s:String>
+    <s:String x:Key="S.Options.Recorder">Захват экрана</s:String>
+    <s:String x:Key="Interface">Интерфейс</s:String>
     <s:String x:Key="S.AutoTasks">Авто-задачи</s:String>
     <s:String x:Key="S.Shortcuts">Горячие клавиши</s:String>
     <s:String x:Key="Image">Изображение</s:String>
@@ -148,14 +149,34 @@
     <s:String x:Key="TemporaryFiles">Файлы и папки</s:String>
     <s:String x:Key="Extras">Дополнительно</s:String>
     <s:String x:Key="Clouds">Онлайн сервисы</s:String>
-    <s:String x:Key="Donate">Donate</s:String>
+    <s:String x:Key="Donate">Поддержать</s:String>
     <s:String x:Key="About">О программе</s:String>
     
     <s:String x:Key="S.Options.Warning.Follow.Header">Нет сочетания клавиш - следовать за курсором</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Message">Необходимо установить сочетание клавиш для переключения этой функции.</s:String>
+    <s:String x:Key="S.Options.Warning.DesktopDuplication.Header">Нет сочетания клавиш - запись экрана</s:String>
+    <s:String x:Key="S.Options.Warning.DesktopDuplication.Message">Для захвата экрана с помощью Desktop Duplication API необходимо загрузить библиотеки SharpDx.</s:String>
     
+    <s:String x:Key="S.Options.Recorder.Interface">Интерфейс</s:String>
+    <s:String x:Key="S.Options.Recorder.Interface.Old">Старый</s:String>
+    <s:String x:Key="S.Options.Recorder.Interface.New">Новый</s:String>
+    <s:String x:Key="S.Options.Recorder.Mode">Режим захвата</s:String>
+    <s:String x:Key="S.Options.Recorder.Bitblt.Info">Использовать старый метод захвата, который медленнее и может не работать в играх,&#10;но не требует плагинов.</s:String>
+    <s:String x:Key="S.Options.Recorder.DirectX.Info">Использовать метод захвата Desktop Duplication API, который быстрее и способен захватывать&#10;полноэкранные игры, но требует SharpDx плагин и Windows 8 или новее.</s:String>
+    <s:String x:Key="S.Options.Recorder.File">Сохранить&#10;в файл</s:String>
+    <s:String x:Key="S.Options.Recorder.File.Info">Каждый кадр будет сохранен как изображение на диске.</s:String>
+    <s:String x:Key="S.Options.Recorder.Cache">Кеш&#10;памяти</s:String>
+    <s:String x:Key="S.Options.Recorder.Cache.Info">Каждый кадр будет сохранен в виде массива пикселей в памяти (можно сжать).</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression">Сжатие:</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.Optimal">Оптимальное</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.Optimal.Info">(медленно, но верно)</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.Fastest">Быстрое</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.Fastest.Info">(быстрее, но больше размер)</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.NoCompression">Не сжимать</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.NoCompression.Info">(Сжатие не будет выполняться при захвате кадров)</s:String>
+    <s:String x:Key="S.Options.Recorder.CacheSize">Размер кэша (в МБ):</s:String>
+    <s:String x:Key="S.Options.Recorder.CacheSize.Info">(При достижении этого размера данные будут сброшены на диск)</s:String>
     <s:String x:Key="S.Options.Recorder.RecordMouse">Показывать курсор на записи.</s:String>
-    <s:String x:Key="S.Options.Recorder.RecordClicks">Записывать щелчки мыши.</s:String>
     <s:String x:Key="S.Options.Recorder.SelectCursorColor">Выберите цвет курсора</s:String>
     <s:String x:Key="S.Options.Recorder.PreStart">Задержка начала записи.</s:String>
     <s:String x:Key="S.Options.Recorder.PreStart.Info">(в секундах)</s:String>
@@ -165,8 +186,6 @@
     <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Постоянная задержка, не изменяется с задержкой записи)</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording">Включить асинхронную запись.</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(Это поможет снизить "лаги" интерфейса во время записи)</s:String>
-    <s:String x:Key="S.Options.Recorder.NewRecorder">Использовать новый рекордер.</s:String>
-    <s:String x:Key="S.Options.Recorder.NewRecorder.Info">(Изменить интерфейс старого рекордера)</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier">Активировать увеличение экрана.</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier.Info">(Увеличивает регион записи с экрана)</s:String>
     <s:String x:Key="S.Options.Recorder.CursorFollowing">Включить следование за курсором</s:String>
@@ -354,8 +373,12 @@
     <s:String x:Key="Extras.GifskiLocation">Путь к Gifski</s:String>
     <s:String x:Key="Extras.GifskiLocation.Select">Укажите путь к Gifski</s:String>
     <s:String x:Key="Extras.GifskiLocation.Invalid">Путь к Gifski содержит недопустимые символы. Выберите правильное расположение файла.</s:String>
+    <s:String x:Key="Extras.SharpDxLocation">Путь к SharpDx (SharpDX.dll, SharpDX.Direct3D11.dll и SharpDX.DXGI.dll)</s:String>
+    <s:String x:Key="Extras.SharpDxLocation.Select">Укажите путь к SharpDx</s:String>
+    <s:String x:Key="Extras.SharpDxLocation.Invalid">Путь к SharpDx содержит недопустимые символы. Выберите правильное расположение файлов.</s:String>
     <s:String x:Key="Extras.License.Ffmpeg">Лицензия FFmpeg</s:String>
     <s:String x:Key="Extras.License.Gifski">Лицензия Gifski</s:String>
+    <s:String x:Key="Extras.License.SharpDx">Лицензия SharpDx</s:String>
 
     <s:String x:Key="Donate.IfYouWish">Поддержать проект можно следующим образом:</s:String>
     <s:String x:Key="Donate.DonateDollar">USD</s:String>
@@ -408,6 +431,12 @@
     <s:String x:Key="Recorder.SnapToWindow">Снимок окна (потяните и отпустите над окном)</s:String>
     <s:String x:Key="Recorder.PreStart">Подготовка</s:String>
     <s:String x:Key="Recorder.Paused">ScreenToGif (Пауза)</s:String>
+    
+    <s:String x:Key="S.Recorder.Warning.CaptureNotPossible">Не удалось захватить экран</s:String>
+    <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">Не удалось захватить экран. Метод захвата не вернул ни одного кадра после 5 попыток.</s:String>
+    <s:String x:Key="S.Recorder.Warning.StartPauseNotPossible">Не удалось запустить / приостановить захват экрана</s:String>
+    <s:String x:Key="S.Recorder.Warning.Windows8">Windows 8 или новее требуется для захвата экрана с помощью Desktop Duplication API.</s:String>
+    <s:String x:Key="S.Recorder.Warning.MissingSharpDx">SharpDx необходим для захвата экрана с помощью Desktop Duplication API. Перейдите в меню Параметры > Дополнительно, чтобы загрузить его.</s:String>
     
     <!--New Recorder-->
     <s:String x:Key="S.Recorder.Area">Регион</s:String>
@@ -516,6 +545,7 @@
     <s:String x:Key="Encoder.Uploading">Загрузка</s:String>
     <s:String x:Key="Encoder.Executing">Выполненные команды</s:String>
     <s:String x:Key="Encoder.Processing">Обработка {0}</s:String>
+    <s:String x:Key="Encoder.CreatingFile">Создание файла</s:String>
     <s:String x:Key="Encoder.Analyzing">Анализ неизменных пикселей</s:String>
     <s:String x:Key="Encoder.OpenFile">Открыть файл</s:String>
     <s:String x:Key="Encoder.ExploreFolder">Обзор папки</s:String>
@@ -739,6 +769,7 @@
     <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">Нельзя импортировать несколько проектов за раз</s:String>
     <s:String x:Key="Editor.DragDrop.InvalidProject.Message">Выберите только один проект.</s:String>
     
+    <s:String x:Key="Editor.RetrievingFromCache">Извлечение кадров из кэша</s:String>
     <s:String x:Key="Editor.LoadingFrames">Загрузка кадров</s:String>
     <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Instruction">Невозможно загрузить проект</s:String>
     <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Message">Не удалось загрузить кадры, поскольку все они повреждены или изображения отсутствуют там, где они ожидаются.</s:String>
@@ -748,7 +779,6 @@
     <s:String x:Key="Editor.PreparingImport">Подготовка к импорту</s:String>
     <s:String x:Key="Editor.ImportingFrames">Импорт кадров</s:String>
     
-    <s:String x:Key="Editor.ExportingRecording">Экспорт записи</s:String>
     <s:String x:Key="S.Editor.AnalyzingDuplicates">Анализ дубликатов</s:String>
     <s:String x:Key="S.Editor.AdjustingDuplicatesDelay">Регулировка задержки</s:String>
     <s:String x:Key="S.Editor.DiscardingDuplicates">Удаление дубликатов</s:String>
@@ -1067,7 +1097,8 @@
     <s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">Сжатие изображения по алгоритму RLE.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline">Сохранить данные шкалы времени.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">Экспортирует еще и время кадров, а не только кадры.</s:String>
-
+    <s:String x:Key="S.SaveAs.ProjectOptions">Параметры проекта</s:String>
+    
     <!--Save As • Save options-->
     <s:String x:Key="S.SaveAs.SaveOptions">Сохранить параметры</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Сохраните файл в папку по вашему выбору.</s:String>
