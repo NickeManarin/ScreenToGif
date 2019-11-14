@@ -387,19 +387,19 @@
     <s:String x:Key="InsertFrames.SelectColorFill">キャンバスの背景色を選択</s:String>
 
     <!--Import Frames From Video-->
-    <s:String x:Key="ImportVideo.Title">ビデオからフレームをインポートする</s:String>
-    <s:String x:Key="ImportVideo.Loading">ロード中...</s:String>
-    <s:String x:Key="ImportVideo.Scale">拡大比率:</s:String>
-    <s:String x:Key="ImportVideo.Size">サイズ:</s:String>
-    <s:String x:Key="ImportVideo.Height">高さ:</s:String>
-    <s:String x:Key="ImportVideo.Width">幅:</s:String>
-    <s:String x:Key="ImportVideo.Framerate">フレームレート:</s:String>
-    <s:String x:Key="ImportVideo.Fps">fps</s:String>
-    <s:String x:Key="ImportVideo.Start">始まり:</s:String>
-    <s:String x:Key="ImportVideo.End">終わり:</s:String>
-    <s:String x:Key="ImportVideo.Selection">選択範囲:</s:String>
-    <s:String x:Key="ImportVideo.Frames">フレーム:</s:String>
-    <s:String x:Key="ImportVideo.Duration">時間:</s:String>
+    <s:String x:Key="S.ImportVideo.Title">ビデオからフレームをインポートする</s:String>
+    <s:String x:Key="S.ImportVideo.Loading">ロード中...</s:String>
+    <s:String x:Key="S.ImportVideo.Scale">拡大比率:</s:String>
+    <s:String x:Key="S.ImportVideo.Size">サイズ:</s:String>
+    <s:String x:Key="S.ImportVideo.Height">高さ:</s:String>
+    <s:String x:Key="S.ImportVideo.Width">幅:</s:String>
+    <s:String x:Key="S.ImportVideo.Framerate">フレームレート:</s:String>
+    <s:String x:Key="S.ImportVideo.Fps">fps</s:String>
+    <s:String x:Key="S.ImportVideo.Start">始まり:</s:String>
+    <s:String x:Key="S.ImportVideo.End">終わり:</s:String>
+    <s:String x:Key="S.ImportVideo.Selection">選択範囲:</s:String>
+    <s:String x:Key="S.ImportVideo.Frames">フレーム:</s:String>
+    <s:String x:Key="S.ImportVideo.Duration">時間:</s:String>
     
     <!--Encoder-->
     <s:String x:Key="Encoder.Title">エンコーダー</s:String>

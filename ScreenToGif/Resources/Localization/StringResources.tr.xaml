@@ -217,19 +217,19 @@
     <s:String x:Key="InsertFrames.SelectColorFill">Tuval dolgu rengini seçiniz</s:String>
 
     <!--Import Frames From Video-->
-    <s:String x:Key="ImportVideo.Title">Video'dan kareleri içe aktar</s:String>
-    <s:String x:Key="ImportVideo.Loading">Yükleniyor...</s:String>
-    <s:String x:Key="ImportVideo.Scale">Ölçek:</s:String>
-    <s:String x:Key="ImportVideo.Size">Boyut:</s:String>
-    <s:String x:Key="ImportVideo.Height">Yükseklik:</s:String>
-    <s:String x:Key="ImportVideo.Width">Genişlik:</s:String>
-    <s:String x:Key="ImportVideo.Framerate">Kare Hızı:</s:String>
-    <s:String x:Key="ImportVideo.Fps">fps</s:String>
-    <s:String x:Key="ImportVideo.Start">Başlama:</s:String>
-    <s:String x:Key="ImportVideo.End">Bitiş:</s:String>
-    <s:String x:Key="ImportVideo.Selection">Seçim:</s:String>
-    <s:String x:Key="ImportVideo.Frames">Kareler:</s:String>
-    <s:String x:Key="ImportVideo.Duration">Geçen süre:</s:String>
+    <s:String x:Key="S.ImportVideo.Title">Video'dan kareleri içe aktar</s:String>
+    <s:String x:Key="S.ImportVideo.Loading">Yükleniyor...</s:String>
+    <s:String x:Key="S.ImportVideo.Scale">Ölçek:</s:String>
+    <s:String x:Key="S.ImportVideo.Size">Boyut:</s:String>
+    <s:String x:Key="S.ImportVideo.Height">Yükseklik:</s:String>
+    <s:String x:Key="S.ImportVideo.Width">Genişlik:</s:String>
+    <s:String x:Key="S.ImportVideo.Framerate">Kare Hızı:</s:String>
+    <s:String x:Key="S.ImportVideo.Fps">fps</s:String>
+    <s:String x:Key="S.ImportVideo.Start">Başlama:</s:String>
+    <s:String x:Key="S.ImportVideo.End">Bitiş:</s:String>
+    <s:String x:Key="S.ImportVideo.Selection">Seçim:</s:String>
+    <s:String x:Key="S.ImportVideo.Frames">Kareler:</s:String>
+    <s:String x:Key="S.ImportVideo.Duration">Geçen süre:</s:String>
     
     <!--Encoder-->
     <s:String x:Key="Encoder.Title">Encoder</s:String>

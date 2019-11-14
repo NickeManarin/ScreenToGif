@@ -433,46 +433,48 @@ namespace ScreenToGif.Windows.Other
                 RedirectStandardError = true
             };
 
-            var pro = Process.Start(process);
             var log = "";
-            var indeterminate = true;
-
-            Update(id, 0, LocalizationHelper.Get("Encoder.Analyzing"));
-
-            while (!pro.StandardError.EndOfStream)
+            using (var pro = Process.Start(process))
             {
-                if (tokenSource.IsCancellationRequested)
+                var indeterminate = true;
+
+                Update(id, 0, LocalizationHelper.Get("Encoder.Analyzing"));
+
+                while (!pro.StandardError.EndOfStream)
                 {
-                    pro.Kill();
-                    return;
-                }
-
-                var line = pro.StandardError.ReadLine() ?? "";
-                log += Environment.NewLine + line;
-
-                var split = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-                for (var block = 0; block < split.Length; block++)
-                {
-                    //frame=  321 fps=170 q=-0.0 Lsize=      57kB time=00:00:14.85 bitrate=  31.2kbits/s speed=7.87x    
-                    if (!split[block].StartsWith("frame="))
-                        continue;
-
-                    if (int.TryParse(split[block + 1], out var frame))
+                    if (tokenSource.IsCancellationRequested)
                     {
-                        if (frame > 0)
-                        {
-                            if (indeterminate)
-                            {
-                                SetStatus(Status.Processing, id, null, false);
-                                indeterminate = false;
-                            }
-
-                            Update(id, frame, string.Format(processing, frame));
-                        }
+                        pro.Kill();
+                        return;
                     }
 
-                    break;
+                    var line = pro.StandardError.ReadLine() ?? "";
+                    log += Environment.NewLine + line;
+
+                    var split = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+                    for (var block = 0; block < split.Length; block++)
+                    {
+                        //frame=  321 fps=170 q=-0.0 Lsize=      57kB time=00:00:14.85 bitrate=  31.2kbits/s speed=7.87x    
+                        if (!split[block].StartsWith("frame="))
+                            continue;
+
+                        if (int.TryParse(split[block + 1], out var frame))
+                        {
+                            if (frame > 0)
+                            {
+                                if (indeterminate)
+                                {
+                                    SetStatus(Status.Processing, id, null, false);
+                                    indeterminate = false;
+                                }
+
+                                Update(id, frame, string.Format(processing, frame));
+                            }
+                        }
+
+                        break;
+                    }
                 }
             }
 

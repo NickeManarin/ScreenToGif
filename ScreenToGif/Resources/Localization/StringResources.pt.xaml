@@ -512,21 +512,25 @@
     <s:String x:Key="InsertFrames.SelectColorFill">Selecione a Cor de Fundo</s:String>
 
     <!--Import Frames From Video-->
-    <s:String x:Key="ImportVideo.Title">Importar Quadros do Vídeo</s:String>
-    <s:String x:Key="ImportVideo.Loading">Carregando...</s:String>
-    <s:String x:Key="ImportVideo.Scale">Escala:</s:String>
-    <s:String x:Key="ImportVideo.Size">Tamanho:</s:String>
-    <s:String x:Key="ImportVideo.Height">Altura:</s:String>
-    <s:String x:Key="ImportVideo.Width">Largura:</s:String>
-    <s:String x:Key="ImportVideo.Framerate">Taxa de Quadros:</s:String>
-    <s:String x:Key="ImportVideo.Fps">fps</s:String>
-    <s:String x:Key="ImportVideo.Start">Início:</s:String>
-    <s:String x:Key="ImportVideo.End">Fim:</s:String>
-    <s:String x:Key="ImportVideo.Selection">Seleção:</s:String>
-    <s:String x:Key="ImportVideo.Frames">Quadros:</s:String>
-    <s:String x:Key="ImportVideo.Duration">Duração:</s:String>
-    <s:String x:Key="S.ImportVideo.Error">Não foi possível carregar o vídeo.</s:String>
-
+    <s:String x:Key="S.ImportVideo.Title">Importar Quadros do Vídeo</s:String>
+    <s:String x:Key="S.ImportVideo.Importer">Importador:</s:String>
+    <s:String x:Key="S.ImportVideo.Loading">Carregando...</s:String>
+    <s:String x:Key="S.ImportVideo.Scale">Escala:</s:String>
+    <s:String x:Key="S.ImportVideo.Size">Tamanho:</s:String>
+    <s:String x:Key="S.ImportVideo.Height">Altura:</s:String>
+    <s:String x:Key="S.ImportVideo.Width">Largura:</s:String>
+    <s:String x:Key="S.ImportVideo.Framerate">Taxa de Quadros:</s:String>
+    <s:String x:Key="S.ImportVideo.Fps">fps</s:String>
+    <s:String x:Key="S.ImportVideo.Start">Início:</s:String>
+    <s:String x:Key="S.ImportVideo.End">Fim:</s:String>
+    <s:String x:Key="S.ImportVideo.Selection">Seleção:</s:String>
+    <s:String x:Key="S.ImportVideo.Frames">Quadros:</s:String>
+    <s:String x:Key="S.ImportVideo.Duration">Duração:</s:String>
+    <s:String x:Key="S.ImportVideo.Error">Não foi possível carregar o vídeo</s:String>
+    <s:String x:Key="S.ImportVideo.Error.Detail">O pré-visualizador não foi iniciado. Tente utilizar outro importador ou verifique se o vídeo não está corrompido.&#x0d;Se você está usando o MediaPlayer, verifique se o recurso do Windows chamado "Recursos de Mídia / Windows Media Player" está ativado e verifique se você tem o codec de vídeo necessário.</s:String>
+    <s:String x:Key="S.ImportVideo.Timeout">Tempo limite de resposta atingido em tentando pré-visualizar o vídeo.</s:String>
+    <s:String x:Key="S.ImportVideo.Nothing">Nenhum quadro selecionado para ser importado.</s:String>
+    
     <!--Encoder-->
     <s:String x:Key="Encoder.Title">Codificador</s:String>
     <s:String x:Key="Encoder.Starting">Iniciando</s:String>

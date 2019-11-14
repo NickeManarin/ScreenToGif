@@ -476,19 +476,19 @@
     <s:String x:Key="InsertFrames.SelectColorFill">Ange fyllningsfärg för duken</s:String>
 
     <!--Import Frames From Video-->
-    <s:String x:Key="ImportVideo.Title">Importera bildrutor från video</s:String>
-    <s:String x:Key="ImportVideo.Loading">Laddar...</s:String>
-    <s:String x:Key="ImportVideo.Scale">Skala:</s:String>
-    <s:String x:Key="ImportVideo.Size">Storlek:</s:String>
-    <s:String x:Key="ImportVideo.Height">Höjd:</s:String>
-    <s:String x:Key="ImportVideo.Width">Bredd:</s:String>
-    <s:String x:Key="ImportVideo.Framerate">Bildhastighet:</s:String>
-    <s:String x:Key="ImportVideo.Fps">fps</s:String>
-    <s:String x:Key="ImportVideo.Start">Start:</s:String>
-    <s:String x:Key="ImportVideo.End">Slut:</s:String>
-    <s:String x:Key="ImportVideo.Selection">Markerade:</s:String>
-    <s:String x:Key="ImportVideo.Frames">Bildrutor:</s:String>
-    <s:String x:Key="ImportVideo.Duration">Varaktighet:</s:String>
+    <s:String x:Key="S.ImportVideo.Title">Importera bildrutor från video</s:String>
+    <s:String x:Key="S.ImportVideo.Loading">Laddar...</s:String>
+    <s:String x:Key="S.ImportVideo.Scale">Skala:</s:String>
+    <s:String x:Key="S.ImportVideo.Size">Storlek:</s:String>
+    <s:String x:Key="S.ImportVideo.Height">Höjd:</s:String>
+    <s:String x:Key="S.ImportVideo.Width">Bredd:</s:String>
+    <s:String x:Key="S.ImportVideo.Framerate">Bildhastighet:</s:String>
+    <s:String x:Key="S.ImportVideo.Fps">fps</s:String>
+    <s:String x:Key="S.ImportVideo.Start">Start:</s:String>
+    <s:String x:Key="S.ImportVideo.End">Slut:</s:String>
+    <s:String x:Key="S.ImportVideo.Selection">Markerade:</s:String>
+    <s:String x:Key="S.ImportVideo.Frames">Bildrutor:</s:String>
+    <s:String x:Key="S.ImportVideo.Duration">Varaktighet:</s:String>
     <s:String x:Key="S.ImportVideo.Error">Det var inte möjligt att ladda videon.</s:String>
     
     <!--Encoder-->

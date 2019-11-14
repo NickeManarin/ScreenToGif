@@ -512,19 +512,19 @@
     <s:String x:Key="InsertFrames.SelectColorFill">Выбрать цвет заливки холста</s:String>
 
     <!--Import Frames From Video-->
-    <s:String x:Key="ImportVideo.Title">Импортировать кадры из видео</s:String>
-    <s:String x:Key="ImportVideo.Loading">Загрузка...</s:String>
-    <s:String x:Key="ImportVideo.Scale">Масштаб:</s:String>
-    <s:String x:Key="ImportVideo.Size">Размер:</s:String>
-    <s:String x:Key="ImportVideo.Height">Высота:</s:String>
-    <s:String x:Key="ImportVideo.Width">Ширина:</s:String>
-    <s:String x:Key="ImportVideo.Framerate">Частота кадров:</s:String>
-    <s:String x:Key="ImportVideo.Fps">FPS</s:String>
-    <s:String x:Key="ImportVideo.Start">Старт:</s:String>
-    <s:String x:Key="ImportVideo.End">Конец:</s:String>
-    <s:String x:Key="ImportVideo.Selection">Выделение:</s:String>
-    <s:String x:Key="ImportVideo.Frames">Кадры:</s:String>
-    <s:String x:Key="ImportVideo.Duration">Продолжительность:</s:String>
+    <s:String x:Key="S.ImportVideo.Title">Импортировать кадры из видео</s:String>
+    <s:String x:Key="S.ImportVideo.Loading">Загрузка...</s:String>
+    <s:String x:Key="S.ImportVideo.Scale">Масштаб:</s:String>
+    <s:String x:Key="S.ImportVideo.Size">Размер:</s:String>
+    <s:String x:Key="S.ImportVideo.Height">Высота:</s:String>
+    <s:String x:Key="S.ImportVideo.Width">Ширина:</s:String>
+    <s:String x:Key="S.ImportVideo.Framerate">Частота кадров:</s:String>
+    <s:String x:Key="S.ImportVideo.Fps">FPS</s:String>
+    <s:String x:Key="S.ImportVideo.Start">Старт:</s:String>
+    <s:String x:Key="S.ImportVideo.End">Конец:</s:String>
+    <s:String x:Key="S.ImportVideo.Selection">Выделение:</s:String>
+    <s:String x:Key="S.ImportVideo.Frames">Кадры:</s:String>
+    <s:String x:Key="S.ImportVideo.Duration">Продолжительность:</s:String>
     <s:String x:Key="S.ImportVideo.Error">Не удалось загрузить видео.</s:String>
     
     <!--Encoder-->

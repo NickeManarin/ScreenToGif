@@ -483,19 +483,19 @@
     <s:String x:Key="InsertFrames.SelectColorFill">Wybierz kolor wypełnienia</s:String>
 
     <!--Import Frames From Video-->
-    <s:String x:Key="ImportVideo.Title">Importuj klatki z filmu</s:String>
-    <s:String x:Key="ImportVideo.Loading">Ładowanie...</s:String>
-    <s:String x:Key="ImportVideo.Scale">Skala:</s:String>
-    <s:String x:Key="ImportVideo.Size">Rozmiar:</s:String>
-    <s:String x:Key="ImportVideo.Height">Wysokość:</s:String>
-    <s:String x:Key="ImportVideo.Width">Szerokość:</s:String>
-    <s:String x:Key="ImportVideo.Framerate">Częstotliwość klatek:</s:String>
-    <s:String x:Key="ImportVideo.Fps">fps</s:String>
-    <s:String x:Key="ImportVideo.Start">Start:</s:String>
-    <s:String x:Key="ImportVideo.End">Koniec:</s:String>
-    <s:String x:Key="ImportVideo.Selection">Zaznaczenie:</s:String>
-    <s:String x:Key="ImportVideo.Frames">Klatki:</s:String>
-    <s:String x:Key="ImportVideo.Duration">Długość trwania:</s:String>
+    <s:String x:Key="S.ImportVideo.Title">Importuj klatki z filmu</s:String>
+    <s:String x:Key="S.ImportVideo.Loading">Ładowanie...</s:String>
+    <s:String x:Key="S.ImportVideo.Scale">Skala:</s:String>
+    <s:String x:Key="S.ImportVideo.Size">Rozmiar:</s:String>
+    <s:String x:Key="S.ImportVideo.Height">Wysokość:</s:String>
+    <s:String x:Key="S.ImportVideo.Width">Szerokość:</s:String>
+    <s:String x:Key="S.ImportVideo.Framerate">Częstotliwość klatek:</s:String>
+    <s:String x:Key="S.ImportVideo.Fps">fps</s:String>
+    <s:String x:Key="S.ImportVideo.Start">Start:</s:String>
+    <s:String x:Key="S.ImportVideo.End">Koniec:</s:String>
+    <s:String x:Key="S.ImportVideo.Selection">Zaznaczenie:</s:String>
+    <s:String x:Key="S.ImportVideo.Frames">Klatki:</s:String>
+    <s:String x:Key="S.ImportVideo.Duration">Długość trwania:</s:String>
     <s:String x:Key="S.ImportVideo.Error">Nie jest możliwe wczytanie wideo.</s:String>
     
     <!--Encoder-->

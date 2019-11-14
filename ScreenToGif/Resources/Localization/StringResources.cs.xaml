@@ -366,19 +366,19 @@
     <s:String x:Key="InsertFrames.SelectColorFill">Vyberte barvu výplně plátna</s:String>
 
     <!--Import Frames From Video-->
-    <s:String x:Key="ImportVideo.Title">Importovat snímky z videa</s:String>
-    <s:String x:Key="ImportVideo.Loading">Nahrávání...</s:String>
-    <s:String x:Key="ImportVideo.Scale">Rozsah</s:String>
-    <s:String x:Key="ImportVideo.Size">Velikost</s:String>
-    <s:String x:Key="ImportVideo.Height">Výška:</s:String>
-    <s:String x:Key="ImportVideo.Width">Šířka</s:String>
-    <s:String x:Key="ImportVideo.Framerate">Frekvence snímků:</s:String>
-    <s:String x:Key="ImportVideo.Fps">fps</s:String>
-    <s:String x:Key="ImportVideo.Start">Start:</s:String>
-    <s:String x:Key="ImportVideo.End">Konec:</s:String>
-    <s:String x:Key="ImportVideo.Selection">Výběr:</s:String>
-    <s:String x:Key="ImportVideo.Frames">Snímky:</s:String>
-    <s:String x:Key="ImportVideo.Duration">Trvání:</s:String>
+    <s:String x:Key="S.ImportVideo.Title">Importovat snímky z videa</s:String>
+    <s:String x:Key="S.ImportVideo.Loading">Nahrávání...</s:String>
+    <s:String x:Key="S.ImportVideo.Scale">Rozsah</s:String>
+    <s:String x:Key="S.ImportVideo.Size">Velikost</s:String>
+    <s:String x:Key="S.ImportVideo.Height">Výška:</s:String>
+    <s:String x:Key="S.ImportVideo.Width">Šířka</s:String>
+    <s:String x:Key="S.ImportVideo.Framerate">Frekvence snímků:</s:String>
+    <s:String x:Key="S.ImportVideo.Fps">fps</s:String>
+    <s:String x:Key="S.ImportVideo.Start">Start:</s:String>
+    <s:String x:Key="S.ImportVideo.End">Konec:</s:String>
+    <s:String x:Key="S.ImportVideo.Selection">Výběr:</s:String>
+    <s:String x:Key="S.ImportVideo.Frames">Snímky:</s:String>
+    <s:String x:Key="S.ImportVideo.Duration">Trvání:</s:String>
     
     <!--Encoder-->
     <s:String x:Key="Encoder.Title">Kódování</s:String>

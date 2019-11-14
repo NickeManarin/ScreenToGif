@@ -140,6 +140,7 @@
     <!--Options Window-->
     <s:String x:Key="Title.Options">ScreenToGif - Optionen</s:String>
     <s:String x:Key="Application">Allgemein</s:String>
+    <s:String x:Key="S.Options.Recorder">Rekorder</s:String>
     <s:String x:Key="Interface">Benutzeroberfläche</s:String>
     <s:String x:Key="S.AutoTasks">Automatische Aufgaben</s:String>
     <s:String x:Key="S.Shortcuts">Tastaturkürzel</s:String>
@@ -153,9 +154,29 @@
     
     <s:String x:Key="S.Options.Warning.Follow.Header">Fehlendes Tastenkürzel für Mauszeiger-Verfolgung</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Message">Um die Mauszeiger-Verfolgung-Option zu nutzen, müssen Sie zuerst ein Tastenkürzel bestimmen, das Sie zum Umschalten verwenden können</s:String>
+    <s:String x:Key="S.Options.Warning.DesktopDuplication.Header">Fehlende Abhängigkeiten für Bildschirm-Aufnahme.</s:String>
+    <s:String x:Key="S.Options.Warning.DesktopDuplication.Message">Um Bildschirm-Aufnahme mittels Desktop Duplication API durchzuführen, müssen Sie zuerst SharpDx-Bibliotheken herunterladen.</s:String>
     
+    <s:String x:Key="S.Options.Recorder.Interface">Oberfläche</s:String>
+    <s:String x:Key="S.Options.Recorder.Interface.Old">Alt</s:String>
+    <s:String x:Key="S.Options.Recorder.Interface.New">Neu</s:String>
+    <s:String x:Key="S.Options.Recorder.Mode">Aufnahme-Modus</s:String>
+    <s:String x:Key="S.Options.Recorder.Bitblt.Info">Alten Aufnahme-Modus verwenden,der zwar langsamer ist und nicht immer bei Spielen funktioniert,&#10;aber ohne Zusatz-Module (Plug-ins) auskommt.</s:String>
+    <s:String x:Key="S.Options.Recorder.DirectX.Info">Desktop Duplication API verwenden, die schneller ist&#10; und Spiele in Vollbild aufnimmt aber SharpDx-Bibliotheken und Windows 8 oder höher voraussetzt.</s:String>
+    <s:String x:Key="S.Options.Recorder.File">In Datei&#10;speichern</s:String>
+    <s:String x:Key="S.Options.Recorder.File.Info">Jeder erfasste Frame wird direkt auf der Festplatte gespeichert.</s:String>
+    <s:String x:Key="S.Options.Recorder.Cache">Zwischen&#10;speicher</s:String>
+    <s:String x:Key="S.Options.Recorder.Cache.Info">Jeder erfasste Frame wird zuerst als Pixel-Reihe im Zwischenspeicher abgelegt (kann zuvor komprimiert werden)</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression">Kompression:</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.Optimal">Optimal</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.Optimal.Info">(Langsamer aber in besserer Qualität)</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.Fastest">Am schnellsten</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.Fastest.Info">(Schneller aber in schlechterer Qualität)</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.NoCompression">Keine Kompression</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.NoCompression.Info">(Keine Kompression während der Aufnahme vornehmen)</s:String>
+    <s:String x:Key="S.Options.Recorder.CacheSize">Zwischenspeicher-Größe (in MB):</s:String>
+    <s:String x:Key="S.Options.Recorder.CacheSize.Info">(Sobald diese Menge erreicht ist, werden alle Daten auf der Festplatte geschrieben)</s:String>
     <s:String x:Key="S.Options.Recorder.RecordMouse">Mauszeiger mit aufnehmen</s:String>
-    <s:String x:Key="S.Options.Recorder.RecordClicks">Mausklicks erkennen</s:String>
     <s:String x:Key="S.Options.Recorder.SelectCursorColor">Mauszeigerfarbe auswählen</s:String>
     <s:String x:Key="S.Options.Recorder.PreStart">Stoppuhr vor Aufnahmestart anzeigen</s:String>
     <s:String x:Key="S.Options.Recorder.PreStart.Info">(Warteschlange in Sekunden)</s:String>
@@ -165,8 +186,6 @@
     <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Gleichbleibende Framelänge)</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording">Asynchrone Aufnahme aktivieren</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(Hilft das Einfrieren der Benutzeroberfläche während der Aufnahme zu reduzieren)</s:String>
-    <s:String x:Key="S.Options.Recorder.NewRecorder">Neue Aufnahme-Benutzeroberfläche aktivieren</s:String>
-    <s:String x:Key="S.Options.Recorder.NewRecorder.Info">(Bisherige Aufnahme-Benutzeroberfläche wird ersetzt)</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier">Bildschirmlupe aktivieren</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier.Info">(Aktiviert Bildschirmlupe während der Auswahl des Aufnahme-Bereichs)</s:String>
     <s:String x:Key="S.Options.Recorder.CursorFollowing">Mauszeiger-Verfolgung aktivieren</s:String>
@@ -354,8 +373,12 @@
     <s:String x:Key="Extras.GifskiLocation">Speicherort für Gifski</s:String>
     <s:String x:Key="Extras.GifskiLocation.Select">Gifski-Programmpfad öffnen</s:String>
     <s:String x:Key="Extras.GifskiLocation.Invalid">Programmpfad beinhaltet mindestens ein ungültiges Zeichen. Bitte wählen Sie korrekte Adresse aus.</s:String>
+    <s:String x:Key="Extras.SharpDxLocation">SharpDx Verzeichnis (SharpDX.dll, SharpDX.Direct3D11.dll und SharpDX.DXGI.dll)</s:String>
+    <s:String x:Key="Extras.SharpDxLocation.Select">Pfad für SharpDx-Bibliotheken auswählen</s:String>
+    <s:String x:Key="Extras.SharpDxLocation.Invalid">Pfadname für SharpDx-Bibliotheken beinhaltet mindestens ein ungültiges Zeichen. Bitte wählen Sie einen gültigen Verzeichnisnamen aus.</s:String>
     <s:String x:Key="Extras.License.Ffmpeg">FFmpeg-Lizenz</s:String>
     <s:String x:Key="Extras.License.Gifski">Gifski-Lizenz</s:String>
+    <s:String x:Key="Extras.License.SharpDx">SharpDx-Lizenz</s:String>
 
     <s:String x:Key="Donate.IfYouWish">Wenn Sie mir danken wollen :D</s:String>
     <s:String x:Key="Donate.DonateDollar">US $ spenden</s:String>
@@ -409,6 +432,12 @@
     <s:String x:Key="Recorder.PreStart">Aufnahme startet in:</s:String>
     <s:String x:Key="Recorder.Paused">ScreenToGif (Pause)</s:String>
     
+    <s:String x:Key="S.Recorder.Warning.CaptureNotPossible">Bildschirm-Aufnahme fehlgeschlagen</s:String>
+    <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">Bildschirm-Aufnahme fehlgeschlagen. Aufnahme-Methode lieferte nach fünf Versuchen keine Frames.</s:String>
+    <s:String x:Key="S.Recorder.Warning.StartPauseNotPossible">Starten/Pausieren der Bildschirm-Aufnahme fehlgeschlagen</s:String>
+    <s:String x:Key="S.Recorder.Warning.Windows8">Verwendung von Desktop Duplication API für Bildschirm-Aufnahme setzt Windows 8 oder höher voraus.</s:String>
+    <s:String x:Key="S.Recorder.Warning.MissingSharpDx">Verwendung von Desktop Duplication API für Bildschirm-Aufnahme setzt SharpDx-Bibliotheken voraus. Gehen Sie zu Optionen > Extras, um sie herunterzuladen.</s:String>
+    
     <!--New Recorder-->
     <s:String x:Key="S.Recorder.Area">Bereich</s:String>
     <s:String x:Key="S.Recorder.Window">Fenster</s:String>
@@ -416,7 +445,7 @@
     <s:String x:Key="S.Recorder.Accept">Übernehmen</s:String>
     <s:String x:Key="S.Recorder.Retry">Wiederholen</s:String>
     <s:String x:Key="S.Recorder.CancelSelection">Auswahl abbrechen (Esc-Taste)</s:String>
-    <s:String x:Key="S.Recorder.SelectArea">Durch Klicken und Ziehen Aufnahmebereich auf diesem Bildschirm bestimmen</s:String>
+    <s:String x:Key="S.Recorder.SelectArea">Ziehen und klicken Sie auf diesem Bildschirm, um Aufnahme-Bereich auszuwählen</s:String>
     <s:String x:Key="S.Recorder.SelectArea.Embedded">Durch Klicken und Ziehen Aufnahmebereich bestimmen</s:String>
     <s:String x:Key="S.Recorder.SelectWindow">Hier klicken, um dieses Fenster zu wählen</s:String>
     <s:String x:Key="S.Recorder.SelectScreen">Hier klicken, um diesen Bildschirm zu wählen</s:String>
@@ -483,19 +512,19 @@
     <s:String x:Key="InsertFrames.SelectColorFill">Arbeitsbereich-Füllfarbe auswählen</s:String>
 
     <!--Import Frames From Video-->
-    <s:String x:Key="ImportVideo.Title">Bildsequenz aus Video importieren</s:String>
-    <s:String x:Key="ImportVideo.Loading">Wird geöffnet</s:String>
-    <s:String x:Key="ImportVideo.Scale">Skalierung:</s:String>
-    <s:String x:Key="ImportVideo.Size">Abmessungen:</s:String>
-    <s:String x:Key="ImportVideo.Height">Höhe:</s:String>
-    <s:String x:Key="ImportVideo.Width">Breite:</s:String>
-    <s:String x:Key="ImportVideo.Framerate">Bildwiederholrate:</s:String>
-    <s:String x:Key="ImportVideo.Fps">B/s</s:String>
-    <s:String x:Key="ImportVideo.Start">Anfang:</s:String>
-    <s:String x:Key="ImportVideo.End">Ende:</s:String>
-    <s:String x:Key="ImportVideo.Selection">Auswahl:</s:String>
-    <s:String x:Key="ImportVideo.Frames">Frames:</s:String>
-    <s:String x:Key="ImportVideo.Duration">Dauer:</s:String>
+    <s:String x:Key="S.ImportVideo.Title">Bildsequenz aus Video importieren</s:String>
+    <s:String x:Key="S.ImportVideo.Loading">Wird geöffnet</s:String>
+    <s:String x:Key="S.ImportVideo.Scale">Skalierung:</s:String>
+    <s:String x:Key="S.ImportVideo.Size">Abmessungen:</s:String>
+    <s:String x:Key="S.ImportVideo.Height">Höhe:</s:String>
+    <s:String x:Key="S.ImportVideo.Width">Breite:</s:String>
+    <s:String x:Key="S.ImportVideo.Framerate">Bildwiederholrate:</s:String>
+    <s:String x:Key="S.ImportVideo.Fps">B/s</s:String>
+    <s:String x:Key="S.ImportVideo.Start">Anfang:</s:String>
+    <s:String x:Key="S.ImportVideo.End">Ende:</s:String>
+    <s:String x:Key="S.ImportVideo.Selection">Auswahl:</s:String>
+    <s:String x:Key="S.ImportVideo.Frames">Frames:</s:String>
+    <s:String x:Key="S.ImportVideo.Duration">Dauer:</s:String>
     <s:String x:Key="S.ImportVideo.Error">Beim Import der Video-Datei ist ein Fehler aufgetreten.</s:String>
     
     <!--Encoder-->
@@ -516,6 +545,7 @@
     <s:String x:Key="Encoder.Uploading">Wird hochgeladen</s:String>
     <s:String x:Key="Encoder.Executing">Befehle werden ausgeführt</s:String>
     <s:String x:Key="Encoder.Processing">Frame {0} wird bearbeitet</s:String>
+    <s:String x:Key="Encoder.CreatingFile">Datei wird erstellt</s:String>
     <s:String x:Key="Encoder.Analyzing">Unveränderte Pixel werden analysiert</s:String>
     <s:String x:Key="Encoder.OpenFile">Datei öffnen</s:String>
     <s:String x:Key="Encoder.ExploreFolder">Verzeichnis durchsuchen</s:String>
@@ -1067,7 +1097,8 @@
     <s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">Bildmaterial mit Hilfe des RLE-Algorithmus komprimieren</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline">Zeitachsedaten speichern</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">Exportiert zusätzlich Zeitachsen der Frames</s:String>
-
+    <s:String x:Key="S.SaveAs.ProjectOptions">Projekt-Optionen</s:String>
+    
     <!--Save As • Save options-->
     <s:String x:Key="S.SaveAs.SaveOptions">Speichern-Optionen</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Datei in ausgewähltes Verzeichnis speichern</s:String>

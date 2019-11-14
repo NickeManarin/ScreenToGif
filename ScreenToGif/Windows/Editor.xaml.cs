@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -1202,19 +1201,19 @@ namespace ScreenToGif.Windows
                     {
                         if (!Util.Other.IsFfmpegPresent())
                         {
-                            StatusList.Warning(StringResource("Editor.Warning.Ffmpeg"), null, () => App.MainViewModel.OpenOptions.Execute(Options.ExtrasIndex));
+                            StatusList.Warning(LocalizationHelper.Get("Editor.Warning.Ffmpeg"), null, () => App.MainViewModel.OpenOptions.Execute(Options.ExtrasIndex));
                             return;
                         }
 
                         if (!string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation) && UserSettings.All.FfmpegLocation.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
                         {
-                            StatusList.Warning(StringResource("Extras.FfmpegLocation.Invalid"));
+                            StatusList.Warning(LocalizationHelper.Get("Extras.FfmpegLocation.Invalid"));
                             return;
                         }
 
                         if (FfmpegPresetsComboBox.SelectionBoxItem == null)
                         {
-                            StatusList.Warning(StringResource("S.SaveAs.Presets.Warning.NoSelection"));
+                            StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Presets.Warning.NoSelection"));
                             return;
                         }
                     }
@@ -1232,13 +1231,13 @@ namespace ScreenToGif.Windows
                     {
                         if (!Util.Other.IsFfmpegPresent())
                         {
-                            StatusList.Warning(StringResource("Editor.Warning.Ffmpeg"), null, () => App.MainViewModel.OpenOptions.Execute(Options.ExtrasIndex));
+                            StatusList.Warning(LocalizationHelper.Get("Editor.Warning.Ffmpeg"), null, () => App.MainViewModel.OpenOptions.Execute(Options.ExtrasIndex));
                             return;
                         }
 
                         if (!string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation) && UserSettings.All.FfmpegLocation.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
                         {
-                            StatusList.Warning(StringResource("Extras.FfmpegLocation.Invalid"));
+                            StatusList.Warning(LocalizationHelper.Get("Extras.FfmpegLocation.Invalid"));
                             return;
                         }
                     }
@@ -1246,13 +1245,13 @@ namespace ScreenToGif.Windows
                     {
                         if (!Util.Other.IsGifskiPresent())
                         {
-                            StatusList.Warning(StringResource("Editor.Warning.Gifski"), null, () => App.MainViewModel.OpenOptions.Execute(Options.ExtrasIndex));
+                            StatusList.Warning(LocalizationHelper.Get("Editor.Warning.Gifski"), null, () => App.MainViewModel.OpenOptions.Execute(Options.ExtrasIndex));
                             return;
                         }
 
                         if (!string.IsNullOrWhiteSpace(UserSettings.All.GifskiLocation) && UserSettings.All.GifskiLocation.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
                         {
-                            StatusList.Warning(StringResource("Extras.GifskiLocation.Invalid"));
+                            StatusList.Warning(LocalizationHelper.Get("Extras.GifskiLocation.Invalid"));
                             return;
                         }
                     }
@@ -1263,13 +1262,13 @@ namespace ScreenToGif.Windows
                     {
                         if (!Util.Other.IsFfmpegPresent())
                         {
-                            StatusList.Warning(StringResource("Editor.Warning.Ffmpeg"), null, () => App.MainViewModel.OpenOptions.Execute(Options.ExtrasIndex));
+                            StatusList.Warning(LocalizationHelper.Get("Editor.Warning.Ffmpeg"), null, () => App.MainViewModel.OpenOptions.Execute(Options.ExtrasIndex));
                             return;
                         }
 
                         if (!string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation) && UserSettings.All.FfmpegLocation.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
                         {
-                            StatusList.Warning(StringResource("Extras.FfmpegLocation.Invalid"));
+                            StatusList.Warning(LocalizationHelper.Get("Extras.FfmpegLocation.Invalid"));
                             return;
                         }
                     }
@@ -1330,26 +1329,26 @@ namespace ScreenToGif.Windows
                 {
                     if (UserSettings.All.LatestUploadService == UploadService.None)
                     {
-                        StatusList.Warning(StringResource("S.SaveAs.Warning.Upload.None"));
+                        StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Upload.None"));
                         return;
                     }
 
                     if (UserSettings.All.LatestUploadService == UploadService.Imgur && !await Imgur.IsAuthorized())
                     {
-                        StatusList.Warning(StringResource("S.SaveAs.Warning.Upload.NotAuthorized"));
+                        StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Upload.NotAuthorized"));
                         return;
                     }
 
                     if (UserSettings.All.LatestUploadService == UploadService.Yandex && !YandexDisk.IsAuthorized())
                     {
-                        StatusList.Warning(StringResource("S.SaveAs.Warning.Upload.NotAuthorized"));
+                        StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Upload.NotAuthorized"));
                         return;
                     }
                 }
 
                 if (saveToClipboard && copyType == CopyType.Link && !upload)
                 {
-                    StatusList.Warning(StringResource("S.SaveAs.Warning.Copy.Link"));
+                    StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Copy.Link"));
                     return;
                 }
 
@@ -1365,7 +1364,7 @@ namespace ScreenToGif.Windows
                 {
                     if (string.IsNullOrWhiteSpace(commands))
                     {
-                        StatusList.Warning(StringResource("S.SaveAs.Warning.Commands.Empty"));
+                        StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Commands.Empty"));
                         return;
                     }
                 }
@@ -1763,7 +1762,7 @@ namespace ScreenToGif.Windows
 
             if (selected.Count > 1)
             {
-                imageItem.Tag = $"{StringResource("ImportVideo.Frames")} {string.Join(", ", selected.Select(x => x.FrameNumber))}";
+                imageItem.Tag = $"{StringResource("S.ImportVideo.Frames")} {string.Join(", ", selected.Select(x => x.FrameNumber))}";
                 imageItem.Image = FindResource("Vector.ImageStack") as Canvas;
                 imageItem.Content = $"{list.Count} Images";
             }
@@ -4657,60 +4656,19 @@ namespace ScreenToGif.Windows
 
         private List<FrameInfo> ImportFromVideo(string fileName, string pathTemp)
         {
-            var delay = 66;
-
-            var frameList = Dispatcher.Invoke(() =>
+            //Get frames from video.
+            return Dispatcher?.Invoke(() =>
             {
-                var videoSource = new VideoSource(fileName) { Owner = this };
-                var result = videoSource.ShowDialog();
-
-                delay = videoSource.Delay;
-
-                if (result.HasValue && result.Value)
-                    return videoSource.FrameList;
-
-                return null;
-            });
-
-            //return frameList ?? new List<FrameInfo>();
-
-            if (frameList == null)
-                return new List<FrameInfo>();
-
-            ShowProgress(DispatcherStringResource("Editor.ImportingFrames"), frameList.Count);
-
-            #region Saves the Frames to the Disk
-
-            var frameInfoList = new List<FrameInfo>();
-            var count = 0;
-
-            foreach (var frame in frameList)
-            {
-                var frameName = Path.Combine(pathTemp, $"{count} {DateTime.Now:hh-mm-ss-FFFF}.png");
-
-                using (var stream = new FileStream(frameName, FileMode.Create))
+                var source = new VideoSource
                 {
-                    var encoder = new PngBitmapEncoder();
-                    encoder.Frames.Add(frame);
-                    encoder.Save(stream);
-                    stream.Close();
-                }
+                    RootFolder = pathTemp,
+                    VideoPath = fileName,
+                    Owner = this
+                };
+                var result = source.ShowDialog();
 
-                var frameInfo = new FrameInfo(frameName, delay);
-                frameInfoList.Add(frameInfo);
-
-                GC.Collect(1, GCCollectionMode.Forced);
-                count++;
-
-                UpdateProgress(count);
-            }
-
-            frameList.Clear();
-            GC.Collect();
-
-            #endregion
-
-            return frameInfoList;
+                return result.HasValue && result.Value ? source.Frames : null;
+            });
         }
 
         #endregion

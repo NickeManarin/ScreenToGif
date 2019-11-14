@@ -382,19 +382,19 @@
     <s:String x:Key="InsertFrames.SelectColorFill">Seleccionar el color de relleno del lienzo</s:String>
 
     <!--Import Frames From Video-->
-    <s:String x:Key="ImportVideo.Title">Importar fotogramas desde video</s:String>
-    <s:String x:Key="ImportVideo.Loading">Cargando…</s:String>
-    <s:String x:Key="ImportVideo.Scale">Escala:</s:String>
-    <s:String x:Key="ImportVideo.Size">Tamaño:</s:String>
-    <s:String x:Key="ImportVideo.Height">Altura:</s:String>
-    <s:String x:Key="ImportVideo.Width">Anchura:</s:String>
-    <s:String x:Key="ImportVideo.Framerate">Tasa de fotograma:</s:String>
-    <s:String x:Key="ImportVideo.Fps">FPS</s:String>
-    <s:String x:Key="ImportVideo.Start">Inicio:</s:String>
-    <s:String x:Key="ImportVideo.End">Fin:</s:String>
-    <s:String x:Key="ImportVideo.Selection">Selección:</s:String>
-    <s:String x:Key="ImportVideo.Frames">Fotogramas:</s:String>
-    <s:String x:Key="ImportVideo.Duration">Duración:</s:String>
+    <s:String x:Key="S.ImportVideo.Title">Importar fotogramas desde video</s:String>
+    <s:String x:Key="S.ImportVideo.Loading">Cargando…</s:String>
+    <s:String x:Key="S.ImportVideo.Scale">Escala:</s:String>
+    <s:String x:Key="S.ImportVideo.Size">Tamaño:</s:String>
+    <s:String x:Key="S.ImportVideo.Height">Altura:</s:String>
+    <s:String x:Key="S.ImportVideo.Width">Anchura:</s:String>
+    <s:String x:Key="S.ImportVideo.Framerate">Tasa de fotograma:</s:String>
+    <s:String x:Key="S.ImportVideo.Fps">FPS</s:String>
+    <s:String x:Key="S.ImportVideo.Start">Inicio:</s:String>
+    <s:String x:Key="S.ImportVideo.End">Fin:</s:String>
+    <s:String x:Key="S.ImportVideo.Selection">Selección:</s:String>
+    <s:String x:Key="S.ImportVideo.Frames">Fotogramas:</s:String>
+    <s:String x:Key="S.ImportVideo.Duration">Duración:</s:String>
     
     <!--Encoder-->
     <s:String x:Key="Encoder.Title">Codificador</s:String>

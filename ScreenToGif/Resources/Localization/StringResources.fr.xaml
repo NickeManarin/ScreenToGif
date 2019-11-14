@@ -382,19 +382,19 @@
     <s:String x:Key="InsertFrames.SelectColorFill">Sélectionnez la couleur de remplissage du canevas</s:String>
 
     <!--Import Frames From Video-->
-    <s:String x:Key="ImportVideo.Title">Importer à partir d'une vidéo</s:String>
-    <s:String x:Key="ImportVideo.Loading">Chargement...</s:String>
-    <s:String x:Key="ImportVideo.Scale">Échelle:</s:String>
-    <s:String x:Key="ImportVideo.Size">Taille:</s:String>
-    <s:String x:Key="ImportVideo.Height">Hauteur:</s:String>
-    <s:String x:Key="ImportVideo.Width">Largeur:</s:String>
-    <s:String x:Key="ImportVideo.Framerate">Fréquence d'image:</s:String>
-    <s:String x:Key="ImportVideo.Fps">fps</s:String>
-    <s:String x:Key="ImportVideo.Start">Début:</s:String>
-    <s:String x:Key="ImportVideo.End">Fin:</s:String>
-    <s:String x:Key="ImportVideo.Selection">Selection:</s:String>
-    <s:String x:Key="ImportVideo.Frames">Images:</s:String>
-    <s:String x:Key="ImportVideo.Duration">Durée:</s:String>
+    <s:String x:Key="S.ImportVideo.Title">Importer à partir d'une vidéo</s:String>
+    <s:String x:Key="S.ImportVideo.Loading">Chargement...</s:String>
+    <s:String x:Key="S.ImportVideo.Scale">Échelle:</s:String>
+    <s:String x:Key="S.ImportVideo.Size">Taille:</s:String>
+    <s:String x:Key="S.ImportVideo.Height">Hauteur:</s:String>
+    <s:String x:Key="S.ImportVideo.Width">Largeur:</s:String>
+    <s:String x:Key="S.ImportVideo.Framerate">Fréquence d'image:</s:String>
+    <s:String x:Key="S.ImportVideo.Fps">fps</s:String>
+    <s:String x:Key="S.ImportVideo.Start">Début:</s:String>
+    <s:String x:Key="S.ImportVideo.End">Fin:</s:String>
+    <s:String x:Key="S.ImportVideo.Selection">Selection:</s:String>
+    <s:String x:Key="S.ImportVideo.Frames">Images:</s:String>
+    <s:String x:Key="S.ImportVideo.Duration">Durée:</s:String>
     
     <!--Encoder-->
     <s:String x:Key="Encoder.Title">Encodage</s:String>

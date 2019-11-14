@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:c="clr-namespace:ScreenToGif.Controls"
         xmlns:u="clr-namespace:ScreenToGif.Util"
-        Title="{DynamicResource ImportVideo.Title}" Height="500" Width="800" MinHeight="400" MinWidth="500" 
+        Title="{DynamicResource S.ImportVideo.Title}" Height="500" Width="800" MinHeight="400" MinWidth="500" 
         SnapsToDevicePixels="True" UseLayoutRounding="True" Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterOwner" 
-        Background="{DynamicResource Panel.Background}" Closing="Window_Closing">
+        Background="{DynamicResource Panel.Background}" Loaded="Window_Loaded" Closing="Window_Closing">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -17,21 +17,37 @@
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Orientation="Horizontal" Background="{DynamicResource Panel.Background.Level4}">
-            <Viewbox x:Name="IconViewBox" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center"
+        <Grid Grid.Row="0" Background="{DynamicResource Panel.Background.Level4}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Viewbox Grid.Column="0" x:Name="IconViewBox" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center"
                      Stretch="Uniform" Child="{StaticResource Vector.FramesFromVideo}" Opacity="{DynamicResource Element.Opacity}"/>
 
-            <Label Content="{DynamicResource ImportVideo.Title}" Margin="5" VerticalAlignment="Center" Padding="2" FontSize="18" 
+            <TextBlock Grid.Column="1" Text="{DynamicResource S.ImportVideo.Title}" Margin="5" VerticalAlignment="Center" Padding="2" FontSize="18" 
                    FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground.Small}" Foreground="{DynamicResource Element.Foreground.Header}"/>
-        </StackPanel>
+
+            <TextBlock Grid.Column="2" Text="{DynamicResource S.ImportVideo.Importer}" FontSize="13" Foreground="{DynamicResource Element.Foreground.Header}" 
+                       TextAlignment="Center" VerticalAlignment="Center" Margin="3"/>
+
+            <ComboBox Grid.Column="3" x:Name="ImporterComboBox" Margin="5,3" Height="23" MinWidth="100" SelectedIndex="{Binding VideoImporter, Source={x:Static u:UserSettings.All}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                      SelectionChanged="ImporterComboBox_SelectionChanged">
+                <TextBlock Text="MediaPlayer"/>
+                <TextBlock Text="FFmpeg"/>
+            </ComboBox>
+        </Grid>
 
         <c:StatusBand Grid.Row="1" x:Name="StatusBand"/>
 
-        <Label x:Name="LoadingLabel" Grid.Row="2" Content="{DynamicResource ImportVideo.Loading}" Margin="0" VerticalContentAlignment="Center" 
+        <Label x:Name="LoadingLabel" Grid.Row="2" Content="{DynamicResource S.ImportVideo.Loading}" Margin="0" VerticalContentAlignment="Center" 
                HorizontalContentAlignment="Center" FontSize="24" Foreground="{DynamicResource Element.Foreground.Header}" FontFamily="Segoe UI Semilight" 
                Effect="{StaticResource Shadow.Foreground.Small}"/>
 
-        <Grid Grid.Row="2" Margin="5">
+        <Grid Grid.Row="2" x:Name="PreviewerGrid" Margin="5" Opacity="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition MinWidth="50"/>
                 <ColumnDefinition Width="Auto"/>
@@ -43,14 +59,13 @@
 
             <GridSplitter x:Name="Splitter" Grid.Column="1" Width="4" BorderBrush="{DynamicResource Element.Border}" 
                           KeyboardIncrement="5" ShowsPreview="False" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" 
-                          Effect="{StaticResource Shadow.Background.Small}" Opacity="0.8" Margin="-2,0" Visibility="Hidden"/>
+                          Effect="{StaticResource Shadow.Background.Small}" Opacity="0.8" Margin="-2,0"/>
         </Grid>
 
-        <c:RangeSlider x:Name="SelectionSlider" Grid.Row="3" Height="Auto" MinHeight="20" 
-                       UpperValue="100" LowerValue="0" TickPlacement="BottomRight" Margin="5,5" IsEnabled="False"
-                       UpperValueChanged="SelectionSlider_UpperValueChanged" LowerValueChanged="SelectionSlider_LowerValueChanged"/>
+        <c:RangeSlider x:Name="SelectionSlider" Grid.Row="3" Height="Auto" MinHeight="20" UpperValue="100" LowerValue="0" TickPlacement="BottomRight" Margin="5,5" IsEnabled="False"
+                       UpperValueChanged="SelectionSlider_UpperValueChanged" LowerValueChanged="SelectionSlider_LowerValueChanged" PreviewMouseUp="SelectionSlider_PreviewMouseUp"/>
 
-        <Grid x:Name="DetailsGrid" Grid.Row="4" Margin="0,0,0,5" Visibility="Visible">
+        <Grid x:Name="DetailsGrid" Grid.Row="4" IsEnabled="False" Margin="0,0,0,5">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -67,57 +82,57 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Label Content="{DynamicResource ImportVideo.Scale}" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+            <TextBlock Text="{DynamicResource S.ImportVideo.Scale}" Foreground="{DynamicResource Element.Foreground.Medium}" VerticalAlignment="Center" Margin="3"/>
             <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
-                <c:IntegerUpDown x:Name="ScaleNumericUpDown" MinWidth="60" Margin="5" Maximum="200" Minimum="5" Value="100" ValueChanged="ScaleNumericUpDown_ValueChanged"/>
-                <Label Content="%" VerticalContentAlignment="Center" Padding="0,0,5,0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                <c:IntegerUpDown x:Name="ScaleIntegerUpDown" MinWidth="60" Margin="5" Maximum="200" Minimum="5" Value="100" ValueChanged="ScaleNumericUpDown_ValueChanged"/>
+                <TextBlock Text="%" VerticalAlignment="Center" Padding="0,0,5,0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
             </StackPanel>
 
-            <Label Grid.Row="0" Grid.Column="1" Content="{DynamicResource ImportVideo.Size}" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+            <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource S.ImportVideo.Size}" Foreground="{DynamicResource Element.Foreground.Medium}" VerticalAlignment="Center" Margin="3"/>
             <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
-                <Label Content="{DynamicResource ImportVideo.Width}" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                <Label x:Name="WidthLabel" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                <TextBlock Text="{DynamicResource S.ImportVideo.Width}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}" Margin="3"/>
+                <TextBlock x:Name="WidthTextBlock" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}" Margin="3"/>
 
-                <Label Content="{DynamicResource ImportVideo.Height}" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                <Label x:Name="HeightLabel" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                <TextBlock Text="{DynamicResource S.ImportVideo.Height}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}" Margin="3"/>
+                <TextBlock x:Name="HeightTextBlock" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}" Margin="3"/>
             </StackPanel>
 
             <Separator Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Width="1" HorizontalAlignment="Left"/>
 
-            <Label Grid.Row="0" Grid.Column="3" Content="{DynamicResource ImportVideo.Framerate}" HorizontalAlignment="Left" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+            <TextBlock Grid.Row="0" Grid.Column="3" Text="{DynamicResource S.ImportVideo.Framerate}" Foreground="{DynamicResource Element.Foreground.Medium}" VerticalAlignment="Center" Margin="3"/>
             <StackPanel Grid.Row="1" Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Left">
-                <c:IntegerUpDown x:Name="FpsNumericUpDown" MinWidth="60" Margin="5" Maximum="60" Minimum="1" Value="{Binding Source={x:Static u:UserSettings.All}, Path=LatestFpsImport, Mode=TwoWay}" 
-                                 ValueChanged="FpsNumericUpDown_ValueChanged"/>
-                <Label Content="{DynamicResource ImportVideo.Fps}" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                <c:IntegerUpDown x:Name="FpsIntegerUpDown" MinWidth="60" Margin="5" Maximum="60" Minimum="1" Value="{Binding Source={x:Static u:UserSettings.All}, Path=LatestFpsImport, Mode=TwoWay}" 
+                                 ValueChanged="FpsIntegerUpDown_ValueChanged"/>
+                <TextBlock Text="{DynamicResource S.ImportVideo.Fps}" Padding="0,0,5,0" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
             </StackPanel>
 
             <Separator Grid.Row="0" Grid.Column="5" Grid.RowSpan="2" Width="1" HorizontalAlignment="Left"/>
 
-            <Label Grid.Row="0" Grid.Column="6" Content="{DynamicResource ImportVideo.Start}" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+            <TextBlock Grid.Row="0" Grid.Column="6" Text="{DynamicResource S.ImportVideo.Start}" Foreground="{DynamicResource Element.Foreground.Medium}" VerticalAlignment="Center" Margin="3"/>
             <StackPanel Grid.Row="1" Grid.Column="6" Orientation="Horizontal" HorizontalAlignment="Left">
-                <c:IntegerUpDown x:Name="StartNumericUpDown" MinWidth="60" Margin="5" StepValue="10" Padding="2,0"
-                                 Maximum="{Binding Value, ElementName=EndNumericUpDown}" Minimum="{Binding Minimum, ElementName=SelectionSlider}" 
+                <c:IntegerUpDown x:Name="StartIntegerUpDown" MinWidth="60" Margin="5" StepValue="10" Padding="2,0"
+                                 Maximum="{Binding Value, ElementName=EndIntegerUpDown}" Minimum="{Binding Minimum, ElementName=SelectionSlider}" 
                                  Value="{Binding LowerValue, ElementName=SelectionSlider, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                                 ValueChanged="StartNumericUpDown_ValueChanged"/>
-                <Label Content="ms" Padding="0,0,5,0" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                 ValueChanged="StartIntegerUpDown_ValueChanged"/>
+                <TextBlock Text="ms" Padding="0,0,5,0" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
             </StackPanel>
 
-            <Label Content="{DynamicResource ImportVideo.End}" Grid.Row="0" Grid.Column="7" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+            <TextBlock Grid.Row="0" Grid.Column="7" Text="{DynamicResource S.ImportVideo.End}" Foreground="{DynamicResource Element.Foreground.Medium}" VerticalAlignment="Center" Margin="3"/>
             <StackPanel Grid.Row="1" Grid.Column="7" Orientation="Horizontal" HorizontalAlignment="Left">
-                <c:IntegerUpDown x:Name="EndNumericUpDown" MinWidth="60" Margin="5" StepValue="10" Padding="2,0"
-                                 Maximum="{Binding Maximum, ElementName=SelectionSlider}" Minimum="{Binding Value, ElementName=StartNumericUpDown}" 
+                <c:IntegerUpDown x:Name="EndIntegerUpDown" MinWidth="60" Margin="5" StepValue="10" Padding="2,0"
+                                 Maximum="{Binding Maximum, ElementName=SelectionSlider}" Minimum="{Binding Value, ElementName=StartIntegerUpDown}" 
                                  Value="{Binding UpperValue, ElementName=SelectionSlider, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                                 ValueChanged="EndNumericUpDown_ValueChanged"/>
-                <Label Content="ms" Padding="0,0,5,0" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                 ValueChanged="EndIntegerUpDown_ValueChanged"/>
+                <TextBlock Text="ms" Padding="0,0,5,0" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
             </StackPanel>
 
-            <Label Grid.Row="0" Grid.Column="8" Content="{DynamicResource ImportVideo.Selection}" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+            <TextBlock Grid.Row="0" Grid.Column="8" Text="{DynamicResource S.ImportVideo.Selection}" Foreground="{DynamicResource Element.Foreground.Medium}" VerticalAlignment="Center" Margin="3"/>
             <StackPanel Grid.Row="1" Grid.Column="8" Orientation="Horizontal">
-                <Label Content="{DynamicResource ImportVideo.Frames}" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                <Label x:Name="FrameCountLabel" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                <TextBlock Text="{DynamicResource S.ImportVideo.Frames}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}" Margin="3"/>
+                <TextBlock x:Name="FrameCountTextBlock" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}" Margin="3"/>
 
-                <Label Content="{DynamicResource ImportVideo.Duration}" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                <Label x:Name="DurationLabel" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                <TextBlock Text="{DynamicResource S.ImportVideo.Duration}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}" Margin="3"/>
+                <TextBlock x:Name="DurationTextBlock" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}" Margin="3"/>
             </StackPanel>
         </Grid>
 

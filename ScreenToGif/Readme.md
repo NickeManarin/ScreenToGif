@@ -14,6 +14,7 @@ _VS 2019 and .Net 4.8 or newer required._
 • Added support for version 0.9.3 of Gifski (delete the older DLL and download again via Options > Extras).  
 • You can now cancel the gif encoding that uses Gifski.  
 • When exporting as project, the app will use the encoder window instead of locking down the editor.  
+• You can use FFmpeg to import frames from video (I also improved performance while importing video with the default method).  
 • Turkish and Russian translation were updated.  
 
 ### Fixed:

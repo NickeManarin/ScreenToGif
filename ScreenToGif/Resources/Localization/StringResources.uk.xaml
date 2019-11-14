@@ -216,19 +216,19 @@
     <s:String x:Key="InsertFrames.SelectColorFill">Виберіть колір заповнення полотна</s:String>
 
     <!--Import Frames From Video-->
-    <s:String x:Key="ImportVideo.Title">Імпорт кадрів з відео</s:String>
-    <s:String x:Key="ImportVideo.Loading">Завантаження...</s:String>
-    <s:String x:Key="ImportVideo.Scale">Масштаб:</s:String>
-    <s:String x:Key="ImportVideo.Size">Розмір:</s:String>
-    <s:String x:Key="ImportVideo.Height">Висота:</s:String>
-    <s:String x:Key="ImportVideo.Width">Ширина:</s:String>
-    <s:String x:Key="ImportVideo.Framerate">Кількість кадрів:</s:String>
-    <s:String x:Key="ImportVideo.Fps">fps</s:String>
-    <s:String x:Key="ImportVideo.Start">Початок:</s:String>
-    <s:String x:Key="ImportVideo.End">Кінець:</s:String>
-    <s:String x:Key="ImportVideo.Selection">Вибір:</s:String>
-    <s:String x:Key="ImportVideo.Frames">Кадри:</s:String>
-    <s:String x:Key="ImportVideo.Duration">Тривалість:</s:String>
+    <s:String x:Key="S.ImportVideo.Title">Імпорт кадрів з відео</s:String>
+    <s:String x:Key="S.ImportVideo.Loading">Завантаження...</s:String>
+    <s:String x:Key="S.ImportVideo.Scale">Масштаб:</s:String>
+    <s:String x:Key="S.ImportVideo.Size">Розмір:</s:String>
+    <s:String x:Key="S.ImportVideo.Height">Висота:</s:String>
+    <s:String x:Key="S.ImportVideo.Width">Ширина:</s:String>
+    <s:String x:Key="S.ImportVideo.Framerate">Кількість кадрів:</s:String>
+    <s:String x:Key="S.ImportVideo.Fps">fps</s:String>
+    <s:String x:Key="S.ImportVideo.Start">Початок:</s:String>
+    <s:String x:Key="S.ImportVideo.End">Кінець:</s:String>
+    <s:String x:Key="S.ImportVideo.Selection">Вибір:</s:String>
+    <s:String x:Key="S.ImportVideo.Frames">Кадри:</s:String>
+    <s:String x:Key="S.ImportVideo.Duration">Тривалість:</s:String>
     
     <!--Encoder-->
     <s:String x:Key="Encoder.Title">Кодувальник</s:String>

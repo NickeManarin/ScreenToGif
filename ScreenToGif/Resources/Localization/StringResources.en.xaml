@@ -512,20 +512,24 @@
     <s:String x:Key="InsertFrames.SelectColorFill">Select the Canvas Fill Color</s:String>
 
     <!--Import Frames From Video-->
-    <s:String x:Key="ImportVideo.Title">Import Frames From Video</s:String>
-    <s:String x:Key="ImportVideo.Loading">Loading...</s:String>
-    <s:String x:Key="ImportVideo.Scale">Scale:</s:String>
-    <s:String x:Key="ImportVideo.Size">Size:</s:String>
-    <s:String x:Key="ImportVideo.Height">Height:</s:String>
-    <s:String x:Key="ImportVideo.Width">Width:</s:String>
-    <s:String x:Key="ImportVideo.Framerate">Frame Rate:</s:String>
-    <s:String x:Key="ImportVideo.Fps">fps</s:String>
-    <s:String x:Key="ImportVideo.Start">Start:</s:String>
-    <s:String x:Key="ImportVideo.End">End:</s:String>
-    <s:String x:Key="ImportVideo.Selection">Selection:</s:String>
-    <s:String x:Key="ImportVideo.Frames">Frames:</s:String>
-    <s:String x:Key="ImportVideo.Duration">Duration:</s:String>
-    <s:String x:Key="S.ImportVideo.Error">It was not possible to load the video.</s:String>
+    <s:String x:Key="S.ImportVideo.Title">Import frames from video</s:String>
+    <s:String x:Key="S.ImportVideo.Importer">Importer:</s:String>
+    <s:String x:Key="S.ImportVideo.Loading">Loading...</s:String>
+    <s:String x:Key="S.ImportVideo.Scale">Scale:</s:String>
+    <s:String x:Key="S.ImportVideo.Size">Size:</s:String>
+    <s:String x:Key="S.ImportVideo.Height">Height:</s:String>
+    <s:String x:Key="S.ImportVideo.Width">Width:</s:String>
+    <s:String x:Key="S.ImportVideo.Framerate">Frame Rate:</s:String>
+    <s:String x:Key="S.ImportVideo.Fps">fps</s:String>
+    <s:String x:Key="S.ImportVideo.Start">Start:</s:String>
+    <s:String x:Key="S.ImportVideo.End">End:</s:String>
+    <s:String x:Key="S.ImportVideo.Selection">Selection:</s:String>
+    <s:String x:Key="S.ImportVideo.Frames">Frames:</s:String>
+    <s:String x:Key="S.ImportVideo.Duration">Duration:</s:String>
+    <s:String x:Key="S.ImportVideo.Error">It was not possible to load the video</s:String>
+    <s:String x:Key="S.ImportVideo.Error.Detail">The previewer could not start. Try with another importer or check if the video is not corrupted.&#x0d;If you are using the MediaPlayer, check if the Windows feature called "Media Features / Windows Media Player" is turned on and make sure that you have the necessary video codec.</s:String>
+    <s:String x:Key="S.ImportVideo.Timeout">Timeout in getting the frame preview.</s:String>
+    <s:String x:Key="S.ImportVideo.Nothing">No frame selected to be imported.</s:String>
     
     <!--Encoder-->
     <s:String x:Key="Encoder.Title">Encoder</s:String>

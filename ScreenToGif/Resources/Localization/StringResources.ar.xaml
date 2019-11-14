@@ -483,19 +483,19 @@
     <s:String x:Key="InsertFrames.SelectColorFill">حدد لون تعبئة الحلبة</s:String>
 
     <!--Import Frames From Video-->
-    <s:String x:Key="ImportVideo.Title">استيراد اطارات من الفيديو</s:String>
-    <s:String x:Key="ImportVideo.Loading">تحميل...</s:String>
-    <s:String x:Key="ImportVideo.Scale">مقياس:</s:String>
-    <s:String x:Key="ImportVideo.Size">الحجم:</s:String>
-    <s:String x:Key="ImportVideo.Height">الارتفاع:</s:String>
-    <s:String x:Key="ImportVideo.Width">العرض:</s:String>
-    <s:String x:Key="ImportVideo.Framerate">معدل الاطار:</s:String>
-    <s:String x:Key="ImportVideo.Fps">fps</s:String>
-    <s:String x:Key="ImportVideo.Start">بدء:</s:String>
-    <s:String x:Key="ImportVideo.End">النهاية:</s:String>
-    <s:String x:Key="ImportVideo.Selection">التحديد:</s:String>
-    <s:String x:Key="ImportVideo.Frames">اطارات:</s:String>
-    <s:String x:Key="ImportVideo.Duration">مده:</s:String>
+    <s:String x:Key="S.ImportVideo.Title">استيراد اطارات من الفيديو</s:String>
+    <s:String x:Key="S.ImportVideo.Loading">تحميل...</s:String>
+    <s:String x:Key="S.ImportVideo.Scale">مقياس:</s:String>
+    <s:String x:Key="S.ImportVideo.Size">الحجم:</s:String>
+    <s:String x:Key="S.ImportVideo.Height">الارتفاع:</s:String>
+    <s:String x:Key="S.ImportVideo.Width">العرض:</s:String>
+    <s:String x:Key="S.ImportVideo.Framerate">معدل الاطار:</s:String>
+    <s:String x:Key="S.ImportVideo.Fps">fps</s:String>
+    <s:String x:Key="S.ImportVideo.Start">بدء:</s:String>
+    <s:String x:Key="S.ImportVideo.End">النهاية:</s:String>
+    <s:String x:Key="S.ImportVideo.Selection">التحديد:</s:String>
+    <s:String x:Key="S.ImportVideo.Frames">اطارات:</s:String>
+    <s:String x:Key="S.ImportVideo.Duration">مده:</s:String>
     <s:String x:Key="S.ImportVideo.Error">لم يكن من الممكن تحميل الفيديو.</s:String>
     
     <!--Encoder-->

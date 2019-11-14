@@ -387,19 +387,19 @@
     <s:String x:Key="InsertFrames.SelectColorFill">Canvaskleur kiezen</s:String>
 
     <!--Import Frames From Video-->
-    <s:String x:Key="ImportVideo.Title">Frames uit video importeren</s:String>
-    <s:String x:Key="ImportVideo.Loading">Laden…</s:String>
-    <s:String x:Key="ImportVideo.Scale">Schaal:</s:String>
-    <s:String x:Key="ImportVideo.Size">Bestandsgrootte:</s:String>
-    <s:String x:Key="ImportVideo.Height">Hoogte:</s:String>
-    <s:String x:Key="ImportVideo.Width">Breedte:</s:String>
-    <s:String x:Key="ImportVideo.Framerate">Framerate:</s:String>
-    <s:String x:Key="ImportVideo.Fps">fps</s:String>
-    <s:String x:Key="ImportVideo.Start">Start:</s:String>
-    <s:String x:Key="ImportVideo.End">Einde:</s:String>
-    <s:String x:Key="ImportVideo.Selection">Selectie:</s:String>
-    <s:String x:Key="ImportVideo.Frames">Frames:</s:String>
-    <s:String x:Key="ImportVideo.Duration">Duur:</s:String>
+    <s:String x:Key="S.ImportVideo.Title">Frames uit video importeren</s:String>
+    <s:String x:Key="S.ImportVideo.Loading">Laden…</s:String>
+    <s:String x:Key="S.ImportVideo.Scale">Schaal:</s:String>
+    <s:String x:Key="S.ImportVideo.Size">Bestandsgrootte:</s:String>
+    <s:String x:Key="S.ImportVideo.Height">Hoogte:</s:String>
+    <s:String x:Key="S.ImportVideo.Width">Breedte:</s:String>
+    <s:String x:Key="S.ImportVideo.Framerate">Framerate:</s:String>
+    <s:String x:Key="S.ImportVideo.Fps">fps</s:String>
+    <s:String x:Key="S.ImportVideo.Start">Start:</s:String>
+    <s:String x:Key="S.ImportVideo.End">Einde:</s:String>
+    <s:String x:Key="S.ImportVideo.Selection">Selectie:</s:String>
+    <s:String x:Key="S.ImportVideo.Frames">Frames:</s:String>
+    <s:String x:Key="S.ImportVideo.Duration">Duur:</s:String>
     
     <!--Encoder-->
     <s:String x:Key="Encoder.Title">Encoder</s:String>

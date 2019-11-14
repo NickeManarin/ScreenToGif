@@ -391,19 +391,19 @@
     <s:String x:Key="InsertFrames.SelectColorFill">Lựa chọn bức vẽ đầy màu</s:String>
 
     <!--Import Frames From Video-->
-    <s:String x:Key="ImportVideo.Title">Nhập các khung hình từ Video</s:String>
-    <s:String x:Key="ImportVideo.Loading">Đang nạp...</s:String>
-    <s:String x:Key="ImportVideo.Scale">Tỉ lệ:</s:String>
-    <s:String x:Key="ImportVideo.Size">Kích thước:</s:String>
-    <s:String x:Key="ImportVideo.Height">Chiều cao:</s:String>
-    <s:String x:Key="ImportVideo.Width">Chiều rộng:</s:String>
-    <s:String x:Key="ImportVideo.Framerate">Tỉ lệ khung hình:</s:String>
-    <s:String x:Key="ImportVideo.Fps">Khung hình/giây</s:String>
-    <s:String x:Key="ImportVideo.Start">Bắt đầu:</s:String>
-    <s:String x:Key="ImportVideo.End">Kết thúc:</s:String>
-    <s:String x:Key="ImportVideo.Selection">Vùng lựa chọn:</s:String>
-    <s:String x:Key="ImportVideo.Frames">Các khung hình:</s:String>
-    <s:String x:Key="ImportVideo.Duration">Thời gian:</s:String>
+    <s:String x:Key="S.ImportVideo.Title">Nhập các khung hình từ Video</s:String>
+    <s:String x:Key="S.ImportVideo.Loading">Đang nạp...</s:String>
+    <s:String x:Key="S.ImportVideo.Scale">Tỉ lệ:</s:String>
+    <s:String x:Key="S.ImportVideo.Size">Kích thước:</s:String>
+    <s:String x:Key="S.ImportVideo.Height">Chiều cao:</s:String>
+    <s:String x:Key="S.ImportVideo.Width">Chiều rộng:</s:String>
+    <s:String x:Key="S.ImportVideo.Framerate">Tỉ lệ khung hình:</s:String>
+    <s:String x:Key="S.ImportVideo.Fps">Khung hình/giây</s:String>
+    <s:String x:Key="S.ImportVideo.Start">Bắt đầu:</s:String>
+    <s:String x:Key="S.ImportVideo.End">Kết thúc:</s:String>
+    <s:String x:Key="S.ImportVideo.Selection">Vùng lựa chọn:</s:String>
+    <s:String x:Key="S.ImportVideo.Frames">Các khung hình:</s:String>
+    <s:String x:Key="S.ImportVideo.Duration">Thời gian:</s:String>
     
     <!--Encoder-->
     <s:String x:Key="Encoder.Title">Mã hóa</s:String>

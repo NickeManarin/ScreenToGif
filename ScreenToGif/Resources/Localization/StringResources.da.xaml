@@ -391,19 +391,19 @@
     <s:String x:Key="InsertFrames.SelectColorFill">Vælg lærredsfarve</s:String>
 
     <!--Import Frames From Video-->
-    <s:String x:Key="ImportVideo.Title">Importér rammer fra video</s:String>
-    <s:String x:Key="ImportVideo.Loading">indlæser...</s:String>
-    <s:String x:Key="ImportVideo.Scale">Skala:</s:String>
-    <s:String x:Key="ImportVideo.Size">Str:</s:String>
-    <s:String x:Key="ImportVideo.Height">Højde:</s:String>
-    <s:String x:Key="ImportVideo.Width">Bredde:</s:String>
-    <s:String x:Key="ImportVideo.Framerate">Rammerate:</s:String>
-    <s:String x:Key="ImportVideo.Fps">fps</s:String>
-    <s:String x:Key="ImportVideo.Start">Start:</s:String>
-    <s:String x:Key="ImportVideo.End">Slut:</s:String>
-    <s:String x:Key="ImportVideo.Selection">Markering:</s:String>
-    <s:String x:Key="ImportVideo.Frames">Rammer:</s:String>
-    <s:String x:Key="ImportVideo.Duration">Længde:</s:String>
+    <s:String x:Key="S.ImportVideo.Title">Importér rammer fra video</s:String>
+    <s:String x:Key="S.ImportVideo.Loading">indlæser...</s:String>
+    <s:String x:Key="S.ImportVideo.Scale">Skala:</s:String>
+    <s:String x:Key="S.ImportVideo.Size">Str:</s:String>
+    <s:String x:Key="S.ImportVideo.Height">Højde:</s:String>
+    <s:String x:Key="S.ImportVideo.Width">Bredde:</s:String>
+    <s:String x:Key="S.ImportVideo.Framerate">Rammerate:</s:String>
+    <s:String x:Key="S.ImportVideo.Fps">fps</s:String>
+    <s:String x:Key="S.ImportVideo.Start">Start:</s:String>
+    <s:String x:Key="S.ImportVideo.End">Slut:</s:String>
+    <s:String x:Key="S.ImportVideo.Selection">Markering:</s:String>
+    <s:String x:Key="S.ImportVideo.Frames">Rammer:</s:String>
+    <s:String x:Key="S.ImportVideo.Duration">Længde:</s:String>
     
     <!--Encoder-->
     <s:String x:Key="Encoder.Title">Kodning</s:String>

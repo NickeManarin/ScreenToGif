@@ -98,7 +98,7 @@ namespace ScreenToGif.Model
         //public string RelativePath { get; set; }
 
         /// <summary>
-        /// The frame image full path.
+        /// The frame image path (it may be the full path or the relative path).
         /// </summary>
         [DataMember]
         public string Path { get; set; }

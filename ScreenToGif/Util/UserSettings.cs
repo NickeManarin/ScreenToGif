@@ -436,6 +436,16 @@ namespace ScreenToGif.Util
 
         #endregion
 
+        #region Video source
+
+        public int VideoImporter
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+        
+        #endregion
+
         #region Feedback
 
         public string LatestFeedbackEmail

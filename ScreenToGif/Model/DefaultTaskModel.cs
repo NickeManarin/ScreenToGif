@@ -59,7 +59,7 @@ namespace ScreenToGif.Model
 
         public string Details => ToString();
 
-        [IgnoreDataMember]
+        [IgnoreDataMember] //This attribute is getting ignored.
         public string Image
         {
             get => _image;

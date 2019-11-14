@@ -42,6 +42,9 @@
     <Color x:Key="InsertFillColor">#FFFFFFFF</Color>
     <s:Int32 x:Key="LatestFpsImport">15</s:Int32>
     
+    <!--Video source-->
+    <s:Int32 x:Key="VideoImporter">0</s:Int32>
+    
     <!--Feedback-->
     <!--<s:String x:Key="LatestFeedbackEmail"></s:String>-->
     

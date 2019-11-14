@@ -225,19 +225,19 @@
     <s:String x:Key="InsertFrames.SelectColorFill">選擇畫布填充顏色</s:String>
 
     <!--Import Frames From Video-->
-    <s:String x:Key="ImportVideo.Title">從影片匯入幀</s:String>
-    <s:String x:Key="ImportVideo.Loading">載入中...</s:String>
-    <s:String x:Key="ImportVideo.Scale">縮放比例:</s:String>
-    <s:String x:Key="ImportVideo.Size">大小:</s:String>
-    <s:String x:Key="ImportVideo.Height">高度:</s:String>
-    <s:String x:Key="ImportVideo.Width">寬度:</s:String>
-    <s:String x:Key="ImportVideo.Framerate">幀率:</s:String>
-    <s:String x:Key="ImportVideo.Fps">fps</s:String>
-    <s:String x:Key="ImportVideo.Start">開始:</s:String>
-    <s:String x:Key="ImportVideo.End">結束:</s:String>
-    <s:String x:Key="ImportVideo.Selection">選取範圍:</s:String>
-    <s:String x:Key="ImportVideo.Frames">幀:</s:String>
-    <s:String x:Key="ImportVideo.Duration">期間:</s:String>
+    <s:String x:Key="S.ImportVideo.Title">從影片匯入幀</s:String>
+    <s:String x:Key="S.ImportVideo.Loading">載入中...</s:String>
+    <s:String x:Key="S.ImportVideo.Scale">縮放比例:</s:String>
+    <s:String x:Key="S.ImportVideo.Size">大小:</s:String>
+    <s:String x:Key="S.ImportVideo.Height">高度:</s:String>
+    <s:String x:Key="S.ImportVideo.Width">寬度:</s:String>
+    <s:String x:Key="S.ImportVideo.Framerate">幀率:</s:String>
+    <s:String x:Key="S.ImportVideo.Fps">fps</s:String>
+    <s:String x:Key="S.ImportVideo.Start">開始:</s:String>
+    <s:String x:Key="S.ImportVideo.End">結束:</s:String>
+    <s:String x:Key="S.ImportVideo.Selection">選取範圍:</s:String>
+    <s:String x:Key="S.ImportVideo.Frames">幀:</s:String>
+    <s:String x:Key="S.ImportVideo.Duration">期間:</s:String>
     
     <!--Encoder-->
     <s:String x:Key="Encoder.Title">編碼</s:String>

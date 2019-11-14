@@ -476,19 +476,19 @@
     <s:String x:Key="InsertFrames.SelectColorFill">배경색 채우기</s:String>
 
     <!--Import Frames From Video-->
-    <s:String x:Key="ImportVideo.Title">비디오에서 프레임 불러오기</s:String>
-    <s:String x:Key="ImportVideo.Loading">로드 중...</s:String>
-    <s:String x:Key="ImportVideo.Scale">배율:</s:String>
-    <s:String x:Key="ImportVideo.Size">크기:</s:String>
-    <s:String x:Key="ImportVideo.Height">높이:</s:String>
-    <s:String x:Key="ImportVideo.Width">폭:</s:String>
-    <s:String x:Key="ImportVideo.Framerate">프레임레이트:</s:String>
-    <s:String x:Key="ImportVideo.Fps">fps</s:String>
-    <s:String x:Key="ImportVideo.Start">시작:</s:String>
-    <s:String x:Key="ImportVideo.End">끝:</s:String>
-    <s:String x:Key="ImportVideo.Selection">선택됨:</s:String>
-    <s:String x:Key="ImportVideo.Frames">프레임:</s:String>
-    <s:String x:Key="ImportVideo.Duration">길이:</s:String>
+    <s:String x:Key="S.ImportVideo.Title">비디오에서 프레임 불러오기</s:String>
+    <s:String x:Key="S.ImportVideo.Loading">로드 중...</s:String>
+    <s:String x:Key="S.ImportVideo.Scale">배율:</s:String>
+    <s:String x:Key="S.ImportVideo.Size">크기:</s:String>
+    <s:String x:Key="S.ImportVideo.Height">높이:</s:String>
+    <s:String x:Key="S.ImportVideo.Width">폭:</s:String>
+    <s:String x:Key="S.ImportVideo.Framerate">프레임레이트:</s:String>
+    <s:String x:Key="S.ImportVideo.Fps">fps</s:String>
+    <s:String x:Key="S.ImportVideo.Start">시작:</s:String>
+    <s:String x:Key="S.ImportVideo.End">끝:</s:String>
+    <s:String x:Key="S.ImportVideo.Selection">선택됨:</s:String>
+    <s:String x:Key="S.ImportVideo.Frames">프레임:</s:String>
+    <s:String x:Key="S.ImportVideo.Duration">길이:</s:String>
     <s:String x:Key="S.ImportVideo.Error">비디오를 불러오지 못 했습니다.</s:String>
     
     <!--Encoder-->
