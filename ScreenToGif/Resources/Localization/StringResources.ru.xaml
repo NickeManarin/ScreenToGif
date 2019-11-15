@@ -149,7 +149,7 @@
     <s:String x:Key="TemporaryFiles">Файлы и папки</s:String>
     <s:String x:Key="Extras">Дополнительно</s:String>
     <s:String x:Key="Clouds">Онлайн сервисы</s:String>
-    <s:String x:Key="Donate">Поддержать</s:String>
+    <s:String x:Key="S.Options.Donate">Поддержать</s:String>
     <s:String x:Key="About">О программе</s:String>
     
     <s:String x:Key="S.Options.Warning.Follow.Header">Нет сочетания клавиш - следовать за курсором</s:String>
@@ -380,17 +380,13 @@
     <s:String x:Key="Extras.License.Gifski">Лицензия Gifski</s:String>
     <s:String x:Key="Extras.License.SharpDx">Лицензия SharpDx</s:String>
 
-    <s:String x:Key="Donate.IfYouWish">Поддержать проект можно следующим образом:</s:String>
-    <s:String x:Key="Donate.DonateDollar">USD</s:String>
-    <s:String x:Key="Donate.DonateEuro">EUR</s:String>
-    <s:String x:Key="Donate.Donate">Пожертвовать</s:String>
-    <s:String x:Key="Donate.Paypal.Dollar">Открыть сайт PayPal. Валюта: USD</s:String>
-    <s:String x:Key="Donate.Paypal.Euro">Открыть сайт PayPal. Валюта: EUR</s:String>
-    <s:String x:Key="Donate.Paypal.OwnCurrency">Открыть сайт PayPal. Необходимо выбрать валюту.</s:String>
-    <s:String x:Key="Donate.Patreon">Открыть мою страницу на Patreon.</s:String>
-    <s:String x:Key="Donate.Steam.Link">Открыть мой Steam wishlist.</s:String>
-    <s:String x:Key="Donate.Steam.Text">Можно послать игры в подарок.</s:String>
-    <s:String x:Key="Donate.Crypto">Криптовалюты</s:String>
+    <s:String x:Key="S.Donate.Donate.Dollar">USD</s:String>
+    <s:String x:Key="S.Donate.Donate.Euro">EUR</s:String>
+    <s:String x:Key="S.Donate.Donate">Пожертвовать</s:String>
+    <s:String x:Key="S.Donate.Paypal.Dollar">Открыть сайт PayPal. Валюта: USD</s:String>
+    <s:String x:Key="S.Donate.Paypal.Euro">Открыть сайт PayPal. Валюта: EUR</s:String>
+    <s:String x:Key="S.Donate.Paypal.OwnCurrency">Открыть сайт PayPal. Необходимо выбрать валюту.</s:String>
+    <s:String x:Key="S.Donate.Crypto">Криптовалюты</s:String>
 
     <s:String x:Key="About.Version">Версия:</s:String>
     <s:String x:Key="About.Author">Автор: Nicke Manarin</s:String>

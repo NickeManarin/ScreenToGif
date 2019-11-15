@@ -1296,7 +1296,7 @@ namespace ScreenToGif.Windows.Other
                 if (!Util.Other.IsSharpDxPresent())
                     throw new Exception(LocalizationHelper.Get("S.Recorder.Warning.MissingSharpDx"));
 
-                _capture = UserSettings.All.UseMemoryCache ? new DirectCachedCapture() : new DirectImageCapture();
+                _capture = GetDirectCapture();
             }
             else
             {
@@ -1313,6 +1313,11 @@ namespace ScreenToGif.Windows.Other
             };
 
             _capture.Start(1000 / FpsIntegerUpDown.Value, (int)_rect.X, (int)_rect.Y, (int)_rect.Width, (int)_rect.Height, 96 * _scale, Project);
+        }
+
+        private ICapture GetDirectCapture()
+        {
+            return UserSettings.All.UseMemoryCache ? new DirectCachedCapture() : new DirectImageCapture();
         }
 
         #endregion

@@ -66,7 +66,7 @@
                 <n:ImageRadioButton x:Name="TempRadio" Text="{DynamicResource TemporaryFiles}" Content="{StaticResource Vector.Temporary}"/>
                 <n:ImageRadioButton x:Name="CloudRadioButton" Text="{DynamicResource Clouds}" Content="{StaticResource Vector.Web}"/>
                 <n:ImageRadioButton x:Name="ExtrasRadioButton" Text="{DynamicResource Extras}" Content="{StaticResource Vector.Extras}"/>
-                <n:ImageRadioButton x:Name="DonateRadio" Text="{DynamicResource Donate}" Content="{StaticResource Vector.Money}"/>
+                <n:ImageRadioButton x:Name="DonateRadio" Text="{DynamicResource S.Options.Donate}" Content="{StaticResource Vector.Money}"/>
                 <n:ImageRadioButton x:Name="AboutRadio" Text="{DynamicResource About}" Content="{StaticResource Vector.Info}"/>
             </StackPanel>
 
@@ -1134,7 +1134,7 @@
                             <RowDefinition Height="21"/>
                             <RowDefinition MinHeight="29" Height="Auto"/>
                             <RowDefinition Height="21"/>
-                            <RowDefinition MinHeight="29" Height="Auto"/>                            
+                            <RowDefinition MinHeight="29" Height="Auto"/>
                             <RowDefinition Height="21"/>
                             <RowDefinition MinHeight="29" Height="Auto"/>
                             <RowDefinition Height="*"/>
@@ -1405,11 +1405,13 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
 
-                        <n:LabelSeparator Grid.Row="0" Text="{DynamicResource Donate.IfYouWish}"/>
-
-                        <Label Grid.Row="1" x:Name="PaypalLabel" Content="Paypal" FontSize="16" Padding="1" Margin="10,0,0,0" Foreground="{DynamicResource Element.Foreground}"/>
-                        <Grid Grid.Row="2" Margin="20,0,0,0" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}">
+                        <n:LabelSeparator Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" x:Name="PaypalLabel" Text="Paypal"/>
+                        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="5,0,0,5" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}" HorizontalAlignment="Center" MinWidth="500">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
@@ -1421,28 +1423,26 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="DonateButton" Text="{DynamicResource Donate.DonateDollar}" Margin="5" Content="{StaticResource Vector.Money}" 
+                            <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="DonateButton" Text="{DynamicResource S.Donate.Donate.Dollar}" Margin="5" Content="{StaticResource Vector.Money}" 
                                            ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
                                            Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
                                            Click="DonateButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
-                                           ToolTipService.ToolTip="{DynamicResource Donate.Paypal.Dollar}" 
-                                           ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                                           ToolTipService.ToolTip="{DynamicResource S.Donate.Paypal.Dollar}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
-                            <n:ImageButton Grid.Row="0" Grid.Column="1" x:Name="DonateEuroButton" Text="{DynamicResource Donate.DonateEuro}" Margin="5" Content="{StaticResource Vector.Money}" 
+                            <n:ImageButton Grid.Row="0" Grid.Column="1" x:Name="DonateEuroButton" Text="{DynamicResource S.Donate.Donate.Euro}" Margin="5" Content="{StaticResource Vector.Money}" 
                                            ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
                                            Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
-                                           Click="DonateEuroButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
-                                           ToolTipService.ToolTip="{DynamicResource Donate.Paypal.Euro}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                                           Click="DonateEuroButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}" 
+                                           ToolTipService.ToolTip="{DynamicResource S.Donate.Paypal.Euro}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
-                            <n:ImageButton Grid.Row="0" Grid.Column="2" x:Name="DonateOtherButton" Text="{DynamicResource Donate.Donate}" Margin="5" Content="{StaticResource Vector.Money}" 
+                            <n:ImageButton Grid.Row="0" Grid.Column="2" x:Name="DonateOtherButton" Text="{DynamicResource S.Donate.Donate}" Margin="5" Content="{StaticResource Vector.Money}" 
                                            ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
                                            Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
                                            Click="DonateOtherButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
-                                           ToolTipService.ToolTip="{DynamicResource Donate.Paypal.OwnCurrency}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                                           ToolTipService.ToolTip="{DynamicResource S.Donate.Paypal.OwnCurrency}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
-                            <Label Grid.Row="1" Grid.Column="0" Content="US$ - USA Dollar" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1"/>
-
-                            <Label Grid.Row="1" Grid.Column="1" Content="€ - Euro" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1"/>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="US$ - USA Dollar" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="€ - Euro" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1"/>
 
                             <ComboBox Grid.Row="1" Grid.Column="2" x:Name="CurrencyComboBox" HorizontalAlignment="Center" VerticalAlignment="Center" SelectedIndex="0"
                                       Margin="3" Foreground="{DynamicResource Element.Foreground.Gray150}">
@@ -1469,45 +1469,139 @@
                                 <ComboBoxItem Content="THB - Thai Baht" Padding="2"/>
                             </ComboBox>
 
-                            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Content="Reference: screentogif • nicke@outlook.com.br" Foreground="{DynamicResource Element.Foreground.Gray150}" 
+                            <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Text="Reference: screentogif • nicke@outlook.com.br" Foreground="{DynamicResource Element.Foreground.Gray150}" 
                                    FontStyle="Italic" HorizontalAlignment="Center" Padding="1"/>
                         </Grid>
 
-                        <Label Grid.Row="3" Content="Patreon" FontSize="16" Padding="1" Margin="10,0,0,0" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}" Foreground="{DynamicResource Element.Foreground}"/>
-                        <TextBlock Grid.Row="4" Margin="20,0,0,0" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}">
-                            <Hyperlink Click="PatreonHyperlink_Click">
-                                <Run Text="{DynamicResource Donate.Patreon}"/>
-                            </Hyperlink>
-                        </TextBlock>
+                        <n:LabelSeparator Grid.Row="2" Grid.Column="0" Text="Patreon" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}"/>
+                        <Grid Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
 
-                        <Label Grid.Row="5" Content="{DynamicResource Donate.Crypto}" FontSize="16" Padding="1" Margin="10,0,0,0" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}" Foreground="{DynamicResource Element.Foreground}"/>
-                        <TextBlock Grid.Row="6" Margin="20,0,0,0" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}" TextWrapping="WrapWithOverflow">
-                            <Run Text="BitcoinCash:"  Foreground="{DynamicResource Element.Foreground}"/>
-                            <Hyperlink Click="BitcoinCashHyperlink_Click" ToolTip="{DynamicResource Editor.Home.Copy}">
-                                <Run Text="1HN81cAwDo16tRtiYfkzvzFqikQUimM3S8"/>
-                            </Hyperlink>
-                            <!--<LineBreak/>-->
-                            <!--<Run Text="Monero"/>
-                            <Hyperlink Click="MoneroHyperlink_Click" ToolTip="{DynamicResource Editor.Home.Copy}">
-                                <Run Text="44yC9CkwHVfKPsKxg5RcA67GZEqiQH6QoBYtRKwkhDaE3tvRpiw1E5i6GShZYNsDq9eCtHnq49SrKjF4DG7NwjqWMoMueD4"/>
-                            </Hyperlink>-->
-                        </TextBlock>
+                            <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="PatreonButton" Text="{DynamicResource S.Donate.Subscribe}" Margin="5" Content="{StaticResource Vector.Patreon}" 
+                                           ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Center" VerticalContentAlignment="Center"
+                                           Foreground="#FF143A61" FontSize="14" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
+                                           Click="PatreonButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
+                                           ToolTipService.ToolTip="https://www.patreon.com/nicke" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
-                        <Label Grid.Row="7" Content="Steam" FontSize="16" Padding="1" Margin="10,0,0,0" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}" Foreground="{DynamicResource Element.Foreground}"/>
-                        <TextBlock Grid.Row="8" Margin="20,0,0,0" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}">
-                            <Hyperlink Click="SteamHyperlink_Click">
-                                <Run Text="{DynamicResource Donate.Steam.Link}"/>
-                            </Hyperlink>
-                            <Run Text="{DynamicResource Donate.Steam.Text}"  Foreground="{DynamicResource Element.Foreground}"/>
-                        </TextBlock>
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource S.Donate.Subscribe.Patreon}" Foreground="{DynamicResource Element.Foreground.Gray150}" 
+                                       FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextWrapping="Wrap"/>
+                        </Grid>
 
-                        <Label Grid.Row="7" Content="Support" FontSize="16" Padding="1" Margin="10,0,0,0" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility, Converter={StaticResource InvertedVisibility}}"
-                               Foreground="{DynamicResource Element.Foreground}"/>
-                        <TextBlock Grid.Row="8" Margin="20,0,0,0" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility, Converter={StaticResource InvertedVisibility}}">
-                            <Hyperlink Click="ExtraSupportHyperlink_Click">
-                                <Run Text="If you wish to support the project, please click here to visit the screentogif.com/donate"/>
-                            </Hyperlink>
-                        </TextBlock>
+                        <n:LabelSeparator Grid.Row="2" Grid.Column="1" Text="Flattr" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}"/>
+                        <Grid Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="FlattrButton" Text="{DynamicResource S.Donate.Subscribe}" Margin="5" Content="{StaticResource Vector.Flattr}" 
+                                           ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Center" VerticalContentAlignment="Center"
+                                           Foreground="#FF143A61" FontSize="14" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
+                                           Click="FlattrButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
+                                           ToolTipService.ToolTip="https://flattr.com/@NickeManarin/domain/screentogif.com" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource S.Donate.Subscribe.Flattr}" Foreground="{DynamicResource Element.Foreground.Gray150}" 
+                                       FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextWrapping="Wrap"/>
+                        </Grid>
+
+                        <n:LabelSeparator Grid.Row="4" Grid.Column="0" Text="Steam" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}"/>
+                        <Grid Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="SteamButton" Text="{DynamicResource S.Donate.Gift}" Margin="5" Content="{StaticResource Vector.Steam}" 
+                                           ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Center" VerticalContentAlignment="Center"
+                                           Foreground="#FF143A61" FontSize="14" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
+                                           Click="SteamButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
+                                           ToolTipService.ToolTip="http://steamcommunity.com/id/nickesm/wishlist" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+
+                            <TextBlock Grid.Row="0" Grid.Column="1" Foreground="{DynamicResource Element.Foreground.Gray150}" 
+                                       FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Margin="5" TextWrapping="Wrap">
+                                <Run Text="{DynamicResource S.Donate.Gift.Steam}"/>
+                                <LineBreak/>
+                                <Run Text="nicke@outlook.com.br"/>
+                            </TextBlock>
+                        </Grid>
+
+                        <n:LabelSeparator Grid.Row="4" Grid.Column="1" Text="GOG Galaxy" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}"/>
+                        <Grid Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="GogButton" Text="{DynamicResource S.Donate.Gift}" Margin="5" Content="{StaticResource Vector.Gog}" 
+                                           ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Center" VerticalContentAlignment="Center"
+                                           Foreground="#FF143A61" FontSize="14" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
+                                           Click="GogButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
+                                           ToolTipService.ToolTip="https://www.gog.com/u/Nickesm/wishlist" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+
+                            <TextBlock Grid.Row="0" Grid.Column="1" Foreground="{DynamicResource Element.Foreground.Gray150}" 
+                                       FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Margin="5" TextWrapping="Wrap">
+                                <Run Text="{DynamicResource S.Donate.Gift.Gog}"/>
+                                <LineBreak/>
+                                <Run Text="nicke@outlook.com.br"/>
+                            </TextBlock>
+                        </Grid>
+
+                        <n:LabelSeparator Grid.Row="6" Grid.Column="0" Text="Ko-fi" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}"/>
+                        <Grid Grid.Row="7" Grid.Column="0" HorizontalAlignment="Left" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="KofiButton" Text="{DynamicResource S.Donate.Donate}" Margin="5" Content="{StaticResource Vector.Kofi}" 
+                                           ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Center" VerticalContentAlignment="Center"
+                                           Foreground="#FF143A61" FontSize="14" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
+                                           Click="KofiButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
+                                           ToolTipService.ToolTip="https://ko-fi.com/nickemanarin" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource S.Donate.Kofi}" Foreground="{DynamicResource Element.Foreground.Gray150}" 
+                                       FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Margin="5" TextWrapping="Wrap"/>
+                        </Grid>
+
+                        <n:LabelSeparator Grid.Row="6" Grid.Column="1" Text="{DynamicResource S.Donate.Crypto}" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}"/>
+                        <Grid Grid.Row="7" Grid.Column="1" HorizontalAlignment="Left" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="CryptoButton" Text="{DynamicResource Editor.Home.Copy}" Margin="5" Content="{StaticResource Vector.Text}" 
+                                           ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Center" VerticalContentAlignment="Center"
+                                           Foreground="#FF143A61" FontSize="14" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
+                                           Click="BitcoinCashCopy_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
+                                           ToolTipService.ToolTip="1HN81cAwDo16tRtiYfkzvzFqikQUimM3S8" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+
+                            <!--BitcoinCash: 1HN81cAwDo16tRtiYfkzvzFqikQUimM3S8-->
+                            <!--Monero: 44yC9CkwHVfKPsKxg5RcA67GZEqiQH6QoBYtRKwkhDaE3tvRpiw1E5i6GShZYNsDq9eCtHnq49SrKjF4DG7NwjqWMoMueD4-->
+
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource S.Donate.Crypto.BitcoinCash}" Foreground="{DynamicResource Element.Foreground.Gray150}" 
+                                       FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Margin="5" TextWrapping="Wrap"/>
+                        </Grid>
+
+                        <n:LabelSeparator Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{DynamicResource S.Donate.Support}" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility, Converter={StaticResource InvertedVisibility}}"/>
+                        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility, Converter={StaticResource InvertedVisibility}}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="SupportButton" Text="screentogif.com/donate" Margin="5" Content="{StaticResource Vector.Web}" 
+                                           ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Center" VerticalContentAlignment="Center"
+                                           Foreground="#FF143A61" FontSize="14" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
+                                           Click="SupportButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
+                                           ToolTipService.ToolTip="http://www.screentogif.com/donate" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource S.Donate.Support.Visit}" Foreground="{DynamicResource Element.Foreground.Gray150}" 
+                                       FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Margin="5" TextWrapping="Wrap"/>
+                        </Grid>
                     </Grid>
 
                     <!--About-->

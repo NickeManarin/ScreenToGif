@@ -148,7 +148,7 @@
     <s:String x:Key="TemporaryFiles">Pliki tymczasowe</s:String>
     <s:String x:Key="Extras">Dodatki</s:String>
     <s:String x:Key="Clouds">Usługi hostingowe</s:String>
-    <s:String x:Key="Donate">Dotacja</s:String>
+    <s:String x:Key="S.Options.Donate">Dotacja</s:String>
     <s:String x:Key="About">O programie</s:String>
     
     <!--<s:String x:Key="S.Options.Warning.Follow.Header">Missing shortcut key for cursor following</s:String>-->
@@ -357,17 +357,13 @@
     <s:String x:Key="Extras.License.Ffmpeg">Licencja FFmpeg</s:String>
     <s:String x:Key="Extras.License.Gifski">Licencja Gifski</s:String>
 
-    <s:String x:Key="Donate.IfYouWish">Podziękuj autorowi :D</s:String>
-    <s:String x:Key="Donate.DonateDollar">Wesprzyj autora - $</s:String>
-    <s:String x:Key="Donate.DonateEuro">Wesprzyj autora - €</s:String>
-    <s:String x:Key="Donate.Donate">Dotacja</s:String>
-    <s:String x:Key="Donate.Paypal.Dollar">Otwiera stronę Paypala. Wybrana waluta: dolar</s:String>
-    <s:String x:Key="Donate.Paypal.Euro">Otwiera stronę Paypala. Wybrana waluta: euro</s:String>
-    <s:String x:Key="Donate.Paypal.OwnCurrency">Otwiera stronę Paypala. Musisz wybrać walutę.</s:String>
-    <s:String x:Key="Donate.Patreon">Kliknij tu, aby otworzyć moją stronę na Patreonie.</s:String>
-    <s:String x:Key="Donate.Steam.Link">Kliknij tu, aby otworzyć moją listę życzeń na Steamie.</s:String>
-    <s:String x:Key="Donate.Steam.Text">Możesz wysłać mi gry jako prezenty.</s:String>
-    <s:String x:Key="Donate.Crypto">Kryptowaluty</s:String>
+    <s:String x:Key="S.Donate.Donate.Dollar">Wesprzyj autora - $</s:String>
+    <s:String x:Key="S.Donate.Donate.Euro">Wesprzyj autora - €</s:String>
+    <s:String x:Key="S.Donate.Donate">Dotacja</s:String>
+    <s:String x:Key="S.Donate.Paypal.Dollar">Otwiera stronę Paypala. Wybrana waluta: dolar</s:String>
+    <s:String x:Key="S.Donate.Paypal.Euro">Otwiera stronę Paypala. Wybrana waluta: euro</s:String>
+    <s:String x:Key="S.Donate.Paypal.OwnCurrency">Otwiera stronę Paypala. Musisz wybrać walutę.</s:String>
+    <s:String x:Key="S.Donate.Crypto">Kryptowaluty</s:String>
 
     <s:String x:Key="About.Version">Wersja:</s:String>
     <s:String x:Key="About.Author">Autor: Nicke Manarin</s:String>

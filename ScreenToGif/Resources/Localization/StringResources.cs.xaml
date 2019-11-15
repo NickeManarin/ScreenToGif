@@ -74,7 +74,7 @@
     <s:String x:Key="TemporaryFiles">Dočasné soubory</s:String>
     <s:String x:Key="Extras">Doplňky</s:String>
     <s:String x:Key="Clouds">Přenos dat</s:String>
-    <s:String x:Key="Donate">Přispět</s:String>
+    <s:String x:Key="S.Options.Donate">Přispět</s:String>
     <s:String x:Key="About">O aplikaci</s:String>
     
     <s:String x:Key="S.Application.Other.Homepage">Domovská stránka:</s:String>
@@ -255,17 +255,13 @@
     <s:String x:Key="Extras.GifskiLocation.Select">Vyberte umístění spustitelného souboru Gifski</s:String>
     <s:String x:Key="Extras.GifskiLocation.Invalid">Cesta spustitelného souboru Gifski obsahuje neplatné znaky. Prosím zvolte platné umístění souboru.</s:String>
     
-    <s:String x:Key="Donate.IfYouWish">Pokud mi chcete poděkovat :D</s:String>
-    <s:String x:Key="Donate.DonateDollar">Přispět US$</s:String>
-    <s:String x:Key="Donate.DonateEuro">Přispět €</s:String>
-    <s:String x:Key="Donate.Donate">Přispět</s:String>
-    <s:String x:Key="Donate.Paypal.Dollar">Otevře stránku Paypal s vybranou měnou: Dolar</s:String>
-    <s:String x:Key="Donate.Paypal.Euro">Otevře stránku Paypal s vybranou měnou: Euro</s:String>
-    <s:String x:Key="Donate.Paypal.OwnCurrency">Otevře stránku Paypal. Je třeba vybrat měnu.</s:String>
-    <s:String x:Key="Donate.Patreon">Klikněte zde pro otevření mé stránky Patreon.</s:String>
-    <s:String x:Key="Donate.Steam.Link">Klikněte zde pro otevřený mého seznamu přání na Stream.</s:String>
-    <s:String x:Key="Donate.Steam.Text">Můžete posílat hry jako dárky.</s:String>
-    <s:String x:Key="Donate.Crypto">Krypto měny</s:String>
+    <s:String x:Key="S.Donate.Donate.Dollar">Přispět US$</s:String>
+    <s:String x:Key="S.Donate.Donate.Euro">Přispět €</s:String>
+    <s:String x:Key="S.Donate.Donate">Přispět</s:String>
+    <s:String x:Key="S.Donate.Paypal.Dollar">Otevře stránku Paypal s vybranou měnou: Dolar</s:String>
+    <s:String x:Key="S.Donate.Paypal.Euro">Otevře stránku Paypal s vybranou měnou: Euro</s:String>
+    <s:String x:Key="S.Donate.Paypal.OwnCurrency">Otevře stránku Paypal. Je třeba vybrat měnu.</s:String>
+    <s:String x:Key="S.Donate.Crypto">Krypto měny</s:String>
 
     <s:String x:Key="About.Version">Verze:</s:String>
     <s:String x:Key="About.Author">Autor: Nicke Manarin</s:String>

@@ -77,7 +77,7 @@
     <s:String x:Key="TemporaryFiles">一時ファイル</s:String>
     <s:String x:Key="Extras">外部ツール</s:String>
     <s:String x:Key="Clouds">アップロードサービス</s:String>
-    <s:String x:Key="Donate">寄付</s:String>
+    <s:String x:Key="S.Options.Donate">寄付</s:String>
     <s:String x:Key="About">アプリ情報</s:String>
     
     <s:String x:Key="S.Options.Recorder.RecordMouse">録画中にマウスカーソルを表示</s:String>
@@ -272,17 +272,13 @@
     <s:String x:Key="Extras.License.Ffmpeg">FFmpeg ライセンス</s:String>
     <s:String x:Key="Extras.License.Gifski">Gifski ライセンス</s:String>
 
-    <s:String x:Key="Donate.IfYouWish">感謝したいとき(•◡•)</s:String>
-    <s:String x:Key="Donate.DonateDollar">US$ で寄付</s:String>
-    <s:String x:Key="Donate.DonateEuro">€ で寄付</s:String>
-    <s:String x:Key="Donate.Donate">寄付</s:String>
-    <s:String x:Key="Donate.Paypal.Dollar">Paypalのウェブサイトを開く (ドル)</s:String>
-    <s:String x:Key="Donate.Paypal.Euro">Paypalのウェブサイトを開く (ユーロ)</s:String>
-    <s:String x:Key="Donate.Paypal.OwnCurrency">Paypalのウェブサイトを開く (通貨選択)</s:String>
-    <s:String x:Key="Donate.Patreon">Patreon HPを開く</s:String>
-    <s:String x:Key="Donate.Steam.Link">Steamのウィッシュリスト(欲しいモノ)ページを開く</s:String>
-    <s:String x:Key="Donate.Steam.Text">ゲームをギフトとして送れます。</s:String>
-    <s:String x:Key="Donate.Crypto">暗号通貨(仮想通貨)</s:String>
+    <s:String x:Key="S.Donate.Donate.Dollar">US$ で寄付</s:String>
+    <s:String x:Key="S.Donate.Donate.Euro">€ で寄付</s:String>
+    <s:String x:Key="S.Donate.Donate">寄付</s:String>
+    <s:String x:Key="S.Donate.Paypal.Dollar">Paypalのウェブサイトを開く (ドル)</s:String>
+    <s:String x:Key="S.Donate.Paypal.Euro">Paypalのウェブサイトを開く (ユーロ)</s:String>
+    <s:String x:Key="S.Donate.Paypal.OwnCurrency">Paypalのウェブサイトを開く (通貨選択)</s:String>
+    <s:String x:Key="S.Donate.Crypto">暗号通貨(仮想通貨)</s:String>
 
     <s:String x:Key="About.Version">バージョン:</s:String>
     <s:String x:Key="About.Author">作者: Nicke Manarin</s:String>

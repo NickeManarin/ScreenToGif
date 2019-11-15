@@ -48,7 +48,7 @@
     <s:String x:Key="Language">語言</s:String>
     <s:String x:Key="TemporaryFiles">暫存檔</s:String>
     <s:String x:Key="Extras">擴充</s:String>
-    <s:String x:Key="Donate">捐贈</s:String>
+    <s:String x:Key="S.Options.Donate">捐贈</s:String>
     <s:String x:Key="About">關於</s:String>
     
     <s:String x:Key="S.Application.Other.Homepage">首頁:</s:String>
@@ -140,10 +140,9 @@
     <s:String x:Key="Extras.FfmpegLocation">FFmpeg位置</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Select">選擇FFmpeg可執行檔的位置</s:String>
     
-    <s:String x:Key="Donate.IfYouWish">如果您想贊助 :D</s:String>
-    <s:String x:Key="Donate.DonateDollar">捐贈美金 US$</s:String>
-    <s:String x:Key="Donate.DonateEuro">捐贈歐元 €</s:String>
-    <s:String x:Key="Donate.Donate">捐贈</s:String>
+    <s:String x:Key="S.Donate.Donate.Dollar">捐贈美金 US$</s:String>
+    <s:String x:Key="S.Donate.Donate.Euro">捐贈歐元 €</s:String>
+    <s:String x:Key="S.Donate.Donate">捐贈</s:String>
 
     <s:String x:Key="About.Version">版本:</s:String>
     <s:String x:Key="About.Author">作者: Nicke Manarin</s:String>

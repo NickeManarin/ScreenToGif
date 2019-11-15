@@ -149,7 +149,7 @@
     <s:String x:Key="TemporaryFiles">Temporary Files</s:String>
     <s:String x:Key="Extras">Extras</s:String>
     <s:String x:Key="Clouds">Upload Services</s:String>
-    <s:String x:Key="Donate">Donate</s:String>
+    <s:String x:Key="S.Options.Donate">Donate</s:String>
     <s:String x:Key="About">About</s:String>
     
     <s:String x:Key="S.Options.Warning.Follow.Header">Missing shortcut key for cursor following</s:String>
@@ -380,18 +380,25 @@
     <s:String x:Key="Extras.License.Gifski">Gifski license</s:String>
     <s:String x:Key="Extras.License.SharpDx">SharpDx license</s:String>
 
-    <s:String x:Key="Donate.IfYouWish">If you wish to thank me :D</s:String>
-    <s:String x:Key="Donate.DonateDollar">Donate US$</s:String>
-    <s:String x:Key="Donate.DonateEuro">Donate €</s:String>
-    <s:String x:Key="Donate.Donate">Donate</s:String>
-    <s:String x:Key="Donate.Paypal.Dollar">Opens the Paypal website. Selected currency: Dollar</s:String>
-    <s:String x:Key="Donate.Paypal.Euro">Opens the Paypal website. Selected currency: Euro</s:String>
-    <s:String x:Key="Donate.Paypal.OwnCurrency">Opens the Paypal website. You must select the currency.</s:String>
-    <s:String x:Key="Donate.Patreon">Click here to open my Patreon page.</s:String>
-    <s:String x:Key="Donate.Steam.Link">Click here to open my Steam wishlist page.</s:String>
-    <s:String x:Key="Donate.Steam.Text">You can send games as gifts.</s:String>
-    <s:String x:Key="Donate.Crypto">Crypto currencies</s:String>
-
+    <!--Donations-->
+    <s:String x:Key="S.Donate.Donate">Donate</s:String>
+    <s:String x:Key="S.Donate.Donate.Dollar">Donate US$</s:String>
+    <s:String x:Key="S.Donate.Donate.Euro">Donate €</s:String>
+    <s:String x:Key="S.Donate.Paypal.Dollar">Opens the Paypal website. Selected currency: Dollar</s:String>
+    <s:String x:Key="S.Donate.Paypal.Euro">Opens the Paypal website. Selected currency: Euro</s:String>
+    <s:String x:Key="S.Donate.Paypal.OwnCurrency">Opens the Paypal website. You must select the currency.</s:String>
+    <s:String x:Key="S.Donate.Subscribe">Subscribe</s:String>
+    <s:String x:Key="S.Donate.Subscribe.Patreon">Donate monthly via Patreon.</s:String>
+    <s:String x:Key="S.Donate.Subscribe.Flattr">Donate monthly via Flattr.</s:String>
+    <s:String x:Key="S.Donate.Gift">Gift games</s:String>
+    <s:String x:Key="S.Donate.Gift.Steam">Gift games via Steam.</s:String>
+    <s:String x:Key="S.Donate.Gift.Gog">Gift games via GOG.</s:String>
+    <s:String x:Key="S.Donate.Kofi">Pay for a coffee via Ko-fi.</s:String>
+    <s:String x:Key="S.Donate.Crypto">Crypto currencies</s:String>
+    <s:String x:Key="S.Donate.Crypto.BitcoinCash">Copy the BitcoinCash address.</s:String>
+    <s:String x:Key="S.Donate.Support">Support</s:String>
+    <s:String x:Key="S.Donate.Support.Visit">If you wish to support the project :)</s:String>
+    
     <s:String x:Key="About.Version">Version:</s:String>
     <s:String x:Key="About.Author">Author: Nicke Manarin</s:String>
     <s:String x:Key="S.About.StoreVersion">Microsoft Store version. Some features are disabled due to enforced policies.</s:String>

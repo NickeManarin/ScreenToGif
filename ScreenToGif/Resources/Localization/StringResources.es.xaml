@@ -54,7 +54,7 @@
     <s:String x:Key="Language">Idioma</s:String>
     <s:String x:Key="TemporaryFiles">Archivos temporales</s:String>
     <s:String x:Key="Extras">Extras</s:String>
-    <s:String x:Key="Donate">Donar</s:String>
+    <s:String x:Key="S.Options.Donate">Donar</s:String>
     <s:String x:Key="About">Información</s:String>
     
     <s:String x:Key="S.Application.Other.Homepage">Inicio:</s:String>
@@ -170,16 +170,12 @@
     <s:String x:Key="Extras.FfmpegLocation.Select">Seleccione la ubicación del ejecutable FFmpeg</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Invalid">La ruta del ejecutable FFmpeg contiene uno o más caracteres no válidos. Por favor, seleccione una ubicación válida para ese ejecutable.</s:String>
     
-    <s:String x:Key="Donate.IfYouWish">Si tú piensas darme las gracias :D</s:String>
-    <s:String x:Key="Donate.DonateDollar">Donar [US] $</s:String>
-    <s:String x:Key="Donate.DonateEuro">Donar [Euro] €</s:String>
-    <s:String x:Key="Donate.Donate">Donar</s:String>
-    <s:String x:Key="Donate.Paypal.Dollar">Abrir PAYPAL: Moneda Seleccionada: Dolar</s:String>
-    <s:String x:Key="Donate.Paypal.Euro">Abrir PAYPAL: Moneda Seleccionada: Euro</s:String>
-    <s:String x:Key="Donate.Paypal.OwnCurrency">Abrir PayPal: Seleccionar otra moneda.</s:String>
-    <s:String x:Key="Donate.Patreon">Click aquí para abrir mi página de Patreon.</s:String>
-    <s:String x:Key="Donate.Steam.Link">Click aquí para abrir mi lista de deseos de Steam.</s:String>
-    <s:String x:Key="Donate.Steam.Text">Puedes enviarme juegos como regalos.</s:String>
+    <s:String x:Key="S.Donate.Donate.Dollar">Donar [US] $</s:String>
+    <s:String x:Key="S.Donate.Donate.Euro">Donar [Euro] €</s:String>
+    <s:String x:Key="S.Donate.Donate">Donar</s:String>
+    <s:String x:Key="S.Donate.Paypal.Dollar">Abrir PAYPAL: Moneda Seleccionada: Dolar</s:String>
+    <s:String x:Key="S.Donate.Paypal.Euro">Abrir PAYPAL: Moneda Seleccionada: Euro</s:String>
+    <s:String x:Key="S.Donate.Paypal.OwnCurrency">Abrir PayPal: Seleccionar otra moneda.</s:String>
 
     <s:String x:Key="About.Version">Versión:</s:String>
     <s:String x:Key="About.Author">Creador: Nicke Manarin</s:String>

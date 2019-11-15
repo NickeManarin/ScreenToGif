@@ -77,7 +77,7 @@
     <s:String x:Key="TemporaryFiles">Tijdelijke opslag</s:String>
     <s:String x:Key="Extras">Extra's</s:String>
     <s:String x:Key="Clouds">Upload-diensten</s:String>
-    <s:String x:Key="Donate">Doneren</s:String>
+    <s:String x:Key="S.Options.Donate">Doneren</s:String>
     <s:String x:Key="About">Over</s:String>
     
     <s:String x:Key="S.Options.Recorder.RecordMouse">Muiscursor tijdens opname weergeven.</s:String>
@@ -272,17 +272,13 @@
     <s:String x:Key="Extras.License.Ffmpeg">FFmpeg licentie</s:String>
     <s:String x:Key="Extras.License.Gifski">Gifski licentie</s:String>
 
-    <s:String x:Key="Donate.IfYouWish">Als u me wilt bedanken :D</s:String>
-    <s:String x:Key="Donate.DonateDollar">US$ Doneren</s:String>
-    <s:String x:Key="Donate.DonateEuro">€ Doneren</s:String>
-    <s:String x:Key="Donate.Donate">Doneren</s:String>
-    <s:String x:Key="Donate.Paypal.Dollar">Opent Paypal website. Geselecteerde munteenheid: Dollar</s:String>
-    <s:String x:Key="Donate.Paypal.Euro">Opent Paypal website. Geselecteerde munteenheid: Euro</s:String>
-    <s:String x:Key="Donate.Paypal.OwnCurrency">Opent Paypal website. U kunt zelf de munteenheid selecteren.</s:String>
-    <s:String x:Key="Donate.Patreon">Klik hier om mijn Patreon-pagina te openen</s:String>
-    <s:String x:Key="Donate.Steam.Link">Klik hier om mijn Steam-wensenlijst te openen.</s:String>
-    <s:String x:Key="Donate.Steam.Text">U kunt games sturen als cadeau.</s:String>
-    <s:String x:Key="Donate.Crypto">Cryptomunten</s:String>
+    <s:String x:Key="S.Donate.Donate.Dollar">US$ Doneren</s:String>
+    <s:String x:Key="S.Donate.Donate.Euro">€ Doneren</s:String>
+    <s:String x:Key="S.Donate.Donate">Doneren</s:String>
+    <s:String x:Key="S.Donate.Paypal.Dollar">Opent Paypal website. Geselecteerde munteenheid: Dollar</s:String>
+    <s:String x:Key="S.Donate.Paypal.Euro">Opent Paypal website. Geselecteerde munteenheid: Euro</s:String>
+    <s:String x:Key="S.Donate.Paypal.OwnCurrency">Opent Paypal website. U kunt zelf de munteenheid selecteren.</s:String>
+    <s:String x:Key="S.Donate.Crypto">Cryptomunten</s:String>
 
     <s:String x:Key="About.Version">Versie:</s:String>
     <s:String x:Key="About.Author">Auteur: Nicke Manarin</s:String>

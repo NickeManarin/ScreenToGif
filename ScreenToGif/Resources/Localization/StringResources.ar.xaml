@@ -148,7 +148,7 @@
     <s:String x:Key="TemporaryFiles">الملفات المؤقتة</s:String>
     <s:String x:Key="Extras">اضافات</s:String>
     <s:String x:Key="Clouds">تحميل الخدمات</s:String>
-    <s:String x:Key="Donate">التبرع</s:String>
+    <s:String x:Key="S.Options.Donate">التبرع</s:String>
     <s:String x:Key="About">حول</s:String>
     
     <s:String x:Key="S.Options.Warning.Follow.Header">مفتاح اختصار مفقود للمؤشر التالي</s:String>
@@ -357,17 +357,13 @@
     <s:String x:Key="Extras.License.Ffmpeg">FFmpeg رخصة</s:String>
     <s:String x:Key="Extras.License.Gifski">Gifski رخصه</s:String>
 
-    <s:String x:Key="Donate.IfYouWish">D:اذا كنت تريد ان تشكرني</s:String>
-    <s:String x:Key="Donate.DonateDollar">تبرع بالدولار الامريكي</s:String>
-    <s:String x:Key="Donate.DonateEuro">تبرع باليورو</s:String>
-    <s:String x:Key="Donate.Donate">التبرع</s:String>
-    <s:String x:Key="Donate.Paypal.Dollar">يفتح موقع باي بال. العملة المحددة: الدولار</s:String>
-    <s:String x:Key="Donate.Paypal.Euro">يفتح موقع باي بال. العملة المحددة: اليورو</s:String>
-    <s:String x:Key="Donate.Paypal.OwnCurrency">يفتح موقع باي بال. يجب تحديد العملة.</s:String>
-    <s:String x:Key="Donate.Patreon">Patreon انقر هنا لفتح صفحتي</s:String>
-    <s:String x:Key="Donate.Steam.Link">Steam wishlist انقر هنا لفتح صفحتي</s:String>
-    <s:String x:Key="Donate.Steam.Text">يمكنك ارسال الالعاب كهدايا.</s:String>
-    <s:String x:Key="Donate.Crypto">العملات السرية</s:String>
+    <s:String x:Key="S.Donate.Donate.Dollar">تبرع بالدولار الامريكي</s:String>
+    <s:String x:Key="S.Donate.Donate.Euro">تبرع باليورو</s:String>
+    <s:String x:Key="S.Donate.Donate">التبرع</s:String>
+    <s:String x:Key="S.Donate.Paypal.Dollar">يفتح موقع باي بال. العملة المحددة: الدولار</s:String>
+    <s:String x:Key="S.Donate.Paypal.Euro">يفتح موقع باي بال. العملة المحددة: اليورو</s:String>
+    <s:String x:Key="S.Donate.Paypal.OwnCurrency">يفتح موقع باي بال. يجب تحديد العملة.</s:String>
+    <s:String x:Key="S.Donate.Crypto">العملات السرية</s:String>
 
     <s:String x:Key="About.Version">الاصدار:</s:String>
     <s:String x:Key="About.Author">الكاتب:فتحي الداودية</s:String>

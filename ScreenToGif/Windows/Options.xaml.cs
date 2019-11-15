@@ -1759,8 +1759,7 @@ namespace ScreenToGif.Windows
             catch (Exception ex)
             {
                 LogWriter.Log(ex, "Error • Openning the Donation website");
-
-                ErrorDialog.Ok(LocalizationHelper.Get("Title.Options"), "Error openning the donation website", ex.Message, ex);
+                ErrorDialog.Ok(Title, "Error openning the donation website", ex.Message, ex);
             }
         }
 
@@ -1774,7 +1773,7 @@ namespace ScreenToGif.Windows
             {
                 LogWriter.Log(ex, "Error • Openning the Donation website");
 
-                ErrorDialog.Ok(LocalizationHelper.Get("Title.Options"), "Error openning the donation website", ex.Message, ex);
+                ErrorDialog.Ok(Title, "Error openning the donation website", ex.Message, ex);
             }
         }
 
@@ -1794,7 +1793,7 @@ namespace ScreenToGif.Windows
             }
         }
 
-        private void PatreonHyperlink_Click(object sender, RoutedEventArgs e)
+        private void PatreonButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -1803,12 +1802,64 @@ namespace ScreenToGif.Windows
             catch (Exception ex)
             {
                 LogWriter.Log(ex, "Error • Openning the Patreon website");
+                ErrorDialog.Ok(Title, "Error openning the Patreon website", ex.Message, ex);
+            }
+        }
+        
+        private void FlattrButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Process.Start("https://flattr.com/@NickeManarin/domain/screentogif.com");
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Error • Openning the Flattr website");
 
-                ErrorDialog.Ok(LocalizationHelper.Get("Title.Options"), "Error openning the patreon website", ex.Message, ex);
+                ErrorDialog.Ok(LocalizationHelper.Get("Title.Options"), "Error openning the Flattr website", ex.Message, ex);
             }
         }
 
-        private void BitcoinCashHyperlink_Click(object sender, RoutedEventArgs e)
+        private void SteamButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Process.Start("http://steamcommunity.com/id/nickesm/wishlist");
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Error • Openning the Steam website");
+                ErrorDialog.Ok(Title, "Error openning the Steam website", ex.Message, ex);
+            }
+        }
+        
+        private void GogButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Process.Start("https://www.gog.com/u/Nickesm/wishlist");
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Error • Openning the GOG website");
+                ErrorDialog.Ok(Title, "Error openning the GOG website", ex.Message, ex);
+            }
+        }     
+        
+        private void KofiButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Process.Start("https://ko-fi.com/nickemanarin");
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Error • Openning the Ko-fi website");
+                ErrorDialog.Ok(Title, "Error openning the Ko-fi website", ex.Message, ex);
+            }
+        }
+
+        private void BitcoinCashCopy_Click(object sender, RoutedEventArgs e)
         {
             System.Windows.Clipboard.SetText("1HN81cAwDo16tRtiYfkzvzFqikQUimM3S8");
         }
@@ -1818,21 +1869,7 @@ namespace ScreenToGif.Windows
             System.Windows.Clipboard.SetText("44yC9CkwHVfKPsKxg5RcA67GZEqiQH6QoBYtRKwkhDaE3tvRpiw1E5i6GShZYNsDq9eCtHnq49SrKjF4DG7NwjqWMoMueD4");
         }
 
-        private void SteamHyperlink_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Process.Start("http://steamcommunity.com/id/nickesm/wishlist");
-            }
-            catch (Exception ex)
-            {
-                LogWriter.Log(ex, "Error • Openning the Steam website");
-
-                ErrorDialog.Ok(LocalizationHelper.Get("Title.Options"), "Error openning the steam website", ex.Message, ex);
-            }
-        }
-
-        private void ExtraSupportHyperlink_Click(object sender, RoutedEventArgs e)
+        private void SupportButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -1841,8 +1878,7 @@ namespace ScreenToGif.Windows
             catch (Exception ex)
             {
                 LogWriter.Log(ex, "Error • Openning the donation website");
-
-                ErrorDialog.Ok(LocalizationHelper.Get("Title.Options"), "Error openning the donation website", ex.Message, ex);
+                ErrorDialog.Ok(Title, "Error openning the donation website", ex.Message, ex);
             }
         }
 

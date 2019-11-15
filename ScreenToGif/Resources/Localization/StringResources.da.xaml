@@ -78,7 +78,7 @@
     <s:String x:Key="TemporaryFiles">Midlertidige filer</s:String>
     <s:String x:Key="Extras">Ekstra</s:String>
     <s:String x:Key="Clouds">Værter</s:String>
-    <s:String x:Key="Donate">Donér</s:String>
+    <s:String x:Key="S.Options.Donate">Donér</s:String>
     <s:String x:Key="About">Om...</s:String>
     
     <s:String x:Key="S.Options.Recorder.RecordMouse">Optag musemarkøren.</s:String>
@@ -275,17 +275,13 @@
     <s:String x:Key="Extras.License.Ffmpeg">FFmpeg licens</s:String>
     <s:String x:Key="Extras.License.Gifski">Gifski licens</s:String>
 
-    <s:String x:Key="Donate.IfYouWish">Hvis jeg har fortjent det :D</s:String>
-    <s:String x:Key="Donate.DonateDollar">Donér US$</s:String>
-    <s:String x:Key="Donate.DonateEuro">Donér €</s:String>
-    <s:String x:Key="Donate.Donate">Donér</s:String>
-    <s:String x:Key="Donate.Paypal.Dollar">Åbner Paypals hjemmeside. Valgt valuta: Dollar</s:String>
-    <s:String x:Key="Donate.Paypal.Euro">Åbner Paypals hjemmeside. Valgt valuta: Euro</s:String>
-    <s:String x:Key="Donate.Paypal.OwnCurrency">Åbner Paypals hjemmeside. Vælg selv valuta.</s:String>
-    <s:String x:Key="Donate.Patreon">Klik for at åbne min Patreon side.</s:String>
-    <s:String x:Key="Donate.Steam.Link">Klik for at åbne min Steam wishlist side.</s:String>
-    <s:String x:Key="Donate.Steam.Text">Du kan sende spil som gaver.</s:String>
-    <s:String x:Key="Donate.Crypto">Crypto valuta</s:String>
+    <s:String x:Key="S.Donate.Donate.Dollar">Donér US$</s:String>
+    <s:String x:Key="S.Donate.Donate.Euro">Donér €</s:String>
+    <s:String x:Key="S.Donate.Donate">Donér</s:String>
+    <s:String x:Key="S.Donate.Paypal.Dollar">Åbner Paypals hjemmeside. Valgt valuta: Dollar</s:String>
+    <s:String x:Key="S.Donate.Paypal.Euro">Åbner Paypals hjemmeside. Valgt valuta: Euro</s:String>
+    <s:String x:Key="S.Donate.Paypal.OwnCurrency">Åbner Paypals hjemmeside. Vælg selv valuta.</s:String>
+    <s:String x:Key="S.Donate.Crypto">Crypto valuta</s:String>
 
     <s:String x:Key="About.Version">Udgave:</s:String>
     <s:String x:Key="About.Author">Udvikler: Nicke Manarin</s:String>

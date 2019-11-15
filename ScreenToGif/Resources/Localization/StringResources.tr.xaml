@@ -47,7 +47,7 @@
     <s:String x:Key="Language">Dil</s:String>
     <s:String x:Key="TemporaryFiles">Geçici Dosyalar</s:String>
     <s:String x:Key="Extras">Ekstralar</s:String>
-    <s:String x:Key="Donate">Bağış Yap</s:String>
+    <s:String x:Key="S.Options.Donate">Bağış Yap</s:String>
     <s:String x:Key="About">Hakkında</s:String>
     
     <s:String x:Key="S.Application.Other.Homepage">Anasayfa:</s:String>
@@ -132,10 +132,9 @@
     <!--<s:String x:Key="Extras.FfmpegLocation">FFmpeg location</s:String>-->
     <!--<s:String x:Key="Extras.FfmpegLocation.Select">Select the location of the FFmpeg executable</s:String>-->
     
-    <s:String x:Key="Donate.IfYouWish">Bana Teşekkür Etmek İsterseniz :D</s:String>
-    <s:String x:Key="Donate.DonateDollar">Bağış Yap US$</s:String>
-    <s:String x:Key="Donate.DonateEuro">Bağış Yap €</s:String>
-    <s:String x:Key="Donate.Donate">Bağış Yap</s:String>
+    <s:String x:Key="S.Donate.Donate.Dollar">Bağış Yap US$</s:String>
+    <s:String x:Key="S.Donate.Donate.Euro">Bağış Yap €</s:String>
+    <s:String x:Key="S.Donate.Donate">Bağış Yap</s:String>
 
     <s:String x:Key="About.Version">Sürüm:</s:String>
     <s:String x:Key="About.Author">Yazar: Nicke Manarin</s:String>

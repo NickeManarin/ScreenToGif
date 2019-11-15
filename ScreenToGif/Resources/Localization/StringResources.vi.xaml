@@ -78,7 +78,7 @@
     <s:String x:Key="TemporaryFiles">Các tệp tạm thời</s:String>
     <s:String x:Key="Extras">Mục bổ sung</s:String>
     <s:String x:Key="Clouds">Dịch vụ tải lên</s:String>
-    <s:String x:Key="Donate">Quyên góp</s:String>
+    <s:String x:Key="S.Options.Donate">Quyên góp</s:String>
     <s:String x:Key="About">Giới thiệu</s:String>
     
     <s:String x:Key="S.Options.Recorder.RecordMouse">Hiển thị con trỏ chuột trong khi đang quay.</s:String>
@@ -275,17 +275,13 @@
     <s:String x:Key="Extras.License.Ffmpeg">Giấy phép FFmpeg</s:String>
     <s:String x:Key="Extras.License.Gifski">Giấy phép Gifski</s:String>
 
-    <s:String x:Key="Donate.IfYouWish">Nếu bạn muốn cảm ơn tôi :D</s:String>
-    <s:String x:Key="Donate.DonateDollar">Quyên góp (US$)</s:String>
-    <s:String x:Key="Donate.DonateEuro">Quyên góp (€)</s:String>
-    <s:String x:Key="Donate.Donate">Quyên góp</s:String>
-    <s:String x:Key="Donate.Paypal.Dollar">Mở trang web Paypal. Chọn tiền tệ: Dollar</s:String>
-    <s:String x:Key="Donate.Paypal.Euro">Mở trang web Paypal. Chọn tiền tệ: Euro</s:String>
-    <s:String x:Key="Donate.Paypal.OwnCurrency">Mở trang web Paypal. Bạn phải chọn loại tiền tệ.</s:String>
-    <s:String x:Key="Donate.Patreon">Click vào đây để mở trang Patreon.</s:String>
-    <s:String x:Key="Donate.Steam.Link">Click vào đây để mở danh sách trang Steam mong muốn.</s:String>
-    <s:String x:Key="Donate.Steam.Text">Bạn có thể gửi các trò chơi điện tử thay cho quà.</s:String>
-    <s:String x:Key="Donate.Crypto">Tiền mã hóa</s:String>
+    <s:String x:Key="S.Donate.Donate.Dollar">Quyên góp (US$)</s:String>
+    <s:String x:Key="S.Donate.Donate.Euro">Quyên góp (€)</s:String>
+    <s:String x:Key="S.Donate.Donate">Quyên góp</s:String>
+    <s:String x:Key="S.Donate.Paypal.Dollar">Mở trang web Paypal. Chọn tiền tệ: Dollar</s:String>
+    <s:String x:Key="S.Donate.Paypal.Euro">Mở trang web Paypal. Chọn tiền tệ: Euro</s:String>
+    <s:String x:Key="S.Donate.Paypal.OwnCurrency">Mở trang web Paypal. Bạn phải chọn loại tiền tệ.</s:String>
+    <s:String x:Key="S.Donate.Crypto">Tiền mã hóa</s:String>
 
     <s:String x:Key="About.Version">Phiên bản:</s:String>
     <s:String x:Key="About.Author">Tác giả: Nicke Manarin</s:String>

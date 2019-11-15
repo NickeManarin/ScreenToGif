@@ -141,7 +141,7 @@
     <s:String x:Key="TemporaryFiles">临时文件</s:String>
     <s:String x:Key="Extras">额外</s:String>
     <s:String x:Key="Clouds">上传服务</s:String>
-    <s:String x:Key="Donate">捐赠</s:String>
+    <s:String x:Key="S.Options.Donate">捐赠</s:String>
     <s:String x:Key="About">关于</s:String>
     
     <s:String x:Key="S.Options.Warning.Follow.Header">光标后面缺少快捷键</s:String>
@@ -357,17 +357,13 @@
     <s:String x:Key="Extras.License.Ffmpeg">FFmpeg 许可证</s:String>
     <s:String x:Key="Extras.License.Gifski">Gifski 许可证</s:String>
 
-    <s:String x:Key="Donate.IfYouWish">如果您愿意感谢我 :D</s:String>
-    <s:String x:Key="Donate.DonateDollar">捐赠美元 (US$)</s:String>
-    <s:String x:Key="Donate.DonateEuro">捐赠欧元 (€)</s:String>
-    <s:String x:Key="Donate.Donate">捐赠</s:String>
-    <s:String x:Key="Donate.Paypal.Dollar">打开 Paypal 网站。选择货币：美元</s:String>
-    <s:String x:Key="Donate.Paypal.Euro">打开 Paypal 网站。选择货币：欧元</s:String>
-    <s:String x:Key="Donate.Paypal.OwnCurrency">打开 Paypal 网站。您必须选择货币</s:String>
-    <s:String x:Key="Donate.Patreon">点击这里打开我的 Patreon 页面</s:String>
-    <s:String x:Key="Donate.Steam.Link">点击这里打开我的 Steam 心愿单页面</s:String>
-    <s:String x:Key="Donate.Steam.Text">您可以向我赠送游戏。</s:String>
-    <s:String x:Key="Donate.Crypto">加密货币</s:String>
+    <s:String x:Key="S.Donate.Donate.Dollar">捐赠美元 (US$)</s:String>
+    <s:String x:Key="S.Donate.Donate.Euro">捐赠欧元 (€)</s:String>
+    <s:String x:Key="S.Donate.Donate">捐赠</s:String>
+    <s:String x:Key="S.Donate.Paypal.Dollar">打开 Paypal 网站。选择货币：美元</s:String>
+    <s:String x:Key="S.Donate.Paypal.Euro">打开 Paypal 网站。选择货币：欧元</s:String>
+    <s:String x:Key="S.Donate.Paypal.OwnCurrency">打开 Paypal 网站。您必须选择货币</s:String>
+    <s:String x:Key="S.Donate.Crypto">加密货币</s:String>
 
     <s:String x:Key="About.Version">版本：</s:String>
     <s:String x:Key="About.Author">作者：Nicke Manarin</s:String>

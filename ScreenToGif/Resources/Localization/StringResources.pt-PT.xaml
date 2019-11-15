@@ -46,7 +46,7 @@
     <s:String x:Key="Language">Idioma</s:String>
     <s:String x:Key="TemporaryFiles">Ficheiros Temp.</s:String>
     <!--<s:String x:Key="Extras">Extras</s:String>-->
-    <s:String x:Key="Donate">Doação</s:String>
+    <s:String x:Key="S.Options.Donate">Doação</s:String>
     <s:String x:Key="About">Sobre</s:String>
     
     <s:String x:Key="S.Application.Other.Homepage">Página Inicial:</s:String>
@@ -131,10 +131,9 @@
     <!--<s:String x:Key="Extras.FfmpegLocation">FFmpeg location</s:String>-->
     <!--<s:String x:Key="Extras.FfmpegLocation.Select">Select the location of the FFmpeg executable</s:String>-->
     
-    <s:String x:Key="Donate.IfYouWish">Se me quiser agradecer :D</s:String>
-    <s:String x:Key="Donate.DonateDollar">Doar US$</s:String>
-    <s:String x:Key="Donate.DonateEuro">Doar €</s:String>
-    <s:String x:Key="Donate.Donate">Doar</s:String>
+    <s:String x:Key="S.Donate.Donate.Dollar">Doar US$</s:String>
+    <s:String x:Key="S.Donate.Donate.Euro">Doar €</s:String>
+    <s:String x:Key="S.Donate.Donate">Doar</s:String>
 
     <s:String x:Key="About.Version">Versão:</s:String>
     <s:String x:Key="About.Author">Autor: Nicke Manarin</s:String>

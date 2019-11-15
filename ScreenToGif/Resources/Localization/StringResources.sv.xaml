@@ -141,7 +141,7 @@
     <s:String x:Key="TemporaryFiles">Temporära filer</s:String>
     <s:String x:Key="Extras">Extra</s:String>
     <s:String x:Key="Clouds">Uppladdnings-&#10;tjänster</s:String>
-    <s:String x:Key="Donate">Donera</s:String>
+    <s:String x:Key="S.Options.Donate">Donera</s:String>
     <s:String x:Key="About">Om</s:String>
     
     <s:String x:Key="S.Options.Warning.Follow.Header">Snabbkommando saknas till följ markören</s:String>
@@ -350,17 +350,13 @@
     <s:String x:Key="Extras.License.Ffmpeg">FFmpeg-licens</s:String>
     <s:String x:Key="Extras.License.Gifski">Gifski-licens</s:String>
 
-    <s:String x:Key="Donate.IfYouWish">Om du vill tacka mig :D</s:String>
-    <s:String x:Key="Donate.DonateDollar">Donera USD</s:String>
-    <s:String x:Key="Donate.DonateEuro">Donera Euro</s:String>
-    <s:String x:Key="Donate.Donate">Donera</s:String>
-    <s:String x:Key="Donate.Paypal.Dollar">Öppnar Paypals hemsida. Välj valutan: Dollar</s:String>
-    <s:String x:Key="Donate.Paypal.Euro">Öppnar Paypals hemsida. Välj valutan: Euro</s:String>
-    <s:String x:Key="Donate.Paypal.OwnCurrency">Öppnar Paypals hemsida. Du måste själv välja valutan.</s:String>
-    <s:String x:Key="Donate.Patreon">Tryck här för att öppna min Patreon-sida.</s:String>
-    <s:String x:Key="Donate.Steam.Link">Tryck här för att öppna min önskelista hos Steam.</s:String>
-    <s:String x:Key="Donate.Steam.Text">Du jag skicka spel som en gåva.</s:String>
-    <s:String x:Key="Donate.Crypto">Crypto-valutor</s:String>
+    <s:String x:Key="S.Donate.Donate.Dollar">Donera USD</s:String>
+    <s:String x:Key="S.Donate.Donate.Euro">Donera Euro</s:String>
+    <s:String x:Key="S.Donate.Donate">Donera</s:String>
+    <s:String x:Key="S.Donate.Paypal.Dollar">Öppnar Paypals hemsida. Välj valutan: Dollar</s:String>
+    <s:String x:Key="S.Donate.Paypal.Euro">Öppnar Paypals hemsida. Välj valutan: Euro</s:String>
+    <s:String x:Key="S.Donate.Paypal.OwnCurrency">Öppnar Paypals hemsida. Du måste själv välja valutan.</s:String>
+    <s:String x:Key="S.Donate.Crypto">Crypto-valutor</s:String>
 
     <s:String x:Key="About.Version">Version:</s:String>
     <s:String x:Key="About.Author">Upphovsman: Nicke Manarin</s:String>

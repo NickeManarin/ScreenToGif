@@ -46,7 +46,7 @@
     <s:String x:Key="Language">Мова</s:String>
     <s:String x:Key="TemporaryFiles">Тимчасові файли</s:String>
     <s:String x:Key="Extras">Додатково</s:String>
-    <s:String x:Key="Donate">Пожертва</s:String>
+    <s:String x:Key="S.Options.Donate">Пожертва</s:String>
     <s:String x:Key="About">Про</s:String>
     
     <s:String x:Key="S.Application.Other.Homepage">Домашня сторінка:</s:String>
@@ -131,10 +131,9 @@
     <s:String x:Key="Extras.FfmpegLocation">Місцезнаходження FFmpeg</s:String>
     <s:String x:Key="Extras.FfmpegLocation.Select">Виберіть місцезнаходження виконавчого файлу FFmpeg</s:String>
     
-    <s:String x:Key="Donate.IfYouWish">Якщо ви бажаєте подякувати мені :D</s:String>
-    <s:String x:Key="Donate.DonateDollar">Пожертвуйте US$</s:String>
-    <s:String x:Key="Donate.DonateEuro">Пожертвуйте €</s:String>
-    <s:String x:Key="Donate.Donate">Пожертвуйте</s:String>
+    <s:String x:Key="S.Donate.Donate.Dollar">Пожертвуйте US$</s:String>
+    <s:String x:Key="S.Donate.Donate.Euro">Пожертвуйте €</s:String>
+    <s:String x:Key="S.Donate.Donate">Пожертвуйте</s:String>
 
     <s:String x:Key="About.Version">Версія:</s:String>
     <s:String x:Key="About.Author">Автор: Nicke Manarin</s:String>

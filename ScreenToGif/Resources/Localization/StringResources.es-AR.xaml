@@ -77,7 +77,7 @@
     <s:String x:Key="TemporaryFiles">Archivos\ntemporales</s:String>
     <s:String x:Key="Extras">Extras</s:String>
     <s:String x:Key="Clouds">Servicios de subida</s:String>
-    <s:String x:Key="Donate">Donar</s:String>
+    <s:String x:Key="S.Options.Donate">Donar</s:String>
     <s:String x:Key="About">Acerca de ScreenToGif</s:String>
     
     <s:String x:Key="S.Options.Recorder.RecordMouse">Mostrar el cursor del mouse en la grabación</s:String>
@@ -271,17 +271,13 @@
     <s:String x:Key="Extras.License.Ffmpeg">Licencia de FFmpeg</s:String>
     <s:String x:Key="Extras.License.Gifski">Licencia de Gifski</s:String>
     
-    <s:String x:Key="Donate.IfYouWish">Si querés agradecerme :D</s:String>
-    <s:String x:Key="Donate.DonateDollar">Doná US$</s:String>
-    <s:String x:Key="Donate.DonateEuro">Doná €</s:String>
-    <s:String x:Key="Donate.Donate">Doná</s:String>
-    <s:String x:Key="Donate.Paypal.Dollar">Abre el sitio de PayPal; divisa seleccionada: dólar estadounidense</s:String>
-    <s:String x:Key="Donate.Paypal.Euro">Abre el sitio de PayPal; divisa seleccionada: euro</s:String>
-    <s:String x:Key="Donate.Paypal.OwnCurrency">Abre el sitio de PayPal; elegí vos la divisa</s:String>
-    <s:String x:Key="Donate.Patreon">Hacé clic acá para abrir mi perfil de Patreon</s:String>
-    <s:String x:Key="Donate.Steam.Link">Hacé clic acá para abrir mi lista de deseos de Steam</s:String>
-    <s:String x:Key="Donate.Steam.Text">Podés enviarme juegos como regalos</s:String>
-    <s:String x:Key="Donate.Crypto">Criptodivisas</s:String>
+    <s:String x:Key="S.Donate.Donate.Dollar">Doná US$</s:String>
+    <s:String x:Key="S.Donate.Donate.Euro">Doná €</s:String>
+    <s:String x:Key="S.Donate.Donate">Doná</s:String>
+    <s:String x:Key="S.Donate.Paypal.Dollar">Abre el sitio de PayPal; divisa seleccionada: dólar estadounidense</s:String>
+    <s:String x:Key="S.Donate.Paypal.Euro">Abre el sitio de PayPal; divisa seleccionada: euro</s:String>
+    <s:String x:Key="S.Donate.Paypal.OwnCurrency">Abre el sitio de PayPal; elegí vos la divisa</s:String>
+    <s:String x:Key="S.Donate.Crypto">Criptodivisas</s:String>
 
     <s:String x:Key="About.Version">Versión:</s:String>
     <s:String x:Key="About.Author">Autor: Nicke Manarin</s:String>
