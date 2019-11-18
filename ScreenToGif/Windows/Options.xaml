@@ -295,7 +295,7 @@
                                         </Grid.ColumnDefinitions>
 
                                         <n:ImageRadioButton Grid.Column="0" ContentWidth="40" Text="BitBlt" Padding="5" IsChecked="{Binding Path=UseDesktopDuplication, Mode=TwoWay, Converter={StaticResource InvertedBool}}"
-                                                    ToolTip="{DynamicResource S.Options.Recorder.Bitblt.Info}">
+                                                            ToolTip="{DynamicResource S.Options.Recorder.Bitblt.Info}">
                                             <n:ImageRadioButton.Content>
                                                 <Canvas Width="40" Height="39">
                                                     <Path StrokeThickness="2.0" Stroke="#ffcd5833" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 19.000,28.000 L 1.000,28.000 L 1.000,11.000 L 19.000,11.000 L 19.000,28.000 Z"/>
@@ -308,7 +308,7 @@
                                         </n:ImageRadioButton>
 
                                         <n:ImageRadioButton Grid.Column="1" ContentWidth="40" Text="DirectX" Padding="5" IsChecked="{Binding Path=UseDesktopDuplication, Mode=TwoWay}"
-                                                    ToolTip="{DynamicResource S.Options.Recorder.DirectX.Info}">
+                                                            ToolTip="{DynamicResource S.Options.Recorder.DirectX.Info}">
                                             <n:ImageRadioButton.Content>
                                                 <Canvas Width="40" Height="29">
                                                     <Path Fill="#ff789639" Data="F1 M 13.333,4.626 L 0.000,4.626 L 0.000,0.000 L 13.333,0.000 L 13.333,4.626 Z"/>
@@ -344,11 +344,11 @@
                                         </Grid.ColumnDefinitions>
 
                                         <n:ImageRadioButton Grid.Column="0" ContentWidth="40" Text="{DynamicResource S.Options.Recorder.File}" Padding="5" Content="{StaticResource Vector.ImageStack}" 
-                                                    IsChecked="{Binding Path=UseMemoryCache, Mode=TwoWay, Converter={StaticResource InvertedBool}}"
-                                                    ToolTip="{DynamicResource S.Options.Recorder.File.Info}"/>
+                                                            IsChecked="{Binding Path=UseMemoryCache, Mode=TwoWay, Converter={StaticResource InvertedBool}}"
+                                                            ToolTip="{DynamicResource S.Options.Recorder.File.Info}"/>
                                         <n:ImageRadioButton Grid.Column="1" ContentWidth="40" Text="{DynamicResource S.Options.Recorder.Cache}" Padding="5" Content="{StaticResource Vector.Cabinet}" 
-                                                    IsChecked="{Binding Path=UseMemoryCache, Mode=TwoWay}"
-                                                    ToolTip="{DynamicResource S.Options.Recorder.Cache.Info}"/>
+                                                            IsChecked="{Binding Path=UseMemoryCache, Mode=TwoWay}"
+                                                            ToolTip="{DynamicResource S.Options.Recorder.Cache.Info}"/>
                                     </Grid>
                                 </WrapPanel>
 
@@ -451,7 +451,7 @@
                                         <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
                                     </Border>
                                     <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme.Light}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" 
-                                               Foreground="{DynamicResource Element.Foreground}"/>
+                                           Foreground="{DynamicResource Element.Foreground}"/>
                                 </StackPanel>
 
                                 <StackPanel Orientation="Horizontal" Tag="Medium">
@@ -474,7 +474,7 @@
                                         <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
                                     </Border>
                                     <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme.Medium}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" 
-                                               Foreground="{DynamicResource Element.Foreground}"/>
+                                           Foreground="{DynamicResource Element.Foreground}"/>
                                 </StackPanel>
 
                                 <StackPanel Orientation="Horizontal" Tag="Dark">
@@ -497,7 +497,7 @@
                                         <TextBlock Text="Aa" Foreground="#FFE8E8E8" HorizontalAlignment="Center"/>
                                     </Border>
                                     <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme.Dark}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" 
-                                               Foreground="{DynamicResource Element.Foreground}"/>
+                                           Foreground="{DynamicResource Element.Foreground}"/>
                                 </StackPanel>
 
                                 <StackPanel Orientation="Horizontal" Tag="VeryDark">
@@ -520,7 +520,7 @@
                                         <TextBlock Text="Aa" Foreground="#FF696969" HorizontalAlignment="Center"/>
                                     </Border>
                                     <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme.VeryDark}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" 
-                                               Foreground="{DynamicResource Element.Foreground}"/>
+                                           Foreground="{DynamicResource Element.Foreground}"/>
                                 </StackPanel>
                             </ComboBox>
                         </Grid>
@@ -1600,7 +1600,7 @@
                             </ComboBox>
 
                             <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Text="Reference: screentogif • nicke@outlook.com.br" Foreground="{DynamicResource Element.Foreground.Gray150}" 
-                                   FontStyle="Italic" HorizontalAlignment="Center" Padding="1"/>
+                                       FontStyle="Italic" HorizontalAlignment="Center" Padding="1"/>
                         </Grid>
 
                         <n:LabelSeparator Grid.Row="2" Grid.Column="0" Text="Patreon" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}"/>
