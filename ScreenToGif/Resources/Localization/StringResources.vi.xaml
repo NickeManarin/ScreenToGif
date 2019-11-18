@@ -70,7 +70,7 @@
     <!--Options Window-->
     <s:String x:Key="S.Options.Title">ScreenToGif - Các tùy chọn</s:String>
     <s:String x:Key="S.Options.App">Ứng dụng</s:String>
-    <s:String x:Key="Interface">Giao diện</s:String>
+    <s:String x:Key="S.Options.Interface">Giao diện</s:String>
     <s:String x:Key="S.AutoTasks">Tự động hóa các nhiệm vụ</s:String>
     <s:String x:Key="S.Shortcuts">Biểu tượng tắt</s:String>
     <s:String x:Key="Image">Hình ảnh</s:String>
@@ -121,43 +121,39 @@
     <s:String x:Key="S.AutomatedTasks.SelectType">(Chọn 1 nhiệm vụ)</s:String>
     <s:String x:Key="S.AutomatedTasks.Info">Các nhiệm vụ này được thực thi tuần tự từ đầu đến cuối danh sách.&#10;Nó xảy ra khi bạn lần đầu mở 1 dự án sử dụng trình chỉnh sửa.</s:String>
     
-    <s:String x:Key="Interface.Theme">Chủ đề ứng dụng</s:String>
-    <s:String x:Key="Interface.Theme.Scheme">Sơ đồ màu</s:String>
-    <s:String x:Key="Interface.EditorBackground">Chỉnh sửa dưới nền</s:String>
-    <s:String x:Key="Interface.Recorder">Chủ đề máy quay</s:String>
-    <s:String x:Key="Interface.Background">Nền</s:String>
-    <s:String x:Key="Interface.Foreground">Ưu tiên</s:String>
-    <s:String x:Key="Interface.BoardBackground">Bảng ghi dưới nền</s:String>
-    <s:String x:Key="Interface.Theme.Scheme.VeryLight">Rất sáng</s:String>
-    <s:String x:Key="Interface.Theme.Scheme.Light">Sáng</s:String>
-    <s:String x:Key="Interface.Theme.Scheme.Medium">Bình thường</s:String>
-    <s:String x:Key="Interface.Theme.Scheme.Dark">Tối</s:String>
-    <s:String x:Key="Interface.Theme.Scheme.VeryDark">Rất tối</s:String>
-    <s:String x:Key="Interface.Theme.Scheme.Custom">Tùy chỉnh</s:String>
-    
-    <s:String x:Key="Interface.EditorBackground.GridSize">Kích thước lưới</s:String>
-    <s:String x:Key="Interface.EditorBackground.GridSize.VerySmall">Rất nhỏ</s:String>
-    <s:String x:Key="Interface.EditorBackground.GridSize.Small">Nhỏ</s:String>
-    <s:String x:Key="Interface.EditorBackground.GridSize.Medium">Bình thường</s:String>
-    <s:String x:Key="Interface.EditorBackground.GridSize.Large">Rộng</s:String>
-    <s:String x:Key="Interface.EditorBackground.GridSize.VeryLarge">Rất rộng</s:String>
-    <s:String x:Key="Interface.EditorBackground.GridSize.ILikeBigSquares">Tôi thích hình vuông lớn</s:String>
-    <s:String x:Key="Interface.EditorBackground.GridSize.ImBlind">Tôi không biết</s:String>
-    <s:String x:Key="Interface.EditorBackground.GridSize.Custom">Tùy chỉnh</s:String>
-
-    <s:String x:Key="Interface.EditorBackground.BaseColor">Màu cơ bản</s:String>
-    <s:String x:Key="Interface.EditorBackground.EvenColor">Màu chẵn</s:String>
-    <s:String x:Key="Interface.EditorBackground.OddColor">Màu lẻ</s:String>
-    <s:String x:Key="Interface.EditorBackground.GridSize.Height">Cao</s:String>
-    <s:String x:Key="Interface.EditorBackground.GridSize.Width">Rộng</s:String>
-    <s:String x:Key="Interface.EditorBackground.GridSize.Apply">Áp dụng</s:String>
-
-    <s:String x:Key="Interface.Other">Khác</s:String>
-    <s:String x:Key="Interface.Other.ExtendChrome">Mở rộng thanh tiêu đề (cửa sổ chrome).</s:String>
-    <s:String x:Key="Interface.Other.HideTitleBar">Ẩn thanh tiêu đề (chế độ mờ).</s:String>
-    <s:String x:Key="Interface.Other.TripleClickSelection">Cho phép 3 click chuột để lựa chọn văn bản.</s:String>
-    <s:String x:Key="Interface.Other.AutomaticallySizeOnContent">Tự động điều chỉnh kích thước cửa sổ dựa trên kích thước khung hình, ngay sau khi nạp.</s:String>
-    <s:String x:Key="Interface.Other.AutomaticallyFitImage">Tự động điều chỉnh thu phóng khung hình dựa trên kích thước cửa sổ, ngay sau khi nạp.</s:String>
+    <s:String x:Key="S.Options.Interface.Theme">Chủ đề ứng dụng</s:String>
+    <s:String x:Key="S.Options.Interface.Theme.Scheme">Sơ đồ màu</s:String>
+    <s:String x:Key="S.Options.Interface.EditorBackground">Chỉnh sửa dưới nền</s:String>
+    <s:String x:Key="S.Options.Interface.Recorder">Chủ đề máy quay</s:String>
+    <s:String x:Key="S.Options.Interface.Background">Nền</s:String>
+    <s:String x:Key="S.Options.Interface.Foreground">Ưu tiên</s:String>
+    <s:String x:Key="S.Options.Interface.BoardBackground">Bảng ghi dưới nền</s:String>
+    <s:String x:Key="S.Options.Interface.Theme.Scheme.VeryLight">Rất sáng</s:String>
+    <s:String x:Key="S.Options.Interface.Theme.Scheme.Light">Sáng</s:String>
+    <s:String x:Key="S.Options.Interface.Theme.Scheme.Medium">Bình thường</s:String>
+    <s:String x:Key="S.Options.Interface.Theme.Scheme.Dark">Tối</s:String>
+    <s:String x:Key="S.Options.Interface.Theme.Scheme.VeryDark">Rất tối</s:String>
+    <s:String x:Key="S.Options.Interface.Theme.Scheme.Custom">Tùy chỉnh</s:String>
+    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize">Kích thước lưới</s:String>
+    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.VerySmall">Rất nhỏ</s:String>
+    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Small">Nhỏ</s:String>
+    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Medium">Bình thường</s:String>
+    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Large">Rộng</s:String>
+    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.VeryLarge">Rất rộng</s:String>
+    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.ILikeBigSquares">Tôi thích hình vuông lớn</s:String>
+    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.ImBlind">Tôi không biết</s:String>
+    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Custom">Tùy chỉnh</s:String>
+    <s:String x:Key="S.Options.Interface.EditorBackground.BaseColor">Màu cơ bản</s:String>
+    <s:String x:Key="S.Options.Interface.EditorBackground.EvenColor">Màu chẵn</s:String>
+    <s:String x:Key="S.Options.Interface.EditorBackground.OddColor">Màu lẻ</s:String>
+    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Height">Cao</s:String>
+    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Width">Rộng</s:String>
+    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Apply">Áp dụng</s:String>
+    <s:String x:Key="S.Options.Interface.Other.ExtendChrome">Mở rộng thanh tiêu đề (cửa sổ chrome).</s:String>
+    <s:String x:Key="S.Options.Interface.Other.HideTitleBar">Ẩn thanh tiêu đề (chế độ mờ).</s:String>
+    <s:String x:Key="S.Options.Interface.Other.TripleClickSelection">Cho phép 3 click chuột để lựa chọn văn bản.</s:String>
+    <s:String x:Key="S.Options.Interface.Other.AutomaticallySizeOnContent">Tự động điều chỉnh kích thước cửa sổ dựa trên kích thước khung hình, ngay sau khi nạp.</s:String>
+    <s:String x:Key="S.Options.Interface.Other.AutomaticallyFitImage">Tự động điều chỉnh thu phóng khung hình dựa trên kích thước cửa sổ, ngay sau khi nạp.</s:String>
   
     <s:String x:Key="S.Shortcuts.Global">Toàn thể</s:String>
     <s:String x:Key="S.Shortcuts.Global.ScreenRecorder">Quay màn hình:</s:String>

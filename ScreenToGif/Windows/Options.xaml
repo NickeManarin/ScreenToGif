@@ -59,7 +59,7 @@
 
                 <n:ImageRadioButton x:Name="AppRadio" Text="{DynamicResource S.Options.App}" Content="{StaticResource Vector.Application}" IsChecked="True"/>
                 <n:ImageRadioButton x:Name="RecorderRadio" Text="{DynamicResource S.Options.Recorder}" Content="{StaticResource Vector.Record}"/>
-                <n:ImageRadioButton x:Name="InterfaceRadio" Text="{DynamicResource Interface}" Content="{StaticResource Vector.Colors}"/>
+                <n:ImageRadioButton x:Name="InterfaceRadio" Text="{DynamicResource S.Options.Interface}" Content="{StaticResource Vector.Colors}"/>
                 <n:ImageRadioButton x:Name="AutomaticRadio" Text="{DynamicResource S.AutoTasks}" Content="{StaticResource Vector.Encoder}"/>
                 <n:ImageRadioButton x:Name="ShortcutsRadio" Text="{DynamicResource S.Shortcuts}" Content="{StaticResource Vector.Keyboard}"/>
                 <n:ImageRadioButton x:Name="LanguageRadio" Text="{DynamicResource Language}" Content="{StaticResource Vector.Translate}"/>
@@ -416,14 +416,14 @@
 
                     <!--Interface-->
                     <StackPanel x:Name="InterfacePanel" Visibility="{Binding IsChecked, ElementName=InterfaceRadio, Converter={StaticResource Bool2Visibility}}" Loaded="InterfacePanel_OnLoaded">
-                        <n:LabelSeparator Text="{DynamicResource Interface.Theme}" Margin="0,0,0,5"/>
+                        <n:LabelSeparator Text="{DynamicResource S.Options.Interface.Theme}" Margin="0,0,0,5"/>
                         <Grid Margin="10,0,0,0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition MinWidth="85" Width="Auto"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <Label Content="{DynamicResource Interface.Theme.Scheme}" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                            <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme}" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                             <ComboBox x:Name="AppThemeComboBox" Grid.Column="1" Height="28" VerticalContentAlignment="Center" Padding="5,0" 
                                       SelectedValuePath="Tag" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=MainTheme, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                       SelectionChanged="AppThemeComboBox_SelectionChanged">
@@ -446,7 +446,7 @@
                                     <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FFEFEFEF" Width="20" Height="20" ToolTip="Pressed">
                                         <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
                                     </Border>
-                                    <Label Content="{DynamicResource Interface.Theme.Scheme.Light}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" 
+                                    <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme.Light}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" 
                                                Foreground="{DynamicResource Element.Foreground}"/>
                                 </StackPanel>
 
@@ -469,7 +469,7 @@
                                     <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FFECECEC" Width="20" Height="20" ToolTip="Pressed">
                                         <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
                                     </Border>
-                                    <Label Content="{DynamicResource Interface.Theme.Scheme.Medium}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" 
+                                    <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme.Medium}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" 
                                                Foreground="{DynamicResource Element.Foreground}"/>
                                 </StackPanel>
 
@@ -492,7 +492,7 @@
                                     <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FF343434" Width="20" Height="20">
                                         <TextBlock Text="Aa" Foreground="#FFE8E8E8" HorizontalAlignment="Center"/>
                                     </Border>
-                                    <Label Content="{DynamicResource Interface.Theme.Scheme.Dark}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" 
+                                    <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme.Dark}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" 
                                                Foreground="{DynamicResource Element.Foreground}"/>
                                 </StackPanel>
 
@@ -515,13 +515,13 @@
                                     <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FF242424" Width="20" Height="20">
                                         <TextBlock Text="Aa" Foreground="#FF696969" HorizontalAlignment="Center"/>
                                     </Border>
-                                    <Label Content="{DynamicResource Interface.Theme.Scheme.VeryDark}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" 
+                                    <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme.VeryDark}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" 
                                                Foreground="{DynamicResource Element.Foreground}"/>
                                 </StackPanel>
                             </ComboBox>
                         </Grid>
 
-                        <n:LabelSeparator Text="{DynamicResource Interface.EditorBackground}" Margin="0,0,0,5"/>
+                        <n:LabelSeparator Text="{DynamicResource S.Options.Interface.EditorBackground}" Margin="0,0,0,5"/>
                         <StackPanel>
                             <Grid Margin="10,0,0,0">
                                 <Grid.ColumnDefinitions>
@@ -529,28 +529,28 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Content="{DynamicResource Interface.Theme.Scheme}" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme}" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                                 <ComboBox x:Name="ColorSchemesComboBox" Grid.Column="1" Height="28" VerticalContentAlignment="Center" Padding="5,0" SelectionChanged="ColorSchemesComboBox_SelectionChanged">
                                     <ComboBox.Items>
                                         <StackPanel Orientation="Horizontal">
                                             <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="#FFF5F5F5" Width="20" Height="20"/>
                                             <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FFF0F0F0" Width="20" Height="20"/>
-                                            <Label Content="{DynamicResource Interface.Theme.Scheme.VeryLight}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                            <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme.VeryLight}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal">
                                             <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="White" Width="20" Height="20"/>
                                             <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FFD3D3D3" Width="20" Height="20"/>
-                                            <Label Content="{DynamicResource Interface.Theme.Scheme.Light}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                            <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme.Light}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal">
                                             <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="#FF999999" Width="20" Height="20"/>
                                             <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FF666666" Width="20" Height="20"/>
-                                            <Label Content="{DynamicResource Interface.Theme.Scheme.Medium}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                            <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme.Medium}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal">
                                             <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="#FF323232" Width="20" Height="20"/>
                                             <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FF2D2D2D" Width="20" Height="20"/>
-                                            <Label Content="{DynamicResource Interface.Theme.Scheme.Dark}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                            <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme.Dark}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                         </StackPanel>
                                         <Separator Height="1"/>
                                         <StackPanel Orientation="Horizontal">
@@ -560,7 +560,7 @@
                                             <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Width="20" Height="20">
                                                 <Label Content="?" Padding="0" HorizontalContentAlignment="Center" FontSize="14" Foreground="{DynamicResource Element.Foreground}"/>
                                             </Border>
-                                            <Label Content="{DynamicResource Interface.Theme.Scheme.Custom}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                            <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme.Custom}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                         </StackPanel>
                                     </ComboBox.Items>
                                 </ComboBox>
@@ -572,48 +572,48 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Content="{DynamicResource Interface.EditorBackground.GridSize}" x:Uid="GridSizeLabel" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize}" x:Uid="GridSizeLabel" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                                 <ComboBox x:Name="GridSizeComboBox" Grid.Column="1" Height="28" Tag="Editor" VerticalContentAlignment="Center" SelectionChanged="GridSizeComboBox_SelectionChanged">
                                     <ComboBox.Items>
                                         <StackPanel x:Name="VerySmallPanel" Orientation="Horizontal">
                                             <Label Content="10 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                            <Label Content="{DynamicResource Interface.EditorBackground.GridSize.VerySmall}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" 
+                                            <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.VerySmall}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" 
                                                    VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                         </StackPanel>
                                         <StackPanel x:Name="SmallPanel" Orientation="Horizontal">
                                             <Label Content="15 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                            <Label Content="{DynamicResource Interface.EditorBackground.GridSize.Small}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" 
+                                            <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Small}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" 
                                                    VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                         </StackPanel>
                                         <StackPanel x:Name="MediumSizePanel" Orientation="Horizontal">
                                             <Label Content="20 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                            <Label Content="{DynamicResource Interface.EditorBackground.GridSize.Medium}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" 
+                                            <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Medium}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" 
                                                    VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                         </StackPanel>
                                         <StackPanel x:Name="LargePanel" Orientation="Horizontal">
                                             <Label Content="25 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                            <Label Content="{DynamicResource Interface.EditorBackground.GridSize.Large}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" 
+                                            <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Large}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" 
                                                    VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                         </StackPanel>
                                         <StackPanel x:Name="VeryLargePanel" Orientation="Horizontal">
                                             <Label Content="30 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                            <Label Content="{DynamicResource Interface.EditorBackground.GridSize.VeryLarge}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" 
+                                            <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.VeryLarge}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" 
                                                    VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                         </StackPanel>
                                         <StackPanel x:Name="ILikeBigSquaresPanel" Orientation="Horizontal">
                                             <Label Content="50 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                            <Label Content="{DynamicResource Interface.EditorBackground.GridSize.ILikeBigSquares}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" 
+                                            <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.ILikeBigSquares}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" 
                                                    VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                         </StackPanel>
                                         <StackPanel x:Name="ImBlindPanel" Orientation="Horizontal">
                                             <Label Content="100 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                            <Label Content="{DynamicResource Interface.EditorBackground.GridSize.ImBlind}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" 
+                                            <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.ImBlind}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" 
                                                    VerticalContentAlignment="Center" Padding="10,0,5,0" FontWeight="Bold" FontSize="14"/>
                                         </StackPanel>
                                         <Separator/>
                                         <StackPanel x:Name="CustomSizePanel" Orientation="Horizontal">
                                             <Label Content="? pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                            <Label Content="{DynamicResource Interface.EditorBackground.GridSize.Custom}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" 
+                                            <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Custom}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" 
                                                    VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                         </StackPanel>
                                     </ComboBox.Items>
@@ -628,14 +628,14 @@
                                 </Grid.ColumnDefinitions>
 
                                 <n:ColorBox Grid.Column="0" x:Name="EvenColorBox" Height="40" SelectedColor="{Binding GridColor1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Tag="Editor"
-                                            ToolTip="{DynamicResource Interface.EditorBackground.EvenColor}" ToolTipService.Placement="Bottom" ColorChanged="ColorBox_ColorChanged"/>
+                                            ToolTip="{DynamicResource S.Options.Interface.EditorBackground.EvenColor}" ToolTipService.Placement="Bottom" ColorChanged="ColorBox_ColorChanged"/>
 
                                 <n:ColorBox Grid.Column="1" x:Name="OddColorBox" Height="40" SelectedColor="{Binding GridColor2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Tag="Editor"
-                                            ToolTip="{DynamicResource Interface.EditorBackground.OddColor}" ToolTipService.Placement="Bottom" BorderThickness="0,1" ColorChanged="ColorBox_ColorChanged"/>
+                                            ToolTip="{DynamicResource S.Options.Interface.EditorBackground.OddColor}" ToolTipService.Placement="Bottom" BorderThickness="0,1" ColorChanged="ColorBox_ColorChanged"/>
 
                                 <Border x:Name="GridSizeBorder" Grid.Column="2" BorderThickness="1" BorderBrush="{DynamicResource Element.Border}"
                                         Background="{StaticResource Checker.DrawingBrush}" Cursor="Hand" MouseLeftButtonDown="GridSizeBorder_MouseLeftButtonDown"
-                                        ToolTip="{DynamicResource Interface.EditorBackground.GridSize}" ToolTipService.Placement="Bottom"/>
+                                        ToolTip="{DynamicResource S.Options.Interface.EditorBackground.GridSize}" ToolTipService.Placement="Bottom"/>
                             </Grid>
 
                             <Grid Margin="10,0,0,0" x:Name="GridSizeGrid" Visibility="Collapsed">
@@ -652,20 +652,20 @@
 
                                 <Viewbox Grid.Column="0" Child="{StaticResource Vector.WidthHeight}" Height="23" Width="23" Margin="3" Opacity="{DynamicResource Element.Opacity}"/>
 
-                                <TextBlock Grid.Column="1" Text="{DynamicResource Interface.EditorBackground.GridSize.Height}" Padding="5" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <TextBlock Grid.Column="1" Text="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Height}" Padding="5" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                                 <n:IntegerUpDown Grid.Column="2" x:Name="GridHeightIntegerUpDown" Minimum="1" Maximum="1000" Margin="5,3" UpdateOnInput="True" Tag="Editor" ValueChanged="GridSizeIntegerUpDown_ValueChanged"/>
 
-                                <TextBlock Grid.Column="3" Text="{DynamicResource Interface.EditorBackground.GridSize.Width}" Padding="5" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <TextBlock Grid.Column="3" Text="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Width}" Padding="5" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                                 <n:IntegerUpDown Grid.Column="4" x:Name="GridWidthIntegerUpDown" Minimum="1" Maximum="1000" Margin="5,3" UpdateOnInput="True" Tag="Editor" ValueChanged="GridSizeIntegerUpDown_ValueChanged"/>
 
-                                <n:ImageButton Grid.Column="6" Text="{DynamicResource Interface.EditorBackground.GridSize.Apply}" Content="{StaticResource Vector.Ok}" Style="{StaticResource Style.Button.Horizontal}" 
+                                <n:ImageButton Grid.Column="6" Text="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Apply}" Content="{StaticResource Vector.Ok}" Style="{StaticResource Style.Button.Horizontal}" 
                                                Padding="2" MaxSize="14" Click="ApplySizeButton_Click"/>
                                 <n:ImageButton Grid.Column="7" Text="{DynamicResource Cancel}" Content="{StaticResource Vector.Cancel}" Style="{StaticResource Style.Button.Horizontal}" 
                                                Padding="2" MaxSize="14" Click="CancelSizeButton_Click"/>
                             </Grid>
                         </StackPanel>
 
-                        <!--<n:LabelSeparator Text="{DynamicResource Interface.BoardBackground}" Visibility="Collapsed"/>-->
+                        <!--<n:LabelSeparator Text="{DynamicResource S.Options.Interface.BoardBackground}" Visibility="Collapsed"/>-->
                         <!--<StackPanel Visibility="Collapsed">
                         <Grid Margin="10,0,0,0">
                             <Grid.ColumnDefinitions>
@@ -673,7 +673,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <Label Content="{DynamicResource Interface.Theme.Scheme}" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                            <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme}" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                             <ComboBox x:Name="ColorSchemes2ComboBox" Grid.Column="1" Height="28" SelectionChanged="BoardColorSchemesComboBox_SelectionChanged" 
                                       VerticalContentAlignment="Center" Padding="5,0">
                                 <ComboBox.Items>
@@ -681,28 +681,28 @@
                                         <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="White" Width="20" Height="20"/>
                                         <Border BorderBrush="#FFACACAC" BorderThickness="0,1,0,1" Background="White" Width="20" Height="20"/>
                                         <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="White" Width="20" Height="20"/>
-                                        <Label Content="{DynamicResource Interface.Theme.Scheme.VeryLight}" VerticalAlignment="Center" 
+                                        <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme.VeryLight}" VerticalAlignment="Center" 
                                                VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="White" Width="20" Height="20"/>
                                         <Border BorderBrush="#FFACACAC" BorderThickness="0,1,0,1" Background="#FFD3D3D3" Width="20" Height="20"/>
                                         <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="#FFD3D3D3" Width="20" Height="20"/>
-                                        <Label Content="{DynamicResource Interface.Theme.Scheme.Light}" VerticalAlignment="Center" 
+                                        <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme.Light}" VerticalAlignment="Center" 
                                                VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="White" Width="20" Height="20"/>
                                         <Border BorderBrush="#FFACACAC" BorderThickness="0,1,0,1" Background="#FF666666" Width="20" Height="20"/>
                                         <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="#FF666666" Width="20" Height="20"/>
-                                        <Label Content="{DynamicResource Interface.Theme.Scheme.Medium}" VerticalAlignment="Center" 
+                                        <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme.Medium}" VerticalAlignment="Center" 
                                                VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="White" Width="20" Height="20"/>
                                         <Border BorderBrush="#FFACACAC" BorderThickness="0,1,0,1" Background="#FF333333" Width="20" Height="20"/>
                                         <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="#FF333333" Width="20" Height="20"/>
-                                        <Label Content="{DynamicResource Interface.Theme.Scheme.Dark}" VerticalAlignment="Center" 
+                                        <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme.Dark}" VerticalAlignment="Center" 
                                                VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <Separator Height="1" IsHitTestVisible="False"/>
@@ -716,7 +716,7 @@
                                         <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Width="20" Height="20">
                                             <Label Content="?" Padding="0" HorizontalContentAlignment="Center" Foreground="#FF4D4D4D" FontSize="14"/>
                                         </Border>
-                                        <Label Content="{DynamicResource Interface.Theme.Scheme.Custom}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme.Custom}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                 </ComboBox.Items>
                             </ComboBox>
@@ -728,42 +728,42 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <Label Content="{DynamicResource Interface.EditorBackground.GridSize}" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                            <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize}" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                             <ComboBox x:Name="GridSize2ComboBox" Grid.Column="1" Height="28" SelectionChanged="GridSizeComboBox_SelectionChanged" Tag="Board"
                                       VerticalContentAlignment="Center" Padding="5,0">
                                 <ComboBox.Items>
                                     <StackPanel Orientation="Horizontal">
                                         <Label Content="10 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.VerySmall}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.VerySmall}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Label Content="15 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.Small}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Small}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Label Content="20 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.Medium}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Medium}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Label Content="25 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.Large}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Large}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Label Content="30 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.VeryLarge}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.VeryLarge}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Label Content="50 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.ILikeBigSquares}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.ILikeBigSquares}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Label Content="100 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.ImBlind}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" FontWeight="Bold" FontSize="14"/>
+                                        <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.ImBlind}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" FontWeight="Bold" FontSize="14"/>
                                     </StackPanel>
                                     <Separator />
                                     <StackPanel Orientation="Horizontal">
                                         <Label Content="? pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.Custom}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Custom}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                 </ComboBox.Items>
                             </ComboBox>
@@ -775,24 +775,24 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <Label Content="{DynamicResource Interface.EditorBackground.GridSize}" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                            <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize}" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                             <ComboBox x:Name="BackgroundStyleComboBox" Grid.Column="1" Height="28" VerticalContentAlignment="Center">
                                 <ComboBox.Items>
                                     <StackPanel Orientation="Horizontal">
                                         <Label Content="10 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.VerySmall}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.VerySmall}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Label Content="15 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.Small}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Small}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Label Content="20 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.Medium}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Medium}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Label Content="25 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="{DynamicResource Interface.EditorBackground.GridSize.Large}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Large}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                 </ComboBox.Items>
                             </ComboBox>
@@ -809,36 +809,36 @@
                             <Border Grid.Column="0" x:Name="BackgroundBorder" Height="40" BorderThickness="1" BorderBrush="#FFACACAC" Cursor="Hand" 
                                     MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown" Tag="Board"
                                     Background="{Binding BoardGridBackground, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
-                                    ToolTip="{DynamicResource Interface.EditorBackground.BaseColor}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                                    ToolTip="{DynamicResource S.Options.Interface.EditorBackground.BaseColor}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                             <Border Grid.Column="1" x:Name="EvenColor2Border" Height="40" BorderThickness="0,1,1,1" BorderBrush="#FFACACAC" Cursor="Hand" 
                                     MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown" Tag="Board"
                                     Background="{Binding BoardGridColor1, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
-                                    ToolTip="{DynamicResource Interface.EditorBackground.EvenColor}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                                    ToolTip="{DynamicResource S.Options.Interface.EditorBackground.EvenColor}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                             <Border Grid.Column="2" x:Name="OddColor2Border" BorderThickness="0,1" BorderBrush="#FFACACAC" Cursor="Hand" 
                                     MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown" Tag="Board"
                                     Background="{Binding BoardGridColor2, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
-                                    ToolTip="{DynamicResource Interface.EditorBackground.OddColor}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                                    ToolTip="{DynamicResource S.Options.Interface.EditorBackground.OddColor}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                             <Border Grid.Column="3" x:Name="GridSize2Border" BorderThickness="1" BorderBrush="#FFACACAC"
                                     Background="{StaticResource Background.Lines}" Cursor="Hand" MouseLeftButtonDown="GridSize2Border_MouseLeftButtonDown"
-                                    ToolTip="{DynamicResource Interface.EditorBackground.GridSize}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5">
+                                    ToolTip="{DynamicResource S.Options.Interface.EditorBackground.GridSize}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5">
 
                                 <Border.ContextMenu>
                                     <ContextMenu x:Name="GridSize2ContextMenu">
-                                        <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Height}" IsHitTestVisible="False" 
+                                        <n:ImageMenuItem Header="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Height}" IsHitTestVisible="False" 
                                                          Image="{StaticResource Vector.WidthHeight}" MaxSize="16" />
                                         <n:IntegerBox x:Name="GridHeight2TextBox" Minimum="1" Maximum="1000" MinWidth="80" Margin="-10,0,0,0" Tag="Board"
                                                       UpdateOnInput="True" Value="{Binding Default.BoardGridSize.Height}"
                                                       LostFocus="GridSizeTextBox_LostFocus" MouseWheel="GridSizeTextBox_MouseWheel" />
 
-                                        <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Width}" IsHitTestVisible="False" 
+                                        <n:ImageMenuItem Header="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Width}" IsHitTestVisible="False" 
                                                          Image="{StaticResource Vector.WidthHeight}" MaxSize="16"/>
                                         <n:IntegerBox x:Name="GridWidth2TextBox" Minimum="1" Maximum="1000" MinWidth="80" Margin="-10,0,0,0" Tag="Board"
                                                       UpdateOnInput="True" Value="{Binding Default.BoardGridSize.Width}"
                                                       LostFocus="GridSizeTextBox_LostFocus" MouseWheel="GridSizeTextBox_MouseWheel" />
                                         <Separator/>
 
-                                        <n:ImageMenuItem Header="{DynamicResource Interface.EditorBackground.GridSize.Apply}" Image="{StaticResource Vector.Ok}" MaxSize="16"/>
+                                        <n:ImageMenuItem Header="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Apply}" Image="{StaticResource Vector.Ok}" MaxSize="16"/>
                                     </ContextMenu>
                                 </Border.ContextMenu>
                             </Border>
@@ -846,11 +846,11 @@
                     </StackPanel>-->
 
                         <n:LabelSeparator Text="{DynamicResource S.Options.Other}" Margin="0,0,0,5"/>
-                        <n:ExtendedCheckBox Text="{DynamicResource Interface.Other.ExtendChrome}" IsChecked="{Binding Path=EditorExtendChrome, Mode=TwoWay}" Margin="10,0,0,5"/>
-                        <n:ExtendedCheckBox Text="{DynamicResource Interface.Other.HideTitleBar}" IsChecked="{Binding Path=RecorderThinMode, Mode=TwoWay}" Margin="10,0,0,5"/>
-                        <n:ExtendedCheckBox Text="{DynamicResource Interface.Other.TripleClickSelection}" IsChecked="{Binding Path=TripleClickSelection, Mode=TwoWay}" Margin="10,0,0,5"/>
-                        <n:ExtendedCheckBox Text="{DynamicResource Interface.Other.AutomaticallySizeOnContent}" IsChecked="{Binding Path=AutomaticallySizeOnContent, Mode=TwoWay}" Margin="10,0,0,5"/>
-                        <n:ExtendedCheckBox Text="{DynamicResource Interface.Other.AutomaticallyFitImage}" IsChecked="{Binding Path=AutomaticallyFitImage, Mode=TwoWay}" Margin="10,0,0,5"/>
+                        <n:ExtendedCheckBox Text="{DynamicResource S.Options.Interface.Other.ExtendChrome}" IsChecked="{Binding Path=EditorExtendChrome, Mode=TwoWay}" Margin="10,0,0,5"/>
+                        <n:ExtendedCheckBox Text="{DynamicResource S.Options.Interface.Other.HideTitleBar}" IsChecked="{Binding Path=RecorderThinMode, Mode=TwoWay}" Margin="10,0,0,5"/>
+                        <n:ExtendedCheckBox Text="{DynamicResource S.Options.Interface.Other.TripleClickSelection}" IsChecked="{Binding Path=TripleClickSelection, Mode=TwoWay}" Margin="10,0,0,5"/>
+                        <n:ExtendedCheckBox Text="{DynamicResource S.Options.Interface.Other.AutomaticallySizeOnContent}" IsChecked="{Binding Path=AutomaticallySizeOnContent, Mode=TwoWay}" Margin="10,0,0,5"/>
+                        <n:ExtendedCheckBox Text="{DynamicResource S.Options.Interface.Other.AutomaticallyFitImage}" IsChecked="{Binding Path=AutomaticallyFitImage, Mode=TwoWay}" Margin="10,0,0,5"/>
                     </StackPanel>
 
                     <!--Tasks-->

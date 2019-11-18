@@ -41,7 +41,7 @@
     <!--Options Page-->
     <s:String x:Key="S.Options.Title">Налаштування ScreenToGif</s:String>
     <s:String x:Key="S.Options.App">Програма</s:String>
-    <s:String x:Key="Interface">Інтерфейс</s:String>
+    <s:String x:Key="S.Options.Interface">Інтерфейс</s:String>
     <s:String x:Key="Image">Зображення</s:String>
     <s:String x:Key="Language">Мова</s:String>
     <s:String x:Key="TemporaryFiles">Тимчасові файли</s:String>
@@ -71,39 +71,35 @@
     <s:String x:Key="S.Options.Other">Інше</s:String>
     <!--<s:String x:Key="S.Options.App.General.CheckForUpdates">Check for updates.</s:String>-->
     
-    <s:String x:Key="Interface.EditorBackground">Тло редактора</s:String>
-    <s:String x:Key="Interface.Recorder">Тема</s:String>
-    <s:String x:Key="Interface.Background">Тло</s:String>
-    <s:String x:Key="Interface.Foreground">Передній план</s:String>
-    <s:String x:Key="Interface.BoardBackground">Тло дошки</s:String>
-    <s:String x:Key="Interface.Theme.Scheme">Кольорова схема</s:String>
-    <s:String x:Key="Interface.Theme.Scheme.VeryLight">Дуже світлий</s:String>
-    <s:String x:Key="Interface.Theme.Scheme.Light">Світлий</s:String>
-    <s:String x:Key="Interface.Theme.Scheme.Medium">Середній</s:String>
-    <s:String x:Key="Interface.Theme.Scheme.Dark">Темний</s:String>
-    <s:String x:Key="Interface.Theme.Scheme.Custom">Вибірковий</s:String>
-    
-    <s:String x:Key="Interface.EditorBackground.GridSize">Розмір комірки</s:String>
-    <s:String x:Key="Interface.EditorBackground.GridSize.VerySmall">Дуже малий</s:String>
-    <s:String x:Key="Interface.EditorBackground.GridSize.Small">Малий</s:String>
-    <s:String x:Key="Interface.EditorBackground.GridSize.Medium">Середній</s:String>
-    <s:String x:Key="Interface.EditorBackground.GridSize.Large">Великий</s:String>
-    <s:String x:Key="Interface.EditorBackground.GridSize.VeryLarge">Дуже великий</s:String>
-    <s:String x:Key="Interface.EditorBackground.GridSize.ILikeBigSquares">Я люблю великі квадрати</s:String>
-    <s:String x:Key="Interface.EditorBackground.GridSize.ImBlind">Я сліпий</s:String>
-    <s:String x:Key="Interface.EditorBackground.GridSize.Custom">Вибірковий</s:String>
-
-    <s:String x:Key="Interface.EditorBackground.BaseColor">Типовий колір</s:String>
-    <s:String x:Key="Interface.EditorBackground.EvenColor">Один колір</s:String>
-    <s:String x:Key="Interface.EditorBackground.OddColor">Другий колір</s:String>
-    <s:String x:Key="Interface.EditorBackground.GridSize.Height">Висота</s:String>
-    <s:String x:Key="Interface.EditorBackground.GridSize.Width">Ширина</s:String>
-    <s:String x:Key="Interface.EditorBackground.GridSize.Apply">Застосувати</s:String>
-
-    <s:String x:Key="Interface.Other">Інше</s:String>
-    <s:String x:Key="Interface.Other.ExtendChrome">Розширити панель меню/chrome.</s:String>
-    <s:String x:Key="Interface.Other.HideTitleBar">Приховати панель меню (полегшений режим).</s:String>
-    <!--<s:String x:Key="Interface.Other.TripleClickSelection">Enable triple-click to select the text.</s:String>-->
+    <s:String x:Key="S.Options.Interface.EditorBackground">Тло редактора</s:String>
+    <s:String x:Key="S.Options.Interface.Recorder">Тема</s:String>
+    <s:String x:Key="S.Options.Interface.Background">Тло</s:String>
+    <s:String x:Key="S.Options.Interface.Foreground">Передній план</s:String>
+    <s:String x:Key="S.Options.Interface.BoardBackground">Тло дошки</s:String>
+    <s:String x:Key="S.Options.Interface.Theme.Scheme">Кольорова схема</s:String>
+    <s:String x:Key="S.Options.Interface.Theme.Scheme.VeryLight">Дуже світлий</s:String>
+    <s:String x:Key="S.Options.Interface.Theme.Scheme.Light">Світлий</s:String>
+    <s:String x:Key="S.Options.Interface.Theme.Scheme.Medium">Середній</s:String>
+    <s:String x:Key="S.Options.Interface.Theme.Scheme.Dark">Темний</s:String>
+    <s:String x:Key="S.Options.Interface.Theme.Scheme.Custom">Вибірковий</s:String>
+    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize">Розмір комірки</s:String>
+    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.VerySmall">Дуже малий</s:String>
+    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Small">Малий</s:String>
+    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Medium">Середній</s:String>
+    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Large">Великий</s:String>
+    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.VeryLarge">Дуже великий</s:String>
+    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.ILikeBigSquares">Я люблю великі квадрати</s:String>
+    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.ImBlind">Я сліпий</s:String>
+    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Custom">Вибірковий</s:String>
+    <s:String x:Key="S.Options.Interface.EditorBackground.BaseColor">Типовий колір</s:String>
+    <s:String x:Key="S.Options.Interface.EditorBackground.EvenColor">Один колір</s:String>
+    <s:String x:Key="S.Options.Interface.EditorBackground.OddColor">Другий колір</s:String>
+    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Height">Висота</s:String>
+    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Width">Ширина</s:String>
+    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Apply">Застосувати</s:String>
+    <s:String x:Key="S.Options.Interface.Other.ExtendChrome">Розширити панель меню/chrome.</s:String>
+    <s:String x:Key="S.Options.Interface.Other.HideTitleBar">Приховати панель меню (полегшений режим).</s:String>
+    <!--<s:String x:Key="S.Options.Interface.Other.TripleClickSelection">Enable triple-click to select the text.</s:String>-->
   
     <s:String x:Key="S.Shortcuts.Recorders.StartPause">Старт/Пауза:</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.Stop">Зупинити:</s:String>
