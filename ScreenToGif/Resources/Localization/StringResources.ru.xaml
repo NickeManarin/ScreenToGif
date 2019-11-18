@@ -377,14 +377,25 @@
     <s:String x:Key="Extras.License.Gifski">Лицензия Gifski</s:String>
     <s:String x:Key="Extras.License.SharpDx">Лицензия SharpDx</s:String>
 
-    <s:String x:Key="S.Donate.Donate.Dollar">USD</s:String>
-    <s:String x:Key="S.Donate.Donate.Euro">EUR</s:String>
-    <s:String x:Key="S.Donate.Donate">Пожертвовать</s:String>
+    <!--Donations-->
+    <s:String x:Key="S.Donate.Donate">Отблагодарить автора</s:String>
+    <s:String x:Key="S.Donate.Donate.Dollar">U$D</s:String>
+    <s:String x:Key="S.Donate.Donate.Euro">€UR</s:String>
     <s:String x:Key="S.Donate.Paypal.Dollar">Открыть сайт PayPal. Валюта: USD</s:String>
     <s:String x:Key="S.Donate.Paypal.Euro">Открыть сайт PayPal. Валюта: EUR</s:String>
-    <s:String x:Key="S.Donate.Paypal.OwnCurrency">Открыть сайт PayPal. Необходимо выбрать валюту.</s:String>
+    <s:String x:Key="S.Donate.Paypal.OwnCurrency">Открыть сайт PayPal. Выбор валюты.</s:String>
+    <s:String x:Key="S.Donate.Subscribe">Подписки</s:String>
+    <s:String x:Key="S.Donate.Subscribe.Patreon">Ежемесячное пожертвование через Patreon.</s:String>
+    <s:String x:Key="S.Donate.Subscribe.Flattr">Ежемесячное пожертвование через Flattr.</s:String>
+    <s:String x:Key="S.Donate.Gift">Игры в подарок</s:String>
+    <s:String x:Key="S.Donate.Gift.Steam">Подарить игры через Steam.</s:String>
+    <s:String x:Key="S.Donate.Gift.Gog">Подарить игры через GOG.</s:String>
+    <s:String x:Key="S.Donate.Kofi">Оплатить кофе через Ko-fi.</s:String>
     <s:String x:Key="S.Donate.Crypto">Криптовалюты</s:String>
-
+    <s:String x:Key="S.Donate.Crypto.BitcoinCash">Копировать адрес BitcoinCash.</s:String>
+    <s:String x:Key="S.Donate.Support">Поддержка</s:String>
+    <s:String x:Key="S.Donate.Support.Visit">Если вы хотите поддержать проект :)</s:String>
+    
     <s:String x:Key="About.Version">Версия:</s:String>
     <s:String x:Key="About.Author">Автор: Nicke Manarin</s:String>
     <s:String x:Key="S.About.StoreVersion">Версия магазина Microsoft. Некоторые функции отключены из-за принудительных политик.</s:String>
@@ -506,6 +517,7 @@
 
     <!--Import Frames From Video-->
     <s:String x:Key="S.ImportVideo.Title">Импортировать кадры из видео</s:String>
+    <s:String x:Key="S.ImportVideo.Importer">Импортер:</s:String>
     <s:String x:Key="S.ImportVideo.Loading">Загрузка...</s:String>
     <s:String x:Key="S.ImportVideo.Scale">Масштаб:</s:String>
     <s:String x:Key="S.ImportVideo.Size">Размер:</s:String>
@@ -519,6 +531,9 @@
     <s:String x:Key="S.ImportVideo.Frames">Кадры:</s:String>
     <s:String x:Key="S.ImportVideo.Duration">Продолжительность:</s:String>
     <s:String x:Key="S.ImportVideo.Error">Не удалось загрузить видео.</s:String>
+    <s:String x:Key="S.ImportVideo.Error.Detail">Не удалось запустить предпросмотр. Попробуйте использовать другой импортер, проверьте, не повреждено ли видео.&#x0d;Если вы используете MediaPlayer, проверьте, включен ли компонент Windows - "Компоненты для работы с мультимедиа/Проигрыватель  Windows Media" и убедитесь, что у вас установлен необходимый видеокодек.</s:String>
+    <s:String x:Key="S.ImportVideo.Timeout">Тайм-аут при предпросмотре кадра.</s:String>
+    <s:String x:Key="S.ImportVideo.Nothing">Не выбраны кадры для импорта.</s:String>
     
     <!--Encoder-->
     <s:String x:Key="Encoder.Title">Кодер</s:String>
@@ -975,7 +990,7 @@
     
     <s:String x:Key="Border.Appearance">Внешний вид</s:String>
     <s:String x:Key="S.Border.Info">Используйте отрицательные значения, чтобы расширить границу. При этом граница будет применена ко всем кадрам.&#x0d;Если отрицательное значение не используется, граница будет применена только к выбранным кадрам.</s:String>
-    
+
     <s:String x:Key="S.Shadow.ShadowColor">Цвет тени:</s:String>
     <s:String x:Key="S.Shadow.BackgroundColor">Цвет фона:</s:String>
     <s:String x:Key="S.Shadow.Direction">Направление:</s:String>
