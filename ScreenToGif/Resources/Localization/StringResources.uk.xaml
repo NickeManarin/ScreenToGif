@@ -42,12 +42,11 @@
     <s:String x:Key="S.Options.Title">Налаштування ScreenToGif</s:String>
     <s:String x:Key="S.Options.App">Програма</s:String>
     <s:String x:Key="S.Options.Interface">Інтерфейс</s:String>
-    <s:String x:Key="Image">Зображення</s:String>
-    <s:String x:Key="Language">Мова</s:String>
-    <s:String x:Key="TemporaryFiles">Тимчасові файли</s:String>
-    <s:String x:Key="Extras">Додатково</s:String>
+    <s:String x:Key="S.Options.Language">Мова</s:String>
+    <s:String x:Key="S.Options.Storage">Тимчасові файли</s:String>
+    <s:String x:Key="S.Options.Extras">Додатково</s:String>
     <s:String x:Key="S.Options.Donate">Пожертва</s:String>
-    <s:String x:Key="About">Про</s:String>
+    <s:String x:Key="S.Options.About">Про</s:String>
     
     <s:String x:Key="S.Options.App.Startup.Window.Startup">Стартове вікно</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Recorder">Запис з екрану</s:String>
@@ -101,44 +100,44 @@
     <s:String x:Key="S.Options.Interface.Other.HideTitleBar">Приховати панель меню (полегшений режим).</s:String>
     <!--<s:String x:Key="S.Options.Interface.Other.TripleClickSelection">Enable triple-click to select the text.</s:String>-->
   
-    <s:String x:Key="S.Shortcuts.Recorders.StartPause">Старт/Пауза:</s:String>
-    <s:String x:Key="S.Shortcuts.Recorders.Stop">Зупинити:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause">Старт/Пауза:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Stop">Зупинити:</s:String>
     
-    <s:String x:Key="Language.AppLanguage">Мова</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage">Мова</s:String>
     
-    <s:String x:Key="TempFiles.FilesAndFolders">Тимчасові файли та папки</s:String>
-    <s:String x:Key="TempFiles.Folders">Папки:</s:String>
-    <s:String x:Key="TempFiles.Files">Файли:</s:String>
-    <s:String x:Key="TempFiles.OpenFolder">Відкрити папку</s:String>
-    <s:String x:Key="TempFiles.Clear">Чистити тимч.папку</s:String>
-    <!--<s:String x:Key="TempFiles.LogsLocation">Logs folder</s:String>-->
-    <!--<s:String x:Key="TempFiles.LogsLocation.Choose">Choose the location for the error logs files</s:String>-->
-    <s:String x:Key="TempFiles.Location">Місцезнаходження папки</s:String>
-    <s:String x:Key="TempFiles.Location.Choose">Вибрати місцерозташування для тимчасових файлів</s:String>
-    <!--<s:String x:Key="TempFiles.Settings">Settings location</s:String>-->
-    <!--<s:String x:Key="TempFiles.AppDataPath">AppData:</s:String>-->
-    <!--<s:String x:Key="TempFiles.LocalPath">Local:</s:String>-->
-    <!--<s:String x:Key="TempFiles.NotExists">It doesn't exist</s:String>-->
-    <!--<s:String x:Key="TempFiles.CreateSettings">Create an empty local settings file.</s:String>-->
-    <!--<s:String x:Key="TempFiles.RemoveSettings">Remove the settings file.</s:String>-->
-    <!--<s:String x:Key="TempFiles.SettingsInfo">• Settings loading pattern: Default ◄ AppData ◄ Local.&#x0d;• If there's no settings file present at the Local folder, the app searches inside the AppData folder, Default is used if no settings file present.&#x0d;• If there's no Local settings, all settings are saved on the AppData settings file.</s:String>-->
+    <s:String x:Key="S.Options.Storage.FilesAndFolders">Тимчасові файли та папки</s:String>
+    <s:String x:Key="S.Options.Storage.Folders">Папки:</s:String>
+    <s:String x:Key="S.Options.Storage.Files">Файли:</s:String>
+    <s:String x:Key="S.Options.Storage.OpenFolder">Відкрити папку</s:String>
+    <s:String x:Key="S.Options.Storage.Clear">Чистити тимч.папку</s:String>
+    <!--<s:String x:Key="S.Options.Storage.LogsLocation">Logs folder</s:String>-->
+    <!--<s:String x:Key="S.Options.Storage.LogsLocation.Choose">Choose the location for the error logs files</s:String>-->
+    <s:String x:Key="S.Options.Storage.Location">Місцезнаходження папки</s:String>
+    <s:String x:Key="S.Options.Storage.Location.Choose">Вибрати місцерозташування для тимчасових файлів</s:String>
+    <!--<s:String x:Key="S.Options.Storage.Settings">Settings location</s:String>-->
+    <!--<s:String x:Key="S.Options.Storage.AppDataPath">AppData:</s:String>-->
+    <!--<s:String x:Key="S.Options.Storage.LocalPath">Local:</s:String>-->
+    <!--<s:String x:Key="S.Options.Storage.NotExists">It doesn't exist</s:String>-->
+    <!--<s:String x:Key="S.Options.Storage.CreateSettings">Create an empty local settings file.</s:String>-->
+    <!--<s:String x:Key="S.Options.Storage.RemoveSettings">Remove the settings file.</s:String>-->
+    <!--<s:String x:Key="S.Options.Storage.SettingsInfo">• Settings loading pattern: Default ◄ AppData ◄ Local.&#x0d;• If there's no settings file present at the Local folder, the app searches inside the AppData folder, Default is used if no settings file present.&#x0d;• If there's no Local settings, all settings are saved on the AppData settings file.</s:String>-->
 
-    <s:String x:Key="Extras.FfmpegLocation">Місцезнаходження FFmpeg</s:String>
-    <s:String x:Key="Extras.FfmpegLocation.Select">Виберіть місцезнаходження виконавчого файлу FFmpeg</s:String>
+    <s:String x:Key="S.Options.Extras.FfmpegLocation">Місцезнаходження FFmpeg</s:String>
+    <s:String x:Key="S.Options.Extras.FfmpegLocation.Select">Виберіть місцезнаходження виконавчого файлу FFmpeg</s:String>
     
-    <s:String x:Key="S.Donate.Donate.Dollar">Пожертвуйте US$</s:String>
-    <s:String x:Key="S.Donate.Donate.Euro">Пожертвуйте €</s:String>
-    <s:String x:Key="S.Donate.Donate">Пожертвуйте</s:String>
+    <s:String x:Key="S.Options.Donate.Donate.Dollar">Пожертвуйте US$</s:String>
+    <s:String x:Key="S.Options.Donate.Donate.Euro">Пожертвуйте €</s:String>
+    <s:String x:Key="S.Options.Donate.Donate">Пожертвуйте</s:String>
 
-    <s:String x:Key="About.Version">Версія:</s:String>
-    <s:String x:Key="About.Author">Автор: Nicke Manarin</s:String>
-    <s:String x:Key="About.Contact">Контакти</s:String>
-    <!--<s:String x:Key="About.Technical">Technical</s:String>-->
-    <!--<s:String x:Key="About.Technical.License">License:</s:String>-->
-    <!--<s:String x:Key="About.Technical.Free">(This is a completely free app)</s:String>-->
-    <!--<s:String x:Key="About.Technical.SourceCode">Source code:</s:String>-->
-    <s:String x:Key="About.ABigThanksTo">Подяка</s:String>
-    <!--<s:String x:Key="About.ABigThanksTo.Everyone">All my supporters, people who provided feedback and/or donations.</s:String>-->
+    <s:String x:Key="S.Options.About.Version">Версія:</s:String>
+    <s:String x:Key="S.Options.About.Author">Автор: Nicke Manarin</s:String>
+    <s:String x:Key="S.Options.About.Contact">Контакти</s:String>
+    <!--<s:String x:Key="S.Options.About.Technical">Technical</s:String>-->
+    <!--<s:String x:Key="S.Options.About.Technical.License">License:</s:String>-->
+    <!--<s:String x:Key="S.Options.About.Technical.Free">(This is a completely free app)</s:String>-->
+    <!--<s:String x:Key="S.Options.About.Technical.SourceCode">Source code:</s:String>-->
+    <s:String x:Key="S.Options.About.ABigThanksTo">Подяка</s:String>
+    <!--<s:String x:Key="S.Options.About.ABigThanksTo.Everyone">All my supporters, people who provided feedback and/or donations.</s:String>-->
 
     <!--Recorder-->
     <s:String x:Key="Recorder.RecordingOptions">Параметри запису:</s:String>

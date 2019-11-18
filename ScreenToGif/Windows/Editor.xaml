@@ -2166,10 +2166,10 @@
                                             <ComboBox Grid.Column="0" Name="UploadComboBox" Margin="20,3,3,3" Height="23" SelectedValuePath="Tag"
                                                       SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=LatestUploadService, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                       Visibility="{Binding IsChecked, ElementName=UploadFileCheckBox, Converter={StaticResource Bool2Visibility}}" ToolTip="{DynamicResource S.SaveAs.SaveOptions.UploadDestination}">
-                                                <ComboBoxItem Tag="{x:Static u:UploadService.None}" Content="{DynamicResource S.Upload.Pick.Destination}"/>
-                                                <ComboBoxItem Tag="{x:Static u:UploadService.ImgurAnonymous}" Content="{DynamicResource S.Upload.Imgur.Anonymous}"/>
+                                                <ComboBoxItem Tag="{x:Static u:UploadService.None}" Content="{DynamicResource S.Options.Upload.Pick.Destination}"/>
+                                                <ComboBoxItem Tag="{x:Static u:UploadService.ImgurAnonymous}" Content="{DynamicResource S.Options.Upload.Imgur.Anonymous}"/>
                                                 <ComboBoxItem Tag="{x:Static u:UploadService.Imgur}" Content="Imgur"/>
-                                                <ComboBoxItem Tag="{x:Static u:UploadService.GfycatAnonymous}" Content="{DynamicResource S.Upload.Gfycat.Anonymous}"/>
+                                                <ComboBoxItem Tag="{x:Static u:UploadService.GfycatAnonymous}" Content="{DynamicResource S.Options.Upload.Gfycat.Anonymous}"/>
                                                 <ComboBoxItem Tag="{x:Static u:UploadService.Yandex}" Content="YandexDisk"/>
                                             </ComboBox>
                                         </Grid>

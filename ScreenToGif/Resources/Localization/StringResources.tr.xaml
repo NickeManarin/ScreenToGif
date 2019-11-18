@@ -41,14 +41,13 @@
     <!--Options Page-->
     <s:String x:Key="S.Options.Title">ScreenToGif - Ayarlar</s:String>
     <s:String x:Key="S.Options.App">Uygulama</s:String>
-    <s:String x:Key="S.Shortcuts">Klavye Kısayolları</s:String>
+    <s:String x:Key="S.Options.Shortcuts">Klavye Kısayolları</s:String>
     <s:String x:Key="S.Options.Interface">Arayüz</s:String>
-    <s:String x:Key="Image">Görüntü</s:String>
-    <s:String x:Key="Language">Dil</s:String>
-    <s:String x:Key="TemporaryFiles">Geçici Dosyalar</s:String>
-    <s:String x:Key="Extras">Ekstralar</s:String>
+    <s:String x:Key="S.Options.Language">Dil</s:String>
+    <s:String x:Key="S.Options.Storage">Geçici Dosyalar</s:String>
+    <s:String x:Key="S.Options.Extras">Ekstralar</s:String>
     <s:String x:Key="S.Options.Donate">Bağış Yap</s:String>
-    <s:String x:Key="About">Hakkında</s:String>
+    <s:String x:Key="S.Options.About">Hakkında</s:String>
     
     <s:String x:Key="S.Options.App.Startup.Window.Startup">Başlangıç Ekranı</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Recorder">Ekran Kaydedici</s:String>
@@ -72,8 +71,8 @@
     <s:String x:Key="S.Options.Other">Diğer</s:String>
     <s:String x:Key="S.Options.App.General.CheckForUpdates">Güncellemeleri kontrol et.</s:String>
     
-    <s:String x:Key="S.Shortcuts.Recorders.StartPause">Başlat/Duraklat:</s:String>
-    <s:String x:Key="S.Shortcuts.Recorders.Stop">Durdur:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause">Başlat/Duraklat:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Stop">Durdur:</s:String>
     
     <s:String x:Key="S.Options.Interface.EditorBackground">Editör Arkaplanı</s:String>
     <s:String x:Key="S.Options.Interface.Recorder">Kayıt teması</s:String>
@@ -105,41 +104,41 @@
     <s:String x:Key="S.Options.Interface.Other.HideTitleBar">Başlık çubuğunu gizle (ince mod).</s:String>
     <s:String x:Key="S.Options.Interface.Other.TripleClickSelection"> Metin seçmek için üçlü tıklamayı aç.</s:String>
   
-    <s:String x:Key="Language.AppLanguage">Uygulama Dili</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage">Uygulama Dili</s:String>
     
-    <s:String x:Key="TempFiles.FilesAndFolders">Geçici Dosya ve Klasörler</s:String>
-    <s:String x:Key="TempFiles.Folders">Klasörler:</s:String>
-    <s:String x:Key="TempFiles.Files">Dosyalar:</s:String>
-    <s:String x:Key="TempFiles.OpenFolder">Klasör Aç</s:String>
-    <s:String x:Key="TempFiles.Clear">Geçici Klasörü Temizle</s:String>
-    <!--<s:String x:Key="TempFiles.LogsLocation">Logs folder</s:String>-->
-    <!--<s:String x:Key="TempFiles.LogsLocation.Choose">Choose the location for the error logs files</s:String>-->
-    <!--<s:String x:Key="TempFiles.Location">Location folder</s:String>-->
-    <!--<s:String x:Key="TempFiles.Location.Choose">Choose the location for the temporary files</s:String>-->
-    <!--<s:String x:Key="TempFiles.Settings">Settings location</s:String>-->
-    <!--<s:String x:Key="TempFiles.AppDataPath">AppData:</s:String>-->
-    <!--<s:String x:Key="TempFiles.LocalPath">Local:</s:String>-->
-    <!--<s:String x:Key="TempFiles.NotExists">It doesn't exist</s:String>-->
-    <!--<s:String x:Key="TempFiles.CreateSettings">Create an empty local settings file.</s:String>-->
-    <!--<s:String x:Key="TempFiles.RemoveSettings">Remove the settings file.</s:String>-->
-    <!--<s:String x:Key="TempFiles.SettingsInfo">• Settings loading pattern: Default ◄ AppData ◄ Local.&#x0d;• If there's no settings file present at the Local folder, the app searches inside the AppData folder, Default is used if no settings file present.&#x0d;• If there's no Local settings, all settings are saved on the AppData settings file.</s:String>-->
+    <s:String x:Key="S.Options.Storage.FilesAndFolders">Geçici Dosya ve Klasörler</s:String>
+    <s:String x:Key="S.Options.Storage.Folders">Klasörler:</s:String>
+    <s:String x:Key="S.Options.Storage.Files">Dosyalar:</s:String>
+    <s:String x:Key="S.Options.Storage.OpenFolder">Klasör Aç</s:String>
+    <s:String x:Key="S.Options.Storage.Clear">Geçici Klasörü Temizle</s:String>
+    <!--<s:String x:Key="S.Options.Storage.LogsLocation">Logs folder</s:String>-->
+    <!--<s:String x:Key="S.Options.Storage.LogsLocation.Choose">Choose the location for the error logs files</s:String>-->
+    <!--<s:String x:Key="S.Options.Storage.Location">Location folder</s:String>-->
+    <!--<s:String x:Key="S.Options.Storage.Location.Choose">Choose the location for the temporary files</s:String>-->
+    <!--<s:String x:Key="S.Options.Storage.Settings">Settings location</s:String>-->
+    <!--<s:String x:Key="S.Options.Storage.AppDataPath">AppData:</s:String>-->
+    <!--<s:String x:Key="S.Options.Storage.LocalPath">Local:</s:String>-->
+    <!--<s:String x:Key="S.Options.Storage.NotExists">It doesn't exist</s:String>-->
+    <!--<s:String x:Key="S.Options.Storage.CreateSettings">Create an empty local settings file.</s:String>-->
+    <!--<s:String x:Key="S.Options.Storage.RemoveSettings">Remove the settings file.</s:String>-->
+    <!--<s:String x:Key="S.Options.Storage.SettingsInfo">• Settings loading pattern: Default ◄ AppData ◄ Local.&#x0d;• If there's no settings file present at the Local folder, the app searches inside the AppData folder, Default is used if no settings file present.&#x0d;• If there's no Local settings, all settings are saved on the AppData settings file.</s:String>-->
 
-    <!--<s:String x:Key="Extras.FfmpegLocation">FFmpeg location</s:String>-->
-    <!--<s:String x:Key="Extras.FfmpegLocation.Select">Select the location of the FFmpeg executable</s:String>-->
+    <!--<s:String x:Key="S.Options.Extras.FfmpegLocation">FFmpeg location</s:String>-->
+    <!--<s:String x:Key="S.Options.Extras.FfmpegLocation.Select">Select the location of the FFmpeg executable</s:String>-->
     
-    <s:String x:Key="S.Donate.Donate.Dollar">Bağış Yap US$</s:String>
-    <s:String x:Key="S.Donate.Donate.Euro">Bağış Yap €</s:String>
-    <s:String x:Key="S.Donate.Donate">Bağış Yap</s:String>
+    <s:String x:Key="S.Options.Donate.Donate.Dollar">Bağış Yap US$</s:String>
+    <s:String x:Key="S.Options.Donate.Donate.Euro">Bağış Yap €</s:String>
+    <s:String x:Key="S.Options.Donate.Donate">Bağış Yap</s:String>
 
-    <s:String x:Key="About.Version">Sürüm:</s:String>
-    <s:String x:Key="About.Author">Yazar: Nicke Manarin</s:String>
-    <s:String x:Key="About.Contact">İletişim</s:String>
-    <!--<s:String x:Key="About.Technical">Technical</s:String>-->
-    <s:String x:Key="About.Technical.License">Lisans:</s:String>
-    <!--<s:String x:Key="About.Technical.Free">(This is a completely free app)</s:String>-->
-    <s:String x:Key="About.Technical.SourceCode">Kaynak kodu:</s:String>
-    <s:String x:Key="About.ABigThanksTo">Çok teşekkürler ></s:String>
-    <!--<s:String x:Key="About.ABigThanksTo.Everyone">All my supporters, people who provided feedback and/or donations.</s:String>-->
+    <s:String x:Key="S.Options.About.Version">Sürüm:</s:String>
+    <s:String x:Key="S.Options.About.Author">Yazar: Nicke Manarin</s:String>
+    <s:String x:Key="S.Options.About.Contact">İletişim</s:String>
+    <!--<s:String x:Key="S.Options.About.Technical">Technical</s:String>-->
+    <s:String x:Key="S.Options.About.Technical.License">Lisans:</s:String>
+    <!--<s:String x:Key="S.Options.About.Technical.Free">(This is a completely free app)</s:String>-->
+    <s:String x:Key="S.Options.About.Technical.SourceCode">Kaynak kodu:</s:String>
+    <s:String x:Key="S.Options.About.ABigThanksTo">Çok teşekkürler ></s:String>
+    <!--<s:String x:Key="S.Options.About.ABigThanksTo.Everyone">All my supporters, people who provided feedback and/or donations.</s:String>-->
 
     <!--Recorder-->
     <s:String x:Key="Recorder.RecordingOptions">Kayıt Ayarları</s:String>

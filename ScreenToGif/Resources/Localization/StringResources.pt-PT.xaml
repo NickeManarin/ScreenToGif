@@ -42,12 +42,11 @@
     <s:String x:Key="S.Options.Title">ScreenToGif - Opções</s:String>
     <s:String x:Key="S.Options.App">Geral</s:String>
     <s:String x:Key="S.Options.Interface">Interface</s:String>
-    <s:String x:Key="Image">Imagem</s:String>
-    <s:String x:Key="Language">Idioma</s:String>
-    <s:String x:Key="TemporaryFiles">Ficheiros Temp.</s:String>
-    <!--<s:String x:Key="Extras">Extras</s:String>-->
+    <s:String x:Key="S.Options.Language">Idioma</s:String>
+    <s:String x:Key="S.Options.Storage">Ficheiros Temp.</s:String>
+    <!--<s:String x:Key="S.Options.Extras">Extras</s:String>-->
     <s:String x:Key="S.Options.Donate">Doação</s:String>
-    <s:String x:Key="About">Sobre</s:String>
+    <s:String x:Key="S.Options.About">Sobre</s:String>
     
     <s:String x:Key="S.Options.App.Startup.Window.Startup">Janela de Início</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Recorder">Gravador de Ecrã</s:String>
@@ -103,44 +102,44 @@
     <!--<s:String x:Key="S.Options.Interface.Other.HideTitleBar">Hide the title bar (thin mode).</s:String>-->
     <!--<s:String x:Key="S.Options.Interface.Other.TripleClickSelection">Enable triple-click to select the text.</s:String>-->
   
-    <s:String x:Key="S.Shortcuts.Recorders.StartPause">Gravar/Pausar:</s:String>
-    <s:String x:Key="S.Shortcuts.Recorders.Stop">Parar:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause">Gravar/Pausar:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Stop">Parar:</s:String>
     
-    <s:String x:Key="Language.AppLanguage">Idioma da Aplicação</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage">Idioma da Aplicação</s:String>
     
-    <s:String x:Key="TempFiles.FilesAndFolders">Ficheiros e Pastas Temporárias</s:String>
-    <s:String x:Key="TempFiles.Folders">Pastas:</s:String>
-    <s:String x:Key="TempFiles.Files">Ficheiros:</s:String>
-    <s:String x:Key="TempFiles.OpenFolder">Abrir Pasta</s:String>
-    <s:String x:Key="TempFiles.Clear">Limpar Pasta Temp.</s:String>
-    <!--<s:String x:Key="TempFiles.LogsLocation">Logs folder</s:String>-->
-    <!--<s:String x:Key="TempFiles.LogsLocation.Choose">Choose the location for the error logs files</s:String>-->
-    <!--<s:String x:Key="TempFiles.Location">Location folder</s:String>-->
-    <!--<s:String x:Key="TempFiles.Location.Choose">Choose the location for the temporary files</s:String>-->
-    <!--<s:String x:Key="TempFiles.Settings">Settings location</s:String>-->
-    <!--<s:String x:Key="TempFiles.AppDataPath">AppData:</s:String>-->
-    <!--<s:String x:Key="TempFiles.LocalPath">Local:</s:String>-->
-    <!--<s:String x:Key="TempFiles.NotExists">It doesn't exist</s:String>-->
-    <!--<s:String x:Key="TempFiles.CreateSettings">Create an empty local settings file.</s:String>-->
-    <!--<s:String x:Key="TempFiles.RemoveSettings">Remove the settings file.</s:String>-->
-    <!--<s:String x:Key="TempFiles.SettingsInfo">• Settings loading pattern: Default ◄ AppData ◄ Local.&#x0d;• If there's no settings file present at the Local folder, the app searches inside the AppData folder, Default is used if no settings file present.&#x0d;• If there's no Local settings, all settings are saved on the AppData settings file.</s:String>-->
+    <s:String x:Key="S.Options.Storage.FilesAndFolders">Ficheiros e Pastas Temporárias</s:String>
+    <s:String x:Key="S.Options.Storage.Folders">Pastas:</s:String>
+    <s:String x:Key="S.Options.Storage.Files">Ficheiros:</s:String>
+    <s:String x:Key="S.Options.Storage.OpenFolder">Abrir Pasta</s:String>
+    <s:String x:Key="S.Options.Storage.Clear">Limpar Pasta Temp.</s:String>
+    <!--<s:String x:Key="S.Options.Storage.LogsLocation">Logs folder</s:String>-->
+    <!--<s:String x:Key="S.Options.Storage.LogsLocation.Choose">Choose the location for the error logs files</s:String>-->
+    <!--<s:String x:Key="S.Options.Storage.Location">Location folder</s:String>-->
+    <!--<s:String x:Key="S.Options.Storage.Location.Choose">Choose the location for the temporary files</s:String>-->
+    <!--<s:String x:Key="S.Options.Storage.Settings">Settings location</s:String>-->
+    <!--<s:String x:Key="S.Options.Storage.AppDataPath">AppData:</s:String>-->
+    <!--<s:String x:Key="S.Options.Storage.LocalPath">Local:</s:String>-->
+    <!--<s:String x:Key="S.Options.Storage.NotExists">It doesn't exist</s:String>-->
+    <!--<s:String x:Key="S.Options.Storage.CreateSettings">Create an empty local settings file.</s:String>-->
+    <!--<s:String x:Key="S.Options.Storage.RemoveSettings">Remove the settings file.</s:String>-->
+    <!--<s:String x:Key="S.Options.Storage.SettingsInfo">• Settings loading pattern: Default ◄ AppData ◄ Local.&#x0d;• If there's no settings file present at the Local folder, the app searches inside the AppData folder, Default is used if no settings file present.&#x0d;• If there's no Local settings, all settings are saved on the AppData settings file.</s:String>-->
 
-    <!--<s:String x:Key="Extras.FfmpegLocation">FFmpeg location</s:String>-->
-    <!--<s:String x:Key="Extras.FfmpegLocation.Select">Select the location of the FFmpeg executable</s:String>-->
+    <!--<s:String x:Key="S.Options.Extras.FfmpegLocation">FFmpeg location</s:String>-->
+    <!--<s:String x:Key="S.Options.Extras.FfmpegLocation.Select">Select the location of the FFmpeg executable</s:String>-->
     
-    <s:String x:Key="S.Donate.Donate.Dollar">Doar US$</s:String>
-    <s:String x:Key="S.Donate.Donate.Euro">Doar €</s:String>
-    <s:String x:Key="S.Donate.Donate">Doar</s:String>
+    <s:String x:Key="S.Options.Donate.Donate.Dollar">Doar US$</s:String>
+    <s:String x:Key="S.Options.Donate.Donate.Euro">Doar €</s:String>
+    <s:String x:Key="S.Options.Donate.Donate">Doar</s:String>
 
-    <s:String x:Key="About.Version">Versão:</s:String>
-    <s:String x:Key="About.Author">Autor: Nicke Manarin</s:String>
-    <s:String x:Key="About.Contact">Contacto</s:String>
-    <!--<s:String x:Key="About.Technical">Technical</s:String>-->
-    <!--<s:String x:Key="About.Technical.License">License:</s:String>-->
-    <!--<s:String x:Key="About.Technical.Free">(This is a completely free app)</s:String>-->
-    <!--<s:String x:Key="About.Technical.SourceCode">Source code:</s:String>-->
-    <s:String x:Key="About.ABigThanksTo">Um Muito Obrigado para</s:String>
-    <!--<s:String x:Key="About.ABigThanksTo.Everyone">All my supporters, people who provided feedback and/or donations.</s:String>-->
+    <s:String x:Key="S.Options.About.Version">Versão:</s:String>
+    <s:String x:Key="S.Options.About.Author">Autor: Nicke Manarin</s:String>
+    <s:String x:Key="S.Options.About.Contact">Contacto</s:String>
+    <!--<s:String x:Key="S.Options.About.Technical">Technical</s:String>-->
+    <!--<s:String x:Key="S.Options.About.Technical.License">License:</s:String>-->
+    <!--<s:String x:Key="S.Options.About.Technical.Free">(This is a completely free app)</s:String>-->
+    <!--<s:String x:Key="S.Options.About.Technical.SourceCode">Source code:</s:String>-->
+    <s:String x:Key="S.Options.About.ABigThanksTo">Um Muito Obrigado para</s:String>
+    <!--<s:String x:Key="S.Options.About.ABigThanksTo.Everyone">All my supporters, people who provided feedback and/or donations.</s:String>-->
 
     <!--Recorder-->
     <s:String x:Key="Recorder.RecordingOptions">Opções de Gravação</s:String>

@@ -693,7 +693,7 @@
         <Setter Property="Background" Value="{DynamicResource Element.Background}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource Element.Border}"/>
         <Setter Property="Focusable" Value="True"/>
-        <Setter Property="ToolTip" Value="{DynamicResource S.Shortcuts.Info}"/>
+        <Setter Property="ToolTip" Value="{DynamicResource S.Options.Shortcuts.Info}"/>
 
         <Setter Property="Template">
             <Setter.Value>

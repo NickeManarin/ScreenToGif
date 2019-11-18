@@ -22,12 +22,12 @@
 
             <Viewbox x:Name="IconViewbox" Margin="5" Child="{StaticResource Vector.ImageStack}" Opacity="{DynamicResource Element.Opacity}"/>
 
-            <TextBlock x:Name="InstructionLabel" Text="{DynamicResource S.Upload.Pick.Album}" Margin="5" Grid.Column="1" VerticalAlignment="Center" FontFamily="Segoe UI Semilight" 
+            <TextBlock x:Name="InstructionLabel" Text="{DynamicResource S.Options.Upload.Pick.Album}" Margin="5" Grid.Column="1" VerticalAlignment="Center" FontFamily="Segoe UI Semilight" 
                        FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
         </Grid>
 
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <TextBlock x:Name="ObservationTextBlock" Margin="25,5,10,5" Text="{DynamicResource S.Upload.Pick.Album.Info}" FontSize="14" TextWrapping="WrapWithOverflow" Foreground="{DynamicResource Element.Foreground}"/>
+            <TextBlock x:Name="ObservationTextBlock" Margin="25,5,10,5" Text="{DynamicResource S.Options.Upload.Pick.Album.Info}" FontSize="14" TextWrapping="WrapWithOverflow" Foreground="{DynamicResource Element.Foreground}"/>
         </ScrollViewer>
 
         <DataGrid Grid.Row="2" x:Name="MainDataGrid" Margin="5" MinHeight="60" SelectionMode="Single" SelectionUnit="FullRow" MouseDoubleClick="DataGrid_MouseDoubleClick" PreviewKeyDown="DataGrid_PreviewKeyDown">

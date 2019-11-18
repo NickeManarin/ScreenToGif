@@ -5,7 +5,7 @@
         xmlns:m="clr-namespace:ScreenToGif.Model"
         xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
         xmlns:u="clr-namespace:ScreenToGif.Util"
-        Title="{DynamicResource S.AutomatedTasks.Title}" Width="350" Height="400" MinWidth="300" MinHeight="300" 
+        Title="{DynamicResource S.Options.Tasks.Title}" Width="350" Height="400" MinWidth="300" MinHeight="300" 
         WindowStartupLocation="CenterScreen" SnapsToDevicePixels="True" Background="{DynamicResource Panel.Background}" Loaded="Window_Loaded">
 
     <Window.CommandBindings>

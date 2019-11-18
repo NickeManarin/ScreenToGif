@@ -60,14 +60,14 @@
                 <n:ImageRadioButton x:Name="AppRadio" Text="{DynamicResource S.Options.App}" Content="{StaticResource Vector.Application}" IsChecked="True"/>
                 <n:ImageRadioButton x:Name="RecorderRadio" Text="{DynamicResource S.Options.Recorder}" Content="{StaticResource Vector.Record}"/>
                 <n:ImageRadioButton x:Name="InterfaceRadio" Text="{DynamicResource S.Options.Interface}" Content="{StaticResource Vector.Colors}"/>
-                <n:ImageRadioButton x:Name="AutomaticRadio" Text="{DynamicResource S.AutoTasks}" Content="{StaticResource Vector.Encoder}"/>
-                <n:ImageRadioButton x:Name="ShortcutsRadio" Text="{DynamicResource S.Shortcuts}" Content="{StaticResource Vector.Keyboard}"/>
-                <n:ImageRadioButton x:Name="LanguageRadio" Text="{DynamicResource Language}" Content="{StaticResource Vector.Translate}"/>
+                <n:ImageRadioButton x:Name="AutomaticRadio" Text="{DynamicResource S.Options.Tasks}" Content="{StaticResource Vector.Encoder}"/>
+                <n:ImageRadioButton x:Name="ShortcutsRadio" Text="{DynamicResource S.Options.Shortcuts}" Content="{StaticResource Vector.Keyboard}"/>
+                <n:ImageRadioButton x:Name="LanguageRadio" Text="{DynamicResource S.Options.Language}" Content="{StaticResource Vector.Translate}"/>
                 <n:ImageRadioButton x:Name="TempRadio" Text="{DynamicResource TemporaryFiles}" Content="{StaticResource Vector.Temporary}"/>
-                <n:ImageRadioButton x:Name="CloudRadioButton" Text="{DynamicResource Clouds}" Content="{StaticResource Vector.Web}"/>
+                <n:ImageRadioButton x:Name="CloudRadioButton" Text="{DynamicResource S.Options.Upload}" Content="{StaticResource Vector.Web}"/>
                 <n:ImageRadioButton x:Name="ExtrasRadioButton" Text="{DynamicResource Extras}" Content="{StaticResource Vector.Extras}"/>
                 <n:ImageRadioButton x:Name="DonateRadio" Text="{DynamicResource S.Options.Donate}" Content="{StaticResource Vector.Money}"/>
-                <n:ImageRadioButton x:Name="AboutRadio" Text="{DynamicResource About}" Content="{StaticResource Vector.Info}"/>
+                <n:ImageRadioButton x:Name="AboutRadio" Text="{DynamicResource S.Options.About}" Content="{StaticResource Vector.Info}"/>
             </StackPanel>
 
             <n:StatusBand Grid.Row="0" Grid.Column="1" x:Name="StatusBand"/>
@@ -870,12 +870,12 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <n:LabelSeparator Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{DynamicResource S.AutomatedTasks.List}"/>
+                        <n:LabelSeparator Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{DynamicResource S.Options.Tasks.List}"/>
                         <DataGrid Grid.Row="1" Grid.Column="0" Grid.RowSpan="6" x:Name="TasksDataGrid" Margin="10,5,5,5" MinHeight="60" SelectionMode="Single" SelectionUnit="FullRow"
                                   MouseDoubleClick="TasksDataGrid_MouseDoubleClick" PreviewKeyDown="TasksDataGrid_PreviewKeyDown">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="{DynamicResource S.AutomatedTasks.List.Task}" Width="Auto" MinWidth="110" IsReadOnly="True" Binding="{Binding Kind, UpdateSourceTrigger=PropertyChanged}"/>
-                                <DataGridTextColumn Header="{DynamicResource S.AutomatedTasks.List.Details}" Width="*" IsReadOnly="True" Binding="{Binding Details, UpdateSourceTrigger=PropertyChanged}"/>
+                                <DataGridTextColumn Header="{DynamicResource S.Options.Tasks.List.Task}" Width="Auto" MinWidth="110" IsReadOnly="True" Binding="{Binding Kind, UpdateSourceTrigger=PropertyChanged}"/>
+                                <DataGridTextColumn Header="{DynamicResource S.Options.Tasks.List.Details}" Width="*" IsReadOnly="True" Binding="{Binding Details, UpdateSourceTrigger=PropertyChanged}"/>
                             </DataGrid.Columns>
                         </DataGrid>
 
@@ -904,14 +904,14 @@
                                        ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
                                        ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-5"/>
 
-                        <TextBlock Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Text="{DynamicResource S.AutomatedTasks.Info}" Padding="0" Margin="3" HorizontalAlignment="Center" TextWrapping="Wrap" 
+                        <TextBlock Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Text="{DynamicResource S.Options.Tasks.Info}" Padding="0" Margin="3" HorizontalAlignment="Center" TextWrapping="Wrap" 
                                    Foreground="{DynamicResource Element.Foreground.Gray150}"/>
                     </Grid>
 
                     <!--Shortcuts-->
                     <StackPanel x:Name="ShortcutsPanel" Visibility="{Binding IsChecked, ElementName=ShortcutsRadio, Converter={StaticResource Bool2Visibility}}"
                                 IsVisibleChanged="ShortcutsPanel_IsVisibleChanged">
-                        <n:LabelSeparator Text="{DynamicResource S.Shortcuts.Global}"/>
+                        <n:LabelSeparator Text="{DynamicResource S.Options.Shortcuts.Global}"/>
                         <Grid Margin="10,3,5,3">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -927,44 +927,44 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource S.Shortcuts.Global.ScreenRecorder}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,4" VerticalAlignment="Center"/>
+                            <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource S.Options.Shortcuts.Global.ScreenRecorder}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,4" VerticalAlignment="Center"/>
                             <n:KeyBox Grid.Row="0" Grid.Column="1" x:Name="RecorderKeyBox" Height="23" Margin="3" VerticalAlignment="Center" 
                                       MainKey="{Binding RecorderShortcut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ModifierKeys="{Binding RecorderModifiers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                       KeyChanged="Globals_OnKeyChanged"/>
-                            <TextBlock Grid.Row="0" Grid.Column="2" Text="{DynamicResource S.Shortcuts.Global.ScreenRecorder.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                            <TextBlock Grid.Row="0" Grid.Column="2" Text="{DynamicResource S.Options.Shortcuts.Global.ScreenRecorder.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
 
-                            <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource S.Shortcuts.Global.WebcamRecorder}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,4" VerticalAlignment="Center"/>
+                            <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource S.Options.Shortcuts.Global.WebcamRecorder}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,4" VerticalAlignment="Center"/>
                             <n:KeyBox Grid.Row="1" Grid.Column="1" x:Name="WebcamKeyBox" Height="23" Margin="3" VerticalAlignment="Center" 
                                       MainKey="{Binding WebcamRecorderShortcut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ModifierKeys="{Binding WebcamRecorderModifiers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                       KeyChanged="Globals_OnKeyChanged"/>
-                            <TextBlock Grid.Row="1" Grid.Column="2" Text="{DynamicResource S.Shortcuts.Global.WebcamRecorder.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                            <TextBlock Grid.Row="1" Grid.Column="2" Text="{DynamicResource S.Options.Shortcuts.Global.WebcamRecorder.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
 
-                            <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource S.Shortcuts.Global.BoardRecorder}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,4" VerticalAlignment="Center"/>
+                            <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource S.Options.Shortcuts.Global.BoardRecorder}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,4" VerticalAlignment="Center"/>
                             <n:KeyBox Grid.Row="2" Grid.Column="1" x:Name="BoardKeyBox" Height="23" Margin="3" VerticalAlignment="Center" 
                                       MainKey="{Binding BoardRecorderShortcut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ModifierKeys="{Binding BoardRecorderModifiers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                       KeyChanged="Globals_OnKeyChanged"/>
-                            <TextBlock Grid.Row="2" Grid.Column="2" Text="{DynamicResource S.Shortcuts.Global.BoardRecorder.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                            <TextBlock Grid.Row="2" Grid.Column="2" Text="{DynamicResource S.Options.Shortcuts.Global.BoardRecorder.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
 
-                            <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource S.Shortcuts.Global.OpenEditor}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,4" VerticalAlignment="Center"/>
+                            <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource S.Options.Shortcuts.Global.OpenEditor}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,4" VerticalAlignment="Center"/>
                             <n:KeyBox Grid.Row="3" Grid.Column="1" x:Name="EditorKeyBox" Height="23" Margin="3" VerticalAlignment="Center" 
                                       MainKey="{Binding EditorShortcut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ModifierKeys="{Binding EditorModifiers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                       KeyChanged="Globals_OnKeyChanged"/>
-                            <TextBlock Grid.Row="3" Grid.Column="2" Text="{DynamicResource S.Shortcuts.Global.OpenEditor.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                            <TextBlock Grid.Row="3" Grid.Column="2" Text="{DynamicResource S.Options.Shortcuts.Global.OpenEditor.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
 
-                            <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource S.Shortcuts.Global.OpenOptions}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,4" VerticalAlignment="Center"/>
+                            <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource S.Options.Shortcuts.Global.OpenOptions}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,4" VerticalAlignment="Center"/>
                             <n:KeyBox Grid.Row="4" Grid.Column="1" x:Name="OptionsKeyBox" Height="23" Margin="3" VerticalAlignment="Center" 
                                       MainKey="{Binding OptionsShortcut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ModifierKeys="{Binding OptionsModifiers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                       KeyChanged="Globals_OnKeyChanged"/>
-                            <TextBlock Grid.Row="4" Grid.Column="2" Text="{DynamicResource S.Shortcuts.Global.OpenOptions.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                            <TextBlock Grid.Row="4" Grid.Column="2" Text="{DynamicResource S.Options.Shortcuts.Global.OpenOptions.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
 
-                            <Label Grid.Row="5" Grid.Column="0" Content="{DynamicResource S.Shortcuts.Global.Exit}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,4" VerticalAlignment="Center"/>
+                            <Label Grid.Row="5" Grid.Column="0" Content="{DynamicResource S.Options.Shortcuts.Global.Exit}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,4" VerticalAlignment="Center"/>
                             <n:KeyBox Grid.Row="5" Grid.Column="1" x:Name="ExitKeyBox" Height="23" Margin="3" VerticalAlignment="Center" 
                                       MainKey="{Binding ExitShortcut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ModifierKeys="{Binding ExitModifiers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                       KeyChanged="Globals_OnKeyChanged"/>
-                            <TextBlock Grid.Row="5" Grid.Column="2" Text="{DynamicResource S.Shortcuts.Global.Exit.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                            <TextBlock Grid.Row="5" Grid.Column="2" Text="{DynamicResource S.Options.Shortcuts.Global.Exit.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
                         </Grid>
 
-                        <n:LabelSeparator Text="{DynamicResource S.Shortcuts.Recorders}"/>
+                        <n:LabelSeparator Text="{DynamicResource S.Options.Shortcuts.Recorders}"/>
                         <Grid Margin="10,3,5,3">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -979,39 +979,39 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource S.Shortcuts.Recorders.StartPause}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,4" VerticalAlignment="Center"/>
+                            <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource S.Options.Shortcuts.Recorders.StartPause}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,4" VerticalAlignment="Center"/>
                             <n:KeyBox Grid.Row="0" Grid.Column="1" x:Name="StartKeyBox" Height="23" Margin="3" VerticalAlignment="Center" 
                                       MainKey="{Binding StartPauseShortcut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                       ModifierKeys="{Binding StartPauseModifiers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                       KeyChanged="Recorders_OnKeyChanged"/>
-                            <TextBlock Grid.Row="0" Grid.Column="2" Text="{DynamicResource S.Shortcuts.Recorders.StartPause.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                            <TextBlock Grid.Row="0" Grid.Column="2" Text="{DynamicResource S.Options.Shortcuts.Recorders.StartPause.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
 
-                            <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource S.Shortcuts.Recorders.Stop}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,4" VerticalAlignment="Center"/>
+                            <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource S.Options.Shortcuts.Recorders.Stop}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,4" VerticalAlignment="Center"/>
                             <n:KeyBox Grid.Row="1" Grid.Column="1" x:Name="StopKeyBox" Height="23" Margin="3" VerticalAlignment="Center" 
                                       MainKey="{Binding StopShortcut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                       ModifierKeys="{Binding StopModifiers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                       KeyChanged="Recorders_OnKeyChanged"/>
-                            <TextBlock Grid.Row="1" Grid.Column="2" Text="{DynamicResource S.Shortcuts.Recorders.Stop.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                            <TextBlock Grid.Row="1" Grid.Column="2" Text="{DynamicResource S.Options.Shortcuts.Recorders.Stop.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
 
-                            <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource S.Shortcuts.Recorders.Discard}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,4" VerticalAlignment="Center"/>
+                            <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource S.Options.Shortcuts.Recorders.Discard}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,4" VerticalAlignment="Center"/>
                             <n:KeyBox Grid.Row="2" Grid.Column="1" x:Name="DiscardKeyBox" Height="23" Margin="3" VerticalAlignment="Center" 
                                       MainKey="{Binding DiscardShortcut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                       ModifierKeys="{Binding DiscardModifiers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                       KeyChanged="Recorders_OnKeyChanged"/>
-                            <TextBlock Grid.Row="2" Grid.Column="2" Text="{DynamicResource S.Shortcuts.Recorders.Discard.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                            <TextBlock Grid.Row="2" Grid.Column="2" Text="{DynamicResource S.Options.Shortcuts.Recorders.Discard.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
 
-                            <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource S.Shortcuts.Recorders.Follow}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,4" VerticalAlignment="Center"/>
+                            <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource S.Options.Shortcuts.Recorders.Follow}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,4" VerticalAlignment="Center"/>
                             <n:KeyBox Grid.Row="3" Grid.Column="1" x:Name="FollowKeyBox" Height="23" Margin="3" VerticalAlignment="Center" 
                                       MainKey="{Binding FollowShortcut, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                       ModifierKeys="{Binding FollowModifiers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                       KeyChanged="Recorders_OnKeyChanged"/>
-                            <TextBlock Grid.Row="3" Grid.Column="2" Text="{DynamicResource S.Shortcuts.Recorders.Follow.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                            <TextBlock Grid.Row="3" Grid.Column="2" Text="{DynamicResource S.Options.Shortcuts.Recorders.Follow.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
 
-                            <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource S.Shortcuts.Recorders.DisableFollow}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,4" VerticalAlignment="Center"/>
+                            <Label Grid.Row="4" Grid.Column="0" Content="{DynamicResource S.Options.Shortcuts.Recorders.DisableFollow}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,4" VerticalAlignment="Center"/>
                             <n:KeyBox Grid.Row="4" Grid.Column="1" x:Name="DisableFollowKeyBox" Height="23" Margin="3" VerticalAlignment="Center" 
                                       ModifierKeys="{Binding DisableFollowModifiers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" OnlyModifiers="True"
                                       KeyChanged="Recorders_OnKeyChanged"/>
-                            <TextBlock Grid.Row="4" Grid.Column="2" Text="{DynamicResource S.Shortcuts.Recorders.DisableFollow.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                            <TextBlock Grid.Row="4" Grid.Column="2" Text="{DynamicResource S.Options.Shortcuts.Recorders.DisableFollow.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
                         </Grid>
                     </StackPanel>
 
@@ -1023,7 +1023,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <n:LabelSeparator Text="{DynamicResource Language.AppLanguage}" Margin="0,0,0,5"/>
+                        <n:LabelSeparator Text="{DynamicResource S.Options.Language.AppLanguage}" Margin="0,0,0,5"/>
 
                         <ListBox Grid.Row="1" x:Name="LanguagePanel" VerticalContentAlignment="Center" Margin="10,0,0,5" SelectionChanged="LanguagePanel_SelectionChanged">
                             <ListBox.Resources>
@@ -1042,7 +1042,7 @@
                                 </ControlTemplate>
                             </ListBox.Template>
 
-                            <n:ImageListBoxItem Image="{StaticResource Vector.Info}" Tag="auto" Content="{DynamicResource Language.AppLanguage.AutoDetect}" Author="{DynamicResource Language.AppLanguage.AutoDetect.Author}" 
+                            <n:ImageListBoxItem Image="{StaticResource Vector.Info}" Tag="auto" Content="{DynamicResource S.Options.Language.AppLanguage.AutoDetect}" Author="{DynamicResource Language.AppLanguage.AutoDetect.Author}" 
                                                 MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=auto, Converter={StaticResource TagToSelection}}"/>
 
                             <n:ImageListBoxItem Image="{StaticResource Flag.SaudiArabia}" Tag="ar" Content="Arabic / العربية" Author="Alan"
@@ -1122,22 +1122,22 @@
                         </ListBox>
 
                         <TextBlock Grid.Row="2" x:Name="TranslateHyperlink" FontSize="12" FontFamily="Segoe UI Semilight" TextWrapping="WrapWithOverflow" Padding="2">
-                            <Run Text="{DynamicResource Language.AppLanguage.Translate.Sentence1.1}" Foreground="{DynamicResource Element.Foreground}"/>
-                            <Hyperlink Click="TranslateHyperlink_OnClick" ToolTip="{DynamicResource Language.AppLanguage.Translate.ResourceLink.Tooltip}" Cursor="Hand">
-                                <Run Text="{DynamicResource Language.AppLanguage.Translate.Sentence1.2}"/>
+                            <Run Text="{DynamicResource S.Options.Language.AppLanguage.Translate.Sentence1.1}" Foreground="{DynamicResource Element.Foreground}"/>
+                            <Hyperlink Click="TranslateHyperlink_OnClick" ToolTip="{DynamicResource S.Options.Language.AppLanguage.Translate.ResourceLink.Tooltip}" Cursor="Hand">
+                                <Run Text="{DynamicResource S.Options.Language.AppLanguage.Translate.Sentence1.2}"/>
                             </Hyperlink>
                             <LineBreak/>
-                            <Run Text="{DynamicResource Language.AppLanguage.Translate.Sentence2.1}" Foreground="{DynamicResource Element.Foreground}"/>
-                            <Hyperlink Click="ImportHyperlink_OnClick" ToolTip="{DynamicResource Language.AppLanguage.Translate.ImportLink.Tooltip}" Cursor="Hand">
-                                <Run Text="{DynamicResource Language.AppLanguage.Translate.Sentence2.2}"/>
+                            <Run Text="{DynamicResource S.Options.Language.AppLanguage.Translate.Sentence2.1}" Foreground="{DynamicResource Element.Foreground}"/>
+                            <Hyperlink Click="ImportHyperlink_OnClick" ToolTip="{DynamicResource S.Options.Language.AppLanguage.Translate.ImportLink.Tooltip}" Cursor="Hand">
+                                <Run Text="{DynamicResource S.Options.Language.AppLanguage.Translate.Sentence2.2}"/>
                             </Hyperlink>
-                            <Run Text="{DynamicResource Language.AppLanguage.Translate.Sentence2.3}" Foreground="{DynamicResource Element.Foreground}"/>
+                            <Run Text="{DynamicResource S.Options.Language.AppLanguage.Translate.Sentence2.3}" Foreground="{DynamicResource Element.Foreground}"/>
                             <LineBreak/>
-                            <Run Text="{DynamicResource Language.AppLanguage.Translate.Sentence3.1}" Foreground="{DynamicResource Element.Foreground}"/>
-                            <Hyperlink Click="EmailHyperlink_OnClick" ToolTip="{DynamicResource Language.AppLanguage.Translate.EmailLink.Tooltip}" Cursor="Hand">
-                                <Run Text="{DynamicResource Language.AppLanguage.Translate.Sentence3.2}"/>
+                            <Run Text="{DynamicResource S.Options.Language.AppLanguage.Translate.Sentence3.1}" Foreground="{DynamicResource Element.Foreground}"/>
+                            <Hyperlink Click="EmailHyperlink_OnClick" ToolTip="{DynamicResource S.Options.Language.AppLanguage.Translate.EmailLink.Tooltip}" Cursor="Hand">
+                                <Run Text="{DynamicResource S.Options.Language.AppLanguage.Translate.Sentence3.2}"/>
                             </Hyperlink>
-                            <Run Text="{DynamicResource Language.AppLanguage.Translate.Sentence3.3}" Foreground="{DynamicResource Element.Foreground}"/>
+                            <Run Text="{DynamicResource S.Options.Language.AppLanguage.Translate.Sentence3.3}" Foreground="{DynamicResource Element.Foreground}"/>
                         </TextBlock>
                     </Grid>
 
@@ -1156,7 +1156,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <n:LabelSeparator Grid.Row="0" Text="{DynamicResource TempFiles.LogsLocation}"/>
+                        <n:LabelSeparator Grid.Row="0" Text="{DynamicResource S.Options.Storage.LogsLocation}"/>
                         <Grid Grid.Row="1">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -1166,11 +1166,11 @@
                             <n:ExtendedTextBox Grid.Column="0" Margin="10,3,0,3" Text="{Binding LogsFolder, Source={x:Static u:UserSettings.All}}"/>
 
                             <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" ContentWidth="20"
-                                           Click="ChooseLogsLocation_Click" ToolTip="{DynamicResource TempFiles.LogsLocation.Choose}"
+                                           Click="ChooseLogsLocation_Click" ToolTip="{DynamicResource S.Options.Storage.LogsLocation.Choose}"
                                            ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
                         </Grid>
 
-                        <n:LabelSeparator Grid.Row="2" Text="{DynamicResource TempFiles.Location}"/>
+                        <n:LabelSeparator Grid.Row="2" Text="{DynamicResource S.Options.Storage.Location}"/>
                         <Grid Grid.Row="3">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -1180,19 +1180,19 @@
                             <n:ExtendedTextBox Grid.Column="0" Margin="10,3,0,3" Text="{Binding TemporaryFolder, Source={x:Static u:UserSettings.All}}"/>
 
                             <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" ContentWidth="20"
-                                           Click="ChooseLocation_Click" ToolTip="{DynamicResource TempFiles.Location.Choose}"
+                                           Click="ChooseLocation_Click" ToolTip="{DynamicResource S.Options.Storage.Location.Choose}"
                                            ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
                         </Grid>
 
-                        <n:LabelSeparator Grid.Row="4" x:Name="TempSeparator" Text="{DynamicResource TempFiles.FilesAndFolders}"/>
+                        <n:LabelSeparator Grid.Row="4" x:Name="TempSeparator" Text="{DynamicResource S.Options.Storage.FilesAndFolders}"/>
                         <StackPanel Grid.Row="5">
-                            <n:ExtendedCheckBox Text="{DynamicResource TempFiles.AutomaticRemoval}" Margin="10,3,5,3"
+                            <n:ExtendedCheckBox Text="{DynamicResource S.Options.Storage.AutomaticRemoval}" Margin="10,3,5,3"
                                                 IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=AutomaticCleanUp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                ToolTip="{DynamicResource TempFiles.AutomaticRemoval.Info}"/>
+                                                ToolTip="{DynamicResource S.Options.Storage.AutomaticRemoval.Info}"/>
 
                             <WrapPanel Margin="30,3,5,3" Visibility="{Binding Source={x:Static u:UserSettings.All}, Path=AutomaticCleanUp, Converter={StaticResource Bool2Visibility}}">
                                 <n:IntegerUpDown Minimum="1" Maximum="30" MinWidth="50" Value="{Binding Source={x:Static u:UserSettings.All}, Path=AutomaticCleanUpDays, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                <TextBlock Text="{DynamicResource TempFiles.AutomaticRemovalDays.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                                <TextBlock Text="{DynamicResource S.Options.Storage.AutomaticRemovalDays.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
                             </WrapPanel>
                         </StackPanel>
 
@@ -1203,16 +1203,16 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Column="0" x:Name="LowSpaceTextBlock" Text="{DynamicResource TempFiles.LowSpace}" Padding="0" Margin="5,3" VerticalAlignment="Center" 
+                            <TextBlock Grid.Column="0" x:Name="LowSpaceTextBlock" Text="{DynamicResource S.Options.Storage.LowSpace}" Padding="0" Margin="5,3" VerticalAlignment="Center" 
                                        TextWrapping="Wrap" Foreground="Crimson" Visibility="Collapsed"/>
 
-                            <n:ImageButton Grid.Column="1" x:Name="OpenFolderButton" Text="{DynamicResource TempFiles.OpenFolder}" Padding="2,0"
+                            <n:ImageButton Grid.Column="1" x:Name="OpenFolderButton" Text="{DynamicResource S.Options.Storage.OpenFolder}" Padding="2,0"
                                            Content="{StaticResource Vector.Open}" ContentHeight="20" Click="OpenFolderButton_Click" Margin="5"/>
-                            <n:ImageButton Grid.Column="2" x:Name="ClearTempButton" Text="{DynamicResource TempFiles.Clear}" Padding="2,0"
+                            <n:ImageButton Grid.Column="2" x:Name="ClearTempButton" Text="{DynamicResource S.Options.Storage.Clear}" Padding="2,0"
                                            Content="{StaticResource Vector.Delete.Folder}" ContentHeight="20" Click="ClearTempButton_Click" Margin="5" IsEnabled="False"/>
                         </Grid>
 
-                        <n:LabelSeparator Grid.Row="7" Text="{DynamicResource TempFiles.Settings}"/>
+                        <n:LabelSeparator Grid.Row="7" Text="{DynamicResource S.Options.Storage.Settings}"/>
                         <Grid Grid.Row="8" Margin="10,0,0,0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -1227,28 +1227,28 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource TempFiles.AppDataPath}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="3"/>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Options.Storage.AppDataPath}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="3"/>
                             <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" x:Name="AppDataPathTextBlock" Text="..." Foreground="{DynamicResource Element.Foreground.Medium}" Padding="3" TextWrapping="Wrap" FontStyle="Italic"/>
 
-                            <n:ImageButton Grid.Row="0" Grid.Column="3" x:Name="OpenAppDataButton" ToolTip="{DynamicResource TempFiles.OpenSettingsFolder}" Style="{StaticResource Style.Button.NoText}"
+                            <n:ImageButton Grid.Row="0" Grid.Column="3" x:Name="OpenAppDataButton" ToolTip="{DynamicResource S.Options.Storage.OpenSettingsFolder}" Style="{StaticResource Style.Button.NoText}"
                                            Content="{StaticResource Vector.Open}" Padding="3" ContentHeight="14" Command="{StaticResource Command.OpenAppDataSettings}"/>
 
-                            <n:ImageButton Grid.Row="0" Grid.Column="4" x:Name="RemoveAppDataButton" ToolTip="{DynamicResource TempFiles.RemoveSettings}" Style="{StaticResource Style.Button.NoText}"
+                            <n:ImageButton Grid.Row="0" Grid.Column="4" x:Name="RemoveAppDataButton" ToolTip="{DynamicResource S.Options.Storage.RemoveSettings}" Style="{StaticResource Style.Button.NoText}"
                                            Content="{StaticResource Vector.Remove}" Padding="3" ContentHeight="14" Command="{StaticResource Command.RemoveAppDataSettings}"/>
 
-                            <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource TempFiles.LocalPath}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="3"/>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.Options.Storage.LocalPath}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="3"/>
                             <TextBlock Grid.Row="1" Grid.Column="1" x:Name="LocalPathTextBlock" Text="..." Foreground="{DynamicResource Element.Foreground.Medium}" Padding="3" TextWrapping="Wrap" FontStyle="Italic"/>
 
-                            <n:ImageButton Grid.Row="1" Grid.Column="2" x:Name="CreateLocalButton" ToolTip="{DynamicResource TempFiles.CreateSettings}" Style="{StaticResource Style.Button.NoText}"
+                            <n:ImageButton Grid.Row="1" Grid.Column="2" x:Name="CreateLocalButton" ToolTip="{DynamicResource S.Options.Storage.CreateSettings}" Style="{StaticResource Style.Button.NoText}"
                                            Content="{StaticResource Vector.Add}" Padding="3" ContentHeight="14" Command="{StaticResource Command.CreateLocalSettings}"/>
 
-                            <n:ImageButton Grid.Row="1" Grid.Column="3" x:Name="OpenLocalButton" ToolTip="{DynamicResource TempFiles.OpenSettingsFolder}" Style="{StaticResource Style.Button.NoText}"
+                            <n:ImageButton Grid.Row="1" Grid.Column="3" x:Name="OpenLocalButton" ToolTip="{DynamicResource S.Options.Storage.OpenSettingsFolder}" Style="{StaticResource Style.Button.NoText}"
                                            Content="{StaticResource Vector.Open}" Padding="3" ContentHeight="14" Command="{StaticResource Command.OpenLocalSettings}"/>
 
-                            <n:ImageButton Grid.Row="1" Grid.Column="4" x:Name="RemoveLocalButton" ToolTip="{DynamicResource TempFiles.RemoveSettings}" Style="{StaticResource Style.Button.NoText}"
+                            <n:ImageButton Grid.Row="1" Grid.Column="4" x:Name="RemoveLocalButton" ToolTip="{DynamicResource S.Options.Storage.RemoveSettings}" Style="{StaticResource Style.Button.NoText}"
                                            Content="{StaticResource Vector.Remove}" Padding="3" ContentHeight="14" Command="{StaticResource Command.RemoveLocalSettings}"/>
 
-                            <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" Text="{DynamicResource TempFiles.SettingsInfo}" Foreground="{DynamicResource Element.Foreground.Medium}" TextWrapping="Wrap" Padding="4,2" Margin="0,10,0,0"/>
+                            <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" Text="{DynamicResource S.Options.Storage.SettingsInfo}" Foreground="{DynamicResource Element.Foreground.Medium}" TextWrapping="Wrap" Padding="4,2" Margin="0,10,0,0"/>
                         </Grid>
                     </Grid>
 
@@ -1351,7 +1351,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Expander Grid.Row="0" Header="{DynamicResource S.Upload.Proxy}" IsExpanded="True">
+                        <Expander Grid.Row="0" Header="{DynamicResource S.Options.Upload.Proxy}" IsExpanded="True">
                             <DockPanel>
                                 <Grid DockPanel.Dock="Top">
                                     <Grid.ColumnDefinitions>
@@ -1364,25 +1364,25 @@
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Text="{DynamicResource S.Upload.Proxy.Mode}" VerticalAlignment="Center" Margin="5" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                    <TextBlock Text="{DynamicResource S.Options.Upload.Proxy.Mode}" VerticalAlignment="Center" Margin="5" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                                     <ComboBox Grid.Column="1" Margin="3" VerticalContentAlignment="Center" SelectedValuePath="Tag" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=ProxyMode}">
-                                        <ComboBoxItem Content="{DynamicResource S.Upload.Proxy.Mode.Disabled}" Tag="{x:Static u:ProxyType.Disabled}"/>
-                                        <ComboBoxItem Content="{DynamicResource S.Upload.Proxy.Mode.Manual}" Tag="{x:Static u:ProxyType.Manual}"/>
-                                        <ComboBoxItem Content="{DynamicResource S.Upload.Proxy.Mode.System}" Tag="{x:Static u:ProxyType.System}"/>
+                                        <ComboBoxItem Content="{DynamicResource S.Options.Upload.Proxy.Mode.Disabled}" Tag="{x:Static u:ProxyType.Disabled}"/>
+                                        <ComboBoxItem Content="{DynamicResource S.Options.Upload.Proxy.Mode.Manual}" Tag="{x:Static u:ProxyType.Manual}"/>
+                                        <ComboBoxItem Content="{DynamicResource S.Options.Upload.Proxy.Mode.System}" Tag="{x:Static u:ProxyType.System}"/>
                                     </ComboBox>
 
-                                    <TextBlock Grid.Column="2" Text="{DynamicResource S.Upload.Proxy.Host}" VerticalAlignment="Center" Margin="10,5,5,5" Visibility="{Binding ElementName=ProxyHostTextBox, Path=Visibility}"
+                                    <TextBlock Grid.Column="2" Text="{DynamicResource S.Options.Upload.Proxy.Host}" VerticalAlignment="Center" Margin="10,5,5,5" Visibility="{Binding ElementName=ProxyHostTextBox, Path=Visibility}"
                                                Foreground="{DynamicResource Element.Foreground.Medium}"/>
                                     <n:ExtendedTextBox Grid.Column="3" x:Name="ProxyHostTextBox" Margin="5,3" VerticalContentAlignment="Center" TextWrapping="Wrap"
                                                        Text="{Binding ProxyHost, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                        Visibility="{Binding ProxyMode, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource EnumToVisibility}, ConverterParameter={x:Static u:ProxyType.Manual}}"/>
 
-                                    <TextBlock Grid.Column="4" Text="{DynamicResource S.Upload.Proxy.Port}" VerticalAlignment="Center" Margin="10,5,5,5" Visibility="{Binding ElementName=ProxyHostTextBox, Path=Visibility}"
+                                    <TextBlock Grid.Column="4" Text="{DynamicResource S.Options.Upload.Proxy.Port}" VerticalAlignment="Center" Margin="10,5,5,5" Visibility="{Binding ElementName=ProxyHostTextBox, Path=Visibility}"
                                                Foreground="{DynamicResource Element.Foreground.Medium}"/>
                                     <n:IntegerUpDown Grid.Column="5" Margin="5,3" Maximum="65535" Value="{Binding ProxyPort, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                      Visibility="{Binding ElementName=ProxyHostTextBox, Path=Visibility}"/>
 
-                                    <TextBlock Grid.Column="2" Grid.ColumnSpan="5" Margin="5,3" Text="{DynamicResource S.Upload.Proxy.Mode.System.Info}" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                    <TextBlock Grid.Column="2" Grid.ColumnSpan="5" Margin="5,3" Text="{DynamicResource S.Options.Upload.Proxy.Mode.System.Info}" HorizontalAlignment="Left" VerticalAlignment="Center"
                                                Visibility="{Binding ProxyMode, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource EnumToVisibility}, ConverterParameter={x:Static u:ProxyType.System}}" 
                                                TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
                                 </Grid>
@@ -1396,26 +1396,26 @@
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Upload.Proxy.User}" VerticalAlignment="Center" Margin="5" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Options.Upload.Proxy.User}" VerticalAlignment="Center" Margin="5" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                                     <n:ExtendedTextBox Grid.Row="0" Grid.Column="1" Margin="5,3" VerticalContentAlignment="Center" TextWrapping="Wrap"
                                                        Text="{Binding ProxyUsername, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                                    <TextBlock Grid.Row="0" Grid.Column="2" Text="{DynamicResource S.Upload.Proxy.Password}" VerticalAlignment="Center" Margin="10,5,5,5" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="2" Text="{DynamicResource S.Options.Upload.Proxy.Password}" VerticalAlignment="Center" Margin="10,5,5,5" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                                     <PasswordBox Grid.Row="0" Grid.Column="3" x:Name="ProxyPasswordBox" Margin="5,3" VerticalContentAlignment="Center"/>
                                 </Grid>
                             </DockPanel>
                         </Expander>
 
-                        <Expander Grid.Row="1" Header="{DynamicResource S.Upload.Imgur.Anonymous}" IsExpanded="True">
+                        <Expander Grid.Row="1" Header="{DynamicResource S.Options.Upload.Imgur.Anonymous}" IsExpanded="True">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
 
-                                <n:ExtendedCheckBox Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Upload.Imgur.Direct}" Margin="5,3" 
+                                <n:ExtendedCheckBox Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Options.Upload.Imgur.Direct}" Margin="5,3" 
                                                     IsChecked="{Binding ImgurAnonymousUseDirectLinks, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                <n:ExtendedCheckBox Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.Upload.Imgur.Gifv}" Margin="5,3"
+                                <n:ExtendedCheckBox Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.Options.Upload.Imgur.Gifv}" Margin="5,3"
                                                     IsChecked="{Binding ImgurAnonymousUseGifvLink, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             </Grid>
                         </Expander>
@@ -1443,29 +1443,29 @@
 
                                 <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="5,0" VerticalAlignment="Center">
                                     <Hyperlink Click="ImgurHyperlink_Click">
-                                        <Run Text="{DynamicResource S.Upload.Get}"/>
+                                        <Run Text="{DynamicResource S.Options.Upload.Get}"/>
                                     </Hyperlink>
                                 </TextBlock>
 
                                 <Viewbox Grid.Row="0" Grid.Column="2" Child="{StaticResource Vector.Arrow.Blue.Right}" Height="14" Opacity="{DynamicResource Element.Opacity}"/>
 
                                 <n:ExtendedTextBox Grid.Row="0" Grid.Column="3" Text="{Binding ImgurOAuthToken, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5,3"
-                                                   Watermark="{DynamicResource S.Upload.PasteToken}" TextWrapping="Wrap"/>
+                                                   Watermark="{DynamicResource S.Options.Upload.PasteToken}" TextWrapping="Wrap"/>
 
                                 <Viewbox Grid.Row="0" Grid.Column="4" Child="{StaticResource Vector.Arrow.Blue.Right}" Height="14" Opacity="{DynamicResource Element.Opacity}"/>
 
-                                <n:ImageButton Grid.Row="0" Grid.Column="5" Text="{DynamicResource S.Upload.Authorize}" Content="{StaticResource Vector.Ok}" ContentHeight="16" Margin="3" Padding="2,0" Click="ImgurAuthorizeButton_Click"/>
-                                <n:ImageButton Grid.Row="0" Grid.Column="6" Text="{DynamicResource S.Upload.Refresh}" Content="{StaticResource Vector.Repeat}" ContentHeight="16" Margin="3" Padding="2,0" Click="ImgurRefreshButton_Click"/>
-                                <n:ImageButton Grid.Row="1" Grid.Column="6" Text="{DynamicResource S.Upload.Clear}" Content="{StaticResource Vector.Eraser}" ContentHeight="16" Margin="3" Padding="2,0" Click="ImgurClearButton_Click"/>
+                                <n:ImageButton Grid.Row="0" Grid.Column="5" Text="{DynamicResource S.Options.Upload.Authorize}" Content="{StaticResource Vector.Ok}" ContentHeight="16" Margin="3" Padding="2,0" Click="ImgurAuthorizeButton_Click"/>
+                                <n:ImageButton Grid.Row="0" Grid.Column="6" Text="{DynamicResource S.Options.Upload.Refresh}" Content="{StaticResource Vector.Repeat}" ContentHeight="16" Margin="3" Padding="2,0" Click="ImgurRefreshButton_Click"/>
+                                <n:ImageButton Grid.Row="1" Grid.Column="6" Text="{DynamicResource S.Options.Upload.Clear}" Content="{StaticResource Vector.Eraser}" ContentHeight="16" Margin="3" Padding="2,0" Click="ImgurClearButton_Click"/>
 
-                                <n:ExtendedCheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="7" Text="{DynamicResource S.Upload.Imgur.Direct}" Margin="5,3" 
+                                <n:ExtendedCheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="7" Text="{DynamicResource S.Options.Upload.Imgur.Direct}" Margin="5,3" 
                                                     IsChecked="{Binding ImgurUseDirectLinks, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                <n:ExtendedCheckBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="7" Text="{DynamicResource S.Upload.Imgur.Gifv}" Margin="5,3"
+                                <n:ExtendedCheckBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="7" Text="{DynamicResource S.Options.Upload.Imgur.Gifv}" Margin="5,3"
                                                     IsChecked="{Binding ImgurUseGifvLink, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                <n:ExtendedCheckBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="7" Text="{DynamicResource S.Upload.Imgur.ToAlbum}" Margin="5,3"
+                                <n:ExtendedCheckBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="7" Text="{DynamicResource S.Options.Upload.Imgur.ToAlbum}" Margin="5,3"
                                                     IsChecked="{Binding ImgurUploadToAlbum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                                <TextBlock Grid.Row="5" Grid.Column="0" Text="{DynamicResource S.Upload.Imgur.Album}" Foreground="{DynamicResource Element.Foreground.Medium}" VerticalAlignment="Center" 
+                                <TextBlock Grid.Row="5" Grid.Column="0" Text="{DynamicResource S.Options.Upload.Imgur.Album}" Foreground="{DynamicResource Element.Foreground.Medium}" VerticalAlignment="Center" 
                                            HorizontalAlignment="Right" Margin="5,0" Visibility="{Binding Visibility, ElementName=ImgurAlbumComboBox}"/>
                                 <ComboBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="6" x:Name="ImgurAlbumComboBox" Margin="5" SelectedValuePath="Id"
                                           SelectedValue="{Binding ImgurSelectedAlbum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -1504,14 +1504,14 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Column="0" Content="{DynamicResource S.Upload.Yandex.Token}" Foreground="{DynamicResource Element.Foreground.Medium}" VerticalAlignment="Center"/>
+                                <Label Grid.Column="0" Content="{DynamicResource S.Options.Upload.Yandex.Token}" Foreground="{DynamicResource Element.Foreground.Medium}" VerticalAlignment="Center"/>
 
                                 <n:ExtendedTextBox Grid.Column="1" Text="{Binding YandexDiskOAuthToken, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5,3"
-                                                   Watermark="{DynamicResource S.Upload.PasteToken}"/>
+                                                   Watermark="{DynamicResource S.Options.Upload.PasteToken}"/>
 
                                 <TextBlock Grid.Column="2" Margin="0,0,5,0" VerticalAlignment="Center">
                                     <Hyperlink NavigateUri="https://oauth.yandex.com/authorize?response_type=token&amp;client_id=3afd5060e3c74c978661d4e1c4271aa9" RequestNavigate="YandexOauth_OnRequestNavigate">
-                                        <Run Text="{DynamicResource S.Upload.Get}"/>
+                                        <Run Text="{DynamicResource S.Options.Upload.Get}"/>
                                     </Hyperlink>
                                 </TextBlock>
                             </Grid>
@@ -1549,23 +1549,23 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="DonateButton" Text="{DynamicResource S.Donate.Donate.Dollar}" Margin="5" Content="{StaticResource Vector.Money}" 
+                            <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="DonateButton" Text="{DynamicResource S.Options.Donate.Donate.Dollar}" Margin="5" Content="{StaticResource Vector.Money}" 
                                            ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
                                            Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
                                            Click="DonateButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
-                                           ToolTipService.ToolTip="{DynamicResource S.Donate.Paypal.Dollar}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                                           ToolTipService.ToolTip="{DynamicResource S.Options.Donate.Paypal.Dollar}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
-                            <n:ImageButton Grid.Row="0" Grid.Column="1" x:Name="DonateEuroButton" Text="{DynamicResource S.Donate.Donate.Euro}" Margin="5" Content="{StaticResource Vector.Money}" 
+                            <n:ImageButton Grid.Row="0" Grid.Column="1" x:Name="DonateEuroButton" Text="{DynamicResource S.Options.Donate.Donate.Euro}" Margin="5" Content="{StaticResource Vector.Money}" 
                                            ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
                                            Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
                                            Click="DonateEuroButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}" 
-                                           ToolTipService.ToolTip="{DynamicResource S.Donate.Paypal.Euro}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                                           ToolTipService.ToolTip="{DynamicResource S.Options.Donate.Paypal.Euro}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
-                            <n:ImageButton Grid.Row="0" Grid.Column="2" x:Name="DonateOtherButton" Text="{DynamicResource S.Donate.Donate}" Margin="5" Content="{StaticResource Vector.Money}" 
+                            <n:ImageButton Grid.Row="0" Grid.Column="2" x:Name="DonateOtherButton" Text="{DynamicResource S.Options.Donate.Donate}" Margin="5" Content="{StaticResource Vector.Money}" 
                                            ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
                                            Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
                                            Click="DonateOtherButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
-                                           ToolTipService.ToolTip="{DynamicResource S.Donate.Paypal.OwnCurrency}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                                           ToolTipService.ToolTip="{DynamicResource S.Options.Donate.Paypal.OwnCurrency}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
                             <TextBlock Grid.Row="1" Grid.Column="0" Text="US$ - USA Dollar" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1"/>
                             <TextBlock Grid.Row="1" Grid.Column="1" Text="€ - Euro" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1"/>
@@ -1606,13 +1606,13 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="PatreonButton" Text="{DynamicResource S.Donate.Subscribe}" Margin="5" Content="{StaticResource Vector.Patreon}" 
+                            <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="PatreonButton" Text="{DynamicResource S.Options.Donate.Subscribe}" Margin="5" Content="{StaticResource Vector.Patreon}" 
                                            ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Center" VerticalContentAlignment="Center"
                                            Foreground="#FF143A61" FontSize="14" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
                                            Click="PatreonButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
                                            ToolTipService.ToolTip="https://www.patreon.com/nicke" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
-                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource S.Donate.Subscribe.Patreon}" Foreground="{DynamicResource Element.Foreground.Gray150}" 
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource S.Options.Donate.Subscribe.Patreon}" Foreground="{DynamicResource Element.Foreground.Gray150}" 
                                        FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextWrapping="Wrap"/>
                         </Grid>
 
@@ -1623,13 +1623,13 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="FlattrButton" Text="{DynamicResource S.Donate.Subscribe}" Margin="5" Content="{StaticResource Vector.Flattr}" 
+                            <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="FlattrButton" Text="{DynamicResource S.Options.Donate.Subscribe}" Margin="5" Content="{StaticResource Vector.Flattr}" 
                                            ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Center" VerticalContentAlignment="Center"
                                            Foreground="#FF143A61" FontSize="14" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
                                            Click="FlattrButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
                                            ToolTipService.ToolTip="https://flattr.com/@NickeManarin/domain/screentogif.com" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
-                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource S.Donate.Subscribe.Flattr}" Foreground="{DynamicResource Element.Foreground.Gray150}" 
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource S.Options.Donate.Subscribe.Flattr}" Foreground="{DynamicResource Element.Foreground.Gray150}" 
                                        FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextWrapping="Wrap"/>
                         </Grid>
 
@@ -1640,7 +1640,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="SteamButton" Text="{DynamicResource S.Donate.Gift}" Margin="5" Content="{StaticResource Vector.Steam}" 
+                            <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="SteamButton" Text="{DynamicResource S.Options.Donate.Gift}" Margin="5" Content="{StaticResource Vector.Steam}" 
                                            ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Center" VerticalContentAlignment="Center"
                                            Foreground="#FF143A61" FontSize="14" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
                                            Click="SteamButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
@@ -1648,7 +1648,7 @@
 
                             <TextBlock Grid.Row="0" Grid.Column="1" Foreground="{DynamicResource Element.Foreground.Gray150}" 
                                        FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Margin="5" TextWrapping="Wrap">
-                                <Run Text="{DynamicResource S.Donate.Gift.Steam}"/>
+                                <Run Text="{DynamicResource S.Options.Donate.Gift.Steam}"/>
                                 <LineBreak/>
                                 <Run Text="nicke@outlook.com.br"/>
                             </TextBlock>
@@ -1661,7 +1661,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="GogButton" Text="{DynamicResource S.Donate.Gift}" Margin="5" Content="{StaticResource Vector.Gog}" 
+                            <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="GogButton" Text="{DynamicResource S.Options.Donate.Gift}" Margin="5" Content="{StaticResource Vector.Gog}" 
                                            ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Center" VerticalContentAlignment="Center"
                                            Foreground="#FF143A61" FontSize="14" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
                                            Click="GogButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
@@ -1669,7 +1669,7 @@
 
                             <TextBlock Grid.Row="0" Grid.Column="1" Foreground="{DynamicResource Element.Foreground.Gray150}" 
                                        FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Margin="5" TextWrapping="Wrap">
-                                <Run Text="{DynamicResource S.Donate.Gift.Gog}"/>
+                                <Run Text="{DynamicResource S.Options.Donate.Gift.Gog}"/>
                                 <LineBreak/>
                                 <Run Text="nicke@outlook.com.br"/>
                             </TextBlock>
@@ -1682,17 +1682,17 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="KofiButton" Text="{DynamicResource S.Donate.Donate}" Margin="5" Content="{StaticResource Vector.Kofi}" 
+                            <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="KofiButton" Text="{DynamicResource S.Options.Donate.Donate}" Margin="5" Content="{StaticResource Vector.Kofi}" 
                                            ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Center" VerticalContentAlignment="Center"
                                            Foreground="#FF143A61" FontSize="14" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
                                            Click="KofiButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
                                            ToolTipService.ToolTip="https://ko-fi.com/nickemanarin" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
-                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource S.Donate.Kofi}" Foreground="{DynamicResource Element.Foreground.Gray150}" 
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource S.Options.Donate.Kofi}" Foreground="{DynamicResource Element.Foreground.Gray150}" 
                                        FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Margin="5" TextWrapping="Wrap"/>
                         </Grid>
 
-                        <n:LabelSeparator Grid.Row="6" Grid.Column="1" Text="{DynamicResource S.Donate.Crypto}" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}"/>
+                        <n:LabelSeparator Grid.Row="6" Grid.Column="1" Text="{DynamicResource S.Options.Donate.Crypto}" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}"/>
                         <Grid Grid.Row="7" Grid.Column="1" HorizontalAlignment="Left" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -1708,11 +1708,11 @@
                             <!--BitcoinCash: 1HN81cAwDo16tRtiYfkzvzFqikQUimM3S8-->
                             <!--Monero: 44yC9CkwHVfKPsKxg5RcA67GZEqiQH6QoBYtRKwkhDaE3tvRpiw1E5i6GShZYNsDq9eCtHnq49SrKjF4DG7NwjqWMoMueD4-->
 
-                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource S.Donate.Crypto.BitcoinCash}" Foreground="{DynamicResource Element.Foreground.Gray150}" 
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource S.Options.Donate.Crypto.BitcoinCash}" Foreground="{DynamicResource Element.Foreground.Gray150}" 
                                        FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Margin="5" TextWrapping="Wrap"/>
                         </Grid>
 
-                        <n:LabelSeparator Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{DynamicResource S.Donate.Support}" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility, Converter={StaticResource InvertedVisibility}}"/>
+                        <n:LabelSeparator Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{DynamicResource S.Options.Donate.Support}" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility, Converter={StaticResource InvertedVisibility}}"/>
                         <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Visibility="{Binding ElementName=PaypalLabel, Path=Visibility, Converter={StaticResource InvertedVisibility}}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -1725,7 +1725,7 @@
                                            Click="SupportButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
                                            ToolTipService.ToolTip="http://www.screentogif.com/donate" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
-                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource S.Donate.Support.Visit}" Foreground="{DynamicResource Element.Foreground.Gray150}" 
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource S.Options.Donate.Support.Visit}" Foreground="{DynamicResource Element.Foreground.Gray150}" 
                                        FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Margin="5" TextWrapping="Wrap"/>
                         </Grid>
                     </Grid>
@@ -1749,7 +1749,7 @@
                                    HorizontalAlignment="Right" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground}" Effect="{StaticResource Shadow.Foreground}"/>
 
                             <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
-                                <Label Content="{DynamicResource About.Version}" FontSize="18" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground}"
+                                <Label Content="{DynamicResource S.Options.About.Version}" FontSize="18" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground}"
                                        VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground}"/>
                                 <Label Content="{Binding Source={x:Static u:UserSettings.All}, Path=Version}" FontSize="18" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground}"
                                        VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground}"/>
@@ -1762,14 +1762,14 @@
                                 </Hyperlink>
                             </Label>
 
-                            <Label Grid.Row="1" Grid.Column="1" Content="{DynamicResource About.Author}" FontSize="16" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center" 
+                            <Label Grid.Row="1" Grid.Column="1" Content="{DynamicResource S.Options.About.Author}" FontSize="16" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center" 
                                    Foreground="{DynamicResource Element.Foreground}" Effect="{StaticResource Shadow.Foreground}"/>
 
-                            <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" x:Name="StoreTextBlock" Text="{DynamicResource S.About.StoreVersion}" Foreground="#882200" Margin="5"
+                            <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" x:Name="StoreTextBlock" Text="{DynamicResource S.Options.About.StoreVersion}" Foreground="#882200" Margin="5"
                                    VerticalAlignment="Center" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground}" Visibility="Collapsed"/>
                         </Grid>
 
-                        <n:LabelSeparator Text="{DynamicResource About.Contact}"/>
+                        <n:LabelSeparator Text="{DynamicResource S.Options.About.Contact}"/>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -1793,7 +1793,7 @@
                             <TextBlock Grid.Row="0" Grid.Column="2" Text="Discord:" FontSize="12" VerticalAlignment="Center" Margin="15,0,5,0" Foreground="{DynamicResource Element.Foreground}"/>
                             <TextBlock Grid.Row="0" Grid.Column="3" FontSize="12" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
                                 <Hyperlink NavigateUri="https://discord.gg/XgEqDHX" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" RequestNavigate="Hyperlink_OnRequestNavigate">
-                                    <Run Text="{StaticResource S.About.Contact.Discord}"/>
+                                    <Run Text="{StaticResource S.Options.About.Contact.Discord}"/>
                                 </Hyperlink>
                             </TextBlock>
 
@@ -1807,7 +1807,7 @@
                             <TextBlock Grid.Row="1" Grid.Column="2" Text="Facebook:" FontSize="12" VerticalAlignment="Center" Margin="15,0,5,0" Foreground="{DynamicResource Element.Foreground}"/>
                             <TextBlock Grid.Row="1" Grid.Column="3" FontSize="12" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
                                 <Hyperlink NavigateUri="https://www.facebook.com/ScreenToGif" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" RequestNavigate="Hyperlink_OnRequestNavigate">
-                                    <Run Text="{StaticResource S.About.Contact.Facebook}"/>
+                                    <Run Text="{StaticResource S.Options.About.Contact.Facebook}"/>
                                 </Hyperlink>
                             </TextBlock>
 
@@ -1821,12 +1821,12 @@
                             <TextBlock Grid.Row="2" Grid.Column="2" Text="Gitter:" FontSize="12" VerticalAlignment="Center" Margin="15,0,5,0" Foreground="{DynamicResource Element.Foreground}"/>
                             <TextBlock Grid.Row="2" Grid.Column="3" FontSize="12" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
                                 <Hyperlink NavigateUri="https://gitter.im/ScreenToGif/Lobby" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" RequestNavigate="Hyperlink_OnRequestNavigate">
-                                    <Run Text="{StaticResource S.About.Contact.Gitter}"/>
+                                    <Run Text="{StaticResource S.Options.About.Contact.Gitter}"/>
                                 </Hyperlink>
                             </TextBlock>
                         </Grid>
 
-                        <n:LabelSeparator Text="{DynamicResource About.Technical}"/>
+                        <n:LabelSeparator Text="{DynamicResource S.Options.About.Technical}"/>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -1838,7 +1838,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource About.Technical.License}" FontSize="12" VerticalContentAlignment="Center" Margin="15,0,0,0" Foreground="{DynamicResource Element.Foreground}"/>
+                            <Label Grid.Row="0" Grid.Column="0" Content="{DynamicResource S.Options.About.Technical.License}" FontSize="12" VerticalContentAlignment="Center" Margin="15,0,0,0" Foreground="{DynamicResource Element.Foreground}"/>
 
                             <TextBlock Grid.Row="0" Grid.Column="1" FontSize="12" FontFamily="Segoe UI Semilight" HorizontalAlignment="Left" Padding="3,5">
                                 <Hyperlink NavigateUri="https://github.com/NickeManarin/ScreenToGif/blob/master/LICENSE.txt" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
@@ -1850,10 +1850,10 @@
                                            Cursor="Hand" RequestNavigate="Hyperlink_OnRequestNavigate">
                                     TL;DR Legal
                                 </Hyperlink>
-                                <Run Text="{DynamicResource About.Technical.Free}" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                                <Run Text="{DynamicResource S.Options.About.Technical.Free}" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
                             </TextBlock>
 
-                            <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource About.Technical.SourceCode}" FontSize="12" VerticalContentAlignment="Center" Margin="15,0,0,0" Foreground="{DynamicResource Element.Foreground}"/>
+                            <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource S.Options.About.Technical.SourceCode}" FontSize="12" VerticalContentAlignment="Center" Margin="15,0,0,0" Foreground="{DynamicResource Element.Foreground}"/>
 
                             <TextBlock Grid.Row="1" Grid.Column="1" FontSize="12" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
                                 <Hyperlink NavigateUri="https://github.com/NickeManarin/ScreenToGif" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
@@ -1863,7 +1863,7 @@
                             </TextBlock>
                         </Grid>
 
-                        <n:LabelSeparator Text="{DynamicResource About.ABigThanksTo}"/>
+                        <n:LabelSeparator Text="{DynamicResource S.Options.About.ABigThanksTo}"/>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -1893,7 +1893,7 @@
                                 </Hyperlink>
                             </Label>
 
-                            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="{DynamicResource About.ABigThanksTo.Everyone}" 
+                            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="{DynamicResource S.Options.About.ABigThanksTo.Everyone}" 
                                    FontSize="12" VerticalContentAlignment="Center" Margin="15,0,0,0" Foreground="{DynamicResource Element.Foreground}"/>
                         </Grid>
                     </StackPanel>

@@ -42,14 +42,13 @@
     <!--Options Page-->
     <s:String x:Key="S.Options.Title">ScreenToGif - 選項</s:String>
     <s:String x:Key="S.Options.App">應用程式</s:String>
-    <s:String x:Key="S.Shortcuts">鍵盤快速鍵</s:String>
+    <s:String x:Key="S.Options.Shortcuts">鍵盤快速鍵</s:String>
     <s:String x:Key="S.Options.Interface">介面</s:String>
-    <s:String x:Key="Image">圖像</s:String>
-    <s:String x:Key="Language">語言</s:String>
-    <s:String x:Key="TemporaryFiles">暫存檔</s:String>
-    <s:String x:Key="Extras">擴充</s:String>
+    <s:String x:Key="S.Options.Language">語言</s:String>
+    <s:String x:Key="S.Options.Storage">暫存檔</s:String>
+    <s:String x:Key="S.Options.Extras">擴充</s:String>
     <s:String x:Key="S.Options.Donate">捐贈</s:String>
-    <s:String x:Key="About">關於</s:String>
+    <s:String x:Key="S.Options.About">關於</s:String>
     
     <s:String x:Key="S.Options.App.Startup.Window.Startup">啟動視窗</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Recorder">螢幕錄影</s:String>
@@ -104,50 +103,50 @@
     <s:String x:Key="S.Options.Interface.Other.HideTitleBar">隱藏標題列(瘦身模式)。</s:String>
     <s:String x:Key="S.Options.Interface.Other.TripleClickSelection">啟用連按三下來選擇文字。</s:String>
 
-    <s:String x:Key="S.Shortcuts.Recorders.StartPause">開始/暫停:</s:String>
-    <s:String x:Key="S.Shortcuts.Recorders.Stop">停止:</s:String>
-    <s:String x:Key="S.Shortcuts.Recorders.Discard">捨棄:</s:String>
-    <s:String x:Key="S.Shortcuts.Recorders.Info">按一下以設定鍵盤焦點，然後點選所需的按鍵和輔助按鍵。不允許使用某些按鍵組合。</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause">開始/暫停:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Stop">停止:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Discard">捨棄:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Info">按一下以設定鍵盤焦點，然後點選所需的按鍵和輔助按鍵。不允許使用某些按鍵組合。</s:String>
 
-    <s:String x:Key="Language.AppLanguage">應用程式語言</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage">應用程式語言</s:String>
     
-    <s:String x:Key="TempFiles.FilesAndFolders">暫存檔案和資料夾</s:String>
-    <s:String x:Key="TempFiles.Folders">資料夾:</s:String>
-    <s:String x:Key="TempFiles.Files">檔案:</s:String>
-    <s:String x:Key="TempFiles.OpenFolder">打開資料夾</s:String>
-    <s:String x:Key="TempFiles.Clear">清空暫存資料夾</s:String>
-    <s:String x:Key="TempFiles.LogsLocation">記錄資料夾</s:String>
-    <s:String x:Key="TempFiles.LogsLocation.Choose">選擇錯誤記錄檔位置</s:String>
-    <s:String x:Key="TempFiles.Location">資料夾位置</s:String>
-    <s:String x:Key="TempFiles.Location.Choose">選擇暫存檔案的位置</s:String>
-    <s:String x:Key="TempFiles.Settings">設定位置</s:String>
-    <!--<s:String x:Key="TempFiles.AppDataPath">AppData:</s:String>-->
-    <s:String x:Key="TempFiles.LocalPath">本機:</s:String>
-    <s:String x:Key="TempFiles.NotExists">它不存在</s:String>
-    <s:String x:Key="TempFiles.CreateSettings">建立空的本機設定檔。</s:String>
-    <s:String x:Key="TempFiles.RemoveSettings">移除設定檔。</s:String>
-    <s:String x:Key="TempFiles.SettingsInfo">• 設定載入模式: 預設 ◄ AppData ◄ 本機。\n• 如果本機資料夾中沒有設定檔，應用程式將在 AppData 資料夾中搜尋，如果沒有設定檔，則使用預設值。\n• 如果沒有本機設定，所有設定都儲存在 AppData 設定檔中。</s:String>
-    <s:String x:Key="TempFiles.KeepRecent">要保留最近的專案嗎?</s:String>
-    <s:String x:Key="TempFiles.KeepRecent.Info">如果您這樣想，所有最近 5 天內的專案將不會被刪除。</s:String>
-    <s:String x:Key="TempFiles.AutomaticRemoval">自動移除舊的專案。</s:String>
-    <s:String x:Key="TempFiles.AutomaticRemoval.Info">打開編輯器時，背景工作將清除超過 5 天的專案。</s:String>
+    <s:String x:Key="S.Options.Storage.FilesAndFolders">暫存檔案和資料夾</s:String>
+    <s:String x:Key="S.Options.Storage.Folders">資料夾:</s:String>
+    <s:String x:Key="S.Options.Storage.Files">檔案:</s:String>
+    <s:String x:Key="S.Options.Storage.OpenFolder">打開資料夾</s:String>
+    <s:String x:Key="S.Options.Storage.Clear">清空暫存資料夾</s:String>
+    <s:String x:Key="S.Options.Storage.LogsLocation">記錄資料夾</s:String>
+    <s:String x:Key="S.Options.Storage.LogsLocation.Choose">選擇錯誤記錄檔位置</s:String>
+    <s:String x:Key="S.Options.Storage.Location">資料夾位置</s:String>
+    <s:String x:Key="S.Options.Storage.Location.Choose">選擇暫存檔案的位置</s:String>
+    <s:String x:Key="S.Options.Storage.Settings">設定位置</s:String>
+    <!--<s:String x:Key="S.Options.Storage.AppDataPath">AppData:</s:String>-->
+    <s:String x:Key="S.Options.Storage.LocalPath">本機:</s:String>
+    <s:String x:Key="S.Options.Storage.NotExists">它不存在</s:String>
+    <s:String x:Key="S.Options.Storage.CreateSettings">建立空的本機設定檔。</s:String>
+    <s:String x:Key="S.Options.Storage.RemoveSettings">移除設定檔。</s:String>
+    <s:String x:Key="S.Options.Storage.SettingsInfo">• 設定載入模式: 預設 ◄ AppData ◄ 本機。\n• 如果本機資料夾中沒有設定檔，應用程式將在 AppData 資料夾中搜尋，如果沒有設定檔，則使用預設值。\n• 如果沒有本機設定，所有設定都儲存在 AppData 設定檔中。</s:String>
+    <s:String x:Key="S.Options.Storage.KeepRecent">要保留最近的專案嗎?</s:String>
+    <s:String x:Key="S.Options.Storage.KeepRecent.Info">如果您這樣想，所有最近 5 天內的專案將不會被刪除。</s:String>
+    <s:String x:Key="S.Options.Storage.AutomaticRemoval">自動移除舊的專案。</s:String>
+    <s:String x:Key="S.Options.Storage.AutomaticRemoval.Info">打開編輯器時，背景工作將清除超過 5 天的專案。</s:String>
     
-    <s:String x:Key="Extras.FfmpegLocation">FFmpeg位置</s:String>
-    <s:String x:Key="Extras.FfmpegLocation.Select">選擇FFmpeg可執行檔的位置</s:String>
+    <s:String x:Key="S.Options.Extras.FfmpegLocation">FFmpeg位置</s:String>
+    <s:String x:Key="S.Options.Extras.FfmpegLocation.Select">選擇FFmpeg可執行檔的位置</s:String>
     
-    <s:String x:Key="S.Donate.Donate.Dollar">捐贈美金 US$</s:String>
-    <s:String x:Key="S.Donate.Donate.Euro">捐贈歐元 €</s:String>
-    <s:String x:Key="S.Donate.Donate">捐贈</s:String>
+    <s:String x:Key="S.Options.Donate.Donate.Dollar">捐贈美金 US$</s:String>
+    <s:String x:Key="S.Options.Donate.Donate.Euro">捐贈歐元 €</s:String>
+    <s:String x:Key="S.Options.Donate.Donate">捐贈</s:String>
 
-    <s:String x:Key="About.Version">版本:</s:String>
-    <s:String x:Key="About.Author">作者: Nicke Manarin</s:String>
-    <s:String x:Key="About.Contact">聯繫</s:String>
-    <s:String x:Key="About.Technical">技術</s:String>
-    <s:String x:Key="About.Technical.License">授權:</s:String>
-    <s:String x:Key="About.Technical.Free">(這是完全免費的應用程式)</s:String>
-    <s:String x:Key="About.Technical.SourceCode">原始碼:</s:String>
-    <s:String x:Key="About.ABigThanksTo">非常感謝</s:String>
-    <s:String x:Key="About.ABigThanksTo.Everyone">我所有的支持者，提供意見反應和/或捐贈的人。</s:String>
+    <s:String x:Key="S.Options.About.Version">版本:</s:String>
+    <s:String x:Key="S.Options.About.Author">作者: Nicke Manarin</s:String>
+    <s:String x:Key="S.Options.About.Contact">聯繫</s:String>
+    <s:String x:Key="S.Options.About.Technical">技術</s:String>
+    <s:String x:Key="S.Options.About.Technical.License">授權:</s:String>
+    <s:String x:Key="S.Options.About.Technical.Free">(這是完全免費的應用程式)</s:String>
+    <s:String x:Key="S.Options.About.Technical.SourceCode">原始碼:</s:String>
+    <s:String x:Key="S.Options.About.ABigThanksTo">非常感謝</s:String>
+    <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">我所有的支持者，提供意見反應和/或捐贈的人。</s:String>
 
     <!--Recorder-->
     <s:String x:Key="Recorder.RecordingOptions">錄影選項</s:String>

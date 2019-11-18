@@ -46,16 +46,15 @@
     <s:String x:Key="Update.CloseThis">¿Quieres cerrar la aplicación?</s:String>
     <s:String x:Key="Update.CloseThis.Detail">Esta es una vieja versión. Puedes descargar la última versión.</s:String>
     
-    <!--Options Page-->
+    <!--Options-->
     <s:String x:Key="S.Options.Title">ScreenToGif - Opciones</s:String>
     <s:String x:Key="S.Options.App">Aplicación</s:String>
     <s:String x:Key="S.Options.Interface">Interfaz</s:String>
-    <s:String x:Key="Image">Imagen</s:String>
-    <s:String x:Key="Language">Idioma</s:String>
-    <s:String x:Key="TemporaryFiles">Archivos temporales</s:String>
-    <s:String x:Key="Extras">Extras</s:String>
+    <s:String x:Key="S.Options.Language">Idioma</s:String>
+    <s:String x:Key="S.Options.Storage">Archivos temporales</s:String>
+    <s:String x:Key="S.Options.Extras">Extras</s:String>
     <s:String x:Key="S.Options.Donate">Donar</s:String>
-    <s:String x:Key="About">Información</s:String>
+    <s:String x:Key="S.Options.About">Información</s:String>
     
     <s:String x:Key="S.Options.App.Startup.Window.Startup">Ventana de Inicio</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Recorder">Grabar Pantalla</s:String>
@@ -124,67 +123,67 @@
     <s:String x:Key="S.Options.Interface.Other.AutomaticallySizeOnContent">Ajustar automaticamente el tamaño de la ventana basado en el fotograma, justo después de cargarlo.</s:String>
     <s:String x:Key="S.Options.Interface.Other.AutomaticallyFitImage">Ajustar automaticamente el zoom del fotograma basado en el tamaño de la ventana, justo después de cargar.</s:String>
   
-    <s:String x:Key="S.Shortcuts.Recorders.StartPause">Iniciar/Parar:</s:String>
-    <s:String x:Key="S.Shortcuts.Recorders.Stop">Parar:</s:String>
-    <s:String x:Key="S.Shortcuts.Recorders.Discard">Descartar:</s:String>
-    <s:String x:Key="S.Shortcuts.Recorders.Info">Haga clic para establecer el atajo del teclado, después de eso, presione las que usara. Algunas combinaciones de teclas no están permitidas.</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause">Iniciar/Parar:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Stop">Parar:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Discard">Descartar:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Info">Haga clic para establecer el atajo del teclado, después de eso, presione las que usara. Algunas combinaciones de teclas no están permitidas.</s:String>
     
-    <s:String x:Key="Language.AppLanguage">Lenguaje de la App</s:String>
-    <s:String x:Key="Language.AppLanguage.AutoDetect">Auto-Detectar</s:String>
-    <s:String x:Key="Language.AppLanguage.AutoDetect.Author">Actual lenguaje (si esta disponible)</s:String>
-    <s:String x:Key="Language.AppLanguage.Translate.Sentence1.1">¿Te gustaria traducir mi app?</s:String>
-    <s:String x:Key="Language.AppLanguage.Translate.Sentence1.2">Click aquí para leer la guia de traducción y descargar la app para traducir</s:String>
-    <s:String x:Key="Language.AppLanguage.Translate.Sentence2.1">Después</s:String>
-    <s:String x:Key="Language.AppLanguage.Translate.Sentence2.2">Click aquí para importar</s:String>
-    <s:String x:Key="Language.AppLanguage.Translate.Sentence2.3">y testear tu traducción</s:String>
-    <s:String x:Key="Language.AppLanguage.Translate.Sentence3.1">Enviarmela mediante</s:String>
-    <s:String x:Key="Language.AppLanguage.Translate.Sentence3.2">email (nicke@outlook.com.br)</s:String>
-    <s:String x:Key="Language.AppLanguage.Translate.Sentence3.3">Si has finalizado la traducción</s:String>
-    <s:String x:Key="Language.AppLanguage.Translate.ResourceLink.Tooltip">Click para abrir la pagina con la guia.</s:String>
-    <s:String x:Key="Language.AppLanguage.Translate.ImportLink.Tooltip">Abrir pagina de importacion</s:String>
-    <s:String x:Key="Language.AppLanguage.Translate.EmailLink.Tooltip">Abir tu email app</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage">Lenguaje de la App</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.AutoDetect">Auto-Detectar</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.AutoDetect.Author">Actual lenguaje (si esta disponible)</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence1.1">¿Te gustaria traducir mi app?</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence1.2">Click aquí para leer la guia de traducción y descargar la app para traducir</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence2.1">Después</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence2.2">Click aquí para importar</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence2.3">y testear tu traducción</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence3.1">Enviarmela mediante</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence3.2">email (nicke@outlook.com.br)</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence3.3">Si has finalizado la traducción</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.ResourceLink.Tooltip">Click para abrir la pagina con la guia.</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.ImportLink.Tooltip">Abrir pagina de importacion</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.EmailLink.Tooltip">Abir tu email app</s:String>
     
-    <s:String x:Key="TempFiles.FilesAndFolders">Archivos temporales y carpetas</s:String>
-    <s:String x:Key="TempFiles.Folders">Carpetas:</s:String>
-    <s:String x:Key="TempFiles.Files">Archivos:</s:String>
-    <s:String x:Key="TempFiles.OpenFolder">Buscar carpeta</s:String>
-    <s:String x:Key="TempFiles.Clear">Limpiar Carpeta Temp.</s:String>
-    <s:String x:Key="TempFiles.LogsLocation">Carpeta de Logs</s:String>
-    <s:String x:Key="TempFiles.LogsLocation.Choose">Escoge la locación para los logs de error</s:String>
-    <s:String x:Key="TempFiles.Location">Localizacion de carpeta</s:String>
-    <s:String x:Key="TempFiles.Location.Choose">Escoge la localizacion de archivos temporales</s:String>
-    <s:String x:Key="TempFiles.Settings">Localizacion de ajustes</s:String>
-    <s:String x:Key="TempFiles.AppDataPath">AppData:</s:String>
-    <s:String x:Key="TempFiles.LocalPath">Local:</s:String>
-    <s:String x:Key="TempFiles.NotExists">Si este no existe</s:String>
-    <s:String x:Key="TempFiles.CreateSettings">Crear un archivo de ajustes vacio.</s:String>
-    <s:String x:Key="TempFiles.RemoveSettings">Remover el archivo de ajustes</s:String>
-    <s:String x:Key="TempFiles.SettingsInfo">• Patrón de carga de configuraciones: Valor predeterminado ◄ AppData ◄ Local.&#x0d;• Si no hay un archivo de configuración presente en la carpeta Local, la aplicación busca dentro de la carpeta AppData, Predeterminado se utiliza si no hay ningún archivo de configuración presente. No hay configuraciones locales, todas las configuraciones se guardan en el archivo de configuración de AppData.</s:String>
-    <s:String x:Key="TempFiles.KeepRecent">¿Deberíamos mantener proyectos recientes?</s:String>
-    <s:String x:Key="TempFiles.KeepRecent.Info">Si lo cree, todos los proyectos recientes con menos de 5 días de antigüedad no se borrarán.</s:String>
-    <s:String x:Key="TempFiles.AutomaticRemoval">Automaticamente remover viejos proyectos.</s:String>
-    <s:String x:Key="TempFiles.AutomaticRemoval.Info">Al abrir el Editor, una tarea en segundo plano borrará los proyectos con más de 5 días de antigüedad.</s:String>
+    <s:String x:Key="S.Options.Storage.FilesAndFolders">Archivos temporales y carpetas</s:String>
+    <s:String x:Key="S.Options.Storage.Folders">Carpetas:</s:String>
+    <s:String x:Key="S.Options.Storage.Files">Archivos:</s:String>
+    <s:String x:Key="S.Options.Storage.OpenFolder">Buscar carpeta</s:String>
+    <s:String x:Key="S.Options.Storage.Clear">Limpiar Carpeta Temp.</s:String>
+    <s:String x:Key="S.Options.Storage.LogsLocation">Carpeta de Logs</s:String>
+    <s:String x:Key="S.Options.Storage.LogsLocation.Choose">Escoge la locación para los logs de error</s:String>
+    <s:String x:Key="S.Options.Storage.Location">Localizacion de carpeta</s:String>
+    <s:String x:Key="S.Options.Storage.Location.Choose">Escoge la localizacion de archivos temporales</s:String>
+    <s:String x:Key="S.Options.Storage.Settings">Localizacion de ajustes</s:String>
+    <s:String x:Key="S.Options.Storage.AppDataPath">AppData:</s:String>
+    <s:String x:Key="S.Options.Storage.LocalPath">Local:</s:String>
+    <s:String x:Key="S.Options.Storage.NotExists">Si este no existe</s:String>
+    <s:String x:Key="S.Options.Storage.CreateSettings">Crear un archivo de ajustes vacio.</s:String>
+    <s:String x:Key="S.Options.Storage.RemoveSettings">Remover el archivo de ajustes</s:String>
+    <s:String x:Key="S.Options.Storage.SettingsInfo">• Patrón de carga de configuraciones: Valor predeterminado ◄ AppData ◄ Local.&#x0d;• Si no hay un archivo de configuración presente en la carpeta Local, la aplicación busca dentro de la carpeta AppData, Predeterminado se utiliza si no hay ningún archivo de configuración presente. No hay configuraciones locales, todas las configuraciones se guardan en el archivo de configuración de AppData.</s:String>
+    <s:String x:Key="S.Options.Storage.KeepRecent">¿Deberíamos mantener proyectos recientes?</s:String>
+    <s:String x:Key="S.Options.Storage.KeepRecent.Info">Si lo cree, todos los proyectos recientes con menos de 5 días de antigüedad no se borrarán.</s:String>
+    <s:String x:Key="S.Options.Storage.AutomaticRemoval">Automaticamente remover viejos proyectos.</s:String>
+    <s:String x:Key="S.Options.Storage.AutomaticRemoval.Info">Al abrir el Editor, una tarea en segundo plano borrará los proyectos con más de 5 días de antigüedad.</s:String>
     
-    <s:String x:Key="Extras.FfmpegLocation">FFmpeg Locación</s:String>
-    <s:String x:Key="Extras.FfmpegLocation.Select">Seleccione la ubicación del ejecutable FFmpeg</s:String>
-    <s:String x:Key="Extras.FfmpegLocation.Invalid">La ruta del ejecutable FFmpeg contiene uno o más caracteres no válidos. Por favor, seleccione una ubicación válida para ese ejecutable.</s:String>
+    <s:String x:Key="S.Options.Extras.FfmpegLocation">FFmpeg Locación</s:String>
+    <s:String x:Key="S.Options.Extras.FfmpegLocation.Select">Seleccione la ubicación del ejecutable FFmpeg</s:String>
+    <s:String x:Key="S.Options.Extras.FfmpegLocation.Invalid">La ruta del ejecutable FFmpeg contiene uno o más caracteres no válidos. Por favor, seleccione una ubicación válida para ese ejecutable.</s:String>
     
-    <s:String x:Key="S.Donate.Donate.Dollar">Donar [US] $</s:String>
-    <s:String x:Key="S.Donate.Donate.Euro">Donar [Euro] €</s:String>
-    <s:String x:Key="S.Donate.Donate">Donar</s:String>
-    <s:String x:Key="S.Donate.Paypal.Dollar">Abrir PAYPAL: Moneda Seleccionada: Dolar</s:String>
-    <s:String x:Key="S.Donate.Paypal.Euro">Abrir PAYPAL: Moneda Seleccionada: Euro</s:String>
-    <s:String x:Key="S.Donate.Paypal.OwnCurrency">Abrir PayPal: Seleccionar otra moneda.</s:String>
+    <s:String x:Key="S.Options.Donate.Donate.Dollar">Donar [US] $</s:String>
+    <s:String x:Key="S.Options.Donate.Donate.Euro">Donar [Euro] €</s:String>
+    <s:String x:Key="S.Options.Donate.Donate">Donar</s:String>
+    <s:String x:Key="S.Options.Donate.Paypal.Dollar">Abrir PAYPAL: Moneda Seleccionada: Dolar</s:String>
+    <s:String x:Key="S.Options.Donate.Paypal.Euro">Abrir PAYPAL: Moneda Seleccionada: Euro</s:String>
+    <s:String x:Key="S.Options.Donate.Paypal.OwnCurrency">Abrir PayPal: Seleccionar otra moneda.</s:String>
 
-    <s:String x:Key="About.Version">Versión:</s:String>
-    <s:String x:Key="About.Author">Creador: Nicke Manarin</s:String>
-    <s:String x:Key="About.Contact">Contacto</s:String>
-    <s:String x:Key="About.Technical">Datos tecnicos</s:String>
-    <s:String x:Key="About.Technical.License">Licencia:</s:String>
-    <s:String x:Key="About.Technical.Free">(Esta es una aplicación completamente gratuita)</s:String>
-    <s:String x:Key="About.Technical.SourceCode">Código fuente:</s:String>
-    <s:String x:Key="About.ABigThanksTo">Agradecimientos especiales</s:String>
-    <s:String x:Key="About.ABigThanksTo.Everyone">Gracias a todos los que me apoyaron en el desarrollo y los que donaron.</s:String>
+    <s:String x:Key="S.Options.About.Version">Versión:</s:String>
+    <s:String x:Key="S.Options.About.Author">Creador: Nicke Manarin</s:String>
+    <s:String x:Key="S.Options.About.Contact">Contacto</s:String>
+    <s:String x:Key="S.Options.About.Technical">Datos tecnicos</s:String>
+    <s:String x:Key="S.Options.About.Technical.License">Licencia:</s:String>
+    <s:String x:Key="S.Options.About.Technical.Free">(Esta es una aplicación completamente gratuita)</s:String>
+    <s:String x:Key="S.Options.About.Technical.SourceCode">Código fuente:</s:String>
+    <s:String x:Key="S.Options.About.ABigThanksTo">Agradecimientos especiales</s:String>
+    <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">Gracias a todos los que me apoyaron en el desarrollo y los que donaron.</s:String>
     
     <!--Localization-->
     <s:String x:Key="Localization">Localización</s:String>

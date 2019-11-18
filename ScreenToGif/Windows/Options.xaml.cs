@@ -865,7 +865,7 @@ namespace ScreenToGif.Windows
                 AppDataPathTextBlock.TextDecorations.Add(new TextDecoration(TextDecorationLocation.Strikethrough, new Pen(Brushes.DarkSlateGray, 1),
                     0, TextDecorationUnit.FontRecommended, TextDecorationUnit.FontRecommended));
 
-                AppDataPathTextBlock.SetResourceReference(ToolTipProperty, "TempFiles.NotExists");
+                AppDataPathTextBlock.SetResourceReference(ToolTipProperty, "S.Options.Storage.NotExists");
             }
 
             //Local.
@@ -874,7 +874,7 @@ namespace ScreenToGif.Windows
                 LocalPathTextBlock.TextDecorations.Add(new TextDecoration(TextDecorationLocation.Strikethrough, new Pen(Brushes.DarkSlateGray, 1),
                     0, TextDecorationUnit.FontRecommended, TextDecorationUnit.FontRecommended));
 
-                LocalPathTextBlock.SetResourceReference(ToolTipProperty, "TempFiles.NotExists");
+                LocalPathTextBlock.SetResourceReference(ToolTipProperty, "S.Options.Storage.NotExists");
             }
 
             #endregion
@@ -930,13 +930,13 @@ namespace ScreenToGif.Windows
                 if (!Directory.Exists(path))
                 {
                     _folderList.Clear();
-                    TempSeparator.TextRight = LocalizationHelper.Get("TempFiles.FilesAndFolders.None");
+                    TempSeparator.TextRight = LocalizationHelper.Get("S.Options.Storage.FilesAndFolders.None");
                     return;
                 }
 
                 _folderList = await Task.Factory.StartNew(() => Directory.GetDirectories(path, "*", SearchOption.TopDirectoryOnly).Select(x => new DirectoryInfo(x)).ToList());
 
-                if (Dialog.Ask("ScreenToGif", LocalizationHelper.Get("TempFiles.KeepRecent"), LocalizationHelper.Get("TempFiles.KeepRecent.Info")))
+                if (Dialog.Ask("ScreenToGif", LocalizationHelper.Get("S.Options.Storage.KeepRecent"), LocalizationHelper.Get("S.Options.Storage.KeepRecent.Info")))
                     _folderList = await Task.Factory.StartNew(() => _folderList.Where(w => (DateTime.Now - w.CreationTime).Days > (UserSettings.All.AutomaticCleanUpDays > 0 ? UserSettings.All.AutomaticCleanUpDays : 5)).ToList());
 
                 foreach (var folder in _folderList)
@@ -958,7 +958,7 @@ namespace ScreenToGif.Windows
                 App.MainViewModel.CheckDiskSpace();
             }
 
-            TempSeparator.TextRight = string.Format(LocalizationHelper.Get("TempFiles.FilesAndFolders.Count", "{0} folders and {1} files"), _folderList.Count.ToString("##,##0"),
+            TempSeparator.TextRight = string.Format(LocalizationHelper.Get("S.Options.Storage.FilesAndFolders.Count", "{0} folders and {1} files"), _folderList.Count.ToString("##,##0"),
                 _folderList.Sum(folder => Directory.EnumerateFiles(folder.FullName).Count()).ToString("##,##0"));
 
             ClearTempButton.IsEnabled = _folderList.Any();
@@ -1004,7 +1004,7 @@ namespace ScreenToGif.Windows
                 AppDataPathTextBlock.TextDecorations.Add(new TextDecoration(TextDecorationLocation.Strikethrough,
                     new Pen(Brushes.DarkSlateGray, 1), 0, TextDecorationUnit.FontRecommended, TextDecorationUnit.FontRecommended));
 
-                AppDataPathTextBlock.SetResourceReference(ToolTipProperty, "TempFiles.NotExists");
+                AppDataPathTextBlock.SetResourceReference(ToolTipProperty, "S.Options.Storage.NotExists");
             }
             catch (Exception ex)
             {
@@ -1051,7 +1051,7 @@ namespace ScreenToGif.Windows
                 LocalPathTextBlock.TextDecorations.Add(new TextDecoration(TextDecorationLocation.Strikethrough,
                     new Pen(Brushes.DarkSlateGray, 1), 0, TextDecorationUnit.FontRecommended, TextDecorationUnit.FontRecommended));
 
-                LocalPathTextBlock.SetResourceReference(ToolTipProperty, "TempFiles.NotExists");
+                LocalPathTextBlock.SetResourceReference(ToolTipProperty, "S.Options.Storage.NotExists");
             }
             catch (Exception ex)
             {
@@ -1090,7 +1090,7 @@ namespace ScreenToGif.Windows
                 {
                     App.MainViewModel.CheckDiskSpace();
 
-                    TempSeparator.TextRight = string.Format(LocalizationHelper.Get("TempFiles.FilesAndFolders.Count", "{0} folders and {1} files"), _folderList.Count.ToString("##,##0"), _fileCount.ToString("##,##0"));
+                    TempSeparator.TextRight = string.Format(LocalizationHelper.Get("S.Options.Storage.FilesAndFolders.Count", "{0} folders and {1} files"), _folderList.Count.ToString("##,##0"), _fileCount.ToString("##,##0"));
 
                     ClearTempButton.IsEnabled = _folderList.Any();
                 });
@@ -1115,7 +1115,7 @@ namespace ScreenToGif.Windows
             catch (Exception ex)
             {
                 LogWriter.Log(ex, "Creating the link and opening a Imgur related page");
-                StatusBand.Error(LocalizationHelper.Get("S.Upload.Imgur.Auth.NotPossible"));
+                StatusBand.Error(LocalizationHelper.Get("S.Options.Upload.Imgur.Auth.NotPossible"));
             }
         }
 
@@ -1123,7 +1123,7 @@ namespace ScreenToGif.Windows
         {
             if (string.IsNullOrWhiteSpace(UserSettings.All.ImgurOAuthToken))
             {
-                StatusBand.Warning(LocalizationHelper.Get("S.Upload.Imgur.Auth.Missing"));
+                StatusBand.Warning(LocalizationHelper.Get("S.Options.Upload.Imgur.Auth.Missing"));
                 return;
             }
 
@@ -1135,10 +1135,10 @@ namespace ScreenToGif.Windows
                 if (await Imgur.GetAccessToken())
                 {
                     UserSettings.All.ImgurOAuthToken = null;
-                    StatusBand.Info(LocalizationHelper.Get("S.Upload.Imgur.Auth.Completed"));
+                    StatusBand.Info(LocalizationHelper.Get("S.Options.Upload.Imgur.Auth.Completed"));
                 }
                 else
-                    StatusBand.Warning(LocalizationHelper.Get("S.Upload.Imgur.Auth.Error"));
+                    StatusBand.Warning(LocalizationHelper.Get("S.Options.Upload.Imgur.Auth.Error"));
             }
             catch (Exception ex)
             {
@@ -1155,7 +1155,7 @@ namespace ScreenToGif.Windows
         {
             if (string.IsNullOrWhiteSpace(UserSettings.All.ImgurRefreshToken))
             {
-                StatusBand.Warning(LocalizationHelper.Get("S.Upload.Imgur.Refresh.None"));
+                StatusBand.Warning(LocalizationHelper.Get("S.Options.Upload.Imgur.Refresh.None"));
                 return;
             }
 
@@ -1165,9 +1165,9 @@ namespace ScreenToGif.Windows
                 StatusBand.Hide();
 
                 if (await Imgur.RefreshToken())
-                    StatusBand.Info(LocalizationHelper.Get("S.Upload.Imgur.Auth.Completed"));
+                    StatusBand.Info(LocalizationHelper.Get("S.Options.Upload.Imgur.Auth.Completed"));
                 else
-                    StatusBand.Warning(LocalizationHelper.Get("S.Upload.Imgur.Auth.Error"));
+                    StatusBand.Warning(LocalizationHelper.Get("S.Options.Upload.Imgur.Auth.Error"));
             }
             catch (Exception ex)
             {
@@ -1190,7 +1190,7 @@ namespace ScreenToGif.Windows
             UserSettings.All.ImgurSelectedAlbum = null;
             ImgurAlbumComboBox.ItemsSource = null;
 
-            StatusBand.Info(LocalizationHelper.Get("S.Upload.Imgur.Removed"));
+            StatusBand.Info(LocalizationHelper.Get("S.Options.Upload.Imgur.Removed"));
             UpdateImgurStatus();
             UpdateAlbumList();
         }
@@ -1209,9 +1209,9 @@ namespace ScreenToGif.Windows
 
         private void UpdateImgurStatus()
         {
-            ImgurTextBlock.Text = UserSettings.All.ImgurAccessToken == null || !UserSettings.All.ImgurExpireDate.HasValue ? LocalizationHelper.Get("S.Upload.Imgur.NotAuthorized") :
-                UserSettings.All.ImgurExpireDate < DateTime.UtcNow ? string.Format(LocalizationHelper.Get("S.Upload.Imgur.Expired"), UserSettings.All.ImgurExpireDate.Value.ToLocalTime().ToString("g", CultureInfo.CurrentUICulture)) :
-                    string.Format(LocalizationHelper.Get("S.Upload.Imgur.Valid"), UserSettings.All.ImgurExpireDate.Value.ToLocalTime().ToString("g", CultureInfo.CurrentUICulture));
+            ImgurTextBlock.Text = UserSettings.All.ImgurAccessToken == null || !UserSettings.All.ImgurExpireDate.HasValue ? LocalizationHelper.Get("S.Options.Upload.Imgur.NotAuthorized") :
+                UserSettings.All.ImgurExpireDate < DateTime.UtcNow ? string.Format(LocalizationHelper.Get("S.Options.Upload.Imgur.Expired"), UserSettings.All.ImgurExpireDate.Value.ToLocalTime().ToString("g", CultureInfo.CurrentUICulture)) :
+                    string.Format(LocalizationHelper.Get("S.Options.Upload.Imgur.Valid"), UserSettings.All.ImgurExpireDate.Value.ToLocalTime().ToString("g", CultureInfo.CurrentUICulture));
         }
 
         private async void UpdateAlbumList(bool offline = false)
@@ -1226,11 +1226,11 @@ namespace ScreenToGif.Windows
                 list = new List<ImgurAlbumData>();
 
                 if (!offline)
-                    StatusBand.Error(LocalizationHelper.Get("S.Upload.Imgur.Error.AlbumLoad"));
+                    StatusBand.Error(LocalizationHelper.Get("S.Options.Upload.Imgur.Error.AlbumLoad"));
             }
 
             if (!offline || list.All(a => a.Id != "♥♦♣♠"))
-                list.Insert(0, new ImgurAlbumData { Id = "♥♦♣♠", Title = LocalizationHelper.Get("S.Upload.Imgur.AskMe") });
+                list.Insert(0, new ImgurAlbumData { Id = "♥♦♣♠", Title = LocalizationHelper.Get("S.Options.Upload.Imgur.AskMe") });
 
             ImgurAlbumComboBox.ItemsSource = list;
 
@@ -1258,7 +1258,7 @@ namespace ScreenToGif.Windows
             }
 
 #if UWP
-            StatusBand.Warning(LocalizationHelper.Get("S.Extras.DownloadRestriction"));
+            StatusBand.Warning(LocalizationHelper.Get("S.Options.Extras.DownloadRestriction"));
             return;
 #else
             #region Save as
@@ -1308,7 +1308,7 @@ namespace ScreenToGif.Windows
             ExtrasGrid.IsEnabled = false;
             Cursor = Cursors.AppStarting;
             FfmpegImageCard.Status = ExtrasStatus.Processing;
-            FfmpegImageCard.Description = LocalizationHelper.Get("Extras.Downloading");
+            FfmpegImageCard.Description = LocalizationHelper.Get("S.Options.Extras.Downloading");
 
             try
             {
@@ -1355,7 +1355,7 @@ namespace ScreenToGif.Windows
             }
 
 #if UWP
-            StatusBand.Warning(LocalizationHelper.Get("S.Extras.DownloadRestriction"));
+            StatusBand.Warning(LocalizationHelper.Get("S.Options.Extras.DownloadRestriction"));
             return;
 #else
             #region Save as
@@ -1405,7 +1405,7 @@ namespace ScreenToGif.Windows
             ExtrasGrid.IsEnabled = false;
             Cursor = Cursors.AppStarting;
             GifskiImageCard.Status = ExtrasStatus.Processing;
-            GifskiImageCard.Description = LocalizationHelper.Get("Extras.Downloading");
+            GifskiImageCard.Description = LocalizationHelper.Get("S.Options.Extras.Downloading");
 
             try
             {
@@ -1453,7 +1453,7 @@ namespace ScreenToGif.Windows
             }
 
 #if UWP
-            StatusBand.Warning(LocalizationHelper.Get("S.Extras.DownloadRestriction"));
+            StatusBand.Warning(LocalizationHelper.Get("S.Options.Extras.DownloadRestriction"));
             return;
 #else
             #region Save as
@@ -1472,7 +1472,7 @@ namespace ScreenToGif.Windows
 
             var fbd = new System.Windows.Forms.FolderBrowserDialog
             {
-                Description = LocalizationHelper.Get("Extras.SharpDxLocation.Select"),
+                Description = LocalizationHelper.Get("S.Options.Extras.SharpDxLocation.Select"),
                 SelectedPath = isRelative ? Path.GetFullPath(initial) : initial
             };
             var result = fbd.ShowDialog();
@@ -1500,7 +1500,7 @@ namespace ScreenToGif.Windows
             ExtrasGrid.IsEnabled = false;
             Cursor = Cursors.AppStarting;
             SharpDxImageCard.Status = ExtrasStatus.Processing;
-            SharpDxImageCard.Description = LocalizationHelper.Get("Extras.Downloading");
+            SharpDxImageCard.Description = LocalizationHelper.Get("S.Options.Extras.Downloading");
 
             try
             {
@@ -1565,7 +1565,7 @@ namespace ScreenToGif.Windows
             {
                 FileName = "ffmpeg",
                 Filter = "FFmpeg executable (*.exe)|*.exe", //TODO: Localize.
-                Title = LocalizationHelper.Get("Extras.FfmpegLocation.Select"),
+                Title = LocalizationHelper.Get("S.Options.Extras.FfmpegLocation.Select"),
                 InitialDirectory = isRelative ? Path.GetFullPath(initial) : initial,
                 DefaultExt = ".exe"
             };
@@ -1613,7 +1613,7 @@ namespace ScreenToGif.Windows
             {
                 FileName = "gifski",
                 Filter = "Gifski library (*.dll)|*.dll", //TODO: Localize.
-                Title = LocalizationHelper.Get("Extras.GifskiLocation.Select"),
+                Title = LocalizationHelper.Get("S.Options.Extras.GifskiLocation.Select"),
                 InitialDirectory = isRelative ? Path.GetFullPath(initial) : initial,
                 DefaultExt = ".dll"
             };
@@ -1659,7 +1659,7 @@ namespace ScreenToGif.Windows
 
             var fbd = new System.Windows.Forms.FolderBrowserDialog
             {
-                Description = LocalizationHelper.Get("Extras.SharpDxLocation.Select"),
+                Description = LocalizationHelper.Get("S.Options.Extras.SharpDxLocation.Select"),
                 SelectedPath = isRelative ? Path.GetFullPath(initial) : initial
             };
             var result = fbd.ShowDialog();
@@ -1708,12 +1708,12 @@ namespace ScreenToGif.Windows
                     info.Refresh();
 
                     FfmpegImageCard.Status = ExtrasStatus.Ready;
-                    FfmpegImageCard.Description = string.Format(LocalizationHelper.Get("Extras.Ready", "{0}"), Humanizer.BytesToString(info.Length));
+                    FfmpegImageCard.Description = string.Format(LocalizationHelper.Get("S.Options.Extras.Ready", "{0}"), Humanizer.BytesToString(info.Length));
                 }
                 else
                 {
                     FfmpegImageCard.Status = ExtrasStatus.Available;
-                    FfmpegImageCard.Description = string.Format(LocalizationHelper.Get("Extras.Download", "{0}"), "~ 43,7 MB");
+                    FfmpegImageCard.Description = string.Format(LocalizationHelper.Get("S.Options.Extras.Download", "{0}"), "~ 43,7 MB");
                 }
 
                 if (Util.Other.IsGifskiPresent(true))
@@ -1722,12 +1722,12 @@ namespace ScreenToGif.Windows
                     info.Refresh();
 
                     GifskiImageCard.Status = ExtrasStatus.Ready;
-                    GifskiImageCard.Description = string.Format(LocalizationHelper.Get("Extras.Ready", "{0}"), Humanizer.BytesToString(info.Length));
+                    GifskiImageCard.Description = string.Format(LocalizationHelper.Get("S.Options.Extras.Ready", "{0}"), Humanizer.BytesToString(info.Length));
                 }
                 else
                 {
                     GifskiImageCard.Status = ExtrasStatus.Available;
-                    GifskiImageCard.Description = string.Format(LocalizationHelper.Get("Extras.Download", "{0}"), "~ 1 MB");
+                    GifskiImageCard.Description = string.Format(LocalizationHelper.Get("S.Options.Extras.Download", "{0}"), "~ 1 MB");
                 }
 
                 if (Util.Other.IsSharpDxPresent(true))
@@ -1740,12 +1740,12 @@ namespace ScreenToGif.Windows
                     info3.Refresh();
 
                     SharpDxImageCard.Status = ExtrasStatus.Ready;
-                    SharpDxImageCard.Description = string.Format(LocalizationHelper.Get("Extras.Ready", "{0}"), Humanizer.BytesToString(info1.Length + info2.Length + info3.Length));
+                    SharpDxImageCard.Description = string.Format(LocalizationHelper.Get("S.Options.Extras.Ready", "{0}"), Humanizer.BytesToString(info1.Length + info2.Length + info3.Length));
                 }
                 else
                 {
                     SharpDxImageCard.Status = ExtrasStatus.Available;
-                    SharpDxImageCard.Description = string.Format(LocalizationHelper.Get("Extras.Download", "{0}"), "~ 242 KB");
+                    SharpDxImageCard.Description = string.Format(LocalizationHelper.Get("S.Options.Extras.Download", "{0}"), "~ 242 KB");
                 }
             }
             catch (Exception ex)

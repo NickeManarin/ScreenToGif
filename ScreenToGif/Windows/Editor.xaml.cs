@@ -1207,7 +1207,7 @@ namespace ScreenToGif.Windows
 
                         if (!string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation) && UserSettings.All.FfmpegLocation.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
                         {
-                            StatusList.Warning(LocalizationHelper.Get("Extras.FfmpegLocation.Invalid"));
+                            StatusList.Warning(LocalizationHelper.Get("S.Options.Extras.FfmpegLocation.Invalid"));
                             return;
                         }
 
@@ -1237,7 +1237,7 @@ namespace ScreenToGif.Windows
 
                         if (!string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation) && UserSettings.All.FfmpegLocation.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
                         {
-                            StatusList.Warning(LocalizationHelper.Get("Extras.FfmpegLocation.Invalid"));
+                            StatusList.Warning(LocalizationHelper.Get("S.Options.Extras.FfmpegLocation.Invalid"));
                             return;
                         }
                     }
@@ -1251,7 +1251,7 @@ namespace ScreenToGif.Windows
 
                         if (!string.IsNullOrWhiteSpace(UserSettings.All.GifskiLocation) && UserSettings.All.GifskiLocation.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
                         {
-                            StatusList.Warning(LocalizationHelper.Get("Extras.GifskiLocation.Invalid"));
+                            StatusList.Warning(LocalizationHelper.Get("S.Options.Extras.GifskiLocation.Invalid"));
                             return;
                         }
                     }
@@ -1268,7 +1268,7 @@ namespace ScreenToGif.Windows
 
                         if (!string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation) && UserSettings.All.FfmpegLocation.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
                         {
-                            StatusList.Warning(LocalizationHelper.Get("Extras.FfmpegLocation.Invalid"));
+                            StatusList.Warning(LocalizationHelper.Get("S.Options.Extras.FfmpegLocation.Invalid"));
                             return;
                         }
                     }

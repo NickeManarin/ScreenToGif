@@ -53,7 +53,7 @@ namespace ScreenToGif.Model
                     case TaskTypeEnum.Shadow:
                         return LocalizationHelper.Get("Editor.Image.Shadow", true);
                     default:
-                        return LocalizationHelper.Get("S.AutomatedTasks.SelectType");
+                        return LocalizationHelper.Get("S.Options.Tasks.SelectType");
                 }
             }
         }
