@@ -131,8 +131,8 @@
     <s:String x:Key="Update.CloseThis.Detail">Detta är en äldre version. Du har redan laddat ner en ny version.</s:String>
     
     <!--Options Window-->
-    <s:String x:Key="Title.Options">ScreenToGif - Alternativ</s:String>
-    <s:String x:Key="Application">Applikation</s:String>
+    <s:String x:Key="S.Options.Title">ScreenToGif - Alternativ</s:String>
+    <s:String x:Key="S.Options.App">Applikation</s:String>
     <s:String x:Key="Interface">Gränssnitt</s:String>
     <s:String x:Key="S.AutoTasks">Automatiserade uppgifter</s:String>
     <s:String x:Key="S.Shortcuts">Snabbkommandon</s:String>
@@ -167,26 +167,23 @@
     <s:String x:Key="S.Options.Recorder.FollowMargin.Info">(Buffertmarginal där inspelningsområdet börjar förflyttas)</s:String>
     <s:String x:Key="S.Options.Recorder.FollowMarginInvisible.Info">(Ytterligare buffertmarginal där användargränssnittet börjar bli dold)</s:String>
 
-    <s:String x:Key="Application.Other">Övrigt</s:String>
-    <s:String x:Key="Application.Other.SystemTray">Visa appen i systemfältet (aviseringsområdet)</s:String>
-    <s:String x:Key="Application.Other.LeaveOpen">Håll appen öppen även om alla fönster är stängda.</s:String>
-    <s:String x:Key="Application.Other.NotifyFrameDeletion">Fråga mig innan jag raderar bildrutor.</s:String>
-    <s:String x:Key="Application.Other.NotifyProjectDiscard">Fråga mig innan jag förkastar ett project.</s:String>
-    <s:String x:Key="Application.Other.NotifyWhileClosingEditor">Fråga mig innan jag stänger redigeraren (om ett projekt är öppet).</s:String>
-    <s:String x:Key="Application.Other.NotifyWhileClosingApp">Fråga mig innan jag stänger appen (via 'Exit'-kommandot)</s:String>
-    <s:String x:Key="Application.Other.DrawOutlineOutside">Rita konturerna med bildtexter utanför bokstäverna.</s:String>
-    <s:String x:Key="Application.Other.DisableHardwareAcceleration">Inaktivera maskinvaruacceleration.</s:String>
-    <s:String x:Key="Application.Other.CheckForTranslationUpdates">Sök efter översättningsuppdateringar.</s:String>
-    <s:String x:Key="Application.Other.CheckForTranslationUpdates.Info">(Uppdaterade språkfiler kommer att laddas ner och installeras automatiskt.)</s:String>
-    <s:String x:Key="Application.Other.CheckForUpdates">Sök efter uppdateringar.</s:String>
-    <s:String x:Key="S.Application.Other.Homepage">Hemsida:</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.StartUp">Uppstartsfönster</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Recorder">Skärminspelning</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Webcam">Webbkamerainspelning</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Board">Ritbordsinspelning</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Editor">Redigeringsfönster</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Minimized">Minimerad (aviseringsraden)</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Info">(Den kontrollerar hur appen öppnas. När den startas minimerad, kommer ikonen i systemfältet att visas)</s:String>
+    <s:String x:Key="S.Options.Other">Övrigt</s:String>
+    <s:String x:Key="S.Options.App.Tray.Show">Visa appen i systemfältet (aviseringsområdet)</s:String>
+    <s:String x:Key="S.Options.App.Tray.LeaveOpen">Håll appen öppen även om alla fönster är stängda.</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyFrameDeletion">Fråga mig innan jag raderar bildrutor.</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyProjectDiscard">Fråga mig innan jag förkastar ett project.</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingEditor">Fråga mig innan jag stänger redigeraren (om ett projekt är öppet).</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">Fråga mig innan jag stänger appen (via 'Exit'-kommandot)</s:String>
+    <s:String x:Key="S.Options.App.General.DrawOutlineOutside">Rita konturerna med bildtexter utanför bokstäverna.</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">Inaktivera maskinvaruacceleration.</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">Sök efter översättningsuppdateringar.</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(Uppdaterade språkfiler kommer att laddas ner och installeras automatiskt.)</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForUpdates">Sök efter uppdateringar.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Startup">Uppstartsfönster</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Recorder">Skärminspelning</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Webcam">Webbkamerainspelning</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Board">Ritbordsinspelning</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Editor">Redigeringsfönster</s:String>
     
     <s:String x:Key="S.AutomatedTasks.Title">Automatiserad uppgift</s:String>
     <s:String x:Key="S.AutomatedTasks.List">Lista över automatiska uppgifter</s:String>

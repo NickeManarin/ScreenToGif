@@ -458,31 +458,24 @@ namespace ScreenToGif.Util
 
 
         #region Options • Application
+        
+        public bool StartMinimized
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
 
         /// <summary>
         /// The homepage of the app:
-        /// 0 - StartUp window.
+        /// 0 - Startup window.
         /// 1 - Recorder window.
         /// 2 - Webcam window.
         /// 3 - Board window.
         /// 4 - Editor window.
-        /// 5 - Open minimized.
         /// </summary>
         public int StartUp
         {
             get => (int)GetValue();
-            set => SetValue(value);
-        }
-
-        public bool ShowNotificationIcon
-        {
-            get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
-        public bool KeepOpen
-        {
-            get => (bool)GetValue();
             set => SetValue(value);
         }
 
@@ -534,10 +527,73 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public bool ShowNotificationIcon
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool KeepOpen
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        /// <summary>
+        /// 0: Do nothing.
+        /// 1: Open a new window.
+        /// 2: Toggle Minimize/Maximize all windows.
+        /// 3: Minimize all windows.
+        /// 4: Maximize all windows.
+        /// </summary>
+        public int LeftClickAction
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        /// <summary>
+        /// 0: None.
+        /// 1: Startup
+        /// 2: Screen recorder
+        /// 3: Webcam recorder
+        /// 4: Board recorder
+        /// 5: Editor
+        /// </summary>
+        public int LeftOpenWindow
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public int DoubleLeftClickAction
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+        
+        public int DoubleLeftOpenWindow
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public int MiddleClickAction
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public int MiddleOpenWindow
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
         #endregion
 
         #region Options • Recorder
-        
+
         public bool NewRecorder
         {
             get => (bool)GetValue();

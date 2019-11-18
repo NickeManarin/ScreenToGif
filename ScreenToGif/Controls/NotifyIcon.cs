@@ -56,7 +56,13 @@ namespace ScreenToGif.Controls
 
         public static readonly DependencyProperty NotifyToolTipElementProperty = NotifyToolTipElementPropertyKey.DependencyProperty;
 
-        private static readonly DependencyProperty DoubleClickCommandProperty = DependencyProperty.Register("DoubleClickCommand", typeof(ICommand), typeof(NotifyIcon),
+        private static readonly DependencyProperty LeftClickCommandProperty = DependencyProperty.Register("LeftClickCommand", typeof(ICommand), typeof(NotifyIcon),
+            new FrameworkPropertyMetadata(null));
+
+        private static readonly DependencyProperty DoubleLeftClickCommandProperty = DependencyProperty.Register("DoubleLeftClickCommand", typeof(ICommand), typeof(NotifyIcon),
+            new FrameworkPropertyMetadata(null));
+
+        private static readonly DependencyProperty MiddleClickCommandProperty = DependencyProperty.Register("MiddleClickCommand", typeof(ICommand), typeof(NotifyIcon),
             new FrameworkPropertyMetadata(null));
 
         public static readonly RoutedEvent TrayMouseMoveEvent = EventManager.RegisterRoutedEvent("TrayMouseMove",
@@ -141,10 +147,22 @@ namespace ScreenToGif.Controls
         [Bindable(true)]
         public ToolTip NotifyToolTipElement => (ToolTip)GetValue(NotifyToolTipElementProperty);
 
-        public ICommand DoubleClickCommand
+        public ICommand LeftClickCommand
         {
-            get => (ICommand)GetValue(DoubleClickCommandProperty);
-            set => SetValue(DoubleClickCommandProperty, value);
+            get => (ICommand)GetValue(LeftClickCommandProperty);
+            set => SetValue(LeftClickCommandProperty, value);
+        }
+
+        public ICommand DoubleLeftClickCommand
+        {
+            get => (ICommand)GetValue(DoubleLeftClickCommandProperty);
+            set => SetValue(DoubleLeftClickCommandProperty, value);
+        }
+                
+        public ICommand MiddleClickCommand
+        {
+            get => (ICommand)GetValue(MiddleClickCommandProperty);
+            set => SetValue(MiddleClickCommandProperty, value);
         }
 
         public event RoutedEventHandler TrayMouseMove
@@ -376,9 +394,8 @@ namespace ScreenToGif.Controls
 
             var args = new RoutedEventArgs { RoutedEvent = PreviewTrayContextMenuOpenEvent };
             RaiseEvent(args);
-            if (args.Handled) return;
-
-            if (ContextMenu == null)
+            
+            if (args.Handled || ContextMenu == null)
                 return;
 
             ContextMenu.Placement = PlacementMode.AbsolutePoint;
@@ -489,16 +506,18 @@ namespace ScreenToGif.Controls
                     break;
                 case MouseEventType.IconLeftMouseUp:
                     RaiseEvent(new RoutedEventArgs { RoutedEvent = TrayLeftMouseUpEvent });
+                    LeftClickCommand?.Execute(this);
                     break;
                 case MouseEventType.IconRightMouseUp:
                     RaiseEvent(new RoutedEventArgs { RoutedEvent = TrayRightMouseUpEvent });
                     break;
                 case MouseEventType.IconMiddleMouseUp:
                     RaiseEvent(new RoutedEventArgs { RoutedEvent = TrayMiddleMouseUpEvent });
+                    MiddleClickCommand?.Execute(this);
                     break;
-                case MouseEventType.IconDoubleClick:
+                case MouseEventType.IconLeftDoubleClick:
                     RaiseEvent(new RoutedEventArgs { RoutedEvent = TrayMouseDoubleClickEvent });
-                    DoubleClickCommand?.Execute(this);
+                    DoubleLeftClickCommand?.Execute(this);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), "Missing handler for mouse event flag: " + type);
@@ -521,7 +540,8 @@ namespace ScreenToGif.Controls
 
         private void OnToolTipChange(bool visible)
         {
-            if (NotifyToolTipElement == null) return;
+            if (NotifyToolTipElement == null) 
+                return;
 
             if (visible)
             {
@@ -542,7 +562,9 @@ namespace ScreenToGif.Controls
             {
                 var args = new RoutedEventArgs { RoutedEvent = PreviewToolTipCloseEvent };
                 RaiseEvent(args);
-                if (args.Handled) return;
+
+                if (args.Handled) 
+                    return;
 
                 NotifyToolTip?.RaiseEvent(new RoutedEventArgs { RoutedEvent = ToolTipCloseEvent });
 

@@ -131,8 +131,8 @@
     <s:String x:Key="Update.CloseThis.Detail">现在是旧版本，发现新版本并且已下载。</s:String>
     
     <!--Options Window-->
-    <s:String x:Key="Title.Options">ScreenToGif - 选项</s:String>
-    <s:String x:Key="Application">应用程序</s:String>
+    <s:String x:Key="S.Options.Title">ScreenToGif - 选项</s:String>
+    <s:String x:Key="S.Options.App">应用程序</s:String>
     <s:String x:Key="Interface">界面</s:String>
     <s:String x:Key="S.AutoTasks">自动化任务</s:String>
     <s:String x:Key="S.Shortcuts">键盘快捷键</s:String>
@@ -167,26 +167,23 @@
     <s:String x:Key="S.Options.Recorder.FollowMargin.Info">（录制区域开始重新定位的缓冲区边距）</s:String>
     <s:String x:Key="S.Options.Recorder.FollowMarginInvisible.Info">（UI 开始隐藏的其他缓冲区边距）</s:String>
 
-    <s:String x:Key="Application.Other">其它</s:String>
-    <s:String x:Key="Application.Other.SystemTray">在系统托盘（通知区域）上显示应用程序。</s:String>
-    <s:String x:Key="Application.Other.LeaveOpen">即使所有窗口关闭，仍保持应用程序的打开状态。</s:String>
-    <s:String x:Key="Application.Other.NotifyFrameDeletion">删除帧前询问我</s:String>
-    <s:String x:Key="Application.Other.NotifyProjectDiscard">放弃项目前询问我</s:String>
-    <s:String x:Key="Application.Other.NotifyWhileClosingEditor">关闭编辑器前询问我 （如果有打开的项目）</s:String>
-    <s:String x:Key="Application.Other.NotifyWhileClosingApp">关闭应用程序之前询问我（通过'退出'命令）</s:String>
-    <s:String x:Key="Application.Other.DrawOutlineOutside">绘制标题文字的外轮廓</s:String>
-    <s:String x:Key="Application.Other.DisableHardwareAcceleration">禁用硬件加速</s:String>
-    <s:String x:Key="Application.Other.CheckForTranslationUpdates">检查翻译更新</s:String>
-    <s:String x:Key="Application.Other.CheckForTranslationUpdates.Info">（更新的翻译将自动下载并安装）</s:String>
-    <s:String x:Key="Application.Other.CheckForUpdates">检查更新</s:String>
-    <s:String x:Key="S.Application.Other.Homepage">起始页面:</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.StartUp">启动窗口</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Recorder">屏幕录像机</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Webcam">摄像头录像机</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Board">画板录像机</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Editor">编辑器窗口</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Minimized">最小化（系统托盘）</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Info">（它控制应用程序的打开方式。最小化时，系统托盘图标将可见）</s:String>
+    <s:String x:Key="S.Options.Other">其它</s:String>
+    <s:String x:Key="S.Options.App.Tray.Show">在系统托盘（通知区域）上显示应用程序。</s:String>
+    <s:String x:Key="S.Options.App.Tray.LeaveOpen">即使所有窗口关闭，仍保持应用程序的打开状态。</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyFrameDeletion">删除帧前询问我</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyProjectDiscard">放弃项目前询问我</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingEditor">关闭编辑器前询问我 （如果有打开的项目）</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">关闭应用程序之前询问我（通过'退出'命令）</s:String>
+    <s:String x:Key="S.Options.App.General.DrawOutlineOutside">绘制标题文字的外轮廓</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">禁用硬件加速</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">检查翻译更新</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">（更新的翻译将自动下载并安装）</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForUpdates">检查更新</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Startup">启动窗口</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Recorder">屏幕录像机</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Webcam">摄像头录像机</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Board">画板录像机</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Editor">编辑器窗口</s:String>
     
     <s:String x:Key="S.AutomatedTasks.Title">自动化任务</s:String>
     <s:String x:Key="S.AutomatedTasks.List">自动化任务列表</s:String>

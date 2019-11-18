@@ -67,8 +67,8 @@
     <s:String x:Key="Update.CloseThis.Detail">Questa versione è obsoleta. È già stata scaricata una nuova versione.</s:String>
     
     <!--Options Window-->
-    <s:String x:Key="Title.Options">ScreenToGif - Impostazioni</s:String>
-    <s:String x:Key="Application">Applicazione</s:String>
+    <s:String x:Key="S.Options.Title">ScreenToGif - Impostazioni</s:String>
+    <s:String x:Key="S.Options.App">Applicazione</s:String>
     <s:String x:Key="Interface">Interfaccia</s:String>
     <s:String x:Key="S.AutoTasks">Task automatizzati</s:String>
     <s:String x:Key="S.Shortcuts">Collegamenti</s:String>
@@ -96,25 +96,22 @@
     <s:String x:Key="S.Options.Recorder.Magnifier">Abilita la lente dello schermo.</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier.Info">(Aiuta a ridurre il ritardo nell'interfaccia durante la registrazione)</s:String>
     
-    <s:String x:Key="Application.Other">Altro</s:String>
-    <s:String x:Key="Application.Other.SystemTray">Visualizza l'app nella system tray (area di notifica).</s:String>
-    <s:String x:Key="Application.Other.LeaveOpen">Mantieni l'app aperta anche se vengono chiuse tutte le finestre.</s:String>
-    <s:String x:Key="Application.Other.NotifyFrameDeletion">Chiedi conferma prima di eliminare fotogrammi.</s:String>
-    <s:String x:Key="Application.Other.NotifyProjectDiscard">Chiedi conferma prima di scartare un progetto.</s:String>
-    <s:String x:Key="Application.Other.NotifyWhileClosingEditor">Chiedi conferma prima di chiudere l'editor (se un progtto è aperto).</s:String>
-    <s:String x:Key="Application.Other.NotifyWhileClosingApp">Chiedi conferma prima di chiudere l'app (tramite comando 'Esci'),</s:String>
-    <s:String x:Key="Application.Other.DrawOutlineOutside">Disegna il contorno delle didascalie esterne alle lettere.</s:String>
-    <s:String x:Key="Application.Other.DisableHardwareAcceleration">Disabilita accelerazione hardware.</s:String>
-    <s:String x:Key="Application.Other.CheckForTranslationUpdates">Verifica aggiornamenti delle traduzioni.</s:String>
-    <s:String x:Key="Application.Other.CheckForUpdates">Verifica aggiornamenti.</s:String>
-    <s:String x:Key="S.Application.Other.Homepage">Homepage:</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.StartUp">Finestra di avvio</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Recorder">Registratore schermo</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Webcam">Registratore webcam</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Board">Registratore lavagna</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Editor">Finestra dell'editor</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Minimized">Minimizzata (system tray)</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Info">(Controlla come l'app si apre. All'avvio minimizzato, verrà mostrata l'icona nella system tray)</s:String>
+    <s:String x:Key="S.Options.Other">Altro</s:String>
+    <s:String x:Key="S.Options.App.Tray.Show">Visualizza l'app nella system tray (area di notifica).</s:String>
+    <s:String x:Key="S.Options.App.Tray.LeaveOpen">Mantieni l'app aperta anche se vengono chiuse tutte le finestre.</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyFrameDeletion">Chiedi conferma prima di eliminare fotogrammi.</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyProjectDiscard">Chiedi conferma prima di scartare un progetto.</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingEditor">Chiedi conferma prima di chiudere l'editor (se un progtto è aperto).</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">Chiedi conferma prima di chiudere l'app (tramite comando 'Esci'),</s:String>
+    <s:String x:Key="S.Options.App.General.DrawOutlineOutside">Disegna il contorno delle didascalie esterne alle lettere.</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">Disabilita accelerazione hardware.</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">Verifica aggiornamenti delle traduzioni.</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForUpdates">Verifica aggiornamenti.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Startup">Finestra di avvio</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Recorder">Registratore schermo</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Webcam">Registratore webcam</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Board">Registratore lavagna</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Editor">Finestra dell'editor</s:String>
     
     <s:String x:Key="S.AutomatedTasks.Title">Task automatizzato</s:String>
     <s:String x:Key="S.AutomatedTasks.List">Lista di task automatizzati</s:String>

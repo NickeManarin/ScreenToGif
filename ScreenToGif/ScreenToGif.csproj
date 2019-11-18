@@ -162,6 +162,7 @@
     <Compile Include="Controls\AdornerControl.cs" />
     <Compile Include="Controls\AttachmentListBoxItem.cs" />
     <Compile Include="Controls\AwareTabItem.cs" />
+    <Compile Include="Controls\BaseWindow.cs" />
     <Compile Include="Controls\CircularProgressBar.cs" />
     <Compile Include="Controls\ColorBox.cs" />
     <Compile Include="Controls\CroppingAdorner.cs" />
@@ -338,6 +339,7 @@
     <Compile Include="Util\Capture\CachedCapture.cs" />
     <Compile Include="Util\ComboBoxItemTemplateSelector.cs" />
     <Compile Include="Util\Converters\ContentToVisibility.cs" />
+    <Compile Include="Util\Converters\InvertedIntToVisibility.cs" />
     <Compile Include="Util\Converters\PercentageToOpacity.cs" />
     <Compile Include="Util\Converters\BoolAndToVisibility.cs" />
     <Compile Include="Util\Converters\BoolOrAndToVisibility.cs" />

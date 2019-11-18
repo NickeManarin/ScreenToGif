@@ -94,7 +94,15 @@ namespace ScreenToGif
 
             if (NotifyIcon != null)
             {
-                NotifyIcon.Visibility = UserSettings.All.ShowNotificationIcon || UserSettings.All.StartUp == 5 ? Visibility.Visible : Visibility.Collapsed;
+                NotifyIcon.Visibility = UserSettings.All.ShowNotificationIcon || UserSettings.All.StartMinimized || UserSettings.All.StartUp == 5 ? Visibility.Visible : Visibility.Collapsed;
+
+                //Replace the old option with the new setting.
+                if (UserSettings.All.StartUp == 5)
+                {
+                    UserSettings.All.StartMinimized  = true;
+                    UserSettings.All.ShowNotificationIcon  = true;
+                    UserSettings.All.StartUp = 0;
+                }
 
                 //using (var iconStream = GetResourceStream(new Uri("pack://application:,,,/Resources/Logo.ico"))?.Stream)
                 //{
@@ -124,13 +132,17 @@ namespace ScreenToGif
 
             #region Startup
 
+            //When starting minimized, the 
+            if (UserSettings.All.StartMinimized)
+                return;
+
             if (UserSettings.All.StartUp == 4 || Argument.FileNames.Any())
             {
                 MainViewModel.OpenEditor.Execute(null);
                 return;
             }
 
-            if (UserSettings.All.StartUp == 0)
+            if (UserSettings.All.StartUp < 1 || UserSettings.All.StartUp > 4)
             {
                 MainViewModel.OpenLauncher.Execute(null);
                 return;

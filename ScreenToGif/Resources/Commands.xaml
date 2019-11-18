@@ -21,7 +21,7 @@
 
     <RoutedUICommand x:Key="Command.NewAnimation" Text="S.Command.NewAnimation">
         <RoutedUICommand.InputGestures>
-            <KeyGesture>Ctrl + Alt + A</KeyGesture>
+            <KeyGesture>Ctrl + Shift + A</KeyGesture>
         </RoutedUICommand.InputGestures>
     </RoutedUICommand>
 
@@ -214,7 +214,7 @@
 
     <RoutedUICommand x:Key="Command.Reverse" Text="S.Command.Reverse">
         <RoutedUICommand.InputGestures>
-            <KeyGesture>Ctrl + Alt + R</KeyGesture>
+            <KeyGesture>Ctrl + Shift + R</KeyGesture>
         </RoutedUICommand.InputGestures>
     </RoutedUICommand>
 
@@ -361,13 +361,13 @@
     <!--Transitions-->
     <RoutedUICommand x:Key="Command.Fade" Text="S.Command.Fade">
         <RoutedUICommand.InputGestures>
-            <KeyGesture>Ctrl + Alt + T</KeyGesture>
+            <KeyGesture>Ctrl + Shift + T</KeyGesture>
         </RoutedUICommand.InputGestures>
     </RoutedUICommand>
 
     <RoutedUICommand x:Key="Command.Slide" Text="S.Command.Slide">
         <RoutedUICommand.InputGestures>
-            <KeyGesture>Ctrl + Alt + Y</KeyGesture>
+            <KeyGesture>Ctrl + Shift + Y</KeyGesture>
         </RoutedUICommand.InputGestures>
     </RoutedUICommand>
     

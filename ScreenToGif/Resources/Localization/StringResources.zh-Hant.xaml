@@ -40,8 +40,8 @@
     <s:String x:Key="Update.CloseThis.Detail">這是較舊的版本。您早已下載過新的版本。</s:String>
     
     <!--Options Page-->
-    <s:String x:Key="Title.Options">ScreenToGif - 選項</s:String>
-    <s:String x:Key="Application">應用程式</s:String>
+    <s:String x:Key="S.Options.Title">ScreenToGif - 選項</s:String>
+    <s:String x:Key="S.Options.App">應用程式</s:String>
     <s:String x:Key="S.Shortcuts">鍵盤快速鍵</s:String>
     <s:String x:Key="Interface">介面</s:String>
     <s:String x:Key="Image">圖像</s:String>
@@ -51,12 +51,11 @@
     <s:String x:Key="S.Options.Donate">捐贈</s:String>
     <s:String x:Key="About">關於</s:String>
     
-    <s:String x:Key="S.Application.Other.Homepage">首頁:</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.StartUp">啟動視窗</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Recorder">螢幕錄影</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Webcam">網路攝影機錄影</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Board">繪圖板錄影</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Editor">編輯器視窗</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Startup">啟動視窗</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Recorder">螢幕錄影</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Webcam">網路攝影機錄影</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Board">繪圖板錄影</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Editor">編輯器視窗</s:String>
     
     <s:String x:Key="S.Options.Recorder.RecordMouse">錄影時顯示滑鼠游標。</s:String>
     <s:String x:Key="S.Options.Recorder.RecordClicks">偵測滑鼠點擊。</s:String>
@@ -72,8 +71,8 @@
     <s:String x:Key="S.Options.Recorder.AsyncRecording">啟用非同步錄影。</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(它能降低錄影時介面的延遲)</s:String>
     
-    <s:String x:Key="Application.Other">其它</s:String>
-    <s:String x:Key="Application.Other.CheckForUpdates">檢查更新。</s:String>
+    <s:String x:Key="S.Options.Other">其它</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForUpdates">檢查更新。</s:String>
     
     <s:String x:Key="Interface.EditorBackground">編輯器背景</s:String>
     <s:String x:Key="Interface.Recorder">錄影程式主題</s:String>

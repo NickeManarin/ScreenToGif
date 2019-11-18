@@ -39,8 +39,8 @@
     <!--<s:String x:Key="Update.CloseThis.Detail">This is an older version. You have already downloaded a new version.</s:String>-->
     
     <!--Options Page-->
-    <s:String x:Key="Title.Options">ScreenToGif - Opções</s:String>
-    <s:String x:Key="Application">Geral</s:String>
+    <s:String x:Key="S.Options.Title">ScreenToGif - Opções</s:String>
+    <s:String x:Key="S.Options.App">Geral</s:String>
     <s:String x:Key="Interface">Interface</s:String>
     <s:String x:Key="Image">Imagem</s:String>
     <s:String x:Key="Language">Idioma</s:String>
@@ -49,12 +49,11 @@
     <s:String x:Key="S.Options.Donate">Doação</s:String>
     <s:String x:Key="About">Sobre</s:String>
     
-    <s:String x:Key="S.Application.Other.Homepage">Página Inicial:</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.StartUp">Janela de Início</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Recorder">Gravador de Ecrã</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Webcam">Gravador de Câmara</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Board">Gravador de Tela</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Editor">Janela do Editor</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Startup">Janela de Início</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Recorder">Gravador de Ecrã</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Webcam">Gravador de Câmara</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Board">Gravador de Tela</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Editor">Janela do Editor</s:String>
     
     <s:String x:Key="S.Options.Recorder.RecordMouse">Mostar o cursor na gravação.</s:String>
     <s:String x:Key="S.Options.Recorder.RecordClicks">Mostrar cliques do rato.</s:String>
@@ -69,8 +68,8 @@
     <!--<s:String x:Key="S.Options.Recorder.AsyncRecording">Enable asynchronous recording.</s:String>-->
     <!--<s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(It helps reduce the interface lag when recording)</s:String>-->
 
-    <s:String x:Key="Application.Other">Outras Definições</s:String>
-    <!--<s:String x:Key="Application.Other.CheckForUpdates">Check for updates.</s:String>-->
+    <s:String x:Key="S.Options.Other">Outras Definições</s:String>
+    <!--<s:String x:Key="S.Options.App.General.CheckForUpdates">Check for updates.</s:String>-->
     
     <s:String x:Key="Interface.EditorBackground">Fundo do Editor</s:String>
     <!--<s:String x:Key="Interface.Recorder">Recorder theme</s:String>-->

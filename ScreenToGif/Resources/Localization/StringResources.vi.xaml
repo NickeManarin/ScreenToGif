@@ -68,8 +68,8 @@
     <s:String x:Key="Update.CloseThis.Detail">Đây là 1 phiên bản cũ hơn. Bạn đã tải về phiên bản mới rồi.</s:String>
     
     <!--Options Window-->
-    <s:String x:Key="Title.Options">ScreenToGif - Các tùy chọn</s:String>
-    <s:String x:Key="Application">Ứng dụng</s:String>
+    <s:String x:Key="S.Options.Title">ScreenToGif - Các tùy chọn</s:String>
+    <s:String x:Key="S.Options.App">Ứng dụng</s:String>
     <s:String x:Key="Interface">Giao diện</s:String>
     <s:String x:Key="S.AutoTasks">Tự động hóa các nhiệm vụ</s:String>
     <s:String x:Key="S.Shortcuts">Biểu tượng tắt</s:String>
@@ -97,25 +97,22 @@
     <s:String x:Key="S.Options.Recorder.Magnifier">Cho phép phóng to màn hình.</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier.Info">(Điều này cho phép 1 kính lúp trong khi chọn 1 vùng đang quay)</s:String>
     
-    <s:String x:Key="Application.Other">Khác</s:String>
-    <s:String x:Key="Application.Other.SystemTray">Hiển thị ứng dụng ở khay hệ thống (Khu vực thông báo).</s:String>
-    <s:String x:Key="Application.Other.LeaveOpen">Giữ ứng dụng mở ngay cả khi tất cả các cửa sổ bị đóng.</s:String>
-    <s:String x:Key="Application.Other.NotifyFrameDeletion">Hỏi tôi trước khi xóa các khung hình.</s:String>
-    <s:String x:Key="Application.Other.NotifyProjectDiscard">Hỏi tôi trước khi hủy bỏ kế hoạch.</s:String>
-    <s:String x:Key="Application.Other.NotifyWhileClosingEditor">Hỏi tôi trước khi đóng chỉnh sửa (nếu có 1 dự án đang mở).</s:String>
-    <s:String x:Key="Application.Other.NotifyWhileClosingApp">Hỏi tôi trước khi đóng ứng dụng (Thông qua lệnh 'Thoát').</s:String>
-    <s:String x:Key="Application.Other.DrawOutlineOutside">Vẽ đường bao ngoài của phụ đề bên ngoài các chữ cái.</s:String>
-    <s:String x:Key="Application.Other.DisableHardwareAcceleration">Loại bỏ tăng tốc phần cứng.</s:String>
-    <s:String x:Key="Application.Other.CheckForTranslationUpdates">Kiểm tra cập nhật bản dịch.</s:String>
-    <s:String x:Key="Application.Other.CheckForUpdates">Kiểm tra cập nhật.</s:String>
-    <s:String x:Key="S.Application.Other.Homepage">Trang chủ:</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.StartUp">Cửa sổ khởi động</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Recorder">Quay màn hình</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Webcam">Ghi hình webcam</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Board">Bảng ghi</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Editor">Cửa sổ chỉnh sửa</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Minimized">Thu nhỏ xuống (khay hệ thống)</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Info">(Nó điều khiển cách ứng dụng mở. Khi bắt đầu thu nhỏ, biểu tượng ở khay hệ thống sẽ hiện lên)</s:String>
+    <s:String x:Key="S.Options.Other">Khác</s:String>
+    <s:String x:Key="S.Options.App.Tray.Show">Hiển thị ứng dụng ở khay hệ thống (Khu vực thông báo).</s:String>
+    <s:String x:Key="S.Options.App.Tray.LeaveOpen">Giữ ứng dụng mở ngay cả khi tất cả các cửa sổ bị đóng.</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyFrameDeletion">Hỏi tôi trước khi xóa các khung hình.</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyProjectDiscard">Hỏi tôi trước khi hủy bỏ kế hoạch.</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingEditor">Hỏi tôi trước khi đóng chỉnh sửa (nếu có 1 dự án đang mở).</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">Hỏi tôi trước khi đóng ứng dụng (Thông qua lệnh 'Thoát').</s:String>
+    <s:String x:Key="S.Options.App.General.DrawOutlineOutside">Vẽ đường bao ngoài của phụ đề bên ngoài các chữ cái.</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">Loại bỏ tăng tốc phần cứng.</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">Kiểm tra cập nhật bản dịch.</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForUpdates">Kiểm tra cập nhật.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Startup">Cửa sổ khởi động</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Recorder">Quay màn hình</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Webcam">Ghi hình webcam</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Board">Bảng ghi</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Editor">Cửa sổ chỉnh sửa</s:String>
     
     <s:String x:Key="S.AutomatedTasks.Title">Tự động hóa nhiệm vụ</s:String>
     <s:String x:Key="S.AutomatedTasks.List">Danh sách các nhiệm vụ tự động</s:String>

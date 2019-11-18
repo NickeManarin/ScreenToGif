@@ -138,8 +138,8 @@
     <s:String x:Key="Update.CloseThis.Detail">Текущая версия программы устарела. Новая версия уже загружена.</s:String>
     
     <!--Options Window-->
-    <s:String x:Key="Title.Options">ScreenToGif - Настройки</s:String>
-    <s:String x:Key="Application">Программа</s:String>
+    <s:String x:Key="S.Options.Title">ScreenToGif - Настройки</s:String>
+    <s:String x:Key="S.Options.App">Программа</s:String>
     <s:String x:Key="S.Options.Recorder">Захват экрана</s:String>
     <s:String x:Key="Interface">Интерфейс</s:String>
     <s:String x:Key="S.AutoTasks">Авто-задачи</s:String>
@@ -193,26 +193,23 @@
     <s:String x:Key="S.Options.Recorder.FollowMargin.Info">(Буферное поле, где область записи получает репозицию)</s:String>
     <s:String x:Key="S.Options.Recorder.FollowMarginInvisible.Info">(Дополнительное поле буфера, где UI скрывается)</s:String>
 
-    <s:String x:Key="Application.Other">Прочее</s:String>
-    <s:String x:Key="Application.Other.SystemTray">Показывать значок в системном трее.</s:String>
-    <s:String x:Key="Application.Other.LeaveOpen">Сохранять программу работающей, даже если все окна закрыты.</s:String>
-    <s:String x:Key="Application.Other.NotifyFrameDeletion">Подтверждение перед удалением кадров.</s:String>
-    <s:String x:Key="Application.Other.NotifyProjectDiscard">Подтверждение перед удалением проекта.</s:String>
-    <s:String x:Key="Application.Other.NotifyWhileClosingEditor">Подтверждение перед выходом из редактора (если открыт проект).</s:String>
-    <s:String x:Key="Application.Other.NotifyWhileClosingApp">Подтверждение перед закрытием (по команде 'Выход').</s:String>
-    <s:String x:Key="Application.Other.DrawOutlineOutside">Отрисовывать контур вокруг букв.</s:String>
-    <s:String x:Key="Application.Other.DisableHardwareAcceleration">Отключить аппаратное ускорение.</s:String>
-    <s:String x:Key="Application.Other.CheckForTranslationUpdates">Проверять обновления перевода.</s:String>
-    <s:String x:Key="Application.Other.CheckForTranslationUpdates.Info">(Обновленные переводы будут загружены и установлены автоматически)</s:String>
-    <s:String x:Key="Application.Other.CheckForUpdates">Проверить обновления.</s:String>
-    <s:String x:Key="S.Application.Other.Homepage">Начинать с:</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.StartUp">Окно приветствия</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Recorder">Запись с экрана</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Webcam">Запись с веб-камеры</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Board">Запись с доски</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Editor">Окно редактора</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Minimized">Свернуть (в трей)</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Info">Что открывать при старте. Если свернуто, то значок в трее.</s:String>
+    <s:String x:Key="S.Options.Other">Прочее</s:String>
+    <s:String x:Key="S.Options.App.Tray.Show">Показывать значок в системном трее.</s:String>
+    <s:String x:Key="S.Options.App.Tray.LeaveOpen">Сохранять программу работающей, даже если все окна закрыты.</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyFrameDeletion">Подтверждение перед удалением кадров.</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyProjectDiscard">Подтверждение перед удалением проекта.</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingEditor">Подтверждение перед выходом из редактора (если открыт проект).</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">Подтверждение перед закрытием (по команде 'Выход').</s:String>
+    <s:String x:Key="S.Options.App.General.DrawOutlineOutside">Отрисовывать контур вокруг букв.</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">Отключить аппаратное ускорение.</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">Проверять обновления перевода.</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(Обновленные переводы будут загружены и установлены автоматически)</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForUpdates">Проверить обновления.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Startup">Окно приветствия</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Recorder">Запись с экрана</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Webcam">Запись с веб-камеры</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Board">Запись с доски</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Editor">Окно редактора</s:String>
     
     <s:String x:Key="S.AutomatedTasks.Title">Авто-задача</s:String>
     <s:String x:Key="S.AutomatedTasks.List">Список авто-задач</s:String>

@@ -511,7 +511,7 @@
         IconLeftMouseUp,
         IconMiddleMouseDown,
         IconMiddleMouseUp,
-        IconDoubleClick
+        IconLeftDoubleClick
     }
 
 

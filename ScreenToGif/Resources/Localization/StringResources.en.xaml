@@ -137,26 +137,65 @@
     <s:String x:Key="Update.CloseThis">Do you want to close this app?</s:String>
     <s:String x:Key="Update.CloseThis.Detail">This is an older version. You have already downloaded a new version.</s:String>
     
-    <!--Options Window-->
-    <s:String x:Key="Title.Options">ScreenToGif - Options</s:String>
-    <s:String x:Key="Application">Application</s:String>
+    <!--Options-->
+    <s:String x:Key="S.Options.Title">ScreenToGif - Options</s:String>
+    <s:String x:Key="S.Options.App">Application</s:String>
     <s:String x:Key="S.Options.Recorder">Recorder</s:String>
     <s:String x:Key="Interface">Interface</s:String>
-    <s:String x:Key="S.AutoTasks">Automated Tasks</s:String>
+    <s:String x:Key="S.AutoTasks">Tasks</s:String>
     <s:String x:Key="S.Shortcuts">Shortcuts</s:String>
     <s:String x:Key="Image">Image</s:String>
     <s:String x:Key="Language">Language</s:String>
-    <s:String x:Key="TemporaryFiles">Temporary Files</s:String>
+    <s:String x:Key="TemporaryFiles">Storage</s:String>
     <s:String x:Key="Extras">Extras</s:String>
-    <s:String x:Key="Clouds">Upload Services</s:String>
+    <s:String x:Key="Clouds">Cloud</s:String>
     <s:String x:Key="S.Options.Donate">Donate</s:String>
     <s:String x:Key="About">About</s:String>
     
+    <s:String x:Key="S.Options.Other">Other</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Header">Missing shortcut key for cursor following</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Message">In order to use the mouse cursor following feature, you must set a shortcut key to toggle it when needed.</s:String>
     <s:String x:Key="S.Options.Warning.DesktopDuplication.Header">Missing dependencies for screen capture</s:String>
     <s:String x:Key="S.Options.Warning.DesktopDuplication.Message">In order to capture the screen with the Desktop Duplication API, you must download the SharpDx libraries.</s:String>
     
+    <!--Options • Application-->
+    <s:String x:Key="S.Options.App.Startup">Startup</s:String>
+    <s:String x:Key="S.Options.App.Startup.Tray">Start minimized to the system tray.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Tray.Info">(System tray icon will be visible while this option is active)</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window">Start with:</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Startup">Startup window</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Recorder">Screen recorder</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Webcam">Webcam recorder</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Board">Board recorder</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Editor">Editor window</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Info">(Window which shows up first when the app starts)</s:String>
+    <s:String x:Key="S.Options.App.General">General</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyFrameDeletion">Ask me before deleting frames.</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyProjectDiscard">Ask me before discarding a project.</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingEditor">Ask me before closing the Editor (if there's a project opened).</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">Ask me before closing the app (via the 'Exit' command).</s:String>
+    <s:String x:Key="S.Options.App.General.DrawOutlineOutside">Draw the outline of captions outside the letters.</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">Disable hardware acceleration.</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(The user interface will be rendered via software mode)</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">Check for translation updates.</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(Updated translations will be downloaded and installed automatically)</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForUpdates">Check for updates.</s:String>
+    <s:String x:Key="S.Options.App.Tray">System tray icon</s:String>
+    <s:String x:Key="S.Options.App.Tray.Show">Display the app on the system tray (notification area).</s:String>
+    <s:String x:Key="S.Options.App.Tray.LeaveOpen">Keep the app open even if all windows are closed.</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Nothing">Do nothing</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Open">Open a window</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Open.None">No window</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Toggle">Minimize/restore all windows</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Minimize">Minimize all windows</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Restore">Restore all windows</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Left">Left click:</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.DoubleLeft">Left click (x2):</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Middle">Middle click:</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Window">Window:</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Else">Or else, opens:</s:String>
+
+    <!--Options • Recorder-->
     <s:String x:Key="S.Options.Recorder.Interface">Interface</s:String>
     <s:String x:Key="S.Options.Recorder.Interface.Old">Old</s:String>
     <s:String x:Key="S.Options.Recorder.Interface.New">New</s:String>
@@ -174,12 +213,12 @@
     <s:String x:Key="S.Options.Recorder.Compression.Fastest.Info">(Faster but likely less optimal compression)</s:String>
     <s:String x:Key="S.Options.Recorder.Compression.NoCompression">No compression</s:String>
     <s:String x:Key="S.Options.Recorder.Compression.NoCompression.Info">(No compression should be performed while capturing frames)</s:String>
-    <s:String x:Key="S.Options.Recorder.CacheSize">Cache size (in MB):</s:String>
-    <s:String x:Key="S.Options.Recorder.CacheSize.Info">(After reaching this size, the data will be written/flushed to the disk)</s:String>
+    <s:String x:Key="S.Options.Recorder.CacheSize">Cache size:</s:String>
+    <s:String x:Key="S.Options.Recorder.CacheSize.Info">(In MB. After reaching this size, the data will be written/flushed to the disk)</s:String>
     <s:String x:Key="S.Options.Recorder.RecordMouse">Show the mouse cursor in the recording.</s:String>
     <s:String x:Key="S.Options.Recorder.SelectCursorColor">Select the cursor color</s:String>
     <s:String x:Key="S.Options.Recorder.PreStart">Use a pre start countdown.</s:String>
-    <s:String x:Key="S.Options.Recorder.PreStart.Info">(in seconds, waits before starting to capture)</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart.Info">(In seconds, waits before starting to capture)</s:String>
     <s:String x:Key="S.Options.Recorder.StepRecording">Enable snapshot mode.</s:String>
     <s:String x:Key="S.Options.Recorder.StepRecording.Info">(Each frame will be captured manually by you)</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate">Fixed frame rate.</s:String>
@@ -192,28 +231,8 @@
     <s:String x:Key="S.Options.Recorder.CursorFollowing.Info">(The recording area will reposition itself based on the location of the cursor)</s:String>
     <s:String x:Key="S.Options.Recorder.FollowMargin.Info">(Buffer margin in pixels, where the recording area starts getting repositioned)</s:String>
     <s:String x:Key="S.Options.Recorder.FollowMarginInvisible.Info">(Additional buffer margin in pixels, where the UI starts getting hidden)</s:String>
-    
-    <s:String x:Key="Application.Other">Other</s:String>
-    <s:String x:Key="Application.Other.SystemTray">Display the app on the system tray (notification area).</s:String>
-    <s:String x:Key="Application.Other.LeaveOpen">Keep the app open even if all windows are closed.</s:String>
-    <s:String x:Key="Application.Other.NotifyFrameDeletion">Ask me before deleting frames.</s:String>
-    <s:String x:Key="Application.Other.NotifyProjectDiscard">Ask me before discarding a project.</s:String>
-    <s:String x:Key="Application.Other.NotifyWhileClosingEditor">Ask me before closing the Editor (if there's a project opened).</s:String>
-    <s:String x:Key="Application.Other.NotifyWhileClosingApp">Ask me before closing the app (via the 'Exit' command).</s:String>
-    <s:String x:Key="Application.Other.DrawOutlineOutside">Draw the outline of captions outside the letters.</s:String>
-    <s:String x:Key="Application.Other.DisableHardwareAcceleration">Disable hardware acceleration.</s:String>
-    <s:String x:Key="Application.Other.CheckForTranslationUpdates">Check for translation updates.</s:String>
-    <s:String x:Key="Application.Other.CheckForTranslationUpdates.Info">(Updated translations will be downloaded and installed automatically)</s:String>
-    <s:String x:Key="Application.Other.CheckForUpdates">Check for updates.</s:String>
-    <s:String x:Key="S.Application.Other.Homepage">Homepage:</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.StartUp">StartUp Window</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Recorder">Screen Recorder</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Webcam">Webcam Recorder</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Board">Board Recorder</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Editor">Editor Window</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Minimized">Minimized (system tray)</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Info">(It controls how the app opens. When starting minimized, the system tray icon will be visible)</s:String>
-    
+
+    <!--Options • Tasks-->
     <s:String x:Key="S.AutomatedTasks.Title">Automated Task</s:String>
     <s:String x:Key="S.AutomatedTasks.List">List of automated tasks</s:String>
     <s:String x:Key="S.AutomatedTasks.List.Task">Task</s:String>
@@ -221,6 +240,7 @@
     <s:String x:Key="S.AutomatedTasks.SelectType">(Pick a task)</s:String>
     <s:String x:Key="S.AutomatedTasks.Info">These tasks are executed sequentially from the top of the list to the bottom.&#10;It happens when you first open a project using the editor.</s:String>
     
+    <!--Options • Interface-->
     <s:String x:Key="Interface.Theme">App's theme</s:String>
     <s:String x:Key="Interface.Theme.Scheme">Color scheme</s:String>
     <s:String x:Key="Interface.EditorBackground">Editor background</s:String>
@@ -234,7 +254,6 @@
     <s:String x:Key="Interface.Theme.Scheme.Dark">Dark</s:String>
     <s:String x:Key="Interface.Theme.Scheme.VeryDark">Very Dark</s:String>
     <s:String x:Key="Interface.Theme.Scheme.Custom">Custom</s:String>
-    
     <s:String x:Key="Interface.EditorBackground.GridSize">Grid Size</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.VerySmall">Very Small</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Small">Small</s:String>
@@ -244,21 +263,19 @@
     <s:String x:Key="Interface.EditorBackground.GridSize.ILikeBigSquares">I Like Big Squares</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.ImBlind">I'm Blind</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Custom">Custom</s:String>
-
     <s:String x:Key="Interface.EditorBackground.BaseColor">Base Color</s:String>
     <s:String x:Key="Interface.EditorBackground.EvenColor">Even Color</s:String>
     <s:String x:Key="Interface.EditorBackground.OddColor">Odd Color</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Height">Height</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Width">Width</s:String>
     <s:String x:Key="Interface.EditorBackground.GridSize.Apply">Apply</s:String>
-
-    <s:String x:Key="Interface.Other">Other</s:String>
     <s:String x:Key="Interface.Other.ExtendChrome">Extend titlebar (window chrome).</s:String>
     <s:String x:Key="Interface.Other.HideTitleBar">Hide the title bar (thin mode).</s:String>
     <s:String x:Key="Interface.Other.TripleClickSelection">Enable triple-click to select the text.</s:String>
     <s:String x:Key="Interface.Other.AutomaticallySizeOnContent">Automatically adjust the window size based on the frame size, right after loading.</s:String>
     <s:String x:Key="Interface.Other.AutomaticallyFitImage">Automatically adjust the frame zoom based on the window size, right after loading.</s:String>
   
+    <!--Options • Shortcuts-->
     <s:String x:Key="S.Shortcuts.Global">Global</s:String>
     <s:String x:Key="S.Shortcuts.Global.ScreenRecorder">Screen recorder:</s:String>
     <s:String x:Key="S.Shortcuts.Global.ScreenRecorder.Info">(Opens the default screen recorder)</s:String>
@@ -285,6 +302,7 @@
     <s:String x:Key="S.Shortcuts.Recorders.DisableFollow.Info">(Temporarily disables the adjustment of the recording area based on the position of the cursor, only modifier keys accepted)</s:String>
     <s:String x:Key="S.Shortcuts.Info">Click to set keyboard focus, then press the desired keys and modifiers.&#10;Some keys combinations are not allowed.</s:String>
     
+    <!--Options • Language-->
     <s:String x:Key="Language.AppLanguage">App's Language</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect">Auto detect</s:String>
     <s:String x:Key="Language.AppLanguage.AutoDetect.Author">Current OS language (if available)</s:String>
@@ -300,6 +318,7 @@
     <s:String x:Key="Language.AppLanguage.Translate.ImportLink.Tooltip">Opens the import page</s:String>
     <s:String x:Key="Language.AppLanguage.Translate.EmailLink.Tooltip">Opens your email app</s:String>
     
+    <!--Options • Storage-->
     <s:String x:Key="TempFiles.FilesAndFolders">Temporary files and folders</s:String>
     <s:String x:Key="TempFiles.FilesAndFolders.Count">{0} folders and {1} files</s:String>
     <s:String x:Key="TempFiles.FilesAndFolders.None">No folder or file detected</s:String>
@@ -324,6 +343,7 @@
     <s:String x:Key="TempFiles.AutomaticRemovalDays.Info">(in days, any closed project older than this will be erased/discarded after opening the app)</s:String>
     <s:String x:Key="TempFiles.LowSpace">Low on space on the current selected hard drive. Please, clean the temp folder or change the location.</s:String>
     
+    <!--Options • Upload-->
     <s:String x:Key="S.Upload.Proxy">Proxy</s:String>
     <s:String x:Key="S.Upload.Proxy.Mode">Mode:</s:String>
     <s:String x:Key="S.Upload.Proxy.Mode.Disabled">Disabled</s:String>
@@ -361,6 +381,7 @@
     <s:String x:Key="S.Upload.Pick.Album">Pick an album (optional)</s:String>
     <s:String x:Key="S.Upload.Pick.Album.Info">If you wish so, you can select the destination album:</s:String>
     
+    <!--Options • Extras-->
     <s:String x:Key="Extras.External">Available external tools</s:String>
     <s:String x:Key="Extras.Download">Click here to download&#x0d;{0}</s:String>
     <s:String x:Key="Extras.Downloading">Downloading...</s:String>
@@ -380,7 +401,7 @@
     <s:String x:Key="Extras.License.Gifski">Gifski license</s:String>
     <s:String x:Key="Extras.License.SharpDx">SharpDx license</s:String>
 
-    <!--Donations-->
+    <!--Options • Donations-->
     <s:String x:Key="S.Donate.Donate">Donate</s:String>
     <s:String x:Key="S.Donate.Donate.Dollar">Donate US$</s:String>
     <s:String x:Key="S.Donate.Donate.Euro">Donate €</s:String>
@@ -399,6 +420,7 @@
     <s:String x:Key="S.Donate.Support">Support</s:String>
     <s:String x:Key="S.Donate.Support.Visit">If you wish to support the project :)</s:String>
     
+    <!--Options • About-->
     <s:String x:Key="About.Version">Version:</s:String>
     <s:String x:Key="About.Author">Author: Nicke Manarin</s:String>
     <s:String x:Key="S.About.StoreVersion">Microsoft Store version. Some features are disabled due to enforced policies.</s:String>

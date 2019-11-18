@@ -3489,14 +3489,14 @@
                                 </Grid.ColumnDefinitions>
 
                                 <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="PenModeRadioButton" Content="{StaticResource Vector.Pen}" 
-                                                    Text="{DynamicResource FreeDrawing.Pen}" Cursor="Hand" ContentWidth="20" Margin="0,3" Padding="0,5" IsChecked="True"/>
+                                                    Text="{DynamicResource FreeDrawing.Pen}" Cursor="Hand" ContentWidth="20" Margin="0,2" Padding="0,2" MinHeight="30" IsChecked="True"/>
                                 <n:ImageRadioButton Grid.Row="0" Grid.Column="1" x:Name="EraserModeRadioButton" Content="{StaticResource Vector.Eraser}" 
-                                                    Text="{DynamicResource FreeDrawing.Eraser}" Cursor="Hand" ContentWidth="20" Margin="0,3" Padding="0,5"/>
+                                                    Text="{DynamicResource FreeDrawing.Eraser}" Cursor="Hand" ContentWidth="20" Margin="0,2" Padding="0,2" MinHeight="30"/>
 
                                 <n:ImageRadioButton Grid.Row="1" Grid.Column="0" x:Name="SelectorModeRadioButton" Content="{StaticResource Vector.Select}" 
-                                                    Text="{DynamicResource FreeDrawing.Select}" Cursor="Hand" ContentWidth="20" Margin="0,3" Padding="0,5"/>
+                                                    Text="{DynamicResource FreeDrawing.Select}" Cursor="Hand" ContentWidth="20" Margin="0,2" Padding="0,2" MinHeight="30"/>
                                 <n:ImageRadioButton Grid.Row="1" Grid.Column="1" x:Name="EraserStrokeModeRadioButton" Content="{StaticResource Vector.StrokeEraser}" 
-                                                    Text="{DynamicResource FreeDrawing.StrokeEraser}" Cursor="Hand" ContentWidth="20" Margin="0,3" Padding="0,5"/>
+                                                    Text="{DynamicResource FreeDrawing.StrokeEraser}" Cursor="Hand" ContentWidth="20" Margin="0,2" Padding="0,2" MinHeight="30"/>
                             </Grid>
 
                             <n:LabelSeparator Grid.Row="2" Text="{DynamicResource FreeDrawing.Pen}" Visibility="{Binding ElementName=PenModeRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}"/>
@@ -3614,11 +3614,11 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
 
-                                <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="AddModeRadioButton" Content="{StaticResource Vector.Add}" Margin="0,3" 
-                                                    Text="{DynamicResource S.Shapes.Mode.Insert}" Cursor="Hand" ContentWidth="20" Padding="0,5" IsChecked="True" Checked="ShapeModes_Checked"/>
+                                <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="AddModeRadioButton" Content="{StaticResource Vector.Add}" Margin="0,2" Padding="0,2" MinHeight="30"  
+                                                    Text="{DynamicResource S.Shapes.Mode.Insert}" Cursor="Hand" ContentWidth="20" IsChecked="True" Checked="ShapeModes_Checked"/>
 
-                                <n:ImageRadioButton Grid.Row="0" Grid.Column="1" x:Name="SelectModeRadioButton" Content="{StaticResource Vector.Select}" Margin="0,3"
-                                                    Text="{DynamicResource FreeDrawing.Select}" Cursor="Hand" ContentWidth="20" Padding="0,5" Checked="ShapeModes_Checked"/>
+                                <n:ImageRadioButton Grid.Row="0" Grid.Column="1" x:Name="SelectModeRadioButton" Content="{StaticResource Vector.Select}" Margin="0,2" Padding="0,2" MinHeight="30" 
+                                                    Text="{DynamicResource FreeDrawing.Select}" Cursor="Hand" ContentWidth="20" Checked="ShapeModes_Checked"/>
                             </Grid>
 
                             <n:LabelSeparator Grid.Row="2" Text="{DynamicResource S.Shapes.Shapes}" Visibility="{Binding ElementName=AddModeRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}"/>
@@ -4026,11 +4026,11 @@
 
                                 <n:ImageRadioButton Grid.Column="0" x:Name="BarRadioButton" Content="{StaticResource Vector.Progress}" Text="{DynamicResource Progress.Type.Bar}" 
                                                     IsChecked="{Binding ProgressType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, 
-                                                    ConverterParameter={x:Static u:ProgressType.Bar}}"/>
+                                                    ConverterParameter={x:Static u:ProgressType.Bar}}" Margin="0,2" Padding="0,2" MinHeight="30"/>
 
                                 <n:ImageRadioButton Grid.Column="1" x:Name="TextRadioButton" Content="{StaticResource Vector.FreeText}" Text="{StaticResource Progress.Type.Text}"
                                                     IsChecked="{Binding ProgressType, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, 
-                                                    ConverterParameter={x:Static u:ProgressType.Text}}"/>
+                                                    ConverterParameter={x:Static u:ProgressType.Text}}" Margin="0,2" Padding="0,2" MinHeight="30"/>
                             </Grid>
 
                             <Expander Grid.Row="2" Header="{DynamicResource Caption.Font}" IsExpanded="{Binding IsProgressFontGroupExpanded, Source={x:Static u:UserSettings.All}}"

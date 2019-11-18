@@ -67,8 +67,8 @@
     <s:String x:Key="Update.CloseThis.Detail">Dit is een oudere versie. U hebt al de nieuwere versie gedownload.</s:String>
     
     <!--Options Window-->
-    <s:String x:Key="Title.Options">ScreenToGif - Instellingen</s:String>
-    <s:String x:Key="Application">Programma</s:String>
+    <s:String x:Key="S.Options.Title">ScreenToGif - Instellingen</s:String>
+    <s:String x:Key="S.Options.App">Programma</s:String>
     <s:String x:Key="Interface">Interface</s:String>
     <s:String x:Key="S.AutoTasks">Automatisering</s:String>
     <s:String x:Key="S.Shortcuts">Sneltoetsen</s:String>
@@ -96,25 +96,22 @@
     <s:String x:Key="S.Options.Recorder.Magnifier">Vergrootglas inschakelen.</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier.Info">(Bij het vastleggen van het opnamegebied)</s:String>
     
-    <s:String x:Key="Application.Other">Overige</s:String>
-    <s:String x:Key="Application.Other.SystemTray">Pictogram in het systeemvak van de taakbalk (meldingencentrum) weergeven.</s:String>
-    <s:String x:Key="Application.Other.LeaveOpen">Houd de toepassing open, zelfs als alle schermen gesloten zijn.</s:String>
-    <s:String x:Key="Application.Other.NotifyFrameDeletion">Bevestiging vragen bij het wissen van frames.</s:String>
-    <s:String x:Key="Application.Other.NotifyProjectDiscard">Bevestiging vragen bij het verwijderen van een project.</s:String>
-    <s:String x:Key="Application.Other.NotifyWhileClosingEditor">Bevestiging vragen bij het afsluiten van de editor (als er een project geopend is).</s:String>
-    <s:String x:Key="Application.Other.NotifyWhileClosingApp">Bevestiging vragen bij het sluiten van het programa (d.m.v. 'Afsluiten').</s:String>
-    <s:String x:Key="Application.Other.DrawOutlineOutside">Contouren van tekstkaders tekenen.</s:String>
-    <s:String x:Key="Application.Other.DisableHardwareAcceleration">Hardwareversnelling uitschakelen.</s:String>
-    <s:String x:Key="Application.Other.CheckForTranslationUpdates">Controleren op nieuw vertalingen.</s:String>
-    <s:String x:Key="Application.Other.CheckForUpdates">Controleren op updates</s:String>
-    <s:String x:Key="S.Application.Other.Homepage">Homepage:</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.StartUp">Startscherm</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Recorder">Schermopname</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Webcam">Webcam-opname</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Board">Whiteboard-opname</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Editor">Editorscherm</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Minimized">Geminimaliseerd (systeemvak)</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Info">(Het bepaalt hoe het programma opent. Bij geminimaliseerd starten, zal het systeemvakpictogram zichtbaar zijn)</s:String>
+    <s:String x:Key="S.Options.Other">Overige</s:String>
+    <s:String x:Key="S.Options.App.Tray.Show">Pictogram in het systeemvak van de taakbalk (meldingencentrum) weergeven.</s:String>
+    <s:String x:Key="S.Options.App.Tray.LeaveOpen">Houd de toepassing open, zelfs als alle schermen gesloten zijn.</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyFrameDeletion">Bevestiging vragen bij het wissen van frames.</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyProjectDiscard">Bevestiging vragen bij het verwijderen van een project.</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingEditor">Bevestiging vragen bij het afsluiten van de editor (als er een project geopend is).</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">Bevestiging vragen bij het sluiten van het programa (d.m.v. 'Afsluiten').</s:String>
+    <s:String x:Key="S.Options.App.General.DrawOutlineOutside">Contouren van tekstkaders tekenen.</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">Hardwareversnelling uitschakelen.</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">Controleren op nieuw vertalingen.</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForUpdates">Controleren op updates</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Startup">Startscherm</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Recorder">Schermopname</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Webcam">Webcam-opname</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Board">Whiteboard-opname</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Editor">Editorscherm</s:String>
     
     <s:String x:Key="S.AutomatedTasks.Title">Taak</s:String>
     <s:String x:Key="S.AutomatedTasks.List">Lijst met automatische taken</s:String>

@@ -39,8 +39,8 @@
     <s:String x:Key="Update.CloseThis.Detail">Bu eski bir sürüm. Yeni sürüm zaten indirildi.</s:String>
     
     <!--Options Page-->
-    <s:String x:Key="Title.Options">ScreenToGif - Ayarlar</s:String>
-    <s:String x:Key="Application">Uygulama</s:String>
+    <s:String x:Key="S.Options.Title">ScreenToGif - Ayarlar</s:String>
+    <s:String x:Key="S.Options.App">Uygulama</s:String>
     <s:String x:Key="S.Shortcuts">Klavye Kısayolları</s:String>
     <s:String x:Key="Interface">Arayüz</s:String>
     <s:String x:Key="Image">Görüntü</s:String>
@@ -50,12 +50,11 @@
     <s:String x:Key="S.Options.Donate">Bağış Yap</s:String>
     <s:String x:Key="About">Hakkında</s:String>
     
-    <s:String x:Key="S.Application.Other.Homepage">Anasayfa:</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.StartUp">Başlangıç Ekranı</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Recorder">Ekran Kaydedici</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Webcam">Webcam Kaydedici</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Board">Pano Kaydedici</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Editor">Editör Penceresi</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Startup">Başlangıç Ekranı</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Recorder">Ekran Kaydedici</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Webcam">Webcam Kaydedici</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Board">Pano Kaydedici</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Editor">Editör Penceresi</s:String>
     
     <s:String x:Key="S.Options.Recorder.RecordMouse">Fare imlecini kayıtta göster.</s:String>
     <s:String x:Key="S.Options.Recorder.RecordClicks">Fare tıklamalarını kayıtta göster.</s:String>
@@ -70,8 +69,8 @@
     <!--<s:String x:Key="S.Options.Recorder.AsyncRecording">Enable asynchronous recording.</s:String>-->
     <!--<s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(It helps reduce the interface lag when recording)</s:String>-->
     
-    <s:String x:Key="Application.Other">Diğer</s:String>
-    <s:String x:Key="Application.Other.CheckForUpdates">Güncellemeleri kontrol et.</s:String>
+    <s:String x:Key="S.Options.Other">Diğer</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForUpdates">Güncellemeleri kontrol et.</s:String>
     
     <s:String x:Key="S.Shortcuts.Recorders.StartPause">Başlat/Duraklat:</s:String>
     <s:String x:Key="S.Shortcuts.Recorders.Stop">Durdur:</s:String>

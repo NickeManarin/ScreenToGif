@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Text;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
@@ -2323,6 +2324,8 @@ namespace ScreenToGif.Util
     {
         #region Variables/Properties
 
+        private readonly object _lock = new object();
+
         /// <summary>
         /// The ID of messages that are received from the taskbar icon.
         /// </summary>
@@ -2334,15 +2337,20 @@ namespace ScreenToGif.Util
         private uint _taskbarRestartMessageId;
 
         /// <summary>
-        /// Used to track whether a mouse-up event is just the aftermath of a double-click and therefore needs to be suppressed.
+        /// The number of clicks between the first click and all clicks in between the maximum amount of time of SystemInformation.DoubleClickTime.
         /// </summary>
-        private bool _isDoubleClick;
+        private int _clickCount = 0;
 
         /// <summary>
         /// A delegate that processes messages of the hidden native window that receives window messages. Storing
         /// this reference makes sure we don't loose our reference to the message window.
         /// </summary>
         private Native.WindowProcedureHandler _messageHandler;
+
+        /// <summary>
+        /// Timer used to detect double clicks and ignore unwanted single click events.
+        /// </summary>
+        private readonly Timer _doubleClick = new Timer();
 
         /// <summary>
         /// Window class ID.
@@ -2380,6 +2388,23 @@ namespace ScreenToGif.Util
         public WindowMessageSink()
         {
             CreateMessageWindow();
+
+            _doubleClick.Interval = SystemInformation.DoubleClickTime;
+            _doubleClick.Tick += DoubleClick_Tick;
+        }
+
+        private void DoubleClick_Tick(object sender, EventArgs e)
+        {
+            lock (_lock)
+            {
+                if (_clickCount <= 0)
+                    return;
+
+                MouseEventReceived?.Invoke(_clickCount > 1 ? MouseEventType.IconLeftDoubleClick : MouseEventType.IconLeftMouseUp);
+
+                _clickCount = 0;
+                _doubleClick.Stop();
+            }
         }
 
         ~WindowMessageSink()
@@ -2431,15 +2456,15 @@ namespace ScreenToGif.Util
         {
             if (messageId == _taskbarRestartMessageId)
             {
-                //recreate the icon if the taskbar was restarted (e.g. due to Win Explorer shutdown)
+                //Recreate the icon if the taskbar was restarted (for example due to Windows Explorer shutdown).
                 var listener = TaskbarCreated;
                 listener?.Invoke();
             }
 
-            //forward message
+            //Forward the message.
             ProcessWindowMessage(messageId, wparam, lparam);
 
-            // Pass the message to the default window procedure
+            //Pass the message to the default window procedure.
             return Native.DefWindowProc(hwnd, messageId, wparam, lparam);
         }
 
@@ -2451,7 +2476,8 @@ namespace ScreenToGif.Util
         /// <param name="lParam">Provides information about the event.</param>
         private void ProcessWindowMessage(uint msg, IntPtr wParam, IntPtr lParam)
         {
-            if (msg != CallbackMessageId) return;
+            if (msg != CallbackMessageId) 
+                return;
 
             switch (lParam.ToInt32())
             {
@@ -2463,16 +2489,22 @@ namespace ScreenToGif.Util
                     MouseEventReceived(MouseEventType.IconLeftMouseDown);
                     break;
 
-                case 0x202:
-                    if (!_isDoubleClick)
-                        MouseEventReceived(MouseEventType.IconLeftMouseUp);
+                case 0x202: //Left click.
+                    _clickCount++;
 
-                    _isDoubleClick = false;
+                    if (_clickCount == 1)
+                        _doubleClick.Start();
+
                     break;
 
                 case 0x203:
-                    _isDoubleClick = true;
-                    MouseEventReceived(MouseEventType.IconDoubleClick);
+                    lock (_lock)
+                    {
+                        _clickCount = -1; //Puts down to -1 to avoid a third call by the mouse up.
+                        _doubleClick.Stop();
+
+                        MouseEventReceived(MouseEventType.IconLeftDoubleClick);   
+                    }
                     break;
 
                 case 0x204:
@@ -2533,6 +2565,10 @@ namespace ScreenToGif.Util
 
             Native.DestroyWindow(MessageWindowHandle);
             _messageHandler = null;
+
+            _doubleClick.Tick -= DoubleClick_Tick;
+            _doubleClick.Stop();
+            _doubleClick.Dispose();
         }
     }
 

@@ -138,8 +138,8 @@
     <s:String x:Key="Update.CloseThis.Detail">هذا هو نسخه قديمه. لقد قمت بالفعل بتنزيل اصدار جديد.</s:String>
     
     <!--Options Window-->
-    <s:String x:Key="Title.Options">خيارات - ScreenToGif </s:String>
-    <s:String x:Key="Application">التطبيق</s:String>
+    <s:String x:Key="S.Options.Title">خيارات - ScreenToGif </s:String>
+    <s:String x:Key="S.Options.App">التطبيق</s:String>
     <s:String x:Key="Interface">واجهه</s:String>
     <s:String x:Key="S.AutoTasks">مهمة تلقائية</s:String>
     <s:String x:Key="S.Shortcuts">اختصارات</s:String>
@@ -174,26 +174,23 @@
     <s:String x:Key="S.Options.Recorder.FollowMargin.Info">(هامش المخزن المؤقت بالبكسل ، حيث تبدا منطقه التسجيل في الحصول على موضع التشغيل)</s:String>
     <s:String x:Key="S.Options.Recorder.FollowMarginInvisible.Info">(هامش المخزن المؤقت اضافيه بالبكسل ، حيث يبدا واجهه المستخدم الحصول على مخفيه)</s:String>
 
-    <s:String x:Key="Application.Other">اخر</s:String>
-    <s:String x:Key="Application.Other.SystemTray">(عرض التطبيق على علبه النظام (منطقه الاعلام.</s:String>
-    <s:String x:Key="Application.Other.LeaveOpen">ابق التطبيق مفتوحا حتى لو تم اغلاق جميع النوافذ.</s:String>
-    <s:String x:Key="Application.Other.NotifyFrameDeletion">السؤال قبل حذف الاطارات.</s:String>
-    <s:String x:Key="Application.Other.NotifyProjectDiscard">اسالني قبل ان تتخلي عن مشروع.</s:String>
-    <s:String x:Key="Application.Other.NotifyWhileClosingEditor">(اسالني قبل اغلاق المحرر (اذا كان هناك مشروع مفتوح.</s:String>
-    <s:String x:Key="Application.Other.NotifyWhileClosingApp">(اسالني قبل اغلاق التطبيق (من خلال امر ' خروج '.</s:String>
-    <s:String x:Key="Application.Other.DrawOutlineOutside">رسم الخطوط العريضة للتعليقات خارج الحروف.</s:String>
-    <s:String x:Key="Application.Other.DisableHardwareAcceleration">تعطيل تسريع الاجهزه.</s:String>
-    <s:String x:Key="Application.Other.CheckForTranslationUpdates">التحقق من تحديثات الترجمة.</s:String>
-    <s:String x:Key="Application.Other.CheckForTranslationUpdates.Info">(سيتم تنزيل الترجمات المحدثة وتثبيتها تلقائيا)</s:String>
-    <s:String x:Key="Application.Other.CheckForUpdates">التحقق من وجود تحديثات.</s:String>
-    <s:String x:Key="S.Application.Other.Homepage">الصفحه الرئيسيه:</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.StartUp">نافذه بدء التشغيل</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Recorder">مسجل الشاشة</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Webcam">مسجل كاميرا ويب</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Board">مسجلة لوحة</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Editor">نافذة محرر</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Minimized">(تصغير (علبه النظام</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Info">(يتحكم في كيفيه فتح التطبيق. عند البدء في التصغير ، سيكون رمز علبه النظام مرئيا)</s:String>
+    <s:String x:Key="S.Options.Other">اخر</s:String>
+    <s:String x:Key="S.Options.App.Tray.Show">(عرض التطبيق على علبه النظام (منطقه الاعلام.</s:String>
+    <s:String x:Key="S.Options.App.Tray.LeaveOpen">ابق التطبيق مفتوحا حتى لو تم اغلاق جميع النوافذ.</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyFrameDeletion">السؤال قبل حذف الاطارات.</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyProjectDiscard">اسالني قبل ان تتخلي عن مشروع.</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingEditor">(اسالني قبل اغلاق المحرر (اذا كان هناك مشروع مفتوح.</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">(اسالني قبل اغلاق التطبيق (من خلال امر ' خروج '.</s:String>
+    <s:String x:Key="S.Options.App.General.DrawOutlineOutside">رسم الخطوط العريضة للتعليقات خارج الحروف.</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">تعطيل تسريع الاجهزه.</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">التحقق من تحديثات الترجمة.</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(سيتم تنزيل الترجمات المحدثة وتثبيتها تلقائيا)</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForUpdates">التحقق من وجود تحديثات.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Startup">نافذه بدء التشغيل</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Recorder">مسجل الشاشة</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Webcam">مسجل كاميرا ويب</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Board">مسجلة لوحة</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Editor">نافذة محرر</s:String>
     
     <s:String x:Key="S.AutomatedTasks.Title">مهمة تلقائية</s:String>
     <s:String x:Key="S.AutomatedTasks.List">قائمه المهام التلقائية</s:String>

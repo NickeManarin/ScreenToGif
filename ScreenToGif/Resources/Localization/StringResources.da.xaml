@@ -68,8 +68,8 @@
     <s:String x:Key="Update.CloseThis.Detail">Dette er en ældre version. Du har allerede hentet en ny.</s:String>
     
     <!--Options Window-->
-    <s:String x:Key="Title.Options">ScreenToGif - Indstillinger</s:String>
-    <s:String x:Key="Application">Program</s:String>
+    <s:String x:Key="S.Options.Title">ScreenToGif - Indstillinger</s:String>
+    <s:String x:Key="S.Options.App">Program</s:String>
     <s:String x:Key="Interface">Brugerflade</s:String>
     <s:String x:Key="S.AutoTasks">Automatisering</s:String>
     <s:String x:Key="S.Shortcuts">Genveje</s:String>
@@ -97,25 +97,22 @@
     <s:String x:Key="S.Options.Recorder.Magnifier">Aktiver lup.</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier.Info">(viser forstørrelsesglas ved valg af område)</s:String>
     
-    <s:String x:Key="Application.Other">Andet</s:String>
-    <s:String x:Key="Application.Other.SystemTray">Vis ikon ved uret.</s:String>
-    <s:String x:Key="Application.Other.LeaveOpen">Luk ikke programmet, selv om alle vinduer lukkes.</s:String>
-    <s:String x:Key="Application.Other.NotifyFrameDeletion">Bekræft sletning af rammer.</s:String>
-    <s:String x:Key="Application.Other.NotifyProjectDiscard">Spørg før projekt kasseres.</s:String>
-    <s:String x:Key="Application.Other.NotifyWhileClosingEditor">Bekræft lukning af redigering (hvis der er åbne projekter).</s:String>
-    <s:String x:Key="Application.Other.NotifyWhileClosingApp">Bekræft programlukning (med 'Luk').</s:String>
-    <s:String x:Key="Application.Other.DrawOutlineOutside">Tegn omkreds på titelbogstaver.</s:String>
-    <s:String x:Key="Application.Other.DisableHardwareAcceleration">Deaktivér hardwareacceleration.</s:String>
-    <s:String x:Key="Application.Other.CheckForTranslationUpdates">Søg efter sprogopdatering.</s:String>
-    <s:String x:Key="Application.Other.CheckForUpdates">Søg efter opdatering.</s:String>
-    <s:String x:Key="S.Application.Other.Homepage">Opstart:</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.StartUp">Startvindue</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Recorder">Optager</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Webcam">Webcam</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Board">Tavle</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Editor">Redigér</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Minimized">Minimeret (ved uret)</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Info">(Bestemmer starttilstand. Ved minimeret start, vises ikon ved uret)</s:String>
+    <s:String x:Key="S.Options.Other">Andet</s:String>
+    <s:String x:Key="S.Options.App.Tray.Show">Vis ikon ved uret.</s:String>
+    <s:String x:Key="S.Options.App.Tray.LeaveOpen">Luk ikke programmet, selv om alle vinduer lukkes.</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyFrameDeletion">Bekræft sletning af rammer.</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyProjectDiscard">Spørg før projekt kasseres.</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingEditor">Bekræft lukning af redigering (hvis der er åbne projekter).</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">Bekræft programlukning (med 'Luk').</s:String>
+    <s:String x:Key="S.Options.App.General.DrawOutlineOutside">Tegn omkreds på titelbogstaver.</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">Deaktivér hardwareacceleration.</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">Søg efter sprogopdatering.</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForUpdates">Søg efter opdatering.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Startup">Startvindue</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Recorder">Optager</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Webcam">Webcam</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Board">Tavle</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Editor">Redigér</s:String>
     
     <s:String x:Key="S.AutomatedTasks.Title">Automatisering</s:String>
     <s:String x:Key="S.AutomatedTasks.List">Automatiske opgaver</s:String>

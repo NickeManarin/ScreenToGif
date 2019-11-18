@@ -67,8 +67,8 @@
     <s:String x:Key="Update.CloseThis.Detail">これは旧バージョンです。既に新しいバージョンをダウンロードしました。</s:String>
     
     <!--Options Window-->
-    <s:String x:Key="Title.Options">ScreenToGif - オプション</s:String>
-    <s:String x:Key="Application">アプリケーション</s:String>
+    <s:String x:Key="S.Options.Title">ScreenToGif - オプション</s:String>
+    <s:String x:Key="S.Options.App">アプリケーション</s:String>
     <s:String x:Key="Interface">インターフェース</s:String>
     <s:String x:Key="S.AutoTasks">自動化タスク</s:String>
     <s:String x:Key="S.Shortcuts">ショートカットキー</s:String>
@@ -96,25 +96,22 @@
     <s:String x:Key="S.Options.Recorder.Magnifier">拡大鏡を有効</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier.Info">(記録領域を選択している間は拡大鏡を有効にします)</s:String>
     
-    <s:String x:Key="Application.Other">その他</s:String>
-    <s:String x:Key="Application.Other.SystemTray">システムトレイ(通知領域)にアプリを表示</s:String>
-    <s:String x:Key="Application.Other.LeaveOpen">すべてのウィンドウを閉じてもアプリは閉じない</s:String>
-    <s:String x:Key="Application.Other.NotifyFrameDeletion">フレームを削除する前に確認</s:String>
-    <s:String x:Key="Application.Other.NotifyProjectDiscard">プロジェクトを破棄する前に確認</s:String>
-    <s:String x:Key="Application.Other.NotifyWhileClosingEditor">エディターを閉じる前に確認 (プロジェクトが開かれている場合)</s:String>
-    <s:String x:Key="Application.Other.NotifyWhileClosingApp">(Exitコマンドで)アプリ終了する前に確認</s:String>
-    <s:String x:Key="Application.Other.DrawOutlineOutside">文字の外側にキャプションのアウトラインを描く</s:String>
-    <s:String x:Key="Application.Other.DisableHardwareAcceleration">ハードウェア・アクセラレーションを使用しない</s:String>
-    <s:String x:Key="Application.Other.CheckForTranslationUpdates">翻訳のアップデートを確認</s:String>
-    <s:String x:Key="Application.Other.CheckForUpdates">アップデートを確認</s:String>
-    <s:String x:Key="S.Application.Other.Homepage">起動時のウィンドウ:</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.StartUp">ランチャー</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Recorder">スクリーンレコーダー</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Webcam">Webカメラ録画</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Board">ボードレコーダー</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Editor">エディターウィンドウ</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Minimized">最小化(システムトレイ)</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Info">起動時のウィンドウを選択します。最小化起動時は、システムトレイにアイコンが表示されます。</s:String>
+    <s:String x:Key="S.Options.Other">その他</s:String>
+    <s:String x:Key="S.Options.App.Tray.Show">システムトレイ(通知領域)にアプリを表示</s:String>
+    <s:String x:Key="S.Options.App.Tray.LeaveOpen">すべてのウィンドウを閉じてもアプリは閉じない</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyFrameDeletion">フレームを削除する前に確認</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyProjectDiscard">プロジェクトを破棄する前に確認</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingEditor">エディターを閉じる前に確認 (プロジェクトが開かれている場合)</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">(Exitコマンドで)アプリ終了する前に確認</s:String>
+    <s:String x:Key="S.Options.App.General.DrawOutlineOutside">文字の外側にキャプションのアウトラインを描く</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">ハードウェア・アクセラレーションを使用しない</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">翻訳のアップデートを確認</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForUpdates">アップデートを確認</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Startup">ランチャー</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Recorder">スクリーンレコーダー</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Webcam">Webカメラ録画</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Board">ボードレコーダー</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Editor">エディターウィンドウ</s:String>
     
     <s:String x:Key="S.AutomatedTasks.Title">自動化タスク</s:String>
     <s:String x:Key="S.AutomatedTasks.List">自動化タスクの一覧</s:String>

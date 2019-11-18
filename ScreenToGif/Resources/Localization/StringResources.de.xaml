@@ -138,8 +138,8 @@
     <s:String x:Key="Update.CloseThis.Detail">Das ist eine veraltete Version. Sie haben bereits die aktuelle Version heruntergeladen.</s:String>
     
     <!--Options Window-->
-    <s:String x:Key="Title.Options">ScreenToGif - Optionen</s:String>
-    <s:String x:Key="Application">Allgemein</s:String>
+    <s:String x:Key="S.Options.Title">ScreenToGif - Optionen</s:String>
+    <s:String x:Key="S.Options.App">Allgemein</s:String>
     <s:String x:Key="S.Options.Recorder">Rekorder</s:String>
     <s:String x:Key="Interface">Benutzeroberfläche</s:String>
     <s:String x:Key="S.AutoTasks">Automatische Aufgaben</s:String>
@@ -193,26 +193,23 @@
     <s:String x:Key="S.Options.Recorder.FollowMargin.Info">(Sicherheitsabstand (in Pixeln) bei Bewegungen des Aufnahme-Bereichs)</s:String>
     <s:String x:Key="S.Options.Recorder.FollowMarginInvisible.Info">(Zusätzlicher Sicherheitsabstand (in Pixeln) falls die Aufnahme-Benutzeroberfläche unsichtbar wird)</s:String>
 
-    <s:String x:Key="Application.Other">Sonstiges</s:String>
-    <s:String x:Key="Application.Other.SystemTray">Programm-Symbol im Infobereich der Taskleiste anzeigen</s:String>
-    <s:String x:Key="Application.Other.LeaveOpen">Programm offen halten auch wenn alle anderen Fenster geschlossen sind</s:String>
-    <s:String x:Key="Application.Other.NotifyFrameDeletion">Warnung vor dem Löschen von Frames ausgeben</s:String>
-    <s:String x:Key="Application.Other.NotifyProjectDiscard">Warnung vor dem Verwerfen eines Projekts ausgeben</s:String>
-    <s:String x:Key="Application.Other.NotifyWhileClosingEditor">Warnung vor dem Schließen des Editors ausgeben (falls Projekt nicht gespeichert)</s:String>
-    <s:String x:Key="Application.Other.NotifyWhileClosingApp">Warnung vor dem Schließen des Programms über "Beenden"-Option ausgeben</s:String>
-    <s:String x:Key="Application.Other.DrawOutlineOutside">Textkontur nur nach aussen vergrößern</s:String>
-    <s:String x:Key="Application.Other.DisableHardwareAcceleration">Hardware-Beschleunigung ausschalten</s:String>
-    <s:String x:Key="Application.Other.CheckForTranslationUpdates">Nach aktualisierter Übersetzung suchen</s:String>
-    <s:String x:Key="Application.Other.CheckForTranslationUpdates.Info">(Aktualisierte Übersetzung wird automatisch heruntergeladen und installiert)</s:String>
-    <s:String x:Key="Application.Other.CheckForUpdates">Nach Programm-Updates suchen</s:String>
-    <s:String x:Key="S.Application.Other.Homepage">Startoptionen:</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.StartUp">Auswahl-Fenster</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Recorder">Bildschirm-Rekorder</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Webcam">Webcam-Rekorder</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Board">Zeichenbrett-Rekorder</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Editor">Editor</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Minimized">Minimiert (Infobereich)</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Info">(Bestimmt, wie das Programm startet. Wenn minimiert, wird das Programm-Symbol im Infobereich sichtbar)</s:String>
+    <s:String x:Key="S.Options.Other">Sonstiges</s:String>
+    <s:String x:Key="S.Options.App.Tray.Show">Programm-Symbol im Infobereich der Taskleiste anzeigen</s:String>
+    <s:String x:Key="S.Options.App.Tray.LeaveOpen">Programm offen halten auch wenn alle anderen Fenster geschlossen sind</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyFrameDeletion">Warnung vor dem Löschen von Frames ausgeben</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyProjectDiscard">Warnung vor dem Verwerfen eines Projekts ausgeben</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingEditor">Warnung vor dem Schließen des Editors ausgeben (falls Projekt nicht gespeichert)</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">Warnung vor dem Schließen des Programms über "Beenden"-Option ausgeben</s:String>
+    <s:String x:Key="S.Options.App.General.DrawOutlineOutside">Textkontur nur nach aussen vergrößern</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">Hardware-Beschleunigung ausschalten</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">Nach aktualisierter Übersetzung suchen</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(Aktualisierte Übersetzung wird automatisch heruntergeladen und installiert)</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForUpdates">Nach Programm-Updates suchen</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Startup">Auswahl-Fenster</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Recorder">Bildschirm-Rekorder</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Webcam">Webcam-Rekorder</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Board">Zeichenbrett-Rekorder</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Editor">Editor</s:String>
     
     <s:String x:Key="S.AutomatedTasks.Title">Automatische Aufgaben</s:String>
     <s:String x:Key="S.AutomatedTasks.List">Liste automatischer Aufgaben</s:String>

@@ -39,8 +39,8 @@
     <!--<s:String x:Key="Update.CloseThis.Detail">This is an older version. You have already downloaded a new version.</s:String>-->
     
     <!--Options Page-->
-    <s:String x:Key="Title.Options">Налаштування ScreenToGif</s:String>
-    <s:String x:Key="Application">Програма</s:String>
+    <s:String x:Key="S.Options.Title">Налаштування ScreenToGif</s:String>
+    <s:String x:Key="S.Options.App">Програма</s:String>
     <s:String x:Key="Interface">Інтерфейс</s:String>
     <s:String x:Key="Image">Зображення</s:String>
     <s:String x:Key="Language">Мова</s:String>
@@ -49,12 +49,11 @@
     <s:String x:Key="S.Options.Donate">Пожертва</s:String>
     <s:String x:Key="About">Про</s:String>
     
-    <s:String x:Key="S.Application.Other.Homepage">Домашня сторінка:</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.StartUp">Стартове вікно</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Recorder">Запис з екрану</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Webcam">Запис з вебкамери</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Board">Запис з дошки</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Editor">Вікно редактора</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Startup">Стартове вікно</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Recorder">Запис з екрану</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Webcam">Запис з вебкамери</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Board">Запис з дошки</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Editor">Вікно редактора</s:String>
     
     <s:String x:Key="S.Options.Recorder.RecordMouse">Показувати курсор миші під час запису.</s:String>
     <s:String x:Key="S.Options.Recorder.RecordClicks">Позначати кліки миші.</s:String>
@@ -69,8 +68,8 @@
     <s:String x:Key="S.Options.Recorder.AsyncRecording">Ввімкнути асинхронний запис.</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(Допомагає зменшити затримки інтерфейсу під час запису)</s:String>
     
-    <s:String x:Key="Application.Other">Інше</s:String>
-    <!--<s:String x:Key="Application.Other.CheckForUpdates">Check for updates.</s:String>-->
+    <s:String x:Key="S.Options.Other">Інше</s:String>
+    <!--<s:String x:Key="S.Options.App.General.CheckForUpdates">Check for updates.</s:String>-->
     
     <s:String x:Key="Interface.EditorBackground">Тло редактора</s:String>
     <s:String x:Key="Interface.Recorder">Тема</s:String>

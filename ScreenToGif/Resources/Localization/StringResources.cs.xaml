@@ -65,8 +65,8 @@
     <s:String x:Key="Update.CloseThis.Detail">Toto je starší verze. Nová verze již byla stažena.</s:String>
     
     <!--Options Page-->
-    <s:String x:Key="Title.Options">ScreenToGif - Nastavení</s:String>
-    <s:String x:Key="Application">Aplikace</s:String>
+    <s:String x:Key="S.Options.Title">ScreenToGif - Nastavení</s:String>
+    <s:String x:Key="S.Options.App">Aplikace</s:String>
     <s:String x:Key="Interface">Rozhraní</s:String>
     <s:String x:Key="S.Shortcuts">Klávesové zkratky</s:String>
     <s:String x:Key="Image">Obrázek</s:String>
@@ -77,12 +77,11 @@
     <s:String x:Key="S.Options.Donate">Přispět</s:String>
     <s:String x:Key="About">O aplikaci</s:String>
     
-    <s:String x:Key="S.Application.Other.Homepage">Domovská stránka:</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.StartUp">Úvodní nabídka</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Recorder">Záznamník plochy</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Webcam">Záznamník web. kamery</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Board">Záznamník plátna</s:String>
-    <s:String x:Key="S.Application.Other.Homepage.Editor">Okno editoru</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Startup">Úvodní nabídka</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Recorder">Záznamník plochy</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Webcam">Záznamník web. kamery</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Board">Záznamník plátna</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Editor">Okno editoru</s:String>
     
     <s:String x:Key="S.Options.Recorder.RecordMouse">Zobrazit kurzor myši v nahraném záznamu.</s:String>
     <s:String x:Key="S.Options.Recorder.RecordClicks">Rozpoznání kliknutí myší.</s:String>
@@ -100,14 +99,14 @@
     <s:String x:Key="S.Options.Recorder.Magnifier">Povolit lupu obrazovky.</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier.Info">(Umožňuje zvětšování při výběru v nahrávané oblasti)</s:String>
     
-    <s:String x:Key="Application.Other">Další</s:String>
-    <s:String x:Key="Application.Other.SystemTray">Zobraz aplikaci v systémové liště (oznamovací oblast).</s:String>
-    <s:String x:Key="Application.Other.LeaveOpen">Nechej aplikaci otevřenou i v případě, že jsou všechna okna zavřena.</s:String>
-    <s:String x:Key="Application.Other.NotifyFrameDeletion">Vyžaduj potvrzení před smazáním snímků.</s:String>
-    <s:String x:Key="Application.Other.NotifyProjectDiscard">Vyžaduj potvrzení před odstraněním projektu.</s:String>
-    <s:String x:Key="Application.Other.NotifyWhileClosingEditor">Vyžaduj potvrzení před uzavřením Editoru (v případě, že existuje otevřený projekt).</s:String>
-    <s:String x:Key="Application.Other.DrawOutlineOutside">Přidání obrysu okolo textu.</s:String>
-    <s:String x:Key="Application.Other.CheckForUpdates">Kontrola aktualizací.</s:String>
+    <s:String x:Key="S.Options.Other">Další</s:String>
+    <s:String x:Key="S.Options.App.Tray.Show">Zobraz aplikaci v systémové liště (oznamovací oblast).</s:String>
+    <s:String x:Key="S.Options.App.Tray.LeaveOpen">Nechej aplikaci otevřenou i v případě, že jsou všechna okna zavřena.</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyFrameDeletion">Vyžaduj potvrzení před smazáním snímků.</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyProjectDiscard">Vyžaduj potvrzení před odstraněním projektu.</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingEditor">Vyžaduj potvrzení před uzavřením Editoru (v případě, že existuje otevřený projekt).</s:String>
+    <s:String x:Key="S.Options.App.General.DrawOutlineOutside">Přidání obrysu okolo textu.</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForUpdates">Kontrola aktualizací.</s:String>
     
     <s:String x:Key="Interface.EditorBackground">Pozadí editoru</s:String>
     <s:String x:Key="Interface.Recorder">Motiv záznamníku</s:String>

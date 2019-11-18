@@ -56,14 +56,16 @@
             <m:ApplicationViewModel x:Key="AppViewModel"/>
 
             <!--Converter-->
-            <BooleanToVisibilityConverter x:Key="Bool2Visibility" />
-            <c:CountToBool x:Key="CountToBoolConverter" />
-            <c:IntToDecimal x:Key="IntToDecimalConverter" />
+            <BooleanToVisibilityConverter x:Key="Bool2Visibility"/>
+            <c:InvertedBoolToVisibility x:Key="InvertedBoolToVisibility"/>
+            <c:CountToBool x:Key="CountToBoolConverter"/>
+            <c:IntToDecimal x:Key="IntToDecimalConverter"/>
             <c:EnumToInt x:Key="EnumToInt"/>
             <c:ColorToBrush x:Key="ColorToBrushConverter"/>
             <c:ShortcutSelection x:Key="ShortcutSelectionConverter"/>
             <c:IntToBool x:Key="BoolToInt"/>
             <c:IntToVisibility x:Key="IntToVisibility"/>
+            <c:InvertedIntToVisibility x:Key="InvertedIntToVisibility"/>
             <c:EnumToVisibility x:Key="EnumToVisibility"/>
             <c:InvertedBool x:Key="InvertedBool"/>
             <c:CommandToInputGestureText x:Key="CommandToInputGestureText"/>
@@ -98,7 +100,8 @@
             <BlurEffect x:Key="Blur" Radius="1" RenderingBias="Quality" KernelType="Gaussian"/>
 
             <!--Notification Icon-->
-            <n:NotifyIcon x:Key="NotifyIcon" IconSource="/Resources/Logo.ico" DataContext="{StaticResource AppViewModel}" NotifyToolTipText="ScreenToGif" Visibility="Collapsed">
+            <n:NotifyIcon x:Key="NotifyIcon" IconSource="/Resources/Logo.ico" DataContext="{StaticResource AppViewModel}" NotifyToolTipText="ScreenToGif" Visibility="Collapsed" 
+                          LeftClickCommand="{Binding TrayLeftClick}" DoubleLeftClickCommand="{Binding TrayDoubleLeftClick}" MiddleClickCommand="{Binding TrayMiddleClick}">
                 <n:NotifyIcon.ContextMenu>
                     <ContextMenu>
                         <n:ImageMenuItem Header="{DynamicResource S.NewRecording}" Image="{StaticResource Vector.Record.New}" Command="{Binding OpenRecorder}" InputGestureText="{Binding RecorderGesture, UpdateSourceTrigger=PropertyChanged}"/>
@@ -553,7 +556,7 @@
                                         <RowDefinition Height="19"/>
                                     </Grid.RowDefinitions>
 
-                                    <Label Grid.Row="0" Content="{TemplateBinding Content}" Padding="{TemplateBinding Padding}" Foreground="{TemplateBinding Foreground}"
+                                    <Label Grid.Row="0" Content="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}"
                                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
 
                                     <Rectangle Grid.Row="1" x:Name="HorizontalRectangle" MinHeight="1" Fill="{DynamicResource Element.Border.Light}" 
@@ -634,7 +637,7 @@
             </Style>
 
             <Style x:Key="ExpanderDownHeaderStyle" TargetType="{x:Type ToggleButton}">
-                <Setter Property="Height" Value="27"/>
+                <Setter Property="Height" Value="22"/>
                 <Setter Property="Background" Value="Transparent"/>
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
 

@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.ComponentModel;
+using System.Runtime.Serialization;
 using ScreenToGif.Util;
 
 namespace ScreenToGif.Model
@@ -60,6 +61,7 @@ namespace ScreenToGif.Model
         public string Details => ToString();
 
         [IgnoreDataMember] //This attribute is getting ignored.
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Image
         {
             get => _image;

@@ -88,8 +88,17 @@ namespace ScreenToGif.Windows
 
         #region App Settings
 
+        private void StartCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            UserSettings.All.ShowNotificationIcon = true;
+        }
+
         private void NotificationIconCheckBox_CheckedChanged(object sender, RoutedEventArgs e)
         {
+            //Can't have a minimized startup, if the icon is not present on the notification area.
+            if (!UserSettings.All.ShowNotificationIcon)
+                UserSettings.All.StartMinimized = false;
+
             if (App.NotifyIcon != null)
                 App.NotifyIcon.Visibility = UserSettings.All.ShowNotificationIcon ? Visibility.Visible : Visibility.Collapsed;
         }
@@ -771,7 +780,7 @@ namespace ScreenToGif.Windows
             }
             catch (Exception ex)
             {
-                ErrorDialog.Ok(LocalizationHelper.Get("Title.Options"), "Error while stopping", ex.Message, ex);
+                ErrorDialog.Ok(LocalizationHelper.Get("S.Options.Title"), "Error while stopping", ex.Message, ex);
                 LogWriter.Log(ex, "Error while trying to set the language.");
             }
         }
@@ -1789,7 +1798,7 @@ namespace ScreenToGif.Windows
             {
                 LogWriter.Log(ex, "Error • Openning the Donation website");
 
-                ErrorDialog.Ok(LocalizationHelper.Get("Title.Options"), "Error openning the donation website", ex.Message, ex);
+                ErrorDialog.Ok(LocalizationHelper.Get("S.Options.Title"), "Error openning the donation website", ex.Message, ex);
             }
         }
 
@@ -1816,7 +1825,7 @@ namespace ScreenToGif.Windows
             {
                 LogWriter.Log(ex, "Error • Openning the Flattr website");
 
-                ErrorDialog.Ok(LocalizationHelper.Get("Title.Options"), "Error openning the Flattr website", ex.Message, ex);
+                ErrorDialog.Ok(LocalizationHelper.Get("S.Options.Title"), "Error openning the Flattr website", ex.Message, ex);
             }
         }
 
@@ -1929,7 +1938,7 @@ namespace ScreenToGif.Windows
 
             if (UserSettings.All.CursorFollowing && UserSettings.All.FollowShortcut == Key.None)
             {
-                Dialog.Ok(LocalizationHelper.Get("Title.Options"), LocalizationHelper.Get("S.Options.Warning.Follow.Header"),
+                Dialog.Ok(LocalizationHelper.Get("S.Options.Title"), LocalizationHelper.Get("S.Options.Warning.Follow.Header"),
                     LocalizationHelper.Get("S.Options.Warning.Follow.Message"), Icons.Warning);
 
                 ShortcutsRadio.IsChecked = true;
@@ -1941,7 +1950,7 @@ namespace ScreenToGif.Windows
 
             if (UserSettings.All.UseDesktopDuplication && !Util.Other.IsSharpDxPresent())
             {
-                Dialog.Ok(LocalizationHelper.Get("Title.Options"), LocalizationHelper.Get("S.Options.Warning.DesktopDuplication.Header"),
+                Dialog.Ok(LocalizationHelper.Get("S.Options.Title"), LocalizationHelper.Get("S.Options.Warning.DesktopDuplication.Header"),
                     LocalizationHelper.Get("S.Options.Warning.DesktopDuplication.Message"), Icons.Warning);
 
                 ExtrasRadioButton.IsChecked = true;

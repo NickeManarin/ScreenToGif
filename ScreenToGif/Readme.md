@@ -10,6 +10,7 @@ _VS 2019 and .Net 4.8 or newer required._
 • The app now uses/requires .Net Framework 4.8.  
 • Screen capture via DirectX 11.1 (Desktop Duplication API, requires Windows 8 or newer).   
 • Screen capture can use a configurable memory cache with support for compression.  
+• You can now set actions to be executed when clicking on the app icon on the system tray.  
 • The default FFmpeg Webm encoder is now set to VP9.  
 • Added support for version 0.9.3 of Gifski (delete the older DLL and download again via Options > Extras).  
 • You can now cancel the gif encoding that uses Gifski.  
@@ -25,6 +26,8 @@ _VS 2019 and .Net 4.8 or newer required._
 ♦ The space bar was not set as the Play/Pause button anymore.  
 ♦ The Gifski encoder now accepts saving gifs to a path (also loading frames from a temporary path) that contains non-latin characters.  
 ♦ The text was overflowing and not wrapping properly in the FFmpeg command text boxes.  
+♦ It was not possible to set shortcuts when deploying with Intune.  
+♦ When trying to type special characters with the help of the Right Alt key, some commands were being fired instead. Because the underlying system translates Right Alt to Ctrl + Alt.     
 
 ### Known Bugs:
 
