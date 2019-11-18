@@ -1723,86 +1723,6 @@ namespace ScreenToGif.Util
             return null;
         }
 
-        public static Image CaptureWithCursor(Size size, int positionX, int positionY, out int cursorPosX, out int cursorPosY)
-        {
-            return CaptureWithCursor((int)size.Width, (int)size.Height, positionX, positionY, out cursorPosX, out cursorPosY);
-        }
-
-        public static Image CaptureWithCursor(int width, int height, int positionX, int positionY, out int cursorPosX, out int cursorPosY)
-        {
-            var hDesk = GetDesktopWindow();
-            var hSrce = GetWindowDC(hDesk);
-            var hDest = CreateCompatibleDC(hSrce);
-            var hBmp = CreateCompatibleBitmap(hSrce, width, height);
-            var hOldBmp = SelectObject(hDest, hBmp);
-
-            cursorPosX = cursorPosY = -1;
-
-            try
-            {
-                new System.Security.Permissions.UIPermission(System.Security.Permissions.UIPermissionWindow.AllWindows).Demand();
-
-                var b = BitBlt(hDest, 0, 0, width, height, hSrce, positionX, positionY, CopyPixelOperation.SourceCopy | CopyPixelOperation.CaptureBlt);
-
-                #region Cursor
-
-                try
-                {
-                    var cursorInfo = new CursorInfo();
-                    cursorInfo.cbSize = Marshal.SizeOf(cursorInfo);
-
-                    if (GetCursorInfo(out cursorInfo))
-                    {
-                        if (cursorInfo.flags == CursorShowing)
-                        {
-                            var hicon = CopyIcon(cursorInfo.hCursor);
-
-                            if (hicon != IntPtr.Zero)
-                            {
-                                if (GetIconInfo(hicon, out var iconInfo))
-                                {
-                                    cursorPosX = cursorInfo.ptScreenPos.X - positionX;
-                                    cursorPosY = cursorInfo.ptScreenPos.Y - positionY;
-
-                                    if (cursorPosX > 0 && cursorPosY > 0)
-                                        DrawIconEx(hDest, cursorPosX - iconInfo.xHotspot, cursorPosY - iconInfo.yHotspot, cursorInfo.hCursor, 0, 0, 0, IntPtr.Zero, 0x0003);
-                                }
-
-                                DeleteObject(iconInfo.hbmColor);
-                                DeleteObject(iconInfo.hbmMask);
-                            }
-
-                            DestroyIcon(hicon);
-                        }
-
-                        DeleteObject(cursorInfo.hCursor);
-                    }
-                }
-                catch (Exception e)
-                {
-                    //LogWriter.Log(e, "Impossible to get screenshot of the screen");
-                }
-
-                #endregion
-
-                return b ? Image.FromHbitmap(hBmp) : null;
-            }
-            catch (Exception ex)
-            {
-                //LogWriter.Log(ex, "Impossible to get screenshot of the screen");
-            }
-            finally
-            {
-                SelectObject(hDest, hOldBmp);
-                DeleteObject(hBmp);
-                DeleteObject(hOldBmp);
-                DeleteDC(hDest);
-                ReleaseDC(hDesk, hSrce);
-            }
-
-            return null;
-        }
-
         public static Image CaptureWindow(IntPtr handle, double scale)
         {
             var rectangle = GetWindowRect(handle);
@@ -1927,7 +1847,7 @@ namespace ScreenToGif.Util
             if (hWnd == IntPtr.Zero)
                 return;
 
-            var hdc = GetWindowDC(hWnd); //GetWindowDC((IntPtr) null); //
+            var hdc = GetWindowDC(hWnd); //GetWindowDC((IntPtr) null);
 
             GetWindowRect(hWnd, out Rect rect);
 
@@ -1998,8 +1918,7 @@ namespace ScreenToGif.Util
 
         internal static string GetKnowFolderPath(Guid knownFolder, bool defaultUser = false)
         {
-            string path;
-            SHGetKnownFolderPath(knownFolder, (uint)KnownFolderFlags.DontVerify, new IntPtr(defaultUser ? -1 : 0), out path);
+            SHGetKnownFolderPath(knownFolder, (uint)KnownFolderFlags.DontVerify, new IntPtr(defaultUser ? -1 : 0), out var path);
             return path;
         }
 

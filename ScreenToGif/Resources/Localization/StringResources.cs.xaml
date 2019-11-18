@@ -268,9 +268,9 @@
     <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">Všem mým podporovatelů a lidem kteří mi poskytlí zpětnou vazbu a/nebo finanční podporu.</s:String>
     
     <!--Localization-->
-    <s:String x:Key="Localization">Lokalizace</s:String>
-    <s:String x:Key="Localization.ResourcePositionUsed">Poslední zdroj je tím právě používaným.</s:String>
-    <s:String x:Key="Localization.MoveRosourcePosition">Pro použití vlastního zdroje proveďte jeho přesun do dolní části seznamu.</s:String>
+    <s:String x:Key="S.Localization">Lokalizace</s:String>
+    <s:String x:Key="S.Localization.ResourcePositionUsed">Poslední zdroj je tím právě používaným.</s:String>
+    <s:String x:Key="S.Localization.MoveRosourcePosition">Pro použití vlastního zdroje proveďte jeho přesun do dolní části seznamu.</s:String>
 
     <!--Recorder-->
     <s:String x:Key="Recorder.RecordingOptions">Možnosti nahrávání:</s:String>

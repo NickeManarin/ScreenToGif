@@ -291,9 +291,9 @@
     <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">フィードバックや寄付を頂いた方々</s:String>
     
     <!--Localization-->
-    <s:String x:Key="Localization">翻訳</s:String>
-    <s:String x:Key="Localization.ResourcePositionUsed">一番下が使用中のリソースです。</s:String>
-    <s:String x:Key="Localization.MoveRosourcePosition">カスタムリソースはリストの一番下に追加されます。</s:String>
+    <s:String x:Key="S.Localization">翻訳</s:String>
+    <s:String x:Key="S.Localization.ResourcePositionUsed">一番下が使用中のリソースです。</s:String>
+    <s:String x:Key="S.Localization.MoveRosourcePosition">カスタムリソースはリストの一番下に追加されます。</s:String>
 
     <!--Recorder-->
     <s:String x:Key="Recorder.RecordingOptions">録画オプション</s:String>

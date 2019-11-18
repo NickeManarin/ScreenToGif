@@ -435,9 +435,9 @@
     <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">All my supporters, people who provided feedback and/or donations.</s:String>
     
     <!--Localization-->
-    <s:String x:Key="Localization">Localization</s:String>
-    <s:String x:Key="Localization.ResourcePositionUsed">The bottom-most resource is the current one being used.</s:String>
-    <s:String x:Key="Localization.MoveRosourcePosition">To apply your custom resource, move it to the bottom of the list.</s:String>
+    <s:String x:Key="S.Localization">Localization</s:String>
+    <s:String x:Key="S.Localization.ResourcePositionUsed">The bottom-most resource is the current one being used.</s:String>
+    <s:String x:Key="S.Localization.MoveRosourcePosition">To apply your custom resource, move it to the bottom of the list.</s:String>
 
     <!--Recorder-->
     <s:String x:Key="Recorder.RecordingOptions">Recording Options:</s:String>

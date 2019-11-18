@@ -435,9 +435,9 @@
     <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">Todos os meus ajudantes, pessoas que me forneceram comentários e/ou doações.</s:String>
     
     <!--Localization-->
-    <s:String x:Key="Localization">Traduções</s:String>
-    <s:String x:Key="Localization.ResourcePositionUsed">O recurso mais para baixo é o atual sendo utilizado.</s:String>
-    <s:String x:Key="Localization.MoveRosourcePosition">Para aplicar sua tradução, mova para a última posição da lista.</s:String>
+    <s:String x:Key="S.Localization">Traduções</s:String>
+    <s:String x:Key="S.Localization.ResourcePositionUsed">O recurso mais para baixo é o atual sendo utilizado.</s:String>
+    <s:String x:Key="S.Localization.MoveRosourcePosition">Para aplicar sua tradução, mova para a última posição da lista.</s:String>
 
     <!--Recorder-->
     <s:String x:Key="Recorder.RecordingOptions">Opções de Gravação:</s:String>

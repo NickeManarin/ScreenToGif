@@ -406,9 +406,9 @@
     <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">И всем, кто пишет отзывы, предложения, качественные переводы и финансово поддерживает.</s:String>
     
     <!--Localization-->
-    <s:String x:Key="Localization">Локализация</s:String>
-    <s:String x:Key="Localization.ResourcePositionUsed">Самый нижний ресурс - текущий используемый.</s:String>
-    <s:String x:Key="Localization.MoveRosourcePosition">Чтобы применить свой ресурс, переместите его в конец списка.</s:String>
+    <s:String x:Key="S.Localization">Локализация</s:String>
+    <s:String x:Key="S.Localization.ResourcePositionUsed">Самый нижний ресурс - текущий используемый.</s:String>
+    <s:String x:Key="S.Localization.MoveRosourcePosition">Чтобы применить свой ресурс, переместите его в конец списка.</s:String>
 
     <!--Recorder-->
     <s:String x:Key="Recorder.RecordingOptions">Настройки записи</s:String>

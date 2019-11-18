@@ -294,9 +294,9 @@
     <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">Alle mine støtter. Folk som er kommet med kritik, idéer og donationer.</s:String>
     
     <!--Localization-->
-    <s:String x:Key="Localization">Oversættelse</s:String>
-    <s:String x:Key="Localization.ResourcePositionUsed">Den aktuelt brugte sprogfil vises nederst .</s:String>
-    <s:String x:Key="Localization.MoveRosourcePosition">Flyt din oversættelse ned, for at teste den.</s:String>
+    <s:String x:Key="S.Localization">Oversættelse</s:String>
+    <s:String x:Key="S.Localization.ResourcePositionUsed">Den aktuelt brugte sprogfil vises nederst .</s:String>
+    <s:String x:Key="S.Localization.MoveRosourcePosition">Flyt din oversættelse ned, for at teste den.</s:String>
 
     <!--Recorder-->
     <s:String x:Key="Recorder.RecordingOptions">Optageindstillinger</s:String>

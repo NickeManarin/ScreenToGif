@@ -369,9 +369,9 @@
     <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">피드백 또는 후원으로 저에게 도움을 주신 분들께 깊은 감사를 표합니다.</s:String>
     
     <!--Localization-->
-    <s:String x:Key="Localization">번역</s:String>
-    <s:String x:Key="Localization.ResourcePositionUsed">맨 밑의 언어 파일을 사용합니다.</s:String>
-    <s:String x:Key="Localization.MoveRosourcePosition">사용자 지정 언어 파일을 적용하려면 맨 밑으로 이동시키십시오.</s:String>
+    <s:String x:Key="S.Localization">번역</s:String>
+    <s:String x:Key="S.Localization.ResourcePositionUsed">맨 밑의 언어 파일을 사용합니다.</s:String>
+    <s:String x:Key="S.Localization.MoveRosourcePosition">사용자 지정 언어 파일을 적용하려면 맨 밑으로 이동시키십시오.</s:String>
 
     <!--Recorder-->
     <s:String x:Key="Recorder.RecordingOptions">녹화 설정</s:String>

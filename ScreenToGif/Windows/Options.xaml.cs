@@ -596,22 +596,22 @@ namespace ScreenToGif.Windows
 
         private void MoveUp_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = DefaultsPanel.IsVisible && TasksDataGrid.SelectedIndex > 0;
+            e.CanExecute = TasksPanel.IsVisible && TasksDataGrid.SelectedIndex > 0;
         }
 
         private void MoveDown_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = DefaultsPanel.IsVisible && TasksDataGrid.SelectedIndex > -1 && TasksDataGrid.SelectedIndex < TasksDataGrid.Items.Count - 1;
+            e.CanExecute = TasksPanel.IsVisible && TasksDataGrid.SelectedIndex > -1 && TasksDataGrid.SelectedIndex < TasksDataGrid.Items.Count - 1;
         }
 
         private void Remove_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = DefaultsPanel.IsVisible && TasksDataGrid.SelectedIndex != -1;
+            e.CanExecute = TasksPanel.IsVisible && TasksDataGrid.SelectedIndex != -1;
         }
 
         private void Add_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = DefaultsPanel.IsVisible;
+            e.CanExecute = TasksPanel.IsVisible;
         }
 
         private void MoveUp_Executed(object sender, ExecutedRoutedEventArgs e)

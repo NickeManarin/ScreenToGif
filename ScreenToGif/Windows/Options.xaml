@@ -63,9 +63,9 @@
                 <n:ImageRadioButton x:Name="AutomaticRadio" Text="{DynamicResource S.Options.Tasks}" Content="{StaticResource Vector.Encoder}"/>
                 <n:ImageRadioButton x:Name="ShortcutsRadio" Text="{DynamicResource S.Options.Shortcuts}" Content="{StaticResource Vector.Keyboard}"/>
                 <n:ImageRadioButton x:Name="LanguageRadio" Text="{DynamicResource S.Options.Language}" Content="{StaticResource Vector.Translate}"/>
-                <n:ImageRadioButton x:Name="TempRadio" Text="{DynamicResource TemporaryFiles}" Content="{StaticResource Vector.Temporary}"/>
+                <n:ImageRadioButton x:Name="TempRadio" Text="{DynamicResource S.Options.Storage}" Content="{StaticResource Vector.Temporary}"/>
                 <n:ImageRadioButton x:Name="CloudRadioButton" Text="{DynamicResource S.Options.Upload}" Content="{StaticResource Vector.Web}"/>
-                <n:ImageRadioButton x:Name="ExtrasRadioButton" Text="{DynamicResource Extras}" Content="{StaticResource Vector.Extras}"/>
+                <n:ImageRadioButton x:Name="ExtrasRadioButton" Text="{DynamicResource S.Options.Extras}" Content="{StaticResource Vector.Extras}"/>
                 <n:ImageRadioButton x:Name="DonateRadio" Text="{DynamicResource S.Options.Donate}" Content="{StaticResource Vector.Money}"/>
                 <n:ImageRadioButton x:Name="AboutRadio" Text="{DynamicResource S.Options.About}" Content="{StaticResource Vector.Info}"/>
             </StackPanel>
@@ -232,9 +232,13 @@
                     </Grid>
 
                     <!--Recorder-->
-                    <StackPanel x:Name="RecorderPanel" Visibility="{Binding IsChecked, ElementName=RecorderRadio, Converter={StaticResource Bool2Visibility}}" 
-                                CanVerticallyScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True">
-
+                    <Grid x:Name="RecorderPanel" Visibility="{Binding IsChecked, ElementName=RecorderRadio, Converter={StaticResource Bool2Visibility}}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        
                         <Expander Grid.Row="0" Header="{DynamicResource S.Options.Recorder.Interface}" IsExpanded="True">
                             <Grid Margin="10,0,5,5">
                                 <Grid.RowDefinitions>
@@ -412,7 +416,7 @@
                                 </WrapPanel>
                             </StackPanel>
                         </Expander>
-                    </StackPanel>
+                    </Grid>
 
                     <!--Interface-->
                     <StackPanel x:Name="InterfacePanel" Visibility="{Binding IsChecked, ElementName=InterfaceRadio, Converter={StaticResource Bool2Visibility}}" Loaded="InterfacePanel_OnLoaded">
@@ -854,7 +858,7 @@
                     </StackPanel>
 
                     <!--Tasks-->
-                    <Grid x:Name="DefaultsPanel" Visibility="{Binding IsChecked, Converter={StaticResource Bool2Visibility}, ElementName=AutomaticRadio}" Loaded="TasksPanel_Loaded">
+                    <Grid x:Name="TasksPanel" Visibility="{Binding IsChecked, Converter={StaticResource Bool2Visibility}, ElementName=AutomaticRadio}" Loaded="TasksPanel_Loaded">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -1042,7 +1046,7 @@
                                 </ControlTemplate>
                             </ListBox.Template>
 
-                            <n:ImageListBoxItem Image="{StaticResource Vector.Info}" Tag="auto" Content="{DynamicResource S.Options.Language.AppLanguage.AutoDetect}" Author="{DynamicResource Language.AppLanguage.AutoDetect.Author}" 
+                            <n:ImageListBoxItem Image="{StaticResource Vector.Info}" Tag="auto" Content="{DynamicResource S.Options.Language.AppLanguage.AutoDetect}" Author="{DynamicResource S.Options.Language.AppLanguage.AutoDetect.Author}" 
                                                 MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=auto, Converter={StaticResource TagToSelection}}"/>
 
                             <n:ImageListBoxItem Image="{StaticResource Flag.SaudiArabia}" Tag="ar" Content="Arabic / العربية" Author="Alan"
@@ -1267,14 +1271,14 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <n:LabelSeparator Grid.Row="0" Text="{DynamicResource Extras.External}"/>
+                        <n:LabelSeparator Grid.Row="0" Text="{DynamicResource S.Options.Extras.External}"/>
                         <WrapPanel Grid.Row="1" Margin="5,0">
                             <n:ImageCard x:Name="FfmpegImageCard" Header="FFmpeg" Click="FfmpegImageCard_Click"/>
                             <n:ImageCard x:Name="GifskiImageCard" Header="Gifski" Click="GifskiImageCard_Click"/>
                             <n:ImageCard x:Name="SharpDxImageCard" Header="SharpDx" Click="SharpDxImageCard_Click"/>
                         </WrapPanel>
 
-                        <n:LabelSeparator Grid.Row="2" Text="{DynamicResource Extras.FfmpegLocation}"/>
+                        <n:LabelSeparator Grid.Row="2" Text="{DynamicResource S.Options.Extras.FfmpegLocation}"/>
                         <Grid Grid.Row="3">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -1285,11 +1289,11 @@
                                                LostKeyboardFocus="LocationTextBox_LostKeyboardFocus"/>
 
                             <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" ContentWidth="20"
-                                           Click="SelectFfmpeg_Click" ToolTip="{DynamicResource Extras.FfmpegLocation.Select}"
+                                           Click="SelectFfmpeg_Click" ToolTip="{DynamicResource S.Options.Extras.FfmpegLocation.Select}"
                                            ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
                         </Grid>
 
-                        <n:LabelSeparator Grid.Row="4" Text="{DynamicResource Extras.GifskiLocation}"/>
+                        <n:LabelSeparator Grid.Row="4" Text="{DynamicResource S.Options.Extras.GifskiLocation}"/>
                         <Grid Grid.Row="5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -1300,11 +1304,11 @@
                                                LostKeyboardFocus="LocationTextBox_LostKeyboardFocus"/>
 
                             <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" ContentWidth="20"
-                                           Click="SelectGifski_Click" ToolTip="{DynamicResource Extras.GifskiLocation.Select}"
+                                           Click="SelectGifski_Click" ToolTip="{DynamicResource S.Options.Extras.GifskiLocation.Select}"
                                            ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
                         </Grid>
 
-                        <n:LabelSeparator Grid.Row="6" Text="{DynamicResource Extras.SharpDxLocation}"/>
+                        <n:LabelSeparator Grid.Row="6" Text="{DynamicResource S.Options.Extras.SharpDxLocation}"/>
                         <Grid Grid.Row="7">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -1315,7 +1319,7 @@
                                                LostKeyboardFocus="LocationTextBox_LostKeyboardFocus"/>
 
                             <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" ContentWidth="20"
-                                           Click="SelectSharpDx_Click" ToolTip="{DynamicResource Extras.SharpDxLocation.Select}"
+                                           Click="SelectSharpDx_Click" ToolTip="{DynamicResource S.Options.Extras.SharpDxLocation.Select}"
                                            ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
                         </Grid>
 
@@ -1324,19 +1328,19 @@
 
                             <TextBlock Margin="2" VerticalAlignment="Center">
                                 <Hyperlink NavigateUri="https://ffmpeg.org/legal.html" RequestNavigate="ExtrasHyperlink_OnRequestNavigate">
-                                    <Run Text="{DynamicResource Extras.License.Ffmpeg}"/>
+                                    <Run Text="{DynamicResource S.Options.Extras.License.Ffmpeg}"/>
                                 </Hyperlink>
                                 
                                 <Run Text="/" Foreground="{DynamicResource Element.Foreground}"/>
 
                                 <Hyperlink NavigateUri="https://github.com/ImageOptim/gifski/blob/master/LICENSE" RequestNavigate="ExtrasHyperlink_OnRequestNavigate">
-                                    <Run Text="{DynamicResource Extras.License.Gifski}"/>
+                                    <Run Text="{DynamicResource S.Options.Extras.License.Gifski}"/>
                                 </Hyperlink>
                                 
                                 <Run Text="/" Foreground="{DynamicResource Element.Foreground}"/>
 
                                 <Hyperlink NavigateUri="https://github.com/sharpdx/SharpDX/blob/master/LICENSE" RequestNavigate="ExtrasHyperlink_OnRequestNavigate">
-                                    <Run Text="{DynamicResource Extras.License.SharpDx}"/>
+                                    <Run Text="{DynamicResource S.Options.Extras.License.SharpDx}"/>
                                 </Hyperlink>
                             </TextBlock>
                         </StackPanel>

@@ -372,9 +372,9 @@
     <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">Wszystkich ludzi, którzy mnie wspierają, przekazują opinie i/lub dotacje.</s:String>
     
     <!--Localization-->
-    <s:String x:Key="Localization">Lokalizacja</s:String>
-    <s:String x:Key="Localization.ResourcePositionUsed">Ostatni na dole plik jest używany.</s:String>
-    <s:String x:Key="Localization.MoveRosourcePosition">Aby użyć twojego pliku, przenieś go na sam dół listy.</s:String>
+    <s:String x:Key="S.Localization">Lokalizacja</s:String>
+    <s:String x:Key="S.Localization.ResourcePositionUsed">Ostatni na dole plik jest używany.</s:String>
+    <s:String x:Key="S.Localization.MoveRosourcePosition">Aby użyć twojego pliku, przenieś go na sam dół listy.</s:String>
 
     <!--Recorder-->
     <s:String x:Key="Recorder.RecordingOptions">Opcje nagrywania</s:String>

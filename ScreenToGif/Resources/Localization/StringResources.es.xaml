@@ -186,9 +186,9 @@
     <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">Gracias a todos los que me apoyaron en el desarrollo y los que donaron.</s:String>
     
     <!--Localization-->
-    <s:String x:Key="Localization">Localización</s:String>
-    <s:String x:Key="Localization.ResourcePositionUsed">El recurso más inferior es el que se usa actualmente.</s:String>
-    <s:String x:Key="Localization.MoveRosourcePosition">Para aplicar tu recurso personal, muevelo al final de la lista.</s:String>
+    <s:String x:Key="S.Localization">Localización</s:String>
+    <s:String x:Key="S.Localization.ResourcePositionUsed">El recurso más inferior es el que se usa actualmente.</s:String>
+    <s:String x:Key="S.Localization.MoveRosourcePosition">Para aplicar tu recurso personal, muevelo al final de la lista.</s:String>
 
     <!--Recorder-->
     <s:String x:Key="Recorder.RecordingOptions">Opciones de grabación:</s:String>

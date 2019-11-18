@@ -372,9 +372,9 @@
     <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">جميع مؤيدي ، والناس الذين قدموا ردود الفعل و/او التبرعات.</s:String>
     
     <!--Localization-->
-    <s:String x:Key="Localization">الترجمه</s:String>
-    <s:String x:Key="Localization.ResourcePositionUsed">المورد السفلي هو المصدر الحالي الذي يتم استخدامه.</s:String>
-    <s:String x:Key="Localization.MoveRosourcePosition">لتطبيق المورد المخصص ، انقله الى اسفل القائمة.</s:String>
+    <s:String x:Key="S.Localization">الترجمه</s:String>
+    <s:String x:Key="S.Localization.ResourcePositionUsed">المورد السفلي هو المصدر الحالي الذي يتم استخدامه.</s:String>
+    <s:String x:Key="S.Localization.MoveRosourcePosition">لتطبيق المورد المخصص ، انقله الى اسفل القائمة.</s:String>
 
     <!--Recorder-->
     <s:String x:Key="Recorder.RecordingOptions">خيارات التسجيل:</s:String>

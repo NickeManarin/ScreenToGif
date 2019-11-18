@@ -365,9 +365,9 @@
     <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">Alla de som stöder mig, de som skickat och/eller donerat.</s:String>
     
     <!--Localization-->
-    <s:String x:Key="Localization">Lokalisering</s:String>
-    <s:String x:Key="Localization.ResourcePositionUsed">Den nedersta filen är den som används.</s:String>
-    <s:String x:Key="Localization.MoveRosourcePosition">Om du vill använda din översatta fil flyttar du den längst ner i listan.</s:String>
+    <s:String x:Key="S.Localization">Lokalisering</s:String>
+    <s:String x:Key="S.Localization.ResourcePositionUsed">Den nedersta filen är den som används.</s:String>
+    <s:String x:Key="S.Localization.MoveRosourcePosition">Om du vill använda din översatta fil flyttar du den längst ner i listan.</s:String>
 
     <!--Recorder-->
     <s:String x:Key="Recorder.RecordingOptions">Inspelningsinställningar:</s:String>

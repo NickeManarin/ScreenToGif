@@ -290,9 +290,9 @@
     <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">Tất cả mọi người ủng hộ tôi, những người đã gửi phản hồi và quyên góp.</s:String>
     
     <!--Localization-->
-    <s:String x:Key="Localization">Định vị</s:String>
-    <s:String x:Key="Localization.ResourcePositionUsed">Nguồn tài nguyên cuối hiện thời đang được sử dụng.</s:String>
-    <s:String x:Key="Localization.MoveRosourcePosition">Để áp dụng nguồn tài nguyên tùy chỉnh, di chuyển nó đến cuối danh sách.</s:String>
+    <s:String x:Key="S.Localization">Định vị</s:String>
+    <s:String x:Key="S.Localization.ResourcePositionUsed">Nguồn tài nguyên cuối hiện thời đang được sử dụng.</s:String>
+    <s:String x:Key="S.Localization.MoveRosourcePosition">Để áp dụng nguồn tài nguyên tùy chỉnh, di chuyển nó đến cuối danh sách.</s:String>
 
     <!--Recorder-->
     <s:String x:Key="Recorder.RecordingOptions">Các tùy chọn quay:</s:String>

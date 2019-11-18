@@ -372,9 +372,9 @@
     <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">所有支持我、提供过反馈或捐助的人。</s:String>
     
     <!--Localization-->
-    <s:String x:Key="Localization">本地化</s:String>
-    <s:String x:Key="Localization.ResourcePositionUsed">现在使用的是最底部的资源。</s:String>
-    <s:String x:Key="Localization.MoveRosourcePosition">要应用您的自定义资源，请将其移动到列表的最底部。</s:String>
+    <s:String x:Key="S.Localization">本地化</s:String>
+    <s:String x:Key="S.Localization.ResourcePositionUsed">现在使用的是最底部的资源。</s:String>
+    <s:String x:Key="S.Localization.MoveRosourcePosition">要应用您的自定义资源，请将其移动到列表的最底部。</s:String>
 
     <!--Recorder-->
     <s:String x:Key="Recorder.RecordingOptions">录制选项：</s:String>

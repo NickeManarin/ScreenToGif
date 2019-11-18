@@ -291,9 +291,9 @@
     <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">Tutti i miei sostenitori, alle persone che forniscono feedback o fanno donazioni.</s:String>
     
     <!--Localization-->
-    <s:String x:Key="Localization">Localizzazione</s:String>
-    <s:String x:Key="Localization.ResourcePositionUsed">La risorsa più in basso è quella attualmente in uso.</s:String>
-    <s:String x:Key="Localization.MoveRosourcePosition">Per applicare la propria risorsa, spostarla in fondo alla lista.</s:String>
+    <s:String x:Key="S.Localization">Localizzazione</s:String>
+    <s:String x:Key="S.Localization.ResourcePositionUsed">La risorsa più in basso è quella attualmente in uso.</s:String>
+    <s:String x:Key="S.Localization.MoveRosourcePosition">Per applicare la propria risorsa, spostarla in fondo alla lista.</s:String>
 
     <!--Recorder-->
     <s:String x:Key="Recorder.RecordingOptions">Opzioni di registrazione:</s:String>

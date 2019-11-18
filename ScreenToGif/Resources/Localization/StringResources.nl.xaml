@@ -291,9 +291,9 @@
     <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">Alle supporters en mensen die reacties en/of donaties hebben gegeven.</s:String>
     
     <!--Localization-->
-    <s:String x:Key="Localization">Localisatie</s:String>
-    <s:String x:Key="Localization.ResourcePositionUsed">De onderste vertaalbestand is hetgeen wordt gebruikt.</s:String>
-    <s:String x:Key="Localization.MoveRosourcePosition">Om het eigen gemaakte vertaalbestand te gebruiken, verplaats het naar onderkant lijst.</s:String>
+    <s:String x:Key="S.Localization">Localisatie</s:String>
+    <s:String x:Key="S.Localization.ResourcePositionUsed">De onderste vertaalbestand is hetgeen wordt gebruikt.</s:String>
+    <s:String x:Key="S.Localization.MoveRosourcePosition">Om het eigen gemaakte vertaalbestand te gebruiken, verplaats het naar onderkant lijst.</s:String>
 
     <!--Recorder-->
     <s:String x:Key="Recorder.RecordingOptions">Opname-opties:</s:String>

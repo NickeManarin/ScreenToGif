@@ -399,9 +399,9 @@
     <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">All diejenigen, die mich und meine Arbeit mit Rückmeldungen und Spenden unterstützen.</s:String>
     
     <!--Localization-->
-    <s:String x:Key="Localization">Übersetzungen</s:String>
-    <s:String x:Key="Localization.ResourcePositionUsed">Letzte Datei in der Liste wird gerade verwendet.</s:String>
-    <s:String x:Key="Localization.MoveRosourcePosition">Um Ihre eigene Übersetzung zu nutzen, platzieren Sie sie am Ende der Liste.</s:String>
+    <s:String x:Key="S.Localization">Übersetzungen</s:String>
+    <s:String x:Key="S.Localization.ResourcePositionUsed">Letzte Datei in der Liste wird gerade verwendet.</s:String>
+    <s:String x:Key="S.Localization.MoveRosourcePosition">Um Ihre eigene Übersetzung zu nutzen, platzieren Sie sie am Ende der Liste.</s:String>
 
     <!--Recorder-->
     <s:String x:Key="Recorder.RecordingOptions">Aufnahme-Optionen:</s:String>
