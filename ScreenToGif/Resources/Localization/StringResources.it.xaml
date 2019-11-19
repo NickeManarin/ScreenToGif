@@ -381,7 +381,7 @@
     <s:String x:Key="S.Options.Upload.Pick.Album.Info">Se si desidera, è possibile selezionare l'album di destinazione:</s:String>
     
     <!--Options • Extras-->
-    <s:String x:Key="S.Options.Extras.External">Strimenti esterni disponibili</s:String>
+    <s:String x:Key="S.Options.Extras.External">Strumenti esterni disponibili</s:String>
     <s:String x:Key="S.Options.Extras.Download">Fare clic qui per scaricare&#x0d;{0}</s:String>
     <s:String x:Key="S.Options.Extras.Downloading">Scaricamento...</s:String>
     <s:String x:Key="S.Options.Extras.Ready">Scaricato&#x0d;{0}</s:String>
