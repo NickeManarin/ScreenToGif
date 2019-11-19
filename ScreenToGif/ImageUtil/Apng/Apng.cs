@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Windows;
+using ScreenToGif.ImageUtil.Apng.Chunks;
 using ScreenToGif.Util;
 
 namespace ScreenToGif.ImageUtil.Apng
@@ -125,6 +126,19 @@ namespace ScreenToGif.ImageUtil.Apng
                 }
                 
                 IsFirstFrame = false;
+            }
+        }
+
+        internal static void GetFrames(string path)
+        {
+            using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read))
+            {
+                //Png Header: 8 bytes.
+                if (stream.ReadBytes(8) != new byte[]{ 137, 80, 78, 71, 13, 10, 26, 10 })
+                    throw new Exception("Invalid file format, expected PNG signature not found." );
+
+                //IHDR chunk. 13 bytes (Length + Type + CRC, 4 bytes each) = 25 bytes.
+                var ihdr = stream.ReadBytes(25);
             }
         }
 

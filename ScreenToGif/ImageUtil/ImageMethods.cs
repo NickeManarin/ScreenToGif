@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -1504,6 +1505,11 @@ namespace ScreenToGif.ImageUtil
                     throw new ArgumentException($"It was not possible to load the image source: '{imageSource}'.");
 
                 return new Icon(streamInfo.Stream);
+            }
+            catch (Win32Exception e)
+            {
+                LogWriter.Log(e, "It was not possible to load the notification area icon.", $"StreamInfo is null? {streamInfo == null}, Native error code: {e.NativeErrorCode}");
+                return null;
             }
             catch (Exception e)
             {

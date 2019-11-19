@@ -46,8 +46,8 @@ namespace ScreenToGif
             LocalizationHelper.SelectCulture(UserSettings.All.LanguageCode);
             ThemeHelper.SelectTheme(UserSettings.All.MainTheme.ToString());
 
-            if (UserSettings.All.DisableHardwareAcceleration)
-                RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+            //Render mode.
+            RenderOptions.ProcessRenderMode = UserSettings.All.DisableHardwareAcceleration ? RenderMode.SoftwareOnly : RenderMode.Default;
 
             #region Net Framework
 
@@ -181,7 +181,7 @@ namespace ScreenToGif
 
         private void App_OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            LogWriter.Log(e.Exception, "On Dispacher Unhandled Exception - Unknown");
+            LogWriter.Log(e.Exception, "On dispacher unhandled exception - Unknown");
 
             try
             {
@@ -200,7 +200,7 @@ namespace ScreenToGif
         {
             if (!(e.ExceptionObject is Exception exception)) return;
 
-            LogWriter.Log(exception, "Current Domain Unhandled Exception - Unknown");
+            LogWriter.Log(exception, "Current domain unhandled exception - Unknown");
 
             try
             {

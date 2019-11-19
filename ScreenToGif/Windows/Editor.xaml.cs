@@ -279,7 +279,7 @@ namespace ScreenToGif.Windows
 
                 var extensionList = Argument.FileNames.Select(Path.GetExtension).ToList();
 
-                var media = new[] { "jpg", "jpeg", "gif", "bmp", "png", "avi", "mp4", "wmv" };
+                var media = new[] { "jpg", "jpeg", "gif", "bmp", "png", "apng", "avi", "mkv", "mp4", "webm", "wmv" };
 
                 var projectCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && (x.Equals("stg") || x.Equals("zip")));
                 var mediaCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && media.Contains(x));
@@ -842,10 +842,10 @@ namespace ScreenToGif.Windows
                 Multiselect = true,
                 AddExtension = true,
                 CheckFileExists = true,
-                Title = FindResource("Editor.OpenMedia").ToString(),
-                Filter = "All supported files (*.bmp, *.jpg, *.jpeg, *.png, *.gif, *.mp4, *.wmv, *.avi)|*.bmp;*.jpg;*.jpeg;*.png;*.gif;*.mp4;*.wmv;*.avi|" +
-                         "Image (*.bmp, *.jpg, *.jpeg, *.png, *.gif)|*.bmp;*.jpg;*.jpeg;*.png;*.gif|" +
-                         "Video (*.mp4, *.wmv, *.avi)|*.mp4;*.wmv;*.avi",
+                Title = LocalizationHelper.Get("Editor.OpenMedia"),
+                Filter = "All supported files (*.apng, *.avi, *.bmp, *.gif, *.jpg, *.jpeg, *.mkv, *.mp4, *.png, *.webm, *.wmv)|*.apng;*.avi;*.bmp;*.gif;*.jpg;*.jpeg;*.mkv;*.mp4;*.png;*.webm;*.wmv|" +
+                         "Image (*.apng, *.bmp, *.gif, *.jpg, *.jpeg, *.png)|*.apng;*.bmp;*.gif;*.jpg;*.jpeg;*.png|" +
+                         "Video (*.avi, *.mkv, *.mp4, *.webm, *.wmv)|*.avi;*.mkv;*.mp4;*.webm;*.wmv",
             };
 
             var result = ofd.ShowDialog();
@@ -854,7 +854,7 @@ namespace ScreenToGif.Windows
 
             var extensionList = ofd.FileNames.Select(Path.GetExtension).ToList();
 
-            var media = new[] { "jpg", "jpeg", "gif", "bmp", "png", "avi", "mp4", "wmv" };
+            var media = new[] { "apng", "avi", "bmp", "gif", "jpg", "jpeg", "mkv", "mp4", "png", "webm", "wmv" };
 
             var projectCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && (x.Equals("stg") || x.Equals("zip")));
             var mediaCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && media.Contains(x));
@@ -1544,10 +1544,10 @@ namespace ScreenToGif.Windows
                 Multiselect = true,
                 AddExtension = true,
                 CheckFileExists = true,
-                Title = FindResource("Editor.OpenMediaProject").ToString(),
-                Filter = "All supported files (*.bmp, *.jpg, *.jpeg, *.png, *.gif, *.mp4, *.wmv, *.avi, *.stg, *.zip)|*.bmp;*.jpg;*.jpeg;*.png;*.gif;*.mp4;*.wmv;*.avi;*.stg;*.zip|" +
-                         "Image (*.bmp, *.jpg, *.jpeg, *.png, *.gif)|*.bmp;*.jpg;*.jpeg;*.png;*.gif|" +
-                         "Video (*.mp4, *.wmv, *.avi)|*.mp4;*.wmv;*.avi|" +
+                Title = LocalizationHelper.Get("Editor.OpenMedia"),
+                Filter = "All supported files (*.apng, *.avi, *.bmp, *.gif, *.jpg, *.jpeg, *.mkv, *.mp4, *.png, *.stg, *.webm, *.wmv, *.zip)|*.apng;*.avi;*.bmp;*.gif;*.jpg;*.jpeg;*.mkv;*.mp4;*.png;*.stg;*.webm;*.wmv;*.zip|" +
+                         "Image (*.apng, *.bmp, *.gif, *.jpg, *.jpeg, *.png)|*.apng;*.bmp;*.gif;*.jpg;*.jpeg;*.png|" +
+                         "Video (*.avi, *.mkv, *.mp4, *.webm, *.wmv)|*.avi;*.mkv;*.mp4;*.webm;*.wmv|" +
                          "ScreenToGif Project (*.stg, *.zip) |*.stg;*.zip",
             };
 
@@ -1557,7 +1557,7 @@ namespace ScreenToGif.Windows
 
             var extensionList = ofd.FileNames.Select(s => Path.GetExtension(s).ToLowerInvariant()).ToList();
 
-            var media = new[] { ".jpg", ".jpeg", ".gif", ".bmp", ".png", ".avi", ".mp4", ".wmv" };
+            var media = new[] { "apng", "avi", "bmp", "gif", "jpg", "jpeg", "mkv", "mp4", "png", "webm", "wmv" };
 
             var projectCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && (x.Equals(".stg") || x.Equals(".zip")));
             var mediaCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && media.Contains(x));
@@ -4308,31 +4308,44 @@ namespace ScreenToGif.Windows
                 {
                     case "stg":
                     case "zip":
-
+                    {
                         listFrames = ImportFromProject(fileName, pathTemp);
                         break;
+                    }
 
                     case "gif":
-
+                    {
                         listFrames = ImportFromGif(fileName, pathTemp);
                         break;
+                    }
 
+                    case "avi":
+                    case "mkv":
                     case "mp4":
                     case "wmv":
-                    case "avi":
-
+                    case "webm":
+                    {
                         listFrames = ImportFromVideo(fileName, pathTemp);
                         break;
+                    }
+
+                    //case "apng":
+                    //case "png":
+                    //{
+                    //    listFrames = ImportFromPng(fileName, pathTemp);
+                    //    break;
+                    //}
 
                     default:
-
+                    {
                         listFrames = ImportFromImage(fileName, pathTemp);
                         break;
+                    }
                 }
             }
             catch (Exception ex)
             {
-                LogWriter.Log(ex, "Import Error");
+                LogWriter.Log(ex, "Import error");
 
                 return new List<FrameInfo>();
             }
@@ -4507,12 +4520,12 @@ namespace ScreenToGif.Windows
 
         #endregion
 
-        private List<FrameInfo> ImportFromProject(string sourceFileName, string pathTemp)
+        private List<FrameInfo> ImportFromProject(string source, string pathTemp)
         {
             try
             {
                 //Extract to the folder of the newly created project.
-                ZipFile.ExtractToDirectory(sourceFileName, pathTemp);
+                ZipFile.ExtractToDirectory(source, pathTemp);
 
                 List<FrameInfo> list;
 
@@ -4559,13 +4572,13 @@ namespace ScreenToGif.Windows
             }
         }
 
-        private List<FrameInfo> ImportFromGif(string sourceFileName, string pathTemp)
+        private List<FrameInfo> ImportFromGif(string source, string pathTemp)
         {
             ShowProgress(DispatcherStringResource("Editor.ImportingFrames"), 50, true);
 
             var listFrames = new List<FrameInfo>();
 
-            var decoder = ImageMethods.GetDecoder(sourceFileName, out var gifMetadata) as GifBitmapDecoder;
+            var decoder = ImageMethods.GetDecoder(source, out var gifMetadata) as GifBitmapDecoder;
 
             ShowProgress(DispatcherStringResource("Editor.ImportingFrames"), decoder.Frames.Count);
 
@@ -4628,13 +4641,28 @@ namespace ScreenToGif.Windows
             return listFrames;
         }
 
-        private List<FrameInfo> ImportFromImage(string sourceFileName, string pathTemp)
+        private List<FrameInfo> ImportFromPng(string source, string pathTemp)
+        {
+            ShowProgress(DispatcherStringResource("Editor.ImportingFrames"), 50, true);
+
+            //Apng.GetFrames(source);
+
+            //TODO: 
+            //Open read image
+            //Detect ids.
+            //Read frames from image.
+            //Add to the list.
+
+            return new List<FrameInfo> { };
+        }
+
+        private List<FrameInfo> ImportFromImage(string source, string pathTemp)
         {
             var fileName = Path.Combine(pathTemp, $"{0} {DateTime.Now:hh-mm-ss-ffff}.png");
 
             #region Save the Image to the Recording Folder
 
-            BitmapSource bitmap = new BitmapImage(new Uri(sourceFileName));
+            BitmapSource bitmap = new BitmapImage(new Uri(source));
 
             if (bitmap.Format != PixelFormats.Bgra32)
                 bitmap = new FormatConvertedBitmap(bitmap, PixelFormats.Bgra32, null, 0);
@@ -4654,20 +4682,20 @@ namespace ScreenToGif.Windows
             return new List<FrameInfo> { new FrameInfo(fileName, 66) };
         }
 
-        private List<FrameInfo> ImportFromVideo(string fileName, string pathTemp)
+        private List<FrameInfo> ImportFromVideo(string source, string pathTemp)
         {
             //Get frames from video.
             return Dispatcher?.Invoke(() =>
             {
-                var source = new VideoSource
+                var vid = new VideoSource
                 {
                     RootFolder = pathTemp,
-                    VideoPath = fileName,
+                    VideoPath = source,
                     Owner = this
                 };
-                var result = source.ShowDialog();
+                var result = vid.ShowDialog();
 
-                return result.HasValue && result.Value ? source.Frames : null;
+                return result.HasValue && result.Value ? vid.Frames : null;
             });
         }
 

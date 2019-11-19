@@ -16,6 +16,7 @@ _VS 2019 and .Net 4.8 or newer required._
 • You can now cancel the gif encoding that uses Gifski.  
 • When exporting as project, the app will use the encoder window instead of locking down the editor.  
 • You can use FFmpeg to import frames from video (I also improved performance while importing video with the default method).  
+• The executable can interpret arguments to disable/enable hardware acceleration.  
 • Turkish and Russian translation were updated.  
 
 ### Fixed:
@@ -27,7 +28,7 @@ _VS 2019 and .Net 4.8 or newer required._
 ♦ The Gifski encoder now accepts saving gifs to a path (also loading frames from a temporary path) that contains non-latin characters.  
 ♦ The text was overflowing and not wrapping properly in the FFmpeg command text boxes.  
 ♦ It was not possible to set shortcuts when deploying with Intune.  
-♦ When trying to type special characters with the help of the Right Alt key, some commands were being fired instead. Because the underlying system translates Right Alt to Ctrl + Alt.     
+♦ When trying to type special characters with the help of the Right Alt key, some commands were being fired instead. Because the underlying system translates Right Alt to Ctrl + Alt.  
 
 ### Known Bugs:
 

@@ -10,17 +10,49 @@ namespace ScreenToGif.Util
     {
         public static void Prepare(string[] args)
         {
-            if (args[0].Equals("/lang"))
+            for (var i = 0; i < args.Length; i++)
             {
-                if (args.Length > 1)
-                    UserSettings.All.LanguageCode = args[1];
-            }
+                switch (args[i])
+                {
+                    case "/lang":
+                    case "-lang":
+                    {
+                        //Changes the language of the app, example: -lang pt
+                        if (args.Length > i + 1)
+                            UserSettings.All.LanguageCode = args[++i];
 
-            //Check each arg to know if it's a file.
-            foreach (var arg in args)
-            {
-                if (File.Exists(arg))
-                    FileNames.Add(arg);
+                        break;
+                    }
+
+                    case "-sm":
+                    case "/sm":
+                    case "-softmode":
+                    case "/softmode":
+                    {
+                        //Forces using software mode.
+                        UserSettings.All.DisableHardwareAcceleration = true;
+                        break;
+                    }
+
+                    case "-hm":
+                    case "/hm":
+                    case "-hardmode":
+                    case "/hardmode":
+                    {
+                        //Forces using hardware mode.
+                        UserSettings.All.DisableHardwareAcceleration = false;
+                        break;
+                    }
+
+                    default:
+                    {
+                        //Anything else is treated as file to be imported.
+                        if (File.Exists(args[i]))
+                            FileNames.Add(args[i]);
+
+                        break;
+                    }
+                }
             }
         }
 
