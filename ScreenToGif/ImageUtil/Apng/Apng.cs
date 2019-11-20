@@ -139,6 +139,10 @@ namespace ScreenToGif.ImageUtil.Apng
 
                 //IHDR chunk. 13 bytes (Length + Type + CRC, 4 bytes each) = 25 bytes.
                 var ihdr = stream.ReadBytes(25);
+
+                //https://en.wikipedia.org/wiki/APNG#cite_ref-29
+                //https://wiki.mozilla.org/APNG_Specification
+                //https://www.w3.org/TR/PNG/
             }
         }
 

@@ -223,7 +223,7 @@
     <s:String x:Key="S.Options.Recorder.FixedFramerate">Fixed frame rate.</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Constant delay that does not change with recording lag)</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording">Enable asynchronous recording.</s:String>
-    <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(It helps reduce the interface lag when recording)</s:String>    
+    <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(It helps reduce the interface lag when recording)</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier">Enable the screen magnifier.</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier.Info">(It enables a magnifier while selecting the recording area)</s:String>
     <s:String x:Key="S.Options.Recorder.CursorFollowing">Enable cursor following.</s:String>
@@ -291,7 +291,7 @@
     <s:String x:Key="S.Options.Shortcuts.Recorders">Recorders</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause">Start/Pause:</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause.Info">(It starts or pauses the recording. It is used to take snapshots if the snapshot mode is activated)</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Recorders.Stop">Stop:</s:String>    
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Stop">Stop:</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Stop.Info">(It stops the recording and opens the editor)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Discard">Discard:</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Discard.Info">(Discards the active recording, when it's paused)</s:String>
@@ -529,7 +529,7 @@
     <s:String x:Key="InsertFrames.FitCanvas.Info">Resizes the canvas to fit both images inside (from the top left corner).</s:String>
     <s:String x:Key="InsertFrames.DifferentSizes">There is a difference beetwen frame sizes. You need to solve this before inserting the frames.</s:String>
     <s:String x:Key="InsertFrames.InsertedFrames">New Frame(s)</s:String>
-    <s:String x:Key="InsertFrames.CurrentFrames">Current Frame(s)</s:String>    
+    <s:String x:Key="InsertFrames.CurrentFrames">Current Frame(s)</s:String>
     <s:String x:Key="InsertFrames.ImageSize">Image size:</s:String>
     <s:String x:Key="InsertFrames.ImagePosition">Image position:</s:String>
     <s:String x:Key="InsertFrames.ResetImageSizePosition">Reset Image Size&#x0d;and Position</s:String>
@@ -1092,7 +1092,7 @@
     <s:String x:Key="S.SaveAs.GifOptions">Gif options</s:String>
     <s:String x:Key="S.SaveAs.Quality">Quality:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors">Colors:</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">Maximum number of colors (for each frame).</s:String>    
+    <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">Maximum number of colors (for each frame).</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Loop">Loop:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">Looped Gif.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Repeat Forever.</s:String>
@@ -1153,7 +1153,7 @@
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">File</s:String>
     <s:String x:Key="S.SaveAs.File.Location">Destination folder.</s:String>
-    <s:String x:Key="S.SaveAs.File.Choose">Choose the location.</s:String>    
+    <s:String x:Key="S.SaveAs.File.Choose">Choose the location.</s:String>
     <s:String x:Key="S.SaveAs.File.Format">File format</s:String>
     <s:String x:Key="S.SaveAs.File.Name">Name of the file. Insert Date/Time format between '?'</s:String>
     <s:String x:Key="S.SaveAs.File.Animation">Animation</s:String>

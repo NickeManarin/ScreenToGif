@@ -808,7 +808,7 @@ namespace ScreenToGif.Windows
                         HeightIntegerBox.IsEnabled = false;
                         WidthIntegerBox.IsEnabled = false;
                         FpsIntegerUpDown.IsEnabled = false;
-                        
+
                         IsRecording = true;
                         Topmost = true;
 
@@ -978,7 +978,7 @@ namespace ScreenToGif.Windows
             try
             {
                 StopButton.IsEnabled = false;
-                
+
                 _captureTimer.Stop();
                 FrameRate.Stop();
                 _capture?.Stop();
