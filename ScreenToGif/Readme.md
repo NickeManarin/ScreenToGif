@@ -8,6 +8,7 @@ _VS 2019 and .Net 4.8 or newer required._
 ## What's new? (Version 2.20)
 
 • The app now uses/requires .Net Framework 4.8.  
+• Experimental support for multi-DPI set of screens.  
 • Screen capture via DirectX 11.1 (Desktop Duplication API, requires Windows 8 or newer).   
 • Screen capture can use a configurable memory cache with support for compression.  
 • You can now set actions to be executed when clicking on the app icon on the system tray.  
@@ -17,6 +18,7 @@ _VS 2019 and .Net 4.8 or newer required._
 • When exporting as project, the app will use the encoder window instead of locking down the editor.  
 • You can use FFmpeg to import frames from video (I also improved performance while importing video with the default method).  
 • The executable can interpret arguments to disable/enable hardware acceleration.  
+• The maximum permitted outwards thickness of the border was increased.   
 • Turkish and Russian translation were updated.  
 
 ### Fixed:
