@@ -20,9 +20,9 @@ namespace ScreenToGif.Util.Capture
 
         #endregion
 
-        public override void Start(int delay, int left, int top, int width, int height, double dpi, ProjectInfo project)
+        public override void Start(int delay, int left, int top, int width, int height, double scale, ProjectInfo project)
         {
-            base.Start(delay, left, top, width, height, dpi, project);
+            base.Start(delay, left, top, width, height, scale, project);
 
             #region Pointers
 
@@ -43,7 +43,8 @@ namespace ScreenToGif.Util.Capture
             {
                 new System.Security.Permissions.UIPermission(System.Security.Permissions.UIPermissionWindow.AllWindows).Demand();
 
-                var success = Native.BitBlt(CompatibleDeviceContext, 0, 0, Width, Height, WindowDeviceContext, Left, Top, Native.CopyPixelOperation.SourceCopy | Native.CopyPixelOperation.CaptureBlt);
+                //var success = Native.BitBlt(CompatibleDeviceContext, 0, 0, Width, Height, WindowDeviceContext, Left, Top, Native.CopyPixelOperation.SourceCopy | Native.CopyPixelOperation.CaptureBlt);
+                var success = Native.StretchBlt(CompatibleDeviceContext, 0, 0, StartWidth, StartHeight, WindowDeviceContext, Left, Top, Width, Height, Native.CopyPixelOperation.SourceCopy | Native.CopyPixelOperation.CaptureBlt);
 
                 if (!success)
                     return FrameCount;
@@ -70,7 +71,8 @@ namespace ScreenToGif.Util.Capture
             {
                 new System.Security.Permissions.UIPermission(System.Security.Permissions.UIPermissionWindow.AllWindows).Demand();
 
-                var success = Native.BitBlt(CompatibleDeviceContext, 0, 0, Width, Height, WindowDeviceContext, Left, Top, Native.CopyPixelOperation.SourceCopy | Native.CopyPixelOperation.CaptureBlt);
+                //var success = Native.BitBlt(CompatibleDeviceContext, 0, 0, Width, Height, WindowDeviceContext, Left, Top, Native.CopyPixelOperation.SourceCopy | Native.CopyPixelOperation.CaptureBlt);
+                var success = Native.StretchBlt(CompatibleDeviceContext, 0, 0, StartWidth, StartHeight, WindowDeviceContext, Left, Top, Width, Height, Native.CopyPixelOperation.SourceCopy | Native.CopyPixelOperation.CaptureBlt);
 
                 if (!success)
                     return FrameCount;
@@ -94,6 +96,9 @@ namespace ScreenToGif.Util.Capture
                                 {
                                     frame.CursorX = cursorInfo.ptScreenPos.X - Left;
                                     frame.CursorY = cursorInfo.ptScreenPos.Y - Top;
+
+                                    //(int)(SystemParameters.CursorHeight * Scale)
+                                    //(int)(SystemParameters.CursorHeight * Scale)
 
                                     var ok = Native.DrawIconEx(CompatibleDeviceContext, frame.CursorX - iconInfo.xHotspot, frame.CursorY - iconInfo.yHotspot, cursorInfo.hCursor, 0, 0, CursorStep, IntPtr.Zero, 0x0003);
 

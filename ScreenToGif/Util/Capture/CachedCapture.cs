@@ -19,9 +19,9 @@ namespace ScreenToGif.Util.Capture
 
         #endregion
 
-        public override void Start(int delay, int left, int top, int width, int height, double dpi, ProjectInfo project)
+        public override void Start(int delay, int left, int top, int width, int height, double scale, ProjectInfo project)
         {
-            base.Start(delay, left, top, width, height, dpi, project);
+            base.Start(delay, left, top, width, height, scale, project);
 
             _infoHeader = new Native.BitmapInfoHeader();
             _infoHeader.biSize = (uint)Marshal.SizeOf(_infoHeader);
@@ -29,12 +29,12 @@ namespace ScreenToGif.Util.Capture
             _infoHeader.biClrUsed = 0;
             _infoHeader.biClrImportant = 0;
             _infoHeader.biCompression = 0;
-            _infoHeader.biHeight = -Height; //Negative, so the Y-axis will be positioned correctly.
-            _infoHeader.biWidth = Width;
+            _infoHeader.biHeight = -StartHeight; //Negative, so the Y-axis will be positioned correctly.
+            _infoHeader.biWidth = StartWidth;
             _infoHeader.biPlanes = 1;
 
             //This was working with 32 bits: 3L * Width * Height;
-            _byteLength = (Width * _infoHeader.biBitCount + 31) / 32 * 4 * Height;
+            _byteLength = (StartWidth * _infoHeader.biBitCount + 31) / 32 * 4 * StartHeight;
             
             //This capture mode ignores the alpha value.
             project.BitDepth = 24;
@@ -50,7 +50,8 @@ namespace ScreenToGif.Util.Capture
             {
                 new System.Security.Permissions.UIPermission(System.Security.Permissions.UIPermissionWindow.AllWindows).Demand();
 
-                var success = Native.BitBlt(CompatibleDeviceContext, 0, 0, Width, Height, WindowDeviceContext, Left, Top, Native.CopyPixelOperation.SourceCopy | Native.CopyPixelOperation.CaptureBlt);
+                //var success = Native.BitBlt(CompatibleDeviceContext, 0, 0, Width, Height, WindowDeviceContext, Left, Top, Native.CopyPixelOperation.SourceCopy | Native.CopyPixelOperation.CaptureBlt);
+                var success = Native.StretchBlt(CompatibleDeviceContext, 0, 0, StartWidth, StartHeight, WindowDeviceContext, Left, Top, Width, Height, Native.CopyPixelOperation.SourceCopy | Native.CopyPixelOperation.CaptureBlt);
 
                 if (!success)
                     return FrameCount;
@@ -62,7 +63,7 @@ namespace ScreenToGif.Util.Capture
                 frame.DataLength = _byteLength;
                 frame.Data = new byte[_byteLength];
 
-                Native.GetDIBits(WindowDeviceContext, CompatibleBitmap, 0, (uint)Height, frame.Data, ref _infoHeader, Native.DibColorMode.DibRgbColors);
+                Native.GetDIBits(WindowDeviceContext, CompatibleBitmap, 0, (uint)StartHeight, frame.Data, ref _infoHeader, Native.DibColorMode.DibRgbColors);
 
                 BlockingCollection.Add(frame);
             }
@@ -80,7 +81,8 @@ namespace ScreenToGif.Util.Capture
             {
                 new System.Security.Permissions.UIPermission(System.Security.Permissions.UIPermissionWindow.AllWindows).Demand();
 
-                var success = Native.BitBlt(CompatibleDeviceContext, 0, 0, Width, Height, WindowDeviceContext, Left, Top, Native.CopyPixelOperation.SourceCopy | Native.CopyPixelOperation.CaptureBlt);
+                //var success = Native.BitBlt(CompatibleDeviceContext, 0, 0, Width, Height, WindowDeviceContext, Left, Top, Native.CopyPixelOperation.SourceCopy | Native.CopyPixelOperation.CaptureBlt);
+                var success = Native.StretchBlt(CompatibleDeviceContext, 0, 0, StartWidth, StartHeight, WindowDeviceContext, Left, Top, Width, Height, Native.CopyPixelOperation.SourceCopy | Native.CopyPixelOperation.CaptureBlt);
 
                 if (!success)
                     return FrameCount;
@@ -149,7 +151,7 @@ namespace ScreenToGif.Util.Capture
                 frame.DataLength = _byteLength;
                 frame.Data = new byte[_byteLength];
 
-                Native.GetDIBits(WindowDeviceContext, CompatibleBitmap, 0, (uint)Height, frame.Data, ref _infoHeader, Native.DibColorMode.DibRgbColors);
+                Native.GetDIBits(WindowDeviceContext, CompatibleBitmap, 0, (uint)StartHeight, frame.Data, ref _infoHeader, Native.DibColorMode.DibRgbColors);
 
                 BlockingCollection.Add(frame);
             }

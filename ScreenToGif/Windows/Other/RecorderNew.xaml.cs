@@ -508,7 +508,7 @@ namespace ScreenToGif.Windows.Other
                 if (_capture != null)
                     _capture.SnapDelay = null;
 
-                if (Project.Frames.Count > 0)
+                if (Project.Frames?.Count > 0)
                 {
                     Stage = Stage.Paused;
                     Title = LocalizationHelper.Get("Recorder.Paused");
@@ -1312,7 +1312,7 @@ namespace ScreenToGif.Windows.Other
                 ErrorDialog.Ok("ScreenToGif", LocalizationHelper.Get("S.Recorder.Warning.CaptureNotPossible"), exception.Message, exception);
             };
 
-            _capture.Start(1000 / FpsIntegerUpDown.Value, (int)_rect.X, (int)_rect.Y, (int)_rect.Width, (int)_rect.Height, 96 * _scale, Project);
+            _capture.Start(1000 / FpsIntegerUpDown.Value, (int)_rect.X, (int)_rect.Y, (int)_rect.Width, (int)_rect.Height, _scale, Project);
         }
 
         private ICapture GetDirectCapture()

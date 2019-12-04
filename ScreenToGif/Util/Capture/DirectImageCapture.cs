@@ -82,6 +82,9 @@ namespace ScreenToGif.Util.Capture
         {
             base.Start(delay, left, top, width, height, dpi, project);
 
+            //Only set as Started after actually finishing starting.
+            WasStarted = false;
+
 #if DEBUG
             Device = new Device(DriverType.Hardware, DeviceCreationFlags.VideoSupport | DeviceCreationFlags.Debug);
 #else
@@ -141,6 +144,8 @@ namespace ScreenToGif.Util.Capture
                     }
                 }
             }
+
+            WasStarted = true;
         }
 
         /// <summary>

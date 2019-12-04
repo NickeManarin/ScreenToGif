@@ -85,9 +85,8 @@
                         <Expander Grid.Row="0" Header="{DynamicResource S.Options.App.Startup}" IsExpanded="True">
                             <StackPanel>
                                 <WrapPanel Margin="10,0,5,0">
-                                    <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.Startup.Tray}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=StartMinimized, Mode=TwoWay}"
-                                                Checked="StartCheckBox_Checked"/>
-                                    <TextBlock Text="{DynamicResource S.Options.App.Startup.Tray.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                                    <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.Startup.Tray}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=StartMinimized, Mode=TwoWay}" Checked="StartCheckBox_Checked"/>
+                                    <TextBlock Text="{DynamicResource S.Options.App.Startup.Tray.Info}" Padding="0" Margin="5,0,0,3" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
                                 </WrapPanel>
 
                                 <Grid Margin="15,0,5,5" Visibility="{Binding StartMinimized, Converter={StaticResource InvertedBoolToVisibility}}">

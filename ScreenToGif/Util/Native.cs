@@ -110,7 +110,7 @@ namespace ScreenToGif.Util
             public IntPtr hbmMask;  // (HBITMAP) Specifies the icon bitmask bitmap. If this structure defines a black and white icon, 
             public IntPtr hbmColor; // (HBITMAP) Handle to the icon color bitmap. This member can be optional if this 
         }
-
+        
         [StructLayout(LayoutKind.Sequential)]
         internal struct PointW
         {
@@ -1181,6 +1181,10 @@ namespace ScreenToGif.Util
         [DllImport("gdi32.dll", EntryPoint = "BitBlt", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool BitBlt([In] IntPtr hdc, int nXDest, int nYDest, int nWidth, int nHeight, [In] IntPtr hdcSrc, int nXSrc, int nYSrc, CopyPixelOperation dwRop);
+
+        [DllImport("gdi32.dll", EntryPoint = "StretchBlt", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static extern bool StretchBlt([In] IntPtr hdc, int nXDest, int nYDest, int nWidthDest, int nHeightDest, [In] IntPtr hdcSrc, int nXSrc, int nYSrc, int nWidthSource, int nHeightSource, CopyPixelOperation dwRop);
 
         /// <summary>
         /// pbmi was BitmapInfo.

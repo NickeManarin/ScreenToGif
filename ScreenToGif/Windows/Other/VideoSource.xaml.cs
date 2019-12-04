@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
@@ -196,10 +197,11 @@ namespace ScreenToGif.Windows.Other
 
         private void CapturePlayer_Changed(object sender, EventArgs e)
         {
-            ImportAndSeek();
+            //ImportAndSeek();
+            Dispatcher?.BeginInvoke(new Action(ImportAndSeek));
         }
 
-        private void OkButton_Click(object sender, RoutedEventArgs e)
+        private async void OkButton_Click(object sender, RoutedEventArgs e)
         {
             if (CountFrames() == 0)
             {
@@ -217,22 +219,22 @@ namespace ScreenToGif.Windows.Other
             DetailsGrid.Visibility = Visibility.Collapsed;
             SelectionSlider.IsEnabled = false;
             OkButton.IsEnabled = false;
-            MinHeight = Height;
-            SizeToContent = SizeToContent.Manual;
-
-            //Calculate all positions.
-            for (var span = SelectionSlider.LowerValue + Delay; span <= SelectionSlider.UpperValue; span += Delay)
-                _positions.Enqueue(TimeSpan.FromMilliseconds(span));
-
-            CaptureProgressBar.Value = 0;
-            CaptureProgressBar.Maximum = _positions.Count;
             StatusLabel.Visibility = Visibility.Visible;
             CaptureProgressBar.Visibility = Visibility.Visible;
+            MinHeight = Height;
+            SizeToContent = SizeToContent.Manual;
 
             GC.Collect();
 
             if (UserSettings.All.VideoImporter == 0)
             {
+                //Calculate all positions.
+                for (var span = SelectionSlider.LowerValue + Delay; span <= SelectionSlider.UpperValue; span += Delay)
+                    _positions.Enqueue(TimeSpan.FromMilliseconds(span));
+
+                CaptureProgressBar.Value = 0;
+                CaptureProgressBar.Maximum = _positions.Count;
+
                 if (_wasPreviewChangedRegistered)
                 {
                     _lowerPlayer.Changed -= LowerPlayer_Changed;
@@ -251,13 +253,37 @@ namespace ScreenToGif.Windows.Other
             else
             {
                 //Import via ffmpeg.
-                GetMultipleScreencaps();
+                await GetMultipleScreencaps();
             }
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             _cancelled = true;
+
+            #region Erase data
+
+            try
+            {
+                if (UserSettings.All.VideoImporter == 0)
+                {
+                    if (Frames != null)
+                        foreach (var frame in Frames.Where(frame => File.Exists(frame.Path)))
+                            File.Delete(frame.Path);
+                }
+                else
+                {
+                    _process?.Kill();
+
+                    ClearImportFolder(Path.Combine(RootFolder, "Import"));
+                }
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Impossible to delete imported frames when canceling the import.");
+            }
+
+            #endregion
 
             Frames?.Clear();
             GC.Collect();
@@ -672,6 +698,9 @@ namespace ScreenToGif.Windows.Other
 
         private void ImportAndSeek()
         {
+            if (_cancelled)
+                return;
+
             lock (_lock)
             {
                 var drawingVisual = new DrawingVisual();
@@ -698,7 +727,7 @@ namespace ScreenToGif.Windows.Other
                 Frames.Add(new FrameInfo
                 {
                     Delay = Delay,
-                    Path = fileName
+                    Path = Path.Combine(RootFolder, fileName)
                 });
             }
 
@@ -714,10 +743,16 @@ namespace ScreenToGif.Windows.Other
             if (_positions.Count > 0)
             {
                 //Seek to next position.
-                _lowerPlayer.Position = _positions.Dequeue();
+                //_lowerPlayer.Position = _positions.Dequeue();
+                Dispatcher?.BeginInvoke(new Action(() =>
+                {
+                    //_lowerPlayer.Changed -= CapturePlayer_Changed;
+                    //_lowerPlayer.Position = TimeSpan.Zero;
+                    //_lowerPlayer.Changed += CapturePlayer_Changed;
+                    _lowerPlayer.Position = _positions.Dequeue();
+                }));
 
                 UpdateProgressBar(_positions.Count);
-                //Dispatcher.Invoke(() => { UpdateProgressBar(_positions.Count); });
                 return;
             }
 
@@ -729,7 +764,7 @@ namespace ScreenToGif.Windows.Other
             DialogResult = true;
         }
 
-        private void GetMultipleScreencaps()
+        private async Task GetMultipleScreencaps()
         {
             var start = TimeSpan.FromMilliseconds(SelectionSlider.LowerValue);
             var end = TimeSpan.FromMilliseconds(SelectionSlider.UpperValue);
@@ -746,8 +781,8 @@ namespace ScreenToGif.Windows.Other
 
                 Directory.CreateDirectory(folder);
 
-                CaptureProgressBar.Maximum = count;
                 CaptureProgressBar.Value = 0;
+                CaptureProgressBar.Maximum = count;
 
                 var info = new ProcessStartInfo(UserSettings.All.FfmpegLocation)
                 {
@@ -755,13 +790,14 @@ namespace ScreenToGif.Windows.Other
                     CreateNoWindow = true,
                     ErrorDialog = false,
                     UseShellExecute = false,
-                    RedirectStandardError = true,
                     RedirectStandardOutput = true
                 };
 
                 _process = new Process();
                 _process.OutputDataReceived += (sender, e) =>
                 {
+                    Debug.WriteLine(e.Data);
+
                     if (string.IsNullOrEmpty(e.Data))
                         return;
 
@@ -790,11 +826,20 @@ namespace ScreenToGif.Windows.Other
                 _process.StartInfo = info;
                 _process.Start();
                 _process.BeginOutputReadLine();
+
+                await Task.Factory.StartNew(() => _process.WaitForExit());
             }
             catch (Exception e)
             {
                 LogWriter.Log(e, "Error importing frames with FFmpeg");
                 ClearImportFolder(folder);
+
+                Splitter.Visibility = Visibility.Visible;
+                DetailsGrid.Visibility = Visibility.Visible;
+                SelectionSlider.IsEnabled = true;
+                OkButton.IsEnabled = true;
+                StatusLabel.Visibility = Visibility.Collapsed;
+                CaptureProgressBar.Visibility = Visibility.Collapsed;
 
                 StatusBand.Error(LocalizationHelper.Get("S.ImportVideo.Error") + Environment.NewLine + e.Message + Environment.NewLine + e.HelpLink);
             }
@@ -802,6 +847,9 @@ namespace ScreenToGif.Windows.Other
 
         private void GetFiles(string folder)
         {
+            if (Dispatcher?.Invoke(() => !IsLoaded) ?? false)
+                return;
+
             foreach (var file in Directory.GetFiles(folder, "*.png"))
             {
                 //Create an unique file name.
@@ -821,7 +869,7 @@ namespace ScreenToGif.Windows.Other
 
             ClearImportFolder(folder);
 
-            Dispatcher.InvokeAsync(() => { DialogResult = true; });
+            Dispatcher?.Invoke(() => { DialogResult = true; });
         }
 
         private void ClearImportFolder(string folder)

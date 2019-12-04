@@ -509,7 +509,7 @@ namespace ScreenToGif.Windows
                 if (_capture != null)
                     _capture.SnapDelay = null;
 
-                if (Project.Frames.Count > 0)
+                if (Project?.Frames.Count > 0)
                 {
                     Stage = Stage.Paused;
                     Title = LocalizationHelper.Get("Recorder.Paused");
@@ -1100,6 +1100,7 @@ namespace ScreenToGif.Windows
                 Dispatcher.Invoke(() =>
                 {
                     UpdateSize();
+                    UpdateLocation();
 
                     WidthIntegerBox.Scale = _scale;
                     HeightIntegerBox.Scale = _scale;
@@ -1115,6 +1116,12 @@ namespace ScreenToGif.Windows
         {
             _width = (int)Math.Round((Width - Constants.HorizontalOffset) * _scale);
             _height = (int)Math.Round((Height - Constants.VerticalOffset) * _scale);
+
+            if (_capture != null)
+            {
+                _capture.Width = _width;
+                _capture.Height = _height;
+            }
         }
 
         private void UpdateLocation()
@@ -1220,13 +1227,18 @@ namespace ScreenToGif.Windows
 
             _capture.OnError += exception =>
             {
-                //Pause the recording and show the error.  
-                RecordPause();
+                Dispatcher?.Invoke(() =>
+                {
+                    //Pause the recording and show the error.  
+                    RecordPause();
 
-                ErrorDialog.Ok("ScreenToGif", LocalizationHelper.Get("S.Recorder.Warning.CaptureNotPossible"), exception.Message, exception);
+                    ErrorDialog.Ok("ScreenToGif", LocalizationHelper.Get("S.Recorder.Warning.CaptureNotPossible"), exception.Message, exception);
+                });
             };
 
-            _capture.Start(1000 / FpsIntegerUpDown.Value, _left, _top, _width, _height, 96 * _scale, Project);
+            var dpi = Monitor.AllMonitors.FirstOrDefault(f => f.IsPrimary)?.Dpi ?? 96d;
+
+            _capture.Start(1000 / FpsIntegerUpDown.Value, _left, _top, _width, _height, dpi / 96d, Project);
         }
 
         private ICapture GetDirectCapture()
@@ -1243,7 +1255,10 @@ namespace ScreenToGif.Windows
             _scale = e.NewDpi.DpiScaleX;
 
             UpdateSize();
-            Window_LocationChanged(sender, e);
+            UpdateLocation();
+
+            WidthIntegerBox.Scale = _scale;
+            HeightIntegerBox.Scale = _scale;
         }
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
