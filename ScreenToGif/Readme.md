@@ -19,7 +19,7 @@ _VS 2019 and .Net 4.8 or newer required._
 • You can use FFmpeg to import frames from video (I also improved performance while importing video with the default method).  
 • The executable can interpret arguments to disable/enable hardware acceleration.  
 • The maximum permitted outwards thickness of the border was increased.   
-• Turkish and Russian translation were updated.  
+• German, Turkish and Russian translation were updated.  
 
 ### Fixed:
 
@@ -31,6 +31,7 @@ _VS 2019 and .Net 4.8 or newer required._
 ♦ The text was overflowing and not wrapping properly in the FFmpeg command text boxes.  
 ♦ It was not possible to set shortcuts when deploying with Intune.  
 ♦ When trying to type special characters with the help of the Right Alt key, some commands were being fired instead. Because the underlying system translates Right Alt to Ctrl + Alt.  
+♦ When exporting images, zeroes will be padded to the left of the file name, so that files stay in order.  
 
 ### Known Bugs:
 

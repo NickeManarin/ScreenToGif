@@ -1702,7 +1702,7 @@ namespace ScreenToGif.Windows
 
             try
             {
-                if (Util.Other.IsFfmpegPresent(true))
+                if (Util.Other.IsFfmpegPresent(true, true))
                 {
                     var info = new FileInfo(UserSettings.All.FfmpegLocation);
                     info.Refresh();
@@ -1716,7 +1716,7 @@ namespace ScreenToGif.Windows
                     FfmpegImageCard.Description = string.Format(LocalizationHelper.Get("S.Options.Extras.Download", "{0}"), "~ 43,7 MB");
                 }
 
-                if (Util.Other.IsGifskiPresent(true))
+                if (Util.Other.IsGifskiPresent(true, true))
                 {
                     var info = new FileInfo(UserSettings.All.GifskiLocation);
                     info.Refresh();
@@ -1727,10 +1727,10 @@ namespace ScreenToGif.Windows
                 else
                 {
                     GifskiImageCard.Status = ExtrasStatus.Available;
-                    GifskiImageCard.Description = string.Format(LocalizationHelper.Get("S.Options.Extras.Download", "{0}"), "~ 1 MB");
+                    GifskiImageCard.Description = string.Format(LocalizationHelper.Get("S.Options.Extras.Download", "{0}"), "~ 600 KB");
                 }
 
-                if (Util.Other.IsSharpDxPresent(true))
+                if (Util.Other.IsSharpDxPresent(true, true))
                 {
                     var info1 = new FileInfo(Path.Combine(UserSettings.All.SharpDxLocationFolder, "SharpDX.dll"));
                     info1.Refresh();

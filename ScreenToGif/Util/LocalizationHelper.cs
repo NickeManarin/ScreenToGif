@@ -85,7 +85,7 @@ namespace ScreenToGif.Util
 
             #region English Fallback of the Current Language
 
-            //Only non-English resources need a fallback, because the English resource is evergreen. TODO
+            //Only non-English resources need a fallback, because the English resource is evergreen.
             if (culture.StartsWith("en"))
                 return;
 

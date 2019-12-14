@@ -1436,26 +1436,31 @@ namespace ScreenToGif.Windows
                             if (FrameListView.SelectedItems.Count > 1 && !Dialog.Ask(LocalizationHelper.Get("S.SaveAs.Frames.Confirmation.Title"),
                                     LocalizationHelper.Get("S.SaveAs.Frames.Confirmation.Instruction"), LocalizationHelper.GetWithFormat("S.SaveAs.Frames.Confirmation.Message", FrameListView.SelectedItems.Count)))
                             {
-                                StatusList.Warning(StringResource("S.SaveAs.Warning.Canceled"));
+                                StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Canceled"));
                                 return;
                             }
 
-                            foreach (var index in SelectedFramesIndex())
+                            var selected = SelectedFramesIndex();
+                            var padLength = selected.OrderByDescending(a => a).FirstOrDefault().ToString().Length;
+
+                            foreach (var index in selected)
                             {
-                                //Validation.
-                                if (File.Exists(Path.Combine(UserSettings.All.LatestImageOutputFolder, UserSettings.All.LatestImageFilename + " " + index + ".png")))
+                                var imageName = $"{UserSettings.All.LatestImageFilename} {index.ToString().PadLeft(padLength, '0')}.png";
+                                var path = Path.Combine(UserSettings.All.LatestImageOutputFolder, imageName);
+
+                                if (File.Exists(path))
                                 {
                                     FileExistsGrid.Visibility = Visibility.Visible;
-                                    StatusList.Warning(StringResource("S.SaveAs.Warning.Overwrite") + " - " + UserSettings.All.LatestImageFilename + " " + index + ".png");
+                                    StatusList.Warning($"{LocalizationHelper.Get("S.SaveAs.Warning.Overwrite")} - {imageName}");
                                     return;
                                 }
                             }
 
-                            foreach (var index in SelectedFramesIndex())
+                            foreach (var index in selected)
                             {
-                                var fileName = Path.Combine(UserSettings.All.LatestImageOutputFolder, UserSettings.All.LatestImageFilename + " " + index + ".png");
+                                var path = Path.Combine(UserSettings.All.LatestImageOutputFolder, $"{UserSettings.All.LatestImageFilename} {index.ToString().PadLeft(padLength, '0')}.png");
 
-                                File.Copy(FrameListView.Items.OfType<FrameListBoxItem>().ToList()[index].Image, fileName);
+                                File.Copy(FrameListView.Items.OfType<FrameListBoxItem>().ToList()[index].Image, path);
                             }
                         }
                         else
@@ -1468,7 +1473,7 @@ namespace ScreenToGif.Windows
                                 if (File.Exists(fileName))
                                 {
                                     FileExistsGrid.Visibility = Visibility.Visible;
-                                    StatusList.Warning(StringResource("S.SaveAs.Warning.Overwrite"));
+                                    StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Overwrite"));
                                     return;
                                 }
                             }
@@ -1476,18 +1481,26 @@ namespace ScreenToGif.Windows
                             if (File.Exists(fileName))
                                 File.Delete(fileName);
 
-                            var exportDirectory = Path.Combine(Path.GetDirectoryName(Project.Frames.First().Path), "Export");
+                            //Temporary folder.
+                            var outPath = Path.Combine(Project.FullPath, "Export");
 
-                            if (Directory.Exists(exportDirectory))
-                                Directory.Delete(exportDirectory, true);
+                            if (Directory.Exists(outPath))
+                                Directory.Delete(outPath, true);
 
-                            var dir = Directory.CreateDirectory(exportDirectory);
+                            var dir = Directory.CreateDirectory(outPath);
 
-                            foreach (var frame in FrameListView.SelectedItems.OfType<FrameListBoxItem>())
-                                File.Copy(frame.Image, Path.Combine(dir.FullName, Path.GetFileName(frame.Image)), true);
+                            //Get files.
+                            var selected = SelectedFramesIndex();
+                            var padLength = selected.OrderByDescending(a => a).FirstOrDefault().ToString().Length;
 
+                            foreach (var index in selected)
+                            {
+                                var path = Path.Combine(dir.FullName, $"{index.ToString().PadLeft(padLength, '0')}.png");
+                                File.Copy(FrameListView.Items.OfType<FrameListBoxItem>().ToList()[index].Image, path, true);
+                            }
+
+                            //Create Zip and clear temporary folder.
                             ZipFile.CreateFromDirectory(dir.FullName, fileName);
-
                             Directory.Delete(dir.FullName, true);
                         }
 

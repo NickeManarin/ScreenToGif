@@ -479,7 +479,7 @@ namespace ScreenToGif.Util
 
         #region Dependencies
 
-        public static bool IsFfmpegPresent(bool ignoreEnvironment = false)
+        public static bool IsFfmpegPresent(bool ignoreEnvironment = false, bool ignoreEmpty = false)
         {
             var realPath = UserSettings.All.FfmpegLocation;
 
@@ -491,6 +491,13 @@ namespace ScreenToGif.Util
             //File location already choosen or detected.
             if (!string.IsNullOrWhiteSpace(realPath) && File.Exists(realPath))
                 return true;
+
+            //The path was not selected, but the file exists inside the same folder.
+            if (!ignoreEmpty && string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation) && File.Exists("ffmpeg.exe"))
+            {
+                UserSettings.All.FfmpegLocation = "ffmpeg.exe";
+                return true;
+            }
 
             //If not found by direct/relative path, ignore the environment variables.
             if (ignoreEnvironment)
@@ -523,7 +530,7 @@ namespace ScreenToGif.Util
             return false;
         }
 
-        public static bool IsGifskiPresent(bool ignoreEnvironment = false)
+        public static bool IsGifskiPresent(bool ignoreEnvironment = false, bool ignoreEmpty = false)
         {
             var realPath = UserSettings.All.GifskiLocation;
 
@@ -535,6 +542,13 @@ namespace ScreenToGif.Util
             //File location already choosen or detected.
             if (!string.IsNullOrWhiteSpace(realPath) && File.Exists(realPath))
                 return true;
+
+            //The path was not selected, but the file exists inside the same folder.
+            if (!ignoreEmpty && string.IsNullOrWhiteSpace(UserSettings.All.GifskiLocation) && File.Exists("gifski.dll"))
+            {
+                UserSettings.All.GifskiLocation = "gifski.dll";
+                return true;
+            }
 
             //If not found by direct/relative path, ignore the environment variables.
             if (ignoreEnvironment)
@@ -567,7 +581,7 @@ namespace ScreenToGif.Util
             return false;
         }
 
-        public static bool IsSharpDxPresent(bool ignoreEnvironment = false)
+        public static bool IsSharpDxPresent(bool ignoreEnvironment = false, bool ignoreEmpty = false)
         {
             var realPath = UserSettings.All.SharpDxLocationFolder ?? "";
 
@@ -583,7 +597,8 @@ namespace ScreenToGif.Util
             //File location already choosen or detected.
             if (realPath != null && File.Exists(Path.Combine(realPath, "SharpDX.dll")) && File.Exists(Path.Combine(realPath, "SharpDX.DXGI.dll")) && File.Exists(Path.Combine(realPath, "SharpDX.Direct3D11.dll")))
             {
-                if (string.IsNullOrWhiteSpace(UserSettings.All.SharpDxLocationFolder))
+                //The path was not selected, but the file exists inside the same folder.
+                if (!ignoreEmpty && string.IsNullOrWhiteSpace(UserSettings.All.SharpDxLocationFolder))
                     UserSettings.All.SharpDxLocationFolder = ".";
 
                 return true;
