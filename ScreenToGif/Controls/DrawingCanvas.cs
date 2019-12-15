@@ -610,7 +610,7 @@ namespace ScreenToGif.Controls
         {
             RemoveAllAdorners();
 
-            _selectedShapes.Clear();
+            _selectedShapes?.Clear();
         }
 
         public void RemoveAllShapes()

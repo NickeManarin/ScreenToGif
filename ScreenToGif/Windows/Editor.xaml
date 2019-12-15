@@ -12,7 +12,8 @@
         x:Name="EditorWindow" Title="{DynamicResource Editor.Title}" MinHeight="500" MinWidth="700" 
         Background="{DynamicResource Panel.Background.Level3}" UseLayoutRounding="True" Icon="/Resources/Logo.ico"
         FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}"
-        Loaded="Window_Loaded" Closing="Window_Closing" Activated="Window_Activated" KeyUp="Window_KeyUp" Deactivated="Window_Deactivated">
+        Loaded="Window_Loaded" Closing="Window_Closing" Activated="Window_Activated" KeyUp="Window_KeyUp" 
+        DpiChanged="Window_DpiChanged" Deactivated="Window_Deactivated">
 
     <Window.Resources>
         <c:DoubleToInt x:Key="DoubleToIntConverter"/>

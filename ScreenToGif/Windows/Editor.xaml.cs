@@ -348,6 +348,16 @@ namespace ScreenToGif.Windows
                 e.Handled = true;
         }
 
+        private void Window_DpiChanged(object sender, DpiChangedEventArgs e)
+        {
+            if (e.NewDpi.PixelsPerInchX == e.OldDpi.PixelsPerInchX)
+                return;
+
+            ZoomBoxControl.RefreshImage();
+
+            Cancel_Executed(sender, null);
+        }
+
         private void Window_Closing(object sender, CancelEventArgs e)
         {
             //TODO: What if there's any processing happening? I need to try to stop.
@@ -4858,6 +4868,8 @@ namespace ScreenToGif.Windows
 
             foreach (var child in ActionInternalGrid.Children.OfType<Grid>().Where(x => x.Visibility == Visibility.Visible))
                 child.Visibility = Visibility.Collapsed;
+
+            ShapeDrawingCanvas.DeselectAll();
 
             #endregion
 
