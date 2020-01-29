@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Nicke Manarin")]
 [assembly: AssemblyProduct("ScreenToGif")]
-[assembly: AssemblyCopyright("Copyright© Nicke Manarin 2019")]
+[assembly: AssemblyCopyright("Copyright© Nicke Manarin 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
