@@ -24,6 +24,8 @@ namespace ScreenToGif.Util
     {
         #region Variables
 
+        private static object _lock = new object();
+
         private static ResourceDictionary _local;
         private static ResourceDictionary _appData;
         private static readonly ResourceDictionary Default;
@@ -143,43 +145,46 @@ namespace ScreenToGif.Util
 
         private static void SetValue(object value, [CallerMemberName] string key = "")
         {
-            //Updates or inserts the value to the Local resource.
-            if (_local != null)
+            lock(_lock)
             {
-                if (_local.Contains(key))
+                //Updates or inserts the value to the Local resource.
+                if (_local != null)
                 {
-                    _local[key] = value;
+                    if (_local.Contains(key))
+                    {
+                        _local[key] = value;
 
-                    //If the value is being set to null, remove it.
-                    if (value == null && (!Default.Contains(key) || Default[key] == null))
-                        _local.Remove(key);
+                        //If the value is being set to null, remove it.
+                        if (value == null && (!Default.Contains(key) || Default[key] == null))
+                            _local.Remove(key);
+                    }
+                    else
+                        _local.Add(key, value);
                 }
-                else
-                    _local.Add(key, value);
-            }
 
-            //Updates or inserts the value to the AppData resource.
-            if (_appData != null)
-            {
-                if (_appData.Contains(key))
+                //Updates or inserts the value to the AppData resource.
+                if (_appData != null)
                 {
-                    _appData[key] = value;
+                    if (_appData.Contains(key))
+                    {
+                        _appData[key] = value;
 
-                    //If the value is being set to null, remove it.
-                    if (value == null && (!Default.Contains(key) || Default[key] == null))
-                        _appData.Remove(key);
+                        //If the value is being set to null, remove it.
+                        if (value == null && (!Default.Contains(key) || Default[key] == null))
+                            _appData.Remove(key);
+                    }
+                    else
+                        _appData.Add(key, value);
                 }
+
+                //Updates/Adds the current value of the resource.
+                if (Application.Current.Resources.Contains(key))
+                    Application.Current.Resources[key] = value;
                 else
-                    _appData.Add(key, value);
+                    Application.Current.Resources.Add(key, value);
+
+                All.OnPropertyChanged(key);
             }
-
-            //Updates/Adds the current value of the resource.
-            if (Application.Current.Resources.Contains(key))
-                Application.Current.Resources[key] = value;
-            else
-                Application.Current.Resources.Add(key, value);
-
-            All.OnPropertyChanged(key);
         }
 
         private static ResourceDictionary LoadOrDefault(string path, int trial = 0, XamlObjectWriterException exception = null)

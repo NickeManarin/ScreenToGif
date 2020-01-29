@@ -85,6 +85,13 @@ namespace ScreenToGif.Util.Capture
             //Only set as Started after actually finishing starting.
             WasStarted = false;
 
+            Initialize();
+
+            WasStarted = true;
+        }
+
+        internal void Initialize()
+        {
 #if DEBUG
             Device = new Device(DriverType.Hardware, DeviceCreationFlags.VideoSupport | DeviceCreationFlags.Debug);
 #else
@@ -144,8 +151,6 @@ namespace ScreenToGif.Util.Capture
                     }
                 }
             }
-
-            WasStarted = true;
         }
 
         /// <summary>
@@ -261,6 +266,14 @@ namespace ScreenToGif.Util.Capture
             }
             catch (SharpDXException se) when (se.ResultCode.Code == SharpDX.DXGI.ResultCode.WaitTimeout.Result.Code)
             {
+                return FrameCount;
+            }
+            catch (SharpDXException se) when (se.ResultCode.Code == SharpDX.DXGI.ResultCode.DeviceRemoved.Result.Code || se.ResultCode.Code == SharpDX.DXGI.ResultCode.DeviceReset.Result.Code)
+            {
+                //When the device gets lost or reset, the resources should be instantiated again.
+                DisposeInternal();
+                Initialize();
+
                 return FrameCount;
             }
             catch (Exception ex)
@@ -379,6 +392,14 @@ namespace ScreenToGif.Util.Capture
             }
             catch (SharpDXException se) when (se.ResultCode.Code == SharpDX.DXGI.ResultCode.WaitTimeout.Result.Code)
             {
+                return FrameCount;
+            }
+            catch (SharpDXException se) when (se.ResultCode.Code == SharpDX.DXGI.ResultCode.DeviceRemoved.Result.Code || se.ResultCode.Code == SharpDX.DXGI.ResultCode.DeviceReset.Result.Code)
+            {
+                //When the device gets lost or reset, the resources should be instantiated again.
+                DisposeInternal();
+                Initialize();
+
                 return FrameCount;
             }
             catch (Exception ex)
@@ -714,19 +735,24 @@ namespace ScreenToGif.Util.Capture
             }
         }
 
-        public override void Stop()
+        public override async Task Stop()
         {
             if (!WasStarted)
                 return;
 
+            DisposeInternal();
+
+            await base.Stop();
+        }
+
+        internal void DisposeInternal()
+        {
             Device.Dispose();
             BackingTexture.Dispose();
             StagingTexture.Dispose();
             DuplicatedOutput.Dispose();
 
             CursorStagingTexture?.Dispose();
-
-            base.Stop();
         }
     }
 }

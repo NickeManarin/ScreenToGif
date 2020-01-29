@@ -98,7 +98,7 @@ namespace ScreenToGif.Util
             var buffer = new byte[count];
 
             if (ms.Read(buffer, 0, count) != count)
-                throw new Exception("End reached.");
+                throw new EndOfStreamException("End reached.");
 
             return buffer;
         }

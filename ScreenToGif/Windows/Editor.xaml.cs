@@ -3894,20 +3894,33 @@ namespace ScreenToGif.Windows
                                 }
 
                                 Dispatcher.Invoke(() => { UpdateProgress(number++); });
-
-                                var array = deflateStream.ReadBytes((int)frame.DataLength);
-
                                 BitmapSource source;
-                                if (Project.BitDepth == 24)
+                                
+                                try
                                 {
-                                    //24 bits: ((Project.Width * 24 + 31) / 32) * 4
-                                    source = BitmapSource.Create(Project.Width, Project.Height, Project.Dpi, Project.Dpi, PixelFormats.Bgr24, null, array, ((Project.Width * 24 + 31) / 32) * 4);
-                                    source = new FormatConvertedBitmap(source, PixelFormats.Bgra32, null, 0);
+                                    var array = deflateStream.ReadBytes((int)frame.DataLength);
+
+                                    if (Project.BitDepth == 24)
+                                    {
+                                        //24 bits: ((Project.Width * 24 + 31) / 32) * 4
+                                        source = BitmapSource.Create(Project.Width, Project.Height, Project.Dpi, Project.Dpi, PixelFormats.Bgr24, null, array, ((Project.Width * 24 + 31) / 32) * 4);
+                                        source = new FormatConvertedBitmap(source, PixelFormats.Bgra32, null, 0);
+                                    }
+                                    else
+                                    {
+                                        //32 bits: 4 * Project.Width
+                                        source = BitmapSource.Create(Project.Width, Project.Height, Project.Dpi, Project.Dpi, PixelFormats.Bgra32, null, array, 4 * Project.Width);
+                                    }
                                 }
-                                else
+                                catch (EndOfStreamException d)
                                 {
-                                    //32 bits: 4 * Project.Width
-                                    source = BitmapSource.Create(Project.Width, Project.Height, Project.Dpi, Project.Dpi, PixelFormats.Bgra32, null, array, 4 * Project.Width);
+                                    LogWriter.Log(d, "It was not possible to read more bytes from the frame cache, since it reached the end");
+                                    break;
+                                }
+                                catch (Exception e)
+                                {
+                                    //Not possible to read!
+                                    throw;
                                 }
 
                                 using (var stream = new FileStream(frame.Path, FileMode.Create))
@@ -7625,7 +7638,7 @@ namespace ScreenToGif.Windows
             var count = 0;
             foreach (var frame in auxList)
             {
-                if (!frame.WasClicked)
+                if (!frame.WasClicked || frame.CursorX == int.MinValue)
                 {
                     UpdateProgress(count++);
                     continue;

@@ -4,7 +4,7 @@ using ScreenToGif.Model;
 
 namespace ScreenToGif.Util.Capture
 {
-    internal interface ICapture : IDisposable
+    internal interface ICapture
     {
         bool WasStarted { get; set; }
         int FrameCount { get; set; }
@@ -24,6 +24,7 @@ namespace ScreenToGif.Util.Capture
         int CaptureWithCursor(FrameInfo frame);
         Task<int> CaptureWithCursorAsync(FrameInfo frame);
         void Save(FrameInfo info);
-        void Stop();
+        Task Stop();
+        Task Dispose();
     }
 }

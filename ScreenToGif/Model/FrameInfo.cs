@@ -119,13 +119,13 @@ namespace ScreenToGif.Model
         /// Cursor X position.
         /// </summary>
         [DataMember(EmitDefaultValue = false)]
-        public int CursorX { get; set; }
+        public int CursorX { get; set; } = int.MinValue;
 
         /// <summary>
         /// Cursor Y position.
         /// </summary>
         [DataMember(EmitDefaultValue = false)]
-        public int CursorY { get; set; }
+        public int CursorY { get; set; } = int.MinValue;
 
         /// <summary>
         /// True if was clicked.

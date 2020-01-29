@@ -163,7 +163,7 @@ namespace ScreenToGif.Util.Capture
             return await Task.Factory.StartNew(() => CaptureWithCursor(frame));
         }
 
-        public override void Stop()
+        public override async Task Stop()
         {
             if (!WasStarted)
                 return;
@@ -180,7 +180,7 @@ namespace ScreenToGif.Util.Capture
                 LogWriter.Log(e, "Impossible to stop and clean resources used by the recording.");
             }
 
-            base.Stop();
+            await base.Stop();
         }
     }
 }

@@ -32,7 +32,7 @@ namespace ScreenToGif.Util.Capture
 
             _fileStream = new FileStream(project.CachePath, FileMode.Create, FileAccess.Write, FileShare.None);
             _bufferedStream = new BufferedStream(_fileStream, UserSettings.All.MemoryCacheSize * 1048576); //Each 1 MB has 1_048_576 bytes.
-            _compressStream = new DeflateStream(_bufferedStream, UserSettings.All.CaptureCompression);
+            _compressStream = new DeflateStream(_bufferedStream, UserSettings.All.CaptureCompression, true);
         }
 
 
@@ -98,6 +98,14 @@ namespace ScreenToGif.Util.Capture
             }
             catch (SharpDXException se) when (se.ResultCode.Code == SharpDX.DXGI.ResultCode.WaitTimeout.Result.Code)
             {
+                return FrameCount;
+            }
+            catch (SharpDXException se) when (se.ResultCode.Code == SharpDX.DXGI.ResultCode.DeviceRemoved.Result.Code || se.ResultCode.Code == SharpDX.DXGI.ResultCode.DeviceReset.Result.Code)
+            {
+                //When the device gets lost or reset, the resources should be instantiated again.
+                DisposeInternal();
+                Initialize();
+
                 return FrameCount;
             }
             catch (Exception ex)
@@ -204,6 +212,14 @@ namespace ScreenToGif.Util.Capture
             {
                 return FrameCount;
             }
+            catch (SharpDXException se) when (se.ResultCode.Code == SharpDX.DXGI.ResultCode.DeviceRemoved.Result.Code || se.ResultCode.Code == SharpDX.DXGI.ResultCode.DeviceReset.Result.Code)
+            {
+                //When the device gets lost or reset, the resources should be instantiated again.
+                DisposeInternal();
+                Initialize();
+
+                return FrameCount;
+            }
             catch (Exception ex)
             {
                 LogWriter.Log(ex, "It was not possible to finish capturing the frame with DirectX.");
@@ -245,20 +261,23 @@ namespace ScreenToGif.Util.Capture
             return await Task.Factory.StartNew(() => CaptureWithCursor(frame));
         }
 
-        public override void Stop()
+        public override async Task Stop()
         {
             if (!WasStarted)
                 return;
 
-            _compressStream.Flush();
+            //Stop the recording first.
+            await base.Stop();
+
+            //Then close the streams.
+            //_compressStream.Flush();
+            _compressStream.Dispose();
+
             _bufferedStream.Flush();
             _fileStream.Flush();
 
-            _compressStream.Dispose();
             _bufferedStream.Dispose();
             _fileStream.Dispose();
-
-            base.Stop();
         }
     }
 }

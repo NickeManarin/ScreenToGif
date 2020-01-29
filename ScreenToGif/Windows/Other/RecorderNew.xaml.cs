@@ -258,7 +258,7 @@ namespace ScreenToGif.Windows.Other
         {
             await Task.Factory.StartNew(UpdateScreenDpi);
 
-            UpdatePositioning(true);
+            await UpdatePositioning(true);
             
             #region Timers
 
@@ -430,26 +430,26 @@ namespace ScreenToGif.Windows.Other
             _posY = (int)Math.Round(args.PosY / _scale, MidpointRounding.AwayFromZero);
         }
 
-        private void RecordPauseButton_Click(object sender, RoutedEventArgs e)
+        private async void RecordPauseButton_Click(object sender, RoutedEventArgs e)
         {
             if (!UserSettings.All.SnapshotMode)
-                RecordPause();
+                await RecordPause();
             else
-                Snap();
+                await Snap();
         }
 
-        private void StopButton_Click(object sender, RoutedEventArgs e)
+        private async void StopButton_Click(object sender, RoutedEventArgs e)
         {
-            Stop();
+            await Stop();
         }
 
-        private void DiscardButton_Click(object sender, RoutedEventArgs e)
+        private async void DiscardButton_Click(object sender, RoutedEventArgs e)
         {
             _captureTimer.Stop();
             FrameRate.Stop();
             FrameCount = 0;
             Stage = Stage.Discarding;
-            _capture.Stop();
+            await _capture.Stop();
 
             //OutterGrid.IsEnabled = false;
             Cursor = Cursors.AppStarting;
@@ -548,14 +548,14 @@ namespace ScreenToGif.Windows.Other
             }
         }
 
-        private void System_PowerModeChanged(object sender, PowerModeChangedEventArgs e)
+        private async void System_PowerModeChanged(object sender, PowerModeChangedEventArgs e)
         {
             if (e.Mode == PowerModes.Suspend)
             {
                 if (Stage == Stage.Recording)
-                    RecordPause();
+                    await RecordPause();
                 else if (Stage == Stage.PreStarting)
-                    Stop();
+                    await Stop();
 
                 GC.Collect();
             }
@@ -565,10 +565,10 @@ namespace ScreenToGif.Windows.Other
         {
             await Task.Factory.StartNew(UpdateScreenDpi);
 
-            UpdatePositioning();
+            await UpdatePositioning();
         }
 
-        private void Window_Closing(object sender, CancelEventArgs e)
+        private async void Window_Closing(object sender, CancelEventArgs e)
         {
             //Save Settings
             UserSettings.Save();
@@ -604,6 +604,10 @@ namespace ScreenToGif.Windows.Other
             _followTimer.Stop();
 
             #endregion
+
+            //Clean all capture resources.
+            if (_capture != null)
+                await _capture.Dispose();
 
             GC.Collect();
         }
@@ -819,7 +823,7 @@ namespace ScreenToGif.Windows.Other
         /// <summary>
         /// Method that starts or pauses the recording
         /// </summary>
-        internal async void RecordPause()
+        internal async Task RecordPause()
         {
             try
             {
@@ -850,7 +854,7 @@ namespace ScreenToGif.Windows.Other
 
                         _rect = ScreenRegion.Scale(_scale).Offset(Util.Other.RoundUpValue(_scale));
 
-                        PrepareNewCapture();
+                        await PrepareNewCapture();
 
                         FpsIntegerUpDown.IsEnabled = false;
 
@@ -962,7 +966,7 @@ namespace ScreenToGif.Windows.Other
             }
         }
 
-        private void Snap()
+        private async Task Snap()
         {
             #region If region not yet selected
 
@@ -985,7 +989,7 @@ namespace ScreenToGif.Windows.Other
 
                     Project = new ProjectInfo().CreateProjectFolder(ProjectByType.ScreenRecorder);
 
-                    PrepareNewCapture();
+                    await PrepareNewCapture();
 
                     IsRecording = true;
                 }
@@ -1000,25 +1004,15 @@ namespace ScreenToGif.Windows.Other
             if (_capture != null)
                 _capture.SnapDelay = UserSettings.All.SnapshotDefaultDelay;
 
-            #region Take Screenshot (All possibles types)
+            #region Take the screenshot
 
             var limit = 0;
             do
             {
                 if (UserSettings.All.ShowCursor)
-                {
-                    if (UserSettings.All.AsyncRecording)
-                        CursorAsync_Elapsed(null, null);
-                    else
-                        Cursor_Elapsed(null, null);
-                }
+                    Cursor_Elapsed(null, null);
                 else
-                {
-                    if (UserSettings.All.AsyncRecording)
-                        NormalAsync_Elapsed(null, null);
-                    else
-                        Normal_Elapsed(null, null);
-                }
+                    Normal_Elapsed(null, null);
 
                 if (limit > 5)
                 {
@@ -1036,7 +1030,7 @@ namespace ScreenToGif.Windows.Other
         /// <summary>
         /// Stops the recording or the Pre-Start countdown.
         /// </summary>
-        private async void Stop()
+        private async Task Stop()
         {
             try
             {
@@ -1044,7 +1038,9 @@ namespace ScreenToGif.Windows.Other
 
                 _captureTimer.Stop();
                 FrameRate.Stop();
-                _capture?.Stop();
+
+                if (_capture != null)
+                    await _capture.Stop();
 
                 if (Stage != Stage.Stopped && Stage != Stage.PreStarting && Project.Any)
                 {
@@ -1121,7 +1117,7 @@ namespace ScreenToGif.Windows.Other
             }
         }
 
-        private void UpdatePositioning(bool startup = false)
+        private async Task UpdatePositioning(bool startup = false)
         {
             #region Fill entire working space
 
@@ -1144,9 +1140,9 @@ namespace ScreenToGif.Windows.Other
                     SelectControl.Cancel();
                 
                 if (Stage == Stage.PreStarting)
-                    Stop();
+                    await Stop();
                 else if (Stage == Stage.Recording)
-                    RecordPause();
+                    await RecordPause();
 
                 //TODO: When discarding?
 
@@ -1282,9 +1278,10 @@ namespace ScreenToGif.Windows.Other
             _followTimer.Stop();
         }
 
-        private void PrepareNewCapture()
+        private async Task PrepareNewCapture()
         {
-            _capture?.Dispose();
+            if (_capture!= null)
+                await _capture.Dispose();
 
             if (UserSettings.All.UseDesktopDuplication)
             {
@@ -1304,10 +1301,10 @@ namespace ScreenToGif.Windows.Other
                 _capture = UserSettings.All.UseMemoryCache ? new CachedCapture() : new ImageCapture();
             }
 
-            _capture.OnError += exception =>
+            _capture.OnError += async exception =>
             {
                 //Pause the recording and show the error.  
-                RecordPause();
+                await RecordPause();
 
                 ErrorDialog.Ok("ScreenToGif", LocalizationHelper.Get("S.Recorder.Warning.CaptureNotPossible"), exception.Message, exception);
             };
@@ -1469,11 +1466,7 @@ namespace ScreenToGif.Windows.Other
             if (_stopRequested)
                 return;
 
-            if (_captureTask != null && !_captureTask.IsCompleted)
-                _captureTask.Wait();
-
             _captureTask = _capture.CaptureAsync(new FrameInfo(_recordClicked, _keyList));
-
             FrameCount = await _captureTask;
 
             _keyList.Clear();
@@ -1484,11 +1477,7 @@ namespace ScreenToGif.Windows.Other
             if (_stopRequested)
                 return;
 
-            if (_captureTask != null && !_captureTask.IsCompleted)
-                _captureTask.Wait();
-
             _captureTask = _capture.CaptureWithCursorAsync(new FrameInfo(_recordClicked, _keyList));
-
             FrameCount = await _captureTask;
 
             _keyList.Clear();

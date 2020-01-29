@@ -68,7 +68,7 @@ namespace ScreenToGif.Util.Capture
 
         ~BaseCapture()
         {
-            Dispose();
+            Dispose().Wait();
         }
 
         public virtual void Start(int delay, int left, int top, int width, int height, double scale, ProjectInfo project)
@@ -134,7 +134,7 @@ namespace ScreenToGif.Util.Capture
             return null;
         }
 
-        public virtual void Stop()
+        public virtual async Task Stop()
         {
             if (!WasStarted)
                 return;
@@ -142,15 +142,15 @@ namespace ScreenToGif.Util.Capture
             //Stop the consumer thread.
             BlockingCollection.CompleteAdding();
 
-            Task.WhenAll(_task).Wait();
+            await Task.WhenAll(_task);
 
             WasStarted = false;
         }
 
-        public virtual void Dispose()
+        public virtual async Task Dispose()
         {
             if (WasStarted)
-                Stop();
+                await Stop();
         }
     }
 }

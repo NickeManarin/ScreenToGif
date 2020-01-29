@@ -29,7 +29,7 @@ namespace ScreenToGif.Model
         /// </summary>
         [DataMember(Order = 2)]
         public List<FrameInfo> Frames { get; set; } = new List<FrameInfo>();
-        
+
         /// <summary>
         /// True if this project was recently created and was not yet loaded by the editor.
         /// </summary>
@@ -67,6 +67,7 @@ namespace ScreenToGif.Model
         /// </summary>
         [DataMember(Order = 8)]
         public double BitDepth { get; set; } = 32;
+
 
         /// <summary>
         /// The full path of project based on current settings.
@@ -107,7 +108,7 @@ namespace ScreenToGif.Model
         /// The latest index of the current list of frames, or -1.
         /// </summary>
         public int LatestIndex => Frames?.Count - 1 ?? -1;
-
+        
 
         #region Methods
 
@@ -232,7 +233,7 @@ namespace ScreenToGif.Model
                     }
 
                     File.Copy(ProjectPath, Path.Combine(folder, "Project.json"), true);
-                    
+
                     return newList;
                 }
 

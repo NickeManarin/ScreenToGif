@@ -28,7 +28,7 @@ namespace ScreenToGif.Windows.Other
             DetectMonitors();
         }
 
-        private void HyperlinkMove_Click(object sender, RoutedEventArgs e)
+        private async void HyperlinkMove_Click(object sender, RoutedEventArgs e)
         {
             var monitor = Monitor.AllMonitorsScaled(this.Scale()).FirstOrDefault(f => f.IsPrimary);
 
@@ -50,7 +50,7 @@ namespace ScreenToGif.Windows.Other
                 if (window is RecorderNew newRecorder)
                 {
                     if (newRecorder.Stage == Stage.Recording)
-                        newRecorder.RecordPause();
+                        await newRecorder.RecordPause();
 
                     //I need to adjust to the Left/Top Bounds since the recorder ocupies the all windows.
 
@@ -80,7 +80,7 @@ namespace ScreenToGif.Windows.Other
                 if (window is Recorder recorder)
                 {
                     if (recorder.Stage == Stage.Recording)
-                        recorder.RecordPause();
+                        await recorder.RecordPause();
                 }
 
                 if (monitor.Bounds.Top > top)

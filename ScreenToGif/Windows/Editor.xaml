@@ -1685,11 +1685,11 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource ImportVideo.Width}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.ImportVideo.Width}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                                 <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="NewImageWidthNumericUpDown" Minimum="10" Maximum="2000" Margin="10,5" MinWidth="80" 
                                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=NewAnimationWidth, Mode=TwoWay}"/>
 
-                                <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource ImportVideo.Height}" VerticalAlignment="Center" Padding="0"  Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.ImportVideo.Height}" VerticalAlignment="Center" Padding="0"  Foreground="{DynamicResource Element.Foreground.Medium}"/>
                                 <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="NewImageHeightNumericUpDown" Minimum="10" Maximum="2000" Margin="10,5" MinWidth="80" 
                                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=NewAnimationHeight, Mode=TwoWay}"/>
                             </Grid>

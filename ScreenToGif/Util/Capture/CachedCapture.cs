@@ -2,6 +2,7 @@
 using System.IO;
 using System.IO.Compression;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using ScreenToGif.Model;
 
 namespace ScreenToGif.Util.Capture
@@ -41,7 +42,7 @@ namespace ScreenToGif.Util.Capture
 
             _fileStream = new FileStream(project.CachePath, FileMode.Create, FileAccess.Write, FileShare.None);
             _bufferedStream = new BufferedStream(_fileStream, UserSettings.All.MemoryCacheSize * 1048576); //Each 1 MB has 1_048_576 bytes.
-            _compressStream = new DeflateStream(_bufferedStream, UserSettings.All.CaptureCompression);
+            _compressStream = new DeflateStream(_bufferedStream, UserSettings.All.CaptureCompression, true);
         }
 
         public override int Capture(FrameInfo frame)
@@ -177,20 +178,23 @@ namespace ScreenToGif.Util.Capture
             Project.Frames.Add(info);
         }
 
-        public override void Stop()
+        public override async Task Stop()
         {
             if (!WasStarted)
                 return;
 
-            _compressStream.Flush();
+            //Stop the recording first.
+            await base.Stop();
+
+            //Then close the streams.
+            //_compressStream.Flush();
+            _compressStream.Dispose();
+
             _bufferedStream.Flush();
             _fileStream.Flush();
-
-            _compressStream.Dispose();
+            
             _bufferedStream.Dispose();
             _fileStream.Dispose();
-
-            base.Stop();
         }
 
         [Obsolete("Only for test")]
