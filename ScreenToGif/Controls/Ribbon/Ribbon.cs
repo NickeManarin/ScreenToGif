@@ -235,9 +235,9 @@ namespace ScreenToGif.Controls.Ribbon
             //var ness = Glass.GlassColor.GetBrightness();
             //var aa = color.ConvertRgbToHsv();
 
-            var darkForeground = !SystemParameters.IsGlassEnabled || !Other.IsWin8OrHigher() || Glass.GlassColor.GetBrightness() > 973 || !isActivated;
+            var darkForeground = !SystemParameters.IsGlassEnabled || !Other.IsGlassSupported() || Glass.GlassColor.GetBrightness() > 973 || !isActivated;
             //var darkForeground = !SystemParameters.IsGlassEnabled || !Other.IsWin8OrHigher() || aa.V > 0.5 || !isActivated;           
-            var showBackground = !Other.IsWin8OrHigher();
+            var showBackground = !Other.IsGlassSupported();
 
             //Console.WriteLine("!IsGlassEnabled: " + !SystemParameters.IsGlassEnabled);
             //Console.WriteLine("!UsesColor: " + !Glass.UsesColor);

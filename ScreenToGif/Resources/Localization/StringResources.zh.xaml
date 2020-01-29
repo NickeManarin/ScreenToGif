@@ -62,7 +62,13 @@
     <s:String x:Key="S.Command.Play">播放动画</s:String>
     <s:String x:Key="S.Command.NextFrame">选择下一帧</s:String>
     <s:String x:Key="S.Command.LastFrame">选择最后一帧</s:String>
+    <s:String x:Key="S.Command.Undo">撤消</s:String>
+    <s:String x:Key="S.Command.Redo">重做</s:String>
     <s:String x:Key="S.Command.Reset">撤消项目中的所有更改</s:String>
+    <s:String x:Key="S.Command.Copy">复制所选帧并将其存储在剪贴板中</s:String>
+    <s:String x:Key="S.Command.Cut">剪切所选帧并将其存储在剪贴板中</s:String>
+    <s:String x:Key="S.Command.Paste">从剪贴板粘贴帧</s:String>
+    <s:String x:Key="S.Command.Delete">删除所选帧</s:String>
     <s:String x:Key="S.Command.DeletePrevious">删除所有上一帧</s:String>
     <s:String x:Key="S.Command.DeleteNext">删除所有下一帧</s:String>
     <s:String x:Key="S.Command.RemoveDuplicates">删除重复项</s:String>
@@ -85,6 +91,7 @@
     <s:String x:Key="S.Command.Border">添加边框</s:String>
     <s:String x:Key="S.Command.Shadow">添加阴影</s:String>
     <s:String x:Key="S.Command.Obfuscate">模糊处理：在帧上隐藏敏感部分</s:String>
+    <s:String x:Key="S.Command.Cinemagraph">使用绘图工具选择帧的哪些部分在整个动画中不应保持静态</s:String>
     <s:String x:Key="S.Command.Progress">进度条或带有播放详细信息的文本</s:String>
     <s:String x:Key="S.Command.SelectAll">选择所有帧</s:String>
     <s:String x:Key="S.Command.GoTo">导航到索引帧</s:String>
@@ -101,7 +108,7 @@
     <s:String x:Key="S.Command.Save">保存所选项目</s:String>
     <s:String x:Key="S.Command.Remove">删除所选项目</s:String>
     
-    <!--StartUp Page-->
+    <!--StartUp-->
     <s:String x:Key="Title.StartUp">ScreenToGif - 启动</s:String>
     <s:String x:Key="Recorder">录像机</s:String>
     <s:String x:Key="Webcam">摄像头</s:String>
@@ -133,6 +140,7 @@
     <!--Options-->
     <s:String x:Key="S.Options.Title">ScreenToGif - 选项</s:String>
     <s:String x:Key="S.Options.App">应用程序</s:String>
+    <s:String x:Key="S.Options.Recorder">录像机</s:String>
     <s:String x:Key="S.Options.Interface">界面</s:String>
     <s:String x:Key="S.Options.Tasks">自动化任务</s:String>
     <s:String x:Key="S.Options.Shortcuts">键盘快捷键</s:String>
@@ -143,11 +151,70 @@
     <s:String x:Key="S.Options.Donate">捐赠</s:String>
     <s:String x:Key="S.Options.About">关于</s:String>
     
+    <s:String x:Key="S.Options.Other">其它</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Header">光标后面缺少快捷键</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Message">为了使用鼠标光标跟随功能，必须设置快捷键以在需要时将其禁用。</s:String>
+    <s:String x:Key="S.Options.Warning.DesktopDuplication.Header">缺少屏幕捕获的依赖项</s:String>
+    <s:String x:Key="S.Options.Warning.DesktopDuplication.Message">为了使用 Desktop Duplication API 捕获屏幕，必须下载 SharpDx 库。</s:String>
     
+    <!--Options • Application-->
+    <s:String x:Key="S.Options.App.Startup">启动</s:String>
+    <s:String x:Key="S.Options.App.Startup.Tray">启动最小化到系统托盘</s:String>
+    <s:String x:Key="S.Options.App.Startup.Tray.Info">（启用此选项后，系统托盘图标将可见）</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window">开始于：</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Startup">启动窗口</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Recorder">屏幕录像机</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Webcam">摄像头录像机</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Board">画板录像机</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Editor">编辑器窗口</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Info">（在应用启动时首先显示的窗口）</s:String>
+    <s:String x:Key="S.Options.App.General">常规</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyFrameDeletion">删除帧前询问我</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyProjectDiscard">放弃项目前询问我</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingEditor">关闭编辑器前询问我 （如果有打开的项目）</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">关闭应用程序之前询问我（通过'退出'命令）</s:String>
+    <s:String x:Key="S.Options.App.General.DrawOutlineOutside">绘制标题文字的外轮廓</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">禁用硬件加速</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">（用户界面将通过软件模式呈现）</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">检查翻译更新</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">（更新的翻译将自动下载并安装）</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForUpdates">检查更新</s:String>
+    <s:String x:Key="S.Options.App.Tray">系统托盘图标</s:String>
+    <s:String x:Key="S.Options.App.Tray.Show">在系统托盘（通知区域）上显示应用程序。</s:String>
+    <s:String x:Key="S.Options.App.Tray.LeaveOpen">即使所有窗口关闭，仍保持应用程序的打开状态。</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Nothing">什么都不做</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Open">打开一个窗口</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Open.None">无窗口</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Toggle">最小化/还原所有窗口</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Minimize">最小化所有窗口</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Restore">恢复所有窗口</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Left">左键单击：</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.DoubleLeft">左键单击（x2）：</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Middle">中键单击：</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Window">窗口：</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Else">否则，打开：</s:String>
+
+    <!--Options • Recorder-->
+    <s:String x:Key="S.Options.Recorder.Interface">界面</s:String>
+    <s:String x:Key="S.Options.Recorder.Interface.Old">旧的</s:String>
+    <s:String x:Key="S.Options.Recorder.Interface.New">新的</s:String>
+    <s:String x:Key="S.Options.Recorder.Mode">捕获模式</s:String>
+    <s:String x:Key="S.Options.Recorder.Bitblt.Info">使用较旧的捕获方法，该方法比较慢，可能无法捕获游戏，但不需要其他插件。</s:String>
+    <s:String x:Key="S.Options.Recorder.DirectX.Info">使用桌面复制 API 捕获方法，该方法更快并且可以捕获全屏游戏，但是需要 SharpDx 插件和 Windows 8 或更高版本。</s:String>
+    <s:String x:Key="S.Options.Recorder.File">保存到文件</s:String>
+    <s:String x:Key="S.Options.Recorder.File.Info">捕获的每一帧将直接作为图像保存在磁盘上。</s:String>
+    <s:String x:Key="S.Options.Recorder.Cache">内存缓存</s:String>
+    <s:String x:Key="S.Options.Recorder.Cache.Info">捕获的每个帧将首先作为像素阵列存储在内存中（可能在压缩之前）。</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression">压缩：</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.Optimal">最佳</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.Optimal.Info">（较慢但可能更理想的压缩）</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.Fastest">最快</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.Fastest.Info">（速度更快，但最佳压缩效果可能较差）</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.NoCompression">无压缩</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.NoCompression.Info">（捕获帧时不应执行压缩）</s:String>
+    <s:String x:Key="S.Options.Recorder.CacheSize">缓存大小：</s:String>
+    <s:String x:Key="S.Options.Recorder.CacheSize.Info">（以MB为单位。达到此大小后，数据将被写入/丢弃到磁盘上）</s:String>
     <s:String x:Key="S.Options.Recorder.RecordMouse">录制时显示鼠标光标</s:String>
-    <s:String x:Key="S.Options.Recorder.RecordClicks">检测鼠标点击</s:String>
     <s:String x:Key="S.Options.Recorder.SelectCursorColor">选择光标颜色</s:String>
     <s:String x:Key="S.Options.Recorder.PreStart">在开始前倒计时</s:String>
     <s:String x:Key="S.Options.Recorder.PreStart.Info">（秒，开始录制前的延时）</s:String>
@@ -157,8 +224,6 @@
     <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">（恒定延迟，不会因为录制时的卡顿变化）</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording">启用异步录制</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">（有助于减少录制时的界面卡顿）</s:String>
-    <s:String x:Key="S.Options.Recorder.NewRecorder">启用新版录像机界面</s:String>
-    <s:String x:Key="S.Options.Recorder.NewRecorder.Info">（将替换旧版录像机界面）</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier">启用屏幕放大镜</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier.Info">（在选择录制区域时启用放大镜）</s:String>
     <s:String x:Key="S.Options.Recorder.CursorFollowing">启用光标跟随。</s:String>
@@ -166,32 +231,17 @@
     <s:String x:Key="S.Options.Recorder.FollowMargin.Info">（录制区域开始重新定位的缓冲区边距）</s:String>
     <s:String x:Key="S.Options.Recorder.FollowMarginInvisible.Info">（UI 开始隐藏的其他缓冲区边距）</s:String>
 
-    <s:String x:Key="S.Options.Other">其它</s:String>
-    <s:String x:Key="S.Options.App.Tray.Show">在系统托盘（通知区域）上显示应用程序。</s:String>
-    <s:String x:Key="S.Options.App.Tray.LeaveOpen">即使所有窗口关闭，仍保持应用程序的打开状态。</s:String>
-    <s:String x:Key="S.Options.App.General.NotifyFrameDeletion">删除帧前询问我</s:String>
-    <s:String x:Key="S.Options.App.General.NotifyProjectDiscard">放弃项目前询问我</s:String>
-    <s:String x:Key="S.Options.App.General.NotifyWhileClosingEditor">关闭编辑器前询问我 （如果有打开的项目）</s:String>
-    <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">关闭应用程序之前询问我（通过'退出'命令）</s:String>
-    <s:String x:Key="S.Options.App.General.DrawOutlineOutside">绘制标题文字的外轮廓</s:String>
-    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">禁用硬件加速</s:String>
-    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">检查翻译更新</s:String>
-    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">（更新的翻译将自动下载并安装）</s:String>
-    <s:String x:Key="S.Options.App.General.CheckForUpdates">检查更新</s:String>
-    <s:String x:Key="S.Options.App.Startup.Window.Startup">启动窗口</s:String>
-    <s:String x:Key="S.Options.App.Startup.Window.Recorder">屏幕录像机</s:String>
-    <s:String x:Key="S.Options.App.Startup.Window.Webcam">摄像头录像机</s:String>
-    <s:String x:Key="S.Options.App.Startup.Window.Board">画板录像机</s:String>
-    <s:String x:Key="S.Options.App.Startup.Window.Editor">编辑器窗口</s:String>
-    
+    <!--Options • Tasks-->
     <s:String x:Key="S.Options.Tasks.Title">自动化任务</s:String>
     <s:String x:Key="S.Options.Tasks.List">自动化任务列表</s:String>
     <s:String x:Key="S.Options.Tasks.List.Task">任务</s:String>
     <s:String x:Key="S.Options.Tasks.List.Details">详细信息</s:String>
     <s:String x:Key="S.Options.Tasks.SelectType">（选择一个任务）</s:String>
-    <s:String x:Key="S.Options.Tasks.Info">这些任务从列表顶部到底部顺序执行。&#10;当您第一次使用编辑器打开项目时会发生这种情况。</s:String>
+    <s:String x:Key="S.Options.Tasks.Info">这些任务从列表顶部到底部顺序执行。
+当您第一次使用编辑器打开项目时会发生这种情况。</s:String>
     
-    <!--<s:String x:Key="S.Options.Interface.Theme">App's theme</s:String>-->
+    <!--Options • Interface-->
+    <s:String x:Key="S.Options.Interface.Theme">应用程序主题</s:String>
     <s:String x:Key="S.Options.Interface.Theme.Scheme">配色方案</s:String>
     <s:String x:Key="S.Options.Interface.EditorBackground">编辑器背景</s:String>
     <s:String x:Key="S.Options.Interface.Recorder">录像机主题</s:String>
@@ -225,6 +275,7 @@
     <s:String x:Key="S.Options.Interface.Other.AutomaticallySizeOnContent">加载后根据帧大小自动调整窗口大小</s:String>
     <s:String x:Key="S.Options.Interface.Other.AutomaticallyFitImage">加载后根据窗口大小自动调整帧缩放级别</s:String>
   
+    <!--Options • Shortcuts-->
     <s:String x:Key="S.Options.Shortcuts.Global">全局</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.ScreenRecorder">屏幕录像机：</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.ScreenRecorder.Info">（打开默认屏幕录像机）</s:String>
@@ -252,6 +303,7 @@
     <s:String x:Key="S.Options.Shortcuts.Info">单击以设置键盘焦点，然后按所需的键和修饰符。
 一些按键组合是不允许的。</s:String>
     
+    <!--Options • Language-->
     <s:String x:Key="S.Options.Language.AppLanguage">应用程序语言</s:String>
     <s:String x:Key="S.Options.Language.AppLanguage.AutoDetect">自动检测</s:String>
     <s:String x:Key="S.Options.Language.AppLanguage.AutoDetect.Author">当前操作系统语言（如果可用）</s:String>
@@ -267,6 +319,7 @@
     <s:String x:Key="S.Options.Language.AppLanguage.Translate.ImportLink.Tooltip">打开导入页面</s:String>
     <s:String x:Key="S.Options.Language.AppLanguage.Translate.EmailLink.Tooltip">打开电子邮件应用</s:String>
     
+    <!--Options • Storage-->
     <s:String x:Key="S.Options.Storage.FilesAndFolders">临时文件和文件夹</s:String>
     <s:String x:Key="S.Options.Storage.FilesAndFolders.Count">{0} 个文件夹和 {1} 个文件</s:String>
     <s:String x:Key="S.Options.Storage.FilesAndFolders.None">未检测到任何文件夹或文件</s:String>
@@ -295,6 +348,7 @@
     <s:String x:Key="S.Options.Storage.AutomaticRemovalDays.Info">（在几天之内，打开编辑器后，任何旧项目都将被删除/丢弃）</s:String>
     <s:String x:Key="S.Options.Storage.LowSpace">当前配置的硬盘驱动器上空间不足。请清理临时缓存文件夹或更改位置。</s:String>
     
+    <!--Options • Upload-->
     <s:String x:Key="S.Options.Upload.Proxy">代理</s:String>
     <s:String x:Key="S.Options.Upload.Proxy.Mode">模式：</s:String>
     <s:String x:Key="S.Options.Upload.Proxy.Mode.Disabled">已禁用</s:String>
@@ -332,6 +386,7 @@
     <s:String x:Key="S.Options.Upload.Pick.Album">选择一个相册（可选）</s:String>
     <s:String x:Key="S.Options.Upload.Pick.Album.Info">如果您愿意，可以选择目标相册：</s:String>
     
+    <!--Options • Extras-->
     <s:String x:Key="S.Options.Extras.External">可用的外部工具</s:String>
     <s:String x:Key="S.Options.Extras.Download">点击此处下载
 {0}</s:String>
@@ -346,17 +401,33 @@
     <s:String x:Key="S.Options.Extras.GifskiLocation">Gifski 位置</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.Select">选择 Gifski 可执行文件的位置</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.Invalid">Gifski 可执行文件的路径包含一个或多个无效字符。请为该可执行文件选择一个有效的位置。</s:String>
+    <s:String x:Key="S.Options.Extras.SharpDxLocation">SharpDx 文件夹（SharpDX.dll，SharpDX.Direct3D11.dll和SharpDX.DXGI.dll）</s:String>
+    <s:String x:Key="S.Options.Extras.SharpDxLocation.Select">选择 SharpDx 库的位置</s:String>
+    <s:String x:Key="S.Options.Extras.SharpDxLocation.Invalid">SharpDx 库的路径包含一个或多个无效字符。 请为这些库选择一个有效的文件夹。</s:String>
     <s:String x:Key="S.Options.Extras.License.Ffmpeg">FFmpeg 许可证</s:String>
     <s:String x:Key="S.Options.Extras.License.Gifski">Gifski 许可证</s:String>
+    <s:String x:Key="S.Options.Extras.License.SharpDx">SharpDx 许可证</s:String>
 
+    <!--Options • Donations-->
+    <s:String x:Key="S.Options.Donate.Donate">捐赠</s:String>
     <s:String x:Key="S.Options.Donate.Donate.Dollar">捐赠美元 (US$)</s:String>
     <s:String x:Key="S.Options.Donate.Donate.Euro">捐赠欧元 (€)</s:String>
-    <s:String x:Key="S.Options.Donate.Donate">捐赠</s:String>
     <s:String x:Key="S.Options.Donate.Paypal.Dollar">打开 Paypal 网站。选择货币：美元</s:String>
     <s:String x:Key="S.Options.Donate.Paypal.Euro">打开 Paypal 网站。选择货币：欧元</s:String>
     <s:String x:Key="S.Options.Donate.Paypal.OwnCurrency">打开 Paypal 网站。您必须选择货币</s:String>
+    <s:String x:Key="S.Options.Donate.Subscribe">订购</s:String>
+    <s:String x:Key="S.Options.Donate.Subscribe.Patreon">每月通过 Patreon 捐款。</s:String>
+    <s:String x:Key="S.Options.Donate.Subscribe.Flattr">每月通过 Flattr 捐款。</s:String>
+    <s:String x:Key="S.Options.Donate.Gift">礼品游戏</s:String>
+    <s:String x:Key="S.Options.Donate.Gift.Steam">通过 Steam 进行礼品游戏。</s:String>
+    <s:String x:Key="S.Options.Donate.Gift.Gog">通过 GOG 进行礼品游戏。</s:String>
+    <s:String x:Key="S.Options.Donate.Kofi">通过 Ko-fi 支付咖啡费用。</s:String>
     <s:String x:Key="S.Options.Donate.Crypto">加密货币</s:String>
-
+    <s:String x:Key="S.Options.Donate.Crypto.BitcoinCash">复制比特币现金地址。</s:String>
+    <s:String x:Key="S.Options.Donate.Support">支持</s:String>
+    <s:String x:Key="S.Options.Donate.Support.Visit">如果您想支持该项目 :)</s:String>
+    
+    <!--Options • About-->
     <s:String x:Key="S.Options.About.Version">版本：</s:String>
     <s:String x:Key="S.Options.About.Author">作者：Nicke Manarin</s:String>
     <s:String x:Key="S.Options.About.StoreVersion">Microsoft Store 版本。 某些功能由于强制策略而被禁用。</s:String>
@@ -397,6 +468,12 @@
     <s:String x:Key="Recorder.PreStart">预启动</s:String>
     <s:String x:Key="Recorder.Paused">ScreenToGif（已暂停）</s:String>
     
+    <s:String x:Key="S.Recorder.Warning.CaptureNotPossible">无法捕获屏幕</s:String>
+    <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">无法捕获屏幕。 5 次尝试后，捕获方法未返回任何帧。</s:String>
+    <s:String x:Key="S.Recorder.Warning.StartPauseNotPossible">无法开始/暂停捕获屏幕</s:String>
+    <s:String x:Key="S.Recorder.Warning.Windows8">使用桌面复制 Desktop Duplication API 捕获屏幕需要 Windows 8 或更高版本。</s:String>
+    <s:String x:Key="S.Recorder.Warning.MissingSharpDx">为了使用 Desktop Duplication API 捕获屏幕，需要 SharpDx 库。 进入选项>其他下载。</s:String>
+    
     <!--New Recorder-->
     <s:String x:Key="S.Recorder.Area">区域</s:String>
     <s:String x:Key="S.Recorder.Window">窗口</s:String>
@@ -435,8 +512,10 @@
     <s:String x:Key="ColorSelector.Initial">初始颜色</s:String>
     <s:String x:Key="ColorSelector.Current">当前颜色</s:String>
     <s:String x:Key="ColorSelector.Latest">最新颜色</s:String>
-    <s:String x:Key="ColorSelector.Sample">拖放到&#x0d;示例颜色</s:String>
-    <s:String x:Key="ColorSelector.Sample.Info">单击并拖动以从屏幕&#x0d;上选择颜色。</s:String>
+    <s:String x:Key="ColorSelector.Sample">拖放到
+示例颜色</s:String>
+    <s:String x:Key="ColorSelector.Sample.Info">单击并拖动以从屏幕
+上选择颜色。</s:String>
     
     <!--Exception Viewer, Optional-->
     <s:String x:Key="ExceptionViewer.Title">异常查看器</s:String>
@@ -473,6 +552,7 @@
 
     <!--Import Frames From Video-->
     <s:String x:Key="S.ImportVideo.Title">从视频导入帧</s:String>
+    <s:String x:Key="S.ImportVideo.Importer">开发商：</s:String>
     <s:String x:Key="S.ImportVideo.Loading">载入中...</s:String>
     <s:String x:Key="S.ImportVideo.Scale">比例：</s:String>
     <s:String x:Key="S.ImportVideo.Size">大小：</s:String>
@@ -486,6 +566,9 @@
     <s:String x:Key="S.ImportVideo.Frames">帧数：</s:String>
     <s:String x:Key="S.ImportVideo.Duration">持续时间：</s:String>
     <s:String x:Key="S.ImportVideo.Error">无法加载视频。</s:String>
+    <s:String x:Key="S.ImportVideo.Error.Detail">预览器无法启动。 请尝试与其他硬件开发商联系或检查视频是否未损坏。&#x0d;如果您使用的是 MediaPlayer，请检查 Windows 功能“ Media Features/Windows Media Player”是否已打开，并确保您具有必需的视频编解码器。</s:String>
+    <s:String x:Key="S.ImportVideo.Timeout">获取帧预览超时。</s:String>
+    <s:String x:Key="S.ImportVideo.Nothing">没有选择的帧将被导入。</s:String>
     
     <!--Encoder-->
     <s:String x:Key="Encoder.Title">编码器</s:String>
@@ -505,6 +588,7 @@
     <s:String x:Key="Encoder.Uploading">上传中</s:String>
     <s:String x:Key="Encoder.Executing">执行命令</s:String>
     <s:String x:Key="Encoder.Processing">正在处理 {0}</s:String>
+    <s:String x:Key="Encoder.CreatingFile">创建文件</s:String>
     <s:String x:Key="Encoder.Analyzing">分析不变的像素</s:String>
     <s:String x:Key="Encoder.OpenFile">打开文件</s:String>
     <s:String x:Key="Encoder.ExploreFolder">显示文件夹</s:String>
@@ -557,7 +641,8 @@
     <s:String x:Key="Editor.File.Insert.Recording">录制</s:String>
     <s:String x:Key="Editor.File.Insert.Webcam">摄像头
 录制</s:String>
-    <s:String x:Key="Editor.File.Insert.Board">白板&#x0d;录制</s:String>
+    <s:String x:Key="Editor.File.Insert.Board">白板
+录制</s:String>
     <s:String x:Key="Editor.File.Insert.Media">媒体</s:String>
     <s:String x:Key="Editor.File.Insert">插入</s:String>
     
@@ -607,7 +692,9 @@
     <!--Playback • Playback Options-->
     <s:String x:Key="Editor.PlaybackOptions.Header">播放选项</s:String>
     <s:String x:Key="Editor.PlaybackOptions.Loop">播放期间循环播放。</s:String>
-    <s:String x:Key="Editor.PlaybackOptions.Loop.Info">仅在播放期间使用。&#x0d;如果要更改用于导出Gif和Apng的循环设置，&#x0d;某些编码器的“另存为”面板中将提供该循环设置。</s:String>
+    <s:String x:Key="Editor.PlaybackOptions.Loop.Info">仅在播放期间使用。
+如果要更改用于导出Gif和Apng的循环设置，
+某些编码器的“另存为”面板中将提供该循环设置。</s:String>
     
     <!--Edit • Frames-->  
     <s:String x:Key="Editor.Edit.Frames">帧</s:String>
@@ -732,6 +819,7 @@
     <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">您无法一次导入多个项目</s:String>
     <s:String x:Key="Editor.DragDrop.InvalidProject.Message">请只选择一个项目。</s:String>
     
+    <s:String x:Key="Editor.RetrievingFromCache">从缓存中检索帧</s:String>
     <s:String x:Key="Editor.LoadingFrames">正在载入帧</s:String>
     <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Instruction">无法加载项目</s:String>
     <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Message">无法加载这些帧，因其已经损坏或图片不在预期位置。</s:String>
@@ -741,7 +829,6 @@
     <s:String x:Key="Editor.PreparingImport">正在准备导入</s:String>
     <s:String x:Key="Editor.ImportingFrames">导入帧</s:String>
     
-    <s:String x:Key="Editor.ExportingRecording">导出录制</s:String>
     <s:String x:Key="S.Editor.AnalyzingDuplicates">分析重复项</s:String>
     <s:String x:Key="S.Editor.AdjustingDuplicatesDelay">调整延迟</s:String>
     <s:String x:Key="S.Editor.DiscardingDuplicates">丢弃重复项</s:String>
@@ -946,7 +1033,8 @@
     <s:String x:Key="Watermark.Opacity">不透明度：</s:String>
     
     <s:String x:Key="Border.Appearance">外观</s:String>
-    <s:String x:Key="S.Border.Info">使用负值使边框扩大图像。 这样做时，边框将应用于所有帧。&#x0d;如果不使用负值，则边框将仅应用于选定的帧。</s:String>
+    <s:String x:Key="S.Border.Info">使用负值使边框扩大图像。 这样做时，边框将应用于所有帧。
+如果不使用负值，则边框将仅应用于选定的帧。</s:String>
 
     <s:String x:Key="S.Shadow.ShadowColor">阴影颜色：</s:String>
     <s:String x:Key="S.Shadow.BackgroundColor">背景颜色：</s:String>
@@ -973,7 +1061,8 @@
     <s:String x:Key="Progress.Precision.Custom">自定义</s:String>
     <s:String x:Key="Progress.Precision.ShowTotal">显示总数</s:String>
     <s:String x:Key="Progress.Format">格式：</s:String>
-    <s:String x:Key="S.Progress.Format.Date">您可以使用 .Net Framework 中的日期和时间格式。&#x0d;该规范可在下面的两个链接中找到。</s:String>
+    <s:String x:Key="S.Progress.Format.Date">您可以使用 .Net Framework 中的日期和时间格式。
+该规范可在下面的两个链接中找到。</s:String>
     <s:String x:Key="S.Progress.Format.Date.Standard">标准格式</s:String>
     <s:String x:Key="S.Progress.Format.Date.Custom">自定义格式</s:String>
     <s:String x:Key="S.Progress.Precision.StartNumber">从字数：</s:String>
@@ -994,7 +1083,8 @@
     <s:String x:Key="OverrideDelay.Info">此新值将替换所有选定帧的持续时间（延时）。该值应保持在 10ms 和 25500ms 之间。</s:String>
     <s:String x:Key="IncreaseDecreaseDelay.Info">该值将增加或减少所选每帧的持续时间（延时）。
 您可以增加或减少介于 -10.000ms 和 10.000ms 之间的值，但每帧的持续时间将介于 10ms 和 25.500ms 之间</s:String>
-    <s:String x:Key="ScaleDelay.Info">通过百分比值缩放每个选定帧的持续时间（延迟）。&#x0d;您可以通过在 1％ 和 1000％ 之间选择一个值来缩放每个帧的持续时间，但每个帧的最终持续时间将限制在 10ms 到 25500ms 之间</s:String>
+    <s:String x:Key="ScaleDelay.Info">通过百分比值缩放每个选定帧的持续时间（延迟）。
+您可以通过在 1％ 和 1000％ 之间选择一个值来缩放每个帧的持续时间，但每个帧的最终持续时间将限制在 10ms 到 25500ms 之间</s:String>
 
     <s:String x:Key="Transitions.Length">过渡长度</s:String>
     <s:String x:Key="Transitions.Delay">过渡延时</s:String>
@@ -1063,7 +1153,8 @@
     <s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">使用 RLE 算法压缩图像数据。</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline">保存时间轴数据。</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">导出帧的时间，而不仅仅是帧。</s:String>
-
+    <s:String x:Key="S.SaveAs.ProjectOptions">项目选项</s:String>
+    
     <!--Save As • Save options-->
     <s:String x:Key="S.SaveAs.SaveOptions">保存选项</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">将文件保存到你选择的文件夹</s:String>
@@ -1143,7 +1234,8 @@
     <!--Troubleshoot-->
     <s:String x:Key="S.Troubleshoot.Title">疑难解答</s:String>
     <s:String x:Key="S.Troubleshoot.Windows">是否有任何窗口不见了?</s:String>
-    <s:String x:Key="S.Troubleshoot.Windows.Info">如果缺少任何窗口（屏幕外），&#x0d;使用下面的选项重置其当前和启动位置。</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Info">如果缺少任何窗口（屏幕外），
+使用下面的选项重置其当前和启动位置。</s:String>
     <s:String x:Key="S.Troubleshoot.Windows.Current">这是每个窗口当前所在的位置：</s:String>
     <s:String x:Key="S.Troubleshoot.Windows.Next">以下是每个窗口下次打开的位置：</s:String>
     <s:String x:Key="S.Troubleshoot.Windows.BringBack">将所有窗口移动到主屏幕。</s:String>
@@ -1172,13 +1264,13 @@
     <s:String x:Key="S.FontWeights.UltraBold">超粗 (Ultra Bold)</s:String>
     <s:String x:Key="S.FontWeights.UltraLight">超细 (Ultra Light)</s:String>
     
-     <!--VerticalAligment-->
+    <!--VerticalAlignment-->
     <s:String x:Key="S.VerticalAlignment.Top">顶部</s:String>
     <s:String x:Key="S.VerticalAlignment.Center">中心</s:String>
     <s:String x:Key="S.VerticalAlignment.Bottom">底部</s:String>
     <s:String x:Key="S.Alignment.Stretch">拉伸</s:String>
 
-     <!--HorizontalAlignment-->
+    <!--HorizontalAlignment-->
     <s:String x:Key="S.HorizontalAlignment.Left">左侧</s:String>
     <s:String x:Key="S.HorizontalAlignment.Center">中心</s:String>
     <s:String x:Key="S.HorizontalAlignment.Right">右侧</s:String>

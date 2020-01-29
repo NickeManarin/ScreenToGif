@@ -100,7 +100,10 @@ namespace ScreenToGif.Util
             return new Point(pointScreenPixels.X, pointScreenPixels.Y);
         }
 
-        public static bool IsWin8OrHigher()
+        /// <summary>
+        /// Checks if the Aero glass is supported this system.
+        /// </summary>
+        public static bool IsGlassSupported()
         {
             if (Environment.OSVersion.Platform != PlatformID.Win32NT || Environment.OSVersion.Version < new Version(6, 2, 9200, 0))
                 return false;
@@ -113,6 +116,11 @@ namespace ScreenToGif.Util
                 return false;
 
             return true;
+        }
+
+        public static bool IsWin8OrHigher()
+        {
+            return Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version >= new Version(6, 2, 9200, 0);
         }
 
         public static string GetTextResource(string resourceName)
