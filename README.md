@@ -19,7 +19,7 @@
 <p>This tool allows you to record a selected area of your <strong>screen</strong>, live feed from your <strong>webcam</strong> or live drawings from a <strong>sketchboard</strong>. Afterwards, you can edit and save the animation as a gif or video. <a href="https://github.com/NickeManarin/ScreenToGif/releases">Download it here</a></p>
 
 <p align="center">
-<g-emoji ios-version="6.0" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a0.png" alias="warning">⚠️</g-emoji> Attention, it requires <a href="http://www.microsoft.com/en-us/download/details.aspx?id=49982">.Net Framework 4.6.1</a> (or above). 
+<g-emoji ios-version="6.0" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a0.png" alias="warning">⚠️</g-emoji> Attention, it requires <a href="http://go.microsoft.com/fwlink/?LinkId=2085155">.Net Framework 4.8</a> (or above). 
  <g-emoji ios-version="6.0" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a0.png" alias="warning">⚠️</g-emoji>
 </p>
 
