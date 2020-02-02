@@ -50,7 +50,7 @@
  * Steam wishlist: [![Steam wishlist](https://img.shields.io/badge/donate-Steam-171a21.svg)](http://steamcommunity.com/id/nickesm/wishlist)
  * GOG Galaxy wishlist: www.gog.com/u/Nickesm/wishlist
  * Feedback (reporting bugs, ideas, etc) [![Author's Twitter](https://img.shields.io/badge/Twitter-%40NickeManarin-blue.svg)](https://twitter.com/NickeManarin)
- * [Anyone can still contribute to the languages](https://github.com/NickeManarin/ScreenToGif/blob/master/LOCALIZATION.md)
+ * [Anyone can still contribute to the localization of the app/website/installer](https://github.com/NickeManarin/ScreenToGif/blob/master/LOCALIZATION.md)
  * Create a review. :)
 
 
