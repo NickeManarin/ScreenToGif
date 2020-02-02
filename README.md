@@ -97,6 +97,11 @@ That's not why I'm sharing the source code, at all.
 		<td></td>
 		<td><a href="http://www.softpedia.com/get/Multimedia/Graphic/Graphic-Others/Screen-to-Gif.shtml">Softpedia</a></td>
 	</tr>
+	<tr>
+		<td></td>
+		<td><a href="https://www.portablefreeware.com/index.php?id=2895">PortableFreeware</a></td>
+	</tr>
+	
 </table>
 
 <h2>The creator also distributes this app via these websites</h2>
