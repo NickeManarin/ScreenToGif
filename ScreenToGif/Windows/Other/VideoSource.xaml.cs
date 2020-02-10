@@ -462,24 +462,29 @@ namespace ScreenToGif.Windows.Other
             if (resolutionsFound.Count == 0)
                 throw new Exception("No video resolution found." + log);
 
+            //Tries to find the line which shows the video rotation.
+            var rotationRegex = new Regex(".*(rotate          : ).*", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+            var linesFound2 = rotationRegex.Matches(response);
+            var isRotated = linesFound2.Count > 0 && linesFound2[0].Value.Contains("90");
+
             //Tries to find the line which shows the video stream details.
             var durationRegex = new Regex(".*(Duration: ).*", RegexOptions.IgnoreCase | RegexOptions.Compiled);
-            var linesFound2 = durationRegex.Matches(response);
+            var linesFound3 = durationRegex.Matches(response);
 
-            if (linesFound2.Count == 0)
+            if (linesFound3.Count == 0)
                 throw new Exception("No video duration found." + log);
 
             //Tried to find the total time of the video.
             var timingRegex = new Regex("[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}(\\.[0-9]{1,2})?", RegexOptions.IgnoreCase | RegexOptions.Compiled);
-            var timingsFound = timingRegex.Matches(linesFound2[0].Value);
+            var timingsFound = timingRegex.Matches(linesFound3[0].Value);
 
             if (timingsFound.Count == 0)
                 throw new Exception("No video timing found." + log);
 
             var size = resolutionsFound[0].Value.Split('x');
 
-            VideoWidth = Convert.ToInt32(size[0]);
-            VideoHeight = Convert.ToInt32(size[1]);
+            VideoWidth = Convert.ToInt32(size[isRotated ? 1 : 0]);
+            VideoHeight = Convert.ToInt32(size[isRotated ? 0 : 1]);
             Duration = TimeSpan.ParseExact(timingsFound[0].Value, "hh\\:mm\\:ss\\.ff", CultureInfo.InvariantCulture);
 
             //Trim the video a bit, just to make sure that we'll get the frame at the end.

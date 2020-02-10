@@ -11,8 +11,9 @@ namespace ScreenToGif.Util
         /// Converts a length value to a readable size.
         /// </summary>
         /// <param name="byteCount">The length of the file.</param>
+        /// <param name="format">The format of the number.</param>
         /// <returns>A string representation of a file size.</returns>
-        public static string BytesToString(long byteCount)
+        public static string BytesToString(long byteCount, string format = null)
         {
             string[] suf = { " B", " KB", " MB", " GB" }; //I hope no one make a gif with TB's of size. haha - Nicke
 
@@ -23,7 +24,7 @@ namespace ScreenToGif.Util
             var place = Convert.ToInt32(Math.Floor(Math.Log(bytes, 1024)));
             var num = Math.Round(bytes / Math.Pow(1024, place), 1);
 
-            return (Math.Sign(byteCount) * num) + suf[place];
+            return (Math.Sign(byteCount) * num).ToString(format) + suf[place];
         }
 
         /// <summary>

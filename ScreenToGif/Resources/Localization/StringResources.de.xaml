@@ -79,7 +79,7 @@
     <s:String x:Key="S.Command.MoveRight">Ausgewählten Frame nach rechts verschieben</s:String>
     <s:String x:Key="S.Command.Resize">Alle Frames vergrößern</s:String>
     <s:String x:Key="S.Command.Crop">Alle Frames beschneiden</s:String>
-    <s:String x:Key="S.Command.FlipRotate">Frames spiegeln oder drehen</s:String>
+    <s:String x:Key="S.Command.FlipRotate">Frames kippen oder drehen</s:String>
     <s:String x:Key="S.Command.Caption">Überschrift hinzufügen</s:String>
     <s:String x:Key="S.Command.FreeText">Frei schwebenden Text hinzufügen</s:String>
     <s:String x:Key="S.Command.TitleFrame">Frame mit Titel hinzufügen</s:String>
@@ -159,7 +159,7 @@
     
     <!--Options • Application-->
     <s:String x:Key="S.Options.App.Startup">Startseite</s:String>
-    <s:String x:Key="S.Options.App.Startup.Tray">Programm startet minimiert.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Tray">Programm startet minimiert</s:String>
     <s:String x:Key="S.Options.App.Startup.Tray.Info">(Programm-Symbol bleibt sichtbar solange diese Option aktiv is)</s:String>
     <s:String x:Key="S.Options.App.Startup.Window">Startoptionen:</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Startup">Auswahl-Fenster</s:String>
@@ -188,11 +188,11 @@
     <s:String x:Key="S.Options.App.Tray.Interactions.Toggle">Alle Fenster minimieren/wiederherstellen</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Minimize">Alle Fenster minimieren</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Restore">Alle Fenster wiederherstellen</s:String>
-    <s:String x:Key="S.Options.App.Tray.Interactions.Left">Klick links:</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Left">Links-Klick:</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.DoubleLeft">Doppel-Klick links:</s:String>
-    <s:String x:Key="S.Options.App.Tray.Interactions.Middle">Klick mittig:</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Middle">Mittel-Klick:</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Window">Fenster:</s:String>
-    <s:String x:Key="S.Options.App.Tray.Interactions.Else">oder etwas anderes, öffnet:</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Else">Sonst öffnet:</s:String>
 
     <!--Options • Recorder-->
     <s:String x:Key="S.Options.Recorder.Interface">Benutzeroberfläche</s:String>
@@ -408,14 +408,14 @@
     <s:String x:Key="S.Options.Donate.Paypal.Euro">Öffnet Paypal Webseite. Gewählte Währung: Euro</s:String>
     <s:String x:Key="S.Options.Donate.Paypal.OwnCurrency">Öffnet Paypal Webseite. Sie müssen Währung auswählen.</s:String>
     <s:String x:Key="S.Options.Donate.Subscribe">Abonnieren</s:String>
-    <s:String x:Key="S.Options.Donate.Subscribe.Patreon">Monatlich via Patreon spenden.</s:String>
-    <s:String x:Key="S.Options.Donate.Subscribe.Flattr">Monatlich via Flattr spenden.</s:String>
+    <s:String x:Key="S.Options.Donate.Subscribe.Patreon">Monatlich via Patreon spenden</s:String>
+    <s:String x:Key="S.Options.Donate.Subscribe.Flattr">Monatlich via Flattr spenden</s:String>
     <s:String x:Key="S.Options.Donate.Gift">Spiele als Geschenk</s:String>
-    <s:String x:Key="S.Options.Donate.Gift.Steam">Spiele als Geschenk via Steam.</s:String>
-    <s:String x:Key="S.Options.Donate.Gift.Gog">Spiele als Geschenk via GOG.</s:String>
-    <s:String x:Key="S.Options.Donate.Kofi">Einen Kaffee ausgeben via Ko-fi.</s:String>
+    <s:String x:Key="S.Options.Donate.Gift.Steam">Spiele als Geschenk via Steam</s:String>
+    <s:String x:Key="S.Options.Donate.Gift.Gog">Spiele als Geschenk via GOG</s:String>
+    <s:String x:Key="S.Options.Donate.Kofi">Einen Kaffee via Ko-fi ausgeben</s:String>
     <s:String x:Key="S.Options.Donate.Crypto">Kryptowährung</s:String>
-    <s:String x:Key="S.Options.Donate.Crypto.BitcoinCash">Bitcoin-Cash-Adresse kopieren.</s:String>
+    <s:String x:Key="S.Options.Donate.Crypto.BitcoinCash">Bitcoin-Cash-Adresse kopieren</s:String>
     <s:String x:Key="S.Options.Donate.Support">Unterstützung</s:String>
     <s:String x:Key="S.Options.Donate.Support.Visit">Wenn Sie mir danken wollen :D</s:String>
     
@@ -536,7 +536,7 @@
     <s:String x:Key="InsertFrames.Info2">Neue Frames zu aktueller Bildsequenz bei folgender Position hinzufügen:</s:String>
     <s:String x:Key="InsertFrames.Before">Vor</s:String>
     <s:String x:Key="InsertFrames.After">Nach</s:String>
-    <s:String x:Key="InsertFrames.Importing">Importieren</s:String>
+    <s:String x:Key="InsertFrames.Importing">Wird importiert ...</s:String>
     <s:String x:Key="InsertFrames.SelectColorFill">Arbeitsbereich-Füllfarbe auswählen</s:String>
 
     <!--Import Frames From Video-->
@@ -924,8 +924,8 @@
     <s:String x:Key="Crop.Bottom">Unten:</s:String>
     <s:String x:Key="Crop.Right">Rechts:</s:String>
     
-    <s:String x:Key="FlipRotate.FlipHorizontal">Horizontal spiegeln</s:String>
-    <s:String x:Key="FlipRotate.FlipVertical">Vertikal spiegeln</s:String>
+    <s:String x:Key="FlipRotate.FlipHorizontal">Horizontal kippen</s:String>
+    <s:String x:Key="FlipRotate.FlipVertical">Vertikal kippen</s:String>
     <s:String x:Key="FlipRotate.RotateLeft">Um 90º nach links drehen</s:String>
     <s:String x:Key="FlipRotate.RotateRight">Um 90° nach rechts drehen</s:String>
     
@@ -1121,7 +1121,7 @@
     <s:String x:Key="S.SaveAs.ApngOptions.PaintTransparent">Unveränderte Pixel transparent kennzeichnen</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions">Video-Optionen</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Fps">B/s:</s:String>
-    <s:String x:Key="S.SaveAs.FlipVertically">Video vertikal spiegeln</s:String>
+    <s:String x:Key="S.SaveAs.FlipVertically">Video vertikal kippen</s:String>
     <s:String x:Key="S.SaveAs.ImagesOptions">Bildoptionen</s:String>
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">Bilder komprimieren</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions">PSD-Optionen</s:String>

@@ -1864,6 +1864,15 @@
                                     github.com/NickeManarin/ScreenToGif
                                 </Hyperlink>
                             </TextBlock>
+
+                            <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource S.Options.About.Technical.Privacy}" FontSize="12" VerticalContentAlignment="Center" Margin="15,0,0,0" Foreground="{DynamicResource Element.Foreground}"/>
+                            
+                            <TextBlock Grid.Row="2" Grid.Column="1" FontSize="12" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
+                                <Hyperlink NavigateUri="https://www.screentogif.com/privacy.html" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
+                                           RequestNavigate="Hyperlink_OnRequestNavigate">
+                                    screentogif.com/privacy
+                                </Hyperlink>
+                            </TextBlock>
                         </Grid>
 
                         <n:LabelSeparator Text="{DynamicResource S.Options.About.ABigThanksTo}"/>

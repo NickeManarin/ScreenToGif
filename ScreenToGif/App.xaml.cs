@@ -51,16 +51,13 @@ namespace ScreenToGif
 
             #region Net Framework
 
-            var array = Type.GetType("System.Array");
-            var method = array?.GetMethod("Empty");
-
-            if (array == null || method == null)
+            if (!FrameworkHelper.HasFramework())
             {
-                var ask = Dialog.Ask("Missing Dependency", "Net Framework 4.6.1 is not present", "In order to properly use this app, you need to download the correct version of the .Net Framework. Open the web page to download?");
+                var ask = Dialog.Ask(LocalizationHelper.Get("S.Warning.Net.Title"), LocalizationHelper.Get("S.Warning.Net.Header"), LocalizationHelper.Get("S.Warning.Net.Message"));
 
                 if (ask)
                 {
-                    Process.Start("https://www.microsoft.com/en-us/download/details.aspx?id=49981");
+                    Process.Start("http://go.microsoft.com/fwlink/?LinkId=2085155");
                     return;
                 }
             }

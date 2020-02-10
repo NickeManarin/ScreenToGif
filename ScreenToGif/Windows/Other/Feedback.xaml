@@ -52,11 +52,11 @@
             </Grid.ColumnDefinitions>
 
             <n:LabelSeparator Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{DynamicResource S.Feedback.Title}"/>
-            <n:ExtendedTextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" x:Name="TitleTextBox" Margin="5" Height="24" MaxLength="255" TextWrapping="Wrap"/>
+            <n:ExtendedTextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" x:Name="TitleTextBox" Margin="5" Height="24" MaxLength="255" TextWrapping="Wrap" IsObligatory="True"/>
 
             <n:LabelSeparator Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="{DynamicResource S.Feedback.Message}"/>
             <n:ExtendedTextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" x:Name="MessageTextBox" Margin="5" AcceptsReturn="True" TextWrapping="Wrap" VerticalContentAlignment="Top"
-                               AcceptsTab="True" VerticalScrollBarVisibility="Auto" Watermark="If you are experiencing a bug, don't forget to explain how you got it, step by step."/>
+                               AcceptsTab="True" VerticalScrollBarVisibility="Auto" IsObligatory="True" Watermark="{DynamicResource S.Feedback.Message.Info}"/>
 
             <n:LabelSeparator Grid.Row="4" Grid.Column="0" Text="{DynamicResource S.Feedback.Type}"/>
             <StackPanel Grid.Row="5" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -65,7 +65,7 @@
             </StackPanel>
 
             <n:LabelSeparator Grid.Row="4" Grid.Column="1" Text="{DynamicResource S.Feedback.YourEmail}" BorderThickness="0,1,0,0"/>
-            <n:ExtendedTextBox Grid.Row="5" Grid.Column="1" x:Name="MailTextBox" Margin="5" Height="24" MaxLength="255" VerticalContentAlignment="Center" Watermark="Type your email here if you wish to recieve a reply"
+            <n:ExtendedTextBox Grid.Row="5" Grid.Column="1" x:Name="EmailTextBox" Margin="5" Height="24" MaxLength="255" VerticalContentAlignment="Center" IsObligatory="True"
                                Text="{Binding Source={x:Static u:UserSettings.All}, Path=LatestFeedbackEmail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
 

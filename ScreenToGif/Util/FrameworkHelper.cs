@@ -52,5 +52,31 @@ namespace ScreenToGif.Util
                 return "Not detectable";
             }
         }
+
+        /// <summary>
+        /// Searchs for the current .Net Framework version installed and returns true if has the necessary version installed.
+        /// Code adapted from https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed
+        /// </summary>
+        internal static bool HasFramework()
+        {
+            const string subkey = @"SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\";
+
+            try
+            {
+                using (var sub = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32).OpenSubKey(subkey))
+                {
+                    if (!(sub?.GetValue("Release") is int key))
+                        return false;
+
+                    //Has .Net 4.8 or newer. Checking the version using >= enables forward compatibility.
+                    return key >= 528040;
+                }
+            }
+            catch (Exception e)
+            {
+                LogWriter.Log(e, "Impossible to detect .Net Framework version.");
+                return false;
+            }
+        }
     }
 }

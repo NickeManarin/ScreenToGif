@@ -23,6 +23,11 @@
     <s:String x:Key="S.Description">Description</s:String>
     <s:String x:Key="S.SelectColor">Click here to select the color.</s:String>
 
+    <!--Warning messages-->
+    <s:String x:Key="S.Warning.Net.Title">Missing Dependency</s:String>
+    <s:String x:Key="S.Warning.Net.Header">Net Framework 4.8 is not present</s:String>
+    <s:String x:Key="S.Warning.Net.Message">In order to properly use this app, you need to download the correct version of the .Net Framework.&#10;Would you like to open the web page to download it?</s:String>
+    
     <!--Tray Icon-->
     <s:String x:Key="S.NewRecording">New screen recording</s:String>
     <s:String x:Key="S.NewWebcamRecording">New webcam recording</s:String>
@@ -431,6 +436,7 @@
     <s:String x:Key="S.Options.About.Technical.License">License:</s:String>
     <s:String x:Key="S.Options.About.Technical.Free">(This is a completely free app)</s:String>
     <s:String x:Key="S.Options.About.Technical.SourceCode">Source code:</s:String>
+    <s:String x:Key="S.Options.About.Technical.Privacy">Privacy policy:</s:String>
     <s:String x:Key="S.Options.About.ABigThanksTo">A big thanks to</s:String>
     <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">All my supporters, people who provided feedback and/or donations.</s:String>
     
@@ -1188,14 +1194,15 @@
     <s:String x:Key="S.Feedback.Header">Send feedback</s:String>
     <s:String x:Key="S.Feedback.Title">Title</s:String>
     <s:String x:Key="S.Feedback.Message">Message</s:String>
+    <s:String x:Key="S.Feedback.Message.Info">If you are experiencing a bug, don't forget to explain to me how you got it, step by step.</s:String>
     <s:String x:Key="S.Feedback.Type">Type of feedback</s:String>
     <s:String x:Key="S.Feedback.Suggestion">Suggestion</s:String>
     <s:String x:Key="S.Feedback.IssueBug">Issue/Bug</s:String>
-    <s:String x:Key="S.Feedback.IssueBug.Info">Please, if you are experiencing any bug: Don't forget to type your e-mail. Sometimes I'm not able to know how exactly the problem happened and I need further details.</s:String>
     <s:String x:Key="S.Feedback.YourEmail">Your email</s:String>
-    <s:String x:Key="S.Feedback.Warning.Title">You need to input a title for the feedback.</s:String>
-    <s:String x:Key="S.Feedback.Warning.Message">You need to input a message in the feedback.</s:String>
-    <s:String x:Key="S.Feedback.Sending">Sending in background... This window will close shortly.</s:String>
+    <s:String x:Key="S.Feedback.Warning.Title">You need to type a title for the feedback.</s:String>
+    <s:String x:Key="S.Feedback.Warning.Message">You need to type a message in the feedback.</s:String>
+    <s:String x:Key="S.Feedback.Warning.Email">You need to type your email, to receive a reply from the developer.</s:String>
+    <s:String x:Key="S.Feedback.Sending">Sending in the background... This window will close shortly.</s:String>
     <s:String x:Key="S.Feedback.Attachments">Attachments (Optional, 20MB Maximum)</s:String>
     <s:String x:Key="S.Feedback.AddAttachments">Add Attachments</s:String>
     <s:String x:Key="S.Feedback.RemoveAttachments">Remove All Attachments</s:String>

@@ -233,18 +233,19 @@ namespace ScreenToGif.Controls
             //Console.WriteLine("IsDark: " + isDark);
 
             //Update each tab.
-            foreach (var tab in _tabPanel.Children.OfType<AwareTabItem>())
-            {
-                //To force the change.
-                if (tab.IsDark == !darkForeground)
-                    tab.IsDark = !tab.IsDark;
+            if (_tabPanel != null)
+                foreach (var tab in _tabPanel.Children.OfType<AwareTabItem>())
+                {
+                    //To force the change.
+                    if (tab.IsDark == !darkForeground)
+                        tab.IsDark = !tab.IsDark;
 
-                if (tab.ShowBackground == showBackground)
-                    tab.ShowBackground = !tab.ShowBackground;
+                    if (tab.ShowBackground == showBackground)
+                        tab.ShowBackground = !tab.ShowBackground;
 
-                tab.IsDark = !darkForeground;
-                tab.ShowBackground = showBackground;
-            }
+                    tab.IsDark = !darkForeground;
+                    tab.ShowBackground = showBackground;
+                }
 
             //Update the buttons.
             if (_notificationButton != null)
