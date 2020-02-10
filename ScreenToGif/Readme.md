@@ -5,16 +5,15 @@ This is the current project of ScreenToGif.
 _VS 2019 and .Net 4.8 or newer required._
 
 
-## What's new? (Version 2.20.2)
+## What's new? (Version 2.20.3)
 
-• German translation was updated.  
-• Added the privacy policy link inside Options.  
+• Just bug fixes.   
 
 ### Fixed:
 
-♦ Updated the startup check to ask for .Net Framewok 4.8.  
-♦ The FFmpeg video importer now detects corretly videos with rotation.  
-♦ The app was ocasionally crashing when loading the editor window when trying to apply the glass effect.  
+♦ Some users could not reverse, undo, reset or save projects imported by video.  
+♦ The feedback tool was not working for some users.  
+♦ Some users were unable to download any external tool (TLS/SSL bug).  
 
 ### Known Bugs:
 

@@ -15,7 +15,7 @@ namespace ScreenToGif.Util
         /// <returns>A string representation of a file size.</returns>
         public static string BytesToString(long byteCount, string format = null)
         {
-            string[] suf = { " B", " KB", " MB", " GB" }; //I hope no one make a gif with TB's of size. haha - Nicke
+            string[] suf = { " B", " KB", " MB", " GB", " TB", " PB" }; 
 
             if (byteCount == 0)
                 return "0" + suf[0];
@@ -34,7 +34,7 @@ namespace ScreenToGif.Util
         /// <returns>A string representation of a file size.</returns>
         public static string BytesToString(ulong byteCount)
         {
-            string[] suf = { " B", " KB", " MB", " GB" }; //I hope no one make a gif with TB's of size. haha - Nicke
+            string[] suf = { " B", " KB", " MB", " GB", " TB", " PB" }; 
 
             if (byteCount == 0)
                 return "0" + suf[0];

@@ -142,13 +142,13 @@ namespace ScreenToGif.Windows.Other
             sb.Append("<th>Running</th>");
             sb.Append("<th>Version</th></tr>");
 
-            var format = new CultureInfo("pt-BR");
+            var culture = new CultureInfo("pt-BR");
 
             sb.AppendFormat("<tr><td class=\"textcentered\">{0}</td>", Environment.UserName);
             sb.AppendFormat("<td class=\"textcentered\">{0}</td>", Environment.MachineName);
-            sb.AppendFormat(format, "<td class=\"textcentered\">{0:g}</td>", Global.StartupDateTime);
-            sb.AppendFormat(format, "<td class=\"textcentered\">{0:g}</td>", DateTime.Now);
-            sb.AppendFormat(format, "<td class=\"textcentered\">{0:d':'hh':'mm':'ss}</td>", Global.StartupDateTime != DateTime.MinValue ? DateTime.Now - Global.StartupDateTime : TimeSpan.Zero);
+            sb.AppendFormat(culture, "<td class=\"textcentered\">{0:g}</td>", Global.StartupDateTime);
+            sb.AppendFormat(culture, "<td class=\"textcentered\">{0:g}</td>", DateTime.Now);
+            sb.AppendFormat(culture, "<td class=\"textcentered\">{0:d':'hh':'mm':'ss}</td>", Global.StartupDateTime != DateTime.MinValue ? DateTime.Now - Global.StartupDateTime : TimeSpan.Zero);
             sb.AppendFormat("<td class=\"textcentered\">{0}</td></tr>", Assembly.GetExecutingAssembly().GetName().Version.ToString(4));
 
             //Second overview row.
@@ -208,20 +208,41 @@ namespace ScreenToGif.Windows.Other
             sb.Append("<th>Free</th>");
             sb.Append("<th>Total</th>");
             sb.Append("<th>Format</th>");
-            sb.Append("<th>Type</th></tr>");
+            sb.Append("<th>Type</th>");
+            sb.Append("<th>Ready?</th></tr>");
 
             foreach (var drive in DriveInfo.GetDrives())
             {
-                var available = drive.TotalSize - drive.AvailableFreeSpace;
-                var usedPerc = Math.Round(Util.Other.CrossMultiplication(drive.TotalSize, available, null), 1);
-                var avaiPerc = Math.Round(Util.Other.CrossMultiplication(drive.TotalSize, drive.AvailableFreeSpace, null), 1);
+                #region Try get the size
+
+                var total = 0L;
+                var available = 0L;
+                var format = "";
+
+                try
+                {
+                    total = drive.TotalSize;
+                    available = drive.AvailableFreeSpace;
+                    format = drive.DriveFormat;
+                }
+                catch (Exception e)
+                {
+                    //LogWriter.Log(e, "Not possible to get driver details");
+                }
+
+                #endregion
+
+                var used = total - available;
+                var usedPerc = Math.Round(Util.Other.CrossMultiplication(total, used, null), 1);
+                var avaiPerc = Math.Round(Util.Other.CrossMultiplication(total, available, null), 1);
                 
                 sb.AppendFormat("<td class=\"textcentered\">{0}</td>", drive.Name);
-                sb.AppendFormat("<td class=\"textRight\">({0} %) {1}</td>", usedPerc, Humanizer.BytesToString(available, "N1"));
-                sb.AppendFormat("<td class=\"textRight\">({0} %) {1}</td>", avaiPerc, Humanizer.BytesToString(drive.AvailableFreeSpace, "N1"));
-                sb.AppendFormat("<td class=\"textRight\">{0}</td>", Humanizer.BytesToString(drive.TotalSize, "N1"));
-                sb.AppendFormat("<td class=\"textcentered\">{0}</td>", drive.DriveFormat);
-                sb.AppendFormat("<td class=\"textcentered\">{0}</td></tr>", drive.DriveType);
+                sb.AppendFormat("<td class=\"textRight\">({0} %) {1}</td>", usedPerc, Humanizer.BytesToString(used, "N1"));
+                sb.AppendFormat("<td class=\"textRight\">({0} %) {1}</td>", avaiPerc, Humanizer.BytesToString(available, "N1"));
+                sb.AppendFormat("<td class=\"textRight\">{0}</td>", Humanizer.BytesToString(total, "N1"));
+                sb.AppendFormat("<td class=\"textcentered\">{0}</td>", format);
+                sb.AppendFormat("<td class=\"textcentered\">{0}</td>", drive.DriveType);
+                sb.AppendFormat("<td class=\"textcentered\">{0}</td></tr>", drive.IsReady ? "Yes" : "No");
             }
 
             sb.Append("<table>");

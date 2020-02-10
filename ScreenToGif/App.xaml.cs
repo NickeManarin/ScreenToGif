@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Management;
+using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
@@ -39,6 +40,10 @@ namespace ScreenToGif
             //Increases the duration of the tooltip display.
             ToolTipService.ShowDurationProperty.OverrideMetadata(typeof(DependencyObject), new FrameworkPropertyMetadata(int.MaxValue));
 
+            //Set network connection properties.
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls13;
+            
             //Parse arguments.
             if (e.Args.Length > 0)
                 Argument.Prepare(e.Args);
