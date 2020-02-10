@@ -5,15 +5,13 @@ This is the current project of ScreenToGif.
 _VS 2019 and .Net 4.8 or newer required._
 
 
-## What's new? (Version 2.20.3)
+## What's new? (Version 2.21)
 
-• Just bug fixes.   
+• 
 
 ### Fixed:
 
-♦ Some users could not reverse, undo, reset or save projects imported by video.  
-♦ The feedback tool was not working for some users.  
-♦ Some users were unable to download any external tool (TLS/SSL bug).  
+♦ 
 
 ### Known Bugs:
 

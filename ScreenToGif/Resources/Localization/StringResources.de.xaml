@@ -22,7 +22,12 @@
     <s:String x:Key="S.Title">Titel</s:String>
     <s:String x:Key="S.Description">Beschreibung</s:String>
     <s:String x:Key="S.SelectColor">Hier klicken, um Farbe auszuwählen</s:String>
-
+    
+    <!--Warning messages-->
+    <s:String x:Key="S.Warning.Net.Title">Fehlende Abhängigkeit</s:String>
+    <s:String x:Key="S.Warning.Net.Header">.NET Framework 4.8 ist nicht verfügbar</s:String>
+    <s:String x:Key="S.Warning.Net.Message">Um dieses Programm zu verwenden, müssen Sie .NET Framework in der 4.8 Version installieren.&#10;Wollen Sie zu Download-Seite gehen?</s:String>
+       
     <!--Tray Icon-->
     <s:String x:Key="S.NewRecording">Neue Bildschirm-Aufnahme</s:String>
     <s:String x:Key="S.NewWebcamRecording">Neue Webcam-Aufnahme</s:String>
@@ -32,7 +37,7 @@
     <!--Application-->
     <s:String x:Key="Application.Exiting.Title">ScreenToGif wird beendet</s:String>
     <s:String x:Key="Application.Exiting.Instruction">Möchten Sie das Programm wirklich beenden?</s:String>
-    <s:String x:Key="Application.Exiting.Message">Alle Fenster werden geschlossen und das Programm-Symbol aus dem Infobereich der Taskleiste enfernt.</s:String>   
+    <s:String x:Key="Application.Exiting.Message">Alle Fenster werden geschlossen und das Programm-Symbol aus dem Infobereich der Taskleiste entfernt.</s:String>   
     
     <!--Error messages--> 
     <s:String x:Key="S.Crash">Ach nee, das Programm ist abgestürzt! :(</s:String>
@@ -54,7 +59,7 @@
     <s:String x:Key="S.Command.OverrideDelay">Frame-Dauer überschreiben</s:String>
     <s:String x:Key="S.Command.IncreaseDecreaseDelay">Frame-Dauer erhöhen/verringern</s:String>
     <s:String x:Key="S.Command.ScaleDelay">Frame-Dauer skalieren</s:String>
-    <s:String x:Key="S.Command.Zoom100">Zomm auf 100 % setzen</s:String>
+    <s:String x:Key="S.Command.Zoom100">Zoom auf 100 % setzen</s:String>
     <s:String x:Key="S.Command.SizeToContent">Fenstergröße an Framegröße anpassen</s:String>
     <s:String x:Key="S.Command.FitImage">Bild an vorhandene Fenstergröße anpassen</s:String>
     <s:String x:Key="S.Command.FirstFrame">Ersten Frame auswählen</s:String>
@@ -119,7 +124,7 @@
     <s:String x:Key="NewRelease">Neue Version verfügbar • {0}</s:String>
     <s:String x:Key="NewRelease.Tooltip">Lädt neueste Version von ScreenToGif herunter</s:String>
     <s:String x:Key="Tooltip.Recorder">Startet Bildschirm-Rekorder, mit dem Sie Ihren Bildschirm aufnehmen können</s:String>
-    <s:String x:Key="Tooltip.Webcam">Startet Webcam-Rekorder, mit dem Sie Webcam-Videos aufnemhen können</s:String>
+    <s:String x:Key="Tooltip.Webcam">Startet Webcam-Rekorder, mit dem Sie Webcam-Videos aufnehmen können</s:String>
     <s:String x:Key="Tooltip.Board">Startet Zeichenbrett-Rekorder, mit dem Sie Ihre Zeichnungen aufnehmen können</s:String>
     <s:String x:Key="Tooltip.Editor">Öffnet Editor, mit dem Sie Ihre Aufnahmen bearbeiten können</s:String>
 
@@ -160,7 +165,7 @@
     <!--Options • Application-->
     <s:String x:Key="S.Options.App.Startup">Startseite</s:String>
     <s:String x:Key="S.Options.App.Startup.Tray">Programm startet minimiert</s:String>
-    <s:String x:Key="S.Options.App.Startup.Tray.Info">(Programm-Symbol bleibt sichtbar solange diese Option aktiv is)</s:String>
+    <s:String x:Key="S.Options.App.Startup.Tray.Info">(Programm-Symbol bleibt sichtbar solange diese Option aktiv ist)</s:String>
     <s:String x:Key="S.Options.App.Startup.Window">Startoptionen:</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Startup">Auswahl-Fenster</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Recorder">Bildschirm-Rekorder</s:String>
@@ -168,14 +173,14 @@
     <s:String x:Key="S.Options.App.Startup.Window.Board">Zeichenbrett-Rekorder</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Editor">Editor</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Info">(Bestimmt, wie das Programm startet. Wenn minimiert, wird das Programm-Symbol im Infobereich sichtbar)</s:String>
-    <s:String x:Key="S.Options.App.General">Algemein</s:String>
+    <s:String x:Key="S.Options.App.General">Allgemein</s:String>
     <s:String x:Key="S.Options.App.General.NotifyFrameDeletion">Warnung vor dem Löschen von Frames ausgeben</s:String>
     <s:String x:Key="S.Options.App.General.NotifyProjectDiscard">Warnung vor dem Verwerfen eines Projekts ausgeben</s:String>
     <s:String x:Key="S.Options.App.General.NotifyWhileClosingEditor">Warnung vor dem Schließen des Editors ausgeben (falls Projekt nicht gespeichert)</s:String>
     <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">Warnung vor dem Schließen des Programms über "Beenden"-Option ausgeben</s:String>
-    <s:String x:Key="S.Options.App.General.DrawOutlineOutside">Textkontur nur nach aussen vergrößern</s:String>
+    <s:String x:Key="S.Options.App.General.DrawOutlineOutside">Textkontur nur nach außen vergrößern</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">Hardware-Beschleunigung ausschalten</s:String>
-    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(The user interface will be rendered via software mode)</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(Die Benutzeroberfläche wird im Software-Modus dargestellt)</s:String>
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">Nach aktualisierter Übersetzung suchen</s:String>
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(Aktualisierte Übersetzung wird automatisch heruntergeladen und installiert)</s:String>
     <s:String x:Key="S.Options.App.General.CheckForUpdates">Nach Programm-Updates suchen</s:String>
@@ -298,7 +303,7 @@
     <s:String x:Key="S.Options.Shortcuts.Recorders.Follow">Mauszeiger-Verfolgung:</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Follow.Info">(Schaltet das Nachziehen des Aufnahme-Bereichs gemäß der Mauszeiger-Position ein oder aus)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.DisableFollow">Mauszeiger-Verfolgung deaktivieren:</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Recorders.DisableFollow.Info">(Schaltet vorläufig das Nachziehen des Aufnahme-Bereichs ab, nur Zusatztasten sind hier erlaubt - Strg, Umschalt, Alt, Windows)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.DisableFollow.Info">(Schaltet vorläufig das Nachziehen des Aufnahme-Bereichs ab, nur Zusatztasten sind hier erlaubt - Strg-, Umschalt-, Alt-, Windows-Taste)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Info">Betätigen Sie eine Taste, damit Tastatureingabe im Fokus steht.&#x0a;Anschließend drücken Sie gewünschte Tastenkombination.&#x0a;Einige Tastenkombinationen sind nicht zulässig.</s:String>
     
     <!--Options • Language-->
@@ -404,9 +409,9 @@
     <s:String x:Key="S.Options.Donate.Donate">Spenden</s:String>
     <s:String x:Key="S.Options.Donate.Donate.Dollar">US $ spenden</s:String>
     <s:String x:Key="S.Options.Donate.Donate.Euro">€ spenden</s:String>
-    <s:String x:Key="S.Options.Donate.Paypal.Dollar">Öffnet Paypal Webseite. Gewählte Währung: US Dollar</s:String>
-    <s:String x:Key="S.Options.Donate.Paypal.Euro">Öffnet Paypal Webseite. Gewählte Währung: Euro</s:String>
-    <s:String x:Key="S.Options.Donate.Paypal.OwnCurrency">Öffnet Paypal Webseite. Sie müssen Währung auswählen.</s:String>
+    <s:String x:Key="S.Options.Donate.Paypal.Dollar">Öffnet PayPal Webseite. Gewählte Währung: US Dollar</s:String>
+    <s:String x:Key="S.Options.Donate.Paypal.Euro">Öffnet PayPal Webseite. Gewählte Währung: Euro</s:String>
+    <s:String x:Key="S.Options.Donate.Paypal.OwnCurrency">Öffnet PayPal Webseite. Sie müssen Währung auswählen.</s:String>
     <s:String x:Key="S.Options.Donate.Subscribe">Abonnieren</s:String>
     <s:String x:Key="S.Options.Donate.Subscribe.Patreon">Monatlich via Patreon spenden</s:String>
     <s:String x:Key="S.Options.Donate.Subscribe.Flattr">Monatlich via Flattr spenden</s:String>
@@ -431,6 +436,7 @@
     <s:String x:Key="S.Options.About.Technical.License">Lizenz:</s:String>
     <s:String x:Key="S.Options.About.Technical.Free">(Dieses Programm ist freie Software)</s:String>
     <s:String x:Key="S.Options.About.Technical.SourceCode">Quellcode:</s:String>
+    <s:String x:Key="S.Options.About.Technical.Privacy">Datenschutzbestimmungen:</s:String>
     <s:String x:Key="S.Options.About.ABigThanksTo">Ein großes Dankeschön an:</s:String>
     <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">All diejenigen, die mich und meine Arbeit mit Rückmeldungen und Spenden unterstützen.</s:String>
     
@@ -541,7 +547,7 @@
 
     <!--Import Frames From Video-->
     <s:String x:Key="S.ImportVideo.Title">Bildsequenz aus Video importieren</s:String>
-    <s:String x:Key="S.ImportVideo.Importer">Importer:</s:String>
+    <s:String x:Key="S.ImportVideo.Importer">Import mit:</s:String>
     <s:String x:Key="S.ImportVideo.Loading">Wird geöffnet</s:String>
     <s:String x:Key="S.ImportVideo.Scale">Skalierung:</s:String>
     <s:String x:Key="S.ImportVideo.Size">Abmessungen:</s:String>
@@ -555,7 +561,7 @@
     <s:String x:Key="S.ImportVideo.Frames">Frames:</s:String>
     <s:String x:Key="S.ImportVideo.Duration">Dauer:</s:String>
     <s:String x:Key="S.ImportVideo.Error">Beim Import der Video-Datei ist ein Fehler aufgetreten.</s:String>
-    <s:String x:Key="S.ImportVideo.Error.Detail">Vorschau fehlgeschlagen. Versuchen Sie anderen Importer oder schauen Sie nach, ob die Datei nicht beschädigt ist.&#x0d;Falls Sie MediaPlayer verwenden, schauen Sie nach, ob er aktiviert wurde und benötigte Codecs installiert sind.</s:String>
+    <s:String x:Key="S.ImportVideo.Error.Detail">Vorschau fehlgeschlagen. Versuchen Sie andere Multimedia-Anwendung oder schauen Sie nach, ob die Datei nicht beschädigt ist.&#x0d;Falls Sie MediaPlayer verwenden, schauen Sie nach, ob er aktiviert wurde und benötigte Codecs installiert sind.</s:String>
     <s:String x:Key="S.ImportVideo.Timeout">Zeitüberschreitung bei Erstellen von Frame-Vorschau.</s:String>
     <s:String x:Key="S.ImportVideo.Nothing">Keine Frames ausgewählt.</s:String>
     
@@ -847,7 +853,7 @@
     <s:String x:Key="Editor.Warning.Selection">Sie müssen mindestens einen Frame auswählen, um Übergang anwenden zu können.</s:String>
     <s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg ist nicht verfügbar. Fügen Sie es Umgebungsvariablen hinzu oder wählen Sie den Speicherort in Optionen > Verschiedenes aus.</s:String>
     <s:String x:Key="Editor.Warning.Gifski">Gifski ist nicht verfügbar. Fügen Sie es Umgebungsvariablen hinzu oder wählen Sie den Speicherort in Optionen > Verschiedenes aus.</s:String>
-    <s:String x:Key="Editor.Warning.LowSpace">Der vom Programm verwendete Speicherplatz is fast belegt ({0}% übrig). Gehen Sie zu Optionen > Temporäre Dateien, um Speicherplatz frei zu geben.</s:String>
+    <s:String x:Key="Editor.Warning.LowSpace">Der vom Programm verwendete Speicherplatz ist fast belegt ({0}% übrig). Gehen Sie zu Optionen > Temporäre Dateien, um Speicherplatz frei zu geben.</s:String>
     
     <!--Hints-->
     <s:String x:Key="Hint.NewRecording">Neue Bildschirm-Aufnahme erstellt.</s:String>
@@ -963,7 +969,7 @@
     <s:String x:Key="KeyStrokes.Separator">Trennzeichen:</s:String>
     <s:String x:Key="KeyStrokes.Edit">Tastatureingaben bearbeiten</s:String>
     <s:String x:Key="KeyStrokes.IgnoreModifiers">Strg-, Alt-, Umschalt- und Windows-Tasten ignorieren</s:String>
-    <s:String x:Key="KeyStrokes.IgnoreModifiers.Info">Zusätzliche Tastenkombinationen ausser Strg+C werden ignoriert</s:String>
+    <s:String x:Key="KeyStrokes.IgnoreModifiers.Info">Zusätzliche Tastenkombinationen außer Strg+C werden ignoriert</s:String>
     <s:String x:Key="KeyStrokes.Extend">Dauer der Anzeige der Tastatureingaben verlängern</s:String>
     <s:String x:Key="KeyStrokes.Earlier">Anzeige der Tastatureingaben früher beginnen</s:String>
     <s:String x:Key="KeyStrokes.By">Um (ms):</s:String>
@@ -1013,7 +1019,7 @@
     <s:String x:Key="Watermark.Opacity">Deckkraft:</s:String>
     
     <s:String x:Key="Border.Appearance">Vorgaben</s:String>
-    <s:String x:Key="S.Border.Info">Verwenden Sie negative Werte, um den Rahmen ausserhalb des Bildes zu erzeugen. So erstellter Rahmen wird auf allen Frames angewendet.&#x0d;Falls positive Werte eingegeben werden, wird der Rahmen nur dem ausgewählten Frame hinzugefügt.</s:String>
+    <s:String x:Key="S.Border.Info">Verwenden Sie negative Werte, um den Rahmen außerhalb des Bildes zu erzeugen. So erstellter Rahmen wird auf allen Frames angewendet.&#x0d;Falls positive Werte eingegeben werden, wird der Rahmen nur dem ausgewählten Frame hinzugefügt.</s:String>
 
     <s:String x:Key="S.Shadow.ShadowColor">Schatten-Farbe:</s:String>
     <s:String x:Key="S.Shadow.BackgroundColor">Hintergrund-Farbe:</s:String>
@@ -1050,7 +1056,7 @@
     <s:String x:Key="S.DelayUpdate">Frame-Dauer</s:String>
     <s:String x:Key="Delay.Mode">Modus:</s:String>
     <s:String x:Key="Delay.Mode.Override">Überschreiben (ms)</s:String>
-    <s:String x:Key="Delay.Mode.IncreaseDecrease">Erhöhen oder verringen (ms)</s:String>
+    <s:String x:Key="Delay.Mode.IncreaseDecrease">Erhöhen oder verringern (ms)</s:String>
     <s:String x:Key="Delay.Mode.Scale">Skalierung (in %)</s:String>
     <s:String x:Key="Delay.NewValue">Vorgabe</s:String>
     <s:String x:Key="Delay.Minimum10Ms">Minimum 10 ms pro Frame</s:String>
@@ -1188,6 +1194,7 @@
     <s:String x:Key="S.Feedback.Header">Rückmeldung senden</s:String>
     <s:String x:Key="S.Feedback.Title">Titel</s:String>
     <s:String x:Key="S.Feedback.Message">Nachricht</s:String>
+    <s:String x:Key="S.Feedback.Message.Info">Falls Sie einen Fehler finden, vergessen Sie nicht, Schritt für Schritt zu erklären, wie es zu diesem Fehler gekommen ist.</s:String>
     <s:String x:Key="S.Feedback.Type">Art der Rückmeldung</s:String>
     <s:String x:Key="S.Feedback.Suggestion">Vorschlag</s:String>
     <s:String x:Key="S.Feedback.IssueBug">Problem/Fehler</s:String>
