@@ -23,6 +23,11 @@
     <s:String x:Key="S.Description">Описание</s:String>
     <s:String x:Key="S.SelectColor">Нажмите здесь, чтобы выбрать цвет.</s:String>
 
+    <!--Warning messages-->
+    <s:String x:Key="S.Warning.Net.Title">Отсутствует зависимость</s:String>
+    <s:String x:Key="S.Warning.Net.Header">Отсутствует Net Framework 4.8</s:String>
+    <s:String x:Key="S.Warning.Net.Message">Для того, чтобы использовать это приложение, вам необходимо загрузить правильную версию .Net Framework.&#10;Открыть веб-страницу загрузки?</s:String>
+    
     <!--Tray Icon-->
     <s:String x:Key="S.NewRecording">Новая запись с экрана</s:String>
     <s:String x:Key="S.NewWebcamRecording">Новая запись с веб-камеры</s:String>
@@ -162,7 +167,7 @@
     <s:String x:Key="S.Options.App.Startup.Tray">Запускать свернутым в трей.</s:String>
     <s:String x:Key="S.Options.App.Startup.Tray.Info">(Значок в системном трее будет виден, пока эта настройка активна)</s:String>
     <s:String x:Key="S.Options.App.Startup.Window">Начинать с:</s:String>
-    <s:String x:Key="S.Options.App.Startup.Window.Startup">Окно приветствия</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Startup">Окно запуска</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Recorder">Запись с экрана</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Webcam">Запись с веб-камеры</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Board">Запись с доски</s:String>
@@ -188,11 +193,11 @@
     <s:String x:Key="S.Options.App.Tray.Interactions.Toggle">Свернуть / восстановить все окна</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Minimize">Свернуть все окна</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Restore">Восстановить все окна</s:String>
-    <s:String x:Key="S.Options.App.Tray.Interactions.Left">Щелчок ЛКМ:</s:String>
-    <s:String x:Key="S.Options.App.Tray.Interactions.DoubleLeft">Двойной щелчок ЛКМ:</s:String>
-    <s:String x:Key="S.Options.App.Tray.Interactions.Middle">Щелчок СКМ:</s:String>
-    <s:String x:Key="S.Options.App.Tray.Interactions.Window">Окно:</s:String>
-    <s:String x:Key="S.Options.App.Tray.Interactions.Else">Или, если уже открыто:</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Left">ЛКМ:</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.DoubleLeft">x2 ЛКМ:</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Middle">СКМ:</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Window">окно:</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Else">иначе:</s:String>
 
     <!--Options • Recorder-->
     <s:String x:Key="S.Options.Recorder.Interface">Интерфейс</s:String>
@@ -203,7 +208,7 @@
     <s:String x:Key="S.Options.Recorder.DirectX.Info">Использовать метод захвата Desktop Duplication API, который быстрее и способен захватывать&#10;полноэкранные игры, но требует SharpDx плагин и Windows 8 или новее.</s:String>
     <s:String x:Key="S.Options.Recorder.File">Сохранить&#10;в файл</s:String>
     <s:String x:Key="S.Options.Recorder.File.Info">Каждый кадр будет сохранен как изображение на диске.</s:String>
-    <s:String x:Key="S.Options.Recorder.Cache">Кеш&#10;памяти</s:String>
+    <s:String x:Key="S.Options.Recorder.Cache">Кэш в&#10;памяти</s:String>
     <s:String x:Key="S.Options.Recorder.Cache.Info">Каждый кадр будет сохранен в виде массива пикселей в памяти (можно сжать).</s:String>
     <s:String x:Key="S.Options.Recorder.Compression">Сжатие:</s:String>
     <s:String x:Key="S.Options.Recorder.Compression.Optimal">Оптимальное</s:String>
@@ -431,6 +436,7 @@
     <s:String x:Key="S.Options.About.Technical.License">Лицензия:</s:String>
     <s:String x:Key="S.Options.About.Technical.Free">(Данное ПО полностью бесплатное)</s:String>
     <s:String x:Key="S.Options.About.Technical.SourceCode">Исходный код:</s:String>
+    <s:String x:Key="S.Options.About.Technical.Privacy">Правила конфиденциальности:</s:String>
     <s:String x:Key="S.Options.About.ABigThanksTo">Огромное спасибо</s:String>
     <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">И всем, кто пишет отзывы, предложения, качественные переводы и финансово поддерживает.</s:String>
     
@@ -847,7 +853,7 @@
     <s:String x:Key="Editor.Warning.Selection">Необходимо выбрать, по крайней мере, один кадр, чтобы применить наложение.</s:String>
     <s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg отсутствует. Добавьте его к переменным средам или установите расположение в настройках.</s:String>
     <s:String x:Key="Editor.Warning.Gifski">Gifski нет. Добавьте его в переменные окружения Path или нажмите здесь, чтобы открыть "Настройки > Дополнительно" и указать путь.</s:String>
-    <s:String x:Key="Editor.Warning.LowSpace">На диске недостаточно места для хранения файлов кеша ({0}%). Нажмите здесь, чтобы открыть "Настройки > Файлы и папки" для освобождения места.</s:String>
+    <s:String x:Key="Editor.Warning.LowSpace">На диске недостаточно места для хранения файлов кэша ({0}%). Нажмите здесь, чтобы открыть "Настройки > Файлы и папки" для освобождения места.</s:String>
     
     <!--Hints-->
     <s:String x:Key="Hint.NewRecording">Создана новая запись с экрана</s:String>
@@ -1188,13 +1194,14 @@
     <s:String x:Key="S.Feedback.Header">Послать отзыв</s:String>
     <s:String x:Key="S.Feedback.Title">Заголовок *</s:String>
     <s:String x:Key="S.Feedback.Message">Сообщение *</s:String>
+    <s:String x:Key="S.Feedback.Message.Info">Если вы получили ошибку, не забывайте объяснить мне, как вы ее получили, шаг за шагом.</s:String>
     <s:String x:Key="S.Feedback.Type">Тип отзыва</s:String>
     <s:String x:Key="S.Feedback.Suggestion">Предложение</s:String>
     <s:String x:Key="S.Feedback.IssueBug">Проблема/баг</s:String>
-    <s:String x:Key="S.Feedback.IssueBug.Info">Если вы нашли какой-то баг, не забудьте указать свой e-mail. Не всегда сразу понятно что именно спровоцировало ошибку, поэтому могут потребоваться подробности.</s:String>
     <s:String x:Key="S.Feedback.YourEmail">Ваш Email (желательно указать, для обратной связи)</s:String>
     <s:String x:Key="S.Feedback.Warning.Title">Необходимо указать заголовок для вашего отзыва.</s:String>
     <s:String x:Key="S.Feedback.Warning.Message">Необходимо добавить сообщение в ваш отзыв.</s:String>
+    <s:String x:Key="S.Feedback.Warning.Email">Вам нужно ввести свой Email, чтобы получить ответ от разработчика.</s:String>
     <s:String x:Key="S.Feedback.Sending">Идет отправка... Окно закроется после отправки.</s:String>
     <s:String x:Key="S.Feedback.Attachments">Вложение (необязательно, 20MB максимум)</s:String>
     <s:String x:Key="S.Feedback.AddAttachments">Добавить вложения</s:String>
