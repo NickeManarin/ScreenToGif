@@ -163,7 +163,7 @@
     <s:String x:Key="S.Options.Warning.DesktopDuplication.Message">Для захвата экрана с помощью Desktop Duplication API необходимо загрузить библиотеки SharpDx.</s:String>
     
     <!--Options • Application-->
-    <s:String x:Key="S.Options.App.Startup">Овтозапуск</s:String>
+    <s:String x:Key="S.Options.App.Startup">Автозапуск</s:String>
     <s:String x:Key="S.Options.App.Startup.Tray">Запускать свернутым в трей.</s:String>
     <s:String x:Key="S.Options.App.Startup.Tray.Info">(Значок в системном трее будет виден, пока эта настройка активна)</s:String>
     <s:String x:Key="S.Options.App.Startup.Window">Начинать с:</s:String>
