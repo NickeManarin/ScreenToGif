@@ -23,6 +23,11 @@
     <s:String x:Key="S.Description">描述</s:String>
     <s:String x:Key="S.SelectColor">单击此处选择颜色。</s:String>
 
+    <!--Warning messages-->
+    <s:String x:Key="S.Warning.Net.Title">缺少依赖</s:String>
+    <s:String x:Key="S.Warning.Net.Header">Net Framework 4.8 不存在</s:String>
+    <s:String x:Key="S.Warning.Net.Message">为了正确使用此应用程序，您需要下载正确版本的 .Net Framework。&#10;您要打开网页进行下载吗?</s:String>
+    
     <!--Tray Icon-->
     <s:String x:Key="S.NewRecording">新建屏幕录制</s:String>
     <s:String x:Key="S.NewWebcamRecording">新建摄像头录制</s:String>
@@ -415,7 +420,7 @@
     <s:String x:Key="S.Options.Donate.Paypal.Dollar">打开 Paypal 网站。选择货币：美元</s:String>
     <s:String x:Key="S.Options.Donate.Paypal.Euro">打开 Paypal 网站。选择货币：欧元</s:String>
     <s:String x:Key="S.Options.Donate.Paypal.OwnCurrency">打开 Paypal 网站。您必须选择货币</s:String>
-    <s:String x:Key="S.Options.Donate.Subscribe">订购</s:String>
+    <s:String x:Key="S.Options.Donate.Subscribe">订阅</s:String>
     <s:String x:Key="S.Options.Donate.Subscribe.Patreon">每月通过 Patreon 捐款。</s:String>
     <s:String x:Key="S.Options.Donate.Subscribe.Flattr">每月通过 Flattr 捐款。</s:String>
     <s:String x:Key="S.Options.Donate.Gift">礼品游戏</s:String>
@@ -439,8 +444,9 @@
     <s:String x:Key="S.Options.About.Technical.License">许可：</s:String>
     <s:String x:Key="S.Options.About.Technical.Free">（本应用完全免费）</s:String>
     <s:String x:Key="S.Options.About.Technical.SourceCode">源代码：</s:String>
+    <s:String x:Key="S.Options.About.Technical.Privacy">隐私政策：</s:String>
     <s:String x:Key="S.Options.About.ABigThanksTo">非常感谢</s:String>
-    <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">所有支持我、提供过反馈或捐助的人。</s:String>
+    <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">所有支持我提供过反馈及捐助的人 - 简体中文翻译 BY 大眼仔~旭（Anan）</s:String>
     
     <!--Localization-->
     <s:String x:Key="S.Localization">本地化</s:String>
@@ -566,7 +572,8 @@
     <s:String x:Key="S.ImportVideo.Frames">帧数：</s:String>
     <s:String x:Key="S.ImportVideo.Duration">持续时间：</s:String>
     <s:String x:Key="S.ImportVideo.Error">无法加载视频。</s:String>
-    <s:String x:Key="S.ImportVideo.Error.Detail">预览器无法启动。 请尝试与其他硬件开发商联系或检查视频是否未损坏。&#x0d;如果您使用的是 MediaPlayer，请检查 Windows 功能“ Media Features/Windows Media Player”是否已打开，并确保您具有必需的视频编解码器。</s:String>
+    <s:String x:Key="S.ImportVideo.Error.Detail">预览器无法启动。 请尝试与其他硬件开发商联系或检查视频是否未损坏。
+如果您使用的是 MediaPlayer，请检查 Windows 功能“ Media Features/Windows Media Player”是否已打开，并确保您具有必需的视频编解码器。</s:String>
     <s:String x:Key="S.ImportVideo.Timeout">获取帧预览超时。</s:String>
     <s:String x:Key="S.ImportVideo.Nothing">没有选择的帧将被导入。</s:String>
     
@@ -1216,13 +1223,14 @@
     <s:String x:Key="S.Feedback.Header">发送反馈</s:String>
     <s:String x:Key="S.Feedback.Title">标题*</s:String>
     <s:String x:Key="S.Feedback.Message">信息*</s:String>
+    <s:String x:Key="S.Feedback.Message.Info">如果您遇到错误，请别忘了一步一步地向我解释如何出现错误的原因。</s:String>
     <s:String x:Key="S.Feedback.Type">反馈类型</s:String>
     <s:String x:Key="S.Feedback.Suggestion">建议</s:String>
     <s:String x:Key="S.Feedback.IssueBug">问题/Bug</s:String>
-    <s:String x:Key="S.Feedback.IssueBug.Info">如果您遇到任何错误：不要忘记输入您的电子邮件。有时候我们无法知道问题发生的程度如何，我们需要更多细节。</s:String>
     <s:String x:Key="S.Feedback.YourEmail">您的电子邮件（可选）</s:String>
     <s:String x:Key="S.Feedback.Warning.Title">请输入反馈标题</s:String>
     <s:String x:Key="S.Feedback.Warning.Message">请输入反馈信息</s:String>
+    <s:String x:Key="S.Feedback.Warning.Email">您需要输入电子邮件，以接收开发人员的回复。</s:String>
     <s:String x:Key="S.Feedback.Sending">后台发送中... 此窗口将在稍后关闭。</s:String>
     <s:String x:Key="S.Feedback.Attachments">附件（可选，最大 20MB）</s:String>
     <s:String x:Key="S.Feedback.AddAttachments">添加附件</s:String>
