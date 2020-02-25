@@ -1,0 +1,118 @@
+﻿<n:RecorderWindow x:Class="ScreenToGif.Windows.NewRecorder"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:n="clr-namespace:ScreenToGif.Controls"
+                  xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
+                  xmlns:u="clr-namespace:ScreenToGif.Util"
+                  x:Name="RecorderWindow" Title="ScreenToGif" SnapsToDevicePixels="True" UseLayoutRounding="True" AllowsTransparency="True" 
+                  WindowStyle="None" Topmost="True" Icon="../Resources/Logo.ico" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize"
+                  Loaded="Window_Loaded" Closing="Window_Closing">
+
+    <Border Background="{DynamicResource Panel.Background}" BorderThickness="1" BorderBrush="{DynamicResource Element.Border.Weak}">
+        <Grid KeyboardNavigation.TabNavigation="Cycle">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="32"/>
+            </Grid.RowDefinitions>
+
+            <Grid.Resources>
+                <c:IntToString x:Key="IntToString"/>
+                <c:StageToCanvas x:Key="StageToCanvas"/>
+                <c:ShortcutKeys x:Key="ShortcutKeys"/>
+            </Grid.Resources>
+
+            <Grid.CommandBindings>
+                <CommandBinding Command="{StaticResource Command.Options}" CanExecute="Options_CanExecute" Executed="Options_Executed"/>
+                <!--<CommandBinding Command="{StaticResource Command.EnableSnapshot}" CanExecute="EnableSnapshot_CanExecute" Executed="EnableSnapshot_Executed"/>-->
+            </Grid.CommandBindings>
+
+            <Grid Grid.Row="0" x:Name="HeaderGrid" MouseLeftButtonDown="HeaderGrid_MouseLeftButtonDown">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="30"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" x:Name="CaptionText" Text="{Binding ElementName=RecorderWindow, Path=Title}" FontFamily="Segoe UI" FontSize="16" VerticalAlignment="Center"
+                           FontWeight="Regular" Margin="5,0,0,0" Foreground="{DynamicResource Element.Foreground.Header}" Effect="{DynamicResource Shadow.Foreground.Small}"/>
+
+                <TextBlock Grid.Column="1" x:Name="FrameCountTextBlock" Text="{Binding ElementName=RecorderWindow, Path=FrameCount, Converter={StaticResource IntToString}}" VerticalAlignment="Center"
+                           FontFamily="Segoe UI" FontSize="14" FontWeight="Regular" Margin="5,0,0,0" Foreground="{DynamicResource Element.Foreground.Header}" Effect="{DynamicResource Shadow.Foreground.Small}"/>
+
+                <n:ImageButton Grid.Column="2" x:Name="MinimizeButton" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Minimize}" 
+                               Width="30" Padding="6" TabIndex="0" Click="MinimizeButton_Click"/>
+                <n:ImageButton Grid.Column="3" x:Name="CloseButton" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Close}" 
+                               Width="30" Padding="6" TabIndex="1" Click="CloseButton_Click"/>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="26"/>
+                    <ColumnDefinition Width="32"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto" MaxWidth="50"/>
+                    <ColumnDefinition Width="Auto" MaxWidth="26"/>
+                    <ColumnDefinition Width="26"/>
+                    <ColumnDefinition Width="26"/>
+                </Grid.ColumnDefinitions>
+
+                <n:ImageButton Grid.Column="0" x:Name="OptionsButton" Content="{DynamicResource Vector.Options}" Margin="0" Padding="3" Command="{StaticResource Command.Options}"
+                               Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" ContentHeight="22"
+                               ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource S.StartUp.Options}"/>
+
+                <Viewbox Grid.Column="1" Stretch="UniformToFill" ClipToBounds="True" Focusable="False" Opacity="{DynamicResource Element.Opacity}"
+                         Visibility="{Binding Path=SnapshotMode, Source={x:Static u:UserSettings.All}}"
+                         ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource Recorder.FpsRange}">
+
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" FlowDirection="LeftToRight" Margin="-4">
+                        <n:CircularProgressBar StrokeThickness="2" Percentage="100" SegmentColor="Gray" Radius="24" IsTabStop="False"/>
+                        <n:CircularProgressBar StrokeThickness="22" Percentage="100" SegmentColor="#FFF0F1F1" Radius="10" IsTabStop="False"/>
+
+                        <n:CircularProgressBar StrokeThickness="2" Value="{Binding ElementName=FpsIntegerUpDown, Path=Value, Mode=OneWay}" 
+                                               IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="24" IsTabStop="False"/>
+                        <n:CircularProgressBar StrokeThickness="22" Value="{Binding ElementName=FpsIntegerUpDown, Path=Value, Mode=OneWay}" 
+                                               IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="10" IsTabStop="False"/>
+                    </Grid>
+                </Viewbox>
+
+                <n:IntegerUpDown Grid.Column="2" x:Name="FpsIntegerUpDown" Margin="1,3" StepValue="1" Minimum="1" Maximum="60" MinWidth="45" TabIndex="4"
+                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=LatestFps, Mode=TwoWay}"
+                                 Visibility="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}"
+                                 ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource Recorder.Fps}"/>
+
+                <Label Grid.Column="3" Content="{StaticResource Recorder.Fps.Short}" FontSize="12" FontFamily="Segoe UI" Margin="1,0,0,0" 
+                       VerticalContentAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}" 
+                       Visibility="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}"/>
+
+                <Separator Grid.Column="4" Width="1" Margin="5,2" HorizontalAlignment="Left"
+                           Visibility="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}"/>
+
+                <n:SplitButton Grid.Column="5" x:Name="ReselectSplitButton" Style="{StaticResource Style.SplitButton.NoBorder.NoText}" ContentHeight="20" Padding="3"
+                               SelectedIndex="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderModeIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                               Foreground="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderForeground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}">
+                    <n:ImageMenuItem Image="{StaticResource Vector.Crop}" Header="{DynamicResource S.Recorder.Area}" ContentHeight="16" ContentWidth="16" Click="RegionButton_Click"/>
+                    <n:ImageMenuItem Image="{StaticResource Vector.Application}" Header="{DynamicResource S.Recorder.Window}" ContentHeight="16" ContentWidth="16" Click="WindowButton_Click"/>
+                    <n:ImageMenuItem Image="{StaticResource Vector.Monitor}" Header="{DynamicResource S.Recorder.Screen}" ContentHeight="16" ContentWidth="16" Click="FullScreenButton_Click"/>
+                </n:SplitButton>
+
+                <n:ImageButton Grid.Column="6" x:Name="DiscardButton" Content="{DynamicResource Vector.Remove}" Visibility="Collapsed" 
+                               Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" 
+                               ContentHeight="20" Padding="3" ToolTip="{DynamicResource Recorder.Discard}" Click="DiscardButton_Click"/>
+
+                <n:ImageButton Grid.Column="7" x:Name="RecordPauseButton"
+                               Content="{Binding Stage, ElementName=RecorderWindow, Converter={StaticResource StageToCanvas}, FallbackValue={StaticResource Vector.Record}}" 
+                               Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}"
+                               KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='1'}"
+                               ContentHeight="20" Padding="3" Click="RecordPauseButton_Click"/>
+
+                <n:ImageButton Grid.Column="8" x:Name="StopButton" Content="{DynamicResource Vector.Stop}"
+                               Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}"
+                               KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='2'}"
+                               ContentHeight="20" Padding="3" ToolTip="{DynamicResource Recorder.Stop}" Click="StopButton_Click"/>
+            </Grid>
+        </Grid>
+    </Border>
+</n:RecorderWindow>

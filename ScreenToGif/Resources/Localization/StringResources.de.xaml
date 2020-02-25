@@ -114,19 +114,19 @@
     <s:String x:Key="S.Command.Remove">Ausgewähltes Element entfernen</s:String>
     
     <!--StartUp-->
-    <s:String x:Key="Title.StartUp">ScreenToGif - Start</s:String>
-    <s:String x:Key="Recorder">Rekorder</s:String>
-    <s:String x:Key="Webcam">Webcam</s:String>
-    <s:String x:Key="Board">Zeichenbrett</s:String>
-    <s:String x:Key="Editor">Editor</s:String>
-    <s:String x:Key="Options">Optionen</s:String>
-    <s:String x:Key="Help">Hilfe</s:String>
-    <s:String x:Key="NewRelease">Neue Version verfügbar • {0}</s:String>
-    <s:String x:Key="NewRelease.Tooltip">Lädt neueste Version von ScreenToGif herunter</s:String>
-    <s:String x:Key="Tooltip.Recorder">Startet Bildschirm-Rekorder, mit dem Sie Ihren Bildschirm aufnehmen können</s:String>
-    <s:String x:Key="Tooltip.Webcam">Startet Webcam-Rekorder, mit dem Sie Webcam-Videos aufnehmen können</s:String>
-    <s:String x:Key="Tooltip.Board">Startet Zeichenbrett-Rekorder, mit dem Sie Ihre Zeichnungen aufnehmen können</s:String>
-    <s:String x:Key="Tooltip.Editor">Öffnet Editor, mit dem Sie Ihre Aufnahmen bearbeiten können</s:String>
+    <s:String x:Key="S.StartUp.Title">ScreenToGif - Start</s:String>
+    <s:String x:Key="S.StartUp.Recorder">Rekorder</s:String>
+    <s:String x:Key="S.StartUp.Webcam">Webcam</s:String>
+    <s:String x:Key="S.StartUp.Board">Zeichenbrett</s:String>
+    <s:String x:Key="S.StartUp.Editor">Editor</s:String>
+    <s:String x:Key="S.StartUp.Options">Optionen</s:String>
+    <s:String x:Key="S.Editor.Help">Hilfe</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">Neue Version verfügbar • {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease.Tooltip">Lädt neueste Version von ScreenToGif herunter</s:String>
+    <s:String x:Key="S.StartUp.Recorder.Tooltip">Startet Bildschirm-Rekorder, mit dem Sie Ihren Bildschirm aufnehmen können</s:String>
+    <s:String x:Key="S.StartUp.Webcam.Tooltip">Startet Webcam-Rekorder, mit dem Sie Webcam-Videos aufnehmen können</s:String>
+    <s:String x:Key="S.StartUp.Board.Tooltip">Startet Zeichenbrett-Rekorder, mit dem Sie Ihre Zeichnungen aufnehmen können</s:String>
+    <s:String x:Key="S.StartUp.Editor.Tooltip">Öffnet Editor, mit dem Sie Ihre Aufnahmen bearbeiten können</s:String>
 
     <!--Update Window-->
     <s:String x:Key="Update">Neue Version verfügbar</s:String>

@@ -109,19 +109,19 @@
     <s:String x:Key="S.Command.Remove">Rimuovi elemento selezionato</s:String>
     
     <!--StartUp-->
-    <s:String x:Key="Title.StartUp">ScreenToGif - Schermata iniziale</s:String>
-    <s:String x:Key="Recorder">Registratore</s:String>
-    <s:String x:Key="Webcam">Webcam</s:String>
-    <s:String x:Key="Board">Lavagna</s:String>
-    <s:String x:Key="Editor">Editor</s:String>
-    <s:String x:Key="Options">Impostazioni</s:String>
-    <s:String x:Key="Help">Aiuto</s:String>
-    <s:String x:Key="NewRelease">Nuova versione disponibile • {0}</s:String>
-    <s:String x:Key="NewRelease.Tooltip">Scarica l'ultima versione di ScreenToGif.</s:String>
-    <s:String x:Key="Tooltip.Recorder">Apre il registratore dello schermo, tramite il quale è possibile iniziare a registrare lo schermo con semplicità.</s:String>
-    <s:String x:Key="Tooltip.Webcam">Apre il registratore della webcam.</s:String>
-    <s:String x:Key="Tooltip.Board">Apre il registratore lavagna, tramite il quale è possibile registrare i propri disegni.</s:String>
-    <s:String x:Key="Tooltip.Editor">Apre la finestra dell'editor, la parte principale di questa app, tramite la quale è possibile avviare e modificare una nuova registrazione.</s:String>
+    <s:String x:Key="S.StartUp.Title">ScreenToGif - Schermata iniziale</s:String>
+    <s:String x:Key="S.StartUp.Recorder">Registratore</s:String>
+    <s:String x:Key="S.StartUp.Webcam">Webcam</s:String>
+    <s:String x:Key="S.StartUp.Board">Lavagna</s:String>
+    <s:String x:Key="S.StartUp.Editor">Editor</s:String>
+    <s:String x:Key="S.StartUp.Options">Impostazioni</s:String>
+    <s:String x:Key="S.Editor.Help">Aiuto</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">Nuova versione disponibile • {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease.Tooltip">Scarica l'ultima versione di ScreenToGif.</s:String>
+    <s:String x:Key="S.StartUp.Recorder.Tooltip">Apre il registratore dello schermo, tramite il quale è possibile iniziare a registrare lo schermo con semplicità.</s:String>
+    <s:String x:Key="S.StartUp.Webcam.Tooltip">Apre il registratore della webcam.</s:String>
+    <s:String x:Key="S.StartUp.Board.Tooltip">Apre il registratore lavagna, tramite il quale è possibile registrare i propri disegni.</s:String>
+    <s:String x:Key="S.StartUp.Editor.Tooltip">Apre la finestra dell'editor, la parte principale di questa app, tramite la quale è possibile avviare e modificare una nuova registrazione.</s:String>
 
     <!--Update Window-->
     <s:String x:Key="Update">Aggiorna</s:String>

@@ -464,6 +464,12 @@ namespace ScreenToGif.Util
 
         #region Options • Application
         
+        public bool SingleInstance
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }   
+        
         public bool StartMinimized
         {
             get => (bool)GetValue();

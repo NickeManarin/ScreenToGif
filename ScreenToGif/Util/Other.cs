@@ -488,6 +488,19 @@ namespace ScreenToGif.Util
 
         #region Dependencies
 
+        /// <summary>
+        /// When dealing with relative paths, the app will fails to point to the right folder when starting it via the "Open with..." or automatic startup methods.
+        /// </summary>
+        public static string AdjustPath(string path)
+        {
+            //If the path is relative, File.Exists() was returning C:\\Windows\\System32\ffmpeg.exe when the app was lauched from the "Open with" context menu.
+            //So, in order to get the correct location, I need to combine the current base directory with the relative path.
+            if (!string.IsNullOrWhiteSpace(path) && !Path.IsPathRooted(path))
+                return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar));
+
+            return path;
+        }
+
         public static bool IsFfmpegPresent(bool ignoreEnvironment = false, bool ignoreEmpty = false)
         {
             var realPath = UserSettings.All.FfmpegLocation;
@@ -642,6 +655,22 @@ namespace ScreenToGif.Util
             #endregion
 
             return false;
+        }
+
+        public static void LoadSharpDx()
+        {
+            var realPath = UserSettings.All.SharpDxLocationFolder ?? "";
+
+            //So, in order to get the correct location, I need to combine the current base directory with the relative path.
+            if (!string.IsNullOrWhiteSpace(UserSettings.All.SharpDxLocationFolder) && !Path.IsPathRooted(UserSettings.All.SharpDxLocationFolder))
+                realPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, UserSettings.All.SharpDxLocationFolder.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar));
+
+            if (string.IsNullOrEmpty(realPath) || realPath == ".")
+                return;
+            
+            Assembly.LoadFrom(Path.Combine(realPath, "SharpDX.dll"));
+            Assembly.LoadFrom(Path.Combine(realPath, "SharpDX.DXGI.dll"));
+            Assembly.LoadFrom(Path.Combine(realPath, "SharpDX.Direct3D11.dll"));
         }
 
         #endregion

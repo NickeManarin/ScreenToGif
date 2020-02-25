@@ -4,7 +4,7 @@
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
         xmlns:u="clr-namespace:ScreenToGif.Util"
-        Title="{DynamicResource S.Options.Title}" Height="530" Width="790" MinWidth="680" MinHeight="460" Background="{DynamicResource Panel.Background}"
+        Title="{DynamicResource S.Options.Title}" Height="580" Width="790" MinWidth="680" MinHeight="460" Background="{DynamicResource Panel.Background}"
         Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" UseLayoutRounding="True" SnapsToDevicePixels="True"
         Loaded="Window_Loaded" Closing="Window_Closing">
 
@@ -75,7 +75,7 @@
             <ScrollViewer Grid.Row="1" Grid.Column="1" VerticalScrollBarVisibility="Auto">
                 <Grid>
                     <!--Application-->
-                    <Grid x:Name="ApplicationPanel" Visibility="{Binding IsChecked, ElementName=AppRadio, Converter={StaticResource Bool2Visibility}}">
+                    <Grid x:Name="ApplicationPanel" Visibility="{Binding IsChecked, ElementName=AppRadio, Converter={StaticResource Bool2Visibility}}" Loaded="ApplicationPanel_Loaded">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -84,6 +84,36 @@
 
                         <Expander Grid.Row="0" Header="{DynamicResource S.Options.App.Startup}" IsExpanded="True">
                             <StackPanel>
+                                <WrapPanel Margin="0,0,5,5" HorizontalAlignment="Center">
+                                    <Grid x:Name="StartupModeGrid">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <n:ImageRadioButton Grid.Column="0" x:Name="StartManuallyCheckBox" ContentWidth="40" Text="{DynamicResource S.Options.App.Startup.Mode.Manual}" Padding="5" IsChecked="True"
+                                                            Content="{StaticResource Vector.Cursor}" ToolTip="{DynamicResource S.Options.App.Startup.Mode.Manual.Info}"/>
+
+                                        <n:ImageRadioButton Grid.Column="1" x:Name="StartAutomaticallyCheckBox" ContentWidth="40" Text="{DynamicResource S.Options.App.Startup.Mode.Automatic}" Padding="5"
+                                                            Content="{StaticResource Vector.Play}" ToolTip="{DynamicResource S.Options.App.Startup.Mode.Automatic.Info}" 
+                                                            Checked="StartAutomaticallyCheckBox_Checked" Unchecked="StartAutomaticallyCheckBox_Unchecked"/>
+                                    </Grid>
+
+                                    <Separator Width="1" Margin="3"/>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <n:ImageRadioButton Grid.Column="0" ContentWidth="40" Text="{DynamicResource S.Options.App.Startup.Instance.Single}" Padding="5" Content="{StaticResource Vector.View}" 
+                                                            IsChecked="{Binding Path=SingleInstance, Mode=TwoWay}" ToolTip="{DynamicResource S.Options.App.Startup.Instance.Single.Info}"/>
+                                        <n:ImageRadioButton Grid.Column="1" ContentWidth="40" Text="{DynamicResource S.Options.App.Startup.Instance.Multiple}" Padding="5" Content="{StaticResource Vector.Views}" 
+                                                            IsChecked="{Binding Path=SingleInstance, Mode=TwoWay, Converter={StaticResource InvertedBool}}" ToolTip="{DynamicResource S.Options.App.Startup.Instance.Multiple.Info}"/>
+                                    </Grid>
+                                </WrapPanel>
+                                
                                 <WrapPanel Margin="10,0,5,0">
                                     <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.Startup.Tray}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=StartMinimized, Mode=TwoWay}" Checked="StartCheckBox_Checked"/>
                                     <TextBlock Text="{DynamicResource S.Options.App.Startup.Tray.Info}" Padding="0" Margin="5,0,0,3" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
@@ -418,7 +448,7 @@
                     </Grid>
 
                     <!--Interface-->
-                    <StackPanel x:Name="InterfacePanel" Visibility="{Binding IsChecked, ElementName=InterfaceRadio, Converter={StaticResource Bool2Visibility}}" Loaded="InterfacePanel_OnLoaded">
+                    <StackPanel x:Name="InterfacePanel" Visibility="{Binding IsChecked, ElementName=InterfaceRadio, Converter={StaticResource Bool2Visibility}}" Loaded="InterfacePanel_Loaded">
                         <n:LabelSeparator Text="{DynamicResource S.Options.Interface.Theme}" Margin="0,0,0,5"/>
                         <Grid Margin="10,0,0,0">
                             <Grid.ColumnDefinitions>

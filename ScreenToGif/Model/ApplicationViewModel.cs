@@ -74,6 +74,7 @@ namespace ScreenToGif.Model
                         if (UserSettings.All.NewRecorder)
                         {
                             var recorderNew = new RecorderNew();
+                            //var recorderNew = new NewRecorder();
                             recorderNew.Closed += (sender, args) =>
                             {
                                 var window = sender as RecorderNew;
@@ -474,11 +475,10 @@ namespace ScreenToGif.Model
 
                 if (project != null)
                     editor.LoadProject(project, true, false);
-
-                editor.Activate();
             }
 
             Application.Current.MainWindow = editor;
+            editor.Activate();
         }
 
         private void CloseOrNot()

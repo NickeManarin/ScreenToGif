@@ -1185,7 +1185,7 @@
 
                         <Menu Grid.Row="0" Grid.Column="2" Effect="{x:Null}" Background="Transparent" VerticalAlignment="Center">
                             <n:ImageMenuItem x:Name="ExtrasMenuItem" Header="{DynamicResource S.Editor.Extras}" Image="{DynamicResource Vector.Editor}" ContentHeight="16" ContentWidth="16" BorderThickness="0">
-                                <n:ImageMenuItem x:Name="OptionsMenuItem" Header="{DynamicResource Options}" Image="{DynamicResource Vector.Options}" 
+                                <n:ImageMenuItem x:Name="OptionsMenuItem" Header="{DynamicResource S.StartUp.Options}" Image="{DynamicResource Vector.Options}" 
                                                  ContentHeight="16" ContentWidth="16" Command="{TemplateBinding OptionsCommand}"/>
                                 <n:ImageMenuItem x:Name="FeedbackMenuItem" Header="{DynamicResource S.Feedback.Feedback}" Image="{DynamicResource Vector.Application}" 
                                                  ContentHeight="16" ContentWidth="16" Command="{TemplateBinding FeedbackCommand}"/>
@@ -2426,6 +2426,52 @@
 
                             <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" x:Name="ZoomTextBlock" Foreground="AliceBlue" Text="X: 1 Y: 2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </Grid>
+
+                        <!--<Grid x:Name="RectGrid" Height="Auto" Width="Auto" Background="#60000000" Grid.ZIndex="9" Visibility="Hidden">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="0" x:Name="MoveSizeWidgetGrid">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="20"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0" Padding="3,2" Text="Selection"/>
+                                <n:ImageButton Grid.Column="1" x:Name="CloseSizeWidgetButton" Content="{DynamicResource Vector.Cancel}" Style="{DynamicResource Style.Button.NoText.White}" Padding="2"/>
+                            </Grid>
+
+                            <Grid Grid.Row="1" Background="#20000000">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Row="0" Grid.Column="0" Padding="3,2" Text="Left:" VerticalAlignment="Center"/>
+                                <n:IntegerBox Grid.Row="0" Grid.Column="1" Margin="2,1" MinWidth="60" HorizontalAlignment="Stretch" UpdateOnInput="False"
+                                              Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Left}"/>
+
+                                <TextBlock Grid.Row="1" Grid.Column="0" Padding="3,2" Text="Top:" VerticalAlignment="Center"/>
+                                <n:IntegerBox Grid.Row="1" Grid.Column="1" Margin="2,1" MinWidth="60" HorizontalAlignment="Stretch" UpdateOnInput="False"
+                                              Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Top}"/>
+
+                                <TextBlock Grid.Row="2" Grid.Column="0" Padding="3,2" Text="Width:" VerticalAlignment="Center"/>
+                                <n:IntegerBox Grid.Row="2" Grid.Column="1" Margin="2,1" MinWidth="60" HorizontalAlignment="Stretch" UpdateOnInput="False"
+                                              Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Width, Mode=TwoWay}"/>
+
+                                <TextBlock Grid.Row="3" Grid.Column="0" Padding="3,2" Text="Height:" VerticalAlignment="Center"/>
+                                <n:IntegerBox Grid.Row="3" Grid.Column="1" Margin="2,1" MinWidth="60" HorizontalAlignment="Stretch" UpdateOnInput="False"
+                                              Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Height, Mode=TwoWay}"/>
+                            </Grid>
+                        </Grid>-->
                     </Canvas>
 
                     <ControlTemplate.Triggers>
@@ -2456,6 +2502,202 @@
         </Setter>
     </Style>
 
+    <Style TargetType="{x:Type n:SelectControl2}">
+        <Setter Property="Background" Value="#30000000"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="BorderBrush" Value="White"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type n:SelectControl2}">
+                    <Canvas x:Name="MainCanvas" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                        <Canvas.Resources>
+                            <Storyboard x:Key="StrokeDashStoryboard" x:Name="StrokeDashStoryboard">
+                                <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="MainPath" Storyboard.TargetProperty="(Shape.StrokeDashOffset)" RepeatBehavior="Forever">
+                                    <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                                    <SplineDoubleKeyFrame KeyTime="00:00:00.6000000" Value="10"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </Canvas.Resources>
+
+                        <Canvas.Triggers>
+                            <EventTrigger RoutedEvent="n:SelectControl.Loaded">
+                                <BeginStoryboard Storyboard="{StaticResource StrokeDashStoryboard}"/>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="n:SelectControl.SelectionAccepted">
+                                <StopStoryboard BeginStoryboardName="StrokeDashStoryboard"/>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="n:SelectControl.SelectionCanceled">
+                                <StopStoryboard BeginStoryboardName="StrokeDashStoryboard"/>
+                            </EventTrigger>
+                        </Canvas.Triggers>
+
+                        <Path x:Name="MainPath" Grid.ZIndex="0" StrokeDashArray="5" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}" 
+                              Fill="{TemplateBinding Background}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                            <Path.Data>
+                                <CombinedGeometry GeometryCombineMode="Exclude">
+                                    <CombinedGeometry.Geometry1>
+                                        <RectangleGeometry x:Name="ExternalRect">
+                                            <RectangleGeometry.Rect>
+                                                <MultiBinding Converter="{StaticResource IntToRect}">
+                                                    <Binding RelativeSource="{RelativeSource Mode=TemplatedParent}" Path="ActualWidth" Mode="OneWay" UpdateSourceTrigger="PropertyChanged"/>
+                                                    <Binding RelativeSource="{RelativeSource Mode=TemplatedParent}" Path="ActualHeight" Mode="OneWay" UpdateSourceTrigger="PropertyChanged"/>
+                                                </MultiBinding>
+                                            </RectangleGeometry.Rect>
+                                        </RectangleGeometry>
+                                    </CombinedGeometry.Geometry1>
+                                    <CombinedGeometry.Geometry2>
+                                        <RectangleGeometry x:Name="InternalRect">
+                                            <RectangleGeometry.Rect>
+                                                <MultiBinding Converter="{StaticResource IntToRect}">
+                                                    <Binding RelativeSource="{RelativeSource Mode=TemplatedParent}" Path="Selected.Width" Mode="OneWay" UpdateSourceTrigger="PropertyChanged"/>
+                                                    <Binding RelativeSource="{RelativeSource Mode=TemplatedParent}" Path="Selected.Height" Mode="OneWay" UpdateSourceTrigger="PropertyChanged"/>
+                                                    <Binding RelativeSource="{RelativeSource Mode=TemplatedParent}" Path="Selected.X" Mode="OneWay" UpdateSourceTrigger="PropertyChanged"/>
+                                                    <Binding RelativeSource="{RelativeSource Mode=TemplatedParent}" Path="Selected.Y" Mode="OneWay" UpdateSourceTrigger="PropertyChanged"/>
+                                                </MultiBinding>
+                                            </RectangleGeometry.Rect>
+                                        </RectangleGeometry>
+                                    </CombinedGeometry.Geometry2>
+                                </CombinedGeometry>
+                            </Path.Data>
+                        </Path>
+
+                        <Rectangle x:Name="SelectRectangle" Fill="#20FFFFFF" Grid.ZIndex="1"
+                                   Canvas.Left="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Left}" Canvas.Top="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Top}"
+                                   Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Width}" Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Height}"/>
+
+                        <n:ExtendedUniformGrid x:Name="StatusControlGrid" Columns="3" Cursor="Arrow" Visibility="Hidden" Grid.ZIndex="9" Background="{DynamicResource Element.Background}">
+                            <n:ImageButton x:Name="AcceptButton" Text="{DynamicResource S.Recorder.Accept}" ContentWidth="24" ContentHeight="24" Style="{DynamicResource Style.Button.Horizontal.White}" Content="{DynamicResource Vector.Ok}" 
+                                           ToolTip="Enter" ToolTipService.Placement="Bottom" Height="30" Padding="4"/>
+
+                            <n:ImageButton x:Name="RetryButton" Text="{DynamicResource S.Recorder.Retry}" ContentWidth="24" ContentHeight="24" Style="{DynamicResource Style.Button.Horizontal.White}" Content="{DynamicResource Vector.Synchronize}" 
+                                           ToolTip="Right-Click" ToolTipService.Placement="Bottom" Height="30" Padding="4"/>
+
+                            <n:ImageButton x:Name="CancelButton" Text="{DynamicResource Cancel}" ContentWidth="24" ContentHeight="24" Style="{DynamicResource Style.Button.Horizontal.White}" Content="{DynamicResource Vector.Cancel}" 
+                                           ToolTip="Esc" ToolTipService.Placement="Bottom" Height="30" Padding="4"/>
+                        </n:ExtendedUniformGrid>
+
+                        <TextBlock x:Name="SizeTextBlock" Grid.ZIndex="1" FontSize="18" Foreground="White" Background="#60000000" Padding="2,0"
+                                   VerticalAlignment="Center" HorizontalAlignment="Center" IsHitTestVisible="False" Visibility="Hidden">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} × {1}">
+                                    <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="NonExpandedSelection.Width" UpdateSourceTrigger="PropertyChanged"/>
+                                    <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="NonExpandedSelection.Height" UpdateSourceTrigger="PropertyChanged"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+
+                        <Thumb Grid.ZIndex="2" x:Name="TopLeftThumb" Style="{DynamicResource ScrollBar.Thumb}" Height="10" Width="10" Cursor="SizeNWSE" Visibility="Collapsed"/>
+                        <Thumb Grid.ZIndex="2" x:Name="TopRightThumb" Style="{DynamicResource ScrollBar.Thumb}" Height="10" Width="10" Cursor="SizeNESW" Visibility="Collapsed"/>
+                        <Thumb Grid.ZIndex="2" x:Name="BottomLeftThumb" Style="{DynamicResource ScrollBar.Thumb}" Height="10" Width="10" Cursor="SizeNESW" Visibility="Collapsed"/>
+                        <Thumb Grid.ZIndex="2" x:Name="BottomRightThumb" Style="{DynamicResource ScrollBar.Thumb}" Height="10" Width="10" Cursor="SizeNWSE" Visibility="Collapsed"/>
+
+                        <Thumb Grid.ZIndex="2" x:Name="TopThumb" Style="{DynamicResource ScrollBar.Thumb}" Height="10" Width="10" Cursor="SizeNS" Visibility="Collapsed"/>
+                        <Thumb Grid.ZIndex="2" x:Name="BottomThumb" Style="{DynamicResource ScrollBar.Thumb}" Height="10" Width="10" Cursor="SizeNS" Visibility="Collapsed"/>
+                        <Thumb Grid.ZIndex="2" x:Name="LeftThumb" Style="{DynamicResource ScrollBar.Thumb}" Height="10" Width="10" Cursor="SizeWE" Visibility="Collapsed"/>
+                        <Thumb Grid.ZIndex="2" x:Name="RightThumb" Style="{DynamicResource ScrollBar.Thumb}" Height="10" Width="10" Cursor="SizeWE" Visibility="Collapsed"/>
+
+                        <Grid x:Name="ZoomGrid" Height="140" Width="120" Background="#60000000" Visibility="Hidden" Grid.ZIndex="8">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="2"/>
+                                <RowDefinition/>
+                                <RowDefinition Height="20"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="2"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="3" x:Name="CroppedImage" Stretch="UniformToFill" 
+                                   RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Unspecified" UseLayoutRounding="True"/>
+
+                            <Rectangle Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Height="2" Stroke="#6020FF00" StrokeThickness="2"/>
+                            <Rectangle Grid.Row="1" Grid.Column="2" Height="2" Stroke="#6020FF00" StrokeThickness="2"/>
+                            <Rectangle Grid.Row="0" Grid.Column="1" Width="2" Stroke="#6020FF00" StrokeThickness="2"/>
+                            <Rectangle Grid.Row="2" Grid.Column="1" Width="2" Stroke="#6020FF00" StrokeThickness="2"/>
+
+                            <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" x:Name="ZoomTextBlock" Foreground="AliceBlue" Text="X: 1 Y: 2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Grid>
+
+                        <!--<Grid x:Name="RectGrid" Height="Auto" Width="Auto" Background="#60000000" Grid.ZIndex="9" Visibility="Hidden">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="0" x:Name="MoveSizeWidgetGrid">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="20"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0" Padding="3,2" Text="Selection"/>
+                                <n:ImageButton Grid.Column="1" x:Name="CloseSizeWidgetButton" Content="{DynamicResource Vector.Cancel}" Style="{DynamicResource Style.Button.NoText.White}" Padding="2"/>
+                            </Grid>
+
+                            <Grid Grid.Row="1" Background="#20000000">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Row="0" Grid.Column="0" Padding="3,2" Text="Left:" VerticalAlignment="Center"/>
+                                <n:IntegerBox Grid.Row="0" Grid.Column="1" Margin="2,1" MinWidth="60" HorizontalAlignment="Stretch" UpdateOnInput="False"
+                                              Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Left}"/>
+
+                                <TextBlock Grid.Row="1" Grid.Column="0" Padding="3,2" Text="Top:" VerticalAlignment="Center"/>
+                                <n:IntegerBox Grid.Row="1" Grid.Column="1" Margin="2,1" MinWidth="60" HorizontalAlignment="Stretch" UpdateOnInput="False"
+                                              Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Top}"/>
+
+                                <TextBlock Grid.Row="2" Grid.Column="0" Padding="3,2" Text="Width:" VerticalAlignment="Center"/>
+                                <n:IntegerBox Grid.Row="2" Grid.Column="1" Margin="2,1" MinWidth="60" HorizontalAlignment="Stretch" UpdateOnInput="False"
+                                              Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Width, Mode=TwoWay}"/>
+
+                                <TextBlock Grid.Row="3" Grid.Column="0" Padding="3,2" Text="Height:" VerticalAlignment="Center"/>
+                                <n:IntegerBox Grid.Row="3" Grid.Column="1" Margin="2,1" MinWidth="60" HorizontalAlignment="Stretch" UpdateOnInput="False"
+                                              Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Selected.Height, Mode=TwoWay}"/>
+                            </Grid>
+                        </Grid>-->
+                    </Canvas>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="FinishedSelection" Value="True">
+                            <Setter TargetName="TopLeftThumb" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="TopRightThumb" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="BottomLeftThumb" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="BottomRightThumb" Property="Visibility" Value="Visible"/>
+
+                            <Setter TargetName="TopThumb" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="BottomThumb" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="LeftThumb" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="RightThumb" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="Mode" Value="Region">
+                            <Setter TargetName="MainCanvas" Property="Cursor" Value="Cross"/>
+                            <Setter TargetName="SelectRectangle" Property="Cursor" Value="SizeAll"/>
+                        </Trigger>
+                        <Trigger Property="Mode" Value="Window">
+                            <Setter TargetName="SelectRectangle" Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                        <Trigger Property="Mode" Value="Fullscreen">
+                            <Setter TargetName="SelectRectangle" Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
     <!--MoveResizeControl Style-->
     <Style TargetType="{x:Type n:MoveResizeControl}">
         <Setter Property="BorderBrush" Value="White"/>

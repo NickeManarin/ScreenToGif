@@ -70,7 +70,7 @@ namespace ScreenToGif.Windows.Other
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            //TODO: Check for memmory leaks.
+            //TODO: Check for memory leaks.
 
             foreach (var tokenSource in CancellationTokenList)
                 tokenSource.Cancel();
@@ -84,13 +84,9 @@ namespace ScreenToGif.Windows.Other
             foreach (var item in EncodingListView.Items.Cast<EncoderListViewItem>().Where(item => item.Status == Status.Completed || item.Status == Status.FileDeletedOrMoved))
             {
                 if (!File.Exists(item.OutputFilename))
-                {
                     SetStatus(Status.FileDeletedOrMoved, item.Id);
-                }
                 else if (item.Status == Status.FileDeletedOrMoved)
-                {
                     SetStatus(Status.Completed, item.Id, item.OutputPath);
-                }
             }
         }
 
@@ -123,9 +119,8 @@ namespace ScreenToGif.Windows.Other
 
         private void EncoderItem_CancelClicked(object sender, RoutedEventArgs args)
         {
-            var item = sender as EncoderListViewItem;
-
-            if (item == null) return;
+            if (!(sender is EncoderListViewItem item)) 
+                return;
 
             if (item.Status != Status.Processing)
             {

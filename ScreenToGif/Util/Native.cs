@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -1098,6 +1099,23 @@ namespace ScreenToGif.Util
             DibPalColors = 1
         }
 
+        internal enum ShowWindowEnum
+        {
+            Hide = 0,
+            ShowNormal = 1,
+            ShowMinimized = 2,
+            ShowMaximized = 3, //Same value as Maximize.
+            Maximize = 3,
+            ShowNormalNoActivate = 4,
+            Show = 5,
+            Minimize = 6,
+            ShowMinNoActivate = 7,
+            ShowNoActivate = 8,
+            Restore = 9,
+            ShowDefault = 10,
+            ForceMinimized = 11
+        }
+
         #endregion
 
         #region Functions
@@ -1622,6 +1640,9 @@ namespace ScreenToGif.Util
         [DllImport("user32.dll")]
         public static extern bool SetForegroundWindow(IntPtr hWnd);
 
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static extern bool ShowWindow(IntPtr hWnd, ShowWindowEnum flags);
 
         /// <summary>
         /// Gets the maximum number of milliseconds that can elapse between a
@@ -1642,12 +1663,12 @@ namespace ScreenToGif.Util
 
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern IntPtr LocalFree(IntPtr hMem);
-
+        
         #endregion
 
         internal delegate bool MonitorEnumProc(IntPtr monitor, IntPtr hdc, IntPtr lprcMonitor, IntPtr lParam);
 
-        private delegate bool EnumWindowsProc(IntPtr hWnd, int lParam);
+        private delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam);
 
         #region Methods
 
@@ -1954,7 +1975,7 @@ namespace ScreenToGif.Util
             var windows = new List<DetectedRegion>();
 
             //EnumWindows(delegate (IntPtr handle, int lParam)
-            EnumDesktopWindows(IntPtr.Zero, delegate (IntPtr handle, int lParam)
+            EnumDesktopWindows(IntPtr.Zero, delegate (IntPtr handle, IntPtr lParam)
             {
                 if (handle == shellWindow)
                     return true;
@@ -2240,6 +2261,51 @@ namespace ScreenToGif.Util
             return ptr;
         }
 
+        /// <summary>
+        /// Gets all first level window handles from a given process.
+        /// The windows must be visible.
+        /// </summary>
+        internal static List<IntPtr> GetWindowHandlesFromProcess(Process process)
+        {
+            var list = new List<IntPtr>();
+
+            //Each thread can create a window.
+            foreach (ProcessThread info in process.Threads)
+            {
+                //With given thread ID, search for windows.
+                var windows = GetWindowHandlesForThread((IntPtr)info.Id);
+
+                if (windows != null)
+                    list.AddRange(windows);
+            }
+
+            return list;
+        }
+
+        private static IntPtr[] GetWindowHandlesForThread(IntPtr threadHandle)
+        {
+            var results = new List<IntPtr>();
+
+            //Enumerate all top level desktop windows.
+            EnumWindows(delegate(IntPtr window, IntPtr thread)
+            {
+                //Get the ID of the thread that created the window.
+                var threadId = GetWindowThreadProcessId(window, out var _);
+
+                //Check if the selected thread created this window.
+                if ((IntPtr)threadId != thread)
+                    return true;
+
+                if (!IsWindowVisible(window))
+                    return true;
+
+                results.Add(window);
+                return true;
+            }, threadHandle);
+
+            return results.ToArray();
+        }
+        
         #endregion
     }
 
@@ -2506,6 +2572,8 @@ namespace ScreenToGif.Util
         public string Name { get; private set; }
 
         public int Dpi { get; private set; }
+        
+        public double Scale => Dpi / 96d;
 
         public bool IsPrimary { get; private set; }
 
@@ -2530,8 +2598,7 @@ namespace ScreenToGif.Util
 
             try
             {
-                uint aux = 0;
-                Native.GetDpiForMonitor(monitor, Native.DpiType.Effective, out aux, out aux);
+                Native.GetDpiForMonitor(monitor, Native.DpiType.Effective, out var aux, out _);
                 Dpi = aux > 0 ? (int)aux : 96;
             }
             catch (Exception)
@@ -2571,6 +2638,30 @@ namespace ScreenToGif.Util
             {
                 monitor.Bounds = new Rect(monitor.Bounds.X / scale, monitor.Bounds.Y / scale, monitor.Bounds.Width / scale, monitor.Bounds.Height / scale);
                 monitor.WorkingArea = new Rect(monitor.WorkingArea.X / scale, monitor.WorkingArea.Y / scale, monitor.WorkingArea.Width / scale, monitor.WorkingArea.Height / scale);
+            }
+
+            return monitors;
+        }
+
+        public static List<Monitor> AllMonitorsGranular(bool offset = false)
+        {
+            var monitors = AllMonitors;
+
+            if (offset)
+            {
+                foreach (var monitor in monitors)
+                {
+                    monitor.Bounds = new Rect(monitor.Bounds.X - SystemParameters.VirtualScreenLeft, monitor.Bounds.Y / monitor.Scale - SystemParameters.VirtualScreenTop, monitor.Bounds.Width / monitor.Scale, monitor.Bounds.Height / monitor.Scale);
+                    monitor.WorkingArea = new Rect(monitor.WorkingArea.X / monitor.Scale - SystemParameters.VirtualScreenLeft, monitor.WorkingArea.Y / monitor.Scale - SystemParameters.VirtualScreenTop, monitor.WorkingArea.Width / monitor.Scale, monitor.WorkingArea.Height / monitor.Scale);
+                }
+
+                return monitors;
+            }
+
+            foreach (var monitor in monitors)
+            {
+                monitor.Bounds = new Rect(monitor.Bounds.X / monitor.Scale, monitor.Bounds.Y / monitor.Scale, monitor.Bounds.Width / monitor.Scale, monitor.Bounds.Height / monitor.Scale);
+                monitor.WorkingArea = new Rect(monitor.WorkingArea.X / monitor.Scale, monitor.WorkingArea.Y / monitor.Scale, monitor.WorkingArea.Width / monitor.Scale, monitor.WorkingArea.Height / monitor.Scale);
             }
 
             return monitors;

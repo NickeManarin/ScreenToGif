@@ -109,19 +109,19 @@
     <s:String x:Key="S.Command.Remove">删除所选项目</s:String>
     
     <!--StartUp-->
-    <s:String x:Key="Title.StartUp">ScreenToGif - 启动</s:String>
-    <s:String x:Key="Recorder">录像机</s:String>
-    <s:String x:Key="Webcam">摄像头</s:String>
-    <s:String x:Key="Board">画板</s:String>
-    <s:String x:Key="Editor">编辑器</s:String>
-    <s:String x:Key="Options">选项</s:String>
-    <s:String x:Key="Help">帮助</s:String>
-    <s:String x:Key="NewRelease">新版本可用 • {0}</s:String>
-    <s:String x:Key="NewRelease.Tooltip">下载最新版本的 ScreenToGif。</s:String>
-    <s:String x:Key="Tooltip.Recorder">打开屏幕录像机，您可以在其中轻松开始录制屏幕。</s:String>
-    <s:String x:Key="Tooltip.Webcam">打开摄像头录像机。</s:String>
-    <s:String x:Key="Tooltip.Board">打开画板录像机，您可以在其中录制您的绘图。</s:String>
-    <s:String x:Key="Tooltip.Editor">打开编辑器窗口，您可以在其中开始或编辑新的录制视频。</s:String>
+    <s:String x:Key="S.StartUp.Title">ScreenToGif - 启动</s:String>
+    <s:String x:Key="S.StartUp.Recorder">录像机</s:String>
+    <s:String x:Key="S.StartUp.Webcam">摄像头</s:String>
+    <s:String x:Key="S.StartUp.Board">画板</s:String>
+    <s:String x:Key="S.StartUp.Editor">编辑器</s:String>
+    <s:String x:Key="S.StartUp.Options">选项</s:String>
+    <s:String x:Key="S.Editor.Help">帮助</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">新版本可用 • {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease.Tooltip">下载最新版本的 ScreenToGif。</s:String>
+    <s:String x:Key="S.StartUp.Recorder.Tooltip">打开屏幕录像机，您可以在其中轻松开始录制屏幕。</s:String>
+    <s:String x:Key="S.StartUp.Webcam.Tooltip">打开摄像头录像机。</s:String>
+    <s:String x:Key="S.StartUp.Board.Tooltip">打开画板录像机，您可以在其中录制您的绘图。</s:String>
+    <s:String x:Key="S.StartUp.Editor.Tooltip">打开编辑器窗口，您可以在其中开始或编辑新的录制视频。</s:String>
 
     <!--Update Window-->
     <s:String x:Key="Update">更新</s:String>

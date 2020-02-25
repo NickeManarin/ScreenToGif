@@ -249,7 +249,7 @@
                 <n:ImageButton x:Name="OptionsButton" Content="{StaticResource Vector.Options}" Style="{StaticResource Style.Button.NoText}" 
                                Effect="{StaticResource Shadow.Foreground.Small}" MaxSize="20" Command="{StaticResource Command.Options}" Padding="3" TabIndex="0">
                     <n:ImageButton.ToolTip>
-                        <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Options}"/>
+                        <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource S.StartUp.Options}"/>
                     </n:ImageButton.ToolTip>
                 </n:ImageButton>
 

@@ -39,19 +39,19 @@
     <s:String x:Key="S.Required">Trường yêu cầu.</s:String>
     
     <!--StartUp Page-->
-    <s:String x:Key="Title.StartUp">ScreenToGif - Bắt đầu</s:String>
-    <s:String x:Key="Recorder">Quay</s:String>
-    <s:String x:Key="Webcam">Webcam</s:String>
-    <s:String x:Key="Board">Bảng</s:String>
-    <s:String x:Key="Editor">Chỉnh sửa</s:String>
-    <s:String x:Key="Options">Các tùy chọn</s:String>
-    <s:String x:Key="Help">Trợ giúp</s:String>
-    <s:String x:Key="NewRelease">Phát hành mới đã sẵn sàng • {0}</s:String>
-    <s:String x:Key="NewRelease.Tooltip">Tải về phiên bản mới nhất của ScreenToGif.</s:String>
-    <s:String x:Key="Tooltip.Recorder">Mở quay màn hình, nơi bạn có thể dễ dàng bắt đầu quay màn hình của bạn.</s:String>
-    <s:String x:Key="Tooltip.Webcam">Mở ghi hình webcam.</s:String>
-    <s:String x:Key="Tooltip.Board">Mở bảng ghi, nơi bạn có thể bắt đầu quay màn hình các hình vẽ của mình.</s:String>
-    <s:String x:Key="Tooltip.Editor">Mở cửa sổ chỉnh sửa, trung tâm của ứng dụng này, nơi bạn có thể bắt đầu và chỉnh sửa quay màn hình mới.</s:String>
+    <s:String x:Key="S.StartUp.Title">ScreenToGif - Bắt đầu</s:String>
+    <s:String x:Key="S.StartUp.Recorder">Quay</s:String>
+    <s:String x:Key="S.StartUp.Webcam">Webcam</s:String>
+    <s:String x:Key="S.StartUp.Board">Bảng</s:String>
+    <s:String x:Key="S.StartUp.Editor">Chỉnh sửa</s:String>
+    <s:String x:Key="S.StartUp.Options">Các tùy chọn</s:String>
+    <s:String x:Key="S.Editor.Help">Trợ giúp</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">Phát hành mới đã sẵn sàng • {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease.Tooltip">Tải về phiên bản mới nhất của ScreenToGif.</s:String>
+    <s:String x:Key="S.StartUp.Recorder.Tooltip">Mở quay màn hình, nơi bạn có thể dễ dàng bắt đầu quay màn hình của bạn.</s:String>
+    <s:String x:Key="S.StartUp.Webcam.Tooltip">Mở ghi hình webcam.</s:String>
+    <s:String x:Key="S.StartUp.Board.Tooltip">Mở bảng ghi, nơi bạn có thể bắt đầu quay màn hình các hình vẽ của mình.</s:String>
+    <s:String x:Key="S.StartUp.Editor.Tooltip">Mở cửa sổ chỉnh sửa, trung tâm của ứng dụng này, nơi bạn có thể bắt đầu và chỉnh sửa quay màn hình mới.</s:String>
 
     <!--Update Window-->
     <s:String x:Key="Update">Cập nhật</s:String>

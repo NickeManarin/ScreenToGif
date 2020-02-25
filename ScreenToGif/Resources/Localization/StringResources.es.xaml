@@ -18,19 +18,19 @@
     <s:String x:Key="Preview">Previsualizar</s:String>
 
     <!--StartUp Page-->
-    <s:String x:Key="Title.StartUp">ScreenToGif - Inicio</s:String>
-    <s:String x:Key="Recorder">Grabar</s:String>
-    <s:String x:Key="Webcam">Webcam</s:String>
-    <s:String x:Key="Board">Tablero</s:String>
-    <s:String x:Key="Editor">Editor</s:String>
-    <s:String x:Key="Options">Opciones</s:String>
-    <s:String x:Key="Help">Ayuda</s:String>
-    <s:String x:Key="NewRelease">Nueva modificación disponible  • {0}</s:String>
-    <s:String x:Key="NewRelease.Tooltip">Descargar la última version de ScreenToGif</s:String>
-    <s:String x:Key="Tooltip.Recorder">Abrir la grabacion de pantalla, para iniciar facilmente la captura de tu pantalla.</s:String>
-    <s:String x:Key="Tooltip.Webcam">Abrir la grabacion de la webcam.</s:String>
-    <s:String x:Key="Tooltip.Board">Abrir la grabacion de tablero, para iniciar la grabacion de tus dibujos.</s:String>
-    <s:String x:Key="Tooltip.Editor">Abrir la ventana de edición, el punto central de esta app, donde editaras tus grabaciones.</s:String>
+    <s:String x:Key="S.StartUp.Title">ScreenToGif - Inicio</s:String>
+    <s:String x:Key="S.StartUp.Recorder">Grabar</s:String>
+    <s:String x:Key="S.StartUp.Webcam">Webcam</s:String>
+    <s:String x:Key="S.StartUp.Board">Tablero</s:String>
+    <s:String x:Key="S.StartUp.Editor">Editor</s:String>
+    <s:String x:Key="S.StartUp.Options">Opciones</s:String>
+    <s:String x:Key="S.Editor.Help">Ayuda</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">Nueva modificación disponible  • {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease.Tooltip">Descargar la última version de ScreenToGif</s:String>
+    <s:String x:Key="S.StartUp.Recorder.Tooltip">Abrir la grabacion de pantalla, para iniciar facilmente la captura de tu pantalla.</s:String>
+    <s:String x:Key="S.StartUp.Webcam.Tooltip">Abrir la grabacion de la webcam.</s:String>
+    <s:String x:Key="S.StartUp.Board.Tooltip">Abrir la grabacion de tablero, para iniciar la grabacion de tus dibujos.</s:String>
+    <s:String x:Key="S.StartUp.Editor.Tooltip">Abrir la ventana de edición, el punto central de esta app, donde editaras tus grabaciones.</s:String>
 
     <!--Update Page-->
     <s:String x:Key="Update">Actualizar</s:String>

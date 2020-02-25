@@ -18,18 +18,18 @@
     <s:String x:Key="Preview">Попередній перегляд</s:String>
 
     <!--StartUp Page-->
-    <s:String x:Key="Title.StartUp">ScreenToGif - Запуск</s:String>
-    <s:String x:Key="Recorder">Запис</s:String>
-    <s:String x:Key="Webcam">Вебкамера</s:String>
-    <s:String x:Key="Board">Дошка</s:String>
-    <s:String x:Key="Editor">Редактор</s:String>
-    <s:String x:Key="Options">Налаштування</s:String>
-    <!--<s:String x:Key="Help">Help</s:String>-->
-    <s:String x:Key="NewRelease">Доступна нова версія • {0}</s:String>
-    <s:String x:Key="Tooltip.Recorder">Відкрити вікно, де ви можете легко почати запис з вашого екрану.</s:String>
-    <s:String x:Key="Tooltip.Webcam">Відкрити вікно запису з вебкамери.</s:String>
-    <s:String x:Key="Tooltip.Board">Відкрити дошку, де ви можете легко почати запис ваших малюнків.</s:String>
-    <s:String x:Key="Tooltip.Editor">Відкрити вікно редактора, головна частина програми, де ви можете почати і редагувати новий запис.</s:String>
+    <s:String x:Key="S.StartUp.Title">ScreenToGif - Запуск</s:String>
+    <s:String x:Key="S.StartUp.Recorder">Запис</s:String>
+    <s:String x:Key="S.StartUp.Webcam">Вебкамера</s:String>
+    <s:String x:Key="S.StartUp.Board">Дошка</s:String>
+    <s:String x:Key="S.StartUp.Editor">Редактор</s:String>
+    <s:String x:Key="S.StartUp.Options">Налаштування</s:String>
+    <!--<s:String x:Key="S.Editor.Help">Help</s:String>-->
+    <s:String x:Key="S.StartUp.NewRelease">Доступна нова версія • {0}</s:String>
+    <s:String x:Key="S.StartUp.Recorder.Tooltip">Відкрити вікно, де ви можете легко почати запис з вашого екрану.</s:String>
+    <s:String x:Key="S.StartUp.Webcam.Tooltip">Відкрити вікно запису з вебкамери.</s:String>
+    <s:String x:Key="S.StartUp.Board.Tooltip">Відкрити дошку, де ви можете легко почати запис ваших малюнків.</s:String>
+    <s:String x:Key="S.StartUp.Editor.Tooltip">Відкрити вікно редактора, головна частина програми, де ви можете почати і редагувати новий запис.</s:String>
 
     <!--Update Page-->
     <s:String x:Key="Update">Доступна нова версія • {0}</s:String>

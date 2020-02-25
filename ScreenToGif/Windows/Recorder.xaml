@@ -5,13 +5,13 @@
                xmlns:u="clr-namespace:ScreenToGif.Util"
                xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
                Title="ScreenToGif" SnapsToDevicePixels="True" UseLayoutRounding="True" AllowsTransparency="True" WindowStyle="None" 
-               Topmost="True" Icon="../Resources/Logo.ico" Child="{StaticResource Vector.Back}"
+               Topmost="True" Icon="../Resources/Logo.ico"
                IsThin="{Binding RecorderThinMode, Source={x:Static u:UserSettings.All}}"
                IsFollowing="{Binding CursorFollowing, Source={x:Static u:UserSettings.All}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                Width="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderWidth, Mode=TwoWay}" 
                Height="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderHeight, Mode=TwoWay}" 
                FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}"
-               SizeChanged="Window_SizeChanged" Loaded="Window_Loaded" Closing="Window_Closing" 
+               Loaded="Window_Loaded" SizeChanged="Window_SizeChanged" Closing="Window_Closing" 
                LocationChanged="Window_LocationChanged" Activated="Window_Activated" DpiChanged="Window_DpiChanged">
 
     <Window.Resources>
@@ -135,7 +135,7 @@
                 <n:ImageButton x:Name="OptionsButton" Content="{StaticResource Vector.Options}" Margin="0" Style="{StaticResource Style.Button.NoText}" 
                                ContentHeight="20" ContentWidth="20" Command="{StaticResource Command.Options}" Padding="3" TabIndex="3">
                     <n:ImageButton.ToolTip>
-                        <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Options}"/>
+                        <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource S.StartUp.Options}"/>
                     </n:ImageButton.ToolTip>
                 </n:ImageButton>
 

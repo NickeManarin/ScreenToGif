@@ -163,7 +163,7 @@ namespace ScreenToGif.Windows.Other
                         left = Canvas.GetLeft(newRecorder.MainBorder) + newRecorder.Left;
                         width = newRecorder.MainBorder.ActualWidth;
                         height = newRecorder.MainBorder.ActualHeight;
-                        title = LocalizationHelper.Get("Recorder");
+                        title = LocalizationHelper.Get("S.StartUp.Recorder");
                     }
                     
                     minLeft = Math.Min(minLeft, left);
@@ -223,7 +223,7 @@ namespace ScreenToGif.Windows.Other
                             {
                                 VerticalAlignment = VerticalAlignment.Center,
                                 Padding = new Thickness(2),
-                                Text = LocalizationHelper.Get("Recorder")
+                                Text = LocalizationHelper.Get("S.StartUp.Recorder")
                             }
                         }
                     };
@@ -255,7 +255,7 @@ namespace ScreenToGif.Windows.Other
                             {
                                 VerticalAlignment = VerticalAlignment.Center,
                                 Padding = new Thickness(2),
-                                Text = LocalizationHelper.Get("Recorder") + " 2",
+                                Text = LocalizationHelper.Get("S.StartUp.Recorder") + " 2",
                                 Foreground = TryFindResource("Element.Foreground") as SolidColorBrush ?? Brushes.Black,
                             }
                         }
@@ -290,7 +290,7 @@ namespace ScreenToGif.Windows.Other
                             {
                                 VerticalAlignment = VerticalAlignment.Center,
                                 Padding = new Thickness(2),
-                                Text = LocalizationHelper.Get("Editor"),
+                                Text = LocalizationHelper.Get("S.StartUp.Editor"),
                                 Foreground = TryFindResource("Element.Foreground") as SolidColorBrush ?? Brushes.Black,
                             }
                         }
@@ -323,7 +323,7 @@ namespace ScreenToGif.Windows.Other
                             {
                                 VerticalAlignment = VerticalAlignment.Center,
                                 Padding = new Thickness(2),
-                                Text = (LocalizationHelper.Get("Title.StartUp") ?? "").Remove("ScreenToGif - "),
+                                Text = (LocalizationHelper.Get("S.StartUp.Title") ?? "").Remove("ScreenToGif - "),
                                 Foreground = TryFindResource("Element.Foreground") as SolidColorBrush ?? Brushes.Black,
                             }
                         }

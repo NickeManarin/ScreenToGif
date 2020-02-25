@@ -38,19 +38,19 @@
     <s:String x:Key="S.Crash">Ufa, el programa se cerró inesperadamente :(</s:String>
     
     <!--StartUp Page-->
-    <s:String x:Key="Title.StartUp">ScreenToGif: Inicio</s:String>
-    <s:String x:Key="Recorder">Grabador</s:String>
-    <s:String x:Key="Webcam">Webcam</s:String>
-    <s:String x:Key="Board">Pizarra</s:String>
-    <s:String x:Key="Editor">Editor</s:String>
-    <s:String x:Key="Options">Configuración</s:String>
-    <s:String x:Key="Help">Ayuda</s:String>
-    <s:String x:Key="NewRelease">Nuevo lanzamiento disponible • {0}</s:String>
-    <s:String x:Key="NewRelease.Tooltip">Descarga la última versión de ScreenToGif.</s:String>
-    <s:String x:Key="Tooltip.Recorder">Abre el grabador de pantalla, en donde podés comenzar a grabar tu pantalla fácilmente.</s:String>
-    <s:String x:Key="Tooltip.Webcam">Abre el grabador de webcam.</s:String>
-    <s:String x:Key="Tooltip.Board">Abre el grabador de pizarra, en donde podés comenzar a grabar tus dibujos.</s:String>
-    <s:String x:Key="Tooltip.Editor">Abre la ventana del editor, el punto central de esta aplicación, en donde podés iniciar y editar una nueva grabación.</s:String>
+    <s:String x:Key="S.StartUp.Title">ScreenToGif - Inicio</s:String>
+    <s:String x:Key="S.StartUp.Recorder">Grabador</s:String>
+    <s:String x:Key="S.StartUp.Webcam">Webcam</s:String>
+    <s:String x:Key="S.StartUp.Board">Pizarra</s:String>
+    <s:String x:Key="S.StartUp.Editor">Editor</s:String>
+    <s:String x:Key="S.StartUp.Options">Configuración</s:String>
+    <s:String x:Key="S.Editor.Help">Ayuda</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">Nuevo lanzamiento disponible • {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease.Tooltip">Descarga la última versión de ScreenToGif.</s:String>
+    <s:String x:Key="S.StartUp.Recorder.Tooltip">Abre el grabador de pantalla, en donde podés comenzar a grabar tu pantalla fácilmente.</s:String>
+    <s:String x:Key="S.StartUp.Webcam.Tooltip">Abre el grabador de webcam.</s:String>
+    <s:String x:Key="S.StartUp.Board.Tooltip">Abre el grabador de pizarra, en donde podés comenzar a grabar tus dibujos.</s:String>
+    <s:String x:Key="S.StartUp.Editor.Tooltip">Abre la ventana del editor, el punto central de esta aplicación, en donde podés iniciar y editar una nueva grabación.</s:String>
 
     <!--Update Window-->
     <s:String x:Key="Update">Actualizar</s:String>

@@ -18,18 +18,18 @@
     <s:String x:Key="Preview">預覽</s:String>
 
     <!--StartUp Page-->
-    <s:String x:Key="Title.StartUp">ScreenToGif - 啟動</s:String>
-    <s:String x:Key="Recorder">螢幕錄影</s:String>
-    <s:String x:Key="Webcam">網路攝影機錄影</s:String>
-    <s:String x:Key="Board">繪圖板錄影</s:String>
-    <s:String x:Key="Editor">編輯器</s:String>
-    <s:String x:Key="Options">選項</s:String>
-    <s:String x:Key="Help">說明</s:String>
-    <s:String x:Key="NewRelease">有新版本 • {0} 可用</s:String>
-    <s:String x:Key="Tooltip.Recorder">啟動螢幕錄影功能，輕鬆錄製您的螢幕畫面。</s:String>
-    <s:String x:Key="Tooltip.Webcam">啟動網路攝影機錄影功能，輕鬆錄製您網路攝影機裡的影像。</s:String>
-    <s:String x:Key="Tooltip.Board">啟動繪圖板錄影功能，輕鬆錄製您繪圖的過程。</s:String>
-    <s:String x:Key="Tooltip.Editor">打開編輯器視窗，在該視窗中您可以編輯新錄製的影像。</s:String>
+    <s:String x:Key="S.StartUp.Title">ScreenToGif - 啟動</s:String>
+    <s:String x:Key="S.StartUp.Recorder">螢幕錄影</s:String>
+    <s:String x:Key="S.StartUp.Webcam">網路攝影機錄影</s:String>
+    <s:String x:Key="S.StartUp.Board">繪圖板錄影</s:String>
+    <s:String x:Key="S.StartUp.Editor">編輯器</s:String>
+    <s:String x:Key="S.StartUp.Options">選項</s:String>
+    <s:String x:Key="S.Editor.Help">說明</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">有新版本 • {0} 可用</s:String>
+    <s:String x:Key="S.StartUp.Recorder.Tooltip">啟動螢幕錄影功能，輕鬆錄製您的螢幕畫面。</s:String>
+    <s:String x:Key="S.StartUp.Webcam.Tooltip">啟動網路攝影機錄影功能，輕鬆錄製您網路攝影機裡的影像。</s:String>
+    <s:String x:Key="S.StartUp.Board.Tooltip">啟動繪圖板錄影功能，輕鬆錄製您繪圖的過程。</s:String>
+    <s:String x:Key="S.StartUp.Editor.Tooltip">打開編輯器視窗，在該視窗中您可以編輯新錄製的影像。</s:String>
 
     <!--Update Page-->
     <s:String x:Key="Update">更新</s:String>

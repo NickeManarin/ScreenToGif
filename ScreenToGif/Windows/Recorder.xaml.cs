@@ -230,7 +230,7 @@ namespace ScreenToGif.Windows
             {
                 IsFollowing = false;
 
-                Dialog.Ok(LocalizationHelper.Get("Recorder"), LocalizationHelper.Get("S.Options.Warning.Follow.Header"),
+                Dialog.Ok(LocalizationHelper.Get("S.StartUp.Recorder"), LocalizationHelper.Get("S.Options.Warning.Follow.Header"),
                     LocalizationHelper.Get("S.Options.Warning.Follow.Message"), Icons.Warning);
             }
         }
@@ -557,7 +557,7 @@ namespace ScreenToGif.Windows
 
             var wasSnapshot = UserSettings.All.SnapshotMode;
 
-            var options = new Options();
+            var options = new Options(Options.RecorderIndex);
             options.ShowDialog();
 
             //Enables or disables the snapshot mode.
@@ -939,7 +939,7 @@ namespace ScreenToGif.Windows
                 else
                     Normal_Elapsed(null, null);
 
-                if (limit > 5)
+                if (limit > 10)
                 {
                     ErrorDialog.Ok(Title, LocalizationHelper.Get("S.Recorder.Warning.CaptureNotPossible"), LocalizationHelper.Get("S.Recorder.Warning.CaptureNotPossible.Info"), null);
                     return;
@@ -1201,6 +1201,8 @@ namespace ScreenToGif.Windows
                 //Check if SharpDx is available.
                 if (!Util.Other.IsSharpDxPresent())
                     throw new Exception(LocalizationHelper.Get("S.Recorder.Warning.MissingSharpDx"));
+
+                Util.Other.LoadSharpDx();
 
                 _capture = GetDirectCapture();
             }

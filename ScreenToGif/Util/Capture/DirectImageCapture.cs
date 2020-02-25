@@ -29,7 +29,7 @@ namespace ScreenToGif.Util.Capture
         protected internal Device Device;
 
         /// <summary>
-        /// The dektop duplication interface.
+        /// The desktop duplication interface.
         /// </summary>
         protected internal OutputDuplication DuplicatedOutput;
 
@@ -321,6 +321,8 @@ namespace ScreenToGif.Util.Capture
                 {
                     //Gets the cursor shape if the screen hasn't changed in between, so the cursor will be available for the next frame.
                     GetCursor(null, info, frame);
+
+                    resource.Dispose();
                     return FrameCount;
                 }
 
@@ -413,13 +415,17 @@ namespace ScreenToGif.Util.Capture
             {
                 try
                 {
-                    //Only release the frame if there was a sucess in capturing it.
+                    //Only release the frame if there was a success in capturing it.
                     if (res.Success)
                         DuplicatedOutput.ReleaseFrame();
                 }
                 catch (Exception e)
                 {
                     LogWriter.Log(e, "It was not possible to release the frame.");
+
+                    //TODO: Check if necessary
+                    DisposeInternal();
+                    Initialize();
                 }
             }
         }
@@ -511,7 +517,7 @@ namespace ScreenToGif.Util.Capture
 
             //Get cursor details and draw it to the staging texture.
             DrawCursorShape(CursorStagingTexture, CursorShapeInfo, CursorShapeBuffer, offsetX, offsetY);
-
+            
             //Copy back the cursor texture to the screen texture.
             Device.ImmediateContext.CopySubresourceRegion(CursorStagingTexture, 0, null, screenTexture, 0, left, top);
         }

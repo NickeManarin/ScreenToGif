@@ -484,8 +484,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:ImageButton}">
-                    <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
-                        <Grid x:Name="InnerGrid">
+                    <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Grid x:Name="InnerGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                             <Viewbox x:Name="ViewBoxInternal" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="{TemplateBinding IsEnabled}"
                                      Margin="{TemplateBinding Padding}" Width="{TemplateBinding ContentWidth}" Height="{TemplateBinding ContentHeight}" Stretch="Uniform" StretchDirection="Both" Effect="{x:Null}">
                                 <ContentPresenter ContentSource="{TemplateBinding Content}" Opacity="{DynamicResource Element.Opacity}"/>

@@ -41,6 +41,7 @@ namespace ScreenToGif.Windows.Other
             CancelButton.Visibility = Visibility.Collapsed;
             YesButton.Visibility = Visibility.Collapsed;
             NoButton.Visibility = Visibility.Collapsed;
+            DetailsButton.Visibility = Exception != null ? Visibility.Visible : Visibility.Collapsed;
 
             OkButton.Focus();
 
@@ -55,6 +56,7 @@ namespace ScreenToGif.Windows.Other
         {
             YesButton.Visibility = Visibility.Collapsed;
             NoButton.Visibility = Visibility.Collapsed;
+            DetailsButton.Visibility = Exception != null ? Visibility.Visible : Visibility.Collapsed;
 
             CancelButton.Focus();
 
@@ -69,6 +71,7 @@ namespace ScreenToGif.Windows.Other
         {
             CancelButton.Visibility = Visibility.Collapsed;
             OkButton.Visibility = Visibility.Collapsed;
+            DetailsButton.Visibility = Exception != null ? Visibility.Visible : Visibility.Collapsed;
 
             NoButton.Focus();
 

@@ -49,6 +49,7 @@
     <!--<s:String x:Key="LatestFeedbackEmail"></s:String>-->
     
     <!--Options • Application-->
+    <s:Boolean x:Key="SingleInstance">True</s:Boolean>
     <s:Boolean x:Key="StartMinimized">False</s:Boolean>
     <s:Int32 x:Key="StartUp">0</s:Int32>
     <s:Boolean x:Key="NotifyFrameDeletion">True</s:Boolean>

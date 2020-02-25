@@ -193,6 +193,7 @@
     <Compile Include="Controls\Ribbon\RibbonGroup.cs" />
     <Compile Include="Controls\Ribbon\RibbonItem.cs" />
     <Compile Include="Controls\Ribbon\RibbonTab.cs" />
+    <Compile Include="Controls\SelectControl2.cs" />
     <Compile Include="Controls\Shapes\Arrow.cs" />
     <Compile Include="Controls\Shapes\Triangle.cs" />
     <Compile Include="Controls\SplitButton.cs" />
@@ -229,11 +230,11 @@
     <Compile Include="Controls\ZoomBox.cs" />
     <Compile Include="ImageUtil\Apng\Apng.cs" />
     <Compile Include="ImageUtil\Apng\Chunks\ActlChunk.cs" />
+    <Compile Include="ImageUtil\Apng\Chunks\ApngFrame.cs" />
     <Compile Include="ImageUtil\Apng\Chunks\Chunk.cs" />
     <Compile Include="ImageUtil\Apng\Chunks\FctlChunk.cs" />
     <Compile Include="ImageUtil\Apng\Chunks\FdatChunk.cs" />
     <Compile Include="ImageUtil\Apng\Chunks\IdatChunk.cs" />
-    <Compile Include="ImageUtil\Apng\Chunks\IendChunk.cs" />
     <Compile Include="ImageUtil\Apng\Chunks\IhdrChunk.cs" />
     <Compile Include="ImageUtil\Gif\Encoder\GifFile.cs" />
     <Compile Include="ImageUtil\Gif\LegacyEncoder\AnimatedGifEncoder.cs" />
@@ -337,6 +338,7 @@
     <Compile Include="Util\Capture\DirectImageCapture.cs" />
     <Compile Include="Util\Capture\ICapture.cs" />
     <Compile Include="Util\Capture\CachedCapture.cs" />
+    <Compile Include="Util\Capture\RegionSelectHelper.cs" />
     <Compile Include="Util\ComboBoxItemTemplateSelector.cs" />
     <Compile Include="Util\Converters\ContentToVisibility.cs" />
     <Compile Include="Util\Converters\InvertedIntToVisibility.cs" />
@@ -456,6 +458,9 @@
     <Compile Include="Windows\EditorEx.xaml.cs">
       <DependentUpon>EditorEx.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\NewRecorder.xaml.cs">
+      <DependentUpon>NewRecorder.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Other\FfmpegPresetDialog.xaml.cs">
       <DependentUpon>FfmpegPresetDialog.xaml</DependentUpon>
     </Compile>
@@ -506,6 +511,12 @@
     </Compile>
     <Compile Include="Windows\Options.xaml.cs">
       <DependentUpon>Options.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Other\RegionSelection.xaml.cs">
+      <DependentUpon>RegionSelection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Other\RegionSelector.xaml.cs">
+      <DependentUpon>RegionSelector.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Other\SelectFolderDialog.xaml.cs">
       <DependentUpon>SelectFolderDialog.xaml</DependentUpon>
@@ -737,6 +748,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\NewRecorder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\Other\FfmpegPresetDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -802,6 +817,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Options.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Other\RegionSelection.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Other\RegionSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -94,7 +94,7 @@
                            Style="{StaticResource Style.Button.NoText}" Effect="{StaticResource Shadow.Background.Small}"
                            HorizontalContentAlignment="Center" ContentHeight="20" Padding="3" Command="{StaticResource Command.Options}">
                 <n:ImageButton.ToolTip>
-                    <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Options}"/>
+                    <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource S.StartUp.Options}"/>
                 </n:ImageButton.ToolTip>
             </n:ImageButton>
 

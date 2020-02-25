@@ -102,19 +102,19 @@
     <s:String x:Key="S.Command.Remove">선택된 것들 삭제하기</s:String>
     
     <!--StartUp Page-->
-    <s:String x:Key="Title.StartUp">ScreenToGif - 시작</s:String>
-    <s:String x:Key="Recorder">녹화</s:String>
-    <s:String x:Key="Webcam">웹캠</s:String>
-    <s:String x:Key="Board">칠판</s:String>
-    <s:String x:Key="Editor">편집기</s:String>
-    <s:String x:Key="Options">설정</s:String>
-    <s:String x:Key="Help">도움말</s:String>
-    <s:String x:Key="NewRelease">사용 가능한 새 릴리스 • {0}</s:String>
-    <s:String x:Key="NewRelease.Tooltip">ScreenToGif의 최신 버전을 다운로드합니다.</s:String>
-    <s:String x:Key="Tooltip.Recorder">화면을 손쉽게 녹화할 수 있는 화면 녹화기를 시작합니다.</s:String>
-    <s:String x:Key="Tooltip.Webcam">웹캠 녹화기를 시작합니다.</s:String>
-    <s:String x:Key="Tooltip.Board">그림 그리는 과정을 녹화할 수 있는 칠판 녹화기를 시작합니다.</s:String>
-    <s:String x:Key="Tooltip.Editor">편집기를 시작합니다.</s:String>
+    <s:String x:Key="S.StartUp.Title">ScreenToGif - 시작</s:String>
+    <s:String x:Key="S.StartUp.Recorder">녹화</s:String>
+    <s:String x:Key="S.StartUp.Webcam">웹캠</s:String>
+    <s:String x:Key="S.StartUp.Board">칠판</s:String>
+    <s:String x:Key="S.StartUp.Editor">편집기</s:String>
+    <s:String x:Key="S.StartUp.Options">설정</s:String>
+    <s:String x:Key="S.Editor.Help">도움말</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">사용 가능한 새 릴리스 • {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease.Tooltip">ScreenToGif의 최신 버전을 다운로드합니다.</s:String>
+    <s:String x:Key="S.StartUp.Recorder.Tooltip">화면을 손쉽게 녹화할 수 있는 화면 녹화기를 시작합니다.</s:String>
+    <s:String x:Key="S.StartUp.Webcam.Tooltip">웹캠 녹화기를 시작합니다.</s:String>
+    <s:String x:Key="S.StartUp.Board.Tooltip">그림 그리는 과정을 녹화할 수 있는 칠판 녹화기를 시작합니다.</s:String>
+    <s:String x:Key="S.StartUp.Editor.Tooltip">편집기를 시작합니다.</s:String>
 
     <!--Update Window-->
     <s:String x:Key="Update">업데이트</s:String>

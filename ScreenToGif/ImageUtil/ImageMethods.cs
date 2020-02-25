@@ -780,9 +780,7 @@ namespace ScreenToGif.ImageUtil
         public static FrameMetadata GetFrameMetadata(BitmapDecoder decoder, GifFile gifMetadata, int frameIndex)
         {
             if (gifMetadata != null && gifMetadata.Frames.Count > frameIndex)
-            {
                 return GetFrameMetadata(gifMetadata.Frames[frameIndex]);
-            }
 
             return GetFrameMetadata(decoder.Frames[frameIndex]);
         }
@@ -827,13 +825,13 @@ namespace ScreenToGif.ImageUtil
 
             var gce = gifMetadata.Extensions.OfType<GifGraphicControlExtension>().FirstOrDefault();
 
-            if (gce != null)
-            {
-                if (gce.Delay != 0)
-                    frameMetadata.Delay = TimeSpan.FromMilliseconds(gce.Delay);
+            if (gce == null) 
+                return frameMetadata;
 
-                frameMetadata.DisposalMethod = (FrameDisposalMethod)gce.DisposalMethod;
-            }
+            if (gce.Delay != 0)
+                frameMetadata.Delay = TimeSpan.FromMilliseconds(gce.Delay);
+
+            frameMetadata.DisposalMethod = (FrameDisposalMethod)gce.DisposalMethod;
 
             return frameMetadata;
         }
@@ -873,10 +871,7 @@ namespace ScreenToGif.ImageUtil
 
         public static bool IsFullFrame(FrameMetadata metadata, System.Drawing.Size fullSize)
         {
-            return metadata.Left == 0
-                   && metadata.Top == 0
-                   && metadata.Width == fullSize.Width
-                   && metadata.Height == fullSize.Height;
+            return metadata.Left == 0 && metadata.Top == 0 && metadata.Width == fullSize.Width && metadata.Height == fullSize.Height;
         }
 
         public static BitmapSource ClearArea(BitmapSource frame, FrameMetadata metadata)
@@ -981,9 +976,7 @@ namespace ScreenToGif.ImageUtil
             {
                 //Recreate the frame from the MemoryStream
                 using (var bmp = new Bitmap(ms))
-                {
-                    return (Bitmap)bmp.Clone();
-                }
+                    return (Bitmap) bmp.Clone();
             }
         }
 
@@ -1173,6 +1166,30 @@ namespace ScreenToGif.ImageUtil
         public static BitmapSource SourceFrom(this string fileSource, int? size = null)
         {
             using (var stream = new FileStream(fileSource, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            {
+                var bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+
+                if (size.HasValue)
+                    bitmapImage.DecodePixelHeight = size.Value;
+
+                bitmapImage.StreamSource = stream;
+                bitmapImage.EndInit();
+                bitmapImage.Freeze(); //Just in case you want to load the image in another thread
+                return bitmapImage;
+            }
+        }
+
+        /// <summary>
+        /// Gets the BitmapSource from the source and closes the file usage.
+        /// </summary>
+        /// <param name="array">The array to open.</param>
+        /// <param name="size">The maximum height of the image.</param>
+        /// <returns>The open BitmapSource.</returns>
+        public static BitmapSource SourceFrom(this byte[] array, int? size = null)
+        {
+            using (var stream = new MemoryStream(array))
             {
                 var bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();

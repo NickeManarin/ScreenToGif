@@ -109,19 +109,19 @@
     <s:String x:Key="S.Command.Remove">Удалить выбранный элемент</s:String>
     
     <!--StartUp-->
-    <s:String x:Key="Title.StartUp">ScreenToGif - Запуск</s:String>
-    <s:String x:Key="Recorder">Запись</s:String>
-    <s:String x:Key="Webcam">Веб-камера</s:String>
-    <s:String x:Key="Board">Доска</s:String>
-    <s:String x:Key="Editor">Редактор</s:String>
-    <s:String x:Key="Options">Настройки</s:String>
-    <s:String x:Key="Help">Справка</s:String>
-    <s:String x:Key="NewRelease">Доступна новая версия: {0}</s:String>
-    <s:String x:Key="NewRelease.Tooltip">Загрузка последней версии программы.</s:String>
-    <s:String x:Key="Tooltip.Recorder">Запись с экрана, легкий старт.</s:String>
-    <s:String x:Key="Tooltip.Webcam">Запись с веб-камеры.</s:String>
-    <s:String x:Key="Tooltip.Board">Запись с доски, рисуйте и записывайте.</s:String>
-    <s:String x:Key="Tooltip.Editor">Редактор, здесь можно начать новую запись или редактировать существующую.</s:String>
+    <s:String x:Key="S.StartUp.Title">ScreenToGif - Запуск</s:String>
+    <s:String x:Key="S.StartUp.Recorder">Запись</s:String>
+    <s:String x:Key="S.StartUp.Webcam">Веб-камера</s:String>
+    <s:String x:Key="S.StartUp.Board">Доска</s:String>
+    <s:String x:Key="S.StartUp.Editor">Редактор</s:String>
+    <s:String x:Key="S.StartUp.Options">Настройки</s:String>
+    <s:String x:Key="S.Editor.Help">Справка</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">Доступна новая версия: {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease.Tooltip">Загрузка последней версии программы.</s:String>
+    <s:String x:Key="S.StartUp.Recorder.Tooltip">Запись с экрана, легкий старт.</s:String>
+    <s:String x:Key="S.StartUp.Webcam.Tooltip">Запись с веб-камеры.</s:String>
+    <s:String x:Key="S.StartUp.Board.Tooltip">Запись с доски, рисуйте и записывайте.</s:String>
+    <s:String x:Key="S.StartUp.Editor.Tooltip">Редактор, здесь можно начать новую запись или редактировать существующую.</s:String>
 
     <!--Update Window-->
     <s:String x:Key="Update">Обновление</s:String>

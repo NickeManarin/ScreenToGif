@@ -27,6 +27,9 @@
     <s:String x:Key="S.Warning.Net.Title">Dependência Ausente</s:String>
     <s:String x:Key="S.Warning.Net.Header">O Net Framework 4.8 não está instalado</s:String>
     <s:String x:Key="S.Warning.Net.Message">Em ordem para utilizar o aplicativo, você precisa fazer o download da versão correta do .Net Framework.&#10;Gostaria de abrir a página de download?</s:String>
+    <s:String x:Key="S.Warning.Single.Title">Apenas uma instância permitida</s:String>
+    <s:String x:Key="S.Warning.Single.Header">O aplicativo já está executando</s:String>
+    <s:String x:Key="S.Warning.Single.Message">ScreenToGif já está executando, mas aparentemente nenhuma janela está aberta. Verifique a bandeja do sistema, um ícone do ScreenToGif deve estar lá.</s:String>
     
     <!--Tray Icon-->
     <s:String x:Key="S.NewRecording">Nova gravação de tela</s:String>
@@ -114,19 +117,18 @@
     <s:String x:Key="S.Command.Remove">Remover item selecionado</s:String>
     
     <!--StartUp Page-->
-    <s:String x:Key="Title.StartUp">ScreenToGif - Início</s:String>
-    <s:String x:Key="Recorder">Gravador</s:String>
-    <s:String x:Key="Webcam">Câmera</s:String>
-    <s:String x:Key="Board">Quadro</s:String>
-    <s:String x:Key="Editor">Editor</s:String>
-    <s:String x:Key="Options">Opções</s:String>
-    <s:String x:Key="Help">Ajuda</s:String>
-    <s:String x:Key="NewRelease">Nova versão disponível • {0}</s:String>
-    <s:String x:Key="NewRelease.Tooltip">Exibe a tela de download da versão mais recente do ScreenToGif.</s:String>
-    <s:String x:Key="Tooltip.Recorder">Abre o gravador de tela.</s:String>
-    <s:String x:Key="Tooltip.Webcam">Abre o gravador de câmera.</s:String>
-    <s:String x:Key="Tooltip.Board">Abre o gravador de quadro.</s:String>
-    <s:String x:Key="Tooltip.Editor">Abre o editor. O local central deste aplicativo.</s:String>
+    <s:String x:Key="S.StartUp.Title">ScreenToGif - Início</s:String>
+    <s:String x:Key="S.StartUp.Recorder">Gravador</s:String>
+    <s:String x:Key="S.StartUp.Webcam">Câmera</s:String>
+    <s:String x:Key="S.StartUp.Board">Quadro</s:String>
+    <s:String x:Key="S.StartUp.Editor">Editor</s:String>
+    <s:String x:Key="S.StartUp.Options">Opções</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">Nova versão disponível • {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease.Tooltip">Exibe a tela de download da versão mais recente do ScreenToGif.</s:String>
+    <s:String x:Key="S.StartUp.Recorder.Tooltip">Abre o gravador de tela.</s:String>
+    <s:String x:Key="S.StartUp.Webcam.Tooltip">Abre o gravador de câmera.</s:String>
+    <s:String x:Key="S.StartUp.Board.Tooltip">Abre o gravador de quadro.</s:String>
+    <s:String x:Key="S.StartUp.Editor.Tooltip">Abre o editor. O local central deste aplicativo.</s:String>
 
     <!--Update Window-->
     <s:String x:Key="Update">Atualização</s:String>
@@ -164,6 +166,15 @@
     
     <!--Options • Application-->
     <s:String x:Key="S.Options.App.Startup">Inicialização</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Manual">Iniciar&#10;manualmente</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Manual.Info">O aplicativo vai abrir somente quando você executá-lo.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Automatic">Iniciar com&#10;o Windows</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Automatic.Info">O aplicativo será executado assim que o Windows iniciar, após o login.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Warning">Impossível alternar entre os modos de inicialização.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Single">Permitir apenas&#10;uma instância</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Single.Info">Você poderá somente abrir uma instância por usuário e executável.&#10;Significa que uma instância de um usuário ou executável diferentes podem co-existir.&#10;Quando tentar executar o aplicativo novamente, uma segunda vez, o aplicativo vai tentar colocar foco na instância que já está aberta.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Multiple">Permitir múltiplas&#10;instâncias</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Multiple.Info">Você poderá abrir o aplicativo várias vezes ao mesmo tempo, sem restrições.</s:String>
     <s:String x:Key="S.Options.App.Startup.Tray">Inicie minimizado na bandeja do sistema.</s:String>
     <s:String x:Key="S.Options.App.Startup.Tray.Info">(O ícone na bandeja do sistema estará visível enquanto essa opção estiver ativa)</s:String>
     <s:String x:Key="S.Options.App.Startup.Window">Inicie com:</s:String>
@@ -612,7 +623,7 @@
     <s:String x:Key="Editor.Transitions">Transições</s:String>
     <s:String x:Key="Editor.Statistics">Estatísticas</s:String>
     <s:String x:Key="Editor.Options">Opções</s:String>
-    
+    <s:String x:Key="S.Editor.Help">Ajuda</s:String>
     <s:String x:Key="S.Editor.Extras">Extras</s:String>
 
     <!--Welcome-->

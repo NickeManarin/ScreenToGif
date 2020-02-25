@@ -248,6 +248,9 @@ namespace ScreenToGif.Windows.Other
                     _wasCaptureChangedRegistered = true;
                 }
 
+                //Resize the rendering to fit in the selected scale. With this code, the preview stops working.
+                _lowerRenderTargetBitmap = new RenderTargetBitmap(VideoWidth, VideoHeight, 96, 96, PixelFormats.Pbgra32);
+
                 ImportAndSeek();
             }
             else
@@ -711,7 +714,7 @@ namespace ScreenToGif.Windows.Other
                 var drawingVisual = new DrawingVisual();
 
                 using (var dc = drawingVisual.RenderOpen())
-                    dc.DrawVideo(_lowerPlayer, new Rect(0, 0, _lowerPlayer.NaturalVideoWidth, _lowerPlayer.NaturalVideoHeight));
+                    dc.DrawVideo(_lowerPlayer, new Rect(0, 0, VideoWidth, VideoHeight));
 
                 _lowerRenderTargetBitmap.Render(drawingVisual);
 

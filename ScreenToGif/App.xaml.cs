@@ -4,6 +4,8 @@ using System.Linq;
 using System.Management;
 using System.Net;
 using System.Reflection;
+using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,6 +28,9 @@ namespace ScreenToGif
 
         internal static ApplicationViewModel MainViewModel { get; set; }
 
+        private Mutex _mutex;
+        private bool _accepted;
+
         #endregion
 
         #region Events
@@ -40,16 +45,75 @@ namespace ScreenToGif
             //Increases the duration of the tooltip display.
             ToolTipService.ShowDurationProperty.OverrideMetadata(typeof(DependencyObject), new FrameworkPropertyMetadata(int.MaxValue));
 
-            //Set network connection properties.
-            ServicePointManager.Expect100Continue = true;
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls13;
-            
+            #region Set network connection properties
+
+            try
+            {
+                ServicePointManager.Expect100Continue = true;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls13;
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Impossible to set the network properties");
+            }
+
+            #endregion
+
             //Parse arguments.
             if (e.Args.Length > 0)
                 Argument.Prepare(e.Args);
 
             LocalizationHelper.SelectCulture(UserSettings.All.LanguageCode);
             ThemeHelper.SelectTheme(UserSettings.All.MainTheme.ToString());
+
+            #region If set, it allows only one instance per user
+
+            //The singleton works on a per-user and per-executable mode.
+            //Meaning that a different user and/or a different executable intances can co-exist.
+            //Part of this code wont work on debug mode, since the SetForegroundWindow() needs focus on the foreground window calling the method.
+            if (UserSettings.All.SingleInstance)
+            {
+                using (var thisProcess = Process.GetCurrentProcess())
+                {
+                    var user = System.Security.Principal.WindowsIdentity.GetCurrent().User;
+                    var name = thisProcess.MainModule?.FileName ?? Assembly.GetEntryAssembly()?.Location ?? "ScreenToGif";
+                    var location = Convert.ToBase64String(Encoding.UTF8.GetBytes(name));
+                    var mutexName = (user != null ? user.AccountDomainSid.ToString() : Environment.UserName) + "_" + location;
+
+                    _mutex = new Mutex(true, mutexName, out _accepted);
+
+                    //If the mutext failed to be accepted, it means that another process already openned it.
+                    if (!_accepted)
+                    {
+                        var warning = true;
+
+                        //Switch to the other app (get only one, if multiple available). Use name of assembly.
+                        using (var process = Process.GetProcessesByName(thisProcess.ProcessName).FirstOrDefault(f => f.MainWindowHandle != thisProcess.MainWindowHandle))
+                        {
+                            if (process != null)
+                            {
+                                var handles = Native.GetWindowHandlesFromProcess(process);
+
+                                //Show the window before setting focus.
+                                Native.ShowWindow(handles.Count > 0 ? handles[0] : process.Handle, Native.ShowWindowEnum.Show);
+
+                                //Set user the focus to the window.
+                                Native.SetForegroundWindow(handles.Count > 0 ? handles[0] : process.Handle);
+                                warning = false;
+                            }
+                        }
+
+                        //If no window available (app is in the system tray), display a warning.
+                        if (warning)
+                            Dialog.Ok(LocalizationHelper.Get("S.Warning.Single.Title"), LocalizationHelper.Get("S.Warning.Single.Header"), LocalizationHelper.Get("S.Warning.Single.Message"), Icons.Info);
+
+                        Environment.Exit(0);
+                        return;
+                    }
+                }
+            }
+
+            #endregion
 
             //Render mode.
             RenderOptions.ProcessRenderMode = UserSettings.All.DisableHardwareAcceleration ? RenderMode.SoftwareOnly : RenderMode.Default;
@@ -101,8 +165,8 @@ namespace ScreenToGif
                 //Replace the old option with the new setting.
                 if (UserSettings.All.StartUp == 5)
                 {
-                    UserSettings.All.StartMinimized  = true;
-                    UserSettings.All.ShowNotificationIcon  = true;
+                    UserSettings.All.StartMinimized = true;
+                    UserSettings.All.ShowNotificationIcon = true;
                     UserSettings.All.StartUp = 0;
                 }
 
@@ -170,15 +234,54 @@ namespace ScreenToGif
 
         private void App_OnExit(object sender, ExitEventArgs e)
         {
-            //TODO: Use a try catch for each one.
+            try
+            {
+                MutexList.RemoveAll();
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Impossible to remove all mutexes of the opened projects.");
+            }
 
-            MutexList.RemoveAll();
+            try
+            {
+                NotifyIcon?.Dispose();
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Impossible to dispose the system tray icon.");
+            }
 
-            NotifyIcon?.Dispose();
+            try
+            {
+                UserSettings.Save();
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Impossible to save the user settings.");
+            }
 
-            UserSettings.Save();
+            try
+            {
+                if (_mutex != null && _accepted)
+                {
+                    _mutex.ReleaseMutex();
+                    _accepted = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Impossible to release the single instance mutex.");
+            }
 
-            HotKeyCollection.Default.Dispose();
+            try
+            {
+                HotKeyCollection.Default.Dispose();
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Impossible to dispose the hotkeys.");
+            }
         }
 
         private void App_OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)

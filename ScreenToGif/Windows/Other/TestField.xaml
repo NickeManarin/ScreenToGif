@@ -9,8 +9,8 @@
         Title="Window Test" Height="200" Width="400" WindowStartupLocation="CenterScreen" Background="{DynamicResource Panel.Background}" 
         Loaded="WindowTest_OnLoaded" LocationChanged="WindowTest_OnLocationChanged" Closed="Window_Closed" SnapsToDevicePixels="True">
 
-    <Grid>
-        <Grid.RowDefinitions>
+    <Canvas>
+        <!--<Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
@@ -19,7 +19,7 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+        </Grid.ColumnDefinitions>-->
 
         <!--<Grid.Resources>
             <ResourceDictionary>
@@ -125,5 +125,5 @@
             <ComboBoxItem Content="ABC"/>
             <ComboBoxItem Content="DEF"/>
         </ComboBox>-->
-    </Grid>
+    </Canvas>
 </Window>

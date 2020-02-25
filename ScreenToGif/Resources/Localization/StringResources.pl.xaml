@@ -109,19 +109,19 @@
     <s:String x:Key="S.Command.Remove">Usuń wybrany element</s:String>
     
     <!--StartUp Page-->
-    <s:String x:Key="Title.StartUp">ScreenToGif - uruchomienie</s:String>
-    <s:String x:Key="Recorder">Nagrywanie</s:String>
-    <s:String x:Key="Webcam">Kamerka</s:String>
-    <s:String x:Key="Board">Tablica</s:String>
-    <s:String x:Key="Editor">Edytor</s:String>
-    <s:String x:Key="Options">Opcje</s:String>
-    <s:String x:Key="Help">Pomoc</s:String>
-    <s:String x:Key="NewRelease">Nowa wersja dostępna • {0}</s:String>
-    <s:String x:Key="NewRelease.Tooltip">Pobiera najnowszą wersję ScreenToGif.</s:String>
-    <s:String x:Key="Tooltip.Recorder">Otwiera nagrywanie ekranu, gdzie łatwo możesz rozpocząć przechwytywanie swojego monitora.</s:String>
-    <s:String x:Key="Tooltip.Webcam">Otwiera nagrywanie z kamerki.</s:String>
-    <s:String x:Key="Tooltip.Board">Otwiera tablicę, gdzie możesz nagrywać swoje rysunki.</s:String>
-    <s:String x:Key="Tooltip.Editor">Otwiera okno edytora, głównego narzędzia tej aplikacji, gdzie łatwo możesz nagrywać i edytować.</s:String>
+    <s:String x:Key="S.StartUp.Title">ScreenToGif - uruchomienie</s:String>
+    <s:String x:Key="S.StartUp.Recorder">Nagrywanie</s:String>
+    <s:String x:Key="S.StartUp.Webcam">Kamerka</s:String>
+    <s:String x:Key="S.StartUp.Board">Tablica</s:String>
+    <s:String x:Key="S.StartUp.Editor">Edytor</s:String>
+    <s:String x:Key="S.StartUp.Options">Opcje</s:String>
+    <s:String x:Key="S.Editor.Help">Pomoc</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">Nowa wersja dostępna • {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease.Tooltip">Pobiera najnowszą wersję ScreenToGif.</s:String>
+    <s:String x:Key="S.StartUp.Recorder.Tooltip">Otwiera nagrywanie ekranu, gdzie łatwo możesz rozpocząć przechwytywanie swojego monitora.</s:String>
+    <s:String x:Key="S.StartUp.Webcam.Tooltip">Otwiera nagrywanie z kamerki.</s:String>
+    <s:String x:Key="S.StartUp.Board.Tooltip">Otwiera tablicę, gdzie możesz nagrywać swoje rysunki.</s:String>
+    <s:String x:Key="S.StartUp.Editor.Tooltip">Otwiera okno edytora, głównego narzędzia tej aplikacji, gdzie łatwo możesz nagrywać i edytować.</s:String>
 
     <!--Update Window-->
     <s:String x:Key="Update">Aktualizacja</s:String>

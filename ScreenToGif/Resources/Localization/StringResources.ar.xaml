@@ -109,19 +109,19 @@
     <s:String x:Key="S.Command.Remove">ازاله العنصر المحدد</s:String>
     
     <!--StartUp Page-->
-    <s:String x:Key="Title.StartUp">بدء التشغيل - ScreenToGif </s:String>
-    <s:String x:Key="Recorder">مسجل</s:String>
-    <s:String x:Key="Webcam">كاميرا ويب</s:String>
-    <s:String x:Key="Board">اللوحة</s:String>
-    <s:String x:Key="Editor">المحرر</s:String>
-    <s:String x:Key="Options">الخيارات</s:String>
-    <s:String x:Key="Help">التعليمات</s:String>
-    <s:String x:Key="NewRelease">يتوفر اصدار جديد • {0}</s:String>
-    <s:String x:Key="NewRelease.Tooltip"> ScreenToGif.تحميل اخر اصدار</s:String>
-    <s:String x:Key="Tooltip.Recorder">يفتح مسجل الشاشة ، حيث يمكنك بسهوله بدء تسجيل الشاشة.</s:String>
-    <s:String x:Key="Tooltip.Webcam">يفتح مسجل كاميرا الويب.</s:String>
-    <s:String x:Key="Tooltip.Board">يفتح مسجل المجلس ، حيث يمكنك البدء في تسجيل رسوماتك.</s:String>
-    <s:String x:Key="Tooltip.Editor">يفتح نافذه المحرر ، النقطة المركزية لهذا التطبيق ، حيث يمكنك بدء وتحرير تسجيل جديد.</s:String>
+    <s:String x:Key="S.StartUp.Title">بدء التشغيل - ScreenToGif </s:String>
+    <s:String x:Key="S.StartUp.Recorder">مسجل</s:String>
+    <s:String x:Key="S.StartUp.Webcam">كاميرا ويب</s:String>
+    <s:String x:Key="S.StartUp.Board">اللوحة</s:String>
+    <s:String x:Key="S.StartUp.Editor">المحرر</s:String>
+    <s:String x:Key="S.StartUp.Options">الخيارات</s:String>
+    <s:String x:Key="S.Editor.Help">التعليمات</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">يتوفر اصدار جديد • {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease.Tooltip"> ScreenToGif.تحميل اخر اصدار</s:String>
+    <s:String x:Key="S.StartUp.Recorder.Tooltip">يفتح مسجل الشاشة ، حيث يمكنك بسهوله بدء تسجيل الشاشة.</s:String>
+    <s:String x:Key="S.StartUp.Webcam.Tooltip">يفتح مسجل كاميرا الويب.</s:String>
+    <s:String x:Key="S.StartUp.Board.Tooltip">يفتح مسجل المجلس ، حيث يمكنك البدء في تسجيل رسوماتك.</s:String>
+    <s:String x:Key="S.StartUp.Editor.Tooltip">يفتح نافذه المحرر ، النقطة المركزية لهذا التطبيق ، حيث يمكنك بدء وتحرير تسجيل جديد.</s:String>
 
     <!--Update Window-->
     <s:String x:Key="Update">تحديث</s:String>

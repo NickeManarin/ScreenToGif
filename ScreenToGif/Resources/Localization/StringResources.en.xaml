@@ -27,6 +27,9 @@
     <s:String x:Key="S.Warning.Net.Title">Missing Dependency</s:String>
     <s:String x:Key="S.Warning.Net.Header">Net Framework 4.8 is not present</s:String>
     <s:String x:Key="S.Warning.Net.Message">In order to properly use this app, you need to download the correct version of the .Net Framework.&#10;Would you like to open the web page to download it?</s:String>
+    <s:String x:Key="S.Warning.Single.Title">Only one instance permitted</s:String>
+    <s:String x:Key="S.Warning.Single.Header">The app is already running</s:String>
+    <s:String x:Key="S.Warning.Single.Message">ScreenToGif is already running, but apparently there's no window open. Check you system tray, a ScreenToGif icon must be there.</s:String>
     
     <!--Tray Icon-->
     <s:String x:Key="S.NewRecording">New screen recording</s:String>
@@ -114,19 +117,18 @@
     <s:String x:Key="S.Command.Remove">Remove selected item</s:String>
     
     <!--StartUp-->
-    <s:String x:Key="Title.StartUp">ScreenToGif - StartUp</s:String>
-    <s:String x:Key="Recorder">Recorder</s:String>
-    <s:String x:Key="Webcam">Webcam</s:String>
-    <s:String x:Key="Board">Board</s:String>
-    <s:String x:Key="Editor">Editor</s:String>
-    <s:String x:Key="Options">Options</s:String>
-    <s:String x:Key="Help">Help</s:String>
-    <s:String x:Key="NewRelease">New release available • {0}</s:String>
-    <s:String x:Key="NewRelease.Tooltip">Downloads the latest version of ScreenToGif.</s:String>
-    <s:String x:Key="Tooltip.Recorder">Opens the screen recorder, where you can easily start recording your screen.</s:String>
-    <s:String x:Key="Tooltip.Webcam">Opens the webcam recorder.</s:String>
-    <s:String x:Key="Tooltip.Board">Opens the board recorder, where you can start recording your drawings.</s:String>
-    <s:String x:Key="Tooltip.Editor">Opens the editor window, the central point of this app, where you can start and edit a new recording.</s:String>
+    <s:String x:Key="S.StartUp.Title">ScreenToGif - StartUp</s:String>
+    <s:String x:Key="S.StartUp.Recorder">Recorder</s:String>
+    <s:String x:Key="S.StartUp.Recorder.Tooltip">Opens the screen recorder, where you can easily start recording your screen.</s:String>
+    <s:String x:Key="S.StartUp.Webcam">Webcam</s:String>
+    <s:String x:Key="S.StartUp.Webcam.Tooltip">Opens the webcam recorder.</s:String>
+    <s:String x:Key="S.StartUp.Board">Board</s:String>
+    <s:String x:Key="S.StartUp.Board.Tooltip">Opens the board recorder, where you can start recording your drawings.</s:String>
+    <s:String x:Key="S.StartUp.Editor">Editor</s:String>
+    <s:String x:Key="S.StartUp.Editor.Tooltip">Opens the editor window, the central point of this app, where you can start and edit a new recording.</s:String>
+    <s:String x:Key="S.StartUp.Options">Options</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">New release available • {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease.Tooltip">Downloads the latest version of ScreenToGif.</s:String>
 
     <!--Update Window-->
     <s:String x:Key="Update">Update</s:String>
@@ -164,6 +166,15 @@
     
     <!--Options • Application-->
     <s:String x:Key="S.Options.App.Startup">Startup</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Manual">Start&#10;manually</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Manual.Info">The app will only be executed when you manually do so.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Automatic">Start with&#10;Windows</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Automatic.Info">The app will be executed after Windows startup.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Warning">Impossible to alternate between startup modes.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Single">Allow only a&#10;single instance</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Single.Info">You'll be able to run the app once per user and executable,&#10;meaning that different user or executable instances can co-exist.&#10;When trying to execute the app again, the second instance will try to give focus to the first one and end itself.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Multiple">Allow multiple&#10;instances</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Multiple.Info">You'll be able to run the app multiple times at the same time, without restriction.</s:String>
     <s:String x:Key="S.Options.App.Startup.Tray">Start minimized to the system tray.</s:String>
     <s:String x:Key="S.Options.App.Startup.Tray.Info">(System tray icon will be visible while this option is active)</s:String>
     <s:String x:Key="S.Options.App.Startup.Window">Start with:</s:String>
@@ -612,7 +623,7 @@
     <s:String x:Key="Editor.Transitions">Transitions</s:String>
     <s:String x:Key="Editor.Statistics">Statistics</s:String>
     <s:String x:Key="Editor.Options">Options</s:String>
-    
+    <s:String x:Key="S.Editor.Help">Help</s:String>
     <s:String x:Key="S.Editor.Extras">Extras</s:String>
     
     <!--Welcome-->

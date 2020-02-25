@@ -8,6 +8,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,6 +17,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Navigation;
 using System.Windows.Threading;
+using Microsoft.Win32;
 using ScreenToGif.Cloud.Imgur;
 using ScreenToGif.Controls;
 using ScreenToGif.Model;
@@ -67,6 +69,11 @@ namespace ScreenToGif.Windows
         /// </summary>
         private Rect _latestGridSize = Rect.Empty;
 
+        /// <summary>
+        /// Flag used to avoid multiple calls on the startup mode change.
+        /// </summary>
+        private bool _ignoreStartup;
+
         #endregion
 
         public Options()
@@ -88,6 +95,112 @@ namespace ScreenToGif.Windows
 
         #region App Settings
 
+        private void ApplicationPanel_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                StartupModeGrid.IsEnabled = false;
+                Cursor = Cursors.AppStarting;
+                _ignoreStartup = true;
+
+                //Detect if this app is set to start with windows.
+                var sub = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", false);
+                var key = sub?.GetValue("ScreenToGif");
+                var name = Assembly.GetEntryAssembly()?.Location ?? Process.GetCurrentProcess().MainModule?.FileName;
+
+                if (key == null || key as string != name)
+                {
+                    //If the key does not exists or its content does not point to the same executable, it means that this app will not run when the user logins.
+                    StartManuallyCheckBox.IsChecked = true;
+                }
+                else
+                {
+                    //If the key exists and its content point to the same executable, it means that this app will run when the user logins.
+                    StartAutomaticallyCheckBox.IsChecked = true;
+                }
+
+                //Detect other version of this app?
+
+                StartupModeGrid.IsEnabled = true;
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Impossible to detect if the app is starting when the user logins");
+                StartupModeGrid.IsEnabled = false;
+            }
+            finally
+            {
+                _ignoreStartup = false;
+                Cursor = Cursors.Arrow;
+            }
+        }
+
+        private void StartAutomaticallyCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (_ignoreStartup)
+                    return;
+
+                Cursor = Cursors.AppStarting;
+                _ignoreStartup = true;
+
+                var sub = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+                var name = Assembly.GetEntryAssembly()?.Location ?? Process.GetCurrentProcess().MainModule?.FileName;
+
+                if (string.IsNullOrWhiteSpace(name) || sub == null)
+                {
+                    StatusBand.Error(LocalizationHelper.Get("S.Options.App.Startup.Mode.Warning"));
+                    throw new Exception("Impossible to set the app to run on startup. " + name + (sub == null ? ", null" : ""));
+                }
+
+                //Add the value in the registry so that the application runs at startup.
+                sub.SetValue("ScreenToGif", name);
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Impossible to set the app to run on startup.");
+            }
+            finally
+            {
+                _ignoreStartup = false;
+                Cursor = Cursors.Arrow;
+            }
+        }
+
+        private void StartAutomaticallyCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (_ignoreStartup)
+                    return;
+
+                Cursor = Cursors.AppStarting;
+                _ignoreStartup = true;
+
+                var sub = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+                var name = Assembly.GetEntryAssembly()?.Location ?? Process.GetCurrentProcess().MainModule?.FileName;
+
+                if (string.IsNullOrWhiteSpace(name) || sub == null)
+                {
+                    StatusBand.Error(LocalizationHelper.Get("S.Options.App.Startup.Mode.Warning"));
+                    throw new Exception("Impossible to set the app to not run on startup. " + name + (sub == null ? ", null" : ""));
+                }
+
+                //Remove the value from the registry so that the application doesn't start automatically.
+                sub.DeleteValue("ScreenToGif", false);
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Impossible to set the app to not run on startup.");
+            }
+            finally
+            {
+                _ignoreStartup = false;
+                Cursor = Cursors.Arrow;
+            }
+        }
+
         private void StartCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             UserSettings.All.ShowNotificationIcon = true;
@@ -107,12 +220,12 @@ namespace ScreenToGif.Windows
 
         #region Interface
 
-        private void InterfacePanel_OnLoaded(object sender, RoutedEventArgs e)
+        private void InterfacePanel_Loaded(object sender, RoutedEventArgs e)
         {
             //Editor.
             CheckScheme(false);
             CheckSize(false);
-            
+
             //Board
             //GridWidth2TextBox.Value = (int)Settings.Default.BoardGridSize.Width;
             //GridHeight2TextBox.Value = (int)Settings.Default.BoardGridSize.Height;
@@ -164,7 +277,7 @@ namespace ScreenToGif.Windows
         {
             if (!(sender is Border border))
                 return;
-            
+
             var color = ((SolidColorBrush)border.Background).Color;
 
             var colorPicker = new ColorSelector(color) { Owner = this };
@@ -369,7 +482,7 @@ namespace ScreenToGif.Windows
             _latestGridSize = UserSettings.All.GridSize;
 
             Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => GridHeightIntegerUpDown.Focus()));
-            
+
             GridWidthIntegerUpDown.ValueChanged += GridSizeIntegerUpDown_ValueChanged;
             GridHeightIntegerUpDown.ValueChanged += GridSizeIntegerUpDown_ValueChanged;
         }
@@ -1509,7 +1622,7 @@ namespace ScreenToGif.Windows
 
                 using (var client = new WebClient { Proxy = WebHelper.GetProxy() })
                     await client.DownloadFileTaskAsync(new Uri("https://github.com/NickeManarin/ScreenToGif-Website/raw/master/downloads/SharpDx.zip", UriKind.Absolute), temp);
-                
+
                 using (var zip = ZipFile.Open(temp, ZipArchiveMode.Read))
                 {
                     foreach (var entry in zip.Entries)
@@ -1664,7 +1777,7 @@ namespace ScreenToGif.Windows
             };
             var result = fbd.ShowDialog();
 
-            if (result != DialogResultWinForms.OK) 
+            if (result != DialogResultWinForms.OK)
                 return;
 
             UserSettings.All.SharpDxLocationFolder = fbd.SelectedPath;
@@ -1704,7 +1817,7 @@ namespace ScreenToGif.Windows
             {
                 if (Util.Other.IsFfmpegPresent(true, true))
                 {
-                    var info = new FileInfo(UserSettings.All.FfmpegLocation);
+                    var info = new FileInfo(Util.Other.AdjustPath(UserSettings.All.FfmpegLocation));
                     info.Refresh();
 
                     FfmpegImageCard.Status = ExtrasStatus.Ready;
@@ -1718,7 +1831,7 @@ namespace ScreenToGif.Windows
 
                 if (Util.Other.IsGifskiPresent(true, true))
                 {
-                    var info = new FileInfo(UserSettings.All.GifskiLocation);
+                    var info = new FileInfo(Util.Other.AdjustPath(UserSettings.All.GifskiLocation));
                     info.Refresh();
 
                     GifskiImageCard.Status = ExtrasStatus.Ready;
@@ -1732,11 +1845,13 @@ namespace ScreenToGif.Windows
 
                 if (Util.Other.IsSharpDxPresent(true, true))
                 {
-                    var info1 = new FileInfo(Path.Combine(UserSettings.All.SharpDxLocationFolder, "SharpDX.dll"));
+                    var folder = Util.Other.AdjustPath(UserSettings.All.SharpDxLocationFolder ?? ".\\");
+
+                    var info1 = new FileInfo(Path.Combine(folder, "SharpDX.dll"));
                     info1.Refresh();
-                    var info2 = new FileInfo(Path.Combine(UserSettings.All.SharpDxLocationFolder, "SharpDX.DXGI.dll"));
+                    var info2 = new FileInfo(Path.Combine(folder, "SharpDX.DXGI.dll"));
                     info2.Refresh();
-                    var info3 = new FileInfo(Path.Combine(UserSettings.All.SharpDxLocationFolder, "SharpDX.Direct3D11.dll"));
+                    var info3 = new FileInfo(Path.Combine(folder, "SharpDX.Direct3D11.dll"));
                     info3.Refresh();
 
                     SharpDxImageCard.Status = ExtrasStatus.Ready;
@@ -1814,7 +1929,7 @@ namespace ScreenToGif.Windows
                 ErrorDialog.Ok(Title, "Error openning the Patreon website", ex.Message, ex);
             }
         }
-        
+
         private void FlattrButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -1841,7 +1956,7 @@ namespace ScreenToGif.Windows
                 ErrorDialog.Ok(Title, "Error openning the Steam website", ex.Message, ex);
             }
         }
-        
+
         private void GogButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -1853,8 +1968,8 @@ namespace ScreenToGif.Windows
                 LogWriter.Log(ex, "Error • Openning the GOG website");
                 ErrorDialog.Ok(Title, "Error openning the GOG website", ex.Message, ex);
             }
-        }     
-        
+        }
+
         private void KofiButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -1990,7 +2105,7 @@ namespace ScreenToGif.Windows
 
         internal void SelectTab(int index)
         {
-            if (index <= -1 || index >= OptionsStackPanel.Children.Count - 1) 
+            if (index <= -1 || index >= OptionsStackPanel.Children.Count - 1)
                 return;
 
             if (OptionsStackPanel.Children[index] is RadioButton radio)

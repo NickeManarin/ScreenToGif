@@ -38,19 +38,19 @@
     <s:String x:Key="S.Crash">アプリのクラッシュ(・へ・)</s:String>
     
     <!--StartUp Page-->
-    <s:String x:Key="Title.StartUp">ScreenToGif - 起動画面</s:String>
-    <s:String x:Key="Recorder">レコーダー</s:String>
-    <s:String x:Key="Webcam">Webカメラ</s:String>
-    <s:String x:Key="Board">ボード</s:String>
-    <s:String x:Key="Editor">エディター</s:String>
-    <s:String x:Key="Options">オプション</s:String>
-    <s:String x:Key="Help">ヘルプ</s:String>
-    <s:String x:Key="NewRelease">新しいリリースがあります • {0}</s:String>
-    <s:String x:Key="NewRelease.Tooltip">ScreenToGifの最新バージョンをダウンロードします。</s:String>
-    <s:String x:Key="Tooltip.Recorder">スクリーンレコーダーで簡単に画面の録画ができます。</s:String>
-    <s:String x:Key="Tooltip.Webcam">Webカメラレコーダーを開きます。</s:String>
-    <s:String x:Key="Tooltip.Board">描画を記録するボードレコーダーを開きます。</s:String>
-    <s:String x:Key="Tooltip.Editor">エディターウィンドウで新しい録画を開始したり編集したりできます。</s:String>
+    <s:String x:Key="S.StartUp.Title">ScreenToGif - 起動画面</s:String>
+    <s:String x:Key="S.StartUp.Recorder">レコーダー</s:String>
+    <s:String x:Key="S.StartUp.Webcam">Webカメラ</s:String>
+    <s:String x:Key="S.StartUp.Board">ボード</s:String>
+    <s:String x:Key="S.StartUp.Editor">エディター</s:String>
+    <s:String x:Key="S.StartUp.Options">オプション</s:String>
+    <s:String x:Key="S.Editor.Help">ヘルプ</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">新しいリリースがあります • {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease.Tooltip">ScreenToGifの最新バージョンをダウンロードします。</s:String>
+    <s:String x:Key="S.StartUp.Recorder.Tooltip">スクリーンレコーダーで簡単に画面の録画ができます。</s:String>
+    <s:String x:Key="S.StartUp.Webcam.Tooltip">Webカメラレコーダーを開きます。</s:String>
+    <s:String x:Key="S.StartUp.Board.Tooltip">描画を記録するボードレコーダーを開きます。</s:String>
+    <s:String x:Key="S.StartUp.Editor.Tooltip">エディターウィンドウで新しい録画を開始したり編集したりできます。</s:String>
 
     <!--Update Window-->
     <s:String x:Key="Update">更新</s:String>

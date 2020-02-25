@@ -38,19 +38,19 @@
     <s:String x:Key="S.Crash">O nee, het programma is vastgelopen :(</s:String>
     
     <!--StartUp Page-->
-    <s:String x:Key="Title.StartUp">ScreenToGif - Startscherm</s:String>
-    <s:String x:Key="Recorder">Opname</s:String>
-    <s:String x:Key="Webcam">Webcam</s:String>
-    <s:String x:Key="Board">Whiteboard</s:String>
-    <s:String x:Key="Editor">Editor</s:String>
-    <s:String x:Key="Options">Instellingen</s:String>
-    <s:String x:Key="Help">Help</s:String>
-    <s:String x:Key="NewRelease">Een nieuwe uitgave is beschikbaar • {0}</s:String>
-    <s:String x:Key="NewRelease.Tooltip">Nieuwste versie van ScreenToGif downloaden.</s:String>
-    <s:String x:Key="Tooltip.Recorder">Opent de Schermopname, waarmee in een handomdraai opnames van het scherm kunnen worden gemaakt.</s:String>
-    <s:String x:Key="Tooltip.Webcam">Opent de Webcam-opname.</s:String>
-    <s:String x:Key="Tooltip.Board">Opent de Whiteboard-opname, waarmee opnames van tekeningen kunnen worden gemaakt.</s:String>
-    <s:String x:Key="Tooltip.Editor">Opent het Editorscherm, de centrale plek van deze applicatie. Hier kunnen nieuwe opnames worden gestart en bestaande opnames bewerkt.</s:String>
+    <s:String x:Key="S.StartUp.Title">ScreenToGif - Startscherm</s:String>
+    <s:String x:Key="S.StartUp.Recorder">Opname</s:String>
+    <s:String x:Key="S.StartUp.Webcam">Webcam</s:String>
+    <s:String x:Key="S.StartUp.Board">Whiteboard</s:String>
+    <s:String x:Key="S.StartUp.Editor">Editor</s:String>
+    <s:String x:Key="S.StartUp.Options">Instellingen</s:String>
+    <s:String x:Key="S.Editor.Help">Help</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">Een nieuwe uitgave is beschikbaar • {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease.Tooltip">Nieuwste versie van ScreenToGif downloaden.</s:String>
+    <s:String x:Key="S.StartUp.Recorder.Tooltip">Opent de Schermopname, waarmee in een handomdraai opnames van het scherm kunnen worden gemaakt.</s:String>
+    <s:String x:Key="S.StartUp.Webcam.Tooltip">Opent de Webcam-opname.</s:String>
+    <s:String x:Key="S.StartUp.Board.Tooltip">Opent de Whiteboard-opname, waarmee opnames van tekeningen kunnen worden gemaakt.</s:String>
+    <s:String x:Key="S.StartUp.Editor.Tooltip">Opent het Editorscherm, de centrale plek van deze applicatie. Hier kunnen nieuwe opnames worden gestart en bestaande opnames bewerkt.</s:String>
 
     <!--Update Window-->
     <s:String x:Key="Update">Update</s:String>

@@ -128,13 +128,10 @@ namespace ScreenToGif.Windows.Other
         public static readonly DependencyProperty IsDraggingProperty = DependencyProperty.Register(nameof(IsDragging), typeof(bool), typeof(RecorderNew), new PropertyMetadata(false));
         public static readonly DependencyProperty IsFollowingProperty = DependencyProperty.Register(nameof(IsFollowing), typeof(bool), typeof(RecorderNew), new PropertyMetadata(false, IsFollowing_PropertyChanged));
         public static readonly DependencyProperty RegionProperty = DependencyProperty.Register(nameof(Region), typeof(Rect), typeof(RecorderNew), new PropertyMetadata(Rect.Empty));
-        public static readonly DependencyProperty FrameCountProperty = DependencyProperty.Register(nameof(FrameCount), typeof(int), typeof(RecorderNew), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.AffectsRender));
-
+        
         #endregion
 
         #region Properties
-
-        public bool IsDialog { get; set; } = true;
 
         public bool IsPickingRegion
         {
@@ -192,16 +189,6 @@ namespace ScreenToGif.Windows.Other
             }
         }
 
-        /// <summary>
-        /// The frame count of the current recording.
-        /// </summary>
-        [Bindable(true), Category("Common"), Description("The frame count of the current recording.")]
-        public int FrameCount
-        {
-            get => (int)GetValue(FrameCountProperty);
-            set => SetValue(FrameCountProperty, value);
-        }
-
         #endregion
 
         public RecorderNew(bool hideBackButton = true)
@@ -249,7 +236,7 @@ namespace ScreenToGif.Windows.Other
             {
                 UserSettings.All.CursorFollowing = IsFollowing = false;
 
-                Dialog.Ok(LocalizationHelper.Get("Recorder"), LocalizationHelper.Get("S.Options.Warning.Follow.Header"),
+                Dialog.Ok(LocalizationHelper.Get("S.StartUp.Recorder"), LocalizationHelper.Get("S.Options.Warning.Follow.Header"),
                     LocalizationHelper.Get("S.Options.Warning.Follow.Message"), Icons.Warning);
             }
         }
@@ -1292,6 +1279,8 @@ namespace ScreenToGif.Windows.Other
                 //Check if SharpDx is available.
                 if (!Util.Other.IsSharpDxPresent())
                     throw new Exception(LocalizationHelper.Get("S.Recorder.Warning.MissingSharpDx"));
+
+                Util.Other.LoadSharpDx();
 
                 _capture = GetDirectCapture();
             }

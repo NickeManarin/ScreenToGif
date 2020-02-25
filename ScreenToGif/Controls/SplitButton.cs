@@ -26,10 +26,10 @@ namespace ScreenToGif.Controls
 
         #region Dependency Properties
 
-        public static readonly DependencyProperty SelectedIndexProperty = DependencyProperty.Register("SelectedIndex", typeof(int), typeof(SplitButton), new FrameworkPropertyMetadata(0,
+        public static readonly DependencyProperty SelectedIndexProperty = DependencyProperty.Register(nameof(SelectedIndex), typeof(int), typeof(SplitButton), new FrameworkPropertyMetadata(0,
             FrameworkPropertyMetadataOptions.AffectsRender, SelectedIndex_ChangedCallback));
 
-        public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(SplitButton), new FrameworkPropertyMetadata(""));
+        public static readonly DependencyProperty TextProperty = DependencyProperty.Register(nameof(Text), typeof(string), typeof(SplitButton), new FrameworkPropertyMetadata(""));
 
         #endregion
 
@@ -83,7 +83,9 @@ namespace ScreenToGif.Controls
             if (_internalGrid == null)
                 return;
 
-            _internalGrid.MouseDown += OnClick;
+            //_internalGrid.MouseDown += OnClick;
+            //_internalGrid.PreviewMouseDown += OnClick;
+            _internalGrid.MouseUp += OnClick;
 
             PrepareMainAction(this);
 
@@ -118,11 +120,11 @@ namespace ScreenToGif.Controls
             split.PrepareMainAction(split);
         }
 
-        private void OnClick(object sender, RoutedEventArgs e)
+        private void OnClick(object sender, MouseButtonEventArgs e)
         {
             Command?.Execute(null);
 
-            _current?.RaiseEvent(new RoutedEventArgs(ImageMenuItem.ClickEvent));
+            _current?.RaiseEvent(new RoutedEventArgs(ClickEvent));
         }
 
         private void PrepareMainAction(SplitButton split)

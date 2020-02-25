@@ -18,18 +18,18 @@
     <s:String x:Key="Preview">Önizleme</s:String>
 
     <!--StartUp Page-->
-    <s:String x:Key="Title.StartUp">ScreenToGif - Başlangıç</s:String>
-    <s:String x:Key="Recorder">Kaydedici</s:String>
-    <s:String x:Key="Webcam">Webcam</s:String>
-    <s:String x:Key="Board">Pano</s:String>
-    <s:String x:Key="Editor">Editör</s:String>
-    <s:String x:Key="Options">Ayarlar</s:String>
-    <s:String x:Key="Help">Yardım</s:String>
-    <s:String x:Key="NewRelease">Yeni sürüm mevcut • {0}</s:String>
-    <s:String x:Key="Tooltip.Recorder">Ekran kaydediciyi açar, kolayca ekranınızı kaydetmeye başlayabilirsiniz.</s:String>
-    <s:String x:Key="Tooltip.Webcam">Webcam kaydediciyi açar.</s:String>
-    <s:String x:Key="Tooltip.Board">Pano kaydedicisini açar, çizimlerinizi kaydetmeye başlayacağınız yer.</s:String>
-    <s:String x:Key="Tooltip.Editor">Düzenleme penceresini açar, bu uygulamanın merkezi, yeni kayıt başlatıp düzenleyebileceğiniz bir yer.</s:String>
+    <s:String x:Key="S.StartUp.Title">ScreenToGif - Başlangıç</s:String>
+    <s:String x:Key="S.StartUp.Recorder">Kaydedici</s:String>
+    <s:String x:Key="S.StartUp.Webcam">Webcam</s:String>
+    <s:String x:Key="S.StartUp.Board">Pano</s:String>
+    <s:String x:Key="S.StartUp.Editor">Editör</s:String>
+    <s:String x:Key="S.StartUp.Options">Ayarlar</s:String>
+    <s:String x:Key="S.Editor.Help">Yardım</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">Yeni sürüm mevcut • {0}</s:String>
+    <s:String x:Key="S.StartUp.Recorder.Tooltip">Ekran kaydediciyi açar, kolayca ekranınızı kaydetmeye başlayabilirsiniz.</s:String>
+    <s:String x:Key="S.StartUp.Webcam.Tooltip">Webcam kaydediciyi açar.</s:String>
+    <s:String x:Key="S.StartUp.Board.Tooltip">Pano kaydedicisini açar, çizimlerinizi kaydetmeye başlayacağınız yer.</s:String>
+    <s:String x:Key="S.StartUp.Editor.Tooltip">Düzenleme penceresini açar, bu uygulamanın merkezi, yeni kayıt başlatıp düzenleyebileceğiniz bir yer.</s:String>
 
     <!--Update Page-->
     <s:String x:Key="Update">Güncelle</s:String>

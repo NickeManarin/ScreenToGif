@@ -36,19 +36,19 @@
     <s:String x:Key="S.Crash">Ach ne, aplikace přestala pracovat :(</s:String>
     
     <!--StartUp Page-->
-    <s:String x:Key="Title.StartUp">ScreenToGif - StartUp</s:String>
-    <s:String x:Key="Recorder">Záznamník</s:String>
-    <s:String x:Key="Webcam">Webová kamera</s:String>
-    <s:String x:Key="Board">Plátno</s:String>
-    <s:String x:Key="Editor">Editor</s:String>
-    <s:String x:Key="Options">Nastavení</s:String>
-    <s:String x:Key="Help">Nápověda</s:String>
-    <s:String x:Key="NewRelease">K dispozici je nová verze • {0}</s:String>
-    <s:String x:Key="NewRelease.Tooltip">Stáhnout nejnovější verzi ScreenToGif.</s:String>
-    <s:String x:Key="Tooltip.Recorder">Otevře záznamník plochy, který umožňuje nahrát vybranou plochu.</s:String>
-    <s:String x:Key="Tooltip.Webcam">Otevře záznamník webové kamery.</s:String>
-    <s:String x:Key="Tooltip.Board">Otevře záznamník plátna, který umožňuje nahrát kresbu.</s:String>
-    <s:String x:Key="Tooltip.Editor">Otevře okno editoru, centrální bod aplikace, ve kterém lze editovat nové záznamy.</s:String>
+    <s:String x:Key="S.StartUp.Title">ScreenToGif - StartUp</s:String>
+    <s:String x:Key="S.StartUp.Recorder">Záznamník</s:String>
+    <s:String x:Key="S.StartUp.Webcam">Webová kamera</s:String>
+    <s:String x:Key="S.StartUp.Board">Plátno</s:String>
+    <s:String x:Key="S.StartUp.Editor">Editor</s:String>
+    <s:String x:Key="S.StartUp.Options">Nastavení</s:String>
+    <s:String x:Key="S.Editor.Help">Nápověda</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">K dispozici je nová verze • {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease.Tooltip">Stáhnout nejnovější verzi ScreenToGif.</s:String>
+    <s:String x:Key="S.StartUp.Recorder.Tooltip">Otevře záznamník plochy, který umožňuje nahrát vybranou plochu.</s:String>
+    <s:String x:Key="S.StartUp.Webcam.Tooltip">Otevře záznamník webové kamery.</s:String>
+    <s:String x:Key="S.StartUp.Board.Tooltip">Otevře záznamník plátna, který umožňuje nahrát kresbu.</s:String>
+    <s:String x:Key="S.StartUp.Editor.Tooltip">Otevře okno editoru, centrální bod aplikace, ve kterém lze editovat nové záznamy.</s:String>
 
     <!--Update Page-->
     <s:String x:Key="Update">Aktualizace</s:String>

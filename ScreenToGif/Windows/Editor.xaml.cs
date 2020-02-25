@@ -43,6 +43,7 @@ using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 using Size = System.Windows.Size;
 using System.Text.RegularExpressions;
 using System.Windows.Media.Effects;
+using ScreenToGif.ImageUtil.Apng;
 
 namespace ScreenToGif.Windows
 {
@@ -1458,17 +1459,23 @@ namespace ScreenToGif.Windows
                                 var imageName = $"{UserSettings.All.LatestImageFilename} {index.ToString().PadLeft(padLength, '0')}.png";
                                 var path = Path.Combine(UserSettings.All.LatestImageOutputFolder, imageName);
 
-                                if (File.Exists(path))
+                                if (!UserSettings.All.OverwriteOnSaveImages)
                                 {
-                                    FileExistsGrid.Visibility = Visibility.Visible;
-                                    StatusList.Warning($"{LocalizationHelper.Get("S.SaveAs.Warning.Overwrite")} - {imageName}");
-                                    return;
+                                    if (File.Exists(path))
+                                    {
+                                        FileExistsGrid.Visibility = Visibility.Visible;
+                                        StatusList.Warning($"{LocalizationHelper.Get("S.SaveAs.Warning.Overwrite")} - {imageName}");
+                                        return;
+                                    }
                                 }
                             }
 
                             foreach (var index in selected)
                             {
                                 var path = Path.Combine(UserSettings.All.LatestImageOutputFolder, $"{UserSettings.All.LatestImageFilename} {index.ToString().PadLeft(padLength, '0')}.png");
+
+                                if (File.Exists(path))
+                                    File.Delete(path);
 
                                 File.Copy(FrameListView.Items.OfType<FrameListBoxItem>().ToList()[index].Image, path);
                             }
@@ -1478,7 +1485,7 @@ namespace ScreenToGif.Windows
                             var fileName = Path.Combine(UserSettings.All.LatestImageOutputFolder, UserSettings.All.LatestImageFilename + ".zip");
 
                             //Check if file exists.
-                            if (!UserSettings.All.OverwriteOnSave)
+                            if (!UserSettings.All.OverwriteOnSaveImages)
                             {
                                 if (File.Exists(fileName))
                                 {
@@ -3895,7 +3902,7 @@ namespace ScreenToGif.Windows
 
                                 Dispatcher.Invoke(() => { UpdateProgress(number++); });
                                 BitmapSource source;
-                                
+
                                 try
                                 {
                                     var array = deflateStream.ReadBytes((int)frame.DataLength);
@@ -4365,12 +4372,12 @@ namespace ScreenToGif.Windows
                         break;
                     }
 
-                    //case "apng":
-                    //case "png":
-                    //{
-                    //    listFrames = ImportFromPng(fileName, pathTemp);
-                    //    break;
-                    //}
+                    case "apng":
+                    case "png":
+                    {
+                        listFrames = ImportFromPng(fileName, pathTemp);
+                        break;
+                    }
 
                     default:
                     {
@@ -4681,15 +4688,65 @@ namespace ScreenToGif.Windows
         {
             ShowProgress(DispatcherStringResource("Editor.ImportingFrames"), 50, true);
 
-            //Apng.GetFrames(source);
+            using (var stream = new FileStream(source, FileMode.Open, FileAccess.Read, FileShare.Read))
+            {
+                var apng = new Apng(stream);
+                var success = apng.ReadFrames();
 
-            //TODO: 
-            //Open read image
-            //Detect ids.
-            //Read frames from image.
-            //Add to the list.
+                if (!success)
+                    return ImportFromImage(source, pathTemp);
 
-            return new List<FrameInfo> { };
+                var fullSize = new System.Drawing.Size((int) apng.Ihdr.Width, (int) apng.Ihdr.Height);
+                var list = new List<FrameInfo>();
+
+                BitmapSource baseFrame = null;
+                for (int index = 0; index < apng.Actl.NumFrames; index++)
+                {
+                    var metadata = apng.GetFrame(index);
+                    var rawFrame = metadata.ImageData.SourceFrom();
+
+                    var bitmapSource = Apng.MakeFrame(fullSize, rawFrame, metadata, baseFrame);
+
+                    #region Disposal Method
+
+                    switch (metadata.DisposeOp)
+                    {
+                        case Apng.DisposeOps.None: //No disposal is done on this frame before rendering the next; the contents of the output buffer are left as is.
+                            baseFrame = bitmapSource;
+                            break;
+                        case Apng.DisposeOps.Background: //The frame's region of the output buffer is to be cleared to fully transparent black before rendering the next frame.
+                            baseFrame = baseFrame == null || Apng.IsFullFrame(metadata, fullSize) ? null : Apng.ClearArea(baseFrame, metadata);
+                            break;
+                        case Apng.DisposeOps.Previous: //The frame's region of the output buffer is to be reverted to the previous contents before rendering the next frame.
+                            //Reuse same base frame.
+                            break;
+                    }
+
+                    #endregion
+
+                    #region Each Frame
+
+                    var fileName = Path.Combine(pathTemp, $"{index} {DateTime.Now:hh-mm-ss-ffff}.png");
+
+                    using (var output = new FileStream(fileName, FileMode.Create))
+                    {
+                        var encoder = new PngBitmapEncoder();
+                        encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
+                        encoder.Save(output);
+                        stream.Close();
+                    }
+
+                    list.Add(new FrameInfo(fileName, metadata.Delay));
+
+                    UpdateProgress(index);
+
+                    GC.Collect(1);
+
+                    #endregion
+                }
+
+                return list;
+            }
         }
 
         private List<FrameInfo> ImportFromImage(string source, string pathTemp)
@@ -5962,7 +6019,7 @@ namespace ScreenToGif.Windows
                     if (!File.Exists(file))
                         continue;
 
-                    var json = File.ReadAllText(Path.Combine(file));
+                    var json = File.ReadAllText(file);
 
                     using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(json)))
                     {

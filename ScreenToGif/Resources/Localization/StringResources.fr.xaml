@@ -38,19 +38,19 @@
     <s:String x:Key="S.Crash">Oh non, l'application a planté :(</s:String>
     
     <!--StartUp Page-->
-    <s:String x:Key="Title.StartUp">ScreenToGif - Bienvenue</s:String>
-    <s:String x:Key="Recorder">Capture d'écran</s:String>
-    <s:String x:Key="Webcam">Webcam</s:String>
-    <s:String x:Key="Board">Planche à dessin</s:String>
-    <s:String x:Key="Editor">Éditeur</s:String>
-    <s:String x:Key="Options">Options</s:String>
-    <s:String x:Key="Help">Aide</s:String>
-    <s:String x:Key="NewRelease">Nouvelle version disponible • {0}</s:String>
-    <s:String x:Key="NewRelease.Tooltip">Télécharger la dernière version de ScreenToGif.</s:String>
-    <s:String x:Key="Tooltip.Recorder">Ouvre l'enregistreur d'écran, où vous pouvez facilement commencer à capturer votre écran</s:String>
-    <s:String x:Key="Tooltip.Webcam">Ouvre l'enregistreur de Webcam</s:String>
-    <s:String x:Key="Tooltip.Board">Ouvre la planche à dessin, où vous pouvez commencer à enregistrer vos dessins</s:String>
-    <s:String x:Key="Tooltip.Editor">Ouvre l'éditeur principal, le point central de cette application, où vous pouvez démarrer et éditer un nouvel enregistrement</s:String>
+    <s:String x:Key="S.StartUp.Title">ScreenToGif - Bienvenue</s:String>
+    <s:String x:Key="S.StartUp.Recorder">Capture d'écran</s:String>
+    <s:String x:Key="S.StartUp.Webcam">Webcam</s:String>
+    <s:String x:Key="S.StartUp.Board">Planche à dessin</s:String>
+    <s:String x:Key="S.StartUp.Editor">Éditeur</s:String>
+    <s:String x:Key="S.StartUp.Options">Options</s:String>
+    <s:String x:Key="S.Editor.Help">Aide</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">Nouvelle version disponible • {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease.Tooltip">Télécharger la dernière version de ScreenToGif.</s:String>
+    <s:String x:Key="S.StartUp.Recorder.Tooltip">Ouvre l'enregistreur d'écran, où vous pouvez facilement commencer à capturer votre écran</s:String>
+    <s:String x:Key="S.StartUp.Webcam.Tooltip">Ouvre l'enregistreur de Webcam</s:String>
+    <s:String x:Key="S.StartUp.Board.Tooltip">Ouvre la planche à dessin, où vous pouvez commencer à enregistrer vos dessins</s:String>
+    <s:String x:Key="S.StartUp.Editor.Tooltip">Ouvre l'éditeur principal, le point central de cette application, où vous pouvez démarrer et éditer un nouvel enregistrement</s:String>
 
     <!--Update Window-->
     <s:String x:Key="Update">Mettre à jour</s:String>

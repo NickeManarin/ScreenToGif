@@ -150,6 +150,8 @@ namespace ScreenToGif.Util.Capture
                 {
                     //Gets the cursor shape if the screen hasn't changed in between, so the cursor will be available for the next frame.
                     GetCursor(null, info, frame);
+
+                    resource.Dispose();
                     return FrameCount;
 
                     //TODO: if only the mouse changed, but there's no frame accumulated, but there's data in the texture from the previous frame, I need to merge with the cursor and add to the list. 
@@ -238,6 +240,10 @@ namespace ScreenToGif.Util.Capture
                 catch (Exception e)
                 {
                     LogWriter.Log(e, "It was not possible to release the frame.");
+
+                    //Do I need this?
+                    DisposeInternal();
+                    Initialize();
                 }
             }
         }

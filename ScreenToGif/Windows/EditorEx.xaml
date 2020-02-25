@@ -19,7 +19,7 @@
         <r:Ribbon Grid.Row="0">
             <r:Ribbon.ExtrasMenu>
                 <c:ImageMenuItem x:Name="ExtrasMenuItem" Header="{DynamicResource S.Editor.Extras}" Image="{DynamicResource Vector.Editor}" ContentHeight="16" ContentWidth="16" BorderThickness="0">
-                    <c:ImageMenuItem x:Name="OptionsMenuItem" Header="{DynamicResource Options}" Image="{DynamicResource Vector.Options}" 
+                    <c:ImageMenuItem x:Name="OptionsMenuItem" Header="{DynamicResource S.StartUp.Options}" Image="{DynamicResource Vector.Options}" 
                                      ContentHeight="16" ContentWidth="16"/>
                     <c:ImageMenuItem x:Name="FeedbackMenuItem" Header="{DynamicResource S.Feedback.Feedback}" Image="{DynamicResource Vector.Application}" 
                                      ContentHeight="16" ContentWidth="16"/>
