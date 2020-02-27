@@ -5,14 +5,13 @@ This is the current project of ScreenToGif.
 _VS 2019 and .Net 4.8 or newer required._
 
 
-## What's new? (Version 2.21)
+## What's new? (Version 2.21.2)
 
-•  Updated the Chinese (Simplified), French and Russian translations.  
+•  Just a bug fix.   
 
 ### Fixed:
 
-♦ The app was crashing on startup when checking if there wasn't any other instance running.  
-♦ The eye-dropper of the color selector window was not updating the RGBA values when dragging accross the screen.  
+♦ The app was not being able to load the SharpDX libraries.  
 
 ### Known Bugs:
 

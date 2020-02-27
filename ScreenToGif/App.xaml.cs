@@ -41,6 +41,7 @@ namespace ScreenToGif
 
             //Unhandled Exceptions.
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
 
             //Increases the duration of the tooltip display.
             ToolTipService.ShowDurationProperty.OverrideMetadata(typeof(DependencyObject), new FrameworkPropertyMetadata(int.MaxValue));
@@ -239,6 +240,61 @@ namespace ScreenToGif
             #endregion
         }
 
+        private void App_OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            LogWriter.Log(e.Exception, "On dispacher unhandled exception - Unknown");
+
+            try
+            {
+                ShowException(e.Exception);
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Error while displaying the error.");
+                //Ignored.
+            }
+
+            e.Handled = true;
+        }
+
+        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            if (!(e.ExceptionObject is Exception exception)) return;
+
+            LogWriter.Log(exception, "Current domain unhandled exception - Unknown");
+
+            try
+            {
+                ShowException(exception);
+            }
+            catch (Exception)
+            {
+                //Ignored.
+            }
+        }
+
+        private static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+        {
+            try
+            {
+                //This is used when trying to load missing assemblies, which are not located in same folder as the main executable.
+
+                var name = args.Name.Split(',').First();
+
+                if (!name.StartsWith("SharpDX"))
+                    return null;
+
+                var path = Other.AdjustPath(UserSettings.All.SharpDxLocationFolder ?? "");
+
+                return Assembly.LoadFrom(System.IO.Path.Combine(path, $"{name}.dll"));
+            }
+            catch (Exception e)
+            {
+                LogWriter.Log(e, "Error loading assemblies");
+                return null;
+            }
+        }
+
         private void App_OnExit(object sender, ExitEventArgs e)
         {
             try
@@ -288,39 +344,6 @@ namespace ScreenToGif
             catch (Exception ex)
             {
                 LogWriter.Log(ex, "Impossible to dispose the hotkeys.");
-            }
-        }
-
-        private void App_OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
-        {
-            LogWriter.Log(e.Exception, "On dispacher unhandled exception - Unknown");
-
-            try
-            {
-                ShowException(e.Exception);
-            }
-            catch (Exception ex)
-            {
-                LogWriter.Log(ex, "Error while displaying the error.");
-                //Ignored.
-            }
-
-            e.Handled = true;
-        }
-
-        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
-        {
-            if (!(e.ExceptionObject is Exception exception)) return;
-
-            LogWriter.Log(exception, "Current domain unhandled exception - Unknown");
-
-            try
-            {
-                ShowException(exception);
-            }
-            catch (Exception)
-            {
-                //Ignored.
             }
         }
 

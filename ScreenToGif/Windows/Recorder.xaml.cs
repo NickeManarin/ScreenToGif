@@ -1202,8 +1202,6 @@ namespace ScreenToGif.Windows
                 if (!Util.Other.IsSharpDxPresent())
                     throw new Exception(LocalizationHelper.Get("S.Recorder.Warning.MissingSharpDx"));
 
-                Util.Other.LoadSharpDx();
-
                 _capture = GetDirectCapture();
             }
             else

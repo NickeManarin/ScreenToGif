@@ -657,22 +657,6 @@ namespace ScreenToGif.Util
             return false;
         }
 
-        public static void LoadSharpDx()
-        {
-            var realPath = UserSettings.All.SharpDxLocationFolder ?? "";
-
-            //So, in order to get the correct location, I need to combine the current base directory with the relative path.
-            if (!string.IsNullOrWhiteSpace(UserSettings.All.SharpDxLocationFolder) && !Path.IsPathRooted(UserSettings.All.SharpDxLocationFolder))
-                realPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, UserSettings.All.SharpDxLocationFolder.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar));
-
-            if (string.IsNullOrEmpty(realPath) || realPath == ".")
-                return;
-            
-            Assembly.LoadFrom(Path.Combine(realPath, "SharpDX.dll"));
-            Assembly.LoadFrom(Path.Combine(realPath, "SharpDX.DXGI.dll"));
-            Assembly.LoadFrom(Path.Combine(realPath, "SharpDX.Direct3D11.dll"));
-        }
-
         #endregion
     }
 }
