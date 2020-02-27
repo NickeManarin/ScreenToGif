@@ -27,6 +27,9 @@
     <s:String x:Key="S.Warning.Net.Title">Отсутствует зависимость</s:String>
     <s:String x:Key="S.Warning.Net.Header">Отсутствует Net Framework 4.8</s:String>
     <s:String x:Key="S.Warning.Net.Message">Для того, чтобы использовать это приложение, вам необходимо загрузить правильную версию .Net Framework.&#10;Открыть веб-страницу загрузки?</s:String>
+    <s:String x:Key="S.Warning.Single.Title">Разрешен только один экземпляр</s:String>
+    <s:String x:Key="S.Warning.Single.Header">Приложение уже запущено</s:String>
+    <s:String x:Key="S.Warning.Single.Message">ScreenToGif уже работает, но, по-видимому, нет открытого окна. Проверьте системный трей, значок ScreenToGif должен быть там.</s:String>
     
     <!--Tray Icon-->
     <s:String x:Key="S.NewRecording">Новая запись с экрана</s:String>
@@ -116,17 +119,16 @@
     <!--StartUp-->
     <s:String x:Key="S.StartUp.Title">ScreenToGif - Запуск</s:String>
     <s:String x:Key="S.StartUp.Recorder">Запись</s:String>
+    <s:String x:Key="S.StartUp.Recorder.Tooltip">Запись с экрана, легкий старт.</s:String>
     <s:String x:Key="S.StartUp.Webcam">Веб-камера</s:String>
+    <s:String x:Key="S.StartUp.Webcam.Tooltip">Запись с веб-камеры.</s:String>
     <s:String x:Key="S.StartUp.Board">Доска</s:String>
+    <s:String x:Key="S.StartUp.Board.Tooltip">Запись с доски, рисуйте и записывайте</s:String>
     <s:String x:Key="S.StartUp.Editor">Редактор</s:String>
+    <s:String x:Key="S.StartUp.Editor.Tooltip">Редактор, здесь можно начать новую запись или редактировать существующую.</s:String>
     <s:String x:Key="S.StartUp.Options">Настройки</s:String>
-    <s:String x:Key="S.Editor.Help">Справка</s:String>
     <s:String x:Key="S.StartUp.NewRelease">Доступна новая версия: {0}</s:String>
     <s:String x:Key="S.StartUp.NewRelease.Tooltip">Загрузка последней версии программы.</s:String>
-    <s:String x:Key="S.StartUp.Recorder.Tooltip">Запись с экрана, легкий старт.</s:String>
-    <s:String x:Key="S.StartUp.Webcam.Tooltip">Запись с веб-камеры.</s:String>
-    <s:String x:Key="S.StartUp.Board.Tooltip">Запись с доски, рисуйте и записывайте.</s:String>
-    <s:String x:Key="S.StartUp.Editor.Tooltip">Редактор, здесь можно начать новую запись или редактировать существующую.</s:String>
 
     <!--Update Window-->
     <s:String x:Key="Update">Обновление</s:String>
@@ -164,6 +166,15 @@
     
     <!--Options • Application-->
     <s:String x:Key="S.Options.App.Startup">Автозапуск</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Manual">Вручную</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Manual.Info">Без автозапуска.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Automatic">С&#10;Windows</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Automatic.Info">Будет запущено после запуска Windows.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Warning">Невозможно чередовать режимы запуска.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Single">Только один&#10;экземпляр</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Single.Info">Один экземпляр приложения для пользователя и исполняемого файла, т.е.,&#10;разные экземпляры пользователя или исп. файла могут сосуществовать,&#10;но только если они запущены не от одного пользователя или&#10;не с одного исполняемого файла.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Multiple">Несколько&#10;экземпляров</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Multiple.Info">Вы сможете запускать приложение несколько раз одновременно, без ограничений,&#10;т.е. пока оно не сожрет все ресурсы вашего ПК.</s:String>
     <s:String x:Key="S.Options.App.Startup.Tray">Запускать свернутым в трей.</s:String>
     <s:String x:Key="S.Options.App.Startup.Tray.Info">(Значок в системном трее будет виден, пока эта настройка активна)</s:String>
     <s:String x:Key="S.Options.App.Startup.Window">Начинать с:</s:String>
