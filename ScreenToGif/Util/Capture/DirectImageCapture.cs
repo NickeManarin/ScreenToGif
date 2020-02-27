@@ -93,7 +93,16 @@ namespace ScreenToGif.Util.Capture
         internal void Initialize()
         {
 #if DEBUG
-            Device = new Device(DriverType.Hardware, DeviceCreationFlags.VideoSupport | DeviceCreationFlags.Debug);
+            Device = new Device(DriverType.Hardware, DeviceCreationFlags.Debug);
+
+            //var debug = SharpDX.DXGI.InfoQueue.TryCreate();
+            //debug.SetBreakOnSeverity(DebugId.All, InformationQueueMessageSeverity.Corruption, true);
+            //debug.SetBreakOnSeverity(DebugId.All, InformationQueueMessageSeverity.Error, true);
+            //debug.SetBreakOnSeverity(DebugId.All, InformationQueueMessageSeverity.Warning, true);
+
+            //var debug2 = DXGIDebug.TryCreate();
+            //debug2.ReportLiveObjects(DebugId.Dx, DebugRloFlags.Summary | DebugRloFlags.Detail);
+
 #else
             Device = new Device(DriverType.Hardware, DeviceCreationFlags.VideoSupport);
 #endif
@@ -193,7 +202,7 @@ namespace ScreenToGif.Util.Capture
 
         public override int Capture(FrameInfo frame)
         {
-            var res = Result.Ok;
+            var res = new Result(-1);
 
             try
             {
@@ -300,7 +309,7 @@ namespace ScreenToGif.Util.Capture
 
         public override int CaptureWithCursor(FrameInfo frame)
         {
-            var res = Result.Ok;
+            var res = new Result(-1);
 
             try
             {
@@ -313,7 +322,7 @@ namespace ScreenToGif.Util.Capture
                     //Somehow, it was not possible to retrieve the resource, frame or metadata.
                     //frame.WasDropped = true;
                     //BlockingCollection.Add(frame);
-
+                    
                     resource?.Dispose();
                     return FrameCount;
                 }

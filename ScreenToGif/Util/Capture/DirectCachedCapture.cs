@@ -38,7 +38,7 @@ namespace ScreenToGif.Util.Capture
 
         public override int Capture(FrameInfo frame)
         {
-            var res = Result.Ok;
+            var res = new Result(-1);
 
             try
             {
@@ -132,7 +132,7 @@ namespace ScreenToGif.Util.Capture
 
         public override int CaptureWithCursor(FrameInfo frame)
         {
-            var res = Result.Ok;
+            var res = new Result(-1);
 
             try
             {
