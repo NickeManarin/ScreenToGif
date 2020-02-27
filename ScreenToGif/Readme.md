@@ -7,11 +7,12 @@ _VS 2019 and .Net 4.8 or newer required._
 
 ## What's new? (Version 2.21.2)
 
-•  Just a bug fix.   
+•  Just a couple of bug fixes.   
 
 ### Fixed:
 
 ♦ The app was not being able to load the SharpDX libraries.  
+♦ The DirectX capture could fail when finishing the capture of a frame.  
 
 ### Known Bugs:
 
