@@ -240,10 +240,6 @@ namespace ScreenToGif.Util.Capture
                 catch (Exception e)
                 {
                     LogWriter.Log(e, "It was not possible to release the frame.");
-
-                    //Do I need this?
-                    DisposeInternal();
-                    Initialize();
                 }
             }
         }

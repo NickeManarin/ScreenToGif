@@ -24,9 +24,13 @@
     <s:String x:Key="S.SelectColor">单击此处选择颜色。</s:String>
 
     <!--Warning messages-->
-    <s:String x:Key="S.Warning.Net.Title">缺少依赖</s:String>
+    <s:String x:Key="S.Warning.Net.Title">缺少依赖项</s:String>
     <s:String x:Key="S.Warning.Net.Header">Net Framework 4.8 不存在</s:String>
-    <s:String x:Key="S.Warning.Net.Message">为了正确使用此应用程序，您需要下载正确版本的 .Net Framework。&#10;您要打开网页进行下载吗?</s:String>
+    <s:String x:Key="S.Warning.Net.Message">为了正确使用此应用程序，您需要下载正确版本的 .Net Framework。
+您要打开网页进行下载吗?</s:String>
+    <s:String x:Key="S.Warning.Single.Title">允许一个实例</s:String>
+    <s:String x:Key="S.Warning.Single.Header">该应用程序已在运行</s:String>
+    <s:String x:Key="S.Warning.Single.Message">ScreenToGif 已经在运行，但是显然没有打开任何窗口。 检查系统托盘，其中必须有一个 ScreenToGif 图标。</s:String>
     
     <!--Tray Icon-->
     <s:String x:Key="S.NewRecording">新建屏幕录制</s:String>
@@ -116,17 +120,16 @@
     <!--StartUp-->
     <s:String x:Key="S.StartUp.Title">ScreenToGif - 启动</s:String>
     <s:String x:Key="S.StartUp.Recorder">录像机</s:String>
+    <s:String x:Key="S.StartUp.Recorder.Tooltip">打开屏幕录像机，您可以在其中轻松开始录制屏幕。</s:String>
     <s:String x:Key="S.StartUp.Webcam">摄像头</s:String>
+    <s:String x:Key="S.StartUp.Webcam.Tooltip">打开摄像头录像机。</s:String>
     <s:String x:Key="S.StartUp.Board">画板</s:String>
+    <s:String x:Key="S.StartUp.Board.Tooltip">打开画板录像机，您可以在其中录制您的绘图。</s:String>
     <s:String x:Key="S.StartUp.Editor">编辑器</s:String>
+    <s:String x:Key="S.StartUp.Editor.Tooltip">打开编辑器窗口，您可以在其中开始或编辑新的录制视频。</s:String>
     <s:String x:Key="S.StartUp.Options">选项</s:String>
-    <s:String x:Key="S.Editor.Help">帮助</s:String>
     <s:String x:Key="S.StartUp.NewRelease">新版本可用 • {0}</s:String>
     <s:String x:Key="S.StartUp.NewRelease.Tooltip">下载最新版本的 ScreenToGif。</s:String>
-    <s:String x:Key="S.StartUp.Recorder.Tooltip">打开屏幕录像机，您可以在其中轻松开始录制屏幕。</s:String>
-    <s:String x:Key="S.StartUp.Webcam.Tooltip">打开摄像头录像机。</s:String>
-    <s:String x:Key="S.StartUp.Board.Tooltip">打开画板录像机，您可以在其中录制您的绘图。</s:String>
-    <s:String x:Key="S.StartUp.Editor.Tooltip">打开编辑器窗口，您可以在其中开始或编辑新的录制视频。</s:String>
 
     <!--Update Window-->
     <s:String x:Key="Update">更新</s:String>
@@ -164,9 +167,18 @@
     
     <!--Options • Application-->
     <s:String x:Key="S.Options.App.Startup">启动</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Manual">手动启动</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Manual.Info">仅当您手动执行该应用程序时，该应用程序才会执行。</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Automatic">跟随 Windows 启动</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Automatic.Info">Windows 启动后将执行该应用程序。</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Warning">无法在启动模式之间交替。</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Single">仅允许一个实例</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Single.Info">您将可以为每个用户和可执行文件运行一次该应用程序，&#10;意味着不同的用户或可执行实例可以共存。&#10;当再次尝试执行该应用程序时，第二个实例将尝试将焦点放在第一个实例上并自行结束。</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Multiple">允许多个实例</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Multiple.Info">您可以无限制地同时运行该应用程序多次。</s:String>
     <s:String x:Key="S.Options.App.Startup.Tray">启动最小化到系统托盘</s:String>
     <s:String x:Key="S.Options.App.Startup.Tray.Info">（启用此选项后，系统托盘图标将可见）</s:String>
-    <s:String x:Key="S.Options.App.Startup.Window">开始于：</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window">启动使用：</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Startup">启动窗口</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Recorder">屏幕录像机</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Webcam">摄像头录像机</s:String>
@@ -185,8 +197,8 @@
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">（更新的翻译将自动下载并安装）</s:String>
     <s:String x:Key="S.Options.App.General.CheckForUpdates">检查更新</s:String>
     <s:String x:Key="S.Options.App.Tray">系统托盘图标</s:String>
-    <s:String x:Key="S.Options.App.Tray.Show">在系统托盘（通知区域）上显示应用程序。</s:String>
-    <s:String x:Key="S.Options.App.Tray.LeaveOpen">即使所有窗口关闭，仍保持应用程序的打开状态。</s:String>
+    <s:String x:Key="S.Options.App.Tray.Show">在系统托盘（通知区域）上显示应用程序</s:String>
+    <s:String x:Key="S.Options.App.Tray.LeaveOpen">即使所有窗口关闭仍保持应用程序的打开状态</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Nothing">什么都不做</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Open">打开一个窗口</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Open.None">无窗口</s:String>
@@ -371,8 +383,8 @@
     <s:String x:Key="S.Options.Upload.Clear">清除</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Anonymous">Imgur（匿名）</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Direct">使用直接链接。</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Gifv">使用 Gifv 扩展名而不是 Gif 获取链接。</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.ToAlbum">将 gif 上传到所选的相册。</s:String>
+    <s:String x:Key="S.Options.Upload.Imgur.Gifv">使用 Gifv 扩展名而不是 Gif 获取链接</s:String>
+    <s:String x:Key="S.Options.Upload.Imgur.ToAlbum">将 Gif 上传到所选的相册</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Album">相册：</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.AskMe">上传前询问我</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Auth.NotPossible">无法打开页面以获取 Imgur 授权凭证。</s:String>
@@ -382,7 +394,7 @@
     <s:String x:Key="S.Options.Upload.Imgur.Refresh.None">为了刷新此应用程序的授权，您需要先完成授权过程。</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.NotAuthorized">未授权。</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Expired">授权已在{0}中过期。</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Valid">授权有效期至{0}。</s:String>
+    <s:String x:Key="S.Options.Upload.Imgur.Valid">授权有效期至 {0}。</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Removed">Imgur 授权被删除。</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Error.AlbumLoad">无法加载相册列表。</s:String>
     <s:String x:Key="S.Options.Upload.Gfycat.Anonymous">Gfycat（匿名）</s:String>
@@ -442,7 +454,7 @@
     <s:String x:Key="S.Options.About.Contact.Gitter">加入房间</s:String>
     <s:String x:Key="S.Options.About.Technical">技术</s:String>
     <s:String x:Key="S.Options.About.Technical.License">许可：</s:String>
-    <s:String x:Key="S.Options.About.Technical.Free">（本应用完全免费）</s:String>
+    <s:String x:Key="S.Options.About.Technical.Free">（该应用程序完全免费）</s:String>
     <s:String x:Key="S.Options.About.Technical.SourceCode">源代码：</s:String>
     <s:String x:Key="S.Options.About.Technical.Privacy">隐私政策：</s:String>
     <s:String x:Key="S.Options.About.ABigThanksTo">非常感谢</s:String>
@@ -545,7 +557,7 @@
 以适合图像</s:String>
     <s:String x:Key="InsertFrames.FitCanvas.Info">调整画布大小以装下两个图像（左上角）</s:String>
     <s:String x:Key="InsertFrames.DifferentSizes">两者帧大小不同。您需要在插入帧之前解决此问题。</s:String>
-    <s:String x:Key="InsertFrames.InsertedFrames">新增帧</s:String>
+    <s:String x:Key="InsertFrames.InsertedFrames">新建帧</s:String>
     <s:String x:Key="InsertFrames.CurrentFrames">当前帧</s:String>
     <s:String x:Key="InsertFrames.ImageSize">图像大小：</s:String>
     <s:String x:Key="InsertFrames.ImagePosition">图像位置：</s:String>
@@ -624,7 +636,7 @@
     <s:String x:Key="Editor.Transitions">过渡</s:String>
     <s:String x:Key="Editor.Statistics">统计</s:String>
     <s:String x:Key="Editor.Options">选项</s:String>
-    
+    <s:String x:Key="S.Editor.Help">帮助</s:String>
     <s:String x:Key="S.Editor.Extras">附加</s:String>
     
     <!--Welcome-->
@@ -1221,8 +1233,8 @@
     <s:String x:Key="S.Feedback.Send">发送</s:String>
     <s:String x:Key="S.Feedback.Preview">预览</s:String>
     <s:String x:Key="S.Feedback.Header">发送反馈</s:String>
-    <s:String x:Key="S.Feedback.Title">标题*</s:String>
-    <s:String x:Key="S.Feedback.Message">信息*</s:String>
+    <s:String x:Key="S.Feedback.Title">标题</s:String>
+    <s:String x:Key="S.Feedback.Message">信息</s:String>
     <s:String x:Key="S.Feedback.Message.Info">如果您遇到错误，请别忘了一步一步地向我解释如何出现错误的原因。</s:String>
     <s:String x:Key="S.Feedback.Type">反馈类型</s:String>
     <s:String x:Key="S.Feedback.Suggestion">建议</s:String>

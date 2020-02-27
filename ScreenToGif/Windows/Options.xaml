@@ -4,7 +4,7 @@
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
         xmlns:u="clr-namespace:ScreenToGif.Util"
-        Title="{DynamicResource S.Options.Title}" Height="580" Width="790" MinWidth="680" MinHeight="460" Background="{DynamicResource Panel.Background}"
+        Title="{DynamicResource S.Options.Title}" Height="590" Width="800" MinWidth="680" MinHeight="460" Background="{DynamicResource Panel.Background}"
         Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" UseLayoutRounding="True" SnapsToDevicePixels="True"
         Loaded="Window_Loaded" Closing="Window_Closing">
 
@@ -1099,7 +1099,7 @@
                             <n:ImageListBoxItem Image="{StaticResource Flag.UnitedKingdom}" Tag="en" Content="English" Author="Nicke Manarin" 
                                                 MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=en, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ImageListBoxItem Image="{StaticResource Flag.France}" Tag="fr" Content="French / Français" Author="Adrick, Sébastien 'Tr4ncer' Villemain"
+                            <n:ImageListBoxItem Image="{StaticResource Flag.France}" Tag="fr" Content="French / Français" Author="Adrick, Sébastien 'Tr4ncer' Villemain, Largo"
                                                 MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=fr, Converter={StaticResource TagToSelection}}"/>
 
                             <n:ImageListBoxItem Image="{StaticResource Flag.Germany}" Tag="de" Content="German / Deutsch" Author="Michael Reukauff, Christoph Voigt, PeterK."

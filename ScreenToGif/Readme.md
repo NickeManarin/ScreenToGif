@@ -7,18 +7,12 @@ _VS 2019 and .Net 4.8 or newer required._
 
 ## What's new? (Version 2.21)
 
-• You can now import Apng's files.  
-• Option to run the app on startup.   
-• Option to allow only one instance of the app, switching to the already opened app when trying to open another instance. (Single instance per user and executable)  
+•  Updated the Chinese (Simplified), French and Russian translations.  
 
 ### Fixed:
 
-♦ If the SharpDX libraries were not in the same folder as the app, it was not possible to load them.  
-♦ The editor window was not receiving focus upon loading.  
-♦ Sometime, the button to select a region in the new recorder was not working.  
-♦ The Accept/Retry/Cancel controls were not getting positioned correctly when the whole right side of a screen was selected.  
-♦ When the folder path of the SharpDx was empty, the options window was displaying an error while checking the external tools.  
-♦ The video importer (MediaPlayer) was not respecting the selected scale.  
+♦ The app was crashing on startup when checking if there wasn't any other instance running.  
+♦ The eye-dropper of the color selector window was not updating the RGBA values when dragging accross the screen.  
 
 ### Known Bugs:
 

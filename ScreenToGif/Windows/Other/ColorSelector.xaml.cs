@@ -200,6 +200,20 @@ namespace ScreenToGif.Windows.Other
             var pix = new PixelUtil(image);
             pix.LockBits();
             UpdateMarkerPosition(pix.GetPixel((int)(_captureSize.Width / 2d), (int)(_captureSize.Height / 2d)));
+
+            #region Update the values
+
+            _isUpdating = true;
+
+            AlphaIntegerUpDown.Value = SelectedColor.A;
+            RedIntegerUpDown.Value = SelectedColor.R;
+            GreenIntegerUpDown.Value = SelectedColor.G;
+            BlueIntegerUpDown.Value = SelectedColor.B;
+
+            _isUpdating = false;
+
+            #endregion
+
             pix.UnlockBits();
         }
 
