@@ -14,6 +14,7 @@ _VS 2019 and .Net 4.8 or newer required._
 
 ♦ The DirectX capture method was crashing in some machines when trying to record with the cursor visible.  
 ♦ The installer was crashing when the user had no .Net Framework 4.7.2 or newer.  
+♦ Wheninserting a new media into an existing project, the app was saving the state to the action stack twice, which caused a crash when trying to undo twice.  
 ♦ The text of 'Help' button was missing.  
 
 ### Known Bugs:

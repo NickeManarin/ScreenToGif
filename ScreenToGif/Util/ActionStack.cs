@@ -885,11 +885,9 @@ namespace ScreenToGif.Util
             var count = UndoStack.Count;
 
             //Pop all iteration from Undo stack
-            for (int i = 0; i < count; i++)
-            {
+            for (var i = 0; i < count; i++)
                 current = Undo(current, false);
-            }
-
+            
             ClearUndo();
             ClearRedo();
 

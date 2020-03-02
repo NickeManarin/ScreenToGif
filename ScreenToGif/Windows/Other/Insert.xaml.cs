@@ -406,7 +406,7 @@ namespace ScreenToGif.Windows.Other
                         var encoder = new PngBitmapEncoder();
                         encoder.Frames.Add(BitmapFrame.Create(bmp));
 
-                        // Saves the image into a file using the encoder
+                        //Saves the image into a file using the encoder
                         using (Stream stream = File.Create(frameInfo.Path))
                             encoder.Save(stream);
 
@@ -517,13 +517,13 @@ namespace ScreenToGif.Windows.Other
                 if (_isCancelled)
                     return false;
 
-                #region Merge the Lists
+                #region Merge the lists
 
                 if (after)
                     _insertIndex++;
 
-                //Saves the state before inserting the images.
-                ActionStack.SaveState(ActionStack.EditAction.Add, _insertIndex, NewList.Count);
+                //Saves the state before inserting the images. This was removed because it was causing a crash when applying undo twice.
+                //ActionStack.SaveState(ActionStack.EditAction.Add, _insertIndex, NewList.Count);
 
                 ActualList.InsertRange(_insertIndex, NewList);
 

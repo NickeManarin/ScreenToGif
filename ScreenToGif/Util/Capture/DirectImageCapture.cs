@@ -486,7 +486,7 @@ namespace ScreenToGif.Util.Capture
             if (screenTexture == null || CursorShapeBuffer?.Length == 0)// || !info.PointerPosition.Visible)
                 return;
 
-            //Don't let it bleed beyond the top-left corner, calculate the dimensions of portion of the cursor that will appear.
+            //Don't let it bleed beyond the top-left corner, calculate the dimensions of the portion of the cursor that will appear.
             var leftCut = frame.CursorX;
             var topCut = frame.CursorY;
             var rightCut = screenTexture.Description.Width - (frame.CursorX + CursorShapeInfo.Width);

@@ -454,9 +454,9 @@
 
             <!--ScrollViewer-->
             <Style TargetType="{x:Type ScrollViewer}">
-                <!--<Setter Property="PanningRatio" Value="0.1"/>
+                <!--<Setter Property="PanningRatio" Value="0.01"/>
                 <Setter Property="PanningDeceleration" Value="0.1"/>
-                <Setter Property="CanContentScroll" Value="False"/>-->
+                <Setter Property="CanContentScroll" Value="True"/>-->
 
                 <Setter Property="Template">
                     <Setter.Value>
