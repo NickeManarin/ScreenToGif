@@ -130,14 +130,24 @@
     <s:String x:Key="S.StartUp.NewRelease">Доступна новая версия: {0}</s:String>
     <s:String x:Key="S.StartUp.NewRelease.Tooltip">Загрузка последней версии программы.</s:String>
 
-    <!--Update Window-->
+    <!--Updater-->
     <s:String x:Key="S.Updater.Title">Обновление</s:String>
+    <s:String x:Key="S.Updater.Header">Доступно обновление</s:String>
     <s:String x:Key="S.Updater.NewRelease">Новая версия!</s:String>
     <s:String x:Key="S.Updater.NewRelease.Info">Доступна новая версия {0}! Показать детали.</s:String>
-    <s:String x:Key="S.Updater.Download">Загрузить</s:String>
+    <s:String x:Key="S.Updater.Version">Версия</s:String>
     <s:String x:Key="S.Updater.Portable">Портативная</s:String>
     <s:String x:Key="S.Updater.Installer">Установщик</s:String>
-
+    <s:String x:Key="S.Updater.Info.WhatsNew">Что нового?</s:String>
+    <s:String x:Key="S.Updater.Info.BugFixes">Исправления:</s:String>
+    <s:String x:Key="S.Updater.Info.NewVersionAvailable">Доступна новая версия.&#x0d;Открыть браузер, чтобы загрузить ее?</s:String>
+    <s:String x:Key="S.Updater.RunAfter">Запустить приложение после обновления.</s:String>
+    <s:String x:Key="S.Updater.Download">Загрузить</s:String>
+    <s:String x:Key="S.Updater.Install">Установить</s:String>
+    <s:String x:Key="S.Updater.Downloading">Загрузка...</s:String>
+    <s:String x:Key="S.Updater.Warning.Show">Не удалось показать детали загрузки.</s:String>
+    <s:String x:Key="S.Updater.Warning.Download">Не удалось загрузить обновление</s:String>
+    
     <!--Options-->
     <s:String x:Key="S.Options.Title">ScreenToGif - Настройки</s:String>
     <s:String x:Key="S.Options.App">Программа</s:String>
@@ -188,7 +198,9 @@
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(Интерфейс будет отрисовываться программно)</s:String>
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">Проверять обновления перевода.</s:String>
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(Обновленные переводы будут загружены и установлены автоматически)</s:String>
-    <s:String x:Key="S.Options.App.General.CheckForUpdates">Проверять обновления.</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForUpdates">Проверять обновления при запуске.</s:String>
+    <s:String x:Key="S.Options.App.General.UpdateOnClose">Автоустановка обновления после закрытия приложения.</s:String>
+    <s:String x:Key="S.Options.App.General.PromptToInstall">Запрос установки</s:String>
     <s:String x:Key="S.Options.App.Tray">Значок в системном трее</s:String>
     <s:String x:Key="S.Options.App.Tray.Show">Показывать значок в системном трее.</s:String>
     <s:String x:Key="S.Options.App.Tray.LeaveOpen">Не выгружать программу, даже если все окна закрыты.</s:String>
@@ -617,8 +629,10 @@
     <s:String x:Key="Editor.Transitions">Переходы</s:String>
     <s:String x:Key="Editor.Statistics">Статистика</s:String>
     <s:String x:Key="Editor.Options">Настройки</s:String>
-    
+    <s:String x:Key="S.Editor.Help">Справка</s:String>
     <s:String x:Key="S.Editor.Extras">Дополнительно</s:String>
+    <s:String x:Key="S.Editor.UpdateAvailable">Доступно обновление!</s:String>
+    <s:String x:Key="S.Editor.UpdateAvailable.Info">Нажмите здесь, чтобы узнать больше.</s:String>
     
     <!--Welcome-->
     <s:String x:Key="Welcome.New">Перейдите в "Файл > Создать запись" чтобы начать новую запись.</s:String>
@@ -1166,7 +1180,7 @@
     <s:String x:Key="S.SaveAs.File.Location">Папка назначения.</s:String>
     <s:String x:Key="S.SaveAs.File.Choose">Выберите расположение.</s:String>
     <s:String x:Key="S.SaveAs.File.Format">Формат файла</s:String>
-    <s:String x:Key="S.SaveAs.File.Name">Имя файла.</s:String>
+    <s:String x:Key="S.SaveAs.File.Name">Имя файла. Вставте формат даты/времени между '?'</s:String>
     <s:String x:Key="S.SaveAs.File.Animation">Анимация</s:String>
     <s:String x:Key="S.SaveAs.File.Increase">Повысить номер файла</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">Понизить номер файла</s:String>
