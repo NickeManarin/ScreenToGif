@@ -8,11 +8,11 @@
     <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
     
     <!--General-->
-    <s:String x:Key="Ok">OK</s:String>
-    <s:String x:Key="Back">Zurück</s:String>
-    <s:String x:Key="Cancel">Abbrechen</s:String>
-    <s:String x:Key="Yes">Ja</s:String>
-    <s:String x:Key="No">Nein</s:String>
+    <s:String x:Key="S.Ok">OK</s:String>
+    <s:String x:Key="S.Back">Zurück</s:String>
+    <s:String x:Key="S.Cancel">Abbrechen</s:String>
+    <s:String x:Key="S.Yes">Ja</s:String>
+    <s:String x:Key="S.No">Nein</s:String>
     <s:String x:Key="Frame">Frame</s:String>
     <s:String x:Key="Suppress">Schließen</s:String>
     <s:String x:Key="Preview">Vorschau</s:String>
@@ -35,9 +35,9 @@
     <s:String x:Key="S.Exit">Beenden</s:String>
 
     <!--Application-->
-    <s:String x:Key="Application.Exiting.Title">ScreenToGif wird beendet</s:String>
-    <s:String x:Key="Application.Exiting.Instruction">Möchten Sie das Programm wirklich beenden?</s:String>
-    <s:String x:Key="Application.Exiting.Message">Alle Fenster werden geschlossen und das Programm-Symbol aus dem Infobereich der Taskleiste entfernt.</s:String>   
+    <s:String x:Key="S.Exiting.Title">ScreenToGif wird beendet</s:String>
+    <s:String x:Key="S.Exiting.Instruction">Möchten Sie das Programm wirklich beenden?</s:String>
+    <s:String x:Key="S.Exiting.Message">Alle Fenster werden geschlossen und das Programm-Symbol aus dem Infobereich der Taskleiste entfernt.</s:String>   
     
     <!--Error messages--> 
     <s:String x:Key="S.Crash">Ach nee, das Programm ist abgestürzt! :(</s:String>
@@ -440,25 +440,25 @@
     <s:String x:Key="S.Localization.MoveRosourcePosition">Um Ihre eigene Übersetzung zu nutzen, platzieren Sie sie am Ende der Liste.</s:String>
 
     <!--Recorder-->
-    <s:String x:Key="Recorder.RecordingOptions">Aufnahme-Optionen:</s:String>
-    <s:String x:Key="Recorder.Snapshot">Schnappschussmodus</s:String>
-    <s:String x:Key="Recorder.ThinMode">Titelleiste ausblenden</s:String>
-    <s:String x:Key="Recorder.Fullscreen">Vollbildmodus (experimentell)</s:String>
+    <s:String x:Key="S.Recorder.RecordingOptions">Aufnahme-Optionen:</s:String>
+    <s:String x:Key="S.Recorder.Snapshot">Schnappschussmodus</s:String>
+    <s:String x:Key="S.Recorder.ThinMode">Titelleiste ausblenden</s:String>
+    <s:String x:Key="S.Recorder.Fullscreen">Vollbildmodus (experimentell)</s:String>
 
-    <s:String x:Key="Recorder.Record">Aufnahme</s:String>
-    <s:String x:Key="Recorder.Pause">Pause</s:String>
-    <s:String x:Key="Recorder.Continue">Fortsetzen</s:String>
-    <s:String x:Key="Recorder.Stop">Stopp</s:String>
-    <s:String x:Key="Recorder.Discard">Verwerfen</s:String>
-    <s:String x:Key="Recorder.Snap">Schnappschuss</s:String>
-    <s:String x:Key="Recorder.Height">Höhe</s:String>
-    <s:String x:Key="Recorder.Width">Breite</s:String>
-    <s:String x:Key="Recorder.Fps">Bilder pro Sekunde</s:String>
-    <s:String x:Key="Recorder.Fps.Short">B/s</s:String>
-    <s:String x:Key="Recorder.FpsRange">Bereich: 1-60 Bilder pro Sekunde</s:String>
-    <s:String x:Key="Recorder.SnapToWindow">Durch Ziehen und Loslassen ans Fenster andocken</s:String>
-    <s:String x:Key="Recorder.PreStart">Aufnahme startet in:</s:String>
-    <s:String x:Key="Recorder.Paused">ScreenToGif (Pause)</s:String>
+    <s:String x:Key="S.Recorder.Record">Aufnahme</s:String>
+    <s:String x:Key="S.Recorder.Pause">Pause</s:String>
+    <s:String x:Key="S.Recorder.Continue">Fortsetzen</s:String>
+    <s:String x:Key="S.Recorder.Stop">Stopp</s:String>
+    <s:String x:Key="S.Recorder.Discard">Verwerfen</s:String>
+    <s:String x:Key="S.Recorder.Snap">Schnappschuss</s:String>
+    <s:String x:Key="S.Recorder.Height">Höhe</s:String>
+    <s:String x:Key="S.Recorder.Width">Breite</s:String>
+    <s:String x:Key="S.Recorder.Fps">Bilder pro Sekunde</s:String>
+    <s:String x:Key="S.Recorder.Fps.Short">B/s</s:String>
+    <s:String x:Key="S.Recorder.FpsRange">Bereich: 1-60 Bilder pro Sekunde</s:String>
+    <s:String x:Key="S.Recorder.SnapToWindow">Durch Ziehen und Loslassen ans Fenster andocken</s:String>
+    <s:String x:Key="S.Recorder.PreStart">Aufnahme startet in:</s:String>
+    <s:String x:Key="S.Recorder.Paused">ScreenToGif (Pause)</s:String>
     
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible">Bildschirm-Aufnahme fehlgeschlagen</s:String>
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">Bildschirm-Aufnahme fehlgeschlagen. Aufnahme-Methode lieferte nach fünf Versuchen keine Frames.</s:String>
@@ -481,37 +481,37 @@
     <s:String x:Key="S.Recorder.EscToCancel">Esc-Taste zum Abbrechen drücken</s:String>
     
     <!--Webcam Recorder-->
-    <s:String x:Key="Webcam.Title">ScreenToGif - Webcam-Rekorder</s:String>
-    <s:String x:Key="Webcam.NoVideo">Kein Video-Gerät gefunden</s:String>
-    <s:String x:Key="Webcam.CheckVideoDevices">Video-Geräte suchen</s:String>
-    <s:String x:Key="Webcam.Scale">Skalierung: {0:0.##}x</s:String>
-    <s:String x:Key="Webcam.ChangeScale">Videogröße ändern</s:String>
+    <s:String x:Key="S.Webcam.Title">ScreenToGif - Webcam-Rekorder</s:String>
+    <s:String x:Key="S.Webcam.NoVideo">Kein Video-Gerät gefunden</s:String>
+    <s:String x:Key="S.Webcam.CheckVideoDevices">Video-Geräte suchen</s:String>
+    <s:String x:Key="S.Webcam.Scale">Skalierung: {0:0.##}x</s:String>
+    <s:String x:Key="S.Webcam.ChangeScale">Videogröße ändern</s:String>
     
     <!--Board Recorder-->
-    <s:String x:Key="Board.Title">ScreenToGif - Zeichenbrett-Rekorder</s:String>
-    <s:String x:Key="Board.AutoRecord">Aufnahme</s:String>
-    <s:String x:Key="Board.AutoRecordToolTip">Ermöglicht Aufnahme während des Zeichnens</s:String>
-    <s:String x:Key="Board.CtrlHold">Strg [Halten]</s:String>
+    <s:String x:Key="S.Board.Title">ScreenToGif - Zeichenbrett-Rekorder</s:String>
+    <s:String x:Key="S.Board.AutoRecord">Aufnahme</s:String>
+    <s:String x:Key="S.Board.AutoRecordToolTip">Ermöglicht Aufnahme während des Zeichnens</s:String>
+    <s:String x:Key="S.Board.CtrlHold">Strg [Halten]</s:String>
     
     <!--Color Selector-->
-    <s:String x:Key="ColorSelector.Title">Farbpalette</s:String>
-    <s:String x:Key="ColorSelector.Select">Farbwert bestimmen</s:String>
-    <s:String x:Key="ColorSelector.Red">Rot:</s:String>
-    <s:String x:Key="ColorSelector.Green">Grün:</s:String>
-    <s:String x:Key="ColorSelector.Blue">Blau:</s:String>
-    <s:String x:Key="ColorSelector.Alpha">Alpha:</s:String>
-    <s:String x:Key="ColorSelector.Hexadecimal">Hex:</s:String>
-    <s:String x:Key="ColorSelector.Initial">Anfangsfarbe</s:String>
-    <s:String x:Key="ColorSelector.Current">Aktuelle Farbe</s:String>
-    <s:String x:Key="ColorSelector.Latest">Letzte Farbe</s:String>
-    <s:String x:Key="ColorSelector.Sample">Farbpipette</s:String>
-    <s:String x:Key="ColorSelector.Sample.Info">Durch Klicken und Ziehen Farben&#x0d; auf dem Bildschirm auswählen</s:String>
+    <s:String x:Key="S.ColorSelector.Title">Farbpalette</s:String>
+    <s:String x:Key="S.ColorSelector.Select">Farbwert bestimmen</s:String>
+    <s:String x:Key="S.ColorSelector.Red">Rot:</s:String>
+    <s:String x:Key="S.ColorSelector.Green">Grün:</s:String>
+    <s:String x:Key="S.ColorSelector.Blue">Blau:</s:String>
+    <s:String x:Key="S.ColorSelector.Alpha">Alpha:</s:String>
+    <s:String x:Key="S.ColorSelector.Hexadecimal">Hex:</s:String>
+    <s:String x:Key="S.ColorSelector.Initial">Anfangsfarbe</s:String>
+    <s:String x:Key="S.ColorSelector.Current">Aktuelle Farbe</s:String>
+    <s:String x:Key="S.ColorSelector.Latest">Letzte Farbe</s:String>
+    <s:String x:Key="S.ColorSelector.Sample">Farbpipette</s:String>
+    <s:String x:Key="S.ColorSelector.Sample.Info">Durch Klicken und Ziehen Farben&#x0d; auf dem Bildschirm auswählen</s:String>
     
     <!--Exception Viewer, Optional-->
-    <s:String x:Key="ExceptionViewer.Title">Ausnahme-Anzeige</s:String>
-    <s:String x:Key="ExceptionViewer.OpenInner">Innere Ausnahme öffnen</s:String>
-    <s:String x:Key="ErrorDialog.Observation">Ein Fehler ist aufgetreten</s:String>
-    <s:String x:Key="ErrorDialog.Send">Fehlerbericht senden</s:String>
+    <s:String x:Key="S.ExceptionViewer.Title">Ausnahme-Anzeige</s:String>
+    <s:String x:Key="S.ExceptionViewer.OpenInner">Innere Ausnahme öffnen</s:String>
+    <s:String x:Key="S.ErrorDialog.Observation">Ein Fehler ist aufgetreten</s:String>
+    <s:String x:Key="S.ErrorDialog.Send">Fehlerbericht senden</s:String>
 
     <!--FFmpeg Preset-->
     <s:String x:Key="S.FfmpegPreset.Title">FFmpeg-Voreinstellung</s:String>
@@ -522,22 +522,22 @@
     <s:String x:Key="S.FfmpegPreset.Warning.SameName">Eine Voreinstellung mit diesem Namen existiert bereits.</s:String>
 
     <!--Insert Frames-->
-    <s:String x:Key="InsertFrames.Title">Frames hinzufügen</s:String>
-    <s:String x:Key="InsertFrames.Info">Beide Seiten müssen gleiche Höhe/Breite haben. Dieses Fenster erlaubt es Ihnen, den Arbeitsbereich und das Bild neu zu positionieren und zu vergrößern bzw. zu verkleinern. Klicken Sie, um auszuwählen und die Größe zu ändern.</s:String>
-    <s:String x:Key="InsertFrames.CanvasSize">Arbeitsbereichgröße:</s:String>
-    <s:String x:Key="InsertFrames.FitCanvas">Bild in das Arbeitsbereich einpassen</s:String>
-    <s:String x:Key="InsertFrames.FitCanvas.Info">Ändert Höhe/Breite des Arbeitsbereiches</s:String>
-    <s:String x:Key="InsertFrames.DifferentSizes">Unterschiedliche Framegrößen. Passen Sie Framegrößen an, bevor Sie Bildsequenzen hinzufügen.</s:String>
-    <s:String x:Key="InsertFrames.InsertedFrames">Neue Frames</s:String>
-    <s:String x:Key="InsertFrames.CurrentFrames">Aktuelle Frames</s:String>
-    <s:String x:Key="InsertFrames.ImageSize">Abmessungen:</s:String>
-    <s:String x:Key="InsertFrames.ImagePosition">Bildposition:</s:String>
-    <s:String x:Key="InsertFrames.ResetImageSizePosition">Bildgröße und &#10;-position zurücksetzen</s:String>
-    <s:String x:Key="InsertFrames.Info2">Neue Frames zu aktueller Bildsequenz bei folgender Position hinzufügen:</s:String>
-    <s:String x:Key="InsertFrames.Before">Vor</s:String>
-    <s:String x:Key="InsertFrames.After">Nach</s:String>
-    <s:String x:Key="InsertFrames.Importing">Wird importiert ...</s:String>
-    <s:String x:Key="InsertFrames.SelectColorFill">Arbeitsbereich-Füllfarbe auswählen</s:String>
+    <s:String x:Key="S.InsertFrames.Title">Frames hinzufügen</s:String>
+    <s:String x:Key="S.InsertFrames.Info">Beide Seiten müssen gleiche Höhe/Breite haben. Dieses Fenster erlaubt es Ihnen, den Arbeitsbereich und das Bild neu zu positionieren und zu vergrößern bzw. zu verkleinern. Klicken Sie, um auszuwählen und die Größe zu ändern.</s:String>
+    <s:String x:Key="S.InsertFrames.CanvasSize">Arbeitsbereichgröße:</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas">Bild in das Arbeitsbereich einpassen</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas.Info">Ändert Höhe/Breite des Arbeitsbereiches</s:String>
+    <s:String x:Key="S.InsertFrames.DifferentSizes">Unterschiedliche Framegrößen. Passen Sie Framegrößen an, bevor Sie Bildsequenzen hinzufügen.</s:String>
+    <s:String x:Key="S.InsertFrames.InsertedFrames">Neue Frames</s:String>
+    <s:String x:Key="S.InsertFrames.CurrentFrames">Aktuelle Frames</s:String>
+    <s:String x:Key="S.InsertFrames.ImageSize">Abmessungen:</s:String>
+    <s:String x:Key="S.InsertFrames.ImagePosition">Bildposition:</s:String>
+    <s:String x:Key="S.InsertFrames.ResetImageSizePosition">Bildgröße und &#10;-position zurücksetzen</s:String>
+    <s:String x:Key="S.InsertFrames.Info2">Neue Frames zu aktueller Bildsequenz bei folgender Position hinzufügen:</s:String>
+    <s:String x:Key="S.InsertFrames.Before">Vor</s:String>
+    <s:String x:Key="S.InsertFrames.After">Nach</s:String>
+    <s:String x:Key="S.InsertFrames.Importing">Wird importiert ...</s:String>
+    <s:String x:Key="S.InsertFrames.SelectColorFill">Arbeitsbereich-Füllfarbe auswählen</s:String>
 
     <!--Import Frames From Video-->
     <s:String x:Key="S.ImportVideo.Title">Bildsequenz aus Video importieren</s:String>
@@ -850,41 +850,41 @@
     <s:String x:Key="Editor.Warning.LowSpace">Der vom Programm verwendete Speicherplatz ist fast belegt ({0}% übrig). Gehen Sie zu Optionen > Temporäre Dateien, um Speicherplatz frei zu geben.</s:String>
     
     <!--Hints-->
-    <s:String x:Key="Hint.NewRecording">Neue Bildschirm-Aufnahme erstellt.</s:String>
-    <s:String x:Key="Hint.NewWebcamRecording">Neue Webcam-Aufnahme erstellt.</s:String>
-    <s:String x:Key="Hint.NewBoardRecording">Neue Zeichenbrett-Aufnahme erstellt.</s:String>
-    <s:String x:Key="Hint.NewAnimation">Neue Animation erstellt.</s:String>
-    <s:String x:Key="Hint.Undo">Rückgängig-Aktion ausgeführt.</s:String>
-    <s:String x:Key="Hint.Reset">Zurücksetzen-Aktion ausgeführt.</s:String>
-    <s:String x:Key="Hint.Redo">Wiederherstellen-Aktion ausgeführt.</s:String>
-    <s:String x:Key="Hint.Cut">{0} Frame(s) ausgeschnitten.</s:String>
-    <s:String x:Key="Hint.Copy">{0} Frame(s) kopiert.</s:String>
-    <s:String x:Key="Hint.Paste">{0} Frame(s) eingefügt.</s:String>
-    <s:String x:Key="Hint.Zoom">Zoom auf {0} % gesetzt.</s:String>
-    <s:String x:Key="Hint.SelectAll">Alle Frames ausgewählt.</s:String>
-    <s:String x:Key="Hint.SelectSingle">Frame {0} ausgewählt.</s:String>
-    <s:String x:Key="Hint.SelectInverse">Auswahl umgekehrt.</s:String>
-    <s:String x:Key="Hint.Deselect">Nichts ausgewählt.</s:String>
-    <s:String x:Key="Hint.DeleteFrames">{0} Frame(s) entfernt.</s:String>
-    <s:String x:Key="Hint.Reverse">Bildsequenz-Reihenfolge umgekehrt.</s:String>
-    <s:String x:Key="Hint.Yoyo">Jo-Jo-Effekt angewendet.</s:String>
-    <s:String x:Key="Hint.MoveLeft">Frame(s) nach links verschoben.</s:String>
-    <s:String x:Key="Hint.MoveRight">Frame(s) nach rechts verschoben.</s:String>
-    <s:String x:Key="Hint.Resize">Framegröße verändert.</s:String>
-    <s:String x:Key="Hint.Crop">Frame(s) zugeschnitten.</s:String>
-    <s:String x:Key="Hint.FlipRotate">Frame(s) gedreht/gespiegelt.</s:String>
-    <s:String x:Key="Hint.FlipRotate2">Spiegeln-Effekt gilt für ausgewählte Frames und Drehen-Effekt gilt für alle Frames.</s:String>
-    <s:String x:Key="Hint.ApplyAll">Diese Aktion gilt für alle Frames.</s:String>
-    <s:String x:Key="Hint.ApplySelected">Diese Aktion gilt für ausgewählte Frames.</s:String>
-    <s:String x:Key="Hint.ApplySelectedOrAll">Diese Aktion gilt für alle oder für ausgewählte Frames, abhängig von Ihren eigenen Einstellungen.</s:String>
-    <s:String x:Key="Hint.Cinemagraph">Cinemagraph-Effekt gilt für alle Frames, die auf dem ersten Frame basieren.</s:String>
-    <s:String x:Key="Hint.Overlay">Überlagerung angewendet.</s:String>
-    <s:String x:Key="Hint.TitleFrame">Titelbild hinzugefügt.</s:String>
-    <s:String x:Key="Hint.TitleFrame2">Titelbild wird vor dem markierten Frame hinzugefügt.</s:String>
-    <s:String x:Key="Hint.Delay">Dauer der markierten Frames geändert.</s:String>
-    <s:String x:Key="Hint.Transition">Übergang angewendet.</s:String>
-    <s:String x:Key="Hint.Reduce">Bildwiederholrate reduziert.</s:String>
-    <s:String x:Key="Hint.Duplicates">Duplikate entfernt.</s:String>
+    <s:String x:Key="S.Hint.NewRecording">Neue Bildschirm-Aufnahme erstellt.</s:String>
+    <s:String x:Key="S.Hint.NewWebcamRecording">Neue Webcam-Aufnahme erstellt.</s:String>
+    <s:String x:Key="S.Hint.NewBoardRecording">Neue Zeichenbrett-Aufnahme erstellt.</s:String>
+    <s:String x:Key="S.Hint.NewAnimation">Neue Animation erstellt.</s:String>
+    <s:String x:Key="S.Hint.Undo">Rückgängig-Aktion ausgeführt.</s:String>
+    <s:String x:Key="S.Hint.Reset">Zurücksetzen-Aktion ausgeführt.</s:String>
+    <s:String x:Key="S.Hint.Redo">Wiederherstellen-Aktion ausgeführt.</s:String>
+    <s:String x:Key="S.Hint.Cut">{0} Frame(s) ausgeschnitten.</s:String>
+    <s:String x:Key="S.Hint.Copy">{0} Frame(s) kopiert.</s:String>
+    <s:String x:Key="S.Hint.Paste">{0} Frame(s) eingefügt.</s:String>
+    <s:String x:Key="S.Hint.Zoom">Zoom auf {0} % gesetzt.</s:String>
+    <s:String x:Key="S.Hint.SelectAll">Alle Frames ausgewählt.</s:String>
+    <s:String x:Key="S.Hint.SelectSingle">Frame {0} ausgewählt.</s:String>
+    <s:String x:Key="S.Hint.SelectInverse">Auswahl umgekehrt.</s:String>
+    <s:String x:Key="S.Hint.Deselect">Nichts ausgewählt.</s:String>
+    <s:String x:Key="S.Hint.DeleteFrames">{0} Frame(s) entfernt.</s:String>
+    <s:String x:Key="S.Hint.Reverse">Bildsequenz-Reihenfolge umgekehrt.</s:String>
+    <s:String x:Key="S.Hint.Yoyo">Jo-Jo-Effekt angewendet.</s:String>
+    <s:String x:Key="S.Hint.MoveLeft">Frame(s) nach links verschoben.</s:String>
+    <s:String x:Key="S.Hint.MoveRight">Frame(s) nach rechts verschoben.</s:String>
+    <s:String x:Key="S.Hint.Resize">Framegröße verändert.</s:String>
+    <s:String x:Key="S.Hint.Crop">Frame(s) zugeschnitten.</s:String>
+    <s:String x:Key="S.Hint.FlipRotate">Frame(s) gedreht/gespiegelt.</s:String>
+    <s:String x:Key="S.Hint.FlipRotate2">Spiegeln-Effekt gilt für ausgewählte Frames und Drehen-Effekt gilt für alle Frames.</s:String>
+    <s:String x:Key="S.Hint.ApplyAll">Diese Aktion gilt für alle Frames.</s:String>
+    <s:String x:Key="S.Hint.ApplySelected">Diese Aktion gilt für ausgewählte Frames.</s:String>
+    <s:String x:Key="S.Hint.ApplySelectedOrAll">Diese Aktion gilt für alle oder für ausgewählte Frames, abhängig von Ihren eigenen Einstellungen.</s:String>
+    <s:String x:Key="S.Hint.Cinemagraph">Cinemagraph-Effekt gilt für alle Frames, die auf dem ersten Frame basieren.</s:String>
+    <s:String x:Key="S.Hint.Overlay">Überlagerung angewendet.</s:String>
+    <s:String x:Key="S.Hint.TitleFrame">Titelbild hinzugefügt.</s:String>
+    <s:String x:Key="S.Hint.TitleFrame2">Titelbild wird vor dem markierten Frame hinzugefügt.</s:String>
+    <s:String x:Key="S.Hint.Delay">Dauer der markierten Frames geändert.</s:String>
+    <s:String x:Key="S.Hint.Transition">Übergang angewendet.</s:String>
+    <s:String x:Key="S.Hint.Reduce">Bildwiederholrate reduziert.</s:String>
+    <s:String x:Key="S.Hint.Duplicates">Duplikate entfernt.</s:String>
     
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">Ausblenden</s:String>

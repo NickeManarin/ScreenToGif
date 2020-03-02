@@ -145,7 +145,7 @@ namespace ScreenToGif.Util
 
         private static void SetValue(object value, [CallerMemberName] string key = "")
         {
-            lock(Lock)
+            lock (Lock)
             {
                 //Updates or inserts the value to the Local resource.
                 if (_local != null)
@@ -448,7 +448,7 @@ namespace ScreenToGif.Util
             get => (int)GetValue();
             set => SetValue(value);
         }
-        
+
         #endregion
 
         #region Feedback
@@ -463,13 +463,13 @@ namespace ScreenToGif.Util
 
 
         #region Options • Application
-        
+
         public bool SingleInstance
         {
             get => (bool)GetValue();
             set => SetValue(value);
-        }   
-        
+        }
+
         public bool StartMinimized
         {
             get => (bool)GetValue();
@@ -594,7 +594,7 @@ namespace ScreenToGif.Util
             get => (int)GetValue();
             set => SetValue(value);
         }
-        
+
         public int DoubleLeftOpenWindow
         {
             get => (int)GetValue();
@@ -646,7 +646,7 @@ namespace ScreenToGif.Util
             get => (int)GetValue();
             set => SetValue(value);
         }
-        
+
         public bool ShowCursor
         {
             get => (bool)GetValue();
@@ -1330,12 +1330,6 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
-        public string ExtraParametersGif
-        {
-            get => (string)GetValue();
-            set => SetValue(value);
-        }
-
         public string LatestOutputFolder
         {
             get => (string)GetValue();
@@ -1437,12 +1431,6 @@ namespace ScreenToGif.Util
         public bool RepeatForeverApng
         {
             get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
-        public string ExtraParametersApngFFmpeg
-        {
-            get => (string)GetValue();
             set => SetValue(value);
         }
 
@@ -2360,7 +2348,7 @@ namespace ScreenToGif.Util
         }
 
         #endregion
-        
+
         #region Editor • Mouse Clicks
 
         public Color MouseClicksColor
@@ -2382,7 +2370,7 @@ namespace ScreenToGif.Util
         }
 
         #endregion
-        
+
         #region Editor • Border
 
         public Color BorderColor
@@ -2648,6 +2636,12 @@ namespace ScreenToGif.Util
             get => null;
             set => SetValue(value);
         }
+
+        [Obsolete]
+        public string ExtraParametersGif { get; set; }
+        
+        [Obsolete]
+        public string ExtraParametersApngFFmpeg { get; set; }
 
         #endregion
     }

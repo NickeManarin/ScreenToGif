@@ -8,11 +8,11 @@
     <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
     
     <!--General-->
-    <s:String x:Key="Ok">Ok</s:String>
-    <s:String x:Key="Back">Volver</s:String>
-    <s:String x:Key="Cancel">Cancelar</s:String>
-    <s:String x:Key="Yes">Sí</s:String>
-    <s:String x:Key="No">No</s:String>
+    <s:String x:Key="S.Ok">Ok</s:String>
+    <s:String x:Key="S.Back">Volver</s:String>
+    <s:String x:Key="S.Cancel">Cancelar</s:String>
+    <s:String x:Key="S.Yes">Sí</s:String>
+    <s:String x:Key="S.No">No</s:String>
     <s:String x:Key="Frame">Fotograma</s:String>
     <s:String x:Key="Suppress">Suprimir</s:String>
     <s:String x:Key="Preview">Previsualizar</s:String>
@@ -185,25 +185,25 @@
     <s:String x:Key="S.Localization.MoveRosourcePosition">Para aplicar tu recurso personal, muevelo al final de la lista.</s:String>
 
     <!--Recorder-->
-    <s:String x:Key="Recorder.RecordingOptions">Opciones de grabación:</s:String>
-    <s:String x:Key="Recorder.Snapshot">Modo instantaneo</s:String>
-    <s:String x:Key="Recorder.ThinMode">Ocultar la barra de titulo</s:String>
-    <s:String x:Key="Recorder.Fullscreen">Modo pantalla completa</s:String>
+    <s:String x:Key="S.Recorder.RecordingOptions">Opciones de grabación:</s:String>
+    <s:String x:Key="S.Recorder.Snapshot">Modo instantaneo</s:String>
+    <s:String x:Key="S.Recorder.ThinMode">Ocultar la barra de titulo</s:String>
+    <s:String x:Key="S.Recorder.Fullscreen">Modo pantalla completa</s:String>
 
-    <s:String x:Key="Recorder.Record">Grabar</s:String>
-    <s:String x:Key="Recorder.Pause">Pausar</s:String>
-    <s:String x:Key="Recorder.Continue">Continuar</s:String>
-    <s:String x:Key="Recorder.Stop">Parar</s:String>
-    <s:String x:Key="Recorder.Discard">Descartar</s:String>
-    <s:String x:Key="Recorder.Snap">Instantaneo</s:String>
-    <s:String x:Key="Recorder.Height">Altura</s:String>
-    <s:String x:Key="Recorder.Width">Anchura</s:String>
-    <s:String x:Key="Recorder.Fps">Maximos fotogramas por segundo</s:String>
-    <s:String x:Key="Recorder.Fps.Short">fps</s:String>
-    <s:String x:Key="Recorder.FpsRange">Minimo a maximo fps: 1-60 fps</s:String>
-    <s:String x:Key="Recorder.SnapToWindow">Ajustar a la ventana (Arrastrar y soltar para ajustar)</s:String>
-    <s:String x:Key="Recorder.PreStart">Pre-Inicio</s:String>
-    <s:String x:Key="Recorder.Paused">ScreenToGif (Pausado)</s:String>
+    <s:String x:Key="S.Recorder.Record">Grabar</s:String>
+    <s:String x:Key="S.Recorder.Pause">Pausar</s:String>
+    <s:String x:Key="S.Recorder.Continue">Continuar</s:String>
+    <s:String x:Key="S.Recorder.Stop">Parar</s:String>
+    <s:String x:Key="S.Recorder.Discard">Descartar</s:String>
+    <s:String x:Key="S.Recorder.Snap">Instantaneo</s:String>
+    <s:String x:Key="S.Recorder.Height">Altura</s:String>
+    <s:String x:Key="S.Recorder.Width">Anchura</s:String>
+    <s:String x:Key="S.Recorder.Fps">Maximos fotogramas por segundo</s:String>
+    <s:String x:Key="S.Recorder.Fps.Short">fps</s:String>
+    <s:String x:Key="S.Recorder.FpsRange">Minimo a maximo fps: 1-60 fps</s:String>
+    <s:String x:Key="S.Recorder.SnapToWindow">Ajustar a la ventana (Arrastrar y soltar para ajustar)</s:String>
+    <s:String x:Key="S.Recorder.PreStart">Pre-Inicio</s:String>
+    <s:String x:Key="S.Recorder.Paused">ScreenToGif (Pausado)</s:String>
     
     <!--New Recorder-->
     <s:String x:Key="S.Recorder.Area">Area</s:String>
@@ -219,53 +219,53 @@
     <s:String x:Key="S.Recorder.EscToCancel">Presiona Esc para cancelar</s:String>
     
     <!--Webcam Recorder-->
-    <s:String x:Key="Webcam.Title">ScreenToGif - Webcam Grabadora</s:String>
-    <s:String x:Key="Webcam.NoVideo">Servicios de video no detectados :(</s:String>
-    <s:String x:Key="Webcam.CheckVideoDevices">Ver los servicios de video</s:String>
-    <s:String x:Key="Webcam.Scale">Escala: {0:0.##}x</s:String>
-    <s:String x:Key="Webcam.ChangeScale">Cambiar la escala del video</s:String>
+    <s:String x:Key="S.Webcam.Title">ScreenToGif - Webcam Grabadora</s:String>
+    <s:String x:Key="S.Webcam.NoVideo">Servicios de video no detectados :(</s:String>
+    <s:String x:Key="S.Webcam.CheckVideoDevices">Ver los servicios de video</s:String>
+    <s:String x:Key="S.Webcam.Scale">Escala: {0:0.##}x</s:String>
+    <s:String x:Key="S.Webcam.ChangeScale">Cambiar la escala del video</s:String>
     
     <!--Board Recorder-->
-    <s:String x:Key="Board.Title">ScreenToGif - Grabación de Tablero</s:String>
-    <s:String x:Key="Board.AutoRecord">Auto-Grabación</s:String>
-    <s:String x:Key="Board.AutoRecordToolTip">Activar la grabación mientras dibujas.</s:String>
-    <s:String x:Key="Board.CtrlHold">Ctrl [Presionar]</s:String>
+    <s:String x:Key="S.Board.Title">ScreenToGif - Grabación de Tablero</s:String>
+    <s:String x:Key="S.Board.AutoRecord">Auto-Grabación</s:String>
+    <s:String x:Key="S.Board.AutoRecordToolTip">Activar la grabación mientras dibujas.</s:String>
+    <s:String x:Key="S.Board.CtrlHold">Ctrl [Presionar]</s:String>
     
     <!--Color Selector-->
-    <s:String x:Key="ColorSelector.Title">Paleta de Colores</s:String>
-    <s:String x:Key="ColorSelector.Select">Selecciona un Color</s:String>
-    <s:String x:Key="ColorSelector.Red">Rojo</s:String>
-    <s:String x:Key="ColorSelector.Green">Verde</s:String>
-    <s:String x:Key="ColorSelector.Blue">Azul</s:String>
-    <s:String x:Key="ColorSelector.Alpha">Alfa</s:String>
-    <s:String x:Key="ColorSelector.Hexadecimal">Hex</s:String>
-    <s:String x:Key="ColorSelector.Initial">Color Inicial</s:String>
-    <s:String x:Key="ColorSelector.Current">Actual Color</s:String>
-    <s:String x:Key="ColorSelector.Latest">Último Color</s:String>
+    <s:String x:Key="S.ColorSelector.Title">Paleta de Colores</s:String>
+    <s:String x:Key="S.ColorSelector.Select">Selecciona un Color</s:String>
+    <s:String x:Key="S.ColorSelector.Red">Rojo</s:String>
+    <s:String x:Key="S.ColorSelector.Green">Verde</s:String>
+    <s:String x:Key="S.ColorSelector.Blue">Azul</s:String>
+    <s:String x:Key="S.ColorSelector.Alpha">Alfa</s:String>
+    <s:String x:Key="S.ColorSelector.Hexadecimal">Hex</s:String>
+    <s:String x:Key="S.ColorSelector.Initial">Color Inicial</s:String>
+    <s:String x:Key="S.ColorSelector.Current">Actual Color</s:String>
+    <s:String x:Key="S.ColorSelector.Latest">Último Color</s:String>
     
     <!--Exception Viewer, Optional-->
-    <s:String x:Key="ExceptionViewer.Title">Visor de excepciones</s:String>
-    <s:String x:Key="ExceptionViewer.OpenInner">Abrir excepcion interna</s:String>
-    <s:String x:Key="ErrorDialog.Observation">Algo malo ha sucedido.</s:String>
-    <s:String x:Key="ErrorDialog.Send">Enviar reporte</s:String>
+    <s:String x:Key="S.ExceptionViewer.Title">Visor de excepciones</s:String>
+    <s:String x:Key="S.ExceptionViewer.OpenInner">Abrir excepcion interna</s:String>
+    <s:String x:Key="S.ErrorDialog.Observation">Algo malo ha sucedido.</s:String>
+    <s:String x:Key="S.ErrorDialog.Send">Enviar reporte</s:String>
 
     <!--Insert Frames-->
-    <s:String x:Key="InsertFrames.Title">Insertar Fotogramas</s:String>
-    <s:String x:Key="InsertFrames.Info">Ambos lados deben tener el mismo tamaño, esta ventana le permite cambiar la posición y el tamaño de la imagen y el lienzo. Haga clic para seleccionar y cambiar el tamaño.</s:String>
-    <s:String x:Key="InsertFrames.CanvasSize">Tamaño lienzo:</s:String>
-    <s:String x:Key="InsertFrames.FitCanvas">Ajustar imagen en lienzo</s:String>
-    <s:String x:Key="InsertFrames.FitCanvas.Info">Redimensionar el lienzo para ajustar las imagenes dentro (Desde la esquina superior izquierda)</s:String>
-    <s:String x:Key="InsertFrames.DifferentSizes">Hay una diferencia entre los tamaños de los fotogramas. Necesitas resolver esto antes de insertar los fotogramas</s:String>
-    <s:String x:Key="InsertFrames.InsertedFrames">Nuevo fotograma(s)</s:String>
-    <s:String x:Key="InsertFrames.CurrentFrames">Actual fotograma(s)</s:String>
-    <s:String x:Key="InsertFrames.ImageSize">Tamaño de imagen:</s:String>
-    <s:String x:Key="InsertFrames.ImagePosition">Posición de imagen:</s:String>
-    <s:String x:Key="InsertFrames.ResetImageSizePosition">Reiniciar Tamaño de Imagen&#x0d;Y posición</s:String>
-    <s:String x:Key="InsertFrames.Info2">Nuevos fotogramas seran insertados dentro de la actual lista de fotogramas en la posición:</s:String>
-    <s:String x:Key="InsertFrames.Before">Antes</s:String>
-    <s:String x:Key="InsertFrames.After">Después</s:String>
-    <s:String x:Key="InsertFrames.Importing">Importando</s:String>
-    <s:String x:Key="InsertFrames.SelectColorFill">Seleccionar el relleno de color del Lienzo</s:String>
+    <s:String x:Key="S.InsertFrames.Title">Insertar Fotogramas</s:String>
+    <s:String x:Key="S.InsertFrames.Info">Ambos lados deben tener el mismo tamaño, esta ventana le permite cambiar la posición y el tamaño de la imagen y el lienzo. Haga clic para seleccionar y cambiar el tamaño.</s:String>
+    <s:String x:Key="S.InsertFrames.CanvasSize">Tamaño lienzo:</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas">Ajustar imagen en lienzo</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas.Info">Redimensionar el lienzo para ajustar las imagenes dentro (Desde la esquina superior izquierda)</s:String>
+    <s:String x:Key="S.InsertFrames.DifferentSizes">Hay una diferencia entre los tamaños de los fotogramas. Necesitas resolver esto antes de insertar los fotogramas</s:String>
+    <s:String x:Key="S.InsertFrames.InsertedFrames">Nuevo fotograma(s)</s:String>
+    <s:String x:Key="S.InsertFrames.CurrentFrames">Actual fotograma(s)</s:String>
+    <s:String x:Key="S.InsertFrames.ImageSize">Tamaño de imagen:</s:String>
+    <s:String x:Key="S.InsertFrames.ImagePosition">Posición de imagen:</s:String>
+    <s:String x:Key="S.InsertFrames.ResetImageSizePosition">Reiniciar Tamaño de Imagen&#x0d;Y posición</s:String>
+    <s:String x:Key="S.InsertFrames.Info2">Nuevos fotogramas seran insertados dentro de la actual lista de fotogramas en la posición:</s:String>
+    <s:String x:Key="S.InsertFrames.Before">Antes</s:String>
+    <s:String x:Key="S.InsertFrames.After">Después</s:String>
+    <s:String x:Key="S.InsertFrames.Importing">Importando</s:String>
+    <s:String x:Key="S.InsertFrames.SelectColorFill">Seleccionar el relleno de color del Lienzo</s:String>
 
     <!--Import Frames From Video-->
     <s:String x:Key="S.ImportVideo.Title">Importar fotogramas desde el video</s:String>
@@ -529,39 +529,39 @@
     <s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg no esta presente. Añádalo a las variables de entorno de ruta o establezca la ubicación en Configuración</s:String>
     
     <!--Hints-->
-    <s:String x:Key="Hint.NewRecording">Nueva grabacion creada</s:String>
-    <s:String x:Key="Hint.NewWebcamRecording">Nueva grabacion de webcam creada</s:String>
-    <s:String x:Key="Hint.NewBoardRecording">Nuevo grabacion de tablero creado</s:String>
-    <s:String x:Key="Hint.NewAnimation">Nuevo proyecto creado</s:String>
-    <s:String x:Key="Hint.Undo">Deshacer ejecutado</s:String>
-    <s:String x:Key="Hint.Reset">Reinicio ejecutado</s:String>
-    <s:String x:Key="Hint.Redo">Rehacer ejecutado</s:String>
-    <s:String x:Key="Hint.Cut">{0} fotogramas(s) cortados</s:String>
-    <s:String x:Key="Hint.Copy">{0} fotograma(s) copiados</s:String>
-    <s:String x:Key="Hint.Paste">{0} fotogramas(s) pegadp</s:String>
-    <s:String x:Key="Hint.Zoom">Zoom cambiado a {0}%</s:String>
-    <s:String x:Key="Hint.SelectAll">Todos los fotogramas han sido seleccionados</s:String>
-    <s:String x:Key="Hint.SelectSingle">Seleccionados #{0} fotogramas</s:String>
-    <s:String x:Key="Hint.SelectInverse">Seleccion invertida</s:String>
-    <s:String x:Key="Hint.Deselect">Todos los fotogramas fueron deseleccionados</s:String>
-    <s:String x:Key="Hint.DeleteFrames">{0} fotograma(s) borrados</s:String>
-    <s:String x:Key="Hint.Reverse">Lista de fotogramas invertidos</s:String>
-    <s:String x:Key="Hint.Yoyo">Yoyo efecto aplicado</s:String>
-    <s:String x:Key="Hint.MoveLeft">Fotograma(s) movidos para la izquierda</s:String>
-    <s:String x:Key="Hint.MoveRight">Fotograma(s) movidos para la derecha</s:String>
-    <s:String x:Key="Hint.Resize">Fotogramas redimensionados</s:String>
-    <s:String x:Key="Hint.Crop">Fotogramas recortados</s:String>
-    <s:String x:Key="Hint.FlipRotate">Fotogramas rotados</s:String>
-    <s:String x:Key="Hint.FlipRotate2">La acción de rotación aplicada en los fotogramas seleccionados </s:String>
-    <s:String x:Key="Hint.ApplyAll">Esta acción aplica a todos los fotogramas</s:String>
-    <s:String x:Key="Hint.ApplySelected">Esta acción aplica al fotograma seleccionado</s:String>
-    <s:String x:Key="Hint.Cinemagraph">La cinematografia aplica para todos los fotogramas basados en el primer fotograma</s:String>
-    <s:String x:Key="Hint.Overlay">Superposicion aplicada</s:String>
-    <s:String x:Key="Hint.TitleFrame">Titulo de fotograma creado</s:String>
-    <s:String x:Key="Hint.TitleFrame2">El titulo del fotograma sera insertado despues de seleccionar el fotograma</s:String>
-    <s:String x:Key="Hint.Delay">Duración (retraso) alterado</s:String>
-    <s:String x:Key="Hint.Transition">Transicion insertada</s:String>
-    <s:String x:Key="Hint.Reduce">Velocidad de fotogramas reducida</s:String>
+    <s:String x:Key="S.Hint.NewRecording">Nueva grabacion creada</s:String>
+    <s:String x:Key="S.Hint.NewWebcamRecording">Nueva grabacion de webcam creada</s:String>
+    <s:String x:Key="S.Hint.NewBoardRecording">Nuevo grabacion de tablero creado</s:String>
+    <s:String x:Key="S.Hint.NewAnimation">Nuevo proyecto creado</s:String>
+    <s:String x:Key="S.Hint.Undo">Deshacer ejecutado</s:String>
+    <s:String x:Key="S.Hint.Reset">Reinicio ejecutado</s:String>
+    <s:String x:Key="S.Hint.Redo">Rehacer ejecutado</s:String>
+    <s:String x:Key="S.Hint.Cut">{0} fotogramas(s) cortados</s:String>
+    <s:String x:Key="S.Hint.Copy">{0} fotograma(s) copiados</s:String>
+    <s:String x:Key="S.Hint.Paste">{0} fotogramas(s) pegadp</s:String>
+    <s:String x:Key="S.Hint.Zoom">Zoom cambiado a {0}%</s:String>
+    <s:String x:Key="S.Hint.SelectAll">Todos los fotogramas han sido seleccionados</s:String>
+    <s:String x:Key="S.Hint.SelectSingle">Seleccionados #{0} fotogramas</s:String>
+    <s:String x:Key="S.Hint.SelectInverse">Seleccion invertida</s:String>
+    <s:String x:Key="S.Hint.Deselect">Todos los fotogramas fueron deseleccionados</s:String>
+    <s:String x:Key="S.Hint.DeleteFrames">{0} fotograma(s) borrados</s:String>
+    <s:String x:Key="S.Hint.Reverse">Lista de fotogramas invertidos</s:String>
+    <s:String x:Key="S.Hint.Yoyo">Yoyo efecto aplicado</s:String>
+    <s:String x:Key="S.Hint.MoveLeft">Fotograma(s) movidos para la izquierda</s:String>
+    <s:String x:Key="S.Hint.MoveRight">Fotograma(s) movidos para la derecha</s:String>
+    <s:String x:Key="S.Hint.Resize">Fotogramas redimensionados</s:String>
+    <s:String x:Key="S.Hint.Crop">Fotogramas recortados</s:String>
+    <s:String x:Key="S.Hint.FlipRotate">Fotogramas rotados</s:String>
+    <s:String x:Key="S.Hint.FlipRotate2">La acción de rotación aplicada en los fotogramas seleccionados </s:String>
+    <s:String x:Key="S.Hint.ApplyAll">Esta acción aplica a todos los fotogramas</s:String>
+    <s:String x:Key="S.Hint.ApplySelected">Esta acción aplica al fotograma seleccionado</s:String>
+    <s:String x:Key="S.Hint.Cinemagraph">La cinematografia aplica para todos los fotogramas basados en el primer fotograma</s:String>
+    <s:String x:Key="S.Hint.Overlay">Superposicion aplicada</s:String>
+    <s:String x:Key="S.Hint.TitleFrame">Titulo de fotograma creado</s:String>
+    <s:String x:Key="S.Hint.TitleFrame2">El titulo del fotograma sera insertado despues de seleccionar el fotograma</s:String>
+    <s:String x:Key="S.Hint.Delay">Duración (retraso) alterado</s:String>
+    <s:String x:Key="S.Hint.Transition">Transicion insertada</s:String>
+    <s:String x:Key="S.Hint.Reduce">Velocidad de fotogramas reducida</s:String>
     
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">Ocultar</s:String>

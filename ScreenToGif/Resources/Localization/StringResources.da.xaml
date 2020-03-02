@@ -8,11 +8,11 @@
     <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
     
     <!--General-->
-    <s:String x:Key="Ok">Ok</s:String>
-    <s:String x:Key="Back">Tilbage</s:String>
-    <s:String x:Key="Cancel">Annuller</s:String>
-    <s:String x:Key="Yes">Ja</s:String>
-    <s:String x:Key="No">Nej</s:String>
+    <s:String x:Key="S.Ok">Ok</s:String>
+    <s:String x:Key="S.Back">Tilbage</s:String>
+    <s:String x:Key="S.Cancel">Annuller</s:String>
+    <s:String x:Key="S.Yes">Ja</s:String>
+    <s:String x:Key="S.No">Nej</s:String>
     <s:String x:Key="Frame">Ramme</s:String>
     <s:String x:Key="Suppress">Undertryk</s:String>
     <s:String x:Key="Preview">Vis</s:String>
@@ -30,9 +30,9 @@
     <s:String x:Key="S.Exit">Luk</s:String>
 
     <!--Application-->
-    <s:String x:Key="Application.Exiting.Title">Lukker ScreenToGif</s:String>
-    <s:String x:Key="Application.Exiting.Instruction">Vil du lukke?</s:String>
-    <s:String x:Key="Application.Exiting.Message">Alle vinduer lukkes og ikonet fjernes.</s:String>
+    <s:String x:Key="S.Exiting.Title">Lukker ScreenToGif</s:String>
+    <s:String x:Key="S.Exiting.Instruction">Vil du lukke?</s:String>
+    <s:String x:Key="S.Exiting.Message">Alle vinduer lukkes og ikonet fjernes.</s:String>
     
     <!--Error messages--> 
     <s:String x:Key="S.Crash">Oh no, the app crashed :(</s:String>
@@ -293,25 +293,25 @@
     <s:String x:Key="S.Localization.MoveRosourcePosition">Flyt din oversættelse ned, for at teste den.</s:String>
 
     <!--Recorder-->
-    <s:String x:Key="Recorder.RecordingOptions">Optageindstillinger</s:String>
-    <s:String x:Key="Recorder.Snapshot">Snapshot</s:String>
-    <s:String x:Key="Recorder.ThinMode">Skjul titellinie</s:String>
-    <s:String x:Key="Recorder.Fullscreen">Fuldskærm (eksperimentelt)</s:String>
+    <s:String x:Key="S.Recorder.RecordingOptions">Optageindstillinger</s:String>
+    <s:String x:Key="S.Recorder.Snapshot">Snapshot</s:String>
+    <s:String x:Key="S.Recorder.ThinMode">Skjul titellinie</s:String>
+    <s:String x:Key="S.Recorder.Fullscreen">Fuldskærm (eksperimentelt)</s:String>
 
-    <s:String x:Key="Recorder.Record">Optag</s:String>
-    <s:String x:Key="Recorder.Pause">Pause</s:String>
-    <s:String x:Key="Recorder.Continue">Fortsæt</s:String>
-    <s:String x:Key="Recorder.Stop">Stop</s:String>
-    <s:String x:Key="Recorder.Discard">Kassér</s:String>
-    <s:String x:Key="Recorder.Snap">Snap</s:String>
-    <s:String x:Key="Recorder.Height">Højde</s:String>
-    <s:String x:Key="Recorder.Width">Bredde</s:String>
-    <s:String x:Key="Recorder.Fps">Maks. rammer pr. sekund</s:String>
-    <s:String x:Key="Recorder.Fps.Short">fps</s:String>
-    <s:String x:Key="Recorder.FpsRange">Minimum til maksimum fps: 1-60 fps</s:String>
-    <s:String x:Key="Recorder.SnapToWindow">Snap til vindue (træk til vindue og slip)</s:String>
-    <s:String x:Key="Recorder.PreStart">Nedtælling</s:String>
-    <s:String x:Key="Recorder.Paused">ScreenToGif (pauset)</s:String>
+    <s:String x:Key="S.Recorder.Record">Optag</s:String>
+    <s:String x:Key="S.Recorder.Pause">Pause</s:String>
+    <s:String x:Key="S.Recorder.Continue">Fortsæt</s:String>
+    <s:String x:Key="S.Recorder.Stop">Stop</s:String>
+    <s:String x:Key="S.Recorder.Discard">Kassér</s:String>
+    <s:String x:Key="S.Recorder.Snap">Snap</s:String>
+    <s:String x:Key="S.Recorder.Height">Højde</s:String>
+    <s:String x:Key="S.Recorder.Width">Bredde</s:String>
+    <s:String x:Key="S.Recorder.Fps">Maks. rammer pr. sekund</s:String>
+    <s:String x:Key="S.Recorder.Fps.Short">fps</s:String>
+    <s:String x:Key="S.Recorder.FpsRange">Minimum til maksimum fps: 1-60 fps</s:String>
+    <s:String x:Key="S.Recorder.SnapToWindow">Snap til vindue (træk til vindue og slip)</s:String>
+    <s:String x:Key="S.Recorder.PreStart">Nedtælling</s:String>
+    <s:String x:Key="S.Recorder.Paused">ScreenToGif (pauset)</s:String>
     
     <!--New Recorder-->
     <s:String x:Key="S.Recorder.Area">Område</s:String>
@@ -328,53 +328,53 @@
     <s:String x:Key="S.Recorder.EscToCancel">Tast Esc for at annullere</s:String>
     
     <!--Webcam Recorder-->
-    <s:String x:Key="Webcam.Title">ScreenToGif - Webcam</s:String>
-    <s:String x:Key="Webcam.NoVideo">Enhed ikke fundet :(</s:String>
-    <s:String x:Key="Webcam.CheckVideoDevices">Søg efter enheder.</s:String>
-    <s:String x:Key="Webcam.Scale">Skala: x{0:0.##}</s:String>
-    <s:String x:Key="Webcam.ChangeScale">Tilpas videostørrelse.</s:String>
+    <s:String x:Key="S.Webcam.Title">ScreenToGif - Webcam</s:String>
+    <s:String x:Key="S.Webcam.NoVideo">Enhed ikke fundet :(</s:String>
+    <s:String x:Key="S.Webcam.CheckVideoDevices">Søg efter enheder.</s:String>
+    <s:String x:Key="S.Webcam.Scale">Skala: x{0:0.##}</s:String>
+    <s:String x:Key="S.Webcam.ChangeScale">Tilpas videostørrelse.</s:String>
     
     <!--Board Recorder-->
-    <s:String x:Key="Board.Title">ScreenToGif - Tavleoptager</s:String>
-    <s:String x:Key="Board.AutoRecord">Autooptag</s:String>
-    <s:String x:Key="Board.AutoRecordToolTip">Optag når der tegnes.</s:String>
-    <s:String x:Key="Board.CtrlHold">Ctrl [Hold]</s:String>
+    <s:String x:Key="S.Board.Title">ScreenToGif - Tavleoptager</s:String>
+    <s:String x:Key="S.Board.AutoRecord">Autooptag</s:String>
+    <s:String x:Key="S.Board.AutoRecordToolTip">Optag når der tegnes.</s:String>
+    <s:String x:Key="S.Board.CtrlHold">Ctrl [Hold]</s:String>
     
     <!--Color Selector-->
-    <s:String x:Key="ColorSelector.Title">Farvevælger</s:String>
-    <s:String x:Key="ColorSelector.Select">Vælg en farve</s:String>
-    <s:String x:Key="ColorSelector.Red">Rød</s:String>
-    <s:String x:Key="ColorSelector.Green">Grøn</s:String>
-    <s:String x:Key="ColorSelector.Blue">Blå</s:String>
-    <s:String x:Key="ColorSelector.Alpha">Alfa</s:String>
-    <s:String x:Key="ColorSelector.Hexadecimal">Hex</s:String>
-    <s:String x:Key="ColorSelector.Initial">Oprindelig</s:String>
-    <s:String x:Key="ColorSelector.Current">Aktuel</s:String>
-    <s:String x:Key="ColorSelector.Latest">Seneste</s:String>
+    <s:String x:Key="S.ColorSelector.Title">Farvevælger</s:String>
+    <s:String x:Key="S.ColorSelector.Select">Vælg en farve</s:String>
+    <s:String x:Key="S.ColorSelector.Red">Rød</s:String>
+    <s:String x:Key="S.ColorSelector.Green">Grøn</s:String>
+    <s:String x:Key="S.ColorSelector.Blue">Blå</s:String>
+    <s:String x:Key="S.ColorSelector.Alpha">Alfa</s:String>
+    <s:String x:Key="S.ColorSelector.Hexadecimal">Hex</s:String>
+    <s:String x:Key="S.ColorSelector.Initial">Oprindelig</s:String>
+    <s:String x:Key="S.ColorSelector.Current">Aktuel</s:String>
+    <s:String x:Key="S.ColorSelector.Latest">Seneste</s:String>
     
     <!--Exception Viewer, Optional-->
-    <s:String x:Key="ExceptionViewer.Title">Undtagelser</s:String>
-    <s:String x:Key="ExceptionViewer.OpenInner">Åben undtagelse</s:String>
-    <s:String x:Key="ErrorDialog.Observation">Noget gik galt.</s:String>
-    <s:String x:Key="ErrorDialog.Send">Send rapport</s:String>
+    <s:String x:Key="S.ExceptionViewer.Title">Undtagelser</s:String>
+    <s:String x:Key="S.ExceptionViewer.OpenInner">Åben undtagelse</s:String>
+    <s:String x:Key="S.ErrorDialog.Observation">Noget gik galt.</s:String>
+    <s:String x:Key="S.ErrorDialog.Send">Send rapport</s:String>
 
     <!--Insert Frames-->
-    <s:String x:Key="InsertFrames.Title">Indsæt rammer</s:String>
-    <s:String x:Key="InsertFrames.Info">Begge sider bør hav samme størrelse. I dette vindue kan du placere og tilpasse billedet på lærredet. Klik for at vælge og tilpasse.</s:String>
-    <s:String x:Key="InsertFrames.CanvasSize">Lærredsstørrelse:</s:String>
-    <s:String x:Key="InsertFrames.FitCanvas">Pas billede til lærred</s:String>
-    <s:String x:Key="InsertFrames.FitCanvas.Info">Tilpasser lærredet til begge billeder (fra øverste venstre hjørne).</s:String>
-    <s:String x:Key="InsertFrames.DifferentSizes">Der er forskel på rammernes størrelse. Tilpas størrelsen før du indsætter.</s:String>
-    <s:String x:Key="InsertFrames.InsertedFrames">Indsatte rammer</s:String>
-    <s:String x:Key="InsertFrames.CurrentFrames">Aktuelle rammer</s:String>
-    <s:String x:Key="InsertFrames.ImageSize">Billedstørrelse:</s:String>
-    <s:String x:Key="InsertFrames.ImagePosition">Billedposition:</s:String>
-    <s:String x:Key="InsertFrames.ResetImageSizePosition">Nulstil billede&#10;og placering</s:String>
-    <s:String x:Key="InsertFrames.Info2">Nye rammer indsættes i den aktuelle rammeliste på positionen:</s:String>
-    <s:String x:Key="InsertFrames.Before">Før</s:String>
-    <s:String x:Key="InsertFrames.After">Efter</s:String>
-    <s:String x:Key="InsertFrames.Importing">Importerer</s:String>
-    <s:String x:Key="InsertFrames.SelectColorFill">Vælg lærredsfarve</s:String>
+    <s:String x:Key="S.InsertFrames.Title">Indsæt rammer</s:String>
+    <s:String x:Key="S.InsertFrames.Info">Begge sider bør hav samme størrelse. I dette vindue kan du placere og tilpasse billedet på lærredet. Klik for at vælge og tilpasse.</s:String>
+    <s:String x:Key="S.InsertFrames.CanvasSize">Lærredsstørrelse:</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas">Pas billede til lærred</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas.Info">Tilpasser lærredet til begge billeder (fra øverste venstre hjørne).</s:String>
+    <s:String x:Key="S.InsertFrames.DifferentSizes">Der er forskel på rammernes størrelse. Tilpas størrelsen før du indsætter.</s:String>
+    <s:String x:Key="S.InsertFrames.InsertedFrames">Indsatte rammer</s:String>
+    <s:String x:Key="S.InsertFrames.CurrentFrames">Aktuelle rammer</s:String>
+    <s:String x:Key="S.InsertFrames.ImageSize">Billedstørrelse:</s:String>
+    <s:String x:Key="S.InsertFrames.ImagePosition">Billedposition:</s:String>
+    <s:String x:Key="S.InsertFrames.ResetImageSizePosition">Nulstil billede&#10;og placering</s:String>
+    <s:String x:Key="S.InsertFrames.Info2">Nye rammer indsættes i den aktuelle rammeliste på positionen:</s:String>
+    <s:String x:Key="S.InsertFrames.Before">Før</s:String>
+    <s:String x:Key="S.InsertFrames.After">Efter</s:String>
+    <s:String x:Key="S.InsertFrames.Importing">Importerer</s:String>
+    <s:String x:Key="S.InsertFrames.SelectColorFill">Vælg lærredsfarve</s:String>
 
     <!--Import Frames From Video-->
     <s:String x:Key="S.ImportVideo.Title">Importér rammer fra video</s:String>
@@ -672,40 +672,40 @@
     <s:String x:Key="Editor.Warning.LowSpace">Der er ikke plads nok til programmets midlertidige filer ({0}% tilbage). Gå til Indstillinger > Midlertidige filer og frigør plads.</s:String>
     
     <!--Hints-->
-    <s:String x:Key="Hint.NewRecording">Optagelse gennemført</s:String>
-    <s:String x:Key="Hint.NewWebcamRecording">Webcamoptagelse gennemført</s:String>
-    <s:String x:Key="Hint.NewBoardRecording">Tavleoptagelse gennemført</s:String>
-    <s:String x:Key="Hint.NewAnimation">Ny animation oprettet</s:String>
-    <s:String x:Key="Hint.Undo">Handling fortrudt</s:String>
-    <s:String x:Key="Hint.Reset">Nulstilling gennemført</s:String>
-    <s:String x:Key="Hint.Redo">Handling gendannet</s:String>
-    <s:String x:Key="Hint.Cut">{0} ramme(r) klippet</s:String>
-    <s:String x:Key="Hint.Copy">{0} ramme(r) kopieret</s:String>
-    <s:String x:Key="Hint.Paste">{0} ramme(r) indsat</s:String>
-    <s:String x:Key="Hint.Zoom">Zoom sat til {0}%</s:String>
-    <s:String x:Key="Hint.SelectAll">Alle rammer valgt</s:String>
-    <s:String x:Key="Hint.SelectSingle">Ramme #{0} valgt</s:String>
-    <s:String x:Key="Hint.SelectInverse">Markering vendt</s:String>
-    <s:String x:Key="Hint.Deselect">Markering ryddet</s:String>
-    <s:String x:Key="Hint.DeleteFrames">{0} ramme(r) valgt</s:String>
-    <s:String x:Key="Hint.Reverse">rammeliste vendt</s:String>
-    <s:String x:Key="Hint.Yoyo">Yoyo effekt anvendt</s:String>
-    <s:String x:Key="Hint.MoveLeft">Ramme(r) flyttet til venstre</s:String>
-    <s:String x:Key="Hint.MoveRight">Ramme(r) flyttet til højre</s:String>
-    <s:String x:Key="Hint.Resize">Rammestørrelser tilpasset</s:String>
-    <s:String x:Key="Hint.Crop">Rammer beskåret</s:String>
-    <s:String x:Key="Hint.FlipRotate">Rammer flippet/roteret</s:String>
-    <s:String x:Key="Hint.FlipRotate2">Flip anvendes på valgte rammer og roter anvendes på alle rammer</s:String>
-    <s:String x:Key="Hint.ApplyAll">Handlingen gælder alle rammer</s:String>
-    <s:String x:Key="Hint.ApplySelected">Handlingen gælder valgte rammer</s:String>
-    <s:String x:Key="Hint.Cinemagraph">Cnemagraph anvendes på alle rammer baseret på første ramme</s:String>
-    <s:String x:Key="Hint.Overlay">Overlæg anvendt</s:String>
-    <s:String x:Key="Hint.TitleFrame">Titelramme oprettet</s:String>
-    <s:String x:Key="Hint.TitleFrame2">Titelrammen indsættes før valgte ramme</s:String>
-    <s:String x:Key="Hint.Delay">Varighed ændret</s:String>
-    <s:String x:Key="Hint.Transition">Overgang indsat</s:String>
-    <s:String x:Key="Hint.Reduce">Reduceret rammerate</s:String>
-    <s:String x:Key="Hint.Duplicates">Duplikater fjernet</s:String>
+    <s:String x:Key="S.Hint.NewRecording">Optagelse gennemført</s:String>
+    <s:String x:Key="S.Hint.NewWebcamRecording">Webcamoptagelse gennemført</s:String>
+    <s:String x:Key="S.Hint.NewBoardRecording">Tavleoptagelse gennemført</s:String>
+    <s:String x:Key="S.Hint.NewAnimation">Ny animation oprettet</s:String>
+    <s:String x:Key="S.Hint.Undo">Handling fortrudt</s:String>
+    <s:String x:Key="S.Hint.Reset">Nulstilling gennemført</s:String>
+    <s:String x:Key="S.Hint.Redo">Handling gendannet</s:String>
+    <s:String x:Key="S.Hint.Cut">{0} ramme(r) klippet</s:String>
+    <s:String x:Key="S.Hint.Copy">{0} ramme(r) kopieret</s:String>
+    <s:String x:Key="S.Hint.Paste">{0} ramme(r) indsat</s:String>
+    <s:String x:Key="S.Hint.Zoom">Zoom sat til {0}%</s:String>
+    <s:String x:Key="S.Hint.SelectAll">Alle rammer valgt</s:String>
+    <s:String x:Key="S.Hint.SelectSingle">Ramme #{0} valgt</s:String>
+    <s:String x:Key="S.Hint.SelectInverse">Markering vendt</s:String>
+    <s:String x:Key="S.Hint.Deselect">Markering ryddet</s:String>
+    <s:String x:Key="S.Hint.DeleteFrames">{0} ramme(r) valgt</s:String>
+    <s:String x:Key="S.Hint.Reverse">rammeliste vendt</s:String>
+    <s:String x:Key="S.Hint.Yoyo">Yoyo effekt anvendt</s:String>
+    <s:String x:Key="S.Hint.MoveLeft">Ramme(r) flyttet til venstre</s:String>
+    <s:String x:Key="S.Hint.MoveRight">Ramme(r) flyttet til højre</s:String>
+    <s:String x:Key="S.Hint.Resize">Rammestørrelser tilpasset</s:String>
+    <s:String x:Key="S.Hint.Crop">Rammer beskåret</s:String>
+    <s:String x:Key="S.Hint.FlipRotate">Rammer flippet/roteret</s:String>
+    <s:String x:Key="S.Hint.FlipRotate2">Flip anvendes på valgte rammer og roter anvendes på alle rammer</s:String>
+    <s:String x:Key="S.Hint.ApplyAll">Handlingen gælder alle rammer</s:String>
+    <s:String x:Key="S.Hint.ApplySelected">Handlingen gælder valgte rammer</s:String>
+    <s:String x:Key="S.Hint.Cinemagraph">Cnemagraph anvendes på alle rammer baseret på første ramme</s:String>
+    <s:String x:Key="S.Hint.Overlay">Overlæg anvendt</s:String>
+    <s:String x:Key="S.Hint.TitleFrame">Titelramme oprettet</s:String>
+    <s:String x:Key="S.Hint.TitleFrame2">Titelrammen indsættes før valgte ramme</s:String>
+    <s:String x:Key="S.Hint.Delay">Varighed ændret</s:String>
+    <s:String x:Key="S.Hint.Transition">Overgang indsat</s:String>
+    <s:String x:Key="S.Hint.Reduce">Reduceret rammerate</s:String>
+    <s:String x:Key="S.Hint.Duplicates">Duplikater fjernet</s:String>
     
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">Skjul</s:String>

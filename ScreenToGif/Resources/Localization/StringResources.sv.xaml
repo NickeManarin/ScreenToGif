@@ -8,11 +8,11 @@
     <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
     
     <!--General-->
-    <s:String x:Key="Ok">Ok</s:String>
-    <s:String x:Key="Back">Bakåt</s:String>
-    <s:String x:Key="Cancel">Avbryt</s:String>
-    <s:String x:Key="Yes">Ja</s:String>
-    <s:String x:Key="No">Nej</s:String>
+    <s:String x:Key="S.Ok">Ok</s:String>
+    <s:String x:Key="S.Back">Bakåt</s:String>
+    <s:String x:Key="S.Cancel">Avbryt</s:String>
+    <s:String x:Key="S.Yes">Ja</s:String>
+    <s:String x:Key="S.No">Nej</s:String>
     <s:String x:Key="Frame">Bildruta</s:String>
     <s:String x:Key="Suppress">Dämpa</s:String>
     <s:String x:Key="Preview">Förhandsvisa</s:String>
@@ -30,9 +30,9 @@
     <s:String x:Key="S.Exit">Avsluta</s:String>
 
     <!--Application-->
-    <s:String x:Key="Application.Exiting.Title">Avslutar ScreenToGif</s:String>
-    <s:String x:Key="Application.Exiting.Instruction">Är det säkert du vill avsluta?</s:String>
-    <s:String x:Key="Application.Exiting.Message">Alla fönster kommer att stängas och aviseringsikonen kommer att tas bort.</s:String>
+    <s:String x:Key="S.Exiting.Title">Avslutar ScreenToGif</s:String>
+    <s:String x:Key="S.Exiting.Instruction">Är det säkert du vill avsluta?</s:String>
+    <s:String x:Key="S.Exiting.Message">Alla fönster kommer att stängas och aviseringsikonen kommer att tas bort.</s:String>
     
     <!--Error messages--> 
     <s:String x:Key="S.Crash">Oh nej, appen kraschade :(</s:String>
@@ -364,25 +364,25 @@
     <s:String x:Key="S.Localization.MoveRosourcePosition">Om du vill använda din översatta fil flyttar du den längst ner i listan.</s:String>
 
     <!--Recorder-->
-    <s:String x:Key="Recorder.RecordingOptions">Inspelningsinställningar:</s:String>
-    <s:String x:Key="Recorder.Snapshot">Stillbildsläge</s:String>
-    <s:String x:Key="Recorder.ThinMode">Dölj titelraden</s:String>
-    <s:String x:Key="Recorder.Fullscreen">Fullskärmsläge</s:String>
+    <s:String x:Key="S.Recorder.RecordingOptions">Inspelningsinställningar:</s:String>
+    <s:String x:Key="S.Recorder.Snapshot">Stillbildsläge</s:String>
+    <s:String x:Key="S.Recorder.ThinMode">Dölj titelraden</s:String>
+    <s:String x:Key="S.Recorder.Fullscreen">Fullskärmsläge</s:String>
 
-    <s:String x:Key="Recorder.Record">Spela in</s:String>
-    <s:String x:Key="Recorder.Pause">Pausa</s:String>
-    <s:String x:Key="Recorder.Continue">Fortsätt</s:String>
-    <s:String x:Key="Recorder.Stop">Stopp</s:String>
-    <s:String x:Key="Recorder.Discard">Förkasta</s:String>
-    <s:String x:Key="Recorder.Snap">Stillbild</s:String>
-    <s:String x:Key="Recorder.Height">Höjd</s:String>
-    <s:String x:Key="Recorder.Width">Bredd</s:String>
-    <s:String x:Key="Recorder.Fps">Maximalt antal bildrutor per sekund</s:String>
-    <s:String x:Key="Recorder.Fps.Short">fps</s:String>
-    <s:String x:Key="Recorder.FpsRange">Minimum till maximum fps: 1-60 fps</s:String>
-    <s:String x:Key="Recorder.SnapToWindow">Fäst mot fönster (Dra och släpp för att fästa)</s:String>
-    <s:String x:Key="Recorder.PreStart">Förhandsstarta</s:String>
-    <s:String x:Key="Recorder.Paused">ScreenToGif (pausad)</s:String>
+    <s:String x:Key="S.Recorder.Record">Spela in</s:String>
+    <s:String x:Key="S.Recorder.Pause">Pausa</s:String>
+    <s:String x:Key="S.Recorder.Continue">Fortsätt</s:String>
+    <s:String x:Key="S.Recorder.Stop">Stopp</s:String>
+    <s:String x:Key="S.Recorder.Discard">Förkasta</s:String>
+    <s:String x:Key="S.Recorder.Snap">Stillbild</s:String>
+    <s:String x:Key="S.Recorder.Height">Höjd</s:String>
+    <s:String x:Key="S.Recorder.Width">Bredd</s:String>
+    <s:String x:Key="S.Recorder.Fps">Maximalt antal bildrutor per sekund</s:String>
+    <s:String x:Key="S.Recorder.Fps.Short">fps</s:String>
+    <s:String x:Key="S.Recorder.FpsRange">Minimum till maximum fps: 1-60 fps</s:String>
+    <s:String x:Key="S.Recorder.SnapToWindow">Fäst mot fönster (Dra och släpp för att fästa)</s:String>
+    <s:String x:Key="S.Recorder.PreStart">Förhandsstarta</s:String>
+    <s:String x:Key="S.Recorder.Paused">ScreenToGif (pausad)</s:String>
     
     <!--New Recorder-->
     <s:String x:Key="S.Recorder.Area">Område</s:String>
@@ -399,37 +399,37 @@
     <s:String x:Key="S.Recorder.EscToCancel">Tryck på Esc för att avbryta</s:String>
     
     <!--Webcam Recorder-->
-    <s:String x:Key="Webcam.Title">ScreenToGif - Webbkamerainspelare</s:String>
-    <s:String x:Key="Webcam.NoVideo">Ingen videoenhet upptäcktes :(</s:String>
-    <s:String x:Key="Webcam.CheckVideoDevices">Leta efter videoenheter.</s:String>
-    <s:String x:Key="Webcam.Scale">Skala: {0:0.##}x</s:String>
-    <s:String x:Key="Webcam.ChangeScale">Ändra skala på videon.</s:String>
+    <s:String x:Key="S.Webcam.Title">ScreenToGif - Webbkamerainspelare</s:String>
+    <s:String x:Key="S.Webcam.NoVideo">Ingen videoenhet upptäcktes :(</s:String>
+    <s:String x:Key="S.Webcam.CheckVideoDevices">Leta efter videoenheter.</s:String>
+    <s:String x:Key="S.Webcam.Scale">Skala: {0:0.##}x</s:String>
+    <s:String x:Key="S.Webcam.ChangeScale">Ändra skala på videon.</s:String>
     
     <!--Board Recorder-->
-    <s:String x:Key="Board.Title">ScreenToGif - Ritbordsinspelaren</s:String>
-    <s:String x:Key="Board.AutoRecord">Automatisk inspelning</s:String>
-    <s:String x:Key="Board.AutoRecordToolTip">Aktiverar inspelning medans du ritar.</s:String>
-    <s:String x:Key="Board.CtrlHold">Ctrl [Håll in]</s:String>
+    <s:String x:Key="S.Board.Title">ScreenToGif - Ritbordsinspelaren</s:String>
+    <s:String x:Key="S.Board.AutoRecord">Automatisk inspelning</s:String>
+    <s:String x:Key="S.Board.AutoRecordToolTip">Aktiverar inspelning medans du ritar.</s:String>
+    <s:String x:Key="S.Board.CtrlHold">Ctrl [Håll in]</s:String>
     
     <!--Color Selector-->
-    <s:String x:Key="ColorSelector.Title">Färgväljaren</s:String>
-    <s:String x:Key="ColorSelector.Select">Välj en färg</s:String>
-    <s:String x:Key="ColorSelector.Red">Röd</s:String>
-    <s:String x:Key="ColorSelector.Green">Grön</s:String>
-    <s:String x:Key="ColorSelector.Blue">Blå</s:String>
-    <s:String x:Key="ColorSelector.Alpha">Alfa</s:String>
-    <s:String x:Key="ColorSelector.Hexadecimal">Hex</s:String>
-    <s:String x:Key="ColorSelector.Initial">Inledande färg</s:String>
-    <s:String x:Key="ColorSelector.Current">Nuvarande färg</s:String>
-    <s:String x:Key="ColorSelector.Latest">Senaste färg</s:String>
-    <s:String x:Key="ColorSelector.Sample">Dra detta till&#10;provfärgerna</s:String>
-    <s:String x:Key="ColorSelector.Sample.Info">Tryck och dra för att plocka&#10;färger från din skärm.</s:String>
+    <s:String x:Key="S.ColorSelector.Title">Färgväljaren</s:String>
+    <s:String x:Key="S.ColorSelector.Select">Välj en färg</s:String>
+    <s:String x:Key="S.ColorSelector.Red">Röd</s:String>
+    <s:String x:Key="S.ColorSelector.Green">Grön</s:String>
+    <s:String x:Key="S.ColorSelector.Blue">Blå</s:String>
+    <s:String x:Key="S.ColorSelector.Alpha">Alfa</s:String>
+    <s:String x:Key="S.ColorSelector.Hexadecimal">Hex</s:String>
+    <s:String x:Key="S.ColorSelector.Initial">Inledande färg</s:String>
+    <s:String x:Key="S.ColorSelector.Current">Nuvarande färg</s:String>
+    <s:String x:Key="S.ColorSelector.Latest">Senaste färg</s:String>
+    <s:String x:Key="S.ColorSelector.Sample">Dra detta till&#10;provfärgerna</s:String>
+    <s:String x:Key="S.ColorSelector.Sample.Info">Tryck och dra för att plocka&#10;färger från din skärm.</s:String>
     
     <!--Exception Viewer, Optional-->
-    <s:String x:Key="ExceptionViewer.Title">Undantagsvisare</s:String>
-    <s:String x:Key="ExceptionViewer.OpenInner">Öppna inre undantag</s:String>
-    <s:String x:Key="ErrorDialog.Observation">Något gick fel.</s:String>
-    <s:String x:Key="ErrorDialog.Send">Skicka rapport</s:String>
+    <s:String x:Key="S.ExceptionViewer.Title">Undantagsvisare</s:String>
+    <s:String x:Key="S.ExceptionViewer.OpenInner">Öppna inre undantag</s:String>
+    <s:String x:Key="S.ErrorDialog.Observation">Något gick fel.</s:String>
+    <s:String x:Key="S.ErrorDialog.Send">Skicka rapport</s:String>
 
     <!--FFmpeg Preset-->
     <s:String x:Key="S.FfmpegPreset.Title">FFmpeg förinställt</s:String>
@@ -440,22 +440,22 @@
     <s:String x:Key="S.FfmpegPreset.Warning.SameName">Det finns redan en förinställning med detta namnet.</s:String>
 
     <!--Insert Frames-->
-    <s:String x:Key="InsertFrames.Title">Infoga bildrutor</s:String>
-    <s:String x:Key="InsertFrames.Info">Båda sidor måste ha samma storlek, detta fönster tillåter dig att ompositionera och ändra storlek på bilden och duken. Klicka för att markera och ändra storlek.</s:String>
-    <s:String x:Key="InsertFrames.CanvasSize">Dukstorlek:</s:String>
-    <s:String x:Key="InsertFrames.FitCanvas">Passa bild till duk</s:String>
-    <s:String x:Key="InsertFrames.FitCanvas.Info">Ändra duken så den passar båda bilderna inuti (från det övre vänstra hörnet).</s:String>
-    <s:String x:Key="InsertFrames.DifferentSizes">Det finns en skillnad mellan bildrutstorlekarna. Du måste lösa detta innan du infogar bildrutorna.</s:String>
-    <s:String x:Key="InsertFrames.InsertedFrames">Nya bildrutor</s:String>
-    <s:String x:Key="InsertFrames.CurrentFrames">Nuvarande bildrut(a|or)</s:String>
-    <s:String x:Key="InsertFrames.ImageSize">Bildstorlek:</s:String>
-    <s:String x:Key="InsertFrames.ImagePosition">Bildposition:</s:String>
-    <s:String x:Key="InsertFrames.ResetImageSizePosition">Återställ bildstorlek&#10;och position</s:String>
-    <s:String x:Key="InsertFrames.Info2">Nya bildrutor vill bli infogade i dn nuvarande listan av bildrutor på den utvalda platsen:	</s:String>
-    <s:String x:Key="InsertFrames.Before">Före</s:String>
-    <s:String x:Key="InsertFrames.After">Efter</s:String>
-    <s:String x:Key="InsertFrames.Importing">Importerar</s:String>
-    <s:String x:Key="InsertFrames.SelectColorFill">Ange fyllningsfärg för duken</s:String>
+    <s:String x:Key="S.InsertFrames.Title">Infoga bildrutor</s:String>
+    <s:String x:Key="S.InsertFrames.Info">Båda sidor måste ha samma storlek, detta fönster tillåter dig att ompositionera och ändra storlek på bilden och duken. Klicka för att markera och ändra storlek.</s:String>
+    <s:String x:Key="S.InsertFrames.CanvasSize">Dukstorlek:</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas">Passa bild till duk</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas.Info">Ändra duken så den passar båda bilderna inuti (från det övre vänstra hörnet).</s:String>
+    <s:String x:Key="S.InsertFrames.DifferentSizes">Det finns en skillnad mellan bildrutstorlekarna. Du måste lösa detta innan du infogar bildrutorna.</s:String>
+    <s:String x:Key="S.InsertFrames.InsertedFrames">Nya bildrutor</s:String>
+    <s:String x:Key="S.InsertFrames.CurrentFrames">Nuvarande bildrut(a|or)</s:String>
+    <s:String x:Key="S.InsertFrames.ImageSize">Bildstorlek:</s:String>
+    <s:String x:Key="S.InsertFrames.ImagePosition">Bildposition:</s:String>
+    <s:String x:Key="S.InsertFrames.ResetImageSizePosition">Återställ bildstorlek&#10;och position</s:String>
+    <s:String x:Key="S.InsertFrames.Info2">Nya bildrutor vill bli infogade i dn nuvarande listan av bildrutor på den utvalda platsen:	</s:String>
+    <s:String x:Key="S.InsertFrames.Before">Före</s:String>
+    <s:String x:Key="S.InsertFrames.After">Efter</s:String>
+    <s:String x:Key="S.InsertFrames.Importing">Importerar</s:String>
+    <s:String x:Key="S.InsertFrames.SelectColorFill">Ange fyllningsfärg för duken</s:String>
 
     <!--Import Frames From Video-->
     <s:String x:Key="S.ImportVideo.Title">Importera bildrutor från video</s:String>
@@ -763,41 +763,41 @@
     <s:String x:Key="Editor.Warning.LowSpace">Det finns inte tillräckligt med utrymme på den disken som denna appen lagrar sin cache ({0}% kvar). Tryck här för att öppna Alternativ > Temporära filer för att frigöra utrymme.</s:String>
     
     <!--Hints-->
-    <s:String x:Key="Hint.NewRecording">Ny inspelning skapades</s:String>
-    <s:String x:Key="Hint.NewWebcamRecording">Ny webbkamerainspelning skapades</s:String>
-    <s:String x:Key="Hint.NewBoardRecording">Ny ritbordinspelning skapades</s:String>
-    <s:String x:Key="Hint.NewAnimation">Nytt projekt skapades</s:String>
-    <s:String x:Key="Hint.Undo">Ångra</s:String>
-    <s:String x:Key="Hint.Reset">Återställ</s:String>
-    <s:String x:Key="Hint.Redo">Göra om</s:String>
-    <s:String x:Key="Hint.Cut">{0} bildrutor beskurna</s:String>
-    <s:String x:Key="Hint.Copy">{0} bildrutor kopierade</s:String>
-    <s:String x:Key="Hint.Paste">{0} bildrutor klistrades in</s:String>
-    <s:String x:Key="Hint.Zoom">Zoom satt till {0}%</s:String>
-    <s:String x:Key="Hint.SelectAll">Alla bildrutor har markerats</s:String>
-    <s:String x:Key="Hint.SelectSingle">Bildruta #{0} markerad</s:String>
-    <s:String x:Key="Hint.SelectInverse">Välj invers</s:String>
-    <s:String x:Key="Hint.Deselect">Alla bildrutor har avmarkerats</s:String>
-    <s:String x:Key="Hint.DeleteFrames">{0} bildrutor raderade</s:String>
-    <s:String x:Key="Hint.Reverse">Bildrutor omvända</s:String>
-    <s:String x:Key="Hint.Yoyo">Yoyo-effekt applicerad</s:String>
-    <s:String x:Key="Hint.MoveLeft">Bildrutor flyttade till vänster</s:String>
-    <s:String x:Key="Hint.MoveRight">Bildrutor flyttade till höger</s:String>
-    <s:String x:Key="Hint.Resize">Bildrutor storleksändrade</s:String>
-    <s:String x:Key="Hint.Crop">Bildrutor beskurna</s:String>
-    <s:String x:Key="Hint.FlipRotate">Bildrutor vända/roterade</s:String>
-    <s:String x:Key="Hint.FlipRotate2">Vändåtgärden tillämpas på de markerade bildrutorna och roteringen tillämpas på alla bildrutor</s:String>
-    <s:String x:Key="Hint.ApplyAll">Denna åtgärd tillämpas på alla bildrutor</s:String>
-    <s:String x:Key="Hint.ApplySelected">Denna åtgärd tillämpas på de valda bildrutorna</s:String>
-    <s:String x:Key="Hint.ApplySelectedOrAll">Denna åtgärd tillämpas på alla eller på de valda bildrutorna, beroende på dina inställningar</s:String>
-    <s:String x:Key="Hint.Cinemagraph">Cinemagrafin tillämpas på alla bildrutor som bygger på den första bildrutan</s:String>
-    <s:String x:Key="Hint.Overlay">Överlägg applicerades</s:String>
-    <s:String x:Key="Hint.TitleFrame">Titelram skapad</s:String>
-    <s:String x:Key="Hint.TitleFrame2">Titelramen kommer att införas före den valda bildrutan</s:String>
-    <s:String x:Key="Hint.Delay">Varaktighet (fördröjning) ändras</s:String>
-    <s:String x:Key="Hint.Transition">Överföring infogad</s:String>
-    <s:String x:Key="Hint.Reduce">Bildhastighet reducerat</s:String>
-    <s:String x:Key="Hint.Duplicates">Dubblettter har tagits bort</s:String>
+    <s:String x:Key="S.Hint.NewRecording">Ny inspelning skapades</s:String>
+    <s:String x:Key="S.Hint.NewWebcamRecording">Ny webbkamerainspelning skapades</s:String>
+    <s:String x:Key="S.Hint.NewBoardRecording">Ny ritbordinspelning skapades</s:String>
+    <s:String x:Key="S.Hint.NewAnimation">Nytt projekt skapades</s:String>
+    <s:String x:Key="S.Hint.Undo">Ångra</s:String>
+    <s:String x:Key="S.Hint.Reset">Återställ</s:String>
+    <s:String x:Key="S.Hint.Redo">Göra om</s:String>
+    <s:String x:Key="S.Hint.Cut">{0} bildrutor beskurna</s:String>
+    <s:String x:Key="S.Hint.Copy">{0} bildrutor kopierade</s:String>
+    <s:String x:Key="S.Hint.Paste">{0} bildrutor klistrades in</s:String>
+    <s:String x:Key="S.Hint.Zoom">Zoom satt till {0}%</s:String>
+    <s:String x:Key="S.Hint.SelectAll">Alla bildrutor har markerats</s:String>
+    <s:String x:Key="S.Hint.SelectSingle">Bildruta #{0} markerad</s:String>
+    <s:String x:Key="S.Hint.SelectInverse">Välj invers</s:String>
+    <s:String x:Key="S.Hint.Deselect">Alla bildrutor har avmarkerats</s:String>
+    <s:String x:Key="S.Hint.DeleteFrames">{0} bildrutor raderade</s:String>
+    <s:String x:Key="S.Hint.Reverse">Bildrutor omvända</s:String>
+    <s:String x:Key="S.Hint.Yoyo">Yoyo-effekt applicerad</s:String>
+    <s:String x:Key="S.Hint.MoveLeft">Bildrutor flyttade till vänster</s:String>
+    <s:String x:Key="S.Hint.MoveRight">Bildrutor flyttade till höger</s:String>
+    <s:String x:Key="S.Hint.Resize">Bildrutor storleksändrade</s:String>
+    <s:String x:Key="S.Hint.Crop">Bildrutor beskurna</s:String>
+    <s:String x:Key="S.Hint.FlipRotate">Bildrutor vända/roterade</s:String>
+    <s:String x:Key="S.Hint.FlipRotate2">Vändåtgärden tillämpas på de markerade bildrutorna och roteringen tillämpas på alla bildrutor</s:String>
+    <s:String x:Key="S.Hint.ApplyAll">Denna åtgärd tillämpas på alla bildrutor</s:String>
+    <s:String x:Key="S.Hint.ApplySelected">Denna åtgärd tillämpas på de valda bildrutorna</s:String>
+    <s:String x:Key="S.Hint.ApplySelectedOrAll">Denna åtgärd tillämpas på alla eller på de valda bildrutorna, beroende på dina inställningar</s:String>
+    <s:String x:Key="S.Hint.Cinemagraph">Cinemagrafin tillämpas på alla bildrutor som bygger på den första bildrutan</s:String>
+    <s:String x:Key="S.Hint.Overlay">Överlägg applicerades</s:String>
+    <s:String x:Key="S.Hint.TitleFrame">Titelram skapad</s:String>
+    <s:String x:Key="S.Hint.TitleFrame2">Titelramen kommer att införas före den valda bildrutan</s:String>
+    <s:String x:Key="S.Hint.Delay">Varaktighet (fördröjning) ändras</s:String>
+    <s:String x:Key="S.Hint.Transition">Överföring infogad</s:String>
+    <s:String x:Key="S.Hint.Reduce">Bildhastighet reducerat</s:String>
+    <s:String x:Key="S.Hint.Duplicates">Dubblettter har tagits bort</s:String>
     
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">Dölj</s:String>

@@ -476,7 +476,7 @@ namespace ScreenToGif.Windows
                     #region SnapShot Recording
 
                     Stage = Stage.Snapping;
-                    Title = "ScreenToGif - " + FindResource("Recorder.Snapshot");
+                    Title = "ScreenToGif - " + LocalizationHelper.Get("S.Recorder.Snapshot");
 
                     Normal_Elapsed(null, null);
 
@@ -492,7 +492,7 @@ namespace ScreenToGif.Windows
                 #region To Pause
 
                 Stage = Stage.Paused;
-                Title = FindResource("Recorder.Paused").ToString();
+                Title = LocalizationHelper.Get("S.Recorder.Paused");
 
                 DiscardButton.BeginStoryboard(FindResource("ShowDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
 

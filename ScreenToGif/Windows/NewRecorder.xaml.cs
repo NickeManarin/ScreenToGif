@@ -387,7 +387,7 @@ namespace ScreenToGif.Windows
 
                 //Set to Snapshot Mode, change the text of the record button to "Snap" and every press of the button, takes a screenshot.
                 Stage = Stage.Snapping;
-                Title = "ScreenToGif - " + LocalizationHelper.Get("Recorder.Snapshot");
+                Title = "ScreenToGif - " + LocalizationHelper.Get("S.Recorder.Snapshot");
 
                 #endregion
             }
@@ -401,7 +401,7 @@ namespace ScreenToGif.Windows
                 if (Project.Frames?.Count > 0)
                 {
                     Stage = Stage.Paused;
-                    Title = LocalizationHelper.Get("Recorder.Paused");
+                    Title = LocalizationHelper.Get("S.Recorder.Paused");
 
                     DiscardButton.BeginStoryboard(FindResource("ShowDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
                 }

@@ -4,7 +4,7 @@
                   xmlns:u="clr-namespace:ScreenToGif.Util"
                   xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
                   x:Class="ScreenToGif.Windows.Webcam" x:Name="WebcamWindow" 
-                  Title="{DynamicResource Webcam.Title}" Height="400" Width="600" MinWidth="200" MinHeight="200" 
+                  Title="{DynamicResource S.Webcam.Title}" Height="400" Width="600" MinWidth="200" MinHeight="200" 
                   Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" Background="{DynamicResource Panel.Background}"
                   Loaded="Window_Loaded" LocationChanged="Window_LocationChanged" Closing="Window_Closing">
 
@@ -62,7 +62,7 @@
 
         <n:WebcamControl Grid.Row="0" x:Name="WebcamControl"/>
 
-        <Label Grid.Row="0" x:Name="NoVideoLabel" Content="{DynamicResource Webcam.NoVideo}" Margin="0,0,0,36" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
+        <Label Grid.Row="0" x:Name="NoVideoLabel" Content="{DynamicResource S.Webcam.NoVideo}" Margin="0,0,0,36" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
                Visibility="Hidden" FontSize="24" Foreground="{DynamicResource Element.Foreground.Header}" FontFamily="Segoe WP Light" Effect="{StaticResource Shadow.Foreground.Small}"/>
 
         <Grid Grid.Row="1" x:Name="LowerGrid" Height="31" VerticalAlignment="Bottom" UseLayoutRounding="True" SnapsToDevicePixels="True">
@@ -86,7 +86,7 @@
                            Style="{StaticResource Style.Button.NoText}" Effect="{StaticResource Shadow.Background.Small}"
                            HorizontalContentAlignment="Center" ContentHeight="20" MinWidth="30" Padding="2" Click="BackButton_OnClick">
                 <n:ImageButton.ToolTip>
-                    <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Back}"/>
+                    <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource S.Back}"/>
                 </n:ImageButton.ToolTip>
             </n:ImageButton>
 
@@ -103,7 +103,7 @@
                            HorizontalContentAlignment="Center" ContentHeight="20" Padding="3" Click="ScaleButton_Click"
                            IsEnabled="{Binding ElementName=VideoDevicesComboBox, Path=IsEnabled}">
                 <n:ImageButton.ToolTip>
-                    <ToolTip Placement="Bottom" HorizontalOffset="-5" Content="{DynamicResource Webcam.ChangeScale}" />
+                    <ToolTip Placement="Bottom" HorizontalOffset="-5" Content="{DynamicResource S.Webcam.ChangeScale}" />
                 </n:ImageButton.ToolTip>
             </n:ImageButton>
 
@@ -111,7 +111,7 @@
                            Style="{StaticResource Style.Button.NoText}" Effect="{StaticResource Shadow.Border}" 
                            HorizontalContentAlignment="Center" ContentHeight="20" Padding="3" Command="{StaticResource Command.CheckVideoDevices}">
                 <n:ImageButton.ToolTip>
-                    <ToolTip Placement="Bottom" HorizontalOffset="-5" Content="{DynamicResource Webcam.CheckVideoDevices}" />
+                    <ToolTip Placement="Bottom" HorizontalOffset="-5" Content="{DynamicResource S.Webcam.CheckVideoDevices}" />
                 </n:ImageButton.ToolTip>
             </n:ImageButton>
 
@@ -131,14 +131,14 @@
                 </Grid>
 
                 <Viewbox.ToolTip>
-                    <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Recorder.FpsRange}"/>
+                    <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource S.Recorder.FpsRange}"/>
                 </Viewbox.ToolTip>
             </Viewbox>
 
             <n:IntegerUpDown Grid.Column="7" x:Name="FpsNumericUpDown" Margin="1,3" StepValue="1" Minimum="1" Maximum="60" TabIndex="3"
                              Value="{Binding LatestFps, Mode=TwoWay, Source={x:Static u:UserSettings.All}}" MinWidth="45" IsEnabled="False">
                 <n:IntegerUpDown.ToolTip>
-                    <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Recorder.Fps}"/>
+                    <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource S.Recorder.Fps}"/>
                 </n:IntegerUpDown.ToolTip>
             </n:IntegerUpDown>
 
@@ -146,18 +146,18 @@
 
             <Separator Grid.Column="9" Width="1" Margin="5,2"/>
 
-            <n:ImageButton Grid.Column="10" x:Name="DiscardButton" Text="{DynamicResource Recorder.Discard}" Content="{StaticResource Vector.Remove}" Visibility="Collapsed" 
+            <n:ImageButton Grid.Column="10" x:Name="DiscardButton" Text="{DynamicResource S.Recorder.Discard}" Content="{StaticResource Vector.Remove}" Visibility="Collapsed" 
                            Click="DiscardButton_Click" Style="{StaticResource Style.Button.Horizontal}" 
                            UseLayoutRounding="True" MaxSize="16" TabIndex="4" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"
                            KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='3'}"/>
 
             <n:ImageButton Grid.Column="11" x:Name="RecordPauseButton" IsEnabled="False" TabIndex="5"
-                           Text="{Binding Path=Stage, ElementName=WebcamWindow, Converter={StaticResource StageToButtonStringConverter}, FallbackValue={StaticResource Recorder.Record}}" 
+                           Text="{Binding Path=Stage, ElementName=WebcamWindow, Converter={StaticResource StageToButtonStringConverter}, FallbackValue={StaticResource S.Recorder.Record}}" 
                            Content="{Binding Path=Stage, ElementName=WebcamWindow, Converter={StaticResource StageToCanvasConverter}, FallbackValue={StaticResource Vector.Record}}" 
 					       KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='1'}"
                            MaxSize="16" Click="RecordPauseButton_Click" Style="{StaticResource Style.Button.Horizontal}"/>
 
-            <n:ImageButton Grid.Column="12" x:Name="StopButton" Text="{DynamicResource Recorder.Stop}" Content="{StaticResource Vector.Stop}" MaxSize="16" Margin="0" 
+            <n:ImageButton Grid.Column="12" x:Name="StopButton" Text="{DynamicResource S.Recorder.Stop}" Content="{StaticResource Vector.Stop}" MaxSize="16" Margin="0" 
                            Command="Stop" Style="{StaticResource Style.Button.Horizontal}" UseLayoutRounding="True" TabIndex="6"
                            KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='2'}"/>
         </Grid>
@@ -170,7 +170,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <n:LabelSeparator Grid.Row="0" Text="{Binding ElementName=ScaleSlider, Path=Value, StringFormat={StaticResource Webcam.Scale}}"/>
+                    <n:LabelSeparator Grid.Row="0" Text="{Binding ElementName=ScaleSlider, Path=Value, StringFormat={StaticResource S.Webcam.Scale}}"/>
 
                     <Slider Grid.Row="1" x:Name="ScaleSlider" Margin="5,3" Minimum="0.4" Maximum="1.5" Value="0.5" LargeChange="0.1" TickFrequency="0.1" TickPlacement="None" ValueChanged="Slider_ValueChanged"/>
                 </Grid>

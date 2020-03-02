@@ -65,7 +65,7 @@
 
                 <Viewbox Grid.Column="1" Stretch="UniformToFill" ClipToBounds="True" Focusable="False" Opacity="{DynamicResource Element.Opacity}"
                          Visibility="{Binding Path=SnapshotMode, Source={x:Static u:UserSettings.All}}"
-                         ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource Recorder.FpsRange}">
+                         ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource S.Recorder.FpsRange}">
 
                     <Grid HorizontalAlignment="Center" VerticalAlignment="Center" FlowDirection="LeftToRight" Margin="-4">
                         <n:CircularProgressBar StrokeThickness="2" Percentage="100" SegmentColor="Gray" Radius="24" IsTabStop="False"/>
@@ -81,9 +81,9 @@
                 <n:IntegerUpDown Grid.Column="2" x:Name="FpsIntegerUpDown" Margin="1,3" StepValue="1" Minimum="1" Maximum="60" MinWidth="45" TabIndex="4"
                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=LatestFps, Mode=TwoWay}"
                                  Visibility="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}"
-                                 ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource Recorder.Fps}"/>
+                                 ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource S.Recorder.Fps}"/>
 
-                <Label Grid.Column="3" Content="{StaticResource Recorder.Fps.Short}" FontSize="12" FontFamily="Segoe UI" Margin="1,0,0,0" 
+                <Label Grid.Column="3" Content="{StaticResource S.Recorder.Fps.Short}" FontSize="12" FontFamily="Segoe UI" Margin="1,0,0,0" 
                        VerticalContentAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}" 
                        Visibility="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}"/>
 
@@ -100,7 +100,7 @@
 
                 <n:ImageButton Grid.Column="6" x:Name="DiscardButton" Content="{DynamicResource Vector.Remove}" Visibility="Collapsed" 
                                Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" 
-                               ContentHeight="20" Padding="3" ToolTip="{DynamicResource Recorder.Discard}" Click="DiscardButton_Click"/>
+                               ContentHeight="20" Padding="3" ToolTip="{DynamicResource S.Recorder.Discard}" Click="DiscardButton_Click"/>
 
                 <n:ImageButton Grid.Column="7" x:Name="RecordPauseButton"
                                Content="{Binding Stage, ElementName=RecorderWindow, Converter={StaticResource StageToCanvas}, FallbackValue={StaticResource Vector.Record}}" 
@@ -111,7 +111,7 @@
                 <n:ImageButton Grid.Column="8" x:Name="StopButton" Content="{DynamicResource Vector.Stop}"
                                Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}"
                                KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='2'}"
-                               ContentHeight="20" Padding="3" ToolTip="{DynamicResource Recorder.Stop}" Click="StopButton_Click"/>
+                               ContentHeight="20" Padding="3" ToolTip="{DynamicResource S.Recorder.Stop}" Click="StopButton_Click"/>
             </Grid>
         </Grid>
     </Border>

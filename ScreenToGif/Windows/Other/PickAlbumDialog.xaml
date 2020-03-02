@@ -46,7 +46,7 @@
             </Grid.ColumnDefinitions>
 
             <n:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource S.Recorder.Accept}" Content="{StaticResource Vector.Ok}" ContentHeight="20" Padding="2,0" MinWidth="90" Margin="5" Click="TrueActionButton_Click"/>
-            <n:ImageButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource Cancel}" Content="{StaticResource Vector.Cancel}" ContentHeight="20" Padding="2,0" MinWidth="90" Margin="5" IsCancel="True" Click="FalseActionButton_Click"/>
+            <n:ImageButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource S.Cancel}" Content="{StaticResource Vector.Cancel}" ContentHeight="20" Padding="2,0" MinWidth="90" Margin="5" IsCancel="True" Click="FalseActionButton_Click"/>
         </Grid>
     </Grid>
 </Window>

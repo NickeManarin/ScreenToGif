@@ -8,11 +8,11 @@
     <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
     
     <!--General-->
-    <s:String x:Key="Ok">OK</s:String>
-    <s:String x:Key="Back">戻る</s:String>
-    <s:String x:Key="Cancel">キャンセル</s:String>
-    <s:String x:Key="Yes">はい</s:String>
-    <s:String x:Key="No">いいえ</s:String>
+    <s:String x:Key="S.Ok">OK</s:String>
+    <s:String x:Key="S.Back">戻る</s:String>
+    <s:String x:Key="S.Cancel">キャンセル</s:String>
+    <s:String x:Key="S.Yes">はい</s:String>
+    <s:String x:Key="S.No">いいえ</s:String>
     <s:String x:Key="Frame">フレーム</s:String>
     <s:String x:Key="Suppress">(表示を)抑制</s:String>
     <s:String x:Key="Preview">プレビュー</s:String>
@@ -30,9 +30,9 @@
     <s:String x:Key="S.Exit">終了</s:String>
 
     <!--Application-->
-    <s:String x:Key="Application.Exiting.Title">ScreenToGif 終了</s:String>
-    <s:String x:Key="Application.Exiting.Instruction">終了しますか？</s:String>
-    <s:String x:Key="Application.Exiting.Message">すべてのウィンドウを閉じ、トレイアイコンを終了します。</s:String>
+    <s:String x:Key="S.Exiting.Title">ScreenToGif 終了</s:String>
+    <s:String x:Key="S.Exiting.Instruction">終了しますか？</s:String>
+    <s:String x:Key="S.Exiting.Message">すべてのウィンドウを閉じ、トレイアイコンを終了します。</s:String>
     
     <!--Error messages--> 
     <s:String x:Key="S.Crash">アプリのクラッシュ(・へ・)</s:String>
@@ -290,25 +290,25 @@
     <s:String x:Key="S.Localization.MoveRosourcePosition">カスタムリソースはリストの一番下に追加されます。</s:String>
 
     <!--Recorder-->
-    <s:String x:Key="Recorder.RecordingOptions">録画オプション</s:String>
-    <s:String x:Key="Recorder.Snapshot">スナップショットモード</s:String>
-    <s:String x:Key="Recorder.ThinMode">タイトルバーを隠す</s:String>
-    <s:String x:Key="Recorder.Fullscreen">全画面モード</s:String>
+    <s:String x:Key="S.Recorder.RecordingOptions">録画オプション</s:String>
+    <s:String x:Key="S.Recorder.Snapshot">スナップショットモード</s:String>
+    <s:String x:Key="S.Recorder.ThinMode">タイトルバーを隠す</s:String>
+    <s:String x:Key="S.Recorder.Fullscreen">全画面モード</s:String>
 
-    <s:String x:Key="Recorder.Record">記録</s:String>
-    <s:String x:Key="Recorder.Pause">ポーズ</s:String>
-    <s:String x:Key="Recorder.Continue">続ける</s:String>
-    <s:String x:Key="Recorder.Stop">停止</s:String>
-    <s:String x:Key="Recorder.Discard">破棄</s:String>
-    <s:String x:Key="Recorder.Snap">スナップ</s:String>
-    <s:String x:Key="Recorder.Height">高さ</s:String>
-    <s:String x:Key="Recorder.Width">幅</s:String>
-    <s:String x:Key="Recorder.Fps">最大フレーム/秒</s:String>
-    <s:String x:Key="Recorder.Fps.Short">fps</s:String>
-    <s:String x:Key="Recorder.FpsRange">最低 - 最大 fps: 1-60 fps</s:String>
-    <s:String x:Key="Recorder.SnapToWindow">ウィンドウに吸着する (スナップしたいところへドラッグして離す)</s:String>
-    <s:String x:Key="Recorder.PreStart">開始まで</s:String>
-    <s:String x:Key="Recorder.Paused">ScreenToGif (ポーズ)</s:String>
+    <s:String x:Key="S.Recorder.Record">記録</s:String>
+    <s:String x:Key="S.Recorder.Pause">ポーズ</s:String>
+    <s:String x:Key="S.Recorder.Continue">続ける</s:String>
+    <s:String x:Key="S.Recorder.Stop">停止</s:String>
+    <s:String x:Key="S.Recorder.Discard">破棄</s:String>
+    <s:String x:Key="S.Recorder.Snap">スナップ</s:String>
+    <s:String x:Key="S.Recorder.Height">高さ</s:String>
+    <s:String x:Key="S.Recorder.Width">幅</s:String>
+    <s:String x:Key="S.Recorder.Fps">最大フレーム/秒</s:String>
+    <s:String x:Key="S.Recorder.Fps.Short">fps</s:String>
+    <s:String x:Key="S.Recorder.FpsRange">最低 - 最大 fps: 1-60 fps</s:String>
+    <s:String x:Key="S.Recorder.SnapToWindow">ウィンドウに吸着する (スナップしたいところへドラッグして離す)</s:String>
+    <s:String x:Key="S.Recorder.PreStart">開始まで</s:String>
+    <s:String x:Key="S.Recorder.Paused">ScreenToGif (ポーズ)</s:String>
     
     <!--New Recorder-->
     <s:String x:Key="S.Recorder.Area">エリア</s:String>
@@ -324,53 +324,53 @@
     <s:String x:Key="S.Recorder.EscToCancel">Escキーを押してキャンセル</s:String>
     
     <!--Webcam Recorder-->
-    <s:String x:Key="Webcam.Title">ScreenToGif - Webカメラレコーダー</s:String>
-    <s:String x:Key="Webcam.NoVideo">ビデオデバイスが見つかりません。(・へ・)</s:String>
-    <s:String x:Key="Webcam.CheckVideoDevices">ビデオデバイスを確認してください。</s:String>
-    <s:String x:Key="Webcam.Scale">スケール: {0:0.##}倍</s:String>
-    <s:String x:Key="Webcam.ChangeScale">ビデオスケール変更</s:String>
+    <s:String x:Key="S.Webcam.Title">ScreenToGif - Webカメラレコーダー</s:String>
+    <s:String x:Key="S.Webcam.NoVideo">ビデオデバイスが見つかりません。(・へ・)</s:String>
+    <s:String x:Key="S.Webcam.CheckVideoDevices">ビデオデバイスを確認してください。</s:String>
+    <s:String x:Key="S.Webcam.Scale">スケール: {0:0.##}倍</s:String>
+    <s:String x:Key="S.Webcam.ChangeScale">ビデオスケール変更</s:String>
     
     <!--Board Recorder-->
-    <s:String x:Key="Board.Title">ScreenToGif - ボードレコーダー</s:String>
-    <s:String x:Key="Board.AutoRecord">自動録画</s:String>
-    <s:String x:Key="Board.AutoRecordToolTip">描画中も録画する</s:String>
-    <s:String x:Key="Board.CtrlHold">Ctrl [保持]</s:String>
+    <s:String x:Key="S.Board.Title">ScreenToGif - ボードレコーダー</s:String>
+    <s:String x:Key="S.Board.AutoRecord">自動録画</s:String>
+    <s:String x:Key="S.Board.AutoRecordToolTip">描画中も録画する</s:String>
+    <s:String x:Key="S.Board.CtrlHold">Ctrl [保持]</s:String>
     
     <!--Color Selector-->
-    <s:String x:Key="ColorSelector.Title">色セレクター</s:String>
-    <s:String x:Key="ColorSelector.Select">色の選択</s:String>
-    <s:String x:Key="ColorSelector.Red">赤(R)</s:String>
-    <s:String x:Key="ColorSelector.Green">緑(G)</s:String>
-    <s:String x:Key="ColorSelector.Blue">青(B)</s:String>
-    <s:String x:Key="ColorSelector.Alpha">アルファ値(A)</s:String>
-    <s:String x:Key="ColorSelector.Hexadecimal">16進数</s:String>
-    <s:String x:Key="ColorSelector.Initial">初期の色</s:String>
-    <s:String x:Key="ColorSelector.Current">現在の色</s:String>
-    <s:String x:Key="ColorSelector.Latest">最新の色</s:String>
+    <s:String x:Key="S.ColorSelector.Title">色セレクター</s:String>
+    <s:String x:Key="S.ColorSelector.Select">色の選択</s:String>
+    <s:String x:Key="S.ColorSelector.Red">赤(R)</s:String>
+    <s:String x:Key="S.ColorSelector.Green">緑(G)</s:String>
+    <s:String x:Key="S.ColorSelector.Blue">青(B)</s:String>
+    <s:String x:Key="S.ColorSelector.Alpha">アルファ値(A)</s:String>
+    <s:String x:Key="S.ColorSelector.Hexadecimal">16進数</s:String>
+    <s:String x:Key="S.ColorSelector.Initial">初期の色</s:String>
+    <s:String x:Key="S.ColorSelector.Current">現在の色</s:String>
+    <s:String x:Key="S.ColorSelector.Latest">最新の色</s:String>
     
     <!--Exception Viewer, Optional-->
-    <s:String x:Key="ExceptionViewer.Title">例外ビューアー</s:String>
-    <s:String x:Key="ExceptionViewer.OpenInner">内部例外を開く</s:String>
-    <s:String x:Key="ErrorDialog.Observation">不具合が発生しました。</s:String>
-    <s:String x:Key="ErrorDialog.Send">レポート送信</s:String>
+    <s:String x:Key="S.ExceptionViewer.Title">例外ビューアー</s:String>
+    <s:String x:Key="S.ExceptionViewer.OpenInner">内部例外を開く</s:String>
+    <s:String x:Key="S.ErrorDialog.Observation">不具合が発生しました。</s:String>
+    <s:String x:Key="S.ErrorDialog.Send">レポート送信</s:String>
 
     <!--Insert Frames-->
-    <s:String x:Key="InsertFrames.Title">フレームを挿入する</s:String>
-    <s:String x:Key="InsertFrames.Info">両方のサイズが同じである必要があるため、このウィンドウでは画像とキャンバスの位置やサイズを変更します。</s:String>
-    <s:String x:Key="InsertFrames.CanvasSize">キャンバスサイズ:</s:String>
-    <s:String x:Key="InsertFrames.FitCanvas">画像をキャンバスに合わせる</s:String>
-    <s:String x:Key="InsertFrames.FitCanvas.Info">キャンバスサイズを(左上隅から)両方の画像に合わせて変更します。</s:String>
-    <s:String x:Key="InsertFrames.DifferentSizes">フレームサイズに違いがあります。フレームを挿入する前にこれを解決する必要があります。</s:String>
-    <s:String x:Key="InsertFrames.InsertedFrames">新規フレーム</s:String>
-    <s:String x:Key="InsertFrames.CurrentFrames">現在のフレーム</s:String>
-    <s:String x:Key="InsertFrames.ImageSize">画像サイズ:</s:String>
-    <s:String x:Key="InsertFrames.ImagePosition">画像位置:</s:String>
-    <s:String x:Key="InsertFrames.ResetImageSizePosition">画像サイズ・位置をリセット</s:String>
-    <s:String x:Key="InsertFrames.Info2">新しいフレームが現在のフレームリストの位置に挿入されます。</s:String>
-    <s:String x:Key="InsertFrames.Before">前へ</s:String>
-    <s:String x:Key="InsertFrames.After">後ろへ</s:String>
-    <s:String x:Key="InsertFrames.Importing">インポート中</s:String>
-    <s:String x:Key="InsertFrames.SelectColorFill">キャンバスの背景色を選択</s:String>
+    <s:String x:Key="S.InsertFrames.Title">フレームを挿入する</s:String>
+    <s:String x:Key="S.InsertFrames.Info">両方のサイズが同じである必要があるため、このウィンドウでは画像とキャンバスの位置やサイズを変更します。</s:String>
+    <s:String x:Key="S.InsertFrames.CanvasSize">キャンバスサイズ:</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas">画像をキャンバスに合わせる</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas.Info">キャンバスサイズを(左上隅から)両方の画像に合わせて変更します。</s:String>
+    <s:String x:Key="S.InsertFrames.DifferentSizes">フレームサイズに違いがあります。フレームを挿入する前にこれを解決する必要があります。</s:String>
+    <s:String x:Key="S.InsertFrames.InsertedFrames">新規フレーム</s:String>
+    <s:String x:Key="S.InsertFrames.CurrentFrames">現在のフレーム</s:String>
+    <s:String x:Key="S.InsertFrames.ImageSize">画像サイズ:</s:String>
+    <s:String x:Key="S.InsertFrames.ImagePosition">画像位置:</s:String>
+    <s:String x:Key="S.InsertFrames.ResetImageSizePosition">画像サイズ・位置をリセット</s:String>
+    <s:String x:Key="S.InsertFrames.Info2">新しいフレームが現在のフレームリストの位置に挿入されます。</s:String>
+    <s:String x:Key="S.InsertFrames.Before">前へ</s:String>
+    <s:String x:Key="S.InsertFrames.After">後ろへ</s:String>
+    <s:String x:Key="S.InsertFrames.Importing">インポート中</s:String>
+    <s:String x:Key="S.InsertFrames.SelectColorFill">キャンバスの背景色を選択</s:String>
 
     <!--Import Frames From Video-->
     <s:String x:Key="S.ImportVideo.Title">ビデオからフレームをインポートする</s:String>
@@ -665,40 +665,40 @@
     <s:String x:Key="Editor.Warning.LowSpace">ドライブに十分な空き容量がありません (残り {0}％)。 「オプション」 - 「一時ファイル」でスペースを確保するには、ここをクリックしてください。</s:String>
     
     <!--Hints-->
-    <s:String x:Key="Hint.NewRecording">新規録画作成</s:String>
-    <s:String x:Key="Hint.NewWebcamRecording">新規Webカメラ録画作成</s:String>
-    <s:String x:Key="Hint.NewBoardRecording">新規ボード録画作成</s:String>
-    <s:String x:Key="Hint.NewAnimation">新規プロジェクト作成</s:String>
-    <s:String x:Key="Hint.Undo">元に戻す</s:String>
-    <s:String x:Key="Hint.Reset">リセット実行</s:String>
-    <s:String x:Key="Hint.Redo">やり直し</s:String>
-    <s:String x:Key="Hint.Cut">{0} フレーム切り取り</s:String>
-    <s:String x:Key="Hint.Copy">{0} フレームコピー</s:String>
-    <s:String x:Key="Hint.Paste">{0} フレーム貼り付け</s:String>
-    <s:String x:Key="Hint.Zoom">表示倍率 {0}%</s:String>
-    <s:String x:Key="Hint.SelectAll">全フレーム選択</s:String>
-    <s:String x:Key="Hint.SelectSingle">フレーム #{0} 選択</s:String>
-    <s:String x:Key="Hint.SelectInverse">選択反転</s:String>
-    <s:String x:Key="Hint.Deselect">全フレーム選択解除</s:String>
-    <s:String x:Key="Hint.DeleteFrames">{0} フレーム削除</s:String>
-    <s:String x:Key="Hint.Reverse">フレームリストを逆順化</s:String>
-    <s:String x:Key="Hint.Yoyo">ヨーヨー反復効果適用</s:String>
-    <s:String x:Key="Hint.MoveLeft">フレーム左移動</s:String>
-    <s:String x:Key="Hint.MoveRight">フレーム右移動</s:String>
-    <s:String x:Key="Hint.Resize">フレームリサイズ</s:String>
-    <s:String x:Key="Hint.Crop">フレーム切り取り</s:String>
-    <s:String x:Key="Hint.FlipRotate">フレームの反転・回転</s:String>
-    <s:String x:Key="Hint.FlipRotate2">反転は選択したフレームに適用され、回転はすべてのフレームに適用されます。</s:String>
-    <s:String x:Key="Hint.ApplyAll">この処理はすべてのフレームに適用されます。</s:String>
-    <s:String x:Key="Hint.ApplySelected">この処理は選択されたフレームに適用されます。</s:String>
-    <s:String x:Key="Hint.Cinemagraph">シネマグラフは先頭フレームに基づくすべてのフレームに適用されます。</s:String>
-    <s:String x:Key="Hint.Overlay">オーバーレイ適用</s:String>
-    <s:String x:Key="Hint.TitleFrame">タイトルフレーム作成</s:String>
-    <s:String x:Key="Hint.TitleFrame2">タイトルフレームは選択されたフレームの前に挿入されます。</s:String>
-    <s:String x:Key="Hint.Delay">持続時間 (遅延)変更</s:String>
-    <s:String x:Key="Hint.Transition">トランジション挿入</s:String>
-    <s:String x:Key="Hint.Reduce">フレームレート減少</s:String>
-    <s:String x:Key="Hint.Duplicates">重複削除</s:String>
+    <s:String x:Key="S.Hint.NewRecording">新規録画作成</s:String>
+    <s:String x:Key="S.Hint.NewWebcamRecording">新規Webカメラ録画作成</s:String>
+    <s:String x:Key="S.Hint.NewBoardRecording">新規ボード録画作成</s:String>
+    <s:String x:Key="S.Hint.NewAnimation">新規プロジェクト作成</s:String>
+    <s:String x:Key="S.Hint.Undo">元に戻す</s:String>
+    <s:String x:Key="S.Hint.Reset">リセット実行</s:String>
+    <s:String x:Key="S.Hint.Redo">やり直し</s:String>
+    <s:String x:Key="S.Hint.Cut">{0} フレーム切り取り</s:String>
+    <s:String x:Key="S.Hint.Copy">{0} フレームコピー</s:String>
+    <s:String x:Key="S.Hint.Paste">{0} フレーム貼り付け</s:String>
+    <s:String x:Key="S.Hint.Zoom">表示倍率 {0}%</s:String>
+    <s:String x:Key="S.Hint.SelectAll">全フレーム選択</s:String>
+    <s:String x:Key="S.Hint.SelectSingle">フレーム #{0} 選択</s:String>
+    <s:String x:Key="S.Hint.SelectInverse">選択反転</s:String>
+    <s:String x:Key="S.Hint.Deselect">全フレーム選択解除</s:String>
+    <s:String x:Key="S.Hint.DeleteFrames">{0} フレーム削除</s:String>
+    <s:String x:Key="S.Hint.Reverse">フレームリストを逆順化</s:String>
+    <s:String x:Key="S.Hint.Yoyo">ヨーヨー反復効果適用</s:String>
+    <s:String x:Key="S.Hint.MoveLeft">フレーム左移動</s:String>
+    <s:String x:Key="S.Hint.MoveRight">フレーム右移動</s:String>
+    <s:String x:Key="S.Hint.Resize">フレームリサイズ</s:String>
+    <s:String x:Key="S.Hint.Crop">フレーム切り取り</s:String>
+    <s:String x:Key="S.Hint.FlipRotate">フレームの反転・回転</s:String>
+    <s:String x:Key="S.Hint.FlipRotate2">反転は選択したフレームに適用され、回転はすべてのフレームに適用されます。</s:String>
+    <s:String x:Key="S.Hint.ApplyAll">この処理はすべてのフレームに適用されます。</s:String>
+    <s:String x:Key="S.Hint.ApplySelected">この処理は選択されたフレームに適用されます。</s:String>
+    <s:String x:Key="S.Hint.Cinemagraph">シネマグラフは先頭フレームに基づくすべてのフレームに適用されます。</s:String>
+    <s:String x:Key="S.Hint.Overlay">オーバーレイ適用</s:String>
+    <s:String x:Key="S.Hint.TitleFrame">タイトルフレーム作成</s:String>
+    <s:String x:Key="S.Hint.TitleFrame2">タイトルフレームは選択されたフレームの前に挿入されます。</s:String>
+    <s:String x:Key="S.Hint.Delay">持続時間 (遅延)変更</s:String>
+    <s:String x:Key="S.Hint.Transition">トランジション挿入</s:String>
+    <s:String x:Key="S.Hint.Reduce">フレームレート減少</s:String>
+    <s:String x:Key="S.Hint.Duplicates">重複削除</s:String>
     
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">隠す</s:String>

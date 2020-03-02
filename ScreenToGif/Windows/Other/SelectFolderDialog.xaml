@@ -59,10 +59,10 @@
                 <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
 
-            <n:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource Ok}" Content="{StaticResource Vector.Ok}" MaxSize="20" MinWidth="90" 
+            <n:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource S.Ok}" Content="{StaticResource Vector.Ok}" MaxSize="20" MinWidth="90" 
                            Margin="10,5,0,5" Command="{StaticResource Command.Ok}"/>
 
-            <n:ImageButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource Cancel}" Content="{StaticResource Vector.Cancel}" MaxSize="20" MinWidth="90" 
+            <n:ImageButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource S.Cancel}" Content="{StaticResource Vector.Cancel}" MaxSize="20" MinWidth="90" 
                            Margin="5" Command="{StaticResource Command.Cancel}" IsCancel="True"/>
         </Grid>
     </Grid>

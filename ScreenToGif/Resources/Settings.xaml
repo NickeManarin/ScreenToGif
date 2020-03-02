@@ -194,7 +194,10 @@
     <s:Boolean x:Key="IsPsdOptionsExpanded">True</s:Boolean>
     <s:Boolean x:Key="IsProjectOptionsExpanded">True</s:Boolean>
     <s:Boolean x:Key="IsSaveOptionsExpanded">True</s:Boolean>
-      
+    <c:ArrayList x:Key="FfmpegPresets">
+        <!--<model:FfmpegPreset Extension=".mp4" Parameters=""/>-->
+    </c:ArrayList>
+    
     <!--Editor • Save As > Gif options-->
     <s:Int32 x:Key="Quality">10</s:Int32>
     <s:Int32 x:Key="GifskiQuality">50</s:Int32>
@@ -206,7 +209,6 @@
     <s:Boolean x:Key="DetectUnchanged">True</s:Boolean>
     <s:Boolean x:Key="PaintTransparent">True</s:Boolean>
     <Color x:Key="ChromaKey">#FF32CD32</Color>
-    <s:String x:Key="ExtraParametersGif">-lavfi palettegen=stats_mode=diff[pal],[0:v][pal]paletteuse=new=1:diff_mode=rectangle</s:String>
     <!--<s:String x:Key="LatestOutputFolder"></s:String>-->
     <!--<s:String x:Key="LatestFilename"></s:String>-->
     <s:String x:Key="LatestExtension">.gif</s:String>
@@ -228,7 +230,6 @@
     <s:Int32 x:Key="RepeatCountApng">2</s:Int32>
     <s:Boolean x:Key="DetectUnchangedApng">True</s:Boolean>
     <s:Boolean x:Key="PaintTransparentApng">True</s:Boolean>
-    <!--<s:String x:Key="ExtraParametersApngFFmpeg"></s:String>-->
     <!--<s:String x:Key="LatestApngOutputFolder"></s:String>-->
     <!--<s:String x:Key="LatestApngFilename"></s:String>-->
     <s:String x:Key="LatestApngExtension">.png</s:String>
@@ -246,9 +247,6 @@
     <s:Int32 x:Key="AviQuality">5000</s:Int32>
     <s:Boolean x:Key="FlipVideo">True</s:Boolean>
     <s:Int32 x:Key="OutputFramerate">30</s:Int32>
-    <c:ArrayList x:Key="FfmpegPresets">
-        <!--<model:FfmpegPreset Extension=".mp4" Parameters=""/>-->
-    </c:ArrayList>
     <!--<s:String x:Key="LatestVideoOutputFolder"></s:String>-->
     <!--<s:String x:Key="LatestVideoFilename"></s:String>-->
     <s:String x:Key="LatestVideoExtension">.mp4</s:String>

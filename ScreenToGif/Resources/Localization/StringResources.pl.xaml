@@ -8,11 +8,11 @@
     <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
     
     <!--General-->
-    <s:String x:Key="Ok">OK</s:String>
-    <s:String x:Key="Back">Cofnij</s:String>
-    <s:String x:Key="Cancel">Anuluj</s:String>
-    <s:String x:Key="Yes">Tak</s:String>
-    <s:String x:Key="No">Nie</s:String>
+    <s:String x:Key="S.Ok">OK</s:String>
+    <s:String x:Key="S.Back">Cofnij</s:String>
+    <s:String x:Key="S.Cancel">Anuluj</s:String>
+    <s:String x:Key="S.Yes">Tak</s:String>
+    <s:String x:Key="S.No">Nie</s:String>
     <s:String x:Key="Frame">Klatka</s:String>
     <s:String x:Key="Suppress">Zwolnij</s:String>
     <s:String x:Key="Preview">Podgląd</s:String>
@@ -30,9 +30,9 @@
     <s:String x:Key="S.Exit">Wyjście</s:String>
 
     <!--Application-->
-    <s:String x:Key="Application.Exiting.Title">Zamykanie ScreenToGif</s:String>
-    <s:String x:Key="Application.Exiting.Instruction">Czy jesteś pewien, że chcesz zakończyć?</s:String>
-    <s:String x:Key="Application.Exiting.Message">Wszystkie okna zostaną zamknięte i ikonka programu zniknie z zasobnika.</s:String>
+    <s:String x:Key="S.Exiting.Title">Zamykanie ScreenToGif</s:String>
+    <s:String x:Key="S.Exiting.Instruction">Czy jesteś pewien, że chcesz zakończyć?</s:String>
+    <s:String x:Key="S.Exiting.Message">Wszystkie okna zostaną zamknięte i ikonka programu zniknie z zasobnika.</s:String>
     
     <!--Error messages--> 
     <s:String x:Key="S.Crash">O nie, aplikacja przestała działać :(</s:String>
@@ -371,25 +371,25 @@
     <s:String x:Key="S.Localization.MoveRosourcePosition">Aby użyć twojego pliku, przenieś go na sam dół listy.</s:String>
 
     <!--Recorder-->
-    <s:String x:Key="Recorder.RecordingOptions">Opcje nagrywania</s:String>
-    <s:String x:Key="Recorder.Snapshot">Tryb migawki</s:String>
-    <s:String x:Key="Recorder.ThinMode">Ukryj pasek tytułowy</s:String>
-    <s:String x:Key="Recorder.Fullscreen">Tryb pełnego ekranu</s:String>
+    <s:String x:Key="S.Recorder.RecordingOptions">Opcje nagrywania</s:String>
+    <s:String x:Key="S.Recorder.Snapshot">Tryb migawki</s:String>
+    <s:String x:Key="S.Recorder.ThinMode">Ukryj pasek tytułowy</s:String>
+    <s:String x:Key="S.Recorder.Fullscreen">Tryb pełnego ekranu</s:String>
 
-    <s:String x:Key="Recorder.Record">Nagrywanie</s:String>
-    <s:String x:Key="Recorder.Pause">Pauza</s:String>
-    <s:String x:Key="Recorder.Continue">Kontynuuj</s:String>
-    <s:String x:Key="Recorder.Stop">Stop</s:String>
-    <s:String x:Key="Recorder.Discard">Odrzuć</s:String>
-    <s:String x:Key="Recorder.Snap">Snap</s:String>
-    <s:String x:Key="Recorder.Height">Wysokość</s:String>
-    <s:String x:Key="Recorder.Width">Szerokość</s:String>
-    <s:String x:Key="Recorder.Fps">Maksymalna ilość klatek na sekundę</s:String>
-    <s:String x:Key="Recorder.Fps.Short">fps</s:String>
-    <s:String x:Key="Recorder.FpsRange">Minimalna-maksymalna ilość klatek na sekundę: 1-60 fps</s:String>
-    <s:String x:Key="Recorder.SnapToWindow">Zrzut selektywny (Przeciągnij i upuść, by zrobić zrzut)</s:String>
-    <s:String x:Key="Recorder.PreStart">Przed startem</s:String>
-    <s:String x:Key="Recorder.Paused">ScreenToGif (Zapauzowane)</s:String>
+    <s:String x:Key="S.Recorder.Record">Nagrywanie</s:String>
+    <s:String x:Key="S.Recorder.Pause">Pauza</s:String>
+    <s:String x:Key="S.Recorder.Continue">Kontynuuj</s:String>
+    <s:String x:Key="S.Recorder.Stop">Stop</s:String>
+    <s:String x:Key="S.Recorder.Discard">Odrzuć</s:String>
+    <s:String x:Key="S.Recorder.Snap">Snap</s:String>
+    <s:String x:Key="S.Recorder.Height">Wysokość</s:String>
+    <s:String x:Key="S.Recorder.Width">Szerokość</s:String>
+    <s:String x:Key="S.Recorder.Fps">Maksymalna ilość klatek na sekundę</s:String>
+    <s:String x:Key="S.Recorder.Fps.Short">fps</s:String>
+    <s:String x:Key="S.Recorder.FpsRange">Minimalna-maksymalna ilość klatek na sekundę: 1-60 fps</s:String>
+    <s:String x:Key="S.Recorder.SnapToWindow">Zrzut selektywny (Przeciągnij i upuść, by zrobić zrzut)</s:String>
+    <s:String x:Key="S.Recorder.PreStart">Przed startem</s:String>
+    <s:String x:Key="S.Recorder.Paused">ScreenToGif (Zapauzowane)</s:String>
     
     <!--New Recorder-->
     <s:String x:Key="S.Recorder.Area">Obszar</s:String>
@@ -406,37 +406,37 @@
     <s:String x:Key="S.Recorder.EscToCancel">Naciśnij ESC, aby anulować</s:String>
     
     <!--Webcam Recorder-->
-    <s:String x:Key="Webcam.Title">ScreenToGif - Nagrywanie z kamerki</s:String>
-    <s:String x:Key="Webcam.NoVideo">Nie znaleziono urządzeń wideo :c</s:String>
-    <s:String x:Key="Webcam.CheckVideoDevices">Sprawdzanie urządzeń wideo.</s:String>
-    <s:String x:Key="Webcam.Scale">Skala: x{0:0.##}</s:String>
-    <s:String x:Key="Webcam.ChangeScale">Zmień skalę wideo.</s:String>
+    <s:String x:Key="S.Webcam.Title">ScreenToGif - Nagrywanie z kamerki</s:String>
+    <s:String x:Key="S.Webcam.NoVideo">Nie znaleziono urządzeń wideo :c</s:String>
+    <s:String x:Key="S.Webcam.CheckVideoDevices">Sprawdzanie urządzeń wideo.</s:String>
+    <s:String x:Key="S.Webcam.Scale">Skala: x{0:0.##}</s:String>
+    <s:String x:Key="S.Webcam.ChangeScale">Zmień skalę wideo.</s:String>
     
     <!--Board Recorder-->
-    <s:String x:Key="Board.Title">ScreenToGif - Nagrywanie tablicy</s:String>
-    <s:String x:Key="Board.AutoRecord">Automatyczne nagrywanie</s:String>
-    <s:String x:Key="Board.AutoRecordToolTip">Włącz nagrywanie podczas rysowania.</s:String>
-    <s:String x:Key="Board.CtrlHold">Ctrl [Przytrzymaj]</s:String>
+    <s:String x:Key="S.Board.Title">ScreenToGif - Nagrywanie tablicy</s:String>
+    <s:String x:Key="S.Board.AutoRecord">Automatyczne nagrywanie</s:String>
+    <s:String x:Key="S.Board.AutoRecordToolTip">Włącz nagrywanie podczas rysowania.</s:String>
+    <s:String x:Key="S.Board.CtrlHold">Ctrl [Przytrzymaj]</s:String>
     
     <!--Color Selector-->
-    <s:String x:Key="ColorSelector.Title">Wybór koloru</s:String>
-    <s:String x:Key="ColorSelector.Select">Wybierz kolor</s:String>
-    <s:String x:Key="ColorSelector.Red">Czerwony</s:String>
-    <s:String x:Key="ColorSelector.Green">Zielony</s:String>
-    <s:String x:Key="ColorSelector.Blue">Niebieski</s:String>
-    <s:String x:Key="ColorSelector.Alpha">Alpha</s:String>
-    <s:String x:Key="ColorSelector.Hexadecimal">Hex</s:String>
-    <s:String x:Key="ColorSelector.Initial">Kolor początkowy</s:String>
-    <s:String x:Key="ColorSelector.Current">Aktualny kolor</s:String>
-    <s:String x:Key="ColorSelector.Latest">Ostatni kolor</s:String>
-    <!--<s:String x:Key="ColorSelector.Sample">Drag this to&#x0d;sample colors</s:String>-->
-    <s:String x:Key="ColorSelector.Sample.Info">Kliknij i przeciągnij&#x0d;kolory ze swojego ekranu</s:String>
+    <s:String x:Key="S.ColorSelector.Title">Wybór koloru</s:String>
+    <s:String x:Key="S.ColorSelector.Select">Wybierz kolor</s:String>
+    <s:String x:Key="S.ColorSelector.Red">Czerwony</s:String>
+    <s:String x:Key="S.ColorSelector.Green">Zielony</s:String>
+    <s:String x:Key="S.ColorSelector.Blue">Niebieski</s:String>
+    <s:String x:Key="S.ColorSelector.Alpha">Alpha</s:String>
+    <s:String x:Key="S.ColorSelector.Hexadecimal">Hex</s:String>
+    <s:String x:Key="S.ColorSelector.Initial">Kolor początkowy</s:String>
+    <s:String x:Key="S.ColorSelector.Current">Aktualny kolor</s:String>
+    <s:String x:Key="S.ColorSelector.Latest">Ostatni kolor</s:String>
+    <!--<s:String x:Key="S.ColorSelector.Sample">Drag this to&#x0d;sample colors</s:String>-->
+    <s:String x:Key="S.ColorSelector.Sample.Info">Kliknij i przeciągnij&#x0d;kolory ze swojego ekranu</s:String>
     
     <!--Exception Viewer, Optional-->
-    <s:String x:Key="ExceptionViewer.Title">Podgląd wyjątków</s:String>
-    <s:String x:Key="ExceptionViewer.OpenInner">Otwórz wewnętrzne wyjątki</s:String>
-    <s:String x:Key="ErrorDialog.Observation">Coś złego się stało.</s:String>
-    <s:String x:Key="ErrorDialog.Send">Zgłoś</s:String>
+    <s:String x:Key="S.ExceptionViewer.Title">Podgląd wyjątków</s:String>
+    <s:String x:Key="S.ExceptionViewer.OpenInner">Otwórz wewnętrzne wyjątki</s:String>
+    <s:String x:Key="S.ErrorDialog.Observation">Coś złego się stało.</s:String>
+    <s:String x:Key="S.ErrorDialog.Send">Zgłoś</s:String>
 
     <!--FFmpeg Preset-->
     <s:String x:Key="S.FfmpegPreset.Title">Ustawienia FFmpeg</s:String>
@@ -447,22 +447,22 @@
     <s:String x:Key="S.FfmpegPreset.Warning.SameName">Istnieją ustawienia z tą samą nazwą.</s:String>
 
     <!--Insert Frames-->
-    <s:String x:Key="InsertFrames.Title">Wstawianie klatek</s:String>
-    <s:String x:Key="InsertFrames.Info">Obie strony powinny mieć ten sam rozmiar, to okno umożliwia ci zmianę pozycji i rozmiarów obrazu na płótnie. Kliknij, aby wybrać i zmienić rozmiar.</s:String>
-    <s:String x:Key="InsertFrames.CanvasSize">Rozmiar płótna:</s:String>
-    <s:String x:Key="InsertFrames.FitCanvas">Dopasuj obraz do płótna</s:String>
-    <s:String x:Key="InsertFrames.FitCanvas.Info">Zmień rozmiar płótna, tak żeby dopasować oba obrazy do środka (od lewego górnego rogu).</s:String>
-    <s:String x:Key="InsertFrames.DifferentSizes">Jest różnica między rozmiarami klatek. Musisz to rozwiązać przed wstawianiem klatek.</s:String>
-    <s:String x:Key="InsertFrames.InsertedFrames">Wstawione klatki</s:String>
-    <s:String x:Key="InsertFrames.CurrentFrames">Aktualna klatka(tki)</s:String>
-    <s:String x:Key="InsertFrames.ImageSize">Rozmiar obrazu:</s:String>
-    <s:String x:Key="InsertFrames.ImagePosition">Położenie obrazu:</s:String>
-    <s:String x:Key="InsertFrames.ResetImageSizePosition">Resetuj rozmiar&#x0d;i położenie obrazu</s:String>
-    <s:String x:Key="InsertFrames.Info2">Nowe klatki będą wstawione do obecnej listy klatek w położeniu:</s:String>
-    <s:String x:Key="InsertFrames.Before">Przed</s:String>
-    <s:String x:Key="InsertFrames.After">Po</s:String>
-    <s:String x:Key="InsertFrames.Importing">Importowanie</s:String>
-    <s:String x:Key="InsertFrames.SelectColorFill">Wybierz kolor wypełnienia</s:String>
+    <s:String x:Key="S.InsertFrames.Title">Wstawianie klatek</s:String>
+    <s:String x:Key="S.InsertFrames.Info">Obie strony powinny mieć ten sam rozmiar, to okno umożliwia ci zmianę pozycji i rozmiarów obrazu na płótnie. Kliknij, aby wybrać i zmienić rozmiar.</s:String>
+    <s:String x:Key="S.InsertFrames.CanvasSize">Rozmiar płótna:</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas">Dopasuj obraz do płótna</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas.Info">Zmień rozmiar płótna, tak żeby dopasować oba obrazy do środka (od lewego górnego rogu).</s:String>
+    <s:String x:Key="S.InsertFrames.DifferentSizes">Jest różnica między rozmiarami klatek. Musisz to rozwiązać przed wstawianiem klatek.</s:String>
+    <s:String x:Key="S.InsertFrames.InsertedFrames">Wstawione klatki</s:String>
+    <s:String x:Key="S.InsertFrames.CurrentFrames">Aktualna klatka(tki)</s:String>
+    <s:String x:Key="S.InsertFrames.ImageSize">Rozmiar obrazu:</s:String>
+    <s:String x:Key="S.InsertFrames.ImagePosition">Położenie obrazu:</s:String>
+    <s:String x:Key="S.InsertFrames.ResetImageSizePosition">Resetuj rozmiar&#x0d;i położenie obrazu</s:String>
+    <s:String x:Key="S.InsertFrames.Info2">Nowe klatki będą wstawione do obecnej listy klatek w położeniu:</s:String>
+    <s:String x:Key="S.InsertFrames.Before">Przed</s:String>
+    <s:String x:Key="S.InsertFrames.After">Po</s:String>
+    <s:String x:Key="S.InsertFrames.Importing">Importowanie</s:String>
+    <s:String x:Key="S.InsertFrames.SelectColorFill">Wybierz kolor wypełnienia</s:String>
 
     <!--Import Frames From Video-->
     <s:String x:Key="S.ImportVideo.Title">Importuj klatki z filmu</s:String>
@@ -770,41 +770,41 @@
     <s:String x:Key="Editor.Warning.LowSpace">Nie ma wystarczająco miejsca na dysku, na którym ta aplikacja zapisu pliki cache (pozostało {0}%). Kliknij tutaj, żeby otworzyć Opcje > Pliki tymczasowe i zwolnić trochę miejsca.</s:String>
     
     <!--Hints-->
-    <s:String x:Key="Hint.NewRecording">Nowe nagranie utworzone</s:String>
-    <s:String x:Key="Hint.NewWebcamRecording">Nowe nagranie z kamerki utworzone</s:String>
-    <s:String x:Key="Hint.NewBoardRecording">Nowe nagranie tablicy utworzone</s:String>
-    <s:String x:Key="Hint.NewAnimation">Nowy projekt utworzony</s:String>
-    <s:String x:Key="Hint.Undo">Cofnięto</s:String>
-    <s:String x:Key="Hint.Reset">Zresetowano</s:String>
-    <s:String x:Key="Hint.Redo">Ponowiono</s:String>
-    <s:String x:Key="Hint.Cut">Ilość wyciętych klatek: {0}</s:String>
-    <s:String x:Key="Hint.Copy">Ilość skopiowanych klatek: {0}</s:String>
-    <s:String x:Key="Hint.Paste">Ilość wklejonych klatek: {0}</s:String>
-    <s:String x:Key="Hint.Zoom">Powiększenie: {0}%</s:String>
-    <s:String x:Key="Hint.SelectAll">Wszystkie klatki zostały zaznaczone</s:String>
-    <s:String x:Key="Hint.SelectSingle">Klatka #{0} zaznaczona</s:String>
-    <s:String x:Key="Hint.SelectInverse">Zaznaczenie odwrócone</s:String>
-    <s:String x:Key="Hint.Deselect">Wszystkie klatki zostały odznaczone</s:String>
-    <s:String x:Key="Hint.DeleteFrames">Ilość odznaczonych klatek: {0}</s:String>
-    <s:String x:Key="Hint.Reverse">Lista klatek odwrócona</s:String>
-    <s:String x:Key="Hint.Yoyo">Zastosowano efekt Yoyo</s:String>
-    <s:String x:Key="Hint.MoveLeft">Klatki przeniesione do lewej strony</s:String>
-    <s:String x:Key="Hint.MoveRight">Klatki przeniesione do prawej strony</s:String>
-    <s:String x:Key="Hint.Resize">Zmieniono rozmiary klatek</s:String>
-    <s:String x:Key="Hint.Crop">Przycięto klatki</s:String>
-    <s:String x:Key="Hint.FlipRotate">Odbito/Obrócono klatki</s:String>
-    <s:String x:Key="Hint.FlipRotate2">Odbicie dotyczy zaznaczonych klatek a obrócenie dotyczy wszystkich klatek</s:String>
-    <s:String x:Key="Hint.ApplyAll">Ta akcja dotyczy wszystkich klatek</s:String>
-    <s:String x:Key="Hint.ApplySelected">Ta akcja dotyczy wybranych klatek</s:String>
-    <s:String x:Key="Hint.ApplySelectedOrAll">Ta akcja dotyczy wszystkich lub wybranych klatek, w zależności od ustawień</s:String>
-    <s:String x:Key="Hint.Cinemagraph">Cinemagraph dotyczy wszystkich klatek na podstawie pierwszej klatki</s:String>
-    <s:String x:Key="Hint.Overlay">Zastosowano nakładkę</s:String>
-    <s:String x:Key="Hint.TitleFrame">Utworzono klatkę tytułową</s:String>
-    <s:String x:Key="Hint.TitleFrame2">Klatka tytułowa będzie wstawiona przed zaznaczoną klatką</s:String>
-    <s:String x:Key="Hint.Delay">Zmieniono czas trwania (opóźnienie)</s:String>
-    <s:String x:Key="Hint.Transition">Wstawiono przejście</s:String>
-    <s:String x:Key="Hint.Reduce">Zmniejszono ilość klatek na sekundę</s:String>
-    <s:String x:Key="Hint.Duplicates">Duplikaty usunięte</s:String>
+    <s:String x:Key="S.Hint.NewRecording">Nowe nagranie utworzone</s:String>
+    <s:String x:Key="S.Hint.NewWebcamRecording">Nowe nagranie z kamerki utworzone</s:String>
+    <s:String x:Key="S.Hint.NewBoardRecording">Nowe nagranie tablicy utworzone</s:String>
+    <s:String x:Key="S.Hint.NewAnimation">Nowy projekt utworzony</s:String>
+    <s:String x:Key="S.Hint.Undo">Cofnięto</s:String>
+    <s:String x:Key="S.Hint.Reset">Zresetowano</s:String>
+    <s:String x:Key="S.Hint.Redo">Ponowiono</s:String>
+    <s:String x:Key="S.Hint.Cut">Ilość wyciętych klatek: {0}</s:String>
+    <s:String x:Key="S.Hint.Copy">Ilość skopiowanych klatek: {0}</s:String>
+    <s:String x:Key="S.Hint.Paste">Ilość wklejonych klatek: {0}</s:String>
+    <s:String x:Key="S.Hint.Zoom">Powiększenie: {0}%</s:String>
+    <s:String x:Key="S.Hint.SelectAll">Wszystkie klatki zostały zaznaczone</s:String>
+    <s:String x:Key="S.Hint.SelectSingle">Klatka #{0} zaznaczona</s:String>
+    <s:String x:Key="S.Hint.SelectInverse">Zaznaczenie odwrócone</s:String>
+    <s:String x:Key="S.Hint.Deselect">Wszystkie klatki zostały odznaczone</s:String>
+    <s:String x:Key="S.Hint.DeleteFrames">Ilość odznaczonych klatek: {0}</s:String>
+    <s:String x:Key="S.Hint.Reverse">Lista klatek odwrócona</s:String>
+    <s:String x:Key="S.Hint.Yoyo">Zastosowano efekt Yoyo</s:String>
+    <s:String x:Key="S.Hint.MoveLeft">Klatki przeniesione do lewej strony</s:String>
+    <s:String x:Key="S.Hint.MoveRight">Klatki przeniesione do prawej strony</s:String>
+    <s:String x:Key="S.Hint.Resize">Zmieniono rozmiary klatek</s:String>
+    <s:String x:Key="S.Hint.Crop">Przycięto klatki</s:String>
+    <s:String x:Key="S.Hint.FlipRotate">Odbito/Obrócono klatki</s:String>
+    <s:String x:Key="S.Hint.FlipRotate2">Odbicie dotyczy zaznaczonych klatek a obrócenie dotyczy wszystkich klatek</s:String>
+    <s:String x:Key="S.Hint.ApplyAll">Ta akcja dotyczy wszystkich klatek</s:String>
+    <s:String x:Key="S.Hint.ApplySelected">Ta akcja dotyczy wybranych klatek</s:String>
+    <s:String x:Key="S.Hint.ApplySelectedOrAll">Ta akcja dotyczy wszystkich lub wybranych klatek, w zależności od ustawień</s:String>
+    <s:String x:Key="S.Hint.Cinemagraph">Cinemagraph dotyczy wszystkich klatek na podstawie pierwszej klatki</s:String>
+    <s:String x:Key="S.Hint.Overlay">Zastosowano nakładkę</s:String>
+    <s:String x:Key="S.Hint.TitleFrame">Utworzono klatkę tytułową</s:String>
+    <s:String x:Key="S.Hint.TitleFrame2">Klatka tytułowa będzie wstawiona przed zaznaczoną klatką</s:String>
+    <s:String x:Key="S.Hint.Delay">Zmieniono czas trwania (opóźnienie)</s:String>
+    <s:String x:Key="S.Hint.Transition">Wstawiono przejście</s:String>
+    <s:String x:Key="S.Hint.Reduce">Zmniejszono ilość klatek na sekundę</s:String>
+    <s:String x:Key="S.Hint.Duplicates">Duplikaty usunięte</s:String>
     
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">Ukryj</s:String>

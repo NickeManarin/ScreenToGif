@@ -8,11 +8,11 @@
     <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
     
     <!--General-->
-    <s:String x:Key="Ok">موافق</s:String>
-    <s:String x:Key="Back">السابق</s:String>
-    <s:String x:Key="Cancel">الغاء الامر</s:String>
-    <s:String x:Key="Yes">نعم</s:String>
-    <s:String x:Key="No">لا</s:String>
+    <s:String x:Key="S.Ok">موافق</s:String>
+    <s:String x:Key="S.Back">السابق</s:String>
+    <s:String x:Key="S.Cancel">الغاء الامر</s:String>
+    <s:String x:Key="S.Yes">نعم</s:String>
+    <s:String x:Key="S.No">لا</s:String>
     <s:String x:Key="Frame">اطار</s:String>
     <s:String x:Key="Suppress">قمع</s:String>
     <s:String x:Key="Preview">معاينة</s:String>
@@ -30,9 +30,9 @@
     <s:String x:Key="S.Exit">خروج</s:String>
 
     <!--Application-->
-    <s:String x:Key="Application.Exiting.Title">Gif انهاء الخلفية</s:String>
-    <s:String x:Key="Application.Exiting.Instruction">هل تريد بالتاكيد الخروج ؟</s:String>
-    <s:String x:Key="Application.Exiting.Message">سيتم اغلاق كافة النوافذ ستتم ازاله ايقونه الدرج.</s:String>
+    <s:String x:Key="S.Exiting.Title">Gif انهاء الخلفية</s:String>
+    <s:String x:Key="S.Exiting.Instruction">هل تريد بالتاكيد الخروج ؟</s:String>
+    <s:String x:Key="S.Exiting.Message">سيتم اغلاق كافة النوافذ ستتم ازاله ايقونه الدرج.</s:String>
     
     <!--Error messages--> 
     <s:String x:Key="S.Crash">اوه لا ، التطبيق تحطمت:(</s:String>
@@ -371,25 +371,25 @@
     <s:String x:Key="S.Localization.MoveRosourcePosition">لتطبيق المورد المخصص ، انقله الى اسفل القائمة.</s:String>
 
     <!--Recorder-->
-    <s:String x:Key="Recorder.RecordingOptions">خيارات التسجيل:</s:String>
-    <s:String x:Key="Recorder.Snapshot">وضع الالتقاط</s:String>
-    <s:String x:Key="Recorder.ThinMode">اخفاء شريط العنوان</s:String>
-    <s:String x:Key="Recorder.Fullscreen">وضع ملء الشاشة</s:String>
+    <s:String x:Key="S.Recorder.RecordingOptions">خيارات التسجيل:</s:String>
+    <s:String x:Key="S.Recorder.Snapshot">وضع الالتقاط</s:String>
+    <s:String x:Key="S.Recorder.ThinMode">اخفاء شريط العنوان</s:String>
+    <s:String x:Key="S.Recorder.Fullscreen">وضع ملء الشاشة</s:String>
 
-    <s:String x:Key="Recorder.Record">سجل</s:String>
-    <s:String x:Key="Recorder.Pause">مهلة</s:String>
-    <s:String x:Key="Recorder.Continue">مواصله</s:String>
-    <s:String x:Key="Recorder.Stop">وقف</s:String>
-    <s:String x:Key="Recorder.Discard">تجاهل</s:String>
-    <s:String x:Key="Recorder.Snap">لقطة</s:String>
-    <s:String x:Key="Recorder.Height">الارتفاع</s:String>
-    <s:String x:Key="Recorder.Width">العرض</s:String>
-    <s:String x:Key="Recorder.Fps">الحد الاقصى للاطارات في الثانية</s:String>
-    <s:String x:Key="Recorder.Fps.Short">Fps</s:String>
-    <s:String x:Key="Recorder.FpsRange">الحد الادنى للحد الاقصى fps: 1-60 اطارا في الثانية</s:String>
-    <s:String x:Key="Recorder.SnapToWindow">(التقاط النافذة (سحب والافراج عن اللقطة</s:String>
-    <s:String x:Key="Recorder.PreStart">قبل البدء</s:String>
-    <s:String x:Key="Recorder.Paused">(متوقف ) - ScreenToGif </s:String>
+    <s:String x:Key="S.Recorder.Record">سجل</s:String>
+    <s:String x:Key="S.Recorder.Pause">مهلة</s:String>
+    <s:String x:Key="S.Recorder.Continue">مواصله</s:String>
+    <s:String x:Key="S.Recorder.Stop">وقف</s:String>
+    <s:String x:Key="S.Recorder.Discard">تجاهل</s:String>
+    <s:String x:Key="S.Recorder.Snap">لقطة</s:String>
+    <s:String x:Key="S.Recorder.Height">الارتفاع</s:String>
+    <s:String x:Key="S.Recorder.Width">العرض</s:String>
+    <s:String x:Key="S.Recorder.Fps">الحد الاقصى للاطارات في الثانية</s:String>
+    <s:String x:Key="S.Recorder.Fps.Short">Fps</s:String>
+    <s:String x:Key="S.Recorder.FpsRange">الحد الادنى للحد الاقصى fps: 1-60 اطارا في الثانية</s:String>
+    <s:String x:Key="S.Recorder.SnapToWindow">(التقاط النافذة (سحب والافراج عن اللقطة</s:String>
+    <s:String x:Key="S.Recorder.PreStart">قبل البدء</s:String>
+    <s:String x:Key="S.Recorder.Paused">(متوقف ) - ScreenToGif </s:String>
     
     <!--New Recorder-->
     <s:String x:Key="S.Recorder.Area">منطقه</s:String>
@@ -406,37 +406,37 @@
     <s:String x:Key="S.Recorder.EscToCancel">اضغط على هروب للالغاء</s:String>
     
     <!--Webcam Recorder-->
-    <s:String x:Key="Webcam.Title">مسجل كاميرا ويب  - ScreenToGif </s:String>
-    <s:String x:Key="Webcam.NoVideo">لم يتم الكشف عن اي جهاز فيديو:(</s:String>
-    <s:String x:Key="Webcam.CheckVideoDevices">التحقق من وجود اجهزه الفيديو.</s:String>
-    <s:String x:Key="Webcam.Scale">: {0:0. # #} x المقياس</s:String>
-    <s:String x:Key="Webcam.ChangeScale">تغيير مقياس الفيديو.</s:String>
+    <s:String x:Key="S.Webcam.Title">مسجل كاميرا ويب  - ScreenToGif </s:String>
+    <s:String x:Key="S.Webcam.NoVideo">لم يتم الكشف عن اي جهاز فيديو:(</s:String>
+    <s:String x:Key="S.Webcam.CheckVideoDevices">التحقق من وجود اجهزه الفيديو.</s:String>
+    <s:String x:Key="S.Webcam.Scale">: {0:0. # #} x المقياس</s:String>
+    <s:String x:Key="S.Webcam.ChangeScale">تغيير مقياس الفيديو.</s:String>
     
     <!--Board Recorder-->
-    <s:String x:Key="Board.Title">مسجلة لوحة - ScreenToGif</s:String>
-    <s:String x:Key="Board.AutoRecord">سجل تلقائي</s:String>
-    <s:String x:Key="Board.AutoRecordToolTip">يتيح التسجيل اثناء الرسم.</s:String>
-    <s:String x:Key="Board.CtrlHold">Ctrl [Hold]</s:String>
+    <s:String x:Key="S.Board.Title">مسجلة لوحة - ScreenToGif</s:String>
+    <s:String x:Key="S.Board.AutoRecord">سجل تلقائي</s:String>
+    <s:String x:Key="S.Board.AutoRecordToolTip">يتيح التسجيل اثناء الرسم.</s:String>
+    <s:String x:Key="S.Board.CtrlHold">Ctrl [Hold]</s:String>
     
     <!--Color Selector-->
-    <s:String x:Key="ColorSelector.Title">محدد الوان</s:String>
-    <s:String x:Key="ColorSelector.Select">تحديد لون</s:String>
-    <s:String x:Key="ColorSelector.Red">احمر</s:String>
-    <s:String x:Key="ColorSelector.Green">اخضر</s:String>
-    <s:String x:Key="ColorSelector.Blue">ازرق</s:String>
-    <s:String x:Key="ColorSelector.Alpha">الفا</s:String>
-    <s:String x:Key="ColorSelector.Hexadecimal">عشري</s:String>
-    <s:String x:Key="ColorSelector.Initial">اللون الاولي</s:String>
-    <s:String x:Key="ColorSelector.Current">اللون الحالي</s:String>
-    <s:String x:Key="ColorSelector.Latest">احدث الوان</s:String>
-    <s:String x:Key="ColorSelector.Sample">عينه الوان&#x0d;اسحب هذا الى</s:String>
-    <s:String x:Key="ColorSelector.Sample.Info">الوان من الشاشة.&#x0d;انقر و اسحب لاختيار</s:String>
+    <s:String x:Key="S.ColorSelector.Title">محدد الوان</s:String>
+    <s:String x:Key="S.ColorSelector.Select">تحديد لون</s:String>
+    <s:String x:Key="S.ColorSelector.Red">احمر</s:String>
+    <s:String x:Key="S.ColorSelector.Green">اخضر</s:String>
+    <s:String x:Key="S.ColorSelector.Blue">ازرق</s:String>
+    <s:String x:Key="S.ColorSelector.Alpha">الفا</s:String>
+    <s:String x:Key="S.ColorSelector.Hexadecimal">عشري</s:String>
+    <s:String x:Key="S.ColorSelector.Initial">اللون الاولي</s:String>
+    <s:String x:Key="S.ColorSelector.Current">اللون الحالي</s:String>
+    <s:String x:Key="S.ColorSelector.Latest">احدث الوان</s:String>
+    <s:String x:Key="S.ColorSelector.Sample">عينه الوان&#x0d;اسحب هذا الى</s:String>
+    <s:String x:Key="S.ColorSelector.Sample.Info">الوان من الشاشة.&#x0d;انقر و اسحب لاختيار</s:String>
     
     <!--Exception Viewer, Optional-->
-    <s:String x:Key="ExceptionViewer.Title">عارض الاستثناء</s:String>
-    <s:String x:Key="ExceptionViewer.OpenInner">فتح استثناء داخلي</s:String>
-    <s:String x:Key="ErrorDialog.Observation">حدث شيء خاطئ</s:String>
-    <s:String x:Key="ErrorDialog.Send">ارسال تقرير</s:String>
+    <s:String x:Key="S.ExceptionViewer.Title">عارض الاستثناء</s:String>
+    <s:String x:Key="S.ExceptionViewer.OpenInner">فتح استثناء داخلي</s:String>
+    <s:String x:Key="S.ErrorDialog.Observation">حدث شيء خاطئ</s:String>
+    <s:String x:Key="S.ErrorDialog.Send">ارسال تقرير</s:String>
 
     <!--FFmpeg Preset-->
     <s:String x:Key="S.FfmpegPreset.Title">ffmpeg المسبق ل</s:String>
@@ -447,22 +447,22 @@
     <s:String x:Key="S.FfmpegPreset.Warning.SameName">هناك مسبقا بنفس الاسم.</s:String>
 
     <!--Insert Frames-->
-    <s:String x:Key="InsertFrames.Title">ادراج اطارات</s:String>
-    <s:String x:Key="InsertFrames.Info">كلا الجانبين يجب ان يكون لها نفس الحجم ، وهذا الاطار يسمح لك لتغيير موضع وتغيير حجم الصورة و الحلبة انقر لتحديد وتغيير الحجم.</s:String>
-    <s:String x:Key="InsertFrames.CanvasSize">حجم الحلبة:</s:String>
-    <s:String x:Key="InsertFrames.FitCanvas">تناسب الصورة على الحلبة</s:String>
-    <s:String x:Key="InsertFrames.FitCanvas.Info">تحجيم الحلبة لتناسب كلا الصورتين داخل (من الزاوية العلوية اليسرى).</s:String>
-    <s:String x:Key="InsertFrames.DifferentSizes">هناك اختلاف احجام الاطار بين تحتاج الى حل هذا قبل ادراج الاطارات.</s:String>
-    <s:String x:Key="InsertFrames.InsertedFrames">اطارات جديده</s:String>
-    <s:String x:Key="InsertFrames.CurrentFrames">الاطار الحالي</s:String>
-    <s:String x:Key="InsertFrames.ImageSize">حجم الصورة:</s:String>
-    <s:String x:Key="InsertFrames.ImagePosition">موقع الصورة:</s:String>
-    <s:String x:Key="InsertFrames.ResetImageSizePosition">اعاده حجم الصورة&#x0d;والموقع</s:String>
-    <s:String x:Key="InsertFrames.Info2">سيتم ادراج اطارات جديده في القائمة الحالية للاطارات في الموقع:</s:String>
-    <s:String x:Key="InsertFrames.Before">قبل</s:String>
-    <s:String x:Key="InsertFrames.After">بعد</s:String>
-    <s:String x:Key="InsertFrames.Importing">استيراد</s:String>
-    <s:String x:Key="InsertFrames.SelectColorFill">حدد لون تعبئة الحلبة</s:String>
+    <s:String x:Key="S.InsertFrames.Title">ادراج اطارات</s:String>
+    <s:String x:Key="S.InsertFrames.Info">كلا الجانبين يجب ان يكون لها نفس الحجم ، وهذا الاطار يسمح لك لتغيير موضع وتغيير حجم الصورة و الحلبة انقر لتحديد وتغيير الحجم.</s:String>
+    <s:String x:Key="S.InsertFrames.CanvasSize">حجم الحلبة:</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas">تناسب الصورة على الحلبة</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas.Info">تحجيم الحلبة لتناسب كلا الصورتين داخل (من الزاوية العلوية اليسرى).</s:String>
+    <s:String x:Key="S.InsertFrames.DifferentSizes">هناك اختلاف احجام الاطار بين تحتاج الى حل هذا قبل ادراج الاطارات.</s:String>
+    <s:String x:Key="S.InsertFrames.InsertedFrames">اطارات جديده</s:String>
+    <s:String x:Key="S.InsertFrames.CurrentFrames">الاطار الحالي</s:String>
+    <s:String x:Key="S.InsertFrames.ImageSize">حجم الصورة:</s:String>
+    <s:String x:Key="S.InsertFrames.ImagePosition">موقع الصورة:</s:String>
+    <s:String x:Key="S.InsertFrames.ResetImageSizePosition">اعاده حجم الصورة&#x0d;والموقع</s:String>
+    <s:String x:Key="S.InsertFrames.Info2">سيتم ادراج اطارات جديده في القائمة الحالية للاطارات في الموقع:</s:String>
+    <s:String x:Key="S.InsertFrames.Before">قبل</s:String>
+    <s:String x:Key="S.InsertFrames.After">بعد</s:String>
+    <s:String x:Key="S.InsertFrames.Importing">استيراد</s:String>
+    <s:String x:Key="S.InsertFrames.SelectColorFill">حدد لون تعبئة الحلبة</s:String>
 
     <!--Import Frames From Video-->
     <s:String x:Key="S.ImportVideo.Title">استيراد اطارات من الفيديو</s:String>
@@ -770,41 +770,41 @@
     <s:String x:Key="Editor.Warning.LowSpace">لا توجد مساحة كافيه لليسار على محرك الاقراص حيث يخزن هذا التطبيق ذاكره التخزين المؤقت ({0}% اليسار). انقر هنا لفتح خيارات > الملفات المؤقتة لتحرير بعض المساحة.</s:String>
     
     <!--Hints-->
-    <s:String x:Key="Hint.NewRecording">تم انشاء تسجيل جديد</s:String>
-    <s:String x:Key="Hint.NewWebcamRecording">انشاء كاميرا ويب تسجيل جديده</s:String>
-    <s:String x:Key="Hint.NewBoardRecording">انشاء لوحه تسجيل جديده</s:String>
-    <s:String x:Key="Hint.NewAnimation">تم انشاء مشروع جديد</s:String>
-    <s:String x:Key="Hint.Undo">تراجع المنفذ</s:String>
-    <s:String x:Key="Hint.Reset">اعاده المنفذ</s:String>
-    <s:String x:Key="Hint.Redo">اعاده المنفذ</s:String>
-    <s:String x:Key="Hint.Cut">قص الاطارات {0}</s:String>
-    <s:String x:Key="Hint.Copy">تم نسخ اطارات {0}</s:String>
-    <s:String x:Key="Hint.Paste">تم لصق الاطارات {0}</s:String>
-    <s:String x:Key="Hint.Zoom">تعيين التكبير/التصغير الى {0}%</s:String>
-    <s:String x:Key="Hint.SelectAll">تم اختيار كل الاطارات</s:String>
-    <s:String x:Key="Hint.SelectSingle">الاطار # {0} محدد</s:String>
-    <s:String x:Key="Hint.SelectInverse">الاختيار معكوس</s:String>
-    <s:String x:Key="Hint.Deselect">تم الغاء تحديد جميع الاطارات</s:String>
-    <s:String x:Key="Hint.DeleteFrames">حذف اطارات {0}</s:String>
-    <s:String x:Key="Hint.Reverse">عكس قائمه الاطارات</s:String>
-    <s:String x:Key="Hint.Yoyo">Yoyo تطبيق تاثير</s:String>
-    <s:String x:Key="Hint.MoveLeft">تم نقل الاطارات الى اليسار</s:String>
-    <s:String x:Key="Hint.MoveRight">تم نقل الاطارات الى اليمين</s:String>
-    <s:String x:Key="Hint.Resize">تغيير حجم الاطارات</s:String>
-    <s:String x:Key="Hint.Crop">اقتصاص الاطارات</s:String>
-    <s:String x:Key="Hint.FlipRotate">الاطارات شقلبت/استدارة</s:String>
-    <s:String x:Key="Hint.FlipRotate2">ينطبق اجراء الشقلبة على الاطارات المحددة ويتم تطبيق الاستدارة على كافة الاطارات</s:String>
-    <s:String x:Key="Hint.ApplyAll">ينطبق هذا الاجراء على كافة الاطارات</s:String>
-    <s:String x:Key="Hint.ApplySelected">ينطبق هذا الاجراء على الاطارات المحددة</s:String>
-    <s:String x:Key="Hint.ApplySelectedOrAll">ينطبق هذا الاجراء على كافة الاطارات او المحددة ، اعتمادا على الاعدادات</s:String>
-    <s:String x:Key="Hint.Cinemagraph">ينطبق رسم سينما بياني على كل الاطارات استنادا الى الاطار الاول</s:String>
-    <s:String x:Key="Hint.Overlay">تراكب تطبيق</s:String>
-    <s:String x:Key="Hint.TitleFrame">تم انشاء اطار العنوان</s:String>
-    <s:String x:Key="Hint.TitleFrame2">سيتم ادراج اطار العنوان قبل الاطار المحدد</s:String>
-    <s:String x:Key="Hint.Delay">المدة (التاخير) التي تم تغييرها</s:String>
-    <s:String x:Key="Hint.Transition">إنتقال المدخل</s:String>
-    <s:String x:Key="Hint.Reduce">تخفيض نسبة إطار</s:String>
-    <s:String x:Key="Hint.Duplicates">ازاله التكرارات</s:String>
+    <s:String x:Key="S.Hint.NewRecording">تم انشاء تسجيل جديد</s:String>
+    <s:String x:Key="S.Hint.NewWebcamRecording">انشاء كاميرا ويب تسجيل جديده</s:String>
+    <s:String x:Key="S.Hint.NewBoardRecording">انشاء لوحه تسجيل جديده</s:String>
+    <s:String x:Key="S.Hint.NewAnimation">تم انشاء مشروع جديد</s:String>
+    <s:String x:Key="S.Hint.Undo">تراجع المنفذ</s:String>
+    <s:String x:Key="S.Hint.Reset">اعاده المنفذ</s:String>
+    <s:String x:Key="S.Hint.Redo">اعاده المنفذ</s:String>
+    <s:String x:Key="S.Hint.Cut">قص الاطارات {0}</s:String>
+    <s:String x:Key="S.Hint.Copy">تم نسخ اطارات {0}</s:String>
+    <s:String x:Key="S.Hint.Paste">تم لصق الاطارات {0}</s:String>
+    <s:String x:Key="S.Hint.Zoom">تعيين التكبير/التصغير الى {0}%</s:String>
+    <s:String x:Key="S.Hint.SelectAll">تم اختيار كل الاطارات</s:String>
+    <s:String x:Key="S.Hint.SelectSingle">الاطار # {0} محدد</s:String>
+    <s:String x:Key="S.Hint.SelectInverse">الاختيار معكوس</s:String>
+    <s:String x:Key="S.Hint.Deselect">تم الغاء تحديد جميع الاطارات</s:String>
+    <s:String x:Key="S.Hint.DeleteFrames">حذف اطارات {0}</s:String>
+    <s:String x:Key="S.Hint.Reverse">عكس قائمه الاطارات</s:String>
+    <s:String x:Key="S.Hint.Yoyo">Yoyo تطبيق تاثير</s:String>
+    <s:String x:Key="S.Hint.MoveLeft">تم نقل الاطارات الى اليسار</s:String>
+    <s:String x:Key="S.Hint.MoveRight">تم نقل الاطارات الى اليمين</s:String>
+    <s:String x:Key="S.Hint.Resize">تغيير حجم الاطارات</s:String>
+    <s:String x:Key="S.Hint.Crop">اقتصاص الاطارات</s:String>
+    <s:String x:Key="S.Hint.FlipRotate">الاطارات شقلبت/استدارة</s:String>
+    <s:String x:Key="S.Hint.FlipRotate2">ينطبق اجراء الشقلبة على الاطارات المحددة ويتم تطبيق الاستدارة على كافة الاطارات</s:String>
+    <s:String x:Key="S.Hint.ApplyAll">ينطبق هذا الاجراء على كافة الاطارات</s:String>
+    <s:String x:Key="S.Hint.ApplySelected">ينطبق هذا الاجراء على الاطارات المحددة</s:String>
+    <s:String x:Key="S.Hint.ApplySelectedOrAll">ينطبق هذا الاجراء على كافة الاطارات او المحددة ، اعتمادا على الاعدادات</s:String>
+    <s:String x:Key="S.Hint.Cinemagraph">ينطبق رسم سينما بياني على كل الاطارات استنادا الى الاطار الاول</s:String>
+    <s:String x:Key="S.Hint.Overlay">تراكب تطبيق</s:String>
+    <s:String x:Key="S.Hint.TitleFrame">تم انشاء اطار العنوان</s:String>
+    <s:String x:Key="S.Hint.TitleFrame2">سيتم ادراج اطار العنوان قبل الاطار المحدد</s:String>
+    <s:String x:Key="S.Hint.Delay">المدة (التاخير) التي تم تغييرها</s:String>
+    <s:String x:Key="S.Hint.Transition">إنتقال المدخل</s:String>
+    <s:String x:Key="S.Hint.Reduce">تخفيض نسبة إطار</s:String>
+    <s:String x:Key="S.Hint.Duplicates">ازاله التكرارات</s:String>
     
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">اخفاء</s:String>

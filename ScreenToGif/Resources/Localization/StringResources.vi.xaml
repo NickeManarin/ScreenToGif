@@ -8,11 +8,11 @@
     <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
     
     <!--General-->
-    <s:String x:Key="Ok">Đồng ý</s:String>
-    <s:String x:Key="Back">Quay lại</s:String>
-    <s:String x:Key="Cancel">Hủy bỏ</s:String>
-    <s:String x:Key="Yes">Có</s:String>
-    <s:String x:Key="No">Không</s:String>
+    <s:String x:Key="S.Ok">Đồng ý</s:String>
+    <s:String x:Key="S.Back">Quay lại</s:String>
+    <s:String x:Key="S.Cancel">Hủy bỏ</s:String>
+    <s:String x:Key="S.Yes">Có</s:String>
+    <s:String x:Key="S.No">Không</s:String>
     <s:String x:Key="Frame">Khung hình</s:String>
     <s:String x:Key="Suppress">Xóa bỏ</s:String>
     <s:String x:Key="Preview">Xem trước</s:String>
@@ -30,9 +30,9 @@
     <s:String x:Key="S.Exit">Thoát</s:String>
 
     <!--Application-->
-    <s:String x:Key="Application.Exiting.Title">Đang thoát ScreenToGif</s:String>
-    <s:String x:Key="Application.Exiting.Instruction">Bạn chắc chắn muốn thoát chứ?</s:String>
-    <s:String x:Key="Application.Exiting.Message">Tất cả cửa sổ sẽ bị đóng lại và thanh ứng dụng sẽ biến mất.</s:String>
+    <s:String x:Key="S.Exiting.Title">Đang thoát ScreenToGif</s:String>
+    <s:String x:Key="S.Exiting.Instruction">Bạn chắc chắn muốn thoát chứ?</s:String>
+    <s:String x:Key="S.Exiting.Message">Tất cả cửa sổ sẽ bị đóng lại và thanh ứng dụng sẽ biến mất.</s:String>
     
     <!--Error messages--> 
     <s:String x:Key="S.Crash">Ôi không, ứng dụng gặp sự cố :(</s:String>
@@ -289,25 +289,25 @@
     <s:String x:Key="S.Localization.MoveRosourcePosition">Để áp dụng nguồn tài nguyên tùy chỉnh, di chuyển nó đến cuối danh sách.</s:String>
 
     <!--Recorder-->
-    <s:String x:Key="Recorder.RecordingOptions">Các tùy chọn quay:</s:String>
-    <s:String x:Key="Recorder.Snapshot">Chế độ chụp ảnh nhanh</s:String>
-    <s:String x:Key="Recorder.ThinMode">Ẩn thanh tiêu đề</s:String>
-    <s:String x:Key="Recorder.Fullscreen">Chế độ toàn màn hình</s:String>
+    <s:String x:Key="S.Recorder.RecordingOptions">Các tùy chọn quay:</s:String>
+    <s:String x:Key="S.Recorder.Snapshot">Chế độ chụp ảnh nhanh</s:String>
+    <s:String x:Key="S.Recorder.ThinMode">Ẩn thanh tiêu đề</s:String>
+    <s:String x:Key="S.Recorder.Fullscreen">Chế độ toàn màn hình</s:String>
 
-    <s:String x:Key="Recorder.Record">Quay</s:String>
-    <s:String x:Key="Recorder.Pause">Tạm dừng</s:String>
-    <s:String x:Key="Recorder.Continue">Tiếp tục</s:String>
-    <s:String x:Key="Recorder.Stop">Dừng</s:String>
-    <s:String x:Key="Recorder.Discard">Hủy bỏ</s:String>
-    <s:String x:Key="Recorder.Snap">Chụp</s:String>
-    <s:String x:Key="Recorder.Height">Chiều cao</s:String>
-    <s:String x:Key="Recorder.Width">Chiều rộng</s:String>
-    <s:String x:Key="Recorder.Fps">Tối đa khung hình/giây</s:String>
-    <s:String x:Key="Recorder.Fps.Short">khung hình/giây</s:String>
-    <s:String x:Key="Recorder.FpsRange">Tối thiểu đến tối đa khung hình/giây: 1-60 khung hình/giây</s:String>
-    <s:String x:Key="Recorder.SnapToWindow">Chụp cửa sổ (Rê và thả chuột để chụp)</s:String>
-    <s:String x:Key="Recorder.PreStart">Bắt đầu trước</s:String>
-    <s:String x:Key="Recorder.Paused">ScreenToGif (Dừng hẳn)</s:String>
+    <s:String x:Key="S.Recorder.Record">Quay</s:String>
+    <s:String x:Key="S.Recorder.Pause">Tạm dừng</s:String>
+    <s:String x:Key="S.Recorder.Continue">Tiếp tục</s:String>
+    <s:String x:Key="S.Recorder.Stop">Dừng</s:String>
+    <s:String x:Key="S.Recorder.Discard">Hủy bỏ</s:String>
+    <s:String x:Key="S.Recorder.Snap">Chụp</s:String>
+    <s:String x:Key="S.Recorder.Height">Chiều cao</s:String>
+    <s:String x:Key="S.Recorder.Width">Chiều rộng</s:String>
+    <s:String x:Key="S.Recorder.Fps">Tối đa khung hình/giây</s:String>
+    <s:String x:Key="S.Recorder.Fps.Short">khung hình/giây</s:String>
+    <s:String x:Key="S.Recorder.FpsRange">Tối thiểu đến tối đa khung hình/giây: 1-60 khung hình/giây</s:String>
+    <s:String x:Key="S.Recorder.SnapToWindow">Chụp cửa sổ (Rê và thả chuột để chụp)</s:String>
+    <s:String x:Key="S.Recorder.PreStart">Bắt đầu trước</s:String>
+    <s:String x:Key="S.Recorder.Paused">ScreenToGif (Dừng hẳn)</s:String>
     
     <!--New Recorder-->
     <s:String x:Key="S.Recorder.Area">Vùng</s:String>
@@ -324,53 +324,53 @@
     <s:String x:Key="S.Recorder.EscToCancel">Nhấn Esc để thoát</s:String>
     
     <!--Webcam Recorder-->
-    <s:String x:Key="Webcam.Title">ScreenToGif - Ghi hình webcam</s:String>
-    <s:String x:Key="Webcam.NoVideo">Không có thiết bị ghi hình được tìm thấy :(</s:String>
-    <s:String x:Key="Webcam.CheckVideoDevices">Kiểm tra thiết bị ghi hình.</s:String>
-    <s:String x:Key="Webcam.Scale">Thu phóng: {0:0.##}x</s:String>
-    <s:String x:Key="Webcam.ChangeScale">Thay đổi tỉ lệ của video.</s:String>
+    <s:String x:Key="S.Webcam.Title">ScreenToGif - Ghi hình webcam</s:String>
+    <s:String x:Key="S.Webcam.NoVideo">Không có thiết bị ghi hình được tìm thấy :(</s:String>
+    <s:String x:Key="S.Webcam.CheckVideoDevices">Kiểm tra thiết bị ghi hình.</s:String>
+    <s:String x:Key="S.Webcam.Scale">Thu phóng: {0:0.##}x</s:String>
+    <s:String x:Key="S.Webcam.ChangeScale">Thay đổi tỉ lệ của video.</s:String>
     
     <!--Board Recorder-->
-    <s:String x:Key="Board.Title">ScreenToGif - Bảng ghi</s:String>
-    <s:String x:Key="Board.AutoRecord">Quay tự động</s:String>
-    <s:String x:Key="Board.AutoRecordToolTip">Cho phép quay trong khi đang vẽ</s:String>
-    <s:String x:Key="Board.CtrlHold">[Giữ] Ctrl </s:String>
+    <s:String x:Key="S.Board.Title">ScreenToGif - Bảng ghi</s:String>
+    <s:String x:Key="S.Board.AutoRecord">Quay tự động</s:String>
+    <s:String x:Key="S.Board.AutoRecordToolTip">Cho phép quay trong khi đang vẽ</s:String>
+    <s:String x:Key="S.Board.CtrlHold">[Giữ] Ctrl </s:String>
     
     <!--Color Selector-->
-    <s:String x:Key="ColorSelector.Title">Chọn màu sắc</s:String>
-    <s:String x:Key="ColorSelector.Select">Lựa chọn 1 màu sắc</s:String>
-    <s:String x:Key="ColorSelector.Red">Đỏ</s:String>
-    <s:String x:Key="ColorSelector.Green">Xanh lá cây</s:String>
-    <s:String x:Key="ColorSelector.Blue">Xanh da trời</s:String>
-    <s:String x:Key="ColorSelector.Alpha">Tổ hợp Alpha</s:String>
-    <s:String x:Key="ColorSelector.Hexadecimal">Mã Hex</s:String>
-    <s:String x:Key="ColorSelector.Initial">Màu sắc ban đầu</s:String>
-    <s:String x:Key="ColorSelector.Current">Màu sắc hiện tại</s:String>
-    <s:String x:Key="ColorSelector.Latest">Màu sắc cuối cùng</s:String>
+    <s:String x:Key="S.ColorSelector.Title">Chọn màu sắc</s:String>
+    <s:String x:Key="S.ColorSelector.Select">Lựa chọn 1 màu sắc</s:String>
+    <s:String x:Key="S.ColorSelector.Red">Đỏ</s:String>
+    <s:String x:Key="S.ColorSelector.Green">Xanh lá cây</s:String>
+    <s:String x:Key="S.ColorSelector.Blue">Xanh da trời</s:String>
+    <s:String x:Key="S.ColorSelector.Alpha">Tổ hợp Alpha</s:String>
+    <s:String x:Key="S.ColorSelector.Hexadecimal">Mã Hex</s:String>
+    <s:String x:Key="S.ColorSelector.Initial">Màu sắc ban đầu</s:String>
+    <s:String x:Key="S.ColorSelector.Current">Màu sắc hiện tại</s:String>
+    <s:String x:Key="S.ColorSelector.Latest">Màu sắc cuối cùng</s:String>
     
     <!--Exception Viewer, Optional-->
-    <s:String x:Key="ExceptionViewer.Title">Ngoại trừ trình xem</s:String>
-    <s:String x:Key="ExceptionViewer.OpenInner">Mở ngoại lệ bên trong</s:String>
-    <s:String x:Key="ErrorDialog.Observation">Vài lỗi sai đã xảy ra.</s:String>
-    <s:String x:Key="ErrorDialog.Send">Gửi thông báo</s:String>
+    <s:String x:Key="S.ExceptionViewer.Title">Ngoại trừ trình xem</s:String>
+    <s:String x:Key="S.ExceptionViewer.OpenInner">Mở ngoại lệ bên trong</s:String>
+    <s:String x:Key="S.ErrorDialog.Observation">Vài lỗi sai đã xảy ra.</s:String>
+    <s:String x:Key="S.ErrorDialog.Send">Gửi thông báo</s:String>
 
     <!--Insert Frames-->
-    <s:String x:Key="InsertFrames.Title">Chèn khung hình</s:String>
-    <s:String x:Key="InsertFrames.Info">Cả 2 chiều sẽ có cùng kích thước, cửa sổ này cho phép bạn đặt lại vị trí và thay đổi kích thước của ảnh và khung. Click để chọn và thay đổi kích thước</s:String>
-    <s:String x:Key="InsertFrames.CanvasSize">Kích thước khung ảnh:</s:String>
-    <s:String x:Key="InsertFrames.FitCanvas">Làm vừa ảnh trong các khung</s:String>
-    <s:String x:Key="InsertFrames.FitCanvas.Info">Thay đổi kích thước khung để vừa với cả các ảnh bên trong (từ góc trên bên trái).</s:String>
-    <s:String x:Key="InsertFrames.DifferentSizes">Có sự khác nhau giữa các kích thước của khung. Bạn cần giải quyết nó trước khi chèn các khung.</s:String>
-    <s:String x:Key="InsertFrames.InsertedFrames">Các khung hình mới</s:String>
-    <s:String x:Key="InsertFrames.CurrentFrames">Các khung hình hiện tại</s:String>
-    <s:String x:Key="InsertFrames.ImageSize">Kích thước ảnh:</s:String>
-    <s:String x:Key="InsertFrames.ImagePosition">Vị trí ảnh:</s:String>
-    <s:String x:Key="InsertFrames.ResetImageSizePosition">Đặt lại kích thước hình ảnh&#x0d;và vị trí</s:String>
-    <s:String x:Key="InsertFrames.Info2">Các khung hình mới sẽ được chèn vào vị trí hiện thời của danh sách khung hình:</s:String>
-    <s:String x:Key="InsertFrames.Before">Trước</s:String>
-    <s:String x:Key="InsertFrames.After">Sau</s:String>
-    <s:String x:Key="InsertFrames.Importing">Đang nhập</s:String>
-    <s:String x:Key="InsertFrames.SelectColorFill">Lựa chọn bức vẽ đầy màu</s:String>
+    <s:String x:Key="S.InsertFrames.Title">Chèn khung hình</s:String>
+    <s:String x:Key="S.InsertFrames.Info">Cả 2 chiều sẽ có cùng kích thước, cửa sổ này cho phép bạn đặt lại vị trí và thay đổi kích thước của ảnh và khung. Click để chọn và thay đổi kích thước</s:String>
+    <s:String x:Key="S.InsertFrames.CanvasSize">Kích thước khung ảnh:</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas">Làm vừa ảnh trong các khung</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas.Info">Thay đổi kích thước khung để vừa với cả các ảnh bên trong (từ góc trên bên trái).</s:String>
+    <s:String x:Key="S.InsertFrames.DifferentSizes">Có sự khác nhau giữa các kích thước của khung. Bạn cần giải quyết nó trước khi chèn các khung.</s:String>
+    <s:String x:Key="S.InsertFrames.InsertedFrames">Các khung hình mới</s:String>
+    <s:String x:Key="S.InsertFrames.CurrentFrames">Các khung hình hiện tại</s:String>
+    <s:String x:Key="S.InsertFrames.ImageSize">Kích thước ảnh:</s:String>
+    <s:String x:Key="S.InsertFrames.ImagePosition">Vị trí ảnh:</s:String>
+    <s:String x:Key="S.InsertFrames.ResetImageSizePosition">Đặt lại kích thước hình ảnh&#x0d;và vị trí</s:String>
+    <s:String x:Key="S.InsertFrames.Info2">Các khung hình mới sẽ được chèn vào vị trí hiện thời của danh sách khung hình:</s:String>
+    <s:String x:Key="S.InsertFrames.Before">Trước</s:String>
+    <s:String x:Key="S.InsertFrames.After">Sau</s:String>
+    <s:String x:Key="S.InsertFrames.Importing">Đang nhập</s:String>
+    <s:String x:Key="S.InsertFrames.SelectColorFill">Lựa chọn bức vẽ đầy màu</s:String>
 
     <!--Import Frames From Video-->
     <s:String x:Key="S.ImportVideo.Title">Nhập các khung hình từ Video</s:String>
@@ -668,40 +668,40 @@
     <s:String x:Key="Editor.Warning.LowSpace">Không đủ không gian lưu trữ trên ổ đĩa nơi ứng dụng này lưu các vùng nhớ đệm ({0}% bên trái). Click vào đây để mở Các tùy chọn > Các tệp tạm thời để giải phóng không gian.</s:String>
     
     <!--Hints-->
-    <s:String x:Key="Hint.NewRecording">Quay màn hình mới được tạo</s:String>
-    <s:String x:Key="Hint.NewWebcamRecording">Ghi hình webcam mới được tạo</s:String>
-    <s:String x:Key="Hint.NewBoardRecording">Bảng ghi mới được tạo</s:String>
-    <s:String x:Key="Hint.NewAnimation">Dự án mới được tạo</s:String>
-    <s:String x:Key="Hint.Undo">Thực thi hoàn tác</s:String>
-    <s:String x:Key="Hint.Reset">Thực thi thiết lập lại</s:String>
-    <s:String x:Key="Hint.Redo">Thực thi thực hiện lại</s:String>
-    <s:String x:Key="Hint.Cut">{0} khung hình được cắt</s:String>
-    <s:String x:Key="Hint.Copy">{0} khung hình được sao chép</s:String>
-    <s:String x:Key="Hint.Paste">{0} khung hình được dán</s:String>
-    <s:String x:Key="Hint.Zoom">Phóng to đến {0}%</s:String>
-    <s:String x:Key="Hint.SelectAll">Tất cả khung hình được chọn</s:String>
-    <s:String x:Key="Hint.SelectSingle">Đã chọn #{0} khung hình</s:String>
-    <s:String x:Key="Hint.SelectInverse">Vùng lựa chọn bị đảo ngược</s:String>
-    <s:String x:Key="Hint.Deselect">Tất cả các khung hình được bỏ chọn</s:String>
-    <s:String x:Key="Hint.DeleteFrames">{0} khung hình được xóa</s:String>
-    <s:String x:Key="Hint.Reverse">Danh sách khung hình được nghịch đảo</s:String>
-    <s:String x:Key="Hint.Yoyo">Hiệu ứng Yoyo được áp dụng</s:String>
-    <s:String x:Key="Hint.MoveLeft">Các khung hình được chuyển sang trái</s:String>
-    <s:String x:Key="Hint.MoveRight">Các khung hình được chuyển sang phải</s:String>
-    <s:String x:Key="Hint.Resize">Các khung hình được điều chỉnh kích thước</s:String>
-    <s:String x:Key="Hint.Crop">Các khung hình đã xén</s:String>
-    <s:String x:Key="Hint.FlipRotate">Các khung hình được lật/xoay</s:String>
-    <s:String x:Key="Hint.FlipRotate2">Hành động lật áp dụng cho các khung hình được chọn và xoay áp dụng cho tất cả các khung hình</s:String>
-    <s:String x:Key="Hint.ApplyAll">Hành động này áp dụng cho tất cả khung hình</s:String>
-    <s:String x:Key="Hint.ApplySelected">Hành động này áp dụng cho tất cả khung hình được chọn</s:String>
-    <s:String x:Key="Hint.Cinemagraph">Cinemagraph áp dụng cho tất cả khung hình dựa trên khung hình đầu tiên</s:String>
-    <s:String x:Key="Hint.Overlay">Xếp chồng được áp dụng</s:String>
-    <s:String x:Key="Hint.TitleFrame">Tiêu đề khung hình được tạo</s:String>
-    <s:String x:Key="Hint.TitleFrame2">Tiêu đề khung hình sẽ được chèn trước khi lựa chọn khung hình</s:String>
-    <s:String x:Key="Hint.Delay">Thời gian (làm chậm) được thay đổi</s:String>
-    <s:String x:Key="Hint.Transition">Chuyển tiếp được chèn</s:String>
-    <s:String x:Key="Hint.Reduce">Tỉ lệ khung hình được giảm</s:String>
-    <s:String x:Key="Hint.Duplicates">Các nhân đôi bị loại bỏ</s:String>
+    <s:String x:Key="S.Hint.NewRecording">Quay màn hình mới được tạo</s:String>
+    <s:String x:Key="S.Hint.NewWebcamRecording">Ghi hình webcam mới được tạo</s:String>
+    <s:String x:Key="S.Hint.NewBoardRecording">Bảng ghi mới được tạo</s:String>
+    <s:String x:Key="S.Hint.NewAnimation">Dự án mới được tạo</s:String>
+    <s:String x:Key="S.Hint.Undo">Thực thi hoàn tác</s:String>
+    <s:String x:Key="S.Hint.Reset">Thực thi thiết lập lại</s:String>
+    <s:String x:Key="S.Hint.Redo">Thực thi thực hiện lại</s:String>
+    <s:String x:Key="S.Hint.Cut">{0} khung hình được cắt</s:String>
+    <s:String x:Key="S.Hint.Copy">{0} khung hình được sao chép</s:String>
+    <s:String x:Key="S.Hint.Paste">{0} khung hình được dán</s:String>
+    <s:String x:Key="S.Hint.Zoom">Phóng to đến {0}%</s:String>
+    <s:String x:Key="S.Hint.SelectAll">Tất cả khung hình được chọn</s:String>
+    <s:String x:Key="S.Hint.SelectSingle">Đã chọn #{0} khung hình</s:String>
+    <s:String x:Key="S.Hint.SelectInverse">Vùng lựa chọn bị đảo ngược</s:String>
+    <s:String x:Key="S.Hint.Deselect">Tất cả các khung hình được bỏ chọn</s:String>
+    <s:String x:Key="S.Hint.DeleteFrames">{0} khung hình được xóa</s:String>
+    <s:String x:Key="S.Hint.Reverse">Danh sách khung hình được nghịch đảo</s:String>
+    <s:String x:Key="S.Hint.Yoyo">Hiệu ứng Yoyo được áp dụng</s:String>
+    <s:String x:Key="S.Hint.MoveLeft">Các khung hình được chuyển sang trái</s:String>
+    <s:String x:Key="S.Hint.MoveRight">Các khung hình được chuyển sang phải</s:String>
+    <s:String x:Key="S.Hint.Resize">Các khung hình được điều chỉnh kích thước</s:String>
+    <s:String x:Key="S.Hint.Crop">Các khung hình đã xén</s:String>
+    <s:String x:Key="S.Hint.FlipRotate">Các khung hình được lật/xoay</s:String>
+    <s:String x:Key="S.Hint.FlipRotate2">Hành động lật áp dụng cho các khung hình được chọn và xoay áp dụng cho tất cả các khung hình</s:String>
+    <s:String x:Key="S.Hint.ApplyAll">Hành động này áp dụng cho tất cả khung hình</s:String>
+    <s:String x:Key="S.Hint.ApplySelected">Hành động này áp dụng cho tất cả khung hình được chọn</s:String>
+    <s:String x:Key="S.Hint.Cinemagraph">Cinemagraph áp dụng cho tất cả khung hình dựa trên khung hình đầu tiên</s:String>
+    <s:String x:Key="S.Hint.Overlay">Xếp chồng được áp dụng</s:String>
+    <s:String x:Key="S.Hint.TitleFrame">Tiêu đề khung hình được tạo</s:String>
+    <s:String x:Key="S.Hint.TitleFrame2">Tiêu đề khung hình sẽ được chèn trước khi lựa chọn khung hình</s:String>
+    <s:String x:Key="S.Hint.Delay">Thời gian (làm chậm) được thay đổi</s:String>
+    <s:String x:Key="S.Hint.Transition">Chuyển tiếp được chèn</s:String>
+    <s:String x:Key="S.Hint.Reduce">Tỉ lệ khung hình được giảm</s:String>
+    <s:String x:Key="S.Hint.Duplicates">Các nhân đôi bị loại bỏ</s:String>
     
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">Ẩn</s:String>

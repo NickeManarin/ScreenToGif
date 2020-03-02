@@ -8,11 +8,11 @@
     <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
     
     <!--General-->
-    <s:String x:Key="Ok">确定</s:String>
-    <s:String x:Key="Back">返回</s:String>
-    <s:String x:Key="Cancel">取消</s:String>
-    <s:String x:Key="Yes">是</s:String>
-    <s:String x:Key="No">否</s:String>
+    <s:String x:Key="S.Ok">确定</s:String>
+    <s:String x:Key="S.Back">返回</s:String>
+    <s:String x:Key="S.Cancel">取消</s:String>
+    <s:String x:Key="S.Yes">是</s:String>
+    <s:String x:Key="S.No">否</s:String>
     <s:String x:Key="Frame">帧</s:String>
     <s:String x:Key="Suppress">隐藏</s:String>
     <s:String x:Key="Preview">预览</s:String>
@@ -39,9 +39,9 @@
     <s:String x:Key="S.Exit">退出</s:String>
 
     <!--Application-->
-    <s:String x:Key="Application.Exiting.Title">退出 ScreenToGif</s:String>
-    <s:String x:Key="Application.Exiting.Instruction">你确定要退出吗?</s:String>
-    <s:String x:Key="Application.Exiting.Message">所有窗口将被关闭，托盘图标将被移除。</s:String>
+    <s:String x:Key="S.Exiting.Title">退出 ScreenToGif</s:String>
+    <s:String x:Key="S.Exiting.Instruction">你确定要退出吗?</s:String>
+    <s:String x:Key="S.Exiting.Message">所有窗口将被关闭，托盘图标将被移除。</s:String>
     
     <!--Error messages--> 
     <s:String x:Key="S.Crash">哦，不，应用程序崩溃了 :(</s:String>
@@ -460,25 +460,25 @@
     <s:String x:Key="S.Localization.MoveRosourcePosition">要应用您的自定义资源，请将其移动到列表的最底部。</s:String>
 
     <!--Recorder-->
-    <s:String x:Key="Recorder.RecordingOptions">录制选项：</s:String>
-    <s:String x:Key="Recorder.Snapshot">快照模式</s:String>
-    <s:String x:Key="Recorder.ThinMode">隐藏标题栏</s:String>
-    <s:String x:Key="Recorder.Fullscreen">全屏模式</s:String>
+    <s:String x:Key="S.Recorder.RecordingOptions">录制选项：</s:String>
+    <s:String x:Key="S.Recorder.Snapshot">快照模式</s:String>
+    <s:String x:Key="S.Recorder.ThinMode">隐藏标题栏</s:String>
+    <s:String x:Key="S.Recorder.Fullscreen">全屏模式</s:String>
 
-    <s:String x:Key="Recorder.Record">录制</s:String>
-    <s:String x:Key="Recorder.Pause">暂停</s:String>
-    <s:String x:Key="Recorder.Continue">继续</s:String>
-    <s:String x:Key="Recorder.Stop">停止</s:String>
-    <s:String x:Key="Recorder.Discard">丢弃</s:String>
-    <s:String x:Key="Recorder.Snap">捕捉</s:String>
-    <s:String x:Key="Recorder.Height">高度</s:String>
-    <s:String x:Key="Recorder.Width">宽度</s:String>
-    <s:String x:Key="Recorder.Fps">每秒最大帧数</s:String>
-    <s:String x:Key="Recorder.Fps.Short">fps</s:String>
-    <s:String x:Key="Recorder.FpsRange">Fps 范围：1-60 fps</s:String>
-    <s:String x:Key="Recorder.SnapToWindow">对齐窗口（拖拽到目标窗口上进行捕捉）</s:String>
-    <s:String x:Key="Recorder.PreStart">预启动</s:String>
-    <s:String x:Key="Recorder.Paused">ScreenToGif（已暂停）</s:String>
+    <s:String x:Key="S.Recorder.Record">录制</s:String>
+    <s:String x:Key="S.Recorder.Pause">暂停</s:String>
+    <s:String x:Key="S.Recorder.Continue">继续</s:String>
+    <s:String x:Key="S.Recorder.Stop">停止</s:String>
+    <s:String x:Key="S.Recorder.Discard">丢弃</s:String>
+    <s:String x:Key="S.Recorder.Snap">捕捉</s:String>
+    <s:String x:Key="S.Recorder.Height">高度</s:String>
+    <s:String x:Key="S.Recorder.Width">宽度</s:String>
+    <s:String x:Key="S.Recorder.Fps">每秒最大帧数</s:String>
+    <s:String x:Key="S.Recorder.Fps.Short">fps</s:String>
+    <s:String x:Key="S.Recorder.FpsRange">Fps 范围：1-60 fps</s:String>
+    <s:String x:Key="S.Recorder.SnapToWindow">对齐窗口（拖拽到目标窗口上进行捕捉）</s:String>
+    <s:String x:Key="S.Recorder.PreStart">预启动</s:String>
+    <s:String x:Key="S.Recorder.Paused">ScreenToGif（已暂停）</s:String>
     
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible">无法捕获屏幕</s:String>
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">无法捕获屏幕。 5 次尝试后，捕获方法未返回任何帧。</s:String>
@@ -501,39 +501,39 @@
     <s:String x:Key="S.Recorder.EscToCancel">按 Esc 键取消</s:String>
     
     <!--Webcam Recorder-->
-    <s:String x:Key="Webcam.Title">ScreenToGif - 摄像头录像机</s:String>
-    <s:String x:Key="Webcam.NoVideo">未检测到视频设备 :(</s:String>
-    <s:String x:Key="Webcam.CheckVideoDevices">检测视频设备</s:String>
-    <s:String x:Key="Webcam.Scale">缩放：{0:0.##} 倍</s:String>
-    <s:String x:Key="Webcam.ChangeScale">更改视频比例</s:String>
+    <s:String x:Key="S.Webcam.Title">ScreenToGif - 摄像头录像机</s:String>
+    <s:String x:Key="S.Webcam.NoVideo">未检测到视频设备 :(</s:String>
+    <s:String x:Key="S.Webcam.CheckVideoDevices">检测视频设备</s:String>
+    <s:String x:Key="S.Webcam.Scale">缩放：{0:0.##} 倍</s:String>
+    <s:String x:Key="S.Webcam.ChangeScale">更改视频比例</s:String>
     
     <!--Board Recorder-->
-    <s:String x:Key="Board.Title">ScreenToGif - 画板录像机</s:String>
-    <s:String x:Key="Board.AutoRecord">自动录制</s:String>
-    <s:String x:Key="Board.AutoRecordToolTip">在绘图时启用录制</s:String>
-    <s:String x:Key="Board.CtrlHold">Ctrl [按住]</s:String>
+    <s:String x:Key="S.Board.Title">ScreenToGif - 画板录像机</s:String>
+    <s:String x:Key="S.Board.AutoRecord">自动录制</s:String>
+    <s:String x:Key="S.Board.AutoRecordToolTip">在绘图时启用录制</s:String>
+    <s:String x:Key="S.Board.CtrlHold">Ctrl [按住]</s:String>
     
     <!--Color Selector-->
-    <s:String x:Key="ColorSelector.Title">颜色选择器</s:String>
-    <s:String x:Key="ColorSelector.Select">选择颜色</s:String>
-    <s:String x:Key="ColorSelector.Red">红色</s:String>
-    <s:String x:Key="ColorSelector.Green">绿色</s:String>
-    <s:String x:Key="ColorSelector.Blue">蓝色</s:String>
-    <s:String x:Key="ColorSelector.Alpha">Alpha</s:String>
-    <s:String x:Key="ColorSelector.Hexadecimal">Hex</s:String>
-    <s:String x:Key="ColorSelector.Initial">初始颜色</s:String>
-    <s:String x:Key="ColorSelector.Current">当前颜色</s:String>
-    <s:String x:Key="ColorSelector.Latest">最新颜色</s:String>
-    <s:String x:Key="ColorSelector.Sample">拖放到
+    <s:String x:Key="S.ColorSelector.Title">颜色选择器</s:String>
+    <s:String x:Key="S.ColorSelector.Select">选择颜色</s:String>
+    <s:String x:Key="S.ColorSelector.Red">红色</s:String>
+    <s:String x:Key="S.ColorSelector.Green">绿色</s:String>
+    <s:String x:Key="S.ColorSelector.Blue">蓝色</s:String>
+    <s:String x:Key="S.ColorSelector.Alpha">Alpha</s:String>
+    <s:String x:Key="S.ColorSelector.Hexadecimal">Hex</s:String>
+    <s:String x:Key="S.ColorSelector.Initial">初始颜色</s:String>
+    <s:String x:Key="S.ColorSelector.Current">当前颜色</s:String>
+    <s:String x:Key="S.ColorSelector.Latest">最新颜色</s:String>
+    <s:String x:Key="S.ColorSelector.Sample">拖放到
 示例颜色</s:String>
-    <s:String x:Key="ColorSelector.Sample.Info">单击并拖动以从屏幕
+    <s:String x:Key="S.ColorSelector.Sample.Info">单击并拖动以从屏幕
 上选择颜色。</s:String>
     
     <!--Exception Viewer, Optional-->
-    <s:String x:Key="ExceptionViewer.Title">异常查看器</s:String>
-    <s:String x:Key="ExceptionViewer.OpenInner">打开内部异常</s:String>
-    <s:String x:Key="ErrorDialog.Observation">出现错误</s:String>
-    <s:String x:Key="ErrorDialog.Send">发送报告</s:String>
+    <s:String x:Key="S.ExceptionViewer.Title">异常查看器</s:String>
+    <s:String x:Key="S.ExceptionViewer.OpenInner">打开内部异常</s:String>
+    <s:String x:Key="S.ErrorDialog.Observation">出现错误</s:String>
+    <s:String x:Key="S.ErrorDialog.Send">发送报告</s:String>
 
     <!--FFmpeg Preset-->
     <s:String x:Key="S.FfmpegPreset.Title">FFmpeg 预设</s:String>
@@ -544,23 +544,23 @@
     <s:String x:Key="S.FfmpegPreset.Warning.SameName">已经存在一个具有相同名称的预设。</s:String>
 
     <!--Insert Frames-->
-    <s:String x:Key="InsertFrames.Title">插入帧</s:String>
-    <s:String x:Key="InsertFrames.Info">两侧应具有相同的大小，此窗口允许您重新定位和调整图像和画布的大小。点击选择并调整大小。</s:String>
-    <s:String x:Key="InsertFrames.CanvasSize">画布大小：</s:String>
-    <s:String x:Key="InsertFrames.FitCanvas">调整画布
+    <s:String x:Key="S.InsertFrames.Title">插入帧</s:String>
+    <s:String x:Key="S.InsertFrames.Info">两侧应具有相同的大小，此窗口允许您重新定位和调整图像和画布的大小。点击选择并调整大小。</s:String>
+    <s:String x:Key="S.InsertFrames.CanvasSize">画布大小：</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas">调整画布
 以适合图像</s:String>
-    <s:String x:Key="InsertFrames.FitCanvas.Info">调整画布大小以装下两个图像（左上角）</s:String>
-    <s:String x:Key="InsertFrames.DifferentSizes">两者帧大小不同。您需要在插入帧之前解决此问题。</s:String>
-    <s:String x:Key="InsertFrames.InsertedFrames">新建帧</s:String>
-    <s:String x:Key="InsertFrames.CurrentFrames">当前帧</s:String>
-    <s:String x:Key="InsertFrames.ImageSize">图像大小：</s:String>
-    <s:String x:Key="InsertFrames.ImagePosition">图像位置：</s:String>
-    <s:String x:Key="InsertFrames.ResetImageSizePosition">重置图像大小和位置</s:String>
-    <s:String x:Key="InsertFrames.Info2">新增帧将被插入到当前帧列表</s:String>
-    <s:String x:Key="InsertFrames.Before">之前于</s:String>
-    <s:String x:Key="InsertFrames.After">之后于</s:String>
-    <s:String x:Key="InsertFrames.Importing">导入</s:String>
-    <s:String x:Key="InsertFrames.SelectColorFill">选择画布填充颜色</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas.Info">调整画布大小以装下两个图像（左上角）</s:String>
+    <s:String x:Key="S.InsertFrames.DifferentSizes">两者帧大小不同。您需要在插入帧之前解决此问题。</s:String>
+    <s:String x:Key="S.InsertFrames.InsertedFrames">新建帧</s:String>
+    <s:String x:Key="S.InsertFrames.CurrentFrames">当前帧</s:String>
+    <s:String x:Key="S.InsertFrames.ImageSize">图像大小：</s:String>
+    <s:String x:Key="S.InsertFrames.ImagePosition">图像位置：</s:String>
+    <s:String x:Key="S.InsertFrames.ResetImageSizePosition">重置图像大小和位置</s:String>
+    <s:String x:Key="S.InsertFrames.Info2">新增帧将被插入到当前帧列表</s:String>
+    <s:String x:Key="S.InsertFrames.Before">之前于</s:String>
+    <s:String x:Key="S.InsertFrames.After">之后于</s:String>
+    <s:String x:Key="S.InsertFrames.Importing">导入</s:String>
+    <s:String x:Key="S.InsertFrames.SelectColorFill">选择画布填充颜色</s:String>
 
     <!--Import Frames From Video-->
     <s:String x:Key="S.ImportVideo.Title">从视频导入帧</s:String>
@@ -881,41 +881,41 @@
     <s:String x:Key="Editor.Warning.LowSpace">驱动器上没有足够的空间供应用程序存储缓存（{0}% 左右）。单击此处打开“选项” > “临时文件”，以释放一些空间。</s:String>
     
     <!--Hints-->
-    <s:String x:Key="Hint.NewRecording">已创建新的录制</s:String>
-    <s:String x:Key="Hint.NewWebcamRecording">已创建新的摄像头录制</s:String>
-    <s:String x:Key="Hint.NewBoardRecording">已创建新的画板录制</s:String>
-    <s:String x:Key="Hint.NewAnimation">已创建新项目</s:String>
-    <s:String x:Key="Hint.Undo">撤销执行</s:String>
-    <s:String x:Key="Hint.Reset">已重置</s:String>
-    <s:String x:Key="Hint.Redo">已重做</s:String>
-    <s:String x:Key="Hint.Cut">已剪切 {0} 帧</s:String>
-    <s:String x:Key="Hint.Copy">已复制 {0} 帧</s:String>
-    <s:String x:Key="Hint.Paste">已粘贴 {0} 帧</s:String>
-    <s:String x:Key="Hint.Zoom">设置为缩放 {0}%</s:String>
-    <s:String x:Key="Hint.SelectAll">已选择所有帧</s:String>
-    <s:String x:Key="Hint.SelectSingle">已选择第 {0} 帧</s:String>
-    <s:String x:Key="Hint.SelectInverse">已反选</s:String>
-    <s:String x:Key="Hint.Deselect">已取消选择所有帧</s:String>
-    <s:String x:Key="Hint.DeleteFrames">已删除 {0} 帧</s:String>
-    <s:String x:Key="Hint.Reverse">已反转帧列表</s:String>
-    <s:String x:Key="Hint.Yoyo">已应用反转循环效果</s:String>
-    <s:String x:Key="Hint.MoveLeft">已将帧向左移动</s:String>
-    <s:String x:Key="Hint.MoveRight">已将帧向右移动</s:String>
-    <s:String x:Key="Hint.Resize">已调整帧的大小</s:String>
-    <s:String x:Key="Hint.Crop">已裁剪帧</s:String>
-    <s:String x:Key="Hint.FlipRotate">已将帧翻转/旋转</s:String>
-    <s:String x:Key="Hint.FlipRotate2">翻转动作适用于所选帧，旋转动作适用于所有帧</s:String>
-    <s:String x:Key="Hint.ApplyAll">此操作将应用于所有帧</s:String>
-    <s:String x:Key="Hint.ApplySelected">此操作将应用于所选帧</s:String>
-    <s:String x:Key="Hint.ApplySelectedOrAll">此操作将应用于所有或选定的帧，具体取决于您的设置</s:String>
-    <s:String x:Key="Hint.Cinemagraph">影片基于第一帧应用于所有帧</s:String>
-    <s:String x:Key="Hint.Overlay">已应用叠加层</s:String>
-    <s:String x:Key="Hint.TitleFrame">已创建标题帧</s:String>
-    <s:String x:Key="Hint.TitleFrame2">标题帧将在所选帧之前插入</s:String>
-    <s:String x:Key="Hint.Delay">已改变持续时间（延时）</s:String>
-    <s:String x:Key="Hint.Transition">已插入过渡效果</s:String>
-    <s:String x:Key="Hint.Reduce">已减少帧率</s:String>
-    <s:String x:Key="Hint.Duplicates">重复删除</s:String>
+    <s:String x:Key="S.Hint.NewRecording">已创建新的录制</s:String>
+    <s:String x:Key="S.Hint.NewWebcamRecording">已创建新的摄像头录制</s:String>
+    <s:String x:Key="S.Hint.NewBoardRecording">已创建新的画板录制</s:String>
+    <s:String x:Key="S.Hint.NewAnimation">已创建新项目</s:String>
+    <s:String x:Key="S.Hint.Undo">撤销执行</s:String>
+    <s:String x:Key="S.Hint.Reset">已重置</s:String>
+    <s:String x:Key="S.Hint.Redo">已重做</s:String>
+    <s:String x:Key="S.Hint.Cut">已剪切 {0} 帧</s:String>
+    <s:String x:Key="S.Hint.Copy">已复制 {0} 帧</s:String>
+    <s:String x:Key="S.Hint.Paste">已粘贴 {0} 帧</s:String>
+    <s:String x:Key="S.Hint.Zoom">设置为缩放 {0}%</s:String>
+    <s:String x:Key="S.Hint.SelectAll">已选择所有帧</s:String>
+    <s:String x:Key="S.Hint.SelectSingle">已选择第 {0} 帧</s:String>
+    <s:String x:Key="S.Hint.SelectInverse">已反选</s:String>
+    <s:String x:Key="S.Hint.Deselect">已取消选择所有帧</s:String>
+    <s:String x:Key="S.Hint.DeleteFrames">已删除 {0} 帧</s:String>
+    <s:String x:Key="S.Hint.Reverse">已反转帧列表</s:String>
+    <s:String x:Key="S.Hint.Yoyo">已应用反转循环效果</s:String>
+    <s:String x:Key="S.Hint.MoveLeft">已将帧向左移动</s:String>
+    <s:String x:Key="S.Hint.MoveRight">已将帧向右移动</s:String>
+    <s:String x:Key="S.Hint.Resize">已调整帧的大小</s:String>
+    <s:String x:Key="S.Hint.Crop">已裁剪帧</s:String>
+    <s:String x:Key="S.Hint.FlipRotate">已将帧翻转/旋转</s:String>
+    <s:String x:Key="S.Hint.FlipRotate2">翻转动作适用于所选帧，旋转动作适用于所有帧</s:String>
+    <s:String x:Key="S.Hint.ApplyAll">此操作将应用于所有帧</s:String>
+    <s:String x:Key="S.Hint.ApplySelected">此操作将应用于所选帧</s:String>
+    <s:String x:Key="S.Hint.ApplySelectedOrAll">此操作将应用于所有或选定的帧，具体取决于您的设置</s:String>
+    <s:String x:Key="S.Hint.Cinemagraph">影片基于第一帧应用于所有帧</s:String>
+    <s:String x:Key="S.Hint.Overlay">已应用叠加层</s:String>
+    <s:String x:Key="S.Hint.TitleFrame">已创建标题帧</s:String>
+    <s:String x:Key="S.Hint.TitleFrame2">标题帧将在所选帧之前插入</s:String>
+    <s:String x:Key="S.Hint.Delay">已改变持续时间（延时）</s:String>
+    <s:String x:Key="S.Hint.Transition">已插入过渡效果</s:String>
+    <s:String x:Key="S.Hint.Reduce">已减少帧率</s:String>
+    <s:String x:Key="S.Hint.Duplicates">重复删除</s:String>
     
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">隐藏</s:String>

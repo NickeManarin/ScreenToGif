@@ -484,7 +484,7 @@ namespace ScreenToGif.Windows.Other
 
                 //Set to Snapshot Mode, change the text of the record button to "Snap" and every press of the button, takes a screenshot.
                 Stage = Stage.Snapping;
-                Title = "ScreenToGif - " + LocalizationHelper.Get("Recorder.Snapshot");
+                Title = "ScreenToGif - " + LocalizationHelper.Get("S.Recorder.Snapshot");
 
                 #endregion
             }
@@ -498,7 +498,7 @@ namespace ScreenToGif.Windows.Other
                 if (Project.Frames?.Count > 0)
                 {
                     Stage = Stage.Paused;
-                    Title = LocalizationHelper.Get("Recorder.Paused");
+                    Title = LocalizationHelper.Get("S.Recorder.Paused");
 
                     DiscardButton.BeginStoryboard(FindResource("ShowDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
                 }
@@ -865,7 +865,7 @@ namespace ScreenToGif.Windows.Other
 
                         if (UserSettings.All.UsePreStart)
                         {
-                            Title = $"ScreenToGif ({LocalizationHelper.Get("Recorder.PreStart")} {UserSettings.All.PreStartValue}s)";
+                            Title = $"ScreenToGif ({LocalizationHelper.Get("S.Recorder.PreStart")} {UserSettings.All.PreStartValue}s)";
                             RecordPauseButton.IsEnabled = false;
 
                             Stage = Stage.PreStarting;
@@ -918,7 +918,7 @@ namespace ScreenToGif.Windows.Other
                         #region To Pause
 
                         Stage = Stage.Paused;
-                        Title = FindResource("Recorder.Paused").ToString();
+                        Title = LocalizationHelper.Get("S.Recorder.Paused");
 
                         DiscardButton.BeginStoryboard(this.FindStoryboard("ShowDiscardStoryboard"), HandoffBehavior.Compose);
 
@@ -1022,6 +1022,10 @@ namespace ScreenToGif.Windows.Other
             try
             {
                 StopButton.IsEnabled = false;
+                RecordPauseButton.IsEnabled = false;
+                DiscardButton.IsEnabled = false;
+                Title = "ScreenToGif - " + LocalizationHelper.Get("S.Recorder.Stopping");
+                Cursor = Cursors.AppStarting;
 
                 _captureTimer.Stop();
                 FrameRate.Stop();
@@ -1064,8 +1068,6 @@ namespace ScreenToGif.Windows.Other
 
                     ReselectSplitButton.BeginStoryboard(this.FindStoryboard("ShowReselectStoryboard"), HandoffBehavior.Compose);
 
-                    Title = "ScreenToGif";
-
                     #endregion
                 }
             }
@@ -1084,7 +1086,13 @@ namespace ScreenToGif.Windows.Other
             finally
             {
                 if (IsLoaded)
+                {
                     StopButton.IsEnabled = true;
+                    Cursor = Cursors.Arrow;
+                    StopButton.IsEnabled = true;
+                    RecordPauseButton.IsEnabled = true;
+                    DiscardButton.IsEnabled = true;
+                }
             }
         }
 
@@ -1392,7 +1400,7 @@ namespace ScreenToGif.Windows.Other
         {
             if (_preStartCount >= 1)
             {
-                Title = $"ScreenToGif ({LocalizationHelper.Get("Recorder.PreStart")} {_preStartCount}s)";
+                Title = $"ScreenToGif ({LocalizationHelper.Get("S.Recorder.PreStart")} {_preStartCount}s)";
                 _preStartCount--;
             }
             else

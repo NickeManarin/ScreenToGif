@@ -8,11 +8,11 @@
     <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
     
     <!--General-->
-    <s:String x:Key="Ok">확인</s:String>
-    <s:String x:Key="Back">뒤로</s:String>
-    <s:String x:Key="Cancel">취소</s:String>
-    <s:String x:Key="Yes">예</s:String>
-    <s:String x:Key="No">아니오</s:String>
+    <s:String x:Key="S.Ok">확인</s:String>
+    <s:String x:Key="S.Back">뒤로</s:String>
+    <s:String x:Key="S.Cancel">취소</s:String>
+    <s:String x:Key="S.Yes">예</s:String>
+    <s:String x:Key="S.No">아니오</s:String>
     <s:String x:Key="Frame">프레임</s:String>
     <s:String x:Key="Suppress">표시하지 않기</s:String>
     <s:String x:Key="Preview">미리보기</s:String>
@@ -30,9 +30,9 @@
     <s:String x:Key="S.Exit">종료</s:String>
 
     <!--Application-->
-    <s:String x:Key="Application.Exiting.Title">ScreenToGif 종료</s:String>
-    <s:String x:Key="Application.Exiting.Instruction">프로그램을 종료하겠습니까?</s:String>
-    <s:String x:Key="Application.Exiting.Message">모든 창을 닫고 작업 표시줄 아이콘을 제거합니다.</s:String>
+    <s:String x:Key="S.Exiting.Title">ScreenToGif 종료</s:String>
+    <s:String x:Key="S.Exiting.Instruction">프로그램을 종료하겠습니까?</s:String>
+    <s:String x:Key="S.Exiting.Message">모든 창을 닫고 작업 표시줄 아이콘을 제거합니다.</s:String>
     
     <!--Error messages--> 
     <s:String x:Key="S.Crash">이런, 프로그램이 예기치 않게 종료되었습니다 :(</s:String>
@@ -368,25 +368,25 @@
     <s:String x:Key="S.Localization.MoveRosourcePosition">사용자 지정 언어 파일을 적용하려면 맨 밑으로 이동시키십시오.</s:String>
 
     <!--Recorder-->
-    <s:String x:Key="Recorder.RecordingOptions">녹화 설정</s:String>
-    <s:String x:Key="Recorder.Snapshot">창 녹화 모드</s:String>
-    <s:String x:Key="Recorder.ThinMode">제목 표시줄 숨기기</s:String>
-    <s:String x:Key="Recorder.Fullscreen">전체 화면 녹화 모드</s:String>
+    <s:String x:Key="S.Recorder.RecordingOptions">녹화 설정</s:String>
+    <s:String x:Key="S.Recorder.Snapshot">창 녹화 모드</s:String>
+    <s:String x:Key="S.Recorder.ThinMode">제목 표시줄 숨기기</s:String>
+    <s:String x:Key="S.Recorder.Fullscreen">전체 화면 녹화 모드</s:String>
 
-    <s:String x:Key="Recorder.Record">녹화</s:String>
-    <s:String x:Key="Recorder.Pause">일시정지</s:String>
-    <s:String x:Key="Recorder.Continue">이어서 녹화</s:String>
-    <s:String x:Key="Recorder.Stop">정지</s:String>
-    <s:String x:Key="Recorder.Discard">취소</s:String>
-    <s:String x:Key="Recorder.Snap">크기</s:String>
-    <s:String x:Key="Recorder.Height">높이</s:String>
-    <s:String x:Key="Recorder.Width">폭</s:String>
-    <s:String x:Key="Recorder.Fps">최대 초당 프레임 수</s:String>
-    <s:String x:Key="Recorder.Fps.Short">fps</s:String>
-    <s:String x:Key="Recorder.FpsRange">fps 제한 범위: 1~60fps</s:String>
-    <s:String x:Key="Recorder.SnapToWindow">창 맞춤(끌어서 창에 놓으세요)</s:String>
-    <s:String x:Key="Recorder.PreStart">타이머</s:String>
-    <s:String x:Key="Recorder.Paused">ScreenToGif (일시 정지)</s:String>
+    <s:String x:Key="S.Recorder.Record">녹화</s:String>
+    <s:String x:Key="S.Recorder.Pause">일시정지</s:String>
+    <s:String x:Key="S.Recorder.Continue">이어서 녹화</s:String>
+    <s:String x:Key="S.Recorder.Stop">정지</s:String>
+    <s:String x:Key="S.Recorder.Discard">취소</s:String>
+    <s:String x:Key="S.Recorder.Snap">크기</s:String>
+    <s:String x:Key="S.Recorder.Height">높이</s:String>
+    <s:String x:Key="S.Recorder.Width">폭</s:String>
+    <s:String x:Key="S.Recorder.Fps">최대 초당 프레임 수</s:String>
+    <s:String x:Key="S.Recorder.Fps.Short">fps</s:String>
+    <s:String x:Key="S.Recorder.FpsRange">fps 제한 범위: 1~60fps</s:String>
+    <s:String x:Key="S.Recorder.SnapToWindow">창 맞춤(끌어서 창에 놓으세요)</s:String>
+    <s:String x:Key="S.Recorder.PreStart">타이머</s:String>
+    <s:String x:Key="S.Recorder.Paused">ScreenToGif (일시 정지)</s:String>
     
     <!--New Recorder-->
     <s:String x:Key="S.Recorder.Area">사각형</s:String>
@@ -403,37 +403,37 @@
     <s:String x:Key="S.Recorder.EscToCancel">ESC를 눌러 취소</s:String>
     
     <!--Webcam Recorder-->
-    <s:String x:Key="Webcam.Title">ScreenToGif - 웹캠 녹화기</s:String>
-    <s:String x:Key="Webcam.NoVideo">인식된 장치가 없습니다 :(</s:String>
-    <s:String x:Key="Webcam.CheckVideoDevices">비디오 장치 목록 새로고침</s:String>
-    <s:String x:Key="Webcam.Scale">배율: {0:0.##}x</s:String>
-    <s:String x:Key="Webcam.ChangeScale">비디오 배율 변경하기</s:String>
+    <s:String x:Key="S.Webcam.Title">ScreenToGif - 웹캠 녹화기</s:String>
+    <s:String x:Key="S.Webcam.NoVideo">인식된 장치가 없습니다 :(</s:String>
+    <s:String x:Key="S.Webcam.CheckVideoDevices">비디오 장치 목록 새로고침</s:String>
+    <s:String x:Key="S.Webcam.Scale">배율: {0:0.##}x</s:String>
+    <s:String x:Key="S.Webcam.ChangeScale">비디오 배율 변경하기</s:String>
     
     <!--Board Recorder-->
-    <s:String x:Key="Board.Title">ScreenToGif - 칠판 녹화기</s:String>
-    <s:String x:Key="Board.AutoRecord">자동 녹화</s:String>
-    <s:String x:Key="Board.AutoRecordToolTip">그릴 때 자동으로 녹화합니다.</s:String>
-    <s:String x:Key="Board.CtrlHold">Ctrl [누르기]</s:String>
+    <s:String x:Key="S.Board.Title">ScreenToGif - 칠판 녹화기</s:String>
+    <s:String x:Key="S.Board.AutoRecord">자동 녹화</s:String>
+    <s:String x:Key="S.Board.AutoRecordToolTip">그릴 때 자동으로 녹화합니다.</s:String>
+    <s:String x:Key="S.Board.CtrlHold">Ctrl [누르기]</s:String>
     
     <!--Color Selector-->
-    <s:String x:Key="ColorSelector.Title">색 선택기</s:String>
-    <s:String x:Key="ColorSelector.Select">색을 선택하세요</s:String>
-    <s:String x:Key="ColorSelector.Red">빨강</s:String>
-    <s:String x:Key="ColorSelector.Green">초록</s:String>
-    <s:String x:Key="ColorSelector.Blue">파랑</s:String>
-    <s:String x:Key="ColorSelector.Alpha">알파</s:String>
-    <s:String x:Key="ColorSelector.Hexadecimal">Hex</s:String>
-    <s:String x:Key="ColorSelector.Initial">기존 색</s:String>
-    <s:String x:Key="ColorSelector.Current">현재 색</s:String>
-    <s:String x:Key="ColorSelector.Latest">선택 색</s:String>
-    <s:String x:Key="ColorSelector.Sample">드래그하여&#x0d;색 스포이드</s:String>
-    <s:String x:Key="ColorSelector.Sample.Info">화면에서 색상을 선택해&#x0d;뽑아내려면 드래그하세요.</s:String>
+    <s:String x:Key="S.ColorSelector.Title">색 선택기</s:String>
+    <s:String x:Key="S.ColorSelector.Select">색을 선택하세요</s:String>
+    <s:String x:Key="S.ColorSelector.Red">빨강</s:String>
+    <s:String x:Key="S.ColorSelector.Green">초록</s:String>
+    <s:String x:Key="S.ColorSelector.Blue">파랑</s:String>
+    <s:String x:Key="S.ColorSelector.Alpha">알파</s:String>
+    <s:String x:Key="S.ColorSelector.Hexadecimal">Hex</s:String>
+    <s:String x:Key="S.ColorSelector.Initial">기존 색</s:String>
+    <s:String x:Key="S.ColorSelector.Current">현재 색</s:String>
+    <s:String x:Key="S.ColorSelector.Latest">선택 색</s:String>
+    <s:String x:Key="S.ColorSelector.Sample">드래그하여&#x0d;색 스포이드</s:String>
+    <s:String x:Key="S.ColorSelector.Sample.Info">화면에서 색상을 선택해&#x0d;뽑아내려면 드래그하세요.</s:String>
     
     <!--Exception Viewer, Optional-->
-    <s:String x:Key="ExceptionViewer.Title">예외 발생</s:String>
-    <s:String x:Key="ExceptionViewer.OpenInner">내부 예외 열기</s:String>
-    <s:String x:Key="ErrorDialog.Observation">오류가 발생했습니다.</s:String>
-    <s:String x:Key="ErrorDialog.Send">보고서 전송</s:String>
+    <s:String x:Key="S.ExceptionViewer.Title">예외 발생</s:String>
+    <s:String x:Key="S.ExceptionViewer.OpenInner">내부 예외 열기</s:String>
+    <s:String x:Key="S.ErrorDialog.Observation">오류가 발생했습니다.</s:String>
+    <s:String x:Key="S.ErrorDialog.Send">보고서 전송</s:String>
 
     <!--FFmpeg Preset-->
     <s:String x:Key="S.FfmpegPreset.Title">FFmpeg 프리셋</s:String>
@@ -444,22 +444,22 @@
     <s:String x:Key="S.FfmpegPreset.Warning.SameName">똑같은 이름의 프리셋이 이미 있습니다.</s:String>
 
     <!--Insert Frames-->
-    <s:String x:Key="InsertFrames.Title">프레임 삽입</s:String>
-    <s:String x:Key="InsertFrames.Info">양쪽이 똑같은 크기여야 합니다. 클릭하여 이미지와 캔버스의 위치와 크기를 조정하세요.</s:String>
-    <s:String x:Key="InsertFrames.CanvasSize">캔버스 크기:</s:String>
-    <s:String x:Key="InsertFrames.FitCanvas">캔버스 크기를 이미지에 맞추기</s:String>
-    <s:String x:Key="InsertFrames.FitCanvas.Info">양쪽 이미지에 맞도록 캔버스 크기를 조정합니다 (왼위쪽 기준).</s:String>
-    <s:String x:Key="InsertFrames.DifferentSizes">프레임 크기가 다릅니다. 프레임을 삽입하기 전에 변경하십시오.</s:String>
-    <s:String x:Key="InsertFrames.InsertedFrames">삽입될 프레임</s:String>
-    <s:String x:Key="InsertFrames.CurrentFrames">현재 프레임</s:String>
-    <s:String x:Key="InsertFrames.ImageSize">이미지 크기:</s:String>
-    <s:String x:Key="InsertFrames.ImagePosition">이미지 위치:</s:String>
-    <s:String x:Key="InsertFrames.ResetImageSizePosition">이미지 크기&#x0d;및 위치 초기화</s:String>
-    <s:String x:Key="InsertFrames.Info2">기존 프레임 기준 새 프레임이 삽입될 위치:</s:String>
-    <s:String x:Key="InsertFrames.Before">프레임 앞에</s:String>
-    <s:String x:Key="InsertFrames.After">프레임 뒤에</s:String>
-    <s:String x:Key="InsertFrames.Importing">불러오는 중</s:String>
-    <s:String x:Key="InsertFrames.SelectColorFill">배경색 채우기</s:String>
+    <s:String x:Key="S.InsertFrames.Title">프레임 삽입</s:String>
+    <s:String x:Key="S.InsertFrames.Info">양쪽이 똑같은 크기여야 합니다. 클릭하여 이미지와 캔버스의 위치와 크기를 조정하세요.</s:String>
+    <s:String x:Key="S.InsertFrames.CanvasSize">캔버스 크기:</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas">캔버스 크기를 이미지에 맞추기</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas.Info">양쪽 이미지에 맞도록 캔버스 크기를 조정합니다 (왼위쪽 기준).</s:String>
+    <s:String x:Key="S.InsertFrames.DifferentSizes">프레임 크기가 다릅니다. 프레임을 삽입하기 전에 변경하십시오.</s:String>
+    <s:String x:Key="S.InsertFrames.InsertedFrames">삽입될 프레임</s:String>
+    <s:String x:Key="S.InsertFrames.CurrentFrames">현재 프레임</s:String>
+    <s:String x:Key="S.InsertFrames.ImageSize">이미지 크기:</s:String>
+    <s:String x:Key="S.InsertFrames.ImagePosition">이미지 위치:</s:String>
+    <s:String x:Key="S.InsertFrames.ResetImageSizePosition">이미지 크기&#x0d;및 위치 초기화</s:String>
+    <s:String x:Key="S.InsertFrames.Info2">기존 프레임 기준 새 프레임이 삽입될 위치:</s:String>
+    <s:String x:Key="S.InsertFrames.Before">프레임 앞에</s:String>
+    <s:String x:Key="S.InsertFrames.After">프레임 뒤에</s:String>
+    <s:String x:Key="S.InsertFrames.Importing">불러오는 중</s:String>
+    <s:String x:Key="S.InsertFrames.SelectColorFill">배경색 채우기</s:String>
 
     <!--Import Frames From Video-->
     <s:String x:Key="S.ImportVideo.Title">비디오에서 프레임 불러오기</s:String>
@@ -767,41 +767,41 @@
     <s:String x:Key="Editor.Warning.LowSpace">이 프로그램이 임시 파일을 저장하는 드라이브에 충분한 공간이 없습니다 ({0}% 남음). 이 메시지를 클릭하여 '설정 > 임시 파일' 에서 공간을 확보하십시오.</s:String>
     
     <!--Hints-->
-    <s:String x:Key="Hint.NewRecording">새 녹화 생성됨</s:String>
-    <s:String x:Key="Hint.NewWebcamRecording">새 웹캠 녹화 생성됨</s:String>
-    <s:String x:Key="Hint.NewBoardRecording">새 칠판 녹화 생성됨</s:String>
-    <s:String x:Key="Hint.NewAnimation">새 프로젝트 생성됨</s:String>
-    <s:String x:Key="Hint.Undo">되돌리기</s:String>
-    <s:String x:Key="Hint.Reset">실행 초기화</s:String>
-    <s:String x:Key="Hint.Redo">다시 실행</s:String>
-    <s:String x:Key="Hint.Cut">{0} 프레임 잘라내기됨</s:String>
-    <s:String x:Key="Hint.Copy">{0} 프레임 복사됨</s:String>
-    <s:String x:Key="Hint.Paste">{0} 프레임 붙여넣기됨</s:String>
-    <s:String x:Key="Hint.Zoom">확대/축소 {0}%</s:String>
-    <s:String x:Key="Hint.SelectAll">모든 프레임 선택됨</s:String>
-    <s:String x:Key="Hint.SelectSingle">#{0}번째 프레임 선택됨</s:String>
-    <s:String x:Key="Hint.SelectInverse">선택 반전됨</s:String>
-    <s:String x:Key="Hint.Deselect">모든 프레임 선택 해제됨</s:String>
-    <s:String x:Key="Hint.DeleteFrames">{0} 프레임 삭제됨</s:String>
-    <s:String x:Key="Hint.Reverse">프레임 역순됨</s:String>
-    <s:String x:Key="Hint.Yoyo">적용 효과 되돌리기</s:String>
-    <s:String x:Key="Hint.MoveLeft">프레임 왼쪽으로 이동됨</s:String>
-    <s:String x:Key="Hint.MoveRight">프레임 오른쪽으로 이동됨</s:String>
-    <s:String x:Key="Hint.Resize">프레임 크기 조정됨</s:String>
-    <s:String x:Key="Hint.Crop">프레임 자르기됨</s:String>
-    <s:String x:Key="Hint.FlipRotate">프레임 뒤집기/회전됨</s:String>
-    <s:String x:Key="Hint.FlipRotate2">뒤집기 작업은 선택된 프레임에, 회전 작업은 모든 프레임에 적용됩니다</s:String>
-    <s:String x:Key="Hint.ApplyAll">이 작업은 모든 프레임에 적용됩니다</s:String>
-    <s:String x:Key="Hint.ApplySelected">이 작업은 선택된 프레임에 적용됩니다</s:String>
-    <s:String x:Key="Hint.ApplySelectedOrAll">이 작업은 사용자 설정에 따라 모든 혹은 선택된 프레임에 적용됩니다</s:String>
-    <s:String x:Key="Hint.Cinemagraph">시네마그래프는 첫 프레임을 기준으로 모든 프레임에 적용됩니다</s:String>
-    <s:String x:Key="Hint.Overlay">워터마크 적용됨</s:String>
-    <s:String x:Key="Hint.TitleFrame">제목 프레임 생성됨</s:String>
-    <s:String x:Key="Hint.TitleFrame2">선택된 프레임 앞에 제목 프레임이 삽입됩니다</s:String>
-    <s:String x:Key="Hint.Delay">프레임 지연시간 변경됨</s:String>
-    <s:String x:Key="Hint.Transition">전환 효과 추가됨</s:String>
-    <s:String x:Key="Hint.Reduce">프레임레이트 줄여짐</s:String>
-    <s:String x:Key="Hint.Duplicates">중복 프레임 삭제됨</s:String>
+    <s:String x:Key="S.Hint.NewRecording">새 녹화 생성됨</s:String>
+    <s:String x:Key="S.Hint.NewWebcamRecording">새 웹캠 녹화 생성됨</s:String>
+    <s:String x:Key="S.Hint.NewBoardRecording">새 칠판 녹화 생성됨</s:String>
+    <s:String x:Key="S.Hint.NewAnimation">새 프로젝트 생성됨</s:String>
+    <s:String x:Key="S.Hint.Undo">되돌리기</s:String>
+    <s:String x:Key="S.Hint.Reset">실행 초기화</s:String>
+    <s:String x:Key="S.Hint.Redo">다시 실행</s:String>
+    <s:String x:Key="S.Hint.Cut">{0} 프레임 잘라내기됨</s:String>
+    <s:String x:Key="S.Hint.Copy">{0} 프레임 복사됨</s:String>
+    <s:String x:Key="S.Hint.Paste">{0} 프레임 붙여넣기됨</s:String>
+    <s:String x:Key="S.Hint.Zoom">확대/축소 {0}%</s:String>
+    <s:String x:Key="S.Hint.SelectAll">모든 프레임 선택됨</s:String>
+    <s:String x:Key="S.Hint.SelectSingle">#{0}번째 프레임 선택됨</s:String>
+    <s:String x:Key="S.Hint.SelectInverse">선택 반전됨</s:String>
+    <s:String x:Key="S.Hint.Deselect">모든 프레임 선택 해제됨</s:String>
+    <s:String x:Key="S.Hint.DeleteFrames">{0} 프레임 삭제됨</s:String>
+    <s:String x:Key="S.Hint.Reverse">프레임 역순됨</s:String>
+    <s:String x:Key="S.Hint.Yoyo">적용 효과 되돌리기</s:String>
+    <s:String x:Key="S.Hint.MoveLeft">프레임 왼쪽으로 이동됨</s:String>
+    <s:String x:Key="S.Hint.MoveRight">프레임 오른쪽으로 이동됨</s:String>
+    <s:String x:Key="S.Hint.Resize">프레임 크기 조정됨</s:String>
+    <s:String x:Key="S.Hint.Crop">프레임 자르기됨</s:String>
+    <s:String x:Key="S.Hint.FlipRotate">프레임 뒤집기/회전됨</s:String>
+    <s:String x:Key="S.Hint.FlipRotate2">뒤집기 작업은 선택된 프레임에, 회전 작업은 모든 프레임에 적용됩니다</s:String>
+    <s:String x:Key="S.Hint.ApplyAll">이 작업은 모든 프레임에 적용됩니다</s:String>
+    <s:String x:Key="S.Hint.ApplySelected">이 작업은 선택된 프레임에 적용됩니다</s:String>
+    <s:String x:Key="S.Hint.ApplySelectedOrAll">이 작업은 사용자 설정에 따라 모든 혹은 선택된 프레임에 적용됩니다</s:String>
+    <s:String x:Key="S.Hint.Cinemagraph">시네마그래프는 첫 프레임을 기준으로 모든 프레임에 적용됩니다</s:String>
+    <s:String x:Key="S.Hint.Overlay">워터마크 적용됨</s:String>
+    <s:String x:Key="S.Hint.TitleFrame">제목 프레임 생성됨</s:String>
+    <s:String x:Key="S.Hint.TitleFrame2">선택된 프레임 앞에 제목 프레임이 삽입됩니다</s:String>
+    <s:String x:Key="S.Hint.Delay">프레임 지연시간 변경됨</s:String>
+    <s:String x:Key="S.Hint.Transition">전환 효과 추가됨</s:String>
+    <s:String x:Key="S.Hint.Reduce">프레임레이트 줄여짐</s:String>
+    <s:String x:Key="S.Hint.Duplicates">중복 프레임 삭제됨</s:String>
     
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">숨기기</s:String>

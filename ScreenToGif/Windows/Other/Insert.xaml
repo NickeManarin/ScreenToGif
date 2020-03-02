@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         xmlns:u="clr-namespace:ScreenToGif.Util"
-        Title="{DynamicResource InsertFrames.Title}" 
+        Title="{DynamicResource S.InsertFrames.Title}" 
         Icon="/ScreenToGif;component/Resources/Logo.ico" SnapsToDevicePixels="True" 
         UseLayoutRounding="True" WindowStartupLocation="CenterOwner" 
         Height="500" Width="870" MinWidth="800" MinHeight="600" SizeToContent="Width" 
@@ -30,7 +30,7 @@
             <Viewbox Grid.Column="0" x:Name="IconViewBox" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" 
                      Stretch="Uniform" Child="{StaticResource Vector.Add}" Width="30" Height="30" Opacity="{DynamicResource Element.Opacity}"/>
 
-            <Label Grid.Column="1" Content="{DynamicResource InsertFrames.Title}" Margin="5,0,5,0" VerticalAlignment="Center" Padding="2" 
+            <Label Grid.Column="1" Content="{DynamicResource S.InsertFrames.Title}" Margin="5,0,5,0" VerticalAlignment="Center" Padding="2" 
                    FontSize="18" FontFamily="Segoe UI Semilight" Foreground="{DynamicResource Element.Foreground.Header}" Effect="{StaticResource Shadow.Foreground.Small}"/>
 
             <Grid Grid.Column="2">
@@ -40,7 +40,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Viewbox Grid.Column="0" MinWidth="15" MaxHeight="15" Stretch="Uniform" Child="{StaticResource Vector.Info}" Opacity="{DynamicResource Element.Opacity}"/>
-                <TextBlock Grid.Column="1" Text="{DynamicResource InsertFrames.Info}" Margin="5,0" Foreground="{DynamicResource Element.Foreground.Detail}" FontStyle="Italic" FontSize="12" 
+                <TextBlock Grid.Column="1" Text="{DynamicResource S.InsertFrames.Info}" Margin="5,0" Foreground="{DynamicResource Element.Foreground.Detail}" FontStyle="Italic" FontSize="12" 
                            TextWrapping="WrapWithOverflow" VerticalAlignment="Center"/>
             </Grid>
 
@@ -60,7 +60,7 @@
                 <Viewbox Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Margin="5" HorizontalAlignment="Left" MaxHeight="25" VerticalAlignment="Center" 
                          Stretch="Uniform" Child="{StaticResource Vector.WidthHeight}" Opacity="{DynamicResource Element.Opacity}"/>
 
-                <Label Grid.Row="0" Grid.Column="1" Content="{DynamicResource InsertFrames.CanvasSize}" VerticalAlignment="Center" Padding="2" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                <Label Grid.Row="0" Grid.Column="1" Content="{DynamicResource S.InsertFrames.CanvasSize}" VerticalAlignment="Center" Padding="2" Foreground="{DynamicResource Element.Foreground.Medium}"/>
 
                 <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}">
                     <TextBlock.Text>
@@ -72,8 +72,8 @@
                 </TextBlock>
 
                 <n:ImageButton Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" x:Name="ResetCanvasButton" Margin="10,0,0,0" TextWrapping="Wrap"
-                               Text="{DynamicResource InsertFrames.FitCanvas}" Content="{StaticResource Vector.PictureFit}" MaxSize="40" 
-                               Style="{StaticResource Style.Button.Horizontal}" ToolTip="{DynamicResource InsertFrames.FitCanvas.Info}" Click="ResetCanvasButton_Click"/>
+                               Text="{DynamicResource S.InsertFrames.FitCanvas}" Content="{StaticResource Vector.PictureFit}" MaxSize="40" 
+                               Style="{StaticResource Style.Button.Horizontal}" ToolTip="{DynamicResource S.InsertFrames.FitCanvas.Info}" Click="ResetCanvasButton_Click"/>
             </Grid>
         </Grid>
 
@@ -109,9 +109,9 @@
                 </Canvas>
             </ScrollViewer>
 
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource InsertFrames.InsertedFrames}" HorizontalAlignment="Center" VerticalAlignment="Top"
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.InsertFrames.InsertedFrames}" HorizontalAlignment="Center" VerticalAlignment="Top"
                        FontSize="16" Foreground="{DynamicResource Element.Foreground.Header}" Background="{DynamicResource Panel.Background.Level4}" Effect="{StaticResource Shadow.Background.Small}" Opacity="0.9"/>
-            <TextBlock Grid.Row="0" Grid.Column="2" Text="{DynamicResource InsertFrames.CurrentFrames}" HorizontalAlignment="Center" VerticalAlignment="Top"
+            <TextBlock Grid.Row="0" Grid.Column="2" Text="{DynamicResource S.InsertFrames.CurrentFrames}" HorizontalAlignment="Center" VerticalAlignment="Top"
                        FontSize="16" Foreground="{DynamicResource Element.Foreground.Header}" Background="{DynamicResource Panel.Background.Level4}" Effect="{StaticResource Shadow.Background.Small}" Opacity="0.9"/>
 
             <Viewbox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Child="{StaticResource Vector.Arrow.Blue.Right}" Height="22" HorizontalAlignment="Center" VerticalAlignment="Top" Opacity="{DynamicResource Element.Opacity}"/>
@@ -131,7 +131,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Viewbox Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Margin="5" MaxHeight="25" Child="{StaticResource Vector.WidthHeight}" Opacity="{DynamicResource Element.Opacity}"/>
-                <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource InsertFrames.ImageSize}" Padding="3,0" Foreground="{DynamicResource Element.Foreground}"/>
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource S.InsertFrames.ImageSize}" Padding="3,0" Foreground="{DynamicResource Element.Foreground}"/>
 
                 <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{DynamicResource Element.Foreground}">
                     <TextBlock.Text>
@@ -145,7 +145,7 @@
                 <Separator Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Width="1"/>
 
                 <Viewbox Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" Margin="5" MaxHeight="25" Child="{StaticResource Vector.Move}" Opacity="{DynamicResource Element.Opacity}"/>
-                <TextBlock Grid.Row="0" Grid.Column="4" Text="{DynamicResource InsertFrames.ImagePosition}" Padding="3,0" Foreground="{DynamicResource Element.Foreground}"/>
+                <TextBlock Grid.Row="0" Grid.Column="4" Text="{DynamicResource S.InsertFrames.ImagePosition}" Padding="3,0" Foreground="{DynamicResource Element.Foreground}"/>
 
                 <TextBlock Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{DynamicResource Element.Foreground}">
                     <TextBlock.Text>
@@ -156,7 +156,7 @@
                     </TextBlock.Text>
                 </TextBlock>
 
-                <n:ImageButton Grid.Row="0" Grid.Column="5" Grid.RowSpan="2" x:Name="ResetLeftButton" Text="{DynamicResource InsertFrames.ResetImageSizePosition}" Content="{StaticResource Vector.Repeat}" MaxSize="20"
+                <n:ImageButton Grid.Row="0" Grid.Column="5" Grid.RowSpan="2" x:Name="ResetLeftButton" Text="{DynamicResource S.InsertFrames.ResetImageSizePosition}" Content="{StaticResource Vector.Repeat}" MaxSize="20"
                                Style="{StaticResource Style.Button.Horizontal}" Click="ResetLeftButton_Click" Margin="10,0,0,0"/>
             </Grid>
 
@@ -175,7 +175,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Viewbox Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Margin="5" MaxHeight="25" Child="{StaticResource Vector.WidthHeight}" Opacity="{DynamicResource Element.Opacity}"/>
-                <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource InsertFrames.ImageSize}" Padding="3,0" Foreground="{DynamicResource Element.Foreground}"/>
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource S.InsertFrames.ImageSize}" Padding="3,0" Foreground="{DynamicResource Element.Foreground}"/>
 
                 <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{DynamicResource Element.Foreground}">
                     <TextBlock.Text>
@@ -189,7 +189,7 @@
                 <Separator Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Width="1"/>
 
                 <Viewbox Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" Margin="5" MaxHeight="25" Child="{StaticResource Vector.Move}" Opacity="{DynamicResource Element.Opacity}"/>
-                <TextBlock Grid.Row="0" Grid.Column="4" Text="{DynamicResource InsertFrames.ImagePosition}" Padding="3,0" Foreground="{DynamicResource Element.Foreground}"/>
+                <TextBlock Grid.Row="0" Grid.Column="4" Text="{DynamicResource S.InsertFrames.ImagePosition}" Padding="3,0" Foreground="{DynamicResource Element.Foreground}"/>
 
                 <TextBlock Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{DynamicResource Element.Foreground}">
                     <TextBlock.Text>
@@ -200,7 +200,7 @@
                     </TextBlock.Text>
                 </TextBlock>
 
-                <n:ImageButton Grid.Row="0" Grid.Column="5" Grid.RowSpan="2" x:Name="ResetRightButton" Text="{DynamicResource InsertFrames.ResetImageSizePosition}" Content="{StaticResource Vector.Repeat}" MaxSize="20"
+                <n:ImageButton Grid.Row="0" Grid.Column="5" Grid.RowSpan="2" x:Name="ResetRightButton" Text="{DynamicResource S.InsertFrames.ResetImageSizePosition}" Content="{StaticResource Vector.Repeat}" MaxSize="20"
                                Style="{StaticResource Style.Button.Horizontal}" Click="ResetRightButton_Click" Margin="10,0,0,0"/>
             </Grid>
 
@@ -215,10 +215,10 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="1" Text="{DynamicResource InsertFrames.Info2}" FontSize="13" Foreground="{DynamicResource Element.Foreground.Medium}" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"/>
+                <TextBlock Grid.Column="1" Text="{DynamicResource S.InsertFrames.Info2}" FontSize="13" Foreground="{DynamicResource Element.Foreground.Medium}" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"/>
 
-                <RadioButton Grid.Column="2" x:Name="BeforeRadioButton" Content="{DynamicResource InsertFrames.Before}" VerticalContentAlignment="Center" Margin="10,0,0,0" IsChecked="True"/>
-                <RadioButton  Grid.Column="3" x:Name="AfterRadioButton" Content="{DynamicResource InsertFrames.After}" Margin="10,0,00,0"/>
+                <RadioButton Grid.Column="2" x:Name="BeforeRadioButton" Content="{DynamicResource S.InsertFrames.Before}" VerticalContentAlignment="Center" Margin="10,0,0,0" IsChecked="True"/>
+                <RadioButton  Grid.Column="3" x:Name="AfterRadioButton" Content="{DynamicResource S.InsertFrames.After}" Margin="10,0,00,0"/>
 
                 <Label Grid.Column="4" Content="{DynamicResource Frame}" Padding="0" Margin="20,0,0,0" Foreground="{DynamicResource Element.Foreground.Detail}" VerticalContentAlignment="Center"/>
                 <Label Grid.Column="5" x:Name="FrameNumberLabel" Content="0" Margin="10,0,0,0" Foreground="{DynamicResource Element.Foreground.Detail}" FontSize="14" Padding="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -239,17 +239,17 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Label x:Name="StatusLabel" Content="{DynamicResource InsertFrames.Importing}" Margin="5,0,0,0" Foreground="{DynamicResource Element.Foreground.Medium}" VerticalAlignment="Center"/>
+                <Label x:Name="StatusLabel" Content="{DynamicResource S.InsertFrames.Importing}" Margin="5,0,0,0" Foreground="{DynamicResource Element.Foreground.Medium}" VerticalAlignment="Center"/>
                 <ProgressBar x:Name="InsertProgressBar" Grid.Column="1" Height="4" Margin="5,0"/>
             </Grid>
 
-            <n:ImageButton Grid.Column="1" x:Name="FillColorButton" Text="{DynamicResource InsertFrames.SelectColorFill}" ContentHeight="20" Margin="5" MinHeight="25" Padding="2,0" Click="FillColorButton_Click">
+            <n:ImageButton Grid.Column="1" x:Name="FillColorButton" Text="{DynamicResource S.InsertFrames.SelectColorFill}" ContentHeight="20" Margin="5" MinHeight="25" Padding="2,0" Click="FillColorButton_Click">
                 <Border Background="{Binding InsertFillColor, Source={x:Static u:UserSettings.All}, Converter={StaticResource ColorToBrushConverter}}"
                         Margin="1" Cursor="Hand" Height="15" Width="15" BorderThickness="1" BorderBrush="{DynamicResource Element.Border}" MouseDown="FillColorButton_Click"/>
             </n:ImageButton>
 
-            <n:ImageButton x:Name="OkButton" Grid.Column="2" Text="{DynamicResource Ok}" Margin="5" Padding="2,0" ContentHeight="20" Click="OkButton_Click" Content="{StaticResource Vector.Ok}" />
-            <n:ImageButton x:Name="CancelButton" Grid.Column="3" Text="{DynamicResource Cancel}" Margin="5" Padding="2,0" ContentHeight="20" Content="{StaticResource Vector.Cancel}" IsCancel="True" Click="CancelButton_Click"/>
+            <n:ImageButton x:Name="OkButton" Grid.Column="2" Text="{DynamicResource S.Ok}" Margin="5" Padding="2,0" ContentHeight="20" Click="OkButton_Click" Content="{StaticResource Vector.Ok}" />
+            <n:ImageButton x:Name="CancelButton" Grid.Column="3" Text="{DynamicResource S.Cancel}" Margin="5" Padding="2,0" ContentHeight="20" Content="{StaticResource Vector.Cancel}" IsCancel="True" Click="CancelButton_Click"/>
         </Grid>
     </Grid>
 </Window>

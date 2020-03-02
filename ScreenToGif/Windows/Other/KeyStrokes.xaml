@@ -97,10 +97,10 @@
             <n:ExtendedCheckBox Grid.Column="0" x:Name="LowercaseCheckBox" Text="{DynamicResource KeyStrokes.Edit.Lower}" Margin="3,0" HorizontalAlignment="Center"
                                 ToolTip="{DynamicResource KeyStrokes.Edit.Lower.Info}"/>
 
-            <n:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource Ok}" Margin="5" Content="{StaticResource Vector.Ok}" IsDefault="True" MaxSize="15"
+            <n:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource S.Ok}" Margin="5" Content="{StaticResource Vector.Ok}" IsDefault="True" MaxSize="15"
                            HorizontalAlignment="Right" MinWidth="100" MinHeight="27" VerticalAlignment="Bottom" Click="OkButton_Click"/>
 
-            <n:ImageButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource Cancel}" Margin="5" Content="{StaticResource Vector.Cancel}" MaxSize="15"
+            <n:ImageButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource S.Cancel}" Margin="5" Content="{StaticResource Vector.Cancel}" MaxSize="15"
                            HorizontalAlignment="Right" MinWidth="100" MinHeight="27" VerticalAlignment="Bottom" Click="CancelButton_Click" IsCancel="True"/>
         </Grid>
     </Grid>

@@ -8,11 +8,11 @@
     <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
     
     <!--General-->
-    <s:String x:Key="Ok">ОК</s:String>
-    <s:String x:Key="Back">Назад</s:String>
-    <s:String x:Key="Cancel">Отмена</s:String>
-    <s:String x:Key="Yes">Да</s:String>
-    <s:String x:Key="No">Нет</s:String>
+    <s:String x:Key="S.Ok">ОК</s:String>
+    <s:String x:Key="S.Back">Назад</s:String>
+    <s:String x:Key="S.Cancel">Отмена</s:String>
+    <s:String x:Key="S.Yes">Да</s:String>
+    <s:String x:Key="S.No">Нет</s:String>
     <s:String x:Key="Frame">Кадр</s:String>
     <s:String x:Key="Suppress">Подавить</s:String>
     <s:String x:Key="Preview">Предпросмотр</s:String>
@@ -38,9 +38,9 @@
     <s:String x:Key="S.Exit">Выход</s:String>
 
     <!--Application-->
-    <s:String x:Key="Application.Exiting.Title">Выход из ScreenToGif</s:String>
-    <s:String x:Key="Application.Exiting.Instruction">Вы уверены, что хотите выйти?</s:String>
-    <s:String x:Key="Application.Exiting.Message">Все окна и значок в трее будут закрыты.</s:String>
+    <s:String x:Key="S.Exiting.Title">Выход из ScreenToGif</s:String>
+    <s:String x:Key="S.Exiting.Instruction">Вы уверены, что хотите выйти?</s:String>
+    <s:String x:Key="S.Exiting.Message">Все окна и значок в трее будут закрыты.</s:String>
     
     <!--Error messages--> 
     <s:String x:Key="S.Crash">О нет, программа рухнула :(</s:String>
@@ -463,25 +463,25 @@
     <s:String x:Key="S.Localization.MoveRosourcePosition">Чтобы применить свой ресурс, переместите его в конец списка.</s:String>
 
     <!--Recorder-->
-    <s:String x:Key="Recorder.RecordingOptions">Настройки записи</s:String>
-    <s:String x:Key="Recorder.Snapshot">Режим снимков</s:String>
-    <s:String x:Key="Recorder.ThinMode">Спрятать заголовок</s:String>
-    <s:String x:Key="Recorder.Fullscreen">Во весь экран</s:String>
+    <s:String x:Key="S.Recorder.RecordingOptions">Настройки записи</s:String>
+    <s:String x:Key="S.Recorder.Snapshot">Режим снимков</s:String>
+    <s:String x:Key="S.Recorder.ThinMode">Спрятать заголовок</s:String>
+    <s:String x:Key="S.Recorder.Fullscreen">Во весь экран</s:String>
 
-    <s:String x:Key="Recorder.Record">Запись</s:String>
-    <s:String x:Key="Recorder.Pause">Пауза</s:String>
-    <s:String x:Key="Recorder.Continue">Продолжить</s:String>
-    <s:String x:Key="Recorder.Stop">Стоп</s:String>
-    <s:String x:Key="Recorder.Discard">Сброс</s:String>
-    <s:String x:Key="Recorder.Snap">Снимок</s:String>
-    <s:String x:Key="Recorder.Height">Высота</s:String>
-    <s:String x:Key="Recorder.Width">Ширина</s:String>
-    <s:String x:Key="Recorder.Fps">Максимум кадров в секунду</s:String>
-    <s:String x:Key="Recorder.Fps.Short">fps</s:String>
-    <s:String x:Key="Recorder.FpsRange">Пределы: 1-60 fps</s:String>
-    <s:String x:Key="Recorder.SnapToWindow">Снимок окна (потяните и отпустите над окном)</s:String>
-    <s:String x:Key="Recorder.PreStart">Подготовка</s:String>
-    <s:String x:Key="Recorder.Paused">ScreenToGif (Пауза)</s:String>
+    <s:String x:Key="S.Recorder.Record">Запись</s:String>
+    <s:String x:Key="S.Recorder.Pause">Пауза</s:String>
+    <s:String x:Key="S.Recorder.Continue">Продолжить</s:String>
+    <s:String x:Key="S.Recorder.Stop">Стоп</s:String>
+    <s:String x:Key="S.Recorder.Discard">Сброс</s:String>
+    <s:String x:Key="S.Recorder.Snap">Снимок</s:String>
+    <s:String x:Key="S.Recorder.Height">Высота</s:String>
+    <s:String x:Key="S.Recorder.Width">Ширина</s:String>
+    <s:String x:Key="S.Recorder.Fps">Максимум кадров в секунду</s:String>
+    <s:String x:Key="S.Recorder.Fps.Short">fps</s:String>
+    <s:String x:Key="S.Recorder.FpsRange">Пределы: 1-60 fps</s:String>
+    <s:String x:Key="S.Recorder.SnapToWindow">Снимок окна (потяните и отпустите над окном)</s:String>
+    <s:String x:Key="S.Recorder.PreStart">Подготовка</s:String>
+    <s:String x:Key="S.Recorder.Paused">ScreenToGif (Пауза)</s:String>
     
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible">Не удалось захватить экран</s:String>
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">Не удалось захватить экран. Метод захвата не вернул ни одного кадра после 5 попыток.</s:String>
@@ -504,37 +504,37 @@
     <s:String x:Key="S.Recorder.EscToCancel">Нажмите ESC для отмены</s:String>
     
     <!--Webcam Recorder-->
-    <s:String x:Key="Webcam.Title">ScreenToGif - запись с веб-камеры</s:String>
-    <s:String x:Key="Webcam.NoVideo">У вас нет веб-камеры :(</s:String>
-    <s:String x:Key="Webcam.CheckVideoDevices">Поиск видео устройств.</s:String>
-    <s:String x:Key="Webcam.Scale">Масштаб: {0:0.##}x</s:String>
-    <s:String x:Key="Webcam.ChangeScale">Изменить масштаб видео.</s:String>
+    <s:String x:Key="S.Webcam.Title">ScreenToGif - запись с веб-камеры</s:String>
+    <s:String x:Key="S.Webcam.NoVideo">У вас нет веб-камеры :(</s:String>
+    <s:String x:Key="S.Webcam.CheckVideoDevices">Поиск видео устройств.</s:String>
+    <s:String x:Key="S.Webcam.Scale">Масштаб: {0:0.##}x</s:String>
+    <s:String x:Key="S.Webcam.ChangeScale">Изменить масштаб видео.</s:String>
     
     <!--Board Recorder-->
-    <s:String x:Key="Board.Title">ScreenToGif - запись с доски</s:String>
-    <s:String x:Key="Board.AutoRecord">Авто-запись</s:String>
-    <s:String x:Key="Board.AutoRecordToolTip">Включать запись во время рисования.</s:String>
-    <s:String x:Key="Board.CtrlHold">Ctrl (удерживать)</s:String>
+    <s:String x:Key="S.Board.Title">ScreenToGif - запись с доски</s:String>
+    <s:String x:Key="S.Board.AutoRecord">Авто-запись</s:String>
+    <s:String x:Key="S.Board.AutoRecordToolTip">Включать запись во время рисования.</s:String>
+    <s:String x:Key="S.Board.CtrlHold">Ctrl (удерживать)</s:String>
     
     <!--Color Selector-->
-    <s:String x:Key="ColorSelector.Title">Выбор цвета</s:String>
-    <s:String x:Key="ColorSelector.Select">Выберите цвет</s:String>
-    <s:String x:Key="ColorSelector.Red">Красный</s:String>
-    <s:String x:Key="ColorSelector.Green">Зеленый</s:String>
-    <s:String x:Key="ColorSelector.Blue">Синий</s:String>
-    <s:String x:Key="ColorSelector.Alpha">Альфа</s:String>
-    <s:String x:Key="ColorSelector.Hexadecimal">Hex</s:String>
-    <s:String x:Key="ColorSelector.Initial">Первоначальный цвет</s:String>
-    <s:String x:Key="ColorSelector.Current">Текущий цвет</s:String>
-    <s:String x:Key="ColorSelector.Latest">Конечный цвет</s:String>
-    <s:String x:Key="ColorSelector.Sample">Перетащите&#x0d;образец цвета</s:String>
-    <s:String x:Key="ColorSelector.Sample.Info">Перетащите для выбора&#x0d;цвета с экрана.</s:String>
+    <s:String x:Key="S.ColorSelector.Title">Выбор цвета</s:String>
+    <s:String x:Key="S.ColorSelector.Select">Выберите цвет</s:String>
+    <s:String x:Key="S.ColorSelector.Red">Красный</s:String>
+    <s:String x:Key="S.ColorSelector.Green">Зеленый</s:String>
+    <s:String x:Key="S.ColorSelector.Blue">Синий</s:String>
+    <s:String x:Key="S.ColorSelector.Alpha">Альфа</s:String>
+    <s:String x:Key="S.ColorSelector.Hexadecimal">Hex</s:String>
+    <s:String x:Key="S.ColorSelector.Initial">Первоначальный цвет</s:String>
+    <s:String x:Key="S.ColorSelector.Current">Текущий цвет</s:String>
+    <s:String x:Key="S.ColorSelector.Latest">Конечный цвет</s:String>
+    <s:String x:Key="S.ColorSelector.Sample">Перетащите&#x0d;образец цвета</s:String>
+    <s:String x:Key="S.ColorSelector.Sample.Info">Перетащите для выбора&#x0d;цвета с экрана.</s:String>
     
     <!--Exception Viewer, Optional-->
-    <s:String x:Key="ExceptionViewer.Title">Просмотр ошибок</s:String>
-    <s:String x:Key="ExceptionViewer.OpenInner">Открыть Inner Exceptions</s:String>
-    <s:String x:Key="ErrorDialog.Observation">Что-то пошло не так.</s:String>
-    <s:String x:Key="ErrorDialog.Send">Отправить отчет.</s:String>
+    <s:String x:Key="S.ExceptionViewer.Title">Просмотр ошибок</s:String>
+    <s:String x:Key="S.ExceptionViewer.OpenInner">Открыть Inner Exceptions</s:String>
+    <s:String x:Key="S.ErrorDialog.Observation">Что-то пошло не так.</s:String>
+    <s:String x:Key="S.ErrorDialog.Send">Отправить отчет.</s:String>
 
     <!--FFmpeg Preset-->
     <s:String x:Key="S.FfmpegPreset.Title">Пресет FFmpeg</s:String>
@@ -545,22 +545,22 @@
     <s:String x:Key="S.FfmpegPreset.Warning.SameName">Пресет с таким именем уже существует.</s:String>
 
     <!--Insert Frames-->
-    <s:String x:Key="InsertFrames.Title">Вставка кадров</s:String>
-    <s:String x:Key="InsertFrames.Info">Обе стороны должны быть одного размера, это окно позволяет переместить и изменить размер изображения и холста.</s:String>
-    <s:String x:Key="InsertFrames.CanvasSize">Размер холста:</s:String>
-    <s:String x:Key="InsertFrames.FitCanvas">Вписать изображение в холст</s:String>
-    <s:String x:Key="InsertFrames.FitCanvas.Info">Изменить размер холста чтобы вписать оба изображения (от верхнего левого угла).</s:String>
-    <s:String x:Key="InsertFrames.DifferentSizes">Кадры имеют различный размер. Необходимо подогнать их перед добавлением.</s:String>
-    <s:String x:Key="InsertFrames.InsertedFrames">Новые кадры</s:String>
-    <s:String x:Key="InsertFrames.CurrentFrames">Текущие кадры</s:String>
-    <s:String x:Key="InsertFrames.ImageSize">Размер изображения:</s:String>
-    <s:String x:Key="InsertFrames.ImagePosition">Позиция изображения:</s:String>
-    <s:String x:Key="InsertFrames.ResetImageSizePosition">Сбросить размер&#x0d;и положение</s:String>
-    <s:String x:Key="InsertFrames.Info2">Новый кадр будет добавлен:</s:String>
-    <s:String x:Key="InsertFrames.Before">Перед</s:String>
-    <s:String x:Key="InsertFrames.After">После</s:String>
-    <s:String x:Key="InsertFrames.Importing">Импорт</s:String>
-    <s:String x:Key="InsertFrames.SelectColorFill">Выбрать цвет заливки холста</s:String>
+    <s:String x:Key="S.InsertFrames.Title">Вставка кадров</s:String>
+    <s:String x:Key="S.InsertFrames.Info">Обе стороны должны быть одного размера, это окно позволяет переместить и изменить размер изображения и холста.</s:String>
+    <s:String x:Key="S.InsertFrames.CanvasSize">Размер холста:</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas">Вписать изображение в холст</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas.Info">Изменить размер холста чтобы вписать оба изображения (от верхнего левого угла).</s:String>
+    <s:String x:Key="S.InsertFrames.DifferentSizes">Кадры имеют различный размер. Необходимо подогнать их перед добавлением.</s:String>
+    <s:String x:Key="S.InsertFrames.InsertedFrames">Новые кадры</s:String>
+    <s:String x:Key="S.InsertFrames.CurrentFrames">Текущие кадры</s:String>
+    <s:String x:Key="S.InsertFrames.ImageSize">Размер изображения:</s:String>
+    <s:String x:Key="S.InsertFrames.ImagePosition">Позиция изображения:</s:String>
+    <s:String x:Key="S.InsertFrames.ResetImageSizePosition">Сбросить размер&#x0d;и положение</s:String>
+    <s:String x:Key="S.InsertFrames.Info2">Новый кадр будет добавлен:</s:String>
+    <s:String x:Key="S.InsertFrames.Before">Перед</s:String>
+    <s:String x:Key="S.InsertFrames.After">После</s:String>
+    <s:String x:Key="S.InsertFrames.Importing">Импорт</s:String>
+    <s:String x:Key="S.InsertFrames.SelectColorFill">Выбрать цвет заливки холста</s:String>
 
     <!--Import Frames From Video-->
     <s:String x:Key="S.ImportVideo.Title">Импортировать кадры из видео</s:String>
@@ -875,41 +875,41 @@
     <s:String x:Key="Editor.Warning.LowSpace">На диске недостаточно места для хранения файлов кэша ({0}%). Нажмите здесь, чтобы открыть "Настройки > Файлы и папки" для освобождения места.</s:String>
     
     <!--Hints-->
-    <s:String x:Key="Hint.NewRecording">Создана новая запись с экрана</s:String>
-    <s:String x:Key="Hint.NewWebcamRecording">Создана новая запись с веб-камеры </s:String>
-    <s:String x:Key="Hint.NewBoardRecording">Создана новая запись с доски</s:String>
-    <s:String x:Key="Hint.NewAnimation">Создан новый проект</s:String>
-    <s:String x:Key="Hint.Undo">Выполнена отмена действия</s:String>
-    <s:String x:Key="Hint.Reset">Выполнен сброс списка всех изменений</s:String>
-    <s:String x:Key="Hint.Redo">Повтор действия выполнен</s:String>
-    <s:String x:Key="Hint.Cut">{0} кадров вырезано</s:String>
-    <s:String x:Key="Hint.Copy">{0} кадров скопировано.</s:String>
-    <s:String x:Key="Hint.Paste">{0} кадров вставлено</s:String>
-    <s:String x:Key="Hint.Zoom">Выбрано увеличение {0}%</s:String>
-    <s:String x:Key="Hint.SelectAll">Были выбраны все кадры</s:String>
-    <s:String x:Key="Hint.SelectSingle">Выбран кадр #{0}</s:String>
-    <s:String x:Key="Hint.SelectInverse">Выделение инвертировано</s:String>
-    <s:String x:Key="Hint.Deselect">Все кадры были удалены</s:String>
-    <s:String x:Key="Hint.DeleteFrames">{0} кадров удалено</s:String>
-    <s:String x:Key="Hint.Reverse">Реверс списка кадров</s:String>
-    <s:String x:Key="Hint.Yoyo">Эффект цикла применен</s:String>
-    <s:String x:Key="Hint.MoveLeft">Кадр(ы) сдвинуты влево</s:String>
-    <s:String x:Key="Hint.MoveRight">Кадр(ы) сдвинуты вправо</s:String>
-    <s:String x:Key="Hint.Resize">Размер кадра изменен</s:String>
-    <s:String x:Key="Hint.Crop">Кадры обрезаны</s:String>
-    <s:String x:Key="Hint.FlipRotate">Кадры отражены/повернуты</s:String>
-    <s:String x:Key="Hint.FlipRotate2">Отражение применяется к выбранным, а поворот ко всем кадрам.</s:String>
-    <s:String x:Key="Hint.ApplyAll">Данное действие применимо ко всем кадрам</s:String>
-    <s:String x:Key="Hint.ApplySelected">Данное действие применимо к выбранным кадрам</s:String>
-    <s:String x:Key="Hint.ApplySelectedOrAll">Это действие затронет все или выбранные кадры, зависит от ваших настроек</s:String>
-    <s:String x:Key="Hint.Cinemagraph">Синемаграф применяется ко всем кадрам, основываясь на первом.</s:String>
-    <s:String x:Key="Hint.Overlay">Наложение применено</s:String>
-    <s:String x:Key="Hint.TitleFrame">Создан титульный кадр</s:String>
-    <s:String x:Key="Hint.TitleFrame2">Титульный кадр будет вставлен перед выбранным</s:String>
-    <s:String x:Key="Hint.Delay">Продолжительность изменена</s:String>
-    <s:String x:Key="Hint.Transition">Переход вставлен</s:String>
-    <s:String x:Key="Hint.Reduce">Частота кадров снижена</s:String>
-    <s:String x:Key="Hint.Duplicates">Дубликаты удалены</s:String>
+    <s:String x:Key="S.Hint.NewRecording">Создана новая запись с экрана</s:String>
+    <s:String x:Key="S.Hint.NewWebcamRecording">Создана новая запись с веб-камеры </s:String>
+    <s:String x:Key="S.Hint.NewBoardRecording">Создана новая запись с доски</s:String>
+    <s:String x:Key="S.Hint.NewAnimation">Создан новый проект</s:String>
+    <s:String x:Key="S.Hint.Undo">Выполнена отмена действия</s:String>
+    <s:String x:Key="S.Hint.Reset">Выполнен сброс списка всех изменений</s:String>
+    <s:String x:Key="S.Hint.Redo">Повтор действия выполнен</s:String>
+    <s:String x:Key="S.Hint.Cut">{0} кадров вырезано</s:String>
+    <s:String x:Key="S.Hint.Copy">{0} кадров скопировано.</s:String>
+    <s:String x:Key="S.Hint.Paste">{0} кадров вставлено</s:String>
+    <s:String x:Key="S.Hint.Zoom">Выбрано увеличение {0}%</s:String>
+    <s:String x:Key="S.Hint.SelectAll">Были выбраны все кадры</s:String>
+    <s:String x:Key="S.Hint.SelectSingle">Выбран кадр #{0}</s:String>
+    <s:String x:Key="S.Hint.SelectInverse">Выделение инвертировано</s:String>
+    <s:String x:Key="S.Hint.Deselect">Все кадры были удалены</s:String>
+    <s:String x:Key="S.Hint.DeleteFrames">{0} кадров удалено</s:String>
+    <s:String x:Key="S.Hint.Reverse">Реверс списка кадров</s:String>
+    <s:String x:Key="S.Hint.Yoyo">Эффект цикла применен</s:String>
+    <s:String x:Key="S.Hint.MoveLeft">Кадр(ы) сдвинуты влево</s:String>
+    <s:String x:Key="S.Hint.MoveRight">Кадр(ы) сдвинуты вправо</s:String>
+    <s:String x:Key="S.Hint.Resize">Размер кадра изменен</s:String>
+    <s:String x:Key="S.Hint.Crop">Кадры обрезаны</s:String>
+    <s:String x:Key="S.Hint.FlipRotate">Кадры отражены/повернуты</s:String>
+    <s:String x:Key="S.Hint.FlipRotate2">Отражение применяется к выбранным, а поворот ко всем кадрам.</s:String>
+    <s:String x:Key="S.Hint.ApplyAll">Данное действие применимо ко всем кадрам</s:String>
+    <s:String x:Key="S.Hint.ApplySelected">Данное действие применимо к выбранным кадрам</s:String>
+    <s:String x:Key="S.Hint.ApplySelectedOrAll">Это действие затронет все или выбранные кадры, зависит от ваших настроек</s:String>
+    <s:String x:Key="S.Hint.Cinemagraph">Синемаграф применяется ко всем кадрам, основываясь на первом.</s:String>
+    <s:String x:Key="S.Hint.Overlay">Наложение применено</s:String>
+    <s:String x:Key="S.Hint.TitleFrame">Создан титульный кадр</s:String>
+    <s:String x:Key="S.Hint.TitleFrame2">Титульный кадр будет вставлен перед выбранным</s:String>
+    <s:String x:Key="S.Hint.Delay">Продолжительность изменена</s:String>
+    <s:String x:Key="S.Hint.Transition">Переход вставлен</s:String>
+    <s:String x:Key="S.Hint.Reduce">Частота кадров снижена</s:String>
+    <s:String x:Key="S.Hint.Duplicates">Дубликаты удалены</s:String>
     
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">Скрыть</s:String>

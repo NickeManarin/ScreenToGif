@@ -101,7 +101,7 @@
 
                                     <n:ImageButton Grid.Column="0" x:Name="BackButton" Content="{TemplateBinding Child}" Visibility="{TemplateBinding BackVisibility}"
                                                    Style="{DynamicResource Style.Button.NoText}" ContentWidth="25" ContentHeight="25" Width="Auto" TabIndex="11" Foreground="{TemplateBinding Foreground}"
-                                                   ToolTip="{DynamicResource Back}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                                                   ToolTip="{DynamicResource S.Back}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
                                     <Grid Grid.Column="1" x:Name="MoveGrid" Background="{TemplateBinding Background}">
                                         <Grid.ColumnDefinitions>
@@ -2379,7 +2379,7 @@
                             <n:ImageButton x:Name="RetryButton" Text="{DynamicResource S.Recorder.Retry}" ContentWidth="24" ContentHeight="24" Style="{DynamicResource Style.Button.Horizontal.White}" Content="{DynamicResource Vector.Synchronize}" 
                                            ToolTip="Right-Click" ToolTipService.Placement="Bottom" Height="30" Padding="4"/>
 
-                            <n:ImageButton x:Name="CancelButton" Text="{DynamicResource Cancel}" ContentWidth="24" ContentHeight="24" Style="{DynamicResource Style.Button.Horizontal.White}" Content="{DynamicResource Vector.Cancel}" 
+                            <n:ImageButton x:Name="CancelButton" Text="{DynamicResource S.Cancel}" ContentWidth="24" ContentHeight="24" Style="{DynamicResource Style.Button.Horizontal.White}" Content="{DynamicResource Vector.Cancel}" 
                                            ToolTip="Esc" ToolTipService.Placement="Bottom" Height="30" Padding="4"/>
                         </n:ExtendedUniformGrid>
 
@@ -2575,7 +2575,7 @@
                             <n:ImageButton x:Name="RetryButton" Text="{DynamicResource S.Recorder.Retry}" ContentWidth="24" ContentHeight="24" Style="{DynamicResource Style.Button.Horizontal.White}" Content="{DynamicResource Vector.Synchronize}" 
                                            ToolTip="Right-Click" ToolTipService.Placement="Bottom" Height="30" Padding="4"/>
 
-                            <n:ImageButton x:Name="CancelButton" Text="{DynamicResource Cancel}" ContentWidth="24" ContentHeight="24" Style="{DynamicResource Style.Button.Horizontal.White}" Content="{DynamicResource Vector.Cancel}" 
+                            <n:ImageButton x:Name="CancelButton" Text="{DynamicResource S.Cancel}" ContentWidth="24" ContentHeight="24" Style="{DynamicResource Style.Button.Horizontal.White}" Content="{DynamicResource Vector.Cancel}" 
                                            ToolTip="Esc" ToolTipService.Placement="Bottom" Height="30" Padding="4"/>
                         </n:ExtendedUniformGrid>
 

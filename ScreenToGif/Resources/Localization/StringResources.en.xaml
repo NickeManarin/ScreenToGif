@@ -8,43 +8,39 @@
     <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
     
     <!--General-->
-    <s:String x:Key="Ok">Ok</s:String>
-    <s:String x:Key="Back">Back</s:String>
-    <s:String x:Key="Cancel">Cancel</s:String>
-    <s:String x:Key="Yes">Yes</s:String>
-    <s:String x:Key="No">No</s:String>
-    <s:String x:Key="Frame">Frame</s:String>
-    <s:String x:Key="Suppress">Suppress</s:String>
-    <s:String x:Key="Preview">Preview</s:String>
+    <s:String x:Key="S.Ok">Ok</s:String>
+    <s:String x:Key="S.Back">Back</s:String>
+    <s:String x:Key="S.Cancel">Cancel</s:String>
+    <s:String x:Key="S.Yes">Yes</s:String>
+    <s:String x:Key="S.No">No</s:String>
     <s:String x:Key="S.Add">Add</s:String>
     <s:String x:Key="S.Edit">Edit</s:String>
     <s:String x:Key="S.Id">Id</s:String>
     <s:String x:Key="S.Title">Title</s:String>
     <s:String x:Key="S.Description">Description</s:String>
     <s:String x:Key="S.SelectColor">Click here to select the color.</s:String>
-
+    <s:String x:Key="Frame">Frame</s:String>
+    <s:String x:Key="Suppress">Suppress</s:String>
+    <s:String x:Key="Preview">Preview</s:String>
+    
     <!--Warning messages-->
+    <s:String x:Key="S.Crash">Oh no, the app crashed :(</s:String>
+    <s:String x:Key="S.Required">Required field.</s:String>
     <s:String x:Key="S.Warning.Net.Title">Missing Dependency</s:String>
     <s:String x:Key="S.Warning.Net.Header">Net Framework 4.8 is not present</s:String>
     <s:String x:Key="S.Warning.Net.Message">In order to properly use this app, you need to download the correct version of the .Net Framework.&#10;Would you like to open the web page to download it?</s:String>
     <s:String x:Key="S.Warning.Single.Title">Only one instance permitted</s:String>
     <s:String x:Key="S.Warning.Single.Header">The app is already running</s:String>
     <s:String x:Key="S.Warning.Single.Message">ScreenToGif is already running, but apparently there's no window open. Check you system tray, a ScreenToGif icon must be there.</s:String>
+    <s:String x:Key="S.Exiting.Title">Exiting ScreenToGif</s:String>
+    <s:String x:Key="S.Exiting.Instruction">Are you sure that you want to exit?</s:String>
+    <s:String x:Key="S.Exiting.Message">All windows will be closed and the tray icon will be removed.</s:String>  
     
-    <!--Tray Icon-->
+    <!--Tray icon-->
     <s:String x:Key="S.NewRecording">New screen recording</s:String>
     <s:String x:Key="S.NewWebcamRecording">New webcam recording</s:String>
     <s:String x:Key="S.NewBoardRecording">New board recording</s:String>
     <s:String x:Key="S.Exit">Exit</s:String>
-
-    <!--Application-->
-    <s:String x:Key="Application.Exiting.Title">Exiting ScreenToGif</s:String>
-    <s:String x:Key="Application.Exiting.Instruction">Are you sure that you want to exit?</s:String>
-    <s:String x:Key="Application.Exiting.Message">All windows will be closed and the tray icon will be removed.</s:String>   
-    
-    <!--Error messages--> 
-    <s:String x:Key="S.Crash">Oh no, the app crashed :(</s:String>
-    <s:String x:Key="S.Required">Required field.</s:String>
     
     <!--Commands-->
     <s:String x:Key="S.Command.NewRecording">New screen recording</s:String>
@@ -161,7 +157,6 @@
     <s:String x:Key="S.Options.Upload">Cloud</s:String>
     <s:String x:Key="S.Options.Donate">Donate</s:String>
     <s:String x:Key="S.Options.About">About</s:String>
-    
     <s:String x:Key="S.Options.Other">Other</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Header">Missing shortcut key for cursor following</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Message">In order to use the mouse cursor following feature, you must set a shortcut key to toggle it when needed.</s:String>
@@ -463,25 +458,26 @@
     <s:String x:Key="S.Localization.MoveRosourcePosition">To apply your custom resource, move it to the bottom of the list.</s:String>
 
     <!--Recorder-->
-    <s:String x:Key="Recorder.RecordingOptions">Recording Options:</s:String>
-    <s:String x:Key="Recorder.Snapshot">Snapshot mode</s:String>
-    <s:String x:Key="Recorder.ThinMode">Hide the title bar</s:String>
-    <s:String x:Key="Recorder.Fullscreen">Fullscreen mode</s:String>
+    <s:String x:Key="S.Recorder.RecordingOptions">Recording Options:</s:String>
+    <s:String x:Key="S.Recorder.Snapshot">Snapshot mode</s:String>
+    <s:String x:Key="S.Recorder.ThinMode">Hide the title bar</s:String>
+    <s:String x:Key="S.Recorder.Fullscreen">Fullscreen mode</s:String>
 
-    <s:String x:Key="Recorder.Record">Record</s:String>
-    <s:String x:Key="Recorder.Pause">Pause</s:String>
-    <s:String x:Key="Recorder.Continue">Continue</s:String>
-    <s:String x:Key="Recorder.Stop">Stop</s:String>
-    <s:String x:Key="Recorder.Discard">Discard</s:String>
-    <s:String x:Key="Recorder.Snap">Snap</s:String>
-    <s:String x:Key="Recorder.Height">Height</s:String>
-    <s:String x:Key="Recorder.Width">Width</s:String>
-    <s:String x:Key="Recorder.Fps">Maximum Frames per Second</s:String>
-    <s:String x:Key="Recorder.Fps.Short">fps</s:String>
-    <s:String x:Key="Recorder.FpsRange">Minimum to maximum fps: 1-60 fps</s:String>
-    <s:String x:Key="Recorder.SnapToWindow">Snap to Window (Drag and release to snap)</s:String>
-    <s:String x:Key="Recorder.PreStart">Pre Start</s:String>
-    <s:String x:Key="Recorder.Paused">ScreenToGif (Paused)</s:String>
+    <s:String x:Key="S.Recorder.Record">Record</s:String>
+    <s:String x:Key="S.Recorder.Pause">Pause</s:String>
+    <s:String x:Key="S.Recorder.Continue">Continue</s:String>
+    <s:String x:Key="S.Recorder.Stop">Stop</s:String>
+    <s:String x:Key="S.Recorder.Discard">Discard</s:String>
+    <s:String x:Key="S.Recorder.Snap">Snap</s:String>
+    <s:String x:Key="S.Recorder.Height">Height</s:String>
+    <s:String x:Key="S.Recorder.Width">Width</s:String>
+    <s:String x:Key="S.Recorder.Fps">Maximum Frames per Second</s:String>
+    <s:String x:Key="S.Recorder.Fps.Short">fps</s:String>
+    <s:String x:Key="S.Recorder.FpsRange">Minimum to maximum fps: 1-60 fps</s:String>
+    <s:String x:Key="S.Recorder.SnapToWindow">Snap to Window (Drag and release to snap)</s:String>
+    <s:String x:Key="S.Recorder.PreStart">Pre Start</s:String>
+    <s:String x:Key="S.Recorder.Paused">ScreenToGif (Paused)</s:String>
+    <s:String x:Key="S.Recorder.Stopping">Stopping...</s:String>
     
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible">It was not possible to capture the screen</s:String>
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">It was not possible to capture the screen. The capture method returned no frame after 5 tries.</s:String>
@@ -489,7 +485,7 @@
     <s:String x:Key="S.Recorder.Warning.Windows8">Windows 8 or newer is required for capturing the screen using the Desktop Duplication API.</s:String>
     <s:String x:Key="S.Recorder.Warning.MissingSharpDx">The SharpDx libraries are required in order to capture the screen using the Desktop Duplication API. Go to Options > Extras to download it.</s:String>
     
-    <!--New Recorder-->
+    <!--New recorder-->
     <s:String x:Key="S.Recorder.Area">Area</s:String>
     <s:String x:Key="S.Recorder.Window">Window</s:String>
     <s:String x:Key="S.Recorder.Screen">Screen</s:String>
@@ -500,43 +496,42 @@
     <s:String x:Key="S.Recorder.SelectArea.Embedded">Click and drag to select an area</s:String>
     <s:String x:Key="S.Recorder.SelectWindow">Click here to select this window</s:String>
     <s:String x:Key="S.Recorder.SelectScreen">Click here to select this screen</s:String>
-    
     <s:String x:Key="S.Recorder.EscToCancel">Press Esc to cancel</s:String>
     
-    <!--Webcam Recorder-->
-    <s:String x:Key="Webcam.Title">ScreenToGif - Webcam Recorder</s:String>
-    <s:String x:Key="Webcam.NoVideo">No video device detected :(</s:String>
-    <s:String x:Key="Webcam.CheckVideoDevices">Check for video devices.</s:String>
-    <s:String x:Key="Webcam.Scale">Scale: {0:0.##}x</s:String>
-    <s:String x:Key="Webcam.ChangeScale">Change the scale of the video.</s:String>
+    <!--Webcam recorder-->
+    <s:String x:Key="S.Webcam.Title">ScreenToGif - Webcam Recorder</s:String>
+    <s:String x:Key="S.Webcam.NoVideo">No video device detected :(</s:String>
+    <s:String x:Key="S.Webcam.CheckVideoDevices">Check for video devices.</s:String>
+    <s:String x:Key="S.Webcam.Scale">Scale: {0:0.##}x</s:String>
+    <s:String x:Key="S.Webcam.ChangeScale">Change the scale of the video.</s:String>
     
-    <!--Board Recorder-->
-    <s:String x:Key="Board.Title">ScreenToGif - Board Recorder</s:String>
-    <s:String x:Key="Board.AutoRecord">Auto Record</s:String>
-    <s:String x:Key="Board.AutoRecordToolTip">Enables recording while drawing.</s:String>
-    <s:String x:Key="Board.CtrlHold">Ctrl [Hold]</s:String>
+    <!--Board recorder-->
+    <s:String x:Key="S.Board.Title">ScreenToGif - Board Recorder</s:String>
+    <s:String x:Key="S.Board.AutoRecord">Auto Record</s:String>
+    <s:String x:Key="S.Board.AutoRecordToolTip">Enables recording while drawing.</s:String>
+    <s:String x:Key="S.Board.CtrlHold">Ctrl [Hold]</s:String>
     
-    <!--Color Selector-->
-    <s:String x:Key="ColorSelector.Title">Color Selector</s:String>
-    <s:String x:Key="ColorSelector.Select">Select a Color</s:String>
-    <s:String x:Key="ColorSelector.Red">Red</s:String>
-    <s:String x:Key="ColorSelector.Green">Green</s:String>
-    <s:String x:Key="ColorSelector.Blue">Blue</s:String>
-    <s:String x:Key="ColorSelector.Alpha">Alpha</s:String>
-    <s:String x:Key="ColorSelector.Hexadecimal">Hex</s:String>
-    <s:String x:Key="ColorSelector.Initial">Initial Color</s:String>
-    <s:String x:Key="ColorSelector.Current">Current Color</s:String>
-    <s:String x:Key="ColorSelector.Latest">Latest Color</s:String>
-    <s:String x:Key="ColorSelector.Sample">Drag this to&#x0d;sample colors</s:String>
-    <s:String x:Key="ColorSelector.Sample.Info">Click and drag to pick&#x0d;colors from your screen.</s:String>
+    <!--Color selector-->
+    <s:String x:Key="S.ColorSelector.Title">Color Selector</s:String>
+    <s:String x:Key="S.ColorSelector.Select">Select a Color</s:String>
+    <s:String x:Key="S.ColorSelector.Red">Red</s:String>
+    <s:String x:Key="S.ColorSelector.Green">Green</s:String>
+    <s:String x:Key="S.ColorSelector.Blue">Blue</s:String>
+    <s:String x:Key="S.ColorSelector.Alpha">Alpha</s:String>
+    <s:String x:Key="S.ColorSelector.Hexadecimal">Hex</s:String>
+    <s:String x:Key="S.ColorSelector.Initial">Initial Color</s:String>
+    <s:String x:Key="S.ColorSelector.Current">Current Color</s:String>
+    <s:String x:Key="S.ColorSelector.Latest">Latest Color</s:String>
+    <s:String x:Key="S.ColorSelector.Sample">Drag this to&#x0d;sample colors</s:String>
+    <s:String x:Key="S.ColorSelector.Sample.Info">Click and drag to pick&#x0d;colors from your screen.</s:String>
     
-    <!--Exception Viewer, Optional-->
-    <s:String x:Key="ExceptionViewer.Title">Exception Viewer</s:String>
-    <s:String x:Key="ExceptionViewer.OpenInner">Open Inner Exception</s:String>
-    <s:String x:Key="ErrorDialog.Observation">Something wrong happened.</s:String>
-    <s:String x:Key="ErrorDialog.Send">Send report</s:String>
+    <!--Exception/Error viewers-->
+    <s:String x:Key="S.ExceptionViewer.Title">Exception Viewer</s:String>
+    <s:String x:Key="S.ExceptionViewer.OpenInner">Open Inner Exception</s:String>
+    <s:String x:Key="S.ErrorDialog.Observation">Something wrong happened.</s:String>
+    <s:String x:Key="S.ErrorDialog.Send">Send report</s:String>
 
-    <!--FFmpeg Preset-->
+    <!--FFmpeg preset-->
     <s:String x:Key="S.FfmpegPreset.Title">FFmpeg Preset</s:String>
     <s:String x:Key="S.FfmpegPreset.Name">Name</s:String>
     <s:String x:Key="S.FfmpegPreset.Parameters">Parameters</s:String>
@@ -544,25 +539,25 @@
     <s:String x:Key="S.FfmpegPreset.Warning.Parameter">You must type some parameters for this preset.</s:String>
     <s:String x:Key="S.FfmpegPreset.Warning.SameName">There's already a preset with the same name.</s:String>
 
-    <!--Insert Frames-->
-    <s:String x:Key="InsertFrames.Title">Insert Frames</s:String>
-    <s:String x:Key="InsertFrames.Info">Both sides should have the same size, this window allows you to reposition and resize the image and the canvas. Click to select and resize.</s:String>
-    <s:String x:Key="InsertFrames.CanvasSize">Canvas size:</s:String>
-    <s:String x:Key="InsertFrames.FitCanvas">Fit Image on Canvas</s:String>
-    <s:String x:Key="InsertFrames.FitCanvas.Info">Resizes the canvas to fit both images inside (from the top left corner).</s:String>
-    <s:String x:Key="InsertFrames.DifferentSizes">There is a difference beetwen frame sizes. You need to solve this before inserting the frames.</s:String>
-    <s:String x:Key="InsertFrames.InsertedFrames">New Frame(s)</s:String>
-    <s:String x:Key="InsertFrames.CurrentFrames">Current Frame(s)</s:String>
-    <s:String x:Key="InsertFrames.ImageSize">Image size:</s:String>
-    <s:String x:Key="InsertFrames.ImagePosition">Image position:</s:String>
-    <s:String x:Key="InsertFrames.ResetImageSizePosition">Reset Image Size&#x0d;and Position</s:String>
-    <s:String x:Key="InsertFrames.Info2">New frames will be inserted into the current list of frames at the position:</s:String>
-    <s:String x:Key="InsertFrames.Before">Before</s:String>
-    <s:String x:Key="InsertFrames.After">After</s:String>
-    <s:String x:Key="InsertFrames.Importing">Importing</s:String>
-    <s:String x:Key="InsertFrames.SelectColorFill">Select the Canvas Fill Color</s:String>
+    <!--Insert frames-->
+    <s:String x:Key="S.InsertFrames.Title">Insert Frames</s:String>
+    <s:String x:Key="S.InsertFrames.Info">Both sides should have the same size, this window allows you to reposition and resize the image and the canvas. Click to select and resize.</s:String>
+    <s:String x:Key="S.InsertFrames.CanvasSize">Canvas size:</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas">Fit Image on Canvas</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas.Info">Resizes the canvas to fit both images inside (from the top left corner).</s:String>
+    <s:String x:Key="S.InsertFrames.DifferentSizes">There is a difference beetwen frame sizes. You need to solve this before inserting the frames.</s:String>
+    <s:String x:Key="S.InsertFrames.InsertedFrames">New Frame(s)</s:String>
+    <s:String x:Key="S.InsertFrames.CurrentFrames">Current Frame(s)</s:String>
+    <s:String x:Key="S.InsertFrames.ImageSize">Image size:</s:String>
+    <s:String x:Key="S.InsertFrames.ImagePosition">Image position:</s:String>
+    <s:String x:Key="S.InsertFrames.ResetImageSizePosition">Reset Image Size&#x0d;and Position</s:String>
+    <s:String x:Key="S.InsertFrames.Info2">New frames will be inserted into the current list of frames at the position:</s:String>
+    <s:String x:Key="S.InsertFrames.Before">Before</s:String>
+    <s:String x:Key="S.InsertFrames.After">After</s:String>
+    <s:String x:Key="S.InsertFrames.Importing">Importing</s:String>
+    <s:String x:Key="S.InsertFrames.SelectColorFill">Select the Canvas Fill Color</s:String>
 
-    <!--Import Frames From Video-->
+    <!--Import frames from video-->
     <s:String x:Key="S.ImportVideo.Title">Import frames from video</s:String>
     <s:String x:Key="S.ImportVideo.Importer">Importer:</s:String>
     <s:String x:Key="S.ImportVideo.Loading">Loading...</s:String>
@@ -641,7 +636,7 @@
     <s:String x:Key="Welcome.Size">The lower the framerate, the color count or the amount of changes between frames, the smaller the size</s:String>
     <s:String x:Key="Welcome.Contact">Do you want to talk? Open "Options > About" for contact methods</s:String>
     <s:String x:Key="Welcome.Trouble">Having trouble? Contact me via the Feedback tool</s:String>
-    <s:String x:Key="Welcome.NewRecorder">Would you like to try out the new recorder? Head over to "Options > Application" to enable it</s:String>
+    <s:String x:Key="Welcome.NewRecorder">Would you like to try out the new recorder?&#x0d;Head over to "Options > Application" to enable it</s:String>
     
     <!--File • New-->
     <s:String x:Key="Editor.File.New.Recording">Recording</s:String>
@@ -875,41 +870,41 @@
     <s:String x:Key="Editor.Warning.LowSpace">There's not enough space left on the drive where this app stores its cache ({0}% left). Click here to open Options > Temporary Files to free some space.</s:String>
     
     <!--Hints-->
-    <s:String x:Key="Hint.NewRecording">New recording created</s:String>
-    <s:String x:Key="Hint.NewWebcamRecording">New webcam recording created</s:String>
-    <s:String x:Key="Hint.NewBoardRecording">New board recording created</s:String>
-    <s:String x:Key="Hint.NewAnimation">New project created</s:String>
-    <s:String x:Key="Hint.Undo">Undo executed</s:String>
-    <s:String x:Key="Hint.Reset">Reset executed</s:String>
-    <s:String x:Key="Hint.Redo">Redo executed</s:String>
-    <s:String x:Key="Hint.Cut">{0} frame(s) cut</s:String>
-    <s:String x:Key="Hint.Copy">{0} frame(s) copied</s:String>
-    <s:String x:Key="Hint.Paste">{0} frame(s) pasted</s:String>
-    <s:String x:Key="Hint.Zoom">Zoom set to {0}%</s:String>
-    <s:String x:Key="Hint.SelectAll">All frames were selected</s:String>
-    <s:String x:Key="Hint.SelectSingle">Frame #{0} selected</s:String>
-    <s:String x:Key="Hint.SelectInverse">Selection inversed</s:String>
-    <s:String x:Key="Hint.Deselect">All frames were deselected</s:String>
-    <s:String x:Key="Hint.DeleteFrames">{0} frame(s) deleted</s:String>
-    <s:String x:Key="Hint.Reverse">Frame list reversed</s:String>
-    <s:String x:Key="Hint.Yoyo">Yoyo effect applied</s:String>
-    <s:String x:Key="Hint.MoveLeft">Frame(s) moved to the left</s:String>
-    <s:String x:Key="Hint.MoveRight">Frame(s) moved to the right</s:String>
-    <s:String x:Key="Hint.Resize">Frames resized</s:String>
-    <s:String x:Key="Hint.Crop">Frames cropped</s:String>
-    <s:String x:Key="Hint.FlipRotate">Frames flipped/rotated</s:String>
-    <s:String x:Key="Hint.FlipRotate2">The flip action applies to the selected frames and the rotate applies to all frames</s:String>
-    <s:String x:Key="Hint.ApplyAll">This action applies to all frames</s:String>
-    <s:String x:Key="Hint.ApplySelected">This action applies to selected frames</s:String>
-    <s:String x:Key="Hint.ApplySelectedOrAll">This action applies to all or selected frames, depending on your settings</s:String>
-    <s:String x:Key="Hint.Cinemagraph">The cinemagraph applies to all frames based on the first frame</s:String>
-    <s:String x:Key="Hint.Overlay">Overlay applied</s:String>
-    <s:String x:Key="Hint.TitleFrame">Title frame created</s:String>
-    <s:String x:Key="Hint.TitleFrame2">The title frame will be inserted before the selected frame</s:String>
-    <s:String x:Key="Hint.Delay">Duration (delay) altered</s:String>
-    <s:String x:Key="Hint.Transition">Transition inserted</s:String>
-    <s:String x:Key="Hint.Reduce">Framerate reduced</s:String>
-    <s:String x:Key="Hint.Duplicates">Duplicates removed</s:String>
+    <s:String x:Key="S.Hint.NewRecording">New recording created</s:String>
+    <s:String x:Key="S.Hint.NewWebcamRecording">New webcam recording created</s:String>
+    <s:String x:Key="S.Hint.NewBoardRecording">New board recording created</s:String>
+    <s:String x:Key="S.Hint.NewAnimation">New project created</s:String>
+    <s:String x:Key="S.Hint.Undo">Undo executed</s:String>
+    <s:String x:Key="S.Hint.Reset">Reset executed</s:String>
+    <s:String x:Key="S.Hint.Redo">Redo executed</s:String>
+    <s:String x:Key="S.Hint.Cut">{0} frame(s) cut</s:String>
+    <s:String x:Key="S.Hint.Copy">{0} frame(s) copied</s:String>
+    <s:String x:Key="S.Hint.Paste">{0} frame(s) pasted</s:String>
+    <s:String x:Key="S.Hint.Zoom">Zoom set to {0}%</s:String>
+    <s:String x:Key="S.Hint.SelectAll">All frames were selected</s:String>
+    <s:String x:Key="S.Hint.SelectSingle">Frame #{0} selected</s:String>
+    <s:String x:Key="S.Hint.SelectInverse">Selection inversed</s:String>
+    <s:String x:Key="S.Hint.Deselect">All frames were deselected</s:String>
+    <s:String x:Key="S.Hint.DeleteFrames">{0} frame(s) deleted</s:String>
+    <s:String x:Key="S.Hint.Reverse">Frame list reversed</s:String>
+    <s:String x:Key="S.Hint.Yoyo">Yoyo effect applied</s:String>
+    <s:String x:Key="S.Hint.MoveLeft">Frame(s) moved to the left</s:String>
+    <s:String x:Key="S.Hint.MoveRight">Frame(s) moved to the right</s:String>
+    <s:String x:Key="S.Hint.Resize">Frames resized</s:String>
+    <s:String x:Key="S.Hint.Crop">Frames cropped</s:String>
+    <s:String x:Key="S.Hint.FlipRotate">Frames flipped/rotated</s:String>
+    <s:String x:Key="S.Hint.FlipRotate2">The flip action applies to the selected frames and the rotate applies to all frames</s:String>
+    <s:String x:Key="S.Hint.ApplyAll">This action applies to all frames</s:String>
+    <s:String x:Key="S.Hint.ApplySelected">This action applies to selected frames</s:String>
+    <s:String x:Key="S.Hint.ApplySelectedOrAll">This action applies to all or selected frames, depending on your settings</s:String>
+    <s:String x:Key="S.Hint.Cinemagraph">The cinemagraph applies to all frames based on the first frame</s:String>
+    <s:String x:Key="S.Hint.Overlay">Overlay applied</s:String>
+    <s:String x:Key="S.Hint.TitleFrame">Title frame created</s:String>
+    <s:String x:Key="S.Hint.TitleFrame2">The title frame will be inserted before the selected frame</s:String>
+    <s:String x:Key="S.Hint.Delay">Duration (delay) altered</s:String>
+    <s:String x:Key="S.Hint.Transition">Transition inserted</s:String>
+    <s:String x:Key="S.Hint.Reduce">Framerate reduced</s:String>
+    <s:String x:Key="S.Hint.Duplicates">Duplicates removed</s:String>
     
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">Hide</s:String>
@@ -1185,9 +1180,7 @@
     <s:String x:Key="S.SaveAs.File.Increase">Increase the file number</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">Decrease the file number</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">A file with the same name already exists.</s:String>
-    
     <s:String x:Key="S.SaveAs.File.Clipboard">Save to the clipboard.</s:String>
-
     <s:String x:Key="S.SaveAs.Warning.Type">You need to select where to save the file (to a folder, to the clipboard or upload somewhere else).</s:String>
     <s:String x:Key="S.SaveAs.Warning.Commands.Empty">To execute a post encoding command, you need to type something on the commands text field.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Upload.None">No upload service selected. You need to select a destination.</s:String>

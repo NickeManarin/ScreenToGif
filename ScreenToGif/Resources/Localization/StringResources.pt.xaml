@@ -8,44 +8,40 @@
     <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
     
     <!--General-->
-    <s:String x:Key="Ok">Ok</s:String>
-    <s:String x:Key="Back">Voltar</s:String>
-    <s:String x:Key="Cancel">Cancelar</s:String>
-    <s:String x:Key="Yes">Sim</s:String>
-    <s:String x:Key="No">Não</s:String>
-    <s:String x:Key="Frame">Quadro</s:String>
-    <s:String x:Key="Suppress">Suprimir</s:String>
-    <s:String x:Key="Preview">Pré Visualização</s:String>
+    <s:String x:Key="S.Ok">Ok</s:String>
+    <s:String x:Key="S.Back">Voltar</s:String>
+    <s:String x:Key="S.Cancel">Cancelar</s:String>
+    <s:String x:Key="S.Yes">Sim</s:String>
+    <s:String x:Key="S.No">Não</s:String>
     <s:String x:Key="S.Add">Adicionar</s:String>
     <s:String x:Key="S.Edit">Editar</s:String>
     <s:String x:Key="S.Id">Cód.</s:String>
     <s:String x:Key="S.Title">Título</s:String>
     <s:String x:Key="S.Description">Descrição</s:String>
     <s:String x:Key="S.SelectColor">Clique aqui para selecionar a cor.</s:String>
-
+    <s:String x:Key="Frame">Quadro</s:String>
+    <s:String x:Key="Suppress">Suprimir</s:String>
+    <s:String x:Key="Preview">Pré Visualização</s:String>
+    
     <!--Warning messages-->
+    <s:String x:Key="S.Crash">Oh não, o aplicativo parou de funcionar :(</s:String>
+    <s:String x:Key="S.Required">Preenchimento obrigatório.</s:String>
     <s:String x:Key="S.Warning.Net.Title">Dependência Ausente</s:String>
     <s:String x:Key="S.Warning.Net.Header">O Net Framework 4.8 não está instalado</s:String>
     <s:String x:Key="S.Warning.Net.Message">Em ordem para utilizar o aplicativo, você precisa fazer o download da versão correta do .Net Framework.&#10;Gostaria de abrir a página de download?</s:String>
     <s:String x:Key="S.Warning.Single.Title">Apenas uma instância permitida</s:String>
     <s:String x:Key="S.Warning.Single.Header">O aplicativo já está executando</s:String>
     <s:String x:Key="S.Warning.Single.Message">ScreenToGif já está executando, mas aparentemente nenhuma janela está aberta. Verifique a bandeja do sistema, um ícone do ScreenToGif deve estar lá.</s:String>
-    
-    <!--Tray Icon-->
+    <s:String x:Key="S.Exiting.Title">Fechando ScreenToGif</s:String>
+    <s:String x:Key="S.Exiting.Instruction">Você tem certeza que deseja fechar?</s:String>
+    <s:String x:Key="S.Exiting.Message">Todas as janela do ScreenToGif serão fechadas e o ícone da área de notificação será removido.</s:String>   
+
+    <!--Tray icon-->
     <s:String x:Key="S.NewRecording">Nova gravação de tela</s:String>
     <s:String x:Key="S.NewWebcamRecording">Nova gravação da webcam</s:String>
     <s:String x:Key="S.NewBoardRecording">Nova gravação de quadro</s:String>
     <s:String x:Key="S.Exit">Fechar</s:String>
-
-    <!--Application-->
-    <s:String x:Key="Application.Exiting.Title">Fechando ScreenToGif</s:String>
-    <s:String x:Key="Application.Exiting.Instruction">Você tem certeza que deseja fechar?</s:String>
-    <s:String x:Key="Application.Exiting.Message">Todas as janela do ScreenToGif serão fechadas e o ícone da área de notificação será removido.</s:String>   
     
-    <!--Error messages--> 
-    <s:String x:Key="S.Crash">Oh não, o aplicativo parou de funcionar :(</s:String>
-    <s:String x:Key="S.Required">Preenchimento obrigatório.</s:String>
-
     <!--Commands-->
     <s:String x:Key="S.Command.NewRecording">Nova gravação de tela</s:String>
     <s:String x:Key="S.Command.NewWebcamRecording">Nova gravação de webcam</s:String>
@@ -161,7 +157,6 @@
     <s:String x:Key="S.Options.Upload">Nuvem</s:String>
     <s:String x:Key="S.Options.Donate">Doação</s:String>
     <s:String x:Key="S.Options.About">Sobre</s:String>
-
     <s:String x:Key="S.Options.Other">Outras configurações</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Header">Atalho de teclado ausente para a gravação via cursor</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Message">Em ordem para usar o cursor do mouse como guia para mover a área de gravação, você deve definir uma tecla de atalho para poder desabilitar quando necessário.</s:String>
@@ -463,25 +458,26 @@
     <s:String x:Key="S.Localization.MoveRosourcePosition">Para aplicar sua tradução, mova para a última posição da lista.</s:String>
 
     <!--Recorder-->
-    <s:String x:Key="Recorder.RecordingOptions">Opções de Gravação:</s:String>
-    <s:String x:Key="Recorder.Snapshot">Modo de foto</s:String>
-    <s:String x:Key="Recorder.ThinMode">Esconder a barra de título</s:String>
-    <s:String x:Key="Recorder.Fullscreen">Modo de tela cheia</s:String>
+    <s:String x:Key="S.Recorder.RecordingOptions">Opções de Gravação:</s:String>
+    <s:String x:Key="S.Recorder.Snapshot">Modo de foto</s:String>
+    <s:String x:Key="S.Recorder.ThinMode">Esconder a barra de título</s:String>
+    <s:String x:Key="S.Recorder.Fullscreen">Modo de tela cheia</s:String>
 
-    <s:String x:Key="Recorder.Record">Gravar</s:String>
-    <s:String x:Key="Recorder.Pause">Pausar</s:String>
-    <s:String x:Key="Recorder.Continue">Continuar</s:String>
-    <s:String x:Key="Recorder.Stop">Parar</s:String>
-    <s:String x:Key="Recorder.Discard">Descartar</s:String>
-    <s:String x:Key="Recorder.Snap">Foto</s:String>
-    <s:String x:Key="Recorder.Height">Altura</s:String>
-    <s:String x:Key="Recorder.Width">Largura</s:String>
-    <s:String x:Key="Recorder.Fps">Quantidade Máxima de Quadros por Segundo</s:String>
-    <s:String x:Key="Recorder.Fps.Short">fps</s:String>
-    <s:String x:Key="Recorder.FpsRange">Fps mínimo para máximo: 1-60 fps</s:String>
-    <s:String x:Key="Recorder.SnapToWindow">Enquadre na Janela (Arraste e solte para enquadrar)</s:String>
-    <s:String x:Key="Recorder.PreStart">Contagem Regressiva</s:String>
-    <s:String x:Key="Recorder.Paused">ScreenToGif (Pausado)</s:String>
+    <s:String x:Key="S.Recorder.Record">Gravar</s:String>
+    <s:String x:Key="S.Recorder.Pause">Pausar</s:String>
+    <s:String x:Key="S.Recorder.Continue">Continuar</s:String>
+    <s:String x:Key="S.Recorder.Stop">Parar</s:String>
+    <s:String x:Key="S.Recorder.Discard">Descartar</s:String>
+    <s:String x:Key="S.Recorder.Snap">Foto</s:String>
+    <s:String x:Key="S.Recorder.Height">Altura</s:String>
+    <s:String x:Key="S.Recorder.Width">Largura</s:String>
+    <s:String x:Key="S.Recorder.Fps">Quantidade Máxima de Quadros por Segundo</s:String>
+    <s:String x:Key="S.Recorder.Fps.Short">fps</s:String>
+    <s:String x:Key="S.Recorder.FpsRange">Fps mínimo para máximo: 1-60 fps</s:String>
+    <s:String x:Key="S.Recorder.SnapToWindow">Enquadre na Janela (Arraste e solte para enquadrar)</s:String>
+    <s:String x:Key="S.Recorder.PreStart">Contagem Regressiva</s:String>
+    <s:String x:Key="S.Recorder.Paused">ScreenToGif (Pausado)</s:String>
+    <s:String x:Key="S.Recorder.Stopping">Parando...</s:String>
     
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible">Não foi possível capturar a tela</s:String>
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">Não foi possível capturar a tela. O método de captura não retornou quadros após 5 tentativas.</s:String>
@@ -489,7 +485,7 @@
     <s:String x:Key="S.Recorder.Warning.Windows8">Windows 8 ou superior é necessário para capturar a tela utilizando a API de duplicação de área de trabalho.</s:String>
     <s:String x:Key="S.Recorder.Warning.MissingSharpDx">As bibliotecas do SharpDx são necessárias para se capturar a tela usando a API de duplicação de área de trabalho. Navegue até Opções > Extras para baixar SharpDx.</s:String>
     
-    <!--New Recorder-->
+    <!--New recorder-->
     <s:String x:Key="S.Recorder.Area">Área</s:String>
     <s:String x:Key="S.Recorder.Window">Janela</s:String>
     <s:String x:Key="S.Recorder.Screen">Tela</s:String>
@@ -500,43 +496,42 @@
     <s:String x:Key="S.Recorder.SelectArea.Embedded">Clique e arraste para selecionar uma área</s:String>
     <s:String x:Key="S.Recorder.SelectWindow">Clique aqui para selecionar essa janela</s:String>
     <s:String x:Key="S.Recorder.SelectScreen">Clique aqui para selecionar essa tela</s:String>
-    
     <s:String x:Key="S.Recorder.EscToCancel">Pressione Esc para cancelar</s:String>
     
-    <!--Webcam Recorder-->
-    <s:String x:Key="Webcam.Title">ScreenToGif - Gravador de Câmera</s:String>
-    <s:String x:Key="Webcam.NoVideo">Nenhum dispositivo de vídeo encontrado :(</s:String>
-    <s:String x:Key="Webcam.CheckVideoDevices">Checar dispositivos de vídeo.</s:String>
-    <s:String x:Key="Webcam.Scale">Escala: x{0:0.##}</s:String>
-    <s:String x:Key="Webcam.ChangeScale">Trocar a escala do vídeo.</s:String>
+    <!--Webcam recorder-->
+    <s:String x:Key="S.Webcam.Title">ScreenToGif - Gravador de Câmera</s:String>
+    <s:String x:Key="S.Webcam.NoVideo">Nenhum dispositivo de vídeo encontrado :(</s:String>
+    <s:String x:Key="S.Webcam.CheckVideoDevices">Checar dispositivos de vídeo.</s:String>
+    <s:String x:Key="S.Webcam.Scale">Escala: x{0:0.##}</s:String>
+    <s:String x:Key="S.Webcam.ChangeScale">Trocar a escala do vídeo.</s:String>
     
-    <!--Board Recorder-->
-    <s:String x:Key="Board.Title">ScreenToGif - Gravador de Quadro</s:String>
-    <s:String x:Key="Board.AutoRecord">Auto Gravar</s:String>
-    <s:String x:Key="Board.AutoRecordToolTip">Habilita a gravação automática enquanto você desenha.</s:String>
-    <s:String x:Key="Board.CtrlHold">Ctrl [Pressione]</s:String>
+    <!--Board recorder-->
+    <s:String x:Key="S.Board.Title">ScreenToGif - Gravador de Quadro</s:String>
+    <s:String x:Key="S.Board.AutoRecord">Auto Gravar</s:String>
+    <s:String x:Key="S.Board.AutoRecordToolTip">Habilita a gravação automática enquanto você desenha.</s:String>
+    <s:String x:Key="S.Board.CtrlHold">Ctrl [Pressione]</s:String>
     
-    <!--Color Selector-->
-    <s:String x:Key="ColorSelector.Title">Seletor de Cor</s:String>
-    <s:String x:Key="ColorSelector.Select">Selecione uma Cor</s:String>
-    <s:String x:Key="ColorSelector.Red">Vermelho</s:String>
-    <s:String x:Key="ColorSelector.Green">Verde</s:String>
-    <s:String x:Key="ColorSelector.Blue">Azul</s:String>
-    <s:String x:Key="ColorSelector.Alpha">Transparência</s:String>
-    <s:String x:Key="ColorSelector.Hexadecimal">Hexa</s:String>
-    <s:String x:Key="ColorSelector.Initial">Cor Inicial</s:String>
-    <s:String x:Key="ColorSelector.Current">Cor Atual</s:String>
-    <s:String x:Key="ColorSelector.Latest">Última Cor</s:String>
-    <s:String x:Key="ColorSelector.Sample">Arraste isso para&#x0d;escolher cores</s:String>
-    <s:String x:Key="ColorSelector.Sample.Info">Clique e arraste para escolher&#x0d;cores de outras partes da sua tela.</s:String>
+    <!--Color selector-->
+    <s:String x:Key="S.ColorSelector.Title">Seletor de Cor</s:String>
+    <s:String x:Key="S.ColorSelector.Select">Selecione uma Cor</s:String>
+    <s:String x:Key="S.ColorSelector.Red">Vermelho</s:String>
+    <s:String x:Key="S.ColorSelector.Green">Verde</s:String>
+    <s:String x:Key="S.ColorSelector.Blue">Azul</s:String>
+    <s:String x:Key="S.ColorSelector.Alpha">Transparência</s:String>
+    <s:String x:Key="S.ColorSelector.Hexadecimal">Hexa</s:String>
+    <s:String x:Key="S.ColorSelector.Initial">Cor Inicial</s:String>
+    <s:String x:Key="S.ColorSelector.Current">Cor Atual</s:String>
+    <s:String x:Key="S.ColorSelector.Latest">Última Cor</s:String>
+    <s:String x:Key="S.ColorSelector.Sample">Arraste isso para&#x0d;escolher cores</s:String>
+    <s:String x:Key="S.ColorSelector.Sample.Info">Clique e arraste para escolher&#x0d;cores de outras partes da sua tela.</s:String>
     
-    <!--Exception Viewer, Optional-->
-    <s:String x:Key="ExceptionViewer.Title">Visualizador de Exceções</s:String>
-    <s:String x:Key="ExceptionViewer.OpenInner">Abrir Exceção Interna</s:String>
-    <s:String x:Key="ErrorDialog.Observation">Algo de errado aconteceu.</s:String>
-    <s:String x:Key="ErrorDialog.Send">Enviar relatório</s:String>
+    <!--Exception/Error viewers-->
+    <s:String x:Key="S.ExceptionViewer.Title">Visualizador de Exceções</s:String>
+    <s:String x:Key="S.ExceptionViewer.OpenInner">Abrir Exceção Interna</s:String>
+    <s:String x:Key="S.ErrorDialog.Observation">Algo de errado aconteceu.</s:String>
+    <s:String x:Key="S.ErrorDialog.Send">Enviar relatório</s:String>
 
-    <!--FFmpeg Preset-->
+    <!--FFmpeg preset-->
     <s:String x:Key="S.FfmpegPreset.Title">Perfis do FFmpeg</s:String>
     <s:String x:Key="S.FfmpegPreset.Name">Nome</s:String>
     <s:String x:Key="S.FfmpegPreset.Parameters">Parâmetros</s:String>
@@ -544,25 +539,25 @@
     <s:String x:Key="S.FfmpegPreset.Warning.Parameter">Você deve escrever algum parâmetro para esse perfil.</s:String>
     <s:String x:Key="S.FfmpegPreset.Warning.SameName">Já existe um perfil com o mesmo nome.</s:String>
 
-    <!--Insert Frames-->
-    <s:String x:Key="InsertFrames.Title">Inserir Quadros</s:String>
-    <s:String x:Key="InsertFrames.Info">Ambos os lados devem ter o mesmo tamanho, esta janela permite o reposicionamento e redimensionamento da imagem e o plano de fundo. Clique para selecionar e redimensionar.</s:String>
-    <s:String x:Key="InsertFrames.CanvasSize">Tamanho do plano de fundo:</s:String>
-    <s:String x:Key="InsertFrames.FitCanvas">Ajustar a imagem no plano</s:String>
-    <s:String x:Key="InsertFrames.FitCanvas.Info">Redimensiona o plano de fundo para caber as duas imagens dentro (a partir do canto superior esquerdo).</s:String>
-    <s:String x:Key="InsertFrames.DifferentSizes">Existe uma diferença de tamanho entre os quadros. Você precisa resolver isso antes de inseri-los.</s:String>
-    <s:String x:Key="InsertFrames.InsertedFrames">Novo(s) Quadro(s)</s:String>
-    <s:String x:Key="InsertFrames.CurrentFrames">Quadro(s) Atual(is)</s:String>
-    <s:String x:Key="InsertFrames.ImageSize">Tamanho da imagem:</s:String>
-    <s:String x:Key="InsertFrames.ImagePosition">Posição da imagem:</s:String>
-    <s:String x:Key="InsertFrames.ResetImageSizePosition">Redefinir o tamanho da&#x0d;imagem e a posição</s:String>
-    <s:String x:Key="InsertFrames.Info2">Novos quadros serão inseridos na lista atual de quadros na posição:</s:String>
-    <s:String x:Key="InsertFrames.Before">Antes</s:String>
-    <s:String x:Key="InsertFrames.After">Depois</s:String>
-    <s:String x:Key="InsertFrames.Importing">Importando</s:String>
-    <s:String x:Key="InsertFrames.SelectColorFill">Selecione a Cor de Fundo</s:String>
+    <!--Insert frames-->
+    <s:String x:Key="S.InsertFrames.Title">Inserir Quadros</s:String>
+    <s:String x:Key="S.InsertFrames.Info">Ambos os lados devem ter o mesmo tamanho, esta janela permite o reposicionamento e redimensionamento da imagem e o plano de fundo. Clique para selecionar e redimensionar.</s:String>
+    <s:String x:Key="S.InsertFrames.CanvasSize">Tamanho do plano de fundo:</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas">Ajustar a imagem no plano</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas.Info">Redimensiona o plano de fundo para caber as duas imagens dentro (a partir do canto superior esquerdo).</s:String>
+    <s:String x:Key="S.InsertFrames.DifferentSizes">Existe uma diferença de tamanho entre os quadros. Você precisa resolver isso antes de inseri-los.</s:String>
+    <s:String x:Key="S.InsertFrames.InsertedFrames">Novo(s) Quadro(s)</s:String>
+    <s:String x:Key="S.InsertFrames.CurrentFrames">Quadro(s) Atual(is)</s:String>
+    <s:String x:Key="S.InsertFrames.ImageSize">Tamanho da imagem:</s:String>
+    <s:String x:Key="S.InsertFrames.ImagePosition">Posição da imagem:</s:String>
+    <s:String x:Key="S.InsertFrames.ResetImageSizePosition">Redefinir o tamanho da&#x0d;imagem e a posição</s:String>
+    <s:String x:Key="S.InsertFrames.Info2">Novos quadros serão inseridos na lista atual de quadros na posição:</s:String>
+    <s:String x:Key="S.InsertFrames.Before">Antes</s:String>
+    <s:String x:Key="S.InsertFrames.After">Depois</s:String>
+    <s:String x:Key="S.InsertFrames.Importing">Importando</s:String>
+    <s:String x:Key="S.InsertFrames.SelectColorFill">Selecione a Cor de Fundo</s:String>
 
-    <!--Import Frames From Video-->
+    <!--Import frames from video-->
     <s:String x:Key="S.ImportVideo.Title">Importar Quadros do Vídeo</s:String>
     <s:String x:Key="S.ImportVideo.Importer">Importador:</s:String>
     <s:String x:Key="S.ImportVideo.Loading">Carregando...</s:String>
@@ -875,41 +870,41 @@
     <s:String x:Key="Editor.Warning.LowSpace">Não há espaço suficiente na unidade de armazenamento em que este aplicativo guarda seu cache ({0}% restantes). Clique aqui para abrir Opções > Arquivos Temporarios para liberar algum espaço.</s:String>
     
     <!--Hints-->
-    <s:String x:Key="Hint.NewRecording">Nova gravação criada</s:String>
-    <s:String x:Key="Hint.NewWebcamRecording">Nova gravação de webcam criada</s:String>
-    <s:String x:Key="Hint.NewBoardRecording">Nova gravação de quadro criada</s:String>
-    <s:String x:Key="Hint.NewAnimation">Nova animação criada</s:String>
-    <s:String x:Key="Hint.Undo">Desfazer executado</s:String>
-    <s:String x:Key="Hint.Reset">Redefinir executado</s:String>
-    <s:String x:Key="Hint.Redo">Refazer executado</s:String>
-    <s:String x:Key="Hint.Cut">{0} quadros(s) recortado(s)</s:String>
-    <s:String x:Key="Hint.Copy">{0} quadros(s) copiado(s)</s:String>
-    <s:String x:Key="Hint.Paste">{0} quadros(s) colado(s)</s:String>
-    <s:String x:Key="Hint.Zoom">Zoom em {0}%</s:String>
-    <s:String x:Key="Hint.SelectAll">Todos os quadros foram selecionados</s:String>
-    <s:String x:Key="Hint.SelectSingle">Quadro #{0} selecionado</s:String>
-    <s:String x:Key="Hint.SelectInverse">Seleção invertida</s:String>
-    <s:String x:Key="Hint.Deselect">Todos os quadros foram desselecionados</s:String>
-    <s:String x:Key="Hint.DeleteFrames">{0} quadros(s) removidos</s:String>
-    <s:String x:Key="Hint.Reverse">Lista de quadros invertida</s:String>
-    <s:String x:Key="Hint.Yoyo">Efeito ioiô aplicado</s:String>
-    <s:String x:Key="Hint.MoveLeft">Quadro(s) movidos para a esquerda</s:String>
-    <s:String x:Key="Hint.MoveRight">Quadro(s) movidos para a direita</s:String>
-    <s:String x:Key="Hint.Resize">Quadros redimensionados</s:String>
-    <s:String x:Key="Hint.Crop">Quadros cortados</s:String>
-    <s:String x:Key="Hint.FlipRotate">Quadros girados/espelhados</s:String>
-    <s:String x:Key="Hint.FlipRotate2">A ação de espelhar se aplica para os quadros selecionados e a ação de girar se aplica a todos os quadros</s:String>
-    <s:String x:Key="Hint.ApplyAll">Esta ação se aplica a todos os quadros</s:String>
-    <s:String x:Key="Hint.ApplySelected">Esta ação se aplica a os quadros selecionados</s:String>
-    <s:String x:Key="Hint.ApplySelectedOrAll">Esta ação se aplica a todos os quadros ou apenas os selecionados, dependendo da sua configuração</s:String>
-    <s:String x:Key="Hint.Cinemagraph">A cinemagrafia se aplica a todos os quadros, baseando-se no primeiro quadro</s:String>
-    <s:String x:Key="Hint.Overlay">Sobreposição aplicada</s:String>
-    <s:String x:Key="Hint.TitleFrame">Quadro de título criado</s:String>
-    <s:String x:Key="Hint.TitleFrame2">O quadro de título será inserido antes do quadro selecionado</s:String>
-    <s:String x:Key="Hint.Delay">Atraso (duração) alterado</s:String>
-    <s:String x:Key="Hint.Transition">Transição inserida</s:String>
-    <s:String x:Key="Hint.Reduce">Quantidade de quadros reduzida</s:String>
-    <s:String x:Key="Hint.Duplicates">Quadros duplicados removidos</s:String>
+    <s:String x:Key="S.Hint.NewRecording">Nova gravação criada</s:String>
+    <s:String x:Key="S.Hint.NewWebcamRecording">Nova gravação de webcam criada</s:String>
+    <s:String x:Key="S.Hint.NewBoardRecording">Nova gravação de quadro criada</s:String>
+    <s:String x:Key="S.Hint.NewAnimation">Nova animação criada</s:String>
+    <s:String x:Key="S.Hint.Undo">Desfazer executado</s:String>
+    <s:String x:Key="S.Hint.Reset">Redefinir executado</s:String>
+    <s:String x:Key="S.Hint.Redo">Refazer executado</s:String>
+    <s:String x:Key="S.Hint.Cut">{0} quadros(s) recortado(s)</s:String>
+    <s:String x:Key="S.Hint.Copy">{0} quadros(s) copiado(s)</s:String>
+    <s:String x:Key="S.Hint.Paste">{0} quadros(s) colado(s)</s:String>
+    <s:String x:Key="S.Hint.Zoom">Zoom em {0}%</s:String>
+    <s:String x:Key="S.Hint.SelectAll">Todos os quadros foram selecionados</s:String>
+    <s:String x:Key="S.Hint.SelectSingle">Quadro #{0} selecionado</s:String>
+    <s:String x:Key="S.Hint.SelectInverse">Seleção invertida</s:String>
+    <s:String x:Key="S.Hint.Deselect">Todos os quadros foram desselecionados</s:String>
+    <s:String x:Key="S.Hint.DeleteFrames">{0} quadros(s) removidos</s:String>
+    <s:String x:Key="S.Hint.Reverse">Lista de quadros invertida</s:String>
+    <s:String x:Key="S.Hint.Yoyo">Efeito ioiô aplicado</s:String>
+    <s:String x:Key="S.Hint.MoveLeft">Quadro(s) movidos para a esquerda</s:String>
+    <s:String x:Key="S.Hint.MoveRight">Quadro(s) movidos para a direita</s:String>
+    <s:String x:Key="S.Hint.Resize">Quadros redimensionados</s:String>
+    <s:String x:Key="S.Hint.Crop">Quadros cortados</s:String>
+    <s:String x:Key="S.Hint.FlipRotate">Quadros girados/espelhados</s:String>
+    <s:String x:Key="S.Hint.FlipRotate2">A ação de espelhar se aplica para os quadros selecionados e a ação de girar se aplica a todos os quadros</s:String>
+    <s:String x:Key="S.Hint.ApplyAll">Esta ação se aplica a todos os quadros</s:String>
+    <s:String x:Key="S.Hint.ApplySelected">Esta ação se aplica a os quadros selecionados</s:String>
+    <s:String x:Key="S.Hint.ApplySelectedOrAll">Esta ação se aplica a todos os quadros ou apenas os selecionados, dependendo da sua configuração</s:String>
+    <s:String x:Key="S.Hint.Cinemagraph">A cinemagrafia se aplica a todos os quadros, baseando-se no primeiro quadro</s:String>
+    <s:String x:Key="S.Hint.Overlay">Sobreposição aplicada</s:String>
+    <s:String x:Key="S.Hint.TitleFrame">Quadro de título criado</s:String>
+    <s:String x:Key="S.Hint.TitleFrame2">O quadro de título será inserido antes do quadro selecionado</s:String>
+    <s:String x:Key="S.Hint.Delay">Atraso (duração) alterado</s:String>
+    <s:String x:Key="S.Hint.Transition">Transição inserida</s:String>
+    <s:String x:Key="S.Hint.Reduce">Quantidade de quadros reduzida</s:String>
+    <s:String x:Key="S.Hint.Duplicates">Quadros duplicados removidos</s:String>
     
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">Esconder</s:String>
@@ -917,6 +912,7 @@
     <s:String x:Key="Action.Open">Abrir</s:String>
     <s:String x:Key="Action.Save">Salvar</s:String>
     <s:String x:Key="Action.Cancel">Cancelar</s:String>
+    
     <s:String x:Key="Size">Tamanho</s:String>
     <s:String x:Key="Background">Plano de Fundo</s:String>
     <s:String x:Key="Color">Cor:</s:String>
@@ -1185,9 +1181,7 @@
     <s:String x:Key="S.SaveAs.File.Increase">Incremente o nome do arquivo.</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">Decremente o nome do arquivo.</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">Um arquivo com o mesmo nome já existe na pasta selecionada.</s:String>
-    
-    <s:String x:Key="S.SaveAs.File.Clipboard">Savar na área de transferência.</s:String>
-
+    <s:String x:Key="S.SaveAs.File.Clipboard">Salvar na área de transferência.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Type">Você precisa selecionar onde salvar o arquivo (em uma pasta, na área de transferência ou para fazer upload).</s:String>
     <s:String x:Key="S.SaveAs.Warning.Commands.Empty">Para executar um comando após a codificação, você precisa escrever o comando na caixa de texto.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Upload.None">Nenhum serviço de upload selecionado. Você precisa selecionar um destino.</s:String>

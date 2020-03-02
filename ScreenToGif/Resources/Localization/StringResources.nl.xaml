@@ -8,11 +8,11 @@
     <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
     
     <!--General-->
-    <s:String x:Key="Ok">OK</s:String>
-    <s:String x:Key="Back">Terug</s:String>
-    <s:String x:Key="Cancel">Annuleren</s:String>
-    <s:String x:Key="Yes">Ja</s:String>
-    <s:String x:Key="No">Nee</s:String>
+    <s:String x:Key="S.Ok">OK</s:String>
+    <s:String x:Key="S.Back">Terug</s:String>
+    <s:String x:Key="S.Cancel">Annuleren</s:String>
+    <s:String x:Key="S.Yes">Ja</s:String>
+    <s:String x:Key="S.No">Nee</s:String>
     <s:String x:Key="Frame">Frame</s:String>
     <s:String x:Key="Suppress">Onderdrukken</s:String>
     <s:String x:Key="Preview">Voorvertoning</s:String>
@@ -30,9 +30,9 @@
     <s:String x:Key="S.Exit">Afsluiten</s:String>
 
     <!--Application-->
-    <s:String x:Key="Application.Exiting.Title">ScreenToGif afsluiten</s:String>
-    <s:String x:Key="Application.Exiting.Instruction">Weet u zeker dat u wilt afsluiten?</s:String>
-    <s:String x:Key="Application.Exiting.Message">Alle schermen worden gesloten en het pictogram wordt van de taakbalk verwijderd.</s:String>
+    <s:String x:Key="S.Exiting.Title">ScreenToGif afsluiten</s:String>
+    <s:String x:Key="S.Exiting.Instruction">Weet u zeker dat u wilt afsluiten?</s:String>
+    <s:String x:Key="S.Exiting.Message">Alle schermen worden gesloten en het pictogram wordt van de taakbalk verwijderd.</s:String>
     
     <!--Error messages--> 
     <s:String x:Key="S.Crash">O nee, het programma is vastgelopen :(</s:String>
@@ -290,25 +290,25 @@
     <s:String x:Key="S.Localization.MoveRosourcePosition">Om het eigen gemaakte vertaalbestand te gebruiken, verplaats het naar onderkant lijst.</s:String>
 
     <!--Recorder-->
-    <s:String x:Key="Recorder.RecordingOptions">Opname-opties:</s:String>
-    <s:String x:Key="Recorder.Snapshot">Foto-opname</s:String>
-    <s:String x:Key="Recorder.ThinMode">Titelbalk verbergen</s:String>
-    <s:String x:Key="Recorder.Fullscreen">Volledig scherm</s:String>
+    <s:String x:Key="S.Recorder.RecordingOptions">Opname-opties:</s:String>
+    <s:String x:Key="S.Recorder.Snapshot">Foto-opname</s:String>
+    <s:String x:Key="S.Recorder.ThinMode">Titelbalk verbergen</s:String>
+    <s:String x:Key="S.Recorder.Fullscreen">Volledig scherm</s:String>
 
-    <s:String x:Key="Recorder.Record">Opnemen</s:String>
-    <s:String x:Key="Recorder.Pause">Pauze</s:String>
-    <s:String x:Key="Recorder.Continue">Doorgaan</s:String>
-    <s:String x:Key="Recorder.Stop">Stoppen</s:String>
-    <s:String x:Key="Recorder.Discard">Afbreken</s:String>
-    <s:String x:Key="Recorder.Snap">Foto</s:String>
-    <s:String x:Key="Recorder.Height">Hoogte</s:String>
-    <s:String x:Key="Recorder.Width">Breedte</s:String>
-    <s:String x:Key="Recorder.Fps">Maximum frames per seconde</s:String>
-    <s:String x:Key="Recorder.Fps.Short">fps</s:String>
-    <s:String x:Key="Recorder.FpsRange">Minimum - maximum fps: 1-60 fps</s:String>
-    <s:String x:Key="Recorder.SnapToWindow">Aanpassen aan venstergrootte (Sleep en laat los om aan te passen)</s:String>
-    <s:String x:Key="Recorder.PreStart">Aftellen</s:String>
-    <s:String x:Key="Recorder.Paused">ScreenToGif (gepauzeerd)</s:String>
+    <s:String x:Key="S.Recorder.Record">Opnemen</s:String>
+    <s:String x:Key="S.Recorder.Pause">Pauze</s:String>
+    <s:String x:Key="S.Recorder.Continue">Doorgaan</s:String>
+    <s:String x:Key="S.Recorder.Stop">Stoppen</s:String>
+    <s:String x:Key="S.Recorder.Discard">Afbreken</s:String>
+    <s:String x:Key="S.Recorder.Snap">Foto</s:String>
+    <s:String x:Key="S.Recorder.Height">Hoogte</s:String>
+    <s:String x:Key="S.Recorder.Width">Breedte</s:String>
+    <s:String x:Key="S.Recorder.Fps">Maximum frames per seconde</s:String>
+    <s:String x:Key="S.Recorder.Fps.Short">fps</s:String>
+    <s:String x:Key="S.Recorder.FpsRange">Minimum - maximum fps: 1-60 fps</s:String>
+    <s:String x:Key="S.Recorder.SnapToWindow">Aanpassen aan venstergrootte (Sleep en laat los om aan te passen)</s:String>
+    <s:String x:Key="S.Recorder.PreStart">Aftellen</s:String>
+    <s:String x:Key="S.Recorder.Paused">ScreenToGif (gepauzeerd)</s:String>
     
     <!--New Recorder-->
     <s:String x:Key="S.Recorder.Area">Gebied</s:String>
@@ -324,53 +324,53 @@
     <s:String x:Key="S.Recorder.EscToCancel">Druk Esc om te annuleren</s:String>
     
     <!--Webcam Recorder-->
-    <s:String x:Key="Webcam.Title">ScreenToGif - Webcam Recorder</s:String>
-    <s:String x:Key="Webcam.NoVideo">Geen apparaat voor video-opname gedetecteerd :(</s:String>
-    <s:String x:Key="Webcam.CheckVideoDevices">Controleer op apparaten voor video-opname.</s:String>
-    <s:String x:Key="Webcam.Scale">Schaal: {0:0.##}x</s:String>
-    <s:String x:Key="Webcam.ChangeScale">De schaal van de video aanpassen.</s:String>
+    <s:String x:Key="S.Webcam.Title">ScreenToGif - Webcam Recorder</s:String>
+    <s:String x:Key="S.Webcam.NoVideo">Geen apparaat voor video-opname gedetecteerd :(</s:String>
+    <s:String x:Key="S.Webcam.CheckVideoDevices">Controleer op apparaten voor video-opname.</s:String>
+    <s:String x:Key="S.Webcam.Scale">Schaal: {0:0.##}x</s:String>
+    <s:String x:Key="S.Webcam.ChangeScale">De schaal van de video aanpassen.</s:String>
     
     <!--Board Recorder-->
-    <s:String x:Key="Board.Title">ScreenToGif - Whiteboard-opname</s:String>
-    <s:String x:Key="Board.AutoRecord">Automatische opname</s:String>
-    <s:String x:Key="Board.AutoRecordToolTip">Maakt opname tijdens het tekenen mogelijk.</s:String>
-    <s:String x:Key="Board.CtrlHold">Ctrl [ingedrukt houden]</s:String>
+    <s:String x:Key="S.Board.Title">ScreenToGif - Whiteboard-opname</s:String>
+    <s:String x:Key="S.Board.AutoRecord">Automatische opname</s:String>
+    <s:String x:Key="S.Board.AutoRecordToolTip">Maakt opname tijdens het tekenen mogelijk.</s:String>
+    <s:String x:Key="S.Board.CtrlHold">Ctrl [ingedrukt houden]</s:String>
     
     <!--Color Selector-->
-    <s:String x:Key="ColorSelector.Title">Kleurkiezer</s:String>
-    <s:String x:Key="ColorSelector.Select">Kies een kleur</s:String>
-    <s:String x:Key="ColorSelector.Red">Rood</s:String>
-    <s:String x:Key="ColorSelector.Green">Groen</s:String>
-    <s:String x:Key="ColorSelector.Blue">Blauw</s:String>
-    <s:String x:Key="ColorSelector.Alpha">Alpha</s:String>
-    <s:String x:Key="ColorSelector.Hexadecimal">Hex</s:String>
-    <s:String x:Key="ColorSelector.Initial">Beginkleur</s:String>
-    <s:String x:Key="ColorSelector.Current">Huidige kleur</s:String>
-    <s:String x:Key="ColorSelector.Latest">Eindkleur</s:String>
+    <s:String x:Key="S.ColorSelector.Title">Kleurkiezer</s:String>
+    <s:String x:Key="S.ColorSelector.Select">Kies een kleur</s:String>
+    <s:String x:Key="S.ColorSelector.Red">Rood</s:String>
+    <s:String x:Key="S.ColorSelector.Green">Groen</s:String>
+    <s:String x:Key="S.ColorSelector.Blue">Blauw</s:String>
+    <s:String x:Key="S.ColorSelector.Alpha">Alpha</s:String>
+    <s:String x:Key="S.ColorSelector.Hexadecimal">Hex</s:String>
+    <s:String x:Key="S.ColorSelector.Initial">Beginkleur</s:String>
+    <s:String x:Key="S.ColorSelector.Current">Huidige kleur</s:String>
+    <s:String x:Key="S.ColorSelector.Latest">Eindkleur</s:String>
     
     <!--Exception Viewer, Optional-->
-    <s:String x:Key="ExceptionViewer.Title">Interne foutmeding</s:String>
-    <s:String x:Key="ExceptionViewer.OpenInner">Interne foutmelding openen</s:String>
-    <s:String x:Key="ErrorDialog.Observation">Er is iets fout gegaan.</s:String>
-    <s:String x:Key="ErrorDialog.Send">Rapport verzenden</s:String>
+    <s:String x:Key="S.ExceptionViewer.Title">Interne foutmeding</s:String>
+    <s:String x:Key="S.ExceptionViewer.OpenInner">Interne foutmelding openen</s:String>
+    <s:String x:Key="S.ErrorDialog.Observation">Er is iets fout gegaan.</s:String>
+    <s:String x:Key="S.ErrorDialog.Send">Rapport verzenden</s:String>
 
     <!--Insert Frames-->
-    <s:String x:Key="InsertFrames.Title">Frames toevoegen</s:String>
-    <s:String x:Key="InsertFrames.Info">Beide kanten moeten dezelfde grootte hebben. In dit scherm kan je de afbeelding ten opzichte van canvas herpositioneren of veranderen qua grootte. Klik op afbeelding om te selecteren.</s:String>
-    <s:String x:Key="InsertFrames.CanvasSize">Canvasgrootte:</s:String>
-    <s:String x:Key="InsertFrames.FitCanvas">Afbeelding aanpassen aan canvas</s:String>
-    <s:String x:Key="InsertFrames.FitCanvas.Info">Canvasgrootte aanpassen om beide afbeeldingen passend te maken (t.o.v. linkerbovenhoek).</s:String>
-    <s:String x:Key="InsertFrames.DifferentSizes">Er is een verschil in framegrootte. Dit moet worden opgelost voordat de frames toegevoegd kunnen worden.</s:String>
-    <s:String x:Key="InsertFrames.InsertedFrames">Nieuwe frame(s)</s:String>
-    <s:String x:Key="InsertFrames.CurrentFrames">Huidige frame(s)</s:String>
-    <s:String x:Key="InsertFrames.ImageSize">Afbeeldinggrootte:</s:String>
-    <s:String x:Key="InsertFrames.ImagePosition">Afbeeldingpositie:</s:String>
-    <s:String x:Key="InsertFrames.ResetImageSizePosition">Afbeeldingsgrootte &#10;en -positie herstellen</s:String>
-    <s:String x:Key="InsertFrames.Info2">Nieuwe frames worden toegevoegd in de huidige lijst van frames op de positie:</s:String>
-    <s:String x:Key="InsertFrames.Before">Voor</s:String>
-    <s:String x:Key="InsertFrames.After">Na</s:String>
-    <s:String x:Key="InsertFrames.Importing">Importeren</s:String>
-    <s:String x:Key="InsertFrames.SelectColorFill">Canvaskleur kiezen</s:String>
+    <s:String x:Key="S.InsertFrames.Title">Frames toevoegen</s:String>
+    <s:String x:Key="S.InsertFrames.Info">Beide kanten moeten dezelfde grootte hebben. In dit scherm kan je de afbeelding ten opzichte van canvas herpositioneren of veranderen qua grootte. Klik op afbeelding om te selecteren.</s:String>
+    <s:String x:Key="S.InsertFrames.CanvasSize">Canvasgrootte:</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas">Afbeelding aanpassen aan canvas</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas.Info">Canvasgrootte aanpassen om beide afbeeldingen passend te maken (t.o.v. linkerbovenhoek).</s:String>
+    <s:String x:Key="S.InsertFrames.DifferentSizes">Er is een verschil in framegrootte. Dit moet worden opgelost voordat de frames toegevoegd kunnen worden.</s:String>
+    <s:String x:Key="S.InsertFrames.InsertedFrames">Nieuwe frame(s)</s:String>
+    <s:String x:Key="S.InsertFrames.CurrentFrames">Huidige frame(s)</s:String>
+    <s:String x:Key="S.InsertFrames.ImageSize">Afbeeldinggrootte:</s:String>
+    <s:String x:Key="S.InsertFrames.ImagePosition">Afbeeldingpositie:</s:String>
+    <s:String x:Key="S.InsertFrames.ResetImageSizePosition">Afbeeldingsgrootte &#10;en -positie herstellen</s:String>
+    <s:String x:Key="S.InsertFrames.Info2">Nieuwe frames worden toegevoegd in de huidige lijst van frames op de positie:</s:String>
+    <s:String x:Key="S.InsertFrames.Before">Voor</s:String>
+    <s:String x:Key="S.InsertFrames.After">Na</s:String>
+    <s:String x:Key="S.InsertFrames.Importing">Importeren</s:String>
+    <s:String x:Key="S.InsertFrames.SelectColorFill">Canvaskleur kiezen</s:String>
 
     <!--Import Frames From Video-->
     <s:String x:Key="S.ImportVideo.Title">Frames uit video importeren</s:String>
@@ -664,40 +664,40 @@
     <s:String x:Key="Editor.Warning.LowSpace">Er is niet onvoldoende ruimte beschikbaar op de harde schijf ({0}% over). Klik hier om Instellingen > Tijdelijke bestanden te openen en extra vrije ruimte te maken.</s:String>
     
     <!--Hints-->
-    <s:String x:Key="Hint.NewRecording">Nieuwe opname aangemaakt</s:String>
-    <s:String x:Key="Hint.NewWebcamRecording">Nieuwe Webcam-opname aangemaakt</s:String>
-    <s:String x:Key="Hint.NewBoardRecording">Nieuwe Whiteboard-opname aangemaakt</s:String>
-    <s:String x:Key="Hint.NewAnimation">Nieuw project aangemaakt</s:String>
-    <s:String x:Key="Hint.Undo">Ongedaan maken uitgevoerd</s:String>
-    <s:String x:Key="Hint.Reset">Herstelactie uitgevoerd</s:String>
-    <s:String x:Key="Hint.Redo">Actie opnieuw uitgevoerd</s:String>
-    <s:String x:Key="Hint.Cut">{0} frame(s) geknipt</s:String>
-    <s:String x:Key="Hint.Copy">{0} frame(s) gekopieerd</s:String>
-    <s:String x:Key="Hint.Paste">{0} frame(s) geplakt</s:String>
-    <s:String x:Key="Hint.Zoom">Zoom ingesteld op {0}%</s:String>
-    <s:String x:Key="Hint.SelectAll">Alle frames zijn geselecteerd</s:String>
-    <s:String x:Key="Hint.SelectSingle">Frame #{0} geselecteerd</s:String>
-    <s:String x:Key="Hint.SelectInverse">Selectie omgekeerd</s:String>
-    <s:String x:Key="Hint.Deselect">Alle frames zijn gedeselecteerd</s:String>
-    <s:String x:Key="Hint.DeleteFrames">{0} frame(s) verwijderd</s:String>
-    <s:String x:Key="Hint.Reverse">Framelijst omgekeerd</s:String>
-    <s:String x:Key="Hint.Yoyo">Jojo-effect toegepast</s:String>
-    <s:String x:Key="Hint.MoveLeft">Frame(s) naar links verplaatst</s:String>
-    <s:String x:Key="Hint.MoveRight">Frame(s) naar rechts verplaatst</s:String>
-    <s:String x:Key="Hint.Resize">Framegrootte aangepast</s:String>
-    <s:String x:Key="Hint.Crop">Frames bijgesneden</s:String>
-    <s:String x:Key="Hint.FlipRotate">Frames gespiegeld/gedraaid</s:String>
-    <s:String x:Key="Hint.FlipRotate2">De spiegelactie wordt toegepast op alle geselecteerde frames en de rotatieactie op alle frames</s:String>
-    <s:String x:Key="Hint.ApplyAll">Deze actie toepassen op alle frames</s:String>
-    <s:String x:Key="Hint.ApplySelected">Deze actie toepassen op alle geselecteerde frames</s:String>
-    <s:String x:Key="Hint.Cinemagraph">Cinemagraph wordt toegepast op alle frames op basis van eerste frame</s:String>
-    <s:String x:Key="Hint.Overlay">Overlay toegepast</s:String>
-    <s:String x:Key="Hint.TitleFrame">Titelframe aangemaakt</s:String>
-    <s:String x:Key="Hint.TitleFrame2">Het Titelframe wordt ingevoegd voor de geselecteerde frame</s:String>
-    <s:String x:Key="Hint.Delay">Duur (vertraging) aangepast</s:String>
-    <s:String x:Key="Hint.Transition">Overgang toegevoegd</s:String>
-    <s:String x:Key="Hint.Reduce">Framerate verminderd</s:String>
-    <s:String x:Key="Hint.Duplicates">Duplicaten verwijderd</s:String>
+    <s:String x:Key="S.Hint.NewRecording">Nieuwe opname aangemaakt</s:String>
+    <s:String x:Key="S.Hint.NewWebcamRecording">Nieuwe Webcam-opname aangemaakt</s:String>
+    <s:String x:Key="S.Hint.NewBoardRecording">Nieuwe Whiteboard-opname aangemaakt</s:String>
+    <s:String x:Key="S.Hint.NewAnimation">Nieuw project aangemaakt</s:String>
+    <s:String x:Key="S.Hint.Undo">Ongedaan maken uitgevoerd</s:String>
+    <s:String x:Key="S.Hint.Reset">Herstelactie uitgevoerd</s:String>
+    <s:String x:Key="S.Hint.Redo">Actie opnieuw uitgevoerd</s:String>
+    <s:String x:Key="S.Hint.Cut">{0} frame(s) geknipt</s:String>
+    <s:String x:Key="S.Hint.Copy">{0} frame(s) gekopieerd</s:String>
+    <s:String x:Key="S.Hint.Paste">{0} frame(s) geplakt</s:String>
+    <s:String x:Key="S.Hint.Zoom">Zoom ingesteld op {0}%</s:String>
+    <s:String x:Key="S.Hint.SelectAll">Alle frames zijn geselecteerd</s:String>
+    <s:String x:Key="S.Hint.SelectSingle">Frame #{0} geselecteerd</s:String>
+    <s:String x:Key="S.Hint.SelectInverse">Selectie omgekeerd</s:String>
+    <s:String x:Key="S.Hint.Deselect">Alle frames zijn gedeselecteerd</s:String>
+    <s:String x:Key="S.Hint.DeleteFrames">{0} frame(s) verwijderd</s:String>
+    <s:String x:Key="S.Hint.Reverse">Framelijst omgekeerd</s:String>
+    <s:String x:Key="S.Hint.Yoyo">Jojo-effect toegepast</s:String>
+    <s:String x:Key="S.Hint.MoveLeft">Frame(s) naar links verplaatst</s:String>
+    <s:String x:Key="S.Hint.MoveRight">Frame(s) naar rechts verplaatst</s:String>
+    <s:String x:Key="S.Hint.Resize">Framegrootte aangepast</s:String>
+    <s:String x:Key="S.Hint.Crop">Frames bijgesneden</s:String>
+    <s:String x:Key="S.Hint.FlipRotate">Frames gespiegeld/gedraaid</s:String>
+    <s:String x:Key="S.Hint.FlipRotate2">De spiegelactie wordt toegepast op alle geselecteerde frames en de rotatieactie op alle frames</s:String>
+    <s:String x:Key="S.Hint.ApplyAll">Deze actie toepassen op alle frames</s:String>
+    <s:String x:Key="S.Hint.ApplySelected">Deze actie toepassen op alle geselecteerde frames</s:String>
+    <s:String x:Key="S.Hint.Cinemagraph">Cinemagraph wordt toegepast op alle frames op basis van eerste frame</s:String>
+    <s:String x:Key="S.Hint.Overlay">Overlay toegepast</s:String>
+    <s:String x:Key="S.Hint.TitleFrame">Titelframe aangemaakt</s:String>
+    <s:String x:Key="S.Hint.TitleFrame2">Het Titelframe wordt ingevoegd voor de geselecteerde frame</s:String>
+    <s:String x:Key="S.Hint.Delay">Duur (vertraging) aangepast</s:String>
+    <s:String x:Key="S.Hint.Transition">Overgang toegevoegd</s:String>
+    <s:String x:Key="S.Hint.Reduce">Framerate verminderd</s:String>
+    <s:String x:Key="S.Hint.Duplicates">Duplicaten verwijderd</s:String>
     
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">Verbergen</s:String>

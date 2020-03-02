@@ -34,7 +34,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <n:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource Ok}" Content="{StaticResource Vector.Ok}" 
+            <n:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource S.Ok}" Content="{StaticResource Vector.Ok}" 
                            ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="OkButton_Click"/>
         </Grid>
     </Grid>

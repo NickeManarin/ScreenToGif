@@ -4,7 +4,7 @@
                xmlns:n="clr-namespace:ScreenToGif.Controls"
                xmlns:u="clr-namespace:ScreenToGif.Util"
                xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
-               x:Name="BoardLightWindow" Title="{DynamicResource Board.Title}" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterScreen" 
+               x:Name="BoardLightWindow" Title="{DynamicResource S.Board.Title}" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterScreen" 
                Width="{Binding BoardWidth, Source={x:Static u:UserSettings.All}, Mode=TwoWay}" Height="{Binding BoardHeight, Source={x:Static u:UserSettings.All},  Mode=TwoWay}"
                IsThin="{Binding RecorderThinMode, Source={x:Static u:UserSettings.All}}" IsFullScreen="False" Icon="../Resources/Logo.ico" 
                Child="{StaticResource Vector.Back}" AllowsTransparency="True" WindowStyle="None" SnapsToDevicePixels="True" UseLayoutRounding="True" 
@@ -117,11 +117,11 @@
 
                 <n:IntegerUpDown Grid.Column="2" x:Name="FreeDrawingHeightNumericUpDown" Minimum="1" Maximum="100" Margin="2,2" MinWidth="50" 
                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=BoardStylusHeight, Mode=TwoWay}"
-                                 ToolTip="{DynamicResource Recorder.Height}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                                 ToolTip="{DynamicResource S.Recorder.Height}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                 <n:IntegerUpDown Grid.Column="3" x:Name="FreeDrawingWidthNumericUpDown" Minimum="1" Maximum="100" Margin="2,2" MinWidth="50" 
                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=BoardStylusWidth, Mode=TwoWay}"
-                                 ToolTip="{DynamicResource Recorder.Width}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                                 ToolTip="{DynamicResource S.Recorder.Width}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                 <n:ImageRadioButton Grid.Column="4" x:Name="EllipseRadioButton" Content="{StaticResource Vector.Ellipse}" 
                                     Cursor="Hand" ContentWidth="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
@@ -161,11 +161,11 @@
 
                 <n:IntegerUpDown Grid.Column="2" x:Name="BorderEraserHeightNumericUpDown" Minimum="1" Maximum="100" Margin="2,2" MinWidth="50" 
                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=BoardEraserHeight, Mode=TwoWay}"
-                                 ToolTip="{DynamicResource Recorder.Height}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                                 ToolTip="{DynamicResource S.Recorder.Height}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                 <n:IntegerUpDown Grid.Column="3" x:Name="BorderEraserWidthNumericUpDown" Minimum="1" Maximum="100" Margin="2,2" MinWidth="50" 
                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=BoardEraserWidth, Mode=TwoWay}"
-                                 ToolTip="{DynamicResource Recorder.Width}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                                 ToolTip="{DynamicResource S.Recorder.Width}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                 <n:ImageRadioButton Grid.Column="4" x:Name="EraserEllipseRadioButton" Content="{StaticResource Vector.Ellipse}" 
                                     Cursor="Hand" ContentWidth="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
@@ -267,14 +267,14 @@
                     </Grid>
 
                     <Viewbox.ToolTip>
-                        <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Recorder.FpsRange}"/>
+                        <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource S.Recorder.FpsRange}"/>
                     </Viewbox.ToolTip>
                 </Viewbox>
 
                 <n:IntegerUpDown x:Name="FpsNumericUpDown" Margin="1,3" StepValue="1" Minimum="1" Maximum="60" TabIndex="1"
                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=LatestFps, Mode=TwoWay}" MinWidth="45">
                     <n:IntegerUpDown.ToolTip>
-                        <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource Recorder.Fps}"/>
+                        <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource S.Recorder.Fps}"/>
                     </n:IntegerUpDown.ToolTip>
                 </n:IntegerUpDown>
 
@@ -284,27 +284,27 @@
 
                 <n:IntegerBox x:Name="WidthIntegerBox" Value="{Binding Source={x:Static u:UserSettings.All}, Path=BoardWidth, Mode=TwoWay}"
                               Offset="{x:Static u:Constants.HorizontalBoardOffset}" Minimum="100" Maximum="3000" TabIndex="2" Height="Auto" Padding="4,0" Margin="1,3"
-                              ToolTip="{DynamicResource Recorder.Width}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                              ToolTip="{DynamicResource S.Recorder.Width}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                 <TextBlock Text="×" FontSize="16" FontFamily="Segoe Script" Margin="1" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
 
                 <n:IntegerBox x:Name="HeightIntegerBox" Value="{Binding Source={x:Static u:UserSettings.All}, Path=BoardHeight, Mode=TwoWay}"
                               Offset="{x:Static u:Constants.VerticalBoardOffset}" Minimum="100" Maximum="3000" TabIndex="3" Height="Auto" Padding="4,0" Margin="1,3"
-                              ToolTip="{DynamicResource Recorder.Height}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                              ToolTip="{DynamicResource S.Recorder.Height}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                 <TextBlock Text="px" FontSize="12" FontFamily="Segoe UI" Margin="1,0,0,0" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
 
                 <Separator Width="1" Margin="3,2"/>
 
-                <n:ImageButton x:Name="DiscardButton" Text="{DynamicResource Recorder.Discard}" Content="{StaticResource Vector.Remove}" Visibility="Collapsed" 
+                <n:ImageButton x:Name="DiscardButton" Text="{DynamicResource S.Recorder.Discard}" Content="{StaticResource Vector.Remove}" Visibility="Collapsed" 
                                Click="DiscardButton_Click" Style="{StaticResource Style.Button.Horizontal}"
                                UseLayoutRounding="True" MaxSize="16" TabIndex="4" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"/>
 
-                <n:ImageToggleButton x:Name="AutoRecordToggleButton" Text="{DynamicResource Board.AutoRecord}" IsChecked="True" Content="{StaticResource Vector.Record}" 
+                <n:ImageToggleButton x:Name="AutoRecordToggleButton" Text="{DynamicResource S.Board.AutoRecord}" IsChecked="True" Content="{StaticResource Vector.Record}" 
                                      ContentHeight="16" ContentWidth="16" Style="{StaticResource Style.ToggleButton.NoBorder}" TabIndex="5" TextWrapping="NoWrap" 
-                                     KeyGesture="{DynamicResource Board.CtrlHold}" ToolTip="{DynamicResource Board.AutoRecordToolTip}" ToolTipService.Placement="Bottom"/>
+                                     KeyGesture="{DynamicResource S.Board.CtrlHold}" ToolTip="{DynamicResource S.Board.AutoRecordToolTip}" ToolTipService.Placement="Bottom"/>
 
-                <n:ImageButton x:Name="StopButton" Text="{DynamicResource Recorder.Stop}" Content="{StaticResource Vector.Stop}" MaxSize="16"
+                <n:ImageButton x:Name="StopButton" Text="{DynamicResource S.Recorder.Stop}" Content="{StaticResource Vector.Stop}" MaxSize="16"
                                Style="{StaticResource Style.Button.Horizontal}" TabIndex="5" ContentHeight="18" ContentWidth="18" 
                                KeyGesture="{Binding Source={x:Static u:UserSettings.All}, Path=StopShortcut, Converter={StaticResource KeysToStringConverter}}" 
                                Click="StopButton_Click"/>

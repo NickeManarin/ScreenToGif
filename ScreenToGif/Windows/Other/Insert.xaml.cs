@@ -270,7 +270,7 @@ namespace ScreenToGif.Windows.Other
             #region Size Diff
 
             if (Math.Abs(LeftImage.ActualWidth - RightImage.ActualWidth) > 0 || Math.Abs(LeftImage.ActualHeight - RightImage.ActualHeight) > 0)
-                StatusBand.Warning(FindResource("InsertFrames.DifferentSizes") as string);
+                StatusBand.Warning(LocalizationHelper.Get("S.InsertFrames.DifferentSizes"));
 
             #endregion
 

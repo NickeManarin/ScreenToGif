@@ -76,7 +76,7 @@
                 <Run Text="{DynamicResource S.Localization.MoveRosourcePosition}"/>
             </TextBlock>
 
-            <c:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource Ok}" Margin="5" Content="{StaticResource Vector.Ok}" IsCancel="True" MaxSize="15"
+            <c:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource S.Ok}" Margin="5" Content="{StaticResource Vector.Ok}" IsCancel="True" MaxSize="15"
                            HorizontalAlignment="Right" MinWidth="100" MinHeight="27" VerticalAlignment="Bottom" />
         </Grid>
     </Grid>

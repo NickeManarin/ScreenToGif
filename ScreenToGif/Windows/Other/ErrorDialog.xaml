@@ -26,7 +26,7 @@
 
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
             <TextBlock x:Name="ObservationTextBlock" Margin="25,5,10,5" FontSize="14" TextWrapping="WrapWithOverflow">
-                <Run Text="{DynamicResource ErrorDialog.Observation}" Foreground="{DynamicResource Element.Foreground}"/>
+                <Run Text="{DynamicResource S.ErrorDialog.Observation}" Foreground="{DynamicResource Element.Foreground}"/>
                 <LineBreak/>
                 <Run x:Name="DetailsRun" Foreground="{DynamicResource Element.Foreground}"/>
             </TextBlock>
@@ -41,14 +41,14 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <n:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource Ok}" Content="{StaticResource Vector.Ok}" ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="TrueActionButton_Click"/>
-            <n:ImageButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource Cancel}" Content="{StaticResource Vector.Cancel}" ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="FalseActionButton_Click" IsCancel="True"/>
+            <n:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource S.Ok}" Content="{StaticResource Vector.Ok}" ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="TrueActionButton_Click"/>
+            <n:ImageButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource S.Cancel}" Content="{StaticResource Vector.Cancel}" ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="FalseActionButton_Click" IsCancel="True"/>
 
-            <n:ImageButton Grid.Column="1" x:Name="YesButton" Text="{DynamicResource Yes}" Content="{StaticResource Vector.Ok}" ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="TrueActionButton_Click"/>
-            <n:ImageButton Grid.Column="2" x:Name="NoButton" Text="{DynamicResource No}" Content="{StaticResource Vector.No}" ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="FalseActionButton_Click"/>
+            <n:ImageButton Grid.Column="1" x:Name="YesButton" Text="{DynamicResource S.Yes}" Content="{StaticResource Vector.Ok}" ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="TrueActionButton_Click"/>
+            <n:ImageButton Grid.Column="2" x:Name="NoButton" Text="{DynamicResource S.No}" Content="{StaticResource Vector.No}" ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="FalseActionButton_Click"/>
 
             <n:ImageButton Grid.Column="3" x:Name="DetailsButton" Text="{DynamicResource Encoder.Details}" Content="{StaticResource Vector.Application}" ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="DetailsButton_Click"/>
-            <n:ImageButton Grid.Column="4" x:Name="SendButton" Text="{DynamicResource ErrorDialog.Send}" Content="{StaticResource Vector.Email}" ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="SendButton_Click"/>
+            <n:ImageButton Grid.Column="4" x:Name="SendButton" Text="{DynamicResource S.ErrorDialog.Send}" Content="{StaticResource Vector.Email}" ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="SendButton_Click"/>
         </Grid>
     </Grid>
 </Window>

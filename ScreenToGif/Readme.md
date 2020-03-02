@@ -9,12 +9,14 @@ _VS 2019 and .Net 4.8 or newer required._
 
 • It's more appareant that a new update is available.   
 • Added an updater, which automatically downloads and installs new updates (optional), even for portable installations.
+• You can now manage the presets of the encoding paramaters of FFmpeg for Gif and Apng too.  
 
 ### Fixed:
 
 ♦ The DirectX capture method was crashing in some machines when trying to record with the cursor visible.  
 ♦ The installer was crashing when the user had no .Net Framework 4.7.2 or newer.  
-♦ Wheninserting a new media into an existing project, the app was saving the state to the action stack twice, which caused a crash when trying to undo twice.  
+♦ When inserting a new media into an existing project, the app was saving the state to the action stack twice, which caused a crash when trying to undo twice.  
+♦ When exporting as images, the app was not resolving the date/time format of the filename.   
 ♦ The text of 'Help' button was missing.  
 
 ### Known Bugs:
@@ -24,3 +26,4 @@ _VS 2019 and .Net 4.8 or newer required._
 ♠ Cancelling a encoding of FFmpeg will result in a crash (file in use).  
 ♠ Keystrokes has a 1 pixel transparent border at the bottom-right sides when using a high DPI screen.  
 ♠ It's impossible to capture snapshots with the DirectX method.  
+♠ When capturing with the DirectX, the recording will crash of the recording area is outside of the screen.  

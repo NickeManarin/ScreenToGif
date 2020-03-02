@@ -8,11 +8,11 @@
     <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
     
     <!--General-->
-    <s:String x:Key="Ok">確定</s:String>
-    <s:String x:Key="Back">返回</s:String>
-    <s:String x:Key="Cancel">取消</s:String>
-    <s:String x:Key="Yes">是</s:String>
-    <s:String x:Key="No">否</s:String>
+    <s:String x:Key="S.Ok">確定</s:String>
+    <s:String x:Key="S.Back">返回</s:String>
+    <s:String x:Key="S.Cancel">取消</s:String>
+    <s:String x:Key="S.Yes">是</s:String>
+    <s:String x:Key="S.No">否</s:String>
     <s:String x:Key="Frame">幀</s:String>
     <s:String x:Key="Suppress">隱藏</s:String>
     <s:String x:Key="Preview">預覽</s:String>
@@ -147,73 +147,73 @@
     <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">我所有的支持者，提供意見反應和/或捐贈的人。</s:String>
 
     <!--Recorder-->
-    <s:String x:Key="Recorder.RecordingOptions">錄影選項</s:String>
-    <s:String x:Key="Recorder.Snapshot">快照模式</s:String>
-    <s:String x:Key="Recorder.ThinMode">隱藏標題列</s:String>
-    <s:String x:Key="Recorder.Fullscreen">全螢幕模式</s:String>
+    <s:String x:Key="S.Recorder.RecordingOptions">錄影選項</s:String>
+    <s:String x:Key="S.Recorder.Snapshot">快照模式</s:String>
+    <s:String x:Key="S.Recorder.ThinMode">隱藏標題列</s:String>
+    <s:String x:Key="S.Recorder.Fullscreen">全螢幕模式</s:String>
 
-    <s:String x:Key="Recorder.Record">錄影</s:String>
-    <s:String x:Key="Recorder.Pause">暫停</s:String>
-    <s:String x:Key="Recorder.Continue">繼續</s:String>
-    <s:String x:Key="Recorder.Stop">停止</s:String>
-    <s:String x:Key="Recorder.Discard">捨棄</s:String>
-    <s:String x:Key="Recorder.Snap">貼齊</s:String>
-    <s:String x:Key="Recorder.Height">高度</s:String>
-    <s:String x:Key="Recorder.Width">寬度</s:String>
-    <s:String x:Key="Recorder.Fps">每秒最大幀數</s:String>
-    <s:String x:Key="Recorder.FpsRange">最小到最大 fps: 1-60 fps</s:String>
-    <s:String x:Key="Recorder.SnapToWindow">貼齊視窗(拖曳後放下來貼齊)</s:String>
-    <s:String x:Key="Recorder.PreStart">啟動前</s:String>
-    <s:String x:Key="Recorder.Paused">ScreenToGif (已暫停)</s:String>
+    <s:String x:Key="S.Recorder.Record">錄影</s:String>
+    <s:String x:Key="S.Recorder.Pause">暫停</s:String>
+    <s:String x:Key="S.Recorder.Continue">繼續</s:String>
+    <s:String x:Key="S.Recorder.Stop">停止</s:String>
+    <s:String x:Key="S.Recorder.Discard">捨棄</s:String>
+    <s:String x:Key="S.Recorder.Snap">貼齊</s:String>
+    <s:String x:Key="S.Recorder.Height">高度</s:String>
+    <s:String x:Key="S.Recorder.Width">寬度</s:String>
+    <s:String x:Key="S.Recorder.Fps">每秒最大幀數</s:String>
+    <s:String x:Key="S.Recorder.FpsRange">最小到最大 fps: 1-60 fps</s:String>
+    <s:String x:Key="S.Recorder.SnapToWindow">貼齊視窗(拖曳後放下來貼齊)</s:String>
+    <s:String x:Key="S.Recorder.PreStart">啟動前</s:String>
+    <s:String x:Key="S.Recorder.Paused">ScreenToGif (已暫停)</s:String>
     
     <!--Webcam Recorder-->
-    <s:String x:Key="Webcam.Title">ScreenToGif - 網路攝影機錄影</s:String>
-    <s:String x:Key="Webcam.NoVideo">未偵測到視訊裝置:(</s:String>
-    <s:String x:Key="Webcam.CheckVideoDevices">檢查視訊裝置。</s:String>
-    <s:String x:Key="Webcam.Scale">比例: x{0:0.##}</s:String>
-    <s:String x:Key="Webcam.ChangeScale">變更視訊比例。</s:String>
+    <s:String x:Key="S.Webcam.Title">ScreenToGif - 網路攝影機錄影</s:String>
+    <s:String x:Key="S.Webcam.NoVideo">未偵測到視訊裝置:(</s:String>
+    <s:String x:Key="S.Webcam.CheckVideoDevices">檢查視訊裝置。</s:String>
+    <s:String x:Key="S.Webcam.Scale">比例: x{0:0.##}</s:String>
+    <s:String x:Key="S.Webcam.ChangeScale">變更視訊比例。</s:String>
     
     <!--Board Recorder-->
-    <s:String x:Key="Board.Title">ScreenToGif - 繪圖板錄影程式</s:String>
-    <s:String x:Key="Board.AutoRecord">自動錄影</s:String>
-    <s:String x:Key="Board.AutoRecordToolTip">在繪圖時啟用錄影。</s:String>
-    <s:String x:Key="Board.CtrlHold">Ctrl [按住]</s:String>
+    <s:String x:Key="S.Board.Title">ScreenToGif - 繪圖板錄影程式</s:String>
+    <s:String x:Key="S.Board.AutoRecord">自動錄影</s:String>
+    <s:String x:Key="S.Board.AutoRecordToolTip">在繪圖時啟用錄影。</s:String>
+    <s:String x:Key="S.Board.CtrlHold">Ctrl [按住]</s:String>
     
     <!--Color Selector-->
-    <s:String x:Key="ColorSelector.Title">顏色選取器</s:String>
-    <s:String x:Key="ColorSelector.Select">選擇一種顏色</s:String>
-    <s:String x:Key="ColorSelector.Red">紅色</s:String>
-    <s:String x:Key="ColorSelector.Green">綠色</s:String>
-    <s:String x:Key="ColorSelector.Blue">藍色</s:String>
-    <s:String x:Key="ColorSelector.Alpha">Alpha</s:String>
-    <s:String x:Key="ColorSelector.Hexadecimal">十六進位</s:String>
-    <s:String x:Key="ColorSelector.Initial">初始顏色</s:String>
-    <s:String x:Key="ColorSelector.Current">目前顏色</s:String>
-    <s:String x:Key="ColorSelector.Latest">最新的顏色</s:String>
+    <s:String x:Key="S.ColorSelector.Title">顏色選取器</s:String>
+    <s:String x:Key="S.ColorSelector.Select">選擇一種顏色</s:String>
+    <s:String x:Key="S.ColorSelector.Red">紅色</s:String>
+    <s:String x:Key="S.ColorSelector.Green">綠色</s:String>
+    <s:String x:Key="S.ColorSelector.Blue">藍色</s:String>
+    <s:String x:Key="S.ColorSelector.Alpha">Alpha</s:String>
+    <s:String x:Key="S.ColorSelector.Hexadecimal">十六進位</s:String>
+    <s:String x:Key="S.ColorSelector.Initial">初始顏色</s:String>
+    <s:String x:Key="S.ColorSelector.Current">目前顏色</s:String>
+    <s:String x:Key="S.ColorSelector.Latest">最新的顏色</s:String>
     
     <!--Exception Viewer, Optional-->
-    <s:String x:Key="ExceptionViewer.Title">異常檢視器</s:String>
-    <s:String x:Key="ExceptionViewer.OpenInner">開啟內部異常</s:String>
-    <s:String x:Key="ErrorDialog.Observation">出事了。</s:String>
-    <s:String x:Key="ErrorDialog.Send">傳送報告</s:String>
+    <s:String x:Key="S.ExceptionViewer.Title">異常檢視器</s:String>
+    <s:String x:Key="S.ExceptionViewer.OpenInner">開啟內部異常</s:String>
+    <s:String x:Key="S.ErrorDialog.Observation">出事了。</s:String>
+    <s:String x:Key="S.ErrorDialog.Send">傳送報告</s:String>
 
     <!--Insert Frames-->
-    <s:String x:Key="InsertFrames.Title">插入幀</s:String>
-    <s:String x:Key="InsertFrames.Info">兩邊應具有相同的大小，此視窗允許您重新調整圖像和畫布的位置和大小。按一下選擇並調整大小。</s:String>
-    <s:String x:Key="InsertFrames.CanvasSize">畫布大小:</s:String>
-    <s:String x:Key="InsertFrames.FitCanvas">適合畫布上的圖像</s:String>
-    <s:String x:Key="InsertFrames.FitCanvas.Info">調整畫布大小以適合內部的兩個圖像 (從左上角)。</s:String>
-    <s:String x:Key="InsertFrames.DifferentSizes">幀大小之間有差別。在插入幀之前您需要解決此問題。</s:String>
-    <s:String x:Key="InsertFrames.InsertedFrames">已插入的幀</s:String>
-    <s:String x:Key="InsertFrames.CurrentFrames">目前幀</s:String>
-    <s:String x:Key="InsertFrames.ImageSize">圖像大小:</s:String>
-    <s:String x:Key="InsertFrames.ImagePosition">圖像位置:</s:String>
-    <s:String x:Key="InsertFrames.ResetImageSizePosition">重設圖像大小\n和位置</s:String>
-    <s:String x:Key="InsertFrames.Info2">新幀將插入到目前位置的幀清單中:</s:String>
-    <s:String x:Key="InsertFrames.Before">之前</s:String>
-    <s:String x:Key="InsertFrames.After">之後</s:String>
-    <s:String x:Key="InsertFrames.Importing">正在匯入</s:String>
-    <s:String x:Key="InsertFrames.SelectColorFill">選擇畫布填充顏色</s:String>
+    <s:String x:Key="S.InsertFrames.Title">插入幀</s:String>
+    <s:String x:Key="S.InsertFrames.Info">兩邊應具有相同的大小，此視窗允許您重新調整圖像和畫布的位置和大小。按一下選擇並調整大小。</s:String>
+    <s:String x:Key="S.InsertFrames.CanvasSize">畫布大小:</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas">適合畫布上的圖像</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas.Info">調整畫布大小以適合內部的兩個圖像 (從左上角)。</s:String>
+    <s:String x:Key="S.InsertFrames.DifferentSizes">幀大小之間有差別。在插入幀之前您需要解決此問題。</s:String>
+    <s:String x:Key="S.InsertFrames.InsertedFrames">已插入的幀</s:String>
+    <s:String x:Key="S.InsertFrames.CurrentFrames">目前幀</s:String>
+    <s:String x:Key="S.InsertFrames.ImageSize">圖像大小:</s:String>
+    <s:String x:Key="S.InsertFrames.ImagePosition">圖像位置:</s:String>
+    <s:String x:Key="S.InsertFrames.ResetImageSizePosition">重設圖像大小\n和位置</s:String>
+    <s:String x:Key="S.InsertFrames.Info2">新幀將插入到目前位置的幀清單中:</s:String>
+    <s:String x:Key="S.InsertFrames.Before">之前</s:String>
+    <s:String x:Key="S.InsertFrames.After">之後</s:String>
+    <s:String x:Key="S.InsertFrames.Importing">正在匯入</s:String>
+    <s:String x:Key="S.InsertFrames.SelectColorFill">選擇畫布填充顏色</s:String>
 
     <!--Import Frames From Video-->
     <s:String x:Key="S.ImportVideo.Title">從影片匯入幀</s:String>
@@ -455,39 +455,39 @@
     <s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg不存在。加入它到Path環境變數或在選項中設置的路徑位置。</s:String>
     
     <!--Hints-->
-    <s:String x:Key="Hint.NewRecording">新錄影已建立</s:String>
-    <s:String x:Key="Hint.NewWebcamRecording">新網路攝影機錄影已建立</s:String>
-    <s:String x:Key="Hint.NewBoardRecording">新繪圖板錄影已建立</s:String>
-    <s:String x:Key="Hint.NewAnimation">新專案已建立</s:String>
-    <s:String x:Key="Hint.Undo">復原執行</s:String>
-    <s:String x:Key="Hint.Reset">重設執行</s:String>
-    <s:String x:Key="Hint.Redo">重做執行</s:String>
-    <s:String x:Key="Hint.Cut">{0} 個幀剪下</s:String>
-    <s:String x:Key="Hint.Copy">{0} 個幀已複製</s:String>
-    <s:String x:Key="Hint.Paste">{0} 個幀已貼上</s:String>
-    <s:String x:Key="Hint.Zoom">縮放設定為 {0}%</s:String>
-    <s:String x:Key="Hint.SelectAll">選擇全部幀</s:String>
-    <s:String x:Key="Hint.SelectSingle">幀 #{0} 已選</s:String>
-    <s:String x:Key="Hint.SelectInverse">反向選擇</s:String>
-    <s:String x:Key="Hint.Deselect">取消選擇了所有幀</s:String>
-    <s:String x:Key="Hint.DeleteFrames">{0} 個幀被刪除</s:String>
-    <s:String x:Key="Hint.Reverse">幀清單已反轉</s:String>
-    <s:String x:Key="Hint.Yoyo">套用反轉循環特效</s:String>
-    <s:String x:Key="Hint.MoveLeft">幀向左移動</s:String>
-    <s:String x:Key="Hint.MoveRight">幀向右移動</s:String>
-    <s:String x:Key="Hint.Resize">幀重新調整大小</s:String>
-    <s:String x:Key="Hint.Crop">幀裁減</s:String>
-    <s:String x:Key="Hint.FlipRotate">幀翻轉/旋轉</s:String>
-    <s:String x:Key="Hint.FlipRotate2">翻轉動作套用到所選幀以及旋轉套用到所有幀</s:String>
-    <s:String x:Key="Hint.ApplyAll">此動作套用到全部幀</s:String>
-    <s:String x:Key="Hint.ApplySelected">此動作套用到所選幀</s:String>
-    <s:String x:Key="Hint.Cinemagraph">影片套用到第一幀為主的的所有幀</s:String>
-    <s:String x:Key="Hint.Overlay">重疊已套用</s:String>
-    <s:String x:Key="Hint.TitleFrame">標題幀建立</s:String>
-    <s:String x:Key="Hint.TitleFrame2">標題幀將插入到所選幀之前</s:String>
-    <s:String x:Key="Hint.Delay">持續時間(延遲)已變更</s:String>
-    <s:String x:Key="Hint.Transition">轉場已插入</s:String>
-    <s:String x:Key="Hint.Reduce">幀率減少</s:String>
+    <s:String x:Key="S.Hint.NewRecording">新錄影已建立</s:String>
+    <s:String x:Key="S.Hint.NewWebcamRecording">新網路攝影機錄影已建立</s:String>
+    <s:String x:Key="S.Hint.NewBoardRecording">新繪圖板錄影已建立</s:String>
+    <s:String x:Key="S.Hint.NewAnimation">新專案已建立</s:String>
+    <s:String x:Key="S.Hint.Undo">復原執行</s:String>
+    <s:String x:Key="S.Hint.Reset">重設執行</s:String>
+    <s:String x:Key="S.Hint.Redo">重做執行</s:String>
+    <s:String x:Key="S.Hint.Cut">{0} 個幀剪下</s:String>
+    <s:String x:Key="S.Hint.Copy">{0} 個幀已複製</s:String>
+    <s:String x:Key="S.Hint.Paste">{0} 個幀已貼上</s:String>
+    <s:String x:Key="S.Hint.Zoom">縮放設定為 {0}%</s:String>
+    <s:String x:Key="S.Hint.SelectAll">選擇全部幀</s:String>
+    <s:String x:Key="S.Hint.SelectSingle">幀 #{0} 已選</s:String>
+    <s:String x:Key="S.Hint.SelectInverse">反向選擇</s:String>
+    <s:String x:Key="S.Hint.Deselect">取消選擇了所有幀</s:String>
+    <s:String x:Key="S.Hint.DeleteFrames">{0} 個幀被刪除</s:String>
+    <s:String x:Key="S.Hint.Reverse">幀清單已反轉</s:String>
+    <s:String x:Key="S.Hint.Yoyo">套用反轉循環特效</s:String>
+    <s:String x:Key="S.Hint.MoveLeft">幀向左移動</s:String>
+    <s:String x:Key="S.Hint.MoveRight">幀向右移動</s:String>
+    <s:String x:Key="S.Hint.Resize">幀重新調整大小</s:String>
+    <s:String x:Key="S.Hint.Crop">幀裁減</s:String>
+    <s:String x:Key="S.Hint.FlipRotate">幀翻轉/旋轉</s:String>
+    <s:String x:Key="S.Hint.FlipRotate2">翻轉動作套用到所選幀以及旋轉套用到所有幀</s:String>
+    <s:String x:Key="S.Hint.ApplyAll">此動作套用到全部幀</s:String>
+    <s:String x:Key="S.Hint.ApplySelected">此動作套用到所選幀</s:String>
+    <s:String x:Key="S.Hint.Cinemagraph">影片套用到第一幀為主的的所有幀</s:String>
+    <s:String x:Key="S.Hint.Overlay">重疊已套用</s:String>
+    <s:String x:Key="S.Hint.TitleFrame">標題幀建立</s:String>
+    <s:String x:Key="S.Hint.TitleFrame2">標題幀將插入到所選幀之前</s:String>
+    <s:String x:Key="S.Hint.Delay">持續時間(延遲)已變更</s:String>
+    <s:String x:Key="S.Hint.Transition">轉場已插入</s:String>
+    <s:String x:Key="S.Hint.Reduce">幀率減少</s:String>
     
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">隱藏</s:String>

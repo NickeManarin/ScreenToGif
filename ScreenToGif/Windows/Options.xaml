@@ -698,7 +698,7 @@
 
                                 <n:ImageButton Grid.Column="6" Text="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Apply}" Content="{StaticResource Vector.Ok}" Style="{StaticResource Style.Button.Horizontal}" 
                                                Padding="2" MaxSize="14" Click="ApplySizeButton_Click"/>
-                                <n:ImageButton Grid.Column="7" Text="{DynamicResource Cancel}" Content="{StaticResource Vector.Cancel}" Style="{StaticResource Style.Button.Horizontal}" 
+                                <n:ImageButton Grid.Column="7" Text="{DynamicResource S.Cancel}" Content="{StaticResource Vector.Cancel}" Style="{StaticResource Style.Button.Horizontal}" 
                                                Padding="2" MaxSize="14" Click="CancelSizeButton_Click"/>
                             </Grid>
                         </StackPanel>
@@ -1955,7 +1955,7 @@
                 <ColumnDefinition Width="Auto" MinWidth="110"/>
             </Grid.ColumnDefinitions>
 
-            <n:ImageButton Grid.Column="2" x:Name="OkButton" Text="{DynamicResource Ok}" Margin="5" Padding="2,0" ContentHeight="20" Content="{StaticResource Vector.Ok}" Click="OkButton_Click"/>
+            <n:ImageButton Grid.Column="2" x:Name="OkButton" Text="{DynamicResource S.Ok}" Margin="5" Padding="2,0" ContentHeight="20" Content="{StaticResource Vector.Ok}" Click="OkButton_Click"/>
         </Grid>
     </Grid>
 </Window>

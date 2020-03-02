@@ -8,11 +8,11 @@
     <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
     
     <!--General-->
-    <s:String x:Key="Ok">Ok</s:String>
-    <s:String x:Key="Back">Voltar</s:String>
-    <s:String x:Key="Cancel">Cancelar</s:String>
-    <s:String x:Key="Yes">Sim</s:String>
-    <s:String x:Key="No">Não</s:String>
+    <s:String x:Key="S.Ok">Ok</s:String>
+    <s:String x:Key="S.Back">Voltar</s:String>
+    <s:String x:Key="S.Cancel">Cancelar</s:String>
+    <s:String x:Key="S.Yes">Sim</s:String>
+    <s:String x:Key="S.No">Não</s:String>
     <s:String x:Key="Frame">Moldura</s:String>
     <s:String x:Key="Suppress">Suprimir</s:String>
     <!--<s:String x:Key="Preview">Preview</s:String>-->
@@ -140,73 +140,73 @@
     <!--<s:String x:Key="S.Options.About.ABigThanksTo.Everyone">All my supporters, people who provided feedback and/or donations.</s:String>-->
 
     <!--Recorder-->
-    <s:String x:Key="Recorder.RecordingOptions">Opções de Gravação</s:String>
-    <s:String x:Key="Recorder.Snapshot">Modo de Foto</s:String>
-    <!--<s:String x:Key="Recorder.ThinMode">Hide the title bar</s:String>-->
-    <s:String x:Key="Recorder.Fullscreen">Modo Ecrã Inteiro</s:String>
+    <s:String x:Key="S.Recorder.RecordingOptions">Opções de Gravação</s:String>
+    <s:String x:Key="S.Recorder.Snapshot">Modo de Foto</s:String>
+    <!--<s:String x:Key="S.Recorder.ThinMode">Hide the title bar</s:String>-->
+    <s:String x:Key="S.Recorder.Fullscreen">Modo Ecrã Inteiro</s:String>
 
-    <s:String x:Key="Recorder.Record">Gravar</s:String>
-    <s:String x:Key="Recorder.Pause">Pausa</s:String>
-    <s:String x:Key="Recorder.Continue">Continuar</s:String>
-    <s:String x:Key="Recorder.Stop">Parar</s:String>
-    <s:String x:Key="Recorder.Discard">Descartar</s:String>
-    <s:String x:Key="Recorder.Snap">Foto</s:String>
-    <s:String x:Key="Recorder.Height">Altura</s:String>
-    <s:String x:Key="Recorder.Width">Largura</s:String>
-    <s:String x:Key="Recorder.Fps">Número Máximo de Fotogramas por Segundo</s:String>
-    <!--<s:String x:Key="Recorder.FpsRange">Minimum to maximum fps: 1-60 fps</s:String>-->
-    <s:String x:Key="Recorder.SnapToWindow">Aderir a Janela (Arraste e large para enquadrar)</s:String>
-    <s:String x:Key="Recorder.PreStart">Contagem Decrescente</s:String>
-    <s:String x:Key="Recorder.Paused">ScreenToGif (Pausado)</s:String>
+    <s:String x:Key="S.Recorder.Record">Gravar</s:String>
+    <s:String x:Key="S.Recorder.Pause">Pausa</s:String>
+    <s:String x:Key="S.Recorder.Continue">Continuar</s:String>
+    <s:String x:Key="S.Recorder.Stop">Parar</s:String>
+    <s:String x:Key="S.Recorder.Discard">Descartar</s:String>
+    <s:String x:Key="S.Recorder.Snap">Foto</s:String>
+    <s:String x:Key="S.Recorder.Height">Altura</s:String>
+    <s:String x:Key="S.Recorder.Width">Largura</s:String>
+    <s:String x:Key="S.Recorder.Fps">Número Máximo de Fotogramas por Segundo</s:String>
+    <!--<s:String x:Key="S.Recorder.FpsRange">Minimum to maximum fps: 1-60 fps</s:String>-->
+    <s:String x:Key="S.Recorder.SnapToWindow">Aderir a Janela (Arraste e large para enquadrar)</s:String>
+    <s:String x:Key="S.Recorder.PreStart">Contagem Decrescente</s:String>
+    <s:String x:Key="S.Recorder.Paused">ScreenToGif (Pausado)</s:String>
     
     <!--Webcam Recorder-->
-    <s:String x:Key="Webcam.Title">ScreenToGif - Gravador de Câmara</s:String>
-    <s:String x:Key="Webcam.NoVideo">Nenhum dispositivo de vídeo encontrado :(</s:String>
-    <s:String x:Key="Webcam.CheckVideoDevices">Verificar dispositivos de vídeo.</s:String>
-    <!--<s:String x:Key="Webcam.Scale">Scale: x{0:0.##}</s:String>-->
-    <!--<s:String x:Key="Webcam.ChangeScale">Change the scale of the video.</s:String>-->
+    <s:String x:Key="S.Webcam.Title">ScreenToGif - Gravador de Câmara</s:String>
+    <s:String x:Key="S.Webcam.NoVideo">Nenhum dispositivo de vídeo encontrado :(</s:String>
+    <s:String x:Key="S.Webcam.CheckVideoDevices">Verificar dispositivos de vídeo.</s:String>
+    <!--<s:String x:Key="S.Webcam.Scale">Scale: x{0:0.##}</s:String>-->
+    <!--<s:String x:Key="S.Webcam.ChangeScale">Change the scale of the video.</s:String>-->
     
     <!--Board Recorder-->
-    <!--<s:String x:Key="Board.Title">ScreenToGif - Board Recorder</s:String>-->
-    <!--<s:String x:Key="Board.AutoRecord">Auto Record</s:String>-->
-    <!--<s:String x:Key="Board.AutoRecordToolTip">Enables recording while drawing.</s:String>-->
-    <!--<s:String x:Key="Board.CtrlHold">Ctrl [Hold]</s:String>-->
+    <!--<s:String x:Key="S.Board.Title">ScreenToGif - Board Recorder</s:String>-->
+    <!--<s:String x:Key="S.Board.AutoRecord">Auto Record</s:String>-->
+    <!--<s:String x:Key="S.Board.AutoRecordToolTip">Enables recording while drawing.</s:String>-->
+    <!--<s:String x:Key="S.Board.CtrlHold">Ctrl [Hold]</s:String>-->
     
     <!--Color Selector-->
-    <s:String x:Key="ColorSelector.Title">Selector de Cor</s:String>
-    <s:String x:Key="ColorSelector.Select">Seleccione uma Cor</s:String>
-    <s:String x:Key="ColorSelector.Red">Vermelho</s:String>
-    <s:String x:Key="ColorSelector.Green">Verde</s:String>
-    <s:String x:Key="ColorSelector.Blue">Azul</s:String>
-    <s:String x:Key="ColorSelector.Alpha">Transparência</s:String>
-    <s:String x:Key="ColorSelector.Hexadecimal">Hexa</s:String>
-    <s:String x:Key="ColorSelector.Initial">Cor Inicial</s:String>
-    <s:String x:Key="ColorSelector.Current">Cor Actual</s:String>
-    <s:String x:Key="ColorSelector.Latest">Última Cor</s:String>
+    <s:String x:Key="S.ColorSelector.Title">Selector de Cor</s:String>
+    <s:String x:Key="S.ColorSelector.Select">Seleccione uma Cor</s:String>
+    <s:String x:Key="S.ColorSelector.Red">Vermelho</s:String>
+    <s:String x:Key="S.ColorSelector.Green">Verde</s:String>
+    <s:String x:Key="S.ColorSelector.Blue">Azul</s:String>
+    <s:String x:Key="S.ColorSelector.Alpha">Transparência</s:String>
+    <s:String x:Key="S.ColorSelector.Hexadecimal">Hexa</s:String>
+    <s:String x:Key="S.ColorSelector.Initial">Cor Inicial</s:String>
+    <s:String x:Key="S.ColorSelector.Current">Cor Actual</s:String>
+    <s:String x:Key="S.ColorSelector.Latest">Última Cor</s:String>
     
     <!--Exception Viewer, Optional-->
-    <s:String x:Key="ExceptionViewer.Title">Visualizador de Excepções</s:String>
-    <s:String x:Key="ExceptionViewer.OpenInner">Abrir Excepção Interna</s:String>
-    <!--<s:String x:Key="ErrorDialog.Observation">Something wrong happened.</s:String>-->
-    <!--<s:String x:Key="ErrorDialog.Send">Send report</s:String>-->
+    <s:String x:Key="S.ExceptionViewer.Title">Visualizador de Excepções</s:String>
+    <s:String x:Key="S.ExceptionViewer.OpenInner">Abrir Excepção Interna</s:String>
+    <!--<s:String x:Key="S.ErrorDialog.Observation">Something wrong happened.</s:String>-->
+    <!--<s:String x:Key="S.ErrorDialog.Send">Send report</s:String>-->
 
     <!--Insert Frames-->
-    <s:String x:Key="InsertFrames.Title">Inserir Fotogramas</s:String>
-    <!--<s:String x:Key="InsertFrames.Info">Both sides should have the same size, this window allows you to reposition and resize the image and the canvas. Click to select and resize.</s:String>-->
-    <!--<s:String x:Key="InsertFrames.CanvasSize">Canvas size:</s:String>-->
-    <!--<s:String x:Key="InsertFrames.FitCanvas">Fit Image on Canvas</s:String>-->
-    <!--<s:String x:Key="InsertFrames.FitCanvas.Info">Resizes the canvas to fit both images inside (from the top left corner).</s:String>-->
-    <s:String x:Key="InsertFrames.DifferentSizes">Existe uma diferença de tamanho entre os fotogramas. Deve redimensionar antes de inseri-los.</s:String>
-    <s:String x:Key="InsertFrames.InsertedFrames">Fotograma(s) Inserido(s)</s:String>
-    <s:String x:Key="InsertFrames.CurrentFrames">Fotograma(s) Actual(ais)</s:String>
-    <!--<s:String x:Key="InsertFrames.ImageSize">Image size:</s:String>-->
-    <!--<s:String x:Key="InsertFrames.ImagePosition">Image position:</s:String>-->
-    <!--<s:String x:Key="InsertFrames.ResetImageSizePosition">Reset Image Size&#x0d;and Position</s:String>-->
-    <!--<s:String x:Key="InsertFrames.Info2">New frames will be inserted into the current list of frames at the position:</s:String>-->
-    <s:String x:Key="InsertFrames.Before">Antes</s:String>
-    <s:String x:Key="InsertFrames.After">Depois</s:String>
-    <s:String x:Key="InsertFrames.Importing">A Importar</s:String>
-    <s:String x:Key="InsertFrames.SelectColorFill">Seleccione a Cor de Fundo</s:String>
+    <s:String x:Key="S.InsertFrames.Title">Inserir Fotogramas</s:String>
+    <!--<s:String x:Key="S.InsertFrames.Info">Both sides should have the same size, this window allows you to reposition and resize the image and the canvas. Click to select and resize.</s:String>-->
+    <!--<s:String x:Key="S.InsertFrames.CanvasSize">Canvas size:</s:String>-->
+    <!--<s:String x:Key="S.InsertFrames.FitCanvas">Fit Image on Canvas</s:String>-->
+    <!--<s:String x:Key="S.InsertFrames.FitCanvas.Info">Resizes the canvas to fit both images inside (from the top left corner).</s:String>-->
+    <s:String x:Key="S.InsertFrames.DifferentSizes">Existe uma diferença de tamanho entre os fotogramas. Deve redimensionar antes de inseri-los.</s:String>
+    <s:String x:Key="S.InsertFrames.InsertedFrames">Fotograma(s) Inserido(s)</s:String>
+    <s:String x:Key="S.InsertFrames.CurrentFrames">Fotograma(s) Actual(ais)</s:String>
+    <!--<s:String x:Key="S.InsertFrames.ImageSize">Image size:</s:String>-->
+    <!--<s:String x:Key="S.InsertFrames.ImagePosition">Image position:</s:String>-->
+    <!--<s:String x:Key="S.InsertFrames.ResetImageSizePosition">Reset Image Size&#x0d;and Position</s:String>-->
+    <!--<s:String x:Key="S.InsertFrames.Info2">New frames will be inserted into the current list of frames at the position:</s:String>-->
+    <s:String x:Key="S.InsertFrames.Before">Antes</s:String>
+    <s:String x:Key="S.InsertFrames.After">Depois</s:String>
+    <s:String x:Key="S.InsertFrames.Importing">A Importar</s:String>
+    <s:String x:Key="S.InsertFrames.SelectColorFill">Seleccione a Cor de Fundo</s:String>
 
     <!--Import Frames From Video-->
     <s:String x:Key="S.ImportVideo.Title">Importar Fotogramas do Vídeo</s:String>
@@ -438,39 +438,39 @@
     <!--<s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg not present. Add it to the Path environment variables or set the location on Settings.</s:String>-->
     
     <!--Hints-->
-    <!--<s:String x:Key="Hint.NewRecording">New recording created</s:String>-->
-    <!--<s:String x:Key="Hint.NewWebcamRecording">New webcam recording created</s:String>-->
-    <!--<s:String x:Key="Hint.NewBoardRecording">New board recording created</s:String>-->
-    <!--<s:String x:Key="Hint.NewAnimation">New project created</s:String>-->
-    <!--<s:String x:Key="Hint.Undo">Undo executed</s:String>-->
-    <!--<s:String x:Key="Hint.Reset">Reset executed</s:String>-->
-    <!--<s:String x:Key="Hint.Redo">Redo executed</s:String>-->
-    <!--<s:String x:Key="Hint.Cut">{0} frame(s) cut</s:String>-->
-    <!--<s:String x:Key="Hint.Copy">{0} frame(s) copied</s:String>-->
-    <!--<s:String x:Key="Hint.Paste">{0} frame(s) pasted</s:String>-->
-    <!--<s:String x:Key="Hint.Zoom">Zoom set to {0}%</s:String>-->
-    <!--<s:String x:Key="Hint.SelectAll">All frames were selected</s:String>-->
-    <!--<s:String x:Key="Hint.SelectSingle">Frame #{0} selected</s:String>-->
-    <!--<s:String x:Key="Hint.SelectInverse">Selection inversed</s:String>-->
-    <!--<s:String x:Key="Hint.Deselect">All frames were deselected</s:String>-->
-    <!--<s:String x:Key="Hint.DeleteFrames">{0} frame(s) deleted</s:String>-->
-    <!--<s:String x:Key="Hint.Reverse">Frame list reversed</s:String>-->
-    <!--<s:String x:Key="Hint.Yoyo">Yoyo effect applied</s:String>-->
-    <!--<s:String x:Key="Hint.MoveLeft">Frame(s) moved to the left</s:String>-->
-    <!--<s:String x:Key="Hint.MoveRight">Frame(s) moved to the right</s:String>-->
-    <!--<s:String x:Key="Hint.Resize">Frames resized</s:String>-->
-    <!--<s:String x:Key="Hint.Crop">Frames cropped</s:String>-->
-    <!--<s:String x:Key="Hint.FlipRotate">Frames flipped/rotated</s:String>-->
-    <!--<s:String x:Key="Hint.FlipRotate2">The flip action applies to the selected frames and the rotate applies to all frames</s:String>-->
-    <!--<s:String x:Key="Hint.ApplyAll">This action applies to all frames</s:String>-->
-    <!--<s:String x:Key="Hint.ApplySelected">This action applies to selected frames</s:String>-->
-    <!--<s:String x:Key="Hint.Cinemagraph">The cinemagraph applies to all frames based on the first frame</s:String>-->
-    <!--<s:String x:Key="Hint.Overlay">Overlay applied</s:String>-->
-    <!--<s:String x:Key="Hint.TitleFrame">Title frame created</s:String>-->
-    <!--<s:String x:Key="Hint.TitleFrame2">The title frame will be inserted before the selected frame</s:String>-->
-    <!--<s:String x:Key="Hint.Delay">Duration (delay) altered</s:String>-->
-    <!--<s:String x:Key="Hint.Transition">Transition inserted</s:String>-->
-    <!--<s:String x:Key="Hint.Reduce">Framerate reduced</s:String>-->
+    <!--<s:String x:Key="S.Hint.NewRecording">New recording created</s:String>-->
+    <!--<s:String x:Key="S.Hint.NewWebcamRecording">New webcam recording created</s:String>-->
+    <!--<s:String x:Key="S.Hint.NewBoardRecording">New board recording created</s:String>-->
+    <!--<s:String x:Key="S.Hint.NewAnimation">New project created</s:String>-->
+    <!--<s:String x:Key="S.Hint.Undo">Undo executed</s:String>-->
+    <!--<s:String x:Key="S.Hint.Reset">Reset executed</s:String>-->
+    <!--<s:String x:Key="S.Hint.Redo">Redo executed</s:String>-->
+    <!--<s:String x:Key="S.Hint.Cut">{0} frame(s) cut</s:String>-->
+    <!--<s:String x:Key="S.Hint.Copy">{0} frame(s) copied</s:String>-->
+    <!--<s:String x:Key="S.Hint.Paste">{0} frame(s) pasted</s:String>-->
+    <!--<s:String x:Key="S.Hint.Zoom">Zoom set to {0}%</s:String>-->
+    <!--<s:String x:Key="S.Hint.SelectAll">All frames were selected</s:String>-->
+    <!--<s:String x:Key="S.Hint.SelectSingle">Frame #{0} selected</s:String>-->
+    <!--<s:String x:Key="S.Hint.SelectInverse">Selection inversed</s:String>-->
+    <!--<s:String x:Key="S.Hint.Deselect">All frames were deselected</s:String>-->
+    <!--<s:String x:Key="S.Hint.DeleteFrames">{0} frame(s) deleted</s:String>-->
+    <!--<s:String x:Key="S.Hint.Reverse">Frame list reversed</s:String>-->
+    <!--<s:String x:Key="S.Hint.Yoyo">Yoyo effect applied</s:String>-->
+    <!--<s:String x:Key="S.Hint.MoveLeft">Frame(s) moved to the left</s:String>-->
+    <!--<s:String x:Key="S.Hint.MoveRight">Frame(s) moved to the right</s:String>-->
+    <!--<s:String x:Key="S.Hint.Resize">Frames resized</s:String>-->
+    <!--<s:String x:Key="S.Hint.Crop">Frames cropped</s:String>-->
+    <!--<s:String x:Key="S.Hint.FlipRotate">Frames flipped/rotated</s:String>-->
+    <!--<s:String x:Key="S.Hint.FlipRotate2">The flip action applies to the selected frames and the rotate applies to all frames</s:String>-->
+    <!--<s:String x:Key="S.Hint.ApplyAll">This action applies to all frames</s:String>-->
+    <!--<s:String x:Key="S.Hint.ApplySelected">This action applies to selected frames</s:String>-->
+    <!--<s:String x:Key="S.Hint.Cinemagraph">The cinemagraph applies to all frames based on the first frame</s:String>-->
+    <!--<s:String x:Key="S.Hint.Overlay">Overlay applied</s:String>-->
+    <!--<s:String x:Key="S.Hint.TitleFrame">Title frame created</s:String>-->
+    <!--<s:String x:Key="S.Hint.TitleFrame2">The title frame will be inserted before the selected frame</s:String>-->
+    <!--<s:String x:Key="S.Hint.Delay">Duration (delay) altered</s:String>-->
+    <!--<s:String x:Key="S.Hint.Transition">Transition inserted</s:String>-->
+    <!--<s:String x:Key="S.Hint.Reduce">Framerate reduced</s:String>-->
     
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">Esconder</s:String>

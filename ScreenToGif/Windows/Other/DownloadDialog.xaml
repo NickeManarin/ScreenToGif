@@ -62,7 +62,7 @@
             <n:ExtendedCheckBox Grid.Column="0" x:Name="RunAfterwardsCheckBox" Text="{DynamicResource S.Updater.RunAfter}" Margin="5" Visibility="Collapsed"/>
 
             <n:ImageButton Grid.Column="1" x:Name="DownloadButton" Text="{DynamicResource S.Updater.Download}" Content="{StaticResource Vector.Ok}" ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="DownloadButton_Click"/>
-            <n:ImageButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource Cancel}" Content="{StaticResource Vector.Cancel}" ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="CancelButton_Click" IsCancel="True"/>
+            <n:ImageButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource S.Cancel}" Content="{StaticResource Vector.Cancel}" ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="CancelButton_Click" IsCancel="True"/>
         </Grid>
     </Grid>
 </Window>

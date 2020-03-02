@@ -11,7 +11,7 @@ using ScreenToGif.Util;
 namespace ScreenToGif.Controls
 {
     /// <summary>
-    /// Light Window used by the Recorder.
+    /// Light Window used by some recorder windows.
     /// </summary>
     public class LightWindow : RecorderWindow
     {
