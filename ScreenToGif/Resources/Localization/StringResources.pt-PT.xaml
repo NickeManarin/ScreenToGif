@@ -32,12 +32,10 @@
     <s:String x:Key="S.StartUp.Editor.Tooltip">Abre o editor. O local central desta aplicação.</s:String>
 
     <!--Update Page-->
-    <!--<s:String x:Key="Update">Update</s:String>-->
-    <!--<s:String x:Key="Update.NewRelease">New release!</s:String>-->
-    <!--<s:String x:Key="Download">Download</s:String>-->
-    <!--<s:String x:Key="Update.CloseThis">Do you want to close this app?</s:String>-->
-    <!--<s:String x:Key="Update.CloseThis.Detail">This is an older version. You have already downloaded a new version.</s:String>-->
-    
+    <!--<s:String x:Key="S.Updater.Title">Update</s:String>-->
+    <!--<s:String x:Key="S.Updater.NewRelease">New release!</s:String>-->
+    <!--<s:String x:Key="S.Updater.Download">Download</s:String>-->
+
     <!--Options Page-->
     <s:String x:Key="S.Options.Title">ScreenToGif - Opções</s:String>
     <s:String x:Key="S.Options.App">Geral</s:String>

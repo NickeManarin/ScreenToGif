@@ -198,8 +198,8 @@ namespace ScreenToGif
 
             #region Tasks
 
-            Task.Factory.StartNew(MainViewModel.ClearTemporaryFilesTask, TaskCreationOptions.LongRunning);
-            Task.Factory.StartNew(MainViewModel.UpdateTask, TaskCreationOptions.LongRunning);
+            Task.Factory.StartNew(MainViewModel.ClearTemporaryFiles, TaskCreationOptions.LongRunning);
+            Task.Factory.StartNew(MainViewModel.CheckForUpdates, TaskCreationOptions.LongRunning);
             Task.Factory.StartNew(MainViewModel.SendFeedback, TaskCreationOptions.LongRunning);
 
             #endregion

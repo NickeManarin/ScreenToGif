@@ -117,19 +117,13 @@
     <s:String x:Key="S.StartUp.Editor.Tooltip">편집기를 시작합니다.</s:String>
 
     <!--Update Window-->
-    <s:String x:Key="Update">업데이트</s:String>
-    <s:String x:Key="Update.NewRelease">새 버전 출시!</s:String>
-    <s:String x:Key="Update.NewRelease.Verbose">새 버전 {0}이 출시되었습니다! 여기를 눌러 자세한 내용을 확인하세요.</s:String>
-    <s:String x:Key="Download">다운로드</s:String>
-    <s:String x:Key="Update.Portable">무설치판</s:String>
-    <s:String x:Key="Update.Installer">설치판</s:String>
-    <s:String x:Key="Update.Filename.Warning">다른 위치 또는 다른 파일 이름을 선택해야 합니다</s:String>
-    <s:String x:Key="Update.Filename.Warning2">당장은 실행 파일을 새 버전으로 덮어쓸 수 없습니다. 다른 파일 이름을 선택하시기 바랍니다.</s:String>
-    <s:String x:Key="Update.Install.Header">지금 바로 새 버전을 설치할까요?</s:String>
-    <s:String x:Key="Update.Install.Description">프로그램을 닫고 설치 마법사를 실행합니다.</s:String>
-    <s:String x:Key="Update.CloseThis">프로그램을 종료하시겠습니까?</s:String>
-    <s:String x:Key="Update.CloseThis.Detail">현재 버전은 오래된 버전입니다. 이미 새 버전이 존재합니다.</s:String>
-    
+    <s:String x:Key="S.Updater.Title">업데이트</s:String>
+    <s:String x:Key="S.Updater.NewRelease">새 버전 출시!</s:String>
+    <s:String x:Key="S.Updater.NewRelease.Info">새 버전 {0}이 출시되었습니다! 여기를 눌러 자세한 내용을 확인하세요.</s:String>
+    <s:String x:Key="S.Updater.Download">다운로드</s:String>
+    <s:String x:Key="S.Updater.Portable">무설치판</s:String>
+    <s:String x:Key="S.Updater.Installer">설치판</s:String>
+
     <!--Options-->
     <s:String x:Key="S.Options.Title">ScreenToGif - 설정</s:String>
     <s:String x:Key="S.Options.App">프로그램</s:String>

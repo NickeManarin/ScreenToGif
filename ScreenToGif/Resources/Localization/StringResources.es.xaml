@@ -33,19 +33,13 @@
     <s:String x:Key="S.StartUp.Editor.Tooltip">Abrir la ventana de edición, el punto central de esta app, donde editaras tus grabaciones.</s:String>
 
     <!--Update Page-->
-    <s:String x:Key="Update">Actualizar</s:String>
-    <s:String x:Key="Update.NewRelease">¡Nueva actualización!</s:String>
-    <s:String x:Key="Update.NewRelease.Verbose">Nueva actualización disponible, Versión {0}! Click aquí para más detalles</s:String>
-    <s:String x:Key="Download">Descargar</s:String>
-    <s:String x:Key="Update.Portable">Portable</s:String>
-    <s:String x:Key="Update.Installer">Instalar</s:String>
-    <s:String x:Key="Update.Filename.Warning">Debes escoger otra localización u otro nombre de archivo.</s:String>
-    <s:String x:Key="Update.Filename.Warning2">No puede sobreescribir el ejecutable con una nueva version en este momento, seleccione otro nombre para el archivo.</s:String>
-    <s:String x:Key="Update.Install.Header">¿Deseas instalar la nueva versión ahora?</s:String>
-    <s:String x:Key="Update.Install.Description">La aplicación se cerrara y el instalador se ejecutara.</s:String>
-    <s:String x:Key="Update.CloseThis">¿Quieres cerrar la aplicación?</s:String>
-    <s:String x:Key="Update.CloseThis.Detail">Esta es una vieja versión. Puedes descargar la última versión.</s:String>
-    
+    <s:String x:Key="S.Updater.Title">Actualizar</s:String>
+    <s:String x:Key="S.Updater.NewRelease">¡Nueva actualización!</s:String>
+    <s:String x:Key="S.Updater.NewRelease.Info">Nueva actualización disponible, Versión {0}! Click aquí para más detalles</s:String>
+    <s:String x:Key="S.Updater.Download">Descargar</s:String>
+    <s:String x:Key="S.Updater.Portable">Portable</s:String>
+    <s:String x:Key="S.Updater.Installer">Instalar</s:String>
+
     <!--Options-->
     <s:String x:Key="S.Options.Title">ScreenToGif - Opciones</s:String>
     <s:String x:Key="S.Options.App">Aplicación</s:String>

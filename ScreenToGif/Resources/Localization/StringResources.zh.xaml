@@ -132,18 +132,12 @@
     <s:String x:Key="S.StartUp.NewRelease.Tooltip">下载最新版本的 ScreenToGif。</s:String>
 
     <!--Update Window-->
-    <s:String x:Key="Update">更新</s:String>
-    <s:String x:Key="Update.NewRelease">新版本发布！</s:String>
-    <s:String x:Key="Update.NewRelease.Verbose">新版本 {0} 可用！点击此处查看。</s:String>
-    <s:String x:Key="Download">下载</s:String>
-    <s:String x:Key="Update.Portable">便携版</s:String>
-    <s:String x:Key="Update.Installer">安装程序</s:String>
-    <s:String x:Key="Update.Filename.Warning">您需要选择其他位置或其他文件名</s:String>
-    <s:String x:Key="Update.Filename.Warning2">您现在无法使用新版本覆盖此可执行文件，请为该文件选择另一个名称。</s:String>
-    <s:String x:Key="Update.Install.Header">您要现在安装新版本吗？</s:String>
-    <s:String x:Key="Update.Install.Description">将关闭此应用并执行安装程序。</s:String>
-    <s:String x:Key="Update.CloseThis">是否关闭应用？</s:String>
-    <s:String x:Key="Update.CloseThis.Detail">现在是旧版本，发现新版本并且已下载。</s:String>
+    <s:String x:Key="S.Updater.Title">更新</s:String>
+    <s:String x:Key="S.Updater.NewRelease">新版本发布！</s:String>
+    <s:String x:Key="S.Updater.NewRelease.Info">新版本 {0} 可用！点击此处查看。</s:String>
+    <s:String x:Key="S.Updater.Download">下载</s:String>
+    <s:String x:Key="S.Updater.Portable">便携版</s:String>
+    <s:String x:Key="S.Updater.Installer">安装程序</s:String>
     
     <!--Options-->
     <s:String x:Key="S.Options.Title">ScreenToGif - 选项</s:String>

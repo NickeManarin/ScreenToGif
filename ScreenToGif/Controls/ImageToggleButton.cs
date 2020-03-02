@@ -5,29 +5,31 @@ using System.Windows.Controls.Primitives;
 namespace ScreenToGif.Controls
 {
     /// <summary>
-    /// Button with a image inside.
+    /// A toggle button with a image inside.
     /// </summary>
     public class ImageToggleButton : ToggleButton
     {
         #region Variables
 
-        public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(ImageToggleButton), new FrameworkPropertyMetadata("Button"));
+        public static readonly DependencyProperty TextProperty = DependencyProperty.Register(nameof(Text), typeof(string), typeof(ImageToggleButton), new FrameworkPropertyMetadata("Button"));
 
-        public static readonly DependencyProperty KeyGestureProperty = DependencyProperty.Register("KeyGesture", typeof(string), typeof(ImageToggleButton), new FrameworkPropertyMetadata(""));
+        public static readonly DependencyProperty KeyGestureProperty = DependencyProperty.Register(nameof(KeyGesture), typeof(string), typeof(ImageToggleButton), new FrameworkPropertyMetadata(""));
 
-        public static readonly DependencyProperty ContentHeightProperty = DependencyProperty.Register("ContentHeight", typeof(double), typeof(ImageToggleButton), new FrameworkPropertyMetadata(double.NaN));
+        public static readonly DependencyProperty ContentHeightProperty = DependencyProperty.Register(nameof(ContentHeight), typeof(double), typeof(ImageToggleButton), new FrameworkPropertyMetadata(double.NaN));
 
-        public static readonly DependencyProperty ContentWidthProperty = DependencyProperty.Register("ContentWidth", typeof(double), typeof(ImageToggleButton), new FrameworkPropertyMetadata(double.NaN));
+        public static readonly DependencyProperty ContentWidthProperty = DependencyProperty.Register(nameof(ContentWidth), typeof(double), typeof(ImageToggleButton), new FrameworkPropertyMetadata(double.NaN));
 
         /// <summary> 
         /// DependencyProperty for <see cref="TextWrapping" /> property.
         /// </summary>
-        public static readonly DependencyProperty TextWrappingProperty = DependencyProperty.Register("TextWrapping", typeof(TextWrapping), typeof(ImageToggleButton),
+        public static readonly DependencyProperty TextWrappingProperty = DependencyProperty.Register(nameof(TextWrapping), typeof(TextWrapping), typeof(ImageToggleButton),
             new FrameworkPropertyMetadata(TextWrapping.NoWrap, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender));
 
-        public static readonly DependencyProperty DarkModeProperty = DependencyProperty.Register("DarkMode", typeof(bool), typeof(ImageToggleButton), new FrameworkPropertyMetadata(false));
+        public static readonly DependencyProperty DarkModeProperty = DependencyProperty.Register(nameof(DarkMode), typeof(bool), typeof(ImageToggleButton), new FrameworkPropertyMetadata(false));
 
-        public static readonly DependencyProperty IsOverNonClientAreaProperty = DependencyProperty.Register("IsOverNonClientArea", typeof(bool), typeof(ImageToggleButton), new FrameworkPropertyMetadata(false));
+        public static readonly DependencyProperty IsOverNonClientAreaProperty = DependencyProperty.Register(nameof(IsOverNonClientArea), typeof(bool), typeof(ImageToggleButton), new FrameworkPropertyMetadata(false));
+
+        public static readonly DependencyProperty IsImportantProperty = DependencyProperty.Register(nameof(IsImportant), typeof(bool), typeof(ImageToggleButton), new FrameworkPropertyMetadata(false));
 
         #endregion
 
@@ -101,6 +103,16 @@ namespace ScreenToGif.Controls
         {
             get => (bool)GetValue(IsOverNonClientAreaProperty);
             set => SetCurrentValue(IsOverNonClientAreaProperty, value);
+        }
+
+        /// <summary>
+        /// True if the button should be diplayed with a warning color.
+        /// </summary>
+        [Description("True if the button should be diplayed with a warning color.")]
+        public bool IsImportant
+        {
+            get => (bool)GetValue(IsImportantProperty);
+            set => SetCurrentValue(IsImportantProperty, value);
         }
 
         #endregion

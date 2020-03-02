@@ -53,19 +53,13 @@
     <s:String x:Key="S.StartUp.Editor.Tooltip">エディターウィンドウで新しい録画を開始したり編集したりできます。</s:String>
 
     <!--Update Window-->
-    <s:String x:Key="Update">更新</s:String>
-    <s:String x:Key="Update.NewRelease">新しいリリース！</s:String>
-    <s:String x:Key="Update.NewRelease.Verbose">新しいリリース バージョン {0}! ここをクリックして詳細表示</s:String>
-    <s:String x:Key="Download">ダウンロード</s:String>
-    <s:String x:Key="Update.Portable">ポータブル</s:String>
-    <s:String x:Key="Update.Installer">インストーラー</s:String>
-    <s:String x:Key="Update.Filename.Warning">別の場所か、別のファイル名を選択する必要があります。</s:String>
-    <s:String x:Key="Update.Filename.Warning2">実行ファイルを直ちに新しいバージョンに上書きすることはできません。別のファイル名を選択してください。</s:String>
-    <s:String x:Key="Update.Install.Header">すぐに最新バージョンをインストールしますか？</s:String>
-    <s:String x:Key="Update.Install.Description">アプリ終了後インストーラーが実行されます。</s:String>
-    <s:String x:Key="Update.CloseThis">アプリを終了しますか？</s:String>
-    <s:String x:Key="Update.CloseThis.Detail">これは旧バージョンです。既に新しいバージョンをダウンロードしました。</s:String>
-    
+    <s:String x:Key="S.Updater.Title">更新</s:String>
+    <s:String x:Key="S.Updater.NewRelease">新しいリリース！</s:String>
+    <s:String x:Key="S.Updater.NewRelease.Info">新しいリリース バージョン {0}! ここをクリックして詳細表示</s:String>
+    <s:String x:Key="S.Updater.Download">ダウンロード</s:String>
+    <s:String x:Key="S.Updater.Portable">ポータブル</s:String>
+    <s:String x:Key="S.Updater.Installer">インストーラー</s:String>
+
     <!--Options Window-->
     <s:String x:Key="S.Options.Title">ScreenToGif - オプション</s:String>
     <s:String x:Key="S.Options.App">アプリケーション</s:String>

@@ -54,19 +54,13 @@
     <s:String x:Key="S.StartUp.Editor.Tooltip">Mở cửa sổ chỉnh sửa, trung tâm của ứng dụng này, nơi bạn có thể bắt đầu và chỉnh sửa quay màn hình mới.</s:String>
 
     <!--Update Window-->
-    <s:String x:Key="Update">Cập nhật</s:String>
-    <s:String x:Key="Update.NewRelease">Phát hành mới!</s:String>
-    <s:String x:Key="Update.NewRelease.Verbose">Phát hành mới đã sẵn sàng, Phiên bản {0}! Click vào đây để biết thêm chi tiết.</s:String>
-    <s:String x:Key="Download">Tải về</s:String>
-    <s:String x:Key="Update.Portable">Bản Portable</s:String>
-    <s:String x:Key="Update.Installer">Tiến trình cài đặt</s:String>
-    <s:String x:Key="Update.Filename.Warning">Bạn cần chọn 1 địa chỉ khác hoặc 1 tên tệp khác</s:String>
-    <s:String x:Key="Update.Filename.Warning2">Bạn không thể thực hiện ghi đè với 1 phiên bản mới ngay lúc này, hãy chọn 1 tên khác cho tệp này.</s:String>
-    <s:String x:Key="Update.Install.Header">Bạn muốn cài đặt phiên bản mới ngay lúc này không?</s:String>
-    <s:String x:Key="Update.Install.Description">Ứng dụng sẽ đóng lại và tiến trình cài đặt sẽ được tiến hành.</s:String>
-    <s:String x:Key="Update.CloseThis">Bạn muốn đóng ứng dụng không?</s:String>
-    <s:String x:Key="Update.CloseThis.Detail">Đây là 1 phiên bản cũ hơn. Bạn đã tải về phiên bản mới rồi.</s:String>
-    
+    <s:String x:Key="S.Updater.Title">Cập nhật</s:String>
+    <s:String x:Key="S.Updater.NewRelease">Phát hành mới!</s:String>
+    <s:String x:Key="S.Updater.NewRelease.Info">Phát hành mới đã sẵn sàng, Phiên bản {0}! Click vào đây để biết thêm chi tiết.</s:String>
+    <s:String x:Key="S.Updater.Download">Tải về</s:String>
+    <s:String x:Key="S.Updater.Portable">Bản Portable</s:String>
+    <s:String x:Key="S.Updater.Installer">Tiến trình cài đặt</s:String>
+
     <!--Options Window-->
     <s:String x:Key="S.Options.Title">ScreenToGif - Các tùy chọn</s:String>
     <s:String x:Key="S.Options.App">Ứng dụng</s:String>

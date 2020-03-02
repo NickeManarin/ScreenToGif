@@ -276,6 +276,7 @@ namespace ScreenToGif.Controls
             var most = NotificationManager.Notifications.Select(s => s.Kind).OrderByDescending(a => (int)a).FirstOrDefault();
             
             _notificationButton.Content =  FindResource(StatusBand.KindToString(most)) as Canvas;
+            _notificationButton.IsImportant = most != StatusType.None;
 
             if (most != StatusType.None)
                 (_notificationButton.FindResource("NotificationStoryboard") as Storyboard)?.Begin();

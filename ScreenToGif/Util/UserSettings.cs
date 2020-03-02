@@ -24,7 +24,7 @@ namespace ScreenToGif.Util
     {
         #region Variables
 
-        private static object _lock = new object();
+        public static readonly object Lock = new object();
 
         private static ResourceDictionary _local;
         private static ResourceDictionary _appData;
@@ -145,7 +145,7 @@ namespace ScreenToGif.Util
 
         private static void SetValue(object value, [CallerMemberName] string key = "")
         {
-            lock(_lock)
+            lock(Lock)
             {
                 //Updates or inserts the value to the Local resource.
                 if (_local != null)
@@ -533,6 +533,18 @@ namespace ScreenToGif.Util
         }
 
         public bool CheckForUpdates
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool InstallUpdates
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool PromptToInstall
         {
             get => (bool)GetValue();
             set => SetValue(value);

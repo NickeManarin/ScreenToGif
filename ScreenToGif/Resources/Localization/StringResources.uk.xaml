@@ -32,12 +32,10 @@
     <s:String x:Key="S.StartUp.Editor.Tooltip">Відкрити вікно редактора, головна частина програми, де ви можете почати і редагувати новий запис.</s:String>
 
     <!--Update Page-->
-    <s:String x:Key="Update">Доступна нова версія • {0}</s:String>
-    <!--<s:String x:Key="Update.NewRelease">New release!</s:String>-->
-    <s:String x:Key="Download">Завантажити</s:String>
-    <!--<s:String x:Key="Update.CloseThis">Do you want to close this app?</s:String>-->
-    <!--<s:String x:Key="Update.CloseThis.Detail">This is an older version. You have already downloaded a new version.</s:String>-->
-    
+    <s:String x:Key="S.Updater.Title">Доступна нова версія • {0}</s:String>
+    <!--<s:String x:Key="S.Updater.NewRelease">New release!</s:String>-->
+    <s:String x:Key="S.Updater.Download">Завантажити</s:String>
+
     <!--Options Page-->
     <s:String x:Key="S.Options.Title">Налаштування ScreenToGif</s:String>
     <s:String x:Key="S.Options.App">Програма</s:String>

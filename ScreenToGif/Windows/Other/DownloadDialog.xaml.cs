@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
-using System.Net;
-using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Documents;
 using System.Xml.Linq;
+using ScreenToGif.Controls;
 using ScreenToGif.Model;
 using ScreenToGif.Util;
 
@@ -14,26 +14,34 @@ namespace ScreenToGif.Windows.Other
 {
     public partial class DownloadDialog : Window
     {
+        #region Properties
+
         public XElement Element { get; set; }
 
-        internal UpdateModel Details { get; set; }
+        internal UpdateAvailable Details { get; set; }
 
         public bool IsChocolatey { get; set; }
 
         public bool IsInstaller { get; set; }
+
+        public bool WasPromptedManually { get; set; }
+
+        #endregion
+
 
         public DownloadDialog()
         {
             InitializeComponent();
         }
 
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             #region Validation
 
-            if (Global.UpdateModel == null)
+            if (Global.UpdateAvailable == null)
             {
-                WhatsNewParagraph.Inlines.Add("Something wrong happened.");
+                WhatsNewParagraph.Inlines.Add("Something wrong happened. No update was found.");
                 return;
             }
 
@@ -45,163 +53,111 @@ namespace ScreenToGif.Windows.Other
                 IsChocolatey = AppDomain.CurrentDomain.BaseDirectory.EndsWith(@"Chocolatey\lib\screentogif\content\");
                 IsInstaller = Directory.EnumerateFiles(AppDomain.CurrentDomain.BaseDirectory).Any(x => x.ToLowerInvariant().EndsWith("screentogif.visualelementsmanifest.xml"));
 
-                VersionRun.Text = "Version " + Global.UpdateModel.Version;
-                SizeRun.Text = Humanizer.BytesToString(IsInstaller ? Global.UpdateModel.InstallerSize : Global.UpdateModel.PortableSize);
+                VersionRun.Text = $"{LocalizationHelper.Get("S.Updater.Version")} {Global.UpdateAvailable.Version}";
+                SizeRun.Text = Global.UpdateAvailable.InstallerSize > 0 ? Humanizer.BytesToString(IsInstaller ? Global.UpdateAvailable.InstallerSize : Global.UpdateAvailable.PortableSize) : "";
+                TypeRun.Text = IsInstaller ? LocalizationHelper.Get("S.Updater.Installer") : LocalizationHelper.Get("S.Updater.Portable");
 
-                TypeRun.Text = IsInstaller ? LocalizationHelper.Get("Update.Installer") : LocalizationHelper.Get("Update.Portable");
+                //If set to download automatically, check if the installer was downloaded.
+                if (UserSettings.All.InstallUpdates)
+                {
+                    //If the update was already downloaded.
+                    if (File.Exists(Global.UpdateAvailable.InstallerPath))
+                    {
+                        DownloadButton.SetResourceReference(ImageButton.TextProperty, "S.Updater.Install");
 
-                var splited = Global.UpdateModel.Description.Split(new[] { '#' }, StringSplitOptions.RemoveEmptyEntries);
+                        //When the update was prompted manually, the user can set the installer to run the app afterwards.
+                        if (WasPromptedManually)
+                        {
+                            RunAfterwardsCheckBox.Visibility = Visibility.Visible;
+                            RunAfterwardsCheckBox.IsChecked = true;
+                        }
+                    }
+                }
 
-                WhatsNewParagraph.Inlines.Add(splited[0].Replace(" What's new?\r\n\r\n", ""));
-                FixesParagraph.Inlines.Add(splited.Length > 1 ? splited[1].Replace(" Bug fixes:\r\n\r\n", "") : "Aparently nothing.");
+                //Details.
+                if (Global.UpdateAvailable.IsFromGithub)
+                {
+                    //From Github, the description is available.
+                    var splited = Global.UpdateAvailable.Description.Split(new[] { '#' }, StringSplitOptions.RemoveEmptyEntries);
+
+                    WhatsNewParagraph.Inlines.Add(splited[0].Replace(" What's new?\r\n\r\n", ""));
+                    FixesParagraph.Inlines.Add(splited.Length > 1 ? splited[1].Replace(" Bug fixes:\r\n\r\n", "").Replace(" Fixed:\r\n\r\n", "") : "Aparently nothing.");
+                }
+                else
+                {
+                    //If the release detail was obtained by querying Fosshub, no release note is available. 
+                    MainFlowDocument.Blocks.Remove(WhatsNewParagraphTitle);
+                    MainFlowDocument.Blocks.Remove(FixesParagraphTitle);
+                    MainFlowDocument.Blocks.Remove(FixesParagraph);
+
+                    var run = new Run();
+                    run.SetResourceReference(Run.TextProperty, "S.Updater.Info.NewVersionAvailable");
+                    WhatsNewParagraph.Inlines.Add(run);
+                }
             }
             catch (Exception ex)
             {
-                LogWriter.Log(ex, "Loading download informations");
-
-                WhatsNewParagraph.Inlines.Add("Something wrong happened.");
+                LogWriter.Log(ex, "Impossible to load the download details");
+                StatusBand.Error(LocalizationHelper.Get("S.Updater.Warning.Show"));
             }
         }
 
         private async void DownloadButton_Click(object sender, RoutedEventArgs e)
         {
-            #region Save as
-
-            var save = new Microsoft.Win32.SaveFileDialog
+            //If update already downloaded, simply close this window. The installation will happen afterwards.
+            if (File.Exists(Global.UpdateAvailable.InstallerPath))
             {
-                FileName = "ScreenToGif " + Global.UpdateModel.Version + (IsInstaller ? " Setup" : ""),
-                DefaultExt = IsInstaller ? ".msi" : ".exe",
-                Filter = IsInstaller ? "ScreenToGif setup|*.msi" : "ScreenToGif executable|*.exe"
-            };
-
-            var result = save.ShowDialog();
-
-            if (!result.HasValue || !result.Value)
-                return;
-
-            if (save.FileName == Assembly.GetExecutingAssembly().Location)
-            {
-                Dialog.Ok(Title, LocalizationHelper.Get("Update.Filename.Warning"), LocalizationHelper.Get("Update.Filename.Warning2"), Icons.Warning);
+                GC.Collect();
+                DialogResult = true;
                 return;
             }
 
-            #endregion
-
-            //After downloading, remove the notification and set the global variable to null;
-
-            DownloadButton.IsEnabled = false;
-            StatusBand.Info("Downloading...");
-            DownloadProgressBar.Visibility = Visibility.Visible;
-
-            var tempFilename = !IsInstaller ? save.FileName.Replace(".exe", DateTime.Now.ToString(" hh-mm-ss fff") + ".zip") : save.FileName;
-
-            #region Download
-
-            try
+            //When the update was not queried from Github, the dowload must be done by browser.
+            if (!Global.UpdateAvailable.IsFromGithub)
             {
-                using (var webClient = new WebClient())
-                {
-                    webClient.Credentials = CredentialCache.DefaultNetworkCredentials;
-                    webClient.Proxy = WebHelper.GetProxy();
-
-                    await webClient.DownloadFileTaskAsync(new Uri(IsInstaller ? Global.UpdateModel.InstallerDownloadUrl : Global.UpdateModel.PortableDownloadUrl), tempFilename);
-                }
-            }
-            catch (Exception ex)
-            {
-                LogWriter.Log(ex, "Download updates");
-
-                DownloadButton.IsEnabled = true;
-                DownloadProgressBar.Visibility = Visibility.Hidden;
-                StatusBand.Hide();
-
-                Dialog.Ok("Update", "Error while downloading", ex.Message);
-                return;
-            }
-
-            #endregion
-
-            //If cancelled.
-            if (!IsLoaded)
-            {
-                StatusBand.Hide();
-                return;
-            }
-
-            #region Installer
-
-            if (IsInstaller)
-            {
-                if (!Dialog.Ask(Title, LocalizationHelper.Get("Update.Install.Header"), LocalizationHelper.Get("Update.Install.Description")))
-                    return;
-
                 try
                 {
-                    Process.Start(tempFilename);
+                    Process.Start(Global.UpdateAvailable.InstallerDownloadUrl);
                 }
                 catch (Exception ex)
                 {
-                    LogWriter.Log(ex, "Starting the installer");
-                    StatusBand.Hide();
-
-                    Dialog.Ok(Title, "Error while starting the installer", ex.Message);
-                    return;
+                    LogWriter.Log(ex, "Impossible to open the browser to download the update.", Global.UpdateAvailable?.InstallerDownloadUrl);
                 }
 
-                Global.UpdateModel = null;
-                Environment.Exit(25);
-            }
-
-            #endregion
-
-            #region Unzip
-
-            try
-            {
-                //Unzips the only file.
-                using (var zipArchive = ZipFile.Open(tempFilename, ZipArchiveMode.Read))
-                    zipArchive.Entries.First(x => x.Name.EndsWith(".exe")).ExtractToFile(save.FileName, true);
-            }
-            catch (Exception ex)
-            {
-                LogWriter.Log(ex, "Unziping update");
-
-                DownloadButton.IsEnabled = true;
-                DownloadProgressBar.Visibility = Visibility.Hidden;
-                StatusBand.Hide();
-
-                Dialog.Ok("Update", "Error while unzipping", ex.Message);
+                GC.Collect();
+                DialogResult = true;
                 return;
             }
 
-            #endregion
+            DownloadButton.IsEnabled = false;
+            StatusBand.Info(LocalizationHelper.Get("S.Updater.Downloading"));
+            DownloadProgressBar.Visibility = Visibility.Visible;
+            RunAfterwardsCheckBox.Visibility = Visibility.Collapsed;
 
-            Global.UpdateModel = null;
+            var result = await Task.Factory.StartNew(() => App.MainViewModel.DownloadUpdate());
 
-            #region Delete temporary zip and run
-
-            try
+            //If cancelled.
+            if (!IsLoaded)
+                return;
+                
+            if (!result)
             {
-                File.Delete(tempFilename);
-
-                Process.Start(save.FileName);
-            }
-            catch (Exception ex)
-            {
-                LogWriter.Log(ex, "Finishing update");
-
                 DownloadButton.IsEnabled = true;
                 DownloadProgressBar.Visibility = Visibility.Hidden;
-                StatusBand.Hide();
-
-                Dialog.Ok(Title, "Error while finishing the update", ex.Message);
+                StatusBand.Error(LocalizationHelper.Get("S.Updater.Warning.Download"));
                 return;
             }
 
-            #endregion
+            //If the update was downloaded successfully, close this window to run.
+            if (File.Exists(Global.UpdateAvailable.InstallerPath))
+            {
+                GC.Collect();
+                StatusBand.Hide();
+                DialogResult = true;
+                return;
+            }
 
-            GC.Collect();
-            DialogResult = true;
+            StatusBand.Error(LocalizationHelper.Get("S.Updater.Warning.Download"));
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)

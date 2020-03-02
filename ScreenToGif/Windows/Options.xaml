@@ -4,7 +4,7 @@
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
         xmlns:u="clr-namespace:ScreenToGif.Util"
-        Title="{DynamicResource S.Options.Title}" Height="590" Width="800" MinWidth="680" MinHeight="460" Background="{DynamicResource Panel.Background}"
+        Title="{DynamicResource S.Options.Title}" Height="610" Width="800" MinWidth="680" MinHeight="460" Background="{DynamicResource Panel.Background}"
         Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" UseLayoutRounding="True" SnapsToDevicePixels="True"
         Loaded="Window_Loaded" Closing="Window_Closing">
 
@@ -256,6 +256,11 @@
                                 </WrapPanel>
 
                                 <n:ExtendedCheckBox x:Name="UpdatesCheckBox" Text="{DynamicResource S.Options.App.General.CheckForUpdates}" Margin="15,3,5,3" IsChecked="{Binding Path=CheckForUpdates, Mode=TwoWay}"/>
+                                <StackPanel Visibility="{Binding CheckForUpdates, Converter={StaticResource Bool2Visibility}}">
+                                    <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.UpdateOnClose}" Margin="30,3,5,3" IsChecked="{Binding Path=InstallUpdates, Mode=TwoWay}"/>
+                                    <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.PromptToInstall}" Margin="45,3,5,3" IsChecked="{Binding Path=PromptToInstall, Mode=TwoWay}"
+                                                        Visibility="{Binding InstallUpdates, Converter={StaticResource Bool2Visibility}}"/>
+                                </StackPanel>
                             </StackPanel>
                         </Expander>
                     </Grid>

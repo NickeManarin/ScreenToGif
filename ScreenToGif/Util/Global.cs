@@ -36,6 +36,6 @@ namespace ScreenToGif.Util
         /// <summary>
         /// Holds the details of the latest update available.
         /// </summary>
-        internal static UpdateModel UpdateModel { get; set; }
+        internal static UpdateAvailable UpdateAvailable { get; set; }
     }
 }

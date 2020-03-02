@@ -51,19 +51,13 @@
     <s:String x:Key="S.StartUp.Editor.Tooltip">Otevře okno editoru, centrální bod aplikace, ve kterém lze editovat nové záznamy.</s:String>
 
     <!--Update Page-->
-    <s:String x:Key="Update">Aktualizace</s:String>
-    <s:String x:Key="Update.NewRelease">Nová verze!</s:String>
-    <s:String x:Key="Update.NewRelease.Verbose">Je k dispozici nová verze {0}! Klikněte zde pro více informací.</s:String>
-    <s:String x:Key="Download">Stáhnout</s:String>
-    <s:String x:Key="Update.Portable">Přenosný</s:String>
-    <s:String x:Key="Update.Installer">Instalační program</s:String>
-    <s:String x:Key="Update.Filename.Warning">Vyberte jiné umístění nebo jiný název souboru</s:String>
-    <s:String x:Key="Update.Filename.Warning2">Nelze přepsat spustitelný soubor novou verzí, vyberte jiný název souboru.</s:String>
-    <s:String x:Key="Update.Install.Header">Chcete nainstalovat novou verzi?</s:String>
-    <s:String x:Key="Update.Install.Description">Aplikace bude uzavřena a instalační soubor spuštěn.</s:String>
-    <s:String x:Key="Update.CloseThis">Chcete aplikaci uzavřít?</s:String>
-    <s:String x:Key="Update.CloseThis.Detail">Toto je starší verze. Nová verze již byla stažena.</s:String>
-    
+    <s:String x:Key="S.Updater.Title">Aktualizace</s:String>
+    <s:String x:Key="S.Updater.NewRelease">Nová verze!</s:String>
+    <s:String x:Key="S.Updater.NewRelease.Info">Je k dispozici nová verze {0}! Klikněte zde pro více informací.</s:String>
+    <s:String x:Key="S.Updater.Download">Stáhnout</s:String>
+    <s:String x:Key="S.Updater.Portable">Přenosný</s:String>
+    <s:String x:Key="S.Updater.Installer">Instalační program</s:String>
+
     <!--Options Page-->
     <s:String x:Key="S.Options.Title">ScreenToGif - Nastavení</s:String>
     <s:String x:Key="S.Options.App">Aplikace</s:String>

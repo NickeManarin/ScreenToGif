@@ -1171,8 +1171,8 @@
                                              IsHitTestVisible="{Binding ElementName=MainPopup, Path=IsOpen, Mode=OneWay, Converter={StaticResource InvertedBool}}">
                             <n:ImageToggleButton.Resources>
                                 <Storyboard x:Key="NotificationStoryboard">
-                                    <DoubleAnimation Storyboard.TargetName="NotificationsButton" Storyboard.TargetProperty="Opacity" From="1" To="0.3"
-                                                     RepeatBehavior="2x" AutoReverse="True" Duration="0:0:0.4"/>
+                                    <DoubleAnimation Storyboard.TargetName="NotificationsButton" Storyboard.TargetProperty="Opacity" From="1" To="0.4"
+                                                     RepeatBehavior="10x" AutoReverse="True" Duration="0:0:0.6"/>
                                 </Storyboard>
                             </n:ImageToggleButton.Resources>
                         </n:ImageToggleButton>
@@ -1192,7 +1192,7 @@
                                 <n:ImageMenuItem x:Name="TroubleshootMenuItem" Header="{DynamicResource S.Troubleshoot.Title}" Image="{DynamicResource Vector.Warning}" 
                                                  ContentHeight="16" ContentWidth="16" Command="{TemplateBinding TroubleshootCommand}"/>
                                 <Separator Height="1"/>
-                                <n:ImageMenuItem x:Name="HelpMenuItem" Header="{DynamicResource Help}" Image="{DynamicResource Vector.Question}" 
+                                <n:ImageMenuItem x:Name="HelpMenuItem" Header="{DynamicResource S.Editor.Help}" Image="{DynamicResource Vector.Question}" 
                                                  ContentHeight="16" ContentWidth="16" Command="{TemplateBinding HelpCommand}"/>
                             </n:ImageMenuItem>
                         </Menu>

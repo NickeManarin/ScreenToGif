@@ -32,12 +32,10 @@
     <s:String x:Key="S.StartUp.Editor.Tooltip">打開編輯器視窗，在該視窗中您可以編輯新錄製的影像。</s:String>
 
     <!--Update Page-->
-    <s:String x:Key="Update">更新</s:String>
-    <s:String x:Key="Update.NewRelease">新版本!</s:String>
-    <s:String x:Key="Update.NewRelease.Verbose">有新版本可用，版本 {0}!按一下這裡了解更多詳情。</s:String>
-    <s:String x:Key="Download">下載</s:String>
-    <s:String x:Key="Update.CloseThis">您要關閉此應用程式嗎?</s:String>
-    <s:String x:Key="Update.CloseThis.Detail">這是較舊的版本。您早已下載過新的版本。</s:String>
+    <s:String x:Key="S.Updater.Title">更新</s:String>
+    <s:String x:Key="S.Updater.NewRelease">新版本!</s:String>
+    <s:String x:Key="S.Updater.NewRelease.Info">有新版本可用，版本 {0}!按一下這裡了解更多詳情。</s:String>
+    <s:String x:Key="S.Updater.Download">下載</s:String>
     
     <!--Options Page-->
     <s:String x:Key="S.Options.Title">ScreenToGif - 選項</s:String>

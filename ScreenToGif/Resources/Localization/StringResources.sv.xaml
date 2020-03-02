@@ -117,19 +117,13 @@
     <s:String x:Key="S.StartUp.Editor.Tooltip">Öppnar redigeringsfönstret, den centrala punkten i denna applikation, där du kan starta och redigera en ny inspelning.</s:String>
 
     <!--Update Window-->
-    <s:String x:Key="Update">Uppdatera</s:String>
-    <s:String x:Key="Update.NewRelease">Ny uppdatering!</s:String>
-    <s:String x:Key="Update.NewRelease.Verbose">Ny version tillgänglig, Version {0}! Tryck här för mer info.</s:String>
-    <s:String x:Key="Download">Ladda ner</s:String>
-    <s:String x:Key="Update.Portable">Portabel</s:String>
-    <s:String x:Key="Update.Installer">Installeraren</s:String>
-    <s:String x:Key="Update.Filename.Warning">Du måste välja en annan plats eller ett annat namn.</s:String>
-    <s:String x:Key="Update.Filename.Warning2">Du kan inte skriva över den körbara filen med en ny version just nu, välj ett annat namn för filen.</s:String>
-    <s:String x:Key="Update.Install.Header">Vill du installera den nya version nu?</s:String>
-    <s:String x:Key="Update.Install.Description">Appen kommer att stängas och installationsprogrammet startas.</s:String>
-    <s:String x:Key="Update.CloseThis">Vill du stänga ner appen?</s:String>
-    <s:String x:Key="Update.CloseThis.Detail">Detta är en äldre version. Du har redan laddat ner en ny version.</s:String>
-    
+    <s:String x:Key="S.Updater.Title">Uppdatera</s:String>
+    <s:String x:Key="S.Updater.NewRelease">Ny uppdatering!</s:String>
+    <s:String x:Key="S.Updater.NewRelease.Info">Ny version tillgänglig, Version {0}! Tryck här för mer info.</s:String>
+    <s:String x:Key="S.Updater.Download">Ladda ner</s:String>
+    <s:String x:Key="S.Updater.Portable">Portabel</s:String>
+    <s:String x:Key="S.Updater.Installer">Installeraren</s:String>
+
     <!--Options Window-->
     <s:String x:Key="S.Options.Title">ScreenToGif - Alternativ</s:String>
     <s:String x:Key="S.Options.App">Applikation</s:String>

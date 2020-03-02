@@ -54,19 +54,13 @@
     <s:String x:Key="S.StartUp.Editor.Tooltip">Åbner redigeringsfunktionen, hvor du kan tilpasse din optagelse, eller starte en ny.</s:String>
 
     <!--Update Window-->
-    <s:String x:Key="Update">Opdater</s:String>
-    <s:String x:Key="Update.NewRelease">Ny udgave!</s:String>
-    <s:String x:Key="Update.NewRelease.Verbose">Version {0} er udkommet! Klik her for detaljer.</s:String>
-    <s:String x:Key="Download">Download</s:String>
-    <s:String x:Key="Update.Portable">Portable</s:String>
-    <s:String x:Key="Update.Installer">Installer</s:String>
-    <s:String x:Key="Update.Filename.Warning">Vælg en anden placering eller et andet filnavn</s:String>
-    <s:String x:Key="Update.Filename.Warning2">Filen kan ikke overskrives lige nu. Giv filen et andet navn.</s:String>
-    <s:String x:Key="Update.Install.Header">Vil du installere nu?</s:String>
-    <s:String x:Key="Update.Install.Description">Programmet lukkes og installeringen startes.</s:String>
-    <s:String x:Key="Update.CloseThis">Vil du lukke dette program?</s:String>
-    <s:String x:Key="Update.CloseThis.Detail">Dette er en ældre version. Du har allerede hentet en ny.</s:String>
-    
+    <s:String x:Key="S.Updater.Title">Opdater</s:String>
+    <s:String x:Key="S.Updater.NewRelease">Ny udgave!</s:String>
+    <s:String x:Key="S.Updater.NewRelease.Info">Version {0} er udkommet! Klik her for detaljer.</s:String>
+    <s:String x:Key="S.Updater.Download">Download</s:String>
+    <s:String x:Key="S.Updater.Portable">Portable</s:String>
+    <s:String x:Key="S.Updater.Installer">Installer</s:String>
+
     <!--Options Window-->
     <s:String x:Key="S.Options.Title">ScreenToGif - Indstillinger</s:String>
     <s:String x:Key="S.Options.App">Program</s:String>

@@ -129,19 +129,13 @@
     <s:String x:Key="S.StartUp.Editor.Tooltip">Öffnet Editor, mit dem Sie Ihre Aufnahmen bearbeiten können</s:String>
 
     <!--Update Window-->
-    <s:String x:Key="Update">Neue Version verfügbar</s:String>
-    <s:String x:Key="Update.NewRelease">Neue Version!</s:String>
-    <s:String x:Key="Update.NewRelease.Verbose">Neue Version {0} kann heruntergeladen werden! Für weitere Details bitte hier klicken.</s:String>
-    <s:String x:Key="Download">Herunterladen</s:String>
-    <s:String x:Key="Update.Portable">Portabel</s:String>
-    <s:String x:Key="Update.Installer">Installation</s:String>
-    <s:String x:Key="Update.Filename.Warning">Sie müssen anderen Pfad oder Dateinamen auswählen</s:String>
-    <s:String x:Key="Update.Filename.Warning2">Sie können die ausführbare Datei nicht mit einer neuer Version überschreiben. Bitte anderen Dateinamen auswählen.</s:String>
-    <s:String x:Key="Update.Install.Header">Möchten Sie die neue Version jetzt installieren?</s:String>
-    <s:String x:Key="Update.Install.Description">Programm und Installation werden geschlossen.</s:String>
-    <s:String x:Key="Update.CloseThis">Möchten Sie das Programm beenden?</s:String>
-    <s:String x:Key="Update.CloseThis.Detail">Das ist eine veraltete Version. Sie haben bereits die aktuelle Version heruntergeladen.</s:String>
-    
+    <s:String x:Key="S.Updater.Title">Neue Version verfügbar</s:String>
+    <s:String x:Key="S.Updater.NewRelease">Neue Version!</s:String>
+    <s:String x:Key="S.Updater.NewRelease.Info">Neue Version {0} kann heruntergeladen werden! Für weitere Details bitte hier klicken.</s:String>
+    <s:String x:Key="S.Updater.Download">Herunterladen</s:String>
+    <s:String x:Key="S.Updater.Portable">Portabel</s:String>
+    <s:String x:Key="S.Updater.Installer">Installation</s:String>
+
     <!--Options-->
     <s:String x:Key="S.Options.Title">ScreenToGif - Optionen</s:String>
     <s:String x:Key="S.Options.App">Allgemein</s:String>

@@ -32,12 +32,10 @@
     <s:String x:Key="S.StartUp.Editor.Tooltip">Düzenleme penceresini açar, bu uygulamanın merkezi, yeni kayıt başlatıp düzenleyebileceğiniz bir yer.</s:String>
 
     <!--Update Page-->
-    <s:String x:Key="Update">Güncelle</s:String>
-    <s:String x:Key="Update.NewRelease">Yeni sürüm!</s:String>
-    <s:String x:Key="Download">İndir</s:String>
-    <s:String x:Key="Update.CloseThis">Bu uygulamayı kapatmak istiyor musunuz?</s:String>
-    <s:String x:Key="Update.CloseThis.Detail">Bu eski bir sürüm. Yeni sürüm zaten indirildi.</s:String>
-    
+    <s:String x:Key="S.Updater.Title">Güncelle</s:String>
+    <s:String x:Key="S.Updater.NewRelease">Yeni sürüm!</s:String>
+    <s:String x:Key="S.Updater.Download">İndir</s:String>
+
     <!--Options Page-->
     <s:String x:Key="S.Options.Title">ScreenToGif - Ayarlar</s:String>
     <s:String x:Key="S.Options.App">Uygulama</s:String>

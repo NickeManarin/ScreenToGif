@@ -124,19 +124,13 @@
     <s:String x:Key="S.StartUp.Editor.Tooltip">يفتح نافذه المحرر ، النقطة المركزية لهذا التطبيق ، حيث يمكنك بدء وتحرير تسجيل جديد.</s:String>
 
     <!--Update Window-->
-    <s:String x:Key="Update">تحديث</s:String>
-    <s:String x:Key="Update.NewRelease">اصدار جديد!</s:String>
-    <s:String x:Key="Update.NewRelease.Verbose">اصدار جديد متوفر ، النسخة {0}! انقر هنا لمزيد من التفاصيل.</s:String>
-    <s:String x:Key="Download">تحميل</s:String>
-    <s:String x:Key="Update.Portable">المحموله</s:String>
-    <s:String x:Key="Update.Installer">المثبت</s:String>
-    <s:String x:Key="Update.Filename.Warning">تحتاج الى اختيار موقع اخر او اسم ملف اخر</s:String>
-    <s:String x:Key="Update.Filename.Warning2">لا يمكنك الكتابة فوق الملف القابل للتنفيذ مع اصدار جديد الان ، الرجاء تحديد اسم اخر للملف.</s:String>
-    <s:String x:Key="Update.Install.Header">هل ترغب في تثبيت الاصدار الجديد الان ؟</s:String>
-    <s:String x:Key="Update.Install.Description">سيتم اغلاق التطبيق سيتم تنفيذ المثبت.</s:String>
-    <s:String x:Key="Update.CloseThis">هل تريد اغلاق هذا التطبيق ؟</s:String>
-    <s:String x:Key="Update.CloseThis.Detail">هذا هو نسخه قديمه. لقد قمت بالفعل بتنزيل اصدار جديد.</s:String>
-    
+    <s:String x:Key="S.Updater.Title">تحديث</s:String>
+    <s:String x:Key="S.Updater.NewRelease">اصدار جديد!</s:String>
+    <s:String x:Key="S.Updater.NewRelease.Info">اصدار جديد متوفر ، النسخة {0}! انقر هنا لمزيد من التفاصيل.</s:String>
+    <s:String x:Key="S.Updater.Download">تحميل</s:String>
+    <s:String x:Key="S.Updater.Portable">المحموله</s:String>
+    <s:String x:Key="S.Updater.Installer">المثبت</s:String>
+
     <!--Options Window-->
     <s:String x:Key="S.Options.Title">خيارات - ScreenToGif </s:String>
     <s:String x:Key="S.Options.App">التطبيق</s:String>

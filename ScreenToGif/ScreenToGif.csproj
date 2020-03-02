@@ -299,6 +299,9 @@
     <Compile Include="ModelEx\Layers\TextLayer.cs" />
     <Compile Include="ModelEx\ProjectModel.cs" />
     <Compile Include="Model\BindableBase.cs" />
+    <Compile Include="Model\FosshubItem.cs" />
+    <Compile Include="Model\FosshubRelease.cs" />
+    <Compile Include="Model\FosshubResponse.cs" />
     <Compile Include="Model\ShadowModel.cs" />
     <Compile Include="Model\DefaultTaskModel.cs" />
     <Compile Include="Model\FfmpegPreset.cs" />
@@ -410,7 +413,7 @@
     <Compile Include="Util\GifskiInterop.cs" />
     <Compile Include="Util\HotKey.cs" />
     <Compile Include="Util\HotKeyCollection.cs" />
-    <Compile Include="Model\UpdateModel.cs" />
+    <Compile Include="Model\UpdateAvailable.cs" />
     <Compile Include="Util\MutexList.cs" />
     <Compile Include="Util\NotificationManager.cs" />
     <Compile Include="Util\Capture\ImageCapture.cs" />

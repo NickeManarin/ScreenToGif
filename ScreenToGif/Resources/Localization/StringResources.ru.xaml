@@ -131,19 +131,13 @@
     <s:String x:Key="S.StartUp.NewRelease.Tooltip">Загрузка последней версии программы.</s:String>
 
     <!--Update Window-->
-    <s:String x:Key="Update">Обновление</s:String>
-    <s:String x:Key="Update.NewRelease">Новая версия!</s:String>
-    <s:String x:Key="Update.NewRelease.Verbose">Доступна новая версия {0}! Показать детали.</s:String>
-    <s:String x:Key="Download">Загрузить</s:String>
-    <s:String x:Key="Update.Portable">Портативная</s:String>
-    <s:String x:Key="Update.Installer">Установщик</s:String>
-    <s:String x:Key="Update.Filename.Warning">Вам необходимо подобрать другое имя файла и\или путь к нему.</s:String>
-    <s:String x:Key="Update.Filename.Warning2">Вы не можете перезаписать EXE файл программы прямо сейчас, так как ПО запущено. Вам следует выбрать другое имя файла.</s:String>
-    <s:String x:Key="Update.Install.Header">Вы хотите установить новую версию программы прямо сейчас?</s:String>
-    <s:String x:Key="Update.Install.Description">Программа будет закрыта и запустится установщик.</s:String>
-    <s:String x:Key="Update.CloseThis">Вы хотите закрыть приложение?</s:String>
-    <s:String x:Key="Update.CloseThis.Detail">Текущая версия программы устарела. Новая версия уже загружена.</s:String>
-    
+    <s:String x:Key="S.Updater.Title">Обновление</s:String>
+    <s:String x:Key="S.Updater.NewRelease">Новая версия!</s:String>
+    <s:String x:Key="S.Updater.NewRelease.Info">Доступна новая версия {0}! Показать детали.</s:String>
+    <s:String x:Key="S.Updater.Download">Загрузить</s:String>
+    <s:String x:Key="S.Updater.Portable">Портативная</s:String>
+    <s:String x:Key="S.Updater.Installer">Установщик</s:String>
+
     <!--Options-->
     <s:String x:Key="S.Options.Title">ScreenToGif - Настройки</s:String>
     <s:String x:Key="S.Options.App">Программа</s:String>

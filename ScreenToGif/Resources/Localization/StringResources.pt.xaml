@@ -130,19 +130,23 @@
     <s:String x:Key="S.StartUp.Board.Tooltip">Abre o gravador de quadro.</s:String>
     <s:String x:Key="S.StartUp.Editor.Tooltip">Abre o editor. O local central deste aplicativo.</s:String>
 
-    <!--Update Window-->
-    <s:String x:Key="Update">Atualização</s:String>
-    <s:String x:Key="Update.NewRelease">Nova versão!</s:String>
-    <s:String x:Key="Update.NewRelease.Verbose">Nova versão disponível, Versão {0}! Clique aqui para mais detalhes.</s:String>
-    <s:String x:Key="Download">Download</s:String>
-    <s:String x:Key="Update.Portable">Portátil</s:String>
-    <s:String x:Key="Update.Installer">Instalador</s:String>
-    <s:String x:Key="Update.Filename.Warning">Você precisa escolher outro local ou outro nome de arquivo</s:String>
-    <s:String x:Key="Update.Filename.Warning2">Você não pode salvar o executável com o mesmo nome da versão que você está executando agora, selecione outro nome para o arquivo (ou salve em outra pasta).</s:String>
-    <s:String x:Key="Update.Install.Header">Deseja instalar a nova versão agora?</s:String>
-    <s:String x:Key="Update.Install.Description">O aplicativo será fechado e o instalador será executado logo após.</s:String>
-    <s:String x:Key="Update.CloseThis">Você deseja fechar este aplicativo?</s:String>
-    <s:String x:Key="Update.CloseThis.Detail">Esta é a versão antiga. Você já baixou a versão nova.</s:String>
+    <!--Updater-->
+    <s:String x:Key="S.Updater.Title">ScreenToGif - Atualizador</s:String>
+    <s:String x:Key="S.Updater.Header">Uma nova atualização está disponível</s:String>
+    <s:String x:Key="S.Updater.NewRelease">Nova versão!</s:String>
+    <s:String x:Key="S.Updater.NewRelease.Info">Nova versão disponível, Versão {0}!&#x0d;Clique aqui para mais detalhes.</s:String>
+    <s:String x:Key="S.Updater.Version">Versão</s:String>
+    <s:String x:Key="S.Updater.Portable">Portátil</s:String>
+    <s:String x:Key="S.Updater.Installer">Instalador</s:String>
+    <s:String x:Key="S.Updater.Info.WhatsNew">O que há de novo?</s:String>
+    <s:String x:Key="S.Updater.Info.BugFixes">Correções de bugs:</s:String>
+    <s:String x:Key="S.Updater.Info.NewVersionAvailable">Uma nova versão está disponível para você baixar.&#x0d;Você gostaria de abrir o navegador para baixá-la?</s:String>
+    <s:String x:Key="S.Updater.RunAfter">Abra o aplicativo após a atualização</s:String>
+    <s:String x:Key="S.Updater.Download">Download</s:String>
+    <s:String x:Key="S.Updater.Install">Instalar</s:String>
+    <s:String x:Key="S.Updater.Downloading">Baixando...</s:String>
+    <s:String x:Key="S.Updater.Warning.Show">Não foi possível exibir os detalhes da atualização.</s:String>
+    <s:String x:Key="S.Updater.Warning.Download">Não foi possível fazer o download da atualização.</s:String>
     
     <!--Options-->
     <s:String x:Key="S.Options.Title">ScreenToGif - Opções</s:String>
@@ -194,7 +198,9 @@
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(A interface será renderizada via software)</s:String>
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">Buscar atualizações das traduções.</s:String>
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(Traduções atualizadas serão baixadas e instaladas automaticamente)</s:String>
-    <s:String x:Key="S.Options.App.General.CheckForUpdates">Buscar atualizações.</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForUpdates">Buscar atualizações ao iniciar o aplicativo.</s:String>
+    <s:String x:Key="S.Options.App.General.UpdateOnClose">Baixar e instalar atualizações automaticamente ao fechar o aplicativo.</s:String>
+    <s:String x:Key="S.Options.App.General.PromptToInstall">Avisar-me antes do início da instalação.</s:String>
     <s:String x:Key="S.Options.App.Tray">Ícone da bandeja do sistema</s:String>
     <s:String x:Key="S.Options.App.Tray.Show">Exibir o aplicativo na bandeja do sistema (área de notificação).</s:String>
     <s:String x:Key="S.Options.App.Tray.LeaveOpen">Manter o aplicativo aberto mesmo se todas as janelas estiverem fechadas.</s:String>
@@ -625,7 +631,9 @@
     <s:String x:Key="Editor.Options">Opções</s:String>
     <s:String x:Key="S.Editor.Help">Ajuda</s:String>
     <s:String x:Key="S.Editor.Extras">Extras</s:String>
-
+    <s:String x:Key="S.Editor.UpdateAvailable">Uma nova atualização está disponível!</s:String>
+    <s:String x:Key="S.Editor.UpdateAvailable.Info">Clique aqui para ler mais a respeito.</s:String>
+    
     <!--Welcome-->
     <s:String x:Key="Welcome.New">Para iniciar uma nova gravação, navegue até "Arquivo > Novo"</s:String>
     <s:String x:Key="Welcome.Import">Arraste e largue imagens, vídeos ou projetos para importar</s:String>

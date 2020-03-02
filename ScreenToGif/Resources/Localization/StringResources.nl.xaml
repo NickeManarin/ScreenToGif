@@ -53,19 +53,13 @@
     <s:String x:Key="S.StartUp.Editor.Tooltip">Opent het Editorscherm, de centrale plek van deze applicatie. Hier kunnen nieuwe opnames worden gestart en bestaande opnames bewerkt.</s:String>
 
     <!--Update Window-->
-    <s:String x:Key="Update">Update</s:String>
-    <s:String x:Key="Update.NewRelease">Nieuwe uitgave!</s:String>
-    <s:String x:Key="Update.NewRelease.Verbose">Nieuwe uitgave beschikbaar, Versie {0}! Klik hier voor meer details.</s:String>
-    <s:String x:Key="Download">Downloaden</s:String>
-    <s:String x:Key="Update.Portable">Portable</s:String>
-    <s:String x:Key="Update.Installer">Installatieprogramma</s:String>
-    <s:String x:Key="Update.Filename.Warning">Kies een andere locatie of bestandsnaam</s:String>
-    <s:String x:Key="Update.Filename.Warning2">U kunt het uitvoeringsprogramma niet overschrijven met een nieuwere versie, kies a.u.b. een andere bestandsnaam.</s:String>
-    <s:String x:Key="Update.Install.Header">Wilt u de nieuwe versie nu installeren?</s:String>
-    <s:String x:Key="Update.Install.Description">Deze toepassing zal worden gesloten en het installatieprogramma zal worden uitgevoerd.</s:String>
-    <s:String x:Key="Update.CloseThis">Wilt u de toepassing sluiten?</s:String>
-    <s:String x:Key="Update.CloseThis.Detail">Dit is een oudere versie. U hebt al de nieuwere versie gedownload.</s:String>
-    
+    <s:String x:Key="S.Updater.Title">Update</s:String>
+    <s:String x:Key="S.Updater.NewRelease">Nieuwe uitgave!</s:String>
+    <s:String x:Key="S.Updater.NewRelease.Info">Nieuwe uitgave beschikbaar, Versie {0}! Klik hier voor meer details.</s:String>
+    <s:String x:Key="S.Updater.Download">Downloaden</s:String>
+    <s:String x:Key="S.Updater.Portable">Portable</s:String>
+    <s:String x:Key="S.Updater.Installer">Installatieprogramma</s:String>
+
     <!--Options Window-->
     <s:String x:Key="S.Options.Title">ScreenToGif - Instellingen</s:String>
     <s:String x:Key="S.Options.App">Programma</s:String>

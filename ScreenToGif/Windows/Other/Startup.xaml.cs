@@ -45,12 +45,12 @@ namespace ScreenToGif.Windows.Other
 
         private void Update_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = Global.UpdateModel != null;
+            e.CanExecute = Global.UpdateAvailable != null;
         }
 
         private void Update_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            App.MainViewModel?.UpdateAction();
+            App.MainViewModel?.PromptUpdate.Execute(null);
         }
 
         private void System_DisplaySettingsChanged(object sender, EventArgs e)
@@ -121,13 +121,13 @@ namespace ScreenToGif.Windows.Other
 
         public void NotificationUpdated()
         {
-            if (Global.UpdateModel == null)
+            if (Global.UpdateAvailable == null)
             {
                 UpdateTextBlock.Visibility = Visibility.Collapsed;
                 return;
             }
 
-            UpdateRun.Text = string.Format(LocalizationHelper.Get("S.StartUp.NewRelease") ?? "New release available • {0}", Global.UpdateModel.Version.ToStringShort());
+            UpdateRun.Text = string.Format(LocalizationHelper.Get("S.StartUp.NewRelease") ?? "New release available • {0}", Global.UpdateAvailable.Version.ToStringShort());
             UpdateTextBlock.Visibility = Visibility.Visible;
 
             CommandManager.InvalidateRequerySuggested();

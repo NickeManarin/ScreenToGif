@@ -253,6 +253,8 @@ namespace ScreenToGif.Windows
             ScrollSynchronizer.SetScrollGroup(MainScrollViewer, "Canvas");
             ScrollSynchronizer.SetScrollGroup(BehindScrollViewer, "Canvas");
 
+            DisplayUpdatePromoter();
+
             #region Load
 
             if (Project != null)
@@ -5445,6 +5447,23 @@ namespace ScreenToGif.Windows
         public void NotificationUpdated()
         {
             RibbonTabControl.UpdateNotifications();
+        }
+
+        /// <summary>
+        /// If there's an update available, it will adjust the UI to warn the user about it.
+        /// It does not control the notification list, that's separated.
+        /// </summary>
+        private void DisplayUpdatePromoter()
+        {
+            if (Global.UpdateAvailable == null)
+            {
+                UpdateStackPanel.Visibility = Visibility.Collapsed;
+                return;
+            }
+
+            UpdateVersionRun.Text = $"{Global.UpdateAvailable.Version}";
+            UpdateSizeRun.Text = Global.UpdateAvailable.InstallerSize > 0 ? Humanizer.BytesToString(Global.UpdateAvailable.InstallerSize) : "";
+            UpdateStackPanel.Visibility = Visibility.Visible;
         }
 
         private void Discard(bool notify = true)

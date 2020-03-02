@@ -1840,7 +1840,7 @@ namespace ScreenToGif.Windows
                 else
                 {
                     GifskiImageCard.Status = ExtrasStatus.Available;
-                    GifskiImageCard.Description = string.Format(LocalizationHelper.Get("S.Options.Extras.Download", "{0}"), "~ 600 KB");
+                    GifskiImageCard.Description = string.Format(LocalizationHelper.Get("S.Options.Extras.Download", "{0}"), "~ 491 KB");
                 }
 
                 if (Util.Other.IsSharpDxPresent(true, true))

@@ -2,12 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 
 namespace ScreenToGif.Util
 {
     internal class NotificationManager
     {
         public static List<Notification> Notifications { get; set; } = new List<Notification>();
+
+        internal static void AddNotification(string text, StatusType kind, string tag, ICommand command = null, object commandParameter = null)
+        {
+            AddNotification(text, kind, tag, () => { command.Execute(commandParameter); });
+        }
 
         internal static void AddNotification(string text, StatusType kind, string tag, Action action = null)
         {

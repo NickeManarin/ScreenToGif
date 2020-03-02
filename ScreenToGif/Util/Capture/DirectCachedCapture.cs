@@ -226,6 +226,7 @@ namespace ScreenToGif.Util.Capture
             {
                 LogWriter.Log(ex, "It was not possible to finish capturing the frame with DirectX.");
 
+                MajorCrashHappened = true;
                 OnError.Invoke(ex);
                 return FrameCount;
             }

@@ -18,6 +18,11 @@ namespace ScreenToGif.Util.Capture
     /// Adapted from:
     /// https://github.com/ajorkowski/VirtualSpace
     /// https://github.com/Microsoft/Windows-classic-samples/blob/master/Samples/DXGIDesktopDuplication
+    ///
+    /// How to debug:
+    /// https://walbourn.github.io/dxgi-debug-device/
+    /// https://walbourn.github.io/direct3d-sdk-debug-layer-tricks/
+    /// https://devblogs.microsoft.com/cppblog/visual-studio-2015-and-graphics-tools-for-windows-10/
     /// </summary>
     internal class DirectImageCapture : BaseCapture
     {
@@ -37,7 +42,7 @@ namespace ScreenToGif.Util.Capture
         /// The texture used to copy the pixel data from the desktop to the destination image. 
         /// </summary>
         protected internal Texture2D StagingTexture;
-        
+
         /// <summary>
         /// The texture used exclusively to be a backing texture when capturing the cursor shape.
         /// This texture will always hold only the desktop texture, without the cursor.
@@ -58,7 +63,7 @@ namespace ScreenToGif.Util.Capture
         /// The details of the cursor.
         /// </summary>
         protected internal OutputDuplicatePointerShapeInformation CursorShapeInfo;
-        
+
         /// <summary>
         /// The previous position of the mouse cursor.
         /// </summary>
@@ -76,6 +81,11 @@ namespace ScreenToGif.Util.Capture
         protected internal int TrueTop => Top + OffsetTop;
         protected internal int TrueBottom => Top + OffsetTop + Height;
 
+        /// <summary>
+        /// Flag that holds the information wheter the previous capture had a major crash.
+        /// </summary>
+        protected internal bool MajorCrashHappened = false;
+
         #endregion
 
         public override void Start(int delay, int left, int top, int width, int height, double dpi, ProjectInfo project)
@@ -92,16 +102,18 @@ namespace ScreenToGif.Util.Capture
 
         internal void Initialize()
         {
+            MajorCrashHappened = false;
+
 #if DEBUG
             Device = new Device(DriverType.Hardware, DeviceCreationFlags.Debug);
 
-            //var debug = SharpDX.DXGI.InfoQueue.TryCreate();
-            //debug.SetBreakOnSeverity(DebugId.All, InformationQueueMessageSeverity.Corruption, true);
-            //debug.SetBreakOnSeverity(DebugId.All, InformationQueueMessageSeverity.Error, true);
-            //debug.SetBreakOnSeverity(DebugId.All, InformationQueueMessageSeverity.Warning, true);
+            var debug = SharpDX.DXGI.InfoQueue.TryCreate();
+            debug.SetBreakOnSeverity(DebugId.All, InformationQueueMessageSeverity.Corruption, true);
+            debug.SetBreakOnSeverity(DebugId.All, InformationQueueMessageSeverity.Error, true);
+            debug.SetBreakOnSeverity(DebugId.All, InformationQueueMessageSeverity.Warning, true);
 
-            //var debug2 = DXGIDebug.TryCreate();
-            //debug2.ReportLiveObjects(DebugId.Dx, DebugRloFlags.Summary | DebugRloFlags.Detail);
+            var debug2 = DXGIDebug.TryCreate();
+            debug2.ReportLiveObjects(DebugId.Dx, DebugRloFlags.Summary | DebugRloFlags.Detail);
 
 #else
             Device = new Device(DriverType.Hardware, DeviceCreationFlags.VideoSupport);
@@ -315,14 +327,14 @@ namespace ScreenToGif.Util.Capture
             {
                 //Try to get the duplicated output frame within given time.
                 res = DuplicatedOutput.TryAcquireNextFrame(0, out var info, out var resource);
-                
+
                 //Checks how to proceed with the capture. It could have failed, or the screen, cursor or both could have been captured.
                 if (res.Failure || resource == null || (info.AccumulatedFrames == 0 && info.LastMouseUpdateTime <= LastProcessTime))
                 {
                     //Somehow, it was not possible to retrieve the resource, frame or metadata.
                     //frame.WasDropped = true;
                     //BlockingCollection.Add(frame);
-                    
+
                     resource?.Dispose();
                     return FrameCount;
                 }
@@ -417,6 +429,7 @@ namespace ScreenToGif.Util.Capture
             {
                 LogWriter.Log(ex, "It was not possible to finish capturing the frame with DirectX.");
 
+                MajorCrashHappened = true;
                 OnError.Invoke(ex);
                 return FrameCount;
             }
@@ -473,21 +486,27 @@ namespace ScreenToGif.Util.Capture
             if (screenTexture == null || CursorShapeBuffer?.Length == 0)// || !info.PointerPosition.Visible)
                 return;
 
-            //Don't let it bleed beyond the top-left corner.
-            var left = Math.Max(frame.CursorX, 0);
-            var top = Math.Max(frame.CursorY, 0);
-            var offsetX = Math.Abs(Math.Min(0, frame.CursorX));
-            var offsetY = Math.Abs(Math.Min(0, frame.CursorY));
+            //Don't let it bleed beyond the top-left corner, calculate the dimensions of portion of the cursor that will appear.
+            var leftCut = frame.CursorX;
+            var topCut = frame.CursorY;
+            var rightCut = screenTexture.Description.Width - (frame.CursorX + CursorShapeInfo.Width);
+            var bottomCut = screenTexture.Description.Height - (frame.CursorY + CursorShapeInfo.Height);
 
             //Adjust the offset, so it's possible to add the highlight correctly later.
             frame.CursorX += CursorShapeInfo.HotSpot.X;
             frame.CursorY += CursorShapeInfo.HotSpot.Y;
 
-            if (CursorShapeInfo.Width - offsetX < 0 || CursorShapeInfo.Height - offsetY < 0)
+            //Don't try merging the textures if the cursor is out of bounds.
+            if (leftCut + CursorShapeInfo.Width < 1 || topCut + CursorShapeInfo.Height < 1 || rightCut + CursorShapeInfo.Width < 1 || bottomCut + CursorShapeInfo.Height < 1)
                 return;
 
+            var cursorLeft = Math.Max(leftCut, 0);
+            var cursorTop = Math.Max(topCut, 0);
+            var cursorWidth = leftCut < 0 ? CursorShapeInfo.Width + leftCut : rightCut < 0 ? CursorShapeInfo.Width + rightCut : CursorShapeInfo.Width;
+            var cursorHeight = topCut < 0 ? CursorShapeInfo.Height + topCut : bottomCut < 0 ? CursorShapeInfo.Height + bottomCut : CursorShapeInfo.Height;
+
             //The staging texture must be able to hold all pixels.
-            if (CursorStagingTexture == null || CursorStagingTexture.Description.Width < CursorShapeInfo.Width - offsetX || CursorStagingTexture.Description.Height < CursorShapeInfo.Height - offsetY)
+            if (CursorStagingTexture == null || CursorStagingTexture.Description.Width != cursorWidth || CursorStagingTexture.Description.Height != cursorHeight)
             {
                 //In order to change the size of the texture, I need to instantiate it again with the new size.
                 CursorStagingTexture?.Dispose();
@@ -496,9 +515,9 @@ namespace ScreenToGif.Util.Capture
                     ArraySize = 1,
                     BindFlags = BindFlags.None,
                     CpuAccessFlags = CpuAccessFlags.Write,
-                    Height = CursorShapeInfo.Height - offsetY,
+                    Height = cursorHeight,
                     Format = Format.B8G8R8A8_UNorm,
-                    Width = CursorShapeInfo.Width - offsetX,
+                    Width = cursorWidth,
                     MipLevels = 1,
                     OptionFlags = ResourceOptionFlags.None,
                     SampleDescription = new SampleDescription(1, 0),
@@ -507,13 +526,14 @@ namespace ScreenToGif.Util.Capture
             }
 
             //The region where the cursor is located is copied to the staging texture to act as the background when dealing with masks and transparency.
+            //The cutout must be the exact region needed and it can't overflow. It's not allowed to try to cut outside of the screenTexture region.
             var region = new ResourceRegion
             {
-                Left = left,
-                Top = top,
+                Left = cursorLeft,
+                Top = cursorTop,
                 Front = 0,
-                Right = left + CursorStagingTexture.Description.Width,
-                Bottom = top + CursorStagingTexture.Description.Height,
+                Right = cursorLeft + cursorWidth,
+                Bottom = cursorTop + cursorHeight,
                 Back = 1
             };
 
@@ -521,13 +541,13 @@ namespace ScreenToGif.Util.Capture
             Device.ImmediateContext.CopySubresourceRegion(screenTexture, 0, region, CursorStagingTexture, 0);
 
             //Get cursor details and draw it to the staging texture.
-            DrawCursorShape(CursorStagingTexture, CursorShapeInfo, CursorShapeBuffer, offsetX, offsetY);
-            
+            DrawCursorShape(CursorStagingTexture, CursorShapeInfo, CursorShapeBuffer, leftCut < 0 ? leftCut * -1 : 0, topCut < 0 ? topCut * -1 : 0, cursorWidth, cursorHeight);
+
             //Copy back the cursor texture to the screen texture.
-            Device.ImmediateContext.CopySubresourceRegion(CursorStagingTexture, 0, null, screenTexture, 0, left, top);
+            Device.ImmediateContext.CopySubresourceRegion(CursorStagingTexture, 0, null, screenTexture, 0, cursorLeft, cursorTop);
         }
 
-        private void DrawCursorShape(Texture2D texture, OutputDuplicatePointerShapeInformation info, byte[] buffer, int offsetX, int offsetY)
+        private void DrawCursorShape(Texture2D texture, OutputDuplicatePointerShapeInformation info, byte[] buffer, int leftCut, int topCut, int cursorWidth, int cursorHeight)
         {
             using (var surface = texture.QueryInterface<Surface>())
             {
@@ -539,17 +559,17 @@ namespace ScreenToGif.Util.Capture
                 {
                     //Masked monochrome, a cursor which reacts with the background.
                     case (int)OutputDuplicatePointerShapeType.Monochrome:
-                        DrawMonochromeCursor(offsetX, offsetY, info.Width, info.Height, rect, info.Pitch, buffer);
+                        DrawMonochromeCursor(leftCut, topCut, cursorWidth, cursorHeight, rect, info.Pitch, buffer, info.Height);
                         break;
 
                     //Color, a colored cursor which supports transparency.
                     case (int)OutputDuplicatePointerShapeType.Color:
-                        DrawColorCursor(offsetX, offsetY, info.Width, info.Height, rect, info.Pitch, buffer);
+                        DrawColorCursor(leftCut, topCut, cursorWidth, cursorHeight, rect, info.Pitch, buffer);
                         break;
 
                     //Masked color, a mix of both previous types.
                     case (int)OutputDuplicatePointerShapeType.MaskedColor:
-                        DrawMaskedColorCursor(offsetX, offsetY, info.Width, info.Height, rect, info.Pitch, buffer);
+                        DrawMaskedColorCursor(leftCut, topCut, cursorWidth, cursorHeight, rect, info.Pitch, buffer);
                         break;
                 }
 
@@ -557,7 +577,7 @@ namespace ScreenToGif.Util.Capture
             }
         }
 
-        private void DrawMonochromeCursor(int offsetX, int offsetY, int width, int height, DataRectangle rect, int pitch, byte[] buffer)
+        private void DrawMonochromeCursor(int offsetX, int offsetY, int width, int height, DataRectangle rect, int pitch, byte[] buffer, int actualHeight)
         {
             for (var row = offsetY; row < height; row++)
             {
@@ -577,7 +597,7 @@ namespace ScreenToGif.Util.Capture
                 {
                     var pos = (row - offsetY) * rect.Pitch + (col - offsetX) * 4;
                     var and = (buffer[row * pitch + col / 8] & mask) == mask; //Mask is take from the first half of the cursor image.
-                    var xor = (buffer[row * pitch + col / 8 + height * pitch] & mask) == mask; //Mask is taken from the second half of the cursor image, hence the "+ height * pitch". 
+                    var xor = (buffer[row * pitch + col / 8 + actualHeight * pitch] & mask) == mask; //Mask is taken from the second half of the cursor image, hence the "+ height * pitch". 
 
                     //Reads current pixel and applies AND and XOR. (AND/XOR ? White : Black)
                     Marshal.WriteByte(rect.DataPointer, pos, (byte)((Marshal.ReadByte(rect.DataPointer, pos) & (and ? 255 : 0)) ^ (xor ? 255 : 0)));
@@ -725,7 +745,7 @@ namespace ScreenToGif.Util.Capture
 
                                     //if (frame.CursorX > 0 && frame.CursorY > 0)
                                     //    Native.DrawIconEx(_compatibleDeviceContext, frame.CursorX - iconInfo.xHotspot, frame.CursorY - iconInfo.yHotspot, cursorInfo.hCursor, 0, 0, 0, IntPtr.Zero, 0x0003);
-                                    
+
                                     //Clean objects here.
                                 }
 
@@ -759,6 +779,7 @@ namespace ScreenToGif.Util.Capture
         internal void DisposeInternal()
         {
             Device.Dispose();
+
             BackingTexture.Dispose();
             StagingTexture.Dispose();
             DuplicatedOutput.Dispose();

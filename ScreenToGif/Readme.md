@@ -5,14 +5,16 @@ This is the current project of ScreenToGif.
 _VS 2019 and .Net 4.8 or newer required._
 
 
-## What's new? (Version 2.21.2)
+## What's new? (Version 2.22)
 
-•  Just a couple of bug fixes.   
+• It's more appareant that a new update is available.   
+• Added an updater, which automatically downloads and installs new updates (optional), even for portable installations.
 
 ### Fixed:
 
-♦ The app was not being able to load the SharpDX libraries.  
-♦ The DirectX capture could fail when finishing the capture of a frame.  
+♦ The DirectX capture method was crashing in some machines when trying to record with the cursor visible.  
+♦ The installer was crashing when the user had no .Net Framework 4.7.2 or newer.  
+♦ The text of 'Help' button was missing.  
 
 ### Known Bugs:
 

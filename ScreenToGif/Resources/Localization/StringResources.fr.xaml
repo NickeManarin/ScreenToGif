@@ -131,19 +131,13 @@
     <s:String x:Key="S.StartUp.NewRelease.Tooltip">Télécharger la dernière version de ScreenToGif.</s:String>
 
     <!--Update Window-->
-    <s:String x:Key="Update">Mettre à jour</s:String>
-    <s:String x:Key="Update.NewRelease">Nouvelle version!</s:String>
-    <s:String x:Key="Update.NewRelease.Verbose">Version {0} disponible! Cliquez ici pour plus de détails.</s:String>
-    <s:String x:Key="Download">Télécharger</s:String>
-    <s:String x:Key="Update.Portable">Portable</s:String>
-    <s:String x:Key="Update.Installer">Installeur</s:String>
-    <s:String x:Key="Update.Filename.Warning">Vous devez choisir un autre emplacement ou un autre nom de fichier.</s:String>
-    <s:String x:Key="Update.Filename.Warning2">Vous ne pouvez pas écraser l'exécutable avec une nouvelle version pour l'instant, veuillez sélectionner un autre nom pour le fichier.</s:String>
-    <s:String x:Key="Update.Install.Header">Souhaitez-vous installer la nouvelle version maintenant ?</s:String>
-    <s:String x:Key="Update.Install.Description">L'application va être fermée et le programme d'installation va se lancer.</s:String>
-    <s:String x:Key="Update.CloseThis">Voulez-vous fermer cette application?</s:String>
-    <s:String x:Key="Update.CloseThis.Detail">Ceci est une version plus ancienne. Vous avez déjà téléchargé une nouvelle version.</s:String>
-    
+    <s:String x:Key="S.Updater.Title">Mettre à jour</s:String>
+    <s:String x:Key="S.Updater.NewRelease">Nouvelle version!</s:String>
+    <s:String x:Key="S.Updater.NewRelease.Info">Version {0} disponible! Cliquez ici pour plus de détails.</s:String>
+    <s:String x:Key="S.Updater.Download">Télécharger</s:String>
+    <s:String x:Key="S.Updater.Portable">Portable</s:String>
+    <s:String x:Key="S.Updater.Installer">Installeur</s:String>
+
     <!--Options-->
     <s:String x:Key="S.Options.Title">ScreenToGif - Options</s:String>
     <s:String x:Key="S.Options.App">Application</s:String>

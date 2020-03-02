@@ -740,6 +740,10 @@
                         <Trigger Property="IsKeyboardFocused" Value="True">
                             <Setter TargetName="InnerBorder" Property="Background" Value="{DynamicResource Brush.Button.Background.Focused}"/>
                         </Trigger>
+                        <Trigger Property="IsImportant" Value="True">
+                            <Setter TargetName="InnerBorder" Property="BorderBrush" Value="{DynamicResource Brush.StatusBand.Warning}"/>
+                            <Setter TargetName="InnerBorder" Property="BorderThickness" Value="0,0,0,3"/>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

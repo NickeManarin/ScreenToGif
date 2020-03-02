@@ -1626,13 +1626,33 @@
                                TextWrapping="Wrap" Effect="{StaticResource Shadow.Foreground.Small}"/>
 
                     <!--<TextBlock FontSize="16" FontFamily="Segoe UI Semilight" HorizontalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Gray192}" Effect="{StaticResource Shadow.Foreground.Small}">
-                        <Hyperlink Command="{StaticResource Command.LoadRecent" Cursor="Hand" TextDecorations="{x:Null}">
+                        <Hyperlink Command="{StaticResource Command.LoadRecent}" Cursor="Hand" TextDecorations="{x:Null}">
                             <Run>Open recent projects...</Run>
                         </Hyperlink>
                     </TextBlock>-->
 
                     <TextBlock x:Name="SymbolTextBlock" Text=":D" Foreground="{DynamicResource Element.Foreground.Gray208}" FontSize="40" FontFamily="Segoe UI Semilight"
                                TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground.Small}"/>
+
+                    <!--New update available-->
+                    <StackPanel x:Name="UpdateStackPanel" HorizontalAlignment="Center" Margin="0,30,0,0" Visibility="Collapsed">
+                        <Separator Height="1"/>
+
+                        <TextBlock FontSize="18" FontFamily="Segoe UI Semilight" HorizontalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Gray192}" 
+                                   Effect="{StaticResource Shadow.Foreground.Small}" Margin="3" ToolTip="{DynamicResource S.Editor.UpdateAvailable.Info}">
+                            <Hyperlink Command="{Binding Source={StaticResource AppViewModel}, Path=PromptUpdate}" Cursor="Hand" TextDecorations="{x:Null}">
+                                <Run Text="{DynamicResource S.Editor.UpdateAvailable}"/>
+                            </Hyperlink>
+                        </TextBlock>
+
+                        <TextBlock FontSize="14" Foreground="{DynamicResource Element.Foreground.Gray192}" FontFamily="Segoe UI Semilight" 
+                                   Effect="{StaticResource Shadow.Foreground.Small}" HorizontalAlignment="Center" TextAlignment="Center">
+                            <Run Text="{DynamicResource S.Updater.Version}" FontSize="18"/>
+                            <Run Name="UpdateVersionRun" Text="2.22" FontSize="18"/>
+                            <LineBreak/>
+                            <Run Name="UpdateSizeRun" Text="800 KB" FontSize="16"/>
+                        </TextBlock>
+                    </StackPanel>
                 </StackPanel>
             </Grid>
 
@@ -2122,7 +2142,7 @@
                                 </Grid>
                             </Expander>
 
-                            
+
                             <Expander Grid.Row="5" Header="{DynamicResource S.SaveAs.SaveOptions}" IsExpanded="{Binding IsSaveOptionsExpanded, Source={x:Static u:UserSettings.All}}">
                                 <Grid>
                                     <Grid Visibility="{Binding IsChecked, ElementName=GifRadioButton, Converter={StaticResource Bool2Visibility}}">

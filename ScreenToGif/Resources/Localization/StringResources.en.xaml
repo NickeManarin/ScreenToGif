@@ -130,19 +130,23 @@
     <s:String x:Key="S.StartUp.NewRelease">New release available • {0}</s:String>
     <s:String x:Key="S.StartUp.NewRelease.Tooltip">Downloads the latest version of ScreenToGif.</s:String>
 
-    <!--Update Window-->
-    <s:String x:Key="Update">Update</s:String>
-    <s:String x:Key="Update.NewRelease">New release!</s:String>
-    <s:String x:Key="Update.NewRelease.Verbose">New release available, Version {0}! Click here for more details.</s:String>
-    <s:String x:Key="Download">Download</s:String>
-    <s:String x:Key="Update.Portable">Portable</s:String>
-    <s:String x:Key="Update.Installer">Installer</s:String>
-    <s:String x:Key="Update.Filename.Warning">You need to pick another location or another file name</s:String>
-    <s:String x:Key="Update.Filename.Warning2">You cannot overwrite the executable with a new version right now, please select another name for the file.</s:String>
-    <s:String x:Key="Update.Install.Header">Do you wish to install the new version right now?</s:String>
-    <s:String x:Key="Update.Install.Description">The app will be closed and the installer will be executed.</s:String>
-    <s:String x:Key="Update.CloseThis">Do you want to close this app?</s:String>
-    <s:String x:Key="Update.CloseThis.Detail">This is an older version. You have already downloaded a new version.</s:String>
+    <!--Updater-->
+    <s:String x:Key="S.Updater.Title">ScreenToGif - Updater</s:String>
+    <s:String x:Key="S.Updater.Header">A new update is available</s:String>
+    <s:String x:Key="S.Updater.NewRelease">New release!</s:String>
+    <s:String x:Key="S.Updater.NewRelease.Info">New release available, Version {0}!&#x0d;Click here for more details.</s:String>
+    <s:String x:Key="S.Updater.Version">Version</s:String>
+    <s:String x:Key="S.Updater.Portable">Portable</s:String>
+    <s:String x:Key="S.Updater.Installer">Installer</s:String>
+    <s:String x:Key="S.Updater.Info.WhatsNew">What's new?</s:String>
+    <s:String x:Key="S.Updater.Info.BugFixes">Bug fixes:</s:String>
+    <s:String x:Key="S.Updater.Info.NewVersionAvailable">A new version is available for you to download.&#x0d;Would you like to open the browser to download it?</s:String>
+    <s:String x:Key="S.Updater.RunAfter">Execute the app after the update.</s:String>
+    <s:String x:Key="S.Updater.Download">Download</s:String>
+    <s:String x:Key="S.Updater.Install">Install</s:String>
+    <s:String x:Key="S.Updater.Downloading">Downloading...</s:String>
+    <s:String x:Key="S.Updater.Warning.Show">It was not possible to show the download details.</s:String>
+    <s:String x:Key="S.Updater.Warning.Download">It was not possible to download the update.</s:String>
     
     <!--Options-->
     <s:String x:Key="S.Options.Title">ScreenToGif - Options</s:String>
@@ -194,7 +198,9 @@
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(The user interface will be rendered via software mode)</s:String>
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">Check for translation updates.</s:String>
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(Updated translations will be downloaded and installed automatically)</s:String>
-    <s:String x:Key="S.Options.App.General.CheckForUpdates">Check for updates.</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForUpdates">Check for updates on startup.</s:String>
+    <s:String x:Key="S.Options.App.General.UpdateOnClose">Automatically install updates after closing the app.</s:String>
+    <s:String x:Key="S.Options.App.General.PromptToInstall">Prompt me before the installation starts.</s:String>
     <s:String x:Key="S.Options.App.Tray">System tray icon</s:String>
     <s:String x:Key="S.Options.App.Tray.Show">Display the app on the system tray (notification area).</s:String>
     <s:String x:Key="S.Options.App.Tray.LeaveOpen">Keep the app open even if all windows are closed.</s:String>
@@ -625,6 +631,8 @@
     <s:String x:Key="Editor.Options">Options</s:String>
     <s:String x:Key="S.Editor.Help">Help</s:String>
     <s:String x:Key="S.Editor.Extras">Extras</s:String>
+    <s:String x:Key="S.Editor.UpdateAvailable">A new update is available!</s:String>
+    <s:String x:Key="S.Editor.UpdateAvailable.Info">Click here to read more about it.</s:String>
     
     <!--Welcome-->
     <s:String x:Key="Welcome.New">Head over to "File > New" to start a new recording</s:String>
