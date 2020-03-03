@@ -866,7 +866,7 @@ namespace ScreenToGif.Model
                         var version = Version.Parse(release.XPathSelectElement("tag_name")?.Value ?? "0.1");
 
                         if (version.Major == 0 || version <= Assembly.GetExecutingAssembly().GetName().Version)
-                            return true;
+                           return true;
 
                         Global.UpdateAvailable = new UpdateAvailable
                         {
@@ -1035,14 +1035,17 @@ namespace ScreenToGif.Model
                 var isInstaller = files.Any(x => x.ToLowerInvariant().EndsWith("screentogif.visualelementsmanifest.xml"));
                 var hasSharpDx = files.Any(x => x.ToLowerInvariant().EndsWith("sharpdx.dll"));
                 var hasGifski = files.Any(x => x.ToLowerInvariant().EndsWith("gifski.dll"));
+                var hasMenuShortcut = File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Microsoft", "Windows", "Start Menu", "Programs", "ScreenToGif.lnk"));
+                var hasDesktopShortcut = File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Desktop", "ScreenToGif.lnk"));
 
                 var startInfo = new ProcessStartInfo
                 {
                     FileName = "msiexec",
                     Arguments = $" {(isInstaller ? "/i" : "/a")} \"{Global.UpdateAvailable.InstallerPath}\"" +
-                                $" INSTALLDIR=\"{AppDomain.CurrentDomain.BaseDirectory}\" INSTALLAUTOMATICALLY=yes INSTALLPORTABLE={(isInstaller ? "no" : "yes")}" +
+                                $" {(isInstaller ? "INSTALLDIR" : "TARGETDIR")}=\"{AppDomain.CurrentDomain.BaseDirectory}\" INSTALLAUTOMATICALLY=yes INSTALLPORTABLE={(isInstaller ? "no" : "yes")}" +
                                 $" ADDLOCAL=Binary{(isInstaller ? ",Auxiliar" : "")}{(hasSharpDx ? ",SharpDX" : "")}{(hasGifski ? ",Gifski" : "")}" +
-                                $" {(wasPromptedManually ? "RUNAFTER=yes" : "")}",
+                                $" {(wasPromptedManually ? "RUNAFTER=yes" : "")}" +
+                                (isInstaller ? $" INSTALLDESKTOPSHORTCUT={(hasDesktopShortcut ? "yes" : "no")} INSTALLSHORTCUT={(hasMenuShortcut ? "yes" : "no")}" : ""),
                     Verb = "runas"
                 };
 
@@ -1055,7 +1058,7 @@ namespace ScreenToGif.Model
             {
                 LogWriter.Log(ex, "Impossible to automatically install update");
 
-                //TODO: Warning that was not possible to install.
+                ErrorDialog.Ok("ScreenToGif", "It was not possible to install the update", ex.Message, ex);
                 return false;
             }
         }
