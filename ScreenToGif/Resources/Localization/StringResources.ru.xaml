@@ -13,38 +13,34 @@
     <s:String x:Key="S.Cancel">Отмена</s:String>
     <s:String x:Key="S.Yes">Да</s:String>
     <s:String x:Key="S.No">Нет</s:String>
-    <s:String x:Key="Frame">Кадр</s:String>
-    <s:String x:Key="Suppress">Подавить</s:String>
-    <s:String x:Key="Preview">Предпросмотр</s:String>
     <s:String x:Key="S.Add">Добавить</s:String>
     <s:String x:Key="S.Edit">Редактировать</s:String>
     <s:String x:Key="S.Id">ID</s:String>
     <s:String x:Key="S.Title">Заголовок</s:String>
     <s:String x:Key="S.Description">Описание</s:String>
     <s:String x:Key="S.SelectColor">Нажмите здесь, чтобы выбрать цвет.</s:String>
-
+    <s:String x:Key="Frame">Кадр</s:String>
+    <s:String x:Key="Suppress">Подавить</s:String>
+    <s:String x:Key="Preview">Предпросмотр</s:String>
+    
     <!--Warning messages-->
+    <s:String x:Key="S.Crash">О нет, программа рухнула :(</s:String>
+    <s:String x:Key="S.Required">Обязательное поле.</s:String>
     <s:String x:Key="S.Warning.Net.Title">Отсутствует зависимость</s:String>
     <s:String x:Key="S.Warning.Net.Header">Отсутствует Net Framework 4.8</s:String>
     <s:String x:Key="S.Warning.Net.Message">Для того, чтобы использовать это приложение, вам необходимо загрузить правильную версию .Net Framework.&#10;Открыть веб-страницу загрузки?</s:String>
     <s:String x:Key="S.Warning.Single.Title">Разрешен только один экземпляр</s:String>
     <s:String x:Key="S.Warning.Single.Header">Приложение уже запущено</s:String>
     <s:String x:Key="S.Warning.Single.Message">ScreenToGif уже работает, но, по-видимому, нет открытого окна. Проверьте системный трей, значок ScreenToGif должен быть там.</s:String>
-    
-    <!--Tray Icon-->
-    <s:String x:Key="S.NewRecording">Новая запись с экрана</s:String>
-    <s:String x:Key="S.NewWebcamRecording">Новая запись с веб-камеры</s:String>
-    <s:String x:Key="S.NewBoardRecording">Новая запись с доски</s:String>
-    <s:String x:Key="S.Exit">Выход</s:String>
-
-    <!--Application-->
     <s:String x:Key="S.Exiting.Title">Выход из ScreenToGif</s:String>
     <s:String x:Key="S.Exiting.Instruction">Вы уверены, что хотите выйти?</s:String>
     <s:String x:Key="S.Exiting.Message">Все окна и значок в трее будут закрыты.</s:String>
     
-    <!--Error messages--> 
-    <s:String x:Key="S.Crash">О нет, программа рухнула :(</s:String>
-    <s:String x:Key="S.Required">Обязательное поле.</s:String>
+    <!--Tray icon-->
+    <s:String x:Key="S.NewRecording">Новая запись с экрана</s:String>
+    <s:String x:Key="S.NewWebcamRecording">Новая запись с веб-камеры</s:String>
+    <s:String x:Key="S.NewBoardRecording">Новая запись с доски</s:String>
+    <s:String x:Key="S.Exit">Выход</s:String>
     
     <!--Commands-->
     <s:String x:Key="S.Command.NewRecording">Новая запись экрана</s:String>
@@ -161,7 +157,6 @@
     <s:String x:Key="S.Options.Upload">Онлайн сервисы</s:String>
     <s:String x:Key="S.Options.Donate">Поддержать</s:String>
     <s:String x:Key="S.Options.About">О программе</s:String>
-    
     <s:String x:Key="S.Options.Other">Прочее</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Header">Нет сочетания клавиш - следовать за курсором</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Message">Необходимо установить сочетание клавиш для переключения этой функции.</s:String>
@@ -423,7 +418,7 @@
     <s:String x:Key="S.Options.Extras.License.SharpDx">Лицензия SharpDx</s:String>
 
     <!--Options • Donations-->
-    <s:String x:Key="S.Options.Donate.Donate">Отблагодарить автора</s:String>
+    <s:String x:Key="S.Options.Donate.Donate">Donate</s:String>
     <s:String x:Key="S.Options.Donate.Donate.Dollar">U$D</s:String>
     <s:String x:Key="S.Options.Donate.Donate.Euro">€UR</s:String>
     <s:String x:Key="S.Options.Donate.Paypal.Dollar">Открыть сайт PayPal. Валюта: USD</s:String>
@@ -432,7 +427,7 @@
     <s:String x:Key="S.Options.Donate.Subscribe">Подписки</s:String>
     <s:String x:Key="S.Options.Donate.Subscribe.Patreon">Ежемесячное пожертвование через Patreon.</s:String>
     <s:String x:Key="S.Options.Donate.Subscribe.Flattr">Ежемесячное пожертвование через Flattr.</s:String>
-    <s:String x:Key="S.Options.Donate.Gift">Игры в подарок</s:String>
+    <s:String x:Key="S.Options.Donate.Gift">Подарить игры</s:String>
     <s:String x:Key="S.Options.Donate.Gift.Steam">Подарить игры через Steam.</s:String>
     <s:String x:Key="S.Options.Donate.Gift.Gog">Подарить игры через GOG.</s:String>
     <s:String x:Key="S.Options.Donate.Kofi">Оплатить кофе через Ko-fi.</s:String>
@@ -482,6 +477,7 @@
     <s:String x:Key="S.Recorder.SnapToWindow">Снимок окна (потяните и отпустите над окном)</s:String>
     <s:String x:Key="S.Recorder.PreStart">Подготовка</s:String>
     <s:String x:Key="S.Recorder.Paused">ScreenToGif (Пауза)</s:String>
+    <s:String x:Key="S.Recorder.Stopping">Остановка...</s:String>
     
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible">Не удалось захватить экран</s:String>
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">Не удалось захватить экран. Метод захвата не вернул ни одного кадра после 5 попыток.</s:String>
@@ -489,7 +485,7 @@
     <s:String x:Key="S.Recorder.Warning.Windows8">Windows 8 или новее требуется для захвата экрана с помощью Desktop Duplication API.</s:String>
     <s:String x:Key="S.Recorder.Warning.MissingSharpDx">SharpDx необходим для захвата экрана с помощью Desktop Duplication API. Перейдите в меню Параметры > Дополнительно, чтобы загрузить его.</s:String>
     
-    <!--New Recorder-->
+    <!--New recorder-->
     <s:String x:Key="S.Recorder.Area">Регион</s:String>
     <s:String x:Key="S.Recorder.Window">Окно</s:String>
     <s:String x:Key="S.Recorder.Screen">Весь экран</s:String>
@@ -500,23 +496,22 @@
     <s:String x:Key="S.Recorder.SelectArea.Embedded">Нажмите и тяните, для выбора области экрана</s:String>
     <s:String x:Key="S.Recorder.SelectWindow">Нажмите здесь, чтобы выбрать это окно</s:String>
     <s:String x:Key="S.Recorder.SelectScreen">Нажмите здесь, чтобы выбрать этот экран</s:String>
-    
     <s:String x:Key="S.Recorder.EscToCancel">Нажмите ESC для отмены</s:String>
     
-    <!--Webcam Recorder-->
+    <!--Webcam recorder-->
     <s:String x:Key="S.Webcam.Title">ScreenToGif - запись с веб-камеры</s:String>
     <s:String x:Key="S.Webcam.NoVideo">У вас нет веб-камеры :(</s:String>
     <s:String x:Key="S.Webcam.CheckVideoDevices">Поиск видео устройств.</s:String>
     <s:String x:Key="S.Webcam.Scale">Масштаб: {0:0.##}x</s:String>
     <s:String x:Key="S.Webcam.ChangeScale">Изменить масштаб видео.</s:String>
     
-    <!--Board Recorder-->
+    <!--Board recorder-->
     <s:String x:Key="S.Board.Title">ScreenToGif - запись с доски</s:String>
     <s:String x:Key="S.Board.AutoRecord">Авто-запись</s:String>
     <s:String x:Key="S.Board.AutoRecordToolTip">Включать запись во время рисования.</s:String>
     <s:String x:Key="S.Board.CtrlHold">Ctrl (удерживать)</s:String>
     
-    <!--Color Selector-->
+    <!--Color selector-->
     <s:String x:Key="S.ColorSelector.Title">Выбор цвета</s:String>
     <s:String x:Key="S.ColorSelector.Select">Выберите цвет</s:String>
     <s:String x:Key="S.ColorSelector.Red">Красный</s:String>
@@ -536,7 +531,7 @@
     <s:String x:Key="S.ErrorDialog.Observation">Что-то пошло не так.</s:String>
     <s:String x:Key="S.ErrorDialog.Send">Отправить отчет.</s:String>
 
-    <!--FFmpeg Preset-->
+    <!--FFmpeg preset-->
     <s:String x:Key="S.FfmpegPreset.Title">Пресет FFmpeg</s:String>
     <s:String x:Key="S.FfmpegPreset.Name">Имя</s:String>
     <s:String x:Key="S.FfmpegPreset.Parameters">Параметры</s:String>
@@ -544,7 +539,7 @@
     <s:String x:Key="S.FfmpegPreset.Warning.Parameter">Необходимо указать параметры пресета.</s:String>
     <s:String x:Key="S.FfmpegPreset.Warning.SameName">Пресет с таким именем уже существует.</s:String>
 
-    <!--Insert Frames-->
+    <!--Insert frames-->
     <s:String x:Key="S.InsertFrames.Title">Вставка кадров</s:String>
     <s:String x:Key="S.InsertFrames.Info">Обе стороны должны быть одного размера, это окно позволяет переместить и изменить размер изображения и холста.</s:String>
     <s:String x:Key="S.InsertFrames.CanvasSize">Размер холста:</s:String>
@@ -562,7 +557,7 @@
     <s:String x:Key="S.InsertFrames.Importing">Импорт</s:String>
     <s:String x:Key="S.InsertFrames.SelectColorFill">Выбрать цвет заливки холста</s:String>
 
-    <!--Import Frames From Video-->
+    <!--Import frames from video-->
     <s:String x:Key="S.ImportVideo.Title">Импортировать кадры из видео</s:String>
     <s:String x:Key="S.ImportVideo.Importer">Импортер:</s:String>
     <s:String x:Key="S.ImportVideo.Loading">Загрузка...</s:String>
@@ -1185,9 +1180,7 @@
     <s:String x:Key="S.SaveAs.File.Increase">Повысить номер файла</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">Понизить номер файла</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">Файл с таким именем уже существует.</s:String>
-    
     <s:String x:Key="S.SaveAs.File.Clipboard">Сохр. в буфере обмена.</s:String>
-
     <s:String x:Key="S.SaveAs.Warning.Type">Вам нужно выбрать, где сохранить файл (в папку, в буфер обмена или загрузить в другое место).</s:String>
     <s:String x:Key="S.SaveAs.Warning.Commands.Empty">Для выполнения команды после кодирования нужно ввести что-то в текстовое поле команды.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Upload.None">Не выбрано приложение для загрузки. Вам нужно выбрать пункт назначения.</s:String>
