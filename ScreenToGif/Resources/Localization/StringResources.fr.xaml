@@ -13,38 +13,34 @@
     <s:String x:Key="S.Cancel">Annuler</s:String>
     <s:String x:Key="S.Yes">Oui</s:String>
     <s:String x:Key="S.No">Non</s:String>
-    <s:String x:Key="Frame">Image</s:String>
-    <s:String x:Key="Suppress">Supprimer</s:String>
-    <s:String x:Key="Preview">Aperçu</s:String>
     <s:String x:Key="S.Add">Ajouter</s:String>
     <s:String x:Key="S.Edit">Éditer</s:String>
     <s:String x:Key="S.Id">Id</s:String>
     <s:String x:Key="S.Title">Titre</s:String>
     <s:String x:Key="S.Description">Description</s:String>
     <s:String x:Key="S.SelectColor">Cliquez ici pour choisir la couleur</s:String>
-
+    <s:String x:Key="Frame">Image</s:String>
+    <s:String x:Key="Suppress">Supprimer</s:String>
+    <s:String x:Key="Preview">Aperçu</s:String>
+    
     <!--Warning messages-->
+    <s:String x:Key="S.Crash">Oh non, l'application a planté :(</s:String>
+    <s:String x:Key="S.Required">Champ requis.</s:String>
     <s:String x:Key="S.Warning.Net.Title">Dépendance manquante</s:String>
     <s:String x:Key="S.Warning.Net.Header">Net Framework 4.8 n'est pas présent</s:String>
     <s:String x:Key="S.Warning.Net.Message">Afin d'utiliser correctement cette application, vous devez télécharger la version correcte du .Net Framework.&#10;Voulez-vous ouvrir la page web pour la télécharger?</s:String>
     <s:String x:Key="S.Warning.Single.Title">Une seule instance autorisée</s:String>
     <s:String x:Key="S.Warning.Single.Header">L'application est déjà lancée</s:String>
     <s:String x:Key="S.Warning.Single.Message">ScreenToGif est déjà en cours d'exécution, mais apparemment il n'y a pas de fenêtre ouverte. Vérifiez dans la barre d'état système, une icône ScreenToGif doit s'y trouver.</s:String>
-    
-    <!--Tray Icon-->
-    <s:String x:Key="S.NewRecording">Nouvelle capture d'écran</s:String>
-    <s:String x:Key="S.NewWebcamRecording">Nouvelle capture de Webcam</s:String>
-    <s:String x:Key="S.NewBoardRecording">Nouvelle planche à dessin</s:String>
-    <s:String x:Key="S.Exit">Quitter</s:String>
-
-    <!--Application-->
     <s:String x:Key="S.Exiting.Title">Quitter ScreenToGif</s:String>
     <s:String x:Key="S.Exiting.Instruction">Êtes-vous sûr de vouloir quitter ?</s:String>
     <s:String x:Key="S.Exiting.Message">Toutes les fenêtres seront fermées et l'icône dans la barre des tâches va disparaitre</s:String>
     
-    <!--Error messages--> 
-    <s:String x:Key="S.Crash">Oh non, l'application a planté :(</s:String>
-    <s:String x:Key="S.Required">Champ requis.</s:String>
+    <!--Tray icon-->
+    <s:String x:Key="S.NewRecording">Nouvelle capture d'écran</s:String>
+    <s:String x:Key="S.NewWebcamRecording">Nouvelle capture de Webcam</s:String>
+    <s:String x:Key="S.NewBoardRecording">Nouvelle planche à dessin</s:String>
+    <s:String x:Key="S.Exit">Quitter</s:String>
     
     <!--Commands-->
     <s:String x:Key="S.Command.NewRecording">Nouvel enregistrement d'écran</s:String>
@@ -130,14 +126,24 @@
     <s:String x:Key="S.StartUp.NewRelease">Nouvelle version disponible • {0}</s:String>
     <s:String x:Key="S.StartUp.NewRelease.Tooltip">Télécharger la dernière version de ScreenToGif.</s:String>
 
-    <!--Update Window-->
+    <!--Updater-->
     <s:String x:Key="S.Updater.Title">Mettre à jour</s:String>
+    <s:String x:Key="S.Updater.Header">Une nouvelle mise à jour est disponible</s:String>
     <s:String x:Key="S.Updater.NewRelease">Nouvelle version!</s:String>
     <s:String x:Key="S.Updater.NewRelease.Info">Version {0} disponible! Cliquez ici pour plus de détails.</s:String>
-    <s:String x:Key="S.Updater.Download">Télécharger</s:String>
+    <s:String x:Key="S.Updater.Version">Version</s:String>
     <s:String x:Key="S.Updater.Portable">Portable</s:String>
     <s:String x:Key="S.Updater.Installer">Installeur</s:String>
-
+    <s:String x:Key="S.Updater.Info.WhatsNew">Quoi de neuf?</s:String>
+    <s:String x:Key="S.Updater.Info.BugFixes">Correction de bugs:</s:String>
+    <s:String x:Key="S.Updater.Info.NewVersionAvailable">Une nouvelle version est disponible au téléchargement.&#x0d;Souhaitez-vous ouvrir le navigateur pour la télécharger?</s:String>
+    <s:String x:Key="S.Updater.RunAfter">Exécutez l'application après la mise à jour.</s:String>
+    <s:String x:Key="S.Updater.Download">Télécharger</s:String>
+    <s:String x:Key="S.Updater.Install">Installer</s:String>
+    <s:String x:Key="S.Updater.Downloading">Téléchargement...</s:String>
+    <s:String x:Key="S.Updater.Warning.Show">Il n'a pas été possible d'afficher les détails du téléchargement.</s:String>
+    <s:String x:Key="S.Updater.Warning.Download">Il n'a pas été possible de télécharger la mise à jour.</s:String>
+    
     <!--Options-->
     <s:String x:Key="S.Options.Title">ScreenToGif - Options</s:String>
     <s:String x:Key="S.Options.App">Application</s:String>
@@ -151,7 +157,6 @@
     <s:String x:Key="S.Options.Upload">Services de téléchargement</s:String>
     <s:String x:Key="S.Options.Donate">Faire un don</s:String>
     <s:String x:Key="S.Options.About">À propos de</s:String>
-    
     <s:String x:Key="S.Options.Other">Autre</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Header">Touche de raccourci manquante pour le suivi du curseur</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Message">Afin d'utiliser la fonction de suivi du curseur de la souris, vous devez définir une touche de raccourci pour la faire basculer en cas de besoin.</s:String>
@@ -189,6 +194,8 @@
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">Vérifier les mises à jour de traduction</s:String>
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(Les traductions mises à jour seront téléchargées et installées automatiquement)</s:String>
     <s:String x:Key="S.Options.App.General.CheckForUpdates">Vérifier les mises à jour</s:String>
+    <s:String x:Key="S.Options.App.General.UpdateOnClose">Installation auto des mises à jour après fermeture de l'application.</s:String>
+    <s:String x:Key="S.Options.App.General.PromptToInstall">Me demander avant le début de l'installation.</s:String>
     <s:String x:Key="S.Options.App.Tray">Icône de la barre d'état système</s:String>
     <s:String x:Key="S.Options.App.Tray.Show">Afficher l'application sur la barre d'état du système (zone de notification)</s:String>
     <s:String x:Key="S.Options.App.Tray.LeaveOpen">Gardez l'application ouverte même si toutes les fenêtres sont fermées</s:String>
@@ -470,6 +477,7 @@
     <s:String x:Key="S.Recorder.SnapToWindow">Accrocher à la fenêtre (Prendre et relâchez pour accrocher)</s:String>
     <s:String x:Key="S.Recorder.PreStart">Démarrage dans...</s:String>
     <s:String x:Key="S.Recorder.Paused">ScreenToGif (en pause)</s:String>
+    <s:String x:Key="S.Recorder.Stopping">Arrêtant…</s:String>
     
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible">Il n'a pas été possible de capturer l'écran</s:String>
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">Il n'a pas été possible de capturer l'écran. La méthode de capture n'a renvoyé aucune image après 5 essais.</s:String>
@@ -477,7 +485,7 @@
     <s:String x:Key="S.Recorder.Warning.Windows8">Windows 8 ou plus récent est nécessaire pour capturer l'écran à l'aide de l'API de duplication du bureau.</s:String>
     <s:String x:Key="S.Recorder.Warning.MissingSharpDx">Les bibliothèques SharpDx sont nécessaires pour capturer l'écran à l'aide de l'API de duplication du bureau. Allez dans Options > Extras pour le télécharger.</s:String>
     
-    <!--New Recorder-->
+    <!--New recorder-->
     <s:String x:Key="S.Recorder.Area">Surface</s:String>
     <s:String x:Key="S.Recorder.Window">Fenêtre</s:String>
     <s:String x:Key="S.Recorder.Screen">Écran</s:String>
@@ -488,23 +496,22 @@
     <s:String x:Key="S.Recorder.SelectArea.Embedded">Cliquez et glissez pour sélectionner une zone</s:String>
     <s:String x:Key="S.Recorder.SelectWindow">Cliquez ici pour sélectionner cette fenêtre</s:String>
     <s:String x:Key="S.Recorder.SelectScreen">Cliquez ici pour sélectionner cet écran</s:String>
-    
     <s:String x:Key="S.Recorder.EscToCancel">Appuyez sur Echap pour annuler</s:String>
     
-    <!--Webcam Recorder-->
+    <!--Webcam recorder-->
     <s:String x:Key="S.Webcam.Title">ScreenToGif - Capture de WebCam</s:String>
     <s:String x:Key="S.Webcam.NoVideo">Aucun périphérique vidéo détecté :(</s:String>
     <s:String x:Key="S.Webcam.CheckVideoDevices">Rechercher vos périphériques vidéo</s:String>
     <s:String x:Key="S.Webcam.Scale">Échelle: {0:0.##}x</s:String>
     <s:String x:Key="S.Webcam.ChangeScale">Changer l'échelle de la vidéo.</s:String>
     
-    <!--Board Recorder-->
+    <!--Board recorder-->
     <s:String x:Key="S.Board.Title">ScreenToGif - Planche à dessin</s:String>
     <s:String x:Key="S.Board.AutoRecord">Enregistrement automatique</s:String>
     <s:String x:Key="S.Board.AutoRecordToolTip">Activer l'enregistrement pendant le dessin</s:String>
     <s:String x:Key="S.Board.CtrlHold">Ctrl [Maintenir]</s:String>
     
-    <!--Color Selector-->
+    <!--Color selector-->
     <s:String x:Key="S.ColorSelector.Title">Sélecteur de couleurs</s:String>
     <s:String x:Key="S.ColorSelector.Select">Sélectionnez une couleur</s:String>
     <s:String x:Key="S.ColorSelector.Red">Rouge</s:String>
@@ -518,13 +525,13 @@
     <s:String x:Key="S.ColorSelector.Sample">Faites glisser ceci vers&#x0d;échantillons de couleurs</s:String>
     <s:String x:Key="S.ColorSelector.Sample.Info">Cliquez et faites glisser pour choisir&#x0d;couleurs de votre écran.</s:String>
     
-    <!--Exception Viewer, Optional-->
+    <!--Exception/Error viewers-->
     <s:String x:Key="S.ExceptionViewer.Title">Visualisation d'exception</s:String>
     <s:String x:Key="S.ExceptionViewer.OpenInner">Ouvrir l'exception interne</s:String>
     <s:String x:Key="S.ErrorDialog.Observation">Quelque chose s'est mal passé.</s:String>
     <s:String x:Key="S.ErrorDialog.Send">Envoyer un rapport</s:String>
 
-    <!--FFmpeg Preset-->
+    <!--FFmpeg preset-->
     <s:String x:Key="S.FfmpegPreset.Title">Présélection FFmpeg</s:String>
     <s:String x:Key="S.FfmpegPreset.Name">Nom</s:String>
     <s:String x:Key="S.FfmpegPreset.Parameters">Paramètres</s:String>
@@ -532,7 +539,7 @@
     <s:String x:Key="S.FfmpegPreset.Warning.Parameter">Vous devez saisir certains paramètres pour ce préréglage.</s:String>
     <s:String x:Key="S.FfmpegPreset.Warning.SameName">Il existe déjà un préréglage portant le même nom.</s:String>
 
-    <!--Insert Frames-->
+    <!--Insert frames-->
     <s:String x:Key="S.InsertFrames.Title">Insérer des images</s:String>
     <s:String x:Key="S.InsertFrames.Info">Les deux côtés doivent avoir la même taille. Cette fenêtre vous permet de repositionner et de redimensionner l’image et le Canevas. Cliquez pour sélectionner et redimensionner.</s:String>
     <s:String x:Key="S.InsertFrames.CanvasSize">Taille du Canvas:</s:String>
@@ -550,7 +557,7 @@
     <s:String x:Key="S.InsertFrames.Importing">Importation</s:String>
     <s:String x:Key="S.InsertFrames.SelectColorFill">Sélectionnez la couleur de remplissage du canevas</s:String>
 
-    <!--Import Frames From Video-->
+    <!--Import frames from video-->
     <s:String x:Key="S.ImportVideo.Title">Importer à partir d'une vidéo</s:String>
     <s:String x:Key="S.ImportVideo.Importer">Importateur:</s:String>
     <s:String x:Key="S.ImportVideo.Loading">Chargement...</s:String>
@@ -619,6 +626,8 @@
     <s:String x:Key="Editor.Options">Options</s:String>
     <s:String x:Key="S.Editor.Help">Aide</s:String>
     <s:String x:Key="S.Editor.Extras">Suppléments</s:String>
+    <s:String x:Key="S.Editor.UpdateAvailable">Une nouvelle mise à jour est disponible!</s:String>
+    <s:String x:Key="S.Editor.UpdateAvailable.Info">Cliquez ici pour en savoir plus.</s:String>
     
     <!--Welcome-->
     <s:String x:Key="Welcome.New">Rendez-vous sur 'Fichier>Nouveau' pour démarrer un nouvel enregistrement</s:String>
@@ -1171,9 +1180,7 @@
     <s:String x:Key="S.SaveAs.File.Increase">Incrémenter le numéro de fichier</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">Décrémenter le nombre de fichiers</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">Un fichier portant le même nom existe déjà.</s:String>
-    
     <s:String x:Key="S.SaveAs.File.Clipboard">Enregistrer dans le presse-papiers.</s:String>
-
     <s:String x:Key="S.SaveAs.Warning.Type">Vous devez sélectionner où enregistrer le fichier (dans un dossier, dans le presse-papiers ou le télécharger ailleurs).</s:String>
     <s:String x:Key="S.SaveAs.Warning.Commands.Empty">Pour exécuter une commande post-encodage, vous devez saisir quelque chose dans le champ de texte des commandes.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Upload.None">Aucun service de téléchargement sélectionné. Vous devez sélectionner une destination.</s:String>
