@@ -1,7 +1,7 @@
 # Localization
 ScreenToGif's base language is [English](https://github.com/NickeManarin/ScreenToGif/blob/master/ScreenToGif/Resources/Localization/StringResources.en.xaml).<br/>
 
-To contribute to the translation of ScreenToGif, you will need to fork this repository.<br/>
+To contribute to the translation of ScreenToGif, you can fork this repository or copy the texts resources and send it to nicke@outlook.com.br.<br/>
 [![GitHub forks](https://img.shields.io/github/forks/badges/shields.svg?style=social&label=Fork)](https://github.com/NickeManarin/ScreenToGif)
 
 This allows you to edit and push changes of files to your fork so that you can then open a pull request.<br/>
