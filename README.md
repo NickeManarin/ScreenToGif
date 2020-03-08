@@ -53,6 +53,9 @@
 <a href="https://github.com/NickeManarin/ScreenToGif/issues" target="_blank">
  <img alt="Issues" src="https://img.shields.io/github/issues/NickeManarin/ScreenToGif.svg" />
 </a>
+<a style="text-decoration:none" href="https://discord.gg/XgEqDHX">
+ <img src="https://img.shields.io/discord/318260719680356352.svg" alt="Discord" />
+</a>
 </p>
 	
 <h2>Would you like to help the project?</h2>
