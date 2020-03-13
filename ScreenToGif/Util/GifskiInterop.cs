@@ -128,10 +128,13 @@ namespace ScreenToGif.Util
             OtherError = 15
         }
 
+        private double _timeStamp = 0;
+
         private delegate IntPtr NewDelegate(GifskiSettings settings);
         private delegate GifskiError AddPngFrameDelegate(IntPtr handle, uint index, [MarshalAs(UnmanagedType.LPUTF8Str)] string path, ushort delay);
-        private delegate GifskiError AddRgbaFrameDelegate(IntPtr handle, uint index, uint width, uint height, IntPtr pixels, ushort delay);
+        //private delegate GifskiError AddRgbaFrameDelegate(IntPtr handle, uint index, uint width, uint height, IntPtr pixels, ushort delay);
         private delegate GifskiError AddRgbFrameDelegate(IntPtr handle, uint index, uint width, uint bytesPerRow, uint height, IntPtr pixels, ushort delay);
+        private delegate GifskiError AddRgb2FrameDelegate(IntPtr handle, uint frameNumber, uint width, uint bytesPerRow, uint height, IntPtr pixels, double timestamp);
 
         private delegate GifskiError SetFileOutputDelegate(IntPtr handle, [MarshalAs(UnmanagedType.LPUTF8Str)] string path);
         private delegate GifskiError FinishDelegate(IntPtr handle);
@@ -143,7 +146,8 @@ namespace ScreenToGif.Util
         private readonly NewDelegate _new;
         private readonly AddPngFrameDelegate _addPngFrame;
         private readonly AddRgbFrameDelegate _addRgbFrame;
-        private readonly AddRgbaFrameDelegate _addRgbaFrame;
+        private readonly AddRgb2FrameDelegate _addRgb2Frame;
+        //private readonly AddRgbaFrameDelegate _addRgbaFrame;
 
         private readonly SetFileOutputDelegate _setFileOutput;
         private readonly FinishDelegate _finish;
@@ -161,12 +165,8 @@ namespace ScreenToGif.Util
 
             switch (info.Length)
             {
-                case 494_080:
-                    Version = new Version(0, 10, 2);
-                    break;
-
                 case 502_720:
-                    Version = new Version(0, 10, 1);
+                    Version = new Version(0, 10, 2);
                     break;
 
                 case 502_208:
@@ -174,7 +174,7 @@ namespace ScreenToGif.Util
                     break;
 
                 default:
-                    Version = new Version(0,0);
+                    Version = new Version(0, 0);
                     break;
             }
 
@@ -184,8 +184,12 @@ namespace ScreenToGif.Util
 
             _new = (NewDelegate)FunctionLoader.LoadFunction<NewDelegate>(UserSettings.All.GifskiLocation, "gifski_new");
             _addPngFrame = (AddPngFrameDelegate)FunctionLoader.LoadFunction<AddPngFrameDelegate>(UserSettings.All.GifskiLocation, "gifski_add_frame_png_file");
-            _addRgbaFrame = (AddRgbaFrameDelegate)FunctionLoader.LoadFunction<AddRgbaFrameDelegate>(UserSettings.All.GifskiLocation, "gifski_add_frame_rgba");
-            _addRgbFrame = (AddRgbFrameDelegate)FunctionLoader.LoadFunction<AddRgbFrameDelegate>(UserSettings.All.GifskiLocation, "gifski_add_frame_rgb");
+            //_addRgbaFrame = (AddRgbaFrameDelegate)FunctionLoader.LoadFunction<AddRgbaFrameDelegate>(UserSettings.All.GifskiLocation, "gifski_add_frame_rgba");
+
+            if (Version.Major == 0 && Version.Minor < 10)
+                _addRgbFrame = (AddRgbFrameDelegate)FunctionLoader.LoadFunction<AddRgbFrameDelegate>(UserSettings.All.GifskiLocation, "gifski_add_frame_rgb");
+            else
+                _addRgb2Frame = (AddRgb2FrameDelegate)FunctionLoader.LoadFunction<AddRgb2FrameDelegate>(UserSettings.All.GifskiLocation, "gifski_add_frame_rgb");
 
             if (Version.Major == 0 && Version.Minor < 9)
             {
@@ -209,7 +213,7 @@ namespace ScreenToGif.Util
             return _new(new GifskiSettings((byte)quality, looped, fast));
         }
 
-        internal GifskiError AddFrame(IntPtr handle, uint index, string path, int delay)
+        internal GifskiError AddFrame(IntPtr handle, uint index, string path, int delay, bool isLast = false)
         {
             if (Version.Major == 0 && Version.Minor < 9)
                 return _addPngFrame(handle, index, path, (ushort)(delay / 10));
@@ -226,12 +230,30 @@ namespace ScreenToGif.Util
             var pinnedBuffer = GCHandle.Alloc(util.Pixels, GCHandleType.Pinned);
             var address = pinnedBuffer.AddrOfPinnedObject();
 
-            //Load the cursor shape into the buffer.
-            var result = AddFramePixels(handle, index, (uint)util.Width, (uint)bytesPerRow, (uint)util.Height, address, (ushort)delay);
-            
+            GifskiError result;
+
+            if (Version.Major == 0 && Version.Minor >= 10)
+            {
+                result = AddFrame2Pixels(handle, index, (uint)util.Width, (uint)bytesPerRow, (uint)util.Height, address, _timeStamp);
+
+                //As a dirty fix for Gifski 0.10.2, the last frame must be duplicated to preserve the timings.
+                if (isLast)
+                {
+                    _timeStamp += ((delay / 1000d) / 2d);
+                    result = AddFrame2Pixels(handle, index + 1, (uint)util.Width, (uint)bytesPerRow, (uint)util.Height, address, _timeStamp);
+                }
+                
+                //Frames can't be more than 1 seconds apart. TODO: Add support for dealing with this issue.
+                _timeStamp += (delay / 1000d);
+            }
+            else
+            {
+                //Normal delay.
+                result = AddFramePixels(handle, index, (uint)util.Width, (uint)bytesPerRow, (uint)util.Height, address, (ushort)delay);
+            }
+
             //The buffer must be unpinned, to free resources.
             pinnedBuffer.Free();
-            
             util.UnlockBitsWithoutCommit();
 
             return result;
@@ -240,6 +262,11 @@ namespace ScreenToGif.Util
         internal GifskiError AddFramePixels(IntPtr handle, uint index, uint width, uint bytesPerRow, uint height, IntPtr pixels, int delay)
         {
             return _addRgbFrame(handle, index, width, bytesPerRow, height, pixels, (ushort)(delay / 10));
+        }
+
+        internal GifskiError AddFrame2Pixels(IntPtr handle, uint frameNumber, uint width, uint bytesPerRow, uint height, IntPtr pixels, double timestamp)
+        {
+            return _addRgb2Frame(handle, frameNumber, width, bytesPerRow, height, pixels, timestamp);
         }
 
         internal GifskiError EndAdding(IntPtr handle)

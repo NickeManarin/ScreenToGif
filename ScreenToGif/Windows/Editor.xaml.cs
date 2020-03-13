@@ -7542,6 +7542,8 @@ namespace ScreenToGif.Windows
 
                 UpdateProgress(count++);
             }
+
+            Project.Persist();
         }
 
         private void DelayCallback(IAsyncResult ar)

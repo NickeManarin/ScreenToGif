@@ -755,7 +755,7 @@ namespace ScreenToGif.Windows.Other
 
                                         Update(id, i, string.Format(processing, i));
 
-                                        res = gifski.AddFrame(handle, (uint)i, frames[i].Path, frames[i].Delay);
+                                        res = gifski.AddFrame(handle, (uint)i, frames[i].Path, frames[i].Delay, i + 1 == frames.Count);
 
                                         if (res != GifskiInterop.GifskiError.Ok)
                                             throw new Exception("Error while adding frames with Gifski. " + res, new Win32Exception(res.ToString())) { HelpLink = $"Result:\n\r{Marshal.GetLastWin32Error()}" };
