@@ -26,7 +26,7 @@
                     <c:ImageMenuItem x:Name="TroubleshootMenuItem" Header="{DynamicResource S.Troubleshoot.Title}" Image="{DynamicResource Vector.Warning}" 
                                      ContentHeight="16" ContentWidth="16"/>
                     <Separator Height="1"/>
-                    <c:ImageMenuItem x:Name="HelpMenuItem" Header="{DynamicResource Help}" Image="{DynamicResource Vector.Question}" 
+                    <c:ImageMenuItem x:Name="HelpMenuItem" Header="{DynamicResource S.Editor.Help}" Image="{DynamicResource Vector.Question}" 
                                      ContentHeight="16" ContentWidth="16"/>
                 </c:ImageMenuItem>
             </r:Ribbon.ExtrasMenu>

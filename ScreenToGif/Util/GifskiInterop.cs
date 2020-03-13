@@ -159,7 +159,24 @@ namespace ScreenToGif.Util
             var info = new FileInfo(UserSettings.All.GifskiLocation);
             info.Refresh();
 
-            Version = info.Length == 502_208 ? new Version(0, 9, 3) : new Version(0, 0);
+            switch (info.Length)
+            {
+                case 494_080:
+                    Version = new Version(0, 10, 2);
+                    break;
+
+                case 502_720:
+                    Version = new Version(0, 10, 1);
+                    break;
+
+                case 502_208:
+                    Version = new Version(0, 9, 3);
+                    break;
+
+                default:
+                    Version = new Version(0,0);
+                    break;
+            }
 
             #endregion
 
@@ -198,18 +215,31 @@ namespace ScreenToGif.Util
                 return _addPngFrame(handle, index, path, (ushort)(delay / 10));
 
             var util = new PixelUtil(new FormatConvertedBitmap(path.SourceFrom(), PixelFormats.Rgb24, null, 0));
-            util.LockBits();
+            util.LockBitsAndUnpad();
 
-            var result = AddFramePixels(handle, index, (uint) util.Width, (uint)((util.Width * 24 + 31) / 32) * 4, (uint) util.Height, util.BackBuffer, (ushort)delay);
+            var bytesPerRow = util.Width * 3; //Was ((util.Width * 24 + 31) / 32) * 3
 
+            //if (bytesPerRow % 4 != 0)
+            //    bytesPerRow += (4 - (bytesPerRow % 4));
+
+            //Pin the buffer in order to pass the address as parameter later.
+            var pinnedBuffer = GCHandle.Alloc(util.Pixels, GCHandleType.Pinned);
+            var address = pinnedBuffer.AddrOfPinnedObject();
+
+            //Load the cursor shape into the buffer.
+            var result = AddFramePixels(handle, index, (uint)util.Width, (uint)bytesPerRow, (uint)util.Height, address, (ushort)delay);
+            
+            //The buffer must be unpinned, to free resources.
+            pinnedBuffer.Free();
+            
             util.UnlockBitsWithoutCommit();
 
             return result;
         }
 
-        internal GifskiError AddFramePixels(IntPtr handle, uint index, uint width, uint bitsPerRow, uint height, IntPtr pixels, int delay)
+        internal GifskiError AddFramePixels(IntPtr handle, uint index, uint width, uint bytesPerRow, uint height, IntPtr pixels, int delay)
         {
-            return _addRgbFrame(handle, index, width, bitsPerRow, height, pixels, (ushort)(delay / 10));
+            return _addRgbFrame(handle, index, width, bytesPerRow, height, pixels, (ushort)(delay / 10));
         }
 
         internal GifskiError EndAdding(IntPtr handle)

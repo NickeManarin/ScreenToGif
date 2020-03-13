@@ -620,8 +620,9 @@ namespace ScreenToGif.Util.ActivityHook
         private MouseButtonState _leftButton = MouseButtonState.Released;
         private MouseButtonState _rightButton = MouseButtonState.Released;
         private MouseButtonState _middleButton = MouseButtonState.Released;
-        static DateTime lastClickTime;// for double click detection
-        static int clickCount;// for double click detection
+        static DateTime _lastClickTime; //For double click detection.
+        static int _clickCount; //For double click detection.
+
         /// <summary>
         /// A callback function which will be called every time a mouse activity detected.
         /// </summary>
@@ -665,18 +666,18 @@ namespace ScreenToGif.Util.ActivityHook
 
                 case MouseEventType.ExtraButtonDown:
                 case MouseEventType.LeftButtonDown:
-                    var deltaMs = DateTime.Now - lastClickTime;
-                    lastClickTime = DateTime.Now;
+                    var deltaMs = DateTime.Now - _lastClickTime;
+                    _lastClickTime = DateTime.Now;
 
                     if (deltaMs.TotalMilliseconds <= Native.GetDoubleClickTime())
-                        clickCount++;
+                        _clickCount++;
                     else
-                        clickCount = 1;
+                        _clickCount = 1;
 
-                    if (clickCount == 2)
+                    if (_clickCount == 2)
                     {
                         OnMouseActivity?.Invoke(this, new CustomMouseEventArgs(mouse.pt.X, mouse.pt.Y, MouseEventType.LeftButtonDoubleClick, _leftButton, _rightButton, _middleButton));
-                        clickCount = 0;
+                        _clickCount = 0;
                     }
 
                     _leftButton = MouseButtonState.Pressed;

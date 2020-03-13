@@ -97,6 +97,62 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
             Marshal.Copy(BackBuffer, Pixels, 0, Pixels.Length);
         }
 
+        public void LockBitsAndUnpad()
+        {
+            //Get width and height of bitmap.
+            Width = _source.PixelWidth;
+            Height = _source.PixelHeight;
+
+            //Get total locked pixels count.
+            var pixelCount = Width * Height;
+
+            //Get source bitmap pixel format size.
+            Depth = _source.Format.BitsPerPixel;
+
+            if (Depth != 32 && Depth != 24)
+                throw new ArgumentException("Only 24 and 32 bpp images are supported.");
+
+            _data = new WriteableBitmap(_source);
+
+            //Lock bitmap and return bitmap data.
+            _data.Lock();
+
+            /*
+                https://doanvublog.wordpress.com/tag/32bpp/
+                1,4,8 and 16bpp uses a color table.
+
+                1bpp : 1 byte, 8 pixels, 2 colors
+                4bpp : 1 byte, 2 pixels, 16 colors
+                8bpp : 1 byte, 1 pixel, 256 colors
+                16bpp : 2 bytes, 1 pixel
+                24bpp : 3 bytes, 1 pixel
+                32bpp : 4 bytes, 1 pixel
+
+                So, bpp/8 = color chunk size.
+            */
+
+            //Create byte array to copy pixel values.
+            var step = Depth / 8;
+
+            //Adjust to necessary padding.
+            var bytesPerRow = Width * step; 
+            var pad = bytesPerRow % 4 != 0 ? 4 - bytesPerRow % 4 : 0;
+
+            Pixels = new byte[pixelCount * step];
+            BackBuffer = _data.BackBuffer;
+
+            //Copy data from pointer to array normally, if it has no padding.
+            if (pad == 0)
+            {
+                Marshal.Copy(BackBuffer, Pixels, 0, Pixels.Length);
+                return;
+            }
+
+            //Removes the pad from the pixel array.
+            for (var row = 0; row < Height; row++)
+                Marshal.Copy(new IntPtr(BackBuffer.ToInt64() + row * (bytesPerRow + pad)), Pixels, row * bytesPerRow, bytesPerRow);
+        }
+
         /// <summary>
         /// Unlock bitmap data
         /// </summary>

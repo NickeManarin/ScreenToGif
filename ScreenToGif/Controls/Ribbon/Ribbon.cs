@@ -10,16 +10,16 @@ using ScreenToGif.Util;
 
 namespace ScreenToGif.Controls.Ribbon
 {
-    public enum RibbonMode
-    {
-        Ribbon,
-        Menu
-    }
-
     //Groups of elements, ordered
     //Groups can be hidden by type/tags
     public class Ribbon : TabControl
     {
+        public enum Modes
+        {
+            Ribbon,
+            Menu
+        }
+
         #region Variables
 
         private Button _hideButton;
@@ -33,14 +33,15 @@ namespace ScreenToGif.Controls.Ribbon
 
         #region Properties
 
-        public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Mode), typeof(RibbonMode), typeof(Ribbon), 
-            new FrameworkPropertyMetadata(RibbonMode.Ribbon, FrameworkPropertyMetadataOptions.AffectsRender, Mode_Changed));
-        public static readonly DependencyProperty ExtrasMenuProperty = DependencyProperty.Register(nameof(ExtrasMenu), typeof(List<FrameworkElement>), typeof(Ribbon), 
+        public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Mode), typeof(Modes), typeof(Ribbon),
+            new FrameworkPropertyMetadata(Modes.Ribbon, FrameworkPropertyMetadataOptions.AffectsRender, Mode_Changed));
+
+        public static readonly DependencyProperty ExtrasMenuProperty = DependencyProperty.Register(nameof(ExtrasMenu), typeof(List<FrameworkElement>), typeof(Ribbon),
             new PropertyMetadata(new List<FrameworkElement>()));
 
-        public RibbonMode Mode
+        public Modes Mode
         {
-            get => (RibbonMode)GetValue(ModeProperty);
+            get => (Modes)GetValue(ModeProperty);
             set => SetValue(ModeProperty, value);
         }
 
@@ -204,12 +205,12 @@ namespace ScreenToGif.Controls.Ribbon
         {
             switch (Mode)
             {
-                case RibbonMode.Ribbon:
+                case Modes.Ribbon:
                 {
 
                     break;
                 }
-                case RibbonMode.Menu:
+                case Modes.Menu:
                 {
 
                     break;
@@ -247,18 +248,19 @@ namespace ScreenToGif.Controls.Ribbon
             //Console.WriteLine("IsDark: " + isDark);
 
             //Update each tab.
-            foreach (var tab in _tabPanel.Children.OfType<AwareTabItem>())
-            {
-                //To force the change.
-                if (tab.IsDark == !darkForeground)
-                    tab.IsDark = !tab.IsDark;
+            if (_tabPanel != null)
+                foreach (var tab in _tabPanel.Children.OfType<AwareTabItem>())
+                {
+                    //To force the change.
+                    if (tab.IsDark == !darkForeground)
+                        tab.IsDark = !tab.IsDark;
 
-                if (tab.ShowBackground == showBackground)
-                    tab.ShowBackground = !tab.ShowBackground;
+                    if (tab.ShowBackground == showBackground)
+                        tab.ShowBackground = !tab.ShowBackground;
 
-                tab.IsDark = !darkForeground;
-                tab.ShowBackground = showBackground;
-            }
+                    tab.IsDark = !darkForeground;
+                    tab.ShowBackground = showBackground;
+                }
 
             //Update the buttons.
             if (_notificationButton != null)
@@ -289,6 +291,7 @@ namespace ScreenToGif.Controls.Ribbon
             var most = NotificationManager.Notifications.Select(s => s.Kind).OrderByDescending(a => (int)a).FirstOrDefault();
 
             _notificationButton.Content = FindResource(StatusBand.KindToString(most)) as Canvas;
+            _notificationButton.IsImportant = most != StatusType.None;
 
             if (most != StatusType.None)
                 (_notificationButton.FindResource("NotificationStoryboard") as Storyboard)?.Begin();

@@ -5,7 +5,7 @@ namespace ScreenToGif.Windows
 {
     public partial class EditorEx : Window
     {
-        private EditorViewModel _editorViewModel; 
+        private readonly EditorViewModel _editorViewModel; 
 
         public EditorEx()
         {

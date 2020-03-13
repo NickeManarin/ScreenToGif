@@ -49,8 +49,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>
-    </DefineConstants>
+    <DefineConstants>UWP</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>
@@ -288,16 +287,23 @@
     <Compile Include="ImageUtil\Psd\LayerInfo.cs" />
     <Compile Include="ImageUtil\Psd\LayerRecord.cs" />
     <Compile Include="ImageUtil\Psd\Psd.cs" />
-    <Compile Include="ModelEx\FrameModel.cs" />
-    <Compile Include="ModelEx\LayerModel.cs" />
-    <Compile Include="ModelEx\Layers\CinemagraphLayer.cs" />
-    <Compile Include="ModelEx\Layers\DrawingLayer.cs" />
-    <Compile Include="ModelEx\Layers\MouseClickLayer.cs" />
-    <Compile Include="ModelEx\Layers\ObfuscationLayer.cs" />
-    <Compile Include="ModelEx\Layers\ProgressLayer.cs" />
-    <Compile Include="ModelEx\Layers\ShapeLayer.cs" />
-    <Compile Include="ModelEx\Layers\TextLayer.cs" />
-    <Compile Include="ModelEx\ProjectModel.cs" />
+    <Compile Include="ModelEx\Project.cs" />
+    <Compile Include="ModelEx\Sequence.cs" />
+    <Compile Include="ModelEx\Sequences\BrushSequence.cs" />
+    <Compile Include="ModelEx\Sequences\CursorSequence.cs" />
+    <Compile Include="ModelEx\Sequences\DrawingLayer.cs" />
+    <Compile Include="ModelEx\Sequences\KeySequence.cs" />
+    <Compile Include="ModelEx\Sequences\ObfuscationSequence.cs" />
+    <Compile Include="ModelEx\Sequences\ProgressSequence.cs" />
+    <Compile Include="ModelEx\Sequences\RasterSequence.cs" />
+    <Compile Include="ModelEx\Sequences\ShapeSequence.cs" />
+    <Compile Include="ModelEx\Sequences\SizeableSequence.cs" />
+    <Compile Include="ModelEx\Sequences\SubSequences\CursorEvent.cs" />
+    <Compile Include="ModelEx\Sequences\SubSequences\Frame.cs" />
+    <Compile Include="ModelEx\Sequences\SubSequences\KeyEvent.cs" />
+    <Compile Include="ModelEx\Sequences\SubSequences\Shadow.cs" />
+    <Compile Include="ModelEx\Sequences\TextSequence.cs" />
+    <Compile Include="ModelEx\Track.cs" />
     <Compile Include="Model\BindableBase.cs" />
     <Compile Include="Model\FosshubItem.cs" />
     <Compile Include="Model\FosshubRelease.cs" />

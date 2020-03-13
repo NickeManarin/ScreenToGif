@@ -287,7 +287,7 @@ namespace ScreenToGif.Controls
             //For example, The value 600 and the Offset 20 should display the text 580.
             //Value = (Text + Offset) * Scale.
 
-            Temporary = Convert.ToInt32(Text, CultureInfo.CurrentCulture) / Scale + Offset;
+            Temporary = Convert.ToInt32(Text, CultureInfo.CurrentUICulture) / Scale + Offset;
             Value = (int)Temporary;
 
             base.OnTextChanged(e);
@@ -309,7 +309,7 @@ namespace ScreenToGif.Controls
                 //For example, The value 600 and the Offset 20 should display the text 580.
                 //Value = Text + Offset.
                 UseTemporary = true;
-                Temporary = Convert.ToInt32(Text, CultureInfo.CurrentCulture) / Scale + Offset;
+                Temporary = Convert.ToInt32(Text, CultureInfo.CurrentUICulture) / Scale + Offset;
                 Value = (int)Math.Round(Temporary);
                 UseTemporary = false;
                 return;
@@ -384,7 +384,7 @@ namespace ScreenToGif.Controls
 
         private bool IsTextAllowed(string text)
         {
-            return Minimum < 0 ? Regex.IsMatch(text, @"^[-]?(?:\d{1,9})?$") : Regex.IsMatch(text, @"^(?:\d{1,9})?$");
+            return Minimum < 0 ? Regex.IsMatch(text, @"^[-]?(?:[0-9]{1,9})?$") : Regex.IsMatch(text, @"^(?:[0-9]{1,9})?$");
         }
 
         #endregion

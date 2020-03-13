@@ -11,14 +11,14 @@ namespace ScreenToGif.Controls.Ribbon
     {
         private int[] _order = null;
 
-        public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Mode), typeof(RibbonMode), typeof(RibbonPanel), 
-            new FrameworkPropertyMetadata(RibbonMode.Ribbon, FrameworkPropertyMetadataOptions.AffectsRender, Mode_Changed));
+        public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Mode), typeof(Ribbon.Modes), typeof(RibbonPanel), 
+            new FrameworkPropertyMetadata(Ribbon.Modes.Ribbon, FrameworkPropertyMetadataOptions.AffectsRender, Mode_Changed));
         public static readonly DependencyProperty ReductionOrderProperty = DependencyProperty.Register(nameof(ReductionOrder), typeof(string[]), typeof(RibbonPanel), 
             new PropertyMetadata(default(string[]), ReductionOrder_Changed));
 
-        public RibbonMode Mode
+        public Ribbon.Modes Mode
         {
-            get => (RibbonMode)GetValue(ModeProperty);
+            get => (Ribbon.Modes)GetValue(ModeProperty);
             set => SetValue(ModeProperty, value);
         }
 
@@ -38,7 +38,7 @@ namespace ScreenToGif.Controls.Ribbon
 
         protected override Size MeasureOverride(Size availableSize)
         {
-            if (Mode == RibbonMode.Menu)
+            if (Mode == Ribbon.Modes.Menu)
                 return base.MeasureOverride(availableSize);
 
             var availableWidth = availableSize.Width;
@@ -57,7 +57,7 @@ namespace ScreenToGif.Controls.Ribbon
 
         protected override Size ArrangeOverride(Size finalSize)
         {
-            if (Mode == RibbonMode.Menu)
+            if (Mode == Ribbon.Modes.Menu)
                 return base.ArrangeOverride(finalSize);
 
             double width = 0;
@@ -88,11 +88,11 @@ namespace ScreenToGif.Controls.Ribbon
         {
             switch (Mode)
             {
-                case RibbonMode.Ribbon:
+                case Ribbon.Modes.Ribbon:
                 {
                     break;
                 }
-                case RibbonMode.Menu:
+                case Ribbon.Modes.Menu:
                 {
 
                     break;

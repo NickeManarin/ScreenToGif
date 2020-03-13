@@ -727,7 +727,7 @@ namespace ScreenToGif.Windows.Other
                                 }
                                 else
                                 {
-                                    #region Version 0.9.3
+                                    #region Version 0.9.3 and newer
 
                                     var res = gifski.SetOutput(handle, param.Filename);
 
@@ -760,6 +760,8 @@ namespace ScreenToGif.Windows.Other
                                         if (res != GifskiInterop.GifskiError.Ok)
                                             throw new Exception("Error while adding frames with Gifski. " + res, new Win32Exception(res.ToString())) { HelpLink = $"Result:\n\r{Marshal.GetLastWin32Error()}" };
                                     }
+
+                                    SetStatus(Status.Processing, id, null, false);
 
                                     gifski.EndAdding(handle);
 
