@@ -16,7 +16,21 @@
 </p>
 <h1 align="center">ScreenToGif 🎬 <a href="http://www.screentogif.com/" target="_blank">screentogif.com</a></h1>
 
-<p>This tool allows you to record a selected area of your <strong>screen</strong>, live feed from your <strong>webcam</strong> or live drawings from a <strong>sketchboard</strong>. Afterwards, you can edit and save the animation as a gif, apng, video, psd or png images. <a href="https://github.com/NickeManarin/ScreenToGif/releases">Download it here</a></p>
+<p align="center">This tool allows you to record a selected area of your <strong>screen</strong>, live feed from your <strong>webcam</strong> or live drawings from a <strong>sketchboard</strong>. Afterwards, you can edit and save the animation as a gif, apng, video, psd or png images.</p>
+
+<p align="center">
+    <a href="https://github.com/NickeManarin/ScreenToGif/releases" target="_blank">
+        <img align="center" alt="download" src="https://github.com/NickeManarin/ScreenToGif-Website/blob/master/img/github/download-now.png"/>
+    </a>
+</p>
+<p align="center">
+    <a href="https://www.microsoft.com/en-us/p/screentogif/9n3sqk8pds8g" target="_blank">
+        <img align="center" alt="download Microsoft Store" src="https://github.com/NickeManarin/ScreenToGif-Website/blob/master/img/github/download-store.png"/>
+    </a>
+    <a href="https://chocolatey.org/packages/screentogif" target="_blank">
+        <img align="center" alt="Download from Chocolatey" src="https://github.com/NickeManarin/ScreenToGif-Website/blob/master/img/github/download-chocolatey.png"/>
+    </a>
+</p>
 
 <p align="center">
 <g-emoji ios-version="6.0" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a0.png" alias="warning">⚠️</g-emoji> Attention, it requires <a href="http://go.microsoft.com/fwlink/?LinkId=2085155">.Net Framework 4.8</a> (or above). 
@@ -38,6 +52,9 @@
 </a>
 <a href="https://github.com/NickeManarin/ScreenToGif/issues" target="_blank">
  <img alt="Issues" src="https://img.shields.io/github/issues/NickeManarin/ScreenToGif.svg" />
+</a>
+<a style="text-decoration:none" href="https://discord.gg/XgEqDHX">
+ <img src="https://img.shields.io/discord/318260719680356352.svg" alt="Discord" />
 </a>
 </p>
 	
