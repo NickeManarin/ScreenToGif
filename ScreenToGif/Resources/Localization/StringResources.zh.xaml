@@ -13,17 +13,19 @@
     <s:String x:Key="S.Cancel">取消</s:String>
     <s:String x:Key="S.Yes">是</s:String>
     <s:String x:Key="S.No">否</s:String>
-    <s:String x:Key="Frame">帧</s:String>
-    <s:String x:Key="Suppress">隐藏</s:String>
-    <s:String x:Key="Preview">预览</s:String>
     <s:String x:Key="S.Add">添加</s:String>
     <s:String x:Key="S.Edit">编辑</s:String>
     <s:String x:Key="S.Id">标识</s:String>
     <s:String x:Key="S.Title">标题</s:String>
     <s:String x:Key="S.Description">描述</s:String>
     <s:String x:Key="S.SelectColor">单击此处选择颜色。</s:String>
-
+    <s:String x:Key="Frame">帧</s:String>
+    <s:String x:Key="Suppress">隐藏</s:String>
+    <s:String x:Key="Preview">预览</s:String>
+    
     <!--Warning messages-->
+    <s:String x:Key="S.Crash">哦，不，应用程序崩溃了 :(</s:String>
+    <s:String x:Key="S.Required">必填字段。</s:String>
     <s:String x:Key="S.Warning.Net.Title">缺少依赖项</s:String>
     <s:String x:Key="S.Warning.Net.Header">Net Framework 4.8 不存在</s:String>
     <s:String x:Key="S.Warning.Net.Message">为了正确使用此应用程序，您需要下载正确版本的 .Net Framework。
@@ -31,21 +33,15 @@
     <s:String x:Key="S.Warning.Single.Title">允许一个实例</s:String>
     <s:String x:Key="S.Warning.Single.Header">该应用程序已在运行</s:String>
     <s:String x:Key="S.Warning.Single.Message">ScreenToGif 已经在运行，但是显然没有打开任何窗口。 检查系统托盘，其中必须有一个 ScreenToGif 图标。</s:String>
-    
-    <!--Tray Icon-->
-    <s:String x:Key="S.NewRecording">新建屏幕录制</s:String>
-    <s:String x:Key="S.NewWebcamRecording">新建摄像头录制</s:String>
-    <s:String x:Key="S.NewBoardRecording">新建画板录制</s:String>
-    <s:String x:Key="S.Exit">退出</s:String>
-
-    <!--Application-->
     <s:String x:Key="S.Exiting.Title">退出 ScreenToGif</s:String>
     <s:String x:Key="S.Exiting.Instruction">你确定要退出吗?</s:String>
     <s:String x:Key="S.Exiting.Message">所有窗口将被关闭，托盘图标将被移除。</s:String>
     
-    <!--Error messages--> 
-    <s:String x:Key="S.Crash">哦，不，应用程序崩溃了 :(</s:String>
-    <s:String x:Key="S.Required">必填字段。</s:String>
+    <!--Tray icon-->
+    <s:String x:Key="S.NewRecording">新建屏幕录制</s:String>
+    <s:String x:Key="S.NewWebcamRecording">新建摄像头录制</s:String>
+    <s:String x:Key="S.NewBoardRecording">新建画板录制</s:String>
+    <s:String x:Key="S.Exit">退出</s:String>
     
     <!--Commands-->
     <s:String x:Key="S.Command.NewRecording">新建屏幕录制</s:String>
@@ -131,13 +127,23 @@
     <s:String x:Key="S.StartUp.NewRelease">新版本可用 • {0}</s:String>
     <s:String x:Key="S.StartUp.NewRelease.Tooltip">下载最新版本的 ScreenToGif。</s:String>
 
-    <!--Update Window-->
+    <!--Updater-->
     <s:String x:Key="S.Updater.Title">更新</s:String>
+    <s:String x:Key="S.Updater.Header">一个新的更新可用</s:String>
     <s:String x:Key="S.Updater.NewRelease">新版本发布！</s:String>
     <s:String x:Key="S.Updater.NewRelease.Info">新版本 {0} 可用！点击此处查看。</s:String>
-    <s:String x:Key="S.Updater.Download">下载</s:String>
+    <s:String x:Key="S.Updater.Version">版本</s:String>
     <s:String x:Key="S.Updater.Portable">便携版</s:String>
     <s:String x:Key="S.Updater.Installer">安装程序</s:String>
+    <s:String x:Key="S.Updater.Info.WhatsNew">新功能?</s:String>
+    <s:String x:Key="S.Updater.Info.BugFixes">错误修复：</s:String>
+    <s:String x:Key="S.Updater.Info.NewVersionAvailable">您可以下载新版本。&#x0d;您要打开浏览器进行下载吗?</s:String>
+    <s:String x:Key="S.Updater.RunAfter">更新后执行该应用程序。</s:String>
+    <s:String x:Key="S.Updater.Download">下载</s:String>
+    <s:String x:Key="S.Updater.Install">安装</s:String>
+    <s:String x:Key="S.Updater.Downloading">正在下载...</s:String>
+    <s:String x:Key="S.Updater.Warning.Show">无法显示下载详细信息。</s:String>
+    <s:String x:Key="S.Updater.Warning.Download">无法下载更新。</s:String>
     
     <!--Options-->
     <s:String x:Key="S.Options.Title">ScreenToGif - 选项</s:String>
@@ -152,7 +158,6 @@
     <s:String x:Key="S.Options.Upload">上传服务</s:String>
     <s:String x:Key="S.Options.Donate">捐赠</s:String>
     <s:String x:Key="S.Options.About">关于</s:String>
-    
     <s:String x:Key="S.Options.Other">其它</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Header">光标后面缺少快捷键</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Message">为了使用鼠标光标跟随功能，必须设置快捷键以在需要时将其禁用。</s:String>
@@ -167,7 +172,9 @@
     <s:String x:Key="S.Options.App.Startup.Mode.Automatic.Info">Windows 启动后将执行该应用程序。</s:String>
     <s:String x:Key="S.Options.App.Startup.Mode.Warning">无法在启动模式之间交替。</s:String>
     <s:String x:Key="S.Options.App.Startup.Instance.Single">仅允许一个实例</s:String>
-    <s:String x:Key="S.Options.App.Startup.Instance.Single.Info">您将可以为每个用户和可执行文件运行一次该应用程序，&#10;意味着不同的用户或可执行实例可以共存。&#10;当再次尝试执行该应用程序时，第二个实例将尝试将焦点放在第一个实例上并自行结束。</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Single.Info">您将可以为每个用户和可执行文件运行一次该应用程序，
+意味着不同的用户或可执行实例可以共存。
+当再次尝试执行该应用程序时，第二个实例将尝试将焦点放在第一个实例上并自行结束。</s:String>
     <s:String x:Key="S.Options.App.Startup.Instance.Multiple">允许多个实例</s:String>
     <s:String x:Key="S.Options.App.Startup.Instance.Multiple.Info">您可以无限制地同时运行该应用程序多次。</s:String>
     <s:String x:Key="S.Options.App.Startup.Tray">启动最小化到系统托盘</s:String>
@@ -190,6 +197,8 @@
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">检查翻译更新</s:String>
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">（更新的翻译将自动下载并安装）</s:String>
     <s:String x:Key="S.Options.App.General.CheckForUpdates">检查更新</s:String>
+    <s:String x:Key="S.Options.App.General.UpdateOnClose">关闭应用程序后自动安装更新</s:String>
+    <s:String x:Key="S.Options.App.General.PromptToInstall">在安装开始之前提示我</s:String>
     <s:String x:Key="S.Options.App.Tray">系统托盘图标</s:String>
     <s:String x:Key="S.Options.App.Tray.Show">在系统托盘（通知区域）上显示应用程序</s:String>
     <s:String x:Key="S.Options.App.Tray.LeaveOpen">即使所有窗口关闭仍保持应用程序的打开状态</s:String>
@@ -237,7 +246,7 @@
     <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">（有助于减少录制时的界面卡顿）</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier">启用屏幕放大镜</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier.Info">（在选择录制区域时启用放大镜）</s:String>
-    <s:String x:Key="S.Options.Recorder.CursorFollowing">启用光标跟随。</s:String>
+    <s:String x:Key="S.Options.Recorder.CursorFollowing">启用光标跟随</s:String>
     <s:String x:Key="S.Options.Recorder.CursorFollowing.Info">（录制区域将根据光标的位置重新定位）</s:String>
     <s:String x:Key="S.Options.Recorder.FollowMargin.Info">（录制区域开始重新定位的缓冲区边距）</s:String>
     <s:String x:Key="S.Options.Recorder.FollowMarginInvisible.Info">（UI 开始隐藏的其他缓冲区边距）</s:String>
@@ -376,7 +385,7 @@
     <s:String x:Key="S.Options.Upload.Refresh">刷新</s:String>
     <s:String x:Key="S.Options.Upload.Clear">清除</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Anonymous">Imgur（匿名）</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Direct">使用直接链接。</s:String>
+    <s:String x:Key="S.Options.Upload.Imgur.Direct">使用直接链接</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Gifv">使用 Gifv 扩展名而不是 Gif 获取链接</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.ToAlbum">将 Gif 上传到所选的相册</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Album">相册：</s:String>
@@ -479,6 +488,7 @@
     <s:String x:Key="S.Recorder.SnapToWindow">对齐窗口（拖拽到目标窗口上进行捕捉）</s:String>
     <s:String x:Key="S.Recorder.PreStart">预启动</s:String>
     <s:String x:Key="S.Recorder.Paused">ScreenToGif（已暂停）</s:String>
+    <s:String x:Key="S.Recorder.Stopping">正在停止...</s:String>
     
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible">无法捕获屏幕</s:String>
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">无法捕获屏幕。 5 次尝试后，捕获方法未返回任何帧。</s:String>
@@ -486,7 +496,7 @@
     <s:String x:Key="S.Recorder.Warning.Windows8">使用桌面复制 Desktop Duplication API 捕获屏幕需要 Windows 8 或更高版本。</s:String>
     <s:String x:Key="S.Recorder.Warning.MissingSharpDx">为了使用 Desktop Duplication API 捕获屏幕，需要 SharpDx 库。 进入选项>其他下载。</s:String>
     
-    <!--New Recorder-->
+    <!--New recorder-->
     <s:String x:Key="S.Recorder.Area">区域</s:String>
     <s:String x:Key="S.Recorder.Window">窗口</s:String>
     <s:String x:Key="S.Recorder.Screen">屏幕</s:String>
@@ -497,23 +507,22 @@
     <s:String x:Key="S.Recorder.SelectArea.Embedded">单击并拖动以选择一个区域</s:String>
     <s:String x:Key="S.Recorder.SelectWindow">单击此处选择此窗口</s:String>
     <s:String x:Key="S.Recorder.SelectScreen">单击此处选择此屏幕</s:String>
-    
     <s:String x:Key="S.Recorder.EscToCancel">按 Esc 键取消</s:String>
     
-    <!--Webcam Recorder-->
+    <!--Webcam recorder-->
     <s:String x:Key="S.Webcam.Title">ScreenToGif - 摄像头录像机</s:String>
     <s:String x:Key="S.Webcam.NoVideo">未检测到视频设备 :(</s:String>
     <s:String x:Key="S.Webcam.CheckVideoDevices">检测视频设备</s:String>
     <s:String x:Key="S.Webcam.Scale">缩放：{0:0.##} 倍</s:String>
     <s:String x:Key="S.Webcam.ChangeScale">更改视频比例</s:String>
     
-    <!--Board Recorder-->
+    <!--Board recorder-->
     <s:String x:Key="S.Board.Title">ScreenToGif - 画板录像机</s:String>
     <s:String x:Key="S.Board.AutoRecord">自动录制</s:String>
     <s:String x:Key="S.Board.AutoRecordToolTip">在绘图时启用录制</s:String>
     <s:String x:Key="S.Board.CtrlHold">Ctrl [按住]</s:String>
     
-    <!--Color Selector-->
+    <!--Color selector-->
     <s:String x:Key="S.ColorSelector.Title">颜色选择器</s:String>
     <s:String x:Key="S.ColorSelector.Select">选择颜色</s:String>
     <s:String x:Key="S.ColorSelector.Red">红色</s:String>
@@ -529,13 +538,13 @@
     <s:String x:Key="S.ColorSelector.Sample.Info">单击并拖动以从屏幕
 上选择颜色。</s:String>
     
-    <!--Exception Viewer, Optional-->
+    <!--Exception/Error viewers-->
     <s:String x:Key="S.ExceptionViewer.Title">异常查看器</s:String>
     <s:String x:Key="S.ExceptionViewer.OpenInner">打开内部异常</s:String>
     <s:String x:Key="S.ErrorDialog.Observation">出现错误</s:String>
     <s:String x:Key="S.ErrorDialog.Send">发送报告</s:String>
 
-    <!--FFmpeg Preset-->
+    <!--FFmpeg preset-->
     <s:String x:Key="S.FfmpegPreset.Title">FFmpeg 预设</s:String>
     <s:String x:Key="S.FfmpegPreset.Name">名称</s:String>
     <s:String x:Key="S.FfmpegPreset.Parameters">参数</s:String>
@@ -543,7 +552,7 @@
     <s:String x:Key="S.FfmpegPreset.Warning.Parameter">你必须为这个设定输入一些参数。</s:String>
     <s:String x:Key="S.FfmpegPreset.Warning.SameName">已经存在一个具有相同名称的预设。</s:String>
 
-    <!--Insert Frames-->
+    <!--Insert frames-->
     <s:String x:Key="S.InsertFrames.Title">插入帧</s:String>
     <s:String x:Key="S.InsertFrames.Info">两侧应具有相同的大小，此窗口允许您重新定位和调整图像和画布的大小。点击选择并调整大小。</s:String>
     <s:String x:Key="S.InsertFrames.CanvasSize">画布大小：</s:String>
@@ -562,7 +571,7 @@
     <s:String x:Key="S.InsertFrames.Importing">导入</s:String>
     <s:String x:Key="S.InsertFrames.SelectColorFill">选择画布填充颜色</s:String>
 
-    <!--Import Frames From Video-->
+    <!--Import frames from video-->
     <s:String x:Key="S.ImportVideo.Title">从视频导入帧</s:String>
     <s:String x:Key="S.ImportVideo.Importer">开发商：</s:String>
     <s:String x:Key="S.ImportVideo.Loading">载入中...</s:String>
@@ -632,6 +641,8 @@
     <s:String x:Key="Editor.Options">选项</s:String>
     <s:String x:Key="S.Editor.Help">帮助</s:String>
     <s:String x:Key="S.Editor.Extras">附加</s:String>
+    <s:String x:Key="S.Editor.UpdateAvailable">一个新的更新可用！</s:String>
+    <s:String x:Key="S.Editor.UpdateAvailable.Info">单击此处以了解更多信息。</s:String>
     
     <!--Welcome-->
     <s:String x:Key="Welcome.New">转到“文件 > 新录制”来开始新录制</s:String>
@@ -1201,9 +1212,7 @@
     <s:String x:Key="S.SaveAs.File.Increase">增加文件编号</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">减小文件编号</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">已存在同名文件</s:String>
-    
     <s:String x:Key="S.SaveAs.File.Clipboard">保存到剪贴板</s:String>
-
     <s:String x:Key="S.SaveAs.Warning.Type">您需要选择保存文件的位置（文件夹、剪贴板或上传到某处）</s:String>
     <s:String x:Key="S.SaveAs.Warning.Commands.Empty">您需要在命令文本框中输入编码后置命令才能执行他们。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Upload.None">没有选择上传服务。你需要选择一个目的地。</s:String>
