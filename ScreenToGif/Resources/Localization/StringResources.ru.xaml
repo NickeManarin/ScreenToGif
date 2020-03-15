@@ -171,9 +171,9 @@
     <s:String x:Key="S.Options.App.Startup.Mode.Automatic.Info">Будет запущено после запуска Windows.</s:String>
     <s:String x:Key="S.Options.App.Startup.Mode.Warning">Невозможно чередовать режимы запуска.</s:String>
     <s:String x:Key="S.Options.App.Startup.Instance.Single">Только один&#10;экземпляр</s:String>
-    <s:String x:Key="S.Options.App.Startup.Instance.Single.Info">Один экземпляр приложения для пользователя и исполняемого файла, т.е.,&#10;разные экземпляры пользователя или исп. файла могут сосуществовать,&#10;но только если они запущены не от одного пользователя или&#10;не с одного исполняемого файла.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Single.Info">Один экземпляр приложения для пользователя и исполняемого файла.&#10;Разные экземпляры все равно могут быть запущены:&#10;1. не с одного исполняемого файла,&#10;2. с одного исполняемого файла, но от разных пользователей.</s:String>
     <s:String x:Key="S.Options.App.Startup.Instance.Multiple">Несколько&#10;экземпляров</s:String>
-    <s:String x:Key="S.Options.App.Startup.Instance.Multiple.Info">Вы сможете запускать приложение несколько раз одновременно, без ограничений,&#10;т.е. пока оно не сожрет все ресурсы вашего ПК.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Multiple.Info">Вы сможете запускать приложение несколько раз одновременно, без ограничений.</s:String>
     <s:String x:Key="S.Options.App.Startup.Tray">Запускать свернутым в трей.</s:String>
     <s:String x:Key="S.Options.App.Startup.Tray.Info">(Значок в системном трее будет виден, пока эта настройка активна)</s:String>
     <s:String x:Key="S.Options.App.Startup.Window">Начинать с:</s:String>
