@@ -61,17 +61,17 @@
             <n:ImageButton Grid.Column="1" Text="{DynamicResource S.StartUp.Webcam}" Margin="5,0,5,5" FontSize="13" Style="{StaticResource Style.Button.Vertical.Border}"
                            Effect="{StaticResource Shadow.Black.Tiny}" ContentWidth="36" ContentHeight="36" Content="{StaticResource Vector.Camera.New}" 
                            Command="{Binding OpenWebcamRecorder}" CommandParameter="{Binding ElementName=StartupWindow}" 
-                           ToolTip="{DynamicResource S.StartUp.Recorder.Tooltip}" ToolTipService.Placement="Bottom"/>
+                           ToolTip="{DynamicResource S.StartUp.Webcam.Tooltip}" ToolTipService.Placement="Bottom"/>
 
             <n:ImageButton Grid.Column="2" Text="{DynamicResource S.StartUp.Board}" Margin="5,0,5,5" FontSize="13" Style="{StaticResource Style.Button.Vertical.Border}"
                            Effect="{StaticResource Shadow.Black.Tiny}" ContentWidth="36" ContentHeight="36" Content="{StaticResource Vector.Board.New}" 
                            Command="{Binding OpenBoardRecorder}" CommandParameter="{Binding ElementName=StartupWindow}"
-                           ToolTip="{DynamicResource S.StartUp.Recorder.Tooltip}" ToolTipService.Placement="Bottom"/>
+                           ToolTip="{DynamicResource S.StartUp.Board.Tooltip}" ToolTipService.Placement="Bottom"/>
 
             <n:ImageButton Grid.Column="3" Text="{DynamicResource S.StartUp.Editor}" Margin="5,0,5,5" FontSize="13" Style="{StaticResource Style.Button.Vertical.Border}"
                            Effect="{StaticResource Shadow.Black.Tiny}" ContentWidth="36" ContentHeight="36" Content="{StaticResource Vector.Editor}" 
                            Command="{Binding OpenEditor}" CommandParameter="{Binding ElementName=StartupWindow}" 
-                           ToolTip="{DynamicResource S.StartUp.Recorder.Tooltip}" ToolTipService.Placement="Bottom"/>
+                           ToolTip="{DynamicResource S.StartUp.Editor.Tooltip}" ToolTipService.Placement="Bottom"/>
         </Grid>
     </Grid>
 </Window>
