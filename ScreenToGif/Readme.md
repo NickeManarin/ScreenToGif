@@ -23,4 +23,4 @@ _VS 2019 and .Net 4.8 or newer required._
 ♠ Cancelling a encoding of FFmpeg will result in a crash (file in use).  
 ♠ Keystrokes has a 1 pixel transparent border at the bottom-right sides when using a high DPI screen.  
 ♠ It's impossible to capture snapshots with the DirectX method.  
-♠ When capturing with the DirectX, the recording will crash of the recording area is outside of the screen.  
+♠ When capturing with the DirectX, the recording will crash if the recording area is outside of the screen.  
