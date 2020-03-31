@@ -3,8 +3,8 @@
                     xmlns:s="clr-namespace:System;assembly=mscorlib"
                     xml:space="preserve">
     
-    <!--To use a new line: &#x0d;-->
-    <!--Or CarriageReturn + NewLine: &#x0d;&#x0a; or &#10;--> 
+    <!--To use a new line: &#x0d; or CarriageReturn + NewLine: &#x0d;&#x0a; or &#10;--> 
+    <!--You can use the zero-width-divider to suggest where the word should be divided when there's no space &#8203;-->
     <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
     
     <!--General-->
@@ -13,56 +13,141 @@
     <s:String x:Key="S.Cancel">キャンセル</s:String>
     <s:String x:Key="S.Yes">はい</s:String>
     <s:String x:Key="S.No">いいえ</s:String>
-    <s:String x:Key="Frame">フレーム</s:String>
-    <s:String x:Key="Suppress">(表示を)抑制</s:String>
-    <s:String x:Key="Preview">プレビュー</s:String>
     <s:String x:Key="S.Add">追加</s:String>
     <s:String x:Key="S.Edit">編集</s:String>
-    <s:String x:Key="S.Id">Id</s:String>
+    <s:String x:Key="S.Id">ID</s:String>
     <s:String x:Key="S.Title">タイトル</s:String>
     <s:String x:Key="S.Description">説明</s:String>
     <s:String x:Key="S.SelectColor">色を選択するには、ここをクリックしてください。</s:String>
-
-    <!--Tray Icon-->
-    <s:String x:Key="S.NewRecording">新しいスクリーン録画</s:String>
+    <s:String x:Key="Frame">フレーム</s:String>
+    <s:String x:Key="Suppress">(表示を)抑制</s:String>
+    <s:String x:Key="Preview">プレビュー</s:String>
+    
+    <!--Warning messages-->
+    <s:String x:Key="S.Crash">アプリのクラッシュ(・へ・)</s:String>
+    <s:String x:Key="S.Required">必須フィールド</s:String>
+    <s:String x:Key="S.Warning.Net.Title">依存ソフトが見当たりません。</s:String>
+    <s:String x:Key="S.Warning.Net.Header">現在.Net Framework 4.8ではありません。</s:String>
+    <s:String x:Key="S.Warning.Net.Message">このアプリを適切に使用するには、正しい.Net Frameworkのバージョンが必要です。ダウンロードページを開きますか？</s:String>
+    <s:String x:Key="S.Warning.Single.Title">単一インスタンスのみ許可</s:String>
+    <s:String x:Key="S.Warning.Single.Header">アプリは既に起動しています。</s:String>
+    <s:String x:Key="S.Warning.Single.Message">ScreenToGifは既に起動しています。ウィンドウが見当たらないなら、システムトレイを見てください。ScreenToGifのアイコンがそこにあるはずです。</s:String>
+    <s:String x:Key="S.Exiting.Title">ScreenToGif終了中</s:String>
+    <s:String x:Key="S.Exiting.Instruction">アプリを終了したいですか？</s:String>
+    <s:String x:Key="S.Exiting.Message">すべてのウィンドウは閉じられ、トレイアイコンは削除されます。</s:String>
+    
+    <!--Tray icon-->
+    <s:String x:Key="S.NewRecording">新規スクリーン録画</s:String>
     <s:String x:Key="S.NewWebcamRecording">新規Webカメラ録画</s:String>
     <s:String x:Key="S.NewBoardRecording">新規ボード録画</s:String>
     <s:String x:Key="S.Exit">終了</s:String>
-
-    <!--Application-->
-    <s:String x:Key="S.Exiting.Title">ScreenToGif 終了</s:String>
-    <s:String x:Key="S.Exiting.Instruction">終了しますか？</s:String>
-    <s:String x:Key="S.Exiting.Message">すべてのウィンドウを閉じ、トレイアイコンを終了します。</s:String>
     
-    <!--Error messages--> 
-    <s:String x:Key="S.Crash">アプリのクラッシュ(・へ・)</s:String>
+    <!--Commands-->
+    <s:String x:Key="S.Command.NewRecording">新規スクリーン録画</s:String>
+    <s:String x:Key="S.Command.NewWebcamRecording">新規Webカメラ録画</s:String>
+    <s:String x:Key="S.Command.NewBoardRecording">新規ボード録画</s:String>
+    <s:String x:Key="S.Command.NewAnimation">新規プロジェクト</s:String>
+    <s:String x:Key="S.Command.InsertRecording">スクリーン録画を挿入</s:String>
+    <s:String x:Key="S.Command.InsertWebcamRecording">Webカメラ録画を挿入</s:String>
+    <s:String x:Key="S.Command.InsertBoardRecording">ボード録画を挿入</s:String>
+    <s:String x:Key="S.Command.InsertFromMedia">メディアから挿入(画像と動画)</s:String>
+    <s:String x:Key="S.Command.SaveAs">名前を付けて保存</s:String>
+    <s:String x:Key="S.Command.Load">ファイルをロード (画像、動画、プロジェクト)</s:String>
+    <s:String x:Key="S.Command.LoadRecent">最近のプロジェクトをロード</s:String>
+    <s:String x:Key="S.Command.DiscardProject">現在のプロジェクトを破棄</s:String>
+    <s:String x:Key="S.Command.OverrideDelay">フレームの遅延をオーバーライド</s:String>
+    <s:String x:Key="S.Command.IncreaseDecreaseDelay">フレームの遅延を増減</s:String>
+    <s:String x:Key="S.Command.ScaleDelay">フレームの遅延をスケール</s:String>
+    <s:String x:Key="S.Command.Zoom100">表示倍率を100%に設定</s:String>
+    <s:String x:Key="S.Command.SizeToContent">ウィンドウをフレームサイズへ調整</s:String>
+    <s:String x:Key="S.Command.FitImage">ウィンドウサイズに画像をフィット</s:String>
+    <s:String x:Key="S.Command.FirstFrame">先頭フレームを選択</s:String>
+    <s:String x:Key="S.Command.PreviousFrame">前のフレームを選択</s:String>
+    <s:String x:Key="S.Command.Play">アニメーション再生</s:String>
+    <s:String x:Key="S.Command.NextFrame">次のフレームを選択</s:String>
+    <s:String x:Key="S.Command.LastFrame">最終フレームを選択</s:String>
+    <s:String x:Key="S.Command.Undo">元に戻す</s:String>
+    <s:String x:Key="S.Command.Redo">やり直し</s:String>
+    <s:String x:Key="S.Command.Reset">プロジェクトでのすべての変更を取り消し</s:String>
+    <s:String x:Key="S.Command.Copy">選択フレームをクリップボードに格納(コピー)</s:String>
+    <s:String x:Key="S.Command.Cut">選択フレームを切り取り、クリップボードに格納</s:String>
+    <s:String x:Key="S.Command.Paste">クリップボードからフレームを貼り付け</s:String>
+    <s:String x:Key="S.Command.Delete">選択フレームをすべて削除</s:String>
+    <s:String x:Key="S.Command.DeletePrevious">以前のフレームをすべて削除</s:String>
+    <s:String x:Key="S.Command.DeleteNext">以後のフレームをすべて削除</s:String>
+    <s:String x:Key="S.Command.RemoveDuplicates">重複フレームを削除</s:String>
+    <s:String x:Key="S.Command.Reduce">フレーム数を削減</s:String>
+    <s:String x:Key="S.Command.Reverse">アニメーションをリバース</s:String>
+    <s:String x:Key="S.Command.Yoyo">(ヨーヨーのように)反復するアニメーションを生成</s:String>
+    <s:String x:Key="S.Command.MoveLeft">選択フレームを左へ移動</s:String>
+    <s:String x:Key="S.Command.MoveRight">選択フレームを右へ移動</s:String>
+    <s:String x:Key="S.Command.Resize">すべてのフレームをリサイズ</s:String>
+    <s:String x:Key="S.Command.Crop">すべてのフレームをクロップ(切り抜き)</s:String>
+    <s:String x:Key="S.Command.FlipRotate">フレームを反転もしくは回転</s:String>
+    <s:String x:Key="S.Command.Caption">キャプションを追加</s:String>
+    <s:String x:Key="S.Command.FreeText">(適用前なら)自由に移動できるテキストを追加</s:String>
+    <s:String x:Key="S.Command.TitleFrame">タイトルフレームを追加</s:String>
+    <s:String x:Key="S.Command.KeyStrokes">録画中に押下したキーを表示</s:String>
+    <s:String x:Key="S.Command.FreeDrawing">図形を自由に描く</s:String>
+    <s:String x:Key="S.Command.Shapes">シェイプを追加</s:String>
+    <s:String x:Key="S.Command.MouseClicks">マウスクリック</s:String>
+    <s:String x:Key="S.Command.Watermark">選択画像を透かしとして追加</s:String>
+    <s:String x:Key="S.Command.Border">境界を追加</s:String>
+    <s:String x:Key="S.Command.Shadow">ドロップシャドウ(落し影)を追加</s:String>
+    <s:String x:Key="S.Command.Obfuscate">フレーム上のセンシティブな部分を隠す</s:String>
+    <s:String x:Key="S.Command.Cinemagraph">再生中、終始固定のままにするべきでないフレームの一部を選択するにはドローイングツールを使用してください。</s:String>
+    <s:String x:Key="S.Command.Progress">プログレスバーもしくはテキストで再生の詳細を表示</s:String>
+    <s:String x:Key="S.Command.SelectAll">すべてのフレームを選択</s:String>
+    <s:String x:Key="S.Command.GoTo">指定インデックスのフレームを表示</s:String>
+    <s:String x:Key="S.Command.InverseSelection">フレームの選択を反転</s:String>
+    <s:String x:Key="S.Command.Unselect">すべてのフレームを選択解除</s:String>
+    <s:String x:Key="S.Command.Fade">フェードトランジション</s:String>
+    <s:String x:Key="S.Command.Slide">スライドトランジション</s:String>
+    <s:String x:Key="S.Command.ClearAll">完了したエンコードはすべてクリア</s:String>
+    <s:String x:Key="S.Command.MoveUp">上に移動</s:String>
+    <s:String x:Key="S.Command.MoveDown">下へ移動</s:String>
+    <s:String x:Key="S.Command.Add">追加</s:String>
+    <s:String x:Key="S.Command.Open">開く</s:String>
+    <s:String x:Key="S.Command.Edit">選択項目を編集</s:String>
+    <s:String x:Key="S.Command.Save">選択項目を保存</s:String>
+    <s:String x:Key="S.Command.Remove">選択項目を削除</s:String>
     
-    <!--StartUp Page-->
+    <!--StartUp-->
     <s:String x:Key="S.StartUp.Title">ScreenToGif - 起動画面</s:String>
     <s:String x:Key="S.StartUp.Recorder">レコーダー</s:String>
-    <s:String x:Key="S.StartUp.Webcam">Webカメラ</s:String>
-    <s:String x:Key="S.StartUp.Board">ボード</s:String>
-    <s:String x:Key="S.StartUp.Editor">エディター</s:String>
-    <s:String x:Key="S.StartUp.Options">オプション</s:String>
-    <s:String x:Key="S.Editor.Help">ヘルプ</s:String>
-    <s:String x:Key="S.StartUp.NewRelease">新しいリリースがあります • {0}</s:String>
-    <s:String x:Key="S.StartUp.NewRelease.Tooltip">ScreenToGifの最新バージョンをダウンロードします。</s:String>
     <s:String x:Key="S.StartUp.Recorder.Tooltip">スクリーンレコーダーで簡単に画面の録画ができます。</s:String>
+    <s:String x:Key="S.StartUp.Webcam">Webカメラ</s:String>
     <s:String x:Key="S.StartUp.Webcam.Tooltip">Webカメラレコーダーを開きます。</s:String>
-    <s:String x:Key="S.StartUp.Board.Tooltip">描画を記録するボードレコーダーを開きます。</s:String>
+    <s:String x:Key="S.StartUp.Board">ボード</s:String>
+    <s:String x:Key="S.StartUp.Board.Tooltip">描画を録画するボードレコーダーを開きます。</s:String>
+    <s:String x:Key="S.StartUp.Editor">エディター</s:String>
     <s:String x:Key="S.StartUp.Editor.Tooltip">エディターウィンドウで新しい録画を開始したり編集したりできます。</s:String>
+    <s:String x:Key="S.StartUp.Options">オプション</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">新しいリリースがあります ( {0} )</s:String>
+    <s:String x:Key="S.StartUp.NewRelease.Tooltip">ScreenToGifの最新バージョンをダウンロードします。</s:String>
 
-    <!--Update Window-->
-    <s:String x:Key="S.Updater.Title">更新</s:String>
+    <!--Updater-->
+    <s:String x:Key="S.Updater.Title">ScreenToGif - アップデーター</s:String>
+    <s:String x:Key="S.Updater.Header">最新版が出ました</s:String>
     <s:String x:Key="S.Updater.NewRelease">新しいリリース！</s:String>
-    <s:String x:Key="S.Updater.NewRelease.Info">新しいリリース バージョン {0}! ここをクリックして詳細表示</s:String>
-    <s:String x:Key="S.Updater.Download">ダウンロード</s:String>
+    <s:String x:Key="S.Updater.NewRelease.Info">新しいバージョン {0} がリリース ! 詳細はここをクリック</s:String>
+    <s:String x:Key="S.Updater.Version">バージョン</s:String>
     <s:String x:Key="S.Updater.Portable">ポータブル</s:String>
     <s:String x:Key="S.Updater.Installer">インストーラー</s:String>
-
-    <!--Options Window-->
+    <s:String x:Key="S.Updater.Info.WhatsNew">変更点</s:String>
+    <s:String x:Key="S.Updater.Info.BugFixes">バグフィックス:</s:String>
+    <s:String x:Key="S.Updater.Info.NewVersionAvailable">新しいバージョンが利用できます。&#10;ブラウザでダウンロードページを開きますか？</s:String>
+    <s:String x:Key="S.Updater.RunAfter">更新後、アプリ実行</s:String>
+    <s:String x:Key="S.Updater.Download">ダウンロード</s:String>
+    <s:String x:Key="S.Updater.Install">インストール</s:String>
+    <s:String x:Key="S.Updater.Downloading">ダウンロード中・・・</s:String>
+    <s:String x:Key="S.Updater.Warning.Show">ダウンロード詳細を表示することができませんでした。</s:String>
+    <s:String x:Key="S.Updater.Warning.Download">アップデートをダウンロードできませんでした。</s:String>
+    
+    <!--Options-->
     <s:String x:Key="S.Options.Title">ScreenToGif - オプション</s:String>
     <s:String x:Key="S.Options.App">アプリケーション</s:String>
+    <s:String x:Key="S.Options.Recorder">レコーダー</s:String>
     <s:String x:Key="S.Options.Interface">インターフェース</s:String>
     <s:String x:Key="S.Options.Tasks">自動化タスク</s:String>
     <s:String x:Key="S.Options.Shortcuts">ショートカットキー</s:String>
@@ -72,40 +157,98 @@
     <s:String x:Key="S.Options.Upload">アップロードサービス</s:String>
     <s:String x:Key="S.Options.Donate">寄付</s:String>
     <s:String x:Key="S.Options.About">アプリ情報</s:String>
-    
-    <s:String x:Key="S.Options.Recorder.RecordMouse">録画中にマウスカーソルを表示</s:String>
-    <s:String x:Key="S.Options.Recorder.RecordClicks">マウスのクリックを検出</s:String>
-    <s:String x:Key="S.Options.Recorder.SelectCursorColor">カーソルの色を選択する</s:String>
-    <s:String x:Key="S.Options.Recorder.PreStart">開始前にカウントダウン</s:String>
-    <s:String x:Key="S.Options.Recorder.PreStart.Info">キャプチャ開始前に数秒待つ</s:String>
-    <s:String x:Key="S.Options.Recorder.StepRecording">スナップショットモード</s:String>
-    <s:String x:Key="S.Options.Recorder.StepRecording.Info">(各フレームは手動でキャプチャされます)</s:String>
-    <s:String x:Key="S.Options.Recorder.FixedFramerate">固定フレームレート</s:String>
-    <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(録画時のラグによる変動をせず一定します)</s:String>
-    <s:String x:Key="S.Options.Recorder.AsyncRecording">非同期録画</s:String>
-    <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(録画時のラグ低減に有効)</s:String>
-    <s:String x:Key="S.Options.Recorder.NewRecorder">新ユーザーインタフェース</s:String>
-    <s:String x:Key="S.Options.Recorder.NewRecorder.Info">(旧ユーザーインタフェースを置き換えます)</s:String>
-    <s:String x:Key="S.Options.Recorder.Magnifier">拡大鏡を有効</s:String>
-    <s:String x:Key="S.Options.Recorder.Magnifier.Info">(記録領域を選択している間は拡大鏡を有効にします)</s:String>
-    
     <s:String x:Key="S.Options.Other">その他</s:String>
-    <s:String x:Key="S.Options.App.Tray.Show">システムトレイ(通知領域)にアプリを表示</s:String>
-    <s:String x:Key="S.Options.App.Tray.LeaveOpen">すべてのウィンドウを閉じてもアプリは閉じない</s:String>
+    <s:String x:Key="S.Options.Warning.Follow.Header">カーソル追従用のショートカットキーを見失い中</s:String>
+    <s:String x:Key="S.Options.Warning.Follow.Message">マウスカーソル追従機能を使用するためには、機能をトグルするショートカットキーの設定が必須です。</s:String>
+    <s:String x:Key="S.Options.Warning.DesktopDuplication.Header">スクリーンキャプチャの依存ソフトが見当たりません。</s:String>
+    <s:String x:Key="S.Options.Warning.DesktopDuplication.Message">Desktop Duplication APIで画面をキャプチャするために、SharpDxライブラリが必須です。</s:String>
+    
+    <!--Options • Application-->
+    <s:String x:Key="S.Options.App.Startup">スタートアップ</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Manual">手動&#10;開始</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Manual.Info">手動で開始する時のみ、アプリは実行されます。</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Automatic">OS起動時&#10;開始</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Automatic.Info">アプリはWindowsの起動後、実行されます。</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Warning">スタートアップモードを変更することができません。</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Single">単一インスタンス&#10;のみ許可</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Single.Info">ユーザーと実行ファイル(の対)毎に同時に一つ実行できます。&#10;異なるユーザーもしくは異なる実行ファイルのインスタンスは、共存できることを意味します。&#10;再びアプリを実行しようとすると、二つ目のインスタンスは、一つ目のインスタンスにフォーカス移動を試みて、終了します。</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Multiple">複数インスタンス&#10;を許可</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Multiple.Info">制限なしに、このアプリを同時に複数実行できます。</s:String>
+    <s:String x:Key="S.Options.App.Startup.Tray">システムトレイへ最小化して開始</s:String>
+    <s:String x:Key="S.Options.App.Startup.Tray.Info">(システムトレイアイコンは、オプションが有効である間、表示されます)</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window">開始:</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Startup">ランチャー</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Recorder">スクリーンレコーダー</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Webcam">Webカメラ録画</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Board">ボードレコーダー</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Editor">エディターウィンドウ</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Info">(アプリ開始時に最初に表示するウィンドウ)</s:String>
+    <s:String x:Key="S.Options.App.General">全般</s:String>
     <s:String x:Key="S.Options.App.General.NotifyFrameDeletion">フレームを削除する前に確認</s:String>
     <s:String x:Key="S.Options.App.General.NotifyProjectDiscard">プロジェクトを破棄する前に確認</s:String>
     <s:String x:Key="S.Options.App.General.NotifyWhileClosingEditor">エディターを閉じる前に確認 (プロジェクトが開かれている場合)</s:String>
     <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">(Exitコマンドで)アプリ終了する前に確認</s:String>
     <s:String x:Key="S.Options.App.General.DrawOutlineOutside">文字の外側にキャプションのアウトラインを描く</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">ハードウェア・アクセラレーションを使用しない</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(ユーザーインターフェースは、ソフトウェアモードでレンダリングされます)</s:String>
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">翻訳のアップデートを確認</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(翻訳がアップデートされたら自動的にダウンロード、インストールされます)</s:String>
     <s:String x:Key="S.Options.App.General.CheckForUpdates">アップデートを確認</s:String>
-    <s:String x:Key="S.Options.App.Startup.Window.Startup">ランチャー</s:String>
-    <s:String x:Key="S.Options.App.Startup.Window.Recorder">スクリーンレコーダー</s:String>
-    <s:String x:Key="S.Options.App.Startup.Window.Webcam">Webカメラ録画</s:String>
-    <s:String x:Key="S.Options.App.Startup.Window.Board">ボードレコーダー</s:String>
-    <s:String x:Key="S.Options.App.Startup.Window.Editor">エディターウィンドウ</s:String>
-    
+    <s:String x:Key="S.Options.App.General.UpdateOnClose">アプリ終了後、自動的に更新をインストール</s:String>
+    <s:String x:Key="S.Options.App.General.PromptToInstall">インストールを開始する前にプロンプトを表示</s:String>
+    <s:String x:Key="S.Options.App.Tray">システムトレイアイコン</s:String>
+    <s:String x:Key="S.Options.App.Tray.Show">システムトレイ(通知領域)にアプリを表示</s:String>
+    <s:String x:Key="S.Options.App.Tray.LeaveOpen">すべてのウィンドウを閉じてもアプリは閉じない</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Nothing">何もしない</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Open">ウィンドウを開く</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Open.None">ウィンドウなし</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Toggle">すべてのウィンドウを最小化またはリストア</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Minimize">すべてのウィンドウを最小化</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Restore">すべてのウィンドウをリストア</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Left">左クリック:</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.DoubleLeft">左クリック(2回):</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Middle">中クリック:</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Window">ウィンドウ:</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Else">以外の場合、開く:</s:String>
+
+    <!--Options • Recorder-->
+    <s:String x:Key="S.Options.Recorder.Interface">インターフェース</s:String>
+    <s:String x:Key="S.Options.Recorder.Interface.Old">旧</s:String>
+    <s:String x:Key="S.Options.Recorder.Interface.New">新</s:String>
+    <s:String x:Key="S.Options.Recorder.Mode">キャプチャモード</s:String>
+    <s:String x:Key="S.Options.Recorder.Bitblt.Info">より古いキャプチャ法を使うと、遅くなり、ゲームをキャプチャできないかもしれません。&#10;しかしプラグインを追加する必要はありません。</s:String>
+    <s:String x:Key="S.Options.Recorder.DirectX.Info">Desktop Duplication APIによるキャプチャ法を使用すると、&#10;より高速化し、フルスクリーンゲームをキャプチャできます。ただし、SharpDxプラグインとWindows8以降が必須となります。</s:String>
+    <s:String x:Key="S.Options.Recorder.File">ファイルへ&#10;保存</s:String>
+    <s:String x:Key="S.Options.Recorder.File.Info">キャプチャされた各フレームは、画像ファイルとしてドライブに保存されます。</s:String>
+    <s:String x:Key="S.Options.Recorder.Cache">メモリー&#10;キャッシュ</s:String>
+    <s:String x:Key="S.Options.Recorder.Cache.Info">各フレームは、初めにメモリー上にピクセル配列として蓄えられます。(その前に圧縮されるかも)</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression">圧縮:</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.Optimal">サイズ優先</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.Optimal.Info">(速さよりも、サイズの小ささを優先して圧縮)</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.Fastest">最速</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.Fastest.Info">(サイズの小ささよりも、速さを優先して圧縮)</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.NoCompression">非圧縮</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.NoCompression.Info">(フレームをキャプチャしている間、非圧縮)</s:String>
+    <s:String x:Key="S.Options.Recorder.CacheSize">キャッシュサイズ:</s:String>
+    <s:String x:Key="S.Options.Recorder.CacheSize.Info">MB (左記のサイズに到達後、データはディスクに書き込まれます)</s:String>
+    <s:String x:Key="S.Options.Recorder.RecordMouse">録画中にマウスカーソルを表示</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectCursorColor">カーソルの色を選択する</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart">開始前にカウントダウン</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart.Info">(キャプチャ開始前に数秒待つ)</s:String>
+    <s:String x:Key="S.Options.Recorder.StepRecording">スナップショットモード</s:String>
+    <s:String x:Key="S.Options.Recorder.StepRecording.Info">(各フレームは手動でキャプチャされます)</s:String>
+    <s:String x:Key="S.Options.Recorder.FixedFramerate">固定フレームレート</s:String>
+    <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(録画時のラグによる変動をせず一定します)</s:String>
+    <s:String x:Key="S.Options.Recorder.AsyncRecording">非同期録画</s:String>
+    <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(録画時のラグ低減に有効)</s:String>
+    <s:String x:Key="S.Options.Recorder.Magnifier">拡大鏡を有効</s:String>
+    <s:String x:Key="S.Options.Recorder.Magnifier.Info">(録画領域を選択している間は拡大鏡を有効にします)</s:String>
+    <s:String x:Key="S.Options.Recorder.CursorFollowing">カーソル追従を有効</s:String>
+    <s:String x:Key="S.Options.Recorder.CursorFollowing.Info">(録画エリアは、カーソル位置に基づき、再配置されます)</s:String>
+    <s:String x:Key="S.Options.Recorder.FollowMargin.Info">(録画エリアが再配置されたところで、ピクセル中に余白をバッファ)</s:String>
+    <s:String x:Key="S.Options.Recorder.FollowMarginInvisible.Info">(UIが隠れ始めるところで、ピクセル中に追加の余白をバッファ)</s:String>
+
+    <!--Options • Tasks-->
     <s:String x:Key="S.Options.Tasks.Title">自動化タスク</s:String>
     <s:String x:Key="S.Options.Tasks.List">自動化タスクの一覧</s:String>
     <s:String x:Key="S.Options.Tasks.List.Task">タスク</s:String>
@@ -113,18 +256,20 @@
     <s:String x:Key="S.Options.Tasks.SelectType">タスクを選択</s:String>
     <s:String x:Key="S.Options.Tasks.Info">タスクは一覧の上から下へ順番に実行されます。&#10;エディターでプロジェクトを開いたときにタスクが実行されます。</s:String>
     
-    <s:String x:Key="S.Options.Interface.EditorBackground">エディター 背景</s:String>
-    <s:String x:Key="S.Options.Interface.Recorder">レコーダー テーマ</s:String>
+    <!--Options • Interface-->
+    <s:String x:Key="S.Options.Interface.Theme">アプリのテーマ</s:String>
+    <s:String x:Key="S.Options.Interface.Theme.Scheme">配色</s:String>
+    <s:String x:Key="S.Options.Interface.EditorBackground">エディター背景</s:String>
+    <s:String x:Key="S.Options.Interface.Recorder">レコーダーテーマ</s:String>
     <s:String x:Key="S.Options.Interface.Background">背景</s:String>
     <s:String x:Key="S.Options.Interface.Foreground">前面</s:String>
-    <s:String x:Key="S.Options.Interface.BoardBackground">ボード 背景</s:String>
-    <s:String x:Key="S.Options.Interface.Theme.Scheme">配色</s:String>
+    <s:String x:Key="S.Options.Interface.BoardBackground">ボード背景</s:String>
     <s:String x:Key="S.Options.Interface.Theme.Scheme.VeryLight">非常に明るい</s:String>
     <s:String x:Key="S.Options.Interface.Theme.Scheme.Light">明るい</s:String>
     <s:String x:Key="S.Options.Interface.Theme.Scheme.Medium">中間</s:String>
     <s:String x:Key="S.Options.Interface.Theme.Scheme.Dark">暗い</s:String>
+    <s:String x:Key="S.Options.Interface.Theme.Scheme.VeryDark">とても暗い</s:String>
     <s:String x:Key="S.Options.Interface.Theme.Scheme.Custom">カスタム</s:String>
-    
     <s:String x:Key="S.Options.Interface.EditorBackground.GridSize">グリッドサイズ</s:String>
     <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.VerySmall">非常に小さい</s:String>
     <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Small">小さい</s:String>
@@ -134,28 +279,26 @@
     <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.ILikeBigSquares">大きい四角が好き</s:String>
     <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.ImBlind">目が不自由です。</s:String>
     <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Custom">カスタム</s:String>
-
     <s:String x:Key="S.Options.Interface.EditorBackground.BaseColor">ベースカラー</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.EvenColor">奇数行のカラー</s:String>
+    <s:String x:Key="S.Options.Interface.EditorBackground.EvenColor">奇数行の色</s:String>
     <s:String x:Key="S.Options.Interface.EditorBackground.OddColor">偶数行の色</s:String>
     <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Height">高さ</s:String>
     <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Width">幅</s:String>
     <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Apply">適用</s:String>
-
-    <s:String x:Key="S.Options.Interface.Other">その他</s:String>
-    <s:String x:Key="S.Options.Interface.Other.ExtendChrome">タイトルバー/Chromeを拡張する</s:String>
+    <s:String x:Key="S.Options.Interface.Other.ExtendChrome">タイトルバー(Chrome)を拡張する</s:String>
     <s:String x:Key="S.Options.Interface.Other.HideTitleBar">タイトルバーを隠す (薄型)</s:String>
     <s:String x:Key="S.Options.Interface.Other.TripleClickSelection">テキスト選択をトリプルクリックにする</s:String>
     <s:String x:Key="S.Options.Interface.Other.AutomaticallySizeOnContent">フレームサイズに応じてウィンドウサイズを自動調整</s:String>
     <s:String x:Key="S.Options.Interface.Other.AutomaticallyFitImage">ウィンドウサイズに応じてフレームサイズを自動調整</s:String>
   
+    <!--Options • Shortcuts-->
     <s:String x:Key="S.Options.Shortcuts.Global">グローバル</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.ScreenRecorder">スクリーンレコーダー:</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.ScreenRecorder.Info">(標準スクリーンレコーダーを開きます）</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.WebcamRecorder">Webカメラレコーダー:</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.WebcamRecorder.Info">(Webカメラレコーダーを開きます)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.BoardRecorder">ボードレコーダー:</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Global.BoardRecorder.Info">(ボードレコーダーでユーザーの描画を記録できます)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.BoardRecorder.Info">(ボードレコーダーでユーザーの描画を録画できます)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.OpenEditor">エディター:</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.OpenEditor.Info">(別のエディターウィンドウを開きます)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.OpenOptions">オプション:</s:String>
@@ -164,36 +307,42 @@
     <s:String x:Key="S.Options.Shortcuts.Global.Exit.Info">(すべてのウィンドウを閉じてシステムトレイからアプリを削除します）</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders">レコーダー</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause">開始/ポーズ:</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause.Info">(記録を開始/ポーズします。スナップショットモードが有効ならスナップショットを撮ります)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause.Info">(録画を開始/ポーズします。スナップショットモードが有効ならスナップショットを撮ります)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Stop">停止:</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Recorders.Stop.Info">(記録を停止してエディターを開きます)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Stop.Info">(録画を停止してエディターを開きます)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Discard">破棄:</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Discard.Info">(ポーズするとアクティブな録画を破棄します)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Follow">カーソル追従:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Follow.Info">(カーソル位置に基づく録画エリアの調整をトグルします)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.DisableFollow">追従を無効化:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.DisableFollow.Info">(一時的に、カーソル位置に基づく録画エリアの調整を無効化します。修飾子キーのみ受け付けます。)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Info">クリックしてから、(修飾子キーと)希望するキーを押してください。&#10;一部使用できないキーの組み合わせがあります。</s:String>
     
+    <!--Options • Language-->
     <s:String x:Key="S.Options.Language.AppLanguage">アプリケーションの言語</s:String>
     <s:String x:Key="S.Options.Language.AppLanguage.AutoDetect">自動検出</s:String>
     <s:String x:Key="S.Options.Language.AppLanguage.AutoDetect.Author">現在のOS言語 (利用可能なら)</s:String>
     <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence1.1">アプリを翻訳しますか？</s:String>
-    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence1.2">翻訳のガイドとアプリのダウンロード</s:String>
-    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence2.1">翻訳のテストはこちらから </s:String>
-    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence2.2">インポート</s:String>
-    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence2.3">翻訳のテスト</s:String>
-    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence3.1">翻訳が完了したらこちらまでメールで送ってください</s:String>
-    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence3.2">Eメール: (nicke@outlook.com.br)</s:String>
-    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence3.3">翻訳終了時</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence1.2">翻訳の案内と翻訳アプリのダウンロードはこちら</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence2.1">翻訳アプリで翻訳ファイルを作成したら</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence2.2">(翻訳ファイルの)インポートはここから</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence2.3">(翻訳ファイルのテスト用)</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence3.1">翻訳ファイルのテストが完了したら</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence3.2">メールアドレス: (nicke@outlook.com.br)</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence3.3">まで送ってください。</s:String>
     <s:String x:Key="S.Options.Language.AppLanguage.Translate.ResourceLink.Tooltip">ガイドラインのウェブページを開く</s:String>
-    <s:String x:Key="S.Options.Language.AppLanguage.Translate.ImportLink.Tooltip">インポートページを開く</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.ImportLink.Tooltip">インポート画面を開く</s:String>
     <s:String x:Key="S.Options.Language.AppLanguage.Translate.EmailLink.Tooltip">メーラーを起動</s:String>
     
+    <!--Options • Storage-->
     <s:String x:Key="S.Options.Storage.FilesAndFolders">一時ファイルとフォルダー</s:String>
     <s:String x:Key="S.Options.Storage.FilesAndFolders.Count">フォルダー数: {0}、ファイル数: {1}</s:String>
-    <s:String x:Key="S.Options.Storage.FilesAndFolders.None">フォルダー/ファイルが見つかりません</s:String>
+    <s:String x:Key="S.Options.Storage.FilesAndFolders.None">フォルダーもしくはファイルが見つかりません</s:String>
     <s:String x:Key="S.Options.Storage.OpenFolder">フォルダーを開く</s:String>
     <s:String x:Key="S.Options.Storage.Clear">一時フォルダークリア</s:String>
-    <s:String x:Key="S.Options.Storage.LogsLocation">ログフォルダー</s:String>
-    <s:String x:Key="S.Options.Storage.LogsLocation.Choose">エラーログファイルの場所を選択</s:String>
-    <s:String x:Key="S.Options.Storage.Location">場所フォルダー</s:String>
+    <s:String x:Key="S.Options.Storage.LogsLocation">(エラー)ログフォルダーの場所</s:String>
+    <s:String x:Key="S.Options.Storage.LogsLocation.Choose">(エラー)ログフォルダーの場所を選択</s:String>
+    <s:String x:Key="S.Options.Storage.Location">一時ファイルのフォルダー</s:String>
     <s:String x:Key="S.Options.Storage.Location.Choose">一時ファイルの場所を選択</s:String>
     <s:String x:Key="S.Options.Storage.Settings">設定ファイルの場所</s:String>
     <s:String x:Key="S.Options.Storage.AppDataPath">アプリデータ:</s:String>
@@ -210,6 +359,7 @@
     <s:String x:Key="S.Options.Storage.AutomaticRemovalDays.Info">(この日数を経過した古いプロジェクトは、アプリ起動時に消去/破棄されます)</s:String>
     <s:String x:Key="S.Options.Storage.LowSpace">ハードドライブのスペースが不足しています。 一時フォルダーをクリアするか場所を変更してください。</s:String>
     
+    <!--Options • Upload-->
     <s:String x:Key="S.Options.Upload.Proxy">プロキシ</s:String>
     <s:String x:Key="S.Options.Upload.Proxy.Mode">モード:</s:String>
     <s:String x:Key="S.Options.Upload.Proxy.Mode.Disabled">無効</s:String>
@@ -247,6 +397,7 @@
     <s:String x:Key="S.Options.Upload.Pick.Album">アルバム選択(オプション)</s:String>
     <s:String x:Key="S.Options.Upload.Pick.Album.Info">必要に応じて目的のアルバムを選択することができます:</s:String>
     
+    <!--Options • Extras-->
     <s:String x:Key="S.Options.Extras.External">利用可能な外部ツール</s:String>
     <s:String x:Key="S.Options.Extras.Download">クリックでダウンロード&#10;{0}</s:String>
     <s:String x:Key="S.Options.Extras.Downloading">ダウンロード中...</s:String>
@@ -254,22 +405,38 @@
     <s:String x:Key="S.Options.Extras.Ready.Info">ファイルのプロパティを開くには、ここをクリックしてください。</s:String>
     <s:String x:Key="S.Options.Extras.DownloadRestriction">Microsoft Storeにより配信されたアプリは他のアプリをダウンロードできません。手動でダウンロードしてください。</s:String>
     <s:String x:Key="S.Options.Extras.FfmpegLocation">FFmpegの場所</s:String>
-    <s:String x:Key="S.Options.Extras.FfmpegLocation.Select">FFmpeg実行ファイルの場所を選択する</s:String>
+    <s:String x:Key="S.Options.Extras.FfmpegLocation.Select">FFmpeg実行ファイルの場所を選択</s:String>
     <s:String x:Key="S.Options.Extras.FfmpegLocation.Invalid">FFmpeg実行ファイルのパスが無効です。実行ファイルの有効な場所を選択してください。</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation">Gifskiの場所</s:String>
-    <s:String x:Key="S.Options.Extras.GifskiLocation.Select">Gifski実行ファイルの場所を選択する</s:String>
+    <s:String x:Key="S.Options.Extras.GifskiLocation.Select">Gifski実行ファイルの場所を選択</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.Invalid">Gifski実行ファイルのパスが無効です。実行ファイルの有効な場所を選択してください。</s:String>
+    <s:String x:Key="S.Options.Extras.SharpDxLocation">SharpDx フォルダー (SharpDX.dll と SharpDX.Direct3D11.dll と SharpDX.DXGI.dll)</s:String>
+    <s:String x:Key="S.Options.Extras.SharpDxLocation.Select">SharpDxライブラリの場所を選択</s:String>
+    <s:String x:Key="S.Options.Extras.SharpDxLocation.Invalid">SharpDx フォルダー用のパスは、不正な文字を一つ以上含んでいます。不正な文字を含まないフォルダーを選択してください。</s:String>
     <s:String x:Key="S.Options.Extras.License.Ffmpeg">FFmpeg ライセンス</s:String>
     <s:String x:Key="S.Options.Extras.License.Gifski">Gifski ライセンス</s:String>
+    <s:String x:Key="S.Options.Extras.License.SharpDx">SharpDx ライセンス</s:String>
 
+    <!--Options • Donations-->
+    <s:String x:Key="S.Options.Donate.Donate">寄付</s:String>
     <s:String x:Key="S.Options.Donate.Donate.Dollar">US$ で寄付</s:String>
     <s:String x:Key="S.Options.Donate.Donate.Euro">€ で寄付</s:String>
-    <s:String x:Key="S.Options.Donate.Donate">寄付</s:String>
     <s:String x:Key="S.Options.Donate.Paypal.Dollar">Paypalのウェブサイトを開く (ドル)</s:String>
     <s:String x:Key="S.Options.Donate.Paypal.Euro">Paypalのウェブサイトを開く (ユーロ)</s:String>
     <s:String x:Key="S.Options.Donate.Paypal.OwnCurrency">Paypalのウェブサイトを開く (通貨選択)</s:String>
+    <s:String x:Key="S.Options.Donate.Subscribe">寄付</s:String>
+    <s:String x:Key="S.Options.Donate.Subscribe.Patreon">Patreonで毎月寄付</s:String>
+    <s:String x:Key="S.Options.Donate.Subscribe.Flattr">Flattrで毎月寄付</s:String>
+    <s:String x:Key="S.Options.Donate.Gift">ゲームをギフト</s:String>
+    <s:String x:Key="S.Options.Donate.Gift.Steam">Steamでゲームをギフト</s:String>
+    <s:String x:Key="S.Options.Donate.Gift.Gog">GOGでゲームをギフト</s:String>
+    <s:String x:Key="S.Options.Donate.Kofi">Ko-fiでコーヒー代を払う</s:String>
     <s:String x:Key="S.Options.Donate.Crypto">暗号通貨(仮想通貨)</s:String>
-
+    <s:String x:Key="S.Options.Donate.Crypto.BitcoinCash">BitcoinCashアドレスをコピー</s:String>
+    <s:String x:Key="S.Options.Donate.Support">サポート</s:String>
+    <s:String x:Key="S.Options.Donate.Support.Visit">プロジェクトを支援したいなら(^.^)</s:String>
+    
+    <!--Options • About-->
     <s:String x:Key="S.Options.About.Version">バージョン:</s:String>
     <s:String x:Key="S.Options.About.Author">作者: Nicke Manarin</s:String>
     <s:String x:Key="S.Options.About.StoreVersion">Microsoft Storeのバージョンでは、強制的なポリシーによりいくつかの機能が使用できません。</s:String>
@@ -281,6 +448,7 @@
     <s:String x:Key="S.Options.About.Technical.License">ライセンス:</s:String>
     <s:String x:Key="S.Options.About.Technical.Free">(フリーウェア)</s:String>
     <s:String x:Key="S.Options.About.Technical.SourceCode">ソースコード:</s:String>
+    <s:String x:Key="S.Options.About.Technical.Privacy">プライバシーポリシー:</s:String>
     <s:String x:Key="S.Options.About.ABigThanksTo">謝辞</s:String>
     <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">フィードバックや寄付を頂いた方々</s:String>
     
@@ -290,12 +458,12 @@
     <s:String x:Key="S.Localization.MoveRosourcePosition">カスタムリソースはリストの一番下に追加されます。</s:String>
 
     <!--Recorder-->
-    <s:String x:Key="S.Recorder.RecordingOptions">録画オプション</s:String>
+    <s:String x:Key="S.Recorder.RecordingOptions">録画オプション:</s:String>
     <s:String x:Key="S.Recorder.Snapshot">スナップショットモード</s:String>
     <s:String x:Key="S.Recorder.ThinMode">タイトルバーを隠す</s:String>
     <s:String x:Key="S.Recorder.Fullscreen">全画面モード</s:String>
 
-    <s:String x:Key="S.Recorder.Record">記録</s:String>
+    <s:String x:Key="S.Recorder.Record">録画</s:String>
     <s:String x:Key="S.Recorder.Pause">ポーズ</s:String>
     <s:String x:Key="S.Recorder.Continue">続ける</s:String>
     <s:String x:Key="S.Recorder.Stop">停止</s:String>
@@ -303,14 +471,21 @@
     <s:String x:Key="S.Recorder.Snap">スナップ</s:String>
     <s:String x:Key="S.Recorder.Height">高さ</s:String>
     <s:String x:Key="S.Recorder.Width">幅</s:String>
-    <s:String x:Key="S.Recorder.Fps">最大フレーム/秒</s:String>
+    <s:String x:Key="S.Recorder.Fps">最大フレーム毎秒</s:String>
     <s:String x:Key="S.Recorder.Fps.Short">fps</s:String>
-    <s:String x:Key="S.Recorder.FpsRange">最低 - 最大 fps: 1-60 fps</s:String>
+    <s:String x:Key="S.Recorder.FpsRange">fpsの範囲(最小～最大): 1～60 (fps)</s:String>
     <s:String x:Key="S.Recorder.SnapToWindow">ウィンドウに吸着する (スナップしたいところへドラッグして離す)</s:String>
     <s:String x:Key="S.Recorder.PreStart">開始まで</s:String>
     <s:String x:Key="S.Recorder.Paused">ScreenToGif (ポーズ)</s:String>
+    <s:String x:Key="S.Recorder.Stopping">停止中・・・</s:String>
     
-    <!--New Recorder-->
+    <s:String x:Key="S.Recorder.Warning.CaptureNotPossible">スクリーンをキャプチャすることができませんでした。</s:String>
+    <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">スクリーンをキャプチャすることができませんでした。このキャプチャ方法で5回試行しましたが、フレームを取得できませんでした。</s:String>
+    <s:String x:Key="S.Recorder.Warning.StartPauseNotPossible">スクリーンキャプチャを開始/ポーズすることができませんでした。</s:String>
+    <s:String x:Key="S.Recorder.Warning.Windows8">Desktop Duplication APIを使用してスクリーンキャプチャするため、Windows 8 以降が必要です。</s:String>
+    <s:String x:Key="S.Recorder.Warning.MissingSharpDx">SharpDx ライブラリは、Desktop Duplication APIを使用してスクリーンキャプチャをするのに必須です。「オプション」 - 「外部ツール」からダウンロードしてください。</s:String>
+    
+    <!--New recorder-->
     <s:String x:Key="S.Recorder.Area">エリア</s:String>
     <s:String x:Key="S.Recorder.Window">ウィンドウ</s:String>
     <s:String x:Key="S.Recorder.Screen">スクリーン</s:String>
@@ -318,25 +493,25 @@
     <s:String x:Key="S.Recorder.Retry">リトライ</s:String>
     <s:String x:Key="S.Recorder.CancelSelection">選択キャンセル(Esc)</s:String>
     <s:String x:Key="S.Recorder.SelectArea">クリック＆ドラッグで画面領域を選択</s:String>
+    <s:String x:Key="S.Recorder.SelectArea.Embedded">クリック＆ドラッグで領域を選択</s:String>
     <s:String x:Key="S.Recorder.SelectWindow">ウィンドウを選択するには、ここをクリックしてください</s:String>
     <s:String x:Key="S.Recorder.SelectScreen">画面を選択するには、ここをクリックしてください</s:String>
-    
     <s:String x:Key="S.Recorder.EscToCancel">Escキーを押してキャンセル</s:String>
     
-    <!--Webcam Recorder-->
+    <!--Webcam recorder-->
     <s:String x:Key="S.Webcam.Title">ScreenToGif - Webカメラレコーダー</s:String>
     <s:String x:Key="S.Webcam.NoVideo">ビデオデバイスが見つかりません。(・へ・)</s:String>
     <s:String x:Key="S.Webcam.CheckVideoDevices">ビデオデバイスを確認してください。</s:String>
     <s:String x:Key="S.Webcam.Scale">スケール: {0:0.##}倍</s:String>
     <s:String x:Key="S.Webcam.ChangeScale">ビデオスケール変更</s:String>
     
-    <!--Board Recorder-->
+    <!--Board recorder-->
     <s:String x:Key="S.Board.Title">ScreenToGif - ボードレコーダー</s:String>
     <s:String x:Key="S.Board.AutoRecord">自動録画</s:String>
     <s:String x:Key="S.Board.AutoRecordToolTip">描画中も録画する</s:String>
     <s:String x:Key="S.Board.CtrlHold">Ctrl [保持]</s:String>
     
-    <!--Color Selector-->
+    <!--Color selector-->
     <s:String x:Key="S.ColorSelector.Title">色セレクター</s:String>
     <s:String x:Key="S.ColorSelector.Select">色の選択</s:String>
     <s:String x:Key="S.ColorSelector.Red">赤(R)</s:String>
@@ -347,16 +522,26 @@
     <s:String x:Key="S.ColorSelector.Initial">初期の色</s:String>
     <s:String x:Key="S.ColorSelector.Current">現在の色</s:String>
     <s:String x:Key="S.ColorSelector.Latest">最新の色</s:String>
+    <s:String x:Key="S.ColorSelector.Sample">調べたい色へこのマークをドラッグして下さい</s:String>
+    <!--<s:String x:Key="S.ColorSelector.Sample.Info">Click and drag to pick&#x0d;colors from your screen.</s:String>-->
     
-    <!--Exception Viewer, Optional-->
+    <!--Exception/Error viewers-->
     <s:String x:Key="S.ExceptionViewer.Title">例外ビューアー</s:String>
     <s:String x:Key="S.ExceptionViewer.OpenInner">内部例外を開く</s:String>
     <s:String x:Key="S.ErrorDialog.Observation">不具合が発生しました。</s:String>
     <s:String x:Key="S.ErrorDialog.Send">レポート送信</s:String>
 
-    <!--Insert Frames-->
-    <s:String x:Key="S.InsertFrames.Title">フレームを挿入する</s:String>
-    <s:String x:Key="S.InsertFrames.Info">両方のサイズが同じである必要があるため、このウィンドウでは画像とキャンバスの位置やサイズを変更します。</s:String>
+    <!--FFmpeg preset-->
+    <s:String x:Key="S.FfmpegPreset.Title">FFmpegプリセット</s:String>
+    <s:String x:Key="S.FfmpegPreset.Name">名称</s:String>
+    <s:String x:Key="S.FfmpegPreset.Parameters">パラメータ</s:String>
+    <s:String x:Key="S.FfmpegPreset.Warning.Name">このプリセットの名称は必須入力です。</s:String>
+    <s:String x:Key="S.FfmpegPreset.Warning.Parameter">このプリセットは、パラメータの入力が必須です。</s:String>
+    <s:String x:Key="S.FfmpegPreset.Warning.SameName">同名のプリセットが既にあります。</s:String>
+
+    <!--Insert frames-->
+    <s:String x:Key="S.InsertFrames.Title">フレームを挿入</s:String>
+    <s:String x:Key="S.InsertFrames.Info">両方のサイズが同じである必要があるため、このウィンドウでは画像とキャンバスそれぞれの位置やサイズを変更します。</s:String>
     <s:String x:Key="S.InsertFrames.CanvasSize">キャンバスサイズ:</s:String>
     <s:String x:Key="S.InsertFrames.FitCanvas">画像をキャンバスに合わせる</s:String>
     <s:String x:Key="S.InsertFrames.FitCanvas.Info">キャンバスサイズを(左上隅から)両方の画像に合わせて変更します。</s:String>
@@ -365,15 +550,16 @@
     <s:String x:Key="S.InsertFrames.CurrentFrames">現在のフレーム</s:String>
     <s:String x:Key="S.InsertFrames.ImageSize">画像サイズ:</s:String>
     <s:String x:Key="S.InsertFrames.ImagePosition">画像位置:</s:String>
-    <s:String x:Key="S.InsertFrames.ResetImageSizePosition">画像サイズ・位置をリセット</s:String>
+    <s:String x:Key="S.InsertFrames.ResetImageSizePosition">画像のサイズと位置をリセット</s:String>
     <s:String x:Key="S.InsertFrames.Info2">新しいフレームが現在のフレームリストの位置に挿入されます。</s:String>
     <s:String x:Key="S.InsertFrames.Before">前へ</s:String>
     <s:String x:Key="S.InsertFrames.After">後ろへ</s:String>
     <s:String x:Key="S.InsertFrames.Importing">インポート中</s:String>
     <s:String x:Key="S.InsertFrames.SelectColorFill">キャンバスの背景色を選択</s:String>
 
-    <!--Import Frames From Video-->
+    <!--Import frames from video-->
     <s:String x:Key="S.ImportVideo.Title">ビデオからフレームをインポートする</s:String>
+    <s:String x:Key="S.ImportVideo.Importer">インポーター:</s:String>
     <s:String x:Key="S.ImportVideo.Loading">ロード中...</s:String>
     <s:String x:Key="S.ImportVideo.Scale">拡大比率:</s:String>
     <s:String x:Key="S.ImportVideo.Size">サイズ:</s:String>
@@ -386,10 +572,13 @@
     <s:String x:Key="S.ImportVideo.Selection">選択範囲:</s:String>
     <s:String x:Key="S.ImportVideo.Frames">フレーム:</s:String>
     <s:String x:Key="S.ImportVideo.Duration">時間:</s:String>
+    <s:String x:Key="S.ImportVideo.Error">ビデオを読み込むことができませんでした。</s:String>
+    <s:String x:Key="S.ImportVideo.Error.Detail">プレビューアが開始できませんでした。他のインポーターで試すか、動画ファイルが壊れていないか検査してください。Media Playerを使用しているなら、</s:String>
+    <s:String x:Key="S.ImportVideo.Timeout">フレームプレビューを生成中にタイムアウト</s:String>
+    <s:String x:Key="S.ImportVideo.Nothing">インポートされるためにフレームが選択されませんでした。</s:String>
     
     <!--Encoder-->
     <s:String x:Key="Encoder.Title">エンコーダー</s:String>
-    <s:String x:Key="Encoder.ClearAllCompleted">すべての完了をクリア</s:String>
     <s:String x:Key="Encoder.Starting">開始中</s:String>
     <s:String x:Key="Encoder.Completed">完了</s:String>
     <s:String x:Key="Encoder.Completed.Clipboard">クリップボードへコピー完了</s:String>
@@ -406,6 +595,7 @@
     <s:String x:Key="Encoder.Uploading">アップロード中</s:String>
     <s:String x:Key="Encoder.Executing">コマンド実行中</s:String>
     <s:String x:Key="Encoder.Processing">実行中 {0}</s:String>
+    <s:String x:Key="Encoder.CreatingFile">ファイルを作成中</s:String>
     <s:String x:Key="Encoder.Analyzing">変更されていないピクセルを検出中</s:String>
     <s:String x:Key="Encoder.OpenFile">ファイルを開く</s:String>
     <s:String x:Key="Encoder.ExploreFolder">フォルダーを開く</s:String>
@@ -428,23 +618,25 @@
     <s:String x:Key="Editor.Title">ScreenToGif - エディター</s:String>
     <s:String x:Key="Editor.File">ファイル</s:String>
     <s:String x:Key="Editor.Home">ホーム</s:String>
-    <s:String x:Key="Editor.Playback">プレイバック</s:String>
-    <s:String x:Key="Editor.Edit">編集</s:String>
-    <s:String x:Key="Editor.Image">画像</s:String>
+    <s:String x:Key="Editor.Playback">再生制御</s:String>
+    <s:String x:Key="Editor.Edit">フレーム操作</s:String>
+    <s:String x:Key="Editor.Image">画像編集</s:String>
     <s:String x:Key="Editor.Transitions">トランジション</s:String>
     <s:String x:Key="Editor.Statistics">統計</s:String>
     <s:String x:Key="Editor.Options">オプション</s:String>
-    
+    <s:String x:Key="S.Editor.Help">ヘルプ</s:String>
     <s:String x:Key="S.Editor.Extras">その他</s:String>
+    <s:String x:Key="S.Editor.UpdateAvailable">最新版が利用できます！</s:String>
+    <s:String x:Key="S.Editor.UpdateAvailable.Info">詳細はここをクリック</s:String>
     
     <!--Welcome-->
-    <s:String x:Key="Welcome.New">新しい録画を開始するには 「ファイル」 - 「新規」グループ から</s:String>
+    <s:String x:Key="Welcome.New">新たに録画を開始するには 「ファイル」 - 「新規」グループ から</s:String>
     <s:String x:Key="Welcome.Import">ドラッグ＆ドロップで画像、ビデオ、プロジェクトをインポート</s:String>
     <s:String x:Key="Welcome.ThankYou">このアプリをご使用頂き、ありがとうございます！</s:String>
     <s:String x:Key="Welcome.Size">低フレームレート、フレーム間の色数または変化量が小さいほどサイズは小さくなります。</s:String>
     <s:String x:Key="Welcome.Contact">作者とコンタクトしますか？ 「オプション」 - 「アプリ情報」から</s:String>
     <s:String x:Key="Welcome.Trouble">不具合があったらフィードバックツールで報告してください。</s:String>
-    <s:String x:Key="Welcome.NewRecorder">新しいレコーダーを試してみませんか？</s:String>
+    <s:String x:Key="Welcome.NewRecorder">新インターフェースのレコーダーを試してみませんか？「オプション」 - 「レコーダー」から</s:String>
     
     <!--File • New-->
     <s:String x:Key="Editor.File.New.Recording">録画</s:String>
@@ -456,8 +648,8 @@
     <!--File • Insert-->
     <s:String x:Key="Editor.File.Insert.Recording">録画</s:String>
     <s:String x:Key="Editor.File.Insert.Webcam">Webカメラ録画</s:String>
-    <s:String x:Key="Editor.File.Insert.Media">メディア</s:String>
     <s:String x:Key="Editor.File.Insert.Board">ボード録画</s:String>
+    <s:String x:Key="Editor.File.Insert.Media">メディア</s:String>
     <s:String x:Key="Editor.File.Insert">挿入</s:String>
     
     <!--File • Save/Discard-->
@@ -493,13 +685,18 @@
     <s:String x:Key="Editor.Home.Deselect">選択解除</s:String>
     
     <!--Playback • Playback-->
-    <s:String x:Key="Editor.Playback.Playback">プレイバック</s:String>
+    <s:String x:Key="Editor.Playback.Playback">再生制御</s:String>
     <s:String x:Key="Editor.Playback.First">先頭</s:String>
     <s:String x:Key="Editor.Playback.Previous">前</s:String>
     <s:String x:Key="Editor.Playback.Play">再生</s:String>
     <s:String x:Key="Editor.Playback.Pause">ポーズ</s:String>
     <s:String x:Key="Editor.Playback.Next">次</s:String>
     <s:String x:Key="Editor.Playback.Last">最後</s:String>
+    
+    <!--Playback • Playback Options-->
+    <s:String x:Key="Editor.PlaybackOptions.Header">再生オプション</s:String>
+    <s:String x:Key="Editor.PlaybackOptions.Loop">ループ再生</s:String>
+    <s:String x:Key="Editor.PlaybackOptions.Loop.Info">(再生制御での)再生中に使用されるだけです。Gif、Apngファイルをエクスポートするときのループ設定を変更したいなら「名前を付けて保存」パネルの中に設定項目があります。</s:String>
     
     <!--Edit • Frames-->  
     <s:String x:Key="Editor.Edit.Frames">フレーム除去</s:String>
@@ -525,7 +722,7 @@
     <!--Image • Size and Rotation-->
     <s:String x:Key="Editor.Image.SizePosition">サイズと回転</s:String>
     <s:String x:Key="Editor.Image.Resize">リサイズ</s:String>
-    <s:String x:Key="Editor.Image.Crop">クロップ</s:String>
+    <s:String x:Key="Editor.Image.Crop">切り抜き</s:String>
     <s:String x:Key="Editor.Image.FlipRotate">反転・回転</s:String>
     
     <!--Image • Text-->
@@ -543,6 +740,7 @@
     <s:String x:Key="Editor.Image.Watermark">透かし</s:String>
     <s:String x:Key="Editor.Image.Cinemagraph">シネマグラフ</s:String>
     <s:String x:Key="Editor.Image.Border">境界</s:String>
+    <s:String x:Key="Editor.Image.Shadow">影</s:String>
     <s:String x:Key="Editor.Image.Progress">進捗</s:String>
     <s:String x:Key="Editor.Image.Obfuscate">難読化</s:String>
 
@@ -552,12 +750,14 @@
     <s:String x:Key="Editor.Transitions.Slide">スライド</s:String>
     
     <!--Statistics-->
-    <s:String x:Key="Editor.Statistics.General">一般</s:String>
-    <s:String x:Key="Editor.Statistics.FrameCount">フレーム数</s:String>
-    <s:String x:Key="Editor.Statistics.TotalDuration">全期間</s:String>
-    <s:String x:Key="Editor.Statistics.FrameSize">フレームサイズ</s:String>
+    <s:String x:Key="Editor.Statistics.General">全般</s:String>
+    <s:String x:Key="Editor.Statistics.FrameCount">総フレーム数</s:String>
+    <s:String x:Key="Editor.Statistics.TotalDuration">全期間(分:秒.ミリ秒)</s:String>
+    <s:String x:Key="Editor.Statistics.FrameSize">フレームサイズ(横×縦)</s:String>
     <s:String x:Key="Editor.Statistics.AverageDuration">平均持続時間(平均遅延)</s:String>
-    <s:String x:Key="Editor.Statistics.FrameDpi">フレームDPI,スケール</s:String>
+    <s:String x:Key="Editor.Statistics.CurrentTime">現在累積時間</s:String>
+    <s:String x:Key="Editor.Statistics.CurrentTime.Info">先頭フレームの表示開始～選択順が早い選択フレームの表示完了までの(累積的な)時間(分:秒.ミリ秒)</s:String>
+    <s:String x:Key="Editor.Statistics.FrameDpi">フレームDPI , スケール</s:String>
     <s:String x:Key="Editor.Statistics.SelectedFrame">選択されたフレーム</s:String>
     
     <!--TODO: Organize-->
@@ -566,14 +766,14 @@
     <s:String x:Key="Editor.InvalidLoadingFiles">不正な読み込み - 一度に複数のファイルをインポートすることはできません。1つのファイルのみ選択してみてください。</s:String>
     <s:String x:Key="Editor.InvalidLoadingProjects">不正な読み込み - 一度に複数のプロジェクトを読み込むことはできません。 1つのプロジェクトのみ選択してみてください。</s:String>
     <s:String x:Key="Editor.OpenMediaProject">メディア(画像,ビデオ)またはプロジェクトファイルを開く </s:String>
-    <s:String x:Key="Editor.OpenMedia">メディア(画像,ビデオ)を開く </s:String>
+    <s:String x:Key="Editor.OpenMedia">メディア(画像,ビデオ)ファイルを開く </s:String>
     
     <s:String x:Key="Editor.Clipboard.InvalidCut.Title">切り取り処理</s:String>
     <s:String x:Key="Editor.Clipboard.InvalidCut.Instruction">すべてのフレームを切り取ることはできません。</s:String>
     <s:String x:Key="Editor.Clipboard.InvalidCut.Message">録画には、少なくとも一つ以上のフレームが必要です。</s:String>
     
     <s:String x:Key="Editor.DeleteAll.Title">すべて削除</s:String>
-    <s:String x:Key="Editor.DeleteAll.Instruction">すべてのフレームを削除しますか？</s:String>
+    <s:String x:Key="Editor.DeleteAll.Instruction">すべてのフレームを削除しても良いですか？</s:String>
     <s:String x:Key="Editor.DeleteAll.Message">このアクションは現在開いているプロジェクトを破棄します(元に戻せません)。 続行しますか？</s:String>
     <s:String x:Key="Editor.DiscardProject.Title">プロジェクトを破棄</s:String>
     <s:String x:Key="Editor.DiscardProject.Instruction">すべてのフレームを削除してもよろしいですか？</s:String>
@@ -589,8 +789,8 @@
     <s:String x:Key="Editor.Exiting.Message2">現在作業中のプロジェクトは、「最近のプロジェクト」から開くことができますが、&#10;「オプション」 - 「一時ファイル」で設定した日数経過後に自動削除されます。</s:String>
     
     <s:String x:Key="Editor.Resize.Warning">リサイズ処理を適用するには、別の値を選択する必要があります。</s:String>
-    <s:String x:Key="Editor.Crop.Warning">クロップ選択は、現在のフレームサイズよりも小さくなければなりません。</s:String>
-    <s:String x:Key="Editor.Crop.Warning2">クロップ選択は、10×10 ピクセルより大きくなければなりません。</s:String>
+    <s:String x:Key="Editor.Crop.Warning">クロップ(切り抜き)選択は、現在のフレームサイズよりも小さくなければなりません。</s:String>
+    <s:String x:Key="Editor.Crop.Warning2">クロップ(切り抜き)選択は、10×10 ピクセルより大きくなければなりません。</s:String>
     <s:String x:Key="Editor.Caption.WarningNoText">適用されるテキストはありません。</s:String>
     <s:String x:Key="Editor.Caption.WarningSelection">キャプションを適用するには、少なくとも1つのフレームを選択する必要があります。</s:String>
     <s:String x:Key="Editor.FreeText.WarningSelection">テキスト入力を適用するには、少なくとも1つのフレームを選択する必要があります。</s:String>
@@ -603,6 +803,8 @@
     <s:String x:Key="Editor.Watermark.WarningSelection">透かしを適用するには、少なくとも1つのフレームを選択する必要があります。</s:String>
     <s:String x:Key="Editor.Border.WarningThickness">少なくとも一辺は、ボーダー太さ(厚さ)を1以上にする必要があります。</s:String>
     <s:String x:Key="Editor.Border.WarningSelection">境界(ボーダー)を適用するには、少なくとも1つのフレームを選択する必要があります。</s:String>
+    <s:String x:Key="Editor.Shadow.Warning.Invisible">透明度は0より大きくなければ(影効果適用による)違いは生まれません。</s:String>
+    <s:String x:Key="Editor.Shadow.Warning.Behind">影の深さとぼかし半径を0として使用時は、フレームの後ろに隠れるので(影効果適用による)違いは生まれません。</s:String>
     <s:String x:Key="Editor.Cinemagraph.WarningNoDrawing">シネマグラフを適用するには、少なくとも1つの画素を選択する必要があります。それらの上に描画されるピクセルを選択します。</s:String>
     
     <s:String x:Key="Editor.Fade.Title">フェードトランジション</s:String>
@@ -619,6 +821,7 @@
     <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">一度に複数のプロジェクトをインポートすることはできません。</s:String>
     <s:String x:Key="Editor.DragDrop.InvalidProject.Message">1プロジェクトのみ選択してみてください。</s:String>
     
+    <s:String x:Key="Editor.RetrievingFromCache">キャッシュからフレームを復旧中</s:String>
     <s:String x:Key="Editor.LoadingFrames">フレームをロード中</s:String>
     <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Instruction">プロジェクトをロードできません。</s:String>
     <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Message">フレームがすべて破損しているか、イメージが存在しないためフレームを読み込むことができませんでした。</s:String>
@@ -628,11 +831,13 @@
     <s:String x:Key="Editor.PreparingImport">インポートの準備中</s:String>
     <s:String x:Key="Editor.ImportingFrames">フレームをインポート中</s:String>
     
-    <s:String x:Key="Editor.ExportingRecording">録画をエクスポート中</s:String>
+    <s:String x:Key="S.Editor.AnalyzingDuplicates">重複を解析中</s:String>
+    <s:String x:Key="S.Editor.AdjustingDuplicatesDelay">遅延を調整中</s:String>
+    <s:String x:Key="S.Editor.DiscardingDuplicates">重複を破棄中</s:String>
     <s:String x:Key="Editor.DiscardingFrames">フレームを破棄中</s:String>
     <s:String x:Key="Editor.DiscardingFolders">フォルダーを破棄中</s:String>
     <s:String x:Key="Editor.ResizingFrames">フレームをリサイズ中</s:String>
-    <s:String x:Key="Editor.CroppingFrames">フレームをクロップ中</s:String>
+    <s:String x:Key="Editor.CroppingFrames">フレームをクロップ(切り抜き)中</s:String>
     <s:String x:Key="Editor.ApplyingOverlay">フレームへオーバーレイを適用中</s:String>
     <s:String x:Key="Editor.CreatingTitleFrame">タイトルフレームを作成中</s:String>
     <s:String x:Key="Editor.ApplyingFlipRotate">フレームの反転・回転を適用中</s:String>
@@ -645,14 +850,14 @@
     <s:String x:Key="Editor.List.ExploreFolder">フォルダーを表示</s:String>
     <s:String x:Key="Editor.List.ExportImage">イメージをエクスポート</s:String>
     
-    <s:String x:Key="Editor.FrameNumbersInfo">総数、選択数、選択インデックス</s:String>
+    <s:String x:Key="Editor.FrameNumbersInfo">総フレーム数(緑)、選択フレーム数(赤)、選択インデックス(青)</s:String>
     
     <s:String x:Key="GoTo.Title">フレームへ移動</s:String>
     <s:String x:Key="GoTo.Instruction">フレームへ移動 (0 ～ {0})</s:String>
     
     <s:String x:Key="Context.SaveAs">名前を付けて保存</s:String>
     <s:String x:Key="Context.RemoveFrames">選択されたフレームを削除</s:String>
-    <s:String x:Key="Context.NewRecording">新しいスクリーン録画</s:String>
+    <s:String x:Key="Context.NewRecording">新規スクリーン録画</s:String>
     <s:String x:Key="Context.NewWebcamRecording">新規Webカメラ録画</s:String>
     <s:String x:Key="Context.NewBoardRecording">新規ボード録画</s:String>
     <s:String x:Key="Context.NewBlankAnimation">新規プロジェクト</s:String>
@@ -665,40 +870,41 @@
     <s:String x:Key="Editor.Warning.LowSpace">ドライブに十分な空き容量がありません (残り {0}％)。 「オプション」 - 「一時ファイル」でスペースを確保するには、ここをクリックしてください。</s:String>
     
     <!--Hints-->
-    <s:String x:Key="S.Hint.NewRecording">新規録画作成</s:String>
-    <s:String x:Key="S.Hint.NewWebcamRecording">新規Webカメラ録画作成</s:String>
-    <s:String x:Key="S.Hint.NewBoardRecording">新規ボード録画作成</s:String>
-    <s:String x:Key="S.Hint.NewAnimation">新規プロジェクト作成</s:String>
-    <s:String x:Key="S.Hint.Undo">元に戻す</s:String>
-    <s:String x:Key="S.Hint.Reset">リセット実行</s:String>
-    <s:String x:Key="S.Hint.Redo">やり直し</s:String>
+    <s:String x:Key="S.Hint.NewRecording">新規録画作成完了</s:String>
+    <s:String x:Key="S.Hint.NewWebcamRecording">新規Webカメラ録画作成完了</s:String>
+    <s:String x:Key="S.Hint.NewBoardRecording">新規ボード録画作成完了</s:String>
+    <s:String x:Key="S.Hint.NewAnimation">新規プロジェクト作成完了</s:String>
+    <s:String x:Key="S.Hint.Undo">元に戻す完了</s:String>
+    <s:String x:Key="S.Hint.Reset">リセット実行完了</s:String>
+    <s:String x:Key="S.Hint.Redo">やり直し完了</s:String>
     <s:String x:Key="S.Hint.Cut">{0} フレーム切り取り</s:String>
-    <s:String x:Key="S.Hint.Copy">{0} フレームコピー</s:String>
-    <s:String x:Key="S.Hint.Paste">{0} フレーム貼り付け</s:String>
+    <s:String x:Key="S.Hint.Copy">{0} フレームコピー完了</s:String>
+    <s:String x:Key="S.Hint.Paste">{0} フレーム貼り付け完了</s:String>
     <s:String x:Key="S.Hint.Zoom">表示倍率 {0}%</s:String>
-    <s:String x:Key="S.Hint.SelectAll">全フレーム選択</s:String>
-    <s:String x:Key="S.Hint.SelectSingle">フレーム #{0} 選択</s:String>
-    <s:String x:Key="S.Hint.SelectInverse">選択反転</s:String>
-    <s:String x:Key="S.Hint.Deselect">全フレーム選択解除</s:String>
-    <s:String x:Key="S.Hint.DeleteFrames">{0} フレーム削除</s:String>
-    <s:String x:Key="S.Hint.Reverse">フレームリストを逆順化</s:String>
-    <s:String x:Key="S.Hint.Yoyo">ヨーヨー反復効果適用</s:String>
-    <s:String x:Key="S.Hint.MoveLeft">フレーム左移動</s:String>
-    <s:String x:Key="S.Hint.MoveRight">フレーム右移動</s:String>
-    <s:String x:Key="S.Hint.Resize">フレームリサイズ</s:String>
-    <s:String x:Key="S.Hint.Crop">フレーム切り取り</s:String>
-    <s:String x:Key="S.Hint.FlipRotate">フレームの反転・回転</s:String>
+    <s:String x:Key="S.Hint.SelectAll">全フレーム選択完了</s:String>
+    <s:String x:Key="S.Hint.SelectSingle">フレーム #{0} 選択完了</s:String>
+    <s:String x:Key="S.Hint.SelectInverse">選択反転完了</s:String>
+    <s:String x:Key="S.Hint.Deselect">全フレーム選択解除完了</s:String>
+    <s:String x:Key="S.Hint.DeleteFrames">{0} フレーム削除完了</s:String>
+    <s:String x:Key="S.Hint.Reverse">フレームリストを逆順化完了</s:String>
+    <s:String x:Key="S.Hint.Yoyo">ヨーヨー反復効果適用完了</s:String>
+    <s:String x:Key="S.Hint.MoveLeft">フレーム左移動完了</s:String>
+    <s:String x:Key="S.Hint.MoveRight">フレーム右移動完了</s:String>
+    <s:String x:Key="S.Hint.Resize">フレームリサイズ完了</s:String>
+    <s:String x:Key="S.Hint.Crop">フレームクロップ(切り抜き)完了</s:String>
+    <s:String x:Key="S.Hint.FlipRotate">フレームの反転・回転完了</s:String>
     <s:String x:Key="S.Hint.FlipRotate2">反転は選択したフレームに適用され、回転はすべてのフレームに適用されます。</s:String>
-    <s:String x:Key="S.Hint.ApplyAll">この処理はすべてのフレームに適用されます。</s:String>
-    <s:String x:Key="S.Hint.ApplySelected">この処理は選択されたフレームに適用されます。</s:String>
+    <s:String x:Key="S.Hint.ApplyAll">このアクションはすべてのフレームに適用されます。</s:String>
+    <s:String x:Key="S.Hint.ApplySelected">このアクションは選択されたフレームに適用されます。</s:String>
+    <s:String x:Key="S.Hint.ApplySelectedOrAll">このアクションはすべてもしくは選択フレームに対して適用されます。設定に依存します。</s:String>
     <s:String x:Key="S.Hint.Cinemagraph">シネマグラフは先頭フレームに基づくすべてのフレームに適用されます。</s:String>
-    <s:String x:Key="S.Hint.Overlay">オーバーレイ適用</s:String>
-    <s:String x:Key="S.Hint.TitleFrame">タイトルフレーム作成</s:String>
+    <s:String x:Key="S.Hint.Overlay">オーバーレイ適用完了</s:String>
+    <s:String x:Key="S.Hint.TitleFrame">タイトルフレーム作成完了</s:String>
     <s:String x:Key="S.Hint.TitleFrame2">タイトルフレームは選択されたフレームの前に挿入されます。</s:String>
-    <s:String x:Key="S.Hint.Delay">持続時間 (遅延)変更</s:String>
-    <s:String x:Key="S.Hint.Transition">トランジション挿入</s:String>
-    <s:String x:Key="S.Hint.Reduce">フレームレート減少</s:String>
-    <s:String x:Key="S.Hint.Duplicates">重複削除</s:String>
+    <s:String x:Key="S.Hint.Delay">持続時間 (遅延)変更完了</s:String>
+    <s:String x:Key="S.Hint.Transition">トランジション挿入完了</s:String>
+    <s:String x:Key="S.Hint.Reduce">フレームレート減少完了</s:String>
+    <s:String x:Key="S.Hint.Duplicates">重複削除完了</s:String>
     
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">隠す</s:String>
@@ -787,6 +993,8 @@
     <s:String x:Key="KeyStrokes.Edit.Keys">キーストローク検出</s:String>
     <s:String x:Key="KeyStrokes.Edit.Remove">キーストローク削除</s:String>
     <s:String x:Key="KeyStrokes.Edit.Add">キーストローク追加:</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Lower">小文字記入</s:String>
+    <s:String x:Key="KeyStrokes.Edit.Lower.Info">単一の小文字を挿入します。</s:String>
     
     <s:String x:Key="String.Delay">遅延</s:String>
     <s:String x:Key="String.DelayMs">遅延 (ミリ秒):</s:String>
@@ -795,6 +1003,7 @@
     <s:String x:Key="String.Margin">マージン:</s:String>
     <s:String x:Key="String.Padding">パディング:</s:String>
     <s:String x:Key="String.Background">背景</s:String>
+    <s:String x:Key="String.MinHeight">最小高さ:</s:String>
     
     <s:String x:Key="FreeDrawing.Mode">モード</s:String>
     <s:String x:Key="FreeDrawing.Pen">ペン</s:String>
@@ -824,7 +1033,14 @@
     <s:String x:Key="Watermark.Opacity">不透過率:</s:String>
     
     <s:String x:Key="Border.Appearance">外観</s:String>
+    <s:String x:Key="S.Border.Info">負の値を使用すると、すべてのフレームに適用されます。&#10;非負(0以上)の値を使用すると、選択フレームにのみ適用されます。</s:String>
 
+    <s:String x:Key="S.Shadow.ShadowColor">影の色:</s:String>
+    <s:String x:Key="S.Shadow.BackgroundColor">背景色:</s:String>
+    <s:String x:Key="S.Shadow.Direction">方向:</s:String>
+    <s:String x:Key="S.Shadow.BlurRadius">ぼかし半径:</s:String>
+    <s:String x:Key="S.Shadow.Depth">深さ:</s:String>
+    
     <s:String x:Key="S.Obfuscate.Options">難読化オプション</s:String>
     <s:String x:Key="S.Obfuscate.PixelSize">ピクセルサイズ:</s:String>
     <s:String x:Key="S.Obfuscate.UseAverage">ピクセル化された各ブロックの平均色を計算</s:String>
@@ -840,13 +1056,24 @@
     <s:String x:Key="Progress.Precision.Miliseconds">ミリ秒</s:String>
     <s:String x:Key="Progress.Precision.Percentage">比率</s:String>
     <s:String x:Key="Progress.Precision.Count">フレーム番号</s:String>
+    <s:String x:Key="Progress.Precision.DateOfRecording">現在日時</s:String>
     <s:String x:Key="Progress.Precision.Custom">カスタム</s:String>
     <s:String x:Key="Progress.Precision.ShowTotal">総数を表示</s:String>
     <s:String x:Key="Progress.Format">フォーマット:</s:String>
+    <s:String x:Key="S.Progress.Format.Date">.Net Framework由来の日時書式を使用できます。&#10;詳細仕様は、下記二つのリンクから</s:String>
+    <s:String x:Key="S.Progress.Format.Date.Standard">標準フォーマット</s:String>
+    <s:String x:Key="S.Progress.Format.Date.Custom">カスタムフォーマット</s:String>
+    <s:String x:Key="S.Progress.Precision.StartNumber">開始カウント</s:String>
+    <s:String x:Key="S.Progress.Precision.StartNumber.ToolTip">この選択番号からフレーム番号のカウントを開始</s:String>
     <s:String x:Key="Progress.Orientation">向き:</s:String>
     
+    <s:String x:Key="S.DelayUpdate">遅延を更新</s:String>
+    <s:String x:Key="Delay.Mode">遅延モード</s:String>
+    <s:String x:Key="Delay.Mode.Override">オーバーライド(ミリ秒)</s:String>
+    <s:String x:Key="Delay.Mode.IncreaseDecrease">増減(ミリ秒)</s:String>
+    <s:String x:Key="Delay.Mode.Scale">スケール(%)</s:String>
     <s:String x:Key="Delay.NewValue">新しい値</s:String>
-    <s:String x:Key="Delay.Minimum10Ms">最低 10ms/ フレーム</s:String>
+    <s:String x:Key="Delay.Minimum10Ms">最低 10 (ミリ秒毎フレーム)</s:String>
     <s:String x:Key="Delay.DecreaseIncrease">値を増やす/減らす</s:String>
     <s:String x:Key="Delay.Scale">拡大比率</s:String>
     
@@ -855,8 +1082,8 @@
     <s:String x:Key="IncreaseDecreaseDelay.Info">この値は選択されたフレーム毎の持続時間 (遅延)を減少/増加させます。-10000ms〜10000msの間の値を選択することによって減少/増加できますが、各フレームの最終的な持続時間は10ms〜25500msに制限されます。</s:String>
     <s:String x:Key="ScaleDelay.Info">この比率(%)でフレーム毎の持続期間(遅延)を拡大します。&#10;1%～1000%の範囲で持続時間(遅延)を拡大できます。最終的な持続時間(遅延)の値は、10ms～25500msの範囲に制限されます。</s:String>
 
-    <s:String x:Key="Transitions.Length">トランジションの長さ</s:String>
-    <s:String x:Key="Transitions.Delay">トランジション遅延</s:String>
+    <s:String x:Key="Transitions.Length">トランジションの長さ(フレーム数)</s:String>
+    <s:String x:Key="Transitions.Delay">(各フレーム)トランジション遅延</s:String>
     <s:String x:Key="Transitions.FadeTo">フェード...</s:String>
     <s:String x:Key="Transitions.FadeTo.Frame">次のフレーム</s:String>
     <s:String x:Key="Transitions.FadeTo.Color">色</s:String>
@@ -872,13 +1099,13 @@
     <s:String x:Key="S.SaveAs.Psd">PSD</s:String>
     <s:String x:Key="S.SaveAs.Video">ビデオ</s:String>
     <s:String x:Key="S.SaveAs.Encoder">エンコーダー</s:String>
-    <!--<s:String x:Key="S.SaveAs.Encoder.ScreenToGif">2.0</s:String>-->
-    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Tooltip">アルゴリズム: Octree.</s:String>
-    <!--<s:String x:Key="S.SaveAs.Encoder.Legacy">1.0</s:String>-->
+    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">2.0</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Tooltip">アルゴリズム: Octree.(八分木)</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Legacy">1.0</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Legacy.Tooltip">アルゴリズム: NeuQuant.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System">システム</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System.Tooltip">標準のパレットを使用</s:String>
-    <!--<s:String x:Key="S.SaveAs.Encoder.Apng">1.0</s:String>-->
+    <s:String x:Key="S.SaveAs.Encoder.Apng">1.0</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Apng.Tooltip">エンコーダーはScreenToGifの開発者により作成されました。</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
@@ -888,14 +1115,28 @@
     <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">最大色数 (フレーム毎)</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Loop">繰り返し:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">ループ型 Gif</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">永遠に繰り返す</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">繰り返し回数</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">無限ループ</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">回繰り返し</s:String>
+    <s:String x:Key="S.SaveAs.Presets">プリセット:</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Default">デフォルト</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Add">追加</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Save">保存</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Edit">編集</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Remove">削除</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Remove.Title">プリセットを削除</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Remove.Header">プリセットを削除したいですか？</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Remove.Message">この操作をアンドゥ(取り消し)できませんが、またあとでプリセットを追加することができます。</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Reset">リセット</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Reset.Title">プリセットをリセット</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Reset.Header">プリセットを初期パラメータにリセットしたいですか？</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Reset.Message">この操作をアンドゥ(取り消し)できませんが、またあとでプリセットを編集しなおすことができます。</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Warning.NoSelection">FFmpegプリセットが選択されていません。一つ選択してください。</s:String>
     <s:String x:Key="S.SaveAs.Extras">追加:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">未変更ピクセルの検出</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">未変更ピクセルをマーク</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">ダミーの色で未変更ピクセルをマーク</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">色を選択</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions">Apng オプション</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.LoopedApng">ループ型 Apng.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.LoopedApng">ループ型 Apng</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions.DetectUnchanged">変更されていないピクセルを検出</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions.PaintTransparent">変更されていないすべてのピクセルを透明色でペイントします。</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions">ビデオオプション</s:String>
@@ -908,7 +1149,8 @@
     <s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">ランレングス圧縮アルゴリズムで画像データを圧縮</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline">タイムラインデータを保存</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">時間調整してエクスポート</s:String>
-
+    <s:String x:Key="S.SaveAs.ProjectOptions">プロジェクトオプション</s:String>
+    
     <!--Save As • Save options-->
     <s:String x:Key="S.SaveAs.SaveOptions">保存オプション</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">選択フォルダーにファイルを保存</s:String>
@@ -929,7 +1171,7 @@
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">エンコード後に実行するコマンドを入力します。&#10;複数コマンドを実行するには行を分けて入力します。&#10;{p} = 出力ファイルパス&#10;{f} = 出力フォルダーパス</s:String>
     
     <!--Save As • File-->
-    <s:String x:Key="S.SaveAs.File">ファイル *</s:String>
+    <s:String x:Key="S.SaveAs.File">保存先 *</s:String>
     <s:String x:Key="S.SaveAs.File.Location">保存先フォルダー</s:String>
     <s:String x:Key="S.SaveAs.File.Choose">場所の選択</s:String>
     <s:String x:Key="S.SaveAs.File.Format">ファイルフォーマット</s:String>
@@ -938,9 +1180,7 @@
     <s:String x:Key="S.SaveAs.File.Increase">ファイル番号増加</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">ファイル番号減少</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">同名ファイルが存在します。</s:String>
-    
     <s:String x:Key="S.SaveAs.File.Clipboard">クリップボードへ保存</s:String>
-
     <s:String x:Key="S.SaveAs.Warning.Type">ファイルの保存先(フォルダー、クリップボード、アップロード先)を選択する必要があります。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Commands.Empty">エンコード後コマンド実行には、フィールドに何か入力する必要があります。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Upload.None">アップロードサービスが選択されていません。対象を選択する必要があります。</s:String>
@@ -966,13 +1206,14 @@
     <s:String x:Key="S.Feedback.Header">フィードバックを送る</s:String>
     <s:String x:Key="S.Feedback.Title">タイトル *</s:String>
     <s:String x:Key="S.Feedback.Message">メッセージ *</s:String>
+    <s:String x:Key="S.Feedback.Message.Info">もしバグに遭遇したなら、(すみませんが、しかも英語で)再現手順を教えてください。1操作ずつ客観的に。</s:String>
     <s:String x:Key="S.Feedback.Type">フィードバックの種類</s:String>
     <s:String x:Key="S.Feedback.Suggestion">提案</s:String>
     <s:String x:Key="S.Feedback.IssueBug">問題点/バグ</s:String>
-    <s:String x:Key="S.Feedback.IssueBug.Info">バグを発見したら電子メールで報告してください。</s:String>
     <s:String x:Key="S.Feedback.YourEmail">メールアドレス (返信希望の場合)</s:String>
     <s:String x:Key="S.Feedback.Warning.Title">タイトルを入力する必要があります。</s:String>
     <s:String x:Key="S.Feedback.Warning.Message">メッセージを入力する必要があります。</s:String>
+    <s:String x:Key="S.Feedback.Warning.Email">開発者から返信を希望する場合、メールアドレスを入力する必要があります。</s:String>
     <s:String x:Key="S.Feedback.Sending">送信中... このウィンドウはまもなく閉じます。</s:String>
     <s:String x:Key="S.Feedback.Attachments">添付ファイル (任意、最大20MB)</s:String>
     <s:String x:Key="S.Feedback.AddAttachments">添付を追加</s:String>
@@ -1013,13 +1254,13 @@
     <s:String x:Key="S.FontWeights.UltraBold">極太(800)</s:String>
     <s:String x:Key="S.FontWeights.UltraLight">極細(200)</s:String>
     
-     <!--VerticalAligment-->
+    <!--VerticalAlignment-->
     <s:String x:Key="S.VerticalAlignment.Top">上</s:String>
     <s:String x:Key="S.VerticalAlignment.Center">中央</s:String>
     <s:String x:Key="S.VerticalAlignment.Bottom">下</s:String>
     <s:String x:Key="S.Alignment.Stretch">ストレッチ</s:String>
 
-     <!--HorizontalAlignment-->
+    <!--HorizontalAlignment-->
     <s:String x:Key="S.HorizontalAlignment.Left">左</s:String>
     <s:String x:Key="S.HorizontalAlignment.Center">中央</s:String>
     <s:String x:Key="S.HorizontalAlignment.Right">右</s:String>

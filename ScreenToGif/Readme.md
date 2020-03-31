@@ -7,13 +7,14 @@ _VS 2019 and .Net 4.8 or newer required._
 
 ## What's new? (Version 2.22.1)
 
-• Updated the French translation.   
+• Updated the Japanese translation.   
 • Added support for Gifski 0.10.2 (delete the old DLL and download it again).  
 
 ### Fixed:
 
-♦ Fixed bug with Gifski encoding which resulted in skewed frames.  
-♦ The text box that accepts only integers could cause a crash when trying to parse the text.  
+♦ Switching back from the snapshot mode from the recorder could cause a small crash.  
+♦ The auto-updater was failing to run when the cache folder was set to a relative path.  
+♦ The tooltips of the buttons of the startup window were incorrect.  
 
 ### Known Bugs:
 

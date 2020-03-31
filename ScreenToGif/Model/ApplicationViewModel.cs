@@ -1038,10 +1038,14 @@ namespace ScreenToGif.Model
                 var hasMenuShortcut = File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Microsoft", "Windows", "Start Menu", "Programs", "ScreenToGif.lnk"));
                 var hasDesktopShortcut = File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Desktop", "ScreenToGif.lnk"));
 
+                //MsiExec does not like relative paths.
+                var isRelative = !string.IsNullOrWhiteSpace(Global.UpdateAvailable.InstallerPath) && !Path.IsPathRooted(Global.UpdateAvailable.InstallerPath);
+                var nonRoot = isRelative ? Path.GetFullPath(Global.UpdateAvailable.InstallerPath) : Global.UpdateAvailable.InstallerPath;
+
                 var startInfo = new ProcessStartInfo
                 {
                     FileName = "msiexec",
-                    Arguments = $" {(isInstaller ? "/i" : "/a")} \"{Global.UpdateAvailable.InstallerPath}\"" +
+                    Arguments = $" {(isInstaller ? "/i" : "/a")} \"{nonRoot}\"" +
                                 $" {(isInstaller ? "INSTALLDIR" : "TARGETDIR")}=\"{AppDomain.CurrentDomain.BaseDirectory}\" INSTALLAUTOMATICALLY=yes INSTALLPORTABLE={(isInstaller ? "no" : "yes")}" +
                                 $" ADDLOCAL=Binary{(isInstaller ? ",Auxiliar" : "")}{(hasSharpDx ? ",SharpDX" : "")}{(hasGifski ? ",Gifski" : "")}" +
                                 $" {(wasPromptedManually ? "RUNAFTER=yes" : "")}" +

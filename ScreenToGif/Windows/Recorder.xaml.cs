@@ -509,7 +509,7 @@ namespace ScreenToGif.Windows
                 if (_capture != null)
                     _capture.SnapDelay = null;
 
-                if (Project?.Frames.Count > 0)
+                if (Project?.Frames?.Count > 0)
                 {
                     Stage = Stage.Paused;
                     Title = LocalizationHelper.Get("S.Recorder.Paused");
