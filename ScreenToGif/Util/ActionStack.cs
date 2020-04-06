@@ -15,8 +15,8 @@ namespace ScreenToGif.Util
 
         public static ProjectInfo Project { get; set; }
 
-        private static readonly Stack<StateChange> UndoStack = new Stack<StateChange>();
-        private static readonly Stack<StateChange> RedoStack = new Stack<StateChange>();
+        private static readonly ExtendedStack<StateChange> UndoStack = new ExtendedStack<StateChange>();
+        private static readonly ExtendedStack<StateChange> RedoStack = new ExtendedStack<StateChange>();
 
         #endregion
 
@@ -50,6 +50,9 @@ namespace ScreenToGif.Util
 
         public static void SaveState(EditAction action, List<FrameInfo> frames, List<int> positions)
         {
+            if (!ShouldSaveState())
+                return;
+
             var orderedPositions = positions.OrderBy(x => x).ToList();
             var savedFrames = new List<FrameInfo>();
             var currentFolder = CreateCurrent(true);
@@ -127,14 +130,17 @@ namespace ScreenToGif.Util
                     throw new ArgumentOutOfRangeException(nameof(action), action, null);
             }
 
-            //Clear the Redo stack.
             ClearRedo();
+            TrimUndo();
         }
 
         public static void SaveState(EditAction action, List<FrameInfo> frames, List<int> removeList, List<int> alterList)
         {
             if (action != EditAction.RemoveAndAlter)
                 throw new ArgumentException("Parameters different than RemoveAndAlter are not supported.", nameof(action));
+
+            if (!ShouldSaveState())
+                return;
 
             var savedFrames = new List<FrameInfo>();
             var currentFolder = CreateCurrent(true);
@@ -175,6 +181,9 @@ namespace ScreenToGif.Util
                 Indexes = removeList,
                 Indexes2 = alterList,
             });
+
+            ClearRedo();
+            TrimUndo();
         }
 
         /// <summary>
@@ -188,15 +197,18 @@ namespace ScreenToGif.Util
             if (action != EditAction.Add)
                 throw new ArgumentException("Parameters different than Add are not supported.", nameof(action));
 
+            if (!ShouldSaveState())
+                return;
+
             //Saves the position where the new frames will be inserted.
             UndoStack.Push(new StateChange
             {
                 Cause = action,
-                Indexes = Util.Other.CreateIndexList2(position, quantity)
+                Indexes = Util.Other.ListOfIndexes(position, quantity)
             });
 
-            //Clear the Redo stack.
             ClearRedo();
+            TrimUndo();
         }
 
         /// <summary>
@@ -209,6 +221,9 @@ namespace ScreenToGif.Util
             if (action != EditAction.Reorder)
                 throw new ArgumentException("Parameters different than Reorder are not supported.", nameof(action));
 
+            if (!ShouldSaveState())
+                return;
+
             //Saves the frames before the reordering.
             UndoStack.Push(new StateChange
             {
@@ -216,8 +231,8 @@ namespace ScreenToGif.Util
                 Frames = frames,
             });
 
-            //Clear the Redo stack.
             ClearRedo();
+            TrimUndo();
         }
 
         #endregion
@@ -953,6 +968,28 @@ namespace ScreenToGif.Util
             }
         }
 
+        private static void TrimUndo()
+        {
+            if (!UserSettings.All.SetHistoryLimit)
+                return;
+
+            if (UndoStack.Count <= UserSettings.All.HistoryLimit)
+                return;
+
+            for (var i = UserSettings.All.HistoryLimit; i < UndoStack.Count; i++)
+            {
+                var last = UndoStack.PopBottom();
+
+                foreach (var frame in last.Frames.Where(frame => frame.Path != null && File.Exists(frame.Path) && frame.Path.Contains("ActionStack" + Path.DirectorySeparatorChar + "Undo")))
+                    File.Delete(frame.Path);
+            }
+        }
+
+
+        public static bool ShouldSaveState()
+        {
+            return !UserSettings.All.SetHistoryLimit || UserSettings.All.HistoryLimit > 0;
+        }
 
         /// <summary>
         /// Verifies if the Undo stack has elements and nothing else is happening.

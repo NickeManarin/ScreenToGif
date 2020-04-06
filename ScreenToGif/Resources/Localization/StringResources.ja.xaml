@@ -184,11 +184,11 @@
     <s:String x:Key="S.Options.App.Startup.Window.Editor">エディターウィンドウ</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Info">(アプリ開始時に最初に表示するウィンドウ)</s:String>
     <s:String x:Key="S.Options.App.General">全般</s:String>
-    <s:String x:Key="S.Options.App.General.NotifyFrameDeletion">フレームを削除する前に確認</s:String>
-    <s:String x:Key="S.Options.App.General.NotifyProjectDiscard">プロジェクトを破棄する前に確認</s:String>
-    <s:String x:Key="S.Options.App.General.NotifyWhileClosingEditor">エディターを閉じる前に確認 (プロジェクトが開かれている場合)</s:String>
+    <s:String x:Key="S.Options.Editor.General.NotifyFrameDeletion">フレームを削除する前に確認</s:String>
+    <s:String x:Key="S.Options.Editor.General.NotifyProjectDiscard">プロジェクトを破棄する前に確認</s:String>
+    <s:String x:Key="S.Options.Editor.General.NotifyWhileClosingEditor">エディターを閉じる前に確認 (プロジェクトが開かれている場合)</s:String>
     <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">(Exitコマンドで)アプリ終了する前に確認</s:String>
-    <s:String x:Key="S.Options.App.General.DrawOutlineOutside">文字の外側にキャプションのアウトラインを描く</s:String>
+    <s:String x:Key="S.Options.Editor.General.DrawOutlineOutside">文字の外側にキャプションのアウトラインを描く</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">ハードウェア・アクセラレーションを使用しない</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(ユーザーインターフェースは、ソフトウェアモードでレンダリングされます)</s:String>
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">翻訳のアップデートを確認</s:String>
@@ -257,39 +257,39 @@
     <s:String x:Key="S.Options.Tasks.Info">タスクは一覧の上から下へ順番に実行されます。&#10;エディターでプロジェクトを開いたときにタスクが実行されます。</s:String>
     
     <!--Options • Interface-->
-    <s:String x:Key="S.Options.Interface.Theme">アプリのテーマ</s:String>
-    <s:String x:Key="S.Options.Interface.Theme.Scheme">配色</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground">エディター背景</s:String>
+    <s:String x:Key="S.Options.App.Theme">アプリのテーマ</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme">配色</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer">エディター背景</s:String>
     <s:String x:Key="S.Options.Interface.Recorder">レコーダーテーマ</s:String>
     <s:String x:Key="S.Options.Interface.Background">背景</s:String>
     <s:String x:Key="S.Options.Interface.Foreground">前面</s:String>
     <s:String x:Key="S.Options.Interface.BoardBackground">ボード背景</s:String>
-    <s:String x:Key="S.Options.Interface.Theme.Scheme.VeryLight">非常に明るい</s:String>
-    <s:String x:Key="S.Options.Interface.Theme.Scheme.Light">明るい</s:String>
-    <s:String x:Key="S.Options.Interface.Theme.Scheme.Medium">中間</s:String>
-    <s:String x:Key="S.Options.Interface.Theme.Scheme.Dark">暗い</s:String>
-    <s:String x:Key="S.Options.Interface.Theme.Scheme.VeryDark">とても暗い</s:String>
-    <s:String x:Key="S.Options.Interface.Theme.Scheme.Custom">カスタム</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize">グリッドサイズ</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.VerySmall">非常に小さい</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Small">小さい</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Medium">中間</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Large">大きい</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.VeryLarge">非常に大きい</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.ILikeBigSquares">大きい四角が好き</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.ImBlind">目が不自由です。</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Custom">カスタム</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.BaseColor">ベースカラー</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.EvenColor">奇数行の色</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.OddColor">偶数行の色</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Height">高さ</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Width">幅</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Apply">適用</s:String>
-    <s:String x:Key="S.Options.Interface.Other.ExtendChrome">タイトルバー(Chrome)を拡張する</s:String>
-    <s:String x:Key="S.Options.Interface.Other.HideTitleBar">タイトルバーを隠す (薄型)</s:String>
-    <s:String x:Key="S.Options.Interface.Other.TripleClickSelection">テキスト選択をトリプルクリックにする</s:String>
-    <s:String x:Key="S.Options.Interface.Other.AutomaticallySizeOnContent">フレームサイズに応じてウィンドウサイズを自動調整</s:String>
-    <s:String x:Key="S.Options.Interface.Other.AutomaticallyFitImage">ウィンドウサイズに応じてフレームサイズを自動調整</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.VeryLight">非常に明るい</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Light">明るい</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Medium">中間</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Dark">暗い</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.VeryDark">とても暗い</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Custom">カスタム</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize">グリッドサイズ</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.VerySmall">非常に小さい</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Small">小さい</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Medium">中間</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Large">大きい</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.VeryLarge">非常に大きい</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.ILikeBigSquares">大きい四角が好き</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.ImBlind">目が不自由です。</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Custom">カスタム</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.BaseColor">ベースカラー</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.EvenColor">奇数行の色</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.OddColor">偶数行の色</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Height">高さ</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Width">幅</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Apply">適用</s:String>
+    <s:String x:Key="S.Options.Editor.Interface.ExtendChrome">タイトルバー(Chrome)を拡張する</s:String>
+    <s:String x:Key="S.Options.Recorder.HideTitleBar">タイトルバーを隠す (薄型)</s:String>
+    <s:String x:Key="S.Options.Editor.General.TripleClickSelection">テキスト選択をトリプルクリックにする</s:String>
+    <s:String x:Key="S.Options.Editor.Interface.AutomaticallySizeOnContent">フレームサイズに応じてウィンドウサイズを自動調整</s:String>
+    <s:String x:Key="S.Options.Editor.Interface.AutomaticallyFitImage">ウィンドウサイズに応じてフレームサイズを自動調整</s:String>
   
     <!--Options • Shortcuts-->
     <s:String x:Key="S.Options.Shortcuts.Global">グローバル</s:String>
@@ -341,9 +341,9 @@
     <s:String x:Key="S.Options.Storage.OpenFolder">フォルダーを開く</s:String>
     <s:String x:Key="S.Options.Storage.Clear">一時フォルダークリア</s:String>
     <s:String x:Key="S.Options.Storage.LogsLocation">(エラー)ログフォルダーの場所</s:String>
-    <s:String x:Key="S.Options.Storage.LogsLocation.Choose">(エラー)ログフォルダーの場所を選択</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Logs.Choose">(エラー)ログフォルダーの場所を選択</s:String>
     <s:String x:Key="S.Options.Storage.Location">一時ファイルのフォルダー</s:String>
-    <s:String x:Key="S.Options.Storage.Location.Choose">一時ファイルの場所を選択</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Cache.Choose">一時ファイルの場所を選択</s:String>
     <s:String x:Key="S.Options.Storage.Settings">設定ファイルの場所</s:String>
     <s:String x:Key="S.Options.Storage.AppDataPath">アプリデータ:</s:String>
     <s:String x:Key="S.Options.Storage.LocalPath">ローカル:</s:String>
@@ -357,7 +357,7 @@
     <s:String x:Key="S.Options.Storage.AutomaticRemoval">古いプロジェクトを自動削除</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemoval.Info">アプリを起動時に 「オプション」 - 「一時ファイル」で設定した日数を経過したプロジェクトは消去されます。</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemovalDays.Info">(この日数を経過した古いプロジェクトは、アプリ起動時に消去/破棄されます)</s:String>
-    <s:String x:Key="S.Options.Storage.LowSpace">ハードドライブのスペースが不足しています。 一時フォルダーをクリアするか場所を変更してください。</s:String>
+    <s:String x:Key="S.Options.Storage.Status.LowSpace">ハードドライブのスペースが不足しています。 一時フォルダーをクリアするか場所を変更してください。</s:String>
     
     <!--Options • Upload-->
     <s:String x:Key="S.Options.Upload.Proxy">プロキシ</s:String>
@@ -949,10 +949,10 @@
     <s:String x:Key="FlipRotate.RotateLeft">左へ 90º 回転</s:String>
     <s:String x:Key="FlipRotate.RotateRight">右へ 90º 回転</s:String>
     
-    <s:String x:Key="Reduce.Header">フレームレート減少</s:String>
-    <s:String x:Key="Reduce.Factor">残数:</s:String>
-    <s:String x:Key="Reduce.Count">削除数:</s:String>
-    <s:String x:Key="Reduce.Info">削除されたフレームを勘定せずに、{1}フレームごとに後の{0}個のフレームを削除します。&#10;フレームレートは調整されます。</s:String>
+    <s:String x:Key="S.Reduce.Header">フレームレート減少</s:String>
+    <s:String x:Key="S.Reduce.Factor">残数:</s:String>
+    <s:String x:Key="S.Reduce.Count">削除数:</s:String>
+    <s:String x:Key="S.Reduce.Info">削除されたフレームを勘定せずに、{1}フレームごとに後の{0}個のフレームを削除します。</s:String>
 
     <s:String x:Key="S.RemoveDuplicates.Header">重複削除</s:String>
     <s:String x:Key="S.RemoveDuplicates.Similarity">類似性 (%):</s:String>

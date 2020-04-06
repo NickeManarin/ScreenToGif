@@ -148,7 +148,7 @@
     <s:String x:Key="S.Options.Title">ScreenToGif - Options</s:String>
     <s:String x:Key="S.Options.App">Application</s:String>
     <s:String x:Key="S.Options.Recorder">Recorder</s:String>
-    <s:String x:Key="S.Options.Interface">Interface</s:String>
+    <s:String x:Key="S.Options.Editor">Editor</s:String>
     <s:String x:Key="S.Options.Tasks">Tasks</s:String>
     <s:String x:Key="S.Options.Shortcuts">Shortcuts</s:String>
     <s:String x:Key="S.Options.Language">Language</s:String>
@@ -183,19 +183,14 @@
     <s:String x:Key="S.Options.App.Startup.Window.Board">Board recorder</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Editor">Editor window</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Info">(Window which shows up first when the app starts)</s:String>
-    <s:String x:Key="S.Options.App.General">General</s:String>
-    <s:String x:Key="S.Options.App.General.NotifyFrameDeletion">Ask me before deleting frames.</s:String>
-    <s:String x:Key="S.Options.App.General.NotifyProjectDiscard">Ask me before discarding a project.</s:String>
-    <s:String x:Key="S.Options.App.General.NotifyWhileClosingEditor">Ask me before closing the Editor (if there's a project opened).</s:String>
-    <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">Ask me before closing the app (via the 'Exit' command).</s:String>
-    <s:String x:Key="S.Options.App.General.DrawOutlineOutside">Draw the outline of captions outside the letters.</s:String>
-    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">Disable hardware acceleration.</s:String>
-    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(The user interface will be rendered via software mode)</s:String>
-    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">Check for translation updates.</s:String>
-    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(Updated translations will be downloaded and installed automatically)</s:String>
-    <s:String x:Key="S.Options.App.General.CheckForUpdates">Check for updates on startup.</s:String>
-    <s:String x:Key="S.Options.App.General.UpdateOnClose">Automatically install updates after closing the app.</s:String>
-    <s:String x:Key="S.Options.App.General.PromptToInstall">Prompt me before the installation starts.</s:String>
+    <s:String x:Key="S.Options.App.Theme">Theme</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme">Color scheme:</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.VeryLight">Very Light</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Light">Light</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Medium">Medium</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Dark">Dark</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.VeryDark">Very Dark</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Custom">Custom</s:String>
     <s:String x:Key="S.Options.App.Tray">System tray icon</s:String>
     <s:String x:Key="S.Options.App.Tray.Show">Display the app on the system tray (notification area).</s:String>
     <s:String x:Key="S.Options.App.Tray.LeaveOpen">Keep the app open even if all windows are closed.</s:String>
@@ -210,6 +205,15 @@
     <s:String x:Key="S.Options.App.Tray.Interactions.Middle">Middle click:</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Window">Window:</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Else">Or else, opens:</s:String>
+    <s:String x:Key="S.Options.App.General">General</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">Ask me before closing the app (via the 'Exit' command).</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">Disable hardware acceleration.</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(The user interface will be rendered via software mode)</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">Check for translation updates.</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(Updated translations will be downloaded and installed automatically)</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForUpdates">Check for updates on startup.</s:String>
+    <s:String x:Key="S.Options.App.General.UpdateOnClose">Automatically install updates after closing the app.</s:String>
+    <s:String x:Key="S.Options.App.General.PromptToInstall">Prompt me before the installation starts.</s:String>
 
     <!--Options • Recorder-->
     <s:String x:Key="S.Options.Recorder.Interface">Interface</s:String>
@@ -241,6 +245,7 @@
     <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Constant delay that does not change with recording lag)</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording">Enable asynchronous recording.</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(It helps reduce the interface lag when recording)</s:String>
+    <s:String x:Key="S.Options.Recorder.HideTitleBar">Hide the title bar (thin mode).</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier">Enable the screen magnifier.</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier.Info">(It enables a magnifier while selecting the recording area)</s:String>
     <s:String x:Key="S.Options.Recorder.CursorFollowing">Enable cursor following.</s:String>
@@ -248,6 +253,35 @@
     <s:String x:Key="S.Options.Recorder.FollowMargin.Info">(Buffer margin in pixels, where the recording area starts getting repositioned)</s:String>
     <s:String x:Key="S.Options.Recorder.FollowMarginInvisible.Info">(Additional buffer margin in pixels, where the UI starts getting hidden)</s:String>
 
+    <!--Options • Editor-->
+    <s:String x:Key="S.Options.Editor.Previewer">Previewer background</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize">Grid Size:</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.VerySmall">Very Small</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Small">Small</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Medium">Medium</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Large">Large</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.VeryLarge">Very Large</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.ILikeBigSquares">I Like Big Squares</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.ImBlind">I'm Blind</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Custom">Custom</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Height">Height</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Width">Width</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Apply">Apply</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.BaseColor">Base Color</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.EvenColor">Even Color</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.OddColor">Odd Color</s:String>
+    <s:String x:Key="S.Options.Editor.Interface.ExtendChrome">Extend titlebar (window chrome).</s:String>
+    <s:String x:Key="S.Options.Editor.Interface.AutomaticallySizeOnContent">Automatically adjust the window size based on the frame size, right after loading.</s:String>
+    <s:String x:Key="S.Options.Editor.Interface.AutomaticallyFitImage">Automatically adjust the frame zoom based on the window size, right after loading.</s:String>
+    <s:String x:Key="S.Options.Editor.General.NotifyFrameDeletion">Ask me before deleting frames.</s:String>
+    <s:String x:Key="S.Options.Editor.General.NotifyProjectDiscard">Ask me before discarding a project.</s:String>
+    <s:String x:Key="S.Options.Editor.General.NotifyWhileClosingEditor">Ask me before closing the Editor (if there's a project opened).</s:String>
+    <s:String x:Key="S.Options.Editor.General.TripleClickSelection">Enable triple-click to select the text.</s:String>
+    <s:String x:Key="S.Options.Editor.General.DrawOutlineOutside">Draw the outline of captions outside the letters.</s:String>
+    <s:String x:Key="S.Options.Editor.General.LimitHistory">Impose a limit to the undo/redo history.</s:String>
+    <s:String x:Key="S.Options.Editor.General.LimitHistory.Info">(Older actions will be removed when the limit is reached)</s:String>
+    <s:String x:Key="S.Options.Editor.General.LimitHistory.Maximum">(Maximum number of actions stored)</s:String>
+    
     <!--Options • Tasks-->
     <s:String x:Key="S.Options.Tasks.Title">Automated Task</s:String>
     <s:String x:Key="S.Options.Tasks.List">List of automated tasks</s:String>
@@ -255,41 +289,6 @@
     <s:String x:Key="S.Options.Tasks.List.Details">Details</s:String>
     <s:String x:Key="S.Options.Tasks.SelectType">(Pick a task)</s:String>
     <s:String x:Key="S.Options.Tasks.Info">These tasks are executed sequentially from the top of the list to the bottom.&#10;It happens when you first open a project using the editor.</s:String>
-    
-    <!--Options • Interface-->
-    <s:String x:Key="S.Options.Interface.Theme">App's theme</s:String>
-    <s:String x:Key="S.Options.Interface.Theme.Scheme">Color scheme</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground">Editor background</s:String>
-    <s:String x:Key="S.Options.Interface.Recorder">Recorder theme</s:String>
-    <s:String x:Key="S.Options.Interface.Background">Background</s:String>
-    <s:String x:Key="S.Options.Interface.Foreground">Foreground</s:String>
-    <s:String x:Key="S.Options.Interface.BoardBackground">Board background</s:String>
-    <s:String x:Key="S.Options.Interface.Theme.Scheme.VeryLight">Very Light</s:String>
-    <s:String x:Key="S.Options.Interface.Theme.Scheme.Light">Light</s:String>
-    <s:String x:Key="S.Options.Interface.Theme.Scheme.Medium">Medium</s:String>
-    <s:String x:Key="S.Options.Interface.Theme.Scheme.Dark">Dark</s:String>
-    <s:String x:Key="S.Options.Interface.Theme.Scheme.VeryDark">Very Dark</s:String>
-    <s:String x:Key="S.Options.Interface.Theme.Scheme.Custom">Custom</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize">Grid Size</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.VerySmall">Very Small</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Small">Small</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Medium">Medium</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Large">Large</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.VeryLarge">Very Large</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.ILikeBigSquares">I Like Big Squares</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.ImBlind">I'm Blind</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Custom">Custom</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.BaseColor">Base Color</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.EvenColor">Even Color</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.OddColor">Odd Color</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Height">Height</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Width">Width</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Apply">Apply</s:String>
-    <s:String x:Key="S.Options.Interface.Other.ExtendChrome">Extend titlebar (window chrome).</s:String>
-    <s:String x:Key="S.Options.Interface.Other.HideTitleBar">Hide the title bar (thin mode).</s:String>
-    <s:String x:Key="S.Options.Interface.Other.TripleClickSelection">Enable triple-click to select the text.</s:String>
-    <s:String x:Key="S.Options.Interface.Other.AutomaticallySizeOnContent">Automatically adjust the window size based on the frame size, right after loading.</s:String>
-    <s:String x:Key="S.Options.Interface.Other.AutomaticallyFitImage">Automatically adjust the frame zoom based on the window size, right after loading.</s:String>
   
     <!--Options • Shortcuts-->
     <s:String x:Key="S.Options.Shortcuts.Global">Global</s:String>
@@ -335,15 +334,26 @@
     <s:String x:Key="S.Options.Language.AppLanguage.Translate.EmailLink.Tooltip">Opens your email app</s:String>
     
     <!--Options • Storage-->
-    <s:String x:Key="S.Options.Storage.FilesAndFolders">Temporary files and folders</s:String>
-    <s:String x:Key="S.Options.Storage.FilesAndFolders.Count">{0} folders and {1} files</s:String>
-    <s:String x:Key="S.Options.Storage.FilesAndFolders.None">No folder or file detected</s:String>
-    <s:String x:Key="S.Options.Storage.OpenFolder">Browse Folder</s:String>
-    <s:String x:Key="S.Options.Storage.Clear">Clear Temp. Folder</s:String>
-    <s:String x:Key="S.Options.Storage.LogsLocation">Logs folder</s:String>
-    <s:String x:Key="S.Options.Storage.LogsLocation.Choose">Choose the location for the error log files</s:String>
-    <s:String x:Key="S.Options.Storage.Location">Location folder</s:String>
-    <s:String x:Key="S.Options.Storage.Location.Choose">Choose the location for the temporary files</s:String>
+    <s:String x:Key="S.Options.Storage.Status">Status</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Volume">Volume:</s:String>
+    <s:String x:Key="S.Options.Storage.Status.FreeSpace">{0} free of {1}</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Check">Check again how much space left there is.</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Clear">Clear the cache folder.&#10;You'll be able to decide if you want to keep recent projects or not.</s:String>
+    <s:String x:Key="S.Options.Storage.Status.LowSpace">Low on space on the current selected hard drive. Please, clean the cache folder or change the location.</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Error">Impossible to retrieve the drive details.</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Files.None">No files</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Files.Singular">{0:##,##0} file</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Files.Plural">{0:##,##0} files</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Folders.None">No folders</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Folders.Singular">{0:##,##0} folder</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Folders.Plural">{0:##,##0} folders</s:String>
+    <s:String x:Key="S.Options.Storage.Status.InUse">{0} in use</s:String>
+    <s:String x:Key="S.Options.Storage.Paths">Paths</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Cache">Cache:</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Cache.Choose">Choose the location for the cache (temporary files).</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Logs">Logs:</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Logs.Choose">Choose the location for the error log files.</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Browse">Browse the selected folder.</s:String>
     <s:String x:Key="S.Options.Storage.Settings">Settings location</s:String>
     <s:String x:Key="S.Options.Storage.AppDataPath">AppData:</s:String>
     <s:String x:Key="S.Options.Storage.LocalPath">Local:</s:String>
@@ -352,12 +362,18 @@
     <s:String x:Key="S.Options.Storage.RemoveSettings">Remove the settings file.</s:String>
     <s:String x:Key="S.Options.Storage.OpenSettingsFolder">Open the folder where the settings file is located.&#x0d;Hold Ctrl while clicking to open the file, if possible.</s:String>
     <s:String x:Key="S.Options.Storage.SettingsInfo">• Settings loading pattern: Default ◄ AppData ◄ Local.&#x0d;• If there's no settings file present at the Local folder, the app searches inside the AppData folder, Default is used if no settings file present.&#x0d;• If there's no Local settings, all settings are saved on the AppData settings file.</s:String>
-    <s:String x:Key="S.Options.Storage.KeepRecent">Should we keep recent projects?</s:String>
-    <s:String x:Key="S.Options.Storage.KeepRecent.Info">If you think so, all recent projects less than a few days old will not be erased.&#x0d;&#x0d;Anyway, any project open will not be erased.</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemoval">Automatically remove old projects.</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemoval.Info">When opening the app, a background task will erase any closed projects older than the amount of time configured.</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemovalDays.Info">(in days, any closed project older than this will be erased/discarded after opening the app)</s:String>
-    <s:String x:Key="S.Options.Storage.LowSpace">Low on space on the current selected hard drive. Please, clean the temp folder or change the location.</s:String>
+    
+    <!--Options • Storage > Clear cache-->
+    <s:String x:Key="S.Options.Storage.Cache.Title">ScreenToGif - Clear Cache</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.Header">Would you like to clear the cache folder?</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.Info">When you create a recording or open something to edit, a project is created and stored inside the cache folder.</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.Question">Would you like to remove these projects from the cache folder?</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.IgnoreRecent">Don't remove recent projects.</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.IgnoreRecent.Yes">(Only the projects older than {0} days, that are not currently in use, will be removed)</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.IgnoreRecent.No">(All the projects, that are not currently in use, will be removed)</s:String>
     
     <!--Options • Upload-->
     <s:String x:Key="S.Options.Upload.Proxy">Proxy</s:String>
@@ -949,11 +965,20 @@
     <s:String x:Key="FlipRotate.RotateLeft">Rotate Left 90º</s:String>
     <s:String x:Key="FlipRotate.RotateRight">Rotate Right 90º</s:String>
     
-    <s:String x:Key="Reduce.Header">Reduce framerate</s:String>
-    <s:String x:Key="Reduce.Factor">Factor:</s:String>
-    <s:String x:Key="Reduce.Count">Remove Count:</s:String>
-    <s:String x:Key="Reduce.Info">It will remove {0} frame(s) after every {1} frame(s), without counting the removed ones.&#10;Framerate will be adjusted.</s:String>
-
+    <s:String x:Key="S.Reduce.Header">Reduce framerate</s:String>
+    <s:String x:Key="S.Reduce.Factor">Factor:</s:String>
+    <s:String x:Key="S.Reduce.Count">Remove Count:</s:String>
+    <s:String x:Key="S.Reduce.Delay">Delay adjustment:</s:String>
+    <s:String x:Key="S.Reduce.Delay.NoAdjustment">Don't adjust</s:String>
+    <s:String x:Key="S.Reduce.Delay.Previous">Sum with the previous frame</s:String>
+    <s:String x:Key="S.Reduce.Delay.Evenly">Sum evenly with the remaining frames</s:String>
+    <s:String x:Key="S.Reduce.ApplyToAll">Reduce the framerate of the entire project.</s:String>
+    <s:String x:Key="S.Reduce.ApplyToAll.Info">If the option is unchecked, you must select multiple consecutive frames,&#10;greater than the removal factor.</s:String>
+    <s:String x:Key="S.Reduce.Info">It will remove {0} frame(s) after every {1} frame(s), without counting the removed ones.</s:String>
+    <s:String x:Key="S.Reduce.Warning.NoSelection">You must select the frames to apply the framerate reduction (or check the option to apply to the entire project).</s:String>
+    <s:String x:Key="S.Reduce.Warning.NonConsecutive">The list of frames selected must be consecutive. You can't leave some frames unselected among selected ones.</s:String>
+    <s:String x:Key="S.Reduce.Warning.SmallerThanFactor">The selection of frames must be greater than the removal factor, in order for the feature to be able to remove anything.</s:String>
+    
     <s:String x:Key="S.RemoveDuplicates.Header">Remove duplicates</s:String>
     <s:String x:Key="S.RemoveDuplicates.Similarity">Similarity (%):</s:String>
     <s:String x:Key="S.RemoveDuplicates.Removal">Frame removal:</s:String>

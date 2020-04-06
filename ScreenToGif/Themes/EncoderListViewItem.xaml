@@ -176,7 +176,7 @@
                     <n:ImageMenuItem x:Name="CopyImageMenuItem" Header="{DynamicResource Encoder.Copy.Image}" Visibility="Collapsed"/>
                     <n:ImageMenuItem x:Name="CopyFilenameMenuItem" Header="{DynamicResource Encoder.Copy.Filename}"/>
                     <n:ImageMenuItem x:Name="CopyFolderMenuItem" Header="{DynamicResource Encoder.Copy.Folder}"/>
-                    <n:ImageMenuItem x:Name="CopyLinkMenuItem" Header="{DynamicResource Encoder.Copy.Link}"/>
+                    <n:ImageMenuItem x:Name="CopyLinkMenuItem" Header="{DynamicResource Encoder.Copy.Link}" Visibility="Collapsed"/>
                 </ContextMenu>
             </Border.ContextMenu>
         </Border>
@@ -194,7 +194,6 @@
 
             <Trigger Property="OutputType" Value="Gif">
                 <Setter TargetName="FileButton" Property="Content" Value="{DynamicResource Vector.Gif}"/>
-                <Setter TargetName="CopyImageMenuItem" Property="Visibility" Value="Visible"/>
             </Trigger>
             <Trigger Property="OutputType" Value="Apng">
                 <Setter TargetName="FileButton" Property="Content" Value="{DynamicResource Vector.Apng}"/>
@@ -228,6 +227,7 @@
 
             <Trigger Property="Uploaded" Value="True">
                 <Setter TargetName="UploadedTextBlock" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="CopyLinkMenuItem" Property="Visibility" Value="Visible"/>
             </Trigger>
 
             <Trigger Property="UploadTaskException" Value="{x:Null}">

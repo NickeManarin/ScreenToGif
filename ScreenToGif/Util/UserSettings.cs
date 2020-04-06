@@ -490,31 +490,7 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
-        public bool NotifyFrameDeletion
-        {
-            get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
-        public bool NotifyProjectDiscard
-        {
-            get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
-        public bool NotifyWhileClosingEditor
-        {
-            get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
         public bool NotifyWhileClosingApp
-        {
-            get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
-        public bool DrawOutlineOutside
         {
             get => (bool)GetValue();
             set => SetValue(value);
@@ -623,6 +599,18 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public bool RecorderThinMode
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool Magnifier
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
         public bool UseDesktopDuplication
         {
             get => (bool)GetValue();
@@ -644,6 +632,48 @@ namespace ScreenToGif.Util
         public int MemoryCacheSize
         {
             get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public AppTheme MainTheme
+        {
+            get => (AppTheme)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color RecorderBackground
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color RecorderForeground
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color BoardGridBackground
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color BoardGridColor1
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color BoardGridColor2
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public Rect BoardGridSize
+        {
+            get => (Rect)GetValue();
             set => SetValue(value);
         }
 
@@ -689,12 +719,6 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
-        public bool Magnifier
-        {
-            get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
         public bool CursorFollowing
         {
             get => (bool)GetValue();
@@ -715,13 +739,7 @@ namespace ScreenToGif.Util
 
         #endregion
 
-        #region Options • Interface
-
-        public AppTheme MainTheme
-        {
-            get => (AppTheme)GetValue();
-            set => SetValue(value);
-        }
+        #region Options • Editor
 
         public Color GridColor1
         {
@@ -741,57 +759,9 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
-        public Color RecorderBackground
-        {
-            get => (Color)GetValue();
-            set => SetValue(value);
-        }
-
-        public Color RecorderForeground
-        {
-            get => (Color)GetValue();
-            set => SetValue(value);
-        }
-
-        public Color BoardGridBackground
-        {
-            get => (Color)GetValue();
-            set => SetValue(value);
-        }
-
-        public Color BoardGridColor1
-        {
-            get => (Color)GetValue();
-            set => SetValue(value);
-        }
-
-        public Color BoardGridColor2
-        {
-            get => (Color)GetValue();
-            set => SetValue(value);
-        }
-
-        public Rect BoardGridSize
-        {
-            get => (Rect)GetValue();
-            set => SetValue(value);
-        }
-
         public bool EditorExtendChrome
         {
             get => (bool)GetValue(defaultValue: false);
-            set => SetValue(value);
-        }
-
-        public bool RecorderThinMode
-        {
-            get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
-        public bool TripleClickSelection
-        {
-            get => (bool)GetValue();
             set => SetValue(value);
         }
 
@@ -804,6 +774,48 @@ namespace ScreenToGif.Util
         public bool AutomaticallyFitImage
         {
             get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool NotifyFrameDeletion
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool NotifyProjectDiscard
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool NotifyWhileClosingEditor
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool TripleClickSelection
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool DrawOutlineOutside
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool SetHistoryLimit
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public int HistoryLimit
+        {
+            get => (int)GetValue();
             set => SetValue(value);
         }
 
@@ -960,15 +972,15 @@ namespace ScreenToGif.Util
 
         #endregion
 
-        #region Options • Temporary Files
+        #region Options • Storage
 
-        public string LogsFolder
+        public string TemporaryFolder
         {
             get => (string)GetValue();
             set => SetValue(value);
         }
 
-        public string TemporaryFolder
+        public string LogsFolder
         {
             get => (string)GetValue();
             set => SetValue(value);
@@ -1750,6 +1762,18 @@ namespace ScreenToGif.Util
         public int ReduceCount
         {
             get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public ReduceDelayType ReduceDelay
+        {
+            get => (ReduceDelayType)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool ReduceApplyToAll
+        {
+            get => (bool)GetValue();
             set => SetValue(value);
         }
 

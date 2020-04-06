@@ -92,11 +92,11 @@
     <s:String x:Key="S.Options.Other">Otros</s:String>
     <s:String x:Key="S.Options.App.Tray.Show">Mostrar el programa en la bandeja de notificaciones del sistema (el área de notificaciones)</s:String>
     <s:String x:Key="S.Options.App.Tray.LeaveOpen">Mantener el programa abierto, incluso si se cierran todas las ventanas</s:String>
-    <s:String x:Key="S.Options.App.General.NotifyFrameDeletion">Preguntarme antes de borrar los fotogramas</s:String>
-    <s:String x:Key="S.Options.App.General.NotifyProjectDiscard">Preguntarme antes de descartar un proyecto</s:String>
-    <s:String x:Key="S.Options.App.General.NotifyWhileClosingEditor">Preguntarme antes de cerrar el editor (si hay un proyecto abierto)</s:String>
+    <s:String x:Key="S.Options.Editor.General.NotifyFrameDeletion">Preguntarme antes de borrar los fotogramas</s:String>
+    <s:String x:Key="S.Options.Editor.General.NotifyProjectDiscard">Preguntarme antes de descartar un proyecto</s:String>
+    <s:String x:Key="S.Options.Editor.General.NotifyWhileClosingEditor">Preguntarme antes de cerrar el editor (si hay un proyecto abierto)</s:String>
     <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">Preguntarme antes de cerrar el programa (vía el comando "Exit")</s:String>
-    <s:String x:Key="S.Options.App.General.DrawOutlineOutside">Dibujar el contorno del texto por fuera de las letras</s:String>
+    <s:String x:Key="S.Options.Editor.General.DrawOutlineOutside">Dibujar el contorno del texto por fuera de las letras</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">Deshabilitar aceleración por hardware</s:String>
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">Buscar actualizaciones de localización</s:String>
     <s:String x:Key="S.Options.App.General.CheckForUpdates">Buscar actualizaciones</s:String>
@@ -113,41 +113,41 @@
     <s:String x:Key="S.Options.Tasks.SelectType">(Elegí una tarea)</s:String>
     <s:String x:Key="S.Options.Tasks.Info">Estas tareas se ejecutan secuencialmente desde arriba de la lista hacia abajo.&#10;Esto sucede cuando abrís un proyecto por primera vez usando el editor.</s:String>
     
-    <s:String x:Key="S.Options.Interface.EditorBackground">Fondo del editor</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer">Fondo del editor</s:String>
     <s:String x:Key="S.Options.Interface.Recorder">Tema del grabador</s:String>
     <s:String x:Key="S.Options.Interface.Background">Fondo</s:String>
     <s:String x:Key="S.Options.Interface.Foreground">Frente</s:String>
     <s:String x:Key="S.Options.Interface.BoardBackground">Fondo de pizarra</s:String>
-    <s:String x:Key="S.Options.Interface.Theme.Scheme">Esquema de colores</s:String>
-    <s:String x:Key="S.Options.Interface.Theme.Scheme.VeryLight">Muy claro</s:String>
-    <s:String x:Key="S.Options.Interface.Theme.Scheme.Light">Claro</s:String>
-    <s:String x:Key="S.Options.Interface.Theme.Scheme.Medium">Medio</s:String>
-    <s:String x:Key="S.Options.Interface.Theme.Scheme.Dark">Oscuro</s:String>
-    <s:String x:Key="S.Options.Interface.Theme.Scheme.Custom">Personalizado</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme">Esquema de colores</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.VeryLight">Muy claro</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Light">Claro</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Medium">Medio</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Dark">Oscuro</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Custom">Personalizado</s:String>
     
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize">Tamaño de grilla</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.VerySmall">Muy pequeño</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Small">Pequeño</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Medium">Medio</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Large">Grande</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.VeryLarge">Muy grande</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.ILikeBigSquares">Quiero cuadros grandes</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.ImBlind">Soy ciego/a</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Custom">Personalizado</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize">Tamaño de grilla</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.VerySmall">Muy pequeño</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Small">Pequeño</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Medium">Medio</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Large">Grande</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.VeryLarge">Muy grande</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.ILikeBigSquares">Quiero cuadros grandes</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.ImBlind">Soy ciego/a</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Custom">Personalizado</s:String>
 
-    <s:String x:Key="S.Options.Interface.EditorBackground.BaseColor">Color base</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.EvenColor">Color par</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.OddColor">Color impar</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Height">Altura</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Width">Anchura</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Apply">Aplicar</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.BaseColor">Color base</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.EvenColor">Color par</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.OddColor">Color impar</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Height">Altura</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Width">Anchura</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Apply">Aplicar</s:String>
 
     <s:String x:Key="S.Options.Interface.Other">Otros</s:String>
-    <s:String x:Key="S.Options.Interface.Other.ExtendChrome">Extender barra de título / croma</s:String>
-    <s:String x:Key="S.Options.Interface.Other.HideTitleBar">Ocultar la barra de título (modo delgado)</s:String>
-    <s:String x:Key="S.Options.Interface.Other.TripleClickSelection">Habilitar triple clic para seleccionar el texto</s:String>
-    <s:String x:Key="S.Options.Interface.Other.AutomaticallySizeOnContent">Ajustar automáticamente el tamaño de la ventana basado en el tamaño del fotograma, justo después de la carga.</s:String>
-    <s:String x:Key="S.Options.Interface.Other.AutomaticallyFitImage">Ajustar automáticamente el acercamiento del fotograma basado en el tamaño de la ventana, justo después de la carga.</s:String>
+    <s:String x:Key="S.Options.Editor.Interface.ExtendChrome">Extender barra de título / croma</s:String>
+    <s:String x:Key="S.Options.Recorder.HideTitleBar">Ocultar la barra de título (modo delgado)</s:String>
+    <s:String x:Key="S.Options.Editor.General.TripleClickSelection">Habilitar triple clic para seleccionar el texto</s:String>
+    <s:String x:Key="S.Options.Editor.Interface.AutomaticallySizeOnContent">Ajustar automáticamente el tamaño de la ventana basado en el tamaño del fotograma, justo después de la carga.</s:String>
+    <s:String x:Key="S.Options.Editor.Interface.AutomaticallyFitImage">Ajustar automáticamente el acercamiento del fotograma basado en el tamaño de la ventana, justo después de la carga.</s:String>
   
     <s:String x:Key="S.Options.Shortcuts.Global">Global</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.ScreenRecorder">Grabador de pantalla:</s:String>
@@ -192,9 +192,9 @@
     <s:String x:Key="S.Options.Storage.OpenFolder">Abrir carpeta</s:String>
     <s:String x:Key="S.Options.Storage.Clear">Limpiar carpeta de archivos temporales</s:String>
     <s:String x:Key="S.Options.Storage.LogsLocation">Carpeta de registros</s:String>
-    <s:String x:Key="S.Options.Storage.LogsLocation.Choose">Elegí la ubicación para los archivos de registro de errores</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Logs.Choose">Elegí la ubicación para los archivos de registro de errores</s:String>
     <s:String x:Key="S.Options.Storage.Location">Carpeta de ubicación</s:String>
-    <s:String x:Key="S.Options.Storage.Location.Choose">Elegí la ubicación para los archivos temporales</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Cache.Choose">Elegí la ubicación para los archivos temporales</s:String>
     <s:String x:Key="S.Options.Storage.Settings">Ubicación de la configuración</s:String>
     <s:String x:Key="S.Options.Storage.AppDataPath">AppData:</s:String>
     <s:String x:Key="S.Options.Storage.LocalPath">Local:</s:String>
@@ -208,7 +208,7 @@
     <s:String x:Key="S.Options.Storage.AutomaticRemoval">Quitar los proyectos viejos automáticamente</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemoval.Info">Al abrir el editor, una tarea en segundo plano eliminará los proyectos más antiguos que la cantidad configurada</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemovalDays.Info">(en días, cualquier proyecto más antiguo que este tiempo será eliminado/descartado después de abrir el editor)</s:String>
-    <s:String x:Key="S.Options.Storage.LowSpace">Hay poco espacio en la unidad seleccionada actualmente. Por favor, limpiá la carpeta de archivos temporales o cambiá de unidad.</s:String>
+    <s:String x:Key="S.Options.Storage.Status.LowSpace">Hay poco espacio en la unidad seleccionada actualmente. Por favor, limpiá la carpeta de archivos temporales o cambiá de unidad.</s:String>
     
     <s:String x:Key="S.Options.Upload.Proxy">Servidor proxy</s:String>
     <s:String x:Key="S.Options.Upload.Proxy.Mode">Modo:</s:String>
@@ -735,10 +735,10 @@
     <s:String x:Key="FlipRotate.RotateLeft">Girar hacia la izquierda 90º</s:String>
     <s:String x:Key="FlipRotate.RotateRight">Girar a la derecha 90º</s:String>
     
-    <s:String x:Key="Reduce.Header">Reducir la tasa de fotogramas</s:String>
-    <s:String x:Key="Reduce.Factor">Factor:</s:String>
-    <s:String x:Key="Reduce.Count">Quitar conteo:</s:String>
-    <s:String x:Key="Reduce.Info">Quitará {0} fotograma/s luego de cada {1} fotograma/s, sin contar los quitados.&#10;Se ajustará la tasa de fotogramas.</s:String>
+    <s:String x:Key="S.Reduce.Header">Reducir la tasa de fotogramas</s:String>
+    <s:String x:Key="S.Reduce.Factor">Factor:</s:String>
+    <s:String x:Key="S.Reduce.Count">Quitar conteo:</s:String>
+    <s:String x:Key="S.Reduce.Info">Quitará {0} fotograma/s luego de cada {1} fotograma/s, sin contar los quitados.</s:String>
 
     <s:String x:Key="S.RemoveDuplicates.Header">Quitar duplicados</s:String>
     <s:String x:Key="S.RemoveDuplicates.Similarity">Similitud (%):</s:String>

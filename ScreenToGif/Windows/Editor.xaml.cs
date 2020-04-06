@@ -1150,7 +1150,8 @@ namespace ScreenToGif.Windows
                 {
                     var selected = new Uri(GetOutputFolder());
                     var baseFolder = new Uri(AppDomain.CurrentDomain.BaseDirectory);
-                    var relativeFolder = Uri.UnescapeDataString(baseFolder.MakeRelativeUri(selected).ToString());
+                    var relativeFolder = selected.AbsolutePath.TrimEnd(Path.DirectorySeparatorChar).TrimEnd(Path.AltDirectorySeparatorChar) == baseFolder.AbsolutePath.TrimEnd(Path.DirectorySeparatorChar).TrimEnd(Path.AltDirectorySeparatorChar) ?
+                        "." : Uri.UnescapeDataString(baseFolder.MakeRelativeUri(selected).ToString());
 
                     //This app even returns you the correct slashes/backslashes.
                     SetOutputFolder(notAlt ? relativeFolder : relativeFolder.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar));
@@ -2291,7 +2292,7 @@ namespace ScreenToGif.Windows
                     return;
             }
 
-            ActionStack.SaveState(ActionStack.EditAction.Remove, Project.Frames, Util.Other.CreateIndexList(0, FrameListView.SelectedIndex - 1));
+            ActionStack.SaveState(ActionStack.EditAction.Remove, Project.Frames, Util.Other.ListOfIndexesOld(0, FrameListView.SelectedIndex - 1));
 
             var count = FrameListView.SelectedIndex;
 
@@ -2319,7 +2320,7 @@ namespace ScreenToGif.Windows
 
             var countList = FrameListView.Items.Count - 1; //So we have a fixed value.
 
-            ActionStack.SaveState(ActionStack.EditAction.Remove, Project.Frames, Util.Other.CreateIndexList2(FrameListView.SelectedIndex + 1, FrameListView.Items.Count - FrameListView.SelectedIndex - 1));
+            ActionStack.SaveState(ActionStack.EditAction.Remove, Project.Frames, Util.Other.ListOfIndexes(FrameListView.SelectedIndex + 1, FrameListView.Items.Count - FrameListView.SelectedIndex - 1));
 
             var count = FrameListView.Items.Count - FrameListView.SelectedIndex - 1;
 
@@ -2359,10 +2360,31 @@ namespace ScreenToGif.Windows
 
         private void ApplyReduceFrameCountButton_Click(object sender, RoutedEventArgs e)
         {
+            var selected = UserSettings.All.ReduceApplyToAll ? Util.Other.ListOfIndexes(0, Project.Frames.Count - 1) : SelectedFramesIndex();
+
+            if (selected.Count == 0)
+            {
+                StatusList.Warning(LocalizationHelper.Get("S.Reduce.Warning.NoSelection"));
+                return;
+            }
+
+            //Detects if there's any non-consecutive frames selected.
+            if (!selected.All(v => selected.Contains(v + 1) || v == selected.Last()))
+            {
+                StatusList.Warning(LocalizationHelper.Get("S.Reduce.Warning.NonConsecutive"));
+                return;
+            }
+
+            if (selected.Count <= UserSettings.All.ReduceFactor)
+            {
+                StatusList.Warning(LocalizationHelper.Get("S.Reduce.Warning.SmallerThanFactor"));
+                return;
+            }
+
             Cursor = Cursors.AppStarting;
 
             _reduceFrameDel = ReduceFrameCount;
-            _reduceFrameDel.BeginInvoke(ReduceFactorIntegerUpDown.Value, ReduceCountIntegerUpDown.Value, ReduceFrameCountCallback, null);
+            _reduceFrameDel.BeginInvoke(selected, UserSettings.All.ReduceFactor, UserSettings.All.ReduceCount, UserSettings.All.ReduceDelay, ReduceFrameCountCallback, null);
 
             ClosePanel();
         }
@@ -2621,7 +2643,7 @@ namespace ScreenToGif.Windows
 
         private void Image_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = FrameListView != null && FrameListView.SelectedItem != null && !IsLoading;
+            e.CanExecute = FrameListView?.SelectedItem != null && !IsLoading;
         }
 
         #region Size and Position
@@ -2713,7 +2735,7 @@ namespace ScreenToGif.Windows
                 return;
             }
 
-            ActionStack.SaveState(ActionStack.EditAction.ImageAndProperties, Project.Frames, Util.Other.CreateIndexList2(0, Project.Frames.Count));
+            ActionStack.SaveState(ActionStack.EditAction.ImageAndProperties, Project.Frames, Util.Other.ListOfIndexes(0, Project.Frames.Count));
 
             Cursor = Cursors.AppStarting;
 
@@ -2845,7 +2867,7 @@ namespace ScreenToGif.Windows
                 return;
             }
 
-            ActionStack.SaveState(ActionStack.EditAction.ImageAndProperties, Project.Frames, Util.Other.CreateIndexList2(0, Project.Frames.Count));
+            ActionStack.SaveState(ActionStack.EditAction.ImageAndProperties, Project.Frames, Util.Other.ListOfIndexes(0, Project.Frames.Count));
 
             Cursor = Cursors.AppStarting;
 
@@ -2878,7 +2900,7 @@ namespace ScreenToGif.Windows
 
             //If it's a rotate operation, the entire list of frames will be altered.
             var selectedIndexes = type == FlipRotateType.RotateLeft90 || type == FlipRotateType.RotateRight90
-                ? Util.Other.CreateIndexList2(0, Project.Frames.Count)
+                ? Util.Other.ListOfIndexes(0, Project.Frames.Count)
                 : SelectedFramesIndex();
 
             ActionStack.SaveState(ActionStack.EditAction.ImageAndProperties, Project.Frames, selectedIndexes);
@@ -2905,13 +2927,13 @@ namespace ScreenToGif.Windows
         {
             if (CaptionTextBox.Text.Trim().Length == 0)
             {
-                StatusList.Warning(FindResource("Editor.Caption.WarningNoText").ToString());
+                StatusList.Warning(LocalizationHelper.Get("Editor.Caption.WarningNoText"));
                 return;
             }
 
             if (FrameListView.SelectedIndex == -1)
             {
-                StatusList.Warning(FindResource("Editor.Caption.WarningSelection").ToString());
+                StatusList.Warning(LocalizationHelper.Get("Editor.Caption.WarningSelection"));
                 return;
             }
 
@@ -3020,7 +3042,7 @@ namespace ScreenToGif.Windows
             if (!result.HasValue || !result.Value)
                 return;
 
-            ActionStack.SaveState(ActionStack.EditAction.Properties, Project.Frames, Util.Other.CreateIndexList2(0, Project.Frames.Count));
+            ActionStack.SaveState(ActionStack.EditAction.Properties, Project.Frames, Util.Other.ListOfIndexes(0, Project.Frames.Count));
 
             for (var i = 0; i < keyStrokes.InternalList.Count; i++)
                 Project.Frames[i].KeyList = new List<SimpleKeyGesture>(keyStrokes.InternalList[i].KeyList);
@@ -3034,7 +3056,7 @@ namespace ScreenToGif.Windows
                 return;
             }
 
-            ActionStack.SaveState(ActionStack.EditAction.ImageAndProperties, Project.Frames, Util.Other.CreateIndexList2(0, Project.Frames.Count));
+            ActionStack.SaveState(ActionStack.EditAction.ImageAndProperties, Project.Frames, Util.Other.ListOfIndexes(0, Project.Frames.Count));
 
             Cursor = Cursors.AppStarting;
 
@@ -3174,7 +3196,7 @@ namespace ScreenToGif.Windows
                 return;
             }
 
-            ActionStack.SaveState(ActionStack.EditAction.ImageAndProperties, Project.Frames, Util.Other.CreateIndexList2(0, Project.Frames.Count));
+            ActionStack.SaveState(ActionStack.EditAction.ImageAndProperties, Project.Frames, Util.Other.ListOfIndexes(0, Project.Frames.Count));
 
             Cursor = Cursors.AppStarting;
 
@@ -3322,7 +3344,7 @@ namespace ScreenToGif.Windows
             }
 
             if (model.LeftThickness < 0 || model.TopThickness < 0 || model.RightThickness < 0 || model.BottomThickness < 0)
-                ActionStack.SaveState(ActionStack.EditAction.ImageAndProperties, Project.Frames, Util.Other.CreateIndexList2(0, Project.Frames.Count));
+                ActionStack.SaveState(ActionStack.EditAction.ImageAndProperties, Project.Frames, Util.Other.ListOfIndexes(0, Project.Frames.Count));
             else
                 ActionStack.SaveState(ActionStack.EditAction.ImageAndProperties, Project.Frames, SelectedFramesIndex());
 
@@ -3397,7 +3419,7 @@ namespace ScreenToGif.Windows
                 return;
             }
 
-            ActionStack.SaveState(ActionStack.EditAction.ImageAndProperties, Project.Frames, Util.Other.CreateIndexList2(0, Project.Frames.Count));
+            ActionStack.SaveState(ActionStack.EditAction.ImageAndProperties, Project.Frames, Util.Other.ListOfIndexes(0, Project.Frames.Count));
 
             Cursor = Cursors.AppStarting;
 
@@ -3447,7 +3469,7 @@ namespace ScreenToGif.Windows
                 return;
             }
 
-            ActionStack.SaveState(ActionStack.EditAction.ImageAndProperties, Project.Frames, Util.Other.CreateIndexList2(0, Project.Frames.Count));
+            ActionStack.SaveState(ActionStack.EditAction.ImageAndProperties, Project.Frames, Util.Other.ListOfIndexes(0, Project.Frames.Count));
 
             #region Get the Strokes and Clip the Image
 
@@ -3548,7 +3570,7 @@ namespace ScreenToGif.Windows
         {
             Cursor = Cursors.AppStarting;
 
-            ActionStack.SaveState(ActionStack.EditAction.ImageAndProperties, Project.Frames, Util.Other.CreateIndexList2(0, Project.Frames.Count));
+            ActionStack.SaveState(ActionStack.EditAction.ImageAndProperties, Project.Frames, Util.Other.ListOfIndexes(0, Project.Frames.Count));
 
             _progressDelegateDel = ProgressAsync;
             _progressDelegateDel.BeginInvoke(ProgressModel.FromSettings(), ProgressCallback, null);
@@ -5185,7 +5207,7 @@ namespace ScreenToGif.Windows
                     break;
                 case PanelType.ReduceFrames:
                     ReduceGrid.Visibility = Visibility.Visible;
-                    ShowHint("S.Hint.ApplyAll", true);
+                    ShowHint("S.Hint.ApplySelectedOrAll", true);
                     break;
                 case PanelType.RemoveDuplicates:
                     RemoveDuplicatesGrid.Visibility = Visibility.Visible;
@@ -5237,20 +5259,11 @@ namespace ScreenToGif.Windows
 
         private void FocusSaveAsFilenameTextBox()
         {
-            // Find the first visible filename text box and select it.
-            ExtendedTextBox box = new ExtendedTextBox[] {
-                OutputFilenameTextBox,
-                OutputApngFilenameTextBox,
-                OutputVideoFilenameTextBox,
-                OutputImagesFilenameTextBox,
-                OutputProjectFilenameTextBox,
-                OutputPsdFilenameTextBox
-            }.FirstOrDefault(x => x.Visibility == Visibility.Visible);
+            //Find the first visible filename text box and select it.
+            var box = new [] { OutputFilenameTextBox, OutputApngFilenameTextBox, OutputVideoFilenameTextBox, OutputImagesFilenameTextBox,
+                OutputProjectFilenameTextBox, OutputPsdFilenameTextBox }.FirstOrDefault(x => x.Visibility == Visibility.Visible);
 
-            if (box != null)
-            {
-                box.Focus();
-            }
+            box?.Focus();
         }
 
         private void ClosePanel(bool isCancel = false, bool removeEvent = false)
@@ -7317,30 +7330,63 @@ namespace ScreenToGif.Windows
 
         #region Async Reduce Frames
 
-        private delegate void ReduceFrame(int factor, int removeCount);
+        private delegate void ReduceFrame(List<int> selection, int factor, int removeCount, ReduceDelayType mode);
 
         private ReduceFrame _reduceFrameDel;
 
-        private void ReduceFrameCount(int factor, int removeCount)
+        private void ReduceFrameCount(List<int> selection, int factor, int removeCount, ReduceDelayType mode)
         {
             var removeList = new List<int>();
 
             //Gets the list of frames to be removed.
-            for (var i = factor - 1; i < Project.Frames.Count - 1; i += factor + removeCount)
-                removeList.AddRange(Util.Other.CreateIndexList2(i + 1, removeCount));
-
+            for (var i = selection.Min() + factor - 1; i < selection.Min() + selection.Count - 1; i += factor + removeCount)
+                removeList.AddRange(Util.Other.ListOfIndexes(i + 1, removeCount));
+            
             //Only allow removing frames within the possible range.
             removeList = removeList.Where(x => x < Project.Frames.Count).ToList();
 
-            var alterList = (from item in removeList where item - 1 >= 0 select item - 1).ToList(); //.Union(removeList)
+            var alterList = mode == ReduceDelayType.Evenly ? Util.Other.ListOfIndexes(0, Project.Frames.Count).Where(w => !removeList.Contains(w)).ToList() : 
+                mode == ReduceDelayType.Previous ? (from item in removeList where item - 1 >= 0 select item - 1).ToList() : //.Union(removeList)
+                new List<int>(); //No other frame will be altered if the delay is not adjusted.
 
-            ActionStack.SaveState(ActionStack.EditAction.RemoveAndAlter, Project.Frames, removeList, alterList);
+            if (alterList.Any())
+                ActionStack.SaveState(ActionStack.EditAction.RemoveAndAlter, Project.Frames, removeList, alterList);
+            else
+                ActionStack.SaveState(ActionStack.EditAction.Remove, Project.Frames, removeList);
 
+            var delayRemoved = 0;
             for (var i = removeList.Count - 1; i >= 0; i--)
             {
                 var removeIndex = removeList[i];
 
-                Project.Frames[removeIndex - 1].Delay += Project.Frames[removeIndex].Delay;
+                if (mode == ReduceDelayType.Previous || factor == 1)
+                {
+                    //Simply stacks the delay of the removed frames to the previous frame;
+                    Project.Frames[removeIndex - 1].Delay += Project.Frames[removeIndex].Delay;
+                }
+                else if (mode == ReduceDelayType.Evenly)
+                {
+                    if (i == removeList.Count - 1 || removeList[i] + 1 == removeList[i + 1])
+                    {
+                        //Store the delay of the frames being removed.
+                        delayRemoved += Project.Frames[removeIndex].Delay;
+                    }
+                    else
+                    {
+                        if (delayRemoved > 0)
+                        {
+                            //Calculate the size of the remaining section (this is the factor, the number of frames not being removed in each section).
+                            var size = removeList[i + 1] - removeList[i] - 1;
+
+                            //Spread evenly the accumulated delay among the remaining frames.
+                            for (var r = removeList[i + 1] - 1; r > removeList[i]; r--)
+                                Project.Frames[r].Delay += delayRemoved / size; //Some information may be lost due to rounding.
+                        }
+
+                        //Start again the accumulation for this block of frames being removed.
+                        delayRemoved = Project.Frames[removeIndex].Delay;
+                    }
+                }                
 
                 File.Delete(Project.Frames[removeIndex].Path);
                 Project.Frames.RemoveAt(removeIndex);
@@ -7359,6 +7405,7 @@ namespace ScreenToGif.Windows
                 SelectNear(LastSelected);
                 Project.Persist();
 
+                //TODO: Load from the start.
                 LoadSelectedStarter(ReduceFactorIntegerUpDown.Value - 1, Project.Frames.Count - 1);
 
                 ShowHint("S.Hint.Reduce");

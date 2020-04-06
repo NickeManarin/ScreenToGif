@@ -26,6 +26,7 @@
     <c:IntToRect x:Key="IntToRect"/>
     <c:ColorToBrush x:Key="ColorToBrush"/>
     <c:InvertedBool x:Key="InvertedBool"/>
+    <c:ScaleConverter x:Key="ScaleConverter"/>
 
     <!--Window Button Style -->
     <Style TargetType="{x:Type Button}" x:Key="Style.Button.Window">
@@ -2303,7 +2304,102 @@
         </Setter>
     </Style>
 
+    <!--ExtendedProgressBar-->
+    <Style TargetType="{x:Type n:ExtendedProgressBar}">
+        <Setter Property="Foreground" Value="{DynamicResource Brush.ProgressBar.Primary}"/>
+        <Setter Property="Background" Value="{DynamicResource Element.Background.Back}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource Element.Border}"/>
+        <Setter Property="BorderThickness" Value="1"/>
 
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type n:ExtendedProgressBar}">
+                    <Grid x:Name="TemplateRoot">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Determinate"/>
+                                <VisualState x:Name="Indeterminate">
+                                    <Storyboard RepeatBehavior="Forever">
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="Animation">
+                                            <EasingDoubleKeyFrame KeyTime="0" Value="0.25"/>
+                                            <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.25"/>
+                                            <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0.25"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <PointAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransformOrigin)" Storyboard.TargetName="Animation">
+                                            <EasingPointKeyFrame KeyTime="0" Value="-0.5,0.5"/>
+                                            <EasingPointKeyFrame KeyTime="0:0:1" Value="0.5,0.5"/>
+                                            <EasingPointKeyFrame KeyTime="0:0:2" Value="1.5,0.5"/>
+                                        </PointAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"/>
+                        <Rectangle x:Name="PART_Track"/>
+
+                        <Grid x:Name="PART_Indicator" ClipToBounds="True" HorizontalAlignment="Left">
+                            <Rectangle x:Name="Indicator" Fill="{TemplateBinding Foreground}"/>
+                            <Rectangle x:Name="Animation" Fill="{TemplateBinding Foreground}" RenderTransformOrigin="0.5,0.5" Visibility="Collapsed">
+                                <Rectangle.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                        </Grid>
+
+                        <Border x:Name="PercentageBorder" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Background="{DynamicResource Brush.ProgressBar.Detail}" CornerRadius="5">
+                            <TextBlock x:Name="PercentageTextBlock" Foreground="{DynamicResource Element.Foreground}" Margin="3,0" Padding="0" VerticalAlignment="Center">
+                                <TextBlock.Text>
+                                    <MultiBinding Converter="{StaticResource ScaleConverter}" StringFormat="{}{0:P2}">
+                                        <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="Value"/>
+                                        <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="Maximum"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </Border>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Orientation" Value="Vertical">
+                            <Setter Property="LayoutTransform" TargetName="TemplateRoot">
+                                <Setter.Value>
+                                    <RotateTransform Angle="-90"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+
+                        <Trigger Property="ShowPercentage" Value="True">
+                            <Setter TargetName="PercentageBorder" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        
+                        <Trigger Property="IsIndeterminate" Value="True">
+                            <Setter Property="Visibility" TargetName="Indicator" Value="Collapsed"/>
+                            <Setter Property="Visibility" TargetName="Animation" Value="Visible"/>
+                            <Setter TargetName="PercentageBorder" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+
+                        <Trigger Property="State" Value="Info">
+                            <Setter Property="Foreground" Value="{DynamicResource Brush.ProgressBar.Info}"/>
+                        </Trigger>
+                        
+                        <Trigger Property="State" Value="Warning">
+                            <Setter Property="Foreground" Value="{DynamicResource Brush.ProgressBar.Warning}"/>
+                        </Trigger>
+
+                        <Trigger Property="State" Value="Danger">
+                            <Setter Property="Foreground" Value="{DynamicResource Brush.ProgressBar.Danger}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
 
     <!--SelectControl Style-->
     <Style TargetType="{x:Type n:SelectControl}">

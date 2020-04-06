@@ -5,16 +5,21 @@ This is the current project of ScreenToGif.
 _VS 2019 and .Net 4.8 or newer required._
 
 
-## What's new? (Version 2.22.1)
+## What's new? (Version 2.23)
 
+• Added the option to reduce the frame count to only the selected frames.  
+• Also, you can select to adjust the delay when reducing the frame count.  
+• Added the option to limit the undo/redo history size.  
 • Updated the Japanese translation.   
-• Added support for Gifski 0.10.2 (delete the old DLL and download it again).  
+• Added support for Gifski 0.10.2 (delete the old DLL and download it again).
+• The Options > Storage UI was redesigned.   
 
 ### Fixed:
 
 ♦ Switching back from the snapshot mode from the recorder could cause a small crash.  
 ♦ The auto-updater was failing to run when the cache folder was set to a relative path.  
 ♦ The tooltips of the buttons of the startup window were incorrect.  
+♦ When trying to undo a 'Reduce Framerate' action that resulted in no frames being deleted, a crash would happen.  
 
 ### Known Bugs:
 

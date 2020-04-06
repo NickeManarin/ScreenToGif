@@ -291,6 +291,7 @@ namespace ScreenToGif.Windows.Other
 
                             item.SizeInBytes = fileInfo.Length;
                             item.OutputFilename = fileName;
+                            item.SavedToDisk = true;
                         }
                         break;
 
@@ -1041,10 +1042,6 @@ namespace ScreenToGif.Windows.Other
                             switch (param.CopyType)
                             {
                                 case CopyType.File:
-                                    if (param.Type != Export.Video && param.Type != Export.Project)
-                                        data.SetImage(param.Filename.SourceFrom());
-
-                                    data.SetText(param.Filename, TextDataFormat.Text);
                                     data.SetFileDropList(new StringCollection { param.Filename });
                                     break;
                                 case CopyType.FolderPath:

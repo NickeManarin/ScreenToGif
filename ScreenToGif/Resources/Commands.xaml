@@ -384,6 +384,12 @@
         </RoutedUICommand.InputGestures>
     </RoutedUICommand>
 
+
+    <RoutedUICommand x:Key="Command.CheckCache"/>
+    <RoutedUICommand x:Key="Command.ClearCache"/>
+    <RoutedUICommand x:Key="Command.BrowseCache"/>
+    <RoutedUICommand x:Key="Command.BrowseLogs"/>
+    
     <RoutedUICommand x:Key="Command.CreateLocalSettings" Text="S.Command.CreateLocalSettings">
         <RoutedUICommand.InputGestures>
             <KeyGesture>Ctrl + Alt + C</KeyGesture>

@@ -821,7 +821,7 @@
 
             <!--ProgressBar-->
             <Style TargetType="{x:Type ProgressBar}">
-                <Setter Property="Foreground" Value="{DynamicResource Brush.ProgressBar.Progress}"/>
+                <Setter Property="Foreground" Value="{DynamicResource Brush.ProgressBar.Primary}"/>
                 <Setter Property="Background" Value="{DynamicResource Element.Background.Back}"/>
                 <Setter Property="BorderBrush" Value="{DynamicResource Element.Border}"/>
                 <Setter Property="BorderThickness" Value="1"/>

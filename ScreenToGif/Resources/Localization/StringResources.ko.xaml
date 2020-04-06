@@ -163,11 +163,11 @@
     <s:String x:Key="S.Options.Other">기타</s:String>
     <s:String x:Key="S.Options.App.Tray.Show">작업 표시줄에 트레이 아이콘을 표시합니다.</s:String>
     <s:String x:Key="S.Options.App.Tray.LeaveOpen">모든 창이 닫혀 있어도 프로그램을 종료하지 않습니다.</s:String>
-    <s:String x:Key="S.Options.App.General.NotifyFrameDeletion">프레임을 삭제하기 전 확인합니다.</s:String>
-    <s:String x:Key="S.Options.App.General.NotifyProjectDiscard">프로젝트를 삭제하기 전 확인합니다.</s:String>
-    <s:String x:Key="S.Options.App.General.NotifyWhileClosingEditor">프로젝트가 열려있을 때, 편집기를 닫기 전 확인합니다.</s:String>
+    <s:String x:Key="S.Options.Editor.General.NotifyFrameDeletion">프레임을 삭제하기 전 확인합니다.</s:String>
+    <s:String x:Key="S.Options.Editor.General.NotifyProjectDiscard">프로젝트를 삭제하기 전 확인합니다.</s:String>
+    <s:String x:Key="S.Options.Editor.General.NotifyWhileClosingEditor">프로젝트가 열려있을 때, 편집기를 닫기 전 확인합니다.</s:String>
     <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">'트레이 > 종료' 버튼으로 프로그램을 닫기 전 확인합니다.</s:String>
-    <s:String x:Key="S.Options.App.General.DrawOutlineOutside">자막에서 글자 바깥에 외곽선을 그립니다.</s:String>
+    <s:String x:Key="S.Options.Editor.General.DrawOutlineOutside">자막에서 글자 바깥에 외곽선을 그립니다.</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">하드웨어 가속을 비활성화합니다.</s:String>
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">번역 업데이트를 확인합니다.</s:String>
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(번역 업데이트가 자동으로 다운로드 되고 설치됩니다)</s:String>
@@ -185,43 +185,43 @@
     <s:String x:Key="S.Options.Tasks.SelectType">(작업 선택)</s:String>
     <s:String x:Key="S.Options.Tasks.Info">작업은 위에서 아래로 순서대로 실행합니다.&#10;편집기를 통해 프로젝트를 열었을 때 작업을 실행합니다.</s:String>
     
-    <s:String x:Key="S.Options.Interface.Theme">프로그램 테마</s:String>
-    <s:String x:Key="S.Options.Interface.Theme.Scheme">색 설정</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground">편집기 배경 설정</s:String>
+    <s:String x:Key="S.Options.App.Theme">프로그램 테마</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme">색 설정</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer">편집기 배경 설정</s:String>
     <s:String x:Key="S.Options.Interface.Recorder">녹화기 테마</s:String>
     <s:String x:Key="S.Options.Interface.Background">배경색</s:String>
     <s:String x:Key="S.Options.Interface.Foreground">전경색</s:String>
     <s:String x:Key="S.Options.Interface.BoardBackground">칠판 배경 설정</s:String>
-    <s:String x:Key="S.Options.Interface.Theme.Scheme.VeryLight">매우 밝게</s:String>
-    <s:String x:Key="S.Options.Interface.Theme.Scheme.Light">밝게</s:String>
-    <s:String x:Key="S.Options.Interface.Theme.Scheme.Medium">중간</s:String>
-    <s:String x:Key="S.Options.Interface.Theme.Scheme.Dark">어둡게</s:String>
-    <s:String x:Key="S.Options.Interface.Theme.Scheme.VeryDark">매우 어둡게</s:String>
-    <s:String x:Key="S.Options.Interface.Theme.Scheme.Custom">사용자 설정</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.VeryLight">매우 밝게</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Light">밝게</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Medium">중간</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Dark">어둡게</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.VeryDark">매우 어둡게</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Custom">사용자 설정</s:String>
     
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize">격자 크기</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.VerySmall">매우 작게</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Small">작게</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Medium">중간</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Large">크게</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.VeryLarge">매우 크게</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.ILikeBigSquares">난 큰 게 좋아!</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.ImBlind">난 장님입니다!</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Custom">사용자 설정</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize">격자 크기</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.VerySmall">매우 작게</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Small">작게</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Medium">중간</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Large">크게</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.VeryLarge">매우 크게</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.ILikeBigSquares">난 큰 게 좋아!</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.ImBlind">난 장님입니다!</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Custom">사용자 설정</s:String>
 
-    <s:String x:Key="S.Options.Interface.EditorBackground.BaseColor">베이스 색</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.EvenColor">같은 색</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.OddColor">다른 색</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Height">높이</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Width">폭</s:String>
-    <s:String x:Key="S.Options.Interface.EditorBackground.GridSize.Apply">적용</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.BaseColor">베이스 색</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.EvenColor">같은 색</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.OddColor">다른 색</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Height">높이</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Width">폭</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Apply">적용</s:String>
 
     <s:String x:Key="S.Options.Interface.Other">기타</s:String>
-    <s:String x:Key="S.Options.Interface.Other.ExtendChrome">제목 표시줄 / 메뉴를 확장합니다.</s:String>
-    <s:String x:Key="S.Options.Interface.Other.HideTitleBar">제목 표시줄을 숨깁니다.</s:String>
-    <s:String x:Key="S.Options.Interface.Other.TripleClickSelection">삼중 클릭으로 텍스트를 선택합니다.</s:String>
-    <s:String x:Key="S.Options.Interface.Other.AutomaticallySizeOnContent">프레임 크기에 맞게 창 크기를 자동으로 조정합니다.</s:String>
-    <s:String x:Key="S.Options.Interface.Other.AutomaticallyFitImage">창 크기에 맞게 프레임 크기를 자동으로 조정합니다.</s:String>
+    <s:String x:Key="S.Options.Editor.Interface.ExtendChrome">제목 표시줄 / 메뉴를 확장합니다.</s:String>
+    <s:String x:Key="S.Options.Recorder.HideTitleBar">제목 표시줄을 숨깁니다.</s:String>
+    <s:String x:Key="S.Options.Editor.General.TripleClickSelection">삼중 클릭으로 텍스트를 선택합니다.</s:String>
+    <s:String x:Key="S.Options.Editor.Interface.AutomaticallySizeOnContent">프레임 크기에 맞게 창 크기를 자동으로 조정합니다.</s:String>
+    <s:String x:Key="S.Options.Editor.Interface.AutomaticallyFitImage">창 크기에 맞게 프레임 크기를 자동으로 조정합니다.</s:String>
   
     <s:String x:Key="S.Options.Shortcuts.Global">전역 설정</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.ScreenRecorder">화면 녹화기:</s:String>
@@ -270,9 +270,9 @@
     <s:String x:Key="S.Options.Storage.OpenFolder">폴더 열기</s:String>
     <s:String x:Key="S.Options.Storage.Clear">임시 파일 삭제</s:String>
     <s:String x:Key="S.Options.Storage.LogsLocation">로그 파일 저장 폴더</s:String>
-    <s:String x:Key="S.Options.Storage.LogsLocation.Choose">로그 파일을 저장할 경로를 선택합니다.</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Logs.Choose">로그 파일을 저장할 경로를 선택합니다.</s:String>
     <s:String x:Key="S.Options.Storage.Location">임시 파일 저장 경로</s:String>
-    <s:String x:Key="S.Options.Storage.Location.Choose">임시 파일을 저장할 경로를 선택합니다.</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Cache.Choose">임시 파일을 저장할 경로를 선택합니다.</s:String>
     <s:String x:Key="S.Options.Storage.Settings">설정 파일 경로</s:String>
     <s:String x:Key="S.Options.Storage.AppDataPath">AppData:</s:String>
     <s:String x:Key="S.Options.Storage.LocalPath">로컬:</s:String>
@@ -286,7 +286,7 @@
     <s:String x:Key="S.Options.Storage.AutomaticRemoval">오래된 프로젝트를 자동으로 삭제합니다.</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemoval.Info">프로그램을 실행할 때, 설정한 시간 이상으로 오래된 프로젝트를 백그라운드에서 삭제합니다.</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemovalDays.Info">(프로그램을 실행할 때 얼마나 오래된 프로젝트를 제거할지 일 단위로 설정합니다)</s:String>
-    <s:String x:Key="S.Options.Storage.LowSpace">하드 디스크의 여유 공간이 부족합니다. 임시 파일을 삭제하거나 폴더 위치를 변경하세요.</s:String>
+    <s:String x:Key="S.Options.Storage.Status.LowSpace">하드 디스크의 여유 공간이 부족합니다. 임시 파일을 삭제하거나 폴더 위치를 변경하세요.</s:String>
     
     <s:String x:Key="S.Options.Upload.Proxy">프록시</s:String>
     <s:String x:Key="S.Options.Upload.Proxy.Mode">모드:</s:String>
@@ -846,10 +846,10 @@
     <s:String x:Key="FlipRotate.RotateLeft">좌측 90º 회전</s:String>
     <s:String x:Key="FlipRotate.RotateRight">우측 90º 회전</s:String>
     
-    <s:String x:Key="Reduce.Header">프레임레이트 줄이기</s:String>
-    <s:String x:Key="Reduce.Factor">건너뛸 수:</s:String>
-    <s:String x:Key="Reduce.Count">제거할 수:</s:String>
-    <s:String x:Key="Reduce.Info">매 {1} 프레임 후에 {0} 프레임을 삭제합니다.&#10;프레임레이트가 재조정됩니다.</s:String>
+    <s:String x:Key="S.Reduce.Header">프레임레이트 줄이기</s:String>
+    <s:String x:Key="S.Reduce.Factor">건너뛸 수:</s:String>
+    <s:String x:Key="S.Reduce.Count">제거할 수:</s:String>
+    <s:String x:Key="S.Reduce.Info">매 {1} 프레임 후에 {0} 프레임을 삭제합니다.</s:String>
 
     <s:String x:Key="S.RemoveDuplicates.Header">중복 프레임 삭제</s:String>
     <s:String x:Key="S.RemoveDuplicates.Similarity">유사도 (%):</s:String>

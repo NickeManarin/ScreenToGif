@@ -481,6 +481,16 @@
     }
 
     /// <summary>
+    /// Specifies the type of frame delay adjustment for the 'Reduce Framerate'.
+    /// </summary>
+    public enum ReduceDelayType
+    {
+        DontAdjust = 0,
+        Previous = 1,
+        Evenly = 2
+    }
+
+    /// <summary>
     /// Specifies the type of frame removal.
     /// </summary>
     public enum DuplicatesRemovalType

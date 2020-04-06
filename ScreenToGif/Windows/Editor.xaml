@@ -3779,7 +3779,7 @@
                             </Grid>
                         </Grid>
 
-                        <Grid x:Name="MouseClicksGrid" Visibility="Visible">
+                        <Grid x:Name="MouseClicksGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
@@ -4810,24 +4810,39 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <n:LabelSeparator Grid.Row="0" Text="{DynamicResource Reduce.Header}"/>
+                            <n:LabelSeparator Grid.Row="0" Text="{DynamicResource S.Reduce.Header}"/>
                             <Grid Grid.Row="1" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource Reduce.Factor}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Reduce.Factor}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                                 <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="ReduceFactorIntegerUpDown" Minimum="1" Maximum="20" Margin="10,5" MinWidth="80" 
                                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=ReduceFactor, Mode=TwoWay}"/>
 
-                                <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource Reduce.Count}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.Reduce.Count}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                                 <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="ReduceCountIntegerUpDown" Minimum="1" Maximum="20" Margin="10,5" MinWidth="80" 
                                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=ReduceCount, Mode=TwoWay}"/>
+
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.Reduce.Delay}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <ComboBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="10,5" 
+                                          SelectedIndex="{Binding Source={x:Static u:UserSettings.All}, Path=ReduceDelay, Converter={StaticResource EnumToInt}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    <ComboBoxItem Content="{DynamicResource S.Reduce.Delay.NoAdjustment}"/>
+                                    <ComboBoxItem Content="{DynamicResource S.Reduce.Delay.Previous}"/>
+                                    <ComboBoxItem Content="{DynamicResource S.Reduce.Delay.Evenly}"/>
+                                </ComboBox>
+                                
+                                <n:ExtendedCheckBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Text="{DynamicResource S.Reduce.ApplyToAll}" Margin="0,5"
+                                                    IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=ReduceApplyToAll, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    ToolTip="{DynamicResource S.Reduce.ApplyToAll.Info}"/>
                             </Grid>
 
                             <Grid Grid.Row="2" Grid.Column="0" Margin="10,10,5,0">
@@ -4836,8 +4851,8 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
 
-                                <Viewbox Grid.Column="0" MinWidth="15" MaxHeight="15" Stretch="Uniform" Child="{StaticResource Vector.Info}" Opacity="{DynamicResource Element.Opacity}"/>
-                                <TextBlock Grid.Column="1" x:Name="ReduceTextBlock" Foreground="{DynamicResource Element.Foreground.Detail}" Tag="{DynamicResource Reduce.Info}"
+                                <Viewbox Grid.Column="0" MinWidth="15" MaxHeight="15" Stretch="Uniform" Child="{StaticResource Vector.Info}" Opacity="{DynamicResource Element.Opacity}" VerticalAlignment="Top" Margin="0,5"/>
+                                <TextBlock Grid.Column="1" x:Name="ReduceTextBlock" Foreground="{DynamicResource Element.Foreground.Detail}" Tag="{DynamicResource S.Reduce.Info}"
                                            FontStyle="Italic" FontSize="12" Padding="3" TextWrapping="WrapWithOverflow">
                                     <TextBlock.Text>
                                         <MultiBinding Converter="{StaticResource FormatConverter}">

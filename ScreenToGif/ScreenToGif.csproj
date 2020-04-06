@@ -174,6 +174,7 @@
     <Compile Include="Controls\DynamicGrid.cs" />
     <Compile Include="Controls\EncoderListViewItem.cs" />
     <Compile Include="Controls\ExtendedCheckBox.cs" />
+    <Compile Include="Controls\ExtendedProgressBar.cs" />
     <Compile Include="Controls\ExtendedTextBox.cs" />
     <Compile Include="Controls\FrameListBoxItem.cs" />
     <Compile Include="Controls\FrameworkElementAdorner.cs" />
@@ -359,12 +360,14 @@
     <Compile Include="Util\Converters\EnumToInt.cs" />
     <Compile Include="Util\Converters\FormatConverter.cs" />
     <Compile Include="Util\Converters\IntToVisibility.cs" />
+    <Compile Include="Util\Converters\ScaleConverter.cs" />
     <Compile Include="Util\Converters\ShortcutKeys.cs" />
     <Compile Include="Util\Converters\StringArrayTypeConverter.cs" />
     <Compile Include="Util\Converters\StringToStaticResource.cs" />
     <Compile Include="Util\CrcHelper.cs" />
     <Compile Include="Util\DataGridHelper.cs" />
     <Compile Include="Util\DynamicResourceBinding.cs" />
+    <Compile Include="Util\ExtendedStack.cs" />
     <Compile Include="Util\FeedbackHelper.cs" />
     <Compile Include="Util\Framerate.cs" />
     <Compile Include="Util\Clipboard.cs" />
@@ -470,6 +473,9 @@
     </Compile>
     <Compile Include="Windows\NewRecorder.xaml.cs">
       <DependentUpon>NewRecorder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Other\CacheDialog.xaml.cs">
+      <DependentUpon>CacheDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Other\FfmpegPresetDialog.xaml.cs">
       <DependentUpon>FfmpegPresetDialog.xaml</DependentUpon>
@@ -761,6 +767,10 @@
     <Page Include="Windows\NewRecorder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Other\CacheDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\Other\FfmpegPresetDialog.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -29,11 +29,6 @@ namespace ScreenToGif.Windows
         /// </summary>
         private readonly UserActivityHook _actHook;
 
-        #region Flags
-
-
-        #endregion
-
         #region Counters
 
         /// <summary>
@@ -145,7 +140,7 @@ namespace ScreenToGif.Windows
 
             _hideBackButton = hideBackButton;
 
-            //Load
+            //Load.
             _timer.Tick += Normal_Elapsed;
 
             #region Global Hook
@@ -225,8 +220,11 @@ namespace ScreenToGif.Windows
                 WebcamControl.VideoDevice = _filters.VideoInputDevices[VideoDevicesComboBox.SelectedIndex];
                 WebcamControl.Refresh();
 
-                Width = WebcamControl.VideoWidth * _scale / 2;
-                Height = (WebcamControl.VideoHeight + 31) * _scale / 2;
+                if (WebcamControl.VideoWidth > 0)
+                {
+                    Width = WebcamControl.VideoWidth * _scale / 2;
+                    Height = (WebcamControl.VideoHeight + 31) * _scale / 2;
+                }
 
                 if (Top < 0)
                     Top = 0;

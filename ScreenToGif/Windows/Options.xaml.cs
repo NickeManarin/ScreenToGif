@@ -50,14 +50,29 @@ namespace ScreenToGif.Windows
         internal const int AboutIndex = 10;
 
         /// <summary>
-        /// The Path of the Temp folder.
+        /// Used to decide if a size check is necessary, when a new path is detected.
+        /// </summary>
+        private string _previousPath = "";
+
+        /// <summary>
+        /// True when the cache folder is being checked.
+        /// </summary>
+        private bool _isBusy = false;
+
+        /// <summary>
+        /// The Path of the cache folder.
         /// </summary>
         private List<DirectoryInfo> _folderList = new List<DirectoryInfo>();
 
         /// <summary>
-        /// The file count of the Temp folder.
+        /// The file count of the cache folder.
         /// </summary>
         private int _fileCount;
+
+        /// <summary>
+        /// The size in bytes of the cache folder.
+        /// </summary>
+        private long _cacheSize;
 
         /// <summary>
         /// List of tasks.
@@ -132,6 +147,29 @@ namespace ScreenToGif.Windows
             {
                 _ignoreStartup = false;
                 Cursor = Cursors.Arrow;
+            }
+        }
+
+        private void AppThemeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!IsLoaded)
+                return;
+
+            try
+            {
+                var selected = AppThemeComboBox.SelectedValue?.ToString();
+
+                if (string.IsNullOrWhiteSpace(selected))
+                    throw new Exception("No theme was selected.");
+
+                ThemeHelper.SelectTheme(selected);
+
+                App.NotifyIcon?.RefreshVisual();
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Error while selecting the app's theme.");
+                ExceptionDialog.Ok(ex, Title, "Error while selecting the app's theme", ex.Message);
             }
         }
 
@@ -218,9 +256,9 @@ namespace ScreenToGif.Windows
 
         #endregion
 
-        #region Interface
+        #region Editor
 
-        private void InterfacePanel_Loaded(object sender, RoutedEventArgs e)
+        private void EditorPanel_Loaded(object sender, RoutedEventArgs e)
         {
             //Editor.
             CheckScheme(false);
@@ -232,29 +270,6 @@ namespace ScreenToGif.Windows
 
             //CheckBoardScheme(false);
             //CheckBoardSize(false);
-        }
-
-        private void AppThemeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (!IsLoaded)
-                return;
-
-            try
-            {
-                var selected = AppThemeComboBox.SelectedValue?.ToString();
-
-                if (string.IsNullOrWhiteSpace(selected))
-                    throw new Exception("No theme was selected.");
-
-                ThemeHelper.SelectTheme(selected);
-
-                App.NotifyIcon?.RefreshVisual();
-            }
-            catch (Exception ex)
-            {
-                LogWriter.Log(ex, "Error while selecting the app's theme.");
-                ExceptionDialog.Ok(ex, Title, "Error while selecting the app's theme", ex.Message);
-            }
         }
 
         private void ColorSchemesComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -946,17 +961,16 @@ namespace ScreenToGif.Windows
 
         #endregion
 
-        #region Temp Files
+        #region Storage
 
         private void TempPanel_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (TempPanel.Visibility != Visibility.Visible)
                 return;
 
-            _tempDel = CheckTemp;
-            _tempDel.BeginInvoke(e, CheckTempCallBack, null);
+            _previousPath = UserSettings.All.TemporaryFolderResolved;
 
-            NotificationUpdated();
+            CheckSpace();
 
             #region Settings
 
@@ -993,90 +1007,21 @@ namespace ScreenToGif.Windows
             #endregion
         }
 
-        private void ChooseLogsLocation_Click(object sender, RoutedEventArgs e)
+
+        private void Cache_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            var folderDialog = new System.Windows.Forms.FolderBrowserDialog { ShowNewFolderButton = true };
-
-            if (!string.IsNullOrWhiteSpace(UserSettings.All.LogsFolder))
-                folderDialog.SelectedPath = UserSettings.All.LogsFolder;
-
-            if (folderDialog.ShowDialog() == DialogResultWinForms.OK)
-                UserSettings.All.LogsFolder = folderDialog.SelectedPath;
+            e.CanExecute = IsLoaded && !string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder) && !_isBusy;
         }
 
-        private void ChooseLocation_Click(object sender, RoutedEventArgs e)
+        private void BrowseCache_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            var folderDialog = new System.Windows.Forms.FolderBrowserDialog { ShowNewFolderButton = true };
-
-            if (!string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolderResolved))
-                folderDialog.SelectedPath = UserSettings.All.TemporaryFolderResolved;
-
-            if (folderDialog.ShowDialog() == DialogResultWinForms.OK)
-                UserSettings.All.TemporaryFolder = folderDialog.SelectedPath;
+            e.CanExecute = IsLoaded && !string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolder) && Directory.Exists(UserSettings.All.TemporaryFolderResolved) && !_isBusy;
         }
 
-        private void OpenFolderButton_Click(object sender, RoutedEventArgs e)
+        private void BrowseLogs_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            try
-            {
-                var path = Path.Combine(UserSettings.All.TemporaryFolderResolved, "ScreenToGif", "Recording");
-
-                if (!Directory.Exists(path))
-                    Directory.CreateDirectory(path);
-
-                Process.Start(path);
-            }
-            catch (Exception ex)
-            {
-                LogWriter.Log(ex, "Error while trying to open the Temp Folder.");
-            }
+            e.CanExecute = IsLoaded && !string.IsNullOrWhiteSpace(UserSettings.All.LogsFolder) && Directory.Exists(UserSettings.All.LogsFolder);
         }
-
-        private async void ClearTempButton_Click(object sender, RoutedEventArgs e)
-        {
-            ClearTempButton.IsEnabled = false;
-
-            try
-            {
-                var path = Path.Combine(UserSettings.All.TemporaryFolderResolved, "ScreenToGif", "Recording");
-
-                if (!Directory.Exists(path))
-                {
-                    _folderList.Clear();
-                    TempSeparator.TextRight = LocalizationHelper.Get("S.Options.Storage.FilesAndFolders.None");
-                    return;
-                }
-
-                _folderList = await Task.Factory.StartNew(() => Directory.GetDirectories(path, "*", SearchOption.TopDirectoryOnly).Select(x => new DirectoryInfo(x)).ToList());
-
-                if (Dialog.Ask("ScreenToGif", LocalizationHelper.Get("S.Options.Storage.KeepRecent"), LocalizationHelper.Get("S.Options.Storage.KeepRecent.Info")))
-                    _folderList = await Task.Factory.StartNew(() => _folderList.Where(w => (DateTime.Now - w.CreationTime).Days > (UserSettings.All.AutomaticCleanUpDays > 0 ? UserSettings.All.AutomaticCleanUpDays : 5)).ToList());
-
-                foreach (var folder in _folderList)
-                {
-                    if (MutexList.IsInUse(folder.Name))
-                        continue;
-
-                    Directory.Delete(folder.FullName, true);
-                }
-
-                _folderList = await Task.Factory.StartNew(() => Directory.GetDirectories(path, "*", SearchOption.TopDirectoryOnly).Select(x => new DirectoryInfo(x)).ToList());
-            }
-            catch (Exception ex)
-            {
-                LogWriter.Log(ex, "Error while cleaning the Temp folder");
-            }
-            finally
-            {
-                App.MainViewModel.CheckDiskSpace();
-            }
-
-            TempSeparator.TextRight = string.Format(LocalizationHelper.Get("S.Options.Storage.FilesAndFolders.Count", "{0} folders and {1} files"), _folderList.Count.ToString("##,##0"),
-                _folderList.Sum(folder => Directory.EnumerateFiles(folder.FullName).Count()).ToString("##,##0"));
-
-            ClearTempButton.IsEnabled = _folderList.Any();
-        }
-
 
         private void CreateLocalSettings_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -1092,6 +1037,175 @@ namespace ScreenToGif.Windows
         {
             e.CanExecute = IsLoaded && File.Exists(AppDataPathTextBlock.Text);
         }
+
+
+        private void CheckCache_Execute(object sender, RoutedEventArgs e)
+        {
+            CheckSpace();
+        }
+
+        private async void ClearCache_Execute(object sender, RoutedEventArgs e)
+        {
+            _isBusy = true;
+            StatusProgressBar.State = ExtendedProgressBar.ProgressState.Primary;
+            StatusProgressBar.IsIndeterminate = true;
+            FilesTextBlock.Visibility = Visibility.Collapsed;
+
+            try
+            {
+                var parent = Util.Other.AdjustPath(UserSettings.All.TemporaryFolderResolved);
+                var path = Path.Combine(parent, "ScreenToGif", "Recording");
+
+                if (!Directory.Exists(path))
+                    return;
+
+                //Force to be 1 day or more.
+                UserSettings.All.AutomaticCleanUpDays = UserSettings.All.AutomaticCleanUpDays > 0 ? UserSettings.All.AutomaticCleanUpDays : 5;
+
+                //Asks if the user wants to remove all files or just the old ones.
+                var dialog = new CacheDialog();
+                var result = dialog.ShowDialog();
+
+                if (!result.HasValue || !result.Value)
+                    return;
+
+                _folderList = await Task.Factory.StartNew(() => Directory.GetDirectories(path, "*", SearchOption.TopDirectoryOnly).Select(x => new DirectoryInfo(x)).ToList());
+
+                if (dialog.IgnoreRecent)
+                    _folderList = await Task.Factory.StartNew(() => _folderList.Where(w => (DateTime.Now - w.CreationTime).Days > UserSettings.All.AutomaticCleanUpDays).ToList());
+
+                foreach (var folder in _folderList.Where(folder => !MutexList.IsInUse(folder.Name)))
+                    Directory.Delete(folder.FullName, true);
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Error while cleaning the cache folder.");
+            }
+            finally
+            {
+                App.MainViewModel.CheckDiskSpace();
+                CheckSpace(true);
+            }
+        }
+
+        private void ChooseCachePath_Click(object sender, RoutedEventArgs e)
+        {
+            var path = UserSettings.All.TemporaryFolderResolved;
+
+            if (UserSettings.All.TemporaryFolderResolved.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
+                path = "";
+
+            //It's only a relative path if not null/empty and there's no root folder declared.
+            var isRelative = !string.IsNullOrWhiteSpace(path) && !Path.IsPathRooted(path);
+            var notAlt = !string.IsNullOrWhiteSpace(path) && UserSettings.All.TemporaryFolderResolved.Contains(Path.DirectorySeparatorChar);
+
+            path = Util.Other.AdjustPath(path);
+
+            var initial = Directory.Exists(path) ? path : Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+
+            var folderDialog = new System.Windows.Forms.FolderBrowserDialog { ShowNewFolderButton = true };
+
+            if (!string.IsNullOrWhiteSpace(initial))
+                folderDialog.SelectedPath = initial;
+
+            if (folderDialog.ShowDialog() != DialogResultWinForms.OK)
+                return;
+
+            //Converts to a relative path again.
+            if (isRelative && !string.IsNullOrWhiteSpace(folderDialog.SelectedPath))
+            {
+                var selected = new Uri(folderDialog.SelectedPath);
+                var baseFolder = new Uri(AppDomain.CurrentDomain.BaseDirectory);
+                var relativeFolder = selected.AbsolutePath.TrimEnd(Path.DirectorySeparatorChar).TrimEnd(Path.AltDirectorySeparatorChar) == baseFolder.AbsolutePath.TrimEnd(Path.DirectorySeparatorChar).TrimEnd(Path.AltDirectorySeparatorChar) ?
+                    "." : Uri.UnescapeDataString(baseFolder.MakeRelativeUri(selected).ToString());
+
+                //This app even returns you the correct slashes/backslashes.
+                UserSettings.All.TemporaryFolder = notAlt ? relativeFolder.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar) :
+                    relativeFolder.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+            }
+            else
+            {
+                UserSettings.All.TemporaryFolder = folderDialog.SelectedPath;
+            }
+
+            _previousPath = UserSettings.All.TemporaryFolderResolved;
+            CheckSpace();
+        }
+
+        private void CacheTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (_previousPath == UserSettings.All.TemporaryFolderResolved)
+                return;
+
+            _previousPath = UserSettings.All.TemporaryFolderResolved;
+            CheckSpace();
+        }
+
+        private void BrowseCache_Execute(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Process.Start(UserSettings.All.TemporaryFolderResolved);
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Error while trying to browse the cache folder.");
+            }
+        }
+
+        private void ChooseLogsPath_Click(object sender, RoutedEventArgs e)
+        {
+            var path = UserSettings.All.LogsFolder;
+
+            if (UserSettings.All.LogsFolder.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
+                path = "";
+
+            //It's only a relative path if not null/empty and there's no root folder declared.
+            var isRelative = !string.IsNullOrWhiteSpace(path) && !Path.IsPathRooted(path);
+            var notAlt = !string.IsNullOrWhiteSpace(path) && UserSettings.All.LogsFolder.Contains(Path.DirectorySeparatorChar);
+            
+            path = Util.Other.AdjustPath(path);
+
+            var initial = Directory.Exists(path) ? path : Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+
+            var folderDialog = new System.Windows.Forms.FolderBrowserDialog { ShowNewFolderButton = true };
+
+            if (!string.IsNullOrWhiteSpace(initial))
+                folderDialog.SelectedPath = initial;
+
+            if (folderDialog.ShowDialog() != DialogResultWinForms.OK)
+                return;
+
+            //Converts to a relative path again.
+            if (isRelative && !string.IsNullOrWhiteSpace(folderDialog.SelectedPath))
+            {
+                var selected = new Uri(folderDialog.SelectedPath);
+                var baseFolder = new Uri(AppDomain.CurrentDomain.BaseDirectory);
+                var relativeFolder = selected.AbsolutePath.TrimEnd(Path.DirectorySeparatorChar).TrimEnd(Path.AltDirectorySeparatorChar) == baseFolder.AbsolutePath.TrimEnd(Path.DirectorySeparatorChar).TrimEnd(Path.AltDirectorySeparatorChar) ? 
+                    "." : Uri.UnescapeDataString(baseFolder.MakeRelativeUri(selected).ToString());
+
+                //This app even returns you the correct slashes/backslashes.
+                UserSettings.All.LogsFolder = notAlt ? relativeFolder.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar) : 
+                    relativeFolder.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+            }
+            else
+            {
+                UserSettings.All.LogsFolder = folderDialog.SelectedPath;
+            }
+        }
+
+        private void BrowseLogs_Execute(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Process.Start(UserSettings.All.LogsFolder);
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Error while trying to browse the logs folder.");
+            }
+        }
+
 
         private void OpenAppDataSettings_Execute(object sender, ExecutedRoutedEventArgs e)
         {
@@ -1172,47 +1286,95 @@ namespace ScreenToGif.Windows
             }
         }
 
-        #region Async
 
-        private delegate void TempDelegate(DependencyPropertyChangedEventArgs e);
-
-        private TempDelegate _tempDel;
-
-        private void CheckTemp(DependencyPropertyChangedEventArgs e)
+        private void CheckSpace(bool force = false)
         {
-            if (!(bool)e.NewValue) return;
+            if (_isBusy && !force)
+                return;
 
-            _folderList = new List<DirectoryInfo>();
+            _isBusy = true;
+            StatusProgressBar.State = ExtendedProgressBar.ProgressState.Primary;
+            StatusProgressBar.IsIndeterminate = true;
+            FilesTextBlock.Visibility = Visibility.Collapsed;
 
-            var path = Path.Combine(UserSettings.All.TemporaryFolderResolved, "ScreenToGif", "Recording");
+            #region Status
 
-            if (!Directory.Exists(path)) return;
+            var path = Util.Other.AdjustPath(UserSettings.All.TemporaryFolderResolved);
+            var drive = DriveInfo.GetDrives().FirstOrDefault(w => w.RootDirectory.FullName == Path.GetPathRoot(path));
 
-            _folderList = Directory.GetDirectories(path).Select(x => new DirectoryInfo(x)).ToList();
+            if (drive != null)
+            {
+                VolumeTextBlock.Text = $"{drive.VolumeLabel} ({drive.Name.TrimEnd(Path.DirectorySeparatorChar).TrimEnd(Path.AltDirectorySeparatorChar)})".TrimStart();
+                FreeSpaceTextBlock.Text = LocalizationHelper.GetWithFormat("S.Options.Storage.Status.FreeSpace", "{0} free of {1}", Humanizer.BytesToString(drive.TotalFreeSpace), Humanizer.BytesToString(drive.TotalSize));
+                StatusProgressBar.Value = 100 - ((double)drive.AvailableFreeSpace / drive.TotalSize * 100);
+                StatusProgressBar.State = StatusProgressBar.Value < 90 ? ExtendedProgressBar.ProgressState.Info : ExtendedProgressBar.ProgressState.Danger;
+                LowSpaceTextBlock.Visibility = drive.AvailableFreeSpace > 2_000_000_000 ? Visibility.Collapsed : Visibility.Visible; //2 GB.
+            }
+            else
+            {
+                VolumeTextBlock.Text = Path.GetPathRoot(path);
+                FreeSpaceTextBlock.Text = LocalizationHelper.Get("S.Options.Storage.Status.Error");
+                StatusProgressBar.Value = 0;
+                LowSpaceTextBlock.Visibility = Visibility.Collapsed;
+            }
 
-            _fileCount = _folderList.Sum(folder => Directory.EnumerateFiles(folder.FullName).Count());
+            #endregion
+
+            //Calculates the quantity of files and folders.
+            _checkDrive = CheckDrive;
+            _checkDrive.BeginInvoke(CheckDriveCallBack, null);
         }
 
-        private void CheckTempCallBack(IAsyncResult r)
+        private delegate void CheckDriveDelegate();
+
+        private CheckDriveDelegate _checkDrive;
+
+        private void CheckDrive()
+        {
+            _folderList = new List<DirectoryInfo>();
+
+            var path = Util.Other.AdjustPath(UserSettings.All.TemporaryFolderResolved);
+            var cache = Path.Combine(path, "ScreenToGif", "Recording");
+
+            if (!Directory.Exists(cache))
+            {
+                _folderList = new List<DirectoryInfo>();
+                _fileCount = 0;
+                _cacheSize = 0;
+                return;
+            }
+
+            _folderList = Directory.GetDirectories(cache).Select(x => new DirectoryInfo(x)).ToList();
+            _fileCount = _folderList.Sum(folder => Directory.EnumerateFiles(folder.FullName).Count());
+            _cacheSize = _folderList.Sum(s => s.EnumerateFiles("*.*", SearchOption.AllDirectories).Sum(fi => fi.Length));
+        }
+
+        private void CheckDriveCallBack(IAsyncResult r)
         {
             try
             {
-                _tempDel.EndInvoke(r);
+                _checkDrive.EndInvoke(r);
 
                 Dispatcher.Invoke(() =>
                 {
                     App.MainViewModel.CheckDiskSpace();
 
-                    TempSeparator.TextRight = string.Format(LocalizationHelper.Get("S.Options.Storage.FilesAndFolders.Count", "{0} folders and {1} files"), _folderList.Count.ToString("##,##0"), _fileCount.ToString("##,##0"));
-
-                    ClearTempButton.IsEnabled = _folderList.Any();
+                    FilesRun.Text = _fileCount == 0 ? LocalizationHelper.Get("S.Options.Storage.Status.Files.None") : 
+                    LocalizationHelper.GetWithFormat("S.Options.Storage.Status.Files." + (_fileCount > 1 ? "Plural" : "Singular"), "{0} files", _fileCount);
+                    FoldersRun.Text = _folderList.Count == 0 ? LocalizationHelper.Get("S.Options.Storage.Status.Folders.None") : 
+                    LocalizationHelper.GetWithFormat("S.Options.Storage.Status.Folders." + (_folderList.Count > 1 ? "Plural" : "Singular"), "{0} folders", _folderList.Count);
+                    UsedSpaceRun.Text = LocalizationHelper.GetWithFormat("S.Options.Storage.Status.InUse", "{0} in use", Humanizer.BytesToString(_cacheSize));
+                    FilesTextBlock.Visibility = Visibility.Visible;
+                    StatusProgressBar.IsIndeterminate = false;
                 });
             }
             catch (Exception)
             { }
+            finally
+            {
+                _isBusy = false;
+            }
         }
-
-        #endregion
 
         #endregion
 
@@ -2095,12 +2257,10 @@ namespace ScreenToGif.Windows
 
         #endregion
 
+
         public void NotificationUpdated()
         {
-            if (!string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolderResolved) && Global.AvailableDiskSpace < 2000000000)
-                LowSpaceTextBlock.Visibility = Visibility.Visible;
-            else
-                LowSpaceTextBlock.Visibility = Visibility.Collapsed;
+            LowSpaceTextBlock.Visibility = Global.AvailableDiskSpace > 2_000_000_000 ? Visibility.Collapsed : Visibility.Visible; //2 GB.
         }
 
         internal void SelectTab(int index)

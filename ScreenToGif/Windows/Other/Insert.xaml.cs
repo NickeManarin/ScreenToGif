@@ -368,7 +368,7 @@ namespace ScreenToGif.Windows.Other
                     StartProgress(ActualList.Count, FindResource("Editor.UpdatingFrames").ToString());
 
                     //Saves the state before resizing the images.
-                    ActionStack.SaveState(ActionStack.EditAction.ImageAndProperties, ActualList, Util.Other.CreateIndexList2(0, ActualList.Count));
+                    ActionStack.SaveState(ActionStack.EditAction.ImageAndProperties, ActualList, Util.Other.ListOfIndexes(0, ActualList.Count));
 
                     foreach (var frameInfo in ActualList)
                     {

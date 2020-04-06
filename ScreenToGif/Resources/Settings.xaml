@@ -52,11 +52,7 @@
     <s:Boolean x:Key="SingleInstance">True</s:Boolean>
     <s:Boolean x:Key="StartMinimized">False</s:Boolean>
     <s:Int32 x:Key="StartUp">0</s:Int32>
-    <s:Boolean x:Key="NotifyFrameDeletion">True</s:Boolean>
-    <s:Boolean x:Key="NotifyProjectDiscard">True</s:Boolean>
-    <s:Boolean x:Key="NotifyWhileClosingEditor">True</s:Boolean>
     <s:Boolean x:Key="NotifyWhileClosingApp">True</s:Boolean>
-    <s:Boolean x:Key="DrawOutlineOutside">True</s:Boolean>
     <s:Boolean x:Key="DisableHardwareAcceleration">False</s:Boolean>
     <s:Boolean x:Key="CheckForTranslationUpdates">True</s:Boolean>
     <s:Boolean x:Key="CheckForUpdates">True</s:Boolean>
@@ -73,10 +69,19 @@
 
     <!--Options • Recorder-->
     <s:Boolean x:Key="NewRecorder">False</s:Boolean>
+    <s:Boolean x:Key="RecorderThinMode">False</s:Boolean>
+    <s:Boolean x:Key="Magnifier">True</s:Boolean>
     <s:Boolean x:Key="UseDesktopDuplication">False</s:Boolean>
     <s:Boolean x:Key="UseMemoryCache">False</s:Boolean>
     <i:CompressionLevel x:Key="CaptureCompression">Optimal</i:CompressionLevel>
     <s:Int32 x:Key="MemoryCacheSize">50</s:Int32>
+    <u:AppTheme x:Key="MainTheme">Light</u:AppTheme>
+    <Color x:Key="RecorderBackground">#FFFFFFFF</Color>
+    <Color x:Key="RecorderForeground">#FF000000</Color>
+    <Rect x:Key="BoardGridSize">0,0,20,20</Rect>
+    <Color x:Key="BoardGridBackground">#FFFFFFFF</Color>
+    <Color x:Key="BoardGridColor1">#FFFFFFFF</Color>
+    <Color x:Key="BoardGridColor2">#FFFFFFFF</Color>
     <s:Boolean x:Key="ShowCursor">True</s:Boolean>
     <s:Boolean x:Key="DetectMouseClicks">True</s:Boolean>
     <s:Boolean x:Key="UsePreStart">False</s:Boolean>
@@ -85,28 +90,25 @@
     <s:Int32 x:Key="SnapshotDefaultDelay">1000</s:Int32>
     <s:Boolean x:Key="FixedFrameRate">False</s:Boolean>
     <s:Boolean x:Key="AsyncRecording">False</s:Boolean>
-    <s:Boolean x:Key="Magnifier">True</s:Boolean>
     <s:Boolean x:Key="CursorFollowing">False</s:Boolean>
     <s:Int32 x:Key="FollowBuffer">20</s:Int32>
     <s:Int32 x:Key="FollowBufferInvisible">20</s:Int32>
 
-    <!--Options • Interface-->
-    <u:AppTheme x:Key="MainTheme">Light</u:AppTheme>
+    <!--Options • Editor-->
     <Rect x:Key="GridSize">0,0,20,20</Rect>
     <Color x:Key="GridColor1">#FFF5F5F5</Color>
     <Color x:Key="GridColor2">#FFF0F0F0</Color>
-    <Color x:Key="RecorderBackground">#FFFFFFFF</Color>
-    <Color x:Key="RecorderForeground">#FF000000</Color>
-    <Rect x:Key="BoardGridSize">0,0,20,20</Rect>
-    <Color x:Key="BoardGridBackground">#FFFFFFFF</Color>
-    <Color x:Key="BoardGridColor1">#FFFFFFFF</Color>
-    <Color x:Key="BoardGridColor2">#FFFFFFFF</Color>
     <s:Boolean x:Key="EditorExtendChrome">False</s:Boolean>
-    <s:Boolean x:Key="RecorderThinMode">False</s:Boolean>
-    <s:Boolean x:Key="TripleClickSelection">False</s:Boolean>
     <s:Boolean x:Key="AutomaticallySizeOnContent">False</s:Boolean>
     <s:Boolean x:Key="AutomaticallyFitImage">True</s:Boolean>
-
+    <s:Boolean x:Key="NotifyFrameDeletion">True</s:Boolean>
+    <s:Boolean x:Key="NotifyProjectDiscard">True</s:Boolean>
+    <s:Boolean x:Key="NotifyWhileClosingEditor">True</s:Boolean>
+    <s:Boolean x:Key="TripleClickSelection">False</s:Boolean>
+    <s:Boolean x:Key="DrawOutlineOutside">True</s:Boolean>
+    <s:Boolean x:Key="SetHistoryLimit">True</s:Boolean>
+    <s:Int32 x:Key="HistoryLimit">50</s:Int32>
+    
     <!--Options • Automated Tasks-->
     <c:ArrayList Capacity="1" x:Key="AutomatedTasksList">
         <m:MouseClicksModel ForegroundColor="#78FFFF00" Width="12" Height="12" TaskType="MouseClicks" />
@@ -138,7 +140,7 @@
     <!--Options • Language-->
     <s:String x:Key="LanguageCode">auto</s:String>
 
-    <!--Options • Temporary Files and Extras-->
+    <!--Options • Storage and Extras-->
     <s:String x:Key="LogsFolder">.</s:String>
     <!--<s:String x:Key="TemporaryFolder"></s:String>-->
     <s:Boolean x:Key="AutomaticCleanUp">True</s:Boolean>
@@ -300,6 +302,8 @@
     <!--Editor • Reduce Frame Count-->
     <s:Int32 x:Key="ReduceFactor">1</s:Int32>
     <s:Int32 x:Key="ReduceCount">1</s:Int32>
+    <u:ReduceDelayType x:Key="ReduceDelay">Evenly</u:ReduceDelayType>
+    <s:Boolean x:Key="ReduceApplyToAll">True</s:Boolean>
     
     <!--Editor • Remove Duplicates-->
     <s:Double x:Key="DuplicatesSimilarity">90</s:Double>

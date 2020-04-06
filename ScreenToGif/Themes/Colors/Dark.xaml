@@ -125,5 +125,9 @@
     <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="#F026A0DA"/>
 
     <!--ProgressBar-->
-    <SolidColorBrush x:Key="Brush.ProgressBar.Progress" Color="#FF046816"/>
+    <SolidColorBrush x:Key="Brush.ProgressBar.Detail" Color="#60000000"/>
+    <SolidColorBrush x:Key="Brush.ProgressBar.Primary" Color="#FF046816"/>
+    <SolidColorBrush x:Key="Brush.ProgressBar.Info" Color="#FF004175"/>
+    <SolidColorBrush x:Key="Brush.ProgressBar.Warning" Color="#FF767A04"/>
+    <SolidColorBrush x:Key="Brush.ProgressBar.Danger" Color="#FF870300"/>
 </ResourceDictionary>

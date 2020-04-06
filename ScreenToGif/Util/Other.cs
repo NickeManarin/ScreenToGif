@@ -367,7 +367,7 @@ namespace ScreenToGif.Util
         /// <param name="start">The start index.</param>
         /// <param name="end">The end index. If it's a lower value than the start index, the start becomes the end and vice-versa.</param>
         /// <returns>A list of ordered integers.</returns>
-        public static List<int> CreateIndexList(int start, int end)
+        public static List<int> ListOfIndexesOld(int start, int end)
         {
             if (start > end)
                 return Enumerable.Range(end, start - end + 1).ToList();
@@ -381,7 +381,7 @@ namespace ScreenToGif.Util
         /// <param name="start">The start index.</param>
         /// <param name="quantity">The quantity indexes to create.</param>
         /// <returns>A list of ordered integers.</returns>
-        public static List<int> CreateIndexList2(int start, int quantity)
+        public static List<int> ListOfIndexes(int start, int quantity)
         {
             //if (start > end)
             //    return Enumerable.Range(end, start - end + 1).ToList();
@@ -496,7 +496,7 @@ namespace ScreenToGif.Util
             //If the path is relative, File.Exists() was returning C:\\Windows\\System32\ffmpeg.exe when the app was lauched from the "Open with" context menu.
             //So, in order to get the correct location, I need to combine the current base directory with the relative path.
             if (!string.IsNullOrWhiteSpace(path) && !Path.IsPathRooted(path))
-                return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar));
+                return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar).Replace(".\\", "").Replace(".", ""));
 
             return path;
         }

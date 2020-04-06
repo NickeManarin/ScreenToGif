@@ -9,6 +9,11 @@
         Loaded="Window_Loaded" Closing="Window_Closing">
 
     <Window.CommandBindings>
+        <CommandBinding Command="{StaticResource Command.CheckCache}" CanExecute="Cache_CanExecute" Executed="CheckCache_Execute"/>
+        <CommandBinding Command="{StaticResource Command.ClearCache}" CanExecute="Cache_CanExecute" Executed="ClearCache_Execute"/>
+        <CommandBinding Command="{StaticResource Command.BrowseCache}" CanExecute="BrowseCache_CanExecute" Executed="BrowseCache_Execute"/>
+        <CommandBinding Command="{StaticResource Command.BrowseLogs}" CanExecute="BrowseLogs_CanExecute" Executed="BrowseLogs_Execute"/>
+
         <CommandBinding Command="{StaticResource Command.RemoveAppDataSettings}" CanExecute="RemoveAppDataSettings_CanExecute" Executed="RemoveAppDataSettings_Executed"/>
         <CommandBinding Command="{StaticResource Command.OpenAppDataSettings}" CanExecute="RemoveAppDataSettings_CanExecute" Executed="OpenAppDataSettings_Execute"/>
 
@@ -59,7 +64,7 @@
 
                 <n:ImageRadioButton x:Name="AppRadio" Text="{DynamicResource S.Options.App}" Content="{StaticResource Vector.Application}" IsChecked="True"/>
                 <n:ImageRadioButton x:Name="RecorderRadio" Text="{DynamicResource S.Options.Recorder}" Content="{StaticResource Vector.Record}"/>
-                <n:ImageRadioButton x:Name="InterfaceRadio" Text="{DynamicResource S.Options.Interface}" Content="{StaticResource Vector.Colors}"/>
+                <n:ImageRadioButton x:Name="EditorRadio" Text="{DynamicResource S.Options.Editor}" Content="{StaticResource Vector.Editor}"/>
                 <n:ImageRadioButton x:Name="AutomaticRadio" Text="{DynamicResource S.Options.Tasks}" Content="{StaticResource Vector.Encoder}"/>
                 <n:ImageRadioButton x:Name="ShortcutsRadio" Text="{DynamicResource S.Options.Shortcuts}" Content="{StaticResource Vector.Keyboard}"/>
                 <n:ImageRadioButton x:Name="LanguageRadio" Text="{DynamicResource S.Options.Language}" Content="{StaticResource Vector.Translate}"/>
@@ -77,6 +82,7 @@
                     <!--Application-->
                     <Grid x:Name="ApplicationPanel" Visibility="{Binding IsChecked, ElementName=AppRadio, Converter={StaticResource Bool2Visibility}}" Loaded="ApplicationPanel_Loaded">
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -113,7 +119,7 @@
                                                             IsChecked="{Binding Path=SingleInstance, Mode=TwoWay, Converter={StaticResource InvertedBool}}" ToolTip="{DynamicResource S.Options.App.Startup.Instance.Multiple.Info}"/>
                                     </Grid>
                                 </WrapPanel>
-                                
+
                                 <WrapPanel Margin="10,0,5,0">
                                     <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.Startup.Tray}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=StartMinimized, Mode=TwoWay}" Checked="StartCheckBox_Checked"/>
                                     <TextBlock Text="{DynamicResource S.Options.App.Startup.Tray.Info}" Padding="0" Margin="5,0,0,3" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
@@ -136,12 +142,119 @@
                                     </ComboBox>
 
                                     <TextBlock Grid.Column="2" Text="{DynamicResource S.Options.App.Startup.Window.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="WrapWithOverflow" 
-                                       Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                                               Foreground="{DynamicResource Element.Foreground.Gray150}"/>
                                 </Grid>
                             </StackPanel>
                         </Expander>
 
-                        <Expander Grid.Row="1" Header="{DynamicResource S.Options.App.Tray}" IsExpanded="True">
+                        <Expander Grid.Row="1" Header="{DynamicResource S.Options.App.Theme}" IsExpanded="True">
+                            <Grid Margin="15,3,5,3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0" Text="{DynamicResource S.Options.App.Theme.Scheme}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="2,0,5,0" VerticalAlignment="Center"/>
+                                <ComboBox Grid.Column="1" x:Name="AppThemeComboBox" Height="28" VerticalContentAlignment="Center" Padding="5,0" SelectedValuePath="Tag" 
+                                          SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=MainTheme, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          SelectionChanged="AppThemeComboBox_SelectionChanged">
+
+                                    <StackPanel Orientation="Horizontal" Tag="Light">
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="#FFFFFFFF" Width="20" Height="20" ToolTip="Input and elements">
+                                            <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFFAFAFA" Width="20" Height="20" ToolTip="Background 1">
+                                            <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFF5F5F5" Width="20" Height="20" ToolTip="Background 2">
+                                            <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFF9F9FF" Width="20" Height="20" ToolTip="Background 3">
+                                            <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFFFFFFF" Width="20" Height="20" ToolTip="Hover">
+                                            <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FFEFEFEF" Width="20" Height="20" ToolTip="Pressed">
+                                            <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Label Content="{DynamicResource S.Options.App.Theme.Scheme.Light}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" 
+                                               Foreground="{DynamicResource Element.Foreground}"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" Tag="Medium">
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="#FFEDEDED" Width="20" Height="20" ToolTip="Input and elements">
+                                            <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFE3E3E3" Width="20" Height="20" ToolTip="Background 1">
+                                            <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFD6D6D6" Width="20" Height="20" ToolTip="Background 2">
+                                            <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFD7D7E4" Width="20" Height="20" ToolTip="Background 3">
+                                            <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFE8E8E8" Width="20" Height="20" ToolTip="Hover">
+                                            <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FFECECEC" Width="20" Height="20" ToolTip="Pressed">
+                                            <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Label Content="{DynamicResource S.Options.App.Theme.Scheme.Medium}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" 
+                                               Foreground="{DynamicResource Element.Foreground}"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" Tag="Dark">
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="#FF202020" Width="20" Height="20">
+                                            <TextBlock Text="Aa" Foreground="#FFE8E8E8" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF262626" Width="20" Height="20">
+                                            <TextBlock Text="Aa" Foreground="#FFE8E8E8" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF2A2A2A" Width="20" Height="20">
+                                            <TextBlock Text="Aa" Foreground="#FFE8E8E8" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF323130" Width="20" Height="20">
+                                            <TextBlock Text="Aa" Foreground="#FFE8E8E8" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF323232" Width="20" Height="20">
+                                            <TextBlock Text="Aa" Foreground="#FFE8E8E8" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FF343434" Width="20" Height="20">
+                                            <TextBlock Text="Aa" Foreground="#FFE8E8E8" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Label Content="{DynamicResource S.Options.App.Theme.Scheme.Dark}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" 
+                                               Foreground="{DynamicResource Element.Foreground}"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" Tag="VeryDark">
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="#FF101010" Width="20" Height="20">
+                                            <TextBlock Text="Aa" Foreground="#FF696969" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF161616" Width="20" Height="20">
+                                            <TextBlock Text="Aa" Foreground="#FF696969" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF1A1A1A" Width="20" Height="20">
+                                            <TextBlock Text="Aa" Foreground="#FF696969" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF222120" Width="20" Height="20">
+                                            <TextBlock Text="Aa" Foreground="#FF696969" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF222222" Width="20" Height="20">
+                                            <TextBlock Text="Aa" Foreground="#FF696969" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FF242424" Width="20" Height="20">
+                                            <TextBlock Text="Aa" Foreground="#FF696969" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Label Content="{DynamicResource S.Options.App.Theme.Scheme.VeryDark}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" 
+                                               Foreground="{DynamicResource Element.Foreground}"/>
+                                    </StackPanel>
+                                </ComboBox>
+                            </Grid>
+                        </Expander>
+
+                        <Expander Grid.Row="2" Header="{DynamicResource S.Options.App.Tray}" IsExpanded="True">
                             <StackPanel>
                                 <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.Tray.Show}" Margin="15,3,5,3" IsChecked="{Binding Path=ShowNotificationIcon, Mode=TwoWay}"
                                                     CheckedChanged="NotificationIconCheckBox_CheckedChanged"/>
@@ -237,13 +350,9 @@
                             </StackPanel>
                         </Expander>
 
-                        <Expander Grid.Row="2" Header="{DynamicResource S.Options.App.General}" IsExpanded="True">
+                        <Expander Grid.Row="3" Header="{DynamicResource S.Options.App.General}" IsExpanded="True">
                             <StackPanel>
-                                <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.NotifyFrameDeletion}" Margin="15,3,5,3" IsChecked="{Binding Path=NotifyFrameDeletion, Mode=TwoWay}"/>
-                                <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.NotifyProjectDiscard}" Margin="15,3,5,3" IsChecked="{Binding Path=NotifyProjectDiscard, Mode=TwoWay}"/>
-                                <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.NotifyWhileClosingEditor}" Margin="15,3,5,3" IsChecked="{Binding Path=NotifyWhileClosingEditor, Mode=TwoWay}"/>
                                 <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.NotifyWhileClosingApp}" Margin="15,3,5,3" IsChecked="{Binding Path=NotifyWhileClosingApp, Mode=TwoWay}"/>
-                                <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.DrawOutlineOutside}" Margin="15,3,5,3" IsChecked="{Binding Path=DrawOutlineOutside, Mode=TwoWay}"/>
 
                                 <WrapPanel Margin="10,0,5,0">
                                     <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.DisableHardwareAcceleration}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=DisableHardwareAcceleration, Mode=TwoWay}"/>
@@ -272,7 +381,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        
+
                         <Expander Grid.Row="0" Header="{DynamicResource S.Options.Recorder.Interface}" IsExpanded="True">
                             <Grid Margin="10,0,5,5">
                                 <Grid.RowDefinitions>
@@ -311,6 +420,9 @@
                                         </Canvas>
                                     </n:ImageRadioButton.Content>
                                 </n:ImageRadioButton>
+
+                                <n:ExtendedCheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="5,3" Visibility="{Binding Path=NewRecorder, Mode=OneWay, Converter={StaticResource InvertedBoolToVisibility}}"
+                                                    Text="{DynamicResource S.Options.Recorder.HideTitleBar}" IsChecked="{Binding Path=RecorderThinMode, Mode=TwoWay}"/>
 
                                 <WrapPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,5,0" Visibility="{Binding Path=NewRecorder, Mode=OneWay, Converter={StaticResource Bool2Visibility}}">
                                     <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.Magnifier}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=Magnifier, Mode=TwoWay}"/>
@@ -452,256 +564,153 @@
                         </Expander>
                     </Grid>
 
-                    <!--Interface-->
-                    <StackPanel x:Name="InterfacePanel" Visibility="{Binding IsChecked, ElementName=InterfaceRadio, Converter={StaticResource Bool2Visibility}}" Loaded="InterfacePanel_Loaded">
-                        <n:LabelSeparator Text="{DynamicResource S.Options.Interface.Theme}" Margin="0,0,0,5"/>
-                        <Grid Margin="10,0,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition MinWidth="85" Width="Auto"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
+                    <!--Editor-->
+                    <StackPanel x:Name="EditorPanel" Visibility="{Binding IsChecked, ElementName=EditorRadio, Converter={StaticResource Bool2Visibility}}" Loaded="EditorPanel_Loaded">
+                        <Expander Header="{DynamicResource S.Options.Editor.Previewer}" IsExpanded="True">
+                            <StackPanel Margin="10,0,5,0">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
 
-                            <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme}" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                            <ComboBox x:Name="AppThemeComboBox" Grid.Column="1" Height="28" VerticalContentAlignment="Center" Padding="5,0" 
-                                      SelectedValuePath="Tag" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=MainTheme, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                      SelectionChanged="AppThemeComboBox_SelectionChanged">
-                                <StackPanel Orientation="Horizontal" Tag="Light">
-                                    <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="#FFFFFFFF" Width="20" Height="20" ToolTip="Input and elements">
-                                        <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFFAFAFA" Width="20" Height="20" ToolTip="Background 1">
-                                        <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFF5F5F5" Width="20" Height="20" ToolTip="Background 2">
-                                        <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFF9F9FF" Width="20" Height="20" ToolTip="Background 3">
-                                        <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFFFFFFF" Width="20" Height="20" ToolTip="Hover">
-                                        <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FFEFEFEF" Width="20" Height="20" ToolTip="Pressed">
-                                        <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme.Light}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" 
-                                           Foreground="{DynamicResource Element.Foreground}"/>
-                                </StackPanel>
+                                    <TextBlock Grid.Column="0" Grid.Row="0" Text="{DynamicResource S.Options.App.Theme.Scheme}" Foreground="{DynamicResource Element.Foreground.Medium}" 
+                                               Padding="2,0,5,0" VerticalAlignment="Center"/>
+                                    <ComboBox Grid.Column="1" Grid.Row="0" x:Name="ColorSchemesComboBox" Height="28" VerticalContentAlignment="Center" Padding="5,0" Margin="0,3" 
+                                              SelectionChanged="ColorSchemesComboBox_SelectionChanged">
+                                        <ComboBox.Items>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="#FFF5F5F5" Width="20" Height="20"/>
+                                                <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FFF0F0F0" Width="20" Height="20"/>
+                                                <Label Content="{DynamicResource S.Options.App.Theme.Scheme.VeryLight}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="White" Width="20" Height="20"/>
+                                                <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FFD3D3D3" Width="20" Height="20"/>
+                                                <Label Content="{DynamicResource S.Options.App.Theme.Scheme.Light}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="#FF999999" Width="20" Height="20"/>
+                                                <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FF666666" Width="20" Height="20"/>
+                                                <Label Content="{DynamicResource S.Options.App.Theme.Scheme.Medium}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="#FF323232" Width="20" Height="20"/>
+                                                <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FF2D2D2D" Width="20" Height="20"/>
+                                                <Label Content="{DynamicResource S.Options.App.Theme.Scheme.Dark}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                            </StackPanel>
+                                            <Separator Height="1"/>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Width="20" Height="20">
+                                                    <Label Content="?" Padding="0" HorizontalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}" FontSize="14"/>
+                                                </Border>
+                                                <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Width="20" Height="20">
+                                                    <Label Content="?" Padding="0" HorizontalContentAlignment="Center" FontSize="14" Foreground="{DynamicResource Element.Foreground}"/>
+                                                </Border>
+                                                <Label Content="{DynamicResource S.Options.App.Theme.Scheme.Custom}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                            </StackPanel>
+                                        </ComboBox.Items>
+                                    </ComboBox>
 
-                                <StackPanel Orientation="Horizontal" Tag="Medium">
-                                    <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="#FFEDEDED" Width="20" Height="20" ToolTip="Input and elements">
-                                        <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFE3E3E3" Width="20" Height="20" ToolTip="Background 1">
-                                        <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFD6D6D6" Width="20" Height="20" ToolTip="Background 2">
-                                        <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFD7D7E4" Width="20" Height="20" ToolTip="Background 3">
-                                        <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFE8E8E8" Width="20" Height="20" ToolTip="Hover">
-                                        <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FFECECEC" Width="20" Height="20" ToolTip="Pressed">
-                                        <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme.Medium}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" 
-                                           Foreground="{DynamicResource Element.Foreground}"/>
-                                </StackPanel>
+                                    <TextBlock Grid.Column="0" Grid.Row="1" Text="{DynamicResource S.Options.Editor.Previewer.GridSize}" Foreground="{DynamicResource Element.Foreground.Medium}" 
+                                               Padding="2,0,5,0" VerticalAlignment="Center"/>
+                                    <ComboBox Grid.Column="1" Grid.Row="1" x:Name="GridSizeComboBox" Height="28" Tag="Editor" VerticalContentAlignment="Center" Padding="5,0" Margin="0,3" 
+                                              SelectionChanged="GridSizeComboBox_SelectionChanged">
+                                        <ComboBox.Items>
+                                            <StackPanel x:Name="VerySmallPanel" Orientation="Horizontal">
+                                                <Label Content="10 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                                <Label Content="{DynamicResource S.Options.Editor.Previewer.GridSize.VerySmall}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" 
+                                                       VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                            </StackPanel>
+                                            <StackPanel x:Name="SmallPanel" Orientation="Horizontal">
+                                                <Label Content="15 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                                <Label Content="{DynamicResource S.Options.Editor.Previewer.GridSize.Small}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" 
+                                                       VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                            </StackPanel>
+                                            <StackPanel x:Name="MediumSizePanel" Orientation="Horizontal">
+                                                <Label Content="20 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                                <Label Content="{DynamicResource S.Options.Editor.Previewer.GridSize.Medium}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" 
+                                                       VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                            </StackPanel>
+                                            <StackPanel x:Name="LargePanel" Orientation="Horizontal">
+                                                <Label Content="25 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                                <Label Content="{DynamicResource S.Options.Editor.Previewer.GridSize.Large}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" 
+                                                       VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                            </StackPanel>
+                                            <StackPanel x:Name="VeryLargePanel" Orientation="Horizontal">
+                                                <Label Content="30 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                                <Label Content="{DynamicResource S.Options.Editor.Previewer.GridSize.VeryLarge}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" 
+                                                       VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                            </StackPanel>
+                                            <StackPanel x:Name="ILikeBigSquaresPanel" Orientation="Horizontal">
+                                                <Label Content="50 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                                <Label Content="{DynamicResource S.Options.Editor.Previewer.GridSize.ILikeBigSquares}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" 
+                                                       VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                            </StackPanel>
+                                            <StackPanel x:Name="ImBlindPanel" Orientation="Horizontal">
+                                                <Label Content="100 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                                <Label Content="{DynamicResource S.Options.Editor.Previewer.GridSize.ImBlind}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" 
+                                                       VerticalContentAlignment="Center" Padding="10,0,5,0" FontWeight="Bold" FontSize="14"/>
+                                            </StackPanel>
+                                            <Separator/>
+                                            <StackPanel x:Name="CustomSizePanel" Orientation="Horizontal">
+                                                <Label Content="? pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
+                                                <Label Content="{DynamicResource S.Options.Editor.Previewer.GridSize.Custom}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" 
+                                                       VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                            </StackPanel>
+                                        </ComboBox.Items>
+                                    </ComboBox>
+                                </Grid>
 
-                                <StackPanel Orientation="Horizontal" Tag="Dark">
-                                    <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="#FF202020" Width="20" Height="20">
-                                        <TextBlock Text="Aa" Foreground="#FFE8E8E8" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF262626" Width="20" Height="20">
-                                        <TextBlock Text="Aa" Foreground="#FFE8E8E8" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF2A2A2A" Width="20" Height="20">
-                                        <TextBlock Text="Aa" Foreground="#FFE8E8E8" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF323130" Width="20" Height="20">
-                                        <TextBlock Text="Aa" Foreground="#FFE8E8E8" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF323232" Width="20" Height="20">
-                                        <TextBlock Text="Aa" Foreground="#FFE8E8E8" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FF343434" Width="20" Height="20">
-                                        <TextBlock Text="Aa" Foreground="#FFE8E8E8" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme.Dark}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" 
-                                           Foreground="{DynamicResource Element.Foreground}"/>
-                                </StackPanel>
+                                <Grid Margin="0,3">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
 
-                                <StackPanel Orientation="Horizontal" Tag="VeryDark">
-                                    <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="#FF101010" Width="20" Height="20">
-                                        <TextBlock Text="Aa" Foreground="#FF696969" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF161616" Width="20" Height="20">
-                                        <TextBlock Text="Aa" Foreground="#FF696969" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF1A1A1A" Width="20" Height="20">
-                                        <TextBlock Text="Aa" Foreground="#FF696969" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF222120" Width="20" Height="20">
-                                        <TextBlock Text="Aa" Foreground="#FF696969" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF222222" Width="20" Height="20">
-                                        <TextBlock Text="Aa" Foreground="#FF696969" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FF242424" Width="20" Height="20">
-                                        <TextBlock Text="Aa" Foreground="#FF696969" HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme.VeryDark}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" 
-                                           Foreground="{DynamicResource Element.Foreground}"/>
-                                </StackPanel>
-                            </ComboBox>
-                        </Grid>
+                                    <n:ColorBox Grid.Column="0" x:Name="EvenColorBox" Height="40" SelectedColor="{Binding GridColor1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Tag="Editor"
+                                                ToolTip="{DynamicResource S.Options.Editor.Previewer.EvenColor}" ToolTipService.Placement="Bottom" ColorChanged="ColorBox_ColorChanged"/>
 
-                        <n:LabelSeparator Text="{DynamicResource S.Options.Interface.EditorBackground}" Margin="0,0,0,5"/>
-                        <StackPanel>
-                            <Grid Margin="10,0,0,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition MinWidth="85" Width="Auto"/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
+                                    <n:ColorBox Grid.Column="1" x:Name="OddColorBox" Height="40" SelectedColor="{Binding GridColor2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Tag="Editor"
+                                                ToolTip="{DynamicResource S.Options.Editor.Previewer.OddColor}" ToolTipService.Placement="Bottom" BorderThickness="0,1" ColorChanged="ColorBox_ColorChanged"/>
 
-                                <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme}" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                                <ComboBox x:Name="ColorSchemesComboBox" Grid.Column="1" Height="28" VerticalContentAlignment="Center" Padding="5,0" SelectionChanged="ColorSchemesComboBox_SelectionChanged">
-                                    <ComboBox.Items>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="#FFF5F5F5" Width="20" Height="20"/>
-                                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FFF0F0F0" Width="20" Height="20"/>
-                                            <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme.VeryLight}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="White" Width="20" Height="20"/>
-                                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FFD3D3D3" Width="20" Height="20"/>
-                                            <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme.Light}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="#FF999999" Width="20" Height="20"/>
-                                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FF666666" Width="20" Height="20"/>
-                                            <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme.Medium}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="#FF323232" Width="20" Height="20"/>
-                                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FF2D2D2D" Width="20" Height="20"/>
-                                            <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme.Dark}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
-                                        </StackPanel>
-                                        <Separator Height="1"/>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Width="20" Height="20">
-                                                <Label Content="?" Padding="0" HorizontalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}" FontSize="14"/>
-                                            </Border>
-                                            <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Width="20" Height="20">
-                                                <Label Content="?" Padding="0" HorizontalContentAlignment="Center" FontSize="14" Foreground="{DynamicResource Element.Foreground}"/>
-                                            </Border>
-                                            <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme.Custom}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
-                                        </StackPanel>
-                                    </ComboBox.Items>
-                                </ComboBox>
-                            </Grid>
+                                    <Border x:Name="GridSizeBorder" Grid.Column="2" BorderThickness="1" BorderBrush="{DynamicResource Element.Border}"
+                                            Background="{StaticResource Checker.DrawingBrush}" Cursor="Hand" MouseLeftButtonDown="GridSizeBorder_MouseLeftButtonDown"
+                                            ToolTip="{DynamicResource S.Options.Editor.Previewer.GridSize}" ToolTipService.Placement="Bottom"/>
+                                </Grid>
 
-                            <Grid Margin="10,5,0,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition MinWidth="85" Width="Auto"/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
+                                <Grid x:Name="GridSizeGrid" Visibility="Collapsed">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="80"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="80"/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
 
-                                <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize}" x:Uid="GridSizeLabel" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                                <ComboBox x:Name="GridSizeComboBox" Grid.Column="1" Height="28" Tag="Editor" VerticalContentAlignment="Center" SelectionChanged="GridSizeComboBox_SelectionChanged">
-                                    <ComboBox.Items>
-                                        <StackPanel x:Name="VerySmallPanel" Orientation="Horizontal">
-                                            <Label Content="10 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                            <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.VerySmall}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" 
-                                                   VerticalContentAlignment="Center" Padding="10,0,5,0"/>
-                                        </StackPanel>
-                                        <StackPanel x:Name="SmallPanel" Orientation="Horizontal">
-                                            <Label Content="15 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                            <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Small}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" 
-                                                   VerticalContentAlignment="Center" Padding="10,0,5,0"/>
-                                        </StackPanel>
-                                        <StackPanel x:Name="MediumSizePanel" Orientation="Horizontal">
-                                            <Label Content="20 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                            <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Medium}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" 
-                                                   VerticalContentAlignment="Center" Padding="10,0,5,0"/>
-                                        </StackPanel>
-                                        <StackPanel x:Name="LargePanel" Orientation="Horizontal">
-                                            <Label Content="25 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                            <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Large}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" 
-                                                   VerticalContentAlignment="Center" Padding="10,0,5,0"/>
-                                        </StackPanel>
-                                        <StackPanel x:Name="VeryLargePanel" Orientation="Horizontal">
-                                            <Label Content="30 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                            <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.VeryLarge}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" 
-                                                   VerticalContentAlignment="Center" Padding="10,0,5,0"/>
-                                        </StackPanel>
-                                        <StackPanel x:Name="ILikeBigSquaresPanel" Orientation="Horizontal">
-                                            <Label Content="50 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                            <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.ILikeBigSquares}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" 
-                                                   VerticalContentAlignment="Center" Padding="10,0,5,0"/>
-                                        </StackPanel>
-                                        <StackPanel x:Name="ImBlindPanel" Orientation="Horizontal">
-                                            <Label Content="100 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                            <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.ImBlind}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" 
-                                                   VerticalContentAlignment="Center" Padding="10,0,5,0" FontWeight="Bold" FontSize="14"/>
-                                        </StackPanel>
-                                        <Separator/>
-                                        <StackPanel x:Name="CustomSizePanel" Orientation="Horizontal">
-                                            <Label Content="? pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                            <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Custom}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" 
-                                                   VerticalContentAlignment="Center" Padding="10,0,5,0"/>
-                                        </StackPanel>
-                                    </ComboBox.Items>
-                                </ComboBox>
-                            </Grid>
+                                    <Viewbox Grid.Column="0" Child="{StaticResource Vector.WidthHeight}" Height="23" Width="23" Margin="3" Opacity="{DynamicResource Element.Opacity}"/>
 
-                            <Grid Margin="10,10,0,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="1" Text="{DynamicResource S.Options.Editor.Previewer.GridSize.Height}" Padding="5" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                    <n:IntegerUpDown Grid.Column="2" x:Name="GridHeightIntegerUpDown" Minimum="1" Maximum="1000" Margin="5,3" UpdateOnInput="True" Tag="Editor" ValueChanged="GridSizeIntegerUpDown_ValueChanged"/>
 
-                                <n:ColorBox Grid.Column="0" x:Name="EvenColorBox" Height="40" SelectedColor="{Binding GridColor1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Tag="Editor"
-                                            ToolTip="{DynamicResource S.Options.Interface.EditorBackground.EvenColor}" ToolTipService.Placement="Bottom" ColorChanged="ColorBox_ColorChanged"/>
+                                    <TextBlock Grid.Column="3" Text="{DynamicResource S.Options.Editor.Previewer.GridSize.Width}" Padding="5" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                    <n:IntegerUpDown Grid.Column="4" x:Name="GridWidthIntegerUpDown" Minimum="1" Maximum="1000" Margin="5,3" UpdateOnInput="True" Tag="Editor" ValueChanged="GridSizeIntegerUpDown_ValueChanged"/>
 
-                                <n:ColorBox Grid.Column="1" x:Name="OddColorBox" Height="40" SelectedColor="{Binding GridColor2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Tag="Editor"
-                                            ToolTip="{DynamicResource S.Options.Interface.EditorBackground.OddColor}" ToolTipService.Placement="Bottom" BorderThickness="0,1" ColorChanged="ColorBox_ColorChanged"/>
-
-                                <Border x:Name="GridSizeBorder" Grid.Column="2" BorderThickness="1" BorderBrush="{DynamicResource Element.Border}"
-                                        Background="{StaticResource Checker.DrawingBrush}" Cursor="Hand" MouseLeftButtonDown="GridSizeBorder_MouseLeftButtonDown"
-                                        ToolTip="{DynamicResource S.Options.Interface.EditorBackground.GridSize}" ToolTipService.Placement="Bottom"/>
-                            </Grid>
-
-                            <Grid Margin="10,0,0,0" x:Name="GridSizeGrid" Visibility="Collapsed">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="80"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="80"/>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-
-                                <Viewbox Grid.Column="0" Child="{StaticResource Vector.WidthHeight}" Height="23" Width="23" Margin="3" Opacity="{DynamicResource Element.Opacity}"/>
-
-                                <TextBlock Grid.Column="1" Text="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Height}" Padding="5" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                                <n:IntegerUpDown Grid.Column="2" x:Name="GridHeightIntegerUpDown" Minimum="1" Maximum="1000" Margin="5,3" UpdateOnInput="True" Tag="Editor" ValueChanged="GridSizeIntegerUpDown_ValueChanged"/>
-
-                                <TextBlock Grid.Column="3" Text="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Width}" Padding="5" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                                <n:IntegerUpDown Grid.Column="4" x:Name="GridWidthIntegerUpDown" Minimum="1" Maximum="1000" Margin="5,3" UpdateOnInput="True" Tag="Editor" ValueChanged="GridSizeIntegerUpDown_ValueChanged"/>
-
-                                <n:ImageButton Grid.Column="6" Text="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Apply}" Content="{StaticResource Vector.Ok}" Style="{StaticResource Style.Button.Horizontal}" 
-                                               Padding="2" MaxSize="14" Click="ApplySizeButton_Click"/>
-                                <n:ImageButton Grid.Column="7" Text="{DynamicResource S.Cancel}" Content="{StaticResource Vector.Cancel}" Style="{StaticResource Style.Button.Horizontal}" 
-                                               Padding="2" MaxSize="14" Click="CancelSizeButton_Click"/>
-                            </Grid>
-                        </StackPanel>
+                                    <n:ImageButton Grid.Column="6" Text="{DynamicResource S.Options.Editor.Previewer.GridSize.Apply}" Content="{StaticResource Vector.Ok}" Style="{StaticResource Style.Button.Horizontal}" 
+                                                   Padding="2" MaxSize="14" Click="ApplySizeButton_Click"/>
+                                    <n:ImageButton Grid.Column="7" Text="{DynamicResource S.Cancel}" Content="{StaticResource Vector.Cancel}" Style="{StaticResource Style.Button.Horizontal}" 
+                                                   Padding="2" MaxSize="14" Click="CancelSizeButton_Click"/>
+                                </Grid>
+                            </StackPanel>
+                        </Expander>
 
                         <!--<n:LabelSeparator Text="{DynamicResource S.Options.Interface.BoardBackground}" Visibility="Collapsed"/>-->
                         <!--<StackPanel Visibility="Collapsed">
@@ -711,7 +720,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme}" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                            <Label Content="{DynamicResource S.Options.App.Theme.Scheme}" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                             <ComboBox x:Name="ColorSchemes2ComboBox" Grid.Column="1" Height="28" SelectionChanged="BoardColorSchemesComboBox_SelectionChanged" 
                                       VerticalContentAlignment="Center" Padding="5,0">
                                 <ComboBox.Items>
@@ -719,28 +728,28 @@
                                         <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="White" Width="20" Height="20"/>
                                         <Border BorderBrush="#FFACACAC" BorderThickness="0,1,0,1" Background="White" Width="20" Height="20"/>
                                         <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="White" Width="20" Height="20"/>
-                                        <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme.VeryLight}" VerticalAlignment="Center" 
+                                        <Label Content="{DynamicResource S.Options.App.Theme.Scheme.VeryLight}" VerticalAlignment="Center" 
                                                VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="White" Width="20" Height="20"/>
                                         <Border BorderBrush="#FFACACAC" BorderThickness="0,1,0,1" Background="#FFD3D3D3" Width="20" Height="20"/>
                                         <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="#FFD3D3D3" Width="20" Height="20"/>
-                                        <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme.Light}" VerticalAlignment="Center" 
+                                        <Label Content="{DynamicResource S.Options.App.Theme.Scheme.Light}" VerticalAlignment="Center" 
                                                VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="White" Width="20" Height="20"/>
                                         <Border BorderBrush="#FFACACAC" BorderThickness="0,1,0,1" Background="#FF666666" Width="20" Height="20"/>
                                         <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="#FF666666" Width="20" Height="20"/>
-                                        <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme.Medium}" VerticalAlignment="Center" 
+                                        <Label Content="{DynamicResource S.Options.App.Theme.Scheme.Medium}" VerticalAlignment="Center" 
                                                VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Border BorderBrush="#FFACACAC" BorderThickness="1,1,0,1" Background="White" Width="20" Height="20"/>
                                         <Border BorderBrush="#FFACACAC" BorderThickness="0,1,0,1" Background="#FF333333" Width="20" Height="20"/>
                                         <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Background="#FF333333" Width="20" Height="20"/>
-                                        <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme.Dark}" VerticalAlignment="Center" 
+                                        <Label Content="{DynamicResource S.Options.App.Theme.Scheme.Dark}" VerticalAlignment="Center" 
                                                VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <Separator Height="1" IsHitTestVisible="False"/>
@@ -754,7 +763,7 @@
                                         <Border BorderBrush="#FFACACAC" BorderThickness="0,1,1,1" Width="20" Height="20">
                                             <Label Content="?" Padding="0" HorizontalContentAlignment="Center" Foreground="#FF4D4D4D" FontSize="14"/>
                                         </Border>
-                                        <Label Content="{DynamicResource S.Options.Interface.Theme.Scheme.Custom}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource S.Options.App.Theme.Scheme.Custom}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                 </ComboBox.Items>
                             </ComboBox>
@@ -766,42 +775,42 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize}" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                            <Label Content="{DynamicResource S.Options.Editor.Previewer.GridSize}" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                             <ComboBox x:Name="GridSize2ComboBox" Grid.Column="1" Height="28" SelectionChanged="GridSizeComboBox_SelectionChanged" Tag="Board"
                                       VerticalContentAlignment="Center" Padding="5,0">
                                 <ComboBox.Items>
                                     <StackPanel Orientation="Horizontal">
                                         <Label Content="10 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.VerySmall}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource S.Options.Editor.Previewer.GridSize.VerySmall}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Label Content="15 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Small}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource S.Options.Editor.Previewer.GridSize.Small}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Label Content="20 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Medium}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource S.Options.Editor.Previewer.GridSize.Medium}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Label Content="25 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Large}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource S.Options.Editor.Previewer.GridSize.Large}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Label Content="30 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.VeryLarge}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource S.Options.Editor.Previewer.GridSize.VeryLarge}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Label Content="50 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.ILikeBigSquares}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource S.Options.Editor.Previewer.GridSize.ILikeBigSquares}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Label Content="100 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.ImBlind}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" FontWeight="Bold" FontSize="14"/>
+                                        <Label Content="{DynamicResource S.Options.Editor.Previewer.GridSize.ImBlind}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" FontWeight="Bold" FontSize="14"/>
                                     </StackPanel>
                                     <Separator />
                                     <StackPanel Orientation="Horizontal">
                                         <Label Content="? pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Custom}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource S.Options.Editor.Previewer.GridSize.Custom}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                 </ComboBox.Items>
                             </ComboBox>
@@ -813,24 +822,24 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize}" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                            <Label Content="{DynamicResource S.Options.Editor.Previewer.GridSize}" Padding="0,5,5,5" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                             <ComboBox x:Name="BackgroundStyleComboBox" Grid.Column="1" Height="28" VerticalContentAlignment="Center">
                                 <ComboBox.Items>
                                     <StackPanel Orientation="Horizontal">
                                         <Label Content="10 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.VerySmall}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource S.Options.Editor.Previewer.GridSize.VerySmall}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Label Content="15 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Small}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource S.Options.Editor.Previewer.GridSize.Small}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Label Content="20 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Medium}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource S.Options.Editor.Previewer.GridSize.Medium}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Label Content="25 pt" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" Width="41" HorizontalContentAlignment="Center" Padding="0,3"/>
-                                        <Label Content="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Large}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                        <Label Content="{DynamicResource S.Options.Editor.Previewer.GridSize.Large}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                     </StackPanel>
                                 </ComboBox.Items>
                             </ComboBox>
@@ -847,48 +856,70 @@
                             <Border Grid.Column="0" x:Name="BackgroundBorder" Height="40" BorderThickness="1" BorderBrush="#FFACACAC" Cursor="Hand" 
                                     MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown" Tag="Board"
                                     Background="{Binding BoardGridBackground, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
-                                    ToolTip="{DynamicResource S.Options.Interface.EditorBackground.BaseColor}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                                    ToolTip="{DynamicResource S.Options.Editor.Previewer.BaseColor}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                             <Border Grid.Column="1" x:Name="EvenColor2Border" Height="40" BorderThickness="0,1,1,1" BorderBrush="#FFACACAC" Cursor="Hand" 
                                     MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown" Tag="Board"
                                     Background="{Binding BoardGridColor1, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
-                                    ToolTip="{DynamicResource S.Options.Interface.EditorBackground.EvenColor}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                                    ToolTip="{DynamicResource S.Options.Editor.Previewer.EvenColor}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                             <Border Grid.Column="2" x:Name="OddColor2Border" BorderThickness="0,1" BorderBrush="#FFACACAC" Cursor="Hand" 
                                     MouseLeftButtonDown="ColorBorder_OnMouseLeftButtonDown" Tag="Board"
                                     Background="{Binding BoardGridColor2, Converter={StaticResource ColorToBrush}, Mode=TwoWay}"
-                                    ToolTip="{DynamicResource S.Options.Interface.EditorBackground.OddColor}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                                    ToolTip="{DynamicResource S.Options.Editor.Previewer.OddColor}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                             <Border Grid.Column="3" x:Name="GridSize2Border" BorderThickness="1" BorderBrush="#FFACACAC"
                                     Background="{StaticResource Background.Lines}" Cursor="Hand" MouseLeftButtonDown="GridSize2Border_MouseLeftButtonDown"
-                                    ToolTip="{DynamicResource S.Options.Interface.EditorBackground.GridSize}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5">
+                                    ToolTip="{DynamicResource S.Options.Editor.Previewer.GridSize}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5">
 
                                 <Border.ContextMenu>
                                     <ContextMenu x:Name="GridSize2ContextMenu">
-                                        <n:ImageMenuItem Header="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Height}" IsHitTestVisible="False" 
+                                        <n:ImageMenuItem Header="{DynamicResource S.Options.Editor.Previewer.GridSize.Height}" IsHitTestVisible="False" 
                                                          Image="{StaticResource Vector.WidthHeight}" MaxSize="16" />
                                         <n:IntegerBox x:Name="GridHeight2TextBox" Minimum="1" Maximum="1000" MinWidth="80" Margin="-10,0,0,0" Tag="Board"
                                                       UpdateOnInput="True" Value="{Binding Default.BoardGridSize.Height}"
                                                       LostFocus="GridSizeTextBox_LostFocus" MouseWheel="GridSizeTextBox_MouseWheel" />
 
-                                        <n:ImageMenuItem Header="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Width}" IsHitTestVisible="False" 
+                                        <n:ImageMenuItem Header="{DynamicResource S.Options.Editor.Previewer.GridSize.Width}" IsHitTestVisible="False" 
                                                          Image="{StaticResource Vector.WidthHeight}" MaxSize="16"/>
                                         <n:IntegerBox x:Name="GridWidth2TextBox" Minimum="1" Maximum="1000" MinWidth="80" Margin="-10,0,0,0" Tag="Board"
                                                       UpdateOnInput="True" Value="{Binding Default.BoardGridSize.Width}"
                                                       LostFocus="GridSizeTextBox_LostFocus" MouseWheel="GridSizeTextBox_MouseWheel" />
                                         <Separator/>
 
-                                        <n:ImageMenuItem Header="{DynamicResource S.Options.Interface.EditorBackground.GridSize.Apply}" Image="{StaticResource Vector.Ok}" MaxSize="16"/>
+                                        <n:ImageMenuItem Header="{DynamicResource S.Options.Editor.Previewer.GridSize.Apply}" Image="{StaticResource Vector.Ok}" MaxSize="16"/>
                                     </ContextMenu>
-                                </Border.ContextMenu>
-                            </Border>
-                        </Grid>
-                    </StackPanel>-->
+                                    </Border.ContextMenu>
+                                </Border>
+                            </Grid>
+                        </StackPanel>-->
 
-                        <n:LabelSeparator Text="{DynamicResource S.Options.Other}" Margin="0,0,0,5"/>
-                        <n:ExtendedCheckBox Text="{DynamicResource S.Options.Interface.Other.ExtendChrome}" IsChecked="{Binding Path=EditorExtendChrome, Mode=TwoWay}" Margin="10,0,0,5"/>
-                        <n:ExtendedCheckBox Text="{DynamicResource S.Options.Interface.Other.HideTitleBar}" IsChecked="{Binding Path=RecorderThinMode, Mode=TwoWay}" Margin="10,0,0,5"/>
-                        <n:ExtendedCheckBox Text="{DynamicResource S.Options.Interface.Other.TripleClickSelection}" IsChecked="{Binding Path=TripleClickSelection, Mode=TwoWay}" Margin="10,0,0,5"/>
-                        <n:ExtendedCheckBox Text="{DynamicResource S.Options.Interface.Other.AutomaticallySizeOnContent}" IsChecked="{Binding Path=AutomaticallySizeOnContent, Mode=TwoWay}" Margin="10,0,0,5"/>
-                        <n:ExtendedCheckBox Text="{DynamicResource S.Options.Interface.Other.AutomaticallyFitImage}" IsChecked="{Binding Path=AutomaticallyFitImage, Mode=TwoWay}" Margin="10,0,0,5"/>
+                        <Expander Header="{DynamicResource S.Options.Recorder.Interface}" IsExpanded="True">
+                            <StackPanel Margin="10,0,5,0">
+                                <n:ExtendedCheckBox Text="{DynamicResource S.Options.Editor.Interface.ExtendChrome}" Margin="0,3" IsChecked="{Binding Path=EditorExtendChrome, Mode=TwoWay}"/>
+                                <n:ExtendedCheckBox Text="{DynamicResource S.Options.Editor.Interface.AutomaticallySizeOnContent}" Margin="0,3" IsChecked="{Binding Path=AutomaticallySizeOnContent, Mode=TwoWay}"/>
+                                <n:ExtendedCheckBox Text="{DynamicResource S.Options.Editor.Interface.AutomaticallyFitImage}" Margin="0,3" IsChecked="{Binding Path=AutomaticallyFitImage, Mode=TwoWay}"/>
+                            </StackPanel>
+                        </Expander>
+
+                        <Expander Header="{DynamicResource S.Options.App.General}" IsExpanded="True">
+                            <StackPanel Margin="10,0,5,0">
+                                <n:ExtendedCheckBox Text="{DynamicResource S.Options.Editor.General.NotifyFrameDeletion}" Margin="0,3" IsChecked="{Binding Path=NotifyFrameDeletion, Mode=TwoWay}"/>
+                                <n:ExtendedCheckBox Text="{DynamicResource S.Options.Editor.General.NotifyProjectDiscard}" Margin="0,3" IsChecked="{Binding Path=NotifyProjectDiscard, Mode=TwoWay}"/>
+                                <n:ExtendedCheckBox Text="{DynamicResource S.Options.Editor.General.NotifyWhileClosingEditor}" Margin="0,3" IsChecked="{Binding Path=NotifyWhileClosingEditor, Mode=TwoWay}"/>
+                                <n:ExtendedCheckBox Text="{DynamicResource S.Options.Editor.General.TripleClickSelection}" Margin="0,3" IsChecked="{Binding Path=TripleClickSelection, Mode=TwoWay}"/>
+                                <n:ExtendedCheckBox Text="{DynamicResource S.Options.Editor.General.DrawOutlineOutside}" Margin="0,3" IsChecked="{Binding Path=DrawOutlineOutside, Mode=TwoWay}"/>
+
+                                <WrapPanel Margin="0,0,5,0">
+                                    <n:ExtendedCheckBox Text="{DynamicResource S.Options.Editor.General.LimitHistory}" Margin="0,3" VerticalAlignment="Top" IsChecked="{Binding Path=SetHistoryLimit, Mode=TwoWay}"/>
+                                    <TextBlock Text="{DynamicResource S.Options.Editor.General.LimitHistory.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" 
+                                               Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                                </WrapPanel>
+                                <WrapPanel Margin="10,3,5,3" Visibility="{Binding SetHistoryLimit, Converter={StaticResource Bool2Visibility}}">
+                                    <n:IntegerUpDown Minimum="0" Maximum="150" MinWidth="50" Value="{Binding Source={x:Static u:UserSettings.All}, Path=HistoryLimit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <TextBlock Text="{DynamicResource S.Options.Editor.General.LimitHistory.Maximum}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" 
+                                               Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                                </WrapPanel>
+                            </StackPanel>
+                        </Expander>
                     </StackPanel>
 
                     <!--Tasks-->
@@ -1183,111 +1214,142 @@
                     <Grid x:Name="TempPanel" Visibility="{Binding IsChecked, Converter={StaticResource Bool2Visibility}, ElementName=TempRadio}" 
                           IsVisibleChanged="TempPanel_IsVisibleChanged">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="21"/>
-                            <RowDefinition MinHeight="29" Height="Auto"/>
-                            <RowDefinition Height="21"/>
-                            <RowDefinition MinHeight="29" Height="Auto"/>
-                            <RowDefinition Height="21"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="21"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <n:LabelSeparator Grid.Row="0" Text="{DynamicResource S.Options.Storage.LogsLocation}"/>
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="30"/>
-                            </Grid.ColumnDefinitions>
+                        <Expander Grid.Row="0" Header="{DynamicResource S.Options.Storage.Status}" IsExpanded="True">
+                            <Grid Margin="10,0,5,10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="30"/>
+                                </Grid.ColumnDefinitions>
 
-                            <n:ExtendedTextBox Grid.Column="0" Margin="10,3,0,3" Text="{Binding LogsFolder, Source={x:Static u:UserSettings.All}}"/>
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Options.Storage.Status.Volume}" Padding="0" Margin="5,0" VerticalAlignment="Center" TextWrapping="Wrap" 
+                                           Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="VolumeTextBlock" Text="New Volume (C:)" Padding="0" Margin="0,0,5,0" VerticalAlignment="Center" TextWrapping="Wrap" 
+                                           Foreground="{DynamicResource Element.Foreground.Gray112}"/>
 
-                            <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" ContentWidth="20"
-                                           Click="ChooseLogsLocation_Click" ToolTip="{DynamicResource S.Options.Storage.LogsLocation.Choose}"
-                                           ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
-                        </Grid>
+                                <TextBlock Grid.Row="0" Grid.Column="2" x:Name="FreeSpaceTextBlock" Text="{DynamicResource S.Options.Storage.Status.FreeSpace}" Padding="0" Margin="5,0" VerticalAlignment="Center" HorizontalAlignment="Right"
+                                           TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray112}"/>
 
-                        <n:LabelSeparator Grid.Row="2" Text="{DynamicResource S.Options.Storage.Location}"/>
-                        <Grid Grid.Row="3">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="30"/>
-                            </Grid.ColumnDefinitions>
+                                <n:ExtendedProgressBar Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" x:Name="StatusProgressBar" Height="20" Value="50" Maximum="100" Margin="3" State="Info" ShowPercentage="True"/>
 
-                            <n:ExtendedTextBox Grid.Column="0" Margin="10,3,0,3" Text="{Binding TemporaryFolder, Source={x:Static u:UserSettings.All}}"/>
+                                <n:ImageButton Grid.Row="1" Grid.Column="3" x:Name="CheckCacheButton" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Repeat}" ContentWidth="20"
+                                               ToolTip="{DynamicResource S.Options.Storage.Status.Check}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{StaticResource Command.CheckCache}"/>
+                                <n:ImageButton Grid.Row="1" Grid.Column="4" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Delete.Folder}" ContentWidth="20"
+                                               ToolTip="{DynamicResource S.Options.Storage.Status.Clear}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{StaticResource Command.ClearCache}"/>
 
-                            <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" ContentWidth="20"
-                                           Click="ChooseLocation_Click" ToolTip="{DynamicResource S.Options.Storage.Location.Choose}"
-                                           ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
-                        </Grid>
+                                <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" x:Name="LowSpaceTextBlock" Text="{DynamicResource S.Options.Storage.Status.LowSpace}" Padding="0" Margin="5,3" 
+                                           VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Brush.ProgressBar.Danger}" Visibility="Collapsed"/>
 
-                        <n:LabelSeparator Grid.Row="4" x:Name="TempSeparator" Text="{DynamicResource S.Options.Storage.FilesAndFolders}"/>
-                        <StackPanel Grid.Row="5">
-                            <n:ExtendedCheckBox Text="{DynamicResource S.Options.Storage.AutomaticRemoval}" Margin="10,3,5,3"
-                                                IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=AutomaticCleanUp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                ToolTip="{DynamicResource S.Options.Storage.AutomaticRemoval.Info}"/>
+                                <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" x:Name="FilesTextBlock" Padding="0" Margin="5,3" Visibility="Collapsed"
+                                           VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray112}">
+                                    <Run x:Name="FoldersRun" Text="100 folders"/>
+                                    <Run Text="•"/>
+                                    <Run x:Name="FilesRun" Text="300 files"/>
+                                    <Run Text="•"/>
+                                    <Run x:Name="UsedSpaceRun" Text="10 GB in use"/>
+                                </TextBlock>
+                            </Grid>
+                        </Expander>
 
-                            <WrapPanel Margin="30,3,5,3" Visibility="{Binding Source={x:Static u:UserSettings.All}, Path=AutomaticCleanUp, Converter={StaticResource Bool2Visibility}}">
-                                <n:IntegerUpDown Minimum="1" Maximum="30" MinWidth="50" Value="{Binding Source={x:Static u:UserSettings.All}, Path=AutomaticCleanUpDays, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                <TextBlock Text="{DynamicResource S.Options.Storage.AutomaticRemovalDays.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
-                            </WrapPanel>
-                        </StackPanel>
+                        <Expander Grid.Row="1" Header="{DynamicResource S.Options.Storage.Paths}" IsExpanded="True">
+                            <Grid Margin="10,0,5,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="30"/>
+                                </Grid.ColumnDefinitions>
 
-                        <Grid Grid.Row="6">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Options.Storage.Paths.Cache}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="2,0,5,0" VerticalAlignment="Center"/>
+                                <n:ExtendedTextBox Grid.Row="0" Grid.Column="1" x:Name="CacheTextBox" Margin="0,3" Text="{Binding TemporaryFolder, Source={x:Static u:UserSettings.All}, UpdateSourceTrigger=PropertyChanged}" 
+                                                   IsEnabled="{Binding ElementName=CheckCacheButton, Path=IsEnabled, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" LostFocus="CacheTextBox_LostFocus"/>
 
-                            <TextBlock Grid.Column="0" x:Name="LowSpaceTextBlock" Text="{DynamicResource S.Options.Storage.LowSpace}" Padding="0" Margin="5,3" VerticalAlignment="Center" 
-                                       TextWrapping="Wrap" Foreground="Crimson" Visibility="Collapsed"/>
+                                <n:ImageButton Grid.Row="0" Grid.Column="2" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" ContentWidth="20"
+                                               ToolTip="{DynamicResource S.Options.Storage.Paths.Cache.Choose}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Click="ChooseCachePath_Click"/>
+                                <n:ImageButton Grid.Row="0" Grid.Column="3" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Forward}" ContentWidth="20"
+                                               ToolTip="{DynamicResource S.Options.Storage.Paths.Browse}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{StaticResource Command.BrowseCache}"/>
 
-                            <n:ImageButton Grid.Column="1" x:Name="OpenFolderButton" Text="{DynamicResource S.Options.Storage.OpenFolder}" Padding="2,0"
-                                           Content="{StaticResource Vector.Open}" ContentHeight="20" Click="OpenFolderButton_Click" Margin="5"/>
-                            <n:ImageButton Grid.Column="2" x:Name="ClearTempButton" Text="{DynamicResource S.Options.Storage.Clear}" Padding="2,0"
-                                           Content="{StaticResource Vector.Delete.Folder}" ContentHeight="20" Click="ClearTempButton_Click" Margin="5" IsEnabled="False"/>
-                        </Grid>
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.Options.Storage.Paths.Logs}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="2,0,5,0" VerticalAlignment="Center"/>
+                                <n:ExtendedTextBox Grid.Row="1" Grid.Column="1" Margin="0,3" Text="{Binding LogsFolder, Source={x:Static u:UserSettings.All}}"/>
 
-                        <n:LabelSeparator Grid.Row="7" Text="{DynamicResource S.Options.Storage.Settings}"/>
-                        <Grid Grid.Row="8" Margin="10,0,0,0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
+                                <n:ImageButton Grid.Row="1" Grid.Column="2" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" ContentWidth="20"
+                                               ToolTip="{DynamicResource S.Options.Storage.Paths.Logs.Choose}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Click="ChooseLogsPath_Click"/>
+                                <n:ImageButton Grid.Row="1" Grid.Column="3" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Forward}" ContentWidth="20"
+                                               ToolTip="{DynamicResource S.Options.Storage.Paths.Browse}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{StaticResource Command.BrowseLogs}"/>
+                            </Grid>
+                        </Expander>
 
-                            <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Options.Storage.AppDataPath}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="3"/>
-                            <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" x:Name="AppDataPathTextBlock" Text="..." Foreground="{DynamicResource Element.Foreground.Medium}" Padding="3" TextWrapping="Wrap" FontStyle="Italic"/>
+                        <Expander Grid.Row="2" Header="{DynamicResource S.Options.Storage.Settings}" IsExpanded="True">
+                            <Grid Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
 
-                            <n:ImageButton Grid.Row="0" Grid.Column="3" x:Name="OpenAppDataButton" ToolTip="{DynamicResource S.Options.Storage.OpenSettingsFolder}" Style="{StaticResource Style.Button.NoText}"
-                                           Content="{StaticResource Vector.Open}" Padding="3" ContentHeight="14" Command="{StaticResource Command.OpenAppDataSettings}"/>
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Options.Storage.AppDataPath}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="3"/>
+                                <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" x:Name="AppDataPathTextBlock" Text="..." Foreground="{DynamicResource Element.Foreground.Medium}" Padding="3" TextWrapping="Wrap" FontStyle="Italic"/>
 
-                            <n:ImageButton Grid.Row="0" Grid.Column="4" x:Name="RemoveAppDataButton" ToolTip="{DynamicResource S.Options.Storage.RemoveSettings}" Style="{StaticResource Style.Button.NoText}"
-                                           Content="{StaticResource Vector.Remove}" Padding="3" ContentHeight="14" Command="{StaticResource Command.RemoveAppDataSettings}"/>
+                                <n:ImageButton Grid.Row="0" Grid.Column="3" x:Name="OpenAppDataButton" ToolTip="{DynamicResource S.Options.Storage.OpenSettingsFolder}" Style="{StaticResource Style.Button.NoText}"
+                                               Content="{StaticResource Vector.Forward}" Padding="3" ContentHeight="14" Command="{StaticResource Command.OpenAppDataSettings}"/>
 
-                            <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.Options.Storage.LocalPath}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="3"/>
-                            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="LocalPathTextBlock" Text="..." Foreground="{DynamicResource Element.Foreground.Medium}" Padding="3" TextWrapping="Wrap" FontStyle="Italic"/>
+                                <n:ImageButton Grid.Row="0" Grid.Column="4" x:Name="RemoveAppDataButton" ToolTip="{DynamicResource S.Options.Storage.RemoveSettings}" Style="{StaticResource Style.Button.NoText}"
+                                               Content="{StaticResource Vector.Remove}" Padding="3" ContentHeight="14" Command="{StaticResource Command.RemoveAppDataSettings}"/>
 
-                            <n:ImageButton Grid.Row="1" Grid.Column="2" x:Name="CreateLocalButton" ToolTip="{DynamicResource S.Options.Storage.CreateSettings}" Style="{StaticResource Style.Button.NoText}"
-                                           Content="{StaticResource Vector.Add}" Padding="3" ContentHeight="14" Command="{StaticResource Command.CreateLocalSettings}"/>
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.Options.Storage.LocalPath}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="3"/>
+                                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="LocalPathTextBlock" Text="..." Foreground="{DynamicResource Element.Foreground.Medium}" Padding="3" TextWrapping="Wrap" FontStyle="Italic"/>
 
-                            <n:ImageButton Grid.Row="1" Grid.Column="3" x:Name="OpenLocalButton" ToolTip="{DynamicResource S.Options.Storage.OpenSettingsFolder}" Style="{StaticResource Style.Button.NoText}"
-                                           Content="{StaticResource Vector.Open}" Padding="3" ContentHeight="14" Command="{StaticResource Command.OpenLocalSettings}"/>
+                                <n:ImageButton Grid.Row="1" Grid.Column="2" x:Name="CreateLocalButton" ToolTip="{DynamicResource S.Options.Storage.CreateSettings}" Style="{StaticResource Style.Button.NoText}"
+                                               Content="{StaticResource Vector.Add}" Padding="3" ContentHeight="14" Command="{StaticResource Command.CreateLocalSettings}"/>
 
-                            <n:ImageButton Grid.Row="1" Grid.Column="4" x:Name="RemoveLocalButton" ToolTip="{DynamicResource S.Options.Storage.RemoveSettings}" Style="{StaticResource Style.Button.NoText}"
-                                           Content="{StaticResource Vector.Remove}" Padding="3" ContentHeight="14" Command="{StaticResource Command.RemoveLocalSettings}"/>
+                                <n:ImageButton Grid.Row="1" Grid.Column="3" x:Name="OpenLocalButton" ToolTip="{DynamicResource S.Options.Storage.OpenSettingsFolder}" Style="{StaticResource Style.Button.NoText}"
+                                               Content="{StaticResource Vector.Forward}" Padding="3" ContentHeight="14" Command="{StaticResource Command.OpenLocalSettings}"/>
 
-                            <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" Text="{DynamicResource S.Options.Storage.SettingsInfo}" Foreground="{DynamicResource Element.Foreground.Medium}" TextWrapping="Wrap" Padding="4,2" Margin="0,10,0,0"/>
-                        </Grid>
+                                <n:ImageButton Grid.Row="1" Grid.Column="4" x:Name="RemoveLocalButton" ToolTip="{DynamicResource S.Options.Storage.RemoveSettings}" Style="{StaticResource Style.Button.NoText}"
+                                               Content="{StaticResource Vector.Remove}" Padding="3" ContentHeight="14" Command="{StaticResource Command.RemoveLocalSettings}"/>
+
+                                <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" Text="{DynamicResource S.Options.Storage.SettingsInfo}" Foreground="{DynamicResource Element.Foreground.Medium}" 
+                                           TextWrapping="Wrap" Padding="4,2" Margin="0,10,0,0"/>
+                            </Grid>
+                        </Expander>
+
+                        <Expander Grid.Row="3" Header="{DynamicResource S.Options.Other}" IsExpanded="True">
+                            <StackPanel>
+                                <n:ExtendedCheckBox Text="{DynamicResource S.Options.Storage.AutomaticRemoval}" Margin="10,3,5,3"
+                                                    IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=AutomaticCleanUp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    ToolTip="{DynamicResource S.Options.Storage.AutomaticRemoval.Info}"/>
+
+                                <WrapPanel Margin="30,3,5,3" Visibility="{Binding Source={x:Static u:UserSettings.All}, Path=AutomaticCleanUp, Converter={StaticResource Bool2Visibility}}">
+                                    <n:IntegerUpDown Minimum="1" Maximum="30" MinWidth="50" Value="{Binding Source={x:Static u:UserSettings.All}, Path=AutomaticCleanUpDays, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <TextBlock Text="{DynamicResource S.Options.Storage.AutomaticRemovalDays.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                                </WrapPanel>
+                            </StackPanel>
+                        </Expander>
                     </Grid>
 
                     <!--Extras-->
@@ -1901,7 +1963,7 @@
                             </TextBlock>
 
                             <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource S.Options.About.Technical.Privacy}" FontSize="12" VerticalContentAlignment="Center" Margin="15,0,0,0" Foreground="{DynamicResource Element.Foreground}"/>
-                            
+
                             <TextBlock Grid.Row="2" Grid.Column="1" FontSize="12" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
                                 <Hyperlink NavigateUri="https://www.screentogif.com/privacy.html" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
                                            RequestNavigate="Hyperlink_OnRequestNavigate">
