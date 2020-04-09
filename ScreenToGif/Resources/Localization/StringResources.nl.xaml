@@ -3,7 +3,7 @@
                     xmlns:s="clr-namespace:System;assembly=mscorlib"
                     xml:space="preserve">
     
-    <!--To use a new line: &#10; or CarriageReturn + NewLine: &#10;&#x0a; or &#10;--> 
+    <!--To use a new line: &#x0d; or CarriageReturn + NewLine: &#x0d;&#x0a; or &#10;--> 
     <!--You can use the zero-width-divider to suggest where the word should be divided when there's no space &#8203;-->
     <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
     
@@ -148,7 +148,7 @@
     <s:String x:Key="S.Options.Title">ScreenToGif - Instellingen</s:String>
     <s:String x:Key="S.Options.App">Programma</s:String>
     <s:String x:Key="S.Options.Recorder">Opname</s:String>
-    <s:String x:Key="S.Options.Interface">Interface</s:String>
+    <s:String x:Key="S.Options.Editor">Bewerker</s:String>
     <s:String x:Key="S.Options.Tasks">Taken</s:String>
     <s:String x:Key="S.Options.Shortcuts">Sneltoetsen</s:String>
     <s:String x:Key="S.Options.Language">Taal</s:String>
@@ -183,19 +183,14 @@
     <s:String x:Key="S.Options.App.Startup.Window.Board">Whiteboard-opname</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Editor">Editorscherm</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Info">(Venster dat als eerste verschijnt wanneer de app start)</s:String>
-    <s:String x:Key="S.Options.App.General">Algemeen</s:String>
-    <s:String x:Key="S.Options.Editor.General.NotifyFrameDeletion">Bevestiging vragen bij het wissen van frames.</s:String>
-    <s:String x:Key="S.Options.Editor.General.NotifyProjectDiscard">Bevestiging vragen bij het verwijderen van een project.</s:String>
-    <s:String x:Key="S.Options.Editor.General.NotifyWhileClosingEditor">Bevestiging vragen bij het afsluiten van de editor (als er een project geopend is).</s:String>
-    <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">Bevestiging vragen bij het sluiten van het programa (d.m.v. 'Afsluiten').</s:String>
-    <s:String x:Key="S.Options.Editor.General.DrawOutlineOutside">Contouren van tekstkaders tekenen.</s:String>
-    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">Hardwareversnelling uitschakelen.</s:String>
-    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(De gebruikersinterface wordt weergegeven via softwaremodus)</s:String>
-    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">Controleren op nieuw vertalingen.</s:String>
-    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(Bijgewerkte vertalingen worden automatisch gedownload en geïnstalleerd)</s:String>
-    <s:String x:Key="S.Options.App.General.CheckForUpdates">Controleer op updates bij het opstarten.</s:String>
-    <s:String x:Key="S.Options.App.General.UpdateOnClose">Updates automatisch installeren na het sluiten van de app.</s:String>
-    <s:String x:Key="S.Options.App.General.PromptToInstall">Vraag me voordat de installatie begint.</s:String>
+    <s:String x:Key="S.Options.App.Theme">Thema van de app</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme">Kleurenschema</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.VeryLight">Zeer licht</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Light">Licht</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Medium">Gemiddeld</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Dark">Donker</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.VeryDark">Zeer donker</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Custom">Aangepast</s:String>
     <s:String x:Key="S.Options.App.Tray">Systeemvakpictogram</s:String>
     <s:String x:Key="S.Options.App.Tray.Show">Pictogram in het systeemvak van de taakbalk (meldingencentrum) weergeven.</s:String>
     <s:String x:Key="S.Options.App.Tray.LeaveOpen">Houd de toepassing open, zelfs als alle schermen gesloten zijn.</s:String>
@@ -210,6 +205,15 @@
     <s:String x:Key="S.Options.App.Tray.Interactions.Middle">Middelste klik:</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Window">Venster:</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Else">Of anders, opent:</s:String>
+    <s:String x:Key="S.Options.App.General">Algemeen</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">Bevestiging vragen bij het sluiten van het programa (d.m.v. 'Afsluiten').</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">Hardwareversnelling uitschakelen.</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(De gebruikersinterface wordt weergegeven via softwaremodus)</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">Controleren op nieuw vertalingen.</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(Bijgewerkte vertalingen worden automatisch gedownload en geïnstalleerd)</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForUpdates">Controleer op updates bij het opstarten.</s:String>
+    <s:String x:Key="S.Options.App.General.UpdateOnClose">Updates automatisch installeren na het sluiten van de app.</s:String>
+    <s:String x:Key="S.Options.App.General.PromptToInstall">Vraag me voordat de installatie begint.</s:String>
 
     <!--Options • Recorder-->
     <s:String x:Key="S.Options.Recorder.Interface">Interface</s:String>
@@ -241,6 +245,7 @@
     <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Constante framerate die niet verandert bij opnamevertraging)</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording">Asynchrone opnamemodus inschakelen.</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(Deze optie vermindert vertragingen in de opname)</s:String>
+    <s:String x:Key="S.Options.Recorder.HideTitleBar">Titelbalk verbergen (thin mode).</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier">Vergrootglas inschakelen.</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier.Info">(Bij het vastleggen van het opnamegebied)</s:String>
     <s:String x:Key="S.Options.Recorder.CursorFollowing">Cursor volgen inschakelen.</s:String>
@@ -248,28 +253,8 @@
     <s:String x:Key="S.Options.Recorder.FollowMargin.Info">(Buffermarge in pixels, waar het opnamegebied wordt verplaatst)</s:String>
     <s:String x:Key="S.Options.Recorder.FollowMarginInvisible.Info">(Extra buffermarge in pixels, waar de gebruikersinterface verborgen begint te raken)</s:String>
 
-    <!--Options • Tasks-->
-    <s:String x:Key="S.Options.Tasks.Title">Taak</s:String>
-    <s:String x:Key="S.Options.Tasks.List">Lijst met automatische taken</s:String>
-    <s:String x:Key="S.Options.Tasks.List.Task">Taak</s:String>
-    <s:String x:Key="S.Options.Tasks.List.Details">Details</s:String>
-    <s:String x:Key="S.Options.Tasks.SelectType">(Kies een taak)</s:String>
-    <s:String x:Key="S.Options.Tasks.Info">Deze taken worden opeenvolgend uitgevoerd vanaf de bovenkant van de lijst aan de bodem.&#10;Dit gebeurt wanneer u voor het eerst een project opent met behulp van de editor.</s:String>
-    
-    <!--Options • Interface-->
-    <s:String x:Key="S.Options.App.Theme">Thema van de app</s:String>
-    <s:String x:Key="S.Options.App.Theme.Scheme">Kleurenschema</s:String>
+    <!--Options • Editor-->
     <s:String x:Key="S.Options.Editor.Previewer">Editor-achtergrond</s:String>
-    <s:String x:Key="S.Options.Interface.Recorder">Opname-thema</s:String>
-    <s:String x:Key="S.Options.Interface.Background">Achtergrond</s:String>
-    <s:String x:Key="S.Options.Interface.Foreground">Voorgrond</s:String>
-    <s:String x:Key="S.Options.Interface.BoardBackground">Whiteboard-achtergrond</s:String>
-    <s:String x:Key="S.Options.App.Theme.Scheme.VeryLight">Zeer licht</s:String>
-    <s:String x:Key="S.Options.App.Theme.Scheme.Light">Licht</s:String>
-    <s:String x:Key="S.Options.App.Theme.Scheme.Medium">Gemiddeld</s:String>
-    <s:String x:Key="S.Options.App.Theme.Scheme.Dark">Donker</s:String>
-    <s:String x:Key="S.Options.App.Theme.Scheme.VeryDark">Zeer donker</s:String>
-    <s:String x:Key="S.Options.App.Theme.Scheme.Custom">Aangepast</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize">Rastergrootte</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.VerySmall">Zeer klein</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.Small">Klein</s:String>
@@ -279,17 +264,31 @@
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.ILikeBigSquares">Ik houd van grote vierkanten</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.ImBlind">Ik ben blind</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.Custom">Aangepast</s:String>
-    <s:String x:Key="S.Options.Editor.Previewer.BaseColor">Basiskleur</s:String>
-    <s:String x:Key="S.Options.Editor.Previewer.EvenColor">Even-kleur</s:String>
-    <s:String x:Key="S.Options.Editor.Previewer.OddColor">Oneven-kleur</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.Height">Hoogte</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.Width">Breedte</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.Apply">Toepassen</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.BaseColor">Basiskleur</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.EvenColor">Even-kleur</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.OddColor">Oneven-kleur</s:String>
     <s:String x:Key="S.Options.Editor.Interface.ExtendChrome">Titelbalk uitbreiden (window chrome).</s:String>
-    <s:String x:Key="S.Options.Recorder.HideTitleBar">Titelbalk verbergen (thin mode).</s:String>
-    <s:String x:Key="S.Options.Editor.General.TripleClickSelection">Driedubbel-klik gebruiken om tekst te selecteren.</s:String>
     <s:String x:Key="S.Options.Editor.Interface.AutomaticallySizeOnContent">Bij het laden de venstergrootte automatisch aanpassen aan de framegrootte.</s:String>
     <s:String x:Key="S.Options.Editor.Interface.AutomaticallyFitImage">Bij het laden het frame-zoomniveau automatisch aanpassen aan de schermgrootte.</s:String>
+    <s:String x:Key="S.Options.Editor.General.NotifyFrameDeletion">Bevestiging vragen bij het wissen van frames.</s:String>
+    <s:String x:Key="S.Options.Editor.General.NotifyProjectDiscard">Bevestiging vragen bij het verwijderen van een project.</s:String>
+    <s:String x:Key="S.Options.Editor.General.NotifyWhileClosingEditor">Bevestiging vragen bij het afsluiten van de editor (als er een project geopend is).</s:String>
+    <s:String x:Key="S.Options.Editor.General.TripleClickSelection">Driedubbel-klik gebruiken om tekst te selecteren.</s:String>
+    <s:String x:Key="S.Options.Editor.General.DrawOutlineOutside">Contouren van tekstkaders tekenen.</s:String>
+    <s:String x:Key="S.Options.Editor.General.LimitHistory">Leg een limiet op aan de geschiedenis van ongedaan maken/opnieuw uitvoeren.</s:String>
+    <s:String x:Key="S.Options.Editor.General.LimitHistory.Info">(Oudere acties worden verwijderd wanneer de limiet is bereikt)</s:String>
+    <s:String x:Key="S.Options.Editor.General.LimitHistory.Maximum">(Maximaal aantal opgeslagen acties)</s:String>
+    
+    <!--Options • Tasks-->
+    <s:String x:Key="S.Options.Tasks.Title">Taak</s:String>
+    <s:String x:Key="S.Options.Tasks.List">Lijst met automatische taken</s:String>
+    <s:String x:Key="S.Options.Tasks.List.Task">Taak</s:String>
+    <s:String x:Key="S.Options.Tasks.List.Details">Details</s:String>
+    <s:String x:Key="S.Options.Tasks.SelectType">(Kies een taak)</s:String>
+    <s:String x:Key="S.Options.Tasks.Info">Deze taken worden opeenvolgend uitgevoerd vanaf de bovenkant van de lijst aan de bodem.&#10;Dit gebeurt wanneer u voor het eerst een project opent met behulp van de editor.</s:String>
   
     <!--Options • Shortcuts-->
     <s:String x:Key="S.Options.Shortcuts.Global">Algemeen</s:String>
@@ -335,15 +334,26 @@
     <s:String x:Key="S.Options.Language.AppLanguage.Translate.EmailLink.Tooltip">Opent uw e-mailprogramma</s:String>
     
     <!--Options • Storage-->
-    <s:String x:Key="S.Options.Storage.FilesAndFolders">Tijdelijke bestanden en mappen</s:String>
-    <s:String x:Key="S.Options.Storage.FilesAndFolders.Count">{0} mappen en {1} bestanden</s:String>
-    <s:String x:Key="S.Options.Storage.FilesAndFolders.None">Geen map of bestand gedetecteerd</s:String>
-    <s:String x:Key="S.Options.Storage.OpenFolder">Map verkennen</s:String>
-    <s:String x:Key="S.Options.Storage.Clear">Tijdelijke map legen</s:String>
-    <s:String x:Key="S.Options.Storage.LogsLocation">Foutrapportage</s:String>
-    <s:String x:Key="S.Options.Storage.Paths.Logs.Choose">Kies een locatie voor de foutrapportages</s:String>
-    <s:String x:Key="S.Options.Storage.Location">Maplocatie</s:String>
+    <s:String x:Key="S.Options.Storage.Status">Status</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Volume">Volume:</s:String>
+    <s:String x:Key="S.Options.Storage.Status.FreeSpace">{0} vrij van {1}</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Check">Controleer nogmaals hoeveel ruimte er nog is.</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Clear">Wis de cachemap. &#10;U kunt beslissen of u recente projecten wilt behouden of niet.</s:String>
+    <s:String x:Key="S.Options.Storage.Status.LowSpace">Beperkte schijfruimte. Ruim tijdelijke bestanden op of verander de opslaglocatie van tijdelijke bestanden.</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Error">Onmogelijk om de schijfdetails op te halen.</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Files.None">Geen bestanden</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Files.Singular">{0:##,##0} bestand</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Files.Plural">{0:##,##0} bestanden</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Folders.None">Geen mappen</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Folders.Singular">{0:##,##0} map</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Folders.Plural">{0:##,##0} mappen</s:String>
+    <s:String x:Key="S.Options.Storage.Status.InUse">{0} in gebruik</s:String>
+    <s:String x:Key="S.Options.Storage.Paths">Paden</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Cache">Cache:</s:String>
     <s:String x:Key="S.Options.Storage.Paths.Cache.Choose">Kies een locatie voor de tijdelijke bestanden</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Logs">Logbestanden:</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Logs.Choose">Kies een locatie voor de foutrapportages</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Browse">Blader door de geselecteerde map.</s:String>
     <s:String x:Key="S.Options.Storage.Settings">Instellingen</s:String>
     <s:String x:Key="S.Options.Storage.AppDataPath">AppData:</s:String>
     <s:String x:Key="S.Options.Storage.LocalPath">Lokaal:</s:String>
@@ -352,12 +362,18 @@
     <s:String x:Key="S.Options.Storage.RemoveSettings">Instellingenbestand verwijderen.</s:String>
     <s:String x:Key="S.Options.Storage.OpenSettingsFolder">Open de map waar het instellngenbestand is opgeslagen. &#10;Houd Ctrl ingedrukt bij het openen van het bestand bestand.</s:String>
     <s:String x:Key="S.Options.Storage.SettingsInfo">• Instellingen laden: Standaard ◄ AppData ◄ Lokaal. &#10;• Als de lokale map geen instellingenbestand bevat dan zoekt de applicatie in de AppData map. Indien geen instellingenbestand gevonden wordt, komen de standaardinstellingen van kracht&#10;• Als er geen lokale instellingenbestand gevonden wordt, worden alle instellingen in AppData opgeslagen.</s:String>
-    <s:String x:Key="S.Options.Storage.KeepRecent">Moeten de recente projecten behouden blijven?</s:String>
-    <s:String x:Key="S.Options.Storage.KeepRecent.Info">In dit geval zullen alle recente projecten jonger dan een paar dagen niet gewist.&#10;&#10;Een geopend project wordt sowieso nooit gewist.</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemoval">Oude projecten automatisch verwijderen.</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemoval.Info">Bij de start zal een achtergrondtaak van het programma alle gesloten projecten wissen die ouder zijn dan een ingestelde tijd.</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemovalDays.Info">(in dagen, oudere projecten worden verwijderd bij het openen van de Editor)</s:String>
-    <s:String x:Key="S.Options.Storage.Status.LowSpace">Beperkte schijfruimte. Ruim tijdelijke bestanden op of verander de opslaglocatie van tijdelijke bestanden.</s:String>
+    
+    <!--Options • Storage > Clear cache-->
+    <s:String x:Key="S.Options.Storage.Cache.Title">ScreenToGif - Cache wissen</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.Header">Wil je de cachemap wissen?</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.Info">Wanneer u een opname maakt of iets opent om te bewerken, wordt een project gemaakt en opgeslagen in de cachemap.</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.Question">Wilt u deze projecten uit de cachemap verwijderen?</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.IgnoreRecent">Verwijder geen recente projecten.</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.IgnoreRecent.Yes">(Alleen de projecten die ouder zijn dan {0} dagen en die momenteel niet in gebruik zijn, worden verwijderd)</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.IgnoreRecent.No">(Alle projecten die momenteel niet in gebruik zijn, worden verwijderd)</s:String>
     
     <!--Options • Upload-->
     <s:String x:Key="S.Options.Upload.Proxy">Proxy</s:String>
@@ -952,8 +968,17 @@
     <s:String x:Key="S.Reduce.Header">Framerate verminderen</s:String>
     <s:String x:Key="S.Reduce.Factor">Factor:</s:String>
     <s:String x:Key="S.Reduce.Count">Telling verwijderen:</s:String>
+    <s:String x:Key="S.Reduce.Delay">Aanpassing vertraging:</s:String>
+    <s:String x:Key="S.Reduce.Delay.NoAdjustment">Niet aanpassen</s:String>
+    <s:String x:Key="S.Reduce.Delay.Previous">Toevoegen aan de vorige frame</s:String>
+    <s:String x:Key="S.Reduce.Delay.Evenly">Gelijkmatig toevoegen aan de resterende frames</s:String>
+    <s:String x:Key="S.Reduce.ApplyToAll">Verminder de framerate van het hele project.</s:String>
+    <s:String x:Key="S.Reduce.ApplyToAll.Info">Als de optie niet is aangevinkt, moet u meerdere opeenvolgende frames selecteren, &#10;groter dan de verwijderingsfactor.</s:String>
     <s:String x:Key="S.Reduce.Info">Deze actie zal {0} frame(s) verwijderen na elke {1} frame(s), zonder de verwijderde frame(s) te tellen.</s:String>
-
+    <s:String x:Key="S.Reduce.Warning.NoSelection">U moet de frames selecteren om de framerate-reductie toe te passen (of vink de optie aan om op het hele project toe te passen).</s:String>
+    <s:String x:Key="S.Reduce.Warning.NonConsecutive">De lijst met geselecteerde frames moet opeenvolgend zijn. U kunt sommige frames niet ongeselecteerd laten tussen geselecteerde.</s:String>
+    <s:String x:Key="S.Reduce.Warning.SmallerThanFactor">De selectie van frames moet groter zijn dan de verwijderingsfactor, anders kan de functie niets verwijderen.</s:String>
+    
     <s:String x:Key="S.RemoveDuplicates.Header">Duplicaten verwijderen</s:String>
     <s:String x:Key="S.RemoveDuplicates.Similarity">Overeenkomstigheid (%):</s:String>
     <s:String x:Key="S.RemoveDuplicates.Removal">Frame-verwijdering:</s:String>
