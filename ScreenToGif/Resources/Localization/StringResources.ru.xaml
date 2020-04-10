@@ -148,7 +148,7 @@
     <s:String x:Key="S.Options.Title">ScreenToGif - Настройки</s:String>
     <s:String x:Key="S.Options.App">Программа</s:String>
     <s:String x:Key="S.Options.Recorder">Захват экрана</s:String>
-    <s:String x:Key="S.Options.Interface">Интерфейс</s:String>
+    <s:String x:Key="S.Options.Editor">Редактор</s:String>
     <s:String x:Key="S.Options.Tasks">Авто-задачи</s:String>
     <s:String x:Key="S.Options.Shortcuts">Горячие клавиши</s:String>
     <s:String x:Key="S.Options.Language">Язык</s:String>
@@ -183,19 +183,14 @@
     <s:String x:Key="S.Options.App.Startup.Window.Board">Запись с доски</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Editor">Окно редактора</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Info">(Окно, которое появляется первым при запуске приложения)</s:String>
-    <s:String x:Key="S.Options.App.General">Общие</s:String>
-    <s:String x:Key="S.Options.Editor.General.NotifyFrameDeletion">Подтверждать удаление кадров.</s:String>
-    <s:String x:Key="S.Options.Editor.General.NotifyProjectDiscard">Подтверждать удаление проекта.</s:String>
-    <s:String x:Key="S.Options.Editor.General.NotifyWhileClosingEditor">Подтверждать выход из редактора (если открыт проект).</s:String>
-    <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">Подтверждать закрытие (по команде 'Выход').</s:String>
-    <s:String x:Key="S.Options.Editor.General.DrawOutlineOutside">Отрисовывать контур вокруг букв.</s:String>
-    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">Отключить аппаратное ускорение.</s:String>
-    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(Интерфейс будет отрисовываться программно)</s:String>
-    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">Проверять обновления перевода.</s:String>
-    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(Обновленные переводы будут загружены и установлены автоматически)</s:String>
-    <s:String x:Key="S.Options.App.General.CheckForUpdates">Проверять обновления при запуске.</s:String>
-    <s:String x:Key="S.Options.App.General.UpdateOnClose">Автоустановка обновления после закрытия приложения.</s:String>
-    <s:String x:Key="S.Options.App.General.PromptToInstall">Запрос установки</s:String>
+    <s:String x:Key="S.Options.App.Theme">Тема программы</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme">Цветовая схема</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.VeryLight">Очень светлая</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Light">Светлая</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Medium">Средняя</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Dark">Темная</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.VeryDark">Очень темная</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Custom">Своя</s:String>
     <s:String x:Key="S.Options.App.Tray">Значок в системном трее</s:String>
     <s:String x:Key="S.Options.App.Tray.Show">Показывать значок в системном трее.</s:String>
     <s:String x:Key="S.Options.App.Tray.LeaveOpen">Не выгружать программу, даже если все окна закрыты.</s:String>
@@ -210,6 +205,15 @@
     <s:String x:Key="S.Options.App.Tray.Interactions.Middle">СКМ:</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Window">окно:</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Else">иначе:</s:String>
+    <s:String x:Key="S.Options.App.General">Общие</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">Подтверждать закрытие (по команде 'Выход').</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">Отключить аппаратное ускорение.</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(Интерфейс будет отрисовываться программно)</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">Проверять обновления перевода.</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(Обновленные переводы будут загружены и установлены автоматически)</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForUpdates">Проверять обновления при запуске.</s:String>
+    <s:String x:Key="S.Options.App.General.UpdateOnClose">Автоустановка обновления после закрытия приложения.</s:String>
+    <s:String x:Key="S.Options.App.General.PromptToInstall">Запрос установки</s:String>
 
     <!--Options • Recorder-->
     <s:String x:Key="S.Options.Recorder.Interface">Интерфейс</s:String>
@@ -241,6 +245,7 @@
     <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Постоянная задержка, не изменяется с задержкой записи)</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording">Включить асинхронную запись.</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(Это поможет снизить "лаги" интерфейса во время записи)</s:String>
+    <s:String x:Key="S.Options.Recorder.HideTitleBar">Скрыть заголовок (тонкая рамка).</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier">Активировать увеличение экрана.</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier.Info">(Увеличивает регион записи с экрана)</s:String>
     <s:String x:Key="S.Options.Recorder.CursorFollowing">Включить следование за курсором</s:String>
@@ -248,28 +253,8 @@
     <s:String x:Key="S.Options.Recorder.FollowMargin.Info">(Буферное поле, где область записи получает репозицию)</s:String>
     <s:String x:Key="S.Options.Recorder.FollowMarginInvisible.Info">(Дополнительное поле буфера, где UI скрывается)</s:String>
 
-    <!--Options • Tasks-->
-    <s:String x:Key="S.Options.Tasks.Title">Авто-задача</s:String>
-    <s:String x:Key="S.Options.Tasks.List">Список авто-задач</s:String>
-    <s:String x:Key="S.Options.Tasks.List.Task">Задача</s:String>
-    <s:String x:Key="S.Options.Tasks.List.Details">Подробности</s:String>
-    <s:String x:Key="S.Options.Tasks.SelectType">(Выбор задачи)</s:String>
-    <s:String x:Key="S.Options.Tasks.Info">Эти задачи выполняются последовательно сверху-вниз списка.&#10;Это происходит, при открытии проекта с помощью редактора.</s:String>
-    
-    <!--Options • Interface-->
-    <s:String x:Key="S.Options.App.Theme">Тема программы</s:String>
-    <s:String x:Key="S.Options.App.Theme.Scheme">Цветовая схема</s:String>
+    <!--Options • Editor-->
     <s:String x:Key="S.Options.Editor.Previewer">Фон редактора</s:String>
-    <s:String x:Key="S.Options.Interface.Recorder">Тема рекордера</s:String>
-    <s:String x:Key="S.Options.Interface.Background">Фон</s:String>
-    <s:String x:Key="S.Options.Interface.Foreground">Передний план</s:String>
-    <s:String x:Key="S.Options.Interface.BoardBackground">Фон доски</s:String>
-    <s:String x:Key="S.Options.App.Theme.Scheme.VeryLight">Очень светлая</s:String>
-    <s:String x:Key="S.Options.App.Theme.Scheme.Light">Светлая</s:String>
-    <s:String x:Key="S.Options.App.Theme.Scheme.Medium">Средняя</s:String>
-    <s:String x:Key="S.Options.App.Theme.Scheme.Dark">Темная</s:String>
-    <s:String x:Key="S.Options.App.Theme.Scheme.VeryDark">Очень темная</s:String>
-    <s:String x:Key="S.Options.App.Theme.Scheme.Custom">Своя</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize">Размер сетки</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.VerySmall">Очень маленький</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.Small">Маленький</s:String>
@@ -279,18 +264,32 @@
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.ILikeBigSquares">Гигантский</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.ImBlind">Я слепой</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.Custom">Свой</s:String>
-    <s:String x:Key="S.Options.Editor.Previewer.BaseColor">Базовый цвет</s:String>
-    <s:String x:Key="S.Options.Editor.Previewer.EvenColor">Четный цвет</s:String>
-    <s:String x:Key="S.Options.Editor.Previewer.OddColor">Нечетный цвет</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.Height">Высота</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.Width">Ширина</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.Apply">Применить</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.BaseColor">Базовый цвет</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.EvenColor">Четный цвет</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.OddColor">Нечетный цвет</s:String>
     <s:String x:Key="S.Options.Editor.Interface.ExtendChrome">Растянуть заголовок (window chrome).</s:String>
-    <s:String x:Key="S.Options.Recorder.HideTitleBar">Скрыть заголовок (тонкая рамка).</s:String>
-    <s:String x:Key="S.Options.Editor.General.TripleClickSelection">Тройной клик - выбор текста.</s:String>
     <s:String x:Key="S.Options.Editor.Interface.AutomaticallySizeOnContent">Авто-настройка размера окна по размеру кадра, при старте.</s:String>
     <s:String x:Key="S.Options.Editor.Interface.AutomaticallyFitImage">Авто-настройка размера кадра по размеру окна, при старте.</s:String>
-  
+    <s:String x:Key="S.Options.Editor.General.NotifyFrameDeletion">Подтверждать удаление кадров.</s:String>
+    <s:String x:Key="S.Options.Editor.General.NotifyProjectDiscard">Подтверждать удаление проекта.</s:String>
+    <s:String x:Key="S.Options.Editor.General.NotifyWhileClosingEditor">Подтверждать выход из редактора (если открыт проект).</s:String>
+    <s:String x:Key="S.Options.Editor.General.TripleClickSelection">Тройной клик - выбор текста.</s:String>
+    <s:String x:Key="S.Options.Editor.General.DrawOutlineOutside">Отрисовывать контур вокруг букв.</s:String>
+    <s:String x:Key="S.Options.Editor.General.LimitHistory">Ограничение истории отмен/повторов.</s:String>
+    <s:String x:Key="S.Options.Editor.General.LimitHistory.Info">(Старые действия будут удалены при достижении лимита)</s:String>
+    <s:String x:Key="S.Options.Editor.General.LimitHistory.Maximum">(Максимальное количество сохраняемых действий)</s:String>
+    
+    <!--Options • Tasks-->
+    <s:String x:Key="S.Options.Tasks.Title">Авто-задача</s:String>
+    <s:String x:Key="S.Options.Tasks.List">Список авто-задач</s:String>
+    <s:String x:Key="S.Options.Tasks.List.Task">Задача</s:String>
+    <s:String x:Key="S.Options.Tasks.List.Details">Подробности</s:String>
+    <s:String x:Key="S.Options.Tasks.SelectType">(Выбор задачи)</s:String>
+    <s:String x:Key="S.Options.Tasks.Info">Эти задачи выполняются последовательно сверху-вниз списка.&#10;Это происходит, при открытии проекта с помощью редактора.</s:String>
+    
     <!--Options • Shortcuts-->
     <s:String x:Key="S.Options.Shortcuts.Global">Общесистемные</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.ScreenRecorder">Запись с экрана:</s:String>
@@ -335,15 +334,26 @@
     <s:String x:Key="S.Options.Language.AppLanguage.Translate.EmailLink.Tooltip">Открыть почтовый клиент</s:String>
     
     <!--Options • Storage-->
-    <s:String x:Key="S.Options.Storage.FilesAndFolders">Временные файлы и папки</s:String>
-    <s:String x:Key="S.Options.Storage.FilesAndFolders.Count">{0} папок и {1} файлов</s:String>
-    <s:String x:Key="S.Options.Storage.FilesAndFolders.None">Папка или файл не обнаружены</s:String>
-    <s:String x:Key="S.Options.Storage.OpenFolder">Открыть папку</s:String>
-    <s:String x:Key="S.Options.Storage.Clear">Очистить временную папку</s:String>
-    <s:String x:Key="S.Options.Storage.LogsLocation">Папка журналов</s:String>
-    <s:String x:Key="S.Options.Storage.Paths.Logs.Choose">Выберите путь к файлам журналов ошибок.</s:String>
-    <s:String x:Key="S.Options.Storage.Location">Временная папка</s:String>
+    <s:String x:Key="S.Options.Storage.Status">Статус</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Volume">Объем:</s:String>
+    <s:String x:Key="S.Options.Storage.Status.FreeSpace">{0} свободно из {1}</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Check">Проверьте еще раз, сколько места осталось.</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Clear">Очистка папки кэша.&#10;Вы можете решить, сохранять ли последние проекты или нет.</s:String>
+    <s:String x:Key="S.Options.Storage.Status.LowSpace">Недостаточно места на выбранном диске. Очистите временную папку или измените расположение.</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Error">Невозможно получить информацию о диске.</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Files.None">Нет файлов</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Files.Singular">{0:##,##0} файл</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Files.Plural">{0:##,##0} файлов</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Folders.None">Нет папок</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Folders.Singular">{0:##,##0} папка</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Folders.Plural">{0:##,##0} папок</s:String>
+    <s:String x:Key="S.Options.Storage.Status.InUse">{0} ипользуется</s:String>
+    <s:String x:Key="S.Options.Storage.Paths">Пути</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Cache">Кэш:</s:String>
     <s:String x:Key="S.Options.Storage.Paths.Cache.Choose">Выберите расположение временных файлов</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Logs">Журналы:</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Logs.Choose">Выберите путь к файлам журналов ошибок.</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Browse">Обзор выбранной папки.</s:String>
     <s:String x:Key="S.Options.Storage.Settings">Путь к настройкам</s:String>
     <s:String x:Key="S.Options.Storage.AppDataPath">AppData:</s:String>
     <s:String x:Key="S.Options.Storage.LocalPath">Путь:</s:String>
@@ -352,12 +362,18 @@
     <s:String x:Key="S.Options.Storage.RemoveSettings">Удалить файл настроек.</s:String>
     <s:String x:Key="S.Options.Storage.OpenSettingsFolder">Откройте папку, в которой находится файл настроек.&#x0d;Удерживая Ctrl, щелкните, чтобы открыть файл, если это возможно.</s:String>
     <s:String x:Key="S.Options.Storage.SettingsInfo">• Если файл настроек не найден рядом с EXE, программа использует AppData.</s:String>
-    <s:String x:Key="S.Options.Storage.KeepRecent">Сохранять недавние проекты?</s:String>
-    <s:String x:Key="S.Options.Storage.KeepRecent.Info">Если задано, то все закрытые проекты, старше указанных дней, будут удалены.&#x0d;&#x0d;Ни один открытый проект удален не будет.</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemoval">Авто-удаление старых проектов, в днях</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemoval.Info">При открытии программы удаляются все закрытые проекты, возраст которых превышает заданное время.</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemovalDays.Info">Любой закрытый проект старше этого времени будет удален при открытии программы.</s:String>
-    <s:String x:Key="S.Options.Storage.Status.LowSpace">Недостаточно места на выбранном жестком диске. Очистите временную папку или измените расположение.</s:String>
+    
+    <!--Options • Storage > Clear cache-->
+    <s:String x:Key="S.Options.Storage.Cache.Title">ScreenToGif - Очистка кэша</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.Header">Хотите очистить папку кеша?</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.Info">Когда вы делаете запись или открываете что-то для редактирования, проект создается и хранится в папке кэша.</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.Question">Хотите удалить эти проекты из папки кэша?</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.IgnoreRecent">Не удалять последние проекты.</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.IgnoreRecent.Yes">(Будут удалены только проекты старше {0} дней, и неиспользуемые сейчас)</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.IgnoreRecent.No">(Все проекты, которые сейчас не используются, будут удалены)</s:String>
     
     <!--Options • Upload-->
     <s:String x:Key="S.Options.Upload.Proxy">Прокси</s:String>
@@ -525,7 +541,7 @@
     <s:String x:Key="S.ColorSelector.Sample">Перетащите&#x0d;образец цвета</s:String>
     <s:String x:Key="S.ColorSelector.Sample.Info">Перетащите для выбора&#x0d;цвета с экрана.</s:String>
     
-    <!--Exception Viewer, Optional-->
+    <!--Exception/Error viewers-->
     <s:String x:Key="S.ExceptionViewer.Title">Просмотр ошибок</s:String>
     <s:String x:Key="S.ExceptionViewer.OpenInner">Открыть Inner Exceptions</s:String>
     <s:String x:Key="S.ErrorDialog.Observation">Что-то пошло не так.</s:String>
@@ -952,8 +968,17 @@
     <s:String x:Key="S.Reduce.Header">Уменьшить количество кадров</s:String>
     <s:String x:Key="S.Reduce.Factor">После каждого:</s:String>
     <s:String x:Key="S.Reduce.Count">Количество:</s:String>
+    <s:String x:Key="S.Reduce.Delay">Коррекция задержки:</s:String>
+    <s:String x:Key="S.Reduce.Delay.NoAdjustment">Не коррекстировать</s:String>
+    <s:String x:Key="S.Reduce.Delay.Previous">Суммировать с предыдущим кадром</s:String>
+    <s:String x:Key="S.Reduce.Delay.Evenly">Суммировать ровняя с оставшимися кадрами</s:String>
+    <s:String x:Key="S.Reduce.ApplyToAll">Уменьшить частоту кадров всего проекта.</s:String>
+    <s:String x:Key="S.Reduce.ApplyToAll.Info">Если параметр не установлен, придется выбрать несколько кадров подряд,&#10;больше фактора удаления.</s:String>
     <s:String x:Key="S.Reduce.Info">Будет удалено {0} кадров, после каждого {1} кадра. Удаленные не считаются.</s:String>
-
+    <s:String x:Key="S.Reduce.Warning.NoSelection">Выберите кадры, что бы уменьшить их частоту (или отметьте чек всего проекта).</s:String>
+    <s:String x:Key="S.Reduce.Warning.NonConsecutive">Выбранные кадры должны быть последовательными.</s:String>
+    <s:String x:Key="S.Reduce.Warning.SmallerThanFactor">Надо выбрать кадров больше фактора удаления.</s:String>
+    
     <s:String x:Key="S.RemoveDuplicates.Header">Удалить дубликаты</s:String>
     <s:String x:Key="S.RemoveDuplicates.Similarity">Сходство (%):</s:String>
     <s:String x:Key="S.RemoveDuplicates.Removal">Удалить кадры:</s:String>
@@ -1254,7 +1279,7 @@
     <s:String x:Key="S.FontWeights.UltraBold">Сверх-полужирный</s:String>
     <s:String x:Key="S.FontWeights.UltraLight">Сверх-светлый</s:String>
     
-    <!--VerticalAligment-->
+    <!--VerticalAlignment-->
     <s:String x:Key="S.VerticalAlignment.Top">Сверху</s:String>
     <s:String x:Key="S.VerticalAlignment.Center">По центру</s:String>
     <s:String x:Key="S.VerticalAlignment.Bottom">Снизу</s:String>
