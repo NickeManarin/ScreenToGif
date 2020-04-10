@@ -496,26 +496,28 @@ namespace ScreenToGif.Util
             //If the path is relative, File.Exists() was returning C:\\Windows\\System32\ffmpeg.exe when the app was lauched from the "Open with" context menu.
             //So, in order to get the correct location, I need to combine the current base directory with the relative path.
             if (!string.IsNullOrWhiteSpace(path) && !Path.IsPathRooted(path))
-                return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar).Replace(".\\", "").Replace(".", ""));
+            {
+                var adjusted = path.StartsWith("." + Path.AltDirectorySeparatorChar) ? path.TrimStart('.', Path.AltDirectorySeparatorChar) :
+                    path.StartsWith("." + Path.DirectorySeparatorChar) ? path.TrimStart('.', Path.DirectorySeparatorChar) : path;
+
+                return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, adjusted);
+            }
 
             return path;
         }
 
         public static bool IsFfmpegPresent(bool ignoreEnvironment = false, bool ignoreEmpty = false)
         {
-            var realPath = UserSettings.All.FfmpegLocation;
-
             //If the path is relative, File.Exists() was returning C:\\Windows\\System32\ffmpeg.exe when the app was lauched from the "Open with" context menu.
             //So, in order to get the correct location, I need to combine the current base directory with the relative path.
-            if (!string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation) && !Path.IsPathRooted(UserSettings.All.FfmpegLocation))
-                realPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, UserSettings.All.FfmpegLocation.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar));
+            var realPath = AdjustPath(UserSettings.All.FfmpegLocation);
 
             //File location already choosen or detected.
             if (!string.IsNullOrWhiteSpace(realPath) && File.Exists(realPath))
                 return true;
 
             //The path was not selected, but the file exists inside the same folder.
-            if (!ignoreEmpty && string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation) && File.Exists("ffmpeg.exe"))
+            if (!ignoreEmpty && string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation) && File.Exists(AdjustPath("ffmpeg.exe")))
             {
                 UserSettings.All.FfmpegLocation = "ffmpeg.exe";
                 return true;
@@ -554,19 +556,16 @@ namespace ScreenToGif.Util
 
         public static bool IsGifskiPresent(bool ignoreEnvironment = false, bool ignoreEmpty = false)
         {
-            var realPath = UserSettings.All.GifskiLocation;
-
             //If the path is relative, File.Exists() was returning C:\\Windows\\System32\Gifski.dll when the app was lauched from the "Open with" context menu.
             //So, in order to get the correct location, I need to combine the current base directory with the relative path.
-            if (!string.IsNullOrWhiteSpace(UserSettings.All.GifskiLocation) && !Path.IsPathRooted(UserSettings.All.GifskiLocation))
-                realPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, UserSettings.All.GifskiLocation.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar));
+            var realPath = AdjustPath(UserSettings.All.GifskiLocation);
 
             //File location already choosen or detected.
             if (!string.IsNullOrWhiteSpace(realPath) && File.Exists(realPath))
                 return true;
 
             //The path was not selected, but the file exists inside the same folder.
-            if (!ignoreEmpty && string.IsNullOrWhiteSpace(UserSettings.All.GifskiLocation) && File.Exists("gifski.dll"))
+            if (!ignoreEmpty && string.IsNullOrWhiteSpace(UserSettings.All.GifskiLocation) && File.Exists(AdjustPath("gifski.dll")))
             {
                 UserSettings.All.GifskiLocation = "gifski.dll";
                 return true;
@@ -605,11 +604,8 @@ namespace ScreenToGif.Util
 
         public static bool IsSharpDxPresent(bool ignoreEnvironment = false, bool ignoreEmpty = false)
         {
-            var realPath = UserSettings.All.SharpDxLocationFolder ?? "";
-
             //So, in order to get the correct location, I need to combine the current base directory with the relative path.
-            if (!string.IsNullOrWhiteSpace(UserSettings.All.SharpDxLocationFolder) && !Path.IsPathRooted(UserSettings.All.SharpDxLocationFolder))
-                realPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, UserSettings.All.SharpDxLocationFolder.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar));
+            var realPath = AdjustPath(string.IsNullOrWhiteSpace(UserSettings.All.SharpDxLocationFolder) ? "." + Path.DirectorySeparatorChar : UserSettings.All.SharpDxLocationFolder);
 
             //All these libraries should exist:
             //SharpDX.dll
@@ -621,7 +617,7 @@ namespace ScreenToGif.Util
             {
                 //The path was not selected, but the file exists inside the same folder.
                 if (!ignoreEmpty && string.IsNullOrWhiteSpace(UserSettings.All.SharpDxLocationFolder))
-                    UserSettings.All.SharpDxLocationFolder = ".";
+                    UserSettings.All.SharpDxLocationFolder = "." + Path.DirectorySeparatorChar;
 
                 return true;
             }

@@ -26,6 +26,10 @@
         <CommandBinding Command="{StaticResource Command.Add}" CanExecute="Add_CanExecute" Executed="Add_Executed"/>
         <CommandBinding x:Name="EditCommandBinding" Command="{StaticResource Command.Edit}" CanExecute="Remove_CanExecute" Executed="Edit_Executed"/>
         <CommandBinding Command="{StaticResource Command.Remove}" CanExecute="Remove_CanExecute" Executed="Remove_Executed"/>
+
+        <CommandBinding Command="{StaticResource Command.BrowseFfmpeg}" CanExecute="BrowseFfmpeg_CanExecute" Executed="BrowseFfmpeg_Execute"/>
+        <CommandBinding Command="{StaticResource Command.BrowseGifski}" CanExecute="BrowseGifski_CanExecute" Executed="BrowseGifski_Execute"/>
+        <CommandBinding Command="{StaticResource Command.BrowseSharpDx}" CanExecute="BrowseSharpDx_CanExecute" Executed="BrowseSharpDx_Execute"/>
     </Window.CommandBindings>
 
     <Window.Resources>
@@ -1379,14 +1383,17 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="30"/>
                             </Grid.ColumnDefinitions>
 
                             <n:ExtendedTextBox Grid.Column="0" x:Name="FfmpegLocationTextBox" Margin="10,3,0,3" Text="{Binding FfmpegLocation, Source={x:Static u:UserSettings.All}, UpdateSourceTrigger=PropertyChanged}" 
-                                               LostKeyboardFocus="LocationTextBox_LostKeyboardFocus"/>
+                                               Tag="FFmpeg" LostKeyboardFocus="LocationTextBox_LostKeyboardFocus"/>
 
                             <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" ContentWidth="20"
-                                           Click="SelectFfmpeg_Click" ToolTip="{DynamicResource S.Options.Extras.FfmpegLocation.Select}"
-                                           ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                                           ToolTip="{DynamicResource S.Options.Extras.FfmpegLocation.Select}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Click="SelectFfmpeg_Click"/>
+
+                            <n:ImageButton Grid.Column="2" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Forward}" ContentWidth="20"
+                                           ToolTip="{DynamicResource S.Options.Storage.Paths.Browse}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{StaticResource Command.BrowseFfmpeg}"/>
                         </Grid>
 
                         <n:LabelSeparator Grid.Row="4" Text="{DynamicResource S.Options.Extras.GifskiLocation}"/>
@@ -1394,14 +1401,17 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="30"/>
                             </Grid.ColumnDefinitions>
 
                             <n:ExtendedTextBox Grid.Column="0" x:Name="GifskiLocationTextBox" Margin="10,3,0,3" Text="{Binding GifskiLocation, Source={x:Static u:UserSettings.All}, UpdateSourceTrigger=PropertyChanged}" 
-                                               LostKeyboardFocus="LocationTextBox_LostKeyboardFocus"/>
+                                               Tag="Gifski" LostKeyboardFocus="LocationTextBox_LostKeyboardFocus"/>
 
                             <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" ContentWidth="20"
-                                           Click="SelectGifski_Click" ToolTip="{DynamicResource S.Options.Extras.GifskiLocation.Select}"
-                                           ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                                           ToolTip="{DynamicResource S.Options.Extras.GifskiLocation.Select}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Click="SelectGifski_Click"/>
+
+                            <n:ImageButton Grid.Column="2" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Forward}" ContentWidth="20"
+                                           ToolTip="{DynamicResource S.Options.Storage.Paths.Browse}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{StaticResource Command.BrowseGifski}"/>
                         </Grid>
 
                         <n:LabelSeparator Grid.Row="6" Text="{DynamicResource S.Options.Extras.SharpDxLocation}"/>
@@ -1409,14 +1419,17 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="30"/>
                             </Grid.ColumnDefinitions>
 
                             <n:ExtendedTextBox Grid.Column="0" x:Name="SharpDxLocationTextBox" Margin="10,3,0,3" Text="{Binding SharpDxLocationFolder, Source={x:Static u:UserSettings.All}, UpdateSourceTrigger=PropertyChanged}" 
-                                               LostKeyboardFocus="LocationTextBox_LostKeyboardFocus"/>
+                                               Tag="SharpDX" LostKeyboardFocus="LocationTextBox_LostKeyboardFocus"/>
 
                             <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" ContentWidth="20"
-                                           Click="SelectSharpDx_Click" ToolTip="{DynamicResource S.Options.Extras.SharpDxLocation.Select}"
-                                           ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                                           ToolTip="{DynamicResource S.Options.Extras.SharpDxLocation.Select}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Click="SelectSharpDx_Click"/>
+
+                            <n:ImageButton Grid.Column="2" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Forward}" ContentWidth="20"
+                                           ToolTip="{DynamicResource S.Options.Storage.Paths.Browse}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{StaticResource Command.BrowseSharpDx}"/>
                         </Grid>
 
                         <StackPanel Grid.Row="9" Orientation="Horizontal">

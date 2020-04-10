@@ -137,7 +137,8 @@
     <s:String x:Key="S.Updater.Installer">安装程序</s:String>
     <s:String x:Key="S.Updater.Info.WhatsNew">新功能?</s:String>
     <s:String x:Key="S.Updater.Info.BugFixes">错误修复：</s:String>
-    <s:String x:Key="S.Updater.Info.NewVersionAvailable">您可以下载新版本。&#x0d;您要打开浏览器进行下载吗?</s:String>
+    <s:String x:Key="S.Updater.Info.NewVersionAvailable">您可以下载新版本。
+您要打开浏览器进行下载吗?</s:String>
     <s:String x:Key="S.Updater.RunAfter">更新后执行该应用程序。</s:String>
     <s:String x:Key="S.Updater.Download">下载</s:String>
     <s:String x:Key="S.Updater.Install">安装</s:String>
@@ -149,7 +150,7 @@
     <s:String x:Key="S.Options.Title">ScreenToGif - 选项</s:String>
     <s:String x:Key="S.Options.App">应用程序</s:String>
     <s:String x:Key="S.Options.Recorder">录像机</s:String>
-    <s:String x:Key="S.Options.Interface">界面</s:String>
+    <s:String x:Key="S.Options.Editor">编辑器</s:String>
     <s:String x:Key="S.Options.Tasks">自动化任务</s:String>
     <s:String x:Key="S.Options.Shortcuts">键盘快捷键</s:String>
     <s:String x:Key="S.Options.Language">语言</s:String>
@@ -186,19 +187,14 @@
     <s:String x:Key="S.Options.App.Startup.Window.Board">画板录像机</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Editor">编辑器窗口</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Info">（在应用启动时首先显示的窗口）</s:String>
-    <s:String x:Key="S.Options.App.General">常规</s:String>
-    <s:String x:Key="S.Options.Editor.General.NotifyFrameDeletion">删除帧前询问我</s:String>
-    <s:String x:Key="S.Options.Editor.General.NotifyProjectDiscard">放弃项目前询问我</s:String>
-    <s:String x:Key="S.Options.Editor.General.NotifyWhileClosingEditor">关闭编辑器前询问我 （如果有打开的项目）</s:String>
-    <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">关闭应用程序之前询问我（通过'退出'命令）</s:String>
-    <s:String x:Key="S.Options.Editor.General.DrawOutlineOutside">绘制标题文字的外轮廓</s:String>
-    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">禁用硬件加速</s:String>
-    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">（用户界面将通过软件模式呈现）</s:String>
-    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">检查翻译更新</s:String>
-    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">（更新的翻译将自动下载并安装）</s:String>
-    <s:String x:Key="S.Options.App.General.CheckForUpdates">检查更新</s:String>
-    <s:String x:Key="S.Options.App.General.UpdateOnClose">关闭应用程序后自动安装更新</s:String>
-    <s:String x:Key="S.Options.App.General.PromptToInstall">在安装开始之前提示我</s:String>
+    <s:String x:Key="S.Options.App.Theme">应用程序主题</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme">配色方案</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.VeryLight">非常浅</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Light">浅色</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Medium">中等</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Dark">深色</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.VeryDark">非常暗</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Custom">自定义</s:String>
     <s:String x:Key="S.Options.App.Tray">系统托盘图标</s:String>
     <s:String x:Key="S.Options.App.Tray.Show">在系统托盘（通知区域）上显示应用程序</s:String>
     <s:String x:Key="S.Options.App.Tray.LeaveOpen">即使所有窗口关闭仍保持应用程序的打开状态</s:String>
@@ -213,6 +209,15 @@
     <s:String x:Key="S.Options.App.Tray.Interactions.Middle">中键单击：</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Window">窗口：</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Else">否则，打开：</s:String>
+    <s:String x:Key="S.Options.App.General">常规</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">关闭应用程序之前询问我（通过'退出'命令）</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">禁用硬件加速</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">（用户界面将通过软件模式呈现）</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">检查翻译更新</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">（更新的翻译将自动下载并安装）</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForUpdates">检查更新</s:String>
+    <s:String x:Key="S.Options.App.General.UpdateOnClose">关闭应用程序后自动安装更新</s:String>
+    <s:String x:Key="S.Options.App.General.PromptToInstall">在安装开始之前提示我</s:String>
 
     <!--Options • Recorder-->
     <s:String x:Key="S.Options.Recorder.Interface">界面</s:String>
@@ -244,6 +249,7 @@
     <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">（恒定延迟，不会因为录制时的卡顿变化）</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording">启用异步录制</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">（有助于减少录制时的界面卡顿）</s:String>
+    <s:String x:Key="S.Options.Recorder.HideTitleBar">隐藏标题栏（精简模式）</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier">启用屏幕放大镜</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier.Info">（在选择录制区域时启用放大镜）</s:String>
     <s:String x:Key="S.Options.Recorder.CursorFollowing">启用光标跟随</s:String>
@@ -251,29 +257,8 @@
     <s:String x:Key="S.Options.Recorder.FollowMargin.Info">（录制区域开始重新定位的缓冲区边距）</s:String>
     <s:String x:Key="S.Options.Recorder.FollowMarginInvisible.Info">（UI 开始隐藏的其他缓冲区边距）</s:String>
 
-    <!--Options • Tasks-->
-    <s:String x:Key="S.Options.Tasks.Title">自动化任务</s:String>
-    <s:String x:Key="S.Options.Tasks.List">自动化任务列表</s:String>
-    <s:String x:Key="S.Options.Tasks.List.Task">任务</s:String>
-    <s:String x:Key="S.Options.Tasks.List.Details">详细信息</s:String>
-    <s:String x:Key="S.Options.Tasks.SelectType">（选择一个任务）</s:String>
-    <s:String x:Key="S.Options.Tasks.Info">这些任务从列表顶部到底部顺序执行。
-当您第一次使用编辑器打开项目时会发生这种情况。</s:String>
-    
-    <!--Options • Interface-->
-    <s:String x:Key="S.Options.App.Theme">应用程序主题</s:String>
-    <s:String x:Key="S.Options.App.Theme.Scheme">配色方案</s:String>
+    <!--Options • Editor-->
     <s:String x:Key="S.Options.Editor.Previewer">编辑器背景</s:String>
-    <s:String x:Key="S.Options.Interface.Recorder">录像机主题</s:String>
-    <s:String x:Key="S.Options.Interface.Background">背景</s:String>
-    <s:String x:Key="S.Options.Interface.Foreground">前景</s:String>
-    <s:String x:Key="S.Options.Interface.BoardBackground">画板背景</s:String>
-    <s:String x:Key="S.Options.App.Theme.Scheme.VeryLight">非常浅</s:String>
-    <s:String x:Key="S.Options.App.Theme.Scheme.Light">浅色</s:String>
-    <s:String x:Key="S.Options.App.Theme.Scheme.Medium">中等</s:String>
-    <s:String x:Key="S.Options.App.Theme.Scheme.Dark">深色</s:String>
-    <s:String x:Key="S.Options.App.Theme.Scheme.VeryDark">非常暗</s:String>
-    <s:String x:Key="S.Options.App.Theme.Scheme.Custom">自定义</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize">网格大小</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.VerySmall">非常小</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.Small">小</s:String>
@@ -283,17 +268,32 @@
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.ILikeBigSquares">我喜欢大方块</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.ImBlind">我是盲人</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.Custom">自定义</s:String>
-    <s:String x:Key="S.Options.Editor.Previewer.BaseColor">基础颜色</s:String>
-    <s:String x:Key="S.Options.Editor.Previewer.EvenColor">偶数行颜色</s:String>
-    <s:String x:Key="S.Options.Editor.Previewer.OddColor">奇数行颜色</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.Height">高度</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.Width">宽度</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.Apply">应用</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.BaseColor">基础颜色</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.EvenColor">偶数行颜色</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.OddColor">奇数行颜色</s:String>
     <s:String x:Key="S.Options.Editor.Interface.ExtendChrome">扩展标题栏（窗口框架）</s:String>
-    <s:String x:Key="S.Options.Recorder.HideTitleBar">隐藏标题栏（精简模式）</s:String>
-    <s:String x:Key="S.Options.Editor.General.TripleClickSelection">启用三次点击选择文字</s:String>
     <s:String x:Key="S.Options.Editor.Interface.AutomaticallySizeOnContent">加载后根据帧大小自动调整窗口大小</s:String>
     <s:String x:Key="S.Options.Editor.Interface.AutomaticallyFitImage">加载后根据窗口大小自动调整帧缩放级别</s:String>
+    <s:String x:Key="S.Options.Editor.General.NotifyFrameDeletion">删除帧前询问我</s:String>
+    <s:String x:Key="S.Options.Editor.General.NotifyProjectDiscard">放弃项目前询问我</s:String>
+    <s:String x:Key="S.Options.Editor.General.NotifyWhileClosingEditor">关闭编辑器前询问我 （如果有打开的项目）</s:String>
+    <s:String x:Key="S.Options.Editor.General.TripleClickSelection">启用三次点击选择文字</s:String>
+    <s:String x:Key="S.Options.Editor.General.DrawOutlineOutside">绘制标题文字的外轮廓</s:String>
+    <s:String x:Key="S.Options.Editor.General.LimitHistory">对撤消/重做历史记录添加限制</s:String>
+    <s:String x:Key="S.Options.Editor.General.LimitHistory.Info">（达到限制后，较旧的操作将被删除）</s:String>
+    <s:String x:Key="S.Options.Editor.General.LimitHistory.Maximum">（存储的最大操作数量）</s:String>
+    
+    <!--Options • Tasks-->
+    <s:String x:Key="S.Options.Tasks.Title">自动化任务</s:String>
+    <s:String x:Key="S.Options.Tasks.List">自动化任务列表</s:String>
+    <s:String x:Key="S.Options.Tasks.List.Task">任务</s:String>
+    <s:String x:Key="S.Options.Tasks.List.Details">详细信息</s:String>
+    <s:String x:Key="S.Options.Tasks.SelectType">（选择一个任务）</s:String>
+    <s:String x:Key="S.Options.Tasks.Info">这些任务从列表顶部到底部顺序执行。
+当您第一次使用编辑器打开项目时会发生这种情况。</s:String>
   
     <!--Options • Shortcuts-->
     <s:String x:Key="S.Options.Shortcuts.Global">全局</s:String>
@@ -340,15 +340,26 @@
     <s:String x:Key="S.Options.Language.AppLanguage.Translate.EmailLink.Tooltip">打开电子邮件应用</s:String>
     
     <!--Options • Storage-->
-    <s:String x:Key="S.Options.Storage.FilesAndFolders">临时文件和文件夹</s:String>
-    <s:String x:Key="S.Options.Storage.FilesAndFolders.Count">{0} 个文件夹和 {1} 个文件</s:String>
-    <s:String x:Key="S.Options.Storage.FilesAndFolders.None">未检测到任何文件夹或文件</s:String>
-    <s:String x:Key="S.Options.Storage.OpenFolder">浏览文件夹</s:String>
-    <s:String x:Key="S.Options.Storage.Clear">清空临时文件夹</s:String>
-    <s:String x:Key="S.Options.Storage.LogsLocation">日志文件夹位置</s:String>
-    <s:String x:Key="S.Options.Storage.Paths.Logs.Choose">选择错误日志文件位置</s:String>
-    <s:String x:Key="S.Options.Storage.Location">文件夹位置</s:String>
+    <s:String x:Key="S.Options.Storage.Status">状态</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Volume">卷：</s:String>
+    <s:String x:Key="S.Options.Storage.Status.FreeSpace">{1} 可用  {0}</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Check">再次检查剩余的空间。</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Clear">清除缓存文件夹。&#10;您将可以决定是否要保留最近的项目。</s:String>
+    <s:String x:Key="S.Options.Storage.Status.LowSpace">当前配置的硬盘驱动器上空间不足。请清理临时缓存文件夹或更改位置。</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Error">无法检索驱动器详细信息。</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Files.None">没有文件</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Files.Singular">{0:##,##0} 个文件</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Files.Plural">{0:##,##0} 个文件</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Folders.None">没有文件夹</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Folders.Singular">{0:##,##0} 个文件夹</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Folders.Plural">{0:##,##0} 个文件夹</s:String>
+    <s:String x:Key="S.Options.Storage.Status.InUse">{0} 在使用</s:String>
+    <s:String x:Key="S.Options.Storage.Paths">路径</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Cache">缓存：</s:String>
     <s:String x:Key="S.Options.Storage.Paths.Cache.Choose">选择临时文件位置</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Logs">日志：</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Logs.Choose">选择错误日志文件位置</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Browse">浏览所选文件夹</s:String>
     <s:String x:Key="S.Options.Storage.Settings">配置文件存放目录</s:String>
     <s:String x:Key="S.Options.Storage.AppDataPath">AppData：</s:String>
     <s:String x:Key="S.Options.Storage.LocalPath">本地：</s:String>
@@ -361,12 +372,18 @@
 • 如果本地文件夹中没有设置文件，此应用将在 AppData 文件夹中进行搜索。
 • 如果没有设置文件，则使用默认值。
 • 如果没有本地设置，保存所有设置将到 AppData 设置文件中。</s:String>
-    <s:String x:Key="S.Options.Storage.KeepRecent">是否保存最近的项目？</s:String>
-    <s:String x:Key="S.Options.Storage.KeepRecent.Info">若要保存，最近 5 天的项目不会被移除。</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemoval">自动删除旧项目</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemoval.Info">打开编辑器时，超过 5 天的旧项目会被自动删除。</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemovalDays.Info">（在几天之内，打开编辑器后，任何旧项目都将被删除/丢弃）</s:String>
-    <s:String x:Key="S.Options.Storage.Status.LowSpace">当前配置的硬盘驱动器上空间不足。请清理临时缓存文件夹或更改位置。</s:String>
+    
+    <!--Options • Storage > Clear cache-->
+    <s:String x:Key="S.Options.Storage.Cache.Title">ScreenToGif - 清除缓存</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.Header">您要清除缓存文件夹吗?</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.Info">创建录制或打开要编辑的内容时，将创建一个项目并将其存储在缓存文件夹中。</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.Question">您要从缓存文件夹中删除这些项目吗?</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.IgnoreRecent">不要删除最近的项目。</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.IgnoreRecent.Yes">（仅会删除 {0} 天之前尚未使用的项目）</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.IgnoreRecent.No">（所有当前未使用的项目将被删除）</s:String>
     
     <!--Options • Upload-->
     <s:String x:Key="S.Options.Upload.Proxy">代理</s:String>
@@ -974,8 +991,17 @@
     <s:String x:Key="S.Reduce.Header">减少帧率</s:String>
     <s:String x:Key="S.Reduce.Factor">系数：</s:String>
     <s:String x:Key="S.Reduce.Count">删除帧数：</s:String>
+    <s:String x:Key="S.Reduce.Delay">延迟调整：</s:String>
+    <s:String x:Key="S.Reduce.Delay.NoAdjustment">不调整</s:String>
+    <s:String x:Key="S.Reduce.Delay.Previous">与前一帧相加</s:String>
+    <s:String x:Key="S.Reduce.Delay.Evenly">与其余帧平均相加</s:String>
+    <s:String x:Key="S.Reduce.ApplyToAll">降低整个项目的帧率。</s:String>
+    <s:String x:Key="S.Reduce.ApplyToAll.Info">如果未选中该选项，则必须选择多个连续帧，且大于去除因子。</s:String>
     <s:String x:Key="S.Reduce.Info">每隔 {1} 帧删除 {0} 帧。（不计算删除的帧）</s:String>
-
+    <s:String x:Key="S.Reduce.Warning.NoSelection">您必须选择要应用帧率降低的帧（或选中要应用于整个项目的选项）。</s:String>
+    <s:String x:Key="S.Reduce.Warning.NonConsecutive">选择的帧列表必须是连续的。 您不能在选定的帧中保留一些未选择的帧。</s:String>
+    <s:String x:Key="S.Reduce.Warning.SmallerThanFactor">为了使功能可以删除任何东西，帧的选择必须比除去因子越大。</s:String>
+    
     <s:String x:Key="S.RemoveDuplicates.Header">删除重复项</s:String>
     <s:String x:Key="S.RemoveDuplicates.Similarity">相似度 (%)：</s:String>
     <s:String x:Key="S.RemoveDuplicates.Removal">帧删除：</s:String>

@@ -1524,11 +1524,13 @@ namespace ScreenToGif.Windows
 
         private async void FfmpegImageCard_Click(object sender, RoutedEventArgs e)
         {
-            CheckTools();
+            CheckTools(true, false, false);
 
-            if (!string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation) && File.Exists(UserSettings.All.FfmpegLocation))
+            var adjusted = Util.Other.AdjustPath(UserSettings.All.FfmpegLocation);
+
+            if (!string.IsNullOrWhiteSpace(adjusted) && File.Exists(adjusted))
             {
-                Native.ShowFileProperties(Path.GetFullPath(UserSettings.All.FfmpegLocation));
+                Native.ShowFileProperties(Path.GetFullPath(adjusted));
                 return;
             }
 
@@ -1621,11 +1623,13 @@ namespace ScreenToGif.Windows
 
         private async void GifskiImageCard_Click(object sender, RoutedEventArgs e)
         {
-            CheckTools();
+            CheckTools(false, true, false);
 
-            if (!string.IsNullOrWhiteSpace(UserSettings.All.GifskiLocation) && File.Exists(UserSettings.All.GifskiLocation))
+            var adjusted = Util.Other.AdjustPath(UserSettings.All.GifskiLocation);
+
+            if (!string.IsNullOrWhiteSpace(adjusted) && File.Exists(adjusted))
             {
-                Native.ShowFileProperties(Path.GetFullPath(UserSettings.All.GifskiLocation));
+                Native.ShowFileProperties(Path.GetFullPath(adjusted));
                 return;
             }
 
@@ -1646,7 +1650,7 @@ namespace ScreenToGif.Windows
 
             var name = Path.GetFileNameWithoutExtension(output) ?? "";
             var directory = !string.IsNullOrWhiteSpace(output) ? Path.GetDirectoryName(output) : "";
-            var initial = Directory.Exists(directory) ? directory : Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            var initial = Directory.Exists(directory) ? directory : AppDomain.CurrentDomain.BaseDirectory;
 
             var sfd = new SaveFileDialog
             {
@@ -1719,11 +1723,13 @@ namespace ScreenToGif.Windows
 
         private async void SharpDxImageCard_Click(object sender, RoutedEventArgs e)
         {
-            CheckTools();
+            CheckTools(false, false, true);
 
-            if (!string.IsNullOrWhiteSpace(UserSettings.All.SharpDxLocationFolder) && File.Exists(Path.Combine(UserSettings.All.SharpDxLocationFolder, "SharpDX.dll")))
+            var adjusted = Util.Other.AdjustPath(string.IsNullOrWhiteSpace(UserSettings.All.SharpDxLocationFolder) ? "." + Path.DirectorySeparatorChar : UserSettings.All.SharpDxLocationFolder);
+
+            if (!string.IsNullOrWhiteSpace(adjusted) && File.Exists(Path.Combine(adjusted, "SharpDX.dll")))
             {
-                Native.ShowFileProperties(Path.GetFullPath(Path.Combine(UserSettings.All.SharpDxLocationFolder, "SharpDX.dll")));
+                Native.ShowFileProperties(Path.GetFullPath(Path.Combine(adjusted, "SharpDX.dll")));
                 return;
             }
 
@@ -1743,7 +1749,7 @@ namespace ScreenToGif.Windows
             var notAlt = !string.IsNullOrWhiteSpace(output) && output.Contains(Path.DirectorySeparatorChar);
 
             var directory = !string.IsNullOrWhiteSpace(output) ? Path.GetDirectoryName(output) : "";
-            var initial = Directory.Exists(directory) ? directory : Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            var initial = Directory.Exists(directory) ? directory : AppDomain.CurrentDomain.BaseDirectory;
 
             var fbd = new System.Windows.Forms.FolderBrowserDialog
             {
@@ -1812,10 +1818,14 @@ namespace ScreenToGif.Windows
 #endif
         }
 
+
         private void LocationTextBox_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
-            CheckTools();
+            var box = sender as TextBox;
+            
+            CheckTools(box?.Tag?.Equals("FFmpeg") ?? false, box?.Tag?.Equals("Gifski") ?? false, box?.Tag?.Equals("SharpDX") ?? false);
         }
+
 
         private void SelectFfmpeg_Click(object sender, RoutedEventArgs e)
         {
@@ -1862,7 +1872,7 @@ namespace ScreenToGif.Windows
                 UserSettings.All.FfmpegLocation = notAlt ? relativeFolder : relativeFolder.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
             }
 
-            CheckTools();
+            CheckTools(true, false, false);
         }
 
         private void SelectGifski_Click(object sender, RoutedEventArgs e)
@@ -1910,7 +1920,7 @@ namespace ScreenToGif.Windows
                 UserSettings.All.GifskiLocation = notAlt ? relativeFolder : relativeFolder.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
             }
 
-            CheckTools();
+            CheckTools(false, true, false);
         }
 
         private void SelectSharpDx_Click(object sender, RoutedEventArgs e)
@@ -1955,8 +1965,86 @@ namespace ScreenToGif.Windows
                 UserSettings.All.SharpDxLocationFolder = notAlt ? relativeFolder : relativeFolder.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
             }
 
-            CheckTools();
+            CheckTools(false, false, true);
         }
+
+
+        private void BrowseFfmpeg_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = IsLoaded && FfmpegImageCard.Status == ExtrasStatus.Ready;
+        }
+
+        private void BrowseGifski_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = IsLoaded && GifskiImageCard.Status == ExtrasStatus.Ready;
+        }
+
+        private void BrowseSharpDx_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = IsLoaded && SharpDxImageCard.Status == ExtrasStatus.Ready;
+        }
+
+        private void BrowseFfmpeg_Execute(object sender, ExecutedRoutedEventArgs e)
+        {
+            try
+            {
+                var path = Util.Other.AdjustPath(UserSettings.All.FfmpegLocation);
+
+                if (string.IsNullOrWhiteSpace(path))
+                    return;
+
+                var folder = Path.GetDirectoryName(path);
+
+                if (string.IsNullOrWhiteSpace(folder))
+                    return;
+
+                Process.Start(folder);
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Error while trying to browse the FFmpeg folder.");
+            }
+        }
+
+        private void BrowseGifski_Execute(object sender, ExecutedRoutedEventArgs e)
+        {
+            try
+            {
+                var path = Util.Other.AdjustPath(UserSettings.All.GifskiLocation);
+
+                if (string.IsNullOrWhiteSpace(path))
+                    return;
+
+                var folder = Path.GetDirectoryName(path);
+
+                if (string.IsNullOrWhiteSpace(folder))
+                    return;
+
+                Process.Start(folder);
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Error while trying to browse the Gifski folder.");
+            }
+        }
+
+        private void BrowseSharpDx_Execute(object sender, ExecutedRoutedEventArgs e)
+        {
+            try
+            {
+                var folder = Util.Other.AdjustPath(string.IsNullOrWhiteSpace(UserSettings.All.SharpDxLocationFolder) ? "." + Path.DirectorySeparatorChar : UserSettings.All.SharpDxLocationFolder);
+
+                if (string.IsNullOrWhiteSpace(folder))
+                    return;
+
+                Process.Start(folder);
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Error while trying to browse the SharpDx folder.");
+            }
+        }
+
 
         private void ExtrasHyperlink_OnRequestNavigate(object sender, RequestNavigateEventArgs e)
         {
@@ -1970,59 +2058,80 @@ namespace ScreenToGif.Windows
             }
         }
 
-        private void CheckTools()
+        private void CheckTools(bool ffmpeg = true, bool gifski = true, bool sharpdx = true)
         {
             if (!IsLoaded)
                 return;
 
             try
             {
-                if (Util.Other.IsFfmpegPresent(true, true))
+                if (ffmpeg)
                 {
-                    var info = new FileInfo(Util.Other.AdjustPath(UserSettings.All.FfmpegLocation));
-                    info.Refresh();
+                    #region FFmpeg
 
-                    FfmpegImageCard.Status = ExtrasStatus.Ready;
-                    FfmpegImageCard.Description = string.Format(LocalizationHelper.Get("S.Options.Extras.Ready", "{0}"), Humanizer.BytesToString(info.Length));
-                }
-                else
-                {
-                    FfmpegImageCard.Status = ExtrasStatus.Available;
-                    FfmpegImageCard.Description = string.Format(LocalizationHelper.Get("S.Options.Extras.Download", "{0}"), "~ 43,7 MB");
-                }
+                    if (Util.Other.IsFfmpegPresent(true, true))
+                    {
+                        var info = new FileInfo(Util.Other.AdjustPath(UserSettings.All.FfmpegLocation));
+                        info.Refresh();
 
-                if (Util.Other.IsGifskiPresent(true, true))
-                {
-                    var info = new FileInfo(Util.Other.AdjustPath(UserSettings.All.GifskiLocation));
-                    info.Refresh();
+                        FfmpegImageCard.Status = ExtrasStatus.Ready;
+                        FfmpegImageCard.Description = string.Format(LocalizationHelper.Get("S.Options.Extras.Ready", "{0}"), Humanizer.BytesToString(info.Length));
+                    }
+                    else
+                    {
+                        FfmpegImageCard.Status = ExtrasStatus.Available;
+                        FfmpegImageCard.Description = string.Format(LocalizationHelper.Get("S.Options.Extras.Download", "{0}"), "~ 43,7 MB");
+                    }
 
-                    GifskiImageCard.Status = ExtrasStatus.Ready;
-                    GifskiImageCard.Description = string.Format(LocalizationHelper.Get("S.Options.Extras.Ready", "{0}"), Humanizer.BytesToString(info.Length));
-                }
-                else
-                {
-                    GifskiImageCard.Status = ExtrasStatus.Available;
-                    GifskiImageCard.Description = string.Format(LocalizationHelper.Get("S.Options.Extras.Download", "{0}"), "~ 491 KB");
+                    #endregion
                 }
 
-                if (Util.Other.IsSharpDxPresent(true, true))
+                if (gifski)
                 {
-                    var folder = Util.Other.AdjustPath(UserSettings.All.SharpDxLocationFolder ?? ".\\");
+                    #region Gifski
 
-                    var info1 = new FileInfo(Path.Combine(folder, "SharpDX.dll"));
-                    info1.Refresh();
-                    var info2 = new FileInfo(Path.Combine(folder, "SharpDX.DXGI.dll"));
-                    info2.Refresh();
-                    var info3 = new FileInfo(Path.Combine(folder, "SharpDX.Direct3D11.dll"));
-                    info3.Refresh();
+                    if (Util.Other.IsGifskiPresent(true, true))
+                    {
+                        var info = new FileInfo(Util.Other.AdjustPath(UserSettings.All.GifskiLocation));
+                        info.Refresh();
 
-                    SharpDxImageCard.Status = ExtrasStatus.Ready;
-                    SharpDxImageCard.Description = string.Format(LocalizationHelper.Get("S.Options.Extras.Ready", "{0}"), Humanizer.BytesToString(info1.Length + info2.Length + info3.Length));
+                        GifskiImageCard.Status = ExtrasStatus.Ready;
+                        GifskiImageCard.Description = string.Format(LocalizationHelper.Get("S.Options.Extras.Ready", "{0}"), Humanizer.BytesToString(info.Length));
+                    }
+                    else
+                    {
+                        GifskiImageCard.Status = ExtrasStatus.Available;
+                        GifskiImageCard.Description = string.Format(LocalizationHelper.Get("S.Options.Extras.Download", "{0}"), "~ 491 KB");
+                    }
+
+                    #endregion
                 }
-                else
+
+                if (sharpdx)
                 {
-                    SharpDxImageCard.Status = ExtrasStatus.Available;
-                    SharpDxImageCard.Description = string.Format(LocalizationHelper.Get("S.Options.Extras.Download", "{0}"), "~ 242 KB");
+                    #region SharpDX
+
+                    if (Util.Other.IsSharpDxPresent(true, true))
+                    {
+                        var folder = Util.Other.AdjustPath(string.IsNullOrWhiteSpace(UserSettings.All.SharpDxLocationFolder) ? "." + Path.DirectorySeparatorChar : UserSettings.All.SharpDxLocationFolder);
+
+                        var info1 = new FileInfo(Path.Combine(folder, "SharpDX.dll"));
+                        info1.Refresh();
+                        var info2 = new FileInfo(Path.Combine(folder, "SharpDX.DXGI.dll"));
+                        info2.Refresh();
+                        var info3 = new FileInfo(Path.Combine(folder, "SharpDX.Direct3D11.dll"));
+                        info3.Refresh();
+
+                        SharpDxImageCard.Status = ExtrasStatus.Ready;
+                        SharpDxImageCard.Description = string.Format(LocalizationHelper.Get("S.Options.Extras.Ready", "{0}"), Humanizer.BytesToString(info1.Length + info2.Length + info3.Length));
+                    }
+                    else
+                    {
+                        SharpDxImageCard.Status = ExtrasStatus.Available;
+                        SharpDxImageCard.Description = string.Format(LocalizationHelper.Get("S.Options.Extras.Download", "{0}"), "~ 242 KB");
+                    }
+
+                    #endregion
                 }
             }
             catch (Exception ex)
