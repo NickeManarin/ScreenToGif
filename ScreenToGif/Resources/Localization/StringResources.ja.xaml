@@ -148,7 +148,7 @@
     <s:String x:Key="S.Options.Title">ScreenToGif - オプション</s:String>
     <s:String x:Key="S.Options.App">アプリケーション</s:String>
     <s:String x:Key="S.Options.Recorder">レコーダー</s:String>
-    <s:String x:Key="S.Options.Interface">インターフェース</s:String>
+    <s:String x:Key="S.Options.Editor">エディター</s:String>
     <s:String x:Key="S.Options.Tasks">自動化タスク</s:String>
     <s:String x:Key="S.Options.Shortcuts">ショートカットキー</s:String>
     <s:String x:Key="S.Options.Language">言語</s:String>
@@ -183,19 +183,14 @@
     <s:String x:Key="S.Options.App.Startup.Window.Board">ボードレコーダー</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Editor">エディターウィンドウ</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Info">(アプリ開始時に最初に表示するウィンドウ)</s:String>
-    <s:String x:Key="S.Options.App.General">全般</s:String>
-    <s:String x:Key="S.Options.Editor.General.NotifyFrameDeletion">フレームを削除する前に確認</s:String>
-    <s:String x:Key="S.Options.Editor.General.NotifyProjectDiscard">プロジェクトを破棄する前に確認</s:String>
-    <s:String x:Key="S.Options.Editor.General.NotifyWhileClosingEditor">エディターを閉じる前に確認 (プロジェクトが開かれている場合)</s:String>
-    <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">(Exitコマンドで)アプリ終了する前に確認</s:String>
-    <s:String x:Key="S.Options.Editor.General.DrawOutlineOutside">文字の外側にキャプションのアウトラインを描く</s:String>
-    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">ハードウェア・アクセラレーションを使用しない</s:String>
-    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(ユーザーインターフェースは、ソフトウェアモードでレンダリングされます)</s:String>
-    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">翻訳のアップデートを確認</s:String>
-    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(翻訳がアップデートされたら自動的にダウンロード、インストールされます)</s:String>
-    <s:String x:Key="S.Options.App.General.CheckForUpdates">アップデートを確認</s:String>
-    <s:String x:Key="S.Options.App.General.UpdateOnClose">アプリ終了後、自動的に更新をインストール</s:String>
-    <s:String x:Key="S.Options.App.General.PromptToInstall">インストールを開始する前にプロンプトを表示</s:String>
+    <s:String x:Key="S.Options.App.Theme">アプリのテーマ</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme">配色</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.VeryLight">非常に明るい</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Light">明るい</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Medium">中間</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Dark">暗い</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.VeryDark">とても暗い</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Custom">カスタム</s:String>
     <s:String x:Key="S.Options.App.Tray">システムトレイアイコン</s:String>
     <s:String x:Key="S.Options.App.Tray.Show">システムトレイ(通知領域)にアプリを表示</s:String>
     <s:String x:Key="S.Options.App.Tray.LeaveOpen">すべてのウィンドウを閉じてもアプリは閉じない</s:String>
@@ -210,6 +205,15 @@
     <s:String x:Key="S.Options.App.Tray.Interactions.Middle">中クリック:</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Window">ウィンドウ:</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Else">以外の場合、開く:</s:String>
+    <s:String x:Key="S.Options.App.General">全般</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">(Exitコマンドで)アプリ終了する前に確認</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">ハードウェア・アクセラレーションを使用しない</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(ユーザーインターフェースは、ソフトウェアモードでレンダリングされます)</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">翻訳のアップデートを確認</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(翻訳がアップデートされたら自動的にダウンロード、インストールされます)</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForUpdates">アップデートを確認</s:String>
+    <s:String x:Key="S.Options.App.General.UpdateOnClose">アプリ終了後、自動的に更新をインストール</s:String>
+    <s:String x:Key="S.Options.App.General.PromptToInstall">インストールを開始する前にプロンプトを表示</s:String>
 
     <!--Options • Recorder-->
     <s:String x:Key="S.Options.Recorder.Interface">インターフェース</s:String>
@@ -241,6 +245,7 @@
     <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(録画時のラグによる変動をせず一定します)</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording">非同期録画</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(録画時のラグ低減に有効)</s:String>
+    <s:String x:Key="S.Options.Recorder.HideTitleBar">タイトルバーを隠す (薄型)</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier">拡大鏡を有効</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier.Info">(録画領域を選択している間は拡大鏡を有効にします)</s:String>
     <s:String x:Key="S.Options.Recorder.CursorFollowing">カーソル追従を有効</s:String>
@@ -248,28 +253,8 @@
     <s:String x:Key="S.Options.Recorder.FollowMargin.Info">(録画エリアが再配置されたところで、ピクセル中に余白をバッファ)</s:String>
     <s:String x:Key="S.Options.Recorder.FollowMarginInvisible.Info">(UIが隠れ始めるところで、ピクセル中に追加の余白をバッファ)</s:String>
 
-    <!--Options • Tasks-->
-    <s:String x:Key="S.Options.Tasks.Title">自動化タスク</s:String>
-    <s:String x:Key="S.Options.Tasks.List">自動化タスクの一覧</s:String>
-    <s:String x:Key="S.Options.Tasks.List.Task">タスク</s:String>
-    <s:String x:Key="S.Options.Tasks.List.Details">詳細</s:String>
-    <s:String x:Key="S.Options.Tasks.SelectType">タスクを選択</s:String>
-    <s:String x:Key="S.Options.Tasks.Info">タスクは一覧の上から下へ順番に実行されます。&#10;エディターでプロジェクトを開いたときにタスクが実行されます。</s:String>
-    
-    <!--Options • Interface-->
-    <s:String x:Key="S.Options.App.Theme">アプリのテーマ</s:String>
-    <s:String x:Key="S.Options.App.Theme.Scheme">配色</s:String>
+    <!--Options • Editor-->
     <s:String x:Key="S.Options.Editor.Previewer">エディター背景</s:String>
-    <s:String x:Key="S.Options.Interface.Recorder">レコーダーテーマ</s:String>
-    <s:String x:Key="S.Options.Interface.Background">背景</s:String>
-    <s:String x:Key="S.Options.Interface.Foreground">前面</s:String>
-    <s:String x:Key="S.Options.Interface.BoardBackground">ボード背景</s:String>
-    <s:String x:Key="S.Options.App.Theme.Scheme.VeryLight">非常に明るい</s:String>
-    <s:String x:Key="S.Options.App.Theme.Scheme.Light">明るい</s:String>
-    <s:String x:Key="S.Options.App.Theme.Scheme.Medium">中間</s:String>
-    <s:String x:Key="S.Options.App.Theme.Scheme.Dark">暗い</s:String>
-    <s:String x:Key="S.Options.App.Theme.Scheme.VeryDark">とても暗い</s:String>
-    <s:String x:Key="S.Options.App.Theme.Scheme.Custom">カスタム</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize">グリッドサイズ</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.VerySmall">非常に小さい</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.Small">小さい</s:String>
@@ -279,17 +264,31 @@
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.ILikeBigSquares">大きい四角が好き</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.ImBlind">目が不自由です。</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.Custom">カスタム</s:String>
-    <s:String x:Key="S.Options.Editor.Previewer.BaseColor">ベースカラー</s:String>
-    <s:String x:Key="S.Options.Editor.Previewer.EvenColor">奇数行の色</s:String>
-    <s:String x:Key="S.Options.Editor.Previewer.OddColor">偶数行の色</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.Height">高さ</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.Width">幅</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.Apply">適用</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.BaseColor">ベースカラー</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.EvenColor">奇数行の色</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.OddColor">偶数行の色</s:String>
     <s:String x:Key="S.Options.Editor.Interface.ExtendChrome">タイトルバー(Chrome)を拡張する</s:String>
-    <s:String x:Key="S.Options.Recorder.HideTitleBar">タイトルバーを隠す (薄型)</s:String>
-    <s:String x:Key="S.Options.Editor.General.TripleClickSelection">テキスト選択をトリプルクリックにする</s:String>
     <s:String x:Key="S.Options.Editor.Interface.AutomaticallySizeOnContent">フレームサイズに応じてウィンドウサイズを自動調整</s:String>
     <s:String x:Key="S.Options.Editor.Interface.AutomaticallyFitImage">ウィンドウサイズに応じてフレームサイズを自動調整</s:String>
+    <s:String x:Key="S.Options.Editor.General.NotifyFrameDeletion">フレームを削除する前に確認</s:String>
+    <s:String x:Key="S.Options.Editor.General.NotifyProjectDiscard">プロジェクトを破棄する前に確認</s:String>
+    <s:String x:Key="S.Options.Editor.General.NotifyWhileClosingEditor">エディターを閉じる前に確認 (プロジェクトが開かれている場合)</s:String>
+    <s:String x:Key="S.Options.Editor.General.TripleClickSelection">テキスト選択をトリプルクリックにする</s:String>
+    <s:String x:Key="S.Options.Editor.General.DrawOutlineOutside">文字の外側にキャプションのアウトラインを描く</s:String>
+    <s:String x:Key="S.Options.Editor.General.LimitHistory">元に戻す/やり直しの履歴を制限する</s:String>
+    <s:String x:Key="S.Options.Editor.General.LimitHistory.Info">(古いアクションは上限に達すると削除されます)</s:String>
+    <s:String x:Key="S.Options.Editor.General.LimitHistory.Maximum">(保持するアクションの最大数)</s:String>
+    
+    <!--Options • Tasks-->
+    <s:String x:Key="S.Options.Tasks.Title">自動化タスク</s:String>
+    <s:String x:Key="S.Options.Tasks.List">自動化タスクの一覧</s:String>
+    <s:String x:Key="S.Options.Tasks.List.Task">タスク</s:String>
+    <s:String x:Key="S.Options.Tasks.List.Details">詳細</s:String>
+    <s:String x:Key="S.Options.Tasks.SelectType">タスクを選択</s:String>
+    <s:String x:Key="S.Options.Tasks.Info">タスクは一覧の上から下へ順番に実行されます。&#10;エディターでプロジェクトを開いたときにタスクが実行されます。</s:String>
   
     <!--Options • Shortcuts-->
     <s:String x:Key="S.Options.Shortcuts.Global">グローバル</s:String>
@@ -335,15 +334,26 @@
     <s:String x:Key="S.Options.Language.AppLanguage.Translate.EmailLink.Tooltip">メーラーを起動</s:String>
     
     <!--Options • Storage-->
-    <s:String x:Key="S.Options.Storage.FilesAndFolders">一時ファイルとフォルダー</s:String>
-    <s:String x:Key="S.Options.Storage.FilesAndFolders.Count">フォルダー数: {0}、ファイル数: {1}</s:String>
-    <s:String x:Key="S.Options.Storage.FilesAndFolders.None">フォルダーもしくはファイルが見つかりません</s:String>
-    <s:String x:Key="S.Options.Storage.OpenFolder">フォルダーを開く</s:String>
-    <s:String x:Key="S.Options.Storage.Clear">一時フォルダークリア</s:String>
-    <s:String x:Key="S.Options.Storage.LogsLocation">(エラー)ログフォルダーの場所</s:String>
-    <s:String x:Key="S.Options.Storage.Paths.Logs.Choose">(エラー)ログフォルダーの場所を選択</s:String>
-    <s:String x:Key="S.Options.Storage.Location">一時ファイルのフォルダー</s:String>
+    <s:String x:Key="S.Options.Storage.Status">状態</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Volume">ボリューム:</s:String>
+    <s:String x:Key="S.Options.Storage.Status.FreeSpace">空き領域 {0}/{1}</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Check">空き領域を再度確認する。</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Clear">キャッシュフォルダをクリアする。&#10;最近のプロジェクトを保存するかどうかを決めることができます。</s:String>
+    <s:String x:Key="S.Options.Storage.Status.LowSpace">ハードドライブのスペースが不足しています。 一時フォルダーをクリアするか場所を変更してください。</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Error">ドライブの詳細を取得できません。</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Files.None">ファイルなし</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Files.Singular">{0:##,##0} ファイル</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Files.Plural">{0:##,##0} ファイル</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Folders.None">フォルダーなし</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Folders.Singular">{0:##,##0} フォルダー</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Folders.Plural">{0:##,##0} フォルダー</s:String>
+    <s:String x:Key="S.Options.Storage.Status.InUse">{0} 使用中</s:String>
+    <s:String x:Key="S.Options.Storage.Paths">パス</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Cache">キャッシュ:</s:String>
     <s:String x:Key="S.Options.Storage.Paths.Cache.Choose">一時ファイルの場所を選択</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Logs">ログ:</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Logs.Choose">(エラー)ログフォルダーの場所を選択</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Browse">選択したフォルダを参照する。</s:String>
     <s:String x:Key="S.Options.Storage.Settings">設定ファイルの場所</s:String>
     <s:String x:Key="S.Options.Storage.AppDataPath">アプリデータ:</s:String>
     <s:String x:Key="S.Options.Storage.LocalPath">ローカル:</s:String>
@@ -352,12 +362,18 @@
     <s:String x:Key="S.Options.Storage.RemoveSettings">設定ファイル削除</s:String>
     <s:String x:Key="S.Options.Storage.OpenSettingsFolder">設定ファイルの保存先フォルダーを開きます。&#10;Ctrlキーを押しながらだと設定ファイルを開きます。(可能であれば)</s:String>
     <s:String x:Key="S.Options.Storage.SettingsInfo">・ 設定ファイル検索順: ローカル ▶ アプリデータ ▶ 標準設定&#10;　・ローカル、アプリデータに設定ファイルがなければ標準設定が使用されます。&#10;　・標準設定が使用された場合、設定ファイルはアプリデータに保存されます。</s:String>
-    <s:String x:Key="S.Options.Storage.KeepRecent">最近のプロジェクトを維持しますか？</s:String>
-    <s:String x:Key="S.Options.Storage.KeepRecent.Info">維持すると、「オプション」 - 「一時ファイル」で設定した日数を経過していない最近のプロジェクトは消去されません。</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemoval">古いプロジェクトを自動削除</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemoval.Info">アプリを起動時に 「オプション」 - 「一時ファイル」で設定した日数を経過したプロジェクトは消去されます。</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemovalDays.Info">(この日数を経過した古いプロジェクトは、アプリ起動時に消去/破棄されます)</s:String>
-    <s:String x:Key="S.Options.Storage.Status.LowSpace">ハードドライブのスペースが不足しています。 一時フォルダーをクリアするか場所を変更してください。</s:String>
+    
+    <!--Options • Storage > Clear cache-->
+    <s:String x:Key="S.Options.Storage.Cache.Title">ScreenToGif - キャッシュのクリア</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.Header">キャッシュフォルダをクリアしますか？</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.Info">録画を作成したり何か開いて編集してたりすると、プロジェクトが作成されキャッシュフォルダ内に保存されます。</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.Question">これらのプロジェクトをキャッシュフォルダから削除しますか？</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.IgnoreRecent">最近のプロジェクトは削除しない。</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.IgnoreRecent.Yes">(現在使用していない{0}日より古いプロジェクトのみ削除されます)</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.IgnoreRecent.No">(現在使用されていないプロジェクトは全て削除されます))</s:String>
     
     <!--Options • Upload-->
     <s:String x:Key="S.Options.Upload.Proxy">プロキシ</s:String>
@@ -523,7 +539,7 @@
     <s:String x:Key="S.ColorSelector.Current">現在の色</s:String>
     <s:String x:Key="S.ColorSelector.Latest">最新の色</s:String>
     <s:String x:Key="S.ColorSelector.Sample">調べたい色へこのマークをドラッグして下さい</s:String>
-    <!--<s:String x:Key="S.ColorSelector.Sample.Info">Click and drag to pick&#x0d;colors from your screen.</s:String>-->
+    <s:String x:Key="S.ColorSelector.Sample.Info">画面の取得したい色のところへクリック・ドラッグして下さい。</s:String>
     
     <!--Exception/Error viewers-->
     <s:String x:Key="S.ExceptionViewer.Title">例外ビューアー</s:String>
@@ -952,8 +968,17 @@
     <s:String x:Key="S.Reduce.Header">フレームレート減少</s:String>
     <s:String x:Key="S.Reduce.Factor">残数:</s:String>
     <s:String x:Key="S.Reduce.Count">削除数:</s:String>
+    <s:String x:Key="S.Reduce.Delay">遅延調整:</s:String>
+    <s:String x:Key="S.Reduce.Delay.NoAdjustment">調整しない</s:String>
+    <s:String x:Key="S.Reduce.Delay.Previous">前のフレームに合算</s:String>
+    <s:String x:Key="S.Reduce.Delay.Evenly">残りフレームに均等に合算</s:String>
+    <s:String x:Key="S.Reduce.ApplyToAll">プロジェクト全体のフレームレートを下げます。</s:String>
+    <s:String x:Key="S.Reduce.ApplyToAll.Info">このオプションをオフにした場合、&#10;残数で指定した値よりも多い連続したフレームを選択する必要があります。</s:String>
     <s:String x:Key="S.Reduce.Info">削除されたフレームを勘定せずに、{1}フレームごとに後の{0}個のフレームを削除します。</s:String>
-
+    <s:String x:Key="S.Reduce.Warning.NoSelection">フレームレート削除を適用するフレームを選択する必要があります（または、プロジェクト全体に適用するオプションにチェックを入れます）。</s:String>
+    <s:String x:Key="S.Reduce.Warning.NonConsecutive">選択されたフレームのリストは連続している必要があります。選択されているフレームの中で、いくつかのフレームを未選択のままにすることはできません。</s:String>
+    <s:String x:Key="S.Reduce.Warning.SmallerThanFactor">フレームの選択は機能がフレームを削除できるようにするために残数よりも大きくなければなりません。</s:String>
+    
     <s:String x:Key="S.RemoveDuplicates.Header">重複削除</s:String>
     <s:String x:Key="S.RemoveDuplicates.Similarity">類似性 (%):</s:String>
     <s:String x:Key="S.RemoveDuplicates.Removal">フレーム除去:</s:String>
