@@ -2634,20 +2634,20 @@
                                                        Visibility="{Binding IsChecked, ElementName=PsdRadioButton, Converter={StaticResource Bool2Visibility}}" TextWrapping="Wrap" TextChanged="FilenameTextBox_TextChanged"/>
 
                                     <ComboBox Grid.Column="1" Name="FileTypeComboBox" Margin="1,3" MinHeight="25" ToolTip="{DynamicResource S.SaveAs.File.Format}"
-                                              SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=LatestExtension, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, TargetNullValue='.gif'}"
+                                              SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=LatestExtension, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                               Visibility="{Binding IsChecked, ElementName=GifRadioButton, Converter={StaticResource Bool2Visibility}}" SelectionChanged="SaveType_Checked">
                                         <s:String>.gif</s:String>
                                     </ComboBox>
 
                                     <ComboBox Grid.Column="1" Name="FileTypeApngComboBox" Margin="1,3" MinHeight="25" ToolTip="{DynamicResource S.SaveAs.File.Format}"
-                                              SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=LatestApngExtension, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, TargetNullValue='.png'}"
+                                              SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=LatestApngExtension, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                               Visibility="{Binding IsChecked, ElementName=ApngRadioButton, Converter={StaticResource Bool2Visibility}}" SelectionChanged="SaveType_Checked">
                                         <s:String>.png</s:String>
                                         <s:String>.apng</s:String>
                                     </ComboBox>
 
                                     <ComboBox Grid.Column="1" Name="FileTypeVideoComboBox" Margin="1,3" MinHeight="25" ToolTip="{DynamicResource S.SaveAs.File.Format}"
-                                              SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=LatestVideoExtension, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, TargetNullValue='.mp4'}"
+                                              SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=LatestVideoExtension, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                               Visibility="{Binding IsChecked, ElementName=VideoRadioButton, Converter={StaticResource Bool2Visibility}}" SelectionChanged="SaveType_Checked">
                                         <s:String>.avi</s:String>
                                         <s:String>.mkv</s:String>
@@ -2657,21 +2657,21 @@
                                     </ComboBox>
 
                                     <ComboBox Grid.Column="1" Name="FileTypeImageComboBox" Margin="1,3" MinHeight="25" ToolTip="{DynamicResource S.SaveAs.File.Format}"
-                                              SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=LatestImageExtension, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, TargetNullValue='.png'}"
+                                              SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=LatestImageExtension, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                               Visibility="{Binding IsChecked, ElementName=ImagesRadioButton, Converter={StaticResource Bool2Visibility}}" SelectionChanged="SaveType_Checked">
                                         <s:String>.zip</s:String>
                                         <s:String>.png</s:String>
                                     </ComboBox>
 
                                     <ComboBox Grid.Column="1" Name="FileTypeProjectComboBox" Margin="1,3" MinHeight="25" ToolTip="{DynamicResource S.SaveAs.File.Format}"
-                                              SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=LatestProjectExtension, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, TargetNullValue='.stg'}"
+                                              SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=LatestProjectExtension, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                               Visibility="{Binding IsChecked, ElementName=ProjectRadioButton, Converter={StaticResource Bool2Visibility}}" SelectionChanged="SaveType_Checked">
                                         <s:String>.stg</s:String>
                                         <s:String>.zip</s:String>
                                     </ComboBox>
 
                                     <ComboBox Grid.Column="1" Name="FileTypePsdComboBox" Margin="1,3" MinHeight="25" ToolTip="{DynamicResource S.SaveAs.File.Format}"
-                                              SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=LatestPhotoshopExtension, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, TargetNullValue='.psd'}"
+                                              SelectedItem="{Binding Source={x:Static u:UserSettings.All}, Path=LatestPhotoshopExtension, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                               Visibility="{Binding IsChecked, ElementName=PsdRadioButton, Converter={StaticResource Bool2Visibility}}" SelectionChanged="SaveType_Checked">
                                         <s:String>.psd</s:String>
                                     </ComboBox>

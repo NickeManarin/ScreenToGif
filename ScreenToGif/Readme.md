@@ -5,14 +5,14 @@ This is the current project of ScreenToGif.
 _VS 2019 and .Net 4.8 or newer required._
 
 
-## What's new? (Version 2.23.1)
+## What's new? (Version 2.23.2)
 
-• Added buttons to navigate to the folder of the extras.  
-• Updated the Chinese (Simplified), Japanese and Dutch translations.  
+• Updated the Japanese and French translations.  
 
 ### Fixed:
 
-♦ The Options > Extras section was not handling well relative paths, cause a false negative detection of the tools.  
+♦ The settings were getting erased because of an empty value.  
+♦ When limiting the Undo stack, the app could crash when trying to undo.  
 
 ### Known Bugs:
 

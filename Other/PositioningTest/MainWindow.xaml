@@ -1,0 +1,27 @@
+﻿<Window x:Class="PositioningTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Positioning Test" Height="450" Width="800"
+        LocationChanged="MainWindow_LocationChanged" SizeChanged="MainWindow_SizeChanged" DpiChanged="MainWindow_DpiChanged">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        
+        <TextBlock Grid.Row="0" Grid.Column="0" x:Name="TopLeftTextBlock" Text="Top/Left"/>
+        <TextBlock Grid.Row="0" Grid.Column="2" x:Name="TopRightTextBlock" Text="Top/Right" HorizontalAlignment="Right"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="1" x:Name="SizeTextBlock" Text="Width/Height" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        
+        <TextBlock Grid.Row="2" Grid.Column="0" x:Name="BottomLeftTextBlock" Text="Bottom/Left"/>
+        <TextBlock Grid.Row="2" Grid.Column="2" x:Name="BottomRightTextBlock" Text="Bottom/Right" HorizontalAlignment="Right"/>
+    </Grid>
+</Window>

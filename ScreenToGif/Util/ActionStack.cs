@@ -976,12 +976,22 @@ namespace ScreenToGif.Util
             if (UndoStack.Count <= UserSettings.All.HistoryLimit)
                 return;
 
-            for (var i = UserSettings.All.HistoryLimit; i < UndoStack.Count; i++)
+            try
             {
-                var last = UndoStack.PopBottom();
+                for (var i = UserSettings.All.HistoryLimit; i < UndoStack.Count; i++)
+                {
+                    var last = UndoStack.PopBottom();
 
-                foreach (var frame in last.Frames.Where(frame => frame.Path != null && File.Exists(frame.Path) && frame.Path.Contains("ActionStack" + Path.DirectorySeparatorChar + "Undo")))
-                    File.Delete(frame.Path);
+                    if (last?.Frames == null)
+                        continue;
+
+                    foreach (var frame in last.Frames.Where(frame => frame.Path != null && File.Exists(frame.Path) && frame.Path.Contains("ActionStack" + Path.DirectorySeparatorChar + "Undo")))
+                        File.Delete(frame.Path);
+                }
+            }
+            catch (Exception e)
+            {
+                LogWriter.Log(e, "Impossible to trim the undo stack.");
             }
         }
 
