@@ -514,6 +514,12 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public bool ForceUpdateAsAdmin
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
         public bool InstallUpdates
         {
             get => (bool)GetValue();
@@ -589,6 +595,14 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        //Workarounds.
+
+        public bool WorkaroundQuota
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
         #endregion
 
         #region Options • Recorder
@@ -606,6 +620,12 @@ namespace ScreenToGif.Util
         }
 
         public bool Magnifier
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool FallThroughOtherScreens
         {
             get => (bool)GetValue();
             set => SetValue(value);

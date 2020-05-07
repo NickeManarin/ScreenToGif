@@ -356,6 +356,11 @@
 
                         <Expander Grid.Row="3" Header="{DynamicResource S.Options.App.General}" IsExpanded="True">
                             <StackPanel>
+                                <WrapPanel Margin="10,0,5,0">
+                                    <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.WorkaroundQuota}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=WorkaroundQuota, Mode=TwoWay}"/>
+                                    <TextBlock Text="{DynamicResource S.Options.App.General.WorkaroundQuota.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                                </WrapPanel>
+                                
                                 <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.NotifyWhileClosingApp}" Margin="15,3,5,3" IsChecked="{Binding Path=NotifyWhileClosingApp, Mode=TwoWay}"/>
 
                                 <WrapPanel Margin="10,0,5,0">
@@ -370,6 +375,7 @@
 
                                 <n:ExtendedCheckBox x:Name="UpdatesCheckBox" Text="{DynamicResource S.Options.App.General.CheckForUpdates}" Margin="15,3,5,3" IsChecked="{Binding Path=CheckForUpdates, Mode=TwoWay}"/>
                                 <StackPanel Visibility="{Binding CheckForUpdates, Converter={StaticResource Bool2Visibility}}">
+                                    <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.ForceUpdateAsAdmin}" Margin="30,3,5,3" IsChecked="{Binding Path=ForceUpdateAsAdmin, Mode=TwoWay}"/>
                                     <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.UpdateOnClose}" Margin="30,3,5,3" IsChecked="{Binding Path=InstallUpdates, Mode=TwoWay}"/>
                                     <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.PromptToInstall}" Margin="45,3,5,3" IsChecked="{Binding Path=PromptToInstall, Mode=TwoWay}"
                                                         Visibility="{Binding InstallUpdates, Converter={StaticResource Bool2Visibility}}"/>

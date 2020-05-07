@@ -46,6 +46,9 @@ namespace ScreenToGif
             //Increases the duration of the tooltip display.
             ToolTipService.ShowDurationProperty.OverrideMetadata(typeof(DependencyObject), new FrameworkPropertyMetadata(int.MaxValue));
 
+            if (UserSettings.All.WorkaroundQuota)
+                BaseCompatibilityPreferences.HandleDispatcherRequestProcessingFailure = BaseCompatibilityPreferences.HandleDispatcherRequestProcessingFailureOptions.Reset;
+
             #region Set network connection properties
 
             try

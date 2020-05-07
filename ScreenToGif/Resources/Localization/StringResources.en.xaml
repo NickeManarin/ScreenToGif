@@ -206,6 +206,8 @@
     <s:String x:Key="S.Options.App.Tray.Interactions.Window">Window:</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Else">Or else, opens:</s:String>
     <s:String x:Key="S.Options.App.General">General</s:String>
+    <s:String x:Key="S.Options.App.General.WorkaroundQuota">Workaround for the 'Not enough quota...' crash.</s:String>
+    <s:String x:Key="S.Options.App.General.WorkaroundQuota.Info">(Experimental)</s:String>
     <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">Ask me before closing the app (via the 'Exit' command).</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">Disable hardware acceleration.</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(The user interface will be rendered via software mode)</s:String>
@@ -213,6 +215,7 @@
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(Updated translations will be downloaded and installed automatically)</s:String>
     <s:String x:Key="S.Options.App.General.CheckForUpdates">Check for updates on startup.</s:String>
     <s:String x:Key="S.Options.App.General.UpdateOnClose">Automatically install updates after closing the app.</s:String>
+    <s:String x:Key="S.Options.App.General.ForceUpdateAsAdmin">Force the update to run with elevated privileges.</s:String>
     <s:String x:Key="S.Options.App.General.PromptToInstall">Prompt me before the installation starts.</s:String>
 
     <!--Options • Recorder-->
@@ -551,6 +554,7 @@
     <s:String x:Key="S.FfmpegPreset.Title">FFmpeg Preset</s:String>
     <s:String x:Key="S.FfmpegPreset.Name">Name</s:String>
     <s:String x:Key="S.FfmpegPreset.Parameters">Parameters</s:String>
+    <s:String x:Key="S.FfmpegPreset.Info.SecondPass">To encode with 2-pass, simply add '-pass 2' to the command.</s:String>
     <s:String x:Key="S.FfmpegPreset.Warning.Name">You must give a name to this preset.</s:String>
     <s:String x:Key="S.FfmpegPreset.Warning.Parameter">You must type some parameters for this preset.</s:String>
     <s:String x:Key="S.FfmpegPreset.Warning.SameName">There's already a preset with the same name.</s:String>
@@ -611,8 +615,10 @@
     <s:String x:Key="Encoder.Uploading">Uploading</s:String>
     <s:String x:Key="Encoder.Executing">Executing commmands</s:String>
     <s:String x:Key="Encoder.Processing">Processing {0}</s:String>
+    <s:String x:Key="S.Encoder.Analyzing.Second">Preparing for second pass</s:String>
+    <s:String x:Key="S.Encoder.Processing.Second">Processing {0} - 2nd pass</s:String>
     <s:String x:Key="Encoder.CreatingFile">Creating file</s:String>
-    <s:String x:Key="Encoder.Analyzing">Analyzing Unchanged Pixels</s:String>
+    <s:String x:Key="Encoder.Analyzing">Analyzing unchanged pixels</s:String>
     <s:String x:Key="Encoder.OpenFile">Open file</s:String>
     <s:String x:Key="Encoder.ExploreFolder">Explore folder</s:String>
     <s:String x:Key="Encoder.Remove">Remove from the list</s:String>
@@ -884,6 +890,7 @@
     <s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg not present. Add it to the Path environment variables or click here to open Options > Extras to set the location.</s:String>
     <s:String x:Key="Editor.Warning.Gifski">Gifski not present. Add it to the Path environment variables or click here to open Options > Extras to set the location.</s:String>
     <s:String x:Key="Editor.Warning.LowSpace">There's not enough space left on the drive where this app stores its cache ({0}% left). Click here to open Options > Temporary Files to free some space.</s:String>
+    <s:String x:Key="S.Editor.Warning.DifferentDpi">You tried to import multiple images with different DPIs, which is not supported. Some of them got imported, the others need to be imported separately.</s:String>
     
     <!--Hints-->
     <s:String x:Key="S.Hint.NewRecording">New recording created</s:String>

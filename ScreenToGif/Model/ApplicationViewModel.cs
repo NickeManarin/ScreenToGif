@@ -1042,6 +1042,9 @@ namespace ScreenToGif.Model
                 var isRelative = !string.IsNullOrWhiteSpace(Global.UpdateAvailable.InstallerPath) && !Path.IsPathRooted(Global.UpdateAvailable.InstallerPath);
                 var nonRoot = isRelative ? Path.GetFullPath(Global.UpdateAvailable.InstallerPath) : Global.UpdateAvailable.InstallerPath;
 
+                //msiexec /i PATH INSTALLDIR="" INSTALLAUTOMATICALLY=yes INSTALLPORTABLE=No ADDLOCAL=Binary
+                //msiexec /a PATH TARGETDIR="" INSTALLAUTOMATICALLY=yes INSTALLPORTABLE=yes ADDLOCAL=Binary
+
                 var startInfo = new ProcessStartInfo
                 {
                     FileName = "msiexec",
@@ -1050,7 +1053,7 @@ namespace ScreenToGif.Model
                                 $" ADDLOCAL=Binary{(isInstaller ? ",Auxiliar" : "")}{(hasSharpDx ? ",SharpDX" : "")}{(hasGifski ? ",Gifski" : "")}" +
                                 $" {(wasPromptedManually ? "RUNAFTER=yes" : "")}" +
                                 (isInstaller ? $" INSTALLDESKTOPSHORTCUT={(hasDesktopShortcut ? "yes" : "no")} INSTALLSHORTCUT={(hasMenuShortcut ? "yes" : "no")}" : ""),
-                    Verb = "runas"
+                    Verb = UserSettings.All.ForceUpdateAsAdmin ? "runas" : ""
                 };
 
                 using (var process = new Process { StartInfo = startInfo })

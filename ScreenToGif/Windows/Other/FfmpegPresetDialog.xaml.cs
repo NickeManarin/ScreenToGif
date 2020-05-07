@@ -56,7 +56,7 @@ namespace ScreenToGif.Windows.Other
             //Get all presets, so we can persist later.
             var list = UserSettings.All.FfmpegPresets.Cast<FfmpegPreset>().ToList();
 
-            if (!IsEditing && list.Any(a => a.ActualName == NameTextBox.Trim()))
+            if (!IsEditing && list.Any(a => a.ActualName == NameTextBox.Trim() && a.Extension == Extension))
             {
                 StatusBand.Warning(LocalizationHelper.Get("S.FfmpegPreset.Warning.SameName"));
                 return;

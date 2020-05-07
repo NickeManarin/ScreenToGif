@@ -206,6 +206,8 @@
     <s:String x:Key="S.Options.App.Tray.Interactions.Window">Janela:</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Else">Senão, abra:</s:String>
     <s:String x:Key="S.Options.App.General">Geral</s:String>
+    <s:String x:Key="S.Options.App.General.WorkaroundQuota">Tentar corrigir o erro de 'Sem quota suficiente...'.</s:String>
+    <s:String x:Key="S.Options.App.General.WorkaroundQuota.Info">(Experimental)</s:String>
     <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">Me pergunte antes de fechar o aplicativo (via o comando 'Sair').</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">Disabilite a aceleração por hardware.</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(A interface será renderizada via software)</s:String>
@@ -213,6 +215,7 @@
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(Traduções atualizadas serão baixadas e instaladas automaticamente)</s:String>
     <s:String x:Key="S.Options.App.General.CheckForUpdates">Buscar atualizações ao iniciar o aplicativo.</s:String>
     <s:String x:Key="S.Options.App.General.UpdateOnClose">Baixar e instalar atualizações automaticamente ao fechar o aplicativo.</s:String>
+    <s:String x:Key="S.Options.App.General.ForceUpdateAsAdmin">Force a atualização para executar com privilégios de adiministrador.</s:String>
     <s:String x:Key="S.Options.App.General.PromptToInstall">Avisar-me antes do início da instalação.</s:String>
     
     <!--Options • Recorder-->
@@ -551,6 +554,7 @@
     <s:String x:Key="S.FfmpegPreset.Title">Perfis do FFmpeg</s:String>
     <s:String x:Key="S.FfmpegPreset.Name">Nome</s:String>
     <s:String x:Key="S.FfmpegPreset.Parameters">Parâmetros</s:String>
+    <s:String x:Key="S.FfmpegPreset.Info.SecondPass">Para codificar com 2 passes, adicione '-pass 2' no comando.</s:String>
     <s:String x:Key="S.FfmpegPreset.Warning.Name">Você deve escrever o nome do perfil.</s:String>
     <s:String x:Key="S.FfmpegPreset.Warning.Parameter">Você deve escrever algum parâmetro para esse perfil.</s:String>
     <s:String x:Key="S.FfmpegPreset.Warning.SameName">Já existe um perfil com o mesmo nome.</s:String>
@@ -611,8 +615,10 @@
     <s:String x:Key="Encoder.Uploading">Enviando</s:String>
     <s:String x:Key="Encoder.Executing">Executando comandos</s:String>
     <s:String x:Key="Encoder.Processing">Processando {0}</s:String>
+    <s:String x:Key="S.Encoder.Analyzing.Second">Preparando para 2º passe</s:String>
+    <s:String x:Key="S.Encoder.Processing.Second">Processando {0} - 2º passe</s:String>
     <s:String x:Key="Encoder.CreatingFile">Criando arquivo</s:String>
-    <s:String x:Key="Encoder.Analyzing">Analisando Pixels Não Modificados</s:String>
+    <s:String x:Key="Encoder.Analyzing">Analisando pixels não modificados</s:String>
     <s:String x:Key="Encoder.OpenFile">Abrir arquivo</s:String>
     <s:String x:Key="Encoder.ExploreFolder">Explorar pasta</s:String>
     <s:String x:Key="Encoder.Remove">Remover da lista</s:String>
@@ -884,6 +890,7 @@
     <s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg não está presente no seu sistema ou não foi encontrado. Adicione-o para as variáveis do sistema (Path) ou clique aqui para abrir Opções > Extras para configurar a localização.</s:String>
     <s:String x:Key="Editor.Warning.Gifski">Gifski não está presente no seu sistema ou não foi encontrado. Adicione-o para as variáveis do sistema (Path) ou clique aqui para abrir Opções > Extras para configurar a localização.</s:String>
     <s:String x:Key="Editor.Warning.LowSpace">Não há espaço suficiente na unidade de armazenamento em que este aplicativo guarda seu cache ({0}% restantes). Clique aqui para abrir Opções > Arquivos Temporarios para liberar algum espaço.</s:String>
+    <s:String x:Key="S.Editor.Warning.DifferentDpi">Você tentou importar múltiplas imagens com DPIs diferentes, o que não é suportado. Algumas delas foram importadas, outras precisam ser importadas separadamente.</s:String>
     
     <!--Hints-->
     <s:String x:Key="S.Hint.NewRecording">Nova gravação criada</s:String>

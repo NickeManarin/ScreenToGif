@@ -119,7 +119,7 @@ namespace ScreenToGif.Windows.Other
 
         private void EncoderItem_CancelClicked(object sender, RoutedEventArgs args)
         {
-            if (!(sender is EncoderListViewItem item)) 
+            if (!(sender is EncoderListViewItem item))
                 return;
 
             if (item.Status != Status.Processing)
@@ -418,7 +418,18 @@ namespace ScreenToGif.Windows.Other
             if (name.Equals("apng"))
                 param.Command = string.Format(param.Command, concatFile, (param.ExtraParameters ?? "").Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString()), param.RepeatCount, param.Filename);
             else
-                param.Command = string.Format(param.Command, concatFile, (param.ExtraParameters ?? "").Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString()), param.Filename);
+            {
+                if ((param.ExtraParameters ?? "").Contains("-pass 2"))
+                {
+                    //-vsync 2 -safe 0 -f concat -i ".\concat.txt" -c:v libvpx-vp9 -b:v 2M -pix_fmt yuv420p -tile-columns 6 -frame-parallel 1 -auto-alt-ref 1 -lag-in-frames 25 -vf "pad=width=1686:height=842:x=0:y=0:color=black" -pass 1 -y ".\Video.webm"
+                    //-vsync 2 -safe 0 -f concat -i ".\concat.txt" -c:v libvpx-vp9 -b:v 2M -pix_fmt yuv420p -tile-columns 6 -frame-parallel 1 -auto-alt-ref 1 -lag-in-frames 25 -vf "pad=width=1686:height=842:x=0:y=0:color=black" -pass 2 -y ".\Video.webm"
+
+                    param.Command = $"-vsync 2 -safe 0 -f concat -i \"{concatFile}\" {(param.ExtraParameters ?? "").Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString()).Replace("-pass 2", "-pass 1")} -passlogfile \"{param.Filename}\" -y \"{param.Filename}\"";
+                    param.SecondPassCommand = $"-hide_banner -vsync 2 -safe 0 -f concat -i \"{concatFile}\" {(param.ExtraParameters ?? "").Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString())} -passlogfile \"{param.Filename}\" -y \"{param.Filename}\"";
+                }
+                else
+                    param.Command = string.Format(param.Command, concatFile, (param.ExtraParameters ?? "").Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString()), param.Filename);
+            }
 
             var process = new ProcessStartInfo(UserSettings.All.FfmpegLocation)
             {
@@ -476,10 +487,93 @@ namespace ScreenToGif.Windows.Other
 
             var fileInfo = new FileInfo(param.Filename);
 
+            if (!string.IsNullOrWhiteSpace(param.SecondPassCommand))
+            {
+                log += Environment.NewLine + SecondPassFfmpeg(param.SecondPassCommand, id, tokenSource, LocalizationHelper.Get("S.Encoder.Processing.Second"));
+
+                EraseSecondPassLogs(param.Filename);
+            }
+
             if (!fileInfo.Exists || fileInfo.Length == 0)
-                throw new Exception($"Error while encoding the {name} with FFmpeg.") { HelpLink = $"Command:\n\r{param.Command}\n\rResult:\n\r{log}" };
+                throw new Exception($"Error while encoding the {name} with FFmpeg.") { HelpLink = $"Command:\n\r{param.Command + Environment.NewLine + param.SecondPassCommand}\n\rResult:\n\r{log}" };
 
             #endregion
+        }
+
+        private string SecondPassFfmpeg(string command, int id, CancellationTokenSource tokenSource, string processing)
+        {
+            var log = "";
+
+            var process = new ProcessStartInfo(UserSettings.All.FfmpegLocation)
+            {
+                Arguments = command,
+                CreateNoWindow = true,
+                ErrorDialog = false,
+                UseShellExecute = false,
+                RedirectStandardError = true
+            };
+
+            using (var pro = Process.Start(process))
+            {
+                var indeterminate = true;
+
+                Update(id, 0, LocalizationHelper.Get("S.Encoder.Analyzing.Second"));
+
+                while (!pro.StandardError.EndOfStream)
+                {
+                    if (tokenSource.IsCancellationRequested)
+                    {
+                        pro.Kill();
+                        return log;
+                    }
+
+                    var line = pro.StandardError.ReadLine() ?? "";
+                    log += Environment.NewLine + line;
+
+                    var split = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+                    for (var block = 0; block < split.Length; block++)
+                    {
+                        //frame=  321 fps=170 q=-0.0 Lsize=      57kB time=00:00:14.85 bitrate=  31.2kbits/s speed=7.87x    
+                        if (!split[block].StartsWith("frame="))
+                            continue;
+
+                        if (int.TryParse(split[block + 1], out var frame))
+                        {
+                            if (frame > 0)
+                            {
+                                if (indeterminate)
+                                {
+                                    SetStatus(Status.Processing, id, null, false);
+                                    indeterminate = false;
+                                }
+
+                                Update(id, frame, string.Format(processing, frame));
+                            }
+                        }
+
+                        break;
+                    }
+                }
+            }
+
+            return log;
+        }
+
+        private void EraseSecondPassLogs(string filename)
+        {
+            try
+            {
+                if (File.Exists(filename + "-0.log.mbtree"))
+                    File.Delete(filename + "-0.log.mbtree");
+
+                if (File.Exists(filename + "-0.log"))
+                    File.Delete(filename + "-0.log");
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Impossible to delete the log files created by the second pass.");
+            }
         }
 
         private async void Encode(List<FrameInfo> frames, int id, Parameters param, CancellationTokenSource tokenSource)

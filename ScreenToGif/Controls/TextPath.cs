@@ -136,8 +136,25 @@ namespace ScreenToGif.Controls
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
-            _textGeometry = new FormattedText(Text ?? "", Thread.CurrentThread.CurrentUICulture, FlowDirection.LeftToRight, 
-                new Typeface(FontFamily, FontStyle, FontWeight, FontStretch), FontSize, Brushes.Black).BuildGeometry(Origin);
+            try
+            {
+                _textGeometry = new FormattedText(Text ?? "", Thread.CurrentThread.CurrentUICulture, FlowDirection.LeftToRight,
+                    new Typeface(FontFamily, FontStyle, FontWeight, FontStretch), FontSize, Brushes.Black, VisualTreeHelper.GetDpi(this).PixelsPerDip).BuildGeometry(Origin);
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Impossible to build text geometry.");
+
+                try
+                {
+                    _textGeometry = new FormattedText(Text ?? "", Thread.CurrentThread.CurrentUICulture, FlowDirection.LeftToRight,
+                        new Typeface(new FontFamily("Arial"), FontStyle, FontWeight, FontStretch), FontSize, Brushes.Black, VisualTreeHelper.GetDpi(this).PixelsPerDip).BuildGeometry(Origin);
+                }
+                catch (Exception ex2)
+                {
+                    LogWriter.Log(ex2, "Impossible to build text geometry with default font.");
+                }
+            }
 
             _pen = new Pen(Stroke, StrokeThickness)
             {

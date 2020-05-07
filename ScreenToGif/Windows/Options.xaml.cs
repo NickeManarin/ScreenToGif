@@ -1692,8 +1692,8 @@ namespace ScreenToGif.Windows
                 var temp = Path.Combine(Path.GetTempPath(), Path.GetTempFileName());
 
                 using (var client = new WebClient { Proxy = WebHelper.GetProxy() })
-                    await client.DownloadFileTaskAsync(new Uri("https://github.com/NickeManarin/ScreenToGif-Website/raw/master/downloads/Gifski.zip", UriKind.Absolute), temp);
-                //await client.DownloadFileTaskAsync(new Uri("http://screentogif.com/downloads/Gifski.zip", UriKind.Absolute), temp);
+                    await client.DownloadFileTaskAsync(new Uri("http://screentogif.com/downloads/Gifski.zip", UriKind.Absolute), temp);
+                //await client.DownloadFileTaskAsync(new Uri("https://github.com/NickeManarin/ScreenToGif-Website/raw/master/downloads/Gifski.zip", UriKind.Absolute), temp);
 
                 using (var zip = ZipFile.Open(temp, ZipArchiveMode.Read))
                 {
@@ -1789,7 +1789,8 @@ namespace ScreenToGif.Windows
                 var temp = Path.Combine(Path.GetTempPath(), Path.GetTempFileName());
 
                 using (var client = new WebClient { Proxy = WebHelper.GetProxy() })
-                    await client.DownloadFileTaskAsync(new Uri("https://github.com/NickeManarin/ScreenToGif-Website/raw/master/downloads/SharpDx.zip", UriKind.Absolute), temp);
+                    await client.DownloadFileTaskAsync(new Uri("http://screentogif.com/downloads/SharpDx.zip", UriKind.Absolute), temp);
+                //await client.DownloadFileTaskAsync(new Uri("https://github.com/NickeManarin/ScreenToGif-Website/raw/master/downloads/SharpDx.zip", UriKind.Absolute), temp);
 
                 using (var zip = ZipFile.Open(temp, ZipArchiveMode.Read))
                 {
@@ -2350,6 +2351,7 @@ namespace ScreenToGif.Windows
 
             Global.IgnoreHotKeys = false;
 
+            BaseCompatibilityPreferences.HandleDispatcherRequestProcessingFailure = UserSettings.All.WorkaroundQuota ? BaseCompatibilityPreferences.HandleDispatcherRequestProcessingFailureOptions.Reset : BaseCompatibilityPreferences.HandleDispatcherRequestProcessingFailureOptions.Continue;
             RenderOptions.ProcessRenderMode = UserSettings.All.DisableHardwareAcceleration ? RenderMode.SoftwareOnly : RenderMode.Default;
 
             UserSettings.All.ProxyPassword = WebHelper.Protect(ProxyPasswordBox.Password);

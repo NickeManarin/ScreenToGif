@@ -66,6 +66,8 @@ namespace ScreenToGif.Util
         public uint VideoQuality { get; set; }
 
         public string Command { get; set; }
+        
+        public string SecondPassCommand { get; set; }
 
         public string ExtraParameters { get; set; }
 

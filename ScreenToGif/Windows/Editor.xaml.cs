@@ -193,6 +193,16 @@ namespace ScreenToGif.Windows
 
         private bool _abortLoading;
 
+        /// <summary>
+        /// True if the window chrome was exended into the application area.
+        /// </summary>
+        private bool _chromeWasExtended = false;
+
+        /// <summary>
+        /// Lock used to prevent firing multiple times (at the same time) both the Activated/Deactivated events.
+        /// </summary>
+        public static readonly object ActivateLock = new object();
+
         #endregion
 
         public Editor()
@@ -318,30 +328,55 @@ namespace ScreenToGif.Windows
 
         private void Window_Activated(object sender, EventArgs e)
         {
-            if (UserSettings.All.EditorExtendChrome)
-                Glass.ExtendGlassFrame(this, new Thickness(0, 126, 0, 0));
-            else
-                Glass.RetractGlassFrame(this);
-
-            RibbonTabControl.UpdateVisual();
-
-            //Returns the preview if was playing before the deactivation of the window.
-            if (WasPreviewing)
+            lock (ActivateLock)
             {
-                WasPreviewing = false;
-                PlayPause();
+                Debug.WriteLine("Activated");
+
+                if (UserSettings.All.EditorExtendChrome && !_chromeWasExtended)
+                {
+                    Glass.ExtendGlassFrame(this, new Thickness(0, 126, 0, 0));
+                    _chromeWasExtended = true;
+                }
+                else
+                {
+                    Glass.RetractGlassFrame(this);
+                    _chromeWasExtended = false;
+                }
+
+                RibbonTabControl.UpdateVisual();
+
+                //Returns the preview if was playing before the deactivation of the window.
+                if (WasPreviewing)
+                {
+                    WasPreviewing = false;
+                    PlayPause();
+                }
             }
         }
 
         private void Window_Deactivated(object sender, EventArgs e)
         {
-            RibbonTabControl.UpdateVisual(false);
+            if (!IsLoaded)
+                return;
 
-            //Pauses the recording preview.
-            if (_timerPreview.Enabled)
+            lock (ActivateLock)
             {
-                WasPreviewing = true;
-                Pause();
+                try
+                {
+                    Debug.WriteLine("Deactivated");
+                    RibbonTabControl.UpdateVisual(false);
+
+                    //Pauses the recording preview.
+                    if (_timerPreview.Enabled)
+                    {
+                        WasPreviewing = true;
+                        Pause();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LogWriter.Log(ex, "Exception when losing focus on window.");
+                }
             }
         }
 
@@ -353,7 +388,7 @@ namespace ScreenToGif.Windows
 
         private void Window_DpiChanged(object sender, DpiChangedEventArgs e)
         {
-            if (e.NewDpi.PixelsPerInchX == e.OldDpi.PixelsPerInchX)
+            if (Math.Abs(e.NewDpi.PixelsPerInchX - e.OldDpi.PixelsPerInchX) < 0.01)
                 return;
 
             ZoomBoxControl.RefreshImage();
@@ -580,7 +615,7 @@ namespace ScreenToGif.Windows
 
                 var currentIndex = FrameListView.Items.IndexOf(current);
 
-                if (currentIndex > -1)
+                if (currentIndex > -1 && Project.Frames.Count > currentIndex)
                 {
                     ZoomBoxControl.ImageSource = Project.Frames[currentIndex].Path;
                     FrameListView.ScrollIntoView(current);
@@ -767,7 +802,7 @@ namespace ScreenToGif.Windows
 
             if (result.HasValue && result.Value)
             {
-                Project.Frames = insert.ActualList;
+                Project.Frames = insert.CurrentList;
                 LoadSelectedStarter(0);
             }
 
@@ -804,7 +839,7 @@ namespace ScreenToGif.Windows
 
             if (result.HasValue && result.Value)
             {
-                Project.Frames = insert.ActualList;
+                Project.Frames = insert.CurrentList;
                 LoadSelectedStarter(0);
             }
 
@@ -838,7 +873,7 @@ namespace ScreenToGif.Windows
 
             if (result.HasValue && result.Value)
             {
-                Project.Frames = insert.ActualList;
+                Project.Frames = insert.CurrentList;
                 LoadSelectedStarter(0);
             }
 
@@ -962,7 +997,7 @@ namespace ScreenToGif.Windows
                 {
                     if (UserSettings.All.LatestProjectExtension != ".stg" && UserSettings.All.LatestProjectExtension != ".zip")
                         UserSettings.All.LatestProjectExtension = ".stg";
-                 
+
                     break;
                 }
                 case Export.Photoshop:
@@ -1045,7 +1080,7 @@ namespace ScreenToGif.Windows
         {
             var tag = (sender as Control)?.Tag as string;
             var preset = (tag == ".gif" ? FfmpegGifPresetsComboBox : tag == ".apng" ? FfmpegApngPresetsComboBox : FfmpegPresetsComboBox).SelectedItem as FfmpegPreset;
-            
+
             if (preset == null)
                 return;
 
@@ -1506,7 +1541,7 @@ namespace ScreenToGif.Windows
 
                                 if (!File.Exists(path))
                                     continue;
-                                
+
                                 FileExistsGrid.Visibility = Visibility.Visible;
                                 StatusList.Warning($"{LocalizationHelper.Get("S.SaveAs.Warning.Overwrite")} - {imageName}");
                                 return;
@@ -4404,7 +4439,7 @@ namespace ScreenToGif.Windows
 
         private ImportFrames _importFramesDel;
 
-        private List<FrameInfo> InsertInternal(string fileName, string pathTemp)
+        private List<FrameInfo> InsertInternal(string fileName, string pathTemp, ref double previousDpi, ref bool warn)
         {
             List<FrameInfo> listFrames;
 
@@ -4438,13 +4473,13 @@ namespace ScreenToGif.Windows
                     case "apng":
                     case "png":
                     {
-                        listFrames = ImportFromPng(fileName, pathTemp);
+                        listFrames = ImportFromPng(fileName, pathTemp, ref previousDpi, ref warn);
                         break;
                     }
 
                     default:
                     {
-                        listFrames = ImportFromImage(fileName, pathTemp);
+                        listFrames = ImportFromImage(fileName, pathTemp, ref previousDpi, ref warn);
                         break;
                     }
                 }
@@ -4474,6 +4509,8 @@ namespace ScreenToGif.Windows
             ShowProgress(DispatcherStringResource("Editor.PreparingImport"), 100);
 
             var project = new ProjectInfo().CreateProjectFolder(ProjectByType.Editor);
+            var currentDpi = 0D;
+            var wasWarned = false;
 
             //Adds each image to a list.
             foreach (var file in fileList)
@@ -4481,7 +4518,18 @@ namespace ScreenToGif.Windows
                 if (Dispatcher.HasShutdownStarted)
                     return false;
 
-                project.Frames.AddRange(InsertInternal(file, project.FullPath) ?? new List<FrameInfo>());
+                var warn = false;
+                var frame = InsertInternal(file, project.FullPath, ref currentDpi, ref warn);
+
+                if (frame != null)
+                    project.Frames.AddRange(frame);
+
+                //Warn that it's not allowed to import images with multiple DPI's at the same time.
+                if (currentDpi > 0 && warn && !wasWarned)
+                {
+                    wasWarned = true;
+                    Dispatcher.Invoke(() => StatusList.Warning(LocalizationHelper.Get("S.Editor.Warning.DifferentDpi")));
+                }
             }
 
             if (project.Frames.Count == 0)
@@ -4540,10 +4588,28 @@ namespace ScreenToGif.Windows
             ShowProgress(DispatcherStringResource("Editor.PreparingImport"), 100);
 
             var project = new ProjectInfo().CreateProjectFolder(ProjectByType.Editor);
+            var currentDpi = 0D;
+            var wasWarned = false;
 
             //Adds each image to a list.
             foreach (var file in fileList)
-                project.Frames.AddRange(InsertInternal(file, project.FullPath) ?? new List<FrameInfo>());
+            {
+                if (Dispatcher.HasShutdownStarted)
+                    return false;
+
+                var warn = false;
+                var frame = InsertInternal(file, project.FullPath, ref currentDpi, ref warn);
+
+                if (frame != null)
+                    project.Frames.AddRange(frame);
+
+                //Warn that it's not allowed to import images with multiple DPI's at the same time.
+                if (currentDpi > 0 && warn && !wasWarned)
+                {
+                    wasWarned = true;
+                    Dispatcher.Invoke(() => StatusList.Warning(LocalizationHelper.Get("S.Editor.Warning.DifferentDpi")));
+                }
+            }
 
             if (!project.Any)
             {
@@ -4562,17 +4628,18 @@ namespace ScreenToGif.Windows
             {
                 #region Insert
 
-                //TODO: Treat multi-sized set of images...
                 var insert = new Insert(Project.Frames, project.Frames, FrameListView.SelectedIndex) { Owner = this };
                 var result = insert.ShowDialog();
 
                 project.ReleaseMutex();
 
+                //Discard(project);
+
                 if (result.HasValue && result.Value)
                 {
                     ActionStack.SaveState(ActionStack.EditAction.Add, FrameListView.SelectedIndex, project.Frames.Count);
 
-                    Project.Frames = insert.ActualList;
+                    Project.Frames = insert.CurrentList;
                     LoadSelectedStarter(FrameListView.SelectedIndex, Project.Frames.Count - 1); //Check
 
                     return true;
@@ -4747,7 +4814,7 @@ namespace ScreenToGif.Windows
             return listFrames;
         }
 
-        private List<FrameInfo> ImportFromPng(string source, string pathTemp)
+        private List<FrameInfo> ImportFromPng(string source, string pathTemp, ref double previousDpi, ref bool warn)
         {
             ShowProgress(DispatcherStringResource("Editor.ImportingFrames"), 50, true);
 
@@ -4757,13 +4824,13 @@ namespace ScreenToGif.Windows
                 var success = apng.ReadFrames();
 
                 if (!success)
-                    return ImportFromImage(source, pathTemp);
+                    return ImportFromImage(source, pathTemp, ref previousDpi, ref warn);
 
                 var fullSize = new System.Drawing.Size((int)apng.Ihdr.Width, (int)apng.Ihdr.Height);
                 var list = new List<FrameInfo>();
 
                 BitmapSource baseFrame = null;
-                for (int index = 0; index < apng.Actl.NumFrames; index++)
+                for (var index = 0; index < apng.Actl.NumFrames; index++)
                 {
                     var metadata = apng.GetFrame(index);
                     var rawFrame = metadata.ImageData.SourceFrom();
@@ -4791,6 +4858,8 @@ namespace ScreenToGif.Windows
 
                     var fileName = Path.Combine(pathTemp, $"{index} {DateTime.Now:hh-mm-ss-ffff}.png");
 
+                    //TODO: Do I need to verify the DPI of the image?
+
                     using (var output = new FileStream(fileName, FileMode.Create))
                     {
                         var encoder = new PngBitmapEncoder();
@@ -4812,13 +4881,23 @@ namespace ScreenToGif.Windows
             }
         }
 
-        private List<FrameInfo> ImportFromImage(string source, string pathTemp)
+        private List<FrameInfo> ImportFromImage(string source, string pathTemp, ref double previousDpi, ref bool warn)
         {
             var fileName = Path.Combine(pathTemp, $"{0} {DateTime.Now:hh-mm-ss-ffff}.png");
 
             #region Save the Image to the Recording Folder
 
             BitmapSource bitmap = new BitmapImage(new Uri(source));
+
+            //Don't let it import multiple images with different DPI's.
+            if (previousDpi > 0 && Math.Abs(previousDpi - bitmap.DpiX) > 0.09)
+            {
+                warn = true;
+                return null;
+            }
+            
+            if (Math.Abs(previousDpi) < 0.01)
+                previousDpi = bitmap.DpiX;
 
             if (bitmap.Format != PixelFormats.Bgra32)
                 bitmap = new FormatConvertedBitmap(bitmap, PixelFormats.Bgra32, null, 0);
@@ -4830,7 +4909,7 @@ namespace ScreenToGif.Windows
                 encoder.Save(stream);
                 stream.Close();
             }
-
+            
             GC.Collect();
 
             #endregion
@@ -5260,7 +5339,7 @@ namespace ScreenToGif.Windows
         private void FocusSaveAsFilenameTextBox()
         {
             //Find the first visible filename text box and select it.
-            var box = new [] { OutputFilenameTextBox, OutputApngFilenameTextBox, OutputVideoFilenameTextBox, OutputImagesFilenameTextBox,
+            var box = new[] { OutputFilenameTextBox, OutputApngFilenameTextBox, OutputVideoFilenameTextBox, OutputImagesFilenameTextBox,
                 OutputProjectFilenameTextBox, OutputPsdFilenameTextBox }.FirstOrDefault(x => x.Visibility == Visibility.Visible);
 
             box?.Focus();
@@ -5536,17 +5615,17 @@ namespace ScreenToGif.Windows
                 case ".apng":
                     return "";
                 case ".avi":
-                    return "-c:v libx264 -pix_fmt yuv420p -vf \"pad=width={W}:height={H}:x=0:y=0:color=black\"";
+                    return "-c:v libx264 -b:v 1M -g 150 -pix_fmt yuv420p -vf \"pad=width={W}:height={H}:x=0:y=0:color=black\"";
                 case ".gif":
                     return "-lavfi palettegen=stats_mode=diff[pal],[0:v][pal]paletteuse=new=1:diff_mode=rectangle";
                 case ".mkv":
-                    return "-f matroska -c:v libx265 -pix_fmt yuv420p -vf \"pad=width={W}:height={H}:x=0:y=0:color=black\"";
+                    return "-f matroska -c:v libx265 -b:v 1M -g 150 -pix_fmt yuv420p -vf \"pad=width={W}:height={H}:x=0:y=0:color=black\"";
                 case ".mp4":
-                    return "-c:v libx264 -pix_fmt yuv420p -vf \"pad=width={W}:height={H}:x=0:y=0:color=black\"";
+                    return "-c:v libx264 -b:v 1M -g 150 -pix_fmt yuv420p -tile-columns 6 -frame-parallel 1 -vf \"pad=width={W}:height={H}:x=0:y=0:color=black\"";
                 case ".webm":
-                    return "-c:v libvpx-vp9 -pix_fmt yuv420p -vf \"pad=width={W}:height={H}:x=0:y=0:color=black\"";
+                    return "-c:v libvpx-vp9 -b:v 1M -g 150 -pix_fmt yuv420p -tile-columns 6 -frame-parallel 1 -auto-alt-ref 1 -lag-in-frames 25 -vf \"pad=width={W}:height={H}:x=0:y=0:color=black\"";
                 case ".wmv":
-                    return "-c:v wmv2 -pix_fmt yuv420p -vf \"pad=width={W}:height={H}:x=0:y=0:color=black\"";
+                    return "-c:v wmv2 -b:v 2M -g 150 -pix_fmt yuv420p -vf \"pad=width={W}:height={H}:x=0:y=0:color=black\"";
                 default:
                     return "";
             }
@@ -5841,7 +5920,7 @@ namespace ScreenToGif.Windows
 
             if (!Regex.IsMatch(name, dateTimeFileNameRegEx, RegexOptions.IgnoreCase))
                 return name;
-            
+
             var match = Regex.Match(name, dateTimeFileNameRegEx, RegexOptions.IgnoreCase);
             var date = DateTime.Now.ToString(Regex.Replace(match.Value, "[?]", ""));
 
@@ -7341,11 +7420,11 @@ namespace ScreenToGif.Windows
             //Gets the list of frames to be removed.
             for (var i = selection.Min() + factor - 1; i < selection.Min() + selection.Count - 1; i += factor + removeCount)
                 removeList.AddRange(Util.Other.ListOfIndexes(i + 1, removeCount));
-            
+
             //Only allow removing frames within the possible range.
             removeList = removeList.Where(x => x < Project.Frames.Count).ToList();
 
-            var alterList = mode == ReduceDelayType.Evenly ? Util.Other.ListOfIndexes(0, Project.Frames.Count).Where(w => !removeList.Contains(w)).ToList() : 
+            var alterList = mode == ReduceDelayType.Evenly ? Util.Other.ListOfIndexes(0, Project.Frames.Count).Where(w => !removeList.Contains(w)).ToList() :
                 mode == ReduceDelayType.Previous ? (from item in removeList where item - 1 >= 0 select item - 1).ToList() : //.Union(removeList)
                 new List<int>(); //No other frame will be altered if the delay is not adjusted.
 
@@ -7386,7 +7465,7 @@ namespace ScreenToGif.Windows
                         //Start again the accumulation for this block of frames being removed.
                         delayRemoved = Project.Frames[removeIndex].Delay;
                     }
-                }                
+                }
 
                 File.Delete(Project.Frames[removeIndex].Path);
                 Project.Frames.RemoveAt(removeIndex);
