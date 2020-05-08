@@ -206,6 +206,8 @@
     <s:String x:Key="S.Options.App.Tray.Interactions.Window">окно:</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Else">иначе:</s:String>
     <s:String x:Key="S.Options.App.General">Общие</s:String>
+    <s:String x:Key="S.Options.App.General.WorkaroundQuota">Обходной путь для ошибки "Недостаточно квоты...".</s:String>
+    <s:String x:Key="S.Options.App.General.WorkaroundQuota.Info">(Эксперимент)</s:String>
     <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">Подтверждать закрытие (по команде 'Выход').</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">Отключить аппаратное ускорение.</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(Интерфейс будет отрисовываться программно)</s:String>
@@ -213,6 +215,7 @@
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(Обновленные переводы будут загружены и установлены автоматически)</s:String>
     <s:String x:Key="S.Options.App.General.CheckForUpdates">Проверять обновления при запуске.</s:String>
     <s:String x:Key="S.Options.App.General.UpdateOnClose">Автоустановка обновления после закрытия приложения.</s:String>
+    <s:String x:Key="S.Options.App.General.ForceUpdateAsAdmin">Принудительно запускать обновление с повышением прав.</s:String>
     <s:String x:Key="S.Options.App.General.PromptToInstall">Запрос установки</s:String>
 
     <!--Options • Recorder-->
@@ -289,7 +292,7 @@
     <s:String x:Key="S.Options.Tasks.List.Details">Подробности</s:String>
     <s:String x:Key="S.Options.Tasks.SelectType">(Выбор задачи)</s:String>
     <s:String x:Key="S.Options.Tasks.Info">Эти задачи выполняются последовательно сверху-вниз списка.&#10;Это происходит, при открытии проекта с помощью редактора.</s:String>
-    
+  
     <!--Options • Shortcuts-->
     <s:String x:Key="S.Options.Shortcuts.Global">Общесистемные</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.ScreenRecorder">Запись с экрана:</s:String>
@@ -551,6 +554,7 @@
     <s:String x:Key="S.FfmpegPreset.Title">Пресет FFmpeg</s:String>
     <s:String x:Key="S.FfmpegPreset.Name">Имя</s:String>
     <s:String x:Key="S.FfmpegPreset.Parameters">Параметры</s:String>
+    <s:String x:Key="S.FfmpegPreset.Info.SecondPass">Чтобы кодировать в 2 прохода, просто добавьте '-pass 2' к команде.</s:String>
     <s:String x:Key="S.FfmpegPreset.Warning.Name">Необходимо дать имя пресету.</s:String>
     <s:String x:Key="S.FfmpegPreset.Warning.Parameter">Необходимо указать параметры пресета.</s:String>
     <s:String x:Key="S.FfmpegPreset.Warning.SameName">Пресет с таким именем уже существует.</s:String>
@@ -611,6 +615,8 @@
     <s:String x:Key="Encoder.Uploading">Загрузка</s:String>
     <s:String x:Key="Encoder.Executing">Выполненные команды</s:String>
     <s:String x:Key="Encoder.Processing">Обработка {0}</s:String>
+    <s:String x:Key="S.Encoder.Analyzing.Second">Подготовка ко второму проходу</s:String>
+    <s:String x:Key="S.Encoder.Processing.Second">Обработка {0} - 2-й проход</s:String>
     <s:String x:Key="Encoder.CreatingFile">Создание файла</s:String>
     <s:String x:Key="Encoder.Analyzing">Анализ неизменных пикселей</s:String>
     <s:String x:Key="Encoder.OpenFile">Открыть файл</s:String>
@@ -884,6 +890,7 @@
     <s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg отсутствует. Добавьте его к переменным средам или установите расположение в настройках.</s:String>
     <s:String x:Key="Editor.Warning.Gifski">Gifski нет. Добавьте его в переменные окружения Path или нажмите здесь, чтобы открыть "Настройки > Дополнительно" и указать путь.</s:String>
     <s:String x:Key="Editor.Warning.LowSpace">На диске недостаточно места для хранения файлов кэша ({0}%). Нажмите здесь, чтобы открыть "Настройки > Файлы и папки" для освобождения места.</s:String>
+    <s:String x:Key="S.Editor.Warning.DifferentDpi">Попытка импорта нескольких изображений с разными DPI. Импорт частичен, импортируйте пропущенные изображения отдельно.</s:String>
     
     <!--Hints-->
     <s:String x:Key="S.Hint.NewRecording">Создана новая запись с экрана</s:String>
