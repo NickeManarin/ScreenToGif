@@ -416,7 +416,7 @@ namespace ScreenToGif.Windows.Other
             #endregion
 
             if (name.Equals("apng"))
-                param.Command = string.Format(param.Command, concatFile, (param.ExtraParameters ?? "").Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString()), param.RepeatCount, param.Filename);
+                param.Command = string.Format(param.Command, "file:" + concatFile, (param.ExtraParameters ?? "").Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString()), param.RepeatCount, param.Filename);
             else
             {
                 if ((param.ExtraParameters ?? "").Contains("-pass 2"))
@@ -424,11 +424,11 @@ namespace ScreenToGif.Windows.Other
                     //-vsync 2 -safe 0 -f concat -i ".\concat.txt" -c:v libvpx-vp9 -b:v 2M -pix_fmt yuv420p -tile-columns 6 -frame-parallel 1 -auto-alt-ref 1 -lag-in-frames 25 -vf "pad=width=1686:height=842:x=0:y=0:color=black" -pass 1 -y ".\Video.webm"
                     //-vsync 2 -safe 0 -f concat -i ".\concat.txt" -c:v libvpx-vp9 -b:v 2M -pix_fmt yuv420p -tile-columns 6 -frame-parallel 1 -auto-alt-ref 1 -lag-in-frames 25 -vf "pad=width=1686:height=842:x=0:y=0:color=black" -pass 2 -y ".\Video.webm"
 
-                    param.Command = $"-vsync 2 -safe 0 -f concat -i \"{concatFile}\" {(param.ExtraParameters ?? "").Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString()).Replace("-pass 2", "-pass 1")} -passlogfile \"{param.Filename}\" -y \"{param.Filename}\"";
-                    param.SecondPassCommand = $"-hide_banner -vsync 2 -safe 0 -f concat -i \"{concatFile}\" {(param.ExtraParameters ?? "").Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString())} -passlogfile \"{param.Filename}\" -y \"{param.Filename}\"";
+                    param.Command = $"-vsync 2 -safe 0 -f concat -i \"{"file:" + concatFile}\" {(param.ExtraParameters ?? "").Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString()).Replace("-pass 2", "-pass 1")} -passlogfile \"{param.Filename}\" -y \"{param.Filename}\"";
+                    param.SecondPassCommand = $"-hide_banner -vsync 2 -safe 0 -f concat -i \"{"file:" + concatFile}\" {(param.ExtraParameters ?? "").Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString())} -passlogfile \"{param.Filename}\" -y \"{param.Filename}\"";
                 }
                 else
-                    param.Command = string.Format(param.Command, concatFile, (param.ExtraParameters ?? "").Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString()), param.Filename);
+                    param.Command = string.Format(param.Command, "file:" + concatFile, (param.ExtraParameters ?? "").Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString()), param.Filename);
             }
 
             var process = new ProcessStartInfo(UserSettings.All.FfmpegLocation)

@@ -5,21 +5,13 @@ This is the current project of ScreenToGif.
 _VS 2019 and .Net 4.8 or newer required._
 
 
-## What's new? (Version 2.24)
+## What's new? (Version 2.24.1)
 
-• [Installer] Added the option to install the shortcut to all users.  
-• [Installer] When installing, the UAC prompt will only appear if necessary (for example, when installing the shortcut to all users).  
-• Added the option to force the update to run with elevated privileges.  
-• Updated the default parameters for exporting with FFmpeg (click on the reset button to load the new ones).  
+• Updated the French and Chinese (Simplified) localizations.  
 
 ### Fixed:
 
-♦ When trying to insert an image with a different DPI than the project, it would import it with the incorrect size.  
-♦ Added a warning when trying to import multiple images with different DPIs.  
-♦ The app could crash when rendering a character which had a broken glyph (while using the caption feature).  
-♦ The app was crashing when applying the 'Reduce Frame Count' while selecting the last frames.  
-♦ It was not allowed to add a preset with a name already in use in a preset from another video type.  
-♦ (Experimental) Added a workaround for the 'Not enough quota...' crash. It can be disabled on Options > Application.  
+♦ Exporting with FFmpeg using newer versions (> 4.2.2) was not working.   
 
 ### Known Bugs:
 

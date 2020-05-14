@@ -206,6 +206,8 @@
     <s:String x:Key="S.Options.App.Tray.Interactions.Window">Fenêtres</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Else">Ou bien, ouvre:</s:String>
     <s:String x:Key="S.Options.App.General">Générale</s:String>
+    <s:String x:Key="S.Options.App.General.WorkaroundQuota">Solution de contournement pour le crash de 'Pas assez de quotas...'.</s:String>
+    <s:String x:Key="S.Options.App.General.WorkaroundQuota.Info">(Expérimental)</s:String>
     <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">Confirmer avant de fermer l'application (via la commande "Quitter")</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">Désactiver l'accélération matérielle</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(L'interface utilisateur sera rendue via le mode logiciel)</s:String>
@@ -213,6 +215,7 @@
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(Les traductions mises à jour seront téléchargées et installées automatiquement)</s:String>
     <s:String x:Key="S.Options.App.General.CheckForUpdates">Vérifier les mises à jour</s:String>
     <s:String x:Key="S.Options.App.General.UpdateOnClose">Installation auto des mises à jour après fermeture de l'application.</s:String>
+    <s:String x:Key="S.Options.App.General.ForceUpdateAsAdmin">Forcer la mise à jour à s'exécuter avec des privilèges élevés.</s:String>
     <s:String x:Key="S.Options.App.General.PromptToInstall">Me demander avant le début de l'installation.</s:String>
 
     <!--Options • Recorder-->
@@ -551,6 +554,7 @@
     <s:String x:Key="S.FfmpegPreset.Title">Présélection FFmpeg</s:String>
     <s:String x:Key="S.FfmpegPreset.Name">Nom</s:String>
     <s:String x:Key="S.FfmpegPreset.Parameters">Paramètres</s:String>
+    <s:String x:Key="S.FfmpegPreset.Info.SecondPass">Pour encoder avec 2 passes, ajoutez simplement '-pass 2' à la commande.</s:String>
     <s:String x:Key="S.FfmpegPreset.Warning.Name">Vous devez donner un nom à ce préréglage.</s:String>
     <s:String x:Key="S.FfmpegPreset.Warning.Parameter">Vous devez saisir certains paramètres pour ce préréglage.</s:String>
     <s:String x:Key="S.FfmpegPreset.Warning.SameName">Il existe déjà un préréglage portant le même nom.</s:String>
@@ -611,6 +615,8 @@
     <s:String x:Key="Encoder.Uploading">Téléchargement</s:String>
     <s:String x:Key="Encoder.Executing">Exécution des commandes</s:String>
     <s:String x:Key="Encoder.Processing">Traitement en cours {0}</s:String>
+    <s:String x:Key="S.Encoder.Analyzing.Second">Préparer la seconde passe</s:String>
+    <s:String x:Key="S.Encoder.Processing.Second">Traitement {0} - 2ème passe</s:String>
     <s:String x:Key="Encoder.CreatingFile">Création d'un fichier</s:String>
     <s:String x:Key="Encoder.Analyzing">Analyse des pixels inchangés</s:String>
     <s:String x:Key="Encoder.OpenFile">Ouvrir le fichier</s:String>
@@ -884,6 +890,7 @@
     <s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg non présent. Ajoutez-le aux variables d'environnement "Path" ou cliquez ici pour ouvrir "Options>Extras" afin de définir son emplacement.</s:String>
     <s:String x:Key="Editor.Warning.Gifski">Gifski non présent. Ajoutez-le aux variables d'environnement "Path" ou cliquez ici pour ouvrir "Options>Extras" afin de définir son emplacement.</s:String>
     <s:String x:Key="Editor.Warning.LowSpace">Il n'y a pas assez d'espace libre sur le lecteur où cette application stocke son cache ({0}% restant). Cliquez ici pour ouvrir "Options>Fichiers temporaires" afin de libérer de l'espace.</s:String>
+    <s:String x:Key="S.Editor.Warning.DifferentDpi">Vous avez essayé d'importer plusieurs images avec différents DPI, ce qui n'est pas pris en charge. Certains d'entre eux ont été importés, les autres doivent être importés séparément.</s:String>
     
     <!--Hints-->
     <s:String x:Key="S.Hint.NewRecording">Nouvel enregistrement d'écran créé</s:String>
