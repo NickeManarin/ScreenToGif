@@ -5,13 +5,14 @@ This is the current project of ScreenToGif.
 _VS 2019 and .Net 4.8 or newer required._
 
 
-## What's new? (Version 2.24.1)
+## What's new? (Version 2.24.2)
 
-• Updated the French and Chinese (Simplified) localizations.  
+• Updated the Spanish localization.  
+• Added the Swahili localization.  
 
 ### Fixed:
 
-♦ Exporting with FFmpeg using newer versions (> 4.2.2) was not working.   
+♦ Replaced the download link of FFmpeg to download v4.2.2. If you are still unable to export using FFmpeg, download it again.     
 
 ### Known Bugs:
 

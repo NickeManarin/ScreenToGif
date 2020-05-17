@@ -1132,48 +1132,56 @@ namespace ScreenToGif.Windows
 
         private bool UpdatePositioning(bool startup = false)
         {
-            var top = UserSettings.All.RecorderTop;
-            var left = UserSettings.All.RecorderLeft;
-
-            //If the position was never set.
-            if (double.IsNaN(top) || double.IsNaN(left))
+            try
             {
-                //Let it center on screen when the window is loading.
-                if (startup)
+                var top = UserSettings.All.RecorderTop;
+                var left = UserSettings.All.RecorderLeft;
+
+                //If the position was never set.
+                if (double.IsNaN(top) || double.IsNaN(left))
+                {
+                    //Let it center on screen when the window is loading.
+                    if (startup)
+                        return false;
+
+                    //Let the code below decide where to position the screen.
+                    top = 0;
+                    left = 0;
+                }
+
+                //The catch here is to get the closest monitor from current Top/Left point. 
+                var monitors = Monitor.AllMonitorsScaled(this.Scale());
+                var closest = monitors.FirstOrDefault(x => x.Bounds.Contains(new System.Windows.Point((int)left, (int)top))) ?? monitors.FirstOrDefault(x => x.IsPrimary) ?? monitors.FirstOrDefault();
+
+                if (closest == null)
                     return false;
 
-                //Let the code below decide where to position the screen.
-                top = 0;
-                left = 0;
+                //To much to the Left.
+                if (closest.WorkingArea.Left > UserSettings.All.RecorderLeft + UserSettings.All.RecorderWidth - 100)
+                    left = closest.WorkingArea.Left;
+
+                //Too much to the top.
+                if (closest.WorkingArea.Top > UserSettings.All.RecorderTop + UserSettings.All.RecorderHeight - 100)
+                    top = closest.WorkingArea.Top;
+
+                //Too much to the right.
+                if (closest.WorkingArea.Right < UserSettings.All.RecorderLeft + 100)
+                    left = closest.WorkingArea.Right - UserSettings.All.RecorderWidth;
+
+                //Too much to the bottom.
+                if (closest.WorkingArea.Bottom < UserSettings.All.RecorderTop + 100)
+                    top = closest.WorkingArea.Bottom - UserSettings.All.RecorderHeight;
+
+                Top = UserSettings.All.RecorderTop = top;
+                Left = UserSettings.All.RecorderLeft = left;
+
+                return true;
             }
-
-            //The catch here is to get the closest monitor from current Top/Left point. 
-            var monitors = Monitor.AllMonitorsScaled(this.Scale());
-            var closest = monitors.FirstOrDefault(x => x.Bounds.Contains(new System.Windows.Point((int)left, (int)top))) ?? monitors.FirstOrDefault(x => x.IsPrimary) ?? monitors.FirstOrDefault();
-
-            if (closest == null)
+            catch (Exception e)
+            {
+                LogWriter.Log(e, "Impossible to position the recorder window.");
                 return false;
-
-            //To much to the Left.
-            if (closest.WorkingArea.Left > UserSettings.All.RecorderLeft + UserSettings.All.RecorderWidth - 100)
-                left = closest.WorkingArea.Left;
-
-            //Too much to the top.
-            if (closest.WorkingArea.Top > UserSettings.All.RecorderTop + UserSettings.All.RecorderHeight - 100)
-                top = closest.WorkingArea.Top;
-
-            //Too much to the right.
-            if (closest.WorkingArea.Right < UserSettings.All.RecorderLeft + 100)
-                left = closest.WorkingArea.Right - UserSettings.All.RecorderWidth;
-
-            //Too much to the bottom.
-            if (closest.WorkingArea.Bottom < UserSettings.All.RecorderTop + 100)
-                top = closest.WorkingArea.Bottom - UserSettings.All.RecorderHeight;
-
-            Top = UserSettings.All.RecorderTop = top;
-            Left = UserSettings.All.RecorderLeft = left;
-
-            return true;
+            }
         }
 
         internal override void OnFollowingChanged()

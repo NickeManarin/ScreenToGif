@@ -349,6 +349,7 @@
     <Compile Include="Util\Capture\RegionSelectHelper.cs" />
     <Compile Include="Util\ComboBoxItemTemplateSelector.cs" />
     <Compile Include="Util\Converters\ContentToVisibility.cs" />
+    <Compile Include="Util\Converters\DoubleToRadius.cs" />
     <Compile Include="Util\Converters\InvertedIntToVisibility.cs" />
     <Compile Include="Util\Converters\PercentageToOpacity.cs" />
     <Compile Include="Util\Converters\BoolAndToVisibility.cs" />
@@ -641,6 +642,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\Localization\StringResources.sv.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Localization\StringResources.sw.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

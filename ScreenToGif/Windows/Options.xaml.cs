@@ -1593,8 +1593,8 @@ namespace ScreenToGif.Windows
                 var temp = Path.Combine(Path.GetTempPath(), Path.GetTempFileName());
 
                 using (var client = new WebClient { Proxy = WebHelper.GetProxy() })
-                    await client.DownloadFileTaskAsync(new Uri(string.Format("https://ffmpeg.zeranoe.com/builds/win{0}/static/ffmpeg-latest-win{0}-static.zip", Environment.Is64BitProcess ? "64" : "32")), temp);
-
+                    await client.DownloadFileTaskAsync(new Uri(string.Format("https://ffmpeg.zeranoe.com/builds/win{0}/static/ffmpeg-4.2.2-win{0}-static.zip", Environment.Is64BitProcess ? "64" : "32")), temp);
+                
                 using (var zip = ZipFile.Open(temp, ZipArchiveMode.Read))
                 {
                     var entry = zip.Entries.FirstOrDefault(x => x.Name.Contains("ffmpeg.exe"));

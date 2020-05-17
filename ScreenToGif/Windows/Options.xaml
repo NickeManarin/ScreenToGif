@@ -1175,9 +1175,12 @@
                             <n:ImageListBoxItem Image="{StaticResource Flag.Argentina}" Tag="es-AR" Content="Spanish (Argentina) / Español (Argentina)" Author="KNTRO (kntro@msn.com)"
                                                 MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=es-AR, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ImageListBoxItem Image="{StaticResource Flag.Spain}" Tag="es" Content="Spanish / Español" Author="Zabb"
+                            <n:ImageListBoxItem Image="{StaticResource Flag.Spain}" Tag="es" Content="Spanish / Español" Author="codedeep, Zabb"
                                                 MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=es, Converter={StaticResource TagToSelection}}"/>
 
+                            <n:ImageListBoxItem Image="{StaticResource Flag.EastAfricanCommunity}" Tag="sw" Content="Swahili / Kiswahili" Author="Mara Gati Lucky"
+                                                MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=sw, Converter={StaticResource TagToSelection}}"/>
+                            
                             <n:ImageListBoxItem Image="{StaticResource Flag.Sweden}" Tag="sv" Content="Swedish / Svenska" Author="Sopor, Andreas Johansson"
                                                 MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=sv, Converter={StaticResource TagToSelection}}"/>
 

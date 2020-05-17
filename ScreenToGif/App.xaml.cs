@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Management;
@@ -30,6 +31,8 @@ namespace ScreenToGif
 
         private Mutex _mutex;
         private bool _accepted;
+        private readonly List<Exception> _exceptionList = new List<Exception>();
+        private readonly object _lock = new object();
 
         #endregion
 
@@ -256,8 +259,10 @@ namespace ScreenToGif
                 LogWriter.Log(ex, "Error while displaying the error.");
                 //Ignored.
             }
-
-            e.Handled = true;
+            finally
+            {
+                e.Handled = true;
+            }
         }
 
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
@@ -388,10 +393,23 @@ namespace ScreenToGif
 
         internal void ShowException(Exception exception)
         {
-            if (Global.IsHotFix4055002Installed && exception is XamlParseException && exception.InnerException is TargetInvocationException)
-                ExceptionDialog.Ok(exception, "ScreenToGif", "Error while rendering visuals", exception.Message);
-            else
-                ExceptionDialog.Ok(exception, "ScreenToGif", "Unhandled exception", exception.Message);
+            lock(_lock)
+            {
+                //Avoid displaying an exception that is already being displayed.
+                if (_exceptionList.Any(a => a.Message == exception.Message))
+                    return;
+
+                //Adding to the list, so a second exception with the same name won't be displayed.
+                _exceptionList.Add(exception);
+
+                if (Global.IsHotFix4055002Installed && exception is XamlParseException && exception.InnerException is TargetInvocationException)
+                    ExceptionDialog.Ok(exception, "ScreenToGif", "Error while rendering visuals", exception.Message);
+                else
+                    ExceptionDialog.Ok(exception, "ScreenToGif", "Unhandled exception", exception.Message);
+
+                //By removing the exception, the same exception can be displayed later.  
+                _exceptionList.Remove(exception);
+            }
         }
 
         #endregion
