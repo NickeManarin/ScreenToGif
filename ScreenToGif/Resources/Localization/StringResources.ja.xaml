@@ -206,6 +206,8 @@
     <s:String x:Key="S.Options.App.Tray.Interactions.Window">ウィンドウ:</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Else">以外の場合、開く:</s:String>
     <s:String x:Key="S.Options.App.General">全般</s:String>
+    <s:String x:Key="S.Options.App.General.WorkaroundQuota">上限容量が十分でないときのクラッシュを回避</s:String>
+    <s:String x:Key="S.Options.App.General.WorkaroundQuota.Info">(実験的な機能)</s:String>
     <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">(Exitコマンドで)アプリ終了する前に確認</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">ハードウェア・アクセラレーションを使用しない</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(ユーザーインターフェースは、ソフトウェアモードでレンダリングされます)</s:String>
@@ -213,6 +215,7 @@
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(翻訳がアップデートされたら自動的にダウンロード、インストールされます)</s:String>
     <s:String x:Key="S.Options.App.General.CheckForUpdates">アップデートを確認</s:String>
     <s:String x:Key="S.Options.App.General.UpdateOnClose">アプリ終了後、自動的に更新をインストール</s:String>
+    <s:String x:Key="S.Options.App.General.ForceUpdateAsAdmin">アップデート実行時、昇格した特権を強制</s:String>
     <s:String x:Key="S.Options.App.General.PromptToInstall">インストールを開始する前にプロンプトを表示</s:String>
 
     <!--Options • Recorder-->
@@ -551,6 +554,7 @@
     <s:String x:Key="S.FfmpegPreset.Title">FFmpegプリセット</s:String>
     <s:String x:Key="S.FfmpegPreset.Name">名称</s:String>
     <s:String x:Key="S.FfmpegPreset.Parameters">パラメータ</s:String>
+    <s:String x:Key="S.FfmpegPreset.Info.SecondPass">2パスでエンコードすると、コマンドのオプションに'-pass 2'が追加されます。</s:String>
     <s:String x:Key="S.FfmpegPreset.Warning.Name">このプリセットの名称は必須入力です。</s:String>
     <s:String x:Key="S.FfmpegPreset.Warning.Parameter">このプリセットは、パラメータの入力が必須です。</s:String>
     <s:String x:Key="S.FfmpegPreset.Warning.SameName">同名のプリセットが既にあります。</s:String>
@@ -611,6 +615,8 @@
     <s:String x:Key="Encoder.Uploading">アップロード中</s:String>
     <s:String x:Key="Encoder.Executing">コマンド実行中</s:String>
     <s:String x:Key="Encoder.Processing">実行中 {0}</s:String>
+    <s:String x:Key="S.Encoder.Analyzing.Second">2パスを準備中</s:String>
+    <s:String x:Key="S.Encoder.Processing.Second">2パスを処理中{0}</s:String>
     <s:String x:Key="Encoder.CreatingFile">ファイルを作成中</s:String>
     <s:String x:Key="Encoder.Analyzing">変更されていないピクセルを検出中</s:String>
     <s:String x:Key="Encoder.OpenFile">ファイルを開く</s:String>
@@ -884,6 +890,7 @@
     <s:String x:Key="Editor.Warning.Ffmpeg">FFmpegが見つかりません。環境変数Pathにパスを追加するか、ここをクリックして「オプション」 - 「外部ツール」を開き、場所を指定してください。</s:String>
     <s:String x:Key="Editor.Warning.Gifski">Gifskiが見つかりません。環境変数Pathにパスを追加するか、ここをクリックして「オプション」 - 「外部ツール」を開き、場所を指定してください。</s:String>
     <s:String x:Key="Editor.Warning.LowSpace">ドライブに十分な空き容量がありません (残り {0}％)。 「オプション」 - 「一時ファイル」でスペースを確保するには、ここをクリックしてください。</s:String>
+    <s:String x:Key="S.Editor.Warning.DifferentDpi">異なるDPIの多重画像のインポートはサポートされていません。一部はインポートされますが、その他は、個別にインポートする必要があります。</s:String>
     
     <!--Hints-->
     <s:String x:Key="S.Hint.NewRecording">新規録画作成完了</s:String>
