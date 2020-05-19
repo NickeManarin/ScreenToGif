@@ -16,7 +16,7 @@
     <s:String x:Key="S.Add">增加</s:String>
     <s:String x:Key="S.Edit">編輯</s:String>
     <s:String x:Key="S.Id">Id</s:String>
-    <s:String x:Key="S.Title">标题</s:String>
+    <s:String x:Key="S.Title">標題</s:String>
     <s:String x:Key="S.Description">描述</s:String>
     <s:String x:Key="S.SelectColor">單擊此處選擇顏色。</s:String>
     <s:String x:Key="Frame">幀</s:String>
@@ -24,14 +24,14 @@
     <s:String x:Key="Preview">預覽</s:String>
     
     <!--Warning messages-->
-    <s:String x:Key="S.Crash">哦，不，程式崩溃了 :(</s:String>
+    <s:String x:Key="S.Crash">哦，不，程式崩潰了 :(</s:String>
     <s:String x:Key="S.Required">必填字段。</s:String>
     <s:String x:Key="S.Warning.Net.Title">缺少依賴項</s:String>
     <s:String x:Key="S.Warning.Net.Header">Net Framework 4.8 不存在</s:String>
     <s:String x:Key="S.Warning.Net.Message">為了正確使用此應用程式，您需要下載正確版本的 .Net Framework。</s:String>
     <s:String x:Key="S.Warning.Single.Title">允許一個實例</s:String>
     <s:String x:Key="S.Warning.Single.Header">該應用程式已在運行</s:String>
-    <s:String x:Key="S.Warning.Single.Message">ScreenToGif 已经在运行，但是显然没有打开任何窗口。 检查系統通知欄，其中必须有一个 ScreenToGif 图标。</s:String>
+    <s:String x:Key="S.Warning.Single.Message">ScreenToGif 已經在運行，但是顯然沒有打開任何視窗。 检查系統通知欄，其中必须有一个 ScreenToGif 图标。</s:String>
     <s:String x:Key="S.Exiting.Title">正在退出 ScreenToGif</s:String>
     <s:String x:Key="S.Exiting.Instruction">你確定要退出嗎?</s:String>
     <s:String x:Key="S.Exiting.Message">所有視窗将被關閉，任務欄圖標将被移除。</s:String>
@@ -135,7 +135,7 @@
     <s:String x:Key="S.Updater.Portable">便攜版</s:String>
     <s:String x:Key="S.Updater.Installer">安裝程式</s:String>
     <s:String x:Key="S.Updater.Info.WhatsNew">新功能?</s:String>
-    <s:String x:Key="S.Updater.Info.BugFixes">错误修复：</s:String>
+    <s:String x:Key="S.Updater.Info.BugFixes">錯誤修復：</s:String>
     <s:String x:Key="S.Updater.Info.NewVersionAvailable">您可以下載新版本。 &#10;您要打開瀏覽器進行下載嗎?</s:String>
     <s:String x:Key="S.Updater.RunAfter">更新後執行該應用程式。</s:String>
     <s:String x:Key="S.Updater.Download">下載</s:String>
@@ -171,7 +171,7 @@
     <s:String x:Key="S.Options.App.Startup.Mode.Automatic.Info">Windows 啟動後將執行該應用程式。</s:String>
     <s:String x:Key="S.Options.App.Startup.Mode.Warning">无法切換启动模式</s:String>
     <s:String x:Key="S.Options.App.Startup.Instance.Single">僅允許一個實例</s:String>
-    <s:String x:Key="S.Options.App.Startup.Instance.Single.Info">您將可以為每個用戶和可執行文件運行一次該應用程序，&#10;意味著不同的用戶或可執行實例可以共存。 &#10;當再次嘗試執行該應用程式時，第二個實例將嘗試將焦點放在第一個實例上並自行結束。</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Single.Info">您將可以為每個用戶和可執行檔案運行一次該應用程式，&#10;意味著不同的用戶或可執行實例可以共存。 &#10;當再次嘗試執行該應用程式時，第二個實例將嘗試將焦點放在第一個實例上並自行結束。</s:String>
     <s:String x:Key="S.Options.App.Startup.Instance.Multiple">允許多個實例</s:String>
     <s:String x:Key="S.Options.App.Startup.Instance.Multiple.Info">您可以無限制地同時運行該應用程式多次。</s:String>
     <s:String x:Key="S.Options.App.Startup.Tray">啟動最小化到任務欄圖標</s:String>
@@ -208,7 +208,7 @@
     <s:String x:Key="S.Options.App.General">常規</s:String>
     <s:String x:Key="S.Options.App.General.WorkaroundQuota">解決“配額不足...”崩潰的方法</s:String>
     <s:String x:Key="S.Options.App.General.WorkaroundQuota.Info">（實驗性）</s:String>
-    <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">關閉應用程式之前詢問我（通過'退出'命令）</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">關閉應用程式之前詢問我（通過'退出'指令）</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">禁用硬件加速</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">（用戶界面將通過軟件模式呈現）</s:String>
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">檢查翻譯更新</s:String>
@@ -306,7 +306,7 @@
     <s:String x:Key="S.Options.Shortcuts.Global.OpenOptions">選項：</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.OpenOptions.Info">（打開選項視窗，一次只能打開一個視窗）</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.Exit">退出：</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Global.Exit.Info">（關閉所有視窗並從系統托盤中刪除應用程序）</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.Exit.Info">（關閉所有視窗並從系統托盤中刪除應用程式）</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders">錄影機</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause">開始/暫停:</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause.Info">（它啟動或暫停錄製，如果快照模式已激活，則用於拍攝快照）</s:String>
@@ -342,7 +342,7 @@
     <s:String x:Key="S.Options.Storage.Status.FreeSpace">{1} 可用  {0}</s:String>
     <s:String x:Key="S.Options.Storage.Status.Check">再次檢查剩餘的空間。</s:String>
     <s:String x:Key="S.Options.Storage.Status.Clear">清除緩存資料夾。 &#10;您將可以決定是否要保留最近的專案。</s:String>
-    <s:String x:Key="S.Options.Storage.Status.LowSpace">當前配置的硬盤驅動器上空間不足。請清理臨時緩存文件夾或更改位置。</s:String>
+    <s:String x:Key="S.Options.Storage.Status.LowSpace">當前配置的硬盤驅動器上空間不足。請清理臨時緩存資料夾或更改位置。</s:String>
     <s:String x:Key="S.Options.Storage.Status.Error">無法檢索驅動器詳細信息。</s:String>
     <s:String x:Key="S.Options.Storage.Status.Files.None">沒有檔案</s:String>
     <s:String x:Key="S.Options.Storage.Status.Files.Singular">{0:##,##0} 個檔案</s:String>
@@ -371,9 +371,9 @@
     
     <!--Options • Storage > Clear cache-->
     <s:String x:Key="S.Options.Storage.Cache.Title">ScreenToGif - 清除緩存</s:String>
-    <s:String x:Key="S.Options.Storage.Cache.Header">您要清除緩存文件夾嗎?</s:String>
-    <s:String x:Key="S.Options.Storage.Cache.Info">创建录制或打开要编辑的内容时，将创建一个專案并将其存储在缓存文件夹中。</s:String>
-    <s:String x:Key="S.Options.Storage.Cache.Question">您要從緩存文件夾中刪除這些專案嗎?</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.Header">您要清除緩存資料夾嗎?</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.Info">創建錄製或打開要編輯的內容時，將創建一個專案並將其存儲在緩存資料夾中。</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.Question">您要從緩存資料夾中刪除這些專案嗎?</s:String>
     <s:String x:Key="S.Options.Storage.Cache.IgnoreRecent">不要刪除最近的專案。</s:String>
     <s:String x:Key="S.Options.Storage.Cache.IgnoreRecent.Yes">（僅會刪除 {0} 天之前尚未使用的專案）</s:String>
     <s:String x:Key="S.Options.Storage.Cache.IgnoreRecent.No">（所有當前未使用的專案將被刪除）</s:String>
@@ -394,14 +394,14 @@
     <s:String x:Key="S.Options.Upload.Authorize">授權</s:String>
     <s:String x:Key="S.Options.Upload.Refresh">刷新</s:String>
     <s:String x:Key="S.Options.Upload.Clear">清除</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Anonymous">伊姆古爾</s:String>
+    <s:String x:Key="S.Options.Upload.Imgur.Anonymous">Imgur（匿名）</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Direct">使用直接鏈接</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Gifv">使用Gifv擴展名而不是Gif獲取鏈接</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.ToAlbum">將Gif上傳到指定的相冊</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Album">相冊：</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.AskMe">發布前詢問我</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Auth.NotPossible">無法打開頁面以獲取Imgur授權憑證。</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Missing">為了授權此應用程序，您需要提供授權令牌憑證。</s:String>
+    <s:String x:Key="S.Options.Upload.Imgur.Auth.Missing">為了授權此應用程式，您需要提供授權令牌憑證。</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Auth.Completed">Imgur授權完成。</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Auth.Error">Imgur授權失敗。幾秒鐘後重試或獲取新的憑證。</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Refresh.None">为了刷新此应用程式的授权，您需要先完成授权过程。</s:String>
@@ -412,7 +412,7 @@
     <s:String x:Key="S.Options.Upload.Imgur.Error.AlbumLoad">使用直接鏈接無法加載相冊列表。</s:String>
     <s:String x:Key="S.Options.Upload.Gfycat.Anonymous">Gfycat（匿名）</s:String>
     <s:String x:Key="S.Options.Upload.Yandex.Token">OAuth 憑證：</s:String>
-    <s:String x:Key="S.Options.Upload.Pick.Destination">选择一个目标</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Destination">選擇一个目标</s:String>
     <s:String x:Key="S.Options.Upload.Pick.Album">選擇一個相冊（可選）</s:String>
     <s:String x:Key="S.Options.Upload.Pick.Album.Info">如果您願意，可以選擇目標相冊：</s:String>
     
@@ -425,13 +425,13 @@
     <s:String x:Key="S.Options.Extras.DownloadRestriction">Microsoft Store 分發的應用程式無法下載其他應用程式。您必須手動下載它。</s:String>
     <s:String x:Key="S.Options.Extras.FfmpegLocation">FFmpeg位置</s:String>
     <s:String x:Key="S.Options.Extras.FfmpegLocation.Select">選擇FFmpeg可執行檔的位置</s:String>
-    <s:String x:Key="S.Options.Extras.FfmpegLocation.Invalid">FFMpeg 可執行文件的路徑中包含一個或多個無效字符。請為該可執行文件選擇一個有效位置。</s:String>
+    <s:String x:Key="S.Options.Extras.FfmpegLocation.Invalid">FFMpeg 可執行檔案的路徑中包含一個或多個無效字符。請為該可執行檔案選擇一個有效位置。</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation">Gifski 位置</s:String>
-    <s:String x:Key="S.Options.Extras.GifskiLocation.Select">選擇 Gifski 可執行文件的位置</s:String>
-    <s:String x:Key="S.Options.Extras.GifskiLocation.Invalid">Gifski 可執行文件的路徑包含一個或多個無效字符。請為該可執行文件選擇一個有效的位置。</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation">SharpDx 文件夾（SharpDX.dll，SharpDX.Direct3D11.dll和SharpDX.DXGI.dll）</s:String>
+    <s:String x:Key="S.Options.Extras.GifskiLocation.Select">選擇 Gifski 可執行檔案的位置</s:String>
+    <s:String x:Key="S.Options.Extras.GifskiLocation.Invalid">Gifski 可執行檔案的路徑包含一個或多個無效字符。請為該可執行檔案選擇一個有效的位置。</s:String>
+    <s:String x:Key="S.Options.Extras.SharpDxLocation">SharpDx 資料夾（SharpDX.dll，SharpDX.Direct3D11.dll和SharpDX.DXGI.dll）</s:String>
     <s:String x:Key="S.Options.Extras.SharpDxLocation.Select">選擇 SharpDx 庫的位置</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation.Invalid">SharpDx 庫的路徑包含一個或多個無效字符。請為這些庫選擇一個有效的文件夾。</s:String>
+    <s:String x:Key="S.Options.Extras.SharpDxLocation.Invalid">SharpDx 庫的路徑包含一個或多個無效字符。請為這些庫選擇一個有效的資料夾。</s:String>
     <s:String x:Key="S.Options.Extras.License.Ffmpeg">FFmpeg 許可證</s:String>
     <s:String x:Key="S.Options.Extras.License.Gifski">Gifski 許可證</s:String>
     <s:String x:Key="S.Options.Extras.License.SharpDx">SharpDx 許可證</s:String>
@@ -513,7 +513,7 @@
     <s:String x:Key="S.Recorder.CancelSelection">取消選擇 (Esc)</s:String>
     <s:String x:Key="S.Recorder.SelectArea">單擊並拖動選擇屏幕區域</s:String>
     <s:String x:Key="S.Recorder.SelectArea.Embedded">單擊並拖動以選擇一個區域</s:String>
-    <s:String x:Key="S.Recorder.SelectWindow">單擊此處選擇此窗口</s:String>
+    <s:String x:Key="S.Recorder.SelectWindow">單擊此處選擇此視窗</s:String>
     <s:String x:Key="S.Recorder.SelectScreen">單擊此處選擇此屏幕</s:String>
     <s:String x:Key="S.Recorder.EscToCancel">按 Esc 鍵取消</s:String>
     
@@ -554,7 +554,7 @@
     <s:String x:Key="S.FfmpegPreset.Title">FFmpeg 預設</s:String>
     <s:String x:Key="S.FfmpegPreset.Name">名稱</s:String>
     <s:String x:Key="S.FfmpegPreset.Parameters">參數</s:String>
-    <s:String x:Key="S.FfmpegPreset.Info.SecondPass">要使用 2 次編碼，只需在命令中添加 '-pass 2' 即可。</s:String>
+    <s:String x:Key="S.FfmpegPreset.Info.SecondPass">要使用 2 次編碼，只需在指令中添加 '-pass 2' 即可。</s:String>
     <s:String x:Key="S.FfmpegPreset.Warning.Name">您必須為此預設命名。</s:String>
     <s:String x:Key="S.FfmpegPreset.Warning.Parameter">你必須為這個設置輸入一些參數。</s:String>
     <s:String x:Key="S.FfmpegPreset.Warning.SameName">已經存在一個具有相同名稱的預設。</s:String>
@@ -603,9 +603,9 @@
     <s:String x:Key="Encoder.Completed">已完成</s:String>
     <s:String x:Key="Encoder.Completed.Clipboard">已複製到剪貼簿</s:String>
     <s:String x:Key="Encoder.Completed.Clipboard.Fail">複製失敗</s:String>
-    <s:String x:Key="Encoder.Completed.Command">已執行命令</s:String>
-    <s:String x:Key="Encoder.Completed.Command.Output">顯示命令的輸出</s:String>
-    <s:String x:Key="Encoder.Completed.Command.Fail">命令執行失敗</s:String>
+    <s:String x:Key="Encoder.Completed.Command">已執行指令</s:String>
+    <s:String x:Key="Encoder.Completed.Command.Output">顯示指令的輸出</s:String>
+    <s:String x:Key="Encoder.Completed.Command.Fail">指令執行失敗</s:String>
     <s:String x:Key="Encoder.Completed.Upload.Fail">上傳失敗</s:String>
     <s:String x:Key="Encoder.Completed.Upload.Delete">Ctrl + 單擊以打開頁面以刪除圖像（如適用）。</s:String>
     <s:String x:Key="Encoder.FileDeletedMoved">檔案已刪除或已移動</s:String>
@@ -613,7 +613,7 @@
     <s:String x:Key="Encoder.Error">錯誤</s:String>
     <s:String x:Key="Encoder.Error.Info">點擊此處顯示此錯誤的詳細信息。</s:String>
     <s:String x:Key="Encoder.Uploading">上傳中</s:String>
-    <s:String x:Key="Encoder.Executing">執行命令</s:String>
+    <s:String x:Key="Encoder.Executing">執行指令</s:String>
     <s:String x:Key="Encoder.Processing">正在處理 {0}</s:String>
     <s:String x:Key="S.Encoder.Analyzing.Second">準備第二次</s:String>
     <s:String x:Key="S.Encoder.Processing.Second">正在處理 {0} - 第二次</s:String>
@@ -629,8 +629,8 @@
     <s:String x:Key="Encoder.Copy.Link">複製鏈接</s:String>
 
     <!--Command output-->
-    <s:String x:Key="Command.Title">ScreenToGId - 命令輸出</s:String>
-    <s:String x:Key="Command.Header">命令輸出</s:String>
+    <s:String x:Key="Command.Title">ScreenToGId - 指令輸出</s:String>
+    <s:String x:Key="Command.Header">指令輸出</s:String>
     
     <!--Notifications-->
     <s:String x:Key="S.Notifications">通知</s:String>
@@ -889,7 +889,7 @@
     <s:String x:Key="Editor.Warning.Selection">你必須選擇至少一個幀來覆蓋。</s:String>
     <s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg不存在。加入它到Path環境變數或在選項中設置的路徑位置。</s:String>
     <s:String x:Key="Editor.Warning.Gifski">Gifski 不存在。將其添加到 Path 環境變量或在設置上設置位置。</s:String>
-    <s:String x:Key="Editor.Warning.LowSpace">驅動器上沒有足夠的空間供應用程序存儲緩存（{0}% 左右）。單擊此處打開“選項” > “臨時文件”，以釋放一些空間。</s:String>
+    <s:String x:Key="Editor.Warning.LowSpace">驅動器上沒有足夠的空間供應用程式存儲緩存（{0}% 左右）。單擊此處打開“選項” > “臨時檔案”，以釋放一些空間。</s:String>
     <s:String x:Key="S.Editor.Warning.DifferentDpi">您嘗試使用不支持的 DPI 導入多個圖像。其中一些是導入的，其他一些則需要單獨導入。</s:String>
     
     <!--Hints-->
@@ -982,7 +982,7 @@
     <s:String x:Key="S.Reduce.ApplyToAll">降低整个專案的帧率。</s:String>
     <s:String x:Key="S.Reduce.ApplyToAll.Info">如果未選中該選項，則必須選擇多個連續幀，且大於去除因子。</s:String>
     <s:String x:Key="S.Reduce.Info">它將在每隔 {1} 幀之後刪除 {0} 幀，而不計算刪除的幀。</s:String>
-    <s:String x:Key="S.Reduce.Warning.NoSelection">您必须选择要应用帧率降低的帧（或选中要应用于整个專案的选项）。</s:String>
+    <s:String x:Key="S.Reduce.Warning.NoSelection">您必须選擇要应用帧率降低的帧（或选中要应用于整个專案的选项）。</s:String>
     <s:String x:Key="S.Reduce.Warning.NonConsecutive">選擇的幀列表必須是連續的。您不能在選定的幀中保留一些未選擇的幀。</s:String>
     <s:String x:Key="S.Reduce.Warning.SmallerThanFactor">為了使功能可以刪除任何東西，幀的選擇必須比除去因子越大。</s:String>
     
@@ -1185,7 +1185,7 @@
     
     <!--Save As • Save options-->
     <s:String x:Key="S.SaveAs.SaveOptions">保存選項</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">将檔案保存到你选择的資料夾</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">将檔案保存到你選擇的資料夾</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">覆寫 (如果已存在)。</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">同時另存為專案（相同資料夾與檔案名）</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">上傳檔案</s:String>
@@ -1197,10 +1197,10 @@
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FolderPath.Info">將輸出檔案的資料夾路徑複製到剪貼板</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath">檔案路徑</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath.Info">將輸出檔案路徑複製到剪貼板</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">連結</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">鏈接</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">將上傳服務生成的鏈接複製到剪貼板</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">執行編碼後置命令</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">輸入在編碼後執行的命令。 &#10;若要執行多條命令，請在不同行內輸入不同命令，一行輸入一條。 &#10;宏:&#10;{p} = 輸出檔案路徑。 &#10;{f} = 輸出資料夾路徑。</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">執行編碼後置指令</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">輸入在編碼後執行的指令。 &#10;若要執行多條指令，請在不同行內輸入不同指令，一行輸入一條。 &#10;宏:&#10;{p} = 輸出檔案路徑。 &#10;{f} = 輸出資料夾路徑。</s:String>
     
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">檔案</s:String>
@@ -1213,8 +1213,8 @@
     <s:String x:Key="S.SaveAs.File.Decrease">減少檔案數量</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">同名檔案已經存在。</s:String>
     <s:String x:Key="S.SaveAs.File.Clipboard">儲存到剪貼簿。</s:String>
-    <s:String x:Key="S.SaveAs.Warning.Type">您需要选择保存檔案的位置（資料夾、剪贴板或上传到某处）</s:String>
-    <s:String x:Key="S.SaveAs.Warning.Commands.Empty">您需要在命令文本框中輸入編碼後置命令才能執行他們。</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Type">您需要選擇保存檔案的位置（資料夾、剪贴板或上傳到某處）</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Commands.Empty">您需要在指令文本框中輸入編碼後置指令才能執行他們。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Upload.None">沒有選擇上傳服務。你需要選擇一個目的地。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Upload.NotAuthorized">您無法上傳到選定的服務，因為它沒有被授權。轉到選項>雲端服務授權此應用程式。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Copy.Link">您不能選擇複製鏈接的選項，因為您沒有設置上傳檔案。</s:String>
@@ -1229,7 +1229,7 @@
     <!--SaveAs • Export-->
     <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">導出幀</s:String>
     <s:String x:Key="S.SaveAs.Frames.Confirmation.Instruction">您確定要導出這些幀嗎？</s:String>
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Message">此操作將直接導出 {0} 幀到所選文件夾中。</s:String>
+    <s:String x:Key="S.SaveAs.Frames.Confirmation.Message">此操作將直接導出 {0} 幀到所選資料夾中。</s:String>
     
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">意見反應</s:String>
