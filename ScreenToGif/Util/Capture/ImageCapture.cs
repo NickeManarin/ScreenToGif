@@ -15,7 +15,7 @@ namespace ScreenToGif.Util.Capture
         protected internal IntPtr CompatibleDeviceContext;
         protected internal IntPtr CompatibleBitmap;
         protected internal IntPtr OldBitmap;
-        
+
         protected internal int CursorStep { get; set; }
 
         #endregion
@@ -43,8 +43,15 @@ namespace ScreenToGif.Util.Capture
             {
                 new System.Security.Permissions.UIPermission(System.Security.Permissions.UIPermissionWindow.AllWindows).Demand();
 
+                var pixelOp = Native.CopyPixelOperation.SourceCopy;
+
+                if (!System.Windows.Forms.SystemInformation.TerminalServerSession)
+                {
+                    pixelOp |= Native.CopyPixelOperation.CaptureBlt;
+                }
+
                 //var success = Native.BitBlt(CompatibleDeviceContext, 0, 0, Width, Height, WindowDeviceContext, Left, Top, Native.CopyPixelOperation.SourceCopy | Native.CopyPixelOperation.CaptureBlt);
-                var success = Native.StretchBlt(CompatibleDeviceContext, 0, 0, StartWidth, StartHeight, WindowDeviceContext, Left, Top, Width, Height, Native.CopyPixelOperation.SourceCopy | Native.CopyPixelOperation.CaptureBlt);
+                var success = Native.StretchBlt(CompatibleDeviceContext, 0, 0, StartWidth, StartHeight, WindowDeviceContext, Left, Top, Width, Height, pixelOp);
 
                 if (!success)
                     return FrameCount;
@@ -71,8 +78,15 @@ namespace ScreenToGif.Util.Capture
             {
                 new System.Security.Permissions.UIPermission(System.Security.Permissions.UIPermissionWindow.AllWindows).Demand();
 
+                var pixelOp = Native.CopyPixelOperation.SourceCopy;
+
+                if (!System.Windows.Forms.SystemInformation.TerminalServerSession)
+                {
+                    pixelOp |= Native.CopyPixelOperation.CaptureBlt;
+                }
+
                 //var success = Native.BitBlt(CompatibleDeviceContext, 0, 0, Width, Height, WindowDeviceContext, Left, Top, Native.CopyPixelOperation.SourceCopy | Native.CopyPixelOperation.CaptureBlt);
-                var success = Native.StretchBlt(CompatibleDeviceContext, 0, 0, StartWidth, StartHeight, WindowDeviceContext, Left, Top, Width, Height, Native.CopyPixelOperation.SourceCopy | Native.CopyPixelOperation.CaptureBlt);
+                var success = Native.StretchBlt(CompatibleDeviceContext, 0, 0, StartWidth, StartHeight, WindowDeviceContext, Left, Top, Width, Height, pixelOp);
 
                 if (!success)
                     return FrameCount;
