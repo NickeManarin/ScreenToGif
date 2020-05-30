@@ -330,12 +330,16 @@ namespace ScreenToGif.Windows
         {
             lock (ActivateLock)
             {
-                Debug.WriteLine("Activated");
+                //Debug.WriteLine("Activated");
 
-                if (UserSettings.All.EditorExtendChrome && !_chromeWasExtended)
+                if (UserSettings.All.EditorExtendChrome)
                 {
-                    Glass.ExtendGlassFrame(this, new Thickness(0, 126, 0, 0));
-                    _chromeWasExtended = true;
+                    //Only extends the title bar again when needed.
+                    if (!_chromeWasExtended)
+                    {
+                        Glass.ExtendGlassFrame(this, new Thickness(0, 126, 0, 0));
+                        _chromeWasExtended = true;
+                    }
                 }
                 else
                 {
@@ -363,7 +367,7 @@ namespace ScreenToGif.Windows
             {
                 try
                 {
-                    Debug.WriteLine("Deactivated");
+                    //Debug.WriteLine("Deactivated");
                     RibbonTabControl.UpdateVisual(false);
 
                     //Pauses the recording preview.

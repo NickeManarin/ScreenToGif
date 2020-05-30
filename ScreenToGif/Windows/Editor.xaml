@@ -1522,7 +1522,7 @@
                             Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
                             Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}"
                             BorderBrush="{Binding ElementName=BorderColorBox, Path=SelectedBrush}"
-                            Visibility="{Binding ElementName=BorderGrid, Path=Visibility}" >
+                            Visibility="{Binding ElementName=BorderGrid, Path=Visibility}">
                         <Border.BorderThickness>
                             <MultiBinding Converter="{StaticResource DoubleToThicknessConverter}" ConverterParameter="+">
                                 <Binding ElementName="BorderLeftThicknessNumericUpDown" Path="Value"/>
@@ -1531,6 +1531,15 @@
                                 <Binding ElementName="BorderBottomThicknessNumericUpDown" Path="Value"/>
                             </MultiBinding>
                         </Border.BorderThickness>
+
+                        <!--<Border.CornerRadius>
+                            <MultiBinding Converter="{StaticResource DoubleToRadiusConverter}">
+                                <Binding ElementName="BorderLeftRadiusNumericUpDown" Path="Value"/>
+                                <Binding ElementName="BorderTopRadiusNumericUpDown" Path="Value"/>
+                                <Binding ElementName="BorderRightRadiusNumericUpDown" Path="Value"/>
+                                <Binding ElementName="BorderBottomRadiusNumericUpDown" Path="Value"/>
+                            </MultiBinding>
+                        </Border.CornerRadius>-->
                     </Border>
 
                     <n:SelectControl x:Name="ObfuscateOverlaySelectControl" VerticalAlignment="Center" HorizontalAlignment="Center"
@@ -3946,6 +3955,8 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
+                                    <!--<RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>-->
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -3977,16 +3988,16 @@
                                         </Grid.ColumnDefinitions>
 
                                         <Viewbox Grid.Column="0" Child="{StaticResource Vector.Arrow.Blue.Top}" MaxWidth="15" MaxHeight="15" Opacity="{DynamicResource Element.Opacity}"/>
-                                        <n:IntegerUpDown Grid.Column="1" x:Name="BorderTopThicknessNumericUpDown" Minimum="-500" Maximum="20" Margin="3,5" Width="55" 
+                                        <n:IntegerUpDown Grid.Column="1" x:Name="BorderTopThicknessNumericUpDown" Minimum="-500" Maximum="50" Margin="3,5" Width="55" 
                                                          Value="{Binding Source={x:Static u:UserSettings.All}, Path=BorderTopThickness, Mode=TwoWay}" ValueChanged="BorderProperties_ValueChanged"/>
                                     </Grid>
 
                                     <Viewbox Grid.Row="1" Grid.Column="0" Child="{StaticResource Vector.Arrow.Blue.Left}" MaxWidth="15" MaxHeight="15" Margin="5,0,0,0" Opacity="{DynamicResource Element.Opacity}"/>
-                                    <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="BorderLeftThicknessNumericUpDown" Minimum="-500" Maximum="20" Margin="3,5" Width="55" 
+                                    <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="BorderLeftThicknessNumericUpDown" Minimum="-500" Maximum="50" Margin="3,5" Width="55" 
                                                      Value="{Binding Source={x:Static u:UserSettings.All}, Path=BorderLeftThickness, Mode=TwoWay}" ValueChanged="BorderProperties_ValueChanged"/>
 
                                     <Viewbox Grid.Row="1" Grid.Column="3" Child="{StaticResource Vector.Arrow.Blue.Right}" MaxWidth="15" MaxHeight="15" Opacity="{DynamicResource Element.Opacity}"/>
-                                    <n:IntegerUpDown Grid.Row="1" Grid.Column="2" x:Name="BorderRightThicknessNumericUpDown" Minimum="-500" Maximum="20" Margin="3,5" Width="55" 
+                                    <n:IntegerUpDown Grid.Row="1" Grid.Column="2" x:Name="BorderRightThicknessNumericUpDown" Minimum="-500" Maximum="50" Margin="3,5" Width="55" 
                                                      Value="{Binding Source={x:Static u:UserSettings.All}, Path=BorderRightThickness, Mode=TwoWay}" ValueChanged="BorderProperties_ValueChanged"/>
 
                                     <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center">
@@ -3996,10 +4007,59 @@
                                         </Grid.ColumnDefinitions>
 
                                         <Viewbox Grid.Column="0" Child="{StaticResource Vector.Arrow.Blue.Bottom}" MaxWidth="15" MaxHeight="15" Opacity="{DynamicResource Element.Opacity}"/>
-                                        <n:IntegerUpDown Grid.Column="1" x:Name="BorderBottomThicknessNumericUpDown" Minimum="-500" Maximum="20" Margin="3,5" Width="55" 
+                                        <n:IntegerUpDown Grid.Column="1" x:Name="BorderBottomThicknessNumericUpDown" Minimum="-500" Maximum="50" Margin="3,5" Width="55" 
                                                          Value="{Binding Source={x:Static u:UserSettings.All}, Path=BorderBottomThickness, Mode=TwoWay}" ValueChanged="BorderProperties_ValueChanged"/>
                                     </Grid>
                                 </Grid>
+
+                                <!--<TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.Shadow.BackgroundColor}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <n:ColorBox Grid.Row="2" Grid.Column="1" x:Name="BorderBackgroundColorBox" Margin="10,5"
+                                            SelectedColor="{Binding BorderBackgroundColor, Source={x:Static u:UserSettings.All}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                
+                                <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource S.Border.CornerRadius}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <Grid Grid.Row="3" Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Viewbox Grid.Column="0" Child="{StaticResource Vector.Arrow.Blue.Top}" MaxWidth="15" MaxHeight="15" Opacity="{DynamicResource Element.Opacity}"/>
+                                        <n:IntegerUpDown Grid.Column="1" x:Name="BorderTopRadiusNumericUpDown" Minimum="0" Maximum="1000" Margin="3,5" Width="55" 
+                                                         Value="{Binding Source={x:Static u:UserSettings.All}, Path=BorderTopRadius, Mode=TwoWay}" ValueChanged="BorderProperties_ValueChanged"/>
+                                    </Grid>
+
+                                    <Viewbox Grid.Row="1" Grid.Column="0" Child="{StaticResource Vector.Arrow.Blue.Left}" MaxWidth="15" MaxHeight="15" Margin="5,0,0,0" Opacity="{DynamicResource Element.Opacity}"/>
+                                    <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="BorderLeftRadiusNumericUpDown" Minimum="0" Maximum="1000" Margin="3,5" Width="55" 
+                                                     Value="{Binding Source={x:Static u:UserSettings.All}, Path=BorderLeftRadius, Mode=TwoWay}" ValueChanged="BorderProperties_ValueChanged"/>
+
+                                    <Viewbox Grid.Row="1" Grid.Column="3" Child="{StaticResource Vector.Arrow.Blue.Right}" MaxWidth="15" MaxHeight="15" Opacity="{DynamicResource Element.Opacity}"/>
+                                    <n:IntegerUpDown Grid.Row="1" Grid.Column="2" x:Name="BorderRightRadiusNumericUpDown" Minimum="0" Maximum="1000" Margin="3,5" Width="55" 
+                                                     Value="{Binding Source={x:Static u:UserSettings.All}, Path=BorderRightRadius, Mode=TwoWay}" ValueChanged="BorderProperties_ValueChanged"/>
+
+                                    <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Viewbox Grid.Column="0" Child="{StaticResource Vector.Arrow.Blue.Bottom}" MaxWidth="15" MaxHeight="15" Opacity="{DynamicResource Element.Opacity}"/>
+                                        <n:IntegerUpDown Grid.Column="1" x:Name="BorderBottomRadiusNumericUpDown" Minimum="0" Maximum="1000" Margin="3,5" Width="55" 
+                                                         Value="{Binding Source={x:Static u:UserSettings.All}, Path=BorderBottomRadius, Mode=TwoWay}" ValueChanged="BorderProperties_ValueChanged"/>
+                                    </Grid>
+                                </Grid>-->
                             </Grid>
 
                             <Grid Grid.Row="2" Grid.Column="0" Margin="10,10,5,0">
