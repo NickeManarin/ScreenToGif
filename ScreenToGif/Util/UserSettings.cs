@@ -733,6 +733,12 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public bool RemoteImprovement
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
         public bool AsyncRecording
         {
             get => (bool)GetValue();
@@ -2446,6 +2452,36 @@ namespace ScreenToGif.Util
             get => (double)GetValue();
             set => SetValue(value);
         }
+
+        //public Color BorderBackgroundColor
+        //{
+        //    get => (Color)GetValue();
+        //    set => SetValue(value);
+        //}
+
+        //public double BorderLeftRadius
+        //{
+        //    get => (double)GetValue();
+        //    set => SetValue(value);
+        //}
+
+        //public double BorderTopRadius
+        //{
+        //    get => (double)GetValue();
+        //    set => SetValue(value);
+        //}
+
+        //public double BorderRightRadius
+        //{
+        //    get => (double)GetValue();
+        //    set => SetValue(value);
+        //}
+
+        //public double BorderBottomRadius
+        //{
+        //    get => (double)GetValue();
+        //    set => SetValue(value);
+        //}
 
         #endregion
 

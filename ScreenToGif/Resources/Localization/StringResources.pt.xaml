@@ -246,6 +246,8 @@
     <s:String x:Key="S.Options.Recorder.StepRecording.Info">(Cada quadro será capturado manualmente por você)</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate">Taxa de quadros por segundo fixa.</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Atraso constante que não muda com o atraso da gravação)</s:String>
+    <s:String x:Key="S.Options.Recorder.RemoteImprovement">Melhora a performance captura em uma conexão remota.</s:String>
+    <s:String x:Key="S.Options.Recorder.RemoteImprovement.Info">(Disabilita a captura de janelas em camadas)</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording">Ativar gravação assíncrona.</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(Isso ajuda reduzir os travamentos da interface durante a gravação)</s:String>
     <s:String x:Key="S.Options.Recorder.HideTitleBar">Esconder barra de título (modo reduzido).</s:String>

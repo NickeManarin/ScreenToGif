@@ -92,6 +92,7 @@
     <s:Boolean x:Key="SnapshotMode">False</s:Boolean>
     <s:Int32 x:Key="SnapshotDefaultDelay">1000</s:Int32>
     <s:Boolean x:Key="FixedFrameRate">False</s:Boolean>
+    <s:Boolean x:Key="RemoteImprovement">True</s:Boolean>
     <s:Boolean x:Key="AsyncRecording">False</s:Boolean>
     <s:Boolean x:Key="CursorFollowing">False</s:Boolean>
     <s:Int32 x:Key="FollowBuffer">20</s:Int32>
@@ -430,6 +431,11 @@
     <s:Double x:Key="BorderLeftThickness">1.0</s:Double>
     <s:Double x:Key="BorderRightThickness">1.0</s:Double>
     <s:Double x:Key="BorderTopThickness">1.0</s:Double>
+    <!--<Color x:Key="BorderBackgroundColor">#FFFFFFFF</Color>
+    <s:Double x:Key="BorderBottomRadius">0.0</s:Double>
+    <s:Double x:Key="BorderLeftRadius">0.0</s:Double>
+    <s:Double x:Key="BorderRightRadius">0.0</s:Double>
+    <s:Double x:Key="BorderTopRadius">0.0</s:Double>-->
 
     <!--Editor • Shadow-->
     <Color x:Key="ShadowColor">#FF000000</Color>

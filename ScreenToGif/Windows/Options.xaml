@@ -547,6 +547,11 @@
                                     <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.FixedFramerate}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=FixedFrameRate, Mode=TwoWay}"/>
                                     <TextBlock Text="{DynamicResource S.Options.Recorder.FixedFramerate.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
                                 </WrapPanel>
+
+                                <WrapPanel Margin="0,0,5,0" Visibility="{Binding Path=UseDesktopDuplication, Mode=OneWay, Converter={StaticResource InvertedBoolToVisibility}}">
+                                    <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.RemoteImprovement}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=RemoteImprovement, Mode=TwoWay}"/>
+                                    <TextBlock Text="{DynamicResource S.Options.Recorder.RemoteImprovement.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                                </WrapPanel>
                             </StackPanel>
                         </Expander>
 

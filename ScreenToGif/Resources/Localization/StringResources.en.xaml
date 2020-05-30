@@ -246,6 +246,8 @@
     <s:String x:Key="S.Options.Recorder.StepRecording.Info">(Each frame will be captured manually by you)</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate">Fixed frame rate.</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Constant delay that does not change with recording lag)</s:String>
+    <s:String x:Key="S.Options.Recorder.RemoteImprovement">Improve the capture performance on a remote desktop connection.</s:String>
+    <s:String x:Key="S.Options.Recorder.RemoteImprovement.Info">(Disables layered window capture)</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording">Enable asynchronous recording.</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(It helps reduce the interface lag when recording)</s:String>
     <s:String x:Key="S.Options.Recorder.HideTitleBar">Hide the title bar (thin mode).</s:String>

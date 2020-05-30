@@ -484,7 +484,12 @@ namespace ScreenToGif.Util.Capture
             //If the method is supposed to simply the get the cursor shape no shape was loaded before, there's nothing else to do.
             //if (CursorShapeBuffer?.Length == 0 || (info.LastPresentTime == 0 && info.LastMouseUpdateTime == 0) || !info.PointerPosition.Visible)
             if (screenTexture == null || CursorShapeBuffer?.Length == 0)// || !info.PointerPosition.Visible)
-                return;
+            {
+                //FallbackCursorCapture(frame);
+                
+                //if (CursorShapeBuffer != null)
+                    return;
+            }
 
             //Don't let it bleed beyond the top-left corner, calculate the dimensions of the portion of the cursor that will appear.
             var leftCut = frame.CursorX;
@@ -686,8 +691,7 @@ namespace ScreenToGif.Util.Capture
             return await Task.Factory.StartNew(() => CaptureWithCursor(frame));
         }
 
-        [Obsolete("Try using this method if everything else fails.")]
-        private void CursorCapture(FrameInfo frame)
+        private void FallbackCursorCapture(FrameInfo frame)
         {
             //if (_justStarted && (CursorShapeBuffer?.Length ?? 0) == 0)
             {
@@ -695,69 +699,79 @@ namespace ScreenToGif.Util.Capture
 
                 //https://stackoverflow.com/a/6374151/1735672
                 //Bitmap struct, is used to get the cursor shape when SharpDX fails to do so. 
-                var _infoHeader = new Native.BitmapInfoHeader();
-                _infoHeader.biSize = (uint)Marshal.SizeOf(_infoHeader);
-                _infoHeader.biBitCount = 32;
-                _infoHeader.biClrUsed = 0;
-                _infoHeader.biClrImportant = 0;
-                _infoHeader.biCompression = 0;
-                _infoHeader.biHeight = -Height; //Negative, so the Y-axis will be positioned correctly.
-                _infoHeader.biWidth = Width;
-                _infoHeader.biPlanes = 1;
+                var infoHeader = new Native.BitmapInfoHeader();
+                infoHeader.biSize = (uint)Marshal.SizeOf(infoHeader);
+                infoHeader.biBitCount = 32;
+                infoHeader.biClrUsed = 0;
+                infoHeader.biClrImportant = 0;
+                infoHeader.biCompression = 0;
+                infoHeader.biHeight = -Height; //Negative, so the Y-axis will be positioned correctly.
+                infoHeader.biWidth = Width;
+                infoHeader.biPlanes = 1;
 
                 try
                 {
                     var cursorInfo = new Native.CursorInfo();
                     cursorInfo.cbSize = Marshal.SizeOf(cursorInfo);
 
-                    if (Native.GetCursorInfo(out cursorInfo))
+                    if (!Native.GetCursorInfo(out cursorInfo))
+                        return;
+
+                    if (cursorInfo.flags == Native.CursorShowing)
                     {
-                        if (cursorInfo.flags == Native.CursorShowing)
+                        var hicon = Native.CopyIcon(cursorInfo.hCursor);
+
+                        if (hicon != IntPtr.Zero)
                         {
-                            var hicon = Native.CopyIcon(cursorInfo.hCursor);
-
-                            if (hicon != IntPtr.Zero)
+                            if (Native.GetIconInfo(hicon, out var iconInfo))
                             {
-                                if (Native.GetIconInfo(hicon, out var iconInfo))
-                                {
-                                    frame.CursorX = cursorInfo.ptScreenPos.X - Left;
-                                    frame.CursorY = cursorInfo.ptScreenPos.Y - Top;
+                                frame.CursorX = cursorInfo.ptScreenPos.X - Left;
+                                frame.CursorY = cursorInfo.ptScreenPos.Y - Top;
 
-                                    var bitmap = new Native.Bitmap();
-                                    var hndl = GCHandle.Alloc(bitmap, GCHandleType.Pinned);
-                                    var ptrToBitmap = hndl.AddrOfPinnedObject();
-                                    Native.GetObject(iconInfo.hbmColor, Marshal.SizeOf<Native.Bitmap>(), ptrToBitmap);
-                                    bitmap = Marshal.PtrToStructure<Native.Bitmap>(ptrToBitmap);
-                                    hndl.Free();
+                                var bitmap = new Native.Bitmap();
+                                var hndl = GCHandle.Alloc(bitmap, GCHandleType.Pinned);
+                                var ptrToBitmap = hndl.AddrOfPinnedObject();
+                                Native.GetObject(iconInfo.hbmColor, Marshal.SizeOf<Native.Bitmap>(), ptrToBitmap);
+                                bitmap = Marshal.PtrToStructure<Native.Bitmap>(ptrToBitmap);
+                                hndl.Free();
 
-                                    //https://microsoft.public.vc.mfc.narkive.com/H1CZeqUk/how-can-i-get-bitmapinfo-object-from-bitmap-or-hbitmap
-                                    _infoHeader.biHeight = bitmap.bmHeight;
-                                    _infoHeader.biWidth = bitmap.bmWidth;
-                                    _infoHeader.biBitCount = (ushort)bitmap.bmBitsPixel;
+                                //https://microsoft.public.vc.mfc.narkive.com/H1CZeqUk/how-can-i-get-bitmapinfo-object-from-bitmap-or-hbitmap
+                                infoHeader.biHeight = bitmap.bmHeight;
+                                infoHeader.biWidth = bitmap.bmWidth;
+                                infoHeader.biBitCount = (ushort)bitmap.bmBitsPixel;
 
-                                    var w = (bitmap.bmWidth * bitmap.bmBitsPixel + 31) / 8;
-                                    CursorShapeBuffer = new byte[w * bitmap.bmHeight];
+                                var w = (bitmap.bmWidth * bitmap.bmBitsPixel + 31) / 8;
+                                CursorShapeBuffer = new byte[w * bitmap.bmHeight];
 
-                                    var windowDeviceContext = Native.GetWindowDC(IntPtr.Zero);
-                                    var compatibleBitmap = Native.CreateCompatibleBitmap(windowDeviceContext, Width, Height);
+                                var windowDeviceContext = Native.GetWindowDC(IntPtr.Zero);
+                                var compatibleBitmap = Native.CreateCompatibleBitmap(windowDeviceContext, Width, Height);
 
-                                    Native.GetDIBits(windowDeviceContext, compatibleBitmap, 0, (uint)_infoHeader.biHeight, CursorShapeBuffer, ref _infoHeader, Native.DibColorMode.DibRgbColors);
+                                Native.GetDIBits(windowDeviceContext, compatibleBitmap, 0, (uint)infoHeader.biHeight, CursorShapeBuffer, ref infoHeader, Native.DibColorMode.DibRgbColors);
 
-                                    //if (frame.CursorX > 0 && frame.CursorY > 0)
-                                    //    Native.DrawIconEx(_compatibleDeviceContext, frame.CursorX - iconInfo.xHotspot, frame.CursorY - iconInfo.yHotspot, cursorInfo.hCursor, 0, 0, 0, IntPtr.Zero, 0x0003);
+                                //CursorShapeInfo = new OutputDuplicatePointerShapeInformation();
+                                //CursorShapeInfo.Type = (int)OutputDuplicatePointerShapeType.Color;
+                                //CursorShapeInfo.Width = bitmap.bmWidth;
+                                //CursorShapeInfo.Height = bitmap.bmHeight;
+                                //CursorShapeInfo.Pitch = w;
+                                //CursorShapeInfo.HotSpot = new RawPoint(0, 0);
 
-                                    //Clean objects here.
-                                }
+                                //if (frame.CursorX > 0 && frame.CursorY > 0)
+                                //    Native.DrawIconEx(_compatibleDeviceContext, frame.CursorX - iconInfo.xHotspot, frame.CursorY - iconInfo.yHotspot, cursorInfo.hCursor, 0, 0, 0, IntPtr.Zero, 0x0003);
 
-                                Native.DeleteObject(iconInfo.hbmColor);
-                                Native.DeleteObject(iconInfo.hbmMask);
+                                //Native.SelectObject(CompatibleDeviceContext, OldBitmap);
+                                //Native.DeleteObject(compatibleBitmap);
+                                //Native.DeleteDC(CompatibleDeviceContext);
+                                //Native.ReleaseDC(IntPtr.Zero, windowDeviceContext);
                             }
 
-                            Native.DestroyIcon(hicon);
+                            Native.DeleteObject(iconInfo.hbmColor);
+                            Native.DeleteObject(iconInfo.hbmMask);
                         }
 
-                        Native.DeleteObject(cursorInfo.hCursor);
+                        Native.DestroyIcon(hicon);
                     }
+
+                    Native.DeleteObject(cursorInfo.hCursor);
                 }
                 catch (Exception e)
                 {

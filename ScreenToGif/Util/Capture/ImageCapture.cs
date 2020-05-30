@@ -18,6 +18,8 @@ namespace ScreenToGif.Util.Capture
 
         protected internal int CursorStep { get; set; }
 
+        protected internal Native.CopyPixelOperation PixelOperation { get; set; }
+
         #endregion
 
         public override void Start(int delay, int left, int top, int width, int height, double scale, ProjectInfo project)
@@ -34,6 +36,14 @@ namespace ScreenToGif.Util.Capture
             OldBitmap = Native.SelectObject(CompatibleDeviceContext, CompatibleBitmap);
 
             #endregion
+
+            var pixelOp = Native.CopyPixelOperation.SourceCopy;
+
+            //If not in a remote desktop connection or if the improvement was disabled, capture layered windows too.
+            if (!System.Windows.Forms.SystemInformation.TerminalServerSession || !UserSettings.All.RemoteImprovement)
+                pixelOp |= Native.CopyPixelOperation.CaptureBlt;
+
+            PixelOperation = pixelOp;
         }
 
 
@@ -43,15 +53,8 @@ namespace ScreenToGif.Util.Capture
             {
                 new System.Security.Permissions.UIPermission(System.Security.Permissions.UIPermissionWindow.AllWindows).Demand();
 
-                var pixelOp = Native.CopyPixelOperation.SourceCopy;
-
-                if (!System.Windows.Forms.SystemInformation.TerminalServerSession)
-                {
-                    pixelOp |= Native.CopyPixelOperation.CaptureBlt;
-                }
-
                 //var success = Native.BitBlt(CompatibleDeviceContext, 0, 0, Width, Height, WindowDeviceContext, Left, Top, Native.CopyPixelOperation.SourceCopy | Native.CopyPixelOperation.CaptureBlt);
-                var success = Native.StretchBlt(CompatibleDeviceContext, 0, 0, StartWidth, StartHeight, WindowDeviceContext, Left, Top, Width, Height, pixelOp);
+                var success = Native.StretchBlt(CompatibleDeviceContext, 0, 0, StartWidth, StartHeight, WindowDeviceContext, Left, Top, Width, Height, PixelOperation);
 
                 if (!success)
                     return FrameCount;
@@ -78,15 +81,8 @@ namespace ScreenToGif.Util.Capture
             {
                 new System.Security.Permissions.UIPermission(System.Security.Permissions.UIPermissionWindow.AllWindows).Demand();
 
-                var pixelOp = Native.CopyPixelOperation.SourceCopy;
-
-                if (!System.Windows.Forms.SystemInformation.TerminalServerSession)
-                {
-                    pixelOp |= Native.CopyPixelOperation.CaptureBlt;
-                }
-
                 //var success = Native.BitBlt(CompatibleDeviceContext, 0, 0, Width, Height, WindowDeviceContext, Left, Top, Native.CopyPixelOperation.SourceCopy | Native.CopyPixelOperation.CaptureBlt);
-                var success = Native.StretchBlt(CompatibleDeviceContext, 0, 0, StartWidth, StartHeight, WindowDeviceContext, Left, Top, Width, Height, pixelOp);
+                var success = Native.StretchBlt(CompatibleDeviceContext, 0, 0, StartWidth, StartHeight, WindowDeviceContext, Left, Top, Width, Height, PixelOperation);
 
                 if (!success)
                     return FrameCount;
