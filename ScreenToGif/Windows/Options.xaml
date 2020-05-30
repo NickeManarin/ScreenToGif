@@ -1130,7 +1130,7 @@
                             <n:ImageListBoxItem Image="{StaticResource Flag.China}" Tag="zh" Content="Chinese (Simplified) / 简体中文" Author="Joel Yang, HiSen, Jeffiy, EMLVIRUS, 王晨旭, Wen Peng"
                                                 MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=zh, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ImageListBoxItem x:Name="TaiwanListBoxItem" Image="{StaticResource Flag.Taiwan}" Tag="zh-Hant" Content="Chinese (Traditional) / 繁體中文" Author="Danfong Hsieh, Tse Zinno"
+                            <n:ImageListBoxItem x:Name="TaiwanListBoxItem" Image="{StaticResource Flag.Taiwan}" Tag="zh-Hant" Content="Chinese (Traditional) / 繁體中文" Author="Jerry Lum, Danfong Hsieh, Tse Zinno"
                                                 MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=zh-Hant, Converter={StaticResource TagToSelection}}"/>
 
                             <n:ImageListBoxItem Image="{StaticResource Flag.CzechRepublic}" Tag="cs" Content="Czech / Čeština" Author="PePav"
