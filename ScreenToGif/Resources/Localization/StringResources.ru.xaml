@@ -246,6 +246,8 @@
     <s:String x:Key="S.Options.Recorder.StepRecording.Info">(Каждый кадр должен быть записан вручную)</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate">Постоянная частота кадров.</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Постоянная задержка, не изменяется с задержкой записи)</s:String>
+    <s:String x:Key="S.Options.Recorder.RemoteImprovement">Улучшить производительность захвата на удаленном рабочем столе.</s:String>
+    <s:String x:Key="S.Options.Recorder.RemoteImprovement.Info">(Отключает многоуровневый захват окна)</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording">Включить асинхронную запись.</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(Это поможет снизить "лаги" интерфейса во время записи)</s:String>
     <s:String x:Key="S.Options.Recorder.HideTitleBar">Скрыть заголовок (тонкая рамка).</s:String>
