@@ -244,6 +244,8 @@
     <s:Boolean x:Key="PickLocationApng">True</s:Boolean>
     <s:Boolean x:Key="OverwriteOnSaveApng">False</s:Boolean>
     <s:Boolean x:Key="SaveAsProjectTooApng">False</s:Boolean>
+    <s:Boolean x:Key="UploadFileApng">False</s:Boolean>
+    <u:UploadService x:Key="LatestUploadServiceApng">None</u:UploadService>
     <s:Boolean x:Key="SaveToClipboardApng">False</s:Boolean>
     <u:CopyType x:Key="LatestCopyTypeApng">FilePath</u:CopyType>
     <s:Boolean x:Key="ExecuteCustomCommandsApng">False</s:Boolean>

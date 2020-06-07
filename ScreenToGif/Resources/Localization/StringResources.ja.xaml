@@ -246,6 +246,8 @@
     <s:String x:Key="S.Options.Recorder.StepRecording.Info">(各フレームは手動でキャプチャされます)</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate">固定フレームレート</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(録画時のラグによる変動をせず一定します)</s:String>
+    <s:String x:Key="S.Options.Recorder.RemoteImprovement">リモートデスクトップ接続中のキャプチャ性能を改善</s:String>
+    <s:String x:Key="S.Options.Recorder.RemoteImprovement.Info">(レイヤー化したウィンドウのキャプチャを無効)</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording">非同期録画</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(録画時のラグ低減に有効)</s:String>
     <s:String x:Key="S.Options.Recorder.HideTitleBar">タイトルバーを隠す (薄型)</s:String>
@@ -1200,7 +1202,7 @@
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">リンク</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">アップロードサービスによって生成されたリンクをクリップボードにコピー</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">エンコード後コマンド実行</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">エンコード後に実行するコマンドを入力します。&#10;複数コマンドを実行するには行を分けて入力します。&#10;{p} = 出力ファイルパス&#10;{f} = 出力フォルダーパス</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">エンコード後に実行するコマンドを入力します。&#10;複数コマンドを実行するには行を分けて入力します。&#10;{p} = 出力ファイルパス&#10;{f} = 出力フォルダーパス&#x0d;{u} = URL of the uploaded file.</s:String>
     
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">保存先 *</s:String>

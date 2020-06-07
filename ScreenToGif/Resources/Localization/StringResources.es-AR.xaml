@@ -902,7 +902,7 @@
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">Enlace</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">Copia el enlace generado por el servicio de subida al portapapeles</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Ejecutar comandos luego de la codificación</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Ingresá los comandos para ser ejecutados luego de la codificación.&#x0d;Para ejecutar múltiples comandos, ingresá cada uno en una línea separada.&#x0d;Macros:&#x0d;{p} = Ruta del archivo de destino.&#x0d;{f} = Ruta de la carpeta de destino.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Ingresá los comandos para ser ejecutados luego de la codificación.&#x0d;Para ejecutar múltiples comandos, ingresá cada uno en una línea separada.&#x0d;Macros:&#x0d;{p} = Ruta del archivo de destino.&#x0d;{f} = Ruta de la carpeta de destino.&#x0d;{u} = URL of the uploaded file.</s:String>
     
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">Archivo</s:String>

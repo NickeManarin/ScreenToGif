@@ -1200,7 +1200,7 @@
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">Link</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">Kopieert de link die is gegenereerd door de upload-dienst naar het klembord.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Aanvullende opdrachten uitvoeren.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Voer de opdrachten in die na de codering moeten worden uitgevoerd.&#10; Om meerdere opdrachten uit te voeren, typt u elk op een gescheiden regel.&#10;Macro's: &#10;{p} = bestandsuitvoer-pad.&#10;{f} = uitvoermap-pad.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Voer de opdrachten in die na de codering moeten worden uitgevoerd.&#10; Om meerdere opdrachten uit te voeren, typt u elk op een gescheiden regel.&#10;Macro's: &#10;{p} = bestandsuitvoer-pad.&#10;{f} = uitvoermap-pad.&#x0d;{u} = URL of the uploaded file.</s:String>
     
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">Bestand</s:String>

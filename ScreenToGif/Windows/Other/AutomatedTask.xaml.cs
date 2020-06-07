@@ -28,6 +28,7 @@ namespace ScreenToGif.Windows.Other
                 TypeTextBlock.Text = LocalizationHelper.Get("S.Edit");
                 TypeComboBox.SelectedIndex = (int)(CurrentTask?.TaskType ?? DefaultTaskModel.TaskTypeEnum.NotDeclared);
                 TypeComboBox.IsEnabled = false;
+                EnabledCheckBox.Visibility = Visibility.Visible;
 
                 TypeComboBox.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
             }
@@ -93,7 +94,7 @@ namespace ScreenToGif.Windows.Other
             }
         }
 
-        private void Ok_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
+        private void Ok_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = IsLoaded && TypeComboBox.SelectedIndex > 0;
         }

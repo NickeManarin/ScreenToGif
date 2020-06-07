@@ -191,6 +191,7 @@
     <s:String x:Key="S.Options.App.Theme.Scheme.Dark">Escuro</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.VeryDark">Muito escuro</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Custom">Personalizado</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Example">Cores de exemplo.</s:String>
     <s:String x:Key="S.Options.App.Tray">Ícone da bandeja do sistema</s:String>
     <s:String x:Key="S.Options.App.Tray.Show">Exibir o aplicativo na bandeja do sistema (área de notificação).</s:String>
     <s:String x:Key="S.Options.App.Tray.LeaveOpen">Manter o aplicativo aberto mesmo se todas as janelas estiverem fechadas.</s:String>
@@ -292,6 +293,8 @@
     <s:String x:Key="S.Options.Tasks.List">Lista de tarefas automáticas</s:String>
     <s:String x:Key="S.Options.Tasks.List.Task">Tarefa</s:String>
     <s:String x:Key="S.Options.Tasks.List.Details">Detalhes</s:String>
+    <s:String x:Key="S.Options.Tasks.List.Enabled">Ativado</s:String>
+    <s:String x:Key="S.Options.Tasks.Enable">Ative esta tarefa.</s:String>
     <s:String x:Key="S.Options.Tasks.SelectType">(Selecione uma tarefa)</s:String>
     <s:String x:Key="S.Options.Tasks.Info">Essas tarefas são executadas sequencialmente do topo da lista para o último elemento.&#10;Isso acontece quando o projeto é aberto pela primeira vez no editor.</s:String>
 
@@ -406,6 +409,8 @@
     <s:String x:Key="S.Options.Upload.Imgur.Auth.Missing">Para autorizar este aplicativo, é necessário fornecer o token de autorização.</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Auth.Completed">Autorização do Imgur foi concluída.</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Auth.Error">A autorização do Imgur falhou. Tente novamente em alguns segundos ou obtenha um novo token.</s:String>
+    <s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Header">Não foi possível autorizar o aplicativo</s:String>
+    <s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Message">Verifique se você providenciou o token correto e se você tem uma conexão com a internet.</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Refresh.None">Para atualizar a autorização para este aplicativo, é necessário finalizar o processo de autorização primeiro.</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.NotAuthorized">Não autorizado.</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Expired">Autorização expirada em {0}.</s:String>
@@ -512,6 +517,7 @@
     <s:String x:Key="S.Recorder.Screen">Tela</s:String>
     <s:String x:Key="S.Recorder.Accept">Aceitar</s:String>
     <s:String x:Key="S.Recorder.Retry">Limpar</s:String>
+    <s:String x:Key="S.Recorder.Retry.Shortcut">Botão direito do mouse</s:String>
     <s:String x:Key="S.Recorder.CancelSelection">Cancelar a seleção (Esc)</s:String>
     <s:String x:Key="S.Recorder.SelectArea">Clique e arraste para selecionar uma área deste monitor</s:String>
     <s:String x:Key="S.Recorder.SelectArea.Embedded">Clique e arraste para selecionar uma área</s:String>
@@ -549,6 +555,10 @@
     <!--Exception/Error viewers-->
     <s:String x:Key="S.ExceptionViewer.Title">Visualizador de Exceções</s:String>
     <s:String x:Key="S.ExceptionViewer.OpenInner">Abrir Exceção Interna</s:String>
+    <s:String x:Key="S.ExceptionViewer.Type">Tipo da exceção</s:String>
+    <s:String x:Key="S.ExceptionViewer.Message">Mensagem</s:String>
+    <s:String x:Key="S.ExceptionViewer.Stack">Pila de chamadas</s:String>
+    <s:String x:Key="S.ExceptionViewer.Source">Fonte da exceção</s:String>
     <s:String x:Key="S.ErrorDialog.Observation">Algo de errado aconteceu.</s:String>
     <s:String x:Key="S.ErrorDialog.Send">Enviar relatório</s:String>
 
@@ -652,6 +662,12 @@
     <s:String x:Key="S.Editor.Extras">Extras</s:String>
     <s:String x:Key="S.Editor.UpdateAvailable">Uma nova atualização está disponível!</s:String>
     <s:String x:Key="S.Editor.UpdateAvailable.Info">Clique aqui para ler mais a respeito.</s:String>
+    
+    <!--File dialogs (does not work with new line characters)-->
+    <s:String x:Key="S.Editor.File.All">Todos os arquivos suportados</s:String>
+    <s:String x:Key="S.Editor.File.Image">Imagem</s:String>
+    <s:String x:Key="S.Editor.File.Video">Vídeo</s:String>
+    <s:String x:Key="S.Editor.File.Project">Projeto do ScreenToGif</s:String>
     
     <!--Welcome-->
     <s:String x:Key="Welcome.New">Para iniciar uma nova gravação, navegue até "Arquivo > Novo"</s:String>
@@ -951,6 +967,9 @@
     
     <s:String x:Key="Clipboard.Entries">Área de Transferência</s:String>
     <s:String x:Key="Clipboard.Entry">Item:</s:String>
+    <s:String x:Key="S.Clipboard.Entry.Image">{0} imagem</s:String>
+    <s:String x:Key="S.Clipboard.Entry.Images">{0} imagens</s:String>
+    <s:String x:Key="S.Clipboard.Entry.Frames">Quadros: {0}</s:String>
     <s:String x:Key="Clipboard.Explore">Explorar Conteúdo</s:String>
     <s:String x:Key="Clipboard.Remove">Remover</s:String>
     <s:String x:Key="Clipboard.Behavior">Modo de Inserção</s:String>
@@ -1057,6 +1076,8 @@
     <s:String x:Key="S.Shapes.Shapes">Formas Geométricas</s:String>
     <s:String x:Key="S.Shapes.Shapes.Radius">Raio:</s:String>
     <s:String x:Key="S.Shapes.Shapes.Dashes">Traços:</s:String>
+    <s:String x:Key="S.Shapes.Shapes.ResetRotatio">Desfazer rotação</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Remove">Remover</s:String>
     <s:String x:Key="S.Shapes.Fill">Preenchimento</s:String>
 
     <s:String x:Key="S.MouseClicks">Cliques do Mouse</s:String>
@@ -1094,6 +1115,14 @@
     <s:String x:Key="Progress.Precision.Custom">Personalizado</s:String>
     <s:String x:Key="Progress.Precision.ShowTotal">Exibir o total</s:String>
     <s:String x:Key="Progress.Format">Formato:</s:String>
+    <s:String x:Key="S.Progress.Format.Header">Formato</s:String>
+    <s:String x:Key="S.Progress.Format.Miliseconds">$ms = milisegundos</s:String>
+    <s:String x:Key="S.Progress.Format.Seconds">$s = segundos</s:String>
+    <s:String x:Key="S.Progress.Format.Minutes">$m = minutos</s:String>
+    <s:String x:Key="S.Progress.Format.Percentage">$p = porcentagem</s:String>
+    <s:String x:Key="S.Progress.Format.FrameNumber">$f = número do quadro</s:String>
+    <s:String x:Key="S.Progress.Format.Totals">Totais:</s:String>
+    <s:String x:Key="S.Progress.Format.Examples">Exemplos:</s:String>
     <s:String x:Key="S.Progress.Format.Date">Você pode usar os formatos de data e horário do .Net Framework.&#x0d;A especificação está disponível nesses dois links abaixo.</s:String>
     <s:String x:Key="S.Progress.Format.Date.Standard">Formatos padrão</s:String>
     <s:String x:Key="S.Progress.Format.Date.Custom">Formatos personalizados</s:String>
@@ -1202,7 +1231,7 @@
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">Link</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">Copia o link gerado pelo serviço de upload para a área de transferência.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Executar comandos após a codificação.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Digite comandos para serem executados após a codificação.&#x0d;Para executar multiplos comandos, escreva cada comando em linhas diferentes.&#x0d;Macros:&#x0d;{p} = Caminho do arquivo.&#x0d;{f} = Caminho da pasta.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Digite comandos para serem executados após a codificação.&#x0d;Para executar multiplos comandos, escreva cada comando em linhas diferentes.&#x0d;Macros:&#x0d;{p} = Caminho do arquivo.&#x0d;{f} = Caminho da pasta.&#x0d;{u} = URL do arquivo enviado.</s:String>
     
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">Arquivo</s:String>

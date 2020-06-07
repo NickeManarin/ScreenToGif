@@ -869,7 +869,7 @@
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">Odkaz</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">Zkopírovat odkaz vygenerovaný službou pro přenos do schránky.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Po kódování provést zapsané příkazy.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Zadejte příkazy, které mají být provedeny po kódování.&#x0d;Po spuštění více příkazů, zadejte každý na samostatný řádek.&#x0d;Makra:&#x0d;{p} = Cesta výstupního souboru.&#x0d;{f} = Cesta výstupní složky.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Zadejte příkazy, které mají být provedeny po kódování.&#x0d;Po spuštění více příkazů, zadejte každý na samostatný řádek.&#x0d;Makra:&#x0d;{p} = Cesta výstupního souboru.&#x0d;{f} = Cesta výstupní složky.&#x0d;{u} = URL of the uploaded file.</s:String>
     
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">Soubor</s:String>

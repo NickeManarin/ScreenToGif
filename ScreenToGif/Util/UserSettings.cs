@@ -1509,6 +1509,18 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public bool UploadFileApng
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public UploadService LatestUploadServiceApng
+        {
+            get => (UploadService)GetValue();
+            set => SetValue(value);
+        }
+
         public bool SaveToClipboardApng
         {
             get => (bool)GetValue();

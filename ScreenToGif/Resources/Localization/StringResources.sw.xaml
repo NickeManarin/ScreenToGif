@@ -1200,7 +1200,7 @@
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">Kiungo</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">Hunakili kiungo iliyoundwa na huduma ya upakiaji kwenye ubao-nakili</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Tekeleza maamirisho ya baada ya usimbaji</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Bofya maamrisho ambazo zinafaa kutekelezwa baada ya usimbiko.&#x0d;Kutekeleza maamrisho anuwai, charaza kila moja kwenye laini tofauti.&#x0d;Macro:&#x0d;{p} = Kijia cha faili towe.&#x0d;{f} = Kijia cha folda towe.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Bofya maamrisho ambazo zinafaa kutekelezwa baada ya usimbiko.&#x0d;Kutekeleza maamrisho anuwai, charaza kila moja kwenye laini tofauti.&#x0d;Macro:&#x0d;{p} = Kijia cha faili towe.&#x0d;{f} = Kijia cha folda towe.&#x0d;{u} = URL of the uploaded file.</s:String>
     
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">Faili</s:String>

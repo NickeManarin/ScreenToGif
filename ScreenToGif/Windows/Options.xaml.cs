@@ -821,26 +821,16 @@ namespace ScreenToGif.Windows
                 e.Handled = true;
             }
 
-            //if (e.Key == Key.Space)
-            //{
-            //    var selected = TasksDataGrid.SelectedItem as DefaultTaskModel;
+            if (e.Key == Key.Space)
+            {
+                if (!(TasksDataGrid.SelectedItem is DefaultTaskModel selected))
+                    return;
+                
+                selected.IsEnabled = !selected.IsEnabled;
+                e.Handled = true;
 
-            //    if (selected != null)
-            //    {
-            //        selected.CanUndo = !selected.CanUndo;
-            //        e.Handled = true;
-
-            //        UserSettings.All.AutomatedTasksList = new ArrayList(_effectList.ToArray());
-            //    }
-            //}
-        }
-
-        private void ExtendedCheckBox_Click(object sender, RoutedEventArgs e)
-        {
-            if (!IsLoaded)
-                return;
-
-            UserSettings.All.AutomatedTasksList = new ArrayList(_effectList.ToArray());
+                //UserSettings.All.AutomatedTasksList = new ArrayList(_effectList.ToArray());
+            }
         }
 
         #endregion
@@ -1418,7 +1408,7 @@ namespace ScreenToGif.Windows
             catch (Exception ex)
             {
                 LogWriter.Log(ex, "Authorizing access - Imgur");
-                ErrorDialog.Ok("ScreenToGif - Options", "It was not possible to authorize the app", "It was not possible to authorize the app. Check if you provided the correct token and if you have an internet connection.", ex);
+                ErrorDialog.Ok(Title, LocalizationHelper.Get("S.Options.Upload.Imgur.Auth.Failed.Header"), LocalizationHelper.Get("S.Options.Upload.Imgur.Auth.Failed.Message"), ex);
             }
 
             ImgurExpander.IsEnabled = true;
@@ -1447,7 +1437,7 @@ namespace ScreenToGif.Windows
             catch (Exception ex)
             {
                 LogWriter.Log(ex, "Refreshing authorization - Imgur");
-                ErrorDialog.Ok("ScreenToGif - Options", "It was not possible to authorize the app", "It was not possible to authorize the app. Check if you provided the correct token and if you have an internet connection.", ex);
+                ErrorDialog.Ok(Title, LocalizationHelper.Get("S.Options.Upload.Imgur.Auth.Failed.Header"), LocalizationHelper.Get("S.Options.Upload.Imgur.Auth.Failed.Message"), ex);
             }
 
             ImgurExpander.IsEnabled = true;
@@ -2300,6 +2290,8 @@ namespace ScreenToGif.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            SizeToContent = SizeToContent.Manual;
+
             try
             {
                 ProxyPasswordBox.Password = WebHelper.Unprotect(UserSettings.All.ProxyPassword);

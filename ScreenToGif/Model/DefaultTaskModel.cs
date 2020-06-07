@@ -24,6 +24,7 @@ namespace ScreenToGif.Model
         }
 
         private TaskTypeEnum _taskType = TaskTypeEnum.NotDeclared;
+        private bool _isEnabled = true;
         private string _image = null;
 
         #endregion
@@ -58,6 +59,12 @@ namespace ScreenToGif.Model
             }
         }
 
+        public bool IsEnabled
+        {
+            get => _isEnabled;
+            set => SetProperty(ref _isEnabled, value);
+        }
+
         public string Details => ToString();
 
         [IgnoreDataMember] //This attribute is getting ignored.
@@ -71,7 +78,7 @@ namespace ScreenToGif.Model
 
         public DefaultTaskModel ShallowCopy()
         {
-            return (DefaultTaskModel)MemberwiseClone();
+            return (DefaultTaskModel) MemberwiseClone();
         }
     }
 }

@@ -1067,7 +1067,7 @@
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">Link</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">Kopiuje wygenerowany link do schowka.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Wykonaj polecenia po enkodowaniu.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Wpisz polecenia, które mają zostać wykonany po enkodowaniu.&#x0d;Żeby wykonać wiele poleceń, wpisz każde na oddzielnej linii.&#x0d;Makra:&#x0d;{p} = ścieżka wyjściowa.&#x0d;{f} = folder wyjściowy.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Wpisz polecenia, które mają zostać wykonany po enkodowaniu.&#x0d;Żeby wykonać wiele poleceń, wpisz każde na oddzielnej linii.&#x0d;Makra:&#x0d;{p} = ścieżka wyjściowa.&#x0d;{f} = folder wyjściowy.&#x0d;{u} = URL of the uploaded file.</s:String>
     
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">Plik</s:String>

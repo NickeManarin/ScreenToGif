@@ -55,16 +55,6 @@ namespace ScreenToGif.Controls
             set => SetCurrentValue(TextProperty, value);
         }
 
-        /// <summary>
-        /// The TextWrapping property controls whether or not text wraps 
-        /// when it reaches the flow edge of its containing block box. 
-        /// </summary>
-        public TextWrapping TextWrapping
-        {
-            get => (TextWrapping)GetValue(TextWrappingProperty);
-            set => SetValue(TextWrappingProperty, value);
-        }
-
         #endregion
 
         static SplitButton()

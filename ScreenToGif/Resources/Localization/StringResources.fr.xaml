@@ -1200,7 +1200,7 @@
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">Lien</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">Copie le lien généré par le service de téléchargement dans le Presse-papiers.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Exécuter des commandes post-encodage.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Saisissez les commandes à exécuter après l'encodage. &#x0d; Pour exécuter plusieurs commandes, saisissez-les sur une ligne séparée. &#x0d; Macros: &#x0d; {p} = chemin du fichier de sortie. &#x0d;{f} = Chemin du dossier de sortie.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Saisissez les commandes à exécuter après l'encodage. &#x0d; Pour exécuter plusieurs commandes, saisissez-les sur une ligne séparée. &#x0d; Macros: &#x0d; {p} = chemin du fichier de sortie. &#x0d;{f} = Chemin du dossier de sortie.&#x0d;{u} = URL of the uploaded file.</s:String>
     
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">Fichier</s:String>

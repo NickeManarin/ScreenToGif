@@ -1189,7 +1189,7 @@ namespace ScreenToGif.Windows.Other
                 {
                     InternalUpdate(id, "Encoder.Executing", true, true);
 
-                    var command = param.PostCommands.Replace("{p}", "\"" + param.Filename + "\"").Replace("{f}", "\"" + Path.GetDirectoryName(param.Filename) + "\"");
+                    var command = param.PostCommands.Replace("{p}", "\"" + param.Filename + "\"").Replace("{f}", "\"" + Path.GetDirectoryName(param.Filename) + "\"").Replace("{u}", "\"" + InternalGetUpload(id) + "\"");
                     var output = "";
 
                     try
@@ -1209,8 +1209,8 @@ namespace ScreenToGif.Windows.Other
                                 process.StartInfo = procStartInfo;
                                 process.Start();
 
-                                var message = process.StandardOutput.ReadToEnd();
-                                var error = process.StandardError.ReadToEnd();
+                                var message = await process.StandardOutput.ReadToEndAsync();
+                                var error = await process.StandardError.ReadToEndAsync();
 
                                 if (!string.IsNullOrWhiteSpace(message))
                                     output += message + Environment.NewLine;

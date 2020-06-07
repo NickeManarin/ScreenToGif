@@ -7,12 +7,21 @@ _VS 2019 and .Net 4.8 or newer required._
 
 ## What's new? (Version 2.24.2)
 
-• Updated the Spanish localization.  
-• Added the Swahili localization.  
+• You can disable tasks without having to remove them.  
+• Added the option to upload APNGs too.  
+• Added a new parameter to the post encoding commands (URL).  
+• Updated the Japanese, Chinese (Simplified), Dutch and Russian localizations.  
+• The options window will adjust its width to its contents when opening.  
 
 ### Fixed:
 
-♦ Replaced the download link of FFmpeg to download v4.2.2. If you are still unable to export using FFmpeg, download it again.     
+♦ The screen capture (BitBlt + cursor) over a remote desktop connection was not working properly (thanks to Luis for the help).  
+♦ The editor window chrome (title bar) was not getting extended when needed.  
+♦ The app could crash before warning of the missing .Net 4.8 when having .Net 4.6.2 or older versions.  
+♦ If the project was too big (too many frames or frames too big), the PSD exporter could fail.  
+♦ Several texts where not translatable (thanks to László for the help).  
+♦ Copy and pasting a frame, then doing it again multiple times, could exceed the filename limit (thanks to Riku for the help).
+♦ The 'duplicated filename' warning was not getting hidden when unticking the option to save the file to a selected folder.  
 
 ### Known Bugs:
 

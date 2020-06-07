@@ -62,7 +62,7 @@ namespace ScreenToGif.Cloud.Imgur
                 if ((IsAnonymous && UserSettings.All.ImgurAnonymousUseDirectLinks) || (!IsAnonymous && UserSettings.All.ImgurUseDirectLinks))
                 {
                     if ((IsAnonymous && UserSettings.All.ImgurAnonymousUseGifvLink) || (!IsAnonymous && UserSettings.All.ImgurUseGifvLink) && !string.IsNullOrEmpty(responseAux.Data.Gifv))
-                        url = responseAux.Data.Gifv;
+                        url = responseAux.Data.Gifv ?? responseAux.Data.Link;
                     else
                         url = responseAux.Data.Link;
                 }

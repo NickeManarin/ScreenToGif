@@ -1200,7 +1200,7 @@
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">Enlace</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">Copia el vínculo generado por el servicio de subida en el portapapeles.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Ejecute comandos despues de codificación.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Escriba los comandos que se ejecutarán después de la codificación.&#x0d;Para ejecutar varios comandos, escriba cada uno de ellos en una línea separada.&#x0d;Macros:&#x0d;{p} Ruta del archivo de salida.&#x0d;{f} Ruta de la carpeta de salida.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Escriba los comandos que se ejecutarán después de la codificación.&#x0d;Para ejecutar varios comandos, escriba cada uno de ellos en una línea separada.&#x0d;Macros:&#x0d;{p} Ruta del archivo de salida.&#x0d;{f} Ruta de la carpeta de salida.&#x0d;{u} = URL of the uploaded file.</s:String>
     
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">Archivo</s:String>

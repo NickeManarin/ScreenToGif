@@ -5,7 +5,7 @@
         xmlns:m="clr-namespace:ScreenToGif.Model"
         xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
         xmlns:u="clr-namespace:ScreenToGif.Util"
-        Title="{DynamicResource S.Options.Tasks.Title}" Width="350" Height="400" MinWidth="300" MinHeight="300" 
+        Title="{DynamicResource S.Options.Tasks.Title}" Width="370" Height="400" MinWidth="350" MinHeight="300" 
         WindowStartupLocation="CenterScreen" SnapsToDevicePixels="True" Background="{DynamicResource Panel.Background}" Loaded="Window_Loaded">
 
     <Window.CommandBindings>
@@ -96,6 +96,9 @@
                 <ColumnDefinition Width="Auto" MinWidth="100"/>
             </Grid.ColumnDefinitions>
 
+            <n:ExtendedCheckBox Grid.Column="0" x:Name="EnabledCheckBox" Text="{DynamicResource S.Options.Tasks.Enable}" Margin="5,3" Visibility="Collapsed"
+                                IsChecked="{Binding ElementName=MainPresenter, Path=Content.DataContext.IsEnabled, FallbackValue=True}"/>
+            
             <n:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource S.Ok}" Content="{StaticResource Vector.Ok}" ContentHeight="20" Padding="4,0" Margin="5" Command="{StaticResource Command.Ok}"/>
             <n:ImageButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource S.Cancel}" Content="{StaticResource Vector.Cancel}" ContentHeight="20" Padding="4,0" Margin="5" Click="CancelButton_Click" IsCancel="True"/>
         </Grid>

@@ -65,7 +65,11 @@ namespace ScreenToGif.Windows.Other
 
         private void PreviewButton_Click(object sender, RoutedEventArgs e)
         {
-            var preview = new FeedbackPreview { Html = BuildBody(TitleTextBox.Text, MessageTextBox.Text, EmailTextBox.Text, IssueCheckBox.IsChecked == true, SuggestionCheckBox.IsChecked == true) };
+            var preview = new FeedbackPreview
+            {
+                Owner = this, 
+                Html = BuildBody(TitleTextBox.Text, MessageTextBox.Text, EmailTextBox.Text, IssueCheckBox.IsChecked == true, SuggestionCheckBox.IsChecked == true)
+            };
             preview.ShowDialog();
         }
 

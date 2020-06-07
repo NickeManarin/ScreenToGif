@@ -1233,7 +1233,7 @@
 若要执行多条命令，请在不同行内输入不同命令，一行输入一条。
 宏:
 {p} = 输出文件路径。
-{f} = 输出文件夹路径。</s:String>
+{f} = 输出文件夹路径。&#x0d;{u} = URL of the uploaded file.</s:String>
     
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">文件</s:String>

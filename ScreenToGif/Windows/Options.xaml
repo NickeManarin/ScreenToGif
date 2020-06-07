@@ -4,8 +4,9 @@
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
         xmlns:u="clr-namespace:ScreenToGif.Util"
-        Title="{DynamicResource S.Options.Title}" Height="610" Width="800" MinWidth="680" MinHeight="460" Background="{DynamicResource Panel.Background}"
-        Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" UseLayoutRounding="True" SnapsToDevicePixels="True"
+        Title="{DynamicResource S.Options.Title}" Height="610" Width="800" MinWidth="680" MinHeight="460" 
+        Background="{DynamicResource Panel.Background}" Icon="/Resources/Logo.ico" 
+        SizeToContent="Width" WindowStartupLocation="CenterScreen" UseLayoutRounding="True" SnapsToDevicePixels="True"
         Loaded="Window_Loaded" Closing="Window_Closing">
 
     <Window.CommandBindings>
@@ -164,22 +165,22 @@
                                           SelectionChanged="AppThemeComboBox_SelectionChanged">
 
                                     <StackPanel Orientation="Horizontal" Tag="Light">
-                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="#FFFFFFFF" Width="20" Height="20" ToolTip="Input and elements">
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="#FFFFFFFF" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
                                             <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
                                         </Border>
-                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFFAFAFA" Width="20" Height="20" ToolTip="Background 1">
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFFAFAFA" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
                                             <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
                                         </Border>
-                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFF5F5F5" Width="20" Height="20" ToolTip="Background 2">
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFF5F5F5" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
                                             <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
                                         </Border>
-                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFF9F9FF" Width="20" Height="20" ToolTip="Background 3">
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFF9F9FF" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
                                             <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
                                         </Border>
-                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFFFFFFF" Width="20" Height="20" ToolTip="Hover">
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFFFFFFF" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
                                             <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
                                         </Border>
-                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FFEFEFEF" Width="20" Height="20" ToolTip="Pressed">
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FFEFEFEF" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
                                             <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
                                         </Border>
                                         <Label Content="{DynamicResource S.Options.App.Theme.Scheme.Light}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" 
@@ -187,22 +188,22 @@
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal" Tag="Medium">
-                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="#FFEDEDED" Width="20" Height="20" ToolTip="Input and elements">
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="#FFEDEDED" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
                                             <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
                                         </Border>
-                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFE3E3E3" Width="20" Height="20" ToolTip="Background 1">
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFE3E3E3" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
                                             <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
                                         </Border>
-                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFD6D6D6" Width="20" Height="20" ToolTip="Background 2">
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFD6D6D6" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
                                             <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
                                         </Border>
-                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFD7D7E4" Width="20" Height="20" ToolTip="Background 3">
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFD7D7E4" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
                                             <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
                                         </Border>
-                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFE8E8E8" Width="20" Height="20" ToolTip="Hover">
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFE8E8E8" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
                                             <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
                                         </Border>
-                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FFECECEC" Width="20" Height="20" ToolTip="Pressed">
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FFECECEC" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
                                             <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
                                         </Border>
                                         <Label Content="{DynamicResource S.Options.App.Theme.Scheme.Medium}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" 
@@ -210,22 +211,22 @@
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal" Tag="Dark">
-                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="#FF202020" Width="20" Height="20">
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="#FF202020" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
                                             <TextBlock Text="Aa" Foreground="#FFE8E8E8" HorizontalAlignment="Center"/>
                                         </Border>
-                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF262626" Width="20" Height="20">
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF262626" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
                                             <TextBlock Text="Aa" Foreground="#FFE8E8E8" HorizontalAlignment="Center"/>
                                         </Border>
-                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF2A2A2A" Width="20" Height="20">
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF2A2A2A" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
                                             <TextBlock Text="Aa" Foreground="#FFE8E8E8" HorizontalAlignment="Center"/>
                                         </Border>
-                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF323130" Width="20" Height="20">
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF323130" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
                                             <TextBlock Text="Aa" Foreground="#FFE8E8E8" HorizontalAlignment="Center"/>
                                         </Border>
-                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF323232" Width="20" Height="20">
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF323232" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
                                             <TextBlock Text="Aa" Foreground="#FFE8E8E8" HorizontalAlignment="Center"/>
                                         </Border>
-                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FF343434" Width="20" Height="20">
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FF343434" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
                                             <TextBlock Text="Aa" Foreground="#FFE8E8E8" HorizontalAlignment="Center"/>
                                         </Border>
                                         <Label Content="{DynamicResource S.Options.App.Theme.Scheme.Dark}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" 
@@ -233,22 +234,22 @@
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal" Tag="VeryDark">
-                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="#FF101010" Width="20" Height="20">
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="#FF101010" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
                                             <TextBlock Text="Aa" Foreground="#FF696969" HorizontalAlignment="Center"/>
                                         </Border>
-                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF161616" Width="20" Height="20">
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF161616" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
                                             <TextBlock Text="Aa" Foreground="#FF696969" HorizontalAlignment="Center"/>
                                         </Border>
-                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF1A1A1A" Width="20" Height="20">
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF1A1A1A" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
                                             <TextBlock Text="Aa" Foreground="#FF696969" HorizontalAlignment="Center"/>
                                         </Border>
-                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF222120" Width="20" Height="20">
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF222120" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
                                             <TextBlock Text="Aa" Foreground="#FF696969" HorizontalAlignment="Center"/>
                                         </Border>
-                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF222222" Width="20" Height="20">
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF222222" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
                                             <TextBlock Text="Aa" Foreground="#FF696969" HorizontalAlignment="Center"/>
                                         </Border>
-                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FF242424" Width="20" Height="20">
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FF242424" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
                                             <TextBlock Text="Aa" Foreground="#FF696969" HorizontalAlignment="Center"/>
                                         </Border>
                                         <Label Content="{DynamicResource S.Options.App.Theme.Scheme.VeryDark}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" 
@@ -955,9 +956,17 @@
                         </Grid.ColumnDefinitions>
 
                         <n:LabelSeparator Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{DynamicResource S.Options.Tasks.List}"/>
-                        <DataGrid Grid.Row="1" Grid.Column="0" Grid.RowSpan="6" x:Name="TasksDataGrid" Margin="10,5,5,5" MinHeight="60" SelectionMode="Single" SelectionUnit="FullRow"
+                        <DataGrid Grid.Row="1" Grid.Column="0" Grid.RowSpan="6" x:Name="TasksDataGrid" Margin="10,5,5,5" MinHeight="60" SelectionMode="Single" SelectionUnit="FullRow" CanUserSortColumns="False"
                                   MouseDoubleClick="TasksDataGrid_MouseDoubleClick" PreviewKeyDown="TasksDataGrid_PreviewKeyDown">
                             <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="{DynamicResource S.Options.Tasks.List.Enabled}" Width="Auto" MinWidth="50">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <n:ExtendedCheckBox IsChecked="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}" Focusable="False" Margin="3,1,0,1" HorizontalAlignment="Center"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                
                                 <DataGridTextColumn Header="{DynamicResource S.Options.Tasks.List.Task}" Width="Auto" MinWidth="110" IsReadOnly="True" Binding="{Binding Kind, UpdateSourceTrigger=PropertyChanged}"/>
                                 <DataGridTextColumn Header="{DynamicResource S.Options.Tasks.List.Details}" Width="*" IsReadOnly="True" Binding="{Binding Details, UpdateSourceTrigger=PropertyChanged}"/>
                             </DataGrid.Columns>
@@ -1155,6 +1164,9 @@
 
                             <n:ImageListBoxItem Image="{StaticResource Flag.Germany}" Tag="de" Content="German / Deutsch" Author="PeterK., Christoph Voigt, Michael Reukauff"
                                                 MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=de, Converter={StaticResource TagToSelection}}"/>
+
+                            <n:ImageListBoxItem Image="{StaticResource Flag.Hungary}" Tag="hu" Content="Hungarian / Magyar" Author="László Földes"
+                                                MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=hu, Converter={StaticResource TagToSelection}}"/>
 
                             <n:ImageListBoxItem Image="{StaticResource Flag.Italy}" Tag="it" Content="Italian / Italiano" Author="HispidaBytes, Michele Locati, Giovanni Rinaldin"
                                                 MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=it, Converter={StaticResource TagToSelection}}"/>

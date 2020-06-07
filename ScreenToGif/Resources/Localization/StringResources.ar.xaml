@@ -1067,7 +1067,7 @@
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">الارتباط</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">نسخ الارتباط الذي تم انشاؤه بواسطة خدمه التحميل في الحافظة.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">تنفيذ اوامر نشر الترميز.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">اكتب الاوامر التي سيتم تنفيذها بعد الترميز. &#x0d; لتنفيذ اوامر متعددة ، اكتب كل واحد على سطر مفصول. &#x0d; وحدات الماكرو: &#x0d; {p} = اخراج مسار الملف. &#x0d; {f} = اخراج مسار المجلد.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">اكتب الاوامر التي سيتم تنفيذها بعد الترميز. &#x0d; لتنفيذ اوامر متعددة ، اكتب كل واحد على سطر مفصول. &#x0d; وحدات الماكرو: &#x0d; {p} = اخراج مسار الملف. &#x0d; {f} = اخراج مسار المجلد. &#x0d; {u} = URL of the uploaded file.</s:String>
     
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">ملف</s:String>

@@ -942,7 +942,7 @@
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">Link</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">Kopierer upload link til udklipsholder.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Kør efterfølgende kommando.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Skriv kommando der udføres efter kodningen&#10;Flere kommandoer skrives på seperate linier&#10;Macroer:&#10;{p} = Resultatfilens placering.&#10;{f} = Resultatmappens placering.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Skriv kommando der udføres efter kodningen&#10;Flere kommandoer skrives på seperate linier&#10;Macroer:&#10;{p} = Resultatfilens placering.&#10;{f} = Resultatmappens placering.&#x0d;{u} = URL of the uploaded file.</s:String>
     
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">Fil</s:String>

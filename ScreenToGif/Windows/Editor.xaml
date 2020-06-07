@@ -2281,8 +2281,7 @@
                                         </Grid>
 
                                         <n:ExtendedCheckBox Grid.Row="4" x:Name="CopyFileCheckBox" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard}" Margin="10,3,3,3"
-                                                            IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=SaveToClipboard}" 
-                                                            Checked="SaveToClipboard_CheckedChanged"/>
+                                                            IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=SaveToClipboard}"/>
 
                                         <WrapPanel Grid.Row="5" Margin="20,0,0,0" Visibility="{Binding IsChecked, ElementName=CopyFileCheckBox, Converter={StaticResource Bool2Visibility}}">
                                             <n:ImageRadioButton x:Name="CopyFileRadioButton" ContentWidth="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.File}" 
@@ -2319,6 +2318,8 @@
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
 
                                         <n:ExtendedCheckBox Grid.Row="0" x:Name="SaveFileApngCheckBox" Text="{DynamicResource S.SaveAs.SaveOptions.PickFolder}" Margin="10,3,3,3"
@@ -2338,11 +2339,30 @@
                                                                 IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=SaveAsProjectTooApng, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                         </Grid>
 
-                                        <n:ExtendedCheckBox Grid.Row="2" x:Name="CopyFileApngCheckBox" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard}" Margin="10,3,3,3"
-                                                            IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=SaveToClipboardApng}" 
-                                                            Checked="SaveToClipboard_CheckedChanged"/>
+                                        <n:ExtendedCheckBox Grid.Row="2" x:Name="UploadFileApngCheckBox" Text="{DynamicResource S.SaveAs.SaveOptions.UploadFile}" Margin="10,3,3,3"
+                                                            IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=UploadFileApng, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                                        <WrapPanel Grid.Row="3" Margin="20,0,0,0" Visibility="{Binding IsChecked, ElementName=CopyFileApngCheckBox, Converter={StaticResource Bool2Visibility}}">
+                                        <Grid Grid.Row="3">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="30"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <ComboBox Grid.Column="0" Name="UploadApngComboBox" Margin="20,3,3,3" Height="23" SelectedValuePath="Tag"
+                                                      SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=LatestUploadServiceApng, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                      Visibility="{Binding IsChecked, ElementName=UploadFileApngCheckBox, Converter={StaticResource Bool2Visibility}}" ToolTip="{DynamicResource S.SaveAs.SaveOptions.UploadDestination}">
+                                                <ComboBoxItem Tag="{x:Static u:UploadService.None}" Content="{DynamicResource S.Options.Upload.Pick.Destination}"/>
+                                                <ComboBoxItem Tag="{x:Static u:UploadService.ImgurAnonymous}" Content="{DynamicResource S.Options.Upload.Imgur.Anonymous}"/>
+                                                <ComboBoxItem Tag="{x:Static u:UploadService.Imgur}" Content="Imgur"/>
+                                                <ComboBoxItem Tag="{x:Static u:UploadService.GfycatAnonymous}" Content="{DynamicResource S.Options.Upload.Gfycat.Anonymous}"/>
+                                                <ComboBoxItem Tag="{x:Static u:UploadService.Yandex}" Content="YandexDisk"/>
+                                            </ComboBox>
+                                        </Grid>
+                                        
+                                        <n:ExtendedCheckBox Grid.Row="4" x:Name="CopyFileApngCheckBox" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard}" Margin="10,3,3,3"
+                                                            IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=SaveToClipboardApng}"/>
+
+                                        <WrapPanel Grid.Row="5" Margin="20,0,0,0" Visibility="{Binding IsChecked, ElementName=CopyFileApngCheckBox, Converter={StaticResource Bool2Visibility}}">
                                             <n:ImageRadioButton x:Name="CopyFileApngRadioButton" ContentWidth="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.File}" 
                                                                 IsChecked="{Binding LatestCopyTypeApng, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.File}}"
                                                                 ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.File.Info}"/>
@@ -2354,12 +2374,16 @@
                                             <n:ImageRadioButton x:Name="CopyFilePathApngRadioButton" ContentWidth="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FilePath}" 
                                                                 IsChecked="{Binding LatestCopyTypeApng, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.FilePath}}"
                                                                 ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.FilePath.Info}"/>
+                                            <Separator Width="1"/>
+                                            <n:ImageRadioButton x:Name="CopyLinkApngRadioButton" ContentWidth="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.Link}"
+                                                                IsChecked="{Binding LatestCopyTypeApng, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CopyType.Link}}"
+                                                                ToolTip="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.Link.Info}"/>
                                         </WrapPanel>
 
-                                        <n:ExtendedCheckBox Grid.Row="4" x:Name="CustomCommandsApngCheckBox" Text="{DynamicResource S.SaveAs.SaveOptions.ExecuteCommands}" Margin="10,3,3,3"
+                                        <n:ExtendedCheckBox Grid.Row="6" x:Name="CustomCommandsApngCheckBox" Text="{DynamicResource S.SaveAs.SaveOptions.ExecuteCommands}" Margin="10,3,3,3"
                                                             IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=ExecuteCustomCommandsApng, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                                        <n:ExtendedTextBox Grid.Row="5" x:Name="CustomCommandsApngTextBox" MinHeight="23" Margin="20,3,3,3" VerticalContentAlignment="Top" TextWrapping="WrapWithOverflow" 
+                                        <n:ExtendedTextBox Grid.Row="7" x:Name="CustomCommandsApngTextBox" MinHeight="23" Margin="20,3,3,3" VerticalContentAlignment="Top" TextWrapping="WrapWithOverflow" 
                                                            AcceptsReturn="True" Text="{Binding Source={x:Static u:UserSettings.All}, Path=CustomCommandsApng, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                            Visibility="{Binding IsChecked, ElementName=CustomCommandsApngCheckBox, Converter={StaticResource Bool2Visibility}}"
                                                            ToolTip="{DynamicResource S.SaveAs.SaveOptions.ExecuteCommands.Info}"/>
@@ -2393,8 +2417,7 @@
                                         </Grid>
 
                                         <n:ExtendedCheckBox Grid.Row="2" x:Name="CopyFileVideoCheckBox" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard}" Margin="10,3,3,3"
-                                                            IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=SaveToClipboardVideo}" 
-                                                            Checked="SaveToClipboard_CheckedChanged"/>
+                                                            IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=SaveToClipboardVideo}"/>
 
                                         <WrapPanel Grid.Row="3" Margin="20,0,0,0" Visibility="{Binding IsChecked, ElementName=CopyFileVideoCheckBox, Converter={StaticResource Bool2Visibility}}">
                                             <n:ImageRadioButton x:Name="CopyFileVideoRadioButton" ContentWidth="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.File}" 
@@ -2441,8 +2464,7 @@
                                         </Grid>
 
                                         <n:ExtendedCheckBox Grid.Row="2" x:Name="CopyFileProjectCheckBox" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard}" Margin="10,3,3,3"
-                                                            IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=SaveToClipboardProject}" 
-                                                            Checked="SaveToClipboard_CheckedChanged"/>
+                                                            IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=SaveToClipboardProject}"/>
 
                                         <WrapPanel Grid.Row="3" Margin="20,0,0,0" Visibility="{Binding IsChecked, ElementName=CopyFileProjectCheckBox, Converter={StaticResource Bool2Visibility}}">
                                             <n:ImageRadioButton x:Name="CopyFileProjectRadioButton" ContentWidth="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.File}" 
@@ -2507,8 +2529,7 @@
                                         </Grid>
 
                                         <n:ExtendedCheckBox Grid.Row="2" x:Name="CopyFilePsdCheckBox" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard}" Margin="10,3,3,3"
-                                                            IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=SaveToClipboardPhotoshop}" 
-                                                            Checked="SaveToClipboard_CheckedChanged"/>
+                                                            IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=SaveToClipboardPhotoshop}"/>
 
                                         <WrapPanel Grid.Row="3" Margin="20,0,0,0" Visibility="{Binding IsChecked, ElementName=CopyFilePsdCheckBox, Converter={StaticResource Bool2Visibility}}">
                                             <n:ImageRadioButton x:Name="CopyFilePsdRadioButton" ContentWidth="0" Padding="0,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.File}" 
@@ -2798,11 +2819,11 @@
                                 <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource Resize.Dpi2}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                                 <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="DpiNumericUpDown" Minimum="72" Maximum="1000" Margin="10,5" MinWidth="70"/>
 
-                                <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource ImportVideo.Width}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.ImportVideo.Width}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                                 <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="WidthResizeNumericUpDown" Minimum="1" Maximum="5000" Margin="10,5" 
                                                  MinWidth="70" ValueChanged="WidthResizeIntegerUpDown_ValueChanged"/>
 
-                                <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource ImportVideo.Height}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.ImportVideo.Height}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                                 <n:IntegerUpDown Grid.Row="2" Grid.Column="1" x:Name="HeightResizeNumericUpDown" Minimum="1" Maximum="5000" Margin="10,5" 
                                                  MinWidth="70" ValueChanged="HeightResizeIntegerUpDown_ValueChanged"/>
 
@@ -2875,7 +2896,7 @@
                                     </n:IntegerUpDown.Maximum>
                                 </n:IntegerUpDown>
 
-                                <Label Grid.Row="3" Grid.Column="0" Content="{DynamicResource Crop.Right}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource Crop.Right}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                                 <n:IntegerUpDown Grid.Row="3" Grid.Column="1" x:Name="RightCropNumericUpDown" Minimum="10" Margin="10,3" 
                                                  MinWidth="70" ValueChanged="CropIntegerUpDown_ValueChanged">
                                     <n:IntegerUpDown.Maximum>
@@ -3811,6 +3832,8 @@
                                 </Grid.ColumnDefinitions>
 
                                 <!--Format(rectangle, circle, perforated circle), edit clicks? -->
+                                <!--Cursor highlight option, always on-->
+                                
                                 <!--<TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource Caption.Style}" VerticalAlignment="Center"/>
                                 <ComboBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="10,5" MinWidth="100" SelectedValuePath="FontStyle" 
                                           SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=KeyStrokesFontStyle}">
@@ -3914,7 +3937,7 @@
                                                  Converter={StaticResource DoubleTimesAHundredToIntConverter}, Mode=TwoWay, FallbackValue=70}"/>
                                 <TextBlock Grid.Row="0" Grid.Column="2" Text="%" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
 
-                                <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource ImportVideo.Scale}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.ImportVideo.Scale}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                                 <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="SizeWatermarkNumericUpDown" 
                                                  Minimum="1" Maximum="200" Margin="5" Width="70" HorizontalAlignment="Left"
                                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=WatermarkSize, 
@@ -4324,24 +4347,24 @@
                                                    Text="{Binding Source={x:Static u:UserSettings.All}, Path=ProgressFormat, Mode=TwoWay}"
                                                    Visibility="{Binding ElementName=ProgressFormatTextBlock, Path=Visibility}" TextChanged="CustomProgressTextBox_TextChanged">
                                     <n:ExtendedTextBox.ToolTip>
-                                        <n:HeaderedTooltip Header="Format" StaysOpen="True">
-                                            <Run Text="$ms = miliseconds"/>
+                                        <n:HeaderedTooltip Header="{DynamicResource S.Progress.Format.Header}" StaysOpen="True">
+                                            <Run Text="{DynamicResource S.Progress.Format.Miliseconds}"/>
                                             <LineBreak/>
-                                            <Run Text="$s = seconds"/>
+                                            <Run Text="{DynamicResource S.Progress.Format.Seconds}"/>
                                             <LineBreak/>
-                                            <Run Text="$m = minutes"/>
+                                            <Run Text="{DynamicResource S.Progress.Format.Minutes}"/>
                                             <LineBreak/>
-                                            <Run Text="$p = percentage"/>
+                                            <Run Text="{DynamicResource S.Progress.Format.Percentage}"/>
                                             <LineBreak/>
-                                            <Run Text="$f = frame number"/>
+                                            <Run Text="{DynamicResource S.Progress.Format.FrameNumber}"/>
                                             <LineBreak/>
                                             <LineBreak/>
-                                            <Run Text="Totals:" FontWeight="SemiBold"/>
+                                            <Run Text="{DynamicResource S.Progress.Format.Totals}" FontWeight="SemiBold"/>
                                             <LineBreak/>
                                             <Run Text="@ms, @s, @m, @p, @f"/>
                                             <LineBreak/>
                                             <LineBreak/>
-                                            <Run Text="Examples:" FontWeight="SemiBold"/>
+                                            <Run Text="{DynamicResource S.Progress.Format.Examples}" FontWeight="SemiBold"/>
                                             <LineBreak/>
                                             <Run Text="'$s/@s s' = 2/10 s"/>
                                             <LineBreak/>

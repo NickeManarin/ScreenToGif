@@ -1200,7 +1200,7 @@
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">鏈接</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">將上傳服務生成的鏈接複製到剪貼板</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">執行編碼後置指令</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">輸入在編碼後執行的指令。 &#10;若要執行多條指令，請在不同行內輸入不同指令，一行輸入一條。 &#10;宏:&#10;{p} = 輸出檔案路徑。 &#10;{f} = 輸出資料夾路徑。</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">輸入在編碼後執行的指令。 &#10;若要執行多條指令，請在不同行內輸入不同指令，一行輸入一條。 &#10;宏:&#10;{p} = 輸出檔案路徑。 &#10;{f} = 輸出資料夾路徑。&#x0d;{u} = URL of the uploaded file.</s:String>
     
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">檔案</s:String>

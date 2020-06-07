@@ -1142,7 +1142,7 @@
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">Collegamento</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">Copia negli appunti il collegamento generato dal servizio di upload</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Esegui i comandi di post-codifica.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Inserire i comandi da eseguire dopo la codifica.&#x0d;Scrivere un comando per riga per eseguire più comandi.&#x0d;Macro:&#x0d;{p} = Percorso del file di output.&#x0d;{f} = Percorso della cartella di output.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Inserire i comandi da eseguire dopo la codifica.&#x0d;Scrivere un comando per riga per eseguire più comandi.&#x0d;Macro:&#x0d;{p} = Percorso del file di output.&#x0d;{f} = Percorso della cartella di output.&#x0d;{u} = URL of the uploaded file.</s:String>
     
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">File</s:String>

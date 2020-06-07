@@ -191,6 +191,7 @@
     <s:String x:Key="S.Options.App.Theme.Scheme.Dark">Dark</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.VeryDark">Very Dark</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Custom">Custom</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Example">Example colors.</s:String>
     <s:String x:Key="S.Options.App.Tray">System tray icon</s:String>
     <s:String x:Key="S.Options.App.Tray.Show">Display the app on the system tray (notification area).</s:String>
     <s:String x:Key="S.Options.App.Tray.LeaveOpen">Keep the app open even if all windows are closed.</s:String>
@@ -292,6 +293,8 @@
     <s:String x:Key="S.Options.Tasks.List">List of automated tasks</s:String>
     <s:String x:Key="S.Options.Tasks.List.Task">Task</s:String>
     <s:String x:Key="S.Options.Tasks.List.Details">Details</s:String>
+    <s:String x:Key="S.Options.Tasks.List.Enabled">Enabled</s:String>
+    <s:String x:Key="S.Options.Tasks.Enable">Enable this task.</s:String>
     <s:String x:Key="S.Options.Tasks.SelectType">(Pick a task)</s:String>
     <s:String x:Key="S.Options.Tasks.Info">These tasks are executed sequentially from the top of the list to the bottom.&#10;It happens when you first open a project using the editor.</s:String>
   
@@ -406,6 +409,8 @@
     <s:String x:Key="S.Options.Upload.Imgur.Auth.Missing">In order to authorize this app, you need to provide the authorization token.</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Auth.Completed">Imgur authorization completed.</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Auth.Error">Imgur authorization failed. Try again in a few seconds or get a new token.</s:String>
+    <s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Header">It was not possible to authorize the app</s:String>
+    <s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Message">Check if you provided the correct token and if you have an internet connection.</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Refresh.None">In order to refresh the authorization for this app, you need to first finish the authorization process.</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.NotAuthorized">Not authorized.</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Expired">Authorization expired in {0}.</s:String>
@@ -512,6 +517,7 @@
     <s:String x:Key="S.Recorder.Screen">Screen</s:String>
     <s:String x:Key="S.Recorder.Accept">Accept</s:String>
     <s:String x:Key="S.Recorder.Retry">Retry</s:String>
+    <s:String x:Key="S.Recorder.Retry.Shortcut">Right-Click</s:String>
     <s:String x:Key="S.Recorder.CancelSelection">Cancel the selection (Esc)</s:String>
     <s:String x:Key="S.Recorder.SelectArea">Click and drag to select an area of this screen</s:String>
     <s:String x:Key="S.Recorder.SelectArea.Embedded">Click and drag to select an area</s:String>
@@ -549,6 +555,10 @@
     <!--Exception/Error viewers-->
     <s:String x:Key="S.ExceptionViewer.Title">Exception Viewer</s:String>
     <s:String x:Key="S.ExceptionViewer.OpenInner">Open Inner Exception</s:String>
+    <s:String x:Key="S.ExceptionViewer.Type">Exception type</s:String>
+    <s:String x:Key="S.ExceptionViewer.Message">Message</s:String>
+    <s:String x:Key="S.ExceptionViewer.Stack">Stack</s:String>
+    <s:String x:Key="S.ExceptionViewer.Source">Source</s:String>
     <s:String x:Key="S.ErrorDialog.Observation">Something wrong happened.</s:String>
     <s:String x:Key="S.ErrorDialog.Send">Send report</s:String>
 
@@ -652,6 +662,12 @@
     <s:String x:Key="S.Editor.Extras">Extras</s:String>
     <s:String x:Key="S.Editor.UpdateAvailable">A new update is available!</s:String>
     <s:String x:Key="S.Editor.UpdateAvailable.Info">Click here to read more about it.</s:String>
+    
+    <!--File dialogs (does not work with new line characters)-->
+    <s:String x:Key="S.Editor.File.All">All supported files</s:String>
+    <s:String x:Key="S.Editor.File.Image">Image</s:String>
+    <s:String x:Key="S.Editor.File.Video">Video</s:String>
+    <s:String x:Key="S.Editor.File.Project">ScreenToGif project</s:String>
     
     <!--Welcome-->
     <s:String x:Key="Welcome.New">Head over to "File > New" to start a new recording</s:String>
@@ -951,6 +967,9 @@
     
     <s:String x:Key="Clipboard.Entries">Clipboard Entries</s:String>
     <s:String x:Key="Clipboard.Entry">Clipboard Entry:</s:String>
+    <s:String x:Key="S.Clipboard.Entry.Image">{0} image</s:String>
+    <s:String x:Key="S.Clipboard.Entry.Images">{0} images</s:String>
+    <s:String x:Key="S.Clipboard.Entry.Frames">Frames: {0}</s:String>
     <s:String x:Key="Clipboard.Explore">Explore Content</s:String>
     <s:String x:Key="Clipboard.Remove">Remove</s:String>
     <s:String x:Key="Clipboard.Behavior">Paste Behavior</s:String>
@@ -1057,6 +1076,8 @@
     <s:String x:Key="S.Shapes.Shapes">Shapes</s:String>
     <s:String x:Key="S.Shapes.Shapes.Radius">Radius:</s:String>
     <s:String x:Key="S.Shapes.Shapes.Dashes">Dashes:</s:String>
+    <s:String x:Key="S.Shapes.Shapes.ResetRotatio">Reset rotation</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Remove">Remove</s:String>
     <s:String x:Key="S.Shapes.Fill">Fill</s:String>
 
     <s:String x:Key="S.MouseClicks">Mouse Clicks</s:String>
@@ -1094,6 +1115,14 @@
     <s:String x:Key="Progress.Precision.Custom">Custom</s:String>
     <s:String x:Key="Progress.Precision.ShowTotal">Show the total.</s:String>
     <s:String x:Key="Progress.Format">Format:</s:String>
+    <s:String x:Key="S.Progress.Format.Header">Format</s:String>
+    <s:String x:Key="S.Progress.Format.Miliseconds">$ms = miliseconds</s:String>
+    <s:String x:Key="S.Progress.Format.Seconds">$s = seconds</s:String>
+    <s:String x:Key="S.Progress.Format.Minutes">$m = minutes</s:String>
+    <s:String x:Key="S.Progress.Format.Percentage">$p = percentage</s:String>
+    <s:String x:Key="S.Progress.Format.FrameNumber">$f = frame number</s:String>
+    <s:String x:Key="S.Progress.Format.Totals">Totals:</s:String>
+    <s:String x:Key="S.Progress.Format.Examples">Examples:</s:String>
     <s:String x:Key="S.Progress.Format.Date">You can use the date and time format from .Net Framework.&#x0d;The specification is available in these two links below.</s:String>
     <s:String x:Key="S.Progress.Format.Date.Standard">Standard formats</s:String>
     <s:String x:Key="S.Progress.Format.Date.Custom">Custom formats</s:String>
@@ -1202,7 +1231,7 @@
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">Link</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">Copies the link generated by the upload service into the clipboard.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Execute post encoding commands.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Type commands to be executed after the encoding.&#x0d;To execute multiple commands, type each one on a separated line.&#x0d;Macros:&#x0d;{p} = Output file path.&#x0d;{f} = Output folder path.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Type commands to be executed after the encoding.&#x0d;To execute multiple commands, type each one on a separated line.&#x0d;Macros:&#x0d;{p} = Output file path.&#x0d;{f} = Output folder path.&#x0d;{u} = URL of the uploaded file.</s:String>
     
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">File</s:String>

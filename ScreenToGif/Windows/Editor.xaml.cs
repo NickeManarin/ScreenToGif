@@ -895,9 +895,9 @@ namespace ScreenToGif.Windows
                 AddExtension = true,
                 CheckFileExists = true,
                 Title = LocalizationHelper.Get("Editor.OpenMedia"),
-                Filter = "All supported files (*.apng, *.avi, *.bmp, *.gif, *.jpg, *.jpeg, *.mkv, *.mp4, *.png, *.webm, *.wmv)|*.apng;*.avi;*.bmp;*.gif;*.jpg;*.jpeg;*.mkv;*.mp4;*.png;*.webm;*.wmv|" +
-                         "Image (*.apng, *.bmp, *.gif, *.jpg, *.jpeg, *.png)|*.apng;*.bmp;*.gif;*.jpg;*.jpeg;*.png|" +
-                         "Video (*.avi, *.mkv, *.mp4, *.webm, *.wmv)|*.avi;*.mkv;*.mp4;*.webm;*.wmv",
+                Filter = $"{LocalizationHelper.Get("S.Editor.File.All")} (*.apng, *.avi, *.bmp, *.gif, *.jpg, *.jpeg, *.mkv, *.mp4, *.png, *.webm, *.wmv)|*.apng;*.avi;*.bmp;*.gif;*.jpg;*.jpeg;*.mkv;*.mp4;*.png;*.webm;*.wmv|" +
+                         $"{LocalizationHelper.Get("S.Editor.File.Image")} (*.apng, *.bmp, *.gif, *.jpg, *.jpeg, *.png)|*.apng;*.bmp;*.gif;*.jpg;*.jpeg;*.png|" +
+                         $"{LocalizationHelper.Get("S.Editor.File.Video")} (*.avi, *.mkv, *.mp4, *.webm, *.wmv)|*.avi;*.mkv;*.mp4;*.webm;*.wmv",
             };
 
             var result = ofd.ShowDialog();
@@ -1177,11 +1177,12 @@ namespace ScreenToGif.Windows
 
                 var result = sfd.ShowDialog();
 
-                if (!result.HasValue || !result.Value) return;
+                if (!result.HasValue || !result.Value) 
+                    return;
 
                 SetOutputFolder(Path.GetDirectoryName(sfd.FileName));
                 SetOutputFilename(Path.GetFileNameWithoutExtension(sfd.FileName));
-                UserSettings.All.OverwriteOnSave = FileExistsGrid.Visibility == Visibility.Visible;
+                SetOverwrite(File.Exists(sfd.FileName));
                 SetOutputExtension(Path.GetExtension(sfd.FileName));
 
                 //Converts to a relative path again.
@@ -1231,20 +1232,12 @@ namespace ScreenToGif.Windows
             //If no file will be saved, there's no need to verify.
             if (!GetPickLocation())
             {
+                FileExistsGrid.Visibility = Visibility.Collapsed;
                 StatusList.Remove(StatusType.Warning);
                 return;
             }
 
             _searchTimer?.Start();
-        }
-
-        private void SaveToClipboard_CheckedChanged(object sender, RoutedEventArgs e)
-        {
-            if (!IsLoaded)
-                return;
-
-            if (UserSettings.All.SaveToClipboard)
-                FileExistsGrid.Visibility = Visibility.Collapsed;
         }
 
         private void FileHyperlink_OnClick(object sender, RoutedEventArgs e)
@@ -1273,6 +1266,7 @@ namespace ScreenToGif.Windows
                 var overwrite = GetOverwriteOnSave();
                 var projectToo = GetSaveAsProjectToo();
                 var upload = GetUploadFile();
+                var uploadService = GetUploadService();
                 var saveToClipboard = GetSaveToClipboard();
                 var copyType = GetCopyType();
                 var executeCommands = GetExecuteCustomCommands();
@@ -1419,19 +1413,19 @@ namespace ScreenToGif.Windows
 
                 if (upload)
                 {
-                    if (UserSettings.All.LatestUploadService == UploadService.None)
+                    if (uploadService == UploadService.None)
                     {
                         StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Upload.None"));
                         return;
                     }
 
-                    if (UserSettings.All.LatestUploadService == UploadService.Imgur && !await Imgur.IsAuthorized())
+                    if (uploadService == UploadService.Imgur && !await Imgur.IsAuthorized())
                     {
                         StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Upload.NotAuthorized"));
                         return;
                     }
 
-                    if (UserSettings.All.LatestUploadService == UploadService.Yandex && !YandexDisk.IsAuthorized())
+                    if (uploadService == UploadService.Yandex && !YandexDisk.IsAuthorized())
                     {
                         StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Upload.NotAuthorized"));
                         return;
@@ -1471,7 +1465,7 @@ namespace ScreenToGif.Windows
                     CopyToClipboard = saveToClipboard,
                     CopyType = copyType,
                     Upload = upload,
-                    UploadDestination = UserSettings.All.LatestUploadService,
+                    UploadDestination = uploadService,
                     ExecuteCommands = executeCommands,
                     PostCommands = commands
                 };
@@ -1656,10 +1650,10 @@ namespace ScreenToGif.Windows
                 AddExtension = true,
                 CheckFileExists = true,
                 Title = LocalizationHelper.Get("Editor.OpenMedia"),
-                Filter = "All supported files (*.apng, *.avi, *.bmp, *.gif, *.jpg, *.jpeg, *.mkv, *.mp4, *.png, *.stg, *.webm, *.wmv, *.zip)|*.apng;*.avi;*.bmp;*.gif;*.jpg;*.jpeg;*.mkv;*.mp4;*.png;*.stg;*.webm;*.wmv;*.zip|" +
-                         "Image (*.apng, *.bmp, *.gif, *.jpg, *.jpeg, *.png)|*.apng;*.bmp;*.gif;*.jpg;*.jpeg;*.png|" +
-                         "Video (*.avi, *.mkv, *.mp4, *.webm, *.wmv)|*.avi;*.mkv;*.mp4;*.webm;*.wmv|" +
-                         "ScreenToGif Project (*.stg, *.zip) |*.stg;*.zip",
+                Filter = $"{LocalizationHelper.Get("S.Editor.File.All")} (*.apng, *.avi, *.bmp, *.gif, *.jpg, *.jpeg, *.mkv, *.mp4, *.png, *.stg, *.webm, *.wmv, *.zip)|*.apng;*.avi;*.bmp;*.gif;*.jpg;*.jpeg;*.mkv;*.mp4;*.png;*.stg;*.webm;*.wmv;*.zip|" +
+                         $"{LocalizationHelper.Get("S.Editor.File.Image")} (*.apng, *.bmp, *.gif, *.jpg, *.jpeg, *.png)|*.apng;*.bmp;*.gif;*.jpg;*.jpeg;*.png|" +
+                         $"{LocalizationHelper.Get("S.Editor.File.Video")} (*.avi, *.mkv, *.mp4, *.webm, *.wmv)|*.avi;*.mkv;*.mp4;*.webm;*.wmv|" +
+                         $"{LocalizationHelper.Get("S.Editor.File.Project")} (*.stg, *.zip) |*.stg;*.zip",
             };
 
             var result = ofd.ShowDialog();
@@ -1911,18 +1905,18 @@ namespace ScreenToGif.Windows
             #region Item
 
             var imageItem = new ImageListBoxItem();
-            imageItem.Tag = $"Frames: {string.Join(", ", selected.Select(x => x.FrameNumber))}";
+            imageItem.Tag = LocalizationHelper.GetWithFormat("S.Clipboard.Entry.Frames", "Frames: {0}", string.Join(", ", selected.Select(x => x.FrameNumber)));
             imageItem.Author = DateTime.Now.ToString("hh:mm:ss");
 
             if (list.Count > 1)
             {
                 imageItem.Image = FindResource("Vector.ImageStack") as Canvas;
-                imageItem.Content = $"{list.Count} Images";
+                imageItem.Content = LocalizationHelper.GetWithFormat("S.Clipboard.Entry.Images", "{0} images", list.Count);
             }
             else
             {
                 imageItem.Image = FindResource("Vector.Image") as Canvas;
-                imageItem.Content = $"{list.Count} Image";
+                imageItem.Content = LocalizationHelper.GetWithFormat("S.Clipboard.Entry.Image", "{0} image", list.Count);
             }
 
             #endregion
@@ -3272,7 +3266,7 @@ namespace ScreenToGif.Windows
                 AddExtension = true,
                 CheckFileExists = true,
                 Title = LocalizationHelper.Get("Editor.Watermark.Select", true),
-                Filter = "Image (*.bmp, *.jpg, *.jpeg, *.png)|*.bmp;*.jpg;*.jpeg;*.png",
+                Filter = $"{LocalizationHelper.Get("S.Editor.File.Image")} (*.bmp, *.jpg, *.jpeg, *.png)|*.bmp;*.jpg;*.jpeg;*.png",
             };
 
             var result = ofd.ShowDialog();
@@ -4091,7 +4085,8 @@ namespace ScreenToGif.Windows
                     Project.IsNew = false;
                     Project.Persist();
 
-                    var tasks = UserSettings.All.AutomatedTasksList?.Cast<DefaultTaskModel>().ToList() ?? new List<DefaultTaskModel>();
+                    //Get enabled tasks.
+                    var tasks = UserSettings.All.AutomatedTasksList?.Cast<DefaultTaskModel>().Where(w => w.IsEnabled).ToList() ?? new List<DefaultTaskModel>();
 
                     if (tasks.Any())
                     {
@@ -6033,6 +6028,33 @@ namespace ScreenToGif.Windows
             }
         }
 
+        private void SetOverwrite(bool overwrite)
+        {
+            switch (UserSettings.All.SaveType)
+            {
+                case Export.Gif:
+                    UserSettings.All.OverwriteOnSave = overwrite;
+                    break;
+                case Export.Apng:
+                    UserSettings.All.OverwriteOnSaveApng = overwrite;
+                    break;
+                case Export.Video:
+                    UserSettings.All.OverwriteOnSaveVideo = overwrite;
+                    break;
+                case Export.Images:
+                    UserSettings.All.OverwriteOnSaveImages = overwrite;
+                    break;
+                case Export.Project:
+                    UserSettings.All.OverwriteOnSaveProject = overwrite;
+                    break;
+                case Export.Photoshop:
+                    UserSettings.All.OverwriteOnSavePhotoshop = overwrite;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
         private bool GetPickLocation()
         {
             switch (UserSettings.All.SaveType)
@@ -6101,11 +6123,30 @@ namespace ScreenToGif.Windows
                 case Export.Gif:
                     return UserSettings.All.UploadFile;
                 case Export.Apng:
+                    return UserSettings.All.UploadFileApng;
                 case Export.Video:
                 case Export.Project:
                 case Export.Images:
                 case Export.Photoshop:
                     return false;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        private UploadService GetUploadService()
+        {
+            switch (UserSettings.All.SaveType)
+            {
+                case Export.Gif:
+                    return UserSettings.All.LatestUploadService;
+                case Export.Apng:
+                    return UserSettings.All.LatestUploadServiceApng;
+                case Export.Video:
+                case Export.Project:
+                case Export.Images:
+                case Export.Photoshop:
+                    return UploadService.None;
                 default:
                     throw new ArgumentOutOfRangeException();
             }

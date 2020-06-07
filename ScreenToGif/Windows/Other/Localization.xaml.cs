@@ -80,8 +80,11 @@ namespace ScreenToGif.Windows.Other
                 ResourceListBox.Items.Add(imageItem);
             }
 
-            ResourceListBox.SelectedIndex = ResourceListBox.Items.Count - 1;
-            ResourceListBox.ScrollIntoView(ResourceListBox.SelectedItem);
+            //Selects the last item on the list.
+            ResourceListBox.SelectedItem = ResourceListBox.Items.Cast<ImageListBoxItem>().LastOrDefault(w => w.IsEnabled);
+            
+            if (ResourceListBox.SelectedItem != null)
+                ResourceListBox.ScrollIntoView(ResourceListBox.SelectedItem);
 
             SaveButton.IsEnabled = true;
             RemoveButton.IsEnabled = true;

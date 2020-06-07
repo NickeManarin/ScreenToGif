@@ -938,7 +938,7 @@
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">Liên kết</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">Sao chép liên kết phát sinh bởi dịch vụ tải lên vào bộ nhớ đệm.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Thực thi gửi các lệnh mã hóa.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Viết các lệnh để thực thi sau khi mã hóa.&#x0d;Để thực thi nhiều lệnh, viết mỗi lệnh 1 dòng riêng.&#x0d;Các lệnh đơn:&#x0d;{p} = Đường dẫn tệp đầu ra.&#x0d;{f} = Đường dẫn thư mục đầu ra.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Viết các lệnh để thực thi sau khi mã hóa.&#x0d;Để thực thi nhiều lệnh, viết mỗi lệnh 1 dòng riêng.&#x0d;Các lệnh đơn:&#x0d;{p} = Đường dẫn tệp đầu ra.&#x0d;{f} = Đường dẫn thư mục đầu ra.&#x0d;{u} = URL of the uploaded file.</s:String>
     
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">Tệp</s:String>

@@ -1064,7 +1064,7 @@
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">링크</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">업로드된 파일의 링크를 클립보드에 복사합니다.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">인코딩 후 명령어 실행</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">인코딩 후 실행될 명령어를 입력하세요.&#x0d;다수의 명령어를 실행하려면 한 줄에 하나의 명령어를 입력하세요.&#x0d;사전 정의된 변수:&#x0d;{p} = 저장된 파일 경로.&#x0d;{f} = 저장 폴더 경로.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">인코딩 후 실행될 명령어를 입력하세요.&#x0d;다수의 명령어를 실행하려면 한 줄에 하나의 명령어를 입력하세요.&#x0d;사전 정의된 변수:&#x0d;{p} = 저장된 파일 경로.&#x0d;{f} = 저장 폴더 경로.&#x0d;{u} = URL of the uploaded file.</s:String>
     
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">파일</s:String>

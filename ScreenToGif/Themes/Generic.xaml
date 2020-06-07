@@ -2473,7 +2473,7 @@
                                            ToolTip="Enter" ToolTipService.Placement="Bottom" Height="30" Padding="4"/>
 
                             <n:ImageButton x:Name="RetryButton" Text="{DynamicResource S.Recorder.Retry}" ContentWidth="24" ContentHeight="24" Style="{DynamicResource Style.Button.Horizontal.White}" Content="{DynamicResource Vector.Synchronize}" 
-                                           ToolTip="Right-Click" ToolTipService.Placement="Bottom" Height="30" Padding="4"/>
+                                           ToolTip="{DynamicResource S.Recorder.Retry.Shortcut}" ToolTipService.Placement="Bottom" Height="30" Padding="4"/>
 
                             <n:ImageButton x:Name="CancelButton" Text="{DynamicResource S.Cancel}" ContentWidth="24" ContentHeight="24" Style="{DynamicResource Style.Button.Horizontal.White}" Content="{DynamicResource Vector.Cancel}" 
                                            ToolTip="Esc" ToolTipService.Placement="Bottom" Height="30" Padding="4"/>

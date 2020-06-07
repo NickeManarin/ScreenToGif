@@ -1060,7 +1060,7 @@
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">Länk</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">Kopierar länken som genereras av uppladdningstjänsten till urklippet.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Kör postkodningskommandon.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Skriv kommandon som ska köras efter kodningen.&#x0d;Om du vill köra flera kommandon skriver du var och en på en separat rad.&#x0d;Makron:&#x0d;{p} = Utdatafilens sökväg.&#x0d;{f} = Utdatamappens sökväg.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Skriv kommandon som ska köras efter kodningen.&#x0d;Om du vill köra flera kommandon skriver du var och en på en separat rad.&#x0d;Makron:&#x0d;{p} = Utdatafilens sökväg.&#x0d;{f} = Utdatamappens sökväg.&#x0d;{u} = URL of the uploaded file.</s:String>
     
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">Fil</s:String>

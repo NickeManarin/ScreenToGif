@@ -1148,7 +1148,7 @@
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">Link</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">Kopiert den durch Upload-Service erzeugten Link in Zwischenablage</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Weitere Kodierungs-Befehle ausführen</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Befehle eingeben, die nach dem Kodieren ausgeführt werden sollen.&#x0a;Falls mehrere Befehle ausgeführt werden sollen, bitte einen Befehl pro Zeile eingeben.&#x0a;Makros:&#x0a;{p} = Dateiausgabepfad&#x0a;{f} = Verzeichnisausgabepfad</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Befehle eingeben, die nach dem Kodieren ausgeführt werden sollen.&#x0a;Falls mehrere Befehle ausgeführt werden sollen, bitte einen Befehl pro Zeile eingeben.&#x0a;Makros:&#x0a;{p} = Dateiausgabepfad&#x0a;{f} = Verzeichnisausgabepfad&#x0d;{u} = URL of the uploaded file</s:String>
     
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">Speicherort und Dateiname</s:String>

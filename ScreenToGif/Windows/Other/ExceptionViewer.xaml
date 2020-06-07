@@ -25,11 +25,8 @@
             <Viewbox Grid.Column="0" Margin="4" Child="{StaticResource Vector.Error}" Opacity="{DynamicResource Element.Opacity}"/>
 
             <Label Grid.Column="1" x:Name="TypeLabel" Content="Exception Type" Margin="5" VerticalContentAlignment="Center" 
-                   FontFamily="Segoe UI Semilight" FontSize="16" Foreground="{DynamicResource Element.Foreground.Header}">
-                <Label.ToolTip>
-                    <ToolTip Content="Exception Type" Placement="Top" HorizontalOffset="-5"/>
-                </Label.ToolTip>
-            </Label>
+                   FontFamily="Segoe UI Semilight" FontSize="16" Foreground="{DynamicResource Element.Foreground.Header}"
+                   ToolTip="{DynamicResource S.ExceptionViewer.Type}" ToolTipService.Placement="Left" ToolTipService.HorizontalOffset="-5" ToolTipService.VerticalOffset="-5"/>
 
             <n:ImageButton Grid.Column="2" x:Name="InnerButton" Text="{DynamicResource S.ExceptionViewer.OpenInner}" Content="{StaticResource Vector.Synchronize}" MaxSize="20" 
                            Margin="3" Padding="2" Style="{StaticResource Style.Button.Horizontal}" IsEnabled="False" FontSize="12" FontFamily="Segoe UI Semilight" 
@@ -37,23 +34,14 @@
         </Grid>
 
         <TextBox x:Name="MessageTextBox" Margin="3" Grid.Row="1" TextWrapping="Wrap" MinHeight="50" FontSize="14" ScrollViewer.CanContentScroll="True" 
-                 VerticalScrollBarVisibility="Auto" FontFamily="Segoe UI Semibold" IsReadOnly="True" MaxHeight="150">
-            <TextBox.ToolTip>
-                <ToolTip Content="Message" Placement="Left" HorizontalOffset="-5" VerticalOffset="-5"/>
-            </TextBox.ToolTip>
-        </TextBox>
+                 VerticalScrollBarVisibility="Auto" FontFamily="Segoe UI Semibold" IsReadOnly="True" MaxHeight="150"
+                 ToolTip="{DynamicResource S.ExceptionViewer.Message}" ToolTipService.Placement="Left" ToolTipService.HorizontalOffset="-5" ToolTipService.VerticalOffset="-5"/>
 
-        <TextBox x:Name="StackTextBox" Margin="3" Grid.Row="2" TextWrapping="Wrap" MinHeight="23" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto" IsReadOnly="True">
-            <TextBox.ToolTip>
-                <ToolTip Content="Stack" Placement="Left" HorizontalOffset="-5" VerticalOffset="-5"/>
-            </TextBox.ToolTip>
-        </TextBox>
+        <TextBox x:Name="StackTextBox" Margin="3" Grid.Row="2" TextWrapping="Wrap" MinHeight="23" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto" IsReadOnly="True"
+                 ToolTip="{DynamicResource S.ExceptionViewer.Stack}" ToolTipService.Placement="Left" ToolTipService.HorizontalOffset="-5" ToolTipService.VerticalOffset="-5"/>
 
-        <TextBox x:Name="SourceTextBox" Margin="3" Grid.Row="3" TextWrapping="Wrap" MinHeight="23" FontSize="12" FontFamily="Segoe UI Semibold" IsReadOnly="True">
-            <TextBox.ToolTip>
-                <ToolTip Content="Source" Placement="Left" HorizontalOffset="-5" VerticalOffset="-5"/>
-            </TextBox.ToolTip>
-        </TextBox>
+        <TextBox x:Name="SourceTextBox" Margin="3" Grid.Row="3" TextWrapping="Wrap" MinHeight="23" FontSize="12" FontFamily="Segoe UI Semibold" IsReadOnly="True"
+                 ToolTip="{DynamicResource S.ExceptionViewer.Source}" ToolTipService.Placement="Left" ToolTipService.HorizontalOffset="-5" ToolTipService.VerticalOffset="-5"/>
 
         <Grid Grid.Row="4" Background="{DynamicResource Panel.Background.Level3}">
             <Grid.ColumnDefinitions>
@@ -61,7 +49,8 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <n:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource S.Ok}" Content="{StaticResource Vector.Ok}" ContentHeight="20" Padding="4,0" Margin="5" MinWidth="90" IsDefault="True" Click="DoneButton_Click"/>
+            <n:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource S.Ok}" Content="{StaticResource Vector.Ok}" 
+                           ContentHeight="20" Padding="4,0" Margin="5" MinWidth="90" IsDefault="True" Click="DoneButton_Click"/>
         </Grid>
     </Grid>
 </Window>
