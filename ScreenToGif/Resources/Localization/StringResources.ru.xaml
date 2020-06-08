@@ -1202,7 +1202,7 @@
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">Ссылка</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">Копировать полученную ссылку в буфер обмена.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Выполнить команды после кодирования.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Введите команды, которые будут выполняться после кодирования.&#x0d;Чтобы выполнить несколько команд, введите их в отдельной строке.&#x0d;Макросы:&#x0d;{p} = Путь файла вывода.&#x0d;{f} = Путь папки вывода.&#x0d;{u} = URL of the uploaded file.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Введите команды, которые будут выполняться после кодирования.&#x0d;Чтобы выполнить несколько команд, введите их в отдельной строке.&#x0d;Макросы:&#x0d;{p} = Путь файла вывода.&#x0d;{f } = Путь папки вывода.&#x0d;{u} = URL загрузки на хостинг.</s:String>
     
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">Файл</s:String>
