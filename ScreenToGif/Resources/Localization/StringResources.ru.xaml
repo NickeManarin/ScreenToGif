@@ -191,6 +191,7 @@
     <s:String x:Key="S.Options.App.Theme.Scheme.Dark">Темная</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.VeryDark">Очень темная</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Custom">Своя</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Example">Пример цвета.</s:String>
     <s:String x:Key="S.Options.App.Tray">Значок в системном трее</s:String>
     <s:String x:Key="S.Options.App.Tray.Show">Показывать значок в системном трее.</s:String>
     <s:String x:Key="S.Options.App.Tray.LeaveOpen">Не выгружать программу, даже если все окна закрыты.</s:String>
@@ -246,6 +247,8 @@
     <s:String x:Key="S.Options.Recorder.StepRecording.Info">(Каждый кадр должен быть записан вручную)</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate">Постоянная частота кадров.</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Постоянная задержка, не изменяется с задержкой записи)</s:String>
+    <s:String x:Key="S.Options.Recorder.RemoteImprovement">Улучшить производительность захвата на удаленном рабочем столе.</s:String>
+    <s:String x:Key="S.Options.Recorder.RemoteImprovement.Info">(Отключает многоуровневый захват окна)</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording">Включить асинхронную запись.</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(Это поможет снизить "лаги" интерфейса во время записи)</s:String>
     <s:String x:Key="S.Options.Recorder.HideTitleBar">Скрыть заголовок (тонкая рамка).</s:String>
@@ -290,6 +293,8 @@
     <s:String x:Key="S.Options.Tasks.List">Список авто-задач</s:String>
     <s:String x:Key="S.Options.Tasks.List.Task">Задача</s:String>
     <s:String x:Key="S.Options.Tasks.List.Details">Подробности</s:String>
+    <s:String x:Key="S.Options.Tasks.List.Enabled">Включен</s:String>
+    <s:String x:Key="S.Options.Tasks.Enable">Включить эту задачу.</s:String>
     <s:String x:Key="S.Options.Tasks.SelectType">(Выбор задачи)</s:String>
     <s:String x:Key="S.Options.Tasks.Info">Эти задачи выполняются последовательно сверху-вниз списка.&#10;Это происходит, при открытии проекта с помощью редактора.</s:String>
   
@@ -404,6 +409,8 @@
     <s:String x:Key="S.Options.Upload.Imgur.Auth.Missing">Чтобы авторизоваться, вам необходимо предоставить токен авторизации.</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Auth.Completed">Авторизация на Imgur завершена.</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Auth.Error">Ошибка авторизации на Imgur. Повторите попытку через несколько секунд или получите новый токен.</s:String>
+    <s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Header">Не удалось авторизовать приложение</s:String>
+    <s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Message">Проверьте, правильно ли вы указали токен и есть ли подключение к сети.</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Refresh.None">Чтобы обновить авторизацию, вам нужно сначала завершить процесс авторизации.</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.NotAuthorized">Не авторизован.</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Expired">Авторизация истекла в {0}.</s:String>
@@ -510,6 +517,7 @@
     <s:String x:Key="S.Recorder.Screen">Весь экран</s:String>
     <s:String x:Key="S.Recorder.Accept">Принять</s:String>
     <s:String x:Key="S.Recorder.Retry">Повторить</s:String>
+    <s:String x:Key="S.Recorder.Retry.Shortcut">ПКМ</s:String>
     <s:String x:Key="S.Recorder.CancelSelection">Отменить выбор (Esc)</s:String>
     <s:String x:Key="S.Recorder.SelectArea">Нажмите и тяните, для выбора региона.</s:String>
     <s:String x:Key="S.Recorder.SelectArea.Embedded">Нажмите и тяните, для выбора области экрана</s:String>
@@ -547,6 +555,10 @@
     <!--Exception/Error viewers-->
     <s:String x:Key="S.ExceptionViewer.Title">Просмотр ошибок</s:String>
     <s:String x:Key="S.ExceptionViewer.OpenInner">Открыть Inner Exceptions</s:String>
+    <s:String x:Key="S.ExceptionViewer.Type">Тип исключения</s:String>
+    <s:String x:Key="S.ExceptionViewer.Message">Сообщение</s:String>
+    <s:String x:Key="S.ExceptionViewer.Stack">Стек</s:String>
+    <s:String x:Key="S.ExceptionViewer.Source">Источник</s:String>
     <s:String x:Key="S.ErrorDialog.Observation">Что-то пошло не так.</s:String>
     <s:String x:Key="S.ErrorDialog.Send">Отправить отчет.</s:String>
 
@@ -650,6 +662,12 @@
     <s:String x:Key="S.Editor.Extras">Дополнительно</s:String>
     <s:String x:Key="S.Editor.UpdateAvailable">Доступно обновление!</s:String>
     <s:String x:Key="S.Editor.UpdateAvailable.Info">Нажмите здесь, чтобы узнать больше.</s:String>
+    
+    <!--File dialogs (does not work with new line characters)-->
+    <s:String x:Key="S.Editor.File.All">Все файлы</s:String>
+    <s:String x:Key="S.Editor.File.Image">Изображения</s:String>
+    <s:String x:Key="S.Editor.File.Video">Видео</s:String>
+    <s:String x:Key="S.Editor.File.Project">Проекты ScreenToGif</s:String>
     
     <!--Welcome-->
     <s:String x:Key="Welcome.New">Перейдите в "Файл > Создать запись" чтобы начать новую запись.</s:String>
@@ -949,6 +967,9 @@
     
     <s:String x:Key="Clipboard.Entries">Содержание буфера</s:String>
     <s:String x:Key="Clipboard.Entry">Запись в буфере:</s:String>
+    <s:String x:Key="S.Clipboard.Entry.Image">{0} изображение</s:String>
+    <s:String x:Key="S.Clipboard.Entry.Images">{0} изображений</s:String>
+    <s:String x:Key="S.Clipboard.Entry.Frames">Кадров: {0}</s:String>
     <s:String x:Key="Clipboard.Explore">Обзор содержимого</s:String>
     <s:String x:Key="Clipboard.Remove">Удалить</s:String>
     <s:String x:Key="Clipboard.Behavior">Режим вставки</s:String>
@@ -1055,6 +1076,8 @@
     <s:String x:Key="S.Shapes.Shapes">Фигуры</s:String>
     <s:String x:Key="S.Shapes.Shapes.Radius">Радиус:</s:String>
     <s:String x:Key="S.Shapes.Shapes.Dashes">Штрихи:</s:String>
+    <s:String x:Key="S.Shapes.Shapes.ResetRotatio">Сброс поворота</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Remove">Убрать</s:String>
     <s:String x:Key="S.Shapes.Fill">Заливка</s:String>
 
     <s:String x:Key="S.MouseClicks">Нажатия мыши</s:String>
@@ -1092,6 +1115,14 @@
     <s:String x:Key="Progress.Precision.Custom">Другое</s:String>
     <s:String x:Key="Progress.Precision.ShowTotal">Показать общее.</s:String>
     <s:String x:Key="Progress.Format">Формат:</s:String>
+    <s:String x:Key="S.Progress.Format.Header">Формат</s:String>
+    <s:String x:Key="S.Progress.Format.Miliseconds">$ms = миллисекунды</s:String>
+    <s:String x:Key="S.Progress.Format.Seconds">$s = секунды</s:String>
+    <s:String x:Key="S.Progress.Format.Minutes">$m = минуты</s:String>
+    <s:String x:Key="S.Progress.Format.Percentage">$p = проценты</s:String>
+    <s:String x:Key="S.Progress.Format.FrameNumber">$f = номера кадров</s:String>
+    <s:String x:Key="S.Progress.Format.Totals">Всего:</s:String>
+    <s:String x:Key="S.Progress.Format.Examples">Примеры:</s:String>
     <s:String x:Key="S.Progress.Format.Date">Вы можете использовать формат даты и времени из .Net Framework.&#x0d;Спецификация доступна по ссылкам ниже.</s:String>
     <s:String x:Key="S.Progress.Format.Date.Standard">Пресеты форматов</s:String>
     <s:String x:Key="S.Progress.Format.Date.Custom">Свои форматы</s:String>
@@ -1200,7 +1231,7 @@
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">Ссылка</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">Копировать полученную ссылку в буфер обмена.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Выполнить команды после кодирования.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Введите команды, которые будут выполняться после кодирования.&#x0d;Чтобы выполнить несколько команд, введите их в отдельной строке.&#x0d;Макросы:&#x0d;{p} = Путь файла вывода.&#x0d;{f} = Путь папки вывода.&#x0d;{u} = URL of the uploaded file.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Введите команды, которые будут выполняться после кодирования.&#x0d;Чтобы выполнить несколько команд, введите их в отдельной строке.&#x0d;Макросы:&#x0d;{p} = Путь файла вывода.&#x0d;{f} = Путь папки вывода.&#x0d;{u} = URL загрузки на хостинг.</s:String>
     
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">Файл</s:String>
