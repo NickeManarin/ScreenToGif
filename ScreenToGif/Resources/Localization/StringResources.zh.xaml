@@ -195,6 +195,7 @@
     <s:String x:Key="S.Options.App.Theme.Scheme.Dark">深色</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.VeryDark">非常暗</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Custom">自定义</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Example">示例颜色</s:String>
     <s:String x:Key="S.Options.App.Tray">系统托盘图标</s:String>
     <s:String x:Key="S.Options.App.Tray.Show">在系统托盘（通知区域）上显示应用程序</s:String>
     <s:String x:Key="S.Options.App.Tray.LeaveOpen">即使所有窗口关闭仍保持应用程序的打开状态</s:String>
@@ -250,6 +251,8 @@
     <s:String x:Key="S.Options.Recorder.StepRecording.Info">（您需要手动捕获每一帧）</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate">固定帧率</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">（恒定延迟，不会因为录制时卡顿变化）</s:String>
+    <s:String x:Key="S.Options.Recorder.RemoteImprovement">提高远程桌面连接上的捕获性能</s:String>
+    <s:String x:Key="S.Options.Recorder.RemoteImprovement.Info">（禁用分层窗口捕获）</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording">启用异步录制</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">（有助于减少录制时界面卡顿）</s:String>
     <s:String x:Key="S.Options.Recorder.HideTitleBar">隐藏标题栏（精简模式）</s:String>
@@ -294,6 +297,8 @@
     <s:String x:Key="S.Options.Tasks.List">自动化任务列表</s:String>
     <s:String x:Key="S.Options.Tasks.List.Task">任务</s:String>
     <s:String x:Key="S.Options.Tasks.List.Details">详细信息</s:String>
+    <s:String x:Key="S.Options.Tasks.List.Enabled">启用</s:String>
+    <s:String x:Key="S.Options.Tasks.Enable">启用此任务</s:String>
     <s:String x:Key="S.Options.Tasks.SelectType">（选择一个任务）</s:String>
     <s:String x:Key="S.Options.Tasks.Info">这些任务从列表顶部到底部顺序执行。
 当您第一次使用编辑器打开项目时会发生这种情况。</s:String>
@@ -372,7 +377,7 @@
     <s:String x:Key="S.Options.Storage.RemoveSettings">删除设置文件</s:String>
     <s:String x:Key="S.Options.Storage.OpenSettingsFolder">打开设置文件所在的文件夹。
 在按住 Ctrl 键的同时，单击打开文件（如果可能）。</s:String>
-    <s:String x:Key="S.Options.Storage.SettingsInfo">• 设置加载模式：默认 ◄ AppData ◄ 本地
+    <s:String x:Key="S.Options.Storage.SettingsInfo">• 设置加载模式：默认 ◄ AppData ◄ 本地。
 • 如果本地文件夹中没有设置文件，此应用将在 AppData 文件夹中进行搜索。
 • 如果没有设置文件，则使用默认值。
 • 如果没有本地设置，保存所有设置将到 AppData 设置文件中。</s:String>
@@ -415,6 +420,8 @@
     <s:String x:Key="S.Options.Upload.Imgur.Auth.Missing">为了授权此应用程序，您需要提供授权令牌凭证。</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Auth.Completed">Imgur 授权完成。</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Auth.Error">Imgur 授权失败。 几秒钟后重试或获取新的凭证。</s:String>
+    <s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Header">无法授权该应用</s:String>
+    <s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Message">检查您提供的令牌是否正确以及是否可以连接互联网。</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Refresh.None">为了刷新此应用程序的授权，您需要先完成授权过程。</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.NotAuthorized">未授权。</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Expired">授权已在{0}中过期。</s:String>
@@ -523,6 +530,7 @@
     <s:String x:Key="S.Recorder.Screen">屏幕</s:String>
     <s:String x:Key="S.Recorder.Accept">接受</s:String>
     <s:String x:Key="S.Recorder.Retry">重试</s:String>
+    <s:String x:Key="S.Recorder.Retry.Shortcut">右键点击</s:String>
     <s:String x:Key="S.Recorder.CancelSelection">取消选择 (Esc)</s:String>
     <s:String x:Key="S.Recorder.SelectArea">单击并拖动选择屏幕区域</s:String>
     <s:String x:Key="S.Recorder.SelectArea.Embedded">单击并拖动以选择一个区域</s:String>
@@ -562,6 +570,10 @@
     <!--Exception/Error viewers-->
     <s:String x:Key="S.ExceptionViewer.Title">异常查看器</s:String>
     <s:String x:Key="S.ExceptionViewer.OpenInner">打开内部异常</s:String>
+    <s:String x:Key="S.ExceptionViewer.Type">异常类型</s:String>
+    <s:String x:Key="S.ExceptionViewer.Message">信息</s:String>
+    <s:String x:Key="S.ExceptionViewer.Stack">堆栈</s:String>
+    <s:String x:Key="S.ExceptionViewer.Source">来源</s:String>
     <s:String x:Key="S.ErrorDialog.Observation">出现错误</s:String>
     <s:String x:Key="S.ErrorDialog.Send">发送报告</s:String>
 
@@ -667,6 +679,12 @@
     <s:String x:Key="S.Editor.Extras">附加</s:String>
     <s:String x:Key="S.Editor.UpdateAvailable">一个新的更新可用！</s:String>
     <s:String x:Key="S.Editor.UpdateAvailable.Info">单击此处以了解更多信息。</s:String>
+    
+    <!--File dialogs (does not work with new line characters)-->
+    <s:String x:Key="S.Editor.File.All">所有支持的文件</s:String>
+    <s:String x:Key="S.Editor.File.Image">图像</s:String>
+    <s:String x:Key="S.Editor.File.Video">视频</s:String>
+    <s:String x:Key="S.Editor.File.Project">ScreenToGif 项目</s:String>
     
     <!--Welcome-->
     <s:String x:Key="Welcome.New">转到“文件 > 新录制”来开始新录制</s:String>
@@ -973,6 +991,9 @@
     
     <s:String x:Key="Clipboard.Entries">剪贴板条目</s:String>
     <s:String x:Key="Clipboard.Entry">剪贴板条目：</s:String>
+    <s:String x:Key="S.Clipboard.Entry.Image">{0} 张图像</s:String>
+    <s:String x:Key="S.Clipboard.Entry.Images">{0} 张图像</s:String>
+    <s:String x:Key="S.Clipboard.Entry.Frames">帧: {0}</s:String>
     <s:String x:Key="Clipboard.Explore">浏览内容</s:String>
     <s:String x:Key="Clipboard.Remove">移除</s:String>
     <s:String x:Key="Clipboard.Behavior">粘贴行为</s:String>
@@ -1080,6 +1101,8 @@
     <s:String x:Key="S.Shapes.Shapes">形状</s:String>
     <s:String x:Key="S.Shapes.Shapes.Radius">半径：</s:String>
     <s:String x:Key="S.Shapes.Shapes.Dashes">破折号：</s:String>
+    <s:String x:Key="S.Shapes.Shapes.ResetRotatio">重置旋转</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Remove">移除</s:String>
     <s:String x:Key="S.Shapes.Fill">填充</s:String>
 
     <s:String x:Key="S.MouseClicks">鼠标点击</s:String>
@@ -1118,6 +1141,14 @@
     <s:String x:Key="Progress.Precision.Custom">自定义</s:String>
     <s:String x:Key="Progress.Precision.ShowTotal">显示总数</s:String>
     <s:String x:Key="Progress.Format">格式：</s:String>
+    <s:String x:Key="S.Progress.Format.Header">格式</s:String>
+    <s:String x:Key="S.Progress.Format.Miliseconds">$ms = 毫秒</s:String>
+    <s:String x:Key="S.Progress.Format.Seconds">$s = 秒</s:String>
+    <s:String x:Key="S.Progress.Format.Minutes">$m = 分钟</s:String>
+    <s:String x:Key="S.Progress.Format.Percentage">$p = 百分比</s:String>
+    <s:String x:Key="S.Progress.Format.FrameNumber">$f = 帧数</s:String>
+    <s:String x:Key="S.Progress.Format.Totals">总计：</s:String>
+    <s:String x:Key="S.Progress.Format.Examples">示例：</s:String>
     <s:String x:Key="S.Progress.Format.Date">您可以使用 .Net Framework 中的日期和时间格式。
 该规范可在下面的两个链接中找到。</s:String>
     <s:String x:Key="S.Progress.Format.Date.Standard">标准格式</s:String>
@@ -1233,7 +1264,8 @@
 若要执行多条命令，请在不同行内输入不同命令，一行输入一条。
 宏:
 {p} = 输出文件路径。
-{f} = 输出文件夹路径。&#x0d;{u} = URL of the uploaded file.</s:String>
+{f} = 输出文件夹路径。
+{u} = URL of the uploaded file.</s:String>
     
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">文件</s:String>
