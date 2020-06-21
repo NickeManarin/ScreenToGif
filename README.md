@@ -84,9 +84,6 @@ That's not why I'm sharing the source code, at all.
 <p align="center">
  <img align="center" alt="start up" src="https://www.screentogif.com/media/Startup.png" />
 </p>
-<p align="center">
- <img align="center" alt="editor" src="https://www.screentogif.com/media/Editor-Empty.png" />
- </p>
  <p align="center">
  <img align="center" alt="editor" src="https://www.screentogif.com/media/Editor.gif" />
  </p>
@@ -96,9 +93,6 @@ That's not why I'm sharing the source code, at all.
  <p align="center">
  <img align="center" alt="keystrokes" src="https://www.screentogif.com/media/Keys.gif" />
  </p>
- <p align="center">
- <img align="center" alt="face" src="https://www.screentogif.com/media/Face.gif" />
-</p>
 
 <h2>Mentions</h2>
 
