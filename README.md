@@ -1,6 +1,6 @@
 <p align="center">
 <a href="https://github.com/NickeManarin/ScreenToGif" target="_blank">
-<img align="center" alt="screen recorder" src="https://github.com/NickeManarin/ScreenToGif-Website/blob/master/img/ms-icon-150x150.png" />
+<img align="center" alt="screen recorder" src="https://www.screentogif.com/logos/ms-icon-144x144.png" />
 </a>
 </p>
 <p align="center">
