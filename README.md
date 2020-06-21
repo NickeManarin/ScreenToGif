@@ -98,19 +98,15 @@ That's not why I'm sharing the source code, at all.
 
 <table>
 	<tr>
-		<th>Image</th>
 		<th>Website</th>
 	<tr>
 	<tr>
-		<td><img align="center" alt="Chip pick" src="https://github.com/NickeManarin/ScreenToGif-Website/blob/master/img/Chip.png?raw=true"/></td>
 		<td><a href="http://www.chip.de/downloads/Screen-To-Gif_65993193.html">Chip</a></td>
 	</tr>
 	<tr>
-		<td></td>
 		<td><a href="http://www.softpedia.com/get/Multimedia/Graphic/Graphic-Others/Screen-to-Gif.shtml">Softpedia</a></td>
 	</tr>
 	<tr>
-		<td></td>
 		<td><a href="https://www.portablefreeware.com/index.php?id=2895">PortableFreeware</a></td>
 	</tr>
 	
