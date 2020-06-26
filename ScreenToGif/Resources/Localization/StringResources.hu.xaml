@@ -20,7 +20,7 @@
     <s:String x:Key="S.Description">Leírás</s:String>
     <s:String x:Key="S.SelectColor">Kattintson ide a szín kiválasztásához.</s:String>
     <s:String x:Key="Frame">Képkocka</s:String>
-    <!--<s:String x:Key="Suppress">Suppress</s:String>-->
+    <s:String x:Key="Suppress">Elrejt</s:String>
     <s:String x:Key="Preview">Előnézet</s:String>
     
     <!--Warning messages-->
@@ -123,7 +123,7 @@
     <s:String x:Key="S.StartUp.Editor">Szerkesztő</s:String>
     <s:String x:Key="S.StartUp.Editor.Tooltip">Megnyitja a szerkesztő ablakot, az alkalmazás központi pontját, ahol új felvételt indíthat és szerkeszthet.</s:String>
     <s:String x:Key="S.StartUp.Options">Beállítások</s:String>
-    <s:String x:Key="S.StartUp.NewRelease">Új kiadás  érhető el • {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">Új kiadás érhető el • {0}</s:String>
     <s:String x:Key="S.StartUp.NewRelease.Tooltip">Letölti a ScreenToGif legújabb verzióját.</s:String>
 
     <!--Updater-->
@@ -191,6 +191,7 @@
     <s:String x:Key="S.Options.App.Theme.Scheme.Dark">Sötét</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.VeryDark">Nagyon sötét</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Custom">Egyéni</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Example">Példa színek.</s:String>
     <s:String x:Key="S.Options.App.Tray">Tálcaikon</s:String>
     <s:String x:Key="S.Options.App.Tray.Show">Az alkalmazás megjelenítése a tálcán (értesítési terület).</s:String>
     <s:String x:Key="S.Options.App.Tray.LeaveOpen">Tartsa megnyitva az alkalmazást, még akkor is, ha az összes ablak be van zárva.</s:String>
@@ -292,6 +293,8 @@
     <s:String x:Key="S.Options.Tasks.List">Automatizált feladatok listája</s:String>
     <s:String x:Key="S.Options.Tasks.List.Task">Feladat</s:String>
     <s:String x:Key="S.Options.Tasks.List.Details">Részletek</s:String>
+    <s:String x:Key="S.Options.Tasks.List.Enabled">Engedélyezve</s:String>
+    <s:String x:Key="S.Options.Tasks.Enable">Engedélyezze ezt a feladatot.</s:String>
     <s:String x:Key="S.Options.Tasks.SelectType">(Válasszon ki egy feladatot)</s:String>
     <s:String x:Key="S.Options.Tasks.Info">Ezeket a feladatokat a program egymás után hajtja végre a lista tetejétől az aljáig.&#x0d;Ez akkor történik, amikor először nyit meg egy projektet a szerkesztő használatával.</s:String>
   
@@ -310,7 +313,7 @@
     <s:String x:Key="S.Options.Shortcuts.Global.Exit">Kilépés:</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.Exit.Info">(Bezárja az összes ablakot, és eltávolítja az alkalmazást a tálcáról)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders">Felvevők</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause">Start / Szünet</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause">Indítás / Szünet</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause.Info">(Elindítja vagy szünetelteti a felvételt. Pillanatképek készítésénél használt, ha a pillanatkép mód aktiválva van)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Stop">Megállít:</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Stop.Info">(Leállítja a felvételt, és megnyitja a szerkesztőt)</s:String>
@@ -406,6 +409,8 @@
     <s:String x:Key="S.Options.Upload.Imgur.Auth.Missing">Az alkalmazás engedélyezéséhez meg kell adnia az engedélyezési tokent.</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Auth.Completed">Az Imgur engedélyezés befejeződött.</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Auth.Error">Az Imgur engedélyezés nem sikerült. Próbálkozzon újra néhány másodpercen belül, vagy szerezzen be egy új tokent.</s:String>
+    <s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Header">Nem lehetett engedélyezni az alkalmazást</s:String>
+    <s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Message">Ellenőrizze, hogy a megfelelő tokent adta-e meg, és van-e internetkapcsolata.</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Refresh.None">Az alkalmazás engedélyezésének frissítéséhez először be kell fejeznie az engedélyezési folyamatot.</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.NotAuthorized">Nem engedélyezett.</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Expired">Az engedély lejárt {0}.</s:String>
@@ -431,7 +436,7 @@
     <s:String x:Key="S.Options.Extras.GifskiLocation">Gifski helye</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.Select">Válassza ki a Gifski könyvtár helyét</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.Invalid">A Gifski könyvtár elérési útja egy vagy több érvénytelen karaktert tartalmaz. Válasszon érvényes helyet a könyvtárhoz.</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation">SharpDx mappa (SharpDX.dll, SharpDX.Direct3D11.dll and SharpDX.DXGI.dll)</s:String>
+    <s:String x:Key="S.Options.Extras.SharpDxLocation">SharpDx mappa (SharpDX.dll, SharpDX.Direct3D11.dll és SharpDX.DXGI.dll)</s:String>
     <s:String x:Key="S.Options.Extras.SharpDxLocation.Select">A SharpDx-könyvtárak helyének kiválasztása</s:String>
     <s:String x:Key="S.Options.Extras.SharpDxLocation.Invalid">A SharpDx-tárak elérési útja egy vagy több érvénytelen karaktert tartalmaz. Jelöljön ki egy érvényes mappát ezekhez a könyvtárakhoz.</s:String>
     <s:String x:Key="S.Options.Extras.License.Ffmpeg">FFmpeg licenc</s:String>
@@ -512,6 +517,7 @@
     <s:String x:Key="S.Recorder.Screen">Képernyő</s:String>
     <s:String x:Key="S.Recorder.Accept">Elfogad</s:String>
     <s:String x:Key="S.Recorder.Retry">Újra</s:String>
+    <s:String x:Key="S.Recorder.Retry.Shortcut">Jobb klikk</s:String>
     <s:String x:Key="S.Recorder.CancelSelection">A kijelölés megszakítása (Esc)</s:String>
     <s:String x:Key="S.Recorder.SelectArea">Kattintással és húzással jelölje ki a képernyő egy területét</s:String>
     <s:String x:Key="S.Recorder.SelectArea.Embedded">Kattintással és húzással jelöljön ki egy területet</s:String>
@@ -549,6 +555,10 @@
     <!--Exception/Error viewers-->
     <s:String x:Key="S.ExceptionViewer.Title">Kivételmegjelenítő</s:String>
     <s:String x:Key="S.ExceptionViewer.OpenInner">Belső kivétel megnyitása</s:String>
+    <s:String x:Key="S.ExceptionViewer.Type">Kivétel típusa</s:String>
+    <s:String x:Key="S.ExceptionViewer.Message">Üzenet</s:String>
+    <s:String x:Key="S.ExceptionViewer.Stack">Verem</s:String>
+    <s:String x:Key="S.ExceptionViewer.Source">Forrás</s:String>
     <s:String x:Key="S.ErrorDialog.Observation">Valami rossz történt.</s:String>
     <s:String x:Key="S.ErrorDialog.Send">Jelentés küldése</s:String>
 
@@ -566,7 +576,7 @@
     <s:String x:Key="S.InsertFrames.Info">Mindkét oldalnak azonos méretűnek kell lennie, ez az ablak lehetővé teszi a kép és a vászon áthelyezését és átméretezését. Kattintson a kijelöléshez és átméretezéshez.</s:String>
     <s:String x:Key="S.InsertFrames.CanvasSize">Vászon mérete:</s:String>
     <s:String x:Key="S.InsertFrames.FitCanvas">Kép igazítása a vásznon</s:String>
-    <s:String x:Key="S.InsertFrames.FitCanvas.Info">Átméretezi a vásznat, hogy az mindkét kép beleférjen (a bal felső sarokból).</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas.Info">Átméretezi a vásznat, hogy mindkét kép beleférjen (a bal felső sarokból).</s:String>
     <s:String x:Key="S.InsertFrames.DifferentSizes">Különbség van a képkockaméretek között. Ezt meg kell oldania a képkockák beszúrása előtt.</s:String>
     <s:String x:Key="S.InsertFrames.InsertedFrames">Új képkocka</s:String>
     <s:String x:Key="S.InsertFrames.CurrentFrames">Aktuális képkocka</s:String>
@@ -652,6 +662,12 @@
     <s:String x:Key="S.Editor.Extras">Extrák</s:String>
     <s:String x:Key="S.Editor.UpdateAvailable">Egy új frissítés érhető el!</s:String>
     <s:String x:Key="S.Editor.UpdateAvailable.Info">Kattintson ide, hogy többet olvashasson róla.</s:String>
+    
+    <!--File dialogs (does not work with new line characters)-->
+    <s:String x:Key="S.Editor.File.All">Minden támogatott fájl</s:String>
+    <s:String x:Key="S.Editor.File.Image">Kép</s:String>
+    <s:String x:Key="S.Editor.File.Video">Videó</s:String>
+    <s:String x:Key="S.Editor.File.Project">ScreenToGif projekt</s:String>
     
     <!--Welcome-->
     <s:String x:Key="Welcome.New">Új felvétel indításához menjen a "Fájl – Új" részhez</s:String>
@@ -934,7 +950,7 @@
     <!--Action Grid-->
     <s:String x:Key="Action.Hide">Elrejt</s:String>
     <s:String x:Key="Action.Apply">Alkalmaz</s:String>
-    <s:String x:Key="Action.Open">Megnyit</s:String>
+    <s:String x:Key="Action.Open">Megnyitás</s:String>
     <s:String x:Key="Action.Save">Ment</s:String>
     <s:String x:Key="Action.Cancel">Mégse</s:String>
     <s:String x:Key="Size">Méret</s:String>
@@ -951,6 +967,9 @@
     
     <s:String x:Key="Clipboard.Entries">Vágólap bejegyzések</s:String>
     <s:String x:Key="Clipboard.Entry">Vágólap bejegyzés:</s:String>
+    <s:String x:Key="S.Clipboard.Entry.Image">{0} kép</s:String>
+    <s:String x:Key="S.Clipboard.Entry.Images">{0} kép</s:String>
+    <s:String x:Key="S.Clipboard.Entry.Frames">Képkockák: {0}</s:String>
     <s:String x:Key="Clipboard.Explore">Tartalom felfedezése</s:String>
     <s:String x:Key="Clipboard.Remove">Eltávolít</s:String>
     <s:String x:Key="Clipboard.Behavior">Beillesztés viselkedése</s:String>
@@ -965,7 +984,7 @@
     
     <s:String x:Key="Crop.Points">Pontok</s:String>
     <s:String x:Key="Crop.Top">Fent:</s:String>
-    <s:String x:Key="Crop.Left">Bal:</s:String>
+    <s:String x:Key="Crop.Left">Balra:</s:String>
     <s:String x:Key="Crop.Bottom">Lent:</s:String>
     <s:String x:Key="Crop.Right">Jobbra:</s:String>
     
@@ -1057,6 +1076,8 @@
     <s:String x:Key="S.Shapes.Shapes">Alakzatok</s:String>
     <s:String x:Key="S.Shapes.Shapes.Radius">Lekerekítés:</s:String>
     <!--<s:String x:Key="S.Shapes.Shapes.Dashes">Dashes:</s:String>-->
+    <s:String x:Key="S.Shapes.Shapes.ResetRotatio">Forgatás visszaállítása</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Remove">Eltávolítás</s:String>
     <s:String x:Key="S.Shapes.Fill">Kitöltés</s:String>
 
     <s:String x:Key="S.MouseClicks">Egérkattintások</s:String>
@@ -1094,6 +1115,14 @@
     <s:String x:Key="Progress.Precision.Custom">Egyéni</s:String>
     <s:String x:Key="Progress.Precision.ShowTotal">Az összeg megjelenítése.</s:String>
     <s:String x:Key="Progress.Format">Formátum:</s:String>
+    <s:String x:Key="S.Progress.Format.Header">Formátum</s:String>
+    <s:String x:Key="S.Progress.Format.Miliseconds">$ms = ezredmásodperc</s:String>
+    <s:String x:Key="S.Progress.Format.Seconds">$s = másodperc</s:String>
+    <s:String x:Key="S.Progress.Format.Minutes">$m = perc</s:String>
+    <s:String x:Key="S.Progress.Format.Percentage">$p = százalék</s:String>
+    <s:String x:Key="S.Progress.Format.FrameNumber">$f = képkockaszám </s:String>
+    <s:String x:Key="S.Progress.Format.Totals">Végösszegek:</s:String>
+    <s:String x:Key="S.Progress.Format.Examples">Példák:</s:String>
     <s:String x:Key="S.Progress.Format.Date">Használhatja a .Net Framework dátum és idő formátumát.&#x0d;A specifikáció az alábbi két hivatkozásban érhető el.</s:String>
     <s:String x:Key="S.Progress.Format.Date.Standard">Szabványos formátumok</s:String>
     <s:String x:Key="S.Progress.Format.Date.Custom">Egyéni formátumok</s:String>
@@ -1202,7 +1231,7 @@
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">Link</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">A feltöltési szolgáltatás által létrehozott hivatkozást a vágólapra másolja.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Kódolás utáni parancsok végrehajtása</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Írja be a kódolás után végrehajtandó parancsokat.&#x0d;Több parancs végrehajtásához írja be mindegyiket egy különálló sorba.&#x0d;Makrók:&#x0d;{p} = Kimeneti fájl elérési útja.&#x0d;{f} = Kimeneti mappa elérési útja.&#x0d;{u} = URL of the uploaded file.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Írja be a kódolás után végrehajtandó parancsokat.&#x0d;Több parancs végrehajtásához írja be mindegyiket egy különálló sorba.&#x0d;Makrók:&#x0d;{p} = Kimeneti fájl elérési útja.&#x0d;{f} = Kimeneti mappa elérési útja.&#x0d;{u} = A feltöltött fájl URL-címe.</s:String>
     
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">Fájl</s:String>
