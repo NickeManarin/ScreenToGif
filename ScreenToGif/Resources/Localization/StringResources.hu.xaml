@@ -19,9 +19,18 @@
     <s:String x:Key="S.Title">Cím</s:String>
     <s:String x:Key="S.Description">Leírás</s:String>
     <s:String x:Key="S.SelectColor">Kattintson ide a szín kiválasztásához.</s:String>
-    <s:String x:Key="S.InsertFrames.Frame">Képkocka</s:String>
     <s:String x:Key="S.Suppress">Elrejt</s:String>
     <s:String x:Key="S.Preview">Előnézet</s:String>
+    <s:String x:Key="S.Size">Méret</s:String>
+    <s:String x:Key="S.Background">Háttér</s:String>
+    <s:String x:Key="S.Color">Szín:</s:String>
+    <s:String x:Key="S.Delay">Késleltetés</s:String>
+    <s:String x:Key="S.DelayMs">Késleltetés:</s:String>
+    <s:String x:Key="S.ValueMs">Érték -+:</s:String>
+    <s:String x:Key="S.ScaleValue">Méretezési érték:</s:String>
+    <s:String x:Key="S.Margin">Margó:</s:String>
+    <s:String x:Key="S.Padding">Kitöltés:</s:String>
+    <s:String x:Key="S.MinHeight">Minimális magasság:</s:String>
     
     <!--Warning messages-->
     <s:String x:Key="S.Crash">Ó ne, az alkalmazás összeomlott :(</s:String>
@@ -223,6 +232,20 @@
     <s:String x:Key="S.Options.Recorder.Interface">Felület</s:String>
     <s:String x:Key="S.Options.Recorder.Interface.Old">Régi</s:String>
     <s:String x:Key="S.Options.Recorder.Interface.New">Új</s:String>
+    
+    <!--<s:String x:Key="S.Options.Recorder.Frequency">Capture frequency</s:String>-->
+    <!--<s:String x:Key="S.Options.Recorder.Frequency.Manual">Manual</s:String>-->
+    <!--<s:String x:Key="S.Options.Recorder.Frequency.Manual.Info">Each frame will be manually captured by you, by pressing the capture button or equivalent keyboard shortcut.</s:String>-->
+    <!--<s:String x:Key="S.Options.Recorder.Frequency.Second">Per second</s:String>-->
+    <!--<s:String x:Key="S.Options.Recorder.Frequency.Second.Info">Frames will be captured in a 'per second' basis,&#10;given the framerate denominator set on the recorder screen.</s:String>-->
+    <!--<s:String x:Key="S.Options.Recorder.Frequency.Minute">Per minute</s:String>-->
+    <!--<s:String x:Key="S.Options.Recorder.Frequency.Minute.Info">Frames will be captured in a 'per minute' basis (timelapse),&#10;given the framerate denominator set on the recorder screen.</s:String>-->
+    <!--<s:String x:Key="S.Options.Recorder.Frequency.Hour">Per hour</s:String>-->
+    <!--<s:String x:Key="S.Options.Recorder.Frequency.Hour.Info">Frames will be captured in a 'per hour' basis (timelapse),&#10;given the framerate denominator set on the recorder screen.</s:String>-->
+    <!--<s:String x:Key="S.Options.Recorder.Frequency.Playback">Playback delay:</s:String>-->
+    <!--<s:String x:Key="S.Options.Recorder.Frequency.Playback.Info">(In ms, each captured frame will be set to this delay)</s:String>-->
+    <!--<s:String x:Key="S.Options.Recorder.Frequency.Interval">Each frame will be captured in interval of {0}.</s:String>-->
+    
     <s:String x:Key="S.Options.Recorder.Mode">Rögzítési mód</s:String>
     <s:String x:Key="S.Options.Recorder.Bitblt.Info">Használja a régebbi rögzítési módszert, amely lassabb, és nem működik a játékok rögzítésében,&#x0d;de nem igényel további beépülő modulokat.</s:String>
     <s:String x:Key="S.Options.Recorder.DirectX.Info">Használja a Desktop Duplication API rögzítési módszerét, amely gyorsabb és&#x0d;képes teljes képernyős játékokat rögzíteni, de ehhez SharpDx beépülő modul és Windows 8 vagy újabb szükséges.</s:String>
@@ -243,8 +266,6 @@
     <s:String x:Key="S.Options.Recorder.SelectCursorColor">A kurzor színének kiválasztása</s:String>
     <s:String x:Key="S.Options.Recorder.PreStart">Használjon indítás előtti visszaszámlálást.</s:String>
     <s:String x:Key="S.Options.Recorder.PreStart.Info">(Másodpercben, várakozás a rögzítés megkezdése előtt)</s:String>
-    <s:String x:Key="S.Options.Recorder.StepRecording">Pillanatkép-mód engedélyezése.</s:String>
-    <s:String x:Key="S.Options.Recorder.StepRecording.Info">(Minden egyes képkockát Ön rögzít manuálisan)</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate">Rögzített képkockasebesség.</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Állandó késleltetés, amely nem változik a felvételi késéssel)</s:String>
     <s:String x:Key="S.Options.Recorder.RemoteImprovement">A rögzítési teljesítmény javítása távoli asztali kapcsolaton.</s:String>
@@ -276,6 +297,7 @@
     <s:String x:Key="S.Options.Editor.Previewer.BaseColor">Alapszín</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.EvenColor">Páros szín</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.OddColor">Páratlan szín</s:String>
+    <!--<s:String x:Key="S.Options.Editor.Interface.DisplayEncoder">Display the encodings in a separated window.</s:String>-->
     <s:String x:Key="S.Options.Editor.Interface.ExtendChrome">A címsor kiterjesztése (chrome ablak)</s:String>
     <s:String x:Key="S.Options.Editor.Interface.AutomaticallySizeOnContent">Az ablak méretének automatikus beállítása a képkocka méretének megfelelően, közvetlenül a betöltés után.</s:String>
     <s:String x:Key="S.Options.Editor.Interface.AutomaticallyFitImage">A képkocka nagyításának automatikus beállítása az ablak méretének megfelelően, közvetlenül a betöltés után.</s:String>
@@ -432,9 +454,11 @@
     <s:String x:Key="S.Options.Extras.DownloadRestriction">A Microsoft Store által terjesztett alkalmazások nem tölthetnek le más alkalmazásokat. Manuálisan kell letöltenie.</s:String>
     <s:String x:Key="S.Options.Extras.FfmpegLocation">FFmpeg helye</s:String>
     <s:String x:Key="S.Options.Extras.FfmpegLocation.Select">Válassza ki az FFmpeg végrehajtható fájl helyét</s:String>
+    <!--<s:String x:Key="S.Options.Extras.FfmpegLocation.File">FFmpeg executable</s:String>-->
     <s:String x:Key="S.Options.Extras.FfmpegLocation.Invalid">Az FFMpeg végrehajtható fájl elérési útja egy vagy több érvénytelen karaktert tartalmaz. Válasszon érvényes helyet a végrehajtható fájlhoz.</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation">Gifski helye</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.Select">Válassza ki a Gifski könyvtár helyét</s:String>
+    <!--<s:String x:Key="S.Options.Extras.GifskiLocation.File">Gifski library</s:String>-->
     <s:String x:Key="S.Options.Extras.GifskiLocation.Invalid">A Gifski könyvtár elérési útja egy vagy több érvénytelen karaktert tartalmaz. Válasszon érvényes helyet a könyvtárhoz.</s:String>
     <s:String x:Key="S.Options.Extras.SharpDxLocation">SharpDx mappa (SharpDX.dll, SharpDX.Direct3D11.dll és SharpDX.DXGI.dll)</s:String>
     <s:String x:Key="S.Options.Extras.SharpDxLocation.Select">A SharpDx-könyvtárak helyének kiválasztása</s:String>
@@ -480,15 +504,27 @@
     
     <!--Localization-->
     <s:String x:Key="S.Localization">Honosítás:</s:String>
+    <!--<s:String x:Key="S.Localization.GettingCodes">Getting language codes...</s:String>-->
+    <!--<s:String x:Key="S.Localization.Recognized">Recognized as {0}</s:String>-->
+    <!--<s:String x:Key="S.Localization.NotRecognized">Not recognized</s:String>-->
     <s:String x:Key="S.Localization.Usage.First">A legalsó erőforrás a jelenleg használt erőforrás.</s:String>
     <s:String x:Key="S.Localization.Usage.Second">Az egyéni erőforrás alkalmazásához helyezze át a lista aljára.</s:String>
+    <!--<s:String x:Key="S.Localization.Exporting">Exporting resource...</s:String>-->
+    <!--<s:String x:Key="S.Localization.SaveResource">Save the resource dictionary</s:String>-->
+    <!--<s:String x:Key="S.Localization.OpenResource">Open a resource dictionary</s:String>-->
+    <!--<s:String x:Key="S.Localization.File.Resource">Resource dictionary</s:String>-->
+    <!--<s:String x:Key="S.Localization.Importing">Importing resource...</s:String>-->
+    <!--<s:String x:Key="S.Localization.Warning.Name">The filename does not follow a valid pattern</s:String>-->
+    <!--<s:String x:Key="S.Localization.Warning.Name.Info">Try renaming like: StringResources.en.xaml, where 'en' should be replaced by your language code.</s:String>-->
+    <!--<s:String x:Key="S.Localization.Warning.Repeated">You can't add a resource with the same name</s:String>-->
+    <!--<s:String x:Key="S.Localization.Warning.Repeated.Info">Try removing the repeated resource or use other language code.</s:String>-->
+    <!--<s:String x:Key="S.Localization.Warning.Redundant">Redundant language code</s:String>-->
+    <!--<s:String x:Key="S.Localization.Warning.Redundant.Info">The "{0}" code is redundant. Try using "{1}" instead.</s:String>-->
+    <!--<s:String x:Key="S.Localization.Warning.Unknown">Unknown language</s:String>-->
+    <!--<s:String x:Key="S.Localization.Warning.Unknown.Info">The "{0}" and its family were not recognized as valid language codes.</s:String>-->
+    <!--<s:String x:Key="S.Localization.Warning.NotPossible">It was not possible to import the localization resource.</s:String>-->
 
     <!--Recorder-->
-    <s:String x:Key="S.Recorder.RecordingOptions">Felvétel beállítások:</s:String>
-    <s:String x:Key="S.Recorder.Snapshot">Pillanatkép mód</s:String>
-    <s:String x:Key="S.Recorder.ThinMode">A címsor elrejtése</s:String>
-    <s:String x:Key="S.Recorder.Fullscreen">Teljes képernyős mód</s:String>
-
     <s:String x:Key="S.Recorder.Record">Felvétel</s:String>
     <s:String x:Key="S.Recorder.Pause">Szünet</s:String>
     <s:String x:Key="S.Recorder.Continue">Folytatás</s:String>
@@ -497,9 +533,19 @@
     <s:String x:Key="S.Recorder.Snap">Igazítás</s:String>
     <s:String x:Key="S.Recorder.Height">Magasság</s:String>
     <s:String x:Key="S.Recorder.Width">Szélesség</s:String>
+
+    <!--<s:String x:Key="S.Recorder.SwitchFrequency">Click to switch among capture frequency modes.</s:String>-->
+    <!--<s:String x:Key="S.Recorder.Manual.Short">manual</s:String>-->
     <s:String x:Key="S.Recorder.Fps">Maximális képkocka/másodperc</s:String>
     <s:String x:Key="S.Recorder.Fps.Short">fps</s:String>
-    <s:String x:Key="S.Recorder.FpsRange">Minimálistól a maximális fps-ig: 1-60 fps</s:String>
+    <!--<s:String x:Key="S.Recorder.Fps.Range">Ranges from 1 to 60 fps, with higher values meaning more frames will be captured.&#10;Each increment represents 16 milliseconds of difference.</s:String>-->
+    <!--<s:String x:Key="S.Recorder.Fpm">Maximum frames per minute</s:String>-->
+    <!--<s:String x:Key="S.Recorder.Fpm.Short">fpm</s:String>-->
+    <!--<s:String x:Key="S.Recorder.Fpm.Range">Ranges from 1 to 60 fpm, with higher values meaning more frames will be captured.&#10;Each increment represents 1 second of difference.</s:String>-->
+    <!--<s:String x:Key="S.Recorder.Fph">Maximum frames per hour</s:String>-->
+    <!--<s:String x:Key="S.Recorder.Fph.Short">fph</s:String>-->
+    <!--<s:String x:Key="S.Recorder.Fph.Range">Ranges from 1 to 60 fph, with higher values meaning more frames will be captured.&#10;Each increment represents 1 minute of difference.</s:String>-->
+    
     <s:String x:Key="S.Recorder.SnapToWindow">Igazítás ablakhoz (Húzás és felengedés az illesztéshez)</s:String>
     <s:String x:Key="S.Recorder.PreStart">Kezdés előtt</s:String>
     <s:String x:Key="S.Recorder.Paused">ScreenToGif (szüneteltetve)</s:String>
@@ -586,6 +632,7 @@
     <s:String x:Key="S.InsertFrames.Info2">Az új képkockák a jelenlegi képkockalistába kerülnek beillesztésre a következő helyen:</s:String>
     <s:String x:Key="S.InsertFrames.Before">Előtte</s:String>
     <s:String x:Key="S.InsertFrames.After">Utána</s:String>
+    <s:String x:Key="S.InsertFrames.Frame">Képkocka</s:String>
     <s:String x:Key="S.InsertFrames.Importing">Importálás</s:String>
     <s:String x:Key="S.InsertFrames.SelectColorFill">A vászon kitöltőszínének kijelölése</s:String>
 
@@ -611,7 +658,9 @@
     
     <!--Encoder-->
     <s:String x:Key="S.Encoder.Title">Kódoló</s:String>
+    <!--<s:String x:Key="S.Encoder.Encoding">Encoding...</s:String>-->
     <s:String x:Key="S.Encoder.Starting">Kezdés</s:String>
+    
     <s:String x:Key="S.Encoder.Completed">Befejezve</s:String>
     <s:String x:Key="S.Encoder.Completed.Clipboard">A vágólapra másolva</s:String>
     <s:String x:Key="S.Encoder.Completed.Clipboard.Fail">A másolás nem sikerült</s:String>
@@ -620,6 +669,14 @@
     <s:String x:Key="S.Encoder.Completed.Command.Fail">A parancs végrehajtása nem sikerült</s:String>
     <s:String x:Key="S.Encoder.Completed.Upload.Fail">A feltöltés nem sikerült</s:String>
     <s:String x:Key="S.Encoder.Completed.Upload.Delete">Ctrl + Kattintás a lap megnyitásához a kép törléséhez (ha elérhető).</s:String>
+    
+    <!--<s:String x:Key="S.Encoder.Completed.Elapsed">Elapsed time, in minutes:</s:String>-->
+    <!--<s:String x:Key="S.Encoder.Completed.Elapsed.Analysis">Analysis:</s:String>-->
+    <!--<s:String x:Key="S.Encoder.Completed.Elapsed.Encoding">Encoding:</s:String>-->
+    <!--<s:String x:Key="S.Encoder.Completed.Elapsed.Upload">Upload:</s:String>-->
+    <!--<s:String x:Key="S.Encoder.Completed.Elapsed.Copy">Copy:</s:String>-->
+    <!--<s:String x:Key="S.Encoder.Completed.Elapsed.Commands">Commands:</s:String>-->
+    
     <s:String x:Key="S.Encoder.DeletedMoved">Fájl törölve vagy mozgatva</s:String>
     <s:String x:Key="S.Encoder.Canceled">Megszakítva</s:String>
     <s:String x:Key="S.Encoder.Error">Hiba</s:String>
@@ -631,15 +688,18 @@
     <s:String x:Key="S.Encoder.Processing.Second">Feldolgozás {0} - 2. menet</s:String>
     <s:String x:Key="S.Encoder.CreatingFile">Fájl létrehozása</s:String>
     <s:String x:Key="S.Encoder.Analyzing">A változatlan képpontok elemzése</s:String>
+    <!--<s:String x:Key="S.Encoder.SavingAnalysis">Saving analysis result</s:String>-->
     <s:String x:Key="S.Encoder.OpenFile">Fájl megnyitása</s:String>
     <s:String x:Key="S.Encoder.ExploreFolder">Mappa felfedezése</s:String>
     <s:String x:Key="S.Encoder.Remove">Eltávolítás a listából</s:String>
     <s:String x:Key="S.Encoder.Details">Részletek megjelenítése</s:String>
+    <!--<s:String x:Key="S.Encoder.Dismiss">Dismiss all finished encodings</s:String>-->
+
     <s:String x:Key="S.Encoder.Copy.Image">Másolás képként</s:String>
     <s:String x:Key="S.Encoder.Copy.Filename">Fájlnév másolása</s:String>
     <s:String x:Key="S.Encoder.Copy.Folder">Mappa elérési útjának másolása</s:String>
     <s:String x:Key="S.Encoder.Copy.Link">Link másolása</s:String>
-
+    
     <!--Command output-->
     <s:String x:Key="S.Encoder.Command.Title">ScreenToGif - Parancs kimenet</s:String>
     <s:String x:Key="S.Encoder.Command.Header">Parancs kimenet</s:String>
@@ -662,14 +722,33 @@
     <s:String x:Key="S.Editor.Extras">Extrák</s:String>
     <s:String x:Key="S.Editor.UpdateAvailable">Egy új frissítés érhető el!</s:String>
     <s:String x:Key="S.Editor.UpdateAvailable.Info">Kattintson ide, hogy többet olvashasson róla.</s:String>
+    <s:String x:Key="S.Editor.FrameNumbersInfo">Teljes szám, kiválasztás darab, kijelölés index</s:String>
     
-    <!--File dialogs (does not work with new line characters)-->
+    <!--Editor • Loading-->
+    <s:String x:Key="S.Editor.Preparing">Képkockák előkészítése</s:String>
+    <s:String x:Key="S.Editor.InvalidLoadingFiles">Érvénytelen betöltés – Egyszerre nem importálhat több fájlt. Próbáljon csak egy fájlt választani.</s:String>
+    <s:String x:Key="S.Editor.InvalidLoadingProjects">Érvénytelen betöltés – Egyszerre nem tölthet be több projektet. Próbáljon csak egy projektet választani.</s:String>
+    
+    <!--Editor • File dialogs (does not work with new line characters)-->
+    <s:String x:Key="S.Editor.File.OpenMedia">Médiafájl (kép- vagy videófájl) megnyitása</s:String>
+    <s:String x:Key="S.Editor.File.OpenMediaProject">Médiafájl (kép vagy videó) vagy projektfájl megnyitása</s:String>
     <s:String x:Key="S.Editor.File.All">Minden támogatott fájl</s:String>
     <s:String x:Key="S.Editor.File.Image">Kép</s:String>
     <s:String x:Key="S.Editor.File.Video">Videó</s:String>
     <s:String x:Key="S.Editor.File.Project">ScreenToGif projekt</s:String>
+    <!--<s:String x:Key="S.Editor.File.Gif">Gif animation</s:String>-->
+    <!--<s:String x:Key="S.Editor.File.Apng">Animated Png</s:String>-->
+    <!--<s:String x:Key="S.Editor.File.Avi">Avi video</s:String>-->
+    <!--<s:String x:Key="S.Editor.File.Mkv">Matroska video</s:String>-->
+    <!--<s:String x:Key="S.Editor.File.Mp4">Mp4 video</s:String>-->
+    <!--<s:String x:Key="S.Editor.File.Webm">Webm video</s:String>-->
+    <!--<s:String x:Key="S.Editor.File.Wmv">Windows media video</s:String>-->
+    <!--<s:String x:Key="S.Editor.File.Image.Zip">Zip file, all selected images</s:String>-->
+    <!--<s:String x:Key="S.Editor.File.Image.Png">Png image, all selected images</s:String>-->
+    <!--<s:String x:Key="S.Editor.File.Project.Zip">ScreenToGif project as Zip</s:String>-->
+    <!--<s:String x:Key="S.Editor.File.Psd">Psd file</s:String>-->
     
-    <!--Welcome-->
+    <!--Editor • Welcome-->
     <s:String x:Key="S.Editor.Welcome.New">Új felvétel indításához menjen a "Fájl – Új" részhez</s:String>
     <s:String x:Key="S.Editor.Welcome.Import">Képek, videók és projektek importálása "fogd és vidd" használatával.</s:String>
     <s:String x:Key="S.Editor.Welcome.ThankYou">Nagyon köszönöm, hogy az alkalmazásomat használja!</s:String>
@@ -678,53 +757,53 @@
     <s:String x:Key="S.Editor.Welcome.Trouble">Gondja van? Lépjen kapcsolatba velem a Visszajelzés eszköz segítségével</s:String>
     <s:String x:Key="S.Editor.Welcome.NewRecorder">Szeretné kipróbálni az új felvevőt?&#x0d;Lépjen a "Beállítások > Alkalmazás" menüpontra az engedélyezéshez</s:String>
     
-    <!--File • New-->
+    <!--Editor • File tab • New-->
     <s:String x:Key="S.Editor.File.New.Recording">Felvétel</s:String>
     <s:String x:Key="S.Editor.File.New.Webcam">Webkamera-&#x0d;felvétel</s:String>
     <s:String x:Key="S.Editor.File.New.Board">Tábla-&#10;felvétel</s:String>
     <s:String x:Key="S.Editor.File.Blank">Üres&#x0d;projekt</s:String>
     <s:String x:Key="S.Editor.File.New">Új</s:String>
     
-    <!--File • Insert-->
+    <!--Editor • File tab • Insert-->
     <s:String x:Key="S.Editor.File.Insert.Recording">Felvétel</s:String>
     <s:String x:Key="S.Editor.File.Insert.Webcam">Webkamera-&#x0d;felvétel</s:String>
     <s:String x:Key="S.Editor.File.Insert.Board">Tábla-&#10;felvétel</s:String>
     <s:String x:Key="S.Editor.File.Insert.Media">Média</s:String>
     <s:String x:Key="S.Editor.File.Insert">Beillesztés</s:String>
     
-    <!--File • Save/Discard-->
+    <!--Editor • File tab • Save/Discard-->
     <s:String x:Key="S.Editor.File.Save">Mentés másként</s:String>
     <s:String x:Key="S.Editor.File.Load">Betölt</s:String>
     <s:String x:Key="S.Editor.File.LoadRecent">Legutóbbi&#x0d;projektek</s:String>
     <s:String x:Key="S.Editor.File.SaveProject">Mentés mint&#x0d;Projekt</s:String>
     <s:String x:Key="S.Editor.File.Discard">Projekt&#10;elvetése</s:String>
     
-    <!--Home • Action Stack-->
+    <!--Editor • Home tab • Action Stack-->
     <s:String x:Key="S.Editor.Home.ActionStack">Akció</s:String>
     <s:String x:Key="S.Editor.Home.Undo">Visszavonás</s:String>
     <s:String x:Key="S.Editor.Home.Redo">Ismét</s:String>
     <s:String x:Key="S.Editor.Home.Reset">Visszaállítás</s:String>
     
-    <!--Home • Clipboard-->
+    <!--Editor • Home tab • Clipboard-->
     <s:String x:Key="S.Editor.Home.Clipboard">Vágólap</s:String>
     <s:String x:Key="S.Editor.Home.Clipboard.Show">Vágólap megjelenítése</s:String>
     <s:String x:Key="S.Editor.Home.Paste">Beillesztés</s:String>
     <s:String x:Key="S.Editor.Home.Cut">Kivágás</s:String>
     <s:String x:Key="S.Editor.Home.Copy">Másolás</s:String>
     
-    <!--Home • Zoom-->
+    <!--Editor • Home tab • Zoom-->
     <s:String x:Key="S.Editor.Home.Zoom">Nagyítás</s:String>
     <s:String x:Key="S.Editor.Home.SizeToContent">Beállítás&#x0d;tartalomhoz</s:String>
     <s:String x:Key="S.Editor.Home.FitImage">Kép igazítása</s:String>
     
-    <!--Home • Select-->
+    <!--Editor • Home tab • Select-->
     <s:String x:Key="S.Editor.Home.Select">Kijelölés</s:String>
     <s:String x:Key="S.Editor.Home.SelectAll">Mind&#10;kijelölése</s:String>
     <s:String x:Key="S.Editor.Home.GoTo">Ugrás</s:String>
     <s:String x:Key="S.Editor.Home.Inverse">Fordított</s:String>
     <s:String x:Key="S.Editor.Home.Deselect">Kiválasztás törlése</s:String>
     
-    <!--Playback • Playback-->
+    <!--Editor • Playback tab • Playback-->
     <s:String x:Key="S.Editor.Playback.Playback">Visszajátszás</s:String>
     <s:String x:Key="S.Editor.Playback.First">Első</s:String>
     <s:String x:Key="S.Editor.Playback.Previous">Előző</s:String>
@@ -733,12 +812,12 @@
     <s:String x:Key="S.Editor.Playback.Next">Következő</s:String>
     <s:String x:Key="S.Editor.Playback.Last">Utolsó</s:String>
     
-    <!--Playback • Playback Options-->
+    <!--Editor • Playback tab • Playback Options-->
     <s:String x:Key="S.Editor.PlaybackOptions.Header">Visszajátszás beállítások</s:String>
     <s:String x:Key="S.Editor.PlaybackOptions.Loop">Végtelenítés lejátszás közben.</s:String>
     <s:String x:Key="S.Editor.PlaybackOptions.Loop.Info">Csak lejátszás közben használható.&#x0d;Ha meg akarja változtatni a végtelenítés beállításait a Gif és Apng exportálásnak,&#x0d;egyes kódolók számára a „Mentés másként” panelen lesz elérhető.</s:String>
     
-    <!--Edit • Frames-->  
+    <!--Editor • Edit tab • Frames-->  
     <s:String x:Key="S.Editor.Edit.Frames">Képkockák</s:String>
     <s:String x:Key="S.Editor.Edit.Delete">Töröl</s:String>
     <s:String x:Key="S.Editor.Edit.Frames.Duplicates">Ismétlődések&#10;eltávolítása</s:String>
@@ -746,33 +825,33 @@
     <s:String x:Key="S.Editor.Edit.DeletePrevious">Az összes előző törlése</s:String>
     <s:String x:Key="S.Editor.Edit.DeleteNext">Az összes következő törlése</s:String>
     
-    <!--Edit • Reordering-->
+    <!--Editor • Edit tab • Reordering-->
     <s:String x:Key="S.Editor.Edit.Reordering">Átrendezés</s:String>
     <s:String x:Key="S.Editor.Edit.Reverse">Fordítva</s:String>
     <s:String x:Key="S.Editor.Edit.Yoyo">Yoyo</s:String>
     <s:String x:Key="S.Editor.Edit.MoveLeft">Mozgatás&#x0d;balra</s:String>
     <s:String x:Key="S.Editor.Edit.MoveRight">Mozgatás&#x0d;jobbra</s:String>
     
-    <!--Edit • Delay/Duration-->
+    <!--Editor • Edit tab • Delay/Duration-->
     <s:String x:Key="S.Editor.Edit.Delay">Késleltetés (időtartam)</s:String>
     <s:String x:Key="S.Editor.Edit.Delay.Override">Felülbírálás</s:String>
     <s:String x:Key="S.Editor.Edit.Delay.IncreaseDecrease">Növelés vagy&#x0d;csökkentés</s:String>
     <s:String x:Key="S.Editor.Edit.Delay.Scale">Méretezés</s:String>
     
-    <!--Image • Size and Rotation-->
+    <!--Editor • Image • Size and Rotation-->
     <s:String x:Key="S.Editor.Image.SizePosition">Méret és forgatás</s:String>
     <s:String x:Key="S.Editor.Image.Resize">Átméretezés</s:String>
     <s:String x:Key="S.Editor.Image.Crop">Körülvágás</s:String>
     <s:String x:Key="S.Editor.Image.FlipRotate">Tükrözés / forgatás</s:String>
     
-    <!--Image • Text-->
+    <!--Editor • Image tab • Text-->
     <s:String x:Key="S.Editor.Image.Text">Szöveg</s:String>
     <s:String x:Key="S.Editor.Image.Caption">Felirat</s:String>
     <s:String x:Key="S.Editor.Image.FreeText">Szabad szöveg</s:String>
     <s:String x:Key="S.Editor.Image.TitleFrame">Cím képkocka</s:String>
     <s:String x:Key="S.Editor.Image.KeyStrokes">Billentyűleütések</s:String>
     
-    <!--Image • Overlay-->
+    <!--Editor • Image tab • Overlay-->
     <s:String x:Key="S.Editor.Image.Overlay">Átfedés</s:String>
     <s:String x:Key="S.Editor.Image.FreeDrawing">Szabad&#10;rajzolás</s:String>
     <s:String x:Key="S.Editor.Image.Shape">Alakzatok</s:String>
@@ -784,12 +863,12 @@
     <s:String x:Key="S.Editor.Image.Progress">Folyamatjelző</s:String>
     <s:String x:Key="S.Editor.Image.Obfuscate">Homályosítás</s:String>
 
-    <!--Transitions • Styles-->
+    <!--Editor • Transitions tab • Styles-->
     <s:String x:Key="S.Editor.Transitions.Styles">Stílusok</s:String>
     <s:String x:Key="S.Editor.Transitions.Fade">Halványítás</s:String>
     <s:String x:Key="S.Editor.Transitions.Slide">Csúszás</s:String>
     
-    <!--Statistics-->
+    <!--Editor • Statistics tab-->
     <s:String x:Key="S.Editor.Statistics.General">Általános</s:String>
     <s:String x:Key="S.Editor.Statistics.FrameCount">Képkockák száma</s:String>
     <s:String x:Key="S.Editor.Statistics.TotalDuration">Teljes időtartam</s:String>
@@ -800,18 +879,10 @@
     <s:String x:Key="S.Editor.Statistics.FrameDpi">Képkocka DPI és méretezés</s:String>
     <s:String x:Key="S.Editor.Statistics.SelectedFrame">Kijelölt képkocka</s:String>
     
-    <!--TODO: Organize-->
-    <!--Editor, Continuation-->
-    <s:String x:Key="S.Editor.Preparing">Képkockák előkészítése</s:String>
-    <s:String x:Key="S.Editor.InvalidLoadingFiles">Érvénytelen betöltés – Egyszerre nem importálhat több fájlt. Próbáljon csak egy fájlt választani.</s:String>
-    <s:String x:Key="S.Editor.InvalidLoadingProjects">Érvénytelen betöltés – Egyszerre nem tölthet be több projektet. Próbáljon csak egy projektet választani.</s:String>
-    <s:String x:Key="S.Editor.File.OpenMediaProject">Médiafájl (kép vagy videó) vagy projektfájl megnyitása</s:String>
-    <s:String x:Key="S.Editor.File.OpenMedia">Médiafájl (kép- vagy videófájl) megnyitása</s:String>
-    
+    <!--Editor • Messages-->
     <s:String x:Key="S.Editor.Clipboard.InvalidCut.Title">Kivágási művelet</s:String>
     <s:String x:Key="S.Editor.Clipboard.InvalidCut.Instruction">Nem vághat ki minden képkockát.</s:String>
     <s:String x:Key="S.Editor.Clipboard.InvalidCut.Message">A felvételnek legalább egy képkockára szüksége van.</s:String>
-    
     <s:String x:Key="S.Editor.DeleteAll.Title">Az összes eltávolítása</s:String>
     <s:String x:Key="S.Editor.DeleteAll.Instruction">Biztos benne, hogy el akarja távolítani az összes képkockát?</s:String>
     <s:String x:Key="S.Editor.DeleteAll.Message">Ez a művelet elveti az aktuálisan megnyitott projektet, és nem lehet visszavonni. Szeretné folytatni?</s:String>
@@ -827,32 +898,6 @@
     <s:String x:Key="S.Editor.Exiting.Instruction">Biztos benne, hogy ki akar lépni?</s:String>
     <s:String x:Key="S.Editor.Exiting.Message">A jelenlegi projekt, amelyen dolgozott, újra megnyitható a "Legutóbbi projektek" segítségével.</s:String>
     <s:String x:Key="S.Editor.Exiting.Message2">Az aktuális projekt, amelyen dolgozott, újra megnyitható a "Legutóbbi projektek" segítségével, de ne felejtse el, hogy néhány nap múlva automatikusan törlődik.</s:String>
-    
-    <s:String x:Key="S.Resize.Warning">Az Átméretezés művelet alkalmazásához másik értéket kell választania.</s:String>
-    <s:String x:Key="S.Crop.Warning">A körülvágás kijelölésnek kisebbnek kell lennie, mint az aktuális képkocka mérete.</s:String>
-    <s:String x:Key="S.Crop.Warning.Bigger">A körülvágás kiválasztásának 10x10 képpontnál nagyobbnak kell lennie.</s:String>
-    <s:String x:Key="S.Editor.Caption.WarningNoText">Nincs alkalmazandó szöveg.</s:String>
-    <s:String x:Key="S.Editor.Caption.WarningSelection">Legalább egy képkockát ki kell választania, amelyre a feliratot alkalmazza.</s:String>
-    <s:String x:Key="S.Editor.FreeText.WarningSelection">Legalább egy képkockát ki kell választania, amelyre a szöveget alkalmazza.</s:String>
-    <s:String x:Key="S.Editor.TitleFrame.WarningSelection">Legalább egy képkockát ki kell választania, amely mellé a cím képkockát  alkalmazza.</s:String>
-    <s:String x:Key="S.FreeDrawing.Warning.NoDrawing">A kijelölt képkockákra nem alkalmazható rajz.</s:String>
-    <s:String x:Key="S.FreeDrawing.WarningSelection">Legalább egy képkockát ki kell választania, amelyre a szabad rajzolást alkalmazza.</s:String>
-    
-    <s:String x:Key="S.Watermark.Select">Egy kép kiválasztása</s:String>
-    <s:String x:Key="S.Watermark.WarningNoImage">Ki kell jelölnie egy képet, hogy a kijelölt képkocká(k)ra alkalmazza.</s:String>
-    <s:String x:Key="S.Watermark.WarningSelection">Legalább egy képkockát ki kell választania, amelyre a vízjelet alkalmazza.</s:String>
-    <s:String x:Key="S.Editor.Border.WarningThickness">Legalább az egyik oldalon nullánál nagyobb szegélyvastagságot kell kijelölni.</s:String>
-    <s:String x:Key="S.Editor.Border.WarningSelection">Legalább egy képkockát ki kell választania, amelyre a szegélyt alkalmazza.</s:String>
-    <s:String x:Key="S.Editor.Shadow.Warning.Invisible">Az átlátszatlanságnak nullánál nagyobbnak kell lennie ahhoz, hogy bármilyen különbséget tegyen a képkockában.</s:String>
-    <s:String x:Key="S.Editor.Shadow.Warning.Behind">Ha az árnyékmélységet és az életlenítési sugarat nullának használja, az nem változtat semmin, mert a képkocka mögé lesz rejtve.</s:String>
-    <s:String x:Key="S.Editor.Cinemagraph.WarningNoDrawing">Legalább egy képpontot ki kell jelölnie ahhoz, hogy a Cinemagraph-ot alkalmazni tudja. Jelölje ki a képpontokat rájuk rajzolva.</s:String>
-    
-    <s:String x:Key="S.Editor.Fade.Title">Halványítás áttűnés</s:String>
-    <s:String x:Key="S.Editor.Fade.WarningSelection">Legalább egy képkockát ki kell választania, amelyre a halványítás áttűnést alkalmazza.</s:String>
-    <s:String x:Key="S.Editor.Fade.WarningColor">A teljesen átlátszó szín nem befolyásolja ezt az átmenetet.</s:String>
-    <s:String x:Key="S.Editor.Slide.Title">Csúszás áttűnés</s:String>
-    <s:String x:Key="S.Editor.Slide.WarningSelection">Legalább egy képkockát ki kell választania, amelyre a csúszás áttűnést alkalmazza.</s:String>
-
     <s:String x:Key="S.Editor.DragDrop.Invalid.Title">Érvénytelen Fogd és Vidd</s:String>
     <s:String x:Key="S.Editor.DragDrop.MultipleFiles.Instruction">Egyszerre nem importálhat több fájlt</s:String>
     <s:String x:Key="S.Editor.DragDrop.MultipleFiles.Message">Próbáljon csak egy fájlt választani.</s:String>
@@ -860,17 +905,39 @@
     <s:String x:Key="S.Editor.DragDrop.Invalid.Message">A fájl nem tölthető be, mert a formátuma érvénytelen.</s:String>
     <s:String x:Key="S.Editor.DragDrop.InvalidProject.Instruction">Egyszerre nem importálhat több projektet</s:String>
     <s:String x:Key="S.Editor.DragDrop.InvalidProject.Message">Próbáljon csak egy projektet választani.</s:String>
-    
-    <s:String x:Key="S.Editor.RetrievingFromCache">Képkockák visszaállítása a gyorsítótárból</s:String>
+
+    <s:String x:Key="S.Editor.Caption.WarningNoText">Nincs alkalmazandó szöveg.</s:String>
+    <s:String x:Key="S.Editor.Caption.WarningSelection">Legalább egy képkockát ki kell választania, amelyre a feliratot alkalmazza.</s:String>
+    <s:String x:Key="S.Editor.FreeText.WarningSelection">Legalább egy képkockát ki kell választania, amelyre a szöveget alkalmazza.</s:String>
+    <s:String x:Key="S.Editor.TitleFrame.WarningSelection">Legalább egy képkockát ki kell választania, amely mellé a cím képkockát  alkalmazza.</s:String>
+    <s:String x:Key="S.Editor.Border.WarningThickness">Legalább az egyik oldalon nullánál nagyobb szegélyvastagságot kell kijelölni.</s:String>
+    <s:String x:Key="S.Editor.Border.WarningSelection">Legalább egy képkockát ki kell választania, amelyre a szegélyt alkalmazza.</s:String>
+    <s:String x:Key="S.Editor.Shadow.Warning.Invisible">Az átlátszatlanságnak nullánál nagyobbnak kell lennie ahhoz, hogy bármilyen különbséget tegyen a képkockában.</s:String>
+    <s:String x:Key="S.Editor.Shadow.Warning.Behind">Ha az árnyékmélységet és az életlenítési sugarat nullának használja, az nem változtat semmin, mert a képkocka mögé lesz rejtve.</s:String>
+    <s:String x:Key="S.Editor.Cinemagraph.WarningNoDrawing">Legalább egy képpontot ki kell jelölnie ahhoz, hogy a Cinemagraph-ot alkalmazni tudja. Jelölje ki a képpontokat rájuk rajzolva.</s:String>
+    <s:String x:Key="S.Editor.Fade.Title">Halványítás áttűnés</s:String>
+    <s:String x:Key="S.Editor.Fade.WarningSelection">Legalább egy képkockát ki kell választania, amelyre a halványítás áttűnést alkalmazza.</s:String>
+    <s:String x:Key="S.Editor.Fade.WarningColor">A teljesen átlátszó szín nem befolyásolja ezt az átmenetet.</s:String>
+    <s:String x:Key="S.Editor.Slide.Title">Csúszás áttűnés</s:String>
+    <s:String x:Key="S.Editor.Slide.WarningSelection">Legalább egy képkockát ki kell választania, amelyre a csúszás áttűnést alkalmazza.</s:String>
     <s:String x:Key="S.Editor.LoadingFrames">Képkockák betöltése</s:String>
     <s:String x:Key="S.Editor.LoadingFrames.ProjectCorrupted.Instruction">Lehetetlen betölteni a projektet</s:String>
     <s:String x:Key="S.Editor.LoadingFrames.ProjectCorrupted.Message">Nem lehetett betölteni a képkockákat, mert mindegyik sérült, vagy a képek nincsenek jelen ott, ahol várhatók lennének.</s:String>
     <s:String x:Key="S.Editor.LoadingFrames.FramesCorrupted.Instruction">Néhány képkocka nem tölthető be</s:String>
     <s:String x:Key="S.Editor.LoadingFrames.FramesCorrupted.Message">A képkockákat nem lehetett betölteni, mert nem találhatók, vagy mert sérültek.</s:String>
+    
+    <!--Editor • Warnings-->
+    <s:String x:Key="S.Editor.Warning.Selection">Legalább egy képkockát ki kell választania, amelyre az átfedést alkalmazza.</s:String>
+    <s:String x:Key="S.Editor.Warning.Ffmpeg">FFmpeg nincs jelen. Adja hozzá a Path környezeti változókhoz, vagy kattintson ide a Beállítások > Extrák megnyitásához és a hely beállításához.</s:String>
+    <s:String x:Key="S.Editor.Warning.Gifski">Gifski nincs jelen. Adja hozzá a Path környezeti változókhoz, vagy kattintson ide a Beállítások > Extrák megnyitásához és a hely beállításához.</s:String>
+    <s:String x:Key="S.Editor.Warning.LowSpace">Nincs elég hely a meghajtón, ahol ez az alkalmazás tárolja a gyorsítótárat ({0}% maradt). Kattintson ide a Beállítások > Ideiglenes fájlok megnyitásához, hogy helyet szabadítson fel.</s:String>
+    <s:String x:Key="S.Editor.Warning.DifferentDpi">Több különböző DPI-vel rendelkező képet próbált importálni, ami nem támogatott. Néhány importálva lett, a többit külön kell importálni.</s:String>
+    
+    <!--Editor • Status-->
+    <s:String x:Key="S.Editor.RetrievingFromCache">Képkockák visszaállítása a gyorsítótárból</s:String>
     <s:String x:Key="S.Editor.UpdatingFrames">Képkockák frissítése</s:String>
     <s:String x:Key="S.Editor.PreparingImport">Importálás előkészítése</s:String>
     <s:String x:Key="S.Editor.ImportingFrames">Képkockák importálása</s:String>
-    
     <s:String x:Key="S.Editor.AnalyzingDuplicates">Ismétlődések elemzése</s:String>
     <s:String x:Key="S.Editor.AdjustingDuplicatesDelay">A késleltetés beállítása</s:String>
     <s:String x:Key="S.Editor.DiscardingDuplicates">Ismétlődések elvetése</s:String>
@@ -885,16 +952,17 @@
     <s:String x:Key="S.Editor.ApplyingTransition">Az áttűnési hatás alkalmazása</s:String>
     <s:String x:Key="S.Editor.PreparingSaving">Mentés előkészítése</s:String>
 
+    <!--Editor • Frame list-->
     <s:String x:Key="S.Editor.List.Frame">Képkocka:</s:String>
     <s:String x:Key="S.Editor.List.OpenImage">Kép megnyitása</s:String>
     <s:String x:Key="S.Editor.List.ExploreFolder">Mappa felfedezése</s:String>
     <s:String x:Key="S.Editor.List.ExportImage">Kép exportálása</s:String>
     
-    <s:String x:Key="S.Editor.FrameNumbersInfo">Teljes szám, kiválasztás darab, kijelölés index</s:String>
-    
+    <!--Editor • Go to-->
     <s:String x:Key="S.GoTo.Title">Ugrás képkockára</s:String>
     <s:String x:Key="S.GoTo.Instruction">Ugrás képkockára (0-tól {0}-ig)</s:String>
     
+    <!--Editor • Context menu-->
     <s:String x:Key="S.Context.SaveAs">Mentés másként</s:String>
     <s:String x:Key="S.Context.RemoveFrames">Kiválasztott képkockák eltávolítása</s:String>
     <s:String x:Key="S.Context.NewRecording">Új képernyőfelvétel</s:String>
@@ -902,15 +970,8 @@
     <s:String x:Key="S.Context.NewBoardRecording">Új táblafelvétel</s:String>
     <s:String x:Key="S.Context.NewBlankAnimation">Új projekt</s:String>
     <s:String x:Key="S.Context.NewFromMediaProject">Új (médiából vagy projektből)</s:String>
-    
-    <!--Warnings-->
-    <s:String x:Key="S.Editor.Warning.Selection">Legalább egy képkockát ki kell választania, amelyre az átfedést alkalmazza.</s:String>
-    <s:String x:Key="S.Editor.Warning.Ffmpeg">FFmpeg nincs jelen. Adja hozzá a Path környezeti változókhoz, vagy kattintson ide a Beállítások > Extrák megnyitásához és a hely beállításához.</s:String>
-    <s:String x:Key="S.Editor.Warning.Gifski">Gifski nincs jelen. Adja hozzá a Path környezeti változókhoz, vagy kattintson ide a Beállítások > Extrák megnyitásához és a hely beállításához.</s:String>
-    <s:String x:Key="S.Editor.Warning.LowSpace">Nincs elég hely a meghajtón, ahol ez az alkalmazás tárolja a gyorsítótárat ({0}% maradt). Kattintson ide a Beállítások > Ideiglenes fájlok megnyitásához, hogy helyet szabadítson fel.</s:String>
-    <s:String x:Key="S.Editor.Warning.DifferentDpi">Több különböző DPI-vel rendelkező képet próbált importálni, ami nem támogatott. Néhány importálva lett, a többit külön kell importálni.</s:String>
-    
-    <!--Hints-->
+   
+    <!--Editor • Hints-->
     <s:String x:Key="S.Hint.NewRecording">Új felvétel létrehozva</s:String>
     <s:String x:Key="S.Hint.NewWebcamRecording">Új webkamera-felvétel készült</s:String>
     <s:String x:Key="S.Hint.NewBoardRecording">Új táblafelvétel készült</s:String>
@@ -947,52 +1008,57 @@
     <s:String x:Key="S.Hint.Reduce">Képkockasebesség csökkentve</s:String>
     <s:String x:Key="S.Hint.Duplicates">Ismétlődések eltávolítva</s:String>
     
-    <!--Action Grid-->
+    <!--Editor • Action panel-->
     <s:String x:Key="S.Action.Hide">Elrejt</s:String>
     <s:String x:Key="S.Action.Apply">Alkalmaz</s:String>
     <s:String x:Key="S.Action.Open">Megnyitás</s:String>
     <s:String x:Key="S.Action.Save">Ment</s:String>
     <s:String x:Key="S.Action.Cancel">Mégse</s:String>
-    <s:String x:Key="S.Size">Méret</s:String>
-    <s:String x:Key="S.Background">Háttér</s:String>
-    <s:String x:Key="S.Color">Szín:</s:String>
-    
+
+    <!--Editor • Recent projects-->
     <s:String x:Key="S.Recent.Projects">Legutóbbi projektek</s:String>
     <s:String x:Key="S.Recent.Searching">Legutóbbi projektek keresése ...</s:String>
     <s:String x:Key="S.Recent.Date">Létrehozás dátuma</s:String>
     <s:String x:Key="S.Recent.Frames">Képkockák száma</s:String>
     <s:String x:Key="S.Recent.Warning.NoSelection">Nincs kijelölt projekt. Jelölje ki a lista egy projektjét a betöltéshez.</s:String>
-    <s:String x:Key="S.Recent.Warning.Same">Ez a szerkesztőpéldány már megjeleníti ezt a projektet.</s:String>
+    <!--<s:String x:Key="S.Recent.Warning.SameProject">This project is already being displayed by this editor instance.</s:String>-->
     <s:String x:Key="S.Recent.Warning.AnotherEditor">Ezt a projektet már megnyitotta egy másik szerkesztőpéldány. A projekt nem nyitható meg másodszor, ha már meg van nyitva egy másik szerkesztőben.</s:String>
     
+    <!--Editor • Clipboard-->
     <s:String x:Key="S.Clipboard.Entries">Vágólap bejegyzések</s:String>
     <s:String x:Key="S.Clipboard.Entry">Vágólap bejegyzés:</s:String>
     <s:String x:Key="S.Clipboard.Entry.Image">{0} kép</s:String>
     <s:String x:Key="S.Clipboard.Entry.Images">{0} kép</s:String>
-    <s:String x:Key="S.Clipboard.Entry.Frames">Képkockák: {0}</s:String>
     <s:String x:Key="S.Clipboard.Explore">Tartalom felfedezése</s:String>
     <s:String x:Key="S.Clipboard.Remove">Eltávolít</s:String>
     <s:String x:Key="S.Clipboard.Behavior">Beillesztés viselkedése</s:String>
     <s:String x:Key="S.Clipboard.Before">A kiválasztott képkocka elé</s:String>
     <s:String x:Key="S.Clipboard.After">A kiválasztott képkocka után</s:String>
     
+    <!--Editor • Resize-->
     <s:String x:Key="S.Resize.CurrentProperties">Jelenlegi tulajdonságok</s:String>
     <s:String x:Key="S.Resize.Dpi">Dpi</s:String>
     <s:String x:Key="S.Resize.NewProperties">Új tulajdonságok</s:String>
     <s:String x:Key="S.Resize.Dpi2">DPI:</s:String>
     <s:String x:Key="S.Resize.KeepAspect">Képarány megtartása.</s:String>
+    <s:String x:Key="S.Resize.Warning">Az Átméretezés művelet alkalmazásához másik értéket kell választania.</s:String>
     
+    <!--Editor • Crop-->
     <s:String x:Key="S.Crop.Points">Pontok</s:String>
     <s:String x:Key="S.Crop.Top">Fent:</s:String>
     <s:String x:Key="S.Crop.Left">Balra:</s:String>
     <s:String x:Key="S.Crop.Bottom">Lent:</s:String>
     <s:String x:Key="S.Crop.Right">Jobbra:</s:String>
+    <s:String x:Key="S.Crop.Warning">A körülvágás kijelölésnek kisebbnek kell lennie, mint az aktuális képkocka mérete.</s:String>
+    <s:String x:Key="S.Crop.Warning.Bigger">A körülvágás kiválasztásának 10x10 képpontnál nagyobbnak kell lennie.</s:String>
     
+    <!--Editor • Flip/rotate-->
     <s:String x:Key="S.FlipRotate.FlipHorizontal">Tükrözés vízszintesen</s:String>
     <s:String x:Key="S.FlipRotate.FlipVertical">Tükrözés függőlegesen</s:String>
     <s:String x:Key="S.FlipRotate.RotateLeft">Forgatás balra 90º-kal</s:String>
     <s:String x:Key="S.FlipRotate.RotateRight">Forgatás jobbra 90º-kal</s:String>
     
+    <!--Editor • Reduce framerate-->
     <s:String x:Key="S.Reduce.Header">A képkockasebesség csökkentése</s:String>
     <s:String x:Key="S.Reduce.Factor">Tényező:</s:String>
     <s:String x:Key="S.Reduce.Count">Eltávolítás darab:</s:String>
@@ -1007,6 +1073,7 @@
     <s:String x:Key="S.Reduce.Warning.NonConsecutive">A kijelölt képkockák listájának egymás után kell lennie. A kijelölt képkockák között nem hagyhat kijelöletlen képkockákat.</s:String>
     <s:String x:Key="S.Reduce.Warning.SmallerThanFactor">A képkockák kijelölésének nagyobbnak kell lennie, mint az eltávolítási tényező, hogy a funkció bármit is eltávolíthasson.</s:String>
     
+    <!--Editor • Remove duplicates-->
     <s:String x:Key="S.RemoveDuplicates.Header">Ismétlődések eltávolítása</s:String>
     <s:String x:Key="S.RemoveDuplicates.Similarity">Hasonlóság (%):</s:String>
     <s:String x:Key="S.RemoveDuplicates.Removal">Képkocka eltávolítás:</s:String>
@@ -1018,6 +1085,7 @@
     <s:String x:Key="S.RemoveDuplicates.Delay.Sum">Az összeg használata</s:String>
     <s:String x:Key="S.RemoveDuplicates.Info">Ez a művelet elemzi az egyes képkockákat (képpontról képpontra), és eltávolítja azokat, amelyek legalább {0} %-ban hasonlítanak a közvetlen szomszédjára.&#x0d;Kiválaszthatja, hogy módosítani szeretné-e a képkockák késleltetését (kiállítási időtartamát).</s:String>
     
+    <!--Editor • Captions-->
     <s:String x:Key="S.Caption.Text">Szöveg</s:String>
     <s:String x:Key="S.Caption.Font">Betűtípus</s:String>
     <s:String x:Key="S.Caption.Family">Család:</s:String>
@@ -1031,6 +1099,7 @@
     <s:String x:Key="S.Caption.Vertical">Függőleges:</s:String>
     <s:String x:Key="S.Caption.Horizontal">Vízszintes:</s:String>
 
+    <!--Editor • Key strokes-->
     <s:String x:Key="S.KeyStrokes">Billentyűleütések</s:String>
     <s:String x:Key="S.KeyStrokes.Keys">Billentyűk</s:String>
     <s:String x:Key="S.KeyStrokes.Separator">Elválasztó:</s:String>
@@ -1048,15 +1117,8 @@
     <s:String x:Key="S.KeyStrokes.Edit.Add">Billentyűleütés hozzáadása:</s:String>
     <s:String x:Key="S.KeyStrokes.Edit.Lower">Kisbetűs felirat</s:String>
     <s:String x:Key="S.KeyStrokes.Edit.Lower.Info">Ez lehetővé teszi, hogy egybetűs kisbetűket illesszen be.</s:String>
-    
-    <s:String x:Key="S.Delay">Késleltetés</s:String>
-    <s:String x:Key="S.DelayMs">Késleltetés:</s:String>
-    <s:String x:Key="S.ValueMs">Érték -+:</s:String>
-    <s:String x:Key="S.ScaleValue">Méretezési érték:</s:String>
-    <s:String x:Key="S.Margin">Margó:</s:String>
-    <s:String x:Key="S.Padding">Kitöltés:</s:String>
-    <s:String x:Key="S.MinHeight">Minimális magasság:</s:String>
-    
+
+    <!--Editor • Free drawing-->
     <s:String x:Key="S.FreeDrawing.Mode">Mód</s:String>
     <s:String x:Key="S.FreeDrawing.Pen">Toll</s:String>
     <s:String x:Key="S.FreeDrawing.Eraser">Radír</s:String>
@@ -1070,7 +1132,10 @@
     <s:String x:Key="S.FreeDrawing.Other">Egyéb:</s:String>
     <s:String x:Key="S.FreeDrawing.Highlighter">Kiemelő.</s:String>
     <s:String x:Key="S.FreeDrawing.FitToCurve">Ívhez illeszkedik</s:String>
+    <s:String x:Key="S.FreeDrawing.Warning.NoDrawing">A kijelölt képkockákra nem alkalmazható rajz.</s:String>
+    <s:String x:Key="S.FreeDrawing.WarningSelection">Legalább egy képkockát ki kell választania, amelyre a szabad rajzolást alkalmazza.</s:String>
     
+    <!--Editor • Shapes-->
     <s:String x:Key="S.Shapes.Mode.Insert">Beilleszt</s:String>
     <s:String x:Key="S.Shapes.Shapes">Alakzatok</s:String>
     <s:String x:Key="S.Shapes.Shapes.Radius">Lekerekítés:</s:String>
@@ -1079,28 +1144,38 @@
     <s:String x:Key="S.Shapes.Shapes.Remove">Eltávolítás</s:String>
     <s:String x:Key="S.Shapes.Fill">Kitöltés</s:String>
 
+    <!--Editor • Mouse clicks-->
     <s:String x:Key="S.MouseClicks">Egérkattintások</s:String>
     <s:String x:Key="S.MouseClicks.Warning.None">Nincs észlelhető egérkattintás a projekten.</s:String>
     
+    <!--Editor • Watermark-->
     <s:String x:Key="S.Watermark.Image">Kép</s:String>
     <s:String x:Key="S.Watermark.File">Fájl:</s:String>
+    <!--<s:String x:Key="S.Watermark.File.Nothing">None selected</s:String>-->
     <s:String x:Key="S.Watermark.Opacity">Átlátszatlanság:</s:String>
+    <s:String x:Key="S.Watermark.Select">Egy kép kiválasztása</s:String>
+    <s:String x:Key="S.Watermark.WarningNoImage">Ki kell jelölnie egy képet, hogy a kijelölt képkocká(k)ra alkalmazza.</s:String>
+    <s:String x:Key="S.Watermark.WarningSelection">Legalább egy képkockát ki kell választania, amelyre a vízjelet alkalmazza.</s:String>
     
+    <!--Editor • Border-->
     <s:String x:Key="S.Border.Appearance">Megjelenés</s:String>
     <s:String x:Key="S.Border.Info">Használjon negatív értékeket, hogy a szegély kibővítse a képet. Ha így tesz, akkor a szegély minden képkockára alkalmazva lesz.&#x0d;Ha nem használ negatív értéket, akkor a szegély csak a kiválasztott képkockákra lesz alkalmazva.</s:String>
 
+    <!--Editor • Shadow-->
     <s:String x:Key="S.Shadow.ShadowColor">Árnyék színe:</s:String>
     <s:String x:Key="S.Shadow.BackgroundColor">Háttér színe:</s:String>
     <s:String x:Key="S.Shadow.Direction">Irány:</s:String>
     <s:String x:Key="S.Shadow.BlurRadius">Elmosódás sugara:</s:String>
     <s:String x:Key="S.Shadow.Depth">Mélység:</s:String>
     
+    <!--Editor • Obfuscate-->
     <s:String x:Key="S.Obfuscate.Options">Homályosítás beállítások</s:String>
     <s:String x:Key="S.Obfuscate.PixelSize">Pixel mérete:</s:String>
     <s:String x:Key="S.Obfuscate.UseAverage">Számítsa ki az egyes pixeles blokkok átlagos színét.</s:String>
     <s:String x:Key="S.Obfuscate.Info">A kiválasztó eszközzel válassza ki a téglalapot, amelyet pixelezni kell.</s:String>
     <s:String x:Key="S.Obfuscate.Warning">Nem választott ki semmit. Kérjük, hogy a Kiválasztó eszköz használatával jelöljön ki egy téglalapot, amit pixelezne.</s:String>
     
+    <!--Editor • Progress-->
     <s:String x:Key="S.Progress.Type">Típus</s:String>
     <s:String x:Key="S.Progress.Type.Bar">Sáv</s:String>
     <s:String x:Key="S.Progress.Type.Text">Szöveg</s:String>
@@ -1129,6 +1204,7 @@
     <s:String x:Key="S.Progress.Precision.StartNumber.ToolTip">Elindítja a képkockaszám számlálását ettől a kiválasztott számtól.</s:String>
     <s:String x:Key="S.Progress.Orientation">Tájolás:</s:String>
     
+    <!--Editor • Delay-->
     <s:String x:Key="S.Delay.Update">Késleltetés frissítése</s:String>
     <s:String x:Key="S.Delay.Mode">Késleltetés mód:</s:String>
     <s:String x:Key="S.Delay.Mode.Override">Felülbírálás (ms-ban)</s:String>
@@ -1138,12 +1214,14 @@
     <s:String x:Key="S.Delay.Minimum10Ms">Legalább 10 ms képkockánként.</s:String>
     <s:String x:Key="S.Delay.DecreaseIncrease">Érték csökkentése / növelése</s:String>
     <s:String x:Key="S.Delay.Scale">Méretezési érték</s:String>
-    
-    <s:String x:Key="S.Cinemagraph.Info">A toll segítségével válassza ki azokat a pixeleket, amelyek nem maradnak statikusak (a képkockák között változniuk kell), a tetejükre való festéssel.</s:String>
     <s:String x:Key="S.Delay.Override.Info">Ez az új érték felülírja az összes kijelölt képkocka időtartamát (késleltetését). Az érték 10 ms és 25500 ms között lehet.</s:String>
     <s:String x:Key="S.Delay.IncreaseDecrease.Info">Ez az érték csökkenti/növeli az egyes kijelölt képkockák időtartamát (késleltetését).&#x0d;-10000 ms és 10000 ms közötti érték kiválasztásával csökkentheti/növelheti a növekményt, de az egyes képkockák végső időtartama 10 ms és 25500 ms között lesz korlátozva.</s:String>
     <s:String x:Key="S.Delay.Scale.Info">Az egyes kiválasztott képkockák időtartamának (késleltetésének) méretezése a százalékos érték szerint.&#x0d;Az egyes képkockák időtartamát 1% és 1000% közötti érték kiválasztásával méretezheti, de az egyes képkockák végső időtartama 10 ms és 25500 ms közé lesz korlátozva.</s:String>
 
+    <!--Editor • Cinemagraph-->
+    <s:String x:Key="S.Cinemagraph.Info">A toll segítségével válassza ki azokat a pixeleket, amelyek nem maradnak statikusak (a képkockák között változniuk kell), a tetejükre való festéssel.</s:String>
+
+    <!--Editor • Transitions-->
     <s:String x:Key="S.Transitions.Length">Áttűnés hossza</s:String>
     <s:String x:Key="S.Transitions.Delay">Áttűnés késleltetés</s:String>
     <s:String x:Key="S.Transitions.FadeTo">Halványítás erre...</s:String>
@@ -1152,7 +1230,7 @@
     <s:String x:Key="S.Transitions.Color">Szín</s:String>
     <s:String x:Key="S.Transitions.Info">Az áttűnés a kiválasztott képkocka és a következő képkocka között lesz alkalmazva.</s:String>
 
-    <!--Save As-->
+    <!--Editor • Save as-->
     <s:String x:Key="S.SaveAs.Type">Fájltípus</s:String>
     <s:String x:Key="S.SaveAs.Gif">Gif</s:String>
     <s:String x:Key="S.SaveAs.Apng">Apng</s:String>
@@ -1160,6 +1238,8 @@
     <s:String x:Key="S.SaveAs.Project">Projekt</s:String>
     <s:String x:Key="S.SaveAs.Psd">PSD</s:String>
     <s:String x:Key="S.SaveAs.Video">Videó</s:String>
+    
+    <!--Editor • Save as > Encoder-->
     <s:String x:Key="S.SaveAs.Encoder">Kódoló</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">2.0</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Tooltip">Algoritmus: Octree.</s:String>
@@ -1171,14 +1251,61 @@
     <s:String x:Key="S.SaveAs.Encoder.Apng.Tooltip">A kódolót a ScreenToGif fejlesztője készítette.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
+    
+    <!--Editor • Save as > Gif options-->
     <s:String x:Key="S.SaveAs.GifOptions">Gif beállítások</s:String>
+    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.Info">Color reduction algorithm (quantization).</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.Neural">Neural network</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.Neural.Info">High fidelity quantization. Slower, but good for higher ammount of colors.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.Octree">Octree</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.Octree.Info">Good for animations with less colors. Faster, but may produce color banding.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.MedianCut">Median cut</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.MedianCut.Info">Less good than Octree and slower.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.Grayscale">Grayscale</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.Grayscale.Info">Uses a fixed grayscale palette, so it's way faster.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.MostUsed">Most used colors</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.MostUsed.Info">Simply takes the most used colors in the frames.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.GifOptions.Sampling">Sampling:</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.GifOptions.Sampling.Info">Sampling factor:&#10;A value of 1 will result in better looking gif, but it will be slower to render.</s:String>-->
     <s:String x:Key="S.SaveAs.GifOptions.Quality">Minőség:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors">Színek:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">Színek maximális száma (minden egyes képkockához).</s:String>
+    <!--<s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable">Use a global color table.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable.Info">May reduce the quality and/or size of the gif.</s:String>-->
     <s:String x:Key="S.SaveAs.GifOptions.Loop">Végtelenítés:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">Végtelenített Gif.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Ismétlés örökké</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Ismétlések száma.</s:String>
+    <!--<s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable">Enable transparency.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable.Info">Enables the full transparency mode, which makes the background of the gif to be fully transparent.&#10;The chroma key replacement process will be ignored if this option is enabled.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.GifOptions.Transparency.Pick">Select which color to display as transparent.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.GifOptions.Transparency.Pick.Info">If a color is selected, it will be converted to transparent and it will appear as transparent in the generated gif.&#10;If no color is selected, all transparent colors (Alpha = 0%) will appear as transparent normally.</s:String>-->
+    <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">A változatlan képpontok észlelése.</s:String>
+    <!--<s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged.Info">By analyzing and detecting unchanged pixels between the frames,&#10;it will be possible to save only the necessary parts to the gif.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma">Replace these pixels with a chroma key.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma.Info">Repeated/unchanged pixels will be replaced with this chroma key,&#10;making it possible to use less colors per frame.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.GifOptions.ChromaKey">Chroma key:</s:String>-->
+
+    <!--Editor • Save as > Apng options-->
+    <s:String x:Key="S.SaveAs.ApngOptions">Apng beállítások</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Looped">Végtelenített Apng.</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.DetectUnchanged">A változatlan képpontok észlelése.</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.PaintTransparent">Az összes változatlan képpontot átlátszó színnel fesse.</s:String>
+    
+    <!--Editor • Save as > Video/Images/Psd/Project options-->
+    <s:String x:Key="S.SaveAs.VideoOptions">Videó beállítások</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Fps">Fps:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.FlipVertically">A videó tükrözése (függőlegesen)</s:String>
+    <s:String x:Key="S.SaveAs.ImagesOptions">Kép beállítások</s:String>
+    <s:String x:Key="S.SaveAs.ImageOptions.Zip">Kép becsomagolása Zip-be.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions">Psd beállítások</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress">A kép tömörítése.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">Tömörítse a képadatokat a RLE algoritmus segítségével.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Timeline">Az idővonal adatainak mentése.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">A képkockák időzítését exportálja, ahelyett, hogy csak a képkocákat.</s:String>
+    <s:String x:Key="S.SaveAs.ProjectOptions">Projekt beállítások</s:String>
+    
+    <s:String x:Key="S.SaveAs.Extras">Extrák:</s:String>
     <s:String x:Key="S.SaveAs.Presets">Előbeállítások:</s:String>
     <s:String x:Key="S.SaveAs.Presets.Default">Alapértelmezett</s:String>
     <s:String x:Key="S.SaveAs.Presets.Add">Hozzáadás</s:String>
@@ -1193,25 +1320,6 @@
     <s:String x:Key="S.SaveAs.Presets.Reset.Header">Visszaállítja az előbeállítást az alapértelmezett paraméterekre?</s:String>
     <s:String x:Key="S.SaveAs.Presets.Reset.Message">Ez a művelet nem vonható vissza, de később újra szerkesztheti az előbeállítást.</s:String>
     <s:String x:Key="S.SaveAs.Presets.Warning.NoSelection">Nincs FFmpeg előbeállítás kiválasztva, kérjük, válasszon egyet.</s:String>
-    <s:String x:Key="S.SaveAs.Extras">Extrák:</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">A változatlan képpontok észlelése.</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">A változatlan képpontok megjelölése színtelen színnel.</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">A szín kiválasztása</s:String>
-    <s:String x:Key="S.SaveAs.ApngOptions">Apng beállítások</s:String>
-    <s:String x:Key="S.SaveAs.ApngOptions.Looped">Végtelenített Apng.</s:String>
-    <s:String x:Key="S.SaveAs.ApngOptions.DetectUnchanged">A változatlan képpontok észlelése.</s:String>
-    <s:String x:Key="S.SaveAs.ApngOptions.PaintTransparent">Az összes változatlan képpontot átlátszó színnel fesse.</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions">Videó beállítások</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.Fps">Fps:</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.FlipVertically">A videó tükrözése (függőlegesen)</s:String>
-    <s:String x:Key="S.SaveAs.ImagesOptions">Kép beállítások</s:String>
-    <s:String x:Key="S.SaveAs.ImageOptions.Zip">Kép becsomagolása Zip-be.</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions">Psd beállítások</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions.Compress">A kép tömörítése.</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">Tömörítse a képadatokat a RLE algoritmus segítségével.</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions.Timeline">Az idővonal adatainak mentése.</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">A képkockák időzítését exportálja, ahelyett, hogy csak a képkocákat.</s:String>
-    <s:String x:Key="S.SaveAs.ProjectOptions">Projekt beállítások</s:String>
     
     <!--Save As • Save options-->
     <s:String x:Key="S.SaveAs.SaveOptions">Mentés beállítások</s:String>

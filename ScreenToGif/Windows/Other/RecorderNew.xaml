@@ -164,10 +164,10 @@
                         <Grid Grid.Row="1" x:Name="RecordControlsGrid">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="26"/>
-                                <ColumnDefinition Width="32"/>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto" MaxWidth="50"/>
                                 <ColumnDefinition Width="Auto" MaxWidth="26"/>
                                 <ColumnDefinition Width="26"/>
