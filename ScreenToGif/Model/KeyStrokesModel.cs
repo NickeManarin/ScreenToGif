@@ -167,11 +167,11 @@ namespace ScreenToGif.Model
 
         public override string ToString()
         {
-            return $"{LocalizationHelper.Get("Caption.Size")} {KeyStrokesFontSize}, " +
-                   $"{LocalizationHelper.Get("Caption.Color")} #{KeyStrokesFontColor.A:X2}{KeyStrokesFontColor.R:X2}{KeyStrokesFontColor.G:X2}{KeyStrokesFontColor.B:X2}, " +
-                   $"{LocalizationHelper.Get("Background")} #{KeyStrokesBackgroundColor.A:X2}{KeyStrokesBackgroundColor.R:X2}{KeyStrokesBackgroundColor.G:X2}{KeyStrokesBackgroundColor.B:X2}, " +
-                   $"{LocalizationHelper.Get("String.Margin")} {KeyStrokesMargin}, " +
-                   $"{LocalizationHelper.Get("String.Padding")} {KeyStrokesPadding}";
+            return $"{LocalizationHelper.Get("S.Caption.Size")} {KeyStrokesFontSize}, " +
+                   $"{LocalizationHelper.Get("S.Caption.Color")} #{KeyStrokesFontColor.A:X2}{KeyStrokesFontColor.R:X2}{KeyStrokesFontColor.G:X2}{KeyStrokesFontColor.B:X2}, " +
+                   $"{LocalizationHelper.Get("S.Background")} #{KeyStrokesBackgroundColor.A:X2}{KeyStrokesBackgroundColor.R:X2}{KeyStrokesBackgroundColor.G:X2}{KeyStrokesBackgroundColor.B:X2}, " +
+                   $"{LocalizationHelper.Get("S.Margin")} {KeyStrokesMargin}, " +
+                   $"{LocalizationHelper.Get("S.Padding")} {KeyStrokesPadding}";
         }
 
         public static KeyStrokesModel Default()

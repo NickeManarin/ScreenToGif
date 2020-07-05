@@ -286,7 +286,7 @@
     }
 
     /// <summary>
-    /// EncoderListBox Item Status.
+    /// Encoding status.
     /// </summary>
     public enum Status
     {
@@ -355,15 +355,14 @@
     {
         Override,
         IncreaseDecrease,
-      Scale
-   }
+        Scale
+    }
 
     /// <summary>
     /// Type of the gif encoder.
     /// </summary>
     public enum GifEncoderType
     {
-        Legacy,
         ScreenToGif,
         PaintNet,
         FFmpeg,
@@ -384,10 +383,12 @@
     /// </summary>
     public enum ColorQuantizationType
     {
-        Ordered,
-        NeuQuant,
-        Octree,
-        Grayscale,
+        Neural = 0,
+        Octree = 1,
+        MedianCut = 2,
+        Grayscale = 3,
+        MostUsed = 4,
+        Palette = 5,
     }
 
     /// <summary>
@@ -625,5 +626,16 @@
         Override = 0,
         IncreaseDecrease = 1,
         Scale = 2,
+    }
+
+    /// <summary>
+    /// Type of capture frequency mode for the screen recorder.
+    /// </summary>
+    public enum CaptureFrequency
+    {
+        Manual,
+        PerSecond,
+        PerMinute,
+        PerHour
     }
 }

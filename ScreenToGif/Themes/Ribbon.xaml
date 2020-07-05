@@ -344,7 +344,7 @@
                         <Popup Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" x:Name="MainPopup" Placement="Bottom" Margin="0" StaysOpen="False" 
                                PopupAnimation="Fade" Width="400" Height="Auto" MinHeight="100" MaxHeight="400" SnapsToDevicePixels="True" AllowsTransparency="True" HorizontalOffset="-2"
                                IsOpen="{Binding ElementName=NotificationsButton, Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" PlacementTarget="{Binding ElementName=NotificationsButton}">
-                            <c:NotificationListControl x:Name="NotificationList"/>
+                            <c:NotificationBox x:Name="NotificationBox"/>
                         </Popup>
 
                         <Menu Grid.Row="0" Grid.Column="2" Effect="{x:Null}" Background="Transparent" VerticalAlignment="Center" ItemsSource="{TemplateBinding ExtrasMenu}"/>

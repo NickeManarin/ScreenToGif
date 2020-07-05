@@ -27,7 +27,7 @@ namespace ScreenToGif.Controls.Ribbon
         private TabPanel _tabPanel;
         private Border _border;
         private ImageToggleButton _notificationButton;
-        private NotificationListControl _notificationList;
+        private NotificationBox _notificationBox;
 
         #endregion
 
@@ -68,7 +68,7 @@ namespace ScreenToGif.Controls.Ribbon
             _border = Template.FindName("ContentBorder", this) as Border;
 
             _notificationButton = Template.FindName("NotificationsButton", this) as ImageToggleButton;
-            _notificationList = Template.FindName("NotificationList", this) as NotificationListControl;
+            _notificationBox = Template.FindName("NotificationBox", this) as NotificationBox;
             _extrasMenuItem = Template.FindName("ExtrasMenuItem", this) as ImageMenuItem;
 
             _hideButton = Template.FindName("HideGridButton", this) as Button;
@@ -87,7 +87,7 @@ namespace ScreenToGif.Controls.Ribbon
             }
 
             UpdateVisual();
-            UpdateNotificationButton();
+            AnimateOrNot();
         }
 
         #region Events
@@ -276,22 +276,72 @@ namespace ScreenToGif.Controls.Ribbon
             }
         }
 
-        public void UpdateNotifications()
-        {
-            _notificationList?.UpdateList();
 
-            UpdateNotificationButton();
+        public void UpdateNotifications(int? id = null)
+        {
+            _notificationBox?.UpdateNotification(id);
+
+            AnimateOrNot();
         }
 
-        public void UpdateNotificationButton()
+        public EncoderListViewItem AddEncoding(int id)
         {
-            if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
+            //Display the popup and animate the button.
+            _notificationButton.IsChecked = true;
+
+            AnimateOrNot(true);
+
+            return _notificationBox.AddEncoding(id);
+        }
+
+        public void UpdateEncoding(int? id = null, bool onlyStatus = false)
+        {
+            if (!onlyStatus)
+                _notificationBox?.UpdateEncoding(id);
+
+            AnimateOrNot();
+        }
+
+        public EncoderListViewItem RemoveEncoding(int id)
+        {
+            try
+            {
+                return _notificationBox.RemoveEncoding(id);
+            }
+            finally
+            {
+                AnimateOrNot();
+            }
+        }
+
+        private void AnimateOrNot(bool add = false)
+        {
+            //Blink the button when an encoding is added.
+            if (add && _notificationButton.FindResource("NotificationStoryboard") is Storyboard story)
+            {
+                story.Stop();
+                story.Begin();
+            }
+
+            var anyProcessing = EncodingManager.Encodings.Any(s => s.Status == Status.Processing);
+            var anyCompleted = EncodingManager.Encodings.Any(s => s.Status == Status.Completed);
+            var anyFaulty = EncodingManager.Encodings.Any(s => s.Status == Status.Error);
+
+            _notificationButton.Content = anyProcessing ? FindResource("Vector.Encoder") as Canvas :
+                anyCompleted ? FindResource("Vector.Ok") as Canvas :
+                anyFaulty ? FindResource("Vector.Cancel.Round") as Canvas : _notificationButton.Content;
+            _notificationButton.IsImportant = anyProcessing;
+            _notificationButton.SetResourceReference(ImageToggleButton.TextProperty, anyProcessing ? "S.Encoder.Encoding" : anyCompleted ? "S.Encoder.Completed" : anyFaulty ? "S.Encoder.Error" : "S.Notifications");
+
+            if (anyProcessing || anyCompleted || anyFaulty)
                 return;
 
+            //Animate the button for notifications, when there are no encodings.
             var most = NotificationManager.Notifications.Select(s => s.Kind).OrderByDescending(a => (int)a).FirstOrDefault();
 
             _notificationButton.Content = FindResource(StatusBand.KindToString(most)) as Canvas;
             _notificationButton.IsImportant = most != StatusType.None;
+            _notificationButton.SetResourceReference(ImageToggleButton.TextProperty, "S.Notifications");
 
             if (most != StatusType.None)
                 (_notificationButton.FindResource("NotificationStoryboard") as Storyboard)?.Begin();

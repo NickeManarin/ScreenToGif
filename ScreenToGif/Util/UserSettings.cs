@@ -615,7 +615,7 @@ namespace ScreenToGif.Util
 
         public bool RecorderThinMode
         {
-            get => (bool)GetValue();
+            get => (bool)GetValue(defaultValue: false);
             set => SetValue(value);
         }
 
@@ -628,6 +628,39 @@ namespace ScreenToGif.Util
         public bool FallThroughOtherScreens
         {
             get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public CaptureFrequency CaptureFrequency
+        {
+            get => (CaptureFrequency)GetValue();
+            set => SetValue(value);
+        }
+
+        /// <summary>
+        /// The placyback spped of the capture frame, in the "manual" mode.
+        /// </summary>
+        public int PlaybackDelayManual
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        /// <summary>
+        /// The placyback spped of the capture frame, in the "per minute" mode.
+        /// </summary>
+        public int PlaybackDelayMinute
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        /// <summary>
+        /// The placyback spped of the capture frame, in the "per hour" mode.
+        /// </summary>
+        public int PlaybackDelayHour
+        {
+            get => (int)GetValue();
             set => SetValue(value);
         }
 
@@ -714,19 +747,7 @@ namespace ScreenToGif.Util
             get => (int)GetValue();
             set => SetValue(value);
         }
-
-        public bool SnapshotMode
-        {
-            get => (bool)GetValue();
-            set => SetValue(value);
-        }
-
-        public int SnapshotDefaultDelay
-        {
-            get => (int)GetValue();
-            set => SetValue(value);
-        }
-
+        
         public bool FixedFrameRate
         {
             get => (bool)GetValue();
@@ -782,6 +803,12 @@ namespace ScreenToGif.Util
         public Rect GridSize
         {
             get => (Rect)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool DisplayEncoder
+        {
+            get => (bool)GetValue();
             set => SetValue(value);
         }
 
@@ -934,7 +961,7 @@ namespace ScreenToGif.Util
 
         public Key StartPauseShortcut
         {
-            get => (Key)GetValue();
+            get => (Key)GetValue(defaultValue: Key.None);
             set => SetValue(value);
         }
 
@@ -946,43 +973,43 @@ namespace ScreenToGif.Util
 
         public Key StopShortcut
         {
-            get => (Key)GetValue();
+            get => (Key)GetValue(defaultValue: Key.None);
             set => SetValue(value);
         }
 
         public ModifierKeys StopModifiers
         {
-            get => (ModifierKeys)GetValue();
+            get => (ModifierKeys)GetValue(defaultValue: ModifierKeys.None);
             set => SetValue(value);
         }
 
         public Key DiscardShortcut
         {
-            get => (Key)GetValue();
+            get => (Key)GetValue(defaultValue: Key.None);
             set => SetValue(value);
         }
 
         public ModifierKeys DiscardModifiers
         {
-            get => (ModifierKeys)GetValue();
+            get => (ModifierKeys)GetValue(defaultValue: ModifierKeys.None);
             set => SetValue(value);
         }
 
         public Key FollowShortcut
         {
-            get => (Key)GetValue();
+            get => (Key)GetValue(defaultValue: Key.None);
             set => SetValue(value);
         }
 
         public ModifierKeys FollowModifiers
         {
-            get => (ModifierKeys)GetValue();
+            get => (ModifierKeys)GetValue(defaultValue: ModifierKeys.None);
             set => SetValue(value);
         }
 
         public ModifierKeys DisableFollowModifiers
         {
-            get => (ModifierKeys)GetValue();
+            get => (ModifierKeys)GetValue(defaultValue: ModifierKeys.None);
             set => SetValue(value);
         }
 
@@ -1308,7 +1335,13 @@ namespace ScreenToGif.Util
         }
 
         //Gif.
-        public int Quality
+        public ColorQuantizationType ColorQuantization
+        {
+            get => (ColorQuantizationType)GetValue();
+            set => SetValue(value);
+        }
+
+        public int SamplingFactor
         {
             get => (int)GetValue();
             set => SetValue(value);
@@ -1323,6 +1356,12 @@ namespace ScreenToGif.Util
         public int MaximumColors
         {
             get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool UseGlobalColorTable
+        {
+            get => (bool)GetValue();
             set => SetValue(value);
         }
 
@@ -1344,9 +1383,21 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
-        public ColorQuantizationType ColorQuantization
+        public bool EnableTransparency
         {
-            get => (ColorQuantizationType)GetValue();
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool SelectTransparencyColor
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color TransparencyColor
+        {
+            get => (Color)GetValue();
             set => SetValue(value);
         }
 
@@ -1367,7 +1418,7 @@ namespace ScreenToGif.Util
             get => (Color)GetValue();
             set => SetValue(value);
         }
-
+        
         public string LatestOutputFolder
         {
             get => (string)GetValue();
@@ -2688,6 +2739,28 @@ namespace ScreenToGif.Util
 
         #region Obsolete
 
+        [Obsolete]
+        public int Quality
+        {
+            get => 0;
+            set => SetValue(value);
+        }
+
+        [Obsolete]
+        public bool SnapshotMode
+        {
+            get => false;
+            set => SetValue(value);
+        }
+
+        [Obsolete]
+        public int SnapshotDefaultDelay
+        {
+            get => 0;
+            set => SetValue(value);
+        }
+
+        [Obsolete]
         public bool DetectMouseClicks
         {
             get => false;

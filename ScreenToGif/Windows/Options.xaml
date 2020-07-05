@@ -102,10 +102,10 @@
                                             <ColumnDefinition/>
                                         </Grid.ColumnDefinitions>
 
-                                        <n:ImageRadioButton Grid.Column="0" x:Name="StartManuallyCheckBox" ContentWidth="40" Text="{DynamicResource S.Options.App.Startup.Mode.Manual}" Padding="5" IsChecked="True"
+                                        <n:ImageRadioButton Grid.Column="0" x:Name="StartManuallyCheckBox" ContentWidth="40" ContentHeight="40" Text="{DynamicResource S.Options.App.Startup.Mode.Manual}" Padding="5" IsChecked="True"
                                                             Content="{StaticResource Vector.Cursor}" ToolTip="{DynamicResource S.Options.App.Startup.Mode.Manual.Info}"/>
 
-                                        <n:ImageRadioButton Grid.Column="1" x:Name="StartAutomaticallyCheckBox" ContentWidth="40" Text="{DynamicResource S.Options.App.Startup.Mode.Automatic}" Padding="5"
+                                        <n:ImageRadioButton Grid.Column="1" x:Name="StartAutomaticallyCheckBox" ContentWidth="40" ContentHeight="40" Text="{DynamicResource S.Options.App.Startup.Mode.Automatic}" Padding="5"
                                                             Content="{StaticResource Vector.Play}" ToolTip="{DynamicResource S.Options.App.Startup.Mode.Automatic.Info}" 
                                                             Checked="StartAutomaticallyCheckBox_Checked" Unchecked="StartAutomaticallyCheckBox_Unchecked"/>
                                     </Grid>
@@ -118,9 +118,9 @@
                                             <ColumnDefinition/>
                                         </Grid.ColumnDefinitions>
 
-                                        <n:ImageRadioButton Grid.Column="0" ContentWidth="40" Text="{DynamicResource S.Options.App.Startup.Instance.Single}" Padding="5" Content="{StaticResource Vector.View}" 
+                                        <n:ImageRadioButton Grid.Column="0" ContentWidth="40" ContentHeight="40" Text="{DynamicResource S.Options.App.Startup.Instance.Single}" Padding="5" Content="{StaticResource Vector.View}" 
                                                             IsChecked="{Binding Path=SingleInstance, Mode=TwoWay}" ToolTip="{DynamicResource S.Options.App.Startup.Instance.Single.Info}"/>
-                                        <n:ImageRadioButton Grid.Column="1" ContentWidth="40" Text="{DynamicResource S.Options.App.Startup.Instance.Multiple}" Padding="5" Content="{StaticResource Vector.Views}" 
+                                        <n:ImageRadioButton Grid.Column="1" ContentWidth="40" ContentHeight="40" Text="{DynamicResource S.Options.App.Startup.Instance.Multiple}" Padding="5" Content="{StaticResource Vector.Views}" 
                                                             IsChecked="{Binding Path=SingleInstance, Mode=TwoWay, Converter={StaticResource InvertedBool}}" ToolTip="{DynamicResource S.Options.App.Startup.Instance.Multiple.Info}"/>
                                     </Grid>
                                 </WrapPanel>
@@ -391,6 +391,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
                         <Expander Grid.Row="0" Header="{DynamicResource S.Options.Recorder.Interface}" IsExpanded="True">
@@ -404,7 +405,7 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
 
-                                <n:ImageRadioButton Grid.Row="0" Grid.Column="0" ContentWidth="60" Text="{DynamicResource S.Options.Recorder.Interface.Old}" Padding="5" HorizontalAlignment="Right"
+                                <n:ImageRadioButton Grid.Row="0" Grid.Column="0" ContentHeight="60" ContentWidth="60" Text="{DynamicResource S.Options.Recorder.Interface.Old}" Padding="5" HorizontalAlignment="Right"
                                                     IsChecked="{Binding Path=NewRecorder, Mode=TwoWay, Converter={StaticResource InvertedBool}}">
                                     <n:ImageRadioButton.Content>
                                         <Canvas Width="40" Height="27">
@@ -418,7 +419,7 @@
                                     </n:ImageRadioButton.Content>
                                 </n:ImageRadioButton>
 
-                                <n:ImageRadioButton Grid.Row="0" Grid.Column="1" ContentWidth="60" Text="{DynamicResource S.Options.Recorder.Interface.New}" Padding="5" HorizontalAlignment="Left"
+                                <n:ImageRadioButton Grid.Row="0" Grid.Column="1" ContentHeight="60" ContentWidth="60" Text="{DynamicResource S.Options.Recorder.Interface.New}" Padding="5" HorizontalAlignment="Left"
                                                     IsChecked="{Binding Path=NewRecorder, Mode=TwoWay}">
                                     <n:ImageRadioButton.Content>
                                         <Canvas Width="36.750" Height="36.875">
@@ -442,7 +443,52 @@
                             </Grid>
                         </Expander>
 
-                        <Expander Grid.Row="1" Header="{DynamicResource S.Options.Recorder.Mode}" IsExpanded="True">
+                        <Expander Grid.Row="1" Header="{DynamicResource S.Options.Recorder.Frequency}" IsExpanded="True">
+                            <Grid Margin="10,0,5,5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="ManualRadioButton" ContentHeight="30" Text="{DynamicResource S.Options.Recorder.Frequency.Manual}" Padding="5" Margin="0,0,0,5" HorizontalAlignment="Right"
+                                                    IsChecked="{Binding CaptureFrequency, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CaptureFrequency.Manual}}" 
+                                                    Content="{StaticResource Vector.Camera}" ToolTip="{DynamicResource S.Options.Recorder.Frequency.Manual.Info}"/>
+
+                                <n:ImageRadioButton Grid.Row="0" Grid.Column="1" x:Name="PerSecondRadioButton" ContentHeight="30" Text="{DynamicResource S.Options.Recorder.Frequency.Second}" Padding="5" Margin="0,0,0,5" HorizontalAlignment="Right"
+                                                    IsChecked="{Binding CaptureFrequency, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CaptureFrequency.PerSecond}}" 
+                                                    Content="{StaticResource Vector.Delay}" ToolTip="{DynamicResource S.Options.Recorder.Frequency.Second.Info}"/>
+
+                                <n:ImageRadioButton Grid.Row="0" Grid.Column="2" x:Name="PerMinuteRadioButton" ContentHeight="30" Text="{DynamicResource S.Options.Recorder.Frequency.Minute}" Padding="5" Margin="0,0,0,5" 
+                                                    IsChecked="{Binding CaptureFrequency, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CaptureFrequency.PerMinute}}" 
+                                                    Content="{StaticResource Vector.Delay.Minute}" ToolTip="{DynamicResource S.Options.Recorder.Frequency.Minute.Info}"/>
+
+                                <n:ImageRadioButton Grid.Row="0" Grid.Column="3" x:Name="PerHourRadioButton" ContentHeight="30" Text="{DynamicResource S.Options.Recorder.Frequency.Hour}" Padding="5" Margin="0,0,0,5" HorizontalAlignment="Left"
+                                                    IsChecked="{Binding CaptureFrequency, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CaptureFrequency.PerHour}}"
+                                                    Content="{StaticResource Vector.Delay.Hour}" ToolTip="{DynamicResource S.Options.Recorder.Frequency.Hour.Info}"/>
+
+                                <WrapPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Margin="0,0,5,0" Visibility="{Binding ElementName=PerSecondRadioButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource InvertedBoolToVisibility}, FallbackValue=Collapsed}">
+                                    <TextBlock Text="{DynamicResource S.Options.Recorder.Frequency.Playback}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,0" VerticalAlignment="Center"/>
+                                    <n:IntegerUpDown Minimum="10" Maximum="25000" Value="{Binding Path=PlaybackDelayManual, Mode=TwoWay}" MinWidth="80" Visibility="{Binding ElementName=ManualRadioButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource Bool2Visibility}}"/>
+                                    <n:IntegerUpDown Minimum="10" Maximum="25000" Value="{Binding Path=PlaybackDelayMinute, Mode=TwoWay}" MinWidth="80" Visibility="{Binding ElementName=PerMinuteRadioButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource Bool2Visibility}}"/>
+                                    <n:IntegerUpDown Minimum="10" Maximum="25000" Value="{Binding Path=PlaybackDelayHour, Mode=TwoWay}" MinWidth="80" Visibility="{Binding ElementName=PerHourRadioButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource Bool2Visibility}}"/>
+                                    <TextBlock Text="{DynamicResource S.Options.Recorder.Frequency.Playback.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="WrapWithOverflow" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                                </WrapPanel>
+
+                                <WrapPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Margin="0,0,5,0" Visibility="{Binding ElementName=PerSecondRadioButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource Bool2Visibility}, FallbackValue=Collapsed}">
+                                    <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.FixedFramerate}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=FixedFrameRate, Mode=TwoWay}"/>
+                                    <TextBlock Text="{DynamicResource S.Options.Recorder.FixedFramerate.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                                </WrapPanel>
+                            </Grid>
+                        </Expander>
+                        
+                        <Expander Grid.Row="2" Header="{DynamicResource S.Options.Recorder.Mode}" IsExpanded="True">
                             <StackPanel Margin="10,0,0,0">
                                 <WrapPanel Margin="0,0,5,5" HorizontalAlignment="Center">
                                     <Grid>
@@ -451,7 +497,7 @@
                                             <ColumnDefinition/>
                                         </Grid.ColumnDefinitions>
 
-                                        <n:ImageRadioButton Grid.Column="0" ContentWidth="40" Text="BitBlt" Padding="5" IsChecked="{Binding Path=UseDesktopDuplication, Mode=TwoWay, Converter={StaticResource InvertedBool}}"
+                                        <n:ImageRadioButton Grid.Column="0" ContentWidth="40" ContentHeight="40" Text="BitBlt" Padding="5" IsChecked="{Binding Path=UseDesktopDuplication, Mode=TwoWay, Converter={StaticResource InvertedBool}}"
                                                             ToolTip="{DynamicResource S.Options.Recorder.Bitblt.Info}">
                                             <n:ImageRadioButton.Content>
                                                 <Canvas Width="40" Height="39">
@@ -464,7 +510,7 @@
                                             </n:ImageRadioButton.Content>
                                         </n:ImageRadioButton>
 
-                                        <n:ImageRadioButton Grid.Column="1" ContentWidth="40" Text="DirectX" Padding="5" IsChecked="{Binding Path=UseDesktopDuplication, Mode=TwoWay}"
+                                        <n:ImageRadioButton Grid.Column="1" ContentWidth="40" ContentHeight="40" Text="DirectX" Padding="5" IsChecked="{Binding Path=UseDesktopDuplication, Mode=TwoWay}"
                                                             ToolTip="{DynamicResource S.Options.Recorder.DirectX.Info}">
                                             <n:ImageRadioButton.Content>
                                                 <Canvas Width="40" Height="29">
@@ -500,10 +546,10 @@
                                             <ColumnDefinition/>
                                         </Grid.ColumnDefinitions>
 
-                                        <n:ImageRadioButton Grid.Column="0" ContentWidth="40" Text="{DynamicResource S.Options.Recorder.File}" Padding="5" Content="{StaticResource Vector.ImageStack}" 
+                                        <n:ImageRadioButton Grid.Column="0" ContentWidth="40" ContentHeight="40" Text="{DynamicResource S.Options.Recorder.File}" Padding="5" Content="{StaticResource Vector.ImageStack}" 
                                                             IsChecked="{Binding Path=UseMemoryCache, Mode=TwoWay, Converter={StaticResource InvertedBool}}"
                                                             ToolTip="{DynamicResource S.Options.Recorder.File.Info}"/>
-                                        <n:ImageRadioButton Grid.Column="1" ContentWidth="40" Text="{DynamicResource S.Options.Recorder.Cache}" Padding="5" Content="{StaticResource Vector.Cabinet}" 
+                                        <n:ImageRadioButton Grid.Column="1" ContentWidth="40" ContentHeight="40" Text="{DynamicResource S.Options.Recorder.Cache}" Padding="5" Content="{StaticResource Vector.Cabinet}" 
                                                             IsChecked="{Binding Path=UseMemoryCache, Mode=TwoWay}"
                                                             ToolTip="{DynamicResource S.Options.Recorder.Cache.Info}"/>
                                     </Grid>
@@ -535,20 +581,10 @@
                                 <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.RecordMouse}" Margin="5,3" IsChecked="{Binding Path=ShowCursor, Mode=TwoWay}"/>
 
                                 <WrapPanel Margin="0,0,5,0">
-                                    <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.StepRecording}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=SnapshotMode, Mode=TwoWay}"/>
-                                    <TextBlock Text="{DynamicResource S.Options.Recorder.StepRecording.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
-                                </WrapPanel>
-
-                                <WrapPanel Margin="0,0,5,0">
                                     <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.AsyncRecording}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=AsyncRecording, Mode=TwoWay}"/>
                                     <TextBlock Text="{DynamicResource S.Options.Recorder.AsyncRecording.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
                                 </WrapPanel>
-
-                                <WrapPanel Margin="0,0,5,0">
-                                    <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.FixedFramerate}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=FixedFrameRate, Mode=TwoWay}"/>
-                                    <TextBlock Text="{DynamicResource S.Options.Recorder.FixedFramerate.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
-                                </WrapPanel>
-
+                                
                                 <WrapPanel Margin="0,0,5,0" Visibility="{Binding Path=UseDesktopDuplication, Mode=OneWay, Converter={StaticResource InvertedBoolToVisibility}}">
                                     <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.RemoteImprovement}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=RemoteImprovement, Mode=TwoWay}"/>
                                     <TextBlock Text="{DynamicResource S.Options.Recorder.RemoteImprovement.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
@@ -556,7 +592,7 @@
                             </StackPanel>
                         </Expander>
 
-                        <Expander Grid.Row="2" Header="{DynamicResource S.Options.Other}" IsExpanded="True">
+                        <Expander Grid.Row="3" Header="{DynamicResource S.Options.Other}" IsExpanded="True">
                             <StackPanel Margin="10,0,0,0">
                                 <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.PreStart}" Margin="5,3" IsChecked="{Binding Path=UsePreStart, Mode=TwoWay}"/>
                                 <WrapPanel Margin="20,3,5,3" Visibility="{Binding UsePreStart, Converter={StaticResource Bool2Visibility}}">
@@ -910,6 +946,7 @@
 
                         <Expander Header="{DynamicResource S.Options.Recorder.Interface}" IsExpanded="True">
                             <StackPanel Margin="10,0,5,0">
+                                <n:ExtendedCheckBox Text="{DynamicResource S.Options.Editor.Interface.DisplayEncoder}" Margin="0,3" IsChecked="{Binding Path=DisplayEncoder, Mode=TwoWay}"/>
                                 <n:ExtendedCheckBox Text="{DynamicResource S.Options.Editor.Interface.ExtendChrome}" Margin="0,3" IsChecked="{Binding Path=EditorExtendChrome, Mode=TwoWay}"/>
                                 <n:ExtendedCheckBox Text="{DynamicResource S.Options.Editor.Interface.AutomaticallySizeOnContent}" Margin="0,3" IsChecked="{Binding Path=AutomaticallySizeOnContent, Mode=TwoWay}"/>
                                 <n:ExtendedCheckBox Text="{DynamicResource S.Options.Editor.Interface.AutomaticallyFitImage}" Margin="0,3" IsChecked="{Binding Path=AutomaticallyFitImage, Mode=TwoWay}"/>
@@ -1398,11 +1435,17 @@
                         </Grid.RowDefinitions>
 
                         <n:LabelSeparator Grid.Row="0" Text="{DynamicResource S.Options.Extras.External}"/>
-                        <WrapPanel Grid.Row="1" Margin="5,0">
-                            <n:ImageCard x:Name="FfmpegImageCard" Header="FFmpeg" Click="FfmpegImageCard_Click"/>
-                            <n:ImageCard x:Name="GifskiImageCard" Header="Gifski" Click="GifskiImageCard_Click"/>
-                            <n:ImageCard x:Name="SharpDxImageCard" Header="SharpDx" Click="SharpDxImageCard_Click"/>
-                        </WrapPanel>
+                        <Grid Grid.Row="1" Margin="5,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <n:ImageCard Grid.Column="0" x:Name="FfmpegImageCard" Header="FFmpeg" Margin="0" Click="FfmpegImageCard_Click"/>
+                            <n:ImageCard Grid.Column="1" x:Name="GifskiImageCard" Header="Gifski" Margin="0" Click="GifskiImageCard_Click"/>
+                            <n:ImageCard Grid.Column="2" x:Name="SharpDxImageCard" Header="SharpDx" Margin="0" Click="SharpDxImageCard_Click"/>
+                        </Grid>
 
                         <n:LabelSeparator Grid.Row="2" Text="{DynamicResource S.Options.Extras.FfmpegLocation}"/>
                         <Grid Grid.Row="3">
@@ -1838,7 +1881,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="CryptoButton" Text="{DynamicResource Editor.Home.Copy}" Margin="5" Content="{StaticResource Vector.Text}" 
+                            <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="CryptoButton" Text="{DynamicResource S.Editor.Home.Copy}" Margin="5" Content="{StaticResource Vector.Text}" 
                                            ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Center" VerticalContentAlignment="Center"
                                            Foreground="#FF143A61" FontSize="14" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
                                            Click="BitcoinCashCopy_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
@@ -1871,41 +1914,40 @@
 
                     <!--About-->
                     <StackPanel x:Name="AboutPanel" Visibility="{Binding IsChecked, ElementName=AboutRadio, Converter={StaticResource Bool2Visibility}}">
-                        <Viewbox Child="{StaticResource Vector.Logo}" MaxHeight="50" MaxWidth="60" Margin="3" HorizontalAlignment="Center" Opacity="{DynamicResource Element.Opacity}"/>
-
-                        <Grid>
+                        <Grid HorizontalAlignment="Center">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
 
-                            <Label Grid.Row="0" Grid.Column="0" Content="ScreenToGif" FontSize="18" FontFamily="Segoe UI Semilight" Margin="0,0,5,0" 
-                                   HorizontalAlignment="Right" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground}" Effect="{StaticResource Shadow.Foreground}"/>
+                            <Viewbox Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Child="{StaticResource Vector.Logo}" MaxHeight="50" MaxWidth="60" Margin="10" HorizontalAlignment="Center" 
+                                     Opacity="{DynamicResource Element.Opacity}"/>
 
-                            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
-                                <Label Content="{DynamicResource S.Options.About.Version}" FontSize="18" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground}"
-                                       VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground}"/>
-                                <Label Content="{Binding Source={x:Static u:UserSettings.All}, Path=Version}" FontSize="18" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Foreground}"
-                                       VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground}"/>
+                            <Label Grid.Row="0" Grid.Column="1" Content="ScreenToGif" FontSize="18" Margin="0,0,5,0" 
+                                   HorizontalAlignment="Right" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground}"/>
+
+                            <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal">
+                                <Label Content="{DynamicResource S.Options.About.Version}" FontSize="18" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground}"/>
+                                <Label Content="{Binding Source={x:Static u:UserSettings.All}, Path=Version}" FontSize="18" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground}"/>
                             </StackPanel>
 
-                            <Label Grid.Row="1" Grid.Column="0" FontSize="16" FontFamily="Segoe UI Semilight" HorizontalAlignment="Right" Cursor="Hand" Padding="3,5" VerticalContentAlignment="Center"
-                                   Effect="{StaticResource Shadow.Foreground}">
+                            <Label Grid.Row="1" Grid.Column="1" FontSize="16" HorizontalAlignment="Right" Cursor="Hand" Padding="3,5" VerticalContentAlignment="Center">
                                 <Hyperlink NavigateUri="https://www.screentogif.com/" RequestNavigate="Hyperlink_OnRequestNavigate">
                                     screentogif.com
                                 </Hyperlink>
                             </Label>
 
-                            <Label Grid.Row="1" Grid.Column="1" Content="{DynamicResource S.Options.About.Author}" FontSize="16" FontFamily="Segoe UI Semilight" VerticalContentAlignment="Center" 
-                                   Foreground="{DynamicResource Element.Foreground}" Effect="{StaticResource Shadow.Foreground}"/>
+                            <Label Grid.Row="1" Grid.Column="2" Content="{DynamicResource S.Options.About.Author}" FontSize="16" VerticalContentAlignment="Center" 
+                                   Foreground="{DynamicResource Element.Foreground}"/>
 
-                            <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" x:Name="StoreTextBlock" Text="{DynamicResource S.Options.About.StoreVersion}" Foreground="#882200" Margin="5"
-                                   VerticalAlignment="Center" HorizontalAlignment="Center" Effect="{StaticResource Shadow.Foreground}" Visibility="Collapsed"/>
+                            <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" x:Name="StoreTextBlock" Text="{DynamicResource S.Options.About.StoreVersion}" Foreground="#882200" Margin="5"
+                                       VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed"/>
                         </Grid>
 
                         <n:LabelSeparator Text="{DynamicResource S.Options.About.Contact}"/>
@@ -1957,12 +1999,12 @@
                                 </Hyperlink>
                             </TextBlock>
 
-                            <TextBlock Grid.Row="2" Grid.Column="2" Text="Gitter:" FontSize="12" VerticalAlignment="Center" Margin="15,0,5,0" Foreground="{DynamicResource Element.Foreground}"/>
+                            <!--<TextBlock Grid.Row="2" Grid.Column="2" Text="Gitter:" FontSize="12" VerticalAlignment="Center" Margin="15,0,5,0" Foreground="{DynamicResource Element.Foreground}"/>
                             <TextBlock Grid.Row="2" Grid.Column="3" FontSize="12" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
                                 <Hyperlink NavigateUri="https://gitter.im/ScreenToGif/Lobby" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" RequestNavigate="Hyperlink_OnRequestNavigate">
                                     <Run Text="{StaticResource S.Options.About.Contact.Gitter}"/>
                                 </Hyperlink>
-                            </TextBlock>
+                            </TextBlock>-->
                         </Grid>
 
                         <n:LabelSeparator Text="{DynamicResource S.Options.About.Technical}"/>
@@ -2004,9 +2046,9 @@
                             <Label Grid.Row="2" Grid.Column="0" Content="{DynamicResource S.Options.About.Technical.Privacy}" FontSize="12" VerticalContentAlignment="Center" Margin="15,0,0,0" Foreground="{DynamicResource Element.Foreground}"/>
 
                             <TextBlock Grid.Row="2" Grid.Column="1" FontSize="12" HorizontalAlignment="Left" Cursor="Hand" Padding="3,5">
-                                <Hyperlink NavigateUri="https://www.screentogif.com/privacy.html" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
+                                <Hyperlink NavigateUri="https://www.screentogif.com/privacy-terms" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=NavigateUri}" 
                                            RequestNavigate="Hyperlink_OnRequestNavigate">
-                                    screentogif.com/privacy
+                                    screentogif.com/privacy-terms
                                 </Hyperlink>
                             </TextBlock>
                         </Grid>

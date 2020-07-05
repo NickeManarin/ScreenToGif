@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using Microsoft.Win32;
+using ScreenToGif.Controls;
 using ScreenToGif.Model;
 using ScreenToGif.Util;
 using ScreenToGif.Util.ActivityHook;
@@ -196,12 +197,8 @@ namespace ScreenToGif.Windows
 
             #endregion
 
-            #region If Snapshot
-
-            if (UserSettings.All.SnapshotMode)
-                EnableSnapshot_Executed(null, null);
-
-            #endregion
+            DetectCaptureFrequency();
+            DetectThinMode();
 
             #region Timers
 
@@ -407,10 +404,10 @@ namespace ScreenToGif.Windows
         {
             _discardFramesDel.EndInvoke(ar);
 
-            Dispatcher.Invoke(() =>
+            Dispatcher.BeginInvoke(new Action(() =>
             {
                 //Enables the controls that are disabled while recording;
-                FpsIntegerUpDown.IsEnabled = true;
+                FrequencyIntegerUpDown.IsEnabled = true;
                 HeightIntegerBox.IsEnabled = true;
                 WidthIntegerBox.IsEnabled = true;
                 OutterGrid.IsEnabled = true;
@@ -420,20 +417,9 @@ namespace ScreenToGif.Windows
 
                 DiscardButton.BeginStoryboard(FindResource("HideDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
 
-                if (!UserSettings.All.SnapshotMode)
-                {
-                    //Only display the Record text when not in snapshot mode. 
-                    Title = "ScreenToGif";
-                    Stage = Stage.Stopped;
-                }
-                else
-                {
-                    Stage = Stage.Snapping;
-                    EnableSnapshot_Executed(null, null);
-                }
-
+                DetectCaptureFrequency();
                 AutoFitButtons();
-            });
+            }));
 
             GC.Collect();
         }
@@ -442,15 +428,9 @@ namespace ScreenToGif.Windows
 
         #region Buttons
 
-        private void EnableSnapshot_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        private void SwitchCaptureFrequency_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = (Stage == Stage.Stopped || Stage == Stage.Snapping || Stage == Stage.Paused) && OutterGrid.IsEnabled;
-        }
-
-        private void EnableThinMode_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            //Only allows if (it's stoped or snapping but with nothing recorded) and the outter grid is enabled.
-            e.CanExecute = (Stage == Stage.Stopped || (Stage == Stage.Snapping && (Project == null || Project.Frames.Count == 0))) && OutterGrid.IsEnabled;
         }
 
         private void Options_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -461,10 +441,13 @@ namespace ScreenToGif.Windows
 
         private async void RecordPauseButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!UserSettings.All.SnapshotMode)
-                await RecordPause();
-            else
+            if (UserSettings.All.CaptureFrequency == CaptureFrequency.Manual)
+            {
                 await Snap();
+                return;
+            }
+
+            await RecordPause();
         }
 
         private async void StopButton_Click(object sender, RoutedEventArgs e)
@@ -487,84 +470,46 @@ namespace ScreenToGif.Windows
             _discardFramesDel.BeginInvoke(DiscardCallback, null);
         }
 
-        private void EnableSnapshot_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            if (UserSettings.All.SnapshotMode)
-            {
-                #region SnapShot Recording
-
-                //Set to Snapshot Mode, change the text of the record button to "Snap" and 
-                //every press of the button, takes a screenshot
-                Stage = Stage.Snapping;
-                Title = "ScreenToGif - " + LocalizationHelper.Get("S.Recorder.Snapshot");
-
-                AutoFitButtons();
-
-                #endregion
-            }
-            else
-            {
-                #region Normal Recording
-
-                if (_capture != null)
-                    _capture.SnapDelay = null;
-
-                if (Project?.Frames?.Count > 0)
-                {
-                    Stage = Stage.Paused;
-                    Title = LocalizationHelper.Get("S.Recorder.Paused");
-
-                    DiscardButton.BeginStoryboard(FindResource("ShowDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
-                }
-                else
-                {
-                    Stage = Stage.Stopped;
-                    Title = "ScreenToGif";
-                }
-
-                AutoFitButtons();
-
-                FrameRate.Stop();
-
-                #region Register the events
-
-                UnregisterEvents();
-
-                if (UserSettings.All.ShowCursor)
-                {
-                    if (UserSettings.All.AsyncRecording)
-                        _captureTimer.Tick += CursorAsync_Elapsed;
-                    else
-                        _captureTimer.Tick += Cursor_Elapsed;
-                }
-                else
-                {
-                    if (UserSettings.All.AsyncRecording)
-                        _captureTimer.Tick += NormalAsync_Elapsed;
-                    else
-                        _captureTimer.Tick += Normal_Elapsed;
-                }
-
-                #endregion
-
-                #endregion
-            }
-        }
-
         private void Options_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Topmost = false;
 
-            var wasSnapshot = UserSettings.All.SnapshotMode;
-
             var options = new Options(Options.RecorderIndex);
             options.ShowDialog();
 
-            //Enables or disables the snapshot mode.
-            if (wasSnapshot != UserSettings.All.SnapshotMode)
-                EnableSnapshot_Executed(sender, e);
+            DetectCaptureFrequency();
+            DetectThinMode();
 
             Topmost = true;
+        }
+
+        private void SwitchCaptureFrequency_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            //When this event is fired from clicking on the switch button.
+            if (e.Parameter != null)
+            {
+                switch (UserSettings.All.CaptureFrequency)
+                {
+                    case CaptureFrequency.Manual:
+                        UserSettings.All.CaptureFrequency = CaptureFrequency.PerSecond;
+                        break;
+
+                    case CaptureFrequency.PerSecond:
+                        UserSettings.All.CaptureFrequency = CaptureFrequency.PerMinute;
+                        break;
+
+                    case CaptureFrequency.PerMinute:
+                        UserSettings.All.CaptureFrequency = CaptureFrequency.PerHour;
+                        break;
+
+                    default: //PerHour.
+                        UserSettings.All.CaptureFrequency = CaptureFrequency.Manual;
+                        break;
+                }
+            }
+
+            //When event is fired when the frequency is picked from the context menu, just switch the labels.
+            DetectCaptureFrequency();
         }
 
         private void SnapToWindow_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -577,14 +522,6 @@ namespace ScreenToGif.Windows
             Mouse.Capture(this);
 
             Cursor = Cursors.Cross;
-        }
-
-        private void EnableThinMode_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            //Updates the Offsets of the two controls (because it's a static property, it will not update by itself).
-
-            HeightIntegerBox.Offset = Constants.VerticalOffset;
-            WidthIntegerBox.Offset = Constants.HorizontalOffset;
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
@@ -633,7 +570,6 @@ namespace ScreenToGif.Windows
                     _captureTimer.Start();
 
                     Stage = Stage.Recording;
-
                     AutoFitButtons();
 
                     #endregion
@@ -784,9 +720,13 @@ namespace ScreenToGif.Windows
                 {
                     case Stage.Stopped:
 
-                        #region To Record
+                        #region To record
 
-                        _captureTimer = new Timer { Interval = 1000 / FpsIntegerUpDown.Value };
+                        //Take into account the frequency mode.
+                        _captureTimer = new Timer
+                        {
+                            Interval = GetCaptureInterval()
+                        };
 
                         Project = new ProjectInfo().CreateProjectFolder(ProjectByType.ScreenRecorder);
 
@@ -799,12 +739,12 @@ namespace ScreenToGif.Windows
 
                         HeightIntegerBox.IsEnabled = false;
                         WidthIntegerBox.IsEnabled = false;
-                        FpsIntegerUpDown.IsEnabled = false;
+                        FrequencyIntegerUpDown.IsEnabled = false;
 
                         IsRecording = true;
                         Topmost = true;
 
-                        FrameRate.Start(_captureTimer.Interval);
+                        FrameRate.Start(HasFixedDelay(), GetFixedDelay());
                         UnregisterEvents();
 
                         #region Start
@@ -823,7 +763,7 @@ namespace ScreenToGif.Windows
                         {
                             if (UserSettings.All.ShowCursor)
                             {
-                                #region If Show Cursor
+                                #region Show the cursor
 
                                 if (UserSettings.All.AsyncRecording)
                                     _captureTimer.Tick += CursorAsync_Elapsed;
@@ -832,15 +772,23 @@ namespace ScreenToGif.Windows
 
                                 _captureTimer.Start();
 
-                                Stage = Stage.Recording;
+                                //Manually capture the first frame on timelapse mode.
+                                if (UserSettings.All.CaptureFrequency == CaptureFrequency.PerMinute || UserSettings.All.CaptureFrequency == CaptureFrequency.PerHour)
+                                {
+                                    if (UserSettings.All.AsyncRecording)
+                                        CursorAsync_Elapsed(null, null);
+                                    else
+                                        Cursor_Elapsed(null, null);
+                                }
 
+                                Stage = Stage.Recording;
                                 AutoFitButtons();
 
                                 #endregion
                             }
                             else
                             {
-                                #region If Not
+                                #region Don't show the cursor
 
                                 if (UserSettings.All.AsyncRecording)
                                     _captureTimer.Tick += NormalAsync_Elapsed;
@@ -849,13 +797,22 @@ namespace ScreenToGif.Windows
 
                                 _captureTimer.Start();
 
-                                Stage = Stage.Recording;
+                                //Manually capture the first frame on timelapse mode.
+                                if (UserSettings.All.CaptureFrequency == CaptureFrequency.PerMinute || UserSettings.All.CaptureFrequency == CaptureFrequency.PerHour)
+                                {
+                                    if (UserSettings.All.AsyncRecording)
+                                        NormalAsync_Elapsed(null, null);
+                                    else
+                                        Normal_Elapsed(null, null);
+                                }
 
+                                Stage = Stage.Recording;
                                 AutoFitButtons();
 
                                 #endregion
                             }
                         }
+
                         break;
 
                     #endregion
@@ -864,13 +821,14 @@ namespace ScreenToGif.Windows
 
                     case Stage.Recording:
 
-                        #region To Pause
+                        #region To pause
 
                         _captureTimer.Stop();
                         FrameRate.Stop();
 
                         Stage = Stage.Paused;
                         Title = LocalizationHelper.Get("S.Recorder.Paused");
+                        FrequencyIntegerUpDown.IsEnabled = true;
 
                         DiscardButton.BeginStoryboard(FindResource("ShowDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
 
@@ -881,16 +839,19 @@ namespace ScreenToGif.Windows
 
                     case Stage.Paused:
 
-                        #region To Record Again
+                        #region To record again
 
                         Stage = Stage.Recording;
                         Title = "ScreenToGif";
+                        FrequencyIntegerUpDown.IsEnabled = false;
 
                         DiscardButton.BeginStoryboard(FindResource("HideDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
-
+                        
                         AutoFitButtons();
 
-                        FrameRate.Start(_captureTimer.Interval);
+                        FrameRate.Start(HasFixedDelay(), GetFixedDelay());
+                        
+                        _captureTimer.Interval = GetCaptureInterval();
                         _captureTimer.Start();
                         break;
 
@@ -916,6 +877,8 @@ namespace ScreenToGif.Windows
 
                     await PrepareNewCapture();
 
+                    HeightIntegerBox.IsEnabled = false;
+                    WidthIntegerBox.IsEnabled = false;
                     IsRecording = true;
                 }
                 catch (Exception ex)
@@ -926,28 +889,33 @@ namespace ScreenToGif.Windows
                 }
             }
 
-            if (_capture != null)
-                _capture.SnapDelay = UserSettings.All.SnapshotDefaultDelay;
-
             #region Take the screenshot
 
-            var limit = 0;
-            do
+            try
             {
-                if (UserSettings.All.ShowCursor)
-                    Cursor_Elapsed(null, null);
-                else
-                    Normal_Elapsed(null, null);
-
-                if (limit > 10)
+                var limit = 0;
+                do
                 {
-                    ErrorDialog.Ok(Title, LocalizationHelper.Get("S.Recorder.Warning.CaptureNotPossible"), LocalizationHelper.Get("S.Recorder.Warning.CaptureNotPossible.Info"), null);
-                    return;
-                }
+                    FrameCount = await _capture.ManualCaptureAsync(new FrameInfo(_recordClicked, _keyList), UserSettings.All.ShowCursor);
 
-                limit++;
+                    _keyList.Clear();
+
+                    if (limit > 5)
+                        throw new Exception("Impossible to capture the manual screenshot.");
+
+                    limit++;
+                }
+                while (FrameCount == 0);
             }
-            while (FrameCount == 0);
+            catch (Exception e)
+            {
+                HeightIntegerBox.IsEnabled = true;
+                WidthIntegerBox.IsEnabled = true;
+                IsRecording = false;
+
+                LogWriter.Log(e, "Impossible to capture the manual screenshot.");
+                ErrorDialog.Ok(Title, LocalizationHelper.Get("S.Recorder.Warning.CaptureNotPossible"), LocalizationHelper.Get("S.Recorder.Warning.CaptureNotPossible.Info"), e);
+            }
 
             #endregion
         }
@@ -971,7 +939,7 @@ namespace ScreenToGif.Windows
                 if (_capture != null)
                     await _capture.Stop();
 
-                if (Stage != Stage.Stopped && Stage != Stage.PreStarting && Project.Any)
+                if (Stage != Stage.Stopped && Stage != Stage.PreStarting && Project?.Any == true)
                 {
                     #region Stop
 
@@ -984,7 +952,7 @@ namespace ScreenToGif.Windows
 
                     #endregion
                 }
-                else if ((Stage == Stage.PreStarting || Stage == Stage.Snapping) && !Project.Any)
+                else if (Stage == Stage.PreStarting || Stage == Stage.Snapping || Project?.Any != true)
                 {
                     #region if Pre-Starting or in Snapmode and no Frames, Stops
 
@@ -998,7 +966,7 @@ namespace ScreenToGif.Windows
                     Stage = Stage == Stage.Snapping ? Stage.Snapping : Stage.Stopped;
 
                     //Enables the controls that are disabled while recording;
-                    FpsIntegerUpDown.IsEnabled = true;
+                    FrequencyIntegerUpDown.IsEnabled = true;
                     RecordPauseButton.IsEnabled = true;
                     HeightIntegerBox.IsEnabled = true;
                     WidthIntegerBox.IsEnabled = true;
@@ -1239,12 +1207,136 @@ namespace ScreenToGif.Windows
 
             var dpi = Monitor.AllMonitors.FirstOrDefault(f => f.IsPrimary)?.Dpi ?? 96d;
 
-            _capture.Start(1000 / FpsIntegerUpDown.Value, _left, _top, _width, _height, dpi / 96d, Project);
+            _capture.Start(GetCaptureInterval(), _left, _top, _width, _height, dpi / 96d, Project);
         }
 
         private ICapture GetDirectCapture()
         {
             return UserSettings.All.UseMemoryCache ? new DirectCachedCapture() : new DirectImageCapture();
+        }
+
+        private void DetectCaptureFrequency()
+        {
+            switch (UserSettings.All.CaptureFrequency)
+            {
+                case CaptureFrequency.Manual:
+                    FrequencyButton.SetResourceReference(ImageButton.TextProperty, "S.Recorder.Manual.Short");
+                    FrequencyIntegerUpDown.Visibility = Visibility.Collapsed;
+                    FrequencyViewbox.Visibility = Visibility.Collapsed;
+                    AdjustToManual();
+                    break;
+                case CaptureFrequency.PerSecond:
+                    FrequencyButton.SetResourceReference(ImageButton.TextProperty, "S.Recorder.Fps.Short");
+                    FrequencyIntegerUpDown.SetResourceReference(ToolTipProperty, "S.Recorder.Fps");
+                    FrequencyViewbox.SetResourceReference(ToolTipProperty, "S.Recorder.Fps.Range");
+                    FrequencyIntegerUpDown.Visibility = Visibility.Visible;
+                    FrequencyViewbox.Visibility = Visibility.Visible;
+                    AdjustToAutomatic();
+                    break;
+
+                case CaptureFrequency.PerMinute:
+                    FrequencyButton.SetResourceReference(ImageButton.TextProperty, "S.Recorder.Fpm.Short");
+                    FrequencyIntegerUpDown.SetResourceReference(ToolTipProperty, "S.Recorder.Fpm");
+                    FrequencyViewbox.SetResourceReference(ToolTipProperty, "S.Recorder.Fpm.Range");
+                    FrequencyIntegerUpDown.Visibility = Visibility.Visible;
+                    FrequencyViewbox.Visibility = Visibility.Visible;
+                    AdjustToAutomatic();
+                    break;
+
+                default: //PerHour.
+                    FrequencyButton.SetResourceReference(ImageButton.TextProperty, "S.Recorder.Fph.Short");
+                    FrequencyIntegerUpDown.SetResourceReference(ToolTipProperty, "S.Recorder.Fph");
+                    FrequencyViewbox.SetResourceReference(ToolTipProperty, "S.Recorder.Fph.Range");
+                    FrequencyIntegerUpDown.Visibility = Visibility.Visible;
+                    FrequencyViewbox.Visibility = Visibility.Visible;
+                    AdjustToAutomatic();
+                    break;
+            }
+        }
+
+        private void AdjustToManual()
+        {
+            Stage = Stage.Snapping;
+            Title = "ScreenToGif";
+
+            AutoFitButtons();
+        }
+
+        private void AdjustToAutomatic()
+        {
+            if (Project?.Frames?.Count > 0)
+            {
+                Stage = Stage.Paused;
+                Title = LocalizationHelper.Get("S.Recorder.Paused");
+            }
+            else
+            {
+                Stage = Stage.Stopped;
+                Title = "ScreenToGif";
+            }
+
+            AutoFitButtons();
+            FrameRate.Stop();
+
+            //Register the events
+            UnregisterEvents();
+
+            if (UserSettings.All.ShowCursor)
+            {
+                if (UserSettings.All.AsyncRecording)
+                    _captureTimer.Tick += CursorAsync_Elapsed;
+                else
+                    _captureTimer.Tick += Cursor_Elapsed;
+            }
+            else
+            {
+                if (UserSettings.All.AsyncRecording)
+                    _captureTimer.Tick += NormalAsync_Elapsed;
+                else
+                    _captureTimer.Tick += Normal_Elapsed;
+            }
+        }
+
+        private int GetCaptureInterval()
+        {
+            switch (UserSettings.All.CaptureFrequency)
+            {
+                case CaptureFrequency.PerHour: //15 frames per hour = 240,000 ms (240 sec, 4 min).
+                    return (1000 * 60 * 60) / FrequencyIntegerUpDown.Value;
+
+                case CaptureFrequency.PerMinute: //15 frames per minute = 4,000 ms (4 sec).
+                    return (1000 * 60) / FrequencyIntegerUpDown.Value;
+
+                default: //PerSecond. 15 frames per second = 66 ms.
+                    return 1000 / FrequencyIntegerUpDown.Value;
+            }
+        }
+
+        private bool HasFixedDelay()
+        {
+            return UserSettings.All.CaptureFrequency != CaptureFrequency.PerSecond || UserSettings.All.FixedFrameRate;
+        }
+
+        private int GetFixedDelay()
+        {
+            switch (UserSettings.All.CaptureFrequency)
+            {
+                case CaptureFrequency.Manual:
+                    return UserSettings.All.PlaybackDelayManual;
+                case CaptureFrequency.PerMinute:
+                    return UserSettings.All.PlaybackDelayMinute;
+                case CaptureFrequency.PerHour:
+                    return UserSettings.All.PlaybackDelayHour;
+                default: //When the capture is 'PerSecond', the fixed delay is set to use the current framerate.
+                    return 1000 / FrequencyIntegerUpDown.Value;
+            }
+        }
+
+        private void DetectThinMode()
+        {
+            //Updates the Offsets of the two controls (because it's a static property, it will not update by itself).
+            HeightIntegerBox.Offset = Constants.VerticalOffset;
+            WidthIntegerBox.Offset = Constants.HorizontalOffset;
         }
 
         #endregion

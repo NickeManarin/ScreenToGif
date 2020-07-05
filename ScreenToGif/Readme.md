@@ -5,29 +5,29 @@ This is the current project of ScreenToGif.
 _VS 2019 and .Net 4.8 or newer required._
 
 
-## What's new? (Version 2.24.2)
+## What's new? (Version 2.26)
 
-• You can disable tasks without having to remove them.  
-• Added the option to upload APNGs too.  
-• Added a new parameter to the post encoding commands (URL).  
-• Updated the Japanese, Chinese (Simplified), Dutch and Russian localizations.  
-• The options window will adjust its width to its contents when opening.  
+• Timelapse recording!  
+• The built-in encoders got re-designed from scratch! 
+• Now you can select the color quantization method (Neural, Octree, MedianCut, Grayscale, and MostUsed) and understand the differences.  
+• You can select the the ammount of colors used for the Neural, Octree, MedianCut, Grayscale, and MostUsed quantization methods.  
+• Added support for transparency in the built-in encoder (works with all quantization methods).  
+• You can now switch between capture frequency modes from the recorder window (when paused or stopped, and even change the framerate).  
+• The encodings are now displayed in a popup attached to the editor (but you can still use the older alternative, a separated window).  
+• You can now see the total elapsed time of the encoding process.  
+♦ The 'Quality' slider of the Neural quantization method is now called 'Sampling', and it's properly explained what it means.  
 
 ### Fixed:
 
-♦ The screen capture (BitBlt + cursor) over a remote desktop connection was not working properly (thanks to Luis for the help).  
-♦ The editor window chrome (title bar) was not getting extended when needed.  
-♦ The app could crash before warning of the missing .Net 4.8 when having .Net 4.6.2 or older versions.  
-♦ If the project was too big (too many frames or frames too big), the PSD exporter could fail.  
-♦ Several texts where not translatable (thanks to László for the help).  
-♦ Copy and pasting a frame, then doing it again multiple times, could exceed the filename limit (thanks to Riku for the help).
-♦ The 'duplicated filename' warning was not getting hidden when unticking the option to save the file to a selected folder.  
+♦ The built-in encoders were giving green artifacts when the color used as chroma key was present in the frame.  
+♦ When opening the recorders while on snapshot mode and pressing the stop button, the app would crash (thanks to Naoki for finding that).  
+♦ The eye dropper of the color selector window was changing size when the drag started.  
+♦ It was impossible to capture the screen in manual mode with the DirectX capture method.  
+♦ The context menu items (undo, redo, and delete) were not being enabled (thanks to László for the help).  
 
 ### Known Bugs:
-
-♠ When importing multiple images with different sizes at the same time, the app does not ask to resize all images to the same size.   
+  
 ♠ When exporting with FFmpeg, the last frame may be out of sync with the timmings of the project.  
 ♠ Cancelling a encoding of FFmpeg will result in a crash (file in use).  
 ♠ Keystrokes has a 1 pixel transparent border at the bottom-right sides when using a high DPI screen.  
-♠ It's impossible to capture snapshots with the DirectX method.  
 ♠ When capturing with the DirectX, the recording will crash if the recording area is outside of the screen.  

@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Ink;
@@ -31,7 +27,7 @@ namespace ScreenToGif.Util.Converters
             if (!selection.HasValue || !selection.Value)
                 return DependencyProperty.UnsetValue;
 
-            if (String.IsNullOrEmpty(param))
+            if (string.IsNullOrEmpty(param))
                 return StylusTip.Rectangle;
 
             return param.Equals("Ellipse") ? StylusTip.Ellipse : StylusTip.Rectangle;

@@ -509,6 +509,5 @@
         </RoutedUICommand.InputGestures>
     </RoutedUICommand>
 
-    <RoutedUICommand x:Key="Command.EnableSnapshot" Text="S.Command.EnableSnapshot"/>
-    <RoutedUICommand x:Key="Command.EnableThinMode" Text="S.Command.EnableThinMode"/>
+    <RoutedUICommand x:Key="Command.SwitchCaptureFrequency" Text="S.Recorder.SwitchFrequency"/>
 </ResourceDictionary>

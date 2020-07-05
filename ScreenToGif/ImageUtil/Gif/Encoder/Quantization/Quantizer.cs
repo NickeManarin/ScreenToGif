@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Media;
 
 namespace ScreenToGif.ImageUtil.Gif.Encoder.Quantization
@@ -12,6 +14,12 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder.Quantization
         private readonly bool _singlePass;
 
         /// <summary>
+        /// Lookup table that holds the already calculated indexes for the colors.
+        /// </summary>
+        private readonly Hashtable _colorMap = new Hashtable();
+
+
+        /// <summary>
         /// The image depth.
         /// </summary>
         public int Depth { get; set; } = 4;
@@ -20,6 +28,11 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder.Quantization
         /// The maximum color count.
         /// </summary>
         public int MaxColors { get; set; } = 256;
+
+        /// <summary>
+        /// The maximum color count, without counting with the transparent color.
+        /// </summary>
+        public int MaxColorsWithTransparency { get; set; }
 
         /// <summary>
         /// The calculated color table of the image.
@@ -31,25 +44,45 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder.Quantization
         /// </summary>
         public Color? TransparentColor { get; set; }
 
+        /// <summary>
+        /// TODO: The index of the transparent color.
+        /// Not always MaxColors - 1, since the color table size is ^2 (...64, 128, 256).
+        /// When the user selects a value that doesn't fit nicely in one of those spots (like 200), we can avoid wasting one color position.
+        /// </summary>
+        public byte TransparentColorIndex 
+        { 
+            get 
+            {
+                var max = TransparentColor.HasValue ? MaxColors - 1 : MaxColors;
 
-        public Quantizer(bool singlePass)
+                //?
+                return 0;
+            }
+        }
+
+
+        protected Quantizer(bool singlePass)
         {
             _singlePass = singlePass;
         }
 
-        public byte[] Quantize(byte[] pixels)
+        public byte[] Quantize(byte[] pixels, bool secondPassOnly = false)
         {
             #region Validation
 
             if (MaxColors < 2 || MaxColors > 256)
-                throw new ArgumentOutOfRangeException(nameof(MaxColors), MaxColors, "The number of colors should be between 2 and 255");
+                throw new ArgumentOutOfRangeException(nameof(MaxColors), MaxColors, "The number of colors should be between 2 and 256");
 
             #endregion
 
-            if (!_singlePass)
-                FirstPass(pixels);
+            //When using a global color table, the analysis should not be executed again. 
+            if (!secondPassOnly)
+            {
+                if (!_singlePass)
+                    FirstPass(pixels);
 
-            ColorTable = GetPalette();
+                ColorTable = BuildPalette();
+            }
 
             return SecondPass(pixels);
         }
@@ -58,34 +91,128 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder.Quantization
         /// Execute the first pass through the pixels in the image
         /// </summary>
         /// <param name="pixels">The source data</param>
-        /// <param name="width">The width in pixels of the image</param>
-        /// <param name="height">The height in pixels of the image</param>
-        protected virtual void FirstPass(byte[] pixels)
+        internal virtual void FirstPass(byte[] pixels)
         {
-            //var pixelSize = Depth == 32 ? 4 : 3;
-
             for (var i = 0; i < pixels.Length; i += Depth)
-                InitialQuantizePixel(new Color { A = 255, B = pixels[i], G = pixels[i + 1], R = pixels[i + 2] });
+                InitialQuantizePixel(Color.FromArgb(pixels[i + 3], pixels[i + 2], pixels[i + 1], pixels[i])); //Pixels are in BGR.
         }
 
-        protected virtual byte[] SecondPass(byte[] pixels)
+        internal List<Color> GetPalette()
+        {
+            return ColorTable = BuildPalette();
+        }
+
+        internal virtual byte[] ParallelSecondPass(byte[] pixels)
+        {
+            var output = new byte[pixels.Length / Depth];
+
+            Parallel.For(0, pixels.Length / Depth, index =>
+            {
+                var trueIndex = index * Depth;
+
+                //Transparent pixels translate to the end of the color table.
+                if (pixels[trueIndex + 3] == 0)
+                {
+                    output[index] = (byte)(ColorTable.Count - 1);
+                    return;
+                }
+
+                var pixel = new Color
+                {
+                    B = pixels[trueIndex],
+                    G = pixels[trueIndex + 1],
+                    R = pixels[trueIndex + 2],
+                    A = pixels[trueIndex + 3]
+                };
+
+                //lock (output)
+                {
+                    var hash = BitConverter.ToInt32(new[] { byte.MaxValue, pixel.R, pixel.G, pixel.B }, 0);
+
+                    if (_colorMap.ContainsKey(hash))
+                    {
+                        output[index] = (byte)_colorMap[hash];
+                        return;
+                    }
+
+                    var position = QuantizePixel(pixel);
+
+                    output[index] = position;
+                    _colorMap.Add(hash, position);
+                }
+            });
+
+            return output;
+
+            //var output = new List<byte>();
+            //
+            //for (var index = 0; index < pixels.Length; index += Depth)
+            //{
+            //    //Transparent pixels translate to the end of the color table.
+            //    if (pixels[index + 3] == 0)
+            //    {
+            //        output.Add((byte)(ColorTable.Count - 1));
+            //        continue;
+            //    }
+
+            //    var pixel = new Color
+            //    {
+            //        B = pixels[index], 
+            //        G = pixels[index + 1], 
+            //        R = pixels[index + 2], 
+            //        A = pixels[index + 3]
+            //    };
+
+            //    var hash = BitConverter.ToInt32(new[] { byte.MaxValue, pixel.R, pixel.G, pixel.B }, 0);
+
+            //    if (_colorMap.ContainsKey(hash))
+            //    {
+            //        output.Add((byte) _colorMap[hash]);
+            //        continue;
+            //    }
+
+            //    var position = QuantizePixel(pixel);
+
+            //    output.Add(position);
+            //    _colorMap.Add(hash, position);
+            //}
+            //
+            //return output.ToArray();
+        }
+
+        internal virtual byte[] SecondPass(byte[] pixels)
         {
             var output = new List<byte>();
-            var previous = new Color { A = 255, B = pixels[0], G = pixels[1], R = pixels[2] };
-            var previousByte = QuantizePixel(previous);
 
-            output.Add(previousByte);
-
-            for (var i = Depth; i < pixels.Length; i += Depth)
+            for (var index = 0; index < pixels.Length; index += Depth)
             {
-                if (previous.B != pixels[i] || previous.G != pixels[i + 1] || previous.R != pixels[i + 2])
+                //Transparent pixels translate to the end of the color table.
+                if (pixels[index + 3] == 0)
                 {
-                    previous = new Color { A = 255, B = pixels[i], G = pixels[i + 1], R = pixels[i + 2] };
-                    previousByte = QuantizePixel(previous);
-                    output.Add(previousByte);
+                    output.Add((byte)(ColorTable.Count - 1));
+                    continue;
                 }
-                else
-                    output.Add(previousByte);
+
+                var pixel = new Color
+                {
+                    B = pixels[index],
+                    G = pixels[index + 1],
+                    R = pixels[index + 2],
+                    A = pixels[index + 3]
+                };
+
+                var hash = BitConverter.ToInt32(new[] { byte.MaxValue, pixel.R, pixel.G, pixel.B }, 0);
+
+                if (_colorMap.ContainsKey(hash))
+                {
+                    output.Add((byte)_colorMap[hash]);
+                    continue;
+                }
+
+                var position = QuantizePixel(pixel);
+
+                output.Add(position);
+                _colorMap.Add(hash, position);
             }
 
             return output.ToArray();
@@ -113,6 +240,6 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder.Quantization
         /// Retrieve the palette for the quantized image
         /// </summary>
         /// <returns>The new color palette</returns>
-        protected abstract List<Color> GetPalette();
+        internal abstract List<Color> BuildPalette();
     }
 }

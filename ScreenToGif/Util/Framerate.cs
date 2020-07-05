@@ -12,7 +12,7 @@ namespace ScreenToGif.Util
         private static Stopwatch _stopwatch = new Stopwatch();
         private static int _interval = 15;
         private static bool _started = true;
-        private static bool _fixedFrameRate = false;
+        private static bool _fixedRate = false;
 
         #endregion
 
@@ -25,20 +25,29 @@ namespace ScreenToGif.Util
             _stopwatch = new Stopwatch();
 
             _interval = interval;
-            _fixedFrameRate = UserSettings.All.FixedFrameRate;
+            _fixedRate = UserSettings.All.FixedFrameRate;
+        }
+
+        /// <summary>
+        /// Prapares the framerate monitor
+        /// </summary>
+        /// <param name="useFixed">If true, uses the fixed internal provided.</param>
+        /// <param name="interval">The fixed interval to be used.</param>
+        public static void Start(bool useFixed, int interval)
+        {
+            _stopwatch = new Stopwatch();
+
+            _interval = interval;
+            _fixedRate = useFixed;
         }
 
         /// <summary>
         /// Gets the diff between the last call.
         /// </summary>
         /// <returns>The ammount of seconds.</returns>
-        public static int GetMilliseconds(int? framerate = null)
+        public static int GetMilliseconds()
         {
-            //Specific delay, for the snapshot feature, for example.
-            if (framerate.HasValue)
-                return framerate.Value;
-
-            if (_fixedFrameRate)
+            if (_fixedRate)
                 return _interval;
 
             if (_started)

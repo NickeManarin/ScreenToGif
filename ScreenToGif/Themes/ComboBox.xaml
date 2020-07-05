@@ -131,7 +131,7 @@
                    IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
                    PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
 
-                <Border x:Name="DropDownBorder" BorderBrush="{DynamicResource Element.Border}" BorderThickness="1" Background="{DynamicResource Element.Background}" Effect="{DynamicResource Shadow.Black}"
+                <Border x:Name="DropDownBorder" BorderBrush="{DynamicResource Element.Border}" BorderThickness="1" Background="{DynamicResource Element.Background}" Effect="{DynamicResource Shadow.Border}"
                         MaxHeight="{TemplateBinding MaxDropDownHeight}" MinWidth="{Binding ActualWidth, ElementName=templateRoot}">
                     <ScrollViewer x:Name="DropDownScrollViewer">
                         <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
@@ -336,7 +336,7 @@
             <Popup x:Name="PART_Popup" AllowsTransparency="True" Grid.ColumnSpan="2" IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
                    PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" Placement="Bottom">
                 <Grid x:Name="shadow" Background="Transparent" MaxHeight="{TemplateBinding MaxDropDownHeight}" MinWidth="{Binding ActualWidth, ElementName=templateRoot}">
-                    <Border x:Name="DropDownBorder" BorderBrush="{DynamicResource Element.Border}" BorderThickness="1" Background="{DynamicResource Element.Background}" Effect="{DynamicResource Shadow.Black}" Margin="0,0,0,5">
+                    <Border x:Name="DropDownBorder" BorderBrush="{DynamicResource Element.Border}" BorderThickness="1" Background="{DynamicResource Element.Background}" Effect="{DynamicResource Shadow.Border}" Margin="0,0,0,5">
                         <ScrollViewer x:Name="DropDownScrollViewer">
                             <Grid x:Name="grid" RenderOptions.ClearTypeHint="Enabled">
                                 <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="0">

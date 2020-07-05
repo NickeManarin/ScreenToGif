@@ -79,6 +79,7 @@ namespace ScreenToGif.Model
                             recorderNew.Closed += (sender, args) =>
                             {
                                 var window = sender as RecorderNew;
+                                //var window = sender as NewRecorder;
 
                                 if (window?.Project != null && window.Project.Any)
                                 {
@@ -748,7 +749,7 @@ namespace ScreenToGif.Model
 
                 //If there's less than 2GB left.
                 if (drive.AvailableFreeSpace < 2_000_000_000)
-                    Application.Current.Dispatcher?.Invoke(() => NotificationManager.AddNotification(LocalizationHelper.GetWithFormat("Editor.Warning.LowSpace", Math.Round(Global.AvailableDiskSpacePercentage, 2)),
+                    Application.Current.Dispatcher?.Invoke(() => NotificationManager.AddNotification(LocalizationHelper.GetWithFormat("S.Editor.Warning.LowSpace", Math.Round(Global.AvailableDiskSpacePercentage, 2)),
                         StatusType.Warning, "disk", () => App.MainViewModel.OpenOptions.Execute(Options.TempFilesIndex)));
                 else
                     Application.Current.Dispatcher?.Invoke(() => NotificationManager.RemoveNotification(r => r.Tag == "disk"));
@@ -798,7 +799,7 @@ namespace ScreenToGif.Model
             }
         }
 
-        internal void CheckForUpdates()
+        internal async void CheckForUpdates()
         {
             Global.UpdateAvailable = null;
 
@@ -810,11 +811,11 @@ namespace ScreenToGif.Model
                 return;
 
             //Try checking for the update on Github first then fallbacks to Fosshub.
-            if (!CheckOnGithub())
-                CheckOnFosshub();
+            if (!await CheckOnGithub())
+                await CheckOnFosshub();
         }
 
-        private bool CheckOnGithub()
+        private async Task<bool> CheckOnGithub()
         {
             try
             {
@@ -822,7 +823,8 @@ namespace ScreenToGif.Model
                 if (AppDomain.CurrentDomain.BaseDirectory.EndsWith(@"Chocolatey\lib\screentogif\content\"))
                     return true;
 
-                //GraphQL equivalent.
+                #region GraphQL equivalent
+
                 //query {
                 //    repository(owner: "NickeManarin", name: "ScreenToGif") {
                 //        releases(first: 1, orderBy: { field: CREATED_AT, direction: DESC}) {
@@ -846,11 +848,13 @@ namespace ScreenToGif.Model
                 //    }
                 //}
 
+                #endregion
+
                 var request = (HttpWebRequest)WebRequest.Create("https://api.github.com/repos/NickeManarin/ScreenToGif/releases/latest");
                 request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
                 request.Proxy = WebHelper.GetProxy();
 
-                var response = (HttpWebResponse)request.GetResponse();
+                var response = (HttpWebResponse)await request.GetResponseAsync();
 
                 using (var resultStream = response.GetResponseStream())
                 {
@@ -859,7 +863,7 @@ namespace ScreenToGif.Model
 
                     using (var reader = new StreamReader(resultStream))
                     {
-                        var result = reader.ReadToEnd();
+                        var result = await reader.ReadToEndAsync();
                         var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(result), new System.Xml.XmlDictionaryReaderQuotas());
                         var release = XElement.Load(jsonReader);
 
@@ -879,11 +883,12 @@ namespace ScreenToGif.Model
                             InstallerName = release.XPathSelectElement("assets/item[2]/name")?.Value ?? "ScreenToGif.Setup.msi",
                         };
 
-                        Application.Current.Dispatcher?.Invoke(() => NotificationManager.AddNotification(string.Format(LocalizationHelper.Get("S.Updater.NewRelease.Info"), Global.UpdateAvailable.Version), StatusType.Update, "update", PromptUpdate));
+                        Application.Current.Dispatcher?.BeginInvoke(new Action(() => NotificationManager.AddNotification(string.Format(LocalizationHelper.Get("S.Updater.NewRelease.Info"), 
+                            Global.UpdateAvailable.Version), StatusType.Update, "update", PromptUpdate)));
 
                         //Download update to be installed when the app closes.
                         if (UserSettings.All.InstallUpdates && !string.IsNullOrEmpty(Global.UpdateAvailable.InstallerDownloadUrl))
-                            DownloadUpdate();
+                            await DownloadUpdate();
                     }
                 }
 
@@ -900,7 +905,7 @@ namespace ScreenToGif.Model
             }
         }
 
-        private void CheckOnFosshub()
+        private async Task CheckOnFosshub()
         {
             try
             {
@@ -913,9 +918,9 @@ namespace ScreenToGif.Model
 
                 using (var client = new HttpClient(handler) { BaseAddress = new Uri("https://www.fosshub.com") })
                 {
-                    using (var response = client.GetAsync("/feed/5bfc6fce8c9fe8186f809d24.json").Result)
+                    using (var response = await client.GetAsync("/feed/5bfc6fce8c9fe8186f809d24.json"))
                     {
-                        var result = response.Content.ReadAsStringAsync().Result;
+                        var result = await response.Content.ReadAsStringAsync();
 
                         using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(result)))
                         {
@@ -939,7 +944,7 @@ namespace ScreenToGif.Model
                             };
 
                             //With Fosshub, the download must be manual. 
-                            Application.Current.Dispatcher?.Invoke(() => NotificationManager.AddNotification(string.Format(LocalizationHelper.Get("S.Updater.NewRelease.Info"), Global.UpdateAvailable.Version), StatusType.Update, "update", PromptUpdate));
+                            Application.Current.Dispatcher?.BeginInvoke(new Action(() => NotificationManager.AddNotification(string.Format(LocalizationHelper.Get("S.Updater.NewRelease.Info"), Global.UpdateAvailable.Version), StatusType.Update, "update", PromptUpdate)));
                         }
                     }
                 }
@@ -954,43 +959,43 @@ namespace ScreenToGif.Model
             }
         }
 
-        internal bool DownloadUpdate()
+        internal async Task<bool> DownloadUpdate()
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolderResolved) || Global.UpdateAvailable.IsDownloading)
-                    return false;
-
-                var folder = Path.Combine(UserSettings.All.TemporaryFolderResolved, "ScreenToGif", "Updates");
-
-                if (!Directory.Exists(folder))
-                    Directory.CreateDirectory(folder);
-
-                Global.UpdateAvailable.InstallerPath = Path.Combine(folder, Global.UpdateAvailable.InstallerName);
-
-                //Check if installer was alread downloaded.
-                if (File.Exists(Global.UpdateAvailable.InstallerPath))
-                {
-                    //Minor issue, if for some reason, the update has the same size, this won't work properly. I would need to check a hash.
-                    if (GetSize(Global.UpdateAvailable.InstallerPath) == Global.UpdateAvailable.InstallerSize)
-                        return false;
-
-                    File.Delete(Global.UpdateAvailable.InstallerPath);
-                }
-
                 lock (UserSettings.Lock)
                 {
-                    Global.UpdateAvailable.IsDownloading = true;
+                    if (string.IsNullOrWhiteSpace(UserSettings.All.TemporaryFolderResolved) || Global.UpdateAvailable.IsDownloading)
+                        return false;
 
-                    using (var webClient = new WebClient())
+                    var folder = Path.Combine(UserSettings.All.TemporaryFolderResolved, "ScreenToGif", "Updates");
+
+                    if (!Directory.Exists(folder))
+                        Directory.CreateDirectory(folder);
+
+                    Global.UpdateAvailable.InstallerPath = Path.Combine(folder, Global.UpdateAvailable.InstallerName);
+
+                    //Check if installer was alread downloaded.
+                    if (File.Exists(Global.UpdateAvailable.InstallerPath))
                     {
-                        webClient.Credentials = CredentialCache.DefaultNetworkCredentials;
-                        webClient.Proxy = WebHelper.GetProxy();
+                        //Minor issue, if for some reason, the update has the same size, this won't work properly. I would need to check a hash.
+                        if (GetSize(Global.UpdateAvailable.InstallerPath) == Global.UpdateAvailable.InstallerSize)
+                            return false;
 
-                        webClient.DownloadFile(new Uri(Global.UpdateAvailable.InstallerDownloadUrl), Global.UpdateAvailable.InstallerPath);
+                        File.Delete(Global.UpdateAvailable.InstallerPath);
                     }
+                
+                    Global.UpdateAvailable.IsDownloading = true;
                 }
+                
+                using (var webClient = new WebClient())
+                {
+                    webClient.Credentials = CredentialCache.DefaultNetworkCredentials;
+                    webClient.Proxy = WebHelper.GetProxy();
 
+                    await webClient.DownloadFileTaskAsync(new Uri(Global.UpdateAvailable.InstallerDownloadUrl), Global.UpdateAvailable.InstallerPath);
+                }
+                
                 return true;
             }
             catch (Exception ex)

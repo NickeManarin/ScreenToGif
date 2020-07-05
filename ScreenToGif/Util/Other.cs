@@ -190,6 +190,11 @@ namespace ScreenToGif.Util
             //return new Rect(rect.Left + offset, rect.Top + offset, rect.Width - (offset * 2d), rect.Height - (offset * 2d));
         }
 
+        internal static Rect Translate(this Rect rect, double offsetX, double offsetY)
+        {
+            return rect.IsEmpty ? rect : new Rect(rect.Left + offsetX, rect.Top + offsetY, rect.Width, rect.Height);
+        }
+
         internal static Rect Scale(this Rect rect, double scale)
         {
             return new Rect(Math.Round(rect.Left * scale, MidpointRounding.AwayFromZero), Math.Round(rect.Top * scale, MidpointRounding.AwayFromZero),

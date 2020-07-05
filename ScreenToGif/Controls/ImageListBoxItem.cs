@@ -15,7 +15,9 @@ namespace ScreenToGif.Controls
         public static readonly DependencyProperty MainAuthorProperty = DependencyProperty.Register(nameof(MainAuthor), typeof(string), typeof(ImageListBoxItem), new FrameworkPropertyMetadata(""));
         public static readonly DependencyProperty AuthorProperty = DependencyProperty.Register(nameof(Author), typeof(string), typeof(ImageListBoxItem), new FrameworkPropertyMetadata(""));
         public static readonly DependencyProperty MaxSizeProperty = DependencyProperty.Register(nameof(MaxSize), typeof(double), typeof(ImageListBoxItem), new FrameworkPropertyMetadata(20.0));
-
+        public static readonly DependencyProperty IndexProperty = DependencyProperty.Register(nameof(Index), typeof(int), typeof(ImageListBoxItem), new FrameworkPropertyMetadata(0));
+        public static readonly DependencyProperty ShowMarkOnSelectionProperty = DependencyProperty.Register(nameof(ShowMarkOnSelection), typeof(bool), typeof(ImageListBoxItem), new FrameworkPropertyMetadata(true));
+        
         #endregion
 
         #region Properties
@@ -58,6 +60,26 @@ namespace ScreenToGif.Controls
         {
             get => (double)GetValue(MaxSizeProperty);
             set => SetCurrentValue(MaxSizeProperty, value);
+        }
+
+        /// <summary>
+        /// The index of the item on the list. Must be manually set.
+        /// </summary>
+        [Description("The index of the item on the list. Must be manually set.")]
+        public int Index
+        {
+            get => (int)GetValue(IndexProperty);
+            set => SetCurrentValue(IndexProperty, value);
+        }
+
+        /// <summary>
+        /// True if the item must show the checkmark on selection.
+        /// </summary>
+        [Description("True if the item must show the checkmark on selection.")]
+        public bool ShowMarkOnSelection
+        {
+            get => (bool)GetValue(ShowMarkOnSelectionProperty);
+            set => SetCurrentValue(ShowMarkOnSelectionProperty, value);
         }
 
         #endregion

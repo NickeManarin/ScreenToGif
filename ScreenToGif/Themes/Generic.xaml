@@ -11,7 +11,7 @@
         <ResourceDictionary Source="/ScreenToGif;component/Themes/Ribbon.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
-    <!--Converter-->
+    <!--Converters-->
     <BooleanToVisibilityConverter x:Key="Bool2VisibilityConverterGeneric"/>
     <c:StringToInt x:Key="StringToInt"/>
     <c:ContentToVisibility x:Key="ContentToVisibility"/>
@@ -27,6 +27,7 @@
     <c:ColorToBrush x:Key="ColorToBrush"/>
     <c:InvertedBool x:Key="InvertedBool"/>
     <c:ScaleConverter x:Key="ScaleConverter"/>
+    <c:CenterPopupConverter x:Key="CenterPopupConverter"/>
 
     <!--Window Button Style -->
     <Style TargetType="{x:Type Button}" x:Key="Style.Button.Window">
@@ -112,10 +113,10 @@
                                         </Grid.ColumnDefinitions>
 
                                         <TextBlock Grid.Column="1" x:Name="CaptionText" Text="{TemplateBinding Title}" FontFamily="Segoe UI" FontSize="16" VerticalAlignment="Center"
-                                                   FontWeight="Regular" Margin="5,0,0,0" Foreground="{TemplateBinding Foreground}" Effect="{DynamicResource Shadow.Foreground.Small}"/>
+                                                   FontWeight="Regular" Margin="5,0,0,0" Foreground="{TemplateBinding Foreground}"/>
 
                                         <TextBlock Grid.Column="2" x:Name="FrameCountTextBlock" Text="{TemplateBinding FrameCount, Converter={StaticResource IntToStringConverter}}" VerticalAlignment="Center"
-                                                   FontFamily="Segoe UI" FontSize="16" FontWeight="Regular" Margin="5,0,0,0" Foreground="{DynamicResource Element.Foreground.Header}" Effect="{DynamicResource Shadow.Foreground.Small}"/>
+                                                   FontFamily="Segoe UI" FontSize="16" FontWeight="Regular" Margin="5,0,0,0" Foreground="{DynamicResource Element.Foreground.Header}"/>
                                     </Grid>
 
                                     <StackPanel Grid.Column="2" x:Name="TopStackPanel" Orientation="Horizontal">
@@ -175,7 +176,6 @@
                             <Setter TargetName="FirstRow" Property="Height" Value="0"/>
                             <Setter TargetName="SecondRow" Property="Height" Value="0"/>
                             <Setter TargetName="TopGrid" Property="Visibility" Value="Collapsed"/>
-                            <Setter Property="Effect" Value="{DynamicResource Shadow.Black.Small}"/>
                             <Setter Property="Opacity" Value=".5"/>
                             <Setter Property="BorderBrush" Value="Transparent"/>
 
@@ -312,7 +312,7 @@
         </Setter>
     </Style>
 
-    <!--Integer Up Down-->
+    <!--IntegerUpDown Style-->
     <Style TargetType="{x:Type n:IntegerUpDown}">
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -467,7 +467,7 @@
         </Setter>
     </Style>
 
-    <!--Double Up Down-->
+    <!--DoubleUpDown Style-->
     <Style TargetType="{x:Type n:DoubleUpDown}">
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -725,7 +725,7 @@
                                        VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" IsHitTestVisible="False" Visibility="Collapsed"/>
 
                             <n:ImageButton Grid.Column="8" x:Name="RemoveButton" Content="{DynamicResource Vector.Close}" Style="{DynamicResource Style.Button.NoText.Border}" 
-                                           ContentWidth="12" Width="16" Margin="1,0,0,0" BorderThickness="1,0,0,0" Height="23" ToolTip="{DynamicResource KeyStrokes.Edit.Remove}"/>
+                                           ContentWidth="12" Width="16" Margin="1,0,0,0" BorderThickness="1,0,0,0" Height="23" ToolTip="{DynamicResource S.KeyStrokes.Edit.Remove}"/>
                         </Grid>
                     </Border>
 
@@ -771,7 +771,7 @@
         </Style.Triggers>
     </Style>
 
-    <!--Image RadioButton Style-->
+    <!--ImageRadioButton Style-->
     <Style BasedOn="{StaticResource {x:Type RadioButton}}" TargetType="{x:Type n:ImageRadioButton}">
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -790,9 +790,8 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                     Margin="2,0,2,0" Width="{TemplateBinding ContentWidth}" Height="{TemplateBinding ContentWidth}" 
-                                     Stretch="Uniform" StretchDirection="Both" MaxHeight="{TemplateBinding ContentWidth}" Effect="{x:Null}">
+                            <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="2,0,2,0" Stretch="Uniform" StretchDirection="Both" 
+                                     Width="{TemplateBinding ContentWidth}" Height="{TemplateBinding ContentHeight}" Effect="{x:Null}">
                                 <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" Opacity="{DynamicResource Element.Opacity}"/>
                             </Viewbox>
 
@@ -830,7 +829,7 @@
         </Style.Triggers>
     </Style>
 
-    <!--Headered Tooltip-->
+    <!--HeaderedTooltip Style-->
     <Style TargetType="{x:Type n:HeaderedTooltip}" BasedOn="{StaticResource {x:Type ToolTip}}">
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="Padding" Value="5"/>
@@ -866,10 +865,10 @@
         </Setter>
     </Style>
 
-    <!--Image Menu Item-->
+    <!--ImageMenuItem Style-->
     <Style TargetType="{x:Type n:ImageMenuItem}">
-        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type ItemsControl}}}"/>
-        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type ItemsControl}}, FallbackValue={x:Static HorizontalAlignment.Left}}"/>
+        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type ItemsControl}}, FallbackValue={x:Static VerticalAlignment.Center}}"/>
         <Setter Property="Foreground" Value="{DynamicResource Element.Foreground.Medium}"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="1"/>
@@ -1149,7 +1148,7 @@
         </Style.Triggers>
     </Style>
 
-    <!--Hideable TabControl Style-->
+    <!--HideableTabControl Style-->
     <Style TargetType="{x:Type n:HideableTabControl}">
         <Setter Property="Background" Value="Transparent"/>
 
@@ -1178,10 +1177,17 @@
                             </n:ImageToggleButton.Resources>
                         </n:ImageToggleButton>
 
-                        <Popup Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" x:Name="MainPopup" Placement="Bottom" Margin="0" StaysOpen="False" 
-                               PopupAnimation="Fade" Width="400" Height="Auto" MinHeight="100" MaxHeight="400" SnapsToDevicePixels="True" AllowsTransparency="True" HorizontalOffset="-2"
-                               IsOpen="{Binding ElementName=NotificationsButton, Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" PlacementTarget="{Binding ElementName=NotificationsButton}">
-                            <n:NotificationListControl x:Name="NotificationList"/>
+                        <Popup Grid.Row="0" Grid.Column="1" x:Name="MainPopup" Placement="Bottom" PlacementTarget="{Binding ElementName=NotificationsButton}" 
+                               Margin="0" Width="400" Height="Auto" MinHeight="100" MaxHeight="400" SnapsToDevicePixels="True" AllowsTransparency="True"
+                               StaysOpen="False" PopupAnimation="Fade" IsOpen="{Binding ElementName=NotificationsButton, Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <Popup.HorizontalOffset>
+                                <MultiBinding Converter="{StaticResource CenterPopupConverter}">
+                                    <Binding RelativeSource="{RelativeSource Self}" Path="PlacementTarget.ActualWidth"/>
+                                    <Binding ElementName="NotificationBox" Path="ActualWidth"/>
+                                </MultiBinding>
+                            </Popup.HorizontalOffset>
+                            
+                            <n:NotificationBox x:Name="NotificationBox"/>
                         </Popup>
 
                         <Menu Grid.Row="0" Grid.Column="2" Effect="{x:Null}" Background="Transparent" VerticalAlignment="Center">
@@ -1382,7 +1388,7 @@
         </Setter>
     </Style>
 
-    <!--Status Band-->
+    <!--StatusBand Style-->
     <Style TargetType="{x:Type n:StatusBand}">
         <Setter Property="Visibility" Value="Collapsed"/>
         <Setter Property="Image" Value="{DynamicResource Vector.Info}"/>
@@ -1449,7 +1455,7 @@
                         <n:ImageButton Grid.Column="2" x:Name="SuppressButton" Content="{DynamicResource Vector.Close}" ContentHeight="16"
                                        HorizontalContentAlignment="Center" HorizontalAlignment="Center" Style="{DynamicResource Style.Button.NoText}" MinWidth="30">
                             <n:ImageButton.ToolTip>
-                                <ToolTip Content="{DynamicResource Suppress}" Placement="Top" HorizontalOffset="-5"/>
+                                <ToolTip Content="{DynamicResource S.Suppress}" Placement="Top" HorizontalOffset="-5"/>
                             </n:ImageButton.ToolTip>
                             <!--<local:ImageButton.Triggers>
                                 <EventTrigger RoutedEvent="Button.Click">
@@ -1680,7 +1686,7 @@
         </Setter>
     </Style>
 
-    <!--Circular ProgressBar Style-->
+    <!--CircularProgressBar Style-->
     <Style TargetType="{x:Type n:CircularProgressBar}">
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -1716,7 +1722,7 @@
         </Style.Triggers>
     </Style>
 
-    <!--ZoomControl-->
+    <!--ZoomControl Style-->
     <Style TargetType="{x:Type n:ZoomBox}">
         <Setter Property="ClipToBounds" Value="True"/>
         <Setter Property="Template">
@@ -1780,7 +1786,7 @@
         </Setter>
     </Style>
 
-    <!--Spectrum Slider Styles -->
+    <!--SpectrumSlider Styles -->
     <Style x:Key="Style.RepeatButton.Slider" TargetType="{x:Type RepeatButton}">
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="IsTabStop" Value="False"/>
@@ -1874,7 +1880,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:SpectrumSlider}">
                     <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Height="{TemplateBinding Height}">
-                        <Grid MinWidth="{TemplateBinding Slider.MinWidth}" ClipToBounds="False" Effect="{DynamicResource Shadow.Black.Large}">
+                        <Grid MinWidth="{TemplateBinding Slider.MinWidth}" ClipToBounds="False" Effect="{DynamicResource Shadow.Border.Large}">
                             <!--Spectrum-->
                             <Border x:Name="TrackBackground" Width="Auto">
                                 <Rectangle x:Name="PART_SpectrumDisplay" Stretch="Fill" VerticalAlignment="Stretch"/>
@@ -1915,9 +1921,8 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <!--End Spectrum Slider -->
 
-    <!--RangeSlider-->
+    <!--RangeSlider Styles-->
     <Style x:Key="Style.Slider.Special" TargetType="Slider">
         <Setter Property="Template">
             <Setter.Value>
@@ -2004,7 +2009,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <!--End RangeSlider-->
 
     <!--ImageCard Style-->
     <Style TargetType="{x:Type n:ImageCard}">
@@ -2098,7 +2102,7 @@
         </Setter>
     </Style>
 
-    <!--Image ListBoxItem (Language List)-->
+    <!--ImageListBoxItem Style (Language List)-->
     <Style TargetType="{x:Type n:ImageListBoxItem}">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Padding" Value="4,1"/>
@@ -2139,9 +2143,9 @@
                             <Label Grid.Column="2" Content="{TemplateBinding Author}" Foreground="{DynamicResource Element.Foreground.Gray112}" Margin="5,0,0,0" HorizontalAlignment="Left"/>
                             
                             <Viewbox Grid.Column="3" x:Name="SelectionMark" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="2,0" Stretch="UniformToFill" StretchDirection="Both" 
-                                     MaxWidth="{TemplateBinding MaxSize}" Effect="{x:Null}">
+                                     MaxWidth="{TemplateBinding MaxSize}" Effect="{x:Null}" Visibility="Collapsed">
                                 <Path x:Name="optionMark" Data="F1 M 9.97498,.8 L 4.6983,9.09834  L 1,5.19331 L 1.27664,3.52165 L 4.255,6.08833 L 9.33331,1.288e-005 Z" Fill="{DynamicResource Element.Glyph}" 
-                                      Margin="1" Stretch="None" Visibility="{TemplateBinding IsSelected, Converter={StaticResource Bool2VisibilityConverterGeneric}}"/>
+                                      Margin="1" Stretch="None"/>
                             </Viewbox>
                         </Grid>
                     </Border>
@@ -2173,6 +2177,15 @@
                             <Setter Property="BorderBrush" TargetName="Bd" Value="{DynamicResource Item.SelectedActive.Border}"/>
                         </MultiTrigger>
 
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ShowMarkOnSelection" Value="True"/>
+                                <Condition Property="IsSelected" Value="True"/>
+                            </MultiTrigger.Conditions>
+
+                            <Setter TargetName="SelectionMark" Property="Visibility" Value="Visible"/>
+                        </MultiTrigger>
+                        
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="0.7"/>
                         </Trigger>
@@ -2182,7 +2195,7 @@
         </Setter>
     </Style>
 
-    <!--Frame ListViewItem-->
+    <!--FrameListViewItem Style-->
     <Style TargetType="{x:Type n:FrameListBoxItem}">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Padding" Value="4,1"/>
@@ -2205,7 +2218,7 @@
 
                             <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="Uniform" StretchDirection="Both"
                                      MaxWidth="{TemplateBinding MaxSize}" MaxHeight="{TemplateBinding MaxSize}" Effect="{x:Null}">
-                                <Image Source="{TemplateBinding Image, Converter={StaticResource UriToBitmapConverter}, ConverterParameter=100}" Width="Auto" Height="Auto" Effect="{DynamicResource Shadow.Black.Large}"/>
+                                <Image Source="{TemplateBinding Image, Converter={StaticResource UriToBitmapConverter}, ConverterParameter=100}" Width="Auto" Height="Auto" Effect="{DynamicResource Shadow.Border.Large}"/>
                             </Viewbox>
 
                             <Grid Grid.Row="1">
@@ -2259,39 +2272,73 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-    <!--NotificationListControl-->
-    <Style TargetType="{x:Type n:NotificationListControl}">
+    
+    <!--NotificationBox Style-->
+    <Style TargetType="{x:Type n:NotificationBox}">
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="Background" Value="{DynamicResource Panel.Background}"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
-        <Setter Property="Grid.IsSharedSizeScope" Value="True"/>
-
+        
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type n:NotificationListControl}">
-                    <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1" Margin="2" Background="{DynamicResource Panel.Background}" Effect="{DynamicResource Shadow.Grey}">
+                <ControlTemplate TargetType="{x:Type n:NotificationBox}">
+                    <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="{TemplateBinding BorderThickness}" Margin="{TemplateBinding Margin}" 
+                            Background="{TemplateBinding Background}" Effect="{DynamicResource Shadow.Border.Dark}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <StackPanel x:Name="MainStackPanel" Background="{DynamicResource Panel.Background.Level2}" KeyboardNavigation.DirectionalNavigation="Cycle"/>
+                            <ScrollViewer Grid.Row="0" Focusable="False" Padding="{TemplateBinding Padding}" VerticalScrollBarVisibility="Auto">
+                                <ItemsPresenter/>
+                            </ScrollViewer>
 
                             <TextBlock Grid.Row="0" x:Name="EllipsesTextBlock" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="40" Height="46" Margin="0,-30,0,0" Text="..." 
                                        Foreground="{DynamicResource Element.Foreground.Gray112}" Visibility="Collapsed"/>
 
-                            <TextBlock Grid.Row="1" x:Name="MainTextBlock" Margin="5" HorizontalAlignment="Center" FontSize="14">
-                                <Hyperlink x:Name="MainHyperlink">
-                                    <Run Text="{DynamicResource S.Notifications.Dismiss}"/>
-                                </Hyperlink>
-                            </TextBlock>
+                            <Grid Grid.Row="1" x:Name="ControlGrid" Background="{DynamicResource Panel.Background.Level2}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0" x:Name="NotificationTextBlock" Margin="5" HorizontalAlignment="Center" FontSize="14" TextWrapping="Wrap">
+                                    <Hyperlink x:Name="NotificationHyperlink">
+                                        <Run Text="{DynamicResource S.Notifications.Dismiss}"/>
+                                    </Hyperlink>
+                                </TextBlock>
+
+                                <TextBlock Grid.Column="1" x:Name="EncodingTextBlock" Margin="5" HorizontalAlignment="Center" FontSize="14" TextWrapping="Wrap">
+                                    <Hyperlink x:Name="EncodingHyperlink">
+                                        <Run Text="{DynamicResource S.Encoder.Dismiss}"/>
+                                    </Hyperlink>
+                                </TextBlock>
+                            </Grid>
                         </Grid>
                     </Border>
 
                     <ControlTemplate.Triggers>
-                        <Trigger Property="HasNotifications" Value="False">
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="HasAnyNotification" Value="False"/>
+                                <Condition Property="HasAnyEncoding" Value="False"/>
+                            </MultiTrigger.Conditions>
+
                             <Setter TargetName="EllipsesTextBlock" Property="Visibility" Value="Visible"/>
-                            <Setter TargetName="MainTextBlock" Property="IsEnabled" Value="False"/>
+                        </MultiTrigger>
+                        
+                        <Trigger Property="OnlyDisplayList" Value="True">
+                            <Setter TargetName="ControlGrid" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+
+                        <Trigger Property="HasAnyNotification" Value="False">
+                            <Setter TargetName="NotificationTextBlock" Property="IsEnabled" Value="False"/>
+                        </Trigger>
+
+                        <Trigger Property="HasAnyEncoding" Value="False">
+                            <Setter TargetName="EncodingTextBlock" Property="IsEnabled" Value="False"/>
                         </Trigger>
 
                         <Trigger Property="IsEnabled" Value="False">
@@ -2303,8 +2350,8 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-    <!--ExtendedProgressBar-->
+    
+    <!--ExtendedProgressBar Style-->
     <Style TargetType="{x:Type n:ExtendedProgressBar}">
         <Setter Property="Foreground" Value="{DynamicResource Brush.ProgressBar.Primary}"/>
         <Setter Property="Background" Value="{DynamicResource Element.Background.Back}"/>
@@ -2402,7 +2449,7 @@
     
 
     <!--SelectControl Style-->
-    <Style TargetType="{x:Type n:SelectControl}">
+    <Style TargetType="{x:Type n:SelectControlOld}">
         <Setter Property="Background" Value="#30000000"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="BorderBrush" Value="White"/>
@@ -2411,7 +2458,7 @@
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type n:SelectControl}">
+                <ControlTemplate TargetType="{x:Type n:SelectControlOld}">
                     <Canvas x:Name="MainCanvas" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
                         <Canvas.Resources>
                             <Storyboard x:Key="StrokeDashStoryboard" x:Name="StrokeDashStoryboard">
@@ -2423,13 +2470,13 @@
                         </Canvas.Resources>
 
                         <Canvas.Triggers>
-                            <EventTrigger RoutedEvent="n:SelectControl.Loaded">
+                            <EventTrigger RoutedEvent="n:SelectControlOld.Loaded">
                                 <BeginStoryboard Storyboard="{StaticResource StrokeDashStoryboard}"/>
                             </EventTrigger>
-                            <EventTrigger RoutedEvent="n:SelectControl.SelectionAccepted">
+                            <EventTrigger RoutedEvent="n:SelectControlOld.SelectionAccepted">
                                 <StopStoryboard BeginStoryboardName="StrokeDashStoryboard"/>
                             </EventTrigger>
-                            <EventTrigger RoutedEvent="n:SelectControl.SelectionCanceled">
+                            <EventTrigger RoutedEvent="n:SelectControlOld.SelectionCanceled">
                                 <StopStoryboard BeginStoryboardName="StrokeDashStoryboard"/>
                             </EventTrigger>
                         </Canvas.Triggers>
@@ -2598,7 +2645,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type n:SelectControl2}">
+    <Style TargetType="{x:Type n:SelectControl}">
         <Setter Property="Background" Value="#30000000"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="BorderBrush" Value="White"/>
@@ -2607,7 +2654,7 @@
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type n:SelectControl2}">
+                <ControlTemplate TargetType="{x:Type n:SelectControl}">
                     <Canvas x:Name="MainCanvas" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
                         <Canvas.Resources>
                             <Storyboard x:Key="StrokeDashStoryboard" x:Name="StrokeDashStoryboard">
@@ -2794,6 +2841,7 @@
         </Setter>
     </Style>
     
+    
     <!--MoveResizeControl Style-->
     <Style TargetType="{x:Type n:MoveResizeControl}">
         <Setter Property="BorderBrush" Value="White"/>
@@ -2962,6 +3010,7 @@
         </Setter>
     </Style>
 
+    <!--DrawingCanvas Style-->
     <Style TargetType="{x:Type n:DrawingCanvas}">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="White"/>

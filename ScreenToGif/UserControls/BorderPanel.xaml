@@ -14,7 +14,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <n:LabelSeparator Grid.Row="0" Text="{DynamicResource Border.Appearance}"/>
+        <n:LabelSeparator Grid.Row="0" Text="{DynamicResource S.Border.Appearance}"/>
         <Grid Grid.Row="1" Margin="10,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -27,11 +27,11 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource Caption.Color}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Caption.Color}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
             <n:ColorBox Grid.Row="0" Grid.Column="1" x:Name="BorderColorBox" Margin="10,5"
                         SelectedColor="{Binding Color, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-            <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource Caption.Thickness}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.Caption.Thickness}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
             <Grid Grid.Row="1" Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition/>

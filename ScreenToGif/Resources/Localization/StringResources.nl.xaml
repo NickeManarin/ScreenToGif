@@ -19,9 +19,9 @@
     <s:String x:Key="S.Title">Titel</s:String>
     <s:String x:Key="S.Description">Omschrijving</s:String>
     <s:String x:Key="S.SelectColor">Klik hier om de kleur te kiezen.</s:String>
-    <s:String x:Key="Frame">Frame</s:String>
-    <s:String x:Key="Suppress">Onderdrukken</s:String>
-    <s:String x:Key="Preview">Voorvertoning</s:String>
+    <s:String x:Key="S.InsertFrames.Frame">Frame</s:String>
+    <s:String x:Key="S.Suppress">Onderdrukken</s:String>
+    <s:String x:Key="S.Preview">Voorvertoning</s:String>
     
     <!--Warning messages-->
     <s:String x:Key="S.Crash">O nee, het programma is vastgelopen :(</s:String>
@@ -480,8 +480,8 @@
     
     <!--Localization-->
     <s:String x:Key="S.Localization">Lokalisatie</s:String>
-    <s:String x:Key="S.Localization.ResourcePositionUsed">De onderste vertaalbestand is hetgeen wordt gebruikt.</s:String>
-    <s:String x:Key="S.Localization.MoveRosourcePosition">Om het eigen gemaakte vertaalbestand te gebruiken, verplaats het naar onderkant lijst.</s:String>
+    <s:String x:Key="S.Localization.Usage.First">De onderste vertaalbestand is hetgeen wordt gebruikt.</s:String>
+    <s:String x:Key="S.Localization.Usage.Second">Om het eigen gemaakte vertaalbestand te gebruiken, verplaats het naar onderkant lijst.</s:String>
 
     <!--Recorder-->
     <s:String x:Key="S.Recorder.RecordingOptions">Opname-opties:</s:String>
@@ -610,54 +610,54 @@
     <s:String x:Key="S.ImportVideo.Nothing">Geen frame geselecteerd om te importeren.</s:String>
     
     <!--Encoder-->
-    <s:String x:Key="Encoder.Title">Encoder</s:String>
-    <s:String x:Key="Encoder.Starting">Starten</s:String>
-    <s:String x:Key="Encoder.Completed">Voltooid</s:String>
-    <s:String x:Key="Encoder.Completed.Clipboard">Gekopieerd naar klembord</s:String>
-    <s:String x:Key="Encoder.Completed.Clipboard.Fail">Kopieeractie is mislukt</s:String>
-    <s:String x:Key="Encoder.Completed.Command">Uitgevoerde opdrachten</s:String>
-    <s:String x:Key="Encoder.Completed.Command.Output">Opdrachtuitvoer weergeven.</s:String>
-    <s:String x:Key="Encoder.Completed.Command.Fail">Uitvoer van opdracht mislukt</s:String>
-    <s:String x:Key="Encoder.Completed.Upload.Fail">Uploaden mislukt</s:String>
-    <s:String x:Key="Encoder.Completed.Upload.Delete">Ctrl + muisklik om pagina te openen waarmee afbeelding verwijderd kan worden (indien beschikbaar).</s:String>
-    <s:String x:Key="Encoder.FileDeletedMoved">Verwijderd of verplaatst bestand</s:String>
-    <s:String x:Key="Encoder.Canceled">Geannuleerd</s:String>
-    <s:String x:Key="Encoder.Error">Fout</s:String>
-    <s:String x:Key="Encoder.Error.Info">Klik hier om details van de foutmelding te tonen.</s:String>
-    <s:String x:Key="Encoder.Uploading">Uploaden</s:String>
-    <s:String x:Key="Encoder.Executing">Opdrachten uitvoeren</s:String>
-    <s:String x:Key="Encoder.Processing">Verwerking {0}</s:String>
+    <s:String x:Key="S.Encoder.Title">Encoder</s:String>
+    <s:String x:Key="S.Encoder.Starting">Starten</s:String>
+    <s:String x:Key="S.Encoder.Completed">Voltooid</s:String>
+    <s:String x:Key="S.Encoder.Completed.Clipboard">Gekopieerd naar klembord</s:String>
+    <s:String x:Key="S.Encoder.Completed.Clipboard.Fail">Kopieeractie is mislukt</s:String>
+    <s:String x:Key="S.Encoder.Completed.Command">Uitgevoerde opdrachten</s:String>
+    <s:String x:Key="S.Encoder.Completed.Command.Output">Opdrachtuitvoer weergeven.</s:String>
+    <s:String x:Key="S.Encoder.Completed.Command.Fail">Uitvoer van opdracht mislukt</s:String>
+    <s:String x:Key="S.Encoder.Completed.Upload.Fail">Uploaden mislukt</s:String>
+    <s:String x:Key="S.Encoder.Completed.Upload.Delete">Ctrl + muisklik om pagina te openen waarmee afbeelding verwijderd kan worden (indien beschikbaar).</s:String>
+    <s:String x:Key="S.Encoder.DeletedMoved">Verwijderd of verplaatst bestand</s:String>
+    <s:String x:Key="S.Encoder.Canceled">Geannuleerd</s:String>
+    <s:String x:Key="S.Encoder.Error">Fout</s:String>
+    <s:String x:Key="S.Encoder.Error.Info">Klik hier om details van de foutmelding te tonen.</s:String>
+    <s:String x:Key="S.Encoder.Uploading">Uploaden</s:String>
+    <s:String x:Key="S.Encoder.Executing">Opdrachten uitvoeren</s:String>
+    <s:String x:Key="S.Encoder.Processing">Verwerking {0}</s:String>
     <s:String x:Key="S.Encoder.Analyzing.Second">Tweede voortgangsslag voorbereiden</s:String>
     <s:String x:Key="S.Encoder.Processing.Second">Verwerking {0} - 2e voortgangsslag</s:String>
-    <s:String x:Key="Encoder.CreatingFile">Bestand aanmaken</s:String>
-    <s:String x:Key="Encoder.Analyzing">Ongewijzigde pixels analyseren</s:String>
-    <s:String x:Key="Encoder.OpenFile">Bestand openen</s:String>
-    <s:String x:Key="Encoder.ExploreFolder">Map verkennen</s:String>
-    <s:String x:Key="Encoder.Remove">Uit lijst verwijderen</s:String>
-    <s:String x:Key="Encoder.Details">Details tonen</s:String>
-    <s:String x:Key="Encoder.Copy.Image">Als afbeelding kopiëren</s:String>
-    <s:String x:Key="Encoder.Copy.Filename">Bestandsnaam kopiëren</s:String>
-    <s:String x:Key="Encoder.Copy.Folder">Maplocatie kopiëren</s:String>
-    <s:String x:Key="Encoder.Copy.Link">Snelkoppeling kopiëren</s:String>
+    <s:String x:Key="S.Encoder.CreatingFile">Bestand aanmaken</s:String>
+    <s:String x:Key="S.Encoder.Analyzing">Ongewijzigde pixels analyseren</s:String>
+    <s:String x:Key="S.Encoder.OpenFile">Bestand openen</s:String>
+    <s:String x:Key="S.Encoder.ExploreFolder">Map verkennen</s:String>
+    <s:String x:Key="S.Encoder.Remove">Uit lijst verwijderen</s:String>
+    <s:String x:Key="S.Encoder.Details">Details tonen</s:String>
+    <s:String x:Key="S.Encoder.Copy.Image">Als afbeelding kopiëren</s:String>
+    <s:String x:Key="S.Encoder.Copy.Filename">Bestandsnaam kopiëren</s:String>
+    <s:String x:Key="S.Encoder.Copy.Folder">Maplocatie kopiëren</s:String>
+    <s:String x:Key="S.Encoder.Copy.Link">Snelkoppeling kopiëren</s:String>
 
     <!--Command output-->
-    <s:String x:Key="Command.Title">ScreenToGif - Opdrachtuitvoer</s:String>
-    <s:String x:Key="Command.Header">Opdrachtuitvoer</s:String>
+    <s:String x:Key="S.Encoder.Command.Title">ScreenToGif - Opdrachtuitvoer</s:String>
+    <s:String x:Key="S.Encoder.Command.Header">Opdrachtuitvoer</s:String>
     
     <!--Notifications-->
     <s:String x:Key="S.Notifications">Meldingen</s:String>
     <s:String x:Key="S.Notifications.Dismiss">Alle meldingen negeren</s:String>
     
     <!--Editor-->
-    <s:String x:Key="Editor.Title">ScreenToGif - Editor</s:String>
-    <s:String x:Key="Editor.File">Bestand</s:String>
-    <s:String x:Key="Editor.Home">Start</s:String>
-    <s:String x:Key="Editor.Playback">Afspelen</s:String>
-    <s:String x:Key="Editor.Edit">Bewerken</s:String>
-    <s:String x:Key="Editor.Image">Afbeelding</s:String>
-    <s:String x:Key="Editor.Transitions">Overgangen</s:String>
-    <s:String x:Key="Editor.Statistics">Statistieken</s:String>
-    <s:String x:Key="Editor.Options">Instellingen</s:String>
+    <s:String x:Key="S.Editor.Title">ScreenToGif - Editor</s:String>
+    <s:String x:Key="S.Editor.File">Bestand</s:String>
+    <s:String x:Key="S.Editor.Home">Start</s:String>
+    <s:String x:Key="S.Editor.Playback">Afspelen</s:String>
+    <s:String x:Key="S.Editor.Edit">Bewerken</s:String>
+    <s:String x:Key="S.Editor.Image">Afbeelding</s:String>
+    <s:String x:Key="S.Editor.Transitions">Overgangen</s:String>
+    <s:String x:Key="S.Editor.Statistics">Statistieken</s:String>
+    <s:String x:Key="S.Editor.Options">Instellingen</s:String>
     <s:String x:Key="S.Editor.Help">Help</s:String>
     <s:String x:Key="S.Editor.Extras">Extra's</s:String>
     <s:String x:Key="S.Editor.UpdateAvailable">Er is een nieuwe update beschikbaar!</s:String>
@@ -670,244 +670,244 @@
     <s:String x:Key="S.Editor.File.Project">ScreenToGif project</s:String>
     
     <!--Welcome-->
-    <s:String x:Key="Welcome.New">Ga naar "Bestand > Nieuw" om een nieuwe opname te starten</s:String>
-    <s:String x:Key="Welcome.Import">Sleep afbeeldingen, videos of projecten om te importeren</s:String>
-    <s:String x:Key="Welcome.ThankYou">Hartelijk bedankt voor het gebruik van mijn programma!</s:String>
-    <s:String x:Key="Welcome.Size">Hoe lager de framerate, aantal gebruikte kleuren of aantal veranderingen tussen frames, hoe kleiner de bestandsgrootte</s:String>
-    <s:String x:Key="Welcome.Contact">Wil je praten? Open "Instellingen > Over" voor contactmogelijkheden</s:String>
-    <s:String x:Key="Welcome.Trouble">Problemen? Neem contact op met de Feedback tool</s:String>
-    <s:String x:Key="Welcome.NewRecorder">Wil je de nieuwe opnamemethode gebruiken? Ga naar "Instellingen --> Applicatie" om deze te activeren</s:String>
+    <s:String x:Key="S.Editor.Welcome.New">Ga naar "Bestand > Nieuw" om een nieuwe opname te starten</s:String>
+    <s:String x:Key="S.Editor.Welcome.Import">Sleep afbeeldingen, videos of projecten om te importeren</s:String>
+    <s:String x:Key="S.Editor.Welcome.ThankYou">Hartelijk bedankt voor het gebruik van mijn programma!</s:String>
+    <s:String x:Key="S.Editor.Welcome.Size">Hoe lager de framerate, aantal gebruikte kleuren of aantal veranderingen tussen frames, hoe kleiner de bestandsgrootte</s:String>
+    <s:String x:Key="S.Editor.Welcome.Contact">Wil je praten? Open "Instellingen > Over" voor contactmogelijkheden</s:String>
+    <s:String x:Key="S.Editor.Welcome.Trouble">Problemen? Neem contact op met de Feedback tool</s:String>
+    <s:String x:Key="S.Editor.Welcome.NewRecorder">Wil je de nieuwe opnamemethode gebruiken? Ga naar "Instellingen --> Applicatie" om deze te activeren</s:String>
     
     <!--File • New-->
-    <s:String x:Key="Editor.File.New.Recording">Opname</s:String>
-    <s:String x:Key="Editor.File.New.Webcam">Webcam&#10;opname</s:String>
-    <s:String x:Key="Editor.File.New.Board">Whiteboard&#10;Opname</s:String>
-    <s:String x:Key="Editor.File.Blank">Blanco&#10;Project</s:String>
-    <s:String x:Key="Editor.File.New">Nieuw</s:String>
+    <s:String x:Key="S.Editor.File.New.Recording">Opname</s:String>
+    <s:String x:Key="S.Editor.File.New.Webcam">Webcam&#10;opname</s:String>
+    <s:String x:Key="S.Editor.File.New.Board">Whiteboard&#10;Opname</s:String>
+    <s:String x:Key="S.Editor.File.Blank">Blanco&#10;Project</s:String>
+    <s:String x:Key="S.Editor.File.New">Nieuw</s:String>
     
     <!--File • Insert-->
-    <s:String x:Key="Editor.File.Insert.Recording">Opname</s:String>
-    <s:String x:Key="Editor.File.Insert.Webcam">Webcam&#10;opname</s:String>
-    <s:String x:Key="Editor.File.Insert.Board">Whiteboard&#10;Opname</s:String>
-    <s:String x:Key="Editor.File.Insert.Media">Media</s:String>
-    <s:String x:Key="Editor.File.Insert">Invoegen</s:String>
+    <s:String x:Key="S.Editor.File.Insert.Recording">Opname</s:String>
+    <s:String x:Key="S.Editor.File.Insert.Webcam">Webcam&#10;opname</s:String>
+    <s:String x:Key="S.Editor.File.Insert.Board">Whiteboard&#10;Opname</s:String>
+    <s:String x:Key="S.Editor.File.Insert.Media">Media</s:String>
+    <s:String x:Key="S.Editor.File.Insert">Invoegen</s:String>
     
     <!--File • Save/Discard-->
-    <s:String x:Key="Editor.File.Save">Opslaan als</s:String>
-    <s:String x:Key="Editor.File.Load">Laden</s:String>
-    <s:String x:Key="Editor.File.LoadRecent">Recente&#10;projecten</s:String>
-    <s:String x:Key="Editor.File.SaveProject">Opslaan als&#10;Project</s:String>
-    <s:String x:Key="Editor.File.Discard">Project&#10;weggooien</s:String>
+    <s:String x:Key="S.Editor.File.Save">Opslaan als</s:String>
+    <s:String x:Key="S.Editor.File.Load">Laden</s:String>
+    <s:String x:Key="S.Editor.File.LoadRecent">Recente&#10;projecten</s:String>
+    <s:String x:Key="S.Editor.File.SaveProject">Opslaan als&#10;Project</s:String>
+    <s:String x:Key="S.Editor.File.Discard">Project&#10;weggooien</s:String>
     
     <!--Home • Action Stack-->
-    <s:String x:Key="Editor.Home.ActionStack">Actielijst</s:String>
-    <s:String x:Key="Editor.Home.Undo">Ongedaan maken</s:String>
-    <s:String x:Key="Editor.Home.Redo">Herhalen</s:String>
-    <s:String x:Key="Editor.Home.Reset">Alles herstellen</s:String>
+    <s:String x:Key="S.Editor.Home.ActionStack">Actielijst</s:String>
+    <s:String x:Key="S.Editor.Home.Undo">Ongedaan maken</s:String>
+    <s:String x:Key="S.Editor.Home.Redo">Herhalen</s:String>
+    <s:String x:Key="S.Editor.Home.Reset">Alles herstellen</s:String>
     
     <!--Home • Clipboard-->
-    <s:String x:Key="Editor.Home.Clipboard">Klembord</s:String>
-    <s:String x:Key="Editor.Home.Clipboard.Show">Klembord tonen</s:String>
-    <s:String x:Key="Editor.Home.Paste">Plakken</s:String>
-    <s:String x:Key="Editor.Home.Cut">Knippen</s:String>
-    <s:String x:Key="Editor.Home.Copy">Kopiëren</s:String>
+    <s:String x:Key="S.Editor.Home.Clipboard">Klembord</s:String>
+    <s:String x:Key="S.Editor.Home.Clipboard.Show">Klembord tonen</s:String>
+    <s:String x:Key="S.Editor.Home.Paste">Plakken</s:String>
+    <s:String x:Key="S.Editor.Home.Cut">Knippen</s:String>
+    <s:String x:Key="S.Editor.Home.Copy">Kopiëren</s:String>
     
     <!--Home • Zoom-->
-    <s:String x:Key="Editor.Home.Zoom">Zoomen</s:String>
-    <s:String x:Key="Editor.Home.SizeToContent">Aanpassen aan&#10;inhoud</s:String>
-    <s:String x:Key="Editor.Home.FitImage">Afbeelding passend maken</s:String>
+    <s:String x:Key="S.Editor.Home.Zoom">Zoomen</s:String>
+    <s:String x:Key="S.Editor.Home.SizeToContent">Aanpassen aan&#10;inhoud</s:String>
+    <s:String x:Key="S.Editor.Home.FitImage">Afbeelding passend maken</s:String>
     
     <!--Home • Select-->
-    <s:String x:Key="Editor.Home.Select">Selecteren</s:String>
-    <s:String x:Key="Editor.Home.SelectAll">Alles&#10;selecteren</s:String>
-    <s:String x:Key="Editor.Home.GoTo">Ga naar</s:String>
-    <s:String x:Key="Editor.Home.Inverse">Selectie omkeren</s:String>
-    <s:String x:Key="Editor.Home.Deselect">Deselecteren</s:String>
+    <s:String x:Key="S.Editor.Home.Select">Selecteren</s:String>
+    <s:String x:Key="S.Editor.Home.SelectAll">Alles&#10;selecteren</s:String>
+    <s:String x:Key="S.Editor.Home.GoTo">Ga naar</s:String>
+    <s:String x:Key="S.Editor.Home.Inverse">Selectie omkeren</s:String>
+    <s:String x:Key="S.Editor.Home.Deselect">Deselecteren</s:String>
     
     <!--Playback • Playback-->
-    <s:String x:Key="Editor.Playback.Playback">Afspelen</s:String>
-    <s:String x:Key="Editor.Playback.First">Eerste</s:String>
-    <s:String x:Key="Editor.Playback.Previous">Vorige</s:String>
-    <s:String x:Key="Editor.Playback.Play">Spelen</s:String>
-    <s:String x:Key="Editor.Playback.Pause">Pauze</s:String>
-    <s:String x:Key="Editor.Playback.Next">Volgende</s:String>
-    <s:String x:Key="Editor.Playback.Last">Laatste</s:String>
+    <s:String x:Key="S.Editor.Playback.Playback">Afspelen</s:String>
+    <s:String x:Key="S.Editor.Playback.First">Eerste</s:String>
+    <s:String x:Key="S.Editor.Playback.Previous">Vorige</s:String>
+    <s:String x:Key="S.Editor.Playback.Play">Spelen</s:String>
+    <s:String x:Key="S.Editor.Playback.Pause">Pauze</s:String>
+    <s:String x:Key="S.Editor.Playback.Next">Volgende</s:String>
+    <s:String x:Key="S.Editor.Playback.Last">Laatste</s:String>
     
     <!--Playback • Playback Options-->
-    <s:String x:Key="Editor.PlaybackOptions.Header">Afspeelopties</s:String>
-    <s:String x:Key="Editor.PlaybackOptions.Loop">Afspelen met herhaling.</s:String>
-    <s:String x:Key="Editor.PlaybackOptions.Loop.Info">Alleen gebruikt tijdens afspelen.&#10;Als je de lusinstellingen voor het exporteren van Gifs en Apngs wilt wijzigen,&#10;is deze voor sommige encoders beschikbaar in het paneel 'Opslaan als'.</s:String>
+    <s:String x:Key="S.Editor.PlaybackOptions.Header">Afspeelopties</s:String>
+    <s:String x:Key="S.Editor.PlaybackOptions.Loop">Afspelen met herhaling.</s:String>
+    <s:String x:Key="S.Editor.PlaybackOptions.Loop.Info">Alleen gebruikt tijdens afspelen.&#10;Als je de lusinstellingen voor het exporteren van Gifs en Apngs wilt wijzigen,&#10;is deze voor sommige encoders beschikbaar in het paneel 'Opslaan als'.</s:String>
     
     <!--Edit • Frames-->  
-    <s:String x:Key="Editor.Edit.Frames">Frames</s:String>
-    <s:String x:Key="Editor.Edit.Delete">Verwijderen</s:String>
-    <s:String x:Key="Editor.Edit.Frames.Duplicates">Duplicaten&#10;verwijderen</s:String>
-    <s:String x:Key="Editor.Edit.Frames.Reduce">Frames&#10;verminderen</s:String>
-    <s:String x:Key="Editor.Edit.DeletePrevious">Alles hiervoor verwijderen</s:String>
-    <s:String x:Key="Editor.Edit.DeleteNext">Alles hierna verwijderen</s:String>
+    <s:String x:Key="S.Editor.Edit.Frames">Frames</s:String>
+    <s:String x:Key="S.Editor.Edit.Delete">Verwijderen</s:String>
+    <s:String x:Key="S.Editor.Edit.Frames.Duplicates">Duplicaten&#10;verwijderen</s:String>
+    <s:String x:Key="S.Editor.Edit.Frames.Reduce">Frames&#10;verminderen</s:String>
+    <s:String x:Key="S.Editor.Edit.DeletePrevious">Alles hiervoor verwijderen</s:String>
+    <s:String x:Key="S.Editor.Edit.DeleteNext">Alles hierna verwijderen</s:String>
     
     <!--Edit • Reordering-->
-    <s:String x:Key="Editor.Edit.Reordering">Herschikken</s:String>
-    <s:String x:Key="Editor.Edit.Reverse">Omkeren</s:String>
-    <s:String x:Key="Editor.Edit.Yoyo">Jojo</s:String>
-    <s:String x:Key="Editor.Edit.MoveLeft">Naar links&#10;verplaatsen</s:String>
-    <s:String x:Key="Editor.Edit.MoveRight">Naar rechts&#10;verplaatsen</s:String>
+    <s:String x:Key="S.Editor.Edit.Reordering">Herschikken</s:String>
+    <s:String x:Key="S.Editor.Edit.Reverse">Omkeren</s:String>
+    <s:String x:Key="S.Editor.Edit.Yoyo">Jojo</s:String>
+    <s:String x:Key="S.Editor.Edit.MoveLeft">Naar links&#10;verplaatsen</s:String>
+    <s:String x:Key="S.Editor.Edit.MoveRight">Naar rechts&#10;verplaatsen</s:String>
     
     <!--Edit • Delay/Duration-->
-    <s:String x:Key="Editor.Edit.Delay">Vertraging (duur)</s:String>
-    <s:String x:Key="Editor.Edit.Delay.Override">Overschrijven</s:String>
-    <s:String x:Key="Editor.Edit.Delay.IncreaseDecrease">Verhogen of&#10;Verlagen</s:String>
-    <s:String x:Key="Editor.Edit.Delay.Scale">Schaal</s:String>
+    <s:String x:Key="S.Editor.Edit.Delay">Vertraging (duur)</s:String>
+    <s:String x:Key="S.Editor.Edit.Delay.Override">Overschrijven</s:String>
+    <s:String x:Key="S.Editor.Edit.Delay.IncreaseDecrease">Verhogen of&#10;Verlagen</s:String>
+    <s:String x:Key="S.Editor.Edit.Delay.Scale">Schaal</s:String>
     
     <!--Image • Size and Rotation-->
-    <s:String x:Key="Editor.Image.SizePosition">Grootte en rotatie</s:String>
-    <s:String x:Key="Editor.Image.Resize">Grootte&#10;aanpasssen</s:String>
-    <s:String x:Key="Editor.Image.Crop">Bijsnijden</s:String>
-    <s:String x:Key="Editor.Image.FlipRotate">Spiegelen/Roteren</s:String>
+    <s:String x:Key="S.Editor.Image.SizePosition">Grootte en rotatie</s:String>
+    <s:String x:Key="S.Editor.Image.Resize">Grootte&#10;aanpasssen</s:String>
+    <s:String x:Key="S.Editor.Image.Crop">Bijsnijden</s:String>
+    <s:String x:Key="S.Editor.Image.FlipRotate">Spiegelen/Roteren</s:String>
     
     <!--Image • Text-->
-    <s:String x:Key="Editor.Image.Text">Tekst</s:String>
-    <s:String x:Key="Editor.Image.Caption">Bijschrift</s:String>
-    <s:String x:Key="Editor.Image.FreeText">Vrije tekst</s:String>
-    <s:String x:Key="Editor.Image.TitleFrame">Titelframe</s:String>
-    <s:String x:Key="Editor.Image.KeyStrokes">Toets-&#10;aanslagen</s:String>
+    <s:String x:Key="S.Editor.Image.Text">Tekst</s:String>
+    <s:String x:Key="S.Editor.Image.Caption">Bijschrift</s:String>
+    <s:String x:Key="S.Editor.Image.FreeText">Vrije tekst</s:String>
+    <s:String x:Key="S.Editor.Image.TitleFrame">Titelframe</s:String>
+    <s:String x:Key="S.Editor.Image.KeyStrokes">Toets-&#10;aanslagen</s:String>
     
     <!--Image • Overlay-->
-    <s:String x:Key="Editor.Image.Overlay">Overlay</s:String>
-    <s:String x:Key="Editor.Image.FreeDrawing">Vrije&#10;tekening</s:String>
-    <s:String x:Key="Editor.Image.Shape">Vormen</s:String>
-    <s:String x:Key="Editor.Image.Clicks">Muis-&#10;klikken</s:String>
-    <s:String x:Key="Editor.Image.Watermark">Watermerk</s:String>
-    <s:String x:Key="Editor.Image.Cinemagraph">Cinemagraph</s:String>
-    <s:String x:Key="Editor.Image.Border">Rand</s:String>
-    <s:String x:Key="Editor.Image.Shadow">Schaduw</s:String>
-    <s:String x:Key="Editor.Image.Progress">Voortgang</s:String>
-    <s:String x:Key="Editor.Image.Obfuscate">Versluieren</s:String>
+    <s:String x:Key="S.Editor.Image.Overlay">Overlay</s:String>
+    <s:String x:Key="S.Editor.Image.FreeDrawing">Vrije&#10;tekening</s:String>
+    <s:String x:Key="S.Editor.Image.Shape">Vormen</s:String>
+    <s:String x:Key="S.Editor.Image.Clicks">Muis-&#10;klikken</s:String>
+    <s:String x:Key="S.Editor.Image.Watermark">Watermerk</s:String>
+    <s:String x:Key="S.Editor.Image.Cinemagraph">Cinemagraph</s:String>
+    <s:String x:Key="S.Editor.Image.Border">Rand</s:String>
+    <s:String x:Key="S.Editor.Image.Shadow">Schaduw</s:String>
+    <s:String x:Key="S.Editor.Image.Progress">Voortgang</s:String>
+    <s:String x:Key="S.Editor.Image.Obfuscate">Versluieren</s:String>
 
     <!--Transitions • Styles-->
-    <s:String x:Key="Editor.Transitions.Styles">Stijlen</s:String>
-    <s:String x:Key="Editor.Transitions.Fade">Vervagen</s:String>
-    <s:String x:Key="Editor.Transitions.Slide">Dia</s:String>
+    <s:String x:Key="S.Editor.Transitions.Styles">Stijlen</s:String>
+    <s:String x:Key="S.Editor.Transitions.Fade">Vervagen</s:String>
+    <s:String x:Key="S.Editor.Transitions.Slide">Dia</s:String>
     
     <!--Statistics-->
-    <s:String x:Key="Editor.Statistics.General">Algemeen</s:String>
-    <s:String x:Key="Editor.Statistics.FrameCount">Aantal frames</s:String>
-    <s:String x:Key="Editor.Statistics.TotalDuration">Totale duur</s:String>
-    <s:String x:Key="Editor.Statistics.FrameSize">Framegrootte</s:String>
-    <s:String x:Key="Editor.Statistics.AverageDuration">Gemiddelde duur (vertraging)</s:String>
-    <s:String x:Key="Editor.Statistics.CurrentTime">Huidige tijd</s:String>
-    <s:String x:Key="Editor.Statistics.CurrentTime.Info">De huidige tijd (cumulatief) op basis van het huidige frame dat wordt weergegeven.</s:String>
-    <s:String x:Key="Editor.Statistics.FrameDpi">Frame-DPI en -schaling</s:String>
-    <s:String x:Key="Editor.Statistics.SelectedFrame">Geselecteerde frame</s:String>
+    <s:String x:Key="S.Editor.Statistics.General">Algemeen</s:String>
+    <s:String x:Key="S.Editor.Statistics.FrameCount">Aantal frames</s:String>
+    <s:String x:Key="S.Editor.Statistics.TotalDuration">Totale duur</s:String>
+    <s:String x:Key="S.Editor.Statistics.FrameSize">Framegrootte</s:String>
+    <s:String x:Key="S.Editor.Statistics.AverageDuration">Gemiddelde duur (vertraging)</s:String>
+    <s:String x:Key="S.Editor.Statistics.CurrentTime">Huidige tijd</s:String>
+    <s:String x:Key="S.Editor.Statistics.CurrentTime.Info">De huidige tijd (cumulatief) op basis van het huidige frame dat wordt weergegeven.</s:String>
+    <s:String x:Key="S.Editor.Statistics.FrameDpi">Frame-DPI en -schaling</s:String>
+    <s:String x:Key="S.Editor.Statistics.SelectedFrame">Geselecteerde frame</s:String>
     
     <!--TODO: Organize-->
     <!--Editor, Continuation-->
-    <s:String x:Key="Editor.Preparing">Frames voorbereiden</s:String>
-    <s:String x:Key="Editor.InvalidLoadingFiles">Laden niet mogelijk - Je kunt niet meerdere bestanden tegelijk importeren. Probeer elk bestand apart.</s:String>
-    <s:String x:Key="Editor.InvalidLoadingProjects">Laden niet mogelijk - Je kunt niet meerdere projecten tegelijk imporeren. Probeer elk project apart.</s:String>
-    <s:String x:Key="Editor.OpenMediaProject">Mediabestand (afbeeldng of video) of een project openen</s:String>
-    <s:String x:Key="Editor.OpenMedia">Mediabestand (afbeelding of video) openen</s:String>
+    <s:String x:Key="S.Editor.Preparing">Frames voorbereiden</s:String>
+    <s:String x:Key="S.Editor.InvalidLoadingFiles">Laden niet mogelijk - Je kunt niet meerdere bestanden tegelijk importeren. Probeer elk bestand apart.</s:String>
+    <s:String x:Key="S.Editor.InvalidLoadingProjects">Laden niet mogelijk - Je kunt niet meerdere projecten tegelijk imporeren. Probeer elk project apart.</s:String>
+    <s:String x:Key="S.Editor.File.OpenMediaProject">Mediabestand (afbeeldng of video) of een project openen</s:String>
+    <s:String x:Key="S.Editor.File.OpenMedia">Mediabestand (afbeelding of video) openen</s:String>
     
-    <s:String x:Key="Editor.Clipboard.InvalidCut.Title">Knip-actie</s:String>
-    <s:String x:Key="Editor.Clipboard.InvalidCut.Instruction">Je kunt niet alle frames knippen.</s:String>
-    <s:String x:Key="Editor.Clipboard.InvalidCut.Message">De opname dient tenminste 1 frame te bevatten.</s:String>
+    <s:String x:Key="S.Editor.Clipboard.InvalidCut.Title">Knip-actie</s:String>
+    <s:String x:Key="S.Editor.Clipboard.InvalidCut.Instruction">Je kunt niet alle frames knippen.</s:String>
+    <s:String x:Key="S.Editor.Clipboard.InvalidCut.Message">De opname dient tenminste 1 frame te bevatten.</s:String>
     
-    <s:String x:Key="Editor.DeleteAll.Title">Alles verwijderen</s:String>
-    <s:String x:Key="Editor.DeleteAll.Instruction">Weet je zeker dat u alle frames wilt verwijderen?</s:String>
-    <s:String x:Key="Editor.DeleteAll.Message">Dit zal het huidige project afbreken en kan niet ongedaan worden gemaakt. Wil je doorgaan?</s:String>
-    <s:String x:Key="Editor.DiscardProject.Title">Project weggooien</s:String>
-    <s:String x:Key="Editor.DiscardProject.Instruction">Weet je zeker dat u het project wilt weggooien?</s:String>
-    <s:String x:Key="Editor.DiscardProject.Message">Dit zal het project en alle frames weggooien.\n\rDeze actie is onherroepelijk.</s:String>
-    <s:String x:Key="Editor.DiscardPreviousProject.Instruction">Wil je het vorige project weggooien?</s:String>
-    <s:String x:Key="Editor.DiscardPreviousProject.Message">Als je dit niet doet, dan blijft het vorige project beschikbaar via Recente projecten.</s:String>
-    <s:String x:Key="Editor.DeleteFrames.Title">Frames verwijderen</s:String>
-    <s:String x:Key="Editor.DeleteFrames.Instruction">Weet je zeker dat je dit wilt verwijderen?</s:String>
-    <s:String x:Key="Editor.DeleteFrames.Message">Deze actie zal {0} frames verwijderen.\n\rJe kunt deze actie later ongedaan maken.</s:String>
-    <s:String x:Key="Editor.Exiting.Title">Editor afsluiten</s:String>
-    <s:String x:Key="Editor.Exiting.Instruction">Weet je zeker dat je wilt afsluiten?</s:String>
-    <s:String x:Key="Editor.Exiting.Message">Het huidige project kan worden heropend via 'Recente projecten'.</s:String>
-    <s:String x:Key="Editor.Exiting.Message2">Het huidige project kan worden heropend via 'Recente projecten', maar zal na 5 dagen automatisch worden verwijderd.</s:String>
+    <s:String x:Key="S.Editor.DeleteAll.Title">Alles verwijderen</s:String>
+    <s:String x:Key="S.Editor.DeleteAll.Instruction">Weet je zeker dat u alle frames wilt verwijderen?</s:String>
+    <s:String x:Key="S.Editor.DeleteAll.Message">Dit zal het huidige project afbreken en kan niet ongedaan worden gemaakt. Wil je doorgaan?</s:String>
+    <s:String x:Key="S.Editor.DiscardProject.Title">Project weggooien</s:String>
+    <s:String x:Key="S.Editor.DiscardProject.Instruction">Weet je zeker dat u het project wilt weggooien?</s:String>
+    <s:String x:Key="S.Editor.DiscardProject.Message">Dit zal het project en alle frames weggooien.\n\rDeze actie is onherroepelijk.</s:String>
+    <s:String x:Key="S.Editor.DiscardPreviousProject.Instruction">Wil je het vorige project weggooien?</s:String>
+    <s:String x:Key="S.Editor.DiscardPreviousProject.Message">Als je dit niet doet, dan blijft het vorige project beschikbaar via Recente projecten.</s:String>
+    <s:String x:Key="S.Editor.DeleteFrames.Title">Frames verwijderen</s:String>
+    <s:String x:Key="S.Editor.DeleteFrames.Instruction">Weet je zeker dat je dit wilt verwijderen?</s:String>
+    <s:String x:Key="S.Editor.DeleteFrames.Message">Deze actie zal {0} frames verwijderen.\n\rJe kunt deze actie later ongedaan maken.</s:String>
+    <s:String x:Key="S.Editor.Exiting.Title">Editor afsluiten</s:String>
+    <s:String x:Key="S.Editor.Exiting.Instruction">Weet je zeker dat je wilt afsluiten?</s:String>
+    <s:String x:Key="S.Editor.Exiting.Message">Het huidige project kan worden heropend via 'Recente projecten'.</s:String>
+    <s:String x:Key="S.Editor.Exiting.Message2">Het huidige project kan worden heropend via 'Recente projecten', maar zal na 5 dagen automatisch worden verwijderd.</s:String>
     
-    <s:String x:Key="Editor.Resize.Warning">Kies een andere waarde om de grootte aan te passen.</s:String>
-    <s:String x:Key="Editor.Crop.Warning">De bijsnijdselectie dient kleiner te zijn dan de huidige framegrootte.</s:String>
-    <s:String x:Key="Editor.Crop.Warning2">De bijsnijdselectie dient groter te zijn dan 10x10 pixels.</s:String>
-    <s:String x:Key="Editor.Caption.WarningNoText">Er is geen tekst om toe te passen.</s:String>
-    <s:String x:Key="Editor.Caption.WarningSelection">Selecteer tenminste 1 frame om een Tekst toe te voegen.</s:String>
-    <s:String x:Key="Editor.FreeText.WarningSelection">Selecteer tenminste 1 frame om de tekst toe te voegen.</s:String>
-    <s:String x:Key="Editor.TitleFrame.WarningSelection">Selecteer tenminste 1 frame om een Titelframe toe te voegen</s:String>
-    <s:String x:Key="Editor.FreeDrawing.WarningNoDrawing">Er zijn geen tekeningen om toe te passen op geselecteerde frames.</s:String>
-    <s:String x:Key="Editor.FreeDrawing.WarningSelection">Selecteer tenminste 1 frame om de vrije tekening op toe te passen.</s:String>
+    <s:String x:Key="S.Resize.Warning">Kies een andere waarde om de grootte aan te passen.</s:String>
+    <s:String x:Key="S.Crop.Warning">De bijsnijdselectie dient kleiner te zijn dan de huidige framegrootte.</s:String>
+    <s:String x:Key="S.Crop.Warning.Bigger">De bijsnijdselectie dient groter te zijn dan 10x10 pixels.</s:String>
+    <s:String x:Key="S.Editor.Caption.WarningNoText">Er is geen tekst om toe te passen.</s:String>
+    <s:String x:Key="S.Editor.Caption.WarningSelection">Selecteer tenminste 1 frame om een Tekst toe te voegen.</s:String>
+    <s:String x:Key="S.Editor.FreeText.WarningSelection">Selecteer tenminste 1 frame om de tekst toe te voegen.</s:String>
+    <s:String x:Key="S.Editor.TitleFrame.WarningSelection">Selecteer tenminste 1 frame om een Titelframe toe te voegen</s:String>
+    <s:String x:Key="S.FreeDrawing.Warning.NoDrawing">Er zijn geen tekeningen om toe te passen op geselecteerde frames.</s:String>
+    <s:String x:Key="S.FreeDrawing.WarningSelection">Selecteer tenminste 1 frame om de vrije tekening op toe te passen.</s:String>
     
-    <s:String x:Key="Editor.Watermark.Select">Selecteer een afbeelding</s:String>
-    <s:String x:Key="Editor.Watermark.WarningNoImage">Selecteer een afbeelding om toe te voegen in geselecteerde frame(s).</s:String>
-    <s:String x:Key="Editor.Watermark.WarningSelection">Selecteer tenminste 1 frame om een watermerk toe te passen.</s:String>
-    <s:String x:Key="Editor.Border.WarningThickness">Selecteer een randdikte van groter dan nul.</s:String>
-    <s:String x:Key="Editor.Border.WarningSelection">Selecteer tenminste 1 frame om een rand toe te passen.</s:String>
-    <s:String x:Key="Editor.Shadow.Warning.Invisible">De dekking moet groter zijn dan nul om enig verschil in het frame te maken.</s:String>
-    <s:String x:Key="Editor.Shadow.Warning.Behind">Wanneer de schaduwdiepte en de vervagingstraal als nul worden gebruikt, maakt het geen verschil omdat het achter het frame wordt verborgen.</s:String>
-    <s:String x:Key="Editor.Cinemagraph.WarningNoDrawing">Selecteer tenminste 1 pixel om Cinemagraph toe te passen. Selecteer de pixels door erop te tekenen.</s:String>
+    <s:String x:Key="S.Watermark.Select">Selecteer een afbeelding</s:String>
+    <s:String x:Key="S.Watermark.WarningNoImage">Selecteer een afbeelding om toe te voegen in geselecteerde frame(s).</s:String>
+    <s:String x:Key="S.Watermark.WarningSelection">Selecteer tenminste 1 frame om een watermerk toe te passen.</s:String>
+    <s:String x:Key="S.Editor.Border.WarningThickness">Selecteer een randdikte van groter dan nul.</s:String>
+    <s:String x:Key="S.Editor.Border.WarningSelection">Selecteer tenminste 1 frame om een rand toe te passen.</s:String>
+    <s:String x:Key="S.Editor.Shadow.Warning.Invisible">De dekking moet groter zijn dan nul om enig verschil in het frame te maken.</s:String>
+    <s:String x:Key="S.Editor.Shadow.Warning.Behind">Wanneer de schaduwdiepte en de vervagingstraal als nul worden gebruikt, maakt het geen verschil omdat het achter het frame wordt verborgen.</s:String>
+    <s:String x:Key="S.Editor.Cinemagraph.WarningNoDrawing">Selecteer tenminste 1 pixel om Cinemagraph toe te passen. Selecteer de pixels door erop te tekenen.</s:String>
     
-    <s:String x:Key="Editor.Fade.Title">Vervagingsovergang</s:String>
-    <s:String x:Key="Editor.Fade.WarningSelection">Selecteer tenminste 1 frame om Vervagingsovergang op toe te passen</s:String>
-    <s:String x:Key="Editor.Fade.WarningColor">Een volledig transparante kleur levert geen effect op deze overgang.</s:String>
-    <s:String x:Key="Editor.Slide.Title">Dia-overgang</s:String>
-    <s:String x:Key="Editor.Slide.WarningSelection">Selecteer tenminste 1 frame om een dia-overgang toe te kunnen passen.</s:String>
+    <s:String x:Key="S.Editor.Fade.Title">Vervagingsovergang</s:String>
+    <s:String x:Key="S.Editor.Fade.WarningSelection">Selecteer tenminste 1 frame om Vervagingsovergang op toe te passen</s:String>
+    <s:String x:Key="S.Editor.Fade.WarningColor">Een volledig transparante kleur levert geen effect op deze overgang.</s:String>
+    <s:String x:Key="S.Editor.Slide.Title">Dia-overgang</s:String>
+    <s:String x:Key="S.Editor.Slide.WarningSelection">Selecteer tenminste 1 frame om een dia-overgang toe te kunnen passen.</s:String>
 
-    <s:String x:Key="Editor.DragDrop.Invalid.Title">Ongeldige sleepactie</s:String>
-    <s:String x:Key="Editor.DragDrop.MultipleFiles.Instruction">Je kunt niet meerdere bestanden tegelijk importeren</s:String>
-    <s:String x:Key="Editor.DragDrop.MultipleFiles.Message">Kies één enkel bestand.</s:String>
-    <s:String x:Key="Editor.DragDrop.Invalid.Instruction">Het bestand kan niet worden geladen</s:String>
-    <s:String x:Key="Editor.DragDrop.Invalid.Message">Het bestand kan niet geladen worden, vanwege een verkeerde bestandsindeling.</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">Je kunt niet meerdere projecten tegelijk importeren</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidProject.Message">Kies één enkel project.</s:String>
+    <s:String x:Key="S.Editor.DragDrop.Invalid.Title">Ongeldige sleepactie</s:String>
+    <s:String x:Key="S.Editor.DragDrop.MultipleFiles.Instruction">Je kunt niet meerdere bestanden tegelijk importeren</s:String>
+    <s:String x:Key="S.Editor.DragDrop.MultipleFiles.Message">Kies één enkel bestand.</s:String>
+    <s:String x:Key="S.Editor.DragDrop.Invalid.Instruction">Het bestand kan niet worden geladen</s:String>
+    <s:String x:Key="S.Editor.DragDrop.Invalid.Message">Het bestand kan niet geladen worden, vanwege een verkeerde bestandsindeling.</s:String>
+    <s:String x:Key="S.Editor.DragDrop.InvalidProject.Instruction">Je kunt niet meerdere projecten tegelijk importeren</s:String>
+    <s:String x:Key="S.Editor.DragDrop.InvalidProject.Message">Kies één enkel project.</s:String>
     
-    <s:String x:Key="Editor.RetrievingFromCache">Frames ophalen uit de tijdelijke opslag</s:String>
-    <s:String x:Key="Editor.LoadingFrames">Frames laden</s:String>
-    <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Instruction">Project niet kunnen laden</s:String>
-    <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Message">Het was niet mogelijk om de frames te laden, want ze zijn allemaal beschadigd of de afbeeldingen zijn niet beschikbaar op de plek waar ze verwacht werden.</s:String>
-    <s:String x:Key="Editor.LoadingFrames.FramesCorrupted.Instruction">Sommige frames konden niet geladen worden</s:String>
-    <s:String x:Key="Editor.LoadingFrames.FramesCorrupted.Message">Het was niet mogelijk om de frames te laden, want ze konden niet worden gevonden of zijn mogelijk beschadigd.</s:String>
-    <s:String x:Key="Editor.UpdatingFrames">Frames bijwerken</s:String>
-    <s:String x:Key="Editor.PreparingImport">Importeeractie voorbereiden</s:String>
-    <s:String x:Key="Editor.ImportingFrames">Frames importeren</s:String>
+    <s:String x:Key="S.Editor.RetrievingFromCache">Frames ophalen uit de tijdelijke opslag</s:String>
+    <s:String x:Key="S.Editor.LoadingFrames">Frames laden</s:String>
+    <s:String x:Key="S.Editor.LoadingFrames.ProjectCorrupted.Instruction">Project niet kunnen laden</s:String>
+    <s:String x:Key="S.Editor.LoadingFrames.ProjectCorrupted.Message">Het was niet mogelijk om de frames te laden, want ze zijn allemaal beschadigd of de afbeeldingen zijn niet beschikbaar op de plek waar ze verwacht werden.</s:String>
+    <s:String x:Key="S.Editor.LoadingFrames.FramesCorrupted.Instruction">Sommige frames konden niet geladen worden</s:String>
+    <s:String x:Key="S.Editor.LoadingFrames.FramesCorrupted.Message">Het was niet mogelijk om de frames te laden, want ze konden niet worden gevonden of zijn mogelijk beschadigd.</s:String>
+    <s:String x:Key="S.Editor.UpdatingFrames">Frames bijwerken</s:String>
+    <s:String x:Key="S.Editor.PreparingImport">Importeeractie voorbereiden</s:String>
+    <s:String x:Key="S.Editor.ImportingFrames">Frames importeren</s:String>
     
     <s:String x:Key="S.Editor.AnalyzingDuplicates">Duplicaten analyseren</s:String>
     <s:String x:Key="S.Editor.AdjustingDuplicatesDelay">Vertraging aanpassen</s:String>
     <s:String x:Key="S.Editor.DiscardingDuplicates">Duplicaten weggooien</s:String>
-    <s:String x:Key="Editor.DiscardingFrames">Frames weggooien</s:String>
-    <s:String x:Key="Editor.DiscardingFolders">Mappen weggooien</s:String>
-    <s:String x:Key="Editor.ResizingFrames">Framegrootte aanpassen</s:String>
-    <s:String x:Key="Editor.CroppingFrames">Frames bijsnijden</s:String>
-    <s:String x:Key="Editor.ApplyingOverlay">Overlay op frames toepassen</s:String>
-    <s:String x:Key="Editor.CreatingTitleFrame">Titelframe aanmaken</s:String>
-    <s:String x:Key="Editor.ApplyingFlipRotate">Frames spiegelen/roteren</s:String>
-    <s:String x:Key="Editor.ChangingDelay">Vertraging aanpassen</s:String>
-    <s:String x:Key="Editor.ApplyingTransition">Overgangseffect toepassen</s:String>
+    <s:String x:Key="S.Editor.DiscardingFrames">Frames weggooien</s:String>
+    <s:String x:Key="S.Editor.DiscardingFolders">Mappen weggooien</s:String>
+    <s:String x:Key="S.Editor.ResizingFrames">Framegrootte aanpassen</s:String>
+    <s:String x:Key="S.Editor.CroppingFrames">Frames bijsnijden</s:String>
+    <s:String x:Key="S.Editor.ApplyingOverlay">Overlay op frames toepassen</s:String>
+    <s:String x:Key="S.Editor.CreatingTitleFrame">Titelframe aanmaken</s:String>
+    <s:String x:Key="S.Editor.ApplyingFlipRotate">Frames spiegelen/roteren</s:String>
+    <s:String x:Key="S.Editor.ChangingDelay">Vertraging aanpassen</s:String>
+    <s:String x:Key="S.Editor.ApplyingTransition">Overgangseffect toepassen</s:String>
     <s:String x:Key="S.Editor.PreparingSaving">Opslaan voorbereiden</s:String>
 
-    <s:String x:Key="Editor.List.Frame">Frame:</s:String>
-    <s:String x:Key="Editor.List.OpenImage">Afbeelding openen</s:String>
-    <s:String x:Key="Editor.List.ExploreFolder">Map verkennen</s:String>
-    <s:String x:Key="Editor.List.ExportImage">Afbeelding exporteren</s:String>
+    <s:String x:Key="S.Editor.List.Frame">Frame:</s:String>
+    <s:String x:Key="S.Editor.List.OpenImage">Afbeelding openen</s:String>
+    <s:String x:Key="S.Editor.List.ExploreFolder">Map verkennen</s:String>
+    <s:String x:Key="S.Editor.List.ExportImage">Afbeelding exporteren</s:String>
     
-    <s:String x:Key="Editor.FrameNumbersInfo">Totaaltelling, telling selectie, selectie index</s:String>
+    <s:String x:Key="S.Editor.FrameNumbersInfo">Totaaltelling, telling selectie, selectie index</s:String>
     
-    <s:String x:Key="GoTo.Title">Ga naar frame</s:String>
-    <s:String x:Key="GoTo.Instruction">Ga naar frame (van 0 tot {0})</s:String>
+    <s:String x:Key="S.GoTo.Title">Ga naar frame</s:String>
+    <s:String x:Key="S.GoTo.Instruction">Ga naar frame (van 0 tot {0})</s:String>
     
-    <s:String x:Key="Context.SaveAs">Opslaan Als</s:String>
-    <s:String x:Key="Context.RemoveFrames">Geselecteerde frames wissen</s:String>
-    <s:String x:Key="Context.NewRecording">Nieuwe Schermopname</s:String>
-    <s:String x:Key="Context.NewWebcamRecording">Nieuwe Webcam-opname</s:String>
-    <s:String x:Key="Context.NewBoardRecording">Nieuwe Whiteboard-opname</s:String>
-    <s:String x:Key="Context.NewBlankAnimation">Nieuw Project</s:String>
-    <s:String x:Key="Context.NewFromMediaProject">Nieuw van Media of Project</s:String>
+    <s:String x:Key="S.Context.SaveAs">Opslaan Als</s:String>
+    <s:String x:Key="S.Context.RemoveFrames">Geselecteerde frames wissen</s:String>
+    <s:String x:Key="S.Context.NewRecording">Nieuwe Schermopname</s:String>
+    <s:String x:Key="S.Context.NewWebcamRecording">Nieuwe Webcam-opname</s:String>
+    <s:String x:Key="S.Context.NewBoardRecording">Nieuwe Whiteboard-opname</s:String>
+    <s:String x:Key="S.Context.NewBlankAnimation">Nieuw Project</s:String>
+    <s:String x:Key="S.Context.NewFromMediaProject">Nieuw van Media of Project</s:String>
     
     <!--Warnings-->
-    <s:String x:Key="Editor.Warning.Selection">Selecteer tenminste 1 frame om een overlay toe te passen.</s:String>
-    <s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg is niet beschikbaar. Voeg deze toe aan de PATH systeemvariabele of stel de locatie in bij Instellingen.</s:String>
-    <s:String x:Key="Editor.Warning.Gifski">Gifski is niet beschikbaar. Voeg deze toe aan de PATH systeemvariabele of stel de locatie in bij Instellingen.</s:String>
-    <s:String x:Key="Editor.Warning.LowSpace">Er is niet onvoldoende ruimte beschikbaar op de harde schijf ({0}% over). Klik hier om Instellingen > Tijdelijke bestanden te openen en extra vrije ruimte te maken.</s:String>
+    <s:String x:Key="S.Editor.Warning.Selection">Selecteer tenminste 1 frame om een overlay toe te passen.</s:String>
+    <s:String x:Key="S.Editor.Warning.Ffmpeg">FFmpeg is niet beschikbaar. Voeg deze toe aan de PATH systeemvariabele of stel de locatie in bij Instellingen.</s:String>
+    <s:String x:Key="S.Editor.Warning.Gifski">Gifski is niet beschikbaar. Voeg deze toe aan de PATH systeemvariabele of stel de locatie in bij Instellingen.</s:String>
+    <s:String x:Key="S.Editor.Warning.LowSpace">Er is niet onvoldoende ruimte beschikbaar op de harde schijf ({0}% over). Klik hier om Instellingen > Tijdelijke bestanden te openen en extra vrije ruimte te maken.</s:String>
     <s:String x:Key="S.Editor.Warning.DifferentDpi">Je hebt geprobeerd meerdere afbeeldingen met verschillende DPI's te importeren, wat niet wordt ondersteund. Sommige zijn geïmporteerd, de andere moeten apart worden geïmporteerd.</s:String>
     
     <!--Hints-->
@@ -948,50 +948,50 @@
     <s:String x:Key="S.Hint.Duplicates">Duplicaten verwijderd</s:String>
     
     <!--Action Grid-->
-    <s:String x:Key="Action.Hide">Verbergen</s:String>
-    <s:String x:Key="Action.Apply">Toepassen</s:String>
-    <s:String x:Key="Action.Open">Openen</s:String>
-    <s:String x:Key="Action.Save">Opslaan</s:String>
-    <s:String x:Key="Action.Cancel">Annuleren</s:String>
-    <s:String x:Key="Size">Grootte</s:String>
-    <s:String x:Key="Background">Achtergrond</s:String>
-    <s:String x:Key="Color">Kleur:</s:String>
+    <s:String x:Key="S.Action.Hide">Verbergen</s:String>
+    <s:String x:Key="S.Action.Apply">Toepassen</s:String>
+    <s:String x:Key="S.Action.Open">Openen</s:String>
+    <s:String x:Key="S.Action.Save">Opslaan</s:String>
+    <s:String x:Key="S.Action.Cancel">Annuleren</s:String>
+    <s:String x:Key="S.Size">Grootte</s:String>
+    <s:String x:Key="S.Background">Achtergrond</s:String>
+    <s:String x:Key="S.Color">Kleur:</s:String>
     
-    <s:String x:Key="Recent.Projects">Recente projecten</s:String>
-    <s:String x:Key="Recent.EnumeratingProjects">Recente projecten opzoeken…</s:String>
-    <s:String x:Key="Recent.CreationDate">Aanmaakdatum</s:String>
-    <s:String x:Key="Recent.FrameCount">Aantal frames</s:String>
-    <s:String x:Key="Recent.Warning.NothingSelected">Er is geen project geselecteerd. Selecteer een project uit de lijst om te laden.</s:String>
-    <s:String x:Key="Recent.Warning.SameOpened">Dit project wordt al weergegeven door deze editor.</s:String>
-    <s:String x:Key="Recent.Warning.AlreadyOpened">Dit project werd al geopend door een andere editor. Een project kan niet een tweede keer worden geopend.</s:String>
+    <s:String x:Key="S.Recent.Projects">Recente projecten</s:String>
+    <s:String x:Key="S.Recent.Searching">Recente projecten opzoeken…</s:String>
+    <s:String x:Key="S.Recent.Date">Aanmaakdatum</s:String>
+    <s:String x:Key="S.Recent.Frames">Aantal frames</s:String>
+    <s:String x:Key="S.Recent.Warning.NoSelection">Er is geen project geselecteerd. Selecteer een project uit de lijst om te laden.</s:String>
+    <s:String x:Key="S.Recent.Warning.Same">Dit project wordt al weergegeven door deze editor.</s:String>
+    <s:String x:Key="S.Recent.Warning.AnotherEditor">Dit project werd al geopend door een andere editor. Een project kan niet een tweede keer worden geopend.</s:String>
     
-    <s:String x:Key="Clipboard.Entries">Klembord-items</s:String>
-    <s:String x:Key="Clipboard.Entry">Klembord-item:</s:String>
+    <s:String x:Key="S.Clipboard.Entries">Klembord-items</s:String>
+    <s:String x:Key="S.Clipboard.Entry">Klembord-item:</s:String>
     <s:String x:Key="S.Clipboard.Entry.Image">{0} afbeelding</s:String>
     <s:String x:Key="S.Clipboard.Entry.Images">{0} afbeeldingen</s:String>
     <s:String x:Key="S.Clipboard.Entry.Frames">Frames: {0}</s:String>
-    <s:String x:Key="Clipboard.Explore">Inhoud verkennen</s:String>
-    <s:String x:Key="Clipboard.Remove">Verwijderen</s:String>
-    <s:String x:Key="Clipboard.Behavior">Plakgedrag</s:String>
-    <s:String x:Key="Clipboard.Before">Voor geselecteerde frame</s:String>
-    <s:String x:Key="Clipboard.After">Na geselecteerde frame</s:String>
+    <s:String x:Key="S.Clipboard.Explore">Inhoud verkennen</s:String>
+    <s:String x:Key="S.Clipboard.Remove">Verwijderen</s:String>
+    <s:String x:Key="S.Clipboard.Behavior">Plakgedrag</s:String>
+    <s:String x:Key="S.Clipboard.Before">Voor geselecteerde frame</s:String>
+    <s:String x:Key="S.Clipboard.After">Na geselecteerde frame</s:String>
     
-    <s:String x:Key="Resize.CurrentProperties">Huidige eigenschappen</s:String>
-    <s:String x:Key="Resize.Dpi">Dpi</s:String>
-    <s:String x:Key="Resize.NewProperties">Nieuwe eigenschappen</s:String>
-    <s:String x:Key="Resize.Dpi2">DPI:</s:String>
-    <s:String x:Key="Resize.KeepAspect">Beeldverhouding behouden.</s:String>
+    <s:String x:Key="S.Resize.CurrentProperties">Huidige eigenschappen</s:String>
+    <s:String x:Key="S.Resize.Dpi">Dpi</s:String>
+    <s:String x:Key="S.Resize.NewProperties">Nieuwe eigenschappen</s:String>
+    <s:String x:Key="S.Resize.Dpi2">DPI:</s:String>
+    <s:String x:Key="S.Resize.KeepAspect">Beeldverhouding behouden.</s:String>
     
-    <s:String x:Key="Crop.Points">Punten:</s:String>
-    <s:String x:Key="Crop.Top">Boven:</s:String>
-    <s:String x:Key="Crop.Left">Links:</s:String>
-    <s:String x:Key="Crop.Bottom">Onder:</s:String>
-    <s:String x:Key="Crop.Right">Rechts:</s:String>
+    <s:String x:Key="S.Crop.Points">Punten:</s:String>
+    <s:String x:Key="S.Crop.Top">Boven:</s:String>
+    <s:String x:Key="S.Crop.Left">Links:</s:String>
+    <s:String x:Key="S.Crop.Bottom">Onder:</s:String>
+    <s:String x:Key="S.Crop.Right">Rechts:</s:String>
     
-    <s:String x:Key="FlipRotate.FlipHorizontal">Horizontaal spiegelen</s:String>
-    <s:String x:Key="FlipRotate.FlipVertical">Verticaal spiegelen</s:String>
-    <s:String x:Key="FlipRotate.RotateLeft">90º linksom roteren</s:String>
-    <s:String x:Key="FlipRotate.RotateRight">90º rechtsom roteren</s:String>
+    <s:String x:Key="S.FlipRotate.FlipHorizontal">Horizontaal spiegelen</s:String>
+    <s:String x:Key="S.FlipRotate.FlipVertical">Verticaal spiegelen</s:String>
+    <s:String x:Key="S.FlipRotate.RotateLeft">90º linksom roteren</s:String>
+    <s:String x:Key="S.FlipRotate.RotateRight">90º rechtsom roteren</s:String>
     
     <s:String x:Key="S.Reduce.Header">Framerate verminderen</s:String>
     <s:String x:Key="S.Reduce.Factor">Factor:</s:String>
@@ -1018,59 +1018,58 @@
     <s:String x:Key="S.RemoveDuplicates.Delay.Sum">Totaal gebruiken</s:String>
     <s:String x:Key="S.RemoveDuplicates.Info">Deze actie analyseert elk frame (pixel per pixel) en verwijderd alle frames die op zijn minst {0} % gelijk zijn aan frame ervoor of erna.&#10;U kunt kiezen of de vertraging van de frames (duur van de vertoningen) aangepast moet worden.</s:String>
     
-    <s:String x:Key="Caption.Text">Tekst</s:String>
-    <s:String x:Key="Caption.Font">Lettertype</s:String>
-    <s:String x:Key="Caption.Family">Familie:</s:String>
-    <s:String x:Key="Caption.Style">Stijl:</s:String>
-    <s:String x:Key="Caption.Weight">Gewicht:</s:String>
-    <s:String x:Key="Caption.Size">Grootte:</s:String>
-    <s:String x:Key="Caption.Color">Kleur:</s:String>
-    <s:String x:Key="Caption.Outline">Contour</s:String>
-    <s:String x:Key="Caption.Thickness">Dikte:</s:String>
-    <s:String x:Key="Caption.Layout">Opmaak</s:String>
-    <s:String x:Key="Caption.Vertical">Verticaal:</s:String>
-    <s:String x:Key="Caption.Horizontal">Horizontaal:</s:String>
+    <s:String x:Key="S.Caption.Text">Tekst</s:String>
+    <s:String x:Key="S.Caption.Font">Lettertype</s:String>
+    <s:String x:Key="S.Caption.Family">Familie:</s:String>
+    <s:String x:Key="S.Caption.Style">Stijl:</s:String>
+    <s:String x:Key="S.Caption.Weight">Gewicht:</s:String>
+    <s:String x:Key="S.Caption.Size">Grootte:</s:String>
+    <s:String x:Key="S.Caption.Color">Kleur:</s:String>
+    <s:String x:Key="S.Caption.Outline">Contour</s:String>
+    <s:String x:Key="S.Caption.Thickness">Dikte:</s:String>
+    <s:String x:Key="S.Caption.Layout">Opmaak</s:String>
+    <s:String x:Key="S.Caption.Vertical">Verticaal:</s:String>
+    <s:String x:Key="S.Caption.Horizontal">Horizontaal:</s:String>
 
     <s:String x:Key="S.KeyStrokes">Toetsaanslagen</s:String>
-    <s:String x:Key="KeyStrokes.Keys">Toetsen</s:String>
-    <s:String x:Key="KeyStrokes.Separator">Scheidingsteken:</s:String>
-    <s:String x:Key="KeyStrokes.Edit">Toetsaanslagen bewerken</s:String>
-    <s:String x:Key="KeyStrokes.IgnoreModifiers">Ctrl, Alt, Shift en Windows-toetsen negeren als deze geen doel hadden.</s:String>
-    <s:String x:Key="KeyStrokes.IgnoreModifiers.Info">Met deze optie worden losse toetsaanslagen zoals "Control" genegeerd, maar "Control + C" wordt niet genegeerd.</s:String>
-    <s:String x:Key="KeyStrokes.Extend">Weergave van de toetsaanslagen uitbreiden.</s:String>
-    <s:String x:Key="KeyStrokes.Earlier">Weergave van de toetsaanslagen eerder starten.</s:String>
-    <s:String x:Key="KeyStrokes.By">Per (ms):</s:String>
-    <s:String x:Key="KeyStrokes.Warning.None">Er zijn geen toetsenbordaanslagen in je opname.</s:String>
-    <s:String x:Key="KeyStrokes.Edit.Title">ScreenToGif - Toetsaanslag Editor</s:String>
-    <s:String x:Key="KeyStrokes.Edit.Number">Framenummer</s:String>
-    <s:String x:Key="KeyStrokes.Edit.Keys">Gedetecteerde toetsaanslagen</s:String>
-    <s:String x:Key="KeyStrokes.Edit.Remove">Toetsaanslag verwijderen</s:String>
-    <s:String x:Key="KeyStrokes.Edit.Add">Toetsaanslag toevoegen:</s:String>
-    <s:String x:Key="KeyStrokes.Edit.Lower">Kleine letters.</s:String>
-    <s:String x:Key="KeyStrokes.Edit.Lower.Info">Hiermee kun je kleine letters invoegen.</s:String>
+    <s:String x:Key="S.KeyStrokes.Keys">Toetsen</s:String>
+    <s:String x:Key="S.KeyStrokes.Separator">Scheidingsteken:</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit">Toetsaanslagen bewerken</s:String>
+    <s:String x:Key="S.KeyStrokes.IgnoreModifiers">Ctrl, Alt, Shift en Windows-toetsen negeren als deze geen doel hadden.</s:String>
+    <s:String x:Key="S.KeyStrokes.IgnoreModifiers.Info">Met deze optie worden losse toetsaanslagen zoals "Control" genegeerd, maar "Control + C" wordt niet genegeerd.</s:String>
+    <s:String x:Key="S.KeyStrokes.Extend">Weergave van de toetsaanslagen uitbreiden.</s:String>
+    <s:String x:Key="S.KeyStrokes.Earlier">Weergave van de toetsaanslagen eerder starten.</s:String>
+    <s:String x:Key="S.KeyStrokes.By">Per (ms):</s:String>
+    <s:String x:Key="S.KeyStrokes.Warning.None">Er zijn geen toetsenbordaanslagen in je opname.</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Title">ScreenToGif - Toetsaanslag Editor</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Number">Framenummer</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Keys">Gedetecteerde toetsaanslagen</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Remove">Toetsaanslag verwijderen</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Add">Toetsaanslag toevoegen:</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Lower">Kleine letters.</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Lower.Info">Hiermee kun je kleine letters invoegen.</s:String>
     
-    <s:String x:Key="String.Delay">Vertraging</s:String>
-    <s:String x:Key="String.DelayMs">Vertraging (ms):</s:String>
-    <s:String x:Key="String.ValueMs">Waarde -+ (ms):</s:String>
-    <s:String x:Key="String.ScaleValue">Schaal:</s:String>
-    <s:String x:Key="String.Margin">Marge:</s:String>
-    <s:String x:Key="String.Padding">Randvulling:</s:String>
-    <s:String x:Key="String.Background">Achtergrond</s:String>
-    <s:String x:Key="String.MinHeight">Min. hoogte:</s:String>
+    <s:String x:Key="S.Delay">Vertraging</s:String>
+    <s:String x:Key="S.DelayMs">Vertraging (ms):</s:String>
+    <s:String x:Key="S.ValueMs">Waarde -+ (ms):</s:String>
+    <s:String x:Key="S.ScaleValue">Schaal:</s:String>
+    <s:String x:Key="S.Margin">Marge:</s:String>
+    <s:String x:Key="S.Padding">Randvulling:</s:String>
+    <s:String x:Key="S.MinHeight">Min. hoogte:</s:String>
     
-    <s:String x:Key="FreeDrawing.Mode">Modus</s:String>
-    <s:String x:Key="FreeDrawing.Pen">Pen</s:String>
-    <s:String x:Key="FreeDrawing.Eraser">Gum</s:String>
-    <s:String x:Key="FreeDrawing.Select">Selectie</s:String>
-    <s:String x:Key="FreeDrawing.StrokeEraser">Object-gum</s:String>
-    <s:String x:Key="FreeDrawing.Width">Breedte:</s:String>
-    <s:String x:Key="FreeDrawing.Height">Hoogte:</s:String>
-    <s:String x:Key="FreeDrawing.Tip">Tip:</s:String>
-    <s:String x:Key="FreeDrawing.Rectangle">Rechthoek</s:String>
-    <s:String x:Key="FreeDrawing.Ellipse">Ellips</s:String>
-    <s:String x:Key="FreeDrawing.Other">Overige:</s:String>
-    <s:String x:Key="FreeDrawing.Highlighter">Marker</s:String>
-    <s:String x:Key="FreeDrawing.FitToCurve">Aanpassen aan curve.</s:String>
+    <s:String x:Key="S.FreeDrawing.Mode">Modus</s:String>
+    <s:String x:Key="S.FreeDrawing.Pen">Pen</s:String>
+    <s:String x:Key="S.FreeDrawing.Eraser">Gum</s:String>
+    <s:String x:Key="S.FreeDrawing.Select">Selectie</s:String>
+    <s:String x:Key="S.FreeDrawing.StrokeEraser">Object-gum</s:String>
+    <s:String x:Key="S.FreeDrawing.Width">Breedte:</s:String>
+    <s:String x:Key="S.FreeDrawing.Height">Hoogte:</s:String>
+    <s:String x:Key="S.FreeDrawing.Tip">Tip:</s:String>
+    <s:String x:Key="S.FreeDrawing.Rectangle">Rechthoek</s:String>
+    <s:String x:Key="S.FreeDrawing.Ellipse">Ellips</s:String>
+    <s:String x:Key="S.FreeDrawing.Other">Overige:</s:String>
+    <s:String x:Key="S.FreeDrawing.Highlighter">Marker</s:String>
+    <s:String x:Key="S.FreeDrawing.FitToCurve">Aanpassen aan curve.</s:String>
     
     <s:String x:Key="S.Shapes.Mode.Insert">Invoegen</s:String>
     <s:String x:Key="S.Shapes.Shapes">Vormen</s:String>
@@ -1083,11 +1082,11 @@
     <s:String x:Key="S.MouseClicks">Muisklikken</s:String>
     <s:String x:Key="S.MouseClicks.Warning.None">Er zijn geen muisklikken gedetecteerd in dit project.</s:String>
     
-    <s:String x:Key="Watermark.Image">Afbeelding</s:String>
-    <s:String x:Key="Watermark.File">Bestand:</s:String>
-    <s:String x:Key="Watermark.Opacity">Dekking:</s:String>
+    <s:String x:Key="S.Watermark.Image">Afbeelding</s:String>
+    <s:String x:Key="S.Watermark.File">Bestand:</s:String>
+    <s:String x:Key="S.Watermark.Opacity">Dekking:</s:String>
     
-    <s:String x:Key="Border.Appearance">Uiterlijk</s:String>
+    <s:String x:Key="S.Border.Appearance">Uiterlijk</s:String>
     <s:String x:Key="S.Border.Info">Gebruik negatieve waarden om de rand de afbeelding te laten vergroten. Daarbij wordt de rand op alle frames toegepast.&#10;Als er geen negatieve waarde wordt gebruikt, wordt de rand alleen toegepast op de geselecteerde frames.</s:String>
 
     <s:String x:Key="S.Shadow.ShadowColor">Schaduwkleur:</s:String>
@@ -1102,21 +1101,21 @@
     <s:String x:Key="S.Obfuscate.Info">Selecteer een rechthoek die korrelig gemaakt moet worden.</s:String>
     <s:String x:Key="S.Obfuscate.Warning">Er is niets geselecteerd. Selecteer een rechthoek die korrelig gemaakt moet worden.</s:String>
     
-    <s:String x:Key="Progress.Type">Type</s:String>
-    <s:String x:Key="Progress.Type.Bar">Balk</s:String>
-    <s:String x:Key="Progress.Type.Text">Tekst</s:String>
-    <s:String x:Key="Progress.Precision">Precisie:</s:String>
-    <s:String x:Key="Progress.Precision.Minutes">Minuten</s:String>
-    <s:String x:Key="Progress.Precision.Seconds">Seconden</s:String>
-    <s:String x:Key="Progress.Precision.Miliseconds">Milliseconden</s:String>
-    <s:String x:Key="Progress.Precision.Percentage">Percentage</s:String>
-    <s:String x:Key="Progress.Precision.Count">Framenummer</s:String>
-    <s:String x:Key="Progress.Precision.DateOfRecording">Actuele datum/tijd</s:String>
-    <s:String x:Key="Progress.Precision.Custom">Aangepast</s:String>
-    <s:String x:Key="Progress.Precision.ShowTotal">Totaal tonen.</s:String>
-    <s:String x:Key="Progress.Format">Formaat:</s:String>
+    <s:String x:Key="S.Progress.Type">Type</s:String>
+    <s:String x:Key="S.Progress.Type.Bar">Balk</s:String>
+    <s:String x:Key="S.Progress.Type.Text">Tekst</s:String>
+    <s:String x:Key="S.Progress.Precision">Precisie:</s:String>
+    <s:String x:Key="S.Progress.Precision.Minutes">Minuten</s:String>
+    <s:String x:Key="S.Progress.Precision.Seconds">Seconden</s:String>
+    <s:String x:Key="S.Progress.Precision.Milliseconds">Milliseconden</s:String>
+    <s:String x:Key="S.Progress.Precision.Percentage">Percentage</s:String>
+    <s:String x:Key="S.Progress.Precision.Count">Framenummer</s:String>
+    <s:String x:Key="S.Progress.Precision.DateOfRecording">Actuele datum/tijd</s:String>
+    <s:String x:Key="S.Progress.Precision.Custom">Aangepast</s:String>
+    <s:String x:Key="S.Progress.Precision.ShowTotal">Totaal tonen.</s:String>
+    <s:String x:Key="S.Progress.Format">Formaat:</s:String>
     <s:String x:Key="S.Progress.Format.Header">Formaat</s:String>
-    <s:String x:Key="S.Progress.Format.Miliseconds">$ms = milliseconden</s:String>
+    <s:String x:Key="S.Progress.Format.Milliseconds">$ms = milliseconden</s:String>
     <s:String x:Key="S.Progress.Format.Seconds">$s = seconden</s:String>
     <s:String x:Key="S.Progress.Format.Minutes">$m = minuten</s:String>
     <s:String x:Key="S.Progress.Format.Percentage">$p = percentage</s:String>
@@ -1128,30 +1127,30 @@
     <s:String x:Key="S.Progress.Format.Date.Custom">Aangepaste formaten</s:String>
     <s:String x:Key="S.Progress.Precision.StartNumber">Tel vanaf:</s:String>
     <s:String x:Key="S.Progress.Precision.StartNumber.ToolTip">Begint het framenummer te tellen vanaf dit geselecteerde nummer.</s:String>
-    <s:String x:Key="Progress.Orientation">Oriëntatie:</s:String>
+    <s:String x:Key="S.Progress.Orientation">Oriëntatie:</s:String>
     
-    <s:String x:Key="S.DelayUpdate">Update uitstellen</s:String>
-    <s:String x:Key="Delay.Mode">Vertragingsmodus:</s:String>
-    <s:String x:Key="Delay.Mode.Override">Overschrijven (in ms)</s:String>
-    <s:String x:Key="Delay.Mode.IncreaseDecrease">Verhogen of verlagen (in ms)</s:String>
-    <s:String x:Key="Delay.Mode.Scale">Schaal (in%)</s:String>
-    <s:String x:Key="Delay.NewValue">Nieuwe waarde</s:String>
-    <s:String x:Key="Delay.Minimum10Ms">Minimaal 10ms per frame.</s:String>
-    <s:String x:Key="Delay.DecreaseIncrease">Waarde verminderen/verhogen</s:String>
-    <s:String x:Key="Delay.Scale">Schaal</s:String>
+    <s:String x:Key="S.Delay.Update">Update uitstellen</s:String>
+    <s:String x:Key="S.Delay.Mode">Vertragingsmodus:</s:String>
+    <s:String x:Key="S.Delay.Mode.Override">Overschrijven (in ms)</s:String>
+    <s:String x:Key="S.Delay.Mode.IncreaseDecrease">Verhogen of verlagen (in ms)</s:String>
+    <s:String x:Key="S.Delay.Mode.Scale">Schaal (in%)</s:String>
+    <s:String x:Key="S.Delay.NewValue">Nieuwe waarde</s:String>
+    <s:String x:Key="S.Delay.Minimum10Ms">Minimaal 10ms per frame.</s:String>
+    <s:String x:Key="S.Delay.DecreaseIncrease">Waarde verminderen/verhogen</s:String>
+    <s:String x:Key="S.Delay.Scale">Schaal</s:String>
     
-    <s:String x:Key="Cinemagraph.Info">Gebruik de pen om de pixels te selecteren die niet ongewijzgd moeten blijven (oftewel veranderen tussen frames), </s:String>
-    <s:String x:Key="OverrideDelay.Info">Deze nieuwe waarde zal de duur (vertraging) vervangen van alle geselecteerde frames. De waarde dient tussen 10ms tot en met 25500ms te liggen.</s:String>
-    <s:String x:Key="IncreaseDecreaseDelay.Info">Deze waarde zal de duur (vertraging) van elke geselecteerde frame toe of af laten nemen.&#10;Je kunt een hogere of lagere waarde kiezen tussen -10000ms en 10000ms, maar de totale duur van elke frame is beperkt tot een waarde tussen 10ms en 25500ms.</s:String>
-    <s:String x:Key="ScaleDelay.Info">De duur (vertraging) van elk geselecteerd frame procentueel verlengen.&#10;Je kunt de duur van elk frame verlengen met 1-10000% , maar de uiteindelijke duur van elk frame blijft beperkt tot een waarde tussen 10ms en 25500ms</s:String>
+    <s:String x:Key="S.Cinemagraph.Info">Gebruik de pen om de pixels te selecteren die niet ongewijzgd moeten blijven (oftewel veranderen tussen frames), </s:String>
+    <s:String x:Key="S.Delay.Override.Info">Deze nieuwe waarde zal de duur (vertraging) vervangen van alle geselecteerde frames. De waarde dient tussen 10ms tot en met 25500ms te liggen.</s:String>
+    <s:String x:Key="S.Delay.IncreaseDecrease.Info">Deze waarde zal de duur (vertraging) van elke geselecteerde frame toe of af laten nemen.&#10;Je kunt een hogere of lagere waarde kiezen tussen -10000ms en 10000ms, maar de totale duur van elke frame is beperkt tot een waarde tussen 10ms en 25500ms.</s:String>
+    <s:String x:Key="S.Delay.Scale.Info">De duur (vertraging) van elk geselecteerd frame procentueel verlengen.&#10;Je kunt de duur van elk frame verlengen met 1-10000% , maar de uiteindelijke duur van elk frame blijft beperkt tot een waarde tussen 10ms en 25500ms</s:String>
 
-    <s:String x:Key="Transitions.Length">Overgangsduur</s:String>
-    <s:String x:Key="Transitions.Delay">Overgangsvertraging</s:String>
-    <s:String x:Key="Transitions.FadeTo">Vervagen naar…</s:String>
-    <s:String x:Key="Transitions.FadeTo.Frame">Volgende frame</s:String>
-    <s:String x:Key="Transitions.FadeTo.Color">Een kleur</s:String>
-    <s:String x:Key="Transitions.Color">Kleur</s:String>
-    <s:String x:Key="Transitions.Info">De overgang wordt toegepast op de geselecteerde frame en de volgende frame</s:String>
+    <s:String x:Key="S.Transitions.Length">Overgangsduur</s:String>
+    <s:String x:Key="S.Transitions.Delay">Overgangsvertraging</s:String>
+    <s:String x:Key="S.Transitions.FadeTo">Vervagen naar…</s:String>
+    <s:String x:Key="S.Transitions.FadeTo.Frame">Volgende frame</s:String>
+    <s:String x:Key="S.Transitions.FadeTo.Color">Een kleur</s:String>
+    <s:String x:Key="S.Transitions.Color">Kleur</s:String>
+    <s:String x:Key="S.Transitions.Info">De overgang wordt toegepast op de geselecteerde frame en de volgende frame</s:String>
 
     <!--Save As-->
     <s:String x:Key="S.SaveAs.Type">Bestandsformaat</s:String>
@@ -1173,7 +1172,7 @@
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
     <s:String x:Key="S.SaveAs.GifOptions">Gif-opties</s:String>
-    <s:String x:Key="S.SaveAs.Quality">Kwaliteit:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quality">Kwaliteit:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors">Kleuren:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">Maximum aantal kleuren (voor elke frame)</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Loop">Lus:</s:String>
@@ -1199,12 +1198,12 @@
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">Ongewijzigde&#10;pixels markeren met een dummykleur</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">Kleur selecteren</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions">Apng-opties</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.LoopedApng">Apng met herhaling.</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Looped">Apng met herhaling.</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions.DetectUnchanged">Ongewijzigde pixels detecteren.</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions.PaintTransparent">Kleur alle ongewijzigde pixels transparant.</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions">Video-opties</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Fps">Fps:</s:String>
-    <s:String x:Key="S.SaveAs.FlipVertically">Video spiegelen (verticaal)</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.FlipVertically">Video spiegelen (verticaal)</s:String>
     <s:String x:Key="S.SaveAs.ImagesOptions">Afbeeldingsopties</s:String>
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">De afbeeldingen in zip inpakken.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions">Psd-opties</s:String>

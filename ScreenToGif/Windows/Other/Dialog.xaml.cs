@@ -20,11 +20,11 @@ namespace ScreenToGif.Windows.Other
             switch (icon)
             {
                 case Icons.Error:
-                    return (Canvas)FindResource("Vector.Error");
+                    return (Canvas)FindResource("Vector.Cancel.Round");
                 case Icons.Info:
                     return (Canvas)FindResource("Vector.Info");
                 case Icons.Success:
-                    return (Canvas)FindResource("Vector.Success");
+                    return (Canvas)FindResource("Vector.Ok.Round");
                 case Icons.Warning:
                     return (Canvas)FindResource("Vector.Warning");
                 case Icons.Question:

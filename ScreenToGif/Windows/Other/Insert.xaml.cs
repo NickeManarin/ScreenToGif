@@ -392,7 +392,7 @@ namespace ScreenToGif.Windows.Other
                 if (Math.Abs(RightCanvas.ActualWidth - _rightWidth) > 0.1 || Math.Abs(RightCanvas.ActualHeight - _rightHeight) > 0.1 ||
                     Math.Abs(RightImage.ActualWidth - _rightWidth) > 0.1 || Math.Abs(RightImage.ActualHeight - _rightHeight) > 0.1)
                 {
-                    StartProgress(CurrentList.Count, FindResource("Editor.UpdatingFrames").ToString());
+                    StartProgress(CurrentList.Count, FindResource("S.Editor.UpdatingFrames").ToString());
 
                     //Saves the state before resizing the images.
                     ActionStack.SaveState(ActionStack.EditAction.ImageAndProperties, CurrentList, Util.Other.ListOfIndexes(0, CurrentList.Count));
@@ -447,7 +447,7 @@ namespace ScreenToGif.Windows.Other
 
                 #region New frames
 
-                StartProgress(CurrentList.Count, FindResource("Editor.ImportingFrames").ToString());
+                StartProgress(CurrentList.Count, FindResource("S.Editor.ImportingFrames").ToString());
 
                 var folder = Path.GetDirectoryName(CurrentList[0].Path);
                 var insertFolder = Path.GetDirectoryName(NewList[0].Path);

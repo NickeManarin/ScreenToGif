@@ -19,7 +19,7 @@ namespace ScreenToGif.Util.Capture
 
         #endregion
 
-        internal static Task<Rect> Select(SelectControl2.ModeType mode, Rect previousRegion)
+        internal static Task<Rect> Select(SelectControl.ModeType mode, Rect previousRegion)
         {
             _taskCompletionSource = new TaskCompletionSource<Rect>();
 
@@ -28,7 +28,7 @@ namespace ScreenToGif.Util.Capture
             foreach (var monitor in Monitor.AllMonitorsGranular())
             {
                 var selector = new RegionSelector();
-                selector.Select(monitor, mode, previousRegion, RegionSelected, RegionChanged, RegionAborted);
+                selector.Select(monitor, mode, previousRegion, RegionSelected, RegionChanged, RegionGotHover, RegionAborted);
 
                 Selectors.Add(selector);
             }
@@ -56,6 +56,13 @@ namespace ScreenToGif.Util.Capture
             //When one monitor gets the focus, the other ones should be cleaned.
             foreach (var selector in Selectors.Where(w => w.Monitor.Handle != monitor.Handle))
                 selector.ClearSelection();
+        }
+
+        private static void RegionGotHover(Monitor monitor)
+        {
+            //When one monitor gets the focus, the other ones should be cleaned.
+            foreach (var selector in Selectors.Where(w => w.Monitor.Handle != monitor.Handle))
+                selector.ClearHoverEffects();
         }
 
         private static void RegionAborted()

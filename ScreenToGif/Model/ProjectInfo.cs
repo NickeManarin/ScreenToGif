@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
+using System.Windows;
+using ScreenToGif.ImageUtil;
+using ScreenToGif.ImageUtil.Gif.Encoder;
 using ScreenToGif.Util;
 
 namespace ScreenToGif.Model
@@ -201,8 +205,9 @@ namespace ScreenToGif.Model
         /// </summary>
         /// <param name="usePadding">True if the file names should have a left pad, to preserve the file ordering.</param>
         /// <param name="copyJson">True if the Project.json file should be copied too.</param>
+        /// <param name="useBytes">True if the images should be converted to byte array.</param>
         /// <returns>A list of frames with the new path.</returns>
-        internal List<FrameInfo> CopyToExport(bool usePadding = false, bool copyJson = false)
+        internal ExportProject CopyToExport(bool usePadding = false, bool copyJson = false, bool useBytes = false)
         {
             #region Output folder
 
@@ -213,7 +218,55 @@ namespace ScreenToGif.Model
 
             #endregion
 
-            var newList = new List<FrameInfo>();
+            var export = new ExportProject();
+
+            if (useBytes)
+            {
+                export.Frames = new List<ExportFrame>();
+                export.ChunkPath = Path.Combine(folder, "Chunk");
+                export.NewChunkPath = Path.Combine(folder, "NewChunk");
+
+                try
+                {
+                    //Create chunk file.
+                    using (var fileStream = new FileStream(export.ChunkPath, FileMode.Create, FileAccess.Write, FileShare.None))
+                    {
+                        var pos = 0L;
+
+                        foreach (var info in Frames)
+                        {
+                            var image = new PixelUtil(info.Path.SourceFrom());
+                            image.LockBits();
+
+                            fileStream.WriteBytes(image.Pixels);
+
+                            export.Frames.Add(new ExportFrame
+                            {
+                                DataPosition = pos,
+                                DataLength = image.Pixels.LongLength, 
+                                Delay = info.Delay, 
+                                Rect = new Int32Rect(0,0, image.Width, image.Height),
+                                ImageDepth = image.Depth
+                            });
+
+                            //Advances in the position.
+                            pos += image.Pixels.LongLength;
+
+                            image.UnlockBitsWithoutCommit();
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    LogWriter.Log(e, "It was impossible to get the image bytes to encode.");
+                    throw;
+                }
+
+                return export;
+            }
+
+            export.UsesFiles = true;
+            export.FramesFiles = new List<FrameInfo>();
 
             try
             {
@@ -229,12 +282,12 @@ namespace ScreenToGif.Model
                         File.Copy(info.Path, filename, true);
 
                         //Create the new object and add to the list.
-                        newList.Add(new FrameInfo(filename, info.Delay));
+                        export.FramesFiles.Add(new FrameInfo(filename, info.Delay));
                     }
 
                     File.Copy(ProjectPath, Path.Combine(folder, "Project.json"), true);
 
-                    return newList;
+                    return export;
                 }
 
                 #endregion
@@ -245,13 +298,13 @@ namespace ScreenToGif.Model
                 foreach (var info in Frames)
                 {
                     //Changes the path of the image. Writes as an ordered list of files, replacing the old filenames.
-                    var filename = Path.Combine(folder, newList.Count.ToString().PadLeft(pad, '0') + ".png");
+                    var filename = Path.Combine(folder, export.FramesFiles.Count.ToString().PadLeft(pad, '0') + ".png");
 
                     //Copy the image to the folder.
                     File.Copy(info.Path, filename, true);
 
                     //Create the new object and add to the list.
-                    newList.Add(new FrameInfo(filename, info.Delay));
+                    export.FramesFiles.Add(new FrameInfo(filename, info.Delay));
                 }
             }
             catch (Exception ex)
@@ -260,7 +313,7 @@ namespace ScreenToGif.Model
                 throw;
             }
 
-            return newList;
+            return export;
         }
 
         #endregion

@@ -52,8 +52,8 @@ namespace ScreenToGif.Model
 
         public override string ToString()
         {
-            return $"{LocalizationHelper.Get("Color")} #{Color.A:X2}{Color.R:X2}{Color.G:X2}{Color.B:X2}, " +
-                   $"{(LocalizationHelper.Get("Caption.Thickness"))} ({LeftThickness}, {TopThickness}, {LeftThickness}, {BottomThickness})";
+            return $"{LocalizationHelper.Get("S.Color")} #{Color.A:X2}{Color.R:X2}{Color.G:X2}{Color.B:X2}, " +
+                   $"{(LocalizationHelper.Get("S.Caption.Thickness"))} ({LeftThickness}, {TopThickness}, {LeftThickness}, {BottomThickness})";
         }
 
         public static BorderModel Default()

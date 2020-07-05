@@ -30,24 +30,33 @@ namespace ScreenToGif.Util
 
         public bool DetectUnchangedPixels { get; set; }
 
-        public Color? DummyColor { get; set; }
+        public Color? ChromaKey { get; set; }
 
 
         #region Gif
 
         public GifEncoderType EncoderType { get; set; }
 
+        public ColorQuantizationType ColorQuantizationType { get; set; }
+
         /// <summary>
         /// When used with the gif encoder, 0 to 20.
         /// </summary>
-        public int Quality { get; set; }
+        public int SamplingFactor { get; set; }
 
         public int MaximumNumberColors { get; set; }
 
         public bool UseGlobalColorTable { get; set; }
 
-        public ColorQuantizationType ColorQuantizationType { get; set; }
+        /// <summary>
+        /// When enabled, sets the selected color as the transparent color of the gif.
+        /// Also sets the first frame as "RestoreBackground" and the last frame as "Leave".
+        /// This option disables the "DetectUnchangedPixels" option, since it's conflicting.
+        /// </summary>
+        public bool EnableTransparency { get; set; }
 
+        public Color? TransparencyColor { get; set; }
+        
         #endregion
 
         #region Apng

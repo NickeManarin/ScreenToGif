@@ -73,8 +73,7 @@
 
     <Window.CommandBindings>
         <CommandBinding Command="{StaticResource Command.Options}" CanExecute="Options_CanExecute" Executed="Options_Executed"/>
-        <CommandBinding Command="{StaticResource Command.EnableSnapshot}" CanExecute="EnableSnapshot_CanExecute" Executed="EnableSnapshot_Executed"/>
-        <CommandBinding Command="{StaticResource Command.EnableThinMode}" CanExecute="EnableThinMode_CanExecute" Executed="EnableThinMode_Executed"/>
+        <CommandBinding Command="{StaticResource Command.SwitchCaptureFrequency}" CanExecute="SwitchCaptureFrequency_CanExecute" Executed="SwitchCaptureFrequency_Executed"/>
         <CommandBinding Command="{StaticResource Command.EnableSnapToWindow}" CanExecute="SnapToWindow_CanExecute"/>
     </Window.CommandBindings>
 
@@ -112,10 +111,10 @@
                                ContentHeight="10" Padding="4,1" TabIndex="1" Click="CloseButton_Click"/>
 
                 <TextBlock Grid.Row="0" Grid.Column="1" x:Name="CaptionText" Text="{Binding Title, ElementName=RecorderLightWindow}" FontFamily="Segoe UI" FontSize="12"
-                           FontWeight="Regular" Margin="5,0,0,0" Foreground="{DynamicResource Element.Foreground}" Effect="{DynamicResource Shadow.Foreground.Small}"/>
+                           FontWeight="Regular" Margin="5,0,0,0" Foreground="{DynamicResource Element.Foreground}"/>
 
                 <TextBlock Grid.Row="1" Grid.Column="1" x:Name="FrameCountTextBlock" Text="{Binding FrameCount, ElementName=RecorderLightWindow, Converter={StaticResource IntToStringConverter}}" 
-                           FontFamily="Segoe UI" FontSize="12" FontWeight="Regular" Margin="5,0,0,0" Foreground="{DynamicResource Element.Foreground.Header}" Effect="{DynamicResource Shadow.Foreground.Small}"/>
+                           FontFamily="Segoe UI" FontSize="12" FontWeight="Regular" Margin="5,0,0,0" Foreground="{DynamicResource Element.Foreground.Header}"/>
             </Grid>
 
             <StackPanel Grid.Column="1" x:Name="ControlStackPanel" Height="31" Orientation="Horizontal" HorizontalAlignment="Right"
@@ -141,41 +140,53 @@
 
                 <Separator Width="1" Margin="5,2"/>
 
-                <Viewbox Stretch="UniformToFill" ClipToBounds="True" Focusable="False">
-                    <Viewbox.Visibility>
-                        <MultiBinding Converter="{StaticResource BoolOrToInvertedVisibility}">
-                            <Binding Path="RecorderThinMode" Source="{x:Static u:UserSettings.All}"/>
-                            <Binding Path="SnapshotMode" Source="{x:Static u:UserSettings.All}"/>
-                        </MultiBinding>
-                    </Viewbox.Visibility>
-
-                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" FlowDirection="LeftToRight" Margin="-4" Opacity="{DynamicResource Element.Opacity}">
+                <Viewbox x:Name="FrequencyViewbox" Stretch="UniformToFill" ClipToBounds="True" Focusable="False" 
+                         ToolTip="{DynamicResource S.Recorder.Fps.Range}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5">
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" FlowDirection="LeftToRight" Margin="-4" Opacity="{DynamicResource Element.Opacity}"
+                          Visibility="{Binding Path=RecorderThinMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}">
                         <n:CircularProgressBar StrokeThickness="2" Percentage="100" SegmentColor="Gray" Radius="24" IsTabStop="False"/>
                         <n:CircularProgressBar StrokeThickness="22" Percentage="100" SegmentColor="#FFF0F1F1" Radius="10" IsTabStop="False"/>
 
-                        <n:CircularProgressBar StrokeThickness="2" Value="{Binding ElementName=FpsIntegerUpDown, Path=Value, Mode=OneWay}" 
+                        <n:CircularProgressBar StrokeThickness="2" Value="{Binding ElementName=FrequencyIntegerUpDown, Path=Value, Mode=OneWay}" 
                                                IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="24" IsTabStop="False"/>
-                        <n:CircularProgressBar StrokeThickness="22" Value="{Binding ElementName=FpsIntegerUpDown, Path=Value, Mode=OneWay}" 
+                        <n:CircularProgressBar StrokeThickness="22" Value="{Binding ElementName=FrequencyIntegerUpDown, Path=Value, Mode=OneWay}" 
                                                IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="10" IsTabStop="False"/>
                     </Grid>
-
-                    <Viewbox.ToolTip>
-                        <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource S.Recorder.FpsRange}"/>
-                    </Viewbox.ToolTip>
                 </Viewbox>
 
-                <n:IntegerUpDown x:Name="FpsIntegerUpDown" Margin="1,3" StepValue="1" Minimum="1" Maximum="60" MinWidth="45" TabIndex="4"
+                <n:IntegerUpDown x:Name="FrequencyIntegerUpDown" Margin="1,3" StepValue="1" Minimum="1" Maximum="60" MinWidth="45" TabIndex="4"
                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=LatestFps, Mode=TwoWay}"
-                                 Visibility="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}">
-                    <n:IntegerUpDown.ToolTip>
-                        <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource S.Recorder.Fps}"/>
-                    </n:IntegerUpDown.ToolTip>
-                </n:IntegerUpDown>
+                                 ToolTip="{DynamicResource S.Recorder.Fps}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                <Label Content="{StaticResource S.Recorder.Fps.Short}" FontSize="12" FontFamily="Segoe UI" Margin="1,0,0,0" VerticalContentAlignment="Center" Padding="0" 
-                       Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}" Visibility="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}"/>
+                <n:ImageButton x:Name="FrequencyButton" Style="{StaticResource Style.Button.Horizontal.NoImage}" Margin="1,0,0,0" VerticalContentAlignment="Center" Padding="0" 
+                               Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}" UseLayoutRounding="True" TabIndex="5" Text="{DynamicResource S.Recorder.Fps.Short}" 
+                               FontSize="12" FontFamily="Segoe UI" ToolTip="{DynamicResource S.Recorder.SwitchFrequency}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"
+                               Command="{StaticResource Command.SwitchCaptureFrequency}" CommandParameter="Switch">
+                    <n:ImageButton.ContextMenu>
+                        <ContextMenu IsOpen="False">
+                            <n:ImageMenuItem Header="{DynamicResource S.Options.Recorder.Frequency}" IsHitTestVisible="False" Image="{StaticResource Vector.Record}" ContentHeight="16" ContentWidth="16"/>
+                            <Separator/>
 
-                <Separator Width="1" Margin="5,2" Visibility="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}"/>
+                            <n:ImageMenuItem Header="{DynamicResource S.Options.Recorder.Frequency.Manual}" IsCheckable="True" Image="{StaticResource Vector.Camera}" ContentHeight="16" ContentWidth="16" 
+                                             IsChecked="{Binding CaptureFrequency, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CaptureFrequency.Manual}}" 
+                                             IsEnabled="{Binding RelativeSource={RelativeSource Self}, Path=IsChecked, Converter={StaticResource InvertedBool}}" Command="{StaticResource Command.SwitchCaptureFrequency}"/>
+
+                            <n:ImageMenuItem Header="{DynamicResource S.Options.Recorder.Frequency.Second}" IsCheckable="True" Image="{StaticResource Vector.Delay}" ContentHeight="16" ContentWidth="16" 
+                                             IsChecked="{Binding CaptureFrequency, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CaptureFrequency.PerSecond}}" 
+                                             IsEnabled="{Binding RelativeSource={RelativeSource Self}, Path=IsChecked, Converter={StaticResource InvertedBool}}" Command="{StaticResource Command.SwitchCaptureFrequency}"/>
+
+                            <n:ImageMenuItem Header="{DynamicResource S.Options.Recorder.Frequency.Minute}" IsCheckable="True" Image="{StaticResource Vector.Delay.Minute}" ContentHeight="16" ContentWidth="16" 
+                                             IsChecked="{Binding CaptureFrequency, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CaptureFrequency.PerMinute}}" 
+                                             IsEnabled="{Binding RelativeSource={RelativeSource Self}, Path=IsChecked, Converter={StaticResource InvertedBool}}" Command="{StaticResource Command.SwitchCaptureFrequency}"/>
+
+                            <n:ImageMenuItem Header="{DynamicResource S.Options.Recorder.Frequency.Hour}" IsCheckable="True" Image="{StaticResource Vector.Delay.Hour}" ContentHeight="16" ContentWidth="16" 
+                                             IsChecked="{Binding CaptureFrequency, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CaptureFrequency.PerHour}}" 
+                                             IsEnabled="{Binding RelativeSource={RelativeSource Self}, Path=IsChecked, Converter={StaticResource InvertedBool}}" Command="{StaticResource Command.SwitchCaptureFrequency}"/>
+                        </ContextMenu>
+                    </n:ImageButton.ContextMenu>
+                </n:ImageButton>
+
+                <Separator Width="1" Margin="5,2"/>
 
                 <!--<Viewbox Child="{StaticResource Vector.WidthHeight}" Stretch="UniformToFill" Margin="3,4" HorizontalAlignment="Right" FlowDirection="LeftToRight" SnapsToDevicePixels="True"
                              Visibility="{Binding RecorderThinMode, Converter={StaticResource InvertedBoolToVisibility}, Source={x:Static u:UserSettings.All}}"/>-->
@@ -203,33 +214,18 @@
                                MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"
                                KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='3'}"/>
 
-                <!--ToolTip="{Binding Source={x:Static properties:Settings.Default}, Path=StartPauseKey, Converter={StaticResource KeysToStringConverter}}" ToolTipService.Placement="Bottom"-->
                 <n:ImageButton x:Name="RecordPauseButton" UseLayoutRounding="True" MaxSize="16" ContentHeight="18" ContentWidth="18" TabIndex="9" 
                                Text="{Binding Stage, ElementName=RecorderLightWindow, Converter={StaticResource StageToButtonStringConverter}, FallbackValue={StaticResource S.Recorder.Record}}" 
                                Content="{Binding Stage, ElementName=RecorderLightWindow, Converter={StaticResource StageToCanvasConverter}, FallbackValue={StaticResource Vector.Record}}" 
-                               Click="RecordPauseButton_Click" Style="{StaticResource Style.Button.Horizontal}"
-                               Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}" 
-                               MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"
-                               KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='1'}">
-                    <n:ImageButton.ContextMenu>
-                        <ContextMenu>
-                            <n:ImageMenuItem Header="{DynamicResource S.Recorder.RecordingOptions}" IsHitTestVisible="False" Image="{StaticResource Vector.Record}" ContentHeight="16" ContentWidth="16"/>
-                            <Separator/>
-                            <n:ImageMenuItem Header="{DynamicResource S.Recorder.Snapshot}" IsCheckable="True" Image="{StaticResource Vector.Camera.Add}" ContentHeight="16" ContentWidth="16" 
-                                             IsChecked="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Mode=TwoWay}" Command="{StaticResource Command.EnableSnapshot}"/>
-
-                            <n:ImageMenuItem x:Name="ThinModeMenuItem" Header="{DynamicResource S.Recorder.ThinMode}" IsCheckable="True" Image="{StaticResource Vector.Application}" ContentHeight="16" ContentWidth="16"
-                                             IsChecked="{Binding RecorderThinMode, Source={x:Static u:UserSettings.All}, Mode=TwoWay}" Command="{StaticResource Command.EnableThinMode}"/>
-                        </ContextMenu>
-                    </n:ImageButton.ContextMenu>
-                </n:ImageButton>
+                               Style="{StaticResource Style.Button.Horizontal}" Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}" 
+                               MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}" KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='1'}"
+                               Click="RecordPauseButton_Click"/>
 
                 <n:ImageButton x:Name="StopButton" Text="{DynamicResource S.Recorder.Stop}" Content="{StaticResource Vector.Stop}"
-                               Click="StopButton_Click" Style="{StaticResource Style.Button.Horizontal}"
-                               Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}"
+                               Style="{StaticResource Style.Button.Horizontal}" Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}"
                                UseLayoutRounding="True" MaxSize="16" ContentHeight="18" ContentWidth="18" Margin="0" TabIndex="10" 
                                MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"
-                               KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='2'}"/>
+                               KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='2'}" Click="StopButton_Click" />
             </StackPanel>
         </Grid>
     </Grid>

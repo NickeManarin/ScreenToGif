@@ -6,8 +6,81 @@
                   xmlns:u="clr-namespace:ScreenToGif.Util"
                   x:Name="RecorderWindow" Title="ScreenToGif" SnapsToDevicePixels="True" UseLayoutRounding="True" AllowsTransparency="True" 
                   WindowStyle="None" Topmost="True" Icon="../Resources/Logo.ico" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize"
-                  Loaded="Window_Loaded" Closing="Window_Closing">
+                  Loaded="Window_Loaded" Activated="Window_Activated" Closing="Window_Closing">
 
+    <n:RecorderWindow.CommandBindings>
+        <CommandBinding Command="{StaticResource Command.Options}" CanExecute="Options_CanExecute" Executed="Options_Executed"/>
+        <CommandBinding Command="{StaticResource Command.SwitchCaptureFrequency}" CanExecute="SwitchCaptureFrequency_CanExecute" Executed="SwitchCaptureFrequency_Executed"/>
+    </n:RecorderWindow.CommandBindings>
+    
+    <n:RecorderWindow.Resources>
+        <Storyboard x:Key="ShowDiscardStoryboard">
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="DiscardButton" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
+                <DiscreteBooleanKeyFrame Value="True" KeyTime="0:0:0"/>
+            </BooleanAnimationUsingKeyFrames>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DiscardButton" Storyboard.TargetProperty="Visibility" Duration="0:0:0">
+                <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" KeyTime="0:0:0"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <DoubleAnimation Storyboard.TargetName="DiscardButton" Storyboard.TargetProperty="(Button.Opacity)" From="0" To="1" Duration="0:0:1">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase Power="8" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+        <Storyboard x:Key="HideDiscardStoryboard">
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="DiscardButton" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
+                <DiscreteBooleanKeyFrame Value="False" KeyTime="0:0:0"/>
+            </BooleanAnimationUsingKeyFrames>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DiscardButton" Storyboard.TargetProperty="Visibility" Duration="0:0:0">
+                <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" KeyTime="0:0:0"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <DoubleAnimation Storyboard.TargetName="DiscardButton" Storyboard.TargetProperty="(Button.Opacity)" 
+                             From="{Binding ElementName=DiscardButton,Path=Opacity}" To="0" Duration="0:0:1">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase Power="8" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+        <Storyboard x:Key="ShowReselectStoryboard">
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ReselectSplitButton" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
+                <DiscreteBooleanKeyFrame Value="True" KeyTime="0:0:0"/>
+            </BooleanAnimationUsingKeyFrames>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ReselectSplitButton" Storyboard.TargetProperty="Visibility" Duration="0:0:0">
+                <DiscreteObjectKeyFrame Value="{x:Static Visibility.Visible}" KeyTime="0:0:0"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <DoubleAnimation Storyboard.TargetName="ReselectSplitButton" Storyboard.TargetProperty="(Button.Opacity)" From="0" To="1" Duration="0:0:1">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase Power="8" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+        <Storyboard x:Key="HideReselectStoryboard">
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ReselectSplitButton" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
+                <DiscreteBooleanKeyFrame Value="False" KeyTime="0:0:0"/>
+            </BooleanAnimationUsingKeyFrames>
+
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ReselectSplitButton" Storyboard.TargetProperty="Visibility" Duration="0:0:0">
+                <DiscreteObjectKeyFrame Value="{x:Static Visibility.Collapsed}" KeyTime="0:0:0"/>
+            </ObjectAnimationUsingKeyFrames>
+
+            <DoubleAnimation Storyboard.TargetName="ReselectSplitButton" Storyboard.TargetProperty="(Button.Opacity)" 
+                             From="{Binding ElementName=DiscardButton,Path=Opacity}" To="0" Duration="0:0:1">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase Power="8" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+    </n:RecorderWindow.Resources>
+    
     <Border Background="{DynamicResource Panel.Background}" BorderThickness="1" BorderBrush="{DynamicResource Element.Border.Weak}">
         <Grid KeyboardNavigation.TabNavigation="Cycle">
             <Grid.RowDefinitions>
@@ -21,11 +94,6 @@
                 <c:ShortcutKeys x:Key="ShortcutKeys"/>
             </Grid.Resources>
 
-            <Grid.CommandBindings>
-                <CommandBinding Command="{StaticResource Command.Options}" CanExecute="Options_CanExecute" Executed="Options_Executed"/>
-                <!--<CommandBinding Command="{StaticResource Command.EnableSnapshot}" CanExecute="EnableSnapshot_CanExecute" Executed="EnableSnapshot_Executed"/>-->
-            </Grid.CommandBindings>
-
             <Grid Grid.Row="0" x:Name="HeaderGrid" MouseLeftButtonDown="HeaderGrid_MouseLeftButtonDown">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -35,10 +103,10 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Column="0" x:Name="CaptionText" Text="{Binding ElementName=RecorderWindow, Path=Title}" FontFamily="Segoe UI" FontSize="16" VerticalAlignment="Center"
-                           FontWeight="Regular" Margin="5,0,0,0" Foreground="{DynamicResource Element.Foreground.Header}" Effect="{DynamicResource Shadow.Foreground.Small}"/>
+                           FontWeight="Regular" Margin="5,0,0,0" Foreground="{DynamicResource Element.Foreground.Header}"/>
 
                 <TextBlock Grid.Column="1" x:Name="FrameCountTextBlock" Text="{Binding ElementName=RecorderWindow, Path=FrameCount, Converter={StaticResource IntToString}}" VerticalAlignment="Center"
-                           FontFamily="Segoe UI" FontSize="14" FontWeight="Regular" Margin="5,0,0,0" Foreground="{DynamicResource Element.Foreground.Header}" Effect="{DynamicResource Shadow.Foreground.Small}"/>
+                           FontFamily="Segoe UI" FontSize="14" FontWeight="Regular" Margin="5,0,0,0" Foreground="{DynamicResource Element.Foreground.Header}"/>
 
                 <n:ImageButton Grid.Column="2" x:Name="MinimizeButton" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Minimize}" 
                                Width="30" Padding="6" TabIndex="0" Click="MinimizeButton_Click"/>
@@ -46,10 +114,11 @@
                                Width="30" Padding="6" TabIndex="1" Click="CloseButton_Click"/>
             </Grid>
 
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="1" x:Name="RecordControlsGrid">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="26"/>
-                    <ColumnDefinition Width="32"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto" MaxWidth="26"/>
+                    <ColumnDefinition Width="Auto" MaxWidth="32"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
@@ -59,38 +128,59 @@
                     <ColumnDefinition Width="26"/>
                 </Grid.ColumnDefinitions>
 
-                <n:ImageButton Grid.Column="0" x:Name="OptionsButton" Content="{DynamicResource Vector.Options}" Margin="0" Padding="3" Command="{StaticResource Command.Options}"
-                               Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" ContentHeight="22"
+                <n:ImageButton Grid.Column="1" x:Name="OptionsButton" Content="{DynamicResource Vector.Options}" Margin="0" Padding="3" Command="{StaticResource Command.Options}"
+                               Style="{DynamicResource Style.Button.NoText}" ContentHeight="22" TabIndex="3"
                                ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource S.StartUp.Options}"/>
 
-                <Viewbox Grid.Column="1" Stretch="UniformToFill" ClipToBounds="True" Focusable="False" Opacity="{DynamicResource Element.Opacity}"
-                         Visibility="{Binding Path=SnapshotMode, Source={x:Static u:UserSettings.All}}"
-                         ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource S.Recorder.FpsRange}">
+                <Viewbox Grid.Column="2" x:Name="FrequencyViewbox" Stretch="UniformToFill" ClipToBounds="True" Focusable="False" Opacity="{DynamicResource Element.Opacity}"
+                         ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource S.Recorder.Fps.Range}">
 
                     <Grid HorizontalAlignment="Center" VerticalAlignment="Center" FlowDirection="LeftToRight" Margin="-4">
                         <n:CircularProgressBar StrokeThickness="2" Percentage="100" SegmentColor="Gray" Radius="24" IsTabStop="False"/>
                         <n:CircularProgressBar StrokeThickness="22" Percentage="100" SegmentColor="#FFF0F1F1" Radius="10" IsTabStop="False"/>
 
-                        <n:CircularProgressBar StrokeThickness="2" Value="{Binding ElementName=FpsIntegerUpDown, Path=Value, Mode=OneWay}" 
+                        <n:CircularProgressBar StrokeThickness="2" Value="{Binding ElementName=FrequencyIntegerUpDown, Path=Value, Mode=OneWay}" 
                                                IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="24" IsTabStop="False"/>
-                        <n:CircularProgressBar StrokeThickness="22" Value="{Binding ElementName=FpsIntegerUpDown, Path=Value, Mode=OneWay}" 
+                        <n:CircularProgressBar StrokeThickness="22" Value="{Binding ElementName=FrequencyIntegerUpDown, Path=Value, Mode=OneWay}" 
                                                IsInverted="True" Minimum="1" Maximum="60" SegmentColor="#FFE28A73" Radius="10" IsTabStop="False"/>
                     </Grid>
                 </Viewbox>
 
-                <n:IntegerUpDown Grid.Column="2" x:Name="FpsIntegerUpDown" Margin="1,3" StepValue="1" Minimum="1" Maximum="60" MinWidth="45" TabIndex="4"
+                <n:IntegerUpDown Grid.Column="3" x:Name="FrequencyIntegerUpDown" Margin="1,3" StepValue="1" Minimum="1" Maximum="60" MinWidth="45" TabIndex="4"
                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=LatestFps, Mode=TwoWay}"
-                                 Visibility="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}"
                                  ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource S.Recorder.Fps}"/>
 
-                <Label Grid.Column="3" Content="{StaticResource S.Recorder.Fps.Short}" FontSize="12" FontFamily="Segoe UI" Margin="1,0,0,0" 
-                       VerticalContentAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}" 
-                       Visibility="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}"/>
+                <n:ImageButton Grid.Column="4" x:Name="FrequencyButton" Style="{StaticResource Style.Button.Horizontal.NoImage}" Margin="1,0,0,0" VerticalContentAlignment="Center" Padding="0" 
+                               Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}" UseLayoutRounding="True" TabIndex="5" Text="{DynamicResource S.Recorder.Fps.Short}" 
+                               FontSize="12" FontFamily="Segoe UI" ToolTip="{DynamicResource S.Recorder.SwitchFrequency}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"
+                               Command="{StaticResource Command.SwitchCaptureFrequency}" CommandParameter="Switch">
+                    <n:ImageButton.ContextMenu>
+                        <ContextMenu IsOpen="False">
+                            <n:ImageMenuItem Header="{DynamicResource S.Options.Recorder.Frequency}" IsHitTestVisible="False" Image="{StaticResource Vector.Record}" ContentHeight="16" ContentWidth="16"/>
+                            <Separator/>
 
-                <Separator Grid.Column="4" Width="1" Margin="5,2" HorizontalAlignment="Left"
-                           Visibility="{Binding SnapshotMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}"/>
+                            <n:ImageMenuItem Header="{DynamicResource S.Options.Recorder.Frequency.Manual}" IsCheckable="True" Image="{StaticResource Vector.Camera}" ContentHeight="16" ContentWidth="16" 
+                                             IsChecked="{Binding CaptureFrequency, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CaptureFrequency.Manual}}" 
+                                             IsEnabled="{Binding RelativeSource={RelativeSource Self}, Path=IsChecked, Converter={StaticResource InvertedBool}}" Command="{StaticResource Command.SwitchCaptureFrequency}"/>
 
-                <n:SplitButton Grid.Column="5" x:Name="ReselectSplitButton" Style="{StaticResource Style.SplitButton.NoBorder.NoText}" ContentHeight="20" Padding="3"
+                            <n:ImageMenuItem Header="{DynamicResource S.Options.Recorder.Frequency.Second}" IsCheckable="True" Image="{StaticResource Vector.Delay}" ContentHeight="16" ContentWidth="16" 
+                                             IsChecked="{Binding CaptureFrequency, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CaptureFrequency.PerSecond}}" 
+                                             IsEnabled="{Binding RelativeSource={RelativeSource Self}, Path=IsChecked, Converter={StaticResource InvertedBool}}" Command="{StaticResource Command.SwitchCaptureFrequency}"/>
+
+                            <n:ImageMenuItem Header="{DynamicResource S.Options.Recorder.Frequency.Minute}" IsCheckable="True" Image="{StaticResource Vector.Delay.Minute}" ContentHeight="16" ContentWidth="16" 
+                                             IsChecked="{Binding CaptureFrequency, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CaptureFrequency.PerMinute}}" 
+                                             IsEnabled="{Binding RelativeSource={RelativeSource Self}, Path=IsChecked, Converter={StaticResource InvertedBool}}" Command="{StaticResource Command.SwitchCaptureFrequency}"/>
+
+                            <n:ImageMenuItem Header="{DynamicResource S.Options.Recorder.Frequency.Hour}" IsCheckable="True" Image="{StaticResource Vector.Delay.Hour}" ContentHeight="16" ContentWidth="16" 
+                                             IsChecked="{Binding CaptureFrequency, Source={x:Static u:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CaptureFrequency.PerHour}}" 
+                                             IsEnabled="{Binding RelativeSource={RelativeSource Self}, Path=IsChecked, Converter={StaticResource InvertedBool}}" Command="{StaticResource Command.SwitchCaptureFrequency}"/>
+                        </ContextMenu>
+                    </n:ImageButton.ContextMenu>
+                </n:ImageButton>
+
+                <Separator Grid.Column="5" Width="1" Margin="5,2" HorizontalAlignment="Left"/>
+
+                <n:SplitButton Grid.Column="6" x:Name="ReselectSplitButton" Style="{StaticResource Style.SplitButton.NoBorder.NoText}" ContentHeight="20" Padding="3"
                                SelectedIndex="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderModeIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                Foreground="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderForeground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}">
                     <n:ImageMenuItem Image="{StaticResource Vector.Crop}" Header="{DynamicResource S.Recorder.Area}" ContentHeight="16" ContentWidth="16" Click="RegionButton_Click"/>
@@ -98,19 +188,16 @@
                     <n:ImageMenuItem Image="{StaticResource Vector.Monitor}" Header="{DynamicResource S.Recorder.Screen}" ContentHeight="16" ContentWidth="16" Click="FullScreenButton_Click"/>
                 </n:SplitButton>
 
-                <n:ImageButton Grid.Column="6" x:Name="DiscardButton" Content="{DynamicResource Vector.Remove}" Visibility="Collapsed" 
-                               Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}" 
-                               ContentHeight="20" Padding="3" ToolTip="{DynamicResource S.Recorder.Discard}" Click="DiscardButton_Click"/>
+                <n:ImageButton Grid.Column="7" x:Name="DiscardButton" Content="{DynamicResource Vector.Remove}" Visibility="Collapsed" 
+                               Style="{DynamicResource Style.Button.NoText}" ContentHeight="20" Padding="3" ToolTip="{DynamicResource S.Recorder.Discard}" Click="DiscardButton_Click"/>
 
-                <n:ImageButton Grid.Column="7" x:Name="RecordPauseButton"
+                <n:ImageButton Grid.Column="8" x:Name="RecordPauseButton"
                                Content="{Binding Stage, ElementName=RecorderWindow, Converter={StaticResource StageToCanvas}, FallbackValue={StaticResource Vector.Record}}" 
-                               Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}"
-                               KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='1'}"
+                               Style="{DynamicResource Style.Button.NoText}" KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='1'}"
                                ContentHeight="20" Padding="3" Click="RecordPauseButton_Click"/>
 
-                <n:ImageButton Grid.Column="8" x:Name="StopButton" Content="{DynamicResource Vector.Stop}"
-                               Style="{DynamicResource Style.Button.NoText}" Effect="{DynamicResource Shadow.Foreground.Small}"
-                               KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='2'}"
+                <n:ImageButton Grid.Column="9" x:Name="StopButton" Content="{DynamicResource Vector.Stop}"
+                               Style="{DynamicResource Style.Button.NoText}" KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='2'}"
                                ContentHeight="20" Padding="3" ToolTip="{DynamicResource S.Recorder.Stop}" Click="StopButton_Click"/>
             </Grid>
         </Grid>

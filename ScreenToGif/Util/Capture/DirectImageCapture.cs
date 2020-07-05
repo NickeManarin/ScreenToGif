@@ -212,6 +212,7 @@ namespace ScreenToGif.Util.Capture
             }
         }
 
+
         public override int Capture(FrameInfo frame)
         {
             var res = new Result(-1);
@@ -274,7 +275,7 @@ namespace ScreenToGif.Util.Capture
                 //Set frame details.
                 FrameCount++;
                 frame.Path = $"{Project.FullPath}{FrameCount}.png";
-                frame.Delay = FrameRate.GetMilliseconds(SnapDelay);
+                frame.Delay = FrameRate.GetMilliseconds();
                 frame.Image = bitmap;
                 BlockingCollection.Add(frame);
 
@@ -317,6 +318,11 @@ namespace ScreenToGif.Util.Capture
                     LogWriter.Log(e, "It was not possible to release the frame.");
                 }
             }
+        }
+
+        public override async Task<int> CaptureAsync(FrameInfo frame)
+        {
+            return await Task.Factory.StartNew(() => Capture(frame));
         }
 
         public override int CaptureWithCursor(FrameInfo frame)
@@ -402,7 +408,7 @@ namespace ScreenToGif.Util.Capture
                 //Set frame details.
                 FrameCount++;
                 frame.Path = $"{Project.FullPath}{FrameCount}.png";
-                frame.Delay = FrameRate.GetMilliseconds(SnapDelay);
+                frame.Delay = FrameRate.GetMilliseconds();
                 frame.Image = bitmap;
                 BlockingCollection.Add(frame);
 
@@ -447,6 +453,154 @@ namespace ScreenToGif.Util.Capture
                 }
             }
         }
+
+        public override async Task<int> CaptureWithCursorAsync(FrameInfo frame)
+        {
+            return await Task.Factory.StartNew(() => CaptureWithCursor(frame));
+        }
+
+        public override int ManualCapture(FrameInfo frame, bool showCursor = false)
+        {
+            var res = new Result(-1);
+
+            try
+            {
+                //Try to get the duplicated output frame within given time.
+                res = DuplicatedOutput.TryAcquireNextFrame(1000, out var info, out var resource);
+
+                //Checks how to proceed with the capture. It could have failed, or the screen, cursor or both could have been captured.
+                if (res.Failure || resource == null || (!showCursor && info.AccumulatedFrames == 0) || (showCursor && info.AccumulatedFrames == 0 && info.LastMouseUpdateTime <= LastProcessTime))
+                {
+                    //Somehow, it was not possible to retrieve the resource, frame or metadata.
+                    //frame.WasDropped = true;
+                    //BlockingCollection.Add(frame);
+
+                    resource?.Dispose();
+                    return FrameCount;
+                }
+                else if (showCursor && info.AccumulatedFrames == 0 && info.LastMouseUpdateTime > LastProcessTime)
+                {
+                    //Gets the cursor shape if the screen hasn't changed in between, so the cursor will be available for the next frame.
+                    GetCursor(null, info, frame);
+
+                    resource.Dispose();
+                    return FrameCount;
+                }
+
+                //Saves the most recent capture time.
+                LastProcessTime = Math.Max(info.LastPresentTime, info.LastMouseUpdateTime);
+
+                //Copy resource into memory that can be accessed by the CPU.
+                using (var screenTexture = resource.QueryInterface<Texture2D>())
+                {
+                    if (showCursor)
+                    {
+                        //Copies from the screen texture only the area which the user wants to capture.
+                        Device.ImmediateContext.CopySubresourceRegion(screenTexture, 0, new ResourceRegion(TrueLeft, TrueTop, 0, TrueRight, TrueBottom, 1), BackingTexture, 0);
+
+                        //Copy the captured desktop texture into a staging texture, in order to show the mouse cursor and not make the captured texture dirty with it.
+                        Device.ImmediateContext.CopyResource(BackingTexture, StagingTexture);
+
+                        //Gets the cursor image and merges with the staging texture.
+                        GetCursor(StagingTexture, info, frame);
+                    }
+                    else
+                    {
+                        //Copies from the screen texture only the area which the user wants to capture.
+                        Device.ImmediateContext.CopySubresourceRegion(screenTexture, 0, new ResourceRegion(TrueLeft, TrueTop, 0, TrueRight, TrueBottom, 1), StagingTexture, 0);
+                    }
+                }
+
+                //Get the desktop capture texture.
+                var data = Device.ImmediateContext.MapSubresource(StagingTexture, 0, MapMode.Read, MapFlags.None);
+
+                if (data.IsEmpty)
+                {
+                    //frame.WasDropped = true;
+                    //BlockingCollection.Add(frame);
+
+                    Device.ImmediateContext.UnmapSubresource(StagingTexture, 0);
+                    resource.Dispose();
+                    return FrameCount;
+                }
+
+                #region Get image data
+
+                var bitmap = new System.Drawing.Bitmap(Width, Height, PixelFormat.Format32bppArgb);
+                var boundsRect = new System.Drawing.Rectangle(0, 0, Width, Height);
+
+                //Copy pixels from screen capture Texture to the GDI bitmap.
+                var mapDest = bitmap.LockBits(boundsRect, ImageLockMode.WriteOnly, bitmap.PixelFormat);
+                var sourcePtr = data.DataPointer;
+                var destPtr = mapDest.Scan0;
+
+                for (var y = 0; y < Height; y++)
+                {
+                    //Copy a single line.
+                    Utilities.CopyMemory(destPtr, sourcePtr, Width * 4);
+
+                    //Advance pointers.
+                    sourcePtr = IntPtr.Add(sourcePtr, data.RowPitch);
+                    destPtr = IntPtr.Add(destPtr, mapDest.Stride);
+                }
+
+                //Release source and dest locks.
+                bitmap.UnlockBits(mapDest);
+
+                //Set frame details.
+                FrameCount++;
+                frame.Path = $"{Project.FullPath}{FrameCount}.png";
+                frame.Delay = FrameRate.GetMilliseconds();
+                frame.Image = bitmap;
+                BlockingCollection.Add(frame);
+
+                #endregion
+
+                Device.ImmediateContext.UnmapSubresource(StagingTexture, 0);
+
+                resource.Dispose();
+                return FrameCount;
+            }
+            catch (SharpDXException se) when (se.ResultCode.Code == SharpDX.DXGI.ResultCode.WaitTimeout.Result.Code)
+            {
+                return FrameCount;
+            }
+            catch (SharpDXException se) when (se.ResultCode.Code == SharpDX.DXGI.ResultCode.DeviceRemoved.Result.Code || se.ResultCode.Code == SharpDX.DXGI.ResultCode.DeviceReset.Result.Code)
+            {
+                //When the device gets lost or reset, the resources should be instantiated again.
+                DisposeInternal();
+                Initialize();
+
+                return FrameCount;
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "It was not possible to finish capturing the frame with DirectX.");
+
+                MajorCrashHappened = true;
+                OnError.Invoke(ex);
+                return FrameCount;
+            }
+            finally
+            {
+                try
+                {
+                    //Only release the frame if there was a success in capturing it.
+                    if (res.Success)
+                        DuplicatedOutput.ReleaseFrame();
+                }
+                catch (Exception e)
+                {
+                    LogWriter.Log(e, "It was not possible to release the frame.");
+                }
+            }
+        }
+
+        public override async Task<int> ManualCaptureAsync(FrameInfo frame, bool showCursor = false)
+        {
+            return await Task.Factory.StartNew(() => ManualCapture(frame, showCursor));
+        }
+
 
         protected internal void GetCursor(Texture2D screenTexture, OutputDuplicateFrameInformation info, FrameInfo frame)
         {
@@ -679,16 +833,6 @@ namespace ScreenToGif.Util.Capture
             frame.Image = null;
 
             Project.Frames.Add(frame);
-        }
-
-        public override async Task<int> CaptureAsync(FrameInfo frame)
-        {
-            return await Task.Factory.StartNew(() => Capture(frame));
-        }
-
-        public override async Task<int> CaptureWithCursorAsync(FrameInfo frame)
-        {
-            return await Task.Factory.StartNew(() => CaptureWithCursor(frame));
         }
 
         private void FallbackCursorCapture(FrameInfo frame)

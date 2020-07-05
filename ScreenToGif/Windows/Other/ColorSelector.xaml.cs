@@ -7,22 +7,18 @@ using ScreenToGif.Controls;
 using ScreenToGif.ImageUtil.Gif.Encoder;
 using ScreenToGif.Util;
 
-//Code by Nicke Manarin - ScreenToGif - 26/02/2014, Updated 16/10/2016, Updated 31/05/2018, Again in 26/09/2019
+//Nicke Manarin - ScreenToGif - 26/02/2014, Updated 16/10/2016, Updated 31/05/2018, Again in 26/09/2019, 28/06/2020.
 
 namespace ScreenToGif.Windows.Other
 {
     public partial class ColorSelector : Window
     {
-        #region Properties
+        #region Properties and variables
 
         /// <summary>
         /// The selected color.
         /// </summary>
         public Color SelectedColor { get; set; }
-
-        #endregion
-
-        #region Private Variables
 
         private readonly TranslateTransform _markerTransform = new TranslateTransform();
         private Point? _colorPosition;
@@ -31,11 +27,6 @@ namespace ScreenToGif.Windows.Other
 
         #endregion
 
-        #region Constructor
-
-        /// <summary>
-        /// Default constructor.
-        /// </summary>
         public ColorSelector(Color selectedColor, bool showAlpha = true)
         {
             InitializeComponent();
@@ -60,8 +51,6 @@ namespace ScreenToGif.Windows.Other
             InitialColor.Background = CurrentColor.Background = LastColor.Background = new SolidColorBrush(selectedColor);
         }
 
-        #endregion
-
         #region Events
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -82,7 +71,7 @@ namespace ScreenToGif.Windows.Other
                 DetermineColor((Point) _colorPosition);
         }
         
-        private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void ColorDetailBorder_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Mouse.Capture(ColorDetail);
             var p = e.GetPosition(ColorDetail);
@@ -91,7 +80,7 @@ namespace ScreenToGif.Windows.Other
             LastColor.Background = CurrentColor.Background;
         }
 
-        private void OnMouseMove(object sender, MouseEventArgs e)
+        private void ColorDetailBorder_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.LeftButton != MouseButtonState.Pressed)
                 return;
@@ -103,7 +92,7 @@ namespace ScreenToGif.Windows.Other
             Mouse.Synchronize();
         }
 
-        private void ColorDetailSizeChanged(object sender, SizeChangedEventArgs args)
+        private void ColorDetailBorder_SizeChanged(object sender, SizeChangedEventArgs args)
         {
             if (args.PreviousSize != Size.Empty && args.PreviousSize.Width != 0 && args.PreviousSize.Height != 0)
             {
@@ -120,7 +109,7 @@ namespace ScreenToGif.Windows.Other
             }
         }
 
-        private void ColorDetail_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void ColorDetailBorder_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Mouse.Capture(null); //Release it.
             LastColor.Background = CurrentColor.Background;
@@ -242,8 +231,8 @@ namespace ScreenToGif.Windows.Other
         {
             _markerTransform.X = p.X;
             _markerTransform.Y = p.Y;
-            p.X = p.X / ColorDetail.ActualWidth;
-            p.Y = p.Y / ColorDetail.ActualHeight;
+            p.X /= ColorDetail.ActualWidth;
+            p.Y /= ColorDetail.ActualHeight;
             _colorPosition = p;
 
             DetermineColor(p);

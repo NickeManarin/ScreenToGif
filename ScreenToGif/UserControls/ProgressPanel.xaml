@@ -42,23 +42,23 @@
             <c:BoolAndOrOrToVisibility x:Key="BoolAndOrOrToVisibility"/>
         </Grid.Resources>
 
-        <n:LabelSeparator Grid.Row="0" Text="{DynamicResource Progress.Type}"/>
+        <n:LabelSeparator Grid.Row="0" Text="{DynamicResource S.Progress.Type}"/>
         <Grid Grid.Row="1" Margin="10,0,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <n:ImageRadioButton Grid.Column="0" x:Name="BarRadioButton" Content="{StaticResource Vector.Progress}" Text="{DynamicResource Progress.Type.Bar}" 
+            <n:ImageRadioButton Grid.Column="0" x:Name="BarRadioButton" Content="{StaticResource Vector.Progress}" Text="{DynamicResource S.Progress.Type.Bar}" 
                                 IsChecked="{Binding Type, Mode=TwoWay, Converter={StaticResource EnumToBool}, 
                                 ConverterParameter={x:Static u:ProgressType.Bar}}"/>
 
-            <n:ImageRadioButton Grid.Column="1" x:Name="TextRadioButton" Content="{StaticResource Vector.FreeText}" Text="{StaticResource Progress.Type.Text}"
+            <n:ImageRadioButton Grid.Column="1" x:Name="TextRadioButton" Content="{StaticResource Vector.FreeText}" Text="{StaticResource S.Progress.Type.Text}"
                                 IsChecked="{Binding Type, Mode=TwoWay,  Converter={StaticResource EnumToBool}, 
                                 ConverterParameter={x:Static u:ProgressType.Text}}"/>
         </Grid>
 
-        <Expander Grid.Row="2" Header="{DynamicResource Caption.Font}" IsExpanded="{Binding IsProgressFontGroupExpanded, Source={x:Static u:UserSettings.All}}"
+        <Expander Grid.Row="2" Header="{DynamicResource S.Caption.Font}" IsExpanded="{Binding IsProgressFontGroupExpanded, Source={x:Static u:UserSettings.All}}"
                   Visibility="{Binding IsChecked, ElementName=TextRadioButton, Converter={StaticResource Bool2Visibility}}">
             <Grid Margin="10,0,0,0">
                 <Grid.RowDefinitions>
@@ -73,7 +73,7 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource Caption.Family}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Caption.Family}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                 <ComboBox Grid.Row="0" Grid.Column="1" x:Name="ProgressFontComboBox" Margin="10,5" MinWidth="100" MaxWidth="150" IsEditable="True"
                           ItemTemplate="{DynamicResource FontTemplate}" SelectedItem="{Binding FontFamily, Mode=TwoWay}">
                     <ComboBox.ItemsSource>
@@ -87,7 +87,7 @@
                     </ComboBox.ItemsPanel>
                 </ComboBox>
 
-                <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource Caption.Style}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.Caption.Style}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                 <ComboBox Grid.Row="1" Grid.Column="1" x:Name="ProgressFontStyleComboBox" Margin="10,5" MinWidth="100"
                           SelectedValuePath="FontStyle" SelectedValue="{Binding FontStyle, Mode=TwoWay}">
                     <ComboBox.ItemTemplate>
@@ -103,7 +103,7 @@
                     <TextBlock FontStyle="Oblique" Text="{DynamicResource S.FontStyles.Oblique}"/>
                 </ComboBox>
 
-                <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource Caption.Weight}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.Caption.Weight}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                 <ComboBox Grid.Row="2" Grid.Column="1" x:Name="ProgressFontWeightComboBox" Margin="10,5" MinWidth="100"
                           SelectedValuePath="FontWeight" SelectedValue="{Binding FontWeight, Mode=TwoWay}">
                     <ComboBox.ItemTemplate>
@@ -132,16 +132,16 @@
                     <TextBlock FontWeight="UltraBlack" Text="{DynamicResource S.FontWeights.UltraBlack}"/>
                 </ComboBox>
 
-                <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource Caption.Size}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource S.Caption.Size}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                 <n:IntegerUpDown Grid.Row="3" Grid.Column="1" x:Name="ProgressFontSizeNumericUpDown" Minimum="10" Maximum="1000" Margin="10,5" MinWidth="70" 
                                  Value="{Binding FontSize, Mode=TwoWay}"/>
 
-                <TextBlock Grid.Row="4" Grid.Column="0" Text="{DynamicResource Caption.Color}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="{DynamicResource S.Caption.Color}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                 <n:ColorBox Grid.Row="4" Grid.Column="1" SelectedColor="{Binding FontColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10,5"/>
             </Grid>
         </Expander>
 
-        <n:LabelSeparator Grid.Row="3" Text="{DynamicResource Border.Appearance}"/>
+        <n:LabelSeparator Grid.Row="3" Text="{DynamicResource S.Border.Appearance}"/>
         <Grid Grid.Row="4" Margin="10,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -157,26 +157,26 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource Color}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Color}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
             <n:ColorBox Grid.Row="0" Grid.Column="1" SelectedColor="{Binding Color, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10,5"/>
 
-            <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource Progress.Precision}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.Progress.Precision}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"
                        Visibility="{Binding IsChecked, ElementName=TextRadioButton, Converter={StaticResource Bool2Visibility}}"/>
             <ComboBox Grid.Row="1" Grid.Column="1" x:Name="ProgressPrecisionComboBox" Margin="10,5" MinWidth="100" MaxWidth="150" IsEditable="True"
                       SelectedIndex="{Binding Precision, Mode=TwoWay}" Visibility="{Binding IsChecked, ElementName=TextRadioButton, Converter={StaticResource Bool2Visibility}}">
-                <ComboBoxItem Content="{DynamicResource Progress.Precision.Minutes}"/>
-                <ComboBoxItem Content="{DynamicResource Progress.Precision.Seconds}"/>
-                <ComboBoxItem Content="{DynamicResource Progress.Precision.Miliseconds}"/>
-                <ComboBoxItem Content="{DynamicResource Progress.Precision.Percentage}"/>
-                <ComboBoxItem Content="{DynamicResource Progress.Precision.Count}"/>
-                <ComboBoxItem Content="{DynamicResource Progress.Precision.Custom}"/>
-                <ComboBoxItem Content="{DynamicResource Progress.Precision.DateOfRecording}"/>
+                <ComboBoxItem Content="{DynamicResource S.Progress.Precision.Minutes}"/>
+                <ComboBoxItem Content="{DynamicResource S.Progress.Precision.Seconds}"/>
+                <ComboBoxItem Content="{DynamicResource S.Progress.Precision.Milliseconds}"/>
+                <ComboBoxItem Content="{DynamicResource S.Progress.Precision.Percentage}"/>
+                <ComboBoxItem Content="{DynamicResource S.Progress.Precision.Count}"/>
+                <ComboBoxItem Content="{DynamicResource S.Progress.Precision.Custom}"/>
+                <ComboBoxItem Content="{DynamicResource S.Progress.Precision.DateOfRecording}"/>
             </ComboBox>
 
-            <n:ExtendedCheckBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Text="{DynamicResource Progress.Precision.ShowTotal}" Margin="10,5,5,5"
+            <n:ExtendedCheckBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Text="{DynamicResource S.Progress.Precision.ShowTotal}" Margin="10,5,5,5"
                                 IsChecked="{Binding ShowTotal, Mode=TwoWay}" Visibility="{Binding IsChecked, ElementName=TextRadioButton, Converter={StaticResource Bool2Visibility}}"/>
 
-            <TextBlock Grid.Row="2" Grid.Column="0" x:Name="ProgressFormatTextBlock" Text="{DynamicResource Progress.Format}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}">
+            <TextBlock Grid.Row="2" Grid.Column="0" x:Name="ProgressFormatTextBlock" Text="{DynamicResource S.Progress.Format}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}">
                 <TextBlock.Visibility>
                     <MultiBinding Converter="{StaticResource BoolAndToVisibility}">
                         <Binding ElementName="ProgressPrecisionComboBox" Path="SelectedIndex" Converter="{StaticResource IntToBool}" ConverterParameter="5"/>
@@ -226,7 +226,7 @@
             <n:IntegerUpDown Grid.Row="3" Grid.Column="1" x:Name="ProgressStartNumberIntegerUpDown" Minimum="0" Maximum="1000" Margin="10,5" MinWidth="70" 
                              Value="{Binding StartNumber, Mode=TwoWay}" Visibility="{Binding ElementName=ProgressStartNumberTextBlock, Path=Visibility}" ToolTip="{DynamicResource S.Progress.Precision.StartNumber.ToolTip}"/>
 
-            <TextBlock Grid.Row="4" Grid.Column="0" x:Name="ProgressDateFormatTextBlock" Text="{DynamicResource Progress.Format}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}">
+            <TextBlock Grid.Row="4" Grid.Column="0" x:Name="ProgressDateFormatTextBlock" Text="{DynamicResource S.Progress.Format}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}">
                 <TextBlock.Visibility>
                     <MultiBinding Converter="{StaticResource BoolAndToVisibility}">
                         <Binding ElementName="ProgressPrecisionComboBox" Path="SelectedIndex" Converter="{StaticResource IntToBool}" ConverterParameter="6"/>
@@ -250,13 +250,13 @@
                 </Hyperlink>
             </TextBlock>
 
-            <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource Caption.Thickness}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource S.Caption.Thickness}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"
                        Visibility="{Binding IsChecked, ElementName=BarRadioButton, Converter={StaticResource Bool2Visibility}}"/>
             <n:IntegerUpDown Grid.Row="3" Grid.Column="1" x:Name="ProgressThicknessNumericUpDown" Minimum="1" Maximum="30" Margin="10,5" MinWidth="70" 
                              Value="{Binding Thickness, Mode=TwoWay}" Visibility="{Binding IsChecked, ElementName=BarRadioButton, Converter={StaticResource Bool2Visibility}}"/>
         </Grid>
 
-        <n:LabelSeparator Grid.Row="5" Text="{DynamicResource Caption.Layout}"/>
+        <n:LabelSeparator Grid.Row="5" Text="{DynamicResource S.Caption.Layout}"/>
         <Grid Grid.Row="6" Margin="10,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -268,7 +268,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource Caption.Vertical}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Caption.Vertical}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
             <ComboBox Grid.Row="0" Grid.Column="1" x:Name="ProgressVerticalComboBox" Margin="10,5" MinWidth="100" MaxWidth="150"
                       SelectedValuePath="VerticalAlignment" SelectedValue="{Binding VerticalAlignment, Mode=TwoWay}">
 
@@ -277,7 +277,7 @@
                 <TextBlock VerticalAlignment="Bottom" Text="{DynamicResource S.VerticalAlignment.Bottom}"/>
             </ComboBox>
 
-            <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource Caption.Horizontal}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.Caption.Horizontal}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
             <ComboBox Grid.Row="1" Grid.Column="1" x:Name="ProgressHorizontalComboBox" Margin="10,5" MinWidth="100" MaxWidth="150" 
                       SelectedValuePath="HorizontalAlignment" SelectedValue="{Binding HorizontalAlignment, Mode=TwoWay}">
 
@@ -286,7 +286,7 @@
                 <TextBlock HorizontalAlignment="Right" Text="{DynamicResource S.HorizontalAlignment.Right}"/>
             </ComboBox>
 
-            <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource Progress.Orientation}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.Progress.Orientation}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"
                        Visibility="{Binding IsChecked, ElementName=BarRadioButton, Converter={StaticResource Bool2Visibility}}"/>
             <ComboBox Grid.Row="2" Grid.Column="1" x:Name="ProgressOrientationComboBox" Margin="10,5" MinWidth="100" MaxWidth="110" 
                       SelectedValuePath="Tag" SelectedValue="{Binding Orientation, Mode=TwoWay}"

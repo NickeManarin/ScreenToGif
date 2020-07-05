@@ -113,7 +113,7 @@ namespace ScreenToGif.Controls
                 return;
 
             band.Type = (StatusType)e.NewValue;
-            band.Image = (Canvas)band.FindResource(band.Type == StatusType.Info ? "Vector.Info" : band.Type == StatusType.Warning ? "Vector.Warning" : "Vector.Error");
+            band.Image = (Canvas)band.FindResource(band.Type == StatusType.Info ? "Vector.Info" : band.Type == StatusType.Warning ? "Vector.Warning" : "Vector.Cancel.Round");
         }
 
         private static void OnTextPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -196,7 +196,7 @@ namespace ScreenToGif.Controls
 
         public void Error(string text, UIElement image = null, Action action = null)
         {
-            Show(StatusType.Error, text, image ?? (Canvas)FindResource("Vector.Error"), action);
+            Show(StatusType.Error, text, image ?? (Canvas)FindResource("Vector.Cancel.Round"), action);
         }
 
         public void Hide()

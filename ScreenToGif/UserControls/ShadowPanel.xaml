@@ -19,7 +19,7 @@
             <v:PercentageToOpacity x:Key="PercentageToOpacity"/>
         </Grid.Resources>
 
-        <n:LabelSeparator Grid.Row="0" Text="{DynamicResource Border.Appearance}"/>
+        <n:LabelSeparator Grid.Row="0" Text="{DynamicResource S.Border.Appearance}"/>
         <Grid Grid.Row="1" Margin="10,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -46,7 +46,7 @@
             <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource S.Shadow.Direction}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
             <n:DoubleUpDown Grid.Row="3" Grid.Column="1" Minimum="0" Maximum="360" Margin="10,5" Value="{Binding Direction, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ValueChanged="Properties_ValueChanged"/>
             
-            <TextBlock Grid.Row="4" Grid.Column="0" Text="{DynamicResource Watermark.Opacity}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="{DynamicResource S.Watermark.Opacity}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
             <n:DoubleUpDown Grid.Row="4" Grid.Column="1" Minimum="0" Maximum="100" Margin="10,5" Value="{Binding Opacity, Mode=TwoWay, Converter={StaticResource PercentageToOpacity}, UpdateSourceTrigger=PropertyChanged}"
                             ValueChanged="Properties_ValueChanged"/>
             
@@ -55,7 +55,7 @@
                             ValueChanged="Properties_ValueChanged"/>
         </Grid>
 
-        <n:LabelSeparator Grid.Row="2" Text="{DynamicResource Preview}"/>
+        <n:LabelSeparator Grid.Row="2" Text="{DynamicResource S.Preview}"/>
         <Grid Grid.Row="3" x:Name="PreviewGrid" Margin="10,5" Background="{Binding BackgroundColor, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ColorToBrush}}">
             <Viewbox x:Name="PreviewViewBox" Child="{StaticResource Vector.Image}" Height="50" Width="50" Stretch="Uniform">
                 <Viewbox.Effect>

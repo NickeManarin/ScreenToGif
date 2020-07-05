@@ -15,11 +15,6 @@ namespace ScreenToGif.Util.Capture
         public int FrameCount { get; set; }
         public int MinimumDelay { get; set; }
         
-        /// <summary>
-        /// The delay of each frame while in snapshot mode.
-        /// </summary>
-        public int? SnapDelay { get; set; }
-
         public int Left { get; set; }
         public int Top { get; set; }
 
@@ -132,6 +127,16 @@ namespace ScreenToGif.Util.Capture
         public virtual Task<int> CaptureWithCursorAsync(FrameInfo frame)
         {
             return null;
+        }
+
+        public virtual int ManualCapture(FrameInfo frame, bool showCursor = false)
+        {
+            return showCursor ? CaptureWithCursor(frame) : Capture(frame);
+        }
+
+        public virtual Task<int> ManualCaptureAsync(FrameInfo frame, bool showCursor = false)
+        {
+            return showCursor ? CaptureWithCursorAsync(frame) : CaptureAsync(frame);
         }
 
         public virtual async Task Stop()

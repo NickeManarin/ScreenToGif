@@ -39,16 +39,36 @@ namespace ScreenToGif.Util
             var parent = VisualTreeHelper.GetParent(child);
             var logicalParent = LogicalTreeHelper.GetParent(child);
 
-            if (logicalParent is TP)
-                return logicalParent as TP;
+            if (logicalParent is TP correctLogical)
+                return correctLogical;
 
-            if (parent is TP)
-                return parent as TP;
+            if (parent is TP correctParent)
+                return correctParent;
 
             if (parent == null || parent.GetType() == stopWhen)
                 return null;
 
             return GetParent<TP>(parent, stopWhen);
+        }
+
+        public static bool HasParent<T>(DependencyObject child, Type stopWhen, bool checkSelf = false) where T : Visual
+        {
+            if (checkSelf && child is T)
+                return true;
+
+            var parent = VisualTreeHelper.GetParent(child);
+            var logicalParent = LogicalTreeHelper.GetParent(child);
+
+            if (logicalParent is T)
+                return true;
+
+            if (parent is T)
+                return true;
+
+            if (parent == null || parent.GetType() == stopWhen)
+                return false;
+
+            return HasParent<T>(parent, stopWhen);
         }
 
         public static T GetVisualChild<T>(Visual parent) where T : Visual
@@ -90,11 +110,6 @@ namespace ScreenToGif.Util
                 return new Storyboard();
 
             return resource;
-        }
-
-        internal static string DispatcherStringResource(this FrameworkElement visual, string key)
-        {
-            return visual.Dispatcher.Invoke(() => visual.FindResource(key).ToString());
         }
 
         internal static bool IsInDesignMode()

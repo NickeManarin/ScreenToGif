@@ -60,7 +60,7 @@ namespace ScreenToGif.Util.Capture
                 //Set frame details.
                 FrameCount++;
                 frame.Path = $"{Project.FullPath}{FrameCount}.png";
-                frame.Delay = FrameRate.GetMilliseconds(SnapDelay);
+                frame.Delay = FrameRate.GetMilliseconds();
                 frame.DataLength = _byteLength;
                 frame.Data = new byte[_byteLength];
 
@@ -148,7 +148,7 @@ namespace ScreenToGif.Util.Capture
                 //Set frame details.
                 FrameCount++;
                 frame.Path = $"{Project.FullPath}{FrameCount}.png";
-                frame.Delay = FrameRate.GetMilliseconds(SnapDelay);
+                frame.Delay = FrameRate.GetMilliseconds();
                 frame.DataLength = _byteLength;
                 frame.Data = new byte[_byteLength];
 

@@ -62,7 +62,7 @@ namespace ScreenToGif.Util.Capture
                 //Set frame details.
                 FrameCount++;
                 frame.Path = $"{Project.FullPath}{FrameCount}.png";
-                frame.Delay = FrameRate.GetMilliseconds(SnapDelay);
+                frame.Delay = FrameRate.GetMilliseconds();
                 frame.Image = Image.FromHbitmap(CompatibleBitmap);
 
                 BlockingCollection.Add(frame);
@@ -73,6 +73,11 @@ namespace ScreenToGif.Util.Capture
             }
 
             return FrameCount;
+        }
+
+        public override async Task<int> CaptureAsync(FrameInfo frame)
+        {
+            return await Task.Factory.StartNew(() => Capture(frame));
         }
 
         public override int CaptureWithCursor(FrameInfo frame)
@@ -141,7 +146,7 @@ namespace ScreenToGif.Util.Capture
                 //Set frame details.
                 FrameCount++;
                 frame.Path = $"{Project.FullPath}{FrameCount}.png";
-                frame.Delay = FrameRate.GetMilliseconds(SnapDelay);
+                frame.Delay = FrameRate.GetMilliseconds();
                 frame.Image = Image.FromHbitmap(CompatibleBitmap);
 
                 BlockingCollection.Add(frame);
@@ -154,6 +159,12 @@ namespace ScreenToGif.Util.Capture
             return FrameCount;
         }
 
+        public override async Task<int> CaptureWithCursorAsync(FrameInfo frame)
+        {
+            return await Task.Factory.StartNew(() => CaptureWithCursor(frame));
+        }
+
+
         public override void Save(FrameInfo frame)
         {
             frame.Image.Save(frame.Path);
@@ -161,16 +172,6 @@ namespace ScreenToGif.Util.Capture
             frame.Image = null;
 
             Project.Frames.Add(frame);
-        }
-
-        public override async Task<int> CaptureAsync(FrameInfo frame)
-        {
-            return await Task.Factory.StartNew(() => Capture(frame));
-        }
-
-        public override async Task<int> CaptureWithCursorAsync(FrameInfo frame)
-        {
-            return await Task.Factory.StartNew(() => CaptureWithCursor(frame));
         }
 
         public override async Task Stop()

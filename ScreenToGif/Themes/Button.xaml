@@ -243,6 +243,61 @@
         </Style.Triggers>
     </Style>
 
+    <!--Button • No Border • Horizontal • Text • No Image-->
+    <Style TargetType="{x:Type n:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.Horizontal.NoImage">
+        <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type n:ImageButton}">
+                    <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
+                        <StackPanel x:Name="InnerStackPanel" Orientation="Horizontal" Background="Transparent">
+                            <Grid Margin="{TemplateBinding Padding}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" x:Name="TextBlockInternal" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" 
+                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="2,0" Foreground="{TemplateBinding Foreground}"
+                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text}" 
+                                           TextWrapping="{TemplateBinding TextWrapping}" Effect="{TemplateBinding Effect}"/>
+
+                                <TextBlock Grid.Row="1" x:Name="KeyGestureTextBlock" Text="{TemplateBinding KeyGesture}" Margin="0,-10,2,0" Padding="0" Height="13"
+                                           Foreground="{DynamicResource Element.Foreground.Gray112}" FontSize="10" HorizontalAlignment="Right"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="KeyGesture" Value="{x:Static s:String.Empty}">
+                            <Setter TargetName="KeyGestureTextBlock" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter TargetName="InnerStackPanel" Property="Background" Value="{DynamicResource Brush.Button.Background.Focused}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource Brush.Button.Background.Hover}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{DynamicResource Brush.Button.Background.Pressed}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.7"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <!--Button • No Border • Horizontal • Text • White-->
     <Style TargetType="{x:Type n:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.Horizontal.White">
         <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>

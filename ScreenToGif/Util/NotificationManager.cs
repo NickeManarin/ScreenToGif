@@ -10,9 +10,10 @@ namespace ScreenToGif.Util
     {
         public static List<Notification> Notifications { get; set; } = new List<Notification>();
 
+
         internal static void AddNotification(string text, StatusType kind, string tag, ICommand command = null, object commandParameter = null)
         {
-            AddNotification(text, kind, tag, () => { command.Execute(commandParameter); });
+            AddNotification(text, kind, tag, () => { command?.Execute(commandParameter); });
         }
 
         internal static void AddNotification(string text, StatusType kind, string tag, Action action = null)
@@ -25,36 +26,41 @@ namespace ScreenToGif.Util
 
             Notifications.Add(new Notification { Id = id, Text = text, Kind = kind, Tag = tag, Action = action });
 
-            UpdateNotifications();
+            Refresh();
         }
+
 
         internal static void RemoveNotification(int id)
         {
             Notifications.RemoveAll(a => a.Id == id);
 
-            UpdateNotifications();
+            Refresh();
         }
 
         internal static void RemoveNotification(Predicate<Notification> match)
         {
             Notifications.RemoveAll(match);
 
-            UpdateNotifications();
+            Refresh();
         }
 
         internal static void RemoveAllNotifications()
         {
             Notifications.Clear();
 
-            UpdateNotifications();
+            Refresh();
         }
 
-        internal static void UpdateNotifications()
+        /// <summary>
+        /// Warns all windows that implement the INotification interface that the notification data was updated.
+        /// </summary>
+        internal static void Refresh()
         {
             foreach (var notification in Application.Current.Windows.OfType<INotification>())
                 notification.NotificationUpdated();
         }
     }
+
 
     interface INotification
     {

@@ -13,7 +13,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <n:LabelSeparator Grid.Row="0" Text="{DynamicResource String.Delay}"/>
+        <n:LabelSeparator Grid.Row="0" Text="{DynamicResource S.Delay}"/>
         <Grid Grid.Row="1" Margin="10,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -26,27 +26,27 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource Delay.Mode}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Delay.Mode}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
             <ComboBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" x:Name="TypeComboBox" Margin="10,5" 
                       SelectedIndex="{Binding Type, Converter={StaticResource EnumToInt}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue=0}">
-                <ComboBoxItem Content="{DynamicResource Delay.Mode.Override}"/>
-                <ComboBoxItem Content="{DynamicResource Delay.Mode.IncreaseDecrease}"/>
-                <ComboBoxItem Content="{DynamicResource Delay.Mode.Scale}"/>
+                <ComboBoxItem Content="{DynamicResource S.Delay.Mode.Override}"/>
+                <ComboBoxItem Content="{DynamicResource S.Delay.Mode.IncreaseDecrease}"/>
+                <ComboBoxItem Content="{DynamicResource S.Delay.Mode.Scale}"/>
             </ComboBox>
 
-            <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource String.DelayMs}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}" 
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.DelayMs}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}" 
                        Visibility="{Binding ElementName=NewDelayIntegerUpDown, Path=Visibility}"/>
             <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="NewDelayIntegerUpDown" Minimum="10" Maximum="25500" Margin="10,5" MinWidth="80" 
                              Value="{Binding NewDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              Visibility="{Binding ElementName=TypeComboBox, Path=SelectedIndex, Converter={StaticResource IntToVisibility}, ConverterParameter=0}"/>
 
-            <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource String.ValueMs}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}" 
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.ValueMs}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}" 
                        Visibility="{Binding ElementName=IncreaseDecreaseDelayIntegerUpDown, Path=Visibility}"/>
             <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="IncreaseDecreaseDelayIntegerUpDown" Minimum="-10000" Maximum="10000" Margin="10,5" MinWidth="80" 
                              Value="{Binding IncreaseDecreaseDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              Visibility="{Binding ElementName=TypeComboBox, Path=SelectedIndex, Converter={StaticResource IntToVisibility}, ConverterParameter=1}"/>
 
-            <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource String.ScaleValue}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}" 
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.ScaleValue}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}" 
                        Visibility="{Binding ElementName=ScalePercentageDoubleUpDown, Path=Visibility}"/>
             <n:DoubleUpDown Grid.Row="1" Grid.Column="1" x:Name="ScalePercentageDoubleUpDown" Minimum="1" Maximum="1000" Margin="10,5" MinWidth="70" 
                             Value="{Binding Percent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -63,15 +63,15 @@
             </Grid.ColumnDefinitions>
 
             <Viewbox Grid.Column="0" MinWidth="15" MaxHeight="15" Stretch="Uniform" Child="{StaticResource Vector.Info}" Opacity="{DynamicResource Element.Opacity}"/>
-            <TextBlock Grid.Column="1" Text="{DynamicResource OverrideDelay.Info}" Foreground="{DynamicResource Element.Foreground.Detail}" 
+            <TextBlock Grid.Column="1" Text="{DynamicResource S.Delay.Override.Info}" Foreground="{DynamicResource Element.Foreground.Detail}" 
                        FontStyle="Italic" FontSize="12" Padding="3" TextWrapping="WrapWithOverflow"
                        Visibility="{Binding ElementName=TypeComboBox, Path=SelectedIndex, Converter={StaticResource IntToVisibility}, ConverterParameter=0}"/>
 
-            <TextBlock Grid.Column="1" Text="{DynamicResource IncreaseDecreaseDelay.Info}" Foreground="{DynamicResource Element.Foreground.Detail}" 
+            <TextBlock Grid.Column="1" Text="{DynamicResource S.Delay.IncreaseDecrease.Info}" Foreground="{DynamicResource Element.Foreground.Detail}" 
                        FontStyle="Italic" FontSize="12" Padding="3" TextWrapping="WrapWithOverflow"
                        Visibility="{Binding ElementName=TypeComboBox, Path=SelectedIndex, Converter={StaticResource IntToVisibility}, ConverterParameter=1}"/>
 
-            <TextBlock Grid.Column="1" Text="{DynamicResource ScaleDelay.Info}" Foreground="{DynamicResource Element.Foreground.Detail}"
+            <TextBlock Grid.Column="1" Text="{DynamicResource S.Delay.Scale.Info}" Foreground="{DynamicResource Element.Foreground.Detail}"
                        FontStyle="Italic" FontSize="12" Padding="3" TextWrapping="WrapWithOverflow"
                        Visibility="{Binding ElementName=TypeComboBox, Path=SelectedIndex, Converter={StaticResource IntToVisibility}, ConverterParameter=2}"/>
         </Grid>

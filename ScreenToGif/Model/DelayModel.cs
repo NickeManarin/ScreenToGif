@@ -43,14 +43,14 @@ namespace ScreenToGif.Model
         }
 
         public string DelayType =>
-            Type == DelayUpdateType.Override ? LocalizationHelper.Get("Editor.Edit.Delay.Override") :
-            Type == DelayUpdateType.IncreaseDecrease ? LocalizationHelper.Get("Editor.Edit.Delay.IncreaseDecrease") :
-            Type == DelayUpdateType.Scale ? LocalizationHelper.Get("Editor.Edit.Delay.Scale") : "None";
+            Type == DelayUpdateType.Override ? LocalizationHelper.Get("S.Editor.Edit.Delay.Override") :
+            Type == DelayUpdateType.IncreaseDecrease ? LocalizationHelper.Get("S.Editor.Edit.Delay.IncreaseDecrease") :
+            Type == DelayUpdateType.Scale ? LocalizationHelper.Get("S.Editor.Edit.Delay.Scale") : "None";
 
         public string DelayTypeKind =>
-            Type == DelayUpdateType.Override ? LocalizationHelper.Get("String.DelayMs") :
-            Type == DelayUpdateType.IncreaseDecrease ? LocalizationHelper.Get("String.ValueMs") :
-            Type == DelayUpdateType.Scale ? LocalizationHelper.Get("String.ScaleValue") : "None";
+            Type == DelayUpdateType.Override ? LocalizationHelper.Get("S.DelayMs") :
+            Type == DelayUpdateType.IncreaseDecrease ? LocalizationHelper.Get("S.ValueMs") :
+            Type == DelayUpdateType.Scale ? LocalizationHelper.Get("S.ScaleValue") : "None";
 
         public string DelayTypeUnitValue =>
             Type == DelayUpdateType.Scale ? Percent + DelayTypeUnit :
@@ -64,7 +64,7 @@ namespace ScreenToGif.Model
 
         public override string ToString()
         {
-            return $"{LocalizationHelper.Get("String.Delay")}: {DelayType}, {DelayTypeKind} {DelayTypeUnitValue}";
+            return $"{LocalizationHelper.Get("S.Delay")}: {DelayType}, {DelayTypeKind} {DelayTypeUnitValue}";
         }
 
         public static DelayModel Default()

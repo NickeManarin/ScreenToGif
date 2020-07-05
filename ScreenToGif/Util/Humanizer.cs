@@ -69,7 +69,7 @@ namespace ScreenToGif.Util
         {
             var random = new Random();
 
-            string[] texts = { "Welcome.New", "Welcome.Import", "Welcome.ThankYou", "Welcome.Size", "Welcome.Contact", "Welcome.Trouble", "Welcome.NewRecorder" };
+            string[] texts = { "S.Editor.Welcome.New", "S.Editor.Welcome.Import", "S.Editor.Welcome.ThankYou", "S.Editor.Welcome.Size", "S.Editor.Welcome.Contact", "S.Editor.Welcome.Trouble", "S.Editor.Welcome.NewRecorder" };
 
             var pick1 = random.Next(texts.Length);
 
@@ -84,7 +84,7 @@ namespace ScreenToGif.Util
         {
             var random = new Random();
 
-            string[] texts = { "Welcome.New", "Welcome.Import", "Welcome.ThankYou", "Welcome.Size", "Welcome.Contact", "Welcome.Trouble", "Welcome.NewRecorder" };
+            string[] texts = { "S.Editor.Welcome.New", "S.Editor.Welcome.Import", "S.Editor.Welcome.ThankYou", "S.Editor.Welcome.Size", "S.Editor.Welcome.Contact", "S.Editor.Welcome.Trouble", "S.Editor.Welcome.NewRecorder" };
 
             var pick1 = random.Next(texts.Length);
             var pick2 = random.Next(texts.Length);

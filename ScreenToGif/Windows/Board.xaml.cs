@@ -27,15 +27,6 @@ namespace ScreenToGif.Windows
 
         #region Variables
 
-        #region Counters
-
-        /// <summary>
-        /// The delay of each frame took as snapshot.
-        /// </summary>
-        private int? _snapDelay = null;
-
-        #endregion
-
         /// <summary>
         /// The DPI of the current screen.
         /// </summary>
@@ -202,7 +193,6 @@ namespace ScreenToGif.Windows
                     #region To Record
 
                     _capture = new Timer { Interval = 1000 / FpsNumericUpDown.Value };
-                    _snapDelay = null;
 
                     Project?.Clear();
                     Project = new ProjectInfo().CreateProjectFolder(ProjectByType.BoardRecorder);
@@ -285,9 +275,7 @@ namespace ScreenToGif.Windows
                 case Stage.Snapping:
 
                     #region Take Screenshot (All possibles types)
-
-                    _snapDelay = UserSettings.All.SnapshotDefaultDelay;
-
+                    
                     Normal_Elapsed(null, null);
 
                     break;
@@ -376,7 +364,7 @@ namespace ScreenToGif.Windows
 
             var render = MainBorder.GetRender(_dpi); //TODO: Too heavy! Maybe just save the strokes? like layers?
 
-            Project.Frames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds(_snapDelay)));
+            Project.Frames.Add(new FrameInfo(fileName, FrameRate.GetMilliseconds()));
 
             ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, render); });
 

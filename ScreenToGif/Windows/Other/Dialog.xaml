@@ -18,7 +18,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Viewbox x:Name="IconViewbox" Child="{StaticResource Vector.Error}" Margin="5" Height="33" Width="33" Opacity="{DynamicResource Element.Opacity}"/>
+            <Viewbox x:Name="IconViewbox" Child="{StaticResource Vector.Cancel.Round}" Margin="5" Height="33" Width="33" Opacity="{DynamicResource Element.Opacity}"/>
 
             <TextBlock x:Name="InstructionLabel" Text="Instruction" Margin="5,1" Grid.Column="1" VerticalAlignment="Center" TextWrapping="Wrap" 
                        FontFamily="Segoe UI Semilight" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>

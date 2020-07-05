@@ -98,43 +98,6 @@
         </Setter>
     </Style>
 
-    <!--TabItem Style-->
-    <Style TargetType="{x:Type TabItem}">
-        <Setter Property="FontFamily" Value="Segoe UI Semilight"/>
-
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TabItem}">
-                    <Grid Name="Panel" Background="Transparent">
-                        <Border Name="ContentBorder" BorderBrush="{DynamicResource Element.Border.Light}" BorderThickness="0">
-                            <ContentPresenter x:Name="ContentSite" ContentStringFormat="{TemplateBinding ContentStringFormat}" ContentTemplate="{TemplateBinding ContentTemplate}" 
-                                                      ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" Content="{TemplateBinding Content}"
-                                                      VerticalAlignment="Center" Effect="{x:Null}" HorizontalAlignment="Center" ContentSource="Header" Margin="10,2"/>
-                        </Border>
-                    </Grid>
-
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource Panel.Background.Level3}"/>
-                            <Setter Property="Foreground" Value="{DynamicResource Element.Foreground.Header}"/>
-                            <Setter TargetName="ContentBorder" Property="BorderThickness" Value="1,1,1,0"/>
-                        </Trigger>
-                        <DataTrigger Binding="{Binding Source={x:Static u:UserSettings.All}, Path=EditorExtendChrome, FallbackValue=False}" Value="True">
-                            <Setter TargetName="ContentBorder" Property="Effect" Value="{StaticResource Glow.Foreground.Large}"/>
-                        </DataTrigger>
-                        <Trigger Property="IsSelected" Value="False">
-                            <Setter Property="Effect" Value="{StaticResource Glow.Foreground.Large}"/>
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="True" SourceName="Panel">
-                            <Setter Property="Foreground" Value="{DynamicResource Element.Foreground.Header}"/>
-                            <Setter TargetName="ContentBorder" Property="Background" Value="{DynamicResource Panel.Background.Level2}"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
     <Style TargetType="{x:Type TextBox}">
         <Setter Property="Background" Value="{DynamicResource Element.Background}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource Element.Border}"/>

@@ -9,7 +9,6 @@ namespace ScreenToGif.Util.Capture
         bool WasStarted { get; set; }
         int FrameCount { get; set; }
         int MinimumDelay { get; set; }
-        int? SnapDelay { get; set; }
         int Left { get; set; }
         int Top { get; set; }
         int Width { get; set; }
@@ -23,6 +22,8 @@ namespace ScreenToGif.Util.Capture
         Task<int> CaptureAsync(FrameInfo frame);
         int CaptureWithCursor(FrameInfo frame);
         Task<int> CaptureWithCursorAsync(FrameInfo frame);
+        int ManualCapture(FrameInfo frame, bool showCursor = false);
+        Task<int> ManualCaptureAsync(FrameInfo frame, bool showCursor = false);
         void Save(FrameInfo info);
         Task Stop();
         Task Dispose();

@@ -38,7 +38,7 @@ namespace ScreenToGif
 
         #region Events
 
-        private void Application_Startup(object sender, StartupEventArgs e)
+        private void App_Startup(object sender, StartupEventArgs e)
         {
             Global.StartupDateTime = DateTime.Now;
 
@@ -48,21 +48,7 @@ namespace ScreenToGif
 
             //Increases the duration of the tooltip display.
             ToolTipService.ShowDurationProperty.OverrideMetadata(typeof(DependencyObject), new FrameworkPropertyMetadata(int.MaxValue));
-
-            #region Set the workaround
-
-            try
-            {
-                if (UserSettings.All.WorkaroundQuota)
-                    BaseCompatibilityPreferences.HandleDispatcherRequestProcessingFailure = BaseCompatibilityPreferences.HandleDispatcherRequestProcessingFailureOptions.Reset;
-            }
-            catch (Exception ex)
-            {
-                LogWriter.Log(ex, "Impossible to set the workaround for the quota crash");
-            }
-
-            #endregion
-
+            
             #region Set network connection properties
 
             try
@@ -155,6 +141,29 @@ namespace ScreenToGif
                     return;
                 }
             }
+
+            #endregion
+
+            #region Set the workaround
+
+            try
+            {
+                if (UserSettings.All.WorkaroundQuota)
+                    BaseCompatibilityPreferences.HandleDispatcherRequestProcessingFailure = BaseCompatibilityPreferences.HandleDispatcherRequestProcessingFailureOptions.Reset;
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Impossible to set the workaround for the quota crash");
+            }
+
+            #if DEBUG
+
+            PresentationTraceSources.DataBindingSource.Listeners.Add(new ConsoleTraceListener());
+            PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.Warning;
+
+            BaseCompatibilityPreferences.HandleDispatcherRequestProcessingFailure = BaseCompatibilityPreferences.HandleDispatcherRequestProcessingFailureOptions.Throw;
+            
+            #endif
 
             #endregion
 
@@ -257,7 +266,7 @@ namespace ScreenToGif
             #endregion
         }
 
-        private void App_OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        private void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             LogWriter.Log(e.Exception, "On dispacher unhandled exception - Unknown");
 
@@ -314,7 +323,7 @@ namespace ScreenToGif
             }
         }
 
-        private void App_OnExit(object sender, ExitEventArgs e)
+        private void App_Exit(object sender, ExitEventArgs e)
         {
             try
             {
@@ -332,6 +341,15 @@ namespace ScreenToGif
             catch (Exception ex)
             {
                 LogWriter.Log(ex, "Impossible to dispose the system tray icon.");
+            }
+
+            try
+            {
+                EncodingManager.StopAllEncodings();
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Impossible to cancel all encodings.");
             }
 
             try
@@ -413,10 +431,13 @@ namespace ScreenToGif
                 //Adding to the list, so a second exception with the same name won't be displayed.
                 _exceptionList.Add(exception);
 
-                if (Global.IsHotFix4055002Installed && exception is XamlParseException && exception.InnerException is TargetInvocationException)
-                    ExceptionDialog.Ok(exception, "ScreenToGif", "Error while rendering visuals", exception.Message);
-                else
-                    ExceptionDialog.Ok(exception, "ScreenToGif", "Unhandled exception", exception.Message);
+                Current.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    if (Global.IsHotFix4055002Installed && exception is XamlParseException && exception.InnerException is TargetInvocationException)
+                        ExceptionDialog.Ok(exception, "ScreenToGif", "Error while rendering visuals", exception.Message);
+                    else
+                        ExceptionDialog.Ok(exception, "ScreenToGif", "Unhandled exception", exception.Message);
+                }));
 
                 //By removing the exception, the same exception can be displayed later.  
                 _exceptionList.Remove(exception);

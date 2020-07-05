@@ -19,9 +19,9 @@
     <s:String x:Key="S.Title">Kichwa</s:String>
     <s:String x:Key="S.Description">Ufafanuzi</s:String>
     <s:String x:Key="S.SelectColor">Bofya hapa kuchagua rangi.</s:String>
-    <s:String x:Key="Frame">Fremu</s:String>
-    <s:String x:Key="Suppress">Kandamiza</s:String>
-    <s:String x:Key="Preview">Uhakiki</s:String>
+    <s:String x:Key="S.InsertFrames.Frame">Fremu</s:String>
+    <s:String x:Key="S.Suppress">Kandamiza</s:String>
+    <s:String x:Key="S.Preview">Uhakiki</s:String>
     
     <!--Warning messages-->
     <s:String x:Key="S.Crash">Woi! App imecrash, manze :(</s:String>
@@ -473,8 +473,8 @@
     
     <!--Localization-->
     <s:String x:Key="S.Localization">Ujanibishaji</s:String>
-    <s:String x:Key="S.Localization.ResourcePositionUsed">Rasilimali ya chini kabisa ndiyo inayotumika.</s:String>
-    <s:String x:Key="S.Localization.MoveRosourcePosition">Kutekeleza rasilimali yako maalu, isogeze hadi chini ya orodha.</s:String>
+    <s:String x:Key="S.Localization.Usage.First">Rasilimali ya chini kabisa ndiyo inayotumika.</s:String>
+    <s:String x:Key="S.Localization.Usage.Second">Kutekeleza rasilimali yako maalu, isogeze hadi chini ya orodha.</s:String>
 
     <!--Recorder-->
     <s:String x:Key="S.Recorder.RecordingOptions">Chaguo za kurekodi</s:String>
@@ -598,298 +598,298 @@
     <s:String x:Key="S.ImportVideo.Nothing">Hakuna fremu iliyoteuliwa kuletwa</s:String>
     
     <!--Encoder-->
-    <s:String x:Key="Encoder.Title">Kisimbaji</s:String>
-    <s:String x:Key="Encoder.Starting">Inaanza</s:String>
-    <s:String x:Key="Encoder.Completed">Imekamilika</s:String>
-    <s:String x:Key="Encoder.Completed.Clipboard">Imenakiliwa kwa ubao-nakili</s:String>
-    <s:String x:Key="Encoder.Completed.Clipboard.Fail">Haikuweza kunakili</s:String>
-    <s:String x:Key="Encoder.Completed.Command">Amri iliyotekelezwa</s:String>
-    <s:String x:Key="Encoder.Completed.Command.Output">Onyesha towe ya (ma)amrisho.</s:String>
-    <s:String x:Key="Encoder.Completed.Command.Fail">Haikuweza kutekeleza amri</s:String>
-    <s:String x:Key="Encoder.Completed.Upload.Fail">Haikuweza kupakia</s:String>
-    <s:String x:Key="Encoder.Completed.Upload.Delete">Ctrl + Bofya kufungua ukurasa wa kufuta picha (kama ipo)</s:String>
-    <s:String x:Key="Encoder.FileDeletedMoved">Faili ilifutwa au kusogezwa</s:String>
-    <s:String x:Key="Encoder.Canceled">Imeghairiwa</s:String>
-    <s:String x:Key="Encoder.Error">Tatizo</s:String>
-    <s:String x:Key="Encoder.Error.Info">Bofya hapa kuonyesha taarifa za tatizo hili.</s:String>
-    <s:String x:Key="Encoder.Uploading">Inapakia</s:String>
-    <s:String x:Key="Encoder.Executing">Tekeleza maamrisho</s:String>
-    <s:String x:Key="Encoder.Processing">Inachakatisha {0}</s:String>
+    <s:String x:Key="S.Encoder.Title">Kisimbaji</s:String>
+    <s:String x:Key="S.Encoder.Starting">Inaanza</s:String>
+    <s:String x:Key="S.Encoder.Completed">Imekamilika</s:String>
+    <s:String x:Key="S.Encoder.Completed.Clipboard">Imenakiliwa kwa ubao-nakili</s:String>
+    <s:String x:Key="S.Encoder.Completed.Clipboard.Fail">Haikuweza kunakili</s:String>
+    <s:String x:Key="S.Encoder.Completed.Command">Amri iliyotekelezwa</s:String>
+    <s:String x:Key="S.Encoder.Completed.Command.Output">Onyesha towe ya (ma)amrisho.</s:String>
+    <s:String x:Key="S.Encoder.Completed.Command.Fail">Haikuweza kutekeleza amri</s:String>
+    <s:String x:Key="S.Encoder.Completed.Upload.Fail">Haikuweza kupakia</s:String>
+    <s:String x:Key="S.Encoder.Completed.Upload.Delete">Ctrl + Bofya kufungua ukurasa wa kufuta picha (kama ipo)</s:String>
+    <s:String x:Key="S.Encoder.DeletedMoved">Faili ilifutwa au kusogezwa</s:String>
+    <s:String x:Key="S.Encoder.Canceled">Imeghairiwa</s:String>
+    <s:String x:Key="S.Encoder.Error">Tatizo</s:String>
+    <s:String x:Key="S.Encoder.Error.Info">Bofya hapa kuonyesha taarifa za tatizo hili.</s:String>
+    <s:String x:Key="S.Encoder.Uploading">Inapakia</s:String>
+    <s:String x:Key="S.Encoder.Executing">Tekeleza maamrisho</s:String>
+    <s:String x:Key="S.Encoder.Processing">Inachakatisha {0}</s:String>
     <s:String x:Key="S.Encoder.Analyzing.Second">Inajitayarisha kwa mpitio wa pili</s:String>
     <s:String x:Key="S.Encoder.Processing.Second">Inachakatisha {0} - mpitio wa pili</s:String>
-    <s:String x:Key="Encoder.CreatingFile">Inatengeneza faili</s:String>
-    <s:String x:Key="Encoder.Analyzing">Inachanganua pikseli zisizobadilika</s:String>
-    <s:String x:Key="Encoder.OpenFile">Fungua faili</s:String>
-    <s:String x:Key="Encoder.ExploreFolder">Kagua folda</s:String>
-    <s:String x:Key="Encoder.Remove">Ondoa kutoka orodha</s:String>
-    <s:String x:Key="Encoder.Details">Onyesha mafafanuzi</s:String>
-    <s:String x:Key="Encoder.Copy.Image">Nakili kama picha</s:String>
-    <s:String x:Key="Encoder.Copy.Filename">Nakili jina la faili</s:String>
-    <s:String x:Key="Encoder.Copy.Folder">Nakili kijia cha folda</s:String>
-    <s:String x:Key="Encoder.Copy.Link">Nakili kiungo</s:String>
+    <s:String x:Key="S.Encoder.CreatingFile">Inatengeneza faili</s:String>
+    <s:String x:Key="S.Encoder.Analyzing">Inachanganua pikseli zisizobadilika</s:String>
+    <s:String x:Key="S.Encoder.OpenFile">Fungua faili</s:String>
+    <s:String x:Key="S.Encoder.ExploreFolder">Kagua folda</s:String>
+    <s:String x:Key="S.Encoder.Remove">Ondoa kutoka orodha</s:String>
+    <s:String x:Key="S.Encoder.Details">Onyesha mafafanuzi</s:String>
+    <s:String x:Key="S.Encoder.Copy.Image">Nakili kama picha</s:String>
+    <s:String x:Key="S.Encoder.Copy.Filename">Nakili jina la faili</s:String>
+    <s:String x:Key="S.Encoder.Copy.Folder">Nakili kijia cha folda</s:String>
+    <s:String x:Key="S.Encoder.Copy.Link">Nakili kiungo</s:String>
 
     <!--Command output-->
-    <s:String x:Key="Command.Title">ScreenToGif - Amri Towe</s:String>
-    <s:String x:Key="Command.Header">Amri towe</s:String>
+    <s:String x:Key="S.Encoder.Command.Title">ScreenToGif - Amri Towe</s:String>
+    <s:String x:Key="S.Encoder.Command.Header">Amri towe</s:String>
     
     <!--Notifications-->
     <s:String x:Key="S.Notifications">Arifa</s:String>
     <s:String x:Key="S.Notifications.Dismiss">Puuza maarifa yote</s:String>
     
     <!--Editor-->
-    <s:String x:Key="Editor.Title">ScreenToGif - Kihariri</s:String>
-    <s:String x:Key="Editor.File">Faili</s:String>
-    <s:String x:Key="Editor.Home">Nyumbani</s:String>
-    <s:String x:Key="Editor.Playback">Uchezaji</s:String>
-    <s:String x:Key="Editor.Edit">Hariri</s:String>
-    <s:String x:Key="Editor.Image">Picha</s:String>
-    <s:String x:Key="Editor.Transitions">Mapitio</s:String>
-    <s:String x:Key="Editor.Statistics">Takwimu</s:String>
-    <s:String x:Key="Editor.Options">Chaguo</s:String>
+    <s:String x:Key="S.Editor.Title">ScreenToGif - Kihariri</s:String>
+    <s:String x:Key="S.Editor.File">Faili</s:String>
+    <s:String x:Key="S.Editor.Home">Nyumbani</s:String>
+    <s:String x:Key="S.Editor.Playback">Uchezaji</s:String>
+    <s:String x:Key="S.Editor.Edit">Hariri</s:String>
+    <s:String x:Key="S.Editor.Image">Picha</s:String>
+    <s:String x:Key="S.Editor.Transitions">Mapitio</s:String>
+    <s:String x:Key="S.Editor.Statistics">Takwimu</s:String>
+    <s:String x:Key="S.Editor.Options">Chaguo</s:String>
     <s:String x:Key="S.Editor.Help">Usaidizi</s:String>
     <s:String x:Key="S.Editor.Extras">Ziada</s:String>
     <s:String x:Key="S.Editor.UpdateAvailable">Sasisha mpya inapatikana!</s:String>
     <s:String x:Key="S.Editor.UpdateAvailable.Info">Bofya hapa kusoma zaidi kuihusu.</s:String>
     
     <!--Welcome-->
-    <s:String x:Key="Welcome.New">Nenda pale "Faili > Mpya" ili uanze rekodi mpya</s:String>
-    <s:String x:Key="Welcome.Import">Kokota na dondosha picha, video au miradi kuleta</s:String>
-    <s:String x:Key="Welcome.ThankYou">Ahsante sana kwa kutumia app yangu!</s:String>
-    <s:String x:Key="Welcome.Size">Kasi ya fremu inapopunguzwa, idadi ya rangi au ya mabadiliko kati ya fremu, ukubwa unapunguka</s:String>
-    <s:String x:Key="Welcome.Contact">Ungependa kuongea? Fungua "Chaguo > Kuhusu" kupata mbinu za mawasiliano.</s:String>
-    <s:String x:Key="Welcome.Trouble">Unapata shida? Wasiliana nami kupitia zana ya kutoa maoni</s:String>
-    <s:String x:Key="Welcome.NewRecorder">Ungependa kujaribu kutumia kirekodi kipya?&#x0d;Enda kwa "Chaguo > Programu-tumizi" kuiwezesha</s:String>
+    <s:String x:Key="S.Editor.Welcome.New">Nenda pale "Faili > Mpya" ili uanze rekodi mpya</s:String>
+    <s:String x:Key="S.Editor.Welcome.Import">Kokota na dondosha picha, video au miradi kuleta</s:String>
+    <s:String x:Key="S.Editor.Welcome.ThankYou">Ahsante sana kwa kutumia app yangu!</s:String>
+    <s:String x:Key="S.Editor.Welcome.Size">Kasi ya fremu inapopunguzwa, idadi ya rangi au ya mabadiliko kati ya fremu, ukubwa unapunguka</s:String>
+    <s:String x:Key="S.Editor.Welcome.Contact">Ungependa kuongea? Fungua "Chaguo > Kuhusu" kupata mbinu za mawasiliano.</s:String>
+    <s:String x:Key="S.Editor.Welcome.Trouble">Unapata shida? Wasiliana nami kupitia zana ya kutoa maoni</s:String>
+    <s:String x:Key="S.Editor.Welcome.NewRecorder">Ungependa kujaribu kutumia kirekodi kipya?&#x0d;Enda kwa "Chaguo > Programu-tumizi" kuiwezesha</s:String>
     
     <!--File • New-->
-    <s:String x:Key="Editor.File.New.Recording">Inarekodi</s:String>
-    <s:String x:Key="Editor.File.New.Webcam">Kamera-tovuti&#x0d;Inarekodi</s:String>
-    <s:String x:Key="Editor.File.New.Board">Bao&#x0d;Inarekodi</s:String>
-    <s:String x:Key="Editor.File.Blank">Tupu&#x0d;Mradi</s:String>
-    <s:String x:Key="Editor.File.New">Mpya</s:String>
+    <s:String x:Key="S.Editor.File.New.Recording">Inarekodi</s:String>
+    <s:String x:Key="S.Editor.File.New.Webcam">Kamera-tovuti&#x0d;Inarekodi</s:String>
+    <s:String x:Key="S.Editor.File.New.Board">Bao&#x0d;Inarekodi</s:String>
+    <s:String x:Key="S.Editor.File.Blank">Tupu&#x0d;Mradi</s:String>
+    <s:String x:Key="S.Editor.File.New">Mpya</s:String>
     
     <!--File • Insert-->
-    <s:String x:Key="Editor.File.Insert.Recording">Inarekodi</s:String>
-    <s:String x:Key="Editor.File.Insert.Webcam">Kamera-tovuti&#x0d;Inarekodi</s:String>
-    <s:String x:Key="Editor.File.Insert.Board">Bao&#x0d;Inarekodi</s:String>
-    <s:String x:Key="Editor.File.Insert.Media">Midia</s:String>
-    <s:String x:Key="Editor.File.Insert">Ingiza</s:String>
+    <s:String x:Key="S.Editor.File.Insert.Recording">Inarekodi</s:String>
+    <s:String x:Key="S.Editor.File.Insert.Webcam">Kamera-tovuti&#x0d;Inarekodi</s:String>
+    <s:String x:Key="S.Editor.File.Insert.Board">Bao&#x0d;Inarekodi</s:String>
+    <s:String x:Key="S.Editor.File.Insert.Media">Midia</s:String>
+    <s:String x:Key="S.Editor.File.Insert">Ingiza</s:String>
     
     <!--File • Save/Discard-->
-    <s:String x:Key="Editor.File.Save">Hifadhi kama</s:String>
-    <s:String x:Key="Editor.File.Load">Pakia</s:String>
-    <s:String x:Key="Editor.File.LoadRecent">Miradi&#x0d;hivi karibuni</s:String>
-    <s:String x:Key="Editor.File.SaveProject">Hifadhi kama&#x0d;Mradi</s:String>
-    <s:String x:Key="Editor.File.Discard">Tupa&#x0d;Mradi</s:String>
+    <s:String x:Key="S.Editor.File.Save">Hifadhi kama</s:String>
+    <s:String x:Key="S.Editor.File.Load">Pakia</s:String>
+    <s:String x:Key="S.Editor.File.LoadRecent">Miradi&#x0d;hivi karibuni</s:String>
+    <s:String x:Key="S.Editor.File.SaveProject">Hifadhi kama&#x0d;Mradi</s:String>
+    <s:String x:Key="S.Editor.File.Discard">Tupa&#x0d;Mradi</s:String>
     
     <!--Home • Action Stack-->
-    <s:String x:Key="Editor.Home.ActionStack">Mpororo wa matendo</s:String>
-    <s:String x:Key="Editor.Home.Undo">Tendua</s:String>
-    <s:String x:Key="Editor.Home.Redo">Rudia</s:String>
-    <s:String x:Key="Editor.Home.Reset">Seti upya</s:String>
+    <s:String x:Key="S.Editor.Home.ActionStack">Mpororo wa matendo</s:String>
+    <s:String x:Key="S.Editor.Home.Undo">Tendua</s:String>
+    <s:String x:Key="S.Editor.Home.Redo">Rudia</s:String>
+    <s:String x:Key="S.Editor.Home.Reset">Seti upya</s:String>
     
     <!--Home • Clipboard-->
-    <s:String x:Key="Editor.Home.Clipboard">Ubao-nakili</s:String>
-    <s:String x:Key="Editor.Home.Clipboard.Show">Onyesha ubao-nakili</s:String>
-    <s:String x:Key="Editor.Home.Paste">Bandika</s:String>
-    <s:String x:Key="Editor.Home.Cut">Kata</s:String>
-    <s:String x:Key="Editor.Home.Copy">Nakili</s:String>
+    <s:String x:Key="S.Editor.Home.Clipboard">Ubao-nakili</s:String>
+    <s:String x:Key="S.Editor.Home.Clipboard.Show">Onyesha ubao-nakili</s:String>
+    <s:String x:Key="S.Editor.Home.Paste">Bandika</s:String>
+    <s:String x:Key="S.Editor.Home.Cut">Kata</s:String>
+    <s:String x:Key="S.Editor.Home.Copy">Nakili</s:String>
     
     <!--Home • Zoom-->
-    <s:String x:Key="Editor.Home.Zoom">Kuza</s:String>
-    <s:String x:Key="Editor.Home.SizeToContent">Rekebisha hadi&#x0d;Yaliyomo</s:String>
-    <s:String x:Key="Editor.Home.FitImage">Tosheleza picha</s:String>
+    <s:String x:Key="S.Editor.Home.Zoom">Kuza</s:String>
+    <s:String x:Key="S.Editor.Home.SizeToContent">Rekebisha hadi&#x0d;Yaliyomo</s:String>
+    <s:String x:Key="S.Editor.Home.FitImage">Tosheleza picha</s:String>
     
     <!--Home • Select-->
-    <s:String x:Key="Editor.Home.Select">Teua</s:String>
-    <s:String x:Key="Editor.Home.SelectAll">Teua&#x0d;zote</s:String>
-    <s:String x:Key="Editor.Home.GoTo">Nenda hadi</s:String>
-    <s:String x:Key="Editor.Home.Inverse">Mgeuko</s:String>
-    <s:String x:Key="Editor.Home.Deselect">Ondoa uteuzi</s:String>
+    <s:String x:Key="S.Editor.Home.Select">Teua</s:String>
+    <s:String x:Key="S.Editor.Home.SelectAll">Teua&#x0d;zote</s:String>
+    <s:String x:Key="S.Editor.Home.GoTo">Nenda hadi</s:String>
+    <s:String x:Key="S.Editor.Home.Inverse">Mgeuko</s:String>
+    <s:String x:Key="S.Editor.Home.Deselect">Ondoa uteuzi</s:String>
     
     <!--Playback • Playback-->
-    <s:String x:Key="Editor.Playback.Playback">Uchezaji</s:String>
-    <s:String x:Key="Editor.Playback.First">Ya kwanza</s:String>
-    <s:String x:Key="Editor.Playback.Previous">Iliyopita</s:String>
-    <s:String x:Key="Editor.Playback.Play">Cheza</s:String>
-    <s:String x:Key="Editor.Playback.Pause">Sitisha</s:String>
-    <s:String x:Key="Editor.Playback.Next">Inayofuata</s:String>
-    <s:String x:Key="Editor.Playback.Last">Mwisho</s:String>
+    <s:String x:Key="S.Editor.Playback.Playback">Uchezaji</s:String>
+    <s:String x:Key="S.Editor.Playback.First">Ya kwanza</s:String>
+    <s:String x:Key="S.Editor.Playback.Previous">Iliyopita</s:String>
+    <s:String x:Key="S.Editor.Playback.Play">Cheza</s:String>
+    <s:String x:Key="S.Editor.Playback.Pause">Sitisha</s:String>
+    <s:String x:Key="S.Editor.Playback.Next">Inayofuata</s:String>
+    <s:String x:Key="S.Editor.Playback.Last">Mwisho</s:String>
     
     <!--Playback • Playback Options-->
-    <s:String x:Key="Editor.PlaybackOptions.Header">Chaguo za uchezaji</s:String>
-    <s:String x:Key="Editor.PlaybackOptions.Loop">Rejeleza uchezeshaji.</s:String>
-    <s:String x:Key="Editor.PlaybackOptions.Loop.Info">Hutumika tu wakati wa kuchezesha.&#x0d;Iwapo ungependa kubadilisha mipangilio ya rejelezi ya kusafirisha GIF na Apng,&#x0d;itakuwepo katika paneli ya 'Hifadhi Kama' kwa visimbiko kadhaa.</s:String>
+    <s:String x:Key="S.Editor.PlaybackOptions.Header">Chaguo za uchezaji</s:String>
+    <s:String x:Key="S.Editor.PlaybackOptions.Loop">Rejeleza uchezeshaji.</s:String>
+    <s:String x:Key="S.Editor.PlaybackOptions.Loop.Info">Hutumika tu wakati wa kuchezesha.&#x0d;Iwapo ungependa kubadilisha mipangilio ya rejelezi ya kusafirisha GIF na Apng,&#x0d;itakuwepo katika paneli ya 'Hifadhi Kama' kwa visimbiko kadhaa.</s:String>
     
     <!--Edit • Frames-->  
-    <s:String x:Key="Editor.Edit.Frames">Fremu</s:String>
-    <s:String x:Key="Editor.Edit.Delete">Futa</s:String>
-    <s:String x:Key="Editor.Edit.Frames.Duplicates">Ondoa&#x0d;virudufu</s:String>
-    <s:String x:Key="Editor.Edit.Frames.Reduce">Punguza&#x0d;kasi-fremu</s:String>
-    <s:String x:Key="Editor.Edit.DeletePrevious">Futa zote za awali</s:String>
-    <s:String x:Key="Editor.Edit.DeleteNext">Futa zote zifuatazo</s:String>
+    <s:String x:Key="S.Editor.Edit.Frames">Fremu</s:String>
+    <s:String x:Key="S.Editor.Edit.Delete">Futa</s:String>
+    <s:String x:Key="S.Editor.Edit.Frames.Duplicates">Ondoa&#x0d;virudufu</s:String>
+    <s:String x:Key="S.Editor.Edit.Frames.Reduce">Punguza&#x0d;kasi-fremu</s:String>
+    <s:String x:Key="S.Editor.Edit.DeletePrevious">Futa zote za awali</s:String>
+    <s:String x:Key="S.Editor.Edit.DeleteNext">Futa zote zifuatazo</s:String>
     
     <!--Edit • Reordering-->
-    <s:String x:Key="Editor.Edit.Reordering">Inapanga upya</s:String>
-    <s:String x:Key="Editor.Edit.Reverse">Pindua</s:String>
-    <s:String x:Key="Editor.Edit.Yoyo">Yoyo</s:String>
-    <s:String x:Key="Editor.Edit.MoveLeft">Sogeza&#x0d;Kushoto</s:String>
-    <s:String x:Key="Editor.Edit.MoveRight">Sogeza&#x0d;Kulia</s:String>
+    <s:String x:Key="S.Editor.Edit.Reordering">Inapanga upya</s:String>
+    <s:String x:Key="S.Editor.Edit.Reverse">Pindua</s:String>
+    <s:String x:Key="S.Editor.Edit.Yoyo">Yoyo</s:String>
+    <s:String x:Key="S.Editor.Edit.MoveLeft">Sogeza&#x0d;Kushoto</s:String>
+    <s:String x:Key="S.Editor.Edit.MoveRight">Sogeza&#x0d;Kulia</s:String>
     
     <!--Edit • Delay/Duration-->
-    <s:String x:Key="Editor.Edit.Delay">Ucheleweshaji (muda)</s:String>
-    <s:String x:Key="Editor.Edit.Delay.Override">Batilisha</s:String>
-    <s:String x:Key="Editor.Edit.Delay.IncreaseDecrease">Ongeza au&#x0d;Punguza</s:String>
-    <s:String x:Key="Editor.Edit.Delay.Scale">Kipimo</s:String>
+    <s:String x:Key="S.Editor.Edit.Delay">Ucheleweshaji (muda)</s:String>
+    <s:String x:Key="S.Editor.Edit.Delay.Override">Batilisha</s:String>
+    <s:String x:Key="S.Editor.Edit.Delay.IncreaseDecrease">Ongeza au&#x0d;Punguza</s:String>
+    <s:String x:Key="S.Editor.Edit.Delay.Scale">Kipimo</s:String>
     
     <!--Image • Size and Rotation-->
-    <s:String x:Key="Editor.Image.SizePosition">Ukubwa na mzunguko</s:String>
-    <s:String x:Key="Editor.Image.Resize">Badilisha ukubwa</s:String>
-    <s:String x:Key="Editor.Image.Crop">Puna</s:String>
-    <s:String x:Key="Editor.Image.FlipRotate">Geuza/zungusha</s:String>
+    <s:String x:Key="S.Editor.Image.SizePosition">Ukubwa na mzunguko</s:String>
+    <s:String x:Key="S.Editor.Image.Resize">Badilisha ukubwa</s:String>
+    <s:String x:Key="S.Editor.Image.Crop">Puna</s:String>
+    <s:String x:Key="S.Editor.Image.FlipRotate">Geuza/zungusha</s:String>
     
     <!--Image • Text-->
-    <s:String x:Key="Editor.Image.Text">Matini</s:String>
-    <s:String x:Key="Editor.Image.Caption">Manukuu</s:String>
-    <s:String x:Key="Editor.Image.FreeText">Matini huru</s:String>
-    <s:String x:Key="Editor.Image.TitleFrame">Fremu ya kichwa</s:String>
-    <s:String x:Key="Editor.Image.KeyStrokes">Vitufe&#x0d;Vitufe</s:String>
+    <s:String x:Key="S.Editor.Image.Text">Matini</s:String>
+    <s:String x:Key="S.Editor.Image.Caption">Manukuu</s:String>
+    <s:String x:Key="S.Editor.Image.FreeText">Matini huru</s:String>
+    <s:String x:Key="S.Editor.Image.TitleFrame">Fremu ya kichwa</s:String>
+    <s:String x:Key="S.Editor.Image.KeyStrokes">Vitufe&#x0d;Vitufe</s:String>
     
     <!--Image • Overlay-->
-    <s:String x:Key="Editor.Image.Overlay">Tandazo</s:String>
-    <s:String x:Key="Editor.Image.FreeDrawing">Matini&#x0d;Mchoro</s:String>
-    <s:String x:Key="Editor.Image.Shape">Maumbo</s:String>
-    <s:String x:Key="Editor.Image.Clicks">Kipanya&#x0d;Mibofyo</s:String>
-    <s:String x:Key="Editor.Image.Watermark">Taswira fifi</s:String>
-    <s:String x:Key="Editor.Image.Cinemagraph">Cinemagraph</s:String>
-    <s:String x:Key="Editor.Image.Border">Boda</s:String>
-    <s:String x:Key="Editor.Image.Shadow">Kivuli</s:String>
-    <s:String x:Key="Editor.Image.Progress">Maendeleo</s:String>
-    <s:String x:Key="Editor.Image.Obfuscate">Chujua:</s:String>
+    <s:String x:Key="S.Editor.Image.Overlay">Tandazo</s:String>
+    <s:String x:Key="S.Editor.Image.FreeDrawing">Matini&#x0d;Mchoro</s:String>
+    <s:String x:Key="S.Editor.Image.Shape">Maumbo</s:String>
+    <s:String x:Key="S.Editor.Image.Clicks">Kipanya&#x0d;Mibofyo</s:String>
+    <s:String x:Key="S.Editor.Image.Watermark">Taswira fifi</s:String>
+    <s:String x:Key="S.Editor.Image.Cinemagraph">Cinemagraph</s:String>
+    <s:String x:Key="S.Editor.Image.Border">Boda</s:String>
+    <s:String x:Key="S.Editor.Image.Shadow">Kivuli</s:String>
+    <s:String x:Key="S.Editor.Image.Progress">Maendeleo</s:String>
+    <s:String x:Key="S.Editor.Image.Obfuscate">Chujua:</s:String>
 
     <!--Transitions • Styles-->
-    <s:String x:Key="Editor.Transitions.Styles">Mtindo</s:String>
-    <s:String x:Key="Editor.Transitions.Fade">Fifia</s:String>
-    <s:String x:Key="Editor.Transitions.Slide">Teleza</s:String>
+    <s:String x:Key="S.Editor.Transitions.Styles">Mtindo</s:String>
+    <s:String x:Key="S.Editor.Transitions.Fade">Fifia</s:String>
+    <s:String x:Key="S.Editor.Transitions.Slide">Teleza</s:String>
     
     <!--Statistics-->
-    <s:String x:Key="Editor.Statistics.General">Jumla</s:String>
-    <s:String x:Key="Editor.Statistics.FrameCount">Idadi ya fremu</s:String>
-    <s:String x:Key="Editor.Statistics.TotalDuration">Muda wa jumla</s:String>
-    <s:String x:Key="Editor.Statistics.FrameSize">Ukubwa wa fremu</s:String>
-    <s:String x:Key="Editor.Statistics.AverageDuration">Muda wastani (mchelewo)</s:String>
-    <s:String x:Key="Editor.Statistics.CurrentTime">Wakati uliopo</s:String>
-    <s:String x:Key="Editor.Statistics.CurrentTime.Info">Wakati wa sasa (nyongeza) kutegemea na fremu ya sasa inayoonyeshwa.</s:String>
-    <s:String x:Key="Editor.Statistics.FrameDpi">DPI na kipimo ya fremu</s:String>
-    <s:String x:Key="Editor.Statistics.SelectedFrame">Fremu teule</s:String>
+    <s:String x:Key="S.Editor.Statistics.General">Jumla</s:String>
+    <s:String x:Key="S.Editor.Statistics.FrameCount">Idadi ya fremu</s:String>
+    <s:String x:Key="S.Editor.Statistics.TotalDuration">Muda wa jumla</s:String>
+    <s:String x:Key="S.Editor.Statistics.FrameSize">Ukubwa wa fremu</s:String>
+    <s:String x:Key="S.Editor.Statistics.AverageDuration">Muda wastani (mchelewo)</s:String>
+    <s:String x:Key="S.Editor.Statistics.CurrentTime">Wakati uliopo</s:String>
+    <s:String x:Key="S.Editor.Statistics.CurrentTime.Info">Wakati wa sasa (nyongeza) kutegemea na fremu ya sasa inayoonyeshwa.</s:String>
+    <s:String x:Key="S.Editor.Statistics.FrameDpi">DPI na kipimo ya fremu</s:String>
+    <s:String x:Key="S.Editor.Statistics.SelectedFrame">Fremu teule</s:String>
     
     <!--TODO: Organize-->
     <!--Editor, Continuation-->
-    <s:String x:Key="Editor.Preparing">Inatayarisha fremu</s:String>
-    <s:String x:Key="Editor.InvalidLoadingFiles">Upakiaji ni batili - huwezi kuleta faili anuwai mara moja. Jaribu kuchagua faili moja tu.</s:String>
-    <s:String x:Key="Editor.InvalidLoadingProjects">Upakiaji ni batili - huwezi kuleta miradi anuwai mara moja. Jaribu kuchagua mradi mmoja tu.</s:String>
-    <s:String x:Key="Editor.OpenMediaProject">Fungua faili ya midia (picha au video) au faili ya mradi</s:String>
-    <s:String x:Key="Editor.OpenMedia">Fungua faili ya midia (picha au video)</s:String>
+    <s:String x:Key="S.Editor.Preparing">Inatayarisha fremu</s:String>
+    <s:String x:Key="S.Editor.InvalidLoadingFiles">Upakiaji ni batili - huwezi kuleta faili anuwai mara moja. Jaribu kuchagua faili moja tu.</s:String>
+    <s:String x:Key="S.Editor.InvalidLoadingProjects">Upakiaji ni batili - huwezi kuleta miradi anuwai mara moja. Jaribu kuchagua mradi mmoja tu.</s:String>
+    <s:String x:Key="S.Editor.File.OpenMediaProject">Fungua faili ya midia (picha au video) au faili ya mradi</s:String>
+    <s:String x:Key="S.Editor.File.OpenMedia">Fungua faili ya midia (picha au video)</s:String>
     
-    <s:String x:Key="Editor.Clipboard.InvalidCut.Title">Kata Amri</s:String>
-    <s:String x:Key="Editor.Clipboard.InvalidCut.Instruction">Huwezi kata fremu zote.</s:String>
-    <s:String x:Key="Editor.Clipboard.InvalidCut.Message">Rekodi inahitaji angalau fremu moja.</s:String>
+    <s:String x:Key="S.Editor.Clipboard.InvalidCut.Title">Kata Amri</s:String>
+    <s:String x:Key="S.Editor.Clipboard.InvalidCut.Instruction">Huwezi kata fremu zote.</s:String>
+    <s:String x:Key="S.Editor.Clipboard.InvalidCut.Message">Rekodi inahitaji angalau fremu moja.</s:String>
     
-    <s:String x:Key="Editor.DeleteAll.Title">Ondoa yote</s:String>
-    <s:String x:Key="Editor.DeleteAll.Instruction">Una uhakika unataka kuondoa fremu zote?</s:String>
-    <s:String x:Key="Editor.DeleteAll.Message">Kitendo hiki kitapuuza mradi uliofunguliwa kwa sasa na haiwezi tenduliwa. Ungependa kuendelea?</s:String>
-    <s:String x:Key="Editor.DiscardProject.Title">Tupa mradi</s:String>
-    <s:String x:Key="Editor.DiscardProject.Instruction">Una uhakika unataka kupuuza mradi?</s:String>
-    <s:String x:Key="Editor.DiscardProject.Message">Kitendo hiki kitapuuza mradi, ikiondoa fremu zote.&#x0d;Huwezi kutendua operesheni hii.</s:String>
-    <s:String x:Key="Editor.DiscardPreviousProject.Instruction">Ungependa kutupa mradi uliopita?</s:String>
-    <s:String x:Key="Editor.DiscardPreviousProject.Message">Iwapo hutaki, mradi wa awali utapatikana kwenye Miradi ya Awali</s:String>
-    <s:String x:Key="Editor.DeleteFrames.Title">Futa fremu</s:String>
-    <s:String x:Key="Editor.DeleteFrames.Instruction">Una uhakika unataka kufuta?</s:String>
-    <s:String x:Key="Editor.DeleteFrames.Message">Kitendo hiki kitafuta fremu {0}.&#x0d;Utaweza kutendua hii baadae.</s:String>
-    <s:String x:Key="Editor.Exiting.Title">Inaondoka kutoka kihariri</s:String>
-    <s:String x:Key="Editor.Exiting.Instruction">Una uhakika unataka kuondoka?</s:String>
-    <s:String x:Key="Editor.Exiting.Message">Mradi wa sasa uliokuwa ukiitendekea unaweza kufunguliwa tena kupitia 'Miradi ya hivi sasa'.</s:String>
-    <s:String x:Key="Editor.Exiting.Message2">Mradi wa sasa uliokuwa ukiitendekea unaweza kufunguliwa tena kupitia 'Miradi ya hivi sasa', lakini usisahau kuwa baada ya siku chache, itafutika kiotomatiki.</s:String>
+    <s:String x:Key="S.Editor.DeleteAll.Title">Ondoa yote</s:String>
+    <s:String x:Key="S.Editor.DeleteAll.Instruction">Una uhakika unataka kuondoa fremu zote?</s:String>
+    <s:String x:Key="S.Editor.DeleteAll.Message">Kitendo hiki kitapuuza mradi uliofunguliwa kwa sasa na haiwezi tenduliwa. Ungependa kuendelea?</s:String>
+    <s:String x:Key="S.Editor.DiscardProject.Title">Tupa mradi</s:String>
+    <s:String x:Key="S.Editor.DiscardProject.Instruction">Una uhakika unataka kupuuza mradi?</s:String>
+    <s:String x:Key="S.Editor.DiscardProject.Message">Kitendo hiki kitapuuza mradi, ikiondoa fremu zote.&#x0d;Huwezi kutendua operesheni hii.</s:String>
+    <s:String x:Key="S.Editor.DiscardPreviousProject.Instruction">Ungependa kutupa mradi uliopita?</s:String>
+    <s:String x:Key="S.Editor.DiscardPreviousProject.Message">Iwapo hutaki, mradi wa awali utapatikana kwenye Miradi ya Awali</s:String>
+    <s:String x:Key="S.Editor.DeleteFrames.Title">Futa fremu</s:String>
+    <s:String x:Key="S.Editor.DeleteFrames.Instruction">Una uhakika unataka kufuta?</s:String>
+    <s:String x:Key="S.Editor.DeleteFrames.Message">Kitendo hiki kitafuta fremu {0}.&#x0d;Utaweza kutendua hii baadae.</s:String>
+    <s:String x:Key="S.Editor.Exiting.Title">Inaondoka kutoka kihariri</s:String>
+    <s:String x:Key="S.Editor.Exiting.Instruction">Una uhakika unataka kuondoka?</s:String>
+    <s:String x:Key="S.Editor.Exiting.Message">Mradi wa sasa uliokuwa ukiitendekea unaweza kufunguliwa tena kupitia 'Miradi ya hivi sasa'.</s:String>
+    <s:String x:Key="S.Editor.Exiting.Message2">Mradi wa sasa uliokuwa ukiitendekea unaweza kufunguliwa tena kupitia 'Miradi ya hivi sasa', lakini usisahau kuwa baada ya siku chache, itafutika kiotomatiki.</s:String>
     
-    <s:String x:Key="Editor.Resize.Warning">Unapaswa kuchagua dhamani tofauti kutekelezea tendo la kubadili kipimo.</s:String>
-    <s:String x:Key="Editor.Crop.Warning">Uteuzi wa upunaji lazima iwe ndogo kiliko ukubwa wa sasa wa fremu.</s:String>
-    <s:String x:Key="Editor.Crop.Warning2">Uteuzi wa upunaji lazima iwe kubwa kuliko pikseli 10x10.</s:String>
-    <s:String x:Key="Editor.Caption.WarningNoText">Hakuna matini ya kutekelezwa.</s:String>
-    <s:String x:Key="Editor.Caption.WarningSelection">Unapaswa kuchagua angalau fremu moja kutekelezea manukuu.</s:String>
-    <s:String x:Key="Editor.FreeText.WarningSelection">Unapaswa kuchagua angalau fremu moja kutekelezea matini.</s:String>
-    <s:String x:Key="Editor.TitleFrame.WarningSelection">Unapaswa kuchagua angalau fremu moja kutekelezea fremu ya kichwa kando yake.</s:String>
-    <s:String x:Key="Editor.FreeDrawing.WarningNoDrawing">Hakuna michoro itakayotekelezwa kwenye fremu ulizoteua.</s:String>
-    <s:String x:Key="Editor.FreeDrawing.WarningSelection">Unapaswa kuchagua angalau fremu moja kutekelezea uchoraji huru.</s:String>
+    <s:String x:Key="S.Resize.Warning">Unapaswa kuchagua dhamani tofauti kutekelezea tendo la kubadili kipimo.</s:String>
+    <s:String x:Key="S.Crop.Warning">Uteuzi wa upunaji lazima iwe ndogo kiliko ukubwa wa sasa wa fremu.</s:String>
+    <s:String x:Key="S.Crop.Warning.Bigger">Uteuzi wa upunaji lazima iwe kubwa kuliko pikseli 10x10.</s:String>
+    <s:String x:Key="S.Editor.Caption.WarningNoText">Hakuna matini ya kutekelezwa.</s:String>
+    <s:String x:Key="S.Editor.Caption.WarningSelection">Unapaswa kuchagua angalau fremu moja kutekelezea manukuu.</s:String>
+    <s:String x:Key="S.Editor.FreeText.WarningSelection">Unapaswa kuchagua angalau fremu moja kutekelezea matini.</s:String>
+    <s:String x:Key="S.Editor.TitleFrame.WarningSelection">Unapaswa kuchagua angalau fremu moja kutekelezea fremu ya kichwa kando yake.</s:String>
+    <s:String x:Key="S.FreeDrawing.Warning.NoDrawing">Hakuna michoro itakayotekelezwa kwenye fremu ulizoteua.</s:String>
+    <s:String x:Key="S.FreeDrawing.WarningSelection">Unapaswa kuchagua angalau fremu moja kutekelezea uchoraji huru.</s:String>
     
-    <s:String x:Key="Editor.Watermark.Select">Teua picha</s:String>
-    <s:String x:Key="Editor.Watermark.WarningNoImage">Unapaswa kuchagua picha kutekelezea fremu teule.</s:String>
-    <s:String x:Key="Editor.Watermark.WarningSelection">Unapaswa kuchagua angalau fremu moja kutekelezea taswira fifi.</s:String>
-    <s:String x:Key="Editor.Border.WarningThickness">Unapaswa kuchagua unene wa boda iliyo kubwa kuliko 0 kwenye upande angalau mmoja.</s:String>
-    <s:String x:Key="Editor.Border.WarningSelection">Unapaswa kuchagua angalau fremu moja ya kutekelezea boda.</s:String>
-    <s:String x:Key="Editor.Shadow.Warning.Invisible">Upitishaji wa nuru lazima iwe kubwa kulizo sufuri ili kuleta mabadiliko kwenye fremu.</s:String>
-    <s:String x:Key="Editor.Shadow.Warning.Behind">Unapotumia kina cha kivuli na nusukipenyo ya ukungu kama sufuri, haijalishi kwa sababu itafichwa nyuma ya fremu.</s:String>
-    <s:String x:Key="Editor.Cinemagraph.WarningNoDrawing">Unapaswa kuchagua angalau pikseli moja kutekelezea Cinemagraph. Chagua pikseli kwa ku(z)ichorea juu.</s:String>
+    <s:String x:Key="S.Watermark.Select">Teua picha</s:String>
+    <s:String x:Key="S.Watermark.WarningNoImage">Unapaswa kuchagua picha kutekelezea fremu teule.</s:String>
+    <s:String x:Key="S.Watermark.WarningSelection">Unapaswa kuchagua angalau fremu moja kutekelezea taswira fifi.</s:String>
+    <s:String x:Key="S.Editor.Border.WarningThickness">Unapaswa kuchagua unene wa boda iliyo kubwa kuliko 0 kwenye upande angalau mmoja.</s:String>
+    <s:String x:Key="S.Editor.Border.WarningSelection">Unapaswa kuchagua angalau fremu moja ya kutekelezea boda.</s:String>
+    <s:String x:Key="S.Editor.Shadow.Warning.Invisible">Upitishaji wa nuru lazima iwe kubwa kulizo sufuri ili kuleta mabadiliko kwenye fremu.</s:String>
+    <s:String x:Key="S.Editor.Shadow.Warning.Behind">Unapotumia kina cha kivuli na nusukipenyo ya ukungu kama sufuri, haijalishi kwa sababu itafichwa nyuma ya fremu.</s:String>
+    <s:String x:Key="S.Editor.Cinemagraph.WarningNoDrawing">Unapaswa kuchagua angalau pikseli moja kutekelezea Cinemagraph. Chagua pikseli kwa ku(z)ichorea juu.</s:String>
     
-    <s:String x:Key="Editor.Fade.Title">Mpitio wa kufifia</s:String>
-    <s:String x:Key="Editor.Fade.WarningSelection">Unapaswa kuchagua angalau fremu moja kutekelezea mpito wa kufifia.</s:String>
-    <s:String x:Key="Editor.Fade.WarningColor">Rangi iliyo na uangavu wote haitaleta madoido yoyote kwenye mpitio huu.</s:String>
-    <s:String x:Key="Editor.Slide.Title">Mpitio wa kuteleza</s:String>
-    <s:String x:Key="Editor.Slide.WarningSelection">Unapaswa kuchagua angalau fremu moja kutekelezea mpito wa kuteleza.</s:String>
+    <s:String x:Key="S.Editor.Fade.Title">Mpitio wa kufifia</s:String>
+    <s:String x:Key="S.Editor.Fade.WarningSelection">Unapaswa kuchagua angalau fremu moja kutekelezea mpito wa kufifia.</s:String>
+    <s:String x:Key="S.Editor.Fade.WarningColor">Rangi iliyo na uangavu wote haitaleta madoido yoyote kwenye mpitio huu.</s:String>
+    <s:String x:Key="S.Editor.Slide.Title">Mpitio wa kuteleza</s:String>
+    <s:String x:Key="S.Editor.Slide.WarningSelection">Unapaswa kuchagua angalau fremu moja kutekelezea mpito wa kuteleza.</s:String>
 
-    <s:String x:Key="Editor.DragDrop.Invalid.Title">Kokota-dondosha ni batili</s:String>
-    <s:String x:Key="Editor.DragDrop.MultipleFiles.Instruction">Huwezi leta faili anuwai mara moja.</s:String>
-    <s:String x:Key="Editor.DragDrop.MultipleFiles.Message">Jaribu kuchagua faili moja tu.</s:String>
-    <s:String x:Key="Editor.DragDrop.Invalid.Instruction">Haiwezi kupakia faili</s:String>
-    <s:String x:Key="Editor.DragDrop.Invalid.Message">Faili haikuweka kupakiwa kwa sababu ina msimbo batili.</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">Huwezi leta miradi anuwai mara moja.</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidProject.Message">Jaribu kuchagua mradi mmoja tu.</s:String>
+    <s:String x:Key="S.Editor.DragDrop.Invalid.Title">Kokota-dondosha ni batili</s:String>
+    <s:String x:Key="S.Editor.DragDrop.MultipleFiles.Instruction">Huwezi leta faili anuwai mara moja.</s:String>
+    <s:String x:Key="S.Editor.DragDrop.MultipleFiles.Message">Jaribu kuchagua faili moja tu.</s:String>
+    <s:String x:Key="S.Editor.DragDrop.Invalid.Instruction">Haiwezi kupakia faili</s:String>
+    <s:String x:Key="S.Editor.DragDrop.Invalid.Message">Faili haikuweka kupakiwa kwa sababu ina msimbo batili.</s:String>
+    <s:String x:Key="S.Editor.DragDrop.InvalidProject.Instruction">Huwezi leta miradi anuwai mara moja.</s:String>
+    <s:String x:Key="S.Editor.DragDrop.InvalidProject.Message">Jaribu kuchagua mradi mmoja tu.</s:String>
     
-    <s:String x:Key="Editor.RetrievingFromCache">Inaepua fremu kutoka kashe</s:String>
-    <s:String x:Key="Editor.LoadingFrames">Pakia fremu</s:String>
-    <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Instruction">Haiwezi kupakia mradi</s:String>
-    <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Message">Haikuwezekana kupakia fremu kwa sababu zote ni mbovu au picha hazipatikani zinapotarajika kupatikana.</s:String>
-    <s:String x:Key="Editor.LoadingFrames.FramesCorrupted.Instruction">Fremu kadhaa hazingeweza kupakiwa</s:String>
-    <s:String x:Key="Editor.LoadingFrames.FramesCorrupted.Message">Haikuwezekana kupakia fremu kwa sababu hazikupatikana au ni mbovu.</s:String>
-    <s:String x:Key="Editor.UpdatingFrames">Inasasisha fremu</s:String>
-    <s:String x:Key="Editor.PreparingImport">Inatayarisha kuleta</s:String>
-    <s:String x:Key="Editor.ImportingFrames">Inaleta fremu</s:String>
+    <s:String x:Key="S.Editor.RetrievingFromCache">Inaepua fremu kutoka kashe</s:String>
+    <s:String x:Key="S.Editor.LoadingFrames">Pakia fremu</s:String>
+    <s:String x:Key="S.Editor.LoadingFrames.ProjectCorrupted.Instruction">Haiwezi kupakia mradi</s:String>
+    <s:String x:Key="S.Editor.LoadingFrames.ProjectCorrupted.Message">Haikuwezekana kupakia fremu kwa sababu zote ni mbovu au picha hazipatikani zinapotarajika kupatikana.</s:String>
+    <s:String x:Key="S.Editor.LoadingFrames.FramesCorrupted.Instruction">Fremu kadhaa hazingeweza kupakiwa</s:String>
+    <s:String x:Key="S.Editor.LoadingFrames.FramesCorrupted.Message">Haikuwezekana kupakia fremu kwa sababu hazikupatikana au ni mbovu.</s:String>
+    <s:String x:Key="S.Editor.UpdatingFrames">Inasasisha fremu</s:String>
+    <s:String x:Key="S.Editor.PreparingImport">Inatayarisha kuleta</s:String>
+    <s:String x:Key="S.Editor.ImportingFrames">Inaleta fremu</s:String>
     
     <s:String x:Key="S.Editor.AnalyzingDuplicates">Inachanganua nakala rudufu</s:String>
     <s:String x:Key="S.Editor.AdjustingDuplicatesDelay">Inarekebisha kuchelewa</s:String>
     <s:String x:Key="S.Editor.DiscardingDuplicates">Inatupa rudufu</s:String>
-    <s:String x:Key="Editor.DiscardingFrames">Inatupa fremu</s:String>
-    <s:String x:Key="Editor.DiscardingFolders">Inatupa folda</s:String>
-    <s:String x:Key="Editor.ResizingFrames">Inabadilisha ukubwa wa fremu</s:String>
-    <s:String x:Key="Editor.CroppingFrames">Inapuna fremu</s:String>
-    <s:String x:Key="Editor.ApplyingOverlay">Inatekeleza mtandazo kwa fremu</s:String>
-    <s:String x:Key="Editor.CreatingTitleFrame">Inatengeneza fremu ya kichwa</s:String>
-    <s:String x:Key="Editor.ApplyingFlipRotate">Inatekeleza geuza/zungusha kwa fremu</s:String>
-    <s:String x:Key="Editor.ChangingDelay">Inabadilisha kuchelewa.</s:String>
-    <s:String x:Key="Editor.ApplyingTransition">Inatekeleza mpitio</s:String>
+    <s:String x:Key="S.Editor.DiscardingFrames">Inatupa fremu</s:String>
+    <s:String x:Key="S.Editor.DiscardingFolders">Inatupa folda</s:String>
+    <s:String x:Key="S.Editor.ResizingFrames">Inabadilisha ukubwa wa fremu</s:String>
+    <s:String x:Key="S.Editor.CroppingFrames">Inapuna fremu</s:String>
+    <s:String x:Key="S.Editor.ApplyingOverlay">Inatekeleza mtandazo kwa fremu</s:String>
+    <s:String x:Key="S.Editor.CreatingTitleFrame">Inatengeneza fremu ya kichwa</s:String>
+    <s:String x:Key="S.Editor.ApplyingFlipRotate">Inatekeleza geuza/zungusha kwa fremu</s:String>
+    <s:String x:Key="S.Editor.ChangingDelay">Inabadilisha kuchelewa.</s:String>
+    <s:String x:Key="S.Editor.ApplyingTransition">Inatekeleza mpitio</s:String>
     <s:String x:Key="S.Editor.PreparingSaving">Inatayarisha kuhifadhi</s:String>
 
-    <s:String x:Key="Editor.List.Frame">Fremu:</s:String>
-    <s:String x:Key="Editor.List.OpenImage">Fungua picha</s:String>
-    <s:String x:Key="Editor.List.ExploreFolder">Kagua folda</s:String>
-    <s:String x:Key="Editor.List.ExportImage">Kagua picha</s:String>
+    <s:String x:Key="S.Editor.List.Frame">Fremu:</s:String>
+    <s:String x:Key="S.Editor.List.OpenImage">Fungua picha</s:String>
+    <s:String x:Key="S.Editor.List.ExploreFolder">Kagua folda</s:String>
+    <s:String x:Key="S.Editor.List.ExportImage">Kagua picha</s:String>
     
-    <s:String x:Key="Editor.FrameNumbersInfo">Jumla ya idadi, idadi ya uteuzi, kielezo cha uteuzi</s:String>
+    <s:String x:Key="S.Editor.FrameNumbersInfo">Jumla ya idadi, idadi ya uteuzi, kielezo cha uteuzi</s:String>
     
-    <s:String x:Key="GoTo.Title">Nenda hadi fremu</s:String>
-    <s:String x:Key="GoTo.Instruction">Nenda hadi fremu (0 hadi {0})</s:String>
+    <s:String x:Key="S.GoTo.Title">Nenda hadi fremu</s:String>
+    <s:String x:Key="S.GoTo.Instruction">Nenda hadi fremu (0 hadi {0})</s:String>
     
-    <s:String x:Key="Context.SaveAs">Hifadhi kama</s:String>
-    <s:String x:Key="Context.RemoveFrames">Ondoa fremu teuzi</s:String>
-    <s:String x:Key="Context.NewRecording">Rekodi mpya ya skrini</s:String>
-    <s:String x:Key="Context.NewWebcamRecording">Rekodi mpya ya kamera-wavuti</s:String>
-    <s:String x:Key="Context.NewBoardRecording">Rekodi mpya ya bodi</s:String>
-    <s:String x:Key="Context.NewBlankAnimation">Mradi mpya</s:String>
-    <s:String x:Key="Context.NewFromMediaProject">Mpya kutoka media au mradi</s:String>
+    <s:String x:Key="S.Context.SaveAs">Hifadhi kama</s:String>
+    <s:String x:Key="S.Context.RemoveFrames">Ondoa fremu teuzi</s:String>
+    <s:String x:Key="S.Context.NewRecording">Rekodi mpya ya skrini</s:String>
+    <s:String x:Key="S.Context.NewWebcamRecording">Rekodi mpya ya kamera-wavuti</s:String>
+    <s:String x:Key="S.Context.NewBoardRecording">Rekodi mpya ya bodi</s:String>
+    <s:String x:Key="S.Context.NewBlankAnimation">Mradi mpya</s:String>
+    <s:String x:Key="S.Context.NewFromMediaProject">Mpya kutoka media au mradi</s:String>
     
     <!--Warnings-->
-    <s:String x:Key="Editor.Warning.Selection">Unapaswa kuchagua angalau fremu moja kutekelezea tandazo.</s:String>
-    <s:String x:Key="Editor.Warning.Ffmpeg">FFmpeg haipo. Iongeze kwenye kijia cha mazingira au bofya hapa kufungua Chaguo > Ziada kuseti eneo.</s:String>
-    <s:String x:Key="Editor.Warning.Gifski">Gifski haipo. Iongeze kwenye kijia cha mazingira au bofya hapa kufungua Chaguo > Ziada kuseti eneo.</s:String>
-    <s:String x:Key="Editor.Warning.LowSpace">Hakuna nafsai huru inayotosha kwenye kiendeshi ambacho app hii huhifadhi kashe yake ({0}% imebaki). Bofya hapa kufungua Chaguo > Faili za hivi punde kukomboa nafasi kiasi.</s:String>
+    <s:String x:Key="S.Editor.Warning.Selection">Unapaswa kuchagua angalau fremu moja kutekelezea tandazo.</s:String>
+    <s:String x:Key="S.Editor.Warning.Ffmpeg">FFmpeg haipo. Iongeze kwenye kijia cha mazingira au bofya hapa kufungua Chaguo > Ziada kuseti eneo.</s:String>
+    <s:String x:Key="S.Editor.Warning.Gifski">Gifski haipo. Iongeze kwenye kijia cha mazingira au bofya hapa kufungua Chaguo > Ziada kuseti eneo.</s:String>
+    <s:String x:Key="S.Editor.Warning.LowSpace">Hakuna nafsai huru inayotosha kwenye kiendeshi ambacho app hii huhifadhi kashe yake ({0}% imebaki). Bofya hapa kufungua Chaguo > Faili za hivi punde kukomboa nafasi kiasi.</s:String>
     <s:String x:Key="S.Editor.Warning.DifferentDpi">Ulijaribu kuleta picha anuwai zilizo na DPI tofauti, ambayo haiauniwi. Zingine zililetwa, zilizobaki zinafaa kuletwa kivyao.</s:String>
     
     <!--Hints-->
@@ -930,47 +930,47 @@
     <s:String x:Key="S.Hint.Duplicates">Rudufu zimeondolewa</s:String>
     
     <!--Action Grid-->
-    <s:String x:Key="Action.Hide">Ficha</s:String>
-    <s:String x:Key="Action.Apply">Tekeleza</s:String>
-    <s:String x:Key="Action.Open">Fungua</s:String>
-    <s:String x:Key="Action.Save">Hifadhi</s:String>
-    <s:String x:Key="Action.Cancel">Ghairi</s:String>
-    <s:String x:Key="Size">Ukubwa</s:String>
-    <s:String x:Key="Background">Mandarinyuma</s:String>
-    <s:String x:Key="Color">Rangi</s:String>
+    <s:String x:Key="S.Action.Hide">Ficha</s:String>
+    <s:String x:Key="S.Action.Apply">Tekeleza</s:String>
+    <s:String x:Key="S.Action.Open">Fungua</s:String>
+    <s:String x:Key="S.Action.Save">Hifadhi</s:String>
+    <s:String x:Key="S.Action.Cancel">Ghairi</s:String>
+    <s:String x:Key="S.Size">Ukubwa</s:String>
+    <s:String x:Key="S.Background">Mandarinyuma</s:String>
+    <s:String x:Key="S.Color">Rangi</s:String>
     
-    <s:String x:Key="Recent.Projects">Miradi ya hivi karibuni</s:String>
-    <s:String x:Key="Recent.EnumeratingProjects">Inatafuta miradi ya hivi majuzi...</s:String>
-    <s:String x:Key="Recent.CreationDate">Tarehe iliyoundwa</s:String>
-    <s:String x:Key="Recent.FrameCount">Idadi ya fremu</s:String>
-    <s:String x:Key="Recent.Warning.NothingSelected">Hakuna mradi uliochaguliwa. Chagua mradi kwa orodha kupakia.</s:String>
-    <s:String x:Key="Recent.Warning.SameOpened">Mradi huu tayari inaonyeshwa kwenye tukio hiki la kihariri.</s:String>
-    <s:String x:Key="Recent.Warning.AlreadyOpened">Mradi huu tayari ulifunguliwa na tukio kingine la kihariri. Mradi haiwezi funguliwa kama tayari imefunguliwa kwenye kihariri kingine.</s:String>
+    <s:String x:Key="S.Recent.Projects">Miradi ya hivi karibuni</s:String>
+    <s:String x:Key="S.Recent.Searching">Inatafuta miradi ya hivi majuzi...</s:String>
+    <s:String x:Key="S.Recent.Date">Tarehe iliyoundwa</s:String>
+    <s:String x:Key="S.Recent.Frames">Idadi ya fremu</s:String>
+    <s:String x:Key="S.Recent.Warning.NoSelection">Hakuna mradi uliochaguliwa. Chagua mradi kwa orodha kupakia.</s:String>
+    <s:String x:Key="S.Recent.Warning.Same">Mradi huu tayari inaonyeshwa kwenye tukio hiki la kihariri.</s:String>
+    <s:String x:Key="S.Recent.Warning.AnotherEditor">Mradi huu tayari ulifunguliwa na tukio kingine la kihariri. Mradi haiwezi funguliwa kama tayari imefunguliwa kwenye kihariri kingine.</s:String>
     
-    <s:String x:Key="Clipboard.Entries">Viingizo vya ubao-nakili</s:String>
-    <s:String x:Key="Clipboard.Entry">Kiingizo cha ubao-nakili</s:String>
-    <s:String x:Key="Clipboard.Explore">Kagua yaliyomo</s:String>
-    <s:String x:Key="Clipboard.Remove">Ondoa</s:String>
-    <s:String x:Key="Clipboard.Behavior">Tabia ya kubandika</s:String>
-    <s:String x:Key="Clipboard.Before">Kabla ya fremu chaguzi</s:String>
-    <s:String x:Key="Clipboard.After">Baada ya fremu chaguzi</s:String>
+    <s:String x:Key="S.Clipboard.Entries">Viingizo vya ubao-nakili</s:String>
+    <s:String x:Key="S.Clipboard.Entry">Kiingizo cha ubao-nakili</s:String>
+    <s:String x:Key="S.Clipboard.Explore">Kagua yaliyomo</s:String>
+    <s:String x:Key="S.Clipboard.Remove">Ondoa</s:String>
+    <s:String x:Key="S.Clipboard.Behavior">Tabia ya kubandika</s:String>
+    <s:String x:Key="S.Clipboard.Before">Kabla ya fremu chaguzi</s:String>
+    <s:String x:Key="S.Clipboard.After">Baada ya fremu chaguzi</s:String>
     
-    <s:String x:Key="Resize.CurrentProperties">Sifa zilizopo</s:String>
-    <s:String x:Key="Resize.Dpi">Dpi</s:String>
-    <s:String x:Key="Resize.NewProperties">Sifa mpya</s:String>
-    <s:String x:Key="Resize.Dpi2">DPI:</s:String>
-    <s:String x:Key="Resize.KeepAspect">Hifadhi uwiano wa kimo-upana</s:String>
+    <s:String x:Key="S.Resize.CurrentProperties">Sifa zilizopo</s:String>
+    <s:String x:Key="S.Resize.Dpi">Dpi</s:String>
+    <s:String x:Key="S.Resize.NewProperties">Sifa mpya</s:String>
+    <s:String x:Key="S.Resize.Dpi2">DPI:</s:String>
+    <s:String x:Key="S.Resize.KeepAspect">Hifadhi uwiano wa kimo-upana</s:String>
     
-    <s:String x:Key="Crop.Points">Pointi</s:String>
-    <s:String x:Key="Crop.Top">Juu:</s:String>
-    <s:String x:Key="Crop.Left">Kushoto:</s:String>
-    <s:String x:Key="Crop.Bottom">Chini:</s:String>
-    <s:String x:Key="Crop.Right">Kulia:</s:String>
+    <s:String x:Key="S.Crop.Points">Pointi</s:String>
+    <s:String x:Key="S.Crop.Top">Juu:</s:String>
+    <s:String x:Key="S.Crop.Left">Kushoto:</s:String>
+    <s:String x:Key="S.Crop.Bottom">Chini:</s:String>
+    <s:String x:Key="S.Crop.Right">Kulia:</s:String>
     
-    <s:String x:Key="FlipRotate.FlipHorizontal">Geuza mlalo</s:String>
-    <s:String x:Key="FlipRotate.FlipVertical">Geuza kiwima</s:String>
-    <s:String x:Key="FlipRotate.RotateLeft">Zungusha kushoto 90º</s:String>
-    <s:String x:Key="FlipRotate.RotateRight">Zungusha kulia 90º</s:String>
+    <s:String x:Key="S.FlipRotate.FlipHorizontal">Geuza mlalo</s:String>
+    <s:String x:Key="S.FlipRotate.FlipVertical">Geuza kiwima</s:String>
+    <s:String x:Key="S.FlipRotate.RotateLeft">Zungusha kushoto 90º</s:String>
+    <s:String x:Key="S.FlipRotate.RotateRight">Zungusha kulia 90º</s:String>
     
     <s:String x:Key="S.Reduce.Header">Punguza kasi-fremu</s:String>
     <s:String x:Key="S.Reduce.Factor">Fakta:</s:String>
@@ -997,59 +997,58 @@
     <s:String x:Key="S.RemoveDuplicates.Delay.Sum">Tumia jumla</s:String>
     <s:String x:Key="S.RemoveDuplicates.Info">Kitendo hiki hukagua kila fremu (pikseli moja kwa nyingine) na kuondoa zinazotofautiana na za jirani kwa {0} %.&#x0d;Waweza chagua iwapo wataka kubadilisha mchelewo wa fremu.</s:String>
     
-    <s:String x:Key="Caption.Text">Matini</s:String>
-    <s:String x:Key="Caption.Font">Fonti</s:String>
-    <s:String x:Key="Caption.Family">Familia:</s:String>
-    <s:String x:Key="Caption.Style">Mtindo:</s:String>
-    <s:String x:Key="Caption.Weight">Uzani:</s:String>
-    <s:String x:Key="Caption.Size">Ukubwa:</s:String>
-    <s:String x:Key="Caption.Color">Rangi:</s:String>
-    <s:String x:Key="Caption.Outline">Kiolezi</s:String>
-    <s:String x:Key="Caption.Thickness">Unene:</s:String>
-    <s:String x:Key="Caption.Layout">Mpangilio</s:String>
-    <s:String x:Key="Caption.Vertical">Wima:</s:String>
-    <s:String x:Key="Caption.Horizontal">Mlalo</s:String>
+    <s:String x:Key="S.Caption.Text">Matini</s:String>
+    <s:String x:Key="S.Caption.Font">Fonti</s:String>
+    <s:String x:Key="S.Caption.Family">Familia:</s:String>
+    <s:String x:Key="S.Caption.Style">Mtindo:</s:String>
+    <s:String x:Key="S.Caption.Weight">Uzani:</s:String>
+    <s:String x:Key="S.Caption.Size">Ukubwa:</s:String>
+    <s:String x:Key="S.Caption.Color">Rangi:</s:String>
+    <s:String x:Key="S.Caption.Outline">Kiolezi</s:String>
+    <s:String x:Key="S.Caption.Thickness">Unene:</s:String>
+    <s:String x:Key="S.Caption.Layout">Mpangilio</s:String>
+    <s:String x:Key="S.Caption.Vertical">Wima:</s:String>
+    <s:String x:Key="S.Caption.Horizontal">Mlalo</s:String>
 
     <s:String x:Key="S.KeyStrokes">Charazo za vitufe</s:String>
-    <s:String x:Key="KeyStrokes.Keys">Vitufe</s:String>
-    <s:String x:Key="KeyStrokes.Separator">Kitenganishi</s:String>
-    <s:String x:Key="KeyStrokes.Edit">Hariri vichapo vyako vya vitufe</s:String>
-    <s:String x:Key="KeyStrokes.IgnoreModifiers">Puuza Ctrl, Alt, Shift, na kitufe cha Windows wakati hazitumiki kama virekebishi.</s:String>
-    <s:String x:Key="KeyStrokes.IgnoreModifiers.Info">Itapuuza ubofyaji wa vitufe moja moja kama "Control", lakini haitapuuza "Control + C".</s:String>
-    <s:String x:Key="KeyStrokes.Extend">Refusha maonyesho ya vichapisho vya vitufe</s:String>
-    <s:String x:Key="KeyStrokes.Earlier">Anza maonyesho ya vitufe vilivyobonyezwa mapema.</s:String>
-    <s:String x:Key="KeyStrokes.By">Kwa (ms):</s:String>
-    <s:String x:Key="KeyStrokes.Warning.None">Hakuna charazo za vitufe kwa rekodi yako.</s:String>
-    <s:String x:Key="KeyStrokes.Edit.Title">ScreenToGif - Kihariri cha vitufe vilivyobonyezwa</s:String>
-    <s:String x:Key="KeyStrokes.Edit.Number">Nambari ya fremu</s:String>
-    <s:String x:Key="KeyStrokes.Edit.Keys">Gundua vitufe vilivyocharazwa</s:String>
-    <s:String x:Key="KeyStrokes.Edit.Remove">Ondoa mpigo wa kitufe</s:String>
-    <s:String x:Key="KeyStrokes.Edit.Add">Ongeza mpigo wa kibonye</s:String>
-    <s:String x:Key="KeyStrokes.Edit.Lower">Mwandiko wa herufindogo.</s:String>
-    <s:String x:Key="KeyStrokes.Edit.Lower.Info">Inakuruhusu kuingiza herufi ndogo mojamoja.</s:String>
+    <s:String x:Key="S.KeyStrokes.Keys">Vitufe</s:String>
+    <s:String x:Key="S.KeyStrokes.Separator">Kitenganishi</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit">Hariri vichapo vyako vya vitufe</s:String>
+    <s:String x:Key="S.KeyStrokes.IgnoreModifiers">Puuza Ctrl, Alt, Shift, na kitufe cha Windows wakati hazitumiki kama virekebishi.</s:String>
+    <s:String x:Key="S.KeyStrokes.IgnoreModifiers.Info">Itapuuza ubofyaji wa vitufe moja moja kama "Control", lakini haitapuuza "Control + C".</s:String>
+    <s:String x:Key="S.KeyStrokes.Extend">Refusha maonyesho ya vichapisho vya vitufe</s:String>
+    <s:String x:Key="S.KeyStrokes.Earlier">Anza maonyesho ya vitufe vilivyobonyezwa mapema.</s:String>
+    <s:String x:Key="S.KeyStrokes.By">Kwa (ms):</s:String>
+    <s:String x:Key="S.KeyStrokes.Warning.None">Hakuna charazo za vitufe kwa rekodi yako.</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Title">ScreenToGif - Kihariri cha vitufe vilivyobonyezwa</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Number">Nambari ya fremu</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Keys">Gundua vitufe vilivyocharazwa</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Remove">Ondoa mpigo wa kitufe</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Add">Ongeza mpigo wa kibonye</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Lower">Mwandiko wa herufindogo.</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Lower.Info">Inakuruhusu kuingiza herufi ndogo mojamoja.</s:String>
     
-    <s:String x:Key="String.Delay">Ucheleweshaji</s:String>
-    <s:String x:Key="String.DelayMs">Ucheleweshaji</s:String>
-    <s:String x:Key="String.ValueMs">Dhamani -+:</s:String>
-    <s:String x:Key="String.ScaleValue">Dhamani ya kipimo:</s:String>
-    <s:String x:Key="String.Margin">Pambizo:</s:String>
-    <s:String x:Key="String.Padding">Pambizo</s:String>
-    <s:String x:Key="String.Background">Mandharinyuma</s:String>
-    <s:String x:Key="String.MinHeight">Kipeochini cha urefu:</s:String>
+    <s:String x:Key="S.Delay">Ucheleweshaji</s:String>
+    <s:String x:Key="S.DelayMs">Ucheleweshaji</s:String>
+    <s:String x:Key="S.ValueMs">Dhamani -+:</s:String>
+    <s:String x:Key="S.ScaleValue">Dhamani ya kipimo:</s:String>
+    <s:String x:Key="S.Margin">Pambizo:</s:String>
+    <s:String x:Key="S.Padding">Pambizo</s:String>
+    <s:String x:Key="S.MinHeight">Kipeochini cha urefu:</s:String>
     
-    <s:String x:Key="FreeDrawing.Mode">Mtindo</s:String>
-    <s:String x:Key="FreeDrawing.Pen">Kalamu</s:String>
-    <s:String x:Key="FreeDrawing.Eraser">Kifutio</s:String>
-    <s:String x:Key="FreeDrawing.Select">Teua</s:String>
-    <s:String x:Key="FreeDrawing.StrokeEraser">Kifutio suguzi</s:String>
-    <s:String x:Key="FreeDrawing.Width">Upana:</s:String>
-    <s:String x:Key="FreeDrawing.Height">Urefu:</s:String>
-    <s:String x:Key="FreeDrawing.Tip">Kidokezo:</s:String>
-    <s:String x:Key="FreeDrawing.Rectangle">Mstatili</s:String>
-    <s:String x:Key="FreeDrawing.Ellipse">Umbo yai</s:String>
-    <s:String x:Key="FreeDrawing.Other">Nyingine:</s:String>
-    <s:String x:Key="FreeDrawing.Highlighter">Kidhulishi</s:String>
-    <s:String x:Key="FreeDrawing.FitToCurve">Tosheleza kwenye mtao</s:String>
+    <s:String x:Key="S.FreeDrawing.Mode">Mtindo</s:String>
+    <s:String x:Key="S.FreeDrawing.Pen">Kalamu</s:String>
+    <s:String x:Key="S.FreeDrawing.Eraser">Kifutio</s:String>
+    <s:String x:Key="S.FreeDrawing.Select">Teua</s:String>
+    <s:String x:Key="S.FreeDrawing.StrokeEraser">Kifutio suguzi</s:String>
+    <s:String x:Key="S.FreeDrawing.Width">Upana:</s:String>
+    <s:String x:Key="S.FreeDrawing.Height">Urefu:</s:String>
+    <s:String x:Key="S.FreeDrawing.Tip">Kidokezo:</s:String>
+    <s:String x:Key="S.FreeDrawing.Rectangle">Mstatili</s:String>
+    <s:String x:Key="S.FreeDrawing.Ellipse">Umbo yai</s:String>
+    <s:String x:Key="S.FreeDrawing.Other">Nyingine:</s:String>
+    <s:String x:Key="S.FreeDrawing.Highlighter">Kidhulishi</s:String>
+    <s:String x:Key="S.FreeDrawing.FitToCurve">Tosheleza kwenye mtao</s:String>
     
     <s:String x:Key="S.Shapes.Mode.Insert">Ingiza</s:String>
     <s:String x:Key="S.Shapes.Shapes">Maumbo</s:String>
@@ -1060,11 +1059,11 @@
     <s:String x:Key="S.MouseClicks">Mibofyo ya kipanya</s:String>
     <s:String x:Key="S.MouseClicks.Warning.None">Hakuna mbofyo wa kipanya uliogunduliwa kwa mradi wako.</s:String>
     
-    <s:String x:Key="Watermark.Image">Picha</s:String>
-    <s:String x:Key="Watermark.File">Faili:</s:String>
-    <s:String x:Key="Watermark.Opacity">Kutopitisha nuru</s:String>
+    <s:String x:Key="S.Watermark.Image">Picha</s:String>
+    <s:String x:Key="S.Watermark.File">Faili:</s:String>
+    <s:String x:Key="S.Watermark.Opacity">Kutopitisha nuru</s:String>
     
-    <s:String x:Key="Border.Appearance">Mwonekano</s:String>
+    <s:String x:Key="S.Border.Appearance">Mwonekano</s:String>
     <s:String x:Key="S.Border.Info">Tumia hasi</s:String>
 
     <s:String x:Key="S.Shadow.ShadowColor">Rangi ya kivuli</s:String>
@@ -1079,48 +1078,48 @@
     <s:String x:Key="S.Obfuscate.Info">Tumia zana ya uteuzi kuteua mstatili itakayofanywa pixeli.</s:String>
     <s:String x:Key="S.Obfuscate.Warning">Hukuchagua chochote. Tafadhali tumia zana ya uteuzi kuteua mstatili ambao utawekwa pikseli.</s:String>
     
-    <s:String x:Key="Progress.Type">AIna</s:String>
-    <s:String x:Key="Progress.Type.Bar">Upau</s:String>
-    <s:String x:Key="Progress.Type.Text">Matini</s:String>
-    <s:String x:Key="Progress.Precision">Usahihi</s:String>
-    <s:String x:Key="Progress.Precision.Minutes">Dakika</s:String>
-    <s:String x:Key="Progress.Precision.Seconds">Sekunde</s:String>
-    <s:String x:Key="Progress.Precision.Miliseconds">Millisekunde</s:String>
-    <s:String x:Key="Progress.Precision.Percentage">Asilimia</s:String>
-    <s:String x:Key="Progress.Precision.Count">Nambari ya fremu</s:String>
-    <s:String x:Key="Progress.Precision.DateOfRecording">Tarehe/saa halisi</s:String>
-    <s:String x:Key="Progress.Precision.Custom">Maalum</s:String>
-    <s:String x:Key="Progress.Precision.ShowTotal">Onyesha jumla.</s:String>
-    <s:String x:Key="Progress.Format">Umbizo:</s:String>
+    <s:String x:Key="S.Progress.Type">AIna</s:String>
+    <s:String x:Key="S.Progress.Type.Bar">Upau</s:String>
+    <s:String x:Key="S.Progress.Type.Text">Matini</s:String>
+    <s:String x:Key="S.Progress.Precision">Usahihi</s:String>
+    <s:String x:Key="S.Progress.Precision.Minutes">Dakika</s:String>
+    <s:String x:Key="S.Progress.Precision.Seconds">Sekunde</s:String>
+    <s:String x:Key="S.Progress.Precision.Milliseconds">Millisekunde</s:String>
+    <s:String x:Key="S.Progress.Precision.Percentage">Asilimia</s:String>
+    <s:String x:Key="S.Progress.Precision.Count">Nambari ya fremu</s:String>
+    <s:String x:Key="S.Progress.Precision.DateOfRecording">Tarehe/saa halisi</s:String>
+    <s:String x:Key="S.Progress.Precision.Custom">Maalum</s:String>
+    <s:String x:Key="S.Progress.Precision.ShowTotal">Onyesha jumla.</s:String>
+    <s:String x:Key="S.Progress.Format">Umbizo:</s:String>
     <s:String x:Key="S.Progress.Format.Date">Unaweza kutumia mtindo wa saa na tarehe kutoka .Net Framework.&#x0d;Ubainishaji unapatika kwenye viungo mbili hapo chini.</s:String>
     <s:String x:Key="S.Progress.Format.Date.Standard">Maumbizo sanifu</s:String>
     <s:String x:Key="S.Progress.Format.Date.Custom">Maumbizo maalum</s:String>
     <s:String x:Key="S.Progress.Precision.StartNumber">Hesabu kutoka:</s:String>
     <s:String x:Key="S.Progress.Precision.StartNumber.ToolTip">Huanza kuhesabu nambari za fremu kutoka nambari hii.</s:String>
-    <s:String x:Key="Progress.Orientation">Uelekeo</s:String>
+    <s:String x:Key="S.Progress.Orientation">Uelekeo</s:String>
     
-    <s:String x:Key="S.DelayUpdate">Chelewesha kisasisho</s:String>
-    <s:String x:Key="Delay.Mode">Mtindo wa ucheleweshaji</s:String>
-    <s:String x:Key="Delay.Mode.Override">Batilisha (ms)</s:String>
-    <s:String x:Key="Delay.Mode.IncreaseDecrease">Ongeza au punguza (ms)</s:String>
-    <s:String x:Key="Delay.Mode.Scale">Kipimo (%)</s:String>
-    <s:String x:Key="Delay.NewValue">Dhamani mpya</s:String>
-    <s:String x:Key="Delay.Minimum10Ms">Kipeochini cha 10ms kila fremu</s:String>
-    <s:String x:Key="Delay.DecreaseIncrease">Punguza/Ongeza dhamani</s:String>
-    <s:String x:Key="Delay.Scale">Dhamani ya kipimo</s:String>
+    <s:String x:Key="S.Delay.Update">Chelewesha kisasisho</s:String>
+    <s:String x:Key="S.Delay.Mode">Mtindo wa ucheleweshaji</s:String>
+    <s:String x:Key="S.Delay.Mode.Override">Batilisha (ms)</s:String>
+    <s:String x:Key="S.Delay.Mode.IncreaseDecrease">Ongeza au punguza (ms)</s:String>
+    <s:String x:Key="S.Delay.Mode.Scale">Kipimo (%)</s:String>
+    <s:String x:Key="S.Delay.NewValue">Dhamani mpya</s:String>
+    <s:String x:Key="S.Delay.Minimum10Ms">Kipeochini cha 10ms kila fremu</s:String>
+    <s:String x:Key="S.Delay.DecreaseIncrease">Punguza/Ongeza dhamani</s:String>
+    <s:String x:Key="S.Delay.Scale">Dhamani ya kipimo</s:String>
     
-    <s:String x:Key="Cinemagraph.Info">Tumia kalamu kuchagua pixeli zisizofaa kubaki.</s:String>
-    <s:String x:Key="OverrideDelay.Info">Dhamani hii mpya itabadilisha muda (mchelewo) wa fremu zote. Dhamani hii inaweza kuwa kati ya 10ms na 25500ms.</s:String>
-    <s:String x:Key="IncreaseDecreaseDelay.Info">Dhamani hii itapunguza/itaongeza muda (mchelewo) wa kila fremu.&#x0d;Unaweza ongeza/punguza kwa kuchagua dhamani kati ya -10000ms na 10000ms, lakini muda wa kila fremu itakuwa kati ya 10ms na n25500ms.</s:String>
-    <s:String x:Key="ScaleDelay.Info">Pimisha muda (wa ucheleweshaji) wa kila fremu teule kutumia asilimia.&#x0d;Unaweza pimisha muda wa kila fremu kwa dhamani kati ya 1% na 100%, lakini muda wa kila fremu itazuiliwa kuwa kati ya 10ms na 25500ms</s:String>
+    <s:String x:Key="S.Cinemagraph.Info">Tumia kalamu kuchagua pixeli zisizofaa kubaki.</s:String>
+    <s:String x:Key="S.Delay.Override.Info">Dhamani hii mpya itabadilisha muda (mchelewo) wa fremu zote. Dhamani hii inaweza kuwa kati ya 10ms na 25500ms.</s:String>
+    <s:String x:Key="S.Delay.IncreaseDecrease.Info">Dhamani hii itapunguza/itaongeza muda (mchelewo) wa kila fremu.&#x0d;Unaweza ongeza/punguza kwa kuchagua dhamani kati ya -10000ms na 10000ms, lakini muda wa kila fremu itakuwa kati ya 10ms na n25500ms.</s:String>
+    <s:String x:Key="S.Delay.Scale.Info">Pimisha muda (wa ucheleweshaji) wa kila fremu teule kutumia asilimia.&#x0d;Unaweza pimisha muda wa kila fremu kwa dhamani kati ya 1% na 100%, lakini muda wa kila fremu itazuiliwa kuwa kati ya 10ms na 25500ms</s:String>
 
-    <s:String x:Key="Transitions.Length">Urefu wa mpitio</s:String>
-    <s:String x:Key="Transitions.Delay">Kuchelewa kwa mpitio</s:String>
-    <s:String x:Key="Transitions.FadeTo">Fifia hadi...</s:String>
-    <s:String x:Key="Transitions.FadeTo.Frame">Fremu ifuatayo</s:String>
-    <s:String x:Key="Transitions.FadeTo.Color">Rangi</s:String>
-    <s:String x:Key="Transitions.Color">Rangi</s:String>
-    <s:String x:Key="Transitions.Info">Mpitio utatekelezwa katikati ya fremu teuzi na ile ifuatayo.</s:String>
+    <s:String x:Key="S.Transitions.Length">Urefu wa mpitio</s:String>
+    <s:String x:Key="S.Transitions.Delay">Kuchelewa kwa mpitio</s:String>
+    <s:String x:Key="S.Transitions.FadeTo">Fifia hadi...</s:String>
+    <s:String x:Key="S.Transitions.FadeTo.Frame">Fremu ifuatayo</s:String>
+    <s:String x:Key="S.Transitions.FadeTo.Color">Rangi</s:String>
+    <s:String x:Key="S.Transitions.Color">Rangi</s:String>
+    <s:String x:Key="S.Transitions.Info">Mpitio utatekelezwa katikati ya fremu teuzi na ile ifuatayo.</s:String>
 
     <!--Save As-->
     <s:String x:Key="S.SaveAs.Type">Aina ya faili</s:String>
@@ -1142,7 +1141,7 @@
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
     <s:String x:Key="S.SaveAs.GifOptions">Chaguo za gif</s:String>
-    <s:String x:Key="S.SaveAs.Quality">Ubora</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quality">Ubora</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors">Rangi:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">Kipeojuu cha idadi ya rangi (kwa kila fremu).</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Loop">Rejeleza:</s:String>
@@ -1168,12 +1167,12 @@
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">Tia alama pikseli zisizobadilika na rangi mwigo.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">Teua rangi</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions">Mipangilio ya Apng</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.LoopedApng">Apng iliyorejelezwa.</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Looped">Apng iliyorejelezwa.</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions.DetectUnchanged">Gundua pikseli zisizobadilika.</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions.PaintTransparent">Paka rangi kwa pikseli zote zilizo na rangi angavu</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions">Chaguo za video</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Fps">Fps:</s:String>
-    <s:String x:Key="S.SaveAs.FlipVertically">Geuza video (kiwima)</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.FlipVertically">Geuza video (kiwima)</s:String>
     <s:String x:Key="S.SaveAs.ImagesOptions">Chaguo za picha</s:String>
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">Zip picha</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions">Chaguo za PSD</s:String>

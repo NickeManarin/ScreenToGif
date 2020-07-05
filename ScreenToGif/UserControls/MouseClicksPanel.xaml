@@ -12,7 +12,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <n:LabelSeparator Grid.Row="0" Text="{DynamicResource Border.Appearance}"/>
+        <n:LabelSeparator Grid.Row="0" Text="{DynamicResource S.Border.Appearance}"/>
         <Grid Grid.Row="1" Margin="10,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -25,14 +25,14 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource Caption.Color}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Caption.Color}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
             <n:ColorBox Grid.Row="0" Grid.Column="1" SelectedColor="{Binding ForegroundColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10,5"/>
 
-            <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource FreeDrawing.Width}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.FreeDrawing.Width}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
             <n:DoubleUpDown Grid.Row="1" Grid.Column="1" x:Name="ClickWidthDoubleUpDown" Minimum="1" Maximum="1000" Margin="10,5" MinWidth="70" 
                             Value="{Binding Width, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-            <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource FreeDrawing.Height}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.FreeDrawing.Height}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
             <n:DoubleUpDown Grid.Row="2" Grid.Column="1" x:Name="ClickHeightDoubleUpDown" Minimum="1" Maximum="1000" Margin="10,5" MinWidth="70"
                             Value="{Binding Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>

@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:n="clr-namespace:ScreenToGif.Controls"
-                    xmlns:c="clr-namespace:ScreenToGif.Util.Converters">
+                    xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
+                    xmlns:s="clr-namespace:System;assembly=mscorlib">
 
     <c:DoubleToPercentage x:Key="DoubleToPercentageConverter"/>
     <c:BytesToSize x:Key="BytesToSizeConverter"/>
@@ -28,13 +29,13 @@
                                VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch"
                                Visibility="Hidden" MaxWidth="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}" Style="{DynamicResource Style.Button.NoText}">
                     <n:ImageButton.ToolTip>
-                        <ToolTip x:Name="CancelToolTip" Content="{DynamicResource Action.Cancel}" Placement="Left" VerticalOffset="-5"/>
+                        <ToolTip x:Name="CancelToolTip" Content="{DynamicResource S.Action.Cancel}" Placement="Left" VerticalOffset="-5"/>
                     </n:ImageButton.ToolTip>
                 </n:ImageButton>
 
-                <Label Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" x:Name="PercentageLabel" Content="{TemplateBinding Percentage, Converter={StaticResource DoubleToPercentageConverter}}" 
+                <Label Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" x:Name="PercentageLabel" Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Percentage}" ContentStringFormat="{}{0:##0.0} %"
                        Foreground="{DynamicResource Element.Foreground.Gray112}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center"
-                       FontFamily="Segoe UI Semilight" BorderThickness="0" MinWidth="45"/>
+                       FontFamily="Segoe UI Semilight" BorderThickness="0" MinWidth="50"/>
 
                 <Label Grid.Row="0" Grid.Column="2" Content="{TemplateBinding Text}" HorizontalAlignment="Stretch" Padding="0,1,0,0" Foreground="{DynamicResource Element.Foreground}"/>
 
@@ -86,18 +87,19 @@
                     <ColumnDefinition/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
                 <Viewbox Grid.Row="0" Grid.Column="0" x:Name="InternalViewBox" VerticalAlignment="Center" HorizontalAlignment="Center" 
                          Stretch="Uniform" StretchDirection="Both" Margin="1" Visibility="Visible" Effect="{x:Null}">
-                    <ContentPresenter Content="{DynamicResource Vector.Success}" Opacity="{DynamicResource Element.Opacity}"/>
+                    <ContentPresenter Content="{DynamicResource Vector.Ok.Round}" Opacity="{DynamicResource Element.Opacity}"/>
                 </Viewbox>
 
                 <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="CancelButton" Padding="2" Content="{DynamicResource Vector.Eraser}" ContentWidth="15" ContentHeight="15"
                                VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch"
                                Visibility="Hidden" MaxWidth="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}" Style="{DynamicResource Style.Button.NoText}">
                     <n:ImageButton.ToolTip>
-                        <ToolTip x:Name="CancelToolTip" Content="{DynamicResource Encoder.Remove}" Placement="Left" VerticalOffset="-5"/>
+                        <ToolTip x:Name="CancelToolTip" Content="{DynamicResource S.Encoder.Remove}" Placement="Left" VerticalOffset="-5"/>
                     </n:ImageButton.ToolTip>
                 </n:ImageButton>
 
@@ -107,61 +109,98 @@
 
                 <StackPanel Grid.Column="2"  HorizontalAlignment="Stretch" VerticalAlignment="Center">
                     <WrapPanel Orientation="Horizontal">
-                        <TextBlock Text="{DynamicResource Encoder.Completed}" Margin="0,0,5,0" Foreground="{DynamicResource Element.Foreground}"/>
+                        <TextBlock Text="{DynamicResource S.Encoder.Completed}" Margin="0,0,5,0" Foreground="{DynamicResource Element.Foreground}"/>
 
                         <TextBlock x:Name="CopiedTextBlock" Visibility="Collapsed" Margin="0,0,5,0">
-                            <Run Text="{DynamicResource Encoder.Completed.Clipboard}" Foreground="{DynamicResource Element.Foreground}"/>
+                            <Run Text="{DynamicResource S.Encoder.Completed.Clipboard}" Foreground="{DynamicResource Element.Foreground}"/>
                         </TextBlock>
 
                         <TextBlock x:Name="CopyFailedTextBlock" Visibility="Visible" Margin="0,0,5,0">
-                            <Hyperlink x:Name="CopyFailedHyperlink" ToolTip="{DynamicResource Encoder.Error.Info}">
-                                <Run Text="{DynamicResource Encoder.Completed.Clipboard.Fail}"/>
+                            <Hyperlink x:Name="CopyFailedHyperlink" ToolTip="{DynamicResource S.Encoder.Error.Info}">
+                                <Run Text="{DynamicResource S.Encoder.Completed.Clipboard.Fail}"/>
                             </Hyperlink>
                         </TextBlock>
 
                         <TextBlock x:Name="ExecutedTextBlock" Visibility="Collapsed" Margin="0,0,5,0">
-                            <Hyperlink x:Name="ExecutedHyperlink" ToolTip="{DynamicResource Encoder.Completed.Command.Output}">
-                                <Run Text="{DynamicResource Encoder.Completed.Command}"/>
+                            <Hyperlink x:Name="ExecutedHyperlink" ToolTip="{DynamicResource S.Encoder.Completed.Command.Output}">
+                                <Run Text="{DynamicResource S.Encoder.Completed.Command}"/>
                             </Hyperlink>
                         </TextBlock>
 
                         <TextBlock x:Name="ExecutionFailedTextBlock" Visibility="Visible" Margin="0,0,5,0">
-                            <Hyperlink x:Name="ExecutionFailedHyperlink" ToolTip="{DynamicResource Encoder.Error.Info}">
-                                <Run Text="{DynamicResource Encoder.Completed.Command.Fail}"/>
+                            <Hyperlink x:Name="ExecutionFailedHyperlink" ToolTip="{DynamicResource S.Encoder.Error.Info}">
+                                <Run Text="{DynamicResource S.Encoder.Completed.Command.Fail}"/>
                             </Hyperlink>
                         </TextBlock>
                     </WrapPanel>
 
                     <StackPanel x:Name="UploadStackPanel" Orientation="Horizontal" Visibility="Collapsed">
-                        <TextBlock x:Name="UploadedTextBlock" Visibility="Collapsed" ToolTip="{DynamicResource Encoder.Completed.Upload.Delete}">
+                        <TextBlock x:Name="UploadedTextBlock" Visibility="Collapsed" ToolTip="{DynamicResource S.Encoder.Completed.Upload.Delete}">
                             <Hyperlink x:Name="UploadHyperlink">
                                 <Run Text="{TemplateBinding UploadLinkDisplay}"/>
                             </Hyperlink>
                         </TextBlock>
                         <TextBlock x:Name="UploadFailedTextBlock" Visibility="Visible">
-                            <Hyperlink x:Name="UploadFailedHyperlink" ToolTip="{DynamicResource Encoder.Error.Info}">
-                                <Run Text="{DynamicResource Encoder.Completed.Upload.Fail}"/>
+                            <Hyperlink x:Name="UploadFailedHyperlink" ToolTip="{DynamicResource S.Encoder.Error.Info}">
+                                <Run Text="{DynamicResource S.Encoder.Completed.Upload.Fail}"/>
                             </Hyperlink>
                         </TextBlock>
                     </StackPanel>
                 </StackPanel>
 
-                <n:ImageButton Grid.Column="3" x:Name="FileButton" Style="{DynamicResource Style.Button.NoText}" Content="{DynamicResource Vector.Gif}" 
+                <TextBlock Grid.Column="3" x:Name="TimeTextBlock" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TotalTime, StringFormat={}{0:mm}:{0:ss}}"
+                           Foreground="{DynamicResource Element.Foreground.Gray112}" VerticalAlignment="Center" Margin="5,3">
+                    <TextBlock.ToolTip>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{DynamicResource S.Encoder.Completed.Elapsed}"/>
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.Encoder.Completed.Elapsed.Analysis}"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TimeToAnalyze, StringFormat={}{0:mm}:{0:ss}:{0:fff}}"/>
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.Encoder.Completed.Elapsed.Encoding}"/>
+                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TimeToEncode, StringFormat={}{0:mm}:{0:ss}:{0:fff}}"/>
+
+                            <TextBlock Grid.Row="3" Grid.Column="0" x:Name="UploadTimeHeaderTextBlock" Text="{DynamicResource S.Encoder.Completed.Elapsed.Upload}"/>
+                            <TextBlock Grid.Row="3" Grid.Column="1" x:Name="UploadTimeTextBlock" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TimeToUpload, StringFormat={}{0:mm}:{0:ss}:{0:fff}}"/>
+
+                            <TextBlock Grid.Row="4" Grid.Column="0" x:Name="CopyTimeHeaderTextBlock" Text="{DynamicResource S.Encoder.Completed.Elapsed.Copy}"/>
+                            <TextBlock Grid.Row="4" Grid.Column="1" x:Name="CopyTimeTextBlock" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TimeToCopy, StringFormat={}{0:mm}:{0:ss}:{0:fff}}"/>
+
+                            <TextBlock Grid.Row="5" Grid.Column="0" x:Name="ExecuteTimeHeaderTextBlock" Text="{DynamicResource S.Encoder.Completed.Elapsed.Commands}"/>
+                            <TextBlock Grid.Row="5" Grid.Column="1" x:Name="ExecuteTimeTextBlock" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TimeToExecute, StringFormat={}{0:mm}:{0:ss}:{0:fff}}"/>
+                        </Grid>
+                    </TextBlock.ToolTip>
+                </TextBlock>
+
+                <n:ImageButton Grid.Column="4" x:Name="FileButton" Style="{DynamicResource Style.Button.NoText}" Content="{DynamicResource Vector.Gif}" 
                                Padding="2,0" ContentWidth="20" ContentHeight="20" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5">
                     <n:ImageButton.ToolTip>
                         <TextBlock Foreground="{DynamicResource Element.Foreground}">
-                            <Run Text="{DynamicResource Encoder.OpenFile}"/>
+                            <Run Text="{DynamicResource S.Encoder.OpenFile}"/>
                             <LineBreak/>
                             <Run Text="{TemplateBinding OutputFilename}"/>
                         </TextBlock>
                     </n:ImageButton.ToolTip>
                 </n:ImageButton>
 
-                <n:ImageButton Grid.Column="4" x:Name="FolderButton" Style="{DynamicResource Style.Button.NoText}" Content="{DynamicResource Vector.Open}" 
+                <n:ImageButton Grid.Column="5" x:Name="FolderButton" Style="{DynamicResource Style.Button.NoText}" Content="{DynamicResource Vector.Open}" 
                                Padding="2,0" ContentWidth="20" ContentHeight="20" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5">
                     <n:ImageButton.ToolTip>
                         <TextBlock Foreground="{DynamicResource Element.Foreground}">
-                            <Run Text="{DynamicResource Encoder.ExploreFolder}"/>
+                            <Run Text="{DynamicResource S.Encoder.ExploreFolder}"/>
                             <LineBreak/>
                             <Run Text="{TemplateBinding OutputPath}"/>
                         </TextBlock>
@@ -171,12 +210,12 @@
 
             <Border.ContextMenu>
                 <ContextMenu>
-                    <n:ImageMenuItem x:Name="CopyMenuItem" Header="{DynamicResource Editor.Home.Copy}" Image="{DynamicResource Vector.Copy}"/>
+                    <n:ImageMenuItem x:Name="CopyMenuItem" Header="{DynamicResource S.Editor.Home.Copy}" Image="{DynamicResource Vector.Copy}"/>
                     <Separator/>
-                    <n:ImageMenuItem x:Name="CopyImageMenuItem" Header="{DynamicResource Encoder.Copy.Image}" Visibility="Collapsed"/>
-                    <n:ImageMenuItem x:Name="CopyFilenameMenuItem" Header="{DynamicResource Encoder.Copy.Filename}"/>
-                    <n:ImageMenuItem x:Name="CopyFolderMenuItem" Header="{DynamicResource Encoder.Copy.Folder}"/>
-                    <n:ImageMenuItem x:Name="CopyLinkMenuItem" Header="{DynamicResource Encoder.Copy.Link}" Visibility="Collapsed"/>
+                    <n:ImageMenuItem x:Name="CopyImageMenuItem" Header="{DynamicResource S.Encoder.Copy.Image}" Visibility="Collapsed"/>
+                    <n:ImageMenuItem x:Name="CopyFilenameMenuItem" Header="{DynamicResource S.Encoder.Copy.Filename}"/>
+                    <n:ImageMenuItem x:Name="CopyFolderMenuItem" Header="{DynamicResource S.Encoder.Copy.Folder}"/>
+                    <n:ImageMenuItem x:Name="CopyLinkMenuItem" Header="{DynamicResource S.Encoder.Copy.Link}" Visibility="Collapsed"/>
                 </ContextMenu>
             </Border.ContextMenu>
         </Border>
@@ -240,6 +279,22 @@
             <Trigger SourceName="UploadFailedTextBlock" Property="Visibility" Value="Visible">
                 <Setter TargetName="UploadStackPanel" Property="Visibility" Value="Visible"/>
             </Trigger>
+
+            <Trigger Property="TotalTime" Value="{x:Static s:TimeSpan.Zero}">
+                <Setter TargetName="TimeTextBlock" Property="Visibility" Value="Collapsed"/>
+            </Trigger>
+            <Trigger Property="TimeToUpload" Value="{x:Static s:TimeSpan.Zero}">
+                <Setter TargetName="UploadTimeHeaderTextBlock" Property="Visibility" Value="Collapsed"/>
+                <Setter TargetName="UploadTimeTextBlock" Property="Visibility" Value="Collapsed"/>
+            </Trigger>
+            <Trigger Property="TimeToCopy" Value="{x:Static s:TimeSpan.Zero}">
+                <Setter TargetName="CopyTimeHeaderTextBlock" Property="Visibility" Value="Collapsed"/>
+                <Setter TargetName="CopyTimeTextBlock" Property="Visibility" Value="Collapsed"/>
+            </Trigger>
+            <Trigger Property="TimeToExecute" Value="{x:Static s:TimeSpan.Zero}">
+                <Setter TargetName="ExecuteTimeHeaderTextBlock" Property="Visibility" Value="Collapsed"/>
+                <Setter TargetName="ExecuteTimeTextBlock" Property="Visibility" Value="Collapsed"/>
+            </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
@@ -255,24 +310,24 @@
 
                 <Viewbox Grid.Row="0" Grid.Column="0" x:Name="InternalViewBox" VerticalAlignment="Center" HorizontalAlignment="Center" 
                          Stretch="Uniform" StretchDirection="Both" Margin="1" Visibility="Visible" Effect="{x:Null}">
-                    <ContentPresenter Content="{DynamicResource Vector.Error}" Opacity="{DynamicResource Element.Opacity}"/>
+                    <ContentPresenter Content="{DynamicResource Vector.Cancel.Round}" Opacity="{DynamicResource Element.Opacity}"/>
                 </Viewbox>
 
                 <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="CancelButton" Padding="2" Content="{DynamicResource Vector.Eraser}" ContentWidth="15" ContentHeight="15" 
                                VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch"
                                Visibility="Hidden" MaxWidth="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}" Style="{DynamicResource Style.Button.NoText}">
                     <n:ImageButton.ToolTip>
-                        <ToolTip Content="{DynamicResource Encoder.Remove}" Placement="Left" VerticalOffset="-5"/>
+                        <ToolTip Content="{DynamicResource S.Encoder.Remove}" Placement="Left" VerticalOffset="-5"/>
                     </n:ImageButton.ToolTip>
                 </n:ImageButton>
 
-                <Label Grid.Row="0" Grid.Column="2" Content="{DynamicResource Encoder.Error}" Foreground="{DynamicResource Element.Foreground}" 
+                <Label Grid.Row="0" Grid.Column="2" Content="{DynamicResource S.Encoder.Error}" Foreground="{DynamicResource Element.Foreground}" 
                        HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="0,1,0,0"/>
 
                 <n:ImageButton Grid.Column="3" x:Name="DetailsButton" Style="{DynamicResource Style.Button.NoText}" Content="{DynamicResource Vector.Application}" 
                                Padding="2,0" ContentWidth="20" ContentHeight="20">
                     <n:ImageButton.ToolTip>
-                        <ToolTip Content="{DynamicResource Encoder.Details}" Placement="Top" HorizontalOffset="-5"/>
+                        <ToolTip Content="{DynamicResource S.Encoder.Details}" Placement="Top" HorizontalOffset="-5"/>
                     </n:ImageButton.ToolTip>
                 </n:ImageButton>
             </Grid>
@@ -308,15 +363,15 @@
                                VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch"
                                MaxWidth="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}" Style="{DynamicResource Style.Button.NoText}">
                     <n:ImageButton.ToolTip>
-                        <ToolTip x:Name="CancelToolTip" Content="{DynamicResource Encoder.Remove}" Placement="Left" VerticalOffset="-5"/>
+                        <ToolTip x:Name="CancelToolTip" Content="{DynamicResource S.Encoder.Remove}" Placement="Left" VerticalOffset="-5"/>
                     </n:ImageButton.ToolTip>
                 </n:ImageButton>
 
-                <Label Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" x:Name="PercentageLabel" Content="{TemplateBinding Percentage, Converter={StaticResource DoubleToPercentageConverter}}" 
+                <Label Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" x:Name="PercentageLabel" Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Percentage}" ContentStringFormat="{}{0:##0.0} %" 
                        Foreground="{DynamicResource Element.Foreground.Gray112}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center"
                        FontFamily="Segoe UI Semilight" BorderThickness="0" MinWidth="45"/>
 
-                <Label Grid.Row="0" Grid.Column="2" Content="{DynamicResource Encoder.Canceled}" Foreground="{DynamicResource Element.Foreground}" HorizontalAlignment="Stretch" Padding="0,1,0,0"/>
+                <Label Grid.Row="0" Grid.Column="2" Content="{DynamicResource S.Encoder.Canceled}" Foreground="{DynamicResource Element.Foreground}" HorizontalAlignment="Stretch" Padding="0,1,0,0"/>
 
                 <ProgressBar Grid.Row="1" Grid.Column="2" Value="{TemplateBinding Percentage}" Minimum="0" Maximum="100" Height="4" HorizontalAlignment="Stretch" Orientation="Horizontal" HorizontalContentAlignment="Stretch"/>
             </Grid>
@@ -342,11 +397,11 @@
                                Visibility="Hidden" MaxWidth="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}" 
                                Style="{DynamicResource Style.Button.NoText}">
                     <n:ImageButton.ToolTip>
-                        <ToolTip Content="{DynamicResource Encoder.Remove}" Placement="Left" VerticalOffset="-5"/>
+                        <ToolTip Content="{DynamicResource S.Encoder.Remove}" Placement="Left" VerticalOffset="-5"/>
                     </n:ImageButton.ToolTip>
                 </n:ImageButton>
 
-                <Label Grid.Row="0" Grid.Column="2" Content="{DynamicResource Encoder.FileDeletedMoved}" Foreground="{DynamicResource Element.Foreground}" 
+                <Label Grid.Row="0" Grid.Column="2" Content="{DynamicResource S.Encoder.DeletedMoved}" Foreground="{DynamicResource Element.Foreground}" 
                        HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="0,1,0,0"/>
             </Grid>
         </Border>

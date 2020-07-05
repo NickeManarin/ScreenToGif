@@ -86,16 +86,16 @@
 
                 <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="PenModeRadioButton" Content="{StaticResource Vector.Pen}" IsChecked="True"
                                     Cursor="Hand" ContentWidth="20" Padding="0,5" Style="{StaticResource Style.ImageRadioButton.NoText}"
-                                    ToolTip="{DynamicResource FreeDrawing.Pen}" ToolTipService.Placement="Top"/>
+                                    ToolTip="{DynamicResource S.FreeDrawing.Pen}" ToolTipService.Placement="Top"/>
                 <n:ImageRadioButton Grid.Column="1" x:Name="EraserModeRadioButton" Content="{StaticResource Vector.Eraser}" 
                                     Cursor="Hand" ContentWidth="20" Padding="0,5" Style="{StaticResource Style.ImageRadioButton.NoText}"
-                                    ToolTip="{DynamicResource FreeDrawing.Eraser}" ToolTipService.Placement="Top"/>
+                                    ToolTip="{DynamicResource S.FreeDrawing.Eraser}" ToolTipService.Placement="Top"/>
                 <n:ImageRadioButton Grid.Column="2" x:Name="SelectorModeRadioButton" Content="{StaticResource Vector.Select}" 
                                     Cursor="Hand" ContentWidth="20" Padding="0,5" Style="{StaticResource Style.ImageRadioButton.NoText}"
-                                    ToolTip="{DynamicResource FreeDrawing.Select}" ToolTipService.Placement="Top"/>
+                                    ToolTip="{DynamicResource S.FreeDrawing.Select}" ToolTipService.Placement="Top"/>
                 <n:ImageRadioButton Grid.Column="3" x:Name="EraserStrokeModeRadioButton" Content="{StaticResource Vector.StrokeEraser}" 
                                     Cursor="Hand" ContentWidth="20" Padding="0,5" Style="{StaticResource Style.ImageRadioButton.NoText}"
-                                    ToolTip="{DynamicResource FreeDrawing.StrokeEraser}" ToolTipService.Placement="Top"/>
+                                    ToolTip="{DynamicResource S.FreeDrawing.StrokeEraser}" ToolTipService.Placement="Top"/>
             </Grid>
 
             <Grid Grid.Column="2" Visibility="{Binding IsChecked, ElementName=PenModeRadioButton, Converter={StaticResource Bool2Visibility}}">
@@ -139,10 +139,10 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <n:ExtendedCheckBox Grid.Row="0" x:Name="FitToCurveRadioButton" Text="{DynamicResource FreeDrawing.FitToCurve}" Cursor="Hand" Padding="0" Margin="3,0,0,0" VerticalAlignment="Center"
+                    <n:ExtendedCheckBox Grid.Row="0" x:Name="FitToCurveRadioButton" Text="{DynamicResource S.FreeDrawing.FitToCurve}" Cursor="Hand" Padding="0" Margin="3,0,0,0" VerticalAlignment="Center"
                                         IsChecked="{Binding BoardFitToCurve, Source={x:Static u:UserSettings.All}}" FontSize="11"/>
 
-                    <n:ExtendedCheckBox Grid.Row="1" x:Name="IsHighlighterRadioButton" Text="{DynamicResource FreeDrawing.Highlighter}" Cursor="Hand" Padding="0" Margin="3,0,0,0" VerticalAlignment="Center"
+                    <n:ExtendedCheckBox Grid.Row="1" x:Name="IsHighlighterRadioButton" Text="{DynamicResource S.FreeDrawing.Highlighter}" Cursor="Hand" Padding="0" Margin="3,0,0,0" VerticalAlignment="Center"
                                         IsChecked="{Binding BoardIsHighlighter, Source={x:Static u:UserSettings.All}}" FontSize="11"/>
                 </Grid>
             </Grid>
@@ -183,8 +183,7 @@
         <Border Grid.Row="1" BorderThickness="1" BorderBrush="{DynamicResource Element.Border.Weak}">
             <Border x:Name="MainBorder">
                 <!--Background="{StaticResource Background.Lines}"-->
-                <n:InkCanvasExtended x:Name="MainInkCanvas"
-                                     PreviewMouseDown="MainInkCanvas_OnPreviewMouseDown" PreviewMouseUp="MainInkCanvas_OnPreviewMouseUp">
+                <n:InkCanvasExtended x:Name="MainInkCanvas" PreviewMouseDown="MainInkCanvas_OnPreviewMouseDown" PreviewMouseUp="MainInkCanvas_OnPreviewMouseUp">
 
                     <n:InkCanvasExtended.EditingMode>
                         <MultiBinding Converter="{StaticResource SelectionToEditingModeConverter}">
@@ -206,10 +205,10 @@
                     </n:InkCanvasExtended.DefaultDrawingAttributes>
 
                     <n:InkCanvasExtended.EraserShape>
-                        <MultiBinding Converter="{StaticResource SelectionToStylusShapeConverter}">
-                            <Binding Source="{x:Static u:UserSettings.All}" Path="BoardStylusWidth"/>
-                            <Binding Source="{x:Static u:UserSettings.All}" Path="BoardStylusHeight"/>
-                            <Binding ElementName="RectangleEraserRadioButton" Path="IsChecked"/>
+                        <MultiBinding Converter="{StaticResource SelectionToStylusShapeConverter}" UpdateSourceTrigger="PropertyChanged">
+                            <Binding Source="{x:Static u:UserSettings.All}" Path="BoardStylusWidth" UpdateSourceTrigger="PropertyChanged"/>
+                            <Binding Source="{x:Static u:UserSettings.All}" Path="BoardStylusHeight" UpdateSourceTrigger="PropertyChanged"/>
+                            <Binding ElementName="EraserRectangleRadioButton" Path="IsChecked" UpdateSourceTrigger="PropertyChanged"/>
                         </MultiBinding>
                     </n:InkCanvasExtended.EraserShape>
                 </n:InkCanvasExtended>
@@ -239,15 +238,15 @@
                                ContentHeight="10" Padding="4,1" TabIndex="1" Click="CloseButton_Click"/>
 
                 <TextBlock Grid.Row="0" Grid.Column="1" x:Name="CaptionText" Text="{Binding Title, ElementName=BoardLightWindow}" FontFamily="Segoe UI" FontSize="12"
-                           FontWeight="Regular" Margin="5,0,0,0" Foreground="{DynamicResource Element.Foreground.Medium}" Effect="{DynamicResource Shadow.Foreground.Small}"/>
+                           FontWeight="Regular" Margin="5,0,0,0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
 
                 <TextBlock Grid.Row="1" Grid.Column="1" x:Name="FrameCountTextBlock" Text="{Binding FrameCount, ElementName=BoardLightWindow, Converter={StaticResource IntToStringConverter}}" 
-                           FontFamily="Segoe UI" FontSize="12" FontWeight="Regular" Margin="5,0,0,0" Foreground="{DynamicResource Element.Foreground.Header}" Effect="{DynamicResource Shadow.Foreground.Small}"/>
+                           FontFamily="Segoe UI" FontSize="12" FontWeight="Regular" Margin="5,0,0,0" Foreground="{DynamicResource Element.Foreground.Header}"/>
             </Grid>
 
             <StackPanel Grid.Column="1" x:Name="ControlStackPanel" Orientation="Horizontal" HorizontalAlignment="Right" ScrollViewer.VerticalScrollBarVisibility="Disabled" >
                 <n:ImageButton x:Name="OptionsButton" Content="{StaticResource Vector.Options}" Style="{StaticResource Style.Button.NoText}" 
-                               Effect="{StaticResource Shadow.Foreground.Small}" MaxSize="20" Command="{StaticResource Command.Options}" Padding="3" TabIndex="0">
+                               MaxSize="20" Command="{StaticResource Command.Options}" Padding="3" TabIndex="0">
                     <n:ImageButton.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource S.StartUp.Options}"/>
                     </n:ImageButton.ToolTip>

@@ -16,7 +16,7 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Column="0" Margin="5,5,5,29" Effect="{StaticResource Shadow.Background.Large}">
+        <Border Grid.Column="0" Margin="5,5,5,29" Effect="{StaticResource Shadow.Border.Large}">
             <Border.Background>
                 <DrawingBrush Viewport="0,0,10,10" ViewportUnits="Absolute" TileMode="Tile">
                     <DrawingBrush.Drawing>
@@ -40,9 +40,10 @@
             </Border.Background>
         </Border>
 
-        <Border Grid.Column="0" x:Name="ColorDetail" HorizontalAlignment="Stretch" Cursor="Cross" Margin="5,5,5,29" SizeChanged="ColorDetailSizeChanged"
-                PreviewMouseMove="OnMouseMove" PreviewMouseLeftButtonDown="OnMouseLeftButtonDown" ClipToBounds="True" MouseLeftButtonUp="ColorDetail_MouseLeftButtonUp" 
-                IsEnabled="False">
+        <Border Grid.Column="0" x:Name="ColorDetail" HorizontalAlignment="Stretch" Cursor="Cross" Margin="5,5,5,29" ClipToBounds="True"
+                Effect="{StaticResource Shadow.Border.Large}" IsEnabled="False" SizeChanged="ColorDetailBorder_SizeChanged" 
+                PreviewMouseMove="ColorDetailBorder_MouseMove" PreviewMouseLeftButtonDown="ColorDetailBorder_MouseLeftButtonDown" 
+                MouseLeftButtonUp="ColorDetailBorder_MouseLeftButtonUp">
 
             <Border.Resources>
                 <c:AlphaToOpacity x:Key="AlphaToOpacity"/>
@@ -108,7 +109,7 @@
                 </EventTrigger>
             </Border.Triggers>
 
-            <Path x:Name="ColorMarker" StrokeThickness="2" Cursor="Cross" Fill="Transparent" RenderTransformOrigin="0.5,0.5" Effect="{DynamicResource Shadow.Black.Small}">
+            <Path x:Name="ColorMarker" StrokeThickness="2" Cursor="Cross" Fill="Transparent" RenderTransformOrigin="0.5,0.5" Effect="{DynamicResource Shadow.Border.Small}">
                 <Path.Data>
                     <EllipseGeometry RadiusX="7" RadiusY="7"/>
                 </Path.Data>
@@ -125,7 +126,7 @@
             </Path>
         </Border>
 
-        <Grid Grid.Column="0" Margin="5,0,5,5" Effect="{StaticResource Shadow.Background.Large}" Height="19" VerticalAlignment="Bottom">
+        <Grid Grid.Column="0" Margin="5,0,5,5" Height="19" VerticalAlignment="Bottom" Effect="{StaticResource Shadow.Border.Large}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -156,32 +157,24 @@
                 </Border.Background>
             </Border>
 
-            <Border Name="InitialColor" Grid.Column="0" Background="White" MouseLeftButtonDown="InitialColor_MouseLeftButtonDown" Cursor="Hand">
-                <Border.ToolTip>
-                    <ToolTip Content="{DynamicResource S.ColorSelector.Initial}" Placement="Bottom" HorizontalOffset="-5"/>
-                </Border.ToolTip>
-            </Border>
+            <Border Name="InitialColor" Grid.Column="0" Background="White" Cursor="Hand" 
+                    ToolTip="{DynamicResource S.ColorSelector.Initial}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"
+                    MouseLeftButtonDown="InitialColor_MouseLeftButtonDown"/>
 
-            <Border Name="CurrentColor" Grid.Column="1" Background="White">
-                <Border.ToolTip>
-                    <ToolTip Content="{DynamicResource S.ColorSelector.Current}" Placement="Bottom" HorizontalOffset="-5"/>
-                </Border.ToolTip>
-            </Border>
+            <Border Name="CurrentColor" Grid.Column="1" Background="White"
+                    ToolTip="{DynamicResource S.ColorSelector.Current}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-            <Border Name="LastColor" Grid.Column="2" Background="White">
-                <Border.ToolTip>
-                    <ToolTip Content="{DynamicResource S.ColorSelector.Latest}" Placement="Bottom" HorizontalOffset="-5"/>
-                </Border.ToolTip>
-            </Border>
+            <Border Name="LastColor" Grid.Column="2" Background="White"
+                    ToolTip="{DynamicResource S.ColorSelector.Latest}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
         </Grid>
 
         <n:SpectrumSlider Grid.Column="1" x:Name="ColorSlider" Value="0" IsMoveToPointEnabled="True" IsSnapToTickEnabled="False" Maximum="360" 
-                          Orientation="Vertical" HorizontalAlignment="Right" Width="36" Margin="0,5" 
+                          Orientation="Vertical" HorizontalAlignment="Right" Width="36" Margin="0,5" Effect="{StaticResource Shadow.Border.Large}"
                           ValueChanged="ColorSlider_ValueChanged" AfterSelecting="ColorSlider_OnAfterSelecting"/>
 
         <n:SpectrumSlider Grid.Column="2" x:Name="AlphaSlider" Value="0" IsMoveToPointEnabled="True" IsSnapToTickEnabled="False" Maximum="255" 
-                          Orientation="Vertical" HorizontalAlignment="Right" Width="36" Margin="5,5,0,5" IsAlphaSpectrum="True" ToolTip="{DynamicResource S.ColorSelector.Alpha}"
-                          ValueChanged="ColorSlider_ValueChanged" AfterSelecting="ColorSlider_OnAfterSelecting"/>
+                          Orientation="Vertical" HorizontalAlignment="Right" Width="36" Margin="5,5,0,5" IsAlphaSpectrum="True" Effect="{StaticResource Shadow.Border.Large}" 
+                          ToolTip="{DynamicResource S.ColorSelector.Alpha}" ValueChanged="ColorSlider_ValueChanged" AfterSelecting="ColorSlider_OnAfterSelecting"/>
 
         <Grid Grid.Column="3">
             <Grid.RowDefinitions>
@@ -200,7 +193,7 @@
                 <ColumnDefinition Width="*" MinWidth="90"/>
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="{DynamicResource S.ColorSelector.Select}" FontSize="14" Foreground="{DynamicResource Element.Foreground.Header}" Effect="{StaticResource Shadow.Foreground.Small}"/>
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="{DynamicResource S.ColorSelector.Select}" FontSize="14" Foreground="{DynamicResource Element.Foreground.Header}"/>
 
             <Label Grid.Row="1" Grid.Column="0" Content="{DynamicResource S.ColorSelector.Red}" Foreground="{DynamicResource Element.Foreground.Medium}" Margin="5" VerticalContentAlignment="Center" Padding="3"/>
             <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="RedIntegerUpDown" Margin="5,3" MaxLength="4" Padding="2,0" Maximum="255" 
@@ -227,16 +220,13 @@
                               Green="{Binding ElementName=GreenIntegerUpDown, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               Blue="{Binding ElementName=BlueIntegerUpDown, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-            <Grid Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" >
+            <Grid Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2">
                 <n:ImageButton x:Name="EyeDropperButton" Content="{StaticResource Vector.Crosshair}" Margin="5" Style="{StaticResource Style.Button.Vertical}" 
-                               Text="{DynamicResource S.ColorSelector.Sample}" HorizontalContentAlignment="Center" ContentHeight="20" ContentWidth="20" Padding="3" TabIndex="2" PreviewMouseDown="EyeDropperButton_PreviewMouseDown">
-                    <n:ImageButton.ToolTip>
-                        <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource S.ColorSelector.Sample.Info}"/>
-                    </n:ImageButton.ToolTip>
-                </n:ImageButton>
+                               Text="{DynamicResource S.ColorSelector.Sample}" HorizontalContentAlignment="Center" ContentHeight="20" ContentWidth="20" Padding="3" TabIndex="2" 
+                               ToolTip="{DynamicResource S.ColorSelector.Sample.Info}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5" PreviewMouseDown="EyeDropperButton_PreviewMouseDown"/>
 
-                <Image x:Name="EyeDropperImage" Margin="5" Opacity="0" IsHitTestVisible="False" RenderOptions.BitmapScalingMode="NearestNeighbor" Effect="{StaticResource Shadow.Black.Large}" 
-                       Stretch="Uniform" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <Image x:Name="EyeDropperImage" Margin="5" Opacity="0" IsHitTestVisible="False" RenderOptions.BitmapScalingMode="NearestNeighbor" Effect="{StaticResource Shadow.Border.Small}" 
+                       Stretch="Uniform" VerticalAlignment="Center" HorizontalAlignment="Center" Width="{Binding ElementName=EyeDropperButton, Path=ActualWidth}" Height="{Binding ElementName=EyeDropperButton, Path=ActualHeight}"/>
 
                 <Viewbox Opacity="{Binding ElementName=EyeDropperImage, Path=Opacity}" Child="{StaticResource Vector.Crosshair.Color}" VerticalAlignment="Center" HorizontalAlignment="Center" IsHitTestVisible="False"
                          Height="50" Width="50"/>

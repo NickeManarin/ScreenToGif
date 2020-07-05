@@ -104,6 +104,25 @@ namespace ScreenToGif.Controls
         public static readonly DependencyProperty CommandOutputProperty = DependencyProperty.Register(nameof(CommandOutput), typeof(string), typeof(EncoderListViewItem),
             new FrameworkPropertyMetadata(null));
 
+        
+        public static readonly DependencyProperty TotalTimeProperty = DependencyProperty.Register(nameof(TotalTime), typeof(TimeSpan), typeof(EncoderListViewItem),
+            new PropertyMetadata(TimeSpan.Zero));
+        
+        public static readonly DependencyProperty TimeToAnalyzeProperty = DependencyProperty.Register(nameof(TimeToAnalyze), typeof(TimeSpan), typeof(EncoderListViewItem), 
+            new PropertyMetadata(TimeSpan.Zero, TimeSpan_PropertyChanged));
+
+        public static readonly DependencyProperty TimeToEncodeProperty = DependencyProperty.Register(nameof(TimeToEncode), typeof(TimeSpan), typeof(EncoderListViewItem), 
+            new PropertyMetadata(TimeSpan.Zero, TimeSpan_PropertyChanged));
+
+        public static readonly DependencyProperty TimeToUploadProperty = DependencyProperty.Register(nameof(TimeToUpload), typeof(TimeSpan), typeof(EncoderListViewItem), 
+            new PropertyMetadata(TimeSpan.Zero, TimeSpan_PropertyChanged));
+
+        public static readonly DependencyProperty TimeToCopyProperty = DependencyProperty.Register(nameof(TimeToCopy), typeof(TimeSpan), typeof(EncoderListViewItem), 
+            new PropertyMetadata(TimeSpan.Zero, TimeSpan_PropertyChanged));
+
+        public static readonly DependencyProperty TimeToExecuteProperty = DependencyProperty.Register(nameof(TimeToExecute), typeof(TimeSpan), typeof(EncoderListViewItem), 
+            new PropertyMetadata(TimeSpan.Zero, TimeSpan_PropertyChanged));
+
         #endregion
 
         #region Properties
@@ -385,6 +404,67 @@ namespace ScreenToGif.Controls
             set => SetCurrentValue(CommandOutputProperty, value);
         }
 
+
+        /// <summary>
+        /// The total time to finish the process.
+        /// </summary>
+        [Description("The total time to finish the process.")]
+        public TimeSpan TotalTime
+        {
+            get => (TimeSpan)GetValue(TotalTimeProperty);
+            set => SetValue(TotalTimeProperty, value);
+        }
+        
+        /// <summary>
+        /// The time it took to analyze the frames.
+        /// </summary>
+        [Description("The time it took to analyze the frames.")]
+        public TimeSpan TimeToAnalyze
+        {
+            get => (TimeSpan)GetValue(TimeToAnalyzeProperty);
+            set => SetValue(TimeToAnalyzeProperty, value);
+        }
+
+        /// <summary>
+        /// The time it took to encode the frames.
+        /// </summary>
+        [Description("The time it took to encode the frames.")]
+        public TimeSpan TimeToEncode
+        {
+            get => (TimeSpan)GetValue(TimeToEncodeProperty);
+            set => SetValue(TimeToEncodeProperty, value);
+        }
+
+        /// <summary>
+        /// The time it took to upload the file.
+        /// </summary>
+        [Description("The time it took to upload the file.")]
+        public TimeSpan TimeToUpload
+        {
+            get => (TimeSpan)GetValue(TimeToUploadProperty);
+            set => SetValue(TimeToUploadProperty, value);
+        }
+
+        /// <summary>
+        /// The time it took to copy the file.
+        /// </summary>
+        [Description("The time it took to copy the file.")]
+        public TimeSpan TimeToCopy
+        {
+            get => (TimeSpan)GetValue(TimeToCopyProperty);
+            set => SetValue(TimeToCopyProperty, value);
+        }
+
+        /// <summary>
+        /// The time it took to execute the post encoding commands.
+        /// </summary>
+        [Description("The time it took to execute the post encoding commands.")]
+        public TimeSpan TimeToExecute
+        {
+            get => (TimeSpan)GetValue(TimeToExecuteProperty);
+            set => SetValue(TimeToExecuteProperty, value);
+        }
+
         #endregion
 
         #region Custom Events
@@ -455,6 +535,7 @@ namespace ScreenToGif.Controls
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(EncoderListViewItem), new FrameworkPropertyMetadata(typeof(EncoderListViewItem)));
         }
+
 
         public override void OnApplyTemplate()
         {
@@ -647,6 +728,7 @@ namespace ScreenToGif.Controls
             }
         }
 
+
         private static void OutputFilename_PropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (!(d is EncoderListViewItem item))
@@ -654,6 +736,15 @@ namespace ScreenToGif.Controls
 
             item.OutputPath = Path.GetDirectoryName(item.OutputFilename);
         }
+
+        private static void TimeSpan_PropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (!(d is EncoderListViewItem item))
+                return;
+
+            item.TotalTime = item.TimeToAnalyze + item.TimeToEncode + item.TimeToUpload + item.TimeToCopy + item.TimeToExecute;
+        }
+
 
         private void SetClipboard(DataObject data)
         {

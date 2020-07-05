@@ -132,9 +132,9 @@ namespace ScreenToGif.Model
 
         public override string ToString()
         {
-            return $"{(Type == ProgressType.Bar ? LocalizationHelper.Get("Progress.Type.Bar") : LocalizationHelper.Get("Progress.Type.Text"))}, " +
-                   $"{LocalizationHelper.Get("Color")} #{Color.A:X2}{Color.R:X2}{Color.G:X2}{Color.B:X2}" +
-                   $"{(Type == ProgressType.Text ? ", " + LocalizationHelper.GetWithIndex(Precision, "Progress.Precision.", "Minutes", "Seconds", "Miliseconds", "Percentage", "Count", "DateOfRecording", "Custom") : "")}";
+            return $"{(Type == ProgressType.Bar ? LocalizationHelper.Get("S.Progress.Type.Bar") : LocalizationHelper.Get("S.Progress.Type.Text"))}, " +
+                   $"{LocalizationHelper.Get("S.Color")} #{Color.A:X2}{Color.R:X2}{Color.G:X2}{Color.B:X2}" +
+                   $"{(Type == ProgressType.Text ? ", " + LocalizationHelper.GetWithIndex(Precision, "S.Progress.Precision.", "Minutes", "Seconds", "Milliseconds", "Percentage", "Count", "DateOfRecording", "Custom") : "")}";
         }
 
         public static ProgressModel Default()

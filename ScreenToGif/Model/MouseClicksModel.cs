@@ -34,7 +34,7 @@ namespace ScreenToGif.Model
 
         public override string ToString()
         {
-            return $"{LocalizationHelper.Get("Caption.Color")} #{ForegroundColor.A:X2}{ForegroundColor.R:X2}{ForegroundColor.G:X2}{ForegroundColor.B:X2}, {LocalizationHelper.Get("FreeDrawing.Width")} {Width}, {LocalizationHelper.Get("FreeDrawing.Height")} {Height}";
+            return $"{LocalizationHelper.Get("S.Caption.Color")} #{ForegroundColor.A:X2}{ForegroundColor.R:X2}{ForegroundColor.G:X2}{ForegroundColor.B:X2}, {LocalizationHelper.Get("S.FreeDrawing.Width")} {Width}, {LocalizationHelper.Get("S.FreeDrawing.Height")} {Height}";
         }
 
         public static MouseClicksModel Default()

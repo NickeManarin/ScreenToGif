@@ -4,7 +4,7 @@
         xmlns:c="clr-namespace:ScreenToGif.Controls"
         Title="{DynamicResource S.Localization}" MinHeight="300" MinWidth="500" MaxHeight="500" SizeToContent="WidthAndHeight"
         Icon="/ScreenToGif;component/Resources/Logo.ico" WindowStartupLocation="CenterOwner" SnapsToDevicePixels="True" 
-        Background="{DynamicResource Panel.Background}" Loaded="Localization_OnLoaded">
+        Background="{DynamicResource Panel.Background}" Loaded="Localization_Loaded">
 
     <Window.CommandBindings>
         <CommandBinding Command="{StaticResource Command.MoveUp}" CanExecute="MoveUp_CanExecute" Executed="MoveUp_Executed"/>
@@ -72,8 +72,8 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0" TextAlignment="Center" VerticalAlignment="Center" FontSize="13" Foreground="{DynamicResource Element.Foreground.Header}" Margin="0">
-                <Run Text="{DynamicResource S.Localization.ResourcePositionUsed}"/><LineBreak/>
-                <Run Text="{DynamicResource S.Localization.MoveRosourcePosition}"/>
+                <Run Text="{DynamicResource S.Localization.Usage.First}"/><LineBreak/>
+                <Run Text="{DynamicResource S.Localization.Usage.Second}"/>
             </TextBlock>
 
             <c:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource S.Ok}" Margin="5" Content="{StaticResource Vector.Ok}" IsCancel="True" MaxSize="15"

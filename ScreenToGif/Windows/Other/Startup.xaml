@@ -32,16 +32,16 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" Text="ScreenToGif" Margin="10" FontSize="18" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}" Effect="{DynamicResource Shadow.Black.Small}"/>
+            <TextBlock Grid.Column="0" Text="ScreenToGif" Margin="10" FontSize="18" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}" Effect="{DynamicResource Shadow.Border.Small}"/>
 
-            <TextBlock Grid.Column="1" Name="UpdateTextBlock" VerticalAlignment="Center" Visibility="Hidden" Effect="{StaticResource Shadow.Black.Small}">
+            <TextBlock Grid.Column="1" Name="UpdateTextBlock" VerticalAlignment="Center" Visibility="Hidden" Effect="{StaticResource Shadow.Border.Small}">
                 <Hyperlink Command="{StaticResource Command.Update}" ToolTip="{DynamicResource S.StartUp.NewRelease.Tooltip}" Cursor="Hand">
                     <Run Name="UpdateRun" Text="{DynamicResource S.StartUp.NewRelease}"/>
                 </Hyperlink>
             </TextBlock>
 
             <n:ImageButton Grid.Column="3" Text="{DynamicResource S.StartUp.Options}" Content="{StaticResource Vector.Options}" 
-                           Margin="5" Style="{StaticResource Style.Button.Horizontal}" Effect="{StaticResource Shadow.Black.Small}"
+                           Margin="5" Style="{StaticResource Style.Button.Horizontal}" Effect="{StaticResource Shadow.Border.Small}"
                            Padding="2" MaxSize="25" Command="{Binding OpenOptions}"/>
         </Grid>
 
@@ -54,22 +54,22 @@
             </Grid.ColumnDefinitions>
 
             <n:ImageButton Grid.Column="0" Text="{DynamicResource S.StartUp.Recorder}" Margin="5,0,5,5" FontSize="13" Style="{StaticResource Style.Button.Vertical.Border}"
-                           Effect="{StaticResource Shadow.Black.Tiny}" ContentWidth="36" ContentHeight="36" Content="{StaticResource Vector.Record.New}" 
+                           Effect="{StaticResource Shadow.Border.Tiny}" ContentWidth="36" ContentHeight="36" Content="{StaticResource Vector.Record.New}" 
                            Command="{Binding OpenRecorder}" CommandParameter="{Binding ElementName=StartupWindow}" 
                            ToolTip="{DynamicResource S.StartUp.Recorder.Tooltip}" ToolTipService.Placement="Bottom"/>
 
             <n:ImageButton Grid.Column="1" Text="{DynamicResource S.StartUp.Webcam}" Margin="5,0,5,5" FontSize="13" Style="{StaticResource Style.Button.Vertical.Border}"
-                           Effect="{StaticResource Shadow.Black.Tiny}" ContentWidth="36" ContentHeight="36" Content="{StaticResource Vector.Camera.New}" 
+                           Effect="{StaticResource Shadow.Border.Tiny}" ContentWidth="36" ContentHeight="36" Content="{StaticResource Vector.Camera.New}" 
                            Command="{Binding OpenWebcamRecorder}" CommandParameter="{Binding ElementName=StartupWindow}" 
                            ToolTip="{DynamicResource S.StartUp.Webcam.Tooltip}" ToolTipService.Placement="Bottom"/>
 
             <n:ImageButton Grid.Column="2" Text="{DynamicResource S.StartUp.Board}" Margin="5,0,5,5" FontSize="13" Style="{StaticResource Style.Button.Vertical.Border}"
-                           Effect="{StaticResource Shadow.Black.Tiny}" ContentWidth="36" ContentHeight="36" Content="{StaticResource Vector.Board.New}" 
+                           Effect="{StaticResource Shadow.Border.Tiny}" ContentWidth="36" ContentHeight="36" Content="{StaticResource Vector.Board.New}" 
                            Command="{Binding OpenBoardRecorder}" CommandParameter="{Binding ElementName=StartupWindow}"
                            ToolTip="{DynamicResource S.StartUp.Board.Tooltip}" ToolTipService.Placement="Bottom"/>
 
             <n:ImageButton Grid.Column="3" Text="{DynamicResource S.StartUp.Editor}" Margin="5,0,5,5" FontSize="13" Style="{StaticResource Style.Button.Vertical.Border}"
-                           Effect="{StaticResource Shadow.Black.Tiny}" ContentWidth="36" ContentHeight="36" Content="{StaticResource Vector.Editor}" 
+                           Effect="{StaticResource Shadow.Border.Tiny}" ContentWidth="36" ContentHeight="36" Content="{StaticResource Vector.Editor}" 
                            Command="{Binding OpenEditor}" CommandParameter="{Binding ElementName=StartupWindow}" 
                            ToolTip="{DynamicResource S.StartUp.Editor.Tooltip}" ToolTipService.Placement="Bottom"/>
         </Grid>

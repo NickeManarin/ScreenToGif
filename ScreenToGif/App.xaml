@@ -4,8 +4,8 @@
              xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
              xmlns:n="clr-namespace:ScreenToGif.Controls"
              xmlns:m="clr-namespace:ScreenToGif.Model"
-             ShutdownMode="OnExplicitShutdown" Startup="Application_Startup" Exit="App_OnExit" 
-             DispatcherUnhandledException="App_OnDispatcherUnhandledException">
+             ShutdownMode="OnExplicitShutdown" Startup="App_Startup" Exit="App_Exit" 
+             DispatcherUnhandledException="App_DispatcherUnhandledException">
 
     <Application.Resources>
         <ResourceDictionary>
@@ -71,35 +71,11 @@
             <c:EnumToVisibility x:Key="EnumToVisibility"/>
             <c:InvertedBool x:Key="InvertedBool"/>
             <c:CommandToInputGestureText x:Key="CommandToInputGestureText"/>
-
+            <c:EnumToBool x:Key="EnumToBool"/>
+            <c:InvertedEnumToBool x:Key="InvertedEnumToBool"/>
+            
             <!--Effects-->
-            <DropShadowEffect x:Key="Shadow.Black.Tiny" ShadowDepth="0" Color="#FF000000" Opacity=".15" BlurRadius="2" RenderingBias="Quality"/>
-            <DropShadowEffect x:Key="Shadow.Black.Small" ShadowDepth="0" Color="#FF000000" Opacity=".2" BlurRadius="2" RenderingBias="Performance"/>
-            <DropShadowEffect x:Key="Shadow.Black" ShadowDepth="0" Color="#FF000000" Opacity="1" BlurRadius="2" RenderingBias="Quality"/>
-            <DropShadowEffect x:Key="Shadow.Black.Dark" ShadowDepth="0" Color="#FF000000" Opacity=".5" BlurRadius="2" RenderingBias="Quality"/>
-            <DropShadowEffect x:Key="Shadow.Black.Large" ShadowDepth="0" Color="#FF000000" Opacity=".35" BlurRadius="5" RenderingBias="Quality"/>
-
-            <DropShadowEffect x:Key="Shadow.Grey" ShadowDepth="0" Color="#FFBEBEBE" Opacity=".5" BlurRadius="3" RenderingBias="Quality"/>
-
-            <DropShadowEffect x:Key="Shadow.Foreground.Large" ShadowDepth="0" Color="{Binding ForegroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="5" RenderingBias="Quality"/>
-            <DropShadowEffect x:Key="Shadow.Foreground" ShadowDepth="0" Color="{Binding ForegroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="3" RenderingBias="Quality"/>
-            <DropShadowEffect x:Key="Shadow.Foreground.Normal" ShadowDepth="0" Color="{Binding ForegroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".2" BlurRadius="3" RenderingBias="Quality"/>
-            <DropShadowEffect x:Key="Shadow.Foreground.Small" ShadowDepth="0" Color="{Binding ForegroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".2" BlurRadius="2" RenderingBias="Quality"/>
-
-            <DropShadowEffect x:Key="Shadow.Background.Tiny" ShadowDepth="0" Color="{Binding BackgroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".1" BlurRadius="1" RenderingBias="Quality"/>
-            <DropShadowEffect x:Key="Shadow.Background.Small" ShadowDepth="0" Color="{Binding BackgroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".2" BlurRadius="2" RenderingBias="Quality"/>
-            <DropShadowEffect x:Key="Shadow.Background" ShadowDepth="0" Color="{Binding BackgroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="3" RenderingBias="Quality"/>
-            <DropShadowEffect x:Key="Shadow.Background.Large" ShadowDepth="0" Color="{Binding BackgroundColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="5" RenderingBias="Quality"/>
-
-            <DropShadowEffect x:Key="Shadow.Border.Tiny" ShadowDepth="0" Color="{Binding BorderColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".15" BlurRadius="2" RenderingBias="Quality"/>
-            <DropShadowEffect x:Key="Shadow.Border.Small" ShadowDepth="0" Color="{Binding BorderColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".2" BlurRadius="3" RenderingBias="Quality"/>
-            <DropShadowEffect x:Key="Shadow.Border" ShadowDepth="0" Color="{Binding BorderColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".35" BlurRadius="3" RenderingBias="Quality"/>
-            <DropShadowEffect x:Key="Shadow.Border.Large" ShadowDepth="0" Color="{Binding BorderColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".4" BlurRadius="5" RenderingBias="Quality"/>
-            <DropShadowEffect x:Key="Shadow.Border.Dark" ShadowDepth="0" Color="{Binding BorderColor, RelativeSource={RelativeSource TemplatedParent}}" Opacity=".5" BlurRadius="3" RenderingBias="Quality"/>
-
-            <DropShadowEffect x:Key="Glow.Foreground.Large" ShadowDepth="0" Color="WhiteSmoke" Opacity="1" BlurRadius="5" RenderingBias="Quality"/>
             <DropShadowEffect x:Key="Shadow.Invariant" ShadowDepth="0" Color="Transparent" Opacity="0" BlurRadius="0" RenderingBias="Performance"/>
-            <BlurEffect x:Key="Blur" Radius="1" RenderingBias="Quality" KernelType="Gaussian"/>
 
             <!--Notification Icon-->
             <n:NotifyIcon x:Key="NotifyIcon" IconSource="/Resources/Logo.ico" DataContext="{StaticResource AppViewModel}" NotifyToolTipText="ScreenToGif" Visibility="Collapsed" 
@@ -198,7 +174,7 @@
                 <Setter Property="Foreground" Value="{DynamicResource Element.Foreground.Medium}"/>
                 <Setter Property="MinWidth" Value="20"/>
                 <Setter Property="SnapsToDevicePixels" Value="True"/>
-                <Setter Property="Effect" Value="{DynamicResource Shadow.Grey}"/>
+                <Setter Property="Effect" Value="{DynamicResource Shadow.Border.Dark}"/>
 
                 <Setter Property="Template">
                     <Setter.Value>
@@ -218,7 +194,7 @@
                 <Setter Property="Grid.IsSharedSizeScope" Value="True"/>
                 <Setter Property="Placement" Value="Bottom"/>
                 <Setter Property="HorizontalOffset" Value="-5"/>
-                <Setter Property="Effect" Value="{DynamicResource Shadow.Grey}"/>
+                <Setter Property="Effect" Value="{DynamicResource Shadow.Border.Dark}"/>
                 <Setter Property="Background" Value="{DynamicResource Element.Background}"/>
                 <Setter Property="BorderBrush" Value="{DynamicResource Element.Border}"/>
                 <Setter Property="Foreground" Value="{DynamicResource Element.Foreground.Medium}"/>

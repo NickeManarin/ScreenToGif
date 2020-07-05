@@ -297,7 +297,7 @@ namespace ScreenToGif.Util
         [Flags]
         private enum KnownFolderFlags : uint
         {
-            SimpleIDList = 0x00000100,
+            SimpleIdList = 0x00000100,
             NotParentRelative = 0x00000200,
             DefaultPath = 0x00000400,
             Init = 0x00000800,
@@ -438,15 +438,54 @@ namespace ScreenToGif.Util
         [StructLayout(LayoutKind.Sequential)]
         internal struct WindowInfo
         {
+            /// <summary>
+            /// The size of the structure, in bytes. The caller must set this member to sizeof(WINDOWINFO).
+            /// </summary>
             internal uint cbSize;
+
+            /// <summary>
+            /// The coordinates of the window.
+            /// </summary>
             internal Rect rcWindow;
+
+            /// <summary>
+            /// The coordinates of the client area.
+            /// </summary>
             internal Rect rcClient;
+
+            /// <summary>
+            /// The window styles. For a table of window styles, see Window Styles (https://docs.microsoft.com/en-us/windows/win32/winmsg/window-styles).
+            /// </summary>
             internal uint dwStyle;
+
+            /// <summary>
+            /// The extended window styles. For a table of extended window styles, see Extended Window Styles (https://docs.microsoft.com/en-us/windows/win32/winmsg/extended-window-styles).
+            /// </summary>
             internal uint dwExStyle;
+
+            /// <summary>
+            /// The window status. If this member is WS_ACTIVECAPTION (0x0001), the window is active. Otherwise, this member is zero.
+            /// </summary>
             internal uint dwWindowStatus;
+
+            /// <summary>
+            /// The width of the window border, in pixels.
+            /// </summary>
             internal uint cxWindowBorders;
+
+            /// <summary>
+            /// The height of the window border, in pixels.
+            /// </summary>
             internal uint cyWindowBorders;
+
+            /// <summary>
+            /// The window class atom (see RegisterClass).
+            /// </summary>
             internal ushort atomWindowType;
+
+            /// <summary>
+            /// The Windows version of the application that created the window.
+            /// </summary>
             internal ushort wCreatorVersion;
 
             internal WindowInfo(bool? filler) : this()
@@ -989,6 +1028,132 @@ namespace ScreenToGif.Util
             [MarshalAs(UnmanagedType.LPWStr)] public string lpszClassName;
         }
 
+        internal enum ShowWindowCommands
+        {
+            /// <summary>
+            /// Hides the window and activates another window.
+            /// </summary>
+            Hide = 0,
+            /// <summary>
+            /// Activates and displays a window. If the window is minimized or
+            /// maximized, the system restores it to its original size and position.
+            /// An application should specify this flag when displaying the window
+            /// for the first time.
+            /// </summary>
+            Normal = 1,
+            /// <summary>
+            /// Activates the window and displays it as a minimized window.
+            /// </summary>
+            ShowMinimized = 2,
+            /// <summary>
+            /// Maximizes the specified window.
+            /// </summary>
+            Maximize = 3, // is this the right value?
+            /// <summary>
+            /// Activates the window and displays it as a maximized window.
+            /// </summary>      
+            ShowMaximized = 3,
+            /// <summary>
+            /// Displays a window in its most recent size and position. This value
+            /// is similar to <see cref="ShowWindowCommands.Normal"/>, except
+            /// the window is not activated.
+            /// </summary>
+            ShowNoActivate = 4,
+            /// <summary>
+            /// Activates the window and displays it in its current size and position.
+            /// </summary>
+            Show = 5,
+            /// <summary>
+            /// Minimizes the specified window and activates the next top-level
+            /// window in the Z order.
+            /// </summary>
+            Minimize = 6,
+            /// <summary>
+            /// Displays the window as a minimized window. This value is similar to
+            /// <see cref="ShowWindowCommands.ShowMinimized"/>, except the
+            /// window is not activated.
+            /// </summary>
+            ShowMinNoActive = 7,
+            /// <summary>
+            /// Displays the window in its current size and position. This value is
+            /// similar to <see cref="ShowWindowCommands.Show"/>, except the
+            /// window is not activated.
+            /// </summary>
+            ShowNa = 8,
+            /// <summary>
+            /// Activates and displays the window. If the window is minimized or
+            /// maximized, the system restores it to its original size and position.
+            /// An application should specify this flag when restoring a minimized window.
+            /// </summary>
+            Restore = 9,
+            /// <summary>
+            /// Sets the show state based on the SW_* value specified in the
+            /// STARTUPINFO structure passed to the CreateProcess function by the
+            /// program that started the application.
+            /// </summary>
+            ShowDefault = 10,
+            /// <summary>
+            ///  <b>Windows 2000/XP:</b> Minimizes a window, even if the thread
+            /// that owns the window is not responding. This flag should only be
+            /// used when minimizing windows from a different thread.
+            /// </summary>
+            ForceMinimize = 11
+        }
+
+        /// <summary>
+        /// Contains information about the placement of a window on the screen.
+        /// </summary>
+        [Serializable]
+        [StructLayout(LayoutKind.Sequential)]
+        internal struct WindowPlacement
+        {
+            /// <summary>
+            /// The length of the structure, in bytes. Before calling the GetWindowPlacement or SetWindowPlacement functions, set this member to sizeof(WINDOWPLACEMENT).
+            /// <para>
+            /// GetWindowPlacement and SetWindowPlacement fail if this member is not set correctly.
+            /// </para>
+            /// </summary>
+            public int Length;
+
+            /// <summary>
+            /// Specifies flags that control the position of the minimized window and the method by which the window is restored.
+            /// </summary>
+            public int Flags;
+
+            /// <summary>
+            /// The current show state of the window.
+            /// </summary>
+            public ShowWindowCommands ShowCmd;
+
+            /// <summary>
+            /// The coordinates of the window's upper-left corner when the window is minimized.
+            /// </summary>
+            public Point MinPosition;
+
+            /// <summary>
+            /// The coordinates of the window's upper-left corner when the window is maximized.
+            /// </summary>
+            public Point MaxPosition;
+
+            /// <summary>
+            /// The window's coordinates when the window is in the restored position.
+            /// </summary>
+            public Rect NormalPosition;
+
+            /// <summary>
+            /// Gets the default (empty) value.
+            /// </summary>
+            public static WindowPlacement Default
+            {
+                get
+                {
+                    var result = new WindowPlacement();
+                    result.Length = Marshal.SizeOf(result);
+                    return result;
+                }
+            }
+        }
+
         public enum BitmapCompressionMode : uint
         {
             BI_RGB = 0,
@@ -1290,6 +1455,31 @@ namespace ScreenToGif.Util
 
         [DllImport("user32.dll", SetLastError = true)]
         internal static extern bool GetWindowRect(IntPtr hwnd, out Rect lpRect);
+
+        [DllImport("user32.dll")]
+        internal static extern bool GetClientRect(IntPtr hWnd, out Rect lpRect);
+
+        /// <summary>
+        /// Retrieves the show state and the restored, minimized, and maximized positions of the specified window.
+        /// </summary>
+        /// <param name="hWnd">
+        /// A handle to the window.
+        /// </param>
+        /// <param name="lpwndpl">
+        /// A pointer to the WINDOWPLACEMENT structure that receives the show state and position information.
+        /// <para>
+        /// Before calling GetWindowPlacement, set the length member to sizeof(WINDOWPLACEMENT). GetWindowPlacement fails if lpwndpl-> length is not set correctly.
+        /// </para>
+        /// </param>
+        /// <returns>
+        /// If the function succeeds, the return value is nonzero.
+        /// <para>
+        /// If the function fails, the return value is zero. To get extended error information, call GetLastError.
+        /// </para>
+        /// </returns>
+        [DllImport("user32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static extern bool GetWindowPlacement(IntPtr hWnd, ref WindowPlacement lpwndpl);
 
         [DllImport("dwmapi.dll")]
         private static extern int DwmGetWindowAttribute(IntPtr hwnd, int dwAttribute, out bool pvAttribute, int cbAttribute);
@@ -2028,6 +2218,89 @@ namespace ScreenToGif.Util
 
             return windows.OrderBy(o => o.Order).ToList();
         }
+
+        /// <summary>
+        /// Returns a dictionary that contains the handle and title of all the open windows inside a given monitor.
+        /// </summary>
+        /// <returns>
+        /// A dictionary that contains the handle and title of all the open windows.
+        /// </returns>
+        internal static List<DetectedRegion> EnumerateWindowsByMonitor(Monitor monitor)
+        {
+            var shellWindow = GetShellWindow();
+
+            var windows = new List<DetectedRegion>();
+
+            //EnumWindows(delegate (IntPtr handle, int lParam)
+            EnumDesktopWindows(IntPtr.Zero, delegate (IntPtr handle, IntPtr lParam)
+            {
+                if (handle == shellWindow)
+                    return true;
+
+                if (!IsWindowVisible(handle))
+                    return true;
+
+                if (IsIconic(handle))
+                    return true;
+
+                var length = GetWindowTextLength(handle);
+
+                if (length == 0)
+                    return true;
+
+                var builder = new StringBuilder(length);
+
+                GetWindowText(handle, builder, length + 1);
+                var title = builder.ToString();
+
+                var info = new WindowInfo(false);
+                GetWindowInfo(handle, ref info);
+
+                //If disabled, ignore.
+                if (((long)info.dwStyle & (uint)WindowStyles.Disabled) == (uint)WindowStyles.Disabled)
+                    return true;
+
+                var infoTile = new TitlebarInfo(false);
+                GetTitleBarInfo(handle, ref infoTile);
+
+                if ((infoTile.rgstate[0] & StateSystemInvisible) == StateSystemInvisible)
+                    return true;
+
+                if ((infoTile.rgstate[0] & StateSystemUnavailable) == StateSystemUnavailable)
+                    return true;
+
+                if ((infoTile.rgstate[0] & StateSystemOffscreen) == StateSystemOffscreen)
+                    return true;
+
+                DwmGetWindowAttribute(handle, (int)DwmWindowAttribute.Cloaked, out bool isCloacked, Marshal.SizeOf(typeof(bool)));
+
+                if (isCloacked)
+                    return true;
+
+                DwmGetWindowAttribute(handle, (int)DwmWindowAttribute.ExtendedFrameBounds, out Rect frameBounds, Marshal.SizeOf(typeof(Rect)));
+
+                var bounds = frameBounds.ToRect(Util.Other.RoundUpValue(monitor.Scale), monitor.Scale);
+
+                var place = WindowPlacement.Default;
+                GetWindowPlacement(handle, ref place);
+
+                //Hack for detecting the correct size of VisualStudio when it's maximized.
+                if (place.ShowCmd == ShowWindowCommands.Maximize && title.Contains("Microsoft Visual Studio"))
+                    bounds = frameBounds.ToRect(-info.cxWindowBorders, monitor.Scale);
+                //bounds = new System.Windows.Rect(new Point(monitor.Bounds.Left / monitor.Scale, monitor.Bounds.Top / monitor.Scale), new Size(info.rcClient.Right / monitor.Scale, info.rcClient.Bottom / monitor.Scale));
+
+                //Windows to the left are not being detected as inside the bounds.
+                if (!bounds.IntersectsWith(monitor.Bounds))
+                    return true;
+
+                windows.Add(new DetectedRegion(handle, bounds, title, GetZOrder(handle)));
+
+                return true;
+            }, IntPtr.Zero);
+
+            return windows.OrderBy(o => o.Order).ToList();
+        }
+
 
         public static char? GetCharFromKey(Key key, bool ignoreState = true)
         {

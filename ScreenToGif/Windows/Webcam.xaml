@@ -62,8 +62,8 @@
 
         <n:WebcamControl Grid.Row="0" x:Name="WebcamControl"/>
 
-        <Label Grid.Row="0" x:Name="NoVideoLabel" Content="{DynamicResource S.Webcam.NoVideo}" Margin="0,0,0,36" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
-               Visibility="Hidden" FontSize="24" Foreground="{DynamicResource Element.Foreground.Header}" FontFamily="Segoe WP Light" Effect="{StaticResource Shadow.Foreground.Small}"/>
+        <Label Grid.Row="0" x:Name="NoVideoLabel" Content="{DynamicResource S.Webcam.NoVideo}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
+               Visibility="Hidden" FontSize="24" Foreground="{DynamicResource Element.Foreground.Header}"/>
 
         <Grid Grid.Row="1" x:Name="LowerGrid" Height="31" VerticalAlignment="Bottom" UseLayoutRounding="True" SnapsToDevicePixels="True">
             <Grid.ColumnDefinitions>
@@ -83,24 +83,21 @@
             </Grid.ColumnDefinitions>
 
             <n:ImageButton x:Name="BackButton" Content="{StaticResource Vector.Back}" Margin="0" 
-                           Style="{StaticResource Style.Button.NoText}" Effect="{StaticResource Shadow.Background.Small}"
-                           HorizontalContentAlignment="Center" ContentHeight="20" MinWidth="30" Padding="2" Click="BackButton_OnClick">
+                           Style="{StaticResource Style.Button.NoText}" HorizontalContentAlignment="Center" ContentHeight="20" MinWidth="30" Padding="2" Click="BackButton_OnClick">
                 <n:ImageButton.ToolTip>
                     <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource S.Back}"/>
                 </n:ImageButton.ToolTip>
             </n:ImageButton>
 
             <n:ImageButton Grid.Column="1" x:Name="OptionsButton" Text="" Content="{StaticResource Vector.Options}" TabIndex="0"
-                           Style="{StaticResource Style.Button.NoText}" Effect="{StaticResource Shadow.Background.Small}"
-                           HorizontalContentAlignment="Center" ContentHeight="20" Padding="3" Command="{StaticResource Command.Options}">
+                           Style="{StaticResource Style.Button.NoText}" HorizontalContentAlignment="Center" ContentHeight="20" Padding="3" Command="{StaticResource Command.Options}">
                 <n:ImageButton.ToolTip>
                     <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource S.StartUp.Options}"/>
                 </n:ImageButton.ToolTip>
             </n:ImageButton>
 
             <n:ImageButton Grid.Column="2" x:Name="ScaleButton" Content="{StaticResource Vector.Resize}" TabIndex="1"
-                           Style="{StaticResource Style.Button.NoText}" Effect="{StaticResource Shadow.Border}" 
-                           HorizontalContentAlignment="Center" ContentHeight="20" Padding="3" Click="ScaleButton_Click"
+                           Style="{StaticResource Style.Button.NoText}" HorizontalContentAlignment="Center" ContentHeight="20" Padding="3" Click="ScaleButton_Click"
                            IsEnabled="{Binding ElementName=VideoDevicesComboBox, Path=IsEnabled}">
                 <n:ImageButton.ToolTip>
                     <ToolTip Placement="Bottom" HorizontalOffset="-5" Content="{DynamicResource S.Webcam.ChangeScale}" />
@@ -108,8 +105,7 @@
             </n:ImageButton>
 
             <n:ImageButton Grid.Column="3" x:Name="RefreshButton" Content="{StaticResource Vector.Repeat}" TabIndex="1"
-                           Style="{StaticResource Style.Button.NoText}" Effect="{StaticResource Shadow.Border}" 
-                           HorizontalContentAlignment="Center" ContentHeight="20" Padding="3" Command="{StaticResource Command.CheckVideoDevices}">
+                           Style="{StaticResource Style.Button.NoText}" HorizontalContentAlignment="Center" ContentHeight="20" Padding="3" Command="{StaticResource Command.CheckVideoDevices}">
                 <n:ImageButton.ToolTip>
                     <ToolTip Placement="Bottom" HorizontalOffset="-5" Content="{DynamicResource S.Webcam.CheckVideoDevices}" />
                 </n:ImageButton.ToolTip>

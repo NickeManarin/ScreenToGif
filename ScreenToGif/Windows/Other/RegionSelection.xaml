@@ -4,7 +4,8 @@
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         x:Name="GhostWindow" Title="ScreenToGif"
         WindowStyle="None" AllowsTransparency="True" Topmost="True" ResizeMode="NoResize"
-        UseLayoutRounding="True" SnapsToDevicePixels="True" Background="Transparent" ShowInTaskbar="False">
+        UseLayoutRounding="True" SnapsToDevicePixels="True" Background="Transparent" ShowInTaskbar="False"
+        DpiChanged="Window_DpiChanged">
 
     <Rectangle x:Name="SelectionRectangle" StrokeDashArray="5" Stroke="#FFABABAB" StrokeThickness="1" IsHitTestVisible="False" Effect="{x:Null}"
                Width="{Binding ElementName=GhostWindow, Path=Width}" Height="{Binding ElementName=GhostWindow, Path=Height}"/>

@@ -94,10 +94,8 @@ namespace ScreenToGif.ImageUtil.Gif.LegacyEncoder
             {
                 img.Save(gifStream, ImageFormat.Gif);
 
-                if (_isFirstImage) // Steal the global color table info
-                {
+                if (_isFirstImage) //Steal the global color table info
                     InitHeader(gifStream, img.Width, img.Height);
-                }
 
                 WriteGraphicControlBlock(gifStream, frameDelay.GetValueOrDefault(FrameDelay));
                 WriteImageBlock(gifStream, !_isFirstImage, x, y, img.Width, img.Height);

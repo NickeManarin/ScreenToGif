@@ -337,7 +337,7 @@ namespace ScreenToGif.Windows.Other
             {
                 if (!Util.Other.IsFfmpegPresent())
                 {
-                    StatusBand.Warning(LocalizationHelper.Get("Editor.Warning.Ffmpeg"), null, () => App.MainViewModel.OpenOptions.Execute(Options.ExtrasIndex));
+                    StatusBand.Warning(LocalizationHelper.Get("S.Editor.Warning.Ffmpeg"), null, () => App.MainViewModel.OpenOptions.Execute(Options.ExtrasIndex));
                     FaultLoading();
                     return;
                 }

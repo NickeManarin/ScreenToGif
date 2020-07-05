@@ -3,7 +3,20 @@
                     xmlns:s="clr-namespace:System;assembly=mscorlib">
 
     <s:Double x:Key="Element.Opacity">0.8</s:Double>
+    
+    <!--Shadows-->
+    <DropShadowEffect x:Key="Shadow.Background.Tiny" ShadowDepth="0" Color="#FF2A2A2A" Opacity=".6" BlurRadius="1" RenderingBias="Quality"/>
+    <DropShadowEffect x:Key="Shadow.Background.Small" ShadowDepth="0" Color="#FF2A2A2A" Opacity=".6" BlurRadius="2" RenderingBias="Quality"/>
+    <DropShadowEffect x:Key="Shadow.Background" ShadowDepth="0" Color="#FF2A2A2A" Opacity=".6" BlurRadius="3" RenderingBias="Quality"/>
+    <DropShadowEffect x:Key="Shadow.Background.Large" ShadowDepth="0" Color="#FF2A2A2A" Opacity=".6" BlurRadius="5" RenderingBias="Quality"/>
 
+    <DropShadowEffect x:Key="Shadow.Border.Tiny" ShadowDepth="0" Color="#FF545454" Opacity=".5" BlurRadius="2" RenderingBias="Quality"/>
+    <DropShadowEffect x:Key="Shadow.Border.Small" ShadowDepth="0" Color="#FF545454" Opacity=".5" BlurRadius="3" RenderingBias="Quality"/>
+    <DropShadowEffect x:Key="Shadow.Border" ShadowDepth="0" Color="#FF545454" Opacity=".5" BlurRadius="3" RenderingBias="Quality"/>
+    <DropShadowEffect x:Key="Shadow.Border.Large" ShadowDepth="0" Color="#FF545454" Opacity=".4" BlurRadius="5" RenderingBias="Quality"/>
+    <DropShadowEffect x:Key="Shadow.Border.Dark" ShadowDepth="0" Color="#FF545454" Opacity=".5" BlurRadius="3" RenderingBias="Quality"/>
+
+    <!--Colors-->
     <SolidColorBrush x:Key="Panel.Background" Color="#FF202020"/>
     <SolidColorBrush x:Key="Panel.Background.Level2" Color="#FF262626"/>
     <SolidColorBrush x:Key="Panel.Background.Level3" Color="#FF2A2A2A"/>

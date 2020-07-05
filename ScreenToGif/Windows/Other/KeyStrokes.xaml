@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:n="clr-namespace:ScreenToGif.Controls"
-        Title="{DynamicResource KeyStrokes.Edit.Title}" MinWidth="350" MinHeight="250" Height="500" Width="450" WindowStartupLocation="CenterScreen"
+        Title="{DynamicResource S.KeyStrokes.Edit.Title}" MinWidth="350" MinHeight="250" Height="500" Width="450" WindowStartupLocation="CenterScreen"
         Background="{DynamicResource Panel.Background}" Loaded="KeyStrokes_Loaded">
 
     <Grid>
@@ -16,7 +16,7 @@
 
         <DataGrid Grid.Row="1" x:Name="KeysDataGrid" Margin="3" MinHeight="60" SelectionMode="Single" MinRowHeight="28" SelectionUnit="FullRow">
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="{DynamicResource KeyStrokes.Edit.Number}" Width="90" IsReadOnly="True" SortMemberPath="Index">
+                <DataGridTemplateColumn Header="{DynamicResource S.KeyStrokes.Edit.Number}" Width="90" IsReadOnly="True" SortMemberPath="Index">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Path=Index, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="3,0"/>
@@ -24,7 +24,7 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn Header="{DynamicResource KeyStrokes.Edit.Keys}" IsReadOnly="True" Width="*" CanUserSort="False">
+                <DataGridTemplateColumn Header="{DynamicResource S.KeyStrokes.Edit.Keys}" IsReadOnly="True" Width="*" CanUserSort="False">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ItemsControl x:Name="MainItemsControl" ItemsSource="{Binding Path=KeyList, UpdateSourceTrigger=PropertyChanged}">
@@ -35,7 +35,7 @@
                                                       AllowAllKeys="True" CanRemove="False" IsSingleLetterLowerCase="{Binding IsUppercase, Mode=TwoWay, Converter={StaticResource InvertedBool}}"/>
 
                                             <n:ImageButton DockPanel.Dock="Right" x:Name="RemoveButton" Content="{StaticResource Vector.Close}" Style="{StaticResource Style.Button.NoText.Border}" 
-                                                           ContentWidth="12" Width="16" Margin="0,1,1,1" BorderThickness="0,1,1,1" Height="23" ToolTip="{DynamicResource KeyStrokes.Edit.Remove}"
+                                                           ContentWidth="12" Width="16" Margin="0,1,1,1" BorderThickness="0,1,1,1" Height="23" ToolTip="{DynamicResource S.KeyStrokes.Edit.Remove}"
                                                            PreviewMouseLeftButtonUp="RemoveButton_OnMouseLeftButtonDown"/>
                                         </DockPanel>
                                     </DataTemplate>
@@ -63,7 +63,7 @@
 
                         <Viewbox Child="{StaticResource Vector.Arrow.Blue.Top}" Margin="5,0"/>
 
-                        <TextBlock Grid.Column="1" Text="{DynamicResource KeyStrokes.Edit.Add}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" Margin="2,3,5,3"/>
+                        <TextBlock Grid.Column="1" Text="{DynamicResource S.KeyStrokes.Edit.Add}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" Margin="2,3,5,3"/>
 
                         <n:KeyBox Grid.Column="2" x:Name="AddKeyBox" MinWidth="100" AllowAllKeys="True" CanRemove="False" IsSingleLetterLowerCase="{Binding ElementName=LowercaseCheckBox, Path=IsChecked}"/>
 
@@ -94,8 +94,8 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <n:ExtendedCheckBox Grid.Column="0" x:Name="LowercaseCheckBox" Text="{DynamicResource KeyStrokes.Edit.Lower}" Margin="3,0" HorizontalAlignment="Center"
-                                ToolTip="{DynamicResource KeyStrokes.Edit.Lower.Info}"/>
+            <n:ExtendedCheckBox Grid.Column="0" x:Name="LowercaseCheckBox" Text="{DynamicResource S.KeyStrokes.Edit.Lower}" Margin="3,0" HorizontalAlignment="Center"
+                                ToolTip="{DynamicResource S.KeyStrokes.Edit.Lower.Info}"/>
 
             <n:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource S.Ok}" Margin="5" Content="{StaticResource Vector.Ok}" IsDefault="True" MaxSize="15"
                            HorizontalAlignment="Right" MinWidth="100" MinHeight="27" VerticalAlignment="Bottom" Click="OkButton_Click"/>

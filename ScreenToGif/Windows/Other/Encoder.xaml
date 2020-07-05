@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:c="clr-namespace:ScreenToGif.Controls"
-        Title="{DynamicResource Encoder.Title}" Icon="/Resources/Logo.ico" Width="320" Height="400" 
+        Title="{DynamicResource S.Encoder.Title}" Icon="/Resources/Logo.ico" Width="320" Height="400" 
         MinWidth="300" MinHeight="300" Background="{DynamicResource Panel.Background}" Closing="Window_Closing" Activated="Window_Activated">
 
     <Window.CommandBindings>
@@ -25,8 +25,8 @@
 
             <Viewbox Grid.Column="0" x:Name="IconViewBox" Child="{StaticResource Vector.ImageStack}" Margin="5" Height="33" Width="33" Opacity="{DynamicResource Element.Opacity}"/>
 
-            <Label Grid.Column="1" x:Name="EncoderLabel" Content="{DynamicResource Encoder.Title}" Margin="10,0,10,0" VerticalAlignment="Center" Padding="2" 
-                   FontSize="24" FontFamily="Segoe UI Semilight" Foreground="{DynamicResource Element.Foreground.Header}" Effect="{StaticResource Shadow.Foreground.Small}">
+            <Label Grid.Column="1" x:Name="EncoderLabel" Content="{DynamicResource S.Encoder.Title}" Margin="10,0,10,0" VerticalAlignment="Center" Padding="2" 
+                   FontSize="24" FontFamily="Segoe UI Semilight" Foreground="{DynamicResource Element.Foreground.Header}">
                 <Label.Triggers>
                     <EventTrigger RoutedEvent="Label.Loaded">
                         <BeginStoryboard>
@@ -50,8 +50,7 @@
         </Grid>
 
         <c:StatusBand Grid.Row="1" x:Name="StatusBand"/>
-
-        <ListView Grid.Row="2" x:Name="EncodingListView" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                  PreviewMouseLeftButtonDown="EncodingListView_PreviewMouseLeftButtonDown" MouseMove="EncodingListView_MouseMove"/>
+        
+        <c:NotificationBox Grid.Row="2" x:Name="NotificationBox" OnlyDisplayList="True" BorderThickness="0" Margin="0"/>
     </Grid>
 </Window>

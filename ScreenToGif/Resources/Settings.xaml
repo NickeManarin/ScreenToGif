@@ -74,6 +74,10 @@
     <s:Boolean x:Key="RecorderThinMode">False</s:Boolean>
     <s:Boolean x:Key="Magnifier">True</s:Boolean>
     <s:Boolean x:Key="FallThroughOtherScreens">False</s:Boolean>
+    <u:CaptureFrequency x:Key="CaptureFrequency">PerSecond</u:CaptureFrequency>
+    <s:Int32 x:Key="PlaybackDelayManual">1000</s:Int32>
+    <s:Int32 x:Key="PlaybackDelayMinute">66</s:Int32>
+    <s:Int32 x:Key="PlaybackDelayHour">66</s:Int32>
     <s:Boolean x:Key="UseDesktopDuplication">False</s:Boolean>
     <s:Boolean x:Key="UseMemoryCache">False</s:Boolean>
     <i:CompressionLevel x:Key="CaptureCompression">Optimal</i:CompressionLevel>
@@ -89,8 +93,6 @@
     <s:Boolean x:Key="DetectMouseClicks">True</s:Boolean>
     <s:Boolean x:Key="UsePreStart">False</s:Boolean>
     <s:Int32 x:Key="PreStartValue">3</s:Int32>
-    <s:Boolean x:Key="SnapshotMode">False</s:Boolean>
-    <s:Int32 x:Key="SnapshotDefaultDelay">1000</s:Int32>
     <s:Boolean x:Key="FixedFrameRate">False</s:Boolean>
     <s:Boolean x:Key="RemoteImprovement">True</s:Boolean>
     <s:Boolean x:Key="AsyncRecording">False</s:Boolean>
@@ -102,6 +104,7 @@
     <Rect x:Key="GridSize">0,0,20,20</Rect>
     <Color x:Key="GridColor1">#FFF5F5F5</Color>
     <Color x:Key="GridColor2">#FFF0F0F0</Color>
+    <s:Boolean x:Key="DisplayEncoder">False</s:Boolean>
     <s:Boolean x:Key="EditorExtendChrome">False</s:Boolean>
     <s:Boolean x:Key="AutomaticallySizeOnContent">False</s:Boolean>
     <s:Boolean x:Key="AutomaticallyFitImage">True</s:Boolean>
@@ -191,7 +194,7 @@
     <!--Editor • Save As-->
     <s:Boolean x:Key="IsSaveTypeExpanded">True</s:Boolean>
     <u:Export x:Key="SaveType">Gif</u:Export>
-    <u:GifEncoderType x:Key="GifEncoder">Legacy</u:GifEncoderType>
+    <u:GifEncoderType x:Key="GifEncoder">ScreenToGif</u:GifEncoderType>
     <u:ApngEncoderType x:Key="ApngEncoder">ScreenToGif</u:ApngEncoderType>
     <u:VideoEncoderType x:Key="VideoEncoder">AviStandalone</u:VideoEncoderType>
     <s:Boolean x:Key="IsGifOptionsExpanded">False</s:Boolean>
@@ -205,13 +208,17 @@
     </c:ArrayList>
     
     <!--Editor • Save As > Gif options-->
-    <s:Int32 x:Key="Quality">10</s:Int32>
+    <u:ColorQuantizationType x:Key="ColorQuantization">Neural</u:ColorQuantizationType>
+    <s:Int32 x:Key="SamplingFactor">5</s:Int32>
     <s:Int32 x:Key="GifskiQuality">50</s:Int32>
     <s:Int32 x:Key="MaximumColors">256</s:Int32>
+    <s:Boolean x:Key="UseGlobalColorTable">False</s:Boolean>
     <s:Boolean x:Key="Looped">True</s:Boolean>
     <s:Boolean x:Key="RepeatForever">True</s:Boolean>
     <s:Int32 x:Key="RepeatCount">2</s:Int32>
-    <u:ColorQuantizationType x:Key="ColorQuantization">Octree</u:ColorQuantizationType>
+    <s:Boolean x:Key="EnableTransparency">false</s:Boolean>
+    <s:Boolean x:Key="SelectTransparencyColor">false</s:Boolean>
+    <Color x:Key="TransparencyColor">#FF000000</Color>
     <s:Boolean x:Key="DetectUnchanged">True</s:Boolean>
     <s:Boolean x:Key="PaintTransparent">True</s:Boolean>
     <Color x:Key="ChromaKey">#FF32CD32</Color>

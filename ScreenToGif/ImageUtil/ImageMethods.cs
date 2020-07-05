@@ -29,11 +29,674 @@ namespace ScreenToGif.ImageUtil
     /// <summary>
     /// Image algorithms.
     /// </summary>
-    public static class ImageMethods
+    internal static class ImageMethods
     {
-        #region Paint Transparent
+        #region Gif transparency
 
-        public static List<FrameInfo> PaintTransparentAndCut(List<FrameInfo> listToEncode, System.Windows.Media.Color transparent, int id, CancellationTokenSource tokenSource)
+        /// <summary>
+        /// Gets the project, scans the each image in the list, replacing the color with a color that will be treated as transparent by the encoder.
+        /// </summary>
+        /// <param name="project">The exported project.</param>
+        /// <param name="source">The color that will be converted to the chroma key, which in turn will be treated as transparent. If null, takes all colors with transparency and convert to the chroma.</param>
+        /// <param name="chroma">The color that will be treated as transparent.</param>
+        /// <param name="taskId">The id of the encoding task.</param>
+        /// <param name="tokenSource">The cancelation token source.</param>
+        /// <returns>The export project, with the images already scanned and altered.</returns>
+        public static ExportProject PaintAndCutForTransparency(ExportProject project, System.Windows.Media.Color? source, System.Windows.Media.Color chroma, int taskId, CancellationTokenSource tokenSource)
+        {
+            using (var oldStream = new FileStream(project.ChunkPath, FileMode.Open, FileAccess.Read, FileShare.Read))
+            {
+                using (var newStream = new FileStream(project.NewChunkPath, FileMode.Create, FileAccess.Write, FileShare.None))
+                {
+                    for (var index = 0; index < project.Frames.Count; index++)
+                    {
+                        #region Cancellation
+
+                        if (tokenSource.Token.IsCancellationRequested)
+                        {
+                            EncodingManager.Update(taskId, Status.Canceled);
+                            break;
+                        }
+
+                        #endregion
+
+                        #region For each frame
+
+                        EncodingManager.Update(taskId, index);
+
+                        //var watch = Stopwatch.StartNew();
+
+                        #region Get image info
+
+                        oldStream.Position = project.Frames[index].DataPosition;
+                        var pixels = oldStream.ReadBytes((int)project.Frames[index].DataLength);
+
+                        var startY = new bool[project.Frames[index].Rect.Height];
+                        var startX = new bool[project.Frames[index].Rect.Width];
+
+                        var height = project.Frames[index].Rect.Height;
+                        var width = project.Frames[index].Rect.Width;
+                        var blockCount = project.Frames[index].ImageDepth / 8;
+
+                        #endregion
+
+                        //Console.WriteLine("Info: " + watch.Elapsed);
+
+                        //Only use Parallel if the image is big enough.
+                        if (width * height > 150000)
+                        {
+                            #region Parallel loop
+
+                            //x - width - sides
+                            Parallel.For(0, pixels.Length / blockCount, i =>
+                            {
+                                i *= blockCount;
+
+                                //Replace all transparent color to a transparent version of the chroma key.
+                                //Replace all colors that match the source color with a transparent version of the chroma key.
+                                if ((!source.HasValue && pixels[i + 3] == 0) || (source.HasValue && pixels[i] == source.Value.B && pixels[i + 1] == source.Value.G && pixels[i + 2] == source.Value.R))
+                                {
+                                    pixels[i] = chroma.B;
+                                    pixels[i + 1] = chroma.G;
+                                    pixels[i + 2] = chroma.R;
+                                    pixels[i + 3] = 0;
+                                }
+                                else
+                                {
+                                    var y = i / blockCount / width;
+                                    var x = i / blockCount - (y * width);
+
+                                    //var current = (y * image1.Width + x) * blockCount == i;
+
+                                    startX[x] = true;
+                                    startY[y] = true;
+                                }
+                            });
+
+                            #endregion
+                        }
+                        else
+                        {
+                            #region Sequential loop
+
+                            for (var i = 0; i < pixels.Length; i += blockCount)
+                            {
+                                //Replace all transparent color to a transparent version of the chroma key.
+                                //Replace all colors that match the source color with a transparent version of the chroma key.
+
+                                if ((!source.HasValue && pixels[i + 3] == 0) || (source.HasValue && pixels[i] == source.Value.B && pixels[i + 1] == source.Value.G && pixels[i + 2] == source.Value.R))
+                                {
+                                    pixels[i] = chroma.B;
+                                    pixels[i + 1] = chroma.G;
+                                    pixels[i + 2] = chroma.R;
+                                    pixels[i + 3] = 0;
+                                }
+                                else
+                                {
+                                    //Actual content, that should be ignored.
+                                    var y = i / blockCount / width;
+                                    var x = i / blockCount - (y * width);
+
+                                    //var current = (y * image1.Width + x) * blockCount == i;
+
+                                    startX[x] = true;
+                                    startY[y] = true;
+                                }
+                            }
+
+                            #endregion
+                        }
+
+                        //Console.WriteLine("Change: " + watch.Elapsed);
+
+                        //First frame gets ignored.
+                        if (index == 0)
+                        {
+                            project.Frames[index].DataPosition = newStream.Position;
+                            project.Frames[index].DataLength = pixels.LongLength;
+
+                            newStream.WriteBytes(pixels);
+                            continue;
+                        }
+
+                        #region Verify positions
+
+                        var firstX = startX.ToList().FindIndex(x => x);
+                        var lastX = startX.ToList().FindLastIndex(x => x);
+
+                        if (firstX == -1)
+                            firstX = 0;
+                        if (lastX == -1)
+                            lastX = width;
+
+                        var firstY = startY.ToList().FindIndex(x => x);
+                        var lastY = startY.ToList().FindLastIndex(x => x);
+
+                        if (lastY == -1)
+                            lastY = height;
+                        if (firstY == -1)
+                            firstY = 0;
+
+                        if (lastX < firstX)
+                        {
+                            var aux = lastX;
+                            lastX = firstX;
+                            firstX = aux;
+                        }
+
+                        if (lastY < firstY)
+                        {
+                            var aux = lastY;
+                            lastY = firstY;
+                            firstY = aux;
+                        }
+
+                        #endregion
+
+                        #region Get the Width and Height
+
+                        var heightCut = Math.Abs(lastY - firstY);
+                        var widthCut = Math.Abs(lastX - firstX);
+
+                        //If nothing changed, shift the delay.
+                        if (heightCut + widthCut == height + width)
+                        {
+                            //TODO: Maximum of 2 bytes, 255 x 100: 25.500 ms
+                            project.Frames[index].Rect = new Int32Rect(0, 0, 0, 0);
+                            project.Frames[index].DataPosition = newStream.Position;
+                            project.Frames[index].DataLength = 0;
+
+                            GC.Collect(1);
+                            continue;
+                        }
+
+                        if (heightCut != height)
+                            heightCut++;
+
+                        if (widthCut != width)
+                            widthCut++;
+
+                        project.Frames[index].Rect = new Int32Rect(firstX, firstY, widthCut, heightCut);
+
+                        #endregion
+
+                        #region Crop and save
+
+                        var newPixels = CropImageArray(pixels, width, 32, project.Frames[index].Rect);
+
+                        project.Frames[index].DataPosition = newStream.Position;
+                        project.Frames[index].DataLength = newPixels.LongLength;
+
+                        newStream.WriteBytes(newPixels);
+
+                        #endregion
+
+                        //Console.WriteLine("Save: " + watch.Elapsed);
+                        //Console.WriteLine();
+
+                        GC.Collect(1);
+
+                        #endregion
+                    }
+                }
+            }
+
+            EncodingManager.Update(taskId, LocalizationHelper.Get("S.Encoder.SavingAnalysis"), true);
+
+            //Detect any empty frame.
+            for (var index = project.Frames.Count - 1; index >= 0; index--)
+            {
+                if (project.Frames[index].DataLength == 0)
+                    project.Frames[index - 1].Delay += project.Frames[index].Delay;
+            }
+
+            //Replaces the chunk file.
+            File.Delete(project.ChunkPath);
+            File.Move(project.NewChunkPath, project.ChunkPath);
+
+            return project;
+        }
+
+        /// <summary>
+        /// Analizes all frames (from the end to the start) and paints all unchanged pixels with a given color, 
+        /// after, it cuts the image to reduce filesize.
+        /// </summary>
+        /// <param name="project">The project with frames to analize.</param>
+        /// <param name="chroma">The color to paint the unchanged pixels.</param>
+        /// <param name="taskId">The Id of the current Task.</param>
+        /// <param name="tokenSource">The cancelation token source.</param>
+        /// <returns>The project contaning all frames and its cut points.</returns>
+        public static ExportProject PaintTransparentAndCut(ExportProject project, System.Windows.Media.Color chroma, int taskId, CancellationTokenSource tokenSource)
+        {
+            using (var oldStream = new FileStream(project.ChunkPath, FileMode.Open, FileAccess.Read, FileShare.Read))
+            {
+                using (var newFileStream = new FileStream(project.NewChunkPath, FileMode.Create, FileAccess.Write, FileShare.None))
+                {
+                    using (var newStream = new BufferedStream(newFileStream, 100 * 1048576)) //Each 1 MB has 1_048_576 bytes.
+                    {
+                        for (var index = project.Frames.Count - 1; index > 0; index--)
+                        {
+                            #region Cancellation
+
+                            if (tokenSource.Token.IsCancellationRequested)
+                            {
+                                EncodingManager.Update(taskId, Status.Canceled);
+                                break;
+                            }
+
+                            #endregion
+
+                            #region For each frame, from the end to the start
+
+                            EncodingManager.Update(taskId, project.Frames.Count - index - 1);
+
+                            //var watch = Stopwatch.StartNew();
+
+                            #region Get image info
+
+                            oldStream.Position = project.Frames[index - 1].DataPosition;
+                            var image1 = oldStream.ReadBytes((int)project.Frames[index - 1].DataLength); //Previous image.
+                            oldStream.Position = project.Frames[index].DataPosition;
+                            var image2 = oldStream.ReadBytes((int)project.Frames[index].DataLength); //Current image.
+
+                            var startY = new bool[project.Frames[index - 1].Rect.Height];
+                            var startX = new bool[project.Frames[index - 1].Rect.Width];
+
+                            var height = project.Frames[index - 1].Rect.Height;
+                            var width = project.Frames[index - 1].Rect.Width;
+                            var blockCount = project.Frames[index - 1].ImageDepth / 8;
+
+                            #endregion
+
+                            //Console.WriteLine("Info: " + watch.Elapsed);
+
+                            //Only use Parallel if the image is big enough.
+                            if (width * height > 150000)
+                            {
+                                #region Parallel Loop
+
+                                //x - width - sides
+                                Parallel.For(0, image1.Length / blockCount, i =>
+                                {
+                                    i *= blockCount;
+
+                                    if (image1[i] != image2[i] || image1[i + 1] != image2[i + 1] || image1[i + 2] != image2[i + 2])
+                                    {
+                                        //Different pixels should remain.
+                                        var y = i / blockCount / width;
+                                        var x = i / blockCount - (y * width);
+
+                                        //image2[i + 3] = 255; When saving frames with transparency without the 'Enable transparency' ticked, the pixels that changed should be set to opaque.
+
+                                        startX[x] = true;
+                                        startY[y] = true;
+                                    }
+                                    else
+                                    {
+                                        image2[i] = chroma.B;
+                                        image2[i + 1] = chroma.G;
+                                        image2[i + 2] = chroma.R;
+                                        image2[i + 3] = 0;
+                                    }
+                                });
+
+                                #endregion
+                            }
+                            else
+                            {
+                                #region Sequential loop
+
+                                for (var i = 0; i < image1.Length; i += blockCount)
+                                {
+                                    if (image1[i] != image2[i] || image1[i + 1] != image2[i + 1] || image1[i + 2] != image2[i + 2])
+                                    {
+                                        //Different pixels should remain.
+                                        var y = i / blockCount / width;
+                                        var x = i / blockCount - (y * width);
+
+                                        //image2[i + 3] = 255; When saving frames with transparency without the 'Enable transparency' ticked, the pixels that changed should be set to opaque.
+
+                                        startX[x] = true;
+                                        startY[y] = true;
+                                    }
+                                    else
+                                    {
+                                        image2[i] = chroma.B;
+                                        image2[i + 1] = chroma.G;
+                                        image2[i + 2] = chroma.R;
+                                        image2[i + 3] = 0;
+                                    }
+                                }
+
+                                #endregion
+                            }
+
+                            //Console.WriteLine("Change: " + watch.Elapsed);
+
+                            #region Verify positions
+
+                            var firstX = startX.ToList().FindIndex(x => x);
+                            var lastX = startX.ToList().FindLastIndex(x => x);
+
+                            if (firstX == -1)
+                                firstX = 0;
+                            if (lastX == -1)
+                                lastX = width;
+
+                            var firstY = startY.ToList().FindIndex(x => x);
+                            var lastY = startY.ToList().FindLastIndex(x => x);
+
+                            if (lastY == -1)
+                                lastY = height;
+                            if (firstY == -1)
+                                firstY = 0;
+
+                            if (lastX < firstX)
+                            {
+                                var aux = lastX;
+                                lastX = firstX;
+                                firstX = aux;
+                            }
+
+                            if (lastY < firstY)
+                            {
+                                var aux = lastY;
+                                lastY = firstY;
+                                firstY = aux;
+                            }
+
+                            #endregion
+
+                            #region Get the Width and Height
+
+                            var heightCut = Math.Abs(lastY - firstY);
+                            var widthCut = Math.Abs(lastX - firstX);
+
+                            //If nothing changed, shift the delay.
+                            if (heightCut + widthCut == height + width)
+                            {
+                                //TODO: Maximum of 2 bytes, 255 x 100: 25.500 ms
+                                project.Frames[index - 1].Delay += project.Frames[index].Delay;
+                                project.Frames[index].Rect = new Int32Rect(0, 0, 0, 0);
+                                project.Frames[index].DataPosition = newStream.Position;
+                                project.Frames[index].DataLength = 0;
+
+                                GC.Collect(1);
+                                continue;
+                            }
+
+                            if (heightCut != height)
+                                heightCut++;
+
+                            if (widthCut != width)
+                                widthCut++;
+
+                            project.Frames[index].Rect = new Int32Rect(firstX, firstY, widthCut, heightCut);
+
+                            #endregion
+
+                            #region Crop and save
+
+                            var newPixels = CropImageArray(image2, width, 32, project.Frames[index].Rect);
+
+                            //Writes to the buffer from end to start. Since I have the position, it does not matter.
+                            project.Frames[index].DataPosition = newStream.Position;
+                            project.Frames[index].DataLength = newPixels.LongLength;
+
+                            newStream.WriteBytes(newPixels);
+
+                            #endregion
+
+                            //SavePixelArrayToFile(newPixels, project.Frames[index].Rect.Width, project.Frames[index].Rect.Height, 4, project.ChunkPath + index + ".png");
+
+                            //Console.WriteLine("Save: " + watch.Elapsed);
+                            //Console.WriteLine();
+
+                            GC.Collect(1);
+
+                            #endregion
+                        }
+
+                        EncodingManager.Update(taskId, LocalizationHelper.Get("S.Encoder.SavingAnalysis"), true);
+
+                        #region Write the first frame
+
+                        oldStream.Position = project.Frames[0].DataPosition;
+                        var firstFrame = oldStream.ReadBytes((int)project.Frames[0].DataLength);
+
+                        project.Frames[0].DataPosition = newStream.Position;
+                        project.Frames[0].DataLength = firstFrame.LongLength;
+
+                        //SavePixelArrayToFile(firstFrame, project.Frames[0].Rect.Width, project.Frames[0].Rect.Height, 4, project.ChunkPath + 0 + ".png");
+
+                        newStream.WriteBytes(firstFrame);
+
+                        #endregion
+                    }
+                }
+            }
+
+            //Detect the data position of each frame.
+            //for (var index = 1; index < project.Frames.Count - 1; index++)
+            //    project.Frames[index].DataPosition = project.Frames[index - 1].DataLength + project.Frames[index - 1].DataPosition;
+
+            //Replaces the chunk file.
+            File.Delete(project.ChunkPath);
+            File.Move(project.NewChunkPath, project.ChunkPath);
+
+            return project;
+        }
+
+        /// <summary>
+        /// Analizes all frames (from the end to the start) and paints all unchanged pixels with a given color, 
+        /// after, it cuts the image to reduce filesize.
+        /// </summary>
+        /// <param name="project">The project with frames to analize.</param>
+        /// <param name="taskId">The Id of the Task.</param>
+        /// <param name="tokenSource">The cancelation token source.</param>
+        /// <returns>The project contaning all frames and its cut points.</returns>
+        public static ExportProject CutUnchanged(ExportProject project, int taskId, CancellationTokenSource tokenSource)
+        {
+            using (var oldStream = new FileStream(project.ChunkPath, FileMode.Open, FileAccess.Read, FileShare.Read))
+            {
+                using (var newStream = new FileStream(project.NewChunkPath, FileMode.Create, FileAccess.Write, FileShare.None))
+                {
+                    for (var index = project.Frames.Count - 1; index > 0; index--)
+                    {
+                        #region Cancellation
+
+                        if (tokenSource.Token.IsCancellationRequested)
+                        {
+                            EncodingManager.Update(taskId, Status.Canceled);
+                            break;
+                        }
+
+                        #endregion
+
+                        #region For each frame, from the end to the start
+
+                        EncodingManager.Update(taskId, project.Frames.Count - index - 1);
+
+                        //var watch = Stopwatch.StartNew();
+
+                        #region Get image info
+
+                        oldStream.Position = project.Frames[index - 1].DataPosition;
+                        var image1 = oldStream.ReadBytes((int)project.Frames[index - 1].DataLength); //Previous image.
+                        oldStream.Position = project.Frames[index].DataPosition;
+                        var image2 = oldStream.ReadBytes((int)project.Frames[index].DataLength); //Current image.
+
+                        var startY = new bool[project.Frames[index - 1].Rect.Height];
+                        var startX = new bool[project.Frames[index - 1].Rect.Width];
+
+                        var height = project.Frames[index - 1].Rect.Height;
+                        var width = project.Frames[index - 1].Rect.Width;
+                        var blockCount = project.Frames[index - 1].ImageDepth / 8;
+
+                        #endregion
+
+                        //Console.WriteLine("Info: " + watch.Elapsed);
+
+                        //Only use Parallel if the image is big enough.
+                        if (width * height > 150000)
+                        {
+                            #region Parallel Loop
+
+                            //x - width - sides
+                            Parallel.For(0, image1.Length / blockCount, i =>
+                            {
+                                i *= blockCount;
+
+                                if (image1[i] != image2[i] || image1[i + 1] != image2[i + 1] || image1[i + 2] != image2[i + 2])
+                                {
+                                    //Different pixels should remain.
+                                    var y = i / blockCount / width;
+                                    var x = i / blockCount - (y * width);
+
+                                    //var current = (y * image1.Width + x) * blockCount == i;
+
+                                    startX[x] = true;
+                                    startY[y] = true;
+                                }
+                            });
+
+                            #endregion
+                        }
+                        else
+                        {
+                            #region Sequential loop
+
+                            for (var i = 0; i < image1.Length; i += blockCount)
+                            {
+                                if (image1[i] != image2[i] || image1[i + 1] != image2[i + 1] || image1[i + 2] != image2[i + 2])
+                                {
+                                    //Different pixels should remain.
+                                    var y = i / blockCount / width;
+                                    var x = i / blockCount - (y * width);
+
+                                    //var current = (y * image1.Width + x) * blockCount == i;
+
+                                    startX[x] = true;
+                                    startY[y] = true;
+                                }
+                            }
+
+                            #endregion
+                        }
+
+                        //Console.WriteLine("Change: " + watch.Elapsed);
+
+                        #region Verify positions
+
+                        var firstX = startX.ToList().FindIndex(x => x);
+                        var lastX = startX.ToList().FindLastIndex(x => x);
+
+                        if (firstX == -1)
+                            firstX = 0;
+                        if (lastX == -1)
+                            lastX = width;
+
+                        var firstY = startY.ToList().FindIndex(x => x);
+                        var lastY = startY.ToList().FindLastIndex(x => x);
+
+                        if (lastY == -1)
+                            lastY = height;
+                        if (firstY == -1)
+                            firstY = 0;
+
+                        if (lastX < firstX)
+                        {
+                            var aux = lastX;
+                            lastX = firstX;
+                            firstX = aux;
+                        }
+
+                        if (lastY < firstY)
+                        {
+                            var aux = lastY;
+                            lastY = firstY;
+                            firstY = aux;
+                        }
+
+                        #endregion
+
+                        #region Get the Width and Height
+
+                        var heightCut = Math.Abs(lastY - firstY);
+                        var widthCut = Math.Abs(lastX - firstX);
+
+                        //If nothing changed, shift the delay.
+                        if (heightCut + widthCut == height + width)
+                        {
+                            //TODO: Maximum of 2 bytes, 255 x 100: 25.500 ms
+                            project.Frames[index - 1].Delay += project.Frames[index].Delay;
+                            project.Frames[index].Rect = new Int32Rect(0, 0, 0, 0);
+                            project.Frames[index].DataPosition = newStream.Position;
+                            project.Frames[index].DataLength = 0;
+
+                            GC.Collect(1);
+                            continue;
+                        }
+
+                        if (heightCut != height)
+                            heightCut++;
+
+                        if (widthCut != width)
+                            widthCut++;
+
+                        project.Frames[index].Rect = new Int32Rect(firstX, firstY, widthCut, heightCut);
+
+                        #endregion
+
+                        #region Crop and save
+
+                        var newPixels = CropImageArray(image2, width, 32, project.Frames[index].Rect);
+
+                        //Writes to the buffer from end to start. Since I have the position, it does not matter.
+                        project.Frames[index].DataPosition = newStream.Position;
+                        project.Frames[index].DataLength = newPixels.LongLength;
+
+                        newStream.WriteBytes(newPixels);
+
+                        #endregion
+
+                        //Console.WriteLine("Save: " + watch.Elapsed);
+                        //Console.WriteLine();
+
+                        GC.Collect(1);
+
+                        #endregion
+                    }
+
+                    EncodingManager.Update(taskId, LocalizationHelper.Get("S.Encoder.SavingAnalysis"), true);
+
+                    #region Write the first frame
+
+                    oldStream.Position = project.Frames[0].DataPosition;
+                    var firstFrame = oldStream.ReadBytes((int)project.Frames[0].DataLength);
+
+                    project.Frames[0].DataPosition = newStream.Position;
+                    project.Frames[0].DataLength = firstFrame.LongLength;
+
+                    newStream.WriteBytes(firstFrame);
+
+                    #endregion
+                }
+            }
+
+            //Detect the data position of each frame.
+            //for (var index = 1; index < project.Frames.Count - 1; index++)
+            //    project.Frames[index].DataPosition = project.Frames[index - 1].DataLength + project.Frames[index - 1].DataPosition;
+
+            //Replaces the chunk file.
+            File.Delete(project.ChunkPath);
+            File.Move(project.NewChunkPath, project.ChunkPath);
+
+            return project;
+        }
+
+
+        public static List<FrameInfo> PaintTransparentAndCut(List<FrameInfo> listToEncode, System.Windows.Media.Color transparent, int taskId, CancellationTokenSource tokenSource)
         {
             //First frame rect.
             var size = listToEncode[0].Path.ScaledSize();
@@ -46,8 +709,7 @@ namespace ScreenToGif.ImageUtil
 
                 if (tokenSource.Token.IsCancellationRequested)
                 {
-                    Windows.Other.Encoder.SetStatus(Status.Canceled, id);
-
+                    EncodingManager.Update(taskId, Status.Canceled);
                     break;
                 }
 
@@ -55,10 +717,7 @@ namespace ScreenToGif.ImageUtil
 
                 #region For each Frame, from the end to the start
 
-                Windows.Other.Encoder.Update(id, listToEncode.Count - index - 1);
-
-                //First frame is ignored.
-                if (index <= 0) continue;
+                EncodingManager.Update(taskId, listToEncode.Count - index - 1);
 
                 //var watch = Stopwatch.StartNew();
 
@@ -238,228 +897,6 @@ namespace ScreenToGif.ImageUtil
             return listToEncode;
         }
 
-        /// <summary>
-        /// Analizes all frames (from the end to the start) and paints all unchanged pixels with a given color, 
-        /// after, it cuts the image to reduce filesize.
-        /// </summary>
-        /// <param name="listToEncode">The list of frames to analize.</param>
-        /// <param name="transparent">The color to paint the unchanged pixels.</param>
-        /// <param name="id">The Id of the current Task.</param>
-        /// <param name="tokenSource">The cancelation token source.</param>
-        /// <returns>A List contaning all frames and its cut points</returns>
-        public static List<FrameInfo> PaintTransparentAndCutOld(List<FrameInfo> listToEncode, Color transparent, int id, CancellationTokenSource tokenSource)
-        {
-            //First frame rect.
-            var size = listToEncode[0].Path.ScaledSize();
-            listToEncode[0].Rect = new Int32Rect(0, 0, (int)size.Width, (int)size.Height);
-
-            //End to start FOR
-            for (var index = listToEncode.Count - 1; index > 0; index--)
-            {
-                #region Cancellation
-
-                if (tokenSource.Token.IsCancellationRequested)
-                {
-                    Windows.Other.Encoder.SetStatus(Status.Canceled, id);
-
-                    break;
-                }
-
-                #endregion
-
-                #region For each Frame, from the end to the start
-
-                Windows.Other.Encoder.Update(id, listToEncode.Count - index - 1);
-
-                //First frame is ignored.
-                if (index <= 0) continue;
-
-                //var watch = Stopwatch.StartNew();
-
-                #region Get Image Info
-
-                var imageAux1 = listToEncode[index - 1].Path.From();
-                var imageAux2 = listToEncode[index].Path.From();
-
-                var startY = new bool[imageAux1.Height];
-                var startX = new bool[imageAux1.Width];
-
-                var image1 = new PixelUtilOld(imageAux1); //Previous image
-                var image2 = new PixelUtilOld(imageAux2); //Actual image
-
-                image1.LockBits();
-                image2.LockBits();
-
-                var height = imageAux1.Height;
-                var width = imageAux1.Width;
-
-                #endregion
-
-                //Console.WriteLine("Lock: " + watch.Elapsed);
-
-                //Only use Parallel if the image is big enough.
-                if (width * height > 150000)
-                {
-                    #region Parallel Loop
-
-                    //x - width - sides
-                    Parallel.For(0, width, x =>
-                    {
-                        //y - height - up/down
-                        for (var y = 0; y < height; y++)
-                        {
-                            var pixel2 = image2.GetPixel(x, y);
-
-                            if (image1.GetPixel(x, y) == pixel2 || pixel2.A == 0)
-                            {
-                                image2.SetPixel(x, y, transparent);
-                            }
-                            else
-                            {
-                                #region Get the Changed Pixels
-
-                                startX[x] = true;
-                                startY[y] = true;
-
-                                #endregion
-                            }
-                        }
-                    }); //SPEEEEEED, alot!
-
-                    #endregion
-                }
-                else
-                {
-                    #region Sequential Loop
-
-                    //x - width - sides
-                    for (var x = 0; x < width; x++)
-                    {
-                        //y - height - up/down
-                        for (var y = 0; y < height; y++)
-                        {
-                            #region For each Pixel
-
-                            var pixel2 = image2.GetPixel(x, y);
-
-                            if (image1.GetPixel(x, y) == pixel2 || pixel2.A == 0)
-                            {
-                                image2.SetPixel(x, y, transparent);
-                            }
-                            else
-                            {
-                                #region Get the Changed Pixels
-
-                                startX[x] = true;
-                                startY[y] = true;
-
-                                #endregion
-                            }
-
-                            #endregion
-                        }
-                    }
-
-                    #endregion
-                }
-
-                //Console.WriteLine("Change: " + watch.Elapsed);
-
-                image1.UnlockBits();
-                image2.UnlockBits();
-
-                //Console.WriteLine("Unlock: " + watch.Elapsed);
-
-                #region Verify positions
-
-                var firstX = startX.ToList().FindIndex(x => x);
-                var lastX = startX.ToList().FindLastIndex(x => x);
-
-                if (firstX == -1)
-                    firstX = 0;
-                if (lastX == -1)
-                    lastX = imageAux1.Width;
-
-                var firstY = startY.ToList().FindIndex(x => x);
-                var lastY = startY.ToList().FindLastIndex(x => x);
-
-                if (lastY == -1)
-                    lastY = imageAux1.Height;
-                if (firstY == -1)
-                    firstY = 0;
-
-                if (lastX < firstX)
-                {
-                    var aux = lastX;
-                    lastX = firstX;
-                    firstX = aux;
-                }
-
-                if (lastY < firstY)
-                {
-                    var aux = lastY;
-                    lastY = firstY;
-                    firstY = aux;
-                }
-
-                #endregion
-
-                #region Get the Width and Height
-
-                var heightCut = Math.Abs(lastY - firstY);
-                var widthCut = Math.Abs(lastX - firstX);
-
-                //If nothing changed, shift the delay.
-                if (heightCut + widthCut == height + width)
-                {
-                    //TODO: Maximum of 2 bytes, 255 x 100: 25.500 ms
-                    listToEncode[index - 1].Delay += listToEncode[index].Delay;
-                    listToEncode[index].Rect = new Int32Rect(0, 0, 0, 0);
-
-                    GC.Collect(1);
-                    continue;
-                }
-
-                if (heightCut != height)
-                    heightCut++;
-
-                if (widthCut != width)
-                    widthCut++;
-
-                listToEncode[index].Rect = new Int32Rect(firstX, firstY, widthCut, heightCut);
-
-                #endregion
-
-                #region Update Image
-
-                //Cut the images and get the new values.
-                var imageSave2 = new Bitmap(imageAux2.Clone(new Rectangle(firstX, firstY, widthCut, heightCut), imageAux2.PixelFormat));
-
-                imageAux2.Dispose();
-                imageAux1.Dispose();
-
-                imageSave2.Save(listToEncode[index].Path);
-
-                #endregion
-
-                //Console.WriteLine("Save: " + watch.Elapsed);
-                //Console.WriteLine();
-
-                GC.Collect(1);
-
-                #endregion
-            }
-
-            return listToEncode;
-        }
-
-        /// <summary>
-        /// Analizes all frames (from the end to the start) and paints all unchanged pixels with a given color, 
-        /// after, it cuts the image to reduce filesize.
-        /// </summary>
-        /// <param name="listToEncode">The list of frames to analize.</param>
-        /// <param name="id">The Id of the Task.</param>
-        /// <param name="tokenSource">The cancelation token source.</param>
         public static List<FrameInfo> CutUnchanged(List<FrameInfo> listToEncode, int id, CancellationTokenSource tokenSource)
         {
             //First frame rect.
@@ -473,8 +910,7 @@ namespace ScreenToGif.ImageUtil
 
                 if (tokenSource.Token.IsCancellationRequested)
                 {
-                    Windows.Other.Encoder.SetStatus(Status.Canceled, id);
-
+                    EncodingManager.Update(id, Status.Canceled);
                     break;
                 }
 
@@ -482,10 +918,7 @@ namespace ScreenToGif.ImageUtil
 
                 #region For each Frame, from the end to the start
 
-                Windows.Other.Encoder.Update(id, listToEncode.Count - index - 1);
-
-                //First frame is ignored.
-                if (index <= 0) continue;
+                EncodingManager.Update(id, listToEncode.Count - index - 1);
 
                 #region Get Image Info
 
@@ -647,6 +1080,7 @@ namespace ScreenToGif.ImageUtil
             return listToEncode;
         }
 
+
         /// <summary>
         /// Calculates the difference between one given frame and another.
         /// </summary>
@@ -714,6 +1148,30 @@ namespace ScreenToGif.ImageUtil
             GC.Collect(1);
 
             return Other.CrossMultiplication(width * height, equalCount, null);
+        }
+
+        /// <summary>
+        /// Color distance calculation.
+        /// https://www.compuphase.com/cmetric.htm
+        /// </summary>
+        public static double ColourDistance(Color e1, Color e2)
+        {
+            var rmean = (e1.R + (long)e2.R) / 2;
+            var r = e1.R - (long)e2.R;
+            var g = e1.G - (long)e2.G;
+            var b = e1.B - (long)e2.B;
+
+            return Math.Sqrt((((512 + rmean) * r * r) >> 8) + 4 * g * g + (((767 - rmean) * b * b) >> 8));
+        }
+
+        public static double ColourDistance(byte b1, byte g1, byte r1, byte b2, byte g2, byte r2)
+        {
+            var rMean = (r1 + (long)r2) / 2;
+            var r = r1 - (long)r2;
+            var g = g1 - (long)g2;
+            var b = b1 - (long)b2;
+
+            return Math.Sqrt((((512 + rMean) * r * r) >> 8) + 4 * g * g + (((767 - rMean) * b * b) >> 8));
         }
 
         #endregion
@@ -1061,6 +1519,16 @@ namespace ScreenToGif.ImageUtil
 
         public static void SavePixelArrayToFile(byte[] pixels, int width, int height, int channels, string filePath)
         {
+            //var img = BitmapSource.Create(project.Frames[index].Rect.Width, project.Frames[index].Rect.Height, 96, 96, PixelFormats.Bgra32, null, newPixels, 4 * project.Frames[index].Rect.Width);
+
+            //using (var stream = new FileStream(project.ChunkPath + index + ".png", FileMode.Create))
+            //{
+            //    var encoder = new PngBitmapEncoder();
+            //    encoder.Frames.Add(BitmapFrame.Create(img));
+            //    encoder.Save(stream);
+            //    stream.Close();
+            //}
+
             using (var fileStream = new FileStream(filePath, FileMode.Create))
             {
                 BitmapEncoder encoder = new PngBitmapEncoder();
@@ -1072,6 +1540,23 @@ namespace ScreenToGif.ImageUtil
         #endregion
 
         #region Edit Images
+
+        public static byte[] CropImageArray(byte[] pixels, int sourceWidth, int bitsPerPixel, Int32Rect rect)
+        {
+            var blockSize = bitsPerPixel / 8;
+            var outputPixels = new byte[rect.Width * rect.Height * blockSize];
+
+            //Create the array of bytes.
+            for (var line = 0; line <= rect.Height - 1; line++)
+            {
+                var sourceIndex = ((rect.Y + line) * sourceWidth + rect.X) * blockSize;
+                var destinationIndex = line * rect.Width * blockSize;
+
+                Array.Copy(pixels, sourceIndex, outputPixels, destinationIndex, rect.Width * blockSize);
+            }
+
+            return outputPixels;
+        }
 
         /// <summary>
         /// Resizes the given image.

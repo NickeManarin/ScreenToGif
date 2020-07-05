@@ -13,9 +13,9 @@
     <s:String x:Key="S.Cancel">الغاء الامر</s:String>
     <s:String x:Key="S.Yes">نعم</s:String>
     <s:String x:Key="S.No">لا</s:String>
-    <s:String x:Key="Frame">اطار</s:String>
-    <s:String x:Key="Suppress">قمع</s:String>
-    <s:String x:Key="Preview">معاينة</s:String>
+    <s:String x:Key="S.InsertFrames.Frame">اطار</s:String>
+    <s:String x:Key="S.Suppress">قمع</s:String>
+    <s:String x:Key="S.Preview">معاينة</s:String>
     <s:String x:Key="S.Add">اضافة</s:String>
     <s:String x:Key="S.Edit">تحرير</s:String>
     <s:String x:Key="S.Id">هوية</s:String>
@@ -367,8 +367,8 @@
     
     <!--Localization-->
     <s:String x:Key="S.Localization">الترجمه</s:String>
-    <s:String x:Key="S.Localization.ResourcePositionUsed">المورد السفلي هو المصدر الحالي الذي يتم استخدامه.</s:String>
-    <s:String x:Key="S.Localization.MoveRosourcePosition">لتطبيق المورد المخصص ، انقله الى اسفل القائمة.</s:String>
+    <s:String x:Key="S.Localization.Usage.First">المورد السفلي هو المصدر الحالي الذي يتم استخدامه.</s:String>
+    <s:String x:Key="S.Localization.Usage.Second">لتطبيق المورد المخصص ، انقله الى اسفل القائمة.</s:String>
 
     <!--Recorder-->
     <s:String x:Key="S.Recorder.RecordingOptions">خيارات التسجيل:</s:String>
@@ -481,293 +481,293 @@
     <s:String x:Key="S.ImportVideo.Error">لم يكن من الممكن تحميل الفيديو.</s:String>
     
     <!--Encoder-->
-    <s:String x:Key="Encoder.Title">تشفير</s:String>
-    <s:String x:Key="Encoder.Starting">بدء</s:String>
-    <s:String x:Key="Encoder.Completed">أكملت</s:String>
-    <s:String x:Key="Encoder.Completed.Clipboard">نسخ الى الحافظة</s:String>
-    <s:String x:Key="Encoder.Completed.Clipboard.Fail">فشل في النسخ</s:String>
-    <s:String x:Key="Encoder.Completed.Command">تم تنفيذ الامر</s:String>
-    <s:String x:Key="Encoder.Completed.Command.Output">(اظهار اخراج الامر (الاوامر.</s:String>
-    <s:String x:Key="Encoder.Completed.Command.Fail">فشل تنفيذ الامر</s:String>
-    <s:String x:Key="Encoder.Completed.Upload.Fail">فشل في التحميل</s:String>
-    <s:String x:Key="Encoder.Completed.Upload.Delete">Ctrl + Click لفتح الصفحة لحذف الصورة (ان وجدت).</s:String>
-    <s:String x:Key="Encoder.FileDeletedMoved">ملف محذوف أو منقول</s:String>
-    <s:String x:Key="Encoder.Canceled">ملغي</s:String>
-    <s:String x:Key="Encoder.Error">الخطا</s:String>
-    <s:String x:Key="Encoder.Error.Info">انقر هنا لاظهار تفاصيل هذا الخطا.</s:String>
-    <s:String x:Key="Encoder.Uploading">تحميل</s:String>
-    <s:String x:Key="Encoder.Executing">تنفيذ الاوامر</s:String>
-    <s:String x:Key="Encoder.Processing">معالجه {0}</s:String>
-    <s:String x:Key="Encoder.Analyzing">تحليل بكسل دون تغيير</s:String>
-    <s:String x:Key="Encoder.OpenFile">فتح ملف</s:String>
-    <s:String x:Key="Encoder.ExploreFolder">استكشاف المجلد</s:String>
-    <s:String x:Key="Encoder.Remove">ازاله من القائمة</s:String>
-    <s:String x:Key="Encoder.Details">اظهار التفاصيل</s:String>
-    <s:String x:Key="Encoder.Copy.Image">نسخ باسم صوره</s:String>
-    <s:String x:Key="Encoder.Copy.Filename">نسخ اسم الملف</s:String>
-    <s:String x:Key="Encoder.Copy.Folder">نسخ مسار المجلد</s:String>
-    <s:String x:Key="Encoder.Copy.Link">انسخ الرابط</s:String>
+    <s:String x:Key="S.Encoder.Title">تشفير</s:String>
+    <s:String x:Key="S.Encoder.Starting">بدء</s:String>
+    <s:String x:Key="S.Encoder.Completed">أكملت</s:String>
+    <s:String x:Key="S.Encoder.Completed.Clipboard">نسخ الى الحافظة</s:String>
+    <s:String x:Key="S.Encoder.Completed.Clipboard.Fail">فشل في النسخ</s:String>
+    <s:String x:Key="S.Encoder.Completed.Command">تم تنفيذ الامر</s:String>
+    <s:String x:Key="S.Encoder.Completed.Command.Output">(اظهار اخراج الامر (الاوامر.</s:String>
+    <s:String x:Key="S.Encoder.Completed.Command.Fail">فشل تنفيذ الامر</s:String>
+    <s:String x:Key="S.Encoder.Completed.Upload.Fail">فشل في التحميل</s:String>
+    <s:String x:Key="S.Encoder.Completed.Upload.Delete">Ctrl + Click لفتح الصفحة لحذف الصورة (ان وجدت).</s:String>
+    <s:String x:Key="S.Encoder.DeletedMoved">ملف محذوف أو منقول</s:String>
+    <s:String x:Key="S.Encoder.Canceled">ملغي</s:String>
+    <s:String x:Key="S.Encoder.Error">الخطا</s:String>
+    <s:String x:Key="S.Encoder.Error.Info">انقر هنا لاظهار تفاصيل هذا الخطا.</s:String>
+    <s:String x:Key="S.Encoder.Uploading">تحميل</s:String>
+    <s:String x:Key="S.Encoder.Executing">تنفيذ الاوامر</s:String>
+    <s:String x:Key="S.Encoder.Processing">معالجه {0}</s:String>
+    <s:String x:Key="S.Encoder.Analyzing">تحليل بكسل دون تغيير</s:String>
+    <s:String x:Key="S.Encoder.OpenFile">فتح ملف</s:String>
+    <s:String x:Key="S.Encoder.ExploreFolder">استكشاف المجلد</s:String>
+    <s:String x:Key="S.Encoder.Remove">ازاله من القائمة</s:String>
+    <s:String x:Key="S.Encoder.Details">اظهار التفاصيل</s:String>
+    <s:String x:Key="S.Encoder.Copy.Image">نسخ باسم صوره</s:String>
+    <s:String x:Key="S.Encoder.Copy.Filename">نسخ اسم الملف</s:String>
+    <s:String x:Key="S.Encoder.Copy.Folder">نسخ مسار المجلد</s:String>
+    <s:String x:Key="S.Encoder.Copy.Link">انسخ الرابط</s:String>
 
     <!--Command output-->
-    <s:String x:Key="Command.Title">اخراج الاوامر - ScreenToGif </s:String>
-    <s:String x:Key="Command.Header">اخراج الاوامر</s:String>
+    <s:String x:Key="S.Encoder.Command.Title">اخراج الاوامر - ScreenToGif </s:String>
+    <s:String x:Key="S.Encoder.Command.Header">اخراج الاوامر</s:String>
     
     <!--Notifications-->
     <s:String x:Key="S.Notifications">الاخطارات</s:String>
     <s:String x:Key="S.Notifications.Dismiss">استبعاد كافة الاعلامات</s:String>
     
     <!--Editor-->
-    <s:String x:Key="Editor.Title">ScreenToGif - محرر</s:String>
-    <s:String x:Key="Editor.File">ملف</s:String>
-    <s:String x:Key="Editor.Home">الرئيسية</s:String>
-    <s:String x:Key="Editor.Playback">الإعادة</s:String>
-    <s:String x:Key="Editor.Edit">تحرير</s:String>
-    <s:String x:Key="Editor.Image">صورة</s:String>
-    <s:String x:Key="Editor.Transitions">التحولات</s:String>
-    <s:String x:Key="Editor.Statistics">الاحصاءات</s:String>
-    <s:String x:Key="Editor.Options">الخيارات</s:String>
+    <s:String x:Key="S.Editor.Title">ScreenToGif - محرر</s:String>
+    <s:String x:Key="S.Editor.File">ملف</s:String>
+    <s:String x:Key="S.Editor.Home">الرئيسية</s:String>
+    <s:String x:Key="S.Editor.Playback">الإعادة</s:String>
+    <s:String x:Key="S.Editor.Edit">تحرير</s:String>
+    <s:String x:Key="S.Editor.Image">صورة</s:String>
+    <s:String x:Key="S.Editor.Transitions">التحولات</s:String>
+    <s:String x:Key="S.Editor.Statistics">الاحصاءات</s:String>
+    <s:String x:Key="S.Editor.Options">الخيارات</s:String>
     
     <s:String x:Key="S.Editor.Extras">اضافات</s:String>
     
     <!--Welcome-->
-    <s:String x:Key="Welcome.New">رئيس لاكثر من  "ملف > جديد " لبدء تسجيل جديد</s:String>
-    <s:String x:Key="Welcome.Import">سحب واسقاط الصور ومقاطع الفيديو او المشاريع للاستيراد</s:String>
-    <s:String x:Key="Welcome.ThankYou">شكرا جزيلا لاستخدام تطبيقي!</s:String>
-    <s:String x:Key="Welcome.Size">وكلما انخفضت framerate ، وعدد الوان او مقدار التغييرات بين الاطارات ، واصغر حجم</s:String>
-    <s:String x:Key="Welcome.Contact">هل تريد التحدث ؟ فتح  "خيارات > حول " لطرق الاتصال</s:String>
-    <s:String x:Key="Welcome.Trouble">هل لديك مشكله ؟ الاتصال بي عبر اداه الملاحظات</s:String>
-    <s:String x:Key="Welcome.NewRecorder">هل تريد تجربه المسجل الجديد ؟ رئيس لاكثر من  "خيارات > تطبيق " لتمكينه</s:String>
+    <s:String x:Key="S.Editor.Welcome.New">رئيس لاكثر من  "ملف > جديد " لبدء تسجيل جديد</s:String>
+    <s:String x:Key="S.Editor.Welcome.Import">سحب واسقاط الصور ومقاطع الفيديو او المشاريع للاستيراد</s:String>
+    <s:String x:Key="S.Editor.Welcome.ThankYou">شكرا جزيلا لاستخدام تطبيقي!</s:String>
+    <s:String x:Key="S.Editor.Welcome.Size">وكلما انخفضت framerate ، وعدد الوان او مقدار التغييرات بين الاطارات ، واصغر حجم</s:String>
+    <s:String x:Key="S.Editor.Welcome.Contact">هل تريد التحدث ؟ فتح  "خيارات > حول " لطرق الاتصال</s:String>
+    <s:String x:Key="S.Editor.Welcome.Trouble">هل لديك مشكله ؟ الاتصال بي عبر اداه الملاحظات</s:String>
+    <s:String x:Key="S.Editor.Welcome.NewRecorder">هل تريد تجربه المسجل الجديد ؟ رئيس لاكثر من  "خيارات > تطبيق " لتمكينه</s:String>
     
     <!--File • New-->
-    <s:String x:Key="Editor.File.New.Recording">تسجيل</s:String>
-    <s:String x:Key="Editor.File.New.Webcam">التسجيل&#x0d;كاميرا على الإنترنت</s:String>
-    <s:String x:Key="Editor.File.New.Board">التسجيل&#x0d;لوحة</s:String>
-    <s:String x:Key="Editor.File.Blank">المشروعd&#x0d;الفارغ</s:String>
-    <s:String x:Key="Editor.File.New">جديد</s:String>
+    <s:String x:Key="S.Editor.File.New.Recording">تسجيل</s:String>
+    <s:String x:Key="S.Editor.File.New.Webcam">التسجيل&#x0d;كاميرا على الإنترنت</s:String>
+    <s:String x:Key="S.Editor.File.New.Board">التسجيل&#x0d;لوحة</s:String>
+    <s:String x:Key="S.Editor.File.Blank">المشروعd&#x0d;الفارغ</s:String>
+    <s:String x:Key="S.Editor.File.New">جديد</s:String>
     
     <!--File • Insert-->
-    <s:String x:Key="Editor.File.Insert.Recording">تسجيل</s:String>
-    <s:String x:Key="Editor.File.Insert.Webcam">التسجيل&#x0d;كاميرا على الإنترنت</s:String>
-    <s:String x:Key="Editor.File.Insert.Board">التسجيل&#x0d;لوحة</s:String>
-    <s:String x:Key="Editor.File.Insert.Media">وسائط</s:String>
-    <s:String x:Key="Editor.File.Insert">ادراج</s:String>
+    <s:String x:Key="S.Editor.File.Insert.Recording">تسجيل</s:String>
+    <s:String x:Key="S.Editor.File.Insert.Webcam">التسجيل&#x0d;كاميرا على الإنترنت</s:String>
+    <s:String x:Key="S.Editor.File.Insert.Board">التسجيل&#x0d;لوحة</s:String>
+    <s:String x:Key="S.Editor.File.Insert.Media">وسائط</s:String>
+    <s:String x:Key="S.Editor.File.Insert">ادراج</s:String>
     
     <!--File • Save/Discard-->
-    <s:String x:Key="Editor.File.Save">حفظ باسم</s:String>
-    <s:String x:Key="Editor.File.Load">تحميل</s:String>
-    <s:String x:Key="Editor.File.LoadRecent">المشاريع&#x0d;الأخير</s:String>
-    <s:String x:Key="Editor.File.SaveProject">المشروع&#x0d;حفظ باسم</s:String>
-    <s:String x:Key="Editor.File.Discard">المشروعd&#x0d;إنبذ</s:String>
+    <s:String x:Key="S.Editor.File.Save">حفظ باسم</s:String>
+    <s:String x:Key="S.Editor.File.Load">تحميل</s:String>
+    <s:String x:Key="S.Editor.File.LoadRecent">المشاريع&#x0d;الأخير</s:String>
+    <s:String x:Key="S.Editor.File.SaveProject">المشروع&#x0d;حفظ باسم</s:String>
+    <s:String x:Key="S.Editor.File.Discard">المشروعd&#x0d;إنبذ</s:String>
     
     <!--Home • Action Stack-->
-    <s:String x:Key="Editor.Home.ActionStack">كومة الاجراءات</s:String>
-    <s:String x:Key="Editor.Home.Undo">تراجع</s:String>
-    <s:String x:Key="Editor.Home.Redo">تراجع</s:String>
-    <s:String x:Key="Editor.Home.Reset">اعاده</s:String>
+    <s:String x:Key="S.Editor.Home.ActionStack">كومة الاجراءات</s:String>
+    <s:String x:Key="S.Editor.Home.Undo">تراجع</s:String>
+    <s:String x:Key="S.Editor.Home.Redo">تراجع</s:String>
+    <s:String x:Key="S.Editor.Home.Reset">اعاده</s:String>
     
     <!--Home • Clipboard-->
-    <s:String x:Key="Editor.Home.Clipboard">الحافظه</s:String>
-    <s:String x:Key="Editor.Home.Clipboard.Show">اظهار الحافظة</s:String>
-    <s:String x:Key="Editor.Home.Paste">لصق</s:String>
-    <s:String x:Key="Editor.Home.Cut">قص</s:String>
-    <s:String x:Key="Editor.Home.Copy">نسخ</s:String>
+    <s:String x:Key="S.Editor.Home.Clipboard">الحافظه</s:String>
+    <s:String x:Key="S.Editor.Home.Clipboard.Show">اظهار الحافظة</s:String>
+    <s:String x:Key="S.Editor.Home.Paste">لصق</s:String>
+    <s:String x:Key="S.Editor.Home.Cut">قص</s:String>
+    <s:String x:Key="S.Editor.Home.Copy">نسخ</s:String>
     
     <!--Home • Zoom-->
-    <s:String x:Key="Editor.Home.Zoom">تكبير</s:String>
-    <s:String x:Key="Editor.Home.SizeToContent">المحتوى&#x0d;عدل إلى</s:String>
-    <s:String x:Key="Editor.Home.FitImage">احتواء الصورة</s:String>
+    <s:String x:Key="S.Editor.Home.Zoom">تكبير</s:String>
+    <s:String x:Key="S.Editor.Home.SizeToContent">المحتوى&#x0d;عدل إلى</s:String>
+    <s:String x:Key="S.Editor.Home.FitImage">احتواء الصورة</s:String>
     
     <!--Home • Select-->
-    <s:String x:Key="Editor.Home.Select">تحديد</s:String>
-    <s:String x:Key="Editor.Home.SelectAll">كل&#x0d;حدد</s:String>
-    <s:String x:Key="Editor.Home.GoTo">انتقل الى</s:String>
-    <s:String x:Key="Editor.Home.Inverse">معكوس</s:String>
-    <s:String x:Key="Editor.Home.Deselect">الغاء التحديد</s:String>
+    <s:String x:Key="S.Editor.Home.Select">تحديد</s:String>
+    <s:String x:Key="S.Editor.Home.SelectAll">كل&#x0d;حدد</s:String>
+    <s:String x:Key="S.Editor.Home.GoTo">انتقل الى</s:String>
+    <s:String x:Key="S.Editor.Home.Inverse">معكوس</s:String>
+    <s:String x:Key="S.Editor.Home.Deselect">الغاء التحديد</s:String>
     
     <!--Playback • Playback-->
-    <s:String x:Key="Editor.Playback.Playback">الإعادة</s:String>
-    <s:String x:Key="Editor.Playback.First">أولا</s:String>
-    <s:String x:Key="Editor.Playback.Previous">السابق</s:String>
-    <s:String x:Key="Editor.Playback.Play">لعب</s:String>
-    <s:String x:Key="Editor.Playback.Pause">مهلة</s:String>
-    <s:String x:Key="Editor.Playback.Next">التالى</s:String>
-    <s:String x:Key="Editor.Playback.Last">أخيرا</s:String>
+    <s:String x:Key="S.Editor.Playback.Playback">الإعادة</s:String>
+    <s:String x:Key="S.Editor.Playback.First">أولا</s:String>
+    <s:String x:Key="S.Editor.Playback.Previous">السابق</s:String>
+    <s:String x:Key="S.Editor.Playback.Play">لعب</s:String>
+    <s:String x:Key="S.Editor.Playback.Pause">مهلة</s:String>
+    <s:String x:Key="S.Editor.Playback.Next">التالى</s:String>
+    <s:String x:Key="S.Editor.Playback.Last">أخيرا</s:String>
     
     <!--Playback • Playback Options-->
-    <s:String x:Key="Editor.PlaybackOptions.Header">خيارات التشغيل</s:String>
-    <s:String x:Key="Editor.PlaybackOptions.Loop">حلقه اثناء التشغيل.</s:String>
-    <s:String x:Key="Editor.PlaybackOptions.Loop.Info">ستكون متوفرة داخل لوحه 'حفظ باسم' لبعض الترميزات.Gifs and Apngs,&#x0d;اذا كنت ترغب في تغيير اعدادات الحلقة لتصدير صور&#x0d;تستخدم فقط اثناء الإعادة</s:String>
+    <s:String x:Key="S.Editor.PlaybackOptions.Header">خيارات التشغيل</s:String>
+    <s:String x:Key="S.Editor.PlaybackOptions.Loop">حلقه اثناء التشغيل.</s:String>
+    <s:String x:Key="S.Editor.PlaybackOptions.Loop.Info">ستكون متوفرة داخل لوحه 'حفظ باسم' لبعض الترميزات.Gifs and Apngs,&#x0d;اذا كنت ترغب في تغيير اعدادات الحلقة لتصدير صور&#x0d;تستخدم فقط اثناء الإعادة</s:String>
     
     <!--Edit • Frames-->  
-    <s:String x:Key="Editor.Edit.Frames">اطارات</s:String>
-    <s:String x:Key="Editor.Edit.Delete">حذف</s:String>
-    <s:String x:Key="Editor.Edit.Frames.Duplicates">النسخ المطابقة&#x0d;ازالة</s:String>
-    <s:String x:Key="Editor.Edit.Frames.Reduce">إحصاء إطار&#x0d;خفض</s:String>
-    <s:String x:Key="Editor.Edit.DeletePrevious">حذف الكل السابق</s:String>
-    <s:String x:Key="Editor.Edit.DeleteNext">حذف كل التالي</s:String>
+    <s:String x:Key="S.Editor.Edit.Frames">اطارات</s:String>
+    <s:String x:Key="S.Editor.Edit.Delete">حذف</s:String>
+    <s:String x:Key="S.Editor.Edit.Frames.Duplicates">النسخ المطابقة&#x0d;ازالة</s:String>
+    <s:String x:Key="S.Editor.Edit.Frames.Reduce">إحصاء إطار&#x0d;خفض</s:String>
+    <s:String x:Key="S.Editor.Edit.DeletePrevious">حذف الكل السابق</s:String>
+    <s:String x:Key="S.Editor.Edit.DeleteNext">حذف كل التالي</s:String>
     
     <!--Edit • Reordering-->
-    <s:String x:Key="Editor.Edit.Reordering">اعاده ترتيب</s:String>
-    <s:String x:Key="Editor.Edit.Reverse">عكس</s:String>
-    <s:String x:Key="Editor.Edit.Yoyo">Yoyo</s:String>
-    <s:String x:Key="Editor.Edit.MoveLeft">اليسار&#x0d;نقل</s:String>
-    <s:String x:Key="Editor.Edit.MoveRight">اليمين&#x0d;نقل</s:String>
+    <s:String x:Key="S.Editor.Edit.Reordering">اعاده ترتيب</s:String>
+    <s:String x:Key="S.Editor.Edit.Reverse">عكس</s:String>
+    <s:String x:Key="S.Editor.Edit.Yoyo">Yoyo</s:String>
+    <s:String x:Key="S.Editor.Edit.MoveLeft">اليسار&#x0d;نقل</s:String>
+    <s:String x:Key="S.Editor.Edit.MoveRight">اليمين&#x0d;نقل</s:String>
     
     <!--Edit • Delay/Duration-->
-    <s:String x:Key="Editor.Edit.Delay">(تاخير (المدة</s:String>
-    <s:String x:Key="Editor.Edit.Delay.Override">تجاوز</s:String>
-    <s:String x:Key="Editor.Edit.Delay.IncreaseDecrease">نقصان&#x0d;زيادة أو</s:String>
-    <s:String x:Key="Editor.Edit.Delay.Scale">مقياس</s:String>
+    <s:String x:Key="S.Editor.Edit.Delay">(تاخير (المدة</s:String>
+    <s:String x:Key="S.Editor.Edit.Delay.Override">تجاوز</s:String>
+    <s:String x:Key="S.Editor.Edit.Delay.IncreaseDecrease">نقصان&#x0d;زيادة أو</s:String>
+    <s:String x:Key="S.Editor.Edit.Delay.Scale">مقياس</s:String>
     
     <!--Image • Size and Rotation-->
-    <s:String x:Key="Editor.Image.SizePosition">الحجم و الدوران</s:String>
-    <s:String x:Key="Editor.Image.Resize">تحجيم</s:String>
-    <s:String x:Key="Editor.Image.Crop">اقتصاص</s:String>
-    <s:String x:Key="Editor.Image.FlipRotate">شقلبة/تدوير</s:String>
+    <s:String x:Key="S.Editor.Image.SizePosition">الحجم و الدوران</s:String>
+    <s:String x:Key="S.Editor.Image.Resize">تحجيم</s:String>
+    <s:String x:Key="S.Editor.Image.Crop">اقتصاص</s:String>
+    <s:String x:Key="S.Editor.Image.FlipRotate">شقلبة/تدوير</s:String>
     
     <!--Image • Text-->
-    <s:String x:Key="Editor.Image.Text">نص</s:String>
-    <s:String x:Key="Editor.Image.Caption">تعليق</s:String>
-    <s:String x:Key="Editor.Image.FreeText">النص الحر</s:String>
-    <s:String x:Key="Editor.Image.TitleFrame">اطار العنوان</s:String>
-    <s:String x:Key="Editor.Image.KeyStrokes">الضربات&#x0d;مفتاح</s:String>
+    <s:String x:Key="S.Editor.Image.Text">نص</s:String>
+    <s:String x:Key="S.Editor.Image.Caption">تعليق</s:String>
+    <s:String x:Key="S.Editor.Image.FreeText">النص الحر</s:String>
+    <s:String x:Key="S.Editor.Image.TitleFrame">اطار العنوان</s:String>
+    <s:String x:Key="S.Editor.Image.KeyStrokes">الضربات&#x0d;مفتاح</s:String>
     
     <!--Image • Overlay-->
-    <s:String x:Key="Editor.Image.Overlay">تراكب</s:String>
-    <s:String x:Key="Editor.Image.FreeDrawing">الرسم&#x0d;الحر</s:String>
-    <s:String x:Key="Editor.Image.Shape">اشكال</s:String>
-    <s:String x:Key="Editor.Image.Clicks">النقرات&#x0d;فأر</s:String>
-    <s:String x:Key="Editor.Image.Watermark">علامه مائيه</s:String>
-    <s:String x:Key="Editor.Image.Cinemagraph">رسم سينما البياني</s:String>
-    <s:String x:Key="Editor.Image.Border">الحدود</s:String>
-    <s:String x:Key="Editor.Image.Shadow">الظل</s:String>
-    <s:String x:Key="Editor.Image.Progress">التقدم</s:String>
-    <s:String x:Key="Editor.Image.Obfuscate">تشويش</s:String>
+    <s:String x:Key="S.Editor.Image.Overlay">تراكب</s:String>
+    <s:String x:Key="S.Editor.Image.FreeDrawing">الرسم&#x0d;الحر</s:String>
+    <s:String x:Key="S.Editor.Image.Shape">اشكال</s:String>
+    <s:String x:Key="S.Editor.Image.Clicks">النقرات&#x0d;فأر</s:String>
+    <s:String x:Key="S.Editor.Image.Watermark">علامه مائيه</s:String>
+    <s:String x:Key="S.Editor.Image.Cinemagraph">رسم سينما البياني</s:String>
+    <s:String x:Key="S.Editor.Image.Border">الحدود</s:String>
+    <s:String x:Key="S.Editor.Image.Shadow">الظل</s:String>
+    <s:String x:Key="S.Editor.Image.Progress">التقدم</s:String>
+    <s:String x:Key="S.Editor.Image.Obfuscate">تشويش</s:String>
 
     <!--Transitions • Styles-->
-    <s:String x:Key="Editor.Transitions.Styles">انماط</s:String>
-    <s:String x:Key="Editor.Transitions.Fade">تلاشي</s:String>
-    <s:String x:Key="Editor.Transitions.Slide">شريحه</s:String>
+    <s:String x:Key="S.Editor.Transitions.Styles">انماط</s:String>
+    <s:String x:Key="S.Editor.Transitions.Fade">تلاشي</s:String>
+    <s:String x:Key="S.Editor.Transitions.Slide">شريحه</s:String>
     
     <!--Statistics-->
-    <s:String x:Key="Editor.Statistics.General">عام</s:String>
-    <s:String x:Key="Editor.Statistics.FrameCount">عدد الاطارات</s:String>
-    <s:String x:Key="Editor.Statistics.TotalDuration">المدة الاجماليه</s:String>
-    <s:String x:Key="Editor.Statistics.FrameSize">حجم الاطار</s:String>
-    <s:String x:Key="Editor.Statistics.AverageDuration">(متوسط مدة (التاخير</s:String>
-    <s:String x:Key="Editor.Statistics.CurrentTime">الوقت الحالي</s:String>
-    <s:String x:Key="Editor.Statistics.CurrentTime.Info">الوقت الحالي (تراكمي) استنادا الى الاطار الحالي الذي يتم عرضه.</s:String>
-    <s:String x:Key="Editor.Statistics.FrameDpi">نقاط الاطار والحجم</s:String>
-    <s:String x:Key="Editor.Statistics.SelectedFrame">الاطار المحدد</s:String>
+    <s:String x:Key="S.Editor.Statistics.General">عام</s:String>
+    <s:String x:Key="S.Editor.Statistics.FrameCount">عدد الاطارات</s:String>
+    <s:String x:Key="S.Editor.Statistics.TotalDuration">المدة الاجماليه</s:String>
+    <s:String x:Key="S.Editor.Statistics.FrameSize">حجم الاطار</s:String>
+    <s:String x:Key="S.Editor.Statistics.AverageDuration">(متوسط مدة (التاخير</s:String>
+    <s:String x:Key="S.Editor.Statistics.CurrentTime">الوقت الحالي</s:String>
+    <s:String x:Key="S.Editor.Statistics.CurrentTime.Info">الوقت الحالي (تراكمي) استنادا الى الاطار الحالي الذي يتم عرضه.</s:String>
+    <s:String x:Key="S.Editor.Statistics.FrameDpi">نقاط الاطار والحجم</s:String>
+    <s:String x:Key="S.Editor.Statistics.SelectedFrame">الاطار المحدد</s:String>
     
     <!--TODO: Organize-->
     <!--Editor, Continuation-->
-    <s:String x:Key="Editor.Preparing">اعداد الاطارات</s:String>
-    <s:String x:Key="Editor.InvalidLoadingFiles">تحميل غير صالح-لا يمكنك استيراد ملفات متعددة في وقت واحد. حاول اختيار ملف واحد فقط.</s:String>
-    <s:String x:Key="Editor.InvalidLoadingProjects">تحميل غير صالح-لا يمكنك تحميل مشاريع متعددة في وقت واحد. حاول اختيار مشروع واحد فقط.</s:String>
-    <s:String x:Key="Editor.OpenMediaProject">فتح الوسائط (صوره او فيديو) او ملف مشروع</s:String>
-    <s:String x:Key="Editor.OpenMedia">(فتح ملف الوسائط (صوره او فيديو</s:String>
+    <s:String x:Key="S.Editor.Preparing">اعداد الاطارات</s:String>
+    <s:String x:Key="S.Editor.InvalidLoadingFiles">تحميل غير صالح-لا يمكنك استيراد ملفات متعددة في وقت واحد. حاول اختيار ملف واحد فقط.</s:String>
+    <s:String x:Key="S.Editor.InvalidLoadingProjects">تحميل غير صالح-لا يمكنك تحميل مشاريع متعددة في وقت واحد. حاول اختيار مشروع واحد فقط.</s:String>
+    <s:String x:Key="S.Editor.File.OpenMediaProject">فتح الوسائط (صوره او فيديو) او ملف مشروع</s:String>
+    <s:String x:Key="S.Editor.File.OpenMedia">(فتح ملف الوسائط (صوره او فيديو</s:String>
     
-    <s:String x:Key="Editor.Clipboard.InvalidCut.Title">قص العمل</s:String>
-    <s:String x:Key="Editor.Clipboard.InvalidCut.Instruction">لا يمكنك قص كل الاطارات.</s:String>
-    <s:String x:Key="Editor.Clipboard.InvalidCut.Message">يحتاج التسجيل الى اطار واحد على الاقل.</s:String>
+    <s:String x:Key="S.Editor.Clipboard.InvalidCut.Title">قص العمل</s:String>
+    <s:String x:Key="S.Editor.Clipboard.InvalidCut.Instruction">لا يمكنك قص كل الاطارات.</s:String>
+    <s:String x:Key="S.Editor.Clipboard.InvalidCut.Message">يحتاج التسجيل الى اطار واحد على الاقل.</s:String>
     
-    <s:String x:Key="Editor.DeleteAll.Title">ازالة الكل</s:String>
-    <s:String x:Key="Editor.DeleteAll.Instruction">هل تريد بالتاكيد ازاله كافة الاطارات ؟</s:String>
-    <s:String x:Key="Editor.DeleteAll.Message">سيؤدي هذا الاجراء الى تجاهل المشروع المفتوح الحالي ولا يمكن التراجع عنه. هل ترغب في المتابعة ؟</s:String>
-    <s:String x:Key="Editor.DiscardProject.Title">تجاهل الاطارات</s:String>
-    <s:String x:Key="Editor.DiscardProject.Instruction">هل تريد تجاهل المشروع السابق ؟</s:String>
-    <s:String x:Key="Editor.DiscardProject.Message">لا يمكنك التراجع عن هذه العملية.&#x0d;سيؤدي هذا الاجراء الى تجاهل المشروع ، وازاله كافة الاطارات.</s:String>
-    <s:String x:Key="Editor.DiscardPreviousProject.Instruction">هل تريد تجاهل المشروع السابق ؟</s:String>
-    <s:String x:Key="Editor.DiscardPreviousProject.Message">اذا اخترت عدم القيام بذلك ، سيكون المشروع السابق متاحا لفتحها عبر المشاريع الالكترونيه.</s:String>
-    <s:String x:Key="Editor.DeleteFrames.Title">حذف الاطارات</s:String>
-    <s:String x:Key="Editor.DeleteFrames.Instruction">هل تريد بالتاكيد حذف ؟</s:String>
-    <s:String x:Key="Editor.DeleteFrames.Message">ستتمكن من التراجع عن هذا لاحقا..&#x0d;سيؤدي هذا الاجراء الى حذف اطارات</s:String>
-    <s:String x:Key="Editor.Exiting.Title">الخروج من المحرر</s:String>
-    <s:String x:Key="Editor.Exiting.Instruction">هل تريد بالتاكيد الخروج ؟</s:String>
-    <s:String x:Key="Editor.Exiting.Message">'يمكن فتح المشروع الحالي الذي كنت تعمل عليه مره اخرى عن طريق 'المشاريع الاخيره.</s:String>
-    <s:String x:Key="Editor.Exiting.Message2">يمكن فتح المشروع الحالي الذي كنت تعمل عليه مره اخرى عن طريق 'المشاريع الاخيره' ، ولكن لا ننسي انه بعد بضعة ايام ، سيتم حذفه تلقائيا.</s:String>
+    <s:String x:Key="S.Editor.DeleteAll.Title">ازالة الكل</s:String>
+    <s:String x:Key="S.Editor.DeleteAll.Instruction">هل تريد بالتاكيد ازاله كافة الاطارات ؟</s:String>
+    <s:String x:Key="S.Editor.DeleteAll.Message">سيؤدي هذا الاجراء الى تجاهل المشروع المفتوح الحالي ولا يمكن التراجع عنه. هل ترغب في المتابعة ؟</s:String>
+    <s:String x:Key="S.Editor.DiscardProject.Title">تجاهل الاطارات</s:String>
+    <s:String x:Key="S.Editor.DiscardProject.Instruction">هل تريد تجاهل المشروع السابق ؟</s:String>
+    <s:String x:Key="S.Editor.DiscardProject.Message">لا يمكنك التراجع عن هذه العملية.&#x0d;سيؤدي هذا الاجراء الى تجاهل المشروع ، وازاله كافة الاطارات.</s:String>
+    <s:String x:Key="S.Editor.DiscardPreviousProject.Instruction">هل تريد تجاهل المشروع السابق ؟</s:String>
+    <s:String x:Key="S.Editor.DiscardPreviousProject.Message">اذا اخترت عدم القيام بذلك ، سيكون المشروع السابق متاحا لفتحها عبر المشاريع الالكترونيه.</s:String>
+    <s:String x:Key="S.Editor.DeleteFrames.Title">حذف الاطارات</s:String>
+    <s:String x:Key="S.Editor.DeleteFrames.Instruction">هل تريد بالتاكيد حذف ؟</s:String>
+    <s:String x:Key="S.Editor.DeleteFrames.Message">ستتمكن من التراجع عن هذا لاحقا..&#x0d;سيؤدي هذا الاجراء الى حذف اطارات</s:String>
+    <s:String x:Key="S.Editor.Exiting.Title">الخروج من المحرر</s:String>
+    <s:String x:Key="S.Editor.Exiting.Instruction">هل تريد بالتاكيد الخروج ؟</s:String>
+    <s:String x:Key="S.Editor.Exiting.Message">'يمكن فتح المشروع الحالي الذي كنت تعمل عليه مره اخرى عن طريق 'المشاريع الاخيره.</s:String>
+    <s:String x:Key="S.Editor.Exiting.Message2">يمكن فتح المشروع الحالي الذي كنت تعمل عليه مره اخرى عن طريق 'المشاريع الاخيره' ، ولكن لا ننسي انه بعد بضعة ايام ، سيتم حذفه تلقائيا.</s:String>
     
-    <s:String x:Key="Editor.Resize.Warning">يمكنك تحديد قيمه مختلفه لتطبيق اجراء تغيير الحجم الى.</s:String>
-    <s:String x:Key="Editor.Crop.Warning">يجب ان يكون اختيار الاقتصاص اصغر من حجم الاطار الحالي.</s:String>
-    <s:String x:Key="Editor.Crop.Warning2">يجب ان يكون اختيار الاقتصاص اكبر من 10x10 بكسل.</s:String>
-    <s:String x:Key="Editor.Caption.WarningNoText">لا يوجد نص ليتم تطبيقه.</s:String>
-    <s:String x:Key="Editor.Caption.WarningSelection">يجب عليك تحديد اطار واحد على الاقل لتطبيق التعليق علي.</s:String>
-    <s:String x:Key="Editor.FreeText.WarningSelection">يمكنك تحديد اطار واحد على الاقل لتطبيق النص علي.</s:String>
-    <s:String x:Key="Editor.TitleFrame.WarningSelection">يمكنك تحديد اطار واحد على الاقل لتطبيق اطار العنوان المجاور له.</s:String>
-    <s:String x:Key="Editor.FreeDrawing.WarningNoDrawing">لا توجد رسومات ليتم تطبيقها على الاطارات التي حددتها.</s:String>
-    <s:String x:Key="Editor.FreeDrawing.WarningSelection">يمكنك تحديد اطار واحد على الاقل لتطبيق الرسم الحر الى.</s:String>
+    <s:String x:Key="S.Resize.Warning">يمكنك تحديد قيمه مختلفه لتطبيق اجراء تغيير الحجم الى.</s:String>
+    <s:String x:Key="S.Crop.Warning">يجب ان يكون اختيار الاقتصاص اصغر من حجم الاطار الحالي.</s:String>
+    <s:String x:Key="S.Crop.Warning.Bigger">يجب ان يكون اختيار الاقتصاص اكبر من 10x10 بكسل.</s:String>
+    <s:String x:Key="S.Editor.Caption.WarningNoText">لا يوجد نص ليتم تطبيقه.</s:String>
+    <s:String x:Key="S.Editor.Caption.WarningSelection">يجب عليك تحديد اطار واحد على الاقل لتطبيق التعليق علي.</s:String>
+    <s:String x:Key="S.Editor.FreeText.WarningSelection">يمكنك تحديد اطار واحد على الاقل لتطبيق النص علي.</s:String>
+    <s:String x:Key="S.Editor.TitleFrame.WarningSelection">يمكنك تحديد اطار واحد على الاقل لتطبيق اطار العنوان المجاور له.</s:String>
+    <s:String x:Key="S.FreeDrawing.Warning.NoDrawing">لا توجد رسومات ليتم تطبيقها على الاطارات التي حددتها.</s:String>
+    <s:String x:Key="S.FreeDrawing.WarningSelection">يمكنك تحديد اطار واحد على الاقل لتطبيق الرسم الحر الى.</s:String>
     
-    <s:String x:Key="Editor.Watermark.Select">تحديد صوره</s:String>
-    <s:String x:Key="Editor.Watermark.WarningNoImage">يمكنك تحديد صوره لتطبيقها على الاطارات المحددة.</s:String>
-    <s:String x:Key="Editor.Watermark.WarningSelection">يمكنك تحديد اطار واحد على الاقل لتطبيق العلامة المائية علي.</s:String>
-    <s:String x:Key="Editor.Border.WarningThickness">يمكنك تحديد سمك الحدود اكبر من الصفر على جانب واحد على الاقل.</s:String>
-    <s:String x:Key="Editor.Border.WarningSelection">يجب عليك تحديد اطار واحد على الاقل لتطبيق الحدود علي.</s:String>
-    <s:String x:Key="Editor.Shadow.Warning.Invisible">يمكنك التعتيم اكبر من الصفر من اجل احداث اي فرق في الاطار.</s:String>
-    <s:String x:Key="Editor.Shadow.Warning.Behind">عند استخدام عمق الظل ودائره نصف قطرها طمس كصفر ، فانه لن يحدث اي فرق لانه سيكون مخفي وراء الاطار.</s:String>
-    <s:String x:Key="Editor.Cinemagraph.WarningNoDrawing">يمكنك تحديد بكسل واحد على الاقل لتطبيق رسم سينما البياني لتحديد البيكسلات بالرسم فوقها.</s:String>
+    <s:String x:Key="S.Watermark.Select">تحديد صوره</s:String>
+    <s:String x:Key="S.Watermark.WarningNoImage">يمكنك تحديد صوره لتطبيقها على الاطارات المحددة.</s:String>
+    <s:String x:Key="S.Watermark.WarningSelection">يمكنك تحديد اطار واحد على الاقل لتطبيق العلامة المائية علي.</s:String>
+    <s:String x:Key="S.Editor.Border.WarningThickness">يمكنك تحديد سمك الحدود اكبر من الصفر على جانب واحد على الاقل.</s:String>
+    <s:String x:Key="S.Editor.Border.WarningSelection">يجب عليك تحديد اطار واحد على الاقل لتطبيق الحدود علي.</s:String>
+    <s:String x:Key="S.Editor.Shadow.Warning.Invisible">يمكنك التعتيم اكبر من الصفر من اجل احداث اي فرق في الاطار.</s:String>
+    <s:String x:Key="S.Editor.Shadow.Warning.Behind">عند استخدام عمق الظل ودائره نصف قطرها طمس كصفر ، فانه لن يحدث اي فرق لانه سيكون مخفي وراء الاطار.</s:String>
+    <s:String x:Key="S.Editor.Cinemagraph.WarningNoDrawing">يمكنك تحديد بكسل واحد على الاقل لتطبيق رسم سينما البياني لتحديد البيكسلات بالرسم فوقها.</s:String>
     
-    <s:String x:Key="Editor.Fade.Title">انتقال التلاشي</s:String>
-    <s:String x:Key="Editor.Fade.WarningSelection">يمكنكتحديد اطار واحد على الاقل لتطبيق الانتقال تتلاشي الى.</s:String>
-    <s:String x:Key="Editor.Fade.WarningColor">لن يؤدي اللون الشفاف تماما الى انشاء اي تاثير على هذا الانتقال.</s:String>
-    <s:String x:Key="Editor.Slide.Title">انتقال الشريحة</s:String>
-    <s:String x:Key="Editor.Slide.WarningSelection">يمكنك تحديد اطار واحد على الاقل لتطبيق انتقال الشريحة الى.</s:String>
+    <s:String x:Key="S.Editor.Fade.Title">انتقال التلاشي</s:String>
+    <s:String x:Key="S.Editor.Fade.WarningSelection">يمكنكتحديد اطار واحد على الاقل لتطبيق الانتقال تتلاشي الى.</s:String>
+    <s:String x:Key="S.Editor.Fade.WarningColor">لن يؤدي اللون الشفاف تماما الى انشاء اي تاثير على هذا الانتقال.</s:String>
+    <s:String x:Key="S.Editor.Slide.Title">انتقال الشريحة</s:String>
+    <s:String x:Key="S.Editor.Slide.WarningSelection">يمكنك تحديد اطار واحد على الاقل لتطبيق انتقال الشريحة الى.</s:String>
 
-    <s:String x:Key="Editor.DragDrop.Invalid.Title">سحب وافلات غير صالحين</s:String>
-    <s:String x:Key="Editor.DragDrop.MultipleFiles.Instruction">لا يمكنك استيراد ملفات متعددة في وقت واحد</s:String>
-    <s:String x:Key="Editor.DragDrop.MultipleFiles.Message">حاول اختيار ملف واحد فقط.</s:String>
-    <s:String x:Key="Editor.DragDrop.Invalid.Instruction">من المستحيل تحميل الملف</s:String>
-    <s:String x:Key="Editor.DragDrop.Invalid.Message">تعذر تحميل الملف لانه يحتوي على تنسيق باطل </s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidProject.Instruction">لا يمكنك استيراد مشاريع متعددة في وقت واحد</s:String>
-    <s:String x:Key="Editor.DragDrop.InvalidProject.Message">حاول اختيار مشروع واحد فقط.</s:String>
+    <s:String x:Key="S.Editor.DragDrop.Invalid.Title">سحب وافلات غير صالحين</s:String>
+    <s:String x:Key="S.Editor.DragDrop.MultipleFiles.Instruction">لا يمكنك استيراد ملفات متعددة في وقت واحد</s:String>
+    <s:String x:Key="S.Editor.DragDrop.MultipleFiles.Message">حاول اختيار ملف واحد فقط.</s:String>
+    <s:String x:Key="S.Editor.DragDrop.Invalid.Instruction">من المستحيل تحميل الملف</s:String>
+    <s:String x:Key="S.Editor.DragDrop.Invalid.Message">تعذر تحميل الملف لانه يحتوي على تنسيق باطل </s:String>
+    <s:String x:Key="S.Editor.DragDrop.InvalidProject.Instruction">لا يمكنك استيراد مشاريع متعددة في وقت واحد</s:String>
+    <s:String x:Key="S.Editor.DragDrop.InvalidProject.Message">حاول اختيار مشروع واحد فقط.</s:String>
     
-    <s:String x:Key="Editor.LoadingFrames">تحميل الاطارات</s:String>
-    <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Instruction">من المستحيل تحميل المشروع</s:String>
-    <s:String x:Key="Editor.LoadingFrames.ProjectCorrupted.Message">لا يمكن تحميل الاطارات لانها كلها معطوبة او الصور غير موجودة حيث من المتوقع ان.</s:String>
-    <s:String x:Key="Editor.LoadingFrames.FramesCorrupted.Instruction">تعذر تحميل بعض الاطارات</s:String>
-    <s:String x:Key="Editor.LoadingFrames.FramesCorrupted.Message">لا يمكن تحميل الاطارات لانه لم يعثر عليها او لانها معطوبة.</s:String>
-    <s:String x:Key="Editor.UpdatingFrames">تحديث الاطارات</s:String>
-    <s:String x:Key="Editor.PreparingImport">التحضير للاستيراد</s:String>
-    <s:String x:Key="Editor.ImportingFrames">استيراد اطارات</s:String>
+    <s:String x:Key="S.Editor.LoadingFrames">تحميل الاطارات</s:String>
+    <s:String x:Key="S.Editor.LoadingFrames.ProjectCorrupted.Instruction">من المستحيل تحميل المشروع</s:String>
+    <s:String x:Key="S.Editor.LoadingFrames.ProjectCorrupted.Message">لا يمكن تحميل الاطارات لانها كلها معطوبة او الصور غير موجودة حيث من المتوقع ان.</s:String>
+    <s:String x:Key="S.Editor.LoadingFrames.FramesCorrupted.Instruction">تعذر تحميل بعض الاطارات</s:String>
+    <s:String x:Key="S.Editor.LoadingFrames.FramesCorrupted.Message">لا يمكن تحميل الاطارات لانه لم يعثر عليها او لانها معطوبة.</s:String>
+    <s:String x:Key="S.Editor.UpdatingFrames">تحديث الاطارات</s:String>
+    <s:String x:Key="S.Editor.PreparingImport">التحضير للاستيراد</s:String>
+    <s:String x:Key="S.Editor.ImportingFrames">استيراد اطارات</s:String>
     
-    <s:String x:Key="Editor.ExportingRecording">تصدير التسجيل</s:String>
+    <s:String x:Key="S.Editor.ExportingRecording">تصدير التسجيل</s:String>
     <s:String x:Key="S.Editor.AnalyzingDuplicates">تحليل التكرارات</s:String>
     <s:String x:Key="S.Editor.AdjustingDuplicatesDelay">ضبط التاخير</s:String>
     <s:String x:Key="S.Editor.DiscardingDuplicates">تجاهل التكرارات</s:String>
-    <s:String x:Key="Editor.DiscardingFrames">تجاهل الاطارات</s:String>
-    <s:String x:Key="Editor.DiscardingFolders">تجاهل المجلدات</s:String>
-    <s:String x:Key="Editor.ResizingFrames">تغيير حجم الاطارات</s:String>
-    <s:String x:Key="Editor.CroppingFrames">اطارات مقصوصة</s:String>
-    <s:String x:Key="Editor.ApplyingOverlay">تطبيق تراكب على الاطارات</s:String>
-    <s:String x:Key="Editor.CreatingTitleFrame">انشاء اطار العنوان</s:String>
-    <s:String x:Key="Editor.ApplyingFlipRotate">تطبيق الشقلبة/تدوير الى الاطارات</s:String>
-    <s:String x:Key="Editor.ChangingDelay">تغيير التاخير</s:String>
-    <s:String x:Key="Editor.ApplyingTransition">تطبيق تاثير الانتقال</s:String>
+    <s:String x:Key="S.Editor.DiscardingFrames">تجاهل الاطارات</s:String>
+    <s:String x:Key="S.Editor.DiscardingFolders">تجاهل المجلدات</s:String>
+    <s:String x:Key="S.Editor.ResizingFrames">تغيير حجم الاطارات</s:String>
+    <s:String x:Key="S.Editor.CroppingFrames">اطارات مقصوصة</s:String>
+    <s:String x:Key="S.Editor.ApplyingOverlay">تطبيق تراكب على الاطارات</s:String>
+    <s:String x:Key="S.Editor.CreatingTitleFrame">انشاء اطار العنوان</s:String>
+    <s:String x:Key="S.Editor.ApplyingFlipRotate">تطبيق الشقلبة/تدوير الى الاطارات</s:String>
+    <s:String x:Key="S.Editor.ChangingDelay">تغيير التاخير</s:String>
+    <s:String x:Key="S.Editor.ApplyingTransition">تطبيق تاثير الانتقال</s:String>
     <s:String x:Key="S.Editor.PreparingSaving">التحضير للحفظ</s:String>
 
-    <s:String x:Key="Editor.List.Frame">اطار:</s:String>
-    <s:String x:Key="Editor.List.OpenImage">فتح الصورة</s:String>
-    <s:String x:Key="Editor.List.ExploreFolder">استكشاف مجلد</s:String>
-    <s:String x:Key="Editor.List.ExportImage">تصدير الصورة</s:String>
+    <s:String x:Key="S.Editor.List.Frame">اطار:</s:String>
+    <s:String x:Key="S.Editor.List.OpenImage">فتح الصورة</s:String>
+    <s:String x:Key="S.Editor.List.ExploreFolder">استكشاف مجلد</s:String>
+    <s:String x:Key="S.Editor.List.ExportImage">تصدير الصورة</s:String>
     
-    <s:String x:Key="Editor.FrameNumbersInfo">اجمالي العدد ، عدد الاختيارات ، فهرس التحديد</s:String>
+    <s:String x:Key="S.Editor.FrameNumbersInfo">اجمالي العدد ، عدد الاختيارات ، فهرس التحديد</s:String>
     
-    <s:String x:Key="GoTo.Title">انتقل الى الاطار</s:String>
-    <s:String x:Key="GoTo.Instruction">({انتقل الى الاطار (من 0 الى {0 </s:String>
+    <s:String x:Key="S.GoTo.Title">انتقل الى الاطار</s:String>
+    <s:String x:Key="S.GoTo.Instruction">({انتقل الى الاطار (من 0 الى {0 </s:String>
     
-    <s:String x:Key="Context.SaveAs">حفظ باسم</s:String>
-    <s:String x:Key="Context.RemoveFrames">ازاله الاطارات المحددة</s:String>
-    <s:String x:Key="Context.NewRecording">تسجيل شاشه جديده</s:String>
-    <s:String x:Key="Context.NewWebcamRecording">تسجيل كاميرا ويب جديده</s:String>
-    <s:String x:Key="Context.NewBoardRecording">تسجيل اللوحة الجديدة</s:String>
-    <s:String x:Key="Context.NewBlankAnimation">مشروع جديد</s:String>
-    <s:String x:Key="Context.NewFromMediaProject">جديد من الاعلام او المشروع</s:String>
+    <s:String x:Key="S.Context.SaveAs">حفظ باسم</s:String>
+    <s:String x:Key="S.Context.RemoveFrames">ازاله الاطارات المحددة</s:String>
+    <s:String x:Key="S.Context.NewRecording">تسجيل شاشه جديده</s:String>
+    <s:String x:Key="S.Context.NewWebcamRecording">تسجيل كاميرا ويب جديده</s:String>
+    <s:String x:Key="S.Context.NewBoardRecording">تسجيل اللوحة الجديدة</s:String>
+    <s:String x:Key="S.Context.NewBlankAnimation">مشروع جديد</s:String>
+    <s:String x:Key="S.Context.NewFromMediaProject">جديد من الاعلام او المشروع</s:String>
     
     <!--Warnings-->
-    <s:String x:Key="Editor.Warning.Selection">يمكنك تحديد اطار واحد على الاقل لتطبيق التراكب عليه.</s:String>
-    <s:String x:Key="Editor.Warning.Ffmpeg"> غير موجود. قم باضافته الى متغيرات بيئة مسار او انقر هنا لفتح خيارات > اضافات لتعيين الموقع.FFmpeg</s:String>
-    <s:String x:Key="Editor.Warning.Gifski">الهدايا غير موجودة قم باضافته الى متغيرات بيئة مسار او انقر هنا لفتح خيارات > اضافات لتعيين الموقع.</s:String>
-    <s:String x:Key="Editor.Warning.LowSpace">لا توجد مساحة كافيه لليسار على محرك الاقراص حيث يخزن هذا التطبيق ذاكره التخزين المؤقت ({0}% اليسار). انقر هنا لفتح خيارات > الملفات المؤقتة لتحرير بعض المساحة.</s:String>
+    <s:String x:Key="S.Editor.Warning.Selection">يمكنك تحديد اطار واحد على الاقل لتطبيق التراكب عليه.</s:String>
+    <s:String x:Key="S.Editor.Warning.Ffmpeg"> غير موجود. قم باضافته الى متغيرات بيئة مسار او انقر هنا لفتح خيارات > اضافات لتعيين الموقع.FFmpeg</s:String>
+    <s:String x:Key="S.Editor.Warning.Gifski">الهدايا غير موجودة قم باضافته الى متغيرات بيئة مسار او انقر هنا لفتح خيارات > اضافات لتعيين الموقع.</s:String>
+    <s:String x:Key="S.Editor.Warning.LowSpace">لا توجد مساحة كافيه لليسار على محرك الاقراص حيث يخزن هذا التطبيق ذاكره التخزين المؤقت ({0}% اليسار). انقر هنا لفتح خيارات > الملفات المؤقتة لتحرير بعض المساحة.</s:String>
     
     <!--Hints-->
     <s:String x:Key="S.Hint.NewRecording">تم انشاء تسجيل جديد</s:String>
@@ -807,47 +807,47 @@
     <s:String x:Key="S.Hint.Duplicates">ازاله التكرارات</s:String>
     
     <!--Action Grid-->
-    <s:String x:Key="Action.Hide">اخفاء</s:String>
-    <s:String x:Key="Action.Apply">تطبيق</s:String>
-    <s:String x:Key="Action.Open">افتح</s:String>
-    <s:String x:Key="Action.Save">حفظ</s:String>
-    <s:String x:Key="Action.Cancel">الغاء الامر</s:String>
-    <s:String x:Key="Size">حجم</s:String>
-    <s:String x:Key="Background">الخلفية</s:String>
-    <s:String x:Key="Color">اللون:</s:String>
+    <s:String x:Key="S.Action.Hide">اخفاء</s:String>
+    <s:String x:Key="S.Action.Apply">تطبيق</s:String>
+    <s:String x:Key="S.Action.Open">افتح</s:String>
+    <s:String x:Key="S.Action.Save">حفظ</s:String>
+    <s:String x:Key="S.Action.Cancel">الغاء الامر</s:String>
+    <s:String x:Key="S.Size">حجم</s:String>
+    <s:String x:Key="S.Background">الخلفية</s:String>
+    <s:String x:Key="S.Color">اللون:</s:String>
     
-    <s:String x:Key="Recent.Projects">المشاريع الحديثة</s:String>
-    <s:String x:Key="Recent.EnumeratingProjects">ابحث عن المشاريع الحديثة...</s:String>
-    <s:String x:Key="Recent.CreationDate">تاريخ الانشاء</s:String>
-    <s:String x:Key="Recent.FrameCount">عدد الاطارات</s:String>
-    <s:String x:Key="Recent.Warning.NothingSelected">لا يوجد مشروع محدد. حدد مشروع القائمة التي سيتم تحميلها.</s:String>
-    <s:String x:Key="Recent.Warning.SameOpened">يتم عرض هذا المشروع بالفعل بواسطة مثيل المحرر هذا.</s:String>
-    <s:String x:Key="Recent.Warning.AlreadyOpened">تم فتح هذا المشروع بالفعل من قبل مثيل محرر اخر. لا يمكن فتح مشروع مره ثانيه اذا كان مفتوحا بالفعل على محرر اخر.</s:String>
+    <s:String x:Key="S.Recent.Projects">المشاريع الحديثة</s:String>
+    <s:String x:Key="S.Recent.Searching">ابحث عن المشاريع الحديثة...</s:String>
+    <s:String x:Key="S.Recent.Date">تاريخ الانشاء</s:String>
+    <s:String x:Key="S.Recent.Frames">عدد الاطارات</s:String>
+    <s:String x:Key="S.Recent.Warning.NoSelection">لا يوجد مشروع محدد. حدد مشروع القائمة التي سيتم تحميلها.</s:String>
+    <s:String x:Key="S.Recent.Warning.Same">يتم عرض هذا المشروع بالفعل بواسطة مثيل المحرر هذا.</s:String>
+    <s:String x:Key="S.Recent.Warning.AnotherEditor">تم فتح هذا المشروع بالفعل من قبل مثيل محرر اخر. لا يمكن فتح مشروع مره ثانيه اذا كان مفتوحا بالفعل على محرر اخر.</s:String>
     
-    <s:String x:Key="Clipboard.Entries">ادخالات الحافظة</s:String>
-    <s:String x:Key="Clipboard.Entry">ادخال الحافظة:</s:String>
-    <s:String x:Key="Clipboard.Explore">استكشاف المحتوي</s:String>
-    <s:String x:Key="Clipboard.Remove">ازالة</s:String>
-    <s:String x:Key="Clipboard.Behavior">سلوك اللصق</s:String>
-    <s:String x:Key="Clipboard.Before">قبل الاطار المحدد</s:String>
-    <s:String x:Key="Clipboard.After">بعد الاطار المحدد</s:String>
+    <s:String x:Key="S.Clipboard.Entries">ادخالات الحافظة</s:String>
+    <s:String x:Key="S.Clipboard.Entry">ادخال الحافظة:</s:String>
+    <s:String x:Key="S.Clipboard.Explore">استكشاف المحتوي</s:String>
+    <s:String x:Key="S.Clipboard.Remove">ازالة</s:String>
+    <s:String x:Key="S.Clipboard.Behavior">سلوك اللصق</s:String>
+    <s:String x:Key="S.Clipboard.Before">قبل الاطار المحدد</s:String>
+    <s:String x:Key="S.Clipboard.After">بعد الاطار المحدد</s:String>
     
-    <s:String x:Key="Resize.CurrentProperties">الخصائص الحالية</s:String>
-    <s:String x:Key="Resize.Dpi">Dpi</s:String>
-    <s:String x:Key="Resize.NewProperties">خصائص جديده</s:String>
-    <s:String x:Key="Resize.Dpi2">DPI:</s:String>
-    <s:String x:Key="Resize.KeepAspect">حافظ على نسبه العرض الى الارتفاع.</s:String>
+    <s:String x:Key="S.Resize.CurrentProperties">الخصائص الحالية</s:String>
+    <s:String x:Key="S.Resize.Dpi">Dpi</s:String>
+    <s:String x:Key="S.Resize.NewProperties">خصائص جديده</s:String>
+    <s:String x:Key="S.Resize.Dpi2">DPI:</s:String>
+    <s:String x:Key="S.Resize.KeepAspect">حافظ على نسبه العرض الى الارتفاع.</s:String>
     
-    <s:String x:Key="Crop.Points">نقاط</s:String>
-    <s:String x:Key="Crop.Top">اعلى:</s:String>
-    <s:String x:Key="Crop.Left">يسار:</s:String>
-    <s:String x:Key="Crop.Bottom">اسفل:</s:String>
-    <s:String x:Key="Crop.Right">يمين:</s:String>
+    <s:String x:Key="S.Crop.Points">نقاط</s:String>
+    <s:String x:Key="S.Crop.Top">اعلى:</s:String>
+    <s:String x:Key="S.Crop.Left">يسار:</s:String>
+    <s:String x:Key="S.Crop.Bottom">اسفل:</s:String>
+    <s:String x:Key="S.Crop.Right">يمين:</s:String>
     
-    <s:String x:Key="FlipRotate.FlipHorizontal">شقلبة افقية</s:String>
-    <s:String x:Key="FlipRotate.FlipVertical">شقلبة عمودية</s:String>
-    <s:String x:Key="FlipRotate.RotateLeft">تدوير اليسار 90 º</s:String>
-    <s:String x:Key="FlipRotate.RotateRight">استدارة لليمين 90 º</s:String>
+    <s:String x:Key="S.FlipRotate.FlipHorizontal">شقلبة افقية</s:String>
+    <s:String x:Key="S.FlipRotate.FlipVertical">شقلبة عمودية</s:String>
+    <s:String x:Key="S.FlipRotate.RotateLeft">تدوير اليسار 90 º</s:String>
+    <s:String x:Key="S.FlipRotate.RotateRight">استدارة لليمين 90 º</s:String>
     
     <s:String x:Key="S.Reduce.Header">خفض نسبة إطار</s:String>
     <s:String x:Key="S.Reduce.Factor">عامل:</s:String>
@@ -865,59 +865,58 @@
     <s:String x:Key="S.RemoveDuplicates.Delay.Sum">استخدم المبلغ</s:String>
     <s:String x:Key="S.RemoveDuplicates.Info">يحلل هذا الاجراء كل اطار (بكسل بكسل) ويزيل تلك التي لا تقل عن {0}% مشابهه لجارتها المباشرة. &#x0d; يمكنك اختيار ما اذا كنت ترغب في ضبط التاخير (مده المعرض) من الاطارات.</s:String>
     
-    <s:String x:Key="Caption.Text">نص</s:String>
-    <s:String x:Key="Caption.Font">الخط</s:String>
-    <s:String x:Key="Caption.Family">الاسره:</s:String>
-    <s:String x:Key="Caption.Style">اسلوب:</s:String>
-    <s:String x:Key="Caption.Weight">الوزن:</s:String>
-    <s:String x:Key="Caption.Size">الحجم:</s:String>
-    <s:String x:Key="Caption.Color">اللون:</s:String>
-    <s:String x:Key="Caption.Outline">خط خارجي</s:String>
-    <s:String x:Key="Caption.Thickness">سمك:</s:String>
-    <s:String x:Key="Caption.Layout">تخطيط</s:String>
-    <s:String x:Key="Caption.Vertical">عمودي:</s:String>
-    <s:String x:Key="Caption.Horizontal">افقي:</s:String>
+    <s:String x:Key="S.Caption.Text">نص</s:String>
+    <s:String x:Key="S.Caption.Font">الخط</s:String>
+    <s:String x:Key="S.Caption.Family">الاسره:</s:String>
+    <s:String x:Key="S.Caption.Style">اسلوب:</s:String>
+    <s:String x:Key="S.Caption.Weight">الوزن:</s:String>
+    <s:String x:Key="S.Caption.Size">الحجم:</s:String>
+    <s:String x:Key="S.Caption.Color">اللون:</s:String>
+    <s:String x:Key="S.Caption.Outline">خط خارجي</s:String>
+    <s:String x:Key="S.Caption.Thickness">سمك:</s:String>
+    <s:String x:Key="S.Caption.Layout">تخطيط</s:String>
+    <s:String x:Key="S.Caption.Vertical">عمودي:</s:String>
+    <s:String x:Key="S.Caption.Horizontal">افقي:</s:String>
 
     <s:String x:Key="S.KeyStrokes">ضربات المفاتيح</s:String>
-    <s:String x:Key="KeyStrokes.Keys">مفاتيح</s:String>
-    <s:String x:Key="KeyStrokes.Separator">فاصل:</s:String>
-    <s:String x:Key="KeyStrokes.Edit">تحرير ضربات المفاتيح </s:String>
-    <s:String x:Key="KeyStrokes.IgnoreModifiers">تجاهل مفاتيح Ctrl و Alt و Shift و Windows اثناء عدم استخدامها كمعدلات.</s:String>
-    <s:String x:Key="KeyStrokes.IgnoreModifiers.Info">"Control + C" وسوف تتجاهل المطابع مفتاح وحيد مثل  "السيطرة " ، لكنها لن تتجاهل </s:String>
-    <s:String x:Key="KeyStrokes.Extend">توسيع المعرض من ضربات المفاتيح </s:String>
-    <!--<s:String x:Key="KeyStrokes.Earlier">Start the exhibition of the key strokes earlier.</s:String>-->
-    <s:String x:Key="KeyStrokes.By">(ms) بواسطة:</s:String>
-    <s:String x:Key="KeyStrokes.Warning.None">لا يوجد ضربات المفاتيح على تسجيلك.</s:String>
-    <s:String x:Key="KeyStrokes.Edit.Title">ScreenToGif - محرر ضربات المفاتيح</s:String>
-    <s:String x:Key="KeyStrokes.Edit.Number">رقم الاطار</s:String>
-    <s:String x:Key="KeyStrokes.Edit.Keys">ضربات المفاتيح المكتشفة</s:String>
-    <s:String x:Key="KeyStrokes.Edit.Remove">ازاله ضربات المفاتيح</s:String>
-    <s:String x:Key="KeyStrokes.Edit.Add">اضافه ضربات المفاتيح:</s:String>
-    <s:String x:Key="KeyStrokes.Edit.Lower">حروف صغيره.</s:String>
-    <s:String x:Key="KeyStrokes.Edit.Lower.Info">فانه يتيح لك ادراج احرف اقل حاله واحده.</s:String>
+    <s:String x:Key="S.KeyStrokes.Keys">مفاتيح</s:String>
+    <s:String x:Key="S.KeyStrokes.Separator">فاصل:</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit">تحرير ضربات المفاتيح </s:String>
+    <s:String x:Key="S.KeyStrokes.IgnoreModifiers">تجاهل مفاتيح Ctrl و Alt و Shift و Windows اثناء عدم استخدامها كمعدلات.</s:String>
+    <s:String x:Key="S.KeyStrokes.IgnoreModifiers.Info">"Control + C" وسوف تتجاهل المطابع مفتاح وحيد مثل  "السيطرة " ، لكنها لن تتجاهل </s:String>
+    <s:String x:Key="S.KeyStrokes.Extend">توسيع المعرض من ضربات المفاتيح </s:String>
+    <!--<s:String x:Key="S.KeyStrokes.Earlier">Start the exhibition of the key strokes earlier.</s:String>-->
+    <s:String x:Key="S.KeyStrokes.By">(ms) بواسطة:</s:String>
+    <s:String x:Key="S.KeyStrokes.Warning.None">لا يوجد ضربات المفاتيح على تسجيلك.</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Title">ScreenToGif - محرر ضربات المفاتيح</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Number">رقم الاطار</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Keys">ضربات المفاتيح المكتشفة</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Remove">ازاله ضربات المفاتيح</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Add">اضافه ضربات المفاتيح:</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Lower">حروف صغيره.</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Lower.Info">فانه يتيح لك ادراج احرف اقل حاله واحده.</s:String>
     
-    <s:String x:Key="String.Delay">تاخير</s:String>
-    <s:String x:Key="String.DelayMs">تاخير:</s:String>
-    <s:String x:Key="String.ValueMs">القيمة +:</s:String>
-    <s:String x:Key="String.ScaleValue">قيمه المقياس:</s:String>
-    <s:String x:Key="String.Margin">الهامش:</s:String>
-    <s:String x:Key="String.Padding">الحشو:</s:String>
-    <s:String x:Key="String.Background">الخلفية</s:String>
-    <s:String x:Key="String.MinHeight">ادنى ارتفاع:</s:String>
+    <s:String x:Key="S.Delay">تاخير</s:String>
+    <s:String x:Key="S.DelayMs">تاخير:</s:String>
+    <s:String x:Key="S.ValueMs">القيمة +:</s:String>
+    <s:String x:Key="S.ScaleValue">قيمه المقياس:</s:String>
+    <s:String x:Key="S.Margin">الهامش:</s:String>
+    <s:String x:Key="S.Padding">الحشو:</s:String>
+    <s:String x:Key="S.MinHeight">ادنى ارتفاع:</s:String>
     
-    <s:String x:Key="FreeDrawing.Mode">وضع</s:String>
-    <s:String x:Key="FreeDrawing.Pen">القلم</s:String>
-    <s:String x:Key="FreeDrawing.Eraser">ممحاة</s:String>
-    <s:String x:Key="FreeDrawing.Select">تحديد</s:String>
-    <s:String x:Key="FreeDrawing.StrokeEraser">اضغط على الممحاة</s:String>
-    <s:String x:Key="FreeDrawing.Width">العرض:</s:String>
-    <s:String x:Key="FreeDrawing.Height">الارتفاع:</s:String>
-    <s:String x:Key="FreeDrawing.Tip">تلميح:</s:String>
-    <s:String x:Key="FreeDrawing.Rectangle">مستطيل</s:String>
-    <s:String x:Key="FreeDrawing.Ellipse">بيضاوي</s:String>
-    <s:String x:Key="FreeDrawing.Other">اخر:</s:String>
-    <s:String x:Key="FreeDrawing.Highlighter">مبرز.</s:String>
-    <s:String x:Key="FreeDrawing.FitToCurve">ملائمة للمنحني.</s:String>
+    <s:String x:Key="S.FreeDrawing.Mode">وضع</s:String>
+    <s:String x:Key="S.FreeDrawing.Pen">القلم</s:String>
+    <s:String x:Key="S.FreeDrawing.Eraser">ممحاة</s:String>
+    <s:String x:Key="S.FreeDrawing.Select">تحديد</s:String>
+    <s:String x:Key="S.FreeDrawing.StrokeEraser">اضغط على الممحاة</s:String>
+    <s:String x:Key="S.FreeDrawing.Width">العرض:</s:String>
+    <s:String x:Key="S.FreeDrawing.Height">الارتفاع:</s:String>
+    <s:String x:Key="S.FreeDrawing.Tip">تلميح:</s:String>
+    <s:String x:Key="S.FreeDrawing.Rectangle">مستطيل</s:String>
+    <s:String x:Key="S.FreeDrawing.Ellipse">بيضاوي</s:String>
+    <s:String x:Key="S.FreeDrawing.Other">اخر:</s:String>
+    <s:String x:Key="S.FreeDrawing.Highlighter">مبرز.</s:String>
+    <s:String x:Key="S.FreeDrawing.FitToCurve">ملائمة للمنحني.</s:String>
     
     <s:String x:Key="S.Shapes.Mode.Insert">ادراج</s:String>
     <s:String x:Key="S.Shapes.Shapes">اشكال</s:String>
@@ -928,11 +927,11 @@
     <s:String x:Key="S.MouseClicks">نقرات الماوس</s:String>
     <s:String x:Key="S.MouseClicks.Warning.None">لا يوجد نقرات الماوس الكشف عن مشروعك.</s:String>
     
-    <s:String x:Key="Watermark.Image">صورة</s:String>
-    <s:String x:Key="Watermark.File">ملف:</s:String>
-    <s:String x:Key="Watermark.Opacity">بلا  شفافية:</s:String>
+    <s:String x:Key="S.Watermark.Image">صورة</s:String>
+    <s:String x:Key="S.Watermark.File">ملف:</s:String>
+    <s:String x:Key="S.Watermark.Opacity">بلا  شفافية:</s:String>
     
-    <s:String x:Key="Border.Appearance">مظهر</s:String>
+    <s:String x:Key="S.Border.Appearance">مظهر</s:String>
     <s:String x:Key="S.Border.Info">استخدم القيم السالبة لجعل الحد يوسع الصورة. عند القيام بذلك ، سيتم تطبيق الحدود على كافة الاطارات. &#x0d;اذا لم يتم استخدام قيمه سالبه ، سيتم تطبيق الحدود على الاطارات المحددة فقط.</s:String>
 
     <s:String x:Key="S.Shadow.ShadowColor">لون الظل:</s:String>
@@ -947,48 +946,48 @@
     <s:String x:Key="S.Obfuscate.Info">استخدم اداه التحديد لتحديد المستطيل الذي يجب ان يكون منقطا.</s:String>
     <s:String x:Key="S.Obfuscate.Warning">لم تحدد اي شيء. الرجاء استخدام اداه التحديد لتحديد المستطيل الذي يجب ان تكون منقطه.</s:String>
     
-    <s:String x:Key="Progress.Type">نوع</s:String>
-    <s:String x:Key="Progress.Type.Bar">شريط</s:String>
-    <s:String x:Key="Progress.Type.Text">نص</s:String>
-    <s:String x:Key="Progress.Precision">الدقه:</s:String>
-    <s:String x:Key="Progress.Precision.Minutes">دقائق</s:String>
-    <s:String x:Key="Progress.Precision.Seconds">ثانيه</s:String>
-    <s:String x:Key="Progress.Precision.Miliseconds">ميلي ثانيه</s:String>
-    <s:String x:Key="Progress.Precision.Percentage">النسبة المئوية</s:String>
-    <s:String x:Key="Progress.Precision.Count">رقم الاطار</s:String>
-    <s:String x:Key="Progress.Precision.DateOfRecording">التاريخ/الوقت الفعلي</s:String>
-    <s:String x:Key="Progress.Precision.Custom">تخصيص</s:String>
-    <s:String x:Key="Progress.Precision.ShowTotal">اظهار الاجمالي.</s:String>
-    <s:String x:Key="Progress.Format">تنسيق:</s:String>
+    <s:String x:Key="S.Progress.Type">نوع</s:String>
+    <s:String x:Key="S.Progress.Type.Bar">شريط</s:String>
+    <s:String x:Key="S.Progress.Type.Text">نص</s:String>
+    <s:String x:Key="S.Progress.Precision">الدقه:</s:String>
+    <s:String x:Key="S.Progress.Precision.Minutes">دقائق</s:String>
+    <s:String x:Key="S.Progress.Precision.Seconds">ثانيه</s:String>
+    <s:String x:Key="S.Progress.Precision.Milliseconds">ميلي ثانيه</s:String>
+    <s:String x:Key="S.Progress.Precision.Percentage">النسبة المئوية</s:String>
+    <s:String x:Key="S.Progress.Precision.Count">رقم الاطار</s:String>
+    <s:String x:Key="S.Progress.Precision.DateOfRecording">التاريخ/الوقت الفعلي</s:String>
+    <s:String x:Key="S.Progress.Precision.Custom">تخصيص</s:String>
+    <s:String x:Key="S.Progress.Precision.ShowTotal">اظهار الاجمالي.</s:String>
+    <s:String x:Key="S.Progress.Format">تنسيق:</s:String>
     <s:String x:Key="S.Progress.Format.Date">يمكنك استخدام تنسيق التاريخ والوقت من .Net framework. &#x0d; تتوفر المواصفات في هذين الارتباطين ادناه.</s:String>
     <s:String x:Key="S.Progress.Format.Date.Standard">التنسيقات القياسية</s:String>
     <s:String x:Key="S.Progress.Format.Date.Custom">تنسيقات مخصصة</s:String>
     <s:String x:Key="S.Progress.Precision.StartNumber">عد من:</s:String>
     <s:String x:Key="S.Progress.Precision.StartNumber.ToolTip">يبدا في احتساب رقم الاطار من هذا الرقم المحدد.</s:String>
-    <s:String x:Key="Progress.Orientation">التوجية:</s:String>
+    <s:String x:Key="S.Progress.Orientation">التوجية:</s:String>
     
-    <s:String x:Key="S.DelayUpdate">تحديث التاخير</s:String>
-    <s:String x:Key="Delay.Mode">وضع التاخير:</s:String>
-    <s:String x:Key="Delay.Mode.Override">(تجاوز (في م ث</s:String>
-    <s:String x:Key="Delay.Mode.IncreaseDecrease">(الزيادة او النقصان (في م ث</s:String>
-    <s:String x:Key="Delay.Mode.Scale">(in %) مقياس</s:String>
-    <s:String x:Key="Delay.NewValue">قيمه جديده</s:String>
-    <s:String x:Key="Delay.Minimum10Ms">الحد الادنى من 10م ث لكل اطار.</s:String>
-    <s:String x:Key="Delay.DecreaseIncrease">انخفاض / زيادة القيمة</s:String>
-    <s:String x:Key="Delay.Scale">قيمه المقياس</s:String>
+    <s:String x:Key="S.Delay.Update">تحديث التاخير</s:String>
+    <s:String x:Key="S.Delay.Mode">وضع التاخير:</s:String>
+    <s:String x:Key="S.Delay.Mode.Override">(تجاوز (في م ث</s:String>
+    <s:String x:Key="S.Delay.Mode.IncreaseDecrease">(الزيادة او النقصان (في م ث</s:String>
+    <s:String x:Key="S.Delay.Mode.Scale">(in %) مقياس</s:String>
+    <s:String x:Key="S.Delay.NewValue">قيمه جديده</s:String>
+    <s:String x:Key="S.Delay.Minimum10Ms">الحد الادنى من 10م ث لكل اطار.</s:String>
+    <s:String x:Key="S.Delay.DecreaseIncrease">انخفاض / زيادة القيمة</s:String>
+    <s:String x:Key="S.Delay.Scale">قيمه المقياس</s:String>
     
-    <s:String x:Key="Cinemagraph.Info">استخدم القلم لتحديد البيكسلات التي لا يجب ان تبقي ثابته (التي يجب ان تتغير بين الاطارات) ، عن طريق الرسم على اعلي منها.</s:String>
-    <s:String x:Key="OverrideDelay.Info">ستحل هذه القيمة الجديدة محل المدة (التاخير) لكافة الاطارات المحددة. يمكن ان تكون القيمة من 10م ث الى 25500م ث.</s:String>
-    <s:String x:Key="IncreaseDecreaseDelay.Info">ستقوم هذه القيمة بانقاص/زيادة المدة (التاخير) لكل اطار محدد. &#x0d; يمكنك انقاص/الزيادة عن طريق تحديد قيمه بين-10000م ث و 10000م ث ، ولكن سيتم تقييد المدة النهائية لكل اطار بين 10م ث و 25500م ث</s:String>
-    <s:String x:Key="ScaleDelay.Info">تحجيم المدة (التاخير) لكل اطار محدد بقيمه النسبة المئوية. &#x0d; يمكنك تحجيم مده كل اطار بتحديد قيمه بين 1% و 1000% ، ولكن المدة النهائية لكل اطار ستكون محصورة بين 10 مللي ثانيه و 25500msي ثانيه</s:String>
+    <s:String x:Key="S.Cinemagraph.Info">استخدم القلم لتحديد البيكسلات التي لا يجب ان تبقي ثابته (التي يجب ان تتغير بين الاطارات) ، عن طريق الرسم على اعلي منها.</s:String>
+    <s:String x:Key="S.Delay.Override.Info">ستحل هذه القيمة الجديدة محل المدة (التاخير) لكافة الاطارات المحددة. يمكن ان تكون القيمة من 10م ث الى 25500م ث.</s:String>
+    <s:String x:Key="S.Delay.IncreaseDecrease.Info">ستقوم هذه القيمة بانقاص/زيادة المدة (التاخير) لكل اطار محدد. &#x0d; يمكنك انقاص/الزيادة عن طريق تحديد قيمه بين-10000م ث و 10000م ث ، ولكن سيتم تقييد المدة النهائية لكل اطار بين 10م ث و 25500م ث</s:String>
+    <s:String x:Key="S.Delay.Scale.Info">تحجيم المدة (التاخير) لكل اطار محدد بقيمه النسبة المئوية. &#x0d; يمكنك تحجيم مده كل اطار بتحديد قيمه بين 1% و 1000% ، ولكن المدة النهائية لكل اطار ستكون محصورة بين 10 مللي ثانيه و 25500msي ثانيه</s:String>
 
-    <s:String x:Key="Transitions.Length">طول الانتقال</s:String>
-    <s:String x:Key="Transitions.Delay">تاخير الانتقال</s:String>
-    <s:String x:Key="Transitions.FadeTo">تتلاشي الى...</s:String>
-    <s:String x:Key="Transitions.FadeTo.Frame">الاطار التالي</s:String>
-    <s:String x:Key="Transitions.FadeTo.Color">لون</s:String>
-    <s:String x:Key="Transitions.Color">لون</s:String>
-    <s:String x:Key="Transitions.Info">سيتم تطبيق الانتقال بين الاطار المحدد والمرحلة التالية.</s:String>
+    <s:String x:Key="S.Transitions.Length">طول الانتقال</s:String>
+    <s:String x:Key="S.Transitions.Delay">تاخير الانتقال</s:String>
+    <s:String x:Key="S.Transitions.FadeTo">تتلاشي الى...</s:String>
+    <s:String x:Key="S.Transitions.FadeTo.Frame">الاطار التالي</s:String>
+    <s:String x:Key="S.Transitions.FadeTo.Color">لون</s:String>
+    <s:String x:Key="S.Transitions.Color">لون</s:String>
+    <s:String x:Key="S.Transitions.Info">سيتم تطبيق الانتقال بين الاطار المحدد والمرحلة التالية.</s:String>
 
     <!--Save As-->
     <s:String x:Key="S.SaveAs.Type">نوع الملف</s:String>
@@ -1010,7 +1009,7 @@
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
     <s:String x:Key="S.SaveAs.GifOptions"> Gif خيارات</s:String>
-    <s:String x:Key="S.SaveAs.Quality">جودة:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quality">جودة:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors">الوان:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">الحد الاقصى لعدد الوان (لكل اطار).</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Loop">حلقه:</s:String>
@@ -1036,12 +1035,12 @@
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithDummy">وضع علامة بكسل دون تغيير مع لون وهميه.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.SelectDummyColor">حدد اللون</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions">خيارات apng</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.LoopedApng">Apng يحلق</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Looped">Apng يحلق</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions.DetectUnchanged">كشف البيكسلات بلا تغيير.</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions.PaintTransparent">ارسم جميع البيكسلات غير المتغيرة بلون شفاف.</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions">خيارات الفيديو</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Fps">Fps:</s:String>
-    <s:String x:Key="S.SaveAs.FlipVertically">(قلب الفيديو (عموديا.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.FlipVertically">(قلب الفيديو (عموديا.</s:String>
     <s:String x:Key="S.SaveAs.ImagesOptions">خيارات الصورة</s:String>
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">الرمز الصور.البريدي </s:String>
     <s:String x:Key="S.SaveAs.PsdOptions">Psd خيارات </s:String>

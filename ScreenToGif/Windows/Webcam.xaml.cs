@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+//using System.Linq;
+//using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+//using System.Windows.Interop;
+//using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
@@ -14,6 +18,12 @@ using ScreenToGif.Util;
 using ScreenToGif.Util.ActivityHook;
 using ScreenToGif.Webcam.DirectX;
 using ScreenToGif.Windows.Other;
+//using SharpDX;
+//using SharpDX.Direct3D;
+//using SharpDX.Direct3D9;
+//using SharpDX.DXGI;
+//using SharpDX.MediaFoundation;
+//using SharpDX.Win32;
 using Timer = System.Windows.Forms.Timer;
 
 namespace ScreenToGif.Windows
@@ -168,7 +178,7 @@ namespace ScreenToGif.Windows
 
             if (source?.CompositionTarget != null)
                 _scale = source.CompositionTarget.TransformToDevice.M11;
-
+            
             #endregion
 
             #region Window Offset
@@ -179,9 +189,339 @@ namespace ScreenToGif.Windows
 
             #endregion
 
+            //TryLoad1();
+            //TryLoad2();
+            
             _loadDel = LoadVideoDevices;
             _loadDel.BeginInvoke(LoadCallBack, null);
         }
+
+        private void TryLoad2()
+        {
+            //List all media sources.
+            //Select one media source.
+            //List all streams.
+            //Select one stream.
+            //Get stream properties.
+            //Read sample.
+            //Parse sample.
+            //Save sample as frame.
+
+            //var attributes = new MediaAttributes(1);
+            //attributes.Set(CaptureDeviceAttributeKeys.SourceType.Guid, CaptureDeviceAttributeKeys.SourceTypeVideoCapture.Guid);
+
+            //var mediaSource = MediaFactory.EnumDeviceSources(attributes)[0].ActivateObject<MediaSource>();
+            //mediaSource.CreatePresentationDescriptor(out var presentationDescriptor);
+
+            //var reader = new SourceReader(mediaSource);
+            //var mediaTypeIndex = 0;
+
+            //int width, height;
+            
+            //using (var mt = reader.GetNativeMediaType(0, mediaTypeIndex))
+            //{
+            //    UnpackLong(mt.Get(MediaTypeAttributeKeys.FrameSize), out  width, out  height);
+            //    UnpackLong(mt.Get(MediaTypeAttributeKeys.FrameRate), out var frameRateNumerator, out var frameRateDenominator);
+            //    UnpackLong(mt.Get(MediaTypeAttributeKeys.PixelAspectRatio), out var aspectRatioNumerator, out var aspectRatioDenominator);
+            //}
+
+            //Other way.
+            var VideoReady = true;
+            int streamIndex = 0;
+            while (!VideoReady)
+            {
+                //var nativeMediaType = reader.GetNativeMediaType(streamIndex, 0);
+                //var currentMediaType = reader.GetCurrentMediaType(streamIndex);
+                //var outputMediaType = new MediaType();
+
+                //reader.SetStreamSelection(streamIndex, true);
+
+                //if (nativeMediaType.MajorType == MediaTypeGuids.Video)
+                //{
+                //    var VideoStreamIndex = streamIndex;
+
+                //    var VideoSubType = currentMediaType.Get<Guid>(MediaTypeAttributeKeys.Subtype);
+                //    UnpackLong(currentMediaType.Get(MediaTypeAttributeKeys.FrameSize), out var VideoWidth, out var VideoHeight);
+                //    UnpackLong(currentMediaType.Get(MediaTypeAttributeKeys.FrameRate), out var VideoFrameRateNumerator, out var VideoFrameRateDenominator);
+                //    UnpackLong(currentMediaType.Get(MediaTypeAttributeKeys.PixelAspectRatio), out var VideoAspectRatioNumerator, out var VideoAspectRatioDenominator);
+                //    var VideoInterlaceMode = (VideoInterlaceMode)(currentMediaType.Get(MediaTypeAttributeKeys.InterlaceMode));
+
+                //    MediaFactory.CreateMediaType(outputMediaType);
+                //    outputMediaType.Set(MediaTypeAttributeKeys.MajorType, MediaTypeGuids.Video);
+                //    outputMediaType.Set(MediaTypeAttributeKeys.Subtype, new Guid(22, 0x0000, 0x0010, 0x80, 0x00, 0x00, 0xaa, 0x00, 0x38, 0x9b, 0x71));
+                //    outputMediaType.Set(MediaTypeAttributeKeys.FrameSize.Guid, PackLong(VideoWidth, VideoHeight));
+                //    outputMediaType.Set(MediaTypeAttributeKeys.FrameRate.Guid, PackLong(VideoFrameRateNumerator, VideoFrameRateDenominator));
+                //    outputMediaType.Set(MediaTypeAttributeKeys.InterlaceMode, (int)VideoInterlaceMode.Progressive);
+                //    outputMediaType.Set(MediaTypeAttributeKeys.PixelAspectRatio, PackLong(1, 1));
+
+                //    reader.SetCurrentMediaType(streamIndex, outputMediaType);
+
+                    VideoReady = true;
+                //}
+
+                //outputMediaType.Dispose();
+
+                streamIndex++;
+            }
+
+
+            //var sample = reader.ReadSample(SourceReaderIndex.AnyStream, SourceReaderControlFlags.None, out var readStreamIndex, out var readFlags, out var timestamp);
+            
+            //if (sample == null)
+            //    sample = reader.ReadSample(SourceReaderIndex.AnyStream, SourceReaderControlFlags.None, out readStreamIndex, out readFlags, out timestamp);
+
+
+            //var sourceBuffer = sample.GetBufferByIndex(0); // sample.ConvertToContiguousBuffer();
+            //var sourcePointer = sourceBuffer.Lock(out var maxLength, out var currentLength);
+
+            //var data = new byte[sample.TotalLength];
+            //Marshal.Copy(sourcePointer, data, 0, sample.TotalLength);
+
+            //var newData = new byte[width * 4 * height];
+
+            //var partWidth = width / 4;
+            //var partHeight = height / 3;
+
+            //for (var i = 0; i < sample.TotalLength; i += 4)
+            //{
+            //    //X8R8B8G8 -> BGRA = 4
+            //    newData[i] = data[i + 3];
+            //    newData[i + 1] = data[i + 2];
+            //    newData[i + 2] = data[i + 1];
+            //    newData[i + 3] = 255; //data[i];
+            //}
+
+            ////var source = BitmapSource.Create(width, height, 96, 96, PixelFormats.Bgra32, null, data, ((width * 24 + 31) / 32) * 4);
+            //var source2 = BitmapSource.Create(width, height, 96, 96, PixelFormats.Bgra32, null, newData, width * 4);
+
+            //sourceBuffer.Unlock();
+            //sourceBuffer.Dispose();
+
+            //var device = new SharpDX.Direct3D11.Device(DriverType.Hardware, SharpDX.Direct3D11.DeviceCreationFlags.VideoSupport);
+            //var texture = new SharpDX.Direct3D11.Texture2D(device, new SharpDX.Direct3D11.Texture2DDescription
+            //{
+            //    Usage = SharpDX.Direct3D11.ResourceUsage.Default,
+            //    BindFlags = SharpDX.Direct3D11.BindFlags.None,
+            //    CpuAccessFlags = SharpDX.Direct3D11.CpuAccessFlags.Read,
+            //    Format = SharpDX.DXGI.Format.B8G8R8A8_UNorm,
+            //    OptionFlags = SharpDX.Direct3D11.ResourceOptionFlags.None,
+            //    ArraySize = 1,
+            //    Height = height,
+            //    Width = width,
+            //    MipLevels = 1,
+            //    SampleDescription = new SampleDescription(1, 0),
+            //});
+
+
+
+
+            //data needs: 
+            //Height * Stride * Format.BitsPerPixel/8
+
+            //var device = new SharpDX.Direct3D9.Device(new Direct3D(), 0, DeviceType.Hardware, new WindowInteropHelper(this).Handle, CreateFlags.SoftwareVertexProcessing, new SharpDX.Direct3D9.PresentParameters(width, height));
+            //var videoTexture = new SharpDX.Direct3D9.Texture(device, width, height, 1, SharpDX.Direct3D9.Usage.Dynamic, SharpDX.Direct3D9.Format.X8R8G8B8, SharpDX.Direct3D9.Pool.Default);
+            //var lockData = videoTexture.LockRectangle(0, SharpDX.Direct3D9.LockFlags.None);
+            //byte[] data = new byte[width * height * 4];
+            //for (int k = 0; k < width * height * 4;)
+            //{
+            //    // Fill with black
+            //    data[k++] = 0x00;
+            //    data[k++] = 0x00;
+            //    data[k++] = 0x00;
+            //    data[k++] = 0xff;
+            //}
+
+            //Marshal.Copy(data, 0, lockData.DataPointer, width * height * 4);
+            //videoTexture.UnlockRectangle(0);
+
+            //var sourceBuffer = sample.ConvertToContiguousBuffer();
+            //var sourcePointer = sourceBuffer.Lock(out var maxLength, out var currentLength);
+            //var destRect = videoTexture.LockRectangle(0, SharpDX.Direct3D9.LockFlags.None);
+            //var destPointer = destRect.DataPointer;
+
+            //Native.MemoryCopy(destPointer, sourcePointer, (UIntPtr)sourceBuffer.MaxLength);
+
+            //Marshal.Copy(lockData.DataPointer, data, 0, width * height * 4);
+            //var source2 = BitmapSource.Create(width, height, 96, 96, PixelFormats.Bgra32, null, data, width * 4);
+
+
+            //videoTexture.UnlockRectangle(0);
+
+            //sourceBuffer.Unlock();
+            //sourceBuffer.Dispose();
+
+
+
+            //for (int d = 0; d < presentationDescriptor.StreamDescriptorCount; d++)
+            //{
+            //    presentationDescriptor.GetStreamDescriptorByIndex(d, out var isSelected, out var streamDescriptor);
+
+            //    for (int i = 0; i < streamDescriptor.MediaTypeHandler.MediaTypeCount; i++)
+            //    {
+            //        var type = streamDescriptor.MediaTypeHandler.GetMediaTypeByIndex(i);
+
+            //        if (type.MajorType == MediaTypeGuids.Video)
+            //        {
+            //            var v = type.QueryInterface<VideoMediaType>();
+            //            // contains always empty values
+            //            var x = v.VideoFormat;
+            //        }
+            //    }
+            //}
+        }
+
+        private long PackLong(int left, int right)
+        {
+            return (long)left << 32 | (uint)right;
+        }
+
+        private void UnpackLong(long value, out int left, out int right)
+        {
+            left = (int)(value >> 32);
+            right = (int)(value & 0xffffffffL);
+        }
+
+        //private static MediaSource _mediaSource = null;
+
+        //private void TryLoad1()
+        //{
+        //    var attributes = new MediaAttributes(1);
+        //    attributes.Set<Guid>(CaptureDeviceAttributeKeys.SourceType, CaptureDeviceAttributeKeys.SourceTypeVideoCapture.Guid);
+        //    var activates = MediaFactory.EnumDeviceSources(attributes);
+
+        //    var dic = new Dictionary<string, Activate>();
+        //    foreach (var activate in activates)
+        //    {
+        //        var uid = activate.Get(CaptureDeviceAttributeKeys.SourceTypeVidcapSymbolicLink);
+        //        dic.Add(uid, activate);
+        //    }
+
+        //    var camera = dic.First().Value;
+
+        //    //"279a808d-aec7-40c8-9c6b-a6b492c78a66" is MediaSource class GUID
+        //    camera.ActivateObject(System.Guid.Parse("279a808d-aec7-40c8-9c6b-a6b492c78a66"), out var vOut);
+
+        //    _mediaSource = new MediaSource(vOut);
+        //    _mediaSource.CreatePresentationDescriptor(out var descriptor);
+
+        //    var time = new Variant();
+        //    time.ElementType = VariantElementType.UInt; //Is this VT_I8 ??
+        //    time.Value = 0; //Value = 0
+
+        //    //var callback = new MFCallback(this, mediaSource);
+        //    var callback = new EventCallback(null, vOut);
+        //    _mediaSource.BeginGetEvent(callback, null);
+        //    _mediaSource.Start(descriptor, null, time);
+        //}
+
+        //public class EventCallback : CppObject, IAsyncCallback
+        //{
+        //    public EventCallback(object iunknowObject, IntPtr pointer)
+        //    {
+        //        //this.NativePointer = Marshal.GetIUnknownForObject(iunknowObject);
+        //        this.NativePointer = pointer;
+        //    }
+
+        //    public IDisposable Shadow { get; set; }
+
+        //    public void Invoke(AsyncResult asyncResultRef)
+        //    {
+        //        var ev = _mediaSource.EndGetEvent(asyncResultRef);
+
+        //         switch (ev.TypeInfo)
+        //         {
+        //             case MediaEventTypes.SessionEnded:
+        //                 //_sessionState = SessionState.Ended;
+        //                //OnSongFinishedPlaying(null, null);
+        //                break;
+                    
+        //            case MediaEventTypes.SessionTopologyStatus:
+        //                 //if (ev.Get(EventAttributeKeys.TopologyStatus) == TopologyStatus.Ready)
+        //                //    OnTopologyReady();
+        //                break;
+                    
+        //            case MediaEventTypes.SessionStopped:
+        //                 //OnSessionStopped();
+        //                break;
+        //         }
+
+        //        _mediaSource.BeginGetEvent(this, null);
+        //    }
+
+        //    public AsyncCallbackFlags Flags { get; }
+
+        //    public WorkQueueId WorkQueueId { get; }
+
+        //    public Result QueryInterface(ref Guid guid, out IntPtr comObject)
+        //    {
+        //        return (Result)Marshal.QueryInterface(this.NativePointer, ref guid, out comObject);
+        //    }
+
+        //    public int AddReference()
+        //    {
+        //        if (this.NativePointer == IntPtr.Zero)
+        //            throw new InvalidOperationException("COM Object pointer is null");
+
+        //        return Marshal.AddRef(this.NativePointer);
+        //    }
+
+        //    public int Release()
+        //    {
+        //        if (this.NativePointer == IntPtr.Zero)
+        //            throw new InvalidOperationException("COM Object pointer is null");
+
+        //        return Marshal.Release(this.NativePointer);
+        //    }
+        //}
+
+        //class MFCallback : ComObject, IAsyncCallback
+        //{
+        //    MediaSource _session;
+        //    Webcam _player;
+
+        //    public MFCallback(Webcam player, MediaSource _session)
+        //    {
+        //        this._session = _session;
+        //        _player = player;
+        //        Disposed += (sender, args) => disposed = true;
+        //    }
+
+        //    bool disposed = false;
+
+        //    public IDisposable Shadow { get; set; }
+
+        //    public void Invoke(AsyncResult asyncResultRef)
+        //    {
+        //        if (disposed)
+        //            return;
+
+        //        try
+        //        {
+        //            var ev = _session.EndGetEvent(asyncResultRef);
+
+        //            if (disposed)
+        //                return;
+
+        //            if (ev.TypeInfo == MediaEventTypes.SessionTopologySet)
+        //            {
+        //               // _player.Begin();
+        //            }
+
+        //            //if (ev.TypeInfo == MediaEventTypes.SessionEnded)
+        //            //    _player.Playing = false;
+
+        //            _session.BeginGetEvent(this, null);
+        //        }
+        //        catch (Exception)
+        //        {
+
+        //        }
+        //    }
+
+        //    public AsyncCallbackFlags Flags { get; private set; }
+
+        //    public WorkQueueId WorkQueueId { get; private set; }
+        //}
 
         #endregion
 
@@ -457,7 +797,7 @@ namespace ScreenToGif.Windows
 
                 #region Start - Normal or Snap
 
-                if (!UserSettings.All.SnapshotMode)
+                if (UserSettings.All.CaptureFrequency != CaptureFrequency.Manual)
                 {
                     #region Normal Recording
 

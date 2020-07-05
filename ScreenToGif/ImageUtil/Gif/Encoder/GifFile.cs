@@ -23,14 +23,15 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
         public int RepeatCount { get; set; } = 0;
 
         /// <summary>
+        /// When enabled, the entire (star and end) gif will contain a transparent background.
+        /// Not related to the option to "paint unchanged pixels".
+        /// </summary>
+        public bool UseFullTransparency { get; set; }
+
+        /// <summary>
         /// The color marked as transparent. Null if not in use.
         /// </summary>
         public Color? TransparentColor { get; set; }
-
-        /// <summary>
-        /// The current color being used as transparent. Null if not in use.
-        /// </summary>
-        public Color? CurrentTransparentColor { get; set; }
 
         /// <summary>
         /// The maximum number of colors of each frame of the gif.
@@ -48,6 +49,12 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
         public bool UseGlobalColorTable { get; set; } = false;
 
         /// <summary>
+        /// The sampling factor of the neural network quantizer.
+        /// </summary>
+        public int SamplingFactor { get; set; }
+
+
+        /// <summary>
         /// The stream which the gif is writen on.
         /// </summary>
         private Stream InternalStream { get; set; }
@@ -56,11 +63,6 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
         /// True if it's the first frame of the gif.
         /// </summary>
         private bool IsFirstFrame { get; set; } = true;
-
-        /// <summary>
-        /// The full size rect of the gif.
-        /// </summary>
-        private Int32Rect FullSize { get; set; }
 
         /// <summary>
         /// The list of indexed pixels, based on a color table (palette).
@@ -73,9 +75,9 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
         private List<Color> ColorTable { get; set; }
 
         /// <summary>
-        /// True if the frame will use a transparent flag. Not necessary if there's no presence of the color marked as transparent.
+        /// True if the color table contains the color that will be treated as transparent.
         /// </summary>
-        private bool WillUseTransparency { get; set; }
+        private bool ColorTableHasTransparency { get; set; }
 
         /// <summary>
         /// The size of the current color table.
@@ -92,29 +94,25 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
         /// </summary>
         private int AdjustedTime { get; set; }
 
+        /// <summary>
+        /// If a quantizer needs to be contructed only once (for example, to use with PaletteQuantizers), this property will be used.
+        /// </summary>
+        private Quantizer GlobalQuantizer { get; set; }
+
         #endregion
 
-        public GifFile(Stream stream, Color? transparent, int repeatCount = 0)
+
+        public GifFile(Stream stream)
         {
             InternalStream = stream;
-            TransparentColor = transparent;
-            RepeatCount = repeatCount;
         }
 
-        public GifFile(Stream stream, int repeatCount = 0)
+
+        #region Public methods
+
+        public void AddFrame(byte[] pixels, Int32Rect rect, int delay = 66, bool isLastFrame = false)
         {
-            InternalStream = stream;
-            RepeatCount = repeatCount;
-        }
-
-        #region Public Methods
-
-        public void AddFrame(string path, Int32Rect rect, int delay = 66)
-        {
-            CurrentTransparentColor = TransparentColor;
-
-            ReadPixels(path);
-            //HandleTransparency();
+            ReadPixels(pixels);
 
             //For global color table, only generate a new palette if it's the first frame.
             if (!UseGlobalColorTable || IsFirstFrame)
@@ -122,20 +120,17 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
 
             if (IsFirstFrame)
             {
-                FullSize = rect;
-
                 WriteLogicalScreenDescriptor(rect);
 
                 //Global color table.
                 if (UseGlobalColorTable)
                     WritePalette();
 
-                //TODO: Only repeat if there's more than 1 frame.
                 if (RepeatCount > -1)
                     WriteApplicationExtension();
             }
 
-            WriteGraphicControlExtension(delay);
+            WriteGraphicControlExtension(delay, isLastFrame);
             WriteImageDescriptor(rect);
 
             IsFirstFrame = false;
@@ -149,7 +144,7 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
 
         #endregion
 
-        #region Main Methods
+        #region Main methods
 
         private void WriteLogicalScreenDescriptor(Int32Rect rect)
         {
@@ -184,7 +179,7 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
             bitArray.Set(7, sizeInBits[2]);
 
             WriteByte(ConvertToByte(bitArray));
-            WriteByte(0); //Background color index, 1 byte
+            WriteByte(UseFullTransparency ? FindTransparentColorIndex() : 0); //Background color index, 1 byte
             WriteByte(0); //Pixel aspect ratio - Assume 1:1, 1 byte
         }
 
@@ -220,7 +215,7 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
             WriteByte(0x00); //Terminator
         }
 
-        private void WriteGraphicControlExtension(int delay)
+        private void WriteGraphicControlExtension(int delay, bool isLastFrame)
         {
             WriteByte(0x21); //Extension Introducer.
             WriteByte(0xf9); //Extension Label.
@@ -242,24 +237,48 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
             //GCE_DISPOSAL_BACKGROUND = Restore Background = 2
             //GCE_DISPOSAL_RESTORE = Restore Previous = 3
 
-            //If transparency is set
-            //First frame as "Leave" with no Transparency. IsFirstFrame
-            //Following frames as "Undefined" with Transparency.
-
-            //Was TransparentColor.HasValue && 
-            if (IsFirstFrame)
+            if (UseFullTransparency)
             {
-                //Leave.
-                bitArray.Set(3, false);
-                bitArray.Set(4, false);
-                bitArray.Set(5, true);
+                //If full "Transparency" is set:
+                //All starting frames as "Restore Background".
+                //The last frame as "Leave".
+
+                if (isLastFrame)
+                {
+                    //Leave.
+                    bitArray.Set(3, false);
+                    bitArray.Set(4, false);
+                    bitArray.Set(5, true);
+                }
+                else
+                {
+                    //Restore background.
+                    bitArray.Set(3, false);
+                    bitArray.Set(4, true);
+                    bitArray.Set(5, false);
+                }
             }
             else
             {
-                //Undefined.
-                bitArray.Set(3, false);
-                bitArray.Set(4, false);
-                bitArray.Set(5, false);
+                //If "Detect Unchanged Pixels" is set:
+                //First frame as "Leave" with no Transparency. IsFirstFrame
+                //Following frames as "Undefined" with Transparency.
+
+                //Was TransparentColor.HasValue && 
+                if (IsFirstFrame)
+                {
+                    //Leave.
+                    bitArray.Set(3, false);
+                    bitArray.Set(4, false);
+                    bitArray.Set(5, true);
+                }
+                else
+                {
+                    //Undefined.
+                    bitArray.Set(3, false);
+                    bitArray.Set(4, false);
+                    bitArray.Set(5, false);
+                }
             }
 
             #endregion
@@ -268,7 +287,7 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
             bitArray.Set(6, false);
 
             //Transparent Color Flag, uses tranparency?
-            bitArray.Set(7, !IsFirstFrame && CurrentTransparentColor.HasValue && ColorTable.Contains(CurrentTransparentColor.Value));
+            bitArray.Set(7, (!IsFirstFrame || UseFullTransparency) && ColorTableHasTransparency);
 
             //Write the packed fields.
             WriteByte(ConvertToByte(bitArray));
@@ -329,6 +348,7 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
         private void WriteImage()
         {
             //TODO: Fix the new LZW encoder when ColorTableSize == 7. It's getting corrupted. 
+
             //if (ColorTableSize < 6)
             //{
             //    //New LZW encoder, ColorTableSize from 1 to 8.
@@ -345,71 +365,147 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
 
         #endregion
 
-        #region Helper Methods
+        #region Helper methods
 
-        private void ReadPixels(string path)
+        private void ReadPixels(byte[] pixels)
         {
-            var image = path.SourceFrom();
-            var pixelUtil = new PixelUtil(image);
-            pixelUtil.LockBits();
-
-            CurrentTransparentColor = TransparentColor;
-
-            //if (QuantizationType == ColorQuantizationType.Grayscale)
-            //{
-            //    var quantizer = new GrayscaleQuantizer { MaxColors = MaximumNumberColor };
-            //    IndexedPixels = quantizer.Quantize(pixelUtil.Pixels);
-            //    ColorTable = quantizer.ColorTable;
-            //}
-            //else
-            //{
-            var quantizer = new OctreeQuantizer
+            if (QuantizationType == ColorQuantizationType.Neural)
             {
-                MaxColors = MaximumNumberColor,
-                TransparentColor = !IsFirstFrame || UseGlobalColorTable ? CurrentTransparentColor : null
-            };
+                #region Neural
 
-            IndexedPixels = quantizer.Quantize(pixelUtil.Pixels);
-            ColorTable = quantizer.ColorTable;
-            //}
-
-            pixelUtil.UnlockBits();
-
-            if (quantizer.TransparentColor != null)
-                CurrentTransparentColor = quantizer.TransparentColor;
-
-            //I need to signal the other method that I won't need transparency.
-            WillUseTransparency = !IsFirstFrame && CurrentTransparentColor.HasValue && ColorTable.Contains(CurrentTransparentColor.Value);
-        }
-
-        private void HandleTransparency()
-        {
-            //ColorTable = NonIndexedPixels.AsParallel().GroupBy(x => x)
-            //    .OrderByDescending(g => g.Count()) //Order by most frequent values
-            //    .Select(g => g.FirstOrDefault()) //take the first among the group
-            //    .Take(MaximumNumberColor).ToList();
-
-            //Make sure that the transparent color is added to list.
-            if (TransparentColor.HasValue && (!IsFirstFrame || UseGlobalColorTable))// && ColorTable.Count == MaximumNumberColor)
-            {
-                //Only adds if there is MaximumNumberColor colors, so I need to make sure that the color won't be ignored.
-                //If there is less than MaximumNumberColor selected colors, it means that the transparent color is already selected.
-
-                //If the color isn't on the list, add or replace.
-                if (ColorTable.AsParallel().All(x => x != TransparentColor.Value))
+                if (GlobalQuantizer == null || !UseGlobalColorTable)
                 {
-                    //Adds to the last spot, keeping it sorted. (Since all the colors are ordered by descending)
-                    ColorTable.Insert(ColorTable.Count - 1, TransparentColor.Value);
+                    GlobalQuantizer = new NeuralQuantizer(SamplingFactor, MaximumNumberColor)
+                    {
+                        MaxColors = MaximumNumberColor,
+                        TransparentColor = !IsFirstFrame || UseGlobalColorTable || UseFullTransparency ? TransparentColor : null
+                    };
 
-                    //Remove the exceding value at the last position.
-
-                    if (ColorTable.Count > MaximumNumberColor)
-                        ColorTable.RemoveAt(MaximumNumberColor);
+                    GlobalQuantizer.FirstPass(pixels);
+                    ColorTable = GlobalQuantizer.GetPalette();
                 }
+
+                //Indexes the pixels to the color table.
+                IndexedPixels = GlobalQuantizer.SecondPass(pixels);
+                
+                #endregion
+            }
+            else if (QuantizationType == ColorQuantizationType.Octree)
+            {
+                #region Octree
+
+                var quantizer = new OctreeQuantizer
+                {
+                    MaxColors = MaximumNumberColor,
+                    TransparentColor = !IsFirstFrame || UseGlobalColorTable || UseFullTransparency ? TransparentColor : null
+                };
+
+                quantizer.Quantize(pixels);
+                ColorTable = GlobalQuantizer.ColorTable;
+
+                #endregion
+            }
+            else if (QuantizationType == ColorQuantizationType.MedianCut)
+            {
+                #region Median cut
+
+                if (GlobalQuantizer == null || !UseGlobalColorTable)
+                {
+                    GlobalQuantizer = new MedianCutQuantizer
+                    {
+                        MaxColors = MaximumNumberColor,
+                        TransparentColor = !IsFirstFrame || UseGlobalColorTable || UseFullTransparency ? TransparentColor : null
+                    };
+
+                    GlobalQuantizer.FirstPass(pixels);
+                    ColorTable = GlobalQuantizer.GetPalette();
+                }
+
+                //Indexes the pixels to the color table.
+                IndexedPixels = GlobalQuantizer.SecondPass(pixels);
+
+                #endregion
+            }
+            else if (QuantizationType == ColorQuantizationType.Grayscale)
+            {
+                #region Grayscale
+
+                //This quantizer uses a fixed palette (generated during object instantiation), so most calculations are called one time.
+                if (GlobalQuantizer == null)
+                {
+                    //Since the color table does not change among frames, it can be stored globally.
+                    UseGlobalColorTable = true;
+
+                    var transparent = !IsFirstFrame || UseGlobalColorTable || UseFullTransparency ? TransparentColor : null;
+
+                    GlobalQuantizer = new GrayscaleQuantizer(transparent, MaximumNumberColor)
+                    {
+                        MaxColors = MaximumNumberColor,
+                        TransparentColor = transparent
+                    };
+
+                    ColorTable = GlobalQuantizer.GetPalette();
+                }
+                
+                //Each frame still needs to be quantized.
+                IndexedPixels = GlobalQuantizer.SecondPass(pixels);
+
+                #endregion
+            }
+            else if (QuantizationType == ColorQuantizationType.MostUsed)
+            {
+                #region Most used colors
+
+                if (GlobalQuantizer == null || !UseGlobalColorTable)
+                {
+                    GlobalQuantizer = new MostUsedQuantizer
+                    {
+                        MaxColors = MaximumNumberColor,
+                        TransparentColor = !IsFirstFrame || UseGlobalColorTable || UseFullTransparency ? TransparentColor : null
+                    };
+
+                    GlobalQuantizer.FirstPass(pixels);
+                    ColorTable = GlobalQuantizer.GetPalette();
+                }
+
+                //Indexes the pixels to the color table.
+                IndexedPixels = GlobalQuantizer.SecondPass(pixels);
+
+                #endregion
+            }
+            else
+            {
+                #region Palette
+
+                //This quantizer uses a fixed palette (generated during object instantiation), so it will be only called once.
+                if (GlobalQuantizer == null)
+                {
+                    //Since the color table does not change among frames, it can be stored globally.
+                    UseGlobalColorTable = true;
+
+                    var transparent = !IsFirstFrame || UseGlobalColorTable || UseFullTransparency ? TransparentColor : null;
+
+                    //TODO: Pass the palette.
+                    //Default palettes: Windows, etc.
+                    //User submitted > Presets > Generate palette based on first frame.
+
+                    GlobalQuantizer = new PaletteQuantizer(new ArrayList()) 
+                    {
+                        MaxColors = MaximumNumberColor,
+                        TransparentColor = transparent
+                    };
+
+                    ColorTable = GlobalQuantizer.GetPalette();
+                }
+
+                //Each frame still needs to be quantized.
+                IndexedPixels = GlobalQuantizer.SecondPass(pixels);
+
+                #endregion
             }
 
-            //I need to signal the other method that I won't need transparency.
-            WillUseTransparency = !IsFirstFrame && TransparentColor.HasValue && ColorTable.Contains(TransparentColor.Value);
+            //I need to signal the other method that I'll need transparency.
+            ColorTableHasTransparency = TransparentColor.HasValue && ColorTable.Contains(TransparentColor.Value);
         }
 
         private void WriteByte(int value)
@@ -433,6 +529,27 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
         private void WriteString(string value)
         {
             InternalStream.Write(value.ToArray().Select(c => (byte)c).ToArray(), 0, value.Length);
+        }
+
+        /// <summary>
+        /// Writes the comment for the animation.
+        /// </summary>
+        /// <param name="comment">The comment to write to the gif.</param>
+        private void WriteComment(string comment)
+        {
+            InternalStream.WriteByte(0x21);
+            InternalStream.WriteByte(0xfe);
+
+            //byte[] length = StringToByteArray(comment.Length.ToString("X"));
+
+            //foreach (byte b in length)
+            //    fs.WriteByte(b);
+
+            var bytes = System.Text.Encoding.ASCII.GetBytes(comment);
+
+            InternalStream.WriteByte((byte) bytes.Length);
+            InternalStream.Write(bytes, 0, bytes.Length);
+            InternalStream.WriteByte(0);
         }
 
         private byte ConvertToByte(BitArray bits)
@@ -512,9 +629,11 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
 
         private int FindTransparentColorIndex()
         {
-            if (IsFirstFrame || !CurrentTransparentColor.HasValue || !ColorTable.Contains(CurrentTransparentColor.Value)) return 0;
+            if (IsFirstFrame && !UseFullTransparency || !ColorTableHasTransparency) 
+                return 0;
 
-            var index = ColorTable.IndexOf(CurrentTransparentColor.Value);
+            //ReSharper disable once PossibleInvalidOperationException
+            var index = ColorTable.IndexOf(TransparentColor.Value);
 
             return index > -1 ? index : 0;
         }
@@ -533,9 +652,12 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
 
         public void Dispose()
         {
-            //Complete File
+            //Add a comment section.
+            WriteComment("Made with ScreenToGif");
+
+            //Complete the file.
             WriteByte(0x3b);
-            //Pushing data
+            //Push data.
             InternalStream.Flush();
             //Resets the stream position to save afterwards.
             InternalStream.Position = 0;

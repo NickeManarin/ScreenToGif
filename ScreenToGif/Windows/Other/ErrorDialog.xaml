@@ -18,7 +18,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Viewbox x:Name="IconViewbox" Margin="5" Child="{StaticResource Vector.Error}" Opacity="{DynamicResource Element.Opacity}"/>
+            <Viewbox x:Name="IconViewbox" Margin="5" Child="{StaticResource Vector.Cancel.Round}" Opacity="{DynamicResource Element.Opacity}"/>
 
             <Label x:Name="InstructionLabel" Content="Instruction" Margin="5" Grid.Column="1" VerticalContentAlignment="Center" 
                    FontFamily="Segoe UI Semilight" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
@@ -47,7 +47,7 @@
             <n:ImageButton Grid.Column="1" x:Name="YesButton" Text="{DynamicResource S.Yes}" Content="{StaticResource Vector.Ok}" ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="TrueActionButton_Click"/>
             <n:ImageButton Grid.Column="2" x:Name="NoButton" Text="{DynamicResource S.No}" Content="{StaticResource Vector.No}" ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="FalseActionButton_Click"/>
 
-            <n:ImageButton Grid.Column="3" x:Name="DetailsButton" Text="{DynamicResource Encoder.Details}" Content="{StaticResource Vector.Application}" ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="DetailsButton_Click"/>
+            <n:ImageButton Grid.Column="3" x:Name="DetailsButton" Text="{DynamicResource S.Encoder.Details}" Content="{StaticResource Vector.Application}" ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="DetailsButton_Click"/>
             <n:ImageButton Grid.Column="4" x:Name="SendButton" Text="{DynamicResource S.ErrorDialog.Send}" Content="{StaticResource Vector.Email}" ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="SendButton_Click"/>
         </Grid>
     </Grid>

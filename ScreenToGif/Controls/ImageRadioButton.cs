@@ -11,6 +11,7 @@ namespace ScreenToGif.Controls
         public static readonly DependencyProperty ChildProperty = DependencyProperty.Register(nameof(Child), typeof(UIElement), typeof(ImageRadioButton), new FrameworkPropertyMetadata());
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register(nameof(Text), typeof(string), typeof(ImageRadioButton), new FrameworkPropertyMetadata("Button"));
         public static readonly DependencyProperty ContentWidthProperty = DependencyProperty.Register(nameof(ContentWidth), typeof(double), typeof(ImageRadioButton), new FrameworkPropertyMetadata(26.0));
+        public static readonly DependencyProperty ContentHeightProperty = DependencyProperty.Register(nameof(ContentHeight), typeof(double), typeof(ImageRadioButton), new FrameworkPropertyMetadata(26.0));
         public static readonly DependencyProperty TextWrappingProperty = DependencyProperty.Register(nameof(TextWrapping), typeof(TextWrapping), typeof(ImageRadioButton), new FrameworkPropertyMetadata(TextWrapping.NoWrap,
             FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender));
 
@@ -46,6 +47,16 @@ namespace ScreenToGif.Controls
         {
             get => (double)GetValue(ContentWidthProperty);
             set => SetCurrentValue(ContentWidthProperty, value);
+        }
+
+        /// <summary>
+        /// The maximum size of the image.
+        /// </summary>
+        [Description("The maximum size of the image.")]
+        public double ContentHeight
+        {
+            get => (double)GetValue(ContentHeightProperty);
+            set => SetCurrentValue(ContentHeightProperty, value);
         }
 
         /// <summary>

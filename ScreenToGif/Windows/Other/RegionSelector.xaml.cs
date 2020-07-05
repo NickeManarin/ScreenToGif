@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using ScreenToGif.Controls;
@@ -12,15 +13,18 @@ namespace ScreenToGif.Windows.Other
 
         private Action<Rect> _selected;
         private Action<Monitor> _changed;
+        private Action<Monitor> _gotHover;
         private Action _aborted;
         private double _scale = 1;
+
 
         public RegionSelector()
         {
             InitializeComponent();
         }
 
-        public void Select(Monitor monitor, SelectControl2.ModeType mode, Rect previousRegion, Action<Rect> selected, Action<Monitor> changed, Action aborted)
+
+        public void Select(Monitor monitor, SelectControl.ModeType mode, Rect previousRegion, Action<Rect> selected, Action<Monitor> changed, Action<Monitor> gotHover, Action aborted)
         {
             //Resize to fit given window.
             Left = monitor.Bounds.Left;
@@ -33,30 +37,38 @@ namespace ScreenToGif.Windows.Other
             _scale = monitor.Dpi / 96d;
             _selected = selected;
             _changed = changed;
+            _gotHover = gotHover;
             _aborted = aborted;
 
+            SelectControl.Scale = monitor.Scale;
+            SelectControl.ParentLeft = Left;
+            SelectControl.ParentTop = Top;
             SelectControl.BackImage = CaptureBackground();
             SelectControl.Mode = mode;
 
-            if (mode == SelectControl2.ModeType.Region)
+            if (mode == Controls.SelectControl.ModeType.Region)
             {
                 //Since each region selector is attached to a single screen, the selection must be translated.
-                if (!previousRegion.IsEmpty)
-                    previousRegion.Offset(monitor.Bounds.Left * -1, monitor.Bounds.Right * -1);
-
-                SelectControl.Selected = previousRegion;
+                SelectControl.Selected = previousRegion.Translate(monitor.Bounds.Left * -1, monitor.Bounds.Top * -1);
                 SelectControl.Windows.Clear();
             }
-            else if (mode == SelectControl2.ModeType.Window)
+            else if (mode == Controls.SelectControl.ModeType.Window)
             {
-                var win = Native.EnumerateWindows();
+                //Get only the windows that are located inside the given screen.
+                var win = Native.EnumerateWindowsByMonitor(monitor);
 
-                //Take into consederation each screen dpi.
-                //Adjust the position of the window.
-
+                //Since each region selector is attached to a single screen, the list of positions must be translated.
                 SelectControl.Windows = win.AdjustPosition(monitor.Bounds.Left, monitor.Bounds.Top);
             }
-
+            else if (mode == Controls.SelectControl.ModeType.Fullscreen)
+            {
+                //Each selector is the whole screen.
+                SelectControl.Windows = new List<DetectedRegion>
+                {
+                    new DetectedRegion(monitor.Handle, new Rect(new Size(monitor.Bounds.Width, monitor.Bounds.Height)), monitor.Name)
+                };
+            }
+            
             //Call the selector to select the region.
             SelectControl.IsPickingRegion = true;
             Show();
@@ -67,10 +79,16 @@ namespace ScreenToGif.Windows.Other
             SelectControl.Retry();
         }
 
+        public void ClearHoverEffects()
+        {
+            SelectControl.HideZoom();
+        }
+
         public void CancelSelection()
         {
             Close();
         }
+
 
         private double GetScreenDpi()
         {
@@ -100,10 +118,16 @@ namespace ScreenToGif.Windows.Other
                 (int)Math.Round((Left - 7) * _scale), (int)Math.Round((Top - 7) * _scale));
         }
 
+
+        private void SelectControl_MouseHovering(object sender, RoutedEventArgs e)
+        {
+            _gotHover.Invoke(Monitor);
+        }
+
         private void SelectControl_SelectionAccepted(object sender, RoutedEventArgs e)
         {
             SelectControl.IsPickingRegion = false;
-            _selected.Invoke(SelectControl.Selected);
+            _selected.Invoke(SelectControl.Selected.Translate(Monitor.Bounds.Left, Monitor.Bounds.Top));
             Close();
         }
 

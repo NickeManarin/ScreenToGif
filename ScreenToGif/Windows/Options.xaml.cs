@@ -1547,7 +1547,7 @@ namespace ScreenToGif.Windows
             {
                 FileName = string.IsNullOrWhiteSpace(name) ? "ffmpeg" : name,
                 InitialDirectory = isRelative ? Path.GetFullPath(initial) : initial,
-                Filter = "FFmpeg executable (.exe)|*.exe",
+                Filter = $"{LocalizationHelper.Get("S.Options.Extras.FfmpegLocation.File")} (.exe)|*.exe",
                 DefaultExt = ".exe"
             };
 
@@ -1646,7 +1646,7 @@ namespace ScreenToGif.Windows
             {
                 FileName = string.IsNullOrWhiteSpace(name) ? "gifski" : name,
                 InitialDirectory = isRelative ? Path.GetFullPath(initial) : initial,
-                Filter = "Gifski library (.dll)|*.dll",
+                Filter = $"{LocalizationHelper.Get("S.Options.Extras.GifskiLocation.File")} (.dll)|*.dll",
                 DefaultExt = ".dll"
             };
 
@@ -1840,7 +1840,7 @@ namespace ScreenToGif.Windows
             var ofd = new OpenFileDialog
             {
                 FileName = "ffmpeg",
-                Filter = "FFmpeg executable (*.exe)|*.exe", //TODO: Localize.
+                Filter = $"{LocalizationHelper.Get("S.Options.Extras.FfmpegLocation.File")} (*.exe)|*.exe", //TODO: Localize.
                 Title = LocalizationHelper.Get("S.Options.Extras.FfmpegLocation.Select"),
                 InitialDirectory = isRelative ? Path.GetFullPath(initial) : initial,
                 DefaultExt = ".exe"
@@ -1888,7 +1888,7 @@ namespace ScreenToGif.Windows
             var ofd = new OpenFileDialog
             {
                 FileName = "gifski",
-                Filter = "Gifski library (*.dll)|*.dll", //TODO: Localize.
+                Filter = $"{LocalizationHelper.Get("S.Options.Extras.GifskiLocation.File")} (*.dll)|*.dll", //TODO: Localize.
                 Title = LocalizationHelper.Get("S.Options.Extras.GifskiLocation.Select"),
                 InitialDirectory = isRelative ? Path.GetFullPath(initial) : initial,
                 DefaultExt = ".dll"

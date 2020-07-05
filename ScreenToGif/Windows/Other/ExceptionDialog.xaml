@@ -20,13 +20,13 @@
                 <ColumnDefinition Width="Auto" MinWidth="110"/>
             </Grid.ColumnDefinitions>
 
-            <Viewbox x:Name="IconViewbox" Margin="6" Child="{StaticResource Vector.Error.Round}" Opacity="{DynamicResource Element.Opacity}"/>
+            <Viewbox x:Name="IconViewbox" Margin="6" Child="{StaticResource Vector.Cancel.Round}" Opacity="{DynamicResource Element.Opacity}"/>
 
             <TextBlock Grid.Column="1" x:Name="TypeTextBlock" Text="" Margin="5" VerticalAlignment="Center" 
                        FontFamily="Segoe UI Semilight" FontSize="18" Foreground="#FF003399" Padding="0"
                        ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
-            <n:ImageButton Grid.Column="2" x:Name="DetailsButton" Text="{DynamicResource Encoder.Details}" Content="{StaticResource Vector.Table}" MaxSize="20" 
+            <n:ImageButton Grid.Column="2" x:Name="DetailsButton" Text="{DynamicResource S.Encoder.Details}" Content="{StaticResource Vector.Table}" MaxSize="20" 
                            Margin="3" Padding="2" Style="{StaticResource Style.Button.Horizontal}" TextWrapping="NoWrap"
                            Click="DetailsButton_Click" FontSize="14" FontFamily="Segoe UI Semilight"/>
         </Grid>

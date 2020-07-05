@@ -180,8 +180,9 @@
     <Compile Include="Controls\ImageCard.cs" />
     <Compile Include="Controls\LabelSeparator.cs" />
     <Compile Include="Controls\ElementAdorner.cs" />
-    <Compile Include="Controls\NotificationListControl.cs" />
+    <Compile Include="Controls\NotificationBox.cs" />
     <Compile Include="Controls\NotifyIcon.cs" />
+    <Compile Include="Controls\QuantizationMethodItem.cs" />
     <Compile Include="Controls\RecorderWindow.cs" />
     <Compile Include="Controls\Ribbon\GroupSizeDefinition.cs" />
     <Compile Include="Controls\Ribbon\ItemSizeDefinition.cs" />
@@ -191,7 +192,7 @@
     <Compile Include="Controls\Ribbon\RibbonGroup.cs" />
     <Compile Include="Controls\Ribbon\RibbonItem.cs" />
     <Compile Include="Controls\Ribbon\RibbonTab.cs" />
-    <Compile Include="Controls\SelectControl2.cs" />
+    <Compile Include="Controls\SelectControl.cs" />
     <Compile Include="Controls\Shapes\Arrow.cs" />
     <Compile Include="Controls\Shapes\Triangle.cs" />
     <Compile Include="Controls\SplitButton.cs" />
@@ -216,7 +217,7 @@
     <Compile Include="Controls\PuncturedRect.cs" />
     <Compile Include="Controls\RadialPanel.cs" />
     <Compile Include="Controls\RangeSlider.cs" />
-    <Compile Include="Controls\SelectControl.cs" />
+    <Compile Include="Controls\SelectControlOld.cs" />
     <Compile Include="Controls\ResizingAdorner.cs" />
     <Compile Include="Controls\SpectrumSlider.cs" />
     <Compile Include="Controls\StatusBand.cs" />
@@ -235,10 +236,11 @@
     <Compile Include="ImageUtil\Apng\Chunks\IdatChunk.cs" />
     <Compile Include="ImageUtil\Apng\Chunks\IhdrChunk.cs" />
     <Compile Include="ImageUtil\Gif\Encoder\GifFile.cs" />
-    <Compile Include="ImageUtil\Gif\LegacyEncoder\AnimatedGifEncoder.cs" />
+    <Compile Include="ImageUtil\Gif\Encoder\Quantization\MostUsedQuantizer.cs" />
+    <Compile Include="ImageUtil\Gif\Encoder\Quantization\NeuralQuantizer.cs" />
+    <Compile Include="ImageUtil\Gif\Encoder\Quantization\MedianCutQuantizer.cs" />
     <Compile Include="ImageUtil\Gif\LegacyEncoder\GifEncoder.cs" />
     <Compile Include="ImageUtil\Gif\LegacyEncoder\LZWEncoder.cs" />
-    <Compile Include="ImageUtil\Gif\LegacyEncoder\NeuQuant.cs" />
     <Compile Include="ImageUtil\Gif\LegacyEncoder\PixelUtilOld.cs" />
     <Compile Include="ImageUtil\Gif\Decoder\GifApplicationExtension.cs" />
     <Compile Include="ImageUtil\Gif\Decoder\GifBlock.cs" />
@@ -304,6 +306,8 @@
     <Compile Include="ModelEx\Sequences\TextSequence.cs" />
     <Compile Include="ModelEx\Track.cs" />
     <Compile Include="Model\BindableBase.cs" />
+    <Compile Include="Model\ExportFrame.cs" />
+    <Compile Include="Model\ExportProject.cs" />
     <Compile Include="Model\FosshubItem.cs" />
     <Compile Include="Model\FosshubRelease.cs" />
     <Compile Include="Model\FosshubResponse.cs" />
@@ -348,8 +352,10 @@
     <Compile Include="Util\Capture\CachedCapture.cs" />
     <Compile Include="Util\Capture\RegionSelectHelper.cs" />
     <Compile Include="Util\ComboBoxItemTemplateSelector.cs" />
+    <Compile Include="Util\Converters\CenterPopupConverter.cs" />
     <Compile Include="Util\Converters\ContentToVisibility.cs" />
     <Compile Include="Util\Converters\DoubleToRadius.cs" />
+    <Compile Include="Util\Converters\InvertedEnumToBool.cs" />
     <Compile Include="Util\Converters\InvertedIntToVisibility.cs" />
     <Compile Include="Util\Converters\PercentageToOpacity.cs" />
     <Compile Include="Util\Converters\BoolAndToVisibility.cs" />
@@ -365,6 +371,7 @@
     <Compile Include="Util\CrcHelper.cs" />
     <Compile Include="Util\DataGridHelper.cs" />
     <Compile Include="Util\DynamicResourceBinding.cs" />
+    <Compile Include="Util\EncodingManager.cs" />
     <Compile Include="Util\ExtendedStack.cs" />
     <Compile Include="Util\FeedbackHelper.cs" />
     <Compile Include="Util\Framerate.cs" />
