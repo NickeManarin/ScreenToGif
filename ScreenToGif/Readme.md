@@ -15,7 +15,7 @@ _VS 2019 and .Net 4.8 or newer required._
 • You can now switch between capture frequency modes from the recorder window (when paused or stopped, and even change the framerate).  
 • The encodings are now displayed in a popup attached to the editor (but you can still use the older alternative, a separated window).  
 • You can now see the total elapsed time of the encoding process.  
-♦ The 'Quality' slider of the Neural quantization method is now called 'Sampling', and it's properly explained what it means.  
+• The 'Quality' slider of the Neural quantization method is now called 'Sampling', and it's properly explained what it means.  
 
 ### Fixed:
 

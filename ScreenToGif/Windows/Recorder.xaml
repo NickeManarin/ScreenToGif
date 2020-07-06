@@ -159,8 +159,8 @@
                                  ToolTip="{DynamicResource S.Recorder.Fps}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                 <n:ImageButton x:Name="FrequencyButton" Style="{StaticResource Style.Button.Horizontal.NoImage}" Margin="1,0,0,0" VerticalContentAlignment="Center" Padding="0" 
-                               Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}" UseLayoutRounding="True" TabIndex="5" Text="{DynamicResource S.Recorder.Fps.Short}" 
-                               FontSize="12" FontFamily="Segoe UI" ToolTip="{DynamicResource S.Recorder.SwitchFrequency}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"
+                               UseLayoutRounding="True" TabIndex="5" Text="{DynamicResource S.Recorder.Fps.Short}" FontSize="12" FontFamily="Segoe UI" 
+                               ToolTip="{DynamicResource S.Recorder.SwitchFrequency}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"
                                Command="{StaticResource Command.SwitchCaptureFrequency}" CommandParameter="Switch">
                     <n:ImageButton.ContextMenu>
                         <ContextMenu IsOpen="False">

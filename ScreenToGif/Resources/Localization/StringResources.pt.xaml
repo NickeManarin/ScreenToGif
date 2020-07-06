@@ -693,7 +693,7 @@
     <s:String x:Key="S.Encoder.ExploreFolder">Explorar pasta</s:String>
     <s:String x:Key="S.Encoder.Remove">Remover da lista</s:String>
     <s:String x:Key="S.Encoder.Details">Mostrar detailhes</s:String>
-    <s:String x:Key="S.Encoder.Dismiss">Remover as codificações finalizadas</s:String>
+    <s:String x:Key="S.Encoder.Dismiss">Limpar as codificações</s:String>
 
     <s:String x:Key="S.Encoder.Copy.Image">Copiar como imagem</s:String>
     <s:String x:Key="S.Encoder.Copy.Filename">Copiar caminho completo</s:String>

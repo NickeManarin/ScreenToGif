@@ -999,7 +999,8 @@
                                 <DataGridTemplateColumn Header="{DynamicResource S.Options.Tasks.List.Enabled}" Width="Auto" MinWidth="50">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <n:ExtendedCheckBox IsChecked="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}" Focusable="False" Margin="3,1,0,1" HorizontalAlignment="Center"/>
+                                            <n:ExtendedCheckBox IsChecked="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}" Focusable="False" Margin="0,2,0,0" Padding="0"
+                                                                Content="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>

@@ -5182,7 +5182,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <Label Grid.Column="0" x:Name="StatusLabel" Content="Status" Padding="0" VerticalContentAlignment="Center" Margin="5,0" Foreground="#FF3C3C3C"/>
+                    <Label Grid.Column="0" x:Name="StatusLabel" Content="Status" Padding="0" VerticalContentAlignment="Center" Margin="5,0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                     <ProgressBar Grid.Column="1" x:Name="StatusProgressBar" Height="8" Width="200" Margin="2,0" VerticalAlignment="Center"/>
                     <n:ImageButton Grid.Column="2" x:Name="CancelLoadingButton" Width="25" Content="{StaticResource Vector.Cancel}" Style="{StaticResource Style.Button.NoText}" ContentWidth="15"
                                    ToolTip="Cancel loading and discard project" Visibility="{Binding ElementName=EditorWindow, Path=IsCancelable, Converter={StaticResource Bool2Visibility}}" 

@@ -38,7 +38,7 @@
     <SolidColorBrush x:Key="Element.Foreground.Gray192" Color="#FF454545"/>
     <SolidColorBrush x:Key="Element.Foreground.Gray208" Color="#FF383838"/>
     <SolidColorBrush x:Key="Element.Foreground.Header" Color="#FF485A7F"/>
-    <SolidColorBrush x:Key="Element.Foreground.Detail" Color="#FF155125"/>
+    <SolidColorBrush x:Key="Element.Foreground.Detail" Color="#FF185D2B"/>
     <SolidColorBrush x:Key="Element.Foreground.Hint" Color="#FF007000"/>
 
     <SolidColorBrush x:Key="Element.Border" Color="#FF474747"/>
