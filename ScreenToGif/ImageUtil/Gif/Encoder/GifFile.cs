@@ -400,8 +400,8 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
                     TransparentColor = !IsFirstFrame || UseGlobalColorTable || UseFullTransparency ? TransparentColor : null
                 };
 
-                quantizer.Quantize(pixels);
-                ColorTable = GlobalQuantizer.ColorTable;
+                IndexedPixels = quantizer.Quantize(pixels);
+                ColorTable = quantizer.ColorTable;
 
                 #endregion
             }

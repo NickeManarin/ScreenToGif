@@ -1241,13 +1241,11 @@
     
     <!--Editor • Save as > Encoder-->
     <s:String x:Key="S.SaveAs.Encoder">Encoder</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">2.0</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Tooltip">Algoritme: Octree.</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.Legacy">1.0</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.Legacy.Tooltip">Algoritme: NeuQuant.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">ScreenToGif</s:String>
+    
     <s:String x:Key="S.SaveAs.Encoder.System">Systeem</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System.Tooltip">Gebruikt een standaard-palet.</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.Apng">1.0</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Apng">ScreenToGif</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Apng.Tooltip">Encoder ontwikkeld door ScreenToGif.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>

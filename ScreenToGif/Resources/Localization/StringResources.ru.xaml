@@ -1241,13 +1241,11 @@
     
     <!--Editor • Save as > Encoder-->
     <s:String x:Key="S.SaveAs.Encoder">Кодер</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">2.0</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Tooltip">Алгоритм: Octree.</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.Legacy">1.0</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.Legacy.Tooltip">Алгоритм: NeuQuant.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">ScreenToGif</s:String>
+    
     <s:String x:Key="S.SaveAs.Encoder.System">Системный</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System.Tooltip">Исп. палитры по-умолчанию.</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.Apng">1.0</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Apng">ScreenToGif</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Apng.Tooltip">Кодировщик от разработчика ScreenToGif.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>

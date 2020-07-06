@@ -1132,13 +1132,11 @@
     <s:String x:Key="S.SaveAs.Psd">PSD</s:String>
     <s:String x:Key="S.SaveAs.Video">ビデオ</s:String>
     <s:String x:Key="S.SaveAs.Encoder">エンコーダー</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">2.0</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Tooltip">アルゴリズム: Octree.(八分木)</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.Legacy">1.0</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.Legacy.Tooltip">アルゴリズム: NeuQuant.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">ScreenToGif</s:String>
+    
     <s:String x:Key="S.SaveAs.Encoder.System">システム</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System.Tooltip">標準のパレットを使用</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.Apng">1.0</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Apng">ScreenToGif</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Apng.Tooltip">エンコーダーはScreenToGifの開発者により作成されました。</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>

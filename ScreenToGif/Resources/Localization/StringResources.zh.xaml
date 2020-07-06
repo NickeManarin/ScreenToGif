@@ -1270,13 +1270,11 @@
     
     <!--Editor • Save as > Encoder-->
     <s:String x:Key="S.SaveAs.Encoder">编码器</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">2.0</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Tooltip">算法：Octree</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.Legacy">1.0</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.Legacy.Tooltip">算法：NeuQuant</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">ScreenToGif</s:String>
+    
     <s:String x:Key="S.SaveAs.Encoder.System">系统</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System.Tooltip">使用默认调色板。</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.Apng">1.0</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Apng">ScreenToGif</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Apng.Tooltip">ScreenToGif 开发人员制作的编码器。</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
