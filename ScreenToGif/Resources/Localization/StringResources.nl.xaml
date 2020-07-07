@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:s="clr-namespace:System;assembly=mscorlib"
                     xml:space="preserve">
@@ -233,18 +233,18 @@
     <s:String x:Key="S.Options.Recorder.Interface.Old">Oud</s:String>
     <s:String x:Key="S.Options.Recorder.Interface.New">Nieuw</s:String>
     
-    <!--<s:String x:Key="S.Options.Recorder.Frequency">Capture frequency</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.Frequency.Manual">Manual</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.Frequency.Manual.Info">Each frame will be manually captured by you, by pressing the capture button or equivalent keyboard shortcut.</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.Frequency.Second">Per second</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.Frequency.Second.Info">Frames will be captured in a 'per second' basis,&#10;given the framerate denominator set on the recorder screen.</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.Frequency.Minute">Per minute</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.Frequency.Minute.Info">Frames will be captured in a 'per minute' basis (timelapse),&#10;given the framerate denominator set on the recorder screen.</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.Frequency.Hour">Per hour</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.Frequency.Hour.Info">Frames will be captured in a 'per hour' basis (timelapse),&#10;given the framerate denominator set on the recorder screen.</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.Frequency.Playback">Playback delay:</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.Frequency.Playback.Info">(In ms, each captured frame will be set to this delay)</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.Frequency.Interval">Each frame will be captured in interval of {0}.</s:String>-->
+    <s:String x:Key="S.Options.Recorder.Frequency">Opname-frequentie</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Manual">Handmatig</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Manual.Info">Elk frame wordt handmatig door u vastgelegd door op de opnameknop of een gelijkwaardige sneltoets te drukken.</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Second">Per seconde</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Second.Info">Frames worden vastgelegd op basis van 'per seconde', &#10;gebaseerd op de framerate noemer die is ingesteld op het recorderscherm.</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Minute">Per minuut</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Minute.Info">Frames worden vastgelegd op basis van 'per minuut' (timelapse), &#10;gebaseerd op de framerate-noemer die op het recorderscherm is ingesteld.</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Hour">Per uur</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Hour.Info">Frames worden vastgelegd op basis van 'per uur' (timelapse), &#10;gebaseerd op de framerate noemer die op het recorderscherm is ingesteld.</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Playback">Terugspeel-vertraging:</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Playback.Info">(In ms, elk vastgelegd frame wordt op deze vertraging ingesteld)</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Interval">Elk frame wordt vastgelegd met een interval van {0}.</s:String>
     
     <s:String x:Key="S.Options.Recorder.Mode">Opnamemodus</s:String>
     <s:String x:Key="S.Options.Recorder.Bitblt.Info">Gebruik de oudere vastlegmethode, die langzamer is en mogelijk niet werkt bij het vastleggen van games,&#10;maar waarvoor geen extra plug-ins nodig zijn.</s:String>
@@ -297,7 +297,7 @@
     <s:String x:Key="S.Options.Editor.Previewer.BaseColor">Basiskleur</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.EvenColor">Even-kleur</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.OddColor">Oneven-kleur</s:String>
-    <!--<s:String x:Key="S.Options.Editor.Interface.DisplayEncoder">Display the encodings in a separated window.</s:String>-->
+    <s:String x:Key="S.Options.Editor.Interface.DisplayEncoder">Geef de coderingen weer in een apart venster.</s:String>
     <s:String x:Key="S.Options.Editor.Interface.ExtendChrome">Titelbalk uitbreiden (window chrome).</s:String>
     <s:String x:Key="S.Options.Editor.Interface.AutomaticallySizeOnContent">Bij het laden de venstergrootte automatisch aanpassen aan de framegrootte.</s:String>
     <s:String x:Key="S.Options.Editor.Interface.AutomaticallyFitImage">Bij het laden het frame-zoomniveau automatisch aanpassen aan de schermgrootte.</s:String>
@@ -454,11 +454,11 @@
     <s:String x:Key="S.Options.Extras.DownloadRestriction">Apps die door de Microsoft Store worden gedistribueerd, kunnen geen andere apps downloaden. Je moet het handmatig downloaden.</s:String>
     <s:String x:Key="S.Options.Extras.FfmpegLocation">Locatie FFmpeg</s:String>
     <s:String x:Key="S.Options.Extras.FfmpegLocation.Select">Locatie van FFmpeg selecteren</s:String>
-    <!--<s:String x:Key="S.Options.Extras.FfmpegLocation.File">FFmpeg executable</s:String>-->
+    <s:String x:Key="S.Options.Extras.FfmpegLocation.File">FFmpeg uitvoerbaar bestand</s:String>
     <s:String x:Key="S.Options.Extras.FfmpegLocation.Invalid">Het pad van FFmpeg bevat een of meer ongeldige tekens. Selecteer de juiste locatie van het bestand.</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation">Locatie Gifski</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.Select">Locatie van Gifski selecteren</s:String>
-    <!--<s:String x:Key="S.Options.Extras.GifskiLocation.File">Gifski library</s:String>-->
+    <s:String x:Key="S.Options.Extras.GifskiLocation.File">Gifski-bibliotheek</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.Invalid">Het pad van Gifski bevat een of meer ongeldige tekens. Selecteer de juiste locatie van het bestand.</s:String>
     <s:String x:Key="S.Options.Extras.SharpDxLocation">SharpDx-map (SharpDX.dll, SharpDX.Direct3D11.dll en SharpDX.DXGI.dll)</s:String>
     <s:String x:Key="S.Options.Extras.SharpDxLocation.Select">Selecteer de locatie van de SharpDx-bibliotheken</s:String>
@@ -504,25 +504,25 @@
     
     <!--Localization-->
     <s:String x:Key="S.Localization">Lokalisatie</s:String>
-    <!--<s:String x:Key="S.Localization.GettingCodes">Getting language codes...</s:String>-->
-    <!--<s:String x:Key="S.Localization.Recognized">Recognized as {0}</s:String>-->
-    <!--<s:String x:Key="S.Localization.NotRecognized">Not recognized</s:String>-->
+    <s:String x:Key="S.Localization.GettingCodes">Taalcodes ophalen...</s:String>
+    <s:String x:Key="S.Localization.Recognized">Herkend als {0}</s:String>
+    <s:String x:Key="S.Localization.NotRecognized">Niet herkend</s:String>
     <s:String x:Key="S.Localization.Usage.First">De onderste vertaalbestand is hetgeen wordt gebruikt.</s:String>
     <s:String x:Key="S.Localization.Usage.Second">Om het eigen gemaakte vertaalbestand te gebruiken, verplaats het naar onderkant lijst.</s:String>
-    <!--<s:String x:Key="S.Localization.Exporting">Exporting resource...</s:String>-->
-    <!--<s:String x:Key="S.Localization.SaveResource">Save the resource dictionary</s:String>-->
-    <!--<s:String x:Key="S.Localization.OpenResource">Open a resource dictionary</s:String>-->
-    <!--<s:String x:Key="S.Localization.File.Resource">Resource dictionary</s:String>-->
-    <!--<s:String x:Key="S.Localization.Importing">Importing resource...</s:String>-->
-    <!--<s:String x:Key="S.Localization.Warning.Name">The filename does not follow a valid pattern</s:String>-->
-    <!--<s:String x:Key="S.Localization.Warning.Name.Info">Try renaming like: StringResources.en.xaml, where 'en' should be replaced by your language code.</s:String>-->
-    <!--<s:String x:Key="S.Localization.Warning.Repeated">You can't add a resource with the same name</s:String>-->
-    <!--<s:String x:Key="S.Localization.Warning.Repeated.Info">Try removing the repeated resource or use other language code.</s:String>-->
-    <!--<s:String x:Key="S.Localization.Warning.Redundant">Redundant language code</s:String>-->
-    <!--<s:String x:Key="S.Localization.Warning.Redundant.Info">The "{0}" code is redundant. Try using "{1}" instead.</s:String>-->
-    <!--<s:String x:Key="S.Localization.Warning.Unknown">Unknown language</s:String>-->
-    <!--<s:String x:Key="S.Localization.Warning.Unknown.Info">The "{0}" and its family were not recognized as valid language codes.</s:String>-->
-    <!--<s:String x:Key="S.Localization.Warning.NotPossible">It was not possible to import the localization resource.</s:String>-->
+    <s:String x:Key="S.Localization.Exporting">Bron exporteren...</s:String>
+    <s:String x:Key="S.Localization.SaveResource">Opslaan als Bronnenwoordenboek</s:String>
+    <s:String x:Key="S.Localization.OpenResource">Bronnenwoordenboek openen</s:String>
+    <s:String x:Key="S.Localization.File.Resource">Bronnenwoordenboek</s:String>
+    <s:String x:Key="S.Localization.Importing">Bron importeren...</s:String>
+    <s:String x:Key="S.Localization.Warning.Name">De bestandsnaam volgt geen geldig patroon</s:String>
+    <s:String x:Key="S.Localization.Warning.Name.Info">Probeer de naam te wijzigen zoals: StringResources.en.xaml, waarbij 'en' moet worden vervangen door jouw taalcode.</s:String>
+    <s:String x:Key="S.Localization.Warning.Repeated">Je kunt geen bron met dezelfde naam toevoegen</s:String>
+    <s:String x:Key="S.Localization.Warning.Repeated.Info">Probeer de herhaalde bron te verwijderen of gebruik een andere taalcode.</s:String>
+    <s:String x:Key="S.Localization.Warning.Redundant">Overbodige taalcode</s:String>
+    <s:String x:Key="S.Localization.Warning.Redundant.Info">De "{0}"-code is overbodig. Gebruik in plaats daarvan '{1}'.</s:String>
+    <s:String x:Key="S.Localization.Warning.Unknown">Onbekende taal</s:String>
+    <s:String x:Key="S.Localization.Warning.Unknown.Info">De '{0}' en zijn familie werden niet herkend als geldige taalcodes.</s:String>
+    <s:String x:Key="S.Localization.Warning.NotPossible">Het was niet mogelijk om de lokalisatiebron te importeren.</s:String>
 
     <!--Recorder-->
     <s:String x:Key="S.Recorder.Record">Opnemen</s:String>
@@ -534,17 +534,17 @@
     <s:String x:Key="S.Recorder.Height">Hoogte</s:String>
     <s:String x:Key="S.Recorder.Width">Breedte</s:String>
 
-    <!--<s:String x:Key="S.Recorder.SwitchFrequency">Click to switch among capture frequency modes.</s:String>-->
-    <!--<s:String x:Key="S.Recorder.Manual.Short">manual</s:String>-->
+    <s:String x:Key="S.Recorder.SwitchFrequency">Klik om te schakelen tussen de modi van opnamefrequentie.</s:String>
+    <s:String x:Key="S.Recorder.Manual.Short">handmatig</s:String>
     <s:String x:Key="S.Recorder.Fps">Maximum frames per seconde</s:String>
     <s:String x:Key="S.Recorder.Fps.Short">fps</s:String>
-    <!--<s:String x:Key="S.Recorder.Fps.Range">Ranges from 1 to 60 fps, with higher values meaning more frames will be captured.&#10;Each increment represents 16 milliseconds of difference.</s:String>-->
-    <!--<s:String x:Key="S.Recorder.Fpm">Maximum frames per minute</s:String>-->
-    <!--<s:String x:Key="S.Recorder.Fpm.Short">fpm</s:String>-->
-    <!--<s:String x:Key="S.Recorder.Fpm.Range">Ranges from 1 to 60 fpm, with higher values meaning more frames will be captured.&#10;Each increment represents 1 second of difference.</s:String>-->
-    <!--<s:String x:Key="S.Recorder.Fph">Maximum frames per hour</s:String>-->
-    <!--<s:String x:Key="S.Recorder.Fph.Short">fph</s:String>-->
-    <!--<s:String x:Key="S.Recorder.Fph.Range">Ranges from 1 to 60 fph, with higher values meaning more frames will be captured.&#10;Each increment represents 1 minute of difference.</s:String>-->
+    <s:String x:Key="S.Recorder.Fps.Range">Varieert van 1 tot 60 fps, met hogere waarden voor meer vastgelegde frames per seconde. &#10;Elke stap vertegenwoordigt 16 milliseconden verschil.</s:String>
+    <s:String x:Key="S.Recorder.Fpm">Maximum frames per minuut</s:String>
+    <s:String x:Key="S.Recorder.Fpm.Short">fpm</s:String>
+    <s:String x:Key="S.Recorder.Fpm.Range">Varieert van 1 tot 60 fpm, met hogere waarden voor meer vastgelegde frames per minuut. &#10;Elke stap vertegenwoordigt 1 seconde verschil.</s:String>
+    <s:String x:Key="S.Recorder.Fph">Maximum frames per uur</s:String>
+    <s:String x:Key="S.Recorder.Fph.Short">fph</s:String>
+    <s:String x:Key="S.Recorder.Fph.Range">Varieert van 1 tot 60 fph, met hogere waarden voor meer vastgelegde frames per uur. &#10;Elke stap vertegenwoordigt 1 minuut verschil.</s:String>
     
     <s:String x:Key="S.Recorder.SnapToWindow">Aanpassen aan venstergrootte (Sleep en laat los om aan te passen)</s:String>
     <s:String x:Key="S.Recorder.PreStart">Aftellen</s:String>
@@ -658,7 +658,7 @@
     
     <!--Encoder-->
     <s:String x:Key="S.Encoder.Title">Encoder</s:String>
-    <!--<s:String x:Key="S.Encoder.Encoding">Encoding...</s:String>-->
+    <s:String x:Key="S.Encoder.Encoding">Coderen...</s:String>
     <s:String x:Key="S.Encoder.Starting">Starten</s:String>
     
     <s:String x:Key="S.Encoder.Completed">Voltooid</s:String>
@@ -670,12 +670,12 @@
     <s:String x:Key="S.Encoder.Completed.Upload.Fail">Uploaden mislukt</s:String>
     <s:String x:Key="S.Encoder.Completed.Upload.Delete">Ctrl + muisklik om pagina te openen waarmee afbeelding verwijderd kan worden (indien beschikbaar).</s:String>
     
-    <!--<s:String x:Key="S.Encoder.Completed.Elapsed">Elapsed time, in minutes:</s:String>-->
-    <!--<s:String x:Key="S.Encoder.Completed.Elapsed.Analysis">Analysis:</s:String>-->
-    <!--<s:String x:Key="S.Encoder.Completed.Elapsed.Encoding">Encoding:</s:String>-->
-    <!--<s:String x:Key="S.Encoder.Completed.Elapsed.Upload">Upload:</s:String>-->
-    <!--<s:String x:Key="S.Encoder.Completed.Elapsed.Copy">Copy:</s:String>-->
-    <!--<s:String x:Key="S.Encoder.Completed.Elapsed.Commands">Commands:</s:String>-->
+    <s:String x:Key="S.Encoder.Completed.Elapsed">Verstreken tijd [minuten]:</s:String>
+    <s:String x:Key="S.Encoder.Completed.Elapsed.Analysis">Analyse:</s:String>
+    <s:String x:Key="S.Encoder.Completed.Elapsed.Encoding">Coderen:</s:String>
+    <s:String x:Key="S.Encoder.Completed.Elapsed.Upload">Uploaden:</s:String>
+    <s:String x:Key="S.Encoder.Completed.Elapsed.Copy">Kopieëren:</s:String>
+    <s:String x:Key="S.Encoder.Completed.Elapsed.Commands">Opdrachten:</s:String>
     
     <s:String x:Key="S.Encoder.DeletedMoved">Verwijderd of verplaatst bestand</s:String>
     <s:String x:Key="S.Encoder.Canceled">Geannuleerd</s:String>
@@ -688,12 +688,12 @@
     <s:String x:Key="S.Encoder.Processing.Second">Verwerking {0} - 2e voortgangsslag</s:String>
     <s:String x:Key="S.Encoder.CreatingFile">Bestand aanmaken</s:String>
     <s:String x:Key="S.Encoder.Analyzing">Ongewijzigde pixels analyseren</s:String>
-    <!--<s:String x:Key="S.Encoder.SavingAnalysis">Saving analysis result</s:String>-->
+    <s:String x:Key="S.Encoder.SavingAnalysis">Analyseresultaat opslaan</s:String>
     <s:String x:Key="S.Encoder.OpenFile">Bestand openen</s:String>
     <s:String x:Key="S.Encoder.ExploreFolder">Map verkennen</s:String>
     <s:String x:Key="S.Encoder.Remove">Uit lijst verwijderen</s:String>
     <s:String x:Key="S.Encoder.Details">Details tonen</s:String>
-    <!--<s:String x:Key="S.Encoder.Dismiss">Dismiss all finished encodings</s:String>-->
+    <s:String x:Key="S.Encoder.Dismiss">Alle voltooide coderingen afwijzen</s:String>
 
     <s:String x:Key="S.Encoder.Copy.Image">Als afbeelding kopiëren</s:String>
     <s:String x:Key="S.Encoder.Copy.Filename">Bestandsnaam kopiëren</s:String>
@@ -736,17 +736,17 @@
     <s:String x:Key="S.Editor.File.Image">Afbeelding</s:String>
     <s:String x:Key="S.Editor.File.Video">Video</s:String>
     <s:String x:Key="S.Editor.File.Project">ScreenToGif project</s:String>
-    <!--<s:String x:Key="S.Editor.File.Gif">Gif animation</s:String>-->
-    <!--<s:String x:Key="S.Editor.File.Apng">Animated Png</s:String>-->
-    <!--<s:String x:Key="S.Editor.File.Avi">Avi video</s:String>-->
-    <!--<s:String x:Key="S.Editor.File.Mkv">Matroska video</s:String>-->
-    <!--<s:String x:Key="S.Editor.File.Mp4">Mp4 video</s:String>-->
-    <!--<s:String x:Key="S.Editor.File.Webm">Webm video</s:String>-->
-    <!--<s:String x:Key="S.Editor.File.Wmv">Windows media video</s:String>-->
-    <!--<s:String x:Key="S.Editor.File.Image.Zip">Zip file, all selected images</s:String>-->
-    <!--<s:String x:Key="S.Editor.File.Image.Png">Png image, all selected images</s:String>-->
-    <!--<s:String x:Key="S.Editor.File.Project.Zip">ScreenToGif project as Zip</s:String>-->
-    <!--<s:String x:Key="S.Editor.File.Psd">Psd file</s:String>-->
+    <s:String x:Key="S.Editor.File.Gif">Gif-animatie</s:String>
+    <s:String x:Key="S.Editor.File.Apng">Animated Png</s:String>
+    <s:String x:Key="S.Editor.File.Avi">Avi-video</s:String>
+    <s:String x:Key="S.Editor.File.Mkv">Matroska-video</s:String>
+    <s:String x:Key="S.Editor.File.Mp4">Mp4-video</s:String>
+    <s:String x:Key="S.Editor.File.Webm">Webm-video</s:String>
+    <s:String x:Key="S.Editor.File.Wmv">Windows media-video</s:String>
+    <s:String x:Key="S.Editor.File.Image.Zip">Zip-bestand, alle geselecteerde bestanden</s:String>
+    <s:String x:Key="S.Editor.File.Image.Png">Png-afbeelding, alle geselecteerde afbeeldingen</s:String>
+    <s:String x:Key="S.Editor.File.Project.Zip">ScreenToGif project (zip)</s:String>
+    <s:String x:Key="S.Editor.File.Psd">Psd-bestand</s:String>
     
     <!--Editor • Welcome-->
     <s:String x:Key="S.Editor.Welcome.New">Ga naar "Bestand > Nieuw" om een nieuwe opname te starten</s:String>
@@ -1021,7 +1021,7 @@
     <s:String x:Key="S.Recent.Date">Aanmaakdatum</s:String>
     <s:String x:Key="S.Recent.Frames">Aantal frames</s:String>
     <s:String x:Key="S.Recent.Warning.NoSelection">Er is geen project geselecteerd. Selecteer een project uit de lijst om te laden.</s:String>
-    <!--<s:String x:Key="S.Recent.Warning.SameProject">This project is already being displayed by this editor instance.</s:String>-->
+    <s:String x:Key="S.Recent.Warning.SameProject">Dit project wordt al weergegeven door deze editorinstantie.</s:String>
     <s:String x:Key="S.Recent.Warning.AnotherEditor">Dit project werd al geopend door een andere editor. Een project kan niet een tweede keer worden geopend.</s:String>
     
     <!--Editor • Clipboard-->
@@ -1151,7 +1151,7 @@
     <!--Editor • Watermark-->
     <s:String x:Key="S.Watermark.Image">Afbeelding</s:String>
     <s:String x:Key="S.Watermark.File">Bestand:</s:String>
-    <!--<s:String x:Key="S.Watermark.File.Nothing">None selected</s:String>-->
+    <s:String x:Key="S.Watermark.File.Nothing">Niets geselecteerd</s:String>
     <s:String x:Key="S.Watermark.Opacity">Dekking:</s:String>
     <s:String x:Key="S.Watermark.Select">Selecteer een afbeelding</s:String>
     <s:String x:Key="S.Watermark.WarningNoImage">Selecteer een afbeelding om toe te voegen in geselecteerde frame(s).</s:String>
@@ -1242,7 +1242,7 @@
     <!--Editor • Save as > Encoder-->
     <s:String x:Key="S.SaveAs.Encoder">Encoder</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">ScreenToGif</s:String>
-    
+    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Tooltip">Gebruikt de ingebouwde encoder, met de onderstaande methode voor kleurreductie.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System">Systeem</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System.Tooltip">Gebruikt een standaard-palet.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Apng">ScreenToGif</s:String>
@@ -1252,37 +1252,37 @@
     
     <!--Editor • Save as > Gif options-->
     <s:String x:Key="S.SaveAs.GifOptions">Gif-opties</s:String>
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.Info">Color reduction algorithm (quantization).</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.Neural">Neural network</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.Neural.Info">High fidelity quantization. Slower, but good for higher ammount of colors.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.Octree">Octree</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.Octree.Info">Good for animations with less colors. Faster, but may produce color banding.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.MedianCut">Median cut</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.MedianCut.Info">Less good than Octree and slower.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.Grayscale">Grayscale</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.Grayscale.Info">Uses a fixed grayscale palette, so it's way faster.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.MostUsed">Most used colors</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.MostUsed.Info">Simply takes the most used colors in the frames.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Sampling">Sampling:</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Sampling.Info">Sampling factor:&#10;A value of 1 will result in better looking gif, but it will be slower to render.</s:String>-->
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Info">Kleurreductie-algoritme (kwantisatie).</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Neural">Neuraal netwerk</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Neural.Info">Kwantitatieve kwantisatie. Langzamer, maar goed voor meer kleuren.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Octree">Octree</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Octree.Info">Goed voor animaties met minder kleuren. Sneller, maar kan kleurstrepen veroorzaken.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.MedianCut">Median cut</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.MedianCut.Info">Minder goed dan Octree en langzamer.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Grayscale">Grijswaarden</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Grayscale.Info">Gebruikt een vaste grijswaardenschaal waarmee het veel sneller gaat.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.MostUsed">Meest gebruikte kleuren</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.MostUsed.Info">Neemt gewoon de meest gebruikte kleuren in de frames.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Sampling">Bemonstering:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Sampling.Info">Bemonsteringsfactor: &#10;een waarde van 1 zal resulteren in een beter uitziende gif, maar zal trager worden weergegeven.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Quality">Kwaliteit:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors">Kleuren:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">Maximum aantal kleuren (voor elke frame)</s:String>
-    <!--<s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable">Use a global color table.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable.Info">May reduce the quality and/or size of the gif.</s:String>-->
+    <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable">Gebruik een globale kleurentabel.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable.Info">Kan de kwaliteit en/of grootte van het gif verminderen.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Loop">Lus:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">Gif met herhaling.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Oneindig herhalen.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Aantal keer herhalen.</s:String>
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable">Enable transparency.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable.Info">Enables the full transparency mode, which makes the background of the gif to be fully transparent.&#10;The chroma key replacement process will be ignored if this option is enabled.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Transparency.Pick">Select which color to display as transparent.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Transparency.Pick.Info">If a color is selected, it will be converted to transparent and it will appear as transparent in the generated gif.&#10;If no color is selected, all transparent colors (Alpha = 0%) will appear as transparent normally.</s:String>-->
+    <s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable">Transparantie inschakelen.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable.Info">Maakt de volledige transparantiemodus mogelijk, waardoor de achtergrond van de gif volledig transparant is. &#10;Het chromasleutelvervangingsproces wordt genegeerd als deze optie is ingeschakeld.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Transparency.Pick">Selecteer welke kleur als transparant moet worden weergegeven.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Transparency.Pick.Info">Als een kleur is geselecteerd, wordt deze geconverteerd naar transparant en wordt deze als transparant weergegeven in de gegenereerde gif. &#10;Als er geen kleur is geselecteerd, worden alle transparante kleuren (Alpha = 0%) normaal als transparant weergegeven.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">Ongewijzigde pixels detecteren.</s:String>
-    <!--<s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged.Info">By analyzing and detecting unchanged pixels between the frames,&#10;it will be possible to save only the necessary parts to the gif.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma">Replace these pixels with a chroma key.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma.Info">Repeated/unchanged pixels will be replaced with this chroma key,&#10;making it possible to use less colors per frame.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.ChromaKey">Chroma key:</s:String>-->
+    <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged.Info">Door ongewijzigde pixels tussen de frames te analyseren en te detecteren, &#10;is het mogelijk om alleen de benodigde delen op te slaan in de gif.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma">Vervang deze pixels door een chromasleutel.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma.Info">Herhaalde/ongewijzigde pixels worden vervangen door deze chromasleutel, &#10;waardoor het mogelijk is om minder kleuren per frame te gebruiken.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.ChromaKey">Chroma sleutel:</s:String>
 
     <!--Editor • Save as > Apng options-->
     <s:String x:Key="S.SaveAs.ApngOptions">Apng-opties</s:String>
