@@ -237,18 +237,18 @@
     <s:String x:Key="S.Options.Recorder.Interface.Old">旧的</s:String>
     <s:String x:Key="S.Options.Recorder.Interface.New">新的</s:String>
     
-    <!--<s:String x:Key="S.Options.Recorder.Frequency">Capture frequency</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.Frequency.Manual">Manual</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.Frequency.Manual.Info">Each frame will be manually captured by you, by pressing the capture button or equivalent keyboard shortcut.</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.Frequency.Second">Per second</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.Frequency.Second.Info">Frames will be captured in a 'per second' basis,&#10;given the framerate denominator set on the recorder screen.</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.Frequency.Minute">Per minute</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.Frequency.Minute.Info">Frames will be captured in a 'per minute' basis (timelapse),&#10;given the framerate denominator set on the recorder screen.</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.Frequency.Hour">Per hour</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.Frequency.Hour.Info">Frames will be captured in a 'per hour' basis (timelapse),&#10;given the framerate denominator set on the recorder screen.</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.Frequency.Playback">Playback delay:</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.Frequency.Playback.Info">(In ms, each captured frame will be set to this delay)</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.Frequency.Interval">Each frame will be captured in interval of {0}.</s:String>-->
+    <s:String x:Key="S.Options.Recorder.Frequency">捕获频率</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Manual">手动</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Manual.Info">您可以通过按“捕获”按钮或等效的键盘快捷键来手动捕获每一帧。</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Second">每秒</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Second.Info">基于录像机屏幕上设置的帧率分母，&#10;将以“每秒”为基础捕获帧。</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Minute">每分钟</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Minute.Info">基于录像机屏幕上设置的帧率分母，&#10;将以“每分钟”（间隔）的时间捕获帧。</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Hour">每小时</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Hour.Info">基于录像机屏幕上设置的帧速率分母，&#10;将以“每小时”为基础（延时）捕获帧。</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Playback">播放延迟：</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Playback.Info">（以毫秒为单位，每个捕获的帧将设置为此延迟）</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Interval">每帧将以 {0} 的间隔进行捕获。</s:String>
     
     <s:String x:Key="S.Options.Recorder.Mode">捕获模式</s:String>
     <s:String x:Key="S.Options.Recorder.Bitblt.Info">使用较旧的捕获方法，该方法比较慢，可能无法捕获游戏，但不需要其他插件。</s:String>
@@ -301,7 +301,7 @@
     <s:String x:Key="S.Options.Editor.Previewer.BaseColor">基础颜色</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.EvenColor">偶数行颜色</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.OddColor">奇数行颜色</s:String>
-    <!--<s:String x:Key="S.Options.Editor.Interface.DisplayEncoder">Display the encodings in a separated window.</s:String>-->
+    <s:String x:Key="S.Options.Editor.Interface.DisplayEncoder">在单独的窗口中显示编码</s:String>
     <s:String x:Key="S.Options.Editor.Interface.ExtendChrome">扩展标题栏（窗口框架）</s:String>
     <s:String x:Key="S.Options.Editor.Interface.AutomaticallySizeOnContent">加载后根据帧大小自动调整窗口大小</s:String>
     <s:String x:Key="S.Options.Editor.Interface.AutomaticallyFitImage">加载后根据窗口大小自动调整帧缩放级别</s:String>
@@ -467,11 +467,11 @@
     <s:String x:Key="S.Options.Extras.DownloadRestriction">Microsoft Store 分发的应用程序无法下载其他应用程序。 您必须手动下载它。</s:String>
     <s:String x:Key="S.Options.Extras.FfmpegLocation">FFmpeg 位置</s:String>
     <s:String x:Key="S.Options.Extras.FfmpegLocation.Select">选择 FFmpeg 可执行文件的位置</s:String>
-    <!--<s:String x:Key="S.Options.Extras.FfmpegLocation.File">FFmpeg executable</s:String>-->
+    <s:String x:Key="S.Options.Extras.FfmpegLocation.File">FFmpeg 可执行文件</s:String>
     <s:String x:Key="S.Options.Extras.FfmpegLocation.Invalid">FFMpeg 可执行文件的路径中包含一个或多个无效字符。请为该可执行文件选择一个有效位置。</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation">Gifski 位置</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.Select">选择 Gifski 可执行文件的位置</s:String>
-    <!--<s:String x:Key="S.Options.Extras.GifskiLocation.File">Gifski library</s:String>-->
+    <s:String x:Key="S.Options.Extras.GifskiLocation.File">Gifski 库</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.Invalid">Gifski 可执行文件的路径包含一个或多个无效字符。请为该可执行文件选择一个有效的位置。</s:String>
     <s:String x:Key="S.Options.Extras.SharpDxLocation">SharpDx 文件夹（SharpDX.dll，SharpDX.Direct3D11.dll和SharpDX.DXGI.dll）</s:String>
     <s:String x:Key="S.Options.Extras.SharpDxLocation.Select">选择 SharpDx 库的位置</s:String>
@@ -513,29 +513,29 @@
     <s:String x:Key="S.Options.About.Technical.SourceCode">源代码：</s:String>
     <s:String x:Key="S.Options.About.Technical.Privacy">隐私政策：</s:String>
     <s:String x:Key="S.Options.About.ABigThanksTo">非常感谢</s:String>
-    <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">所有支持我提供过反馈及捐助的人 - 简体中文翻译 BY 大眼仔~旭（Anan）2020（www.dayanzai.me）</s:String>
+    <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">所有支持过我和提供反馈及捐助的人 - 简体中文翻译 BY 大眼仔~旭（Anan）2020（www.dayanzai.me）</s:String>
     
     <!--Localization-->
     <s:String x:Key="S.Localization">本地化</s:String>
-    <!--<s:String x:Key="S.Localization.GettingCodes">Getting language codes...</s:String>-->
-    <!--<s:String x:Key="S.Localization.Recognized">Recognized as {0}</s:String>-->
-    <!--<s:String x:Key="S.Localization.NotRecognized">Not recognized</s:String>-->
+    <s:String x:Key="S.Localization.GettingCodes">正在获取语言代码...</s:String>
+    <s:String x:Key="S.Localization.Recognized">识别为 {0}</s:String>
+    <s:String x:Key="S.Localization.NotRecognized">无法识别</s:String>
     <s:String x:Key="S.Localization.Usage.First">现在使用的是最底部的资源。</s:String>
     <s:String x:Key="S.Localization.Usage.Second">要应用您的自定义资源，请将其移动到列表的最底部。</s:String>
-    <!--<s:String x:Key="S.Localization.Exporting">Exporting resource...</s:String>-->
-    <!--<s:String x:Key="S.Localization.SaveResource">Save the resource dictionary</s:String>-->
-    <!--<s:String x:Key="S.Localization.OpenResource">Open a resource dictionary</s:String>-->
-    <!--<s:String x:Key="S.Localization.File.Resource">Resource dictionary</s:String>-->
-    <!--<s:String x:Key="S.Localization.Importing">Importing resource...</s:String>-->
-    <!--<s:String x:Key="S.Localization.Warning.Name">The filename does not follow a valid pattern</s:String>-->
-    <!--<s:String x:Key="S.Localization.Warning.Name.Info">Try renaming like: StringResources.en.xaml, where 'en' should be replaced by your language code.</s:String>-->
-    <!--<s:String x:Key="S.Localization.Warning.Repeated">You can't add a resource with the same name</s:String>-->
-    <!--<s:String x:Key="S.Localization.Warning.Repeated.Info">Try removing the repeated resource or use other language code.</s:String>-->
-    <!--<s:String x:Key="S.Localization.Warning.Redundant">Redundant language code</s:String>-->
-    <!--<s:String x:Key="S.Localization.Warning.Redundant.Info">The "{0}" code is redundant. Try using "{1}" instead.</s:String>-->
-    <!--<s:String x:Key="S.Localization.Warning.Unknown">Unknown language</s:String>-->
-    <!--<s:String x:Key="S.Localization.Warning.Unknown.Info">The "{0}" and its family were not recognized as valid language codes.</s:String>-->
-    <!--<s:String x:Key="S.Localization.Warning.NotPossible">It was not possible to import the localization resource.</s:String>-->
+    <s:String x:Key="S.Localization.Exporting">正在导出资源...</s:String>
+    <s:String x:Key="S.Localization.SaveResource">保存资源字典</s:String>
+    <s:String x:Key="S.Localization.OpenResource">打开资源字典</s:String>
+    <s:String x:Key="S.Localization.File.Resource">资源字典</s:String>
+    <s:String x:Key="S.Localization.Importing">正在导入资源...</s:String>
+    <s:String x:Key="S.Localization.Warning.Name">文件名没有遵循有效的格式</s:String>
+    <s:String x:Key="S.Localization.Warning.Name.Info">尝试重命名为：StringResources.en.xaml，其中“ en”应替换为您的语言代码。</s:String>
+    <s:String x:Key="S.Localization.Warning.Repeated">您不能添加相同名称的资源</s:String>
+    <s:String x:Key="S.Localization.Warning.Repeated.Info">尝试删除重复的资源或使用其他语言代码。</s:String>
+    <s:String x:Key="S.Localization.Warning.Redundant">冗余语言代码</s:String>
+    <s:String x:Key="S.Localization.Warning.Redundant.Info">“ {0}”代码是多余的。 尝试改用“ {1}”。</s:String>
+    <s:String x:Key="S.Localization.Warning.Unknown">未知语言</s:String>
+    <s:String x:Key="S.Localization.Warning.Unknown.Info">无法将“ {0}”及其家族识别为有效的语言代码。</s:String>
+    <s:String x:Key="S.Localization.Warning.NotPossible">无法导入本地化资源。</s:String>
 
     <!--Recorder-->
     <s:String x:Key="S.Recorder.Record">录制</s:String>
@@ -547,17 +547,17 @@
     <s:String x:Key="S.Recorder.Height">高度</s:String>
     <s:String x:Key="S.Recorder.Width">宽度</s:String>
 
-    <!--<s:String x:Key="S.Recorder.SwitchFrequency">Click to switch among capture frequency modes.</s:String>-->
-    <!--<s:String x:Key="S.Recorder.Manual.Short">manual</s:String>-->
+    <s:String x:Key="S.Recorder.SwitchFrequency">单击以在捕获频率模式之间切换。</s:String>
+    <s:String x:Key="S.Recorder.Manual.Short">手动</s:String>
     <s:String x:Key="S.Recorder.Fps">每秒最大帧数</s:String>
     <s:String x:Key="S.Recorder.Fps.Short">fps</s:String>
-    <!--<s:String x:Key="S.Recorder.Fps.Range">Ranges from 1 to 60 fps, with higher values meaning more frames will be captured.&#10;Each increment represents 16 milliseconds of difference.</s:String>-->
-    <!--<s:String x:Key="S.Recorder.Fpm">Maximum frames per minute</s:String>-->
-    <!--<s:String x:Key="S.Recorder.Fpm.Short">fpm</s:String>-->
-    <!--<s:String x:Key="S.Recorder.Fpm.Range">Ranges from 1 to 60 fpm, with higher values meaning more frames will be captured.&#10;Each increment represents 1 second of difference.</s:String>-->
-    <!--<s:String x:Key="S.Recorder.Fph">Maximum frames per hour</s:String>-->
-    <!--<s:String x:Key="S.Recorder.Fph.Short">fph</s:String>-->
-    <!--<s:String x:Key="S.Recorder.Fph.Range">Ranges from 1 to 60 fph, with higher values meaning more frames will be captured.&#10;Each increment represents 1 minute of difference.</s:String>-->
+    <s:String x:Key="S.Recorder.Fps.Range">范围从 1 到 60 fps，更高的值表示将捕获更多帧。&#10;每个增量代表 16 毫秒的差异。</s:String>
+    <s:String x:Key="S.Recorder.Fpm">每分钟最大帧数</s:String>
+    <s:String x:Key="S.Recorder.Fpm.Short">fpm</s:String>
+    <s:String x:Key="S.Recorder.Fpm.Range">范围从 1 到 60 fpm，更高的值表示将捕获更多帧。&#10;每个增量代表 1 秒的差异。</s:String>
+    <s:String x:Key="S.Recorder.Fph">每小时最大帧数</s:String>
+    <s:String x:Key="S.Recorder.Fph.Short">fph</s:String>
+    <s:String x:Key="S.Recorder.Fph.Range">范围从 1 到 60 fph，更高的值表示将捕获更多帧。&#10;每个增量代表 1 分钟的差异。</s:String>
     
     <s:String x:Key="S.Recorder.SnapToWindow">对齐窗口（拖拽到目标窗口上进行捕捉）</s:String>
     <s:String x:Key="S.Recorder.PreStart">预启动</s:String>
@@ -675,7 +675,7 @@
     
     <!--Encoder-->
     <s:String x:Key="S.Encoder.Title">编码器</s:String>
-    <!--<s:String x:Key="S.Encoder.Encoding">Encoding...</s:String>-->
+    <s:String x:Key="S.Encoder.Encoding">正在编码中...</s:String>
     <s:String x:Key="S.Encoder.Starting">开始</s:String>
     
     <s:String x:Key="S.Encoder.Completed">已完成</s:String>
@@ -687,12 +687,12 @@
     <s:String x:Key="S.Encoder.Completed.Upload.Fail">无法上传</s:String>
     <s:String x:Key="S.Encoder.Completed.Upload.Delete">Ctrl + 单击以打开页面以删除图像（如果可用）。</s:String>
     
-    <!--<s:String x:Key="S.Encoder.Completed.Elapsed">Elapsed time, in minutes:</s:String>-->
-    <!--<s:String x:Key="S.Encoder.Completed.Elapsed.Analysis">Analysis:</s:String>-->
-    <!--<s:String x:Key="S.Encoder.Completed.Elapsed.Encoding">Encoding:</s:String>-->
-    <!--<s:String x:Key="S.Encoder.Completed.Elapsed.Upload">Upload:</s:String>-->
-    <!--<s:String x:Key="S.Encoder.Completed.Elapsed.Copy">Copy:</s:String>-->
-    <!--<s:String x:Key="S.Encoder.Completed.Elapsed.Commands">Commands:</s:String>-->
+    <s:String x:Key="S.Encoder.Completed.Elapsed">已用时间（以分钟为单位）：</s:String>
+    <s:String x:Key="S.Encoder.Completed.Elapsed.Analysis">分析：</s:String>
+    <s:String x:Key="S.Encoder.Completed.Elapsed.Encoding">编码：</s:String>
+    <s:String x:Key="S.Encoder.Completed.Elapsed.Upload">上传：</s:String>
+    <s:String x:Key="S.Encoder.Completed.Elapsed.Copy">复制：</s:String>
+    <s:String x:Key="S.Encoder.Completed.Elapsed.Commands">命令：</s:String>
     
     <s:String x:Key="S.Encoder.DeletedMoved">已删除或移动文件</s:String>
     <s:String x:Key="S.Encoder.Canceled">已取消</s:String>
@@ -705,12 +705,12 @@
     <s:String x:Key="S.Encoder.Processing.Second">正在处理 {0} - 第二次</s:String>
     <s:String x:Key="S.Encoder.CreatingFile">创建文件</s:String>
     <s:String x:Key="S.Encoder.Analyzing">分析不变的像素</s:String>
-    <!--<s:String x:Key="S.Encoder.SavingAnalysis">Saving analysis result</s:String>-->
+    <s:String x:Key="S.Encoder.SavingAnalysis">保存分析结果</s:String>
     <s:String x:Key="S.Encoder.OpenFile">打开文件</s:String>
     <s:String x:Key="S.Encoder.ExploreFolder">显示文件夹</s:String>
     <s:String x:Key="S.Encoder.Remove">从列表中移除</s:String>
     <s:String x:Key="S.Encoder.Details">显示详细信息</s:String>
-    <!--<s:String x:Key="S.Encoder.Dismiss">Dismiss all finished encodings</s:String>-->
+    <s:String x:Key="S.Encoder.Dismiss">关闭所有已完成编码</s:String>
 
     <s:String x:Key="S.Encoder.Copy.Image">复制静止图片</s:String>
     <s:String x:Key="S.Encoder.Copy.Filename">复制文件名</s:String>
@@ -753,17 +753,17 @@
     <s:String x:Key="S.Editor.File.Image">图像</s:String>
     <s:String x:Key="S.Editor.File.Video">视频</s:String>
     <s:String x:Key="S.Editor.File.Project">ScreenToGif 项目</s:String>
-    <!--<s:String x:Key="S.Editor.File.Gif">Gif animation</s:String>-->
-    <!--<s:String x:Key="S.Editor.File.Apng">Animated Png</s:String>-->
-    <!--<s:String x:Key="S.Editor.File.Avi">Avi video</s:String>-->
-    <!--<s:String x:Key="S.Editor.File.Mkv">Matroska video</s:String>-->
-    <!--<s:String x:Key="S.Editor.File.Mp4">Mp4 video</s:String>-->
-    <!--<s:String x:Key="S.Editor.File.Webm">Webm video</s:String>-->
-    <!--<s:String x:Key="S.Editor.File.Wmv">Windows media video</s:String>-->
-    <!--<s:String x:Key="S.Editor.File.Image.Zip">Zip file, all selected images</s:String>-->
-    <!--<s:String x:Key="S.Editor.File.Image.Png">Png image, all selected images</s:String>-->
-    <!--<s:String x:Key="S.Editor.File.Project.Zip">ScreenToGif project as Zip</s:String>-->
-    <!--<s:String x:Key="S.Editor.File.Psd">Psd file</s:String>-->
+    <s:String x:Key="S.Editor.File.Gif">Gif 动画</s:String>
+    <s:String x:Key="S.Editor.File.Apng">动画 PNG</s:String>
+    <s:String x:Key="S.Editor.File.Avi">AVI 视频</s:String>
+    <s:String x:Key="S.Editor.File.Mkv">Matroska 视频</s:String>
+    <s:String x:Key="S.Editor.File.Mp4">MP4 视频</s:String>
+    <s:String x:Key="S.Editor.File.Webm">Webm 视频</s:String>
+    <s:String x:Key="S.Editor.File.Wmv">Windows 媒体视频</s:String>
+    <s:String x:Key="S.Editor.File.Image.Zip">ZIP 文件，所有选择图像</s:String>
+    <s:String x:Key="S.Editor.File.Image.Png">PNG 图像，所有选择图像</s:String>
+    <s:String x:Key="S.Editor.File.Project.Zip">ScreenToGif 项目为 Zip</s:String>
+    <s:String x:Key="S.Editor.File.Psd">PSD 文件</s:String>
     
     <!--Editor • Welcome-->
     <s:String x:Key="S.Editor.Welcome.New">转到“文件 > 新录制”来开始新录制</s:String>
@@ -1176,7 +1176,7 @@
     <!--Editor • Watermark-->
     <s:String x:Key="S.Watermark.Image">图像</s:String>
     <s:String x:Key="S.Watermark.File">文件：</s:String>
-    <!--<s:String x:Key="S.Watermark.File.Nothing">None selected</s:String>-->
+    <s:String x:Key="S.Watermark.File.Nothing">未选择</s:String>
     <s:String x:Key="S.Watermark.Opacity">不透明度：</s:String>
     <s:String x:Key="S.Watermark.Select">选择图像</s:String>
     <s:String x:Key="S.Watermark.WarningNoImage">您必须选择将应用到所选帧的图像。</s:String>
@@ -1271,7 +1271,7 @@
     <!--Editor • Save as > Encoder-->
     <s:String x:Key="S.SaveAs.Encoder">编码器</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">ScreenToGif</s:String>
-    
+    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Tooltip">使用内置编码器，以及下面的减色方法。</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System">系统</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System.Tooltip">使用默认调色板。</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Apng">ScreenToGif</s:String>
@@ -1281,37 +1281,37 @@
     
     <!--Editor • Save as > Gif options-->
     <s:String x:Key="S.SaveAs.GifOptions">Gif 选项</s:String>
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.Info">Color reduction algorithm (quantization).</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.Neural">Neural network</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.Neural.Info">High fidelity quantization. Slower, but good for higher ammount of colors.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.Octree">Octree</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.Octree.Info">Good for animations with less colors. Faster, but may produce color banding.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.MedianCut">Median cut</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.MedianCut.Info">Less good than Octree and slower.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.Grayscale">Grayscale</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.Grayscale.Info">Uses a fixed grayscale palette, so it's way faster.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.MostUsed">Most used colors</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.MostUsed.Info">Simply takes the most used colors in the frames.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Sampling">Sampling:</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Sampling.Info">Sampling factor:&#10;A value of 1 will result in better looking gif, but it will be slower to render.</s:String>-->
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Info">色彩还原算法（量化）</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Neural">神经网络</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Neural.Info">高保真量化。 速度较慢，但适合较高数量的颜色。</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Octree">八位</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Octree.Info">适用于色彩较少的动画。 速度更快，但可能会产生色带。</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.MedianCut">中位数</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.MedianCut.Info">不如八位好，但速度较慢。</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Grayscale">灰度</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Grayscale.Info">使用固定的灰度调色板，因此速度更快。</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.MostUsed">最常用的颜色</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.MostUsed.Info">只是需要在选择帧中最常用的颜色。</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Sampling">采样：</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Sampling.Info">采样因子：&#10;值为 1 会产生更好的 GIF 效果，但渲染速度会较慢。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Quality">质量：</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors">颜色：</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">最大颜色数（每帧）</s:String>
-    <!--<s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable">Use a global color table.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable.Info">May reduce the quality and/or size of the gif.</s:String>-->
+    <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable">使用全局色表。</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable.Info">可能会降低 GIF 的质量和/或大小。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Loop">循环：</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">循环 Gif</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">永远重复</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">重复计数</s:String>
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable">Enable transparency.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable.Info">Enables the full transparency mode, which makes the background of the gif to be fully transparent.&#10;The chroma key replacement process will be ignored if this option is enabled.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Transparency.Pick">Select which color to display as transparent.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Transparency.Pick.Info">If a color is selected, it will be converted to transparent and it will appear as transparent in the generated gif.&#10;If no color is selected, all transparent colors (Alpha = 0%) will appear as transparent normally.</s:String>-->
+    <s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable">启用透明度。</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable.Info">启用完全透明模式，使 GIF 的背景完全透明。&#10;如果启用此选项，则色键替换过程将被忽略。</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Transparency.Pick">选择显示为透明的颜色。</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Transparency.Pick.Info">如果选择了一种颜色，它将被转换为透明的，并且在生成的 GIF 中将显示为透明。&#10;如果未选择颜色，则所有透明颜色（Alpha = 0％）将正常显示为透明。rmally.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">检测未更改的像素</s:String>
-    <!--<s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged.Info">By analyzing and detecting unchanged pixels between the frames,&#10;it will be possible to save only the necessary parts to the gif.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma">Replace these pixels with a chroma key.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma.Info">Repeated/unchanged pixels will be replaced with this chroma key,&#10;making it possible to use less colors per frame.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.ChromaKey">Chroma key:</s:String>-->
+    <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged.Info">通过分析和检测帧之间未更改的像素，&#10;可以将仅必要的部分保存到 GIF。</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma">用色度键替换这些像素。</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma.Info">重复/不变的像素将被此色度键替换，&#10;从而可以减少每帧使用的颜色。</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.ChromaKey">色度键：</s:String>
 
     <!--Editor • Save as > Apng options-->
     <s:String x:Key="S.SaveAs.ApngOptions">Apng 选项</s:String>

@@ -22,9 +22,8 @@
 
             <Viewbox x:Name="IconViewbox" Margin="6" Child="{StaticResource Vector.Cancel.Round}" Opacity="{DynamicResource Element.Opacity}"/>
 
-            <TextBlock Grid.Column="1" x:Name="TypeTextBlock" Text="" Margin="5" VerticalAlignment="Center" 
-                       FontFamily="Segoe UI Semilight" FontSize="18" Foreground="#FF003399" Padding="0"
-                       ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+            <TextBlock Grid.Column="1" x:Name="TypeTextBlock" Text="Instruction" Margin="5,0" VerticalAlignment="Center" 
+                       FontFamily="Segoe UI Semilight" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
 
             <n:ImageButton Grid.Column="2" x:Name="DetailsButton" Text="{DynamicResource S.Encoder.Details}" Content="{StaticResource Vector.Table}" MaxSize="20" 
                            Margin="3" Padding="2" Style="{StaticResource Style.Button.Horizontal}" TextWrapping="NoWrap"
@@ -37,9 +36,11 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" x:Name="HeaderTextBlock" Text="{DynamicResource S.Crash}" Foreground="#E0000060" FontSize="22" Margin="10" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="0" x:Name="HeaderTextBlock" Text="{DynamicResource S.Crash}" Foreground="{DynamicResource Element.Foreground.Header}" 
+                       FontSize="22" Margin="10" HorizontalAlignment="Center"/>
 
-            <TextBlock Grid.Row="1" x:Name="DetailsTextBlock" FontSize="16" Margin="6,6,6,15" TextWrapping="Wrap" Foreground="#E0000000" ScrollViewer.CanContentScroll="True"/>
+            <TextBlock Grid.Row="1" x:Name="DetailsTextBlock" FontSize="16" Margin="6,6,6,15" TextWrapping="Wrap" 
+                       Foreground="{DynamicResource Element.Foreground}" ScrollViewer.CanContentScroll="True"/>
         </Grid>
 
         <Grid Grid.Row="2" Background="{DynamicResource Panel.Background.Level3}">

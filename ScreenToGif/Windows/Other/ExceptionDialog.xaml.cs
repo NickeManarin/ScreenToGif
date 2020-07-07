@@ -61,17 +61,17 @@ namespace ScreenToGif.Windows.Other
         private void PrepareOk(string title, string instruction, string observation)
         {
             TypeTextBlock.Text = instruction;
-            DetailsTextBlock.Inlines.Add(new Run("\t" + observation));
+            DetailsTextBlock.Inlines.Add(new Run("    " + observation));
             Title = title ?? "ScreenToGif - Error";
 
             if (BugWithHotFix4055002)
             {
                 DetailsTextBlock.Inlines.Add(new LineBreak());
                 DetailsTextBlock.Inlines.Add(new LineBreak());
-                DetailsTextBlock.Inlines.Add(new Run("\tThis was likely caused by a bug with an update for .Net Framework 4.7.1 (KB4055002, released in January 2018). This bug happens on machines with Windows 7 SP1 or Windows Server 2008 R2."));
+                DetailsTextBlock.Inlines.Add(new Run("    This was likely caused by a bug with an update for .Net Framework 4.7.1 (KB4055002, released in January 2018). This bug happens on machines with Windows 7 SP1 or Windows Server 2008 R2."));
                 DetailsTextBlock.Inlines.Add(new LineBreak());
                 DetailsTextBlock.Inlines.Add(new LineBreak());
-                DetailsTextBlock.Inlines.Add(new Run("\t"));
+                DetailsTextBlock.Inlines.Add(new Run("    "));
 
                 var hyper = new Hyperlink(new Run("Click here to open a page with some details on how to fix this issue.") {ToolTip = "https://github.com/dotnet/announcements/issues/53" });
                 hyper.Click += HyperOnClick;

@@ -24,7 +24,7 @@ namespace ScreenToGif.Windows.Other
 
             #region Shows Information
 
-            TypeLabel.Content = ex.GetType().Name;
+            TypeLabel.Text = ex.GetType().Name;
             MessageTextBox.Text = ex.Message;
             StackTextBox.Text = (!string.IsNullOrWhiteSpace(aditional) ? aditional + Environment.NewLine : "") + ex.StackTrace;
             SourceTextBox.Text = ex.Source;

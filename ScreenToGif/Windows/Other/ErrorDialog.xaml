@@ -7,7 +7,7 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="48"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="*" MinHeight="100"/>
             <RowDefinition Height="40" />
         </Grid.RowDefinitions>
@@ -15,20 +15,20 @@
         <Grid Grid.Row="0" Background="{DynamicResource Panel.Background.Level4}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <Viewbox x:Name="IconViewbox" Margin="5" Child="{StaticResource Vector.Cancel.Round}" Opacity="{DynamicResource Element.Opacity}"/>
 
-            <Label x:Name="InstructionLabel" Content="Instruction" Margin="5" Grid.Column="1" VerticalContentAlignment="Center" 
+            <Label x:Name="InstructionLabel" Content="Instruction" Margin="5,0" Grid.Column="1" VerticalContentAlignment="Center" 
                    FontFamily="Segoe UI Semilight" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
         </Grid>
 
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <TextBlock x:Name="ObservationTextBlock" Margin="25,5,10,5" FontSize="14" TextWrapping="WrapWithOverflow">
-                <Run Text="{DynamicResource S.ErrorDialog.Observation}" Foreground="{DynamicResource Element.Foreground}"/>
+            <TextBlock x:Name="ObservationTextBlock" Margin="25,5,10,5" FontSize="14" TextWrapping="WrapWithOverflow" Foreground="{DynamicResource Element.Foreground}">
+                <Run Text="{DynamicResource S.ErrorDialog.Observation}"/>
                 <LineBreak/>
-                <Run x:Name="DetailsRun" Foreground="{DynamicResource Element.Foreground}"/>
+                <Run x:Name="DetailsRun"/>
             </TextBlock>
         </ScrollViewer>
 
