@@ -506,7 +506,7 @@
     <s:String x:Key="S.Localization">Локализация</s:String>
     <s:String x:Key="S.Localization.GettingCodes">Получение языковых кодов...</s:String>
     <s:String x:Key="S.Localization.Recognized">Распознан как {0}</s:String>
-    <s:String x:Key="S.Localization.NotRecognized">Не распознан/s:String>
+    <s:String x:Key="S.Localization.NotRecognized">Не распознан</s:String>
     <s:String x:Key="S.Localization.Usage.First">Самый нижний ресурс - текущий используемый.</s:String>
     <s:String x:Key="S.Localization.Usage.Second">Чтобы применить свой ресурс, переместите его в конец списка.</s:String>
     <s:String x:Key="S.Localization.Exporting">Экспорт ресурса...</s:String>

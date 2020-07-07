@@ -11,7 +11,7 @@ _VS 2019 and .Net 4.8 or newer required._
 
 ### Fixed:
 
-♦ Clicking on the generated link (when setting to upload the file) was causing a crash.  
+♦ Clicking on a link of an encoding (when setting to upload the file) was causing a crash.  
 ♦ The error and exception details windows were not adjusting to the correct theme.  
 
 ### Known Bugs:
