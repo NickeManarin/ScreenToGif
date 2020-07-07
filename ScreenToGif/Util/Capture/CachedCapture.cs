@@ -36,7 +36,8 @@ namespace ScreenToGif.Util.Capture
 
             //This was working with 32 bits: 3L * Width * Height;
             _byteLength = (StartWidth * _infoHeader.biBitCount + 31) / 32 * 4 * StartHeight;
-            
+
+            //Due to a strange behavior with the GetDiBits method while the cursor is IBeam, it's best to use 24 bits, to ignore the alpha values.
             //This capture mode ignores the alpha value.
             project.BitDepth = 24;
 
@@ -64,7 +65,8 @@ namespace ScreenToGif.Util.Capture
                 frame.DataLength = _byteLength;
                 frame.Data = new byte[_byteLength];
 
-                Native.GetDIBits(WindowDeviceContext, CompatibleBitmap, 0, (uint)StartHeight, frame.Data, ref _infoHeader, Native.DibColorMode.DibRgbColors);
+                if (Native.GetDIBits(WindowDeviceContext, CompatibleBitmap, 0, (uint)StartHeight, frame.Data, ref _infoHeader, Native.DibColorMode.DibRgbColors) == 0)
+                    frame.FrameSkipped = true;
 
                 BlockingCollection.Add(frame);
             }
@@ -152,7 +154,8 @@ namespace ScreenToGif.Util.Capture
                 frame.DataLength = _byteLength;
                 frame.Data = new byte[_byteLength];
 
-                Native.GetDIBits(WindowDeviceContext, CompatibleBitmap, 0, (uint)StartHeight, frame.Data, ref _infoHeader, Native.DibColorMode.DibRgbColors);
+                if (Native.GetDIBits(WindowDeviceContext, CompatibleBitmap, 0, (uint)StartHeight, frame.Data, ref _infoHeader, Native.DibColorMode.DibRgbColors) == 0)
+                    frame.FrameSkipped = true;
 
                 BlockingCollection.Add(frame);
             }
@@ -166,13 +169,15 @@ namespace ScreenToGif.Util.Capture
 
         public override void Save(FrameInfo info)
         {
-            //Due to a strange behavior with the GetDiBits method while the cursor is IBeam, i have to set back all alpha bits to 255.
-            //if (info.RemoveAnyTransparency)
-            //    for (var i = 3; i < _byteLength; i += 4)
-            //        info.Data[i] = 255;
+            //If the frame skipped, just increase the delay to the previous frame.
+            if (info.FrameSkipped)
+            {
+                info.Data = null;
+                Project.Frames[Project.Frames.Count - 1].Delay += info.Delay;
+                return;
+            }
 
             _compressStream.WriteBytes(info.Data);
-
             info.Data = null;
 
             Project.Frames.Add(info);

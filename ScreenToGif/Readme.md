@@ -11,6 +11,7 @@ _VS 2019 and .Net 4.8 or newer required._
 
 ### Fixed:
 
+♦ The BitBlt capture mode with Memory Cache was resulting in some black frames.  
 ♦ Clicking on a link of an encoding (when setting to upload the file) was causing a crash.  
 ♦ The error and exception details windows were not adjusting to the correct theme.  
 

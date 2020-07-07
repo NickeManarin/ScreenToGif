@@ -171,6 +171,12 @@ namespace ScreenToGif.Model
         public byte[] Data { get; set; }
 
         /// <summary>
+        /// True if the capture of the frame failed somehow.
+        /// </summary>
+        [IgnoreDataMember]
+        public bool FrameSkipped { get; set; }
+
+        /// <summary>
         /// The pixel array data length of the frame.
         /// Used only during the recording.
         /// </summary>
