@@ -164,7 +164,7 @@
     <s:String x:Key="S.Options.Storage">Тимчасові файли</s:String>
     <s:String x:Key="S.Options.Extras">Додатково</s:String>
     <!--<s:String x:Key="S.Options.Upload">Cloud</s:String>-->
-    <s:String x:Key="S.Options.Donate">Пожертва</s:String>
+    <s:String x:Key="S.Options.Donate">Пожертвувати</s:String>
     <s:String x:Key="S.Options.About">Про</s:String>
     <s:String x:Key="S.Options.Other">Інше</s:String>
     <!--<s:String x:Key="S.Options.Warning.Follow.Header">Missing shortcut key for cursor following</s:String>-->
