@@ -2903,6 +2903,7 @@
                                 <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
                             <n:LabelSeparator Grid.Row="0" Text="{DynamicResource S.Resize.CurrentProperties}"/>
@@ -2945,6 +2946,7 @@
                             </Grid>
 
                             <n:ExtendedCheckBox Grid.Row="4" x:Name="KeepAspectCheckBox" Text="{DynamicResource S.Resize.KeepAspect}" Margin="10,5" IsChecked="True" Checked="KeepAspectCheckBox_Checked"/>
+                            <n:ExtendedCheckBox Grid.Row="5" x:Name="UseHighQualityScaling" Text="{DynamicResource S.Resize.HighQalityScaling}" Margin="10,5" IsChecked="False" />
                         </Grid>
 
                         <Grid x:Name="CropGrid" Visibility="Collapsed">

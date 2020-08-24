@@ -1567,13 +1567,28 @@ namespace ScreenToGif.ImageUtil
         /// <param name="margin">Cut margin.</param>
         /// <param name="dpi">The DPI of the image.</param>
         /// <returns>A resized ImageSource</returns>
-        public static BitmapFrame ResizeImage(BitmapImage source, int width, int height, int margin = 0, double dpi = 96d)
+        public static BitmapFrame ResizeImage(BitmapImage source, int width, int height, int margin = 0, double dpi = 96d, bool useHighQualityScale = false)
         {
             var scale = dpi / 96d;
 
             var drawingVisual = new DrawingVisual();
             using (var drawingContext = drawingVisual.RenderOpen())
-                drawingContext.DrawImage(source, new Rect(0, 0, width / scale, height / scale));
+            {
+                if (useHighQualityScale)
+                {
+                    DrawingGroup dg = new DrawingGroup();
+                    using (DrawingContext context = dg.Open())
+                    {
+                        RenderOptions.SetBitmapScalingMode(dg, BitmapScalingMode.Fant);
+                        context.DrawImage(source, new Rect(0, 0, width / scale, height / scale));
+                    }
+                    drawingContext.DrawDrawing(dg);
+                }
+                else
+                {
+                    drawingContext.DrawImage(source, new Rect(0, 0, width / scale, height / scale));
+                }                
+            }            
 
             //(int)Math.Round(width * scale)
 

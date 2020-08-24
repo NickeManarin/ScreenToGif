@@ -1041,6 +1041,7 @@
     <s:String x:Key="S.Resize.NewProperties">New Properties</s:String>
     <s:String x:Key="S.Resize.Dpi2">DPI:</s:String>
     <s:String x:Key="S.Resize.KeepAspect">Keep the aspect ratio.</s:String>
+    <s:String x:Key="S.Resize.HighQalityScaling">Use high quality scaling.</s:String>
     <s:String x:Key="S.Resize.Warning">You have to select a different value to apply the Resize action to.</s:String>
     
     <!--Editor • Crop-->
