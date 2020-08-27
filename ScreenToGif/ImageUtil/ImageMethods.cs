@@ -1566,20 +1566,21 @@ namespace ScreenToGif.ImageUtil
         /// <param name="height">The height of the image.</param>
         /// <param name="margin">Cut margin.</param>
         /// <param name="dpi">The DPI of the image.</param>
+        /// <param name="scalingQuality">Scaling Quality to use when resizing. <seealso cref="System.Windows.Media.BitmapScalingMode"/></param>
         /// <returns>A resized ImageSource</returns>
-        public static BitmapFrame ResizeImage(BitmapImage source, int width, int height, int margin = 0, double dpi = 96d, bool useHighQualityScale = false)
+        public static BitmapFrame ResizeImage(BitmapImage source, int width, int height, int margin = 0, double dpi = 96d, BitmapScalingMode scalingQuality = BitmapScalingMode.Unspecified)
         {
             var scale = dpi / 96d;
 
             var drawingVisual = new DrawingVisual();
             using (var drawingContext = drawingVisual.RenderOpen())
             {
-                if (useHighQualityScale)
+                if (scalingQuality != BitmapScalingMode.Unspecified)
                 {
                     DrawingGroup dg = new DrawingGroup();
                     using (DrawingContext context = dg.Open())
                     {
-                        RenderOptions.SetBitmapScalingMode(dg, BitmapScalingMode.Fant);
+                        RenderOptions.SetBitmapScalingMode(dg, scalingQuality);
                         context.DrawImage(source, new Rect(0, 0, width / scale, height / scale));
                     }
                     drawingContext.DrawDrawing(dg);
