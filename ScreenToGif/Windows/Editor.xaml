@@ -2903,6 +2903,8 @@
                                 <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="27"/>
+                                <RowDefinition Height="Auto"/>                                
                             </Grid.RowDefinitions>
 
                             <n:LabelSeparator Grid.Row="0" Text="{DynamicResource S.Resize.CurrentProperties}"/>
@@ -2945,6 +2947,26 @@
                             </Grid>
 
                             <n:ExtendedCheckBox Grid.Row="4" x:Name="KeepAspectCheckBox" Text="{DynamicResource S.Resize.KeepAspect}" Margin="10,5" IsChecked="True" Checked="KeepAspectCheckBox_Checked"/>
+
+                            <n:LabelSeparator Grid.Row="5" Text="{DynamicResource S.Resize.Options}"/>
+                            <Grid Grid.Row="6" Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.Resize.ScalingQuality}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="ResizeScalingQuality" Margin="10,5" MaxWidth="150" SelectedValuePath="Tag" >
+                                    <ComboBoxItem Tag="{x:Static u:ScalingMethod.Fant}" Content="{DynamicResource S.Resize.ScalingQuality.Fant}" />
+                                    <ComboBoxItem Tag="{x:Static u:ScalingMethod.Linear}" Content="{DynamicResource S.Resize.ScalingQuality.Linear}" IsSelected="True"/>
+                                    <ComboBoxItem Tag="{x:Static u:ScalingMethod.NearestNeighbor}" Content="{DynamicResource S.Resize.ScalingQuality.NearestNeighbor}"/>
+                                </ComboBox>
+                            </Grid>
+
+                            
                         </Grid>
 
                         <Grid x:Name="CropGrid" Visibility="Collapsed">
