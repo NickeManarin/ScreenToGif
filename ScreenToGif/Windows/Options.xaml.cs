@@ -1682,8 +1682,8 @@ namespace ScreenToGif.Windows
                 var temp = Path.Combine(Path.GetTempPath(), Path.GetTempFileName());
 
                 using (var client = new WebClient { Proxy = WebHelper.GetProxy() })
-                    await client.DownloadFileTaskAsync(new Uri("http://screentogif.com/downloads/Gifski.zip", UriKind.Absolute), temp);
-                //await client.DownloadFileTaskAsync(new Uri("https://github.com/NickeManarin/ScreenToGif-Website/raw/master/downloads/Gifski.zip", UriKind.Absolute), temp);
+                    await client.DownloadFileTaskAsync(new Uri("https://www.screentogif.com/downloads/Gifski.zip", UriKind.Absolute), temp);
+                //await client.DownloadFileTaskAsync(new Uri("https://github.com/NickeManarin/ScreenToGif-Website/raw/gh-pages/downloads/Gifski.zip", UriKind.Absolute), temp);
 
                 using (var zip = ZipFile.Open(temp, ZipArchiveMode.Read))
                 {
@@ -1779,8 +1779,8 @@ namespace ScreenToGif.Windows
                 var temp = Path.Combine(Path.GetTempPath(), Path.GetTempFileName());
 
                 using (var client = new WebClient { Proxy = WebHelper.GetProxy() })
-                    await client.DownloadFileTaskAsync(new Uri("http://screentogif.com/downloads/SharpDx.zip", UriKind.Absolute), temp);
-                //await client.DownloadFileTaskAsync(new Uri("https://github.com/NickeManarin/ScreenToGif-Website/raw/master/downloads/SharpDx.zip", UriKind.Absolute), temp);
+                    await client.DownloadFileTaskAsync(new Uri("https://www.screentogif.com/downloads/SharpDx.zip", UriKind.Absolute), temp);
+                //await client.DownloadFileTaskAsync(new Uri("https://github.com/NickeManarin/ScreenToGif-Website/raw/gh-pages/downloads/SharpDx.zip", UriKind.Absolute), temp);
 
                 using (var zip = ZipFile.Open(temp, ZipArchiveMode.Read))
                 {
@@ -2210,7 +2210,7 @@ namespace ScreenToGif.Windows
         {
             try
             {
-                Process.Start("http://steamcommunity.com/id/nickesm/wishlist");
+                Process.Start("https://steamcommunity.com/id/nickesm/wishlist");
             }
             catch (Exception ex)
             {
@@ -2259,7 +2259,7 @@ namespace ScreenToGif.Windows
         {
             try
             {
-                Process.Start("http://www.screentogif.com/donate");
+                Process.Start("https://www.screentogif.com/donate");
             }
             catch (Exception ex)
             {
