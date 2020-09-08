@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using ScreenToGif.Controls;
+using ScreenToGif.Native;
 using ScreenToGif.Util;
 
 namespace ScreenToGif.Windows.Other
@@ -11,7 +12,7 @@ namespace ScreenToGif.Windows.Other
     {
         public Monitor Monitor { get; set; }
 
-        private Action<Rect> _selected;
+        private Action<Monitor, Rect> _selected;
         private Action<Monitor> _changed;
         private Action<Monitor> _gotHover;
         private Action _aborted;
@@ -24,7 +25,7 @@ namespace ScreenToGif.Windows.Other
         }
 
 
-        public void Select(Monitor monitor, SelectControl.ModeType mode, Rect previousRegion, Action<Rect> selected, Action<Monitor> changed, Action<Monitor> gotHover, Action aborted)
+        public void Select(Monitor monitor, SelectControl.ModeType mode, Rect previousRegion, Action<Monitor, Rect> selected, Action<Monitor> changed, Action<Monitor> gotHover, Action aborted)
         {
             //Resize to fit given window.
             Left = monitor.Bounds.Left;
@@ -46,21 +47,21 @@ namespace ScreenToGif.Windows.Other
             SelectControl.BackImage = CaptureBackground();
             SelectControl.Mode = mode;
 
-            if (mode == Controls.SelectControl.ModeType.Region)
+            if (mode == SelectControl.ModeType.Region)
             {
                 //Since each region selector is attached to a single screen, the selection must be translated.
                 SelectControl.Selected = previousRegion.Translate(monitor.Bounds.Left * -1, monitor.Bounds.Top * -1);
                 SelectControl.Windows.Clear();
             }
-            else if (mode == Controls.SelectControl.ModeType.Window)
+            else if (mode == SelectControl.ModeType.Window)
             {
                 //Get only the windows that are located inside the given screen.
-                var win = Native.EnumerateWindowsByMonitor(monitor);
+                var win = Util.Native.EnumerateWindowsByMonitor(monitor);
 
                 //Since each region selector is attached to a single screen, the list of positions must be translated.
                 SelectControl.Windows = win.AdjustPosition(monitor.Bounds.Left, monitor.Bounds.Top);
             }
-            else if (mode == Controls.SelectControl.ModeType.Fullscreen)
+            else if (mode == SelectControl.ModeType.Fullscreen)
             {
                 //Each selector is the whole screen.
                 SelectControl.Windows = new List<DetectedRegion>
@@ -113,8 +114,14 @@ namespace ScreenToGif.Windows.Other
 
         private BitmapSource CaptureBackground()
         {
-            //A 7 pixel border is added to allow the crop by the magnifying glass.
-            return Native.CaptureBitmapSource((int)Math.Round((Width + 14) * _scale), (int)Math.Round((Height + 14) * _scale),
+            //A 7 pixel offset is added to allow the crop by the magnifying glass.
+            //var left = Math.Round((Left - 8d) * _scale, MidpointRounding.AwayFromZero);
+            //var top = Math.Round((Top - 8d) * _scale, MidpointRounding.AwayFromZero);
+
+            //return Util.Native.CaptureBitmapSource((int)Math.Round((Width + 16) * _scale), (int)Math.Round((Height + 16) * _scale),
+            //    (int)left, (int)top);
+
+            return Util.Native.CaptureBitmapSource((int)Math.Round((Width + 14 + 1) * _scale), (int)Math.Round((Height + 14 + 1) * _scale),
                 (int)Math.Round((Left - 7) * _scale), (int)Math.Round((Top - 7) * _scale));
         }
 
@@ -127,7 +134,7 @@ namespace ScreenToGif.Windows.Other
         private void SelectControl_SelectionAccepted(object sender, RoutedEventArgs e)
         {
             SelectControl.IsPickingRegion = false;
-            _selected.Invoke(SelectControl.Selected.Translate(Monitor.Bounds.Left, Monitor.Bounds.Top));
+            _selected.Invoke(Monitor, SelectControl.Selected.Translate(Monitor.Bounds.Left, Monitor.Bounds.Top)); //NonExpandedSelection
             Close();
         }
 

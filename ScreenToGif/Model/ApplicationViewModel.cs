@@ -74,12 +74,10 @@ namespace ScreenToGif.Model
 
                         if (UserSettings.All.NewRecorder)
                         {
-                            var recorderNew = new RecorderNew();
-                            //var recorderNew = new NewRecorder();
+                            var recorderNew = new NewRecorder();
                             recorderNew.Closed += (sender, args) =>
                             {
-                                var window = sender as RecorderNew;
-                                //var window = sender as NewRecorder;
+                                var window = sender as NewRecorder;
 
                                 if (window?.Project != null && window.Project.Any)
                                 {
@@ -261,7 +259,7 @@ namespace ScreenToGif.Model
                         var caller = a as Window;
 
                         //TODO: Should it behave the same way as it does after a recording? Always open a new one or simply show all/one that was already opened?
-                        ShowEditor();
+                        ShowEditor(null, a is string[]);
 
                         caller?.Close();
                     }
@@ -473,7 +471,7 @@ namespace ScreenToGif.Model
 
         #region Methods
 
-        private void ShowEditor(ProjectInfo project = null)
+        private void ShowEditor(ProjectInfo project = null, bool openMedia = false)
         {
             var editor = Application.Current.Windows.OfType<Editor>().FirstOrDefault(f => f.Project == null || !f.Project.Any);
 
@@ -496,6 +494,8 @@ namespace ScreenToGif.Model
 
                 if (project != null)
                     editor.LoadProject(project, true, false);
+                else if (openMedia)
+                    editor.LoadFromArguments();
             }
 
             Application.Current.MainWindow = editor;
@@ -876,8 +876,11 @@ namespace ScreenToGif.Model
                         {
                             Version = version,
                             Description = release.XPathSelectElement("body")?.Value ?? "",
+
                             PortableDownloadUrl = release.XPathSelectElement("assets/item[1]/browser_download_url")?.Value ?? "",
                             PortableSize = Convert.ToInt64(release.XPathSelectElement("assets/item[1]/size")?.Value ?? "0"),
+                            PortableName = release.XPathSelectElement("assets/item[1]/name")?.Value ?? "ScreenToGif.zip",
+
                             InstallerDownloadUrl = release.XPathSelectElement("assets/item[2]/browser_download_url")?.Value ?? "",
                             InstallerSize = Convert.ToInt64(release.XPathSelectElement("assets/item[2]/size")?.Value ?? "0"),
                             InstallerName = release.XPathSelectElement("assets/item[2]/name")?.Value ?? "ScreenToGif.Setup.msi",
@@ -973,18 +976,18 @@ namespace ScreenToGif.Model
                     if (!Directory.Exists(folder))
                         Directory.CreateDirectory(folder);
 
-                    Global.UpdateAvailable.InstallerPath = Path.Combine(folder, Global.UpdateAvailable.InstallerName);
+                    Global.UpdateAvailable.ActivePath = Path.Combine(folder, Global.UpdateAvailable.ActiveName);
 
                     //Check if installer was alread downloaded.
-                    if (File.Exists(Global.UpdateAvailable.InstallerPath))
+                    if (File.Exists(Global.UpdateAvailable.ActivePath))
                     {
-                        //Minor issue, if for some reason, the update has the same size, this won't work properly. I would need to check a hash.
-                        if (GetSize(Global.UpdateAvailable.InstallerPath) == Global.UpdateAvailable.InstallerSize)
+                        //Minor issue, if for some reason, the update has the exact same size, this won't work properly. I would need to check a hash.
+                        if (GetSize(Global.UpdateAvailable.ActivePath) == Global.UpdateAvailable.ActiveSize)
                             return false;
 
-                        File.Delete(Global.UpdateAvailable.InstallerPath);
+                        File.Delete(Global.UpdateAvailable.ActivePath);
                     }
-                
+
                     Global.UpdateAvailable.IsDownloading = true;
                 }
                 
@@ -993,14 +996,16 @@ namespace ScreenToGif.Model
                     webClient.Credentials = CredentialCache.DefaultNetworkCredentials;
                     webClient.Proxy = WebHelper.GetProxy();
 
-                    await webClient.DownloadFileTaskAsync(new Uri(Global.UpdateAvailable.InstallerDownloadUrl), Global.UpdateAvailable.InstallerPath);
+                    await webClient.DownloadFileTaskAsync(new Uri(Global.UpdateAvailable.ActiveDownloadUrl), Global.UpdateAvailable.ActivePath);
                 }
-                
+
+                Global.UpdateAvailable.TaskCompletionSource?.TrySetResult(true);
                 return true;
             }
             catch (Exception ex)
             {
                 LogWriter.Log(ex, "Impossible to automatically download update");
+                Global.UpdateAvailable.TaskCompletionSource?.TrySetResult(false);
                 return false;
             }
             finally
@@ -1023,7 +1028,7 @@ namespace ScreenToGif.Model
                 //Not configured to download the update automatically OR
                 //Configured to download but set to prompt anyway OR
                 //Download not completed (perharps because the notification was triggered by a query on Fosshub).
-                if (UserSettings.All.PromptToInstall || !UserSettings.All.InstallUpdates || string.IsNullOrWhiteSpace(Global.UpdateAvailable.InstallerPath))
+                if (UserSettings.All.PromptToInstall || !UserSettings.All.InstallUpdates || string.IsNullOrWhiteSpace(Global.UpdateAvailable.ActivePath))
                 {
                     var download = new DownloadDialog { WasPromptedManually = wasPromptedManually };
                     var result = download.ShowDialog();
@@ -1033,8 +1038,15 @@ namespace ScreenToGif.Model
                 }
 
                 //Only try to install if the update was downloaded.
-                if (!File.Exists(Global.UpdateAvailable.InstallerPath))
+                if (!File.Exists(Global.UpdateAvailable.ActivePath))
                     return false;
+
+                if (UserSettings.All.PortableUpdate)
+                {
+                    //In portable mode, simply open the Zip file and close ScreenToGif.
+                    Process.Start(Global.UpdateAvailable.PortablePath);
+                    return true;
+                }
 
                 var files = Directory.EnumerateFiles(AppDomain.CurrentDomain.BaseDirectory).ToList();
                 var isInstaller = files.Any(x => x.ToLowerInvariant().EndsWith("screentogif.visualelementsmanifest.xml"));

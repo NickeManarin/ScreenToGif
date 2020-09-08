@@ -1,4 +1,6 @@
-﻿namespace ScreenToGif.Util
+﻿using System;
+
+namespace ScreenToGif.Util
 {
     /// <summary>
     /// Determines the app's theme.
@@ -247,42 +249,49 @@
     /// <summary>
     /// Stage status of the recording process.
     /// </summary>
+    [Flags]
     public enum Stage
     {
         /// <summary>
         /// Recording stopped, but selecting the region to record.
         /// </summary>
-        SelectingRegion = -1,
+        [Obsolete]
+        SelectingRegion = 0, //Removed later.
+
+
 
         /// <summary>
         /// Recording stopped.
         /// </summary>
-        Stopped = 0,
+        Stopped = 1, //1 << 0, 0b_000001
 
         /// <summary>
         /// Recording active.
         /// </summary>
-        Recording = 1,
+        Recording = 2, //1 << 1, 0b_000010
 
         /// <summary>
         /// Recording paused.
         /// </summary>
-        Paused = 2,
+        Paused = 4, //1 << 2, 0b_000100
 
         /// <summary>
         /// Pre start countdown active.
         /// </summary>
-        PreStarting = 3,
-
-        /// <summary>
-        /// Single shot mode.
-        /// </summary>
-        Snapping = 4,
+        PreStarting = 8, //1 << 3, 0b_001000
 
         /// <summary>
         /// The recording is being discarded.
         /// </summary>
-        Discarding = 5
+        Discarding = 16, //1 << 4, 0b_010000
+
+
+
+        /// <summary>
+        /// Single shot mode.
+        /// </summary>
+        [Obsolete]
+        Snapping = 32, //1 << 5, 0b_100000 //Remove later.
     }
 
     /// <summary>
@@ -634,8 +643,17 @@
     public enum CaptureFrequency
     {
         Manual,
+        Interaction,
         PerSecond,
         PerMinute,
         PerHour
+    }
+
+    public enum ObfuscationMode
+    {
+        Pixelation,
+        Blur,
+        Darken,
+        Lighten
     }
 }

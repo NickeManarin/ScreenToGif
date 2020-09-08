@@ -4,6 +4,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using Microsoft.Win32;
+using ScreenToGif.Native;
 using ScreenToGif.Util;
 
 namespace ScreenToGif.Windows.Other
@@ -13,6 +15,8 @@ namespace ScreenToGif.Windows.Other
         public Troubleshoot()
         {
             InitializeComponent();
+
+            SystemEvents.DisplaySettingsChanged += SystemEvents_DisplaySettingsChanged;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -23,83 +27,66 @@ namespace ScreenToGif.Windows.Other
                 LaterRadioButton.IsChecked = true;
         }
 
+        private void SystemEvents_DisplaySettingsChanged(object sender, EventArgs e)
+        {
+            DetectMonitors();
+        }
+
         private void KindRadioButton_Checked(object sender, RoutedEventArgs e)
         {
             DetectMonitors();
         }
 
-        private async void HyperlinkMove_Click(object sender, RoutedEventArgs e)
+        private void HyperlinkMove_Click(object sender, RoutedEventArgs e)
         {
-            var monitor = Monitor.AllMonitorsScaled(this.Scale()).FirstOrDefault(f => f.IsPrimary);
+            var monitor = Monitor.AllMonitorsGranular().FirstOrDefault(f => f.IsPrimary);
 
             if (monitor == null)
-            {
-                //Uh-oh.
                 return;
-            }
 
             //Move all windows to the main monitor.
-            foreach (var window in Application.Current.Windows.OfType<Window>().Where(w => w.GetType() != typeof(Troubleshoot)).OrderBy(o => o.Width).ThenBy(o => o.Height))
+            foreach (var window in Application.Current.Windows.OfType<Window>().Where(w => w.GetType() != typeof(Troubleshoot) && w.GetType() != typeof(RegionSelection)).OrderBy(o => o.Width).ThenBy(o => o.Height))
             {
-                var top = window.Top;
-                var left = window.Left;
-                var width = window.ActualWidth;
-                var height = window.ActualHeight;
-
                 //Pause any active recording...
-                if (window is RecorderNew newRecorder)
+                if (window is NewRecorder newRecorder)
                 {
-                    if (newRecorder.Stage == Stage.Recording)
-                        await newRecorder.RecordPause();
+                    if (newRecorder.Stage == Stage.Recording && newRecorder.Project?.Any == true)
+                        newRecorder.Pause();
 
-                    //I need to adjust to the Left/Top Bounds since the recorder ocupies the all windows.
-
-                    top = Canvas.GetTop(newRecorder.MainBorder) + newRecorder.Top;
-                    left = Canvas.GetLeft(newRecorder.MainBorder) + newRecorder.Left;
-                    width = newRecorder.MainBorder.ActualWidth;
-                    height = newRecorder.MainBorder.ActualHeight;
-
-                    if (monitor.Bounds.Top > top)
-                        top = monitor.Bounds.Top;
-
-                    if (monitor.Bounds.Left > left)
-                        left = monitor.Bounds.Left;
-
-                    if (monitor.Bounds.Bottom < top + height)
-                        top = monitor.Bounds.Bottom - height;
-
-                    if (monitor.Bounds.Right < left + width)
-                        left = monitor.Bounds.Right - width;
-
-                    Canvas.SetTop(newRecorder.MainBorder, top - newRecorder.Top);
-                    Canvas.SetLeft(newRecorder.MainBorder, left - newRecorder.Left);
-
+                    newRecorder.MoveToMainScreen();
                     continue;
                 }
 
                 if (window is Recorder recorder)
                 {
-                    if (recorder.Stage == Stage.Recording)
-                        await recorder.RecordPause();
+                    if (recorder.Stage == Stage.Recording && recorder.Project?.Any == true)
+                        recorder.Pause();
                 }
 
-                if (monitor.Bounds.Top > top)
-                    top = monitor.Bounds.Top;
+                var scale = window.Scale();
+                var top = window.Top * scale;
+                var left = window.Left * scale;
+                var width = window.ActualWidth;
+                var height = window.ActualHeight;
+
+                if (monitor.NativeBounds.Top > top)
+                    top = monitor.NativeBounds.Top;
 
                 if (monitor.Bounds.Left > left)
-                    left = monitor.Bounds.Left;
+                    left = monitor.NativeBounds.Left;
 
-                if (monitor.Bounds.Bottom < top + height)
-                    top = monitor.Bounds.Bottom - height;
+                if (monitor.NativeBounds.Bottom < top + height)
+                    top = monitor.NativeBounds.Bottom - height;
 
-                if (monitor.Bounds.Right < left + width)
-                    left = monitor.Bounds.Right - width;
+                if (monitor.NativeBounds.Right < left + width)
+                    left = monitor.NativeBounds.Right - width;
 
-                window.Top = top;
-                window.Left = left;
                 window.WindowState = WindowState.Normal;
-                //window.Width = width;
-                //window.Height = height;
+                window.Left = monitor.NativeBounds.Left;
+                window.Top = monitor.NativeBounds.Top;
+
+                window.Left = left;
+                window.Top = top;
             }
 
             DetectMonitors();
@@ -139,11 +126,11 @@ namespace ScreenToGif.Windows.Other
 
         private void DetectMonitors()
         {
-            var monitors = Monitor.AllMonitorsScaled(this.Scale());
-            var minLeft = monitors.Min(m => m.Bounds.Left);
-            var minTop = monitors.Min(m => m.Bounds.Top);
-            var maxRight = monitors.Max(m => m.Bounds.Right);
-            var maxBottom = monitors.Max(m => m.Bounds.Bottom);
+            var monitors = Monitor.AllMonitorsGranular();
+            var minLeft = monitors.Min(m => m.NativeBounds.Left);
+            var minTop = monitors.Min(m => m.NativeBounds.Top);
+            var maxRight = monitors.Max(m => m.NativeBounds.Right);
+            var maxBottom = monitors.Max(m => m.NativeBounds.Bottom);
 
             MainCanvas.Children.Clear();
 
@@ -151,20 +138,16 @@ namespace ScreenToGif.Windows.Other
             {
                 foreach (var window in Application.Current.Windows.OfType<Window>().Where(w => w.GetType() != typeof(Troubleshoot) && w.IsVisible).OrderBy(o => o.Width).ThenBy(o => o.Height))
                 {
-                    var top = window.Top;
-                    var left = window.Left;
-                    var width = window.ActualWidth;
-                    var height = window.ActualHeight;
+                    var scale = window.Scale();
+
+                    var top = window.Top * scale;
+                    var left = window.Left * scale;
+                    var width = window.ActualWidth * scale;
+                    var height = window.ActualHeight * scale;
                     var title = window.Title.Remove("ScreenToGif - ");
 
-                    if (window is RecorderNew newRecorder)
-                    {
-                        top = Canvas.GetTop(newRecorder.MainBorder) + newRecorder.Top;
-                        left = Canvas.GetLeft(newRecorder.MainBorder) + newRecorder.Left;
-                        width = newRecorder.MainBorder.ActualWidth;
-                        height = newRecorder.MainBorder.ActualHeight;
+                    if (window is Recorder || window is NewRecorder || window is RegionSelection)
                         title = LocalizationHelper.Get("S.StartUp.Recorder");
-                    }
                     
                     minLeft = Math.Min(minLeft, left);
                     minTop = Math.Min(minTop, top);
@@ -349,21 +332,23 @@ namespace ScreenToGif.Windows.Other
                 {
                     Stroke = TryFindResource("Element.Foreground") as SolidColorBrush ??  Brushes.Black,
                     Fill = monitor.IsPrimary ? TryFindResource("Element.Background.Checked") as SolidColorBrush ?? Brushes.LightBlue : TryFindResource("Element.Background.Hover") as SolidColorBrush ?? Brushes.LightGray,
-                    Width = monitor.Bounds.Width,
-                    Height = monitor.Bounds.Height,
+                    Width = monitor.NativeBounds.Width,
+                    Height = monitor.NativeBounds.Height,
                     StrokeThickness = 6,
                 };
 
                 MainCanvas.Children.Add(rect);
 
-                Canvas.SetLeft(rect, monitor.Bounds.Left);
-                Canvas.SetTop(rect, monitor.Bounds.Top);
+                Canvas.SetLeft(rect, monitor.NativeBounds.Left);
+                Canvas.SetTop(rect, monitor.NativeBounds.Top);
                 Panel.SetZIndex(rect, 1);
             }
 
             MainCanvas.SizeChanged += (args, o) => SetViewPort(MainCanvas, minLeft, maxRight, minTop, maxBottom);
             MainCanvas.Width = Math.Abs(minLeft) + Math.Abs(maxRight);
             MainCanvas.Height = Math.Abs(minTop) + Math.Abs(maxBottom);
+
+            SetViewPort(MainCanvas, minLeft, maxRight, minTop, maxBottom);
         }
 
         public static void SetViewPort(Canvas canvas, double minX, double maxX, double minY, double maxY)

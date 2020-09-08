@@ -11,7 +11,7 @@ namespace ScreenToGif.ModelEx
         public bool IsLocked { get; set; }
         
         public string Name { get; set; }
-
+        
         /// <summary>
         /// A track can have multiple sequences of the same type.
         /// </summary>

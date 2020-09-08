@@ -100,8 +100,8 @@ namespace ScreenToGif.Controls
         [Description("Decides if it should fit the image on start.")]
         public bool FitImage
         {
-            get => (bool)GetValue(ImageScaleProperty);
-            set => SetCurrentValue(ImageScaleProperty, value);
+            get => (bool)GetValue(FitImageProperty);
+            set => SetCurrentValue(FitImageProperty, value);
         }
 
         /// <summary>

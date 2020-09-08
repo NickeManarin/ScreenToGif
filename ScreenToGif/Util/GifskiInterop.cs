@@ -163,8 +163,13 @@ namespace ScreenToGif.Util
             var info = new FileInfo(UserSettings.All.GifskiLocation);
             info.Refresh();
 
+            //I really need another way to differentiate gifski versions.
             switch (info.Length)
             {
+                case 524_752:
+                    Version = new Version(1, 2, 0);
+                    break;
+
                 case 502_720:
                     Version = new Version(0, 10, 2);
                     break;
@@ -213,10 +218,12 @@ namespace ScreenToGif.Util
             return _new(new GifskiSettings((byte)quality, looped, fast));
         }
 
-        internal GifskiError AddFrame(IntPtr handle, uint index, string path, int delay, bool isLast = false)
+        internal GifskiError AddFrame(IntPtr handle, uint index, string path, int delay, double lastTimestamp = 0, bool isLast = false)
         {
             if (Version.Major == 0 && Version.Minor < 9)
                 return _addPngFrame(handle, index, path, (ushort)(delay / 10));
+
+            //var aa = new FormatConvertedBitmap(path.SourceFrom(), PixelFormats.Rgb24, null, 0);
 
             var util = new PixelUtil(new FormatConvertedBitmap(path.SourceFrom(), PixelFormats.Rgb24, null, 0));
             util.LockBitsAndUnpad();
@@ -232,7 +239,14 @@ namespace ScreenToGif.Util
 
             GifskiError result;
 
-            if (Version.Major == 0 && Version.Minor >= 10)
+            if (Version > new Version(0, 10, 4))
+            {
+                //First frame receives the delay set of the last frame.
+                result = AddFrame2Pixels(handle, index, (uint)util.Width, (uint)bytesPerRow, (uint)util.Height, address, index == 0 ? lastTimestamp : _timeStamp);
+
+                _timeStamp += (delay / 1000d);
+            }
+            else if (Version.Major == 0 && Version.Minor >= 10)
             {
                 result = AddFrame2Pixels(handle, index, (uint)util.Width, (uint)bytesPerRow, (uint)util.Height, address, _timeStamp);
 
@@ -242,8 +256,8 @@ namespace ScreenToGif.Util
                     _timeStamp += ((delay / 1000d) / 2d);
                     result = AddFrame2Pixels(handle, index + 1, (uint)util.Width, (uint)bytesPerRow, (uint)util.Height, address, _timeStamp);
                 }
-                
-                //Frames can't be more than 1 seconds apart. TODO: Add support for dealing with this issue.
+
+                //Frames can't be more than 1 second apart. TODO: Add support for dealing with this issue.
                 _timeStamp += (delay / 1000d);
             }
             else

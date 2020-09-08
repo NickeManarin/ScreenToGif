@@ -252,7 +252,7 @@ namespace ScreenToGif.Windows.Other
 
             #region Set as Maximized if the window gets big enough
 
-            var size = Native.ScreenSizeFromWindow(this);
+            var size = Util.Native.ScreenSizeFromWindow(this);
 
             if (size.Height - Height < 200 || size.Width - Width < 200)
                 WindowState = WindowState.Maximized;

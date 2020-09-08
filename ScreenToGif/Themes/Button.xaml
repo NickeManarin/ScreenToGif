@@ -2,25 +2,28 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:n="clr-namespace:ScreenToGif.Controls"
                     xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
-                    xmlns:s="clr-namespace:System;assembly=mscorlib"
-                    xmlns:u="clr-namespace:ScreenToGif.Util">
+                    xmlns:s="clr-namespace:System;assembly=mscorlib">
 
     <c:MultiLineTitle x:Key="MultiLineTitleConverter"/>
 
+    
     <!--Button • Border • Horizontal • Text-->
-    <Style TargetType="{x:Type n:ImageButton}" BasedOn="{StaticResource {x:Type Button}}">
+    <Style TargetType="{x:Type n:ExtendedButton}" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
         <Setter Property="Background" Value="{DynamicResource Brush.Button.Background}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource Brush.Button.Border}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Padding" Value="3,1"/>
+        <Setter Property="ContentWidth" Value="16"/>
+        <Setter Property="ContentHeight" Value="16"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type n:ImageButton}">
+                <ControlTemplate TargetType="{x:Type n:ExtendedButton}">
                     <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
                         <Border x:Name="InnerBorder" Background="Transparent">
                             <Grid>
@@ -33,10 +36,8 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
 
-                                <Viewbox Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,3" 
-                                         Stretch="Uniform" StretchDirection="Both" Effect="{x:Null}" Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}">
-                                    <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="{DynamicResource Element.Opacity}"/>
-                                </Viewbox>
+                                <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Background="{TemplateBinding Icon}" Margin="5,3,0,3" Opacity="{DynamicResource Element.Opacity}"
+                                        Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
                                 <TextBlock Grid.Row="0" Grid.Column="1" x:Name="TextBlockInternal" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource TemplatedParent}}"
                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" Foreground="{TemplateBinding Foreground}"
@@ -79,9 +80,9 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
+    
     <!--Button • Border • Vertical • Text-->
-    <Style TargetType="{x:Type n:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.Vertical.Border">
+    <Style TargetType="{x:Type n:ExtendedButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.Vertical.Border">
         <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
         <Setter Property="Background" Value="{DynamicResource Brush.Button.Background}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource Brush.Button.Border}"/>
@@ -94,14 +95,12 @@
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type n:ImageButton}">
+                <ControlTemplate TargetType="{x:Type n:ExtendedButton}">
                     <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
                         <Border x:Name="InnerBorder" Background="Transparent">
                             <StackPanel Orientation="Vertical" SnapsToDevicePixels="True" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="2,0" Stretch="Uniform" StretchDirection="Both" Effect="{x:Null}"
-                                         Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}">
-                                    <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="{DynamicResource Element.Opacity}"/>
-                                </Viewbox>
+                                <Border Background="{TemplateBinding Icon}" Margin="2,0" Opacity="{DynamicResource Element.Opacity}"
+                                        Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
                                 <TextBlock x:Name="TextBlockInternal" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" 
                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
@@ -142,20 +141,18 @@
     </Style>
 
     <!--Button • Border • Horizontal • Text • Yellow-->
-    <Style TargetType="{x:Type n:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.Horizontal.Special">
+    <Style TargetType="{x:Type n:ExtendedButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.Horizontal.Special">
         <Setter Property="Background" Value="{DynamicResource Brush.Button.Paypal.Background}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource Brush.Button.Paypal.Border}"/>
         <Setter Property="Foreground" Value="{DynamicResource Brush.Button.Paypal.Foreground}"/>
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type n:ImageButton}">
+                <ControlTemplate TargetType="{x:Type n:ExtendedButton}">
                     <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
                         <StackPanel Orientation="Horizontal" SnapsToDevicePixels="True" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="2,0" Stretch="Uniform" StretchDirection="Both" Effect="{x:Null}"
-                                     Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}">
-                                <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="{DynamicResource Element.Opacity}"/>
-                            </Viewbox>
+                            <Border Background="{TemplateBinding Icon}" Margin="2,0" Opacity="{DynamicResource Element.Opacity}"
+                                        Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
                             <TextBlock x:Name="TextBlockInternal" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" 
                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
@@ -184,38 +181,39 @@
 
 
     <!--Button • No Border • Horizontal • Text-->
-    <Style TargetType="{x:Type n:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.Horizontal">
+    <Style TargetType="{x:Type n:ExtendedButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.Horizontal">
         <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type n:ImageButton}">
-                    <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
-                        <StackPanel x:Name="InnerStackPanel" Orientation="Horizontal" Background="Transparent">
-                            <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="{TemplateBinding IsEnabled}" Margin="2" Stretch="Uniform" StretchDirection="Both" 
-                                     Effect="{x:Null}" Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}" MaxHeight="{TemplateBinding MaxSize}" MaxWidth="{TemplateBinding MaxSize}">
-                                <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="{DynamicResource Element.Opacity}"/>
-                            </Viewbox>
+                <ControlTemplate TargetType="{x:Type n:ExtendedButton}">
+                    <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" BorderThickness="0">
+                        <Grid x:Name="InnerGrid" Margin="{TemplateBinding Padding}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
 
-                            <Grid Margin="{TemplateBinding Padding}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
+                            <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Background="{TemplateBinding Icon}" Margin="2" Opacity="{DynamicResource Element.Opacity}"
+                                    Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            
+                            <TextBlock Grid.Row="0" Grid.Column="1" x:Name="TextBlockInternal" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" 
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="2,0" Foreground="{TemplateBinding Foreground}"
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text}" 
+                                       TextWrapping="{TemplateBinding TextWrapping}" Effect="{TemplateBinding Effect}"/>
 
-                                <TextBlock Grid.Row="0" x:Name="TextBlockInternal" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" 
-                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="2,0" Foreground="{TemplateBinding Foreground}"
-                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text}" 
-                                           TextWrapping="{TemplateBinding TextWrapping}" Effect="{TemplateBinding Effect}"/>
-
-                                <TextBlock Grid.Row="1" x:Name="KeyGestureTextBlock" Text="{TemplateBinding KeyGesture}" Margin="0,-10,2,0" Padding="0" Height="13"
-                                           Foreground="{DynamicResource Element.Foreground.Gray112}" FontSize="10" HorizontalAlignment="Right"/>
-                            </Grid>
-                        </StackPanel>
+                            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="KeyGestureTextBlock" Text="{TemplateBinding KeyGesture}" Margin="0,-10,2,0" Padding="0" Height="13"
+                                       Foreground="{DynamicResource Element.Foreground.Gray112}" FontSize="10" HorizontalAlignment="Right"/>
+                        </Grid>
                     </Border>
 
                     <ControlTemplate.Triggers>
@@ -223,7 +221,7 @@
                             <Setter TargetName="KeyGestureTextBlock" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="True">
-                            <Setter TargetName="InnerStackPanel" Property="Background" Value="{DynamicResource Brush.Button.Background.Focused}"/>
+                            <Setter TargetName="InnerGrid" Property="Background" Value="{DynamicResource Brush.Button.Background.Focused}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -244,7 +242,7 @@
     </Style>
 
     <!--Button • No Border • Horizontal • Text • No Image-->
-    <Style TargetType="{x:Type n:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.Horizontal.NoImage">
+    <Style TargetType="{x:Type n:ExtendedButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.Horizontal.NoImage">
         <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
@@ -253,24 +251,21 @@
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type n:ImageButton}">
+                <ControlTemplate TargetType="{x:Type n:ExtendedButton}">
                     <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
-                        <StackPanel x:Name="InnerStackPanel" Orientation="Horizontal" Background="Transparent">
-                            <Grid Margin="{TemplateBinding Padding}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
+                        <Grid x:Name="InnerGrid" Margin="{TemplateBinding Padding}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
 
-                                <TextBlock Grid.Row="0" x:Name="TextBlockInternal" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" 
-                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="2,0" Foreground="{TemplateBinding Foreground}"
-                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text}" 
-                                           TextWrapping="{TemplateBinding TextWrapping}" Effect="{TemplateBinding Effect}"/>
+                            <TextBlock Grid.Row="0" x:Name="TextBlockInternal" Text="{TemplateBinding Text}" Margin="2,0" Foreground="{TemplateBinding Foreground}"
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                       TextWrapping="{TemplateBinding TextWrapping}" Effect="{TemplateBinding Effect}"/>
 
-                                <TextBlock Grid.Row="1" x:Name="KeyGestureTextBlock" Text="{TemplateBinding KeyGesture}" Margin="0,-10,2,0" Padding="0" Height="13"
-                                           Foreground="{DynamicResource Element.Foreground.Gray112}" FontSize="10" HorizontalAlignment="Right"/>
-                            </Grid>
-                        </StackPanel>
+                            <TextBlock Grid.Row="1" x:Name="KeyGestureTextBlock" Text="{TemplateBinding KeyGesture}" Margin="0,-10,2,0" Padding="0" Height="13"
+                                       Foreground="{DynamicResource Element.Foreground.Gray112}" FontSize="10" HorizontalAlignment="Right"/>
+                        </Grid>
                     </Border>
 
                     <ControlTemplate.Triggers>
@@ -278,7 +273,7 @@
                             <Setter TargetName="KeyGestureTextBlock" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="True">
-                            <Setter TargetName="InnerStackPanel" Property="Background" Value="{DynamicResource Brush.Button.Background.Focused}"/>
+                            <Setter TargetName="InnerGrid" Property="Background" Value="{DynamicResource Brush.Button.Background.Focused}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -299,7 +294,7 @@
     </Style>
 
     <!--Button • No Border • Horizontal • Text • White-->
-    <Style TargetType="{x:Type n:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.Horizontal.White">
+    <Style TargetType="{x:Type n:ExtendedButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.Horizontal.White">
         <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
         <Setter Property="Background" Value="#20FFFFFF"/>
         <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
@@ -308,14 +303,12 @@
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type n:ImageButton}">
+                <ControlTemplate TargetType="{x:Type n:ExtendedButton}">
                     <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
                         <StackPanel x:Name="InnerStackPanel" Orientation="Horizontal" Background="Transparent">
-                            <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="{TemplateBinding IsEnabled}"
-                                     Margin="2" Stretch="Uniform" StretchDirection="Both" Effect="{x:Null}" Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}">
-                                <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="{DynamicResource Element.Opacity}"/>
-                            </Viewbox>
-
+                            <Border Background="{TemplateBinding Icon}" Margin="2" Opacity="{DynamicResource Element.Opacity}"
+                                    Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+  
                             <Grid Margin="{TemplateBinding Padding}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition/>
@@ -359,7 +352,7 @@
     </Style>
 
     <!--Button • No Border • Horizontal • Text • Fade-->
-    <Style TargetType="{x:Type n:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.Horizontal.Fade">
+    <Style TargetType="{x:Type n:ExtendedButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.Horizontal.Fade">
         <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
@@ -369,15 +362,12 @@
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type n:ImageButton}">
+                <ControlTemplate TargetType="{x:Type n:ExtendedButton}">
                     <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
                         <StackPanel x:Name="InnerStackPanel" Orientation="Horizontal" Background="Transparent">
-                            <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="{TemplateBinding IsEnabled}"
-                                     Margin="2" Stretch="Uniform" StretchDirection="Both" Effect="{x:Null}" Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}" 
-                                     MaxHeight="{TemplateBinding MaxSize}" MaxWidth="{TemplateBinding MaxSize}">
-                                <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="{DynamicResource Element.Opacity}"/>
-                            </Viewbox>
-
+                            <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Background="{TemplateBinding Icon}" Margin="2" Opacity="{DynamicResource Element.Opacity}"
+                                    Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+    
                             <Grid Margin="{TemplateBinding Padding}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition/>
@@ -439,7 +429,7 @@
 
 
     <!--Button • No Border • Vertical • Text-->
-    <Style TargetType="{x:Type n:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.Vertical">
+    <Style TargetType="{x:Type n:ExtendedButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.Vertical">
         <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
@@ -449,26 +439,30 @@
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type n:ImageButton}">
-                    <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
+                <ControlTemplate TargetType="{x:Type n:ExtendedButton}">
+                    <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" MinWidth="{TemplateBinding MinWidth}" Background="{TemplateBinding Background}">
                         <Grid x:Name="InnerGrid">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="{TemplateBinding ContentHeight}"/>
+                                <RowDefinition MinHeight="{TemplateBinding ContentHeight}"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
-                            <Viewbox x:Name="ViewBoxInternal" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Stretch" IsEnabled="{TemplateBinding IsEnabled}"
-                                     Stretch="Uniform" StretchDirection="Both" Margin="5" Effect="{x:Null}" Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}">
-                                <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="{DynamicResource Element.Opacity}"/>
-                            </Viewbox>
-
-                            <TextBlock x:Name="TextBlockInternal" Grid.Row="1" Margin="2,0" HorizontalAlignment="Stretch" VerticalAlignment="Top" 
+                            <Border Grid.Row="0" Background="{TemplateBinding Icon}" Margin="0" Opacity="{DynamicResource Element.Opacity}"
+                                    Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            
+                            <TextBlock Grid.Row="1" x:Name="TextBlockInternal" Margin="2,0" HorizontalAlignment="Stretch" VerticalAlignment="Top" 
                                        Text="{TemplateBinding Text, Converter={StaticResource MultiLineTitleConverter}}" TextWrapping="{TemplateBinding TextWrapping}" 
                                        Effect="{TemplateBinding Effect}" TextAlignment="Center"/>
+
+                            <TextBlock Grid.Row="1" x:Name="KeyGestureTextBlock" Text="{TemplateBinding KeyGesture}" Margin="0,10,0,0" Padding="0" Height="13"
+                                       Foreground="{DynamicResource Element.Foreground.Gray112}" FontSize="10" HorizontalAlignment="Center"/>
                         </Grid>
                     </Border>
 
                     <ControlTemplate.Triggers>
+                        <Trigger Property="KeyGesture" Value="{x:Static s:String.Empty}">
+                            <Setter TargetName="KeyGestureTextBlock" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="True">
                             <Setter TargetName="InnerGrid" Property="Background" Value="{DynamicResource Brush.Button.Background.Focused}"/>
                         </Trigger>
@@ -491,20 +485,18 @@
     </Style>
 
     <!--Button • No Border • No Text-->
-    <Style TargetType="{x:Type n:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.NoText">
+    <Style TargetType="{x:Type n:ExtendedButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.NoText">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type n:ImageButton}">
+                <ControlTemplate TargetType="{x:Type n:ExtendedButton}">
                     <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
                         <Grid x:Name="InnerGrid">
-                            <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="{TemplateBinding IsEnabled}" Stretch="Uniform" StretchDirection="Both"
-                                     Margin="{TemplateBinding Padding}" Width="{TemplateBinding ContentWidth}" Height="{TemplateBinding ContentHeight}" Effect="{x:Null}">
-                                <ContentPresenter ContentSource="{TemplateBinding Content}" Opacity="{DynamicResource Element.Opacity}"/>
-                            </Viewbox>
+                            <Border Background="{TemplateBinding Icon}" Margin="{TemplateBinding Padding}" Opacity="{DynamicResource Element.Opacity}"
+                                    Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </Grid>
                     </Border>
 
@@ -531,20 +523,18 @@
     </Style>
 
     <!--Button • No Border • No Text • White-->
-    <Style TargetType="{x:Type n:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.NoText.White">
+    <Style TargetType="{x:Type n:ExtendedButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.NoText.White">
         <Setter Property="Background" Value="#20FFFFFF"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type n:ImageButton}">
+                <ControlTemplate TargetType="{x:Type n:ExtendedButton}">
                     <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <Grid x:Name="InnerGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                            <Viewbox x:Name="ViewBoxInternal" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="{TemplateBinding IsEnabled}"
-                                     Margin="{TemplateBinding Padding}" Width="{TemplateBinding ContentWidth}" Height="{TemplateBinding ContentHeight}" Stretch="Uniform" StretchDirection="Both" Effect="{x:Null}">
-                                <ContentPresenter ContentSource="{TemplateBinding Content}" Opacity="{DynamicResource Element.Opacity}"/>
-                            </Viewbox>
+                            <Border Background="{TemplateBinding Icon}" Margin="{TemplateBinding Padding}" Opacity="{DynamicResource Element.Opacity}"
+                                    Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </Grid>
                     </Border>
 
@@ -571,7 +561,7 @@
     </Style>
 
     <!--Button • Border • No Text-->
-    <Style TargetType="{x:Type n:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.NoText.Border">
+    <Style TargetType="{x:Type n:ExtendedButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.NoText.Border">
         <Setter Property="Background" Value="{DynamicResource Brush.Button.Background}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource Brush.Button.Border}"/>
         <Setter Property="BorderThickness" Value="1"/>
@@ -582,13 +572,11 @@
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type n:ImageButton}">
+                <ControlTemplate TargetType="{x:Type n:ExtendedButton}">
                     <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
                         <Border x:Name="InnerBorder" Background="Transparent">
-                            <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="2,0" MaxWidth="{TemplateBinding ContentWidth}" MaxHeight="{TemplateBinding ContentHeight}" 
-                                     Stretch="Uniform" StretchDirection="Both" Effect="{x:Null}">
-                                <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" Opacity="{DynamicResource Element.Opacity}"/>
-                            </Viewbox>
+                            <Border Background="{TemplateBinding Icon}" Margin="2,0" Opacity="{DynamicResource Element.Opacity}"
+                                    Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </Border>
                     </Border>
 
@@ -623,7 +611,7 @@
     </Style>
 
     <!--Button • No Border • No Text • Fade-->
-    <Style TargetType="{x:Type n:ImageButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.NoText.Fade">
+    <Style TargetType="{x:Type n:ExtendedButton}" BasedOn="{StaticResource {x:Type Button}}" x:Key="Style.Button.NoText.Fade">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
@@ -631,13 +619,11 @@
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type n:ImageButton}">
+                <ControlTemplate TargetType="{x:Type n:ExtendedButton}">
                     <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
                         <Grid x:Name="InnerGrid">
-                            <Viewbox x:Name="ViewBoxInternal" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="{TemplateBinding Padding}" Stretch="Uniform" StretchDirection="Both" Effect="{x:Null}"
-                                     Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}" MaxHeight="{TemplateBinding MaxSize}" MaxWidth="{TemplateBinding MaxSize}">
-                                <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Viewbox>
+                            <Border Background="{TemplateBinding Icon}" Margin="{TemplateBinding Padding}" Opacity="{DynamicResource Element.Opacity}"
+                                    Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </Grid>
                     </Border>
 
@@ -682,7 +668,7 @@
 
 
     <!--ToggleButton • Border • Horizontal • Text-->
-    <Style TargetType="{x:Type n:ImageToggleButton}" BasedOn="{StaticResource {x:Type ToggleButton}}">
+    <Style TargetType="{x:Type n:ExtendedToggleButton}" BasedOn="{StaticResource {x:Type ToggleButton}}">
         <Setter Property="Background" Value="{DynamicResource Element.Background}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource Element.Border}"/>
         <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
@@ -692,14 +678,12 @@
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type n:ImageToggleButton}">
+                <ControlTemplate TargetType="{x:Type n:ExtendedToggleButton}">
                     <Border x:Name="MainBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
                         <Border x:Name="InnerBorder">
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="2,0" Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" 
-                                         Stretch="Uniform" StretchDirection="Both" Effect="{x:Null}">
-                                    <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" Opacity="{DynamicResource Element.Opacity}"/>
-                                </Viewbox>
+                                <Border Background="{TemplateBinding Icon}" Margin="5,3,0,3" Opacity="{DynamicResource Element.Opacity}"
+                                        Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
                                 <TextBlock x:Name="TextBlockInternal" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" 
                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
@@ -752,7 +736,7 @@
     </Style>
 
     <!--ToggleButton • No Border • Horizontal • Text-->
-    <Style TargetType="{x:Type n:ImageToggleButton}" BasedOn="{StaticResource {x:Type ToggleButton}}" x:Key="Style.ToggleButton.NoBorder">
+    <Style TargetType="{x:Type n:ExtendedToggleButton}" BasedOn="{StaticResource {x:Type ToggleButton}}" x:Key="Style.ToggleButton.NoBorder">
         <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
@@ -761,14 +745,17 @@
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type n:ImageToggleButton}">
+                <ControlTemplate TargetType="{x:Type n:ExtendedToggleButton}">
                     <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
                         <Border x:Name="InnerBorder">
                             <StackPanel Orientation="Horizontal">
-                                <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                <Border Background="{TemplateBinding Icon}" Margin="2" Opacity="{DynamicResource Element.Opacity}"
+                                        Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                                <!--<Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                          Margin="2" Stretch="Uniform" StretchDirection="Both" Effect="{x:Null}" Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" >
                                     <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="{DynamicResource Element.Opacity}"/>
-                                </Viewbox>
+                                </Viewbox>-->
 
                                 <Grid>
                                     <Grid.RowDefinitions>
@@ -855,20 +842,18 @@
     </Style>
 
     <!--ToggleButton • No Border • Horizontal • No Text-->
-    <Style TargetType="{x:Type n:ImageToggleButton}" BasedOn="{StaticResource {x:Type ToggleButton}}" x:Key="Style.ToggleButton.NoText">
+    <Style TargetType="{x:Type n:ExtendedToggleButton}" BasedOn="{StaticResource {x:Type ToggleButton}}" x:Key="Style.ToggleButton.NoText">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type n:ImageToggleButton}">
+                <ControlTemplate TargetType="{x:Type n:ExtendedToggleButton}">
                     <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
                         <Grid x:Name="InnerGrid">
-                            <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="{TemplateBinding IsEnabled}"
-                                     Margin="{TemplateBinding Padding}" Width="{TemplateBinding ContentWidth}" Height="{TemplateBinding ContentHeight}" Stretch="Uniform" StretchDirection="Both" Effect="{x:Null}">
-                                <ContentPresenter ContentSource="{TemplateBinding Content}" Opacity="{DynamicResource Element.Opacity}"/>
-                            </Viewbox>
+                            <Border Background="{TemplateBinding Icon}" Margin="{TemplateBinding Padding}" Opacity="{DynamicResource Element.Opacity}"
+                                    Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </Grid>
                     </Border>
 
@@ -908,9 +893,8 @@
     </Style>
 
 
-
     <!--RepeatButton • No Border • Vertical • Text-->
-    <Style TargetType="{x:Type n:ImageRepeatButton}" BasedOn="{StaticResource {x:Type RepeatButton}}" x:Key="Style.RepeatButton.Vertical">
+    <Style TargetType="{x:Type n:ExtendedRepeatButton}" BasedOn="{StaticResource {x:Type RepeatButton}}" x:Key="Style.RepeatButton.Vertical">
         <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
@@ -920,7 +904,7 @@
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type n:ImageRepeatButton}">
+                <ControlTemplate TargetType="{x:Type n:ExtendedRepeatButton}">
                     <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
                         <Grid x:Name="InnerGrid">
                             <Grid.RowDefinitions>
@@ -928,11 +912,9 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
-                            <Viewbox x:Name="ViewBoxInternal" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Stretch" IsEnabled="{TemplateBinding IsEnabled}"
-                                     Stretch="Uniform" StretchDirection="Both" Margin="5" Effect="{x:Null}" Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}">
-                                <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="{DynamicResource Element.Opacity}"/>
-                            </Viewbox>
-
+                            <Border Grid.Row="0" Background="{TemplateBinding Icon}" Margin="{TemplateBinding Padding}" Opacity="{DynamicResource Element.Opacity}"
+                                    Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            
                             <TextBlock x:Name="TextBlockInternal" Grid.Row="1" Margin="2,0" HorizontalAlignment="Stretch" VerticalAlignment="Top" 
                                        Text="{TemplateBinding Text, Converter={StaticResource MultiLineTitleConverter}}" TextWrapping="{TemplateBinding TextWrapping}" 
                                        Effect="{TemplateBinding Effect}" TextAlignment="Center"/>
@@ -962,20 +944,18 @@
     </Style>
 
     <!--RepeatButton • No Border • No Text-->
-    <Style TargetType="{x:Type n:ImageRepeatButton}" BasedOn="{StaticResource {x:Type RepeatButton}}" x:Key="Style.RepeatButton.NoText">
+    <Style TargetType="{x:Type n:ExtendedRepeatButton}" BasedOn="{StaticResource {x:Type RepeatButton}}" x:Key="Style.RepeatButton.NoText">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type n:ImageRepeatButton}">
+                <ControlTemplate TargetType="{x:Type n:ExtendedRepeatButton}">
                     <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
                         <Grid x:Name="InnerGrid">
-                            <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="{TemplateBinding IsEnabled}" Stretch="Uniform" StretchDirection="Both"
-                                     Margin="{TemplateBinding Padding}" Width="{TemplateBinding ContentWidth}" Height="{TemplateBinding ContentHeight}" Effect="{x:Null}">
-                                <ContentPresenter ContentSource="{TemplateBinding Content}" Opacity="{DynamicResource Element.Opacity}"/>
-                            </Viewbox>
+                            <Border Background="{TemplateBinding Icon}" Margin="{TemplateBinding Padding}" Opacity="{DynamicResource Element.Opacity}"
+                                    Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </Grid>
                     </Border>
 
@@ -1001,8 +981,66 @@
         </Style.Triggers>
     </Style>
 
+
+    <!--ImageRadioButton • Text-->
+    <Style BasedOn="{StaticResource {x:Type RadioButton}}" TargetType="{x:Type n:ExtendedRadioButton}">
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
+        <Setter Property="Padding" Value="3,1"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource Style.FocusVisual.NoMargin}"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type n:ExtendedRadioButton}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" BorderThickness="1" Padding="{TemplateBinding Padding}">
+                        <Grid MinHeight="{TemplateBinding MinHeight}" SnapsToDevicePixels="True" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border Grid.Row="0" Grid.Column="0" Background="{TemplateBinding Icon}" Margin="2,0" Opacity="{DynamicResource Element.Opacity}"
+                                    Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                            <TextBlock Grid.Column="1" MaxWidth="{Binding Path=ActualWidth,RelativeSource={RelativeSource TemplatedParent}}" 
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
+                                       VerticalAlignment="Center" Text="{TemplateBinding Text, Converter={StaticResource MultiLineTitleConverter}}" 
+                                       TextWrapping="{TemplateBinding TextWrapping}"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsChecked" Value="True"/>
+                    <Condition Property="IsMouseOver" Value="True"/>
+                </MultiTrigger.Conditions>
+                
+                <MultiTrigger.Setters>
+                    <Setter Property="BorderBrush" Value="{DynamicResource Element.Border.Pressed}"/>
+                    <Setter Property="Background" Value="{DynamicResource Element.Background.Pressed}"/>
+                </MultiTrigger.Setters>
+            </MultiTrigger>
+
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background" Value="{DynamicResource Element.Background.Checked}"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource Element.Background.Hover}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{DynamicResource Element.Background.Pressed}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <!--ImageRadioButton • No Text-->
-    <Style BasedOn="{StaticResource {x:Type RadioButton}}" TargetType="{x:Type n:ImageRadioButton}" x:Key="Style.ImageRadioButton.NoText">
+    <Style BasedOn="{StaticResource {x:Type RadioButton}}" TargetType="{x:Type n:ExtendedRadioButton}" x:Key="Style.ImageRadioButton.NoText">
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -1010,14 +1048,11 @@
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type n:ImageRadioButton}">
+                <ControlTemplate TargetType="{x:Type n:ExtendedRadioButton}">
                     <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
                         <Grid MinHeight="{TemplateBinding MinHeight}" SnapsToDevicePixels="True" Background="{TemplateBinding Background}">
-                            <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                     Margin="2,0,2,0" Width="{TemplateBinding ContentWidth}" Height="{TemplateBinding ContentWidth}" 
-                                     Stretch="Uniform" StretchDirection="Both" MaxHeight="{TemplateBinding ContentWidth}" Effect="{x:Null}">
-                                <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" Opacity="{DynamicResource Element.Opacity}"/>
-                            </Viewbox>
+                            <Border Background="{TemplateBinding Icon}" Margin="2,0" Opacity="{DynamicResource Element.Opacity}"
+                                    Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </Grid>
                     </Border>
                 </ControlTemplate>
@@ -1049,7 +1084,260 @@
     </Style>
 
 
+    <!--SplitButton • Border • Text-->
+    <Style TargetType="{x:Type n:SplitButton}">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="#FFABABAB"/>
+        <Setter Property="Foreground" Value="#FF444444"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Padding" Value="4,0,4,0"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
 
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type n:SplitButton}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"
+                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="1"/>
+                                <ColumnDefinition Width="11"/>
+                            </Grid.ColumnDefinitions>
+
+                            <n:ExtendedButton Grid.Column="0" x:Name="ActionButton" Icon="{TemplateBinding Icon}" Text="{TemplateBinding Text}" TextWrapping="{TemplateBinding TextWrapping}"
+                                              ContentWidth="{TemplateBinding ContentWidth}" ContentHeight="{TemplateBinding ContentHeight}" Style="{StaticResource Style.Button.Horizontal}"
+                                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}"/>
+
+                            <Separator Grid.Column="1" x:Name="Separator" BorderBrush="#FFA3BDE3" Width="1" Margin="0" Visibility="Hidden"/>
+
+                            <n:ExtendedToggleButton Grid.Column="2" x:Name="ExpanderButton" Style="{DynamicResource Style.ToggleButton.NoText}" Icon="{DynamicResource Vector.Arrow.Blue.Bottom}" 
+                                                    ContentWidth="5" ContentHeight="3"/>
+
+                            <Popup Name="Popup" Placement="Bottom" IsOpen="{Binding ElementName=ExpanderButton, Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                   AllowsTransparency="True" StaysOpen="False" PopupAnimation="Fade" HorizontalOffset="-2">
+                                <Border Name="SubmenuBorder" SnapsToDevicePixels="True" Background="White" BorderBrush="#FFBEBEBE" BorderThickness="1" Effect="{DynamicResource Shadow.Border.Small}" Margin="2">
+                                    <StackPanel x:Name="InnerStackPanel" IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
+                                </Border>
+                            </Popup>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger SourceName="ActionButton" Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="{DynamicResource Brush.Button.Border.Hover}"/>
+                            <Setter Property="Visibility" TargetName="Separator" Value="Visible"/>
+                        </Trigger>
+
+                        <Trigger SourceName="ExpanderButton" Property="IsMouseOver" Value="True">
+                            <!--<Setter TargetName="ExpanderButton" Property="Background" Value="{DynamicResource Brush.Button.Background.Hover}"/>-->
+                            <Setter Property="BorderBrush" Value="{DynamicResource Brush.Button.Border.Hover}"/>
+                            <Setter Property="Visibility" TargetName="Separator" Value="Visible"/>
+                        </Trigger>
+
+                        <Trigger SourceName="ActionButton" Property="IsPressed" Value="True">
+                            <Setter Property="BorderBrush" Value="{DynamicResource Brush.Button.Border.Pressed}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="#FFE6E6E6"/>
+                            <Setter Property="BorderBrush" Value="#FFBCBCBC"/>
+                            <Setter Property="Opacity" Value="0.7"/>
+                        </Trigger>
+
+                        <DataTrigger Binding="{Binding IsMouseOver, ElementName=ExpanderButton}" Value="True">
+                            <Setter Property="StaysOpen" TargetName="Popup" Value="True"/>
+                            <Setter Property="Focusable" TargetName="Popup" Value="False"/>
+                        </DataTrigger>
+
+                        <Trigger SourceName="ExpanderButton" Property="IsMouseOver" Value="False">
+                            <Setter Property="StaysOpen" TargetName="Popup" Value="False"/>
+                            <Setter Property="Focusable" TargetName="Popup" Value="False"/>
+                        </Trigger>
+
+                        <Trigger SourceName="Popup" Property="IsOpen" Value="True">
+                            <Setter TargetName="ExpanderButton" Property="IsHitTestVisible" Value="False"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!--SplitButton • No Border-->
+    <Style TargetType="{x:Type n:SplitButton}" x:Key="Style.SplitButton.NoBorder">
+        <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Button.Border}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Padding" Value="4,0"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="IsTabStop" Value="False"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type n:SplitButton}">
+                    <Grid Background="{TemplateBinding Background}" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}"
+                          HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                          FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}" KeyboardNavigation.TabNavigation="Continue">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="1"/>
+                            <ColumnDefinition Width="20"/>
+                        </Grid.ColumnDefinitions>
+
+                        <n:ExtendedButton Grid.Column="0" x:Name="ActionButton" Icon="{TemplateBinding Icon}" Text="{TemplateBinding Text}" TextWrapping="{TemplateBinding TextWrapping}"
+                                          ContentWidth="{TemplateBinding ContentWidth}" ContentHeight="{TemplateBinding ContentHeight}" Style="{StaticResource Style.Button.Horizontal}"
+                                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}"/>
+                        
+                        <Separator Grid.Column="1" x:Name="Separator" BorderBrush="{TemplateBinding BorderBrush}" Width="1" Margin="0" Visibility="Hidden"/>
+                        
+                        <n:ExtendedToggleButton Grid.Column="2" x:Name="ExpanderButton" Style="{DynamicResource Style.ToggleButton.NoText}" Icon="{DynamicResource Vector.Arrow.Blue.Bottom}" 
+                                                ContentWidth="8" ContentHeight="8"/>
+
+                        <Popup x:Name="Popup" Placement="Bottom" IsOpen="{Binding ElementName=ExpanderButton, Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue=False}" 
+                               AllowsTransparency="True" StaysOpen="False" PopupAnimation="Fade" HorizontalOffset="-2">
+                            <Border Name="SubmenuBorder" SnapsToDevicePixels="True" Background="{DynamicResource Element.Background}" BorderBrush="{DynamicResource Element.Border}" 
+                                    BorderThickness="1" Effect="{DynamicResource Shadow.Border.Small}" Margin="2">
+                                <StackPanel x:Name="InnerStackPanel" IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
+                            </Border>
+                        </Popup>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger SourceName="ActionButton" Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="{DynamicResource Brush.Button.Border.Hover}"/>
+                            <Setter Property="Visibility" TargetName="Separator" Value="Visible"/>
+                        </Trigger>
+
+                        <Trigger SourceName="ExpanderButton" Property="IsMouseOver" Value="True">
+                            <!--<Setter TargetName="ExpanderButton" Property="Background" Value="{DynamicResource Brush.Button.Background.Hover}"/>-->
+                            <Setter Property="BorderBrush" Value="{DynamicResource Brush.Button.Border.Hover}"/>
+                            <Setter Property="Visibility" TargetName="Separator" Value="Visible"/>
+                        </Trigger>
+
+                        <Trigger SourceName="ActionButton" Property="IsPressed" Value="True">
+                            <Setter Property="BorderBrush" Value="{DynamicResource Brush.Button.Border.Pressed}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.7"/>
+                        </Trigger>
+
+                        <DataTrigger Binding="{Binding IsMouseOver, ElementName=ExpanderButton}" Value="True">
+                            <Setter Property="StaysOpen" TargetName="Popup" Value="True"/>
+                            <Setter Property="Focusable" TargetName="Popup" Value="False"/>
+                        </DataTrigger>
+
+                        <Trigger SourceName="ExpanderButton" Property="IsMouseOver" Value="False">
+                            <Setter Property="StaysOpen" TargetName="Popup" Value="False"/>
+                            <Setter Property="Focusable" TargetName="Popup" Value="False"/>
+                        </Trigger>
+
+                        <Trigger SourceName="Popup" Property="IsOpen" Value="True">
+                            <Setter TargetName="ExpanderButton" Property="IsHitTestVisible" Value="False"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--SplitButton • No Border • No Text-->
+    <Style TargetType="{x:Type n:SplitButton}" x:Key="Style.SplitButton.NoBorder.NoText">
+        <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Button.Border}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Padding" Value="4,0"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type n:SplitButton}">
+                    <Grid Background="{TemplateBinding Background}" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}"
+                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" MinWidth="25"/>
+                            <ColumnDefinition Width="1"/>
+                            <ColumnDefinition Width="14"/>
+                        </Grid.ColumnDefinitions>
+
+                        <n:ExtendedButton Grid.Column="0" x:Name="ActionButton" Icon="{TemplateBinding Icon}" TextWrapping="{TemplateBinding TextWrapping}"
+                                          ContentWidth="{TemplateBinding ContentWidth}" ContentHeight="{TemplateBinding ContentHeight}" Style="{StaticResource Style.Button.NoText}"
+                                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}"/>
+                        
+                        <Separator Grid.Column="1" x:Name="Separator" BorderBrush="{TemplateBinding BorderBrush}" Width="1" Margin="0" Visibility="Hidden"/>
+
+                        <n:ExtendedToggleButton Grid.Column="2" x:Name="ExpanderButton" Style="{DynamicResource Style.ToggleButton.NoText}" Icon="{DynamicResource Vector.Arrow.Blue.Bottom}" 
+                                                ContentWidth="6" ContentHeight="5"/>
+
+                        <Popup x:Name="Popup" Placement="Bottom" IsOpen="{Binding ElementName=ExpanderButton, Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                               AllowsTransparency="True" StaysOpen="False" PopupAnimation="Fade" HorizontalOffset="-2">
+                            <Border Name="SubmenuBorder" SnapsToDevicePixels="True" Background="{DynamicResource Element.Background}" BorderBrush="{DynamicResource Element.Border}" 
+                                    BorderThickness="1" Effect="{DynamicResource Shadow.Border.Small}" Margin="2">
+                                <StackPanel x:Name="InnerStackPanel" IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
+                            </Border>
+                        </Popup>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger SourceName="ActionButton" Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="{DynamicResource Brush.Button.Border.Hover}"/>
+                            <Setter Property="Visibility" TargetName="Separator" Value="Visible"/>
+                        </Trigger>
+
+                        <Trigger SourceName="ExpanderButton" Property="IsMouseOver" Value="True">
+                            <!--<Setter TargetName="ExpanderButton" Property="Background" Value="{DynamicResource Brush.Button.Background.Hover}"/>-->
+                            <Setter Property="BorderBrush" Value="{DynamicResource Brush.Button.Border.Hover}"/>
+                            <Setter Property="Visibility" TargetName="Separator" Value="Visible"/>
+                        </Trigger>
+
+                        <Trigger SourceName="ActionButton" Property="IsPressed" Value="True">
+                            <Setter Property="BorderBrush" Value="{DynamicResource Brush.Button.Border.Pressed}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.7"/>
+                        </Trigger>
+
+                        <DataTrigger Binding="{Binding IsMouseOver, ElementName=ExpanderButton}" Value="True">
+                            <Setter Property="StaysOpen" TargetName="Popup" Value="True"/>
+                            <Setter Property="Focusable" TargetName="Popup" Value="False"/>
+                        </DataTrigger>
+
+                        <Trigger SourceName="ExpanderButton" Property="IsMouseOver" Value="False">
+                            <Setter Property="StaysOpen" TargetName="Popup" Value="False"/>
+                            <Setter Property="Focusable" TargetName="Popup" Value="False"/>
+                        </Trigger>
+
+                        <Trigger SourceName="Popup" Property="IsOpen" Value="True">
+                            <Setter TargetName="ExpanderButton" Property="IsHitTestVisible" Value="False"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
     <!--SplitButton • Border • No Text-->
     <Style TargetType="{x:Type n:SplitButton}" x:Key="Style.SplitButton.NoText">
         <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
@@ -1061,7 +1349,8 @@
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
         <Setter Property="Padding" Value="4,0"/>
-
+        <Setter Property="IsTabStop" Value="False"/>
+        
         <!--Default Values-->
         <Setter Property="FocusVisualStyle">
             <Setter.Value>
@@ -1086,21 +1375,20 @@
                             Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*" MinWidth="20"/>
                                 <ColumnDefinition Width="1"/>
                                 <ColumnDefinition Width="11"/>
                             </Grid.ColumnDefinitions>
 
-                            <Grid Grid.Column="0" x:Name="InternalGrid">
-                                <Viewbox Grid.Column="0" x:Name="ImageViewBox" VerticalAlignment="Center" Width="{TemplateBinding ContentWidth}" Height="{TemplateBinding ContentHeight}" Stretch="Uniform" Margin="3">
-                                    <ContentPresenter Content="{TemplateBinding Image}" VerticalAlignment="Center"/>
-                                </Viewbox>
-                            </Grid>
+                            <n:ExtendedButton Grid.Column="0" x:Name="ActionButton" Icon="{TemplateBinding Icon}" Text="{TemplateBinding Text}" TextWrapping="{TemplateBinding TextWrapping}"
+                                              ContentWidth="{TemplateBinding ContentWidth}" ContentHeight="{TemplateBinding ContentHeight}" Style="{StaticResource Style.Button.NoText}"
+                                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}"/>
 
                             <Separator Grid.Column="1" x:Name="Separator" BorderBrush="#FFA3BDE3" Width="1" Margin="0" Visibility="Hidden"/>
 
-                            <n:ImageToggleButton Grid.Column="2" x:Name="ExpanderButton" Style="{DynamicResource Style.ToggleButton.NoText}" Content="{DynamicResource Vector.Arrow.Blue.Bottom}" 
-                                                 ContentWidth="5" ContentHeight="3"/>
+                            <n:ExtendedToggleButton Grid.Column="2" x:Name="ExpanderButton" Style="{DynamicResource Style.ToggleButton.NoText}" Icon="{DynamicResource Vector.Arrow.Blue.Bottom}" 
+                                                    ContentWidth="5" ContentHeight="3"/>
 
                             <Popup Name="Popup" Placement="Bottom" IsOpen="{Binding ElementName=ExpanderButton, Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                    AllowsTransparency="True" StaysOpen="False" PopupAnimation="Fade" HorizontalOffset="-2">
@@ -1112,113 +1400,24 @@
                     </Border>
 
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="BorderBrush" Value="#FF9A9A9A"/>
+                        <Trigger SourceName="ActionButton" Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="{DynamicResource Brush.Button.Border.Hover}"/>
                             <Setter Property="Visibility" TargetName="Separator" Value="Visible"/>
                         </Trigger>
 
-                        <Trigger SourceName="InternalGrid" Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" TargetName="InternalGrid" Value="#FFD5E1F2"/>
-                        </Trigger>
-
                         <Trigger SourceName="ExpanderButton" Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" TargetName="ExpanderButton" Value="#FFD5E1F2"/>
+                            <!--<Setter TargetName="ExpanderButton" Property="Background" Value="{DynamicResource Brush.Button.Background.Hover}"/>-->
+                            <Setter Property="BorderBrush" Value="{DynamicResource Brush.Button.Border.Hover}"/>
+                            <Setter Property="Visibility" TargetName="Separator" Value="Visible"/>
                         </Trigger>
 
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" TargetName="InternalGrid" Value="#FFA3BDE3"/>
-                            <Setter Property="BorderBrush" Value="#FFA3BDE3"/>
+                        <Trigger SourceName="ActionButton" Property="IsPressed" Value="True">
+                            <Setter Property="BorderBrush" Value="{DynamicResource Brush.Button.Border.Pressed}"/>
                         </Trigger>
 
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background" Value="#FFE6E6E6"/>
                             <Setter Property="BorderBrush" Value="#FFBCBCBC"/>
-                        </Trigger>
-
-                        <DataTrigger Binding="{Binding IsMouseOver, ElementName=ExpanderButton}" Value="True">
-                            <Setter Property="StaysOpen" TargetName="Popup" Value="True"/>
-                            <Setter Property="Focusable" TargetName="Popup" Value="False"/>
-                        </DataTrigger>
-
-                        <Trigger Property="IsMouseOver" SourceName="ExpanderButton" Value="False">
-                            <Setter Property="StaysOpen" TargetName="Popup" Value="False"/>
-                            <Setter Property="Focusable" TargetName="Popup" Value="False"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <!--SplitButton • No Border • No Text-->
-    <Style TargetType="{x:Type n:SplitButton}" x:Key="Style.SplitButton.NoBorder.NoText">
-        <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Button.Border}"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="VerticalAlignment" Value="Stretch"/>
-        <Setter Property="HorizontalAlignment" Value="Stretch"/>
-        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-        <Setter Property="SnapsToDevicePixels" Value="True"/>
-        <Setter Property="Padding" Value="4,0"/>
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type n:SplitButton}">
-                    <Grid Background="{TemplateBinding Background}" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}"
-                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="1"/>
-                            <ColumnDefinition Width="11"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Border Grid.Column="0" x:Name="OuterBorder">
-                            <Grid x:Name="InternalGrid">
-                                <Viewbox x:Name="ImageViewBox" VerticalAlignment="Center" Width="{TemplateBinding ContentWidth}" Height="{TemplateBinding ContentHeight}" Stretch="Uniform" Margin="3">
-                                    <ContentPresenter Content="{TemplateBinding Image}" VerticalAlignment="Center" Opacity="{DynamicResource Element.Opacity}"/>
-                                </Viewbox>
-                            </Grid>
-                        </Border>
-
-                        <Separator Grid.Column="1" x:Name="Separator" BorderBrush="{TemplateBinding BorderBrush}" Width="1" Margin="0" Visibility="Hidden"/>
-
-                        <n:ImageToggleButton Grid.Column="2" x:Name="ExpanderButton" Style="{DynamicResource Style.ToggleButton.NoText}" Content="{DynamicResource Vector.Arrow.Blue.Bottom}" 
-                                             ContentWidth="5" ContentHeight="3"/>
-
-                        <Popup x:Name="Popup" Placement="Bottom" IsOpen="{Binding ElementName=ExpanderButton, Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                               AllowsTransparency="True" StaysOpen="False" PopupAnimation="Fade" HorizontalOffset="-2">
-                            <Border Name="SubmenuBorder" SnapsToDevicePixels="True" Background="{DynamicResource Element.Background}" BorderBrush="{DynamicResource Element.Border}" 
-                                    BorderThickness="1" Effect="{DynamicResource Shadow.Border.Small}" Margin="2">
-                                <StackPanel x:Name="InnerStackPanel" IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
-                            </Border>
-                        </Popup>
-                    </Grid>
-
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsKeyboardFocused" Value="True">
-                            <Setter TargetName="InternalGrid" Property="Background" Value="{DynamicResource Brush.Button.Background.Focused}"/>
-                        </Trigger>
-
-                        <Trigger SourceName="OuterBorder" Property="IsMouseOver" Value="True">
-                            <Setter TargetName="OuterBorder" Property="Background" Value="{DynamicResource Brush.Button.Background.Hover}"/>
-                            <Setter Property="BorderBrush" Value="{DynamicResource Brush.Button.Border.Hover}"/>
-                            <Setter Property="Visibility" TargetName="Separator" Value="Visible"/>
-                        </Trigger>
-
-                        <Trigger SourceName="ExpanderButton" Property="IsMouseOver" Value="True">
-                            <Setter TargetName="ExpanderButton" Property="Background" Value="{DynamicResource Brush.Button.Background.Hover}"/>
-                            <Setter Property="BorderBrush" Value="{DynamicResource Brush.Button.Border.Hover}"/>
-                            <Setter Property="Visibility" TargetName="Separator" Value="Visible"/>
-                        </Trigger>
-
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" TargetName="InternalGrid" Value="{DynamicResource Brush.Button.Background.Pressed}"/>
-                            <Setter Property="BorderBrush" Value="{DynamicResource Brush.Button.Border.Pressed}"/>
-                        </Trigger>
-
-                        <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="0.7"/>
                         </Trigger>
 
@@ -1227,9 +1426,13 @@
                             <Setter Property="Focusable" TargetName="Popup" Value="False"/>
                         </DataTrigger>
 
-                        <Trigger Property="IsMouseOver" SourceName="ExpanderButton" Value="False">
+                        <Trigger SourceName="ExpanderButton" Property="IsMouseOver" Value="False">
                             <Setter Property="StaysOpen" TargetName="Popup" Value="False"/>
                             <Setter Property="Focusable" TargetName="Popup" Value="False"/>
+                        </Trigger>
+
+                        <Trigger SourceName="Popup" Property="IsOpen" Value="True">
+                            <Setter TargetName="ExpanderButton" Property="IsHitTestVisible" Value="False"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

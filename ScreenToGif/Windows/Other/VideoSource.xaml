@@ -19,14 +19,13 @@
 
         <Grid Grid.Row="0" Background="{DynamicResource Panel.Background.Level4}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="40"/>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Viewbox Grid.Column="0" x:Name="IconViewBox" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center"
-                     Stretch="Uniform" Child="{StaticResource Vector.FramesFromVideo}" Opacity="{DynamicResource Element.Opacity}"/>
+            <Border Grid.Column="0" x:Name="IconViewBox" Margin="6" Background="{StaticResource Vector.FramesFromVideo}" Opacity="{DynamicResource Element.Opacity}"/>
 
             <TextBlock Grid.Column="1" Text="{DynamicResource S.ImportVideo.Title}" Margin="5" VerticalAlignment="Center" Padding="2" FontSize="18" 
                        FontFamily="Segoe UI Semilight" Foreground="{DynamicResource Element.Foreground.Header}"/>
@@ -147,10 +146,10 @@
                    Foreground="{DynamicResource Element.Foreground.Medium}" VerticalAlignment="Center" Visibility="Collapsed"/>
             <ProgressBar x:Name="CaptureProgressBar" Grid.Column="1" Height="4" Margin="5,0" Visibility="Collapsed"/>
 
-            <c:ImageButton x:Name="OkButton" Grid.Column="2" Text="{DynamicResource S.Ok}" Margin="5" IsEnabled="False" MaxSize="20"
-                           MinWidth="90" MinHeight="20" Click="OkButton_Click" Content="{StaticResource Vector.Ok}"/>
-            <c:ImageButton x:Name="CancelButton" Grid.Column="3" Text="{DynamicResource S.Cancel}" Margin="5" MaxSize="20"
-                           MinWidth="90" MinHeight="20" Content="{StaticResource Vector.Cancel}" Click="CancelButton_Click" IsCancel="True"/>
+            <c:ExtendedButton x:Name="OkButton" Grid.Column="2" Text="{DynamicResource S.Ok}" IsEnabled="False" Icon="{StaticResource Vector.Ok}" 
+                              ContentWidth="18" ContentHeight="18" Padding="5,0" MinWidth="90" Margin="5" Click="OkButton_Click" />
+            <c:ExtendedButton x:Name="CancelButton" Grid.Column="3" Text="{DynamicResource S.Cancel}" Icon="{StaticResource Vector.Cancel}"
+                              ContentWidth="18" ContentHeight="18" Padding="5,0" MinWidth="90" Margin="5" IsCancel="True" Click="CancelButton_Click"/>
         </Grid>
     </Grid>
 </Window>

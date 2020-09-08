@@ -8,12 +8,10 @@ namespace ScreenToGif.Util.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var number = value as int?;
-
-            if (!number.HasValue|| number.Value == 0)
+            if (!(value is int number)|| number == 0)
                 return "";
 
-            return number.Value.ToString();
+            return number.ToString();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

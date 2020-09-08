@@ -8,8 +8,20 @@ namespace ScreenToGif.ModelEx
     {
         #region Identity
 
+        /// <summary>
+        /// Just the name to the project file.
+        /// </summary>
         public string Name { get; set; }
+        
+        /// <summary>
+        /// The full path of the project (saved by the user).
+        /// It's the path + filename + extension.
+        /// </summary>
+        public string Path { get; set; }
 
+        /// <summary>
+        /// The version of ScreenToGif used to create this project.
+        /// </summary>
         public Version Version { get; set; }
 
         public DateTime? CreationDate { get; set; }

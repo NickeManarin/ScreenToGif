@@ -16,12 +16,12 @@ using System.Windows.Resources;
 using ScreenToGif.ImageUtil.Gif.Decoder;
 using ScreenToGif.ImageUtil.Gif.Encoder;
 using ScreenToGif.Util;
-using Color = System.Drawing.Color;
 using Image = System.Drawing.Image;
 using PixelFormat = System.Windows.Media.PixelFormat;
 using Size = System.Drawing.Size;
 using ScreenToGif.ImageUtil.Gif.LegacyEncoder;
 using ScreenToGif.Model;
+using Color = System.Windows.Media.Color;
 using GifFile = ScreenToGif.ImageUtil.Gif.Decoder.GifFile;
 
 namespace ScreenToGif.ImageUtil
@@ -1154,7 +1154,7 @@ namespace ScreenToGif.ImageUtil
         /// Color distance calculation.
         /// https://www.compuphase.com/cmetric.htm
         /// </summary>
-        public static double ColourDistance(Color e1, Color e2)
+        public static double ColorDistance(Color e1, Color e2)
         {
             var rmean = (e1.R + (long)e2.R) / 2;
             var r = e1.R - (long)e2.R;
@@ -1164,7 +1164,7 @@ namespace ScreenToGif.ImageUtil
             return Math.Sqrt((((512 + rmean) * r * r) >> 8) + 4 * g * g + (((767 - rmean) * b * b) >> 8));
         }
 
-        public static double ColourDistance(byte b1, byte g1, byte r1, byte b2, byte g2, byte r2)
+        public static double ColorDistance(byte b1, byte g1, byte r1, byte b2, byte g2, byte r2)
         {
             var rMean = (r1 + (long)r2) / 2;
             var r = r1 - (long)r2;
@@ -1283,7 +1283,7 @@ namespace ScreenToGif.ImageUtil
 
             var gce = gifMetadata.Extensions.OfType<GifGraphicControlExtension>().FirstOrDefault();
 
-            if (gce == null) 
+            if (gce == null)
                 return frameMetadata;
 
             if (gce.Delay != 0)
@@ -1434,7 +1434,7 @@ namespace ScreenToGif.ImageUtil
             {
                 //Recreate the frame from the MemoryStream
                 using (var bmp = new Bitmap(ms))
-                    return (Bitmap) bmp.Clone();
+                    return (Bitmap)bmp.Clone();
             }
         }
 
@@ -1501,11 +1501,11 @@ namespace ScreenToGif.ImageUtil
         {
             var format = PixelFormats.Default;
 
-            if (ch == 1) 
+            if (ch == 1)
                 format = PixelFormats.Gray8; //Grey scale image 0-255.
-            else if (ch == 3) 
+            else if (ch == 3)
                 format = PixelFormats.Bgr24; //RGB.
-            else if (ch == 4) 
+            else if (ch == 4)
                 format = PixelFormats.Bgr32; //RGB + alpha.
 
             for (var i = data.Count - 1; i < w * h * ch; i++)
@@ -1587,41 +1587,411 @@ namespace ScreenToGif.ImageUtil
         /// Applies the pixelate effect in given frame.
         /// </summary>
         /// <param name="image">The image to pixelate.</param>
-        /// <param name="rectangle">The area to pixelate.</param>
+        /// <param name="rectX">The X-axis threshold of the area to pixelate.</param>
+        /// <param name="rectY">The Y-axis threshold of the area to pixelate.</param>
+        /// <param name="width">The X-axis threshold of the area to pixelate.</param>
+        /// <param name="height">The Y-axis threshold of the area to pixelate.</param>
         /// <param name="pixelateSize">The size of the pixel.</param>
+        /// <param name="opacityPower">Determinies how strong the opacity multiplier should be.</param>
+        /// <param name="opacityDistance">Determines how far the opacity should start/end being smaller than 1 (based on the opacity power too).</param>
         /// <param name="useMedian">Calculate the median color of the pixel block.</param>
-        /// <returns>A pixelated Bitmap.</returns>
-        public static BitmapSource Pixelate(BitmapSource image, Int32Rect rectangle, int pixelateSize, bool useMedian)
+        /// <param name="inverted">Apply the effect to the inverted region of the selection.</param>
+        /// <returns>A pixelated BitmapSource.</returns>
+        internal static BitmapSource Pixelate(BitmapSource image, int rectX, int rectY, int width, int height, int pixelateSize, double opacityPower, int opacityDistance, bool useMedian, bool inverted)
         {
-            var croppedImage = new CroppedBitmap(image, rectangle);
-            var pixelUtil = new PixelUtil(croppedImage);
+            var pixelUtil = new PixelUtil(image);
             pixelUtil.LockBits();
 
+            var startX = inverted ? 0 : rectX;
+            var startY = inverted ? 0 : rectY;
+            var endX = inverted ? image.PixelWidth : rectX + width;
+            var endY = inverted ? image.PixelHeight : rectY + height;
+
             //Loop through all the blocks that should be pixelated.
-            for (var xx = 0; xx < croppedImage.PixelWidth; xx += pixelateSize)
+            for (var xx = startX; xx < endX; xx += pixelateSize)
             {
-                for (var yy = 0; yy < croppedImage.PixelHeight; yy += pixelateSize)
+                for (var yy = startY; yy < endY; yy += pixelateSize)
                 {
+                    //Ignore non selected parts of the image.
+                    if (inverted && xx > rectX && xx < rectX + width && yy > rectY && yy < rectY + height)
+                        continue;
+
                     var offsetX = pixelateSize / 2;
                     var offsetY = pixelateSize / 2;
 
-                    if (xx + offsetX >= croppedImage.PixelWidth)
-                        offsetX = croppedImage.PixelWidth;
+                    if (xx + offsetX > image.PixelWidth)
+                        offsetX = image.PixelWidth;
 
-                    if (yy + offsetY >= croppedImage.PixelHeight)
-                        offsetY = croppedImage.PixelHeight;
+                    if (yy + offsetY > image.PixelHeight)
+                        offsetY = image.PixelHeight;
 
                     //Get the pixel color in the center of the soon to be pixelated area.
-                    var pixel = useMedian ? pixelUtil.GetMedianColor(xx, yy, offsetX, offsetY) : pixelUtil.GetPixel(xx + offsetX, yy + offsetY);
+                    var changed = useMedian ? pixelUtil.GetMedianColor(xx, yy, offsetX, offsetY) : pixelUtil.GetPixel(xx + offsetX, yy + offsetY);
 
                     //For each pixel in the pixelate size, set it to the center color.
-                    for (var x = xx; x < xx + pixelateSize && x < croppedImage.PixelWidth; x++)
-                        for (var y = yy; y < yy + pixelateSize && y < croppedImage.PixelHeight; y++)
-                            pixelUtil.SetPixel(x, y, pixel);
+                    for (var x = xx; x < xx + pixelateSize && x < image.PixelWidth; x++)
+                    {
+                        for (var y = yy; y < yy + pixelateSize && y < image.PixelHeight; y++)
+                        {
+                            //Ignore non selected parts of the image.
+                            if (!inverted && (x < rectX || x > rectX + width || y < rectY || y > rectY + height))
+                                continue;
+
+                            if (inverted && x > rectX && x < rectX + width && y > rectY && y < rectY + height)
+                                continue;
+
+                            if (opacityDistance > 0)
+                            {
+                                var opacity = CalculateOpacity(inverted, x, y, rectX, rectY, width, height, opacityDistance, opacityPower);
+
+                                pixelUtil.SetAndBlendPixel(x, y, changed, opacity);
+                                continue;
+                            }
+
+                            pixelUtil.SetPixel(x, y, changed);
+                        }
+                    }
                 }
             }
 
             return pixelUtil.UnlockBits();
+        }
+
+        /// <summary>
+        /// Applies the pixelate effect in given frame.
+        /// </summary>
+        /// <param name="image">The image to apply blur.</param>
+        /// <param name="rectX">The X-axis threshold of the area to apply blur.</param>
+        /// <param name="rectY">The Y-axis threshold of the area to apply blur.</param>
+        /// <param name="width">The X-axis threshold of the area to apply blur.</param>
+        /// <param name="height">The Y-axis threshold of the area to apply blur.</param>
+        /// <param name="blurLevel">The level of blur.</param>
+        /// <param name="opacityPower">Determinies how strong the opacity multiplier should be.</param>
+        /// <param name="opacityDistance">Determines how far the opacity should start/end being smaller than 1 (based on the opacity power too).</param>
+        /// <param name="inverted">Apply the effect to the inverted region of the selection.</param>
+        /// <returns>A pixelated BitmapSource.</returns>
+        internal static BitmapSource Blur(BitmapSource image, int rectX, int rectY, int width, int height, int blurLevel, double opacityPower, int opacityDistance, bool inverted)
+        {
+            var pixelUtil = new PixelUtil(image);
+            pixelUtil.LockBits();
+
+            var startX = inverted ? 0 : rectX;
+            var startY = inverted ? 0 : rectY;
+            var endX = inverted ? image.PixelWidth : rectX + width;
+            var endY = inverted ? image.PixelHeight : rectY + height;
+
+            Parallel.For(startX, pixelUtil.Pixels.Length / pixelUtil.ChannelsPerPixel, i =>
+            {
+                i *= pixelUtil.ChannelsPerPixel;
+
+                var y = i / pixelUtil.ChannelsPerPixel / image.PixelWidth;
+                var x = i / pixelUtil.ChannelsPerPixel - (y * image.PixelWidth);
+
+                //Ignore non selected parts of the image.
+                if (!inverted && (x < startX || x > endX || y < startY || y > endY))
+                    return;
+
+                if (inverted && x > rectX && x < rectX + width && y > rectY && y < rectY + height)
+                    return;
+
+                //Apply the blur
+                int avgR = 0, avgG = 0, avgB = 0, avgA = 0;
+                var blurPixelCount = 0;
+
+                //Get the average of the colors in the block.
+                for (var xx = x; xx < x + blurLevel && xx < image.PixelWidth; xx++)
+                {
+                    for (var yy = y; yy < y + blurLevel && yy < image.PixelHeight; yy++)
+                    {
+                        var pixel = pixelUtil.GetPixel(xx, yy);
+
+                        avgB += pixel.B;
+                        avgG += pixel.G;
+                        avgR += pixel.R;
+                        avgA += pixel.A;
+
+                        blurPixelCount++;
+                    }
+                }
+
+                if (blurPixelCount > 0)
+                {
+                    avgR /= blurPixelCount;
+                    avgG /= blurPixelCount;
+                    avgB /= blurPixelCount;
+                    avgA /= blurPixelCount;
+                }
+
+                //Apply the average to the block.
+                for (var xx = x; xx < x + blurLevel && xx < image.PixelWidth; xx++)
+                {
+                    for (var yy = y; yy < y + blurLevel && yy < image.PixelHeight; yy++)
+                    {
+                        //Ignore non selected parts of the image.
+                        if (!inverted && (xx < rectX || xx > rectX + width || yy < rectY || yy > rectY + height))
+                            continue;
+
+                        if (inverted && xx > rectX && xx < rectX + width && yy > rectY && yy < rectY + height)
+                            continue;
+
+                        if (opacityDistance > 0)
+                        {
+                            var opacity = CalculateOpacity(inverted, xx, yy, rectX, rectY, width, height, opacityDistance, opacityPower);
+
+                            pixelUtil.SetAndBlendPixel(xx, yy, (byte)avgB, (byte)avgG, (byte)avgR, (byte)avgA, opacity);
+                            continue;
+                        }
+
+                        pixelUtil.SetPixel(xx, yy, (byte)avgB, (byte)avgG, (byte)avgR, (byte)avgA);
+                    }
+                }
+            });
+
+            #region Non parallel
+
+            //for (var xx = startX; xx < endX; xx++)
+            //{
+            //    for (var yy = startY; yy < endY; yy++)
+            //    {
+            //        //Ignore non selected parts of the image.
+            //        if (inverted && xx > rectX && xx < rectX + width && yy > rectY && yy < rectY + height)
+            //            continue;
+
+            //        int avgR = 0, avgG = 0, avgB = 0, avgA = 0;
+            //        var blurPixelCount = 0;
+
+            //        //Get the average of the colors in the block.
+            //        for (var x = xx; x < xx + blurLevel && x < image.PixelWidth; x++)
+            //        {
+            //            for (var y = yy; y < yy + blurLevel && y < image.PixelHeight; y++)
+            //            {
+            //                var pixel = pixelUtil.GetPixel(x, y);
+
+            //                avgB += pixel.B;
+            //                avgG += pixel.G;
+            //                avgR += pixel.R;
+            //                avgA += pixel.A;
+
+            //                blurPixelCount++;
+            //            }
+            //        }
+
+            //        avgR /= blurPixelCount;
+            //        avgG /= blurPixelCount;
+            //        avgB /= blurPixelCount;
+            //        avgA /= blurPixelCount;
+
+            //        //Apply the average to the block.
+            //        for (var x = xx; x < xx + blurLevel && x < image.PixelWidth; x++)
+            //        {
+            //            for (var y = yy; y < yy + blurLevel && y < image.PixelHeight; y++)
+            //            {
+            //                //Ignore non selected parts of the image.
+            //                if (!inverted && (x < rectX || x > rectX + width || y < rectY || y > rectY + height))
+            //                    continue;
+
+            //                if (inverted && x > rectX && x < rectX + width && y > rectY && y < rectY + height)
+            //                    continue;
+
+            //                if (opacityDistance > 0)
+            //                {
+            //                    var opacity = CalculateOpacity(inverted, x, y, rectX, rectY, width, height, opacityDistance, opacityPower);
+
+            //                    pixelUtil.SetAndBlendPixel(x, y, (byte)avgB, (byte)avgG, (byte)avgR, (byte)avgA, opacity);
+            //                    continue;
+            //                }
+
+            //                pixelUtil.SetPixel(x, y, (byte)avgB, (byte)avgG, (byte)avgR, (byte)avgA);
+            //            }
+            //        }
+            //    }
+            //}
+
+            #endregion
+
+            return pixelUtil.UnlockBits();
+        }
+
+        /// <summary>
+        /// Darkens or lightens the given frame.
+        /// </summary>
+        /// <param name="image">The image to have the lightness altered.</param>
+        /// <param name="rectX">The X-axis threshold of the area to be altered.</param>
+        /// <param name="rectY">The Y-axis threshold of the area to be altered.</param>
+        /// <param name="width">The X-axis threshold of the area to be altered.</param>
+        /// <param name="height">The Y-axis threshold of the area to alter lightness.</param>
+        /// <param name="isDarken">True if the images should be darkened, else lightened.</param>
+        /// <param name="lightnessLevel">The level of lightness.</param>
+        /// <param name="opacityPower">Determinies how strong the opacity multiplier should be.</param>
+        /// <param name="opacityDistance">Determines how far the opacity should start/end being smaller than 1 (based on the opacity power too).</param>
+        /// <param name="inverted">Apply the effect to the inverted region of the selection.</param>
+        /// <returns>A lightness altered BitmapSource.</returns>
+        internal static BitmapSource Lightness(BitmapSource image, int rectX, int rectY, int width, int height, bool isDarken, double lightnessLevel, double opacityPower, int opacityDistance, bool inverted)
+        {
+            var pixelUtil = new PixelUtil(image);
+            pixelUtil.LockBits();
+
+            var startX = inverted ? 0 : rectX;
+            var startY = inverted ? 0 : rectY;
+            var endX = inverted ? image.PixelWidth : rectX + width;
+            var endY = inverted ? image.PixelHeight : rectY + height;
+
+            Parallel.For(startX, pixelUtil.Pixels.Length / pixelUtil.ChannelsPerPixel, i =>
+            {
+                i *= pixelUtil.ChannelsPerPixel;
+
+                var y = i / pixelUtil.ChannelsPerPixel / image.PixelWidth;
+                var x = i / pixelUtil.ChannelsPerPixel - (y * image.PixelWidth);
+
+                //Ignore non selected parts of the image.
+                if (!inverted && (x < startX || x > endX || y < startY || y > endY))
+                    return;
+
+                if (inverted && x > rectX && x < rectX + width && y > rectY && y < rectY + height)
+                    return;
+
+                //Apply smoothness.
+                var original = pixelUtil.GetPixel(x, y);
+                var changed = ChangeColorBrightness(original, lightnessLevel / 100d * (isDarken ? -1 : 1));
+
+                if (opacityDistance > 0)
+                {
+                    var opacity = CalculateOpacity(inverted, x, y, rectX, rectY, width, height, opacityDistance, opacityPower);
+
+                    pixelUtil.SetAndBlendPixel(x, y, changed, opacity);
+                    return;
+                }
+
+                pixelUtil.SetPixel(x, y, changed);
+            });
+
+            #region Non parallel
+
+            //for (var xx = startX; xx < endX; xx++)
+            //{
+            //    for (var yy = startY; yy < endY; yy++)
+            //    {
+            //        //Ignore non selected parts of the image.
+            //        if (inverted && xx > rectX && xx < rectX + width && yy > rectY && yy < rectY + height)
+            //            continue;
+
+            //        //Apply smoothness.
+            //        var original = pixelUtil.GetPixel(xx, yy);
+            //        var changed = ChangeColorBrightness(original, lightnessLevel / 100d * (isDarken ? -1 : 1));
+
+            //        if (opacityDistance > 0)
+            //        {
+            //            var opacity = CalculateOpacity(inverted, xx, yy, rectX, rectY, width, height, opacityDistance, opacityPower);
+
+            //            pixelUtil.SetAndBlendPixel(xx, yy, changed, opacity);
+            //            continue;
+            //        }
+
+            //        pixelUtil.SetPixel(xx, yy, changed);
+            //    }
+            //}
+
+            #endregion
+
+            return pixelUtil.UnlockBits();
+        }
+
+        /// <summary>
+        /// Creates color with corrected brightness.
+        /// https://stackoverflow.com/a/12598573/1735672
+        /// </summary>
+        /// <param name="color">Color to correct.</param>
+        /// <param name="correctionFactor">The brightness correction factor. Must be between -1 and 1. Negative values produce darker colors.</param>
+        public static Color ChangeColorBrightness(Color color, double correctionFactor)
+        {
+            var red = (double)color.R;
+            var green = (double)color.G;
+            var blue = (double)color.B;
+
+            if (correctionFactor < 0)
+            {
+                correctionFactor = 1 + correctionFactor;
+                red *= correctionFactor;
+                green *= correctionFactor;
+                blue *= correctionFactor;
+            }
+            else
+            {
+                red = (255 - red) * correctionFactor + red;
+                green = (255 - green) * correctionFactor + green;
+                blue = (255 - blue) * correctionFactor + blue;
+            }
+
+            return Color.FromArgb(color.A, (byte)red, (byte)green, (byte)blue);
+        }
+
+        /// <summary>
+        /// Blends two colors based on a given opacity percentage.
+        /// </summary>
+        /// <param name="bottom">The current base color.</param>
+        /// <param name="top">The new color that will be put on top of the base one.</param>
+        /// <param name="opacity">The percentage of how much top color to put on top of the base color.</param>
+        public static Color AlphaBlend(Color bottom, Color top, double opacity)
+        {
+            //var alpha = (byte)(255 * 1 - (1 - bottom.A) * (1 - top.A));
+            var alpha = (byte)((top.A * opacity) + bottom.A * (1 - opacity));
+            var red = (byte)((top.R * opacity) + bottom.R * (1 - opacity));
+            var green = (byte)((top.G * opacity) + bottom.G * (1 - opacity));
+            var blue = (byte)((top.B * opacity) + bottom.B * (1 - opacity));
+
+            return Color.FromArgb(alpha, red, green, blue);
+        }
+
+        private static double CalculateOpacity(bool inverted, int xx, int yy, int rectX, int rectY, int width, int height, int opacityDistance, double opacityPower)
+        {
+            if (inverted)
+            {
+                var left = xx <= rectX && //Left.
+                           yy - opacityDistance <= rectY + height && //Bottom corner.
+                           yy + opacityDistance >= rectY ? //Top corner.
+                           rectX - xx : int.MaxValue;
+
+                var top = yy <= rectY && //Top
+                          xx - opacityDistance <= rectX + width && //Right corner.
+                          xx + opacityDistance >= rectX ? //Left corner.
+                          rectY - yy : int.MaxValue;
+
+                var right = xx >= rectX + width && //Right.
+                            yy - opacityDistance <= rectY + height && //Bottom corner.
+                            yy + opacityDistance >= rectY ? //Top corner.
+                            xx - (rectX + width) : int.MaxValue;
+
+                var bottom = yy >= rectY + height && //Bottom.
+                             xx - opacityDistance <= rectX + width && //Right corner.
+                             xx + opacityDistance >= rectX ? //Left corner.
+                             yy - (rectY + height) : int.MaxValue;
+
+                if (xx <= rectX && yy <= rectY) //Top left corner.
+                    top = left = Math.Max(top, left);
+
+                if (xx >= rectX + width && yy <= rectY) //Top right corner.
+                    top = right = Math.Max(right, top);
+
+                if (xx >= rectX + width && yy >= rectY + height) //Bottom right corner.
+                    bottom = right = Math.Max(bottom, right);
+
+                if (xx <= rectX && yy >= rectY + height) //Bottom left corner.
+                    bottom = left = Math.Max(bottom, left);
+
+                var distance = new[] { left, top, right, bottom }.OrderBy(o => o).First();
+                return distance <= opacityDistance ? opacityPower / 100d * ((distance * 100d) / opacityDistance) / 100d : 1d;
+            }
+
+            //TODO: Option to avoid smoothing near the edges. 
+            //var distance = new[] { xx - rectX, yy - rectY, rectX + width - xx, rectY + height - yy }.OrderBy(o => o).First();
+
+            var left2 = xx - rectX;
+            var top2 = yy - rectY;
+            var right2 = rectX + width - xx;
+            var bottom2 = rectY + height - yy;
+
+            var distance2 = new[] { left2, top2, right2, bottom2 }.OrderBy(o => o).First();
+            return distance2 <= opacityDistance ? opacityPower / 100d * ((distance2 * 100d) / opacityDistance) / 100d : 1d;
         }
 
         #endregion

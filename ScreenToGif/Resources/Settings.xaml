@@ -23,6 +23,7 @@
     <s:Double x:Key="RecorderLeft">NaN</s:Double>
     <s:Int32 x:Key="LatestFps">15</s:Int32>
     <Rect x:Key="SelectedRegion">Empty</Rect>
+    <s:Double x:Key="SelectedRegionScale">1.0</s:Double>
     <s:Int32 x:Key="RecorderModeIndex">0</s:Int32>
 
     <!--Board-->
@@ -56,6 +57,7 @@
     <s:Boolean x:Key="DisableHardwareAcceleration">False</s:Boolean>
     <s:Boolean x:Key="CheckForTranslationUpdates">True</s:Boolean>
     <s:Boolean x:Key="CheckForUpdates">True</s:Boolean>
+    <s:Boolean x:Key="PortableUpdate">False</s:Boolean>
     <s:Boolean x:Key="ForceUpdateAsAdmin">False</s:Boolean>
     <s:Boolean x:Key="InstallUpdates">True</s:Boolean>
     <s:Boolean x:Key="PromptToInstall">True</s:Boolean>
@@ -73,15 +75,23 @@
     <s:Boolean x:Key="NewRecorder">False</s:Boolean>
     <s:Boolean x:Key="RecorderThinMode">False</s:Boolean>
     <s:Boolean x:Key="Magnifier">True</s:Boolean>
+    <s:Boolean x:Key="AnimateRecorderBorder">False</s:Boolean>
+    <s:Boolean x:Key="EnableSelectionPanning">True</s:Boolean>
+    <s:Boolean x:Key="RecorderCompactMode">False</s:Boolean>
+    <s:Boolean x:Key="RecorderDisplayDiscard">False</s:Boolean>
     <s:Boolean x:Key="FallThroughOtherScreens">False</s:Boolean>
     <u:CaptureFrequency x:Key="CaptureFrequency">PerSecond</u:CaptureFrequency>
     <s:Int32 x:Key="PlaybackDelayManual">1000</s:Int32>
+    <s:Int32 x:Key="PlaybackDelayInteraction">500</s:Int32>
     <s:Int32 x:Key="PlaybackDelayMinute">66</s:Int32>
     <s:Int32 x:Key="PlaybackDelayHour">66</s:Int32>
+    <s:Boolean x:Key="FixedFrameRate">False</s:Boolean>
+    <s:Boolean x:Key="OnlyCaptureChanges">False</s:Boolean>
     <s:Boolean x:Key="UseDesktopDuplication">False</s:Boolean>
     <s:Boolean x:Key="UseMemoryCache">False</s:Boolean>
     <i:CompressionLevel x:Key="CaptureCompression">Optimal</i:CompressionLevel>
-    <s:Int32 x:Key="MemoryCacheSize">50</s:Int32>
+    <s:Int32 x:Key="MemoryCacheSize">250</s:Int32>
+    <s:Boolean x:Key="PreventBlackFrames">True</s:Boolean>
     <u:AppTheme x:Key="MainTheme">Light</u:AppTheme>
     <Color x:Key="RecorderBackground">#FFFFFFFF</Color>
     <Color x:Key="RecorderForeground">#FF000000</Color>
@@ -93,12 +103,24 @@
     <s:Boolean x:Key="DetectMouseClicks">True</s:Boolean>
     <s:Boolean x:Key="UsePreStart">False</s:Boolean>
     <s:Int32 x:Key="PreStartValue">3</s:Int32>
-    <s:Boolean x:Key="FixedFrameRate">False</s:Boolean>
-    <s:Boolean x:Key="RemoteImprovement">True</s:Boolean>
     <s:Boolean x:Key="AsyncRecording">False</s:Boolean>
+    <s:Boolean x:Key="RemoteImprovement">True</s:Boolean>
+
+    <s:Boolean x:Key="DisplayThirdsGuideline">False</s:Boolean>
+    <s:Double x:Key="ThirdsGuidelineThickness">0.5</s:Double>
+    <Color x:Key="ThirdsGuidelineColor">#C89D9D9D</Color>
+    <DoubleCollection x:Key="ThirdsGuidelineStrokeDashArray">1 0</DoubleCollection>
+    <s:Boolean x:Key="DisplayCrosshairGuideline">False</s:Boolean>
+    <s:Double x:Key="CrosshairGuidelineThickness">1.0</s:Double>
+    <Color x:Key="CrosshairGuidelineColor">#A8F0FF00</Color>
+    <DoubleCollection x:Key="CrosshairGuidelineStrokeDashArray">5 5</DoubleCollection>
+
+    <s:Boolean x:Key="RecorderRememberSize">True</s:Boolean>
+    <s:Boolean x:Key="RecorderRememberPosition">True</s:Boolean>
     <s:Boolean x:Key="CursorFollowing">False</s:Boolean>
     <s:Int32 x:Key="FollowBuffer">20</s:Int32>
     <s:Int32 x:Key="FollowBufferInvisible">20</s:Int32>
+    <s:Boolean x:Key="NotifyRecordingDiscard">True</s:Boolean>
 
     <!--Options • Editor-->
     <Rect x:Key="GridSize">0,0,20,20</Rect>
@@ -118,12 +140,12 @@
     
     <!--Options • Automated Tasks-->
     <c:ArrayList Capacity="1" x:Key="AutomatedTasksList">
-        <m:MouseClicksModel ForegroundColor="#78FFFF00" Width="12" Height="12" TaskType="MouseClicks" />
+        <m:MouseClicksModel ForegroundColor="#78FFFF00" Width="12" Height="12" TaskType="MouseClicks"/>
     </c:ArrayList>
 
     <!--Options • Shortcuts-->
     <Key x:Key="RecorderShortcut">None</Key>
-    <ModifierKeys x:Key="RecorderModifiers" xml:space="preserve">Alt</ModifierKeys>
+    <ModifierKeys x:Key="RecorderModifiers" xml:space="preserve"></ModifierKeys>
     <Key x:Key="WebcamRecorderShortcut">None</Key>
     <ModifierKeys x:Key="WebcamRecorderModifiers" xml:space="preserve"></ModifierKeys>
     <Key x:Key="BoardRecorderShortcut">None</Key>
@@ -455,8 +477,15 @@
     <s:Double x:Key="ShadowDepth">5.0</s:Double>
     
     <!--Editor • Obfuscate-->
+    <u:ObfuscationMode x:Key="ObfuscationMode">Pixelation</u:ObfuscationMode>
+    <s:Boolean x:Key="ObfuscationInvertedSelection">False</s:Boolean>
     <s:Int32 x:Key="PixelSize">5</s:Int32>
+    <s:Int32 x:Key="BlurLevel">3</s:Int32>
+    <s:Double x:Key="DarkenLevel">20.0</s:Double>
+    <s:Double x:Key="LightenLevel">20.0</s:Double>
     <s:Boolean x:Key="UseMedian">True</s:Boolean>
+    <s:Int32 x:Key="ObfuscationSmoothnessRadius">5</s:Int32>
+    <s:Double x:Key="ObfuscationSmoothnessOpacity">100.0</s:Double>
     
     <!--Editor • Watermark-->
     <!--<s:String x:Key="WatermarkFilePath"></s:String>-->

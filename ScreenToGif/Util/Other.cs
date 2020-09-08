@@ -174,10 +174,21 @@ namespace ScreenToGif.Util
             return number % 2 == 0 ? number : number + 1;
         }
 
+        internal static long PackLong(int left, int right)
+        {
+            return (long)left << 32 | (uint)right;
+        }
+
+        internal static void UnpackLong(long value, out int left, out int right)
+        {
+            left = (int)(value >> 32);
+            right = (int)(value & 0xffffffffL);
+        }
+
         private static Size MeasureString(this TextBlock textBlock)
         {
             var formattedText = new FormattedText(textBlock.Text, CultureInfo.CurrentUICulture, FlowDirection.LeftToRight,
-                new Typeface(textBlock.FontFamily, textBlock.FontStyle, textBlock.FontWeight, textBlock.FontStretch), textBlock.FontSize, Brushes.Black);
+                new Typeface(textBlock.FontFamily, textBlock.FontStyle, textBlock.FontWeight, textBlock.FontStretch), textBlock.FontSize, Brushes.Black, 96d);
 
             return new Size(formattedText.Width, formattedText.Height);
         }
@@ -192,7 +203,10 @@ namespace ScreenToGif.Util
 
         internal static Rect Translate(this Rect rect, double offsetX, double offsetY)
         {
-            return rect.IsEmpty ? rect : new Rect(rect.Left + offsetX, rect.Top + offsetY, rect.Width, rect.Height);
+            return rect.IsEmpty ? rect : new Rect(Math.Round(rect.Left + offsetX, MidpointRounding.AwayFromZero), Math.Round(rect.Top + offsetY, MidpointRounding.AwayFromZero), 
+                Math.Round(rect.Width, MidpointRounding.AwayFromZero), Math.Round(rect.Height, MidpointRounding.AwayFromZero));
+
+            //return rect.IsEmpty ? rect : new Rect(rect.Left + offsetX, rect.Top + offsetY, rect.Width, rect.Height);
         }
 
         internal static Rect Scale(this Rect rect, double scale)
@@ -544,7 +558,7 @@ namespace ScreenToGif.Util
                     if (!File.Exists(Path.Combine(path, "ffmpeg.exe")))
                         continue;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     //LogWriter.Log(ex, "Checking the path variables", path);
                     continue;

@@ -35,7 +35,7 @@ namespace ScreenToGif.Windows.Other
         }
 
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             #region Validation
 
@@ -54,25 +54,9 @@ namespace ScreenToGif.Windows.Other
                 IsInstaller = Directory.EnumerateFiles(AppDomain.CurrentDomain.BaseDirectory).Any(x => x.ToLowerInvariant().EndsWith("screentogif.visualelementsmanifest.xml"));
 
                 VersionRun.Text = $"{LocalizationHelper.Get("S.Updater.Version")} {Global.UpdateAvailable.Version}";
-                SizeRun.Text = Global.UpdateAvailable.InstallerSize > 0 ? Humanizer.BytesToString(IsInstaller ? Global.UpdateAvailable.InstallerSize : Global.UpdateAvailable.PortableSize) : "";
+                SizeRun.Text = !UserSettings.All.PortableUpdate ? (Global.UpdateAvailable.InstallerSize > 0 ? Humanizer.BytesToString(Global.UpdateAvailable.InstallerSize) : "") : 
+                    (Global.UpdateAvailable.PortableSize > 0 ? Humanizer.BytesToString(Global.UpdateAvailable.PortableSize) : "");
                 TypeRun.Text = IsInstaller ? LocalizationHelper.Get("S.Updater.Installer") : LocalizationHelper.Get("S.Updater.Portable");
-
-                //If set to download automatically, check if the installer was downloaded.
-                if (UserSettings.All.InstallUpdates)
-                {
-                    //If the update was already downloaded.
-                    if (File.Exists(Global.UpdateAvailable.InstallerPath))
-                    {
-                        DownloadButton.SetResourceReference(ImageButton.TextProperty, "S.Updater.Install");
-
-                        //When the update was prompted manually, the user can set the installer to run the app afterwards.
-                        if (WasPromptedManually)
-                        {
-                            RunAfterwardsCheckBox.Visibility = Visibility.Visible;
-                            RunAfterwardsCheckBox.IsChecked = true;
-                        }
-                    }
-                }
 
                 //Details.
                 if (Global.UpdateAvailable.IsFromGithub)
@@ -94,6 +78,55 @@ namespace ScreenToGif.Windows.Other
                     run.SetResourceReference(Run.TextProperty, "S.Updater.Info.NewVersionAvailable");
                     WhatsNewParagraph.Inlines.Add(run);
                 }
+
+                //If set to force the download the portable version of the app, check if it was downloaded.
+                if (UserSettings.All.PortableUpdate)
+                {
+                    //If the update was already downloaded.
+                    if (File.Exists(Global.UpdateAvailable.PortablePath))
+                    {
+                        //If it's still downloading, wait for it to finish before displaying "Open".
+                        if (Global.UpdateAvailable.IsDownloading)
+                        {
+                            Global.UpdateAvailable.TaskCompletionSource = new TaskCompletionSource<bool>();
+                            await Global.UpdateAvailable.TaskCompletionSource.Task;
+
+                            if (!IsLoaded)
+                                return;
+                        }
+
+                        DownloadButton.SetResourceReference(ExtendedButton.TextProperty, "S.Updater.InstallManually");
+                    }
+
+                    return;
+                }
+
+                //If set to download automatically, check if the installer was downloaded.
+                if (UserSettings.All.InstallUpdates)
+                {
+                    //If the update was already downloaded.
+                    if (File.Exists(Global.UpdateAvailable.InstallerPath))
+                    {
+                        //If it's still downloading, wait for it to finish before displaying "Install".
+                        if (Global.UpdateAvailable.IsDownloading)
+                        {
+                            Global.UpdateAvailable.TaskCompletionSource = new TaskCompletionSource<bool>();
+                            await Global.UpdateAvailable.TaskCompletionSource.Task;
+
+                            if (!IsLoaded)
+                                return;
+                        }
+
+                        DownloadButton.SetResourceReference(ExtendedButton.TextProperty, "S.Updater.Install");
+
+                        //When the update was prompted manually, the user can set the installer to run the app afterwards.
+                        if (WasPromptedManually)
+                        {
+                            RunAfterwardsCheckBox.Visibility = Visibility.Visible;
+                            RunAfterwardsCheckBox.IsChecked = true;
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -104,33 +137,44 @@ namespace ScreenToGif.Windows.Other
 
         private async void DownloadButton_Click(object sender, RoutedEventArgs e)
         {
+            DownloadButton.IsEnabled = false;
+            StatusBand.Info(LocalizationHelper.Get("S.Updater.Downloading"));
+
+            //If it's still downloading, wait for it to finish.
+            if (Global.UpdateAvailable.IsDownloading)
+            {
+                Global.UpdateAvailable.TaskCompletionSource = new TaskCompletionSource<bool>();
+                await Global.UpdateAvailable.TaskCompletionSource.Task;
+
+                if (!IsLoaded)
+                    return;
+            }
+
             //If update already downloaded, simply close this window. The installation will happen afterwards.
-            if (File.Exists(Global.UpdateAvailable.InstallerPath))
+            if (File.Exists(Global.UpdateAvailable.ActivePath))
             {
                 GC.Collect();
                 DialogResult = true;
                 return;
             }
 
-            //When the update was not queried from Github, the dowload must be done by browser.
+            //When the update was not queried from Github, the download must be done by browser.
             if (!Global.UpdateAvailable.IsFromGithub)
             {
                 try
                 {
-                    Process.Start(Global.UpdateAvailable.InstallerDownloadUrl);
+                    Process.Start(Global.UpdateAvailable.ActiveDownloadUrl);
                 }
                 catch (Exception ex)
                 {
-                    LogWriter.Log(ex, "Impossible to open the browser to download the update.", Global.UpdateAvailable?.InstallerDownloadUrl);
+                    LogWriter.Log(ex, "Impossible to open the browser to download the update.", Global.UpdateAvailable?.ActiveDownloadUrl);
                 }
 
                 GC.Collect();
                 DialogResult = true;
                 return;
             }
-
-            DownloadButton.IsEnabled = false;
-            StatusBand.Info(LocalizationHelper.Get("S.Updater.Downloading"));
+            
             DownloadProgressBar.Visibility = Visibility.Visible;
             RunAfterwardsCheckBox.Visibility = Visibility.Collapsed;
 
@@ -149,7 +193,7 @@ namespace ScreenToGif.Windows.Other
             }
 
             //If the update was downloaded successfully, close this window to run.
-            if (File.Exists(Global.UpdateAvailable.InstallerPath))
+            if (File.Exists(Global.UpdateAvailable.ActivePath))
             {
                 GC.Collect();
                 StatusBand.Hide();
@@ -164,6 +208,11 @@ namespace ScreenToGif.Windows.Other
         {
             GC.Collect();
             DialogResult = false;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Global.UpdateAvailable.TaskCompletionSource = null;
         }
     }
 }

@@ -25,7 +25,6 @@ using ScreenToGif.Util;
 using ScreenToGif.Windows.Other;
 using Application = System.Windows.Application;
 using ComboBox = System.Windows.Controls.ComboBox;
-using DialogResultWinForms = System.Windows.Forms.DialogResult;
 using Localization = ScreenToGif.Windows.Other.Localization;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 using Path = System.IO.Path;
@@ -148,6 +147,18 @@ namespace ScreenToGif.Windows
                 _ignoreStartup = false;
                 Cursor = Cursors.Arrow;
             }
+        }
+
+        private void Instance_Checked(object sender, RoutedEventArgs e)
+        {
+            if (!IsLoaded)
+                return;
+
+            //With this inter process server, this instance can listen to arguments sent by other instances.
+            if (UserSettings.All.SingleInstance)
+                InterProcess.RegisterServer();
+            else
+                InterProcess.UnregisterServer();
         }
 
         private void AppThemeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -1093,12 +1104,12 @@ namespace ScreenToGif.Windows
 
             var initial = Directory.Exists(path) ? path : Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
 
-            var folderDialog = new System.Windows.Forms.FolderBrowserDialog { ShowNewFolderButton = true };
+            var folderDialog = new FolderSelector();
 
             if (!string.IsNullOrWhiteSpace(initial))
                 folderDialog.SelectedPath = initial;
 
-            if (folderDialog.ShowDialog() != DialogResultWinForms.OK)
+            if (!folderDialog.ShowDialog())
                 return;
 
             //Converts to a relative path again.
@@ -1158,12 +1169,12 @@ namespace ScreenToGif.Windows
 
             var initial = Directory.Exists(path) ? path : Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
 
-            var folderDialog = new System.Windows.Forms.FolderBrowserDialog { ShowNewFolderButton = true };
+            var folderDialog = new FolderSelector();
 
             if (!string.IsNullOrWhiteSpace(initial))
                 folderDialog.SelectedPath = initial;
 
-            if (folderDialog.ShowDialog() != DialogResultWinForms.OK)
+            if (!folderDialog.ShowDialog())
                 return;
 
             //Converts to a relative path again.
@@ -1520,7 +1531,7 @@ namespace ScreenToGif.Windows
 
             if (!string.IsNullOrWhiteSpace(adjusted) && File.Exists(adjusted))
             {
-                Native.ShowFileProperties(Path.GetFullPath(adjusted));
+                Util.Native.ShowFileProperties(Path.GetFullPath(adjusted));
                 return;
             }
 
@@ -1619,7 +1630,7 @@ namespace ScreenToGif.Windows
 
             if (!string.IsNullOrWhiteSpace(adjusted) && File.Exists(adjusted))
             {
-                Native.ShowFileProperties(Path.GetFullPath(adjusted));
+                Util.Native.ShowFileProperties(Path.GetFullPath(adjusted));
                 return;
             }
 
@@ -1719,7 +1730,7 @@ namespace ScreenToGif.Windows
 
             if (!string.IsNullOrWhiteSpace(adjusted) && File.Exists(Path.Combine(adjusted, "SharpDX.dll")))
             {
-                Native.ShowFileProperties(Path.GetFullPath(Path.Combine(adjusted, "SharpDX.dll")));
+                Util.Native.ShowFileProperties(Path.GetFullPath(Path.Combine(adjusted, "SharpDX.dll")));
                 return;
             }
 
@@ -1741,14 +1752,13 @@ namespace ScreenToGif.Windows
             var directory = !string.IsNullOrWhiteSpace(output) ? Path.GetDirectoryName(output) : "";
             var initial = Directory.Exists(directory) ? directory : AppDomain.CurrentDomain.BaseDirectory;
 
-            var fbd = new System.Windows.Forms.FolderBrowserDialog
+            var fbd = new FolderSelector
             {
                 Description = LocalizationHelper.Get("S.Options.Extras.SharpDxLocation.Select"),
                 SelectedPath = isRelative ? Path.GetFullPath(initial) : initial
             };
-            var result = fbd.ShowDialog();
 
-            if (result != DialogResultWinForms.OK)
+            if (!fbd.ShowDialog())
                 return;
 
             UserSettings.All.SharpDxLocationFolder = fbd.SelectedPath;
@@ -1933,14 +1943,13 @@ namespace ScreenToGif.Windows
 
             var initial = Directory.Exists(directory) ? directory : Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
 
-            var fbd = new System.Windows.Forms.FolderBrowserDialog
+            var fbd = new FolderSelector
             {
                 Description = LocalizationHelper.Get("S.Options.Extras.SharpDxLocation.Select"),
                 SelectedPath = isRelative ? Path.GetFullPath(initial) : initial
             };
-            var result = fbd.ShowDialog();
 
-            if (result != DialogResultWinForms.OK)
+            if (!fbd.ShowDialog())
                 return;
 
             UserSettings.All.SharpDxLocationFolder = fbd.SelectedPath;
@@ -2342,7 +2351,7 @@ namespace ScreenToGif.Windows
             #endregion
 
             Global.IgnoreHotKeys = false;
-
+            
             BaseCompatibilityPreferences.HandleDispatcherRequestProcessingFailure = UserSettings.All.WorkaroundQuota ? BaseCompatibilityPreferences.HandleDispatcherRequestProcessingFailureOptions.Reset : BaseCompatibilityPreferences.HandleDispatcherRequestProcessingFailureOptions.Continue;
             RenderOptions.ProcessRenderMode = UserSettings.All.DisableHardwareAcceleration ? RenderMode.SoftwareOnly : RenderMode.Default;
 

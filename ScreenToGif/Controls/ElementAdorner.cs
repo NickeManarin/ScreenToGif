@@ -312,12 +312,12 @@ namespace ScreenToGif.Controls
         /// </summary>
         private void BuildAdornerBorder()
         {
-            var resetMenu = new ImageMenuItem { Header = "Reset rotation", Image = TryFindResource("Vector.Repeat") as Canvas };
+            var resetMenu = new ExtendedMenuItem { Header = "Reset rotation", Icon = TryFindResource("Vector.Repeat") as Brush };
             resetMenu.SetResourceReference(HeaderedItemsControl.HeaderProperty, "S.Shapes.Shapes.ResetRotatio");
 
             //var duplicateMenu = new ImageMenuItem { Header = "Duplicate", Image = TryFindResource("Vector.Copy") as Canvas };
 
-            var removeMenu = new ImageMenuItem { Header = "Remove", Image = TryFindResource("Vector.Cancel") as Canvas };
+            var removeMenu = new ExtendedMenuItem { Header = "Remove", Icon = TryFindResource("Vector.Cancel") as Brush };
             removeMenu.SetResourceReference(HeaderedItemsControl.HeaderProperty, "S.Shapes.Shapes.Remove");
 
             resetMenu.Click += (sender, args) => RaiseRotationResetRequestedEvent();

@@ -650,6 +650,8 @@ namespace ScreenToGif.Util
 
                                     Update(id, Status.Processing, null, false);
 
+                                    var lastTimestamp = project.FramesFiles.Sum(s => s.Delay / 1000D); //project.FramesFiles[project.FramesFiles.Count - 1].Delay / 1000d;
+
                                     for (var i = 0; i < project.FramesFiles.Count; i++)
                                     {
                                         #region Cancellation
@@ -664,7 +666,7 @@ namespace ScreenToGif.Util
 
                                         Update(id, i, string.Format(processing, i));
 
-                                        res = gifski.AddFrame(handle, (uint)i, project.FramesFiles[i].Path, project.FramesFiles[i].Delay, i + 1 == project.FramesFiles.Count);
+                                        res = gifski.AddFrame(handle, (uint)i, project.FramesFiles[i].Path, project.FramesFiles[i].Delay, lastTimestamp, i + 1 == project.FramesFiles.Count);
 
                                         if (res != GifskiInterop.GifskiError.Ok)
                                             throw new Exception("Error while adding frames with Gifski. " + res, new Win32Exception(res.ToString())) { HelpLink = $"Result:\n\r{Marshal.GetLastWin32Error()}" };
@@ -977,15 +979,15 @@ namespace ScreenToGif.Util
                                     data.SetFileDropList(new StringCollection { param.Filename });
                                     break;
                                 case CopyType.FolderPath:
-                                    data.SetText(Path.GetDirectoryName(param.Filename) ?? param.Filename, TextDataFormat.Text);
+                                    data.SetText(Path.GetDirectoryName(param.Filename) ?? param.Filename, TextDataFormat.UnicodeText);
                                     break;
                                 case CopyType.Link:
                                     var link = GetUploadLink(id);
 
-                                    data.SetText(string.IsNullOrEmpty(link) ? param.Filename : link, TextDataFormat.Text);
+                                    data.SetText(string.IsNullOrEmpty(link) ? param.Filename : link, TextDataFormat.UnicodeText);
                                     break;
                                 default:
-                                    data.SetText(param.Filename, TextDataFormat.Text);
+                                    data.SetText(param.Filename, TextDataFormat.UnicodeText);
                                     break;
                             }
 

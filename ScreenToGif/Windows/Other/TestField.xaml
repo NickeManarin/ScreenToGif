@@ -1,20 +1,39 @@
 ﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:n="clr-namespace:ScreenToGif.Controls"
-        xmlns:u="clr-namespace:ScreenToGif.Util"
-        xmlns:s="clr-namespace:System;assembly=mscorlib"
-        xmlns:t="clr-namespace:ScreenToGif"
-        xmlns:h="clr-namespace:ScreenToGif.Controls.Shapes"
         x:Class="ScreenToGif.Windows.Other.TestField" x:Name="ThisWindow"
-        Title="Window Test" Height="350" Width="450" WindowStartupLocation="CenterScreen" Background="{DynamicResource Panel.Background}" 
-        Loaded="WindowTest_OnLoaded" LocationChanged="WindowTest_OnLocationChanged" Closed="Window_Closed" SnapsToDevicePixels="True">
+        Title="Window Test" Height="350" Width="450" WindowStartupLocation="CenterScreen" 
+        SnapsToDevicePixels="True" Loaded="WindowTest_OnLoaded" LocationChanged="WindowTest_OnLocationChanged" Closed="Window_Closed">
 
+    <!--Background="{DynamicResource Panel.Background}"-->
+    
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <!--<n:ExtendedButton Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Icon="{StaticResource Vector.Encoder.MostUsed}" Text="Example" ContentWidth="18" ContentHeight="18"/>
+        <n:ImageButton Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Content="{StaticResource Vector.Encoder.MostUsed}" Text="Example" ContentWidth="18" ContentHeight="18"/>-->
+
+        <!--<Grid Width="100" Height="100">
+            <Grid.Background>
+                <DrawingBrush>
+                    <DrawingBrush.Drawing>
+                        <DrawingGroup>
+                            <GeometryDrawing Brush="#ffa02821" Geometry="M 32.719,28.660 C 34.942,25.666 36.088,22.036 36.088,18.021 C 36.088,8.069 28.009,0.000 18.044,0.000 C 8.079,0.000 0.000,8.069 0.000,18.021 C 0.000,27.974 8.079,36.043 18.044,36.043 C 21.186,36.043 23.893,35.532 26.464,34.120 L 26.584,33.909 L 20.450,34.000 L 20.450,28.354 L 26.344,28.354 L 26.344,22.467 L 32.719,22.467 L 32.719,28.660 Z" />
+                            <GeometryDrawing Brush="#ff6da391" Geometry="M 27.016,29.030 L 21.159,29.030 L 21.159,33.419 L 27.016,33.419 L 27.016,40.000 L 32.142,40.000 L 32.142,33.419 L 38.000,33.419 L 38.000,29.030 L 32.142,29.030 L 32.142,23.180 L 27.016,23.180 L 27.016,29.030 Z" />
+                        </DrawingGroup>
+                    </DrawingBrush.Drawing>
+                </DrawingBrush>
+            </Grid.Background>
+        </Grid>-->
 
         <!--<Grid Background="White" Width="100" Height="100" Effect="{DynamicResource Shadow.Background}"/>-->
 

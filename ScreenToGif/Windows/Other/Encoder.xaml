@@ -23,7 +23,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Viewbox Grid.Column="0" x:Name="IconViewBox" Child="{StaticResource Vector.ImageStack}" Margin="5" Height="33" Width="33" Opacity="{DynamicResource Element.Opacity}"/>
+            <Border Grid.Column="0" Background="{StaticResource Vector.ImageStack}" Margin="5" Height="32" Width="32" Opacity="{DynamicResource Element.Opacity}"/>
 
             <Label Grid.Column="1" x:Name="EncoderLabel" Content="{DynamicResource S.Encoder.Title}" Margin="10,0,10,0" VerticalAlignment="Center" Padding="2" 
                    FontSize="24" FontFamily="Segoe UI Semilight" Foreground="{DynamicResource Element.Foreground.Header}">
@@ -42,11 +42,11 @@
                 </Label.Triggers>
             </Label>
 
-            <c:ImageButton Grid.Column="2" x:Name="ClearAllButton" Content="{DynamicResource Vector.Eraser}" ContentHeight="20" MinWidth="30"
-                           HorizontalContentAlignment="Center" HorizontalAlignment="Center" Style="{DynamicResource Style.Button.NoText}" 
-                           Command="{StaticResource Command.ClearAll}" IsEnabled="{Binding Path=HasItems, ElementName=EncodingListView}"
-                           ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}"
-                           ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+            <c:ExtendedButton Grid.Column="2" x:Name="ClearAllButton" Icon="{DynamicResource Vector.Eraser}" ContentWidth="18" ContentHeight="18" MinWidth="30"
+                              HorizontalContentAlignment="Center" HorizontalAlignment="Center" Style="{DynamicResource Style.Button.NoText}" 
+                              Command="{StaticResource Command.ClearAll}" IsEnabled="{Binding Path=HasItems, ElementName=EncodingListView}"
+                              ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}"
+                              ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
         </Grid>
 
         <c:StatusBand Grid.Row="1" x:Name="StatusBand"/>

@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
 using ScreenToGif.ImageUtil;
 using ScreenToGif.Util;
 using ScreenToGif.Windows.Other;
@@ -23,8 +24,7 @@ namespace ScreenToGif.Controls
     {
         #region Dependency Properties
 
-        public static readonly DependencyProperty ImageProperty = DependencyProperty.Register(nameof(Image), typeof(UIElement), typeof(EncoderListViewItem),
-            new FrameworkPropertyMetadata());
+        public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon), typeof(Brush), typeof(EncoderListViewItem));
 
         public static readonly DependencyProperty PercentageProperty = DependencyProperty.Register(nameof(Percentage), typeof(double), typeof(EncoderListViewItem),
             new FrameworkPropertyMetadata(0.0));
@@ -128,13 +128,13 @@ namespace ScreenToGif.Controls
         #region Properties
 
         /// <summary>
-        /// The Image of the ListViewItem.
+        /// The icon of the ListViewItem.
         /// </summary>
-        [Description("The Image of the ListViewItem.")]
-        public UIElement Image
+        [Description("The icon of the ListViewItem.")]
+        public Brush Icon
         {
-            get => (UIElement)GetValue(ImageProperty);
-            set => SetCurrentValue(ImageProperty, value);
+            get => (Brush)GetValue(IconProperty);
+            set => SetCurrentValue(IconProperty, value);
         }
 
         /// <summary>
@@ -541,7 +541,7 @@ namespace ScreenToGif.Controls
         {
             base.OnApplyTemplate();
 
-            var cancelButton = Template.FindName("CancelButton", this) as ImageButton;
+            var cancelButton = Template.FindName("CancelButton", this) as ExtendedButton;
 
             var copyFailedHyperlink = Template.FindName("CopyFailedHyperlink", this) as Hyperlink;
             var executedHyperlink = Template.FindName("ExecutedHyperlink", this) as Hyperlink;
@@ -549,14 +549,14 @@ namespace ScreenToGif.Controls
             var uploadHyperlink = Template.FindName("UploadHyperlink", this) as Hyperlink;
             var uploadFailedHyperlink = Template.FindName("UploadFailedHyperlink", this) as Hyperlink;
 
-            var fileButton = Template.FindName("FileButton", this) as ImageButton;
-            var folderButton = Template.FindName("FolderButton", this) as ImageButton;
-            var detailsButton = Template.FindName("DetailsButton", this) as ImageButton;
-            var copyMenu = Template.FindName("CopyMenuItem", this) as ImageMenuItem;
-            var copyImageMenu = Template.FindName("CopyImageMenuItem", this) as ImageMenuItem;
-            var copyFilenameMenu = Template.FindName("CopyFilenameMenuItem", this) as ImageMenuItem;
-            var copyFolderMenu = Template.FindName("CopyFolderMenuItem", this) as ImageMenuItem;
-            var copyLinkMenu = Template.FindName("CopyLinkMenuItem", this) as ImageMenuItem;
+            var fileButton = Template.FindName("FileButton", this) as ExtendedButton;
+            var folderButton = Template.FindName("FolderButton", this) as ExtendedButton;
+            var detailsButton = Template.FindName("DetailsButton", this) as ExtendedButton;
+            var copyMenu = Template.FindName("CopyMenuItem", this) as ExtendedMenuItem;
+            var copyImageMenu = Template.FindName("CopyImageMenuItem", this) as ExtendedMenuItem;
+            var copyFilenameMenu = Template.FindName("CopyFilenameMenuItem", this) as ExtendedMenuItem;
+            var copyFolderMenu = Template.FindName("CopyFolderMenuItem", this) as ExtendedMenuItem;
+            var copyLinkMenu = Template.FindName("CopyLinkMenuItem", this) as ExtendedMenuItem;
 
             if (cancelButton != null)
                 cancelButton.Click += (s, a) => RaiseCancelClickedEvent();

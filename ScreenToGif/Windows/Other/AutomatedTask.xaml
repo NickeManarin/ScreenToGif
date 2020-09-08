@@ -31,7 +31,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Viewbox Grid.Column="0" x:Name="MainViewbox" Margin="6" Child="{StaticResource Vector.Add}" Opacity="{DynamicResource Element.Opacity}"/>
+            <Border Grid.Column="0" x:Name="MainBorder" Margin="6" Background="{StaticResource Vector.Add}" Width="23" Opacity="{DynamicResource Element.Opacity}"/>
 
             <TextBlock Grid.Column="1" x:Name="TypeTextBlock" Text="{DynamicResource S.Add}" Margin="5" VerticalAlignment="Center" 
                        FontFamily="Segoe UI Semilight" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
@@ -46,9 +46,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <Viewbox Grid.Column="0" x:Name="IconViewBox" Margin="3,3,6,3" Stretch="Uniform" MaxHeight="24">
-                                <ContentPresenter Content="{Binding Image, Converter={StaticResource StringToStaticResource}}" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Viewbox>
+                            <Border Grid.Column="0" Background="{Binding Image, Converter={StaticResource StringToStaticResource}}" Width="14" Height="14" Margin="3,2,6,2"/>
 
                             <Separator Grid.Column="1" Width="1" Margin="0"/>
                             <TextBlock Grid.Column="2" Text="{Binding Kind}" Margin="10,0,2,0" Foreground="{DynamicResource Element.Foreground.Medium}" VerticalAlignment="Center"/>
@@ -65,9 +63,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <Viewbox Grid.Column="0" x:Name="IconViewBox" Margin="3,3,6,3" Stretch="Uniform" Height="24">
-                                <ContentPresenter Content="{Binding Image, Converter={StaticResource StringToStaticResource}}" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Viewbox>
+                            <Border Grid.Column="0" Background="{Binding Image, Converter={StaticResource StringToStaticResource}}" Width="20" Height="20" Margin="3,3,6,3"/>
 
                             <Separator Grid.Column="1" Width="1" Margin="0"/>
                             <TextBlock Grid.Column="2" Text="{Binding Kind}" Margin="10,0,2,0" Foreground="{DynamicResource Element.Foreground.Medium}" VerticalAlignment="Center"/>
@@ -98,9 +94,11 @@
 
             <n:ExtendedCheckBox Grid.Column="0" x:Name="EnabledCheckBox" Text="{DynamicResource S.Options.Tasks.Enable}" Margin="5,3" Visibility="Collapsed"
                                 IsChecked="{Binding ElementName=MainPresenter, Path=Content.DataContext.IsEnabled, FallbackValue=True}"/>
-            
-            <n:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource S.Ok}" Content="{StaticResource Vector.Ok}" ContentHeight="20" Padding="4,0" Margin="5" Command="{StaticResource Command.Ok}"/>
-            <n:ImageButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource S.Cancel}" Content="{StaticResource Vector.Cancel}" ContentHeight="20" Padding="4,0" Margin="5" Click="CancelButton_Click" IsCancel="True"/>
+
+            <n:ExtendedButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource S.Ok}" Icon="{StaticResource Vector.Ok}" ContentHeight="18" ContentWidth="18" 
+                              Padding="4,0" Margin="5" Command="{StaticResource Command.Ok}"/>
+            <n:ExtendedButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource S.Cancel}" Icon="{StaticResource Vector.Cancel}" ContentHeight="18" ContentWidth="18" 
+                              Padding="4,0" Margin="5" Click="CancelButton_Click" IsCancel="True"/>
         </Grid>
     </Grid>
 </Window>

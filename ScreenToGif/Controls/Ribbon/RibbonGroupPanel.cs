@@ -7,6 +7,7 @@ namespace ScreenToGif.Controls.Ribbon
     {
         protected override Size ArrangeOverride(Size finalSize)
         {
+            //?
 
             return base.ArrangeOverride(finalSize);
         }

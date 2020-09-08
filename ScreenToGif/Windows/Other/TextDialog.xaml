@@ -15,11 +15,11 @@
 
         <Grid Grid.Row="0" Background="{DynamicResource Panel.Background.Level4}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="40"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Viewbox x:Name="IconViewbox" Margin="5" Child="{StaticResource Vector.Text}" Opacity="{DynamicResource Element.Opacity}"/>
+            <Border Margin="6" Background="{StaticResource Vector.Text}" Opacity="{DynamicResource Element.Opacity}"/>
 
             <Label x:Name="InstructionLabel" Content="{DynamicResource S.Encoder.Command.Header}" Margin="3" Grid.Column="1" VerticalContentAlignment="Center" 
                    FontFamily="Segoe UI Semilight" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
@@ -34,8 +34,8 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <n:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource S.Ok}" Content="{StaticResource Vector.Ok}" 
-                           ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="OkButton_Click"/>
+            <n:ExtendedButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource S.Ok}" Icon="{StaticResource Vector.Ok}" 
+                              ContentWidth="18" ContentHeight="18" Padding="5,0" MinWidth="90" Margin="5" Click="OkButton_Click"/>
         </Grid>
     </Grid>
 </Window>

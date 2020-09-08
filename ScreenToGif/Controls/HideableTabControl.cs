@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 using ScreenToGif.Util;
 
@@ -17,10 +18,10 @@ namespace ScreenToGif.Controls
         #region Variables
 
         private Button _hideButton;
-        private ImageMenuItem _extrasMenuItem;
+        private ExtendedMenuItem _extrasMenuItem;
         private TabPanel _tabPanel;
         private Border _border;
-        private ImageToggleButton _notificationButton;
+        private ExtendedToggleButton _notificationButton;
         private NotificationBox _notificationBox;
 
         #endregion
@@ -77,9 +78,9 @@ namespace ScreenToGif.Controls
             _tabPanel = Template.FindName("TabPanel", this) as TabPanel;
             _border = Template.FindName("ContentBorder", this) as Border;
 
-            _notificationButton = Template.FindName("NotificationsButton", this) as ImageToggleButton;
+            _notificationButton = Template.FindName("NotificationsButton", this) as ExtendedToggleButton;
             _notificationBox = Template.FindName("NotificationBox", this) as NotificationBox;
-            _extrasMenuItem = Template.FindName("ExtrasMenuItem", this) as ImageMenuItem;
+            _extrasMenuItem = Template.FindName("ExtrasMenuItem", this) as ExtendedMenuItem;
 
             _hideButton = Template.FindName("HideGridButton", this) as Button;
 
@@ -101,15 +102,6 @@ namespace ScreenToGif.Controls
 
             UpdateVisual();
             AnimateOrNot();
-        }
-
-        private void NotificationButton_Checked(object sender, RoutedEventArgs e)
-        {
-            if (!IsLoaded)
-                return;
-
-            if (_notificationButton.FindResource("NotificationStoryboard") is Storyboard story)
-                story.Stop();
         }
 
         #region Events
@@ -211,6 +203,15 @@ namespace ScreenToGif.Controls
                 EasingFunction = new PowerEase { Power = 8 }
             };
             _tabPanel.BeginAnimation(MarginProperty, marginAnimation);
+        }
+
+        private void NotificationButton_Checked(object sender, RoutedEventArgs e)
+        {
+            if (!IsLoaded)
+                return;
+
+            if (_notificationButton.FindResource("NotificationStoryboard") is Storyboard story)
+                story.Stop();
         }
 
         #endregion
@@ -330,11 +331,11 @@ namespace ScreenToGif.Controls
             var anyCompleted = EncodingManager.Encodings.Any(s => s.Status == Status.Completed);
             var anyFaulty = EncodingManager.Encodings.Any(s => s.Status == Status.Error);
 
-            _notificationButton.Content = anyProcessing ? FindResource("Vector.Progress") as Canvas :
-                anyCompleted ? FindResource("Vector.Ok.Round") as Canvas :
-                anyFaulty ? FindResource("Vector.Cancel.Round") as Canvas : _notificationButton.Content;
+            _notificationButton.Icon = anyProcessing ? FindResource("Vector.Progress") as Brush :
+                anyCompleted ? FindResource("Vector.Ok.Round") as Brush :
+                anyFaulty ? FindResource("Vector.Cancel.Round") as Brush : _notificationButton.Icon;
             _notificationButton.IsImportant = anyProcessing;
-            _notificationButton.SetResourceReference(ImageToggleButton.TextProperty, anyProcessing ? "S.Encoder.Encoding" : anyCompleted ? "S.Encoder.Completed" : anyFaulty? "S.Encoder.Error" : "S.Notifications");
+            _notificationButton.SetResourceReference(ExtendedToggleButton.TextProperty, anyProcessing ? "S.Encoder.Encoding" : anyCompleted ? "S.Encoder.Completed" : anyFaulty? "S.Encoder.Error" : "S.Notifications");
 
             if (anyProcessing || anyCompleted || anyFaulty)
                 return;
@@ -342,9 +343,9 @@ namespace ScreenToGif.Controls
             //Animate the button for notifications, when there are no encodings.
             var most = NotificationManager.Notifications.Select(s => s.Kind).OrderByDescending(a => (int)a).FirstOrDefault();
 
-            _notificationButton.Content = FindResource(StatusBand.KindToString(most)) as Canvas;
+            _notificationButton.Icon = FindResource(StatusBand.KindToString(most)) as Brush;
             _notificationButton.IsImportant = most != StatusType.None;
-            _notificationButton.SetResourceReference(ImageToggleButton.TextProperty, "S.Notifications");
+            _notificationButton.SetResourceReference(ExtendedToggleButton.TextProperty, "S.Notifications");
 
             if(story != null)
             {

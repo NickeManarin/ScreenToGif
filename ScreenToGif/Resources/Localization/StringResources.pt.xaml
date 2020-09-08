@@ -31,6 +31,7 @@
     <s:String x:Key="S.Margin">Margem:</s:String>
     <s:String x:Key="S.Padding">Preenchimento:</s:String>
     <s:String x:Key="S.MinHeight">Altura mínima:</s:String>
+    <s:String x:Key="S.AndOr">e/ou</s:String>
     
     <!--Warning messages-->
     <s:String x:Key="S.Crash">Oh não, o aplicativo parou de funcionar :(</s:String>
@@ -44,6 +45,9 @@
     <s:String x:Key="S.Exiting.Title">Fechando ScreenToGif</s:String>
     <s:String x:Key="S.Exiting.Instruction">Você tem certeza que deseja fechar?</s:String>
     <s:String x:Key="S.Exiting.Message">Todas as janela do ScreenToGif serão fechadas e o ícone da área de notificação será removido.</s:String>
+    
+    <!--Keys-->
+    <s:String x:Key="S.Keys.Space">Espaço</s:String>  
     
     <!--Tray icon-->
     <s:String x:Key="S.NewRecording">Nova gravação de tela</s:String>
@@ -150,6 +154,7 @@
     <s:String x:Key="S.Updater.Download">Download</s:String>
     <s:String x:Key="S.Updater.Install">Instalar</s:String>
     <s:String x:Key="S.Updater.Downloading">Baixando...</s:String>
+    <s:String x:Key="S.Updater.InstallManually">Instalar manualmente</s:String>
     <s:String x:Key="S.Updater.Warning.Show">Não foi possível exibir os detalhes da atualização.</s:String>
     <s:String x:Key="S.Updater.Warning.Download">Não foi possível fazer o download da atualização.</s:String>
     
@@ -225,7 +230,9 @@
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(Traduções atualizadas serão baixadas e instaladas automaticamente)</s:String>
     <s:String x:Key="S.Options.App.General.CheckForUpdates">Buscar atualizações ao iniciar o aplicativo.</s:String>
     <s:String x:Key="S.Options.App.General.UpdateOnClose">Baixar e instalar atualizações automaticamente ao fechar o aplicativo.</s:String>
-    <s:String x:Key="S.Options.App.General.ForceUpdateAsAdmin">Force a atualização para executar com privilégios de adiministrador.</s:String>
+    <s:String x:Key="S.Options.App.General.PortableUpdate">Force o download da versão portátil.</s:String>
+    <s:String x:Key="S.Options.App.General.PortableUpdate.Info">(Requirer a instalação manual, descompactando e trocando o executável)</s:String>
+    <s:String x:Key="S.Options.App.General.ForceUpdateAsAdmin">Force a atualização para executar com privilégios de administrador.</s:String>
     <s:String x:Key="S.Options.App.General.PromptToInstall">Avisar-me antes do início da instalação.</s:String>
 
     <!--Options • Recorder-->
@@ -236,6 +243,8 @@
     <s:String x:Key="S.Options.Recorder.Frequency">Frequencia de captura</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Manual">Manual</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Manual.Info">Cada quadro será capturado manualmente por você, ao pressionar o botão de captura ou atalho de teclado equivalente.</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Interaction">Interação de usuário</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Interaction.Info">Quadros serão capturados toda vez que você clicar ou digitar algo.</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Second">Por segundo</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Second.Info">Quadros serão capturados em base de 'por segundo',&#10;considerando o denominador de taxa de captura definido na tela do gravador.</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Minute">Por minuto</s:String>
@@ -262,24 +271,48 @@
     <s:String x:Key="S.Options.Recorder.Compression.NoCompression.Info">(Nenhuma compressão será feita na captura de quadros)</s:String>
     <s:String x:Key="S.Options.Recorder.CacheSize">Tamanho do cache:</s:String>
     <s:String x:Key="S.Options.Recorder.CacheSize.Info">(Em MB. Após chegar nesse tamanho, os dados serão gravados em disco)</s:String>
+    <s:String x:Key="S.Options.Recorder.PreventBlackFrames">Previnir a captura de quadros todos em preto.</s:String>
+    <s:String x:Key="S.Options.Recorder.PreventBlackFrames.Info">(Previne o BitBlt com cache de memória de resultar errôneamente em quadros com todos os pixels em preto)</s:String>
     <s:String x:Key="S.Options.Recorder.RecordMouse">Mostre o cursor na gravação.</s:String>
     <s:String x:Key="S.Options.Recorder.SelectCursorColor">Selecione a cor do Cursor</s:String>
-    <s:String x:Key="S.Options.Recorder.PreStart">Use uma contagem regressiva.</s:String>
-    <s:String x:Key="S.Options.Recorder.PreStart.Info">(Em segundos, aguarda antes de iniciar a captura)</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate">Taxa de quadros por segundo fixa.</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Atraso constante que não muda com o atraso da gravação)</s:String>
+    <s:String x:Key="S.Options.Recorder.CaptureChanges">Capture apenas quando algo mudar na tela.</s:String>
+    <s:String x:Key="S.Options.Recorder.CaptureChanges.Info">(Um quadro será capturado somente quando alguma coisa mudar dentro da região de captura)</s:String>
     <s:String x:Key="S.Options.Recorder.RemoteImprovement">Melhora a performance captura em uma conexão remota.</s:String>
     <s:String x:Key="S.Options.Recorder.RemoteImprovement.Info">(Disabilita a captura de janelas em camadas)</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording">Ativar gravação assíncrona.</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(Isso ajuda reduzir os travamentos da interface durante a gravação)</s:String>
+        
+    <s:String x:Key="S.Options.Recorder.Guidelines">Guias</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds">Regra de terços</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds.Info">Clique para alternar a exibição&#10;da guia de regra de terços.</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.Crosshair">Mira</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.Crosshair.Info">Clique para alternar a exibição&#10;da guia de mira.</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.Info">As guias serão somente exibidas enquanto o gravador estiver pausado ou parado.</s:String>
+    
     <s:String x:Key="S.Options.Recorder.HideTitleBar">Esconder barra de título (modo reduzido).</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier">Habilitar a lupa.</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier.Info">(A lupa garante um zoom durante a seleção da área de gravação)</s:String>
+    <s:String x:Key="S.Options.Recorder.AnimateBorder">Animar a borda da região de captura durante a seleção.</s:String>
+    <s:String x:Key="S.Options.Recorder.AnimateBorder.Info">(Animar usando o estilo de 'formigas marchantes')</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionPanning">Habilitar a movimentação da seleção.</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionPanning.Info">(Exibe um adorno perto do canto da seleção, permitindo o movimento da área de captura)</s:String>
+    <s:String x:Key="S.Options.Recorder.Compact">Modo compacto.</s:String>
+    <s:String x:Key="S.Options.Recorder.Compact.Info">(Exibe uma versão menor do painel de controles de gravação)</s:String>    
+    <s:String x:Key="S.Options.Recorder.DisplayDiscard">Exibe o botão de descartar também durante a gravação.</s:String>
+    <s:String x:Key="S.Options.Recorder.DisplayDiscard.Info">(Normalmente, o botão só fica visível durante a pausa)</s:String>
+    
+    <s:String x:Key="S.Options.Recorder.RememberSize">Lembre-se do tamanho anterior da área de gravação.</s:String>
+    <s:String x:Key="S.Options.Recorder.RememberPosition">Lembrar da localização anterior da área de gravação.</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart">Use uma contagem regressiva.</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart.Info">(Em segundos, aguarda antes de iniciar a captura)</s:String>    
     <s:String x:Key="S.Options.Recorder.CursorFollowing">Habilitar gravação via cursor.</s:String>
     <s:String x:Key="S.Options.Recorder.CursorFollowing.Info">(A área de gravação vai se posicionar conforme a posição do cursor)</s:String>
     <s:String x:Key="S.Options.Recorder.FollowMargin.Info">(Margem onde a área de gravação começará a se ajustar)</s:String>
     <s:String x:Key="S.Options.Recorder.FollowMarginInvisible.Info">(Margem adicional onde a interface começará a ser escondida para ser movida)</s:String>
-
+    <s:String x:Key="S.Options.Recorder.NotifyRecordingDiscard">Me pergunte antes de descartar a gravação.</s:String>
+    
     <!--Options • Editor-->
     <s:String x:Key="S.Options.Editor.Previewer">Plano de fundo do pré-visualizador</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize">Tamanho da grade:</s:String>
@@ -533,9 +566,11 @@
     <s:String x:Key="S.Recorder.Snap">Foto</s:String>
     <s:String x:Key="S.Recorder.Height">Altura</s:String>
     <s:String x:Key="S.Recorder.Width">Largura</s:String>
-
+    <s:String x:Key="S.Recorder.CursorFollowing">O seguimento do cursor está ativado.</s:String>
+    
     <s:String x:Key="S.Recorder.SwitchFrequency">Clique para circular entre as frequências de captura.</s:String>
     <s:String x:Key="S.Recorder.Manual.Short">manual</s:String>
+    <s:String x:Key="S.Recorder.Interaction.Short">interações</s:String>
     <s:String x:Key="S.Recorder.Fps">Quantidade máxima de quadros por segundo</s:String>
     <s:String x:Key="S.Recorder.Fps.Short">qps</s:String>
     <s:String x:Key="S.Recorder.Fps.Range">Pode variar de 1 até 60 qps, com valores mais altos significando que mais quadros serão capturados.&#10;Cada incremento representa 16 milisegundos de diferença.</s:String>
@@ -550,6 +585,7 @@
     <s:String x:Key="S.Recorder.PreStart">Contagem Regressiva</s:String>
     <s:String x:Key="S.Recorder.Paused">ScreenToGif (Pausado)</s:String>
     <s:String x:Key="S.Recorder.Stopping">Parando...</s:String>
+    <s:String x:Key="S.Recorder.PreStarting">Pré-iniciando...</s:String>
     
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible">Não foi possível capturar a tela</s:String>
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">Não foi possível capturar a tela. O método de captura não retornou quadros após 5 tentativas.</s:String>
@@ -559,8 +595,18 @@
     
     <!--New recorder-->
     <s:String x:Key="S.Recorder.Area">Área</s:String>
+    <s:String x:Key="S.Recorder.Area.Select">Selecione uma área</s:String>
     <s:String x:Key="S.Recorder.Window">Janela</s:String>
+    <s:String x:Key="S.Recorder.Window.Select">Selecione uma janela</s:String>
     <s:String x:Key="S.Recorder.Screen">Tela</s:String>
+    <s:String x:Key="S.Recorder.Screen.Select">Selecione uma tela</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Internal">Tela interna</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Generic">Tela genérica</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Info1">Adaptador gráfico: {0}</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Info2">Resolução: {0} x {1}</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Info3">Resolução nativa: {0} x {1}</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Info4">DPI: {0} ({1:0.##}%)</s:String>
+    <s:String x:Key="S.Recorder.Move">Arraste para mover&#10;a seleção.</s:String>
     <s:String x:Key="S.Recorder.Accept">Aceitar</s:String>
     <s:String x:Key="S.Recorder.Retry">Limpar</s:String>
     <s:String x:Key="S.Recorder.Retry.Shortcut">Botão direito do mouse</s:String>
@@ -570,6 +616,12 @@
     <s:String x:Key="S.Recorder.SelectWindow">Clique aqui para selecionar essa janela</s:String>
     <s:String x:Key="S.Recorder.SelectScreen">Clique aqui para selecionar essa tela</s:String>
     <s:String x:Key="S.Recorder.EscToCancel">Pressione Esc para cancelar</s:String>
+    <s:String x:Key="S.Recorder.Splash.Title">Pressione {0} para parar a grvação</s:String>
+    <s:String x:Key="S.Recorder.Splash.Subtitle">A janela do gravador será minimizada,&#10;restaure ou pressione {0} para pausar a captura</s:String>
+    
+    <s:String x:Key="S.Recorder.Discard.Title">Descartar gravação</s:String>
+    <s:String x:Key="S.Recorder.Discard.Instruction">Você tem certeza que deseja descartar a gravação?</s:String>
+    <s:String x:Key="S.Recorder.Discard.Message">Esta ação irá descartar a gravação, removendo todos os quadros.&#x0d;Você não pode desfazer esta operação.</s:String>
     
     <!--Webcam recorder-->
     <s:String x:Key="S.Webcam.Title">ScreenToGif - Gravador de Câmera</s:String>
@@ -951,7 +1003,8 @@
     <s:String x:Key="S.Editor.ChangingDelay">Trocando o atraso</s:String>
     <s:String x:Key="S.Editor.ApplyingTransition">Aplicando efeito de transição</s:String>
     <s:String x:Key="S.Editor.PreparingSaving">Preparando para salvar</s:String>
-
+    <s:String x:Key="S.Editor.CancelDiscard">Cancelar carregamento e descartar projeto.</s:String>
+    
     <!--Editor • Frame list-->
     <s:String x:Key="S.Editor.List.Frame">Quadro:</s:String>
     <s:String x:Key="S.Editor.List.OpenImage">Abrir Imagem</s:String>
@@ -1140,6 +1193,7 @@
     <s:String x:Key="S.Shapes.Shapes">Formas Geométricas</s:String>
     <s:String x:Key="S.Shapes.Shapes.Radius">Raio:</s:String>
     <s:String x:Key="S.Shapes.Shapes.Dashes">Traços:</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Dashes.Info">Controla o tamanho dos traços e das lacunas.&#10;Você pode definir vários tamanhos para criar um estilo de traço elaborado.&#10;O padrão é "1 0" ou vazio, o que significa um traço sem lacunas.</s:String>
     <s:String x:Key="S.Shapes.Shapes.ResetRotatio">Desfazer rotação</s:String>
     <s:String x:Key="S.Shapes.Shapes.Remove">Remover</s:String>
     <s:String x:Key="S.Shapes.Fill">Preenchimento</s:String>
@@ -1169,10 +1223,20 @@
     <s:String x:Key="S.Shadow.Depth">Profundidade:</s:String>
     
     <!--Editor • Obfuscate-->
+    <s:String x:Key="S.Obfuscate.Type.Pixelate">Pixelar</s:String>
+    <s:String x:Key="S.Obfuscate.Type.Blur">Borrar</s:String>
+    <s:String x:Key="S.Obfuscate.Type.Darken">Escurecer</s:String>
+    <s:String x:Key="S.Obfuscate.Type.Lighten">Iluminar</s:String>
     <s:String x:Key="S.Obfuscate.Options">Opções de ofuscação</s:String>
     <s:String x:Key="S.Obfuscate.PixelSize">Tamanho do pixel:</s:String>
+    <s:String x:Key="S.Obfuscate.BlurLevel">Nível do borrão:</s:String>
+    <s:String x:Key="S.Obfuscate.DarkenLevel">Nível de escurecimento:</s:String>
+    <s:String x:Key="S.Obfuscate.LightenLevel">Nível de iluminação:</s:String>
     <s:String x:Key="S.Obfuscate.UseAverage">Calcular a cor média para cada bloco de pixels.</s:String>
+    <s:String x:Key="S.Obfuscate.Invert">Aplique a obfuscação no inverso da seleção.</s:String>
+    <s:String x:Key="S.Obfuscate.Smoothness">Suavidade</s:String>
     <s:String x:Key="S.Obfuscate.Info">Use a ferramenta de seleção para selecionar uma parte da imagem que deve ser pixelada.</s:String>
+    <s:String x:Key="S.Obfuscate.Info2">Use a ferramenta de seleção para selecionar uma parte da imagem que não deve ser pixelada.</s:String>
     <s:String x:Key="S.Obfuscate.Warning">Você não selecionou alguma parte da imagem. Selecione uma parte da imagem para aplicar o efeito de pixelamento.</s:String>
     
     <!--Editor • Progress-->
@@ -1341,7 +1405,7 @@
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">Arquivo</s:String>
     <s:String x:Key="S.SaveAs.File.Location">Pasta de destino.</s:String>
-    <s:String x:Key="S.SaveAs.File.Choose">Escolha a pasta.</s:String>
+    <s:String x:Key="S.SaveAs.File.Choose">Escolha a pasta.&#x0d;Pressione Shift e clique para selecionar&#x0d;o nome do arquivo também.</s:String>
     <s:String x:Key="S.SaveAs.File.Format">Formato do arquivo.</s:String>
     <s:String x:Key="S.SaveAs.File.Name">Nome do arquivo.</s:String>
     <s:String x:Key="S.SaveAs.File.Animation">Animação</s:String>

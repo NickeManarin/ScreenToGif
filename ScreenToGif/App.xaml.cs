@@ -98,14 +98,16 @@ namespace ScreenToGif
                             {
                                 if (process != null)
                                 {
-                                    var handles = Native.GetWindowHandlesFromProcess(process);
+                                    var handles = Util.Native.GetWindowHandlesFromProcess(process);
 
                                     //Show the window before setting focus.
-                                    Native.ShowWindow(handles.Count > 0 ? handles[0] : process.Handle, Native.ShowWindowEnum.Show);
+                                    Util.Native.ShowWindow(handles.Count > 0 ? handles[0] : process.Handle, Util.Native.ShowWindowEnum.Show);
 
                                     //Set user the focus to the window.
-                                    Native.SetForegroundWindow(handles.Count > 0 ? handles[0] : process.Handle);
+                                    Util.Native.SetForegroundWindow(handles.Count > 0 ? handles[0] : process.Handle);
                                     warning = false;
+
+                                    InterProcess.SendMessage(e.Args);
                                 }
                             }
 
@@ -116,6 +118,9 @@ namespace ScreenToGif
                             Environment.Exit(0);
                             return;
                         }
+
+                        //If this is the first instance, register the inter process channel to listen for other instances.
+                        InterProcess.RegisterServer();
                     }
                 }
                 catch (Exception ex)
@@ -217,10 +222,9 @@ namespace ScreenToGif
 
             #endregion
 
-            //var select = new SelectFolderDialog(); select.ShowDialog(); return;
-            //var select = new TestField(); select.ShowDialog(); return;
-            //var select = new Encoder(); select.ShowDialog(); return;
-            //var select = new EditorEx(); select.ShowDialog(); return;
+            //var test = new TestField(); test.ShowDialog(); return;
+            //var test = new Windows.EditorEx(); test.ShowDialog(); return;
+            //var test = new Windows.NewWebcam(); test.ShowDialog(); return;
 
             #region Tasks
 
@@ -412,12 +416,12 @@ namespace ScreenToGif
                 { if (!Global.IgnoreHotKeys && MainViewModel.ExitApplication.CanExecute(null)) MainViewModel.ExitApplication.Execute(null); }, true);
 
             //Updates the input gesture text of each command.
-            MainViewModel.RecorderGesture = screen ? Native.GetSelectKeyText(UserSettings.All.RecorderShortcut, UserSettings.All.RecorderModifiers, true, true) : "";
-            MainViewModel.WebcamRecorderGesture = webcam ? Native.GetSelectKeyText(UserSettings.All.WebcamRecorderShortcut, UserSettings.All.WebcamRecorderModifiers, true, true) : "";
-            MainViewModel.BoardRecorderGesture = board ? Native.GetSelectKeyText(UserSettings.All.BoardRecorderShortcut, UserSettings.All.BoardRecorderModifiers, true, true) : "";
-            MainViewModel.EditorGesture = editor ? Native.GetSelectKeyText(UserSettings.All.EditorShortcut, UserSettings.All.EditorModifiers, true, true) : "";
-            MainViewModel.OptionsGesture = options ? Native.GetSelectKeyText(UserSettings.All.OptionsShortcut, UserSettings.All.OptionsModifiers, true, true) : "";
-            MainViewModel.ExitGesture = exit ? Native.GetSelectKeyText(UserSettings.All.ExitShortcut, UserSettings.All.ExitModifiers, true, true) : "";
+            MainViewModel.RecorderGesture = screen ? Util.Native.GetSelectKeyText(UserSettings.All.RecorderShortcut, UserSettings.All.RecorderModifiers, true, true) : "";
+            MainViewModel.WebcamRecorderGesture = webcam ? Util.Native.GetSelectKeyText(UserSettings.All.WebcamRecorderShortcut, UserSettings.All.WebcamRecorderModifiers, true, true) : "";
+            MainViewModel.BoardRecorderGesture = board ? Util.Native.GetSelectKeyText(UserSettings.All.BoardRecorderShortcut, UserSettings.All.BoardRecorderModifiers, true, true) : "";
+            MainViewModel.EditorGesture = editor ? Util.Native.GetSelectKeyText(UserSettings.All.EditorShortcut, UserSettings.All.EditorModifiers, true, true) : "";
+            MainViewModel.OptionsGesture = options ? Util.Native.GetSelectKeyText(UserSettings.All.OptionsShortcut, UserSettings.All.OptionsModifiers, true, true) : "";
+            MainViewModel.ExitGesture = exit ? Util.Native.GetSelectKeyText(UserSettings.All.ExitShortcut, UserSettings.All.ExitModifiers, true, true) : "";
         }
 
         internal void ShowException(Exception exception)

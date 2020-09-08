@@ -583,39 +583,6 @@ namespace ScreenToGif.ImageUtil.Gif.Encoder
             ColorTableSize = ColorTable.Count > 1 ? (int)Math.Log(ColorTable.Count - 1, 2) : 0;
         }
 
-        //private byte[] IndexPixels(List<Color> palette)
-        //{
-        //    return NonIndexedPixels.AsParallel().Select((x, i) => new { Index = i, Indexed = (byte)ColorExtensions.ClosestColorRgb(palette, x) }).Select(x => x.Indexed).ToArray();
-
-        //    #region Old code
-
-        //    //var pixels = new byte[NonIndexedPixels.Count];
-        //    //var pixelCount = 0;
-        //    //foreach (var color in NonIndexedPixels)
-        //    //{
-        //    //    var index = palette.IndexOf(color);
-
-        //    //    if (index == -1)
-        //    //    {
-        //    //        //Search for nearby colors.
-        //    //        index = ColorExtensions.ClosestColorRgb(palette, color);
-        //    //        //index = ColorExtensions.ClosestColorHue(palette, color);
-        //    //        //index = ColorExtensions.ClosestColorRsb(palette, color);
-
-        //    //        //Add colors to a dictionary, if available, no need to search.
-        //    //        //TODO: Make this available for choice.
-        //    //    }
-
-        //    //    //Map the pixel to a color in the Color Table.
-        //    //    pixels[pixelCount] = (byte)index;
-        //    //    pixelCount++;
-        //    //}
-
-        //    //return pixels;
-
-        //    #endregion
-        //}
-
         /// <summary>
         /// Calculates the maximum number of colors for the 
         /// specified Logical Screen Description value.

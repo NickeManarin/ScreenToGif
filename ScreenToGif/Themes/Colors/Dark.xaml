@@ -16,6 +16,9 @@
     <DropShadowEffect x:Key="Shadow.Border.Large" ShadowDepth="0" Color="#FF545454" Opacity=".4" BlurRadius="5" RenderingBias="Quality"/>
     <DropShadowEffect x:Key="Shadow.Border.Dark" ShadowDepth="0" Color="#FF545454" Opacity=".5" BlurRadius="3" RenderingBias="Quality"/>
 
+    <!--Gradients-->
+    <Color x:Key="Gradient.Border.Light">#4F444C55</Color>
+    
     <!--Colors-->
     <SolidColorBrush x:Key="Panel.Background" Color="#FF202020"/>
     <SolidColorBrush x:Key="Panel.Background.Level2" Color="#FF262626"/>
@@ -38,7 +41,7 @@
     <SolidColorBrush x:Key="Element.Foreground.Gray192" Color="#FF4F4F4F"/>
     <SolidColorBrush x:Key="Element.Foreground.Gray208" Color="#FF3F3F3F"/>
     <SolidColorBrush x:Key="Element.Foreground.Header" Color="#FF566C99"/>
-    <SolidColorBrush x:Key="Element.Foreground.Detail" Color="#FF1D7134"/>
+    <SolidColorBrush x:Key="Element.Foreground.Detail" Color="#FF279645"/>
     <SolidColorBrush x:Key="Element.Foreground.Hint" Color="#FF007000"/>
 
     <SolidColorBrush x:Key="Element.Border" Color="#FF545454"/>

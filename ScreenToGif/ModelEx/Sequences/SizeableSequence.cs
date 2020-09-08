@@ -1,5 +1,8 @@
 ﻿namespace ScreenToGif.ModelEx.Sequences
 {
+    /// <summary>
+    /// Primitive sequence object which has a defined sizing information.
+    /// </summary>
     public class SizeableSequence : Sequence
     {
         public double Left { get; set; }

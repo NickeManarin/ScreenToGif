@@ -57,15 +57,15 @@
 
         <n:LabelSeparator Grid.Row="2" Text="{DynamicResource S.Preview}"/>
         <Grid Grid.Row="3" x:Name="PreviewGrid" Margin="10,5" Background="{Binding BackgroundColor, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ColorToBrush}}">
-            <Viewbox x:Name="PreviewViewBox" Child="{StaticResource Vector.Image}" Height="50" Width="50" Stretch="Uniform">
-                <Viewbox.Effect>
+            <Border x:Name="PreviewViewBox" Background="{StaticResource Vector.Image}" Height="50" Width="50">
+                <Border.Effect>
                     <DropShadowEffect Color="{Binding Color, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
                                       BlurRadius="{Binding BlurRadius, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                       Direction="{Binding Direction, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                       Opacity="{Binding Opacity, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                       ShadowDepth="{Binding Depth, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
-                </Viewbox.Effect>
-            </Viewbox>
+                </Border.Effect>
+            </Border>
         </Grid>
     </Grid>
 </UserControl>

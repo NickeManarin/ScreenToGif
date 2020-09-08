@@ -6,8 +6,8 @@
                xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
                x:Name="BoardLightWindow" Title="{DynamicResource S.Board.Title}" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterScreen" 
                Width="{Binding BoardWidth, Source={x:Static u:UserSettings.All}, Mode=TwoWay}" Height="{Binding BoardHeight, Source={x:Static u:UserSettings.All},  Mode=TwoWay}"
-               IsThin="{Binding RecorderThinMode, Source={x:Static u:UserSettings.All}}" IsFullScreen="False" Icon="../Resources/Logo.ico" 
-               Child="{StaticResource Vector.Back}" AllowsTransparency="True" WindowStyle="None" SnapsToDevicePixels="True" UseLayoutRounding="True" 
+               IsThin="{Binding RecorderThinMode, Source={x:Static u:UserSettings.All}}" Icon="../Resources/Logo.ico" 
+               AllowsTransparency="True" WindowStyle="None" SnapsToDevicePixels="True" UseLayoutRounding="True" 
                SizeChanged="LightWindow_SizeChanged" Loaded="Board_OnLoaded" KeyDown="Board_KeyDown" 
                KeyUp="Board_KeyUp" Deactivated="Board_Deactivated" Closing="LightWindow_Closing">
 
@@ -84,18 +84,18 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="PenModeRadioButton" Content="{StaticResource Vector.Pen}" IsChecked="True"
-                                    Cursor="Hand" ContentWidth="20" Padding="0,5" Style="{StaticResource Style.ImageRadioButton.NoText}"
-                                    ToolTip="{DynamicResource S.FreeDrawing.Pen}" ToolTipService.Placement="Top"/>
-                <n:ImageRadioButton Grid.Column="1" x:Name="EraserModeRadioButton" Content="{StaticResource Vector.Eraser}" 
-                                    Cursor="Hand" ContentWidth="20" Padding="0,5" Style="{StaticResource Style.ImageRadioButton.NoText}"
-                                    ToolTip="{DynamicResource S.FreeDrawing.Eraser}" ToolTipService.Placement="Top"/>
-                <n:ImageRadioButton Grid.Column="2" x:Name="SelectorModeRadioButton" Content="{StaticResource Vector.Select}" 
-                                    Cursor="Hand" ContentWidth="20" Padding="0,5" Style="{StaticResource Style.ImageRadioButton.NoText}"
-                                    ToolTip="{DynamicResource S.FreeDrawing.Select}" ToolTipService.Placement="Top"/>
-                <n:ImageRadioButton Grid.Column="3" x:Name="EraserStrokeModeRadioButton" Content="{StaticResource Vector.StrokeEraser}" 
-                                    Cursor="Hand" ContentWidth="20" Padding="0,5" Style="{StaticResource Style.ImageRadioButton.NoText}"
-                                    ToolTip="{DynamicResource S.FreeDrawing.StrokeEraser}" ToolTipService.Placement="Top"/>
+                <n:ExtendedRadioButton Grid.Row="0" Grid.Column="0" x:Name="PenModeRadioButton" Icon="{StaticResource Vector.Pen}" IsChecked="True"
+                                       Cursor="Hand" ContentWidth="20" Padding="0,5" Style="{StaticResource Style.ImageRadioButton.NoText}"
+                                       ToolTip="{DynamicResource S.FreeDrawing.Pen}" ToolTipService.Placement="Top"/>
+                <n:ExtendedRadioButton Grid.Column="1" x:Name="EraserModeRadioButton" Icon="{StaticResource Vector.Eraser}" 
+                                       Cursor="Hand" ContentWidth="20" Padding="0,5" Style="{StaticResource Style.ImageRadioButton.NoText}"
+                                       ToolTip="{DynamicResource S.FreeDrawing.Eraser}" ToolTipService.Placement="Top"/>
+                <n:ExtendedRadioButton Grid.Column="2" x:Name="SelectorModeRadioButton" Icon="{StaticResource Vector.Select}" 
+                                       Cursor="Hand" ContentWidth="20" Padding="0,5" Style="{StaticResource Style.ImageRadioButton.NoText}"
+                                       ToolTip="{DynamicResource S.FreeDrawing.Select}" ToolTipService.Placement="Top"/>
+                <n:ExtendedRadioButton Grid.Column="3" x:Name="EraserStrokeModeRadioButton" Icon="{StaticResource Vector.StrokeEraser}" 
+                                       Cursor="Hand" ContentWidth="20" Padding="0,5" Style="{StaticResource Style.ImageRadioButton.NoText}"
+                                       ToolTip="{DynamicResource S.FreeDrawing.StrokeEraser}" ToolTipService.Placement="Top"/>
             </Grid>
 
             <Grid Grid.Column="2" Visibility="{Binding IsChecked, ElementName=PenModeRadioButton, Converter={StaticResource Bool2Visibility}}">
@@ -123,15 +123,13 @@
                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=BoardStylusWidth, Mode=TwoWay}"
                                  ToolTip="{DynamicResource S.Recorder.Width}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                <n:ImageRadioButton Grid.Column="4" x:Name="EllipseRadioButton" Content="{StaticResource Vector.Ellipse}" 
-                                    Cursor="Hand" ContentWidth="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
-                                    IsChecked="{Binding BoardStylusTip, Source={x:Static u:UserSettings.All}, 
-                                    Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
+                <n:ExtendedRadioButton Grid.Column="4" x:Name="EllipseRadioButton" Icon="{StaticResource Vector.Ellipse}" 
+                                       Cursor="Hand" ContentWidth="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
+                                       IsChecked="{Binding BoardStylusTip, Source={x:Static u:UserSettings.All}, Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
 
-                <n:ImageRadioButton Grid.Column="5" x:Name="RectangleRadioButton" Content="{StaticResource Vector.Rectangle}" 
-                                    Cursor="Hand" ContentWidth="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
-                                    IsChecked="{Binding BoardStylusTip, Source={x:Static u:UserSettings.All}, 
-                                    Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
+                <n:ExtendedRadioButton Grid.Column="5" x:Name="RectangleRadioButton" Icon="{StaticResource Vector.Rectangle}" 
+                                       Cursor="Hand" ContentWidth="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
+                                       IsChecked="{Binding BoardStylusTip, Source={x:Static u:UserSettings.All}, Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
 
                 <Grid Grid.Column="6">
                     <Grid.RowDefinitions>
@@ -167,15 +165,13 @@
                                  Value="{Binding Source={x:Static u:UserSettings.All}, Path=BoardEraserWidth, Mode=TwoWay}"
                                  ToolTip="{DynamicResource S.Recorder.Width}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                <n:ImageRadioButton Grid.Column="4" x:Name="EraserEllipseRadioButton" Content="{StaticResource Vector.Ellipse}" 
-                                    Cursor="Hand" ContentWidth="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
-                                    IsChecked="{Binding BoardEraserStylusTip, Source={x:Static u:UserSettings.All}, 
-                                    Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
+                <n:ExtendedRadioButton Grid.Column="4" x:Name="EraserEllipseRadioButton" Icon="{StaticResource Vector.Ellipse}" 
+                                       Cursor="Hand" ContentWidth="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
+                                       IsChecked="{Binding BoardEraserStylusTip, Source={x:Static u:UserSettings.All}, Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
 
-                <n:ImageRadioButton Grid.Column="5" x:Name="EraserRectangleRadioButton" Content="{StaticResource Vector.Rectangle}" 
-                                    Cursor="Hand" ContentWidth="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
-                                    IsChecked="{Binding BoardEraserStylusTip, Source={x:Static u:UserSettings.All}, 
-                                    Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
+                <n:ExtendedRadioButton Grid.Column="5" x:Name="EraserRectangleRadioButton" Icon="{StaticResource Vector.Rectangle}" 
+                                       Cursor="Hand" ContentWidth="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
+                                       IsChecked="{Binding BoardEraserStylusTip, Source={x:Static u:UserSettings.All}, Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
             </Grid>
         </Grid>
 
@@ -231,11 +227,8 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="BackButton" Content="{StaticResource Vector.Back}" Style="{StaticResource Style.Button.NoText}"
-                               ContentHeight="14" Padding="4,1" TabIndex="0" Click="BackButton_Click"/>
-
-                <n:ImageButton Grid.Row="1" Grid.Column="0" x:Name="CloseButton" Content="{StaticResource Vector.Close}" Style="{StaticResource Style.Button.NoText}"
-                               ContentHeight="10" Padding="4,1" TabIndex="1" Click="CloseButton_Click"/>
+                <n:ExtendedButton Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"  x:Name="CloseButton" Icon="{StaticResource Vector.Close}" Style="{StaticResource Style.Button.NoText}"
+                                  ContentHeight="10" ContentWidth="10" Padding="4,1" TabIndex="1" Click="CloseButton_Click"/>
 
                 <TextBlock Grid.Row="0" Grid.Column="1" x:Name="CaptionText" Text="{Binding Title, ElementName=BoardLightWindow}" FontFamily="Segoe UI" FontSize="12"
                            FontWeight="Regular" Margin="5,0,0,0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
@@ -245,12 +238,12 @@
             </Grid>
 
             <StackPanel Grid.Column="1" x:Name="ControlStackPanel" Orientation="Horizontal" HorizontalAlignment="Right" ScrollViewer.VerticalScrollBarVisibility="Disabled" >
-                <n:ImageButton x:Name="OptionsButton" Content="{StaticResource Vector.Options}" Style="{StaticResource Style.Button.NoText}" 
-                               MaxSize="20" Command="{StaticResource Command.Options}" Padding="3" TabIndex="0">
-                    <n:ImageButton.ToolTip>
+                <n:ExtendedButton x:Name="OptionsButton" Icon="{StaticResource Vector.Options}" Style="{StaticResource Style.Button.NoText}" 
+                                  ContentWidth="20" ContentHeight="20" Command="{StaticResource Command.Options}" Padding="3" TabIndex="0">
+                    <n:ExtendedButton.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource S.StartUp.Options}"/>
-                    </n:ImageButton.ToolTip>
-                </n:ImageButton>
+                    </n:ExtendedButton.ToolTip>
+                </n:ExtendedButton>
 
                 <Separator Width="1" Margin="5,3"/>
 
@@ -266,7 +259,7 @@
                     </Grid>
 
                     <Viewbox.ToolTip>
-                        <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource S.Recorder.FpsRange}"/>
+                        <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource S.Recorder.Fps.Range}"/>
                     </Viewbox.ToolTip>
                 </Viewbox>
 
@@ -295,18 +288,18 @@
 
                 <Separator Width="1" Margin="3,2"/>
 
-                <n:ImageButton x:Name="DiscardButton" Text="{DynamicResource S.Recorder.Discard}" Content="{StaticResource Vector.Remove}" Visibility="Collapsed" 
-                               Click="DiscardButton_Click" Style="{StaticResource Style.Button.Horizontal}"
-                               UseLayoutRounding="True" MaxSize="16" TabIndex="4" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"/>
+                <n:ExtendedButton x:Name="DiscardButton" Text="{DynamicResource S.Recorder.Discard}" Icon="{StaticResource Vector.Remove}" Visibility="Collapsed" 
+                                  ContentWidth="16" ContentHeight="16" TabIndex="4" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"
+                                  Style="{StaticResource Style.Button.Horizontal}" Click="DiscardButton_Click"/>
 
-                <n:ImageToggleButton x:Name="AutoRecordToggleButton" Text="{DynamicResource S.Board.AutoRecord}" IsChecked="True" Content="{StaticResource Vector.Record}" 
-                                     ContentHeight="16" ContentWidth="16" Style="{StaticResource Style.ToggleButton.NoBorder}" TabIndex="5" TextWrapping="NoWrap" 
-                                     KeyGesture="{DynamicResource S.Board.CtrlHold}" ToolTip="{DynamicResource S.Board.AutoRecordToolTip}" ToolTipService.Placement="Bottom"/>
+                <n:ExtendedToggleButton x:Name="AutoRecordToggleButton" Text="{DynamicResource S.Board.AutoRecord}" IsChecked="True" Icon="{StaticResource Vector.Record}" 
+                                        ContentHeight="16" ContentWidth="16" Style="{StaticResource Style.ToggleButton.NoBorder}" TabIndex="5" TextWrapping="NoWrap" 
+                                        KeyGesture="{DynamicResource S.Board.CtrlHold}" ToolTip="{DynamicResource S.Board.AutoRecordToolTip}" ToolTipService.Placement="Bottom"/>
 
-                <n:ImageButton x:Name="StopButton" Text="{DynamicResource S.Recorder.Stop}" Content="{StaticResource Vector.Stop}" MaxSize="16"
-                               Style="{StaticResource Style.Button.Horizontal}" TabIndex="5" ContentHeight="18" ContentWidth="18" 
-                               KeyGesture="{Binding Source={x:Static u:UserSettings.All}, Path=StopShortcut, Converter={StaticResource KeysToStringConverter}}" 
-                               Click="StopButton_Click"/>
+                <n:ExtendedButton x:Name="StopButton" Text="{DynamicResource S.Recorder.Stop}" Icon="{StaticResource Vector.Stop}"
+                                  Style="{StaticResource Style.Button.Horizontal}" TabIndex="5" ContentHeight="16" ContentWidth="16" 
+                                  KeyGesture="{Binding Source={x:Static u:UserSettings.All}, Path=StopShortcut, Converter={StaticResource KeysToStringConverter}}" 
+                                  Click="StopButton_Click"/>
             </StackPanel>
         </Grid>
     </Grid>

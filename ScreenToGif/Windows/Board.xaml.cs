@@ -44,13 +44,10 @@ namespace ScreenToGif.Windows
 
         #region Inicialization
 
-        public Board(bool hideBackButton = true)
+        public Board()
         {
             InitializeComponent();
 
-            BackVisibility = hideBackButton ? Visibility.Collapsed : Visibility.Visible;
-
-            //Load
             _capture.Tick += Normal_Elapsed;
         }
 
@@ -490,7 +487,7 @@ namespace ScreenToGif.Windows
             //Save Settings
             UserSettings.Save();
 
-            if (Stage != (int)Stage.Stopped)
+            if (Stage != Stage.Stopped)
             {
                 _capture.Stop();
                 _capture.Dispose();

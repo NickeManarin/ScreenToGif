@@ -35,9 +35,7 @@
             <Trigger Property="IsRowSelected" Value="True">
                 <Setter Property="Content">
                     <Setter.Value>
-                        <Viewbox Stretch="UniformToFill">
-                            <ContentControl Margin="4" Height="10" Width="10" Content="{DynamicResource Vector.Arrow.Blue.Right}"/>
-                        </Viewbox>
+                        <Border Margin="4" Height="10" Width="10" Background="{DynamicResource Vector.Arrow.Blue.Right}"/>
                     </Setter.Value>
                 </Setter>
             </Trigger>

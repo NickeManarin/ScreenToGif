@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace ScreenToGif.Controls
 {
@@ -8,17 +9,17 @@ namespace ScreenToGif.Controls
     {
         #region Dependency Property
 
-        public static readonly DependencyProperty IsDarkProperty = DependencyProperty.Register("IsDark", typeof(bool), typeof(AwareTabItem),
+        public static readonly DependencyProperty IsDarkProperty = DependencyProperty.Register(nameof(IsDark), typeof(bool), typeof(AwareTabItem),
             new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender, OnPropertyChanged));
 
-        public static readonly DependencyProperty ShowBackgroundProperty = DependencyProperty.Register("ShowBackground", typeof(bool), typeof(AwareTabItem),
+        public static readonly DependencyProperty ShowBackgroundProperty = DependencyProperty.Register(nameof(ShowBackground), typeof(bool), typeof(AwareTabItem),
             new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender, ShowBackground_OnPropertyChanged));
 
-        public static readonly DependencyProperty ImageProperty = DependencyProperty.Register("Image", typeof(UIElement), typeof(AwareTabItem), new FrameworkPropertyMetadata());
+        public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon), typeof(Brush), typeof(AwareTabItem));
 
         #endregion
 
-        #region Property Accessor
+        #region Property accessors
 
         /// <summary>
         /// True if the titlebar color is dark.
@@ -41,13 +42,13 @@ namespace ScreenToGif.Controls
         }
 
         /// <summary>
-        /// The Image of the tab.
+        /// The icon of the tab.
         /// </summary>
-        [Description("The Image of the tab.")]
-        public UIElement Image
+        [Description("The icon of the tab.")]
+        public Brush Icon
         {
-            get => (UIElement)GetValue(ImageProperty);
-            set => SetCurrentValue(ImageProperty, value);
+            get => (Brush)GetValue(IconProperty);
+            set => SetCurrentValue(IconProperty, value);
         }
 
         #endregion

@@ -18,12 +18,12 @@
 
         <Grid Grid.Row="0" Background="{DynamicResource Panel.Background.Level4}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="40"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Viewbox Grid.Column="0" Margin="6" Child="{StaticResource Vector.Application}" Opacity="{DynamicResource Element.Opacity}"/>
+            <Border Grid.Column="0" Margin="6" Background="{StaticResource Vector.Application}" Opacity="{DynamicResource Element.Opacity}"/>
 
             <TextBlock Grid.Column="1" x:Name="TypeLabel" Text="{DynamicResource S.Feedback.Header}" Margin="5" VerticalAlignment="Center" 
                        FontFamily="Segoe UI Semilight" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
@@ -115,9 +115,9 @@
                                             <Label Grid.Column="1" x:Name="ShortNameLabel" Content="{TemplateBinding ShortName}" Foreground="{DynamicResource Element.Foreground.Medium}" 
                                                    HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="1"/>
 
-                                            <n:ImageButton Grid.Column="2" x:Name="RemoveButton" Content="{StaticResource Vector.Close}" VerticalAlignment="Stretch"
-                                                           Style="{StaticResource Style.Button.NoText}" ContentWidth="12" Width="12" Visibility="Collapsed" 
-                                                           PreviewMouseLeftButtonUp="RemoveButton_OnMouseLeftButtonDown" Margin="2,0,0,0"/>
+                                            <n:ExtendedButton Grid.Column="2" x:Name="RemoveButton" Icon="{StaticResource Vector.Close}" VerticalAlignment="Stretch"
+                                                              Style="{StaticResource Style.Button.NoText}" ContentWidth="12" ContentHeight="12" Width="12" Visibility="Collapsed" 
+                                                              PreviewMouseLeftButtonUp="RemoveButton_OnMouseLeftButtonDown" Margin="2,0,0,0"/>
                                         </Grid>
                                     </Border>
 
@@ -170,14 +170,17 @@
                 <ColumnDefinition Width="Auto" MinWidth="100"/>
             </Grid.ColumnDefinitions>
 
-            <n:ImageButton Grid.Column="0" x:Name="AddAttachmentButton" Text="{DynamicResource S.Feedback.AddAttachments}" Content="{StaticResource Vector.Add}" ContentHeight="18" MinWidth="90" Margin="5" Padding="4,0" 
-                           Click="AddAttachmentButton_Click"/>
-            <n:ImageButton Grid.Column="1" x:Name="RemoveAllAttachmentButton" Text="{DynamicResource S.Feedback.RemoveAttachments}" Content="{StaticResource Vector.Remove}" ContentHeight="18" Margin="5" Padding="4,0" 
-                           Click="RemoveAllAttachmentButton_Click"/>
+            <n:ExtendedButton Grid.Column="0" x:Name="AddAttachmentButton" Text="{DynamicResource S.Feedback.AddAttachments}" Icon="{StaticResource Vector.Add}" 
+                              ContentWidth="18" ContentHeight="18" Padding="5,0" MinWidth="90" Margin="5" Click="AddAttachmentButton_Click"/>
+            <n:ExtendedButton Grid.Column="1" x:Name="RemoveAllAttachmentButton" Text="{DynamicResource S.Feedback.RemoveAttachments}" Icon="{StaticResource Vector.Remove}" 
+                              ContentWidth="18" ContentHeight="18" Padding="5,0" MinWidth="90" Margin="5"  Click="RemoveAllAttachmentButton_Click"/>
 
-            <n:ImageButton Grid.Column="3" x:Name="OkButton" Text="{DynamicResource S.Feedback.Send}" Content="{StaticResource Vector.Ok}" ContentHeight="20" Padding="4,0" Margin="5" Click="SendButton_Click"/>
-            <n:ImageButton Grid.Column="4" x:Name="PreviewButton" Text="{DynamicResource S.Feedback.Preview}" Content="{StaticResource Vector.Report}" ContentHeight="20" Padding="4,0" Margin="5" Click="PreviewButton_Click"/>
-            <n:ImageButton Grid.Column="5" x:Name="CancelButton" Text="{DynamicResource S.Cancel}" Content="{StaticResource Vector.Cancel}" ContentHeight="20" Padding="4,0" Margin="5" IsCancel="True" Click="CancelButton_Click"/>
+            <n:ExtendedButton Grid.Column="3" x:Name="OkButton" Text="{DynamicResource S.Feedback.Send}" Icon="{StaticResource Vector.Ok}" 
+                              ContentWidth="18" ContentHeight="18" Padding="5,0" MinWidth="90" Margin="5" Click="SendButton_Click"/>
+            <n:ExtendedButton Grid.Column="4" x:Name="PreviewButton" Text="{DynamicResource S.Feedback.Preview}" Icon="{StaticResource Vector.Report}" 
+                              ContentWidth="18" ContentHeight="18" Padding="5,0" MinWidth="90" Margin="5" Click="PreviewButton_Click"/>
+            <n:ExtendedButton Grid.Column="5" x:Name="CancelButton" Text="{DynamicResource S.Cancel}" Icon="{StaticResource Vector.Cancel}" 
+                              ContentWidth="18" ContentHeight="18" Padding="5,0" MinWidth="90" Margin="5" IsCancel="True" Click="CancelButton_Click"/>
         </Grid>
     </Grid>
 </Window>

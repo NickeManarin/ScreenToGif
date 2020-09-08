@@ -1,20 +1,24 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Markup;
+using System.Windows.Media;
 
 namespace ScreenToGif.Controls.Ribbon
 {
-    public class RibbonItem : Button
+    [ContentProperty("Content")]
+    public class RibbonItem : ButtonBase
     {
         public enum RibbonItemMode
         {
             Button,
             DropDownButton,
-            SplitButton
+            SplitButton,
+            Other
         }
 
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register(nameof(Text), typeof(string), typeof(RibbonItem), new PropertyMetadata(default(string)));
-        public static readonly DependencyProperty ImageProperty = DependencyProperty.Register(nameof(Image), typeof(UIElement), typeof(RibbonItem), new PropertyMetadata(default(UIElement)));
+        public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon), typeof(Brush), typeof(RibbonItem));
         public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(nameof(Mode), typeof(RibbonItemMode), typeof(RibbonItem), new PropertyMetadata(RibbonItemMode.Button));
         public static readonly DependencyProperty IconSizeProperty = DependencyProperty.Register(nameof(IconSize), typeof(ItemSizeDefinition.IconSizeEnum), typeof(RibbonItem), new PropertyMetadata(ItemSizeDefinition.IconSizeEnum.Large));
         public static readonly DependencyProperty IsTextVisibleProperty = DependencyProperty.Register(nameof(IsTextVisible), typeof(bool), typeof(RibbonItem), new PropertyMetadata(true));
@@ -26,10 +30,10 @@ namespace ScreenToGif.Controls.Ribbon
             set => SetValue(TextProperty, value);
         }
 
-        public UIElement Image
+        public Brush Icon
         {
-            get => (UIElement)GetValue(ImageProperty);
-            set => SetValue(ImageProperty, value);
+            get => (Brush)GetValue(IconProperty);
+            set => SetValue(IconProperty, value);
         }
 
         public RibbonItemMode Mode
@@ -54,6 +58,11 @@ namespace ScreenToGif.Controls.Ribbon
         {
             get => (List<FrameworkElement>)GetValue(MenuProperty);
             set => SetValue(MenuProperty, value);
+        }
+
+        static RibbonItem()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(RibbonItem), new FrameworkPropertyMetadata(typeof(RibbonItem)));
         }
     }
 }

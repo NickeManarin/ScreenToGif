@@ -295,11 +295,8 @@
                           Background="{TemplateBinding Background}" Style="{StaticResource DropDownToggleButton}" IsEnabled="{TemplateBinding IsEnabled}"
                           HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
 
-            <Viewbox Grid.Column="0" x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="{TemplateBinding IsEnabled}"
-                     Margin="{TemplateBinding Padding}" Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}" IsHitTestVisible="False" 
-                     Stretch="Uniform" StretchDirection="Both" MaxHeight="{TemplateBinding MaxSize}" Effect="{x:Null}">
-                <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" VerticalAlignment="Center"/>
-            </Viewbox>
+            <Border Grid.Column="0" Background="{TemplateBinding Icon}" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="{TemplateBinding IsEnabled}"
+                    Margin="{TemplateBinding Padding}" Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}"/>
 
             <TextBlock Grid.Column="1" x:Name="TextBlockInternal" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" 
                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
@@ -354,12 +351,9 @@
             <ToggleButton Grid.Row="0" Grid.RowSpan="3" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
                           Background="{TemplateBinding Background}" Style="{StaticResource DropDownToggleButton}" IsEnabled="{TemplateBinding IsEnabled}"/>
 
-            <Viewbox Grid.Row="0" x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="{TemplateBinding IsEnabled}"
-                     Margin="{TemplateBinding Padding}" Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}" IsHitTestVisible="False" 
-                     Stretch="Uniform" StretchDirection="Both" MaxHeight="{TemplateBinding MaxSize}" Effect="{x:Null}">
-                <ContentPresenter ContentSource="{TemplateBinding Content}" Width="Auto" Height="Auto" HorizontalAlignment="Center" />
-            </Viewbox>
-
+            <Border Grid.Column="0" Background="{TemplateBinding Icon}" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="{TemplateBinding IsEnabled}"
+                     Margin="{TemplateBinding Padding}" Width="{TemplateBinding MaxSize}" Height="{TemplateBinding MaxSize}"/>
+            
             <TextBlock Grid.Row="1" x:Name="TextBlockInternal" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" 
                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
                        VerticalAlignment="Center" Text="{TemplateBinding Description}" TextWrapping="WrapWithOverflow" 

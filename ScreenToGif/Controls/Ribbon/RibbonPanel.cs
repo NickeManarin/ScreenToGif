@@ -33,6 +33,7 @@ namespace ScreenToGif.Controls.Ribbon
         protected override void OnVisualChildrenChanged(DependencyObject visualAdded, DependencyObject visualRemoved)
         {
             base.OnVisualChildrenChanged(visualAdded, visualRemoved);
+            
             OrderChildren();
         }
 
@@ -90,6 +91,7 @@ namespace ScreenToGif.Controls.Ribbon
             {
                 case Ribbon.Modes.Ribbon:
                 {
+
                     break;
                 }
                 case Ribbon.Modes.Menu:

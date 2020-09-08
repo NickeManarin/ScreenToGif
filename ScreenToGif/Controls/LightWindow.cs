@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
+using System.Windows.Media;
 using System.Windows.Shapes;
 using ScreenToGif.Util;
 
@@ -17,6 +18,8 @@ namespace ScreenToGif.Controls
     {
         private HwndSource _hwndSource;
 
+        public DisplayTimer DisplayTimer = null;
+
         #region Dependency Property
 
         public static readonly DependencyProperty ChildProperty = DependencyProperty.Register(nameof(Child), typeof(UIElement), typeof(LightWindow),
@@ -25,9 +28,6 @@ namespace ScreenToGif.Controls
         public static readonly DependencyProperty MaxSizeProperty = DependencyProperty.Register(nameof(MaxSize), typeof(double), typeof(LightWindow),
             new FrameworkPropertyMetadata(26.0, FrameworkPropertyMetadataOptions.AffectsRender));
 
-        public static readonly DependencyProperty BackVisibilityProperty = DependencyProperty.Register(nameof(BackVisibility), typeof(Visibility), typeof(LightWindow),
-            new FrameworkPropertyMetadata(Visibility.Visible, FrameworkPropertyMetadataOptions.AffectsRender));
-
         public static readonly DependencyProperty MinimizeVisibilityProperty = DependencyProperty.Register(nameof(MinimizeVisibility), typeof(Visibility), typeof(LightWindow),
             new FrameworkPropertyMetadata(Visibility.Visible, FrameworkPropertyMetadataOptions.AffectsRender));
 
@@ -35,9 +35,6 @@ namespace ScreenToGif.Controls
             new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
 
         public static readonly DependencyProperty IsThinProperty = DependencyProperty.Register(nameof(IsThin), typeof(bool), typeof(LightWindow),
-            new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
-
-        public static readonly DependencyProperty IsFullScreenProperty = DependencyProperty.Register(nameof(IsFullScreen), typeof(bool), typeof(LightWindow),
             new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
 
         public static readonly DependencyProperty IsFollowingProperty = DependencyProperty.Register(nameof(IsFollowing), typeof(bool), typeof(LightWindow), 
@@ -65,16 +62,6 @@ namespace ScreenToGif.Controls
         {
             get => (double)GetValue(MaxSizeProperty);
             set => SetCurrentValue(MaxSizeProperty, value);
-        }
-
-        /// <summary>
-        /// Back button visibility.
-        /// </summary>
-        [Bindable(true), Category("Common"), Description("Back button visibility.")]
-        public Visibility BackVisibility
-        {
-            get => (Visibility)GetValue(BackVisibilityProperty);
-            set => SetCurrentValue(BackVisibilityProperty, value);
         }
 
         /// <summary>
@@ -108,16 +95,6 @@ namespace ScreenToGif.Controls
         }
 
         /// <summary>
-        /// Fullscreen mode (hides the title bar).
-        /// </summary>
-        [Bindable(true), Category("Common"), Description("Fullscreen mode (hides the title bar and a few other things).")]
-        public bool IsFullScreen
-        {
-            get => (bool)GetValue(IsFullScreenProperty);
-            set => SetCurrentValue(IsFullScreenProperty, value);
-        }
-
-        /// <summary>
         /// True if the window should follow the mouse cursor.
         /// </summary>
         public bool IsFollowing
@@ -139,17 +116,16 @@ namespace ScreenToGif.Controls
 
         public override void OnApplyTemplate()
         {
-            if (GetTemplateChild("BackButton") is ImageButton backButton)
-                backButton.Click += BackClick;
+            DisplayTimer = GetTemplateChild("DisplayTimer") as DisplayTimer;
 
-            if (GetTemplateChild("MinimizeButton") is Button minimizeButton)
+            if (GetTemplateChild("MinimizeButton") is ExtendedButton minimizeButton)
                 minimizeButton.Click += MinimizeClick;
 
-            if (GetTemplateChild("CloseButton") is Button closeButton)
+            if (GetTemplateChild("CloseButton") is ExtendedButton closeButton)
                 closeButton.Click += CloseClick;
 
-            if (GetTemplateChild("MoveGrid") is Grid moveGrid)
-                moveGrid.PreviewMouseDown += MoveGrid_PreviewMouseDown;
+            if (GetTemplateChild("TopGrid") is Grid topGrid)
+                topGrid.MouseLeftButtonDown += TopGrid_MouseLeftButtonDown;
 
             if (GetTemplateChild("MainGrid") is Grid resizeGrid)
             {
@@ -173,7 +149,7 @@ namespace ScreenToGif.Controls
 
         private void ResizeWindow(ResizeDirection direction)
         {
-            Native.SendMessage(_hwndSource.Handle, 0x112, (IntPtr)(61440 + direction), IntPtr.Zero);
+            Util.Native.SendMessage(_hwndSource.Handle, 0x112, (IntPtr)(61440 + direction), IntPtr.Zero);
         }
 
         internal void HideInternals()
@@ -200,11 +176,6 @@ namespace ScreenToGif.Controls
             _hwndSource = (HwndSource)PresentationSource.FromVisual(this);
         }
 
-        private void BackClick(object sender, RoutedEventArgs routedEventArgs)
-        {
-            DialogResult = false;
-        }
-
         private void MinimizeClick(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
@@ -216,15 +187,15 @@ namespace ScreenToGif.Controls
             {
                 WindowState = WindowState.Maximized;
 
-                if (sender is Button button) 
-                    button.Content = FindResource("Vector.Restore");
+                if (sender is ExtendedButton button) 
+                    button.Icon = FindResource("Vector.Restore") as Brush;
             }
             else
             {
                 WindowState = WindowState.Normal;
 
-                if (sender is Button button) 
-                    button.Content = FindResource("Vector.Maximize");
+                if (sender is ExtendedButton button) 
+                    button.Icon = FindResource("Vector.Maximize") as Brush;
             }
         }
 
@@ -233,7 +204,7 @@ namespace ScreenToGif.Controls
             Close();
         }
 
-        private void MoveGrid_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private void TopGrid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (Mouse.LeftButton == MouseButtonState.Pressed)
                 DragMove();

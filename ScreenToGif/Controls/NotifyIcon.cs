@@ -19,7 +19,7 @@ namespace ScreenToGif.Controls
         /// <summary>
         /// Represents the current icon data.
         /// </summary>
-        private Native.NotifyIconData _iconData;
+        private Util.Native.NotifyIconData _iconData;
 
         /// <summary>
         /// Receives messages from the taskbar icon.
@@ -122,7 +122,7 @@ namespace ScreenToGif.Controls
                 _icon = value;
                 _iconData.IconHandle = value == null ? IntPtr.Zero : _icon.Handle;
 
-                VisualHelper.WriteIconData(ref _iconData, Native.NotifyCommand.Modify, Native.IconDataMembers.Icon);
+                VisualHelper.WriteIconData(ref _iconData, Util.Native.NotifyCommand.Modify, Util.Native.IconDataMembers.Icon);
             }
         }
 
@@ -334,7 +334,7 @@ namespace ScreenToGif.Controls
         {
             _messageSink = new WindowMessageSink();
 
-            _iconData = Native.NotifyIconData.CreateDefault(_messageSink.MessageWindowHandle);
+            _iconData = Util.Native.NotifyIconData.CreateDefault(_messageSink.MessageWindowHandle);
 
             _messageSink.MouseEventReceived += OnMouseEvent;
             _messageSink.TaskbarCreated += OnTaskbarCreated;
@@ -354,13 +354,13 @@ namespace ScreenToGif.Controls
                     return;
 
                 //Initial configuration.
-                var status = VisualHelper.WriteIconData(ref _iconData, Native.NotifyCommand.Add, Native.IconDataMembers.Message | Native.IconDataMembers.Icon | Native.IconDataMembers.Tip);
+                var status = VisualHelper.WriteIconData(ref _iconData, Util.Native.NotifyCommand.Add, Util.Native.IconDataMembers.Message | Util.Native.IconDataMembers.Icon | Util.Native.IconDataMembers.Tip);
 
                 if (!status)
                     return;
 
-                _iconData.VersionOrTimeout = (uint)Native.NotifyIconVersion.Vista;
-                status = Native.Shell_NotifyIcon(Native.NotifyCommand.SetVersion, ref _iconData);
+                _iconData.VersionOrTimeout = (uint)Util.Native.NotifyIconVersion.Vista;
+                status = Util.Native.Shell_NotifyIcon(Util.Native.NotifyCommand.SetVersion, ref _iconData);
 
                 if (!status)
                     return;
@@ -376,18 +376,18 @@ namespace ScreenToGif.Controls
                 if (!IsTaskbarIconCreated)
                     return;
 
-                VisualHelper.WriteIconData(ref _iconData, Native.NotifyCommand.Delete, Native.IconDataMembers.Message);
+                VisualHelper.WriteIconData(ref _iconData, Util.Native.NotifyCommand.Delete, Util.Native.IconDataMembers.Message);
                 IsTaskbarIconCreated = false;
             }
         }
 
-        public Native.PointW GetDeviceCoordinates(Native.PointW point)
+        public Util.Native.PointW GetDeviceCoordinates(Util.Native.PointW point)
         {
             var dpi = Other.ScaleOfSystem();
-            return new Native.PointW { X = (int)(point.X / dpi), Y = (int)(point.Y / dpi) };
+            return new Util.Native.PointW { X = (int)(point.X / dpi), Y = (int)(point.Y / dpi) };
         }
 
-        private void ShowContextMenu(Native.PointW cursorPosition)
+        private void ShowContextMenu(Util.Native.PointW cursorPosition)
         {
             if (IsDisposed)
                 return;
@@ -407,7 +407,7 @@ namespace ScreenToGif.Controls
             var handle = ((HwndSource)PresentationSource.FromVisual(ContextMenu))?.Handle ?? _messageSink.MessageWindowHandle;
 
             //This makes sure that the context menu can close if lost focus.
-            Native.SetForegroundWindow(handle);
+            Util.Native.SetForegroundWindow(handle);
 
             RaiseEvent(new RoutedEventArgs { RoutedEvent = TrayContextMenuOpenEvent });
         }
@@ -457,7 +457,7 @@ namespace ScreenToGif.Controls
             if (string.IsNullOrEmpty(_iconData.ToolTipText) && NotifyToolTipElement != null)
                 _iconData.ToolTipText = "ToolTip";
 
-            VisualHelper.WriteIconData(ref _iconData, Native.NotifyCommand.Modify, Native.IconDataMembers.Tip);
+            VisualHelper.WriteIconData(ref _iconData, Util.Native.NotifyCommand.Modify, Util.Native.IconDataMembers.Tip);
         }
 
         public void RefreshVisual()
@@ -523,8 +523,8 @@ namespace ScreenToGif.Controls
                     throw new ArgumentOutOfRangeException(nameof(type), "Missing handler for mouse event flag: " + type);
             }
 
-            var cursorPosition = new Native.PointW();
-            Native.GetPhysicalCursorPos(ref cursorPosition);
+            var cursorPosition = new Util.Native.PointW();
+            Util.Native.GetPhysicalCursorPos(ref cursorPosition);
 
             cursorPosition = GetDeviceCoordinates(cursorPosition);
 

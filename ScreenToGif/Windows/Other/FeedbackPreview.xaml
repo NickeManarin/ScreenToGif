@@ -21,7 +21,8 @@
 
             <TextBlock Grid.Column="0" TextAlignment="Center" VerticalAlignment="Center" Margin="5" Text="{DynamicResource S.Feedback.Preview.Info}" Foreground="{DynamicResource Element.Foreground.Header}"/>
 
-            <n:ImageButton Grid.Column="1" x:Name="CancelButton" Text="{DynamicResource S.Ok}" Content="{StaticResource Vector.Ok}" ContentHeight="20" Padding="4,0" Margin="5" Click="OkButton_Click" IsCancel="True"/>
+            <n:ExtendedButton Grid.Column="1" x:Name="CancelButton" Text="{DynamicResource S.Ok}" Icon="{StaticResource Vector.Ok}" 
+                              ContentWidth="18" ContentHeight="18" Padding="5,0" MinWidth="90" Margin="5" Click="OkButton_Click" IsCancel="True"/>
         </Grid>
     </Grid>
 </Window>

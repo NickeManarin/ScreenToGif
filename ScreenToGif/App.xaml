@@ -11,8 +11,7 @@
         <ResourceDictionary>
 
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Resources/IconSet.xaml"/>
-                <ResourceDictionary Source="/Resources/Glyphs.xaml"/>
+                <ResourceDictionary Source="/Resources/Vectors.xaml"/>
                 <ResourceDictionary Source="/Resources/Backgrounds.xaml"/>
                 <ResourceDictionary Source="/Resources/Commands.xaml"/>
                 <ResourceDictionary Source="/Resources/Settings.xaml"/>
@@ -65,7 +64,6 @@
             <c:EnumToInt x:Key="EnumToInt"/>
             <c:ColorToBrush x:Key="ColorToBrushConverter"/>
             <c:ShortcutSelection x:Key="ShortcutSelectionConverter"/>
-            <c:IntToBool x:Key="BoolToInt"/>
             <c:IntToVisibility x:Key="IntToVisibility"/>
             <c:InvertedIntToVisibility x:Key="InvertedIntToVisibility"/>
             <c:EnumToVisibility x:Key="EnumToVisibility"/>
@@ -82,16 +80,16 @@
                           LeftClickCommand="{Binding TrayLeftClick}" DoubleLeftClickCommand="{Binding TrayDoubleLeftClick}" MiddleClickCommand="{Binding TrayMiddleClick}">
                 <n:NotifyIcon.ContextMenu>
                     <ContextMenu>
-                        <n:ImageMenuItem Header="{DynamicResource S.NewRecording}" Image="{StaticResource Vector.Record.New}" Command="{Binding OpenRecorder}" InputGestureText="{Binding RecorderGesture, UpdateSourceTrigger=PropertyChanged}"/>
-                        <n:ImageMenuItem Header="{DynamicResource S.NewWebcamRecording}" Image="{StaticResource Vector.Camera.New}" Command="{Binding OpenWebcamRecorder}" InputGestureText="{Binding WebcamRecorderGesture, UpdateSourceTrigger=PropertyChanged}"/>
-                        <n:ImageMenuItem Header="{DynamicResource S.NewBoardRecording}" Image="{StaticResource Vector.Board.New}" Command="{Binding OpenBoardRecorder}" InputGestureText="{Binding BoardRecorderGesture, UpdateSourceTrigger=PropertyChanged}"/>
+                        <n:ExtendedMenuItem Header="{DynamicResource S.NewRecording}" Icon="{StaticResource Vector.Record.New}" Command="{Binding OpenRecorder}" InputGestureText="{Binding RecorderGesture, UpdateSourceTrigger=PropertyChanged}"/>
+                        <n:ExtendedMenuItem Header="{DynamicResource S.NewWebcamRecording}" Icon="{StaticResource Vector.Camera.New}" Command="{Binding OpenWebcamRecorder}" InputGestureText="{Binding WebcamRecorderGesture, UpdateSourceTrigger=PropertyChanged}"/>
+                        <n:ExtendedMenuItem Header="{DynamicResource S.NewBoardRecording}" Icon="{StaticResource Vector.Board.New}" Command="{Binding OpenBoardRecorder}" InputGestureText="{Binding BoardRecorderGesture, UpdateSourceTrigger=PropertyChanged}"/>
                         <Separator/>
-                        <n:ImageMenuItem Header="{DynamicResource S.StartUp.Editor}" Image="{StaticResource Vector.Editor}" Command="{Binding OpenEditor}" InputGestureText="{Binding EditorGesture, UpdateSourceTrigger=PropertyChanged}"/>
-                        <n:ImageMenuItem Header="{DynamicResource S.StartUp.Options}" Image="{StaticResource Vector.Options}" Command="{Binding OpenOptions}" InputGestureText="{Binding OptionsGesture, UpdateSourceTrigger=PropertyChanged}"/>
-                        <n:ImageMenuItem Header="{DynamicResource S.Feedback.Feedback}" Image="{StaticResource Vector.Application}" Command="{Binding OpenFeedback}"/>
-                        <n:ImageMenuItem Header="{DynamicResource S.Troubleshoot.Title}" Image="{StaticResource Vector.Warning}" Command="{Binding OpenTroubleshoot}"/>
+                        <n:ExtendedMenuItem Header="{DynamicResource S.StartUp.Editor}" Icon="{StaticResource Vector.Editor}" Command="{Binding OpenEditor}" InputGestureText="{Binding EditorGesture, UpdateSourceTrigger=PropertyChanged}"/>
+                        <n:ExtendedMenuItem Header="{DynamicResource S.StartUp.Options}" Icon="{StaticResource Vector.Options}" Command="{Binding OpenOptions}" InputGestureText="{Binding OptionsGesture, UpdateSourceTrigger=PropertyChanged}"/>
+                        <n:ExtendedMenuItem Header="{DynamicResource S.Feedback.Feedback}" Icon="{StaticResource Vector.Application}" Command="{Binding OpenFeedback}"/>
+                        <n:ExtendedMenuItem Header="{DynamicResource S.Troubleshoot.Title}" Icon="{StaticResource Vector.Warning}" Command="{Binding OpenTroubleshoot}"/>
                         <Separator/>
-                        <n:ImageMenuItem Header="{DynamicResource S.Exit}" Image="{StaticResource Vector.Close}" Command="{Binding ExitApplication}" InputGestureText="{Binding ExitGesture, UpdateSourceTrigger=PropertyChanged}"/>
+                        <n:ExtendedMenuItem Header="{DynamicResource S.Exit}" Icon="{StaticResource Vector.Close}" Command="{Binding ExitApplication}" InputGestureText="{Binding ExitGesture, UpdateSourceTrigger=PropertyChanged}"/>
                     </ContextMenu>
                 </n:NotifyIcon.ContextMenu>
             </n:NotifyIcon>
@@ -619,7 +617,6 @@
             </Style>
 
             <Style x:Key="ExpanderDownHeaderStyle" TargetType="{x:Type ToggleButton}">
-                <Setter Property="Height" Value="22"/>
                 <Setter Property="Background" Value="Transparent"/>
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
 

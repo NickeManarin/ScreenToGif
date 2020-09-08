@@ -127,10 +127,10 @@ namespace ScreenToGif.Controls
 
         #region Custom Events
 
-        public static readonly RoutedEvent LowerValueChangedEvent = EventManager.RegisterRoutedEvent("LowerValueChanged", RoutingStrategy.Bubble, 
+        public static readonly RoutedEvent LowerValueChangedEvent = EventManager.RegisterRoutedEvent(nameof(LowerValueChanged), RoutingStrategy.Bubble, 
             typeof(RoutedEventHandler), typeof(RangeSlider));
 
-        public static readonly RoutedEvent UpperValueChangedEvent = EventManager.RegisterRoutedEvent("UpperValueChanged", RoutingStrategy.Bubble, 
+        public static readonly RoutedEvent UpperValueChangedEvent = EventManager.RegisterRoutedEvent(nameof(UpperValueChanged), RoutingStrategy.Bubble, 
             typeof(RoutedEventHandler), typeof(RangeSlider));
 
         public event RoutedEventHandler LowerValueChanged

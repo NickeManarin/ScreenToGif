@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace ScreenToGif.Util.Converters
 {
@@ -10,24 +10,22 @@ namespace ScreenToGif.Util.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var stage = value as Stage?;
-
-            if (!stage.HasValue)
-                return (Canvas)Application.Current.FindResource("Vector.Record");
+            if (!(value is Stage stage))
+                return (Brush)Application.Current.FindResource("Vector.Record");
 
             switch (stage)
             {
                 case Stage.Stopped:
-                    return (Canvas)Application.Current.FindResource("Vector.Record");
+                    return (Brush)Application.Current.FindResource("Vector.Record");
                 case Stage.Recording:
-                    return (Canvas)Application.Current.FindResource("Vector.Pause");
+                    return (Brush)Application.Current.FindResource("Vector.Pause");
                 case Stage.Paused:
-                    return (Canvas)Application.Current.FindResource("Vector.Record");
+                    return (Brush)Application.Current.FindResource("Vector.Record");
                 case Stage.Snapping:
-                    return (Canvas)Application.Current.FindResource("Vector.Camera.Add");
+                    return (Brush)Application.Current.FindResource("Vector.Camera.Add");
             }
 
-            return (Canvas)Application.Current.FindResource("Vector.Record");
+            return (Brush)Application.Current.FindResource("Vector.Record");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -1,6 +1,6 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using ScreenToGif.Model;
 using ScreenToGif.UserControls;
 using ScreenToGif.Util;
@@ -24,7 +24,7 @@ namespace ScreenToGif.Windows.Other
 
             if (IsEditing)
             {
-                MainViewbox.Child = TryFindResource("Vector.Pen") as Canvas;
+                MainBorder.Background = TryFindResource("Vector.Pen") as Brush;
                 TypeTextBlock.Text = LocalizationHelper.Get("S.Edit");
                 TypeComboBox.SelectedIndex = (int)(CurrentTask?.TaskType ?? DefaultTaskModel.TaskTypeEnum.NotDeclared);
                 TypeComboBox.IsEnabled = false;

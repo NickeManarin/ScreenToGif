@@ -101,7 +101,7 @@ namespace ScreenToGif.Controls
         private void Encoding_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             //Don't start the drag and drop if the user clicks on some button on the encoder.
-            if (!(sender is EncoderListViewItem item) || e.OriginalSource is Run || VisualHelper.HasParent<ImageButton>(e.OriginalSource as Visual, typeof(EncoderListViewItem), true))
+            if (!(sender is EncoderListViewItem item) || e.OriginalSource is Run || VisualHelper.HasParent<ExtendedButton>(e.OriginalSource as Visual, typeof(EncoderListViewItem), true))
                 return;
 
             item.CaptureMouse();
@@ -178,7 +178,6 @@ namespace ScreenToGif.Controls
                     Id = item.Id,
                     Text = item.Text,
                     Type = item.Kind,
-                    Image = TryFindResource(StatusBand.KindToString(item.Kind)) as Canvas,
                     Action = item.Action,
                     IsLink = item.Action != null,
                     Visibility = Visibility.Visible

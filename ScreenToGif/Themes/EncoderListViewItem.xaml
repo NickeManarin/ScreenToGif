@@ -19,19 +19,17 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
+                
+                <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="InternalBorder" Background="{TemplateBinding Icon}" 
+                        Margin="1" Visibility="Visible" Effect="{x:Null}" Opacity="{DynamicResource Element.Opacity}"/>
 
-                <Viewbox Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="InternalViewBox" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                         Stretch="Uniform" StretchDirection="Both" Margin="1" Visibility="Visible" Effect="{x:Null}">
-                    <ContentPresenter Content="{TemplateBinding Image}" Opacity="{DynamicResource Element.Opacity}"/>
-                </Viewbox>
-
-                <n:ImageButton Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="CancelButton" Padding="2" Content="{DynamicResource Vector.Close}" ContentWidth="15" ContentHeight="15"
-                               VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch"
-                               Visibility="Hidden" MaxWidth="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}" Style="{DynamicResource Style.Button.NoText}">
-                    <n:ImageButton.ToolTip>
+                <n:ExtendedButton Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="CancelButton" Padding="2" Icon="{DynamicResource Vector.Close}" ContentWidth="15" ContentHeight="15"
+                                  VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch"
+                                  Visibility="Hidden" MaxWidth="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}" Style="{DynamicResource Style.Button.NoText}">
+                    <n:ExtendedButton.ToolTip>
                         <ToolTip x:Name="CancelToolTip" Content="{DynamicResource S.Action.Cancel}" Placement="Left" VerticalOffset="-5"/>
-                    </n:ImageButton.ToolTip>
-                </n:ImageButton>
+                    </n:ExtendedButton.ToolTip>
+                </n:ExtendedButton>
 
                 <Label Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" x:Name="PercentageLabel" Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Percentage}" ContentStringFormat="{}{0:##0.0} %"
                        Foreground="{DynamicResource Element.Foreground.Gray112}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center"
@@ -51,24 +49,24 @@
                     <Condition Property="IsEnabled" Value="True"/>
                 </MultiTrigger.Conditions>
 
-                <Setter Property="Visibility" TargetName="CancelButton" Value="Visible"/>
-                <Setter Property="Visibility" TargetName="InternalViewBox" Value="Hidden"/>
+                <Setter TargetName="CancelButton" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="InternalBorder" Property="Visibility" Value="Collapsed"/>
             </MultiTrigger>
 
             <Trigger Property="OutputType" Value="Gif">
-                <Setter Property="Image" Value="{DynamicResource Vector.Gif}"/>
+                <Setter Property="Icon" Value="{DynamicResource Vector.Gif}"/>
             </Trigger>
             <Trigger Property="OutputType" Value="Apng">
-                <Setter Property="Image" Value="{DynamicResource Vector.Apng}"/>
+                <Setter Property="Icon" Value="{DynamicResource Vector.Apng}"/>
             </Trigger>
             <Trigger Property="OutputType" Value="Video">
-                <Setter Property="Image" Value="{DynamicResource Vector.Video}"/>
+                <Setter Property="Icon" Value="{DynamicResource Vector.Video}"/>
             </Trigger>
             <Trigger Property="OutputType" Value="Photoshop">
-                <Setter Property="Image" Value="{DynamicResource Vector.Psd}"/>
+                <Setter Property="Icon" Value="{DynamicResource Vector.Psd}"/>
             </Trigger>
             <Trigger Property="OutputType" Value="Project">
-                <Setter Property="Image" Value="{DynamicResource Vector.Project}"/>
+                <Setter Property="Icon" Value="{DynamicResource Vector.Project}"/>
             </Trigger>
 
             <Trigger Property="IsIndeterminate" Value="True">
@@ -90,18 +88,16 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <Viewbox Grid.Row="0" Grid.Column="0" x:Name="InternalViewBox" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                         Stretch="Uniform" StretchDirection="Both" Margin="1" Visibility="Visible" Effect="{x:Null}">
-                    <ContentPresenter Content="{DynamicResource Vector.Ok.Round}" Opacity="{DynamicResource Element.Opacity}"/>
-                </Viewbox>
-
-                <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="CancelButton" Padding="2" Content="{DynamicResource Vector.Eraser}" ContentWidth="15" ContentHeight="15"
-                               VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch"
-                               Visibility="Hidden" MaxWidth="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}" Style="{DynamicResource Style.Button.NoText}">
-                    <n:ImageButton.ToolTip>
+                <Border Grid.Row="0" Grid.Column="0" x:Name="InternalBorder" Background="{DynamicResource Vector.Ok.Round}"
+                        Margin="1" Visibility="Visible" Effect="{x:Null}" Opacity="{DynamicResource Element.Opacity}"/>
+                
+                <n:ExtendedButton Grid.Row="0" Grid.Column="0" x:Name="CancelButton" Padding="2" Icon="{DynamicResource Vector.Eraser}" ContentWidth="15" ContentHeight="15"
+                                  VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch"
+                                  Visibility="Hidden" MaxWidth="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}" Style="{DynamicResource Style.Button.NoText}">
+                    <n:ExtendedButton.ToolTip>
                         <ToolTip x:Name="CancelToolTip" Content="{DynamicResource S.Encoder.Remove}" Placement="Left" VerticalOffset="-5"/>
-                    </n:ImageButton.ToolTip>
-                </n:ImageButton>
+                    </n:ExtendedButton.ToolTip>
+                </n:ExtendedButton>
 
                 <Label Grid.Row="0" Grid.Column="1" x:Name="FileSizeLabel" Content="{TemplateBinding SizeInBytes, Converter={StaticResource BytesToSizeConverter}}" 
                        Foreground="{DynamicResource Element.Foreground.Gray112}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0"
@@ -185,37 +181,37 @@
                     </TextBlock.ToolTip>
                 </TextBlock>
 
-                <n:ImageButton Grid.Column="4" x:Name="FileButton" Style="{DynamicResource Style.Button.NoText}" Content="{DynamicResource Vector.Gif}" 
-                               Padding="2,0" ContentWidth="20" ContentHeight="20" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5">
-                    <n:ImageButton.ToolTip>
+                <n:ExtendedButton Grid.Column="4" x:Name="FileButton" Style="{DynamicResource Style.Button.NoText}" Icon="{DynamicResource Vector.Gif}" 
+                                  Padding="2,0" ContentWidth="20" ContentHeight="20" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5">
+                    <n:ExtendedButton.ToolTip>
                         <TextBlock Foreground="{DynamicResource Element.Foreground}">
                             <Run Text="{DynamicResource S.Encoder.OpenFile}"/>
                             <LineBreak/>
                             <Run Text="{TemplateBinding OutputFilename}"/>
                         </TextBlock>
-                    </n:ImageButton.ToolTip>
-                </n:ImageButton>
+                    </n:ExtendedButton.ToolTip>
+                </n:ExtendedButton>
 
-                <n:ImageButton Grid.Column="5" x:Name="FolderButton" Style="{DynamicResource Style.Button.NoText}" Content="{DynamicResource Vector.Open}" 
-                               Padding="2,0" ContentWidth="20" ContentHeight="20" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5">
-                    <n:ImageButton.ToolTip>
+                <n:ExtendedButton Grid.Column="5" x:Name="FolderButton" Style="{DynamicResource Style.Button.NoText}" Icon="{DynamicResource Vector.Open}" 
+                                  Padding="2,0" ContentWidth="20" ContentHeight="20" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5">
+                    <n:ExtendedButton.ToolTip>
                         <TextBlock Foreground="{DynamicResource Element.Foreground}">
                             <Run Text="{DynamicResource S.Encoder.ExploreFolder}"/>
                             <LineBreak/>
                             <Run Text="{TemplateBinding OutputPath}"/>
                         </TextBlock>
-                    </n:ImageButton.ToolTip>
-                </n:ImageButton>
+                    </n:ExtendedButton.ToolTip>
+                </n:ExtendedButton>
             </Grid>
 
             <Border.ContextMenu>
                 <ContextMenu>
-                    <n:ImageMenuItem x:Name="CopyMenuItem" Header="{DynamicResource S.Editor.Home.Copy}" Image="{DynamicResource Vector.Copy}"/>
+                    <n:ExtendedMenuItem x:Name="CopyMenuItem" Header="{DynamicResource S.Editor.Home.Copy}" Icon="{DynamicResource Vector.Copy}"/>
                     <Separator/>
-                    <n:ImageMenuItem x:Name="CopyImageMenuItem" Header="{DynamicResource S.Encoder.Copy.Image}" Visibility="Collapsed"/>
-                    <n:ImageMenuItem x:Name="CopyFilenameMenuItem" Header="{DynamicResource S.Encoder.Copy.Filename}"/>
-                    <n:ImageMenuItem x:Name="CopyFolderMenuItem" Header="{DynamicResource S.Encoder.Copy.Folder}"/>
-                    <n:ImageMenuItem x:Name="CopyLinkMenuItem" Header="{DynamicResource S.Encoder.Copy.Link}" Visibility="Collapsed"/>
+                    <n:ExtendedMenuItem x:Name="CopyImageMenuItem" Header="{DynamicResource S.Encoder.Copy.Image}" Visibility="Collapsed"/>
+                    <n:ExtendedMenuItem x:Name="CopyFilenameMenuItem" Header="{DynamicResource S.Encoder.Copy.Filename}"/>
+                    <n:ExtendedMenuItem x:Name="CopyFolderMenuItem" Header="{DynamicResource S.Encoder.Copy.Folder}"/>
+                    <n:ExtendedMenuItem x:Name="CopyLinkMenuItem" Header="{DynamicResource S.Encoder.Copy.Link}" Visibility="Collapsed"/>
                 </ContextMenu>
             </Border.ContextMenu>
         </Border>
@@ -227,25 +223,25 @@
                     <Condition Property="IsEnabled" Value="True"/>
                 </MultiTrigger.Conditions>
 
-                <Setter Property="Visibility" TargetName="CancelButton" Value="Visible"/>
-                <Setter Property="Visibility" TargetName="InternalViewBox" Value="Hidden"/>
+                <Setter TargetName="CancelButton" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="InternalBorder" Property="Visibility" Value="Collapsed"/>
             </MultiTrigger>
 
             <Trigger Property="OutputType" Value="Gif">
-                <Setter TargetName="FileButton" Property="Content" Value="{DynamicResource Vector.Gif}"/>
+                <Setter TargetName="FileButton" Property="Icon" Value="{DynamicResource Vector.Gif}"/>
             </Trigger>
             <Trigger Property="OutputType" Value="Apng">
-                <Setter TargetName="FileButton" Property="Content" Value="{DynamicResource Vector.Apng}"/>
+                <Setter TargetName="FileButton" Property="Icon" Value="{DynamicResource Vector.Apng}"/>
                 <Setter TargetName="CopyImageMenuItem" Property="Visibility" Value="Visible"/>
             </Trigger>
             <Trigger Property="OutputType" Value="Video">
-                <Setter TargetName="FileButton" Property="Content" Value="{DynamicResource Vector.Video}"/>
+                <Setter TargetName="FileButton" Property="Icon" Value="{DynamicResource Vector.Video}"/>
             </Trigger>
             <Trigger Property="OutputType" Value="Photoshop">
-                <Setter TargetName="FileButton" Property="Content" Value="{DynamicResource Vector.Psd}"/>
+                <Setter TargetName="FileButton" Property="Icon" Value="{DynamicResource Vector.Psd}"/>
             </Trigger>
             <Trigger Property="OutputType" Value="Project">
-                <Setter TargetName="FileButton" Property="Content" Value="{DynamicResource Vector.Project}"/>
+                <Setter TargetName="FileButton" Property="Icon" Value="{DynamicResource Vector.Project}"/>
             </Trigger>
 
             <Trigger Property="CopiedToClipboard" Value="True">
@@ -308,28 +304,26 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <Viewbox Grid.Row="0" Grid.Column="0" x:Name="InternalViewBox" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                         Stretch="Uniform" StretchDirection="Both" Margin="1" Visibility="Visible" Effect="{x:Null}">
-                    <ContentPresenter Content="{DynamicResource Vector.Cancel.Round}" Opacity="{DynamicResource Element.Opacity}"/>
-                </Viewbox>
+                <Border Grid.Row="0" Grid.Column="0" x:Name="InternalBorder" Background="{DynamicResource Vector.Cancel.Round}" 
+                        Margin="2" Visibility="Visible" Effect="{x:Null}" Opacity="{DynamicResource Element.Opacity}"/>
 
-                <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="CancelButton" Padding="2" Content="{DynamicResource Vector.Eraser}" ContentWidth="15" ContentHeight="15" 
-                               VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch"
-                               Visibility="Hidden" MaxWidth="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}" Style="{DynamicResource Style.Button.NoText}">
-                    <n:ImageButton.ToolTip>
+                <n:ExtendedButton Grid.Row="0" Grid.Column="0" x:Name="CancelButton" Padding="2" Icon="{DynamicResource Vector.Eraser}" ContentWidth="15" ContentHeight="15" 
+                                  VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch"
+                                  Visibility="Hidden" MaxWidth="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}" Style="{DynamicResource Style.Button.NoText}">
+                    <n:ExtendedButton.ToolTip>
                         <ToolTip Content="{DynamicResource S.Encoder.Remove}" Placement="Left" VerticalOffset="-5"/>
-                    </n:ImageButton.ToolTip>
-                </n:ImageButton>
+                    </n:ExtendedButton.ToolTip>
+                </n:ExtendedButton>
 
                 <Label Grid.Row="0" Grid.Column="2" Content="{DynamicResource S.Encoder.Error}" Foreground="{DynamicResource Element.Foreground}" 
                        HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="0,1,0,0"/>
 
-                <n:ImageButton Grid.Column="3" x:Name="DetailsButton" Style="{DynamicResource Style.Button.NoText}" Content="{DynamicResource Vector.Application}" 
-                               Padding="2,0" ContentWidth="20" ContentHeight="20">
-                    <n:ImageButton.ToolTip>
+                <n:ExtendedButton Grid.Column="3" x:Name="DetailsButton" Style="{DynamicResource Style.Button.NoText}" Icon="{DynamicResource Vector.Application}" 
+                                  Padding="2,0" ContentWidth="20" ContentHeight="20">
+                    <n:ExtendedButton.ToolTip>
                         <ToolTip Content="{DynamicResource S.Encoder.Details}" Placement="Top" HorizontalOffset="-5"/>
-                    </n:ImageButton.ToolTip>
-                </n:ImageButton>
+                    </n:ExtendedButton.ToolTip>
+                </n:ExtendedButton>
             </Grid>
         </Border>
 
@@ -340,8 +334,8 @@
                     <Condition Property="IsEnabled" Value="True"/>
                 </MultiTrigger.Conditions>
 
-                <Setter Property="Visibility" TargetName="CancelButton" Value="Visible"/>
-                <Setter Property="Visibility" TargetName="InternalViewBox" Value="Hidden"/>
+                <Setter TargetName="CancelButton" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="InternalBorder" Property="Visibility" Value="Collapsed"/>
             </MultiTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -359,13 +353,13 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <n:ImageButton Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="CancelButton" Padding="2" Content="{DynamicResource Vector.Close}" ContentWidth="15" ContentHeight="15"  
-                               VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch"
-                               MaxWidth="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}" Style="{DynamicResource Style.Button.NoText}">
-                    <n:ImageButton.ToolTip>
+                <n:ExtendedButton Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="CancelButton" Padding="2" Icon="{DynamicResource Vector.Close}" ContentWidth="15" ContentHeight="15"  
+                                  VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch"
+                                  MaxWidth="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}" Style="{DynamicResource Style.Button.NoText}">
+                    <n:ExtendedButton.ToolTip>
                         <ToolTip x:Name="CancelToolTip" Content="{DynamicResource S.Encoder.Remove}" Placement="Left" VerticalOffset="-5"/>
-                    </n:ImageButton.ToolTip>
-                </n:ImageButton>
+                    </n:ExtendedButton.ToolTip>
+                </n:ExtendedButton>
 
                 <Label Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" x:Name="PercentageLabel" Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Percentage}" ContentStringFormat="{}{0:##0.0} %" 
                        Foreground="{DynamicResource Element.Foreground.Gray112}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center"
@@ -387,19 +381,17 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Viewbox Grid.Row="0" Grid.Column="0" x:Name="InternalViewBox" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                         Stretch="Uniform" StretchDirection="Both" Margin="1" Visibility="Visible" Effect="{x:Null}">
-                    <ContentPresenter Content="{DynamicResource Vector.FilePermission}" Opacity="{DynamicResource Element.Opacity}"/>
-                </Viewbox>
-
-                <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="CancelButton" Padding="2" Content="{DynamicResource Vector.Eraser}" ContentWidth="15" ContentHeight="15" 
-                               VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch"
-                               Visibility="Hidden" MaxWidth="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}" 
-                               Style="{DynamicResource Style.Button.NoText}">
-                    <n:ImageButton.ToolTip>
+                <Border Grid.Row="0" Grid.Column="0" x:Name="InternalBorder" Background="{DynamicResource Vector.FilePermission}" Margin="1" 
+                        Visibility="Visible" Effect="{x:Null}" Opacity="{DynamicResource Element.Opacity}"/>
+                
+                <n:ExtendedButton Grid.Row="0" Grid.Column="0" x:Name="CancelButton" Padding="2" Icon="{DynamicResource Vector.Eraser}" ContentWidth="15" ContentHeight="15" 
+                                  VerticalAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch"
+                                  Visibility="Hidden" MaxWidth="{Binding Path=Height, RelativeSource={RelativeSource Mode=Self}}" 
+                                  Style="{DynamicResource Style.Button.NoText}">
+                    <n:ExtendedButton.ToolTip>
                         <ToolTip Content="{DynamicResource S.Encoder.Remove}" Placement="Left" VerticalOffset="-5"/>
-                    </n:ImageButton.ToolTip>
-                </n:ImageButton>
+                    </n:ExtendedButton.ToolTip>
+                </n:ExtendedButton>
 
                 <Label Grid.Row="0" Grid.Column="2" Content="{DynamicResource S.Encoder.DeletedMoved}" Foreground="{DynamicResource Element.Foreground}" 
                        HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="0,1,0,0"/>
@@ -413,8 +405,8 @@
                     <Condition Property="IsEnabled" Value="True"/>
                 </MultiTrigger.Conditions>
 
-                <Setter Property="Visibility" TargetName="CancelButton" Value="Visible"/>
-                <Setter Property="Visibility" TargetName="InternalViewBox" Value="Hidden"/>
+                <Setter TargetName="CancelButton" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="InternalBorder" Property="Visibility" Value="Collapsed"/>
             </MultiTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>

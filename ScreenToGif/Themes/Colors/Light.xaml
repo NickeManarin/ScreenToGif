@@ -15,7 +15,10 @@
     <DropShadowEffect x:Key="Shadow.Border" ShadowDepth="0" Color="#FFABABAB" Opacity=".5" BlurRadius="3" RenderingBias="Quality"/>
     <DropShadowEffect x:Key="Shadow.Border.Large" ShadowDepth="0" Color="#FFABABAB" Opacity=".4" BlurRadius="5" RenderingBias="Quality"/>
     <DropShadowEffect x:Key="Shadow.Border.Dark" ShadowDepth="0" Color="#FFABABAB" Opacity=".5" BlurRadius="3" RenderingBias="Quality"/>
-    
+
+    <!--Gradients-->
+    <Color x:Key="Gradient.Border.Light">#4FE0E3E6</Color>
+
     <!--Colors-->
     <SolidColorBrush x:Key="Panel.Background" Color="#FFFFFFFF"/>
     <SolidColorBrush x:Key="Panel.Background.Level2" Color="#FFFAFAFA"/>

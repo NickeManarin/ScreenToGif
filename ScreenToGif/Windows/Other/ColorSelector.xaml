@@ -221,15 +221,15 @@
                               Blue="{Binding ElementName=BlueIntegerUpDown, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <Grid Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2">
-                <n:ImageButton x:Name="EyeDropperButton" Content="{StaticResource Vector.Crosshair}" Margin="5" Style="{StaticResource Style.Button.Vertical}" 
-                               Text="{DynamicResource S.ColorSelector.Sample}" HorizontalContentAlignment="Center" ContentHeight="20" ContentWidth="20" Padding="3" TabIndex="2" 
-                               ToolTip="{DynamicResource S.ColorSelector.Sample.Info}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5" PreviewMouseDown="EyeDropperButton_PreviewMouseDown"/>
+                <n:ExtendedButton x:Name="EyeDropperButton" Icon="{StaticResource Vector.Crosshair}" Margin="5" Style="{StaticResource Style.Button.Vertical}" 
+                                  Text="{DynamicResource S.ColorSelector.Sample}" HorizontalContentAlignment="Center" ContentHeight="20" ContentWidth="20" Padding="3" TabIndex="2" 
+                                  ToolTip="{DynamicResource S.ColorSelector.Sample.Info}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5" PreviewMouseDown="EyeDropperButton_PreviewMouseDown"/>
 
                 <Image x:Name="EyeDropperImage" Margin="5" Opacity="0" IsHitTestVisible="False" RenderOptions.BitmapScalingMode="NearestNeighbor" Effect="{StaticResource Shadow.Border.Small}" 
                        Stretch="Uniform" VerticalAlignment="Center" HorizontalAlignment="Center" Width="{Binding ElementName=EyeDropperButton, Path=ActualWidth}" Height="{Binding ElementName=EyeDropperButton, Path=ActualHeight}"/>
 
-                <Viewbox Opacity="{Binding ElementName=EyeDropperImage, Path=Opacity}" Child="{StaticResource Vector.Crosshair.Color}" VerticalAlignment="Center" HorizontalAlignment="Center" IsHitTestVisible="False"
-                         Height="50" Width="50"/>
+                <Border Opacity="{Binding ElementName=EyeDropperImage, Path=Opacity}" Background="{StaticResource Vector.Crosshair.Color}" 
+                        VerticalAlignment="Center" HorizontalAlignment="Center" IsHitTestVisible="False" Height="50" Width="50"/>
             </Grid>
 
             <Grid Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Margin="3,0,0,0" Background="{DynamicResource Panel.Background.Level3}">
@@ -238,10 +238,10 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <n:ImageButton x:Name="OkButton" Text="{DynamicResource S.Ok}" Margin="5" Content="{StaticResource Vector.Ok}" Click="OkButton_Click"
-                               MinWidth="70" MinHeight="25" ContentHeight="16"/>
-                <n:ImageButton x:Name="CancelButton" Text="{DynamicResource S.Cancel}" Margin="5" IsCancel="True" Grid.Column="1" Content="{StaticResource Vector.Cancel}"
-                               MinWidth="70" MinHeight="25" ContentHeight="16"/>
+                <n:ExtendedButton Grid.Column="0" x:Name="OkButton" Text="{DynamicResource S.Ok}" Margin="5" Icon="{StaticResource Vector.Ok}"
+                                  MinWidth="70" MinHeight="25" ContentWidth="16" ContentHeight="16" Click="OkButton_Click"/>
+                <n:ExtendedButton Grid.Column="1" x:Name="CancelButton" Text="{DynamicResource S.Cancel}" Margin="5" Icon="{StaticResource Vector.Cancel}"
+                                  MinWidth="70" MinHeight="25" ContentWidth="16" ContentHeight="16" IsCancel="True"/>
             </Grid>
         </Grid>
     </Grid>

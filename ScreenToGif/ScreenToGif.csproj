@@ -43,6 +43,7 @@
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -122,6 +123,7 @@
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Management" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web" />
@@ -164,6 +166,7 @@
     <Compile Include="Controls\ColorBox.cs" />
     <Compile Include="Controls\CroppingAdorner.cs" />
     <Compile Include="Controls\DataGridHeaderBorder.cs" />
+    <Compile Include="Controls\DisplayTimer.cs" />
     <Compile Include="Controls\DoubleBox.cs" />
     <Compile Include="Controls\DragScrollGrid.cs" />
     <Compile Include="Controls\DrawingCanvas.cs" />
@@ -173,11 +176,13 @@
     <Compile Include="Controls\ExtendedCheckBox.cs" />
     <Compile Include="Controls\ExtendedProgressBar.cs" />
     <Compile Include="Controls\ExtendedTextBox.cs" />
+    <Compile Include="Controls\FolderSelector.cs" />
     <Compile Include="Controls\FrameListBoxItem.cs" />
+    <Compile Include="Controls\FrameViewer.cs" />
     <Compile Include="Controls\FrameworkElementAdorner.cs" />
     <Compile Include="Controls\HeaderedTooltip.cs" />
     <Compile Include="Controls\ExtendedUniformGrid.cs" />
-    <Compile Include="Controls\ImageCard.cs" />
+    <Compile Include="Controls\Card.cs" />
     <Compile Include="Controls\LabelSeparator.cs" />
     <Compile Include="Controls\ElementAdorner.cs" />
     <Compile Include="Controls\NotificationBox.cs" />
@@ -195,25 +200,22 @@
     <Compile Include="Controls\SelectControl.cs" />
     <Compile Include="Controls\Shapes\Arrow.cs" />
     <Compile Include="Controls\Shapes\Triangle.cs" />
+    <Compile Include="Controls\SideScrollViewer.cs" />
     <Compile Include="Controls\SplitButton.cs" />
     <Compile Include="Controls\KeyBox.cs" />
     <Compile Include="Controls\HexadecimalBox.cs" />
     <Compile Include="Controls\HideableTabControl.cs" />
-    <Compile Include="Controls\HierarchicalItem.cs" />
-    <Compile Include="Controls\ImageButton.cs" />
-    <Compile Include="Controls\ImageListBoxItem.cs" />
-    <Compile Include="Controls\ImageMenuItem.cs" />
-    <Compile Include="Controls\ImageRadioButton.cs" />
-    <Compile Include="Controls\ImageRepeatButton.cs" />
-    <Compile Include="Controls\ImageScrollViewer.cs" />
-    <Compile Include="Controls\ImageToggleButton.cs" />
+    <Compile Include="Controls\ExtendedButton.cs" />
+    <Compile Include="Controls\ExtendedListBoxItem.cs" />
+    <Compile Include="Controls\ExtendedMenuItem.cs" />
+    <Compile Include="Controls\ExtendedRadioButton.cs" />
+    <Compile Include="Controls\ExtendedRepeatButton.cs" />
+    <Compile Include="Controls\ExtendedToggleButton.cs" />
     <Compile Include="Controls\InkCanvasExtended.cs" />
     <Compile Include="Controls\IntegerBox.cs" />
     <Compile Include="Controls\MoveResizeControl.cs" />
-    <Compile Include="Controls\NumericTextBox.cs" />
     <Compile Include="Controls\DoubleUpDown.cs" />
     <Compile Include="Controls\IntegerUpDown.cs" />
-    <Compile Include="Controls\PathListViewItem.cs" />
     <Compile Include="Controls\PuncturedRect.cs" />
     <Compile Include="Controls\RadialPanel.cs" />
     <Compile Include="Controls\RangeSlider.cs" />
@@ -311,6 +313,7 @@
     <Compile Include="Model\FosshubItem.cs" />
     <Compile Include="Model\FosshubRelease.cs" />
     <Compile Include="Model\FosshubResponse.cs" />
+    <Compile Include="Model\MediaSource.cs" />
     <Compile Include="Model\ShadowModel.cs" />
     <Compile Include="Model\DefaultTaskModel.cs" />
     <Compile Include="Model\FfmpegPreset.cs" />
@@ -320,6 +323,11 @@
     <Compile Include="Model\ManipulatedEventArgs.cs" />
     <Compile Include="Model\DelayModel.cs" />
     <Compile Include="Model\MouseClicksModel.cs" />
+    <Compile Include="Model\VideoSource.cs" />
+    <Compile Include="Native\Monitor.cs" />
+    <Compile Include="Settings\Migrations\IMigration.cs" />
+    <Compile Include="Settings\Migrations\Migration0to2_27.cs" />
+    <Compile Include="Settings\UserSettings.cs" />
     <Compile Include="UserControls\ShadowPanel.xaml.cs">
       <DependentUpon>ShadowPanel.xaml</DependentUpon>
     </Compile>
@@ -339,24 +347,34 @@
       <DependentUpon>MouseClicksPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Util\ActionStack.cs" />
-    <Compile Include="Util\ActivityHook\CustomKeyEventArgs.cs" />
-    <Compile Include="Util\ActivityHook\CustomKeyPressEventArgs.cs" />
-    <Compile Include="Util\ActivityHook\CustomMouseEventArgs.cs" />
-    <Compile Include="Util\ActivityHook\UserActivityHook.cs" />
+    <Compile Include="Util\Converters\StringToDoubleArray.cs" />
+    <Compile Include="Util\InputHook\CustomKeyEventArgs.cs" />
+    <Compile Include="Util\InputHook\CustomKeyPressEventArgs.cs" />
+    <Compile Include="Util\InputHook\SimpleMouseGesture.cs" />
+    <Compile Include="Util\InputHook\InputHook.cs" />
     <Compile Include="Util\Argument.cs" />
     <Compile Include="Util\BitHelper.cs" />
-    <Compile Include="Util\Capture\BaseCapture.cs" />
-    <Compile Include="Util\Capture\DirectCachedCapture.cs" />
-    <Compile Include="Util\Capture\DirectImageCapture.cs" />
-    <Compile Include="Util\Capture\ICapture.cs" />
-    <Compile Include="Util\Capture\CachedCapture.cs" />
-    <Compile Include="Util\Capture\RegionSelectHelper.cs" />
+    <Compile Include="Util\BrushAnimation.cs" />
+    <Compile Include="Capture\BaseCapture.cs" />
+    <Compile Include="Capture\DirectCachedCapture.cs" />
+    <Compile Include="Capture\DirectChangedCachedCapture.cs" />
+    <Compile Include="Capture\DirectChangedImageCapture.cs" />
+    <Compile Include="Capture\DirectImageCapture.cs" />
+    <Compile Include="Capture\ICapture.cs" />
+    <Compile Include="Capture\CachedCapture.cs" />
+    <Compile Include="Capture\RegionSelectHelper.cs" />
     <Compile Include="Util\ComboBoxItemTemplateSelector.cs" />
+    <Compile Include="Util\Converters\BoolAnd.cs" />
+    <Compile Include="Util\Converters\BoolOr.cs" />
     <Compile Include="Util\Converters\CenterPopupConverter.cs" />
+    <Compile Include="Util\Converters\CommandToKeyGesture.cs" />
     <Compile Include="Util\Converters\ContentToVisibility.cs" />
     <Compile Include="Util\Converters\DoubleToRadius.cs" />
+    <Compile Include="Util\Converters\InvertedEnumToVisibility.cs" />
+    <Compile Include="Util\Converters\HasEnumToVisibility.cs" />
     <Compile Include="Util\Converters\InvertedEnumToBool.cs" />
     <Compile Include="Util\Converters\InvertedIntToVisibility.cs" />
+    <Compile Include="Util\Converters\KeyGestureToString.cs" />
     <Compile Include="Util\Converters\PercentageToOpacity.cs" />
     <Compile Include="Util\Converters\BoolAndToVisibility.cs" />
     <Compile Include="Util\Converters\BoolOrAndToVisibility.cs" />
@@ -378,7 +396,6 @@
     <Compile Include="Util\Clipboard.cs" />
     <Compile Include="Util\ColorExtensions.cs" />
     <Compile Include="Util\Constants.cs" />
-    <Compile Include="Util\ControlArgs\RangeArgs.cs" />
     <Compile Include="Util\Converters\AlphaToOpacity.cs" />
     <Compile Include="Util\Converters\BoolOrToInvertedVisibility.cs" />
     <Compile Include="Util\Converters\BoolOrToVisibility.cs" />
@@ -429,9 +446,10 @@
     <Compile Include="Util\HotKey.cs" />
     <Compile Include="Util\HotKeyCollection.cs" />
     <Compile Include="Model\UpdateAvailable.cs" />
+    <Compile Include="Util\InterProcess.cs" />
     <Compile Include="Util\MutexList.cs" />
     <Compile Include="Util\NotificationManager.cs" />
-    <Compile Include="Util\Capture\ImageCapture.cs" />
+    <Compile Include="Capture\ImageCapture.cs" />
     <Compile Include="Util\ThemeHelper.cs" />
     <Compile Include="Util\WebHelper.cs" />
     <Compile Include="Model\ApplicationModel.cs" />
@@ -459,14 +477,19 @@
     <Compile Include="Util\UiElementsExtension.cs" />
     <Compile Include="Util\UserSettings.cs" />
     <Compile Include="Util\VisualHelper.cs" />
+    <Compile Include="Util\WordLevel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\EditorViewModel.cs" />
+    <Compile Include="ViewModel\RecorderViewModel.cs" />
+    <Compile Include="ViewModel\ScreenRecorderViewModel.cs" />
+    <Compile Include="ViewModel\WebcamViewModel.cs" />
     <Compile Include="Webcam\DirectShow\ControlStreaming.cs" />
     <Compile Include="Webcam\DirectShow\CoreStreaming.cs" />
     <Compile Include="Webcam\DirectShow\Devices.cs" />
     <Compile Include="Webcam\DirectShow\EditStreaming.cs" />
     <Compile Include="Webcam\DirectShow\ExtendStreaming.cs" />
-    <Compile Include="Webcam\DirectShow\UtilStreaming.cs" />
+    <Compile Include="Webcam\DirectShow\Marshaller.cs" />
+    <Compile Include="Webcam\DirectShow\Util.cs" />
     <Compile Include="Webcam\DirectShow\Uuid.cs" />
     <Compile Include="Webcam\DirectShow\Workaround.cs" />
     <Compile Include="Webcam\DirectX\CaptureWebcam.cs" />
@@ -478,6 +501,9 @@
     </Compile>
     <Compile Include="Windows\NewRecorder.xaml.cs">
       <DependentUpon>NewRecorder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\NewWebcam.xaml.cs">
+      <DependentUpon>NewWebcam.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Other\CacheDialog.xaml.cs">
       <DependentUpon>CacheDialog.xaml</DependentUpon>
@@ -533,14 +559,17 @@
     <Compile Include="Windows\Options.xaml.cs">
       <DependentUpon>Options.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Other\RegionMagnifier.xaml.cs">
+      <DependentUpon>RegionMagnifier.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Other\RegionSelection.xaml.cs">
       <DependentUpon>RegionSelection.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Other\RegionSelector.xaml.cs">
       <DependentUpon>RegionSelector.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Other\SelectFolderDialog.xaml.cs">
-      <DependentUpon>SelectFolderDialog.xaml</DependentUpon>
+    <Compile Include="Windows\Other\Splash.xaml.cs">
+      <DependentUpon>Splash.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Other\TextDialog.xaml.cs">
       <DependentUpon>TextDialog.xaml</DependentUpon>
@@ -556,9 +585,6 @@
     </Compile>
     <Compile Include="Windows\Other\TestField.xaml.cs">
       <DependentUpon>TestField.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Other\RecorderNew.xaml.cs">
-      <DependentUpon>RecorderNew.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Recorder.xaml.cs">
       <DependentUpon>Recorder.xaml</DependentUpon>
@@ -587,14 +613,6 @@
     <Page Include="Resources\Flags.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\Glyphs.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\IconSet.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\Localization\StringResources.ar.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -696,6 +714,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources\Vectors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Button.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -741,6 +763,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controls\LightWindow.cs" />
+    <None Include="Docs\Documentation.md" />
     <None Include="packages.config" />
     <None Include="Themes\Old.xaml">
       <SubType>Designer</SubType>
@@ -779,6 +802,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\NewRecorder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\NewWebcam.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -854,6 +881,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\Other\RegionMagnifier.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\Other\RegionSelection.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -862,9 +893,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Other\SelectFolderDialog.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Windows\Other\Splash.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Other\TextDialog.xaml">
       <SubType>Designer</SubType>
@@ -883,10 +914,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Other\TestField.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Other\RecorderNew.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -935,7 +962,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\Style.css" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

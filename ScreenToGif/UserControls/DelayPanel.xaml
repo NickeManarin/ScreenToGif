@@ -62,7 +62,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Viewbox Grid.Column="0" MinWidth="15" MaxHeight="15" Stretch="Uniform" Child="{StaticResource Vector.Info}" Opacity="{DynamicResource Element.Opacity}"/>
+            <Border Grid.Column="0" Width="15" Height="15" Background="{StaticResource Vector.Info}" Opacity="{DynamicResource Element.Opacity}"/>
             <TextBlock Grid.Column="1" Text="{DynamicResource S.Delay.Override.Info}" Foreground="{DynamicResource Element.Foreground.Detail}" 
                        FontStyle="Italic" FontSize="12" Padding="3" TextWrapping="WrapWithOverflow"
                        Visibility="{Binding ElementName=TypeComboBox, Path=SelectedIndex, Converter={StaticResource IntToVisibility}, ConverterParameter=0}"/>

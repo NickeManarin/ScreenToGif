@@ -15,11 +15,11 @@
 
         <Grid Grid.Row="0" Background="{DynamicResource Panel.Background.Level4}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="40"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Viewbox Margin="5" Child="{StaticResource Vector.Delete.Folder}" Opacity="{DynamicResource Element.Opacity}"/>
+            <Border Margin="5" Background="{StaticResource Vector.Delete.Folder}" Opacity="{DynamicResource Element.Opacity}"/>
 
             <Label Content="{DynamicResource S.Options.Storage.Cache.Header}" Margin="3" Grid.Column="1" VerticalContentAlignment="Center" 
                    FontFamily="Segoe UI Semilight" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
@@ -29,6 +29,7 @@
 
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -42,10 +43,12 @@
                 <Run Text="{DynamicResource S.Options.Storage.Cache.Question}"/>
             </TextBlock>
 
-            <n:ExtendedCheckBox Grid.Row="1" x:Name="IgnoreRecentCheckBox" Text="{DynamicResource S.Options.Storage.Cache.IgnoreRecent}" Margin="25,10,10,5" FontSize="14"
+            <Separator Grid.Row="1" Height="1" Margin="5,3"/>
+            
+            <n:ExtendedCheckBox Grid.Row="2" x:Name="IgnoreRecentCheckBox" Text="{DynamicResource S.Options.Storage.Cache.IgnoreRecent}" Margin="25,10,10,5" FontSize="14"
                                 VerticalContentAlignment="Center" IsChecked="True" CheckedChanged="CheckBox_CheckedChanged"/>
 
-            <TextBlock Grid.Row="2" x:Name="InfoTextBlock" Margin="25,5,10,5" FontSize="14" TextWrapping="WrapWithOverflow" Foreground="{DynamicResource Element.Foreground.Gray150}"
+            <TextBlock Grid.Row="3" x:Name="InfoTextBlock" Margin="25,5,10,5" FontSize="14" TextWrapping="WrapWithOverflow" Foreground="{DynamicResource Element.Foreground.Gray150}"
                        Text="{DynamicResource S.Options.Storage.Cache.IgnoreRecent.Yes}"/>
         </Grid>
 
@@ -56,8 +59,10 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <n:ImageButton Grid.Column="1" x:Name="YesButton" Text="{DynamicResource S.Yes}" Content="{StaticResource Vector.Ok}" ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="YesButton_Click"/>
-            <n:ImageButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource S.No}" Content="{StaticResource Vector.No}" ContentHeight="24" Padding="4,0" MinWidth="90" Margin="5" Click="NoButton_Click" IsCancel="True"/>
+            <n:ExtendedButton Grid.Column="1" x:Name="YesButton" Text="{DynamicResource S.Yes}" Icon="{StaticResource Vector.Ok}" 
+                              ContentWidth="18" ContentHeight="18" Padding="5,0" MinWidth="90" Margin="5" Click="YesButton_Click"/>
+            <n:ExtendedButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource S.No}" Icon="{StaticResource Vector.No}" 
+                              ContentWidth="18" ContentHeight="18" Padding="5,0" MinWidth="90" Margin="5" IsCancel="True" Click="NoButton_Click"/>
         </Grid>
     </Grid>
 </Window>

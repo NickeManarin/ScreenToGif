@@ -51,16 +51,16 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <Viewbox Grid.Column="0" Child="{StaticResource Vector.Arrow.Blue.Top}" MaxWidth="15" MaxHeight="15" Opacity="{DynamicResource Element.Opacity}"/>
+                    <Border Grid.Column="0" Background="{StaticResource Vector.Arrow.Blue.Top}" Width="15" Height="15" Opacity="{DynamicResource Element.Opacity}"/>
                     <n:IntegerUpDown Grid.Column="1" x:Name="BorderTopThicknessNumericUpDown" Minimum="-500" Maximum="20" Margin="3,5" Width="55" 
                                      Value="{Binding TopThickness, Mode=TwoWay}"/>
                 </Grid>
 
-                <Viewbox Grid.Row="1" Grid.Column="0" Child="{StaticResource Vector.Arrow.Blue.Left}" MaxWidth="15" MaxHeight="15" Margin="5,0,0,0" Opacity="{DynamicResource Element.Opacity}"/>
+                <Border Grid.Row="1" Grid.Column="0" Background="{StaticResource Vector.Arrow.Blue.Left}" Width="15" Height="15" Margin="5,0,0,0" Opacity="{DynamicResource Element.Opacity}"/>
                 <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="BorderLeftThicknessNumericUpDown" Minimum="-500" Maximum="20" Margin="3,5" Width="55" 
                                  Value="{Binding LeftThickness, Mode=TwoWay}"/>
 
-                <Viewbox Grid.Row="1" Grid.Column="3" Child="{StaticResource Vector.Arrow.Blue.Right}" MaxWidth="15" MaxHeight="15" Opacity="{DynamicResource Element.Opacity}"/>
+                <Border Grid.Row="1" Grid.Column="3" Background="{StaticResource Vector.Arrow.Blue.Right}" Width="15" Height="15" Opacity="{DynamicResource Element.Opacity}"/>
                 <n:IntegerUpDown Grid.Row="1" Grid.Column="2" x:Name="BorderRightThicknessNumericUpDown" Minimum="-500" Maximum="20" Margin="3,5" Width="55" 
                                  Value="{Binding RightThickness, Mode=TwoWay}"/>
 
@@ -70,7 +70,7 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <Viewbox Grid.Column="0" Child="{StaticResource Vector.Arrow.Blue.Bottom}" MaxWidth="15" MaxHeight="15" Opacity="{DynamicResource Element.Opacity}"/>
+                    <Border Grid.Column="0" Background="{StaticResource Vector.Arrow.Blue.Bottom}" Width="15" Height="15" Opacity="{DynamicResource Element.Opacity}"/>
                     <n:IntegerUpDown Grid.Column="1" x:Name="BorderBottomThicknessNumericUpDown" Minimum="-500" Maximum="20" Margin="3,5" Width="55" 
                                      Value="{Binding BottomThickness, Mode=TwoWay}"/>
                 </Grid>
@@ -83,7 +83,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Viewbox Grid.Column="0" MinWidth="15" MaxHeight="15" Stretch="Uniform" Child="{StaticResource Vector.Info}" Opacity="{DynamicResource Element.Opacity}"/>
+            <Border Grid.Column="0" Width="15" Height="15" Background="{StaticResource Vector.Info}" Opacity="{DynamicResource Element.Opacity}"/>
             <TextBlock Grid.Column="1" Text="{DynamicResource S.Border.Info}" Foreground="{DynamicResource Element.Foreground.Detail}" 
                        FontStyle="Italic" FontSize="12" Padding="3" TextWrapping="WrapWithOverflow"/>
         </Grid>

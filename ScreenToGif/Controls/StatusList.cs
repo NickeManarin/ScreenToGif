@@ -27,7 +27,7 @@ namespace ScreenToGif.Controls
 
         #endregion
 
-        private void Add(StatusType type, string text, UIElement image = null, Action action = null)
+        private void Add(StatusType type, string text, Action action = null)
         {
             var current = Children.OfType<StatusBand>().FirstOrDefault(x => x.Type == type && x.Text == text);
 
@@ -45,30 +45,30 @@ namespace ScreenToGif.Controls
             switch (type)
             {
                 case StatusType.Info:
-                    band.Info(text, image, action);
+                    band.Info(text, action);
                     break;
                 case StatusType.Warning:
-                    band.Warning(text, image, action);
+                    band.Warning(text, action);
                     break;
                 case StatusType.Error:
-                    band.Error(text, image, action);
+                    band.Error(text, action);
                     break;
             }
         }
 
-        public void Info(string text, UIElement image = null, Action action = null)
+        public void Info(string text, Action action = null)
         {
-            Add(StatusType.Info, text, image, action);
+            Add(StatusType.Info, text, action);
         }
 
-        public void Warning(string text, UIElement image = null, Action action = null)
+        public void Warning(string text, Action action = null)
         {
-            Add(StatusType.Warning, text, image, action);
+            Add(StatusType.Warning, text, action);
         }
 
-        public void Error(string text, UIElement image = null, Action action = null)
+        public void Error(string text, Action action = null)
         {
-            Add(StatusType.Error, text, image, action);
+            Add(StatusType.Error, text, action);
         }
 
         public void Remove(StatusType type)

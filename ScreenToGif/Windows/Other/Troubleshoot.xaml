@@ -17,12 +17,12 @@
 
         <Grid Grid.Row="0" Background="{DynamicResource Panel.Background.Level4}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="40"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Viewbox Grid.Column="0" Margin="6" Child="{StaticResource Vector.Warning}" MaxWidth="25" MaxHeight="25" Opacity="{DynamicResource Element.Opacity}"/>
+            <Border Grid.Column="0" Margin="6" Background="{StaticResource Vector.Warning}" Opacity="{DynamicResource Element.Opacity}"/>
 
             <TextBlock Grid.Column="1" x:Name="TypeLabel" Text="{DynamicResource S.Troubleshoot.Windows}" Margin="5" VerticalAlignment="Center" 
                        FontFamily="Segoe UI Semilight" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
@@ -37,8 +37,8 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <n:ImageRadioButton Grid.Column="0" x:Name="NowRadioButton" Text="{DynamicResource S.Troubleshoot.Windows.Current}" TextWrapping="Wrap" Checked="KindRadioButton_Checked"/>
-            <n:ImageRadioButton Grid.Column="1" x:Name="LaterRadioButton" Text="{DynamicResource S.Troubleshoot.Windows.Next}" TextWrapping="Wrap" Checked="KindRadioButton_Checked"/>
+            <n:ExtendedRadioButton Grid.Column="0" x:Name="NowRadioButton" Text="{DynamicResource S.Troubleshoot.Windows.Current}" TextWrapping="Wrap" Checked="KindRadioButton_Checked"/>
+            <n:ExtendedRadioButton Grid.Column="1" x:Name="LaterRadioButton" Text="{DynamicResource S.Troubleshoot.Windows.Next}" TextWrapping="Wrap" Checked="KindRadioButton_Checked"/>
         </Grid>
 
         <Viewbox Grid.Row="2" Stretch="Uniform" StretchDirection="Both" Margin="3" VerticalAlignment="Center">
@@ -70,7 +70,8 @@
                 <ColumnDefinition Width="Auto" MinWidth="110"/>
             </Grid.ColumnDefinitions>
 
-            <n:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource S.Ok}" Margin="5" Padding="2,0" ContentHeight="20" Content="{StaticResource Vector.Ok}" Click="OkButton_Click" IsCancel="True"/>
+            <n:ExtendedButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource S.Ok}" Icon="{StaticResource Vector.Ok}" 
+                              ContentWidth="18" ContentHeight="18" Padding="5,0" MinWidth="90" Margin="5" Click="OkButton_Click" IsCancel="True"/>
         </Grid>
     </Grid>
 </Window>

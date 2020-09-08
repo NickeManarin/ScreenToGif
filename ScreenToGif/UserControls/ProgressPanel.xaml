@@ -37,7 +37,6 @@
             </DataTemplate>
 
             <c:IntToBool x:Key="IntToBool"/>
-            <c:EnumToBool x:Key="EnumToBool"/>
             <c:BoolAndToVisibility x:Key="BoolAndToVisibility"/>
             <c:BoolAndOrOrToVisibility x:Key="BoolAndOrOrToVisibility"/>
         </Grid.Resources>
@@ -49,13 +48,11 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <n:ImageRadioButton Grid.Column="0" x:Name="BarRadioButton" Content="{StaticResource Vector.Progress}" Text="{DynamicResource S.Progress.Type.Bar}" 
-                                IsChecked="{Binding Type, Mode=TwoWay, Converter={StaticResource EnumToBool}, 
-                                ConverterParameter={x:Static u:ProgressType.Bar}}"/>
+            <n:ExtendedRadioButton Grid.Column="0" x:Name="BarRadioButton" Icon="{StaticResource Vector.Progress}" Text="{DynamicResource S.Progress.Type.Bar}" 
+                                   IsChecked="{Binding Type, Mode=TwoWay, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:ProgressType.Bar}}"/>
 
-            <n:ImageRadioButton Grid.Column="1" x:Name="TextRadioButton" Content="{StaticResource Vector.FreeText}" Text="{StaticResource S.Progress.Type.Text}"
-                                IsChecked="{Binding Type, Mode=TwoWay,  Converter={StaticResource EnumToBool}, 
-                                ConverterParameter={x:Static u:ProgressType.Text}}"/>
+            <n:ExtendedRadioButton Grid.Column="1" x:Name="TextRadioButton" Icon="{StaticResource Vector.FreeText}" Text="{StaticResource S.Progress.Type.Text}"
+                                   IsChecked="{Binding Type, Mode=TwoWay, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:ProgressType.Text}}"/>
         </Grid>
 
         <Expander Grid.Row="2" Header="{DynamicResource S.Caption.Font}" IsExpanded="{Binding IsProgressFontGroupExpanded, Source={x:Static u:UserSettings.All}}"

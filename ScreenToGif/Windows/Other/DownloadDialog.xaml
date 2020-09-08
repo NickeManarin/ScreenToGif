@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         Title="{DynamicResource S.Updater.Title}" Height="400" Width="600" MinHeight="300" MinWidth="450"
-        Loaded="Window_Loaded" SizeToContent="Height" WindowStartupLocation="CenterScreen" Background="{DynamicResource Panel.Background}">
+        SizeToContent="Height" WindowStartupLocation="CenterScreen" Background="{DynamicResource Panel.Background}" 
+        Loaded="Window_Loaded" Closing="Window_Closing">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -19,7 +20,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Viewbox x:Name="IconViewbox" Margin="5" Child="{StaticResource Vector.Synchronize}" Opacity="{DynamicResource Element.Opacity}"/>
+            <Border Margin="5" Width="32" Height="32" Background="{StaticResource Vector.Synchronize}" Opacity="{DynamicResource Element.Opacity}"/>
 
             <Label x:Name="InstructionLabel" Content="{DynamicResource S.Updater.Header}" Margin="3" Grid.Column="1" VerticalContentAlignment="Center" 
                    FontFamily="Segoe UI Semilight" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
@@ -61,8 +62,10 @@
             <ProgressBar Grid.Column="0" x:Name="DownloadProgressBar" Height="4" Margin="5,0" IsIndeterminate="True" Visibility="Hidden"/>
             <n:ExtendedCheckBox Grid.Column="0" x:Name="RunAfterwardsCheckBox" Text="{DynamicResource S.Updater.RunAfter}" Margin="5" Visibility="Collapsed"/>
 
-            <n:ImageButton Grid.Column="1" x:Name="DownloadButton" Text="{DynamicResource S.Updater.Download}" Content="{StaticResource Vector.Ok}" ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="DownloadButton_Click"/>
-            <n:ImageButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource S.Cancel}" Content="{StaticResource Vector.Cancel}" ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="CancelButton_Click" IsCancel="True"/>
+            <n:ExtendedButton Grid.Column="1" x:Name="DownloadButton" Text="{DynamicResource S.Updater.Download}" Icon="{StaticResource Vector.Ok}" 
+                              ContentWidth="18" ContentHeight="18" Padding="5,0" MinWidth="90" Margin="5" Click="DownloadButton_Click"/>
+            <n:ExtendedButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource S.Cancel}" Icon="{StaticResource Vector.Cancel}" 
+                              ContentWidth="18" ContentHeight="18" Padding="5,0" MinWidth="90" Margin="5" IsCancel="True" Click="CancelButton_Click"/>
         </Grid>
     </Grid>
 </Window>

@@ -82,34 +82,27 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <n:ImageButton x:Name="BackButton" Content="{StaticResource Vector.Back}" Margin="0" 
-                           Style="{StaticResource Style.Button.NoText}" HorizontalContentAlignment="Center" ContentHeight="20" MinWidth="30" Padding="2" Click="BackButton_OnClick">
-                <n:ImageButton.ToolTip>
-                    <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource S.Back}"/>
-                </n:ImageButton.ToolTip>
-            </n:ImageButton>
-
-            <n:ImageButton Grid.Column="1" x:Name="OptionsButton" Text="" Content="{StaticResource Vector.Options}" TabIndex="0"
-                           Style="{StaticResource Style.Button.NoText}" HorizontalContentAlignment="Center" ContentHeight="20" Padding="3" Command="{StaticResource Command.Options}">
-                <n:ImageButton.ToolTip>
+            <n:ExtendedButton Grid.Column="1" x:Name="OptionsButton" Icon="{StaticResource Vector.Options}" TabIndex="0" ContentWidth="20" ContentHeight="20"
+                           Style="{StaticResource Style.Button.NoText}" HorizontalContentAlignment="Center" Padding="3" Command="{StaticResource Command.Options}">
+                <n:ExtendedButton.ToolTip>
                     <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource S.StartUp.Options}"/>
-                </n:ImageButton.ToolTip>
-            </n:ImageButton>
+                </n:ExtendedButton.ToolTip>
+            </n:ExtendedButton>
 
-            <n:ImageButton Grid.Column="2" x:Name="ScaleButton" Content="{StaticResource Vector.Resize}" TabIndex="1"
-                           Style="{StaticResource Style.Button.NoText}" HorizontalContentAlignment="Center" ContentHeight="20" Padding="3" Click="ScaleButton_Click"
-                           IsEnabled="{Binding ElementName=VideoDevicesComboBox, Path=IsEnabled}">
-                <n:ImageButton.ToolTip>
+            <n:ExtendedButton Grid.Column="2" x:Name="ScaleButton" Icon="{StaticResource Vector.Resize}" TabIndex="1" ContentWidth="20" ContentHeight="20" Padding="3" 
+                              Style="{StaticResource Style.Button.NoText}" HorizontalContentAlignment="Center" Click="ScaleButton_Click"
+                              IsEnabled="{Binding ElementName=VideoDevicesComboBox, Path=IsEnabled}">
+                <n:ExtendedButton.ToolTip>
                     <ToolTip Placement="Bottom" HorizontalOffset="-5" Content="{DynamicResource S.Webcam.ChangeScale}" />
-                </n:ImageButton.ToolTip>
-            </n:ImageButton>
+                </n:ExtendedButton.ToolTip>
+            </n:ExtendedButton>
 
-            <n:ImageButton Grid.Column="3" x:Name="RefreshButton" Content="{StaticResource Vector.Repeat}" TabIndex="1"
-                           Style="{StaticResource Style.Button.NoText}" HorizontalContentAlignment="Center" ContentHeight="20" Padding="3" Command="{StaticResource Command.CheckVideoDevices}">
-                <n:ImageButton.ToolTip>
+            <n:ExtendedButton Grid.Column="3" x:Name="RefreshButton" Icon="{StaticResource Vector.Repeat}" TabIndex="1" ContentWidth="20" ContentHeight="20" Padding="3" 
+                              Style="{StaticResource Style.Button.NoText}" HorizontalContentAlignment="Center" Command="{StaticResource Command.CheckVideoDevices}">
+                <n:ExtendedButton.ToolTip>
                     <ToolTip Placement="Bottom" HorizontalOffset="-5" Content="{DynamicResource S.Webcam.CheckVideoDevices}" />
-                </n:ImageButton.ToolTip>
-            </n:ImageButton>
+                </n:ExtendedButton.ToolTip>
+            </n:ExtendedButton>
 
             <ComboBox Grid.Column="4" x:Name="VideoDevicesComboBox" MinWidth="120" Margin="0,3" TabIndex="2" IsEnabled="False" SelectionChanged="VideoDevicesComboBox_SelectionChanged"/>
 
@@ -127,7 +120,7 @@
                 </Grid>
 
                 <Viewbox.ToolTip>
-                    <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource S.Recorder.FpsRange}"/>
+                    <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource S.Recorder.Fps.Range}"/>
                 </Viewbox.ToolTip>
             </Viewbox>
 
@@ -142,20 +135,19 @@
 
             <Separator Grid.Column="9" Width="1" Margin="5,2"/>
 
-            <n:ImageButton Grid.Column="10" x:Name="DiscardButton" Text="{DynamicResource S.Recorder.Discard}" Content="{StaticResource Vector.Remove}" Visibility="Collapsed" 
-                           Click="DiscardButton_Click" Style="{StaticResource Style.Button.Horizontal}" 
-                           UseLayoutRounding="True" MaxSize="16" TabIndex="4" MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"
-                           KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='3'}"/>
+            <n:ExtendedButton Grid.Column="10" x:Name="DiscardButton" Text="{DynamicResource S.Recorder.Discard}" Icon="{StaticResource Vector.Remove}" Visibility="Collapsed" 
+                              Click="DiscardButton_Click" Style="{StaticResource Style.Button.Horizontal}" UseLayoutRounding="True" ContentWidth="16" ContentHeight="16" TabIndex="4" 
+                              MinWidth="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}" KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='3'}"/>
 
-            <n:ImageButton Grid.Column="11" x:Name="RecordPauseButton" IsEnabled="False" TabIndex="5"
-                           Text="{Binding Path=Stage, ElementName=WebcamWindow, Converter={StaticResource StageToButtonStringConverter}, FallbackValue={StaticResource S.Recorder.Record}}" 
-                           Content="{Binding Path=Stage, ElementName=WebcamWindow, Converter={StaticResource StageToCanvasConverter}, FallbackValue={StaticResource Vector.Record}}" 
-					       KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='1'}"
-                           MaxSize="16" Click="RecordPauseButton_Click" Style="{StaticResource Style.Button.Horizontal}"/>
+            <n:ExtendedButton Grid.Column="11" x:Name="RecordPauseButton" IsEnabled="False" TabIndex="5"
+                              Text="{Binding Path=Stage, ElementName=WebcamWindow, Converter={StaticResource StageToButtonStringConverter}, FallbackValue={StaticResource S.Recorder.Record}}" 
+                              Icon="{Binding Path=Stage, ElementName=WebcamWindow, Converter={StaticResource StageToCanvasConverter}, FallbackValue={StaticResource Vector.Record}}" 
+                              KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='1'}"
+                              ContentWidth="16" ContentHeight="16" Click="RecordPauseButton_Click" Style="{StaticResource Style.Button.Horizontal}"/>
 
-            <n:ImageButton Grid.Column="12" x:Name="StopButton" Text="{DynamicResource S.Recorder.Stop}" Content="{StaticResource Vector.Stop}" MaxSize="16" Margin="0" 
-                           Command="Stop" Style="{StaticResource Style.Button.Horizontal}" UseLayoutRounding="True" TabIndex="6"
-                           KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='2'}"/>
+            <n:ExtendedButton Grid.Column="12" x:Name="StopButton" Text="{DynamicResource S.Recorder.Stop}" Icon="{StaticResource Vector.Stop}" ContentWidth="16" ContentHeight="16" Margin="0" 
+                              Command="Stop" Style="{StaticResource Style.Button.Horizontal}" UseLayoutRounding="True" TabIndex="6"
+                              KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='2'}"/>
         </Grid>
 
         <Popup Grid.Row="0" x:Name="ScalePopup" Placement="Bottom" PlacementTarget="{Binding ElementName=ScaleButton}" StaysOpen="False" Width="200" Height="50">

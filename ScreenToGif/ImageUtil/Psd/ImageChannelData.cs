@@ -112,12 +112,12 @@ namespace ScreenToGif.ImageUtil.Psd
                 ms.Read(compressed, 0, compressed.Length);
             }
 
-            return compressed;
+            //var gzBuffer = new byte[compressed.Length + 4];
+            //Buffer.BlockCopy(compressed, 0, gzBuffer, 4, compressed.Length);
+            //Buffer.BlockCopy(BitConverter.GetBytes(buffer.Length), 0, gzBuffer, 0, 4);
+            //return gzBuffer;
 
-            var gzBuffer = new byte[compressed.Length + 4];
-            Buffer.BlockCopy(compressed, 0, gzBuffer, 4, compressed.Length);
-            Buffer.BlockCopy(BitConverter.GetBytes(buffer.Length), 0, gzBuffer, 0, 4);
-            return gzBuffer;
+            return compressed;
         }
 
         public static byte[] Compress2(byte[] data)

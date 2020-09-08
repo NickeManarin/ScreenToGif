@@ -34,9 +34,9 @@
                                             <n:KeyBox x:Name="KeyBox" MainKey="{Binding Key, Mode=TwoWay}" ModifierKeys="{Binding Modifiers, Mode=TwoWay}" Margin="1,1,0,1" Padding="0" 
                                                       AllowAllKeys="True" CanRemove="False" IsSingleLetterLowerCase="{Binding IsUppercase, Mode=TwoWay, Converter={StaticResource InvertedBool}}"/>
 
-                                            <n:ImageButton DockPanel.Dock="Right" x:Name="RemoveButton" Content="{StaticResource Vector.Close}" Style="{StaticResource Style.Button.NoText.Border}" 
-                                                           ContentWidth="12" Width="16" Margin="0,1,1,1" BorderThickness="0,1,1,1" Height="23" ToolTip="{DynamicResource S.KeyStrokes.Edit.Remove}"
-                                                           PreviewMouseLeftButtonUp="RemoveButton_OnMouseLeftButtonDown"/>
+                                            <n:ExtendedButton DockPanel.Dock="Right" x:Name="RemoveButton" Icon="{StaticResource Vector.Close}" Style="{StaticResource Style.Button.NoText.Border}" 
+                                                              ContentWidth="12" ContentHeight="12" Width="16" Margin="0,1,1,1" BorderThickness="0,1,1,1" Height="23" ToolTip="{DynamicResource S.KeyStrokes.Edit.Remove}"
+                                                              PreviewMouseLeftButtonUp="RemoveButton_OnMouseLeftButtonDown"/>
                                         </DockPanel>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
@@ -55,20 +55,20 @@
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="20"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <Viewbox Child="{StaticResource Vector.Arrow.Blue.Top}" Margin="5,0"/>
+                        <Border Background="{StaticResource Vector.Arrow.Blue.Top}" Margin="5,0"/>
 
                         <TextBlock Grid.Column="1" Text="{DynamicResource S.KeyStrokes.Edit.Add}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" Margin="2,3,5,3"/>
 
                         <n:KeyBox Grid.Column="2" x:Name="AddKeyBox" MinWidth="100" AllowAllKeys="True" CanRemove="False" IsSingleLetterLowerCase="{Binding ElementName=LowercaseCheckBox, Path=IsChecked}"/>
 
-                        <n:ImageButton Grid.Column="3" x:Name="AddButton" Text="{DynamicResource S.Add}" Content="{StaticResource Vector.Add}" ContentHeight="14" Height="23" Padding="5,0" Margin="5,3"
-                                       Click="AddButton_Click"/>
+                        <n:ExtendedButton Grid.Column="3" x:Name="AddButton" Text="{DynamicResource S.Add}" Icon="{StaticResource Vector.Add}" ContentHeight="14" Height="23" Padding="5,0" Margin="5,3"
+                                          Click="AddButton_Click"/>
                     </Grid>
                 </DataTemplate>
             </DataGrid.RowDetailsTemplate>
@@ -97,11 +97,11 @@
             <n:ExtendedCheckBox Grid.Column="0" x:Name="LowercaseCheckBox" Text="{DynamicResource S.KeyStrokes.Edit.Lower}" Margin="3,0" HorizontalAlignment="Center"
                                 ToolTip="{DynamicResource S.KeyStrokes.Edit.Lower.Info}"/>
 
-            <n:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource S.Ok}" Margin="5" Content="{StaticResource Vector.Ok}" IsDefault="True" MaxSize="15"
-                           HorizontalAlignment="Right" MinWidth="100" MinHeight="27" VerticalAlignment="Bottom" Click="OkButton_Click"/>
+            <n:ExtendedButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource S.Ok}" Icon="{StaticResource Vector.Ok}" IsDefault="True" 
+                              ContentWidth="18" ContentHeight="18" Padding="5,0" MinWidth="90" Margin="5" Click="OkButton_Click"/>
 
-            <n:ImageButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource S.Cancel}" Margin="5" Content="{StaticResource Vector.Cancel}" MaxSize="15"
-                           HorizontalAlignment="Right" MinWidth="100" MinHeight="27" VerticalAlignment="Bottom" Click="CancelButton_Click" IsCancel="True"/>
+            <n:ExtendedButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource S.Cancel}" Icon="{StaticResource Vector.Cancel}" 
+                              ContentWidth="18" ContentHeight="18" Padding="5,0" MinWidth="90" Margin="5" Click="CancelButton_Click" IsCancel="True"/>
         </Grid>
     </Grid>
 </Window>

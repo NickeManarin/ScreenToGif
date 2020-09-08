@@ -23,6 +23,8 @@ namespace ScreenToGif.Util
     /// </summary>
     public static class LocalizationHelper
     {
+        public static string CurrentCulture { get; set; }
+        
         public static void SelectCulture(string culture)
         {
             #region Validation
@@ -78,6 +80,7 @@ namespace ScreenToGif.Util
             //Then this language will be our current string table.
             Application.Current.Resources.MergedDictionaries.Remove(requestedResource);
             Application.Current.Resources.MergedDictionaries.Add(requestedResource);
+            CurrentCulture = culture;
 
             //Inform the threads of the new culture.
             Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);

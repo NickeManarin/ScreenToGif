@@ -35,6 +35,8 @@
 
     <Window.Resources>
         <c:InvertedVisibility x:Key="InvertedVisibility"/>
+        <c:BoolAndToVisibility x:Key="BoolAndToVisibility"/>
+        <c:BoolOrToVisibility x:Key="BoolOrToVisibility"/>
     </Window.Resources>
 
     <Grid DataContext="{x:Static u:UserSettings.All}">
@@ -56,7 +58,7 @@
             <!--Options-->
             <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="OptionsStackPanel" Margin="0" MaxWidth="180" MinWidth="130">
                 <StackPanel.Resources>
-                    <Style BasedOn="{StaticResource {x:Type n:ImageRadioButton}}" TargetType="{x:Type n:ImageRadioButton}">
+                    <Style BasedOn="{StaticResource {x:Type n:ExtendedRadioButton}}" TargetType="{x:Type n:ExtendedRadioButton}">
                         <Setter Property="Padding" Value="2,2,2,2"/>
                         <Setter Property="FontSize" Value="17"/>
                         <Setter Property="FontFamily" Value="Segoe UI Semilight"/>
@@ -67,17 +69,17 @@
                     </Style>
                 </StackPanel.Resources>
 
-                <n:ImageRadioButton x:Name="AppRadio" Text="{DynamicResource S.Options.App}" Content="{StaticResource Vector.Application}" IsChecked="True"/>
-                <n:ImageRadioButton x:Name="RecorderRadio" Text="{DynamicResource S.Options.Recorder}" Content="{StaticResource Vector.Record}"/>
-                <n:ImageRadioButton x:Name="EditorRadio" Text="{DynamicResource S.Options.Editor}" Content="{StaticResource Vector.Editor}"/>
-                <n:ImageRadioButton x:Name="AutomaticRadio" Text="{DynamicResource S.Options.Tasks}" Content="{StaticResource Vector.Encoder}"/>
-                <n:ImageRadioButton x:Name="ShortcutsRadio" Text="{DynamicResource S.Options.Shortcuts}" Content="{StaticResource Vector.Keyboard}"/>
-                <n:ImageRadioButton x:Name="LanguageRadio" Text="{DynamicResource S.Options.Language}" Content="{StaticResource Vector.Translate}"/>
-                <n:ImageRadioButton x:Name="TempRadio" Text="{DynamicResource S.Options.Storage}" Content="{StaticResource Vector.Temporary}"/>
-                <n:ImageRadioButton x:Name="CloudRadioButton" Text="{DynamicResource S.Options.Upload}" Content="{StaticResource Vector.Web}"/>
-                <n:ImageRadioButton x:Name="ExtrasRadioButton" Text="{DynamicResource S.Options.Extras}" Content="{StaticResource Vector.Extras}"/>
-                <n:ImageRadioButton x:Name="DonateRadio" Text="{DynamicResource S.Options.Donate}" Content="{StaticResource Vector.Money}"/>
-                <n:ImageRadioButton x:Name="AboutRadio" Text="{DynamicResource S.Options.About}" Content="{StaticResource Vector.Info}"/>
+                <n:ExtendedRadioButton x:Name="AppRadio" Text="{DynamicResource S.Options.App}" Icon="{StaticResource Vector.Application}"/>
+                <n:ExtendedRadioButton x:Name="RecorderRadio" Text="{DynamicResource S.Options.Recorder}" Icon="{StaticResource Vector.Record}" IsChecked="True"/>
+                <n:ExtendedRadioButton x:Name="EditorRadio" Text="{DynamicResource S.Options.Editor}" Icon="{StaticResource Vector.Editor}"/>
+                <n:ExtendedRadioButton x:Name="AutomaticRadio" Text="{DynamicResource S.Options.Tasks}" Icon="{StaticResource Vector.Encoder}"/>
+                <n:ExtendedRadioButton x:Name="ShortcutsRadio" Text="{DynamicResource S.Options.Shortcuts}" Icon="{StaticResource Vector.Keyboard}"/>
+                <n:ExtendedRadioButton x:Name="LanguageRadio" Text="{DynamicResource S.Options.Language}" Icon="{StaticResource Vector.Translate}"/>
+                <n:ExtendedRadioButton x:Name="TempRadio" Text="{DynamicResource S.Options.Storage}" Icon="{StaticResource Vector.Temporary}"/>
+                <n:ExtendedRadioButton x:Name="CloudRadioButton" Text="{DynamicResource S.Options.Upload}" Icon="{StaticResource Vector.Web}"/>
+                <n:ExtendedRadioButton x:Name="ExtrasRadioButton" Text="{DynamicResource S.Options.Extras}" Icon="{StaticResource Vector.Extras}"/>
+                <n:ExtendedRadioButton x:Name="DonateRadio" Text="{DynamicResource S.Options.Donate}" Icon="{StaticResource Vector.Money}"/>
+                <n:ExtendedRadioButton x:Name="AboutRadio" Text="{DynamicResource S.Options.About}" Icon="{StaticResource Vector.Info}"/>
             </StackPanel>
 
             <n:StatusBand Grid.Row="0" Grid.Column="1" x:Name="StatusBand"/>
@@ -102,12 +104,12 @@
                                             <ColumnDefinition/>
                                         </Grid.ColumnDefinitions>
 
-                                        <n:ImageRadioButton Grid.Column="0" x:Name="StartManuallyCheckBox" ContentWidth="40" ContentHeight="40" Text="{DynamicResource S.Options.App.Startup.Mode.Manual}" Padding="5" IsChecked="True"
-                                                            Content="{StaticResource Vector.Cursor}" ToolTip="{DynamicResource S.Options.App.Startup.Mode.Manual.Info}"/>
+                                        <n:ExtendedRadioButton Grid.Column="0" x:Name="StartManuallyCheckBox" ContentWidth="40" ContentHeight="40" Text="{DynamicResource S.Options.App.Startup.Mode.Manual}" Padding="5" IsChecked="True"
+                                                               Icon="{StaticResource Vector.Cursor}" ToolTip="{DynamicResource S.Options.App.Startup.Mode.Manual.Info}"/>
 
-                                        <n:ImageRadioButton Grid.Column="1" x:Name="StartAutomaticallyCheckBox" ContentWidth="40" ContentHeight="40" Text="{DynamicResource S.Options.App.Startup.Mode.Automatic}" Padding="5"
-                                                            Content="{StaticResource Vector.Play}" ToolTip="{DynamicResource S.Options.App.Startup.Mode.Automatic.Info}" 
-                                                            Checked="StartAutomaticallyCheckBox_Checked" Unchecked="StartAutomaticallyCheckBox_Unchecked"/>
+                                        <n:ExtendedRadioButton Grid.Column="1" x:Name="StartAutomaticallyCheckBox" ContentWidth="40" ContentHeight="40" Text="{DynamicResource S.Options.App.Startup.Mode.Automatic}" Padding="5"
+                                                               Icon="{StaticResource Vector.Play}" ToolTip="{DynamicResource S.Options.App.Startup.Mode.Automatic.Info}" 
+                                                               Checked="StartAutomaticallyCheckBox_Checked" Unchecked="StartAutomaticallyCheckBox_Unchecked"/>
                                     </Grid>
 
                                     <Separator Width="1" Margin="3"/>
@@ -118,18 +120,18 @@
                                             <ColumnDefinition/>
                                         </Grid.ColumnDefinitions>
 
-                                        <n:ImageRadioButton Grid.Column="0" ContentWidth="40" ContentHeight="40" Text="{DynamicResource S.Options.App.Startup.Instance.Single}" Padding="5" Content="{StaticResource Vector.View}" 
-                                                            IsChecked="{Binding Path=SingleInstance, Mode=TwoWay}" ToolTip="{DynamicResource S.Options.App.Startup.Instance.Single.Info}"/>
-                                        <n:ImageRadioButton Grid.Column="1" ContentWidth="40" ContentHeight="40" Text="{DynamicResource S.Options.App.Startup.Instance.Multiple}" Padding="5" Content="{StaticResource Vector.Views}" 
-                                                            IsChecked="{Binding Path=SingleInstance, Mode=TwoWay, Converter={StaticResource InvertedBool}}" ToolTip="{DynamicResource S.Options.App.Startup.Instance.Multiple.Info}"/>
+                                        <n:ExtendedRadioButton Grid.Column="0" ContentWidth="40" ContentHeight="40" Text="{DynamicResource S.Options.App.Startup.Instance.Single}" Padding="5" Icon="{StaticResource Vector.View}" 
+                                                               IsChecked="{Binding Path=SingleInstance, Mode=TwoWay}" ToolTip="{DynamicResource S.Options.App.Startup.Instance.Single.Info}"
+                                                               Checked="Instance_Checked"/>
+                                        <n:ExtendedRadioButton Grid.Column="1" ContentWidth="40" ContentHeight="40" Text="{DynamicResource S.Options.App.Startup.Instance.Multiple}" Padding="5" Icon="{StaticResource Vector.Views}" 
+                                                               IsChecked="{Binding Path=SingleInstance, Mode=TwoWay, Converter={StaticResource InvertedBool}}" ToolTip="{DynamicResource S.Options.App.Startup.Instance.Multiple.Info}"
+                                                               Checked="Instance_Checked"/>
                                     </Grid>
                                 </WrapPanel>
 
-                                <WrapPanel Margin="10,0,5,0">
-                                    <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.Startup.Tray}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=StartMinimized, Mode=TwoWay}" Checked="StartCheckBox_Checked"/>
-                                    <TextBlock Text="{DynamicResource S.Options.App.Startup.Tray.Info}" Padding="0" Margin="5,0,0,3" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
-                                </WrapPanel>
-
+                                <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.Startup.Tray}" Info="{DynamicResource S.Options.App.Startup.Tray.Info}"
+                                                    Margin="15,3,5,3" VerticalAlignment="Top" IsChecked="{Binding Path=StartMinimized, Mode=TwoWay}" Checked="StartCheckBox_Checked"/>
+                                
                                 <Grid Margin="15,0,5,5" Visibility="{Binding StartMinimized, Converter={StaticResource InvertedBoolToVisibility}}">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
@@ -357,25 +359,18 @@
 
                         <Expander Grid.Row="3" Header="{DynamicResource S.Options.App.General}" IsExpanded="True">
                             <StackPanel>
-                                <WrapPanel Margin="10,0,5,0">
-                                    <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.WorkaroundQuota}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=WorkaroundQuota, Mode=TwoWay}"/>
-                                    <TextBlock Text="{DynamicResource S.Options.App.General.WorkaroundQuota.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
-                                </WrapPanel>
-                                
+                                <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.WorkaroundQuota}" Info="{DynamicResource S.Options.App.General.WorkaroundQuota.Info}"
+                                                    Margin="15,3,5,3" VerticalAlignment="Top" IsChecked="{Binding Path=WorkaroundQuota, Mode=TwoWay}"/>                                
                                 <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.NotifyWhileClosingApp}" Margin="15,3,5,3" IsChecked="{Binding Path=NotifyWhileClosingApp, Mode=TwoWay}"/>
-
-                                <WrapPanel Margin="10,0,5,0">
-                                    <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.DisableHardwareAcceleration}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=DisableHardwareAcceleration, Mode=TwoWay}"/>
-                                    <TextBlock Text="{DynamicResource S.Options.App.General.DisableHardwareAcceleration.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
-                                </WrapPanel>
-
-                                <WrapPanel Margin="10,0,5,0">
-                                    <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.CheckForTranslationUpdates}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=CheckForTranslationUpdates, Mode=TwoWay}"/>
-                                    <TextBlock Text="{DynamicResource S.Options.App.General.CheckForTranslationUpdates.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
-                                </WrapPanel>
+                                <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.DisableHardwareAcceleration}" Info="{DynamicResource S.Options.App.General.DisableHardwareAcceleration.Info}"
+                                                    Margin="15,3,5,3" VerticalAlignment="Top" IsChecked="{Binding Path=DisableHardwareAcceleration, Mode=TwoWay}"/>
+                                <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.CheckForTranslationUpdates}" Info="{DynamicResource S.Options.App.General.CheckForTranslationUpdates.Info}"
+                                                    Margin="15,3,5,3" VerticalAlignment="Top" IsChecked="{Binding Path=CheckForTranslationUpdates, Mode=TwoWay}"/>
 
                                 <n:ExtendedCheckBox x:Name="UpdatesCheckBox" Text="{DynamicResource S.Options.App.General.CheckForUpdates}" Margin="15,3,5,3" IsChecked="{Binding Path=CheckForUpdates, Mode=TwoWay}"/>
                                 <StackPanel Visibility="{Binding CheckForUpdates, Converter={StaticResource Bool2Visibility}}">
+                                    <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.PortableUpdate}" Info="{DynamicResource S.Options.App.General.PortableUpdate.Info}" 
+                                                        Margin="30,3,5,3" IsChecked="{Binding Path=PortableUpdate, Mode=TwoWay}"/>
                                     <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.ForceUpdateAsAdmin}" Margin="30,3,5,3" IsChecked="{Binding Path=ForceUpdateAsAdmin, Mode=TwoWay}"/>
                                     <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.UpdateOnClose}" Margin="30,3,5,3" IsChecked="{Binding Path=InstallUpdates, Mode=TwoWay}"/>
                                     <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.PromptToInstall}" Margin="45,3,5,3" IsChecked="{Binding Path=PromptToInstall, Mode=TwoWay}"
@@ -392,11 +387,16 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
                         <Expander Grid.Row="0" Header="{DynamicResource S.Options.Recorder.Interface}" IsExpanded="True">
                             <Grid Margin="10,0,5,5">
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
@@ -405,41 +405,33 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
 
-                                <n:ImageRadioButton Grid.Row="0" Grid.Column="0" ContentHeight="60" ContentWidth="60" Text="{DynamicResource S.Options.Recorder.Interface.Old}" Padding="5" HorizontalAlignment="Right"
-                                                    IsChecked="{Binding Path=NewRecorder, Mode=TwoWay, Converter={StaticResource InvertedBool}}">
-                                    <n:ImageRadioButton.Content>
-                                        <Canvas Width="40" Height="27">
-                                            <Path StrokeThickness="0.8" Stroke="#ffaaaaaa" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 40.000,27.000 L -0.000,27.000 L -0.000,0.000 L 40.000,0.000 L 40.000,27.000 Z"/>
-                                            <Path StrokeThickness="0.8" Stroke="#ffaaaaaa" StrokeMiterLimit="1.0" Data="F1 M 38.000,23.000 L 2.000,23.000 L 2.000,4.000 L 38.000,4.000 L 38.000,23.000 Z"/>
-                                            <Path StrokeThickness="0.3" Stroke="#ffffffff" StrokeMiterLimit="1.0" Fill="#ff9f2821" Data="F1 M 29.000,24.750 C 29.000,25.578 28.328,26.250 27.500,26.250 C 26.672,26.250 26.000,25.578 26.000,24.750 C 26.000,23.922 26.672,23.250 27.500,23.250 C 28.328,23.250 29.000,23.922 29.000,24.750 Z"/>
-                                            <Path StrokeThickness="0.3" Stroke="#ffffffff" StrokeMiterLimit="1.0" Fill="#ff3f7db7" Data="F1 M 35.000,26.250 L 32.000,26.250 L 32.000,23.250 L 35.000,23.250 L 35.000,26.250 Z"/>
-                                            <Path Fill="#ff221e1f" Data="F1 M 37.137,3.600 L 34.750,1.213 L 34.863,1.100 L 37.250,3.487 L 37.137,3.600 Z"/>
-                                            <Path Fill="#ff221e1f" Data="F1 M 34.863,3.600 L 34.750,3.487 L 37.137,1.100 L 37.250,1.213 L 34.863,3.600 Z"/>
-                                        </Canvas>
-                                    </n:ImageRadioButton.Content>
-                                </n:ImageRadioButton>
+                                <n:ExtendedRadioButton Grid.Row="0" Grid.Column="0" ContentHeight="46" ContentWidth="56" Text="{DynamicResource S.Options.Recorder.Interface.Old}" Padding="5" HorizontalAlignment="Right"
+                                                       IsChecked="{Binding Path=NewRecorder, Mode=TwoWay, Converter={StaticResource InvertedBool}}" Icon="{StaticResource Vector.Recorder.Old}"/>
 
-                                <n:ImageRadioButton Grid.Row="0" Grid.Column="1" ContentHeight="60" ContentWidth="60" Text="{DynamicResource S.Options.Recorder.Interface.New}" Padding="5" HorizontalAlignment="Left"
-                                                    IsChecked="{Binding Path=NewRecorder, Mode=TwoWay}">
-                                    <n:ImageRadioButton.Content>
-                                        <Canvas Width="36.750" Height="36.875">
-                                            <Path StrokeThickness="0.8" Stroke="#ffaaaaaa" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 36.375,36.875 L 8.375,36.875 L 8.375,27.375 L 36.375,27.375 L 36.375,36.875 Z"/>
-                                            <Path StrokeThickness="0.8" Stroke="#ffaaaaaa" StrokeMiterLimit="1.0" StrokeDashArray="6.67,2.67" Fill="#ffffffff" Data="F1 M 36.375,25.375 L 0.375,25.375 L 0.375,0.375 L 36.375,0.375 L 36.375,25.375 Z"/>
-                                            <Path StrokeThickness="0.3" Stroke="#ffffffff" StrokeMiterLimit="1.0" Fill="#ff9f2821" Data="F1 M 29.375,33.875 C 29.375,34.703 28.703,35.375 27.875,35.375 C 27.047,35.375 26.375,34.703 26.375,33.875 C 26.375,33.047 27.047,32.375 27.875,32.375 C 28.703,32.375 29.375,33.047 29.375,33.875 Z"/>
-                                            <Path StrokeThickness="0.3" Stroke="#ffffffff" StrokeMiterLimit="1.0" Fill="#ff3f7db7" Data="F1 M 34.375,35.375 L 31.375,35.375 L 31.375,32.375 L 34.375,32.375 L 34.375,35.375 Z"/>
-                                            <Path Fill="#ff221e1f" Data="F1 M 34.512,31.475 L 32.125,29.088 L 32.238,28.975 L 34.625,31.362 L 34.512,31.475 Z"/>
-                                            <Path Fill="#ff221e1f" Data="F1 M 32.238,31.475 L 32.125,31.362 L 34.512,28.975 L 34.625,29.088 L 32.238,31.475 Z"/>
-                                        </Canvas>
-                                    </n:ImageRadioButton.Content>
-                                </n:ImageRadioButton>
+                                <n:ExtendedRadioButton Grid.Row="0" Grid.Column="1" ContentHeight="46" ContentWidth="56" Text="{DynamicResource S.Options.Recorder.Interface.New}" Padding="5" HorizontalAlignment="Left"
+                                                       IsChecked="{Binding Path=NewRecorder, Mode=TwoWay}" Icon="{StaticResource Vector.Recorder.New}"/>
 
                                 <n:ExtendedCheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="5,3" Visibility="{Binding Path=NewRecorder, Mode=OneWay, Converter={StaticResource InvertedBoolToVisibility}}"
                                                     Text="{DynamicResource S.Options.Recorder.HideTitleBar}" IsChecked="{Binding Path=RecorderThinMode, Mode=TwoWay}"/>
 
-                                <WrapPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,5,0" Visibility="{Binding Path=NewRecorder, Mode=OneWay, Converter={StaticResource Bool2Visibility}}">
-                                    <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.Magnifier}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=Magnifier, Mode=TwoWay}"/>
-                                    <TextBlock Text="{DynamicResource S.Options.Recorder.Magnifier.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
-                                </WrapPanel>
+                                <n:ExtendedCheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{DynamicResource S.Options.Recorder.Magnifier}" 
+                                                    Info="{DynamicResource S.Options.Recorder.Magnifier.Info}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=Magnifier, Mode=TwoWay}"
+                                                    Visibility="{Binding Path=NewRecorder, Mode=OneWay, Converter={StaticResource Bool2Visibility}}"/>
+
+                                <n:ExtendedCheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="{DynamicResource S.Options.Recorder.AnimateBorder}" 
+                                                    Info="{DynamicResource S.Options.Recorder.AnimateBorder.Info}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=AnimateRecorderBorder, Mode=TwoWay}"
+                                                    Visibility="{Binding Path=NewRecorder, Mode=OneWay, Converter={StaticResource Bool2Visibility}}"/>
+
+                                <n:ExtendedCheckBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Text="{DynamicResource S.Options.Recorder.SelectionPanning}" 
+                                                    Info="{DynamicResource S.Options.Recorder.SelectionPanning.Info}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=EnableSelectionPanning, Mode=TwoWay}"
+                                                    Visibility="{Binding Path=NewRecorder, Mode=OneWay, Converter={StaticResource Bool2Visibility}}"/>
+
+                                <n:ExtendedCheckBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Text="{DynamicResource S.Options.Recorder.Compact}" 
+                                                    Info="{DynamicResource S.Options.Recorder.Compact.Info}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=RecorderCompactMode, Mode=TwoWay}"
+                                                    Visibility="{Binding Path=NewRecorder, Mode=OneWay, Converter={StaticResource Bool2Visibility}}"/>
+
+                                <n:ExtendedCheckBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Text="{DynamicResource S.Options.Recorder.DisplayDiscard}" 
+                                                    Info="{DynamicResource S.Options.Recorder.DisplayDiscard.Info}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=RecorderDisplayDiscard, Mode=TwoWay}"/>
                             </Grid>
                         </Expander>
 
@@ -454,37 +446,63 @@
                                     <ColumnDefinition/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
 
-                                <n:ImageRadioButton Grid.Row="0" Grid.Column="0" x:Name="ManualRadioButton" ContentHeight="30" Text="{DynamicResource S.Options.Recorder.Frequency.Manual}" Padding="5" Margin="0,0,0,5" HorizontalAlignment="Right"
-                                                    IsChecked="{Binding CaptureFrequency, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CaptureFrequency.Manual}}" 
-                                                    Content="{StaticResource Vector.Camera}" ToolTip="{DynamicResource S.Options.Recorder.Frequency.Manual.Info}"/>
+                                <n:ExtendedRadioButton Grid.Row="0" Grid.Column="1" x:Name="ManualRadioButton" ContentHeight="26" ContentWidth="26"
+                                                       Text="{DynamicResource S.Options.Recorder.Frequency.Manual}" Padding="5" Margin="0,0,0,5" TextWrapping="Wrap"
+                                                       IsChecked="{Binding CaptureFrequency, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CaptureFrequency.Manual}}" 
+                                                       Icon="{StaticResource Vector.Camera}" ToolTip="{DynamicResource S.Options.Recorder.Frequency.Manual.Info}"/>
 
-                                <n:ImageRadioButton Grid.Row="0" Grid.Column="1" x:Name="PerSecondRadioButton" ContentHeight="30" Text="{DynamicResource S.Options.Recorder.Frequency.Second}" Padding="5" Margin="0,0,0,5" HorizontalAlignment="Right"
-                                                    IsChecked="{Binding CaptureFrequency, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CaptureFrequency.PerSecond}}" 
-                                                    Content="{StaticResource Vector.Delay}" ToolTip="{DynamicResource S.Options.Recorder.Frequency.Second.Info}"/>
+                                <n:ExtendedRadioButton Grid.Row="0" Grid.Column="2" x:Name="InteractionRadioButton" ContentHeight="26" ContentWidth="26"
+                                                       Text="{DynamicResource S.Options.Recorder.Frequency.Interaction}" Padding="5" Margin="0,0,0,5" TextWrapping="Wrap"
+                                                       IsChecked="{Binding CaptureFrequency, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CaptureFrequency.Interaction}}" 
+                                                       Icon="{StaticResource Vector.Cursor}" ToolTip="{DynamicResource S.Options.Recorder.Frequency.Interaction.Info}"/>
 
-                                <n:ImageRadioButton Grid.Row="0" Grid.Column="2" x:Name="PerMinuteRadioButton" ContentHeight="30" Text="{DynamicResource S.Options.Recorder.Frequency.Minute}" Padding="5" Margin="0,0,0,5" 
-                                                    IsChecked="{Binding CaptureFrequency, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CaptureFrequency.PerMinute}}" 
-                                                    Content="{StaticResource Vector.Delay.Minute}" ToolTip="{DynamicResource S.Options.Recorder.Frequency.Minute.Info}"/>
+                                <n:ExtendedRadioButton Grid.Row="0" Grid.Column="3" x:Name="PerSecondRadioButton" ContentHeight="26" ContentWidth="26" 
+                                                       Text="{DynamicResource S.Options.Recorder.Frequency.Second}" Padding="5" Margin="0,0,0,5" TextWrapping="Wrap"
+                                                       IsChecked="{Binding CaptureFrequency, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CaptureFrequency.PerSecond}}" 
+                                                       Icon="{StaticResource Vector.Delay}" ToolTip="{DynamicResource S.Options.Recorder.Frequency.Second.Info}"/>
 
-                                <n:ImageRadioButton Grid.Row="0" Grid.Column="3" x:Name="PerHourRadioButton" ContentHeight="30" Text="{DynamicResource S.Options.Recorder.Frequency.Hour}" Padding="5" Margin="0,0,0,5" HorizontalAlignment="Left"
-                                                    IsChecked="{Binding CaptureFrequency, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CaptureFrequency.PerHour}}"
-                                                    Content="{StaticResource Vector.Delay.Hour}" ToolTip="{DynamicResource S.Options.Recorder.Frequency.Hour.Info}"/>
+                                <n:ExtendedRadioButton Grid.Row="0" Grid.Column="4" x:Name="PerMinuteRadioButton" ContentHeight="26" ContentWidth="26"
+                                                       Text="{DynamicResource S.Options.Recorder.Frequency.Minute}" Padding="5" Margin="0,0,0,5" TextWrapping="Wrap"
+                                                       IsChecked="{Binding CaptureFrequency, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CaptureFrequency.PerMinute}}" 
+                                                       Icon="{StaticResource Vector.Delay.Minute}" ToolTip="{DynamicResource S.Options.Recorder.Frequency.Minute.Info}"/>
 
-                                <WrapPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Margin="0,0,5,0" Visibility="{Binding ElementName=PerSecondRadioButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource InvertedBoolToVisibility}, FallbackValue=Collapsed}">
+                                <n:ExtendedRadioButton Grid.Row="0" Grid.Column="5" x:Name="PerHourRadioButton" ContentHeight="26" ContentWidth="26"
+                                                       Text="{DynamicResource S.Options.Recorder.Frequency.Hour}" Padding="5" Margin="0,0,0,5" TextWrapping="Wrap"
+                                                       IsChecked="{Binding CaptureFrequency, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:CaptureFrequency.PerHour}}"
+                                                       Icon="{StaticResource Vector.Delay.Hour}" ToolTip="{DynamicResource S.Options.Recorder.Frequency.Hour.Info}"/>
+
+                                <WrapPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="7" Margin="0,0,5,0" Visibility="{Binding ElementName=PerSecondRadioButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource InvertedBoolToVisibility}, FallbackValue=Collapsed}">
                                     <TextBlock Text="{DynamicResource S.Options.Recorder.Frequency.Playback}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,0" VerticalAlignment="Center"/>
                                     <n:IntegerUpDown Minimum="10" Maximum="25000" Value="{Binding Path=PlaybackDelayManual, Mode=TwoWay}" MinWidth="80" Visibility="{Binding ElementName=ManualRadioButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource Bool2Visibility}}"/>
+                                    <n:IntegerUpDown Minimum="10" Maximum="25000" Value="{Binding Path=PlaybackDelayInteraction, Mode=TwoWay}" MinWidth="80" Visibility="{Binding ElementName=InteractionRadioButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource Bool2Visibility}}"/>
                                     <n:IntegerUpDown Minimum="10" Maximum="25000" Value="{Binding Path=PlaybackDelayMinute, Mode=TwoWay}" MinWidth="80" Visibility="{Binding ElementName=PerMinuteRadioButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource Bool2Visibility}}"/>
                                     <n:IntegerUpDown Minimum="10" Maximum="25000" Value="{Binding Path=PlaybackDelayHour, Mode=TwoWay}" MinWidth="80" Visibility="{Binding ElementName=PerHourRadioButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource Bool2Visibility}}"/>
                                     <TextBlock Text="{DynamicResource S.Options.Recorder.Frequency.Playback.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="WrapWithOverflow" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
                                 </WrapPanel>
 
-                                <WrapPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Margin="0,0,5,0" Visibility="{Binding ElementName=PerSecondRadioButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource Bool2Visibility}, FallbackValue=Collapsed}">
-                                    <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.FixedFramerate}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=FixedFrameRate, Mode=TwoWay}"/>
-                                    <TextBlock Text="{DynamicResource S.Options.Recorder.FixedFramerate.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
-                                </WrapPanel>
+                                <n:ExtendedCheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="7" Text="{DynamicResource S.Options.Recorder.FixedFramerate}" 
+                                                    Info="{DynamicResource S.Options.Recorder.FixedFramerate.Info}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=FixedFrameRate, Mode=TwoWay}"
+                                                    Visibility="{Binding ElementName=PerSecondRadioButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource Bool2Visibility}, FallbackValue=Collapsed}"/>
+
+                                <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="7" Margin="0,0,5,0">
+                                    <Grid.Visibility>
+                                        <MultiBinding Converter="{StaticResource BoolOrToVisibility}">
+                                            <Binding ElementName="PerSecondRadioButton" Path="IsChecked" Mode="OneWay"/>
+                                            <Binding ElementName="PerMinuteRadioButton" Path="IsChecked" Mode="OneWay"/>
+                                            <Binding ElementName="PerHourRadioButton" Path="IsChecked" Mode="OneWay"/>
+                                        </MultiBinding>
+                                    </Grid.Visibility>
+
+                                    <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.CaptureChanges}" Info="{DynamicResource S.Options.Recorder.CaptureChanges.Info}" 
+                                                        Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=OnlyCaptureChanges, Mode=TwoWay}"
+                                                        Visibility="{Binding UseDesktopDuplication, Converter={StaticResource Bool2Visibility}}"/>
+                                </Grid>
                             </Grid>
                         </Expander>
                         
@@ -497,45 +515,11 @@
                                             <ColumnDefinition/>
                                         </Grid.ColumnDefinitions>
 
-                                        <n:ImageRadioButton Grid.Column="0" ContentWidth="40" ContentHeight="40" Text="BitBlt" Padding="5" IsChecked="{Binding Path=UseDesktopDuplication, Mode=TwoWay, Converter={StaticResource InvertedBool}}"
-                                                            ToolTip="{DynamicResource S.Options.Recorder.Bitblt.Info}">
-                                            <n:ImageRadioButton.Content>
-                                                <Canvas Width="40" Height="39">
-                                                    <Path StrokeThickness="2.0" Stroke="#ffcd5833" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 19.000,28.000 L 1.000,28.000 L 1.000,11.000 L 19.000,11.000 L 19.000,28.000 Z"/>
-                                                    <Path StrokeThickness="2.0" Stroke="#ff2d9ddd" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 24.000,38.000 L 8.000,38.000 L 8.000,22.000 L 24.000,22.000 L 24.000,38.000 Z"/>
-                                                    <Path StrokeThickness="2.0" Stroke="#ff82a65e" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 26.000,20.000 L 12.000,20.000 L 12.000,6.000 L 26.000,6.000 L 26.000,20.000 Z"/>
-                                                    <Path StrokeThickness="2.0" Stroke="#fff2cf42" StrokeMiterLimit="1.0" Fill="#ffffffff" Data="F1 M 39.000,21.000 L 19.000,21.000 L 19.000,1.000 L 39.000,1.000 L 39.000,21.000 Z"/>
-                                                    <TextBlock Foreground="#ff000000" Canvas.Left="20.776" Canvas.Top="5.736" FontSize="9.00" FontFamily="Franklin Gothic Heavy">GDI</TextBlock>
-                                                </Canvas>
-                                            </n:ImageRadioButton.Content>
-                                        </n:ImageRadioButton>
+                                        <n:ExtendedRadioButton Grid.Column="0" ContentWidth="36" ContentHeight="36" Text="BitBlt" Padding="5" IsChecked="{Binding Path=UseDesktopDuplication, Mode=TwoWay, Converter={StaticResource InvertedBool}}"
+                                                               Icon="{StaticResource Vector.Gdi}" ToolTip="{DynamicResource S.Options.Recorder.Bitblt.Info}"/>
 
-                                        <n:ImageRadioButton Grid.Column="1" ContentWidth="40" ContentHeight="40" Text="DirectX" Padding="5" IsChecked="{Binding Path=UseDesktopDuplication, Mode=TwoWay}"
-                                                            ToolTip="{DynamicResource S.Options.Recorder.DirectX.Info}">
-                                            <n:ImageRadioButton.Content>
-                                                <Canvas Width="40" Height="29">
-                                                    <Path Fill="#ff789639" Data="F1 M 13.333,4.626 L 0.000,4.626 L 0.000,0.000 L 13.333,0.000 L 13.333,4.626 Z"/>
-                                                    <Path Fill="#ff789639" Data="F1 M 26.667,0.000 L 40.000,0.000 L 40.000,4.626 L 26.667,4.626 L 26.667,0.000 Z"/>
-                                                    <Path Fill="#ff789639" Data="F1 M 0.000,24.374 L 13.333,24.374 L 13.333,29.000 L 0.000,29.000 L 0.000,24.374 Z"/>
-                                                    <Path Fill="#ff789639" Data="F1 M 40.000,24.374 L 26.667,24.374 L 26.667,29.000 L 40.000,29.000 L 40.000,24.374 Z"/>
-                                                    <Path Fill="#ff88a847" Data="F1 M 15.200,2.313 L 2.044,2.313 L 2.044,6.939 L 15.200,6.939 L 15.200,2.313 Z"/>
-                                                    <Path Fill="#ff88a847" Data="F1 M 24.622,2.313 L 37.778,2.313 L 37.778,6.939 L 24.622,6.939 L 24.622,2.313 Z"/>
-                                                    <Path Fill="#ff88a847" Data="F1 M 37.778,22.239 L 24.622,22.239 L 24.622,26.865 L 37.778,26.865 L 37.778,22.239 Z"/>
-                                                    <Path Fill="#ff88a847" Data="F1 M 2.044,22.239 L 15.200,22.239 L 15.200,26.865 L 2.044,26.865 L 2.044,22.239 Z"/>
-                                                    <Path Fill="#ff9fbc63" Data="F1 M 17.067,4.448 L 4.444,4.448 L 4.444,9.074 L 17.067,9.074 L 17.067,4.448 Z"/>
-                                                    <Path Fill="#ff9fbc63" Data="F1 M 22.933,4.448 L 35.556,4.448 L 35.556,9.074 L 22.933,9.074 L 22.933,4.448 Z"/>
-                                                    <Path Fill="#ff9fbc63" Data="F1 M 4.444,20.104 L 17.067,20.104 L 17.067,24.730 L 4.444,24.730 L 4.444,20.104 Z"/>
-                                                    <Path Fill="#ff9fbc63" Data="F1 M 35.911,20.104 L 23.289,20.104 L 23.289,24.730 L 35.911,24.730 L 35.911,20.104 Z"/>
-                                                    <Path Fill="#ffbed098" Data="F1 M 6.578,17.791 L 18.844,17.791 L 18.844,22.417 L 6.578,22.417 L 6.578,17.791 Z"/>
-                                                    <Path Fill="#ffbed098" Data="F1 M 33.422,17.791 L 21.156,17.791 L 21.156,22.417 L 33.422,22.417 L 33.422,17.791 Z"/>
-                                                    <Path Fill="#ffbed098" Data="F1 M 21.156,6.583 L 33.422,6.583 L 33.422,11.209 L 21.156,11.209 L 21.156,6.583 Z"/>
-                                                    <Path Fill="#ffbed098" Data="F1 M 18.844,6.583 L 6.578,6.583 L 6.578,11.209 L 18.844,11.209 L 18.844,6.583 Z"/>
-                                                    <Path Fill="#ffdce7c4" Data="F1 M 31.289,8.807 L 8.711,8.807 L 8.711,13.255 L 31.289,13.255 L 31.289,8.807 Z"/>
-                                                    <Path Fill="#ffdce7c4" Data="F1 M 31.289,20.193 L 8.711,20.193 L 8.711,15.745 L 31.289,15.745 L 31.289,20.193 Z"/>
-                                                    <Path Fill="#ffebf2de" Data="F1 M 28.889,15.834 L 11.111,15.834 L 11.111,13.166 L 28.889,13.166 L 28.889,15.834 Z"/>
-                                                </Canvas>
-                                            </n:ImageRadioButton.Content>
-                                        </n:ImageRadioButton>
+                                        <n:ExtendedRadioButton Grid.Column="1" ContentWidth="36" ContentHeight="40" Text="DirectX" Padding="5" IsChecked="{Binding Path=UseDesktopDuplication, Mode=TwoWay}"
+                                                               Icon="{StaticResource Vector.DirectX}" ToolTip="{DynamicResource S.Options.Recorder.DirectX.Info}"/>
                                     </Grid>
 
                                     <Separator Width="1" Margin="3"/>
@@ -546,12 +530,10 @@
                                             <ColumnDefinition/>
                                         </Grid.ColumnDefinitions>
 
-                                        <n:ImageRadioButton Grid.Column="0" ContentWidth="40" ContentHeight="40" Text="{DynamicResource S.Options.Recorder.File}" Padding="5" Content="{StaticResource Vector.ImageStack}" 
-                                                            IsChecked="{Binding Path=UseMemoryCache, Mode=TwoWay, Converter={StaticResource InvertedBool}}"
-                                                            ToolTip="{DynamicResource S.Options.Recorder.File.Info}"/>
-                                        <n:ImageRadioButton Grid.Column="1" ContentWidth="40" ContentHeight="40" Text="{DynamicResource S.Options.Recorder.Cache}" Padding="5" Content="{StaticResource Vector.Cabinet}" 
-                                                            IsChecked="{Binding Path=UseMemoryCache, Mode=TwoWay}"
-                                                            ToolTip="{DynamicResource S.Options.Recorder.Cache.Info}"/>
+                                        <n:ExtendedRadioButton Grid.Column="0" ContentWidth="36" ContentHeight="36" Text="{DynamicResource S.Options.Recorder.File}" Padding="5" Icon="{StaticResource Vector.ImageStack}" 
+                                                               IsChecked="{Binding Path=UseMemoryCache, Mode=TwoWay, Converter={StaticResource InvertedBool}}" ToolTip="{DynamicResource S.Options.Recorder.File.Info}"/>
+                                        <n:ExtendedRadioButton Grid.Column="1" ContentWidth="36" ContentHeight="36" Text="{DynamicResource S.Options.Recorder.Cache}" Padding="5" Icon="{StaticResource Vector.Cabinet}" 
+                                                               IsChecked="{Binding Path=UseMemoryCache, Mode=TwoWay}" ToolTip="{DynamicResource S.Options.Recorder.Cache.Info}"/>
                                     </Grid>
                                 </WrapPanel>
 
@@ -578,32 +560,125 @@
                                     <TextBlock Text="{DynamicResource S.Options.Recorder.CacheSize.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="WrapWithOverflow" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
                                 </WrapPanel>
 
+                                <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.PreventBlackFrames}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=PreventBlackFrames, Mode=TwoWay}"
+                                                    Info="{DynamicResource S.Options.Recorder.PreventBlackFrames.Info}">
+                                    <n:ExtendedCheckBox.Visibility>
+                                        <MultiBinding Converter="{StaticResource BoolAndToVisibility}">
+                                            <Binding Path="UseMemoryCache" Mode="OneWay"/>
+                                            <Binding Path="UseDesktopDuplication" Mode="OneWay" Converter="{StaticResource InvertedBool}"/>
+                                        </MultiBinding>
+                                    </n:ExtendedCheckBox.Visibility>
+                                </n:ExtendedCheckBox>
+                                
                                 <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.RecordMouse}" Margin="5,3" IsChecked="{Binding Path=ShowCursor, Mode=TwoWay}"/>
 
-                                <WrapPanel Margin="0,0,5,0">
-                                    <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.AsyncRecording}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=AsyncRecording, Mode=TwoWay}"/>
-                                    <TextBlock Text="{DynamicResource S.Options.Recorder.AsyncRecording.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
-                                </WrapPanel>
-                                
-                                <WrapPanel Margin="0,0,5,0" Visibility="{Binding Path=UseDesktopDuplication, Mode=OneWay, Converter={StaticResource InvertedBoolToVisibility}}">
-                                    <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.RemoteImprovement}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=RemoteImprovement, Mode=TwoWay}"/>
-                                    <TextBlock Text="{DynamicResource S.Options.Recorder.RemoteImprovement.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
-                                </WrapPanel>
+                                <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.AsyncRecording}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=AsyncRecording, Mode=TwoWay}"
+                                                    Info="{DynamicResource S.Options.Recorder.AsyncRecording.Info}"/>
+
+                                <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.RemoteImprovement}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=RemoteImprovement, Mode=TwoWay}"
+                                                    Info="{DynamicResource S.Options.Recorder.RemoteImprovement.Info}" Visibility="{Binding Path=UseDesktopDuplication, Mode=OneWay, Converter={StaticResource InvertedBoolToVisibility}}"/>
                             </StackPanel>
                         </Expander>
 
-                        <Expander Grid.Row="3" Header="{DynamicResource S.Options.Other}" IsExpanded="True">
+                        <Expander Grid.Row="3" Header="{DynamicResource S.Options.Recorder.Guidelines}" IsExpanded="False">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <n:ExtendedToggleButton Grid.Row="0" Grid.Column="0" x:Name="GuidelineThirdsToggleButton" ContentHeight="30" ContentWidth="40" Style="{StaticResource Style.ToggleButton.NoBorder}"
+                                                        Text="{DynamicResource S.Options.Recorder.Guidelines.RuleOfThirds}" Padding="10" Margin="0,0,0,5" HorizontalAlignment="Center" Icon="{StaticResource Vector.Guideline.Thirds}"
+                                                        IsChecked="{Binding DisplayThirdsGuideline, Mode=TwoWay}" ToolTip="{DynamicResource S.Options.Recorder.Guidelines.RuleOfThirds.Info}"/>
+
+                                <Grid Grid.Row="1" Grid.Column="0" IsEnabled="{Binding DisplayThirdsGuideline, Mode=OneWay}" HorizontalAlignment="Center">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Caption.Thickness}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                    <n:DoubleUpDown Grid.Row="0" Grid.Column="1" Margin="5,3" Value="{Binding ThirdsGuidelineThickness, Mode=TwoWay}" 
+                                                    Minimum="0.5" Maximum="5" MinWidth="80" HorizontalAlignment="Left"/>
+
+                                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.Caption.Color}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                    <n:ColorBox Grid.Row="1" Grid.Column="1" Margin="5,3" SelectedColor="{Binding ThirdsGuidelineColor, Mode=TwoWay}" MinWidth="80" HorizontalAlignment="Left"/>
+
+                                    <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.Shapes.Shapes.Dashes}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                    <n:ExtendedTextBox Grid.Row="2" Grid.Column="1" Margin="5,3" AllowedCharacters="0123456789 " MinWidth="80" HorizontalAlignment="Left"
+                                                       Text="{Binding ThirdsGuidelineStrokeDashArray}" ToolTip="{DynamicResource S.Shapes.Shapes.Dashes.Info}"/>
+                                </Grid>
+
+                                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                           Text="{DynamicResource S.AndOr}" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+
+                                <Separator Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Width="1" HorizontalAlignment="Center"/>
+                                
+                                <n:ExtendedToggleButton Grid.Row="0" Grid.Column="1" x:Name="GuidelineCrosshairToggleButton" ContentHeight="30" ContentWidth="40" Style="{StaticResource Style.ToggleButton.NoBorder}"
+                                                        Text="{DynamicResource S.Options.Recorder.Guidelines.Crosshair}" Padding="10" Margin="0,0,0,5" HorizontalAlignment="Center" Icon="{StaticResource Vector.Guideline.Crosshair}"
+                                                        IsChecked="{Binding DisplayCrosshairGuideline, Mode=TwoWay}" ToolTip="{DynamicResource S.Options.Recorder.Guidelines.Crosshair.Info}"/>
+
+                                <Grid Grid.Row="1" Grid.Column="1" IsEnabled="{Binding DisplayCrosshairGuideline, Mode=OneWay}" HorizontalAlignment="Center">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Caption.Thickness}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                    <n:DoubleUpDown Grid.Row="0" Grid.Column="1" Margin="5,3" Value="{Binding CrosshairGuidelineThickness, Mode=TwoWay}" 
+                                                    Minimum="0.5" Maximum="5" MinWidth="80" HorizontalAlignment="Left"/>
+
+                                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.Caption.Color}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                    <n:ColorBox Grid.Row="1" Grid.Column="1" Margin="5,3" SelectedColor="{Binding CrosshairGuidelineColor, Mode=TwoWay}" MinWidth="80" HorizontalAlignment="Left"/>
+
+                                    <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.Shapes.Shapes.Dashes}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                    <n:ExtendedTextBox Grid.Row="2" Grid.Column="1" Margin="5,3" AllowedCharacters="0123456789 " MinWidth="80" HorizontalAlignment="Left"
+                                                       Text="{Binding CrosshairGuidelineStrokeDashArray}" ToolTip="{DynamicResource S.Shapes.Shapes.Dashes.Info}"/>
+                                </Grid>
+
+                                <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="10,10,5,0" HorizontalAlignment="Center">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Border Grid.Column="0" Width="15" Height="15" Background="{StaticResource Vector.Info}" Opacity="{DynamicResource Element.Opacity}"/>
+                                    <TextBlock Grid.Column="1" Text="{DynamicResource S.Options.Recorder.Guidelines.Info}" Foreground="{DynamicResource Element.Foreground.Detail}" 
+                                               Padding="3" TextWrapping="WrapWithOverflow"/>
+                                </Grid>
+                            </Grid>
+                        </Expander>
+                        
+                        <Expander Grid.Row="4" Header="{DynamicResource S.Options.Other}" IsExpanded="True">
                             <StackPanel Margin="10,0,0,0">
+                                <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.RememberSize}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=RecorderRememberSize, Mode=TwoWay}"/>
+                                <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.RememberPosition}" Margin="25,3,5,3" VerticalAlignment="Top" IsChecked="{Binding Path=RecorderRememberPosition, Mode=TwoWay}"
+                                                    IsEnabled="{Binding RecorderRememberSize, Mode=OneWay}" UncheckOnDisable="True"/>
+                                
                                 <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.PreStart}" Margin="5,3" IsChecked="{Binding Path=UsePreStart, Mode=TwoWay}"/>
                                 <WrapPanel Margin="20,3,5,3" Visibility="{Binding UsePreStart, Converter={StaticResource Bool2Visibility}}">
                                     <n:IntegerUpDown Minimum="2" Maximum="15" MinWidth="50" Value="{Binding Source={x:Static u:UserSettings.All}, Path=PreStartValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                     <TextBlock Text="{DynamicResource S.Options.Recorder.PreStart.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
                                 </WrapPanel>
 
-                                <WrapPanel Margin="0,0,5,0">
-                                    <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.CursorFollowing}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=CursorFollowing, Mode=TwoWay}"/>
-                                    <TextBlock Text="{DynamicResource S.Options.Recorder.CursorFollowing.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
-                                </WrapPanel>
+                                <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.CursorFollowing}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=CursorFollowing, Mode=TwoWay}"
+                                                    Info="{DynamicResource S.Options.Recorder.CursorFollowing.Info}"/>
+
                                 <WrapPanel Margin="20,3,5,3" Visibility="{Binding CursorFollowing, Converter={StaticResource Bool2Visibility}}">
                                     <n:IntegerUpDown Minimum="2" Maximum="100" MinWidth="50" Value="{Binding Source={x:Static u:UserSettings.All}, Path=FollowBuffer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                     <TextBlock Text="{DynamicResource S.Options.Recorder.FollowMargin.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
@@ -612,6 +687,8 @@
                                     <n:IntegerUpDown Minimum="2" Maximum="100" MinWidth="50" Value="{Binding Source={x:Static u:UserSettings.All}, Path=FollowBufferInvisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                     <TextBlock Text="{DynamicResource S.Options.Recorder.FollowMarginInvisible.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
                                 </WrapPanel>
+
+                                <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.NotifyRecordingDiscard}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=NotifyRecordingDiscard, Mode=TwoWay}"/>
                             </StackPanel>
                         </Expander>
                     </Grid>
@@ -748,7 +825,7 @@
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <Viewbox Grid.Column="0" Child="{StaticResource Vector.WidthHeight}" Height="23" Width="23" Margin="3" Opacity="{DynamicResource Element.Opacity}"/>
+                                    <Grid Grid.Column="0" Background="{StaticResource Vector.WidthHeight}" Height="23" Width="23" Margin="3" Opacity="{DynamicResource Element.Opacity}"/>
 
                                     <TextBlock Grid.Column="1" Text="{DynamicResource S.Options.Editor.Previewer.GridSize.Height}" Padding="5" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                                     <n:IntegerUpDown Grid.Column="2" x:Name="GridHeightIntegerUpDown" Minimum="1" Maximum="1000" Margin="5,3" UpdateOnInput="True" Tag="Editor" ValueChanged="GridSizeIntegerUpDown_ValueChanged"/>
@@ -756,10 +833,10 @@
                                     <TextBlock Grid.Column="3" Text="{DynamicResource S.Options.Editor.Previewer.GridSize.Width}" Padding="5" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                                     <n:IntegerUpDown Grid.Column="4" x:Name="GridWidthIntegerUpDown" Minimum="1" Maximum="1000" Margin="5,3" UpdateOnInput="True" Tag="Editor" ValueChanged="GridSizeIntegerUpDown_ValueChanged"/>
 
-                                    <n:ImageButton Grid.Column="6" Text="{DynamicResource S.Options.Editor.Previewer.GridSize.Apply}" Content="{StaticResource Vector.Ok}" Style="{StaticResource Style.Button.Horizontal}" 
-                                                   Padding="2" MaxSize="14" Click="ApplySizeButton_Click"/>
-                                    <n:ImageButton Grid.Column="7" Text="{DynamicResource S.Cancel}" Content="{StaticResource Vector.Cancel}" Style="{StaticResource Style.Button.Horizontal}" 
-                                                   Padding="2" MaxSize="14" Click="CancelSizeButton_Click"/>
+                                    <n:ExtendedButton Grid.Column="6" Text="{DynamicResource S.Options.Editor.Previewer.GridSize.Apply}" Icon="{StaticResource Vector.Ok}" Style="{StaticResource Style.Button.Horizontal}" 
+                                                      Padding="2" ContentWidth="14" ContentHeight="14" Click="ApplySizeButton_Click"/>
+                                    <n:ExtendedButton Grid.Column="7" Text="{DynamicResource S.Cancel}" Icon="{StaticResource Vector.Cancel}" Style="{StaticResource Style.Button.Horizontal}" 
+                                                      Padding="2" ContentWidth="14" ContentHeight="14" Click="CancelSizeButton_Click"/>
                                 </Grid>
                             </StackPanel>
                         </Expander>
@@ -961,11 +1038,9 @@
                                 <n:ExtendedCheckBox Text="{DynamicResource S.Options.Editor.General.TripleClickSelection}" Margin="0,3" IsChecked="{Binding Path=TripleClickSelection, Mode=TwoWay}"/>
                                 <n:ExtendedCheckBox Text="{DynamicResource S.Options.Editor.General.DrawOutlineOutside}" Margin="0,3" IsChecked="{Binding Path=DrawOutlineOutside, Mode=TwoWay}"/>
 
-                                <WrapPanel Margin="0,0,5,0">
-                                    <n:ExtendedCheckBox Text="{DynamicResource S.Options.Editor.General.LimitHistory}" Margin="0,3" VerticalAlignment="Top" IsChecked="{Binding Path=SetHistoryLimit, Mode=TwoWay}"/>
-                                    <TextBlock Text="{DynamicResource S.Options.Editor.General.LimitHistory.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" 
-                                               Foreground="{DynamicResource Element.Foreground.Gray150}"/>
-                                </WrapPanel>
+                                <n:ExtendedCheckBox Text="{DynamicResource S.Options.Editor.General.LimitHistory}" Margin="0,3" VerticalAlignment="Top" IsChecked="{Binding Path=SetHistoryLimit, Mode=TwoWay}"
+                                                    Info="{DynamicResource S.Options.Editor.General.LimitHistory.Info}"/>
+
                                 <WrapPanel Margin="10,3,5,3" Visibility="{Binding SetHistoryLimit, Converter={StaticResource Bool2Visibility}}">
                                     <n:IntegerUpDown Minimum="0" Maximum="150" MinWidth="50" Value="{Binding Source={x:Static u:UserSettings.All}, Path=HistoryLimit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                     <TextBlock Text="{DynamicResource S.Options.Editor.General.LimitHistory.Maximum}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" 
@@ -1010,30 +1085,30 @@
                             </DataGrid.Columns>
                         </DataGrid>
 
-                        <n:ImageButton Grid.Row="1" Grid.Column="1" x:Name="UpButton" Margin="3,5" Content="{StaticResource Vector.Arrow.Blue.Top}" ContentWidth="18"
-                                       Style="{StaticResource Style.Button.NoText.Border}" MinWidth="30" MinHeight="30" Command="{StaticResource Command.MoveUp}"
-                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
-                                       ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-5"/>
+                        <n:ExtendedButton Grid.Row="1" Grid.Column="1" x:Name="UpButton" Margin="3,5" Icon="{StaticResource Vector.Arrow.Blue.Top}" ContentWidth="18" ContentHeight="18"
+                                          Style="{StaticResource Style.Button.NoText.Border}" MinWidth="30" MinHeight="30" Command="{StaticResource Command.MoveUp}"
+                                          ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
+                                          ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-5"/>
 
-                        <n:ImageButton Grid.Row="2" Grid.Column="1" x:Name="DownButton" Margin="3,5" Content="{StaticResource Vector.Arrow.Blue.Bottom}" ContentWidth="18"
-                                       Style="{StaticResource Style.Button.NoText.Border}" MinWidth="30" MinHeight="30" Command="{StaticResource Command.MoveDown}"
-                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
-                                       ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-5"/>
+                        <n:ExtendedButton Grid.Row="2" Grid.Column="1" x:Name="DownButton" Margin="3,5" Icon="{StaticResource Vector.Arrow.Blue.Bottom}" ContentWidth="18" ContentHeight="18"
+                                          Style="{StaticResource Style.Button.NoText.Border}" MinWidth="30" MinHeight="30" Command="{StaticResource Command.MoveDown}"
+                                          ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
+                                          ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-5"/>
 
-                        <n:ImageButton Grid.Row="3" Grid.Column="1" x:Name="AddButton" Margin="3,5" Content="{StaticResource Vector.Add}" ContentWidth="18"
-                                       Style="{StaticResource Style.Button.NoText.Border}" MinWidth="30" MinHeight="30" Command="{StaticResource Command.Add}"
-                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
-                                       ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-5"/>
+                        <n:ExtendedButton Grid.Row="3" Grid.Column="1" x:Name="AddButton" Margin="3,5" Icon="{StaticResource Vector.Add}" ContentWidth="18" ContentHeight="18"
+                                          Style="{StaticResource Style.Button.NoText.Border}" MinWidth="30" MinHeight="30" Command="{StaticResource Command.Add}"
+                                          ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
+                                          ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-5"/>
 
-                        <n:ImageButton Grid.Row="4" Grid.Column="1" x:Name="EditButton" Margin="3,5" Content="{StaticResource Vector.Pen}" ContentWidth="18"
-                                       Style="{StaticResource Style.Button.NoText.Border}" MinWidth="30" MinHeight="30" Command="{StaticResource Command.Edit}"
-                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
-                                       ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-5"/>
+                        <n:ExtendedButton Grid.Row="4" Grid.Column="1" x:Name="EditButton" Margin="3,5" Icon="{StaticResource Vector.Pen}" ContentWidth="18" ContentHeight="18"
+                                          Style="{StaticResource Style.Button.NoText.Border}" MinWidth="30" MinHeight="30" Command="{StaticResource Command.Edit}"
+                                          ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
+                                          ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-5"/>
 
-                        <n:ImageButton Grid.Row="5" Grid.Column="1" x:Name="RemoveButton" Margin="3,5" Content="{StaticResource Vector.Remove}" ContentWidth="18"
-                                       Style="{StaticResource Style.Button.NoText.Border}" MinWidth="30" MinHeight="30" Command="{StaticResource Command.Remove}"
-                                       ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
-                                       ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-5"/>
+                        <n:ExtendedButton Grid.Row="5" Grid.Column="1" x:Name="RemoveButton" Margin="3,5" Icon="{StaticResource Vector.Remove}" ContentWidth="18" ContentHeight="18"
+                                          Style="{StaticResource Style.Button.NoText.Border}" MinWidth="30" MinHeight="30" Command="{StaticResource Command.Remove}"
+                                          ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
+                                          ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-5"/>
 
                         <TextBlock Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Text="{DynamicResource S.Options.Tasks.Info}" Padding="0" Margin="3" HorizontalAlignment="Center" TextWrapping="Wrap" 
                                    Foreground="{DynamicResource Element.Foreground.Gray150}"/>
@@ -1173,89 +1248,89 @@
                                 </ControlTemplate>
                             </ListBox.Template>
 
-                            <n:ImageListBoxItem Image="{StaticResource Vector.Info}" Tag="auto" Content="{DynamicResource S.Options.Language.AppLanguage.AutoDetect}" Author="{DynamicResource S.Options.Language.AppLanguage.AutoDetect.Author}" 
-                                                MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=auto, Converter={StaticResource TagToSelection}}"/>
+                            <n:ExtendedListBoxItem Icon="{StaticResource Vector.Info}" Tag="auto" Content="{DynamicResource S.Options.Language.AppLanguage.AutoDetect}" Author="{DynamicResource S.Options.Language.AppLanguage.AutoDetect.Author}" 
+                                                   ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=auto, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ImageListBoxItem Image="{StaticResource Flag.SaudiArabia}" Tag="ar" Content="Arabic / العربية" Author="Alan"
-                                                MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ar, Converter={StaticResource TagToSelection}}"/>
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.SaudiArabia}" Tag="ar" Content="Arabic / العربية" Author="Alan"
+                                                   ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=ar, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ImageListBoxItem Image="{StaticResource Flag.China}" Tag="zh" Content="Chinese (Simplified) / 简体中文" Author="Joel Yang, HiSen, Jeffiy, EMLVIRUS, 王晨旭, Wen Peng"
-                                                MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=zh, Converter={StaticResource TagToSelection}}"/>
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.China}" Tag="zh" Content="Chinese (Simplified) / 简体中文" Author="Joel Yang, HiSen, Jeffiy, EMLVIRUS, 王晨旭, Wen Peng"
+                                                   ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=zh, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ImageListBoxItem x:Name="TaiwanListBoxItem" Image="{StaticResource Flag.Taiwan}" Tag="zh-Hant" Content="Chinese (Traditional) / 繁體中文" Author="Jerry Lum, Danfong Hsieh, Tse Zinno"
-                                                MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=zh-Hant, Converter={StaticResource TagToSelection}}"/>
+                            <n:ExtendedListBoxItem x:Name="TaiwanListBoxItem" Image="{StaticResource Flag.Taiwan}" Tag="zh-Hant" Content="Chinese (Traditional) / 繁體中文" Author="Jerry Lum, Danfong Hsieh, Tse Zinno"
+                                                   ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=zh-Hant, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ImageListBoxItem Image="{StaticResource Flag.CzechRepublic}" Tag="cs" Content="Czech / Čeština" Author="PePav"
-                                                MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=cs, Converter={StaticResource TagToSelection}}"/>
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.CzechRepublic}" Tag="cs" Content="Czech / Čeština" Author="PePav"
+                                                   ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=cs, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ImageListBoxItem Image="{StaticResource Flag.Denmark}" Tag="da" Content="Danish / Dansk" Author="Regmos"
-                                                MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=da, Converter={StaticResource TagToSelection}}"/>
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Denmark}" Tag="da" Content="Danish / Dansk" Author="Regmos"
+                                                   ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=da, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ImageListBoxItem Image="{StaticResource Flag.Netherlands}" Tag="nl" Content="Dutch / Nederlands" Author="Stephan Paternotte, Jasper Verweij"
-                                                MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=nl, Converter={StaticResource TagToSelection}}"/>
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Netherlands}" Tag="nl" Content="Dutch / Nederlands" Author="Stephan Paternotte, Jasper Verweij"
+                                                   ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=nl, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ImageListBoxItem Image="{StaticResource Flag.UnitedKingdom}" Tag="en" Content="English" Author="Nicke Manarin" 
-                                                MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=en, Converter={StaticResource TagToSelection}}"/>
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.UnitedKingdom}" Tag="en" Content="English" Author="Nicke Manarin" 
+                                                   ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=en, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ImageListBoxItem Image="{StaticResource Flag.France}" Tag="fr" Content="French / Français" Author="Largo, Sébastien 'Tr4ncer' Villemain, Adrick"
-                                                MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=fr, Converter={StaticResource TagToSelection}}"/>
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.France}" Tag="fr" Content="French / Français" Author="Largo, Sébastien 'Tr4ncer' Villemain, Adrick"
+                                                   ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=fr, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ImageListBoxItem Image="{StaticResource Flag.Germany}" Tag="de" Content="German / Deutsch" Author="PeterK., Christoph Voigt, Michael Reukauff"
-                                                MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=de, Converter={StaticResource TagToSelection}}"/>
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Germany}" Tag="de" Content="German / Deutsch" Author="PeterK., Christoph Voigt, Michael Reukauff"
+                                                   ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=de, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ImageListBoxItem Image="{StaticResource Flag.Hungary}" Tag="hu" Content="Hungarian / Magyar" Author="László Földes"
-                                                MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=hu, Converter={StaticResource TagToSelection}}"/>
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Hungary}" Tag="hu" Content="Hungarian / Magyar" Author="László Földes"
+                                                   ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=hu, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ImageListBoxItem Image="{StaticResource Flag.Italy}" Tag="it" Content="Italian / Italiano" Author="HispidaBytes, Michele Locati, Giovanni Rinaldin"
-                                                MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=it, Converter={StaticResource TagToSelection}}"/>
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Italy}" Tag="it" Content="Italian / Italiano" Author="HispidaBytes, Michele Locati, Giovanni Rinaldin"
+                                                   ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=it, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ImageListBoxItem Image="{StaticResource Flag.Japan}" Tag="ja" Content="Japanese / 日本語" Author="oxosi, Toshio, Winston, Chihiro Watanabe"
-                                                MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ja, Converter={StaticResource TagToSelection}}"/>
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Japan}" Tag="ja" Content="Japanese / 日本語" Author="oxosi, Toshio, Winston, Chihiro Watanabe"
+                                                   ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=ja, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ImageListBoxItem Image="{StaticResource Flag.SouthKorea}" Tag="ko" Content="Korean / 한국어" Author="Manbok, Lytie"
-                                                MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ko, Converter={StaticResource TagToSelection}}"/>
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.SouthKorea}" Tag="ko" Content="Korean / 한국어" Author="Manbok, Lytie"
+                                                   ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=ko, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ImageListBoxItem Image="{StaticResource Flag.Poland}" Tag="pl" Content="Polish / Polski" Author="Michał Stojke, Sebastian Pietras, Jakub Bazgier" 
-                                                MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=pl, Converter={StaticResource TagToSelection}}"/>
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Poland}" Tag="pl" Content="Polish / Polski" Author="Michał Stojke, Sebastian Pietras, Jakub Bazgier" 
+                                                   ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=pl, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ImageListBoxItem Image="{StaticResource Flag.Brazil}" Tag="pt" Content="Portuguese / Português" Author="Nicke Manarin" 
-                                                MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=pt, Converter={StaticResource TagToSelection}}"/>
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Brazil}" Tag="pt" Content="Portuguese / Português" Author="Nicke Manarin" 
+                                                   ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=pt, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ImageListBoxItem Image="{StaticResource Flag.Portugal}" Tag="pt-PT" Content="Portuguese (Portugal) / Português (Portugal)" Author="Duarte Ramos" 
-                                                MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=pt-PT, Converter={StaticResource TagToSelection}}"/>
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Portugal}" Tag="pt-PT" Content="Portuguese (Portugal) / Português (Portugal)" Author="Duarte Ramos" 
+                                                   ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=pt-PT, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ImageListBoxItem Image="{StaticResource Flag.Turkey}" Tag="tr" Content="Turkish / Türkçe" Author="seferciogluecce, Omer Mollamehmetoglu, Bekir"
-                                                MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=tr, Converter={StaticResource TagToSelection}}"/>
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Turkey}" Tag="tr" Content="Turkish / Türkçe" Author="seferciogluecce, Omer Mollamehmetoglu, Bekir"
+                                                   ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=tr, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ImageListBoxItem Image="{StaticResource Flag.Argentina}" Tag="es-AR" Content="Spanish (Argentina) / Español (Argentina)" Author="KNTRO (kntro@msn.com)"
-                                                MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=es-AR, Converter={StaticResource TagToSelection}}"/>
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Argentina}" Tag="es-AR" Content="Spanish (Argentina) / Español (Argentina)" Author="KNTRO (kntro@msn.com)"
+                                                   ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=es-AR, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ImageListBoxItem Image="{StaticResource Flag.Spain}" Tag="es" Content="Spanish / Español" Author="codedeep, Zabb"
-                                                MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=es, Converter={StaticResource TagToSelection}}"/>
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Spain}" Tag="es" Content="Spanish / Español" Author="codedeep, Zabb"
+                                                   ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=es, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ImageListBoxItem Image="{StaticResource Flag.EastAfricanCommunity}" Tag="sw" Content="Swahili / Kiswahili" Author="Mara Gati Lucky"
-                                                MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=sw, Converter={StaticResource TagToSelection}}"/>
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.EastAfricanCommunity}" Tag="sw" Content="Swahili / Kiswahili" Author="Mara Gati Lucky"
+                                                   ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=sw, Converter={StaticResource TagToSelection}}"/>
                             
-                            <n:ImageListBoxItem Image="{StaticResource Flag.Sweden}" Tag="sv" Content="Swedish / Svenska" Author="Sopor, Andreas Johansson"
-                                                MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=sv, Converter={StaticResource TagToSelection}}"/>
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Sweden}" Tag="sv" Content="Swedish / Svenska" Author="Sopor, Andreas Johansson"
+                                                   ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=sv, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ImageListBoxItem Image="{StaticResource Flag.Russia}" Tag="ru" Content="Russian / Русский" Author="wvxwxvw, Zoltanleo, Qwitriy, ralienpp, Nivalis, Yuri Komar, Vadim Velezhenko"
-                                                MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ru, Converter={StaticResource TagToSelection}}"/>
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Russia}" Tag="ru" Content="Russian / Русский" Author="wvxwxvw, Zoltanleo, Qwitriy, ralienpp, Nivalis, Yuri Komar, Vadim Velezhenko"
+                                                   ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=ru, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ImageListBoxItem Image="{StaticResource Flag.Ukraine}" Tag="uk" Content="Ukrainian / українська" Author="Andrey Ìlečko"
-                                                MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=uk, Converter={StaticResource TagToSelection}}"/>
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Ukraine}" Tag="uk" Content="Ukrainian / українська" Author="Andrey Ìlečko"
+                                                   ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=uk, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ImageListBoxItem Image="{StaticResource Flag.Vietnam}" Tag="vi" Content="Vietnamese / Tiếng Việt" Author="Đỗ Quang Hưng"
-                                                MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=vi, Converter={StaticResource TagToSelection}}"/>
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Vietnam}" Tag="vi" Content="Vietnamese / Tiếng Việt" Author="Đỗ Quang Hưng"
+                                                   ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=vi, Converter={StaticResource TagToSelection}}"/>
 
-                            <!--<n:ImageListBoxItem Image="{StaticResource Greece}" Tag="el" Content="Greek" Author="No Author"
-                                                    MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=el, Converter={StaticResource TagToSelection}}"/>
+                            <!--<n:ExtendedListBoxItem Image="{StaticResource Greece}" Tag="el" Content="Greek" Author="No Author"
+                                                       ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=el, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ImageListBoxItem Image="{StaticResource Romania}" Tag="ro" Content="Romanian" Author="No Author"
-                                                MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ro, Converter={StaticResource TagToSelection}}"/>
+                            <n:ExtendedListBoxItem Image="{StaticResource Romania}" Tag="ro" Content="Romanian" Author="No Author"
+                                                   ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=ro, Converter={StaticResource TagToSelection}}"/>
  
-                            <n:ImageListBoxItem Image="{StaticResource India}" Tag="ta" Content="Tamil" Author="No Author"
-                                                MaxSize="25" IsSelected="{Binding LanguageCode, ConverterParameter=ta, Converter={StaticResource TagToSelection}}"/>-->
+                            <n:ExtendedListBoxItem Image="{StaticResource India}" Tag="ta" Content="Tamil" Author="No Author"
+                                                   ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=ta, Converter={StaticResource TagToSelection}}"/>-->
                         </ListBox>
 
                         <TextBlock Grid.Row="2" x:Name="TranslateHyperlink" FontSize="12" FontFamily="Segoe UI Semilight" TextWrapping="WrapWithOverflow" Padding="2">
@@ -1314,10 +1389,10 @@
 
                                 <n:ExtendedProgressBar Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" x:Name="StatusProgressBar" Height="20" Value="50" Maximum="100" Margin="3" State="Info" ShowPercentage="True"/>
 
-                                <n:ImageButton Grid.Row="1" Grid.Column="3" x:Name="CheckCacheButton" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Repeat}" ContentWidth="20"
-                                               ToolTip="{DynamicResource S.Options.Storage.Status.Check}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{StaticResource Command.CheckCache}"/>
-                                <n:ImageButton Grid.Row="1" Grid.Column="4" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Delete.Folder}" ContentWidth="20"
-                                               ToolTip="{DynamicResource S.Options.Storage.Status.Clear}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{StaticResource Command.ClearCache}"/>
+                                <n:ExtendedButton Grid.Row="1" Grid.Column="3" x:Name="CheckCacheButton" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Repeat}" ContentWidth="20" ContentHeight="20"
+                                                  ToolTip="{DynamicResource S.Options.Storage.Status.Check}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{StaticResource Command.CheckCache}"/>
+                                <n:ExtendedButton Grid.Row="1" Grid.Column="4" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Delete.Folder}" ContentWidth="20" ContentHeight="20"
+                                                  ToolTip="{DynamicResource S.Options.Storage.Status.Clear}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{StaticResource Command.ClearCache}"/>
 
                                 <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" x:Name="LowSpaceTextBlock" Text="{DynamicResource S.Options.Storage.Status.LowSpace}" Padding="0" Margin="5,3" 
                                            VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Brush.ProgressBar.Danger}" Visibility="Collapsed"/>
@@ -1350,18 +1425,18 @@
                                 <n:ExtendedTextBox Grid.Row="0" Grid.Column="1" x:Name="CacheTextBox" Margin="0,3" Text="{Binding TemporaryFolder, Source={x:Static u:UserSettings.All}, UpdateSourceTrigger=PropertyChanged}" 
                                                    IsEnabled="{Binding ElementName=CheckCacheButton, Path=IsEnabled, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" LostFocus="CacheTextBox_LostFocus"/>
 
-                                <n:ImageButton Grid.Row="0" Grid.Column="2" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" ContentWidth="20"
-                                               ToolTip="{DynamicResource S.Options.Storage.Paths.Cache.Choose}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Click="ChooseCachePath_Click"/>
-                                <n:ImageButton Grid.Row="0" Grid.Column="3" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Forward}" ContentWidth="20"
-                                               ToolTip="{DynamicResource S.Options.Storage.Paths.Browse}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{StaticResource Command.BrowseCache}"/>
+                                <n:ExtendedButton Grid.Row="0" Grid.Column="2" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Open}" ContentWidth="20" ContentHeight="20"
+                                                  ToolTip="{DynamicResource S.Options.Storage.Paths.Cache.Choose}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Click="ChooseCachePath_Click"/>
+                                <n:ExtendedButton Grid.Row="0" Grid.Column="3" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Forward}" ContentWidth="20" ContentHeight="20"
+                                                  ToolTip="{DynamicResource S.Options.Storage.Paths.Browse}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{StaticResource Command.BrowseCache}"/>
 
                                 <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.Options.Storage.Paths.Logs}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="2,0,5,0" VerticalAlignment="Center"/>
                                 <n:ExtendedTextBox Grid.Row="1" Grid.Column="1" Margin="0,3" Text="{Binding LogsFolder, Source={x:Static u:UserSettings.All}}"/>
 
-                                <n:ImageButton Grid.Row="1" Grid.Column="2" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" ContentWidth="20"
-                                               ToolTip="{DynamicResource S.Options.Storage.Paths.Logs.Choose}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Click="ChooseLogsPath_Click"/>
-                                <n:ImageButton Grid.Row="1" Grid.Column="3" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Forward}" ContentWidth="20"
-                                               ToolTip="{DynamicResource S.Options.Storage.Paths.Browse}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{StaticResource Command.BrowseLogs}"/>
+                                <n:ExtendedButton Grid.Row="1" Grid.Column="2" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Open}" ContentWidth="20" ContentHeight="20"
+                                                  ToolTip="{DynamicResource S.Options.Storage.Paths.Logs.Choose}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Click="ChooseLogsPath_Click"/>
+                                <n:ExtendedButton Grid.Row="1" Grid.Column="3" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Forward}" ContentWidth="20" ContentHeight="20"
+                                                  ToolTip="{DynamicResource S.Options.Storage.Paths.Browse}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{StaticResource Command.BrowseLogs}"/>
                             </Grid>
                         </Expander>
 
@@ -1383,23 +1458,23 @@
                                 <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Options.Storage.AppDataPath}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="3"/>
                                 <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" x:Name="AppDataPathTextBlock" Text="..." Foreground="{DynamicResource Element.Foreground.Medium}" Padding="3" TextWrapping="Wrap" FontStyle="Italic"/>
 
-                                <n:ImageButton Grid.Row="0" Grid.Column="3" x:Name="OpenAppDataButton" ToolTip="{DynamicResource S.Options.Storage.OpenSettingsFolder}" Style="{StaticResource Style.Button.NoText}"
-                                               Content="{StaticResource Vector.Forward}" Padding="3" ContentHeight="14" Command="{StaticResource Command.OpenAppDataSettings}"/>
+                                <n:ExtendedButton Grid.Row="0" Grid.Column="3" x:Name="OpenAppDataButton" ToolTip="{DynamicResource S.Options.Storage.OpenSettingsFolder}" Style="{StaticResource Style.Button.NoText}"
+                                                  Icon="{StaticResource Vector.Forward}" Padding="3" ContentWidth="18" ContentHeight="14" Command="{StaticResource Command.OpenAppDataSettings}"/>
 
-                                <n:ImageButton Grid.Row="0" Grid.Column="4" x:Name="RemoveAppDataButton" ToolTip="{DynamicResource S.Options.Storage.RemoveSettings}" Style="{StaticResource Style.Button.NoText}"
-                                               Content="{StaticResource Vector.Remove}" Padding="3" ContentHeight="14" Command="{StaticResource Command.RemoveAppDataSettings}"/>
+                                <n:ExtendedButton Grid.Row="0" Grid.Column="4" x:Name="RemoveAppDataButton" ToolTip="{DynamicResource S.Options.Storage.RemoveSettings}" Style="{StaticResource Style.Button.NoText}"
+                                                  Icon="{StaticResource Vector.Remove}" Padding="3" ContentWidth="18" ContentHeight="14" Command="{StaticResource Command.RemoveAppDataSettings}"/>
 
                                 <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.Options.Storage.LocalPath}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="3"/>
                                 <TextBlock Grid.Row="1" Grid.Column="1" x:Name="LocalPathTextBlock" Text="..." Foreground="{DynamicResource Element.Foreground.Medium}" Padding="3" TextWrapping="Wrap" FontStyle="Italic"/>
 
-                                <n:ImageButton Grid.Row="1" Grid.Column="2" x:Name="CreateLocalButton" ToolTip="{DynamicResource S.Options.Storage.CreateSettings}" Style="{StaticResource Style.Button.NoText}"
-                                               Content="{StaticResource Vector.Add}" Padding="3" ContentHeight="14" Command="{StaticResource Command.CreateLocalSettings}"/>
+                                <n:ExtendedButton Grid.Row="1" Grid.Column="2" x:Name="CreateLocalButton" ToolTip="{DynamicResource S.Options.Storage.CreateSettings}" Style="{StaticResource Style.Button.NoText}"
+                                                  Icon="{StaticResource Vector.Add}" Padding="3" ContentHeight="18" ContentWidth="14" Command="{StaticResource Command.CreateLocalSettings}"/>
 
-                                <n:ImageButton Grid.Row="1" Grid.Column="3" x:Name="OpenLocalButton" ToolTip="{DynamicResource S.Options.Storage.OpenSettingsFolder}" Style="{StaticResource Style.Button.NoText}"
-                                               Content="{StaticResource Vector.Forward}" Padding="3" ContentHeight="14" Command="{StaticResource Command.OpenLocalSettings}"/>
+                                <n:ExtendedButton Grid.Row="1" Grid.Column="3" x:Name="OpenLocalButton" ToolTip="{DynamicResource S.Options.Storage.OpenSettingsFolder}" Style="{StaticResource Style.Button.NoText}"
+                                                  Icon="{StaticResource Vector.Forward}" Padding="3" ContentWidth="18" ContentHeight="14" Command="{StaticResource Command.OpenLocalSettings}"/>
 
-                                <n:ImageButton Grid.Row="1" Grid.Column="4" x:Name="RemoveLocalButton" ToolTip="{DynamicResource S.Options.Storage.RemoveSettings}" Style="{StaticResource Style.Button.NoText}"
-                                               Content="{StaticResource Vector.Remove}" Padding="3" ContentHeight="14" Command="{StaticResource Command.RemoveLocalSettings}"/>
+                                <n:ExtendedButton Grid.Row="1" Grid.Column="4" x:Name="RemoveLocalButton" ToolTip="{DynamicResource S.Options.Storage.RemoveSettings}" Style="{StaticResource Style.Button.NoText}"
+                                                  Icon="{StaticResource Vector.Remove}" Padding="3" ContentWidth="18" ContentHeight="14" Command="{StaticResource Command.RemoveLocalSettings}"/>
 
                                 <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" Text="{DynamicResource S.Options.Storage.SettingsInfo}" Foreground="{DynamicResource Element.Foreground.Medium}" 
                                            TextWrapping="Wrap" Padding="4,2" Margin="0,10,0,0"/>
@@ -1418,111 +1493,6 @@
                                 </WrapPanel>
                             </StackPanel>
                         </Expander>
-                    </Grid>
-
-                    <!--Extras-->
-                    <Grid x:Name="ExtrasGrid" Visibility="{Binding IsChecked, Converter={StaticResource Bool2Visibility}, ElementName=ExtrasRadioButton}" Loaded="ExtrasGrid_Loaded">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="21"/>
-                            <RowDefinition MinHeight="29" Height="Auto"/>
-                            <RowDefinition Height="21"/>
-                            <RowDefinition MinHeight="29" Height="Auto"/>
-                            <RowDefinition Height="21"/>
-                            <RowDefinition MinHeight="29" Height="Auto"/>
-                            <RowDefinition Height="21"/>
-                            <RowDefinition MinHeight="29" Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
-                        <n:LabelSeparator Grid.Row="0" Text="{DynamicResource S.Options.Extras.External}"/>
-                        <Grid Grid.Row="1" Margin="5,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-
-                            <n:ImageCard Grid.Column="0" x:Name="FfmpegImageCard" Header="FFmpeg" Margin="0" Click="FfmpegImageCard_Click"/>
-                            <n:ImageCard Grid.Column="1" x:Name="GifskiImageCard" Header="Gifski" Margin="0" Click="GifskiImageCard_Click"/>
-                            <n:ImageCard Grid.Column="2" x:Name="SharpDxImageCard" Header="SharpDx" Margin="0" Click="SharpDxImageCard_Click"/>
-                        </Grid>
-
-                        <n:LabelSeparator Grid.Row="2" Text="{DynamicResource S.Options.Extras.FfmpegLocation}"/>
-                        <Grid Grid.Row="3">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="30"/>
-                                <ColumnDefinition Width="30"/>
-                            </Grid.ColumnDefinitions>
-
-                            <n:ExtendedTextBox Grid.Column="0" x:Name="FfmpegLocationTextBox" Margin="10,3,0,3" Text="{Binding FfmpegLocation, Source={x:Static u:UserSettings.All}, UpdateSourceTrigger=PropertyChanged}" 
-                                               Tag="FFmpeg" LostKeyboardFocus="LocationTextBox_LostKeyboardFocus"/>
-
-                            <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" ContentWidth="20"
-                                           ToolTip="{DynamicResource S.Options.Extras.FfmpegLocation.Select}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Click="SelectFfmpeg_Click"/>
-
-                            <n:ImageButton Grid.Column="2" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Forward}" ContentWidth="20"
-                                           ToolTip="{DynamicResource S.Options.Storage.Paths.Browse}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{StaticResource Command.BrowseFfmpeg}"/>
-                        </Grid>
-
-                        <n:LabelSeparator Grid.Row="4" Text="{DynamicResource S.Options.Extras.GifskiLocation}"/>
-                        <Grid Grid.Row="5">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="30"/>
-                                <ColumnDefinition Width="30"/>
-                            </Grid.ColumnDefinitions>
-
-                            <n:ExtendedTextBox Grid.Column="0" x:Name="GifskiLocationTextBox" Margin="10,3,0,3" Text="{Binding GifskiLocation, Source={x:Static u:UserSettings.All}, UpdateSourceTrigger=PropertyChanged}" 
-                                               Tag="Gifski" LostKeyboardFocus="LocationTextBox_LostKeyboardFocus"/>
-
-                            <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" ContentWidth="20"
-                                           ToolTip="{DynamicResource S.Options.Extras.GifskiLocation.Select}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Click="SelectGifski_Click"/>
-
-                            <n:ImageButton Grid.Column="2" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Forward}" ContentWidth="20"
-                                           ToolTip="{DynamicResource S.Options.Storage.Paths.Browse}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{StaticResource Command.BrowseGifski}"/>
-                        </Grid>
-
-                        <n:LabelSeparator Grid.Row="6" Text="{DynamicResource S.Options.Extras.SharpDxLocation}"/>
-                        <Grid Grid.Row="7">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="30"/>
-                                <ColumnDefinition Width="30"/>
-                            </Grid.ColumnDefinitions>
-
-                            <n:ExtendedTextBox Grid.Column="0" x:Name="SharpDxLocationTextBox" Margin="10,3,0,3" Text="{Binding SharpDxLocationFolder, Source={x:Static u:UserSettings.All}, UpdateSourceTrigger=PropertyChanged}" 
-                                               Tag="SharpDX" LostKeyboardFocus="LocationTextBox_LostKeyboardFocus"/>
-
-                            <n:ImageButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Open}" ContentWidth="20"
-                                           ToolTip="{DynamicResource S.Options.Extras.SharpDxLocation.Select}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Click="SelectSharpDx_Click"/>
-
-                            <n:ImageButton Grid.Column="2" Style="{StaticResource Style.Button.NoText}" Content="{StaticResource Vector.Forward}" ContentWidth="20"
-                                           ToolTip="{DynamicResource S.Options.Storage.Paths.Browse}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{StaticResource Command.BrowseSharpDx}"/>
-                        </Grid>
-
-                        <StackPanel Grid.Row="9" Orientation="Horizontal">
-                            <Viewbox Child="{StaticResource Vector.Info}" Height="16" Width="16" Margin="2" Opacity="{DynamicResource Element.Opacity}"/>
-
-                            <TextBlock Margin="2" VerticalAlignment="Center">
-                                <Hyperlink NavigateUri="https://ffmpeg.org/legal.html" RequestNavigate="ExtrasHyperlink_OnRequestNavigate">
-                                    <Run Text="{DynamicResource S.Options.Extras.License.Ffmpeg}"/>
-                                </Hyperlink>
-                                
-                                <Run Text="/" Foreground="{DynamicResource Element.Foreground}"/>
-
-                                <Hyperlink NavigateUri="https://github.com/ImageOptim/gifski/blob/master/LICENSE" RequestNavigate="ExtrasHyperlink_OnRequestNavigate">
-                                    <Run Text="{DynamicResource S.Options.Extras.License.Gifski}"/>
-                                </Hyperlink>
-                                
-                                <Run Text="/" Foreground="{DynamicResource Element.Foreground}"/>
-
-                                <Hyperlink NavigateUri="https://github.com/sharpdx/SharpDX/blob/master/LICENSE" RequestNavigate="ExtrasHyperlink_OnRequestNavigate">
-                                    <Run Text="{DynamicResource S.Options.Extras.License.SharpDx}"/>
-                                </Hyperlink>
-                            </TextBlock>
-                        </StackPanel>
                     </Grid>
 
                     <!--Cloud-->
@@ -1630,16 +1600,19 @@
                                     </Hyperlink>
                                 </TextBlock>
 
-                                <Viewbox Grid.Row="0" Grid.Column="2" Child="{StaticResource Vector.Arrow.Blue.Right}" Height="14" Opacity="{DynamicResource Element.Opacity}"/>
+                                <Border Grid.Row="0" Grid.Column="2" Background="{StaticResource Vector.Arrow.Blue.Right}" Width="14" Height="14" Opacity="{DynamicResource Element.Opacity}"/>
 
                                 <n:ExtendedTextBox Grid.Row="0" Grid.Column="3" Text="{Binding ImgurOAuthToken, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5,3"
                                                    Watermark="{DynamicResource S.Options.Upload.PasteToken}" TextWrapping="Wrap"/>
 
-                                <Viewbox Grid.Row="0" Grid.Column="4" Child="{StaticResource Vector.Arrow.Blue.Right}" Height="14" Opacity="{DynamicResource Element.Opacity}"/>
-
-                                <n:ImageButton Grid.Row="0" Grid.Column="5" Text="{DynamicResource S.Options.Upload.Authorize}" Content="{StaticResource Vector.Ok}" ContentHeight="16" Margin="3" Padding="2,0" Click="ImgurAuthorizeButton_Click"/>
-                                <n:ImageButton Grid.Row="0" Grid.Column="6" Text="{DynamicResource S.Options.Upload.Refresh}" Content="{StaticResource Vector.Repeat}" ContentHeight="16" Margin="3" Padding="2,0" Click="ImgurRefreshButton_Click"/>
-                                <n:ImageButton Grid.Row="1" Grid.Column="6" Text="{DynamicResource S.Options.Upload.Clear}" Content="{StaticResource Vector.Eraser}" ContentHeight="16" Margin="3" Padding="2,0" Click="ImgurClearButton_Click"/>
+                                <Border Grid.Row="0" Grid.Column="4" Background="{StaticResource Vector.Arrow.Blue.Right}" Width="14" Height="14" Opacity="{DynamicResource Element.Opacity}"/>
+                                
+                                <n:ExtendedButton Grid.Row="0" Grid.Column="5" Text="{DynamicResource S.Options.Upload.Authorize}" Icon="{StaticResource Vector.Ok}" 
+                                                  ContentWidth="16" ContentHeight="16" Margin="3" Click="ImgurAuthorizeButton_Click"/>
+                                <n:ExtendedButton Grid.Row="0" Grid.Column="6" Text="{DynamicResource S.Options.Upload.Refresh}" Icon="{StaticResource Vector.Repeat}" 
+                                                  ContentWidth="16" ContentHeight="16" Margin="3" Click="ImgurRefreshButton_Click"/>
+                                <n:ExtendedButton Grid.Row="1" Grid.Column="6" Text="{DynamicResource S.Options.Upload.Clear}" Icon="{StaticResource Vector.Eraser}" 
+                                                  ContentWidth="16" ContentHeight="16" Margin="3" Click="ImgurClearButton_Click"/>
 
                                 <n:ExtendedCheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="7" Text="{DynamicResource S.Options.Upload.Imgur.Direct}" Margin="5,3" 
                                                     IsChecked="{Binding ImgurUseDirectLinks, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -1701,6 +1674,111 @@
                         </Expander>
                     </Grid>
 
+                    <!--Extras-->
+                    <Grid x:Name="ExtrasGrid" Visibility="{Binding IsChecked, Converter={StaticResource Bool2Visibility}, ElementName=ExtrasRadioButton}" Loaded="ExtrasGrid_Loaded">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="21"/>
+                            <RowDefinition MinHeight="29" Height="Auto"/>
+                            <RowDefinition Height="21"/>
+                            <RowDefinition MinHeight="29" Height="Auto"/>
+                            <RowDefinition Height="21"/>
+                            <RowDefinition MinHeight="29" Height="Auto"/>
+                            <RowDefinition Height="21"/>
+                            <RowDefinition MinHeight="29" Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <n:LabelSeparator Grid.Row="0" Text="{DynamicResource S.Options.Extras.External}"/>
+                        <Grid Grid.Row="1" Margin="5,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <n:Card Grid.Column="0" x:Name="FfmpegImageCard" Header="FFmpeg" Margin="0" Click="FfmpegImageCard_Click"/>
+                            <n:Card Grid.Column="1" x:Name="GifskiImageCard" Header="Gifski" Margin="0" Click="GifskiImageCard_Click"/>
+                            <n:Card Grid.Column="2" x:Name="SharpDxImageCard" Header="SharpDx" Margin="0" Click="SharpDxImageCard_Click"/>
+                        </Grid>
+
+                        <n:LabelSeparator Grid.Row="2" Text="{DynamicResource S.Options.Extras.FfmpegLocation}"/>
+                        <Grid Grid.Row="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="30"/>
+                            </Grid.ColumnDefinitions>
+
+                            <n:ExtendedTextBox Grid.Column="0" x:Name="FfmpegLocationTextBox" Margin="10,3,0,3" Text="{Binding FfmpegLocation, Source={x:Static u:UserSettings.All}, UpdateSourceTrigger=PropertyChanged}" 
+                                               Tag="FFmpeg" LostKeyboardFocus="LocationTextBox_LostKeyboardFocus"/>
+
+                            <n:ExtendedButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Open}" ContentWidth="20" ContentHeight="20"
+                                              ToolTip="{DynamicResource S.Options.Extras.FfmpegLocation.Select}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Click="SelectFfmpeg_Click"/>
+
+                            <n:ExtendedButton Grid.Column="2" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Forward}" ContentWidth="20" ContentHeight="20"
+                                              ToolTip="{DynamicResource S.Options.Storage.Paths.Browse}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{StaticResource Command.BrowseFfmpeg}"/>
+                        </Grid>
+
+                        <n:LabelSeparator Grid.Row="4" Text="{DynamicResource S.Options.Extras.GifskiLocation}"/>
+                        <Grid Grid.Row="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="30"/>
+                            </Grid.ColumnDefinitions>
+
+                            <n:ExtendedTextBox Grid.Column="0" x:Name="GifskiLocationTextBox" Margin="10,3,0,3" Text="{Binding GifskiLocation, Source={x:Static u:UserSettings.All}, UpdateSourceTrigger=PropertyChanged}" 
+                                               Tag="Gifski" LostKeyboardFocus="LocationTextBox_LostKeyboardFocus"/>
+
+                            <n:ExtendedButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Open}" ContentWidth="20" ContentHeight="20"
+                                              ToolTip="{DynamicResource S.Options.Extras.GifskiLocation.Select}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Click="SelectGifski_Click"/>
+
+                            <n:ExtendedButton Grid.Column="2" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Forward}" ContentWidth="20" ContentHeight="20"
+                                              ToolTip="{DynamicResource S.Options.Storage.Paths.Browse}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{StaticResource Command.BrowseGifski}"/>
+                        </Grid>
+
+                        <n:LabelSeparator Grid.Row="6" Text="{DynamicResource S.Options.Extras.SharpDxLocation}"/>
+                        <Grid Grid.Row="7">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="30"/>
+                            </Grid.ColumnDefinitions>
+
+                            <n:ExtendedTextBox Grid.Column="0" x:Name="SharpDxLocationTextBox" Margin="10,3,0,3" Text="{Binding SharpDxLocationFolder, Source={x:Static u:UserSettings.All}, UpdateSourceTrigger=PropertyChanged}" 
+                                               Tag="SharpDX" LostKeyboardFocus="LocationTextBox_LostKeyboardFocus"/>
+
+                            <n:ExtendedButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Open}" ContentWidth="20" ContentHeight="20"
+                                              ToolTip="{DynamicResource S.Options.Extras.SharpDxLocation.Select}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Click="SelectSharpDx_Click"/>
+
+                            <n:ExtendedButton Grid.Column="2" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Forward}" ContentWidth="20" ContentHeight="20"
+                                              ToolTip="{DynamicResource S.Options.Storage.Paths.Browse}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{StaticResource Command.BrowseSharpDx}"/>
+                        </Grid>
+
+                        <StackPanel Grid.Row="9" Orientation="Horizontal">
+                            <Border Background="{StaticResource Vector.Info}" Height="16" Width="16" Margin="2" Opacity="{DynamicResource Element.Opacity}"/>
+
+                            <TextBlock Margin="2" VerticalAlignment="Center">
+                                <Hyperlink NavigateUri="https://ffmpeg.org/legal.html" RequestNavigate="ExtrasHyperlink_OnRequestNavigate">
+                                    <Run Text="{DynamicResource S.Options.Extras.License.Ffmpeg}"/>
+                                </Hyperlink>
+                                
+                                <Run Text="/" Foreground="{DynamicResource Element.Foreground}"/>
+
+                                <Hyperlink NavigateUri="https://github.com/ImageOptim/gifski/blob/master/LICENSE" RequestNavigate="ExtrasHyperlink_OnRequestNavigate">
+                                    <Run Text="{DynamicResource S.Options.Extras.License.Gifski}"/>
+                                </Hyperlink>
+                                
+                                <Run Text="/" Foreground="{DynamicResource Element.Foreground}"/>
+
+                                <Hyperlink NavigateUri="https://github.com/sharpdx/SharpDX/blob/master/LICENSE" RequestNavigate="ExtrasHyperlink_OnRequestNavigate">
+                                    <Run Text="{DynamicResource S.Options.Extras.License.SharpDx}"/>
+                                </Hyperlink>
+                            </TextBlock>
+                        </StackPanel>
+                    </Grid>
+
                     <!--Donate-->
                     <Grid x:Name="DonateGrid" Visibility="{Binding IsChecked, ElementName=DonateRadio, Converter={StaticResource Bool2Visibility}}">
                         <Grid.RowDefinitions>
@@ -1732,23 +1810,23 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="DonateButton" Text="{DynamicResource S.Options.Donate.Donate.Dollar}" Margin="5" Content="{StaticResource Vector.Money}" 
-                                           ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
-                                           Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
-                                           Click="DonateButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
-                                           ToolTipService.ToolTip="{DynamicResource S.Options.Donate.Paypal.Dollar}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                            <n:ExtendedButton Grid.Row="0" Grid.Column="0" x:Name="DonateButton" Text="{DynamicResource S.Options.Donate.Donate.Dollar}" Margin="5" Icon="{StaticResource Vector.Money}" 
+                                              ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
+                                              Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
+                                              Click="DonateButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
+                                              ToolTipService.ToolTip="{DynamicResource S.Options.Donate.Paypal.Dollar}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
-                            <n:ImageButton Grid.Row="0" Grid.Column="1" x:Name="DonateEuroButton" Text="{DynamicResource S.Options.Donate.Donate.Euro}" Margin="5" Content="{StaticResource Vector.Money}" 
-                                           ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
-                                           Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
-                                           Click="DonateEuroButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}" 
-                                           ToolTipService.ToolTip="{DynamicResource S.Options.Donate.Paypal.Euro}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                            <n:ExtendedButton Grid.Row="0" Grid.Column="1" x:Name="DonateEuroButton" Text="{DynamicResource S.Options.Donate.Donate.Euro}" Margin="5" Icon="{StaticResource Vector.Money}" 
+                                              ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
+                                              Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
+                                              Click="DonateEuroButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}" 
+                                              ToolTipService.ToolTip="{DynamicResource S.Options.Donate.Paypal.Euro}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
-                            <n:ImageButton Grid.Row="0" Grid.Column="2" x:Name="DonateOtherButton" Text="{DynamicResource S.Options.Donate.Donate}" Margin="5" Content="{StaticResource Vector.Money}" 
-                                           ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
-                                           Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
-                                           Click="DonateOtherButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
-                                           ToolTipService.ToolTip="{DynamicResource S.Options.Donate.Paypal.OwnCurrency}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                            <n:ExtendedButton Grid.Row="0" Grid.Column="2" x:Name="DonateOtherButton" Text="{DynamicResource S.Options.Donate.Donate}" Margin="5" Icon="{StaticResource Vector.Money}" 
+                                              ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Bottom" VerticalContentAlignment="Center"
+                                              Foreground="#FF143A61" FontSize="18" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
+                                              Click="DonateOtherButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
+                                              ToolTipService.ToolTip="{DynamicResource S.Options.Donate.Paypal.OwnCurrency}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
                             <TextBlock Grid.Row="1" Grid.Column="0" Text="US$ - USA Dollar" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1"/>
                             <TextBlock Grid.Row="1" Grid.Column="1" Text="€ - Euro" Foreground="{DynamicResource Element.Foreground.Gray150}" FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1"/>
@@ -1789,11 +1867,11 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="PatreonButton" Text="{DynamicResource S.Options.Donate.Subscribe}" Margin="5" Content="{StaticResource Vector.Patreon}" 
-                                           ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Center" VerticalContentAlignment="Center"
-                                           Foreground="#FF143A61" FontSize="14" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
-                                           Click="PatreonButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
-                                           ToolTipService.ToolTip="https://www.patreon.com/nicke" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                            <n:ExtendedButton Grid.Row="0" Grid.Column="0" x:Name="PatreonButton" Text="{DynamicResource S.Options.Donate.Subscribe}" Margin="5" Icon="{StaticResource Vector.Patreon}" 
+                                              ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Center" VerticalContentAlignment="Center"
+                                              Foreground="#FF143A61" FontSize="14" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
+                                              Click="PatreonButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
+                                              ToolTipService.ToolTip="https://www.patreon.com/nicke" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
                             <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource S.Options.Donate.Subscribe.Patreon}" Foreground="{DynamicResource Element.Foreground.Gray150}" 
                                        FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextWrapping="Wrap"/>
@@ -1806,11 +1884,11 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="FlattrButton" Text="{DynamicResource S.Options.Donate.Subscribe}" Margin="5" Content="{StaticResource Vector.Flattr}" 
-                                           ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Center" VerticalContentAlignment="Center"
-                                           Foreground="#FF143A61" FontSize="14" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
-                                           Click="FlattrButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
-                                           ToolTipService.ToolTip="https://flattr.com/@NickeManarin/domain/screentogif.com" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                            <n:ExtendedButton Grid.Row="0" Grid.Column="0" x:Name="FlattrButton" Text="{DynamicResource S.Options.Donate.Subscribe}" Margin="5" Icon="{StaticResource Vector.Flattr}" 
+                                              ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Center" VerticalContentAlignment="Center"
+                                              Foreground="#FF143A61" FontSize="14" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
+                                              Click="FlattrButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
+                                              ToolTipService.ToolTip="https://flattr.com/@NickeManarin/domain/screentogif.com" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
                             <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource S.Options.Donate.Subscribe.Flattr}" Foreground="{DynamicResource Element.Foreground.Gray150}" 
                                        FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextWrapping="Wrap"/>
@@ -1823,11 +1901,11 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="SteamButton" Text="{DynamicResource S.Options.Donate.Gift}" Margin="5" Content="{StaticResource Vector.Steam}" 
-                                           ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Center" VerticalContentAlignment="Center"
-                                           Foreground="#FF143A61" FontSize="14" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
-                                           Click="SteamButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
-                                           ToolTipService.ToolTip="http://steamcommunity.com/id/nickesm/wishlist" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                            <n:ExtendedButton Grid.Row="0" Grid.Column="0" x:Name="SteamButton" Text="{DynamicResource S.Options.Donate.Gift}" Margin="5" Icon="{StaticResource Vector.Steam}" 
+                                              ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Center" VerticalContentAlignment="Center"
+                                              Foreground="#FF143A61" FontSize="14" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
+                                              Click="SteamButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
+                                              ToolTipService.ToolTip="http://steamcommunity.com/id/nickesm/wishlist" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
                             <TextBlock Grid.Row="0" Grid.Column="1" Foreground="{DynamicResource Element.Foreground.Gray150}" 
                                        FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Margin="5" TextWrapping="Wrap">
@@ -1844,11 +1922,11 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="GogButton" Text="{DynamicResource S.Options.Donate.Gift}" Margin="5" Content="{StaticResource Vector.Gog}" 
-                                           ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Center" VerticalContentAlignment="Center"
-                                           Foreground="#FF143A61" FontSize="14" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
-                                           Click="GogButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
-                                           ToolTipService.ToolTip="https://www.gog.com/u/Nickesm/wishlist" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                            <n:ExtendedButton Grid.Row="0" Grid.Column="0" x:Name="GogButton" Text="{DynamicResource S.Options.Donate.Gift}" Margin="5" Icon="{StaticResource Vector.Gog}" 
+                                              ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Center" VerticalContentAlignment="Center"
+                                              Foreground="#FF143A61" FontSize="14" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
+                                              Click="GogButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
+                                              ToolTipService.ToolTip="https://www.gog.com/u/Nickesm/wishlist" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
                             <TextBlock Grid.Row="0" Grid.Column="1" Foreground="{DynamicResource Element.Foreground.Gray150}" 
                                        FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Margin="5" TextWrapping="Wrap">
@@ -1865,11 +1943,11 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="KofiButton" Text="{DynamicResource S.Options.Donate.Donate}" Margin="5" Content="{StaticResource Vector.Kofi}" 
-                                           ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Center" VerticalContentAlignment="Center"
-                                           Foreground="#FF143A61" FontSize="14" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
-                                           Click="KofiButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
-                                           ToolTipService.ToolTip="https://ko-fi.com/nickemanarin" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                            <n:ExtendedButton Grid.Row="0" Grid.Column="0" x:Name="KofiButton" Text="{DynamicResource S.Options.Donate.Donate}" Margin="5" Icon="{StaticResource Vector.Kofi}" 
+                                              ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Center" VerticalContentAlignment="Center"
+                                              Foreground="#FF143A61" FontSize="14" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
+                                              Click="KofiButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
+                                              ToolTipService.ToolTip="https://ko-fi.com/nickemanarin" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
                             <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource S.Options.Donate.Kofi}" Foreground="{DynamicResource Element.Foreground.Gray150}" 
                                        FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Margin="5" TextWrapping="Wrap"/>
@@ -1882,11 +1960,11 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="CryptoButton" Text="{DynamicResource S.Editor.Home.Copy}" Margin="5" Content="{StaticResource Vector.Text}" 
-                                           ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Center" VerticalContentAlignment="Center"
-                                           Foreground="#FF143A61" FontSize="14" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
-                                           Click="BitcoinCashCopy_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
-                                           ToolTipService.ToolTip="1HN81cAwDo16tRtiYfkzvzFqikQUimM3S8" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                            <n:ExtendedButton Grid.Row="0" Grid.Column="0" x:Name="CryptoButton" Text="{DynamicResource S.Editor.Home.Copy}" Margin="5" Icon="{StaticResource Vector.Text}" 
+                                              ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Center" VerticalContentAlignment="Center"
+                                              Foreground="#FF143A61" FontSize="14" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
+                                              Click="BitcoinCashCopy_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
+                                              ToolTipService.ToolTip="1HN81cAwDo16tRtiYfkzvzFqikQUimM3S8" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
                             <!--BitcoinCash: 1HN81cAwDo16tRtiYfkzvzFqikQUimM3S8-->
                             <!--Monero: 44yC9CkwHVfKPsKxg5RcA67GZEqiQH6QoBYtRKwkhDaE3tvRpiw1E5i6GShZYNsDq9eCtHnq49SrKjF4DG7NwjqWMoMueD4-->
@@ -1902,11 +1980,11 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <n:ImageButton Grid.Row="0" Grid.Column="0" x:Name="SupportButton" Text="screentogif.com/donate" Margin="5" Content="{StaticResource Vector.Web}" 
-                                           ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Center" VerticalContentAlignment="Center"
-                                           Foreground="#FF143A61" FontSize="14" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
-                                           Click="SupportButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
-                                           ToolTipService.ToolTip="http://www.screentogif.com/donate" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
+                            <n:ExtendedButton Grid.Row="0" Grid.Column="0" x:Name="SupportButton" Text="screentogif.com/donate" Margin="5" Icon="{StaticResource Vector.Web}" 
+                                              ContentHeight="20" ContentWidth="20" HorizontalAlignment="Stretch" MinWidth="120" MinHeight="40" VerticalAlignment="Center" VerticalContentAlignment="Center"
+                                              Foreground="#FF143A61" FontSize="14" FontWeight="SemiBold" FontStyle="Italic" Cursor="Hand"
+                                              Click="SupportButton_Click" Style="{StaticResource Style.Button.Horizontal.Special}"
+                                              ToolTipService.ToolTip="http://www.screentogif.com/donate" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
                             <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource S.Options.Donate.Support.Visit}" Foreground="{DynamicResource Element.Foreground.Gray150}" 
                                        FontStyle="Italic" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Margin="5" TextWrapping="Wrap"/>
@@ -1927,8 +2005,8 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
 
-                            <Viewbox Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Child="{StaticResource Vector.Logo}" MaxHeight="50" MaxWidth="60" Margin="10" HorizontalAlignment="Center" 
-                                     Opacity="{DynamicResource Element.Opacity}"/>
+                            <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Background="{StaticResource Vector.Logo}" Height="50" Width="60" Margin="10" HorizontalAlignment="Center" 
+                                    Opacity="{DynamicResource Element.Opacity}"/>
 
                             <Label Grid.Row="0" Grid.Column="1" Content="ScreenToGif" FontSize="18" Margin="0,0,5,0" 
                                    HorizontalAlignment="Right" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground}"/>
@@ -2099,7 +2177,8 @@
                 <ColumnDefinition Width="Auto" MinWidth="110"/>
             </Grid.ColumnDefinitions>
 
-            <n:ImageButton Grid.Column="2" x:Name="OkButton" Text="{DynamicResource S.Ok}" Margin="5" Padding="2,0" ContentHeight="20" Content="{StaticResource Vector.Ok}" Click="OkButton_Click"/>
+            <n:ExtendedButton Grid.Column="2" x:Name="OkButton" Text="{DynamicResource S.Ok}" Margin="5" Padding="2,0" 
+                              ContentHeight="18" ContentWidth="18" Icon="{StaticResource Vector.Ok}" Click="OkButton_Click"/>
         </Grid>
     </Grid>
 </Window>

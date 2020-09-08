@@ -719,7 +719,7 @@
     <s:String x:Key="S.Editor.Statistics">Statistiche</s:String>
     <s:String x:Key="S.Editor.Options">Impostazioni</s:String>
     <s:String x:Key="S.Editor.Help">Aiuto</s:String>
-    <s:String x:Key="S.Editor.Extras">Exta</s:String>
+    <s:String x:Key="S.Editor.Extras">Extra</s:String>
     <!--<s:String x:Key="S.Editor.UpdateAvailable">A new update is available!</s:String>-->
     <!--<s:String x:Key="S.Editor.UpdateAvailable.Info">Click here to read more about it.</s:String>-->
     <s:String x:Key="S.Editor.FrameNumbersInfo">Conteggio totale, conteggio selezione, indice selezione</s:String>

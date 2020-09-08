@@ -5,7 +5,6 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Media.Imaging;
-using ScreenToGif.Util;
 using PixelFormat = System.Drawing.Imaging.PixelFormat;
 
 namespace ScreenToGif.ImageUtil.Video
@@ -95,7 +94,7 @@ namespace ScreenToGif.ImageUtil.Video
                     dwSuggestedBufferSize = (uint)(_height * _stride),
                     dwQuality = quality, //-1 default 0xffffffff, 0 to 10.000
 
-                    rcFrame = new Native.Rect
+                    rcFrame = new Util.Native.Rect
                     {
                         Bottom = _height,
                         Right = _width
@@ -364,7 +363,7 @@ namespace ScreenToGif.ImageUtil.Video
             public uint dwSampleSize;
 
             /// <summary>Dimensions of the video destination rectangle.</summary>
-            public Native.Rect rcFrame;
+            public Util.Native.Rect rcFrame;
 
             /// <summary>Number of times the stream has been edited.</summary>
             public uint dwEditCount;

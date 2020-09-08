@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using ScreenToGif.Util;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 
 namespace ScreenToGif.Controls
@@ -15,7 +14,7 @@ namespace ScreenToGif.Controls
         private bool _ignore;
         private Key _previousKey;
         private ModifierKeys _previousModifier;
-        private ImageButton _removeButton;
+        private ExtendedButton _removeButton;
 
         #endregion
 
@@ -149,7 +148,7 @@ namespace ScreenToGif.Controls
 
             if (box.OnlyModifiers && box.ModifierKeys != ModifierKeys.None)
             {
-                box.Text = Native.GetSelectKeyText(box.ModifierKeys);
+                box.Text = Util.Native.GetSelectKeyText(box.ModifierKeys);
                 box.IsSelectionFinished = true;
                 return;
             }
@@ -157,7 +156,7 @@ namespace ScreenToGif.Controls
             if (box.MainKey == null)
                 return;
 
-            box.Text = Native.GetSelectKeyText(box.MainKey ?? Key.None, box.ModifierKeys, !(box.IsSingleLetterLowerCase && box.ModifierKeys == ModifierKeys.None), !box.DisplayNone);
+            box.Text = Util.Native.GetSelectKeyText(box.MainKey ?? Key.None, box.ModifierKeys, !(box.IsSingleLetterLowerCase && box.ModifierKeys == ModifierKeys.None), !box.DisplayNone);
             box.IsSelectionFinished = true;
         }
 
@@ -182,7 +181,7 @@ namespace ScreenToGif.Controls
         {
             base.OnApplyTemplate();
 
-            _removeButton = Template.FindName("RemoveButton", this) as ImageButton;
+            _removeButton = Template.FindName("RemoveButton", this) as ExtendedButton;
 
             if (_removeButton != null)
                 _removeButton.Click += (sender, args) =>

@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.Win32;
+using ScreenToGif.Native;
 using ScreenToGif.Util;
 
 namespace ScreenToGif.Controls
@@ -61,7 +62,7 @@ namespace ScreenToGif.Controls
         /// <summary>
         /// Status control buttons.
         /// </summary>
-        private ImageButton _acceptButton, _retryButton, _cancelButton;
+        private ExtendedButton _acceptButton, _retryButton, _cancelButton;
 
         /// <summary>
         /// The texblock that shows the size of the selection.
@@ -76,7 +77,7 @@ namespace ScreenToGif.Controls
         /// <summary>
         /// The button that closes the sizing widget.
         /// </summary>
-        private ImageButton _closeRectButton;
+        private ExtendedButton _closeRectButton;
 
         /// <summary>
         /// The grid that enables the movement of the sizing widget.
@@ -233,9 +234,9 @@ namespace ScreenToGif.Controls
 
             _rectangle = Template.FindName("SelectRectangle", this) as Rectangle;
             _statusControlGrid = Template.FindName("StatusControlGrid", this) as ExtendedUniformGrid;
-            _acceptButton = Template.FindName("AcceptButton", this) as ImageButton;
-            _retryButton = Template.FindName("RetryButton", this) as ImageButton;
-            _cancelButton = Template.FindName("CancelButton", this) as ImageButton;
+            _acceptButton = Template.FindName("AcceptButton", this) as ExtendedButton;
+            _retryButton = Template.FindName("RetryButton", this) as ExtendedButton;
+            _cancelButton = Template.FindName("CancelButton", this) as ExtendedButton;
 
             _zoomGrid = Template.FindName("ZoomGrid", this) as Grid;
             _croppedImage = Template.FindName("CroppedImage", this) as Image;
@@ -315,7 +316,7 @@ namespace ScreenToGif.Controls
             else
             {
                 if (Mode == ModeType.Window && _hitTestWindow != null)
-                    Native.SetForegroundWindow(_hitTestWindow.Handle);
+                    Util.Native.SetForegroundWindow(_hitTestWindow.Handle);
 
                 if (Selected.Width > 0 && Selected.Height > 0)
                     RaiseAcceptedEvent();
@@ -782,7 +783,7 @@ namespace ScreenToGif.Controls
             if (_mainCanvas == null)
                 return;
 
-            foreach (var button in _mainCanvas.Children.OfType<ImageButton>())
+            foreach (var button in _mainCanvas.Children.OfType<ExtendedButton>())
                 button.Visibility = FinishedSelection ? Visibility.Hidden : Visibility.Visible;
         }
 
@@ -903,7 +904,7 @@ namespace ScreenToGif.Controls
         public void AdjustMode()
         {
             if (Mode == ModeType.Window)
-                Windows = Native.EnumerateWindows(Scale).AdjustPosition(SystemParameters.VirtualScreenLeft, SystemParameters.VirtualScreenTop);
+                Windows = Util.Native.EnumerateWindows(Scale).AdjustPosition(SystemParameters.VirtualScreenLeft, SystemParameters.VirtualScreenTop);
             else if (Mode == ModeType.Fullscreen)
                 Windows = Monitor.AllMonitorsScaled(Scale, true).Select(x => new DetectedRegion(x.Handle, x.Bounds.Offset(-1), x.Name)).ToList();
             else
@@ -984,7 +985,7 @@ namespace ScreenToGif.Controls
             foreach (var monitor in Monitors)
             {
                 //Close button.
-                var button = new ImageButton
+                var button = new ExtendedButton
                 {
                     Name = "CancelButton",
                     Width = 40,
@@ -992,7 +993,7 @@ namespace ScreenToGif.Controls
                     ContentHeight = 25,
                     ContentWidth = 25,
                     ToolTip = LocalizationHelper.Get("S.Recorder.CancelSelection"),
-                    Content = TryFindResource("Vector.Cancel") as Canvas,
+                    Icon = TryFindResource("Vector.Cancel") as Brush,
                     Style = TryFindResource("Style.Button.NoText.White") as Style,
                     Cursor = Cursors.Arrow,
                     Tag = "T"

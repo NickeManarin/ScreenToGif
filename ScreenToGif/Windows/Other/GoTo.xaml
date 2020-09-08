@@ -28,11 +28,11 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <n:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource S.Ok}" Content="{StaticResource Vector.Ok}" 
-                           MaxSize="20" MinWidth="90" Margin="5" Click="OkButton_Click"/>
+            <n:ExtendedButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource S.Ok}" Icon="{StaticResource Vector.Ok}" 
+                              ContentWidth="18" ContentHeight="18" Padding="5,0" MinWidth="90" Margin="5" Click="OkButton_Click"/>
 
-            <n:ImageButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource S.Cancel}" Content="{StaticResource Vector.Cancel}" 
-                           MaxSize="20" MinWidth="90" Margin="5" Command="{StaticResource Command.Cancel}"/>
+            <n:ExtendedButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource S.Cancel}" Icon="{StaticResource Vector.Cancel}" 
+                              ContentWidth="18" ContentHeight="18" Padding="5,0" MinWidth="90" Margin="5" Command="{StaticResource Command.Cancel}"/>
         </Grid>
     </Grid>
 </Window>

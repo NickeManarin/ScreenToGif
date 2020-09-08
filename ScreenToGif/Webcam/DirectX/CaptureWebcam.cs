@@ -1,4 +1,14 @@
-﻿using System;
+﻿#region License
+
+// ------------------------------------------------------------------
+// Adapted work from DirectX.Capture
+// https://www.codeproject.com/articles/3566/directx-capture-class-library
+// http://creativecommons.org/licenses/publicdomain/
+// -----------------------------------------------------------------
+
+#endregion
+
+using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows;
@@ -163,9 +173,6 @@ namespace ScreenToGif.Webcam.DirectX
         protected EditStreaming.ISampleGrabber SampGrabber = null;
         private EditStreaming.VideoInfoHeader _videoInfoHeader;
 
-        private double _widthRatio = -1;
-        private double _heightRatio = -1;
-
         #endregion
 
         /// <summary>
@@ -233,34 +240,40 @@ namespace ScreenToGif.Webcam.DirectX
             //Skip if already created
             if ((int)ActualGraphState < (int)GraphState.Created)
             {
-                // Make a new filter graph
+                //Make a new filter graph.
                 GraphBuilder = (ExtendStreaming.IGraphBuilder)Activator.CreateInstance(Type.GetTypeFromCLSID(Uuid.Clsid.FilterGraph, true));
 
-                // Get the Capture Graph Builder
+                //Get the Capture Graph Builder.
                 var clsid = Uuid.Clsid.CaptureGraphBuilder2;
                 var riid = typeof(ExtendStreaming.ICaptureGraphBuilder2).GUID;
                 CaptureGraphBuilder = (ExtendStreaming.ICaptureGraphBuilder2)Workaround.CreateDsInstance(ref clsid, ref riid);
 
-                // Link the CaptureGraphBuilder to the filter graph
+                //Link the CaptureGraphBuilder to the filter graph
                 var hr = CaptureGraphBuilder.SetFiltergraph(GraphBuilder);
-                if (hr < 0) Marshal.ThrowExceptionForHR(hr);
+                
+                if (hr < 0) 
+                    Marshal.ThrowExceptionForHR(hr);
 
                 var comType = Type.GetTypeFromCLSID(Uuid.Clsid.SampleGrabber);
+                
                 if (comType == null)
-                    throw new NotImplementedException(@"DirectShow SampleGrabber not installed/registered!");
+                    throw new Exception("DirectShow SampleGrabber not installed/registered!");
+
                 var comObj = Activator.CreateInstance(comType);
                 SampGrabber = (EditStreaming.ISampleGrabber)comObj; comObj = null;
 
-                _baseGrabFlt = (CoreStreaming.IBaseFilter)SampGrabber;
+                _baseGrabFlt = (CoreStreaming.IBaseFilter) SampGrabber;
 
-                var media = new CoreStreaming.AMMediaType();
+                var media = new CoreStreaming.AmMediaType();
                 // Get the video device and add it to the filter graph
                 if (VideoDevice != null)
                 {
                     VideoDeviceFilter = (CoreStreaming.IBaseFilter)Marshal.BindToMoniker(VideoDevice.MonikerString);
 
                     hr = GraphBuilder.AddFilter(VideoDeviceFilter, "Video Capture Device");
-                    if (hr < 0) Marshal.ThrowExceptionForHR(hr);
+                    
+                    if (hr < 0) 
+                        Marshal.ThrowExceptionForHR(hr);
 
                     media.majorType = Uuid.MediaType.Video;
                     media.subType = Uuid.MediaSubType.RGB32;//RGB24;
@@ -273,7 +286,9 @@ namespace ScreenToGif.Webcam.DirectX
                         Marshal.ThrowExceptionForHR(hr);
 
                     hr = GraphBuilder.AddFilter(_baseGrabFlt, "Grabber");
-                    if (hr < 0) Marshal.ThrowExceptionForHR(hr);
+                    
+                    if (hr < 0) 
+                        Marshal.ThrowExceptionForHR(hr);
                 }
 
                 // Retrieve the stream control interface for the video device
@@ -286,13 +301,13 @@ namespace ScreenToGif.Webcam.DirectX
                 var cat = Uuid.PinCategory.Capture;
                 var med = Uuid.MediaType.Interleaved;
                 var iid = typeof(ExtendStreaming.IAMStreamConfig).GUID;
-                hr = CaptureGraphBuilder.FindInterface(ref cat, ref med, VideoDeviceFilter, ref iid, out o);
+                hr = CaptureGraphBuilder.FindInterface(cat, med, VideoDeviceFilter, iid, out o);
 
                 if (hr != 0)
                 {
                     // If not found, try looking for a video media type
                     med = Uuid.MediaType.Video;
-                    hr = CaptureGraphBuilder.FindInterface(ref cat, ref med, VideoDeviceFilter, ref iid, out o);
+                    hr = CaptureGraphBuilder.FindInterface(cat, med, VideoDeviceFilter, iid, out o);
 
                     if (hr != 0)
                         o = null;
@@ -318,7 +333,7 @@ namespace ScreenToGif.Webcam.DirectX
                     Marshal.ThrowExceptionForHR(hr);
             }
 
-            // Update the state now that we are done
+            //Update the state now that we are done.
             ActualGraphState = GraphState.Created;
         }
 
@@ -352,8 +367,7 @@ namespace ScreenToGif.Webcam.DirectX
                 ActualGraphState = GraphState.Created;
                 IsPreviewRendered = false;
 
-                // Disconnect all filters downstream of the 
-                // video and audio devices. If we have a compressor
+                // Disconnect all filters downstream of the video and audio devices. If we have a compressor
                 // then disconnect it, but don't remove it
                 if (VideoDeviceFilter != null)
                     RemoveDownstream(VideoDeviceFilter, VideoCompressor == null);
@@ -370,57 +384,58 @@ namespace ScreenToGif.Webcam.DirectX
         protected void RemoveDownstream(CoreStreaming.IBaseFilter filter, bool removeFirstFilter)
         {
             // Get a pin enumerator off the filter
-            CoreStreaming.IEnumPins pinEnum;
-            var hr = filter.EnumPins(out pinEnum);
-            if (pinEnum != null)
+            var hr = filter.EnumPins(out var pinEnum);
+
+            if (pinEnum == null)
+                return;
+            
+            pinEnum.Reset();
+
+            if (hr != 0)
+                return;
+
+            //Loop through each pin.
+            var pins = new CoreStreaming.IPin[1];
+
+            do
             {
-                pinEnum.Reset();
+                // Get the next pin
+                hr = pinEnum.Next(1, pins, out _);
 
-                if ((hr == 0))
+                if (hr != 0 || pins[0] == null)
+                    continue;
+                
+                //Get the pin it is connected to
+                pins[0].ConnectedTo(out var pinTo);
+
+                if (pinTo != null)
                 {
-                    // Loop through each pin
-                    var pins = new CoreStreaming.IPin[1];
-                    int f;
-                    do
+                    // Is this an input pin?
+                    hr = pinTo.QueryPinInfo(out var info);
+
+                    if (hr == 0 && (info.dir == CoreStreaming.PinDirection.Input))
                     {
-                        // Get the next pin
-                        hr = pinEnum.Next(1, pins, out f);
-                        if ((hr == 0) && (pins[0] != null))
-                        {
-                            // Get the pin it is connected to
-                            CoreStreaming.IPin pinTo = null;
-                            pins[0].ConnectedTo(out pinTo);
-                            if (pinTo != null)
-                            {
-                                // Is this an input pin?
-                                var info = new CoreStreaming.PinInfo();
-                                hr = pinTo.QueryPinInfo(out info);
-                                if ((hr == 0) && (info.dir == CoreStreaming.PinDirection.Input))
-                                {
-                                    // Recurse down this branch
-                                    RemoveDownstream(info.filter, true);
+                        // Recurse down this branch
+                        RemoveDownstream(info.filter, true);
 
-                                    // Disconnect 
-                                    GraphBuilder.Disconnect(pinTo);
-                                    GraphBuilder.Disconnect(pins[0]);
+                        // Disconnect 
+                        GraphBuilder.Disconnect(pinTo);
+                        GraphBuilder.Disconnect(pins[0]);
 
-                                    // Remove this filter
-                                    // but don't remove the video or audio compressors
-                                    if (info.filter != VideoCompressorFilter)
-                                        GraphBuilder.RemoveFilter(info.filter);
-                                }
+                        // Remove this filter
+                        // but don't remove the video or audio compressors
+                        if (info.filter != VideoCompressorFilter)
+                            GraphBuilder.RemoveFilter(info.filter);
+                    }
 
-                                Marshal.ReleaseComObject(info.filter);
-                                Marshal.ReleaseComObject(pinTo);
-                            }
-
-                            Marshal.ReleaseComObject(pins[0]);
-                        }
-                    } while (hr == 0);
-
-                    Marshal.ReleaseComObject(pinEnum); pinEnum = null;
+                    Marshal.ReleaseComObject(info.filter);
+                    Marshal.ReleaseComObject(pinTo);
                 }
-            }
+
+                Marshal.ReleaseComObject(pins[0]);
+            } while (hr == 0);
+
+            Marshal.ReleaseComObject(pinEnum);
         }
 
         /// <summary>
@@ -432,9 +447,6 @@ namespace ScreenToGif.Webcam.DirectX
         protected void RenderGraph()
         {
             var didSomething = false;
-            const int WS_CHILD = 0x40000000;
-            const int WS_CLIPCHILDREN = 0x02000000;
-            const int WS_CLIPSIBLINGS = 0x04000000;
 
             // Stop the graph
             MediaControl?.Stop();
@@ -458,42 +470,54 @@ namespace ScreenToGif.Webcam.DirectX
                 // Render preview (video -> renderer)
                 var cat = Uuid.PinCategory.Preview;
                 var med = Uuid.MediaType.Video;
-                var hr = CaptureGraphBuilder.RenderStream(ref cat, ref med, VideoDeviceFilter, _baseGrabFlt, null);
-                if (hr < 0) Marshal.ThrowExceptionForHR(hr);
 
-                // Get the IVideoWindow interface
-                VideoWindow = (ControlStreaming.IVideoWindow)GraphBuilder;
+                var hr = CaptureGraphBuilder.RenderStream(cat, med, VideoDeviceFilter, _baseGrabFlt, null);
+                
+                if (hr < 0) 
+                    Marshal.ThrowExceptionForHR(hr);
+
+                //Get the IVideoWindow interface
+                VideoWindow = (ControlStreaming.IVideoWindow) GraphBuilder;
 
                 // Set the video window to be a child of the main window
                 var source = PresentationSource.FromVisual(PreviewWindow) as HwndSource;
                 hr = VideoWindow.put_Owner(source.Handle);
-                if (hr < 0) Marshal.ThrowExceptionForHR(hr);
+                
+                if (hr < 0) 
+                    Marshal.ThrowExceptionForHR(hr);
 
                 // Set video window style
-                hr = VideoWindow.put_WindowStyle(WS_CHILD | WS_CLIPCHILDREN | WS_CLIPSIBLINGS);
-                if (hr < 0) Marshal.ThrowExceptionForHR(hr);
+                hr = VideoWindow.put_WindowStyle(ControlStreaming.WindowStyle.Child | ControlStreaming.WindowStyle.ClipChildren | ControlStreaming.WindowStyle.ClipSiblings);
+                
+                if (hr < 0) 
+                    Marshal.ThrowExceptionForHR(hr);
 
                 // Position video window in client rect of owner window
                 PreviewWindow.SizeChanged += OnPreviewWindowResize;
                 OnPreviewWindowResize(this, null);
 
-                // Make the video window visible, now that it is properly positioned
-                hr = VideoWindow.put_Visible(CoreStreaming.DsHlp.OATRUE);
-                if (hr < 0) Marshal.ThrowExceptionForHR(hr);
+                //Make the video window visible, now that it is properly positioned.
+                hr = VideoWindow.put_Visible(ControlStreaming.OABool.True);
+                
+                if (hr < 0) 
+                    Marshal.ThrowExceptionForHR(hr);
 
                 IsPreviewRendered = true;
                 didSomething = true;
 
-                var media = new CoreStreaming.AMMediaType();
+                var media = new CoreStreaming.AmMediaType();
                 hr = SampGrabber.GetConnectedMediaType(media);
 
                 if (hr < 0)
                     Marshal.ThrowExceptionForHR(hr);
-                if ((media.formatType != Uuid.FormatType.VideoInfo) || (media.formatPtr == IntPtr.Zero))
+
+                if (media.formatType != Uuid.FormatType.VideoInfo || media.formatPtr == IntPtr.Zero)
                     throw new NotSupportedException("Unknown Grabber Media Format");
 
                 _videoInfoHeader = (EditStreaming.VideoInfoHeader)Marshal.PtrToStructure(media.formatPtr, typeof(EditStreaming.VideoInfoHeader));
-                Marshal.FreeCoTaskMem(media.formatPtr); media.formatPtr = IntPtr.Zero;
+                
+                Marshal.FreeCoTaskMem(media.formatPtr); 
+                media.formatPtr = IntPtr.Zero;
             }
 
             if (didSomething)
@@ -532,26 +556,21 @@ namespace ScreenToGif.Webcam.DirectX
         /// </summary>
         protected void DestroyGraph()
         {
-            // Derender the graph (This will stop the graph
-            // and release preview window. It also destroys
-            // half of the graph which is unnecessary but
-            // harmless here.) (ignore errors)
+            // Derender the graph
+            // This will stop the graph and release preview window.
+            // It also destroys half of the graph which is unnecessary but harmless here (ignore errors).
             try { DerenderGraph(); }
             catch { }
 
             // Update the state after derender because it
             // depends on correct status. But we also want to
-            // update the state as early as possible in case
-            // of error.
+            // update the state as early as possible in case of error.
             ActualGraphState = GraphState.Null;
             IsPreviewRendered = false;
 
             // Remove filters from the graph
-            // This should be unnecessary but the Nvidia WDM
-            // video driver cannot be used by this application 
-            // again unless we remove it. Ideally, we should
-            // simply enumerate all the filters in the graph
-            // and remove them. (ignore errors)
+            // This should be unnecessary but the Nvidia WDM video driver cannot be used by this application 
+            // again unless we remove it. Ideally, we should simply enumerate all the filters in the graph and remove them (ignore errors).
             if (GraphBuilder != null)
             {
                 if (VideoCompressorFilter != null)
@@ -562,6 +581,7 @@ namespace ScreenToGif.Webcam.DirectX
                 // Cleanup
                 Marshal.ReleaseComObject(GraphBuilder); GraphBuilder = null;
             }
+
             if (CaptureGraphBuilder != null)
                 Marshal.ReleaseComObject(CaptureGraphBuilder); CaptureGraphBuilder = null;
             if (VideoDeviceFilter != null)
@@ -599,9 +619,10 @@ namespace ScreenToGif.Webcam.DirectX
 
         public int BufferCB(double sampleTime, IntPtr pBuffer, int bufferLen)
         {
-            if (CaptureFrameEvent == null) return 1;
+            if (CaptureFrameEvent == null) 
+                return 1;
 
-            var width = _videoInfoHeader.BmiHeader.Width; //TODO: Make this a property.
+            var width = _videoInfoHeader.BmiHeader.Width;
             var height = _videoInfoHeader.BmiHeader.Height;
 
             var stride = width * 3;
@@ -630,7 +651,7 @@ namespace ScreenToGif.Webcam.DirectX
 
             if (_savedArray == null)
             {
-                if ((size < 1000) || (size > 16000000))
+                if (size < 1000 || size > 16000000)
                     return;
 
                 _savedArray = new byte[size + 64000];

@@ -20,14 +20,14 @@
                 <ColumnDefinition Width="Auto" MinWidth="110"/>
             </Grid.ColumnDefinitions>
 
-            <Viewbox x:Name="IconViewbox" Margin="6" Child="{StaticResource Vector.Cancel.Round}" Opacity="{DynamicResource Element.Opacity}"/>
+            <Border x:Name="IconBorder" Margin="6" Background="{DynamicResource Vector.Cancel.Round}" Opacity="{DynamicResource Element.Opacity}"/>
 
             <TextBlock Grid.Column="1" x:Name="TypeTextBlock" Text="Instruction" Margin="5,0" VerticalAlignment="Center" 
                        FontFamily="Segoe UI Semilight" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
 
-            <n:ImageButton Grid.Column="2" x:Name="DetailsButton" Text="{DynamicResource S.Encoder.Details}" Content="{StaticResource Vector.Table}" MaxSize="20" 
-                           Margin="3" Padding="2" Style="{StaticResource Style.Button.Horizontal}" TextWrapping="NoWrap"
-                           Click="DetailsButton_Click" FontSize="14" FontFamily="Segoe UI Semilight"/>
+            <n:ExtendedButton Grid.Column="2" x:Name="DetailsButton" Text="{DynamicResource S.Encoder.Details}" Icon="{DynamicResource Vector.Table}" 
+                              ContentWidth="20" ContentHeight="20" Margin="3" Padding="2" Style="{StaticResource Style.Button.Horizontal}" TextWrapping="NoWrap"
+                              Click="DetailsButton_Click" FontSize="14" FontFamily="Segoe UI Semilight"/>
         </Grid>
 
         <Grid Grid.Row="1">
@@ -50,11 +50,11 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <n:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource S.Ok}" Content="{StaticResource Vector.Ok}" ContentHeight="18" 
-                           Margin="5" Padding="5,0" MinWidth="90" IsDefault="True" Click="OkButton_Click"/>
+            <n:ExtendedButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource S.Ok}" Icon="{DynamicResource Vector.Ok}" ContentWidth="18" ContentHeight="18" 
+                              Padding="5,0" MinWidth="90" Margin="5" IsDefault="True" Click="OkButton_Click"/>
 
-            <n:ImageButton Grid.Column="2" x:Name="SendButton" Text="{DynamicResource S.ErrorDialog.Send}" Content="{StaticResource Vector.Email}" ContentHeight="20" 
-                           Padding="4,0" MinWidth="90" Margin="5" Click="SendButton_Click"/>
+            <n:ExtendedButton Grid.Column="2" x:Name="SendButton" Text="{DynamicResource S.ErrorDialog.Send}" Icon="{DynamicResource Vector.Email}" ContentWidth="18" ContentHeight="20" 
+                              Padding="4,0" MinWidth="90" Margin="5" Click="SendButton_Click"/>
         </Grid>
     </Grid>
 </Window>

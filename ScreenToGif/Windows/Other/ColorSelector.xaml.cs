@@ -176,10 +176,10 @@ namespace ScreenToGif.Windows.Other
 
         private void EyeDropperButton_PreviewMouseMove(object sender, MouseEventArgs e)
         {
-            var str = new Native.PointW();
-            Native.GetCursorPos(ref str);
+            var str = new Util.Native.PointW();
+            Util.Native.GetCursorPos(ref str);
 
-            var image = Native.CaptureBitmapSource((int)_captureSize.Width, (int)_captureSize.Height, str.X - (int)(_captureSize.Width / 2d), str.Y - (int)(_captureSize.Height / 2d));
+            var image = Util.Native.CaptureBitmapSource((int)_captureSize.Width, (int)_captureSize.Height, str.X - (int)(_captureSize.Width / 2d), str.Y - (int)(_captureSize.Height / 2d));
 
             if (image.Format != PixelFormats.Bgra32)
                 image = new FormatConvertedBitmap(image, PixelFormats.Bgra32, null, 0);

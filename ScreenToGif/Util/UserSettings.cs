@@ -59,6 +59,9 @@ namespace ScreenToGif.Util
                 File.Create(appData).Dispose();
             }
 
+            //TODO: When loading check version.
+            //Use migration schemes to go up or down versions.
+
             //Loads AppData settings.
             if (File.Exists(appData))
             {
@@ -317,6 +320,12 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public double SelectedRegionScale
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
         public int RecorderModeIndex
         {
             get => (int)GetValue();
@@ -514,6 +523,12 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public bool PortableUpdate
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
         public bool ForceUpdateAsAdmin
         {
             get => (bool)GetValue();
@@ -625,6 +640,30 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public bool AnimateRecorderBorder
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool EnableSelectionPanning
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool RecorderCompactMode
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool RecorderDisplayDiscard
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
         public bool FallThroughOtherScreens
         {
             get => (bool)GetValue();
@@ -638,7 +677,7 @@ namespace ScreenToGif.Util
         }
 
         /// <summary>
-        /// The placyback spped of the capture frame, in the "manual" mode.
+        /// The placyback speed of the capture frame, in the "manual" mode.
         /// </summary>
         public int PlaybackDelayManual
         {
@@ -647,7 +686,16 @@ namespace ScreenToGif.Util
         }
 
         /// <summary>
-        /// The placyback spped of the capture frame, in the "per minute" mode.
+        /// The placyback speed of the capture frame, in the "manual" mode.
+        /// </summary>
+        public int PlaybackDelayInteraction
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        /// <summary>
+        /// The placyback speed of the capture frame, in the "per minute" mode.
         /// </summary>
         public int PlaybackDelayMinute
         {
@@ -656,11 +704,23 @@ namespace ScreenToGif.Util
         }
 
         /// <summary>
-        /// The placyback spped of the capture frame, in the "per hour" mode.
+        /// The placyback speed of the capture frame, in the "per hour" mode.
         /// </summary>
         public int PlaybackDelayHour
         {
             get => (int)GetValue();
+            set => SetValue(value);
+        }
+        
+        public bool FixedFrameRate
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool OnlyCaptureChanges
+        {
+            get => (bool)GetValue();
             set => SetValue(value);
         }
 
@@ -685,6 +745,12 @@ namespace ScreenToGif.Util
         public int MemoryCacheSize
         {
             get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool PreventBlackFrames
+        {
+            get => (bool)GetValue();
             set => SetValue(value);
         }
 
@@ -747,8 +813,8 @@ namespace ScreenToGif.Util
             get => (int)GetValue();
             set => SetValue(value);
         }
-        
-        public bool FixedFrameRate
+
+        public bool AsyncRecording
         {
             get => (bool)GetValue();
             set => SetValue(value);
@@ -760,7 +826,63 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
-        public bool AsyncRecording
+        //Guidelines.
+        public bool DisplayThirdsGuideline
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public double ThirdsGuidelineThickness
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color ThirdsGuidelineColor
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public DoubleCollection ThirdsGuidelineStrokeDashArray
+        {
+            get => (DoubleCollection)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool DisplayCrosshairGuideline
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public double CrosshairGuidelineThickness
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color CrosshairGuidelineColor
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public DoubleCollection CrosshairGuidelineStrokeDashArray
+        {
+            get => (DoubleCollection)GetValue();
+            set => SetValue(value);
+        }
+
+        //Other.
+        public bool RecorderRememberSize
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool RecorderRememberPosition
         {
             get => (bool)GetValue();
             set => SetValue(value);
@@ -781,6 +903,12 @@ namespace ScreenToGif.Util
         public int FollowBufferInvisible
         {
             get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool NotifyRecordingDiscard
+        {
+            get => (bool)GetValue();
             set => SetValue(value);
         }
 
@@ -2590,9 +2718,39 @@ namespace ScreenToGif.Util
 
         #region Editor • Obfuscate
 
+        public ObfuscationMode ObfuscationMode
+        {
+            get => (ObfuscationMode)GetValue();
+            set => SetValue(value);
+        }
+        
+        public bool ObfuscationInvertedSelection
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
         public int PixelSize
         {
             get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public int BlurLevel
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public double DarkenLevel
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        public double LightenLevel
+        {
+            get => (double)GetValue();
             set => SetValue(value);
         }
 
@@ -2602,6 +2760,18 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public int ObfuscationSmoothnessRadius
+        {
+            get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        public double ObfuscationSmoothnessOpacity
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+        
         #endregion
 
         #region Editor • Watermark

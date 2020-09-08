@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows;
+using System.Windows.Input;
 using ScreenToGif.Model;
 using ScreenToGif.Util;
 
@@ -19,7 +20,11 @@ namespace ScreenToGif.Controls
         public Stage Stage
         {
             get => (Stage)GetValue(StageProperty);
-            set => SetValue(StageProperty, value);
+            set
+            {
+                SetValue(StageProperty, value);
+                CommandManager.InvalidateRequerySuggested();
+            }
         }
 
         /// <summary>

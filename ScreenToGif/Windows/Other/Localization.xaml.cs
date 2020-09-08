@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using Microsoft.Win32;
@@ -48,10 +49,10 @@ namespace ScreenToGif.Windows.Other
                     continue;
                 }
 
-                var imageItem = new ImageListBoxItem
+                var imageItem = new ExtendedListBoxItem
                 {
                     Content = resourceDictionary.Source.OriginalString,
-                    Image = FindResource("Vector.Translate") as Canvas,
+                    Icon = FindResource("Vector.Translate") as Brush,
                     Index = actualIndex++,
                     ShowMarkOnSelection = false
                 };
@@ -71,7 +72,7 @@ namespace ScreenToGif.Windows.Other
             }
 
             //Selects the last item on the list.
-            ResourceListBox.SelectedItem = ResourceListBox.Items.Cast<ImageListBoxItem>().LastOrDefault(w => w.IsEnabled);
+            ResourceListBox.SelectedItem = ResourceListBox.Items.Cast<ExtendedListBoxItem>().LastOrDefault(w => w.IsEnabled);
             
             if (ResourceListBox.SelectedItem != null)
                 ResourceListBox.ScrollIntoView(ResourceListBox.SelectedItem);
@@ -123,7 +124,7 @@ namespace ScreenToGif.Windows.Other
 
         private void MoveUp_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            if (!(ResourceListBox.SelectedItem is ImageListBoxItem item))
+            if (!(ResourceListBox.SelectedItem is ExtendedListBoxItem item))
                 return;
 
             if (LocalizationHelper.Move(item.Index))
@@ -144,7 +145,7 @@ namespace ScreenToGif.Windows.Other
 
         private void MoveDown_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            if (!(ResourceListBox.SelectedItem is ImageListBoxItem item))
+            if (!(ResourceListBox.SelectedItem is ExtendedListBoxItem item))
                 return;
 
             if (LocalizationHelper.Move(item.Index, false))
@@ -167,7 +168,7 @@ namespace ScreenToGif.Windows.Other
         {
             StatusBand.Info(LocalizationHelper.Get("S.Localization.Exporting"));
 
-            if (!(ResourceListBox.SelectedItem is ImageListBoxItem selected))
+            if (!(ResourceListBox.SelectedItem is ExtendedListBoxItem selected))
                 return;
 
             var source = selected.Content.ToString();
@@ -206,7 +207,7 @@ namespace ScreenToGif.Windows.Other
 
         private void Remove_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            if (!(ResourceListBox.SelectedItem is ImageListBoxItem item))
+            if (!(ResourceListBox.SelectedItem is ExtendedListBoxItem item))
                 return;
 
             if (LocalizationHelper.Remove(item.Index))
@@ -217,7 +218,7 @@ namespace ScreenToGif.Windows.Other
                 //Adjust the actual index of the rest of the items.
                 for (var index = current; index < ResourceListBox.Items.Count; index++)
                 {
-                    if (ResourceListBox.Items[index] is ImageListBoxItem res)
+                    if (ResourceListBox.Items[index] is ExtendedListBoxItem res)
                         res.Index --;
                 }
             }
@@ -310,10 +311,10 @@ namespace ScreenToGif.Windows.Other
 
             var resourceDictionary = Application.Current.Resources.MergedDictionaries.LastOrDefault();
 
-            var imageItem = new ImageListBoxItem
+            var imageItem = new ExtendedListBoxItem
             {
                 Content = resourceDictionary?.Source.OriginalString ?? "...",
-                Image = FindResource("Vector.Translate") as Canvas,
+                Icon = FindResource("Vector.Translate") as Brush,
                 Author = LocalizationHelper.GetWithFormat("S.Localization.Recognized", "Recognized as {0}", pieces[1]),
                 Index = Application.Current.Resources.MergedDictionaries.Count - 1,
                 ShowMarkOnSelection = false
@@ -467,7 +468,7 @@ namespace ScreenToGif.Windows.Other
                 if (resourceDictionary.Source?.OriginalString.Contains("StringResources") != true)
                     continue;
 
-                if (ResourceListBox.Items[actualIndex] is ImageListBoxItem res)
+                if (ResourceListBox.Items[actualIndex] is ExtendedListBoxItem res)
                 {
                     res.Index = index;
                     actualIndex++;

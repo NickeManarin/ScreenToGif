@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
+using System.Windows.Media;
 using ScreenToGif.Model;
 using ScreenToGif.Util;
 
@@ -27,7 +27,7 @@ namespace ScreenToGif.Windows.Other
             if (IsEditing)
             {
                 ParametersTextBox.Focus();
-                MainViewbox.Child = TryFindResource("Vector.Pen") as Canvas;
+                IconBorder.Background = TryFindResource("Vector.Pen") as Brush;
                 ModeTextBlock.Text = LocalizationHelper.Get("S.Edit");
             }
             else

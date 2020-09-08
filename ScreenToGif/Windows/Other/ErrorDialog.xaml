@@ -14,11 +14,11 @@
 
         <Grid Grid.Row="0" Background="{DynamicResource Panel.Background.Level4}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="40"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Viewbox x:Name="IconViewbox" Margin="5" Child="{StaticResource Vector.Cancel.Round}" Opacity="{DynamicResource Element.Opacity}"/>
+            <Border x:Name="IconBorder" Margin="5" Background="{StaticResource Vector.Cancel.Round}" Opacity="{DynamicResource Element.Opacity}"/>
 
             <Label x:Name="InstructionLabel" Content="Instruction" Margin="5,0" Grid.Column="1" VerticalContentAlignment="Center" 
                    FontFamily="Segoe UI Semilight" FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
@@ -41,14 +41,20 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <n:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource S.Ok}" Content="{StaticResource Vector.Ok}" ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="TrueActionButton_Click"/>
-            <n:ImageButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource S.Cancel}" Content="{StaticResource Vector.Cancel}" ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="FalseActionButton_Click" IsCancel="True"/>
+            <n:ExtendedButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource S.Ok}" Icon="{StaticResource Vector.Ok}" 
+                              ContentWidth="18" ContentHeight="18" Padding="5,0" MinWidth="90" Margin="5" Click="TrueActionButton_Click"/>
+            <n:ExtendedButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource S.Cancel}" Icon="{StaticResource Vector.Cancel}" 
+                              ContentWidth="18" ContentHeight="18" Padding="5,0" MinWidth="90" Margin="5" Click="FalseActionButton_Click" IsCancel="True"/>
 
-            <n:ImageButton Grid.Column="1" x:Name="YesButton" Text="{DynamicResource S.Yes}" Content="{StaticResource Vector.Ok}" ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="TrueActionButton_Click"/>
-            <n:ImageButton Grid.Column="2" x:Name="NoButton" Text="{DynamicResource S.No}" Content="{StaticResource Vector.No}" ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="FalseActionButton_Click"/>
+            <n:ExtendedButton Grid.Column="1" x:Name="YesButton" Text="{DynamicResource S.Yes}" Icon="{StaticResource Vector.Ok}" 
+                              ContentWidth="18" ContentHeight="18" Padding="5,0" MinWidth="90" Margin="5" Click="TrueActionButton_Click"/>
+            <n:ExtendedButton Grid.Column="2" x:Name="NoButton" Text="{DynamicResource S.No}" Icon="{StaticResource Vector.No}" 
+                              ContentWidth="18" ContentHeight="18" Padding="5,0" MinWidth="90" Margin="5" Click="FalseActionButton_Click"/>
 
-            <n:ImageButton Grid.Column="3" x:Name="DetailsButton" Text="{DynamicResource S.Encoder.Details}" Content="{StaticResource Vector.Application}" ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="DetailsButton_Click"/>
-            <n:ImageButton Grid.Column="4" x:Name="SendButton" Text="{DynamicResource S.ErrorDialog.Send}" Content="{StaticResource Vector.Email}" ContentHeight="20" Padding="4,0" MinWidth="90" Margin="5" Click="SendButton_Click"/>
+            <n:ExtendedButton Grid.Column="3" x:Name="DetailsButton" Text="{DynamicResource S.Encoder.Details}" Icon="{StaticResource Vector.Application}" 
+                              ContentWidth="18" ContentHeight="18" Padding="5,0" MinWidth="90" Margin="5" Click="DetailsButton_Click"/>
+            <n:ExtendedButton Grid.Column="4" x:Name="SendButton" Text="{DynamicResource S.ErrorDialog.Send}" Icon="{StaticResource Vector.Email}" 
+                              ContentWidth="18" ContentHeight="18" Padding="5,0" MinWidth="90" Margin="5" Click="SendButton_Click"/>
         </Grid>
     </Grid>
 </Window>

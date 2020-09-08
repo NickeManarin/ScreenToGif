@@ -7,13 +7,16 @@ namespace ScreenToGif.Controls
     {
         #region Dependency Properties
 
-        public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string),
+        public static readonly DependencyProperty TextProperty = DependencyProperty.Register(nameof(Text), typeof(string),
             typeof(ExtendedCheckBox), new PropertyMetadata());
 
-        public static readonly DependencyProperty TextWrappingProperty = DependencyProperty.Register("TextWrapping", typeof(TextWrapping),
+        public static readonly DependencyProperty InfoProperty = DependencyProperty.Register(nameof(Info), typeof(string),
+            typeof(ExtendedCheckBox), new PropertyMetadata());
+
+        public static readonly DependencyProperty TextWrappingProperty = DependencyProperty.Register(nameof(TextWrapping), typeof(TextWrapping),
             typeof(ExtendedCheckBox), new PropertyMetadata(TextWrapping.Wrap));
 
-        public static readonly DependencyProperty UncheckOnDisableProperty = DependencyProperty.Register("UncheckOnDisable", typeof(bool),
+        public static readonly DependencyProperty UncheckOnDisableProperty = DependencyProperty.Register(nameof(UncheckOnDisable), typeof(bool),
             typeof(ExtendedCheckBox), new PropertyMetadata(false));
 
         #endregion
@@ -24,6 +27,12 @@ namespace ScreenToGif.Controls
         {
             get => (string)GetValue(TextProperty);
             set => SetValue(TextProperty, value);
+        }
+
+        public string Info
+        {
+            get => (string)GetValue(InfoProperty);
+            set => SetValue(InfoProperty, value);
         }
 
         public TextWrapping TextWrapping
@@ -42,7 +51,7 @@ namespace ScreenToGif.Controls
 
         #region Custom Events
 
-        public static readonly RoutedEvent CheckedChangedEvent = EventManager.RegisterRoutedEvent("CheckedChanged", RoutingStrategy.Bubble,
+        public static readonly RoutedEvent CheckedChangedEvent = EventManager.RegisterRoutedEvent(nameof(CheckedChanged), RoutingStrategy.Bubble,
             typeof(RoutedEventHandler), typeof(ExtendedCheckBox));
 
         public event RoutedEventHandler CheckedChanged

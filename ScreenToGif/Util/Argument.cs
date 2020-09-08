@@ -10,6 +10,8 @@ namespace ScreenToGif.Util
     {
         public static void Prepare(string[] args)
         {
+            FileNames.Clear();
+
             for (var i = 0; i < args.Length; i++)
             {
                 switch (args[i])

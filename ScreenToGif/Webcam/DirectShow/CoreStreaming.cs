@@ -1,5 +1,29 @@
-﻿using System;
+﻿#region License
+
+/*
+    Adapted work from:
+
+    DirectShowLib - Provide access to DirectShow interfaces via .NET
+    Copyright (C) 2007
+    http://sourceforge.net/projects/directshownet/
+    This library is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Lesser General Public
+    License as published by the Free Software Foundation; either
+    version 2.1 of the License, or (at your option) any later version.
+    This library is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    Lesser General Public License for more details.
+    You should have received a copy of the GNU Lesser General Public
+    License along with this library; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+*/
+
+#endregion
+
+using System;
 using System.Runtime.InteropServices;
+using System.Security;
 using System.Text;
 
 namespace ScreenToGif.Webcam.DirectShow
@@ -10,14 +34,10 @@ namespace ScreenToGif.Webcam.DirectShow
         public interface IPin
         {
             [PreserveSig]
-            int Connect(
-                [In]											IPin pReceivePin,
-                [In, MarshalAs(UnmanagedType.LPStruct)]			AMMediaType pmt);
+            int Connect([In] IPin pReceivePin, [In, MarshalAs(UnmanagedType.LPStruct)] AmMediaType pmt);
 
             [PreserveSig]
-            int ReceiveConnection(
-                [In]											IPin pReceivePin,
-                [In, MarshalAs(UnmanagedType.LPStruct)]			AMMediaType pmt);
+            int ReceiveConnection([In] IPin pReceivePin, [In, MarshalAs(UnmanagedType.LPStruct)] AmMediaType pmt);
 
             [PreserveSig]
             int Disconnect();
@@ -25,10 +45,15 @@ namespace ScreenToGif.Webcam.DirectShow
             [PreserveSig]
             int ConnectedTo([Out] out IPin ppPin);
 
+            /// <summary>
+            /// Release returned parameter with DsUtils.FreeAMMediaType
+            /// </summary>
             [PreserveSig]
-            int ConnectionMediaType(
-                [Out, MarshalAs(UnmanagedType.LPStruct)]		AMMediaType pmt);
+            int ConnectionMediaType([Out, MarshalAs(UnmanagedType.LPStruct)] AmMediaType pmt);
 
+            /// <summary>
+            /// Release returned parameter with DsUtils.FreePinInfo
+            /// </summary>
             [PreserveSig]
             int QueryPinInfo([Out] out PinInfo pInfo);
 
@@ -36,18 +61,16 @@ namespace ScreenToGif.Webcam.DirectShow
             int QueryDirection(out PinDirection pPinDir);
 
             [PreserveSig]
-            int QueryId(
-                [Out, MarshalAs(UnmanagedType.LPWStr)]		out	string Id);
+            int QueryId([Out, MarshalAs(UnmanagedType.LPWStr)] out string id);
 
             [PreserveSig]
-            int QueryAccept(
-                [In, MarshalAs(UnmanagedType.LPStruct)]			AMMediaType pmt);
+            int QueryAccept([In, MarshalAs(UnmanagedType.LPStruct)] AmMediaType pmt);
 
             [PreserveSig]
-            int EnumMediaTypes(IntPtr ppEnum);
+            int EnumMediaTypes([Out] out IEnumMediaTypes ppEnum);
 
             [PreserveSig]
-            int QueryInternalConnections(IntPtr apPin, [In, Out] ref int nPin);
+            int QueryInternalConnections([Out, MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] IPin[] ppPins, [In, Out] ref int nPin);
 
             [PreserveSig]
             int EndOfStream();
@@ -59,35 +82,58 @@ namespace ScreenToGif.Webcam.DirectShow
             int EndFlush();
 
             [PreserveSig]
-            int NewSegment(long tStart, long tStop, double dRate);
+            int NewSegment([In] long tStart, [In] long tStop, [In] double dRate);
         }
 
-        [StructLayout(LayoutKind.Sequential, Pack = 1, CharSet = CharSet.Unicode), ComVisible(false)]
-        public struct PinInfo		// PIN_INFO
+        [ComImport, System.Security.SuppressUnmanagedCodeSecurity, Guid("89c31040-846b-11ce-97d3-00aa0055595a"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+        public interface IEnumMediaTypes
+        {
+            [PreserveSig]
+            int Next([In] int cMediaTypes, [In, Out, MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(EMTMarshaler), SizeParamIndex = 0)] AmMediaType[] ppMediaTypes, [In] IntPtr pcFetched);
+
+            [PreserveSig]
+            int Skip([In] int cMediaTypes);
+
+            [PreserveSig]
+            int Reset();
+
+            [PreserveSig]
+            int Clone([Out] out IEnumMediaTypes ppEnum);
+        }
+
+        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+        public struct PinInfo 
         {
             public IBaseFilter filter;
             public PinDirection dir;
+
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
             public string name;
         }
 
-        [ComVisible(false)]
-        public enum PinDirection		// PIN_DIRECTION
+        public enum PinDirection
         {
-            Input,		// PINDIR_INPUT
-            Output		// PINDIR_OUTPUT
+            Input,
+            Output
         }
 
-        [ComVisible(true), ComImport, Guid("56a86895-0ad4-11ce-b03a-0020af0ba770"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-        public interface IBaseFilter
+        [ComImport, System.Security.SuppressUnmanagedCodeSecurity, Guid("0000010c-0000-0000-C000-000000000046"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+        public interface IPersist
         {
-            #region "IPersist Methods"
             [PreserveSig]
-            int GetClassID(
-                [Out]									out Guid pClassID);
+            int GetClassID([Out] out Guid pClassID);
+        }
+
+        [ComImport, System.Security.SuppressUnmanagedCodeSecurity, Guid("56a86899-0ad4-11ce-b03a-0020af0ba770"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+        public interface IMediaFilter : IPersist
+        {
+            #region IPersist Methods
+
+            [PreserveSig]
+            new int GetClassID([Out] out Guid pClassID);
+
             #endregion
 
-            #region "IMediaFilter Methods"
             [PreserveSig]
             int Stop();
 
@@ -95,77 +141,102 @@ namespace ScreenToGif.Webcam.DirectShow
             int Pause();
 
             [PreserveSig]
-            int Run(long tStart);
+            int Run([In] long tStart);
 
             [PreserveSig]
-            int GetState(int dwMilliSecsTimeout, [Out] out int filtState);
+            int GetState([In] int dwMilliSecsTimeout, [Out] out ControlStreaming.FilterState filtState);
 
             [PreserveSig]
             int SetSyncSource([In] IReferenceClock pClock);
 
             [PreserveSig]
             int GetSyncSource([Out] out IReferenceClock pClock);
+        }
+
+        [ComVisible(true), ComImport, Guid("56a86895-0ad4-11ce-b03a-0020af0ba770"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+        public interface IBaseFilter : IMediaFilter
+        {
+            #region IPersist Methods
+            
+            [PreserveSig]
+            new int GetClassID([Out] out Guid pClassID);
+
+            #endregion
+
+            #region IMediaFilter Methods
+
+            [PreserveSig]
+            new int Stop();
+
+            [PreserveSig]
+            new int Pause();
+
+            [PreserveSig]
+            new int Run(long tStart);
+
+            [PreserveSig]
+            new int GetState([In] int dwMilliSecsTimeout, [Out] out ControlStreaming.FilterState filtState);
+
+            [PreserveSig]
+            new int SetSyncSource([In] IReferenceClock pClock);
+
+            [PreserveSig]
+            new int GetSyncSource([Out] out IReferenceClock pClock);
+
             #endregion
 
             [PreserveSig]
-            int EnumPins(
-                [Out]										out IEnumPins ppEnum);
+            int EnumPins([Out] out IEnumPins ppEnum);
 
             [PreserveSig]
-            int FindPin(
-                [In, MarshalAs(UnmanagedType.LPWStr)]			string Id,
-                [Out]										out IPin ppPin);
+            int FindPin([In, MarshalAs(UnmanagedType.LPWStr)] string Id, [Out] out IPin ppPin);
 
             [PreserveSig]
-            int QueryFilterInfo(
-                [Out]											FilterInfo pInfo);
+            int QueryFilterInfo([Out] FilterInfo pInfo);
 
             [PreserveSig]
-            int JoinFilterGraph(
-                [In]											IFilterGraph pGraph,
-                [In, MarshalAs(UnmanagedType.LPWStr)]			string pName);
+            int JoinFilterGraph([In] IFilterGraph pGraph, [In, MarshalAs(UnmanagedType.LPWStr)] string pName);
 
             [PreserveSig]
-            int QueryVendorInfo(
-                [Out, MarshalAs(UnmanagedType.LPWStr)]		out	string pVendorInfo);
+            int QueryVendorInfo([Out, MarshalAs(UnmanagedType.LPWStr)] out string pVendorInfo);
         }
 
         [ComVisible(true), ComImport, Guid("56a86897-0ad4-11ce-b03a-0020af0ba770"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
         public interface IReferenceClock
         {
             [PreserveSig]
-            int GetTime(out long pTime);
+            int GetTime([Out] out long pTime);
 
             [PreserveSig]
-            int AdviseTime(long baseTime, long streamTime, IntPtr hEvent, out int pdwAdviseCookie);
+            int AdviseTime([In] long baseTime, [In] long streamTime, [In] IntPtr hEvent, [Out] out int pdwAdviseCookie);
 
             [PreserveSig]
-            int AdvisePeriodic(long startTime, long periodTime, IntPtr hSemaphore, out int pdwAdviseCookie);
+            int AdvisePeriodic([In] long startTime, [In] long periodTime, [In] IntPtr hSemaphore, [Out] out int pdwAdviseCookie);
 
             [PreserveSig]
-            int Unadvise(int dwAdviseCookie);
+            int Unadvise([In] int dwAdviseCookie);
         }
 
         [ComVisible(true), ComImport, Guid("56a86892-0ad4-11ce-b03a-0020af0ba770"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
         public interface IEnumPins
         {
             [PreserveSig]
-            int Next(
-                [In]														int cPins,
-                [Out, MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)]	IPin[] ppPins,
-                [Out]														out int pcFetched);
+            int Next([In] int cPins, [Out, MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] IPin[] ppPins, [Out] out int pcFetched);
 
             [PreserveSig]
             int Skip([In] int cPins);
+
             void Reset();
+            
             void Clone([Out] out IEnumPins ppEnum);
         }
 
-        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode), ComVisible(false)]
-        public class FilterInfo		//  FILTER_INFO
+        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+        public class FilterInfo
         {
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
             public string achName;
+
             [MarshalAs(UnmanagedType.IUnknown)]
             public object pUnk;
         }
@@ -174,9 +245,7 @@ namespace ScreenToGif.Webcam.DirectShow
         public interface IFilterGraph
         {
             [PreserveSig]
-            int AddFilter(
-                [In] IBaseFilter pFilter,
-                [In, MarshalAs(UnmanagedType.LPWStr)]			string pName);
+            int AddFilter([In] IBaseFilter pFilter, [In, MarshalAs(UnmanagedType.LPWStr)] string pName);
 
             [PreserveSig]
             int RemoveFilter([In] IBaseFilter pFilter);
@@ -185,13 +254,10 @@ namespace ScreenToGif.Webcam.DirectShow
             int EnumFilters([Out] out IEnumFilters ppEnum);
 
             [PreserveSig]
-            int FindFilterByName(
-                [In, MarshalAs(UnmanagedType.LPWStr)]			string pName,
-                [Out]										out IBaseFilter ppFilter);
+            int FindFilterByName([In, MarshalAs(UnmanagedType.LPWStr)] string pName, [Out] out IBaseFilter ppFilter);
 
             [PreserveSig]
-            int ConnectDirect([In] IPin ppinOut, [In] IPin ppinIn,
-               [In, MarshalAs(UnmanagedType.LPStruct)]			AMMediaType pmt);
+            int ConnectDirect([In] IPin ppinOut, [In] IPin ppinIn, [In, MarshalAs(UnmanagedType.LPStruct)] AmMediaType pmt);
 
             [PreserveSig]
             int Reconnect([In] IPin ppin);
@@ -201,37 +267,48 @@ namespace ScreenToGif.Webcam.DirectShow
 
             [PreserveSig]
             int SetDefaultSyncSource();
-
         }
 
         [ComVisible(true), ComImport, Guid("56a86893-0ad4-11ce-b03a-0020af0ba770"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
         public interface IEnumFilters
         {
             [PreserveSig]
-            int Next(
-                [In]															uint cFilters,
-                                                                            out IBaseFilter x,
-                [Out]															out uint pcFetched);
+            int Next([In] uint cFilters, out IBaseFilter x, [Out] out uint pcFetched);
 
             [PreserveSig]
             int Skip([In] int cFilters);
+
             void Reset();
+            
             void Clone([Out] out IEnumFilters ppEnum);
         }
 
+        /// <summary>
+        /// From AM_MEDIA_TYPE - When you are done with an instance of this class,
+        /// it should be released with FreeAMMediaType() to avoid leaking
+        /// </summary>
         [StructLayout(LayoutKind.Sequential), ComVisible(false)]
-        public class AMMediaType 		//  AM_MEDIA_TYPE
+        public class AmMediaType
         {
             public Guid majorType;
+
             public Guid subType;
+            
             [MarshalAs(UnmanagedType.Bool)]
+            
             public bool fixedSizeSamples;
+            
             [MarshalAs(UnmanagedType.Bool)]
             public bool temporalCompression;
+            
             public int sampleSize;
+            
             public Guid formatType;
+            
             public IntPtr unkPtr;
+            
             public int formatSize;
+            
             public IntPtr formatPtr;
         }
 
@@ -239,56 +316,55 @@ namespace ScreenToGif.Webcam.DirectShow
         public interface IMediaSample
         {
             [PreserveSig]
-            int GetPointer(out IntPtr ppBuffer);
+            int GetPointer([Out] out IntPtr ppBuffer);
+
             [PreserveSig]
             int GetSize();
 
             [PreserveSig]
-            int GetTime(out long pTimeStart, out long pTimeEnd);
+            int GetTime([Out] out long pTimeStart, [Out] out long pTimeEnd);
 
             [PreserveSig]
-            int SetTime(
-                [In, MarshalAs(UnmanagedType.LPStruct)]			UtilStreaming.DsOptInt64 pTimeStart,
-                [In, MarshalAs(UnmanagedType.LPStruct)]			UtilStreaming.DsOptInt64 pTimeEnd);
+            int SetTime([In, MarshalAs(UnmanagedType.LPStruct)] Util.DsOptInt64 pTimeStart, [In, MarshalAs(UnmanagedType.LPStruct)] Util.DsOptInt64 pTimeEnd);
 
             [PreserveSig]
             int IsSyncPoint();
+
             [PreserveSig]
-            int SetSyncPoint(
-                [In, MarshalAs(UnmanagedType.Bool)]			bool bIsSyncPoint);
+            int SetSyncPoint([In, MarshalAs(UnmanagedType.Bool)] bool bIsSyncPoint);
 
             [PreserveSig]
             int IsPreroll();
+
             [PreserveSig]
-            int SetPreroll(
-                [In, MarshalAs(UnmanagedType.Bool)]			bool bIsPreroll);
+            int SetPreroll([In, MarshalAs(UnmanagedType.Bool)] bool bIsPreroll);
 
             [PreserveSig]
             int GetActualDataLength();
-            [PreserveSig]
-            int SetActualDataLength(int len);
 
             [PreserveSig]
-            int GetMediaType(
-                [Out, MarshalAs(UnmanagedType.LPStruct)]	out AMMediaType ppMediaType);
+            int SetActualDataLength([In] int len);
+
+            /// <summary>
+            /// Returned object must be released with DsUtils.FreeAMMediaType()
+            /// </summary>
+            [PreserveSig]
+            int GetMediaType([Out, MarshalAs(UnmanagedType.LPStruct)] out AmMediaType ppMediaType);
 
             [PreserveSig]
-            int SetMediaType(
-                [In, MarshalAs(UnmanagedType.LPStruct)]			AMMediaType pMediaType);
+            int SetMediaType([In, MarshalAs(UnmanagedType.LPStruct)] AmMediaType pMediaType);
 
             [PreserveSig]
             int IsDiscontinuity();
-            [PreserveSig]
-            int SetDiscontinuity(
-                [In, MarshalAs(UnmanagedType.Bool)]			bool bDiscontinuity);
 
             [PreserveSig]
-            int GetMediaTime(out long pTimeStart, out long pTimeEnd);
+            int SetDiscontinuity([In, MarshalAs(UnmanagedType.Bool)] bool bDiscontinuity);
 
             [PreserveSig]
-            int SetMediaTime(
-                [In, MarshalAs(UnmanagedType.LPStruct)]			UtilStreaming.DsOptInt64 pTimeStart,
-                [In, MarshalAs(UnmanagedType.LPStruct)]			UtilStreaming.DsOptInt64 pTimeEnd);
+            int GetMediaTime([Out] out long pTimeStart, [Out] out long pTimeEnd);
+
+            [PreserveSig]
+            int SetMediaTime([In, MarshalAs(UnmanagedType.LPStruct)] Util.DsOptInt64 pTimeStart, [In, MarshalAs(UnmanagedType.LPStruct)] Util.DsOptInt64 pTimeEnd);
         }
 
         [ComVisible(false)]
@@ -297,7 +373,7 @@ namespace ScreenToGif.Webcam.DirectShow
             public const int OATRUE = -1;
             public const int OAFALSE = 0;
 
-            [DllImport("quartz.dll", CharSet = CharSet.Auto)]
+            [DllImport("quartz.dll", CharSet = CharSet.Unicode, ExactSpelling = true, EntryPoint = "AMGetErrorTextW"), SuppressUnmanagedCodeSecurity]
             public static extern int AMGetErrorText(int hr, StringBuilder buf, int max);
         }
     }

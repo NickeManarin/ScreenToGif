@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using ScreenToGif.Native;
 
 namespace ScreenToGif.Windows.Other
 {
@@ -162,8 +163,8 @@ namespace ScreenToGif.Windows.Other
             sb.Append("<th>Available</th>");
             sb.Append("<th>Total</th></tr>");
 
-            var status = new Native.MemoryStatusEx(true);
-            Native.GlobalMemoryStatusEx(ref status);
+            var status = new Util.Native.MemoryStatusEx(true);
+            Util.Native.GlobalMemoryStatusEx(ref status);
 
             sb.AppendFormat("<td class=\"textcentered\" colspan=\"2\">{0}</td>", Environment.OSVersion.Version);
             sb.AppendFormat("<td class=\"textcentered\">{0}</td>", Environment.Is64BitOperatingSystem ? "64 bits" : "32 Bits");

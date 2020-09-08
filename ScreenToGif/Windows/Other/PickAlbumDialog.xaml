@@ -16,11 +16,11 @@
 
         <Grid Grid.Row="0" Background="{DynamicResource Panel.Background.Level4}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="40"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Viewbox x:Name="IconViewbox" Margin="5" Child="{StaticResource Vector.ImageStack}" Opacity="{DynamicResource Element.Opacity}"/>
+            <Border Margin="6" Background="{StaticResource Vector.ImageStack}" Opacity="{DynamicResource Element.Opacity}"/>
 
             <TextBlock x:Name="InstructionLabel" Text="{DynamicResource S.Options.Upload.Pick.Album}" Margin="5" Grid.Column="1" VerticalAlignment="Center" FontFamily="Segoe UI Semilight" 
                        FontSize="18" Foreground="{DynamicResource Element.Foreground.Header}"/>
@@ -45,8 +45,10 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <n:ImageButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource S.Recorder.Accept}" Content="{StaticResource Vector.Ok}" ContentHeight="20" Padding="2,0" MinWidth="90" Margin="5" Click="TrueActionButton_Click"/>
-            <n:ImageButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource S.Cancel}" Content="{StaticResource Vector.Cancel}" ContentHeight="20" Padding="2,0" MinWidth="90" Margin="5" IsCancel="True" Click="FalseActionButton_Click"/>
+            <n:ExtendedButton Grid.Column="1" x:Name="OkButton" Text="{DynamicResource S.Recorder.Accept}" Icon="{StaticResource Vector.Ok}" 
+                              ContentWidth="18" ContentHeight="18" Padding="5,0" MinWidth="90" Margin="5" Click="TrueActionButton_Click"/>
+            <n:ExtendedButton Grid.Column="2" x:Name="CancelButton" Text="{DynamicResource S.Cancel}" Icon="{StaticResource Vector.Cancel}" 
+                              ContentWidth="18" ContentHeight="18" Padding="5,0" MinWidth="90" Margin="5" IsCancel="True" Click="FalseActionButton_Click"/>
         </Grid>
     </Grid>
 </Window>
