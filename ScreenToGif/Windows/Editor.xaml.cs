@@ -2780,8 +2780,11 @@ namespace ScreenToGif.Windows
 
             Cursor = Cursors.AppStarting;
 
+            var scalingQuality = ScalingMethod.Linear;
+            Enum.TryParse<ScalingMethod>((ResizeScalingQuality.SelectedItem as ComboBoxItem).Tag.ToString(), out scalingQuality);
+
             _resizeFramesDel = Resize;
-            _resizeFramesDel.BeginInvoke(WidthResizeNumericUpDown.Value, HeightResizeNumericUpDown.Value, DpiNumericUpDown.Value, ResizeCallback, null);
+            _resizeFramesDel.BeginInvoke(WidthResizeNumericUpDown.Value, HeightResizeNumericUpDown.Value, DpiNumericUpDown.Value, (BitmapScalingMode)scalingQuality, ResizeCallback, null);
 
             ClosePanel();
 
@@ -6547,11 +6550,11 @@ namespace ScreenToGif.Windows
 
         #region Async Resize
 
-        private delegate void ResizeFrames(int width, int height, double dpi);
+        private delegate void ResizeFrames(int width, int height, double dpi, BitmapScalingMode scalingQuality);
 
         private ResizeFrames _resizeFramesDel;
 
-        private void Resize(int width, int height, double dpi)
+        private void Resize(int width, int height, double dpi, BitmapScalingMode scalingQuality)
         {
             ShowProgress(LocalizationHelper.Get("S.Editor.ResizingFrames"), Project.Frames.Count);
 
@@ -6561,7 +6564,7 @@ namespace ScreenToGif.Windows
             foreach (var frame in Project.Frames)
             {
                 var png = new PngBitmapEncoder();
-                png.Frames.Add(ImageMethods.ResizeImage((BitmapImage)frame.Path.SourceFrom(), width, height, 0, dpi));
+                png.Frames.Add(ImageMethods.ResizeImage((BitmapImage)frame.Path.SourceFrom(), width, height, 0, dpi, scalingQuality));
 
                 using (Stream stm = File.OpenWrite(frame.Path))
                     png.Save(stm);
