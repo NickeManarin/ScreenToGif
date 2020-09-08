@@ -1097,7 +1097,7 @@
                             <RowDefinition Height="16"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="7" Content="{DynamicResource S.Editor.Image.Overlay}" 
+                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="8" Content="{DynamicResource S.Editor.Image.Overlay}" 
 						       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 						       FontSize="12" Foreground="{DynamicResource Element.Foreground.Gray112}"/>
 
@@ -5176,7 +5176,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="{DynamicResource S.RemoveDuplicates.Header}" Style="{StaticResource LabelSeparator}"/>
+                            <n:LabelSeparator Grid.Row="0" Text="{DynamicResource S.RemoveDuplicates.Header}"/>
                             <Grid Grid.Row="1" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>

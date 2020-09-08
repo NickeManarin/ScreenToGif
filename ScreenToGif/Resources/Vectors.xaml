@@ -33,7 +33,7 @@
     <!--Glyphs-->
     <DrawingBrush x:Key="Glyph.Up" Stretch="Uniform" AlignmentX="Center" AlignmentY="Center">
         <DrawingBrush.Drawing>
-            <GeometryDrawing Brush="{DynamicResource Element.Glyph.Strong}" Geometry="F1M 10,0L0,9.534 2.608,13 10,6.067 17.391,13 20,9.534z"/>
+            <GeometryDrawing Brush="{DynamicResource Element.Glyph}" Geometry="F1M 10,0L0,9.534 2.608,13 10,6.067 17.391,13 20,9.534z"/>
         </DrawingBrush.Drawing>
     </DrawingBrush>
 

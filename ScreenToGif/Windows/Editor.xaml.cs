@@ -478,7 +478,8 @@ namespace ScreenToGif.Windows
         private void ZoomBoxControl_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             //Perhaps ignore when the mouse up happened because of a drag?
-            (FindResource("Command.Play") as RoutedUICommand)?.Execute(null, this);
+            if (_timerPreview.Enabled || !NotPreviewing)
+                (FindResource("Command.Play") as RoutedUICommand)?.Execute(null, this);
         }
 
         private async void SearchTimer_Tick(object sender, EventArgs e)
@@ -2780,8 +2781,7 @@ namespace ScreenToGif.Windows
 
             Cursor = Cursors.AppStarting;
 
-            var scalingQuality = ScalingMethod.Linear;
-            Enum.TryParse<ScalingMethod>((ResizeScalingQuality.SelectedItem as ComboBoxItem).Tag.ToString(), out scalingQuality);
+            Enum.TryParse<ScalingMethod>((ResizeScalingQuality.SelectedItem as ComboBoxItem).Tag.ToString(), out var scalingQuality);
 
             _resizeFramesDel = Resize;
             _resizeFramesDel.BeginInvoke(WidthResizeNumericUpDown.Value, HeightResizeNumericUpDown.Value, DpiNumericUpDown.Value, (BitmapScalingMode)scalingQuality, ResizeCallback, null);
