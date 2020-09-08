@@ -1094,6 +1094,11 @@
     <s:String x:Key="S.Resize.NewProperties">Nova Propriedades</s:String>
     <s:String x:Key="S.Resize.Dpi2">PPP:</s:String>
     <s:String x:Key="S.Resize.KeepAspect">Manter aspecto.</s:String>
+    <s:String x:Key="S.Resize.Options">Opções</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality">Qualidade de escala:</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Fant">Fant (alta qualidade)</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Linear">Linear (baixa qualidade)</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.NearestNeighbor">Vizinho mais próximo (qualidade baixa e mais rápido)</s:String>
     <s:String x:Key="S.Resize.Warning">Você precisa selecionar algum valor diferente para aplicar o redimensionamento.</s:String>
     
     <!--Editor • Crop-->

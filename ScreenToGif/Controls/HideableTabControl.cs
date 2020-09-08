@@ -343,7 +343,7 @@ namespace ScreenToGif.Controls
             //Animate the button for notifications, when there are no encodings.
             var most = NotificationManager.Notifications.Select(s => s.Kind).OrderByDescending(a => (int)a).FirstOrDefault();
 
-            _notificationButton.Icon = FindResource(StatusBand.KindToString(most)) as Brush;
+            _notificationButton.Icon = TryFindResource(StatusBand.KindToString(most)) as Brush;
             _notificationButton.IsImportant = most != StatusType.None;
             _notificationButton.SetResourceReference(ExtendedToggleButton.TextProperty, "S.Notifications");
 

@@ -1099,7 +1099,6 @@
     <s:String x:Key="S.Resize.ScalingQuality.Fant">Fant (higher quality)</s:String>
     <s:String x:Key="S.Resize.ScalingQuality.Linear">Linear (lower quality)</s:String>
     <s:String x:Key="S.Resize.ScalingQuality.NearestNeighbor">Nearest neighbor (lower quality and faster)</s:String>
-    
     <s:String x:Key="S.Resize.Warning">You have to select a different value to apply the Resize action to.</s:String>
     
     <!--Editor • Crop-->
