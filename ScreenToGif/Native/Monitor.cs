@@ -169,6 +169,17 @@ namespace ScreenToGif.Native
             catch (Exception ex)
             {
                 LogWriter.Log(ex, "Impossible to detect screen DPI.");
+
+                try
+                {
+                    var h = Util.Native.CreateCompatibleDC(IntPtr.Zero);
+                    Dpi = Util.Native.GetDeviceCaps(h, (int)Util.Native.DeviceCaps.LogPixelsX);
+                    Util.Native.DeleteDC(h);
+                }
+                catch (Exception e)
+                {
+                    LogWriter.Log(e, "Error getting fallback of screen DPI.");
+                }
             }
 
             #endregion
