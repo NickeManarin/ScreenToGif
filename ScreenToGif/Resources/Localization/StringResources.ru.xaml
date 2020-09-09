@@ -31,6 +31,7 @@
     <s:String x:Key="S.Margin">Отступ:</s:String>
     <s:String x:Key="S.Padding">Заполнение:</s:String>
     <s:String x:Key="S.MinHeight">Мин. высота:</s:String>
+    <s:String x:Key="S.AndOr">и/или</s:String>
     
     <!--Warning messages-->
     <s:String x:Key="S.Crash">О нет, программа рухнула :(</s:String>
@@ -44,6 +45,9 @@
     <s:String x:Key="S.Exiting.Title">Выход из ScreenToGif</s:String>
     <s:String x:Key="S.Exiting.Instruction">Вы уверены, что хотите выйти?</s:String>
     <s:String x:Key="S.Exiting.Message">Все окна и значок в трее будут закрыты.</s:String>
+    
+    <!--Keys-->
+    <s:String x:Key="S.Keys.Space">Пространство</s:String>  
     
     <!--Tray icon-->
     <s:String x:Key="S.NewRecording">Новая запись с экрана</s:String>
@@ -149,6 +153,7 @@
     <s:String x:Key="S.Updater.RunAfter">Запустить приложение после обновления.</s:String>
     <s:String x:Key="S.Updater.Download">Загрузить</s:String>
     <s:String x:Key="S.Updater.Install">Установить</s:String>
+    <s:String x:Key="S.Updater.InstallManually">Установить вручную</s:String>
     <s:String x:Key="S.Updater.Downloading">Загрузка...</s:String>
     <s:String x:Key="S.Updater.Warning.Show">Не удалось показать детали загрузки.</s:String>
     <s:String x:Key="S.Updater.Warning.Download">Не удалось загрузить обновление</s:String>
@@ -222,9 +227,11 @@
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">Отключить аппаратное ускорение.</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(Интерфейс будет отрисовываться программно)</s:String>
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">Проверять обновления перевода.</s:String>
-    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(Обновленные переводы будут загружены и установлены автоматически)</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(Автозагрузка и автоустановка)</s:String>
     <s:String x:Key="S.Options.App.General.CheckForUpdates">Проверять обновления при запуске.</s:String>
     <s:String x:Key="S.Options.App.General.UpdateOnClose">Автоустановка обновления после закрытия приложения.</s:String>
+    <s:String x:Key="S.Options.App.General.PortableUpdate">Принудительно загрузить портативную версию.</s:String>
+    <s:String x:Key="S.Options.App.General.PortableUpdate.Info">(Потребуется ручная распаковка ZIP и замена исполняемого файла)</s:String>
     <s:String x:Key="S.Options.App.General.ForceUpdateAsAdmin">Принудительно запускать обновление с повышением прав.</s:String>
     <s:String x:Key="S.Options.App.General.PromptToInstall">Запрос установки</s:String>
 
@@ -236,6 +243,8 @@
     <s:String x:Key="S.Options.Recorder.Frequency">Частота захвата</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Manual">Вручную</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Manual.Info">Каждый кадр будет захватываться по нажатию кнопкм захвата или эквивалентного сочетания клавиш.</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Interaction">Действия пользователя</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Interaction.Info">Кадры будут захватываться только когда вы нажимаете или вводите что-то.</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Second">В секунду</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Second.Info">Кадры будут захватываться столько раз "в секунду",&#10;сколько установлено в окне рекордера.</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Minute">В минуту</s:String>
@@ -262,23 +271,47 @@
     <s:String x:Key="S.Options.Recorder.Compression.NoCompression.Info">(Сжатие не будет выполняться при захвате кадров)</s:String>
     <s:String x:Key="S.Options.Recorder.CacheSize">Размер кэша (в МБ):</s:String>
     <s:String x:Key="S.Options.Recorder.CacheSize.Info">(При достижении этого размера данные будут сброшены на диск)</s:String>
+    <s:String x:Key="S.Options.Recorder.PreventBlackFrames">Предотвратить захват полностью черных кадров.</s:String>
+    <s:String x:Key="S.Options.Recorder.PreventBlackFrames.Info">(Предотвращает захват и ошибочное получение полностью черных кадров)</s:String>
     <s:String x:Key="S.Options.Recorder.RecordMouse">Показывать курсор на записи.</s:String>
     <s:String x:Key="S.Options.Recorder.SelectCursorColor">Выберите цвет курсора</s:String>
-    <s:String x:Key="S.Options.Recorder.PreStart">Задержка начала записи.</s:String>
-    <s:String x:Key="S.Options.Recorder.PreStart.Info">(в секундах)</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate">Постоянная частота кадров.</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Постоянная задержка, не изменяется с задержкой записи)</s:String>
-    <s:String x:Key="S.Options.Recorder.RemoteImprovement">Улучшить производительность захвата на удаленном рабочем столе.</s:String>
+    <s:String x:Key="S.Options.Recorder.CaptureChanges">Захват только при изменениях.</s:String>
+    <s:String x:Key="S.Options.Recorder.CaptureChanges.Info">(Кадр будет захвачен только, если что-то изменено в пределах области захвата)</s:String>
+    <s:String x:Key="S.Options.Recorder.RemoteImprovement">Улучшить захват на удаленном рабочем столе.</s:String>
     <s:String x:Key="S.Options.Recorder.RemoteImprovement.Info">(Отключает многоуровневый захват окна)</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording">Включить асинхронную запись.</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(Это поможет снизить "лаги" интерфейса во время записи)</s:String>
+    
+    <s:String x:Key="S.Options.Recorder.Guidelines">Линии разметки</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds">Правило третей</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds.Info">Переключить отображение&#10;линий правила третей.</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.Crosshair">Перекрестие</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.Crosshair.Info">Переключить отображени&#10;линий перекрестия.</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.Info">Линии разметки будут отображаться только, если запись на паузе или остановлена.</s:String>
+    
     <s:String x:Key="S.Options.Recorder.HideTitleBar">Скрыть заголовок (тонкая рамка).</s:String>
-    <s:String x:Key="S.Options.Recorder.Magnifier">Активировать увеличение экрана.</s:String>
-    <s:String x:Key="S.Options.Recorder.Magnifier.Info">(Увеличивает регион записи с экрана)</s:String>
+    <s:String x:Key="S.Options.Recorder.Magnifier">Активировать увеличение</s:String>
+    <s:String x:Key="S.Options.Recorder.Magnifier.Info">(Включает лупу при выборе области записи)</s:String>
+    <s:String x:Key="S.Options.Recorder.AnimateBorder">Анимация границы во время выбора области.</s:String>
+    <s:String x:Key="S.Options.Recorder.AnimateBorder.Info">(Пунктирная анимация при выборе)</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionPanning">Элемент перемещения области записи.</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionPanning.Info">(Адортер рядом с областью записи)</s:String>
+    <s:String x:Key="S.Options.Recorder.Compact">Компактный режим.</s:String>
+    <s:String x:Key="S.Options.Recorder.Compact.Info">(Уменьшенная версия панели команд рекордера)</s:String>    
+    <s:String x:Key="S.Options.Recorder.DisplayDiscard">Отображать кнопку отмены даже во время записи.</s:String>
+    <s:String x:Key="S.Options.Recorder.DisplayDiscard.Info">(Обычно она видна только во время паузы)</s:String>
+    
+    <s:String x:Key="S.Options.Recorder.RememberSize">Запоминать предыдущий размер области записи.</s:String>
+    <s:String x:Key="S.Options.Recorder.RememberPosition">Запоминать предыдущее расположение области записи.</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart">Задержка начала записи.</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart.Info">(в секундах)</s:String>
     <s:String x:Key="S.Options.Recorder.CursorFollowing">Включить следование за курсором</s:String>
     <s:String x:Key="S.Options.Recorder.CursorFollowing.Info">(Область записи перемещается центрируясь по курсору)</s:String>
     <s:String x:Key="S.Options.Recorder.FollowMargin.Info">(Буферное поле, где область записи получает репозицию)</s:String>
     <s:String x:Key="S.Options.Recorder.FollowMarginInvisible.Info">(Дополнительное поле буфера, где UI скрывается)</s:String>
+    <s:String x:Key="S.Options.Recorder.NotifyRecordingDiscard">Подтверждать отмену записи.</s:String>
 
     <!--Options • Editor-->
     <s:String x:Key="S.Options.Editor.Previewer">Фон редактора</s:String>
@@ -529,13 +562,15 @@
     <s:String x:Key="S.Recorder.Pause">Пауза</s:String>
     <s:String x:Key="S.Recorder.Continue">Продолжить</s:String>
     <s:String x:Key="S.Recorder.Stop">Стоп</s:String>
-    <s:String x:Key="S.Recorder.Discard">Сброс</s:String>
+    <s:String x:Key="S.Recorder.Discard">Отмена</s:String>
     <s:String x:Key="S.Recorder.Snap">Снимок</s:String>
     <s:String x:Key="S.Recorder.Height">Высота</s:String>
     <s:String x:Key="S.Recorder.Width">Ширина</s:String>
+    <s:String x:Key="S.Recorder.CursorFollowing">Следование за курсором включено.</s:String>
 
     <s:String x:Key="S.Recorder.SwitchFrequency">Нажмите, чтобы переключить режим частоты захвата.</s:String>
     <s:String x:Key="S.Recorder.Manual.Short">Вручную</s:String>
+    <s:String x:Key="S.Recorder.Interaction.Short">При действиях</s:String>
     <s:String x:Key="S.Recorder.Fps">Максимум кадров в секунду</s:String>
     <s:String x:Key="S.Recorder.Fps.Short">fps</s:String>
     <s:String x:Key="S.Recorder.Fps.Range">Диапазон от 1 до 60 кадров в секунду.</s:String>
@@ -550,6 +585,7 @@
     <s:String x:Key="S.Recorder.PreStart">Подготовка</s:String>
     <s:String x:Key="S.Recorder.Paused">ScreenToGif (Пауза)</s:String>
     <s:String x:Key="S.Recorder.Stopping">Остановка...</s:String>
+    <s:String x:Key="S.Recorder.PreStarting">Ожидание старта...</s:String>
     
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible">Не удалось захватить экран</s:String>
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">Не удалось захватить экран. Метод захвата не вернул ни одного кадра после 5 попыток.</s:String>
@@ -559,8 +595,18 @@
     
     <!--New recorder-->
     <s:String x:Key="S.Recorder.Area">Регион</s:String>
+    <s:String x:Key="S.Recorder.Area.Select">Выбор области</s:String>
     <s:String x:Key="S.Recorder.Window">Окно</s:String>
+    <s:String x:Key="S.Recorder.Window.Select">Выбор окна</s:String>
     <s:String x:Key="S.Recorder.Screen">Весь экран</s:String>
+    <s:String x:Key="S.Recorder.Screen.Select">Выбор экрана</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Internal">Внутренний экран</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Generic">Общий экран</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Info1">Графический адаптер: {0}</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Info2">Разрешение: {0} x {1}</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Info3">Родное разрешение: {0} x {1}</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Info4">DPI: {0} ({1:0.##}%)</s:String>
+    <s:String x:Key="S.Recorder.Move">Переместить&#10;перетаскиванием.</s:String>
     <s:String x:Key="S.Recorder.Accept">Принять</s:String>
     <s:String x:Key="S.Recorder.Retry">Повторить</s:String>
     <s:String x:Key="S.Recorder.Retry.Shortcut">ПКМ</s:String>
@@ -570,6 +616,12 @@
     <s:String x:Key="S.Recorder.SelectWindow">Нажмите здесь, чтобы выбрать это окно</s:String>
     <s:String x:Key="S.Recorder.SelectScreen">Нажмите здесь, чтобы выбрать этот экран</s:String>
     <s:String x:Key="S.Recorder.EscToCancel">Нажмите ESC для отмены</s:String>
+    <s:String x:Key="S.Recorder.Splash.Title">Нажмите {0}, чтобы остановить запись</s:String>
+    <s:String x:Key="S.Recorder.Splash.Subtitle">Окно рекордера будет свернуто,&#10;нажмите {0}, чтобы приостановить захват.</s:String>
+    
+    <s:String x:Key="S.Recorder.Discard.Title">Отмена записи</s:String>
+    <s:String x:Key="S.Recorder.Discard.Instruction">Вы уверены, что хотите отказаться от записи?</s:String>
+    <s:String x:Key="S.Recorder.Discard.Message">Это действие приведет к отмене записи и удалению всех кадров&#x0d;Вы не сможете отменить эту операцию.</s:String>
     
     <!--Webcam recorder-->
     <s:String x:Key="S.Webcam.Title">ScreenToGif - запись с веб-камеры</s:String>
@@ -951,6 +1003,7 @@
     <s:String x:Key="S.Editor.ChangingDelay">Изменение задержки</s:String>
     <s:String x:Key="S.Editor.ApplyingTransition">Применение эффекта перехода</s:String>
     <s:String x:Key="S.Editor.PreparingSaving">Подготовка к сохранению</s:String>
+    <s:String x:Key="S.Editor.CancelDiscard">Отменить загрузку и удалить проект.</s:String>
 
     <!--Editor • Frame list-->
     <s:String x:Key="S.Editor.List.Frame">Кадр:</s:String>
@@ -1041,6 +1094,11 @@
     <s:String x:Key="S.Resize.NewProperties">Новые свойства</s:String>
     <s:String x:Key="S.Resize.Dpi2">DPI:</s:String>
     <s:String x:Key="S.Resize.KeepAspect">Сохранить пропорции.</s:String>
+    <s:String x:Key="S.Resize.Options">Настройки</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality">Качество масштабирования:</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Fant">Fant (высокое качество)</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Linear">Linear (низкое качество)</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.NearestNeighbor">Nearest neighbor (низкое качество, быстрее)</s:String>
     <s:String x:Key="S.Resize.Warning">Необходимо выбрать другое значение, чтобы применить размер.</s:String>
     
     <!--Editor • Crop-->
@@ -1140,6 +1198,7 @@
     <s:String x:Key="S.Shapes.Shapes">Фигуры</s:String>
     <s:String x:Key="S.Shapes.Shapes.Radius">Радиус:</s:String>
     <s:String x:Key="S.Shapes.Shapes.Dashes">Штрихи:</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Dashes.Info">Управление размерами штрихов и промежутков.&#10;Вы можете установить несколько размеров, чтобы создать сложный стиль тире.&#10;Значение по умолчанию - "1 0" или пусто, что означает прочерк без пробелов..</s:String>
     <s:String x:Key="S.Shapes.Shapes.ResetRotatio">Сброс поворота</s:String>
     <s:String x:Key="S.Shapes.Shapes.Remove">Убрать</s:String>
     <s:String x:Key="S.Shapes.Fill">Заливка</s:String>
@@ -1169,10 +1228,20 @@
     <s:String x:Key="S.Shadow.Depth">Глубина:</s:String>
     
     <!--Editor • Obfuscate-->
+    <s:String x:Key="S.Obfuscate.Type.Pixelate">Пикселизация</s:String>
+    <s:String x:Key="S.Obfuscate.Type.Blur">Блюр (размытие)</s:String>
+    <s:String x:Key="S.Obfuscate.Type.Darken">Затемнение</s:String>
+    <s:String x:Key="S.Obfuscate.Type.Lighten">Освещение</s:String>
     <s:String x:Key="S.Obfuscate.Options">Параметры пикселизации</s:String>
     <s:String x:Key="S.Obfuscate.PixelSize">Размер пикселя:</s:String>
+    <s:String x:Key="S.Obfuscate.BlurLevel">Уровень размытия:</s:String>
+    <s:String x:Key="S.Obfuscate.DarkenLevel">Уровень затемнения:</s:String>
+    <s:String x:Key="S.Obfuscate.LightenLevel">Уровень освещения:</s:String>
     <s:String x:Key="S.Obfuscate.UseAverage">Вычисление среднего цвета для каждого пикселизированного блока.</s:String>
+    <s:String x:Key="S.Obfuscate.Invert">Применить запутывание с инверсией области выбора.</s:String>
+    <s:String x:Key="S.Obfuscate.Smoothness">Сглаживание</s:String>
     <s:String x:Key="S.Obfuscate.Info">Выберите прямоугольную область, которая должна быть пикселизирована.</s:String>
+    <s:String x:Key="S.Obfuscate.Info2">Используйте выбор, чтобы выбрать часть кадра, которая не должна быть запутана.</s:String>
     <s:String x:Key="S.Obfuscate.Warning">Вы ничего не выбрали. Выберите мышью прямоугольную область, которая должна быть пикселизирована.</s:String>
     
     <!--Editor • Progress-->
