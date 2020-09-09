@@ -31,6 +31,7 @@
     <s:String x:Key="S.Margin">边距：</s:String>
     <s:String x:Key="S.Padding">填充：</s:String>
     <s:String x:Key="S.MinHeight">最小高度：</s:String>
+    <s:String x:Key="S.AndOr">和/或</s:String>
     
     <!--Warning messages-->
     <s:String x:Key="S.Crash">哦，不，应用程序崩溃了 :(</s:String>
@@ -45,6 +46,9 @@
     <s:String x:Key="S.Exiting.Title">退出 ScreenToGif</s:String>
     <s:String x:Key="S.Exiting.Instruction">你确定要退出吗?</s:String>
     <s:String x:Key="S.Exiting.Message">所有窗口将被关闭，托盘图标将被移除。</s:String>
+    
+    <!--Keys-->
+    <s:String x:Key="S.Keys.Space">空格键</s:String>
     
     <!--Tray icon-->
     <s:String x:Key="S.NewRecording">新建屏幕录制</s:String>
@@ -151,6 +155,7 @@
     <s:String x:Key="S.Updater.RunAfter">更新后执行该应用程序。</s:String>
     <s:String x:Key="S.Updater.Download">下载</s:String>
     <s:String x:Key="S.Updater.Install">安装</s:String>
+    <s:String x:Key="S.Updater.InstallManually">手动安装</s:String>
     <s:String x:Key="S.Updater.Downloading">正在下载...</s:String>
     <s:String x:Key="S.Updater.Warning.Show">无法显示下载详细信息。</s:String>
     <s:String x:Key="S.Updater.Warning.Download">无法下载更新。</s:String>
@@ -229,6 +234,8 @@
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">（更新的翻译将自动下载并安装）</s:String>
     <s:String x:Key="S.Options.App.General.CheckForUpdates">检查更新</s:String>
     <s:String x:Key="S.Options.App.General.UpdateOnClose">关闭应用程序后自动安装更新</s:String>
+    <s:String x:Key="S.Options.App.General.PortableUpdate">强制下载便携版本</s:String>
+    <s:String x:Key="S.Options.App.General.PortableUpdate.Info">（需要通过解压缩和替换可执行文件来进行手动安装）</s:String>
     <s:String x:Key="S.Options.App.General.ForceUpdateAsAdmin">强制更新以提升特权运行</s:String>
     <s:String x:Key="S.Options.App.General.PromptToInstall">在安装开始之前提示我</s:String>
 
@@ -240,12 +247,17 @@
     <s:String x:Key="S.Options.Recorder.Frequency">捕获频率</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Manual">手动</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Manual.Info">您可以通过按“捕获”按钮或等效的键盘快捷键来手动捕获每一帧。</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Interaction">用户交互</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Interaction.Info">每次单击或键入内容时，都会捕获帧。</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Second">每秒</s:String>
-    <s:String x:Key="S.Options.Recorder.Frequency.Second.Info">基于录像机屏幕上设置的帧率分母，&#10;将以“每秒”为基础捕获帧。</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Second.Info">基于录像机屏幕上设置的帧率分母，
+将以“每秒”为基础捕获帧。</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Minute">每分钟</s:String>
-    <s:String x:Key="S.Options.Recorder.Frequency.Minute.Info">基于录像机屏幕上设置的帧率分母，&#10;将以“每分钟”（间隔）的时间捕获帧。</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Minute.Info">基于录像机屏幕上设置的帧率分母，
+将以“每分钟”（间隔）的时间捕获帧。</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Hour">每小时</s:String>
-    <s:String x:Key="S.Options.Recorder.Frequency.Hour.Info">基于录像机屏幕上设置的帧速率分母，&#10;将以“每小时”为基础（延时）捕获帧。</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Hour.Info">基于录像机屏幕上设置的帧速率分母，
+将以“每小时”为基础（延时）捕获帧。</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Playback">播放延迟：</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Playback.Info">（以毫秒为单位，每个捕获的帧将设置为此延迟）</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Interval">每帧将以 {0} 的间隔进行捕获。</s:String>
@@ -266,23 +278,47 @@
     <s:String x:Key="S.Options.Recorder.Compression.NoCompression.Info">（捕获帧时不应执行压缩）</s:String>
     <s:String x:Key="S.Options.Recorder.CacheSize">缓存大小：</s:String>
     <s:String x:Key="S.Options.Recorder.CacheSize.Info">（以MB为单位。达到此大小后，数据将被写入/丢弃到磁盘上）</s:String>
+    <s:String x:Key="S.Options.Recorder.PreventBlackFrames">防止捕获全黑帧。</s:String>
+    <s:String x:Key="S.Options.Recorder.PreventBlackFrames.Info">（防止具有内存缓存的 BitBlt 错误地导致所有像素均为黑色的帧）</s:String>
     <s:String x:Key="S.Options.Recorder.RecordMouse">录制时显示鼠标光标</s:String>
     <s:String x:Key="S.Options.Recorder.SelectCursorColor">选择光标颜色</s:String>
-    <s:String x:Key="S.Options.Recorder.PreStart">在开始前倒计时</s:String>
-    <s:String x:Key="S.Options.Recorder.PreStart.Info">（秒，开始录制前延时）</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate">固定帧率</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">（恒定延迟，不会因为录制时卡顿变化）</s:String>
+    <s:String x:Key="S.Options.Recorder.CaptureChanges">仅在发生变化时捕获</s:String>
+    <s:String x:Key="S.Options.Recorder.CaptureChanges.Info">（仅当在捕获区域内进行了某些更改时，才会捕获帧）</s:String>
     <s:String x:Key="S.Options.Recorder.RemoteImprovement">提高远程桌面连接上的捕获性能</s:String>
     <s:String x:Key="S.Options.Recorder.RemoteImprovement.Info">（禁用分层窗口捕获）</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording">启用异步录制</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">（有助于减少录制时界面卡顿）</s:String>
+    
+    <s:String x:Key="S.Options.Recorder.Guidelines">指导方针</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds">三分法则</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds.Info">单击切换三分法则准线的显示。</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.Crosshair">十字准线</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.Crosshair.Info">点击切换十字准线的显示。</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.Info">指南仅在录像机暂停或停止时显示。</s:String>
+    
     <s:String x:Key="S.Options.Recorder.HideTitleBar">隐藏标题栏（精简模式）</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier">启用屏幕放大镜</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier.Info">（在选择录制区域时启用放大镜）</s:String>
+    <s:String x:Key="S.Options.Recorder.AnimateBorder">在选择期间对屏幕区域边框进行动画处理。</s:String>
+    <s:String x:Key="S.Options.Recorder.AnimateBorder.Info">（使用“行军蚁”样式制作动画）</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionPanning">启用选择平移</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionPanning.Info">（在选择的一角附近显示一个装饰物，允许移动录制区域）</s:String>
+    <s:String x:Key="S.Options.Recorder.Compact">紧凑模式</s:String>
+    <s:String x:Key="S.Options.Recorder.Compact.Info">（显示录制器命令面板的较小版本）</s:String>
+    <s:String x:Key="S.Options.Recorder.DisplayDiscard">显示放弃按钮也同时录制</s:String>
+    <s:String x:Key="S.Options.Recorder.DisplayDiscard.Info">（通常，仅在暂停状态下可见）</s:String>
+    
+    <s:String x:Key="S.Options.Recorder.RememberSize">记住录制区域的先前大小</s:String>
+    <s:String x:Key="S.Options.Recorder.RememberPosition">记住录制区域的先前位置</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart">在开始前倒计时</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart.Info">（秒，开始录制前延时）</s:String>
     <s:String x:Key="S.Options.Recorder.CursorFollowing">启用光标跟随</s:String>
     <s:String x:Key="S.Options.Recorder.CursorFollowing.Info">（录制区域将根据光标的位置重新定位）</s:String>
     <s:String x:Key="S.Options.Recorder.FollowMargin.Info">（录制区域开始重新定位缓冲区边距）</s:String>
     <s:String x:Key="S.Options.Recorder.FollowMarginInvisible.Info">（UI 开始隐藏其他缓冲区边距）</s:String>
+    <s:String x:Key="S.Options.Recorder.NotifyRecordingDiscard">在放弃录制之前询问我</s:String>
 
     <!--Options • Editor-->
     <s:String x:Key="S.Options.Editor.Previewer">编辑器背景</s:String>
@@ -542,38 +578,54 @@
     <s:String x:Key="S.Recorder.Pause">暂停</s:String>
     <s:String x:Key="S.Recorder.Continue">继续</s:String>
     <s:String x:Key="S.Recorder.Stop">停止</s:String>
-    <s:String x:Key="S.Recorder.Discard">丢弃</s:String>
+    <s:String x:Key="S.Recorder.Discard">放弃</s:String>
     <s:String x:Key="S.Recorder.Snap">捕捉</s:String>
     <s:String x:Key="S.Recorder.Height">高度</s:String>
     <s:String x:Key="S.Recorder.Width">宽度</s:String>
+    <s:String x:Key="S.Recorder.CursorFollowing">光标跟踪已启用。</s:String>
 
     <s:String x:Key="S.Recorder.SwitchFrequency">单击以在捕获频率模式之间切换。</s:String>
     <s:String x:Key="S.Recorder.Manual.Short">手动</s:String>
+    <s:String x:Key="S.Recorder.Interaction.Short">交互</s:String>
     <s:String x:Key="S.Recorder.Fps">每秒最大帧数</s:String>
     <s:String x:Key="S.Recorder.Fps.Short">fps</s:String>
-    <s:String x:Key="S.Recorder.Fps.Range">范围从 1 到 60 fps，更高的值表示将捕获更多帧。&#10;每个增量代表 16 毫秒的差异。</s:String>
+    <s:String x:Key="S.Recorder.Fps.Range">范围从 1 到 60 fps，更高的值表示将捕获更多帧。
+每个增量代表 16 毫秒的差异。</s:String>
     <s:String x:Key="S.Recorder.Fpm">每分钟最大帧数</s:String>
     <s:String x:Key="S.Recorder.Fpm.Short">fpm</s:String>
-    <s:String x:Key="S.Recorder.Fpm.Range">范围从 1 到 60 fpm，更高的值表示将捕获更多帧。&#10;每个增量代表 1 秒的差异。</s:String>
+    <s:String x:Key="S.Recorder.Fpm.Range">范围从 1 到 60 fpm，更高的值表示将捕获更多帧。
+每个增量代表 1 秒的差异。</s:String>
     <s:String x:Key="S.Recorder.Fph">每小时最大帧数</s:String>
     <s:String x:Key="S.Recorder.Fph.Short">fph</s:String>
-    <s:String x:Key="S.Recorder.Fph.Range">范围从 1 到 60 fph，更高的值表示将捕获更多帧。&#10;每个增量代表 1 分钟的差异。</s:String>
+    <s:String x:Key="S.Recorder.Fph.Range">范围从 1 到 60 fph，更高的值表示将捕获更多帧。
+每个增量代表 1 分钟的差异。</s:String>
     
     <s:String x:Key="S.Recorder.SnapToWindow">对齐窗口（拖拽到目标窗口上进行捕捉）</s:String>
     <s:String x:Key="S.Recorder.PreStart">预启动</s:String>
     <s:String x:Key="S.Recorder.Paused">ScreenToGif（已暂停）</s:String>
     <s:String x:Key="S.Recorder.Stopping">正在停止...</s:String>
+    <s:String x:Key="S.Recorder.PreStarting">预先启动...</s:String>
     
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible">无法捕获屏幕</s:String>
-    <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">无法捕获屏幕。 5 次尝试后，捕获方法未返回任何帧。</s:String>
+    <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">无法捕获屏幕。5 次尝试后，捕获方法未返回任何帧。</s:String>
     <s:String x:Key="S.Recorder.Warning.StartPauseNotPossible">无法开始/暂停捕获屏幕</s:String>
     <s:String x:Key="S.Recorder.Warning.Windows8">使用桌面复制 Desktop Duplication API 捕获屏幕需要 Windows 8 或更高版本。</s:String>
     <s:String x:Key="S.Recorder.Warning.MissingSharpDx">为了使用 Desktop Duplication API 捕获屏幕，需要 SharpDx 库。 进入选项>其他下载。</s:String>
     
     <!--New recorder-->
     <s:String x:Key="S.Recorder.Area">区域</s:String>
+    <s:String x:Key="S.Recorder.Area.Select">选择一个区域</s:String>
     <s:String x:Key="S.Recorder.Window">窗口</s:String>
+    <s:String x:Key="S.Recorder.Window.Select">选择一个窗口</s:String>
     <s:String x:Key="S.Recorder.Screen">屏幕</s:String>
+    <s:String x:Key="S.Recorder.Screen.Select">选择一个屏幕</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Internal">内部屏幕</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Generic">通用画面</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Info1">图形适配器：{0}</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Info2">分辨率：{0} x {1}</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Info3">原始分辨率：{0} x {1}</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Info4">DPI: {0} ({1:0.##}%)</s:String>
+    <s:String x:Key="S.Recorder.Move">拖动以移动选择。</s:String>
     <s:String x:Key="S.Recorder.Accept">接受</s:String>
     <s:String x:Key="S.Recorder.Retry">重试</s:String>
     <s:String x:Key="S.Recorder.Retry.Shortcut">右键点击</s:String>
@@ -583,6 +635,12 @@
     <s:String x:Key="S.Recorder.SelectWindow">单击此处选择此窗口</s:String>
     <s:String x:Key="S.Recorder.SelectScreen">单击此处选择此屏幕</s:String>
     <s:String x:Key="S.Recorder.EscToCancel">按 Esc 键取消</s:String>
+    <s:String x:Key="S.Recorder.Splash.Title">按{0}停止录制</s:String>
+    <s:String x:Key="S.Recorder.Splash.Subtitle">录像机窗口最小化，&#10;恢复它或按 {0} 暂停捕获</s:String>
+    
+    <s:String x:Key="S.Recorder.Discard.Title">放弃录制</s:String>
+    <s:String x:Key="S.Recorder.Discard.Instruction">您确定要放弃该录制吗？</s:String>
+    <s:String x:Key="S.Recorder.Discard.Message">此操作将放弃录制并删除所有帧。&#x0d;您无法撤消此操作。</s:String>
     
     <!--Webcam recorder-->
     <s:String x:Key="S.Webcam.Title">ScreenToGif - 摄像头录像机</s:String>
@@ -975,6 +1033,7 @@
     <s:String x:Key="S.Editor.ChangingDelay">更改延时</s:String>
     <s:String x:Key="S.Editor.ApplyingTransition">正在应用过渡效果</s:String>
     <s:String x:Key="S.Editor.PreparingSaving">正在准备保存</s:String>
+    <s:String x:Key="S.Editor.CancelDiscard">取消载入并放弃项目。</s:String>
 
     <!--Editor • Frame list-->
     <s:String x:Key="S.Editor.List.Frame">帧：</s:String>
@@ -1045,7 +1104,7 @@
     <s:String x:Key="S.Recent.Date">创建日期</s:String>
     <s:String x:Key="S.Recent.Frames">总帧数</s:String>
     <s:String x:Key="S.Recent.Warning.NoSelection">未选择任何项目。请从列表中选择并载入。</s:String>
-    <!--<s:String x:Key="S.Recent.Warning.SameProject">This project is already being displayed by this editor instance.</s:String>-->
+    <s:String x:Key="S.Recent.Warning.SameProject">该编辑器实例已经在显示该项目。</s:String>
     <s:String x:Key="S.Recent.Warning.AnotherEditor">该项目已由另一个编辑器实例打开。 如果项目已在另一个编辑器上打开，则无法再次打开该项目。</s:String>
     
     <!--Editor • Clipboard-->
@@ -1065,6 +1124,11 @@
     <s:String x:Key="S.Resize.NewProperties">新属性</s:String>
     <s:String x:Key="S.Resize.Dpi2">DPI：</s:String>
     <s:String x:Key="S.Resize.KeepAspect">保持长宽比</s:String>
+    <s:String x:Key="S.Resize.Options">选项</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality">缩放质量：</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Fant">高档（更高质量）</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Linear">线性（较低质量）</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.NearestNeighbor">最近邻（低质量和更快）</s:String>
     <s:String x:Key="S.Resize.Warning">您必须选择其他值以应用“调整大小”操作。</s:String>
     
     <!--Editor • Crop-->
@@ -1165,6 +1229,7 @@
     <s:String x:Key="S.Shapes.Shapes">形状</s:String>
     <s:String x:Key="S.Shapes.Shapes.Radius">半径：</s:String>
     <s:String x:Key="S.Shapes.Shapes.Dashes">破折号：</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Dashes.Info">控制虚线的大小和间隙的大小。&#10;您可以设置多个大小来创建精致的破折号样式。&#10;默认值为“ 1 0”或为空，表示没有间隙的破折号。</s:String>
     <s:String x:Key="S.Shapes.Shapes.ResetRotatio">重置旋转</s:String>
     <s:String x:Key="S.Shapes.Shapes.Remove">移除</s:String>
     <s:String x:Key="S.Shapes.Fill">填充</s:String>
@@ -1195,10 +1260,20 @@
     <s:String x:Key="S.Shadow.Depth">深度：</s:String>
     
     <!--Editor • Obfuscate-->
+    <s:String x:Key="S.Obfuscate.Type.Pixelate">像素化</s:String>
+    <s:String x:Key="S.Obfuscate.Type.Blur">模糊</s:String>
+    <s:String x:Key="S.Obfuscate.Type.Darken">加深</s:String>
+    <s:String x:Key="S.Obfuscate.Type.Lighten">变亮</s:String>
     <s:String x:Key="S.Obfuscate.Options">混淆选项</s:String>
     <s:String x:Key="S.Obfuscate.PixelSize">像素大小：</s:String>
+    <s:String x:Key="S.Obfuscate.BlurLevel">模糊级别：</s:String>
+    <s:String x:Key="S.Obfuscate.DarkenLevel">加深级别：</s:String>
+    <s:String x:Key="S.Obfuscate.LightenLevel">变亮级别：</s:String>
     <s:String x:Key="S.Obfuscate.UseAverage">计算每个像素块的平均颜色。</s:String>
+    <s:String x:Key="S.Obfuscate.Invert">应用模糊到选择的倒数。</s:String>
+    <s:String x:Key="S.Obfuscate.Smoothness">平滑度</s:String>
     <s:String x:Key="S.Obfuscate.Info">使用选择工具选择应像素化的矩形区域。</s:String>
+    <s:String x:Key="S.Obfuscate.Info2">使用选择工具选择不应混淆的帧部分。</s:String>
     <s:String x:Key="S.Obfuscate.Warning">您没有选择任何区域。请使用选择工具选择应像素化的矩形区域。</s:String>
     
     <!--Editor • Progress-->
@@ -1293,7 +1368,8 @@
     <s:String x:Key="S.SaveAs.GifOptions.Quantizer.MostUsed">最常用的颜色</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Quantizer.MostUsed.Info">只是需要在选择帧中最常用的颜色。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Sampling">采样：</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Sampling.Info">采样因子：&#10;值为 1 会产生更好的 GIF 效果，但渲染速度会较慢。</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Sampling.Info">采样因子：
+值为 1 会产生更好的 GIF 效果，但渲染速度会较慢。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Quality">质量：</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors">颜色：</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">最大颜色数（每帧）</s:String>
@@ -1304,13 +1380,17 @@
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">永远重复</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">重复计数</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable">启用透明度。</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable.Info">启用完全透明模式，使 GIF 的背景完全透明。&#10;如果启用此选项，则色键替换过程将被忽略。</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable.Info">启用完全透明模式，使 GIF 的背景完全透明。
+如果启用此选项，则色键替换过程将被忽略。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Transparency.Pick">选择显示为透明的颜色。</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Transparency.Pick.Info">如果选择了一种颜色，它将被转换为透明的，并且在生成的 GIF 中将显示为透明。&#10;如果未选择颜色，则所有透明颜色（Alpha = 0％）将正常显示为透明。rmally.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Transparency.Pick.Info">如果选择了一种颜色，它将被转换为透明的，并且在生成的 GIF 中将显示为透明。
+如果未选择颜色，则所有透明颜色（Alpha = 0％）将正常显示为透明。rmally.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">检测未更改的像素</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged.Info">通过分析和检测帧之间未更改的像素，&#10;可以将仅必要的部分保存到 GIF。</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged.Info">通过分析和检测帧之间未更改的像素，
+可以将仅必要的部分保存到 GIF。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma">用色度键替换这些像素。</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma.Info">重复/不变的像素将被此色度键替换，&#10;从而可以减少每帧使用的颜色。</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma.Info">重复/不变的像素将被此色度键替换，
+从而可以减少每帧使用的颜色。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.ChromaKey">色度键：</s:String>
 
     <!--Editor • Save as > Apng options-->
