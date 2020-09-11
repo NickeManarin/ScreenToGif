@@ -31,6 +31,7 @@
     <s:String x:Key="S.Margin">Marge:</s:String>
     <s:String x:Key="S.Padding">Randvulling:</s:String>
     <s:String x:Key="S.MinHeight">Min. hoogte:</s:String>
+    <s:String x:Key="S.AndOr">en/of</s:String>
     
     <!--Warning messages-->
     <s:String x:Key="S.Crash">O nee, het programma is vastgelopen :(</s:String>
@@ -44,6 +45,9 @@
     <s:String x:Key="S.Exiting.Title">ScreenToGif afsluiten</s:String>
     <s:String x:Key="S.Exiting.Instruction">Weet je zeker dat je wilt afsluiten?</s:String>
     <s:String x:Key="S.Exiting.Message">Alle schermen worden gesloten en het pictogram wordt van de taakbalk verwijderd.</s:String>
+    
+    <!--Keys-->
+    <s:String x:Key="S.Keys.Space">Spatie</s:String>
     
     <!--Tray icon-->
     <s:String x:Key="S.NewRecording">Nieuwe Schermopname</s:String>
@@ -149,6 +153,7 @@
     <s:String x:Key="S.Updater.RunAfter">Start de app na de update.</s:String>
     <s:String x:Key="S.Updater.Download">Downloaden</s:String>
     <s:String x:Key="S.Updater.Install">Installeren</s:String>
+    <s:String x:Key="S.Updater.InstallManually">Handmatig installeren</s:String>
     <s:String x:Key="S.Updater.Downloading">Downloaden...</s:String>
     <s:String x:Key="S.Updater.Warning.Show">Het was niet mogelijk om de downloaddetails te tonen.</s:String>
     <s:String x:Key="S.Updater.Warning.Download">De update kon niet worden gedownload.</s:String>
@@ -225,6 +230,8 @@
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(Bijgewerkte vertalingen worden automatisch gedownload en geïnstalleerd)</s:String>
     <s:String x:Key="S.Options.App.General.CheckForUpdates">Controleer op updates bij het opstarten.</s:String>
     <s:String x:Key="S.Options.App.General.UpdateOnClose">Updates automatisch installeren na het sluiten van de app.</s:String>
+    <s:String x:Key="S.Options.App.General.PortableUpdate">Forceer het downloaden van de draagbare versie.</s:String>
+    <s:String x:Key="S.Options.App.General.PortableUpdate.Info">(Vereist een handmatige installatie door het uitvoerbare bestand uit te pakken en te vervangen)</s:String>
     <s:String x:Key="S.Options.App.General.ForceUpdateAsAdmin">Afdwingen dat de update met verhoogde rechten wordt uitgevoerd.</s:String>
     <s:String x:Key="S.Options.App.General.PromptToInstall">Vraag me voordat de installatie begint.</s:String>
 
@@ -236,6 +243,8 @@
     <s:String x:Key="S.Options.Recorder.Frequency">Opname-frequentie</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Manual">Handmatig</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Manual.Info">Elk frame wordt handmatig door u vastgelegd door op de opnameknop of een gelijkwaardige sneltoets te drukken.</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Interaction">Gebruikersinteractie</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Interaction.Info">Elke keer dat u op iets klikt of typt, worden frames vastgelegd.</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Second">Per seconde</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Second.Info">Frames worden vastgelegd op basis van 'per seconde', &#10;gebaseerd op de framerate noemer die is ingesteld op het recorderscherm.</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Minute">Per minuut</s:String>
@@ -262,23 +271,47 @@
     <s:String x:Key="S.Options.Recorder.Compression.NoCompression.Info">(Er mag geen compressie worden uitgevoerd tijdens het vastleggen van frames)</s:String>
     <s:String x:Key="S.Options.Recorder.CacheSize">Tijdelijke opslag:</s:String>
     <s:String x:Key="S.Options.Recorder.CacheSize.Info">(In MB. Na het bereiken van deze grootte worden de gegevens weggeschreven / gespoeld naar de schijf)</s:String>
+    <s:String x:Key="S.Options.Recorder.PreventBlackFrames">Voorkom het vastleggen van volledig zwarte frames.</s:String>
+    <s:String x:Key="S.Options.Recorder.PreventBlackFrames.Info">(Voorkomt dat BitBlt met een geheugencache ten onrechte leidt tot frames met alleen zwarte pixels)</s:String>
     <s:String x:Key="S.Options.Recorder.RecordMouse">Muiscursor tijdens opname weergeven.</s:String>
     <s:String x:Key="S.Options.Recorder.SelectCursorColor">Kleur muiscursor selecteren.</s:String>
-    <s:String x:Key="S.Options.Recorder.PreStart">Aftellen voor opname.</s:String>
-    <s:String x:Key="S.Options.Recorder.PreStart.Info">(de wachttijd [sec] voordat de opname wordt gestart)</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate">Vaste framerate.</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Constante framerate die niet verandert bij opnamevertraging)</s:String>
+    <s:String x:Key="S.Options.Recorder.CaptureChanges">Leg alleen vast als er iets verandert.</s:String>
+    <s:String x:Key="S.Options.Recorder.CaptureChanges.Info">(Er wordt alleen een frame vastgelegd als er iets is gewijzigd binnen het opnamegebied)</s:String>
     <s:String x:Key="S.Options.Recorder.RemoteImprovement">Verbeter de opnameprestaties bij een externe desktopverbinding.</s:String>
     <s:String x:Key="S.Options.Recorder.RemoteImprovement.Info">(Schakelt gelaagde vensteropname uit)</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording">Asynchrone opnamemodus inschakelen.</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(Deze optie vermindert vertragingen in de opname)</s:String>
+    
+    <s:String x:Key="S.Options.Recorder.Guidelines">Richtlijnen</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds">Regel van derden</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds.Info">Klik om de weergave van een regel van een derde richtlijn in of uit te schakelen.</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.Crosshair">Draadkruis</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.Crosshair.Info">Klik om de weergave van een draadkruisrichtlijn in of uit te schakelen.</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.Info">De richtlijnen worden alleen weergegeven als de recorder is gepauzeerd of gestopt.</s:String>
+    
     <s:String x:Key="S.Options.Recorder.HideTitleBar">Titelbalk verbergen (thin mode).</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier">Vergrootglas inschakelen.</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier.Info">(Bij het vastleggen van het opnamegebied)</s:String>
+    <s:String x:Key="S.Options.Recorder.AnimateBorder">Opnamegebied tijdens de selectie voorzien van animatie.</s:String>
+    <s:String x:Key="S.Options.Recorder.AnimateBorder.Info">(Animatie in 'marcherende mieren'-stijl)</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionPanning">Selectie pannen inschakelen.</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionPanning.Info">(Geeft een handle weer in de buurt van de hoek van de selectie, waarmee het opnamegebied kan worden verplaatst)</s:String>
+    <s:String x:Key="S.Options.Recorder.Compact">Compacte weergave.</s:String>
+    <s:String x:Key="S.Options.Recorder.Compact.Info">(Toont een kleinere versie van het opdrachtpaneel van de recorder)</s:String>
+    <s:String x:Key="S.Options.Recorder.DisplayDiscard">De knop Annuleren ook weergeven tijdens de opname.</s:String>
+    <s:String x:Key="S.Options.Recorder.DisplayDiscard.Info">(Normaal gesproken alleen zichtbaar wanneer de opname is gepauzeerd)</s:String>
+    
+    <s:String x:Key="S.Options.Recorder.RememberSize">Onthoud de vorige grootte van het opnamegebied.</s:String>
+    <s:String x:Key="S.Options.Recorder.RememberPosition">Onthoud de vorige locatie van het opnamegebied.</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart">Aftellen voor opname.</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart.Info">(de wachttijd [sec] voordat de opname wordt gestart)</s:String>
     <s:String x:Key="S.Options.Recorder.CursorFollowing">Cursor volgen inschakelen.</s:String>
     <s:String x:Key="S.Options.Recorder.CursorFollowing.Info">(Het opnamegebied zal zichzelf verplaatsen op basis van de locatie van de cursor)</s:String>
     <s:String x:Key="S.Options.Recorder.FollowMargin.Info">(Buffermarge in pixels, waar het opnamegebied wordt verplaatst)</s:String>
     <s:String x:Key="S.Options.Recorder.FollowMarginInvisible.Info">(Extra buffermarge in pixels, waar de gebruikersinterface verborgen begint te raken)</s:String>
+    <s:String x:Key="S.Options.Recorder.NotifyRecordingDiscard">Bevestiging vragen voor het weggooien van een opname.</s:String>
 
     <!--Options • Editor-->
     <s:String x:Key="S.Options.Editor.Previewer">Editor-achtergrond</s:String>
@@ -533,9 +566,11 @@
     <s:String x:Key="S.Recorder.Snap">Foto</s:String>
     <s:String x:Key="S.Recorder.Height">Hoogte</s:String>
     <s:String x:Key="S.Recorder.Width">Breedte</s:String>
+    <s:String x:Key="S.Recorder.CursorFollowing">Cursor volgen is ingeschakeld.</s:String>
 
     <s:String x:Key="S.Recorder.SwitchFrequency">Klik om te schakelen tussen de modi van opnamefrequentie.</s:String>
     <s:String x:Key="S.Recorder.Manual.Short">handmatig</s:String>
+    <s:String x:Key="S.Recorder.Interaction.Short">interacties</s:String>
     <s:String x:Key="S.Recorder.Fps">Maximum frames per seconde</s:String>
     <s:String x:Key="S.Recorder.Fps.Short">fps</s:String>
     <s:String x:Key="S.Recorder.Fps.Range">Varieert van 1 tot 60 fps, met hogere waarden voor meer vastgelegde frames per seconde. &#10;Elke stap vertegenwoordigt 16 milliseconden verschil.</s:String>
@@ -550,6 +585,7 @@
     <s:String x:Key="S.Recorder.PreStart">Aftellen</s:String>
     <s:String x:Key="S.Recorder.Paused">ScreenToGif (gepauzeerd)</s:String>
     <s:String x:Key="S.Recorder.Stopping">Stoppen...</s:String>
+    <s:String x:Key="S.Recorder.PreStarting">Opstarten...</s:String>
     
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible">Het was niet mogelijk om het scherm vast te leggen</s:String>
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">Het was niet mogelijk om het scherm vast te leggen. De opnamemethode heeft na 5 pogingen geen frame geretourneerd.</s:String>
@@ -559,8 +595,18 @@
     
     <!--New recorder-->
     <s:String x:Key="S.Recorder.Area">Gebied</s:String>
+    <s:String x:Key="S.Recorder.Area.Select">Selecteer een gebied</s:String>
     <s:String x:Key="S.Recorder.Window">Venster</s:String>
+    <s:String x:Key="S.Recorder.Window.Select">Selecteer een venster</s:String>
     <s:String x:Key="S.Recorder.Screen">Scherm</s:String>
+    <s:String x:Key="S.Recorder.Screen.Select">Selecteer een scherm</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Internal">Intern schemr</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Generic">Algemeen scherm</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Info1">Grafische adapter: {0}</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Info2">Resolutie: {0} x {1}</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Info3">Natuurlijke resolutie: {0} x {1}</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Info4">DPI: {0} ({1:0.###)%)</s:String>
+    <s:String x:Key="S.Recorder.Move">Sleep om de selectie&#10;te verplaatsen.</s:String>
     <s:String x:Key="S.Recorder.Accept">Accepteren</s:String>
     <s:String x:Key="S.Recorder.Retry">Opnieuw proberen</s:String>
     <s:String x:Key="S.Recorder.Retry.Shortcut">Rechtermuisklik</s:String>
@@ -570,6 +616,12 @@
     <s:String x:Key="S.Recorder.SelectWindow">Klik hier om dit venster te selecteren</s:String>
     <s:String x:Key="S.Recorder.SelectScreen">Klik hier om dit scherm te selecteren</s:String>
     <s:String x:Key="S.Recorder.EscToCancel">Druk Esc om te annuleren</s:String>
+    <s:String x:Key="S.Recorder.Splash.Title">Druk op {0} om de opname te stoppen</s:String>
+    <s:String x:Key="S.Recorder.Splash.Subtitle">Het opnamevenster wordt geminimaliseerd,&#10;herstel het of druk op {0} om de opname te pauzeren</s:String>
+    
+    <s:String x:Key="S.Recorder.Discard.Title">Opname weggooien</s:String>
+    <s:String x:Key="S.Recorder.Discard.Instruction">Weet je zeker dat je de opname wilt verwijderen?</s:String>
+    <s:String x:Key="S.Recorder.Discard.Message">Met deze actie wordt de opname verwijderd en worden alle frames verwijderd. &#10;Je kunt deze bewerking niet ongedaan maken.</s:String>
     
     <!--Webcam recorder-->
     <s:String x:Key="S.Webcam.Title">ScreenToGif - Webcam Recorder</s:String>
@@ -951,6 +1003,7 @@
     <s:String x:Key="S.Editor.ChangingDelay">Vertraging aanpassen</s:String>
     <s:String x:Key="S.Editor.ApplyingTransition">Overgangseffect toepassen</s:String>
     <s:String x:Key="S.Editor.PreparingSaving">Opslaan voorbereiden</s:String>
+    <s:String x:Key="S.Editor.CancelDiscard">Annuleer het laden en gooi het project weg.</s:String>
 
     <!--Editor • Frame list-->
     <s:String x:Key="S.Editor.List.Frame">Frame:</s:String>
@@ -1041,6 +1094,11 @@
     <s:String x:Key="S.Resize.NewProperties">Nieuwe eigenschappen</s:String>
     <s:String x:Key="S.Resize.Dpi2">DPI:</s:String>
     <s:String x:Key="S.Resize.KeepAspect">Beeldverhouding behouden.</s:String>
+    <s:String x:Key="S.Resize.Options">Options</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality">Schaalkwaliteit:</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Fant">Fant (hogere kwaliteit)</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Linear">Lineair (lagere kwaliteit)</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.NearestNeighbor">Naaste buur (lagere kwaliteit en sneller)</s:String>
     <s:String x:Key="S.Resize.Warning">Kies een andere waarde om de grootte aan te passen.</s:String>
     
     <!--Editor • Crop-->
@@ -1140,6 +1198,7 @@
     <s:String x:Key="S.Shapes.Shapes">Vormen</s:String>
     <s:String x:Key="S.Shapes.Shapes.Radius">Radius:</s:String>
     <s:String x:Key="S.Shapes.Shapes.Dashes">Arcering:</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Dashes.Info">Bepaalt de lengte van de streepjes en de tussenruimte. &#10;Je kunt beide maten instellen om een eigen streepjespatroon te creëren. &#10;De standaardwaarde is "1 0" of leeg, wat resulteert in een streepje zonder tussenruimte.</s:String>
     <s:String x:Key="S.Shapes.Shapes.ResetRotatio">Rotatie herstellen</s:String>
     <s:String x:Key="S.Shapes.Shapes.Remove">Verwijderen</s:String>
     <s:String x:Key="S.Shapes.Fill">Vulling</s:String>
@@ -1169,10 +1228,20 @@
     <s:String x:Key="S.Shadow.Depth">Diepte:</s:String>
     
     <!--Editor • Obfuscate-->
+    <s:String x:Key="S.Obfuscate.Type.Pixelate">Korrelig maken</s:String>
+    <s:String x:Key="S.Obfuscate.Type.Blur">Vervagen</s:String>
+    <s:String x:Key="S.Obfuscate.Type.Darken">Donkerder maken</s:String>
+    <s:String x:Key="S.Obfuscate.Type.Lighten">Lichter maken</s:String>
     <s:String x:Key="S.Obfuscate.Options">Verduisteringsopties (korreligheid)</s:String>
     <s:String x:Key="S.Obfuscate.PixelSize">Pixelgrootte:</s:String>
+    <s:String x:Key="S.Obfuscate.BlurLevel">Vervagingsniveau:</s:String>
+    <s:String x:Key="S.Obfuscate.DarkenLevel">Verduistering:</s:String>
+    <s:String x:Key="S.Obfuscate.LightenLevel">Verlichtingsniveau:</s:String>
     <s:String x:Key="S.Obfuscate.UseAverage">Bereken de gemiddelde kleur voor elke korrelig blok.</s:String>
+    <s:String x:Key="S.Obfuscate.Invert">Pas de verduistering toe op de inverse van de selectie.</s:String>
+    <s:String x:Key="S.Obfuscate.Smoothness">Gladheid</s:String>
     <s:String x:Key="S.Obfuscate.Info">Selecteer een rechthoek die korrelig gemaakt moet worden.</s:String>
+    <s:String x:Key="S.Obfuscate.Info2">Gebruik het selectiegereedschap om het deel van het frame te selecteren dat niet mag worden verduisterd.</s:String>
     <s:String x:Key="S.Obfuscate.Warning">Er is niets geselecteerd. Selecteer een rechthoek die korrelig gemaakt moet worden.</s:String>
     
     <!--Editor • Progress-->
