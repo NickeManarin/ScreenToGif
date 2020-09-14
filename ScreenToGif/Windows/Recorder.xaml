@@ -12,7 +12,7 @@
                Height="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderHeight, Mode=TwoWay}" 
                FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}"
                Loaded="Window_Loaded" Closing="Window_Closing" Activated="Window_Activated" KeyDown="Window_KeyDown">
-
+    
     <Window.Resources>
         <Storyboard x:Key="ShowDiscardStoryboard">
             <BooleanAnimationUsingKeyFrames Storyboard.TargetName="DiscardButton" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
@@ -92,7 +92,7 @@
                                      Description="{DynamicResource S.Recorder.Pause}" CommandTarget="{Binding ElementName=PauseButton}"
                                      Visibility="{Binding ElementName=PauseButton, Path=Visibility, Mode=OneWay}">
                         <ThumbButtonInfo.ImageSource>
-                            <DrawingImage Drawing="{Binding Source={StaticResource Vector.Stop}, Path=Drawing, Mode=OneTime}"/>
+                            <DrawingImage Drawing="{Binding Source={StaticResource Vector.Pause}, Path=Drawing, Mode=OneTime}"/>
                         </ThumbButtonInfo.ImageSource>
                     </ThumbButtonInfo>
                     

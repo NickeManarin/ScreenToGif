@@ -8,6 +8,7 @@ using System.Windows.Documents;
 using System.Xml.Linq;
 using ScreenToGif.Controls;
 using ScreenToGif.Model;
+using ScreenToGif.Native;
 using ScreenToGif.Util;
 
 namespace ScreenToGif.Windows.Other
@@ -54,7 +55,7 @@ namespace ScreenToGif.Windows.Other
                 IsInstaller = Directory.EnumerateFiles(AppDomain.CurrentDomain.BaseDirectory).Any(x => x.ToLowerInvariant().EndsWith("screentogif.visualelementsmanifest.xml"));
 
                 VersionRun.Text = $"{LocalizationHelper.Get("S.Updater.Version")} {Global.UpdateAvailable.Version}";
-                SizeRun.Text = !UserSettings.All.PortableUpdate ? (Global.UpdateAvailable.InstallerSize > 0 ? Humanizer.BytesToString(Global.UpdateAvailable.InstallerSize) : "") : 
+                SizeRun.Text = !UserSettings.All.PortableUpdate ? (Global.UpdateAvailable.InstallerSize > 0 ? Humanizer.BytesToString(Global.UpdateAvailable.InstallerSize) : "") :
                     (Global.UpdateAvailable.PortableSize > 0 ? Humanizer.BytesToString(Global.UpdateAvailable.PortableSize) : "");
                 TypeRun.Text = IsInstaller ? LocalizationHelper.Get("S.Updater.Installer") : LocalizationHelper.Get("S.Updater.Portable");
 
@@ -78,6 +79,8 @@ namespace ScreenToGif.Windows.Other
                     run.SetResourceReference(Run.TextProperty, "S.Updater.Info.NewVersionAvailable");
                     WhatsNewParagraph.Inlines.Add(run);
                 }
+
+                DocumentViewer.UpdateLayout();
 
                 //If set to force the download the portable version of the app, check if it was downloaded.
                 if (UserSettings.All.PortableUpdate)
@@ -133,6 +136,18 @@ namespace ScreenToGif.Windows.Other
                 LogWriter.Log(ex, "Impossible to load the download details");
                 StatusBand.Error(LocalizationHelper.Get("S.Updater.Warning.Show"));
             }
+            finally
+            {
+                Height = ActualHeight;
+                SizeToContent = SizeToContent.Width;
+                Width = ActualWidth;
+                SizeToContent = SizeToContent.Manual;
+
+                MaxHeight = double.PositiveInfinity;
+                MaxWidth = double.PositiveInfinity;
+
+                CenterOnScreen();
+            }
         }
 
         private async void DownloadButton_Click(object sender, RoutedEventArgs e)
@@ -174,7 +189,7 @@ namespace ScreenToGif.Windows.Other
                 DialogResult = true;
                 return;
             }
-            
+
             DownloadProgressBar.Visibility = Visibility.Visible;
             RunAfterwardsCheckBox.Visibility = Visibility.Collapsed;
 
@@ -183,7 +198,7 @@ namespace ScreenToGif.Windows.Other
             //If cancelled.
             if (!IsLoaded)
                 return;
-                
+
             if (!result)
             {
                 DownloadButton.IsEnabled = true;
@@ -213,6 +228,24 @@ namespace ScreenToGif.Windows.Other
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Global.UpdateAvailable.TaskCompletionSource = null;
+        }
+
+
+        private void CenterOnScreen()
+        {
+            //Since the list of monitors could have been changed, it needs to be queried again.
+            var monitors = Monitor.AllMonitorsGranular();
+
+            //Detect closest screen to the point (previously selected top/left point or current mouse coordinate).
+            var point = new Point((int)Left, (int)Top);
+            var closest = monitors.FirstOrDefault(x => x.Bounds.Contains(point)) ?? monitors.FirstOrDefault(x => x.IsPrimary) ?? monitors.FirstOrDefault();
+
+            if (closest == null)
+                throw new Exception("It was not possible to get a list of known screens.");
+
+            //Move the window to the correct location.
+            Left = closest.WorkingArea.Left + closest.WorkingArea.Width / 2d - ActualWidth / 2d;
+            Top = closest.WorkingArea.Top + closest.WorkingArea.Height / 2d - ActualHeight / 2d;
         }
     }
 }

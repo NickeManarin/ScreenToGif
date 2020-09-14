@@ -68,7 +68,7 @@ namespace ScreenToGif
                 Argument.Prepare(e.Args);
 
             LocalizationHelper.SelectCulture(UserSettings.All.LanguageCode);
-            ThemeHelper.SelectTheme(UserSettings.All.MainTheme.ToString());
+            ThemeHelper.SelectTheme(UserSettings.All.MainTheme);
 
             #region If set, it allows only one instance per user
 
@@ -225,7 +225,8 @@ namespace ScreenToGif
             //var test = new TestField(); test.ShowDialog(); return;
             //var test = new Windows.EditorEx(); test.ShowDialog(); return;
             //var test = new Windows.NewWebcam(); test.ShowDialog(); return;
-
+            //var test = Settings.UserSettings.All.StartupTop;
+            
             #region Tasks
 
             Task.Factory.StartNew(MainViewModel.ClearTemporaryFiles, TaskCreationOptions.LongRunning);

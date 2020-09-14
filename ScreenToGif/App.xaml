@@ -12,6 +12,7 @@
 
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Resources/Vectors.xaml"/>
+                <ResourceDictionary Source="/Resources/Glyphs.xaml"/>
                 <ResourceDictionary Source="/Resources/Backgrounds.xaml"/>
                 <ResourceDictionary Source="/Resources/Commands.xaml"/>
                 <ResourceDictionary Source="/Resources/Settings.xaml"/>
@@ -21,7 +22,7 @@
                 <ResourceDictionary Source="/Themes/Colors/Dark.xaml"/>
                 <ResourceDictionary Source="/Themes/Colors/Medium.xaml"/>
                 <ResourceDictionary Source="/Themes/Colors/Light.xaml"/>
-
+                
                 <ResourceDictionary Source="/Themes/DataGrid.xaml"/>
                 <ResourceDictionary Source="/Themes/Button.xaml"/>
                 <ResourceDictionary Source="/Themes/Common.xaml"/>

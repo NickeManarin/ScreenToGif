@@ -31,6 +31,7 @@
     <s:String x:Key="S.Margin">Margó:</s:String>
     <s:String x:Key="S.Padding">Kitöltés:</s:String>
     <s:String x:Key="S.MinHeight">Minimális magasság:</s:String>
+    <s:String x:Key="S.AndOr">és / vagy</s:String>
     
     <!--Warning messages-->
     <s:String x:Key="S.Crash">Ó ne, az alkalmazás összeomlott :(</s:String>
@@ -44,6 +45,9 @@
     <s:String x:Key="S.Exiting.Title">ScreenToGif bezárása</s:String>
     <s:String x:Key="S.Exiting.Instruction">Biztos vagy benne, hogy ki akarsz lépni?</s:String>
     <s:String x:Key="S.Exiting.Message">Minden ablak bezárul, és a tálca ikonja eltávolításra kerül.</s:String>
+    
+    <!--Keys-->
+    <s:String x:Key="S.Keys.Space">Szóköz</s:String>
     
     <!--Tray icon-->
     <s:String x:Key="S.NewRecording">Új képernyőfelvétel</s:String>
@@ -149,6 +153,7 @@
     <s:String x:Key="S.Updater.RunAfter">Az alkalmazás végrehajtása a frissítés után.</s:String>
     <s:String x:Key="S.Updater.Download">Letölt</s:String>
     <s:String x:Key="S.Updater.Install">Telepít</s:String>
+    <s:String x:Key="S.Updater.InstallManually">Manuális telepítés</s:String>
     <s:String x:Key="S.Updater.Downloading">Letöltés...</s:String>
     <s:String x:Key="S.Updater.Warning.Show">A letöltés részleteit nem lehetett megjeleníteni.</s:String>
     <s:String x:Key="S.Updater.Warning.Download">A frissítés letöltése nem volt lehetséges.</s:String>
@@ -225,6 +230,8 @@
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(A frissített fordítások letöltése és telepítése automatikusan megtörténik)</s:String>
     <s:String x:Key="S.Options.App.General.CheckForUpdates">Frissítések ellenőrzése indításkor.</s:String>
     <s:String x:Key="S.Options.App.General.UpdateOnClose">Az alkalmazás bezárása után automatikusan telepíti a frissítéseket.</s:String>
+    <s:String x:Key="S.Options.App.General.PortableUpdate">Kényszerítse a hordozható verzió letöltését.</s:String>
+    <s:String x:Key="S.Options.App.General.PortableUpdate.Info">(Kézi telepítést igényel a futtatható fájl kibontásával és cseréjével)</s:String>
     <s:String x:Key="S.Options.App.General.ForceUpdateAsAdmin">A frissítés kényszerítése emelt szintű jogosultságokkal való futtatásra.</s:String>
     <s:String x:Key="S.Options.App.General.PromptToInstall">A telepítés megkezdése előtt figyelmeztessen.</s:String>
 
@@ -236,6 +243,8 @@
     <s:String x:Key="S.Options.Recorder.Frequency">Rögzítési gyakoriság</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Manual">Kézi</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Manual.Info">Mindegyik képkockát manuálisan rögzíted, a rögzítés gomb vagy az ezzel egyenértékű billentyűparancs megnyomásával.</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Interaction">Felhasználói interakció</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Interaction.Info">A képkockák minden alkalommal rögzítésre kerülnek, amikor kattintasz vagy beírsz valamit.</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Second">Másodpercenként</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Second.Info">A képkockák "másodpercenkénti" alapon lesznek rögzítve,&#10;a felvevő képernyőjén beállított képkockasebesség-nevező alapján.</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Minute">Percenként</s:String>
@@ -262,23 +271,47 @@
     <s:String x:Key="S.Options.Recorder.Compression.NoCompression.Info">(A képkockák rögzítése közben nem kell tömörítést végezni)</s:String>
     <s:String x:Key="S.Options.Recorder.CacheSize">Gyorsítótár mérete:</s:String>
     <s:String x:Key="S.Options.Recorder.CacheSize.Info">(MB-ban. E méret elérése után az adatokat a lemezre írják / ürítik)</s:String>
+    <s:String x:Key="S.Options.Recorder.PreventBlackFrames">Megakadályozza a teljesen fekete képkockák rögzítését.</s:String>
+    <s:String x:Key="S.Options.Recorder.PreventBlackFrames.Info">(Megakadályozza, hogy a BitBlt a memóriagyorsítótárral tévesen olyan képkockákat eredményezzen, amelyeken az összes képpont fekete)</s:String>
     <s:String x:Key="S.Options.Recorder.RecordMouse">Az egérmutató megjelenítése a felvételen.</s:String>
     <s:String x:Key="S.Options.Recorder.SelectCursorColor">A kurzor színének kiválasztása</s:String>
-    <s:String x:Key="S.Options.Recorder.PreStart">Használjon indítás előtti visszaszámlálást.</s:String>
-    <s:String x:Key="S.Options.Recorder.PreStart.Info">(Másodpercben, várakozás a rögzítés megkezdése előtt)</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate">Rögzített képkockasebesség.</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Állandó késleltetés, amely nem változik a felvételi késéssel)</s:String>
+    <s:String x:Key="S.Options.Recorder.CaptureChanges">Csak akkor rögzítsen, ha valami megváltozik.</s:String>
+    <s:String x:Key="S.Options.Recorder.CaptureChanges.Info">(Egy képkocka csak akkor lesz rögzítve, ha valami módosul a rögzítési területen belül)</s:String>
     <s:String x:Key="S.Options.Recorder.RemoteImprovement">A rögzítési teljesítmény javítása távoli asztali kapcsolaton.</s:String>
     <s:String x:Key="S.Options.Recorder.RemoteImprovement.Info">(Letiltja a réteges ablakrögzítést)</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording">Engedélyezze az aszinkron felvételt.</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(Ez segít csökkenteni a felület akadozását a felvétel közben)</s:String>
+    
+    <s:String x:Key="S.Options.Recorder.Guidelines">Segédvonalak</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds">Harmadszabály</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds.Info">Ide kattintva válthatod a&#10;harmadszabály-segédvonal megjelenítését.</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.Crosshair">Célkereszt</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.Crosshair.Info">Ide kattintva válthatod a&#10;célkereszt-segédvonal megjelenítését.</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.Info">A segédvonalak csak akkor jelennek meg, ha a felvevő szünetel vagy le van állítva.</s:String>
+    
     <s:String x:Key="S.Options.Recorder.HideTitleBar">A címsor elrejtése (vékony mód).</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier">A képernyő nagyító bekapcsolása</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier.Info">(Ez bekapcsol egy nagyítót, miközben kiválasztod a felvételi területet)</s:String>
+    <s:String x:Key="S.Options.Recorder.AnimateBorder">Kijelölés közben animálja a képernyőterület szegélyét.</s:String>
+    <s:String x:Key="S.Options.Recorder.AnimateBorder.Info">(Animálás a "menetelő hangyák" stílus használatával)</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionPanning">Kijelölés pásztázásának engedélyezése.</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionPanning.Info">(A kijelölés sarkának közelében egy díszítőt jelenít meg, amely lehetővé teszi a felvételi terület mozgatását)</s:String>
+    <s:String x:Key="S.Options.Recorder.Compact">Kompakt mód.</s:String>
+    <s:String x:Key="S.Options.Recorder.Compact.Info">(A felvevő vezérlőpanel egy kisebb verzióját jeleníti meg)</s:String>
+    <s:String x:Key="S.Options.Recorder.DisplayDiscard">Az elvetés gomb megjelenítése felvétel közben is.</s:String>
+    <s:String x:Key="S.Options.Recorder.DisplayDiscard.Info">(Normál esetben csak szüneteltetés alatt látható)</s:String>
+    
+    <s:String x:Key="S.Options.Recorder.RememberSize">A felvételi terület előző méretének megjegyzése.</s:String>
+    <s:String x:Key="S.Options.Recorder.RememberPosition">Emlékezzen a felvételi terület előző helyére.</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart">Használjon indítás előtti visszaszámlálást.</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart.Info">(Másodpercben, várakozás a rögzítés megkezdése előtt)</s:String>
     <s:String x:Key="S.Options.Recorder.CursorFollowing">Kurzor követésének bekapcsolása</s:String>
     <s:String x:Key="S.Options.Recorder.CursorFollowing.Info">(A felvételi terület magától áthelyezésre kerül a kurzor helye alapján)</s:String>
     <s:String x:Key="S.Options.Recorder.FollowMargin.Info">(Puffermargó képpontokban, ahol a felvételi terület áthelyeződik)</s:String>
     <s:String x:Key="S.Options.Recorder.FollowMarginInvisible.Info">(További puffermargó képpontokban, ahol a felhasználói felület elrejtőzik)</s:String>
+    <s:String x:Key="S.Options.Recorder.NotifyRecordingDiscard">Kérdés a felvétel elvetése előtt.</s:String>
 
     <!--Options • Editor-->
     <s:String x:Key="S.Options.Editor.Previewer">Előnézet háttere</s:String>
@@ -530,12 +563,14 @@
     <s:String x:Key="S.Recorder.Continue">Folytatás</s:String>
     <s:String x:Key="S.Recorder.Stop">Megállítás</s:String>
     <s:String x:Key="S.Recorder.Discard">Elvetés</s:String>
-    <s:String x:Key="S.Recorder.Snap">Igazítás</s:String>
+    <s:String x:Key="S.Recorder.Snap">Pillanatfelvétel</s:String>
     <s:String x:Key="S.Recorder.Height">Magasság</s:String>
     <s:String x:Key="S.Recorder.Width">Szélesség</s:String>
+    <s:String x:Key="S.Recorder.CursorFollowing">A kurzorkövetés engedélyezve van.</s:String>
 
-    <s:String x:Key="S.Recorder.SwitchFrequency">Ide kattintva válthat a rögzítési frekvenciamódok között.</s:String>
+    <s:String x:Key="S.Recorder.SwitchFrequency">Ide kattintva válthatsz a rögzítési frekvenciamódok között.</s:String>
     <s:String x:Key="S.Recorder.Manual.Short">kézi</s:String>
+    <s:String x:Key="S.Recorder.Interaction.Short">interakciók</s:String>
     <s:String x:Key="S.Recorder.Fps">Maximális képkocka/másodperc</s:String>
     <s:String x:Key="S.Recorder.Fps.Short">képkocka/másodperc</s:String>
     <s:String x:Key="S.Recorder.Fps.Range">1 és 60 képkocka/másodperc közötti tartomány, a magasabb érték azt jelenti, hogy több képkocka lesz rögzítve.&#10;Minden növekmény 16 ezredmásodperc különbséget jelent.</s:String>
@@ -550,6 +585,7 @@
     <s:String x:Key="S.Recorder.PreStart">Kezdés előtt</s:String>
     <s:String x:Key="S.Recorder.Paused">ScreenToGif (szüneteltetve)</s:String>
     <s:String x:Key="S.Recorder.Stopping">Megállítás...</s:String>
+    <s:String x:Key="S.Recorder.PreStarting">Előindítás...</s:String>
     
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible">Nem lehetett rögzíteni a képernyőt</s:String>
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">Nem lehetett rögzíteni a képernyőt. A rögzítési módszer 5 próbálkozás után nem adott vissza képkockát.</s:String>
@@ -559,8 +595,18 @@
     
     <!--New recorder-->
     <s:String x:Key="S.Recorder.Area">Terület</s:String>
+    <s:String x:Key="S.Recorder.Area.Select">Egy terület kijelölése</s:String>
     <s:String x:Key="S.Recorder.Window">Ablak</s:String>
+    <s:String x:Key="S.Recorder.Window.Select">Egy ablak kijelölése</s:String>
     <s:String x:Key="S.Recorder.Screen">Képernyő</s:String>
+    <s:String x:Key="S.Recorder.Screen.Select">Egy képernyő kijelölése</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Internal">Belső képernyő</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Generic">Általános képernyő</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Info1">Videókártya: {0}</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Info2">Felbontás: {0} x {1}</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Info3">Natív felbontás: {0} x {1}</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Info4">DPI: {0} ({1:0.##}%)</s:String>
+    <s:String x:Key="S.Recorder.Move">Húzással helyezd át&#10;a kijelölést.</s:String>
     <s:String x:Key="S.Recorder.Accept">Elfogad</s:String>
     <s:String x:Key="S.Recorder.Retry">Újra</s:String>
     <s:String x:Key="S.Recorder.Retry.Shortcut">Jobb klikk</s:String>
@@ -570,6 +616,12 @@
     <s:String x:Key="S.Recorder.SelectWindow">Kattints ide ezen ablak kiválasztásához</s:String>
     <s:String x:Key="S.Recorder.SelectScreen">Kattints ide ezen képernyő kiválasztásához</s:String>
     <s:String x:Key="S.Recorder.EscToCancel">A megszakításhoz nyomd le az Esc billentyűt</s:String>
+    <s:String x:Key="S.Recorder.Splash.Title">Nyomja meg a(z) {0} a felvétel leállításához</s:String>
+    <s:String x:Key="S.Recorder.Splash.Subtitle">A felvevő ablak kis méretűre lesz állítva,&#10;állítsd vissza, vagy nyomd meg a(z) {0} gombot a rögzítés szüneteltetéséhez</s:String>
+    
+    <s:String x:Key="S.Recorder.Discard.Title">Felvétel elvetése</s:String>
+    <s:String x:Key="S.Recorder.Discard.Instruction">Biztosan elveted a felvételt?</s:String>
+    <s:String x:Key="S.Recorder.Discard.Message">Ez a művelet elveti a felvételt, és eltávolítja az összes képkockát.&#x0d;A művelet nem vonható vissza.</s:String>
     
     <!--Webcam recorder-->
     <s:String x:Key="S.Webcam.Title">ScreenToGif - Webkamera-felvevő</s:String>
@@ -951,6 +1003,7 @@
     <s:String x:Key="S.Editor.ChangingDelay">A késleltetés módosítása</s:String>
     <s:String x:Key="S.Editor.ApplyingTransition">Az áttűnési hatás alkalmazása</s:String>
     <s:String x:Key="S.Editor.PreparingSaving">Mentés előkészítése</s:String>
+    <s:String x:Key="S.Editor.CancelDiscard">A betöltés megszakítása és a projekt elvetése.</s:String>
 
     <!--Editor • Frame list-->
     <s:String x:Key="S.Editor.List.Frame">Képkocka:</s:String>
@@ -1041,6 +1094,11 @@
     <s:String x:Key="S.Resize.NewProperties">Új tulajdonságok</s:String>
     <s:String x:Key="S.Resize.Dpi2">DPI:</s:String>
     <s:String x:Key="S.Resize.KeepAspect">Képarány megtartása.</s:String>
+    <s:String x:Key="S.Resize.Options">Beállítások</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality">Méretezés minősége:</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Fant">Fant (jobb minőségű)</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Linear">Lineáris (gyengébb minőség)</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.NearestNeighbor">Legközelebbi szomszéd (gyengébb minőségű és gyorsabb)</s:String>
     <s:String x:Key="S.Resize.Warning">Az Átméretezés művelet alkalmazásához másik értéket kell választanod.</s:String>
     
     <!--Editor • Crop-->
@@ -1139,7 +1197,8 @@
     <s:String x:Key="S.Shapes.Mode.Insert">Beilleszt</s:String>
     <s:String x:Key="S.Shapes.Shapes">Alakzatok</s:String>
     <s:String x:Key="S.Shapes.Shapes.Radius">Lekerekítés:</s:String>
-    <!--<s:String x:Key="S.Shapes.Shapes.Dashes">Dashes:</s:String>-->
+    <s:String x:Key="S.Shapes.Shapes.Dashes">Kötőjelek:</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Dashes.Info">A kötőjelek méretét és a hézagok méretét szabályozza.&#10;Több méretet is beállíthatsz bonyolult szaggatott stílus létrehozásához.&#10;Az alapértelmezett érték "1 0" vagy üres, ami hézagok nélküli kötőjelet jelent.</s:String>
     <s:String x:Key="S.Shapes.Shapes.ResetRotatio">Forgatás visszaállítása</s:String>
     <s:String x:Key="S.Shapes.Shapes.Remove">Eltávolítás</s:String>
     <s:String x:Key="S.Shapes.Fill">Kitöltés</s:String>
@@ -1169,10 +1228,20 @@
     <s:String x:Key="S.Shadow.Depth">Mélység:</s:String>
     
     <!--Editor • Obfuscate-->
+    <s:String x:Key="S.Obfuscate.Type.Pixelate">Pixelezés</s:String>
+    <s:String x:Key="S.Obfuscate.Type.Blur">Homályosítás</s:String>
+    <s:String x:Key="S.Obfuscate.Type.Darken">Sötétítés</s:String>
+    <s:String x:Key="S.Obfuscate.Type.Lighten">Világosítás</s:String>
     <s:String x:Key="S.Obfuscate.Options">Homályosítás beállítások</s:String>
     <s:String x:Key="S.Obfuscate.PixelSize">Pixel mérete:</s:String>
+    <s:String x:Key="S.Obfuscate.BlurLevel">Homályosítási szint:</s:String>
+    <s:String x:Key="S.Obfuscate.DarkenLevel">Sötétítési szint:</s:String>
+    <s:String x:Key="S.Obfuscate.LightenLevel">Világosítási szint:</s:String>
     <s:String x:Key="S.Obfuscate.UseAverage">Számítsa ki az egyes pixeles blokkok átlagos színét.</s:String>
+    <s:String x:Key="S.Obfuscate.Invert">Alkalmazza az elhomályosítást a kijelölés inverzére.</s:String>
+    <s:String x:Key="S.Obfuscate.Smoothness">Simaság</s:String>
     <s:String x:Key="S.Obfuscate.Info">A kiválasztó eszközzel válaszd ki a téglalapot, amelyet pixelezni kell.</s:String>
+    <s:String x:Key="S.Obfuscate.Info2">A kijelölőeszközzel jelöld ki a képkockának azt a részét, amelyet nem szabad elhomályosítani.</s:String>
     <s:String x:Key="S.Obfuscate.Warning">Nem választottál ki semmit. Kérlek, hogy a Kiválasztó eszköz használatával jelölj ki egy téglalapot, amit pixeleznél.</s:String>
     
     <!--Editor • Progress-->

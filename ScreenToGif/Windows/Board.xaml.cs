@@ -383,6 +383,10 @@ namespace ScreenToGif.Windows
 
         private void DiscardButton_Click(object sender, RoutedEventArgs e)
         {
+            if (UserSettings.All.NotifyRecordingDiscard && !Dialog.Ask(LocalizationHelper.Get("S.Recorder.Discard.Title"),
+                LocalizationHelper.Get("S.Recorder.Discard.Instruction"), LocalizationHelper.Get("S.Recorder.Discard.Message"), false))
+                return;
+
             _capture.Stop();
             FrameRate.Stop();
             FrameCount = 0;

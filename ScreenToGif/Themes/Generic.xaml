@@ -77,7 +77,7 @@
                                     <TextBlock Grid.Column="0" x:Name="CaptionText" Text="{TemplateBinding Title}" FontFamily="Segoe UI" FontSize="16" VerticalAlignment="Center"
                                                FontWeight="Regular" Margin="5,0,0,0" Foreground="{TemplateBinding Foreground}"/>
 
-                                    <TextBlock Grid.Column="1" Text="Click or press keys to capture" VerticalAlignment="Center" TextAlignment="Center" Margin="5" 
+                                    <TextBlock Grid.Column="1" Text="{DynamicResource S.Recorder.ClickOrPress}" VerticalAlignment="Center" TextAlignment="Center" Margin="5" 
                                                    Foreground="{DynamicResource Element.Foreground.Gray112}">
                                         <TextBlock.Visibility>
                                             <MultiBinding Converter="{StaticResource BoolAndToVisibility}">
@@ -3127,19 +3127,19 @@
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
 
-                                <TextBlock Grid.Row="0" x:Name="ElapsedTooltipTextBlock" Text="Elapsed capture time."/>
+                                <TextBlock Grid.Row="0" x:Name="ElapsedTooltipTextBlock" Text="{DynamicResource S.Recorder.Timer.Elapsed}"/>
 
                                 <TextBlock Grid.Row="1" x:Name="AutomaticTooltipTextBlock">
-                                    <Run Text="Total frame count:"/>
+                                    <Run Text="{DynamicResource S.Recorder.Timer.Total}"/>
                                     <Run Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=CapturedCount, StringFormat={}{0:N0}}"/>
                                 </TextBlock>
 
                                 <TextBlock Grid.Row="2" x:Name="ManualTooltipTextBlock">
-                                    <Run Text="Captured manually:"/>
+                                    <Run Text="{DynamicResource S.Recorder.Timer.Manual}"/>
                                     <Run Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ManuallyCapturedCount, StringFormat={}{0:N0}}"/>
                                 </TextBlock>
 
-                                <TextBlock Grid.Row="3" x:Name="PausedTooltipTextBlock" Text="The capture is paused." Visibility="Collapsed"/>
+                                <TextBlock Grid.Row="3" x:Name="PausedTooltipTextBlock" Text="{DynamicResource S.Recorder.Timer.Paused}" Visibility="Collapsed"/>
                             </Grid>
                         </Border.ToolTip>
                         

@@ -581,11 +581,17 @@
     <s:String x:Key="S.Recorder.Fph.Short">qph</s:String>
     <s:String x:Key="S.Recorder.Fph.Range">Pode variar de 1 até 60 qph, com valores mais altos significando que mais quadros serão capturados.&#10;Cada incremento representa 1 minuto de diferença.</s:String>
     
+    <s:String x:Key="S.Recorder.ClickOrPress">Clique ou pressione teclas para capturar</s:String>
     <s:String x:Key="S.Recorder.SnapToWindow">Enquadre na Janela (Arraste e solte para enquadrar)</s:String>
     <s:String x:Key="S.Recorder.PreStart">Contagem Regressiva</s:String>
     <s:String x:Key="S.Recorder.Paused">ScreenToGif (Pausado)</s:String>
     <s:String x:Key="S.Recorder.Stopping">Parando...</s:String>
     <s:String x:Key="S.Recorder.PreStarting">Pré-iniciando...</s:String>
+    
+    <s:String x:Key="S.Recorder.Timer.Elapsed">Tempo de captura decorrido.</s:String>
+    <s:String x:Key="S.Recorder.Timer.Total">Quantidade total de quadros:</s:String>
+    <s:String x:Key="S.Recorder.Timer.Manual">Capturados manualmente:</s:String>
+    <s:String x:Key="S.Recorder.Timer.Paused">A captura está em pausa.</s:String>
     
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible">Não foi possível capturar a tela</s:String>
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">Não foi possível capturar a tela. O método de captura não retornou quadros após 5 tentativas.</s:String>

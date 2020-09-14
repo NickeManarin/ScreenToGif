@@ -59,8 +59,6 @@ namespace ScreenToGif.Util
                 File.Create(appData).Dispose();
             }
 
-            //TODO: When loading check version.
-            //Use migration schemes to go up or down versions.
 
             //Loads AppData settings.
             if (File.Exists(appData))

@@ -168,9 +168,7 @@ namespace ScreenToGif.Windows
 
             try
             {
-                var selected = AppThemeComboBox.SelectedValue?.ToString();
-
-                if (string.IsNullOrWhiteSpace(selected))
+                if (!(AppThemeComboBox.SelectedValue is AppTheme selected))
                     throw new Exception("No theme was selected.");
 
                 ThemeHelper.SelectTheme(selected);

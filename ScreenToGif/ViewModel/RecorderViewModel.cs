@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
 using ScreenToGif.Model;
 using ScreenToGif.Util;
 
@@ -20,9 +21,9 @@ namespace ScreenToGif.ViewModel
 
         #region Commands
 
-        private KeyGesture _recordKeyGesture = new KeyGesture(UserSettings.All.StartPauseShortcut, UserSettings.All.StartPauseModifiers);
-        private KeyGesture _stopKeyGesture = new KeyGesture(UserSettings.All.StopShortcut, UserSettings.All.StopModifiers);
-        private KeyGesture _discardKeyGesture = new KeyGesture(UserSettings.All.DiscardShortcut, UserSettings.All.DiscardModifiers);
+        private KeyGesture _recordKeyGesture = null;
+        private KeyGesture _stopKeyGesture = null;
+        private KeyGesture _discardKeyGesture = null;
 
         public KeyGesture RecordKeyGesture
         {
@@ -98,9 +99,16 @@ namespace ScreenToGif.ViewModel
 
         public void RefreshKeyGestures()
         {
-            RecordKeyGesture = new KeyGesture(UserSettings.All.StartPauseShortcut, UserSettings.All.StartPauseModifiers);
-            StopKeyGesture = new KeyGesture(UserSettings.All.StopShortcut, UserSettings.All.StopModifiers);
-            DiscardKeyGesture = new KeyGesture(UserSettings.All.DiscardShortcut, UserSettings.All.DiscardModifiers);
+            try
+            {
+                RecordKeyGesture = new KeyGesture(UserSettings.All.StartPauseShortcut, UserSettings.All.StartPauseModifiers);
+                StopKeyGesture = new KeyGesture(UserSettings.All.StopShortcut, UserSettings.All.StopModifiers);
+                DiscardKeyGesture = new KeyGesture(UserSettings.All.DiscardShortcut, UserSettings.All.DiscardModifiers);
+            }
+            catch (Exception e)
+            {
+                LogWriter.Log(e, "Impossible to set the key gestures for the recorder.");
+            }
         }
     }
 }

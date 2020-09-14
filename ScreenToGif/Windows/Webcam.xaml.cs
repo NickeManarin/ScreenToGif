@@ -416,11 +416,6 @@ namespace ScreenToGif.Windows
 
         #region Click Events
 
-        private void BackButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
         private void ScaleButton_Click(object sender, RoutedEventArgs e)
         {
             ScalePopup.IsOpen = true;
@@ -511,8 +506,36 @@ namespace ScreenToGif.Windows
             }
         }
 
+        internal void Pause()
+        {
+            try
+            {
+                if (Stage != Stage.Recording)
+                    return;
+
+                Stage = Stage.Paused;
+                Stage = Stage.Paused;
+                Title = LocalizationHelper.Get("S.Recorder.Paused");
+
+                DiscardButton.BeginStoryboard(FindResource("ShowDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
+
+                _timer.Stop();
+            }
+            catch (Exception e)
+            {
+                LogWriter.Log(e, "Impossible to pause the recording.");
+                ErrorDialog.Ok(Title, LocalizationHelper.Get("S.Recorder.Warning.StartPauseNotPossible"), e.Message, e);
+            }
+        }
+
         private void DiscardButton_Click(object sender, RoutedEventArgs e)
         {
+            Pause();
+
+            if (UserSettings.All.NotifyRecordingDiscard && !Dialog.Ask(LocalizationHelper.Get("S.Recorder.Discard.Title"),
+                LocalizationHelper.Get("S.Recorder.Discard.Instruction"), LocalizationHelper.Get("S.Recorder.Discard.Message"), false))
+                return;
+
             _timer.Stop();
             _frameCount = 0;
             Stage = Stage.Stopped;

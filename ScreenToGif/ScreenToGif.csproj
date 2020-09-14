@@ -326,7 +326,8 @@
     <Compile Include="Model\VideoSource.cs" />
     <Compile Include="Native\Monitor.cs" />
     <Compile Include="Settings\Migrations\IMigration.cs" />
-    <Compile Include="Settings\Migrations\Migration0to2_27.cs" />
+    <Compile Include="Settings\Migrations\Migration0to2_28.cs" />
+    <Compile Include="Settings\Migrations\Migrations.cs" />
     <Compile Include="Settings\UserSettings.cs" />
     <Compile Include="UserControls\ShadowPanel.xaml.cs">
       <DependentUpon>ShadowPanel.xaml</DependentUpon>
@@ -611,6 +612,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Flags.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Glyphs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

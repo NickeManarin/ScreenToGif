@@ -581,11 +581,17 @@
     <s:String x:Key="S.Recorder.Fph.Short">fph</s:String>
     <s:String x:Key="S.Recorder.Fph.Range">Ranges from 1 to 60 fph, with higher values meaning more frames will be captured.&#10;Each increment represents 1 minute of difference.</s:String>
     
+    <s:String x:Key="S.Recorder.ClickOrPress">Click or press keys to capture</s:String>
     <s:String x:Key="S.Recorder.SnapToWindow">Snap to Window (Drag and release to snap)</s:String>
     <s:String x:Key="S.Recorder.PreStart">Pre Start</s:String>
     <s:String x:Key="S.Recorder.Paused">ScreenToGif (Paused)</s:String>
     <s:String x:Key="S.Recorder.Stopping">Stopping...</s:String>
     <s:String x:Key="S.Recorder.PreStarting">Pre-starting...</s:String>
+    
+    <s:String x:Key="S.Recorder.Timer.Elapsed">Elapsed capture time.</s:String>
+    <s:String x:Key="S.Recorder.Timer.Total">Total frame count:</s:String>
+    <s:String x:Key="S.Recorder.Timer.Manual">Captured manually:</s:String>
+    <s:String x:Key="S.Recorder.Timer.Paused">The capture is paused.</s:String>
     
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible">It was not possible to capture the screen</s:String>
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">It was not possible to capture the screen. The capture method returned no frame after 5 tries.</s:String>

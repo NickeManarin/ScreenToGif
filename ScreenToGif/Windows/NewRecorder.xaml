@@ -33,19 +33,21 @@
                                      Description="{DynamicResource S.Recorder.Pause}" CommandTarget="{Binding ElementName=PauseButton}"
                                      Visibility="{Binding ElementName=PauseButton, Path=Visibility, Mode=OneWay}">
                         <ThumbButtonInfo.ImageSource>
-                            <DrawingImage Drawing="{Binding Source={StaticResource Vector.Stop}, Path=Drawing, Mode=OneTime}"/>
+                            <DrawingImage Drawing="{Binding Source={StaticResource Vector.Pause}, Path=Drawing, Mode=OneTime}"/>
                         </ThumbButtonInfo.ImageSource>
                     </ThumbButtonInfo>
 
                     <ThumbButtonInfo x:Name="StopLargeThumbInfo" Command="{Binding StopLargeCommand}" DismissWhenClicked="True" 
-                                     Description="{DynamicResource S.Recorder.Stop}" CommandTarget="{Binding ElementName=StopLargeButton}">
+                                     Description="{DynamicResource S.Recorder.Stop}" CommandTarget="{Binding ElementName=StopLargeButton}"
+                                     Visibility="{Binding ElementName=StopLargeButton, Path=Visibility, Mode=OneWay}">
                         <ThumbButtonInfo.ImageSource>
                             <DrawingImage Drawing="{Binding Source={StaticResource Vector.Stop}, Path=Drawing, Mode=OneTime}"/>
                         </ThumbButtonInfo.ImageSource>
                     </ThumbButtonInfo>
 
                     <ThumbButtonInfo x:Name="StopThumbInfo" Command="{Binding StopCommand}" DismissWhenClicked="True" 
-                                     Description="{DynamicResource S.Recorder.Stop}" CommandTarget="{Binding ElementName=StopButton}">
+                                     Description="{DynamicResource S.Recorder.Stop}" CommandTarget="{Binding ElementName=StopSmallButton}"
+                                     Visibility="{Binding ElementName=StopSmallButton, Path=Visibility, Mode=OneWay}">
                         <ThumbButtonInfo.ImageSource>
                             <DrawingImage Drawing="{Binding Source={StaticResource Vector.Stop}, Path=Drawing, Mode=OneTime}"/>
                         </ThumbButtonInfo.ImageSource>
@@ -93,7 +95,7 @@
                 <TextBlock Grid.Column="0" Text="{Binding ElementName=RecorderWindow, Path=Title, FallbackValue=ScreenToGif}" Margin="5,0,3,0"
                            VerticalAlignment="Center" FontSize="16" Foreground="{DynamicResource Element.Foreground.Header}"/>
 
-                <TextBlock Grid.Column="1" Text="Click or press keys to capture" VerticalAlignment="Center" TextAlignment="Center" Margin="5" 
+                <TextBlock Grid.Column="1" Text="{DynamicResource S.Recorder.ClickOrPress}" VerticalAlignment="Center" TextAlignment="Center" Margin="5" 
                            Foreground="{DynamicResource Element.Foreground.Gray112}">
                     <TextBlock.Visibility>
                         <MultiBinding Converter="{StaticResource BoolAndToVisibility}">
@@ -108,9 +110,9 @@
                 <Grid Grid.Column="3" Background="{StaticResource Vector.Cursor}" Margin="3,5" ToolTip="{DynamicResource S.Recorder.CursorFollowing}" Width="16"
                       Visibility="{Binding ElementName=RecorderWindow, Path=IsFollowing, Converter={StaticResource Bool2Visibility}}"/>
 
-                <n:ExtendedButton Grid.Column="4" x:Name="MinimizeButton" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Minimize}" 
+                <n:ExtendedButton Grid.Column="4" x:Name="MinimizeButton" Style="{StaticResource Style.Button.NoText}" Icon="{DynamicResource Vector.Minimize}" 
                                   Width="30" Padding="6" TabIndex="9" ContentHeight="14" ContentWidth="14" UseLayoutRounding="True" Click="MinimizeButton_Click"/>
-                <n:ExtendedButton Grid.Column="5" x:Name="CloseButton" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Close}" 
+                <n:ExtendedButton Grid.Column="5" x:Name="CloseButton" Style="{StaticResource Style.Button.NoText}" Icon="{DynamicResource Vector.Close}" 
                                   Width="30" Padding="6" TabIndex="10" ContentHeight="14" ContentWidth="14" UseLayoutRounding="True" Command="{Binding CloseCommand}"/>
             </Grid>
 
@@ -297,21 +299,21 @@
 
                 <!--Pause-->
                 <n:ExtendedButton Grid.Row="0" Grid.Column="6" Grid.RowSpan="2" x:Name="PauseButton" ContentHeight="24" ContentWidth="24" TabIndex="6" MinWidth="65"
-                               Text="{DynamicResource S.Recorder.Pause}" Icon="{StaticResource Vector.Pause}" Style="{StaticResource Style.Button.Vertical}" 
-                               Command="{Binding PauseCommand}" KeyGesture="{Binding RecordKeyGesture, Converter={StaticResource KeyGestureToString}, UpdateSourceTrigger=PropertyChanged}"
-                               Visibility="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled, Converter={StaticResource Bool2Visibility}}"/>
+                                  Text="{DynamicResource S.Recorder.Pause}" Icon="{StaticResource Vector.Pause}" Style="{StaticResource Style.Button.Vertical}" 
+                                  Command="{Binding PauseCommand}" KeyGesture="{Binding RecordKeyGesture, Converter={StaticResource KeyGestureToString}, UpdateSourceTrigger=PropertyChanged}"
+                                  Visibility="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled, Converter={StaticResource Bool2Visibility}}"/>
 
                 <!--Discard-->
                 <n:ExtendedButton Grid.Row="0" Grid.Column="7" x:Name="DiscardButton" ContentHeight="16" ContentWidth="16" TabIndex="7" MinWidth="65"
-                               Text="{DynamicResource S.Recorder.Discard}" Icon="{StaticResource Vector.Remove}" Style="{StaticResource Style.Button.Horizontal}" 
-                               Command="{Binding DiscardCommand}" KeyGesture="{Binding DiscardKeyGesture, Converter={StaticResource KeyGestureToString}, UpdateSourceTrigger=PropertyChanged}"
-                               Visibility="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled, Converter={StaticResource Bool2Visibility}, FallbackValue={x:Static Visibility.Collapsed}}"/>
+                                  Text="{DynamicResource S.Recorder.Discard}" Icon="{StaticResource Vector.Remove}" Style="{StaticResource Style.Button.Horizontal}" 
+                                  Command="{Binding DiscardCommand}" KeyGesture="{Binding DiscardKeyGesture, Converter={StaticResource KeyGestureToString}, UpdateSourceTrigger=PropertyChanged}"
+                                  Visibility="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled, Converter={StaticResource Bool2Visibility}, FallbackValue={x:Static Visibility.Collapsed}}"/>
 
                 <!--Stop (when recording)-->
                 <n:ExtendedButton Grid.Row="0" Grid.Column="7" Grid.RowSpan="2" x:Name="StopLargeButton" ContentHeight="24" ContentWidth="24" TabIndex="8" MinWidth="65"
-                               Text="{DynamicResource S.Recorder.Stop}" Icon="{StaticResource Vector.Stop}" Style="{StaticResource Style.Button.Vertical}" 
-                               Command="{Binding StopLargeCommand}" KeyGesture="{Binding StopKeyGesture, Converter={StaticResource KeyGestureToString}, UpdateSourceTrigger=PropertyChanged}"
-                               Visibility="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled, Converter={StaticResource Bool2Visibility}, FallbackValue={x:Static Visibility.Collapsed}}"/>
+                                  Text="{DynamicResource S.Recorder.Stop}" Icon="{StaticResource Vector.Stop}" Style="{StaticResource Style.Button.Vertical}" 
+                                  Command="{Binding StopLargeCommand}" KeyGesture="{Binding StopKeyGesture, Converter={StaticResource KeyGestureToString}, UpdateSourceTrigger=PropertyChanged}"
+                                  Visibility="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled, Converter={StaticResource Bool2Visibility}, FallbackValue={x:Static Visibility.Collapsed}}"/>
 
                 <!--Stop (when paused/manual capture)-->
                 <n:ExtendedButton Grid.Row="1" Grid.Column="7" x:Name="StopSmallButton" ContentHeight="16" ContentWidth="16" TabIndex="8" MinWidth="65"

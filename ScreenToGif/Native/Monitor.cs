@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows;
@@ -10,6 +11,8 @@ namespace ScreenToGif.Native
 {
     public class Monitor
     {
+
+
         #region Native
 
         [Flags]
@@ -148,7 +151,8 @@ namespace ScreenToGif.Native
                         continue;
                     
                     AdapterName = adapter;
-                    FriendlyName = string.IsNullOrWhiteSpace(display.DeviceString) ? "Internal screen" : display.DeviceString == "Generic PnP Monitor" ? "Generic screen" : display.DeviceString; //TODO: Localize
+                    FriendlyName = string.IsNullOrWhiteSpace(display.DeviceString) ? LocalizationHelper.Get("S.Recorder.Screen.Name.Internal") : 
+                        display.DeviceString == "Generic PnP Monitor" ? LocalizationHelper.Get("S.Recorder.Screen.Name.Generic") : display.DeviceString;
                     break;
                 }
             }

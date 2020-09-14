@@ -152,7 +152,7 @@
                     <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}">
                         <StackPanel Orientation="Horizontal" SnapsToDevicePixels="True" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Border Background="{TemplateBinding Icon}" Margin="2,0" Opacity="{DynamicResource Element.Opacity}"
-                                        Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
                             <TextBlock x:Name="TextBlockInternal" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" 
                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
@@ -499,7 +499,7 @@
                                     Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </Grid>
                     </Border>
-
+                    
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsKeyboardFocused" Value="True">
                             <Setter TargetName="InnerGrid" Property="Background" Value="{DynamicResource Brush.Button.Background.Focused}"/>

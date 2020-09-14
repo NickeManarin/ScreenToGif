@@ -4284,7 +4284,7 @@ namespace ScreenToGif.Windows
             }
             catch (Exception ex)
             {
-                LogWriter.Log(ex, "Frame Loading");
+                LogWriter.Log(ex, "Error in loading frames");
                 Dispatcher.Invoke(() => ErrorDialog.Ok(Title, "Error loading frames", "It was not possible to load all the frames.", ex));
 
                 return false;
@@ -4314,7 +4314,7 @@ namespace ScreenToGif.Windows
                 }
 
                 FrameListView.SelectedIndex = -1;
-                FrameListView.SelectedIndex = 0; //TODO: Get the latest selected frame is it's the same project.
+                FrameListView.SelectedIndex = 0; //TODO: Get the latest selected frame if it's the same project.
                 ZoomBoxControl.PixelSize = Project.Frames[0].Path.ScaledSize();
                 ZoomBoxControl.ImageScale = Project.Frames[0].Path.ScaleOf();
                 ZoomBoxControl.RefreshImage();

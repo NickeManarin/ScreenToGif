@@ -595,7 +595,7 @@ namespace ScreenToGif.Windows
                 if (Stage == Stage.Recording && args.IsInteraction && UserSettings.All.CaptureFrequency == CaptureFrequency.Interaction)
                 {
                     var controlHit = VisualTreeHelper.HitTest(this, Mouse.GetPosition(this));
-                    var selectionHit = VisualTreeHelper.HitTest(_regionSelection, Mouse.GetPosition(_regionSelection));
+                    var selectionHit = _regionSelection.IsVisible && _regionSelection.Opacity > 0 ? VisualTreeHelper.HitTest(_regionSelection, Mouse.GetPosition(_regionSelection)) : null;
                     
                     if (controlHit == null && selectionHit == null)
                         await Snap();
@@ -933,7 +933,7 @@ namespace ScreenToGif.Windows
             else
             {
                 MoveCommandPanel();
-                DisplaySelection();
+                DisplaySelection(null, UserSettings.All.RecorderModeIndex == (int)SelectControl.ModeType.Fullscreen);
             }
 
             #endregion
@@ -1024,7 +1024,7 @@ namespace ScreenToGif.Windows
 
             DetectCaptureFrequency();
             RegisterCommands();
-            DisplaySelection();
+            DisplaySelection(null, UserSettings.All.RecorderModeIndex == (int) SelectControl.ModeType.Fullscreen);
             MoveCommandPanel();
 
             //If not recording (or recording in manual/interactive mode, but with no frames captured yet), adjust the maximum bounds for the recorder.

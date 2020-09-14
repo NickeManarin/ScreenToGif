@@ -1,0 +1,38 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--Window vectors-->
+    <DrawingBrush x:Key="Vector.Back" Stretch="Uniform" AlignmentX="Center" AlignmentY="Center">
+        <DrawingBrush.Drawing>
+            <GeometryDrawing Brush="{DynamicResource Element.Glyph.Strong}" Geometry="F1 M 3.511,18.500 L 17.690,33.080 C 18.093,33.490 18.093,34.163 17.690,34.575 C 17.291,34.985 16.635,34.985 16.234,34.575 L 0.297,18.192 C 0.289,18.180 0.279,18.174 0.273,18.162 C 0.254,18.138 0.229,18.114 0.214,18.090 C 0.202,18.071 0.184,18.050 0.175,18.036 C 0.157,18.010 0.146,17.985 0.130,17.961 C 0.116,17.940 0.108,17.916 0.092,17.894 C 0.089,17.880 0.083,17.864 0.075,17.849 C 0.071,17.838 0.071,17.828 0.067,17.820 C 0.058,17.798 0.048,17.774 0.043,17.750 C 0.035,17.722 0.028,17.698 0.021,17.670 C 0.017,17.647 0.012,17.625 0.012,17.600 C 0.007,17.573 0.003,17.547 0,17.521 C 0,17.494 0,17.469 0,17.442 C 0,17.418 0,17.394 0,17.366 C 0.003,17.340 0.007,17.312 0.012,17.286 C 0.012,17.265 0.017,17.239 0.021,17.213 C 0.028,17.187 0.035,17.159 0.043,17.133 C 0.048,17.111 0.058,17.087 0.062,17.067 C 0.071,17.057 0.071,17.046 0.075,17.038 C 0.083,17.019 0.089,17.004 0.099,16.989 C 0.108,16.967 0.116,16.948 0.130,16.926 C 0.146,16.898 0.157,16.874 0.175,16.851 C 0.184,16.832 0.202,16.812 0.214,16.796 C 0.229,16.771 0.246,16.747 0.269,16.730 C 0.278,16.717 0.283,16.706 0.297,16.693 L 16.234,0.310 C 16.437,0.103 16.700,0 16.965,0 C 17.228,0 17.491,0.103 17.690,0.310 C 18.093,0.722 18.093,1.395 17.690,1.806 L 17.690,1.806 L 3.511,16.385 L 38.968,16.380 C 39.537,16.380 40,16.853 40,17.437 C 40,18.019 39.537,18.494 38.968,18.494"/>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+
+    <DrawingBrush x:Key="Vector.Close" Stretch="Uniform" AlignmentX="Center" AlignmentY="Center">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <GeometryDrawing Brush="{DynamicResource Element.Glyph.Strong}" Geometry="F1 M 38.199,40 L 0,1.801 L 1.801,0 L 40,38.199 L 38.199,40 Z"/>
+                <GeometryDrawing Brush="{DynamicResource Element.Glyph.Strong}" Geometry="F1 M 1.801,40 L 0,38.199 L 38.199,0 L 40,1.801 L 1.801,40 Z"/>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+
+    <DrawingBrush x:Key="Vector.Maximize" Stretch="Uniform" AlignmentX="Center" AlignmentY="Center">
+        <DrawingBrush.Drawing>
+            <GeometryDrawing Brush="{DynamicResource Element.Glyph.Strong}" Geometry="F1 M 2.659,37.328 L 37.344,37.328 L 37.344,2.672 L 2.659,2.672 L 2.659,37.328 L 2.659,37.328 Z M 40,40 L 0,40 L 0,0 L 40,0 L 40,40 L 40,40 Z"/>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+
+    <DrawingBrush x:Key="Vector.Minimize" Stretch="Uniform" AlignmentX="Center" AlignmentY="Center">
+        <DrawingBrush.Drawing>
+            <GeometryDrawing Brush="{DynamicResource Element.Glyph.Strong}" Geometry="F1 M 0,2.602 L 40,2.594 L 40,0 L 0,0.008 L 0,2.602 Z"/>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+
+    <DrawingBrush x:Key="Glyph.Up" Stretch="Uniform" AlignmentX="Center" AlignmentY="Center">
+        <DrawingBrush.Drawing>
+            <GeometryDrawing Brush="{DynamicResource Element.Glyph}" Geometry="F1M 10,0L0,9.534 2.608,13 10,6.067 17.391,13 20,9.534z"/>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    
+</ResourceDictionary>
