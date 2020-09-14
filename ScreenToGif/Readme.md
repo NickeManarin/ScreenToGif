@@ -17,6 +17,7 @@ _VS 2019 and .Net 4.8 or newer required._
 ♦ The 'Pause' button on the taskbar preview was using the 'Stop' icon (also, two Stop buttons were being displayed).  
 ♦ The window icons (minimize and close) were not being updated to match the selected theme (dark vs light).  
 ♦ The updater window was clipping outside of the screen (when the text inside was too big).  
+♦ The screen recorders were working on Windows 7.  
 ♦ Some texts were not translatable.  
 
 ### Known Bugs:
