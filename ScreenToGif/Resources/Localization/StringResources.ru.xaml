@@ -47,7 +47,7 @@
     <s:String x:Key="S.Exiting.Message">Все окна и значок в трее будут закрыты.</s:String>
     
     <!--Keys-->
-    <s:String x:Key="S.Keys.Space">Пространство</s:String>  
+    <s:String x:Key="S.Keys.Space">Пробел</s:String>  
     
     <!--Tray icon-->
     <s:String x:Key="S.NewRecording">Новая запись с экрана</s:String>
@@ -581,11 +581,17 @@
     <s:String x:Key="S.Recorder.Fph.Short">fph</s:String>
     <s:String x:Key="S.Recorder.Fph.Range">Диапазон от 1 до 60 кадров в час.</s:String>
     
+    <s:String x:Key="S.Recorder.ClickOrPress">Щелкните или нажмите клавиши захвата</s:String>
     <s:String x:Key="S.Recorder.SnapToWindow">Снимок окна (потяните и отпустите над окном)</s:String>
     <s:String x:Key="S.Recorder.PreStart">Подготовка</s:String>
     <s:String x:Key="S.Recorder.Paused">ScreenToGif (Пауза)</s:String>
     <s:String x:Key="S.Recorder.Stopping">Остановка...</s:String>
     <s:String x:Key="S.Recorder.PreStarting">Ожидание старта...</s:String>
+    
+    <s:String x:Key="S.Recorder.Timer.Elapsed">Время захвата.</s:String>
+    <s:String x:Key="S.Recorder.Timer.Total">Всего кадров:</s:String>
+    <s:String x:Key="S.Recorder.Timer.Manual">Ручной захват:</s:String>
+    <s:String x:Key="S.Recorder.Timer.Paused">Пауза захвата.</s:String>
     
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible">Не удалось захватить экран</s:String>
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">Не удалось захватить экран. Метод захвата не вернул ни одного кадра после 5 попыток.</s:String>
@@ -1336,7 +1342,7 @@
     <s:String x:Key="S.SaveAs.GifOptions.Sampling.Info">Фактор выборки:&#10;Значение 1 приведет к улучшению GIF,  но отрисовка будет медленнее.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Quality">Качество:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors">Цвета:</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">Макс. кол-во кадров (для каждого кадра):</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">Макс. кол-во цветов (для каждого кадра):</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable">Использовать глобальную таблицу цветов.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable.Info">Может уменьшить качество и/или размер GIF.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Loop">Циклы:</s:String>
