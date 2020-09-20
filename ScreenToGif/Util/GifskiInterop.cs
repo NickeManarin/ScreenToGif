@@ -15,10 +15,10 @@ namespace ScreenToGif.Util
         [StructLayout(LayoutKind.Sequential)]
         internal struct GifskiSettings
         {
-            public GifskiSettings(byte quality, bool looped, bool fast)
+            public GifskiSettings(uint width, uint height, byte quality, bool looped, bool fast)
             {
-                Width = 0;
-                Height = 0;
+                Width = width;
+                Height = height;
                 Quality = quality;
                 Once = !looped;
                 Fast = fast;
@@ -213,9 +213,9 @@ namespace ScreenToGif.Util
             #endregion
         }
 
-        internal IntPtr Start(int quality, bool looped = true, bool fast = false)
+        internal IntPtr Start(uint width, uint height, int quality, bool looped = true, bool fast = false)
         {
-            return _new(new GifskiSettings((byte)quality, looped, fast));
+            return _new(new GifskiSettings(width, height, (byte)quality, looped, fast));
         }
 
         internal GifskiError AddFrame(IntPtr handle, uint index, string path, int delay, double lastTimestamp = 0, bool isLast = false)

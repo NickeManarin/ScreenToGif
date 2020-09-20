@@ -5,20 +5,15 @@ This is the current project of ScreenToGif.
 _VS 2019 and .Net 4.8 or newer required._
 
 
-## What's new? (Version 2.27.1)
+## What's new? (Version 2.27.2)
 
-• Updated the Korean, Russian, Hungarian, French, Dutch, and Chinese (Simplified) translations.  
+• Just bug fixes.  
 
 ### Fixed:
 
-♦ Using non-supported shortcut keys (Shift + letter or just letters) as the recorder shortcuts (record, pause, stop) was crashing the app.  
-♦ The 'interaction' capture frequency was not working with clicks on fullscreen mode.  
-♦ After opening and closing the options window while on fullscreen mode, the recorder was displaying the guidelines.  
-♦ The 'Pause' button on the taskbar preview was using the 'Stop' icon (also, two Stop buttons were being displayed).  
-♦ The window icons (minimize and close) were not being updated to match the selected theme (dark vs light).  
-♦ The updater window was clipping outside of the screen (when the text inside was too big).  
-♦ The screen recorders were working on Windows 7.  
-♦ Some texts were not translatable.  
+♦ If you tried to open the app while not having .Net 4.8 installed, a crash was happening the before the message could appear explaining that .Net 4.8 was required.  
+♦ Gifski was shrinking the size of gifs bigger than 800x600.  
+♦ The download of FFmpeg was not working.   
 
 ### Known Bugs:
   

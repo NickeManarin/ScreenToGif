@@ -48,20 +48,11 @@ namespace ScreenToGif
 
             //Increases the duration of the tooltip display.
             ToolTipService.ShowDurationProperty.OverrideMetadata(typeof(DependencyObject), new FrameworkPropertyMetadata(int.MaxValue));
-            
-            #region Set network connection properties
 
-            try
-            {
-                ServicePointManager.Expect100Continue = true;
-                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls13;
-            }
-            catch (Exception ex)
-            {
-                LogWriter.Log(ex, "Impossible to set the network properties");
-            }
+            var version = FrameworkHelper.GetFrameworkVersion();
 
-            #endregion
+            if (version > new Version(4, 7, 2))
+                SetSecurityProtocol();
 
             //Parse arguments.
             if (e.Args.Length > 0)
@@ -136,7 +127,7 @@ namespace ScreenToGif
 
             #region Net Framework
 
-            if (!FrameworkHelper.HasFramework())
+            if (version < new Version(4, 8))
             {
                 var ask = Dialog.Ask(LocalizationHelper.Get("S.Warning.Net.Title"), LocalizationHelper.Get("S.Warning.Net.Header"), LocalizationHelper.Get("S.Warning.Net.Message"));
 
@@ -149,28 +140,8 @@ namespace ScreenToGif
 
             #endregion
 
-            #region Set the workaround
-
-            try
-            {
-                if (UserSettings.All.WorkaroundQuota)
-                    BaseCompatibilityPreferences.HandleDispatcherRequestProcessingFailure = BaseCompatibilityPreferences.HandleDispatcherRequestProcessingFailureOptions.Reset;
-            }
-            catch (Exception ex)
-            {
-                LogWriter.Log(ex, "Impossible to set the workaround for the quota crash");
-            }
-
-            #if DEBUG
-
-            PresentationTraceSources.DataBindingSource.Listeners.Add(new ConsoleTraceListener());
-            PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.Warning;
-
-            BaseCompatibilityPreferences.HandleDispatcherRequestProcessingFailure = BaseCompatibilityPreferences.HandleDispatcherRequestProcessingFailureOptions.Throw;
-            
-            #endif
-
-            #endregion
+            if (version > new Version(4, 7))
+                SetWorkaroundForDispatcher();
 
             #region Net Framework HotFixes
 
@@ -392,6 +363,41 @@ namespace ScreenToGif
         #endregion
 
         #region Methods
+
+        private void SetSecurityProtocol()
+        {
+            try
+            {
+                ServicePointManager.Expect100Continue = true;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls13;
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Impossible to set the network properties");
+            }
+        }
+
+        private void SetWorkaroundForDispatcher()
+        {
+            try
+            {
+                if (UserSettings.All.WorkaroundQuota)
+                    BaseCompatibilityPreferences.HandleDispatcherRequestProcessingFailure = BaseCompatibilityPreferences.HandleDispatcherRequestProcessingFailureOptions.Reset;
+
+                #if DEBUG
+
+                PresentationTraceSources.DataBindingSource.Listeners.Add(new ConsoleTraceListener());
+                PresentationTraceSources.DataBindingSource.Switch.Level = SourceLevels.Warning;
+
+                BaseCompatibilityPreferences.HandleDispatcherRequestProcessingFailure = BaseCompatibilityPreferences.HandleDispatcherRequestProcessingFailureOptions.Throw;
+
+                #endif
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Impossible to set the workaround for the quota crash");
+            }
+        }
 
         internal static void RegisterShortcuts()
         {

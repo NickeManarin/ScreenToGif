@@ -8,6 +8,7 @@ using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Management;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -122,6 +123,60 @@ namespace ScreenToGif.Windows.Other
             }
         }
 
+        private string GetProcessor()
+        {
+            var sb = new StringBuilder();
+            sb.Append("<tr><th>Processor</th>");
+            sb.Append("<th>Cores</th></tr>");
+
+            try
+            {
+                using (var searcher = new ManagementObjectSearcher("select * from Win32_Processor"))
+                {
+                    foreach (var obj in searcher.Get())
+                    {
+                        sb.AppendFormat("<td class=\"textcentered\">{0}</td>", obj["Name"]);
+                        sb.AppendFormat("<td class=\"textcentered\">{0} ({1})</td></tr>", obj["NumberOfCores"], obj["NumberOfLogicalProcessors"]);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                LogWriter.Log(e, "Error while trying to find a processor.");
+
+                sb.AppendFormat("<tr><td colspan=\"2\" class=\"textcentered\">No processor found ({0})</td></tr>", e.Message);
+            }
+
+            return sb.ToString();
+        }
+
+        private string GetGraphicsAdapter()
+        {
+            var sb = new StringBuilder();
+            sb.Append("<tr><th>Graphics adapter</th>");
+            sb.Append("<th>Driver version</th></tr>");
+
+            try
+            {
+                using (var searcher = new ManagementObjectSearcher("select * from Win32_VideoController"))
+                {
+                    foreach (var obj in searcher.Get())
+                    {
+                        sb.AppendFormat("<td class=\"textcentered\">{0} @ {1}Hz</td>", obj["Name"], obj["CurrentRefreshRate"]);
+                        sb.AppendFormat("<td class=\"textcentered\">{0}</td></tr>", obj["DriverVersion"]);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                LogWriter.Log(e, "Error while trying to find a graphics adapter.");
+
+                sb.AppendFormat("<tr><td class=\"textcentered\">No graphics adapter found ({0})</td></tr>", e.Message);
+            }
+
+            return sb.ToString();
+        }
+
         private string BuildBody(string title, string message, string email, bool issue, bool suggestion)
         {
             var sb = new StringBuilder();
@@ -174,7 +229,7 @@ namespace ScreenToGif.Windows.Other
 
             //Third overview row.
             sb.Append("<tr><th colspan=\"3\">E-mail</th>");
-            sb.Append("<th>.Net Version</th>");
+            sb.Append("<th>.Net version</th>");
             sb.Append("<th>Issue?</th>");
             sb.Append("<th>Suggestion?</th></tr>");
 
@@ -183,28 +238,44 @@ namespace ScreenToGif.Windows.Other
             sb.AppendFormat("<td class=\"textcentered\">{0}</td>", issue ? "Yes" : "No");
             sb.AppendFormat("<td class=\"textcentered\">{0}</td></tr></table></div></div>", suggestion ? "Yes" : "No");
 
+            //Processors.
+            sb.Append("<br><h2>Processors</h2><table>");
+            sb.Append(GetProcessor());
+            sb.Append(GetGraphicsAdapter());
+            sb.Append("</table>");
+
+            //System.Windows.Forms.SystemInformation.PowerStatus.BatteryChargeStatus == System.Windows.Forms.BatteryChargeStatus.NoSystemBattery
+
             //Monitors.
             sb.Append("<br><h2>Monitors</h2><table>");
-            sb.Append("<tr><th>Bounds</th>");
-            sb.Append("<th>Working Area</th>");
+            sb.Append("<tr><th>Name</th>");
+            sb.Append("<th>Bounds</th>");
+            sb.Append("<th>Working area</th>");
             sb.Append("<th>DPI/Scale</th>");
+            sb.Append("<th>Graphics adapter</th>");
             sb.Append("<th>Primary?</th></tr>");
 
             foreach (var monitor in Monitor.AllMonitors)
             {
+                sb.AppendFormat("<td class=\"textcentered\">{0} ({1})</td>", monitor.FriendlyName, monitor.Name);
                 sb.AppendFormat("<td class=\"textcentered\">{0}:{1} • {2}x{3}</td>", monitor.Bounds.Left, monitor.Bounds.Top, monitor.Bounds.Width, monitor.Bounds.Height);
                 sb.AppendFormat("<td class=\"textcentered\">{0}:{1} • {2}x{3}</td>", monitor.WorkingArea.Left, monitor.WorkingArea.Top, monitor.WorkingArea.Width, monitor.WorkingArea.Height);
                 sb.AppendFormat("<td class=\"textcentered\">{0}dpi / {1:#00}%</td>", monitor.Dpi, monitor.Dpi / 96d * 100d);
+                sb.AppendFormat("<td class=\"textcentered\">{0}</td>", monitor.AdapterName);
                 sb.AppendFormat("<td class=\"textcentered\">{0}</td></tr>", monitor.IsPrimary ? "Yes" : "No");
             }
 
-            sb.Append("<table>");
+            sb.Append("</table>");
 
-            //TODO: Show drawing of monitors, with the position of each window.
-            //sb.Append("<svg>" +
-            //          "<circle cx=\"40\" cy=\"40\" r=\"24\" style=\"stroke:#006600; fill:#00cc00\"/>" +
-            //          "<rect id=\"box\" x=\"0\" y=\"0\" width=\"50\" height=\"50\" style=\"stroke:#006600; fill:#00cc00\"/>" +
-            //          "</svg>");
+            if (Monitor.AllMonitors.Count > 0)
+            {
+                sb.AppendFormat("");
+
+                //sb.Append("<svg>" +
+                //          "<circle cx=\"40\" cy=\"40\" r=\"24\" style=\"stroke:#006600; fill:#00cc00\"/>" +
+                //          "<rect id=\"box\" x=\"0\" y=\"0\" width=\"50\" height=\"50\" style=\"stroke:#006600; fill:#00cc00\"/>" +
+                //          "</svg>");
+            }
 
             //Drives.
             sb.Append("<br><h2>Drives</h2><table>");

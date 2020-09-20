@@ -5,6 +5,50 @@ namespace ScreenToGif.Util
 {
     internal class FrameworkHelper
     {
+        internal static Version GetFrameworkVersion()
+        {
+            const string subkey = @"SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\";
+
+            try
+            {
+                using (var sub = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32).OpenSubKey(subkey))
+                {
+                    if (!(sub?.GetValue("Release") is int key))
+                        return new Version(0, 0);
+
+                    //Checking the version using >= enables forward compatibility.
+                    if (key >= 528040)
+                        return new Version(4, 8);
+                    if (key >= 461808)
+                        return new Version(4, 7, 2);
+                    if (key >= 461308)
+                        return new Version(4, 7, 1);
+                    if (key >= 460798)
+                        return new Version(4, 7);
+                    if (key >= 394802)
+                        return new Version(4, 6, 2);
+                    if (key >= 394254)
+                        return new Version(4, 6, 1);
+                    if (key >= 393295)
+                        return new Version(4, 6);
+                    if (key >= 379893)
+                        return new Version(4, 5, 2);
+                    if (key >= 378675)
+                        return new Version(4, 5, 1);
+                    if (key >= 378389)
+                        return new Version(4, 5);
+
+                    //This code should never execute. A non-null release key should mean that 4.5 or later is installed.
+                    return new Version(0, 0);
+                }
+            }
+            catch (Exception e)
+            {
+                LogWriter.Log(e, "Impossible to detect .Net Framework version.");
+                return new Version(0, 0);
+            }
+        }
+
         /// <summary>
         /// Searchs for the current .Net Framework version installed.
         /// Code adapted from https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed

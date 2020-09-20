@@ -586,8 +586,10 @@ namespace ScreenToGif.Util
                                 if (File.Exists(param.Filename))
                                     File.Delete(param.Filename);
 
+                                var size = project.FramesFiles[0].Path.ScaledSize();
+
                                 var gifski = new GifskiInterop();
-                                var handle = gifski.Start(UserSettings.All.GifskiQuality, UserSettings.All.Looped);
+                                var handle = gifski.Start((uint)size.Width, (uint)size.Height, UserSettings.All.GifskiQuality, UserSettings.All.Looped);
 
                                 if (gifski.Version.Major == 0 && gifski.Version.Minor < 9)
                                 {
