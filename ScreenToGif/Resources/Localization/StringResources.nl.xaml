@@ -581,11 +581,17 @@
     <s:String x:Key="S.Recorder.Fph.Short">fph</s:String>
     <s:String x:Key="S.Recorder.Fph.Range">Varieert van 1 tot 60 fph, met hogere waarden voor meer vastgelegde frames per uur. &#10;Elke stap vertegenwoordigt 1 minuut verschil.</s:String>
     
+    <s:String x:Key="S.Recorder.ClickOrPress">Klik of druk een toets voor opname</s:String>
     <s:String x:Key="S.Recorder.SnapToWindow">Aanpassen aan venstergrootte (Sleep en laat los om aan te passen)</s:String>
     <s:String x:Key="S.Recorder.PreStart">Aftellen</s:String>
     <s:String x:Key="S.Recorder.Paused">ScreenToGif (gepauzeerd)</s:String>
     <s:String x:Key="S.Recorder.Stopping">Stoppen...</s:String>
     <s:String x:Key="S.Recorder.PreStarting">Opstarten...</s:String>
+    
+    <s:String x:Key="S.Recorder.Timer.Elapsed">Opnametijd verlopen.</s:String>
+    <s:String x:Key="S.Recorder.Timer.Total">Totaal aantal frames:</s:String>
+    <s:String x:Key="S.Recorder.Timer.Manual">Handmatige opgenomen:</s:String>
+    <s:String x:Key="S.Recorder.Timer.Paused">De opname is gepauzeerd.</s:String>
     
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible">Het was niet mogelijk om het scherm vast te leggen</s:String>
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">Het was niet mogelijk om het scherm vast te leggen. De opnamemethode heeft na 5 pogingen geen frame geretourneerd.</s:String>
