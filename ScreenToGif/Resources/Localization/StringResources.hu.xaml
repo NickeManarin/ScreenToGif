@@ -256,8 +256,8 @@
     <s:String x:Key="S.Options.Recorder.Frequency.Interval">Minden képkocka {0} időközzel lesz rögzítve.</s:String>
     
     <s:String x:Key="S.Options.Recorder.Mode">Rögzítési mód</s:String>
-    <s:String x:Key="S.Options.Recorder.Bitblt.Info">Használja a régebbi rögzítési módszert, amely lassabb, és nem működik a játékok rögzítésében,&#x0d;de nem igényel további beépülő modulokat.</s:String>
-    <s:String x:Key="S.Options.Recorder.DirectX.Info">Használja a Desktop Duplication API rögzítési módszerét, amely gyorsabb és&#x0d;képes teljes képernyős játékokat rögzíteni, de ehhez SharpDx beépülő modul és Windows 8 vagy újabb szükséges.</s:String>
+    <s:String x:Key="S.Options.Recorder.Bitblt.Info">Használd a régebbi rögzítési módszert, amely lassabb, és nem működik a játékok rögzítésében,&#x0d;de nem igényel további beépülő modulokat.</s:String>
+    <s:String x:Key="S.Options.Recorder.DirectX.Info">Használd a Desktop Duplication API rögzítési módszerét, amely gyorsabb és&#x0d;képes teljes képernyős játékokat rögzíteni, de ehhez SharpDx beépülő modul és Windows 8 vagy újabb szükséges.</s:String>
     <s:String x:Key="S.Options.Recorder.File">Mentés&#x0d;fájlba</s:String>
     <s:String x:Key="S.Options.Recorder.File.Info">Minden rögzített képkocka képként lesz lementve közvetlenül a lemezre.</s:String>
     <s:String x:Key="S.Options.Recorder.Cache">Memória&#x0d;gyorsítótár</s:String>
@@ -581,11 +581,17 @@
     <s:String x:Key="S.Recorder.Fph.Short">képkocka/óra</s:String>
     <s:String x:Key="S.Recorder.Fph.Range">1 és 60 képkocka/óra közötti tartomány, a magasabb érték azt jelenti, hogy több képkocka lesz rögzítve.&#10;Minden növekmény 1 perc különbséget jelent.</s:String>
     
+    <s:String x:Key="S.Recorder.ClickOrPress">Kattints vagy nyomj meg billentyűket a rögzítéshez</s:String>
     <s:String x:Key="S.Recorder.SnapToWindow">Igazítás ablakhoz (Húzás és felengedés az illesztéshez)</s:String>
     <s:String x:Key="S.Recorder.PreStart">Kezdés előtt</s:String>
     <s:String x:Key="S.Recorder.Paused">ScreenToGif (szüneteltetve)</s:String>
     <s:String x:Key="S.Recorder.Stopping">Megállítás...</s:String>
     <s:String x:Key="S.Recorder.PreStarting">Előindítás...</s:String>
+    
+    <s:String x:Key="S.Recorder.Timer.Elapsed">Eltelt rögzítési idő.</s:String>
+    <s:String x:Key="S.Recorder.Timer.Total">Teljes képkockaszám:</s:String>
+    <s:String x:Key="S.Recorder.Timer.Manual">Captured manually:</s:String>
+    <s:String x:Key="S.Recorder.Timer.Paused">A rögzítés szünetel.</s:String>
     
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible">Nem lehetett rögzíteni a képernyőt</s:String>
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">Nem lehetett rögzíteni a képernyőt. A rögzítési módszer 5 próbálkozás után nem adott vissza képkockát.</s:String>
@@ -616,7 +622,7 @@
     <s:String x:Key="S.Recorder.SelectWindow">Kattints ide ezen ablak kiválasztásához</s:String>
     <s:String x:Key="S.Recorder.SelectScreen">Kattints ide ezen képernyő kiválasztásához</s:String>
     <s:String x:Key="S.Recorder.EscToCancel">A megszakításhoz nyomd le az Esc billentyűt</s:String>
-    <s:String x:Key="S.Recorder.Splash.Title">Nyomja meg a(z) {0} a felvétel leállításához</s:String>
+    <s:String x:Key="S.Recorder.Splash.Title">Nyomd meg a(z) {0} billentyűt a felvétel leállításához</s:String>
     <s:String x:Key="S.Recorder.Splash.Subtitle">A felvevő ablak kis méretűre lesz állítva,&#10;állítsd vissza, vagy nyomd meg a(z) {0} gombot a rögzítés szüneteltetéséhez</s:String>
     
     <s:String x:Key="S.Recorder.Discard.Title">Felvétel elvetése</s:String>
@@ -871,7 +877,7 @@
     
     <!--Editor • Edit tab • Frames-->  
     <s:String x:Key="S.Editor.Edit.Frames">Képkockák</s:String>
-    <s:String x:Key="S.Editor.Edit.Delete">Töröl</s:String>
+    <s:String x:Key="S.Editor.Edit.Delete">Törlés</s:String>
     <s:String x:Key="S.Editor.Edit.Frames.Duplicates">Ismétlődések&#10;eltávolítása</s:String>
     <s:String x:Key="S.Editor.Edit.Frames.Reduce">Képkockaszám&#x0d;csökkentése</s:String>
     <s:String x:Key="S.Editor.Edit.DeletePrevious">Az összes előző törlése</s:String>
@@ -1174,7 +1180,7 @@
     <s:String x:Key="S.KeyStrokes.Edit.Remove">Billentyűleütés eltávolítása</s:String>
     <s:String x:Key="S.KeyStrokes.Edit.Add">Billentyűleütés hozzáadása:</s:String>
     <s:String x:Key="S.KeyStrokes.Edit.Lower">Kisbetűs felirat</s:String>
-    <s:String x:Key="S.KeyStrokes.Edit.Lower.Info">Ez lehetővé teszi, hogy egybetűs kisbetűket illesszen be.</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Lower.Info">Ez lehetővé teszi, hogy egybetűs kisbetűket illessz be.</s:String>
 
     <!--Editor • Free drawing-->
     <s:String x:Key="S.FreeDrawing.Mode">Mód</s:String>
@@ -1240,9 +1246,9 @@
     <s:String x:Key="S.Obfuscate.UseAverage">Számítsa ki az egyes pixeles blokkok átlagos színét.</s:String>
     <s:String x:Key="S.Obfuscate.Invert">Alkalmazza az elhomályosítást a kijelölés inverzére.</s:String>
     <s:String x:Key="S.Obfuscate.Smoothness">Simaság</s:String>
-    <s:String x:Key="S.Obfuscate.Info">A kiválasztó eszközzel válaszd ki a téglalapot, amelyet pixelezni kell.</s:String>
+    <s:String x:Key="S.Obfuscate.Info">A kijelölő eszköz használatával válaszd ki a képkocka azon részét, amit el kell homályosítani.</s:String>
     <s:String x:Key="S.Obfuscate.Info2">A kijelölőeszközzel jelöld ki a képkockának azt a részét, amelyet nem szabad elhomályosítani.</s:String>
-    <s:String x:Key="S.Obfuscate.Warning">Nem választottál ki semmit. Kérlek, hogy a Kiválasztó eszköz használatával jelölj ki egy téglalapot, amit pixeleznél.</s:String>
+    <s:String x:Key="S.Obfuscate.Warning">Nem választottál ki semmit. Kérlek, hogy a Kijelölő eszköz használatával jelöld ki a téglalapot, amit elhomályosítanál.</s:String>
     
     <!--Editor • Progress-->
     <s:String x:Key="S.Progress.Type">Típus</s:String>
@@ -1404,13 +1410,13 @@
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath.Info">A kimeneti fájl elérési útját a vágólapra másolja.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">Link</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">A feltöltési szolgáltatás által létrehozott hivatkozást a vágólapra másolja.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Kódolás utáni parancsok végrehajtása</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Kódolás utáni parancsok végrehajtása.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Írd be a kódolás után végrehajtandó parancsokat.&#x0d;Több parancs végrehajtásához írd be mindegyiket egy különálló sorba.&#x0d;Makrók:&#x0d;{p} = Kimeneti fájl elérési útja.&#x0d;{f} = Kimeneti mappa elérési útja.&#x0d;{u} = A feltöltött fájl URL-címe.</s:String>
     
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">Fájl</s:String>
     <s:String x:Key="S.SaveAs.File.Location">Cél mappa.</s:String>
-    <s:String x:Key="S.SaveAs.File.Choose">Válaszd ki a helyet.</s:String>
+    <s:String x:Key="S.SaveAs.File.Choose">Válaszd ki a helyet.&#x0d;Nyomd le a Shift billentyűt és kattints,&#x0d;hogy a fájlnevet is kiválaszd.</s:String>
     <s:String x:Key="S.SaveAs.File.Format">Fájl formátuma</s:String>
     <s:String x:Key="S.SaveAs.File.Name">A fájl neve. Dátum/idő formátum beszúrása '?' közé </s:String>
     <s:String x:Key="S.SaveAs.File.Animation">Animáció</s:String>

@@ -575,7 +575,7 @@
     <s:String x:Key="S.Webcam.Title">مسجل كاميرا ويب  - ScreenToGif </s:String>
     <s:String x:Key="S.Webcam.NoVideo">لم يتم الكشف عن اي جهاز فيديو:(</s:String>
     <s:String x:Key="S.Webcam.CheckVideoDevices">التحقق من وجود اجهزه الفيديو.</s:String>
-    <s:String x:Key="S.Webcam.Scale">: {0:0. # #} x المقياس</s:String>
+    <s:String x:Key="S.Webcam.Scale">: {0:0.##} x المقياس</s:String>
     <s:String x:Key="S.Webcam.ChangeScale">تغيير مقياس الفيديو.</s:String>
     
     <!--Board recorder-->
