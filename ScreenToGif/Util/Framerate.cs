@@ -44,7 +44,7 @@ namespace ScreenToGif.Util
         /// <summary>
         /// Gets the diff between the last call.
         /// </summary>
-        /// <returns>The ammount of seconds.</returns>
+        /// <returns>The amount of seconds.</returns>
         public static int GetMilliseconds()
         {
             if (_fixedRate)
