@@ -1256,7 +1256,7 @@
     <s:String x:Key="S.SaveAs.GifOptions">Gif ayarları</s:String>
     <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.Info">Color reduction algorithm (quantization).</s:String>-->
     <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.Neural">Neural network</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.Neural.Info">High fidelity quantization. Slower, but good for higher ammount of colors.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.Neural.Info">High fidelity quantization. Slower, but good for higher amount of colors.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.Octree">Octree</s:String>-->
     <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.Octree.Info">Good for animations with less colors. Faster, but may produce color banding.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.MedianCut">Median cut</s:String>-->

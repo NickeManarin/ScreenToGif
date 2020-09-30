@@ -110,7 +110,7 @@ namespace ScreenToGif.Controls
         public double ImageDpi { get; set; }
 
         /// <summary>
-        /// The ammount of scale of the image x the visuals. 
+        /// The amount of scale of the image x the visuals. 
         /// (Dpi of the images compared with the dpi of the UIElements).
         /// </summary>
         public double ScaleDiff { get; set; }

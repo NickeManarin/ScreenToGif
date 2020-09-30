@@ -353,9 +353,9 @@ namespace ScreenToGif.Util
             #region Validation
 
             //Only one of the parameters can bee null.
-            var ammount = (total.HasValue ? 0 : 1) + (variable.HasValue ? 0 : 1) + (percentage.HasValue ? 0 : 1);
+            var amount = (total.HasValue ? 0 : 1) + (variable.HasValue ? 0 : 1) + (percentage.HasValue ? 0 : 1);
 
-            if (ammount != 1)
+            if (amount != 1)
                 throw new ArgumentException("Only one of the parameters can bee null");
 
             #endregion
