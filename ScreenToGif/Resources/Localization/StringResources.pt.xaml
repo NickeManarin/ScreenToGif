@@ -157,7 +157,13 @@
     <s:String x:Key="S.Updater.InstallManually">Instalar manualmente</s:String>
     <s:String x:Key="S.Updater.Warning.Show">Não foi possível exibir os detalhes da atualização.</s:String>
     <s:String x:Key="S.Updater.Warning.Download">Não foi possível fazer o download da atualização.</s:String>
+    <s:String x:Key="S.Updater.Warning.Encoding">Você precisa esperar todas as codificações finalizarem para atualizar o aplicativo.</s:String>
     
+    <!--Downloader-->
+    <s:String x:Key="S.Downloader.Title">ScreenToGif - Baixar</s:String>
+    <s:String x:Key="S.Downloader.Header">Baixar</s:String>
+    <s:String x:Key="S.Downloader.Size">{0} de {1}</s:String>
+        
     <!--Options-->
     <s:String x:Key="S.Options.Title">ScreenToGif - Opções</s:String>
     <s:String x:Key="S.Options.App">Geral</s:String>
@@ -499,7 +505,9 @@
     <s:String x:Key="S.Options.Extras.License.Ffmpeg">Licença do FFmpeg</s:String>
     <s:String x:Key="S.Options.Extras.License.Gifski">Licença do Gifski</s:String>
     <s:String x:Key="S.Options.Extras.License.SharpDx">Licença do SharpDx</s:String>
-
+    <s:String x:Key="S.Options.Extras.Permission.Header">Sem permissão de gravação na pasta</s:String>
+    <s:String x:Key="S.Options.Extras.Permission.Observation">Não é possível salvar o download na pasta devido à falta de permissão de gravação.&#10;&#10;Gostaria de iniciar o downloader como administrador para finalizar o download?</s:String>
+    
     <!--Options • Donations-->
     <s:String x:Key="S.Options.Donate.Donate">Doar</s:String>
     <s:String x:Key="S.Options.Donate.Donate.Dollar">Doar US$</s:String>
@@ -1416,6 +1424,7 @@
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">Arquivo</s:String>
     <s:String x:Key="S.SaveAs.File.Location">Pasta de destino.</s:String>
+    <s:String x:Key="S.SaveAs.File.SelectFolder">Selecione a pasta de destino</s:String>
     <s:String x:Key="S.SaveAs.File.Choose">Escolha a pasta.&#x0d;Pressione Shift e clique para selecionar&#x0d;o nome do arquivo também.</s:String>
     <s:String x:Key="S.SaveAs.File.Format">Formato do arquivo.</s:String>
     <s:String x:Key="S.SaveAs.File.Name">Nome do arquivo.</s:String>

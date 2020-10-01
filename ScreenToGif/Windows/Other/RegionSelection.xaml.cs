@@ -16,6 +16,8 @@ namespace ScreenToGif.Windows.Other
 
         public Rect Rect { get; set; }
         
+        public ModeType? Mode { get; set; }
+
         public bool IsStatic { get; set; }
         
         public Monitor Monitor { get; set; }
@@ -152,7 +154,7 @@ namespace ScreenToGif.Windows.Other
         }
 
 
-        public void Select(Rect region, Monitor monitor = null, bool isFullscreen = false)
+        public void Select(ModeType? mode, Rect region, Monitor monitor = null)
         {
             //TODO: Configurable border color.
 
@@ -163,8 +165,10 @@ namespace ScreenToGif.Windows.Other
                 //If the new region is in another screen, move the panel to the new screen first, to adjust the UI to the screen DPI.
                 if (Monitor?.Handle != monitor.Handle || Monitor?.Scale != monitor.Scale)
                 {
-                    Left = monitor.NativeBounds.Left;
-                    Top = monitor.NativeBounds.Top;
+                    if (double.IsNaN(Left) || double.IsNaN(Top))
+                        Show();
+
+                    this.MoveToScreen(monitor);
                 }
 
                 Monitor = monitor;
@@ -175,21 +179,23 @@ namespace ScreenToGif.Windows.Other
                 Monitor = Monitor.FromPoint((int) region.X, (int) region.Y);
             }
 
-            Scale = this.Scale();
-            Dpi = Scale * 96d;
+            Mode = mode ?? Mode;
             Rect = region;
-            IsStatic = isFullscreen || !UserSettings.All.EnableSelectionPanning;
-            Opacity = isFullscreen ? 0 : 1;
+            IsStatic = !Mode.HasValue || Mode == ModeType.Fullscreen || !UserSettings.All.EnableSelectionPanning;
+            Opacity = !Mode.HasValue || Mode == ModeType.Fullscreen ? 0 : 1;
 
             DisplaySelection();
             DisplayThumbs();
             Show();
+
+            Scale = this.Scale();
+            Dpi = Scale * 96d;
         } 
 
         private void DisplaySelection(bool ignoreThumbs = true)
         {
-            Left = Rect.Left - (ignoreThumbs || _horizontalAlignment == HorizontalAlignment.Right ? 0 : HorizontalBorder.ActualWidth);
-            Top = Rect.Top - (ignoreThumbs || _verticalAlignment == VerticalAlignment.Bottom ? 0 : VerticalBorder.ActualHeight);
+            Left = (Rect.Left - (ignoreThumbs || _horizontalAlignment == HorizontalAlignment.Right ? 0 : HorizontalBorder.ActualWidth)) / (this.Scale() / Monitor.Scale);
+            Top = (Rect.Top - (ignoreThumbs || _verticalAlignment == VerticalAlignment.Bottom ? 0 : VerticalBorder.ActualHeight)) / (this.Scale() / Monitor.Scale);
 
             SelectionRectangle.Width = Rect.Width;
             SelectionRectangle.Height = Rect.Height;
@@ -219,8 +225,8 @@ namespace ScreenToGif.Windows.Other
             #region Position the thumbs
 
             //Offset.
-            Left = Rect.Left - (_horizontalAlignment == HorizontalAlignment.Right ? 0 : HorizontalBorder.ActualWidth);
-            Top = Rect.Top - (_verticalAlignment == VerticalAlignment.Bottom ? 0 : VerticalBorder.ActualHeight);
+            Left = (Rect.Left - (_horizontalAlignment == HorizontalAlignment.Right ? 0 : HorizontalBorder.ActualWidth)) / (this.Scale() / Monitor.Scale);
+            Top = (Rect.Top - (_verticalAlignment == VerticalAlignment.Bottom ? 0 : VerticalBorder.ActualHeight)) / (this.Scale() / Monitor.Scale); 
 
             //Grid positioning.
             Grid.SetRow(HorizontalBorder, 1);

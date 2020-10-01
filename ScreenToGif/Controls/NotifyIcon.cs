@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -466,11 +467,21 @@ namespace ScreenToGif.Controls
                 return;
 
             //For some reason, the context menu of the systray icon is not updating its style.
-            ContextMenu.Background = TryFindResource("Element.Background") as SolidColorBrush;
-            ContextMenu.Foreground = TryFindResource("Element.Foreground.Medium") as SolidColorBrush;
+            NotifyToolTipElement.Background = ContextMenu.Background = TryFindResource("Element.Background") as SolidColorBrush;
+            
+            foreach (var menuItem in ContextMenu.Items.OfType<ExtendedMenuItem>())
+            {
+                menuItem.Foreground = TryFindResource("Element.Foreground.Medium") as SolidColorBrush;
 
-            ContextMenu.InvalidateVisual();
-            ContextMenu.UpdateLayout();
+                if (menuItem.Name == "ExitButton")
+                    menuItem.Icon = TryFindResource("Vector.Close") as System.Windows.Media.Brush;
+            }
+            
+            if (NotifyToolTipElement is ToolTip tooltip)
+            {
+                tooltip.SetValue(TextBlock.ForegroundProperty, TryFindResource("Element.Foreground.Medium") as SolidColorBrush);
+                tooltip.InvalidateVisual();
+            }
         }
 
         #endregion

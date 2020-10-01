@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media.Imaging;
-using ScreenToGif.Controls;
 using ScreenToGif.Native;
 using ScreenToGif.Util;
 
@@ -25,35 +24,37 @@ namespace ScreenToGif.Windows.Other
         }
 
 
-        public void Select(Monitor monitor, SelectControl.ModeType mode, Rect previousRegion, Action<Monitor, Rect> selected, Action<Monitor> changed, Action<Monitor> gotHover, Action aborted)
+        public void Select(Monitor monitor, ModeType mode, Rect previousRegion, Action<Monitor, Rect> selected, Action<Monitor> changed, Action<Monitor> gotHover, Action aborted)
         {
             //Resize to fit given window.
             Left = monitor.Bounds.Left;
             Top = monitor.Bounds.Top;
             Width = monitor.Bounds.Width;
             Height = monitor.Bounds.Height;
-
+            
             Monitor = monitor;
 
-            _scale = monitor.Dpi / 96d;
+            _scale = monitor.Scale;
             _selected = selected;
             _changed = changed;
             _gotHover = gotHover;
             _aborted = aborted;
 
+            SelectControl.Width = monitor.Bounds.Width;
+            SelectControl.Height = monitor.Bounds.Height;
             SelectControl.Scale = monitor.Scale;
             SelectControl.ParentLeft = Left;
             SelectControl.ParentTop = Top;
-            SelectControl.BackImage = CaptureBackground();
             SelectControl.Mode = mode;
+            SelectControl.BackImage = CaptureBackground();
 
-            if (mode == SelectControl.ModeType.Region)
+            if (mode == ModeType.Region)
             {
                 //Since each region selector is attached to a single screen, the selection must be translated.
                 SelectControl.Selected = previousRegion.Translate(monitor.Bounds.Left * -1, monitor.Bounds.Top * -1);
                 SelectControl.Windows.Clear();
             }
-            else if (mode == SelectControl.ModeType.Window)
+            else if (mode == ModeType.Window)
             {
                 //Get only the windows that are located inside the given screen.
                 var win = Util.Native.EnumerateWindowsByMonitor(monitor);
@@ -61,7 +62,7 @@ namespace ScreenToGif.Windows.Other
                 //Since each region selector is attached to a single screen, the list of positions must be translated.
                 SelectControl.Windows = win.AdjustPosition(monitor.Bounds.Left, monitor.Bounds.Top);
             }
-            else if (mode == SelectControl.ModeType.Fullscreen)
+            else if (mode == ModeType.Fullscreen)
             {
                 //Each selector is the whole screen.
                 SelectControl.Windows = new List<DetectedRegion>
@@ -69,10 +70,12 @@ namespace ScreenToGif.Windows.Other
                     new DetectedRegion(monitor.Handle, new Rect(new Size(monitor.Bounds.Width, monitor.Bounds.Height)), monitor.Name)
                 };
             }
-            
+
             //Call the selector to select the region.
             SelectControl.IsPickingRegion = true;
             Show();
+
+            this.MoveToScreen(monitor, true);
         }
 
         public void ClearSelection()

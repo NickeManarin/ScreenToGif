@@ -112,17 +112,7 @@ namespace ScreenToGif.Controls
         /// This makes the zoom view to be hidden everywhere else.
         /// </summary>
         private bool _wasHoverFocusChanged;
-
-        /// <summary>
-        /// The type of capture area selection.
-        /// </summary>
-        public enum ModeType
-        {
-            Region = 0,
-            Window = 1,
-            Fullscreen = 2
-        }
-
+        
         public List<DetectedRegion> Windows = new List<DetectedRegion>();
 
         public BitmapSource BackImage;

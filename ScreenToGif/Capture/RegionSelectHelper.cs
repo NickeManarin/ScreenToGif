@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using ScreenToGif.Controls;
 using ScreenToGif.Native;
+using ScreenToGif.Util;
 using ScreenToGif.Windows.Other;
 
 namespace ScreenToGif.Capture
@@ -33,7 +33,7 @@ namespace ScreenToGif.Capture
 
         #endregion
 
-        internal static Task<Selection> Select(SelectControl.ModeType mode, Rect previousRegion, Monitor currentMonitor, bool quickSelection = false)
+        internal static Task<Selection> Select(ModeType mode, Rect previousRegion, Monitor currentMonitor, bool quickSelection = false)
         {
             _taskCompletionSource = new TaskCompletionSource<Selection>();
 
@@ -42,7 +42,7 @@ namespace ScreenToGif.Capture
             var monitors = Monitor.AllMonitorsGranular();
 
             //If in quick screen selection mode and there's just one screen, select that one.
-            if (quickSelection && mode == SelectControl.ModeType.Fullscreen && monitors.Count == 1)
+            if (quickSelection && mode == ModeType.Fullscreen && monitors.Count == 1)
                 return Task.FromResult(new Selection(monitors.FirstOrDefault(), monitors[0].Bounds));
 
             foreach (var monitor in monitors)

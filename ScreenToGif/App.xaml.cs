@@ -53,13 +53,29 @@ namespace ScreenToGif
 
             if (version > new Version(4, 7, 2))
                 SetSecurityProtocol();
-
+            
             //Parse arguments.
-            if (e.Args.Length > 0)
-                Argument.Prepare(e.Args);
+            Argument.Prepare(e.Args);
 
             LocalizationHelper.SelectCulture(UserSettings.All.LanguageCode);
             ThemeHelper.SelectTheme(UserSettings.All.MainTheme);
+
+            #region Download mode
+
+            if (Argument.IsInDownloadMode)
+            {
+                var downloader = new Downloader
+                {
+                    DownloadMode = Argument.DownloadMode,
+                    DestinationPath = Argument.DownloadPath
+                };
+                downloader.ShowDialog();
+
+                Environment.Exit(90);
+                return;
+            }
+
+            #endregion
 
             #region If set, it allows only one instance per user
 

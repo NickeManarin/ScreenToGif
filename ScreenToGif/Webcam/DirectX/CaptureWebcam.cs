@@ -265,7 +265,8 @@ namespace ScreenToGif.Webcam.DirectX
                 _baseGrabFlt = (CoreStreaming.IBaseFilter) SampGrabber;
 
                 var media = new CoreStreaming.AmMediaType();
-                // Get the video device and add it to the filter graph
+                
+                //Get the video device and add it to the filter graph
                 if (VideoDevice != null)
                 {
                     VideoDeviceFilter = (CoreStreaming.IBaseFilter)Marshal.BindToMoniker(VideoDevice.MonikerString);
@@ -467,7 +468,7 @@ namespace ScreenToGif.Webcam.DirectX
             // Render preview stream (only if necessary)
             if (WantPreviewRendered && !IsPreviewRendered)
             {
-                // Render preview (video -> renderer)
+                //Render preview (video -> renderer)
                 var cat = Uuid.PinCategory.Preview;
                 var med = Uuid.MediaType.Video;
 
@@ -486,13 +487,13 @@ namespace ScreenToGif.Webcam.DirectX
                 if (hr < 0) 
                     Marshal.ThrowExceptionForHR(hr);
 
-                // Set video window style
+                //Set video window style
                 hr = VideoWindow.put_WindowStyle(ControlStreaming.WindowStyle.Child | ControlStreaming.WindowStyle.ClipChildren | ControlStreaming.WindowStyle.ClipSiblings);
                 
                 if (hr < 0) 
                     Marshal.ThrowExceptionForHR(hr);
 
-                // Position video window in client rect of owner window
+                //Position video window in client rect of owner window
                 PreviewWindow.SizeChanged += OnPreviewWindowResize;
                 OnPreviewWindowResize(this, null);
 

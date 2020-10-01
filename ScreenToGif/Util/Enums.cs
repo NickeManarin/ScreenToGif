@@ -668,4 +668,14 @@ namespace ScreenToGif.Util
         Linear = System.Windows.Media.BitmapScalingMode.Linear,
         NearestNeighbor = System.Windows.Media.BitmapScalingMode.NearestNeighbor
     }
+
+    /// <summary>
+    /// The type of capture area selection.
+    /// </summary>
+    public enum ModeType
+    {
+        Region = 0,
+        Window = 1,
+        Fullscreen = 2
+    }
 }

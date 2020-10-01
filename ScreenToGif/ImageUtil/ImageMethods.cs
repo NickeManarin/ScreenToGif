@@ -1147,7 +1147,7 @@ namespace ScreenToGif.ImageUtil
 
             GC.Collect(1);
 
-            return Other.CrossMultiplication(width * height, equalCount, null);
+            return MathHelper.CrossMultiplication(width * height, equalCount, null);
         }
 
         /// <summary>

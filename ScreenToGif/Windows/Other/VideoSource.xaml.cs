@@ -449,6 +449,29 @@ namespace ScreenToGif.Windows.Other
                At least one output file must be specified
              */
 
+            /*
+                Arguments:  -i "C:\Users\user\Desktop\example.mp4" -hide_banner
+                Response: Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'C:\Users\nicke\Desktop\RPReplay_Final1600052642.MP4':
+                  Metadata:
+                    major_brand     : mp42
+                    minor_version   : 1
+                    compatible_brands: isommp41mp42
+                    creation_time   : 2020-09-14T03:04:02.000000Z
+                  Duration: 00:00:09.30, start: 0.000000, bitrate: 18391 kb/s
+                    Stream #0:0(und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 2 kb/s (default)
+                    Metadata:
+                      creation_time   : 2020-09-14T03:04:02.000000Z
+                      handler_name    : Core Media Audio
+                    Stream #0:1(und): Video: h264 (High) (avc1 / 0x31637661), yuvj420p(pc, bt709/bt709/unknown), 1440x1920, 18383 kb/s, 59.14 fps, 60 tbr, 600 tbn, 1200 tbc (default)
+                    Metadata:
+                      rotate          : 270
+                      creation_time   : 2020-09-14T03:04:02.000000Z
+                      handler_name    : Core Media Video
+                    Side data:
+                      displaymatrix: rotation of 90.00 degrees
+                At least one output file must be specified
+            */
+
             log += "Response: " + response + Environment.NewLine;
 
             //Tries to find the line which shows the video stream details. TODO: What happens if there's more than 1 video stream?
@@ -468,7 +491,7 @@ namespace ScreenToGif.Windows.Other
             //Tries to find the line which shows the video rotation.
             var rotationRegex = new Regex(".*(rotate          : ).*", RegexOptions.IgnoreCase | RegexOptions.Compiled);
             var linesFound2 = rotationRegex.Matches(response);
-            var isRotated = linesFound2.Count > 0 && linesFound2[0].Value.Contains("90");
+            var isRotated = linesFound2.Count > 0 && (linesFound2[0].Value.Contains("90") || linesFound2[0].Value.Contains("270"));
 
             //Tries to find the line which shows the video stream details.
             var durationRegex = new Regex(".*(Duration: ).*", RegexOptions.IgnoreCase | RegexOptions.Compiled);

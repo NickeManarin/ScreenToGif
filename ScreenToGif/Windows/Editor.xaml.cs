@@ -1114,7 +1114,7 @@ namespace ScreenToGif.Windows
 
                     var fs = new FolderSelector
                     {
-                        Description = "Select the output folder",
+                        Description = LocalizationHelper.Get("S.SaveAs.File.SelectFolder"),
                         DefaultFolder = isRelative ? Path.GetFullPath(initial) : initial,
                         SelectedPath = isRelative ? Path.GetFullPath(initial) : initial
                     };
@@ -5071,7 +5071,7 @@ namespace ScreenToGif.Windows
             Dispatcher.Invoke(() =>
             {
                 TaskbarItemInfo.ProgressState = TaskbarItemProgressState.Normal;
-                TaskbarItemInfo.ProgressValue = Util.Other.CrossMultiplication(StatusProgressBar.Maximum, value, null) / 100d;
+                TaskbarItemInfo.ProgressValue = MathHelper.CrossMultiplication(StatusProgressBar.Maximum, value, null) / 100d;
 
                 StatusProgressBar.IsIndeterminate = false;
                 StatusProgressBar.Value = value;

@@ -1370,7 +1370,8 @@
                        AllowDrop="True" Drop="Control_Drop" DragEnter="Control_DragEnter" MouseLeftButtonUp="ZoomBoxControl_MouseLeftButtonUp" PreviewMouseWheel="ZoomBox_MouseWheel">
                 <n:ZoomBox.ContextMenu>
                     <ContextMenu>
-                        <n:ExtendedMenuItem x:Name="PlayMenuItem" Header="{DynamicResource S.Editor.Playback.Play}" Icon="{StaticResource Vector.Play}" ContentHeight="16" ContentWidth="16" Command="{StaticResource Command.Play}"/>
+                        <n:ExtendedMenuItem x:Name="PlayMenuItem" Header="{DynamicResource S.Editor.Playback.Play}" Icon="{StaticResource Vector.Play}" ContentHeight="16" ContentWidth="16" Command="{StaticResource Command.Play}"
+                                            InputGestureText="{DynamicResource S.Keys.Space}"/>
                         <Separator/>
                         <n:ExtendedMenuItem Header="{DynamicResource S.Editor.Home.Undo}" Icon="{StaticResource Vector.Undo}" ContentHeight="16" ContentWidth="16" Command="{StaticResource Command.Undo}"/>
                         <n:ExtendedMenuItem Header="{DynamicResource S.Editor.Home.Redo}" Icon="{StaticResource Vector.Redo}" ContentHeight="16" ContentWidth="16" Command="{StaticResource Command.Redo}"/>

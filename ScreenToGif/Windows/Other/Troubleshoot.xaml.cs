@@ -63,9 +63,9 @@ namespace ScreenToGif.Windows.Other
                         recorder.Pause();
                 }
 
-                var scale = window.Scale();
-                var top = window.Top * scale;
-                var left = window.Left * scale;
+                var diff = window.Scale() / monitor.Scale;
+                var top = window.Top / diff;
+                var left = window.Left / diff;
                 var width = window.ActualWidth;
                 var height = window.ActualHeight;
 
@@ -81,9 +81,11 @@ namespace ScreenToGif.Windows.Other
                 if (monitor.NativeBounds.Right < left + width)
                     left = monitor.NativeBounds.Right - width;
 
+                window.MoveToScreen(monitor);
+
                 window.WindowState = WindowState.Normal;
-                window.Left = monitor.NativeBounds.Left;
-                window.Top = monitor.NativeBounds.Top;
+                window.Left = monitor.NativeBounds.Left + 1;
+                window.Top = monitor.NativeBounds.Top + 1;
 
                 window.Left = left;
                 window.Top = top;

@@ -375,6 +375,17 @@ namespace ScreenToGif.Windows
             UpdateLocation();
         }
 
+        private void SizeIntegerBox_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (!(sender is IntegerBox box))
+                return;
+
+            var screenPoint = box.PointToScreen(new Point(0, 0));
+            var scale = this.Scale();
+
+            Util.Native.SetCursorPos((int)(screenPoint.X + (box.ActualWidth / 2) * scale), (int)(screenPoint.Y + (box.ActualHeight / 2) * scale));
+        }
+
         private async void System_PowerModeChanged(object sender, PowerModeChangedEventArgs e)
         {
             if (e.Mode == PowerModes.Suspend)
@@ -407,9 +418,11 @@ namespace ScreenToGif.Windows
 
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            //Save Settings
+            //Save the settings
             UserSettings.All.RecorderTop = Top;
             UserSettings.All.RecorderLeft = Left;
+            UserSettings.All.RecorderHeight = (int) Height;
+            UserSettings.All.RecorderWidth = (int) Width;
             UserSettings.Save();
 
             #region Remove Hooks
@@ -1385,8 +1398,8 @@ namespace ScreenToGif.Windows
 
         private void UpdateLocation()
         {
-            _left = (int)Math.Round((Math.Round(Left, MidpointRounding.AwayFromZero) + Constants.LeftOffset) * _scale);
-            _top = (int)Math.Round((Math.Round(Top, MidpointRounding.AwayFromZero) + Constants.TopOffset) * _scale);
+            UserSettings.All.RecorderLeft = _left = (int)Math.Round((Math.Round(Left, MidpointRounding.AwayFromZero) + Constants.LeftOffset) * _scale);
+            UserSettings.All.RecorderTop = _top = (int)Math.Round((Math.Round(Top, MidpointRounding.AwayFromZero) + Constants.TopOffset) * _scale);
 
             _viewModel.Region = new Rect(new Point(_left, _top), _viewModel.Region.BottomRight);
 
@@ -1558,11 +1571,14 @@ namespace ScreenToGif.Windows
                     top = closest.WorkingArea.Bottom - UserSettings.All.RecorderHeight;
             }
 
-            Top = closest.NativeBounds.Top;
-            Left = closest.NativeBounds.Left;
+            Top = closest.NativeBounds.Top + 1;
+            Left = closest.NativeBounds.Left + 1;
 
-            Top = UserSettings.All.RecorderTop = top;
-            Left = UserSettings.All.RecorderLeft = left;
+            var diff = this.Scale() / closest.Scale;
+            Top = UserSettings.All.RecorderTop = top / diff;
+            Left = UserSettings.All.RecorderLeft = left / diff;
+            Height = UserSettings.All.RecorderHeight;
+            Width = UserSettings.All.RecorderWidth;
 
             //After moving, detect the current monitor using a more reliable method.
             var windowInteropHelper = new System.Windows.Interop.WindowInteropHelper(this);

@@ -309,8 +309,8 @@ namespace ScreenToGif.Windows.Other
                 #endregion
 
                 var used = total - available;
-                var usedPerc = Math.Round(Util.Other.CrossMultiplication(total, used, null), 1);
-                var avaiPerc = Math.Round(Util.Other.CrossMultiplication(total, available, null), 1);
+                var usedPerc = Math.Round(MathHelper.CrossMultiplication(total, used, null), 1);
+                var avaiPerc = Math.Round(MathHelper.CrossMultiplication(total, available, null), 1);
                 
                 sb.AppendFormat("<td class=\"textcentered\">{0}</td>", drive.Name);
                 sb.AppendFormat("<td class=\"textRight\">({0} %) {1}</td>", usedPerc, Humanizer.BytesToString(used, "N1"));

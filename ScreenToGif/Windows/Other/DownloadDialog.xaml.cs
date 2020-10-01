@@ -152,6 +152,14 @@ namespace ScreenToGif.Windows.Other
 
         private async void DownloadButton_Click(object sender, RoutedEventArgs e)
         {
+            StatusBand.Hide();
+
+            if (EncodingManager.Encodings.Any(a => a.Status == Status.Processing))
+            {
+                StatusBand.Warning(LocalizationHelper.Get("S.Updater.Warning.Encoding"));
+                return;
+            }
+
             DownloadButton.IsEnabled = false;
             StatusBand.Info(LocalizationHelper.Get("S.Updater.Downloading"));
 

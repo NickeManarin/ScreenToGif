@@ -8,6 +8,7 @@
         UseLayoutRounding="True" SnapsToDevicePixels="True" Background="Transparent" ShowInTaskbar="False">
 
     <n:SelectControl x:Name="SelectControl" Focusable="True" AnimateBorder="{Binding Source={x:Static util:UserSettings.All}, Path=AnimateRecorderBorder, Mode=OneWay}" 
-                     MouseHovering="SelectControl_MouseHovering" SelectionAccepted="SelectControl_SelectionAccepted" SelectionChanged="SelectControl_SelectionChanged" 
+                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MouseHovering="SelectControl_MouseHovering" 
+                     SelectionAccepted="SelectControl_SelectionAccepted" SelectionChanged="SelectControl_SelectionChanged" 
                      SelectionCanceled="SelectControl_SelectionCanceled"/>
 </Window>

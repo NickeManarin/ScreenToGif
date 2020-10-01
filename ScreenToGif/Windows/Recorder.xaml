@@ -8,11 +8,9 @@
                Topmost="True" Icon="../Resources/Logo.ico"
                IsThin="{Binding RecorderThinMode, Source={x:Static u:UserSettings.All}}"
                IsFollowing="{Binding CursorFollowing, Source={x:Static u:UserSettings.All}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-               Width="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderWidth, Mode=TwoWay}" 
-               Height="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderHeight, Mode=TwoWay}" 
                FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}"
                Loaded="Window_Loaded" Closing="Window_Closing" Activated="Window_Activated" KeyDown="Window_KeyDown">
-    
+
     <Window.Resources>
         <Storyboard x:Key="ShowDiscardStoryboard">
             <BooleanAnimationUsingKeyFrames Storyboard.TargetName="DiscardButton" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
@@ -290,16 +288,18 @@
                         </MultiBinding>
                     </Grid.IsEnabled>
 
-                    <n:IntegerBox Grid.Column="0" x:Name="WidthIntegerBox" Value="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderWidth, Mode=TwoWay}"
+                    <n:IntegerBox Grid.Column="0" x:Name="WidthIntegerBox" Value="{Binding ElementName=RecorderLightWindow, Path=Width, Mode=TwoWay}"
                                   Offset="{x:Static u:Constants.HorizontalOffset}" Minimum="100" Maximum="3000" TabIndex="6" Height="Auto" Padding="4,0" Margin="1,3"
-                                  ToolTip="{DynamicResource S.Recorder.Width}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                                  ToolTip="{DynamicResource S.Recorder.Width}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"
+                                  PropagateWheelEvent="True" MouseWheel="SizeIntegerBox_MouseWheel"/>
 
                     <Label Grid.Column="1" Content="×" FontSize="16" FontFamily="Segoe Script" Margin="1" VerticalContentAlignment="Center" Padding="0" 
                            Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}"/>
 
-                    <n:IntegerBox Grid.Column="2" x:Name="HeightIntegerBox" Value="{Binding Source={x:Static u:UserSettings.All}, Path=RecorderHeight, Mode=TwoWay}"
+                    <n:IntegerBox Grid.Column="2" x:Name="HeightIntegerBox" Value="{Binding ElementName=RecorderLightWindow, Path=Height, Mode=TwoWay}"
                                   Offset="{x:Static u:Constants.VerticalOffset}" Minimum="100" Maximum="3000" TabIndex="7" Height="Auto" Padding="4,0" Margin="1,3"
-                                  ToolTip="{DynamicResource S.Recorder.Height}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+                                  ToolTip="{DynamicResource S.Recorder.Height}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"
+                                  PropagateWheelEvent="True" MouseWheel="SizeIntegerBox_MouseWheel"/>
 
                     <TextBlock Grid.Column="3" Text="px" FontSize="12" FontFamily="Segoe UI" Margin="1,0,0,0" VerticalAlignment="Center" Padding="0" 
                                Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}"/>

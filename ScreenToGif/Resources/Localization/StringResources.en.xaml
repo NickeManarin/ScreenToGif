@@ -157,6 +157,12 @@
     <s:String x:Key="S.Updater.Downloading">Downloading...</s:String>
     <s:String x:Key="S.Updater.Warning.Show">It was not possible to show the download details.</s:String>
     <s:String x:Key="S.Updater.Warning.Download">It was not possible to download the update.</s:String>
+    <s:String x:Key="S.Updater.Warning.Encoding">You need to wait for all encodings to finish before updating.</s:String>
+    
+    <!--Downloader-->
+    <s:String x:Key="S.Downloader.Title">ScreenToGif - Downloader</s:String>
+    <s:String x:Key="S.Downloader.Header">Downloader</s:String>
+    <s:String x:Key="S.Downloader.Size">{0} of {1}</s:String>
     
     <!--Options-->
     <s:String x:Key="S.Options.Title">ScreenToGif - Options</s:String>
@@ -499,7 +505,9 @@
     <s:String x:Key="S.Options.Extras.License.Ffmpeg">FFmpeg license</s:String>
     <s:String x:Key="S.Options.Extras.License.Gifski">Gifski license</s:String>
     <s:String x:Key="S.Options.Extras.License.SharpDx">SharpDx license</s:String>
-
+    <s:String x:Key="S.Options.Extras.Permission.Header">Missing write permission in folder</s:String>
+    <s:String x:Key="S.Options.Extras.Permission.Observation">It's not possible to save the download in the folder due to a lack of write permission.&#10;&#10;Would you like to start the downloader with administrative rights to finish the download?</s:String>
+    
     <!--Options • Donations-->
     <s:String x:Key="S.Options.Donate.Donate">Donate</s:String>
     <s:String x:Key="S.Options.Donate.Donate.Dollar">Donate US$</s:String>
@@ -1416,6 +1424,7 @@
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">File</s:String>
     <s:String x:Key="S.SaveAs.File.Location">Destination folder.</s:String>
+    <s:String x:Key="S.SaveAs.File.SelectFolder">Select the output folder</s:String>
     <s:String x:Key="S.SaveAs.File.Choose">Choose the location.&#x0d;Press Shift and click to&#x0d;select the filename too.</s:String>
     <s:String x:Key="S.SaveAs.File.Format">File format</s:String>
     <s:String x:Key="S.SaveAs.File.Name">Name of the file. Insert Date/Time format between '?'</s:String>

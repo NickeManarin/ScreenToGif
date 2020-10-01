@@ -13,7 +13,7 @@ namespace ScreenToGif.Util
             //Checks if the theme is already the current in use.
             var last = Application.Current.Resources.MergedDictionaries.LastOrDefault(l => l.Source != null && l.Source.ToString().Contains("Colors/"));
 
-            if (last?.Source.ToString().EndsWith($"{theme}.xaml") == true)
+            if (last?.Source.ToString().EndsWith($"/{theme}.xaml") == true)
                 return;
 
             //Tries to switch to the new theme.
@@ -33,6 +33,16 @@ namespace ScreenToGif.Util
 
             Application.Current.Resources.MergedDictionaries.Remove(glyphs);
             Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary { Source = new System.Uri("Resources/Glyphs.xaml", System.UriKind.RelativeOrAbsolute) });
+
+            RefreshNotificationIcon();
+        }
+
+        private static void RefreshNotificationIcon()
+        {
+            if (App.NotifyIcon == null)
+                return;
+
+            App.NotifyIcon.RefreshVisual();
         }
     }
 }

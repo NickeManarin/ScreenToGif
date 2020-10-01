@@ -430,6 +430,9 @@ namespace ScreenToGif.Windows
                 _viewModel.Monitors = Monitor.AllMonitorsGranular();
 
             await UpdatePositioning();
+
+            if (WindowState == WindowState.Minimized && _regionSelection != null)
+                _regionSelection.WindowState = WindowState.Minimized;
         }
 
         private void SizeIntegerBox_ValueChanged(object sender, RoutedEventArgs e)
@@ -445,8 +448,9 @@ namespace ScreenToGif.Windows
         {
             var relativePoint = e.GetPosition(WidthIntegerBox);
             var screenPoint = WidthIntegerBox.PointToScreen(new Point(0, 0));
-            
-            Util.Native.SetCursorPos((int)(screenPoint.X + relativePoint.X), (int)(screenPoint.Y + relativePoint.Y));
+            var scale = this.Scale();
+
+            Util.Native.SetCursorPos((int)(screenPoint.X + relativePoint.X * scale), (int)(screenPoint.Y + relativePoint.Y * scale));
         }
 
         private static void IsFollowing_PropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -517,17 +521,17 @@ namespace ScreenToGif.Windows
 
         private async void RegionButton_Click(object sender, RoutedEventArgs e)
         {
-            await PickRegion(SelectControl.ModeType.Region);
+            await PickRegion(ModeType.Region);
         }
 
         private async void WindowButton_Click(object sender, RoutedEventArgs e)
         {
-            await PickRegion(SelectControl.ModeType.Window);
+            await PickRegion(ModeType.Window);
         }
 
         private async void FullScreenButton_Click(object sender, RoutedEventArgs e)
         {
-            await PickRegion(SelectControl.ModeType.Fullscreen);
+            await PickRegion(ModeType.Fullscreen);
         }
 
 
@@ -793,12 +797,12 @@ namespace ScreenToGif.Windows
                 return;
             }
 
-            //This code its kind of broken. It's not taking into consideration the relative position of the window on the secondary monitor.
+            //This code it's kind of broken. It's not taking into consideration the relative position of the window on the secondary monitor.
             //It will move the window to the primary monitor, but it won't keep the same axis.  
 
             var diff = _regionSelection.Scale / main.Scale;
-            var left = _viewModel.Region.Left * diff;
-            var top = _viewModel.Region.Top * diff;
+            var left = _viewModel.Region.Left / diff;
+            var top = _viewModel.Region.Top / diff;
             
             if (main.Bounds.Top > top)
                 top = main.Bounds.Top;
@@ -815,7 +819,7 @@ namespace ScreenToGif.Windows
             UserSettings.All.SelectedRegion = _viewModel.Region = new Rect(new Point(left, top), _viewModel.Region.Size);
             UserSettings.All.SelectedRegionScale = main.Scale;
 
-            DisplaySelection(main);
+            DisplaySelection(_regionSelection.Mode, main);
             MoveCommandPanel();
         }
 
@@ -933,7 +937,7 @@ namespace ScreenToGif.Windows
             else
             {
                 MoveCommandPanel();
-                DisplaySelection(null, UserSettings.All.RecorderModeIndex == (int)SelectControl.ModeType.Fullscreen);
+                DisplaySelection((ModeType) UserSettings.All.RecorderModeIndex);
             }
 
             #endregion
@@ -1024,7 +1028,7 @@ namespace ScreenToGif.Windows
 
             DetectCaptureFrequency();
             RegisterCommands();
-            DisplaySelection(null, UserSettings.All.RecorderModeIndex == (int) SelectControl.ModeType.Fullscreen);
+            DisplaySelection();
             MoveCommandPanel();
 
             //If not recording (or recording in manual/interactive mode, but with no frames captured yet), adjust the maximum bounds for the recorder.
@@ -1047,7 +1051,7 @@ namespace ScreenToGif.Windows
 
                         if (_viewModel.Region.IsEmpty)
                         {
-                            await PickRegion((SelectControl.ModeType) ReselectSplitButton.SelectedIndex, true);
+                            await PickRegion((ModeType) ReselectSplitButton.SelectedIndex, true);
 
                             if (_viewModel.Region.IsEmpty)
                                 return;
@@ -1219,7 +1223,7 @@ namespace ScreenToGif.Windows
 
             if (_viewModel.Region.IsEmpty)
             {
-                await PickRegion((SelectControl.ModeType)ReselectSplitButton.SelectedIndex, true);
+                await PickRegion((ModeType)ReselectSplitButton.SelectedIndex, true);
 
                 if (_viewModel.Region.IsEmpty)
                     return;
@@ -1502,10 +1506,12 @@ namespace ScreenToGif.Windows
             return UserSettings.All.UseMemoryCache ? new DirectCachedCapture() : new DirectImageCapture();
         }
 
-        private async Task PickRegion(SelectControl.ModeType mode, bool quickSelection = false)
+        private async Task PickRegion(ModeType mode, bool quickSelection = false)
         {
             _regionSelection.Hide();
             Hide();
+
+            var previousMode = UserSettings.All.RecorderModeIndex;
 
             var selection = await RegionSelectHelper.Select(mode, _viewModel.Region, _regionSelection.Monitor, quickSelection);
 
@@ -1522,18 +1528,19 @@ namespace ScreenToGif.Windows
                 WidthIntegerBox.IgnoreValueChanged = false;
                 HeightIntegerBox.IgnoreValueChanged = false;
 
-                DisplaySelection(selection.Monitor, mode == SelectControl.ModeType.Fullscreen);
+                DisplaySelection(mode, selection.Monitor);
                 MoveCommandPanel();
             }
             else
             {
+                UserSettings.All.RecorderModeIndex = previousMode;
                 DisplaySelection();
             }
 
             Show();
         }
 
-        private void DisplaySelection(Monitor display = null, bool isFullscreen = false)
+        private void DisplaySelection(ModeType? mode = null, Monitor display = null)
         {
             if (_viewModel.Region.IsEmpty)
             {
@@ -1545,7 +1552,7 @@ namespace ScreenToGif.Windows
                 if (display != null)
                     _viewModel.CurrentMonitor = display;
 
-                _regionSelection.Select(_viewModel.Region, display ?? _viewModel.CurrentMonitor, isFullscreen);
+                _regionSelection.Select(mode, _viewModel.Region, display ?? _viewModel.CurrentMonitor);
             }
 
             DisplaySize();
@@ -1556,7 +1563,7 @@ namespace ScreenToGif.Windows
         {
             switch (UserSettings.All.RecorderModeIndex)
             {
-                case (int)SelectControl.ModeType.Window:
+                case (int)ModeType.Window:
                 {
                     SizeTextBlock.ToolTip = null;
 
@@ -1573,7 +1580,7 @@ namespace ScreenToGif.Windows
                     SizeTextBlock.Visibility = Visibility.Collapsed;
                     return;
                 }
-                case (int)SelectControl.ModeType.Fullscreen:
+                case (int)ModeType.Fullscreen:
                 {
                     SizeGrid.Visibility = Visibility.Collapsed;
                     SizeTextBlock.Visibility = Visibility.Visible;
@@ -1683,174 +1690,19 @@ namespace ScreenToGif.Windows
             MovePanelTo(_viewModel.CurrentMonitor, _viewModel.Region.Left + _viewModel.Region.Width / 2 - ActualWidth / 2, _viewModel.Region.Top + _viewModel.Region.Height / 2 - ActualHeight / 2);
         }
 
-        private Monitor MoveCommandPanel2()
+        private void MovePanelTo(Monitor monitor, double left, double top)
         {
-            if (_viewModel.Region.Width < 25 || _viewModel.Region.Height < 25)
-                return null;
-
-            //Get monitors, ordered by how much they intersect the selected region.
-            var monitors = _viewModel.Monitors.OrderByDescending(f =>
-            {
-                var x = Math.Max(_viewModel.Region.Left, f.Bounds.Left);
-                var num1 = Math.Min(_viewModel.Region.Left + _viewModel.Region.Width, f.Bounds.Right);
-                var y = Math.Max(_viewModel.Region.Top, f.Bounds.Top);
-                var num2 = Math.Min(_viewModel.Region.Top + _viewModel.Region.Height, f.Bounds.Bottom);
-
-                if (num1 >= x && num2 >= y)
-                    return num1 - x + num2 - y;
-
-                return 0;
-            }).ToList();
-
-            //Repositions the capture controls near the selected region, in order to stay away from the capture. If no space available on the nearest screen, try others.
-            var count = 0;
-            foreach (var monitor in monitors)
-            {
-                //TODO: The size calculation when inside the secondary monitor with 240DPI is wrong.
-                //When moving from one monitor to the other, sometimes the location is wrong.
-                //If the capture controls are in other screen, check if the recording will be captured correctly.
-
-                #region Calculate the available spaces for all four sides 
-
-                //If the selected region is passing the bottom edge of the display, it means that there are no space available on the bottom.
-                //If the selected region is inside (bottom is below the top most part), it means that there are space available.
-                //If none above, it means that the region is not located inside the screen.
-
-                var bottomSpace = _viewModel.Region.Bottom > monitor.Bounds.Bottom ? 0 :
-                    _viewModel.Region.Bottom > monitor.Bounds.Top ? monitor.Bounds.Bottom - _viewModel.Region.Bottom :
-                        monitor.Bounds.Height;
-
-                var topSpace = _viewModel.Region.Top < monitor.Bounds.Top ? 0 :
-                    _viewModel.Region.Top < monitor.Bounds.Bottom ? _viewModel.Region.Top - monitor.Bounds.Top :
-                        monitor.Bounds.Height;
-
-                var leftSpace = _viewModel.Region.Left < monitor.Bounds.Left ? 0 :
-                    _viewModel.Region.Left < monitor.Bounds.Right ? _viewModel.Region.Left - monitor.Bounds.Left :
-                        monitor.Bounds.Width;
-
-                var rightSpace = _viewModel.Region.Right > monitor.Bounds.Right ? 0 :
-                    _viewModel.Region.Right > monitor.Bounds.Left ? monitor.Bounds.Right - _viewModel.Region.Right :
-                        monitor.Bounds.Width;
-
-                #endregion
-
-                //When there's no space left on the monitor where the selection is located, try the other monitors (if the settings allows that).
-                if (count != 0)
-                {
-                    var toTop = monitor.Bounds.Bottom <= monitors[0].Bounds.Top;
-                    var toLeft = monitor.Bounds.Right <= monitors[0].Bounds.Left;
-                    var toRight = monitor.Bounds.Left >= monitors[0].Bounds.Right;
-                    var toBottom = monitor.Bounds.Top >= monitors[0].Bounds.Bottom;
-
-                    //Bottom.
-                    if (bottomSpace > 0 && toBottom)
-                    {
-                        double left;
-
-                        if (leftSpace > 0)
-                            left = monitor.Bounds.Left + leftSpace - ActualWidth - 10;
-                        else if (rightSpace > 0)
-                            left = monitor.Bounds.Right - rightSpace + 10;
-                        else
-                            left = _viewModel.Region.Left + _viewModel.Region.Width / 2 - ActualWidth / 2;
-
-                        return MovePanelTo(monitors.FirstOrDefault(), left, monitor.Bounds.Bottom - bottomSpace + 10);
-                    }
-
-                    //Top.
-                    if (topSpace > 0 && toTop)
-                    {
-                        double left;
-
-                        if (leftSpace > 0)
-                            left = monitor.Bounds.Left + leftSpace - ActualWidth - 10;
-                        else if (rightSpace > 0)
-                            left = monitor.Bounds.Right - rightSpace + 10;
-                        else
-                            left = _viewModel.Region.Left + _viewModel.Region.Width / 2 - ActualWidth / 2;
-
-                        return MovePanelTo(monitors.FirstOrDefault(), left, monitor.Bounds.Top + topSpace - ActualHeight - 10);
-                    }
-
-                    //Left.
-                    if (leftSpace > 0 && toLeft)
-                    {
-                        double top;
-
-                        if (topSpace > 0)
-                            top = monitor.Bounds.Top + topSpace - ActualHeight - 10;
-                        else if (bottomSpace > 0)
-                            top = monitor.Bounds.Bottom - bottomSpace + 10;
-                        else
-                            top = _viewModel.Region.Top + _viewModel.Region.Height / 2 - ActualHeight / 2;
-
-                        return MovePanelTo(monitors.FirstOrDefault(), monitor.Bounds.Left + leftSpace - ActualWidth - 10, top);
-                    }
-
-                    //Right.
-                    if (rightSpace > 0 && toRight)
-                    {
-                        double top;
-
-                        if (topSpace > 0)
-                            top = monitor.Bounds.Top + topSpace - ActualHeight - 10;
-                        else if (bottomSpace > 0)
-                            top = monitor.Bounds.Bottom - bottomSpace + 10;
-                        else
-                            top = _viewModel.Region.Top + _viewModel.Region.Height / 2 - ActualHeight / 2;
-
-                        return MovePanelTo(monitors.FirstOrDefault(), monitor.Bounds.Right - rightSpace + 10, top);
-                    }
-
-                    continue;
-                }
-
-                //Bottom.
-                if (bottomSpace > ActualHeight + 20)
-                    return MovePanelTo(monitor, (_viewModel.Region.Left + _viewModel.Region.Width / 2 - ActualWidth / 2).Clamp(monitor.Bounds.Left, monitor.Bounds.Right - ActualWidth), _viewModel.Region.Bottom + 10);
-
-                //Top.
-                if (topSpace > ActualHeight + 20)
-                    return MovePanelTo(monitor, (_viewModel.Region.Left + _viewModel.Region.Width / 2 - ActualWidth / 2).Clamp(monitor.Bounds.Left, monitor.Bounds.Right - ActualWidth), _viewModel.Region.Top - ActualHeight - 10);
-
-                //Left.
-                if (leftSpace > ActualWidth + 20)
-                    return MovePanelTo(monitor, _viewModel.Region.Left - ActualWidth - 10, _viewModel.Region.Top + _viewModel.Region.Height / 2 - ActualHeight / 2);
-
-                //Right.
-                if (rightSpace > ActualWidth + 20)
-                    return MovePanelTo(monitor, _viewModel.Region.Right + 10, _viewModel.Region.Top + _viewModel.Region.Height / 2 - ActualHeight / 2);
-
-                count++;
-
-                //When there's no space left on the same monitor as the selected region, try or not to find space in others.
-                if (!UserSettings.All.FallThroughOtherScreens)
-                    break;
-            }
-
-            //No space available, simply center on the selected region.
-            return MovePanelTo(monitors.FirstOrDefault(), _viewModel.Region.Left + _viewModel.Region.Width / 2 - ActualWidth / 2, _viewModel.Region.Top + _viewModel.Region.Height / 2 - ActualHeight / 2);
-        }
-
-        private Monitor MovePanelTo(Monitor monitor, double left, double top)
-        {
-            //If the new region is in another screen, move the panel to the new screen first, to adjust the UI to the screen DPI.
-            
-            if (_viewModel.CurrentControlMonitor?.Handle != monitor.Handle)
+            if (_viewModel.CurrentControlMonitor?.Handle != monitor.Handle || _viewModel.CurrentControlMonitor?.Scale != monitor.Scale)
             {
                 //First move the command window to the final monitor, so that the UI scale can be adjusted.
-                Left = monitor.NativeBounds.Left;
-                Top = monitor.NativeBounds.Top;
+                this.MoveToScreen(monitor);
+                
+                _viewModel.CurrentControlMonitor = monitor;
             }
 
             //Move the command window to the final place.
-            Left = left;
-            Top = top;
-
-            _viewModel.CurrentControlMonitor = monitor;
-
-            //Return the final monitor, so that the region selection can be moved too.
-            return monitor;
+            Left = left / (this.Scale() / monitor.Scale);
+            Top = top / (this.Scale() / monitor.Scale);
         }
 
         /// <summary>
@@ -1873,20 +1725,20 @@ namespace ScreenToGif.Windows
                 throw new Exception("It was not possible to move the current selected region to the closest monitor.");
 
             //To much to the Left.
-            if (closest.NativeBounds.Left > _viewModel.Region.Left - 1)
-                left = closest.NativeBounds.Left;
+            if (closest.Bounds.Left > _viewModel.Region.Left - 1)
+                left = closest.Bounds.Left;
 
             //Too much to the top.
-            if (closest.NativeBounds.Top > _viewModel.Region.Top - 1)
-                top = closest.NativeBounds.Top;
+            if (closest.Bounds.Top > _viewModel.Region.Top - 1)
+                top = closest.Bounds.Top;
 
             //Too much to the right.
-            if (closest.NativeBounds.Right < _viewModel.Region.Left + _viewModel.Region.Width)
-                left = closest.NativeBounds.Right - _viewModel.Region.Width;
+            if (closest.Bounds.Right < _viewModel.Region.Left + _viewModel.Region.Width)
+                left = closest.Bounds.Right - _viewModel.Region.Width;
 
             //Too much to the bottom.
-            if (closest.NativeBounds.Bottom < _viewModel.Region.Top + _viewModel.Region.Height)
-                top = closest.NativeBounds.Bottom - _viewModel.Region.Height;
+            if (closest.Bounds.Bottom < _viewModel.Region.Top + _viewModel.Region.Height)
+                top = closest.Bounds.Bottom - _viewModel.Region.Height;
 
             UserSettings.All.SelectedRegionScale = closest.Scale;
             _viewModel.CurrentMonitor = closest;
@@ -1914,8 +1766,6 @@ namespace ScreenToGif.Windows
 
             _followTimer.Stop();
         }
-
-        #endregion
         
         private void SwitchFrequency(object sender, ExecutedRoutedEventArgs e)
         {
@@ -2166,5 +2016,7 @@ namespace ScreenToGif.Windows
                 LogWriter.Log(e, "Impossible to set the taskbar button overlay");
             }
         }
+
+        #endregion
     }
 }

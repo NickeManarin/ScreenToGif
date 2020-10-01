@@ -1692,7 +1692,6 @@ namespace ScreenToGif.Windows
 
                 using (var client = new WebClient { Proxy = WebHelper.GetProxy() })
                     await client.DownloadFileTaskAsync(new Uri("https://www.screentogif.com/downloads/Gifski.zip", UriKind.Absolute), temp);
-                //await client.DownloadFileTaskAsync(new Uri("https://github.com/NickeManarin/ScreenToGif-Website/raw/gh-pages/downloads/Gifski.zip", UriKind.Absolute), temp);
 
                 using (var zip = ZipFile.Open(temp, ZipArchiveMode.Read))
                 {
@@ -1774,6 +1773,29 @@ namespace ScreenToGif.Windows
 
             #endregion
 
+            #region Check for permissions
+
+            if (!DirectoryHelper.HasWriteRights(UserSettings.All.SharpDxLocationFolder))
+            {
+                if (!Dialog.Ask(Title, LocalizationHelper.Get("S.Options.Extras.Permission.Header"), LocalizationHelper.Get("S.Options.Extras.Permission.Observation")))
+                    return;
+
+                ExtrasGrid.IsEnabled = false;
+                Cursor = Cursors.AppStarting;
+                SharpDxImageCard.Status = ExtrasStatus.Processing;
+                SharpDxImageCard.Description = LocalizationHelper.Get("S.Options.Extras.Downloading");
+
+                //If the app has no permission to write to the selected folder, it should ask to restart the process 
+                await ProcessHelper.RestartAsAdmin($"-d sharpdx \"{UserSettings.All.SharpDxLocationFolder}\"", true);
+
+                CheckTools();
+                ExtrasGrid.IsEnabled = true;
+                Cursor = Cursors.Arrow;
+                return;
+            }
+            
+            #endregion
+
             #region Download
 
             ExtrasGrid.IsEnabled = false;
@@ -1788,7 +1810,6 @@ namespace ScreenToGif.Windows
 
                 using (var client = new WebClient { Proxy = WebHelper.GetProxy() })
                     await client.DownloadFileTaskAsync(new Uri("https://www.screentogif.com/downloads/SharpDx.zip", UriKind.Absolute), temp);
-                //await client.DownloadFileTaskAsync(new Uri("https://github.com/NickeManarin/ScreenToGif-Website/raw/gh-pages/downloads/SharpDx.zip", UriKind.Absolute), temp);
 
                 using (var zip = ZipFile.Open(temp, ZipArchiveMode.Read))
                 {
@@ -2078,7 +2099,7 @@ namespace ScreenToGif.Windows
                     else
                     {
                         FfmpegImageCard.Status = ExtrasStatus.Available;
-                        FfmpegImageCard.Description = string.Format(LocalizationHelper.Get("S.Options.Extras.Download", "{0}"), "~ 43,7 MB");
+                        FfmpegImageCard.Description = string.Format(LocalizationHelper.Get("S.Options.Extras.Download", "{0}"), "~ 24,6 MB");
                     }
 
                     #endregion
@@ -2099,7 +2120,7 @@ namespace ScreenToGif.Windows
                     else
                     {
                         GifskiImageCard.Status = ExtrasStatus.Available;
-                        GifskiImageCard.Description = string.Format(LocalizationHelper.Get("S.Options.Extras.Download", "{0}"), "~ 491 KB");
+                        GifskiImageCard.Description = string.Format(LocalizationHelper.Get("S.Options.Extras.Download", "{0}"), "~ 512 KB");
                     }
 
                     #endregion

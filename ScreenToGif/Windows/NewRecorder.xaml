@@ -6,7 +6,7 @@
                   xmlns:u="clr-namespace:ScreenToGif.Util"
                   x:Name="RecorderWindow" Title="ScreenToGif" SnapsToDevicePixels="True" UseLayoutRounding="True" AllowsTransparency="False"
                   WindowStyle="None" Topmost="True" Icon="../Resources/Logo.ico" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize" MinWidth="220"
-                  FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}" 
+                  FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}" WindowStartupLocation="Manual"
                   Loaded="Window_Loaded" Activated="Window_Activated" KeyDown="Window_KeyDown" StateChanged="Window_StateChanged" Closing="Window_Closing">
 
     <n:RecorderWindow.TaskbarItemInfo>
@@ -95,6 +95,12 @@
                 <TextBlock Grid.Column="0" Text="{Binding ElementName=RecorderWindow, Path=Title, FallbackValue=ScreenToGif}" Margin="5,0,3,0"
                            VerticalAlignment="Center" FontSize="16" Foreground="{DynamicResource Element.Foreground.Header}"/>
 
+                <!--<TextBlock Grid.Column="1" VerticalAlignment="Center" Margin="5">
+                    <Run Text="{Binding ElementName=RecorderWindow, Path=Left, StringFormat={}{0}}"/>
+                    <Run Text="x"/>
+                    <Run Text="{Binding ElementName=RecorderWindow, Path=Top, StringFormat={}{0}}"/>
+                </TextBlock>-->
+                
                 <TextBlock Grid.Column="1" Text="{DynamicResource S.Recorder.ClickOrPress}" VerticalAlignment="Center" TextAlignment="Center" Margin="5" 
                            Foreground="{DynamicResource Element.Foreground.Gray112}">
                     <TextBlock.Visibility>

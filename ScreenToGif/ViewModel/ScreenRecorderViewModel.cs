@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using ScreenToGif.Native;
 
@@ -98,8 +99,8 @@ namespace ScreenToGif.ViewModel
             set => SetProperty(ref _currentControlMonitor, value);
         }
 
-        public Rect MaximumBounds => IsDirectMode && CurrentMonitor != null ? CurrentMonitor.Bounds : new Rect(SystemParameters.VirtualScreenLeft, SystemParameters.VirtualScreenTop, SystemParameters.VirtualScreenWidth, SystemParameters.VirtualScreenHeight);
-
+        public Rect MaximumBounds => IsDirectMode && CurrentMonitor != null ? CurrentMonitor.Bounds : 
+            new Rect(Monitors.Min(m => m.Bounds.X), Monitors.Min(m => m.Bounds.Y), Monitors.Max(m => m.Bounds.Right), Monitors.Max(m => m.Bounds.Bottom));
 
         public Style ButtonStyle
         {

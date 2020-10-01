@@ -325,6 +325,7 @@
     <Compile Include="Model\MouseClicksModel.cs" />
     <Compile Include="Model\VideoSource.cs" />
     <Compile Include="Native\Monitor.cs" />
+    <Compile Include="Native\Windows.cs" />
     <Compile Include="Settings\Migrations\IMigration.cs" />
     <Compile Include="Settings\Migrations\Migration0to2_28.cs" />
     <Compile Include="Settings\Migrations\Migrations.cs" />
@@ -349,6 +350,7 @@
     </Compile>
     <Compile Include="Util\ActionStack.cs" />
     <Compile Include="Util\Converters\StringToDoubleArray.cs" />
+    <Compile Include="Util\DirectoryHelper.cs" />
     <Compile Include="Util\InputHook\CustomKeyEventArgs.cs" />
     <Compile Include="Util\InputHook\CustomKeyPressEventArgs.cs" />
     <Compile Include="Util\InputHook\SimpleMouseGesture.cs" />
@@ -451,6 +453,7 @@
     <Compile Include="Util\MutexList.cs" />
     <Compile Include="Util\NotificationManager.cs" />
     <Compile Include="Capture\ImageCapture.cs" />
+    <Compile Include="Util\ProcessHelper.cs" />
     <Compile Include="Util\ThemeHelper.cs" />
     <Compile Include="Util\WebHelper.cs" />
     <Compile Include="Model\ApplicationModel.cs" />
@@ -508,6 +511,9 @@
     </Compile>
     <Compile Include="Windows\Other\CacheDialog.xaml.cs">
       <DependentUpon>CacheDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Other\Downloader.xaml.cs">
+      <DependentUpon>Downloader.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Other\FfmpegPresetDialog.xaml.cs">
       <DependentUpon>FfmpegPresetDialog.xaml</DependentUpon>
@@ -817,6 +823,10 @@
     <Page Include="Windows\Other\CacheDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Other\Downloader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Other\FfmpegPresetDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
