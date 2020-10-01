@@ -157,6 +157,12 @@
     <s:String x:Key="S.Updater.Downloading">Загрузка...</s:String>
     <s:String x:Key="S.Updater.Warning.Show">Не удалось показать детали загрузки.</s:String>
     <s:String x:Key="S.Updater.Warning.Download">Не удалось загрузить обновление</s:String>
+    <s:String x:Key="S.Updater.Warning.Encoding">Перед обновлением нужно дождаться завершения всех обработок.</s:String>
+    
+    <!--Downloader-->
+    <s:String x:Key="S.Downloader.Title">ScreenToGif - Загрузчик</s:String>
+    <s:String x:Key="S.Downloader.Header">Загрузчик</s:String>
+    <s:String x:Key="S.Downloader.Size">{0} из {1}</s:String>
     
     <!--Options-->
     <s:String x:Key="S.Options.Title">ScreenToGif - Настройки</s:String>
@@ -499,7 +505,9 @@
     <s:String x:Key="S.Options.Extras.License.Ffmpeg">Лицензия FFmpeg</s:String>
     <s:String x:Key="S.Options.Extras.License.Gifski">Лицензия Gifski</s:String>
     <s:String x:Key="S.Options.Extras.License.SharpDx">Лицензия SharpDx</s:String>
-
+    <s:String x:Key="S.Options.Extras.Permission.Header">Отсутствует разрешение на запись в папку</s:String>
+    <s:String x:Key="S.Options.Extras.Permission.Observation">Невозможно сохранить загрузку в папке из-за отсутствия разрешения на запись.&#10;&#10;Запустить загрузчик с правами администратора, чтобы завершить загрузку?</s:String>
+    
     <!--Options • Donations-->
     <s:String x:Key="S.Options.Donate.Donate">Donate</s:String>
     <s:String x:Key="S.Options.Donate.Donate.Dollar">U$D</s:String>
@@ -1416,6 +1424,7 @@
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">Файл</s:String>
     <s:String x:Key="S.SaveAs.File.Location">Папка назначения.</s:String>
+    <s:String x:Key="S.SaveAs.File.SelectFolder">Выберите папку вывода</s:String>
     <s:String x:Key="S.SaveAs.File.Choose">Выберите расположение.</s:String>
     <s:String x:Key="S.SaveAs.File.Format">Формат файла</s:String>
     <s:String x:Key="S.SaveAs.File.Name">Имя файла. Вставте формат даты/времени между '?'</s:String>
