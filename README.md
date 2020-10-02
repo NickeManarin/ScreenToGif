@@ -47,9 +47,6 @@
 <a href="https://github.com/NickeManarin/ScreenToGif/wiki/Help" target="_blank">
  <img alt="Documentation WIP" src="https://img.shields.io/badge/Docs-WIP-red.svg" />
 </a>
-<a href="https://gitter.im/ScreenToGif/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge" target="_blank">
- <img alt="Join me at Gitter" src="https://img.shields.io/gitter/room/nwjs/nw.js.svg" />
-</a>
 <a href="https://github.com/NickeManarin/ScreenToGif/issues" target="_blank">
  <img alt="Issues" src="https://img.shields.io/github/issues/NickeManarin/ScreenToGif.svg" />
 </a>
@@ -76,7 +73,7 @@
 I don't care if you copy the source code to use in your project, but please avoid simply changing the name and selling as your work. 
 That's not why I'm sharing the source code, at all.
 
-<h2>Screenshots (and other images)</h2>
+<h2>Screenshots</h2>
 
 <p align="center">
  <img align="center" alt="start up" src="https://www.screentogif.com/media/Recorder.png" />
