@@ -2140,6 +2140,12 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public bool KeyStrokesIgnoreInjected
+        {
+            get => (bool) GetValue();
+            set => SetValue(value);
+        }
+
         public bool KeyStrokesEarlier
         {
             get => (bool)GetValue();

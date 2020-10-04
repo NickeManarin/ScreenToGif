@@ -44,6 +44,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -55,25 +56,29 @@
                                     IsChecked="{Binding KeyStrokesIgnoreNonModifiers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     ToolTip="{DynamicResource S.KeyStrokes.IgnoreModifiers.Info}"/>
 
-                <n:ExtendedCheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Text="{DynamicResource S.KeyStrokes.Extend}" Margin="0,5"
+                <n:ExtendedCheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Text="{DynamicResource S.KeyStrokes.IgnoreInjected}" Margin="0,5"
+                                    IsChecked="{Binding KeyStrokesIgnoreInjected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    ToolTip="{DynamicResource S.KeyStrokes.IgnoreInjected.Info}"/>
+
+                <n:ExtendedCheckBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Text="{DynamicResource S.KeyStrokes.Extend}" Margin="0,5"
                                     IsChecked="{Binding KeyStrokesExtended, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" Margin="10,0,0,0" 
+                <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" Margin="10,0,0,0" 
                             Visibility="{Binding KeyStrokesExtended, Converter={StaticResource Bool2Visibility}}">
                     <TextBlock Text="{DynamicResource S.KeyStrokes.By}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                     <n:IntegerUpDown Minimum="10" Maximum="1000" Margin="5" MinWidth="70" Value="{Binding KeyStrokesDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
 
-                <n:ExtendedCheckBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Text="{DynamicResource S.KeyStrokes.Earlier}" Margin="0,5"
+                <n:ExtendedCheckBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Text="{DynamicResource S.KeyStrokes.Earlier}" Margin="0,5"
                                     IsChecked="{Binding KeyStrokesEarlier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" Margin="10,0,0,0" 
+                <StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" Margin="10,0,0,0" 
                             Visibility="{Binding KeyStrokesEarlier, Converter={StaticResource Bool2Visibility}}">
                     <TextBlock Text="{DynamicResource S.KeyStrokes.By}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                     <n:IntegerUpDown Minimum="10" Maximum="1000" Margin="5" MinWidth="70" Value="{Binding KeyStrokesEarlierBy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
 
-                <TextBlock Grid.Row="6" Grid.Column="0" Text="{DynamicResource S.KeyStrokes.Separator}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                <TextBlock Grid.Row="7" Grid.Column="0" Text="{DynamicResource S.KeyStrokes.Separator}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                 <n:ExtendedTextBox Grid.Row="6" Grid.Column="1" Margin="5,3" MinWidth="70" Text="{Binding KeyStrokesSeparator, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
         </Expander>
