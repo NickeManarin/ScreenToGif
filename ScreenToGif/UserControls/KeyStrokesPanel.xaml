@@ -79,7 +79,7 @@
                 </StackPanel>
 
                 <TextBlock Grid.Row="7" Grid.Column="0" Text="{DynamicResource S.KeyStrokes.Separator}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                <n:ExtendedTextBox Grid.Row="6" Grid.Column="1" Margin="5,3" MinWidth="70" Text="{Binding KeyStrokesSeparator, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <n:ExtendedTextBox Grid.Row="7" Grid.Column="1" Margin="5,3" MinWidth="70" Text="{Binding KeyStrokesSeparator, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
         </Expander>
 
