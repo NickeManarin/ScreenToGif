@@ -157,6 +157,12 @@
     <s:String x:Key="S.Updater.Downloading">Downloaden...</s:String>
     <s:String x:Key="S.Updater.Warning.Show">Het was niet mogelijk om de downloaddetails te tonen.</s:String>
     <s:String x:Key="S.Updater.Warning.Download">De update kon niet worden gedownload.</s:String>
+    <s:String x:Key="S.Updater.Warning.Encoding">Je moet wachten tot alle coderingen zijn voltooid voordat je kunt updaten.</s:String>
+    
+    <!--Downloader-->
+    <s:String x:Key="S.Downloader.Title">ScreenToGif - Downloader</s:String>
+    <s:String x:Key="S.Downloader.Header">Downloader</s:String>
+    <s:String x:Key="S.Downloader.Size">{0} van {1}</s:String>
     
     <!--Options-->
     <s:String x:Key="S.Options.Title">ScreenToGif - Instellingen</s:String>
@@ -499,7 +505,9 @@
     <s:String x:Key="S.Options.Extras.License.Ffmpeg">FFmpeg licentie</s:String>
     <s:String x:Key="S.Options.Extras.License.Gifski">Gifski licentie</s:String>
     <s:String x:Key="S.Options.Extras.License.SharpDx">SharpDx-licentie</s:String>
-
+    <s:String x:Key="S.Options.Extras.Permission.Header">Geen bewerkingsrechten voor deze map</s:String>
+    <s:String x:Key="S.Options.Extras.Permission.Observation">Het is niet mogelijk om de download in de map op te slaan vanwege een gebrek aan schrijfrechten. &#10;&#10;Wil je de downloader starten met beheerdersrechten om de download te voltooien?</s:String>
+    
     <!--Options • Donations-->
     <s:String x:Key="S.Options.Donate.Donate">Doneren</s:String>
     <s:String x:Key="S.Options.Donate.Donate.Dollar">US$ Doneren</s:String>
@@ -1416,6 +1424,7 @@
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">Bestand</s:String>
     <s:String x:Key="S.SaveAs.File.Location">Doelmap.</s:String>
+    <s:String x:Key="S.SaveAs.File.SelectFolder">Selecteer de uitvoermap</s:String>
     <s:String x:Key="S.SaveAs.File.Choose">Locatie kiezen.</s:String>
     <s:String x:Key="S.SaveAs.File.Format">Bestandsformaat</s:String>
     <s:String x:Key="S.SaveAs.File.Name">Bestandsnaam. Datum/tijd-notatie invoegen tussen '?'</s:String>
