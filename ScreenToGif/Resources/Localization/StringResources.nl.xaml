@@ -611,7 +611,7 @@
     <s:String x:Key="S.Recorder.Screen.Name.Info1">Grafische adapter: {0}</s:String>
     <s:String x:Key="S.Recorder.Screen.Name.Info2">Resolutie: {0} x {1}</s:String>
     <s:String x:Key="S.Recorder.Screen.Name.Info3">Natuurlijke resolutie: {0} x {1}</s:String>
-    <s:String x:Key="S.Recorder.Screen.Name.Info4">DPI: {0} ({1:0.###)%)</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Info4">DPI: {0} ({1:0.###}%)</s:String>
     <s:String x:Key="S.Recorder.Move">Sleep om de selectie&#10;te verplaatsen.</s:String>
     <s:String x:Key="S.Recorder.Accept">Accepteren</s:String>
     <s:String x:Key="S.Recorder.Retry">Opnieuw proberen</s:String>
