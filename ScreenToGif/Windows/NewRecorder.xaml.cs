@@ -1600,7 +1600,7 @@ namespace ScreenToGif.Windows
                         (Math.Abs(_viewModel.CurrentMonitor.Scale - 1) > 0.001 ? Environment.NewLine +
                         LocalizationHelper.GetWithFormat("S.Recorder.Screen.Name.Info3", "Native resolution: {0} x {1}", _viewModel.CurrentMonitor.NativeBounds.Width, _viewModel.CurrentMonitor.NativeBounds.Height) : "")  +
                         Environment.NewLine +
-                        LocalizationHelper.GetWithFormat("S.Recorder.Screen.Name.Info4", "DPI: {0} (x {1:0.##})", _viewModel.CurrentMonitor.Dpi, _viewModel.CurrentMonitor.Scale * 100d);
+                        LocalizationHelper.GetWithFormat("S.Recorder.Screen.Name.Info4", "DPI: {0} ({1:0.##}%)", _viewModel.CurrentMonitor.Dpi, _viewModel.CurrentMonitor.Scale * 100d);
                     
                     return;
                 }

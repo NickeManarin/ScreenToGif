@@ -9,7 +9,7 @@ namespace ScreenToGif.Native
         /// <summary>
         /// Special window handles.
         /// </summary>
-        public enum SpecialWindowHandles
+        internal enum SpecialWindowHandles
         {
             /// <summary>
             /// Places the window at the top of the Z order.
@@ -36,7 +36,7 @@ namespace ScreenToGif.Native
         }
 
         [Flags]
-        public enum SetWindowPosFlags : uint
+        internal enum SetWindowPosFlags : uint
         {
             /// <summary>
             /// If the calling thread and the thread that owns the window are attached to different input queues, the system posts the request to the thread that owns the window.
@@ -122,10 +122,10 @@ namespace ScreenToGif.Native
         }
 
         [DllImport("user32.dll", SetLastError = true)]
-        public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, SetWindowPosFlags uFlags);
+        internal static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, SetWindowPosFlags uFlags);
 
 
-        public static void MoveToScreen(this Window window, Monitor next, bool fullScreen = false)
+        internal static void MoveToScreen(this Window window, Monitor next, bool fullScreen = false)
         {
             if (fullScreen)
             {
