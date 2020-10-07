@@ -9,6 +9,7 @@ namespace ScreenToGif.Model
         #region Variables
 
         private bool _ignoreNonModifiers;
+        private bool _ignoreInjected;
         private bool _earlier;
         private double _earlierBy;
         private string _separator;
@@ -39,6 +40,12 @@ namespace ScreenToGif.Model
         {
             get => _ignoreNonModifiers;
             set => SetProperty(ref _ignoreNonModifiers, value);
+        }
+
+        public bool KeyStrokesIgnoreInjected
+        {
+            get => _ignoreInjected;
+            set => SetProperty(ref _ignoreInjected, value);
         }
 
         public bool KeyStrokesEarlier
@@ -179,6 +186,7 @@ namespace ScreenToGif.Model
             return new KeyStrokesModel
             {
                 KeyStrokesIgnoreNonModifiers = true,
+                KeyStrokesIgnoreInjected = false,
                 KeyStrokesEarlier = false,
                 KeyStrokesEarlierBy = 500,
                 KeyStrokesExtended = true,
@@ -205,6 +213,7 @@ namespace ScreenToGif.Model
             return new KeyStrokesModel
             {
                 KeyStrokesIgnoreNonModifiers = UserSettings.All.KeyStrokesIgnoreNonModifiers,
+                KeyStrokesIgnoreInjected = UserSettings.All.KeyStrokesIgnoreInjected,
                 KeyStrokesEarlier = UserSettings.All.KeyStrokesEarlier,
                 KeyStrokesEarlierBy = UserSettings.All.KeyStrokesEarlierBy,
                 KeyStrokesExtended = UserSettings.All.KeyStrokesExtended,
