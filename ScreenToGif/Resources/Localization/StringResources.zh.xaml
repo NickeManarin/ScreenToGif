@@ -1195,6 +1195,8 @@
     <s:String x:Key="S.KeyStrokes.Edit">编辑键盘按键</s:String>
     <s:String x:Key="S.KeyStrokes.IgnoreModifiers">忽略 Ctrl、Alt、Shift 和 Windows 键，而不将其用作修饰符。</s:String>
     <s:String x:Key="S.KeyStrokes.IgnoreModifiers.Info">它将忽略诸如“Control”这样单独的按键, 但它不会忽略“Control + C”。</s:String>
+    <s:String x:Key="S.KeyStrokes.IgnoreInjected">忽略软件模拟的按键。</s:String>
+    <s:String x:Key="S.KeyStrokes.IgnoreInjected.Info">仅记录用户实际输入的按键。</s:String>
     <s:String x:Key="S.KeyStrokes.Extend">延长按键显示时间</s:String>
     <s:String x:Key="S.KeyStrokes.Earlier">早些时候开始展示击键。</s:String>
     <s:String x:Key="S.KeyStrokes.By">长度 (ms)</s:String>

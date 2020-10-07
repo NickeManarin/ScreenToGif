@@ -1178,6 +1178,8 @@
     <s:String x:Key="S.KeyStrokes.Edit">Edit your key strokes</s:String>
     <s:String x:Key="S.KeyStrokes.IgnoreModifiers">Ignore Ctrl, Alt, Shift, and Windows keys while not being used as modifiers.</s:String>
     <s:String x:Key="S.KeyStrokes.IgnoreModifiers.Info">It will ignore lone key presses such as "Control", but it will not ignore "Control + C".</s:String>
+    <s:String x:Key="S.KeyStrokes.IgnoreInjected">Ignore software simulated keystrokes.</s:String>
+    <s:String x:Key="S.KeyStrokes.IgnoreInjected.Info">Only record user input keystrokes.</s:String>
     <s:String x:Key="S.KeyStrokes.Extend">Extend the exhibition of the key strokes.</s:String>
     <s:String x:Key="S.KeyStrokes.Earlier">Start the exhibition of the key strokes earlier.</s:String>
     <s:String x:Key="S.KeyStrokes.By">By (ms):</s:String>

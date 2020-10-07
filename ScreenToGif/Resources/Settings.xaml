@@ -369,6 +369,7 @@
     <!--Editor • KeyStrokes-->
     <s:Boolean x:Key="IsKeyStrokesKeysExpanded">True</s:Boolean>
     <s:Boolean x:Key="KeyStrokesIgnoreNonModifiers">True</s:Boolean>
+    <s:Boolean x:Key="KeyStrokesIgnoreInjected">False</s:Boolean>
     <s:Boolean x:Key="KeyStrokesEarlier">False</s:Boolean>
     <s:Double x:Key="KeyStrokesEarlierBy">500.0</s:Double>
     <s:Boolean x:Key="KeyStrokesExtended">True</s:Boolean>

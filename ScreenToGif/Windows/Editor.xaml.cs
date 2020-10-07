@@ -7030,6 +7030,9 @@ namespace ScreenToGif.Windows
                 var keyList = new List<SimpleKeyGesture>();
                 for (var i = 0; i < frame.KeyList.Count; i++)
                 {
+                    if (model.KeyStrokesIgnoreInjected && frame.KeyList[i].IsInjected)
+                        continue;
+
                     //Ignore Control, Shift, Alt and Windows keys if not acting as modifiers.
                     if (model.KeyStrokesIgnoreNonModifiers && (frame.KeyList[i].Key >= Key.LeftShift && frame.KeyList[i].Key <= Key.RightAlt || frame.KeyList[i].Key == Key.LWin || frame.KeyList[i].Key == Key.RWin))
                         continue;

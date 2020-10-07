@@ -31,6 +31,9 @@ namespace ScreenToGif.Util
         [DataMember]
         public bool IsUppercase { get; set; }
 
+        [DataMember]
+        public bool IsInjected { get; set; }
+
         /// <summary>Gets a string representation of this <see cref="T:System.Windows.Input.KeyGesture" />.</summary>
         /// <returns>The display string for this <see cref="T:System.Windows.Input.KeyGesture" />. The default value is <see cref="F:System.String.Empty" />.</returns>
         [IgnoreDataMember]
@@ -66,11 +69,12 @@ namespace ScreenToGif.Util
         /// <param name="key">The key associated with the gesture.</param>
         /// <param name="modifiers">The modifier keys associated with the gesture.</param>
         /// <param name="isUppercase">True if the letter is uppercase.</param>
+        /// <param name="isInjected">True if keystroke was simulated by other software.</param>
         /// <exception cref="T:System.ComponentModel.InvalidEnumArgumentException">
         /// <paramref name="modifiers" /> is not a valid <see cref="T:System.Windows.Input.ModifierKeys" />-or-<paramref name="key" /> is not a valid <see cref="T:System.Windows.Input.Key" />.</exception>
         /// <exception cref="T:System.NotSupportedException">
         /// <paramref name="key" /> and <paramref name="modifiers" /> do not form a valid <see cref="T:System.Windows.Input.KeyGesture" />.</exception>
-        public SimpleKeyGesture(Key key, ModifierKeys modifiers, bool isUppercase = false) : this(key, modifiers, string.Empty, isUppercase)
+        public SimpleKeyGesture(Key key, ModifierKeys modifiers, bool isUppercase = false, bool isInjected = false) : this(key, modifiers, string.Empty, isUppercase, isInjected)
         {
             //Remove the modifier key, if it's the same as the detected pressend key.
             if (key == Key.LeftCtrl || key == Key.LeftShift || key == Key.LeftAlt || key == Key.LWin || key == Key.RightCtrl || key == Key.RightShift || key == Key.RightAlt || key == Key.RWin)
@@ -82,13 +86,14 @@ namespace ScreenToGif.Util
         /// <param name="modifiers">The modifier keys associated with the gesture.</param>
         /// <param name="displayString">A string representation of the <see cref="T:System.Windows.Input.KeyGesture" />.</param>
         /// <param name="isUppercase">True if the letter is uppercase.</param>
+        /// <param name="isInjected">True if keystroke was simulated by other software.</param>
         /// <exception cref="T:System.ComponentModel.InvalidEnumArgumentException">
         /// <paramref name="modifiers" /> is not a valid <see cref="T:System.Windows.Input.ModifierKeys" />-or-<paramref name="key" /> is not a valid <see cref="T:System.Windows.Input.Key" />.</exception>
         /// <exception cref="T:System.ArgumentNullException">
         /// <paramref name="displayString" /> is null.</exception>
         /// <exception cref="T:System.NotSupportedException">
         /// <paramref name="key" /> and <paramref name="modifiers" /> do not form a valid <see cref="T:System.Windows.Input.KeyGesture" />.</exception>
-        public SimpleKeyGesture(Key key, ModifierKeys modifiers, string displayString, bool isUppercase = false)
+        public SimpleKeyGesture(Key key, ModifierKeys modifiers, string displayString, bool isUppercase = false, bool isInjected = false)
         {
             if (!IsDefinedKey(key))
                 throw new InvalidEnumArgumentException(nameof(key), (int)key, typeof(Key));
@@ -96,6 +101,7 @@ namespace ScreenToGif.Util
             Modifiers = modifiers;
             Key = key;
             IsUppercase = isUppercase;
+            IsInjected = isInjected;
             DisplayString = displayString ?? throw new ArgumentNullException(nameof(displayString));
         }
 

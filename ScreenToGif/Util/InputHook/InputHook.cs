@@ -878,6 +878,7 @@ namespace ScreenToGif.Util.InputHook
 
             //Read structure KeyboardHookStruct at lParam
             var keyboard = (KeyboardHookStruct)Marshal.PtrToStructure(lParam, typeof(KeyboardHookStruct));
+            var isInjected = (keyboard.Flags & 0x10) != 0;
 
             if (KeyDown != null && (wParam == MessageKeydown || wParam == MessageSystemKeyDown))
             {
@@ -885,8 +886,9 @@ namespace ScreenToGif.Util.InputHook
 
                 var isDownShift = (GetKeyState(KeyShift) & 0x80) == 0x80;
                 var isDownCapslock = GetKeyState(KeyCapital) != 0;
+             
 
-                var e = new CustomKeyEventArgs(KeyInterop.KeyFromVirtualKey(keyboard.KeyCode), isDownCapslock ^ isDownShift);
+                var e = new CustomKeyEventArgs(KeyInterop.KeyFromVirtualKey(keyboard.KeyCode), isDownCapslock ^ isDownShift, isInjected);
 
                 KeyDown?.Invoke(this, e);
 
@@ -925,7 +927,7 @@ namespace ScreenToGif.Util.InputHook
             {
                 #region Raise KeyUp
 
-                var e = new CustomKeyEventArgs(KeyInterop.KeyFromVirtualKey(keyboard.KeyCode));
+                var e = new CustomKeyEventArgs(KeyInterop.KeyFromVirtualKey(keyboard.KeyCode), false, isInjected);
 
                 KeyUp?.Invoke(this, e);
 
