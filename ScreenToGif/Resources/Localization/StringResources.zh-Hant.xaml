@@ -23,14 +23,14 @@
     <s:String x:Key="S.Preview">預覽</s:String>
     <s:String x:Key="S.Size">大小</s:String>
     <s:String x:Key="S.Background">背景</s:String>
-    <s:String x:Key="S.Color">顏色:</s:String>
+    <s:String x:Key="S.Color">顏色：</s:String>
     <s:String x:Key="S.Delay">延遲</s:String>
-    <s:String x:Key="S.DelayMs">延遲(毫秒):</s:String>
-    <s:String x:Key="S.ValueMs">數值 -+ (ms):</s:String>
-    <s:String x:Key="S.ScaleValue">比例值:</s:String>
-    <s:String x:Key="S.Margin">邊界:</s:String>
-    <s:String x:Key="S.Padding">填充:</s:String>
-    <s:String x:Key="S.MinHeight">最小高度:</s:String>
+    <s:String x:Key="S.DelayMs">延遲(毫秒)：</s:String>
+    <s:String x:Key="S.ValueMs">數值 -+ (ms)：</s:String>
+    <s:String x:Key="S.ScaleValue">比例值：</s:String>
+    <s:String x:Key="S.Margin">邊界：</s:String>
+    <s:String x:Key="S.Padding">填充：</s:String>
+    <s:String x:Key="S.MinHeight">最小高度：</s:String>
     <s:String x:Key="S.AndOr">且/或</s:String>
     
     <!--Warning messages-->
@@ -38,20 +38,20 @@
     <s:String x:Key="S.Required">必填字段</s:String>
     <s:String x:Key="S.Warning.Net.Title">缺少相依元件</s:String>
     <s:String x:Key="S.Warning.Net.Header">Net Framework 4.8 不存在</s:String>
-    <s:String x:Key="S.Warning.Net.Message">為了正確使用此應用程式，您需要下載正確版本的 .Net Framework</s:String>
+    <s:String x:Key="S.Warning.Net.Message">為了正確使用此應用程式，您需要下載正確版本的 .Net Framework。</s:String>
     <s:String x:Key="S.Warning.Single.Title">同時只能有一個實例執行</s:String>
     <s:String x:Key="S.Warning.Single.Header">該應用程式已在執行中</s:String>
-    <s:String x:Key="S.Warning.Single.Message">ScreenToGif 已經在執行中，但是顯然沒有打開任何視窗。 請檢查系統通知欄，其中必須有一個 ScreenToGif 圖標</s:String>
+    <s:String x:Key="S.Warning.Single.Message">ScreenToGif 已經在執行中，但是顯然沒有打開任何視窗。請檢查系統工具列，其中必須有一個 ScreenToGif 圖示。</s:String>
     <s:String x:Key="S.Exiting.Title">正在離開 ScreenToGif</s:String>
-    <s:String x:Key="S.Exiting.Instruction">你確定要離開嗎?</s:String>
+    <s:String x:Key="S.Exiting.Instruction">你確定要離開嗎？</s:String>
     <s:String x:Key="S.Exiting.Message">所有視窗及工具列圖示將被關閉</s:String>
     
     <!--Keys-->
     <s:String x:Key="S.Keys.Space">空白鍵</s:String>
     
     <!--Tray icon-->
-    <s:String x:Key="S.NewRecording">新增屏幕錄製</s:String>
-    <s:String x:Key="S.NewWebcamRecording">新增攝像頭錄製</s:String>
+    <s:String x:Key="S.NewRecording">新增螢幕錄製</s:String>
+    <s:String x:Key="S.NewWebcamRecording">新增攝影機錄製</s:String>
     <s:String x:Key="S.NewBoardRecording">新增畫板錄製</s:String>
     <s:String x:Key="S.Exit">離開</s:String>
     
@@ -128,13 +128,13 @@
     <!--StartUp-->
     <s:String x:Key="S.StartUp.Title">ScreenToGif - 啟動</s:String>
     <s:String x:Key="S.StartUp.Recorder">螢幕錄影</s:String>
-    <s:String x:Key="S.StartUp.Recorder.Tooltip">啟動螢幕錄影功能，輕鬆錄製您的螢幕畫面</s:String>
+    <s:String x:Key="S.StartUp.Recorder.Tooltip">啟動螢幕錄影功能，輕鬆錄製您的螢幕畫面。</s:String>
     <s:String x:Key="S.StartUp.Webcam">網路攝影機錄影</s:String>
-    <s:String x:Key="S.StartUp.Webcam.Tooltip">啟動網路攝影機錄影功能，輕鬆錄製您網路攝影機裡的影像</s:String>
+    <s:String x:Key="S.StartUp.Webcam.Tooltip">啟動網路攝影機錄影功能，輕鬆錄製您網路攝影機裡的影像。</s:String>
     <s:String x:Key="S.StartUp.Board">繪圖板錄影</s:String>
-    <s:String x:Key="S.StartUp.Board.Tooltip">啟動繪圖板錄影功能，輕鬆錄製您繪圖的過程</s:String>
+    <s:String x:Key="S.StartUp.Board.Tooltip">啟動繪圖板錄影功能，輕鬆錄製您繪圖的過程。</s:String>
     <s:String x:Key="S.StartUp.Editor">編輯器</s:String>
-    <s:String x:Key="S.StartUp.Editor.Tooltip">打開編輯器視窗，在該視窗中您可以編輯新錄製的影像</s:String>
+    <s:String x:Key="S.StartUp.Editor.Tooltip">打開編輯器視窗，在該視窗中您可以編輯新錄製的影像。</s:String>
     <s:String x:Key="S.StartUp.Options">選項</s:String>
     <s:String x:Key="S.StartUp.NewRelease">有新版本 • {0} 可用</s:String>
     <s:String x:Key="S.StartUp.NewRelease.Tooltip">下載最新版本的 ScreenToGif</s:String>
@@ -143,13 +143,13 @@
     <s:String x:Key="S.Updater.Title">更新</s:String>
     <s:String x:Key="S.Updater.Header">一個新的更新可用</s:String>
     <s:String x:Key="S.Updater.NewRelease">新版本!</s:String>
-    <s:String x:Key="S.Updater.NewRelease.Info">有新版本可用，版本 {0}!按一下這裡了解更多詳情</s:String>
+    <s:String x:Key="S.Updater.NewRelease.Info">有新版本可用，版本 {0}!按一下這裡了解更多詳情。</s:String>
     <s:String x:Key="S.Updater.Version">版本</s:String>
-    <s:String x:Key="S.Updater.Portable">可攜版</s:String>
+    <s:String x:Key="S.Updater.Portable">可攜式</s:String>
     <s:String x:Key="S.Updater.Installer">安裝程式</s:String>
-    <s:String x:Key="S.Updater.Info.WhatsNew">新功能?</s:String>
-    <s:String x:Key="S.Updater.Info.BugFixes">錯誤修復:</s:String>
-    <s:String x:Key="S.Updater.Info.NewVersionAvailable">您可以下載新版本。 &#10;您要打開瀏覽器進行下載嗎?</s:String>
+    <s:String x:Key="S.Updater.Info.WhatsNew">新功能？</s:String>
+    <s:String x:Key="S.Updater.Info.BugFixes">錯誤修復：</s:String>
+    <s:String x:Key="S.Updater.Info.NewVersionAvailable">您可以下載新版本。 &#10;您要打開瀏覽器進行下載嗎？</s:String>
     <s:String x:Key="S.Updater.RunAfter">更新後執行該應用程式</s:String>
     <s:String x:Key="S.Updater.Download">下載</s:String>
     <s:String x:Key="S.Updater.Install">安裝</s:String>
@@ -179,9 +179,9 @@
     <s:String x:Key="S.Options.About">關於</s:String>
     <s:String x:Key="S.Options.Other">其它</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Header">鼠標跟隨缺少快捷鍵</s:String>
-    <s:String x:Key="S.Options.Warning.Follow.Message">為了使用鼠標跟隨功能，必須設定快捷鍵以在需要時將其啟停用</s:String>
+    <s:String x:Key="S.Options.Warning.Follow.Message">為了使用鼠標跟隨功能，必須設定快捷鍵以在需要時將其啟停用。</s:String>
     <s:String x:Key="S.Options.Warning.DesktopDuplication.Header">缺少螢幕擷取的相依元件</s:String>
-    <s:String x:Key="S.Options.Warning.DesktopDuplication.Message">為了使用 Desktop Duplication API 擷取螢幕，必須下載 SharpDx 元件</s:String>
+    <s:String x:Key="S.Options.Warning.DesktopDuplication.Message">為了使用 Desktop Duplication API 擷取螢幕，必須下載 SharpDx 元件。</s:String>
     
     <!--Options • Application-->
     <s:String x:Key="S.Options.App.Startup">啟動</s:String>
@@ -191,12 +191,12 @@
     <s:String x:Key="S.Options.App.Startup.Mode.Automatic.Info">Windows 啟動後將執行該應用程式</s:String>
     <s:String x:Key="S.Options.App.Startup.Mode.Warning">無法切換啟動模式</s:String>
     <s:String x:Key="S.Options.App.Startup.Instance.Single">僅允許一個實例</s:String>
-    <s:String x:Key="S.Options.App.Startup.Instance.Single.Info">您將可以為每個用戶和可執行檔案執行一次此應用程式，&#10;意味著不同的用戶或可執行實例可以共存。 &#10;當再次嘗試執行此應用程式時，第二個實例將嘗試將焦點放在第一個實例上並自行結束</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Single.Info">您將可以為每個使用者和可執行檔案執行一次此應用程式，&#10;意味著不同的使用者或可執行實例可以共存。 &#10;當再次嘗試執行此應用程式時，第二個實例將嘗試將焦點放在第一個實例上並自行結束</s:String>
     <s:String x:Key="S.Options.App.Startup.Instance.Multiple">允許多個實例</s:String>
     <s:String x:Key="S.Options.App.Startup.Instance.Multiple.Info">您可以無限制地同時執行此應用程式</s:String>
     <s:String x:Key="S.Options.App.Startup.Tray">啟動最小化到工具列圖示</s:String>
     <s:String x:Key="S.Options.App.Startup.Tray.Info">（啟用此選項後工具列圖示將可見）</s:String>
-    <s:String x:Key="S.Options.App.Startup.Window">啟動使用:</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window">啟動使用：</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Startup">啟動視窗</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Recorder">螢幕錄製</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Webcam">網路攝影機錄製</s:String>
@@ -221,22 +221,22 @@
     <s:String x:Key="S.Options.App.Tray.Interactions.Toggle">最小化/還原所有視窗</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Minimize">最小化所有視窗</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Restore">恢復所有視窗</s:String>
-    <s:String x:Key="S.Options.App.Tray.Interactions.Left">左鍵點擊:</s:String>
-    <s:String x:Key="S.Options.App.Tray.Interactions.DoubleLeft">左鍵點擊（x2）:</s:String>
-    <s:String x:Key="S.Options.App.Tray.Interactions.Middle">中鍵點擊:</s:String>
-    <s:String x:Key="S.Options.App.Tray.Interactions.Window">視窗:</s:String>
-    <s:String x:Key="S.Options.App.Tray.Interactions.Else">否則，打開:</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Left">左鍵點擊：</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.DoubleLeft">左鍵點擊（x2）：</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Middle">中鍵點擊：</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Window">視窗：</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Else">否則，打開：</s:String>
     <s:String x:Key="S.Options.App.General">常規</s:String>
     <s:String x:Key="S.Options.App.General.WorkaroundQuota">解決"空間不足..."崩潰的方法</s:String>
     <s:String x:Key="S.Options.App.General.WorkaroundQuota.Info">（實驗性）</s:String>
     <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">關閉應用程式之前詢問我（通過'離開'指令）</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">停用硬體加速</s:String>
-    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">（用戶界面將通過軟體模式呈現）</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">（使用者界面將通過軟體模式呈現）</s:String>
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">檢查翻譯更新</s:String>
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">（更新的翻譯將自動下載並安裝）</s:String>
     <s:String x:Key="S.Options.App.General.CheckForUpdates">檢查更新</s:String>
     <s:String x:Key="S.Options.App.General.UpdateOnClose">關閉應用程式後自動安裝更新</s:String>
-    <s:String x:Key="S.Options.App.General.PortableUpdate">強制下載可攜版</s:String>
+    <s:String x:Key="S.Options.App.General.PortableUpdate">強制下載可攜式版本</s:String>
     <s:String x:Key="S.Options.App.General.PortableUpdate.Info">（需要軟體手動解壓縮並取代執行檔來安裝）</s:String>
     <s:String x:Key="S.Options.App.General.ForceUpdateAsAdmin">強制更新時提升執行權限</s:String>
     <s:String x:Key="S.Options.App.General.PromptToInstall">在安裝開始之前提示我</s:String>
@@ -248,34 +248,34 @@
     
     <s:String x:Key="S.Options.Recorder.Frequency">擷取頻率</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Manual">手動</s:String>
-    <s:String x:Key="S.Options.Recorder.Frequency.Manual.Info">手動按下擷取鍵或對應的快捷鍵來擷取畫面</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Manual.Info">手動按下擷取鍵或對應的快捷鍵來擷取畫面。</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Interaction">使用者互動</s:String>
-    <s:String x:Key="S.Options.Recorder.Frequency.Interaction.Info">當您點擊或鍵盤輸入時擷取畫面</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Interaction.Info">當您點擊或鍵盤輸入時擷取畫面。</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Second">每秒</s:String>
-    <s:String x:Key="S.Options.Recorder.Frequency.Second.Info">會以設定的影格率，以每秒為基礎擷取畫面</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Second.Info">會以設定的影格率，以每秒為基礎擷取畫面。</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Minute">每分鐘</s:String>
-    <s:String x:Key="S.Options.Recorder.Frequency.Minute.Info">會以設定的影格率，以每分鐘為基礎擷取畫面</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Minute.Info">會以設定的影格率，以每分鐘為基礎擷取畫面。</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Hour">每小時</s:String>
-    <s:String x:Key="S.Options.Recorder.Frequency.Hour.Info">會以設定的影格率，以每小時為基礎擷取畫面</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Hour.Info">會以設定的影格率，以每小時為基礎擷取畫面。</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Playback">播放延遲</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Playback.Info">（每張擷取的畫面會設定此延遲毫秒數）</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Interval">每間隔 {0} 擷取畫面</s:String>
     
     <s:String x:Key="S.Options.Recorder.Mode">擷取模式</s:String>
-    <s:String x:Key="S.Options.Recorder.Bitblt.Info">使用較舊的擷取方法，該方法比較慢，可能無法擷取遊戲，但不需要其他外掛</s:String>
-    <s:String x:Key="S.Options.Recorder.DirectX.Info">使用桌面複製 API 擷取方法，該方法更快並且可以擷取全畫面遊戲，但是需要 SharpDx 元件和 Windows 8 或更高版本</s:String>
+    <s:String x:Key="S.Options.Recorder.Bitblt.Info">使用較舊的擷取方法，該方法比較慢，可能無法擷取遊戲，但不需要其他外掛。</s:String>
+    <s:String x:Key="S.Options.Recorder.DirectX.Info">使用 Desktop Duplication API 擷取方法，該方法更快並且可以擷取全畫面遊戲，但是需要 SharpDx 元件和 Windows 8 或更高版本。</s:String>
     <s:String x:Key="S.Options.Recorder.File">保存到檔案</s:String>
-    <s:String x:Key="S.Options.Recorder.File.Info">擷取到的每一影格將直接作為圖片儲存在磁碟上</s:String>
+    <s:String x:Key="S.Options.Recorder.File.Info">擷取到的每一影格將直接作為圖片儲存在磁碟上。</s:String>
     <s:String x:Key="S.Options.Recorder.Cache">記憶體&#10;快取</s:String>
-    <s:String x:Key="S.Options.Recorder.Cache.Info">每一擷取到的影格將會優先作為像素陣列儲存於記憶體中（可能在壓縮之前）</s:String>
-    <s:String x:Key="S.Options.Recorder.Compression">壓縮:</s:String>
+    <s:String x:Key="S.Options.Recorder.Cache.Info">每一擷取到的影格將會優先作為像素陣列儲存於記憶體中（可能在壓縮之前）。</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression">壓縮：</s:String>
     <s:String x:Key="S.Options.Recorder.Compression.Optimal">最佳</s:String>
     <s:String x:Key="S.Options.Recorder.Compression.Optimal.Info">（較慢但可能更理想的壓縮）</s:String>
     <s:String x:Key="S.Options.Recorder.Compression.Fastest">最快</s:String>
     <s:String x:Key="S.Options.Recorder.Compression.Fastest.Info">（速度更快，但最佳壓縮效果可能較差）</s:String>
     <s:String x:Key="S.Options.Recorder.Compression.NoCompression">無壓縮</s:String>
     <s:String x:Key="S.Options.Recorder.Compression.NoCompression.Info">（擷取影格時不執行壓縮）</s:String>
-    <s:String x:Key="S.Options.Recorder.CacheSize">快取大小:</s:String>
+    <s:String x:Key="S.Options.Recorder.CacheSize">快取大小：</s:String>
     <s:String x:Key="S.Options.Recorder.CacheSize.Info">（以MB為單位。達到此大小後，數據將被寫入到磁碟上）</s:String>
     <s:String x:Key="S.Options.Recorder.PreventBlackFrames">防止擷取全黑畫面</s:String>
     <s:String x:Key="S.Options.Recorder.PreventBlackFrames.Info">（防止具有記憶體快取的 BitBlt 錯誤地擷取到全黑的畫面）</s:String>
@@ -295,7 +295,7 @@
     <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds.Info">點擊以切換顯示此井字輔助線</s:String>
     <s:String x:Key="S.Options.Recorder.Guidelines.Crosshair">十字線</s:String>
     <s:String x:Key="S.Options.Recorder.Guidelines.Crosshair.Info">點擊以切換顯示此十字輔助線</s:String>
-    <s:String x:Key="S.Options.Recorder.Guidelines.Info">輔助線只會在錄製暫停或停止時顯示</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.Info">輔助線只會在錄製暫停或停止時顯示。</s:String>
     
     <s:String x:Key="S.Options.Recorder.HideTitleBar">隱藏標題列(精簡模式)</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier">啟用螢幕放大鏡</s:String>
@@ -312,10 +312,10 @@
     <s:String x:Key="S.Options.Recorder.RememberSize">記住前次錄製區域的大小</s:String>
     <s:String x:Key="S.Options.Recorder.RememberPosition">記住前次錄製區域的位置</s:String>
     <s:String x:Key="S.Options.Recorder.PreStart">使用開始前倒數計時</s:String>
-    <s:String x:Key="S.Options.Recorder.PreStart.Info">(以秒為單位，在開始擷取之前等待時間)</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart.Info">（以秒為單位，在開始擷取之前等待時間）</s:String>
     <s:String x:Key="S.Options.Recorder.CursorFollowing">啟用鼠標跟隨</s:String>
     <s:String x:Key="S.Options.Recorder.CursorFollowing.Info">（錄製區域將根據鼠標的位置重新定位）</s:String>
-    <s:String x:Key="S.Options.Recorder.FollowMargin.Info">（恆定延遲，不會因為錄製時卡頓變化）</s:String>
+    <s:String x:Key="S.Options.Recorder.FollowMargin.Info">（邊界緩衝，移動像素超過此值時才會改變錄影位置）</s:String>
     <s:String x:Key="S.Options.Recorder.FollowMarginInvisible.Info">（錄製區域開始重新定位緩衝區邊距）</s:String>
     <s:String x:Key="S.Options.Recorder.NotifyRecordingDiscard">在捨棄錄影前請詢問我</s:String>
 
@@ -337,7 +337,7 @@
     <s:String x:Key="S.Options.Editor.Previewer.EvenColor">顏色 1</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.OddColor">顏色 2</s:String>
     <s:String x:Key="S.Options.Editor.Interface.DisplayEncoder">在另一個視窗中顯示編碼</s:String>
-    <s:String x:Key="S.Options.Editor.Interface.ExtendChrome">延伸標題列/Chrome</s:String>
+    <s:String x:Key="S.Options.Editor.Interface.ExtendChrome">延伸標題列（視窗邊框）</s:String>
     <s:String x:Key="S.Options.Editor.Interface.AutomaticallySizeOnContent">讀取後根據影格大小自動調整視窗大小</s:String>
     <s:String x:Key="S.Options.Editor.Interface.AutomaticallyFitImage">讀取後根據視窗大小自動調整影格縮放級別</s:String>
     <s:String x:Key="S.Options.Editor.General.NotifyFrameDeletion">刪除影格前詢問我</s:String>
@@ -357,59 +357,59 @@
     <s:String x:Key="S.Options.Tasks.List.Enabled">啟用</s:String>
     <s:String x:Key="S.Options.Tasks.Enable">啟用此任務</s:String>
     <s:String x:Key="S.Options.Tasks.SelectType">（選擇一個任務）</s:String>
-    <s:String x:Key="S.Options.Tasks.Info">這些任務從列表的頂部到底部依次執行。&#10;在您第一次使用編輯器打開專案時，就會發生這種情況</s:String>
+    <s:String x:Key="S.Options.Tasks.Info">這些任務從列表的頂部到底部依次執行。&#10;在您第一次使用編輯器打開專案時，就會發生這種情況。</s:String>
   
     <!--Options • Shortcuts-->
     <s:String x:Key="S.Options.Shortcuts.Global">全域</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.ScreenRecorder">螢幕錄製</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.ScreenRecorder.Info">（打開預設螢幕錄製）</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Global.WebcamRecorder">攝影機錄製:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.WebcamRecorder">攝影機錄製：</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.WebcamRecorder.Info">（打開攝影機錄製）</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.BoardRecorder">繪畫板錄製</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.BoardRecorder.Info">（打開繪畫板錄製，以便您可以錄製您的繪畫）</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Global.OpenEditor">編輯器:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.OpenEditor">編輯器：</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.OpenEditor.Info">（打開另一個編輯器視窗）</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Global.OpenOptions">選項:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.OpenOptions">選項：</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.OpenOptions.Info">（打開選項視窗，一次只能打開一個視窗）</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Global.Exit">離開:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.Exit">離開：</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.Exit.Info">（關閉所有視窗並從系統工作列中關閉應用程式）</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders">錄製設定</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause">開始/暫停:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause">開始/暫停：</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause.Info">（它啟動或暫停錄製，如果已啟用快照模式，則用於拍攝快照）</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Recorders.Stop">停止:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Stop">停止：</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Stop.Info">（它會停止錄製並打開編輯器）</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Recorders.Discard">捨棄:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Discard">捨棄：</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Discard.Info">（暫停時捨棄已錄製畫面）</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Recorders.Follow">鼠標跟隨:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Follow">鼠標跟隨：</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Follow.Info">（根據鼠標的位置調整錄製區域）</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Recorders.DisableFollow">停用以下內容:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.DisableFollow">停用以下內容：</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.DisableFollow.Info">（暫時停用基於鼠標位置的錄製區域調整，僅接受修飾鍵）</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Info">點擊並輸入所需的按鍵和修飾鍵</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Info">點擊並輸入所需的按鍵和修飾鍵。&#10;部分按鍵組合無法使用。</s:String>
     
     <!--Options • Language-->
     <s:String x:Key="S.Options.Language.AppLanguage">應用程式語系</s:String>
     <s:String x:Key="S.Options.Language.AppLanguage.AutoDetect">自動偵測</s:String>
     <s:String x:Key="S.Options.Language.AppLanguage.AutoDetect.Author">目前作業系統的語系（如適用）</s:String>
     <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence1.1">您願意翻譯我的應用程式嗎？</s:String>
-    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence1.2">點擊此處閱讀翻譯指南並下載 Translator 應用</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence1.2">點擊此處閱讀翻譯指南並下載 Translator 工具程式。</s:String>
     <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence2.1">之後，</s:String>
     <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence2.2">點擊這裡匯入</s:String>
-    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence2.3">並測試您的翻譯</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence2.3">並測試您的翻譯。</s:String>
     <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence3.1">在您翻譯完成以後，請將語言文件發送到</s:String>
     <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence3.2">Email (nicke@outlook.com.br)</s:String>
     <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence3.3">。謝謝！</s:String>
-    <s:String x:Key="S.Options.Language.AppLanguage.Translate.ResourceLink.Tooltip">點擊以打開說明的網頁</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.ResourceLink.Tooltip">點擊以打開說明的網頁。</s:String>
     <s:String x:Key="S.Options.Language.AppLanguage.Translate.ImportLink.Tooltip">打開匯入頁面</s:String>
     <s:String x:Key="S.Options.Language.AppLanguage.Translate.EmailLink.Tooltip">打開電子郵件應用程式</s:String>
     
     <!--Options • Storage-->
     <s:String x:Key="S.Options.Storage.Status">狀態</s:String>
-    <s:String x:Key="S.Options.Storage.Status.Volume">磁碟機:</s:String>
-    <s:String x:Key="S.Options.Storage.Status.FreeSpace">共 {1}，可用  {0}</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Volume">磁碟機：</s:String>
+    <s:String x:Key="S.Options.Storage.Status.FreeSpace">共 {1}，可用 {0}</s:String>
     <s:String x:Key="S.Options.Storage.Status.Check">再次檢查剩餘的空間</s:String>
-    <s:String x:Key="S.Options.Storage.Status.Clear">清除暫存資料夾。 &#10;您可以決定是否要保留最近的專案</s:String>
-    <s:String x:Key="S.Options.Storage.Status.LowSpace">目前選擇的硬碟空間不足。請清理暫存資料夾或更改位置</s:String>
-    <s:String x:Key="S.Options.Storage.Status.Error">無法收到磁碟機詳細信息</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Clear">清除暫存資料夾。 &#10;您可以決定是否要保留最近的專案。</s:String>
+    <s:String x:Key="S.Options.Storage.Status.LowSpace">目前選擇的硬碟空間不足。請清理暫存資料夾或更改位置。</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Error">無法收到磁碟機詳細信息。</s:String>
     <s:String x:Key="S.Options.Storage.Status.Files.None">沒有檔案</s:String>
     <s:String x:Key="S.Options.Storage.Status.Files.Singular">{0:##,##0} 個檔案</s:String>
     <s:String x:Key="S.Options.Storage.Status.Files.Plural">{0:##,##0} 個檔案</s:String>
@@ -418,43 +418,43 @@
     <s:String x:Key="S.Options.Storage.Status.Folders.Plural">{0:##,##0} 個資料夾</s:String>
     <s:String x:Key="S.Options.Storage.Status.InUse">{0} 使用中</s:String>
     <s:String x:Key="S.Options.Storage.Paths">路徑</s:String>
-    <s:String x:Key="S.Options.Storage.Paths.Cache">暫存檔:</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Cache">暫存檔：</s:String>
     <s:String x:Key="S.Options.Storage.Paths.Cache.Choose">選擇暫存檔案的位置</s:String>
-    <s:String x:Key="S.Options.Storage.Paths.Logs">記錄檔:</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Logs">記錄檔：</s:String>
     <s:String x:Key="S.Options.Storage.Paths.Logs.Choose">選擇錯誤記錄檔位置</s:String>
     <s:String x:Key="S.Options.Storage.Paths.Browse">瀏覽所選資料夾</s:String>
     <s:String x:Key="S.Options.Storage.Settings">設定位置</s:String>
-    <s:String x:Key="S.Options.Storage.AppDataPath">AppData:</s:String>
-    <s:String x:Key="S.Options.Storage.LocalPath">本機:</s:String>
+    <s:String x:Key="S.Options.Storage.AppDataPath">AppData：</s:String>
+    <s:String x:Key="S.Options.Storage.LocalPath">本機：</s:String>
     <s:String x:Key="S.Options.Storage.NotExists">不存在</s:String>
     <s:String x:Key="S.Options.Storage.CreateSettings">建立空的本機設定檔</s:String>
     <s:String x:Key="S.Options.Storage.RemoveSettings">移除設定檔</s:String>
     <s:String x:Key="S.Options.Storage.OpenSettingsFolder">打開設定檔案所在的資料夾。 &#10;按住 Ctrl 鍵並點擊以打開檔案</s:String>
     <s:String x:Key="S.Options.Storage.SettingsInfo">• 設定載入模式: 預設 ◄ AppData ◄ 本機。&#10;• 如果本機資料夾中沒有設定檔，應用程式將在 AppData 資料夾中搜尋，如果沒有設定檔，則使用預設值。&#10;• 如果沒有本機設定，所有設定都儲存在 AppData 設定檔中</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemoval">自動移除舊的專案</s:String>
-    <s:String x:Key="S.Options.Storage.AutomaticRemoval.Info">打開編輯器時，背景工作將清除超過 5 天的專案</s:String>
+    <s:String x:Key="S.Options.Storage.AutomaticRemoval.Info">打開編輯器時，背景工作將清除超過 5 天的專案。</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemovalDays.Info">（在幾天之內，打開編輯器後，任何舊專案都將被刪除/丟棄）</s:String>
     
     <!--Options • Storage > Clear cache-->
     <s:String x:Key="S.Options.Storage.Cache.Title">ScreenToGif - 清除暫存</s:String>
-    <s:String x:Key="S.Options.Storage.Cache.Header">您要清除暫存資料夾嗎?</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.Header">您要清除暫存資料夾嗎？</s:String>
     <s:String x:Key="S.Options.Storage.Cache.Info">創建錄製或打開要編輯的內容時，將創建一個專案並將其儲存在暫存資料夾中</s:String>
-    <s:String x:Key="S.Options.Storage.Cache.Question">您要從暫存資料夾中刪除這些專案嗎?</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.Question">您要從暫存資料夾中刪除這些專案嗎？</s:String>
     <s:String x:Key="S.Options.Storage.Cache.IgnoreRecent">不要刪除最近的專案</s:String>
     <s:String x:Key="S.Options.Storage.Cache.IgnoreRecent.Yes">（僅會刪除 {0} 天之前尚未使用的專案）</s:String>
     <s:String x:Key="S.Options.Storage.Cache.IgnoreRecent.No">（所有目前未使用的專案將被刪除）</s:String>
     
     <!--Options • Upload-->
     <s:String x:Key="S.Options.Upload.Proxy">代理</s:String>
-    <s:String x:Key="S.Options.Upload.Proxy.Mode">模式:</s:String>
+    <s:String x:Key="S.Options.Upload.Proxy.Mode">模式：</s:String>
     <s:String x:Key="S.Options.Upload.Proxy.Mode.Disabled">停用</s:String>
     <s:String x:Key="S.Options.Upload.Proxy.Mode.Manual">手動</s:String>
     <s:String x:Key="S.Options.Upload.Proxy.Mode.System">系統</s:String>
     <s:String x:Key="S.Options.Upload.Proxy.Mode.System.Info">（使用系統代理）</s:String>
-    <s:String x:Key="S.Options.Upload.Proxy.Host">主機:</s:String>
-    <s:String x:Key="S.Options.Upload.Proxy.Port">連接埠:</s:String>
-    <s:String x:Key="S.Options.Upload.Proxy.User">用戶名:</s:String>
-    <s:String x:Key="S.Options.Upload.Proxy.Password">密碼:</s:String>
+    <s:String x:Key="S.Options.Upload.Proxy.Host">主機：</s:String>
+    <s:String x:Key="S.Options.Upload.Proxy.Port">連接埠：</s:String>
+    <s:String x:Key="S.Options.Upload.Proxy.User">使用者名稱：</s:String>
+    <s:String x:Key="S.Options.Upload.Proxy.Password">密碼：</s:String>
     <s:String x:Key="S.Options.Upload.Get">取得 OAuth 憑證</s:String>
     <s:String x:Key="S.Options.Upload.PasteToken">將授權憑證貼到此處</s:String>
     <s:String x:Key="S.Options.Upload.Authorize">授權</s:String>
@@ -464,49 +464,49 @@
     <s:String x:Key="S.Options.Upload.Imgur.Direct">使用直接連結</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Gifv">取得 Gifv 副檔名連結而不是 Gif</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.ToAlbum">將 Gif 上傳到指定的相簿</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Album">相簿:</s:String>
+    <s:String x:Key="S.Options.Upload.Imgur.Album">相簿：</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.AskMe">發佈前詢問我</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.NotPossible">無法打開頁面以獲取 Imgur 授權憑證</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Missing">為了授權此應用程式，您需要提供授權憑證</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Completed">Imgur 授權完成</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Error">Imgur 授權失敗。幾秒鐘後重試或獲取新的憑證</s:String>
+    <s:String x:Key="S.Options.Upload.Imgur.Auth.NotPossible">無法打開頁面以獲取 Imgur 授權憑證。</s:String>
+    <s:String x:Key="S.Options.Upload.Imgur.Auth.Missing">為了授權此應用程式，您需要提供授權憑證。</s:String>
+    <s:String x:Key="S.Options.Upload.Imgur.Auth.Completed">Imgur 授權完成。</s:String>
+    <s:String x:Key="S.Options.Upload.Imgur.Auth.Error">Imgur 授權失敗。幾秒鐘後重試或獲取新的憑證。</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Header">無法授權此應用程式</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Message">請檢查是否提供正確的憑證及是否有網際網路連線</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Refresh.None">為了更新此應用程式的授權，您需要先完成授權過程</s:String>
+    <s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Message">請檢查是否提供正確的憑證及是否有網際網路連線。</s:String>
+    <s:String x:Key="S.Options.Upload.Imgur.Refresh.None">為了更新此應用程式的授權，您需要先完成授權過程。</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.NotAuthorized">未授權</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Expired">授權已於 {0} 中過期</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Valid">授權有效期至 {0}</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Removed">Imgur 授權已刪除</s:String>
     <s:String x:Key="S.Options.Upload.Imgur.Error.AlbumLoad">使用直接連結無法讀取相簿列表</s:String>
     <s:String x:Key="S.Options.Upload.Gfycat.Anonymous">Gfycat（匿名）</s:String>
-    <s:String x:Key="S.Options.Upload.Yandex.Token">OAuth 憑證:</s:String>
+    <s:String x:Key="S.Options.Upload.Yandex.Token">OAuth 憑證：</s:String>
     <s:String x:Key="S.Options.Upload.Pick.Destination">選擇一個目標</s:String>
     <s:String x:Key="S.Options.Upload.Pick.Album">選擇一個相簿（可選）</s:String>
-    <s:String x:Key="S.Options.Upload.Pick.Album.Info">如果您願意，可以選擇目標相簿:</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Album.Info">如果您願意，可以選擇目標相簿：</s:String>
     
     <!--Options • Extras-->
     <s:String x:Key="S.Options.Extras.External">可用的外部工具</s:String>
-    <s:String x:Key="S.Options.Extras.Download">點擊此處下載</s:String>
+    <s:String x:Key="S.Options.Extras.Download">點擊此處下載&#x0d;{0}</s:String>
     <s:String x:Key="S.Options.Extras.Downloading">下載中...</s:String>
-    <s:String x:Key="S.Options.Extras.Ready">已下載&#10;{0}</s:String>
+    <s:String x:Key="S.Options.Extras.Ready">已下載&#x0d;{0}</s:String>
     <s:String x:Key="S.Options.Extras.Ready.Info">點擊這裡打開檔案的屬性</s:String>
-    <s:String x:Key="S.Options.Extras.DownloadRestriction">Microsoft Store 分發的應用程式無法下載其他應用程式。您必須手動下載它</s:String>
+    <s:String x:Key="S.Options.Extras.DownloadRestriction">Microsoft Store 發佈的應用程式無法下載其他應用程式。您必須手動下載它</s:String>
     <s:String x:Key="S.Options.Extras.FfmpegLocation">FFmpeg 位置</s:String>
     <s:String x:Key="S.Options.Extras.FfmpegLocation.Select">選擇 FFmpeg 可執行檔的位置</s:String>
     <s:String x:Key="S.Options.Extras.FfmpegLocation.File">FFmpeg 可執行檔</s:String>
-    <s:String x:Key="S.Options.Extras.FfmpegLocation.Invalid">FFmpeg 可執行檔案的路徑中包含一個或多個無效字符。請為該可執行檔案選擇一個有效位置</s:String>
+    <s:String x:Key="S.Options.Extras.FfmpegLocation.Invalid">FFmpeg 可執行檔案的路徑中包含一個或多個無效字元。請為該可執行檔案選擇一個有效位置。</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation">Gifski 位置</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.Select">選擇 Gifski 元件的位置</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.File">Gifski 元件</s:String>
-    <s:String x:Key="S.Options.Extras.GifskiLocation.Invalid">Gifski 可執行檔案的路徑包含一個或多個無效字符。請為該可執行檔案選擇一個有效的位置</s:String>
+    <s:String x:Key="S.Options.Extras.GifskiLocation.Invalid">Gifski 元件的路徑包含一個或多個無效字元。請為該可執行檔案選擇一個有效的位置。</s:String>
     <s:String x:Key="S.Options.Extras.SharpDxLocation">SharpDx 資料夾（SharpDX.dll、SharpDX.Direct3D11.dll 和 SharpDX.DXGI.dll）</s:String>
     <s:String x:Key="S.Options.Extras.SharpDxLocation.Select">選擇 SharpDx 元件的位置</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation.Invalid">SharpDx 元件的路徑包含一個或多個無效字符。請為這些元件選擇一個有效的資料夾</s:String>
+    <s:String x:Key="S.Options.Extras.SharpDxLocation.Invalid">SharpDx 元件的路徑包含一個或多個無效字元。請為這些元件選擇一個有效的資料夾。</s:String>
     <s:String x:Key="S.Options.Extras.License.Ffmpeg">FFmpeg 授權條款</s:String>
     <s:String x:Key="S.Options.Extras.License.Gifski">Gifski 授權條款</s:String>
     <s:String x:Key="S.Options.Extras.License.SharpDx">SharpDx 授權條款</s:String>
     <s:String x:Key="S.Options.Extras.Permission.Header">缺少資料夾的寫入權限</s:String>
-    <s:String x:Key="S.Options.Extras.Permission.Observation">因缺少資料夾寫入權限而無法儲存下載的資料&#10;&#10;請問您想要使用系統管理員權限來啟動下載器嗎？</s:String>
+    <s:String x:Key="S.Options.Extras.Permission.Observation">因缺少資料夾寫入權限而無法儲存下載的資料。&#10;&#10;請問您想要使用系統管理員權限來啟動下載器嗎？</s:String>
     
     <!--Options • Donations-->
     <s:String x:Key="S.Options.Donate.Donate">捐贈</s:String>
@@ -518,9 +518,9 @@
     <s:String x:Key="S.Options.Donate.Subscribe">訂閱</s:String>
     <s:String x:Key="S.Options.Donate.Subscribe.Patreon">每月通過 Patreon 捐款</s:String>
     <s:String x:Key="S.Options.Donate.Subscribe.Flattr">每月通過 Flattr 捐款</s:String>
-    <s:String x:Key="S.Options.Donate.Gift">禮品遊戲</s:String>
-    <s:String x:Key="S.Options.Donate.Gift.Steam">通過 Steam 進行禮品遊戲</s:String>
-    <s:String x:Key="S.Options.Donate.Gift.Gog">通過 GOG 進行禮品遊戲</s:String>
+    <s:String x:Key="S.Options.Donate.Gift">贈送遊戲</s:String>
+    <s:String x:Key="S.Options.Donate.Gift.Steam">通過 Steam 贈送遊戲</s:String>
+    <s:String x:Key="S.Options.Donate.Gift.Gog">通過 GOG 贈送遊戲</s:String>
     <s:String x:Key="S.Options.Donate.Kofi">通過 Ko-fi 支付咖啡費用</s:String>
     <s:String x:Key="S.Options.Donate.Crypto">加密貨幣</s:String>
     <s:String x:Key="S.Options.Donate.Crypto.BitcoinCash">複製比特幣現金地址</s:String>
@@ -528,7 +528,7 @@
     <s:String x:Key="S.Options.Donate.Support.Visit">如果您想支持該項目 :)</s:String>
     
     <!--Options • About-->
-    <s:String x:Key="S.Options.About.Version">版本:</s:String>
+    <s:String x:Key="S.Options.About.Version">版本：</s:String>
     <s:String x:Key="S.Options.About.Author">作者: Nicke Manarin</s:String>
     <s:String x:Key="S.Options.About.StoreVersion">Microsoft Store 版本。某些功能由於強制策略而被禁用</s:String>
     <s:String x:Key="S.Options.About.Contact">聯繫</s:String>
@@ -536,10 +536,10 @@
     <s:String x:Key="S.Options.About.Contact.Facebook">訪問頁面</s:String>
     <s:String x:Key="S.Options.About.Contact.Gitter">加入房間</s:String>
     <s:String x:Key="S.Options.About.Technical">技術</s:String>
-    <s:String x:Key="S.Options.About.Technical.License">授權:</s:String>
+    <s:String x:Key="S.Options.About.Technical.License">授權：</s:String>
     <s:String x:Key="S.Options.About.Technical.Free">（此程式完全免費）</s:String>
-    <s:String x:Key="S.Options.About.Technical.SourceCode">原始碼:</s:String>
-    <s:String x:Key="S.Options.About.Technical.Privacy">隱私政策:</s:String>
+    <s:String x:Key="S.Options.About.Technical.SourceCode">原始碼：</s:String>
+    <s:String x:Key="S.Options.About.Technical.Privacy">隱私政策：</s:String>
     <s:String x:Key="S.Options.About.ABigThanksTo">非常感謝</s:String>
     <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">我所有的支持者，提供意見反應和/或捐贈的人</s:String>
     
@@ -548,21 +548,21 @@
     <s:String x:Key="S.Localization.GettingCodes">正在取得語系代碼...</s:String>
     <s:String x:Key="S.Localization.Recognized">識別為 {0}</s:String>
     <s:String x:Key="S.Localization.NotRecognized">未知</s:String>
-    <s:String x:Key="S.Localization.Usage.First">現在使用的是最底部的資源</s:String>
-    <s:String x:Key="S.Localization.Usage.Second">要應用您的自定義資源，請將其移動到列表的最底部</s:String>
+    <s:String x:Key="S.Localization.Usage.First">現在使用的是最底部的資源。</s:String>
+    <s:String x:Key="S.Localization.Usage.Second">要應用您的自定義資源，請將其移動到列表的最底部。</s:String>
     <s:String x:Key="S.Localization.Exporting">匯出語系資源</s:String>
     <s:String x:Key="S.Localization.SaveResource">儲存語系字典檔</s:String>
     <s:String x:Key="S.Localization.OpenResource">開啟語系字典檔</s:String>
     <s:String x:Key="S.Localization.File.Resource">資源字典檔</s:String>
     <s:String x:Key="S.Localization.Importing">匯入語系資源</s:String>
     <s:String x:Key="S.Localization.Warning.Name">檔案名稱未依規範</s:String>
-    <s:String x:Key="S.Localization.Warning.Name.Info">請嘗試重新命名，如: StringResources.en.xaml，"en" 應該要改成您的語系代碼</s:String>
+    <s:String x:Key="S.Localization.Warning.Name.Info">請嘗試重新命名，如: StringResources.en.xaml，"en" 應該要改成您的語系代碼。</s:String>
     <s:String x:Key="S.Localization.Warning.Repeated">你不能加入相同的語系資源</s:String>
-    <s:String x:Key="S.Localization.Warning.Repeated.Info">請移除重複的語系資源或使用其他語系代碼</s:String>
+    <s:String x:Key="S.Localization.Warning.Repeated.Info">請移除重複的語系資源或使用其他語系代碼。</s:String>
     <s:String x:Key="S.Localization.Warning.Redundant">重複的語系代碼</s:String>
-    <s:String x:Key="S.Localization.Warning.Redundant.Info">"{0}" 已被使用，請嘗試用 "{1}" 取代</s:String>
+    <s:String x:Key="S.Localization.Warning.Redundant.Info">"{0}" 已被使用，請嘗試用 "{1}" 取代。</s:String>
     <s:String x:Key="S.Localization.Warning.Unknown">未知的語系</s:String>
-    <s:String x:Key="S.Localization.Warning.Unknown.Info">"{0}" 及其家族不被識別為合法的語系代碼</s:String>
+    <s:String x:Key="S.Localization.Warning.Unknown.Info">"{0}" 及其家族不被識別為合法的語系代碼。</s:String>
     <s:String x:Key="S.Localization.Warning.NotPossible">匯入語系資源失敗</s:String>
 
     <!--Recorder-->
@@ -574,38 +574,38 @@
     <s:String x:Key="S.Recorder.Snap">貼齊</s:String>
     <s:String x:Key="S.Recorder.Height">高度</s:String>
     <s:String x:Key="S.Recorder.Width">寬度</s:String>
-    <s:String x:Key="S.Recorder.CursorFollowing">已啟用跟隨鼠標</s:String>
+    <s:String x:Key="S.Recorder.CursorFollowing">已啟用鼠標跟隨</s:String>
 
-    <s:String x:Key="S.Recorder.SwitchFrequency">點擊以在擷取頻率模式之間切換</s:String>
+    <s:String x:Key="S.Recorder.SwitchFrequency">點擊以在擷取頻率模式之間切換。</s:String>
     <s:String x:Key="S.Recorder.Manual.Short">手動</s:String>
     <s:String x:Key="S.Recorder.Interaction.Short">互動</s:String>
     <s:String x:Key="S.Recorder.Fps">每秒最大影格數</s:String>
     <s:String x:Key="S.Recorder.Fps.Short">fps</s:String>
-    <s:String x:Key="S.Recorder.Fps.Range">範圍從 1 到 60 fps，數值越高表示越多影格被錄製。&#10;每一單位表示 16 毫秒的差異</s:String>
+    <s:String x:Key="S.Recorder.Fps.Range">範圍從 1 到 60 fps，數值越高表示越多影格被錄製。&#10;每一單位表示 16 毫秒的差異。</s:String>
     <s:String x:Key="S.Recorder.Fpm">每分鐘最大影格數</s:String>
     <!--<s:String x:Key="S.Recorder.Fpm.Short">fpm</s:String>-->
-    <s:String x:Key="S.Recorder.Fpm.Range">範圍從 1 到 60 fpm，數值越高表示越多影格被錄製。&#10;每一單位表示 1 秒的差異</s:String>
+    <s:String x:Key="S.Recorder.Fpm.Range">範圍從 1 到 60 fpm，數值越高表示越多影格被錄製。&#10;每一單位表示 1 秒的差異。</s:String>
     <s:String x:Key="S.Recorder.Fph">每小時最大影格數</s:String>
     <!--<s:String x:Key="S.Recorder.Fph.Short">fph</s:String>-->
-    <s:String x:Key="S.Recorder.Fph.Range">範圍從 1 到 60 fph，數值越高表示越多影格被錄製。&#10;每一單位表示 1 秒的差異</s:String>
+    <s:String x:Key="S.Recorder.Fph.Range">範圍從 1 到 60 fph，數值越高表示越多影格被錄製。&#10;每一單位表示 1 秒的差異。</s:String>
     
     <s:String x:Key="S.Recorder.ClickOrPress">點擊或按下來開始擷取</s:String>
-    <s:String x:Key="S.Recorder.SnapToWindow">貼齊視窗(拖曳後放開貼齊)</s:String>
+    <s:String x:Key="S.Recorder.SnapToWindow">貼齊視窗（拖曳後放開貼齊）</s:String>
     <s:String x:Key="S.Recorder.PreStart">啟動前</s:String>
-    <s:String x:Key="S.Recorder.Paused">ScreenToGif (已暫停)</s:String>
+    <s:String x:Key="S.Recorder.Paused">ScreenToGif（已暫停）</s:String>
     <s:String x:Key="S.Recorder.Stopping">正在停止...</s:String>
     <s:String x:Key="S.Recorder.PreStarting">準備啟動中...</s:String>
     
     <s:String x:Key="S.Recorder.Timer.Elapsed">擷取經過時間</s:String>
-    <s:String x:Key="S.Recorder.Timer.Total">總影格數:</s:String>
+    <s:String x:Key="S.Recorder.Timer.Total">總影格數：</s:String>
     <s:String x:Key="S.Recorder.Timer.Manual">手動擷取</s:String>
     <s:String x:Key="S.Recorder.Timer.Paused">已暫停</s:String>
     
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible">無法擷取畫面</s:String>
-    <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">無法擷取畫面。5 次嘗試擷取後未取得任何影格</s:String>
-    <s:String x:Key="S.Recorder.Warning.StartPauseNotPossible">無法開始/暫停捕獲屏幕</s:String>
-    <s:String x:Key="S.Recorder.Warning.Windows8">使用桌面複製 Desktop Duplication API 捕獲屏幕需要 Windows 8 或更高版本</s:String>
-    <s:String x:Key="S.Recorder.Warning.MissingSharpDx">為了使用 Desktop Duplication API 擷取畫面，需要 SharpDx 元件。進入選項>其他下載</s:String>
+    <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">無法擷取畫面。5 次嘗試擷取後未取得任何影格。</s:String>
+    <s:String x:Key="S.Recorder.Warning.StartPauseNotPossible">無法開始/暫停擷取螢幕</s:String>
+    <s:String x:Key="S.Recorder.Warning.Windows8">使用 Desktop Duplication API 擷取螢幕需要 Windows 8 或更高版本。</s:String>
+    <s:String x:Key="S.Recorder.Warning.MissingSharpDx">為了使用 Desktop Duplication API 擷取螢幕，需要 SharpDx 元件。請進入 [選項 > 附加功能] 進行下載。</s:String>
     
     <!--New recorder-->
     <s:String x:Key="S.Recorder.Area">區域</s:String>
@@ -631,11 +631,11 @@
     <s:String x:Key="S.Recorder.SelectScreen">點擊此處選擇此螢幕</s:String>
     <s:String x:Key="S.Recorder.EscToCancel">按 Esc 鍵取消</s:String>
     <s:String x:Key="S.Recorder.Splash.Title">按下 {0} 來停止錄製</s:String>
-    <s:String x:Key="S.Recorder.Splash.Subtitle">錄影視窗將會最小化，將其還原或按 {0} 以暫停錄製</s:String>
+    <s:String x:Key="S.Recorder.Splash.Subtitle">錄影視窗將會最小化，將其還原或按 {0} 以暫停錄製。</s:String>
     
     <s:String x:Key="S.Recorder.Discard.Title">捨棄錄影</s:String>
     <s:String x:Key="S.Recorder.Discard.Instruction">您確定想要捨棄目前錄影嗎？</s:String>
-    <s:String x:Key="S.Recorder.Discard.Message">此動作會捨棄目前錄影，移除所有影格。&#x0d;您無法復原此操作</s:String>
+    <s:String x:Key="S.Recorder.Discard.Message">此動作會捨棄目前錄影，移除所有影格。&#x0d;您無法復原此操作。</s:String>
     
     <!--Webcam recorder-->
     <s:String x:Key="S.Webcam.Title">ScreenToGif - 網路攝影機錄影</s:String>
@@ -656,13 +656,13 @@
     <s:String x:Key="S.ColorSelector.Red">紅色</s:String>
     <s:String x:Key="S.ColorSelector.Green">綠色</s:String>
     <s:String x:Key="S.ColorSelector.Blue">藍色</s:String>
-    <s:String x:Key="S.ColorSelector.Alpha">Alpha</s:String>
+    <s:String x:Key="S.ColorSelector.Alpha">不透明度</s:String>
     <s:String x:Key="S.ColorSelector.Hexadecimal">十六進位</s:String>
     <s:String x:Key="S.ColorSelector.Initial">初始顏色</s:String>
     <s:String x:Key="S.ColorSelector.Current">目前顏色</s:String>
     <s:String x:Key="S.ColorSelector.Latest">最新的顏色</s:String>
-    <s:String x:Key="S.ColorSelector.Sample">拖放到&#10;示例顏色</s:String>
-    <s:String x:Key="S.ColorSelector.Sample.Info">點擊並拖曳以從屏幕&#10;上選擇顏色</s:String>
+    <s:String x:Key="S.ColorSelector.Sample">拖曳以取樣顏色</s:String>
+    <s:String x:Key="S.ColorSelector.Sample.Info">點擊並拖曳以從螢幕上選擇顏色</s:String>
     
     <!--Exception/Error viewers-->
     <s:String x:Key="S.ExceptionViewer.Title">例外檢視器</s:String>
@@ -675,27 +675,27 @@
     <s:String x:Key="S.ErrorDialog.Send">傳送報告</s:String>
 
     <!--FFmpeg preset-->
-    <s:String x:Key="S.FfmpegPreset.Title">FFmpeg 預設</s:String>
+    <s:String x:Key="S.FfmpegPreset.Title">FFmpeg 預置參數</s:String>
     <s:String x:Key="S.FfmpegPreset.Name">名稱</s:String>
     <s:String x:Key="S.FfmpegPreset.Parameters">參數</s:String>
-    <s:String x:Key="S.FfmpegPreset.Info.SecondPass">要使用 2 次編碼，只需在指令中添加 '-pass 2' 即可</s:String>
-    <s:String x:Key="S.FfmpegPreset.Warning.Name">您必須為此預設命名</s:String>
-    <s:String x:Key="S.FfmpegPreset.Warning.Parameter">你必須為這個設置輸入一些參數</s:String>
-    <s:String x:Key="S.FfmpegPreset.Warning.SameName">已經存在一個具有相同名稱的預設</s:String>
+    <s:String x:Key="S.FfmpegPreset.Info.SecondPass">要使用二次編碼，只需在指令中添加 '-pass 2' 即可</s:String>
+    <s:String x:Key="S.FfmpegPreset.Warning.Name">您必須為此預置參數命名。</s:String>
+    <s:String x:Key="S.FfmpegPreset.Warning.Parameter">你必須為這個設置輸入一些參數。</s:String>
+    <s:String x:Key="S.FfmpegPreset.Warning.SameName">已經存在一個具有相同名稱的預置參數。</s:String>
 
     <!--Insert frames-->
     <s:String x:Key="S.InsertFrames.Title">插入影格</s:String>
-    <s:String x:Key="S.InsertFrames.Info">兩邊應具有相同的大小，此視窗允許您重新調整圖片和畫布的位置和大小。按一下選擇並調整大小</s:String>
-    <s:String x:Key="S.InsertFrames.CanvasSize">畫布大小:</s:String>
+    <s:String x:Key="S.InsertFrames.Info">兩邊應具有相同的大小，此視窗允許您重新調整圖片和畫布的位置和大小。按一下選擇並調整大小。</s:String>
+    <s:String x:Key="S.InsertFrames.CanvasSize">畫布大小：</s:String>
     <s:String x:Key="S.InsertFrames.FitCanvas">適合畫布上的圖片</s:String>
-    <s:String x:Key="S.InsertFrames.FitCanvas.Info">調整畫布大小以適合內部的兩個圖片 (從左上角)</s:String>
-    <s:String x:Key="S.InsertFrames.DifferentSizes">影格大小之間有差別。在插入影格之前您需要解決此問題</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas.Info">調整畫布大小以適合內部的兩個圖片（從左上角）</s:String>
+    <s:String x:Key="S.InsertFrames.DifferentSizes">影格大小之間有差別，在插入影格之前您需要解決此問題。</s:String>
     <s:String x:Key="S.InsertFrames.InsertedFrames">已插入的影格</s:String>
     <s:String x:Key="S.InsertFrames.CurrentFrames">目前影格</s:String>
-    <s:String x:Key="S.InsertFrames.ImageSize">圖片大小:</s:String>
-    <s:String x:Key="S.InsertFrames.ImagePosition">圖片位置:</s:String>
+    <s:String x:Key="S.InsertFrames.ImageSize">圖片大小：</s:String>
+    <s:String x:Key="S.InsertFrames.ImagePosition">圖片位置：</s:String>
     <s:String x:Key="S.InsertFrames.ResetImageSizePosition">重設圖片大小&#10;和位置</s:String>
-    <s:String x:Key="S.InsertFrames.Info2">新影格將插入到目前位置的影格清單中:</s:String>
+    <s:String x:Key="S.InsertFrames.Info2">新影格將插入到目前位置的影格清單中：</s:String>
     <s:String x:Key="S.InsertFrames.Before">之前</s:String>
     <s:String x:Key="S.InsertFrames.After">之後</s:String>
     <s:String x:Key="S.InsertFrames.Frame">影格</s:String>
@@ -704,21 +704,21 @@
 
     <!--Import frames from video-->
     <s:String x:Key="S.ImportVideo.Title">從影片匯入影格</s:String>
-    <s:String x:Key="S.ImportVideo.Importer">開發商:</s:String>
+    <s:String x:Key="S.ImportVideo.Importer">開發商：</s:String>
     <s:String x:Key="S.ImportVideo.Loading">載入中...</s:String>
-    <s:String x:Key="S.ImportVideo.Scale">縮放比例:</s:String>
-    <s:String x:Key="S.ImportVideo.Size">大小:</s:String>
-    <s:String x:Key="S.ImportVideo.Height">高度:</s:String>
-    <s:String x:Key="S.ImportVideo.Width">寬度:</s:String>
-    <s:String x:Key="S.ImportVideo.Framerate">影格率:</s:String>
+    <s:String x:Key="S.ImportVideo.Scale">縮放比例：</s:String>
+    <s:String x:Key="S.ImportVideo.Size">大小：</s:String>
+    <s:String x:Key="S.ImportVideo.Height">高度：</s:String>
+    <s:String x:Key="S.ImportVideo.Width">寬度：</s:String>
+    <s:String x:Key="S.ImportVideo.Framerate">影格率：</s:String>
     <s:String x:Key="S.ImportVideo.Fps">fps</s:String>
-    <s:String x:Key="S.ImportVideo.Start">開始:</s:String>
-    <s:String x:Key="S.ImportVideo.End">結束:</s:String>
-    <s:String x:Key="S.ImportVideo.Selection">選取範圍:</s:String>
-    <s:String x:Key="S.ImportVideo.Frames">影格:</s:String>
-    <s:String x:Key="S.ImportVideo.Duration">持續時間:</s:String>
+    <s:String x:Key="S.ImportVideo.Start">開始：</s:String>
+    <s:String x:Key="S.ImportVideo.End">結束：</s:String>
+    <s:String x:Key="S.ImportVideo.Selection">選取範圍：</s:String>
+    <s:String x:Key="S.ImportVideo.Frames">影格：</s:String>
+    <s:String x:Key="S.ImportVideo.Duration">持續時間：</s:String>
     <s:String x:Key="S.ImportVideo.Error">影片讀取失敗</s:String>
-    <s:String x:Key="S.ImportVideo.Error.Detail">預覽元件無法啟動。請嘗試使用其他匯入工具或檢查影片是否未損壞。 &#10;如果您使用的是 MediaPlayer，請檢查 Windows 功能“ Media Features/Windows Media Player”是否已打開，並確保您具有必需的影片編解碼器</s:String>
+    <s:String x:Key="S.ImportVideo.Error.Detail">預覽工具無法啟動。請嘗試使用其他匯入工具或檢查影片是否未損壞。&#10;如果您使用的是 MediaPlayer，請檢查 Windows 功能 "媒體功能/Windows Media Player" 是否已打開，並確保您具有必需的影片編解碼器。</s:String>
     <s:String x:Key="S.ImportVideo.Timeout">預覽影格逾時</s:String>
     <s:String x:Key="S.ImportVideo.Nothing">沒有選擇要匯入的影格</s:String>
     
@@ -736,12 +736,12 @@
     <s:String x:Key="S.Encoder.Completed.Upload.Fail">上傳失敗</s:String>
     <s:String x:Key="S.Encoder.Completed.Upload.Delete">Ctrl + 點擊以打開頁面刪除圖片（如適用）</s:String>
     
-    <s:String x:Key="S.Encoder.Completed.Elapsed">經過時間（分鐘）:</s:String>
-    <s:String x:Key="S.Encoder.Completed.Elapsed.Analysis">分析:</s:String>
-    <s:String x:Key="S.Encoder.Completed.Elapsed.Encoding">編碼:</s:String>
-    <s:String x:Key="S.Encoder.Completed.Elapsed.Upload">上傳:</s:String>
-    <s:String x:Key="S.Encoder.Completed.Elapsed.Copy">複製:</s:String>
-    <s:String x:Key="S.Encoder.Completed.Elapsed.Commands">指令:</s:String>
+    <s:String x:Key="S.Encoder.Completed.Elapsed">經過時間（分鐘）：</s:String>
+    <s:String x:Key="S.Encoder.Completed.Elapsed.Analysis">分析：</s:String>
+    <s:String x:Key="S.Encoder.Completed.Elapsed.Encoding">編碼：</s:String>
+    <s:String x:Key="S.Encoder.Completed.Elapsed.Upload">上傳：</s:String>
+    <s:String x:Key="S.Encoder.Completed.Elapsed.Copy">複製：</s:String>
+    <s:String x:Key="S.Encoder.Completed.Elapsed.Commands">指令：</s:String>
     
     <s:String x:Key="S.Encoder.DeletedMoved">檔案已刪除或已移動</s:String>
     <s:String x:Key="S.Encoder.Canceled">已取消</s:String>
@@ -786,18 +786,18 @@
     <s:String x:Key="S.Editor.Options">選項</s:String>
     <s:String x:Key="S.Editor.Help">說明</s:String>
     <s:String x:Key="S.Editor.Extras">附加功能</s:String>
-    <s:String x:Key="S.Editor.UpdateAvailable">一個新的更新可用！</s:String>
-    <s:String x:Key="S.Editor.UpdateAvailable.Info">點擊此處以了解更多訊息</s:String>
+    <s:String x:Key="S.Editor.UpdateAvailable">有一個新的更新！</s:String>
+    <s:String x:Key="S.Editor.UpdateAvailable.Info">點擊此處以了解更多訊息。</s:String>
     <s:String x:Key="S.Editor.FrameNumbersInfo">總影格數、已選影格數、已選影格索引</s:String>
     
     <!--Editor • Loading-->
     <s:String x:Key="S.Editor.Preparing">正在準備影格</s:String>
-    <s:String x:Key="S.Editor.InvalidLoadingFiles">載入無效 - 您無法一次同時匯入多個檔案。試著只選擇一個檔案</s:String>
-    <s:String x:Key="S.Editor.InvalidLoadingProjects">載入無效 - 您無法一次同時匯入多個專案。試著只選擇一個專案</s:String>
+    <s:String x:Key="S.Editor.InvalidLoadingFiles">載入無效 - 您無法一次同時匯入多個檔案。請試著只選擇一個檔案。</s:String>
+    <s:String x:Key="S.Editor.InvalidLoadingProjects">載入無效 - 您無法一次同時匯入多個專案。請試著只選擇一個專案。</s:String>
     
     <!--Editor • File dialogs (does not work with new line characters)-->
-    <s:String x:Key="S.Editor.File.OpenMedia">打開媒體(圖片或影片)</s:String>
-    <s:String x:Key="S.Editor.File.OpenMediaProject">打開媒體(圖片或影片)或專案檔</s:String>
+    <s:String x:Key="S.Editor.File.OpenMedia">打開媒體（圖片或影片）</s:String>
+    <s:String x:Key="S.Editor.File.OpenMediaProject">打開媒體（圖片或影片）或專案檔</s:String>
     <s:String x:Key="S.Editor.File.All">所有支援的檔案</s:String>
     <s:String x:Key="S.Editor.File.Image">圖片</s:String>
     <s:String x:Key="S.Editor.File.Video">影片</s:String>
@@ -815,13 +815,13 @@
     <s:String x:Key="S.Editor.File.Psd">PSD 檔</s:String>
     
     <!--Editor • Welcome-->
-    <s:String x:Key="S.Editor.Welcome.New">從「檔案 > 新增」開始新的錄影</s:String>
+    <s:String x:Key="S.Editor.Welcome.New">從 [檔案 > 新增] 開始新的錄影</s:String>
     <s:String x:Key="S.Editor.Welcome.Import">拖放要匯入的圖片、影片或專案</s:String>
     <s:String x:Key="S.Editor.Welcome.ThankYou">非常感謝您使用我的應用程式!</s:String>
     <s:String x:Key="S.Editor.Welcome.Size">影格率越低，色彩計數或影格之間的變化量越小，則大小越小</s:String>
-    <s:String x:Key="S.Editor.Welcome.Contact">您想談談嗎?連絡方式請打開「選項 > 關於」</s:String>
-    <s:String x:Key="S.Editor.Welcome.Trouble">遇到麻煩?透過意見反應工具與我聯繫</s:String>
-    <s:String x:Key="S.Editor.Welcome.NewRecorder">你想試試新版錄製界面嗎？轉到“選項 > 應用程式”可以啟用</s:String>
+    <s:String x:Key="S.Editor.Welcome.Contact">您想談談嗎？連絡方式請打開 [選項 > 關於]</s:String>
+    <s:String x:Key="S.Editor.Welcome.Trouble">遇到麻煩？請透過意見反應工具與我聯繫</s:String>
+    <s:String x:Key="S.Editor.Welcome.NewRecorder">你想試試新版錄製界面嗎？可以從 [選項 > 應用程式] 來啟用</s:String>
     
     <!--Editor • File tab • New-->
     <s:String x:Key="S.Editor.File.New.Recording">錄製</s:String>
@@ -845,7 +845,7 @@
     <s:String x:Key="S.Editor.File.Discard">捨棄&#10;專案</s:String>
     
     <!--Editor • Home tab • Action Stack-->
-    <s:String x:Key="S.Editor.Home.ActionStack">動作堆疊</s:String>
+    <s:String x:Key="S.Editor.Home.ActionStack">動作紀錄</s:String>
     <s:String x:Key="S.Editor.Home.Undo">還原</s:String>
     <s:String x:Key="S.Editor.Home.Redo">重做</s:String>
     <s:String x:Key="S.Editor.Home.Reset">重設</s:String>
@@ -871,17 +871,17 @@
     
     <!--Editor • Playback tab • Playback-->
     <s:String x:Key="S.Editor.Playback.Playback">播放</s:String>
-    <s:String x:Key="S.Editor.Playback.First">第一個</s:String>
-    <s:String x:Key="S.Editor.Playback.Previous">上一個</s:String>
+    <s:String x:Key="S.Editor.Playback.First">第一張</s:String>
+    <s:String x:Key="S.Editor.Playback.Previous">上一張</s:String>
     <s:String x:Key="S.Editor.Playback.Play">播放</s:String>
     <s:String x:Key="S.Editor.Playback.Pause">暫停</s:String>
-    <s:String x:Key="S.Editor.Playback.Next">下一個</s:String>
-    <s:String x:Key="S.Editor.Playback.Last">最後一個</s:String>
+    <s:String x:Key="S.Editor.Playback.Next">下一張</s:String>
+    <s:String x:Key="S.Editor.Playback.Last">最後一張</s:String>
     
     <!--Editor • Playback tab • Playback Options-->
     <s:String x:Key="S.Editor.PlaybackOptions.Header">播放選項</s:String>
     <s:String x:Key="S.Editor.PlaybackOptions.Loop">播放期間循環播放</s:String>
-    <s:String x:Key="S.Editor.PlaybackOptions.Loop.Info">僅在播放期間使用&#10;如果要更改用於輸出 Gif 和 Apng 的循環設定，請至 "另存為..." 面板中設定</s:String>
+    <s:String x:Key="S.Editor.PlaybackOptions.Loop.Info">僅在播放期間使用&#10;如果要更改用於輸出 Gif 和 Apng 的循環設定，請至 "另存新檔" 中設定</s:String>
     
     <!--Editor • Edit tab • Frames-->  
     <s:String x:Key="S.Editor.Edit.Frames">影格</s:String>
@@ -894,12 +894,12 @@
     <!--Editor • Edit tab • Reordering-->
     <s:String x:Key="S.Editor.Edit.Reordering">錄影</s:String>
     <s:String x:Key="S.Editor.Edit.Reverse">反轉</s:String>
-    <s:String x:Key="S.Editor.Edit.Yoyo">反轉循環</s:String>
+    <s:String x:Key="S.Editor.Edit.Yoyo">反轉循環（Yoyo 循環）</s:String>
     <s:String x:Key="S.Editor.Edit.MoveLeft">移動到&#10;左側</s:String>
     <s:String x:Key="S.Editor.Edit.MoveRight">移動到&#10;右側</s:String>
     
     <!--Editor • Edit tab • Delay/Duration-->
-    <s:String x:Key="S.Editor.Edit.Delay">延遲(持續期間)</s:String>
+    <s:String x:Key="S.Editor.Edit.Delay">延遲（持續期間）</s:String>
     <s:String x:Key="S.Editor.Edit.Delay.Override">覆寫</s:String>
     <s:String x:Key="S.Editor.Edit.Delay.IncreaseDecrease">增加或&#10;減少</s:String>
     <s:String x:Key="S.Editor.Edit.Delay.Scale">縮放</s:String>
@@ -921,7 +921,7 @@
     <s:String x:Key="S.Editor.Image.Overlay">覆蓋</s:String>
     <s:String x:Key="S.Editor.Image.FreeDrawing">自由&#10;繪圖</s:String>
     <s:String x:Key="S.Editor.Image.Shape">形狀</s:String>
-    <s:String x:Key="S.Editor.Image.Clicks">滑鼠點擊</s:String>
+    <s:String x:Key="S.Editor.Image.Clicks">滑鼠&#10;點擊</s:String>
     <s:String x:Key="S.Editor.Image.Watermark">浮水印</s:String>
     <s:String x:Key="S.Editor.Image.Cinemagraph">動畫圖片</s:String>
     <s:String x:Key="S.Editor.Image.Border">邊框</s:String>
@@ -935,13 +935,13 @@
     <s:String x:Key="S.Editor.Transitions.Slide">滑動</s:String>
     
     <!--Editor • Statistics tab-->
-    <s:String x:Key="S.Editor.Statistics.General">一般</s:String>
-    <s:String x:Key="S.Editor.Statistics.FrameCount">影格計數</s:String>
+    <s:String x:Key="S.Editor.Statistics.General">通用</s:String>
+    <s:String x:Key="S.Editor.Statistics.FrameCount">總影格數</s:String>
     <s:String x:Key="S.Editor.Statistics.TotalDuration">總持續期間</s:String>
     <s:String x:Key="S.Editor.Statistics.FrameSize">影格大小</s:String>
-    <s:String x:Key="S.Editor.Statistics.AverageDuration">平均持續期間(延遲)</s:String>
-    <s:String x:Key="S.Editor.Statistics.CurrentTime">當前時間</s:String>
-    <s:String x:Key="S.Editor.Statistics.CurrentTime.Info">基於當前正在顯示的影格的當前時間（累積時間）</s:String>
+    <s:String x:Key="S.Editor.Statistics.AverageDuration">平均持續期間（延遲）</s:String>
+    <s:String x:Key="S.Editor.Statistics.CurrentTime">目前時間</s:String>
+    <s:String x:Key="S.Editor.Statistics.CurrentTime.Info">基於目前正在顯示的影格的累積時間</s:String>
     <s:String x:Key="S.Editor.Statistics.FrameDpi">影格 DPI 和縮放</s:String>
     <s:String x:Key="S.Editor.Statistics.SelectedFrame">所選影格</s:String>
     
@@ -954,50 +954,50 @@
     <s:String x:Key="S.Editor.DeleteAll.Message">此操作將放棄目前已打開的專案且無法還原。要繼續嗎？</s:String>
     <s:String x:Key="S.Editor.DiscardProject.Title">捨棄專案</s:String>
     <s:String x:Key="S.Editor.DiscardProject.Instruction">您確定要捨棄專案嗎？</s:String>
-    <s:String x:Key="S.Editor.DiscardProject.Message">您正試著移除所有影格。&#10;\r您無法還原此項操作</s:String>
+    <s:String x:Key="S.Editor.DiscardProject.Message">您正試著移除所有影格。&#10;您無法還原此項操作。</s:String>
     <s:String x:Key="S.Editor.DiscardPreviousProject.Instruction">您要捨棄以前的專案嗎？</s:String>
-    <s:String x:Key="S.Editor.DiscardPreviousProject.Message">如果您選擇保留，以前的專案將可在“最近的專案”中打開</s:String>
+    <s:String x:Key="S.Editor.DiscardPreviousProject.Message">如果您選擇保留，以前的專案將可在"最近的專案"中打開。</s:String>
     <s:String x:Key="S.Editor.DeleteFrames.Title">刪除影格</s:String>
     <s:String x:Key="S.Editor.DeleteFrames.Instruction">您確定要刪除嗎？</s:String>
-    <s:String x:Key="S.Editor.DeleteFrames.Message">此操作將刪除 {0} 影格。 &#10;\r您可以稍後還原</s:String>
+    <s:String x:Key="S.Editor.DeleteFrames.Message">此操作將刪除 {0} 影格。&#10;您可以稍後還原。</s:String>
     <s:String x:Key="S.Editor.Exiting.Title">退出編輯器</s:String>
-    <s:String x:Key="S.Editor.Exiting.Instruction">您確實要退出嗎？</s:String>
-    <s:String x:Key="S.Editor.Exiting.Message">您正在處理的專案可以在“最近的專案”中再次打開</s:String>
-    <s:String x:Key="S.Editor.Exiting.Message2">您正在處理的專案可以在“最近的專案”中再次打開，但別忘了，它將會在幾日後被自動刪除</s:String>
+    <s:String x:Key="S.Editor.Exiting.Instruction">您確定要退出嗎？</s:String>
+    <s:String x:Key="S.Editor.Exiting.Message">您正在處理的專案可以在"最近的專案"中再次打開。</s:String>
+    <s:String x:Key="S.Editor.Exiting.Message2">您正在處理的專案可以在"最近的專案"中再次打開，但別忘了，它將會在幾日後被自動刪除。</s:String>
     <s:String x:Key="S.Editor.DragDrop.Invalid.Title">無效的拖放</s:String>
     <s:String x:Key="S.Editor.DragDrop.MultipleFiles.Instruction">您無法一次同時匯入多個檔</s:String>
-    <s:String x:Key="S.Editor.DragDrop.MultipleFiles.Message">試著只選擇一個檔案</s:String>
+    <s:String x:Key="S.Editor.DragDrop.MultipleFiles.Message">試著只選擇一個檔案。</s:String>
     <s:String x:Key="S.Editor.DragDrop.Invalid.Instruction">無法讀取檔案</s:String>
-    <s:String x:Key="S.Editor.DragDrop.Invalid.Message">由於格式無效，無法讀取該檔案</s:String>
+    <s:String x:Key="S.Editor.DragDrop.Invalid.Message">由於格式無效，無法讀取該檔案。</s:String>
     <s:String x:Key="S.Editor.DragDrop.InvalidProject.Instruction">您無法一次同時匯入多個專案</s:String>
-    <s:String x:Key="S.Editor.DragDrop.InvalidProject.Message">試著只選擇一個專案</s:String>
+    <s:String x:Key="S.Editor.DragDrop.InvalidProject.Message">試著只選擇一個專案。</s:String>
 
-    <s:String x:Key="S.Editor.Caption.WarningNoText">沒有文字可套用</s:String>
-    <s:String x:Key="S.Editor.Caption.WarningSelection">您必須至少選擇一個影格來套用標題</s:String>
-    <s:String x:Key="S.Editor.FreeText.WarningSelection">您必須至少選擇一個影格來套用文字</s:String>
-    <s:String x:Key="S.Editor.TitleFrame.WarningSelection">您必須至少選擇一個影格來套用標題影格文字</s:String>
-    <s:String x:Key="S.Editor.Border.WarningThickness">您必須告知至少一邊邊框大於零的粗細</s:String>
-    <s:String x:Key="S.Editor.Border.WarningSelection">您必須至少選擇一個影格來套用邊框</s:String>
-    <s:String x:Key="S.Editor.Shadow.Warning.Invisible">不透明度必須大於零，以使邊框有所不同</s:String>
-    <s:String x:Key="S.Editor.Shadow.Warning.Behind">如使用陰影深度和模糊半徑設為零時，不會有任何區別，因為它會隱藏在邊框的後面</s:String>
-    <s:String x:Key="S.Editor.Cinemagraph.WarningNoDrawing">您必須至少選擇一個像素來套用動畫圖片。透過在它們上面繪圖來選擇像素</s:String>
+    <s:String x:Key="S.Editor.Caption.WarningNoText">沒有文字可套用。</s:String>
+    <s:String x:Key="S.Editor.Caption.WarningSelection">您必須至少選擇一個影格來套用標題。</s:String>
+    <s:String x:Key="S.Editor.FreeText.WarningSelection">您必須至少選擇一個影格來套用文字。</s:String>
+    <s:String x:Key="S.Editor.TitleFrame.WarningSelection">您必須至少選擇一個影格來套用標題影格文字。</s:String>
+    <s:String x:Key="S.Editor.Border.WarningThickness">您必須告知至少一邊邊框大於零的粗細。</s:String>
+    <s:String x:Key="S.Editor.Border.WarningSelection">您必須至少選擇一個影格來套用邊框。</s:String>
+    <s:String x:Key="S.Editor.Shadow.Warning.Invisible">不透明度必須大於零，以使邊框有所不同。</s:String>
+    <s:String x:Key="S.Editor.Shadow.Warning.Behind">如使用陰影深度和模糊半徑設為零時，不會有任何區別，因為它會隱藏在邊框的後面。</s:String>
+    <s:String x:Key="S.Editor.Cinemagraph.WarningNoDrawing">您必須至少選擇一個像素來套用動畫圖片。透過在它們上面繪圖來選擇像素。</s:String>
     <s:String x:Key="S.Editor.Fade.Title">淡出轉場</s:String>
-    <s:String x:Key="S.Editor.Fade.WarningSelection">您必須至少選擇一個影格來套用淡出轉場</s:String>
-    <s:String x:Key="S.Editor.Fade.WarningColor">完全透明的顏色不會對此過渡產生任何影響</s:String>
+    <s:String x:Key="S.Editor.Fade.WarningSelection">您必須至少選擇一個影格來套用淡出轉場。</s:String>
+    <s:String x:Key="S.Editor.Fade.WarningColor">完全透明的顏色不會對此過渡產生任何影響。</s:String>
     <s:String x:Key="S.Editor.Slide.Title">滑動轉場</s:String>
-    <s:String x:Key="S.Editor.Slide.WarningSelection">您必須至少選擇一個影格來套用滑動轉場</s:String>
+    <s:String x:Key="S.Editor.Slide.WarningSelection">您必須至少選擇一個影格來套用滑動轉場。</s:String>
     <s:String x:Key="S.Editor.LoadingFrames">正在載入影格</s:String>
     <s:String x:Key="S.Editor.LoadingFrames.ProjectCorrupted.Instruction">無法載入專案</s:String>
-    <s:String x:Key="S.Editor.LoadingFrames.ProjectCorrupted.Message">無法載入這些影格，因其已經損壞或圖片不在預期位置</s:String>
+    <s:String x:Key="S.Editor.LoadingFrames.ProjectCorrupted.Message">無法載入這些影格，因其已經損壞或圖片不在預期位置。</s:String>
     <s:String x:Key="S.Editor.LoadingFrames.FramesCorrupted.Instruction">無法載入某些影格</s:String>
-    <s:String x:Key="S.Editor.LoadingFrames.FramesCorrupted.Message">無法載入這些影格，因其無法被找到或已損壞</s:String>
+    <s:String x:Key="S.Editor.LoadingFrames.FramesCorrupted.Message">無法載入這些影格，因其無法被找到或已損壞。</s:String>
     
     <!--Editor • Warnings-->
-    <s:String x:Key="S.Editor.Warning.Selection">你必須選擇至少一個影格來覆蓋</s:String>
-    <s:String x:Key="S.Editor.Warning.Ffmpeg">FFmpeg 不存在。將其加入至 Path 環境變數或在選項中設定好路徑</s:String>
-    <s:String x:Key="S.Editor.Warning.Gifski">Gifski 不存在。將其加入至 Path 環境變數或在選項中設定好路徑</s:String>
-    <s:String x:Key="S.Editor.Warning.LowSpace">磁碟機上沒有足夠的空間供應用程式儲存快取（剩餘 {0}% ）。點擊此處打開“選項” > “暫存檔案”，以釋放一些空間</s:String>
-    <s:String x:Key="S.Editor.Warning.DifferentDpi">您嘗試使用不支持的 DPI 匯入多個圖片。部分已匯入成功，其他則需要單獨匯入</s:String>
+    <s:String x:Key="S.Editor.Warning.Selection">你必須選擇至少一個影格來執行覆蓋。</s:String>
+    <s:String x:Key="S.Editor.Warning.Ffmpeg">FFmpeg 不存在。將其加入至 Path 環境變數或在選項中設定好路徑。</s:String>
+    <s:String x:Key="S.Editor.Warning.Gifski">Gifski 不存在。將其加入至 Path 環境變數或在選項中設定好路徑。</s:String>
+    <s:String x:Key="S.Editor.Warning.LowSpace">磁碟機上沒有足夠的空間供應用程式儲存快取（剩餘 {0}% ）。點擊此處打開 [選項 > 暫存檔]，以釋放一些空間。</s:String>
+    <s:String x:Key="S.Editor.Warning.DifferentDpi">您嘗試使用不支持的 DPI 匯入多個圖片。部分已匯入成功，其他則需要單獨匯入。</s:String>
     
     <!--Editor • Status-->
     <s:String x:Key="S.Editor.RetrievingFromCache">正在從快取中取得影格</s:String>
@@ -1020,14 +1020,14 @@
     <s:String x:Key="S.Editor.CancelDiscard">取消讀取並捨棄專案</s:String>
 
     <!--Editor • Frame list-->
-    <s:String x:Key="S.Editor.List.Frame">影格:</s:String>
+    <s:String x:Key="S.Editor.List.Frame">影格：</s:String>
     <s:String x:Key="S.Editor.List.OpenImage">開啟圖片</s:String>
     <s:String x:Key="S.Editor.List.ExploreFolder">瀏覽資料夾</s:String>
     <s:String x:Key="S.Editor.List.ExportImage">匯出圖片</s:String>
     
     <!--Editor • Go to-->
     <s:String x:Key="S.GoTo.Title">移至影格</s:String>
-    <s:String x:Key="S.GoTo.Instruction">移至影格(0 到 {0})</s:String>
+    <s:String x:Key="S.GoTo.Instruction">移至影格（0 到 {0}）</s:String>
     
     <!--Editor • Context menu-->
     <s:String x:Key="S.Context.SaveAs">另存成</s:String>
@@ -1070,7 +1070,7 @@
     <s:String x:Key="S.Hint.Overlay">重疊已套用</s:String>
     <s:String x:Key="S.Hint.TitleFrame">標題影格建立</s:String>
     <s:String x:Key="S.Hint.TitleFrame2">標題影格將插入到所選影格之前</s:String>
-    <s:String x:Key="S.Hint.Delay">持續時間(延遲)已變更</s:String>
+    <s:String x:Key="S.Hint.Delay">持續時間（延遲）已變更</s:String>
     <s:String x:Key="S.Hint.Transition">轉場已插入</s:String>
     <s:String x:Key="S.Hint.Reduce">影格率減少</s:String>
     <s:String x:Key="S.Hint.Duplicates">重複已被移除</s:String>
@@ -1087,13 +1087,13 @@
     <s:String x:Key="S.Recent.Searching">正在尋找最近使用的專案...</s:String>
     <s:String x:Key="S.Recent.Date">建立日期</s:String>
     <s:String x:Key="S.Recent.Frames">影格計數</s:String>
-    <s:String x:Key="S.Recent.Warning.NoSelection">沒有選擇專案。選擇清單的專案來載入</s:String>
-    <s:String x:Key="S.Recent.Warning.SameProject">該專案已在目前編輯器中顯示</s:String>
-    <s:String x:Key="S.Recent.Warning.AnotherEditor">該專案已由另一個編輯器實例打開。如果專案已在另一個編輯器上打開，則無法再次打開該專案</s:String>
+    <s:String x:Key="S.Recent.Warning.NoSelection">沒有選擇專案。選擇清單的專案來載入。</s:String>
+    <s:String x:Key="S.Recent.Warning.SameProject">該專案已在目前編輯器中顯示。</s:String>
+    <s:String x:Key="S.Recent.Warning.AnotherEditor">該專案已由另一個編輯器實例打開。如果專案已在另一個編輯器上打開，則無法再次打開該專案。</s:String>
     
     <!--Editor • Clipboard-->
     <s:String x:Key="S.Clipboard.Entries">剪貼簿項目</s:String>
-    <s:String x:Key="S.Clipboard.Entry">剪貼簿項目:</s:String>
+    <s:String x:Key="S.Clipboard.Entry">剪貼簿項目：</s:String>
     <s:String x:Key="S.Clipboard.Entry.Image">{0} 張圖片</s:String>
     <s:String x:Key="S.Clipboard.Entry.Images">{0} 張圖片</s:String>
     <s:String x:Key="S.Clipboard.Explore">瀏覽內容</s:String>
@@ -1106,23 +1106,23 @@
     <s:String x:Key="S.Resize.CurrentProperties">目前內容</s:String>
     <s:String x:Key="S.Resize.Dpi">Dpi</s:String>
     <s:String x:Key="S.Resize.NewProperties">新增內容</s:String>
-    <s:String x:Key="S.Resize.Dpi2">DPI:</s:String>
+    <s:String x:Key="S.Resize.Dpi2">DPI：</s:String>
     <s:String x:Key="S.Resize.KeepAspect">保持長寬比</s:String>
     <s:String x:Key="S.Resize.Options">選項</s:String>
-    <s:String x:Key="S.Resize.ScalingQuality">縮放品質:</s:String>
-    <s:String x:Key="S.Resize.ScalingQuality.Fant">Fant (高品質)</s:String>
-    <s:String x:Key="S.Resize.ScalingQuality.Linear">Linear (低品質)</s:String>
-    <s:String x:Key="S.Resize.ScalingQuality.NearestNeighbor">Nearest neighbor (低品質且較快)</s:String>
-    <s:String x:Key="S.Resize.Warning">您必須選擇不同的值來套用調整大小動作</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality">縮放品質：</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Fant">Fant（高品質）</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Linear">Linear（低品質）</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.NearestNeighbor">Nearest neighbor（低品質且較快）</s:String>
+    <s:String x:Key="S.Resize.Warning">您必須選擇不同的值來套用調整大小動作。</s:String>
     
     <!--Editor • Crop-->
     <s:String x:Key="S.Crop.Points">點</s:String>
-    <s:String x:Key="S.Crop.Top">上:</s:String>
-    <s:String x:Key="S.Crop.Left">左:</s:String>
-    <s:String x:Key="S.Crop.Bottom">下:</s:String>
-    <s:String x:Key="S.Crop.Right">右:</s:String>
-    <s:String x:Key="S.Crop.Warning">裁減選取範圍必須小於目前影格大小</s:String>
-    <s:String x:Key="S.Crop.Warning.Bigger">裁減選取範圍必須大於 10x10 像素</s:String>
+    <s:String x:Key="S.Crop.Top">上：</s:String>
+    <s:String x:Key="S.Crop.Left">左：</s:String>
+    <s:String x:Key="S.Crop.Bottom">下：</s:String>
+    <s:String x:Key="S.Crop.Right">右：</s:String>
+    <s:String x:Key="S.Crop.Warning">裁減選取範圍必須小於目前影格大小。</s:String>
+    <s:String x:Key="S.Crop.Warning.Bigger">裁減選取範圍必須大於 10x10 像素。</s:String>
     
     <!--Editor • Flip/rotate-->
     <s:String x:Key="S.FlipRotate.FlipHorizontal">水平翻轉</s:String>
@@ -1132,55 +1132,57 @@
     
     <!--Editor • Reduce framerate-->
     <s:String x:Key="S.Reduce.Header">減少影格率</s:String>
-    <s:String x:Key="S.Reduce.Factor">縮放比例:</s:String>
-    <s:String x:Key="S.Reduce.Count">移除計數:</s:String>
-    <s:String x:Key="S.Reduce.Delay">延遲調整:</s:String>
+    <s:String x:Key="S.Reduce.Factor">移除比例：</s:String>
+    <s:String x:Key="S.Reduce.Count">移除計數：</s:String>
+    <s:String x:Key="S.Reduce.Delay">延遲調整：</s:String>
     <s:String x:Key="S.Reduce.Delay.NoAdjustment">不調整</s:String>
     <s:String x:Key="S.Reduce.Delay.Previous">與前一影格相加</s:String>
     <s:String x:Key="S.Reduce.Delay.Evenly">與其餘影格平均相加</s:String>
     <s:String x:Key="S.Reduce.ApplyToAll">降低整個專案的影格率</s:String>
-    <s:String x:Key="S.Reduce.ApplyToAll.Info">如果未選中該選項，則必須選擇多個連續影格，且大於去除因子</s:String>
-    <s:String x:Key="S.Reduce.Info">它將在每隔 {1} 影格之後刪除 {0} 影格，而不計算刪除的影格</s:String>
-    <s:String x:Key="S.Reduce.Warning.NoSelection">您必須選擇要應用影格率降低的影格（或選中要應用於整個專案的選項）</s:String>
-    <s:String x:Key="S.Reduce.Warning.NonConsecutive">選擇的影格列表必須是連續的。您不能在選定的影格中保留一些未選擇的影格</s:String>
-    <s:String x:Key="S.Reduce.Warning.SmallerThanFactor">為了使功能可以刪除任何東西，影格的選擇必須比除去因子越大</s:String>
+    <s:String x:Key="S.Reduce.ApplyToAll.Info">如果未啟用此選項，則必須選擇多個連續影格，且大於移除比例。</s:String>
+    <s:String x:Key="S.Reduce.Info">它將在每隔 {1} 影格之後刪除 {0} 影格，而不計算刪除的影格。</s:String>
+    <s:String x:Key="S.Reduce.Warning.NoSelection">您必須選擇要套用影格率降低的影格（或選擇要套用於整個專案的選項）。</s:String>
+    <s:String x:Key="S.Reduce.Warning.NonConsecutive">選擇的影格列表必須是連續的。您不能在選定的影格中留下一些未選擇的影格。</s:String>
+    <s:String x:Key="S.Reduce.Warning.SmallerThanFactor">為了使此功能可以刪除掉多餘影格，選中的影格數量必須大於移除比例。</s:String>
     
     <!--Editor • Remove duplicates-->
     <s:String x:Key="S.RemoveDuplicates.Header">刪除重複項</s:String>
-    <s:String x:Key="S.RemoveDuplicates.Similarity">相似度 (%):</s:String>
-    <s:String x:Key="S.RemoveDuplicates.Removal">影格刪除:</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Similarity">相似度 (%)：</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal">影格刪除：</s:String>
     <s:String x:Key="S.RemoveDuplicates.Removal.First">刪除第一影格</s:String>
     <s:String x:Key="S.RemoveDuplicates.Removal.Last">刪除最後影格</s:String>
-    <s:String x:Key="S.RemoveDuplicates.Delay">延遲調整:</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay">延遲調整：</s:String>
     <s:String x:Key="S.RemoveDuplicates.Delay.NoAdjustment">不調整</s:String>
     <s:String x:Key="S.RemoveDuplicates.Delay.Average">使用平均值</s:String>
     <s:String x:Key="S.RemoveDuplicates.Delay.Sum">使用總和</s:String>
-    <s:String x:Key="S.RemoveDuplicates.Info">此操作會分析每個影格（逐個像素），並刪除至少為 {0}% 的類似於其最近鄰的影格。 &#10;您可以選擇是否要調整影格的延遲（顯示持續時間）</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Info">此操作會分析每個影格（逐像素），並刪除至少為 {0}% 的類似於其最近鄰的影格。 &#10;您可以選擇是否要調整影格的延遲（顯示持續時間）。</s:String>
     
     <!--Editor • Captions-->
     <s:String x:Key="S.Caption.Text">文字</s:String>
     <s:String x:Key="S.Caption.Font">字型</s:String>
-    <s:String x:Key="S.Caption.Family">系列:</s:String>
-    <s:String x:Key="S.Caption.Style">樣式:</s:String>
-    <s:String x:Key="S.Caption.Weight">粗細:</s:String>
-    <s:String x:Key="S.Caption.Size">大小:</s:String>
-    <s:String x:Key="S.Caption.Color">顏色:</s:String>
+    <s:String x:Key="S.Caption.Family">系列：</s:String>
+    <s:String x:Key="S.Caption.Style">樣式：</s:String>
+    <s:String x:Key="S.Caption.Weight">粗細：</s:String>
+    <s:String x:Key="S.Caption.Size">大小：</s:String>
+    <s:String x:Key="S.Caption.Color">顏色：</s:String>
     <s:String x:Key="S.Caption.Outline">外框</s:String>
-    <s:String x:Key="S.Caption.Thickness">粗細:</s:String>
+    <s:String x:Key="S.Caption.Thickness">粗細：</s:String>
     <s:String x:Key="S.Caption.Layout">配置</s:String>
-    <s:String x:Key="S.Caption.Vertical">垂直:</s:String>
-    <s:String x:Key="S.Caption.Horizontal">水平:</s:String>
+    <s:String x:Key="S.Caption.Vertical">垂直：</s:String>
+    <s:String x:Key="S.Caption.Horizontal">水平：</s:String>
 
     <!--Editor • Key strokes-->
     <s:String x:Key="S.KeyStrokes">按鍵展示</s:String>
     <s:String x:Key="S.KeyStrokes.Keys">按鍵</s:String>
     <s:String x:Key="S.KeyStrokes.Separator">間隔</s:String>
     <s:String x:Key="S.KeyStrokes.Edit">編輯您的按鍵展示</s:String>
-    <s:String x:Key="S.KeyStrokes.IgnoreModifiers">忽略 Ctrl、Alt、Shift 和 Windows 鍵，而不將其用作修飾鍵</s:String>
-    <s:String x:Key="S.KeyStrokes.IgnoreModifiers.Info">它將忽略諸如“Control”這樣單獨的按鍵，但它不會忽略“Control + C”</s:String>
-    <s:String x:Key="S.KeyStrokes.Extend">延伸按鍵展示時間:</s:String>
-    <s:String x:Key="S.KeyStrokes.Earlier">更早開始展示按鍵文字</s:String>
-    <s:String x:Key="S.KeyStrokes.By">依(毫秒):</s:String>
+    <s:String x:Key="S.KeyStrokes.IgnoreModifiers">忽略 Ctrl、Alt、Shift 和 Windows 鍵，而不將其用作修飾鍵。</s:String>
+    <s:String x:Key="S.KeyStrokes.IgnoreModifiers.Info">它將忽略諸如 "Control" 這樣單獨的按鍵，但它不會忽略 "Control + C"。</s:String>
+    <s:String x:Key="S.KeyStrokes.IgnoreInjected">忽略軟體模擬的按鍵。</s:String>
+    <s:String x:Key="S.KeyStrokes.IgnoreInjected.Info">僅紀錄使用者實際輸入的按鍵。</s:String>
+    <s:String x:Key="S.KeyStrokes.Extend">延伸按鍵展示時間：</s:String>
+    <s:String x:Key="S.KeyStrokes.Earlier">提前開始展示按鍵文字。</s:String>
+    <s:String x:Key="S.KeyStrokes.By">依(毫秒)：</s:String>
     <s:String x:Key="S.KeyStrokes.Warning.None">您的錄影上沒有按鍵動作</s:String>
     <s:String x:Key="S.KeyStrokes.Edit.Title">ScreenToGif - 按鍵展示編輯器</s:String>
     <s:String x:Key="S.KeyStrokes.Edit.Number">影格數</s:String>
@@ -1188,7 +1190,7 @@
     <s:String x:Key="S.KeyStrokes.Edit.Remove">移除按鍵展示</s:String>
     <s:String x:Key="S.KeyStrokes.Edit.Add">加入一個按鍵展示</s:String>
     <s:String x:Key="S.KeyStrokes.Edit.Lower">小寫字母</s:String>
-    <s:String x:Key="S.KeyStrokes.Edit.Lower.Info">它使您可以插入小寫的單個字母</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Lower.Info">它使您可以輸入小寫字母。</s:String>
 
     <!--Editor • Free drawing-->
     <s:String x:Key="S.FreeDrawing.Mode">模式</s:String>
@@ -1196,12 +1198,12 @@
     <s:String x:Key="S.FreeDrawing.Eraser">橡皮擦</s:String>
     <s:String x:Key="S.FreeDrawing.Select">選擇</s:String>
     <s:String x:Key="S.FreeDrawing.StrokeEraser">筆劃橡皮擦</s:String>
-    <s:String x:Key="S.FreeDrawing.Width">寬度:</s:String>
-    <s:String x:Key="S.FreeDrawing.Height">高度:</s:String>
-    <s:String x:Key="S.FreeDrawing.Tip">提示:</s:String>
+    <s:String x:Key="S.FreeDrawing.Width">寬度：</s:String>
+    <s:String x:Key="S.FreeDrawing.Height">高度：</s:String>
+    <s:String x:Key="S.FreeDrawing.Tip">提示：</s:String>
     <s:String x:Key="S.FreeDrawing.Rectangle">矩形</s:String>
     <s:String x:Key="S.FreeDrawing.Ellipse">橢圓形</s:String>
-    <s:String x:Key="S.FreeDrawing.Other">其它:</s:String>
+    <s:String x:Key="S.FreeDrawing.Other">其它：</s:String>
     <s:String x:Key="S.FreeDrawing.Highlighter">螢光筆</s:String>
     <s:String x:Key="S.FreeDrawing.FitToCurve">適合曲線</s:String>
     <s:String x:Key="S.FreeDrawing.Warning.NoDrawing">沒有繪圖套用到您所選的影格</s:String>
@@ -1210,59 +1212,59 @@
     <!--Editor • Shapes-->
     <s:String x:Key="S.Shapes.Mode.Insert">插入</s:String>
     <s:String x:Key="S.Shapes.Shapes">形狀</s:String>
-    <s:String x:Key="S.Shapes.Shapes.Radius">半徑:</s:String>
-    <s:String x:Key="S.Shapes.Shapes.Dashes">破折號:</s:String>
-    <s:String x:Key="S.Shapes.Shapes.Dashes.Info">控制破折號的大小及間隙的大小。&#10;您可以設定多組大小來微調破折號樣式。&#10;預設值為 "1 0" 或留空，表示沒有間隙的破折號</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Radius">半徑：</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Dashes">破折號：</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Dashes.Info">控制破折號的大小及間隙的大小。&#10;您可以設定多組大小來微調破折號樣式。&#10;預設值為 "1 0" 或留空，表示沒有間隙的破折號。</s:String>
     <s:String x:Key="S.Shapes.Shapes.ResetRotatio">重設旋轉</s:String>
     <s:String x:Key="S.Shapes.Shapes.Remove">移除</s:String>
     <s:String x:Key="S.Shapes.Fill">填充</s:String>
 
     <!--Editor • Mouse clicks-->
     <s:String x:Key="S.MouseClicks">滑鼠點擊</s:String>
-    <s:String x:Key="S.MouseClicks.Warning.None">你的專案沒有檢測到滑鼠點擊</s:String>
+    <s:String x:Key="S.MouseClicks.Warning.None">你的專案沒有檢測到滑鼠點擊。</s:String>
     
     <!--Editor • Watermark-->
     <s:String x:Key="S.Watermark.Image">圖片</s:String>
-    <s:String x:Key="S.Watermark.File">檔案:</s:String>
+    <s:String x:Key="S.Watermark.File">檔案：</s:String>
     <s:String x:Key="S.Watermark.File.Nothing">未選擇</s:String>
-    <s:String x:Key="S.Watermark.Opacity">不透明度:</s:String>
+    <s:String x:Key="S.Watermark.Opacity">不透明度：</s:String>
     <s:String x:Key="S.Watermark.Select">選擇圖片</s:String>
-    <s:String x:Key="S.Watermark.WarningNoImage">您必須選擇一個圖片來套用所選的影格</s:String>
-    <s:String x:Key="S.Watermark.WarningSelection">您必須至少選擇一個影格來套用浮水印</s:String>
+    <s:String x:Key="S.Watermark.WarningNoImage">您必須選擇一個圖片來套用所選的影格。</s:String>
+    <s:String x:Key="S.Watermark.WarningSelection">您必須至少選擇一個影格來套用浮水印。</s:String>
     
     <!--Editor • Border-->
     <s:String x:Key="S.Border.Appearance">外觀</s:String>
-    <s:String x:Key="S.Border.Info">使用負值使邊框擴大圖片。這樣做時，邊框將套用於所有影格</s:String>
+    <s:String x:Key="S.Border.Info">使用負值使邊框擴大圖片。這樣做時，邊框將套用於所有影格。</s:String>
 
     <!--Editor • Shadow-->
-    <s:String x:Key="S.Shadow.ShadowColor">陰影顏色:</s:String>
-    <s:String x:Key="S.Shadow.BackgroundColor">背景顏色:</s:String>
-    <s:String x:Key="S.Shadow.Direction">方向:</s:String>
-    <s:String x:Key="S.Shadow.BlurRadius">模糊半徑:</s:String>
-    <s:String x:Key="S.Shadow.Depth">深度:</s:String>
+    <s:String x:Key="S.Shadow.ShadowColor">陰影顏色：</s:String>
+    <s:String x:Key="S.Shadow.BackgroundColor">背景顏色：</s:String>
+    <s:String x:Key="S.Shadow.Direction">方向：</s:String>
+    <s:String x:Key="S.Shadow.BlurRadius">模糊半徑：</s:String>
+    <s:String x:Key="S.Shadow.Depth">深度：</s:String>
     
     <!--Editor • Obfuscate-->
     <s:String x:Key="S.Obfuscate.Type.Pixelate">像素化</s:String>
-    <s:String x:Key="S.Obfuscate.Type.Blur">模糊</s:String>
-    <s:String x:Key="S.Obfuscate.Type.Darken">暗化</s:String>
-    <s:String x:Key="S.Obfuscate.Type.Lighten">亮化</s:String>
+    <s:String x:Key="S.Obfuscate.Type.Blur">模糊化</s:String>
+    <s:String x:Key="S.Obfuscate.Type.Darken">調暗</s:String>
+    <s:String x:Key="S.Obfuscate.Type.Lighten">調亮</s:String>
     <s:String x:Key="S.Obfuscate.Options">混淆選項</s:String>
-    <s:String x:Key="S.Obfuscate.PixelSize">像素大小:</s:String>
-    <s:String x:Key="S.Obfuscate.BlurLevel">模糊等級:</s:String>
-    <s:String x:Key="S.Obfuscate.DarkenLevel">暗化等級:</s:String>
-    <s:String x:Key="S.Obfuscate.LightenLevel">亮化等級:</s:String>
-    <s:String x:Key="S.Obfuscate.UseAverage">計算每個像素塊的平均顏色</s:String>
-    <s:String x:Key="S.Obfuscate.Invert">套用模糊化在未選擇的區域</s:String>
+    <s:String x:Key="S.Obfuscate.PixelSize">像素大小：</s:String>
+    <s:String x:Key="S.Obfuscate.BlurLevel">模糊等級：</s:String>
+    <s:String x:Key="S.Obfuscate.DarkenLevel">調暗等級：</s:String>
+    <s:String x:Key="S.Obfuscate.LightenLevel">調亮等級：</s:String>
+    <s:String x:Key="S.Obfuscate.UseAverage">計算每個像素塊的平均顏色。</s:String>
+    <s:String x:Key="S.Obfuscate.Invert">套用混淆在未選擇的區域。</s:String>
     <s:String x:Key="S.Obfuscate.Smoothness">柔化</s:String>
-    <s:String x:Key="S.Obfuscate.Info">使用選擇工具選擇需被混淆化的矩形區域</s:String>
-    <s:String x:Key="S.Obfuscate.Info2">使用選擇工具選擇不需被混淆化的矩形區域</s:String>
-    <s:String x:Key="S.Obfuscate.Warning">您沒有選擇任何區域。請使用選擇工具選擇需被混淆的矩形區域</s:String>
+    <s:String x:Key="S.Obfuscate.Info">使用選擇工具選擇需被混淆化的矩形區域。</s:String>
+    <s:String x:Key="S.Obfuscate.Info2">使用選擇工具選擇不需被混淆化的矩形區域。</s:String>
+    <s:String x:Key="S.Obfuscate.Warning">您沒有選擇任何區域。請使用選擇工具選擇需被混淆的矩形區域。</s:String>
     
     <!--Editor • Progress-->
     <s:String x:Key="S.Progress.Type">類型</s:String>
-    <s:String x:Key="S.Progress.Type.Bar">條</s:String>
+    <s:String x:Key="S.Progress.Type.Bar">進度列</s:String>
     <s:String x:Key="S.Progress.Type.Text">文字</s:String>
-    <s:String x:Key="S.Progress.Precision">精確度:</s:String>
+    <s:String x:Key="S.Progress.Precision">精確度：</s:String>
     <s:String x:Key="S.Progress.Precision.Minutes">分</s:String>
     <s:String x:Key="S.Progress.Precision.Seconds">秒</s:String>
     <s:String x:Key="S.Progress.Precision.Milliseconds">毫秒</s:String>
@@ -1271,25 +1273,25 @@
     <s:String x:Key="S.Progress.Precision.DateOfRecording">實際日期/時間</s:String>
     <s:String x:Key="S.Progress.Precision.Custom">自訂</s:String>
     <s:String x:Key="S.Progress.Precision.ShowTotal">顯示總數</s:String>
-    <s:String x:Key="S.Progress.Format">格式:</s:String>
+    <s:String x:Key="S.Progress.Format">格式：</s:String>
     <s:String x:Key="S.Progress.Format.Header">格式</s:String>
     <s:String x:Key="S.Progress.Format.Milliseconds">$ms = 毫秒數</s:String>
     <s:String x:Key="S.Progress.Format.Seconds">$s = 秒數</s:String>
     <s:String x:Key="S.Progress.Format.Minutes">$m = 分鐘數</s:String>
     <s:String x:Key="S.Progress.Format.Percentage">$p = 百分比</s:String>
     <s:String x:Key="S.Progress.Format.FrameNumber">$f = 影格數</s:String>
-    <s:String x:Key="S.Progress.Format.Totals">總數:</s:String>
-    <s:String x:Key="S.Progress.Format.Examples">範例:</s:String>
-    <s:String x:Key="S.Progress.Format.Date">您可以使用 .Net Framework 中的日期和時間格式。 &#10;該規範可在下面的兩個連結中找到</s:String>
+    <s:String x:Key="S.Progress.Format.Totals">總數：</s:String>
+    <s:String x:Key="S.Progress.Format.Examples">範例：</s:String>
+    <s:String x:Key="S.Progress.Format.Date">您可以使用 .Net Framework 中的日期和時間格式。 &#10;該規範可在下面的兩個連結中找到。</s:String>
     <s:String x:Key="S.Progress.Format.Date.Standard">標準格式</s:String>
     <s:String x:Key="S.Progress.Format.Date.Custom">自定義格式</s:String>
-    <s:String x:Key="S.Progress.Precision.StartNumber">從字數:</s:String>
+    <s:String x:Key="S.Progress.Precision.StartNumber">從字數：</s:String>
     <s:String x:Key="S.Progress.Precision.StartNumber.ToolTip">從該所選編號開始計數影格編號</s:String>
-    <s:String x:Key="S.Progress.Orientation">方向:</s:String>
+    <s:String x:Key="S.Progress.Orientation">方向：</s:String>
     
     <!--Editor • Delay-->
     <s:String x:Key="S.Delay.Update">延遲更新</s:String>
-    <s:String x:Key="S.Delay.Mode">延遲模式:</s:String>
+    <s:String x:Key="S.Delay.Mode">延遲模式：</s:String>
     <s:String x:Key="S.Delay.Mode.Override">覆蓋（毫秒）</s:String>
     <s:String x:Key="S.Delay.Mode.IncreaseDecrease">增加或減少（毫秒）</s:String>
     <s:String x:Key="S.Delay.Mode.Scale">縮放（%）</s:String>
@@ -1297,12 +1299,12 @@
     <s:String x:Key="S.Delay.Minimum10Ms">每影格最少 10 毫秒</s:String>
     <s:String x:Key="S.Delay.DecreaseIncrease">減少/增加值</s:String>
     <s:String x:Key="S.Delay.Scale">縮放值</s:String>
-    <s:String x:Key="S.Delay.Override.Info">此新值將取代所有選定影格的持續時間(延遲)。該值可以從 10ms 到 25500ms</s:String>
-    <s:String x:Key="S.Delay.IncreaseDecrease.Info">該值將減少/增加每個所選影格的持續時間(延遲)。&#10;您可以透過選擇 -10000 和 10000ms 之間的值進行遞減/遞增，但每影格的最終持續時間將限制在 10ms 到 25500ms 之間</s:String>
-    <s:String x:Key="S.Delay.Scale.Info">通過百分比值縮放每個選定影格的持續時間（延遲）。 &#10;您可以通過在 1％ 和 1000％ 之間選擇一個值來縮放每個影格的持續時間，但每個影格的最終持續時間將限制在 10ms 到 25500ms 之間</s:String>
+    <s:String x:Key="S.Delay.Override.Info">此新值將取代所有選定影格的持續時間（延遲）。該值可以從 10ms 到 25500ms。</s:String>
+    <s:String x:Key="S.Delay.IncreaseDecrease.Info">該值將減少/增加每個所選影格的持續時間（延遲）。&#10;您可以透過選擇 -10000 和 10000ms 之間的值進行遞減/遞增，但每影格的最終持續時間將限制在 10ms 到 25500ms 之間。</s:String>
+    <s:String x:Key="S.Delay.Scale.Info">通過百分比值縮放每個選定影格的持續時間（延遲）。&#10;您可以通過在 1％ 和 1000％ 之間選擇一個值來縮放每個影格的持續時間，但每個影格的最終持續時間將限制在 10ms 到 25500ms 之間。</s:String>
 
     <!--Editor • Cinemagraph-->
-    <s:String x:Key="S.Cinemagraph.Info">使用筆選擇不應該保持靜態的像素(應該在影格之間變更)，透過在其上繪畫</s:String>
+    <s:String x:Key="S.Cinemagraph.Info">使用筆選擇不應該保持靜態的像素（應該在影格之間變更），透過在其上繪畫。</s:String>
 
     <!--Editor • Transitions-->
     <s:String x:Key="S.Transitions.Length">轉場長度</s:String>
@@ -1311,13 +1313,13 @@
     <s:String x:Key="S.Transitions.FadeTo.Frame">下一影格</s:String>
     <s:String x:Key="S.Transitions.FadeTo.Color">顏色</s:String>
     <s:String x:Key="S.Transitions.Color">顏色</s:String>
-    <s:String x:Key="S.Transitions.Info">轉場將套用到所選影格與下一影格之間</s:String>
+    <s:String x:Key="S.Transitions.Info">轉場將套用到所選影格與下一影格之間。</s:String>
 
     <!--Editor • Save as-->
     <s:String x:Key="S.SaveAs.Type">檔案類型</s:String>
     <s:String x:Key="S.SaveAs.Gif">Gif</s:String>
     <s:String x:Key="S.SaveAs.Apng">Apng</s:String>
-    <s:String x:Key="S.SaveAs.Images">圖片(影格)</s:String>
+    <s:String x:Key="S.SaveAs.Images">圖片（影格）</s:String>
     <s:String x:Key="S.SaveAs.Project">專案</s:String>
     <s:String x:Key="S.SaveAs.Psd">PSD 文件</s:String>
     <s:String x:Key="S.SaveAs.Video">影片</s:String>
@@ -1325,11 +1327,11 @@
     <!--Editor • Save as > Encoder-->
     <s:String x:Key="S.SaveAs.Encoder">編碼器</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">ScreenToGif</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Tooltip">使用內建編碼器，以及下方的減色方法</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Tooltip">使用內建編碼器，以及下方的減色方法。</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System">系統</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.System.Tooltip">使用預設調色板</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.System.Tooltip">使用預設調色板。</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Apng">ScreenToGif</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.Apng.Tooltip">ScreenToGif 開發人員製作的編碼器</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Apng.Tooltip">ScreenToGif 開發人員製作的編碼器。</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
     
@@ -1337,35 +1339,35 @@
     <s:String x:Key="S.SaveAs.GifOptions">Gif 選項</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Info">色彩減色演算法（量化）</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Neural">神經網路</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Neural.Info">高保真量化，較慢，但適合顏色數量多的影像</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Neural.Info">高保真量化，較慢，但適合顏色數量多的影像。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Octree">Octree</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Octree.Info">適用於顏色較少的動畫，較快，但可能產生色帶</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Octree.Info">適用於顏色較少的動畫，較快，但可能產生色帶。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Quantizer.MedianCut">中位切割演算法</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.MedianCut.Info">不如 Octree 好，且速度較慢</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.MedianCut.Info">不如 Octree 好，且速度較慢。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Grayscale">灰階化</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Grayscale.Info">使用固定的灰階調色盤，速度較快</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Grayscale.Info">使用固定的灰階調色盤，速度較快。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Quantizer.MostUsed">最常用的顏色</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.MostUsed.Info">只取影格中最常用的顏色</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Sampling">取樣:</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Sampling.Info">取樣值:&#10;值為 1 時會產生畫質比較好的 gif，但渲染速度會比較慢</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Quality">品質:</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Colors">顏色:</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">最大顏色數(每影格)</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.MostUsed.Info">只取影格中最常用的顏色。</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Sampling">取樣：</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Sampling.Info">取樣值:&#10;值為 1 時會產生畫質比較好的 gif，但渲染速度會比較慢。</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quality">品質：</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Colors">顏色：</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">最大顏色數（每影格）</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable">使用全域色表</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable.Info">可能會降低 gif 的品質或/和大小</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Loop">循環:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Loop">循環：</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">Gif 循環</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">永遠循環</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">次循環</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable">啟用透明度</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable.Info">啟用完全透明模式，這會使 gif 的背景完全透明。&#10;如果啟用此選項，則色鍵替換過程將被忽略</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable.Info">啟用完全透明模式，這會使 gif 的背景完全透明。&#10;如果啟用此選項，則色鍵替換過程將被忽略。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Transparency.Pick">選擇要顯示為透明的顏色</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Transparency.Pick.Info">如果選擇了一種顏色，則它將被轉換為透明色，產生的 gif 將顯示為透明。&#10;如果未選擇顯色，所有透明顏色 (Alpha = 0%) 將正常顯示為透明</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">偵測未變更的像素</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged.Info">通過分析和檢測影格之間未變化的像素，可以只保留必要的部分到 gif 中</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Transparency.Pick.Info">如果選擇了一種顏色，則它將被轉換為透明色，產生的 gif 將顯示為透明。&#10;如果未選擇顯色，所有透明顏色（不透明度 = 0%）將正常顯示為透明。</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">偵測未變化的像素</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged.Info">通過分析和檢測影格之間未變化的像素，可以只保留必要的部分到 gif 中。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma">使用色鍵取代像素</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma.Info">重複/不變的像素將被此色鍵取代，進而減少每影格使用的顏色數量</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.ChromaKey">色鍵:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma.Info">重複/不變的像素將被此色鍵取代，進而減少每影格使用的顏色數量。</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.ChromaKey">色鍵：</s:String>
 
     <!--Editor • Save as > Apng options-->
     <s:String x:Key="S.SaveAs.ApngOptions">Apng 選項</s:String>
@@ -1375,37 +1377,37 @@
     
     <!--Editor • Save as > Video/Images/Psd/Project options-->
     <s:String x:Key="S.SaveAs.VideoOptions">影片選項</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.Fps">Fps:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Fps">Fps：</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.FlipVertically">翻轉影片（垂直）</s:String>
     <s:String x:Key="S.SaveAs.ImagesOptions">圖片選項</s:String>
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">壓縮圖片</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions">PSD 選項</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Compress">壓縮圖片</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">使用 RLE 算法壓縮圖片資料</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">使用 RLE 算法壓縮圖片資料。</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline">保存時間軸數據</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">輸出影格的時間，而不僅僅是影格</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">輸出影格的時間，而不僅僅是影格。</s:String>
     <s:String x:Key="S.SaveAs.ProjectOptions">專案選項</s:String>
     
-    <s:String x:Key="S.SaveAs.Extras">擴充:</s:String>
-    <s:String x:Key="S.SaveAs.Presets">預設:</s:String>
+    <s:String x:Key="S.SaveAs.Extras">擴充：</s:String>
+    <s:String x:Key="S.SaveAs.Presets">預設：</s:String>
     <s:String x:Key="S.SaveAs.Presets.Default">預設值</s:String>
     <s:String x:Key="S.SaveAs.Presets.Add">添加</s:String>
     <s:String x:Key="S.SaveAs.Presets.Save">儲存</s:String>
     <s:String x:Key="S.SaveAs.Presets.Edit">編輯</s:String>
     <s:String x:Key="S.SaveAs.Presets.Remove">移除</s:String>
     <s:String x:Key="S.SaveAs.Presets.Remove.Title">刪除預設</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Remove.Header">您要刪除預設嗎?</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Remove.Message">您無法撤消此操作，但是可以稍後再次添加預設</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Remove.Header">您要刪除預設嗎？</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Remove.Message">您無法復原此操作，但是可以稍後再次添加預設。</s:String>
     <s:String x:Key="S.SaveAs.Presets.Reset">重置</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Reset.Title">重置預設</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Reset.Header">您是否要將預設重置為其默認參數?</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Reset.Message">您無法撤消此操作，但是以後可以再次編輯回預設</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Warning.NoSelection">未選擇 FFmpeg 預設，請選擇一個</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Reset.Title">重置預置參數</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Reset.Header">您是否要將預置參數重置為其預設參數？</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Reset.Message">您無法復原此操作，但是以後可以再次重置回預設。</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Warning.NoSelection">未選擇 FFmpeg 預置參數，請選擇一個。</s:String>
     
     <!--Save As • Save options-->
     <s:String x:Key="S.SaveAs.SaveOptions">儲存選項</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">將檔案儲存到你選擇的資料夾</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">覆蓋 (如果已存在)</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">覆蓋（如果已存在）</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">同時另存為專案（相同資料夾與檔案名）</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">上傳檔案</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.UploadDestination">上傳目標地點</s:String>
@@ -1416,10 +1418,10 @@
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FolderPath.Info">將輸出檔案的資料夾路徑複製到剪貼簿</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath">檔案路徑</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath.Info">將輸出檔案路徑複製到剪貼簿</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">超連結</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">將上傳服務生成的超連結複製到剪貼簿</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">連結</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">將上傳服務產生的連結複製到剪貼簿</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">執行編碼後置指令</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">輸入在編碼後執行的指令。 &#10;若要執行多條指令，請在不同行內輸入不同指令，一行輸入一條。 &#10;宏:&#10;{p} = 輸出檔案路徑。 &#10;{f} = 輸出資料夾路徑。&#x0d;{u} = URL of the uploaded file.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">輸入在編碼後執行的指令。&#10;若要執行多條指令，請在不同行內輸入不同指令，一行輸入一條。&#10;巨集:&#10;{p} = 輸出檔案路徑。&#10;{f} = 輸出資料夾路徑。&#x0d;{u} = 檔案上傳後的路徑.</s:String>
     
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">檔案</s:String>
@@ -1437,19 +1439,19 @@
     <s:String x:Key="S.SaveAs.Warning.Commands.Empty">您需要在指令框中輸入編碼後置指令才能執行他們</s:String>
     <s:String x:Key="S.SaveAs.Warning.Upload.None">沒有選擇上傳服務。你需要選擇一個目的地</s:String>
     <s:String x:Key="S.SaveAs.Warning.Upload.NotAuthorized">您無法上傳到選定的服務，因為它沒有被授權。轉到選項>雲端服務授權此應用程式</s:String>
-    <s:String x:Key="S.SaveAs.Warning.Copy.Link">您不能選擇複製超連結的選項，因為您沒有設定上傳檔案</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Copy.Link">您不能選擇複製連結的選項，因為您沒有設定上傳檔案</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">您必須選擇輸出資料夾</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">輸出資料夾不存在</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.Invalid">輸出資料夾包含一個或多個無效字符。請選擇一個有效的資料夾</s:String>
     <s:String x:Key="S.SaveAs.Warning.Filename">您必須輸入檔案名稱</s:String>
     <s:String x:Key="S.SaveAs.Warning.Filename.Invalid">輸出檔案名包含一個或多個無效字元。請選擇有效的檔案名</s:String>
-    <s:String x:Key="S.SaveAs.Warning.Overwrite">檔案名稱已使用。設定覆寫或另取檔案名稱</s:String>
-    <s:String x:Key="S.SaveAs.Warning.Canceled">該操作被取消</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Overwrite">檔案名稱已使用。設定覆蓋或另取檔案名稱</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Canceled">操作已取消</s:String>
     
     <!--SaveAs • Export-->
     <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">匯出影格</s:String>
     <s:String x:Key="S.SaveAs.Frames.Confirmation.Instruction">您確定要匯出這些影格嗎？</s:String>
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Message">此操作將直接匯出 {0} 影格到所選資料夾中</s:String>
+    <s:String x:Key="S.SaveAs.Frames.Confirmation.Message">此操作將直接匯出 {0} 個影格到所選資料夾中</s:String>
     
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">意見反應</s:String>
@@ -1458,28 +1460,28 @@
     <s:String x:Key="S.Feedback.Header">傳送意見</s:String>
     <s:String x:Key="S.Feedback.Title">標題 *</s:String>
     <s:String x:Key="S.Feedback.Message">訊息 *</s:String>
-    <s:String x:Key="S.Feedback.Message.Info">如果您遇到錯誤，請別忘了一步一步地向我解釋如何出現錯誤的原因</s:String>
+    <s:String x:Key="S.Feedback.Message.Info">如果您遇到錯誤，請別忘了一步一步地向我解釋如何出現錯誤的原因。</s:String>
     <s:String x:Key="S.Feedback.Type">意見反應類型</s:String>
     <s:String x:Key="S.Feedback.Suggestion">建議</s:String>
     <s:String x:Key="S.Feedback.IssueBug">問題/錯誤</s:String>
-    <s:String x:Key="S.Feedback.YourEmail">您的電子郵件(選用)</s:String>
-    <s:String x:Key="S.Feedback.Warning.Title">您需要輸入意見反應標題</s:String>
-    <s:String x:Key="S.Feedback.Warning.Message">您需要在意見反應中輸入訊息</s:String>
-    <s:String x:Key="S.Feedback.Warning.Email">您需要輸入電子郵件，以接收開發人員的回复</s:String>
+    <s:String x:Key="S.Feedback.YourEmail">您的電子郵件（選用）</s:String>
+    <s:String x:Key="S.Feedback.Warning.Title">您需要輸入意見反應標題。</s:String>
+    <s:String x:Key="S.Feedback.Warning.Message">您需要在意見反應中輸入訊息。</s:String>
+    <s:String x:Key="S.Feedback.Warning.Email">您需要輸入電子郵件，以接收開發人員的回覆。</s:String>
     <s:String x:Key="S.Feedback.Sending">傳送中...此視窗在完成之後會自動關閉</s:String>
-    <s:String x:Key="S.Feedback.Attachments">附件(選用，最大 20MB)</s:String>
+    <s:String x:Key="S.Feedback.Attachments">附件（選用，最大 20MB）</s:String>
     <s:String x:Key="S.Feedback.AddAttachments">加入附件</s:String>
     <s:String x:Key="S.Feedback.RemoveAttachments">移除所有附件</s:String>
     <s:String x:Key="S.Feedback.LanguageInfo1">我可以理解英語</s:String>
-    <s:String x:Key="S.Feedback.LanguageInfo2">和葡萄牙語（巴西和歐洲）</s:String>
-    <s:String x:Key="S.Feedback.Preview.Info">這是您要發送的內容，以及所有附件</s:String>
+    <s:String x:Key="S.Feedback.LanguageInfo2">和葡萄牙語（巴西和歐洲）。</s:String>
+    <s:String x:Key="S.Feedback.Preview.Info">這是您要發送的內容，以及所有附件。</s:String>
     
     <!--Troubleshoot-->
     <s:String x:Key="S.Troubleshoot.Title">疑難解答</s:String>
-    <s:String x:Key="S.Troubleshoot.Windows">是否有任何視窗不見了?</s:String>
-    <s:String x:Key="S.Troubleshoot.Windows.Info">如果缺少任何視窗（螢幕外），&#10;使用下面的選項重置其目前及啟動位置</s:String>
-    <s:String x:Key="S.Troubleshoot.Windows.Current">這是每個視窗目前所在的位置:</s:String>
-    <s:String x:Key="S.Troubleshoot.Windows.Next">以下是每個視窗下次打開的位置:</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows">是否有任何視窗不見了？</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Info">如果缺少任何視窗（螢幕外），&#10;使用下面的選項重置其目前及啟動位置。</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Current">這是每個視窗目前所在的位置：</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Next">以下是每個視窗下次打開的位置：</s:String>
     <s:String x:Key="S.Troubleshoot.Windows.BringBack">將所有視窗移動到主螢幕</s:String>
     <s:String x:Key="S.Troubleshoot.Windows.Reset">重置所有視窗的啟動位置</s:String>
    
