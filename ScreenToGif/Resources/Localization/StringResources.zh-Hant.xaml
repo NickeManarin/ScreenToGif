@@ -71,7 +71,7 @@
     <s:String x:Key="S.Command.OverrideDelay">覆蓋影格延遲</s:String>
     <s:String x:Key="S.Command.IncreaseDecreaseDelay">增加/減少影格延遲</s:String>
     <s:String x:Key="S.Command.ScaleDelay">影格縮放延遲</s:String>
-    <s:String x:Key="S.Command.Zoom100">設置縮放到 100％</s:String>
+    <s:String x:Key="S.Command.Zoom100">設定縮放到 100％</s:String>
     <s:String x:Key="S.Command.SizeToContent">調整視窗到影格大小</s:String>
     <s:String x:Key="S.Command.FitImage">選擇第一影格使圖片符合可用的視窗大小</s:String>
     <s:String x:Key="S.Command.FirstFrame">選擇第一影格</s:String>
@@ -680,7 +680,7 @@
     <s:String x:Key="S.FfmpegPreset.Parameters">參數</s:String>
     <s:String x:Key="S.FfmpegPreset.Info.SecondPass">要使用二次編碼，只需在指令中添加 '-pass 2' 即可</s:String>
     <s:String x:Key="S.FfmpegPreset.Warning.Name">您必須為此預置參數命名。</s:String>
-    <s:String x:Key="S.FfmpegPreset.Warning.Parameter">你必須為這個設置輸入一些參數。</s:String>
+    <s:String x:Key="S.FfmpegPreset.Warning.Parameter">你必須為這個設定輸入一些參數。</s:String>
     <s:String x:Key="S.FfmpegPreset.Warning.SameName">已經存在一個具有相同名稱的預置參數。</s:String>
 
     <!--Insert frames-->
@@ -1065,7 +1065,7 @@
     <s:String x:Key="S.Hint.FlipRotate2">翻轉動作套用到所選影格以及旋轉套用到所有影格</s:String>
     <s:String x:Key="S.Hint.ApplyAll">此動作套用到全部影格</s:String>
     <s:String x:Key="S.Hint.ApplySelected">此動作套用到所選影格</s:String>
-    <s:String x:Key="S.Hint.ApplySelectedOrAll">此動作將應用於所有或選定的影格，具體取決於您的設置</s:String>
+    <s:String x:Key="S.Hint.ApplySelectedOrAll">此動作將套用於所有或選定的影格，具體取決於您的設定</s:String>
     <s:String x:Key="S.Hint.Cinemagraph">影片套用到第一影格為主的的所有影格</s:String>
     <s:String x:Key="S.Hint.Overlay">重疊已套用</s:String>
     <s:String x:Key="S.Hint.TitleFrame">標題影格建立</s:String>
