@@ -41,10 +41,10 @@
     <s:String x:Key="S.Warning.Net.Message">為了正確使用此應用程式，您需要下載正確版本的 .Net Framework。</s:String>
     <s:String x:Key="S.Warning.Single.Title">同時只能有一個實例執行</s:String>
     <s:String x:Key="S.Warning.Single.Header">該應用程式已在執行中</s:String>
-    <s:String x:Key="S.Warning.Single.Message">ScreenToGif 已經在執行中，但是顯然沒有打開任何視窗。請檢查系統工具列，其中必須有一個 ScreenToGif 圖示。</s:String>
+    <s:String x:Key="S.Warning.Single.Message">ScreenToGif 已經在執行中，但是顯然沒有打開任何視窗。請檢查系統工作列的通知區域，其中必須有一個 ScreenToGif 圖示。</s:String>
     <s:String x:Key="S.Exiting.Title">正在離開 ScreenToGif</s:String>
     <s:String x:Key="S.Exiting.Instruction">你確定要離開嗎？</s:String>
-    <s:String x:Key="S.Exiting.Message">所有視窗及工具列圖示將被關閉</s:String>
+    <s:String x:Key="S.Exiting.Message">所有視窗及通知區域圖示將被關閉</s:String>
     
     <!--Keys-->
     <s:String x:Key="S.Keys.Space">空白鍵</s:String>
@@ -107,7 +107,7 @@
     <s:String x:Key="S.Command.Watermark">選擇圖片並加入為浮水印</s:String>
     <s:String x:Key="S.Command.Border">新增邊框</s:String>
     <s:String x:Key="S.Command.Shadow">加入陰影</s:String>
-    <s:String x:Key="S.Command.Obfuscate">混淆處理影格上敏感部分</s:String>
+    <s:String x:Key="S.Command.Obfuscate">套用效果在影格上敏感部分</s:String>
     <s:String x:Key="S.Command.Cinemagraph">使用繪圖工具選擇影格的哪些部分在整個動畫中不應保持靜態</s:String>
     <s:String x:Key="S.Command.Progress">進度條或帶有播放詳細訊息的文字</s:String>
     <s:String x:Key="S.Command.SelectAll">選擇所有影格</s:String>
@@ -194,8 +194,8 @@
     <s:String x:Key="S.Options.App.Startup.Instance.Single.Info">您將可以為每個使用者和可執行檔案執行一次此應用程式，&#10;意味著不同的使用者或可執行實例可以共存。 &#10;當再次嘗試執行此應用程式時，第二個實例將嘗試將焦點放在第一個實例上並自行結束</s:String>
     <s:String x:Key="S.Options.App.Startup.Instance.Multiple">允許多個實例</s:String>
     <s:String x:Key="S.Options.App.Startup.Instance.Multiple.Info">您可以無限制地同時執行此應用程式</s:String>
-    <s:String x:Key="S.Options.App.Startup.Tray">啟動最小化到工具列圖示</s:String>
-    <s:String x:Key="S.Options.App.Startup.Tray.Info">（啟用此選項後工具列圖示將可見）</s:String>
+    <s:String x:Key="S.Options.App.Startup.Tray">啟動後最小化到工作列通知區域圖示</s:String>
+    <s:String x:Key="S.Options.App.Startup.Tray.Info">（啟用此選項後通知區域圖示將可見）</s:String>
     <s:String x:Key="S.Options.App.Startup.Window">啟動使用：</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Startup">啟動視窗</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Recorder">螢幕錄製</s:String>
@@ -212,8 +212,8 @@
     <s:String x:Key="S.Options.App.Theme.Scheme.VeryDark">非常深</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Custom">自訂</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Example">範例顏色</s:String>
-    <s:String x:Key="S.Options.App.Tray">工具列圖示</s:String>
-    <s:String x:Key="S.Options.App.Tray.Show">在工具列（通知區域）上顯示應用程式</s:String>
+    <s:String x:Key="S.Options.App.Tray">通知區域圖示</s:String>
+    <s:String x:Key="S.Options.App.Tray.Show">在工作列（通知區域）上顯示應用程式的圖示</s:String>
     <s:String x:Key="S.Options.App.Tray.LeaveOpen">即使所有視窗關閉仍保持應用程式的打開狀態</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Nothing">什麼都不做</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Open">打開一個視窗</s:String>
@@ -927,7 +927,7 @@
     <s:String x:Key="S.Editor.Image.Border">邊框</s:String>
     <s:String x:Key="S.Editor.Image.Shadow">陰影</s:String>
     <s:String x:Key="S.Editor.Image.Progress">進度</s:String>
-    <s:String x:Key="S.Editor.Image.Obfuscate">混淆</s:String>
+    <s:String x:Key="S.Editor.Image.Obfuscate">效果</s:String>
 
     <!--Editor • Transitions tab • Styles-->
     <s:String x:Key="S.Editor.Transitions.Styles">樣式</s:String>
@@ -1248,17 +1248,17 @@
     <s:String x:Key="S.Obfuscate.Type.Blur">模糊化</s:String>
     <s:String x:Key="S.Obfuscate.Type.Darken">調暗</s:String>
     <s:String x:Key="S.Obfuscate.Type.Lighten">調亮</s:String>
-    <s:String x:Key="S.Obfuscate.Options">混淆選項</s:String>
+    <s:String x:Key="S.Obfuscate.Options">效果選項</s:String>
     <s:String x:Key="S.Obfuscate.PixelSize">像素大小：</s:String>
     <s:String x:Key="S.Obfuscate.BlurLevel">模糊等級：</s:String>
     <s:String x:Key="S.Obfuscate.DarkenLevel">調暗等級：</s:String>
     <s:String x:Key="S.Obfuscate.LightenLevel">調亮等級：</s:String>
     <s:String x:Key="S.Obfuscate.UseAverage">計算每個像素塊的平均顏色。</s:String>
-    <s:String x:Key="S.Obfuscate.Invert">套用混淆在未選擇的區域。</s:String>
+    <s:String x:Key="S.Obfuscate.Invert">套用效果在未選擇的區域。</s:String>
     <s:String x:Key="S.Obfuscate.Smoothness">柔化</s:String>
-    <s:String x:Key="S.Obfuscate.Info">使用選擇工具選擇需被混淆化的矩形區域。</s:String>
-    <s:String x:Key="S.Obfuscate.Info2">使用選擇工具選擇不需被混淆化的矩形區域。</s:String>
-    <s:String x:Key="S.Obfuscate.Warning">您沒有選擇任何區域。請使用選擇工具選擇需被混淆的矩形區域。</s:String>
+    <s:String x:Key="S.Obfuscate.Info">使用選擇工具選擇需套用效果的矩形區域。</s:String>
+    <s:String x:Key="S.Obfuscate.Info2">使用選擇工具選擇不需套用效果的矩形區域。</s:String>
+    <s:String x:Key="S.Obfuscate.Warning">您沒有選擇任何區域。請使用選擇工具選擇需套用效果的矩形區域。</s:String>
     
     <!--Editor • Progress-->
     <s:String x:Key="S.Progress.Type">類型</s:String>
