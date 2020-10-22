@@ -384,8 +384,12 @@ namespace ScreenToGif.Windows
             {
                 Project.Persist();
 
+                var exitingMessageKey = UserSettings.All.AutomaticCleanUp
+                    ? "S.Editor.Exiting.Message2"
+                    : "S.Editor.Exiting.Message";
+
                 if (UserSettings.All.NotifyWhileClosingEditor && !Dialog.Ask(LocalizationHelper.Get("S.Editor.Exiting.Title"), LocalizationHelper.Get("S.Editor.Exiting.Instruction"),
-                        LocalizationHelper.Get(UserSettings.All.AutomaticCleanUp ? "S.Editor.Exiting.Message2" : "S.Editor.Exiting.Message")))
+                        LocalizationHelper.GetWithFormat(exitingMessageKey, UserSettings.All.AutomaticCleanUpDays)))
                 {
                     e.Cancel = true;
                     return;

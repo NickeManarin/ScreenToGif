@@ -440,7 +440,7 @@
 • 如果没有设置文件，则使用默认值。
 • 如果没有本地设置，保存所有设置将到 AppData 设置文件中。</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemoval">自动删除旧项目</s:String>
-    <!--<s:String x:Key="S.Options.Storage.AutomaticRemoval.Info">When opening the app, a background task will erase any closed projects older than the amount of time configured.</s:String>-->
+    <s:String x:Key="S.Options.Storage.AutomaticRemoval.Info">打开编辑器时，超过[临时文件]-[其它]设置天数的旧项目会被自动删除。</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemovalDays.Info">（在几天之内，打开编辑器后，任何旧项目都将被删除/丢弃）</s:String>
     
     <!--Options • Storage > Clear cache-->
@@ -979,7 +979,7 @@
     <s:String x:Key="S.Editor.Exiting.Title">退出编辑器</s:String>
     <s:String x:Key="S.Editor.Exiting.Instruction">您确实要退出吗？</s:String>
     <s:String x:Key="S.Editor.Exiting.Message">您正在处理的项目可以在“最近项目”中再次打开。</s:String>
-    <!--<s:String x:Key="S.Editor.Exiting.Message2">The current project that you were working on can be opened again via 'Recent Projects', but don't forget that after a few days, it will be automatically deleted.</s:String>-->
+    <s:String x:Key="S.Editor.Exiting.Message2">您正在处理的项目可以在“最近项目”中再次打开，但别忘了，{0}天后它将被自动删除。</s:String>
     <s:String x:Key="S.Editor.DragDrop.Invalid.Title">拖放无效</s:String>
     <s:String x:Key="S.Editor.DragDrop.MultipleFiles.Instruction">您无法一次导入多个文件</s:String>
     <s:String x:Key="S.Editor.DragDrop.MultipleFiles.Message">请只选择一个文件。</s:String>
