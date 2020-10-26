@@ -1178,6 +1178,8 @@
     <s:String x:Key="S.KeyStrokes.Edit">Изменить нажатия клавиш</s:String>
     <s:String x:Key="S.KeyStrokes.IgnoreModifiers">Игнорировать клавиши Ctrl, Alt, Shift и Win, пока они не используются в качестве модификаторов.</s:String>
     <s:String x:Key="S.KeyStrokes.IgnoreModifiers.Info">Игнорировать одиночные нажатия клавиш, таких как "Ctrl", но он не будет игнорировать "Ctrl + C".</s:String>
+    <s:String x:Key="S.KeyStrokes.IgnoreInjected">Игнорировать программы, имитирующие нажатия клавиш.</s:String>
+    <s:String x:Key="S.KeyStrokes.IgnoreInjected.Info">Записывать только пользовательские нажатия клавиш.</s:String>
     <s:String x:Key="S.KeyStrokes.Extend">Увеличить длительность показа</s:String>
     <s:String x:Key="S.KeyStrokes.Earlier">Начать показ нажатий клавиш раньше</s:String>
     <s:String x:Key="S.KeyStrokes.By">на (мс):</s:String>
