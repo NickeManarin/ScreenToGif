@@ -1,0 +1,113 @@
+﻿<n:RecorderWindow x:Class="ScreenToGif.Windows.SystemCapture"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
+                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                  xmlns:n="clr-namespace:ScreenToGif.Controls"
+                  xmlns:u="clr-namespace:ScreenToGif.Util"
+                  Title="{DynamicResource S.SystemCapture.Title}"
+                  Width="300"
+                  Height="32"
+                  MinWidth="200"
+                  MinHeight="64"
+                  Background="{DynamicResource Panel.Background}"
+                  Closing="Window_Closing"
+                  Icon="/Resources/Logo.ico"
+                  Loaded="Window_Loaded"
+                  Topmost="True"
+                  Unloaded="SystemCapture_Unloaded"
+                  WindowStartupLocation="CenterScreen"
+                  mc:Ignorable="d">
+    <Window.Resources>
+        <ResourceDictionary>
+            <c:ShortcutKeys x:Key="ShortcutKeys" />
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Viewbox Grid.Column="1"
+                 ClipToBounds="True"
+                 Focusable="False"
+                 ToolTip="{DynamicResource S.Recorder.Fps.Range}"
+                 ToolTipService.HorizontalOffset="-5"
+                 ToolTipService.Placement="Bottom">
+            <Grid Margin="-4"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Opacity="{DynamicResource Element.Opacity}">
+                <n:CircularProgressBar IsTabStop="False"
+                                       Percentage="100"
+                                       Radius="24"
+                                       SegmentColor="Gray"
+                                       StrokeThickness="2" />
+                <n:CircularProgressBar IsTabStop="False"
+                                       Percentage="100"
+                                       Radius="10"
+                                       SegmentColor="#FFF0F1F1"
+                                       StrokeThickness="22" />
+                <n:CircularProgressBar IsInverted="True"
+                                       IsTabStop="False"
+                                       Maximum="60"
+                                       Minimum="1"
+                                       Radius="24"
+                                       SegmentColor="#FFE28A73"
+                                       StrokeThickness="2"
+                                       Value="{Binding ElementName=FpsNumbericUpDown, Path=Value, Mode=OneWay}" />
+                <n:CircularProgressBar IsInverted="True"
+                                       IsTabStop="False"
+                                       Maximum="60"
+                                       Minimum="1"
+                                       Radius="10"
+                                       SegmentColor="#FFE28A73"
+                                       StrokeThickness="22"
+                                       Value="{Binding ElementName=FpsNumbericUpDown, Path=Value, Mode=OneWay}" />
+            </Grid>
+        </Viewbox>
+        <n:IntegerUpDown x:Name="FpsNumbericUpDown"
+                         Grid.Column="2"
+                         MinWidth="45"
+                         Margin="1,3"
+                         Maximum="60"
+                         Minimum="1"
+                         StepValue="1"
+                         ToolTip="{DynamicResource S.Recorder.Fps}"
+                         ToolTipService.HorizontalOffset="-5"
+                         ToolTipService.Placement="Bottom"
+                         Value="{Binding Source={x:Static u:UserSettings.All}, Path=LatestFps, Mode=TwoWay}" />
+        <TextBlock Grid.Column="3"
+                   Margin="1,0,0,0"
+                   Padding="0"
+                   VerticalAlignment="Center"
+                   FontFamily="Segoe UI"
+                   FontSize="12"
+                   Foreground="{DynamicResource Element.Foreground.Medium}"
+                   Text="{DynamicResource S.Recorder.Fps.Short}" />
+        <Grid Grid.Column="4"
+              Width="72"
+              Margin="4,0,0,0">
+            <n:ExtendedButton x:Name="RecordButton"
+                              Click="RecordButton_Click"
+                              ContentHeight="18"
+                              ContentWidth="18"
+                              Icon="{StaticResource Vector.Record}"
+                              KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='1'}"
+                              Text="{DynamicResource S.Recorder.Record}"
+                              ToolTip="{DynamicResource S.Recorder.Record}" />
+            <n:ExtendedButton x:Name="StopButton"
+                              Click="StopButton_Click"
+                              ContentHeight="18"
+                              ContentWidth="18"
+                              Icon="{StaticResource Vector.Stop}"
+                              KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='2'}"
+                              Text="{DynamicResource S.Recorder.Stop}"
+                              ToolTip="{DynamicResource S.Recorder.Stop}" />
+        </Grid>
+    </Grid>
+</n:RecorderWindow>

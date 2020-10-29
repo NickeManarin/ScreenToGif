@@ -48,6 +48,7 @@
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
+                <ColumnDefinition x:Name="SystemCaptureColumn"/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -58,17 +59,26 @@
                               Command="{Binding OpenRecorder}" CommandParameter="{Binding ElementName=StartupWindow}" 
                               ToolTip="{DynamicResource S.StartUp.Recorder.Tooltip}" ToolTipService.Placement="Bottom"/>
 
-            <n:ExtendedButton Grid.Column="1" Text="{DynamicResource S.StartUp.Webcam}" Margin="5,0,5,5" FontSize="13" Style="{StaticResource Style.Button.Vertical.Border}"
+            <n:ExtendedButton x:Name="SystemCaptureButton" Grid.Column="1" Text="{DynamicResource S.StartUp.SystemCapture}" Margin="5,0,5,5" FontSize="13" Style="{StaticResource Style.Button.Vertical.Border}"
+                              Effect="{StaticResource Shadow.Border.Tiny}" ContentWidth="36" ContentHeight="36"
+                              Command="{Binding OpenSystemCapture}" CommandParameter="{Binding ElementName=StartupWindow}"
+                              ToolTip="{DynamicResource S.StartUp.SystemCapture.Tooltip}" ToolTipService.Placement="Bottom">
+                <n:ExtendedButton.Icon>
+                    <ImageBrush ImageSource="../../Resources/Logo.ico"/>
+                </n:ExtendedButton.Icon>
+            </n:ExtendedButton>
+
+            <n:ExtendedButton Grid.Column="2" Text="{DynamicResource S.StartUp.Webcam}" Margin="5,0,5,5" FontSize="13" Style="{StaticResource Style.Button.Vertical.Border}"
                               Effect="{StaticResource Shadow.Border.Tiny}" ContentWidth="36" ContentHeight="36" Icon="{StaticResource Vector.Camera.New}" 
                               Command="{Binding OpenWebcamRecorder}" CommandParameter="{Binding ElementName=StartupWindow}" 
                               ToolTip="{DynamicResource S.StartUp.Webcam.Tooltip}" ToolTipService.Placement="Bottom"/>
 
-            <n:ExtendedButton Grid.Column="2" Text="{DynamicResource S.StartUp.Board}" Margin="5,0,5,5" FontSize="13" Style="{StaticResource Style.Button.Vertical.Border}"
+            <n:ExtendedButton Grid.Column="3" Text="{DynamicResource S.StartUp.Board}" Margin="5,0,5,5" FontSize="13" Style="{StaticResource Style.Button.Vertical.Border}"
                               Effect="{StaticResource Shadow.Border.Tiny}" ContentWidth="36" ContentHeight="36" Icon="{StaticResource Vector.Board.New}" 
                               Command="{Binding OpenBoardRecorder}" CommandParameter="{Binding ElementName=StartupWindow}"
                               ToolTip="{DynamicResource S.StartUp.Board.Tooltip}" ToolTipService.Placement="Bottom"/>
 
-            <n:ExtendedButton Grid.Column="3" Text="{DynamicResource S.StartUp.Editor}" Margin="5,0,5,5" FontSize="13" Style="{StaticResource Style.Button.Vertical.Border}"
+            <n:ExtendedButton Grid.Column="4" Text="{DynamicResource S.StartUp.Editor}" Margin="5,0,5,5" FontSize="13" Style="{StaticResource Style.Button.Vertical.Border}"
                               Effect="{StaticResource Shadow.Border.Tiny}" ContentWidth="36" ContentHeight="36" Icon="{StaticResource Vector.Editor}" 
                               Command="{Binding OpenEditor}" CommandParameter="{Binding ElementName=StartupWindow}" 
                               ToolTip="{DynamicResource S.StartUp.Editor.Tooltip}" ToolTipService.Placement="Bottom"/>
