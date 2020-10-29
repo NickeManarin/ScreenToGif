@@ -107,7 +107,8 @@
                               Icon="{StaticResource Vector.Stop}"
                               KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='2'}"
                               Text="{DynamicResource S.Recorder.Stop}"
-                              ToolTip="{DynamicResource S.Recorder.Stop}" />
+                              ToolTip="{DynamicResource S.Recorder.Stop}"
+                              Visibility="Collapsed" />
         </Grid>
     </Grid>
 </n:RecorderWindow>

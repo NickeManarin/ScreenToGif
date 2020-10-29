@@ -160,6 +160,9 @@ namespace ScreenToGif.Windows
 
             Stage = Stage.Recording;
 
+            RecordButton.Visibility = Visibility.Collapsed;
+            StopButton.Visibility = Visibility.Visible;
+
             StartCaptureAsync();
         }
 
