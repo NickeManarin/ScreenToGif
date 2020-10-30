@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Windows.Foundation.Metadata;
-using Windows.Graphics;
 using Windows.Graphics.Capture;
 using Windows.Graphics.DirectX;
 using Windows.Graphics.DirectX.Direct3D11;
@@ -20,6 +19,9 @@ namespace ScreenToGif.Windows
 {
     public partial class SystemCapture
     {
+        /// <summary>
+        /// The capture item.
+        /// </summary>
         private readonly GraphicsCaptureItem _item;
 
         /// <summary>
@@ -32,17 +34,34 @@ namespace ScreenToGif.Windows
         /// </summary>
         private InputHook _actHook;
 
+        /// <summary>
+        /// The Direct3D device.
+        /// </summary>
         private IDirect3DDevice _device;
+
+        /// <summary>
+        /// Frames per second.
+        /// </summary>
         private int _fps;
+
+        /// <summary>
+        /// Total frame count.
+        /// </summary>
         private int _frameCount;
+
+        /// <summary>
+        /// The Direct3D frame pool.
+        /// </summary>
         private Direct3D11CaptureFramePool _framePool;
 
         /// <summary>
-        /// Last frame size.
+        /// The last frame captured timestamp.
         /// </summary>
-        private SizeInt32 _lastSize;
-
         private TimeSpan? _lastTimestamp;
+
+        /// <summary>
+        /// The capture session.
+        /// </summary>
         private GraphicsCaptureSession _session;
 
         public SystemCapture(GraphicsCaptureItem item)
@@ -54,7 +73,6 @@ namespace ScreenToGif.Windows
 
             item.Closed += GraphicsCaptureItem_Closed;
             _item = item;
-            _lastSize = item.Size;
 
             InitializeComponent();
 
@@ -71,7 +89,12 @@ namespace ScreenToGif.Windows
 
         private void GraphicsCaptureItem_Closed(GraphicsCaptureItem sender, object args)
         {
-            Close();
+            // The capture item closed then stop the capture.
+            // If StopButton.IsEnabled = false that means waiting to process the remain frames.
+            if (StopButton.IsEnabled)
+            {
+                StopButton_Click(null, null);
+            }
         }
 
         private void InitKeyboardHook()
@@ -121,13 +144,6 @@ namespace ScreenToGif.Windows
 
             _lastTimestamp = currentTimestamp;
 
-            if (frame.ContentSize.Width != _lastSize.Width ||
-                frame.ContentSize.Height != _lastSize.Height)
-            {
-                _lastSize = frame.ContentSize;
-                ResetFramePool(frame.ContentSize);
-            }
-
             var tcs = new TaskCompletionSource<object>();
             try
             {
@@ -166,15 +182,6 @@ namespace ScreenToGif.Windows
             StartCaptureAsync();
         }
 
-        private async void ResetFramePool(SizeInt32 size)
-        {
-            // Don't know why need to use async, if sync it will block the UI.
-            await Dispatcher.InvokeAsync(() =>
-            {
-                _framePool.Recreate(_device, DirectXPixelFormat.B8G8R8A8UIntNormalized, 1, size);
-            });
-        }
-
         private void StartCaptureAsync()
         {
             _fps = FpsNumbericUpDown.Value;
@@ -192,7 +199,12 @@ namespace ScreenToGif.Windows
 
         private async void StopButton_Click(object sender, RoutedEventArgs e)
         {
-            await WaitForAllFrameProcessed();
+            // Unregister the event to avoid continue to capture new frames while waiting for processing remain frames.
+            _framePool.FrameArrived -= FramePool_FrameArrived;
+
+            StopButton.IsEnabled = false;
+
+            await WaitForAllFramesProcessed();
 
             StopCapture();
 
@@ -212,7 +224,7 @@ namespace ScreenToGif.Windows
             StopCapture();
         }
 
-        private async Task WaitForAllFrameProcessed()
+        private async Task WaitForAllFramesProcessed()
         {
             await Task.WhenAll(_processFrameTasks);
         }
