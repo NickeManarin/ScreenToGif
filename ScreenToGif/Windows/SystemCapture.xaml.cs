@@ -55,9 +55,19 @@ namespace ScreenToGif.Windows
         private Direct3D11CaptureFramePool _framePool;
 
         /// <summary>
+        /// Indicate current stage is paused.
+        /// </summary>
+        private bool _isPaused;
+
+        /// <summary>
         /// The last frame captured timestamp.
         /// </summary>
         private TimeSpan? _lastTimestamp;
+
+        /// <summary>
+        /// The last pause operation occured time.
+        /// </summary>
+        private DateTime? _pauseTime;
 
         /// <summary>
         /// The capture session.
@@ -83,7 +93,10 @@ namespace ScreenToGif.Windows
         {
             using (var frame = _framePool.TryGetNextFrame())
             {
-                ProcessFrame(frame);
+                if (!_isPaused)
+                {
+                    ProcessFrame(frame);
+                }
             }
         }
 
@@ -124,6 +137,19 @@ namespace ScreenToGif.Windows
             else if (Keyboard.Modifiers.HasFlag(UserSettings.All.StopModifiers) && e.Key == UserSettings.All.StopShortcut)
             {
                 StopButton_Click(null, null);
+            }
+        }
+
+        private void PauseButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (Stage == Stage.Recording)
+            {
+                _pauseTime = DateTime.Now;
+                _isPaused = true;
+                Stage = Stage.Paused;
+
+                RecordButton.Visibility = Visibility.Visible;
+                PauseButton.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -172,14 +198,43 @@ namespace ScreenToGif.Windows
 
         private void RecordButton_Click(object sender, RoutedEventArgs e)
         {
-            Project = new ProjectInfo().CreateProjectFolder(ProjectByType.SystemCapture);
+            if (Stage == Stage.Stopped)
+            {
+                Project = new ProjectInfo().CreateProjectFolder(ProjectByType.SystemCapture);
 
-            Stage = Stage.Recording;
+                Stage = Stage.Recording;
 
-            RecordButton.Visibility = Visibility.Collapsed;
-            StopButton.Visibility = Visibility.Visible;
+                RecordButton.Visibility = Visibility.Collapsed;
+                PauseButton.Visibility = Visibility.Visible;
+                StopButton.Visibility = Visibility.Visible;
 
-            StartCaptureAsync();
+                StartCaptureAsync();
+            }
+            else if (Stage == Stage.Paused)
+            {
+                // Calculate how long has been paused and add the duration to the last frame timestamp.
+                if (_pauseTime.HasValue)
+                {
+                    var now = DateTime.Now;
+                    var pausedDuration = now - _pauseTime.Value;
+                    if (_lastTimestamp.HasValue)
+                    {
+                        _lastTimestamp = _lastTimestamp.Value + pausedDuration;
+                    }
+                    else
+                    {
+                        _lastTimestamp = pausedDuration;
+                    }
+
+                    _pauseTime = null;
+                }
+
+                _isPaused = false;
+                Stage = Stage.Recording;
+
+                RecordButton.Visibility = Visibility.Collapsed;
+                PauseButton.Visibility = Visibility.Visible;
+            }
         }
 
         private void StartCaptureAsync()
@@ -202,6 +257,9 @@ namespace ScreenToGif.Windows
             // Unregister the event to avoid continue to capture new frames while waiting for processing remain frames.
             _framePool.FrameArrived -= FramePool_FrameArrived;
 
+            // Make all buttons disabled to avoid click again.
+            RecordButton.IsEnabled = false;
+            PauseButton.IsEnabled = false;
             StopButton.IsEnabled = false;
 
             await WaitForAllFramesProcessed();

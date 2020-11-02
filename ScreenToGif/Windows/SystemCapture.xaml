@@ -7,7 +7,7 @@
                   xmlns:n="clr-namespace:ScreenToGif.Controls"
                   xmlns:u="clr-namespace:ScreenToGif.Util"
                   Title="{DynamicResource S.SystemCapture.Title}"
-                  Width="300"
+                  Width="320"
                   Height="32"
                   MinWidth="200"
                   MinHeight="64"
@@ -27,6 +27,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
@@ -82,33 +83,44 @@
                          ToolTipService.Placement="Bottom"
                          Value="{Binding Source={x:Static u:UserSettings.All}, Path=LatestFps, Mode=TwoWay}" />
         <TextBlock Grid.Column="3"
-                   Margin="1,0,0,0"
+                   Margin="1,0,4,0"
                    Padding="0"
                    VerticalAlignment="Center"
                    FontFamily="Segoe UI"
                    FontSize="12"
                    Foreground="{DynamicResource Element.Foreground.Medium}"
                    Text="{DynamicResource S.Recorder.Fps.Short}" />
-        <Grid Grid.Column="4"
-              Width="72"
-              Margin="4,0,0,0">
-            <n:ExtendedButton x:Name="RecordButton"
-                              Click="RecordButton_Click"
-                              ContentHeight="18"
-                              ContentWidth="18"
-                              Icon="{StaticResource Vector.Record}"
-                              KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='1'}"
-                              Text="{DynamicResource S.Recorder.Record}"
-                              ToolTip="{DynamicResource S.Recorder.Record}" />
-            <n:ExtendedButton x:Name="StopButton"
-                              Click="StopButton_Click"
-                              ContentHeight="18"
-                              ContentWidth="18"
-                              Icon="{StaticResource Vector.Stop}"
-                              KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='2'}"
-                              Text="{DynamicResource S.Recorder.Stop}"
-                              ToolTip="{DynamicResource S.Recorder.Stop}"
-                              Visibility="Collapsed" />
-        </Grid>
+        <n:ExtendedButton x:Name="RecordButton"
+                          Grid.Column="4"
+                          Width="72"
+                          Click="RecordButton_Click"
+                          ContentHeight="18"
+                          ContentWidth="18"
+                          Icon="{StaticResource Vector.Record}"
+                          KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='1'}"
+                          Text="{DynamicResource S.Recorder.Record}"
+                          ToolTip="{DynamicResource S.Recorder.Record}" />
+        <n:ExtendedButton x:Name="PauseButton"
+                          Grid.Column="4"
+                          Width="72"
+                          Click="PauseButton_Click"
+                          ContentHeight="18"
+                          ContentWidth="18"
+                          Icon="{StaticResource Vector.Pause}"
+                          KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='1'}"
+                          Text="{DynamicResource S.Recorder.Pause}"
+                          ToolTip="{DynamicResource S.Recorder.Pause}"
+                          Visibility="Collapsed" />
+        <n:ExtendedButton x:Name="StopButton"
+                          Grid.Column="5"
+                          Width="72"
+                          Click="StopButton_Click"
+                          ContentHeight="18"
+                          ContentWidth="18"
+                          Icon="{StaticResource Vector.Stop}"
+                          KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='2'}"
+                          Text="{DynamicResource S.Recorder.Stop}"
+                          ToolTip="{DynamicResource S.Recorder.Stop}"
+                          Visibility="Collapsed" />
     </Grid>
 </n:RecorderWindow>
