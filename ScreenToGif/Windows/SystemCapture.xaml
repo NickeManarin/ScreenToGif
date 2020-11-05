@@ -32,6 +32,7 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Viewbox Grid.Column="1"
                  ClipToBounds="True"
@@ -90,35 +91,46 @@
                    FontSize="12"
                    Foreground="{DynamicResource Element.Foreground.Medium}"
                    Text="{DynamicResource S.Recorder.Fps.Short}" />
-        <n:ExtendedButton x:Name="RecordButton"
+        <n:ExtendedButton x:Name="DiscardButton"
                           Grid.Column="4"
-                          Width="72"
+                          Click="DiscardButton_Click"
+                          ContentHeight="18"
+                          ContentWidth="18"
+                          Icon="{DynamicResource Vector.Remove}"
+                          KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='3'}"
+                          Style="{StaticResource Style.Button.Horizontal}"
+                          Text="{DynamicResource S.Recorder.Discard}"
+                          ToolTip="{DynamicResource S.Recorder.Discard}"
+                          Visibility="Collapsed" />
+        <n:ExtendedButton x:Name="RecordButton"
+                          Grid.Column="5"
                           Click="RecordButton_Click"
                           ContentHeight="18"
                           ContentWidth="18"
                           Icon="{StaticResource Vector.Record}"
                           KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='1'}"
+                          Style="{StaticResource Style.Button.Horizontal}"
                           Text="{DynamicResource S.Recorder.Record}"
                           ToolTip="{DynamicResource S.Recorder.Record}" />
         <n:ExtendedButton x:Name="PauseButton"
-                          Grid.Column="4"
-                          Width="72"
+                          Grid.Column="5"
                           Click="PauseButton_Click"
                           ContentHeight="18"
                           ContentWidth="18"
                           Icon="{StaticResource Vector.Pause}"
                           KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='1'}"
+                          Style="{StaticResource Style.Button.Horizontal}"
                           Text="{DynamicResource S.Recorder.Pause}"
                           ToolTip="{DynamicResource S.Recorder.Pause}"
                           Visibility="Collapsed" />
         <n:ExtendedButton x:Name="StopButton"
-                          Grid.Column="5"
-                          Width="72"
+                          Grid.Column="6"
                           Click="StopButton_Click"
                           ContentHeight="18"
                           ContentWidth="18"
                           Icon="{StaticResource Vector.Stop}"
                           KeyGesture="{Binding Converter={StaticResource ShortcutKeys}, ConverterParameter='2'}"
+                          Style="{StaticResource Style.Button.Horizontal}"
                           Text="{DynamicResource S.Recorder.Stop}"
                           ToolTip="{DynamicResource S.Recorder.Stop}"
                           Visibility="Collapsed" />

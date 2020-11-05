@@ -2,6 +2,7 @@
 using ScreenToGif.SystemCapture;
 using ScreenToGif.Util;
 using ScreenToGif.Util.InputHook;
+using ScreenToGif.Windows.Other;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -89,6 +90,77 @@ namespace ScreenToGif.Windows
             InitKeyboardHook();
         }
 
+        private async void DiscardButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (UserSettings.All.NotifyRecordingDiscard &&
+                !Dialog.Ask(LocalizationHelper.Get("S.Recorder.Discard.Title"),
+                    LocalizationHelper.Get("S.Recorder.Discard.Instruction"),
+                    LocalizationHelper.Get("S.Recorder.Discard.Message"),
+                    yesAsDefault: false))
+            {
+                return;
+            }
+
+            Stage = Stage.Discarding;
+
+            await WaitForStopCapture();
+
+            await Task.Run(() =>
+            {
+                try
+                {
+                    // Remove all the files
+                    foreach (var frame in Project.Frames)
+                    {
+                        try
+                        {
+                            if (File.Exists(frame.Path))
+                            {
+                                File.Delete(frame.Path);
+                            }
+                        }
+                        catch
+                        {
+                            // ignored
+                        }
+                    }
+
+                    try
+                    {
+                        Directory.Delete(Project.FullPath, true);
+                    }
+                    catch (Exception ex)
+                    {
+                        LogWriter.Log(ex, "Delete temp path");
+                    }
+
+                    Project.Frames.Clear();
+                }
+                catch (IOException ioException)
+                {
+                    LogWriter.Log(ioException, "Error while trying to discard the recording");
+                }
+                catch (Exception ex)
+                {
+                    Dispatcher.Invoke(() => Dialog.Ok("Discard Error", "Error while trying to discard the recording", ex.Message));
+                    LogWriter.Log(ex, "Error while trying to discard the recording");
+                }
+            });
+
+            Stage = Stage.Stopped;
+
+            // Reset all controls status.
+            RecordButton.IsEnabled = true;
+            RecordButton.Visibility = Visibility.Visible;
+            PauseButton.IsEnabled = true;
+            PauseButton.Visibility = Visibility.Collapsed;
+            StopButton.IsEnabled = true;
+            StopButton.Visibility = Visibility.Collapsed;
+            DiscardButton.Visibility = Visibility.Collapsed;
+            DiscardButton.IsEnabled = true;
+            FpsNumbericUpDown.IsEnabled = true;
+        }
+
         private void FramePool_FrameArrived(Direct3D11CaptureFramePool sender, object args)
         {
             using (var frame = _framePool.TryGetNextFrame())
@@ -128,15 +200,43 @@ namespace ScreenToGif.Windows
             return ApiInformation.IsPropertyPresent("Windows.Graphics.Capture.GraphicsCaptureSession", "IsCursorCaptureEnabled");
         }
 
-        private void KeyHookTarget(object sender, CustomKeyEventArgs e)
+        private async void KeyHookTarget(object sender, CustomKeyEventArgs e)
         {
+            // No idea why need to call Task.Yield, Dispatcher.Invoke is not working.
+
             if (Keyboard.Modifiers.HasFlag(UserSettings.All.StartPauseModifiers) && e.Key == UserSettings.All.StartPauseShortcut)
             {
-                RecordButton_Click(null, null);
+                if (Stage == Stage.Stopped || Stage == Stage.Paused)
+                {
+                    await Task.Yield();
+                    if (RecordButton.IsEnabled && RecordButton.Visibility == Visibility.Visible)
+                    {
+                        RecordButton_Click(null, null);
+                    }
+                }
+                else
+                {
+                    if (PauseButton.IsEnabled && PauseButton.Visibility == Visibility.Visible)
+                    {
+                        PauseButton_Click(null, null);
+                    }
+                }
             }
             else if (Keyboard.Modifiers.HasFlag(UserSettings.All.StopModifiers) && e.Key == UserSettings.All.StopShortcut)
             {
-                StopButton_Click(null, null);
+                await Task.Yield();
+                if (StopButton.IsEnabled && StopButton.Visibility == Visibility.Visible)
+                {
+                    StopButton_Click(null, null);
+                }
+            }
+            else if (Keyboard.Modifiers.HasFlag(UserSettings.All.DiscardModifiers) && e.Key == UserSettings.All.DiscardShortcut)
+            {
+                await Task.Yield();
+                if (DiscardButton.IsEnabled && DiscardButton.Visibility == Visibility.Visible)
+                {
+                    DiscardButton_Click(null, null);
+                }
             }
         }
 
@@ -150,6 +250,7 @@ namespace ScreenToGif.Windows
 
                 RecordButton.Visibility = Visibility.Visible;
                 PauseButton.Visibility = Visibility.Collapsed;
+                DiscardButton.Visibility = Visibility.Visible;
             }
         }
 
@@ -207,6 +308,7 @@ namespace ScreenToGif.Windows
                 RecordButton.Visibility = Visibility.Collapsed;
                 PauseButton.Visibility = Visibility.Visible;
                 StopButton.Visibility = Visibility.Visible;
+                DiscardButton.Visibility = Visibility.Collapsed;
 
                 StartCaptureAsync();
             }
@@ -254,17 +356,7 @@ namespace ScreenToGif.Windows
 
         private async void StopButton_Click(object sender, RoutedEventArgs e)
         {
-            // Unregister the event to avoid continue to capture new frames while waiting for processing remain frames.
-            _framePool.FrameArrived -= FramePool_FrameArrived;
-
-            // Make all buttons disabled to avoid click again.
-            RecordButton.IsEnabled = false;
-            PauseButton.IsEnabled = false;
-            StopButton.IsEnabled = false;
-
-            await WaitForAllFramesProcessed();
-
-            StopCapture();
+            await WaitForStopCapture();
 
             Close();
         }
@@ -285,6 +377,22 @@ namespace ScreenToGif.Windows
         private async Task WaitForAllFramesProcessed()
         {
             await Task.WhenAll(_processFrameTasks);
+        }
+
+        private async Task WaitForStopCapture()
+        {
+            // Unregister the event to avoid continue to capture new frames while waiting for processing remain frames.
+            _framePool.FrameArrived -= FramePool_FrameArrived;
+
+            // Make all buttons disabled to avoid click again.
+            RecordButton.IsEnabled = false;
+            PauseButton.IsEnabled = false;
+            StopButton.IsEnabled = false;
+            DiscardButton.IsEnabled = false;
+
+            await WaitForAllFramesProcessed();
+
+            StopCapture();
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)
