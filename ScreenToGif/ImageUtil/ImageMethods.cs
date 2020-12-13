@@ -1089,65 +1089,55 @@ namespace ScreenToGif.ImageUtil
         /// <returns>The similarity between the two frames in percentage.</returns>
         public static double CalculateDifference(FrameInfo first, FrameInfo second)
         {
-            #region Get Image Info
+            using (var imageAux1 = first.Path.From())
+            using (var imageAux2 = second.Path.From())
+            {
+                #region Get Image Info
 
-            var imageAux1 = first.Path.From();
-            var imageAux2 = second.Path.From();
+                var height = imageAux1.Height;
+                var width = imageAux1.Width;
+                var pixelCount = height * width;
 
-            var image1 = new PixelUtilOld(imageAux1); //First image
-            var image2 = new PixelUtilOld(imageAux2); //Last image
+                #endregion
 
-            image1.LockBits();
-            image2.LockBits();
+                var changedPixelCount = EnumerateIndexOfNonEqualPixels(imageAux1, imageAux2)
+                    .AsParallel()
+                    .Count();
+
+                return MathHelper.CrossMultiplication(pixelCount, pixelCount - changedPixelCount, null);
+            }
+        }
+
+        private static IEnumerable<int> EnumerateIndexOfNonEqualPixels(Bitmap imageAux1, Bitmap imageAux2)
+        {
+            if (imageAux1.PixelFormat != imageAux2.PixelFormat)
+            {
+                throw new ArgumentException("Images need to have same PixelFormat.");
+            }
+
+            if(Image.GetPixelFormatSize(imageAux1.PixelFormat) > 32)
+            {
+                throw new ArgumentException("PixelFormat not supported.");
+            }
 
             var height = imageAux1.Height;
             var width = imageAux1.Width;
 
-            var equalCount = 0;
+            var lineBuffer1 = new int[width];
+            var lineBuffer2 = new int[width];
+            var format = System.Drawing.Imaging.PixelFormat.Format32bppArgb;
 
-            #endregion
-
-            //Only use Parallel if the image is big enough.
-            if (width * height > 150000)
+            for (int y = 0; y < height; y++)
             {
-                #region Parallel Loop
+                PixelUtilOld.ReadLine(imageAux1, format, y, lineBuffer1);
+                PixelUtilOld.ReadLine(imageAux2, format, y, lineBuffer2);
 
-                //x - width - sides
-                Parallel.For(0, width, x =>
+                for (int x = 0; x < width; x++)
                 {
-                    //y - height - up/down
-                    for (var y = 0; y < height; y++)
-                    {
-                        if (image1.GetPixel(x, y) == image2.GetPixel(x, y))
-                            Interlocked.Increment(ref equalCount);
-
-                        //equalCount = equalCount + (image1.GetPixel(x, y) == image2.GetPixel(x, y) ? 1 : 0);
-                    }
-                });
-
-                #endregion
-            }
-            else
-            {
-                #region Sequential Loop
-
-                //x - width - sides
-                for (var x = 0; x < width; x++)
-                {
-                    //y - height - up/down
-                    for (var y = 0; y < height; y++)
-                        equalCount = equalCount + (image1.GetPixel(x, y) == image2.GetPixel(x, y) ? 1 : 0);
+                    if (lineBuffer1[x] != lineBuffer2[x])
+                        yield return x + y * width;
                 }
-
-                #endregion
             }
-
-            image1.UnlockBits();
-            image2.UnlockBits();
-
-            GC.Collect(1);
-
-            return MathHelper.CrossMultiplication(width * height, equalCount, null);
         }
 
         /// <summary>
