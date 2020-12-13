@@ -184,5 +184,23 @@ namespace ScreenToGif.ImageUtil.Gif.LegacyEncoder
                 Pixels[i] = color.B;
             }
         }
+
+        /// <summary>
+        /// Load a line from the image into the provided buffer.
+        /// </summary>
+        /// <param name="source">The image source.</param>
+        /// <param name="pixelFormat">The format of the pixel that will be written to the buffer.</param>
+        /// <param name="line">The line index to read.</param>
+        /// <param name="buffer">Buffer to write to.</param>
+        public static void ReadLine(Bitmap source, PixelFormat pixelFormat, int line, int[] buffer)
+        {
+            var lockRectangle = new Rectangle(0, line, source.Width, 1);
+
+            var lockBits = source.LockBits(lockRectangle, ImageLockMode.ReadOnly, pixelFormat);
+
+            Marshal.Copy(lockBits.Scan0, buffer, 0, lockBits.Stride / sizeof(int));
+
+            source.UnlockBits(lockBits);
+        }
     }
 }
