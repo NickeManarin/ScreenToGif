@@ -6389,15 +6389,27 @@ namespace ScreenToGif.Windows
 
             ShowProgress(LocalizationHelper.Get("S.Editor.AnalyzingDuplicates"), Project.Frames.Count - 1);
 
-            //Gets the list of similar frames.
-            for (var i = 0; i < Project.Frames.Count - 2; i++)
+            var similarFramePairs = Enumerable.Range(0, Project.Frames.Count - 1)
+                .Select(i => { UpdateProgress(i + 1); return i; })
+                .Select(i => (First: Project.Frames[i], Last: Project.Frames[i + 1]))
+                .AsParallel()
+                .Where((t) => ImageMethods.CalculateDifference(t.First, t.Last) >= similarity);
+
+            foreach (var (firstFrame, lastFrame) in similarFramePairs)
             {
-                var sim = ImageMethods.CalculateDifference(Project.Frames[i], Project.Frames[i + 1]);
-
-                if (sim >= similarity)
-                    removeList.Add(removal == DuplicatesRemovalType.First ? i : i + 1);
-
-                UpdateProgress(i + 1);
+                switch (removal)
+                {
+                    case DuplicatesRemovalType.First:
+                        removeList.Add(firstFrame.Index);
+                        alterList.Add(lastFrame.Index);
+                        break;
+                    case DuplicatesRemovalType.Last:
+                        alterList.Add(firstFrame.Index);
+                        removeList.Add(lastFrame.Index);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(removal));
+                }
             }
 
             if (removeList.Count == 0)
@@ -6413,7 +6425,6 @@ namespace ScreenToGif.Windows
 
                 //Gets the list of frames that will be altered (if the delay will be adjusted).
                 var mode = removal == DuplicatesRemovalType.First ? 1 : -1;
-                alterList = (from item in removeList where item + mode >= 0 select item + mode).ToList();
 
                 ActionStack.SaveState(ActionStack.EditAction.RemoveAndAlter, Project.Frames, removeList, alterList);
 
@@ -6453,18 +6464,18 @@ namespace ScreenToGif.Windows
 
             ShowProgress(LocalizationHelper.Get("S.Editor.DiscardingDuplicates"), removeList.Count);
 
-            for (var i = removeList.Count - 1; i >= 0; i--)
-            {
-                var removeIndex = removeList[i];
+            var removeFrames = removeList.Select(i => Project.Frames[i]).ToArray();
 
-                File.Delete(Project.Frames[removeIndex].Path);
-                Project.Frames.RemoveAt(removeIndex);
+            foreach (var frame in removeFrames)
+            {
+                File.Delete(frame.Path);
+                Project.Frames.Remove(frame);
 
                 UpdateProgress(count++);
             }
 
             //Gets the minimum index being altered.
-            return alterList.Count == 0 && removeList.Count == 0 ? Project.Frames.Count : alterList.Count > 0 ? Math.Min(removeList.Min(), alterList.Min()) : removeList.Min();
+            return alterList.Concat(removeList).Min();
         }
 
         private void RemoveDuplicatesCallback(IAsyncResult ar)
