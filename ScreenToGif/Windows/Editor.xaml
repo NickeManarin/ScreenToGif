@@ -2167,7 +2167,7 @@
                                                         Visibility="{Binding IsChecked, ElementName=NormalApngEncoderRadioButton, Converter={StaticResource Bool2Visibility}}"/>
 
                                     <n:ExtendedCheckBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" x:Name="PaintTransparentApngCheckBox" Margin="10,3,3,3" Text="{DynamicResource S.SaveAs.ApngOptions.PaintTransparent}" 
-                                                        IsChecked="{Binding PaintTransparent, Source={x:Static u:UserSettings.All}}">
+                                                        IsChecked="{Binding PaintTransparentApng, Source={x:Static u:UserSettings.All}}">
                                         <n:ExtendedCheckBox.Visibility>
                                             <MultiBinding Converter="{StaticResource BoolAndToVisibility}">
                                                 <Binding ElementName="DetectApngCheckBox" Path="IsChecked" />
