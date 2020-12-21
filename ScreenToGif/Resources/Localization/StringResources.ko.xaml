@@ -605,7 +605,7 @@
     <s:String x:Key="S.Recorder.Screen.Name.Info1">그래픽 어댑터: {0}</s:String>
     <s:String x:Key="S.Recorder.Screen.Name.Info2">해상도: {0} x {1}</s:String>
     <s:String x:Key="S.Recorder.Screen.Name.Info3">원본 해상도: {0} x {1}</s:String>
-    <s:String x:Key="S.Recorder.Screen.Name.Info4">DPI: {0] ({1:0.##}%)</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Info4">DPI: {0} ({1:0.##}%)</s:String>
     <s:String x:Key="S.Recorder.Move">끌어서 선택을 이동합니다.</s:String>
     <s:String x:Key="S.Recorder.Accept">확인</s:String>
     <s:String x:Key="S.Recorder.Retry">다시실행</s:String>
