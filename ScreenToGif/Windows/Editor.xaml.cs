@@ -5815,7 +5815,7 @@ namespace ScreenToGif.Windows
 
         private void UpdateOtherStatistics()
         {
-            if (FrameListView.SelectedIndex > -1 && FrameListView.SelectedIndex < Project.Frames.Count - 1)
+            if (FrameListView.SelectedIndex > -1 && FrameListView.SelectedIndex < Project.Frames.Count)
                 CurrentTime = TimeSpan.FromMilliseconds(Project.Frames.Take(FrameListView.SelectedIndex + 1).Sum(x => x.Delay));
             else
                 CurrentTime = TimeSpan.Zero;
