@@ -15,10 +15,6 @@ trim_trailing_whitespace = true
 [*.{md}]
 indent_size = 2
 
-# Xaml files
-[*.{xaml}]
-indent_size = 4
-
 ##########################################
 # The below are copied from
 # https://github.com/RehanSaeed/EditorConfig
