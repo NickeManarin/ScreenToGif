@@ -1098,6 +1098,7 @@
     <s:String x:Key="S.Caption.Layout">Układ</s:String>
     <s:String x:Key="S.Caption.Vertical">Pionowy:</s:String>
     <s:String x:Key="S.Caption.Horizontal">Poziomy:</s:String>
+    <s:String x:Key="S.Caption.TextAlignment">Położenie:</s:String>
 
     <!--Editor • Key strokes-->
     <s:String x:Key="S.KeyStrokes">Uderzenia klawiszy</s:String>
@@ -1436,4 +1437,10 @@
     <!--Orientation-->
     <s:String x:Key="S.Orientation.Horizontal">Poziomo</s:String>
     <s:String x:Key="S.Orientation.Vertical">Pionowo</s:String>
+    
+    <!--TextAlignment-->
+    <s:String x:Key="S.TextAlignment.Left">Do lewej</s:String>
+    <s:String x:Key="S.TextAlignment.Right">Do prawej</s:String>
+    <s:String x:Key="S.TextAlignment.Center">Do środka</s:String>
+    <s:String x:Key="S.TextAlignment.Justify">Wyjustuj</s:String>
 </ResourceDictionary>
