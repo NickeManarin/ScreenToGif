@@ -401,6 +401,7 @@
     <s:Double x:Key="FreeTextFontSize">16.0</s:Double>
     <Color x:Key="FreeTextFontColor">#FF000000</Color>
     <TextAlignment x:Key="FreeTextTextAlignment">Left</TextAlignment>
+    <s:String x:Key="FreeTextTextDecoration">None</s:String>
 
     <!--Editor • Title Frame-->
     <Color x:Key="TitleFrameBackgroundColor">#FFD7D7D7</Color>

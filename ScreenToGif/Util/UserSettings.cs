@@ -2323,6 +2323,12 @@ namespace ScreenToGif.Util
             get => (TextAlignment)GetValue();
             set => SetValue(value);
         }
+      
+        public string FreeTextTextDecoration
+        {
+            get => (string)GetValue();
+            set => SetValue(value);
+        }
 
         #endregion
 

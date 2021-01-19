@@ -1171,6 +1171,7 @@
     <s:String x:Key="S.Caption.Vertical">Vertical:</s:String>
     <s:String x:Key="S.Caption.Horizontal">Horizontal:</s:String>
     <s:String x:Key="S.Caption.TextAlignment">Alignment:</s:String>
+    <s:String x:Key="S.Caption.TextDecoration">Decoration:</s:String>
 
     <!--Editor • Key strokes-->
     <s:String x:Key="S.KeyStrokes">Key Strokes</s:String>
@@ -1529,4 +1530,11 @@
     <s:String x:Key="S.TextAlignment.Right">Right</s:String>
     <s:String x:Key="S.TextAlignment.Center">Center</s:String>
     <s:String x:Key="S.TextAlignment.Justify">Justify</s:String>
+    
+    <!--TextDecoration-->
+    <s:String x:Key="S.TextDecorations.None">None</s:String>
+    <s:String x:Key="S.TextDecorations.Underline">Underline</s:String>
+    <s:String x:Key="S.TextDecorations.Strikethrough">Strikethrough</s:String>
+    <s:String x:Key="S.TextDecorations.OverLine">OverLine</s:String>
+    <s:String x:Key="S.TextDecorations.Baseline">Baseline</s:String>
 </ResourceDictionary>
