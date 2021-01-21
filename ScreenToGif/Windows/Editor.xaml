@@ -3255,7 +3255,6 @@
                                 <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
@@ -3265,34 +3264,7 @@
                                                Text="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextText, Mode=TwoWay}"
                                                TextChanged="FreeTextTextBox_OnTextChanged"/>
 
-                            <Grid Grid.Row="2" Margin="10,0,0,0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-
-                                <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Caption.TextAlignment}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                                <ComboBox Grid.Row="0" Grid.Column="1" x:Name="FreeTextTextAlignmentComboBox" Margin="10,5" MinWidth="100"
-                                              SelectedValuePath="TextAlignment" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextTextAlignment, Mode=TwoWay}">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
-                                                <TextBlock FontStyle="{Binding FontStyle}" FontSize="14" Text="{Binding Text}"/>
-                                            </VirtualizingStackPanel>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
-
-                                    <TextBlock TextAlignment="Left" Text="{DynamicResource S.TextAlignment.Left}"/>
-                                    <TextBlock TextAlignment="Center" Text="{DynamicResource S.TextAlignment.Center}"/>
-                                    <TextBlock TextAlignment="Right" Text="{DynamicResource S.TextAlignment.Right}"/>
-                                    <TextBlock TextAlignment="Justify" Text="{DynamicResource S.TextAlignment.Justify}"/>
-                                </ComboBox>
-                            </Grid>
-                            
-                            <Expander Grid.Row="3" Header="{DynamicResource S.Caption.Font}" IsExpanded="{Binding IsFreeTextFontGroupExpanded, Source={x:Static u:UserSettings.All}}">
+                            <Expander Grid.Row="2" Header="{DynamicResource S.Caption.Font}" IsExpanded="{Binding IsFreeTextFontGroupExpanded, Source={x:Static u:UserSettings.All}}">
                                 <Grid Margin="10,0,0,0">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
@@ -3376,9 +3348,10 @@
                                 </Grid>
                             </Expander>
 
-                            <n:LabelSeparator Grid.Row="4" Text="{DynamicResource S.Caption.Layout}"/>
-                            <Grid Grid.Row="5" Margin="10,0,0,0">
+                            <n:LabelSeparator Grid.Row="3" Text="{DynamicResource S.Caption.Layout}"/>
+                            <Grid Grid.Row="4" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
@@ -3397,9 +3370,26 @@
                                 <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="FreeTextPositionYNumericUpDown" Margin="10,5" MinWidth="70" 
                                                  Value="{Binding ElementName=FreeTextOverlayControl, Path=Top, Converter={StaticResource DoubleToIntConverter}, Mode=TwoWay, FallbackValue=0}"
                                                  Maximum="{Binding ElementName=FreeTextOverlayControl, Path=ActualHeight, FallbackValue=1000}"/>
+                                
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.Caption.TextAlignment}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <ComboBox Grid.Row="2" Grid.Column="1" x:Name="FreeTextTextAlignmentComboBox" Margin="10,5" MinWidth="70"
+                                              SelectedValuePath="TextAlignment" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextTextAlignment, Mode=TwoWay}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
+                                                <TextBlock FontStyle="{Binding FontStyle}" FontSize="14" Text="{Binding Text}"/>
+                                            </VirtualizingStackPanel>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
 
-                                <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.FreeDrawing.Width}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                                <n:IntegerUpDown Grid.Row="2" Grid.Column="1" x:Name="FreeTextWidthNumericUpDown" Margin="10,5" MinWidth="70">
+                                    <TextBlock TextAlignment="Left" Text="{DynamicResource S.TextAlignment.Left}"/>
+                                    <TextBlock TextAlignment="Center" Text="{DynamicResource S.TextAlignment.Center}"/>
+                                    <TextBlock TextAlignment="Right" Text="{DynamicResource S.TextAlignment.Right}"/>
+                                    <TextBlock TextAlignment="Justify" Text="{DynamicResource S.TextAlignment.Justify}"/>
+                                </ComboBox>
+
+                                <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource S.FreeDrawing.Width}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <n:IntegerUpDown Grid.Row="3" Grid.Column="1" x:Name="FreeTextWidthNumericUpDown" Margin="10,5" MinWidth="70">
                                     <n:IntegerUpDown.Style>
                                         <Style>
                                             <Style.Triggers>
