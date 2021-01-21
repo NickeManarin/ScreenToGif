@@ -2330,6 +2330,42 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public bool IsFreeTextShadowGroupExpanded
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color FreeTextShadowColor
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public double FreeTextShadowDirection
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        public double FreeTextShadowBlurRadius
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        public double FreeTextShadowOpacity
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
+        public double FreeTextShadowDepth
+        {
+            get => (double)GetValue();
+            set => SetValue(value);
+        }
+
         #endregion
 
         #region Editor • Title Frame

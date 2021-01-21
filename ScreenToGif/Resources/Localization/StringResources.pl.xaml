@@ -1100,7 +1100,9 @@
     <s:String x:Key="S.Caption.Horizontal">Poziomy:</s:String>
     <s:String x:Key="S.Caption.TextAlignment">Położenie:</s:String>
     <s:String x:Key="S.Caption.TextDecoration">Dekoracja:</s:String>
-
+    <s:String x:Key="S.Caption.ShadowCollapsed">Cień (rozwiń aby zastosować)</s:String>
+    <s:String x:Key="S.Caption.ShadowExpanded">Cień (zwiń aby usunąć)</s:String>
+    
     <!--Editor • Key strokes-->
     <s:String x:Key="S.KeyStrokes">Uderzenia klawiszy</s:String>
     <s:String x:Key="S.KeyStrokes.Keys">Klawisze</s:String>

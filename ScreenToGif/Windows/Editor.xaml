@@ -1427,6 +1427,14 @@
                                    FontWeight="{Binding ElementName=FreeTextFontWeightComboBox, Path=SelectedValue}"
                                    FontSize="{Binding ElementName=FreeTextFontSizeNumericUpDown, Path=Value}"
                                    Foreground="{Binding ElementName=FreeTextFontColorBox, Path=SelectedBrush}">
+                            <TextBlock.Resources>
+                                <DropShadowEffect x:Key="DropShadowEffect" 
+                                                  Color="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextShadowColor, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                                  BlurRadius="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextShadowBlurRadius, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                                  Direction="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextShadowDirection, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                                  Opacity="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextShadowOpacity, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                                  ShadowDepth="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextShadowDepth, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                            </TextBlock.Resources>
                             <TextBlock.Style>
                                 <Style>
                                     <Style.Triggers>
@@ -1434,10 +1442,14 @@
                                             <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
                                             <Setter Property="TextBlock.Width" Value="{Binding ElementName=FreeTextWidthNumericUpDown, Path=Value}"/>
                                         </DataTrigger>
+                                        <DataTrigger Binding="{Binding ElementName=IsFreeTextShadowGroupExpanded, Path=IsExpanded}" Value="True">
+                                            <Setter Property="TextBlock.Effect" Value="{StaticResource DropShadowEffect}"/>
+                                        </DataTrigger>
                                     </Style.Triggers>
                                     <Style.Setters>
                                         <Setter Property="TextBlock.TextWrapping" Value="NoWrap"/>
                                         <Setter Property="TextBlock.Width" Value="Auto"/>
+                                        <Setter Property="TextBlock.Effect" Value="{x:Null}"/>
                                     </Style.Setters>
                                 </Style>
                             </TextBlock.Style>
@@ -3256,6 +3268,7 @@
                                 <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
@@ -3368,8 +3381,56 @@
                                 </Grid>
                             </Expander>
 
-                            <n:LabelSeparator Grid.Row="3" Text="{DynamicResource S.Caption.Layout}"/>
-                            <Grid Grid.Row="4" Margin="10,0,0,0">
+                            <Expander Grid.Row="3" x:Name="IsFreeTextShadowGroupExpanded" IsExpanded="{Binding IsFreeTextShadowGroupExpanded, Source={x:Static u:UserSettings.All}, Mode=TwoWay}">
+                                <Expander.Style>
+                                    <Style TargetType="Expander" BasedOn="{StaticResource {x:Type Expander}}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=IsFreeTextShadowGroupExpanded, Path=IsExpanded}" Value="True">
+                                                <Setter Property="Header" Value="{DynamicResource S.Caption.ShadowExpanded}"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ElementName=IsFreeTextShadowGroupExpanded, Path=IsExpanded}" Value="False">
+                                                <Setter Property="Header" Value="{DynamicResource S.Caption.ShadowCollapsed}"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Expander.Style>
+                                <Grid Margin="10,0,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.Resources>
+                                        <c:PercentageToOpacity x:Key="PercentageToOpacity"/>
+                                    </Grid.Resources>
+
+                                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Shadow.ShadowColor}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                    <n:ColorBox Grid.Row="0" Grid.Column="1" Margin="10,5" AllowTransparency="False"
+                                            SelectedColor="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextShadowColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                    <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.Shadow.BlurRadius}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                    <n:DoubleUpDown Grid.Row="2" Grid.Column="1" Minimum="0" Maximum="100" Margin="10,5" StepValue="0.5" Value="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextShadowBlurRadius, Mode=TwoWay}"/>
+
+                                    <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource S.Shadow.Direction}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                    <n:DoubleUpDown Grid.Row="3" Grid.Column="1" Minimum="0" Maximum="360" Margin="10,5" StepValue="0.5" Value="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextShadowDirection, Mode=TwoWay}"/>
+
+                                    <TextBlock Grid.Row="4" Grid.Column="0" Text="{DynamicResource S.Watermark.Opacity}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                    <n:DoubleUpDown Grid.Row="4" Grid.Column="1" Minimum="0" Maximum="100" Margin="10,5" StepValue="0.5" Value="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextShadowOpacity, Converter={StaticResource PercentageToOpacity}, Mode=TwoWay}"/>
+
+                                    <TextBlock Grid.Row="5" Grid.Column="0" Text="{DynamicResource S.Shadow.Depth}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                    <n:DoubleUpDown Grid.Row="5" Grid.Column="1" Minimum="0" Maximum="100" Margin="10,5" StepValue="0.5" Value="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextShadowDepth, Mode=TwoWay}"/>
+                                </Grid>
+                            </Expander>
+                            
+                            <n:LabelSeparator Grid.Row="4" Text="{DynamicResource S.Caption.Layout}"/>
+                            <Grid Grid.Row="5" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
@@ -3390,7 +3451,7 @@
                                 <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="FreeTextPositionYNumericUpDown" Margin="10,5" MinWidth="70" 
                                                  Value="{Binding ElementName=FreeTextOverlayControl, Path=Top, Converter={StaticResource DoubleToIntConverter}, Mode=TwoWay, FallbackValue=0}"
                                                  Maximum="{Binding ElementName=FreeTextOverlayControl, Path=ActualHeight, FallbackValue=1000}"/>
-                                
+
                                 <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.Caption.TextAlignment}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                                 <ComboBox Grid.Row="2" Grid.Column="1" x:Name="FreeTextTextAlignmentComboBox" Margin="10,5" MinWidth="70"
                                               SelectedValuePath="TextAlignment" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextTextAlignment, Mode=TwoWay}">
