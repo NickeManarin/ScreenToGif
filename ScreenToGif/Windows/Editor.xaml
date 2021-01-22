@@ -1415,16 +1415,32 @@
                     </Grid>
 
                     <n:MoveResizeControl x:Name="FreeTextOverlayControl" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True"
-                                         Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
+                                         Width="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}"
                                          Height="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}"
                                          Visibility="{Binding ElementName=FreeTextGrid, Path=Visibility}">
                         <TextBlock x:Name="FreeTextTextBlock" Padding="0"
                                    Text="{Binding ElementName=FreeTextTextBox, Path=Text}" 
+                                   TextAlignment="{Binding ElementName=FreeTextTextAlignmentComboBox, Path=SelectedValue}" 
                                    FontFamily="{Binding ElementName=FreeTextFontComboBox, Path=SelectedItem}" 
                                    FontStyle="{Binding ElementName=FreeTextFontStyleComboBox, Path=SelectedValue}"
                                    FontWeight="{Binding ElementName=FreeTextFontWeightComboBox, Path=SelectedValue}"
                                    FontSize="{Binding ElementName=FreeTextFontSizeNumericUpDown, Path=Value}"
-                                   Foreground="{Binding ElementName=FreeTextFontColorBox, Path=SelectedBrush}"/>
+                                   Foreground="{Binding ElementName=FreeTextFontColorBox, Path=SelectedBrush}">
+                            <TextBlock.Style>
+                                <Style>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=FreeTextTextAlignmentComboBox, Path=SelectedValue}" Value="Justify">
+                                            <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
+                                            <Setter Property="TextBlock.Width" Value="{Binding ElementName=FreeTextWidthNumericUpDown, Path=Value}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                    <Style.Setters>
+                                        <Setter Property="TextBlock.TextWrapping" Value="NoWrap"/>
+                                        <Setter Property="TextBlock.Width" Value="Auto"/>
+                                    </Style.Setters>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
                     </n:MoveResizeControl>
 
                     <Grid x:Name="TitleFrameOverlayGrid" VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="True"
@@ -3337,6 +3353,8 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -3352,6 +3370,41 @@
                                 <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="FreeTextPositionYNumericUpDown" Margin="10,5" MinWidth="70" 
                                                  Value="{Binding ElementName=FreeTextOverlayControl, Path=Top, Converter={StaticResource DoubleToIntConverter}, Mode=TwoWay, FallbackValue=0}"
                                                  Maximum="{Binding ElementName=FreeTextOverlayControl, Path=ActualHeight, FallbackValue=1000}"/>
+                                
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.Caption.TextAlignment}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <ComboBox Grid.Row="2" Grid.Column="1" x:Name="FreeTextTextAlignmentComboBox" Margin="10,5" MinWidth="70"
+                                              SelectedValuePath="TextAlignment" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextTextAlignment, Mode=TwoWay}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling" ScrollViewer.IsDeferredScrollingEnabled="True">
+                                                <TextBlock FontStyle="{Binding FontStyle}" FontSize="14" Text="{Binding Text}"/>
+                                            </VirtualizingStackPanel>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+
+                                    <TextBlock TextAlignment="Left" Text="{DynamicResource S.TextAlignment.Left}"/>
+                                    <TextBlock TextAlignment="Center" Text="{DynamicResource S.TextAlignment.Center}"/>
+                                    <TextBlock TextAlignment="Right" Text="{DynamicResource S.TextAlignment.Right}"/>
+                                    <TextBlock TextAlignment="Justify" Text="{DynamicResource S.TextAlignment.Justify}"/>
+                                </ComboBox>
+
+                                <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource S.FreeDrawing.Width}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <n:IntegerUpDown Grid.Row="3" Grid.Column="1" x:Name="FreeTextWidthNumericUpDown" Margin="10,5" MinWidth="70">
+                                    <n:IntegerUpDown.Style>
+                                        <Style>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=FreeTextTextAlignmentComboBox, Path=SelectedValue}" Value="Justify">
+                                                    <Setter Property="n:IntegerUpDown.IsEnabled" Value="True"/>
+                                                    <Setter Property="n:IntegerUpDown.Value" Value="{Binding ElementName=FreeTextTextBlock, Path=ActualWidth, FallbackValue=0}"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                            <Style.Setters>
+                                                <Setter Property="n:IntegerUpDown.IsEnabled" Value="False"/>
+                                                <Setter Property="n:IntegerUpDown.Value" Value="{Binding ElementName=FreeTextTextBlock, Path=ActualWidth, FallbackValue=0}"/>
+                                            </Style.Setters>
+                                        </Style>
+                                    </n:IntegerUpDown.Style>
+                                </n:IntegerUpDown>
                             </Grid>
                         </Grid>
 

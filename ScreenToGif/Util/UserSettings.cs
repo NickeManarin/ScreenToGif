@@ -2318,6 +2318,12 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public TextAlignment FreeTextTextAlignment
+        {
+            get => (TextAlignment)GetValue();
+            set => SetValue(value);
+        }
+
         #endregion
 
         #region Editor • Title Frame
