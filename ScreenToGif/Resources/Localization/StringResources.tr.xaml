@@ -61,37 +61,37 @@
     <!--<s:String x:Key="S.Command.InsertBoardRecording">Insert board recording</s:String>-->
     <!--<s:String x:Key="S.Command.InsertFromMedia">Insert from media (images and videos)</s:String>-->
     <s:String x:Key="S.Command.SaveAs">Farklı kaydet</s:String>
-    <s:String x:Key="S.Command.Load">Dosyalardan yükle (resimler, videolar ve projeler)</s:String>
+    <s:String x:Key="S.Command.Load">Dosyalardan yükle (görüntüler, videolar ve projeler)</s:String>
     <s:String x:Key="S.Command.LoadRecent">En son projeleri yükle</s:String>
     <s:String x:Key="S.Command.DiscardProject">Mevcut projeleri yoksay</s:String>
     <!--<s:String x:Key="S.Command.OverrideDelay">Override delay of frames</s:String>-->
-    <s:String x:Key="S.Command.IncreaseDecreaseDelay">Çerçevelerdeki gecikmeyi Arttır/Azalt</s:String>
+    <s:String x:Key="S.Command.IncreaseDecreaseDelay">Karelerdeki gecikmeyi Arttır/Azalt</s:String>
     <!--<s:String x:Key="S.Command.ScaleDelay">Scale delay of frames</s:String>-->
     <s:String x:Key="S.Command.Zoom100">Yakınlaştırma miktarını %100 olarak ayarla</s:String>
     <!--<s:String x:Key="S.Command.SizeToContent">Adjust the window to the frame size</s:String>-->
     <!--<s:String x:Key="S.Command.FitImage">Fit image to the available window size</s:String>-->
-    <s:String x:Key="S.Command.FirstFrame">İlk çerçeveyi seç</s:String>
-    <s:String x:Key="S.Command.PreviousFrame">Bir önceki çerçeveyi seç</s:String>
+    <s:String x:Key="S.Command.FirstFrame">İlk kareyi seç</s:String>
+    <s:String x:Key="S.Command.PreviousFrame">Bir önceki kareyi seç</s:String>
     <s:String x:Key="S.Command.Play">Animasyonu oynat</s:String>
-    <s:String x:Key="S.Command.NextFrame">Bir sonraki çerçeveyi seç</s:String>
-    <s:String x:Key="S.Command.LastFrame">Sonuncu çerçeveyi seç</s:String>
+    <s:String x:Key="S.Command.NextFrame">Bir sonraki kareyi seç</s:String>
+    <s:String x:Key="S.Command.LastFrame">Sonuncu kareyi seç</s:String>
     <s:String x:Key="S.Command.Undo">Geri al</s:String>
     <s:String x:Key="S.Command.Redo">Yinele</s:String>
     <s:String x:Key="S.Command.Reset">Projedeki tüm değişiklikleri geri al</s:String>
     <!--<s:String x:Key="S.Command.Copy">Copy the selected frames and store them in the clipboard</s:String>-->
     <!--<s:String x:Key="S.Command.Cut">Cut the selected frames and store them in the clipboard</s:String>-->
     <!--<s:String x:Key="S.Command.Paste">Paste the frames from the clipboard</s:String>-->
-    <s:String x:Key="S.Command.Delete">Seçili tüm çerçeveleri sil</s:String>
-    <s:String x:Key="S.Command.DeletePrevious">Önceki tüm çerçeveleri sil</s:String>
-    <s:String x:Key="S.Command.DeleteNext">Sonraki tüm çerçeveleri sil</s:String>
+    <s:String x:Key="S.Command.Delete">Seçili tüm kareleri sil</s:String>
+    <s:String x:Key="S.Command.DeletePrevious">Önceki tüm kareleri sil</s:String>
+    <s:String x:Key="S.Command.DeleteNext">Sonraki tüm kareleri sil</s:String>
     <!--<s:String x:Key="S.Command.RemoveDuplicates">Remove duplicates</s:String>-->
-    <s:String x:Key="S.Command.Reduce">Çerçeve sayısını azalt</s:String>
+    <s:String x:Key="S.Command.Reduce">Kare sayısını azalt</s:String>
     <s:String x:Key="S.Command.Reverse">Animasyonu ters çevir</s:String>
     <!--<s:String x:Key="S.Command.Yoyo">Makes the animation go forward and backwards</s:String>-->
     <!--<s:String x:Key="S.Command.MoveLeft">Move the selected frame to the left</s:String>-->
     <!--<s:String x:Key="S.Command.MoveRight">Move the selected frame to the right</s:String>-->
-    <s:String x:Key="S.Command.Resize">Tüm çerçeveleri yeniden boyutlandır</s:String>
-    <s:String x:Key="S.Command.Crop">Tüm çerçeveleri kırp</s:String>
+    <s:String x:Key="S.Command.Resize">Tüm kareleri yeniden boyutlandır</s:String>
+    <s:String x:Key="S.Command.Crop">Tüm kareleri kırp</s:String>
     <!--<s:String x:Key="S.Command.FlipRotate">Flip or rotate the frames</s:String>-->
     <!--<s:String x:Key="S.Command.Caption">Add a caption</s:String>-->
     <!--<s:String x:Key="S.Command.FreeText">Add a free-floating text</s:String>-->
@@ -106,7 +106,7 @@
     <!--<s:String x:Key="S.Command.Obfuscate">Hide sensitive parts on your frames</s:String>-->
     <!--<s:String x:Key="S.Command.Cinemagraph">Use the drawing tools to select which parts of the frame should not remain static throughout the animation</s:String>-->
     <!--<s:String x:Key="S.Command.Progress">Progress bar or text with playback details</s:String>-->
-    <s:String x:Key="S.Command.SelectAll">Tüm çerçeveleri seç</s:String>
+    <s:String x:Key="S.Command.SelectAll">Tüm kareleri seç</s:String>
     <!--<s:String x:Key="S.Command.GoTo">Navigate to frame by index</s:String>-->
     <!--<s:String x:Key="S.Command.InverseSelection">Inverse the selection of frames</s:String>-->
     <!--<s:String x:Key="S.Command.Unselect">Unselect all frames</s:String>-->
@@ -624,7 +624,7 @@
     <s:String x:Key="S.InsertFrames.FitCanvas">Tuval üzerine görüntüyü sığdır</s:String>
     <s:String x:Key="S.InsertFrames.FitCanvas.Info">Tuvali, her iki görüntüyü de sığacak şekilde yeniden boyutlandırır (sol üst köşeden başlar).</s:String>
     <s:String x:Key="S.InsertFrames.DifferentSizes">Kare boyutlanrı arasında farklılıklar var. Kareleri eklemeden önce bunu çözmeniz gerekiyor.</s:String>
-    <s:String x:Key="S.InsertFrames.InsertedFrames">Eklenen Çerçeve(ler)</s:String>
+    <s:String x:Key="S.InsertFrames.InsertedFrames">Eklenen Kare(ler)</s:String>
     <s:String x:Key="S.InsertFrames.CurrentFrames">Mevcut Kare(ler)</s:String>
     <s:String x:Key="S.InsertFrames.ImageSize">Görüntü Boyutu:</s:String>
     <s:String x:Key="S.InsertFrames.ImagePosition">Görüntü Pozisyonu:</s:String>
@@ -730,13 +730,13 @@
     <s:String x:Key="S.Editor.InvalidLoadingProjects">Geçersiz Yükleme - Tek seferde birden fazla proje yükleyemezsin. Tek bir proje seçmeyi dene.</s:String>
     
     <!--Editor • File dialogs (does not work with new line characters)-->
-    <s:String x:Key="S.Editor.File.OpenMedia">Medya (Resim veya Video) Aç</s:String>
-    <s:String x:Key="S.Editor.File.OpenMediaProject">Bir Medya (Görünütü veya Video) yada bir Proje Dosyası Aç</s:String>
-    <!--<s:String x:Key="S.Editor.File.All">All supported files</s:String>-->
-    <!--<s:String x:Key="S.Editor.File.Image">Image</s:String>-->
-    <!--<s:String x:Key="S.Editor.File.Video">Video</s:String>-->
-    <!--<s:String x:Key="S.Editor.File.Project">ScreenToGif project</s:String>-->
-    <!--<s:String x:Key="S.Editor.File.Gif">Gif animation</s:String>-->
+    <s:String x:Key="S.Editor.File.OpenMedia">Medya (Görüntü veya Video) Aç</s:String>
+    <s:String x:Key="S.Editor.File.OpenMediaProject">Bir Medya (Görüntü veya Video) yada bir Proje Dosyası Aç</s:String>
+    <s:String x:Key="S.Editor.File.All">Tüm desteklenen dosyalar</s:String>
+    <s:String x:Key="S.Editor.File.Image">Görüntü</s:String>
+    <s:String x:Key="S.Editor.File.Video">Video</s:String>
+    <s:String x:Key="S.Editor.File.Project">ScreenToGif projesi</s:String>
+    <s:String x:Key="S.Editor.File.Gif">Gif animasyonu</s:String>
     <!--<s:String x:Key="S.Editor.File.Apng">Animated Png</s:String>-->
     <!--<s:String x:Key="S.Editor.File.Avi">Avi video</s:String>-->
     <!--<s:String x:Key="S.Editor.File.Mkv">Matroska video</s:String>-->
@@ -774,7 +774,7 @@
     <!--Editor • File tab • Save/Discard-->
     <s:String x:Key="S.Editor.File.Save">Farklı Kaydet</s:String>
     <s:String x:Key="S.Editor.File.Load">Medya veya\nProje</s:String>
-    <!--<s:String x:Key="S.Editor.File.LoadRecent">Recent&#x0d;Projects</s:String>-->
+    <s:String x:Key="S.Editor.File.LoadRecent">Son&#x0d;Projeler</s:String>
     <s:String x:Key="S.Editor.File.SaveProject">Proje Olarak&#x0d;Kaydet</s:String>
     <s:String x:Key="S.Editor.File.Discard">Projeyi\nİptal et</s:String>
     
@@ -836,7 +836,7 @@
     <s:String x:Key="S.Editor.Edit.Delay">Gecikme Süresi</s:String>
     <s:String x:Key="S.Editor.Edit.Delay.Override">Değiştir</s:String>
     <s:String x:Key="S.Editor.Edit.Delay.IncreaseDecrease">Arttırma yada&#x0d;Azaltma</s:String>
-    <!--<s:String x:Key="S.Editor.Edit.Delay.Scale">Scale</s:String>-->
+    <s:String x:Key="S.Editor.Edit.Delay.Scale">Ölçek</s:String>
     
     <!--Editor • Image • Size and Rotation-->
     <s:String x:Key="S.Editor.Image.SizePosition">Boyut ve Konum</s:String>
@@ -849,17 +849,17 @@
     <s:String x:Key="S.Editor.Image.Caption">Başlık</s:String>
     <s:String x:Key="S.Editor.Image.FreeText">Serbest Yazı</s:String>
     <s:String x:Key="S.Editor.Image.TitleFrame">Başlık Karesi</s:String>
-    <!--<s:String x:Key="S.Editor.Image.KeyStrokes">Key&#x0d;Strokes</s:String>-->
+    <s:String x:Key="S.Editor.Image.KeyStrokes">Tuş&#x0d;Vuruşları</s:String>
     
     <!--Editor • Image tab • Overlay-->
     <s:String x:Key="S.Editor.Image.Overlay">Kaplama</s:String>
     <s:String x:Key="S.Editor.Image.FreeDrawing">Serbest\nÇizim</s:String>
-    <!--<s:String x:Key="S.Editor.Image.Shape">Shapes</s:String>-->
-    <!--<s:String x:Key="S.Editor.Image.Clicks">Mouse&#x0d;Clicks</s:String>-->
+    <s:String x:Key="S.Editor.Image.Shape">Şekiller</s:String>
+    <s:String x:Key="S.Editor.Image.Clicks">Fare&#x0d;Tıklamaları</s:String>
     <s:String x:Key="S.Editor.Image.Watermark">Filigran</s:String>
     <s:String x:Key="S.Editor.Image.Cinemagraph">Cinemagraph</s:String>
     <s:String x:Key="S.Editor.Image.Border">Kenar</s:String>
-    <!--<s:String x:Key="S.Editor.Image.Shadow">Shadow</s:String>-->
+    <s:String x:Key="S.Editor.Image.Shadow">Gölge</s:String>
     <!--<s:String x:Key="S.Editor.Image.Progress">Progress</s:String>-->
     <!--<s:String x:Key="S.Editor.Image.Obfuscate">Obfuscate</s:String>-->
 
@@ -874,7 +874,7 @@
     <s:String x:Key="S.Editor.Statistics.TotalDuration">Toplam Süre</s:String>
     <s:String x:Key="S.Editor.Statistics.FrameSize">Kare Boyutu</s:String>
     <s:String x:Key="S.Editor.Statistics.AverageDuration">Ortalama Gecikme Süresi</s:String>
-    <!--<s:String x:Key="S.Editor.Statistics.CurrentTime">Current time</s:String>-->
+    <s:String x:Key="S.Editor.Statistics.CurrentTime">Güncel zaman</s:String>
     <!--<s:String x:Key="S.Editor.Statistics.CurrentTime.Info">The current time (cumulative) based on the current frame being displayed.</s:String>-->
     <!--<s:String x:Key="S.Editor.Statistics.FrameDpi">Frame DPI and scale</s:String>-->
     <s:String x:Key="S.Editor.Statistics.SelectedFrame">Seçili Kare</s:String>
@@ -883,26 +883,26 @@
     <s:String x:Key="S.Editor.Clipboard.InvalidCut.Title">Eylemi Kes</s:String>
     <s:String x:Key="S.Editor.Clipboard.InvalidCut.Instruction">Tüm kareleri kesemezsiniz.</s:String>
     <s:String x:Key="S.Editor.Clipboard.InvalidCut.Message">Kayıt en az bir kare içermeli.</s:String>
-    <!--<s:String x:Key="S.Editor.DeleteAll.Title">Remove All</s:String>-->
-    <!--<s:String x:Key="S.Editor.DeleteAll.Instruction">Are you sure that you want to remove all frames?</s:String>-->
-    <!--<s:String x:Key="S.Editor.DeleteAll.Message">This action will discard the current open project and cannot be undone. Would you like to continue?</s:String>-->
+    <s:String x:Key="S.Editor.DeleteAll.Title">Tümünü kaldır</s:String>
+    <s:String x:Key="S.Editor.DeleteAll.Instruction">Tüm kareleri kaldırmak istediğinize emin misiniz?</s:String>
+    <s:String x:Key="S.Editor.DeleteAll.Message">Bu işlem mevcut projeyi yok sayacaktır ve geri döndürülemez. Devam etmek istiyor musunuz?</s:String>
     <s:String x:Key="S.Editor.DiscardProject.Title">Tümünü Kaldır</s:String>
     <s:String x:Key="S.Editor.DiscardProject.Instruction">Tüm kareleri silmek mi istiyorsunuz?</s:String>
     <s:String x:Key="S.Editor.DiscardProject.Message">Tüm kareleri silmeyi deniyorsunuz.\n\rBu eylem geri alınamaz.</s:String>
     <!--<s:String x:Key="S.Editor.DiscardPreviousProject.Instruction">Do you want to discard the previous project?</s:String>-->
     <!--<s:String x:Key="S.Editor.DiscardPreviousProject.Message">If you choose not to do so, the previous project will be available to open via Recents Projects.</s:String>-->
-    <!--<s:String x:Key="S.Editor.DeleteFrames.Title">Delete Frames</s:String>-->
-    <!--<s:String x:Key="S.Editor.DeleteFrames.Instruction">Are you sure that you want to delete?</s:String>-->
-    <!--<s:String x:Key="S.Editor.DeleteFrames.Message">This action will delete {0} frame(s).&#x0d;You'll be able to undo this later.</s:String>-->
+    <s:String x:Key="S.Editor.DeleteFrames.Title">Kareleri Sil</s:String>
+    <s:String x:Key="S.Editor.DeleteFrames.Instruction">Silmek istediğinize emin misiniz?</s:String>
+    <s:String x:Key="S.Editor.DeleteFrames.Message">Bu işlem şu sayıda {0} çerçeve(leri) silecektir.&#x0d;Bu işlem sonradan geri döndürülebilir..</s:String>
     <!--<s:String x:Key="S.Editor.Exiting.Title">Exiting the Editor</s:String>-->
-    <!--<s:String x:Key="S.Editor.Exiting.Instruction">Are you sure that you want to exit?</s:String>-->
-    <!--<s:String x:Key="S.Editor.Exiting.Message">The current project that you were working on can be opened again via 'Recent Projects'.</s:String>-->
-    <!--<s:String x:Key="S.Editor.Exiting.Message2">The current project that you were working on can be opened again via 'Recent Projects', but don't forget that after a few days, it will be automatically deleted.</s:String>-->
+    <s:String x:Key="S.Editor.Exiting.Instruction">Çıkmak istediğinize emin misiniz?</s:String>
+    <s:String x:Key="S.Editor.Exiting.Message">Üzerinde çalıştığınız mevcut proje 'Son Projeler' kısmından tekrar açılabilir.</s:String>
+    <s:String x:Key="S.Editor.Exiting.Message2">Üzerinde çalıştığınız mevcut proje 'Son Projeler' kısmından tekrar açılabilir, fakat bir kaç gün sonra otomatik olarak silineceğini unutmayın.</s:String>
     <s:String x:Key="S.Editor.DragDrop.Invalid.Title">Geçersiz Sürükle ve Bırak</s:String>
     <s:String x:Key="S.Editor.DragDrop.MultipleFiles.Instruction">Tek seferde birden fazla dosyayı içe aktaramazsınız</s:String>
     <s:String x:Key="S.Editor.DragDrop.MultipleFiles.Message">Tek dosya seçmeyi dene.</s:String>
-    <!--<s:String x:Key="S.Editor.DragDrop.Invalid.Instruction">Impossible to load file</s:String>-->
-    <!--<s:String x:Key="S.Editor.DragDrop.Invalid.Message">The file could not be loaded because it has an invalid format.</s:String>-->
+    <s:String x:Key="S.Editor.DragDrop.Invalid.Instruction">Dosyayı yüklemek imkansız</s:String>
+    <s:String x:Key="S.Editor.DragDrop.Invalid.Message">Dosya yüklenemedi çünkü dosya geçerli bir formatta değil.</s:String>
     <s:String x:Key="S.Editor.DragDrop.InvalidProject.Instruction">Tek seferde birden fazla proje içe aktaramazsın.</s:String>
     <s:String x:Key="S.Editor.DragDrop.InvalidProject.Message">Yalnızca bir proje seçmeyi deneyin.</s:String>
 
@@ -934,13 +934,13 @@
     <!--<s:String x:Key="S.Editor.Warning.DifferentDpi">You tried to import multiple images with different DPIs, which is not supported. Some of them got imported, the others need to be imported separately.</s:String>-->
     
     <!--Editor • Status-->
-    <!--<s:String x:Key="S.Editor.RetrievingFromCache">Retrieving frames from the cache</s:String>-->
+    <s:String x:Key="S.Editor.RetrievingFromCache">Kareler önbellekten geri çağırılıyor.</s:String>
     <s:String x:Key="S.Editor.UpdatingFrames">Kareler Güncelleniyor</s:String>
     <s:String x:Key="S.Editor.PreparingImport">İçe aktarmaya hazırlanıyor</s:String>
     <s:String x:Key="S.Editor.ImportingFrames">Kareler İçe aktarılıyor</s:String>
-    <!--<s:String x:Key="S.Editor.AnalyzingDuplicates">Analyzing duplicates</s:String>-->
-    <!--<s:String x:Key="S.Editor.AdjustingDuplicatesDelay">Adjusting the delay</s:String>-->
-    <!--<s:String x:Key="S.Editor.DiscardingDuplicates">Discarding duplicates</s:String>-->
+    <s:String x:Key="S.Editor.AnalyzingDuplicates">Tekrarlananlar analiz ediliyor</s:String>
+    <s:String x:Key="S.Editor.AdjustingDuplicatesDelay">Gecikmeyi dengele</s:String>
+    <s:String x:Key="S.Editor.DiscardingDuplicates">Tekrarlananlar yok sayılıyor</s:String>
     <s:String x:Key="S.Editor.DiscardingFrames">Kareleri İptal Etme</s:String>
     <s:String x:Key="S.Editor.DiscardingFolders">Klasörleri İptal Etme</s:String>
     <s:String x:Key="S.Editor.ResizingFrames">Kareler Yeniden Boyutlandırılıyor</s:String>
@@ -950,13 +950,13 @@
     <s:String x:Key="S.Editor.ApplyingFlipRotate">Çevirme/Döndürmeler Karelere Uygulanıyor</s:String>
     <s:String x:Key="S.Editor.ChangingDelay">Gecikme Değiştiriliyor</s:String>
     <s:String x:Key="S.Editor.ApplyingTransition">Geçiş Efekti Uygulanıyor</s:String>
-    <!--<s:String x:Key="S.Editor.PreparingSaving">Preparing to save</s:String>-->
+    <s:String x:Key="S.Editor.PreparingSaving">Kayıt edilmeye hazırlanıyor</s:String>
 
     <!--Editor • Frame list-->
     <s:String x:Key="S.Editor.List.Frame">Kare:</s:String>
-    <s:String x:Key="S.Editor.List.OpenImage">Resim Aç</s:String>
+    <s:String x:Key="S.Editor.List.OpenImage">Görüntü Aç</s:String>
     <!--<s:String x:Key="S.Editor.List.ExploreFolder">Explore Folder</s:String>-->
-    <s:String x:Key="S.Editor.List.ExportImage">İçe Resim Aktar</s:String>
+    <s:String x:Key="S.Editor.List.ExportImage">İçe Görüntü Aktar</s:String>
     
     <!--Editor • Go to-->
     <s:String x:Key="S.GoTo.Title">Kareye Git</s:String>
@@ -982,7 +982,7 @@
     <s:String x:Key="S.Hint.Cut">{0} kare kesildi</s:String>
     <s:String x:Key="S.Hint.Copy">{0} kare kopyalandı</s:String>
     <s:String x:Key="S.Hint.Paste">{0} kare yapıştırıldı</s:String>
-    <!--<s:String x:Key="S.Hint.Zoom">Zoom set to {0}%</s:String>-->
+    <s:String x:Key="S.Hint.Zoom">Yakınlaştırmayı ayarla {0}%</s:String>
     <s:String x:Key="S.Hint.SelectAll">Tüm kareler seçildi</s:String>
     <s:String x:Key="S.Hint.SelectSingle">Kare #{0} seçildi</s:String>
     <s:String x:Key="S.Hint.SelectInverse">Seçim tersine çevrilirdi</s:String>
@@ -992,43 +992,43 @@
     <s:String x:Key="S.Hint.Yoyo">Yoyo etkisi uygulandı</s:String>
     <s:String x:Key="S.Hint.MoveLeft">Kare(ler) sola taşındı</s:String>
     <s:String x:Key="S.Hint.MoveRight">Kare(ler) sağa taşındı</s:String>
-    <!--<s:String x:Key="S.Hint.Resize">Frames resized</s:String>-->
+    <s:String x:Key="S.Hint.Resize">Kareler yeniden boyutlandırıldı</s:String>
     <s:String x:Key="S.Hint.Crop">Kareler kesildi</s:String>
-    <!--<s:String x:Key="S.Hint.FlipRotate">Frames flipped/rotated</s:String>-->
+    <s:String x:Key="S.Hint.FlipRotate">Kareler ters çevirildi/döndürüldü</s:String>
     <!--<s:String x:Key="S.Hint.FlipRotate2">The flip action applies to the selected frames and the rotate applies to all frames</s:String>-->
     <!--<s:String x:Key="S.Hint.ApplyAll">This action applies to all frames</s:String>-->
-    <!--<s:String x:Key="S.Hint.ApplySelected">This action applies to selected frames</s:String>-->
+    <s:String x:Key="S.Hint.ApplySelected">Bu işlem seçili karelere uygulanır</s:String>
     <!--<s:String x:Key="S.Hint.ApplySelectedOrAll">This action applies to all or selected frames, depending on your settings</s:String>-->
     <!--<s:String x:Key="S.Hint.Cinemagraph">The cinemagraph applies to all frames based on the first frame</s:String>-->
     <!--<s:String x:Key="S.Hint.Overlay">Overlay applied</s:String>-->
-    <!--<s:String x:Key="S.Hint.TitleFrame">Title frame created</s:String>-->
-    <!--<s:String x:Key="S.Hint.TitleFrame2">The title frame will be inserted before the selected frame</s:String>-->
+    <s:String x:Key="S.Hint.TitleFrame">Başlık karesi oluşturuldu</s:String>
+    <s:String x:Key="S.Hint.TitleFrame2">Başlık karesi seçili karenin öncesine yerleştirilecek</s:String>
     <!--<s:String x:Key="S.Hint.Delay">Duration (delay) altered</s:String>-->
     <s:String x:Key="S.Hint.Transition">Geçiş eklendi</s:String>
-    <!--<s:String x:Key="S.Hint.Reduce">Framerate reduced</s:String>-->
-    <!--<s:String x:Key="S.Hint.Duplicates">Duplicates removed</s:String>-->
+    <s:String x:Key="S.Hint.Reduce">Kare oranı azaltıldı</s:String>
+    <s:String x:Key="S.Hint.Duplicates">Tekrarlananlar kaldırıldı</s:String>
     
     <!--Editor • Action panel-->
     <s:String x:Key="S.Action.Hide">Gizle</s:String>
     <s:String x:Key="S.Action.Apply">Uygula</s:String>
-    <!--<s:String x:Key="S.Action.Open">Open</s:String>-->
+    <s:String x:Key="S.Action.Open">Aç</s:String>
     <s:String x:Key="S.Action.Save">Kaydet</s:String>
     <s:String x:Key="S.Action.Cancel">İptal</s:String>
 
     <!--Editor • Recent projects-->
-    <!--<s:String x:Key="S.Recent.Projects">Recent Projects</s:String>-->
-    <!--<s:String x:Key="S.Recent.Searching">Looking for recent projects...</s:String>-->
-    <!--<s:String x:Key="S.Recent.Date">Creation date</s:String>-->
-    <!--<s:String x:Key="S.Recent.Frames">Frame count</s:String>-->
-    <!--<s:String x:Key="S.Recent.Warning.NoSelection">There's no project selected. Select a project of the list to load.</s:String>-->
-    <!--<s:String x:Key="S.Recent.Warning.SameProject">This project is already being displayed by this editor instance.</s:String>-->
-    <!--<s:String x:Key="S.Recent.Warning.AnotherEditor">This project was already opened by another editor instance. A project cannot be opened a second time if it's already open on another editor.</s:String>-->
+    <s:String x:Key="S.Recent.Projects">Son Projeler</s:String>
+    <s:String x:Key="S.Recent.Searching">Son projelere bakılıyor...</s:String>
+    <s:String x:Key="S.Recent.Date">Oluşturulma tarihi</s:String>
+    <s:String x:Key="S.Recent.Frames">Kare sayısı</s:String>
+    <s:String x:Key="S.Recent.Warning.NoSelection">Seçili proje yok. Yüklemek için listeden bir proje seçin.</s:String>
+    <s:String x:Key="S.Recent.Warning.SameProject">Bu proje bu editörde zaten görüntüleniyor.</s:String>
+    <s:String x:Key="S.Recent.Warning.AnotherEditor">Bu proje başka bir editörde halihazırda açık. Bir proje başka bir editörde açık olmadığı sürece ikinci defa açılamaz.</s:String>-->
     
     <!--Editor • Clipboard-->
     <s:String x:Key="S.Clipboard.Entries">Pano Girdileri</s:String>
     <s:String x:Key="S.Clipboard.Entry">Pano Girdisi:</s:String>
-    <!--<s:String x:Key="S.Clipboard.Entry.Image">{0} image</s:String>-->
-    <!--<s:String x:Key="S.Clipboard.Entry.Images">{0} images</s:String>-->
+    <s:String x:Key="S.Clipboard.Entry.Image">{0} görüntü</s:String>
+    <s:String x:Key="S.Clipboard.Entry.Images">{0} görüntüler</s:String>
     <s:String x:Key="S.Clipboard.Explore">İçerik Keşfet</s:String>
     <s:String x:Key="S.Clipboard.Remove">Kaldır</s:String>
     <s:String x:Key="S.Clipboard.Behavior">Davranışı Yapıştır</s:String>
@@ -1050,7 +1050,7 @@
     <s:String x:Key="S.Crop.Bottom">Alt:</s:String>
     <s:String x:Key="S.Crop.Right">Sağ:</s:String>
     <s:String x:Key="S.Crop.Warning">Kırpılan alan geçerli kare boyutundan daha küçük olmalıdır.</s:String>
-    <!--<s:String x:Key="S.Crop.Warning.Bigger">The crop selection has to be bigger than 10x10 pixels.</s:String>-->
+    <s:String x:Key="S.Crop.Warning.Bigger">Seçili kırpma alanı 10x10 pikselden daha büyük olmalıdır.</s:String>-->
     
     <!--Editor • Flip/rotate-->
     <s:String x:Key="S.FlipRotate.FlipHorizontal">Yatay Çevir</s:String>
@@ -1062,7 +1062,7 @@
     <s:String x:Key="S.Reduce.Header">Kare Sayısını Azalt</s:String>
     <s:String x:Key="S.Reduce.Factor">Kaç Karede Bir:</s:String>
     <s:String x:Key="S.Reduce.Count">Kaldırılacak Kare Sayısı:</s:String>
-    <!--<s:String x:Key="S.Reduce.Delay">Delay adjustment:</s:String>-->
+    <s:String x:Key="S.Reduce.Delay">Gecikme dengelemesi:</s:String>
     <!--<s:String x:Key="S.Reduce.Delay.NoAdjustment">Don't adjust</s:String>-->
     <!--<s:String x:Key="S.Reduce.Delay.Previous">Sum with the previous frame</s:String>-->
     <!--<s:String x:Key="S.Reduce.Delay.Evenly">Sum evenly with the remaining frames</s:String>-->
@@ -1074,15 +1074,15 @@
     <!--<s:String x:Key="S.Reduce.Warning.SmallerThanFactor">The selection of frames must be greater than the removal factor, in order for the feature to be able to remove anything.</s:String>-->
     
     <!--Editor • Remove duplicates-->
-    <!--<s:String x:Key="S.RemoveDuplicates.Header">Remove duplicates</s:String>-->
-    <!--<s:String x:Key="S.RemoveDuplicates.Similarity">Similarity (%):</s:String>-->
+    <s:String x:Key="S.RemoveDuplicates.Header">Tekrarlananları kaldır</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Similarity">Benzerlik (%):</s:String>
     <!--<s:String x:Key="S.RemoveDuplicates.Removal">Frame removal:</s:String>-->
-    <!--<s:String x:Key="S.RemoveDuplicates.Removal.First">Remove the first frame</s:String>-->
-    <!--<s:String x:Key="S.RemoveDuplicates.Removal.Last">Remove the last frame</s:String>-->
-    <!--<s:String x:Key="S.RemoveDuplicates.Delay">Delay adjustment:</s:String>-->
+    <s:String x:Key="S.RemoveDuplicates.Removal.First">İlk kareyi kaldır</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal.Last">Son kareyi kaldır</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay">Gecikme dengelemesi:</s:String>
     <!--<s:String x:Key="S.RemoveDuplicates.Delay.NoAdjustment">Don't adjust</s:String>-->
-    <!--<s:String x:Key="S.RemoveDuplicates.Delay.Average">Use the average</s:String>-->
-    <!--<s:String x:Key="S.RemoveDuplicates.Delay.Sum">Use the sum</s:String>-->
+    <s:String x:Key="S.RemoveDuplicates.Delay.Average">Ortalamayı kullan</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.Sum">Toplamı kullan</s:String>
     <!--<s:String x:Key="S.RemoveDuplicates.Info">This action analyzes each frame (pixel by pixel) and removes the ones that are at least {0} % similar to its immediate neighbor.&#x0d;You can choose if you want to adjust the delay (duration of exhibition) of the frames.</s:String>-->
     
     <!--Editor • Captions-->
@@ -1100,10 +1100,10 @@
     <s:String x:Key="S.Caption.Horizontal">Yatay:</s:String>
 
     <!--Editor • Key strokes-->
-    <!--<s:String x:Key="S.KeyStrokes">Key Strokes</s:String>-->
-    <!--<s:String x:Key="S.KeyStrokes.Keys">Keys</s:String>-->
+    <s:String x:Key="S.KeyStrokes">Tuş vuruşları</s:String>
+    <s:String x:Key="S.KeyStrokes.Keys">Tuşlar</s:String>
     <s:String x:Key="S.KeyStrokes.Separator">Ayraç</s:String>
-    <!--<s:String x:Key="S.KeyStrokes.Edit">Edit your key strokes</s:String>-->
+    <s:String x:Key="S.KeyStrokes.Edit">Tuş vuruşlarını düzenle</s:String>
     <!--<s:String x:Key="S.KeyStrokes.IgnoreModifiers">Ignore Ctrl, Alt, Shift, and Windows keys while not being used as modifiers.</s:String>-->
     <!--<s:String x:Key="S.KeyStrokes.IgnoreModifiers.Info">It will ignore lone key presses such as "Control", but it will not ignore "Control + C".</s:String>-->
     <!--<s:String x:Key="S.KeyStrokes.Extend">Extend the exhibition of the key strokes.</s:String>-->
@@ -1111,7 +1111,7 @@
     <!--<s:String x:Key="S.KeyStrokes.By">By (ms):</s:String>-->
     <!--<s:String x:Key="S.KeyStrokes.Warning.None">There's no keystrokes on your recording.</s:String>-->
     <!--<s:String x:Key="S.KeyStrokes.Edit.Title">ScreenToGif - Key Strokes Editor</s:String>-->
-    <!--<s:String x:Key="S.KeyStrokes.Edit.Number">Frame number</s:String>-->
+    <s:String x:Key="S.KeyStrokes.Edit.Number">Kare numarası</s:String>
     <!--<s:String x:Key="S.KeyStrokes.Edit.Keys">Detected key strokes</s:String>-->
     <!--<s:String x:Key="S.KeyStrokes.Edit.Remove">Remove key stroke</s:String>-->
     <!--<s:String x:Key="S.KeyStrokes.Edit.Add">Add a key stroke:</s:String>-->
@@ -1136,22 +1136,22 @@
     <s:String x:Key="S.FreeDrawing.WarningSelection">Serbest Çizimin uygulanması için en az bir kare seçmeniz gerekiyor.</s:String>
     
     <!--Editor • Shapes-->
-    <!--<s:String x:Key="S.Shapes.Mode.Insert">Insert</s:String>-->
-    <!--<s:String x:Key="S.Shapes.Shapes">Shapes</s:String>-->
-    <!--<s:String x:Key="S.Shapes.Shapes.Radius">Radius:</s:String>-->
+    <s:String x:Key="S.Shapes.Mode.Insert">Yerleştir</s:String>
+    <s:String x:Key="S.Shapes.Shapes">Şekiller</s:String>>
+    <s:String x:Key="S.Shapes.Shapes.Radius">Yarıçap:</s:String>
     <!--<s:String x:Key="S.Shapes.Shapes.Dashes">Dashes:</s:String>-->
-    <!--<s:String x:Key="S.Shapes.Shapes.ResetRotatio">Reset rotation</s:String>-->
-    <!--<s:String x:Key="S.Shapes.Shapes.Remove">Remove</s:String>-->
-    <!--<s:String x:Key="S.Shapes.Fill">Fill</s:String>-->
+    <s:String x:Key="S.Shapes.Shapes.ResetRotatio">Dönüklüğü sıfırla</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Remove">Kaldır</s:String>
+    <s:String x:Key="S.Shapes.Fill">Doldur</s:String>
 
     <!--Editor • Mouse clicks-->
-    <!--<s:String x:Key="S.MouseClicks">Mouse Clicks</s:String>-->
+    <s:String x:Key="S.MouseClicks">Fare Tıklamaları</s:String>
     <!--<s:String x:Key="S.MouseClicks.Warning.None">There's no detected mouse clicks on your project.</s:String>-->
     
     <!--Editor • Watermark-->
     <s:String x:Key="S.Watermark.Image">Görüntü</s:String>
     <s:String x:Key="S.Watermark.File">Dosya:</s:String>
-    <!--<s:String x:Key="S.Watermark.File.Nothing">None selected</s:String>-->
+    <s:String x:Key="S.Watermark.File.Nothing">Hiçbir şey seçilmedi</s:String>
     <s:String x:Key="S.Watermark.Opacity">Saydamlık:</s:String>
     <s:String x:Key="S.Watermark.Select">Bir Görüntü Seç</s:String>
     <s:String x:Key="S.Watermark.WarningNoImage">Seçili kare(lerin) uygulanması için bir görüntü seçmelisiniz.</s:String>
@@ -1162,16 +1162,16 @@
     <!--<s:String x:Key="S.Border.Info">Use negative values to make the border expand the image. When doing so, the border will be applied to all frames.&#x0d;If no negative value being used, the border will be applied only to the selected frames.</s:String>-->
 
     <!--Editor • Shadow-->
-    <!--<s:String x:Key="S.Shadow.ShadowColor">Shadow color:</s:String>-->
-    <!--<s:String x:Key="S.Shadow.BackgroundColor">Background color:</s:String>-->
-    <!--<s:String x:Key="S.Shadow.Direction">Direction:</s:String>-->
-    <!--<s:String x:Key="S.Shadow.BlurRadius">Blur radius:</s:String>-->
-    <!--<s:String x:Key="S.Shadow.Depth">Depth:</s:String>-->
+    <s:String x:Key="S.Shadow.ShadowColor">Gölge rengi:</s:String>
+    <s:String x:Key="S.Shadow.BackgroundColor">Arkaplan rengi:</s:String>
+    <s:String x:Key="S.Shadow.Direction">Doğrultu:</s:String>
+    <s:String x:Key="S.Shadow.BlurRadius">Bulanıklık yarıçapı:</s:String>
+    <s:String x:Key="S.Shadow.Depth">Derinlik:</s:String>
     
     <!--Editor • Obfuscate-->
     <!--<s:String x:Key="S.Obfuscate.Options">Obfuscation options</s:String>-->
-    <!--<s:String x:Key="S.Obfuscate.PixelSize">Pixel size:</s:String>-->
-    <!--<s:String x:Key="S.Obfuscate.UseAverage">Calculate the average color for each pixelated block.</s:String>-->
+    <s:String x:Key="S.Obfuscate.PixelSize">Piksel boyutu:</s:String>
+    <s:String x:Key="S.Obfuscate.UseAverage">Her bir pikselleştirilmiş blok için ortalama rengi hesapla.</s:String>
     <!--<s:String x:Key="S.Obfuscate.Info">Use the selection tool to select the rectangle that should be pixelated.</s:String>-->
     <!--<s:String x:Key="S.Obfuscate.Warning">You didn't select anything. Please use the selection tool to select the rectangle that should be pixelated.</s:String>-->
     
@@ -1179,24 +1179,24 @@
     <s:String x:Key="S.Progress.Type">Tür</s:String>
     <!--<s:String x:Key="S.Progress.Type.Bar">Bar</s:String>-->
     <s:String x:Key="S.Progress.Type.Text">Metin</s:String>
-    <!--<s:String x:Key="S.Progress.Precision">Precision:</s:String>-->
+    <s:String x:Key="S.Progress.Precision">Hassasiyet:</s:String>
     <s:String x:Key="S.Progress.Precision.Minutes">Dakika</s:String>
     <s:String x:Key="S.Progress.Precision.Seconds">Saniye</s:String>
     <s:String x:Key="S.Progress.Precision.Milliseconds">Salise</s:String>
     <s:String x:Key="S.Progress.Precision.Percentage">Oran</s:String>
     <s:String x:Key="S.Progress.Precision.Count">Kare Sayısı</s:String>
-    <!--<s:String x:Key="S.Progress.Precision.DateOfRecording">Actual date/time</s:String>-->
+    <s:String x:Key="S.Progress.Precision.DateOfRecording">Güncel tarih/zaman</s:String>
     <!--<s:String x:Key="S.Progress.Precision.Custom">Custom</s:String>-->
     <s:String x:Key="S.Progress.Precision.ShowTotal">Toplamı göster.</s:String>
     <!--<s:String x:Key="S.Progress.Format">Format:</s:String>-->
     <!--<s:String x:Key="S.Progress.Format.Header">Format</s:String>-->
-    <!--<s:String x:Key="S.Progress.Format.Milliseconds">$ms = milliseconds</s:String>-->
-    <!--<s:String x:Key="S.Progress.Format.Seconds">$s = seconds</s:String>-->
-    <!--<s:String x:Key="S.Progress.Format.Minutes">$m = minutes</s:String>-->
-    <!--<s:String x:Key="S.Progress.Format.Percentage">$p = percentage</s:String>-->
-    <!--<s:String x:Key="S.Progress.Format.FrameNumber">$f = frame number</s:String>-->
-    <!--<s:String x:Key="S.Progress.Format.Totals">Totals:</s:String>-->
-    <!--<s:String x:Key="S.Progress.Format.Examples">Examples:</s:String>-->
+    <s:String x:Key="S.Progress.Format.Milliseconds">$ms = milisaniye</s:String>
+    <s:String x:Key="S.Progress.Format.Seconds">$s = saniye</s:String>
+    <s:String x:Key="S.Progress.Format.Minutes">$m = dakika</s:String>
+    <s:String x:Key="S.Progress.Format.Percentage">$p = yüzdelik</s:String>
+    <s:String x:Key="S.Progress.Format.FrameNumber">$f = kare sayısı</s:String>
+    <s:String x:Key="S.Progress.Format.Totals">Toplam:</s:String>
+    <s:String x:Key="S.Progress.Format.Examples">Örnekler:</s:String>
     <!--<s:String x:Key="S.Progress.Format.Date">You can use the date and time format from .Net Framework.&#x0d;The specification is available in these two links below.</s:String>-->
     <!--<s:String x:Key="S.Progress.Format.Date.Standard">Standard formats</s:String>-->
     <!--<s:String x:Key="S.Progress.Format.Date.Custom">Custom formats</s:String>-->
@@ -1213,7 +1213,7 @@
     <s:String x:Key="S.Delay.NewValue">Yeni Değer</s:String>
     <s:String x:Key="S.Delay.Minimum10Ms">Kare başına en az 10ms.</s:String>
     <s:String x:Key="S.Delay.DecreaseIncrease">Değeri Azalt/Arttır</s:String>
-    <!--<s:String x:Key="S.Delay.Scale">Scale Value</s:String>-->
+    <s:String x:Key="S.Delay.Scale">Ölçek Değeri</s:String>
     <!--<s:String x:Key="S.Delay.Override.Info">This new value will replace the duration (delay) of all selected frames. The value can be from 10ms to 25500ms.</s:String>-->
     <!--<s:String x:Key="S.Delay.IncreaseDecrease.Info">This value will decrease/increase the duration (delay) of each selected frame.&#x0d;You can decrement/increment by selecting a value between -10000ms and 10000ms, but the final duration of each frame will be restricted to between 10ms and 25500ms</s:String>-->
     <!--<s:String x:Key="S.Delay.Scale.Info">Scale the duration (delay) of each selected frame by the percent value.&#x0d;You can scale each frame's duration by selecting a value between 1% and 1000%, but the final duration of each frame will be restricted to between 10ms and 25500ms</s:String>-->
@@ -1223,7 +1223,7 @@
 
     <!--Editor • Transitions-->
     <s:String x:Key="S.Transitions.Length">Geçiş Süresi</s:String>
-    <!--<s:String x:Key="S.Transitions.Delay">Transition Delay</s:String>-->
+    <s:String x:Key="S.Transitions.Delay">Geçiş Gecikmesi</s:String>
     <s:String x:Key="S.Transitions.FadeTo">Geçiş yap...</s:String>
     <s:String x:Key="S.Transitions.FadeTo.Frame">Sonraki Kare</s:String>
     <s:String x:Key="S.Transitions.FadeTo.Color">Tek renk</s:String>
@@ -1232,30 +1232,30 @@
 
     <!--Editor • Save as-->
     <s:String x:Key="S.SaveAs.Type">Dosya Tipi</s:String>
-    <!--<s:String x:Key="S.SaveAs.Gif">Gif</s:String>-->
+    <s:String x:Key="S.SaveAs.Gif">Gif</s:String>
     <!--<s:String x:Key="S.SaveAs.Apng">Apng</s:String>-->
     <s:String x:Key="S.SaveAs.Images">Görüntü karelerini</s:String>
     <s:String x:Key="S.SaveAs.Project">Proje olarak</s:String>
-    <!--<s:String x:Key="S.SaveAs.Psd">PSD</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.Video">Video</s:String>-->
+    <s:String x:Key="S.SaveAs.Psd">PSD</s:String>
+    <s:String x:Key="S.SaveAs.Video">Video</s:String>
     
     <!--Editor • Save as > Encoder-->
-    <!--<s:String x:Key="S.SaveAs.Encoder">Encoder</s:String>-->
+    <s:String x:Key="S.SaveAs.Encoder">Kodlayıcı</s:String>
     <!--<s:String x:Key="S.SaveAs.Encoder.ScreenToGif">ScreenToGif</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Tooltip">Uses the built-in encoder, with the color reduction method below.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.Encoder.Legacy">Old</s:String>-->
+    <s:String x:Key="S.SaveAs.Encoder.Legacy">Eski</s:String>
     <!--<s:String x:Key="S.SaveAs.Encoder.Legacy.Tooltip">Algorithm: NeuQuant.</s:String>-->
     <s:String x:Key="S.SaveAs.Encoder.System">Sistem</s:String>
     <!--<s:String x:Key="S.SaveAs.Encoder.System.Tooltip">Uses a default palette.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Encoder.Apng">ScreenToGif</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Encoder.Apng.Tooltip">Encoder made by the ScreenToGif developer.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>-->
+    <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
     <!--<s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>-->
     
     <!--Editor • Save as > Gif options-->
     <s:String x:Key="S.SaveAs.GifOptions">Gif ayarları</s:String>
     <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.Info">Color reduction algorithm (quantization).</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.Neural">Neural network</s:String>-->
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Neural">Sinir ağı</s:String>
     <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.Neural.Info">High fidelity quantization. Slower, but good for higher amount of colors.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.Octree">Octree</s:String>-->
     <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.Octree.Info">Good for animations with less colors. Faster, but may produce color banding.</s:String>-->
@@ -1263,7 +1263,7 @@
     <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.MedianCut.Info">Less good than Octree and slower.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.Grayscale">Grayscale</s:String>-->
     <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.Grayscale.Info">Uses a fixed grayscale palette, so it's way faster.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.MostUsed">Most used colors</s:String>-->
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.MostUsed">En çok kullanılan renkler</s:String>
     <!--<s:String x:Key="S.SaveAs.GifOptions.Quantizer.MostUsed.Info">Simply takes the most used colors in the frames.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.GifOptions.Sampling">Sampling:</s:String>-->
     <!--<s:String x:Key="S.SaveAs.GifOptions.Sampling.Info">Sampling factor:&#10;A value of 1 will result in better looking gif, but it will be slower to render.</s:String>-->
@@ -1276,7 +1276,7 @@
     <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">Tekrarlı Gif.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Sonsuza kadar tekrarla.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Tekrar Sayısı.</s:String>
-    <!--<s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable">Enable transparency.</s:String>-->
+    <s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable">Şeffaflığı aktif et.</s:String>
     <!--<s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable.Info">Enables the full transparency mode, which makes the background of the gif to be fully transparent.&#10;The chroma key replacement process will be ignored if this option is enabled.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.GifOptions.Transparency.Pick">Select which color to display as transparent.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.GifOptions.Transparency.Pick.Info">If a color is selected, it will be converted to transparent and it will appear as transparent in the generated gif.&#10;If no color is selected, all transparent colors (Alpha = 0%) will appear as transparent normally.</s:String>-->
@@ -1294,28 +1294,28 @@
     
     <!--Editor • Save as > Video/Images/Psd/Project options-->
     <s:String x:Key="S.SaveAs.VideoOptions">Video ayarları</s:String>
-    <!--<s:String x:Key="S.SaveAs.VideoOptions.Fps">Fps:</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.VideoOptions.FlipVertically">Flip the video (vertically).</s:String>-->
-    <s:String x:Key="S.SaveAs.ImagesOptions">Resim seçenekleri</s:String>
-    <!--<s:String x:Key="S.SaveAs.ImageOptions.Zip">Zip the images.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.PsdOptions">Psd options</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.PsdOptions.Compress">Compress the image.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">Compress the image data using the RLE algorithm.</s:String>-->
+    <s:String x:Key="S.SaveAs.VideoOptions.Fps">Fps:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.FlipVertically">Videoyu çevir (düşey olarak).</s:String>
+    <s:String x:Key="S.SaveAs.ImagesOptions">Görüntü seçenekleri</s:String>
+    <s:String x:Key="S.SaveAs.ImageOptions.Zip">Görüntüleri ziple.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions">Psd ayarları</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress">Görüntüyü sıkıştır.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">Görüntü verisini RLE algoritmasını kullanarak sıkıştır.</s:String>
     <!--<s:String x:Key="S.SaveAs.PsdOptions.Timeline">Save the timeline data.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">Exports the timings of the frames, instead of just the frames.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.ProjectOptions">Project options</s:String>-->
+    <s:String x:Key="S.SaveAs.ProjectOptions">Proje ayarları</s:String>
     
     <s:String x:Key="S.SaveAs.Extras">Ekstralar:</s:String>
     <!--<s:String x:Key="S.SaveAs.Presets">Presets:</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Presets.Default">Default</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.Presets.Add">Add</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.Presets.Save">Save</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.Presets.Edit">Edit</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.Presets.Remove">Remove</s:String>-->
+    <s:String x:Key="S.SaveAs.Presets.Add">Ekle</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Save">Kaydet</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Edit">Düzenle</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Remove">Kaldır</s:String>
     <!--<s:String x:Key="S.SaveAs.Presets.Remove.Title">Remove Preset</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Presets.Remove.Header">Do you wish to remove the preset?</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Presets.Remove.Message">You can't undo this operation, but you can add the preset again later.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.Presets.Reset">Reset</s:String>-->
+    <s:String x:Key="S.SaveAs.Presets.Reset">Sıfırla</s:String>
     <!--<s:String x:Key="S.SaveAs.Presets.Reset.Title">Reset Preset</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Presets.Reset.Header">Do you wish to reset the preset to its default parameters?</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Presets.Reset.Message">You can't undo this operation, but you can edit back the preset again later.</s:String>-->
@@ -1341,16 +1341,16 @@
     <!--<s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Type commands to be executed after the encoding.&#x0d;To execute multiple commands, type each one on a separated line.&#x0d;Macros:&#x0d;{p} = Output file path.&#x0d;{f} = Output folder path.&#x0d;{u} = URL of the uploaded file.</s:String>-->
     
     <!--Save As • File-->
-    <!--<s:String x:Key="S.SaveAs.File">File</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.File.Location">Destination folder.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.File.Choose">Choose the location.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.File.Format">File format</s:String>-->
+    <s:String x:Key="S.SaveAs.File">Dosya</s:String>
+    <s:String x:Key="S.SaveAs.File.Location">Hedef klasör.</s:String>
+    <s:String x:Key="S.SaveAs.File.Choose">Konumu seç.</s:String>
+    <s:String x:Key="S.SaveAs.File.Format">Dosya formatı</s:String>
     <s:String x:Key="S.SaveAs.File.Name">Dosya ismi.</s:String>
     <s:String x:Key="S.SaveAs.File.Animation">Animasyon</s:String>
-    <!--<s:String x:Key="S.SaveAs.File.Increase">Increase the file number</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.File.Decrease">Decrease the file number</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.File.Exists">A file with the same name already exists.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.File.Clipboard">Save to the clipboard.</s:String>-->
+    <s:String x:Key="S.SaveAs.File.Increase">Dosya sayısını arttır</s:String>
+    <s:String x:Key="S.SaveAs.File.Decrease">Dosya sayısını azalt</s:String>
+    <s:String x:Key="S.SaveAs.File.Exists">Aynı isimli bir dosya zaten mevcut.</s:String>
+    <s:String x:Key="S.SaveAs.File.Clipboard">Panoya kaydet.</s:String>
     <!--<s:String x:Key="S.SaveAs.Warning.Type">You need to select where to save the file (to a folder, to the clipboard or upload somewhere else).</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Warning.Commands.Empty">To execute a post encoding command, you need to type something on the commands text field.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Warning.Upload.None">No upload service selected. You need to select a destination.</s:String>-->
@@ -1360,51 +1360,51 @@
     <!--<s:String x:Key="S.SaveAs.Warning.Folder.NotExists">The output folder does not exist.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Warning.Folder.Invalid">The output folder contains one or more invalid characters. Please, select a valid folder.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Warning.Filename">You need to pick a filename.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.Warning.Filename.Invalid">The output file name contains one or more invalid characters. Please, select a valid file name.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.Warning.Overwrite">Filename already in use. Set to overwrite or pick another filename.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.Warning.Canceled">The operation was canceled.</s:String>-->
+    <s:String x:Key="S.SaveAs.Warning.Filename.Invalid">Çıktı dosyasının adı bir veya birden çok geçersiz karakter içeriyor. Lütfen geçerli bir dosya adı seçin.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Overwrite">Dosya adı zaten kullanılıyor. Üzerine yazma seçeneğini veya farklı bir dosya adı seçin.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Canceled">İşlem iptal edildi.</s:String>
     
     <!--SaveAs • Export-->
-    <!--<s:String x:Key="S.SaveAs.Frames.Confirmation.Title">Export Frames</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.Frames.Confirmation.Instruction">Are you sure that you want to export the frames?</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.Frames.Confirmation.Message">This action will export {0} frames directly into the selected folder.</s:String>-->
+    <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">Kareleri dışa aktar</s:String>
+    <s:String x:Key="S.SaveAs.Frames.Confirmation.Instruction">Kareleri dışa aktarmak istediğinize emin misiniz?</s:String>
+    <s:String x:Key="S.SaveAs.Frames.Confirmation.Message">Bu işlem {0} çerçeveyi doğrudan seçili klasöre aktaracaktır.</s:String>
     
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">Geri Bildirim</s:String>
     <s:String x:Key="S.Feedback.Send">Gönder</s:String>
-    <!--<s:String x:Key="S.Feedback.Preview">Preview</s:String>-->
+    <s:String x:Key="S.Feedback.Preview">Önizleme</s:String>
     <s:String x:Key="S.Feedback.Header">Geri Bildirim Gönder</s:String>
     <s:String x:Key="S.Feedback.Title">Başlık *</s:String>
     <s:String x:Key="S.Feedback.Message">Mesaj *</s:String>
-    <!--<s:String x:Key="S.Feedback.Message.Info">If you are experiencing a bug, don't forget to explain to me how you got it, step by step.</s:String>-->
+    <s:String x:Key="S.Feedback.Message.Info">Eğer bir hata fark ettiysen, bana adım adım bunu nasıl keşfettiğini anlatmayı unutma.</s:String>
     <s:String x:Key="S.Feedback.Type">Geri Bildirim Türü</s:String>
     <s:String x:Key="S.Feedback.Suggestion">Öneri</s:String>
     <s:String x:Key="S.Feedback.IssueBug">Durum/Hata</s:String>
     <s:String x:Key="S.Feedback.YourEmail">Mailiniz (Opsiyonel)</s:String>
-    <!--<s:String x:Key="S.Feedback.Warning.Title">You need to type a title for the feedback.</s:String>-->
-    <!--<s:String x:Key="S.Feedback.Warning.Message">You need to type a message in the feedback.</s:String>-->
-    <!--<s:String x:Key="S.Feedback.Warning.Email">You need to type your email, to receive a reply from the developer.</s:String>-->
-    <!--<s:String x:Key="S.Feedback.Sending">Sending in the background... This window will close shortly.</s:String>-->
-    <!--<s:String x:Key="S.Feedback.Attachments">Attachments (Optional, 20MB Maximum)</s:String>-->
+    <s:String x:Key="S.Feedback.Warning.Title">Geri besleme için bir başlık yazmalısın</s:String>
+    <s:String x:Key="S.Feedback.Warning.Message">Geri besleme için bir mesaj yazmalısın.</s:String>
+    <s:String x:Key="S.Feedback.Warning.Email">Geliştiricinin geri dönüş sağlayabilmesi için bir e-posta adresi yazmalısın.</s:String>
+    <s:String x:Key="S.Feedback.Sending">Arka planda gönderiliyor... Bu pencere kısa bir süre sonra kapanacaktır.</s:String>
+    <s:String x:Key="S.Feedback.Attachments">Ekler (Opsiyonel, 20MB Maksimum)</s:String>
     <s:String x:Key="S.Feedback.AddAttachments">Eklenti Ekle</s:String>
     <s:String x:Key="S.Feedback.RemoveAttachments">Tüm Eklentileri Kaldır</s:String>
-    <!--<s:String x:Key="S.Feedback.LanguageInfo1">I can understand English</s:String>-->
-    <!--<s:String x:Key="S.Feedback.LanguageInfo2">and Portuguese (Brazillian and European).</s:String>-->
+    <s:String x:Key="S.Feedback.LanguageInfo1">İngilizce anlayabiliyorum</s:String>
+    <s:String x:Key="S.Feedback.LanguageInfo2">ve Portekizce (Brezilya ve Avrupa).</s:String>
     <!--<s:String x:Key="S.Feedback.Preview.Info">This is what you'll send, plus all the attachments.</s:String>-->
     
     <!--Troubleshoot-->
-    <!--<s:String x:Key="S.Troubleshoot.Title">Troubleshoot</s:String>-->
-    <!--<s:String x:Key="S.Troubleshoot.Windows">Is there any window missing?</s:String>-->
-    <!--<s:String x:Key="S.Troubleshoot.Windows.Info">If any of the windows is missing (outside of the screen),&#x0d;use the options below to reset its current and startup position.</s:String>-->
+    <s:String x:Key="S.Troubleshoot.Title">Sorun gidermek</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows">Herhangi bir pencere kayıp mı?</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Info">Eğer herhangi bir pencere kayıpsa (ekranın dışında),&#x0d;mevcut ve başlangıç konumunu sıfırlamak için aşağıdaki ayarları kullan.</s:String>
     <!--<s:String x:Key="S.Troubleshoot.Windows.Current">Here's where each window is currently located:</s:String>-->
     <!--<s:String x:Key="S.Troubleshoot.Windows.Next">Here's where each window will open next time:</s:String>-->
-    <!--<s:String x:Key="S.Troubleshoot.Windows.BringBack">Move all windows to the main screen.</s:String>-->
-    <!--<s:String x:Key="S.Troubleshoot.Windows.Reset">Reset the startup position of all windows.</s:String>-->
+    <s:String x:Key="S.Troubleshoot.Windows.BringBack">Tüm pencereleri ana ekrana taşı.</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Reset">Tüm pencerelerin başlangıç konumunu sıfırla.</s:String>
    
     <!--FontStyles-->
-    <!--<s:String x:Key="S.FontStyles.Normal">Normal</s:String>-->
-    <!--<s:String x:Key="S.FontStyles.Italic">Italic</s:String>-->
-    <!--<s:String x:Key="S.FontStyles.Oblique">Oblique</s:String>-->
+    <s:String x:Key="S.FontStyles.Normal">Normal</s:String>
+    <s:String x:Key="S.FontStyles.Italic">İtalik</s:String>
+    <s:String x:Key="S.FontStyles.Oblique">Eğik</s:String>
     
     <!--FontWeight-->
     <!--<s:String x:Key="S.FontWeights.Black">Black</s:String>-->
@@ -1428,7 +1428,7 @@
     <s:String x:Key="S.VerticalAlignment.Top">Üst</s:String>
     <s:String x:Key="S.VerticalAlignment.Center">Merkez</s:String>
     <s:String x:Key="S.VerticalAlignment.Bottom">Alt</s:String>
-    <!--<s:String x:Key="S.Alignment.Stretch">Stretch</s:String>-->
+    <s:String x:Key="S.Alignment.Stretch">Yay</s:String>
 
     <!--HorizontalAlignment-->
     <s:String x:Key="S.HorizontalAlignment.Left">Sol</s:String>
