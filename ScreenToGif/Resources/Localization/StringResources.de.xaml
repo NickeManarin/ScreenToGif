@@ -715,8 +715,8 @@
     <s:String x:Key="S.ImportVideo.Nothing">Keine Frames ausgewählt.</s:String>
     
     <!--Encoder-->
-    <s:String x:Key="S.Encoder.Title">Verschlüsseln</s:String>
-    <s:String x:Key="S.Encoder.Encoding">Wird verschlüsselt …</s:String>
+    <s:String x:Key="S.Encoder.Title">Kodieren</s:String>
+    <s:String x:Key="S.Encoder.Encoding">Wird kodiert …</s:String>
     <s:String x:Key="S.Encoder.Starting">Wird gestartet</s:String>
     
     <s:String x:Key="S.Encoder.Completed">Beendet</s:String>
@@ -730,7 +730,7 @@
     
     <s:String x:Key="S.Encoder.Completed.Elapsed">Verstrichene Zeit (in Minuten):</s:String>
     <s:String x:Key="S.Encoder.Completed.Elapsed.Analysis">Auswertung:</s:String>
-    <s:String x:Key="S.Encoder.Completed.Elapsed.Encoding">Verschlüsselung:</s:String>
+    <s:String x:Key="S.Encoder.Completed.Elapsed.Encoding">Kodierung:</s:String>
     <s:String x:Key="S.Encoder.Completed.Elapsed.Upload">Hochladen:</s:String>
     <s:String x:Key="S.Encoder.Completed.Elapsed.Copy">Kopieren:</s:String>
     <s:String x:Key="S.Encoder.Completed.Elapsed.Commands">Befehle:</s:String>
@@ -751,7 +751,7 @@
     <s:String x:Key="S.Encoder.ExploreFolder">Ordner durchsuchen</s:String>
     <s:String x:Key="S.Encoder.Remove">Aus Liste entfernen</s:String>
     <s:String x:Key="S.Encoder.Details">Details anzeigen</s:String>
-    <s:String x:Key="S.Encoder.Dismiss">Alle abgeschlossenen Verschlüsselungen verwerfen</s:String>
+    <s:String x:Key="S.Encoder.Dismiss">Alle abgeschlossenen Kodierungen verwerfen</s:String>
 
     <s:String x:Key="S.Encoder.Copy.Image">Als Grafik kopieren</s:String>
     <s:String x:Key="S.Encoder.Copy.Filename">Dateinamen kopieren</s:String>
