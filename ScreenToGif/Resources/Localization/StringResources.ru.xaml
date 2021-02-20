@@ -1170,15 +1170,16 @@
     <s:String x:Key="S.Caption.Layout">Макет</s:String>
     <s:String x:Key="S.Caption.Vertical">По вертикали:</s:String>
     <s:String x:Key="S.Caption.Horizontal">По горизонтали:</s:String>
+    <s:String x:Key="S.Caption.TextAlignment">Выровнять:</s:String>
 
     <!--Editor • Key strokes-->
     <s:String x:Key="S.KeyStrokes">Нажатия клавиш</s:String>
     <s:String x:Key="S.KeyStrokes.Keys">Клавиши</s:String>
     <s:String x:Key="S.KeyStrokes.Separator">Разделитель</s:String>
     <s:String x:Key="S.KeyStrokes.Edit">Изменить нажатия клавиш</s:String>
-    <s:String x:Key="S.KeyStrokes.IgnoreModifiers">Игнорировать клавиши Ctrl, Alt, Shift и Win, пока они не используются в качестве модификаторов.</s:String>
-    <s:String x:Key="S.KeyStrokes.IgnoreModifiers.Info">Игнорировать одиночные нажатия клавиш, таких как "Ctrl", но он не будет игнорировать "Ctrl + C".</s:String>
-    <s:String x:Key="S.KeyStrokes.IgnoreInjected">Игнорировать программы, имитирующие нажатия клавиш.</s:String>
+    <s:String x:Key="S.KeyStrokes.IgnoreModifiers">Игнорировать клавиши Ctrl, Alt, Shift и Win, если они не используются как модификаторы.</s:String>
+    <s:String x:Key="S.KeyStrokes.IgnoreModifiers.Info">Игнорировать нажатия одиночных клавиш, типа "Ctrl", но не игнорировать "Ctrl + C".</s:String>
+    <s:String x:Key="S.KeyStrokes.IgnoreInjected">Игнорировать программы имитирующие нажатия клавиш.</s:String>
     <s:String x:Key="S.KeyStrokes.IgnoreInjected.Info">Записывать только пользовательские нажатия клавиш.</s:String>
     <s:String x:Key="S.KeyStrokes.Extend">Увеличить длительность показа</s:String>
     <s:String x:Key="S.KeyStrokes.Earlier">Начать показ нажатий клавиш раньше</s:String>
@@ -1522,4 +1523,10 @@
     <!--Orientation-->
     <s:String x:Key="S.Orientation.Horizontal">Горизонтально</s:String>
     <s:String x:Key="S.Orientation.Vertical">Вертикально</s:String>
+    
+    <!--TextAlignment-->
+    <s:String x:Key="S.TextAlignment.Left">Слева</s:String>
+    <s:String x:Key="S.TextAlignment.Right">Справо</s:String>
+    <s:String x:Key="S.TextAlignment.Center">По центру</s:String>
+    <s:String x:Key="S.TextAlignment.Justify">По ширине</s:String>
 </ResourceDictionary>

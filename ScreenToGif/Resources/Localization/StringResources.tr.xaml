@@ -13,12 +13,12 @@
     <s:String x:Key="S.Cancel">İptal</s:String>
     <s:String x:Key="S.Yes">Evet</s:String>
     <s:String x:Key="S.No">Hayır</s:String>
-    <!--<s:String x:Key="S.Add">Add</s:String>-->
-    <!--<s:String x:Key="S.Edit">Edit</s:String>-->
-    <!--<s:String x:Key="S.Id">Id</s:String>-->
-    <!--<s:String x:Key="S.Title">Title</s:String>-->
-    <!--<s:String x:Key="S.Description">Description</s:String>-->
-    <!--<s:String x:Key="S.SelectColor">Click here to select the color.</s:String>-->
+    <s:String x:Key="S.Add">Ekle</s:String>
+    <s:String x:Key="S.Edit">Düzenle</s:String>
+    <s:String x:Key="S.Id">Kimlik</s:String>
+    <s:String x:Key="S.Title">Başlık</s:String>
+    <s:String x:Key="S.Description">Açıklama</s:String>
+    <s:String x:Key="S.SelectColor">Renk seçmek için buraya tıklayın.</s:String>
     <s:String x:Key="S.Suppress">Bastırma</s:String>
     <s:String x:Key="S.Preview">Önizleme</s:String>
     <s:String x:Key="S.Size">Boyut</s:String>
@@ -33,72 +33,72 @@
     <!--<s:String x:Key="S.MinHeight">Min height:</s:String>-->
     
     <!--Warning messages-->
-    <!--<s:String x:Key="S.Crash">Oh no, the app crashed :(</s:String>-->
-    <!--<s:String x:Key="S.Required">Required field.</s:String>-->
+    <s:String x:Key="S.Crash">Hayır olamaz, uygulama çöktü :(</s:String>
+    <s:String x:Key="S.Required">Gerekli alan.</s:String>
     <!--<s:String x:Key="S.Warning.Net.Title">Missing Dependency</s:String>-->
     <!--<s:String x:Key="S.Warning.Net.Header">Net Framework 4.8 is not present</s:String>-->
     <!--<s:String x:Key="S.Warning.Net.Message">In order to properly use this app, you need to download the correct version of the .Net Framework.&#10;Would you like to open the web page to download it?</s:String>-->
     <!--<s:String x:Key="S.Warning.Single.Title">Only one instance permitted</s:String>-->
-    <!--<s:String x:Key="S.Warning.Single.Header">The app is already running</s:String>-->
+    <s:String x:Key="S.Warning.Single.Header">Uygulama zaten çalışıyor</s:String>
     <!--<s:String x:Key="S.Warning.Single.Message">ScreenToGif is already running, but apparently there's no window open. Check you system tray, a ScreenToGif icon must be there.</s:String>-->
     <!--<s:String x:Key="S.Exiting.Title">Exiting ScreenToGif</s:String>-->
-    <!--<s:String x:Key="S.Exiting.Instruction">Are you sure that you want to exit?</s:String>-->
+    <s:String x:Key="S.Exiting.Instruction">Çıkmak istediğinize emin misiniz?</s:String>
     <!--<s:String x:Key="S.Exiting.Message">All windows will be closed and the tray icon will be removed.</s:String>  -->
     
     <!--Tray icon-->
     <!--<s:String x:Key="S.NewRecording">New screen recording</s:String>-->
     <!--<s:String x:Key="S.NewWebcamRecording">New webcam recording</s:String>-->
     <!--<s:String x:Key="S.NewBoardRecording">New board recording</s:String>-->
-    <!--<s:String x:Key="S.Exit">Exit</s:String>-->
+    <s:String x:Key="S.Exit">Çıkış</s:String>
     
     <!--Commands-->
-    <!--<s:String x:Key="S.Command.NewRecording">New screen recording</s:String>-->
-    <!--<s:String x:Key="S.Command.NewWebcamRecording">New webcam recording</s:String>-->
+    <s:String x:Key="S.Command.NewRecording">Yeni ekran kaydı</s:String>
+    <s:String x:Key="S.Command.NewWebcamRecording">Yeni web kamerası kaydı</s:String>
     <!--<s:String x:Key="S.Command.NewBoardRecording">New board recording</s:String>-->
-    <!--<s:String x:Key="S.Command.NewAnimation">New animation</s:String>-->
+    <s:String x:Key="S.Command.NewAnimation">Yeni animasyon</s:String>
     <!--<s:String x:Key="S.Command.InsertRecording">Insert screen recording</s:String>-->
     <!--<s:String x:Key="S.Command.InsertWebcamRecording">Insert webcam recording</s:String>-->
     <!--<s:String x:Key="S.Command.InsertBoardRecording">Insert board recording</s:String>-->
     <!--<s:String x:Key="S.Command.InsertFromMedia">Insert from media (images and videos)</s:String>-->
-    <!--<s:String x:Key="S.Command.SaveAs">Save as...</s:String>-->
-    <!--<s:String x:Key="S.Command.Load">Load files (images, videos and projects)</s:String>-->
-    <!--<s:String x:Key="S.Command.LoadRecent">Load recent projects</s:String>-->
-    <!--<s:String x:Key="S.Command.DiscardProject">Discard current project</s:String>-->
+    <s:String x:Key="S.Command.SaveAs">Farklı kaydet</s:String>
+    <s:String x:Key="S.Command.Load">Dosyalardan yükle (resimler, videolar ve projeler)</s:String>
+    <s:String x:Key="S.Command.LoadRecent">En son projeleri yükle</s:String>
+    <s:String x:Key="S.Command.DiscardProject">Mevcut projeleri yoksay</s:String>
     <!--<s:String x:Key="S.Command.OverrideDelay">Override delay of frames</s:String>-->
-    <!--<s:String x:Key="S.Command.IncreaseDecreaseDelay">Increase/Decrease delay of frames</s:String>-->
+    <s:String x:Key="S.Command.IncreaseDecreaseDelay">Çerçevelerdeki gecikmeyi Arttır/Azalt</s:String>
     <!--<s:String x:Key="S.Command.ScaleDelay">Scale delay of frames</s:String>-->
-    <!--<s:String x:Key="S.Command.Zoom100">Set zoom to 100%</s:String>-->
+    <s:String x:Key="S.Command.Zoom100">Yakınlaştırma miktarını %100 olarak ayarla</s:String>
     <!--<s:String x:Key="S.Command.SizeToContent">Adjust the window to the frame size</s:String>-->
     <!--<s:String x:Key="S.Command.FitImage">Fit image to the available window size</s:String>-->
-    <!--<s:String x:Key="S.Command.FirstFrame">Select the first frame</s:String>-->
-    <!--<s:String x:Key="S.Command.PreviousFrame">Select the previous frame</s:String>-->
-    <!--<s:String x:Key="S.Command.Play">Play the animation</s:String>-->
-    <!--<s:String x:Key="S.Command.NextFrame">Select the next frame</s:String>-->
-    <!--<s:String x:Key="S.Command.LastFrame">Select the last frame</s:String>-->
-    <!--<s:String x:Key="S.Command.Undo">Undo</s:String>-->
-    <!--<s:String x:Key="S.Command.Redo">Redo</s:String>-->
-    <!--<s:String x:Key="S.Command.Reset">Undo all changes in the project</s:String>-->
+    <s:String x:Key="S.Command.FirstFrame">İlk çerçeveyi seç</s:String>
+    <s:String x:Key="S.Command.PreviousFrame">Bir önceki çerçeveyi seç</s:String>
+    <s:String x:Key="S.Command.Play">Animasyonu oynat</s:String>
+    <s:String x:Key="S.Command.NextFrame">Bir sonraki çerçeveyi seç</s:String>
+    <s:String x:Key="S.Command.LastFrame">Sonuncu çerçeveyi seç</s:String>
+    <s:String x:Key="S.Command.Undo">Geri al</s:String>
+    <s:String x:Key="S.Command.Redo">Yinele</s:String>
+    <s:String x:Key="S.Command.Reset">Projedeki tüm değişiklikleri geri al</s:String>
     <!--<s:String x:Key="S.Command.Copy">Copy the selected frames and store them in the clipboard</s:String>-->
     <!--<s:String x:Key="S.Command.Cut">Cut the selected frames and store them in the clipboard</s:String>-->
     <!--<s:String x:Key="S.Command.Paste">Paste the frames from the clipboard</s:String>-->
-    <!--<s:String x:Key="S.Command.Delete">Delete all selected frames</s:String>-->
-    <!--<s:String x:Key="S.Command.DeletePrevious">Delete all previous frames</s:String>-->
-    <!--<s:String x:Key="S.Command.DeleteNext">Delete all next frames</s:String>-->
+    <s:String x:Key="S.Command.Delete">Seçili tüm çerçeveleri sil</s:String>
+    <s:String x:Key="S.Command.DeletePrevious">Önceki tüm çerçeveleri sil</s:String>
+    <s:String x:Key="S.Command.DeleteNext">Sonraki tüm çerçeveleri sil</s:String>
     <!--<s:String x:Key="S.Command.RemoveDuplicates">Remove duplicates</s:String>-->
-    <!--<s:String x:Key="S.Command.Reduce">Reduce frame count</s:String>-->
-    <!--<s:String x:Key="S.Command.Reverse">Reverse animation</s:String>-->
+    <s:String x:Key="S.Command.Reduce">Çerçeve sayısını azalt</s:String>
+    <s:String x:Key="S.Command.Reverse">Animasyonu ters çevir</s:String>
     <!--<s:String x:Key="S.Command.Yoyo">Makes the animation go forward and backwards</s:String>-->
     <!--<s:String x:Key="S.Command.MoveLeft">Move the selected frame to the left</s:String>-->
     <!--<s:String x:Key="S.Command.MoveRight">Move the selected frame to the right</s:String>-->
-    <!--<s:String x:Key="S.Command.Resize">Resize all frames</s:String>-->
-    <!--<s:String x:Key="S.Command.Crop">Crop all frames</s:String>-->
+    <s:String x:Key="S.Command.Resize">Tüm çerçeveleri yeniden boyutlandır</s:String>
+    <s:String x:Key="S.Command.Crop">Tüm çerçeveleri kırp</s:String>
     <!--<s:String x:Key="S.Command.FlipRotate">Flip or rotate the frames</s:String>-->
     <!--<s:String x:Key="S.Command.Caption">Add a caption</s:String>-->
     <!--<s:String x:Key="S.Command.FreeText">Add a free-floating text</s:String>-->
     <!--<s:String x:Key="S.Command.TitleFrame">Add a frame with a title on it</s:String>-->
     <!--<s:String x:Key="S.Command.KeyStrokes">Inserts keys pressed during the recording</s:String>-->
     <!--<s:String x:Key="S.Command.FreeDrawing">Draw free forms</s:String>-->
-    <!--<s:String x:Key="S.Command.Shapes">Add shapes</s:String>-->
+    <s:String x:Key="S.Command.Shapes">Şekil ekle</s:String>
     <!--<s:String x:Key="S.Command.MouseClicks">Mouse clicks</s:String>-->
     <!--<s:String x:Key="S.Command.Watermark">Select an image and add as watermark</s:String>-->
     <!--<s:String x:Key="S.Command.Border">Add borders</s:String>-->
@@ -106,7 +106,7 @@
     <!--<s:String x:Key="S.Command.Obfuscate">Hide sensitive parts on your frames</s:String>-->
     <!--<s:String x:Key="S.Command.Cinemagraph">Use the drawing tools to select which parts of the frame should not remain static throughout the animation</s:String>-->
     <!--<s:String x:Key="S.Command.Progress">Progress bar or text with playback details</s:String>-->
-    <!--<s:String x:Key="S.Command.SelectAll">Select all frames</s:String>-->
+    <s:String x:Key="S.Command.SelectAll">Tüm çerçeveleri seç</s:String>
     <!--<s:String x:Key="S.Command.GoTo">Navigate to frame by index</s:String>-->
     <!--<s:String x:Key="S.Command.InverseSelection">Inverse the selection of frames</s:String>-->
     <!--<s:String x:Key="S.Command.Unselect">Unselect all frames</s:String>-->
@@ -115,11 +115,11 @@
     <!--<s:String x:Key="S.Command.ClearAll">Clear all completed encodings</s:String>-->
     <!--<s:String x:Key="S.Command.MoveUp">Move up</s:String>-->
     <!--<s:String x:Key="S.Command.MoveDown">Move down</s:String>-->
-    <!--<s:String x:Key="S.Command.Add">Add</s:String>-->
-    <!--<s:String x:Key="S.Command.Open">Open</s:String>-->
-    <!--<s:String x:Key="S.Command.Edit">Edit selected item</s:String>-->
-    <!--<s:String x:Key="S.Command.Save">Save selected item</s:String>-->
-    <!--<s:String x:Key="S.Command.Remove">Remove selected item</s:String>-->
+    <s:String x:Key="S.Command.Add">Ekle</s:String>
+    <s:String x:Key="S.Command.Open">Aç</s:String>
+    <s:String x:Key="S.Command.Edit">Seçili parçayı düzenle</s:String>
+    <s:String x:Key="S.Command.Save">Seçili parçayı kaydet</s:String>
+    <s:String x:Key="S.Command.Remove">Seçili parçayı kaldır</s:String>
     
     <!--StartUp-->
     <s:String x:Key="S.StartUp.Title">ScreenToGif - Başlangıç</s:String>
@@ -133,23 +133,23 @@
     <s:String x:Key="S.StartUp.Editor.Tooltip">Düzenleme penceresini açar, bu uygulamanın merkezi, yeni kayıt başlatıp düzenleyebileceğiniz bir yer.</s:String>
     <s:String x:Key="S.StartUp.Options">Ayarlar</s:String>
     <s:String x:Key="S.StartUp.NewRelease">Yeni sürüm mevcut • {0}</s:String>
-    <!--<s:String x:Key="S.StartUp.NewRelease.Tooltip">Downloads the latest version of ScreenToGif.</s:String>-->
+    <s:String x:Key="S.StartUp.NewRelease.Tooltip">ScreenToGif'in en son versiyonunu indirin.</s:String>
 
     <!--Updater-->
     <s:String x:Key="S.Updater.Title">Güncelle</s:String>
-    <!--<s:String x:Key="S.Updater.Header">A new update is available</s:String>-->
+    <!s:String x:Key="S.Updater.Header">Yeni bir güncelleme mevcut</s:String>
     <s:String x:Key="S.Updater.NewRelease">Yeni sürüm!</s:String>
-    <!--<s:String x:Key="S.Updater.NewRelease.Info">New release available, Version {0}!&#x0d;Click here for more details.</s:String>-->
-    <!--<s:String x:Key="S.Updater.Version">Version</s:String>-->
+    <s:String x:Key="S.Updater.NewRelease.Info">Yeni sürüm mevcut, Versiyon {0}!&#x0d;Daha fazla bilgi için buraya tıklayın.</s:String>
+    <s:String x:Key="S.Updater.Version">Versiyon</s:String>
     <!--<s:String x:Key="S.Updater.Portable">Portable</s:String>-->
     <!--<s:String x:Key="S.Updater.Installer">Installer</s:String>-->
-    <!--<s:String x:Key="S.Updater.Info.WhatsNew">What's new?</s:String>-->
-    <!--<s:String x:Key="S.Updater.Info.BugFixes">Bug fixes:</s:String>-->
-    <!--<s:String x:Key="S.Updater.Info.NewVersionAvailable">A new version is available for you to download.&#x0d;Would you like to open the browser to download it?</s:String>-->
+    <s:String x:Key="S.Updater.Info.WhatsNew">Neler yeni?</s:String>
+    <s:String x:Key="S.Updater.Info.BugFixes">Hatalar düzeltildi:</s:String>
+    <s:String x:Key="S.Updater.Info.NewVersionAvailable">İndirmen için yeni bir versiyon mevcut.&#x0d;İndirmek için tarayıcıyı açmak ister misin?</s:String>
     <!--<s:String x:Key="S.Updater.RunAfter">Execute the app after the update.</s:String>-->
     <s:String x:Key="S.Updater.Download">İndir</s:String>
-    <!--<s:String x:Key="S.Updater.Install">Install</s:String>-->
-    <!--<s:String x:Key="S.Updater.Downloading">Downloading...</s:String>-->
+    <s:String x:Key="S.Updater.Install">Yükle</s:String>
+    <s:String x:Key="S.Updater.Downloading">İndiriliyor...</s:String>
     <!--<s:String x:Key="S.Updater.Warning.Show">It was not possible to show the download details.</s:String>-->
     <!--<s:String x:Key="S.Updater.Warning.Download">It was not possible to download the update.</s:String>-->
     
@@ -158,12 +158,12 @@
     <s:String x:Key="S.Options.App">Uygulama</s:String>
     <!--<s:String x:Key="S.Options.Recorder">Recorder</s:String>-->
     <!--<s:String x:Key="S.Options.Editor">Editor</s:String>-->
-    <!--<s:String x:Key="S.Options.Tasks">Tasks</s:String>-->
+    <s:String x:Key="S.Options.Tasks">Görevler</s:String>
     <s:String x:Key="S.Options.Shortcuts">Klavye Kısayolları</s:String>
     <s:String x:Key="S.Options.Language">Dil</s:String>
     <s:String x:Key="S.Options.Storage">Geçici Dosyalar</s:String>
     <s:String x:Key="S.Options.Extras">Ekstralar</s:String>
-    <!--<s:String x:Key="S.Options.Upload">Cloud</s:String>-->
+    <s:String x:Key="S.Options.Upload">Bulut</s:String>
     <s:String x:Key="S.Options.Donate">Bağış Yap</s:String>
     <s:String x:Key="S.Options.About">Hakkında</s:String>
     <s:String x:Key="S.Options.Other">Diğer</s:String>
@@ -192,13 +192,13 @@
     <s:String x:Key="S.Options.App.Startup.Window.Board">Pano Kaydedici</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Editor">Editör Penceresi</s:String>
     <!--<s:String x:Key="S.Options.App.Startup.Window.Info">(Window which shows up first when the app starts)</s:String>-->
-    <!--<s:String x:Key="S.Options.App.Theme">Theme</s:String>-->
+    <s:String x:Key="S.Options.App.Theme">Tema</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme">Renk Düzeni</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.VeryLight">Çok Açık</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Light">Açık</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Medium">Orta</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Dark">Koyu</s:String>
-    <!--<s:String x:Key="S.Options.App.Theme.Scheme.VeryDark">Very Dark</s:String>-->
+    <s:String x:Key="S.Options.App.Theme.Scheme.VeryDark">Çok Koyu</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Custom">Özel</s:String>
     <!--<s:String x:Key="S.Options.App.Theme.Scheme.Example">Example colors.</s:String>-->
     <!--<s:String x:Key="S.Options.App.Tray">System tray icon</s:String>-->
@@ -229,9 +229,9 @@
     <!--<s:String x:Key="S.Options.App.General.PromptToInstall">Prompt me before the installation starts.</s:String>-->
 
     <!--Options • Recorder-->
-    <!--<s:String x:Key="S.Options.Recorder.Interface">Interface</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.Interface.Old">Old</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.Interface.New">New</s:String>-->
+    <s:String x:Key="S.Options.Recorder.Interface">Arayüz</s:String>
+    <s:String x:Key="S.Options.Recorder.Interface.Old">Eski</s:String>
+    <s:String x:Key="S.Options.Recorder.Interface.New">Yeni</s:String>
     
     <!--<s:String x:Key="S.Options.Recorder.Frequency">Capture frequency</s:String>-->
     <!--<s:String x:Key="S.Options.Recorder.Frequency.Manual">Manual</s:String>-->

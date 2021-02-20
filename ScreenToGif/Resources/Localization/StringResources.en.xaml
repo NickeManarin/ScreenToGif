@@ -35,7 +35,7 @@
     
     <!--Warning messages-->
     <s:String x:Key="S.Crash">Oh no, the app crashed :(</s:String>
-    <s:String x:Key="S.Required">Required field.</s:String>
+    <s:String x:Key="S.Required">Required field</s:String>
     <s:String x:Key="S.Warning.Net.Title">Missing Dependency</s:String>
     <s:String x:Key="S.Warning.Net.Header">Net Framework 4.8 is not present</s:String>
     <s:String x:Key="S.Warning.Net.Message">In order to properly use this app, you need to download the correct version of the .Net Framework.&#10;Would you like to open the web page to download it?</s:String>
@@ -262,7 +262,7 @@
     <s:String x:Key="S.Options.Recorder.Frequency.Interval">Each frame will be captured in interval of {0}.</s:String>
     
     <s:String x:Key="S.Options.Recorder.Mode">Capture mode</s:String>
-    <s:String x:Key="S.Options.Recorder.Bitblt.Info">Use the older capture method, which is slower and may not work capturing games,&#10;but requires no aditional plug-ins.</s:String>
+    <s:String x:Key="S.Options.Recorder.Bitblt.Info">Use the older capture method, which is slower and may not work capturing games,&#10;but requires no additional plug-ins.</s:String>
     <s:String x:Key="S.Options.Recorder.DirectX.Info">Use the Desktop Duplication API capture method, which is faster and&#10;is able to capture fullscreen games, but requires the SharpDx plug-in and Windows 8 or newer.</s:String>
     <s:String x:Key="S.Options.Recorder.File">Save to&#10;file</s:String>
     <s:String x:Key="S.Options.Recorder.File.Info">Each frame captured will be saved directly as an image on disk.</s:String>
@@ -330,8 +330,8 @@
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.ILikeBigSquares">I Like Big Squares</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.ImBlind">I'm Blind</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.Custom">Custom</s:String>
-    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Height">Height</s:String>
-    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Width">Width</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Height">Height:</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Width">Width:</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.Apply">Apply</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.BaseColor">Base Color</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.EvenColor">Even Color</s:String>
@@ -591,7 +591,7 @@
     
     <s:String x:Key="S.Recorder.ClickOrPress">Click or press keys to capture</s:String>
     <s:String x:Key="S.Recorder.SnapToWindow">Snap to Window (Drag and release to snap)</s:String>
-    <s:String x:Key="S.Recorder.PreStart">Pre Start</s:String>
+    <s:String x:Key="S.Recorder.PreStart">Pre Start:</s:String>
     <s:String x:Key="S.Recorder.Paused">ScreenToGif (Paused)</s:String>
     <s:String x:Key="S.Recorder.Stopping">Stopping...</s:String>
     <s:String x:Key="S.Recorder.PreStarting">Pre-starting...</s:String>
@@ -699,7 +699,7 @@
     <s:String x:Key="S.InsertFrames.Before">Before</s:String>
     <s:String x:Key="S.InsertFrames.After">After</s:String>
     <s:String x:Key="S.InsertFrames.Frame">Frame</s:String>
-    <s:String x:Key="S.InsertFrames.Importing">Importing</s:String>
+    <s:String x:Key="S.InsertFrames.Importing">Importing...</s:String>
     <s:String x:Key="S.InsertFrames.SelectColorFill">Select the canvas fill color</s:String>
 
     <!--Import frames from video-->
@@ -748,7 +748,7 @@
     <s:String x:Key="S.Encoder.Error">Error</s:String>
     <s:String x:Key="S.Encoder.Error.Info">Click here to show the details of this error.</s:String>
     <s:String x:Key="S.Encoder.Uploading">Uploading</s:String>
-    <s:String x:Key="S.Encoder.Executing">Executing commmands</s:String>
+    <s:String x:Key="S.Encoder.Executing">Executing commands</s:String>
     <s:String x:Key="S.Encoder.Processing">Processing {0}</s:String>
     <s:String x:Key="S.Encoder.Analyzing.Second">Preparing for second pass</s:String>
     <s:String x:Key="S.Encoder.Processing.Second">Processing {0} - 2nd pass</s:String>
@@ -821,7 +821,7 @@
     <s:String x:Key="S.Editor.Welcome.Size">The lower the framerate, the color count or the amount of changes between frames, the smaller the size</s:String>
     <s:String x:Key="S.Editor.Welcome.Contact">Do you want to talk? Open "Options > About" for contact methods</s:String>
     <s:String x:Key="S.Editor.Welcome.Trouble">Having trouble? Contact me via the Feedback tool</s:String>
-    <s:String x:Key="S.Editor.Welcome.NewRecorder">Would you like to try out the new recorder?&#x0d;Head over to "Options > Application" to enable it</s:String>
+    <s:String x:Key="S.Editor.Welcome.NewRecorder">Would you like to try out the new recorder?&#x0d;Head over to "Options > Application" to enable it.</s:String>
     
     <!--Editor • File tab • New-->
     <s:String x:Key="S.Editor.File.New.Recording">Recording</s:String>
@@ -894,7 +894,7 @@
     <!--Editor • Edit tab • Reordering-->
     <s:String x:Key="S.Editor.Edit.Reordering">Reordering</s:String>
     <s:String x:Key="S.Editor.Edit.Reverse">Reverse</s:String>
-    <s:String x:Key="S.Editor.Edit.Yoyo">Yoyo</s:String>
+    <s:String x:Key="S.Editor.Edit.Yoyo">Yo-yo</s:String>
     <s:String x:Key="S.Editor.Edit.MoveLeft">Move&#x0d;Left</s:String>
     <s:String x:Key="S.Editor.Edit.MoveRight">Move&#x0d;Right</s:String>
     
@@ -1056,7 +1056,7 @@
     <s:String x:Key="S.Hint.Deselect">All frames were deselected</s:String>
     <s:String x:Key="S.Hint.DeleteFrames">{0} frame(s) deleted</s:String>
     <s:String x:Key="S.Hint.Reverse">Frame list reversed</s:String>
-    <s:String x:Key="S.Hint.Yoyo">Yoyo effect applied</s:String>
+    <s:String x:Key="S.Hint.Yoyo">Yo-yo effect applied</s:String>
     <s:String x:Key="S.Hint.MoveLeft">Frame(s) moved to the left</s:String>
     <s:String x:Key="S.Hint.MoveRight">Frame(s) moved to the right</s:String>
     <s:String x:Key="S.Hint.Resize">Frames resized</s:String>
@@ -1236,7 +1236,7 @@
     
     <!--Editor • Border-->
     <s:String x:Key="S.Border.Appearance">Appearance</s:String>
-    <s:String x:Key="S.Border.Info">Use negative values to make the border expand the image. When doing so, the border will be applied to all frames.&#x0d;If no negative value being used, the border will be applied only to the selected frames.</s:String>
+    <s:String x:Key="S.Border.Info">Use negative values to make the border expand the image. When doing so, the border will be applied to all frames.&#10;If no negative value being used, the border will be applied only to the selected frames.</s:String>
 
     <!--Editor • Shadow-->
     <s:String x:Key="S.Shadow.ShadowColor">Shadow color:</s:String>
@@ -1323,7 +1323,7 @@
     <s:String x:Key="S.SaveAs.Apng">Apng</s:String>
     <s:String x:Key="S.SaveAs.Images">Images (frames)</s:String>
     <s:String x:Key="S.SaveAs.Project">Project</s:String>
-    <s:String x:Key="S.SaveAs.Psd">PSD</s:String>
+    <s:String x:Key="S.SaveAs.Psd">Psd</s:String>
     <s:String x:Key="S.SaveAs.Video">Video</s:String>
     
     <!--Editor • Save as > Encoder-->
@@ -1470,12 +1470,12 @@
     <s:String x:Key="S.Feedback.Warning.Title">You need to type a title for the feedback.</s:String>
     <s:String x:Key="S.Feedback.Warning.Message">You need to type a message in the feedback.</s:String>
     <s:String x:Key="S.Feedback.Warning.Email">You need to type your email, to receive a reply from the developer.</s:String>
-    <s:String x:Key="S.Feedback.Sending">Sending in the background... This window will close shortly.</s:String>
+    <s:String x:Key="S.Feedback.Sending">Sending in the background. This window will close shortly.</s:String>
     <s:String x:Key="S.Feedback.Attachments">Attachments (Optional, 20MB Maximum)</s:String>
     <s:String x:Key="S.Feedback.AddAttachments">Add Attachments</s:String>
     <s:String x:Key="S.Feedback.RemoveAttachments">Remove All Attachments</s:String>
     <s:String x:Key="S.Feedback.LanguageInfo1">I can understand English</s:String>
-    <s:String x:Key="S.Feedback.LanguageInfo2">and Portuguese (Brazillian and European).</s:String>
+    <s:String x:Key="S.Feedback.LanguageInfo2">and Portuguese (Brazilian and European).</s:String>
     <s:String x:Key="S.Feedback.Preview.Info">This is what you'll send, plus all the attachments.</s:String>
     
     <!--Troubleshoot-->
