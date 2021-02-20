@@ -2336,6 +2336,12 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public bool FreeTextShadowEnabled
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
         public Color FreeTextShadowColor
         {
             get => (Color)GetValue();

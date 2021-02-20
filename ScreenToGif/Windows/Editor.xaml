@@ -1442,7 +1442,7 @@
                                             <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
                                             <Setter Property="TextBlock.Width" Value="{Binding ElementName=FreeTextWidthNumericUpDown, Path=Value}"/>
                                         </DataTrigger>
-                                        <DataTrigger Binding="{Binding ElementName=IsFreeTextShadowGroupExpanded, Path=IsExpanded}" Value="True">
+                                        <DataTrigger Binding="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextShadowEnabled, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Value="True">
                                             <Setter Property="TextBlock.Effect" Value="{StaticResource DropShadowEffect}"/>
                                         </DataTrigger>
                                     </Style.Triggers>
@@ -3381,19 +3381,7 @@
                                 </Grid>
                             </Expander>
 
-                            <Expander Grid.Row="3" x:Name="IsFreeTextShadowGroupExpanded" IsExpanded="{Binding IsFreeTextShadowGroupExpanded, Source={x:Static u:UserSettings.All}, Mode=TwoWay}">
-                                <Expander.Style>
-                                    <Style TargetType="Expander" BasedOn="{StaticResource {x:Type Expander}}">
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding ElementName=IsFreeTextShadowGroupExpanded, Path=IsExpanded}" Value="True">
-                                                <Setter Property="Header" Value="{DynamicResource S.Caption.ShadowExpanded}"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding ElementName=IsFreeTextShadowGroupExpanded, Path=IsExpanded}" Value="False">
-                                                <Setter Property="Header" Value="{DynamicResource S.Caption.ShadowCollapsed}"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Expander.Style>
+                            <Expander Grid.Row="3" Header="{DynamicResource S.Editor.Image.Shadow}" IsExpanded="{Binding Source={x:Static u:UserSettings.All}, Path=IsFreeTextShadowGroupExpanded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <Grid Margin="10,0,0,0">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
@@ -3411,9 +3399,11 @@
                                         <c:PercentageToOpacity x:Key="PercentageToOpacity"/>
                                     </Grid.Resources>
 
-                                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Shadow.ShadowColor}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                                    <n:ColorBox Grid.Row="0" Grid.Column="1" Margin="10,5" AllowTransparency="False"
-                                            SelectedColor="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextShadowColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Command.Shadow}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                    <n:ExtendedCheckBox Grid.Row="0" Grid.Column="1" Margin="10,5" IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextShadowEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.Shadow.ShadowColor}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                    <n:ColorBox Grid.Row="1" Grid.Column="1" Margin="10,5" AllowTransparency="False" SelectedColor="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextShadowColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                                     <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.Shadow.BlurRadius}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                                     <n:DoubleUpDown Grid.Row="2" Grid.Column="1" Minimum="0" Maximum="100" Margin="10,5" StepValue="0.5" Value="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextShadowBlurRadius, Mode=TwoWay}"/>
