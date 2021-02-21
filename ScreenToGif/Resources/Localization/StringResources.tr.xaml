@@ -1050,7 +1050,7 @@
     <s:String x:Key="S.Crop.Bottom">Alt:</s:String>
     <s:String x:Key="S.Crop.Right">Sağ:</s:String>
     <s:String x:Key="S.Crop.Warning">Kırpılan alan geçerli kare boyutundan daha küçük olmalıdır.</s:String>
-    <s:String x:Key="S.Crop.Warning.Bigger">Seçili kırpma alanı 10x10 pikselden daha büyük olmalıdır.</s:String>-->
+    <s:String x:Key="S.Crop.Warning.Bigger">Seçili kırpma alanı 10x10 pikselden daha büyük olmalıdır.</s:String>
     
     <!--Editor • Flip/rotate-->
     <s:String x:Key="S.FlipRotate.FlipHorizontal">Yatay Çevir</s:String>
