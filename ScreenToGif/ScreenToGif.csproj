@@ -349,6 +349,7 @@
       <DependentUpon>MouseClicksPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Util\ActionStack.cs" />
+    <Compile Include="Util\Converters\DoubleToBool.cs" />
     <Compile Include="Util\Converters\StringToDoubleArray.cs" />
     <Compile Include="Util\DirectoryHelper.cs" />
     <Compile Include="Util\InputHook\CustomKeyEventArgs.cs" />

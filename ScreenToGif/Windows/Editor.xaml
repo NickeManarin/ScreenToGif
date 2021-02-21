@@ -1428,6 +1428,7 @@
                                    FontSize="{Binding ElementName=FreeTextFontSizeNumericUpDown, Path=Value}"
                                    Foreground="{Binding ElementName=FreeTextFontColorBox, Path=SelectedBrush}">
                             <TextBlock.Resources>
+                                <c:DoubleToBool x:Key="DoubleToBool"/>
                                 <DropShadowEffect x:Key="DropShadowEffect" 
                                                   Color="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextShadowColor, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
                                                   BlurRadius="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextShadowBlurRadius, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
@@ -1442,7 +1443,7 @@
                                             <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
                                             <Setter Property="TextBlock.Width" Value="{Binding ElementName=FreeTextWidthNumericUpDown, Path=Value}"/>
                                         </DataTrigger>
-                                        <DataTrigger Binding="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextShadowEnabled, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                        <DataTrigger Binding="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextShadowOpacity, Converter={StaticResource DoubleToBool}, ConverterParameter=0, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Value="False">
                                             <Setter Property="TextBlock.Effect" Value="{StaticResource DropShadowEffect}"/>
                                         </DataTrigger>
                                     </Style.Triggers>
@@ -3389,7 +3390,6 @@
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
@@ -3399,23 +3399,20 @@
                                         <c:PercentageToOpacity x:Key="PercentageToOpacity"/>
                                     </Grid.Resources>
 
-                                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Command.Shadow}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                                    <n:ExtendedCheckBox Grid.Row="0" Grid.Column="1" Margin="10,5" IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextShadowEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Shadow.ShadowColor}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                    <n:ColorBox Grid.Row="0" Grid.Column="1" Margin="10,5" AllowTransparency="False" SelectedColor="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextShadowColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.Shadow.ShadowColor}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                                    <n:ColorBox Grid.Row="1" Grid.Column="1" Margin="10,5" AllowTransparency="False" SelectedColor="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextShadowColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.Shadow.BlurRadius}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                    <n:DoubleUpDown Grid.Row="1" Grid.Column="1" Minimum="0" Maximum="100" Margin="10,5" StepValue="0.5" Value="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextShadowBlurRadius, Mode=TwoWay}"/>
 
-                                    <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.Shadow.BlurRadius}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                                    <n:DoubleUpDown Grid.Row="2" Grid.Column="1" Minimum="0" Maximum="100" Margin="10,5" StepValue="0.5" Value="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextShadowBlurRadius, Mode=TwoWay}"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.Shadow.Direction}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                    <n:DoubleUpDown Grid.Row="2" Grid.Column="1" Minimum="0" Maximum="360" Margin="10,5" StepValue="0.5" Value="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextShadowDirection, Mode=TwoWay}"/>
 
-                                    <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource S.Shadow.Direction}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                                    <n:DoubleUpDown Grid.Row="3" Grid.Column="1" Minimum="0" Maximum="360" Margin="10,5" StepValue="0.5" Value="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextShadowDirection, Mode=TwoWay}"/>
+                                    <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource S.Watermark.Opacity}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                    <n:DoubleUpDown Grid.Row="3" Grid.Column="1" Minimum="0" Maximum="100" Margin="10,5" StepValue="0.5" Value="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextShadowOpacity, Converter={StaticResource PercentageToOpacity}, Mode=TwoWay}"/>
 
-                                    <TextBlock Grid.Row="4" Grid.Column="0" Text="{DynamicResource S.Watermark.Opacity}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                                    <n:DoubleUpDown Grid.Row="4" Grid.Column="1" Minimum="0" Maximum="100" Margin="10,5" StepValue="0.5" Value="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextShadowOpacity, Converter={StaticResource PercentageToOpacity}, Mode=TwoWay}"/>
-
-                                    <TextBlock Grid.Row="5" Grid.Column="0" Text="{DynamicResource S.Shadow.Depth}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                                    <n:DoubleUpDown Grid.Row="5" Grid.Column="1" Minimum="0" Maximum="100" Margin="10,5" StepValue="0.5" Value="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextShadowDepth, Mode=TwoWay}"/>
+                                    <TextBlock Grid.Row="4" Grid.Column="0" Text="{DynamicResource S.Shadow.Depth}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                    <n:DoubleUpDown Grid.Row="4" Grid.Column="1" Minimum="0" Maximum="100" Margin="10,5" StepValue="0.5" Value="{Binding Source={x:Static u:UserSettings.All}, Path=FreeTextShadowDepth, Mode=TwoWay}"/>
                                 </Grid>
                             </Expander>
                             

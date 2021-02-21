@@ -403,11 +403,10 @@
     <TextAlignment x:Key="FreeTextTextAlignment">Left</TextAlignment>
     <s:String x:Key="FreeTextTextDecoration">None</s:String>
     <s:Boolean x:Key="IsFreeTextShadowGroupExpanded">True</s:Boolean>
-    <s:Boolean x:Key="FreeTextShadowEnabled">False</s:Boolean>
     <Color x:Key="FreeTextShadowColor">#FF000000</Color>
     <s:Double x:Key="FreeTextShadowDirection">315.0</s:Double>
     <s:Double x:Key="FreeTextShadowBlurRadius">5.0</s:Double>
-    <s:Double x:Key="FreeTextShadowOpacity">100.0</s:Double>
+    <s:Double x:Key="FreeTextShadowOpacity">0.0</s:Double>
     <s:Double x:Key="FreeTextShadowDepth">5.0</s:Double>
 
     <!--Editor • Title Frame-->
