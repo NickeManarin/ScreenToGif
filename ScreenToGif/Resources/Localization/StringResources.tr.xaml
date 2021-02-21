@@ -92,7 +92,7 @@
     <s:String x:Key="S.Command.MoveRight">Seçili kareyi sağa taşı</s:String>
     <s:String x:Key="S.Command.Resize">Tüm kareleri yeniden boyutlandır</s:String>
     <s:String x:Key="S.Command.Crop">Tüm kareleri kırp</s:String>
-    <s:String x:Key="S.Command.FlipRotate">Kareleri çevir veya döndür</s:String>-->
+    <s:String x:Key="S.Command.FlipRotate">Kareleri çevir veya döndür</s:String>
     <s:String x:Key="S.Command.Caption">Altyazı ekle</s:String>
     <!--<s:String x:Key="S.Command.FreeText">Add a free-floating text</s:String>-->
     <!--<s:String x:Key="S.Command.TitleFrame">Add a frame with a title on it</s:String>-->
@@ -1050,7 +1050,7 @@
     <s:String x:Key="S.Crop.Bottom">Alt:</s:String>
     <s:String x:Key="S.Crop.Right">Sağ:</s:String>
     <s:String x:Key="S.Crop.Warning">Kırpılan alan geçerli kare boyutundan daha küçük olmalıdır.</s:String>
-    <s:String x:Key="S.Crop.Warning.Bigger">Seçili kırpma alanı 10x10 pikselden daha büyük olmalıdır.</s:String>-->
+    <s:String x:Key="S.Crop.Warning.Bigger">Seçili kırpma alanı 10x10 pikselden daha büyük olmalıdır.</s:String>
     
     <!--Editor • Flip/rotate-->
     <s:String x:Key="S.FlipRotate.FlipHorizontal">Yatay Çevir</s:String>
