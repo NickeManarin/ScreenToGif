@@ -92,7 +92,7 @@
     <s:String x:Key="S.Command.MoveRight">Seçili kareyi sağa taşı</s:String>
     <s:String x:Key="S.Command.Resize">Tüm kareleri yeniden boyutlandır</s:String>
     <s:String x:Key="S.Command.Crop">Tüm kareleri kırp</s:String>
-    <s:String x:Key="S.Command.FlipRotate">Kareleri çevir veya döndür</s:String>-->
+    <s:String x:Key="S.Command.FlipRotate">Kareleri çevir veya döndür</s:String>
     <s:String x:Key="S.Command.Caption">Altyazı ekle</s:String>
     <!--<s:String x:Key="S.Command.FreeText">Add a free-floating text</s:String>-->
     <!--<s:String x:Key="S.Command.TitleFrame">Add a frame with a title on it</s:String>-->
