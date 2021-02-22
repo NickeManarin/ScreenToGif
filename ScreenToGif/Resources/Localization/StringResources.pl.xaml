@@ -102,7 +102,7 @@
     <s:String x:Key="S.Command.MouseClicks">Kliknięcia myszy</s:String>
     <s:String x:Key="S.Command.Watermark">Wybierz obraz i dodaj jako znak wodny</s:String>
     <s:String x:Key="S.Command.Border">Dodaj obramowanie</s:String>
-    <!--<s:String x:Key="S.Command.Shadow">Add drop shadow</s:String>-->
+    <s:String x:Key="S.Command.Shadow">Dodaj cień</s:String>
     <s:String x:Key="S.Command.Obfuscate">Ukryj wrażliwe elementy na klatkach</s:String>
     <!--<s:String x:Key="S.Command.Cinemagraph">Use the drawing tools to select which parts of the frame should not remain static throughout the animation</s:String>-->
     <!--<s:String x:Key="S.Command.Progress">Progress bar or text with playback details</s:String>-->
@@ -1099,7 +1099,8 @@
     <s:String x:Key="S.Caption.Vertical">Pionowy:</s:String>
     <s:String x:Key="S.Caption.Horizontal">Poziomy:</s:String>
     <s:String x:Key="S.Caption.TextAlignment">Położenie:</s:String>
-
+    <s:String x:Key="S.Caption.TextDecoration">Dekoracja:</s:String>
+    
     <!--Editor • Key strokes-->
     <s:String x:Key="S.KeyStrokes">Uderzenia klawiszy</s:String>
     <s:String x:Key="S.KeyStrokes.Keys">Klawisze</s:String>
@@ -1443,4 +1444,11 @@
     <s:String x:Key="S.TextAlignment.Right">Do prawej</s:String>
     <s:String x:Key="S.TextAlignment.Center">Do środka</s:String>
     <s:String x:Key="S.TextAlignment.Justify">Wyjustuj</s:String>
+    
+    <!--TextDecoration-->
+    <s:String x:Key="S.TextDecorations.None">Brak</s:String>
+    <s:String x:Key="S.TextDecorations.Underline">Podkreślenie</s:String>
+    <s:String x:Key="S.TextDecorations.Strikethrough">Przekreślenie</s:String>
+    <s:String x:Key="S.TextDecorations.OverLine">Linia nad</s:String>
+    <s:String x:Key="S.TextDecorations.Baseline">Linia bazowa</s:String>
 </ResourceDictionary>

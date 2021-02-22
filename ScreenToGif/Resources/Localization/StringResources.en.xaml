@@ -252,11 +252,11 @@
     <s:String x:Key="S.Options.Recorder.Frequency.Interaction">User interaction</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Interaction.Info">Frames will be captured each time you click or type something.</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Second">Per second</s:String>
-    <s:String x:Key="S.Options.Recorder.Frequency.Second.Info">Frames will be captured in a 'per second' basis,&#10;given the frame rate denominator set on the recorder screen.</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Second.Info">Frames will be captured in a 'per second' basis,&#10;given the framerate denominator set on the recorder screen.</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Minute">Per minute</s:String>
-    <s:String x:Key="S.Options.Recorder.Frequency.Minute.Info">Frames will be captured in a 'per minute' basis (timelapse),&#10;given the frame rate denominator set on the recorder screen.</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Minute.Info">Frames will be captured in a 'per minute' basis (timelapse),&#10;given the framerate denominator set on the recorder screen.</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Hour">Per hour</s:String>
-    <s:String x:Key="S.Options.Recorder.Frequency.Hour.Info">Frames will be captured in a 'per hour' basis (timelapse),&#10;given the frame rate denominator set on the recorder screen.</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Hour.Info">Frames will be captured in a 'per hour' basis (timelapse),&#10;given the framerate denominator set on the recorder screen.</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Playback">Playback delay:</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Playback.Info">(In ms, each captured frame will be set to this delay)</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Interval">Each frame will be captured in interval of {0}.</s:String>
@@ -337,7 +337,7 @@
     <s:String x:Key="S.Options.Editor.Previewer.EvenColor">Even Color</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.OddColor">Odd Color</s:String>
     <s:String x:Key="S.Options.Editor.Interface.DisplayEncoder">Display the encodings in a separated window.</s:String>
-    <s:String x:Key="S.Options.Editor.Interface.ExtendChrome">Extend the title bar (window chrome).</s:String>
+    <s:String x:Key="S.Options.Editor.Interface.ExtendChrome">Extend the titlebar (window chrome).</s:String>
     <s:String x:Key="S.Options.Editor.Interface.AutomaticallySizeOnContent">Automatically adjust the window size based on the frame size, right after loading.</s:String>
     <s:String x:Key="S.Options.Editor.Interface.AutomaticallyFitImage">Automatically adjust the frame zoom based on the window size, right after loading.</s:String>
     <s:String x:Key="S.Options.Editor.General.NotifyFrameDeletion">Ask me before deleting frames.</s:String>
@@ -818,7 +818,7 @@
     <s:String x:Key="S.Editor.Welcome.New">Head over to "File > New" to start a new recording</s:String>
     <s:String x:Key="S.Editor.Welcome.Import">Drag and drop images, videos or projects to import</s:String>
     <s:String x:Key="S.Editor.Welcome.ThankYou">Thank you so much for using my app!</s:String>
-    <s:String x:Key="S.Editor.Welcome.Size">The lower the frame rate, the color count or the amount of changes between frames, the smaller the size</s:String>
+    <s:String x:Key="S.Editor.Welcome.Size">The lower the framerate, the color count or the amount of changes between frames, the smaller the size</s:String>
     <s:String x:Key="S.Editor.Welcome.Contact">Do you want to talk? Open "Options > About" for contact methods</s:String>
     <s:String x:Key="S.Editor.Welcome.Trouble">Having trouble? Contact me via the Feedback tool</s:String>
     <s:String x:Key="S.Editor.Welcome.NewRecorder">Would you like to try out the new recorder?&#x0d;Head over to "Options > Application" to enable it.</s:String>
@@ -1072,7 +1072,7 @@
     <s:String x:Key="S.Hint.TitleFrame2">The title frame will be inserted before the selected frame</s:String>
     <s:String x:Key="S.Hint.Delay">Duration (delay) altered</s:String>
     <s:String x:Key="S.Hint.Transition">Transition inserted</s:String>
-    <s:String x:Key="S.Hint.Reduce">Frame rate reduced</s:String>
+    <s:String x:Key="S.Hint.Reduce">Framerate reduced</s:String>
     <s:String x:Key="S.Hint.Duplicates">Duplicates removed</s:String>
     
     <!--Editor • Action panel-->
@@ -1130,18 +1130,18 @@
     <s:String x:Key="S.FlipRotate.RotateLeft">Rotate Left 90º</s:String>
     <s:String x:Key="S.FlipRotate.RotateRight">Rotate Right 90º</s:String>
     
-    <!--Editor • Reduce frame rate-->
-    <s:String x:Key="S.Reduce.Header">Reduce frame rate</s:String>
+    <!--Editor • Reduce framerate-->
+    <s:String x:Key="S.Reduce.Header">Reduce framerate</s:String>
     <s:String x:Key="S.Reduce.Factor">Factor:</s:String>
     <s:String x:Key="S.Reduce.Count">Remove Count:</s:String>
     <s:String x:Key="S.Reduce.Delay">Delay adjustment:</s:String>
     <s:String x:Key="S.Reduce.Delay.NoAdjustment">Don't adjust</s:String>
     <s:String x:Key="S.Reduce.Delay.Previous">Sum with the previous frame</s:String>
     <s:String x:Key="S.Reduce.Delay.Evenly">Sum evenly with the remaining frames</s:String>
-    <s:String x:Key="S.Reduce.ApplyToAll">Reduce the frame rate of the entire project.</s:String>
+    <s:String x:Key="S.Reduce.ApplyToAll">Reduce the framerate of the entire project.</s:String>
     <s:String x:Key="S.Reduce.ApplyToAll.Info">If the option is unchecked, you must select multiple consecutive frames,&#10;greater than the removal factor.</s:String>
     <s:String x:Key="S.Reduce.Info">It will remove {0} frame(s) after every {1} frame(s), without counting the removed ones.</s:String>
-    <s:String x:Key="S.Reduce.Warning.NoSelection">You must select the frames to apply the frame rate reduction (or check the option to apply to the entire project).</s:String>
+    <s:String x:Key="S.Reduce.Warning.NoSelection">You must select the frames to apply the framerate reduction (or check the option to apply to the entire project).</s:String>
     <s:String x:Key="S.Reduce.Warning.NonConsecutive">The list of frames selected must be consecutive. You can't leave some frames unselected among selected ones.</s:String>
     <s:String x:Key="S.Reduce.Warning.SmallerThanFactor">The selection of frames must be greater than the removal factor, in order for the feature to be able to remove anything.</s:String>
     
@@ -1171,6 +1171,7 @@
     <s:String x:Key="S.Caption.Vertical">Vertical:</s:String>
     <s:String x:Key="S.Caption.Horizontal">Horizontal:</s:String>
     <s:String x:Key="S.Caption.TextAlignment">Alignment:</s:String>
+    <s:String x:Key="S.Caption.TextDecoration">Decoration:</s:String>
 
     <!--Editor • Key strokes-->
     <s:String x:Key="S.KeyStrokes">Key Strokes</s:String>
@@ -1529,4 +1530,11 @@
     <s:String x:Key="S.TextAlignment.Right">Right</s:String>
     <s:String x:Key="S.TextAlignment.Center">Center</s:String>
     <s:String x:Key="S.TextAlignment.Justify">Justify</s:String>
+    
+    <!--TextDecoration-->
+    <s:String x:Key="S.TextDecorations.None">None</s:String>
+    <s:String x:Key="S.TextDecorations.Underline">Underline</s:String>
+    <s:String x:Key="S.TextDecorations.Strikethrough">Strikethrough</s:String>
+    <s:String x:Key="S.TextDecorations.OverLine">OverLine</s:String>
+    <s:String x:Key="S.TextDecorations.Baseline">Baseline</s:String>
 </ResourceDictionary>

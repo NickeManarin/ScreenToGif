@@ -401,6 +401,13 @@
     <s:Double x:Key="FreeTextFontSize">16.0</s:Double>
     <Color x:Key="FreeTextFontColor">#FF000000</Color>
     <TextAlignment x:Key="FreeTextTextAlignment">Left</TextAlignment>
+    <s:String x:Key="FreeTextTextDecoration">None</s:String>
+    <s:Boolean x:Key="IsFreeTextShadowGroupExpanded">True</s:Boolean>
+    <Color x:Key="FreeTextShadowColor">#FF000000</Color>
+    <s:Double x:Key="FreeTextShadowDirection">315.0</s:Double>
+    <s:Double x:Key="FreeTextShadowBlurRadius">5.0</s:Double>
+    <s:Double x:Key="FreeTextShadowOpacity">0.0</s:Double>
+    <s:Double x:Key="FreeTextShadowDepth">5.0</s:Double>
 
     <!--Editor • Title Frame-->
     <Color x:Key="TitleFrameBackgroundColor">#FFD7D7D7</Color>
