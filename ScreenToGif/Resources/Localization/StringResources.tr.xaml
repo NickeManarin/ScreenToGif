@@ -37,7 +37,7 @@
     <s:String x:Key="S.Required">Gerekli alan.</s:String>
     <s:String x:Key="S.Warning.Net.Title">Kayıp Bağımlılık</s:String>
     <s:String x:Key="S.Warning.Net.Header">Net Framework 4.8 mevcut değil</s:String>
-    <<s:String x:Key="S.Warning.Net.Message">Uygulamayı düzgün bir şekilde kullanabilmek için .Net Framework.&#10; yazılımının doğru sürümünü indirmelisin. İndirmek için web sayfasının açılmasını ister misin?</s:String>
+    <s:String x:Key="S.Warning.Net.Message">Uygulamayı düzgün bir şekilde kullanabilmek için .Net Framework.&#10; yazılımının doğru sürümünü indirmelisin. İndirmek için web sayfasının açılmasını ister misin?</s:String>
     <!--<s:String x:Key="S.Warning.Single.Title">Only one instance permitted</s:String>-->
     <s:String x:Key="S.Warning.Single.Header">Uygulama zaten çalışıyor</s:String>
     <s:String x:Key="S.Warning.Single.Message">ScreenToGif zaten çalışıyor, fakat görünüşe göre hiç bir pencere açık değil. Sistem tepsisini kontol et, ScreenToGif ikonu orda olmalı.</s:String>
@@ -137,7 +137,7 @@
 
     <!--Updater-->
     <s:String x:Key="S.Updater.Title">Güncelle</s:String>
-    <!s:String x:Key="S.Updater.Header">Yeni bir güncelleme mevcut</s:String>
+    <s:String x:Key="S.Updater.Header">Yeni bir güncelleme mevcut</s:String>
     <s:String x:Key="S.Updater.NewRelease">Yeni sürüm!</s:String>
     <s:String x:Key="S.Updater.NewRelease.Info">Yeni sürüm mevcut, Versiyon {0}!&#x0d;Daha fazla bilgi için buraya tıklayın.</s:String>
     <s:String x:Key="S.Updater.Version">Versiyon</s:String>
@@ -336,7 +336,7 @@
     <s:String x:Key="S.Options.Shortcuts.Global.Exit.Info">(Tüm pencereleri kapar ve uygulamayı sistem tepsisinden kaldırır)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders">Kaydediciler</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause">Başlat/Duraklat:</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause.Info">(Kaydı başlatır veya durdurur. Anlık görüntü modu aktif ise anlık görüntü almak için kullanılır)</s:String>-->
+    <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause.Info">(Kaydı başlatır veya durdurur. Anlık görüntü modu aktif ise anlık görüntü almak için kullanılır)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Stop">Durdur:</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Stop.Info">(Kaydı durdurur ve editörü açar)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Discard">Yok say:</s:String>
@@ -345,7 +345,7 @@
     <!--<s:String x:Key="S.Options.Shortcuts.Recorders.Follow.Info">(Toggles the adjustment of the recording area based on the position of the cursor)</s:String>-->
     <s:String x:Key="S.Options.Shortcuts.Recorders.DisableFollow">Takibi pasif duruma getir:</s:String>
     <!--<s:String x:Key="S.Options.Shortcuts.Recorders.DisableFollow.Info">(Temporarily disables the adjustment of the recording area based on the position of the cursor, only modifier keys accepted)</s:String>-->
-    <s:String x:Key="S.Options.Shortcuts.Info">Klavye odağı için tıkla, ardından istenilen tuşlara ve tanımlayıcılara bas.&#10;Bazı tuş kombinasyonlarına izin verilmemektedir.</s:String>-->
+    <s:String x:Key="S.Options.Shortcuts.Info">Klavye odağı için tıkla, ardından istenilen tuşlara ve tanımlayıcılara bas.&#10;Bazı tuş kombinasyonlarına izin verilmemektedir.</s:String>
     
     <!--Options • Language-->
     <s:String x:Key="S.Options.Language.AppLanguage">Uygulama Dili</s:String>
@@ -1022,7 +1022,7 @@
     <s:String x:Key="S.Recent.Frames">Kare sayısı</s:String>
     <s:String x:Key="S.Recent.Warning.NoSelection">Seçili proje yok. Yüklemek için listeden bir proje seçin.</s:String>
     <s:String x:Key="S.Recent.Warning.SameProject">Bu proje bu editörde zaten görüntüleniyor.</s:String>
-    <s:String x:Key="S.Recent.Warning.AnotherEditor">Bu proje başka bir editörde halihazırda açık. Bir proje başka bir editörde açık olmadığı sürece ikinci defa açılamaz.</s:String>-->
+    <s:String x:Key="S.Recent.Warning.AnotherEditor">Bu proje başka bir editörde halihazırda açık. Bir proje başka bir editörde açık olmadığı sürece ikinci defa açılamaz.</s:String>
     
     <!--Editor • Clipboard-->
     <s:String x:Key="S.Clipboard.Entries">Pano Girdileri</s:String>
@@ -1137,7 +1137,7 @@
     
     <!--Editor • Shapes-->
     <s:String x:Key="S.Shapes.Mode.Insert">Yerleştir</s:String>
-    <s:String x:Key="S.Shapes.Shapes">Şekiller</s:String>>
+    <s:String x:Key="S.Shapes.Shapes">Şekiller</s:String>
     <s:String x:Key="S.Shapes.Shapes.Radius">Yarıçap:</s:String>
     <!--<s:String x:Key="S.Shapes.Shapes.Dashes">Dashes:</s:String>-->
     <s:String x:Key="S.Shapes.Shapes.ResetRotatio">Dönüklüğü sıfırla</s:String>
