@@ -665,7 +665,7 @@
     <s:String x:Key="S.ColorSelector.Sample.Info">Klik en sleep om kleuren&#10;van je scherm te kiezen.</s:String>
     
     <!--Exception/Error viewers-->
-    <s:String x:Key="S.ExceptionViewer.Title">Interne foutmeding</s:String>
+    <s:String x:Key="S.ExceptionViewer.Title">Interne foutmelding</s:String>
     <s:String x:Key="S.ExceptionViewer.OpenInner">Interne foutmelding openen</s:String>
     <s:String x:Key="S.ExceptionViewer.Type">Uitzondering</s:String>
     <s:String x:Key="S.ExceptionViewer.Message">Boodschap</s:String>
