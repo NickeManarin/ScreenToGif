@@ -700,7 +700,7 @@ namespace ScreenToGif.Windows
 
             var frame = new FrameInfo(_recordClicked, _keyList);
             _keyList.Clear();
-            _captureTask = _capture.CaptureAsync(frame));
+            _captureTask = _capture.CaptureAsync(frame);
             FrameCount = await _captureTask;
         }
 
