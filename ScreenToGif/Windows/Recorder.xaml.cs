@@ -698,10 +698,10 @@ namespace ScreenToGif.Windows
             if (_stopRequested)
                 return;
 
-            _captureTask = _capture.CaptureAsync(new FrameInfo(_recordClicked, _keyList));
-            FrameCount = await _captureTask;
-
+            var frame = new FrameInfo(_recordClicked, _keyList);
             _keyList.Clear();
+            _captureTask = _capture.CaptureAsync(frame));
+            FrameCount = await _captureTask;
         }
 
         private async void CursorAsync_Elapsed(object sender, EventArgs e)
@@ -709,10 +709,11 @@ namespace ScreenToGif.Windows
             if (_stopRequested)
                 return;
 
-            _captureTask = _capture.CaptureWithCursorAsync(new FrameInfo(_recordClicked, _keyList));
+            var frame = new FrameInfo(_recordClicked, _keyList);
+            _keyList.Clear();
+            _captureTask = _capture.CaptureWithCursorAsync(frame);
             FrameCount = await _captureTask;
 
-            _keyList.Clear();
         }
 
         private void Normal_Elapsed(object sender, EventArgs e)
@@ -724,9 +725,9 @@ namespace ScreenToGif.Windows
 
         private void Cursor_Elapsed(object sender, EventArgs e)
         {
-            FrameCount = _capture.CaptureWithCursor(new FrameInfo(_recordClicked, _keyList));
-
+            var frame = new FrameInfo(_recordClicked, _keyList);
             _keyList.Clear();
+            FrameCount = _capture.CaptureWithCursor(frame);
         }
 
 
