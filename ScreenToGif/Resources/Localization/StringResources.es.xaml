@@ -114,12 +114,12 @@
     <s:String x:Key="S.Command.Slide">Transición de diapositivas</s:String>
     <s:String x:Key="S.Command.ClearAll">Limpiar todas las codificaciones completadas</s:String>
     <s:String x:Key="S.Command.MoveUp">Mover arriba</s:String>
-    <s:String x:Key="S.Command.MoveDown">Movel abajo</s:String>
+    <s:String x:Key="S.Command.MoveDown">MoveR abajo</s:String>
     <s:String x:Key="S.Command.Add">Añadir</s:String>
     <s:String x:Key="S.Command.Open">Abrir</s:String>
     <s:String x:Key="S.Command.Edit">Editar elemento seleccionado</s:String>
     <s:String x:Key="S.Command.Save">Guardar elemento selecionado</s:String>
-    <s:String x:Key="S.Command.Remove">Eliminar Eliminar elemento seleccionado</s:String>
+    <s:String x:Key="S.Command.Remove">Eliminar elemento seleccionado</s:String>
     
     <!--StartUp-->
     <s:String x:Key="S.StartUp.Title">ScreenToGif - Inicio</s:String>
