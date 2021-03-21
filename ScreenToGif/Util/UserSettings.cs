@@ -986,6 +986,12 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
+        public bool SkipFramesDuringPreviewIfBehind
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
         public bool SetHistoryLimit
         {
             get => (bool)GetValue();
