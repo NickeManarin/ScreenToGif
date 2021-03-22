@@ -3816,7 +3816,7 @@ namespace ScreenToGif.Windows
                         selectedIndex++;
                     }
 
-                    if (!UserSettings.All.SkipFramesDuringPreviewIfBehind)
+                    if (!UserSettings.All.DropFramesDuringPreviewIfBehind)
                     {
                         // Wait for application UI to render changes
                         Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, new Action(() => { })).Wait();

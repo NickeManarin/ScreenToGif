@@ -986,7 +986,7 @@ namespace ScreenToGif.Util
             set => SetValue(value);
         }
 
-        public bool SkipFramesDuringPreviewIfBehind
+        public bool DropFramesDuringPreviewIfBehind
         {
             get => (bool)GetValue();
             set => SetValue(value);

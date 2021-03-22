@@ -135,7 +135,7 @@
     <s:Boolean x:Key="NotifyWhileClosingEditor">True</s:Boolean>
     <s:Boolean x:Key="TripleClickSelection">False</s:Boolean>
     <s:Boolean x:Key="DrawOutlineOutside">True</s:Boolean>
-    <s:Boolean x:Key="SkipFramesDuringPreviewIfBehind">False</s:Boolean>
+    <s:Boolean x:Key="DropFramesDuringPreviewIfBehind">False</s:Boolean>
     <s:Boolean x:Key="SetHistoryLimit">True</s:Boolean>
     <s:Int32 x:Key="HistoryLimit">50</s:Int32>
     

@@ -345,7 +345,9 @@
     <s:String x:Key="S.Options.Editor.General.NotifyWhileClosingEditor">Ask me before closing the Editor (if there's a project opened).</s:String>
     <s:String x:Key="S.Options.Editor.General.TripleClickSelection">Enable triple-click to select the text.</s:String>
     <s:String x:Key="S.Options.Editor.General.DrawOutlineOutside">Draw the outline of captions outside the letters.</s:String>
-    <s:String x:Key="S.Options.Editor.General.SkipFramesDuringPreviewIfBehind">Skip frames during preview if behind time</s:String>
+    <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind">Drop frames when necessary.</s:String>
+    <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind.Info">(Skip a frame if the previewer is not able to display it in time)</s:String>
+    <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind.Tooltip">Skip a frame if the previewer is not able to display it in time.</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory">Impose a limit to the undo/redo history.</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Info">(Older actions will be removed when the limit is reached)</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Maximum">(Maximum number of actions stored)</s:String>
