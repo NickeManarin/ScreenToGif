@@ -3805,7 +3805,7 @@ namespace ScreenToGif.Windows
                         //If the playback should not loop, it will stop at the latest frame.
                         if (!UserSettings.All.LoopedPlayback)
                         {
-                            Pause();
+                            Dispatcher.Invoke(() => Pause());
                             return;
                         }
 
