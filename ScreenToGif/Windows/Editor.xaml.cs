@@ -3793,7 +3793,12 @@ namespace ScreenToGif.Windows
                 sw.Restart();
                 long frameDelay = Project.Frames[selectedIndex].Delay;
 
+                // Change active frame
                 Dispatcher.Invoke(() => FrameListView.SelectedIndex = selectedIndex);
+
+                // Wait for application UI to render changes (there is no point in ordering change of next frame if the previous one is not displayed yet)
+                // Loaded priority could be used but input can become laggy
+                Dispatcher.Invoke(() => { }, DispatcherPriority.Background);
 
                 int pass = 0;
                 do
@@ -3818,8 +3823,6 @@ namespace ScreenToGif.Windows
 
                     if (!UserSettings.All.DropFramesDuringPreviewIfBehind)
                     {
-                        // Wait for application UI to render changes
-                        Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, new Action(() => { })).Wait();
                         break;
                     }
 
@@ -3835,6 +3838,7 @@ namespace ScreenToGif.Windows
 
                 if (sw.ElapsedMilliseconds < frameDelay)
                 {
+                    // Wait rest of actual frame delay time
                     System.Threading.SpinWait.SpinUntil(() => sw.ElapsedMilliseconds >= frameDelay);
                 }
             }
