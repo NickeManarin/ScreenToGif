@@ -944,7 +944,7 @@
     <s:String x:Key="S.Editor.DiscardingFrames">Descartar Fotogramas</s:String>
     <s:String x:Key="S.Editor.DiscardingFolders">Descartar Carpetas</s:String>
     <s:String x:Key="S.Editor.ResizingFrames">Redimensionar los Fotogramas</s:String>
-    <s:String x:Key="S.Editor.CroppingFrames">Recortango fotogramas</s:String>
+    <s:String x:Key="S.Editor.CroppingFrames">Recortando fotogramas</s:String>
     <s:String x:Key="S.Editor.ApplyingOverlay">Aplicar Superposición de Fotogramas</s:String>
     <s:String x:Key="S.Editor.CreatingTitleFrame">Crear un Titulo en el Fotograma</s:String>
     <s:String x:Key="S.Editor.ApplyingFlipRotate">Aplicar Rotar los Fotogramas.</s:String>
