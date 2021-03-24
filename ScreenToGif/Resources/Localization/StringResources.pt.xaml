@@ -229,8 +229,8 @@
     <s:String x:Key="S.Options.App.General">Geral</s:String>
     <s:String x:Key="S.Options.App.General.WorkaroundQuota">Tentar corrigir o erro de 'Sem quota suficiente...'.</s:String>
     <s:String x:Key="S.Options.App.General.WorkaroundQuota.Info">(Experimental)</s:String>
-    <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">Me pergunte antes de fechar o aplicativo (via o comando 'Sair').</s:String>
-    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">Disabilite a aceleração por hardware.</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">Pergunte-me antes de fechar o aplicativo (via o comando 'Sair').</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">Desabilite a aceleração por hardware.</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(A interface será renderizada via software)</s:String>
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">Buscar atualizações das traduções.</s:String>
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(Traduções atualizadas serão baixadas e instaladas automaticamente)</s:String>
@@ -246,7 +246,7 @@
     <s:String x:Key="S.Options.Recorder.Interface.Old">Antiga</s:String>
     <s:String x:Key="S.Options.Recorder.Interface.New">Nova</s:String>
     
-    <s:String x:Key="S.Options.Recorder.Frequency">Frequencia de captura</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency">Frequência de captura</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Manual">Manual</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Manual.Info">Cada quadro será capturado manualmente por você, ao pressionar o botão de captura ou atalho de teclado equivalente.</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Interaction">Interação de usuário</s:String>
