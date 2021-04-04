@@ -38,10 +38,10 @@
     <s:String x:Key="S.Required">필수 입력란을 채워주세요.</s:String>
     <s:String x:Key="S.Warning.Net.Title">추가 요소 존재하지 않음</s:String>
     <s:String x:Key="S.Warning.Net.Header">.NET Framework 4.8을 찾을 수 없습니다</s:String>
-    <!--<s:String x:Key="S.Warning.Net.Message">In order to properly use this app, you need to download the correct version of the .Net Framework.&#10;Would you like to open the web page to download it?</s:String>-->
-    <!--<s:String x:Key="S.Warning.Single.Title">Only one instance permitted</s:String>-->
+    <s:String x:Key="S.Warning.Net.Message">프로그램을 사용하기 위해, 적절한 버전의 .Net Framework를 다운로드 해야 합니다. &#10;다운로드 페이지를 여시겠습니까?</s:String>
+    <s:String x:Key="S.Warning.Single.Title">한 작업만 수행할 수 있습니다</s:String>
     <s:String x:Key="S.Warning.Single.Header">프로그램이 이미 실행 중입니다</s:String>
-    <!--<s:String x:Key="S.Warning.Single.Message">ScreenToGif is already running, but apparently there's no window open. Check you system tray, a ScreenToGif icon must be there.</s:String>-->
+    <s:String x:Key="S.Warning.Single.Message">ScreenToGif는 이미 실행중입니다. 그러나 열려있는 창이 없으므로 시스템 트레이의 아이콘을 확인하십시오.</s:String>
     <s:String x:Key="S.Exiting.Title">ScreenToGif 종료</s:String>
     <s:String x:Key="S.Exiting.Instruction">프로그램을 종료하겠습니까?</s:String>
     <s:String x:Key="S.Exiting.Message">모든 창을 닫고 작업 표시줄 아이콘을 제거합니다.</s:String>
@@ -155,8 +155,8 @@
     <s:String x:Key="S.Updater.Install">설치</s:String>
     <s:String x:Key="S.Updater.InstallManually">수동 설치</s:String>
     <s:String x:Key="S.Updater.Downloading">다운로드 중...</s:String>
-    <!--<s:String x:Key="S.Updater.Warning.Show">It was not possible to show the download details.</s:String>-->
-    <!--<s:String x:Key="S.Updater.Warning.Download">It was not possible to download the update.</s:String>-->
+    <s:String x:Key="S.Updater.Warning.Show">다운로드 상세 정보를 표시할 수 없습니다.</s:String>
+    <s:String x:Key="S.Updater.Warning.Download">업데이트에 실패했습니다.</s:String>
     
     <!--Options-->
     <s:String x:Key="S.Options.Title">ScreenToGif - 설정</s:String>
@@ -179,24 +179,24 @@
     
     <!--Options • Application-->
     <s:String x:Key="S.Options.App.Startup">프로그램 시작</s:String>
-    <!--<s:String x:Key="S.Options.App.Startup.Mode.Manual">Start&#10;manually</s:String>-->
-    <!--<s:String x:Key="S.Options.App.Startup.Mode.Manual.Info">The app will only be executed when you manually do so.</s:String>-->
+    <s:String x:Key="S.Options.App.Startup.Mode.Manual">수동으로&#10;시작</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Manual.Info">프로그램이 수동으로 실행시킬 때에만 시작됩니다.</s:String>
     <s:String x:Key="S.Options.App.Startup.Mode.Automatic">윈도우 시작 시&#10;자동 시작</s:String>
-    <!--<s:String x:Key="S.Options.App.Startup.Mode.Automatic.Info">The app will be executed after Windows startup.</s:String>-->
-    <!--<s:String x:Key="S.Options.App.Startup.Mode.Warning">Impossible to alternate between startup modes.</s:String>-->
-    <!--<s:String x:Key="S.Options.App.Startup.Instance.Single">Allow only a&#10;single instance</s:String>-->
-    <!--<s:String x:Key="S.Options.App.Startup.Instance.Single.Info">You'll be able to run the app once per user and executable,&#10;meaning that different user or executable instances can co-exist.&#10;When trying to execute the app again, the second instance will try to give focus to the first one and end itself.</s:String>-->
-    <!--<s:String x:Key="S.Options.App.Startup.Instance.Multiple">Allow multiple&#10;instances</s:String>-->
-    <!--<s:String x:Key="S.Options.App.Startup.Instance.Multiple.Info">You'll be able to run the app multiple times at the same time, without restriction.</s:String>-->
-    <!--<s:String x:Key="S.Options.App.Startup.Tray">Start minimized to the system tray.</s:String>-->
-    <!--<s:String x:Key="S.Options.App.Startup.Tray.Info">(System tray icon will be visible while this option is active)</s:String>-->
-    <!--<s:String x:Key="S.Options.App.Startup.Window">Start with:</s:String>-->
+    <s:String x:Key="S.Options.App.Startup.Mode.Automatic.Info">윈도우가 시작된 후 프로그램이 실행됩니다.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Warning">자동 시작으로 전환할 수 없습니다.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Single">오직 하나의&#10;프로그램 허용</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Single.Info">한 유저에 하나의 프로그램만 실행할 수 있습니다.&#10;다른 유저가 사용한다면 여러 프로그램 창을 실행할 수 있습니다.&#10;여러 번 실행하려고 하면, 두 번째 창은 자동으로 꺼지게 됩니다.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Multiple">복수의&#10;프로그램 허용</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Multiple.Info">여러 프로그램 창을 제약없이 한번에 사용할 수 있습니다.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Tray">시스템 트레이에 최소화로 시작.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Tray.Info">(시스템 트레이 아이콘은 이 옵션이 체크되었을 때 활성화 됩니다.)</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window">처음 화면:</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Startup">시작 화면</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Recorder">화면 녹화기</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Webcam">웹캠 녹화기</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Board">칠판 녹화기</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Editor">편집기</s:String>
-    <!--<s:String x:Key="S.Options.App.Startup.Window.Info">(Window which shows up first when the app starts)</s:String>-->
+    <s:String x:Key="S.Options.App.Startup.Window.Info">(프로그램이 처음 시작되었을 때 나오는 화면입니다.)</s:String>
     <s:String x:Key="S.Options.App.Theme">프로그램 테마</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme">색 설정</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.VeryLight">매우 밝게</s:String>
