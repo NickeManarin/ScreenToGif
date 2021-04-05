@@ -41,10 +41,10 @@
     <s:String x:Key="S.Warning.Net.Message">프로그램을 사용하기 위해, 적절한 버전의 .Net Framework를 다운로드 해야 합니다. &#10;다운로드 페이지를 여시겠습니까?</s:String>
     <s:String x:Key="S.Warning.Single.Title">한 작업만 수행할 수 있습니다</s:String>
     <s:String x:Key="S.Warning.Single.Header">프로그램이 이미 실행 중입니다</s:String>
-    <s:String x:Key="S.Warning.Single.Message">ScreenToGif는 이미 실행중입니다. 그러나 열려있는 창이 없으므로 시스템 트레이의 아이콘을 확인하십시오.</s:String>
+    <s:String x:Key="S.Warning.Single.Message">ScreenToGif는 이미 실행중입니다. 그러나 열려있는 창이 없으므로 작업 표시줄의 아이콘을 확인하십시오.</s:String>
     <s:String x:Key="S.Exiting.Title">ScreenToGif 종료</s:String>
     <s:String x:Key="S.Exiting.Instruction">프로그램을 종료하겠습니까?</s:String>
-    <s:String x:Key="S.Exiting.Message">모든 창을 닫고 작업 표시줄 아이콘을 제거합니다.</s:String>
+    <s:String x:Key="S.Exiting.Message">모든 창을 닫고 작업 표시줄의 트레이 아이콘을 제거합니다.</s:String>
     
     <!--Keys-->
     <s:String x:Key="S.Keys.Space">스페이스</s:String>
@@ -206,7 +206,7 @@
     <s:String x:Key="S.Options.App.Theme.Scheme.VeryDark">매우 어둡게</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Custom">사용자 설정</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Example">색상 예시:</s:String>
-    <!--<s:String x:Key="S.Options.App.Tray">System tray icon</s:String>-->
+    <s:String x:Key="S.Options.App.Tray">시스템 트레이 아이콘</s:String>
     <s:String x:Key="S.Options.App.Tray.Show">작업 표시줄에 트레이 아이콘을 표시합니다.</s:String>
     <s:String x:Key="S.Options.App.Tray.LeaveOpen">모든 창이 닫혀 있어도 프로그램을 종료하지 않습니다.</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Nothing">아무것도 하지 않음</s:String>
@@ -219,10 +219,10 @@
     <s:String x:Key="S.Options.App.Tray.Interactions.DoubleLeft">좌클릭 2회:</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Middle">가운데 클릭:</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Window">창:</s:String>
-    <!--<s:String x:Key="S.Options.App.Tray.Interactions.Else">Or else, opens:</s:String>-->
+    <s:String x:Key="S.Options.App.Tray.Interactions.Else">아니면, 열기:</s:String>
     <s:String x:Key="S.Options.App.General">일반</s:String>
-    <!--<s:String x:Key="S.Options.App.General.WorkaroundQuota">Workaround for the 'Not enough quota...' crash.</s:String>-->
-    <!--<s:String x:Key="S.Options.App.General.WorkaroundQuota.Info">(Experimental)</s:String>-->
+    <s:String x:Key="S.Options.App.General.WorkaroundQuota">할당량 부족 문제를 방지합니다.</s:String>
+    <s:String x:Key="S.Options.App.General.WorkaroundQuota.Info">(실험적)</s:String>
     <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">'트레이 > 종료' 버튼으로 프로그램을 닫기 전 확인합니다.</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">하드웨어 가속을 비활성화합니다.</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(소프트웨어를 이용해 프로그램을 표시합니다)</s:String>
