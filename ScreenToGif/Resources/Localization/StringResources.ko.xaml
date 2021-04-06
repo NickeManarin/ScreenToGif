@@ -256,12 +256,12 @@
     <s:String x:Key="S.Options.Recorder.Frequency.Interval">각 프레임이 {0} 간격으로 캡처됩니다.</s:String>
     
     <s:String x:Key="S.Options.Recorder.Mode">녹화 모드</s:String>
-    <!--<s:String x:Key="S.Options.Recorder.Bitblt.Info">Use the older capture method, which is slower and may not work capturing games,&#10;but requires no aditional plug-ins.</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.DirectX.Info">Use the Desktop Duplication API capture method, which is faster and&#10;is able to capture fullscreen games, but requires the SharpDx plug-in and Windows 8 or newer.</s:String>-->
+    <s:String x:Key="S.Options.Recorder.Bitblt.Info">오래된 캠처 방법으로, 느리고 게임 캡처에는 부적절할 수 있습니다.&#10;그러나 추가적인 플러그인이 필요 없습니다.</s:String>
+    <s:String x:Key="S.Options.Recorder.DirectX.Info">Desktop Duplication API 캡처 방법으로, 더 빠르고 전체화면 게임을 캡처할 수 있습니다.&#10;그러나 SharpDx 플러그인과 윈도우8 이상이 필요합니다.</s:String>
     <s:String x:Key="S.Options.Recorder.File">파일로&#10;저장</s:String>
-    <!--<s:String x:Key="S.Options.Recorder.File.Info">Each frame captured will be saved directly as an image on disk.</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.Cache">Memory&#10;cache</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.Cache.Info">Each frame captured will be stored as a pixel array on memory first (may be compressed before).</s:String>-->
+    <s:String x:Key="S.Options.Recorder.File.Info">각 프레임이 디스크에 이미지로 직접 저장됩니다.</s:String>
+    <s:String x:Key="S.Options.Recorder.Cache">메모리&#10;캐시</s:String>
+    <s:String x:Key="S.Options.Recorder.Cache.Info">각 프레임이 메모리에 픽셀 배열로 먼저 저장됩니다.(그 전에 압축될 것입니다.)</s:String>
     <s:String x:Key="S.Options.Recorder.Compression">압축:</s:String>
     <s:String x:Key="S.Options.Recorder.Compression.Optimal">최적</s:String>
     <s:String x:Key="S.Options.Recorder.Compression.Optimal.Info">(느리나 압축률이 높습니다)</s:String>
