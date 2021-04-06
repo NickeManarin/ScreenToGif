@@ -242,15 +242,15 @@
     
     <s:String x:Key="S.Options.Recorder.Frequency">캡처 빈도</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Manual">수동</s:String>
-    <!--<s:String x:Key="S.Options.Recorder.Frequency.Manual.Info">Each frame will be manually captured by you, by pressing the capture button or equivalent keyboard shortcut.</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.Frequency.Interaction">User interaction</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.Frequency.Interaction.Info">Frames will be captured each time you click or type something.</s:String>-->
+    <s:String x:Key="S.Options.Recorder.Frequency.Manual.Info">캡처버튼이나 해당 키보드 단축키를 누르면서, 각 프레임을 수동으로 캡처합니다. </s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Interaction">사용자 상호작용</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Interaction.Info">클릭이나 타이핑할 때 프레임이 캡처됩니다.</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Second">초당</s:String>
-    <!--<s:String x:Key="S.Options.Recorder.Frequency.Second.Info">Frames will be captured in a 'per second' basis,&#10;given the framerate denominator set on the recorder screen.</s:String>-->
+    <s:String x:Key="S.Options.Recorder.Frequency.Second.Info">프레임이 '초당'기준으로 캡처됩니다.&#10;녹화 화면에서 설정된 프레임레이트의 분모값을 따릅니다.</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Minute">분당</s:String>
-    <!--<s:String x:Key="S.Options.Recorder.Frequency.Minute.Info">Frames will be captured in a 'per minute' basis (timelapse),&#10;given the framerate denominator set on the recorder screen.</s:String>-->
+    <s:String x:Key="S.Options.Recorder.Frequency.Minute.Info">프레임이 '분당'기준으로 캡처됩니다.(타임랩스)&#10;녹화 화면에서 설정된 프레임레이트의 분모값을 따릅니다.</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Hour">시간당</s:String>
-    <!--<s:String x:Key="S.Options.Recorder.Frequency.Hour.Info">Frames will be captured in a 'per hour' basis (timelapse),&#10;given the framerate denominator set on the recorder screen.</s:String>-->
+    <s:String x:Key="S.Options.Recorder.Frequency.Hour.Info">프레임이 '시간당'기준으로 캡처됩니다.(타임랩스)&#10;녹화 화면에서 설정된 프레임레이트의 분모값을 따릅니다.</s:String>
     <!--<s:String x:Key="S.Options.Recorder.Frequency.Playback">Playback delay:</s:String>-->
     <!--<s:String x:Key="S.Options.Recorder.Frequency.Playback.Info">(In ms, each captured frame will be set to this delay)</s:String>-->
     <!--<s:String x:Key="S.Options.Recorder.Frequency.Interval">Each frame will be captured in interval of {0}.</s:String>-->
