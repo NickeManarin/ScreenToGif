@@ -251,9 +251,9 @@
     <s:String x:Key="S.Options.Recorder.Frequency.Minute.Info">프레임이 '분당'기준으로 캡처됩니다.(타임랩스)&#10;녹화 화면에서 설정된 프레임레이트의 분모값을 따릅니다.</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Hour">시간당</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Hour.Info">프레임이 '시간당'기준으로 캡처됩니다.(타임랩스)&#10;녹화 화면에서 설정된 프레임레이트의 분모값을 따릅니다.</s:String>
-    <!--<s:String x:Key="S.Options.Recorder.Frequency.Playback">Playback delay:</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.Frequency.Playback.Info">(In ms, each captured frame will be set to this delay)</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.Frequency.Interval">Each frame will be captured in interval of {0}.</s:String>-->
+    <s:String x:Key="S.Options.Recorder.Frequency.Playback">재생 딜레이:</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Playback.Info">(밀리세컨드 단위로, 각 프레임이 이 딜레이에 맞춰집니다.)</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Interval">각 프레임이 {0} 간격으로 캡처됩니다.</s:String>
     
     <s:String x:Key="S.Options.Recorder.Mode">녹화 모드</s:String>
     <!--<s:String x:Key="S.Options.Recorder.Bitblt.Info">Use the older capture method, which is slower and may not work capturing games,&#10;but requires no aditional plug-ins.</s:String>-->
