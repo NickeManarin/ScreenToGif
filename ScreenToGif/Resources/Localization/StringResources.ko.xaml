@@ -269,8 +269,8 @@
     <s:String x:Key="S.Options.Recorder.Compression.Fastest.Info">(빠르나 압축율이 낮습니다)</s:String>
     <s:String x:Key="S.Options.Recorder.Compression.NoCompression">압축 없음</s:String>
     <s:String x:Key="S.Options.Recorder.Compression.NoCompression.Info">(프레임 녹화 중 압축하지 않습니다)</s:String>
-    <!--<s:String x:Key="S.Options.Recorder.CacheSize">Cache size:</s:String>-->
-    <!--<s:String x:Key="S.Options.Recorder.CacheSize.Info">(In MB. After reaching this size, the data will be written/flushed to the disk)</s:String>-->
+    <s:String x:Key="S.Options.Recorder.CacheSize">캐시 용량:</s:String>
+    <s:String x:Key="S.Options.Recorder.CacheSize.Info">(MB 단위로, 용량을 채우면, 데이터는 디스크에 써지고 캐시를 비웁니다.)</s:String>
     <s:String x:Key="S.Options.Recorder.PreventBlackFrames">완전히 검은 프레임을 캡처하지 않습니다.</s:String>
     <!--<s:String x:Key="S.Options.Recorder.PreventBlackFrames.Info">(Prevents BitBlt with a memory cache from wrongfully resulting in frames with all pixels as black)</s:String>-->
     <s:String x:Key="S.Options.Recorder.RecordMouse">녹화 중 마우스 커서를 같이 녹화합니다.</s:String>
