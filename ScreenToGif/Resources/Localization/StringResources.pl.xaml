@@ -306,6 +306,9 @@
     <s:String x:Key="S.Options.Editor.General.NotifyWhileClosingEditor">Potwierdź przed zamknięciem edytora (gdy jest otwarty projekt).</s:String>
     <s:String x:Key="S.Options.Editor.General.TripleClickSelection">Włącz potrójne kliknięcie do zaznaczenia tekstu.</s:String>
     <s:String x:Key="S.Options.Editor.General.DrawOutlineOutside">Rysuj kontur napisów na zewnątrz liter.</s:String>
+    <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind">Pomiń klatki jeżeli wymagane.</s:String>
+    <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind.Info">(Pomiń klatkę jeżeli podgląd nie jest w stanie wyświetlić jej na czas)</s:String>
+    <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind.Tooltip">Pomiń klatkę jeżeli podgląd nie jest w stanie wyświetlić jej na czas.</s:String>
     <!--<s:String x:Key="S.Options.Editor.General.LimitHistory">Impose a limit to the undo/redo history.</s:String>-->
     <!--<s:String x:Key="S.Options.Editor.General.LimitHistory.Info">(Older actions will be removed when the limit is reached)</s:String>-->
     <!--<s:String x:Key="S.Options.Editor.General.LimitHistory.Maximum">(Maximum number of actions stored)</s:String>-->

@@ -824,16 +824,21 @@
                     <Grid Grid.Column="2" Margin="0,1,0,0">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
+                            <RowDefinition/>
                             <RowDefinition Height="16"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.Row="1" Content="{DynamicResource S.Editor.PlaybackOptions.Header}" 
+                        <Label Grid.Column="0" Grid.Row="2" Content="{DynamicResource S.Editor.PlaybackOptions.Header}" 
 							   HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 							   FontSize="12" Foreground="{DynamicResource Element.Foreground.Gray112}"/>
 
                         <n:ExtendedCheckBox Grid.Column="0" Grid.Row="0" x:Name="LoopedPlaybackCheckBox" Text="{DynamicResource S.Editor.PlaybackOptions.Loop}" 
                                             IsChecked="{Binding LoopedPlayback, Source={x:Static u:UserSettings.All}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             Margin="5,3" ToolTip="{DynamicResource S.Editor.PlaybackOptions.Loop.Info}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+
+                        <n:ExtendedCheckBox Grid.Column="0" Grid.Row="1" Text="{DynamicResource S.Options.Editor.General.DropFramesDuringPreviewIfBehind}"
+                                            IsChecked="{Binding DropFramesDuringPreviewIfBehind, Source={x:Static u:UserSettings.All}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                             Margin="5,3" ToolTip="{DynamicResource S.Options.Editor.General.DropFramesDuringPreviewIfBehind.Tooltip}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                     </Grid>
 
                     <Separator Grid.Column="3" Grid.Row="0" Width="1" Height="Auto" Margin="3,2"/>

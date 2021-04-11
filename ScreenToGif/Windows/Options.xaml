@@ -1037,6 +1037,8 @@
                                 <n:ExtendedCheckBox Text="{DynamicResource S.Options.Editor.General.NotifyWhileClosingEditor}" Margin="0,3" IsChecked="{Binding Path=NotifyWhileClosingEditor, Mode=TwoWay}"/>
                                 <n:ExtendedCheckBox Text="{DynamicResource S.Options.Editor.General.TripleClickSelection}" Margin="0,3" IsChecked="{Binding Path=TripleClickSelection, Mode=TwoWay}"/>
                                 <n:ExtendedCheckBox Text="{DynamicResource S.Options.Editor.General.DrawOutlineOutside}" Margin="0,3" IsChecked="{Binding Path=DrawOutlineOutside, Mode=TwoWay}"/>
+                                <n:ExtendedCheckBox Text="{DynamicResource S.Options.Editor.General.DropFramesDuringPreviewIfBehind}" Margin="0,3" IsChecked="{Binding Path=DropFramesDuringPreviewIfBehind, Mode=TwoWay}"
+                                                    Info="{DynamicResource S.Options.Editor.General.DropFramesDuringPreviewIfBehind.Info}"/>
 
                                 <n:ExtendedCheckBox Text="{DynamicResource S.Options.Editor.General.LimitHistory}" Margin="0,3" VerticalAlignment="Top" IsChecked="{Binding Path=SetHistoryLimit, Mode=TwoWay}"
                                                     Info="{DynamicResource S.Options.Editor.General.LimitHistory.Info}"/>
