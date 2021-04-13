@@ -6421,6 +6421,10 @@ namespace ScreenToGif.Windows
                 return Project.Frames.Count;
             }
 
+            // ActionStack assumes the list is sorted.
+            removeList.Sort();
+            alterList.Sort();
+
             var count = 0;
             if (delay != DuplicatesDelayType.DontAdjust)
             {
