@@ -54,5 +54,34 @@ namespace ScreenToGif.Util
                 return false;
             }
         }
+
+        internal static Process RestartAsAdminAdvanced(string arguments = "")
+        {
+            try
+            {
+                var fileName = Process.GetCurrentProcess().MainModule?.FileName ?? System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase;
+
+                var info = new ProcessStartInfo(fileName)
+                {
+                    UseShellExecute = true,
+                    Verb = "runas",
+                    Arguments = arguments
+                };
+
+                return Process.Start(info);
+            }
+            catch (Win32Exception ex)
+            {
+                if (ex.NativeErrorCode != 1223) //User cancelled.
+                    LogWriter.Log(ex, "Impossible to start process as admin.");
+
+                return null;
+            }
+            catch (Exception e)
+            {
+                LogWriter.Log(e, "Impossible to start process as admin.");
+                return null;
+            }
+        }
     }
 }

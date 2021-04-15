@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace ScreenToGif.Controls
 {
-    public class DoubleBox : TextBox
+    public class DoubleBox : ExtendedTextBox
     {
         #region Variables
 
@@ -22,31 +22,29 @@ namespace ScreenToGif.Controls
 
         #region Dependency Property
 
-        public static readonly DependencyProperty MaximumProperty = DependencyProperty.Register("Maximum", typeof(double), typeof(DoubleBox),
+        public static readonly DependencyProperty MaximumProperty = DependencyProperty.Register(nameof(Maximum), typeof(double), typeof(DoubleBox),
             new FrameworkPropertyMetadata(double.MaxValue, OnMaximumPropertyChanged));
 
-        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(double), typeof(DoubleBox),
+        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(nameof(Value), typeof(double), typeof(DoubleBox),
             new FrameworkPropertyMetadata(0D, OnValuePropertyChanged));
 
-        public static readonly DependencyProperty MinimumProperty = DependencyProperty.Register("Minimum", typeof(double), typeof(DoubleBox),
+        public static readonly DependencyProperty MinimumProperty = DependencyProperty.Register(nameof(Minimum), typeof(double), typeof(DoubleBox),
             new FrameworkPropertyMetadata(0D, OnMinimumPropertyChanged));
 
-        public static readonly DependencyProperty DecimalsProperty = DependencyProperty.Register("Decimals", typeof(int), typeof(DoubleBox),
+        public static readonly DependencyProperty DecimalsProperty = DependencyProperty.Register(nameof(Decimals), typeof(int), typeof(DoubleBox),
             new FrameworkPropertyMetadata(2, OnDecimalsPropertyChanged));
 
-        public static readonly DependencyProperty StepProperty = DependencyProperty.Register("StepValue", typeof(double), typeof(DoubleUpDown), 
-            new FrameworkPropertyMetadata(1d));
+        public static readonly DependencyProperty StepProperty = DependencyProperty.Register(nameof(StepValue), typeof(double), typeof(DoubleBox), 
+            new FrameworkPropertyMetadata(1D));
 
-        public static readonly DependencyProperty UpdateOnInputProperty = DependencyProperty.Register("UpdateOnInput", typeof(bool), typeof(DoubleBox),
+        public static readonly DependencyProperty UpdateOnInputProperty = DependencyProperty.Register(nameof(UpdateOnInput), typeof(bool), typeof(DoubleBox),
             new FrameworkPropertyMetadata(false, OnUpdateOnInputPropertyChanged));
 
-        public static readonly DependencyProperty IsObligatoryProperty = DependencyProperty.Register("IsObligatory", typeof(bool), typeof(DoubleBox));
-
-        public static readonly DependencyProperty DefaultValueIfEmptyProperty = DependencyProperty.Register("DefaultValueIfEmpty", typeof(double), typeof(DoubleBox),
+        public static readonly DependencyProperty DefaultValueIfEmptyProperty = DependencyProperty.Register(nameof(DefaultValueIfEmpty), typeof(double), typeof(DoubleBox),
             new FrameworkPropertyMetadata(0D));
 
-        public static readonly DependencyProperty ScaleProperty = DependencyProperty.Register("Scale", typeof(double), typeof(DoubleBox),
-            new PropertyMetadata(1d, OnScalePropertyChanged));
+        public static readonly DependencyProperty ScaleProperty = DependencyProperty.Register(nameof(Scale), typeof(double), typeof(DoubleBox),
+            new PropertyMetadata(1D, OnScalePropertyChanged));
 
         #endregion
 
@@ -95,13 +93,6 @@ namespace ScreenToGif.Controls
         {
             get => (bool)GetValue(UpdateOnInputProperty);
             set => SetValue(UpdateOnInputProperty, value);
-        }
-
-        [Bindable(true), Category("Common")]
-        public bool IsObligatory
-        {
-            get => (bool)GetValue(IsObligatoryProperty);
-            set => SetValue(IsObligatoryProperty, value);
         }
 
         [Bindable(true), Category("Common")]

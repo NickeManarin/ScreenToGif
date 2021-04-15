@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using ScreenToGif.ImageUtil.Apng.Chunks;
 using ScreenToGif.Util;
+using PixelFormats = System.Windows.Media.PixelFormats;
 
 namespace ScreenToGif.ImageUtil.Apng
 {

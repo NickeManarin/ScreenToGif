@@ -1,15 +1,16 @@
-﻿using System;
+using System;
 using System.IO;
+using ScreenToGif.Settings;
 
 namespace ScreenToGif.Util
 {
     /// <summary>
-    /// Log Writer Class
+    /// Basic log writer that stores messages on a file on disk.
     /// </summary>
     public static class LogWriter
     {
         /// <summary>
-        /// Write to Error Log (Text File).
+        /// Writes the exception details to the error log on disk.
         /// </summary>
         /// <param name="ex">The Exception to write.</param>
         /// <param name="title">The name of the error</param>
@@ -60,7 +61,7 @@ namespace ScreenToGif.Util
                         writer.WriteLine($"► Title - {Environment.NewLine}\t{title}");
                         writer.WriteLine($"▬ Message - {Environment.NewLine}\t{ex.Message}");
                         writer.WriteLine($"○ Type - {Environment.NewLine}\t{ex.GetType()}");
-                        writer.WriteLine(FormattableString.Invariant($"♦ [Version] Date/Hour - {Environment.NewLine}\t[{UserSettings.All?.Version}] {DateTime.Now}"));
+                        writer.WriteLine(FormattableString.Invariant($"♦ [Version] Date/Hour - {Environment.NewLine}\t[{UserSettings.All?.VersionText}] {DateTime.Now}"));
                         writer.WriteLine($"▲ Source - {Environment.NewLine}\t{ex.Source}");
                         writer.WriteLine($"▼ TargetSite - {Environment.NewLine}\t{ex.TargetSite}");
 
@@ -118,6 +119,76 @@ namespace ScreenToGif.Util
                 //One last trial.
                 if (!isFallback)
                     Log(ex, title, aditional, true);
+            }
+        }
+
+        /// <summary>
+        /// Writes the details to the error log on disk.
+        /// </summary>
+        /// <param name="title">The name of the error</param>
+        /// <param name="aditional">Aditional information.</param>
+        /// <param name="isFallback">Fallbacks to the Documents folder.</param>
+        public static void Log(string title, object aditional = null, bool isFallback = false)
+        {
+            try
+            {
+                #region Output folder
+
+                var documents = isFallback || string.IsNullOrWhiteSpace(UserSettings.All.LogsFolder) ? Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) : UserSettings.All.LogsFolder;
+                var folder = Path.Combine(documents, "ScreenToGif", "Logs");
+
+                if (!Directory.Exists(folder))
+                    Directory.CreateDirectory(folder);
+
+                #endregion
+
+                #region Creates the file
+
+                var date = Path.Combine(folder, DateTime.Now.ToString("yy_MM_dd") + ".txt");
+                var dateTime = Path.Combine(folder, DateTime.Now.ToString("yy_MM_dd hh_mm_ss_fff") + ".txt");
+
+                FileStream fs = null;
+                var inUse = false;
+
+                try
+                {
+                    fs = new FileStream(date, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                }
+                catch (Exception)
+                {
+                    inUse = true;
+                    fs = new FileStream(dateTime, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                }
+
+                fs.Dispose();
+
+                #endregion
+
+                #region Append the exception information
+
+                using (var fileStream = new FileStream(inUse ? dateTime : date, FileMode.Append, FileAccess.Write))
+                {
+                    using (var writer = new StreamWriter(fileStream))
+                    {
+                        writer.WriteLine($"► Title - {Environment.NewLine}\t{title}");
+                        writer.WriteLine(FormattableString.Invariant($"♦ [Version] Date/Hour - {Environment.NewLine}\t[{UserSettings.All?.VersionText}] {DateTime.Now}"));
+
+                        if (aditional != null)
+                            writer.WriteLine($"◄ Aditional - {Environment.NewLine}\t{aditional}");
+                        
+                        writer.WriteLine();
+                        writer.WriteLine("----------------------------------");
+                        writer.WriteLine();
+                    }
+                }
+
+                #endregion
+            }
+            catch (Exception)
+            {
+                //One last trial.
+                if (!isFallback)
+                    Log(title, aditional, true);
             }
         }
     }

@@ -59,13 +59,40 @@
             <Trigger Property="OutputType" Value="Apng">
                 <Setter Property="Icon" Value="{DynamicResource Vector.Apng}"/>
             </Trigger>
-            <Trigger Property="OutputType" Value="Video">
+            <Trigger Property="OutputType" Value="Webp">
+                <Setter Property="Icon" Value="{DynamicResource Vector.Webp}"/>
+            </Trigger>
+
+            <Trigger Property="OutputType" Value="Bmp">
+                <Setter Property="Icon" Value="{DynamicResource Vector.Bmp}"/>
+            </Trigger>
+            <Trigger Property="OutputType" Value="Jpeg">
+                <Setter Property="Icon" Value="{DynamicResource Vector.Jpg}"/>
+            </Trigger>
+            <Trigger Property="OutputType" Value="Png">
+                <Setter Property="Icon" Value="{DynamicResource Vector.Apng}"/>
+            </Trigger>
+            
+            <Trigger Property="OutputType" Value="Avi">
                 <Setter Property="Icon" Value="{DynamicResource Vector.Video}"/>
             </Trigger>
-            <Trigger Property="OutputType" Value="Photoshop">
+            <Trigger Property="OutputType" Value="Mov">
+                <Setter Property="Icon" Value="{DynamicResource Vector.Video}"/>
+            </Trigger>
+            <Trigger Property="OutputType" Value="Mp4">
+                <Setter Property="Icon" Value="{DynamicResource Vector.Video}"/>
+            </Trigger>
+            <Trigger Property="OutputType" Value="Mkv">
+                <Setter Property="Icon" Value="{DynamicResource Vector.Video}"/>
+            </Trigger>
+            <Trigger Property="OutputType" Value="Webm">
+                <Setter Property="Icon" Value="{DynamicResource Vector.Video}"/>
+            </Trigger>
+            
+            <Trigger Property="OutputType" Value="Psd">
                 <Setter Property="Icon" Value="{DynamicResource Vector.Psd}"/>
             </Trigger>
-            <Trigger Property="OutputType" Value="Project">
+            <Trigger Property="OutputType" Value="Stg">
                 <Setter Property="Icon" Value="{DynamicResource Vector.Project}"/>
             </Trigger>
 
@@ -234,13 +261,40 @@
                 <Setter TargetName="FileButton" Property="Icon" Value="{DynamicResource Vector.Apng}"/>
                 <Setter TargetName="CopyImageMenuItem" Property="Visibility" Value="Visible"/>
             </Trigger>
-            <Trigger Property="OutputType" Value="Video">
+            <Trigger Property="OutputType" Value="Webp">
+                <Setter TargetName="FileButton" Property="Icon" Value="{DynamicResource Vector.Webp}"/>
+            </Trigger>
+
+            <Trigger Property="OutputType" Value="Bmp">
+                <Setter TargetName="FileButton" Property="Icon" Value="{DynamicResource Vector.Bmp}"/>
+            </Trigger>
+            <Trigger Property="OutputType" Value="Jpeg">
+                <Setter TargetName="FileButton" Property="Icon" Value="{DynamicResource Vector.Jpeg}"/>
+            </Trigger>
+            <Trigger Property="OutputType" Value="Png">
+                <Setter TargetName="FileButton" Property="Icon" Value="{DynamicResource Vector.Apng}"/>
+            </Trigger>
+            
+            <Trigger Property="OutputType" Value="Avi">
                 <Setter TargetName="FileButton" Property="Icon" Value="{DynamicResource Vector.Video}"/>
             </Trigger>
-            <Trigger Property="OutputType" Value="Photoshop">
+            <Trigger Property="OutputType" Value="Mov">
+                <Setter TargetName="FileButton" Property="Icon" Value="{DynamicResource Vector.Video}"/>
+            </Trigger>
+            <Trigger Property="OutputType" Value="Mp4">
+                <Setter TargetName="FileButton" Property="Icon" Value="{DynamicResource Vector.Video}"/>
+            </Trigger>
+            <Trigger Property="OutputType" Value="Mkv">
+                <Setter TargetName="FileButton" Property="Icon" Value="{DynamicResource Vector.Video}"/>
+            </Trigger>
+            <Trigger Property="OutputType" Value="Webm">
+                <Setter TargetName="FileButton" Property="Icon" Value="{DynamicResource Vector.Video}"/>
+            </Trigger>
+            
+            <Trigger Property="OutputType" Value="Psd">
                 <Setter TargetName="FileButton" Property="Icon" Value="{DynamicResource Vector.Psd}"/>
             </Trigger>
-            <Trigger Property="OutputType" Value="Project">
+            <Trigger Property="OutputType" Value="Stg">
                 <Setter TargetName="FileButton" Property="Icon" Value="{DynamicResource Vector.Project}"/>
             </Trigger>
 

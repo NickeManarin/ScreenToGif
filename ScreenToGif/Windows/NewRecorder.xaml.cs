@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -14,6 +14,7 @@ using ScreenToGif.Capture;
 using ScreenToGif.Controls;
 using ScreenToGif.Model;
 using ScreenToGif.Native;
+using ScreenToGif.Settings;
 using ScreenToGif.Util;
 using ScreenToGif.Util.InputHook;
 using ScreenToGif.ViewModel;

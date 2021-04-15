@@ -1,44 +1,52 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using ScreenToGif.Model.UploadPresets;
+using ScreenToGif.Model.UploadPresets.History;
+using ScreenToGif.Model.UploadPresets.Yandex;
+using ScreenToGif.Settings;
 using ScreenToGif.Util;
 
 namespace ScreenToGif.Cloud.YandexDisk
 {
-    public class YandexDisk : ICloud
+    public class YandexDisk : IUploader
     {
-        private readonly string _oauthToken;
-
-        public YandexDisk(string oauthToken)
+        public async Task<History> UploadFileAsync(UploadPreset preset, string path, CancellationToken cancellationToken, IProgress<double> progressCallback = null)
         {
-            if (string.IsNullOrEmpty(oauthToken)) throw new ArgumentException(nameof(oauthToken));
-
-            _oauthToken = oauthToken;
-        }
-
-        public async Task<UploadedFile> UploadFileAsync(string path, CancellationToken cancellationToken, IProgress<double> progressCallback = null)
-        {
-            if (string.IsNullOrEmpty(path)) throw new ArgumentException(nameof(path));
+            if (string.IsNullOrEmpty(path)) 
+                throw new ArgumentException(nameof(path));
 
             var fileName = Path.GetFileName(path);
 
-            var link = await GetAsync<Link>("https://cloud-api.yandex.net/v1/disk/resources/upload?path=app:/" + fileName + "&overwrite=true", cancellationToken);
-            if (string.IsNullOrEmpty(link?.href)) throw new UploadingException("Unknown error");
+            var link = await GetAsync<Link>(preset as YandexPreset, "https://cloud-api.yandex.net/v1/disk/resources/upload?path=app:/" + fileName + "&overwrite=true", cancellationToken);
+            
+            if (string.IsNullOrEmpty(link?.href)) 
+                throw new UploadingException("Unknown error");
 
             using (var fileSteram = new FileStream(path, FileMode.Open, FileAccess.Read))
             {
-                await PutAsync(link.href, new StreamContent(fileSteram), cancellationToken);
+                await PutAsync(preset as YandexPreset, link.href, new StreamContent(fileSteram), cancellationToken);
             }
 
-            var downloadLink = await GetAsync<Link>("https://cloud-api.yandex.net/v1/disk/resources/download?path=app:/" + fileName, cancellationToken);
+            var downloadLink = await GetAsync<Link>(preset as YandexPreset, "https://cloud-api.yandex.net/v1/disk/resources/download?path=app:/" + fileName, cancellationToken);
 
-            return new UploadedFile { Link = downloadLink.href };
+            var history = new History
+            {
+                Type = preset.Type,
+                PresetName = preset.Title,
+                DateInUtc = DateTime.UtcNow,
+                Result = 200,
+                Link = downloadLink.href
+            };
+            
+            return history;
         }
 
-        private async Task<T> GetAsync<T>(string url, CancellationToken cancellationToken)
+        private async Task<T> GetAsync<T>(YandexPreset preset, string url, CancellationToken cancellationToken)
         {
             var handler = new HttpClientHandler
             {
@@ -53,7 +61,7 @@ namespace ScreenToGif.Cloud.YandexDisk
                 {
                     Headers =
                     {
-                        {HttpRequestHeader.Authorization.ToString(), "OAuth " + _oauthToken}
+                        {HttpRequestHeader.Authorization.ToString(), "OAuth " + preset.OAuthToken}
                     }
                 };
 
@@ -63,16 +71,16 @@ namespace ScreenToGif.Cloud.YandexDisk
                     responseBody = await response.Content.ReadAsStringAsync();
                 }
                 
-                var errorDescriptor = WebHelper.Deserialize<ErrorDescriptor>(responseBody);
+                var errorDescriptor = Serializer.Deserialize<ErrorDescriptor>(responseBody);
 
                 if (errorDescriptor.error != null)
                     throw new UploadingException($"{errorDescriptor.error}, {errorDescriptor.message}, {errorDescriptor.description}");
 
-                return WebHelper.Deserialize<T>(responseBody);
+                return Serializer.Deserialize<T>(responseBody);
             }
         }
 
-        private async Task PutAsync(string url, HttpContent content, CancellationToken cancellationToken)
+        private async Task PutAsync(YandexPreset preset, string url, HttpContent content, CancellationToken cancellationToken)
         {
             var handler = new HttpClientHandler
             {
@@ -87,24 +95,30 @@ namespace ScreenToGif.Cloud.YandexDisk
                 {
                     Headers =
                     {
-                        {HttpRequestHeader.Authorization.ToString(), "OAuth " + _oauthToken}
+                        {HttpRequestHeader.Authorization.ToString(), "OAuth " + preset.OAuthToken}
                     },
                     Content = content
                 };
 
                 using (await client.SendAsync(request, cancellationToken))
-                {
-
-                }
+                { }
             }
         }
 
-        public static bool IsAuthorized()
+        public static string GetAuthorizationAdress()
         {
-            if (string.IsNullOrWhiteSpace(UserSettings.All.YandexDiskOAuthToken))
-                return false;
+            var args = new Dictionary<string, string>
+            {
+                {"client_id", Secret.YandexId},
+                {"response_type", "token"}
+            };
 
-            return true;
+            return WebHelper.AppendQuery($"https://oauth.yandex.{(UserSettings.All.LanguageCode.StartsWith("ru") ? "ru" : "com")}/authorize", args);
+        }
+
+        public static bool IsAuthorized(YandexPreset preset)
+        {
+            return !string.IsNullOrWhiteSpace(preset.OAuthToken);
         }
     }
 }

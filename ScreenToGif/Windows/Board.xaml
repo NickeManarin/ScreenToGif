@@ -1,12 +1,13 @@
-﻿<n:LightWindow x:Class="ScreenToGif.Windows.Board"
+<n:LightWindow x:Class="ScreenToGif.Windows.Board"
                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                xmlns:n="clr-namespace:ScreenToGif.Controls"
                xmlns:u="clr-namespace:ScreenToGif.Util"
                xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
+               xmlns:t="clr-namespace:ScreenToGif.Settings"
                x:Name="BoardLightWindow" Title="{DynamicResource S.Board.Title}" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterScreen" 
-               Width="{Binding BoardWidth, Source={x:Static u:UserSettings.All}, Mode=TwoWay}" Height="{Binding BoardHeight, Source={x:Static u:UserSettings.All},  Mode=TwoWay}"
-               IsThin="{Binding RecorderThinMode, Source={x:Static u:UserSettings.All}}" Icon="../Resources/Logo.ico" 
+               Width="{Binding BoardWidth, Source={x:Static t:UserSettings.All}, Mode=TwoWay}" Height="{Binding BoardHeight, Source={x:Static t:UserSettings.All},  Mode=TwoWay}"
+               IsThin="{Binding RecorderThinMode, Source={x:Static t:UserSettings.All}}" Icon="../Resources/Logo.ico" 
                AllowsTransparency="True" WindowStyle="None" SnapsToDevicePixels="True" UseLayoutRounding="True" 
                SizeChanged="LightWindow_SizeChanged" Loaded="Board_OnLoaded" KeyDown="Board_KeyDown" 
                KeyUp="Board_KeyUp" Deactivated="Board_Deactivated" Closing="LightWindow_Closing">
@@ -113,23 +114,23 @@
                 <Separator Grid.Column="0" Width="1" Margin="0,1,10,1"/>
 
                 <n:ColorBox Grid.Column="1" x:Name="TipColorBox" Width="40" MinWidth="40" Margin="5,2"
-                            SelectedColor="{Binding BoardColor, Source={x:Static u:UserSettings.All}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            SelectedColor="{Binding BoardColor, Source={x:Static t:UserSettings.All}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <n:IntegerUpDown Grid.Column="2" x:Name="FreeDrawingHeightNumericUpDown" Minimum="1" Maximum="100" Margin="2,2" MinWidth="50" 
-                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=BoardStylusHeight, Mode=TwoWay}"
+                                 Value="{Binding Source={x:Static t:UserSettings.All}, Path=BoardStylusHeight, Mode=TwoWay}"
                                  ToolTip="{DynamicResource S.Recorder.Height}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                 <n:IntegerUpDown Grid.Column="3" x:Name="FreeDrawingWidthNumericUpDown" Minimum="1" Maximum="100" Margin="2,2" MinWidth="50" 
-                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=BoardStylusWidth, Mode=TwoWay}"
+                                 Value="{Binding Source={x:Static t:UserSettings.All}, Path=BoardStylusWidth, Mode=TwoWay}"
                                  ToolTip="{DynamicResource S.Recorder.Width}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                 <n:ExtendedRadioButton Grid.Column="4" x:Name="EllipseRadioButton" Icon="{StaticResource Vector.Ellipse}" 
                                        Cursor="Hand" ContentWidth="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
-                                       IsChecked="{Binding BoardStylusTip, Source={x:Static u:UserSettings.All}, Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
+                                       IsChecked="{Binding BoardStylusTip, Source={x:Static t:UserSettings.All}, Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
 
                 <n:ExtendedRadioButton Grid.Column="5" x:Name="RectangleRadioButton" Icon="{StaticResource Vector.Rectangle}" 
                                        Cursor="Hand" ContentWidth="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
-                                       IsChecked="{Binding BoardStylusTip, Source={x:Static u:UserSettings.All}, Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
+                                       IsChecked="{Binding BoardStylusTip, Source={x:Static t:UserSettings.All}, Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
 
                 <Grid Grid.Column="6">
                     <Grid.RowDefinitions>
@@ -138,10 +139,10 @@
                     </Grid.RowDefinitions>
 
                     <n:ExtendedCheckBox Grid.Row="0" x:Name="FitToCurveRadioButton" Text="{DynamicResource S.FreeDrawing.FitToCurve}" Cursor="Hand" Padding="0" Margin="3,0,0,0" VerticalAlignment="Center"
-                                        IsChecked="{Binding BoardFitToCurve, Source={x:Static u:UserSettings.All}}" FontSize="11"/>
+                                        IsChecked="{Binding BoardFitToCurve, Source={x:Static t:UserSettings.All}}" FontSize="11"/>
 
                     <n:ExtendedCheckBox Grid.Row="1" x:Name="IsHighlighterRadioButton" Text="{DynamicResource S.FreeDrawing.Highlighter}" Cursor="Hand" Padding="0" Margin="3,0,0,0" VerticalAlignment="Center"
-                                        IsChecked="{Binding BoardIsHighlighter, Source={x:Static u:UserSettings.All}}" FontSize="11"/>
+                                        IsChecked="{Binding BoardIsHighlighter, Source={x:Static t:UserSettings.All}}" FontSize="11"/>
                 </Grid>
             </Grid>
 
@@ -158,20 +159,20 @@
                 <Separator Grid.Column="0" Width="1" Margin="0,1,10,1"/>
 
                 <n:IntegerUpDown Grid.Column="2" x:Name="BorderEraserHeightNumericUpDown" Minimum="1" Maximum="100" Margin="2,2" MinWidth="50" 
-                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=BoardEraserHeight, Mode=TwoWay}"
+                                 Value="{Binding Source={x:Static t:UserSettings.All}, Path=BoardEraserHeight, Mode=TwoWay}"
                                  ToolTip="{DynamicResource S.Recorder.Height}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                 <n:IntegerUpDown Grid.Column="3" x:Name="BorderEraserWidthNumericUpDown" Minimum="1" Maximum="100" Margin="2,2" MinWidth="50" 
-                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=BoardEraserWidth, Mode=TwoWay}"
+                                 Value="{Binding Source={x:Static t:UserSettings.All}, Path=BoardEraserWidth, Mode=TwoWay}"
                                  ToolTip="{DynamicResource S.Recorder.Width}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                 <n:ExtendedRadioButton Grid.Column="4" x:Name="EraserEllipseRadioButton" Icon="{StaticResource Vector.Ellipse}" 
                                        Cursor="Hand" ContentWidth="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
-                                       IsChecked="{Binding BoardEraserStylusTip, Source={x:Static u:UserSettings.All}, Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
+                                       IsChecked="{Binding BoardEraserStylusTip, Source={x:Static t:UserSettings.All}, Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Ellipse}"/>
 
                 <n:ExtendedRadioButton Grid.Column="5" x:Name="EraserRectangleRadioButton" Icon="{StaticResource Vector.Rectangle}" 
                                        Cursor="Hand" ContentWidth="20" Padding="0" Style="{StaticResource Style.ImageRadioButton.NoText}"
-                                       IsChecked="{Binding BoardEraserStylusTip, Source={x:Static u:UserSettings.All}, Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
+                                       IsChecked="{Binding BoardEraserStylusTip, Source={x:Static t:UserSettings.All}, Converter={StaticResource StylusTipToBoolConverter}, ConverterParameter=Rectangle}"/>
             </Grid>
         </Grid>
 
@@ -191,8 +192,8 @@
 
                     <n:InkCanvasExtended.DefaultDrawingAttributes>
                         <MultiBinding Converter="{StaticResource SelectionToDrawingAttributesConverter}">
-                            <Binding Source="{x:Static u:UserSettings.All}" Path="BoardStylusHeight"/>
-                            <Binding Source="{x:Static u:UserSettings.All}" Path="BoardStylusWidth"/>
+                            <Binding Source="{x:Static t:UserSettings.All}" Path="BoardStylusHeight"/>
+                            <Binding Source="{x:Static t:UserSettings.All}" Path="BoardStylusWidth"/>
                             <Binding ElementName="TipColorBox" Path="SelectedColor"/>
                             <Binding ElementName="FitToCurveRadioButton" Path="IsChecked"/>
                             <Binding ElementName="IsHighlighterRadioButton" Path="IsChecked"/>
@@ -202,8 +203,8 @@
 
                     <n:InkCanvasExtended.EraserShape>
                         <MultiBinding Converter="{StaticResource SelectionToStylusShapeConverter}" UpdateSourceTrigger="PropertyChanged">
-                            <Binding Source="{x:Static u:UserSettings.All}" Path="BoardStylusWidth" UpdateSourceTrigger="PropertyChanged"/>
-                            <Binding Source="{x:Static u:UserSettings.All}" Path="BoardStylusHeight" UpdateSourceTrigger="PropertyChanged"/>
+                            <Binding Source="{x:Static t:UserSettings.All}" Path="BoardStylusWidth" UpdateSourceTrigger="PropertyChanged"/>
+                            <Binding Source="{x:Static t:UserSettings.All}" Path="BoardStylusHeight" UpdateSourceTrigger="PropertyChanged"/>
                             <Binding ElementName="EraserRectangleRadioButton" Path="IsChecked" UpdateSourceTrigger="PropertyChanged"/>
                         </MultiBinding>
                     </n:InkCanvasExtended.EraserShape>
@@ -217,7 +218,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="0" Visibility="{Binding RecorderThinMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource Bool2Visibility}}">
+            <Grid Grid.Column="0" Visibility="{Binding RecorderThinMode, Source={x:Static t:UserSettings.All}, Converter={StaticResource Bool2Visibility}}">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -247,7 +248,7 @@
 
                 <Separator Width="1" Margin="5,3"/>
 
-                <Viewbox Stretch="UniformToFill" ClipToBounds="True" Focusable="False" Visibility="{Binding RecorderThinMode, Source={x:Static u:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}">
+                <Viewbox Stretch="UniformToFill" ClipToBounds="True" Focusable="False" Visibility="{Binding RecorderThinMode, Source={x:Static t:UserSettings.All}, Converter={StaticResource InvertedBoolToVisibility}}">
                     <Grid MaxHeight="30" MaxWidth="30" Opacity="{DynamicResource Element.Opacity}">
                         <n:CircularProgressBar StrokeThickness="1" Percentage="100" SegmentColor="Gray" Radius="12"/>
                         <n:CircularProgressBar StrokeThickness="10" Percentage="100" SegmentColor="#FFF0F1F1" Radius="5" />
@@ -264,7 +265,7 @@
                 </Viewbox>
 
                 <n:IntegerUpDown x:Name="FpsNumericUpDown" Margin="1,3" StepValue="1" Minimum="1" Maximum="60" TabIndex="1"
-                                 Value="{Binding Source={x:Static u:UserSettings.All}, Path=LatestFps, Mode=TwoWay}" MinWidth="45">
+                                 Value="{Binding Source={x:Static t:UserSettings.All}, Path=LatestFps, Mode=TwoWay}" MinWidth="45">
                     <n:IntegerUpDown.ToolTip>
                         <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource S.Recorder.Fps}"/>
                     </n:IntegerUpDown.ToolTip>
@@ -274,13 +275,13 @@
 
                 <Separator Width="1" Margin="5,3"/>
 
-                <n:IntegerBox x:Name="WidthIntegerBox" Value="{Binding Source={x:Static u:UserSettings.All}, Path=BoardWidth, Mode=TwoWay}"
+                <n:IntegerBox x:Name="WidthIntegerBox" Value="{Binding Source={x:Static t:UserSettings.All}, Path=BoardWidth, Mode=TwoWay}"
                               Offset="{x:Static u:Constants.HorizontalBoardOffset}" Minimum="100" Maximum="3000" TabIndex="2" Height="Auto" Padding="4,0" Margin="1,3"
                               ToolTip="{DynamicResource S.Recorder.Width}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                 <TextBlock Text="×" FontSize="16" FontFamily="Segoe Script" Margin="1" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
 
-                <n:IntegerBox x:Name="HeightIntegerBox" Value="{Binding Source={x:Static u:UserSettings.All}, Path=BoardHeight, Mode=TwoWay}"
+                <n:IntegerBox x:Name="HeightIntegerBox" Value="{Binding Source={x:Static t:UserSettings.All}, Path=BoardHeight, Mode=TwoWay}"
                               Offset="{x:Static u:Constants.VerticalBoardOffset}" Minimum="100" Maximum="3000" TabIndex="3" Height="Auto" Padding="4,0" Margin="1,3"
                               ToolTip="{DynamicResource S.Recorder.Height}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
@@ -298,7 +299,7 @@
 
                 <n:ExtendedButton x:Name="StopButton" Text="{DynamicResource S.Recorder.Stop}" Icon="{StaticResource Vector.Stop}"
                                   Style="{StaticResource Style.Button.Horizontal}" TabIndex="5" ContentHeight="16" ContentWidth="16" 
-                                  KeyGesture="{Binding Source={x:Static u:UserSettings.All}, Path=StopShortcut, Converter={StaticResource KeysToStringConverter}}" 
+                                  KeyGesture="{Binding Source={x:Static t:UserSettings.All}, Path=StopShortcut, Converter={StaticResource KeysToStringConverter}}" 
                                   Click="StopButton_Click"/>
             </StackPanel>
         </Grid>

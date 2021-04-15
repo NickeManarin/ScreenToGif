@@ -1,22 +1,23 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
-                    xmlns:u="clr-namespace:ScreenToGif.Util">
+                    xmlns:u="clr-namespace:ScreenToGif.Util"
+                    xmlns:t="clr-namespace:ScreenToGif.Settings">
 
     <c:ColorToBrush x:Key="ColorToBrush"/>
 
     <!--Checker Drawing Brush-->
-    <DrawingBrush x:Key="Checker.DrawingBrush" Viewport="{Binding GridSize, Source={x:Static u:UserSettings.All}}" 
+    <DrawingBrush x:Key="Checker.DrawingBrush" Viewport="{Binding GridSize, Source={x:Static t:UserSettings.All}}" 
                   ViewportUnits="Absolute" TileMode="Tile" Opacity="1">
         <DrawingBrush.Drawing>
             <DrawingGroup>
-                <GeometryDrawing Brush="{Binding GridColor1, Source={x:Static u:UserSettings.All}, Converter={StaticResource ColorToBrush}}">
+                <GeometryDrawing Brush="{Binding GridColor1, Source={x:Static t:UserSettings.All}, Converter={StaticResource ColorToBrush}}">
                     <GeometryDrawing.Geometry>
                         <RectangleGeometry Rect="0,0 100,100" />
                     </GeometryDrawing.Geometry>
                 </GeometryDrawing>
 
-                <GeometryDrawing Brush="{Binding GridColor2, Source={x:Static u:UserSettings.All}, Converter={StaticResource ColorToBrush}}">
+                <GeometryDrawing Brush="{Binding GridColor2, Source={x:Static t:UserSettings.All}, Converter={StaticResource ColorToBrush}}">
                     <GeometryDrawing.Geometry>
                         <GeometryGroup>
                             <RectangleGeometry Rect="0,0 50,50" />
@@ -28,11 +29,11 @@
         </DrawingBrush.Drawing>
     </DrawingBrush>
 
-    <DrawingBrush x:Shared="False" x:Key="Background.Lines" Viewport="{Binding BoardGridSize, Source={x:Static u:UserSettings.All}}"
+    <DrawingBrush x:Shared="False" x:Key="Background.Lines" Viewport="{Binding BoardGridSize, Source={x:Static t:UserSettings.All}}"
                   ViewportUnits="Absolute" TileMode="FlipXY" Opacity="1">
         <DrawingBrush.Drawing>
             <DrawingGroup>
-                <GeometryDrawing Brush="{Binding BoardGridBackground, Source={x:Static u:UserSettings.All}, Converter={StaticResource ColorToBrush}}">
+                <GeometryDrawing Brush="{Binding BoardGridBackground, Source={x:Static t:UserSettings.All}, Converter={StaticResource ColorToBrush}}">
                     <GeometryDrawing.Geometry>
                         <RectangleGeometry Rect="0,0,80,80"/>
                     </GeometryDrawing.Geometry>
@@ -43,7 +44,7 @@
                         <LineGeometry StartPoint="0,0" EndPoint="80,0"/>
                     </GeometryDrawing.Geometry>
                     <GeometryDrawing.Pen>
-                        <Pen Brush="{Binding BoardGridColor2, Source={x:Static u:UserSettings.All}, Converter={StaticResource ColorToBrush}, FallbackValue=White}" Thickness="1"/>
+                        <Pen Brush="{Binding BoardGridColor2, Source={x:Static t:UserSettings.All}, Converter={StaticResource ColorToBrush}, FallbackValue=White}" Thickness="1"/>
                     </GeometryDrawing.Pen>
                 </GeometryDrawing>
                 
@@ -52,7 +53,7 @@
                         <LineGeometry StartPoint="0,0" EndPoint="80,0"/>
                     </GeometryDrawing.Geometry>
                     <GeometryDrawing.Pen>
-                        <Pen Brush="{Binding BoardGridColor1, Source={x:Static u:UserSettings.All}, Converter={StaticResource ColorToBrush}, FallbackValue=White}" Thickness="1"/>
+                        <Pen Brush="{Binding BoardGridColor1, Source={x:Static t:UserSettings.All}, Converter={StaticResource ColorToBrush}, FallbackValue=White}" Thickness="1"/>
                     </GeometryDrawing.Pen>
                 </GeometryDrawing>
             </DrawingGroup>

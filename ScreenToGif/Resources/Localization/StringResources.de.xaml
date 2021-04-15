@@ -457,27 +457,27 @@
     <s:String x:Key="S.Options.Upload.Proxy.Password">Passwort:</s:String>
     <s:String x:Key="S.Options.Upload.Get">OAuth-Token abholen</s:String>
     <s:String x:Key="S.Options.Upload.PasteToken">Zugriffsberechtigung (Token) hier einfügen</s:String>
-    <s:String x:Key="S.Options.Upload.Authorize">Autorisieren</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Authorize">Autorisieren</s:String>
     <s:String x:Key="S.Options.Upload.Refresh">Aktualisieren</s:String>
     <s:String x:Key="S.Options.Upload.Clear">Löschen</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Anonymous">Imgur (anonym)</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Direct">Direkt-Links verwenden</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Gifv">Links mit der GIFV-Erweiterung anstelle von GIF holen</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.ToAlbum">GIF-Dateien in ausgewähltes Album hochladen</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Album">Album:</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.AskMe">Vor dem Hochladen fragen</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.NotPossible">Öffnen der Seite und Erhalt der Imgur-Zugriffsberechtigung (Token) fehlgeschlagen.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Missing">Um das Programm zu autorisieren, müssen Sie über Zugriffsberechtigung (Token) verfügen.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Completed">Imgur-Zugriffsberechtigung beendet.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Error">Imgur-Zugriffsberechtigung fehlgeschlagen. Versuchen Sie es später nochmal oder verwenden Sie eine neue Zugriffsberechtigung (Token).</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Header">Autorisieren der Anwendung fehlgeschlagen</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Message">Überprüfen Sie, ob Sie den richtigen Token angegeben haben und ob Sie über eine Internetverbindung verfügen.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Refresh.None">Um die Zugriffsberechtigung (Token) zu aktualisieren, müssen Sie zuerst das Autorisierungsverfahren beenden.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.NotAuthorized">Nicht autorisiert</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Expired">Zugriffsberechtigung abgelaufen in {0}.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Valid">Zugriffsberechtigung gültig bis {0}.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Removed">Imgur-Zugriffsberechtigung gelöscht.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Error.AlbumLoad">Laden der Albumliste fehlgeschlagen.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Anonymous">Imgur (anonym)</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Direct">Direkt-Links verwenden</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Gifv">Links mit der GIFV-Erweiterung anstelle von GIF holen</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.ToAlbum">GIF-Dateien in ausgewähltes Album hochladen</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Album">Album:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.AskMe">Vor dem Hochladen fragen</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.NotPossible">Öffnen der Seite und Erhalt der Imgur-Zugriffsberechtigung (Token) fehlgeschlagen.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Token">Um das Programm zu autorisieren, müssen Sie über Zugriffsberechtigung (Token) verfügen.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Completed">Imgur-Zugriffsberechtigung beendet.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Error">Imgur-Zugriffsberechtigung fehlgeschlagen. Versuchen Sie es später nochmal oder verwenden Sie eine neue Zugriffsberechtigung (Token).</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Header">Autorisieren der Anwendung fehlgeschlagen</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Message">Überprüfen Sie, ob Sie den richtigen Token angegeben haben und ob Sie über eine Internetverbindung verfügen.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Refresh.None">Um die Zugriffsberechtigung (Token) zu aktualisieren, müssen Sie zuerst das Autorisierungsverfahren beenden.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.NotAuthorized">Nicht autorisiert</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Expired">Zugriffsberechtigung abgelaufen in {0}.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Valid">Zugriffsberechtigung gültig bis {0}.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Removed">Imgur-Zugriffsberechtigung gelöscht.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.AlbumLoad">Laden der Albumliste fehlgeschlagen.</s:String>
     <s:String x:Key="S.Options.Upload.Gfycat.Anonymous">Gfycat (anonym)</s:String>
     <s:String x:Key="S.Options.Upload.Yandex.Token">OAuth-Token:</s:String>
     <s:String x:Key="S.Options.Upload.Pick.Destination">Ziel wählen</s:String>
@@ -1352,7 +1352,7 @@
     <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable">Allgemeine Farbtabelle verwenden.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable.Info">Kann die Qualität und/oder Größe der GIF-Animation verringern.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Loop">Wiederholung:</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">Wiederholtes GIF</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Looped">Wiederholtes GIF</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Endlosschleife</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Anzahl Wiederholungen</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable">Transparenz ermöglichen.</s:String>
@@ -1379,9 +1379,9 @@
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">Grafiken komprimieren</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions">PSD-Einstellungen</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Compress">Grafiken komprimieren</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">Bildmaterial mit Hilfe des RLE-Algorithmus komprimieren</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Info">Bildmaterial mit Hilfe des RLE-Algorithmus komprimieren</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline">Zeitachsendaten speichern</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">Exportiert zusätzlich Zeitachsen der Frames</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Info">Exportiert zusätzlich Zeitachsen der Frames</s:String>
     <s:String x:Key="S.SaveAs.ProjectOptions">Projekt-Einstellungen</s:String>
     
     <s:String x:Key="S.SaveAs.Extras">Parameter:</s:String>
@@ -1444,9 +1444,9 @@
     <s:String x:Key="S.SaveAs.Warning.Canceled">Vorgang wurde abgebrochen.</s:String>
     
     <!--SaveAs • Export-->
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">Frames exportieren</s:String>
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Instruction">Möchten Sie die Frames wirklich exportieren?</s:String>
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Message">Diese Aktion wird {0} Frames direkt in den gewählten Ordner exportieren.</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Title">Frames exportieren</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">Möchten Sie die Frames wirklich exportieren?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">Diese Aktion wird {0} Frames direkt in den gewählten Ordner exportieren.</s:String>
     
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">Rückmeldung</s:String>

@@ -4,6 +4,7 @@
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
         xmlns:u="clr-namespace:ScreenToGif.Util"
+        xmlns:t="clr-namespace:ScreenToGif.Settings"
         Title="{DynamicResource S.Options.Title}" Height="610" Width="800" MinWidth="680" MinHeight="460" 
         Background="{DynamicResource Panel.Background}" Icon="/Resources/Logo.ico" 
         SizeToContent="Width" WindowStartupLocation="CenterScreen" UseLayoutRounding="True" SnapsToDevicePixels="True"
@@ -22,12 +23,6 @@
         <CommandBinding Command="{StaticResource Command.OpenLocalSettings}" CanExecute="RemoveLocalSettings_CanExecute" Executed="OpenLocalSettings_Execute"/>
         <CommandBinding Command="{StaticResource Command.RemoveLocalSettings}" CanExecute="RemoveLocalSettings_CanExecute" Executed="RemoveLocalSettings_Execute"/>
 
-        <CommandBinding Command="{StaticResource Command.MoveUp}" CanExecute="MoveUp_CanExecute" Executed="MoveUp_Executed"/>
-        <CommandBinding Command="{StaticResource Command.MoveDown}" CanExecute="MoveDown_CanExecute" Executed="MoveDown_Executed"/>
-        <CommandBinding Command="{StaticResource Command.Add}" CanExecute="Add_CanExecute" Executed="Add_Executed"/>
-        <CommandBinding x:Name="EditCommandBinding" Command="{StaticResource Command.Edit}" CanExecute="Remove_CanExecute" Executed="Edit_Executed"/>
-        <CommandBinding Command="{StaticResource Command.Remove}" CanExecute="Remove_CanExecute" Executed="Remove_Executed"/>
-
         <CommandBinding Command="{StaticResource Command.BrowseFfmpeg}" CanExecute="BrowseFfmpeg_CanExecute" Executed="BrowseFfmpeg_Execute"/>
         <CommandBinding Command="{StaticResource Command.BrowseGifski}" CanExecute="BrowseGifski_CanExecute" Executed="BrowseGifski_Execute"/>
         <CommandBinding Command="{StaticResource Command.BrowseSharpDx}" CanExecute="BrowseSharpDx_CanExecute" Executed="BrowseSharpDx_Execute"/>
@@ -39,7 +34,7 @@
         <c:BoolOrToVisibility x:Key="BoolOrToVisibility"/>
     </Window.Resources>
 
-    <Grid DataContext="{x:Static u:UserSettings.All}">
+    <Grid DataContext="{x:Static t:UserSettings.All}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="40"/>
@@ -69,8 +64,8 @@
                     </Style>
                 </StackPanel.Resources>
 
-                <n:ExtendedRadioButton x:Name="AppRadio" Text="{DynamicResource S.Options.App}" Icon="{StaticResource Vector.Application}"/>
-                <n:ExtendedRadioButton x:Name="RecorderRadio" Text="{DynamicResource S.Options.Recorder}" Icon="{StaticResource Vector.Record}" IsChecked="True"/>
+                <n:ExtendedRadioButton x:Name="AppRadio" Text="{DynamicResource S.Options.App}" Icon="{StaticResource Vector.Application}" IsChecked="True"/>
+                <n:ExtendedRadioButton x:Name="RecorderRadio" Text="{DynamicResource S.Options.Recorder}" Icon="{StaticResource Vector.Record}"/>
                 <n:ExtendedRadioButton x:Name="EditorRadio" Text="{DynamicResource S.Options.Editor}" Icon="{StaticResource Vector.Editor}"/>
                 <n:ExtendedRadioButton x:Name="AutomaticRadio" Text="{DynamicResource S.Options.Tasks}" Icon="{StaticResource Vector.Encoder}"/>
                 <n:ExtendedRadioButton x:Name="ShortcutsRadio" Text="{DynamicResource S.Options.Shortcuts}" Icon="{StaticResource Vector.Keyboard}"/>
@@ -163,7 +158,7 @@
 
                                 <TextBlock Grid.Column="0" Text="{DynamicResource S.Options.App.Theme.Scheme}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="2,0,5,0" VerticalAlignment="Center"/>
                                 <ComboBox Grid.Column="1" x:Name="AppThemeComboBox" Height="28" VerticalContentAlignment="Center" Padding="5,0" SelectedValuePath="Tag" 
-                                          SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=MainTheme, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          SelectedValue="{Binding Source={x:Static t:UserSettings.All}, Path=MainTheme, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                           SelectionChanged="AppThemeComboBox_SelectionChanged">
 
                                     <StackPanel Orientation="Horizontal" Tag="Light">
@@ -672,7 +667,7 @@
                                 
                                 <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.PreStart}" Margin="5,3" IsChecked="{Binding Path=UsePreStart, Mode=TwoWay}"/>
                                 <WrapPanel Margin="20,3,5,3" Visibility="{Binding UsePreStart, Converter={StaticResource Bool2Visibility}}">
-                                    <n:IntegerUpDown Minimum="2" Maximum="15" MinWidth="50" Value="{Binding Source={x:Static u:UserSettings.All}, Path=PreStartValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <n:IntegerUpDown Minimum="2" Maximum="15" MinWidth="50" Value="{Binding Source={x:Static t:UserSettings.All}, Path=PreStartValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                     <TextBlock Text="{DynamicResource S.Options.Recorder.PreStart.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
                                 </WrapPanel>
 
@@ -680,11 +675,11 @@
                                                     Info="{DynamicResource S.Options.Recorder.CursorFollowing.Info}"/>
 
                                 <WrapPanel Margin="20,3,5,3" Visibility="{Binding CursorFollowing, Converter={StaticResource Bool2Visibility}}">
-                                    <n:IntegerUpDown Minimum="2" Maximum="100" MinWidth="50" Value="{Binding Source={x:Static u:UserSettings.All}, Path=FollowBuffer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <n:IntegerUpDown Minimum="2" Maximum="100" MinWidth="50" Value="{Binding Source={x:Static t:UserSettings.All}, Path=FollowBuffer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                     <TextBlock Text="{DynamicResource S.Options.Recorder.FollowMargin.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
                                 </WrapPanel>
                                 <WrapPanel Margin="20,3,5,3" Visibility="{Binding CursorFollowing, Converter={StaticResource Bool2Visibility}}">
-                                    <n:IntegerUpDown Minimum="2" Maximum="100" MinWidth="50" Value="{Binding Source={x:Static u:UserSettings.All}, Path=FollowBufferInvisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <n:IntegerUpDown Minimum="2" Maximum="100" MinWidth="50" Value="{Binding Source={x:Static t:UserSettings.All}, Path=FollowBufferInvisible, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                     <TextBlock Text="{DynamicResource S.Options.Recorder.FollowMarginInvisible.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
                                 </WrapPanel>
 
@@ -1044,7 +1039,7 @@
                                                     Info="{DynamicResource S.Options.Editor.General.LimitHistory.Info}"/>
 
                                 <WrapPanel Margin="10,3,5,3" Visibility="{Binding SetHistoryLimit, Converter={StaticResource Bool2Visibility}}">
-                                    <n:IntegerUpDown Minimum="0" Maximum="150" MinWidth="50" Value="{Binding Source={x:Static u:UserSettings.All}, Path=HistoryLimit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <n:IntegerUpDown Minimum="0" Maximum="150" MinWidth="50" Value="{Binding Source={x:Static t:UserSettings.All}, Path=HistoryLimit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                     <TextBlock Text="{DynamicResource S.Options.Editor.General.LimitHistory.Maximum}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" 
                                                Foreground="{DynamicResource Element.Foreground.Gray150}"/>
                                 </WrapPanel>
@@ -1068,6 +1063,14 @@
                             <ColumnDefinition/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
+
+                        <Grid.CommandBindings>
+                            <CommandBinding Command="{StaticResource Command.MoveUp}" CanExecute="MoveUp_CanExecute" Executed="MoveUp_Executed"/>
+                            <CommandBinding Command="{StaticResource Command.MoveDown}" CanExecute="MoveDown_CanExecute" Executed="MoveDown_Executed"/>
+                            <CommandBinding Command="{StaticResource Command.Add}" CanExecute="Add_CanExecute" Executed="Add_Executed"/>
+                            <CommandBinding x:Name="EditCommandBinding" Command="{StaticResource Command.Edit}" CanExecute="Remove_CanExecute" Executed="Edit_Executed"/>
+                            <CommandBinding Command="{StaticResource Command.Remove}" CanExecute="Remove_CanExecute" Executed="Remove_Executed"/>
+                        </Grid.CommandBindings>
 
                         <n:LabelSeparator Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{DynamicResource S.Options.Tasks.List}"/>
                         <DataGrid Grid.Row="1" Grid.Column="0" Grid.RowSpan="6" x:Name="TasksDataGrid" Margin="10,5,5,5" MinHeight="60" SelectionMode="Single" SelectionUnit="FullRow" CanUserSortColumns="False"
@@ -1280,16 +1283,19 @@
                             <n:ExtendedListBoxItem Image="{StaticResource Flag.Germany}" Tag="de" Content="German / Deutsch" Author="Andy Kleinert, PeterK., Christoph Voigt, Michael Reukauff"
                                                    ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=de, Converter={StaticResource TagToSelection}}"/>
 
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Greece}" Tag="el" Content="Greek / Ελληνικά" Author="Χρήστος Μητσιάρης"
+                                                   ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=el, Converter={StaticResource TagToSelection}}"/>
+                            
                             <n:ExtendedListBoxItem Image="{StaticResource Flag.Hungary}" Tag="hu" Content="Hungarian / Magyar" Author="László Földes"
                                                    ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=hu, Converter={StaticResource TagToSelection}}"/>
 
                             <n:ExtendedListBoxItem Image="{StaticResource Flag.Italy}" Tag="it" Content="Italian / Italiano" Author="HispidaBytes, Michele Locati, Giovanni Rinaldin"
                                                    ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=it, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Japan}" Tag="ja" Content="Japanese / 日本語" Author="oxosi, Toshio, Winston, Chihiro Watanabe"
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Japan}" Tag="ja" Content="Japanese / 日本語" Author="Seaeees, oxosi, Toshio, Winston, Chihiro Watanabe"
                                                    ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=ja, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ExtendedListBoxItem Image="{StaticResource Flag.SouthKorea}" Tag="ko" Content="Korean / 한국어" Author="Manbok, Lytie"
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.SouthKorea}" Tag="ko" Content="Korean / 한국어" Author="hoho, Manbok, Lytie"
                                                    ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=ko, Converter={StaticResource TagToSelection}}"/>
 
                             <n:ExtendedListBoxItem Image="{StaticResource Flag.Poland}" Tag="pl" Content="Polish / Polski" Author="Michał Stojke, Sebastian Pietras, Jakub Bazgier" 
@@ -1301,7 +1307,7 @@
                             <n:ExtendedListBoxItem Image="{StaticResource Flag.Portugal}" Tag="pt-PT" Content="Portuguese (Portugal) / Português (Portugal)" Author="Duarte Ramos" 
                                                    ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=pt-PT, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Turkey}" Tag="tr" Content="Turkish / Türkçe" Author="seferciogluecce, Omer Mollamehmetoglu, Bekir"
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Turkey}" Tag="tr" Content="Turkish / Türkçe" Author="Volkan Dağdelen, seferciogluecce, Omer Mollamehmetoglu, Bekir"
                                                    ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=tr, Converter={StaticResource TagToSelection}}"/>
 
                             <n:ExtendedListBoxItem Image="{StaticResource Flag.Argentina}" Tag="es-AR" Content="Spanish (Argentina) / Español (Argentina)" Author="KNTRO (kntro@msn.com)"
@@ -1424,7 +1430,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Options.Storage.Paths.Cache}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="2,0,5,0" VerticalAlignment="Center"/>
-                                <n:ExtendedTextBox Grid.Row="0" Grid.Column="1" x:Name="CacheTextBox" Margin="0,3" Text="{Binding TemporaryFolder, Source={x:Static u:UserSettings.All}, UpdateSourceTrigger=PropertyChanged}" 
+                                <n:ExtendedTextBox Grid.Row="0" Grid.Column="1" x:Name="CacheTextBox" Margin="0,3" Text="{Binding TemporaryFolder, Source={x:Static t:UserSettings.All}, UpdateSourceTrigger=PropertyChanged}" 
                                                    IsEnabled="{Binding ElementName=CheckCacheButton, Path=IsEnabled, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" LostFocus="CacheTextBox_LostFocus"/>
 
                                 <n:ExtendedButton Grid.Row="0" Grid.Column="2" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Open}" ContentWidth="20" ContentHeight="20"
@@ -1433,7 +1439,7 @@
                                                   ToolTip="{DynamicResource S.Options.Storage.Paths.Browse}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{StaticResource Command.BrowseCache}"/>
 
                                 <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.Options.Storage.Paths.Logs}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="2,0,5,0" VerticalAlignment="Center"/>
-                                <n:ExtendedTextBox Grid.Row="1" Grid.Column="1" Margin="0,3" Text="{Binding LogsFolder, Source={x:Static u:UserSettings.All}}"/>
+                                <n:ExtendedTextBox Grid.Row="1" Grid.Column="1" Margin="0,3" Text="{Binding LogsFolder, Source={x:Static t:UserSettings.All}}"/>
 
                                 <n:ExtendedButton Grid.Row="1" Grid.Column="2" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Open}" ContentWidth="20" ContentHeight="20"
                                                   ToolTip="{DynamicResource S.Options.Storage.Paths.Logs.Choose}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Click="ChooseLogsPath_Click"/>
@@ -1485,12 +1491,19 @@
 
                         <Expander Grid.Row="3" Header="{DynamicResource S.Options.Other}" IsExpanded="True">
                             <StackPanel>
+                                <n:ExtendedCheckBox Text="{DynamicResource S.Options.Storage.DeleteEverything}" Margin="10,3,5,3"
+                                                    IsChecked="{Binding Source={x:Static t:UserSettings.All}, Path=DeleteCacheWhenClosing, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                <n:ExtendedCheckBox Text="{DynamicResource S.Options.Storage.AskDeleteEverything}" Margin="30,3,5,3"
+                                                    IsChecked="{Binding Source={x:Static t:UserSettings.All}, Path=AskDeleteCacheWhenClosing, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    Visibility="{Binding Source={x:Static t:UserSettings.All}, Path=DeleteCacheWhenClosing, Converter={StaticResource Bool2Visibility}}"/>
+                                
                                 <n:ExtendedCheckBox Text="{DynamicResource S.Options.Storage.AutomaticRemoval}" Margin="10,3,5,3"
-                                                    IsChecked="{Binding Source={x:Static u:UserSettings.All}, Path=AutomaticCleanUp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                    IsChecked="{Binding Source={x:Static t:UserSettings.All}, Path=AutomaticCleanUp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                     ToolTip="{DynamicResource S.Options.Storage.AutomaticRemoval.Info}"/>
 
-                                <WrapPanel Margin="30,3,5,3" Visibility="{Binding Source={x:Static u:UserSettings.All}, Path=AutomaticCleanUp, Converter={StaticResource Bool2Visibility}}">
-                                    <n:IntegerUpDown Minimum="1" Maximum="30" MinWidth="50" Value="{Binding Source={x:Static u:UserSettings.All}, Path=AutomaticCleanUpDays, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                <WrapPanel Margin="30,3,5,3" Visibility="{Binding Source={x:Static t:UserSettings.All}, Path=AutomaticCleanUp, Converter={StaticResource Bool2Visibility}}">
+                                    <n:IntegerUpDown Minimum="1" Maximum="30" MinWidth="50" Value="{Binding Source={x:Static t:UserSettings.All}, Path=AutomaticCleanUpDays, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                     <TextBlock Text="{DynamicResource S.Options.Storage.AutomaticRemovalDays.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
                                 </WrapPanel>
                             </StackPanel>
@@ -1498,14 +1511,20 @@
                     </Grid>
 
                     <!--Cloud-->
-                    <Grid x:Name="CloudGrid" Visibility="{Binding IsChecked, Converter={StaticResource Bool2Visibility}, ElementName=CloudRadioButton}">
+                    <Grid x:Name="CloudGrid" Visibility="{Binding IsChecked, Converter={StaticResource Bool2Visibility}, ElementName=CloudRadioButton}" Loaded="CloudGrid_Loaded">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
+                        <Grid.CommandBindings>
+                            <CommandBinding Command="{StaticResource Command.Add}" CanExecute="AddUpload_CanExecute" Executed="AddUpload_Executed"/>
+                            <CommandBinding x:Name="EditUploadCommandBinding" Command="{StaticResource Command.Edit}" CanExecute="Upload_CanExecute" Executed="EditUpload_Executed"/>
+                            <CommandBinding Command="{StaticResource Command.Remove}" CanExecute="Upload_CanExecute" Executed="RemoveUpload_Executed"/>
+                            <CommandBinding Command="{StaticResource Command.ViewHistory}" CanExecute="Upload_CanExecute" Executed="HistoryUpload_Executed"/>
+                        </Grid.CommandBindings>
+                        
                         <Expander Grid.Row="0" Header="{DynamicResource S.Options.Upload.Proxy}" IsExpanded="True">
                             <DockPanel>
                                 <Grid DockPanel.Dock="Top">
@@ -1520,7 +1539,7 @@
                                     </Grid.ColumnDefinitions>
 
                                     <TextBlock Text="{DynamicResource S.Options.Upload.Proxy.Mode}" VerticalAlignment="Center" Margin="5" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                                    <ComboBox Grid.Column="1" Margin="3" VerticalContentAlignment="Center" SelectedValuePath="Tag" SelectedValue="{Binding Source={x:Static u:UserSettings.All}, Path=ProxyMode}">
+                                    <ComboBox Grid.Column="1" Margin="3" VerticalContentAlignment="Center" SelectedValuePath="Tag" SelectedValue="{Binding Source={x:Static t:UserSettings.All}, Path=ProxyMode}">
                                         <ComboBoxItem Content="{DynamicResource S.Options.Upload.Proxy.Mode.Disabled}" Tag="{x:Static u:ProxyType.Disabled}"/>
                                         <ComboBoxItem Content="{DynamicResource S.Options.Upload.Proxy.Mode.Manual}" Tag="{x:Static u:ProxyType.Manual}"/>
                                         <ComboBoxItem Content="{DynamicResource S.Options.Upload.Proxy.Mode.System}" Tag="{x:Static u:ProxyType.System}"/>
@@ -1561,119 +1580,58 @@
                             </DockPanel>
                         </Expander>
 
-                        <Expander Grid.Row="1" Header="{DynamicResource S.Options.Upload.Imgur.Anonymous}" IsExpanded="True">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
+                        <n:LabelSeparator Grid.Row="1" Text="{DynamicResource S.Options.Upload.Presets}"/>
+                        <Grid Grid.Row="2" Margin="10,0,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
 
-                                <n:ExtendedCheckBox Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Options.Upload.Imgur.Direct}" Margin="5,3" 
-                                                    IsChecked="{Binding ImgurAnonymousUseDirectLinks, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                <n:ExtendedCheckBox Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.Options.Upload.Imgur.Gifv}" Margin="5,3"
-                                                    IsChecked="{Binding ImgurAnonymousUseGifvLink, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                            </Grid>
-                        </Expander>
+                            <DataGrid Grid.Row="0" Grid.Column="0" Grid.RowSpan="5" x:Name="UploadDataGrid" Margin="5" MinHeight="60" SelectionMode="Single" SelectionUnit="FullRow" CanUserSortColumns="False"
+                                      MouseDoubleClick="UploadDataGrid_MouseDoubleClick" PreviewKeyDown="UploadDataGrid_PreviewKeyDown">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Header="{DynamicResource S.Options.Upload.Presets.Enabled}" Width="Auto" MinWidth="50">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <n:ExtendedCheckBox IsChecked="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}" Focusable="False" Margin="0,2,0,0" Padding="0"
+                                                                    Content="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
 
-                        <Expander Grid.Row="2" x:Name="ImgurExpander" Header="Imgur" IsExpanded="True">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
+                                    <DataGridTextColumn Header="{DynamicResource S.Options.Upload.Presets.Service}" Width="Auto" MinWidth="110" IsReadOnly="True" Binding="{Binding Type, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <DataGridTextColumn Header="{DynamicResource S.Options.Upload.Presets.Title}" Width="*" IsReadOnly="True" Binding="{Binding Title, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <DataGridTextColumn Header="{DynamicResource S.Options.Upload.Presets.Description}" Width="*" IsReadOnly="True" Binding="{Binding Description, UpdateSourceTrigger=PropertyChanged}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
 
-                                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="5,0" VerticalAlignment="Center">
-                                    <Hyperlink Click="ImgurHyperlink_Click">
-                                        <Run Text="{DynamicResource S.Options.Upload.Get}"/>
-                                    </Hyperlink>
-                                </TextBlock>
+                            <n:ExtendedButton Grid.Row="0" Grid.Column="1" x:Name="AddPresetButton" Margin="3,5" Icon="{StaticResource Vector.Add}" ContentWidth="18" ContentHeight="18"
+                                              Style="{StaticResource Style.Button.NoText.Border}" MinWidth="30" MinHeight="30" Command="{StaticResource Command.Add}"
+                                              ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
+                                              ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-5"/>
 
-                                <Border Grid.Row="0" Grid.Column="2" Background="{StaticResource Vector.Arrow.Blue.Right}" Width="14" Height="14" Opacity="{DynamicResource Element.Opacity}"/>
+                            <n:ExtendedButton Grid.Row="1" Grid.Column="1" x:Name="EditPresetButton" Margin="3,5" Icon="{StaticResource Vector.Pen}" ContentWidth="18" ContentHeight="18"
+                                              Style="{StaticResource Style.Button.NoText.Border}" MinWidth="30" MinHeight="30" Command="{StaticResource Command.Edit}"
+                                              ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
+                                              ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-5"/>
 
-                                <n:ExtendedTextBox Grid.Row="0" Grid.Column="3" Text="{Binding ImgurOAuthToken, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5,3"
-                                                   Watermark="{DynamicResource S.Options.Upload.PasteToken}" TextWrapping="Wrap"/>
+                            <n:ExtendedButton Grid.Row="2" Grid.Column="1" x:Name="RemovePresetButton" Margin="3,5" Icon="{StaticResource Vector.Remove}" ContentWidth="18" ContentHeight="18"
+                                              Style="{StaticResource Style.Button.NoText.Border}" MinWidth="30" MinHeight="30" Command="{StaticResource Command.Remove}"
+                                              ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
+                                              ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-5"/>
 
-                                <Border Grid.Row="0" Grid.Column="4" Background="{StaticResource Vector.Arrow.Blue.Right}" Width="14" Height="14" Opacity="{DynamicResource Element.Opacity}"/>
-                                
-                                <n:ExtendedButton Grid.Row="0" Grid.Column="5" Text="{DynamicResource S.Options.Upload.Authorize}" Icon="{StaticResource Vector.Ok}" 
-                                                  ContentWidth="16" ContentHeight="16" Margin="3" Click="ImgurAuthorizeButton_Click"/>
-                                <n:ExtendedButton Grid.Row="0" Grid.Column="6" Text="{DynamicResource S.Options.Upload.Refresh}" Icon="{StaticResource Vector.Repeat}" 
-                                                  ContentWidth="16" ContentHeight="16" Margin="3" Click="ImgurRefreshButton_Click"/>
-                                <n:ExtendedButton Grid.Row="1" Grid.Column="6" Text="{DynamicResource S.Options.Upload.Clear}" Icon="{StaticResource Vector.Eraser}" 
-                                                  ContentWidth="16" ContentHeight="16" Margin="3" Click="ImgurClearButton_Click"/>
-
-                                <n:ExtendedCheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="7" Text="{DynamicResource S.Options.Upload.Imgur.Direct}" Margin="5,3" 
-                                                    IsChecked="{Binding ImgurUseDirectLinks, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                <n:ExtendedCheckBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="7" Text="{DynamicResource S.Options.Upload.Imgur.Gifv}" Margin="5,3"
-                                                    IsChecked="{Binding ImgurUseGifvLink, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                <n:ExtendedCheckBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="7" Text="{DynamicResource S.Options.Upload.Imgur.ToAlbum}" Margin="5,3"
-                                                    IsChecked="{Binding ImgurUploadToAlbum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-
-                                <TextBlock Grid.Row="5" Grid.Column="0" Text="{DynamicResource S.Options.Upload.Imgur.Album}" Foreground="{DynamicResource Element.Foreground.Medium}" VerticalAlignment="Center" 
-                                           HorizontalAlignment="Right" Margin="5,0" Visibility="{Binding Visibility, ElementName=ImgurAlbumComboBox}"/>
-                                <ComboBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="6" x:Name="ImgurAlbumComboBox" Margin="5" SelectedValuePath="Id"
-                                          SelectedValue="{Binding ImgurSelectedAlbum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                          Visibility="{Binding ImgurUploadToAlbum, Converter={StaticResource Bool2Visibility}}">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto" MinWidth="40"/>
-                                                    <ColumnDefinition Width="1"/>
-                                                    <ColumnDefinition Width="Auto" MaxWidth="400"/>
-                                                    <ColumnDefinition/>
-                                                </Grid.ColumnDefinitions>
-
-                                                <TextBlock Grid.Column="0" Text="{Binding Id}" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                                                <Separator Grid.Column="1" Width="1" Margin="0"/>
-                                                <TextBlock Grid.Column="2" Text="{Binding Title}" Margin="3,0,0,0" FontWeight="SemiBold" Foreground="{DynamicResource Element.Foreground}"/>
-                                                <TextBlock Grid.Column="3" Text="{Binding Description}" Margin="10,0,2,0" Foreground="{DynamicResource Element.Foreground.Medium}" FontStyle="Italic" TextWrapping="NoWrap"/>
-                                            </Grid>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
-
-                                    <!--Description="Instead of selecting an album right now, choose one later."-->
-                                    <!--<i:ImgurAlbumData Id="♥♦♣♠" Title="Prompt me before uploading" Description="This is a description"/>-->
-                                </ComboBox>
-
-                                <TextBlock Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="7" x:Name="ImgurTextBlock" Margin="5,3" HorizontalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
-                            </Grid>
-                        </Expander>
-
-                        <Expander Grid.Row="3" Header="Yandex.Disk" IsExpanded="True">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-
-                                <Label Grid.Column="0" Content="{DynamicResource S.Options.Upload.Yandex.Token}" Foreground="{DynamicResource Element.Foreground.Medium}" VerticalAlignment="Center"/>
-
-                                <n:ExtendedTextBox Grid.Column="1" Text="{Binding YandexDiskOAuthToken, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5,3"
-                                                   Watermark="{DynamicResource S.Options.Upload.PasteToken}"/>
-
-                                <TextBlock Grid.Column="2" Margin="0,0,5,0" VerticalAlignment="Center">
-                                    <Hyperlink NavigateUri="https://oauth.yandex.com/authorize?response_type=token&amp;client_id=3afd5060e3c74c978661d4e1c4271aa9" RequestNavigate="YandexOauth_OnRequestNavigate">
-                                        <Run Text="{DynamicResource S.Options.Upload.Get}"/>
-                                    </Hyperlink>
-                                </TextBlock>
-                            </Grid>
-                        </Expander>
+                            <n:ExtendedButton Grid.Row="3" Grid.Column="1" x:Name="HistoryPresetButton" Margin="3,5" Icon="{StaticResource Vector.Clock}" ContentWidth="18" ContentHeight="18"
+                                              Style="{StaticResource Style.Button.NoText.Border}" MinWidth="30" MinHeight="30" Command="{StaticResource Command.ViewHistory}"
+                                              ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
+                                              ToolTipService.Placement="Right" ToolTipService.VerticalOffset="-5"/>
+                        </Grid>
                     </Grid>
 
                     <!--Extras-->
@@ -1712,7 +1670,7 @@
                                 <ColumnDefinition Width="30"/>
                             </Grid.ColumnDefinitions>
 
-                            <n:ExtendedTextBox Grid.Column="0" x:Name="FfmpegLocationTextBox" Margin="10,3,0,3" Text="{Binding FfmpegLocation, Source={x:Static u:UserSettings.All}, UpdateSourceTrigger=PropertyChanged}" 
+                            <n:ExtendedTextBox Grid.Column="0" x:Name="FfmpegLocationTextBox" Margin="10,3,0,3" Text="{Binding FfmpegLocation, Source={x:Static t:UserSettings.All}, UpdateSourceTrigger=PropertyChanged}" 
                                                Tag="FFmpeg" LostKeyboardFocus="LocationTextBox_LostKeyboardFocus"/>
 
                             <n:ExtendedButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Open}" ContentWidth="20" ContentHeight="20"
@@ -1730,7 +1688,7 @@
                                 <ColumnDefinition Width="30"/>
                             </Grid.ColumnDefinitions>
 
-                            <n:ExtendedTextBox Grid.Column="0" x:Name="GifskiLocationTextBox" Margin="10,3,0,3" Text="{Binding GifskiLocation, Source={x:Static u:UserSettings.All}, UpdateSourceTrigger=PropertyChanged}" 
+                            <n:ExtendedTextBox Grid.Column="0" x:Name="GifskiLocationTextBox" Margin="10,3,0,3" Text="{Binding GifskiLocation, Source={x:Static t:UserSettings.All}, UpdateSourceTrigger=PropertyChanged}" 
                                                Tag="Gifski" LostKeyboardFocus="LocationTextBox_LostKeyboardFocus"/>
 
                             <n:ExtendedButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Open}" ContentWidth="20" ContentHeight="20"
@@ -1748,7 +1706,7 @@
                                 <ColumnDefinition Width="30"/>
                             </Grid.ColumnDefinitions>
 
-                            <n:ExtendedTextBox Grid.Column="0" x:Name="SharpDxLocationTextBox" Margin="10,3,0,3" Text="{Binding SharpDxLocationFolder, Source={x:Static u:UserSettings.All}, UpdateSourceTrigger=PropertyChanged}" 
+                            <n:ExtendedTextBox Grid.Column="0" x:Name="SharpDxLocationTextBox" Margin="10,3,0,3" Text="{Binding SharpDxLocationFolder, Source={x:Static t:UserSettings.All}, UpdateSourceTrigger=PropertyChanged}" 
                                                Tag="SharpDX" LostKeyboardFocus="LocationTextBox_LostKeyboardFocus"/>
 
                             <n:ExtendedButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Open}" ContentWidth="20" ContentHeight="20"
@@ -2015,7 +1973,7 @@
 
                             <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal">
                                 <Label Content="{DynamicResource S.Options.About.Version}" FontSize="18" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground}"/>
-                                <Label Content="{Binding Source={x:Static u:UserSettings.All}, Path=Version}" FontSize="18" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground}"/>
+                                <Label Content="{Binding Source={x:Static t:UserSettings.All}, Path=VersionText}" FontSize="18" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground}"/>
                             </StackPanel>
 
                             <Label Grid.Row="1" Grid.Column="1" FontSize="16" HorizontalAlignment="Right" Cursor="Hand" Padding="3,5" VerticalContentAlignment="Center">

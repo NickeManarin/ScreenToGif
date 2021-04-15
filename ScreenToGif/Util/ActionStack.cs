@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using ScreenToGif.Model;
+using ScreenToGif.Settings;
 
 namespace ScreenToGif.Util
 {

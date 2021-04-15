@@ -1,4 +1,6 @@
-﻿namespace ScreenToGif.Util
+using ScreenToGif.Settings;
+
+namespace ScreenToGif.Util
 {
     public static class Constants
     {

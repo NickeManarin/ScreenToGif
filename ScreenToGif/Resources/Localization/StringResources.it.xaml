@@ -66,7 +66,7 @@
     <s:String x:Key="S.Command.DiscardProject">Scarta progetto corrente</s:String>
     <s:String x:Key="S.Command.OverrideDelay">Sovrascrivi ritardo dei fotogrammi</s:String>
     <s:String x:Key="S.Command.IncreaseDecreaseDelay">Aumenta/riduci ritardo dei fotogrammi</s:String>
-    <s:String x:Key="S.Command.ScaleDelay">Scala il ritardo dei fotorammi</s:String>
+    <s:String x:Key="S.Command.ScaleDelay">Scala il ritardo dei fotogrammi</s:String>
     <s:String x:Key="S.Command.Zoom100">Imposta zoom al 100%</s:String>
     <s:String x:Key="S.Command.SizeToContent">Corregge la finestra alle dimensioni del fotogramma</s:String>
     <s:String x:Key="S.Command.FitImage">Adatta l'immagine alla dimensione disponibile della finestra</s:String>
@@ -249,7 +249,7 @@
     <s:String x:Key="S.Options.Recorder.Mode">Modalità cattura</s:String>
     <s:String x:Key="S.Options.Recorder.Bitblt.Info">Usa il vecchio metodo di cattura, che è lento e potrebbe non registrare i giochi,&#10;ma che non richiede estensioni aggiuntive.</s:String>
     <s:String x:Key="S.Options.Recorder.DirectX.Info">Usa il metodo di cattura delle API Desktop Duplication, che sono più veloci e&#10;permette di catturare giochi a schermo intero; tuttavia richiede l'estensione SharpDx e almeno Windows 8.</s:String>
-    <s:String x:Key="S.Options.Recorder.File">Save su&#10;file</s:String>
+    <s:String x:Key="S.Options.Recorder.File">Salva su&#10;file</s:String>
     <s:String x:Key="S.Options.Recorder.File.Info">Ciascun fotogramma catturato verrà salvato dirette su disco come un'immagine.</s:String>
     <s:String x:Key="S.Options.Recorder.Cache">Cache in&#10;memoria</s:String>
     <s:String x:Key="S.Options.Recorder.Cache.Info">Ciascun fotogramma catturato verrà prima salvato in memoria come un elenco di pixel (potrebbero essere compressi prima)</s:String>
@@ -299,11 +299,11 @@
     <s:String x:Key="S.Options.Editor.Previewer.OddColor">Colore dispari</s:String>
     <!--<s:String x:Key="S.Options.Editor.Interface.DisplayEncoder">Display the encodings in a separated window.</s:String>-->
     <s:String x:Key="S.Options.Editor.Interface.ExtendChrome">Estendi la barra del titolo.</s:String>
-    <s:String x:Key="S.Options.Editor.Interface.AutomaticallySizeOnContent">Corregge automaicamente la dimensione della finestra in base alla dimensione dei fotogrammi, subito dopo il caricamento.</s:String>
+    <s:String x:Key="S.Options.Editor.Interface.AutomaticallySizeOnContent">Corregge automaticamente la dimensione della finestra in base alla dimensione dei fotogrammi, subito dopo il caricamento.</s:String>
     <s:String x:Key="S.Options.Editor.Interface.AutomaticallyFitImage">Corregge automaticamente l'ingrandimento dei fotogrammi in base alle dimensioni della finestra, subito dopo il caricamento.</s:String>
     <s:String x:Key="S.Options.Editor.General.NotifyFrameDeletion">Chiedi conferma prima di eliminare fotogrammi.</s:String>
     <s:String x:Key="S.Options.Editor.General.NotifyProjectDiscard">Chiedi conferma prima di scartare un progetto.</s:String>
-    <s:String x:Key="S.Options.Editor.General.NotifyWhileClosingEditor">Chiedi conferma prima di chiudere l'editor (se un progtto è aperto).</s:String>
+    <s:String x:Key="S.Options.Editor.General.NotifyWhileClosingEditor">Chiedi conferma prima di chiudere l'editor (se un progetto è aperto).</s:String>
     <s:String x:Key="S.Options.Editor.General.TripleClickSelection">Abilita il triplo clic per selezionare il testo.</s:String>
     <s:String x:Key="S.Options.Editor.General.DrawOutlineOutside">Disegna il contorno delle didascalie esterne alle lettere.</s:String>
     <!--<s:String x:Key="S.Options.Editor.General.LimitHistory">Impose a limit to the undo/redo history.</s:String>-->
@@ -418,27 +418,27 @@
     <s:String x:Key="S.Options.Upload.Proxy.Password">Password:</s:String>
     <s:String x:Key="S.Options.Upload.Get">Ottieni token OAuth</s:String>
     <s:String x:Key="S.Options.Upload.PasteToken">Incollare il token di autorizzazione qui</s:String>
-    <s:String x:Key="S.Options.Upload.Authorize">Autorizza</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Authorize">Autorizza</s:String>
     <s:String x:Key="S.Options.Upload.Refresh">Aggiorna</s:String>
     <s:String x:Key="S.Options.Upload.Clear">Svuota</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Anonymous">Imgur (Anonimo)</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Direct">Utilizza link diretti.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Gifv">Ottieni i link con l'estensione Gifv invece di Gif.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.ToAlbum">Carica le gif ad un album selezionato.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Album">Album:</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.AskMe">Chiedere conferma prima di caricare</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.NotPossible">Non è stato possibile aprire la pagina per ottenere il token di autorizzazione Imgur.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Missing">Per poter autorizzare questa app è necessario fornire il token di autorizzazione.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Completed">Autorizzazione Imgur completata.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Error">Autorizzazione Imgur fallita. Riprovare tra qualche secondo oppure procurarsi un nuovo token.</s:String>
-    <!--<s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Header">It was not possible to authorize the app</s:String>-->
-    <!--<s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Message">Check if you provided the correct token and if you have an internet connection.</s:String>-->
-    <s:String x:Key="S.Options.Upload.Imgur.Refresh.None">Per poter aggiornare l'autorizzazione per questa app, devi prima terminare il processo di autorizzazione.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.NotAuthorized">Non autorizzato.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Expired">Autorizzazione scaduta il {0}.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Valid">Autorizzazione valida fino {0}.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Removed">Autorizzazione Imgur rimossa.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Error.AlbumLoad">Non è stato possibile caricare la lista degli album.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Anonymous">Imgur (Anonimo)</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Direct">Utilizza link diretti.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Gifv">Ottieni i link con l'estensione Gifv invece di Gif.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.ToAlbum">Carica le gif ad un album selezionato.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Album">Album:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.AskMe">Chiedere conferma prima di caricare</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.NotPossible">Non è stato possibile aprire la pagina per ottenere il token di autorizzazione Imgur.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Token">Per poter autorizzare questa app è necessario fornire il token di autorizzazione.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Completed">Autorizzazione Imgur completata.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Error">Autorizzazione Imgur fallita. Riprovare tra qualche secondo oppure procurarsi un nuovo token.</s:String>
+    <!--<s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Header">It was not possible to authorize the app</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Message">Check if you provided the correct token and if you have an internet connection.</s:String>-->
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Refresh.None">Per poter aggiornare l'autorizzazione per questa app, devi prima terminare il processo di autorizzazione.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.NotAuthorized">Non autorizzato.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Expired">Autorizzazione scaduta il {0}.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Valid">Autorizzazione valida fino {0}.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Removed">Autorizzazione Imgur rimossa.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.AlbumLoad">Non è stato possibile caricare la lista degli album.</s:String>
     <s:String x:Key="S.Options.Upload.Gfycat.Anonymous">Gfycat (Anonimo)</s:String>
     <s:String x:Key="S.Options.Upload.Yandex.Token">OAuth token:</s:String>
     <s:String x:Key="S.Options.Upload.Pick.Destination">Selezionare una destinazione</s:String>
@@ -595,8 +595,8 @@
     <s:String x:Key="S.ColorSelector.Initial">Colore iniziale</s:String>
     <s:String x:Key="S.ColorSelector.Current">Colore attuale</s:String>
     <s:String x:Key="S.ColorSelector.Latest">Ultimo colore</s:String>
-    <s:String x:Key="S.ColorSelector.Sample">Trascita questo per&#x0d;campionare i colori</s:String>
-    <s:String x:Key="S.ColorSelector.Sample.Info">Fare clic e trascinare per&#x0d;selezionari colori dallo schermo.</s:String>
+    <s:String x:Key="S.ColorSelector.Sample">Trascina questo per&#x0d;campionare i colori</s:String>
+    <s:String x:Key="S.ColorSelector.Sample.Info">Fare clic e trascinare per&#x0d;selezionare colori dallo schermo.</s:String>
     
     <!--Exception/Error viewers-->
     <s:String x:Key="S.ExceptionViewer.Title">Visualizzatore errori</s:String>
@@ -664,7 +664,7 @@
     <s:String x:Key="S.Encoder.Completed">Completato</s:String>
     <s:String x:Key="S.Encoder.Completed.Clipboard">copiato negli appunti</s:String>
     <s:String x:Key="S.Encoder.Completed.Clipboard.Fail">Copia fallita</s:String>
-    <s:String x:Key="S.Encoder.Completed.Command">Comando eseguido</s:String>
+    <s:String x:Key="S.Encoder.Completed.Command">Comando eseguito</s:String>
     <s:String x:Key="S.Encoder.Completed.Command.Output">Mostra l'output dei comandi.</s:String>
     <s:String x:Key="S.Encoder.Completed.Command.Fail">Esecuzione del comando fallita</s:String>
     <s:String x:Key="S.Encoder.Completed.Upload.Fail">Caricamento fallito</s:String>
@@ -896,8 +896,8 @@
     <s:String x:Key="S.Editor.DeleteFrames.Message">Verranno eliminati {0} fotogrammi.\n\rNon sarà possibile ripristinarli in seguito.</s:String>
     <s:String x:Key="S.Editor.Exiting.Title">Uscita dall'editor</s:String>
     <s:String x:Key="S.Editor.Exiting.Instruction">Uscire?</s:String>
-    <s:String x:Key="S.Editor.Exiting.Message">Il progetto corrente su cui si stava lavoranto può essere aperto nuovamente tramite 'Progetti recenti'.</s:String>
-    <s:String x:Key="S.Editor.Exiting.Message2">Il progetto corrente su cui si stava lavoranto può essere aperto nuovamente tramite 'Progetti recenti', ma non dimenticarsi che verrà eliminato automaticamente dopo 5 giorni.</s:String>
+    <s:String x:Key="S.Editor.Exiting.Message">Il progetto corrente su cui si stava lavorando può essere aperto nuovamente tramite 'Progetti recenti'.</s:String>
+    <s:String x:Key="S.Editor.Exiting.Message2">Il progetto corrente su cui si stava lavorando può essere aperto nuovamente tramite 'Progetti recenti', ma non dimenticarsi che verrà eliminato automaticamente dopo 5 giorni.</s:String>
     <s:String x:Key="S.Editor.DragDrop.Invalid.Title">Trascinamento non valido</s:String>
     <s:String x:Key="S.Editor.DragDrop.MultipleFiles.Instruction">Non è possibile importare più file contemporaneamente</s:String>
     <s:String x:Key="S.Editor.DragDrop.MultipleFiles.Message">Provare a selezionare un file solo.</s:String>
@@ -930,7 +930,7 @@
     <s:String x:Key="S.Editor.Warning.Selection">È necessario selezionare almeno un fotogramma cui applicare la sovrimpressione.</s:String>
     <s:String x:Key="S.Editor.Warning.Ffmpeg">FFmpeg non è presente. Aggiungerlo alle variabili d'ambiente Path o indicarne la posizione nelle impostazioni.</s:String>
     <s:String x:Key="S.Editor.Warning.Gifski">Gifski non è presente. Aggiungerlo alla variabile d'ambiente PATH o impostarne la posizione nelle impostazioni.</s:String>
-    <s:String x:Key="S.Editor.Warning.LowSpace">Non c'è abbastanza spazio libero nel disco in cui questa applicazione salva la propria cacle ({0}% rimanente). Fare clic per aprire Opzioni > File temporanei per liberare un po' di spazio.</s:String>
+    <s:String x:Key="S.Editor.Warning.LowSpace">Non c'è abbastanza spazio libero nel disco in cui questa applicazione salva la propria cache ({0}% rimanente). Fare clic per aprire Opzioni > File temporanei per liberare un po' di spazio.</s:String>
     <!--<s:String x:Key="S.Editor.Warning.DifferentDpi">You tried to import multiple images with different DPIs, which is not supported. Some of them got imported, the others need to be imported separately.</s:String>-->
     
     <!--Editor • Status-->
@@ -1116,7 +1116,7 @@
     <s:String x:Key="S.KeyStrokes.Edit.Remove">Rimuovi sequenza di tasti</s:String>
     <s:String x:Key="S.KeyStrokes.Edit.Add">Aggiungi sequenza di tasti:</s:String>
     <s:String x:Key="S.KeyStrokes.Edit.Lower">Lettere minuscole.</s:String>
-    <s:String x:Key="S.KeyStrokes.Edit.Lower.Info">Permette di inserire lettere in miniscolo.</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Lower.Info">Permette di inserire lettere in minuscolo.</s:String>
 
     <!--Editor • Free drawing-->
     <s:String x:Key="S.FreeDrawing.Mode">Modalità</s:String>
@@ -1205,7 +1205,7 @@
     <s:String x:Key="S.Progress.Orientation">Orientamento:</s:String>
     
     <!--Editor • Delay-->
-    <s:String x:Key="S.Delay.Update">Modaltià ritardo</s:String>
+    <s:String x:Key="S.Delay.Update">Modalità ritardo</s:String>
     <s:String x:Key="S.Delay.Mode">Modalità ritardo:</s:String>
     <s:String x:Key="S.Delay.Mode.Override">Sovrascrivi (in ms)</s:String>
     <s:String x:Key="S.Delay.Mode.IncreaseDecrease">Aumenta o riduci (in ms)</s:String>
@@ -1271,7 +1271,7 @@
     <!--<s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable">Use a global color table.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable.Info">May reduce the quality and/or size of the gif.</s:String>-->
     <s:String x:Key="S.SaveAs.GifOptions.Loop">Ciclo:</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">Gif ciclica.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Looped">Gif ciclica.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Ripeti per sempre.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Numero ripetizioni.</s:String>
     <!--<s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable">Enable transparency.</s:String>-->
@@ -1298,9 +1298,9 @@
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">Comprimi le immagini con zip.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions">Opzioni Psd</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Compress">Comprimi l'immagine.</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">Comprimi i dati dell'immagine utilizzando l'algoritmo RLE.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Info">Comprimi i dati dell'immagine utilizzando l'algoritmo RLE.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline">Salva dati timeline.</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">Esporta le tempistiche dei fotogrammi, invece dei soli fotogrammi.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Info">Esporta le tempistiche dei fotogrammi, invece dei soli fotogrammi.</s:String>
     <s:String x:Key="S.SaveAs.ProjectOptions">Opzioni progetto</s:String>
     
     <s:String x:Key="S.SaveAs.Extras">Extra:</s:String>
@@ -1336,7 +1336,7 @@
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">Collegamento</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">Copia negli appunti il collegamento generato dal servizio di upload</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Esegui i comandi di post-codifica.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Inserire i comandi da eseguire dopo la codifica.&#x0d;Scrivere un comando per riga per eseguire più comandi.&#x0d;Macro:&#x0d;{p} = Percorso del file di output.&#x0d;{f} = Percorso della cartella di output.&#x0d;{u} = URL of the uploaded file.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Inserire i comandi da eseguire dopo la codifica.&#x0d;Scrivere un comando per riga per eseguire più comandi.&#x0d;Macro:&#x0d;{p} = Percorso del file di output.&#x0d;{f} = Percorso della cartella di output.&#x0d;{u} = URL del file caricato.</s:String>
     
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">File</s:String>
@@ -1352,8 +1352,8 @@
     <s:String x:Key="S.SaveAs.Warning.Type">È necessario selezionare dove salvare il file (in una cartella, negli appunti o caricarlo da qualche altra parte).</s:String>
     <s:String x:Key="S.SaveAs.Warning.Commands.Empty">Per eseguire un comando di post-codifica è necessario inserire qualcosa nel campo di testo dei comandi.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Upload.None">Nessun servizio di caricamento selezionato. È necessario selezionare una destinazione</s:String>
-    <s:String x:Key="S.SaveAs.Warning.Upload.NotAuthorized">Non è sato possibile eseguire il caricamento al servizio selezionato poichè manca l'autorizzazione. Autorizzare questa applicazione da Opzioni > Servizi upload.</s:String>
-    <s:String x:Key="S.SaveAs.Warning.Copy.Link">Non è possibile selezionare l'opzione di copia del collegamento in quanto non è stato impostato il carimento del file.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Upload.NotAuthorized">Non è stato possibile eseguire il caricamento al servizio selezionato poichè manca l'autorizzazione. Autorizzare questa applicazione da Opzioni > Servizi upload.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Copy.Link">Non è possibile selezionare l'opzione di copia del collegamento in quanto non è stato impostato il caricamento del file.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">È necessario selezionare una cartella per l'output.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">La cartella per l'output non esiste.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.Invalid">La cartella per l'output contiene uno o più caratteri non validi. Selezionare una cartella valida.</s:String>
@@ -1363,9 +1363,9 @@
     <s:String x:Key="S.SaveAs.Warning.Canceled">L'operazione è stata annullata.</s:String>
     
     <!--SaveAs • Export-->
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">Esporta fotogrammi</s:String>
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Instruction">Esportare i fotogrammi?</s:String>
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Message">Questa azione comporterà l'esportazione di {0} fotogrammi direttamente nella cartella selezionata.</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Title">Esporta fotogrammi</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">Esportare i fotogrammi?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">Questa azione comporterà l'esportazione di {0} fotogrammi direttamente nella cartella selezionata.</s:String>
     
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">Feedback</s:String>
@@ -1409,7 +1409,7 @@
     <s:String x:Key="S.FontWeights.Bold">Grassetto</s:String>
     <s:String x:Key="S.FontWeights.DemiBold">Grassetto medio</s:String>
     <s:String x:Key="S.FontWeights.ExtraBlack">Nero extra</s:String>
-    <s:String x:Key="S.FontWeights.ExtraBold">Grassetto exta</s:String>
+    <s:String x:Key="S.FontWeights.ExtraBold">Grassetto extra</s:String>
     <s:String x:Key="S.FontWeights.ExtraLight">Extra-leggero</s:String>
     <s:String x:Key="S.FontWeights.Heavy">Pesante</s:String>
     <s:String x:Key="S.FontWeights.Light">Leggero</s:String>

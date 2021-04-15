@@ -1,7 +1,7 @@
-﻿<Window x:Class="ScreenToGif.Windows.Other.RegionSelection"
+<Window x:Class="ScreenToGif.Windows.Other.RegionSelection"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:u="clr-namespace:ScreenToGif.Util"
+        xmlns:t="clr-namespace:ScreenToGif.Settings"
         x:Name="ThisWindow" Title="ScreenToGif" WindowStyle="None" AllowsTransparency="True" Topmost="True" ResizeMode="NoResize" SizeToContent="WidthAndHeight"
         UseLayoutRounding="True" SnapsToDevicePixels="True" Background="{x:Null}" ShowInTaskbar="False"
         DpiChanged="Window_DpiChanged">
@@ -27,7 +27,7 @@
         </TextBlock>-->
         
         <Grid Grid.Row="1" Grid.Column="1" x:Name="GuidelinesGrid">
-            <Grid Visibility="{Binding Source={x:Static u:UserSettings.All}, Path=DisplayThirdsGuideline, Converter={StaticResource Bool2Visibility}}">
+            <Grid Visibility="{Binding Source={x:Static t:UserSettings.All}, Path=DisplayThirdsGuideline, Converter={StaticResource Bool2Visibility}}">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -41,9 +41,9 @@
 
                 <!--Rule of thirds, horizontal top-->
                 <Line Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" x:Name="ThirdsLine" X1="0" Y1="0" X2="1" Y2="0" 
-                      Stroke="{Binding Source={x:Static u:UserSettings.All}, Path=ThirdsGuidelineColor, Converter={StaticResource ColorToBrush}}" 
-                      StrokeThickness="{Binding Source={x:Static u:UserSettings.All}, Path=ThirdsGuidelineThickness}" Stretch="Uniform" VerticalAlignment="Bottom"
-                      StrokeDashArray="{Binding Source={x:Static u:UserSettings.All}, Path=ThirdsGuidelineStrokeDashArray}"/>
+                      Stroke="{Binding Source={x:Static t:UserSettings.All}, Path=ThirdsGuidelineColor, Converter={StaticResource ColorToBrush}}" 
+                      StrokeThickness="{Binding Source={x:Static t:UserSettings.All}, Path=ThirdsGuidelineThickness}" Stretch="Uniform" VerticalAlignment="Bottom"
+                      StrokeDashArray="{Binding Source={x:Static t:UserSettings.All}, Path=ThirdsGuidelineStrokeDashArray}"/>
 
                 <!--Rule of thirds, horizontal bottom-->
                 <Line Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" X1="0" Y1="0" X2="1" Y2="0" Stroke="{Binding ElementName=ThirdsLine, Path=Stroke}" 
@@ -61,11 +61,11 @@
                       StrokeDashArray="{Binding ElementName=ThirdsLine, Path=StrokeDashArray}"/>
             </Grid>
 
-            <Grid Visibility="{Binding Source={x:Static u:UserSettings.All}, Path=DisplayCrosshairGuideline, Converter={StaticResource Bool2Visibility}}">
+            <Grid Visibility="{Binding Source={x:Static t:UserSettings.All}, Path=DisplayCrosshairGuideline, Converter={StaticResource Bool2Visibility}}">
                 <!--Crosshair, horizontal-->
-                <Line X1="0" Y1="0" X2="1" Y2="0" x:Name="CrosshairLine" Stroke="{Binding Source={x:Static u:UserSettings.All}, Path=CrosshairGuidelineColor, Converter={StaticResource ColorToBrush}}" 
-                      StrokeThickness="{Binding Source={x:Static u:UserSettings.All}, Path=CrosshairGuidelineThickness}" Stretch="Uniform" VerticalAlignment="Center" 
-                      StrokeDashArray="{Binding Source={x:Static u:UserSettings.All}, Path=CrosshairGuidelineStrokeDashArray}"/>
+                <Line X1="0" Y1="0" X2="1" Y2="0" x:Name="CrosshairLine" Stroke="{Binding Source={x:Static t:UserSettings.All}, Path=CrosshairGuidelineColor, Converter={StaticResource ColorToBrush}}" 
+                      StrokeThickness="{Binding Source={x:Static t:UserSettings.All}, Path=CrosshairGuidelineThickness}" Stretch="Uniform" VerticalAlignment="Center" 
+                      StrokeDashArray="{Binding Source={x:Static t:UserSettings.All}, Path=CrosshairGuidelineStrokeDashArray}"/>
 
                 <!--Crosshair, vertical-->
                 <Line X1="0" Y1="0" X2="0" Y2="1" Stroke="{Binding ElementName=CrosshairLine, Path=Stroke}" StrokeThickness="{Binding ElementName=CrosshairLine, Path=StrokeThickness}" 

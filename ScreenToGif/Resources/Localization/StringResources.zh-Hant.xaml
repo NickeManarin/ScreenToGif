@@ -457,27 +457,27 @@
     <s:String x:Key="S.Options.Upload.Proxy.Password">密碼：</s:String>
     <s:String x:Key="S.Options.Upload.Get">取得 OAuth 憑證</s:String>
     <s:String x:Key="S.Options.Upload.PasteToken">將授權憑證貼到此處</s:String>
-    <s:String x:Key="S.Options.Upload.Authorize">授權</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Authorize">授權</s:String>
     <s:String x:Key="S.Options.Upload.Refresh">重整</s:String>
     <s:String x:Key="S.Options.Upload.Clear">清除</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Anonymous">Imgur（匿名）</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Direct">使用直接連結</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Gifv">取得 Gifv 副檔名連結而不是 Gif</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.ToAlbum">將 Gif 上傳到指定的相簿</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Album">相簿：</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.AskMe">發佈前詢問我</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.NotPossible">無法打開頁面以獲取 Imgur 授權憑證。</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Missing">為了授權此應用程式，您需要提供授權憑證。</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Completed">Imgur 授權完成。</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Error">Imgur 授權失敗。幾秒鐘後重試或獲取新的憑證。</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Header">無法授權此應用程式</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Message">請檢查是否提供正確的憑證及是否有網際網路連線。</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Refresh.None">為了更新此應用程式的授權，您需要先完成授權過程。</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.NotAuthorized">未授權</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Expired">授權已於 {0} 中過期</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Valid">授權有效期至 {0}</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Removed">Imgur 授權已刪除</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Error.AlbumLoad">使用直接連結無法讀取相簿列表</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Anonymous">Imgur（匿名）</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Direct">使用直接連結</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Gifv">取得 Gifv 副檔名連結而不是 Gif</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.ToAlbum">將 Gif 上傳到指定的相簿</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Album">相簿：</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.AskMe">發佈前詢問我</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.NotPossible">無法打開頁面以獲取 Imgur 授權憑證。</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Token">為了授權此應用程式，您需要提供授權憑證。</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Completed">Imgur 授權完成。</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Error">Imgur 授權失敗。幾秒鐘後重試或獲取新的憑證。</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Header">無法授權此應用程式</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Message">請檢查是否提供正確的憑證及是否有網際網路連線。</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Refresh.None">為了更新此應用程式的授權，您需要先完成授權過程。</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.NotAuthorized">未授權</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Expired">授權已於 {0} 中過期</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Valid">授權有效期至 {0}</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Removed">Imgur 授權已刪除</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.AlbumLoad">使用直接連結無法讀取相簿列表</s:String>
     <s:String x:Key="S.Options.Upload.Gfycat.Anonymous">Gfycat（匿名）</s:String>
     <s:String x:Key="S.Options.Upload.Yandex.Token">OAuth 憑證：</s:String>
     <s:String x:Key="S.Options.Upload.Pick.Destination">選擇一個目標</s:String>
@@ -1356,7 +1356,7 @@
     <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable">使用全域色表</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable.Info">可能會降低 gif 的品質或/和大小</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Loop">循環：</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">Gif 循環</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Looped">Gif 循環</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">永遠循環</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">次循環</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable">啟用透明度</s:String>
@@ -1383,9 +1383,9 @@
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">壓縮圖片</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions">PSD 選項</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Compress">壓縮圖片</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">使用 RLE 算法壓縮圖片資料。</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Info">使用 RLE 算法壓縮圖片資料。</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline">保存時間軸數據</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">輸出影格的時間，而不僅僅是影格。</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Info">輸出影格的時間，而不僅僅是影格。</s:String>
     <s:String x:Key="S.SaveAs.ProjectOptions">專案選項</s:String>
     
     <s:String x:Key="S.SaveAs.Extras">擴充：</s:String>
@@ -1449,9 +1449,9 @@
     <s:String x:Key="S.SaveAs.Warning.Canceled">操作已取消</s:String>
     
     <!--SaveAs • Export-->
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">匯出影格</s:String>
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Instruction">您確定要匯出這些影格嗎？</s:String>
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Message">此操作將直接匯出 {0} 個影格到所選資料夾中</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Title">匯出影格</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">您確定要匯出這些影格嗎？</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">此操作將直接匯出 {0} 個影格到所選資料夾中</s:String>
     
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">意見反應</s:String>

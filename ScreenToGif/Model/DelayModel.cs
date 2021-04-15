@@ -1,4 +1,5 @@
-﻿using ScreenToGif.Util;
+using ScreenToGif.Settings;
+using ScreenToGif.Util;
 
 namespace ScreenToGif.Model
 {

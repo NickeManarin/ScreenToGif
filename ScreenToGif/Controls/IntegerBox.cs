@@ -49,6 +49,9 @@ namespace ScreenToGif.Controls
         public static readonly DependencyProperty DefaultValueIfEmptyProperty = DependencyProperty.Register(nameof(DefaultValueIfEmpty), typeof(int), typeof(IntegerBox),
             new FrameworkPropertyMetadata(0));
 
+        public static readonly DependencyProperty EmptyIfValueEmptyProperty = DependencyProperty.Register(nameof(EmptyIfValue), typeof(int), typeof(IntegerBox),
+            new FrameworkPropertyMetadata(int.MinValue));
+
         public static readonly DependencyProperty PropagateWheelEventProperty = DependencyProperty.Register(nameof(PropagateWheelEvent), typeof(bool), typeof(IntegerBox), new PropertyMetadata(default(bool)));
         
         #endregion
@@ -114,6 +117,13 @@ namespace ScreenToGif.Controls
             set => SetValue(DefaultValueIfEmptyProperty, value);
         }
 
+        [Bindable(true), Category("Common")]
+        public int EmptyIfValue
+        {
+            get => (int)GetValue(EmptyIfValueEmptyProperty);
+            set => SetValue(EmptyIfValueEmptyProperty, value);
+        }
+
         /// <summary>
         /// True if the wheel events should not be set as handled.
         /// </summary>
@@ -159,10 +169,11 @@ namespace ScreenToGif.Controls
 
             _ignore = false;
 
-            var value = ((int)Math.Round(((box.UseTemporary ? box.Temporary : box.Value) - box.Offset) * box.Scale, MidpointRounding.ToEven)).ToString();
+            var value = ((int)Math.Round(((box.UseTemporary ? box.Temporary : box.Value) - box.Offset) * box.Scale, MidpointRounding.ToEven));
+            var stringValue = value == box.EmptyIfValue ? "" : value.ToString();
 
-            if (!string.Equals(box.Text, value))
-                box.Text = value;
+            if (!string.Equals(box.Text, stringValue))
+                box.Text = stringValue;
 
             if (!box.IgnoreValueChanged)
                 box.RaiseValueChangedEvent();
@@ -183,28 +194,28 @@ namespace ScreenToGif.Controls
 
         private static void OnOffsetPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var intBox = d as IntegerBox;
-
-            if (intBox == null) return;
+            if (!(d is IntegerBox box)) 
+                return;
 
             //The offset value dictates the value being displayed.
             //For example, The value 600 and the Offset 20 should display the text 580.
             //Text = Value - Offset.
 
-            intBox.Text = ((int)Math.Round((intBox.Value - intBox.Offset) * intBox.Scale)).ToString();
+            var value = ((int)Math.Round((box.Value - box.Offset) * box.Scale));
+            box.Text = value == box.EmptyIfValue ? "" : value.ToString();
         }
 
         private static void OnScalePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var intBox = d as IntegerBox;
-
-            if (intBox == null) return;
+            if (!(d is IntegerBox box)) 
+                return;
 
             //The scale value dictates the value being displayed.
             //For example, The value 600 and the scale 1.25 should display the text 750.
             //Text = Value * Scale.
 
-            intBox.Text = ((int)Math.Round((intBox.Value - intBox.Offset) * intBox.Scale)).ToString();
+            var value = ((int)Math.Round((box.Value - box.Offset) * box.Scale));
+            box.Text = value == box.EmptyIfValue ? "" : value.ToString();
         }
 
         #endregion
@@ -254,7 +265,8 @@ namespace ScreenToGif.Controls
         {
             base.OnInitialized(e);
 
-            Text = ((int)((Value - Offset) * Scale)).ToString();
+            var value = ((int)((Value - Offset) * Scale));
+            Text = value == EmptyIfValue ? "" : value.ToString();
         }
 
         protected override void OnGotFocus(RoutedEventArgs e)
@@ -336,7 +348,8 @@ namespace ScreenToGif.Controls
             //For example, The value 600 and the Offset 20 should display the text 580.
             //Text = Value - Offset.
 
-            Text = ((int)((Value - Offset) * Scale)).ToString();
+            var value =((int)((Value - Offset) * Scale));
+            Text = value == EmptyIfValue ? "" : value.ToString();
         }
 
         protected override void OnKeyDown(KeyEventArgs e)

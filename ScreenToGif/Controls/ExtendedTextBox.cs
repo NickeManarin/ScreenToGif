@@ -1,9 +1,9 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using ScreenToGif.Util;
+using ScreenToGif.Settings;
 
 namespace ScreenToGif.Controls
 {
@@ -128,7 +128,7 @@ namespace ScreenToGif.Controls
         private bool IsEntryAllowed(string text)
         {
             //Only the allowed chars.
-            var regex = new Regex($"^[{AllowedCharacters}]+$");
+            var regex = new Regex($"^[{AllowedCharacters.Replace("-", @"\-")}]+$");
 
             //Checks if it's a valid char based on the context.
             return regex.IsMatch(text);
@@ -136,7 +136,7 @@ namespace ScreenToGif.Controls
 
         private bool IsTextAllowed(string text)
         {
-            return Regex.IsMatch(text, $"^[{AllowedCharacters}]+$");
+            return Regex.IsMatch(text, $"^[{AllowedCharacters.Replace("-", @"\-") + (AllowSpacing ? " " : "")})]+$");
         }
 
         public bool IsNullOrWhiteSpace()

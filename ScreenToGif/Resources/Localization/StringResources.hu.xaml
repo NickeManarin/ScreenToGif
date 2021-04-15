@@ -451,27 +451,27 @@
     <s:String x:Key="S.Options.Upload.Proxy.Password">Jelszó:</s:String>
     <s:String x:Key="S.Options.Upload.Get">OAuth token beszerzése</s:String>
     <s:String x:Key="S.Options.Upload.PasteToken">A jogosultsági token beillesztése ide</s:String>
-    <s:String x:Key="S.Options.Upload.Authorize">Engedélyez</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Authorize">Engedélyez</s:String>
     <s:String x:Key="S.Options.Upload.Refresh">Frissít</s:String>
     <s:String x:Key="S.Options.Upload.Clear">Töröl</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Anonymous">Imgur (Névtelen)</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Direct">Direkt linkek használata.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Gifv">Szerezz hivatkozásokat Gifv kiterjesztéssel a Gif helyett.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.ToAlbum">Gifek feltöltése egy kiválasztott albumba.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Album">Album:</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.AskMe">Kérdés a feltöltés előtt</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.NotPossible">Az Imgur engedélyezési token beszerzéséhez nem lehetett megnyitni a lapot.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Missing">Az alkalmazás engedélyezéséhez meg kell adnod az engedélyezési tokent.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Completed">Az Imgur engedélyezés befejeződött.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Error">Az Imgur engedélyezés nem sikerült. Próbálkozz újra néhány másodpercen belül, vagy szerezz be egy új tokent.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Header">Nem lehetett engedélyezni az alkalmazást</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Message">Ellenőrizd, hogy a megfelelő tokent adta-e meg, és van-e internetkapcsolata.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Refresh.None">Az alkalmazás engedélyezésének frissítéséhez először be kell fejezned az engedélyezési folyamatot.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.NotAuthorized">Nem engedélyezett.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Expired">Az engedély lejárt {0}.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Valid">Az engedély {0}-ig érvényes.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Removed">Imgur engedélyezés eltávolítva.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Error.AlbumLoad">Nem sikerült betölteni az albumlistát.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Anonymous">Imgur (Névtelen)</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Direct">Direkt linkek használata.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Gifv">Szerezz hivatkozásokat Gifv kiterjesztéssel a Gif helyett.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.ToAlbum">Gifek feltöltése egy kiválasztott albumba.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Album">Album:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.AskMe">Kérdés a feltöltés előtt</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.NotPossible">Az Imgur engedélyezési token beszerzéséhez nem lehetett megnyitni a lapot.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Token">Az alkalmazás engedélyezéséhez meg kell adnod az engedélyezési tokent.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Completed">Az Imgur engedélyezés befejeződött.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Error">Az Imgur engedélyezés nem sikerült. Próbálkozz újra néhány másodpercen belül, vagy szerezz be egy új tokent.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Header">Nem lehetett engedélyezni az alkalmazást</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Message">Ellenőrizd, hogy a megfelelő tokent adta-e meg, és van-e internetkapcsolata.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Refresh.None">Az alkalmazás engedélyezésének frissítéséhez először be kell fejezned az engedélyezési folyamatot.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.NotAuthorized">Nem engedélyezett.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Expired">Az engedély lejárt {0}.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Valid">Az engedély {0}-ig érvényes.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Removed">Imgur engedélyezés eltávolítva.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.AlbumLoad">Nem sikerült betölteni az albumlistát.</s:String>
     <s:String x:Key="S.Options.Upload.Gfycat.Anonymous">Gfycat (névtelen)</s:String>
     <s:String x:Key="S.Options.Upload.Yandex.Token">OAuth token:</s:String>
     <s:String x:Key="S.Options.Upload.Pick.Destination">Válassz ki egy célt</s:String>
@@ -1346,7 +1346,7 @@
     <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable">Használjon globális színtáblázatot.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable.Info">Csökkentheti a gif minőségét és/vagy méretét.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Loop">Végtelenítés:</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">Végtelenített Gif.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Looped">Végtelenített Gif.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Ismétlés örökké</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Ismétlések száma.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable">Az átlátszóság engedélyezése.</s:String>
@@ -1373,9 +1373,9 @@
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">Kép becsomagolása Zip-be.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions">Psd beállítások</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Compress">A kép tömörítése.</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">Tömörítse a képadatokat a RLE algoritmus segítségével.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Info">Tömörítse a képadatokat a RLE algoritmus segítségével.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline">Az idővonal adatainak mentése.</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">A képkockák időzítését exportálja, ahelyett, hogy csak a képkocákat.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Info">A képkockák időzítését exportálja, ahelyett, hogy csak a képkocákat.</s:String>
     <s:String x:Key="S.SaveAs.ProjectOptions">Projekt beállítások</s:String>
     
     <s:String x:Key="S.SaveAs.Extras">Extrák:</s:String>
@@ -1438,9 +1438,9 @@
     <s:String x:Key="S.SaveAs.Warning.Canceled">A művelet megszakadt.</s:String>
     
     <!--SaveAs • Export-->
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">Képkockák exportálása</s:String>
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Instruction">Biztos vagy benne, hogy exportálni akarod a képkockákat?</s:String>
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Message">Ez a művelet {0} képkockát közvetlenül a kijelölt mappába exportál.</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Title">Képkockák exportálása</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">Biztos vagy benne, hogy exportálni akarod a képkockákat?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">Ez a művelet {0} képkockát közvetlenül a kijelölt mappába exportál.</s:String>
     
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">Visszajelzés</s:String>

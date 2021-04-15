@@ -457,27 +457,27 @@
     <s:String x:Key="S.Options.Upload.Proxy.Password">Пароль:</s:String>
     <s:String x:Key="S.Options.Upload.Get">Получить токен OAuth</s:String>
     <s:String x:Key="S.Options.Upload.PasteToken">Вставьте токен авторизации здесь</s:String>
-    <s:String x:Key="S.Options.Upload.Authorize">Авторизация</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Authorize">Авторизация</s:String>
     <s:String x:Key="S.Options.Upload.Refresh">Обновить</s:String>
     <s:String x:Key="S.Options.Upload.Clear">Очистить</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Anonymous">Imgur (анонимно)</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Direct">Прямые ссылки.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Gifv">Получать ссылки с расширением Gifv вместо Gif.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.ToAlbum">Загружать gif в выбранный альбом.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Album">Альбом:</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.AskMe">Спросить меня перед оправкой</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.NotPossible">Не удалось открыть страницу, чтобы получить токен авторизации Imgur.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Missing">Чтобы авторизоваться, вам необходимо предоставить токен авторизации.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Completed">Авторизация на Imgur завершена.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Error">Ошибка авторизации на Imgur. Повторите попытку через несколько секунд или получите новый токен.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Header">Не удалось авторизовать приложение</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Message">Проверьте, правильно ли вы указали токен и есть ли подключение к сети.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Refresh.None">Чтобы обновить авторизацию, вам нужно сначала завершить процесс авторизации.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.NotAuthorized">Не авторизован.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Expired">Авторизация истекла в {0}.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Valid">Авторизация действительна до {0}.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Removed">Авторизация на Imgur удалена.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Error.AlbumLoad">Не удалось загрузить список альбомов.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Anonymous">Imgur (анонимно)</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Direct">Прямые ссылки.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Gifv">Получать ссылки с расширением Gifv вместо Gif.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.ToAlbum">Загружать gif в выбранный альбом.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Album">Альбом:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.AskMe">Спросить меня перед оправкой</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.NotPossible">Не удалось открыть страницу, чтобы получить токен авторизации Imgur.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Token">Чтобы авторизоваться, вам необходимо предоставить токен авторизации.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Completed">Авторизация на Imgur завершена.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Error">Ошибка авторизации на Imgur. Повторите попытку через несколько секунд или получите новый токен.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Header">Не удалось авторизовать приложение</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Message">Проверьте, правильно ли вы указали токен и есть ли подключение к сети.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Refresh.None">Чтобы обновить авторизацию, вам нужно сначала завершить процесс авторизации.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.NotAuthorized">Не авторизован.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Expired">Авторизация истекла в {0}.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Valid">Авторизация действительна до {0}.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Removed">Авторизация на Imgur удалена.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.AlbumLoad">Не удалось загрузить список альбомов.</s:String>
     <s:String x:Key="S.Options.Upload.Gfycat.Anonymous">Gfycat (анонимно)</s:String>
     <s:String x:Key="S.Options.Upload.Yandex.Token">Токен OAuth:</s:String>
     <s:String x:Key="S.Options.Upload.Pick.Destination">Выберите назначение</s:String>
@@ -1357,7 +1357,7 @@
     <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable">Использовать глобальную таблицу цветов.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable.Info">Может уменьшить качество и/или размер GIF.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Loop">Циклы:</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">Цикличный GIF.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Looped">Цикличный GIF.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Повторять бесконечно.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Число повторов.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable">Включить прозрачность.</s:String>
@@ -1384,9 +1384,9 @@
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">Создать ZIP архив.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions">Параметры PSD</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Compress">Сжать изображение.</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">Сжатие изображения по алгоритму RLE.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Info">Сжатие изображения по алгоритму RLE.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline">Сохранить данные шкалы времени.</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">Экспортирует еще и время кадров, а не только кадры.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Info">Экспортирует еще и время кадров, а не только кадры.</s:String>
     <s:String x:Key="S.SaveAs.ProjectOptions">Параметры проекта</s:String>
     
     <s:String x:Key="S.SaveAs.Extras">Дополнительно:</s:String>
@@ -1450,9 +1450,9 @@
     <s:String x:Key="S.SaveAs.Warning.Canceled">Операция была отменена.</s:String>
     
     <!--SaveAs • Export-->
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">Экспорт кадров</s:String>
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Instruction">Вы уверены что хотите выполнить экспорт кадров?</s:String>
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Message">Данное действие выполнит экспорт {0} кадров в выбранную папку.</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Title">Экспорт кадров</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">Вы уверены что хотите выполнить экспорт кадров?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">Данное действие выполнит экспорт {0} кадров в выбранную папку.</s:String>
     
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">Послать отзыв</s:String>

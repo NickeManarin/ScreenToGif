@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -9,6 +9,7 @@ using System.Xml.Linq;
 using ScreenToGif.Controls;
 using ScreenToGif.Model;
 using ScreenToGif.Native;
+using ScreenToGif.Settings;
 using ScreenToGif.Util;
 
 namespace ScreenToGif.Windows.Other

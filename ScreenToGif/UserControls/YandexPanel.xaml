@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="ScreenToGif.UserControls.YandexPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:n="clr-namespace:ScreenToGif.Controls"
+             mc:Ignorable="d" d:DesignHeight="500" d:DesignWidth="320" Background="White"
+             x:Name="ThisPanel" Loaded="YandexPanel_Loaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <n:StatusBand Grid.Row="0" x:Name="StatusBand"/>
+
+        <Expander Grid.Row="1" Header="{DynamicResource S.Options.Upload.Preset.Details}" IsExpanded="True">
+            <Grid Margin="10,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Options.Upload.Preset.Name}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                <n:ExtendedTextBox Grid.Row="0" Grid.Column="1" x:Name="NameTextBox" Text="{Binding Title}" Margin="5,3" MaxLength="50" IsObligatory="True"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.Options.Upload.Preset.Description}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                <n:ExtendedTextBox Grid.Row="1" Grid.Column="1" Text="{Binding Description}" MinHeight="23" Margin="5,3" VerticalContentAlignment="Top" TextWrapping="Wrap" MaxLength="100"/>
+            </Grid>
+        </Expander>
+
+        <Expander Grid.Row="2" Header="{DynamicResource S.Options.Upload.Preset.Authorization}" IsExpanded="True">
+            <Grid Margin="10,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Margin="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Hyperlink RequestNavigate="TokenHyperlink_RequestNavigate">
+                        <Run Text="{DynamicResource S.Options.Upload.Preset.GetToken}"/>
+                    </Hyperlink>
+                </TextBlock>
+
+                <Border Grid.Row="1" Height="10" Background="{StaticResource Vector.Arrow.Blue.Bottom}" Margin="3"/>
+
+                <n:ExtendedTextBox Grid.Row="2" x:Name="TokenTextBox" Text="{Binding OAuthToken}" Margin="5,3" TextWrapping="Wrap" 
+                                   Watermark="{DynamicResource S.Options.Upload.Preset.Token}" HorizontalContentAlignment="Center" IsObligatory="True"/>
+            </Grid>
+        </Expander>
+    </Grid>
+</UserControl>

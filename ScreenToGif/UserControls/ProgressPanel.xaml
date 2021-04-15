@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ScreenToGif.UserControls.ProgressPanel"
+<UserControl x:Class="ScreenToGif.UserControls.ProgressPanel"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,6 +7,7 @@
              xmlns:u="clr-namespace:ScreenToGif.Util"
              xmlns:cm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
+             xmlns:t="clr-namespace:ScreenToGif.Settings"
              mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="300"
              SnapsToDevicePixels="True">
     
@@ -55,7 +56,7 @@
                                    IsChecked="{Binding Type, Mode=TwoWay, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:ProgressType.Text}}"/>
         </Grid>
 
-        <Expander Grid.Row="2" Header="{DynamicResource S.Caption.Font}" IsExpanded="{Binding IsProgressFontGroupExpanded, Source={x:Static u:UserSettings.All}}"
+        <Expander Grid.Row="2" Header="{DynamicResource S.Caption.Font}" IsExpanded="{Binding IsProgressFontGroupExpanded, Source={x:Static t:UserSettings.All}}"
                   Visibility="{Binding IsChecked, ElementName=TextRadioButton, Converter={StaticResource Bool2Visibility}}">
             <Grid Margin="10,0,0,0">
                 <Grid.RowDefinitions>
@@ -184,24 +185,24 @@
             <n:ExtendedTextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" x:Name="CustomProgressTextBox" Margin="10,5"
                                Text="{Binding Format, Mode=TwoWay}" Visibility="{Binding ElementName=ProgressFormatTextBlock, Path=Visibility}">
                 <n:ExtendedTextBox.ToolTip>
-                    <n:HeaderedTooltip Header="Format" StaysOpen="True">
-                        <Run Text="$ms = miliseconds"/>
+                    <n:HeaderedTooltip Header="{DynamicResource S.Progress.Format.Header}" StaysOpen="True">
+                        <Run Text="{DynamicResource S.Progress.Format.Milliseconds}"/>
                         <LineBreak/>
-                        <Run Text="$s = seconds"/>
+                        <Run Text="{DynamicResource S.Progress.Format.Seconds}"/>
                         <LineBreak/>
-                        <Run Text="$m = minutes"/>
+                        <Run Text="{DynamicResource S.Progress.Format.Minutes}"/>
                         <LineBreak/>
-                        <Run Text="$p = percentage"/>
+                        <Run Text="{DynamicResource S.Progress.Format.Percentage}"/>
                         <LineBreak/>
-                        <Run Text="$f = frame number"/>
+                        <Run Text="{DynamicResource S.Progress.Format.FrameNumber}"/>
                         <LineBreak/>
                         <LineBreak/>
-                        <Run Text="Totals:" FontWeight="SemiBold"/>
+                        <Run Text="{DynamicResource S.Progress.Format.Totals}" FontWeight="SemiBold"/>
                         <LineBreak/>
                         <Run Text="@ms, @s, @m, @p, @f"/>
                         <LineBreak/>
                         <LineBreak/>
-                        <Run Text="Examples:" FontWeight="SemiBold"/>
+                        <Run Text="{DynamicResource S.Progress.Format.Examples}" FontWeight="SemiBold"/>
                         <LineBreak/>
                         <Run Text="'$s/@s s' = 2/10 s"/>
                         <LineBreak/>

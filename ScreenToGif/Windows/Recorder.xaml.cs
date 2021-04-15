@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -14,6 +14,7 @@ using Microsoft.Win32;
 using ScreenToGif.Capture;
 using ScreenToGif.Controls;
 using ScreenToGif.Model;
+using ScreenToGif.Settings;
 using ScreenToGif.Util;
 using ScreenToGif.Util.InputHook;
 using ScreenToGif.ViewModel;
@@ -1382,8 +1383,12 @@ namespace ScreenToGif.Windows
 
         private void UpdateSize()
         {
-            _width = (int)Math.Round((Width - Constants.HorizontalOffset) * _scale);
-            _height = (int)Math.Round((Height - Constants.VerticalOffset) * _scale);
+            //If minimized, assume that the position is the same.
+            if (WindowState != WindowState.Minimized)
+            {
+                _width = (int)Math.Round((Width - Constants.HorizontalOffset) * _scale);
+                _height = (int)Math.Round((Height - Constants.VerticalOffset) * _scale);
+            }
 
             _viewModel.Region = new Rect(_viewModel.Region.TopLeft, new Size(_width, _height));
 

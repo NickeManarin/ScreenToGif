@@ -418,27 +418,27 @@
     <s:String x:Key="S.Options.Upload.Proxy.Password">Lösenord:</s:String>
     <s:String x:Key="S.Options.Upload.Get">Hämta OAuth-token</s:String>
     <s:String x:Key="S.Options.Upload.PasteToken">Klistra in auktorisationstoken här</s:String>
-    <s:String x:Key="S.Options.Upload.Authorize">Auktoriserad</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Authorize">Auktoriserad</s:String>
     <s:String x:Key="S.Options.Upload.Refresh">Uppdatera</s:String>
     <s:String x:Key="S.Options.Upload.Clear">Rensa</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Anonymous">Imgur (anonym)</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Direct">Använd direktlänkar.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Gifv">Få länkar med Gifv-tillägget i stället för Gif.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.ToAlbum">Ladda upp gifs till ett valt album.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Album">Album:</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.AskMe">Fråga mig innan uppladdning</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.NotPossible">Det gick inte att öppna sidan för att få Imgur-auktorisationstoken.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Missing">För att auktorisera den här appen måste du ange en auktorisationstoken.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Completed">Imgur-auktorisation slutfört.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Error">Imgur-auktorisationen misslyckades. Försök igen om några sekunder eller skaffa en ny token.</s:String>
-    <!--<s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Header">It was not possible to authorize the app</s:String>-->
-    <!--<s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Message">Check if you provided the correct token and if you have an internet connection.</s:String>-->
-    <s:String x:Key="S.Options.Upload.Imgur.Refresh.None">För att uppdatera auktorisationen för denna app måste du först avsluta auktorisationsprocessen.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.NotAuthorized">Inte auktoriserad.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Expired">Auktorisationen upphörde om {0}.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Valid">Auktorisationen är giltig till {0}.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Removed">Imgur-auktorisationen har tagits bort.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Error.AlbumLoad">Det gick inte att ladda albumlistan.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Anonymous">Imgur (anonym)</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Direct">Använd direktlänkar.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Gifv">Få länkar med Gifv-tillägget i stället för Gif.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.ToAlbum">Ladda upp gifs till ett valt album.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Album">Album:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.AskMe">Fråga mig innan uppladdning</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.NotPossible">Det gick inte att öppna sidan för att få Imgur-auktorisationstoken.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Token">För att auktorisera den här appen måste du ange en auktorisationstoken.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Completed">Imgur-auktorisation slutfört.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Error">Imgur-auktorisationen misslyckades. Försök igen om några sekunder eller skaffa en ny token.</s:String>
+    <!--<s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Header">It was not possible to authorize the app</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Message">Check if you provided the correct token and if you have an internet connection.</s:String>-->
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Refresh.None">För att uppdatera auktorisationen för denna app måste du först avsluta auktorisationsprocessen.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.NotAuthorized">Inte auktoriserad.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Expired">Auktorisationen upphörde om {0}.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Valid">Auktorisationen är giltig till {0}.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Removed">Imgur-auktorisationen har tagits bort.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.AlbumLoad">Det gick inte att ladda albumlistan.</s:String>
     <s:String x:Key="S.Options.Upload.Gfycat.Anonymous">Gfycat (anonym)</s:String>
     <s:String x:Key="S.Options.Upload.Yandex.Token">OAuth-token:</s:String>
     <s:String x:Key="S.Options.Upload.Pick.Destination">Välj ett mål</s:String>
@@ -1271,7 +1271,7 @@
     <!--<s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable">Use a global color table.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable.Info">May reduce the quality and/or size of the gif.</s:String>-->
     <s:String x:Key="S.SaveAs.GifOptions.Loop">Slinga:</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">Slinga Gif.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Looped">Slinga Gif.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Slinga för alltid.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Antal slingor</s:String>
     <!--<s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable">Enable transparency.</s:String>-->
@@ -1298,9 +1298,9 @@
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">Packa bilderna med ZIP.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions">PSD-alternativ</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Compress">Komprimera bilden.</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">Komprimera bilden med RLE-algoritmen.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Info">Komprimera bilden med RLE-algoritmen.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline">Spara tidslinjedata.</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">Exporterar tiderna av bildrutorna i stället för bara bildrutorna.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Info">Exporterar tiderna av bildrutorna i stället för bara bildrutorna.</s:String>
     <!--<s:String x:Key="S.SaveAs.ProjectOptions">Project options</s:String>-->
     
     <s:String x:Key="S.SaveAs.Extras">Extra:</s:String>
@@ -1363,9 +1363,9 @@
     <s:String x:Key="S.SaveAs.Warning.Canceled">Åtgärden avbröts.</s:String>
     
     <!--SaveAs • Export-->
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">Exportera bildrutor</s:String>
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Instruction">Är det säkert att du vill exportera bildrutorna?</s:String>
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Message">Den här åtgärden exporterar {0} bildrutor direkt till den valda mappen.</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Title">Exportera bildrutor</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">Är det säkert att du vill exportera bildrutorna?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">Den här åtgärden exporterar {0} bildrutor direkt till den valda mappen.</s:String>
     
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">Feedback</s:String>

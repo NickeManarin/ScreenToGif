@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
+using ScreenToGif.Settings;
 
 namespace ScreenToGif.Util
 {

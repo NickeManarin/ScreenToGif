@@ -1,0 +1,141 @@
+<UserControl x:Class="ScreenToGif.UserControls.ImgurPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:n="clr-namespace:ScreenToGif.Controls"
+             mc:Ignorable="d" d:DesignHeight="500" d:DesignWidth="320" Background="White"
+             x:Name="ThisPanel" Loaded="ImgurPanel_Loaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <n:StatusBand Grid.Row="0" x:Name="StatusBand"/>
+
+        <Expander Grid.Row="1" Header="{DynamicResource S.Options.Upload.Preset.Details}" IsExpanded="True">
+            <Grid Margin="10,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Options.Upload.Preset.Name}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                <n:ExtendedTextBox Grid.Row="0" Grid.Column="1" x:Name="NameTextBox" Text="{Binding Title}" Margin="5,3" MaxLength="50" IsObligatory="True"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.Options.Upload.Preset.Description}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                <n:ExtendedTextBox Grid.Row="1" Grid.Column="1" Text="{Binding Description}" MinHeight="23" Margin="5,3" VerticalContentAlignment="Top" TextWrapping="Wrap" MaxLength="100"/>
+                
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.Options.Upload.Preset.Mode}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                <ComboBox Grid.Row="2" Grid.Column="1" Margin="5,3" VerticalContentAlignment="Center" SelectedValuePath="Tag" SelectedValue="{Binding IsAnonymous}">
+                    <ComboBoxItem Content="{DynamicResource S.Options.Upload.Preset.Mode.Anonymous}" Tag="True"/>
+                    <ComboBoxItem Content="{DynamicResource S.Options.Upload.Preset.Mode.Authenticated}" Tag="False"/>
+                </ComboBox>
+            </Grid>
+        </Expander>
+
+        <Expander Grid.Row="2" Header="{DynamicResource S.Options.Upload.Preset.Authorization}" IsExpanded="True" Visibility="{Binding IsAnonymous, Converter={StaticResource InvertedBoolToVisibility}}">
+            <Grid Margin="10,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Margin="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Hyperlink NavigateUri="imgur.com" RequestNavigate="TokenHyperlink_RequestNavigate">
+                        <Run Text="{DynamicResource S.Options.Upload.Preset.GetToken}"/>
+                    </Hyperlink>
+                </TextBlock>
+
+                <Border Grid.Row="1" Height="10" Background="{StaticResource Vector.Arrow.Blue.Bottom}" Margin="3"/>
+
+                <n:ExtendedTextBox Grid.Row="2" Text="{Binding OAuthToken}" Margin="5,3" TextWrapping="Wrap" 
+                                   Watermark="{DynamicResource S.Options.Upload.Preset.Token}" HorizontalContentAlignment="Center" IsObligatory="True"/>
+
+                <Border Grid.Row="3" Height="10" Background="{StaticResource Vector.Arrow.Blue.Bottom}" Margin="3"/>
+
+                <n:ExtendedButton Grid.Row="4" Text="{DynamicResource S.Options.Upload.Preset.Authorize}" Icon="{StaticResource Vector.Ok}" 
+                                  ContentWidth="16" ContentHeight="16" Margin="3" HorizontalAlignment="Center" Click="AuthorizeButton_Click"/>
+
+                <TextBlock Grid.Row="5" Grid.Column="0" Margin="5,3" Text="{Binding Status}" HorizontalAlignment="Center" 
+                           TextWrapping="Wrap" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+            </Grid>
+        </Expander>
+
+        <Expander Grid.Row="3" Header="{DynamicResource S.Options.Upload.Preset.Options}" IsExpanded="True">
+            <Grid Margin="10,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <n:ExtendedCheckBox Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Options.Upload.Preset.Direct}" Margin="5,3" 
+                                    IsChecked="{Binding UseDirectLinks, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <n:ExtendedCheckBox Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.Options.Upload.Preset.Imgur.Gifv}" Margin="5,3"
+                                    IsChecked="{Binding UseGifvLinks, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <n:ExtendedCheckBox Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.Options.Upload.Preset.Imgur.ToAlbum}" Margin="5,3"
+                                    IsChecked="{Binding UploadToAlbum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Visibility="{Binding IsAnonymous, Converter={StaticResource InvertedBoolToVisibility}}"/>
+            </Grid>
+        </Expander>
+
+        <Expander Grid.Row="4" Header="{DynamicResource S.Options.Upload.Preset.Album}" IsExpanded="True">
+            <Expander.Visibility>
+                <MultiBinding Converter="{StaticResource BoolAndToVisibility}">
+                    <Binding Path="IsAnonymous" Converter="{StaticResource InvertedBool}"/>
+                    <Binding Path="UploadToAlbum"/>
+                </MultiBinding>
+            </Expander.Visibility>
+            
+            <Grid Margin="10,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="35"/>
+                </Grid.ColumnDefinitions>
+
+                <ComboBox Grid.Column="0" x:Name="AlbumComboBox" Margin="5,3" SelectedValuePath="Id"
+                          SelectedValue="{Binding SelectedAlbum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" MinWidth="40"/>
+                                    <ColumnDefinition Width="1"/>
+                                    <ColumnDefinition Width="Auto" MaxWidth="400"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0" Text="{Binding Id}" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <Separator Grid.Column="1" Width="1" Margin="0"/>
+                                <TextBlock Grid.Column="2" Text="{Binding Title}" Margin="3,0,0,0" FontWeight="SemiBold" Foreground="{DynamicResource Element.Foreground}"/>
+                                <TextBlock Grid.Column="3" Text="{Binding Description}" Margin="10,0,2,0" Foreground="{DynamicResource Element.Foreground.Medium}" FontStyle="Italic" TextWrapping="NoWrap"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+
+                    <!--Description="Instead of selecting an album right now, choose one later."-->
+                    <!--<i:ImgurAlbum Id="♥♦♣♠" Title="Prompt me before uploading" Description="This is a description"/>-->
+                </ComboBox>
+
+                <n:ExtendedButton Grid.Column="1" Style="{StaticResource Style.Button.NoText.Border}" Margin="0,3,5,3"
+                                  Icon="{StaticResource Vector.Repeat}" ContentHeight="15" ContentWidth="15" Height="25"
+                                  ToolTip="{DynamicResource S.Options.Upload.Preset.Imgur.Reload}" Click="LoadAlbums_Click"/>
+            </Grid>
+        </Expander>
+    </Grid>
+</UserControl>

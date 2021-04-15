@@ -24,6 +24,8 @@ namespace ScreenToGif.Controls
         public static readonly DependencyProperty IdProperty = DependencyProperty.Register(nameof(Id), typeof(int), typeof(StatusBand), new FrameworkPropertyMetadata(0));
 
         public static readonly DependencyProperty TypeProperty = DependencyProperty.Register(nameof(Type), typeof(StatusType), typeof(StatusBand), new FrameworkPropertyMetadata(StatusType.None));
+        
+        public static readonly DependencyProperty ReasonProperty = DependencyProperty.Register(nameof(Reason), typeof(StatusReasons), typeof(StatusBand), new FrameworkPropertyMetadata(StatusReasons.None));
 
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register(nameof(Text), typeof(string), typeof(StatusBand));
 
@@ -49,6 +51,13 @@ namespace ScreenToGif.Controls
         {
             get => (StatusType)GetValue(TypeProperty);
             set => SetValue(TypeProperty, value);
+        }
+
+        [Bindable(true), Category("Common")]
+        public StatusReasons Reason
+        {
+            get => (StatusReasons)GetValue(ReasonProperty);
+            set => SetValue(ReasonProperty, value);
         }
 
         [Bindable(true), Category("Common")]

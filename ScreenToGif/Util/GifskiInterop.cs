@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using ScreenToGif.ImageUtil;
 using ScreenToGif.ImageUtil.Gif.Encoder;
+using ScreenToGif.Settings;
 
 namespace ScreenToGif.Util
 {

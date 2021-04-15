@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.Windows.Data;
+using ScreenToGif.Settings;
 
 namespace ScreenToGif.Util.Converters
 {

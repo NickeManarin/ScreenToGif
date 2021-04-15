@@ -1,8 +1,8 @@
-﻿<n:RecorderWindow xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<n:RecorderWindow xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                   xmlns:n="clr-namespace:ScreenToGif.Controls"
-                  xmlns:u="clr-namespace:ScreenToGif.Util"
                   xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
+                  xmlns:t="clr-namespace:ScreenToGif.Settings"
                   x:Class="ScreenToGif.Windows.Webcam" x:Name="WebcamWindow" 
                   Title="{DynamicResource S.Webcam.Title}" Height="400" Width="600" MinWidth="200" MinHeight="200" 
                   Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" Background="{DynamicResource Panel.Background}"
@@ -125,7 +125,7 @@
             </Viewbox>
 
             <n:IntegerUpDown Grid.Column="7" x:Name="FpsNumericUpDown" Margin="1,3" StepValue="1" Minimum="1" Maximum="60" TabIndex="3"
-                             Value="{Binding LatestFps, Mode=TwoWay, Source={x:Static u:UserSettings.All}}" MinWidth="45" IsEnabled="False">
+                             Value="{Binding LatestFps, Mode=TwoWay, Source={x:Static t:UserSettings.All}}" MinWidth="45" IsEnabled="False">
                 <n:IntegerUpDown.ToolTip>
                     <ToolTip HorizontalOffset="-5" Placement="Bottom" Content="{DynamicResource S.Recorder.Fps}"/>
                 </n:IntegerUpDown.ToolTip>

@@ -19,24 +19,24 @@ namespace ScreenToGif.Controls
 
         #endregion
 
-        #region Dependency
+        #region Dependency Properties
 
-        public static readonly DependencyProperty MinimumProperty = DependencyProperty.Register("Minimum", typeof(double), typeof(RangeSlider), 
+        public static readonly DependencyProperty MinimumProperty = DependencyProperty.Register(nameof(Minimum), typeof(double), typeof(RangeSlider), 
             new FrameworkPropertyMetadata(0d));
 
-        public static readonly DependencyProperty LowerValueProperty = DependencyProperty.Register("LowerValue", typeof(double), typeof(RangeSlider), 
+        public static readonly DependencyProperty LowerValueProperty = DependencyProperty.Register(nameof(LowerValue), typeof(double), typeof(RangeSlider), 
             new FrameworkPropertyMetadata(10d, LowerValue_PropertyChanged));
 
-        public static readonly DependencyProperty UpperValueProperty = DependencyProperty.Register("UpperValue", typeof(double), typeof(RangeSlider), 
+        public static readonly DependencyProperty UpperValueProperty = DependencyProperty.Register(nameof(UpperValue), typeof(double), typeof(RangeSlider), 
             new FrameworkPropertyMetadata(90d, UpperValue_PropertyChanged));
 
-        public static readonly DependencyProperty MaximumProperty = DependencyProperty.Register("Maximum", typeof(double), typeof(RangeSlider), 
+        public static readonly DependencyProperty MaximumProperty = DependencyProperty.Register(nameof(Maximum), typeof(double), typeof(RangeSlider), 
             new FrameworkPropertyMetadata(100d));
 
-        public static readonly DependencyProperty DisableLowerValueProperty = DependencyProperty.Register("DisableLowerValue", typeof(bool), typeof(RangeSlider), 
+        public static readonly DependencyProperty DisableLowerValueProperty = DependencyProperty.Register(nameof(DisableLowerValue), typeof(bool), typeof(RangeSlider), 
             new FrameworkPropertyMetadata(false));
 
-        public static readonly DependencyProperty TickPlacementProperty = DependencyProperty.Register("TickPlacement", typeof(TickPlacement), typeof(RangeSlider), 
+        public static readonly DependencyProperty TickPlacementProperty = DependencyProperty.Register(nameof(TickPlacement), typeof(TickPlacement), typeof(RangeSlider), 
             new FrameworkPropertyMetadata(TickPlacement.None));
 
         #endregion
@@ -111,16 +111,30 @@ namespace ScreenToGif.Controls
 
         private static void LowerValue_PropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var range = d as RangeSlider;
+            if (!(d is RangeSlider range))
+                return;
 
-            range?.RaiseLowerValueChangedEvent();
+            if (range.LowerValue < range.Minimum)
+                range.LowerValue = range.Minimum;
+
+            if (range.LowerValue > range.UpperValue)
+                range.UpperValue = range.LowerValue;
+
+            range.RaiseLowerValueChangedEvent();
         }
 
         private static void UpperValue_PropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var range = d as RangeSlider;
+            if (!(d is RangeSlider range))
+                return;
 
-            range?.RaiseUpperValueChangedEvent();
+            if (range.UpperValue > range.Maximum)
+                range.UpperValue = range.Maximum;
+
+            if (range.LowerValue > range.UpperValue)
+                range.LowerValue = range.UpperValue;
+
+            range.RaiseUpperValueChangedEvent();
         }
 
         #endregion
@@ -192,8 +206,45 @@ namespace ScreenToGif.Controls
             }
         }
 
+        protected override void OnPreviewKeyDown(KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Up:
+                {
+                    e.Handled = true;
+                    UpperValue += 1;
+                    break;
+                }
+                case Key.Down:
+                {
+                    e.Handled = true;
+                    UpperValue -= 1;
+                    break;
+                }
+
+                case Key.Right:
+                {
+                    e.Handled = true;
+                    LowerValue += 1;
+                    break;
+                }
+                case Key.Left:
+                {
+                    e.Handled = true;
+                    LowerValue -= 1;
+                    break;
+                }
+            }
+
+            base.OnKeyDown(e);
+        }
+
         private void SetProgressBorder()
         {
+            if (Maximum - Minimum < 1)
+                return;
+
             var lowerPoint = ActualWidth * (LowerValue - Minimum) / (Maximum - Minimum);
             var upperPoint = ActualWidth * (UpperValue - Minimum) / (Maximum - Minimum);
             upperPoint = ActualWidth - upperPoint;

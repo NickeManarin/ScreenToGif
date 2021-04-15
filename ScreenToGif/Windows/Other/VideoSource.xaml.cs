@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using ScreenToGif.Model;
+using ScreenToGif.Settings;
 using ScreenToGif.Util;
 
 namespace ScreenToGif.Windows.Other
@@ -514,8 +515,8 @@ namespace ScreenToGif.Windows.Other
             Duration = TimeSpan.ParseExact(timingsFound[0].Value, "hh\\:mm\\:ss\\.ff", CultureInfo.InvariantCulture);
 
             //Trim the video a bit, just to make sure that we'll get the frame at the end.
-            if (Duration > TimeSpan.Zero && Duration.TotalMilliseconds > Duration.Milliseconds * 2)
-                Duration = Duration.Subtract(TimeSpan.FromMilliseconds(Duration.Milliseconds * 2));
+            if (Duration > TimeSpan.Zero && Duration.TotalMilliseconds > 1000)
+                Duration = Duration.Subtract(TimeSpan.FromMilliseconds(100));
         }
 
         private async Task WhenBothLoaded()

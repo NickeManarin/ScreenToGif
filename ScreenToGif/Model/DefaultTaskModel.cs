@@ -25,6 +25,7 @@ namespace ScreenToGif.Model
 
         private TaskTypeEnum _taskType = TaskTypeEnum.NotDeclared;
         private bool _isEnabled = true;
+        private bool _isManual = false;
         private string _image = null;
 
         #endregion
@@ -66,6 +67,14 @@ namespace ScreenToGif.Model
         }
 
         public string Details => ToString();
+
+        [IgnoreDataMember] //This attribute is getting ignored.
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool IsManual
+        {
+            get => _isManual;
+            set => SetProperty(ref _isManual, value);
+        }
 
         [IgnoreDataMember] //This attribute is getting ignored.
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]

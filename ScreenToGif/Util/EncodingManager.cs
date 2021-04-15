@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -13,16 +13,26 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using ScreenToGif.Cloud;
 using ScreenToGif.Controls;
+using ScreenToGif.Extensions;
 using ScreenToGif.ImageUtil;
 using ScreenToGif.ImageUtil.Apng;
 using ScreenToGif.ImageUtil.Gif.Encoder;
 using ScreenToGif.ImageUtil.Gif.LegacyEncoder;
 using ScreenToGif.ImageUtil.Psd;
-using ScreenToGif.ImageUtil.Video;
 using ScreenToGif.Model;
+using ScreenToGif.Model.ExportPresets;
+using ScreenToGif.Model.ExportPresets.AnimatedImage.Apng;
+using ScreenToGif.Model.ExportPresets.AnimatedImage.Gif;
+using ScreenToGif.Model.ExportPresets.AnimatedImage.Webp;
+using ScreenToGif.Model.ExportPresets.Image;
+using ScreenToGif.Model.ExportPresets.Other;
+using ScreenToGif.Model.ExportPresets.Video;
+using ScreenToGif.Model.UploadPresets;
+using ScreenToGif.Settings;
 using ScreenToGif.Windows.Other;
 using Encoder = ScreenToGif.Windows.Other.Encoder;
 
@@ -51,11 +61,11 @@ namespace ScreenToGif.Util
 
         #endregion
 
-        internal static void StartEncoding(ExportProject project, Parameters param, double scale)
+        internal static void StartEncoding(ExportProject project, ExportPreset preset)
         {
             //If the user still wants an encoder window, here's when it should be opened.
             if (UserSettings.All.DisplayEncoder)
-                Application.Current.Dispatcher?.BeginInvoke(new Action(() => Encoder.Start(scale)));
+                Application.Current.Dispatcher?.BeginInvoke(new Action(() => Encoder.Start(preset.Scale)));
 
             //Creates the Cancellation Token
             var cancellationTokenSource = new CancellationTokenSource();
@@ -68,7 +78,7 @@ namespace ScreenToGif.Util
             var task = new Task(async () =>
             {
                 //ReSharper disable once AccessToModifiedClosure
-                await Encode(project, taskId, param, cancellationTokenSource);
+                await Encode(project, preset, taskId, cancellationTokenSource);
 
             }, cancellationTokenSource.Token, TaskCreationOptions.LongRunning);
             taskId = task.Id;
@@ -91,7 +101,7 @@ namespace ScreenToGif.Util
             Encodings.Add(new EncodingItem
             {
                 Id = taskId,
-                OutputType = param.Type,
+                OutputType = preset.Type,
                 Text = LocalizationHelper.Get("S.Encoder.Starting"),
                 FrameCount = project.FrameCount,
                 TokenSource = cancellationTokenSource
@@ -100,7 +110,7 @@ namespace ScreenToGif.Util
             try
             {
                 TaskList.Add(task);
-                TaskList.Last().Start();
+                task.Start(); //TaskList.Last().Start();
             }
             catch (Exception ex)
             {
@@ -416,7 +426,7 @@ namespace ScreenToGif.Util
 
         #region Encoding
 
-        private static async Task Encode(ExportProject project, int id, Parameters param, CancellationTokenSource tokenSource)
+        private static async Task Encode(ExportProject project, ExportPreset preset, int id, CancellationTokenSource tokenSource)
         {
             var processing = LocalizationHelper.Get("S.Encoder.Processing");
             var watch = new Stopwatch();
@@ -424,28 +434,149 @@ namespace ScreenToGif.Util
 
             try
             {
-                switch (param.Type)
+                #region File naming
+
+                if (preset.PickLocation)
                 {
+                    preset.FullPath = Path.Combine(preset.OutputFolder, preset.OutputFilename + (preset.Extension ?? preset.DefaultExtension));
+                }
+                else
+                {
+                    preset.OutputFolder = Path.GetTempPath(); //Get path where the cache is stored instead.
+                    preset.OutputFilename = Guid.NewGuid() + "";
+                    preset.FullPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+
+                    //If somehow this happens, try again. TODO: File should be created on the spot, to properly prevent this issue.
+                    if (File.Exists(Path.Combine(preset.OutputFilename, preset.OutputFilename)))
+                    {
+                        preset.OutputFilename = Guid.NewGuid() + "";
+                        preset.FullPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+                    }
+                }
+
+                #endregion
+
+                switch (preset.Type)
+                {
+                    case Export.Apng:
+                    {
+                        #region Apng
+
+                        switch (preset.Encoder)
+                        {
+                            case EncoderType.ScreenToGif:
+                            {
+                                if (!(preset is EmbeddedApngPreset embApngPreset))
+                                    return;
+
+                                #region Cut/Paint Unchanged Pixels
+
+                                if (embApngPreset.DetectUnchanged)
+                                {
+                                    Update(id, 0, LocalizationHelper.Get("S.Encoder.Analyzing"));
+
+                                    if (embApngPreset.PaintTransparent)
+                                        project.FramesFiles = ImageMethods.PaintTransparentAndCut(project.FramesFiles, Colors.Transparent, id, tokenSource);
+                                    else
+                                        project.FramesFiles = ImageMethods.CutUnchanged(project.FramesFiles, id, tokenSource);
+
+                                    Update(id, 0, watch.Elapsed);
+                                    watch.Restart();
+                                }
+                                else
+                                {
+                                    var size = project.FramesFiles[0].Path.ScaledSize();
+                                    project.FramesFiles.ForEach(x => x.Rect = new Int32Rect(0, 0, (int)size.Width, (int)size.Height));
+                                }
+
+                                #endregion
+
+                                #region Encoding
+
+                                using (var stream = new MemoryStream())
+                                {
+                                    var frameCount = project.FramesFiles.Count(x => x.HasArea);
+
+                                    using (var encoder = new Apng(stream, frameCount, embApngPreset.RepeatCount))
+                                    {
+                                        for (var i = 0; i < project.FramesFiles.Count; i++)
+                                        {
+                                            if (!project.FramesFiles[i].HasArea && embApngPreset.DetectUnchanged)
+                                                continue;
+
+                                            if (project.FramesFiles[i].Delay == 0)
+                                                project.FramesFiles[i].Delay = 10;
+
+                                            encoder.AddFrame(project.FramesFiles[i].Path, project.FramesFiles[i].Rect, project.FramesFiles[i].Delay);
+
+                                            Update(id, i, string.Format(processing, i));
+
+                                            #region Cancellation
+
+                                            if (tokenSource.Token.IsCancellationRequested)
+                                            {
+                                                Update(id, Status.Canceled);
+                                                break;
+                                            }
+
+                                            #endregion
+                                        }
+                                    }
+
+                                    try
+                                    {
+                                        using (var fileStream = new FileStream(embApngPreset.FullPath, FileMode.Create, FileAccess.Write, FileShare.None, 4096))
+                                            stream.WriteTo(fileStream);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        Update(id, Status.Error);
+                                        LogWriter.Log(ex, "Apng Encoding");
+                                    }
+                                }
+
+                                #endregion
+
+                                break;
+                            }
+
+                            case EncoderType.FFmpeg:
+                            {
+                                EncodeWithFfmpeg(preset, project.FramesFiles, id, tokenSource, processing);
+                                break;
+                            }
+                        }
+
+                        Update(id, 1, watch.Elapsed);
+                        watch.Restart();
+
+                        break;
+
+                        #endregion
+                    }
                     case Export.Gif:
                     {
                         #region Gif
 
-                        switch (param.EncoderType)
+                        switch (preset.Encoder)
                         {
-                            case GifEncoderType.ScreenToGif:
+                            case EncoderType.ScreenToGif:
 
                                 #region Frame analysis
 
                                 Update(id, 0, LocalizationHelper.Get("S.Encoder.Analyzing"));
 
-                                if (param.EnableTransparency && param.ChromaKey.HasValue)
+                                if (!(preset is EmbeddedGifPreset embGifPreset))
+                                    return;
+
+                                if (embGifPreset.EnableTransparency && embGifPreset.PaintTransparent) //ChromaKey.HasValue
                                 {
-                                    ImageMethods.PaintAndCutForTransparency(project, param.TransparencyColor, param.ChromaKey.Value, id, tokenSource);
+                                    ImageMethods.PaintAndCutForTransparency(project, embGifPreset.TransparencyColor, embGifPreset.ChromaKey, id, tokenSource);
                                 }
-                                else if (param.DetectUnchangedPixels)
+                                else if (embGifPreset.DetectUnchanged)
                                 {
-                                    if (param.ChromaKey.HasValue)
-                                        ImageMethods.PaintTransparentAndCut(project, param.ChromaKey.Value, id, tokenSource);
+                                    if (embGifPreset.PaintTransparent) //ChromaKey.HasValue
+                                        ImageMethods.PaintTransparentAndCut(project, embGifPreset.ChromaKey, id, tokenSource);
                                     else
                                         ImageMethods.CutUnchanged(project, id, tokenSource);
                                 }
@@ -467,13 +598,13 @@ namespace ScreenToGif.Util
                                 {
                                     using (var encoder = new GifFile(stream))
                                     {
-                                        encoder.RepeatCount = project.FrameCount > 1 ? param.RepeatCount : -1;
-                                        encoder.UseGlobalColorTable = param.UseGlobalColorTable;
-                                        encoder.TransparentColor = param.ChromaKey.HasValue ? System.Windows.Media.Color.FromArgb(0, param.ChromaKey.Value.R, param.ChromaKey.Value.G, param.ChromaKey.Value.B) : new System.Windows.Media.Color?();
-                                        encoder.MaximumNumberColor = param.MaximumNumberColors;
-                                        encoder.UseFullTransparency = param.EnableTransparency;
-                                        encoder.QuantizationType = param.ColorQuantizationType;
-                                        encoder.SamplingFactor = param.SamplingFactor;
+                                        encoder.RepeatCount = project.FrameCount > 1 ? embGifPreset.RepeatCount : -1;
+                                        encoder.UseGlobalColorTable = embGifPreset.UseGlobalColorTable;
+                                        encoder.TransparentColor = embGifPreset.PaintTransparent ? System.Windows.Media.Color.FromArgb(0, embGifPreset.ChromaKey.R, embGifPreset.ChromaKey.G, embGifPreset.ChromaKey.B) : new System.Windows.Media.Color?();
+                                        encoder.MaximumNumberColor = embGifPreset.MaximumColorCount;
+                                        encoder.UseFullTransparency = embGifPreset.EnableTransparency;
+                                        encoder.QuantizationType = embGifPreset.Quantizer;
+                                        encoder.SamplingFactor = embGifPreset.SamplingFactor;
 
                                         //Get the last index, in cases where the last frames have no changes.
                                         var last = project.FramesFiles.FindLastIndex(f => f.HasArea);
@@ -485,7 +616,7 @@ namespace ScreenToGif.Util
 
                                             for (var i = 0; i < project.Frames.Count; i++)
                                             {
-                                                if (!project.Frames[i].HasArea && param.DetectUnchangedPixels)
+                                                if (!project.Frames[i].HasArea && embGifPreset.DetectUnchanged)
                                                     continue;
 
                                                 if (project.Frames[i].Delay == 0)
@@ -511,7 +642,7 @@ namespace ScreenToGif.Util
 
                                     try
                                     {
-                                        using (var fileStream = new FileStream(param.Filename, FileMode.Create, FileAccess.Write, FileShare.None, 4096))
+                                        using (var fileStream = new FileStream(preset.FullPath, FileMode.Create, FileAccess.Write, FileShare.None, 4096))
                                             stream.WriteTo(fileStream);
                                     }
                                     catch (Exception ex)
@@ -524,13 +655,16 @@ namespace ScreenToGif.Util
                                 #endregion
 
                                 break;
-                            case GifEncoderType.PaintNet:
+                            case EncoderType.System:
 
                                 #region System encoding
 
+                                if (!(preset is SystemGifPreset systemGifPreset))
+                                    return;
+
                                 using (var stream = new MemoryStream())
                                 {
-                                    using (var encoder = new GifEncoder(stream, null, null, param.RepeatCount))
+                                    using (var encoder = new GifEncoder(stream, null, null, systemGifPreset.RepeatCount))
                                     {
                                         for (var i = 0; i < project.FramesFiles.Count; i++)
                                         {
@@ -556,7 +690,7 @@ namespace ScreenToGif.Util
 
                                     try
                                     {
-                                        using (var fileStream = new FileStream(param.Filename, FileMode.Create, FileAccess.Write, FileShare.None, Constants.BufferSize, false))
+                                        using (var fileStream = new FileStream(systemGifPreset.FullPath, FileMode.Create, FileAccess.Write, FileShare.None, Constants.BufferSize, false))
                                             stream.WriteTo(fileStream);
                                     }
                                     catch (Exception ex)
@@ -569,27 +703,30 @@ namespace ScreenToGif.Util
                                 #endregion
 
                                 break;
-                            case GifEncoderType.FFmpeg:
+                            case EncoderType.FFmpeg:
 
-                                EncodeWithFfmpeg("gif", project.FramesFiles, id, param, tokenSource, processing);
+                                EncodeWithFfmpeg(preset, project.FramesFiles, id, tokenSource, processing);
 
                                 break;
-                            case GifEncoderType.Gifski:
+                            case EncoderType.Gifski:
 
                                 #region Gifski encoding
 
                                 Update(id, Status.Processing, null, true);
 
-                                if (!Util.Other.IsGifskiPresent())
+                                if (!(preset is GifskiGifPreset gifskiGifPreset))
+                                    return;
+
+                                if (!Other.IsGifskiPresent())
                                     throw new ApplicationException("Gifski not present.");
 
-                                if (File.Exists(param.Filename))
-                                    File.Delete(param.Filename);
+                                if (File.Exists(preset.FullPath))
+                                    File.Delete(preset.FullPath);
 
                                 var size = project.FramesFiles[0].Path.ScaledSize();
 
                                 var gifski = new GifskiInterop();
-                                var handle = gifski.Start((uint)size.Width, (uint)size.Height, UserSettings.All.GifskiQuality, UserSettings.All.Looped);
+                                var handle = gifski.Start((uint)size.Width, (uint)size.Height, gifskiGifPreset.Quality, gifskiGifPreset.Looped);
 
                                 if (gifski.Version.Major == 0 && gifski.Version.Minor < 9)
                                 {
@@ -632,7 +769,7 @@ namespace ScreenToGif.Util
                                             throw new Exception("Error while finishing adding frames with Gifski. " + res, new Win32Exception(res.ToString())) { HelpLink = $"Result:\n\r{Marshal.GetLastWin32Error()}" };
                                     }, null);
 
-                                    gifski.End(handle, param.Filename);
+                                    gifski.End(handle, gifskiGifPreset.FullPath);
 
                                     #endregion
                                 }
@@ -640,7 +777,7 @@ namespace ScreenToGif.Util
                                 {
                                     #region Version 0.9.3 and newer
 
-                                    var res = gifski.SetOutput(handle, param.Filename);
+                                    var res = gifski.SetOutput(handle, gifskiGifPreset.FullPath);
 
                                     if (res != GifskiInterop.GifskiError.Ok)
                                         throw new Exception("Error while setting output with Gifski. " + res, new Win32Exception()) { HelpLink = $"Result:\n\r{Marshal.GetLastWin32Error()}" };
@@ -681,7 +818,7 @@ namespace ScreenToGif.Util
                                     #endregion
                                 }
 
-                                var fileInfo2 = new FileInfo(param.Filename);
+                                var fileInfo2 = new FileInfo(gifskiGifPreset.FullPath);
 
                                 if (!fileInfo2.Exists || fileInfo2.Length == 0)
                                     throw new Exception("Error while encoding the gif with Gifski. Empty output file.", new Win32Exception()) { HelpLink = $"Result:\n\r{Marshal.GetLastWin32Error()}" };
@@ -700,91 +837,121 @@ namespace ScreenToGif.Util
 
                         #endregion
                     }
-                    case Export.Apng:
+
+                    case Export.Bmp:
+                    case Export.Jpeg:
+                    case Export.Png:
                     {
-                        #region Apng
+                        if (!(preset is ImagePreset imagePreset))
+                            return;
 
-                        switch (param.ApngEncoder)
+                        var padLength = project.FramesFiles.Select(s => s.Index).Max().ToString().Length;
+
+                        if (!imagePreset.ZipFiles)
                         {
-                            case ApngEncoderType.ScreenToGif:
+                            foreach (var frame in project.FramesFiles)
                             {
-                                #region Cut/Paint Unchanged Pixels
+                                var path = Path.Combine(preset.OutputFolder, $"{preset.OutputFilename} {frame.Index.ToString().PadLeft(padLength, '0')}{preset.Extension ?? preset.DefaultExtension}");
 
-                                if (param.DetectUnchangedPixels)
+                                if (File.Exists(path))
+                                    File.Delete(path);
+
+                                switch(preset.Type)
                                 {
-                                    Update(id, 0, LocalizationHelper.Get("S.Encoder.Analyzing"));
-
-                                    if (param.ChromaKey.HasValue)
-                                        project.FramesFiles = ImageMethods.PaintTransparentAndCut(project.FramesFiles, param.ChromaKey.Value, id, tokenSource);
-                                    else
-                                        project.FramesFiles = ImageMethods.CutUnchanged(project.FramesFiles, id, tokenSource);
-
-                                    Update(id, 0, watch.Elapsed);
-                                    watch.Restart();
-                                }
-                                else
-                                {
-                                    var size = project.FramesFiles[0].Path.ScaledSize();
-                                    project.FramesFiles.ForEach(x => x.Rect = new Int32Rect(0, 0, (int)size.Width, (int)size.Height));
-                                }
-
-                                #endregion
-
-                                #region Encoding
-
-                                using (var stream = new MemoryStream())
-                                {
-                                    var frameCount = project.FramesFiles.Count(x => x.HasArea);
-
-                                    using (var encoder = new Apng(stream, frameCount, param.RepeatCount))
+                                    case Export.Bmp:
                                     {
-                                        for (var i = 0; i < project.FramesFiles.Count; i++)
+                                        using (var fileStream = new FileStream(frame.Path, FileMode.Create))
                                         {
-                                            if (!project.FramesFiles[i].HasArea && param.DetectUnchangedPixels)
-                                                continue;
-
-                                            if (project.FramesFiles[i].Delay == 0)
-                                                project.FramesFiles[i].Delay = 10;
-
-                                            encoder.AddFrame(project.FramesFiles[i].Path, project.FramesFiles[i].Rect, project.FramesFiles[i].Delay);
-
-                                            Update(id, i, string.Format(processing, i));
-
-                                            #region Cancellation
-
-                                            if (tokenSource.Token.IsCancellationRequested)
-                                            {
-                                                Update(id, Status.Canceled);
-                                                break;
-                                            }
-
-                                            #endregion
+                                            var bmpEncoder = new BmpBitmapEncoder();
+                                            bmpEncoder.Frames.Add(BitmapFrame.Create(frame.Path.SourceFrom()));
+                                            bmpEncoder.Save(fileStream);
                                         }
-                                    }
 
-                                    try
-                                    {
-                                        using (var fileStream = new FileStream(param.Filename, FileMode.Create, FileAccess.Write, FileShare.None, 4096))
-                                            stream.WriteTo(fileStream);
+                                        break;
                                     }
-                                    catch (Exception ex)
+                                    case Export.Jpeg:
                                     {
-                                        Update(id, Status.Error);
-                                        LogWriter.Log(ex, "Apng Encoding");
+                                        using (var fileStream = new FileStream(frame.Path, FileMode.Create))
+                                        {
+                                            var jpgEncoder = new JpegBitmapEncoder { QualityLevel = 100 };
+                                            jpgEncoder.Frames.Add(BitmapFrame.Create(frame.Path.SourceFrom()));
+                                            jpgEncoder.Save(fileStream);
+                                        }
+
+                                        break;
                                     }
                                 }
 
-                                #endregion
-
-                                break;
-                            }
-
-                            case ApngEncoderType.FFmpeg:
-                            {
-                                EncodeWithFfmpeg("apng", project.FramesFiles, id, param, tokenSource, processing);
-                                break;
+                                File.Copy(frame.Path, path, true);
                             }
                         }
+                        else
+                        {
+                            var fileName = Path.Combine(preset.OutputFolder, preset.OutputFilename + ".zip");
+                            
+                            if (File.Exists(fileName))
+                                File.Delete(fileName);
+
+                            //Temporary folder.
+                            var outPath = Path.Combine(project.Path, "Export");
+
+                            if (Directory.Exists(outPath))
+                                Directory.Delete(outPath, true);
+
+                            var dir = Directory.CreateDirectory(outPath);
+
+                            //Get files.
+                            foreach (var frame in project.FramesFiles)
+                            {
+                                var path = Path.Combine(dir.FullName, $"{frame.Index.ToString().PadLeft(padLength, '0')}{preset.Extension ?? preset.DefaultExtension}");
+
+                                switch (preset.Type)
+                                {
+                                    case Export.Bmp:
+                                    {
+                                        using (var fileStream = new FileStream(frame.Path, FileMode.Create))
+                                        {
+                                            var bmpEncoder = new BmpBitmapEncoder();
+                                            bmpEncoder.Frames.Add(BitmapFrame.Create(frame.Path.SourceFrom()));
+                                            bmpEncoder.Save(fileStream);
+                                        }
+
+                                        break;
+                                    }
+                                    case Export.Jpeg:
+                                    {
+                                        using (var fileStream = new FileStream(frame.Path, FileMode.Create))
+                                        {
+                                            var jpgEncoder = new JpegBitmapEncoder { QualityLevel = 100 };
+                                            jpgEncoder.Frames.Add(BitmapFrame.Create(frame.Path.SourceFrom()));
+                                            jpgEncoder.Save(fileStream);
+                                        }
+
+                                        break;
+                                    }
+                                }
+
+                                File.Copy(frame.Path, path, true);
+                            }
+
+                            //Create Zip and clear temporary folder.
+                            ZipFile.CreateFromDirectory(dir.FullName, fileName);
+                            Directory.Delete(dir.FullName, true);
+                        }
+
+                        break;
+                    }
+
+                    case Export.Webp:
+                    case Export.Avi:
+                    case Export.Mov:
+                    case Export.Mp4:
+                    case Export.Mkv:
+                    case Export.Webm:
+                    {
+                        #region FFmpeg
+
+                        EncodeWithFfmpeg(preset, project.FramesFiles, id, tokenSource, processing);
 
                         Update(id, 1, watch.Elapsed);
                         watch.Restart();
@@ -793,13 +960,17 @@ namespace ScreenToGif.Util
 
                         #endregion
                     }
-                    case Export.Photoshop:
+
+                    case Export.Psd:
                     {
                         #region Psd
 
+                        if (!(preset is PsdPreset psdPreset))
+                            return;
+
                         using (var stream = new MemoryStream())
                         {
-                            using (var encoder = new Psd(stream, param.RepeatCount, param.Height, param.Width, param.Compress, param.SaveTimeline))
+                            using (var encoder = new Psd(stream, psdPreset.Height, psdPreset.Width, psdPreset.CompressImage, psdPreset.SaveTimeline))
                             {
                                 for (var i = 0; i < project.FramesFiles.Count; i++)
                                 {
@@ -822,7 +993,7 @@ namespace ScreenToGif.Util
                                 }
                             }
 
-                            using (var fileStream = new FileStream(param.Filename, FileMode.Create, FileAccess.Write, FileShare.None, 4096))
+                            using (var fileStream = new FileStream(psdPreset.FullPath, FileMode.Create, FileAccess.Write, FileShare.None, 4096))
                                 stream.WriteTo(fileStream);
                         }
 
@@ -833,87 +1004,20 @@ namespace ScreenToGif.Util
 
                         #endregion
                     }
-                    case Export.Video:
-                    {
-                        #region Video
-
-                        switch (param.VideoEncoder)
-                        {
-                            case VideoEncoderType.AviStandalone:
-                            {
-                                #region Avi Standalone
-
-                                var image = project.FramesFiles[0].Path.SourceFrom();
-
-                                if (File.Exists(param.Filename))
-                                    File.Delete(param.Filename);
-
-                                //1000 / frames[0].Delay
-                                using (var aviWriter = new AviWriter(param.Filename, param.Framerate, image.PixelWidth, image.PixelHeight, param.VideoQuality))
-                                {
-                                    var numImage = 0;
-                                    foreach (var frame in project.FramesFiles)
-                                    {
-                                        using (var outStream = new MemoryStream())
-                                        {
-                                            var bitImage = frame.Path.SourceFrom();
-
-                                            var enc = new BmpBitmapEncoder();
-                                            enc.Frames.Add(BitmapFrame.Create(bitImage));
-                                            enc.Save(outStream);
-
-                                            outStream.Flush();
-
-                                            using (var bitmap = new Bitmap(outStream))
-                                                aviWriter.AddFrame(bitmap, param.FlipVideo);
-                                        }
-
-                                        Update(id, numImage, string.Format(processing, numImage));
-                                        numImage++;
-
-                                        #region Cancellation
-
-                                        if (tokenSource.Token.IsCancellationRequested)
-                                        {
-                                            Update(id, Status.Canceled);
-                                            break;
-                                        }
-
-                                        #endregion
-                                    }
-                                }
-
-                                #endregion
-
-                                break;
-                            }
-                            case VideoEncoderType.Ffmpg:
-                            {
-                                EncodeWithFfmpeg("video", project.FramesFiles, id, param, tokenSource, processing);
-                                break;
-                            }
-                            default:
-                                throw new Exception("Undefined video encoder");
-                        }
-
-                        Update(id, 1, watch.Elapsed);
-                        watch.Restart();
-
-                        break;
-
-                        #endregion
-                    }
-                    case Export.Project:
+                    case Export.Stg:
                     {
                         #region Project
+
+                        if (!(preset is StgPreset stgPreset))
+                            return;
 
                         Update(id, Status.Processing, null, true);
                         Update(id, 0, LocalizationHelper.Get("S.Encoder.CreatingFile"));
 
-                        if (File.Exists(param.Filename))
-                            File.Delete(param.Filename);
+                        if (File.Exists(stgPreset.FullPath))
+                            File.Delete(stgPreset.FullPath);
 
-                        ZipFile.CreateFromDirectory(Path.GetDirectoryName(project.FramesFiles[0].Path), param.Filename, param.CompressionLevel, false);
+                        ZipFile.CreateFromDirectory(Path.GetDirectoryName(project.FramesFiles[0].Path), stgPreset.FullPath, stgPreset.CompressionLevel, false);
 
                         Update(id, 1, watch.Elapsed);
                         watch.Restart();
@@ -924,14 +1028,14 @@ namespace ScreenToGif.Util
                     }
 
                     default:
-                        throw new ArgumentOutOfRangeException(nameof(param));
+                        throw new ArgumentOutOfRangeException(nameof(preset));
                 }
 
                 //If it was canceled, try deleting the file.
                 if (tokenSource.Token.IsCancellationRequested)
                 {
-                    if (File.Exists(param.Filename))
-                        File.Delete(param.Filename);
+                    if (File.Exists(preset.FullPath))
+                        File.Delete(preset.FullPath);
 
                     Update(id, Status.Canceled);
                     return;
@@ -939,27 +1043,42 @@ namespace ScreenToGif.Util
 
                 #region Upload
 
-                if (param.Upload && File.Exists(param.Filename))
+                if (preset.UploadFile && File.Exists(preset.FullPath))
                 {
                     Update(id, "S.Encoder.Uploading", true, true);
 
                     try
                     {
-                        //TODO: Limit upload size and time.
+                        //Get selected preset.
+                        var presetType = preset.Extension == ".zip" ? Export.Zip : preset.Type;
+                        var uploadPreset = UserSettings.All.UploadPresets.OfType<UploadPreset>().FirstOrDefault(f => (f.AllowedTypes.Count == 0 || f.AllowedTypes.Contains(presetType)) && f.Title == preset.UploadService);
 
-                        var cloud = CloudFactory.CreateCloud(param.UploadDestination);
+                        if (uploadPreset == null)
+                            throw new Exception($"Missing upload preset called {preset.UploadService}");
 
-                        var uploadedFile = await cloud.UploadFileAsync(param.Filename, CancellationToken.None);
+                        //TODO: Limit upload by imposed service limits.
 
-                        SetUpload(id, true, uploadedFile.Link, uploadedFile.DeleteLink);
+                        //Try uploading to the selected service.
+                        var cloud = CloudFactory.CreateCloud(uploadPreset.Type);
+                        var history = await cloud.UploadFileAsync(uploadPreset, preset.FullPath, CancellationToken.None);
 
-                        Update(id, 2, watch.Elapsed);
-                        watch.Stop();
+                        uploadPreset.History.Add(history);
+                        UserSettings.Save();
+                        
+                        if (history.Result != 200)
+                            throw new Exception(history.Message);
+
+                        SetUpload(id, true, history.GetLink(uploadPreset), history.DeletionLink);
                     }
                     catch (Exception e)
                     {
                         LogWriter.Log(e, "It was not possible to upload.");
                         SetUpload(id, false, null, null, e);
+                    }
+                    finally
+                    {
+                        Update(id, 2, watch.Elapsed);
+                        watch.Restart();
                     }
                 }
 
@@ -967,7 +1086,7 @@ namespace ScreenToGif.Util
 
                 #region Copy to clipboard
 
-                if (param.CopyToClipboard && File.Exists(param.Filename))
+                if (preset.SaveToClipboard && File.Exists(preset.FullPath))
                 {
                     Application.Current.Dispatcher.Invoke(() =>
                     {
@@ -975,21 +1094,22 @@ namespace ScreenToGif.Util
                         {
                             var data = new DataObject();
 
-                            switch (param.CopyType)
+                            switch (preset.CopyType)
                             {
                                 case CopyType.File:
-                                    data.SetFileDropList(new StringCollection { param.Filename });
+                                    //data.SetData(DataFormats.GetDataFormat("GIF").Name, System.Drawing.Image.FromFile(param.Filename));
+                                    data.SetFileDropList(new StringCollection { preset.FullPath });
                                     break;
                                 case CopyType.FolderPath:
-                                    data.SetText(Path.GetDirectoryName(param.Filename) ?? param.Filename, TextDataFormat.UnicodeText);
+                                    data.SetText(Path.GetDirectoryName(preset.FullPath) ?? preset.FullPath, TextDataFormat.UnicodeText);
                                     break;
                                 case CopyType.Link:
                                     var link = GetUploadLink(id);
 
-                                    data.SetText(string.IsNullOrEmpty(link) ? param.Filename : link, TextDataFormat.UnicodeText);
+                                    data.SetText(string.IsNullOrEmpty(link) ? preset.FullPath : link, TextDataFormat.UnicodeText);
                                     break;
                                 default:
-                                    data.SetText(param.Filename, TextDataFormat.UnicodeText);
+                                    data.SetText(preset.FullPath, TextDataFormat.UnicodeText);
                                     break;
                             }
 
@@ -1021,7 +1141,7 @@ namespace ScreenToGif.Util
                     });
 
                     Update(id, 3, watch.Elapsed);
-                    watch.Stop();
+                    watch.Restart();
                 }
 
                 #endregion
@@ -1030,11 +1150,11 @@ namespace ScreenToGif.Util
 
 #if !UWP
 
-                if (param.ExecuteCommands && !string.IsNullOrWhiteSpace(param.PostCommands))
+                if (preset.ExecuteCustomCommands && !string.IsNullOrWhiteSpace(preset.CustomCommands))
                 {
                     Update(id, "S.Encoder.Executing", true, true);
 
-                    var command = param.PostCommands.Replace("{p}", "\"" + param.Filename + "\"").Replace("{f}", "\"" + Path.GetDirectoryName(param.Filename) + "\"").Replace("{u}", "\"" + GetUploadLink(id) + "\"");
+                    var command = preset.CustomCommands.Replace("{p}", "\"" + preset.FullPath + "\"").Replace("{f}", "\"" + Path.GetDirectoryName(preset.OutputFolder) + "\"").Replace("{u}", "\"" + GetUploadLink(id) + "\"");
                     var output = "";
 
                     try
@@ -1071,14 +1191,16 @@ namespace ScreenToGif.Util
                         }
 
                         SetCommand(id, true, command, output);
-
-                        Update(id, 4, watch.Elapsed);
-                        watch.Stop();
                     }
                     catch (Exception e)
                     {
                         LogWriter.Log(e, "It was not possible to run the post encoding command.");
                         SetCommand(id, false, command, output, e);
+                    }
+                    finally
+                    {
+                        Update(id, 4, watch.Elapsed);
+                        watch.Restart();
                     }
                 }
 
@@ -1087,7 +1209,7 @@ namespace ScreenToGif.Util
                 #endregion
 
                 if (!tokenSource.Token.IsCancellationRequested)
-                    Update(id, Status.Completed, param.Filename);
+                    Update(id, Status.Completed, preset.FullPath);
             }
             catch (Exception ex)
             {
@@ -1120,17 +1242,15 @@ namespace ScreenToGif.Util
             }
         }
 
-        private static void EncodeWithFfmpeg(string name, List<FrameInfo> listFrames, int id, Parameters param, CancellationTokenSource tokenSource, string processing)
+        private static void EncodeWithFfmpeg(ExportPreset preset, List<FrameInfo> listFrames, int id, CancellationTokenSource tokenSource, string processing)
         {
-            #region FFmpeg encoding
-
             Update(id, Status.Processing, null, true);
 
-            if (!Util.Other.IsFfmpegPresent())
+            if (!Other.IsFfmpegPresent())
                 throw new ApplicationException("FFmpeg not present.");
 
-            if (File.Exists(param.Filename))
-                File.Delete(param.Filename);
+            if (File.Exists(preset.FullPath))
+                File.Delete(preset.FullPath);
 
             #region Generate concat
 
@@ -1154,25 +1274,259 @@ namespace ScreenToGif.Util
 
             #endregion
 
-            if (name.Equals("apng"))
-                param.Command = string.Format(param.Command, "file:" + concatFile, (param.ExtraParameters ?? "").Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString()), param.RepeatCount, param.Filename);
-            else
-            {
-                if ((param.ExtraParameters ?? "").Contains("-pass 2"))
-                {
-                    //-vsync 2 -safe 0 -f concat -i ".\concat.txt" -c:v libvpx-vp9 -b:v 2M -pix_fmt yuv420p -tile-columns 6 -frame-parallel 1 -auto-alt-ref 1 -lag-in-frames 25 -vf "pad=width=1686:height=842:x=0:y=0:color=black" -pass 1 -y ".\Video.webm"
-                    //-vsync 2 -safe 0 -f concat -i ".\concat.txt" -c:v libvpx-vp9 -b:v 2M -pix_fmt yuv420p -tile-columns 6 -frame-parallel 1 -auto-alt-ref 1 -lag-in-frames 25 -vf "pad=width=1686:height=842:x=0:y=0:color=black" -pass 2 -y ".\Video.webm"
+            var firstPass = "";
+            var secondPass = "";
 
-                    param.Command = $"-vsync 2 -safe 0 -f concat -i \"{"file:" + concatFile}\" {(param.ExtraParameters ?? "").Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString()).Replace("-pass 2", "-pass 1")} -passlogfile \"{param.Filename}\" -y \"{param.Filename}\"";
-                    param.SecondPassCommand = $"-hide_banner -vsync 2 -safe 0 -f concat -i \"{"file:" + concatFile}\" {(param.ExtraParameters ?? "").Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString())} -passlogfile \"{param.Filename}\" -y \"{param.Filename}\"";
+            switch (preset.Type)
+            {
+                case Export.Gif:
+                {
+                    #region Gif 
+
+                    if (!(preset is FfmpegGifPreset gifPreset))
+                        return;
+
+                    //ffmpeg -vsync 0 {I} -loop 0 -lavfi palettegen=stats_mode=single[pal],[0:v][pal]paletteuse=new=1:dither=sierra2_4a:diff_mode=rectangle -f gif {O}
+                    if (gifPreset.SettingsMode == VideoSettingsMode.Advanced)
+                        firstPass = gifPreset.Parameters;
+                    else
+                    {
+                        //Vsync
+                        if (gifPreset.Vsync != Vsyncs.Off)
+                            firstPass += $"-vsync {gifPreset.Vsync.ToString().ToLower()} ";
+
+                        //Input and loop.
+                        firstPass += "{I} ";
+                        firstPass += $"-loop {(gifPreset.Looped ? gifPreset.RepeatForever ? 0 : gifPreset.RepeatCount : -1)} ";
+
+                        //Palette and dither.
+                        firstPass += $"-lavfi palettegen=stats_mode={(gifPreset.UseGlobalColorTable ? "diff" : "single")}[pal],[0:v][pal]paletteuse={(gifPreset.UseGlobalColorTable ? "" : "new=1:")}";
+                        firstPass += $"dither={gifPreset.Dither.GetDescription()}";
+                        firstPass += (gifPreset.Dither == DitherMethods.Bayer ? $":bayer_scale={gifPreset.BayerScale}" : "");
+                        firstPass += ":diff_mode=rectangle ";
+
+                        //Pixel format.
+                        if (gifPreset.PixelFormat != VideoPixelFormats.Auto)
+                            firstPass += $"-pix_fmt {gifPreset.PixelFormat.GetLowerDescription()} ";
+
+                        //Framerate.
+                        if (gifPreset.Framerate != Framerates.Auto)
+                            firstPass += $"-r {(gifPreset.Framerate == Framerates.Custom ? gifPreset.CustomFramerate.ToString(CultureInfo.InvariantCulture) : gifPreset.Framerate.GetLowerDescription())} ";
+
+                        //Format and output.
+                        firstPass += "-f gif {O}";
+                    }
+
+                    break;
+
+                    #endregion
                 }
-                else
-                    param.Command = string.Format(param.Command, "file:" + concatFile, (param.ExtraParameters ?? "").Replace("{H}", param.Height.ToString()).Replace("{W}", param.Width.ToString()), param.Filename);
+                case Export.Apng:
+                {
+                    #region Apng
+
+                    if (!(preset is FfmpegApngPreset apngPreset))
+                        return;
+
+                    //ffmpeg -vsync 0 {I} -pred mixed -plays 0 -f apng {O}
+                    if (apngPreset.SettingsMode == VideoSettingsMode.Advanced)
+                        firstPass = apngPreset.Parameters;
+                    else
+                    {
+                        //Vsync
+                        if (apngPreset.Vsync != Vsyncs.Off)
+                            firstPass += $"-vsync {apngPreset.Vsync.ToString().ToLower()} ";
+
+                        //Input and loop.
+                        firstPass += "{I} ";
+                        firstPass += $"-plays {(apngPreset.Looped ? apngPreset.RepeatForever ? 0 : apngPreset.RepeatCount : -1)} ";
+
+                        //Prediction method.
+                        if (apngPreset.PredictionMethod != PredictionMethods.None)
+                            firstPass += $"-pred {apngPreset.PredictionMethod.ToString().ToLower()} ";
+
+                        //Pixel format.
+                        if (apngPreset.PixelFormat != VideoPixelFormats.Auto)
+                            firstPass += $"-pix_fmt {apngPreset.PixelFormat.GetLowerDescription()} ";
+
+                        //Framerate.
+                        if (apngPreset.Framerate != Framerates.Auto)
+                            firstPass += $"-r {(apngPreset.Framerate == Framerates.Custom ? apngPreset.CustomFramerate.ToString(CultureInfo.InvariantCulture) : apngPreset.Framerate.GetLowerDescription())} ";
+
+                        //Format and output.
+                        firstPass += "-f apng {O}";
+                    }
+
+                    break;
+
+                    #endregion
+                }
+                case Export.Webp:
+                {
+                    #region Webp
+
+                    if (!(preset is FfmpegWebpPreset webpPreset))
+                        return;
+
+                    //ffmpeg -vsync 0 {I} -c:v libwebp_anim -lossless 0 -quality 75 -loop 0 -f webp {O}
+                    if (webpPreset.SettingsMode == VideoSettingsMode.Advanced)
+                        firstPass = webpPreset.Parameters;
+                    else
+                    {
+                        //Vsync
+                        if (webpPreset.Vsync != Vsyncs.Off)
+                            firstPass += $"-vsync {webpPreset.Vsync.ToString().ToLower()} ";
+
+                        //Input, encoder and loop.
+                        firstPass += "{I} -c:v libwebp_anim ";
+                        firstPass += $"-loop {(webpPreset.Looped ? webpPreset.RepeatForever ? 0 : webpPreset.RepeatCount : -1)} ";
+
+                        //Codec preset.
+                        if (webpPreset.CodecPreset != VideoCodecPresets.Default)
+                            firstPass += $"-preset {webpPreset.CodecPreset.GetLowerDescription()} ";
+
+                        //Lossless.
+                        firstPass += $"-lossless {(webpPreset.Lossless ? "1" : "0")} ";
+
+                        //Quality.
+                        firstPass += $"-quality {webpPreset.Quality} ";
+
+                        //Pixel format.
+                        if (webpPreset.PixelFormat != VideoPixelFormats.Auto)
+                            firstPass += $"-pix_fmt {webpPreset.PixelFormat.GetLowerDescription()} ";
+
+                        //Framerate.
+                        if (webpPreset.Framerate != Framerates.Auto)
+                            firstPass += $"-r {(webpPreset.Framerate == Framerates.Custom ? webpPreset.CustomFramerate.ToString(CultureInfo.InvariantCulture) : webpPreset.Framerate.GetLowerDescription())} ";
+
+                        //Format and output.
+                        firstPass += "-f webp {O}";
+                    }
+                    
+                    break;
+
+                    #endregion
+                }
+
+                case Export.Avi:
+                case Export.Mkv:
+                case Export.Mov:
+                case Export.Mp4:
+                case Export.Webm:
+                {
+                    #region Video
+
+                    if (!(preset is VideoPreset videoPreset))
+                        return;
+
+                    if (videoPreset.SettingsMode == VideoSettingsMode.Advanced)
+                    {
+                        firstPass = videoPreset.Parameters.Replace("\n", " ").Replace("\r", "");
+
+                        if (firstPass.Contains("-pass 2"))
+                        {
+                            firstPass = firstPass.Replace("-pass 2", $"-pass 1 -passlogfile \"{preset.FullPath}\" ");
+                            secondPass = "-hide_banner " + firstPass.Replace("-pass 1", $"-pass 2 -passlogfile \"{preset.FullPath}\" ");
+                        }
+                    }
+                    else
+                    {
+                        //Vsync
+                        if (videoPreset.Vsync != Vsyncs.Off)
+                            firstPass += $"-vsync {videoPreset.Vsync.ToString().ToLower()} ";
+
+                        //Hardware acceleration.
+                        if (videoPreset.HardwareAcceleration != HardwareAcceleration.Off)
+                            firstPass += "-hwaccel auto ";
+
+                        //Input and encoder.
+                        firstPass += "{I} ";
+                        firstPass += $"-c:v {videoPreset.VideoCodec.GetLowerDescription()} ";
+
+                        //Some codecs require special treatments.
+                        if (videoPreset.VideoCodec == VideoCodecs.Mpeg4)
+                            firstPass += "-vtag xvid ";
+                        else if (videoPreset.VideoCodec == VideoCodecs.Vp9)
+                            firstPass += "-tile-columns 6 -frame-parallel 1 -auto-alt-ref 1 -lag-in-frames 25 ";
+
+                        //Codec preset.
+                        if (videoPreset.CodecPreset != VideoCodecPresets.Default && videoPreset.CodecPreset != VideoCodecPresets.None && videoPreset.CodecPreset != VideoCodecPresets.NotSelected)
+                            firstPass += $"-preset {videoPreset.CodecPreset.GetLowerDescription()} ";
+
+                        //Pixel format.
+                        if (videoPreset.PixelFormat != VideoPixelFormats.Auto)
+                            firstPass += $"-pix_fmt {videoPreset.PixelFormat.GetLowerDescription()} ";
+
+                        //Workaround, makes the size to be divisible by two.
+                        firstPass += "-vf \"scale=trunc(iw/2)*2:trunc(ih/2)*2\" "; //scale=iw+mod(iw,2):ih+mod(ih,2):flags=neighbor
+
+                        //CRF.
+                        if (videoPreset.ConstantRateFactor > 0)
+                            firstPass += $"-crf {videoPreset.ConstantRateFactor.Value.ToString(CultureInfo.InvariantCulture)} ";
+
+                        //Bitrate.
+                        if (videoPreset.IsVariableBitRate)
+                            firstPass += $"-q:v {videoPreset.BitRate.ToString(CultureInfo.InvariantCulture)} ";
+                        else
+                        {
+                            if (videoPreset.BitRate > 0)
+                                firstPass += $"-b:v {videoPreset.BitRate.ToString(CultureInfo.InvariantCulture)}{videoPreset.BitRateUnit.GetDescription()} ";
+                            else if (videoPreset.BitRate == 0 && (videoPreset.VideoCodec == VideoCodecs.Vp8 || videoPreset.VideoCodec == VideoCodecs.Vp9))
+                                firstPass += "-b:v 0 ";
+                        }
+
+                        //Minimum bitrate.
+                        if (videoPreset.MinimumBitRate > 0)
+                            firstPass += $"-minrate {videoPreset.MinimumBitRate.ToString(CultureInfo.InvariantCulture)}{videoPreset.MinimumBitRateUnit.GetDescription()} ";
+
+                        //Maximum bitrate.
+                        if (videoPreset.MaximumBitRate > 0)
+                            firstPass += $"-maxrate {videoPreset.MaximumBitRate.ToString(CultureInfo.InvariantCulture)}{videoPreset.MaximumBitRateUnit.GetDescription()} ";
+
+                        //Buffer size.
+                        if (videoPreset.RateControlBuffer > 0)
+                            firstPass += $"-bufsize {videoPreset.RateControlBuffer.ToString(CultureInfo.InvariantCulture)}{videoPreset.RateControlBufferUnit.GetDescription()} ";
+
+                        //First pass adjustments.
+                        if (videoPreset.Pass > 1)
+                        {
+                            if (videoPreset.VideoCodec == VideoCodecs.X265)
+                                firstPass += "-x265-params pass=1 ";
+                            else
+                                firstPass += "-pass 1 ";
+
+                            firstPass += $"-passlogfile \"{preset.FullPath}\" ";
+                        }
+
+                        //Framerate.
+                        if (videoPreset.Framerate != Framerates.Auto)
+                            firstPass += $"-r {(videoPreset.Framerate == Framerates.Custom ? videoPreset.CustomFramerate.ToString(CultureInfo.InvariantCulture) : videoPreset.Framerate.GetLowerDescription())} ";
+
+                        //Format and output.
+                        firstPass += $"-f {preset.Type.ToString().ToLower().Replace("mkv", "matroska")} ";
+                        firstPass += "{O}";
+
+                        //Second pass, using a similar command with some ajustments.
+                        if (videoPreset.Pass > 1)
+                            secondPass = "-hide_banner " + firstPass.Replace("-pass 1", "-pass 2").Replace("pass=1", "pass=2");
+                    }
+
+                    break;
+
+                    #endregion
+                }
             }
+
+            //Replace special params.
+            firstPass = firstPass.Replace("{I}", $"-safe 0 -f concat -i \"file:{concatFile}\"").Replace("{O}", $"-y \"{preset.FullPath}\"")
+                .Replace("{H}", preset.Height.DivisibleByTwo().ToString(CultureInfo.InvariantCulture)).Replace("{W}", preset.Width.DivisibleByTwo().ToString(CultureInfo.InvariantCulture));
+
+            secondPass = secondPass.Replace("{I}", $"-safe 0 -f concat -i \"file:{concatFile}\"").Replace("{O}", $"-y \"{preset.FullPath}\"")
+                .Replace("{H}", preset.Height.DivisibleByTwo().ToString(CultureInfo.InvariantCulture)).Replace("{W}", preset.Width.DivisibleByTwo().ToString(CultureInfo.InvariantCulture));
 
             var process = new ProcessStartInfo(UserSettings.All.FfmpegLocation)
             {
-                Arguments = param.Command,
+                Arguments = firstPass,
                 CreateNoWindow = true,
                 ErrorDialog = false,
                 UseShellExecute = false,
@@ -1224,19 +1578,23 @@ namespace ScreenToGif.Util
                 }
             }
 
-            var fileInfo = new FileInfo(param.Filename);
+            var fileInfo = new FileInfo(preset.FullPath);
 
-            if (!string.IsNullOrWhiteSpace(param.SecondPassCommand))
+            //Execute the second pass, cleaning up the logs.
+            if (!string.IsNullOrWhiteSpace(secondPass))
             {
-                log += Environment.NewLine + SecondPassFfmpeg(param.SecondPassCommand, id, tokenSource, LocalizationHelper.Get("S.Encoder.Processing.Second"));
+                //I could try using as a single command.
+                //ffmpeg -y -hwaccel auto {I} -c:v h264_nvenc -pix_fmt yuv420p -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" -pass 1 -f avi NUL
+                //&&
+                //ffmpeg -y -hwaccel auto {I} -c:v h264_nvenc -pix_fmt yuv420p -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" -pass 2 -f avi {O}
 
-                EraseSecondPassLogs(param.Filename);
+                log += Environment.NewLine + SecondPassFfmpeg(secondPass, id, tokenSource, LocalizationHelper.Get("S.Encoder.Processing.Second"));
+
+                EraseSecondPassLogs(preset.FullPath);
             }
 
             if (!fileInfo.Exists || fileInfo.Length == 0)
-                throw new Exception($"Error while encoding the {name} with FFmpeg.") { HelpLink = $"Command:\n\r{param.Command + Environment.NewLine + param.SecondPassCommand}\n\rResult:\n\r{log}" };
-
-            #endregion
+                throw new Exception($"Error while encoding the {preset.Type} with FFmpeg.") { HelpLink = $"Command:\n\r{firstPass + Environment.NewLine + secondPass}\n\rResult:\n\r{log}" };
         }
 
         private static string SecondPassFfmpeg(string command, int id, CancellationTokenSource tokenSource, string processing)
