@@ -2328,18 +2328,19 @@ namespace ScreenToGif.Windows
         {
             Pause();
 
+            var selectedFrames = FrameListView.SelectedItems.OfType<FrameListBoxItem>().ToList();
+            var firstFrame = selectedFrames.Min(x => x.FrameNumber);
+
             if (UserSettings.All.NotifyFrameDeletion)
             {
                 if (!Dialog.Ask(LocalizationHelper.Get("S.Editor.DeleteFrames.Title"), LocalizationHelper.Get("S.Editor.DeleteFrames.Instruction"),
-                    string.Format(LocalizationHelper.Get("S.Editor.DeleteFrames.Message"), FrameListView.SelectedIndex)))
+                    string.Format(LocalizationHelper.Get("S.Editor.DeleteFrames.Message"), firstFrame)))
                     return;
             }
 
-            ActionStack.SaveState(ActionStack.EditAction.Remove, Project.Frames, Util.Other.ListOfIndexesOld(0, FrameListView.SelectedIndex - 1));
+            ActionStack.SaveState(ActionStack.EditAction.Remove, Project.Frames, Util.Other.ListOfIndexesOld(0, firstFrame - 1));
 
-            var count = FrameListView.SelectedIndex;
-
-            for (var index = FrameListView.SelectedIndex - 1; index >= 0; index--)
+            for (var index = firstFrame - 1; index >= 0; index--)
                 DeleteFrame(index);
 
             AdjustFrameNumbers(0);
@@ -2347,32 +2348,34 @@ namespace ScreenToGif.Windows
 
             Project.Persist();
             UpdateStatistics();
-            ShowHint("S.Hint.DeleteFrames", false, count);
+            ShowHint("S.Hint.DeleteFrames", false, firstFrame);
         }
 
         private void DeleteNext_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
 
+            var selectedFrames = FrameListView.SelectedItems.OfType<FrameListBoxItem>().ToList();
+            var lastFrame = selectedFrames.Max(x => x.FrameNumber);
+            var count = FrameListView.Items.Count - lastFrame - 1;
+
             if (UserSettings.All.NotifyFrameDeletion)
             {
                 if (!Dialog.Ask(LocalizationHelper.Get("S.Editor.DeleteFrames.Title"), LocalizationHelper.Get("S.Editor.DeleteFrames.Instruction"),
-                    string.Format(LocalizationHelper.Get("S.Editor.DeleteFrames.Message"), FrameListView.Items.Count - FrameListView.SelectedIndex - 1)))
+                    string.Format(LocalizationHelper.Get("S.Editor.DeleteFrames.Message"), count)))
                     return;
             }
 
             var countList = FrameListView.Items.Count - 1; //So we have a fixed value.
 
-            ActionStack.SaveState(ActionStack.EditAction.Remove, Project.Frames, Util.Other.ListOfIndexes(FrameListView.SelectedIndex + 1, FrameListView.Items.Count - FrameListView.SelectedIndex - 1));
+            ActionStack.SaveState(ActionStack.EditAction.Remove, Project.Frames, Util.Other.ListOfIndexes(lastFrame + 1, count));
 
-            var count = FrameListView.Items.Count - FrameListView.SelectedIndex - 1;
-
-            for (var i = countList; i > FrameListView.SelectedIndex; i--) //From the end to the middle.
+            for (var i = countList; i > lastFrame; i--) //From the end to the middle.
             {
                 DeleteFrame(i);
             }
 
-            SelectNear(FrameListView.Items.Count - 1);
+            SelectNear(lastFrame - 1);
 
             Project.Persist();
             UpdateStatistics();
