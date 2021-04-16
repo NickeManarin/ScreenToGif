@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -148,12 +148,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Cloud\ICloud.cs" />
+    <Compile Include="Cloud\Gfycat\GfycatAuthRequest.cs" />
+    <Compile Include="Cloud\Gfycat\GfycatCreateRequest.cs" />
+    <Compile Include="Cloud\Gfycat\GfycatCreateResponse.cs" />
+    <Compile Include="Cloud\Gfycat\GfycatErrorResponse.cs" />
+    <Compile Include="Cloud\Gfycat\GfycatUploadResponse.cs" />
+    <Compile Include="Cloud\Imgur\ImgurImage.cs" />
+    <Compile Include="Cloud\IUploader.cs" />
     <Compile Include="Cloud\Imgur\ImgurAlbum.cs" />
-    <Compile Include="Cloud\Imgur\ImgurGetAlbumsResponse.cs" />
-    <Compile Include="Cloud\Imgur\ImgurUploadImageResponse.cs" />
-    <Compile Include="Cloud\Imgur\OAuth2Token.cs" />
-    <Compile Include="Cloud\UploadedFile.cs" />
+    <Compile Include="Cloud\Imgur\ImgurAlbumsResponse.cs" />
+    <Compile Include="Cloud\Imgur\ImgurUploadResponse.cs" />
+    <Compile Include="Cloud\OAuth2Token.cs" />
     <Compile Include="Cloud\UploadingException.cs" />
     <Compile Include="Cloud\YandexDisk\Error.cs" />
     <Compile Include="Cloud\YandexDisk\Link.cs" />
@@ -166,15 +171,19 @@
     <Compile Include="Controls\ColorBox.cs" />
     <Compile Include="Controls\CroppingAdorner.cs" />
     <Compile Include="Controls\DataGridHeaderBorder.cs" />
+    <Compile Include="Controls\DecimalBox.cs" />
     <Compile Include="Controls\DisplayTimer.cs" />
     <Compile Include="Controls\DoubleBox.cs" />
+    <Compile Include="Controls\DecimalUpDown.cs" />
     <Compile Include="Controls\DragScrollGrid.cs" />
     <Compile Include="Controls\DrawingCanvas.cs" />
     <Compile Include="Controls\DropDownButton.cs" />
     <Compile Include="Controls\DynamicGrid.cs" />
     <Compile Include="Controls\EncoderListViewItem.cs" />
     <Compile Include="Controls\ExtendedCheckBox.cs" />
+    <Compile Include="Controls\ExtendedComboBox.cs" />
     <Compile Include="Controls\ExtendedProgressBar.cs" />
+    <Compile Include="Controls\ExtendedSlider.cs" />
     <Compile Include="Controls\ExtendedTextBox.cs" />
     <Compile Include="Controls\FolderSelector.cs" />
     <Compile Include="Controls\FrameListBoxItem.cs" />
@@ -183,11 +192,15 @@
     <Compile Include="Controls\HeaderedTooltip.cs" />
     <Compile Include="Controls\ExtendedUniformGrid.cs" />
     <Compile Include="Controls\Card.cs" />
+    <Compile Include="Controls\NullableIntegerBox.cs" />
+    <Compile Include="Controls\NullableIntegerUpDown.cs" />
+    <Compile Include="Controls\Items\EncoderItem.cs" />
+    <Compile Include="Controls\Items\ExportItem.cs" />
     <Compile Include="Controls\LabelSeparator.cs" />
     <Compile Include="Controls\ElementAdorner.cs" />
     <Compile Include="Controls\NotificationBox.cs" />
     <Compile Include="Controls\NotifyIcon.cs" />
-    <Compile Include="Controls\QuantizationMethodItem.cs" />
+    <Compile Include="Controls\Items\QuantizationMethodItem.cs" />
     <Compile Include="Controls\RecorderWindow.cs" />
     <Compile Include="Controls\Ribbon\GroupSizeDefinition.cs" />
     <Compile Include="Controls\Ribbon\ItemSizeDefinition.cs" />
@@ -225,10 +238,17 @@
     <Compile Include="Controls\StatusBand.cs" />
     <Compile Include="Controls\StatusList.cs" />
     <Compile Include="Controls\TextPath.cs" />
+    <Compile Include="Controls\Items\GenericItem.cs" />
+    <Compile Include="Controls\TimeBox.cs" />
     <Compile Include="Controls\WebcamControl.xaml.cs">
       <DependentUpon>WebcamControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ZoomBox.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
+    <Compile Include="Extensions\InlineExtensions.cs" />
+    <Compile Include="Extensions\ParseExtensions.cs" />
+    <Compile Include="Extensions\PresetExtensions.cs" />
+    <Compile Include="Extensions\PropertyExtensions.cs" />
     <Compile Include="ImageUtil\Apng\Apng.cs" />
     <Compile Include="ImageUtil\Apng\Chunks\ActlChunk.cs" />
     <Compile Include="ImageUtil\Apng\Chunks\ApngFrame.cs" />
@@ -272,7 +292,7 @@
     <Compile Include="ImageUtil\Gif\Encoder\Quantization\PaletteQuantizer.cs" />
     <Compile Include="ImageUtil\Gif\Encoder\Quantization\Quantizer.cs" />
     <Compile Include="Cloud\CloudFactory.cs" />
-    <Compile Include="Cloud\Gfycat.cs" />
+    <Compile Include="Cloud\Gfycat\Gfycat.cs" />
     <Compile Include="Cloud\Imgur\Imgur.cs" />
     <Compile Include="ImageUtil\Psd\AditionalLayers\IAditionalLayerInfo.cs" />
     <Compile Include="ImageUtil\Psd\AditionalLayers\IMetadata.cs" />
@@ -290,11 +310,15 @@
     <Compile Include="ImageUtil\Psd\LayerInfo.cs" />
     <Compile Include="ImageUtil\Psd\LayerRecord.cs" />
     <Compile Include="ImageUtil\Psd\Psd.cs" />
+    <Compile Include="Interfaces\IExportPreset.cs" />
+    <Compile Include="Interfaces\IFfmpegPreset.cs" />
+    <Compile Include="Interfaces\IPanel.cs" />
+    <Compile Include="Interfaces\IPreset.cs" />
     <Compile Include="ModelEx\Project.cs" />
     <Compile Include="ModelEx\Sequence.cs" />
     <Compile Include="ModelEx\Sequences\BrushSequence.cs" />
     <Compile Include="ModelEx\Sequences\CursorSequence.cs" />
-    <Compile Include="ModelEx\Sequences\DrawingLayer.cs" />
+    <Compile Include="ModelEx\Sequences\DrawingSequence.cs" />
     <Compile Include="ModelEx\Sequences\KeySequence.cs" />
     <Compile Include="ModelEx\Sequences\ObfuscationSequence.cs" />
     <Compile Include="ModelEx\Sequences\ProgressSequence.cs" />
@@ -308,12 +332,57 @@
     <Compile Include="ModelEx\Sequences\TextSequence.cs" />
     <Compile Include="ModelEx\Track.cs" />
     <Compile Include="Model\BindableBase.cs" />
+    <Compile Include="Model\Events\SaveEventArgs.cs" />
+    <Compile Include="Model\Events\ValidatedEventArgs.cs" />
     <Compile Include="Model\ExportFrame.cs" />
+    <Compile Include="Model\ExportPresets\Video\Codecs\HevcQsv.cs" />
+    <Compile Include="Model\ExportPresets\Video\Codecs\HevcNvenc.cs" />
+    <Compile Include="Model\ExportPresets\Video\Codecs\HevcAmf.cs" />
+    <Compile Include="Model\ExportPresets\Video\Codecs\Vp9.cs" />
+    <Compile Include="Model\ExportPresets\Video\Codecs\Vp8.cs" />
+    <Compile Include="Model\ExportPresets\Video\Codecs\X265.cs" />
+    <Compile Include="Model\ExportPresets\Video\Codecs\H264Qsv.cs" />
+    <Compile Include="Model\ExportPresets\Video\Codecs\H264Nvenc.cs" />
+    <Compile Include="Model\ExportPresets\Video\Codecs\Mpeg2.cs" />
+    <Compile Include="Model\ExportPresets\Video\Codecs\Mpeg4.cs" />
+    <Compile Include="Model\ExportPresets\Video\Codecs\VideoCodec.cs" />
+    <Compile Include="Model\ExportPresets\Video\Codecs\H264Amf.cs" />
+    <Compile Include="Model\ExportPresets\Video\Codecs\X264.cs" />
     <Compile Include="Model\ExportProject.cs" />
     <Compile Include="Model\FosshubItem.cs" />
     <Compile Include="Model\FosshubRelease.cs" />
     <Compile Include="Model\FosshubResponse.cs" />
     <Compile Include="Model\MediaSource.cs" />
+    <Compile Include="Model\ExportPresets\AnimatedImage\AnimatedImagePreset.cs" />
+    <Compile Include="Model\ExportPresets\AnimatedImage\Apng\ApngPreset.cs" />
+    <Compile Include="Model\ExportPresets\AnimatedImage\Apng\EmbeddedApngPreset.cs" />
+    <Compile Include="Model\ExportPresets\AnimatedImage\Apng\FfmpegApngPreset.cs" />
+    <Compile Include="Model\ExportPresets\AnimatedImage\Bpg\BpgPreset.cs" />
+    <Compile Include="Model\ExportPresets\AnimatedImage\Gif\SystemGifPreset.cs" />
+    <Compile Include="Model\ExportPresets\AnimatedImage\Webp\FfmpegWebpPreset.cs" />
+    <Compile Include="Model\ExportPresets\AnimatedImage\Webp\WebpPreset.cs" />
+    <Compile Include="Model\ExportPresets\ExportPreset.cs" />
+    <Compile Include="Model\ExportPresets\AnimatedImage\Gif\EmbeddedGifPreset.cs" />
+    <Compile Include="Model\ExportPresets\AnimatedImage\Gif\GifPreset.cs" />
+    <Compile Include="Model\ExportPresets\AnimatedImage\Gif\FfmpegGifPreset.cs" />
+    <Compile Include="Model\ExportPresets\AnimatedImage\Gif\GifskiGifPreset.cs" />
+    <Compile Include="Model\ExportPresets\Image\BmpPreset.cs" />
+    <Compile Include="Model\ExportPresets\Image\ImagePreset.cs" />
+    <Compile Include="Model\ExportPresets\Image\JpegPreset.cs" />
+    <Compile Include="Model\ExportPresets\Image\PngPreset.cs" />
+    <Compile Include="Model\ExportPresets\Other\StgPreset.cs" />
+    <Compile Include="Model\ExportPresets\Other\PsdPreset.cs" />
+    <Compile Include="Model\ExportPresets\Video\Avi\AviPreset.cs" />
+    <Compile Include="Model\ExportPresets\Video\Avi\FfmpegAviPreset.cs" />
+    <Compile Include="Model\ExportPresets\Video\Mkv\FfmpegMkvPreset.cs" />
+    <Compile Include="Model\ExportPresets\Video\Mkv\MkvPreset.cs" />
+    <Compile Include="Model\ExportPresets\Video\Mov\FfmpegMovPreset.cs" />
+    <Compile Include="Model\ExportPresets\Video\Mov\MovPreset.cs" />
+    <Compile Include="Model\ExportPresets\Video\Mp4\FfmpegMp4Preset.cs" />
+    <Compile Include="Model\ExportPresets\Video\Mp4\Mp4Preset.cs" />
+    <Compile Include="Model\ExportPresets\Video\VideoPreset.cs" />
+    <Compile Include="Model\ExportPresets\Video\Webm\FfmpegWebmPreset.cs" />
+    <Compile Include="Model\ExportPresets\Video\Webm\WebmPreset.cs" />
     <Compile Include="Model\ShadowModel.cs" />
     <Compile Include="Model\DefaultTaskModel.cs" />
     <Compile Include="Model\FfmpegPreset.cs" />
@@ -323,13 +392,34 @@
     <Compile Include="Model\ManipulatedEventArgs.cs" />
     <Compile Include="Model\DelayModel.cs" />
     <Compile Include="Model\MouseClicksModel.cs" />
+    <Compile Include="Model\UploadPresets\Custom\CustomPreset.cs" />
+    <Compile Include="Model\UploadPresets\History\GfycatHistory.cs" />
+    <Compile Include="Model\UploadPresets\History\History.cs" />
+    <Compile Include="Model\UploadPresets\History\ImgurHistory.cs" />
+    <Compile Include="Model\UploadPresets\Imgur\ImgurAlbum.cs" />
+    <Compile Include="Model\UploadPresets\UploadPreset.cs" />
+    <Compile Include="Model\UploadPresets\Gfycat\GfycatPreset.cs" />
+    <Compile Include="Model\UploadPresets\Imgur\ImgurPreset.cs" />
+    <Compile Include="Model\UploadPresets\Yandex\YandexPreset.cs" />
     <Compile Include="Model\VideoSource.cs" />
     <Compile Include="Native\Monitor.cs" />
     <Compile Include="Native\Windows.cs" />
-    <Compile Include="Settings\Migrations\IMigration.cs" />
-    <Compile Include="Settings\Migrations\Migration0to2_28.cs" />
-    <Compile Include="Settings\Migrations\Migrations.cs" />
+    <Compile Include="Settings\Migrations\Migration0to2_28_0.cs" />
+    <Compile Include="Settings\Migrations.cs" />
+    <Compile Include="Settings\Property.cs" />
     <Compile Include="Settings\UserSettings.cs" />
+    <Compile Include="UserControls\GfycatPanel.xaml.cs">
+      <DependentUpon>GfycatPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\YandexPanel.xaml.cs">
+      <DependentUpon>YandexPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ImgurPanel.xaml.cs">
+      <DependentUpon>ImgurPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ExportPanel.xaml.cs">
+      <DependentUpon>ExportPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ShadowPanel.xaml.cs">
       <DependentUpon>ShadowPanel.xaml</DependentUpon>
     </Compile>
@@ -350,7 +440,10 @@
     </Compile>
     <Compile Include="Util\ActionStack.cs" />
     <Compile Include="Util\Converters\DoubleToBool.cs" />
+    <Compile Include="Util\Converters\NullToVisibility.cs" />
+    <Compile Include="Util\Converters\SelectionCountToDescription.cs" />
     <Compile Include="Util\Converters\StringToDoubleArray.cs" />
+    <Compile Include="Util\Converters\TimeSpanToTotalMilliseconds.cs" />
     <Compile Include="Util\DirectoryHelper.cs" />
     <Compile Include="Util\InputHook\CustomKeyEventArgs.cs" />
     <Compile Include="Util\InputHook\CustomKeyPressEventArgs.cs" />
@@ -404,7 +497,6 @@
     <Compile Include="Util\Converters\BoolOrToInvertedVisibility.cs" />
     <Compile Include="Util\Converters\BoolOrToVisibility.cs" />
     <Compile Include="Util\Converters\BoolToOpacity.cs" />
-    <Compile Include="Util\Converters\ColorOrTransparent.cs" />
     <Compile Include="Util\Converters\ColorToAlpha.cs" />
     <Compile Include="Util\Converters\EnumToVisibility.cs" />
     <Compile Include="Util\Converters\EnumToBool.cs" />
@@ -450,11 +542,13 @@
     <Compile Include="Util\HotKey.cs" />
     <Compile Include="Util\HotKeyCollection.cs" />
     <Compile Include="Model\UpdateAvailable.cs" />
-    <Compile Include="Util\InterProcess.cs" />
+    <Compile Include="Util\InterProcessChannel\InstanceSwitcherChannel.cs" />
+    <Compile Include="Util\InterProcessChannel\SettingsPersistenceChannel.cs" />
     <Compile Include="Util\MutexList.cs" />
     <Compile Include="Util\NotificationManager.cs" />
     <Compile Include="Capture\ImageCapture.cs" />
     <Compile Include="Util\ProcessHelper.cs" />
+    <Compile Include="Util\StorageUtils.cs" />
     <Compile Include="Util\ThemeHelper.cs" />
     <Compile Include="Util\WebHelper.cs" />
     <Compile Include="Model\ApplicationModel.cs" />
@@ -472,7 +566,6 @@
     <Compile Include="ImageUtil\Video\AviWriter.cs" />
     <Compile Include="Util\LogWriter.cs" />
     <Compile Include="Util\Other.cs" />
-    <Compile Include="Util\Parameters.cs" />
     <Compile Include="Util\ScreenHelper.cs" />
     <Compile Include="Util\ScrollSynchronizer.cs" />
     <Compile Include="Util\Secret.cs" />
@@ -480,7 +573,6 @@
     <Compile Include="Util\SimpleKeyGesture.cs" />
     <Compile Include="Util\StreamHelpers.cs" />
     <Compile Include="Util\UiElementsExtension.cs" />
-    <Compile Include="Util\UserSettings.cs" />
     <Compile Include="Util\VisualHelper.cs" />
     <Compile Include="Util\WordLevel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
@@ -504,6 +596,18 @@
     <Compile Include="Windows\EditorEx.xaml.cs">
       <DependentUpon>EditorEx.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\Other\UploadDetailsDialog.xaml.cs">
+      <DependentUpon>UploadDetailsDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Other\UploadHistory.xaml.cs">
+      <DependentUpon>UploadHistory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Other\Upload.xaml.cs">
+      <DependentUpon>Upload.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Other\Preset.xaml.cs">
+      <DependentUpon>Preset.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\NewRecorder.xaml.cs">
       <DependentUpon>NewRecorder.xaml</DependentUpon>
     </Compile>
@@ -516,8 +620,8 @@
     <Compile Include="Windows\Other\Downloader.xaml.cs">
       <DependentUpon>Downloader.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Other\FfmpegPresetDialog.xaml.cs">
-      <DependentUpon>FfmpegPresetDialog.xaml</DependentUpon>
+    <Compile Include="Windows\Other\CommandPreviewer.xaml.cs">
+      <DependentUpon>CommandPreviewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Other\ColorSelector.xaml.cs">
       <DependentUpon>ColorSelector.xaml</DependentUpon>
@@ -631,6 +735,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\Localization\StringResources.cs.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Localization\StringResources.el.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -754,6 +862,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\Controls\ExtendedComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Ribbon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -785,6 +897,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="UserControls\GfycatPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\YandexPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\ImgurPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\ExportPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\ShadowPanel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -813,6 +941,22 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\Other\UploadDetailsDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Other\UploadHistory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Other\Upload.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Other\Preset.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\NewRecorder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -829,7 +973,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Other\FfmpegPresetDialog.xaml">
+    <Page Include="Windows\Other\CommandPreviewer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -978,6 +1122,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\Style.css" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -996,9 +1141,11 @@
     <Copy SourceFiles="@(Win32Binaries)" DestinationFolder="$(TargetUWP)" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>if exist "$(DevEnvDir)..\..\VC\Auxiliary\Build\vsvars32.bat" (
-   call "$(DevEnvDir)..\..\VC\Auxiliary\Build\vsvars32.bat"
-   editbin /largeaddressaware "$(TargetPath)"
-)</PostBuildEvent>
+    <PostBuildEvent>
+      if exist "$(DevEnvDir)..\..\VC\Auxiliary\Build\vsvars32.bat" (
+      call "$(DevEnvDir)..\..\VC\Auxiliary\Build\vsvars32.bat"
+      editbin /largeaddressaware "$(TargetPath)"
+      )
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>
