@@ -15,9 +15,9 @@ _VS 2019 and .Net 4.8 or newer required._
 • Added option to ignore simulated keystrokes (thanks to @cuiliang).  
 • Added option to purge the cache when leaving the app (option to ask for it).  
 • New settings system, should give you less issues when persisting to disk.
-• The free text can now receive text decorations, shadow and it can be aligned.  
+• The free text can now receive text decorations, shadow and it can be aligned (thanks to @mabakay).  
 • Added Greek localization.  
-• Updated the Italian, Korean, German, Spanish, Portuguese, Dutch, Russian, Chinese (Traditional), Turkish and Japanese localizations.  
+• Updated the Italian, Korean, German, Spanish, Portuguese, Dutch, Russian, Chinese (Traditional), Chinese (Simplified), Turkish and Japanese localizations.  
 
 ### Fixed:
 
