@@ -107,15 +107,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SharpDX, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpDX.4.2.0\lib\net45\SharpDX.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX.Direct3D11, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpDX.Direct3D11.4.2.0\lib\net45\SharpDX.Direct3D11.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX.DXGI, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpDX.DXGI.4.2.0\lib\net45\SharpDX.DXGI.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -330,6 +321,8 @@
     <Compile Include="Settings\Migrations\Migration0to2_28.cs" />
     <Compile Include="Settings\Migrations\Migrations.cs" />
     <Compile Include="Settings\UserSettings.cs" />
+    <Compile Include="SystemCapture\CaptureHelper.cs" />
+    <Compile Include="SystemCapture\Direct3D11Helper.cs" />
     <Compile Include="UserControls\ShadowPanel.xaml.cs">
       <DependentUpon>ShadowPanel.xaml</DependentUpon>
     </Compile>
@@ -600,6 +593,9 @@
     <Compile Include="Windows\Other\Startup.xaml.cs">
       <DependentUpon>Startup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\SystemCapture.xaml.cs">
+      <DependentUpon>SystemCapture.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\Webcam.xaml.cs">
       <DependentUpon>Webcam.xaml</DependentUpon>
     </Compile>
@@ -776,7 +772,6 @@
     </Compile>
     <Compile Include="Controls\LightWindow.cs" />
     <None Include="Docs\Documentation.md" />
-    <None Include="packages.config" />
     <None Include="Themes\Old.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -941,6 +936,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\SystemCapture.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\Webcam.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -978,6 +977,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\Style.css" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Windows.SDK.Contracts">
+      <Version>10.0.19041.1</Version>
+    </PackageReference>
+    <PackageReference Include="SharpDX.Direct3D11">
+      <Version>4.2.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

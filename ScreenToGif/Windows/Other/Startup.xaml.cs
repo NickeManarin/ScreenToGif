@@ -3,6 +3,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using Windows.Foundation.Metadata;
+using Windows.Graphics.Capture;
 using Microsoft.Win32;
 using ScreenToGif.Native;
 using ScreenToGif.Util;
@@ -14,6 +16,12 @@ namespace ScreenToGif.Windows.Other
         public Startup()
         {
             InitializeComponent();
+
+            if (!IsSystemCaptureSupported())
+            {
+                SystemCaptureColumn.Width = new GridLength(0);
+                SystemCaptureButton.Visibility = Visibility.Collapsed;
+            }
         }
 
         #region Events
@@ -132,6 +140,12 @@ namespace ScreenToGif.Windows.Other
             UpdateTextBlock.Visibility = Visibility.Visible;
 
             CommandManager.InvalidateRequerySuggested();
+        }
+
+        private bool IsSystemCaptureSupported()
+        {
+            return ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 8) &&
+                   GraphicsCaptureSession.IsSupported();
         }
 
         #endregion

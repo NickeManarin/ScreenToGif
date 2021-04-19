@@ -129,6 +129,8 @@
     <s:String x:Key="S.StartUp.Title">ScreenToGif - StartUp</s:String>
     <s:String x:Key="S.StartUp.Recorder">Recorder</s:String>
     <s:String x:Key="S.StartUp.Recorder.Tooltip">Opens the screen recorder, where you can easily start recording your screen.</s:String>
+    <s:String x:Key="S.StartUp.SystemCapture">System capture</s:String>
+    <s:String x:Key="S.StartUp.SystemCapture.Tooltip">Opens the system capture, where you can start recording your window or monitor.</s:String>
     <s:String x:Key="S.StartUp.Webcam">Webcam</s:String>
     <s:String x:Key="S.StartUp.Webcam.Tooltip">Opens the webcam recorder.</s:String>
     <s:String x:Key="S.StartUp.Board">Board</s:String>
@@ -652,7 +654,10 @@
     <s:String x:Key="S.Board.AutoRecord">Auto Record</s:String>
     <s:String x:Key="S.Board.AutoRecordToolTip">Enables recording while drawing.</s:String>
     <s:String x:Key="S.Board.CtrlHold">Ctrl [Hold]</s:String>
-    
+
+    <!--System capture-->
+    <s:String x:Key="S.SystemCapture.Title">ScreenToGif - System Capture</s:String>
+
     <!--Color selector-->
     <s:String x:Key="S.ColorSelector.Title">Color Selector</s:String>
     <s:String x:Key="S.ColorSelector.Select">Select a Color</s:String>

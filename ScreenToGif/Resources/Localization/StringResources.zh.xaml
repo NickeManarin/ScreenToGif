@@ -130,6 +130,8 @@
     <s:String x:Key="S.StartUp.Title">ScreenToGif - 启动</s:String>
     <s:String x:Key="S.StartUp.Recorder">录像机</s:String>
     <s:String x:Key="S.StartUp.Recorder.Tooltip">打开屏幕录像机，您可以在其中轻松开始录制屏幕。</s:String>
+    <s:String x:Key="S.StartUp.SystemCapture">系统捕获</s:String>
+    <s:String x:Key="S.StartUp.SystemCapture.Tooltip">打开系统捕获，您可以在其中录制窗口或屏幕。</s:String>
     <s:String x:Key="S.StartUp.Webcam">摄像头</s:String>
     <s:String x:Key="S.StartUp.Webcam.Tooltip">打开摄像头录像机。</s:String>
     <s:String x:Key="S.StartUp.Board">画板</s:String>
@@ -655,6 +657,9 @@
     <s:String x:Key="S.Board.AutoRecordToolTip">在绘图时启用录制</s:String>
     <s:String x:Key="S.Board.CtrlHold">Ctrl [按住]</s:String>
     
+    <!--System capture-->
+    <s:String x:Key="S.SystemCapture.Title">ScreenToGif - 系统捕获</s:String>
+
     <!--Color selector-->
     <s:String x:Key="S.ColorSelector.Title">颜色选择器</s:String>
     <s:String x:Key="S.ColorSelector.Select">选择颜色</s:String>

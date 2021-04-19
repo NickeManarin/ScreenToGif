@@ -11,9 +11,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Xml.Linq;
 using System.Xml.XPath;
+using Windows.Graphics.Capture;
 using ScreenToGif.Controls;
+using ScreenToGif.SystemCapture;
 using ScreenToGif.Util;
 using ScreenToGif.Windows;
 using ScreenToGif.Windows.Other;
@@ -136,6 +139,75 @@ namespace ScreenToGif.Model
 
                         Application.Current.MainWindow = recorder;
                         recorder.Show();
+                    }
+                };
+            }
+        }
+
+        public ICommand OpenSystemCapture
+        {
+            get
+            {
+                return new RelayCommand
+                {
+                    CanExecutePredicate = o =>
+                    {
+                        //True if all windows are not Recorders.
+                        return Application.Current?.Windows.OfType<Window>().All(a => !(a is RecorderWindow)) ?? false;
+                    },
+                    ExecuteAction = async a =>
+                    {
+                        if (!GraphicsCaptureSession.IsSupported())
+                        {
+                            MessageBox.Show("Not supported");
+                            return;
+                        }
+
+                        var caller = a as Window;
+                        if (caller == null)
+                            return;
+
+                        var picker = new GraphicsCapturePicker();
+                        var hwnd = new WindowInteropHelper(caller).Handle;
+                        picker.SetWindow(hwnd);
+                        var item = await picker.PickSingleItemAsync();
+                        if (item == null)
+                            return;
+
+                        var editor = a as Editor;
+
+                        if (editor == null)
+                            caller.Hide();
+
+                        var systemCapture = new Windows.SystemCapture(item);
+                        systemCapture.Closed += (sender, args) =>
+                        {
+                            var window = sender as Windows.SystemCapture;
+
+                            if (window?.Project != null && window.Project.Any)
+                            {
+                                if (editor == null)
+                                {
+                                    ShowEditor(window.Project);
+                                    caller.Close();
+                                }
+                                else
+                                    editor.RecorderCallback(window.Project);
+                            }
+                            else
+                            {
+                                if (editor == null)
+                                {
+                                    caller.Show();
+                                    CloseOrNot();
+                                }
+                                else
+                                    editor.RecorderCallback(null);
+                            }
+                        };
+
+                        Application.Current.MainWindow = systemCapture;
+                        systemCapture.Show();
                     }
                 };
             }
@@ -524,141 +596,141 @@ namespace ScreenToGif.Model
             switch (action)
             {
                 case 1: //Open a window.
-                {
-                    switch (open)
                     {
-                        case 1: //Startup.
+                        switch (open)
                         {
-                            OpenLauncher.Execute(null);
-                            break;
-                        }
-                        case 2: //Recorder.
-                        {
-                            if (!OpenRecorder.CanExecute(null))
-                            {
-                                var rec = Application.Current.Windows.OfType<RecorderWindow>().FirstOrDefault();
-
-                                if (rec != null)
+                            case 1: //Startup.
                                 {
-                                    if (rec.WindowState == WindowState.Minimized)
-                                        rec.WindowState = WindowState.Normal;
+                                    OpenLauncher.Execute(null);
+                                    break;
+                                }
+                            case 2: //Recorder.
+                                {
+                                    if (!OpenRecorder.CanExecute(null))
+                                    {
+                                        var rec = Application.Current.Windows.OfType<RecorderWindow>().FirstOrDefault();
 
-                                    //Bring to foreground.
-                                    rec.Activate();
+                                        if (rec != null)
+                                        {
+                                            if (rec.WindowState == WindowState.Minimized)
+                                                rec.WindowState = WindowState.Normal;
+
+                                            //Bring to foreground.
+                                            rec.Activate();
+                                            return;
+                                        }
+                                    }
+
+                                    OpenRecorder.Execute(null);
                                     return;
                                 }
-                            }
-
-                            OpenRecorder.Execute(null);
-                            return;
-                        }
-                        case 3: //Webcam.
-                        {
-                            if (!OpenWebcamRecorder.CanExecute(null))
-                            {
-                                var rec = Application.Current.Windows.OfType<RecorderWindow>().FirstOrDefault();
-
-                                if (rec != null)
+                            case 3: //Webcam.
                                 {
-                                    if (rec.WindowState == WindowState.Minimized)
-                                        rec.WindowState = WindowState.Normal;
+                                    if (!OpenWebcamRecorder.CanExecute(null))
+                                    {
+                                        var rec = Application.Current.Windows.OfType<RecorderWindow>().FirstOrDefault();
 
-                                    //Bring to foreground.
-                                    rec.Activate();
-                                    return;
+                                        if (rec != null)
+                                        {
+                                            if (rec.WindowState == WindowState.Minimized)
+                                                rec.WindowState = WindowState.Normal;
+
+                                            //Bring to foreground.
+                                            rec.Activate();
+                                            return;
+                                        }
+                                    }
+
+                                    OpenWebcamRecorder.Execute(null);
+                                    break;
                                 }
-                            }
-
-                            OpenWebcamRecorder.Execute(null);
-                            break;
-                        }
-                        case 4: //Board.
-                        {
-                            if (!OpenBoardRecorder.CanExecute(null))
-                            {
-                                var rec = Application.Current.Windows.OfType<RecorderWindow>().FirstOrDefault();
-
-                                if (rec != null)
+                            case 4: //Board.
                                 {
-                                    if (rec.WindowState == WindowState.Minimized)
-                                        rec.WindowState = WindowState.Normal;
+                                    if (!OpenBoardRecorder.CanExecute(null))
+                                    {
+                                        var rec = Application.Current.Windows.OfType<RecorderWindow>().FirstOrDefault();
 
-                                    //Bring to foreground.
-                                    rec.Activate();
-                                    return;
+                                        if (rec != null)
+                                        {
+                                            if (rec.WindowState == WindowState.Minimized)
+                                                rec.WindowState = WindowState.Normal;
+
+                                            //Bring to foreground.
+                                            rec.Activate();
+                                            return;
+                                        }
+                                    }
+
+                                    OpenBoardRecorder.Execute(null);
+                                    break;
                                 }
-                            }
+                            case 5: //Editor.
+                                {
+                                    OpenEditor.Execute(null);
+                                    break;
+                                }
+                        }
 
-                            OpenBoardRecorder.Execute(null);
-                            break;
-                        }
-                        case 5: //Editor.
-                        {
-                            OpenEditor.Execute(null);
-                            break;
-                        }
+                        break;
                     }
-
-                    break;
-                }
 
                 case 2: //Minimize/restore all windows.
-                {
-                    var all = Application.Current.Windows.OfType<Window>().Where(w => w.Content != null).ToList();
-
-                    if (all.Count == 0)
                     {
-                        Interact(1, open);
-                        return;
-                    }
+                        var all = Application.Current.Windows.OfType<Window>().Where(w => w.Content != null).ToList();
 
-                    if (all.Any(n => n.WindowState != WindowState.Minimized))
-                    {
-                        //Minimize all windows.
-                        foreach (var window in all)
-                            window.WindowState = WindowState.Minimized;
-                    }
-                    else
-                    {
-                        //Restore all windows.
-                        foreach (var window in all)
-                            window.WindowState = WindowState.Normal;
-                    }
+                        if (all.Count == 0)
+                        {
+                            Interact(1, open);
+                            return;
+                        }
 
-                    break;
-                }
+                        if (all.Any(n => n.WindowState != WindowState.Minimized))
+                        {
+                            //Minimize all windows.
+                            foreach (var window in all)
+                                window.WindowState = WindowState.Minimized;
+                        }
+                        else
+                        {
+                            //Restore all windows.
+                            foreach (var window in all)
+                                window.WindowState = WindowState.Normal;
+                        }
+
+                        break;
+                    }
 
                 case 3: //Minimize all windows.
-                {
-                    var all = Application.Current.Windows.OfType<Window>().Where(w => w.Content != null).ToList();
-
-                    if (all.Count == 0)
                     {
-                        Interact(1, open);
-                        return;
+                        var all = Application.Current.Windows.OfType<Window>().Where(w => w.Content != null).ToList();
+
+                        if (all.Count == 0)
+                        {
+                            Interact(1, open);
+                            return;
+                        }
+
+                        foreach (var window in all)
+                            window.WindowState = WindowState.Minimized;
+
+                        break;
                     }
-
-                    foreach (var window in all)
-                        window.WindowState = WindowState.Minimized;
-
-                    break;
-                }
 
                 case 4: //Restore all windows.
-                {
-                    var all = Application.Current.Windows.OfType<Window>().Where(w => w.Content != null).ToList();
-
-                    if (all.Count == 0)
                     {
-                        Interact(1, open);
-                        return;
+                        var all = Application.Current.Windows.OfType<Window>().Where(w => w.Content != null).ToList();
+
+                        if (all.Count == 0)
+                        {
+                            Interact(1, open);
+                            return;
+                        }
+
+                        foreach (var window in all)
+                            window.WindowState = WindowState.Normal;
+
+                        break;
                     }
-
-                    foreach (var window in all)
-                        window.WindowState = WindowState.Normal;
-
-                    break;
-                }
             }
         }
 
@@ -870,7 +942,7 @@ namespace ScreenToGif.Model
                         var version = Version.Parse(release.XPathSelectElement("tag_name")?.Value ?? "0.1");
 
                         if (version.Major == 0 || version <= Assembly.GetExecutingAssembly().GetName().Version)
-                           return true;
+                            return true;
 
                         Global.UpdateAvailable = new UpdateAvailable
                         {
@@ -886,7 +958,7 @@ namespace ScreenToGif.Model
                             InstallerName = release.XPathSelectElement("assets/item[2]/name")?.Value ?? "ScreenToGif.Setup.msi",
                         };
 
-                        Application.Current.Dispatcher?.BeginInvoke(new Action(() => NotificationManager.AddNotification(string.Format(LocalizationHelper.Get("S.Updater.NewRelease.Info"), 
+                        Application.Current.Dispatcher?.BeginInvoke(new Action(() => NotificationManager.AddNotification(string.Format(LocalizationHelper.Get("S.Updater.NewRelease.Info"),
                             Global.UpdateAvailable.Version), StatusType.Update, "update", PromptUpdate)));
 
                         //Download update to be installed when the app closes.
@@ -990,7 +1062,7 @@ namespace ScreenToGif.Model
 
                     Global.UpdateAvailable.IsDownloading = true;
                 }
-                
+
                 using (var webClient = new WebClient())
                 {
                     webClient.Credentials = CredentialCache.DefaultNetworkCredentials;

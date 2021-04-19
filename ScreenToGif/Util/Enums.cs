@@ -608,6 +608,7 @@ namespace ScreenToGif.Util
         WebcamRecorder = 2,
         BoardRecorder = 3,
         Editor = 4,
+        SystemCapture = 5
     }
 
     /// <summary>
