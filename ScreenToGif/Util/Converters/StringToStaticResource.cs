@@ -11,8 +11,8 @@ namespace ScreenToGif.Util.Converters
         {
             var str = value as string;
 
-            if (string.IsNullOrWhiteSpace(str))
-                return Binding.DoNothing;
+            if (string.IsNullOrWhiteSpace(str) || Application.Current == null || !Application.Current.Resources.Contains(str))
+                return DependencyProperty.UnsetValue;
 
             return Application.Current.Resources[str];
         }

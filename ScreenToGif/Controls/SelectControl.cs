@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.Win32;
+using ScreenToGif.Settings;
 using ScreenToGif.Util;
 
 namespace ScreenToGif.Controls
@@ -609,6 +610,13 @@ namespace ScreenToGif.Controls
 
             try
             {
+                //When using multiple monitors, the mouse cursor can paqss to another screen. This makes sure that to only get a valid screen position.
+                if (scaledPoint.X < 0 || scaledPoint.Y < 0 || scaledPoint.X + scaledSize > BackImage.PixelWidth || scaledPoint.Y + scaledSize > BackImage.PixelHeight)
+                {
+                    _zoomGrid.Visibility = Visibility.Hidden;
+                    return;
+                }
+
                 //The image is already 7 pixels offset of the current position.
                 _croppedImage.Source = new CroppedBitmap(BackImage, new Int32Rect((int)scaledPoint.X, (int)scaledPoint.Y, scaledSize, scaledSize));
             }

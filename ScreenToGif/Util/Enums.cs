@@ -1,4 +1,6 @@
-﻿using System;
+using System;
+using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ScreenToGif.Util
 {
@@ -60,24 +62,112 @@ namespace ScreenToGif.Util
         Apng,
 
         /// <summary>
-        /// Any type of video.
+        /// Web Picture.
         /// </summary>
-        Video,
+        Webp,
+
+        /// <summary>
+        /// Better portable graphics.
+        /// </summary>
+        Bpg,
+
+
+        /// <summary>
+        /// Audio Video Interleaved.
+        /// </summary>
+        Avi,
+        
+        /// <summary>
+        /// Matroska.
+        /// </summary>
+        Mkv,
+        
+        /// <summary>
+        /// Quicktime movie.
+        /// </summary>
+        Mov,
+
+        /// <summary>
+        /// MPEG-4 Part 14.
+        /// </summary>
+        Mp4,
+        
+        /// <summary>
+        /// Web Movie.
+        /// </summary>
+        Webm,
+        
+
+        /// <summary>
+        /// Bitmap.
+        /// </summary>
+        Bmp,
+
+        /// <summary>
+        /// Joint Photographic Experts Group.
+        /// </summary>
+        Jpeg,
 
         /// <summary>
         /// Portable Network Graphics.
         /// </summary>
-        Images,
+        Png,
+        
 
         /// <summary>
         /// Project file, .stg or .zip.
         /// </summary>
-        Project,
+        Stg,
 
         /// <summary>
-        /// PSD file.
+        /// Photoshop file.
         /// </summary>
-        Photoshop,
+        Psd,
+
+        /// <summary>
+        /// Compressed file.
+        /// Not in directly use by the encoder, but as an option for the images and the project.
+        /// </summary>
+        Zip
+    }
+
+    /// <summary>
+    /// Partial export type.
+    /// </summary>
+    public enum PartialExportType
+    {
+        /// <summary>
+        /// An expression like '4, 5, 9 - 11'.
+        /// </summary>
+        FrameExpression,
+        
+        /// <summary>
+        /// Start and end frame number.
+        /// </summary>
+        FrameRange,
+
+        /// <summary>
+        /// Start and end times.
+        /// </summary>
+        TimeRange,
+
+        /// <summary>
+        /// All selected frames in the timeline.
+        /// </summary>
+        Selection
+    }
+
+    /// <summary>
+    /// Upload destination type.
+    /// </summary>
+    public enum UploadType
+    {
+        NotDefined = 0,
+        Imgur,
+        Gfycat,
+        Yandex,
+        YouTrack,
+        Custom
     }
 
     /// <summary>
@@ -368,23 +458,14 @@ namespace ScreenToGif.Util
     }
 
     /// <summary>
-    /// Type of the gif encoder.
+    /// Type of the encoder.
     /// </summary>
-    public enum GifEncoderType
+    public enum EncoderType
     {
-        ScreenToGif,
-        PaintNet,
-        FFmpeg,
-        Gifski
-    }
-
-    /// <summary>
-    /// Type of the apng encoder.
-    /// </summary>
-    public enum ApngEncoderType
-    {
-        ScreenToGif,
-        FFmpeg,
+        ScreenToGif, //Gif, Apng
+        System, //Gif, Video
+        FFmpeg, //Gif, Webp, Apng, Video
+        Gifski //Gif
     }
 
     /// <summary>
@@ -399,63 +480,14 @@ namespace ScreenToGif.Util
         MostUsed = 4,
         Palette = 5,
     }
-
-    /// <summary>
-    /// Type of the video encoder.
-    /// </summary>
-    public enum VideoEncoderType
-    {
-        AviStandalone,
-        Ffmpg,
-    }
-
+    
     /// <summary>
     /// Type of the progress indicator.
     /// </summary>
     public enum ProgressType
     {
         Bar,
-        Text,
-    }
-
-    /// <summary>
-    /// The type of directory, used to decide the icon of the folder inside the SelectFolderDialog.
-    /// </summary>
-    public enum DirectoryType
-    {
-        ThisComputer,
-        Drive,
-        Folder,
-        File,
-
-        Desktop,
-        Documents,
-        Images,
-        Music,
-        Videos,
-        Downloads
-    }
-
-    /// <summary>
-    /// The type of path.
-    /// </summary>
-    public enum PathType
-    {
-        VirtualFolder,
-        Folder,
-        File
-    }
-
-    /// <summary>
-    /// The type of the output.
-    /// </summary>
-    public enum OutputType
-    {
-        Video,
-        Gif,
-        Apng,
-        Image,
-        Project
+        Text
     }
 
     /// <summary>
@@ -598,6 +630,17 @@ namespace ScreenToGif.Util
         Error
     }
 
+    public enum StatusReasons : int
+    {
+        None,
+        EmptyProperty,
+        InvalidState,
+        FileAlreadyExists,
+        MissingFfmpeg,
+        MissingGifski,
+        UploadServiceUnauthorized
+    }
+
     /// <summary>
     /// The types of source of project creation.
     /// </summary>
@@ -607,7 +650,7 @@ namespace ScreenToGif.Util
         ScreenRecorder = 1,
         WebcamRecorder = 2,
         BoardRecorder = 3,
-        Editor = 4,
+        Editor = 4
     }
 
     /// <summary>
@@ -634,7 +677,7 @@ namespace ScreenToGif.Util
     {
         Override = 0,
         IncreaseDecrease = 1,
-        Scale = 2,
+        Scale = 2
     }
 
     /// <summary>
@@ -677,5 +720,218 @@ namespace ScreenToGif.Util
         Region = 0,
         Window = 1,
         Fullscreen = 2
+    }
+
+    public enum VideoSettingsMode
+    {
+        Normal,
+        Advanced
+    }
+
+    /// <summary>
+    /// Png prediction methods used by FFmpeg.
+    /// </summary>
+    public enum PredictionMethods
+    {
+        None,
+        Sub,
+        Up,
+        Avg,
+        Paeth,
+        Mixed
+    }
+
+    /// <summary>
+    /// Dither methods, currently being used by FFmpeg.
+    /// </summary>
+    public enum DitherMethods
+    {
+        [Description("bayer")]
+        Bayer,
+
+        [Description("heckbert")]
+        Heckbert,
+
+        [Description("floyd_steinberg")]
+        FloydSteinberg,
+
+        [Description("sierra2")]
+        Sierra2,
+
+        [Description("sierra2_4a")]
+        Sierra2Lite,
+    }
+
+    public enum VideoCodecs
+    {
+        NotSelected,
+
+        [Description("mpeg2video")]
+        Mpeg2,
+
+        [Description("mpeg4")]
+        Mpeg4,
+
+        [Description("libx264")]
+        X264,
+
+        [Description("h264_amf")]
+        H264Amf,
+
+        [Description("h264_nvenc")]
+        H264Nvenc,
+
+        [Description("h264_qsv")]
+        H264Qsv,
+
+        [Description("libx265")]
+        X265,
+
+        [Description("hevc_amf")]
+        HevcAmf,
+
+        [Description("hevc_nvenc")]
+        HevcNvenc,
+
+        [Description("hevc_qsv")]
+        HevcQsv,
+
+        [Description("libvpx")]
+        Vp8,
+
+        [Description("libvpx-vp9")]
+        Vp9
+    }
+
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
+    public enum VideoCodecPresets
+    {
+        NotSelected,
+        None,
+
+        VerySlow,
+        Slower,
+        Slow,
+        Medium,
+        Fast,
+        Faster,
+        VeryFast,
+        SuperFast,
+        UltraFast,
+
+        Quality,
+        Balanced,
+        Speed,
+
+        Default,
+        Lossless,
+        LosslessHP,
+        HP,
+        HQ,
+        BD,
+        LowLatency,
+        LowLatencyHP,
+        LowLatencyHQ,
+        
+        Picture, //Digital picture, like portrait, inner shot.
+        Photo, //Outdoor photograph, with natural lighting.
+        Drawing, //Hand or line drawing, with high-contrast details.
+        Icon, //Small-sized colorful images.
+        Text //Text-like.
+    }
+
+    public enum HardwareAcceleration
+    {
+        Off, //Only lets you select non-hardware backed encoders. 
+        On, //Lets you select hardware backed encoders too. -hwaccel auto
+        Auto //Only lets you select non-hardware backed encoders, but switches to one if possible. -hwaccel auto
+    }
+
+    public enum RateUnit
+    {
+        [Description("B")]
+        Bits,
+
+        [Description("K")]
+        Kilobits,
+
+        [Description("M")]
+        Megabits
+    }
+
+    /// <summary>
+    /// FFmpeg pixel formats.
+    /// https://github.com/FFmpeg/FFmpeg/blob/b7b73e83e3d5c78a5fea96a6bcae02e1f0a5c45f/libavutil/pixdesc.c
+    /// </summary>
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
+    public enum VideoPixelFormats
+    {
+        NotSelected,
+        Auto,
+        Bgr0,
+        [Description("bgr4_byte")] Bgr4Byte, //https://stackoverflow.com/questions/8588384/how-to-define-an-enum-with-string-value
+        Bgr8,
+        BgrA,
+        Cuda,
+        D3D11,
+        Dxva2Vld,
+        Gbrp,
+        Gbrp10Le,
+        Gbrp12Le,
+        Gray,
+        Gray10Le,
+        Gray16Be,
+        MonoB,
+        Nv12,
+        Nv16,
+        Nv20Le,
+        Nv21,
+        P010Le,
+        Pal8,
+        Qsv,
+        Rgb24,
+        Rgb48Be,
+        Rgb8,
+        Rgba64Be,
+        RgbA,
+        [Description("bgr4_byte")] Rgb4Byte,
+        Ya8,
+        Ya16Be,
+        Yuv420p,
+        Yuv420p10Le,
+        Yuv420p12Le,
+        Yuv422p,
+        Yuv422p10Le,
+        Yuv422p12Le,
+        Yuv440p,
+        Yuv444p,
+        Yuv440p10Le,
+        Yuv440p12Le,
+        Yuv444p10Le,
+        Yuv444p12Le,
+        Yuv444p16Le,
+        Yuva420p,
+        Yuvj420p,
+        Yuvj422p,
+        Yuvj444p,
+    }
+
+    public enum Framerates
+    {
+        Auto,
+        Custom,
+        Film,
+        Ntsc,
+        Pal
+    }
+
+    public enum Vsyncs
+    {
+        Off,
+        Auto,
+        Passthrough,
+        Cfr,
+        Vfr,
+        Drop
     }
 }

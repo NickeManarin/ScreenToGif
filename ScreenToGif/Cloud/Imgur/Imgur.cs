@@ -3,182 +3,203 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
-using System.Net.Http;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using ScreenToGif.Model.UploadPresets;
+using ScreenToGif.Model.UploadPresets.History;
+using ScreenToGif.Model.UploadPresets.Imgur;
 using ScreenToGif.Util;
 using ScreenToGif.Windows.Other;
 
 namespace ScreenToGif.Cloud.Imgur
 {
-    public class Imgur : ICloud
+    public class Imgur : IUploader
     {
-        public bool IsAnonymous { get; set; }
-
-        public Imgur(bool anonymous = true)
+        public async Task<History> UploadFileAsync(UploadPreset preset, string path, CancellationToken cancellationToken, IProgress<double> progressCallback = null)
         {
-            IsAnonymous = anonymous;
-        }
+            if (!(preset is ImgurPreset imgurPreset))
+                throw new Exception("Imgur preset is null.");
 
-        public async Task<UploadedFile> UploadFileAsync(string path, CancellationToken cancellationToken, IProgress<double> progressCallback = null)
-        {
             var args = new Dictionary<string, string>();
             var headers = new NameValueCollection();
 
-            if (IsAnonymous)
+            if (!preset.IsAnonymous)
             {
-                headers.Add("Authorization", "Client-ID " + Secret.ImgurId);
-            }
-            else
-            {
-                headers.Add("Authorization", "Bearer " + UserSettings.All.ImgurAccessToken);
+                if (!await IsAuthorized(imgurPreset))
+                    throw new UploadingException("It was not possible to get the authorization to upload to Imgur.");
 
-                if (!await IsAuthorized())
-                    throw new UploadingException("It was not possible to get the authorization to upload to Imgur");
+                headers.Add("Authorization", "Bearer " + imgurPreset.AccessToken);
 
-                if (UserSettings.All.ImgurUploadToAlbum)
+                if (imgurPreset.UploadToAlbum)
                 {
-                    var album = string.IsNullOrWhiteSpace(UserSettings.All.ImgurSelectedAlbum) || UserSettings.All.ImgurSelectedAlbum == "♥♦♣♠" ? await AskForAlbum() : UserSettings.All.ImgurSelectedAlbum;
+                    var album = string.IsNullOrWhiteSpace(imgurPreset.SelectedAlbum) || imgurPreset.SelectedAlbum == "♥♦♣♠" ? 
+                        await AskForAlbum(imgurPreset) : imgurPreset.SelectedAlbum;
 
                     if (!string.IsNullOrEmpty(album))
                         args.Add("album", album);
                 }
             }
-
-            using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            else
             {
-                var result = await WebHelper.SendFile("https://api.imgur.com/3/image", stream, path, args, headers);
-
-                var responseAux = WebHelper.Deserialize<ImgurUploadImageResponse>(result);
-
-                if (responseAux == null || (!responseAux.Success && responseAux.Status != 200))
-                    throw new UploadingException("Upload failed: " + (responseAux?.Status.ToString() ?? "Response was null"));
-
-                if (string.IsNullOrEmpty(responseAux.Data?.Link))
-                    throw new UploadingException("Upload failed. The link was not provided.");
-
-                var url = "";
-                if ((IsAnonymous && UserSettings.All.ImgurAnonymousUseDirectLinks) || (!IsAnonymous && UserSettings.All.ImgurUseDirectLinks))
-                {
-                    if ((IsAnonymous && UserSettings.All.ImgurAnonymousUseGifvLink) || (!IsAnonymous && UserSettings.All.ImgurUseGifvLink) && !string.IsNullOrEmpty(responseAux.Data.Gifv))
-                        url = responseAux.Data.Gifv ?? responseAux.Data.Link;
-                    else
-                        url = responseAux.Data.Link;
-                }
-                else
-                {
-                    url = $"https://imgur.com/{responseAux.Data.Id}";
-                }
-                
-                return new UploadedFile { Link = url, DeleteLink = $"https://imgur.com/delete/{responseAux.Data.DeleteHash}" };
+                headers.Add("Authorization", "Client-ID " + Secret.ImgurId);
             }
+            
+            if (cancellationToken.IsCancellationRequested)
+                return null;
+
+            return await Upload(imgurPreset, path, args, headers);
         }
+        
 
-
-        public static string GetGetAuthorizationAdress()
+        public static string GetAuthorizationAdress()
         {
             var args = new Dictionary<string, string>
             {
-                {"client_id", Secret.ImgurId}, {"response_type", "pin"}
+                {"client_id", Secret.ImgurId}, 
+                {"response_type", "pin"}
             };
 
             return WebHelper.AppendQuery("https://api.imgur.com/oauth2/authorize", args);
         }
 
-        public static async Task<bool> GetAccessToken()
+        public static async Task<bool> GetTokens(ImgurPreset preset)
         {
             var args = new Dictionary<string, string>
             {
                 {"client_id", Secret.ImgurId},
                 {"client_secret", Secret.ImgurSecret},
                 {"grant_type", "pin"},
-                {"pin", UserSettings.All.ImgurOAuthToken}
+                {"pin", preset.OAuthToken}
             };
 
-            var response = await WebHelper.MultiRequest("https://api.imgur.com/oauth2/token", args);
-
-            if (string.IsNullOrEmpty(response))
-                return false;
-
-            var token = WebHelper.Deserialize<OAuth2Token>(response);
-
-            if (string.IsNullOrEmpty(token?.AccessToken))
-                return false;
-
-            UserSettings.All.ImgurAccessToken = token.AccessToken;
-            UserSettings.All.ImgurRefreshToken = token.RefreshToken;
-            UserSettings.All.ImgurExpireDate = DateTime.UtcNow + TimeSpan.FromSeconds(token.ExpiresIn - 10);
-            return true;
+            return await GetTokens(preset, args);
         }
 
-        public static async Task<bool> RefreshToken()
+        public static async Task<bool> RefreshToken(ImgurPreset preset)
         {
             var args = new Dictionary<string, string>
             {
-                {"refresh_token", UserSettings.All.ImgurRefreshToken},
+                {"refresh_token", preset.RefreshToken},
                 {"client_id", Secret.ImgurId},
                 {"client_secret", Secret.ImgurSecret},
                 {"grant_type", "refresh_token"}
             };
 
-            var response = await WebHelper.MultiRequest("https://api.imgur.com/oauth2/token", args);
-
-            if (string.IsNullOrEmpty(response)) return false;
-
-            var token = WebHelper.Deserialize<OAuth2Token>(response);
-
-            if (string.IsNullOrEmpty(token?.AccessToken))
-                return false;
-
-            UserSettings.All.ImgurAccessToken = token.AccessToken;
-            UserSettings.All.ImgurRefreshToken = token.RefreshToken;
-            UserSettings.All.ImgurExpireDate = DateTime.UtcNow + TimeSpan.FromSeconds(token.ExpiresIn - 10);
-            return true;
+            return await GetTokens(preset, args);
         }
 
-        public static bool IsAuthorizationExpired()
+        public static bool IsAuthorizationExpired(ImgurPreset preset)
         {
-            return DateTime.UtcNow > UserSettings.All.ImgurExpireDate;
+            return DateTime.UtcNow > preset.ExpiryDate;
         }
 
-        public static async Task<bool> IsAuthorized()
+        public static async Task<bool> IsAuthorized(ImgurPreset preset)
         {
-            if (string.IsNullOrWhiteSpace(UserSettings.All.ImgurAccessToken))
+            if (string.IsNullOrWhiteSpace(preset.RefreshToken))
                 return false;
 
-            if (!IsAuthorizationExpired())
+            if (!IsAuthorizationExpired(preset))
                 return true;
 
-            return await RefreshToken();
+            return await RefreshToken(preset);
         }
 
-        public static async Task<List<ImgurAlbumData>> GetAlbums()
+        public static async Task<List<ImgurAlbum>> GetAlbums(ImgurPreset preset)
         {
-            if (!await IsAuthorized())
+            if (!await IsAuthorized(preset))
                 return null;
 
-            var headers = new NameValueCollection { { "Authorization", "Bearer " + UserSettings.All.ImgurAccessToken } };
+            var headers = new NameValueCollection
+            {
+                { "Authorization", "Bearer " + preset.AccessToken }
+            };
 
-            var response = await WebHelper.SimpleRequest(HttpMethod.Get, "https://api.imgur.com/3/account/me/albums", headers: headers);
+            var response = await WebHelper.Get("https://api.imgur.com/3/account/me/albums", headers);
 
-            var responseAux = WebHelper.Deserialize<ImgurGetAlbumsResponse>(response);
+            var responseAux = Serializer.Deserialize<ImgurAlbumsResponse>(response);
 
             if (responseAux == null || (!responseAux.Success && responseAux.Status != 200))
                 return null;
 
-            UserSettings.All.ImgurAlbumList = new ArrayList(responseAux.Data);
-            return responseAux.Data;
+            var list = responseAux.Data.Select(s => new ImgurAlbum(s)).ToList();
+
+            preset.Albums = new ArrayList(list);
+
+            return list;
         }
 
-        public static async Task<string> AskForAlbum()
+        public static async Task<string> AskForAlbum(ImgurPreset preset)
         {
-            var albums = await GetAlbums();
+            var albums = await GetAlbums(preset);
 
-            //This looks ugly.
-            var selected = Application.Current.Dispatcher.Invoke(() => Application.Current.Windows[0].Dispatcher.Invoke(() => PickAlbumDialog.OkCancel(albums)));
+            return Application.Current.Dispatcher.Invoke(() => PickAlbumDialog.OkCancel(albums));
+        }
 
-            return selected;
+
+        private static async Task<bool> GetTokens(ImgurPreset preset, Dictionary<string, string> args)
+        {
+            var response = await WebHelper.PostMultipart("https://api.imgur.com/oauth2/token", args);
+
+            if (string.IsNullOrEmpty(response))
+                return false;
+
+            var token = Serializer.Deserialize<OAuth2Token>(response);
+
+            if (string.IsNullOrEmpty(token?.AccessToken))
+                return false;
+
+            preset.AccessToken = token.AccessToken;
+            preset.RefreshToken = token.RefreshToken;
+            preset.ExpiryDate = DateTime.UtcNow + TimeSpan.FromSeconds(token.ExpiresIn - 10);
+            return true;
+        }
+
+        private async Task<History> Upload(ImgurPreset preset, string path, Dictionary<string, string> args, NameValueCollection headers)
+        {
+            using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            {
+                var result = await WebHelper.SendFile("https://api.imgur.com/3/image", stream, path, args, headers, "image");
+                var response = Serializer.Deserialize<ImgurUploadResponse>(result);
+
+                //Error when sending video.
+                //{"data":{"errorCode":null,"ticket":"7234557b"},"success":true,"status":200}
+
+                if (response == null || (!response.Success && response.Status != 200))
+                    return new ImgurHistory
+                    {
+                        PresetName = preset.Title,
+                        DateInUtc = DateTime.UtcNow,
+                        Result = 400,
+                        Message = response?.Status.ToString() ?? result
+                    };
+
+                if (string.IsNullOrEmpty(response.Data?.Link))
+                     return new ImgurHistory
+                     {
+                         PresetName = preset.Title,
+                         DateInUtc = DateTime.UtcNow,
+                         Result = 400,
+                         Message = "Upload failed. The link was not provided."
+                     };
+
+                var history = new ImgurHistory
+                {
+                    PresetName = preset.Title,
+                    DateInUtc = DateTime.UtcNow,
+                    Result = 200,
+                    Id = response.Data.Id,
+                    Link = $"https://imgur.com/{response.Data.Id}",
+                    DeletionLink = $"https://imgur.com/delete/{response.Data.DeleteHash}",
+                    Mp4 = response.Data.Mp4,
+                    Webm = response.Data.Webm,
+                    Gifv = response.Data.Gifv,
+                    Gif = response.Data.Link
+                };
+
+                return history;
+            }
         }
     }
 }

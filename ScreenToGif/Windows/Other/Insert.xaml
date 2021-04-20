@@ -1,8 +1,8 @@
-﻿<Window x:Class="ScreenToGif.Windows.Other.Insert"
+<Window x:Class="ScreenToGif.Windows.Other.Insert"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:n="clr-namespace:ScreenToGif.Controls"
-        xmlns:u="clr-namespace:ScreenToGif.Util"
+        xmlns:t="clr-namespace:ScreenToGif.Settings"
         Title="{DynamicResource S.InsertFrames.Title}" 
         Icon="/ScreenToGif;component/Resources/Logo.ico" SnapsToDevicePixels="True" 
         UseLayoutRounding="True" WindowStartupLocation="CenterOwner" 
@@ -93,7 +93,7 @@
             <ScrollViewer Grid.Row="0" Grid.Column="0" x:Name="LeftScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
                           Background="{StaticResource Checker.DrawingBrush}" BorderThickness="1,1,0,1" BorderBrush="{DynamicResource Element.Border}" PanningMode="Both"
                           PreviewMouseWheel="ScrollViewer_MouseWheel" PreviewMouseRightButtonDown="ScrollViewer_PreviewMouseRightButtonDown">
-                <Canvas x:Name="LeftCanvas" Background="{Binding InsertFillColor, Source={x:Static u:UserSettings.All}, Converter={StaticResource ColorToBrushConverter}, Mode=TwoWay}">
+                <Canvas x:Name="LeftCanvas" Background="{Binding InsertFillColor, Source={x:Static t:UserSettings.All}, Converter={StaticResource ColorToBrushConverter}, Mode=TwoWay}">
                     <Image Canvas.Left="0" Canvas.Top="0" x:Name="LeftImage" Stretch="Fill"/>
                 </Canvas>
             </ScrollViewer>
@@ -103,7 +103,7 @@
             <ScrollViewer Grid.Row="0" Grid.Column="2" x:Name="RightScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
                           Background="{StaticResource Checker.DrawingBrush}" BorderThickness="0,1,1,1" BorderBrush="{DynamicResource Element.Border}" PanningMode="Both"
                           PreviewMouseWheel="ScrollViewer_MouseWheel" PreviewMouseRightButtonDown="ScrollViewer_PreviewMouseRightButtonDown">
-                <Canvas x:Name="RightCanvas" Background="{Binding InsertFillColor, Source={x:Static u:UserSettings.All}, Converter={StaticResource ColorToBrushConverter}, Mode=TwoWay}">
+                <Canvas x:Name="RightCanvas" Background="{Binding InsertFillColor, Source={x:Static t:UserSettings.All}, Converter={StaticResource ColorToBrushConverter}, Mode=TwoWay}">
                     <Image Canvas.Left="0" Canvas.Top="0" x:Name="RightImage" Stretch="Fill"/>
                 </Canvas>
             </ScrollViewer>
@@ -248,7 +248,7 @@
                 <n:ExtendedButton.Icon>
                     <DrawingBrush>
                         <DrawingBrush.Drawing>
-                            <GeometryDrawing Brush="{Binding InsertFillColor, Source={x:Static u:UserSettings.All}, Converter={StaticResource ColorToBrushConverter}}" Geometry="M 0,40 L 40,40 L 40,0 L 0,0 L 0,40 Z">
+                            <GeometryDrawing Brush="{Binding InsertFillColor, Source={x:Static t:UserSettings.All}, Converter={StaticResource ColorToBrushConverter}}" Geometry="M 0,40 L 40,40 L 40,0 L 0,0 L 0,40 Z">
                                 <GeometryDrawing.Pen>
                                     <Pen Thickness="1" Brush="{DynamicResource Element.Border}"/>
                                 </GeometryDrawing.Pen>

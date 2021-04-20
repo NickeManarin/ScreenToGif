@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
-using ScreenToGif.Util;
+using ScreenToGif.Settings;
 
 namespace ScreenToGif.Model
 {

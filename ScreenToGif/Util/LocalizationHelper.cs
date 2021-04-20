@@ -1,4 +1,4 @@
-﻿using ScreenToGif.Windows.Other;
+using ScreenToGif.Windows.Other;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -15,6 +15,7 @@ using System.Windows.Markup;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
+using ScreenToGif.Settings;
 
 namespace ScreenToGif.Util
 {

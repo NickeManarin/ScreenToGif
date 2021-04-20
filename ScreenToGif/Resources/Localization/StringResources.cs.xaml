@@ -418,27 +418,27 @@
     <s:String x:Key="S.Options.Upload.Proxy.Password">Heslo:</s:String>
     <s:String x:Key="S.Options.Upload.Get">Získat klíč OAuth</s:String>
     <s:String x:Key="S.Options.Upload.PasteToken">Zde vložte autorizační klíč.</s:String>
-    <s:String x:Key="S.Options.Upload.Authorize">Povolit</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Authorize">Povolit</s:String>
     <s:String x:Key="S.Options.Upload.Refresh">Obnovit</s:String>
     <s:String x:Key="S.Options.Upload.Clear">Smazat</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Anonymous">Imgur (anonymní)</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Direct">Použijte přímé odkazy.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Gifv">Získejte odkazy s rozšířením Gifv namísto Gif.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.ToAlbum">Odeslat soubory gif do vybraného alba.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Album">Album:</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.AskMe">Dotázat se před nahráním</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.NotPossible">Stránku pro získání autorizačního klíče nebylo možné otevřít.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Missing">Pro autorizaci této aplikace zadejte autorizační klíč.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Completed">Autorizace Imgur byla dokončena.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Error">Autorizace Imgur se nepovedla. Zkuste to znovu za pár sekun nebo si opatřete nový klíč.</s:String>
-    <!--<s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Header">It was not possible to authorize the app</s:String>-->
-    <!--<s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Message">Check if you provided the correct token and if you have an internet connection.</s:String>-->
-    <s:String x:Key="S.Options.Upload.Imgur.Refresh.None">Pro obnovení autorizace aplikace, je potřeba nejprve dokončit autorizační proces.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.NotAuthorized">Neautorizovaný.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Expired">Autorizace vyprší za {0}.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Valid">Autorizace je platná do {0}.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Removed">Autorizace Imgur odstraněna.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Error.AlbumLoad">Nelze načíst seznam alb.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Anonymous">Imgur (anonymní)</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Direct">Použijte přímé odkazy.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Gifv">Získejte odkazy s rozšířením Gifv namísto Gif.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.ToAlbum">Odeslat soubory gif do vybraného alba.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Album">Album:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.AskMe">Dotázat se před nahráním</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.NotPossible">Stránku pro získání autorizačního klíče nebylo možné otevřít.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Token">Pro autorizaci této aplikace zadejte autorizační klíč.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Completed">Autorizace Imgur byla dokončena.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Error">Autorizace Imgur se nepovedla. Zkuste to znovu za pár sekun nebo si opatřete nový klíč.</s:String>
+    <!--<s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Header">It was not possible to authorize the app</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Message">Check if you provided the correct token and if you have an internet connection.</s:String>-->
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Refresh.None">Pro obnovení autorizace aplikace, je potřeba nejprve dokončit autorizační proces.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.NotAuthorized">Neautorizovaný.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Expired">Autorizace vyprší za {0}.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Valid">Autorizace je platná do {0}.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Removed">Autorizace Imgur odstraněna.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.AlbumLoad">Nelze načíst seznam alb.</s:String>
     <s:String x:Key="S.Options.Upload.Gfycat.Anonymous">Gfycat (anonymní)</s:String>
     <s:String x:Key="S.Options.Upload.Yandex.Token">OAuth klíč:</s:String>
     <s:String x:Key="S.Options.Upload.Pick.Destination">Vyberte cíl</s:String>
@@ -1271,7 +1271,7 @@
     <!--<s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable">Use a global color table.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable.Info">May reduce the quality and/or size of the gif.</s:String>-->
     <s:String x:Key="S.SaveAs.GifOptions.Loop">Smyčka:</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">Smyčka Gif.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Looped">Smyčka Gif.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Nekonečné opakování.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Opakovat počet.</s:String>
     <!--<s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable">Enable transparency.</s:String>-->
@@ -1298,9 +1298,9 @@
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">Zazipovat obrázky.</s:String>
     <!--<s:String x:Key="S.SaveAs.PsdOptions">Psd options</s:String>-->
     <!--<s:String x:Key="S.SaveAs.PsdOptions.Compress">Compress the image.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">Compress the image data using the RLE algorithm.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.PsdOptions.Compress.Info">Compress the image data using the RLE algorithm.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.PsdOptions.Timeline">Save the timeline data.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">Exports the timings of the frames, instead of just the frames.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.PsdOptions.Timeline.Info">Exports the timings of the frames, instead of just the frames.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.ProjectOptions">Project options</s:String>-->
     
     <s:String x:Key="S.SaveAs.Extras">Doplňky:</s:String>
@@ -1363,9 +1363,9 @@
     <!--<s:String x:Key="S.SaveAs.Warning.Canceled">The operation was canceled.</s:String>-->
     
     <!--SaveAs • Export-->
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">Export snímků</s:String>
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Instruction">Opravdu chcete exportovat snímky?</s:String>
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Message">Tato akce provede export {0} snímků přímo do vybraného adresáře.</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Title">Export snímků</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">Opravdu chcete exportovat snímky?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">Tato akce provede export {0} snímků přímo do vybraného adresáře.</s:String>
     
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">Zpětná vazba</s:String>

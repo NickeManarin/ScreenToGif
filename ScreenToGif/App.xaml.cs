@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -16,7 +16,9 @@ using System.Windows.Media;
 using System.Windows.Threading;
 using ScreenToGif.Controls;
 using ScreenToGif.Model;
+using ScreenToGif.Settings;
 using ScreenToGif.Util;
+using ScreenToGif.Util.InterProcessChannel;
 using ScreenToGif.Windows.Other;
 
 namespace ScreenToGif
@@ -77,6 +79,16 @@ namespace ScreenToGif
 
             #endregion
 
+            #region Settings persistence mode
+
+            if (Argument.IsInSettingsMode)
+            {
+                SettingsPersistenceChannel.RegisterServer();
+                return;
+            }
+
+            #endregion
+
             #region If set, it allows only one instance per user
 
             //The singleton works on a per-user and per-executable mode.
@@ -114,7 +126,7 @@ namespace ScreenToGif
                                     Util.Native.SetForegroundWindow(handles.Count > 0 ? handles[0] : process.Handle);
                                     warning = false;
 
-                                    InterProcess.SendMessage(e.Args);
+                                    InstanceSwitcherChannel.SendMessage(e.Args);
                                 }
                             }
 
@@ -127,7 +139,7 @@ namespace ScreenToGif
                         }
 
                         //If this is the first instance, register the inter process channel to listen for other instances.
-                        InterProcess.RegisterServer();
+                        InstanceSwitcherChannel.RegisterServer();
                     }
                 }
                 catch (Exception ex)
@@ -209,7 +221,7 @@ namespace ScreenToGif
 
             #endregion
 
-            //var test = new TestField(); test.ShowDialog(); return;
+            //var test = new TestField(); test.ShowDialog(); Environment.Exit(1); return;
             //var test = new Windows.EditorEx(); test.ShowDialog(); return;
             //var test = new Windows.NewWebcam(); test.ShowDialog(); return;
             //var test = Settings.UserSettings.All.StartupTop;
@@ -317,6 +329,9 @@ namespace ScreenToGif
 
         private void App_Exit(object sender, ExitEventArgs e)
         {
+            if (UserSettings.All.DeleteCacheWhenClosing)
+                StorageUtils.PurgeCache();
+            
             try
             {
                 MutexList.RemoveAll();

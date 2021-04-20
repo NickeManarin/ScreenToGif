@@ -1,13 +1,13 @@
-﻿<Window x:Class="ScreenToGif.Windows.Other.RegionSelector"
+<Window x:Class="ScreenToGif.Windows.Other.RegionSelector"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:n="clr-namespace:ScreenToGif.Controls"
-        xmlns:util="clr-namespace:ScreenToGif.Util"
+        xmlns:t="clr-namespace:ScreenToGif.Settings"
         x:Name="GhostWindow" Title="ScreenToGif" Height="Auto" Width="Auto"
         WindowStyle="None" AllowsTransparency="True" Topmost="True" ResizeMode="NoResize"
         UseLayoutRounding="True" SnapsToDevicePixels="True" Background="Transparent" ShowInTaskbar="False">
 
-    <n:SelectControl x:Name="SelectControl" Focusable="True" AnimateBorder="{Binding Source={x:Static util:UserSettings.All}, Path=AnimateRecorderBorder, Mode=OneWay}" 
+    <n:SelectControl x:Name="SelectControl" Focusable="True" AnimateBorder="{Binding Source={x:Static t:UserSettings.All}, Path=AnimateRecorderBorder, Mode=OneWay}" 
                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MouseHovering="SelectControl_MouseHovering" 
                      SelectionAccepted="SelectControl_SelectionAccepted" SelectionChanged="SelectControl_SelectionChanged" 
                      SelectionCanceled="SelectControl_SelectionCanceled"/>

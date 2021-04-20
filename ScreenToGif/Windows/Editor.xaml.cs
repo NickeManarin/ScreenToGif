@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -21,8 +20,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shell;
 using System.Windows.Threading;
 using Microsoft.Win32;
-using ScreenToGif.Cloud.Imgur;
-using ScreenToGif.Cloud.YandexDisk;
 using ScreenToGif.Controls;
 using ScreenToGif.ImageUtil;
 using ScreenToGif.ImageUtil.Gif.Decoder;
@@ -39,12 +36,17 @@ using Encoder = ScreenToGif.Windows.Other.Encoder;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 using ListViewItem = System.Windows.Controls.ListViewItem;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
-using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 using Size = System.Windows.Size;
 using System.Text.RegularExpressions;
+using System.Windows.Data;
 using System.Windows.Media.Effects;
 using ScreenToGif.ImageUtil.Apng;
+using ScreenToGif.Model.ExportPresets;
+using ScreenToGif.Model.ExportPresets.Image;
+using ScreenToGif.Model.ExportPresets.Other;
 using ScreenToGif.Native;
+using ScreenToGif.Settings;
+using ScreenToGif.UserControls;
 using VideoSource = ScreenToGif.Windows.Other.VideoSource;
 
 namespace ScreenToGif.Windows
@@ -215,15 +217,7 @@ namespace ScreenToGif.Windows
         public Editor()
         {
             InitializeComponent();
-
-            #region Initialize timers
-
-            _searchTimer = new DispatcherTimer(DispatcherPriority.Background);
-            _searchTimer.Interval = TimeSpan.FromMilliseconds(500);
-            _searchTimer.Tick += SearchTimer_Tick;
-
-            #endregion
-
+            
             #region Adjust the position
 
             //Tries to adjust the position/size of the window, centers on screen otherwise.
@@ -299,7 +293,7 @@ namespace ScreenToGif.Windows
             WelcomeTextBlock.Text = LocalizationHelper.Get(Humanizer.WelcomeInfo());
             SymbolTextBlock.Text = Humanizer.Welcome();
         }
-
+        
         private void Window_Activated(object sender, EventArgs e)
         {
             lock (ActivateLock)
@@ -379,6 +373,7 @@ namespace ScreenToGif.Windows
             //TODO: What if there's any processing happening? I need to try to stop.
 
             Pause();
+            ClosePanel();
 
             if (Project != null && Project.Any)
             {
@@ -396,10 +391,7 @@ namespace ScreenToGif.Windows
                 //Remove the ActionStack.
                 ActionStack.Clear();
             }
-
-            //Stop all timers.
-            _searchTimer?.Stop();
-
+            
             //Manually get the position/size of the window, so it's possible opening multiple instances.
             UserSettings.All.EditorTop = Top;
             UserSettings.All.EditorLeft = Left;
@@ -481,40 +473,7 @@ namespace ScreenToGif.Windows
             if (_timerPreview != null || !NotPreviewing)
                 (FindResource("Command.Play") as RoutedUICommand)?.Execute(null, this);
         }
-
-        private async void SearchTimer_Tick(object sender, EventArgs e)
-        {
-            if (!IsLoaded)
-                return;
-
-            _searchTimer.Stop();
-
-            await Task.Run(() =>
-            {
-                try
-                {
-                    //Check if there's a file with the same path.
-                    var exists = File.Exists(Path.Combine(GetOutputFolder(), GetOutputFilename() + GetOutputExtension()));
-
-                    Dispatcher.Invoke(() =>
-                    {
-                        FileExistsGrid.Visibility = exists ? Visibility.Visible : Visibility.Collapsed;
-                        StatusList.Remove(StatusType.Warning);
-                    });
-                }
-                catch (Exception ex)
-                {
-                    LogWriter.Log(ex, "Check if exists");
-
-                    Dispatcher.Invoke(() =>
-                    {
-                        StatusList.Warning("Filename inconsistency: " + ex.Message);
-                        FileExistsGrid.Visibility = Visibility.Collapsed;
-                    });
-                }
-            });
-        }
-
+        
         private void System_PowerModeChanged(object sender, PowerModeChangedEventArgs e)
         {
             if (e.Mode == PowerModes.Suspend)
@@ -876,9 +835,9 @@ namespace ScreenToGif.Windows
                 AddExtension = true,
                 CheckFileExists = true,
                 Title = LocalizationHelper.Get("S.Editor.File.OpenMedia"),
-                Filter = $"{LocalizationHelper.Get("S.Editor.File.All")} (*.apng, *.avi, *.bmp, *.gif, *.jpg, *.jpeg, *.mkv, *.mp4, *.png, *.webm, *.wmv)|*.apng;*.avi;*.bmp;*.gif;*.jpg;*.jpeg;*.mkv;*.mp4;*.png;*.webm;*.wmv|" +
+                Filter = $"{LocalizationHelper.Get("S.Editor.File.All")} (*.apng, *.avi, *.bmp, *.gif, *.jpg, *.jpeg, *.mkv, *.mp4, *.png, *.webp, *.webm, *.wmv)|*.apng;*.avi;*.bmp;*.gif;*.jpg;*.jpeg;*.mkv;*.mp4;*.png;*.webp;*.webm;*.wmv|" +
                          $"{LocalizationHelper.Get("S.Editor.File.Image")} (*.apng, *.bmp, *.gif, *.jpg, *.jpeg, *.png)|*.apng;*.bmp;*.gif;*.jpg;*.jpeg;*.png|" +
-                         $"{LocalizationHelper.Get("S.Editor.File.Video")} (*.avi, *.mkv, *.mp4, *.webm, *.wmv)|*.avi;*.mkv;*.mp4;*.webm;*.wmv",
+                         $"{LocalizationHelper.Get("S.Editor.File.Video")} (*.avi, *.mkv, *.mp4, *.webp, *.webm, *.wmv)|*.avi;*.mkv;*.mp4;*.webp;*.webm;*.wmv",
             };
 
             var result = ofd.ShowDialog();
@@ -887,14 +846,14 @@ namespace ScreenToGif.Windows
 
             var extensionList = ofd.FileNames.Select(Path.GetExtension).ToList();
 
-            var media = new[] { "apng", "avi", "bmp", "gif", "jpg", "jpeg", "mkv", "mp4", "png", "webm", "wmv" };
+            var media = new[] { "apng", "avi", "bmp", "gif", "jpg", "jpeg", "mkv", "mp4", "png", "webp", "webm", "wmv" };
 
             var projectCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && (x.Equals("stg") || x.Equals("zip")));
             var mediaCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && media.Contains(x));
 
             if (projectCount != 0 && mediaCount != 0)
             {
-                Dispatcher.Invoke(() => StatusList.Warning(FindResource("S.Editor.InvalidLoadingFiles").ToString()));
+                Dispatcher.Invoke(() => StatusList.Warning(LocalizationHelper.Get("S.Editor.InvalidLoadingFiles")));
                 return;
             }
 
@@ -920,340 +879,7 @@ namespace ScreenToGif.Windows
         {
             Pause();
 
-            if (!Util.Other.IsFfmpegPresent())
-                SystemEncoderRadioButton.IsChecked = true;
-
-            SaveType_Checked(null, null);
-
             ShowPanel(PanelType.SaveAs, LocalizationHelper.Get("S.Editor.File.Save", true), "Vector.Save", SaveAsButton_Click);
-        }
-
-        private void SaveType_Checked(object sender, RoutedEventArgs e)
-        {
-            if (!IsLoaded)
-                return;
-
-            switch (UserSettings.All.SaveType)
-            {
-                case Export.Gif:
-                {
-                    UserSettings.All.LatestExtension = ".gif";
-
-                    if (FfmpegGifEncoderRadioButton.IsChecked == true)
-                    {
-                        UpdateFfmpegPresetsList();
-                        SelectDefaultFfmpegPreset();
-                    }
-                    break;
-                }
-                case Export.Apng:
-                {
-                    if (FfmpegApngEncoderRadioButton.IsChecked == true)
-                    {
-                        UpdateFfmpegPresetsList();
-                        SelectDefaultFfmpegPreset();
-                    }
-                    break;
-                }
-                case Export.Video:
-                {
-                    if (SystemEncoderRadioButton.IsChecked == true)
-                    {
-                        UserSettings.All.LatestVideoExtension = ".avi";
-                        FileTypeVideoComboBox.IsEnabled = false;
-                    }
-                    else
-                    {
-                        FileTypeVideoComboBox.IsEnabled = true;
-
-                        if (FileTypeVideoComboBox.Items == null || !FileTypeVideoComboBox.Items.OfType<string>().Contains(UserSettings.All.LatestVideoExtension))
-                            UserSettings.All.LatestVideoExtension = ".mp4";
-
-                        UpdateFfmpegPresetsList();
-                        SelectDefaultFfmpegPreset();
-                    }
-
-                    break;
-                }
-                case Export.Images:
-                    UserSettings.All.LatestImageExtension = UserSettings.All.ZipImages ? ".zip" : ".png";
-                    break;
-                case Export.Project:
-                {
-                    if (UserSettings.All.LatestProjectExtension != ".stg" && UserSettings.All.LatestProjectExtension != ".zip")
-                        UserSettings.All.LatestProjectExtension = ".stg";
-
-                    break;
-                }
-                case Export.Photoshop:
-                    UserSettings.All.LatestPhotoshopExtension = ".psd";
-                    break;
-            }
-
-            FilenameTextBox_TextChanged(null, null);
-        }
-
-        private void VideoEncoderRadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-            if (!IsLoaded)
-                return;
-
-            SaveType_Checked(sender, e);
-        }
-
-        private void FfmpegPresetsComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var tag = (sender as Control)?.Tag as string;
-
-            switch (tag)
-            {
-                case ".gif":
-                    var gif = FfmpegGifPresetsComboBox.SelectedItem as FfmpegPreset;
-
-                    FfmpegGifParameterTextBox.IsEnabled = gif != null;
-                    FfmpegGifParameterTextBox.Text = gif?.Parameters ?? "";
-                    break;
-                case ".apng":
-                    var apng = FfmpegApngPresetsComboBox.SelectedItem as FfmpegPreset;
-
-                    FfmpegApngParameterTextBox.IsEnabled = apng != null;
-                    FfmpegApngParameterTextBox.Text = apng?.Parameters ?? "";
-                    break;
-                default:
-                    var video = FfmpegPresetsComboBox.SelectedItem as FfmpegPreset;
-
-                    FfmpegParameterTextBox.IsEnabled = video != null;
-                    FfmpegParameterTextBox.Text = video?.Parameters ?? "";
-                    break;
-            }
-        }
-
-        private void AddPreset_Click(object sender, RoutedEventArgs e)
-        {
-            var tag = (sender as Control)?.Tag as string;
-
-            var dialog = new FfmpegPresetDialog
-            {
-                Extension = tag ?? UserSettings.All.LatestVideoExtension,
-                Owner = this
-            };
-
-            var result = dialog.ShowDialog();
-
-            if (!result.HasValue || !result.Value)
-                return;
-
-            UpdateFfmpegPresetsList();
-            SelectDefaultFfmpegPreset();
-        }
-
-        private void SavePreset_Click(object sender, RoutedEventArgs e)
-        {
-            PersistFfmpegPreset((sender as Control)?.Tag as string);
-        }
-
-        private void EditPreset_Click(object sender, RoutedEventArgs e)
-        {
-            var tag = (sender as Control)?.Tag as string;
-            var preset = (tag == ".gif" ? FfmpegGifPresetsComboBox : tag == ".apng" ? FfmpegApngPresetsComboBox : FfmpegPresetsComboBox).SelectedItem as FfmpegPreset;
-
-            if (preset == null)
-                return;
-
-            var dialog = new FfmpegPresetDialog
-            {
-                IsEditing = true,
-                CurrentPreset = preset,
-                Extension = tag ?? UserSettings.All.LatestVideoExtension,
-                Owner = this
-            };
-
-            var result = dialog.ShowDialog();
-
-            if (!result.HasValue || !result.Value)
-                return;
-
-            UpdateFfmpegPresetsList();
-            SelectDefaultFfmpegPreset();
-        }
-
-        private void RemovePreset_Click(object sender, RoutedEventArgs e)
-        {
-            if (!Dialog.Ask(LocalizationHelper.Get("S.SaveAs.Presets.Remove.Title"), LocalizationHelper.Get("S.SaveAs.Presets.Remove.Header"), LocalizationHelper.Get("S.SaveAs.Presets.Remove.Message")))
-                return;
-
-            RemoveFfmpegPreset((sender as Control)?.Tag as string);
-        }
-
-        private void ResetPreset_Click(object sender, RoutedEventArgs e)
-        {
-            if (!Dialog.Ask(LocalizationHelper.Get("S.SaveAs.Presets.Reset.Title"), LocalizationHelper.Get("S.SaveAs.Presets.Reset.Header"), LocalizationHelper.Get("S.SaveAs.Presets.Reset.Message")))
-                return;
-
-            ResetFfmpegPreset((sender as Control)?.Tag as string);
-        }
-
-        private void ChooseLocation_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                var output = GetOutputFolder();
-
-                if (output.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
-                    output = "";
-
-                //It's only a relative path if not null/empty and there's no root folder declared.
-                var isRelative = !string.IsNullOrWhiteSpace(output) && !Path.IsPathRooted(output);
-                var notAlt = !string.IsNullOrWhiteSpace(output) && GetOutputFolder().Contains(Path.DirectorySeparatorChar);
-
-                var initial = Directory.Exists(output) ? output : Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-
-                if ((Keyboard.Modifiers & ModifierKeys.Shift) == 0)
-                {
-                    #region Select folder
-
-                    var fs = new FolderSelector
-                    {
-                        Description = LocalizationHelper.Get("S.SaveAs.File.SelectFolder"),
-                        DefaultFolder = isRelative ? Path.GetFullPath(initial) : initial,
-                        SelectedPath = isRelative ? Path.GetFullPath(initial) : initial
-                    };
-
-                    if (!fs.ShowDialog())
-                        return;
-
-                    SetOutputFolder(fs.SelectedPath);
-                    ChooseLocatioButton.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
-
-                    #endregion
-                }
-                else
-                {
-                    #region Save folder and file
-
-                    var sfd = new SaveFileDialog
-                    {
-                        FileName = GetOutputFilename(),
-                        InitialDirectory = isRelative ? Path.GetFullPath(initial) : initial
-                    };
-
-                    #region Extensions
-
-                    switch (UserSettings.All.SaveType)
-                    {
-                        case Export.Gif:
-                            sfd.Filter = $"{LocalizationHelper.Get("S.Editor.File.Gif")} (.gif)|*.gif";
-                            sfd.DefaultExt = ".gif";
-                            break;
-                        case Export.Apng:
-                            sfd.Filter = string.Format("{0}|*.png|{0}|*.apng", LocalizationHelper.Get("S.Editor.File.Apng"));
-                            sfd.DefaultExt = UserSettings.All.LatestApngExtension ?? ".png";
-                            break;
-                        case Export.Video:
-                            sfd.Filter = FfmpegEncoderRadioButton.IsChecked == true ?
-                                $"{LocalizationHelper.Get("S.Editor.File.Avi")} (.avi)|*.avi|{LocalizationHelper.Get("S.Editor.File.Mkv")} (.mkv)|*.mkv|" +
-                                $"{LocalizationHelper.Get("S.Editor.File.Mp4")} (.mp4)|*.mp4|{LocalizationHelper.Get("S.Editor.File.Webm")} (.webm)|*.webm|{LocalizationHelper.Get("S.Editor.File.Wmv")} (.wmv)|*.wmv" :
-                                $"{LocalizationHelper.Get("S.Editor.File.Avi")} (.avi)|*.avi";
-                            sfd.DefaultExt = FfmpegEncoderRadioButton.IsChecked == true ? FileTypeVideoComboBox.SelectedItem as string ?? ".mp4" : ".avi";
-                            sfd.FilterIndex = FfmpegEncoderRadioButton.IsChecked == true ? FileTypeVideoComboBox.SelectedIndex + 1 : 0;
-                            break;
-                        case Export.Images:
-                            sfd.Filter = UserSettings.All.ZipImages ? $"{LocalizationHelper.Get("S.Editor.File.Image.Zip")} (.zip)|*.zip" : $"{LocalizationHelper.Get("S.Editor.File.Image.Png")} (.png)|*.png";
-                            sfd.DefaultExt = UserSettings.All.ZipImages ? ".zip" : ".png";
-                            break;
-                        case Export.Project:
-                            sfd.Filter = $"{LocalizationHelper.Get("S.Editor.File.Project")} (.stg)|*.stg|{LocalizationHelper.Get("S.Editor.File.Project.Zip")} (.zip)|*.zip";
-                            sfd.DefaultExt = ".stg";
-                            break;
-                        case Export.Photoshop:
-                            sfd.Filter = $"{LocalizationHelper.Get("S.Editor.File.Psd")} (.psd)|*.psd";
-                            sfd.DefaultExt = ".psd";
-                            break;
-                    }
-
-                    #endregion
-
-                    var result = sfd.ShowDialog();
-
-                    if (!result.HasValue || !result.Value)
-                        return;
-
-                    //TODO: process output before setting to property?
-
-                    SetOutputFolder(Path.GetDirectoryName(sfd.FileName));
-                    SetOutputFilename(Path.GetFileNameWithoutExtension(sfd.FileName));
-                    SetOverwrite(File.Exists(sfd.FileName));
-                    SetOutputExtension(Path.GetExtension(sfd.FileName));
-                    SaveAsButton_Click(sender, e);
-
-                    #endregion
-                }
-
-                //Converts to a relative path again.
-                if (isRelative && !string.IsNullOrWhiteSpace(GetOutputFolder()))
-                {
-                    var selected = new Uri(GetOutputFolder());
-                    var baseFolder = new Uri(AppDomain.CurrentDomain.BaseDirectory);
-                    var relativeFolder = selected.AbsolutePath.TrimEnd(Path.DirectorySeparatorChar).TrimEnd(Path.AltDirectorySeparatorChar) == baseFolder.AbsolutePath.TrimEnd(Path.DirectorySeparatorChar).TrimEnd(Path.AltDirectorySeparatorChar) ?
-                        "." : Uri.UnescapeDataString(baseFolder.MakeRelativeUri(selected).ToString());
-
-                    //This app even returns you the correct slashes/backslashes.
-                    SetOutputFolder(notAlt ? relativeFolder : relativeFolder.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar));
-                }
-            }
-            catch (ArgumentException sx)
-            {
-                LogWriter.Log(sx, "Error while trying to choose the output path and filename.", GetOutputFolder() + GetOutputFilename());
-
-                SetOutputFolder("");
-                SetOutputFilename("");
-                throw;
-            }
-            catch (Exception ex)
-            {
-                LogWriter.Log(ex, "Error while trying to choose the output path and filename.", GetOutputFolder() + GetOutputFilename());
-                throw;
-            }
-        }
-
-        private void IncreaseNumber_Click(object sender, RoutedEventArgs e)
-        {
-            ChangeFileNumber(1);
-        }
-
-        private void DecreaseNumber_Click(object sender, RoutedEventArgs e)
-        {
-            ChangeFileNumber(-1);
-        }
-
-        private void FilenameTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (!IsLoaded)
-                return;
-
-            _searchTimer?.Stop();
-
-            //If no file will be saved, there's no need to verify.
-            if (!GetPickLocation())
-            {
-                FileExistsGrid.Visibility = Visibility.Collapsed;
-                StatusList.Remove(StatusType.Warning);
-                return;
-            }
-
-            _searchTimer?.Start();
-        }
-
-        private void FileHyperlink_OnClick(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Process.Start(Path.Combine(GetOutputFolder(), GetOutputFilename() + GetOutputExtension()));
-            }
-            catch (Exception ex)
-            {
-                LogWriter.Log(ex, "Open file that already exists using the hyperlink");
-            }
         }
 
         private async void SaveAsButton_Click(object sender, RoutedEventArgs e)
@@ -1262,387 +888,75 @@ namespace ScreenToGif.Windows
 
             try
             {
-                var output = GetOutputFolder();
-                var name = ReplaceRegexInName(GetOutputFilename());
-                var extension = GetOutputExtension();
-
-                var pickLocation = GetPickLocation();
-                var overwrite = GetOverwriteOnSave();
-                var projectToo = GetSaveAsProjectToo();
-                var upload = GetUploadFile();
-                var uploadService = GetUploadService();
-                var saveToClipboard = GetSaveToClipboard();
-                var copyType = GetCopyType();
-                var executeCommands = GetExecuteCustomCommands();
-                var commands = GetCustomCommands();
-
-                #region Common validations
-
-                if (!pickLocation && !upload && !saveToClipboard)
-                {
-                    StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Type"));
+                if (!(CustomContentControl.Content is ExportPanel panel))
                     return;
-                }
 
-                //Check external tools (Gifski, FFmpeg).
-                if (UserSettings.All.SaveType == Export.Video)
-                {
-                    if (UserSettings.All.VideoEncoder == VideoEncoderType.Ffmpg)
-                    {
-                        if (!Util.Other.IsFfmpegPresent())
-                        {
-                            StatusList.Warning(LocalizationHelper.Get("S.Editor.Warning.Ffmpeg"), () => App.MainViewModel.OpenOptions.Execute(Options.ExtrasIndex));
-                            return;
-                        }
+                //Lock UI.
+                IsLoading = true;
 
-                        if (!string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation) && UserSettings.All.FfmpegLocation.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
-                        {
-                            StatusList.Warning(LocalizationHelper.Get("S.Options.Extras.FfmpegLocation.Invalid"));
-                            return;
-                        }
-
-                        if (FfmpegPresetsComboBox.SelectionBoxItem == null)
-                        {
-                            StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Presets.Warning.NoSelection"));
-                            return;
-                        }
-                    }
-                    else
-                        UserSettings.All.LatestVideoExtension = ".avi";
-
-                    if (!new[] { ".avi", ".mp4", ".wmv", ".webm" }.Contains(UserSettings.All.LatestVideoExtension))
-                        UserSettings.All.LatestVideoExtension = (string)FileTypeVideoComboBox.SelectedItem;
-
-                    extension = GetOutputExtension();
-                }
-                else if (UserSettings.All.SaveType == Export.Gif)
-                {
-                    if (UserSettings.All.GifEncoder == GifEncoderType.FFmpeg)
-                    {
-                        if (!Util.Other.IsFfmpegPresent())
-                        {
-                            StatusList.Warning(LocalizationHelper.Get("S.Editor.Warning.Ffmpeg"), () => App.MainViewModel.OpenOptions.Execute(Options.ExtrasIndex));
-                            return;
-                        }
-
-                        if (!string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation) && UserSettings.All.FfmpegLocation.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
-                        {
-                            StatusList.Warning(LocalizationHelper.Get("S.Options.Extras.FfmpegLocation.Invalid"));
-                            return;
-                        }
-                    }
-                    else if (UserSettings.All.GifEncoder == GifEncoderType.Gifski)
-                    {
-                        if (!Util.Other.IsGifskiPresent())
-                        {
-                            StatusList.Warning(LocalizationHelper.Get("S.Editor.Warning.Gifski"), () => App.MainViewModel.OpenOptions.Execute(Options.ExtrasIndex));
-                            return;
-                        }
-
-                        if (!string.IsNullOrWhiteSpace(UserSettings.All.GifskiLocation) && UserSettings.All.GifskiLocation.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
-                        {
-                            StatusList.Warning(LocalizationHelper.Get("S.Options.Extras.GifskiLocation.Invalid"));
-                            return;
-                        }
-                    }
-                }
-                else if (UserSettings.All.SaveType == Export.Apng)
-                {
-                    if (UserSettings.All.ApngEncoder == ApngEncoderType.FFmpeg)
-                    {
-                        if (!Util.Other.IsFfmpegPresent())
-                        {
-                            StatusList.Warning(LocalizationHelper.Get("S.Editor.Warning.Ffmpeg"), () => App.MainViewModel.OpenOptions.Execute(Options.ExtrasIndex));
-                            return;
-                        }
-
-                        if (!string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation) && UserSettings.All.FfmpegLocation.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
-                        {
-                            StatusList.Warning(LocalizationHelper.Get("S.Options.Extras.FfmpegLocation.Invalid"));
-                            return;
-                        }
-                    }
-
-                    extension = GetOutputExtension();
-                }
-
-                if (pickLocation)
-                {
-                    if (string.IsNullOrWhiteSpace(output))
-                    {
-                        StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Folder"));
-                        return;
-                    }
-
-                    if (output.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
-                    {
-                        StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Folder.Invalid"));
-                        return;
-                    }
-
-                    if (!Directory.Exists(output))
-                    {
-                        StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Folder.NotExists"));
-                        return;
-                    }
-
-                    if (string.IsNullOrWhiteSpace(name))
-                    {
-                        StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Filename"));
-                        return;
-                    }
-
-                    if (name.ToCharArray().Any(x => Path.GetInvalidFileNameChars().Contains(x)))
-                    {
-                        StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Filename.Invalid"));
-                        return;
-                    }
-
-                    if (!overwrite && File.Exists(Path.Combine(output, name + GetOutputExtension())))
-                    {
-                        FileExistsGrid.Visibility = Visibility.Visible;
-                        StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Overwrite"));
-                        return;
-                    }
-
-                    if (projectToo)
-                    {
-                        if (!overwrite && File.Exists(Path.Combine(output, name + (UserSettings.All.LatestProjectExtension ?? ".stg"))))
-                        {
-                            StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Overwrite"));
-                            return;
-                        }
-                    }
-                }
-
-                if (upload)
-                {
-                    if (uploadService == UploadService.None)
-                    {
-                        StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Upload.None"));
-                        return;
-                    }
-
-                    if (uploadService == UploadService.Imgur && !await Imgur.IsAuthorized())
-                    {
-                        StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Upload.NotAuthorized"));
-                        return;
-                    }
-
-                    if (uploadService == UploadService.Yandex && !YandexDisk.IsAuthorized())
-                    {
-                        StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Upload.NotAuthorized"));
-                        return;
-                    }
-                }
-
-                if (saveToClipboard && copyType == CopyType.Link && !upload)
-                {
-                    StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Copy.Link"));
+                if (!await panel.IsValid())
                     return;
-                }
 
-                //When only copying to the clipboard or uploading.
-                if (!pickLocation)
-                {
-                    //If somehow this happens, try again.
-                    if (File.Exists(Path.Combine(output, name)))
-                        name = GetOutputFilename();
-                }
+                var preset = panel.GetPreset();
+                preset.OutputFilename = ReplaceRegexInName(preset.OutputFilename);
 
-                if (executeCommands)
-                {
-                    if (string.IsNullOrWhiteSpace(commands))
-                    {
-                        StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Commands.Empty"));
-                        return;
-                    }
-                }
+                //Set some transient properties.
+                var size = Project.Frames[0].Path.SizeOf();
+                preset.Width = size.Width;
+                preset.Height = size.Height;
+                preset.Scale = this.Scale();
 
-                #endregion
+                await Task.Run(() => SaveAsync(preset));
 
-                var filename = Path.Combine(output, name + extension);
-                var param = new Parameters
-                {
-                    Type = UserSettings.All.SaveType,
-                    Filename = filename,
-                    CopyToClipboard = saveToClipboard,
-                    CopyType = copyType,
-                    Upload = upload,
-                    UploadDestination = uploadService,
-                    ExecuteCommands = executeCommands,
-                    PostCommands = commands
-                };
+                ClosePanel();
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Error while exporting");
+                //TODO Error band.
+            }
+            finally
+            {
+                //Workaround for not disdabling the CanExecute of the panel.
+                _applyAction = SaveAsButton_Click;
 
+                //Return state of UI.
+                Cursor = Cursors.Arrow;
+                IsLoading = false;
+
+                HideProgress();
+
+                CommandManager.InvalidateRequerySuggested();
+            }
+
+            try
+            {
                 switch (UserSettings.All.SaveType)
                 {
                     case Export.Gif:
                     {
-                        param.EncoderType = UserSettings.All.GifEncoder;
-                        param.ColorQuantizationType = UserSettings.All.ColorQuantization;
-                        param.MaximumNumberColors = UserSettings.All.MaximumColors;
-                        param.UseGlobalColorTable = UserSettings.All.UseGlobalColorTable;
-                        param.RepeatCount = UserSettings.All.Looped ? (UserSettings.All.RepeatForever ? 0 : UserSettings.All.RepeatCount) : -1;
-                        param.EnableTransparency = UserSettings.All.EnableTransparency;
-                        param.TransparencyColor = UserSettings.All.SelectTransparencyColor ? UserSettings.All.TransparencyColor : new Color?();
-                        param.DetectUnchangedPixels = UserSettings.All.DetectUnchanged;
-                        param.ChromaKey = UserSettings.All.DetectUnchanged && UserSettings.All.PaintTransparent ? UserSettings.All.ChromaKey : new Color?();
-                        param.SamplingFactor = UserSettings.All.SamplingFactor;
-                        param.Command = "-vsync 2 -safe 0 -f concat -i \"{0}\" {1} -y \"{2}\"";
-                        param.ExtraParameters = FfmpegGifParameterTextBox.Text;
+                        //param.RepeatCount = UserSettings.All.Looped ? (UserSettings.All.RepeatForever ? 0 : UserSettings.All.RepeatCount) : -1;
+                        //param.TransparencyColor = UserSettings.All.SelectTransparencyColor ? UserSettings.All.TransparencyColor : new Color?();
+                        //param.ChromaKey = UserSettings.All.DetectUnchanged && UserSettings.All.PaintTransparent ? UserSettings.All.ChromaKey : new Color?();
+                        //param.Command = "-vsync 2 -safe 0 -f concat -i \"{0}\" {1} -y \"{2}\"";
                         break;
                     }
 
                     case Export.Apng:
                     {
-                        param.ApngEncoder = UserSettings.All.ApngEncoder;
-                        param.DetectUnchangedPixels = UserSettings.All.DetectUnchangedApng;
-                        param.ChromaKey = UserSettings.All.DetectUnchangedApng && UserSettings.All.PaintTransparentApng ? Colors.Transparent : new Color?();
-                        param.RepeatCount = UserSettings.All.LoopedApng ? (UserSettings.All.RepeatForeverApng ? 0 : UserSettings.All.RepeatCountApng) : -1;
-                        param.Command = "-vsync 2 -safe 0 -f concat -i \"{0}\" {1} -plays {2} -f apng -y \"{3}\"";
-                        param.ExtraParameters = FfmpegApngParameterTextBox.Text;
+                        //param.ChromaKey = UserSettings.All.DetectUnchangedApng && UserSettings.All.PaintTransparentApng ? Colors.Transparent : new Color?();
+                        //param.RepeatCount = UserSettings.All.LoopedApng ? (UserSettings.All.RepeatForeverApng ? 0 : UserSettings.All.RepeatCountApng) : -1;
+                        //param.Command = "-vsync 2 -safe 0 -f concat -i \"{0}\" {1} -plays {2} -f apng -y \"{3}\"";
                         break;
                     }
 
-                    case Export.Video:
-                    {
-                        var size = Project.Frames[0].Path.SizeOf();
-
-                        param.VideoEncoder = FfmpegEncoderRadioButton.IsChecked == true ? VideoEncoderType.Ffmpg : VideoEncoderType.AviStandalone;
-                        param.VideoQuality = (uint)AviQualitySlider.Value;
-                        param.FlipVideo = UserSettings.All.FlipVideo;
-                        param.Command = "-vsync 2 -safe 0 -f concat -i \"{0}\" {1} -y \"{2}\"";
-                        param.Height = size.Height.DivisibleByTwo();
-                        param.Width = size.Width.DivisibleByTwo();
-                        param.ExtraParameters = FfmpegParameterTextBox.Text;
-                        param.Framerate = UserSettings.All.OutputFramerate;
-                        break;
-                    }
-
-                    case Export.Images:
-                    {
-                        param.CompressionLevel = CompressionLevel.Optimal;
-
-                        if (!UserSettings.All.ZipImages)
-                        {
-                            //TODO: Check the verification for existing files. For the 4 types of files.
-                            if (FrameListView.SelectedItems.Count > 1 && !Dialog.Ask(LocalizationHelper.Get("S.SaveAs.Frames.Confirmation.Title"),
-                                    LocalizationHelper.Get("S.SaveAs.Frames.Confirmation.Instruction"), LocalizationHelper.GetWithFormat("S.SaveAs.Frames.Confirmation.Message", FrameListView.SelectedItems.Count)))
-                            {
-                                StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Canceled"));
-                                return;
-                            }
-
-                            var selected = SelectedFramesIndex();
-                            var padLength = selected.OrderByDescending(a => a).FirstOrDefault().ToString().Length;
-
-                            foreach (var index in selected)
-                            {
-                                var imageName = $"{name} {index.ToString().PadLeft(padLength, '0')}.png";
-                                var path = Path.Combine(UserSettings.All.LatestImageOutputFolder, imageName);
-
-                                if (UserSettings.All.OverwriteOnSaveImages)
-                                    continue;
-
-                                if (!File.Exists(path))
-                                    continue;
-
-                                FileExistsGrid.Visibility = Visibility.Visible;
-                                StatusList.Warning($"{LocalizationHelper.Get("S.SaveAs.Warning.Overwrite")} - {imageName}");
-                                return;
-                            }
-
-                            foreach (var index in selected)
-                            {
-                                var path = Path.Combine(UserSettings.All.LatestImageOutputFolder, $"{name} {index.ToString().PadLeft(padLength, '0')}.png");
-
-                                if (File.Exists(path))
-                                    File.Delete(path);
-
-                                File.Copy(FrameListView.Items.OfType<FrameListBoxItem>().ToList()[index].Image, path);
-                            }
-                        }
-                        else
-                        {
-                            var fileName = Path.Combine(UserSettings.All.LatestImageOutputFolder, name + ".zip");
-
-                            //Check if file exists.
-                            if (!UserSettings.All.OverwriteOnSaveImages)
-                            {
-                                if (File.Exists(fileName))
-                                {
-                                    FileExistsGrid.Visibility = Visibility.Visible;
-                                    StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Overwrite"));
-                                    return;
-                                }
-                            }
-
-                            if (File.Exists(fileName))
-                                File.Delete(fileName);
-
-                            //Temporary folder.
-                            var outPath = Path.Combine(Project.FullPath, "Export");
-
-                            if (Directory.Exists(outPath))
-                                Directory.Delete(outPath, true);
-
-                            var dir = Directory.CreateDirectory(outPath);
-
-                            //Get files.
-                            var selected = SelectedFramesIndex();
-                            var padLength = selected.OrderByDescending(a => a).FirstOrDefault().ToString().Length;
-
-                            foreach (var index in selected)
-                            {
-                                var path = Path.Combine(dir.FullName, $"{index.ToString().PadLeft(padLength, '0')}.png");
-                                File.Copy(FrameListView.Items.OfType<FrameListBoxItem>().ToList()[index].Image, path, true);
-                            }
-
-                            //Create Zip and clear temporary folder.
-                            ZipFile.CreateFromDirectory(dir.FullName, fileName);
-                            Directory.Delete(dir.FullName, true);
-                        }
-
-                        break;
-                    }
-
-                    case Export.Project:
-                    {
-                        Project.Persist();
-
-                        param.CompressionLevel = UserSettings.All.CompressionLevelProject;
-                        break;
-                    }
-
-                    case Export.Photoshop:
-                    {
-                        var size2 = Project.Frames[0].Path.SizeOf();
-
-                        param.Height = size2.Height;
-                        param.Width = size2.Width;
-                        param.Compress = UserSettings.All.CompressImage;
-                        param.SaveTimeline = UserSettings.All.SaveTimeline;
-                        break;
-                    }
-
-                    default:
-                        throw new ArgumentOutOfRangeException(nameof(UserSettings.All.SaveType), "Export type not selected.");
-                }
-
-                //Save, using the encoder.
-                if (UserSettings.All.SaveType != Export.Images)
-                {
-                    _saveDel = SaveAsync;
-                    _saveDel.BeginInvoke(Project.Frames, param, this.Scale(), projectToo, false, SaveCallback, null);
+                    //https://gist.github.com/nico-lab/19540daed6892b69f130213703679574
                 }
             }
             catch (Exception ex)
             {
-                LogWriter.Log(ex, "Save As");
-                ErrorDialog.Ok("ScreenToGif", "Error while trying to save", ex.Message, ex); //TODO: Translate
-            }
 
-            ClosePanel();
+            }
         }
 
 
@@ -1657,9 +971,9 @@ namespace ScreenToGif.Windows
                 AddExtension = true,
                 CheckFileExists = true,
                 Title = LocalizationHelper.Get("S.Editor.File.OpenMediaProject"),
-                Filter = $"{LocalizationHelper.Get("S.Editor.File.All")} (*.apng, *.avi, *.bmp, *.gif, *.jpg, *.jpeg, *.mkv, *.mp4, *.png, *.stg, *.webm, *.wmv, *.zip)|*.apng;*.avi;*.bmp;*.gif;*.jpg;*.jpeg;*.mkv;*.mp4;*.png;*.stg;*.webm;*.wmv;*.zip|" +
+                Filter = $"{LocalizationHelper.Get("S.Editor.File.All")} (*.apng, *.avi, *.bmp, *.gif, *.jpg, *.jpeg, *.mkv, *.mp4, *.png, *.stg, *.webp, *.webm, *.wmv, *.zip)|*.apng;*.avi;*.bmp;*.gif;*.jpg;*.jpeg;*.mkv;*.mp4;*.png;*.stg;*.webp;*.webm;*.wmv;*.zip|" +
                          $"{LocalizationHelper.Get("S.Editor.File.Image")} (*.apng, *.bmp, *.gif, *.jpg, *.jpeg, *.png)|*.apng;*.bmp;*.gif;*.jpg;*.jpeg;*.png|" +
-                         $"{LocalizationHelper.Get("S.Editor.File.Video")} (*.avi, *.mkv, *.mp4, *.webm, *.wmv)|*.avi;*.mkv;*.mp4;*.webm;*.wmv|" +
+                         $"{LocalizationHelper.Get("S.Editor.File.Video")} (*.avi, *.mkv, *.mp4, *.webp, *.webm, *.wmv)|*.avi;*.mkv;*.mp4;*.webp;*.webm;*.wmv|" +
                          $"{LocalizationHelper.Get("S.Editor.File.Project")} (*.stg, *.zip) |*.stg;*.zip",
             };
 
@@ -1669,7 +983,7 @@ namespace ScreenToGif.Windows
 
             var extensionList = ofd.FileNames.Select(s => Path.GetExtension(s).ToLowerInvariant()).ToList();
 
-            var media = new[] { "apng", "avi", "bmp", "gif", "jpg", "jpeg", "mkv", "mp4", "png", "webm", "wmv" };
+            var media = new[] { "apng", "avi", "bmp", "gif", "jpg", "jpeg", "mkv", "mp4", "png", "webp", "webm", "wmv" };
 
             var projectCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && (x.Equals(".stg") || x.Equals(".zip")));
             var mediaCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && media.Contains(x));
@@ -3371,7 +2685,7 @@ namespace ScreenToGif.Windows
 
         private void ApplyBorderButton_Click(object sender, RoutedEventArgs e)
         {
-            var model = BorderModel.FromSettings();
+            var model = BorderModel.FromSettings(true);
 
             if (Math.Abs(model.LeftThickness) < 0.001 && Math.Abs(model.TopThickness) < 0.001 && Math.Abs(model.RightThickness) < 0.001 && Math.Abs(model.BottomThickness) < 0.001)
             {
@@ -3524,29 +2838,21 @@ namespace ScreenToGif.Windows
 
             geometry = Geometry.Combine(geometry, rectangle, GeometryCombineMode.Xor, null);
 
+            //Sicne the geometry is bound to the screen, it needs to be scaled to follow the image scale.
+            geometry.Transform = new ScaleTransform(this.Scale() / ZoomBoxControl.ImageScale, this.Scale() / ZoomBoxControl.ImageScale);
+
             var clippedImage = new Image
             {
-                Height = image.PixelHeight,
-                Width = image.PixelWidth,
                 Source = image,
                 Clip = geometry
             };
-
-            //OverlayGrid.Children.Add(clippedImage);
-
-            //var m = PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice;
-
-            //var dpiTransform = new ScaleTransform(1 / m.M11, 1 / m.M22);
-            //if (dpiTransform.CanFreeze)
-            //    dpiTransform.Freeze();
-
-            //clippedImage.LayoutTransform = dpiTransform;
 
             clippedImage.Measure(new Size(image.Width, image.Height));
             clippedImage.Arrange(new Rect(clippedImage.DesiredSize));
 
             //The ScaleDiff (ScreenScale / ImageScale) must be calculated as if the screen has 96DPI, since the clippedImage is not being attached to any visual.
-            var imageRender = clippedImage.GetScaledRender(1 / ZoomBoxControl.ImageScale, ZoomBoxControl.ImageDpi, ZoomBoxControl.GetImageSize());
+            //var imageRender = clippedImage.GetScaledRender(1 / ZoomBoxControl.ImageScale, ZoomBoxControl.ImageDpi, ZoomBoxControl.GetImageSize());
+            var imageRender = clippedImage.GetScaledRender(1, ZoomBoxControl.ImageDpi, ZoomBoxControl.GetImageSize());
 
             #endregion
 
@@ -3751,14 +3057,7 @@ namespace ScreenToGif.Windows
                 Dialog.Ok("Open Image", "Impossible to open the image folder.", ex.Message);
             }
         }
-
-        private void ExportImages_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            ImagesRadioButton.IsChecked = true;
-
-            SaveAs_Executed(sender, e);
-        }
-
+        
         private void FrameListView_OnPreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Space)
@@ -3940,7 +3239,7 @@ namespace ScreenToGif.Windows
 
             var extensionList = Argument.FileNames.Select(Path.GetExtension).ToList();
 
-            var media = new[] { "jpg", "jpeg", "gif", "bmp", "png", "apng", "avi", "mkv", "mp4", "webm", "wmv" };
+            var media = new[] { "jpg", "jpeg", "gif", "bmp", "png", "apng", "avi", "mkv", "mp4", "webp", "webm", "wmv" };
 
             var projectCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && (x.Equals("stg") || x.Equals("zip")));
             var mediaCount = extensionList.Count(x => !string.IsNullOrEmpty(x) && media.Contains(x));
@@ -4534,6 +3833,7 @@ namespace ScreenToGif.Windows
                     case "mkv":
                     case "mp4":
                     case "wmv":
+                    case "webp":
                     case "webm":
                     {
                         listFrames = ImportFromVideo(fileName, pathTemp);
@@ -4836,7 +4136,7 @@ namespace ScreenToGif.Windows
             {
                 var metadata = ImageMethods.GetFrameMetadata(decoder, gifMetadata, index);
 
-                var bitmapSource = ImageMethods.MakeFrame(fullSize, rawFrame, metadata, baseFrame);
+                var bitmapSource = ImageMethods.MakeFrame(fullSize, rawFrame, metadata, baseFrame, 96D);
 
                 #region Disposal Method
 
@@ -4847,7 +4147,7 @@ namespace ScreenToGif.Windows
                         baseFrame = bitmapSource;
                         break;
                     case FrameDisposalMethod.RestoreBackground:
-                        baseFrame = ImageMethods.IsFullFrame(metadata, fullSize) ? null : ImageMethods.ClearArea(bitmapSource, metadata);
+                        baseFrame = ImageMethods.IsFullFrame(metadata, fullSize) ? null : ImageMethods.ClearArea(bitmapSource, metadata, 96D);
                         break;
                     case FrameDisposalMethod.RestorePrevious:
                         //Reuse same base frame.
@@ -5162,6 +4462,9 @@ namespace ScreenToGif.Windows
             foreach (var child in ActionInternalGrid.Children.OfType<Grid>().Where(x => x.Visibility == Visibility.Visible))
                 child.Visibility = Visibility.Collapsed;
 
+            CustomContentControl.Content = null;
+            CustomContentControl.Visibility = Visibility.Collapsed;
+
             ShapeDrawingCanvas.DeselectAll();
 
             #endregion
@@ -5190,7 +4493,7 @@ namespace ScreenToGif.Windows
 
             if (apply != null)
             {
-                ApplyButton.Text = LocalizationHelper.Get("S.Action.Apply");
+                ApplyButton.SetResourceReference(ExtendedButton.TextProperty, "S.Action.Apply");
                 ApplyButton.Icon = FindResource("Vector.Ok") as Brush;
                 _applyAction = apply;
 
@@ -5211,22 +4514,55 @@ namespace ScreenToGif.Windows
                     NewGrid.Visibility = Visibility.Visible;
                     break;
                 case PanelType.SaveAs:
-                    ApplyButton.Text = LocalizationHelper.Get("S.Action.Save");
+                    ApplyButton.SetResourceReference(ExtendedButton.TextProperty, "S.Action.Save");
                     ApplyButton.Icon = FindResource("Vector.Save") as Brush;
+                    
+                    //WARNING: Temporary!!!
+                    var grid = new ExportPanel();
+                    grid.Save += (sender, args) =>
+                    {
+                        SaveAs_Executed(null, null);
+                    };
+                    grid.Validated += (sender, args) =>
+                    {
+                        StatusList.Warning(LocalizationHelper.Get(args.MessageKey), args.Reason, args.Action);
+                    };
+                    grid.ValidationRemoved += (sender, args) =>
+                    {
+                        StatusList.Remove(StatusType.Warning, args.Reason);
+                    };
 
-                    //Change the preset selection.
-                    UpdateFfmpegPresetsList();
-                    SelectDefaultFfmpegPreset();
+                    var frameCountBinding = new Binding();
+                    frameCountBinding.ElementName = "FrameListView";
+                    frameCountBinding.Path = new PropertyPath("Items.Count");
+                    frameCountBinding.Mode = BindingMode.OneWay;
+                    frameCountBinding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                    BindingOperations.SetBinding(grid, ExportPanel.FrameCountProperty, frameCountBinding);
 
-                    SaveGrid.Visibility = Visibility.Visible;
+                    var durationBinding = new Binding();
+                    durationBinding.ElementName = "EditorWindow";
+                    durationBinding.Path = new PropertyPath("TotalDuration");
+                    durationBinding.Mode = BindingMode.OneWay;
+                    durationBinding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                    BindingOperations.SetBinding(grid, ExportPanel.TotalTimeProperty, durationBinding);
 
-                    // Focus the filename text box instead of automatically 
-                    // focusing the first child control in the panel.
-                    FocusSaveAsFilenameTextBox();
+                    var selectionCountBinding = new Binding();
+                    selectionCountBinding.ElementName = "FrameListView";
+                    selectionCountBinding.Path = new PropertyPath("SelectedItems.Count");
+                    selectionCountBinding.Mode = BindingMode.OneWay;
+                    selectionCountBinding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+                    BindingOperations.SetBinding(grid, ExportPanel.SelectionCountProperty, selectionCountBinding);
+
+                    CustomContentControl.Content = grid;
+                    CustomContentControl.Visibility = Visibility.Visible;
+
+                    //Focus the filename text box instead of automatically focusing the first child control in the panel.
+                    grid.InitialFocus();
+                    
                     focusFirstVisibleChild = false;
                     break;
                 case PanelType.LoadRecent:
-                    ApplyButton.Text = LocalizationHelper.Get("S.Action.Open");
+                    ApplyButton.SetResourceReference(ExtendedButton.TextProperty, "S.Action.Open");
                     ApplyButton.Icon = FindResource("Vector.Open") as Brush;
                     LoadRecentGrid.Visibility = Visibility.Visible;
 
@@ -5416,16 +4752,7 @@ namespace ScreenToGif.Windows
 
             CommandManager.InvalidateRequerySuggested();
         }
-
-        private void FocusSaveAsFilenameTextBox()
-        {
-            //Find the first visible filename text box and select it.
-            var box = new[] { OutputFilenameTextBox, OutputApngFilenameTextBox, OutputVideoFilenameTextBox, OutputImagesFilenameTextBox,
-                OutputProjectFilenameTextBox, OutputPsdFilenameTextBox }.FirstOrDefault(x => x.Visibility == Visibility.Visible);
-
-            box?.Focus();
-        }
-
+        
         private void ClosePanel(bool isCancel = false, bool removeEvent = false)
         {
             StatusList.Remove(StatusType.Warning);
@@ -5443,6 +4770,9 @@ namespace ScreenToGif.Windows
 
             BeginStoryboard(this.FindStoryboard("HidePanelStoryboard"), HandoffBehavior.Compose);
             BeginStoryboard(this.FindStoryboard("HideOverlayGridStoryboard"), HandoffBehavior.Compose);
+
+            CustomContentControl.Content = null;
+            CustomContentControl.Visibility = Visibility.Collapsed;
         }
 
         private List<int> SelectedFramesIndex()
@@ -5496,224 +4826,7 @@ namespace ScreenToGif.Windows
         }
 
         #endregion
-
-        #region FFmpeg presets
-
-        private void UpdateFfmpegPresetsList()
-        {
-            //Make sure it's not null first.
-            UserSettings.All.FfmpegPresets = UserSettings.All.FfmpegPresets ?? new ArrayList();
-
-            var list = UserSettings.All.FfmpegPresets.Cast<FfmpegPreset>().ToList();
-
-            //For each currently available FFmpeg output extension, make sure that a default preset is available.
-            foreach (var ext in FileTypeVideoComboBox.Items.OfType<string>())
-            {
-                var current = list.FirstOrDefault(f => f.Extension == ext);
-
-                if (current != null)
-                    continue;
-
-                //Creates a default preset.
-                current = new FfmpegPreset
-                {
-                    Extension = ext,
-                    LastSelected = true,
-                    IsDefault = true,
-                    Parameters = GetDefaultPresetParameters(ext),
-                };
-
-                list.Add(current);
-            }
-
-            //For the gif extension, make sure that a default preset is available.
-            var gifPreset = list.FirstOrDefault(f => f.Extension == ".gif");
-
-            if (gifPreset == null)
-            {
-                //Creates a default preset.
-                gifPreset = new FfmpegPreset
-                {
-                    Extension = ".gif",
-                    LastSelected = true,
-                    IsDefault = true,
-                    Parameters = GetDefaultPresetParameters(".gif"),
-                };
-
-                list.Add(gifPreset);
-            }
-
-            //For the apng extension, make sure that a default preset is available.
-            var apngPreset = list.FirstOrDefault(f => f.Extension == ".apng");
-
-            if (apngPreset == null)
-            {
-                //Creates a default preset.
-                apngPreset = new FfmpegPreset
-                {
-                    Extension = ".apng",
-                    LastSelected = true,
-                    IsDefault = true,
-                    Parameters = GetDefaultPresetParameters(".apng"),
-                };
-
-                list.Add(apngPreset);
-            }
-
-            //Persist the changes to the settings.
-            UserSettings.All.FfmpegPresets = new ArrayList(list.ToArray());
-
-            //Update the lists.
-            FfmpegPresetsComboBox.ItemsSource = list.Where(w => w.Extension == UserSettings.All.LatestVideoExtension).OrderBy(o => o.IsDefault).ThenBy(t => t.Name).ToList();
-            FfmpegGifPresetsComboBox.ItemsSource = list.Where(w => w.Extension == ".gif").OrderBy(o => o.IsDefault).ThenBy(t => t.Name).ToList();
-            FfmpegApngPresetsComboBox.ItemsSource = list.Where(w => w.Extension == ".apng").OrderBy(o => o.IsDefault).ThenBy(t => t.Name).ToList();
-        }
-
-        private void SelectDefaultFfmpegPreset()
-        {
-            FfmpegPresetsComboBox.SelectedItem = null;
-            FfmpegGifPresetsComboBox.SelectedItem = null;
-            FfmpegApngPresetsComboBox.SelectedItem = null;
-            FfmpegPresetsComboBox.SelectedItem = UserSettings.All.FfmpegPresets?.Cast<FfmpegPreset>().FirstOrDefault(w => w.Extension == UserSettings.All.LatestVideoExtension && w.LastSelected);
-            FfmpegGifPresetsComboBox.SelectedItem = UserSettings.All.FfmpegPresets?.Cast<FfmpegPreset>().FirstOrDefault(w => w.Extension == ".gif" && w.LastSelected);
-            FfmpegApngPresetsComboBox.SelectedItem = UserSettings.All.FfmpegPresets?.Cast<FfmpegPreset>().FirstOrDefault(w => w.Extension == ".apng" && w.LastSelected);
-        }
-
-        private void RefreshFfmpegPresetList(List<FfmpegPreset> list, string tag)
-        {
-            switch (tag)
-            {
-                case ".gif":
-                    FfmpegGifPresetsComboBox.ItemsSource = list.Where(w => w.Extension == ".gif").OrderBy(o => o.IsDefault).ThenBy(t => t.Name).ToList();
-                    break;
-                case ".apng":
-                    FfmpegApngPresetsComboBox.ItemsSource = list.Where(w => w.Extension == ".apng").OrderBy(o => o.IsDefault).ThenBy(t => t.Name).ToList();
-                    break;
-                default:
-                    FfmpegPresetsComboBox.ItemsSource = list.Where(w => w.Extension == UserSettings.All.LatestVideoExtension).OrderBy(o => o.IsDefault).ThenBy(t => t.Name).ToList();
-                    break;
-            }
-        }
-
-        /// <summary>
-        /// Persists changes to the current preset and sets it as the default for the current extension.
-        /// </summary>
-        private void PersistFfmpegPreset(string tag)
-        {
-            //Get the current preset.
-            var selected = (tag == ".gif" ? FfmpegGifPresetsComboBox : tag == ".apng" ? FfmpegApngPresetsComboBox : FfmpegPresetsComboBox).SelectedItem as FfmpegPreset;
-
-            if (selected == null)
-                return;
-
-            //Get all presets, so we can persist later.
-            var list = UserSettings.All.FfmpegPresets.Cast<FfmpegPreset>().ToList();
-            list.Remove(selected);
-
-            selected.Parameters = (tag == ".gif" ? FfmpegGifParameterTextBox : tag == ".apng" ? FfmpegApngParameterTextBox : FfmpegParameterTextBox).Text;
-            list.Add(selected);
-
-            //Set the current preset as last selected.
-            foreach (var preset in list)
-            {
-                if (preset.Extension != selected.Extension)
-                    continue;
-
-                preset.LastSelected = preset.Name == selected.Name;
-            }
-
-            //Persist the changes to the settings.
-            UserSettings.All.FfmpegPresets = new ArrayList(list.ToArray());
-
-            RefreshFfmpegPresetList(list, tag);
-        }
-
-        private void RemoveFfmpegPreset(string tag)
-        {
-            //Get the current preset.
-            var selected = (tag == ".gif" ? FfmpegGifPresetsComboBox : tag == ".apng" ? FfmpegApngPresetsComboBox : FfmpegPresetsComboBox).SelectedItem as FfmpegPreset;
-
-            if (selected == null)
-                return;
-
-            //Get all presets, so we can persist later.
-            var list = UserSettings.All.FfmpegPresets.Cast<FfmpegPreset>().ToList();
-            list.Remove(selected);
-
-            //Set other preset as last selected.
-            foreach (var preset in list)
-            {
-                if (preset.Extension != selected.Extension)
-                    continue;
-
-                preset.LastSelected = true;
-                break;
-            }
-
-            //Persist the changes to the settings.
-            UserSettings.All.FfmpegPresets = new ArrayList(list.ToArray());
-
-            RefreshFfmpegPresetList(list, tag);
-            SelectDefaultFfmpegPreset();
-        }
-
-        private void ResetFfmpegPreset(string tag)
-        {
-            //Get the current preset.
-            var selected = (tag == ".gif" ? FfmpegGifPresetsComboBox : tag == ".apng" ? FfmpegApngPresetsComboBox : FfmpegPresetsComboBox).SelectedItem as FfmpegPreset;
-
-            if (selected == null)
-                return;
-
-            //Get all presets, so we can persist later.
-            var list = UserSettings.All.FfmpegPresets.Cast<FfmpegPreset>().ToList();
-            list.Remove(selected);
-
-            //Reset its parameters.
-            selected.Parameters = GetDefaultPresetParameters(selected.Extension);
-            list.Add(selected);
-
-            //Set the current preset as last selected.
-            foreach (var preset in list)
-            {
-                if (preset.Extension != selected.Extension)
-                    continue;
-
-                preset.LastSelected = preset.Name == selected.Name;
-            }
-
-            //Persist the changes to the settings.
-            UserSettings.All.FfmpegPresets = new ArrayList(list.ToArray());
-
-            RefreshFfmpegPresetList(list, tag);
-            SelectDefaultFfmpegPreset();
-        }
-
-        private string GetDefaultPresetParameters(string extension)
-        {
-            switch (extension)
-            {
-                case ".apng":
-                    return "";
-                case ".avi":
-                    return "-c:v libx264 -b:v 1M -g 150 -pix_fmt yuv420p -vf \"pad=width={W}:height={H}:x=0:y=0:color=black\"";
-                case ".gif":
-                    return "-lavfi palettegen=stats_mode=diff[pal],[0:v][pal]paletteuse=new=1:diff_mode=rectangle";
-                case ".mkv":
-                    return "-f matroska -c:v libx265 -b:v 1M -g 150 -pix_fmt yuv420p -vf \"pad=width={W}:height={H}:x=0:y=0:color=black\"";
-                case ".mp4":
-                    return "-c:v libx264 -b:v 1M -g 150 -pix_fmt yuv420p -tile-columns 6 -frame-parallel 1 -vf \"pad=width={W}:height={H}:x=0:y=0:color=black\"";
-                case ".webm":
-                    return "-c:v libvpx-vp9 -b:v 1M -g 150 -pix_fmt yuv420p -tile-columns 6 -frame-parallel 1 -auto-alt-ref 1 -lag-in-frames 25 -vf \"pad=width={W}:height={H}:x=0:y=0:color=black\"";
-                case ".wmv":
-                    return "-c:v wmv2 -b:v 2M -g 150 -pix_fmt yuv420p -vf \"pad=width={W}:height={H}:x=0:y=0:color=black\"";
-                default:
-                    return "";
-            }
-        }
-
-        #endregion
-
+        
         #region Other
 
         public void NotificationUpdated()
@@ -5797,54 +4910,6 @@ namespace ScreenToGif.Windows
             return Project.Frames.Where(x => selectedIndexList.Contains(Project.Frames.IndexOf(x))).ToList();
         }
         
-        private void ChangeFileNumber(int change)
-        {
-            //If there's no filename declared, show the default one.
-            if (string.IsNullOrWhiteSpace(GetOutputFilename()))
-            {
-                SetOutputFilename(LocalizationHelper.Get("S.SaveAs.File.Animation"));
-                return;
-            }
-
-            var index = GetOutputFilename().Length;
-            int start = -1, end = -1;
-
-            //Detects the last number in a string.
-            foreach (var c in GetOutputFilename().Reverse())
-            {
-                if (char.IsNumber(c))
-                {
-                    if (end == -1)
-                        end = index;
-
-                    start = index - 1;
-                }
-                else if (start == index)
-                    break;
-
-                index--;
-            }
-
-            //If there's no number.
-            if (end == -1)
-            {
-                SetOutputFilename(GetOutputFilename() + $" ({change})");
-                return;
-            }
-
-            //If it's a negative number, include the signal.
-            if (start > 0 && GetOutputFilename().Substring(start - 1, 1).Equals("-"))
-                start--;
-
-            //Cut, convert, merge.
-            if (int.TryParse(GetOutputFilename().Substring(start, end - start), out var number))
-            {
-                var offset = start + number.ToString().Length;
-
-                SetOutputFilename(GetOutputFilename().Substring(0, start) + (number + change) + GetOutputFilename().Substring(offset, GetOutputFilename().Length - end));
-            }
-        }
-
         private void UpdateStatistics()
         {
             TotalDuration = TimeSpan.FromMilliseconds(Project.Frames.Sum(x => x.Delay));
@@ -5946,55 +5011,7 @@ namespace ScreenToGif.Windows
             ProgressHorizontalTextBlock.Text = GetProgressText(UserSettings.All.ProgressPrecision, UserSettings.All.ProgressShowTotal, UserSettings.All.ProgressFormat, UserSettings.All.ProgressDateFormat,
                 UserSettings.All.ProgressStartNumber, cumulative, total, FrameListView.SelectedIndex + 1);
         }
-
-        private string GetOutputFolder()
-        {
-            if (!GetPickLocation())
-                return Path.GetTempPath();
-
-            switch (UserSettings.All.SaveType)
-            {
-                case Export.Gif:
-                    return UserSettings.All.LatestOutputFolder ?? "";
-                case Export.Apng:
-                    return UserSettings.All.LatestApngOutputFolder ?? "";
-                case Export.Video:
-                    return UserSettings.All.LatestVideoOutputFolder ?? "";
-                case Export.Images:
-                    return UserSettings.All.LatestImageOutputFolder ?? "";
-                case Export.Project:
-                    return UserSettings.All.LatestProjectOutputFolder ?? "";
-                case Export.Photoshop:
-                    return UserSettings.All.LatestPhotoshopOutputFolder ?? "";
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        private string GetOutputFilename()
-        {
-            if (!GetPickLocation())
-                return Guid.NewGuid() + "";
-
-            switch (UserSettings.All.SaveType)
-            {
-                case Export.Gif:
-                    return UserSettings.All.LatestFilename ?? "";
-                case Export.Apng:
-                    return UserSettings.All.LatestApngFilename ?? "";
-                case Export.Video:
-                    return UserSettings.All.LatestVideoFilename ?? "";
-                case Export.Images:
-                    return UserSettings.All.LatestImageFilename ?? "";
-                case Export.Project:
-                    return UserSettings.All.LatestProjectFilename ?? "";
-                case Export.Photoshop:
-                    return UserSettings.All.LatestPhotoshopFilename ?? "";
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
+        
         /// <summary>
         /// Puts the current date/time into filename, replacing the format typed in between two questions marks.
         /// Such as 'Animation ?dd-MM-yy?' -> 'Animation 02-03-20'
@@ -6015,315 +5032,7 @@ namespace ScreenToGif.Windows
 
             return name.Replace(match.ToString(), date);
         }
-
-        private string GetOutputExtension()
-        {
-            switch (UserSettings.All.SaveType)
-            {
-                case Export.Gif:
-                    return UserSettings.All.LatestExtension ?? ".gif";
-                case Export.Apng:
-                    return UserSettings.All.LatestApngExtension ?? ".png";
-                case Export.Video:
-                    return UserSettings.All.LatestVideoExtension ?? ".mp4";
-                case Export.Images:
-                    return UserSettings.All.LatestImageExtension ?? ".png";
-                case Export.Project:
-                    return UserSettings.All.LatestProjectExtension ?? ".stg";
-                case Export.Photoshop:
-                    return UserSettings.All.LatestPhotoshopExtension ?? ".psd";
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        private void SetOutputFolder(string folder)
-        {
-            switch (UserSettings.All.SaveType)
-            {
-                case Export.Gif:
-                    UserSettings.All.LatestOutputFolder = folder;
-                    break;
-                case Export.Apng:
-                    UserSettings.All.LatestApngOutputFolder = folder;
-                    break;
-                case Export.Video:
-                    UserSettings.All.LatestVideoOutputFolder = folder;
-                    break;
-                case Export.Images:
-                    UserSettings.All.LatestImageOutputFolder = folder;
-                    break;
-                case Export.Project:
-                    UserSettings.All.LatestProjectOutputFolder = folder;
-                    break;
-                case Export.Photoshop:
-                    UserSettings.All.LatestPhotoshopOutputFolder = folder;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        private void SetOutputFilename(string filename)
-        {
-            switch (UserSettings.All.SaveType)
-            {
-                case Export.Gif:
-                    UserSettings.All.LatestFilename = filename;
-                    break;
-                case Export.Apng:
-                    UserSettings.All.LatestApngFilename = filename;
-                    break;
-                case Export.Video:
-                    UserSettings.All.LatestVideoFilename = filename;
-                    break;
-                case Export.Images:
-                    UserSettings.All.LatestImageFilename = filename;
-                    break;
-                case Export.Project:
-                    UserSettings.All.LatestProjectFilename = filename;
-                    break;
-                case Export.Photoshop:
-                    UserSettings.All.LatestPhotoshopFilename = filename;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        private void SetOutputExtension(string extension)
-        {
-            switch (UserSettings.All.SaveType)
-            {
-                case Export.Gif:
-                    UserSettings.All.LatestExtension = extension;
-                    break;
-                case Export.Apng:
-                    UserSettings.All.LatestApngExtension = extension;
-                    break;
-                case Export.Video:
-                    UserSettings.All.LatestVideoExtension = extension;
-                    break;
-                case Export.Images:
-                    UserSettings.All.LatestImageExtension = extension;
-                    break;
-                case Export.Project:
-                    UserSettings.All.LatestProjectExtension = extension;
-                    break;
-                case Export.Photoshop:
-                    UserSettings.All.LatestPhotoshopExtension = extension;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        private void SetOverwrite(bool overwrite)
-        {
-            switch (UserSettings.All.SaveType)
-            {
-                case Export.Gif:
-                    UserSettings.All.OverwriteOnSave = overwrite;
-                    break;
-                case Export.Apng:
-                    UserSettings.All.OverwriteOnSaveApng = overwrite;
-                    break;
-                case Export.Video:
-                    UserSettings.All.OverwriteOnSaveVideo = overwrite;
-                    break;
-                case Export.Images:
-                    UserSettings.All.OverwriteOnSaveImages = overwrite;
-                    break;
-                case Export.Project:
-                    UserSettings.All.OverwriteOnSaveProject = overwrite;
-                    break;
-                case Export.Photoshop:
-                    UserSettings.All.OverwriteOnSavePhotoshop = overwrite;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        private bool GetPickLocation()
-        {
-            switch (UserSettings.All.SaveType)
-            {
-                case Export.Gif:
-                    return UserSettings.All.PickLocation;
-                case Export.Apng:
-                    return UserSettings.All.PickLocationApng;
-                case Export.Video:
-                    return UserSettings.All.PickLocationVideo;
-                case Export.Photoshop:
-                    return UserSettings.All.PickLocationPhotoshop;
-                case Export.Project:
-                case Export.Images:
-                    return true;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        private bool GetOverwriteOnSave()
-        {
-            switch (UserSettings.All.SaveType)
-            {
-                case Export.Gif:
-                    return UserSettings.All.OverwriteOnSave;
-                case Export.Apng:
-                    return UserSettings.All.OverwriteOnSaveApng;
-                case Export.Video:
-                    return UserSettings.All.OverwriteOnSaveVideo;
-                case Export.Project:
-                    return UserSettings.All.OverwriteOnSaveProject;
-                case Export.Images:
-                    return UserSettings.All.OverwriteOnSaveImages;
-                case Export.Photoshop:
-                    return UserSettings.All.OverwriteOnSavePhotoshop;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        private bool GetSaveAsProjectToo()
-        {
-            switch (UserSettings.All.SaveType)
-            {
-                case Export.Gif:
-                    return UserSettings.All.SaveAsProjectToo;
-                case Export.Apng:
-                    return UserSettings.All.SaveAsProjectTooApng;
-                case Export.Video:
-                    return UserSettings.All.SaveAsProjectTooVideo;
-                case Export.Photoshop:
-                    return UserSettings.All.SaveAsProjectTooPhotoshop;
-                case Export.Project:
-                case Export.Images:
-                    return false;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        private bool GetUploadFile()
-        {
-            switch (UserSettings.All.SaveType)
-            {
-                case Export.Gif:
-                    return UserSettings.All.UploadFile;
-                case Export.Apng:
-                    return UserSettings.All.UploadFileApng;
-                case Export.Video:
-                case Export.Project:
-                case Export.Images:
-                case Export.Photoshop:
-                    return false;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        private UploadService GetUploadService()
-        {
-            switch (UserSettings.All.SaveType)
-            {
-                case Export.Gif:
-                    return UserSettings.All.LatestUploadService;
-                case Export.Apng:
-                    return UserSettings.All.LatestUploadServiceApng;
-                case Export.Video:
-                case Export.Project:
-                case Export.Images:
-                case Export.Photoshop:
-                    return UploadService.None;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        private bool GetSaveToClipboard()
-        {
-            switch (UserSettings.All.SaveType)
-            {
-                case Export.Gif:
-                    return UserSettings.All.SaveToClipboard;
-                case Export.Apng:
-                    return UserSettings.All.SaveToClipboardApng;
-                case Export.Video:
-                    return UserSettings.All.SaveToClipboardVideo;
-                case Export.Project:
-                    return UserSettings.All.SaveToClipboardProject;
-                case Export.Photoshop:
-                    return UserSettings.All.SaveToClipboardPhotoshop;
-                case Export.Images:
-                    return false;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        private CopyType GetCopyType()
-        {
-            switch (UserSettings.All.SaveType)
-            {
-                case Export.Gif:
-                    return UserSettings.All.LatestCopyType;
-                case Export.Apng:
-                    return UserSettings.All.LatestCopyTypeApng;
-                case Export.Video:
-                    return UserSettings.All.LatestCopyTypeVideo;
-                case Export.Project:
-                    return UserSettings.All.LatestCopyTypeProject;
-                case Export.Photoshop:
-                    return UserSettings.All.LatestCopyTypePhotoshop;
-                case Export.Images:
-                    return CopyType.File;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        private bool GetExecuteCustomCommands()
-        {
-            switch (UserSettings.All.SaveType)
-            {
-                case Export.Gif:
-                    return UserSettings.All.ExecuteCustomCommands;
-                case Export.Apng:
-                    return UserSettings.All.ExecuteCustomCommandsApng;
-                case Export.Video:
-                    return UserSettings.All.ExecuteCustomCommandsVideo;
-                case Export.Photoshop:
-                    return UserSettings.All.ExecuteCustomCommandsPhotoshop;
-                case Export.Project:
-                case Export.Images:
-                    return false;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        private string GetCustomCommands()
-        {
-            switch (UserSettings.All.SaveType)
-            {
-                case Export.Gif:
-                    return UserSettings.All.CustomCommands;
-                case Export.Apng:
-                    return UserSettings.All.CustomCommandsApng;
-                case Export.Video:
-                    return UserSettings.All.CustomCommandsVideo;
-                case Export.Photoshop:
-                    return UserSettings.All.CustomCommandsPhotoshop;
-                case Export.Project:
-                case Export.Images:
-                    return "";
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
+        
         #endregion
 
         #endregion
@@ -6426,67 +5135,157 @@ namespace ScreenToGif.Windows
 
         #region Async Save
 
-        private delegate bool SaveDelegate(List<FrameInfo> listFrames, Parameters param, double scale, bool projectToo, bool usePadding = false);
-
-        private SaveDelegate _saveDel;
-
-        private bool SaveAsync(List<FrameInfo> frames, Parameters param, double scale, bool projectToo, bool usePadding = false)
+        private void SaveAsync(ExportPreset preset)
         {
-            ShowProgress(LocalizationHelper.Get("S.Editor.PreparingSaving"), Project.Frames.Count, true);
+            ShowProgress(LocalizationHelper.Get("S.Editor.PreparingSaving"), 1, true);
 
-            Dispatcher.Invoke(() => IsLoading = true);
+            #region Filter out frames
 
-            #region Save
+            var indexes = new List<int>();
 
-            try
+            if (preset.ExportPartially)
             {
-                //Copy the frames, so it can be manipulated without problem.
-                var copied = Project.CopyToExport(usePadding, param.Type == Export.Project, param.Type == Export.Gif && param.EncoderType == GifEncoderType.ScreenToGif);
-
-                EncodingManager.StartEncoding(copied, param, scale);
-
-                if (projectToo)
+                switch (preset.PartialExport)
                 {
-                    var proParam = new Parameters
+                    case PartialExportType.FrameExpression:
                     {
-                        Type = Export.Project,
-                        Filename = Path.Combine(GetOutputFolder(), GetOutputFilename() + (UserSettings.All.LatestProjectExtension ?? ".stg")),
-                        CompressionLevel = UserSettings.All.CompressionLevelProject,
-                    };
+                        var blocks = preset.PartialExportFrameExpression.Split(new [] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
-                    //Copy the frames, so it can be manipulated without problem.
-                    var copied2 = Project.CopyToExport(usePadding, true);
+                        foreach (var block in blocks)
+                        {
+                            //Frame range.
+                            if (block.Contains("-"))
+                            {
+                                var subs = block.Split(new[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
 
-                    EncodingManager.StartEncoding(copied2, proParam, scale);
+                                if (!int.TryParse(subs[0], out var start) || !int.TryParse(subs[1], out var end))
+                                    continue;
+
+                                if (start == end) 
+                                {
+                                    //Single frame.
+                                    indexes.Add(start); //indexes.Add(frames[start]);
+                                }
+                                else if (start < end) 
+                                {
+                                    //Normal range.
+                                    for (var i = start; i <= end; i++)
+                                        indexes.Add(i); //indexes.Add(frames[i]);
+                                }
+                                else 
+                                {
+                                    //Reversed range.
+                                    //The CopyToExport() method bellow has no support for this yet, so it just copies the frames in order anyway.
+                                    for (var i = start; i >= end; i--)
+                                        indexes.Add(i); //indexes.Add(frames[i]);
+                                }
+                            }
+                            else
+                            {
+                                if (int.TryParse(block, out var number))
+                                    indexes.Add(number);
+                            }
+                        }
+
+                        break;
+                    }
+
+                    case PartialExportType.FrameRange:
+                    {
+                        indexes = Enumerable.Range(preset.PartialExportFrameStart, preset.PartialExportFrameEnd - preset.PartialExportFrameStart).ToList();
+                        break;
+                    }
+
+                    case PartialExportType.TimeRange:
+                    {
+                        var span = TimeSpan.Zero;
+
+                        //Playback mode.
+                        if (preset.PartialExportTimeStart < preset.PartialExportTimeEnd)
+                        {
+                            //Normal playback.
+                            for (var i = 0; i < Project.Frames.Count; i++)
+                            {
+                                if (span >= preset.PartialExportTimeStart && span <= preset.PartialExportTimeEnd)
+                                    indexes.Add(i);
+
+                                if (span > preset.PartialExportTimeEnd)
+                                    break;
+
+                                span = span.Add(TimeSpan.FromMilliseconds(Project.Frames[i].Delay));
+                            }
+                        }
+                        else
+                        {
+                            //Reversed playback.
+                            //The CopyToExport() method bellow has no support for this yet, so it just copies the frames in order anyway.
+                            span = TimeSpan.FromMilliseconds(Project.Frames.Sum(s => s.Delay));
+                            
+                            for (var i = Project.Frames.Count - 1; i >= 0 ; i--)
+                            {
+                                if (span >= preset.PartialExportTimeEnd && span <= preset.PartialExportTimeStart)
+                                    indexes.Add(i);
+
+                                if (span > preset.PartialExportTimeStart)
+                                    break;
+
+                                span = span.Subtract(TimeSpan.FromMilliseconds(Project.Frames[i].Delay));
+                            }
+                        }
+
+                        break;
+                    }
+
+                    case PartialExportType.Selection:
+                    {
+                        indexes = Dispatcher.Invoke(SelectedFramesIndex);
+                        break;
+                    }
                 }
             }
-            catch (Exception ex)
-            {
-                LogWriter.Log(ex, "Preparing to save the recording");
-
-                Dispatcher.Invoke(() => Dialog.Ok("Error While Saving", "Error while preparing to save", ex.Message)); //TODO: Translate
-            }
-
-            return projectToo;
 
             #endregion
-        }
 
-        private void SaveCallback(IAsyncResult ar)
-        {
-            var result = _saveDel.EndInvoke(ar);
+            #region Last minute validation
 
-            Dispatcher.Invoke(() =>
+            //Validates each file name when saving multiple images (if more than one image, that will not be zipped).
+            if (preset is ImagePreset imagePreset && !imagePreset.ZipFiles)
             {
-                Cursor = Cursors.Arrow;
-                IsLoading = false;
+                var output = Path.Combine(preset.OutputFolder, preset.OutputFilename);
+                var padSize = (Project.Frames.Count - 1).ToString().Length;
 
-                HideProgress();
+                if (indexes.Count > 1 ? indexes.Any(a => File.Exists($"{output} ({(a + "").PadLeft(padSize, '0')})" + preset.Extension)) : File.Exists(output + preset.Extension))
+                {
+                    Dispatcher.Invoke(() => StatusList.Warning("S.SaveAs.Warning.Overwrite"));
+                    return;
+                }
 
-                CommandManager.InvalidateRequerySuggested();
-            });
+                if (indexes.Count > 1 && !Dispatcher.Invoke(() => Dialog.Ask(LocalizationHelper.Get("S.SaveAs.Dialogs.Multiple.Title"), 
+                    LocalizationHelper.Get("S.SaveAs.Dialogs.Multiple.Instruction"), LocalizationHelper.GetWithFormat("S.SaveAs.Dialogs.Multiple.Message", indexes.Count))))
+                {
+                    Dispatcher.Invoke(() => StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Canceled")));
+                    return;
+                }
+            }
 
-            GC.Collect();
+            #endregion
+
+            //Copy the frames, so it can be manipulated without problem.
+            var copied = Project.CopyToExport(indexes, preset.Type == Export.Stg, preset.Type == Export.Gif && preset.Encoder == EncoderType.ScreenToGif);
+
+            EncodingManager.StartEncoding(copied, preset);
+
+            if (preset.ExportAsProjectToo)
+            {
+                var copiedAux = Project.CopyToExport(indexes, true);
+
+                //Get default project encoder settings.
+                var projectPreset = UserSettings.All.ExportPresets.OfType<StgPreset>().FirstOrDefault(f => f.IsSelectedForEncoder) ?? UserSettings.All.ExportPresets.OfType<StgPreset>().FirstOrDefault() ?? StgPreset.Default;
+                projectPreset.OutputFolder = preset.OutputFolder;
+                projectPreset.OutputFilename = preset.OutputFilename;
+
+                EncodingManager.StartEncoding(copiedAux, projectPreset); 
+            }
         }
 
         #endregion
@@ -7248,7 +6047,8 @@ namespace ScreenToGif.Windows
 
             ShowProgress(LocalizationHelper.Get("S.Editor.ApplyingOverlay"), Project.Frames.Count);
 
-            var frames = model.LeftThickness < 0 || model.TopThickness < 0 || model.RightThickness < 0 || model.BottomThickness < 0 ? Project.Frames : SelectedFrames();
+            //If the borders are negative or this was called by an automatic task, select all frames.
+            var frames = model.LeftThickness < 0 || model.TopThickness < 0 || model.RightThickness < 0 || model.BottomThickness < 0 || !model.IsManual ? Project.Frames : SelectedFrames();
             var scale = Math.Round(ZoomBoxControl.ImageDpi / 96d, 2); //ZoomBoxControl.ImageScale;
 
             //Since there could be a difference in the DPI of the UI vs the one from the image, I need to adjust the scale of the thickness.

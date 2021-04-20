@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using ScreenToGif.Model;
+using ScreenToGif.Settings;
 using ScreenToGif.Util;
 using Image = System.Drawing.Image;
 

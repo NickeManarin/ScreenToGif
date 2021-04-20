@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using ScreenToGif.Settings;
 
 namespace ScreenToGif.Util
 {
@@ -33,7 +34,13 @@ namespace ScreenToGif.Util
         /// </summary>
         public static string DownloadPath { get; set; }
 
+        /// <summary>
+        /// True if this instance should not try to display anything, besides trying to save the settings to disk.
+        /// </summary>
+        public static bool IsInSettingsMode { get; set; }
+        
         #endregion
+
 
         public static void Prepare(string[] args)
         {
@@ -97,6 +104,13 @@ namespace ScreenToGif.Util
                     {
                         //Forces using hardware mode.
                         UserSettings.All.DisableHardwareAcceleration = false;
+                        break;
+                    }
+
+                    case "-settings":
+                    {
+                        //Enables the mode which will try to save the settings using administrative privileges.
+                        IsInSettingsMode = true;
                         break;
                     }
 

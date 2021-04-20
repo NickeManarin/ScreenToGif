@@ -418,27 +418,27 @@
     <s:String x:Key="S.Options.Upload.Proxy.Password">Kodeord:</s:String>
     <s:String x:Key="S.Options.Upload.Get">Hent</s:String>
     <s:String x:Key="S.Options.Upload.PasteToken">Indsæt godkendelse her</s:String>
-    <s:String x:Key="S.Options.Upload.Authorize">Godkend</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Authorize">Godkend</s:String>
     <s:String x:Key="S.Options.Upload.Refresh">Opdatér</s:String>
     <s:String x:Key="S.Options.Upload.Clear">Ryd</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Anonymous">Imgur (anonymt)</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Direct">Direkte link</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Gifv">Gifv links i stedet for Gif links.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.ToAlbum">Upload til valgt album.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Album">Album:</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.AskMe">Bekræft upload</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.NotPossible">Det var ikke muligt at hente godkendelsen.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Missing">Angiv en godkendelse for at autorisere programmet.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Completed">Imgur godkendelse gennemført.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Error">Imgur godkendelse mislykkedes. Prøv igen, eller hent en ny godkendelse.</s:String>
-    <!--<s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Header">It was not possible to authorize the app</s:String>-->
-    <!--<s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Message">Check if you provided the correct token and if you have an internet connection.</s:String>-->
-    <s:String x:Key="S.Options.Upload.Imgur.Refresh.None">Opdatering kræver at du først har gennemført godkendelsen.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.NotAuthorized">Ikke godkendt</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Expired">Godkendelse udløber om {0}.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Valid">Godkendelse gyldig til {0}.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Removed">Godkendelse fjernet.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Error.AlbumLoad">Albumlisten kunne ikke indlæses.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Anonymous">Imgur (anonymt)</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Direct">Direkte link</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Gifv">Gifv links i stedet for Gif links.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.ToAlbum">Upload til valgt album.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Album">Album:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.AskMe">Bekræft upload</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.NotPossible">Det var ikke muligt at hente godkendelsen.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Token">Angiv en godkendelse for at autorisere programmet.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Completed">Imgur godkendelse gennemført.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Error">Imgur godkendelse mislykkedes. Prøv igen, eller hent en ny godkendelse.</s:String>
+    <!--<s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Header">It was not possible to authorize the app</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Message">Check if you provided the correct token and if you have an internet connection.</s:String>-->
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Refresh.None">Opdatering kræver at du først har gennemført godkendelsen.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.NotAuthorized">Ikke godkendt</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Expired">Godkendelse udløber om {0}.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Valid">Godkendelse gyldig til {0}.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Removed">Godkendelse fjernet.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.AlbumLoad">Albumlisten kunne ikke indlæses.</s:String>
     <s:String x:Key="S.Options.Upload.Gfycat.Anonymous">Gfycat (Anonymt)</s:String>
     <s:String x:Key="S.Options.Upload.Yandex.Token">Godkendelse:</s:String>
     <s:String x:Key="S.Options.Upload.Pick.Destination">Vælg destination</s:String>
@@ -1271,7 +1271,7 @@
     <!--<s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable">Use a global color table.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable.Info">May reduce the quality and/or size of the gif.</s:String>-->
     <s:String x:Key="S.SaveAs.GifOptions.Loop">Gentag:</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">Gentag gif</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Looped">Gentag gif</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Gentag for evigt</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Antal</s:String>
     <!--<s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable">Enable transparency.</s:String>-->
@@ -1298,9 +1298,9 @@
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">Zip billederne.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions">Psd valg</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Compress">Komprimér billedet.</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">Komprimér billedet med RLE algoritme.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Info">Komprimér billedet med RLE algoritme.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline">Gem tidsdata.</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">Eksportér både rammer og rammetid.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Info">Eksportér både rammer og rammetid.</s:String>
     <!--<s:String x:Key="S.SaveAs.ProjectOptions">Project options</s:String>-->
     
     <s:String x:Key="S.SaveAs.Extras">Ekstra:</s:String>
@@ -1363,9 +1363,9 @@
     <s:String x:Key="S.SaveAs.Warning.Canceled">Handlingen blev annulleret.</s:String>
     
     <!--SaveAs • Export-->
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">Eksporter rammer</s:String>
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Instruction">Vil du eksportere rammerne?</s:String>
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Message">Dette eksporterer {0} rammer til den valgte mappe.</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Title">Eksporter rammer</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">Vil du eksportere rammerne?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">Dette eksporterer {0} rammer til den valgte mappe.</s:String>
     
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">Kritik</s:String>

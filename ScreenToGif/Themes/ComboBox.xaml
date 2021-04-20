@@ -1,6 +1,7 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:c="clr-namespace:ScreenToGif.Controls">
+                    xmlns:c="clr-namespace:ScreenToGif.Controls"
+                    xmlns:v="clr-namespace:ScreenToGif.Util.Converters">
 
     <!--ComboBox Style-->
     <Style x:Key="Style.ToggleButton.ComboBox" TargetType="{x:Type ToggleButton}">
@@ -406,4 +407,61 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+
+    <v:StringToStaticResource x:Key="StringToStaticResource"/>
+    
+    <!--Common Templates-->
+    <DataTemplate x:Key="Template.ComboBox.Simple">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="33"/>
+                <ColumnDefinition Width="1"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="IconBorder" Background="{Binding ImageId, Converter={StaticResource StringToStaticResource}}"
+                    Margin="1,1,4,1" Height="22" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+            <Separator Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Width="1" Margin="0"/>
+            <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding Title}" Margin="10,0,2,0" Foreground="{DynamicResource Element.Foreground.Medium}" VerticalAlignment="Center"/>
+            <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Description}" Margin="10,0,2,0" Foreground="{DynamicResource Element.Foreground.Gray112}" 
+                       TextTrimming="CharacterEllipsis" FontSize="11" VerticalAlignment="Center"/>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="Template.ComboBox.Item">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="1"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock Grid.Column="0" Margin="1,1,5,1" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center">
+                <TextBlock.Text>
+                    <PriorityBinding>
+                        <Binding Path="NameKey" Converter="{StaticResource StringToStaticResource}"/>
+                        <Binding Path="Name"/>
+                    </PriorityBinding>
+                </TextBlock.Text>
+            </TextBlock>
+
+            <Separator Grid.Column="1" Width="1" Margin="0"/>
+            
+            <TextBlock Grid.Column="2" Margin="5,1,3,1" Foreground="{DynamicResource Element.Foreground.Gray112}" 
+                       TextTrimming="CharacterEllipsis" FontSize="11" VerticalAlignment="Center">
+                <TextBlock.Text>
+                    <PriorityBinding>
+                        <Binding Path="Parameter"/>
+                        <Binding Path="Command"/>
+                    </PriorityBinding>
+                </TextBlock.Text>
+            </TextBlock>
+        </Grid>
+    </DataTemplate>
 </ResourceDictionary>

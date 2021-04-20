@@ -1,15 +1,17 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:n="clr-namespace:ScreenToGif.Controls"
                     xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
                     xmlns:u="clr-namespace:ScreenToGif.Util"
                     xmlns:s="clr-namespace:System;assembly=mscorlib"
-                    xmlns:r="clr-namespace:ScreenToGif.Controls.Ribbon">
+                    xmlns:r="clr-namespace:ScreenToGif.Controls.Ribbon"
+                    xmlns:t="clr-namespace:ScreenToGif.Settings">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/ScreenToGif;component/Themes/Common.xaml"/>
         <ResourceDictionary Source="/ScreenToGif;component/Themes/EncoderListViewItem.xaml"/>
         <ResourceDictionary Source="/ScreenToGif;component/Themes/Ribbon.xaml"/>
+        <ResourceDictionary Source="/ScreenToGif;component/Themes/Controls/ExtendedComboBox.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <!--Converters-->
@@ -32,6 +34,7 @@
     <c:BoolAndToVisibility x:Key="BoolAndToVisibility"/>
     <c:IntToBool x:Key="IntToBool"/>
     <c:EnumToBool x:Key="EnumToBool"/>
+    <c:TimeSpanToTotalMilliseconds x:Key="TimeSpanToTotalMilliseconds"/>
 
     <!--Window Style -->
     <Style TargetType="{x:Type n:LightWindow}">
@@ -81,7 +84,7 @@
                                                    Foreground="{DynamicResource Element.Foreground.Gray112}">
                                         <TextBlock.Visibility>
                                             <MultiBinding Converter="{StaticResource BoolAndToVisibility}">
-                                                <Binding Source="{x:Static u:UserSettings.All}" Path="CaptureFrequency" Converter="{StaticResource EnumToBool}" ConverterParameter="{x:Static u:CaptureFrequency.Interaction}"/>
+                                                <Binding Source="{x:Static t:UserSettings.All}" Path="CaptureFrequency" Converter="{StaticResource EnumToBool}" ConverterParameter="{x:Static u:CaptureFrequency.Interaction}"/>
                                                 <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="FrameCount" Converter="{StaticResource IntToBool}" ConverterParameter="0"/>
                                             </MultiBinding>
                                         </TextBlock.Visibility>
@@ -146,6 +149,96 @@
         </Setter>
     </Style>
 
+    <!--ExtendedTexBox Style-->
+    <Style TargetType="{x:Type n:ExtendedTextBox}">
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
+        <Setter Property="Background" Value="{DynamicResource Element.Background}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource Element.Border}"/>
+        <Setter Property="Padding" Value="2"/>
+        <Setter Property="MinHeight" Value="23"/>
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="AllowDrop" Value="True"/>
+        <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type n:ExtendedTextBox}">
+                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" 
+                            VerticalAlignment="{TemplateBinding VerticalAlignment}" HorizontalAlignment="{TemplateBinding HorizontalAlignment}" SnapsToDevicePixels="True"
+                            Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" MinWidth="{TemplateBinding MinWidth}" MinHeight="{TemplateBinding MinHeight}">
+                        <Grid x:Name="InnerGrid">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalScrollBarVisibility="Hidden" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                            <TextBlock x:Name="WatermarkTextBlock" Text="{TemplateBinding Watermark}" IsHitTestVisible="False" Foreground="{DynamicResource Element.Foreground.Watermark}"
+                                       Padding="3,2" Visibility="Collapsed" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+
+                            <Path x:Name="InnerPath" Data="M 0,0 6,6 0,6 z" Fill="{DynamicResource Element.Border.Required}" HorizontalAlignment="Left" 
+                                  VerticalAlignment="Bottom" Opacity="0" ToolTip="{DynamicResource S.Required}"/>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsObligatory" Value="True"/>
+                                <Condition Property="Text" Value="{x:Static s:String.Empty}"/>
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource Element.Border.Required}"/>
+                            <Setter Property="Opacity" TargetName="InnerPath" Value="1"/>
+                        </MultiTrigger>
+                        <Trigger Property="IsReadOnly" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{DynamicResource Element.Background.ReadOnly}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" TargetName="border" Value="0.7"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource Element.Border.Hover}"/>
+                            <Setter Property="Fill" TargetName="InnerPath" Value="{DynamicResource Element.Border.Hover}"/>
+                        </Trigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Text" Value="{x:Static s:String.Empty}"/>
+                                <Condition Property="IsKeyboardFocused" Value="False"/>
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Visibility" TargetName="WatermarkTextBlock" Value="Visible"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Text" Value="{x:Null}"/>
+                                <Condition Property="IsKeyboardFocused" Value="False"/>
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="Visibility" TargetName="WatermarkTextBlock" Value="Visible"/>
+                        </MultiTrigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsKeyboardFocused" Value="True"/>
+                                <Condition Property="IsReadOnly" Value="False"/>
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource Element.Border.Pressed}"/>
+                            <Setter Property="Background" TargetName="border" Value="{DynamicResource Element.Background.Focused}"/>
+                            <Setter Property="Fill" TargetName="InnerPath" Value="{DynamicResource Element.Border.Pressed}"/>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
     <!--IntegerBox Style-->
     <Style TargetType="{x:Type n:IntegerBox}">
         <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -326,79 +419,96 @@
         </Style.Triggers>
     </Style>
 
-    <!--DoubleBox Style-->
-    <Style TargetType="{x:Type n:DoubleBox}">
+    <!--NullableIntegerBox Style-->
+    <Style TargetType="{x:Type n:NullableIntegerBox}" BasedOn="{StaticResource {x:Type n:ExtendedTextBox}}">
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-        <Setter Property="VerticalAlignment" Value="Stretch"/>
-        <Setter Property="HorizontalAlignment" Value="Stretch"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Height" Value="23"/>
-        <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
+    </Style>
+
+    <!--NullableIntegerUpDown Style-->
+    <Style TargetType="{x:Type n:NullableIntegerUpDown}">
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="Background" Value="{DynamicResource Element.Background}"/>
+        <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource Element.Border}"/>
-        <Setter Property="Padding" Value="2,0"/>
+        <Setter Property="BorderThickness" Value="1"/>
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type n:DoubleBox}">
-                    <Border x:Name="border" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" MinWidth="{TemplateBinding MinWidth}"
-                            BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
-                            Background="{TemplateBinding Background}" VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}" SnapsToDevicePixels="True">
-                        <Grid x:Name="InnerGrid">
-                            <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden"
-                                      VerticalScrollBarVisibility="Hidden" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                <ControlTemplate TargetType="{x:Type n:NullableIntegerUpDown}">
+                    <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"
+                            Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" MinWidth="{TemplateBinding MinWidth}">
+                        <Grid Background="{TemplateBinding Background}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="1"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="55*"/>
+                                <ColumnDefinition Width="1"/>
+                                <ColumnDefinition Width="45*" MinWidth="20" MaxWidth="25"/>
+                            </Grid.ColumnDefinitions>
 
-                            <Path x:Name="InnerPath" Data="M 0,0 6,6 0,6 z" Fill="{DynamicResource Element.Border.Required}" HorizontalAlignment="Left" 
-                                  VerticalAlignment="Bottom" Opacity="0" ToolTip="{DynamicResource S.Required}"/>
+                            <ScrollViewer Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" x:Name="PART_ContentHost" Focusable="False" 
+                                          HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"
+                                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+
+                            <Separator Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" x:Name="VeticalSeparator" Width="1" Margin="0" 
+                                       VerticalAlignment="Stretch" Visibility="Collapsed" BorderBrush="{DynamicResource Element.Border.Medium}"/>
+
+                            <RepeatButton Grid.Row="0" Grid.Column="2" x:Name="UpButton" Content="▲" IsTabStop="False" Focusable="False"
+                                          Style="{StaticResource Style.RepeatButton}" FontSize="8" VerticalContentAlignment="Center" 
+                                          BorderThickness="0" Padding="0,-1,0,0" Margin="0"/>
+
+                            <Separator Grid.Row="1" Grid.Column="2" x:Name="HorizontalSeparator" Height="1" Margin="0"
+                                       HorizontalAlignment="Stretch" Visibility="Collapsed" BorderBrush="{DynamicResource Element.Border.Medium}"/>
+
+                            <RepeatButton Grid.Row="2" Grid.Column="2" x:Name="DownButton" Content="▼" IsTabStop="False" Focusable="False"
+                                          Style="{StaticResource Style.RepeatButton}" FontSize="8" VerticalContentAlignment="Center" 
+                                          BorderThickness="0" Padding="0,-1,0,0" Margin="0"/>
                         </Grid>
                     </Border>
 
                     <ControlTemplate.Triggers>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsObligatory" Value="True"/>
-                                <Condition Property="Text" Value="{x:Static s:String.Empty}"/>
-                            </MultiTrigger.Conditions>
-
-                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource Element.Border.Required}"/>
-                            <Setter Property="Opacity" TargetName="InnerPath" Value="1"/>
-                        </MultiTrigger>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsObligatory" Value="True"/>
-                                <Condition Property="Value" Value="0"/>
-                            </MultiTrigger.Conditions>
-
-                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource Element.Border.Required}"/>
-                            <Setter Property="Opacity" TargetName="InnerPath" Value="1"/>
-                        </MultiTrigger>
-                        <Trigger Property="IsReadOnly" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="{DynamicResource Element.Background.ReadOnly}"/>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="VeticalSeparator" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger SourceName="UpButton" Property="IsMouseOver" Value="True">
+                            <Setter TargetName="HorizontalSeparator" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger SourceName="DownButton" Property="IsMouseOver" Value="True">
+                            <Setter TargetName="HorizontalSeparator"  Property="Visibility" Value="Visible"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" TargetName="border" Value="0.7"/>
+                            <Setter Property="Visibility" TargetName="UpButton" Value="Hidden"/>
+                            <Setter Property="Visibility" TargetName="DownButton" Value="Hidden"/>
+                            <Setter Property="Visibility" TargetName="HorizontalSeparator" Value="Visible"/>
                         </Trigger>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource Element.Border.Hover}"/>
-                            <Setter Property="Fill" TargetName="InnerPath" Value="{DynamicResource Element.Border.Hover}"/>
-                        </Trigger>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsKeyboardFocused" Value="True"/>
-                                <Condition Property="IsReadOnly" Value="False"/>
-                            </MultiTrigger.Conditions>
-
-                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource Element.Border.Pressed}"/>
-                            <Setter Property="Background" TargetName="border" Value="{DynamicResource Element.Background.Focused}"/>
-                            <Setter Property="Fill" TargetName="InnerPath" Value="{DynamicResource Element.Border.Pressed}"/>
-                        </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="{DynamicResource Element.Border.Hover}"/>
+            </Trigger>
+            <Trigger Property="IsKeyboardFocused" Value="True">
+                <Setter Property="Background" Value="{DynamicResource Element.Background.Focused}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.7"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <!--DoubleBox Style-->
+    <Style TargetType="{x:Type n:DoubleBox}" BasedOn="{StaticResource {x:Type n:ExtendedTextBox}}">
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
     </Style>
 
     <!--DoubleUpDown Style-->
@@ -481,96 +591,92 @@
         </Style.Triggers>
     </Style>
 
-    <!--ExtendedTexBox Style-->
-    <Style TargetType="{x:Type n:ExtendedTextBox}">
-        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-        <Setter Property="HorizontalContentAlignment" Value="Left"/>
-        <Setter Property="VerticalAlignment" Value="Stretch"/>
-        <Setter Property="HorizontalAlignment" Value="Stretch"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
+    <!--DecimalBox Style-->
+    <Style TargetType="{x:Type n:DecimalBox}" BasedOn="{StaticResource {x:Type n:ExtendedTextBox}}">
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+    </Style>
+
+    <!--DecimalUpDown Style-->
+    <Style TargetType="{x:Type n:DecimalUpDown}">
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="Background" Value="{DynamicResource Element.Background}"/>
+        <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource Element.Border}"/>
-        <Setter Property="Padding" Value="2"/>
-        <Setter Property="MinHeight" Value="23"/>
-        <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-        <Setter Property="AllowDrop" Value="True"/>
-        <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
-        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="BorderThickness" Value="1"/>
 
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type n:ExtendedTextBox}">
-                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" 
-                            VerticalAlignment="{TemplateBinding VerticalAlignment}" HorizontalAlignment="{TemplateBinding HorizontalAlignment}" SnapsToDevicePixels="True"
-                            Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" MinWidth="{TemplateBinding MinWidth}" MinHeight="{TemplateBinding MinHeight}">
-                        <Grid x:Name="InnerGrid">
-                            <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden"
-                                          VerticalScrollBarVisibility="Hidden" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                <ControlTemplate TargetType="{x:Type n:DecimalUpDown}">
+                    <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"
+                            Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" MinWidth="{TemplateBinding MinWidth}">
+                        <Grid Background="{TemplateBinding Background}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="1"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="55*"/>
+                                <ColumnDefinition Width="1"/>
+                                <ColumnDefinition Width="45*" MinWidth="20" MaxWidth="25"/>
+                            </Grid.ColumnDefinitions>
 
-                            <TextBlock x:Name="WatermarkTextBlock" Text="{TemplateBinding Watermark}" IsHitTestVisible="False" Foreground="{DynamicResource Element.Foreground.Watermark}"
-                                       Padding="3,2" Visibility="Collapsed"/>
+                            <ScrollViewer Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" x:Name="PART_ContentHost" Focusable="False" 
+                                          HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"
+                                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
 
-                            <Path x:Name="InnerPath" Data="M 0,0 6,6 0,6 z" Fill="{DynamicResource Element.Border.Required}" HorizontalAlignment="Left" 
-                                  VerticalAlignment="Bottom" Opacity="0" ToolTip="{DynamicResource S.Required}"/>
+                            <Separator Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" x:Name="VeticalSeparator" Width="1" Margin="0" 
+                                       VerticalAlignment="Stretch" Visibility="Collapsed" BorderBrush="{DynamicResource Element.Border.Medium}"/>
+
+                            <RepeatButton Grid.Row="0" Grid.Column="2" x:Name="UpButton" Content="▲" IsTabStop="False" Focusable="False"
+                                          Style="{StaticResource Style.RepeatButton}" FontSize="8" VerticalContentAlignment="Center" 
+                                          BorderThickness="0" Padding="0,-1,0,0" Margin="0"/>
+
+                            <Separator Grid.Row="1" Grid.Column="2" x:Name="HorizontalSeparator" Height="1" Margin="0"
+                                       HorizontalAlignment="Stretch" Visibility="Collapsed" BorderBrush="{DynamicResource Element.Border.Medium}"/>
+
+                            <RepeatButton Grid.Row="2" Grid.Column="2" x:Name="DownButton" Content="▼" IsTabStop="False" Focusable="False"
+                                          Style="{StaticResource Style.RepeatButton}" FontSize="8" VerticalContentAlignment="Center" 
+                                          BorderThickness="0" Padding="0,-1,0,0" Margin="0"/>
                         </Grid>
                     </Border>
 
                     <ControlTemplate.Triggers>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsObligatory" Value="True"/>
-                                <Condition Property="Text" Value="{x:Static s:String.Empty}"/>
-                            </MultiTrigger.Conditions>
-
-                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource Element.Border.Required}"/>
-                            <Setter Property="Opacity" TargetName="InnerPath" Value="1"/>
-                        </MultiTrigger>
-                        <Trigger Property="IsReadOnly" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="{DynamicResource Element.Background.ReadOnly}"/>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="VeticalSeparator" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger SourceName="UpButton" Property="IsMouseOver" Value="True">
+                            <Setter TargetName="HorizontalSeparator" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger SourceName="DownButton" Property="IsMouseOver" Value="True">
+                            <Setter TargetName="HorizontalSeparator"  Property="Visibility" Value="Visible"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" TargetName="border" Value="0.7"/>
+                            <Setter Property="Visibility" TargetName="UpButton" Value="Hidden"/>
+                            <Setter Property="Visibility" TargetName="DownButton" Value="Hidden"/>
+                            <Setter Property="Visibility" TargetName="HorizontalSeparator" Value="Visible"/>
                         </Trigger>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource Element.Border.Hover}"/>
-                            <Setter Property="Fill" TargetName="InnerPath" Value="{DynamicResource Element.Border.Hover}"/>
-                        </Trigger>
-
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="Text" Value="{x:Static s:String.Empty}"/>
-                                <Condition Property="IsKeyboardFocused" Value="False"/>
-                            </MultiTrigger.Conditions>
-
-                            <Setter Property="Visibility" TargetName="WatermarkTextBlock" Value="Visible"/>
-                        </MultiTrigger>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="Text" Value="{x:Null}"/>
-                                <Condition Property="IsKeyboardFocused" Value="False"/>
-                            </MultiTrigger.Conditions>
-
-                            <Setter Property="Visibility" TargetName="WatermarkTextBlock" Value="Visible"/>
-                        </MultiTrigger>
-
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsKeyboardFocused" Value="True"/>
-                                <Condition Property="IsReadOnly" Value="False"/>
-                            </MultiTrigger.Conditions>
-
-                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource Element.Border.Pressed}"/>
-                            <Setter Property="Background" TargetName="border" Value="{DynamicResource Element.Background.Focused}"/>
-                            <Setter Property="Fill" TargetName="InnerPath" Value="{DynamicResource Element.Border.Pressed}"/>
-                        </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
 
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="{DynamicResource Element.Border.Hover}"/>
+            </Trigger>
+            <Trigger Property="IsKeyboardFocused" Value="True">
+                <Setter Property="Background" Value="{DynamicResource Element.Background.Focused}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.7"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
     <!--HexaDecimalBox Style-->
     <Style TargetType="{x:Type n:HexadecimalBox}">
         <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -1429,7 +1535,7 @@
                         <!--When ExtendChrome, !IsDark, !IsSelected-->
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Source={x:Static u:UserSettings.All}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
+                                <Condition Binding="{Binding Source={x:Static t:UserSettings.All}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsDark}" Value="False"/>
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="False"/>
                             </MultiDataTrigger.Conditions>
@@ -1441,7 +1547,7 @@
                         <!--When ExtendChrome, !IsDark, IsMouseOver-->
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Source={x:Static u:UserSettings.All}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
+                                <Condition Binding="{Binding Source={x:Static t:UserSettings.All}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsDark}" Value="False"/>
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="True"/>
                             </MultiDataTrigger.Conditions>
@@ -1452,7 +1558,7 @@
                         <!--When ExtendChrome, !IsDark, IsSelected-->
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Source={x:Static u:UserSettings.All}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
+                                <Condition Binding="{Binding Source={x:Static t:UserSettings.All}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsDark}" Value="False"/>
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="True"/>
                             </MultiDataTrigger.Conditions>
@@ -1465,7 +1571,7 @@
                         <!--When ExtendChrome, IsDark, !IsSelected-->
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Source={x:Static u:UserSettings.All}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
+                                <Condition Binding="{Binding Source={x:Static t:UserSettings.All}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsDark}" Value="True"/>
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="False"/>
                             </MultiDataTrigger.Conditions>
@@ -1488,7 +1594,7 @@
                         <!--When ExtendChrome, IsDark, IsMouseOver-->
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Source={x:Static u:UserSettings.All}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
+                                <Condition Binding="{Binding Source={x:Static t:UserSettings.All}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsDark}" Value="True"/>
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="True"/>
                             </MultiDataTrigger.Conditions>
@@ -1499,7 +1605,7 @@
                         <!--When ExtendChrome, IsDark, IsSelected-->
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Source={x:Static u:UserSettings.All}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
+                                <Condition Binding="{Binding Source={x:Static t:UserSettings.All}, Path=EditorExtendChrome, FallbackValue=False}" Value="True"/>
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsDark}" Value="True"/>
                                 <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="True"/>
                             </MultiDataTrigger.Conditions>
@@ -2014,7 +2120,7 @@
                                 <Rectangle x:Name="PART_SpectrumDisplay" Stretch="Fill" VerticalAlignment="Stretch"/>
                             </Border>
 
-                            <!--Selecition Range-->
+                            <!--Selection Range-->
                             <Canvas HorizontalAlignment="Center" Width="4">
                                 <Rectangle x:Name="PART_SelectionRange" Canvas.Left="1" Fill="{DynamicResource Element.Foreground}" Width="2.0" Visibility="Hidden"/>
                             </Canvas>
@@ -2059,14 +2165,14 @@
                         <Grid x:Name="HorizontalTemplate">
                             <Track x:Name="PART_Track">
                                 <Track.IncreaseRepeatButton>
-                                    <RepeatButton x:Name="HorizontalTrackLargeChangeIncreaseRepeatButton" Template="{StaticResource Template.RepeatButton.Simple}"/>
+                                    <RepeatButton x:Name="HorizontalTrackLargeChangeIncreaseRepeatButton" Template="{StaticResource Template.RepeatButton.Simple}" IsTabStop="False"/>
                                 </Track.IncreaseRepeatButton>
                                 <Track.DecreaseRepeatButton>
-                                    <RepeatButton x:Name="HorizontalTrackLargeChangeDecreaseRepeatButton" Template="{StaticResource Template.RepeatButton.Simple}"/>
+                                    <RepeatButton x:Name="HorizontalTrackLargeChangeDecreaseRepeatButton" Template="{StaticResource Template.RepeatButton.Simple}" IsTabStop="False"/>
                                 </Track.DecreaseRepeatButton>
 
                                 <Track.Thumb>
-                                    <Thumb x:Name="HorizontalThumb" Height="18" IsTabStop="True" Width="10" Template="{StaticResource Template.Slider.Thumb.Horizontal}"/>
+                                    <Thumb x:Name="HorizontalThumb" Height="18" Width="10" Template="{StaticResource Template.Slider.Thumb.Horizontal}" IsTabStop="False"/>
                                 </Track.Thumb>
                             </Track>
                         </Grid>
@@ -2086,8 +2192,10 @@
     </Style>
 
     <Style TargetType="{x:Type n:RangeSlider}">
-        <Setter Property="Background" Value="Transparent"/>
-
+        <Setter Property="TickPlacement" Value="BottomRight"/>
+        <Setter Property="Background" Value="{DynamicResource Element.Background}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource Element.Border}"/>
+        
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:RangeSlider}">
@@ -2101,18 +2209,19 @@
                         <TickBar x:Name="TopTick" Grid.Row="0" Fill="{DynamicResource Element.Border}" TickFrequency="1" Height="4" Margin="5,0,5,2" Placement="Top" Visibility="Collapsed"/>
                         <TickBar x:Name="BottomTick" Grid.Row="2" Fill="{DynamicResource Element.Border}" TickFrequency="1" Height="4" Margin="5,1,5,0" Placement="Bottom" Visibility="Collapsed"/>
 
-                        <Border x:Name="ProgressBorder" Grid.Row="1" Background="#FFA3BDE3" BorderThickness="0" Height="5" VerticalAlignment="Center"/>
+                        <Border x:Name="TrackBorder" Grid.Row="1" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" Height="3" VerticalAlignment="Center" Margin="4,0"/>
+                        <Border x:Name="ProgressBorder" Grid.Row="1" Background="{DynamicResource Element.Border.Hover}" BorderThickness="0" Height="3" VerticalAlignment="Center"/>
 
-                        <Slider x:Name="LowerSlider" Grid.Row="1"
-                                Minimum="{Binding RelativeSource={RelativeSource AncestorType=n:RangeSlider}, Path=Minimum, Mode=TwoWay}"
-                                Maximum="{Binding RelativeSource={RelativeSource AncestorType=n:RangeSlider}, Path=Maximum, Mode=TwoWay}"
-                                Value="{Binding RelativeSource={RelativeSource AncestorType=n:RangeSlider}, Path=LowerValue, Mode=TwoWay}"
+                        <Slider x:Name="LowerSlider" Grid.Row="1" IsTabStop="False"
+                                Minimum="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Minimum, Mode=TwoWay}"
+                                Maximum="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Maximum, Mode=TwoWay}"
+                                Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=LowerValue, Mode=TwoWay}"
                                 TickPlacement="{TemplateBinding TickPlacement}" AutoToolTipPlacement="TopLeft" Style="{StaticResource Style.Slider.Special}"/>
 
-                        <Slider x:Name="UpperSlider" Grid.Row="1"
-                                Minimum="{Binding RelativeSource={RelativeSource AncestorType=n:RangeSlider}, Path=Minimum, Mode=TwoWay}"
-                                Maximum="{Binding RelativeSource={RelativeSource AncestorType=n:RangeSlider}, Path=Maximum, Mode=TwoWay}"
-                                Value="{Binding RelativeSource={RelativeSource AncestorType=n:RangeSlider}, Path=UpperValue, Mode=TwoWay}"
+                        <Slider x:Name="UpperSlider" Grid.Row="1" IsTabStop="False"
+                                Minimum="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Minimum, Mode=TwoWay}"
+                                Maximum="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Maximum, Mode=TwoWay}"
+                                Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=UpperValue, Mode=TwoWay}"
                                 TickPlacement="{TemplateBinding TickPlacement}" AutoToolTipPlacement="TopLeft" Style="{StaticResource Style.Slider.Special}"/>
                     </Grid>
 
@@ -2419,7 +2528,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <ScrollViewer Grid.Row="0" Focusable="False" Padding="{TemplateBinding Padding}" VerticalScrollBarVisibility="Auto">
+                            <ScrollViewer Grid.Row="0" x:Name="MainScrollViewer" Focusable="False" Padding="{TemplateBinding Padding}" VerticalScrollBarVisibility="Auto">
                                 <ItemsPresenter/>
                             </ScrollViewer>
 
@@ -3212,6 +3321,77 @@
                             </MultiTrigger.Conditions>
                             
                             <Setter Property="Visibility" Value="Collapsed"/>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--TimeBox Style-->
+    <Style TargetType="{x:Type n:TimeBox}">
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
+        <Setter Property="Background" Value="{DynamicResource Element.Background}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource Element.Border}"/>
+        <Setter Property="Padding" Value="2"/>
+        <Setter Property="MinHeight" Value="23"/>
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="AllowDrop" Value="True"/>
+        <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type n:TimeBox}">
+                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" 
+                            VerticalAlignment="{TemplateBinding VerticalAlignment}" HorizontalAlignment="{TemplateBinding HorizontalAlignment}" SnapsToDevicePixels="True"
+                            Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" MinWidth="{TemplateBinding MinWidth}" MinHeight="{TemplateBinding MinHeight}">
+                        <Grid x:Name="InnerGrid">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalScrollBarVisibility="Hidden" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                            <Path x:Name="InnerPath" Data="M 0,0 6,6 0,6 z" Fill="{DynamicResource Element.Border.Required}" HorizontalAlignment="Left" 
+                                  VerticalAlignment="Bottom" Opacity="0" ToolTip="{DynamicResource S.Required}"/>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsObligatory" Value="True"/>
+                                <Condition Property="Text" Value="{x:Static s:String.Empty}"/>
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource Element.Border.Required}"/>
+                            <Setter Property="Opacity" TargetName="InnerPath" Value="1"/>
+                        </MultiTrigger>
+                        
+                        <Trigger Property="IsReadOnly" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{DynamicResource Element.Background.ReadOnly}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" TargetName="border" Value="0.7"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource Element.Border.Hover}"/>
+                            <Setter Property="Fill" TargetName="InnerPath" Value="{DynamicResource Element.Border.Hover}"/>
+                        </Trigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsKeyboardFocused" Value="True"/>
+                                <Condition Property="IsReadOnly" Value="False"/>
+                            </MultiTrigger.Conditions>
+
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource Element.Border.Pressed}"/>
+                            <Setter Property="Background" TargetName="border" Value="{DynamicResource Element.Background.Focused}"/>
+                            <Setter Property="Fill" TargetName="InnerPath" Value="{DynamicResource Element.Border.Pressed}"/>
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

@@ -17,11 +17,6 @@ namespace ScreenToGif.ImageUtil.Psd
         private Stream InternalStream { get; set; }
 
         /// <summary>
-        /// Repeat Count for the psd.
-        /// </summary>
-        internal int RepeatCount { get; set; } = 0;
-
-        /// <summary>
         /// The height of the image.
         /// </summary>
         internal int Height { get; set; } = 0;
@@ -48,10 +43,9 @@ namespace ScreenToGif.ImageUtil.Psd
         private LayerAndMask LayerAndMask { get; set; } = new LayerAndMask();
 
 
-        internal Psd(Stream stream, int repeatCount, int height, int width, bool compress = true, bool saveTimeline = true)
+        internal Psd(Stream stream, int height, int width, bool compress = true, bool saveTimeline = true)
         {
             InternalStream = stream;
-            RepeatCount = repeatCount;
             Height = height;
             Width = width;
             Compress = compress;

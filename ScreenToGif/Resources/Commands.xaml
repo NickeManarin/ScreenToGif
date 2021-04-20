@@ -433,8 +433,6 @@
 
     <RoutedUICommand x:Key="Command.ExploreFolder" Text="S.Command.ExploreFolder"/>
 
-    <RoutedUICommand x:Key="Command.ExportImages" Text="S.Command.ExportImages"/>
-
     <RoutedUICommand x:Key="Command.CheckVideoDevices" Text="S.Command.CheckVideoDevices">
         <RoutedUICommand.InputGestures>
             <KeyGesture>Ctrl + Alt + F5</KeyGesture>
@@ -457,6 +455,13 @@
     <RoutedUICommand x:Key="Command.Cancel" Text="S.Command.Cancel">
         <RoutedUICommand.InputGestures>
             <KeyGesture>Escape</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <!--Upload-->
+    <RoutedUICommand x:Key="Command.ViewHistory" Text="S.Command.ViewHistory">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + H</KeyGesture>
         </RoutedUICommand.InputGestures>
     </RoutedUICommand>
 

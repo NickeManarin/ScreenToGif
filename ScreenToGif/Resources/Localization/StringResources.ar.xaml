@@ -418,27 +418,27 @@
     <s:String x:Key="S.Options.Upload.Proxy.Password">كلمة السر:</s:String>
     <s:String x:Key="S.Options.Upload.Get">المميز OAuth الحصول على رمز </s:String>
     <s:String x:Key="S.Options.Upload.PasteToken">لصق رمز التخويل هنا</s:String>
-    <s:String x:Key="S.Options.Upload.Authorize">تخويل</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Authorize">تخويل</s:String>
     <s:String x:Key="S.Options.Upload.Refresh">انعاش</s:String>
     <s:String x:Key="S.Options.Upload.Clear">مسح</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Anonymous">(مجهول) Imgur</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Direct">استخدم الروابط المباشرة.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Gifv">Gif.الحصول على ارتباطات مع التمديد جيف بدلا من </s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.ToAlbum">تحميل الصور المتحركة الى البوم محدد.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Album">الالبوم:</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.AskMe">إسألني قبل الإرسال</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.NotPossible">لم يكن من الممكن فتح الصفحة للحصول على الرمز المميز لتخويل Imgur.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Missing">من اجل تخويل هذا التطبيق ، تحتاج الى توفير رمز التخويل.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Completed">أكمل Imgur  تفويض.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Error">فشل تخويل imgur. حاول مره اخرى في بضع ثوان او الحصول على رمز مميز جديد.</s:String>
-    <!--<s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Header">It was not possible to authorize the app</s:String>-->
-    <!--<s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Message">Check if you provided the correct token and if you have an internet connection.</s:String>-->
-    <s:String x:Key="S.Options.Upload.Imgur.Refresh.None">من اجل تحديث التخويل لهذا التطبيق ، تحتاج الى الانتهاء اولا من عمليه التخويل.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.NotAuthorized">غير مصرح به.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Expired">{انتهت صلاحيه التخويل في {0.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Valid">{التخويل صالح حتى {0.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Removed">Imgur تم ازاله تفويض </s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Error.AlbumLoad">لم يكن من الممكن تحميل قائمه البومات.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Anonymous">(مجهول) Imgur</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Direct">استخدم الروابط المباشرة.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Gifv">Gif.الحصول على ارتباطات مع التمديد جيف بدلا من </s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.ToAlbum">تحميل الصور المتحركة الى البوم محدد.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Album">الالبوم:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.AskMe">إسألني قبل الإرسال</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.NotPossible">لم يكن من الممكن فتح الصفحة للحصول على الرمز المميز لتخويل Imgur.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Token">من اجل تخويل هذا التطبيق ، تحتاج الى توفير رمز التخويل.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Completed">أكمل Imgur  تفويض.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Error">فشل تخويل imgur. حاول مره اخرى في بضع ثوان او الحصول على رمز مميز جديد.</s:String>
+    <!--<s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Header">It was not possible to authorize the app</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Message">Check if you provided the correct token and if you have an internet connection.</s:String>-->
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Refresh.None">من اجل تحديث التخويل لهذا التطبيق ، تحتاج الى الانتهاء اولا من عمليه التخويل.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.NotAuthorized">غير مصرح به.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Expired">{انتهت صلاحيه التخويل في {0.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Valid">{التخويل صالح حتى {0.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Removed">Imgur تم ازاله تفويض </s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.AlbumLoad">لم يكن من الممكن تحميل قائمه البومات.</s:String>
     <s:String x:Key="S.Options.Upload.Gfycat.Anonymous"> (مجهول) Gfycat</s:String>
     <s:String x:Key="S.Options.Upload.Yandex.Token">OAuth الرمز المميز:</s:String>
     <s:String x:Key="S.Options.Upload.Pick.Destination">اختيار وجهه</s:String>
@@ -1271,7 +1271,7 @@
     <!--<s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable">Use a global color table.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable.Info">May reduce the quality and/or size of the gif.</s:String>-->
     <s:String x:Key="S.SaveAs.GifOptions.Loop">حلقه:</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">Gif يحلق </s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Looped">Gif يحلق </s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">كرر الى الابد.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">تكرار العد.</s:String>
     <!--<s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable">Enable transparency.</s:String>-->
@@ -1298,9 +1298,9 @@
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">الرمز الصور.البريدي </s:String>
     <s:String x:Key="S.SaveAs.PsdOptions">Psd خيارات </s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Compress">ضغط الصورة.</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">ضغط بيانات الصورة باستخدام خوارزميه RLE.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Info">ضغط بيانات الصورة باستخدام خوارزميه RLE.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline">حفظ بيانات المخطط الزمني.</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">تصدير توقيت الاطارات ، بدلا من الاطارات فقط.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Info">تصدير توقيت الاطارات ، بدلا من الاطارات فقط.</s:String>
     <!--<s:String x:Key="S.SaveAs.ProjectOptions">Project options</s:String>-->
     
     <s:String x:Key="S.SaveAs.Extras">اضافات:</s:String>
@@ -1363,9 +1363,9 @@
     <s:String x:Key="S.SaveAs.Warning.Canceled">تم الغاء العملية.</s:String>
     
     <!--SaveAs • Export-->
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">تصدير الاطارات</s:String>
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Instruction">هل تريد بالتاكيد تصدير الاطارات ؟</s:String>
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Message">سيقوم هذا الاجراء بتصدير اطارات {0} مباشره الى المجلد المحدد.</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Title">تصدير الاطارات</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">هل تريد بالتاكيد تصدير الاطارات ؟</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">سيقوم هذا الاجراء بتصدير اطارات {0} مباشره الى المجلد المحدد.</s:String>
     
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">ردود الفعل</s:String>

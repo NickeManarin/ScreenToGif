@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
@@ -6,11 +6,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Cache;
 using System.Net.Http;
-using System.Runtime.Serialization.Json;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using ScreenToGif.Settings;
 
 namespace ScreenToGif.Util
 {
@@ -20,13 +20,7 @@ namespace ScreenToGif.Util
     /// </summary>
     internal static class WebHelper
     {
-        internal static T Deserialize<T>(string json)
-        {
-            var ser = new DataContractJsonSerializer(typeof(T));
-
-            using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
-                return (T)ser.ReadObject(stream);
-        }
+        private const string Boundary = "+++fringe+++";
 
         internal static string Protect(string str)
         {
@@ -54,9 +48,9 @@ namespace ScreenToGif.Util
         }
 
 
-        internal static async Task<string> SimpleRequest(HttpMethod method, string url, NameValueCollection headers = null)
+        internal static async Task<string> Get(string url, NameValueCollection headers = null)
         {
-            using (var webResponse = await GetResponse(method, url, null, null, headers))
+            using (var webResponse = await GetResponse(HttpMethod.Get, url, headers))
             {
                 using (var responseStream = webResponse.GetResponseStream())
                 {
@@ -64,18 +58,33 @@ namespace ScreenToGif.Util
                         return null;
 
                     using (var reader = new StreamReader(responseStream, Encoding.UTF8))
-                        return reader.ReadToEnd();
+                        return await reader.ReadToEndAsync();
                 }
             }
         }
 
-        internal static async Task<string> MultiRequest(string url, Dictionary<string, string> args)
+        internal static async Task<string> Post(string url, string content, NameValueCollection headers = null)
+        {
+            using (var webResponse = await GetResponse(HttpMethod.Post, url, content, "application/json", headers))
+            {
+                using (var responseStream = webResponse.GetResponseStream())
+                {
+                    if (responseStream == null)
+                        return null;
+
+                    using (var reader = new StreamReader(responseStream, Encoding.UTF8))
+                        return await reader.ReadToEndAsync();
+                }
+            }
+        }
+
+        internal static async Task<string> PostMultipart(string url, Dictionary<string, string> args)
         {
             using (var stream = new MemoryStream())
             {
-                stream.WriteStringUtf8(GetMultipartString("+fringe+", args));
+                stream.WriteStringUtf8(GetMultipartString(Boundary, args));
 
-                using (var webResponse = await GetResponse(HttpMethod.Post, url, stream, "multipart/form-data; boundary=+fringe+"))
+                using (var webResponse = await GetResponse(HttpMethod.Post, url, stream, "multipart/form-data; boundary=" + Boundary))
                 {
                     using (var responseStream = webResponse.GetResponseStream())
                     {
@@ -83,17 +92,35 @@ namespace ScreenToGif.Util
                             return null;
 
                         using (var reader = new StreamReader(responseStream, Encoding.UTF8))
-                            return reader.ReadToEnd();
+                            return await reader.ReadToEndAsync();
                     }
                 }
             }
         }
 
-        internal static async Task<string> SendFile(string url, Stream data, string filename, Dictionary<string, string> args = null, NameValueCollection headers = null)
+        internal static async Task<string> SendFile(string url, Stream data, string filename, Dictionary<string, string> args = null, NameValueCollection headers = null, string streamName = "file")
         {
-            using (var head = GetMultipartStream("+fringe+", args, filename, data))
+            using (var head = GetMultipartStream(Boundary, args, filename, data, streamName))
             {
-                var request = GetWebRequest(HttpMethod.Post, url, headers, "multipart/form-data; boundary=+fringe+", head.Length);
+                using (var webResponse = await GetResponse(HttpMethod.Post, url, head, "multipart/form-data; boundary=" + Boundary, headers))
+                {
+                    using (var responseStream = webResponse.GetResponseStream())
+                    {
+                        if (responseStream == null)
+                            return null;
+
+                        using (var reader = new StreamReader(responseStream, Encoding.UTF8))
+                            return await reader.ReadToEndAsync();
+                    }
+                }
+            }
+        }
+        
+        internal static async Task<string> SendFile2(string url, Stream data, string filename, Dictionary<string, string> args = null, NameValueCollection headers = null)
+        {
+            using (var head = GetMultipartStream(Boundary, args, filename, data))
+            {
+                var request = GetWebRequest(HttpMethod.Post, url, headers, "multipart/form-data; boundary=" + Boundary, head.Length);
 
                 using (var requestStream = await request.GetRequestStreamAsync())
                     requestStream.WriteStream(head);
@@ -106,26 +133,29 @@ namespace ScreenToGif.Util
                             return null;
 
                         using (var reader = new StreamReader(responseStream, Encoding.UTF8))
-                            return reader.ReadToEnd();
+                            return await reader.ReadToEndAsync();
                     }
                 }
             }
         }
 
-        private static Stream GetMultipartStream(string border, Dictionary<string, string> args, string filename, Stream data)
+        private static Stream GetMultipartStream(string border, Dictionary<string, string> args, string filename, Stream data, string streamName = "file")
         {
             var stream = new MemoryStream();
+            stream.WriteStringUtf8("Content-Type: text/plain; charset=utf-8");
 
             foreach (var content in args.Where(w => !string.IsNullOrEmpty(w.Key) && !string.IsNullOrEmpty(w.Value)))
                 stream.WriteStringUtf8($"--{border}\r\nContent-Disposition: form-data; name=\"{content.Key}\"\r\n\r\n{content.Value}\r\n");
 
             if (!string.IsNullOrWhiteSpace(filename))
-                stream.WriteStringUtf8($"--{border}\r\nContent-Disposition: form-data; name=\"image\"; filename=\"{filename}\"\r\nContent-Type: image/gif\r\n\r\n");
+                stream.WriteStringUtf8($"--{border}\r\nContent-Disposition: form-data; name={streamName}; filename={filename};\r\n\r\n");
+                //stream.WriteStringUtf8($"--{border}\r\nContent-Disposition: form-data; name=\"image\"; filename=\"{filename}\"\r\nContent-Type: image/gif\r\n\r\n"); //TODO: Fixed content type.
 
             stream.WriteStream(data);
-
+            
             stream.WriteStringUtf8($"\r\n--{border}--\r\n");
 
+            stream.Position = 0;
             return stream;
         }
 
@@ -135,21 +165,19 @@ namespace ScreenToGif.Util
                 .Aggregate("", (p, n) => p + $"--{border}\r\nContent-Disposition: form-data; name=\"{n.Key}\"\r\n\r\n{n.Value}\r\n") + $"--{border}--\r\n";
         }
 
-        private static Task<WebResponse> GetResponse(HttpMethod method, string url, Stream data = null, string contentType = null, NameValueCollection headers = null)
+
+        private static Task<WebResponse> GetResponse(HttpMethod method, string url, NameValueCollection headers = null)
         {
             try
             {
-                var length = data?.Length ?? 0;
+                return GetWebRequest(method, url, headers).GetResponseAsync();
+            }
+            catch (WebException we)
+            {
+                if (!(we.Response is WebResponse resp))
+                    throw;
 
-                var request = GetWebRequest(method, url, headers, contentType, length);
-
-                if (length <= 0)
-                    return request.GetResponseAsync();
-
-                using (var requestStream = request.GetRequestStream())
-                    requestStream.WriteStream(data);
-
-                return request.GetResponseAsync();
+                return Task.FromResult(resp);
             }
             catch (Exception ex)
             {
@@ -159,9 +187,64 @@ namespace ScreenToGif.Util
             return null;
         }
 
+        private static Task<WebResponse> GetResponse(HttpMethod method, string url, string content, string contentType = null, NameValueCollection headers = null)
+        {
+            try
+            {
+                var request = GetWebRequest(method, url, headers, contentType, content.Length);
+
+                if (content.Length > 0)
+                    using (var requestStream = request.GetRequestStream())
+                        requestStream.WriteStringUtf8(content);
+
+                return request.GetResponseAsync();
+            }
+            catch (WebException we)
+            {
+                if (!(we.Response is WebResponse resp))
+                    throw;
+
+                return Task.FromResult(resp);
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Get response: " + url);
+            }
+
+            return Task.FromResult<WebResponse>(null);
+        }
+
+        private static async Task<WebResponse> GetResponse(HttpMethod method, string url, Stream data, string contentType = null, NameValueCollection headers = null)
+        {
+            try
+            {
+                var request = GetWebRequest(method, url, headers, contentType, data?.Length ?? 0);
+                
+                if (request.ContentLength > 0)
+                    using (var requestStream = await request.GetRequestStreamAsync())
+                        requestStream.WriteStream(data);
+
+                return await request.GetResponseAsync();
+            }
+            catch (WebException we)
+            {
+                if (!(we.Response is WebResponse resp))
+                    throw;
+
+                return resp;
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Log(ex, "Get response: " + url);
+            }
+
+            return null;
+        }
+
+
         private static HttpWebRequest GetWebRequest(HttpMethod method, string url, NameValueCollection headers = null, string contentType = null, long contentLength = 0)
         {
-            var request = (HttpWebRequest)WebRequest.Create(url);
+            var request = (HttpWebRequest) WebRequest.Create(url);
 
             if (headers != null)
                 request.Headers.Add(headers);

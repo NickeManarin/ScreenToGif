@@ -457,27 +457,27 @@
     <s:String x:Key="S.Options.Upload.Proxy.Password">Wachtwoord:</s:String>
     <s:String x:Key="S.Options.Upload.Get">OAuth token ophalen</s:String>
     <s:String x:Key="S.Options.Upload.PasteToken">Plak hier de autorisatiesleutel</s:String>
-    <s:String x:Key="S.Options.Upload.Authorize">Autoriseren</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Authorize">Autoriseren</s:String>
     <s:String x:Key="S.Options.Upload.Refresh">Verversen</s:String>
     <s:String x:Key="S.Options.Upload.Clear">Wissen</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Anonymous">Imgur (Anoniem)</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Direct">Gebruik directe links.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Gifv">Links verkrijgen met de Gifv extensie in plaats van Gif.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.ToAlbum">Gifs naar geselecteerd album uploaden.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Album">Album:</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.AskMe">Bevestiging vragen voor uploaden</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.NotPossible">Het was niet mogelijk om een pagina te openen om de Imgur autorisatiesleutel op te halen.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Missing">Voordat deze applicatie geautoriseerd kan worden, dien je een geldige autorisatiesleutel op te geven.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Completed">Imgur-autorisate voltooid.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Error">Imgur-autorisatie mislukt. Probeer het opnieuw or vraag een nieuwe sleutel aan.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Header">De app kon niet worden geautoriseerd</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Message">Controleer of je het juiste token hebt opgegeven en of je een internetverbinding hebt.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Refresh.None">Voordat de autorisatie vernieuwd kan worden, moet eerst het autorisatieproces worden afgerond.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.NotAuthorized">Niet geautoriseerd.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Expired">Autorisatie loopt af in {0}.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Valid">Autorisatie geldig tot {0}.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Removed">Imgur-autorisatie verwijderd.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Error.AlbumLoad">Het album kon niet worden geladen.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Anonymous">Imgur (Anoniem)</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Direct">Gebruik directe links.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Gifv">Links verkrijgen met de Gifv extensie in plaats van Gif.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.ToAlbum">Gifs naar geselecteerd album uploaden.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Album">Album:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.AskMe">Bevestiging vragen voor uploaden</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.NotPossible">Het was niet mogelijk om een pagina te openen om de Imgur autorisatiesleutel op te halen.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Token">Voordat deze applicatie geautoriseerd kan worden, dien je een geldige autorisatiesleutel op te geven.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Completed">Imgur-autorisate voltooid.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Error">Imgur-autorisatie mislukt. Probeer het opnieuw or vraag een nieuwe sleutel aan.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Header">De app kon niet worden geautoriseerd</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Message">Controleer of je het juiste token hebt opgegeven en of je een internetverbinding hebt.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Refresh.None">Voordat de autorisatie vernieuwd kan worden, moet eerst het autorisatieproces worden afgerond.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.NotAuthorized">Niet geautoriseerd.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Expired">Autorisatie loopt af in {0}.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Valid">Autorisatie geldig tot {0}.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Removed">Imgur-autorisatie verwijderd.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.AlbumLoad">Het album kon niet worden geladen.</s:String>
     <s:String x:Key="S.Options.Upload.Gfycat.Anonymous">Gfycat (Anoniem)</s:String>
     <s:String x:Key="S.Options.Upload.Yandex.Token">OAuth token:</s:String>
     <s:String x:Key="S.Options.Upload.Pick.Destination">Selecteer bestemming</s:String>
@@ -1354,7 +1354,7 @@
     <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable">Gebruik een globale kleurentabel.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable.Info">Kan de kwaliteit en/of grootte van het gif verminderen.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Loop">Lus:</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">Gif met herhaling.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Looped">Gif met herhaling.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Oneindig herhalen.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Aantal keer herhalen.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable">Transparantie inschakelen.</s:String>
@@ -1381,9 +1381,9 @@
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">De afbeeldingen in zip inpakken.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions">Psd-opties</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Compress">Afbeelding comprimeren.</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">De afbeelding comprimeren met het RLE-algoritme.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Info">De afbeelding comprimeren met het RLE-algoritme.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline">Tijdlijngegevens opslaan.</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">Exporteert de tijden van de frames, in plaats van alleen de frames.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Info">Exporteert de tijden van de frames, in plaats van alleen de frames.</s:String>
     <s:String x:Key="S.SaveAs.ProjectOptions">Projectopties</s:String>
     
     <s:String x:Key="S.SaveAs.Extras">Extra's:</s:String>
@@ -1447,9 +1447,9 @@
     <s:String x:Key="S.SaveAs.Warning.Canceled">De actie is afgebroken.</s:String>
     
     <!--SaveAs • Export-->
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">Frames exporteren</s:String>
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Instruction">Weet je zeker dat je de frames wilt exporteren?</s:String>
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Message">Deze actie zal {0} frames direct in geselecteerde map exporteren</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Title">Frames exporteren</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">Weet je zeker dat je de frames wilt exporteren?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">Deze actie zal {0} frames direct in geselecteerde map exporteren</s:String>
     
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">Reacties</s:String>

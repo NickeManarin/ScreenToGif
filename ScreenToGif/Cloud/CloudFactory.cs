@@ -5,20 +5,16 @@ namespace ScreenToGif.Cloud
 {
     public class CloudFactory
     {
-        public static ICloud CreateCloud(UploadService service)
+        public static IUploader CreateCloud(UploadType service)
         {
             switch (service)
             {
-                case UploadService.ImgurAnonymous:
+                case UploadType.Imgur:
                     return new Imgur.Imgur();
-                case UploadService.Imgur:
-                    return new Imgur.Imgur(false);
-                case UploadService.GfycatAnonymous:
-                    return new Gfycat();
-                //case UploadService.Gfycat:
-                //    return new Gfycat();
-                case UploadService.Yandex:
-                    return new YandexDisk.YandexDisk(UserSettings.All.YandexDiskOAuthToken);
+                case UploadType.Gfycat:
+                    return new Gfycat.Gfycat();
+                case UploadType.Yandex:
+                    return new YandexDisk.YandexDisk();
             }
 
             throw new NotImplementedException();

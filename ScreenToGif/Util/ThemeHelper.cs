@@ -1,5 +1,6 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Windows;
+using ScreenToGif.Settings;
 
 namespace ScreenToGif.Util
 {

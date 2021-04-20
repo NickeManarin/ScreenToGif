@@ -418,27 +418,27 @@
     <s:String x:Key="S.Options.Upload.Proxy.Password">Mật khẩu:</s:String>
     <s:String x:Key="S.Options.Upload.Get">Nhận thẻ OAuth</s:String>
     <s:String x:Key="S.Options.Upload.PasteToken">Dán thẻ được cho phép tại đây</s:String>
-    <s:String x:Key="S.Options.Upload.Authorize">Cho phép</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Authorize">Cho phép</s:String>
     <s:String x:Key="S.Options.Upload.Refresh">Làm mới</s:String>
     <s:String x:Key="S.Options.Upload.Clear">Xóa</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Anonymous">Imgur (Khuyết danh)</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Direct">Sử dụng liên kết trực tiếp.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Gifv">Nhận các liên kết với tiện ích Gifv thay vì Gif.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.ToAlbum">Tải lên gifs tới 1 album được chọn.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Album">Album:</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.AskMe">Hỏi tôi trước khi tải lên</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.NotPossible">Không thể mở trang để nhận thẻ ủy quyền Imgur.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Missing">Để đặt trước cho phép của ứng dụng này, bạn cần cung cấp đầy đủ thẻ ủy quyền.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Completed">Cho phép Imgur hoàn tất.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Error">Ủy quyền Imgur thất bại. Thử lại sau vài giây hoặc nhận thẻ mới.</s:String>
-    <!--<s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Header">It was not possible to authorize the app</s:String>-->
-    <!--<s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Message">Check if you provided the correct token and if you have an internet connection.</s:String>-->
-    <s:String x:Key="S.Options.Upload.Imgur.Refresh.None">Để làm mới cho phép cho ứng dụng này, bạn cần trước tiên kết thúc thực thi cho phép.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.NotAuthorized">Không được cho phép.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Expired">Cho phép hết hạn trong {0}.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Valid">Cho phép không hợp lệ cho tới khi {0}.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Removed">Ủy quyền Imgur bị loại bỏ.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Error.AlbumLoad">Không thể nạp danh sách album.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Anonymous">Imgur (Khuyết danh)</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Direct">Sử dụng liên kết trực tiếp.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Gifv">Nhận các liên kết với tiện ích Gifv thay vì Gif.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.ToAlbum">Tải lên gifs tới 1 album được chọn.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Album">Album:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.AskMe">Hỏi tôi trước khi tải lên</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.NotPossible">Không thể mở trang để nhận thẻ ủy quyền Imgur.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Token">Để đặt trước cho phép của ứng dụng này, bạn cần cung cấp đầy đủ thẻ ủy quyền.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Completed">Cho phép Imgur hoàn tất.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Error">Ủy quyền Imgur thất bại. Thử lại sau vài giây hoặc nhận thẻ mới.</s:String>
+    <!--<s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Header">It was not possible to authorize the app</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Message">Check if you provided the correct token and if you have an internet connection.</s:String>-->
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Refresh.None">Để làm mới cho phép cho ứng dụng này, bạn cần trước tiên kết thúc thực thi cho phép.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.NotAuthorized">Không được cho phép.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Expired">Cho phép hết hạn trong {0}.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Valid">Cho phép không hợp lệ cho tới khi {0}.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Removed">Ủy quyền Imgur bị loại bỏ.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.AlbumLoad">Không thể nạp danh sách album.</s:String>
     <s:String x:Key="S.Options.Upload.Gfycat.Anonymous">Gfycat (Khuyết danh)</s:String>
     <s:String x:Key="S.Options.Upload.Yandex.Token">Thẻ OAuth:</s:String>
     <s:String x:Key="S.Options.Upload.Pick.Destination">Chọn 1 điểm đến</s:String>
@@ -1271,7 +1271,7 @@
     <!--<s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable">Use a global color table.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable.Info">May reduce the quality and/or size of the gif.</s:String>-->
     <s:String x:Key="S.SaveAs.GifOptions.Loop">Lặp:</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">Vòng lặp Gif.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Looped">Vòng lặp Gif.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Lặp lại mãi mãi.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Lặp lại số lần.</s:String>
     <!--<s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable">Enable transparency.</s:String>-->
@@ -1298,9 +1298,9 @@
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">Khóa các hình ảnh.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions">Các tùy chọn Psd</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Compress">Nén ảnh.</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">Nén dữ liệu ảnh sử dụng thuật toán RLE.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Info">Nén dữ liệu ảnh sử dụng thuật toán RLE.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline">Lưu dữ liệu dòng thời gian.</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">Xuất thiết đặt thời gian của khung hình, thay vì chỉ khung hình.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Info">Xuất thiết đặt thời gian của khung hình, thay vì chỉ khung hình.</s:String>
     <!--<s:String x:Key="S.SaveAs.ProjectOptions">Project options</s:String>-->
     
     <s:String x:Key="S.SaveAs.Extras">Mục bổ sung:</s:String>
@@ -1363,9 +1363,9 @@
     <s:String x:Key="S.SaveAs.Warning.Canceled">Hành động đã bị hủy bỏ.</s:String>
     
     <!--SaveAs • Export-->
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">Xuất các khung hình</s:String>
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Instruction">Bạn chắc rằng muốn xuất các khung hình?</s:String>
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Message">Hành động này sẽ xuất {0} khung hình trực tiếp vào thư mục được chọn.</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Title">Xuất các khung hình</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">Bạn chắc rằng muốn xuất các khung hình?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">Hành động này sẽ xuất {0} khung hình trực tiếp vào thư mục được chọn.</s:String>
     
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">Phản hồi</s:String>

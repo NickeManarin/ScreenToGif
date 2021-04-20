@@ -421,27 +421,27 @@
     <s:String x:Key="S.Options.Upload.Proxy.Password">Hasło:</s:String>
     <s:String x:Key="S.Options.Upload.Get">Uzyskaj token OAuth</s:String>
     <s:String x:Key="S.Options.Upload.PasteToken">Wklej token autoryzacyjny tutaj</s:String>
-    <s:String x:Key="S.Options.Upload.Authorize">Autoryzuj</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Authorize">Autoryzuj</s:String>
     <s:String x:Key="S.Options.Upload.Refresh">Odśwież</s:String>
     <s:String x:Key="S.Options.Upload.Clear">Wyczyść</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Anonymous">Imgur (Anonimowo)</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Direct">Użyj bezpośrednich linków.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Gifv">Użyj linków do rozszerzenia Gifv zamiast Gif.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.ToAlbum">Prześlij gify do wybranego albumu.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Album">Album:</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.AskMe">Pytaj przed przesłaniem</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.NotPossible">Nie udało się uzyskać tokenu autoryzacyjnego z Imgura.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Missing">Żeby zautoryzować tę aplikację, musisz podać token autoryzacyjny.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Completed">Autoryzacja przebiegła pomyślnie.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Error">Autoryzacja nie powiodła się. Spróbuj ponownie za kilka sekund lub uzyskaj nowy token.</s:String>
-    <!--<s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Header">It was not possible to authorize the app</s:String>-->
-    <!--<s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Message">Check if you provided the correct token and if you have an internet connection.</s:String>-->
-    <s:String x:Key="S.Options.Upload.Imgur.Refresh.None">Żeby odnowić autoryzację tej aplikacji, musisz najpierw ukończyć proces autoryzacji.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.NotAuthorized">Nie zautoryzowano.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Expired">Autoryzacja wygasła w: {0}.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Valid">Autoryzacja ważna do: {0}.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Removed">Autoryzacja usunięta.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Error.AlbumLoad">Nie można było załadować listy albumów.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Anonymous">Imgur (Anonimowo)</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Direct">Użyj bezpośrednich linków.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Gifv">Użyj linków do rozszerzenia Gifv zamiast Gif.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.ToAlbum">Prześlij gify do wybranego albumu.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Album">Album:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.AskMe">Pytaj przed przesłaniem</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.NotPossible">Nie udało się uzyskać tokenu autoryzacyjnego z Imgura.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Token">Żeby zautoryzować tę aplikację, musisz podać token autoryzacyjny.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Completed">Autoryzacja przebiegła pomyślnie.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Error">Autoryzacja nie powiodła się. Spróbuj ponownie za kilka sekund lub uzyskaj nowy token.</s:String>
+    <!--<s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Header">It was not possible to authorize the app</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Message">Check if you provided the correct token and if you have an internet connection.</s:String>-->
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Refresh.None">Żeby odnowić autoryzację tej aplikacji, musisz najpierw ukończyć proces autoryzacji.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.NotAuthorized">Nie zautoryzowano.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Expired">Autoryzacja wygasła w: {0}.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Valid">Autoryzacja ważna do: {0}.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Removed">Autoryzacja usunięta.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.AlbumLoad">Nie można było załadować listy albumów.</s:String>
     <s:String x:Key="S.Options.Upload.Gfycat.Anonymous">Gfycat (Anonimowo)</s:String>
     <s:String x:Key="S.Options.Upload.Yandex.Token">Token OAuth:</s:String>
     <s:String x:Key="S.Options.Upload.Pick.Destination">Wybierz miejsce</s:String>
@@ -1276,7 +1276,7 @@
     <!--<s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable">Use a global color table.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable.Info">May reduce the quality and/or size of the gif.</s:String>-->
     <s:String x:Key="S.SaveAs.GifOptions.Loop">Pętla:</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">Zapętlony GIF.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Looped">Zapętlony GIF.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Powtarzaj w nieskończoność.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Ilość powtórzeń.</s:String>
     <!--<s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable">Enable transparency.</s:String>-->
@@ -1303,9 +1303,9 @@
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">Zarchiwizuj obrazy.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions">Opcej pliku PSD</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Compress">Kompresuj obraz.</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">Kompresuj obraz używając algorytmu RLE.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Info">Kompresuj obraz używając algorytmu RLE.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline">Zapisz dane osi czasu.</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">Eksportuj czasy klatek, zamiast tylko klatki.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Info">Eksportuj czasy klatek, zamiast tylko klatki.</s:String>
     <!--<s:String x:Key="S.SaveAs.ProjectOptions">Project options</s:String>-->
     
     <s:String x:Key="S.SaveAs.Extras">Dodatki:</s:String>
@@ -1368,9 +1368,9 @@
     <s:String x:Key="S.SaveAs.Warning.Canceled">Operacja została anulowana.</s:String>
     
     <!--SaveAs • Export-->
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">Eksportuj klatki</s:String>
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Instruction">Czy chcesz wyeksportować klatki?</s:String>
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Message">Polecenie wyeksportuje {0} klatek to wybranego folderu.</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Title">Eksportuj klatki</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">Czy chcesz wyeksportować klatki?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">Polecenie wyeksportuje {0} klatek to wybranego folderu.</s:String>
     
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">Wsparcie</s:String>

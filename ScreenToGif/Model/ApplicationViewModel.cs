@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using ScreenToGif.Controls;
+using ScreenToGif.Settings;
 using ScreenToGif.Util;
 using ScreenToGif.Windows;
 using ScreenToGif.Windows.Other;

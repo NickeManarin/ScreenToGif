@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -10,6 +10,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using ScreenToGif.Model;
+using ScreenToGif.Settings;
 using ScreenToGif.Util;
 using ScreenToGif.Util.InputHook;
 using ScreenToGif.Webcam.DirectX;

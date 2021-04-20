@@ -32,7 +32,7 @@ namespace ScreenToGif.ImageUtil.Gif.Decoder
         public ushort RepeatCount { get; set; }
 
         private GifFile()
-        {}
+        { }
 
         internal static GifFile ReadGifFile(Stream stream, bool metadataOnly)
         {
@@ -68,14 +68,12 @@ namespace ScreenToGif.ImageUtil.Gif.Decoder
                 if (block.Kind == GifBlockKind.GraphicRendering)
                     controlExtensions = new List<GifExtension>();
 
-                if (block is GifFrame)
+                if (block is GifFrame frame)
                 {
-                    frames.Add((GifFrame)block);
+                    frames.Add(frame);
                 }
-                else if (block is GifExtension)
+                else if (block is GifExtension extension)
                 {
-                    var extension = (GifExtension)block;
-
                     switch (extension.Kind)
                     {
                         case GifBlockKind.Control:

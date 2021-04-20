@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -23,8 +23,9 @@ namespace ScreenToGif.Controls
         /// </summary>
         private Point _dragStart = new Point(0, 0);
 
-        Hyperlink _notificationHyperlink;
-        Hyperlink _encodingHyperlink;
+        private Hyperlink _notificationHyperlink;
+        private Hyperlink _encodingHyperlink;
+        private ScrollViewer _mainScrollViewer;
 
         #endregion
 
@@ -77,6 +78,7 @@ namespace ScreenToGif.Controls
 
             _notificationHyperlink = GetTemplateChild("NotificationHyperlink") as Hyperlink;
             _encodingHyperlink = GetTemplateChild("EncodingHyperlink") as Hyperlink;
+            _mainScrollViewer = GetTemplateChild("MainScrollViewer") as ScrollViewer;
 
             IsVisibleChanged += (sender, args) =>
             {
@@ -270,6 +272,8 @@ namespace ScreenToGif.Controls
             enc.MouseMove += Encoding_MouseMove;
 
             Items.Add(enc);
+
+            _mainScrollViewer?.ScrollToBottom();
 
             HasAnyEncoding = Items.OfType<EncoderListViewItem>().Any();
             HasAnyActiveEncoding = Items.OfType<EncoderListViewItem>().Any(a => a.Status == Status.Processing);

@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32;
+using Microsoft.Win32;
 using ScreenToGif.Controls;
 using ScreenToGif.Util;
 using System;
@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using ScreenToGif.Native;
+using ScreenToGif.Settings;
 
 namespace ScreenToGif.Windows.Other
 {

@@ -10,6 +10,7 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
@@ -27,32 +28,30 @@
 
         <n:StatusBand Grid.Row="1" x:Name="StatusBand"/>
 
-        <Grid Grid.Row="2">
+        <TextBlock Grid.Row="2" Margin="25,5,10,5" FontSize="14" TextWrapping="WrapWithOverflow" Foreground="{DynamicResource Element.Foreground}">
+            <Run Text="{DynamicResource S.Options.Storage.Cache.Info}"/>
+            <LineBreak/>
+            <LineBreak/>
+            <Run Text="{DynamicResource S.Options.Storage.Cache.Question}"/>
+        </TextBlock>
+
+        <Grid Grid.Row="3" x:Name="OptionsGrid" Margin="20,0,5,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Margin="25,5,10,5" FontSize="14" TextWrapping="WrapWithOverflow" Foreground="{DynamicResource Element.Foreground}">
-                <Run Text="{DynamicResource S.Options.Storage.Cache.Info}"/>
-                <LineBreak/>
-                <LineBreak/>
-                <Run Text="{DynamicResource S.Options.Storage.Cache.Question}"/>
-            </TextBlock>
+            <Separator Grid.Row="0" Height="1" Margin="5,3"/>
 
-            <Separator Grid.Row="1" Height="1" Margin="5,3"/>
-            
-            <n:ExtendedCheckBox Grid.Row="2" x:Name="IgnoreRecentCheckBox" Text="{DynamicResource S.Options.Storage.Cache.IgnoreRecent}" Margin="25,10,10,5" FontSize="14"
+            <n:ExtendedCheckBox Grid.Row="1" x:Name="IgnoreRecentCheckBox" Text="{DynamicResource S.Options.Storage.Cache.IgnoreRecent}" Margin="5,3" FontSize="14"
                                 VerticalContentAlignment="Center" IsChecked="True" CheckedChanged="CheckBox_CheckedChanged"/>
 
-            <TextBlock Grid.Row="3" x:Name="InfoTextBlock" Margin="25,5,10,5" FontSize="14" TextWrapping="WrapWithOverflow" Foreground="{DynamicResource Element.Foreground.Gray150}"
+            <TextBlock Grid.Row="2" x:Name="InfoTextBlock" Margin="25,5,10,5" FontSize="14" TextWrapping="WrapWithOverflow" Foreground="{DynamicResource Element.Foreground.Gray150}"
                        Text="{DynamicResource S.Options.Storage.Cache.IgnoreRecent.Yes}"/>
         </Grid>
 
-        <Grid Grid.Row="3" Background="{DynamicResource Panel.Background.Level3}">
+        <Grid Grid.Row="4" Background="{DynamicResource Panel.Background.Level3}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="Auto"/>

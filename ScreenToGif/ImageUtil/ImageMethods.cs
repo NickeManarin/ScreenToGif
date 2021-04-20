@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -1281,26 +1281,25 @@ namespace ScreenToGif.ImageUtil
                 DisposalMethod = FrameDisposalMethod.None
             };
 
-            var gce = gifMetadata.Extensions.OfType<GifGraphicControlExtension>().FirstOrDefault();
+            var control = gifMetadata.Extensions.OfType<GifGraphicControlExtension>().FirstOrDefault();
 
-            if (gce == null)
+            if (control == null)
                 return frameMetadata;
 
-            if (gce.Delay != 0)
-                frameMetadata.Delay = TimeSpan.FromMilliseconds(gce.Delay);
+            if (control.Delay != 0)
+                frameMetadata.Delay = TimeSpan.FromMilliseconds(control.Delay);
 
-            frameMetadata.DisposalMethod = (FrameDisposalMethod)gce.DisposalMethod;
+            frameMetadata.DisposalMethod = (FrameDisposalMethod) control.DisposalMethod;
 
             return frameMetadata;
         }
 
-        public static BitmapSource MakeFrame(System.Drawing.Size fullSize, BitmapSource rawFrame, FrameMetadata metadata, BitmapSource baseFrame)
+        public static BitmapSource MakeFrame(System.Drawing.Size fullSize, BitmapSource rawFrame, FrameMetadata metadata, BitmapSource baseFrame, double? forceDpi = null)
         {
-            //I removed this, so I could save the same as 32bpp
+            //I removed this so I could save as Pbgra32.
             //if (baseFrame == null && IsFullFrame(metadata, fullSize))
             //{
-            //    // No previous image to combine with, and same size as the full image
-            //    // Just return the frame as is
+            //    //No previous image to combine with, and same size as the full image, so just return as is.
             //    return rawFrame;
             //}
 
@@ -1317,8 +1316,7 @@ namespace ScreenToGif.ImageUtil
                 context.DrawImage(rawFrame, rect);
             }
 
-            //TODO: Test, DPI was hardcoded to 96.
-            var bitmap = new RenderTargetBitmap(fullSize.Width, fullSize.Height, rawFrame.DpiX, rawFrame.DpiY, PixelFormats.Pbgra32);
+            var bitmap = new RenderTargetBitmap(fullSize.Width, fullSize.Height, forceDpi ?? rawFrame.DpiX, forceDpi ?? rawFrame.DpiY, PixelFormats.Pbgra32);
             bitmap.Render(visual);
 
             if (bitmap.CanFreeze && !bitmap.IsFrozen)
@@ -1332,7 +1330,7 @@ namespace ScreenToGif.ImageUtil
             return metadata.Left == 0 && metadata.Top == 0 && metadata.Width == fullSize.Width && metadata.Height == fullSize.Height;
         }
 
-        public static BitmapSource ClearArea(BitmapSource frame, FrameMetadata metadata)
+        public static BitmapSource ClearArea(BitmapSource frame, FrameMetadata metadata, double? forcedDpi = null)
         {
             var visual = new DrawingVisual();
             using (var context = visual.RenderOpen())
@@ -1345,7 +1343,7 @@ namespace ScreenToGif.ImageUtil
                 context.DrawImage(frame, fullRect);
             }
 
-            var bitmap = new RenderTargetBitmap(frame.PixelWidth, frame.PixelHeight, frame.DpiX, frame.DpiY, PixelFormats.Pbgra32);
+            var bitmap = new RenderTargetBitmap(frame.PixelWidth, frame.PixelHeight, forcedDpi ?? frame.DpiX, forcedDpi ?? frame.DpiY, PixelFormats.Pbgra32);
             bitmap.Render(visual);
 
             if (bitmap.CanFreeze && !bitmap.IsFrozen)

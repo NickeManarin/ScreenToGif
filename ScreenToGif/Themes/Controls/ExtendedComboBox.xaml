@@ -1,0 +1,142 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:n="clr-namespace:ScreenToGif.Controls"
+                    xmlns:s="clr-namespace:System;assembly=mscorlib">
+
+    <!--Templates-->
+    <ControlTemplate x:Key="Template.ExtendedComboBox" TargetType="{x:Type n:ExtendedComboBox}">
+        <Grid x:Name="templateRoot" SnapsToDevicePixels="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" Width="0"/>
+            </Grid.ColumnDefinitions>
+
+            <Popup Grid.ColumnSpan="2" x:Name="PART_Popup" AllowsTransparency="True" Placement="Bottom"
+                   IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                   PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
+
+                <Border x:Name="DropDownBorder" BorderBrush="{DynamicResource Element.Border}" BorderThickness="1" Background="{DynamicResource Element.Background}" Effect="{DynamicResource Shadow.Border}"
+                        MaxHeight="{TemplateBinding MaxDropDownHeight}" MinWidth="{Binding ActualWidth, ElementName=templateRoot}">
+                    <ScrollViewer x:Name="DropDownScrollViewer">
+                        <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                    </ScrollViewer>
+                </Border>
+            </Popup>
+
+            <ToggleButton Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" 
+                          IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Style="{DynamicResource Style.ToggleButton.ComboBox}"/>
+
+            <ContentPresenter Grid.Column="0" IsHitTestVisible="False" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                              Content="{TemplateBinding SelectionItemBox}" ContentTemplate="{TemplateBinding SelectionItemBoxTemplate}" 
+                              ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                
+                <!--<ContentPresenter.Content>
+                    <PriorityBinding>
+                        <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="SelectionBoxItem"/>
+                        <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="SelectionItemBox"/>
+                    </PriorityBinding>
+                </ContentPresenter.Content>-->
+            </ContentPresenter>
+        </Grid>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="HasItems" Value="False">
+                <Setter TargetName="DropDownBorder" Property="Height" Value="95"/>
+            </Trigger>
+
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsGrouping" Value="True"/>
+                    <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="False"/>
+                </MultiTrigger.Conditions>
+
+                <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
+            </MultiTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="Template.ExtendedComboBox.Editable" TargetType="{x:Type n:ExtendedComboBox}">
+        <Grid x:Name="templateRoot" SnapsToDevicePixels="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" Width="0"/>
+            </Grid.ColumnDefinitions>
+
+            <Popup Grid.ColumnSpan="2" x:Name="PART_Popup" AllowsTransparency="True" Placement="Bottom"
+                   IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                   PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
+
+                <Border x:Name="DropDownBorder" BorderBrush="{DynamicResource Element.Border}" BorderThickness="1" Background="{DynamicResource Element.Background}" Effect="{DynamicResource Shadow.Border}"
+                        MaxHeight="{TemplateBinding MaxDropDownHeight}" MinWidth="{Binding ActualWidth, ElementName=templateRoot}">
+                    <ScrollViewer x:Name="DropDownScrollViewer">
+                        <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                    </ScrollViewer>
+                </Border>
+            </Popup>
+
+            <ToggleButton Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" 
+                          IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Style="{DynamicResource Style.ToggleButton.ComboBox}"/>
+
+            <n:ExtendedTextBox Grid.Column="0" x:Name="PART_EditableTextBox" Margin="{TemplateBinding Padding}"
+                               IsReadOnly="{Binding IsReadOnly, RelativeSource={RelativeSource TemplatedParent}}" Style="{DynamicResource Style.TextBox.ComboBoxEditable}" 
+                               HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+        </Grid>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" TargetName="PART_EditableTextBox" Value="0.7"/>
+            </Trigger>
+            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
+            </Trigger>
+            <Trigger Property="HasItems" Value="False">
+                <Setter TargetName="DropDownBorder" Property="Height" Value="95"/>
+            </Trigger>
+
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsGrouping" Value="True"/>
+                    <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="False"/>
+                </MultiTrigger.Conditions>
+
+                <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
+            </MultiTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    
+    
+    <!--ExtendedComboBox Style-->
+    <Style TargetType="{x:Type n:ExtendedComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
+        <Setter Property="Template" Value="{StaticResource Template.ExtendedComboBox}"/>
+        <Setter Property="SelectionItemBox" Value="{Binding RelativeSource={RelativeSource Self}, Path=SelectionBoxItem}"/>
+        <!--<Setter Property="SelectionItemBoxTemplate" Value="{Binding RelativeSource={RelativeSource Self}, Path=SelectionBoxItemTemplate}"/>-->
+        <Setter Property="SelectionItemBoxTemplate" Value="{Binding RelativeSource={RelativeSource Self}, Path=ItemTemplate}"/>
+
+        <Style.Triggers>
+            <Trigger Property="IsEditable" Value="True">
+                <Setter Property="IsTabStop" Value="False"/>
+                <Setter Property="Padding" Value="2"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Template" Value="{StaticResource Template.ExtendedComboBox.Editable}"/>
+            </Trigger>
+            
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.7"/>
+            </Trigger>
+
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="SelectedItem" Value="{x:Null}"/>
+                    <Condition Property="HasItems" Value="True"/>
+                </MultiTrigger.Conditions>
+
+                <Setter Property="SelectionItemBox" Value="{Binding RelativeSource={RelativeSource Self}, Path=NoSelectionItem}"/>
+            </MultiTrigger>
+
+            <Trigger Property="HasItems" Value="False">
+                <Setter Property="SelectionItemBox" Value="{Binding RelativeSource={RelativeSource Self}, Path=EmptyItem}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

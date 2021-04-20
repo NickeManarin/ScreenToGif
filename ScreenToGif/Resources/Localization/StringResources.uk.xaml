@@ -418,27 +418,27 @@
     <!--<s:String x:Key="S.Options.Upload.Proxy.Password">Password:</s:String>-->
     <!--<s:String x:Key="S.Options.Upload.Get">Get OAuth token</s:String>-->
     <!--<s:String x:Key="S.Options.Upload.PasteToken">Paste the authorization token here</s:String>    -->
-    <!--<s:String x:Key="S.Options.Upload.Authorize">Authorize</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Authorize">Authorize</s:String>-->
     <!--<s:String x:Key="S.Options.Upload.Refresh">Refresh</s:String>-->
     <!--<s:String x:Key="S.Options.Upload.Clear">Clear</s:String>-->
-    <!--<s:String x:Key="S.Options.Upload.Imgur.Anonymous">Imgur (Anonymous)</s:String>-->
-    <!--<s:String x:Key="S.Options.Upload.Imgur.Direct">Use direct links.</s:String>-->
-    <!--<s:String x:Key="S.Options.Upload.Imgur.Gifv">Get links with the Gifv extension instead of Gif.</s:String>-->
-    <!--<s:String x:Key="S.Options.Upload.Imgur.ToAlbum">Upload gifs to a selected album.</s:String>-->
-    <!--<s:String x:Key="S.Options.Upload.Imgur.Album">Album:</s:String>-->
-    <!--<s:String x:Key="S.Options.Upload.Imgur.AskMe">Ask me before uploading</s:String>-->
-    <!--<s:String x:Key="S.Options.Upload.Imgur.Auth.NotPossible">It was not possible to open the page to get the Imgur authorization token.</s:String>-->
-    <!--<s:String x:Key="S.Options.Upload.Imgur.Auth.Missing">In order to authorize this app, you need to provide the authorization token.</s:String>-->
-    <!--<s:String x:Key="S.Options.Upload.Imgur.Auth.Completed">Imgur authorization completed.</s:String>-->
-    <!--<s:String x:Key="S.Options.Upload.Imgur.Auth.Error">Imgur authorization failed. Try again in a few seconds or get a new token.</s:String>-->
-    <!--<s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Header">It was not possible to authorize the app</s:String>-->
-    <!--<s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Message">Check if you provided the correct token and if you have an internet connection.</s:String>-->
-    <!--<s:String x:Key="S.Options.Upload.Imgur.Refresh.None">In order to refresh the authorization for this app, you need to first finish the authorization process.</s:String>-->
-    <!--<s:String x:Key="S.Options.Upload.Imgur.NotAuthorized">Not authorized.</s:String>-->
-    <!--<s:String x:Key="S.Options.Upload.Imgur.Expired">Authorization expired in {0}.</s:String>-->
-    <!--<s:String x:Key="S.Options.Upload.Imgur.Valid">Authorization valid until {0}.</s:String>-->
-    <!--<s:String x:Key="S.Options.Upload.Imgur.Removed">Imgur authorization removed.</s:String>-->
-    <!--<s:String x:Key="S.Options.Upload.Imgur.Error.AlbumLoad">It was not possible to load the album list.</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Imgur.Anonymous">Imgur (Anonymous)</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Direct">Use direct links.</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Imgur.Gifv">Get links with the Gifv extension instead of Gif.</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Imgur.ToAlbum">Upload gifs to a selected album.</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Imgur.Album">Album:</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Imgur.AskMe">Ask me before uploading</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.NotPossible">It was not possible to open the page to get the Imgur authorization token.</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Warning.Token">In order to authorize this app, you need to provide the authorization token.</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Completed">Imgur authorization completed.</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Error">Imgur authorization failed. Try again in a few seconds or get a new token.</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Header">It was not possible to authorize the app</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Message">Check if you provided the correct token and if you have an internet connection.</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Imgur.Refresh.None">In order to refresh the authorization for this app, you need to first finish the authorization process.</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Info.NotAuthorized">Not authorized.</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Info.Expired">Authorization expired in {0}.</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Info.Valid">Authorization valid until {0}.</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Info.Removed">Imgur authorization removed.</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Warning.AlbumLoad">It was not possible to load the album list.</s:String>-->
     <!--<s:String x:Key="S.Options.Upload.Gfycat.Anonymous">Gfycat (Anonymous)</s:String>-->
     <!--<s:String x:Key="S.Options.Upload.Yandex.Token">OAuth token:</s:String>-->
     <!--<s:String x:Key="S.Options.Upload.Pick.Destination">Pick a destination</s:String>-->
@@ -1273,7 +1273,7 @@
     <!--<s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable">Use a global color table.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable.Info">May reduce the quality and/or size of the gif.</s:String>-->
     <s:String x:Key="S.SaveAs.GifOptions.Loop">Loop:</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">Looped Gif.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Looped">Looped Gif.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Постійно повторювати.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Кількість повторів.</s:String>
     <!--<s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable">Enable transparency.</s:String>-->
@@ -1300,9 +1300,9 @@
     <!--<s:String x:Key="S.SaveAs.ImageOptions.Zip">Zip the images.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.PsdOptions">Psd options</s:String>-->
     <!--<s:String x:Key="S.SaveAs.PsdOptions.Compress">Compress the image.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">Compress the image data using the RLE algorithm.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.PsdOptions.Compress.Info">Compress the image data using the RLE algorithm.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.PsdOptions.Timeline">Save the timeline data.</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">Exports the timings of the frames, instead of just the frames.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.PsdOptions.Timeline.Info">Exports the timings of the frames, instead of just the frames.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.ProjectOptions">Project options</s:String>-->
     
     <s:String x:Key="S.SaveAs.Extras">Додаткові налаштування:</s:String>
@@ -1365,9 +1365,9 @@
     <s:String x:Key="S.SaveAs.Warning.Canceled">Операцію скасовано.</s:String>
     
     <!--SaveAs • Export-->
-    <!--<s:String x:Key="S.SaveAs.Frames.Confirmation.Title">Export Frames</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.Frames.Confirmation.Instruction">Are you sure that you want to export the frames?</s:String>-->
-    <!--<s:String x:Key="S.SaveAs.Frames.Confirmation.Message">This action will export {0} frames directly into the selected folder.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Dialogs.Multiple.Title">Export Frames</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">Are you sure that you want to export the frames?</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">This action will export {0} frames directly into the selected folder.</s:String>-->
     
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">Зворотній зв'язок</s:String>

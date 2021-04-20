@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,6 +8,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using ScreenToGif.ImageUtil;
 using ScreenToGif.Model;
+using ScreenToGif.Settings;
 using ScreenToGif.Util;
 using ScreenToGif.Windows.Other;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;

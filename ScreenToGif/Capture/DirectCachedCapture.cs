@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.IO;
 using System.IO.Compression;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
 using ScreenToGif.Model;
+using ScreenToGif.Settings;
 using ScreenToGif.Util;
 using SharpDX;
 using SharpDX.Direct3D11;
@@ -76,11 +77,11 @@ namespace ScreenToGif.Capture
 
                         for (var movedIndex = 0; movedIndex < movedRegionsLength / Marshal.SizeOf(typeof(OutputDuplicateMoveRectangle)); movedIndex++)
                         {
-                            //Crop the destination rectangle to the scree area rectangle.
-                            var left = Math.Max(movedRectangles[movedIndex].DestinationRect.Left, Left);
-                            var right = Math.Min(movedRectangles[movedIndex].DestinationRect.Right, Left + Width);
-                            var top = Math.Max(movedRectangles[movedIndex].DestinationRect.Top, Top);
-                            var bottom = Math.Min(movedRectangles[movedIndex].DestinationRect.Bottom, Top + Height);
+                            //Crop the destination rectangle to the screen area rectangle.
+                            var left = Math.Max(movedRectangles[movedIndex].DestinationRect.Left, Left - OffsetLeft);
+                            var right = Math.Min(movedRectangles[movedIndex].DestinationRect.Right, Left + Width - OffsetLeft);
+                            var top = Math.Max(movedRectangles[movedIndex].DestinationRect.Top, Top - OffsetTop);
+                            var bottom = Math.Min(movedRectangles[movedIndex].DestinationRect.Bottom, Top + Height - OffsetTop);
 
                             //Copies from the screen texture only the area which the user wants to capture.
                             if (right > left && bottom > top)
@@ -89,8 +90,9 @@ namespace ScreenToGif.Capture
                                 var sourceWidth = movedRectangles[movedIndex].SourcePoint.X + (right - left);
                                 var sourceHeight = movedRectangles[movedIndex].SourcePoint.Y + (bottom - top);
 
-                                Device.ImmediateContext.CopySubresourceRegion(screenTexture, 0, new ResourceRegion(movedRectangles[movedIndex].SourcePoint.X, movedRectangles[movedIndex].SourcePoint.Y, 0, sourceWidth, sourceHeight, 1),
-                                    StagingTexture, 0, left - Left, top - Top);
+                                Device.ImmediateContext.CopySubresourceRegion(screenTexture, 0,
+                                    new ResourceRegion(movedRectangles[movedIndex].SourcePoint.X, movedRectangles[movedIndex].SourcePoint.Y, 0, sourceWidth, sourceHeight, 1),
+                                    StagingTexture, 0, left - (Left - OffsetLeft), top - (Top - OffsetTop));
                             }
                         }
 
@@ -104,14 +106,14 @@ namespace ScreenToGif.Capture
                         for (var dirtyIndex = 0; dirtyIndex < dirtyRegionsLength / Marshal.SizeOf(typeof(RawRectangle)); dirtyIndex++)
                         {
                             //Crop screen positions and size to frame sizes.
-                            var left = Math.Max(dirtyRectangles[dirtyIndex].Left, Left);
-                            var right = Math.Min(dirtyRectangles[dirtyIndex].Right, Left + Width);
-                            var top = Math.Max(dirtyRectangles[dirtyIndex].Top, Top);
-                            var bottom = Math.Min(dirtyRectangles[dirtyIndex].Bottom, Top + Height);
+                            var left = Math.Max(dirtyRectangles[dirtyIndex].Left, Left - OffsetLeft);
+                            var right = Math.Min(dirtyRectangles[dirtyIndex].Right, Left + Width - OffsetLeft);
+                            var top = Math.Max(dirtyRectangles[dirtyIndex].Top, Top - OffsetTop);
+                            var bottom = Math.Min(dirtyRectangles[dirtyIndex].Bottom, Top + Height - OffsetTop);
 
                             //Copies from the screen texture only the area which the user wants to capture.
                             if (right > left && bottom > top)
-                                Device.ImmediateContext.CopySubresourceRegion(screenTexture, 0, new ResourceRegion(left, top, 0, right, bottom, 1), StagingTexture, 0, left - Left, top - Top);
+                                Device.ImmediateContext.CopySubresourceRegion(screenTexture, 0, new ResourceRegion(left, top, 0, right, bottom, 1), StagingTexture, 0, left - (Left - OffsetLeft), top - (Top - OffsetTop));
                         }
 
                         #endregion
@@ -229,11 +231,11 @@ namespace ScreenToGif.Capture
 
                         for (var movedIndex = 0; movedIndex < movedRegionsLength / Marshal.SizeOf(typeof(OutputDuplicateMoveRectangle)); movedIndex++)
                         {                            
-                            //Crop the destination rectangle to the scree area rectangle.
-                            var left = Math.Max(movedRectangles[movedIndex].DestinationRect.Left, Left);
-                            var right = Math.Min(movedRectangles[movedIndex].DestinationRect.Right, Left + Width);
-                            var top = Math.Max(movedRectangles[movedIndex].DestinationRect.Top, Top);
-                            var bottom = Math.Min(movedRectangles[movedIndex].DestinationRect.Bottom, Top + Height);
+                            //Crop the destination rectangle to the screen area rectangle.
+                            var left = Math.Max(movedRectangles[movedIndex].DestinationRect.Left, Left - OffsetLeft);
+                            var right = Math.Min(movedRectangles[movedIndex].DestinationRect.Right, Left + Width - OffsetLeft);
+                            var top = Math.Max(movedRectangles[movedIndex].DestinationRect.Top, Top - OffsetTop);
+                            var bottom = Math.Min(movedRectangles[movedIndex].DestinationRect.Bottom, Top + Height - OffsetTop);
 
                             //Copies from the screen texture only the area which the user wants to capture.
                             if (right > left && bottom > top)
@@ -242,8 +244,9 @@ namespace ScreenToGif.Capture
                                 var sourceWidth = movedRectangles[movedIndex].SourcePoint.X + (right - left);
                                 var sourceHeight = movedRectangles[movedIndex].SourcePoint.Y + (bottom - top);
 
-                                Device.ImmediateContext.CopySubresourceRegion(screenTexture, 0, new ResourceRegion(movedRectangles[movedIndex].SourcePoint.X, movedRectangles[movedIndex].SourcePoint.Y, 0, sourceWidth, sourceHeight, 1), 
-                                    BackingTexture, 0, left - Left, top - Top);
+                                Device.ImmediateContext.CopySubresourceRegion(screenTexture, 0,
+                                    new ResourceRegion(movedRectangles[movedIndex].SourcePoint.X, movedRectangles[movedIndex].SourcePoint.Y, 0, sourceWidth, sourceHeight, 1),
+                                    BackingTexture, 0, left - (Left - OffsetLeft), top - (Top - OffsetTop));
                             }
                         }
 
@@ -253,18 +256,58 @@ namespace ScreenToGif.Capture
 
                         var dirtyRectangles = new RawRectangle[info.TotalMetadataBufferSize];
                         DuplicatedOutput.GetFrameDirtyRects(dirtyRectangles.Length, dirtyRectangles, out var dirtyRegionsLength);
-
+                        
                         for (var dirtyIndex = 0; dirtyIndex < dirtyRegionsLength / Marshal.SizeOf(typeof(RawRectangle)); dirtyIndex++)
                         {
                             //Crop screen positions and size to frame sizes.
-                            var left = Math.Max(dirtyRectangles[dirtyIndex].Left, Left);
-                            var right = Math.Min(dirtyRectangles[dirtyIndex].Right, Left + Width);
-                            var top = Math.Max(dirtyRectangles[dirtyIndex].Top, Top);
-                            var bottom = Math.Min(dirtyRectangles[dirtyIndex].Bottom, Top + Height);
+                            var left = Math.Max(dirtyRectangles[dirtyIndex].Left, Left - OffsetLeft);
+                            var right = Math.Min(dirtyRectangles[dirtyIndex].Right, Left + Width - OffsetLeft);
+                            var top = Math.Max(dirtyRectangles[dirtyIndex].Top, Top - OffsetTop);
+                            var bottom = Math.Min(dirtyRectangles[dirtyIndex].Bottom, Top + Height - OffsetTop);
 
+                            //int left, right, top, bottom;
+                            //switch (DisplayRotation)
+                            //{
+                            //    case DisplayModeRotation.Rotate90:
+                            //    {
+                            //        //TODO:
+                            //        left = Math.Max(dirtyRectangles[dirtyIndex].Left, Left - OffsetLeft);
+                            //        right = Math.Min(dirtyRectangles[dirtyIndex].Right, Left + Width - OffsetLeft);
+                            //        top = Math.Max(dirtyRectangles[dirtyIndex].Top, Top - OffsetTop);
+                            //        bottom = Math.Min(dirtyRectangles[dirtyIndex].Bottom, Top + Height - OffsetTop);
+
+                            //        //left = Math.Min(dirtyRectangles[dirtyIndex].Bottom, Top + Height - OffsetTop); 
+                            //        //right = Math.Max(dirtyRectangles[dirtyIndex].Top, Top - OffsetTop);
+                            //        //top = Math.Max(dirtyRectangles[dirtyIndex].Left, Left - OffsetLeft);
+                            //        //bottom = Math.Min(dirtyRectangles[dirtyIndex].Right, Left + Width - OffsetLeft);
+
+                            //        break;
+                            //    }
+
+                            //    case DisplayModeRotation.Rotate180:
+                            //    {
+                            //        //TODO:
+                            //        left = Math.Max(dirtyRectangles[dirtyIndex].Top + OffsetTop, Top); 
+                            //        right = Math.Min(dirtyRectangles[dirtyIndex].Bottom + OffsetTop, Top + Height); 
+                            //        top = Math.Min(dirtyRectangles[dirtyIndex].Right + OffsetLeft, Left + Width);
+                            //        bottom = Math.Max(dirtyRectangles[dirtyIndex].Left + OffsetLeft, Left); 
+                            //        break;
+                            //    }
+                                
+                            //    default:
+                            //    {
+                            //        //In this context, the screen positions are relative to the current screen, not to the whole set of screens (virtual space).
+                            //        left = Math.Max(dirtyRectangles[dirtyIndex].Left, Left - OffsetLeft);
+                            //        right = Math.Min(dirtyRectangles[dirtyIndex].Right, Left + Width - OffsetLeft);
+                            //        top = Math.Max(dirtyRectangles[dirtyIndex].Top, Top - OffsetTop);
+                            //        bottom = Math.Min(dirtyRectangles[dirtyIndex].Bottom, Top + Height - OffsetTop);
+                            //        break;
+                            //    }
+                            //}
+                            
                             //Copies from the screen texture only the area which the user wants to capture.
                             if (right > left && bottom > top)
-                                Device.ImmediateContext.CopySubresourceRegion(screenTexture, 0, new ResourceRegion(left, top, 0, right, bottom, 1), BackingTexture, 0, left - Left, top - Top);
+                                Device.ImmediateContext.CopySubresourceRegion(screenTexture, 0, new ResourceRegion(left, top, 0, right, bottom, 1), BackingTexture, 0, left - (Left - OffsetLeft), top - (Top - OffsetTop));
                         }
 
                         #endregion

@@ -451,27 +451,27 @@
     <s:String x:Key="S.Options.Upload.Proxy.Password">비밀번호:</s:String>
     <s:String x:Key="S.Options.Upload.Get">OAuth 토큰 발급</s:String>
     <s:String x:Key="S.Options.Upload.PasteToken">여기에 인증 토큰을 넣어주세요</s:String>
-    <s:String x:Key="S.Options.Upload.Authorize">인증</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Authorize">인증</s:String>
     <s:String x:Key="S.Options.Upload.Refresh">갱신</s:String>
     <s:String x:Key="S.Options.Upload.Clear">삭제</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Anonymous">Imgur (익명)</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Direct">직접 링크를 사용합니다.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Gifv">Gif 대신 Gifv 링크를 받습니다.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.ToAlbum">선택한 앨범에 Gif를 업로드합니다.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Album">앨범:</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.AskMe">업로드 전에 확인하기</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.NotPossible">Imgur 인증 토큰을 받기 위한 웹 페이지를 확인할 수 없습니다.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Missing">이 프로그램을 인증하기 위해 인증 토큰을 제공해야 합니다.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Completed">Imgur 인증을 완료했습니다.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Error">Imgur 인증에 실패했습니다. 잠시 후 다시 시도하거나 새 토큰을 발급받으세요.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Header">앱 인증에 실패했습니다</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Message">토큰이 올바른지 확인하고 인터넷 연결을 점검해보세요</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Refresh.None">이 프로그램에 대한 인증을 갱신하기 위해 먼저 인증 절차를 마쳐야 합니다.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.NotAuthorized">인증되지 않았습니다.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Expired">{0}에 인증이 만료됩니다.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Valid">{0}까지 인증이 유효합니다.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Removed">Imgur 인증을 제거했습니다.</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Error.AlbumLoad">앨범 목록을 불러오는데 실패했습니다.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Anonymous">Imgur (익명)</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Direct">직접 링크를 사용합니다.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Gifv">Gif 대신 Gifv 링크를 받습니다.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.ToAlbum">선택한 앨범에 Gif를 업로드합니다.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Album">앨범:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.AskMe">업로드 전에 확인하기</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.NotPossible">Imgur 인증 토큰을 받기 위한 웹 페이지를 확인할 수 없습니다.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Token">이 프로그램을 인증하기 위해 인증 토큰을 제공해야 합니다.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Completed">Imgur 인증을 완료했습니다.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Error">Imgur 인증에 실패했습니다. 잠시 후 다시 시도하거나 새 토큰을 발급받으세요.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Header">앱 인증에 실패했습니다</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Message">토큰이 올바른지 확인하고 인터넷 연결을 점검해보세요</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Refresh.None">이 프로그램에 대한 인증을 갱신하기 위해 먼저 인증 절차를 마쳐야 합니다.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.NotAuthorized">인증되지 않았습니다.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Expired">{0}에 인증이 만료됩니다.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Valid">{0}까지 인증이 유효합니다.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Removed">Imgur 인증을 제거했습니다.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.AlbumLoad">앨범 목록을 불러오는데 실패했습니다.</s:String>
     <s:String x:Key="S.Options.Upload.Gfycat.Anonymous">Gfycat (익명)</s:String>
     <s:String x:Key="S.Options.Upload.Yandex.Token">OAuth 토큰:</s:String>
     <s:String x:Key="S.Options.Upload.Pick.Destination">사이트 선택</s:String>
@@ -1340,7 +1340,7 @@
     <!--<s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable">Use a global color table.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable.Info">May reduce the quality and/or size of the gif.</s:String>-->
     <s:String x:Key="S.SaveAs.GifOptions.Loop">반복:</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">반복 사용</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Looped">반복 사용</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">계속 반복</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">회 반복</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable">투명도 활성화</s:String>
@@ -1367,9 +1367,9 @@
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">파일 압축하기</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions">Psd 설정</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Compress">이미지 압축하기</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">RLE 알고리즘을 사용하여 이미지 데이터를 압축합니다.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Info">RLE 알고리즘을 사용하여 이미지 데이터를 압축합니다.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline">타임라인 데이터 저장하기</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">프레임뿐만 아니라 프레임 지연시간까지 같이 내보냅니다.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Info">프레임뿐만 아니라 프레임 지연시간까지 같이 내보냅니다.</s:String>
     <s:String x:Key="S.SaveAs.ProjectOptions">프로젝트 설정</s:String>
     
     <s:String x:Key="S.SaveAs.Extras">기타:</s:String>
@@ -1432,9 +1432,9 @@
     <s:String x:Key="S.SaveAs.Warning.Canceled">작업 취소됨</s:String>
     
     <!--SaveAs • Export-->
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">프레임 내보내기</s:String>
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Instruction">이 프레임을 내보내겠습니까?</s:String>
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Message">{0} 프레임을 선택 폴더에 내보냅니다.</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Title">프레임 내보내기</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">이 프레임을 내보내겠습니까?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">{0} 프레임을 선택 폴더에 내보냅니다.</s:String>
     
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">피드백</s:String>

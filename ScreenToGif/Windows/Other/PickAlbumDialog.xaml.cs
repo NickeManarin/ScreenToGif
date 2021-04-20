@@ -2,14 +2,14 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using ScreenToGif.Cloud.Imgur;
+using ScreenToGif.Model.UploadPresets.Imgur;
 using ScreenToGif.Util;
 
 namespace ScreenToGif.Windows.Other
 {
     public partial class PickAlbumDialog : Window
     {
-        private List<ImgurAlbumData> AlbumList { get; set; }
+        private List<ImgurAlbum> AlbumList { get; set; }
 
         public PickAlbumDialog()
         {
@@ -18,7 +18,7 @@ namespace ScreenToGif.Windows.Other
 
         #region Methods
 
-        private void PrepareOk(List<ImgurAlbumData> list)
+        private void PrepareOk(List<ImgurAlbum> list)
         {
             AlbumList = list;
 
@@ -26,7 +26,7 @@ namespace ScreenToGif.Windows.Other
             OkButton.Focus();
         }
 
-        private void PrepareOkCancel(List<ImgurAlbumData> list)
+        private void PrepareOkCancel(List<ImgurAlbum> list)
         {
             AlbumList = list;
 
@@ -58,7 +58,7 @@ namespace ScreenToGif.Windows.Other
         /// Shows a Ok dialog.
         /// </summary>
         /// <returns>True if Ok</returns>
-        public static string Ok(List<ImgurAlbumData> list)
+        public static string Ok(List<ImgurAlbum> list)
         {
             var dialog = new PickAlbumDialog();
             dialog.PrepareOk(list);
@@ -67,7 +67,7 @@ namespace ScreenToGif.Windows.Other
             if (!result.HasValue || !result.Value)
                 return null;
 
-            var item = dialog.MainDataGrid.SelectedItem as ImgurAlbumData;
+            var item = dialog.MainDataGrid.SelectedItem as ImgurAlbum;
             return item?.Id;
         }
 
@@ -75,7 +75,7 @@ namespace ScreenToGif.Windows.Other
         /// Shows a Ok/Cancel dialog.
         /// </summary>
         /// <returns>True if Ok</returns>
-        public static string OkCancel(List<ImgurAlbumData> list)
+        public static string OkCancel(List<ImgurAlbum> list)
         {
             var dialog = new PickAlbumDialog();
             dialog.PrepareOkCancel(list);
@@ -84,7 +84,7 @@ namespace ScreenToGif.Windows.Other
             if (!result.HasValue || !result.Value)
                 return null;
 
-            var item = dialog.MainDataGrid.SelectedItem as ImgurAlbumData;
+            var item = dialog.MainDataGrid.SelectedItem as ImgurAlbum;
             return item?.Id;
         }
 

@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Win32;
 using ScreenToGif.Native;
+using ScreenToGif.Settings;
 using ScreenToGif.Util;
 
 namespace ScreenToGif.Windows.Other

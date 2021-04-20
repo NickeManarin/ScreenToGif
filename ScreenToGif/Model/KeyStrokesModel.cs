@@ -1,5 +1,6 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Media;
+using ScreenToGif.Settings;
 using ScreenToGif.Util;
 
 namespace ScreenToGif.Model

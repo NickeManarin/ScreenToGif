@@ -20,6 +20,11 @@ namespace ScreenToGif.Model
         public string NewChunkPath { get; set; }
 
         /// <summary>
+        /// Path of the folder where the files are located.
+        /// </summary>
+        public string Path { get; set; }
+
+        /// <summary>
         /// List of frames.
         /// </summary>
         public List<ExportFrame> Frames { get; set; } = new List<ExportFrame>();

@@ -1,9 +1,8 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -18,10 +17,13 @@ using System.Windows.Media;
 using System.Windows.Navigation;
 using System.Windows.Threading;
 using Microsoft.Win32;
-using ScreenToGif.Cloud.Imgur;
 using ScreenToGif.Controls;
 using ScreenToGif.Model;
+using ScreenToGif.Model.ExportPresets;
+using ScreenToGif.Model.UploadPresets;
+using ScreenToGif.Settings;
 using ScreenToGif.Util;
+using ScreenToGif.Util.InterProcessChannel;
 using ScreenToGif.Windows.Other;
 using Application = System.Windows.Application;
 using ComboBox = System.Windows.Controls.ComboBox;
@@ -77,6 +79,11 @@ namespace ScreenToGif.Windows
         /// List of tasks.
         /// </summary>
         private ObservableCollection<DefaultTaskModel> _effectList;
+
+        /// <summary>
+        /// List of upload presets.
+        /// </summary>
+        private ObservableCollection<UploadPreset> _uploadList;
 
         /// <summary>
         /// The latest size of the grid before being altered.
@@ -156,9 +163,9 @@ namespace ScreenToGif.Windows
 
             //With this inter process server, this instance can listen to arguments sent by other instances.
             if (UserSettings.All.SingleInstance)
-                InterProcess.RegisterServer();
+                InstanceSwitcherChannel.RegisterServer();
             else
-                InterProcess.UnregisterServer();
+                InstanceSwitcherChannel.UnregisterServer();
         }
 
         private void AppThemeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -899,7 +906,8 @@ namespace ScreenToGif.Windows
         private void LanguagePanel_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //To avoid being called during startup of the window and to avoid being called twice after selection changes.
-            if (!IsLoaded || e.AddedItems.Count == 0) return;
+            if (!IsLoaded || e.AddedItems.Count == 0)
+                return;
 
             try
             {
@@ -1062,15 +1070,12 @@ namespace ScreenToGif.Windows
                 UserSettings.All.AutomaticCleanUpDays = UserSettings.All.AutomaticCleanUpDays > 0 ? UserSettings.All.AutomaticCleanUpDays : 5;
 
                 //Asks if the user wants to remove all files or just the old ones.
-                var dialog = new CacheDialog();
-                var result = dialog.ShowDialog();
-
-                if (!result.HasValue || !result.Value)
+                if (!CacheDialog.Ask(true, out bool ignoreRecent))
                     return;
 
                 _folderList = await Task.Factory.StartNew(() => Directory.GetDirectories(path, "*", SearchOption.TopDirectoryOnly).Select(x => new DirectoryInfo(x)).ToList());
 
-                if (dialog.IgnoreRecent)
+                if (ignoreRecent)
                     _folderList = await Task.Factory.StartNew(() => _folderList.Where(w => (DateTime.Now - w.CreationTime).Days > UserSettings.All.AutomaticCleanUpDays).ToList());
 
                 foreach (var folder in _folderList.Where(folder => !MutexList.IsInUse(folder.Name)))
@@ -1379,137 +1384,115 @@ namespace ScreenToGif.Windows
 
         #region Cloud Services
 
-        private void ImgurHyperlink_Click(object sender, RoutedEventArgs e)
+        private void CloudGrid_Loaded(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                StatusBand.Hide();
-                Process.Start(Imgur.GetGetAuthorizationAdress());
-            }
-            catch (Exception ex)
-            {
-                LogWriter.Log(ex, "Creating the link and opening a Imgur related page");
-                StatusBand.Error(LocalizationHelper.Get("S.Options.Upload.Imgur.Auth.NotPossible"));
-            }
+            var list = UserSettings.All.UploadPresets?.Cast<UploadPreset>().ToList() ?? new List<UploadPreset>();
+
+            UploadDataGrid.ItemsSource = _uploadList = new ObservableCollection<UploadPreset>(list);
         }
 
-        private async void ImgurAuthorizeButton_Click(object sender, RoutedEventArgs e)
+        private void AddUpload_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(UserSettings.All.ImgurOAuthToken))
-            {
-                StatusBand.Warning(LocalizationHelper.Get("S.Options.Upload.Imgur.Auth.Missing"));
-                return;
-            }
-
-            try
-            {
-                ImgurExpander.IsEnabled = false;
-                StatusBand.Hide();
-
-                if (await Imgur.GetAccessToken())
-                {
-                    UserSettings.All.ImgurOAuthToken = null;
-                    StatusBand.Info(LocalizationHelper.Get("S.Options.Upload.Imgur.Auth.Completed"));
-                }
-                else
-                    StatusBand.Warning(LocalizationHelper.Get("S.Options.Upload.Imgur.Auth.Error"));
-            }
-            catch (Exception ex)
-            {
-                LogWriter.Log(ex, "Authorizing access - Imgur");
-                ErrorDialog.Ok(Title, LocalizationHelper.Get("S.Options.Upload.Imgur.Auth.Failed.Header"), LocalizationHelper.Get("S.Options.Upload.Imgur.Auth.Failed.Message"), ex);
-            }
-
-            ImgurExpander.IsEnabled = true;
-            UpdateImgurStatus();
-            UpdateAlbumList();
+            e.CanExecute = CloudGrid.IsVisible;
         }
 
-        private async void ImgurRefreshButton_Click(object sender, RoutedEventArgs e)
+        private void Upload_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(UserSettings.All.ImgurRefreshToken))
-            {
-                StatusBand.Warning(LocalizationHelper.Get("S.Options.Upload.Imgur.Refresh.None"));
-                return;
-            }
-
-            try
-            {
-                ImgurExpander.IsEnabled = false;
-                StatusBand.Hide();
-
-                if (await Imgur.RefreshToken())
-                    StatusBand.Info(LocalizationHelper.Get("S.Options.Upload.Imgur.Auth.Completed"));
-                else
-                    StatusBand.Warning(LocalizationHelper.Get("S.Options.Upload.Imgur.Auth.Error"));
-            }
-            catch (Exception ex)
-            {
-                LogWriter.Log(ex, "Refreshing authorization - Imgur");
-                ErrorDialog.Ok(Title, LocalizationHelper.Get("S.Options.Upload.Imgur.Auth.Failed.Header"), LocalizationHelper.Get("S.Options.Upload.Imgur.Auth.Failed.Message"), ex);
-            }
-
-            ImgurExpander.IsEnabled = true;
-            UpdateImgurStatus();
-            UpdateAlbumList();
+            e.CanExecute = CloudGrid.IsVisible && UploadDataGrid.SelectedIndex != -1;
         }
 
-        private void ImgurClearButton_Click(object sender, RoutedEventArgs e)
+        private void AddUpload_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            UserSettings.All.ImgurOAuthToken = null;
-            UserSettings.All.ImgurAccessToken = null;
-            UserSettings.All.ImgurRefreshToken = null;
-            UserSettings.All.ImgurExpireDate = null;
-            UserSettings.All.ImgurAlbumList = null;
-            UserSettings.All.ImgurSelectedAlbum = null;
-            ImgurAlbumComboBox.ItemsSource = null;
+            var upload = new Upload();
+            var result = upload.ShowDialog();
 
-            StatusBand.Info(LocalizationHelper.Get("S.Options.Upload.Imgur.Removed"));
-            UpdateImgurStatus();
-            UpdateAlbumList();
-        }
-
-        private void YandexOauth_OnRequestNavigate(object sender, RequestNavigateEventArgs e)
-        {
-            try
-            {
-                Process.Start(UserSettings.All.LanguageCode.StartsWith("ru") ? e.Uri.AbsoluteUri.Replace("yandex.com", "yandex.ru") : e.Uri.AbsoluteUri);
-            }
-            catch (Exception ex)
-            {
-                LogWriter.Log(ex, "Open Hyperlink");
-            }
-        }
-
-        private void UpdateImgurStatus()
-        {
-            ImgurTextBlock.Text = UserSettings.All.ImgurAccessToken == null || !UserSettings.All.ImgurExpireDate.HasValue ? LocalizationHelper.Get("S.Options.Upload.Imgur.NotAuthorized") :
-                UserSettings.All.ImgurExpireDate < DateTime.UtcNow ? string.Format(LocalizationHelper.Get("S.Options.Upload.Imgur.Expired"), UserSettings.All.ImgurExpireDate.Value.ToLocalTime().ToString("g", CultureInfo.CurrentUICulture)) :
-                    string.Format(LocalizationHelper.Get("S.Options.Upload.Imgur.Valid"), UserSettings.All.ImgurExpireDate.Value.ToLocalTime().ToString("g", CultureInfo.CurrentUICulture));
-        }
-
-        private async void UpdateAlbumList(bool offline = false)
-        {
-            if (!offline && !await Imgur.IsAuthorized())
+            if (result != true)
                 return;
 
-            var list = offline && UserSettings.All.ImgurAlbumList != null ? UserSettings.All.ImgurAlbumList.Cast<ImgurAlbumData>().ToList() : offline ? null : await Imgur.GetAlbums();
+            _uploadList.Add(upload.CurrentPreset);
 
-            if (list == null)
+            UserSettings.All.UploadPresets = new ArrayList(_uploadList.ToArray());
+        }
+
+        private void EditUpload_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            var index = UploadDataGrid.SelectedIndex;
+            var current = _uploadList[UploadDataGrid.SelectedIndex];
+            var selected = current.ShallowCopy();
+
+            var preset = new Upload { CurrentPreset = selected, IsEditing = true };
+            var result = preset.ShowDialog();
+
+            if (result != true)
+                return;
+
+            _uploadList[UploadDataGrid.SelectedIndex] = preset.CurrentPreset;
+            UploadDataGrid.Items.Refresh();
+            UploadDataGrid.SelectedIndex = index;
+
+            //Update the upload preset in all export presets.
+            if (current.Title != preset.CurrentPreset.Title)
             {
-                list = new List<ImgurAlbumData>();
-
-                if (!offline)
-                    StatusBand.Error(LocalizationHelper.Get("S.Options.Upload.Imgur.Error.AlbumLoad"));
+                foreach (var exportPreset in UserSettings.All.ExportPresets.OfType<ExportPreset>().Where(w => w.UploadService == current.Title))
+                    exportPreset.UploadService = preset.CurrentPreset.Title;
             }
 
-            if (!offline || list.All(a => a.Id != "♥♦♣♠"))
-                list.Insert(0, new ImgurAlbumData { Id = "♥♦♣♠", Title = LocalizationHelper.Get("S.Options.Upload.Imgur.AskMe") });
+            UserSettings.All.UploadPresets = new ArrayList(_uploadList.ToArray());
+        }
 
-            ImgurAlbumComboBox.ItemsSource = list;
+        private void RemoveUpload_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            var index = UploadDataGrid.SelectedIndex;
 
-            if (ImgurAlbumComboBox.SelectedIndex == -1)
-                ImgurAlbumComboBox.SelectedIndex = 0;
+            //Ask if the user really wants to remove the preset.
+            if (index < 0 || !Dialog.Ask(LocalizationHelper.Get("S.SaveAs.Upload.Ask.Delete.Title"), LocalizationHelper.Get("S.SaveAs.Upload.Ask.Delete.Instruction"),
+                LocalizationHelper.Get("S.SaveAs.Upload.Ask.Delete.Message")))
+                return;
+
+            var selected = _uploadList[UploadDataGrid.SelectedIndex];
+            _uploadList.RemoveAt(UploadDataGrid.SelectedIndex);
+
+            //Automatically selects the closest item from the position of the one that was removed.
+            UploadDataGrid.SelectedIndex = _uploadList.Count == 0 ? -1 : _uploadList.Count <= index ? _uploadList.Count - 1 : index;
+
+            UserSettings.All.UploadPresets = new ArrayList(_uploadList.ToArray());
+
+            //Remove the upload preset from all export presets.
+            foreach (var exportPreset in UserSettings.All.ExportPresets.OfType<ExportPreset>().Where(w => w.UploadService == selected.Title))
+                exportPreset.UploadService = null;
+        }
+
+        private void HistoryUpload_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            var history = new UploadHistory
+            {
+                CurrentPreset = _uploadList[UploadDataGrid.SelectedIndex]
+            };
+            history.ShowDialog();
+        }
+
+        private void UploadDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (EditUploadCommandBinding.Command.CanExecute(sender))
+                EditUploadCommandBinding.Command.Execute(sender);
+        }
+
+        private void UploadDataGrid_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter && EditUploadCommandBinding.Command.CanExecute(sender))
+            {
+                EditUploadCommandBinding.Command.Execute(sender);
+                e.Handled = true;
+            }
+
+            if (e.Key == Key.Space)
+            {
+                if (!(UploadDataGrid.SelectedItem is UploadPreset selected))
+                    return;
+
+                selected.IsEnabled = !selected.IsEnabled;
+                e.Handled = true;
+            }
         }
 
         #endregion
@@ -2329,9 +2312,6 @@ namespace ScreenToGif.Windows
                 StatusBand.Warning("It was not possible to correctly load your proxy password. This usually happens when sharing the app settings with different computers.");
                 LogWriter.Log(ex, "Unprotect data");
             }
-
-            UpdateImgurStatus();
-            UpdateAlbumList(true);
         }
 
         private void OkButton_Click(object sender, RoutedEventArgs e)

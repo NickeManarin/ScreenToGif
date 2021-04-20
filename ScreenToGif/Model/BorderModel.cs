@@ -1,4 +1,5 @@
-﻿using System.Windows.Media;
+using System.Windows.Media;
+using ScreenToGif.Settings;
 using ScreenToGif.Util;
 
 namespace ScreenToGif.Model
@@ -68,7 +69,7 @@ namespace ScreenToGif.Model
             };
         }
 
-        public static BorderModel FromSettings()
+        public static BorderModel FromSettings(bool isManual = false)
         {
             return new BorderModel
             {
@@ -77,6 +78,7 @@ namespace ScreenToGif.Model
                 TopThickness = UserSettings.All.BorderTopThickness,
                 RightThickness = UserSettings.All.BorderRightThickness,
                 BottomThickness = UserSettings.All.BorderBottomThickness,
+                IsManual = isManual
             };
         }
     }

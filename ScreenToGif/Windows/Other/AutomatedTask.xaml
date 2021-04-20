@@ -14,6 +14,7 @@
     
     <Window.Resources>
         <c:StringToStaticResource x:Key="StringToStaticResource"/>
+        <c:NullToVisibility x:Key="NullToVisibility"/>
         <u:ComboBoxItemTemplateSelector x:Key="ItemSelector"/>
     </Window.Resources>
     
@@ -85,6 +86,14 @@
             <ContentControl x:Name="MainPresenter" Focusable="False"/>
         </ScrollViewer>
 
+        <TextBlock Grid.Row="1" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap"
+                   Foreground="{DynamicResource Element.Foreground.Gray192}" FontFamily="Segoe UI Semilight" Effect="{StaticResource Shadow.Background.Tiny}"
+                   Visibility="{Binding ElementName=MainPresenter, Path=Content, Converter={StaticResource NullToVisibility}}">
+            <Run Text="▲"/>
+            <LineBreak/>
+            <Run Text="{DynamicResource S.Options.Tasks.SelectType.Info}"/>
+        </TextBlock>
+        
         <Grid Grid.Row="2" Background="{DynamicResource Panel.Background.Level3}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>

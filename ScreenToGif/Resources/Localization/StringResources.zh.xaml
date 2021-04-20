@@ -148,7 +148,7 @@
     <s:String x:Key="S.Updater.Version">版本</s:String>
     <s:String x:Key="S.Updater.Portable">便携版</s:String>
     <s:String x:Key="S.Updater.Installer">安装程序</s:String>
-    <s:String x:Key="S.Updater.Info.WhatsNew">新功能?</s:String>
+    <s:String x:Key="S.Updater.Info.WhatsNew">新功能</s:String>
     <s:String x:Key="S.Updater.Info.BugFixes">错误修复：</s:String>
     <s:String x:Key="S.Updater.Info.NewVersionAvailable">您可以下载新版本。
 您要打开浏览器进行下载吗?</s:String>
@@ -175,7 +175,7 @@
     <s:String x:Key="S.Options.About">关于</s:String>
     <s:String x:Key="S.Options.Other">其它</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Header">光标后面缺少快捷键</s:String>
-    <s:String x:Key="S.Options.Warning.Follow.Message">为了使用鼠标光标跟随功能，必须设置快捷键以在需要时将其禁用。</s:String>
+    <s:String x:Key="S.Options.Warning.Follow.Message">为了使用鼠标光标跟随功能，必须设置一个快捷键，以便在需要时进行切换。</s:String>
     <s:String x:Key="S.Options.Warning.DesktopDuplication.Header">缺少屏幕捕获的依赖项</s:String>
     <s:String x:Key="S.Options.Warning.DesktopDuplication.Message">为了使用 Desktop Duplication API 捕获屏幕，必须下载 SharpDx 库。</s:String>
     
@@ -271,9 +271,9 @@
     <s:String x:Key="S.Options.Recorder.Cache.Info">捕获的每个帧将首先作为像素阵列存储在内存中（可能在压缩之前）。</s:String>
     <s:String x:Key="S.Options.Recorder.Compression">压缩：</s:String>
     <s:String x:Key="S.Options.Recorder.Compression.Optimal">最佳</s:String>
-    <s:String x:Key="S.Options.Recorder.Compression.Optimal.Info">（较慢但可能更理想的压缩）</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.Optimal.Info">（速度较慢，但可能是更理想的压缩方式）</s:String>
     <s:String x:Key="S.Options.Recorder.Compression.Fastest">最快</s:String>
-    <s:String x:Key="S.Options.Recorder.Compression.Fastest.Info">（速度更快，但最佳压缩效果可能较差）</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.Fastest.Info">（速度较快，但可能不是理想的压缩方式）</s:String>
     <s:String x:Key="S.Options.Recorder.Compression.NoCompression">无压缩</s:String>
     <s:String x:Key="S.Options.Recorder.Compression.NoCompression.Info">（捕获帧时不应执行压缩）</s:String>
     <s:String x:Key="S.Options.Recorder.CacheSize">缓存大小：</s:String>
@@ -440,7 +440,7 @@
 • 如果没有设置文件，则使用默认值。
 • 如果没有本地设置，保存所有设置将到 AppData 设置文件中。</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemoval">自动删除旧项目</s:String>
-    <!--<s:String x:Key="S.Options.Storage.AutomaticRemoval.Info">When opening the app, a background task will erase any closed projects older than the amount of time configured.</s:String>-->
+    <s:String x:Key="S.Options.Storage.AutomaticRemoval.Info">当打开应用程序时，超过配置时间的已关闭项目将被后台任务删除。</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemovalDays.Info">（在几天之内，打开编辑器后，任何旧项目都将被删除/丢弃）</s:String>
     
     <!--Options • Storage > Clear cache-->
@@ -465,27 +465,27 @@
     <s:String x:Key="S.Options.Upload.Proxy.Password">密码：</s:String>
     <s:String x:Key="S.Options.Upload.Get">获取 OAuth 凭证</s:String>
     <s:String x:Key="S.Options.Upload.PasteToken">将授权凭证粘贴到此处</s:String>
-    <s:String x:Key="S.Options.Upload.Authorize">授权</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Authorize">授权</s:String>
     <s:String x:Key="S.Options.Upload.Refresh">刷新</s:String>
     <s:String x:Key="S.Options.Upload.Clear">清除</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Anonymous">Imgur（匿名）</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Direct">使用直接链接</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Gifv">使用 Gifv 扩展名而不是 Gif 获取链接</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.ToAlbum">将 Gif 上传到所选的相册</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Album">相册：</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.AskMe">上传前询问我</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.NotPossible">无法打开页面以获取 Imgur 授权凭证。</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Missing">为了授权此应用程序，您需要提供授权令牌凭证。</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Completed">Imgur 授权完成。</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Error">Imgur 授权失败。 几秒钟后重试或获取新的凭证。</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Header">无法授权该应用</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Auth.Failed.Message">检查您提供的令牌是否正确以及是否可以连接互联网。</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Refresh.None">为了刷新此应用程序的授权，您需要先完成授权过程。</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.NotAuthorized">未授权。</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Expired">授权已在{0}中过期。</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Valid">授权有效期至 {0}。</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Removed">Imgur 授权被删除。</s:String>
-    <s:String x:Key="S.Options.Upload.Imgur.Error.AlbumLoad">无法加载相册列表。</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Anonymous">Imgur（匿名）</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Direct">使用直接链接</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Gifv">使用 Gifv 扩展名而不是 Gif 获取链接</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.ToAlbum">将 Gif 上传到所选的相册</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Album">相册：</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.AskMe">上传前询问我</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.NotPossible">无法打开页面以获取 Imgur 授权凭证。</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Token">为了授权此应用程序，您需要提供授权令牌凭证。</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Completed">Imgur 授权完成。</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Error">Imgur 授权失败。 几秒钟后重试或获取新的凭证。</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Header">无法授权该应用</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Message">检查您提供的令牌是否正确以及是否可以连接互联网。</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Refresh.None">为了刷新此应用程序的授权，您需要先完成授权过程。</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.NotAuthorized">未授权。</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Expired">授权已在{0}中过期。</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Valid">授权有效期至 {0}。</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Removed">Imgur 授权被删除。</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.AlbumLoad">无法加载相册列表。</s:String>
     <s:String x:Key="S.Options.Upload.Gfycat.Anonymous">Gfycat（匿名）</s:String>
     <s:String x:Key="S.Options.Upload.Yandex.Token">OAuth 凭证：</s:String>
     <s:String x:Key="S.Options.Upload.Pick.Destination">选择一个目标</s:String>
@@ -979,7 +979,7 @@
     <s:String x:Key="S.Editor.Exiting.Title">退出编辑器</s:String>
     <s:String x:Key="S.Editor.Exiting.Instruction">您确实要退出吗？</s:String>
     <s:String x:Key="S.Editor.Exiting.Message">您正在处理的项目可以在“最近项目”中再次打开。</s:String>
-    <!--<s:String x:Key="S.Editor.Exiting.Message2">The current project that you were working on can be opened again via 'Recent Projects', but don't forget that after a few days, it will be automatically deleted.</s:String>-->
+    <s:String x:Key="S.Editor.Exiting.Message2">您正在处理的项目可以在“最近项目”中再次打开，但不要忘记，几天后会自动删除。</s:String>
     <s:String x:Key="S.Editor.DragDrop.Invalid.Title">拖放无效</s:String>
     <s:String x:Key="S.Editor.DragDrop.MultipleFiles.Instruction">您无法一次导入多个文件</s:String>
     <s:String x:Key="S.Editor.DragDrop.MultipleFiles.Message">请只选择一个文件。</s:String>
@@ -1378,7 +1378,7 @@
     <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable">使用全局色表。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable.Info">可能会降低 GIF 的质量和/或大小。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Loop">循环：</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.LoopedGif">循环 Gif</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Looped">循环 Gif</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">永远重复</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">重复计数</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable">启用透明度。</s:String>
@@ -1409,9 +1409,9 @@
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">压缩图片</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions">PSD 选项</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Compress">压缩图像。</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Tooltip">使用 RLE 算法压缩图像数据。</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Info">使用 RLE 算法压缩图像数据。</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline">保存时间轴数据。</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Tooltip">导出帧的时间，而不仅仅是帧。</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Info">导出帧的时间，而不仅仅是帧。</s:String>
     <s:String x:Key="S.SaveAs.ProjectOptions">项目选项</s:String>
     
     <s:String x:Key="S.SaveAs.Extras">额外：</s:String>
@@ -1457,6 +1457,7 @@
     <!--Save As • File-->
     <s:String x:Key="S.SaveAs.File">文件</s:String>
     <s:String x:Key="S.SaveAs.File.Location">目标文件夹</s:String>
+    <s:String x:Key="S.SaveAs.File.SelectFolder">选择输出目录</s:String>
     <s:String x:Key="S.SaveAs.File.Choose">选择位置</s:String>
     <s:String x:Key="S.SaveAs.File.Format">格式</s:String>
     <s:String x:Key="S.SaveAs.File.Name">文件名。</s:String>
@@ -1479,9 +1480,9 @@
     <s:String x:Key="S.SaveAs.Warning.Canceled">该操作被取消。</s:String>
     
     <!--SaveAs • Export-->
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Title">导出帧</s:String>
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Instruction">您确定要导出这些帧吗？</s:String>
-    <s:String x:Key="S.SaveAs.Frames.Confirmation.Message">此操作将直接导出 {0} 帧到所选文件夹中。</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Title">导出帧</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">您确定要导出这些帧吗？</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">此操作将直接导出 {0} 帧到所选文件夹中。</s:String>
     
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">反馈</s:String>
