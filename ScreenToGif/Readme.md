@@ -30,6 +30,7 @@ _VS 2019 and .Net 4.8 or newer required._
 ♦ Cinemagraph: This feature was not working as expected in high DPI environments.   
 ♦ The option to save gifs with transparency was not working if you didn't also select the option to detect unchanged pixels.  
 ♦ Some gifs from Gfycat where not being correctly loaded.  
+♦ When the frame capture was too slow, some key presses could be not recorded (thanks to @bbuerger).  
 
 ### Known Bugs:
   
