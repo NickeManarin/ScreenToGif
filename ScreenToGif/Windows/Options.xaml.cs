@@ -906,7 +906,8 @@ namespace ScreenToGif.Windows
         private void LanguagePanel_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //To avoid being called during startup of the window and to avoid being called twice after selection changes.
-            if (!IsLoaded || e.AddedItems.Count == 0) return;
+            if (!IsLoaded || e.AddedItems.Count == 0)
+                return;
 
             try
             {

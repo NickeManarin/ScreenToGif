@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Globalization;
 using System.Windows;
@@ -454,12 +454,9 @@ namespace ScreenToGif.Controls
             if (e.NewFocus == e.OldFocus)
                 return;
 
-            _ignore = true;
-
             //Validate on LostFocus.
             if (!TimeSpan.TryParse(Text, out var aux))
             {
-                //Text = "";
                 Selected = null;
             }
             else
@@ -468,12 +465,9 @@ namespace ScreenToGif.Controls
                 if (aux.Days > 0 && aux.Days < 24 && aux.Minutes == 0 && aux.Seconds == 0)
                     aux = new TimeSpan(aux.Days, 0, 0);
 
-                //Text = aux.ToString(Format);
                 Selected = aux;
             }
-
-            _ignore = false;
-
+            
             UpdateSource();
 
             base.OnPreviewLostKeyboardFocus(e);
@@ -481,12 +475,9 @@ namespace ScreenToGif.Controls
 
         protected override void OnLostKeyboardFocus(KeyboardFocusChangedEventArgs e)
         {
-            _ignore = true;
-
             //Validate on LostFocus.
             if (!TimeSpan.TryParse(Text, out var aux))
             {
-                //Text = "";
                 Selected = null;
             }
             else
@@ -495,11 +486,8 @@ namespace ScreenToGif.Controls
                 if (aux.Days > 0 && aux.Days < 24 && aux.Minutes == 0 && aux.Seconds == 0)
                     aux = new TimeSpan(aux.Days, 0, 0);
 
-                //Text = aux.ToString(Format);
                 Selected = aux;
             }
-
-            _ignore = false;
 
             UpdateSource();
 
@@ -508,12 +496,9 @@ namespace ScreenToGif.Controls
 
         protected override void OnLostFocus(RoutedEventArgs e)
         {
-            _ignore = true;
-
             //Validate on LostFocus.
             if (!TimeSpan.TryParse(Text, out var aux))
             {
-                //Text = "";
                 Selected = null;
             }
             else
@@ -522,11 +507,8 @@ namespace ScreenToGif.Controls
                 if (aux.Days > 0 && aux.Days < 24 && aux.Minutes == 0 && aux.Seconds == 0)
                     aux = new TimeSpan(aux.Days, 0, 0);
 
-                //Text = aux.ToString(Format);
                 Selected = aux;
             }
-
-            _ignore = false;
 
             UpdateSource();
 
@@ -544,10 +526,11 @@ namespace ScreenToGif.Controls
 
         protected override void OnMouseWheel(MouseWheelEventArgs e)
         {
-            base.OnMouseWheel(e);
-
-            if (IsReadOnly || AvoidScroll)
+            if (IsReadOnly || AvoidScroll || !IsFocused)
+            {
+                base.OnMouseWheel(e);
                 return;
+            }
 
             switch (Keyboard.Modifiers)
             {
@@ -581,6 +564,9 @@ namespace ScreenToGif.Controls
                     break;
                 }
             }
+
+            e.Handled = true;
+            base.OnMouseWheel(e);
         }
 
         #endregion

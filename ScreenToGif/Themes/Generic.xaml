@@ -2528,7 +2528,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <ScrollViewer Grid.Row="0" Focusable="False" Padding="{TemplateBinding Padding}" VerticalScrollBarVisibility="Auto">
+                            <ScrollViewer Grid.Row="0" x:Name="MainScrollViewer" Focusable="False" Padding="{TemplateBinding Padding}" VerticalScrollBarVisibility="Auto">
                                 <ItemsPresenter/>
                             </ScrollViewer>
 

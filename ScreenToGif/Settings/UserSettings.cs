@@ -16,9 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Xml;
 using System.Xml.Linq;
-using ScreenToGif.Extensions;
 using ScreenToGif.Model;
-using ScreenToGif.Model.UploadPresets.Imgur;
 using ScreenToGif.Util;
 using ScreenToGif.Util.InterProcessChannel;
 using ScreenToGif.Windows.Other;
@@ -140,7 +138,7 @@ namespace ScreenToGif.Settings
                 Attributes = attributes,
                 Value = node.Value
             };
-
+            
             if (node.Name.LocalName.StartsWith("Null"))
                 return null;
 
@@ -182,7 +180,9 @@ namespace ScreenToGif.Settings
                 switch (property.Type)
                 {
                     case "String":
-                        if (property.Value == "{x:Null}" || property.Value == "{}{x:Null}")
+                        property.Value = property.Value.StartsWith("{}") ? property.Value.Substring(2) : property.Value;
+
+                        if (property.Value == "{x:Null}")
                             return null;
 
                         return property.Value;
@@ -295,62 +295,6 @@ namespace ScreenToGif.Settings
                             array.Add(ParseProperty(child));
 
                         return array;
-                    }
-
-                    case "ImgurPreset2":
-                    {
-                        //TODO: Besides loading from migration, load also from the new settings.
-                        //Upload presets have history inside.
-                        //I need a generic way to parse the settings.
-                        //Test with the export presets too.
-
-                        var albums = property.Children.SelectMany(s => s.Children.Select(ss => new ImgurAlbum 
-                        {
-                            Id = ss.Attributes.FirstOrDefault(f => f.Key == "Id")?.Value,
-                            Title = ss.Attributes.FirstOrDefault(f => f.Key == "Title")?.Value,
-                            Description = ss.Attributes.FirstOrDefault(f => f.Key == "Description")?.Value,
-                            Link = ss.Attributes.FirstOrDefault(f => f.Key == "Link")?.Value,
-                            Privacy = ss.Attributes.FirstOrDefault(f => f.Key == "Privacy")?.Value,
-                            Favorite = ss.Attributes.FirstOrDefault(f => f.Key == "Favorite").AsBoolean(),
-                            Nsfw = ss.Attributes.FirstOrDefault(f => f.Key == "Nfsw")?.AsBoolean(),
-                            ImagesCount = ss.Attributes.FirstOrDefault(f => f.Key == "ImagesCount").AsInteger()
-                        })).ToList();
-
-                        return new ImgurPreset
-                        {
-                            Title = property.Attributes.FirstOrDefault(f => f.Key == "Title")?.Value,
-                            Description = property.Attributes.FirstOrDefault(f => f.Key == "Description")?.Value,
-                            UseDirectLinks = property.Attributes.FirstOrDefault(f => f.Key == "UseDirectLinks").AsBoolean(),
-                            UseGifvLinks = property.Attributes.FirstOrDefault(f => f.Key == "UseGifvLinks").AsBoolean(),
-                            OAuthToken = property.Attributes.FirstOrDefault(f => f.Key == "OAuthToken")?.Value,
-                            AccessToken = property.Attributes.FirstOrDefault(f => f.Key == "AccessToken")?.Value,
-                            RefreshToken = property.Attributes.FirstOrDefault(f => f.Key == "RefreshToken")?.Value,
-                            ExpiryDate = property.Attributes.FirstOrDefault(f => f.Key == "ExpiryDate").AsNullableDateTime(),
-                            UploadToAlbum = property.Attributes.FirstOrDefault(f => f.Key == "UploadToAlbum").AsBoolean(),
-                            SelectedAlbum = property.Attributes.FirstOrDefault(f => f.Key == "SelectedAlbum")?.Value,
-                            Albums = new ArrayList(albums)
-                        };
-                    }
-
-                   case "MouseClicksModel2":
-                    {
-                        return new MouseClicksModel
-                        {
-                            IsEnabled = Convert.ToBoolean(property.Attributes.FirstOrDefault(f => f.Key == "isEnabled")?.Value ?? "False"),
-                            ForegroundColor = ColorConverter.ConvertFromString(property.Attributes.FirstOrDefault(f => f.Key == "foregroundColor")?.Value) as Color? ?? Color.FromArgb(120, 255, 255, 0),
-                            Height = Convert.ToDouble(property.Attributes.FirstOrDefault(f => f.Key == "height")?.Value ?? "12"),
-                            Width = Convert.ToDouble(property.Attributes.FirstOrDefault(f => f.Key == "width")?.Value ?? "12")
-                        };
-                    }
-                    case "BorderModel2":
-                    {
-                        return new MouseClicksModel
-                        {
-                            IsEnabled = Convert.ToBoolean(property.Attributes.FirstOrDefault(f => f.Key == "isEnabled")?.Value ?? "False"),
-                            ForegroundColor = ColorConverter.ConvertFromString(property.Attributes.FirstOrDefault(f => f.Key == "foregroundColor")?.Value) as Color? ?? Color.FromArgb(120, 255, 255, 0),
-                            Height = Convert.ToDouble(property.Attributes.FirstOrDefault(f => f.Key == "height")?.Value ?? "12"),
-                            Width = Convert.ToDouble(property.Attributes.FirstOrDefault(f => f.Key == "width")?.Value ?? "12")
-                        };
                     }
 
                     default:

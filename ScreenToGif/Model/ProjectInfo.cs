@@ -142,7 +142,7 @@ namespace ScreenToGif.Model
             return this;
         }
 
-        public void Persist()
+        public void Persist(string path = null)
         {
             try
             {
@@ -152,7 +152,7 @@ namespace ScreenToGif.Model
 
                     ser.WriteObject(ms, this);
 
-                    File.WriteAllText(ProjectPath, Encoding.UTF8.GetString(ms.ToArray())); //Use Serializer
+                    File.WriteAllText(path ?? ProjectPath, Encoding.UTF8.GetString(ms.ToArray())); //Use Serializer
                 }
             }
             catch (Exception ex)
@@ -357,6 +357,7 @@ namespace ScreenToGif.Model
 
                             export.Frames.Add(new ExportFrame
                             {
+                                Index = info.Index,
                                 DataPosition = pos,
                                 DataLength = image.Pixels.LongLength,
                                 Delay = info.Delay,
@@ -397,15 +398,21 @@ namespace ScreenToGif.Model
                         File.Copy(info.Path, filename, true);
 
                         //Create the new object and add to the list.
-                        export.FramesFiles.Add(new FrameInfo(filename, info.Delay));
+                        export.FramesFiles.Add(new FrameInfo
+                        {
+                            Index = info.Index,
+                            Path = filename,
+                            Delay = info.Delay
+                        });
                     }
 
+                    //Improve this.
                     if (indexes.Count > 0)
                     {
                         var projectAux = ShallowCopy();
                         projectAux.RelativePath = encodePath;
                         projectAux.Frames = Frames.Where((w, i) => indexes.Contains(i)).ToList();
-                        projectAux.Persist();
+                        projectAux.Persist(Path.Combine(export.Path, "Project.json"));
                     }
                     else
                     {
@@ -429,7 +436,12 @@ namespace ScreenToGif.Model
                     File.Copy(info.Path, filename, true);
 
                     //Create the new object and add to the list.
-                    export.FramesFiles.Add(new FrameInfo(filename, info.Delay));
+                    export.FramesFiles.Add(new FrameInfo
+                    {
+                        Index = info.Index,
+                        Path = filename,
+                        Delay = info.Delay
+                    });
                 }
             }
             catch (Exception ex)

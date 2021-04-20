@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     <!--Application vectors-->
@@ -243,6 +243,7 @@
         </DrawingBrush.Drawing>
     </DrawingBrush>
 
+    <!--Rename to Vector.Error-->
     <DrawingBrush x:Key="Vector.Cancel.Round" Stretch="Uniform" AlignmentX="Center" AlignmentY="Center">
         <DrawingBrush.Drawing>
             <DrawingGroup>

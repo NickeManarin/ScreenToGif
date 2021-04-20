@@ -278,6 +278,10 @@ namespace ScreenToGif.UserControls
             }
 
             SaveAsProjectTooCheckBox.Visibility = type != Export.Stg ? Visibility.Visible : Visibility.Collapsed;
+            UploadFileCheckBox.Visibility = type != Export.Bmp && type != Export.Jpeg && type != Export.Png ? Visibility.Visible : Visibility.Collapsed;
+            CopyFileCheckBox.Visibility = type != Export.Bmp && type != Export.Jpeg && type != Export.Png ? Visibility.Visible : Visibility.Collapsed;
+            CustomCommandsCheckBox.Visibility = type != Export.Bmp && type != Export.Jpeg && type != Export.Png ? Visibility.Visible : Visibility.Collapsed;
+            SaveFileCheckBox.IsEnabled = UploadFileCheckBox.Visibility == Visibility.Visible || CopyFileCheckBox.Visibility == Visibility.Visible;
         }
 
         private void LoadPresets(Export type, ExportPreset toLoad = null, bool firstLoad = false)
@@ -840,7 +844,7 @@ namespace ScreenToGif.UserControls
             selected.PartialExportFrameEnd = FrameCount;
             selected.PartialExportTimeStart = TimeSpan.Zero;
             selected.PartialExportTimeEnd = TotalTime;
-            selected.PartialExportFrameExpression = $"0 - {FrameCount}";
+            selected.PartialExportFrameExpression = $"0 - {FrameCount - 1}";
 
             //Select the upload preset.
             LoadUploadPresets(selected);
@@ -1012,7 +1016,8 @@ namespace ScreenToGif.UserControls
             if (!(EncoderComboBox.SelectedValue is EncoderType encoder) || encoder == CurrentPreset?.Encoder)
                 return;
 
-            PresetComboBox.SelectedItem = PresetComboBox.ItemsSource.OfType<ExportPreset>().FirstOrDefault(f => f.Type == UserSettings.All.SaveType && f.Encoder == encoder && f.IsSelectedForEncoder);
+            PresetComboBox.SelectedItem = PresetComboBox.ItemsSource.OfType<ExportPreset>().FirstOrDefault(f => f.Type == UserSettings.All.SaveType && f.Encoder == encoder && f.IsSelectedForEncoder) ??
+                PresetComboBox.ItemsSource.OfType<ExportPreset>().FirstOrDefault(f => f.Type == UserSettings.All.SaveType && f.Encoder == encoder);
             QuantizerComboBox.Visibility = UserSettings.All.SaveType == Export.Gif && encoder == EncoderType.ScreenToGif ? Visibility.Visible : Visibility.Collapsed;
         }
 

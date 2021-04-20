@@ -678,7 +678,7 @@
                                Foreground="{DynamicResource Element.Foreground.Medium}"/>
 
                     <Slider Grid.Row="0" Grid.Column="1" x:Name="GifskiQualitySlider" Margin="0,3,3,0" AutoToolTipPlacement="TopLeft" TickPlacement="BottomRight" 
-                            Minimum="2" Maximum="100" Value="{Binding Quality}" SmallChange="1" IsSnapToTickEnabled="True" IsMoveToPointEnabled="True"/>
+                            Minimum="1" Maximum="100" Value="{Binding Quality}" SmallChange="1" IsSnapToTickEnabled="True" IsMoveToPointEnabled="True"/>
 
                     <Grid Grid.Row="1" Grid.Column="1" Margin="0,0,3,3">
                         <Grid.ColumnDefinitions>
@@ -688,13 +688,13 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Column="0" FontSize="11">
-                            <Run Text="2"/>
+                            <Run Text="1"/>
                             <Run Text="•"/>
-                            <Run Text="{DynamicResource S.SaveAs.GifOptions.Best}"/>
+                            <Run Text="{DynamicResource S.SaveAs.GifOptions.Fastest}"/>
                         </TextBlock>
 
                         <TextBlock Grid.Column="2" FontSize="11">
-                            <Run Text="{DynamicResource S.SaveAs.GifOptions.Fastest}"/>
+                            <Run Text="{DynamicResource S.SaveAs.GifOptions.Best}"/>
                             <Run Text="•"/>
                             <Run Text="100"/>
                         </TextBlock>
@@ -1210,7 +1210,7 @@
                                     IsChecked="{Binding UploadFile, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue=False}" Unchecked="UploadFileCheckBox_Unchecked"/>
                 
                 <n:ExtendedCheckBox Grid.Row="4" x:Name="CopyFileCheckBox" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard}" Margin="10,3,3,3"
-                                    IsChecked="{Binding SaveToClipboard}"/>
+                                    IsChecked="{Binding SaveToClipboard, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <WrapPanel Grid.Row="5" Margin="20,0,0,0" Visibility="{Binding IsChecked, ElementName=CopyFileCheckBox, Converter={StaticResource Bool2Visibility}}">
                     <n:ExtendedRadioButton x:Name="CopyFileRadioButton" ContentWidth="0" ContentHeight="0" Padding="0,2,2,2" Text="{DynamicResource S.SaveAs.SaveOptions.CopyToClipboard.File}" 

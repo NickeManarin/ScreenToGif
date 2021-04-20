@@ -110,7 +110,7 @@ namespace ScreenToGif.Util
             try
             {
                 TaskList.Add(task);
-                task.Start(); //TaskList.Last().Start();
+                task.Start();
             }
             catch (Exception ex)
             {
@@ -569,13 +569,13 @@ namespace ScreenToGif.Util
                                 if (!(preset is EmbeddedGifPreset embGifPreset))
                                     return;
 
-                                if (embGifPreset.EnableTransparency && embGifPreset.PaintTransparent) //ChromaKey.HasValue
+                                if (embGifPreset.EnableTransparency)
                                 {
                                     ImageMethods.PaintAndCutForTransparency(project, embGifPreset.TransparencyColor, embGifPreset.ChromaKey, id, tokenSource);
                                 }
                                 else if (embGifPreset.DetectUnchanged)
                                 {
-                                    if (embGifPreset.PaintTransparent) //ChromaKey.HasValue
+                                    if (embGifPreset.PaintTransparent)
                                         ImageMethods.PaintTransparentAndCut(project, embGifPreset.ChromaKey, id, tokenSource);
                                     else
                                         ImageMethods.CutUnchanged(project, id, tokenSource);
@@ -600,7 +600,8 @@ namespace ScreenToGif.Util
                                     {
                                         encoder.RepeatCount = project.FrameCount > 1 ? embGifPreset.RepeatCount : -1;
                                         encoder.UseGlobalColorTable = embGifPreset.UseGlobalColorTable;
-                                        encoder.TransparentColor = embGifPreset.PaintTransparent ? System.Windows.Media.Color.FromArgb(0, embGifPreset.ChromaKey.R, embGifPreset.ChromaKey.G, embGifPreset.ChromaKey.B) : new System.Windows.Media.Color?();
+                                        encoder.TransparentColor = embGifPreset.PaintTransparent || embGifPreset.EnableTransparency ?
+                                            System.Windows.Media.Color.FromArgb(0, embGifPreset.ChromaKey.R, embGifPreset.ChromaKey.G, embGifPreset.ChromaKey.B) : new System.Windows.Media.Color?();
                                         encoder.MaximumNumberColor = embGifPreset.MaximumColorCount;
                                         encoder.UseFullTransparency = embGifPreset.EnableTransparency;
                                         encoder.QuantizationType = embGifPreset.Quantizer;
@@ -726,7 +727,7 @@ namespace ScreenToGif.Util
                                 var size = project.FramesFiles[0].Path.ScaledSize();
 
                                 var gifski = new GifskiInterop();
-                                var handle = gifski.Start((uint)size.Width, (uint)size.Height, gifskiGifPreset.Quality, gifskiGifPreset.Looped);
+                                var handle = gifski.Start((uint)size.Width, (uint)size.Height, gifskiGifPreset.Quality, gifskiGifPreset.Looped, gifskiGifPreset.Fast);
 
                                 if (gifski.Version.Major == 0 && gifski.Version.Minor < 9)
                                 {
@@ -860,7 +861,7 @@ namespace ScreenToGif.Util
                                 {
                                     case Export.Bmp:
                                     {
-                                        using (var fileStream = new FileStream(frame.Path, FileMode.Create))
+                                        using (var fileStream = new FileStream(path, FileMode.Create))
                                         {
                                             var bmpEncoder = new BmpBitmapEncoder();
                                             bmpEncoder.Frames.Add(BitmapFrame.Create(frame.Path.SourceFrom()));
@@ -880,9 +881,12 @@ namespace ScreenToGif.Util
 
                                         break;
                                     }
+                                    case Export.Png:
+                                    {
+                                        File.Copy(frame.Path, path, true);
+                                        break;
+                                    }
                                 }
-
-                                File.Copy(frame.Path, path, true);
                             }
                         }
                         else
@@ -903,13 +907,13 @@ namespace ScreenToGif.Util
                             //Get files.
                             foreach (var frame in project.FramesFiles)
                             {
-                                var path = Path.Combine(dir.FullName, $"{frame.Index.ToString().PadLeft(padLength, '0')}{preset.Extension ?? preset.DefaultExtension}");
-
                                 switch (preset.Type)
                                 {
                                     case Export.Bmp:
                                     {
-                                        using (var fileStream = new FileStream(frame.Path, FileMode.Create))
+                                        var path = Path.Combine(dir.FullName, $"{frame.Index.ToString().PadLeft(padLength, '0')}.bmp");
+
+                                        using (var fileStream = new FileStream(path, FileMode.Create))
                                         {
                                             var bmpEncoder = new BmpBitmapEncoder();
                                             bmpEncoder.Frames.Add(BitmapFrame.Create(frame.Path.SourceFrom()));
@@ -920,7 +924,9 @@ namespace ScreenToGif.Util
                                     }
                                     case Export.Jpeg:
                                     {
-                                        using (var fileStream = new FileStream(frame.Path, FileMode.Create))
+                                        var path = Path.Combine(dir.FullName, $"{frame.Index.ToString().PadLeft(padLength, '0')}.jpg");
+
+                                        using (var fileStream = new FileStream(path, FileMode.Create))
                                         {
                                             var jpgEncoder = new JpegBitmapEncoder { QualityLevel = 100 };
                                             jpgEncoder.Frames.Add(BitmapFrame.Create(frame.Path.SourceFrom()));
@@ -929,9 +935,14 @@ namespace ScreenToGif.Util
 
                                         break;
                                     }
-                                }
+                                    case Export.Png:
+                                    {
+                                        var path = Path.Combine(dir.FullName, $"{frame.Index.ToString().PadLeft(padLength, '0')}.png");
 
-                                File.Copy(frame.Path, path, true);
+                                        File.Copy(frame.Path, path, true);
+                                        break;
+                                    }
+                                }
                             }
 
                             //Create Zip and clear temporary folder.
@@ -1288,7 +1299,7 @@ namespace ScreenToGif.Util
 
                     //ffmpeg -vsync 0 {I} -loop 0 -lavfi palettegen=stats_mode=single[pal],[0:v][pal]paletteuse=new=1:dither=sierra2_4a:diff_mode=rectangle -f gif {O}
                     if (gifPreset.SettingsMode == VideoSettingsMode.Advanced)
-                        firstPass = gifPreset.Parameters;
+                        firstPass = gifPreset.Parameters.Replace("\n", " ").Replace("\r", "");
                     else
                     {
                         //Vsync
@@ -1299,8 +1310,8 @@ namespace ScreenToGif.Util
                         firstPass += "{I} ";
                         firstPass += $"-loop {(gifPreset.Looped ? gifPreset.RepeatForever ? 0 : gifPreset.RepeatCount : -1)} ";
 
-                        //Palette and dither.
-                        firstPass += $"-lavfi palettegen=stats_mode={(gifPreset.UseGlobalColorTable ? "diff" : "single")}[pal],[0:v][pal]paletteuse={(gifPreset.UseGlobalColorTable ? "" : "new=1:")}";
+                        //Palette and dither. Does not work properly: (gifPreset.UseGlobalColorTable ? "diff" : "single")
+                        firstPass += $"-lavfi palettegen=stats_mode=diff[pal],[0:v][pal]paletteuse={(gifPreset.UseGlobalColorTable ? "" : "new=1:")}";
                         firstPass += $"dither={gifPreset.Dither.GetDescription()}";
                         firstPass += (gifPreset.Dither == DitherMethods.Bayer ? $":bayer_scale={gifPreset.BayerScale}" : "");
                         firstPass += ":diff_mode=rectangle ";
@@ -1330,7 +1341,7 @@ namespace ScreenToGif.Util
 
                     //ffmpeg -vsync 0 {I} -pred mixed -plays 0 -f apng {O}
                     if (apngPreset.SettingsMode == VideoSettingsMode.Advanced)
-                        firstPass = apngPreset.Parameters;
+                        firstPass = apngPreset.Parameters.Replace("\n", " ").Replace("\r", "");
                     else
                     {
                         //Vsync
@@ -1370,7 +1381,7 @@ namespace ScreenToGif.Util
 
                     //ffmpeg -vsync 0 {I} -c:v libwebp_anim -lossless 0 -quality 75 -loop 0 -f webp {O}
                     if (webpPreset.SettingsMode == VideoSettingsMode.Advanced)
-                        firstPass = webpPreset.Parameters;
+                        firstPass = webpPreset.Parameters.Replace("\n", " ").Replace("\r", "");
                     else
                     {
                         //Vsync
@@ -1458,7 +1469,7 @@ namespace ScreenToGif.Util
                             firstPass += $"-pix_fmt {videoPreset.PixelFormat.GetLowerDescription()} ";
 
                         //Workaround, makes the size to be divisible by two.
-                        firstPass += "-vf \"scale=trunc(iw/2)*2:trunc(ih/2)*2\" "; //scale=iw+mod(iw,2):ih+mod(ih,2):flags=neighbor
+                        firstPass += "-vf \"scale=trunc(iw/2)*2:trunc(ih/2)*2\" "; //"scale=iw+mod(iw,2):ih+mod(ih,2):flags=neighbor" OR "pad=width={W}:height={H}:x=0:y=0:color=black"
 
                         //CRF.
                         if (videoPreset.ConstantRateFactor > 0)
@@ -1466,7 +1477,7 @@ namespace ScreenToGif.Util
 
                         //Bitrate.
                         if (videoPreset.IsVariableBitRate)
-                            firstPass += $"-q:v {videoPreset.BitRate.ToString(CultureInfo.InvariantCulture)} ";
+                            firstPass += $"-q:v {videoPreset.QualityLevel.ToString(CultureInfo.InvariantCulture)} ";
                         else
                         {
                             if (videoPreset.BitRate > 0)

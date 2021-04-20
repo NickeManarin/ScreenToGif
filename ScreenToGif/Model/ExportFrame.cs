@@ -1,9 +1,14 @@
-﻿using System.Windows;
+using System.Windows;
 
 namespace ScreenToGif.Model
 {
     internal class ExportFrame
     {
+        /// <summary>
+        /// The position of the frame within the list.
+        /// </summary>
+        public int Index { get; set; }
+
         /// <summary>
         /// The position of the frame on the pixel array.
         /// </summary>

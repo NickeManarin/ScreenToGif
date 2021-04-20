@@ -14,10 +14,10 @@ namespace ScreenToGif.Model.ExportPresets.AnimatedImage.Gif
     public class FfmpegGifPreset : GifPreset, IFfmpegPreset
     {
         private VideoSettingsMode _settingsMode = VideoSettingsMode.Normal;
-        private string _parameters = "-vsync passthrough \n{I} \n-loop 0 \n-lavfi palettegen=stats_mode=single[pal],[0:v][pal]paletteuse=new=1:dither=sierra2_4a:diff_mode=rectangle \n-f gif \n{O}";
+        private string _parameters = "-vsync passthrough \n{I} \n-loop 0 \n-lavfi palettegen=stats_mode=diff[pal],[0:v][pal]paletteuse=new=1:dither=sierra2_4a:diff_mode=rectangle \n-f gif \n{O}";
         private DitherMethods _dither = DitherMethods.Sierra2Lite;
         private int _bayerScale = 2;
-        private VideoPixelFormats _pixelFormat = VideoPixelFormats.Rgb8;
+        private VideoPixelFormats _pixelFormat = VideoPixelFormats.Auto;
         private Framerates _framerate = Framerates.Auto;
         private double _customFramerate = 25d;
         private Vsyncs _vsync = Vsyncs.Passthrough;
@@ -102,7 +102,7 @@ namespace ScreenToGif.Model.ExportPresets.AnimatedImage.Gif
                 UseGlobalColorTable = true,
                 Dither = DitherMethods.Bayer,
                 BayerScale = 3,
-                Parameters = "-vsync passthrough \n{I} \n-loop 0 \n-lavfi palettegen=stats_mode=diff[pal],[0:v][pal]paletteuse=dither=bayer:bayer_scale=5:diff_mode=rectangle \n-f gif \n{O}"
+                Parameters = "-vsync passthrough \n{I} \n-loop 0 \n-lavfi palettegen=stats_mode=diff[pal],[0:v][pal]paletteuse=dither=bayer:bayer_scale=3:diff_mode=rectangle \n-f gif \n{O}"
             }
         };
     }

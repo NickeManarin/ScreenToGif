@@ -2838,29 +2838,21 @@ namespace ScreenToGif.Windows
 
             geometry = Geometry.Combine(geometry, rectangle, GeometryCombineMode.Xor, null);
 
+            //Sicne the geometry is bound to the screen, it needs to be scaled to follow the image scale.
+            geometry.Transform = new ScaleTransform(this.Scale() / ZoomBoxControl.ImageScale, this.Scale() / ZoomBoxControl.ImageScale);
+
             var clippedImage = new Image
             {
-                Height = image.PixelHeight,
-                Width = image.PixelWidth,
                 Source = image,
                 Clip = geometry
             };
-
-            //OverlayGrid.Children.Add(clippedImage);
-
-            //var m = PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice;
-
-            //var dpiTransform = new ScaleTransform(1 / m.M11, 1 / m.M22);
-            //if (dpiTransform.CanFreeze)
-            //    dpiTransform.Freeze();
-
-            //clippedImage.LayoutTransform = dpiTransform;
 
             clippedImage.Measure(new Size(image.Width, image.Height));
             clippedImage.Arrange(new Rect(clippedImage.DesiredSize));
 
             //The ScaleDiff (ScreenScale / ImageScale) must be calculated as if the screen has 96DPI, since the clippedImage is not being attached to any visual.
-            var imageRender = clippedImage.GetScaledRender(1 / ZoomBoxControl.ImageScale, ZoomBoxControl.ImageDpi, ZoomBoxControl.GetImageSize());
+            //var imageRender = clippedImage.GetScaledRender(1 / ZoomBoxControl.ImageScale, ZoomBoxControl.ImageDpi, ZoomBoxControl.GetImageSize());
+            var imageRender = clippedImage.GetScaledRender(1, ZoomBoxControl.ImageDpi, ZoomBoxControl.GetImageSize());
 
             #endregion
 
@@ -4144,7 +4136,7 @@ namespace ScreenToGif.Windows
             {
                 var metadata = ImageMethods.GetFrameMetadata(decoder, gifMetadata, index);
 
-                var bitmapSource = ImageMethods.MakeFrame(fullSize, rawFrame, metadata, baseFrame);
+                var bitmapSource = ImageMethods.MakeFrame(fullSize, rawFrame, metadata, baseFrame, 96D);
 
                 #region Disposal Method
 
@@ -4155,7 +4147,7 @@ namespace ScreenToGif.Windows
                         baseFrame = bitmapSource;
                         break;
                     case FrameDisposalMethod.RestoreBackground:
-                        baseFrame = ImageMethods.IsFullFrame(metadata, fullSize) ? null : ImageMethods.ClearArea(bitmapSource, metadata);
+                        baseFrame = ImageMethods.IsFullFrame(metadata, fullSize) ? null : ImageMethods.ClearArea(bitmapSource, metadata, 96D);
                         break;
                     case FrameDisposalMethod.RestorePrevious:
                         //Reuse same base frame.
@@ -5183,6 +5175,7 @@ namespace ScreenToGif.Windows
                                 else 
                                 {
                                     //Reversed range.
+                                    //The CopyToExport() method bellow has no support for this yet, so it just copies the frames in order anyway.
                                     for (var i = start; i >= end; i--)
                                         indexes.Add(i); //indexes.Add(frames[i]);
                                 }
@@ -5207,15 +5200,37 @@ namespace ScreenToGif.Windows
                     {
                         var span = TimeSpan.Zero;
 
-                        for (var i = 0; i < Project.Frames.Count; i++)
+                        //Playback mode.
+                        if (preset.PartialExportTimeStart < preset.PartialExportTimeEnd)
                         {
-                            if (span >= preset.PartialExportTimeStart && span <= preset.PartialExportTimeEnd)
-                                indexes.Add(i);
+                            //Normal playback.
+                            for (var i = 0; i < Project.Frames.Count; i++)
+                            {
+                                if (span >= preset.PartialExportTimeStart && span <= preset.PartialExportTimeEnd)
+                                    indexes.Add(i);
 
-                            if (span > preset.PartialExportTimeEnd)
-                                break;
+                                if (span > preset.PartialExportTimeEnd)
+                                    break;
 
-                            span = span.Add(TimeSpan.FromMilliseconds(Project.Frames[0].Delay));
+                                span = span.Add(TimeSpan.FromMilliseconds(Project.Frames[i].Delay));
+                            }
+                        }
+                        else
+                        {
+                            //Reversed playback.
+                            //The CopyToExport() method bellow has no support for this yet, so it just copies the frames in order anyway.
+                            span = TimeSpan.FromMilliseconds(Project.Frames.Sum(s => s.Delay));
+                            
+                            for (var i = Project.Frames.Count - 1; i >= 0 ; i--)
+                            {
+                                if (span >= preset.PartialExportTimeEnd && span <= preset.PartialExportTimeStart)
+                                    indexes.Add(i);
+
+                                if (span > preset.PartialExportTimeStart)
+                                    break;
+
+                                span = span.Subtract(TimeSpan.FromMilliseconds(Project.Frames[i].Delay));
+                            }
                         }
 
                         break;

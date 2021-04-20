@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Windows.Media;
 using ScreenToGif.Util;
@@ -119,8 +119,9 @@ namespace ScreenToGif.Model.ExportPresets.AnimatedImage.Gif
                 CreationDate = new DateTime(2021, 02, 20),
 
                 Quantizer = ColorQuantizationType.Neural,
+                EnableTransparency = true,
+                DetectUnchanged = false,
                 PaintTransparent = false,
-                EnableTransparency = true
             },
 
             new EmbeddedGifPreset

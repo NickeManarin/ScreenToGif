@@ -14,7 +14,7 @@ namespace ScreenToGif.Model.ExportPresets.AnimatedImage.Apng
     public class FfmpegApngPreset : ApngPreset, IFfmpegPreset
     {
         private VideoSettingsMode _settingsMode = VideoSettingsMode.Normal;
-        private string _parameters = "-vsync passthrough \n{I} \n-pred mixed \n-plays 0 \n-f apng \n{O}";
+        private string _parameters = "-vsync passthrough \n{I} \n-pred mixed \n-plays 0 \n-pix_fmt rgba \n-f apng \n{O}";
         private PredictionMethods _predictionMethods = PredictionMethods.Mixed;
         private VideoPixelFormats _pixelFormat = VideoPixelFormats.RgbA;
         private Framerates _framerate = Framerates.Auto;
@@ -80,7 +80,7 @@ namespace ScreenToGif.Model.ExportPresets.AnimatedImage.Apng
                 TitleKey = "S.Preset.Apng.Ffmpeg.High.Title",
                 DescriptionKey = "S.Preset.Apng.Ffmpeg.High.Description",
                 HasAutoSave = true,
-                IsSelectedForEncoder = false,
+                IsSelectedForEncoder = true,
                 IsDefault = true,
                 CreationDate = new DateTime(2021, 02, 20)
             },
@@ -93,8 +93,9 @@ namespace ScreenToGif.Model.ExportPresets.AnimatedImage.Apng
                 IsDefault = true,
                 CreationDate = new DateTime(2021, 02, 20),
 
-                PixelFormat = VideoPixelFormats.Rgb8,
-                Parameters = "-vsync passthrough \n{I} \n-pred mixed \n-plays 0 \n-pix_fmt rgb8 \n-f apng \n{O}"
+                PixelFormat = VideoPixelFormats.Rgb24,
+                PredictionMethod = PredictionMethods.None,
+                Parameters = "-vsync passthrough \n{I} \n-pred none \n-plays 0 \n-pix_fmt rgb24 \n-f apng \n{O}"
             }
         };
     }
