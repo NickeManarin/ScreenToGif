@@ -1608,7 +1608,7 @@
     <s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration.Off">Uit</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration.On">Aan</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration.Auto">Automatisch selecteren</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration.Info">Regelt het gebruik van speciale hardware (videobeelden).&#10;Uit: gebruikt geen speciale hardware.& 10;Aan: gebruikt speciale hardware en laat je speciale encoders selecteren.&#10;Auto: gebruikt speciale hardware en automatisch selecteert de juiste encoder, indien mogelijk.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration.Info">Regelt het gebruik van speciale hardware (videobeelden).&#10;Uit: gebruikt geen speciale hardware.&#10;Aan: gebruikt speciale hardware en laat je speciale encoders selecteren.&#10;Auto: gebruikt speciale hardware en automatisch selecteert de juiste encoder, indien mogelijk.</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.PixelFormat">Pixel-formaat:</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.PixelFormat.Auto">Automatisch</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Vsync">Vsync:</s:String>
