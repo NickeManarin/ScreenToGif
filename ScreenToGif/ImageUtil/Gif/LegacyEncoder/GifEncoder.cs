@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -118,7 +118,10 @@ namespace ScreenToGif.ImageUtil.Gif.LegacyEncoder
             WriteByte(0); // Pixel aspect ratio
             WriteColorTable(sourceGif);
 
-            // App Extension Header
+            if (_repeatCount < 0)
+                return;
+
+            //App Extension Header
             WriteShort(ApplicationExtensionBlockIdentifier);
             WriteByte(ApplicationBlockSize);
             WriteString(ApplicationIdentification);

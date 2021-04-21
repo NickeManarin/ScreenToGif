@@ -161,6 +161,17 @@ namespace ScreenToGif.UserControls
             _searchTimer.Tick += SearchTimer_Tick;
 
             #endregion
+
+            #region UWP restrictions
+
+#if UWP
+
+            CustomCommandsCheckBox.IsEnabled = false;
+            CustomCommandsTextBox.IsEnabled = false;
+
+#endif
+
+            #endregion
         }
 
 
