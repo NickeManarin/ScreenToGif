@@ -1377,13 +1377,13 @@ namespace ScreenToGif.UserControls
             {
                 try
                 {
-                    var preset = Dispatcher.Invoke(() => PresetComboBox.SelectedItem as ExportPreset);
+                    var preset = Dispatcher.Invoke(() => CurrentPreset);
 
                     if (preset == null)
                         return;
 
                     //Check if there's a file with the same path.
-                    var exists = File.Exists(Path.Combine(preset.OutputFolder, preset.OutputFilename + preset.Extension));
+                    var exists = File.Exists(Path.Combine(preset.OutputFolder, PathHelper.ReplaceRegexInName(preset.OutputFilename) + preset.Extension));
 
                     Dispatcher.Invoke(() =>
                     {
@@ -1440,7 +1440,8 @@ namespace ScreenToGif.UserControls
 
             try
             {
-                Process.Start(Path.Combine(preset.OutputFolder, preset.OutputFilename + preset.Extension));
+                //If the file name template result changed, it will be imposible to open the previous file. The user should simple try to save it again.
+                Process.Start(Path.Combine(preset.OutputFolder, PathHelper.ReplaceRegexInName(preset.OutputFilename) + preset.Extension));
             }
             catch (Exception ex)
             {

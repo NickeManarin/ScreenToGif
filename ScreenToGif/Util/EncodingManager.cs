@@ -438,7 +438,7 @@ namespace ScreenToGif.Util
 
                 if (preset.PickLocation)
                 {
-                    preset.FullPath = Path.Combine(preset.OutputFolder, preset.OutputFilename + (preset.Extension ?? preset.DefaultExtension));
+                    preset.FullPath = Path.Combine(preset.OutputFolder, preset.ResolvedFilename + (preset.Extension ?? preset.DefaultExtension));
                 }
                 else
                 {
@@ -852,7 +852,7 @@ namespace ScreenToGif.Util
                         {
                             foreach (var frame in project.FramesFiles)
                             {
-                                var path = Path.Combine(preset.OutputFolder, $"{preset.OutputFilename} {frame.Index.ToString().PadLeft(padLength, '0')}{preset.Extension ?? preset.DefaultExtension}");
+                                var path = Path.Combine(preset.OutputFolder, $"{preset.ResolvedFilename} {frame.Index.ToString().PadLeft(padLength, '0')}{preset.Extension ?? preset.DefaultExtension}");
 
                                 if (File.Exists(path))
                                     File.Delete(path);
@@ -891,7 +891,7 @@ namespace ScreenToGif.Util
                         }
                         else
                         {
-                            var fileName = Path.Combine(preset.OutputFolder, preset.OutputFilename + ".zip");
+                            var fileName = Path.Combine(preset.OutputFolder, preset.ResolvedFilename + ".zip");
                             
                             if (File.Exists(fileName))
                                 File.Delete(fileName);

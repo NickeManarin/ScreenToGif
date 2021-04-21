@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -334,21 +335,27 @@ namespace ScreenToGif.Settings
             var instance = Activator.CreateInstance(type);
 
             //Sub-properties.
-            foreach (var prop in property.Attributes.Where(w => w.Key != "Key"))
+            foreach (var att in property.Attributes.Where(w => w.Key != "Key"))
             {
-                var info = type.GetProperty(prop.Key);
-
-                if (info == null)
+                if (string.IsNullOrEmpty(att.Key))
                 {
-                    LogWriter.Log("Property available in object.", property.Key + "." + prop.Key);
+                    LogWriter.Log("Property not identified in children", att, property);
                     continue;
                 }
 
-                prop.Type = info.PropertyType.Name;
+                var info = type.GetProperty(att.Key);
+
+                if (info == null)
+                {
+                    LogWriter.Log("Property not available in object", att, property);
+                    continue;
+                }
+
+                att.Type = info.PropertyType.Name;
 
                 if (info.PropertyType == typeof(int?))
                 {
-                    if (int.TryParse(prop.Value, out var intValue))
+                    if (int.TryParse(att.Value, out var intValue))
                         info.SetValue(instance, intValue, null);
 
                     continue;
@@ -356,7 +363,7 @@ namespace ScreenToGif.Settings
 
                 if (info.PropertyType == typeof(DateTime?))
                 {
-                    if (DateTime.TryParse(prop.Value, out var deteTimeValue))
+                    if (DateTime.TryParse(att.Value, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out var deteTimeValue))
                         info.SetValue(instance, deteTimeValue, null);
 
                     continue;
@@ -364,25 +371,73 @@ namespace ScreenToGif.Settings
 
                 if (info.PropertyType == typeof(bool?))
                 {
-                    if (bool.TryParse(prop.Value, out var boolValue))
+                    if (bool.TryParse(att.Value, out var boolValue))
                         info.SetValue(instance, boolValue, null);
 
                     continue;
                 }
 
-                if (prop.Type.StartsWith("Nullable"))
+                if (att.Type.StartsWith("Nullable"))
                 {
-                    LogWriter.Log("Property not identified.", property.Key + "." + prop.Type);
+                    LogWriter.Log("Property not identified.", att, property);
                     continue;
                 }
 
-                info.SetValue(instance, ParseProperty(prop), null);
+                var value = ParseProperty(att);
+
+                if (value != null)
+                    info.SetValue(instance, value, null);
             }
 
             //Sub-properties that are in expanded tags.
             foreach (var child in property.Children)
             {
+                if (string.IsNullOrEmpty(child.Key))
+                {
+                    LogWriter.Log("Property not identified in children", child, property);
+                    continue;
+                }
+
                 var info = type.GetProperty(child.Key);
+
+                if (info == null)
+                {
+                    LogWriter.Log("Property not available in object in children", child, property);
+                    continue;
+                }
+
+                child.Type = info.PropertyType.Name;
+
+                if (info.PropertyType == typeof(int?))
+                {
+                    if (int.TryParse(child.Value, out var intValue))
+                        info.SetValue(instance, intValue, null);
+
+                    continue;
+                }
+
+                if (info.PropertyType == typeof(DateTime?))
+                {
+                    if (DateTime.TryParse(child.Value, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out var deteTimeValue))
+                        info.SetValue(instance, deteTimeValue, null);
+
+                    continue;
+                }
+
+                if (info.PropertyType == typeof(bool?))
+                {
+                    if (bool.TryParse(child.Value, out var boolValue))
+                        info.SetValue(instance, boolValue, null);
+
+                    continue;
+                }
+
+                if (child.Type.StartsWith("Nullable"))
+                {
+                    LogWriter.Log("Property not identified in children.", child, property);
+                    continue;
+                }
+
                 var innerChild = ParseProperty(child);
 
                 if (innerChild != null)
@@ -413,7 +468,7 @@ namespace ScreenToGif.Settings
                 //Create the backup, in case the save operation fails.
                 if (File.Exists(filename))
                     File.Copy(filename, backup, true);
-                
+
                 var settings = new XmlWriterSettings
                 {
                     Indent = true,
@@ -603,7 +658,10 @@ namespace ScreenToGif.Settings
                             _local.Remove(key);
                     }
                     else
-                        _local.Add(key, value);
+                    {
+                        if (value != null)
+                            _local.Add(key, value);
+                    }
                 }
 
                 //Updates or inserts the value to the AppData resource.
@@ -618,7 +676,10 @@ namespace ScreenToGif.Settings
                             _appData.Remove(key);
                     }
                     else
-                        _appData.Add(key, value);
+                    {
+                        if (value != null)
+                            _appData.Add(key, value);
+                    }
                 }
 
                 //Updates/Adds the current value of the resource.
