@@ -63,6 +63,18 @@ namespace ScreenToGif.Settings
             var local = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Settings.xaml");
             var appData = Path.Combine(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ScreenToGif"), "Settings.xaml");
 
+            //Only creates an empty AppData settings file if there's no local settings defined.
+            if (!File.Exists(local) && !File.Exists(appData))
+            {
+                var directory = Path.GetDirectoryName(appData);
+
+                if (!string.IsNullOrWhiteSpace(directory) && !Directory.Exists(directory))
+                    Directory.CreateDirectory(directory);
+
+                //Just creates a resource dictionary without any properties. 
+                File.WriteAllText(appData, "<ResourceDictionary xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"></ResourceDictionary>");
+            }
+
             //Loads AppData settings.
             if (File.Exists(appData))
             {
@@ -535,7 +547,7 @@ namespace ScreenToGif.Settings
             var local = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Settings.xaml");
 
             if (!File.Exists(local))
-                File.Create(local).Dispose();
+                File.WriteAllText(local, "<ResourceDictionary xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"></ResourceDictionary>");
 
             _local = new ResourceDictionary();
         }
