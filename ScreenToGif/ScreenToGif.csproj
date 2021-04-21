@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -547,6 +547,7 @@
     <Compile Include="Util\MutexList.cs" />
     <Compile Include="Util\NotificationManager.cs" />
     <Compile Include="Capture\ImageCapture.cs" />
+    <Compile Include="Util\PathHelper.cs" />
     <Compile Include="Util\ProcessHelper.cs" />
     <Compile Include="Util\StorageUtils.cs" />
     <Compile Include="Util\ThemeHelper.cs" />

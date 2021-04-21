@@ -881,8 +881,7 @@ namespace ScreenToGif.Windows
                     return;
 
                 var preset = panel.GetPreset();
-                preset.OutputFilename = ReplaceRegexInName(preset.OutputFilename);
-
+               
                 //Set some transient properties.
                 var size = Project.Frames[0].Path.SizeOf();
                 preset.Width = size.Width;
@@ -896,7 +895,7 @@ namespace ScreenToGif.Windows
             catch (Exception ex)
             {
                 LogWriter.Log(ex, "Error while exporting");
-                //TODO Error band.
+                StatusList.Error(ex.Message, StatusReasons.InvalidState); //TODO: Put a proper message and localize it.
             }
             finally
             {
@@ -910,35 +909,6 @@ namespace ScreenToGif.Windows
                 HideProgress();
 
                 CommandManager.InvalidateRequerySuggested();
-            }
-
-            try
-            {
-                switch (UserSettings.All.SaveType)
-                {
-                    case Export.Gif:
-                    {
-                        //param.RepeatCount = UserSettings.All.Looped ? (UserSettings.All.RepeatForever ? 0 : UserSettings.All.RepeatCount) : -1;
-                        //param.TransparencyColor = UserSettings.All.SelectTransparencyColor ? UserSettings.All.TransparencyColor : new Color?();
-                        //param.ChromaKey = UserSettings.All.DetectUnchanged && UserSettings.All.PaintTransparent ? UserSettings.All.ChromaKey : new Color?();
-                        //param.Command = "-vsync 2 -safe 0 -f concat -i \"{0}\" {1} -y \"{2}\"";
-                        break;
-                    }
-
-                    case Export.Apng:
-                    {
-                        //param.ChromaKey = UserSettings.All.DetectUnchangedApng && UserSettings.All.PaintTransparentApng ? Colors.Transparent : new Color?();
-                        //param.RepeatCount = UserSettings.All.LoopedApng ? (UserSettings.All.RepeatForeverApng ? 0 : UserSettings.All.RepeatCountApng) : -1;
-                        //param.Command = "-vsync 2 -safe 0 -f concat -i \"{0}\" {1} -plays {2} -f apng -y \"{3}\"";
-                        break;
-                    }
-
-                    //https://gist.github.com/nico-lab/19540daed6892b69f130213703679574
-                }
-            }
-            catch (Exception ex)
-            {
-
             }
         }
 
@@ -5005,27 +4975,6 @@ namespace ScreenToGif.Windows
                 UserSettings.All.ProgressStartNumber, cumulative, total, FrameListView.SelectedIndex + 1);
         }
         
-        /// <summary>
-        /// Puts the current date/time into filename, replacing the format typed in between two questions marks.
-        /// Such as 'Animation ?dd-MM-yy?' -> 'Animation 02-03-20'
-        /// Only some of the formats are available, since there's a file name limitation from Windows.
-        /// https://docs.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings 
-        /// </summary>
-        /// <param name="name">The name of the file, with the date/time format.</param>
-        /// <returns>The name with the date and time.</returns>
-        private string ReplaceRegexInName(string name)
-        {
-            var dateTimeFileNameRegEx = @"[?]([ymdhsfzgkt]+[-_ ]*)+[?]";
-
-            if (!Regex.IsMatch(name, dateTimeFileNameRegEx, RegexOptions.IgnoreCase))
-                return name;
-
-            var match = Regex.Match(name, dateTimeFileNameRegEx, RegexOptions.IgnoreCase);
-            var date = DateTime.Now.ToString(Regex.Replace(match.Value, "[?]", ""));
-
-            return name.Replace(match.ToString(), date);
-        }
-        
         #endregion
 
         #endregion
@@ -5244,7 +5193,7 @@ namespace ScreenToGif.Windows
             //Validates each file name when saving multiple images (if more than one image, that will not be zipped).
             if (preset is ImagePreset imagePreset && !imagePreset.ZipFiles)
             {
-                var output = Path.Combine(preset.OutputFolder, preset.OutputFilename);
+                var output = Path.Combine(preset.OutputFolder, preset.ResolvedFilename);
                 var padSize = (Project.Frames.Count - 1).ToString().Length;
 
                 if (indexes.Count > 1 ? indexes.Any(a => File.Exists($"{output} ({(a + "").PadLeft(padSize, '0')})" + preset.Extension)) : File.Exists(output + preset.Extension))
@@ -5275,7 +5224,7 @@ namespace ScreenToGif.Windows
                 //Get default project encoder settings.
                 var projectPreset = UserSettings.All.ExportPresets.OfType<StgPreset>().FirstOrDefault(f => f.IsSelectedForEncoder) ?? UserSettings.All.ExportPresets.OfType<StgPreset>().FirstOrDefault() ?? StgPreset.Default;
                 projectPreset.OutputFolder = preset.OutputFolder;
-                projectPreset.OutputFilename = preset.OutputFilename;
+                projectPreset.OutputFilename = preset.ResolvedFilename;
 
                 EncodingManager.StartEncoding(copiedAux, projectPreset); 
             }
