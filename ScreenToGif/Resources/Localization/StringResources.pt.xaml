@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:s="clr-namespace:System;assembly=mscorlib"
                     xml:space="preserve">
@@ -19,8 +19,9 @@
     <s:String x:Key="S.Title">Título</s:String>
     <s:String x:Key="S.Description">Descrição</s:String>
     <s:String x:Key="S.SelectColor">Clique aqui para selecionar a cor.</s:String>
+    <s:String x:Key="S.Documentation">Clique para navegar até a documentação.</s:String>
     <s:String x:Key="S.Suppress">Suprimir</s:String>
-    <s:String x:Key="S.Preview">Pré Visualização</s:String>
+    <s:String x:Key="S.Preview">Pré-visualização</s:String>
     <s:String x:Key="S.Size">Tamanho</s:String>
     <s:String x:Key="S.Background">Plano de fundo</s:String>
     <s:String x:Key="S.Color">Cor:</s:String>
@@ -42,12 +43,17 @@
     <s:String x:Key="S.Warning.Single.Title">Apenas uma instância permitida</s:String>
     <s:String x:Key="S.Warning.Single.Header">O aplicativo já está executando</s:String>
     <s:String x:Key="S.Warning.Single.Message">ScreenToGif já está executando, mas aparentemente nenhuma janela está aberta. Verifique a bandeja do sistema, um ícone do ScreenToGif deve estar lá.</s:String>
+    
+    <s:String x:Key="S.SavingSettings.Title">Salvando as Configurações</s:String>
+    <s:String x:Key="S.SavingSettings.Instruction">Gostaria de tentar salvar novamente?</s:String>
+    <s:String x:Key="S.SavingSettings.Message">Parece que o ScreenToGif não tem privilégios suficientes para salvar as configurações do disco.&#10;&#10;Gostaria de tentar novamente, mas desta vez usando privilégios administrativos?</s:String>
+    
     <s:String x:Key="S.Exiting.Title">Fechando ScreenToGif</s:String>
     <s:String x:Key="S.Exiting.Instruction">Você tem certeza que deseja fechar?</s:String>
     <s:String x:Key="S.Exiting.Message">Todas as janela do ScreenToGif serão fechadas e o ícone da área de notificação será removido.</s:String>
     
     <!--Keys-->
-    <s:String x:Key="S.Keys.Space">Espaço</s:String>  
+    <s:String x:Key="S.Keys.Space">Espaço</s:String>
     
     <!--Tray icon-->
     <s:String x:Key="S.NewRecording">Nova gravação de tela</s:String>
@@ -124,6 +130,7 @@
     <s:String x:Key="S.Command.Edit">Editar item selecionado</s:String>
     <s:String x:Key="S.Command.Save">Salvar item selecionado</s:String>
     <s:String x:Key="S.Command.Remove">Remover item selecionado</s:String>
+    <s:String x:Key="S.Command.ViewHistory">Ver a história</s:String>
     
     <!--StartUp-->
     <s:String x:Key="S.StartUp.Title">ScreenToGif - Início</s:String>
@@ -153,8 +160,8 @@
     <s:String x:Key="S.Updater.RunAfter">Abra o aplicativo após a atualização</s:String>
     <s:String x:Key="S.Updater.Download">Download</s:String>
     <s:String x:Key="S.Updater.Install">Instalar</s:String>
-    <s:String x:Key="S.Updater.Downloading">Baixando...</s:String>
     <s:String x:Key="S.Updater.InstallManually">Instalar manualmente</s:String>
+    <s:String x:Key="S.Updater.Downloading">Baixando...</s:String>
     <s:String x:Key="S.Updater.Warning.Show">Não foi possível exibir os detalhes da atualização.</s:String>
     <s:String x:Key="S.Updater.Warning.Download">Não foi possível fazer o download da atualização.</s:String>
     <s:String x:Key="S.Updater.Warning.Encoding">Você precisa esperar todas as codificações finalizarem para atualizar o aplicativo.</s:String>
@@ -163,7 +170,7 @@
     <s:String x:Key="S.Downloader.Title">ScreenToGif - Baixar</s:String>
     <s:String x:Key="S.Downloader.Header">Baixar</s:String>
     <s:String x:Key="S.Downloader.Size">{0} de {1}</s:String>
-        
+    
     <!--Options-->
     <s:String x:Key="S.Options.Title">ScreenToGif - Opções</s:String>
     <s:String x:Key="S.Options.App">Geral</s:String>
@@ -289,7 +296,7 @@
     <s:String x:Key="S.Options.Recorder.RemoteImprovement.Info">(Disabilita a captura de janelas em camadas)</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording">Ativar gravação assíncrona.</s:String>
     <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(Isso ajuda reduzir os travamentos da interface durante a gravação)</s:String>
-        
+    
     <s:String x:Key="S.Options.Recorder.Guidelines">Guias</s:String>
     <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds">Regra de terços</s:String>
     <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds.Info">Clique para alternar a exibição&#10;da guia de regra de terços.</s:String>
@@ -305,20 +312,20 @@
     <s:String x:Key="S.Options.Recorder.SelectionPanning">Habilitar a movimentação da seleção.</s:String>
     <s:String x:Key="S.Options.Recorder.SelectionPanning.Info">(Exibe um adorno perto do canto da seleção, permitindo o movimento da área de captura)</s:String>
     <s:String x:Key="S.Options.Recorder.Compact">Modo compacto.</s:String>
-    <s:String x:Key="S.Options.Recorder.Compact.Info">(Exibe uma versão menor do painel de controles de gravação)</s:String>    
+    <s:String x:Key="S.Options.Recorder.Compact.Info">(Exibe uma versão menor do painel de controles de gravação)</s:String>
     <s:String x:Key="S.Options.Recorder.DisplayDiscard">Exibe o botão de descartar também durante a gravação.</s:String>
     <s:String x:Key="S.Options.Recorder.DisplayDiscard.Info">(Normalmente, o botão só fica visível durante a pausa)</s:String>
     
     <s:String x:Key="S.Options.Recorder.RememberSize">Lembre-se do tamanho anterior da área de gravação.</s:String>
     <s:String x:Key="S.Options.Recorder.RememberPosition">Lembrar da localização anterior da área de gravação.</s:String>
     <s:String x:Key="S.Options.Recorder.PreStart">Use uma contagem regressiva.</s:String>
-    <s:String x:Key="S.Options.Recorder.PreStart.Info">(Em segundos, aguarda antes de iniciar a captura)</s:String>    
+    <s:String x:Key="S.Options.Recorder.PreStart.Info">(Em segundos, aguarda antes de iniciar a captura)</s:String>
     <s:String x:Key="S.Options.Recorder.CursorFollowing">Habilitar gravação via cursor.</s:String>
     <s:String x:Key="S.Options.Recorder.CursorFollowing.Info">(A área de gravação vai se posicionar conforme a posição do cursor)</s:String>
     <s:String x:Key="S.Options.Recorder.FollowMargin.Info">(Margem onde a área de gravação começará a se ajustar)</s:String>
     <s:String x:Key="S.Options.Recorder.FollowMarginInvisible.Info">(Margem adicional onde a interface começará a ser escondida para ser movida)</s:String>
     <s:String x:Key="S.Options.Recorder.NotifyRecordingDiscard">Me pergunte antes de descartar a gravação.</s:String>
-    
+
     <!--Options • Editor-->
     <s:String x:Key="S.Options.Editor.Previewer">Plano de fundo do pré-visualizador</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize">Tamanho da grade:</s:String>
@@ -345,6 +352,9 @@
     <s:String x:Key="S.Options.Editor.General.NotifyWhileClosingEditor">Me pergunte antes de fechar o Editor (se um projeto estiver aberto).</s:String>
     <s:String x:Key="S.Options.Editor.General.TripleClickSelection">Habilitar triplo clique para selecionar o texto.</s:String>
     <s:String x:Key="S.Options.Editor.General.DrawOutlineOutside">Aplique a borda das legendas por fora das letras.</s:String>
+    <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind">Pule quadros quando necessário.</s:String>
+    <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind.Info">(Pule um quadro se o pré-visualizador não for capaz de exibi-lo a tempo)</s:String>
+    <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind.Tooltip">Pule um quadro se o pré-visualizador não for capaz de exibi-lo a tempo.</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory">Impor um limite para o histórico de desfazer/refazer.</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Info">(Ações mais antigas serão removidas quando o limite for alcançado)</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Maximum">(Número máximo de ações armazenadas)</s:String>
@@ -357,6 +367,7 @@
     <s:String x:Key="S.Options.Tasks.List.Enabled">Ativado</s:String>
     <s:String x:Key="S.Options.Tasks.Enable">Ative esta tarefa.</s:String>
     <s:String x:Key="S.Options.Tasks.SelectType">(Selecione uma tarefa)</s:String>
+    <s:String x:Key="S.Options.Tasks.SelectType.Info">Selecione uma tarefa acima</s:String>
     <s:String x:Key="S.Options.Tasks.Info">Essas tarefas são executadas sequencialmente do topo da lista para o último elemento.&#10;Isso acontece quando o projeto é aberto pela primeira vez no editor.</s:String>
   
     <!--Options • Shortcuts-->
@@ -431,6 +442,8 @@
     <s:String x:Key="S.Options.Storage.RemoveSettings">Remover o arquivo de configurções.</s:String>
     <s:String x:Key="S.Options.Storage.OpenSettingsFolder">Abra a pasta que contém o arquivo de configurações.&#x0d;Pressione a tecla Ctrl enquanto clicando para abrir diretamente o arquivo, se possível.</s:String>
     <s:String x:Key="S.Options.Storage.SettingsInfo">• Padrão de carregamento de configurações: Configurações padrão ◄ AppData ◄ Local.&#x0d;• Se não existe arquivo de configurações presente na pasta Local, o aplicativo busca dentro da pasta AppData,&#10;&#x09;as Configurações padrão são usadas se nenhum arquivo de configuração presente.&#x0d;• Se não existir configurações locais, todas as configurações são salvas na pasta AppData.</s:String>
+    <s:String x:Key="S.Options.Storage.DeleteEverything">Exclua todos os arquivos do cache ao fechar o aplicativo.</s:String>
+    <s:String x:Key="S.Options.Storage.AskDeleteEverything">Me pergunte antes de excluir todos os arquivos do cache.</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemoval">Remover automaticamente projectos antigos.</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemoval.Info">Quando o aplicativo abrir, uma tarefa em segundo plano vai apagar projetos antigos que não estão abertos (depende da configuração).</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemovalDays.Info">(em dias, qualquer projeto mas antigo que isso e que esteja fechado será apagado/descartado após abrir o aplicativo)</s:String>
@@ -455,34 +468,83 @@
     <s:String x:Key="S.Options.Upload.Proxy.Port">Porta:</s:String>
     <s:String x:Key="S.Options.Upload.Proxy.User">Usuário:</s:String>
     <s:String x:Key="S.Options.Upload.Proxy.Password">Senha:</s:String>
-    <s:String x:Key="S.Options.Upload.Get">Obter token OAuth</s:String>
-    <s:String x:Key="S.Options.Upload.PasteToken">Cole o token de autorização aqui</s:String>
+    
+    <s:String x:Key="S.Options.Upload.Presets">Predefinições de upload</s:String>
+    <s:String x:Key="S.Options.Upload.Presets.Service">Serviço</s:String>
+    <s:String x:Key="S.Options.Upload.Presets.Title">Título</s:String>
+    <s:String x:Key="S.Options.Upload.Presets.Description">Descrição</s:String>
+    <s:String x:Key="S.Options.Upload.Presets.Enabled">Habilitado</s:String>
+    
+     <!--Options • Upload > Preset-->
+    <s:String x:Key="S.Options.Upload.Preset.Title">Serviço de Upload</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Select">Selecione um serviço</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Select.Info">Selecione um serviço de upload acima</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Custom">Personalizado</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Enable">Habilite esta predefinição.</s:String>
+    
+    <s:String x:Key="S.Options.Upload.Preset.Details">Detalhes</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Name">Nome:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Description">Descrição:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Mode">odo:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Mode.Anonymous">Anônimo</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Mode.Authenticated">Autenticado</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Authorization">Autorização</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.GetToken">Obter token</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Token">Cole o token OAuth aqui</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Username">Nome de usuário:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Password">Senha:</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Authorize">Autorizar</s:String>
-    <s:String x:Key="S.Options.Upload.Refresh">Atualizar</s:String>
-    <s:String x:Key="S.Options.Upload.Clear">Limpar</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Imgur.Anonymous">Imgur (Anônimo)</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.NotStored">O nome de usuário e a senha não serão armazenados.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Options">Opções</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Direct">Obter links diretos.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Album">Álbum</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Title">Você deve dar a esta predefinição um nome único.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Repeated">O nome já está em uso por outra predefinição de upload.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Authenticate">Quando estiver no modo autenticado, você deve terminar o processo de autenticação.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Credentials">Você deve fornecer seu nome de usuário e senha para autorizar este aplicativo.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.GetToken">Não foi possível obter o token de autorização.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Token">Para autorizar este aplicativo, é necessário fornecer o token de autorização.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.AuthError">A autorização falhou. Verifique se está tudo certo e tente novamente em alguns segundos.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.AlbumLoad">Não foi possível carregar a lista de álbuns.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Authorized">Autorização concluída.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.NotAuthorized">Não autorizado.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Expired">Autorização expirada em {0}.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Valid">Autorização válida até {0}.</s:String>
+    
     <s:String x:Key="S.Options.Upload.Preset.Imgur.Gifv">Obter links com a extensão Gifv ao invés de Gif.</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Imgur.ToAlbum">Fazer upload dos gifs para um álbum.</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Imgur.Album">Álbum:</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Imgur.AskMe">Me pergunte antes de enviar</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.NotPossible">Não foi possível abrir a página para obter o token de autorização.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Warning.Token">Para autorizar este aplicativo, é necessário fornecer o token de autorização.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Completed">Autorização do Imgur foi concluída.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Error">A autorização do Imgur falhou. Tente novamente em alguns segundos ou obtenha um novo token.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Header">Não foi possível autorizar o aplicativo</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Message">Verifique se você providenciou o token correto e se você tem uma conexão com a internet.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Imgur.Refresh.None">Para atualizar a autorização para este aplicativo, é necessário finalizar o processo de autorização primeiro.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Info.NotAuthorized">Não autorizado.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Info.Expired">Autorização expirada em {0}.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Info.Valid">Autorização válida até {0}.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Info.Removed">A autorização do Imgur foi removida.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Warning.AlbumLoad">Não foi possível carregar a lista de álbuns.</s:String>
-    <s:String x:Key="S.Options.Upload.Gfycat.Anonymous">Gfycat (Anônimo)</s:String>
-    <s:String x:Key="S.Options.Upload.Yandex.Token">Token OAuth:</s:String>
-    <s:String x:Key="S.Options.Upload.Pick.Destination">Escolha um destino</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Reload">Recarregar a lista de álbuns.</s:String>
+    
+    <s:String x:Key="S.Options.Upload.Preset.Gfycat.Defaults">Padrões</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Gfycat.AskMe">Me peça para preencher os detalhes do upload.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Gfycat.UrlType">Tipo de url:</s:String>
+    
+    <!--Options • Upload > Album-->
     <s:String x:Key="S.Options.Upload.Pick.Album">Escolha um álbum de destino (opcional)</s:String>
     <s:String x:Key="S.Options.Upload.Pick.Album.Info">Se você deseja, escolha um álbum de destino:</s:String>
+    
+    <!--Options • Upload > Details-->
+    <s:String x:Key="S.Options.Upload.Pick.Details">Detalhes do upload (opcional) </s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Info">Detalhes de upload</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Title">Título:</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Description">Descrição:</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Tags">Tags:</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Tags.Info">Separe as etiquetas usando um ponto e vírgula ( ; )</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Private">Somente para quem acessar via link direto.</s:String>
+    
+    <!--Options • Upload > History-->
+    <s:String x:Key="S.Options.Upload.History.Title">Histórico de upload</s:String>
+    <s:String x:Key="S.Options.Upload.History.Date">Data</s:String>
+    <s:String x:Key="S.Options.Upload.History.Preset">Predefinição</s:String>
+    <s:String x:Key="S.Options.Upload.History.Successful">em-sucedido?</s:String>
+    <s:String x:Key="S.Options.Upload.History.Remove">Excluir entrada de histórico.</s:String>
+    <s:String x:Key="S.Options.Upload.History.Detail.Link">Link:</s:String>
+    <s:String x:Key="S.Options.Upload.History.Detail.LowerQuality">Menor qualidade:</s:String>
+    <s:String x:Key="S.Options.Upload.History.Detail.DeleteLink">Link de exclusão:</s:String>
+    <s:String x:Key="S.Options.Upload.History.Delete.Instruction">Tem certeza de que deseja excluir a entrada do histórico?</s:String>
+    <s:String x:Key="S.Options.Upload.History.Delete.Message">Esta ação não pode ser desfeita.&#10;&#10;Gostaria de excluir a entrada de histórico selecionada?</s:String>
     
     <!--Options • Extras-->
     <s:String x:Key="S.Options.Extras.External">Ferramentas externas</s:String>
@@ -575,7 +637,7 @@
     <s:String x:Key="S.Recorder.Height">Altura</s:String>
     <s:String x:Key="S.Recorder.Width">Largura</s:String>
     <s:String x:Key="S.Recorder.CursorFollowing">O seguimento do cursor está ativado.</s:String>
-    
+
     <s:String x:Key="S.Recorder.SwitchFrequency">Clique para circular entre as frequências de captura.</s:String>
     <s:String x:Key="S.Recorder.Manual.Short">manual</s:String>
     <s:String x:Key="S.Recorder.Interaction.Short">interações</s:String>
@@ -674,15 +736,59 @@
     <s:String x:Key="S.ErrorDialog.Observation">Algo de errado aconteceu.</s:String>
     <s:String x:Key="S.ErrorDialog.Send">Enviar relatório</s:String>
 
-    <!--FFmpeg preset-->
-    <s:String x:Key="S.FfmpegPreset.Title">Perfis do FFmpeg</s:String>
-    <s:String x:Key="S.FfmpegPreset.Name">Nome</s:String>
-    <s:String x:Key="S.FfmpegPreset.Parameters">Parâmetros</s:String>
-    <s:String x:Key="S.FfmpegPreset.Info.SecondPass">Para codificar com 2 passes, adicione '-pass 2' no comando.</s:String>
-    <s:String x:Key="S.FfmpegPreset.Warning.Name">Você deve escrever o nome do perfil.</s:String>
-    <s:String x:Key="S.FfmpegPreset.Warning.Parameter">Você deve escrever algum parâmetro para esse perfil.</s:String>
-    <s:String x:Key="S.FfmpegPreset.Warning.SameName">Já existe um perfil com o mesmo nome.</s:String>
+    <!--Presets-->
+    <s:String x:Key="S.Preset.Title">Predefinição</s:String>
+    <s:String x:Key="S.Preset.Encoder">Codificador</s:String>
+    <s:String x:Key="S.Preset.Name">Nome</s:String>
+    <s:String x:Key="S.Preset.Description">Descrição</s:String>
+    <s:String x:Key="S.Preset.Other">Outro</s:String>
+    <s:String x:Key="S.Preset.AutoSave">Salvar automaticamente quando uma opção for modificada.</s:String>
+    <s:String x:Key="S.Preset.Info.Manual">Todas as alterações nessa configurações de predefinição (configurações de codificação e exportação) precisam ser salvas manualmente pressionando o botão de salvamento.</s:String>
+    <s:String x:Key="S.Preset.Info.Automatic">Todas as alterações nessas configurações de predefinição (configurações de codificação e exportação) serão salvas automaticamente.</s:String>
+    <s:String x:Key="S.Preset.Warning.Readonly">Algumas das propriedades de uma predefinição padrão são somente leitura.</s:String>
+    <s:String x:Key="S.Preset.Warning.Name">Você deve dar um nome a esta predefinição.</s:String>
+    <s:String x:Key="S.Preset.Warning.SameName">Já há uma predefinição com o mesmo nome.</s:String>
+    
+    <!--Presets • Listing-->
+    <s:String x:Key="S.Preset.Autosave">Auto salva</s:String>
+    <s:String x:Key="S.Preset.Autosave.Info">As alterações nesta predefinição são automaticamente salvas.</s:String>
+    <s:String x:Key="S.Preset.Default.Title">Padrão ({0})</s:String>
+    <s:String x:Key="S.Preset.Default.Description">Predefinição padrão para o codificador.</s:String>
+    <s:String x:Key="S.Preset.Hevc.Title">HEVC ({0})</s:String>
+    <s:String x:Key="S.Preset.Hevc.Description">High Efficiency Video Coding.</s:String>
+    <s:String x:Key="S.Preset.Vp8.Title">VP8 ({0})</s:String>
+    <s:String x:Key="S.Preset.Vp8.Description">Codec mais antigo e mais conhecido.</s:String>
+    <s:String x:Key="S.Preset.Filename.Animation">Animação</s:String>
+    <s:String x:Key="S.Preset.Filename.Video">Vídeo</s:String>
+    <s:String x:Key="S.Preset.Filename.Image">Imagem</s:String>
+    <s:String x:Key="S.Preset.Filename.Project">Projeto</s:String>
 
+    <s:String x:Key="S.Preset.Gif.Embedded.High.Title">Alta qualidade</s:String>
+    <s:String x:Key="S.Preset.Gif.Embedded.High.Description">Mais adequado para gravações com mais cores e gradientes.</s:String>
+    <s:String x:Key="S.Preset.Gif.Embedded.Transparent.Title">Alta qualidade • Fundo transparente</s:String>
+    <s:String x:Key="S.Preset.Gif.Embedded.Transparent.Description">Suporta salvar a animação com um fundo transparente.</s:String>
+    <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Title">Alta qualidade • Gráficos</s:String>
+    <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Description">Melhor para gravações com menor quantidade de cores.</s:String>
+    <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Title">FFmpeg - Qualidade superior</s:String>
+    <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Description">Qualidade de imagem superior, mas com um tamanho de arquivo maior.</s:String>
+    <s:String x:Key="S.Preset.Gif.Ffmpeg.Low.Title">FFmpeg - Menor qualidade</s:String>
+    <s:String x:Key="S.Preset.Gif.Ffmpeg.Low.Description">Menor qualidade de imagem, mas com um tamanho de arquivo menor.</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.High.Title">Gifski - Maior qualidade</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.High.Description">Maior qualidade de imagem, mas com maior tamanho de arquivo.</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.Low.Title">Gifski - Menor qualidade</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.Low.Description">Menor qualidade de imagem, mas com um tamanho de arquivo menor.</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.Fast.Title">Gifski - Menor qualidade e codificação mais rápida</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.Fast.Description">Qualidade de imagem ainda menor, com uma codificação mais rápida, mas com um tamanho de arquivo menor.</s:String>
+    <s:String x:Key="S.Preset.Gif.System.Low.Title">Sistema - Baixa qualidade</s:String>
+    <s:String x:Key="S.Preset.Gif.System.Low.Description">Baixa qualidade, mas codificação mais rápida.</s:String>
+    
+    <s:String x:Key="S.Preset.Apng.Ffmpeg.High.Title">FFmpeg - Alta qualidade</s:String>
+    <s:String x:Key="S.Preset.Apng.Ffmpeg.High.Description">Alta qualidade de imagem e tamanho de arquivo pequeno, mas codificação mais lenta.</s:String>
+    <s:String x:Key="S.Preset.Apng.Ffmpeg.Low.Title">FFmpeg - Menor qualidade</s:String>
+    <s:String x:Key="S.Preset.Apng.Ffmpeg.Low.Description">Menor qualidade de imagem, tamanho de arquivo pequeno e codificação mais rápida.</s:String>
+    <s:String x:Key="S.Preset.Webp.Ffmpeg.High.Title">Alta qualidade</s:String>
+    <s:String x:Key="S.Preset.Webp.Ffmpeg.High.Description">Alta qualidade de imagem e tamanho do arquivo pequeno.</s:String>
+    
     <!--Insert frames-->
     <s:String x:Key="S.InsertFrames.Title">Inserir Quadros</s:String>
     <s:String x:Key="S.InsertFrames.Info">Ambos os lados devem ter o mesmo tamanho, esta janela permite o reposicionamento e redimensionamento da imagem e o plano de fundo. Clique para selecionar e redimensionar.</s:String>
@@ -801,16 +907,23 @@
     <s:String x:Key="S.Editor.File.All">Todos os arquivos suportados</s:String>
     <s:String x:Key="S.Editor.File.Image">Imagem</s:String>
     <s:String x:Key="S.Editor.File.Video">Vídeo</s:String>
-    <s:String x:Key="S.Editor.File.Project">Projeto do ScreenToGif</s:String>
-    <s:String x:Key="S.Editor.File.Gif">Animação em Gif</s:String>
+
     <s:String x:Key="S.Editor.File.Apng">Animação em Png</s:String>
+    <s:String x:Key="S.Editor.File.Gif">Animação em Gif</s:String>
+    <s:String x:Key="S.Editor.File.Webp">Animação em Webp</s:String>
+    
     <s:String x:Key="S.Editor.File.Avi">Vídeo Avi</s:String>
     <s:String x:Key="S.Editor.File.Mkv">Vídeo Matroska</s:String>
+    <s:String x:Key="S.Editor.File.Mov">Vídeo Mov</s:String>
     <s:String x:Key="S.Editor.File.Mp4">Vídeo Mp4</s:String>
     <s:String x:Key="S.Editor.File.Webm">Vídeo Webm</s:String>
-    <s:String x:Key="S.Editor.File.Wmv">Vídeo Windows media</s:String>
-    <s:String x:Key="S.Editor.File.Image.Zip">Arquivo Zip, todas as imagens selecionadas</s:String>
-    <s:String x:Key="S.Editor.File.Image.Png">Imagem Png, todas as imagens selecionadas</s:String>
+    
+    <s:String x:Key="S.Editor.File.Image.Bmp">Imagem Bmp</s:String>
+    <s:String x:Key="S.Editor.File.Image.Jpeg">Imagem Jpeg</s:String>
+    <s:String x:Key="S.Editor.File.Image.Png">Imagem Png</s:String>
+    <s:String x:Key="S.Editor.File.Image.Zip">Arquivo Zip</s:String>
+    
+    <s:String x:Key="S.Editor.File.Project">Projeto do ScreenToGif</s:String>
     <s:String x:Key="S.Editor.File.Project.Zip">Projeto ScreenToGif como Zip</s:String>
     <s:String x:Key="S.Editor.File.Psd">Arquivo Psd</s:String>
     
@@ -1018,12 +1131,11 @@
     <s:String x:Key="S.Editor.ApplyingTransition">Aplicando efeito de transição</s:String>
     <s:String x:Key="S.Editor.PreparingSaving">Preparando para salvar</s:String>
     <s:String x:Key="S.Editor.CancelDiscard">Cancelar carregamento e descartar projeto.</s:String>
-    
+
     <!--Editor • Frame list-->
     <s:String x:Key="S.Editor.List.Frame">Quadro:</s:String>
     <s:String x:Key="S.Editor.List.OpenImage">Abrir Imagem</s:String>
     <s:String x:Key="S.Editor.List.ExploreFolder">Explorar Pasta</s:String>
-    <s:String x:Key="S.Editor.List.ExportImage">Exportar Imagem</s:String>
     
     <!--Editor • Go to-->
     <s:String x:Key="S.GoTo.Title">Ir Para Quadro</s:String>
@@ -1170,6 +1282,8 @@
     <s:String x:Key="S.Caption.Layout">Posicionamento</s:String>
     <s:String x:Key="S.Caption.Vertical">Vertical:</s:String>
     <s:String x:Key="S.Caption.Horizontal">Horizontal:</s:String>
+    <s:String x:Key="S.Caption.TextAlignment">Alinhamento:</s:String>
+    <s:String x:Key="S.Caption.TextDecoration">Decoração:</s:String>
 
     <!--Editor • Key strokes-->
     <s:String x:Key="S.KeyStrokes">Teclas Pressionadas</s:String>
@@ -1178,6 +1292,8 @@
     <s:String x:Key="S.KeyStrokes.Edit">Edite suas teclas pressionadas</s:String>
     <s:String x:Key="S.KeyStrokes.IgnoreModifiers">Ignore as teclas Ctrl, Alt, Shift e Windows enquanto não estiverem sendo usadas como modificadoras.</s:String>
     <s:String x:Key="S.KeyStrokes.IgnoreModifiers.Info">Pressionamentos de teclas modificadoras sem formar nenhum comando serão ignoradas,&#x0d;por exemplo, a tecla "Control" sozinha será ignorada, mas o comando "Control + C" não.</s:String>
+    <s:String x:Key="S.KeyStrokes.IgnoreInjected">Ignore as teclas simuladas de software.</s:String>
+    <s:String x:Key="S.KeyStrokes.IgnoreInjected.Info">Apenas capture os pressionamentos de teclas do usuário.</s:String>
     <s:String x:Key="S.KeyStrokes.Extend">Extender a exibição do pressionamento de teclas:</s:String>
     <s:String x:Key="S.KeyStrokes.Earlier">Exiba o pressionamento de tecla mais cedo:</s:String>
     <s:String x:Key="S.KeyStrokes.By">Por (ms):</s:String>
@@ -1315,23 +1431,84 @@
 
     <!--Editor • Save as-->
     <s:String x:Key="S.SaveAs.Type">Tipo de arquivo</s:String>
-    <s:String x:Key="S.SaveAs.Gif">Gif</s:String>
+    <s:String x:Key="S.SaveAs.Type.Format">O formato do arquivo de saída.</s:String>
+    <s:String x:Key="S.SaveAs.Type.Preset">O predefinição de exportação que detém todas as configurações exibidas atualmente.&#10;Gerencie suas predefinições de exportação através dos botões abaixo.</s:String>
+    <s:String x:Key="S.SaveAs.Type.Animated">Imagem animada</s:String>
+    <s:String x:Key="S.SaveAs.Type.Video">Vídeo</s:String>
+    <s:String x:Key="S.SaveAs.Type.Frames">Quadros</s:String>
+    <s:String x:Key="S.SaveAs.Type.Other">Outro</s:String>
+    
     <s:String x:Key="S.SaveAs.Apng">Apng</s:String>
-    <s:String x:Key="S.SaveAs.Images">Imagens (Quadros)</s:String>
+    <s:String x:Key="S.SaveAs.Apng.Info">Animated Portable Network Graphics</s:String>
+    <s:String x:Key="S.SaveAs.Gif">Gif</s:String>
+    <s:String x:Key="S.SaveAs.Gif.Info">Graphics Interchange Format</s:String>
+    <s:String x:Key="S.SaveAs.Webp">Webp</s:String>
+    <s:String x:Key="S.SaveAs.Webp.Info">Web Picture</s:String>
+    
+    <s:String x:Key="S.SaveAs.Avi">Avi</s:String>
+    <s:String x:Key="S.SaveAs.Avi.Info">Audio Video Interleave</s:String>
+    <s:String x:Key="S.SaveAs.Mkv">Mkv</s:String>
+    <s:String x:Key="S.SaveAs.Mkv.Info">Matroska</s:String>
+    <s:String x:Key="S.SaveAs.Mov">Mov</s:String>
+    <s:String x:Key="S.SaveAs.Mov.Info">QuickTime File Format</s:String>
+    <s:String x:Key="S.SaveAs.Mp4">Mp4</s:String>
+    <s:String x:Key="S.SaveAs.Mp4.Info">Mpeg-4</s:String>
+    <s:String x:Key="S.SaveAs.Webm">Webm</s:String>
+    <s:String x:Key="S.SaveAs.Webm.Info">Web Movie</s:String>
+    
+    <s:String x:Key="S.SaveAs.Bmp">Bmp</s:String>
+    <s:String x:Key="S.SaveAs.Bmp.Info">Bitmap</s:String>
+    <s:String x:Key="S.SaveAs.Jpeg">Jpeg</s:String>
+    <s:String x:Key="S.SaveAs.Jpeg.Info">Joint Photographic Experts Group</s:String>
+    <s:String x:Key="S.SaveAs.Png">Png</s:String>
+    <s:String x:Key="S.SaveAs.Png.Info">Portable Network Graphics</s:String>
+    
     <s:String x:Key="S.SaveAs.Project">Projeto</s:String>
+    <s:String x:Key="S.SaveAs.Project.Info">Projeto do ScreenToGif</s:String>
     <s:String x:Key="S.SaveAs.Psd">PSD</s:String>
-    <s:String x:Key="S.SaveAs.Video">Video</s:String>
+    <s:String x:Key="S.SaveAs.Psd.Info">Arquivo do Photoshop</s:String>
+    
+    <!--Editor • Save as > Presets-->
+    <s:String x:Key="S.SaveAs.Presets">Perfil:</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Default">Padrão</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Add">Adicionar</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Save">Salvar</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Edit">Editar</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Remove">Remover</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Reset">Redefinir</s:String>
+    
+    <!--Editor • Save as > Presets > Dialogs-->
+    <s:String x:Key="S.SaveAs.Presets.Ask.Delete.Title">Excluindo o Predefinição</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Ask.Delete.Instruction">Tem certeza de que deseja excluir a predefinição?</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Ask.Delete.Message">Esta ação não pode ser desfeita.&#10;&#10;Gostaria de excluir a predefinição selecionada?</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Ask.Reset.Title">Redefinindo o Predefinição</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Ask.Reset.Instruction">Tem certeza que quer redefinir a predefinição?</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Ask.Reset.Message">Esta ação não pode ser desfeita.&#10;&#10;Gostaria de redefinir a predefinição selecionada para as configurações padrão?</s:String>
     
     <!--Editor • Save as > Encoder-->
     <s:String x:Key="S.SaveAs.Encoder">Codificador</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Quantizer">Codificador e quantizador</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Info">Codificador responsável por gerar o arquivo final.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">ScreenToGif</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Tooltip">Utiliza o codificador interno do aplicativo, com o método de redução de cores abaixo.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Info">Codificador embutido.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System">Sistema</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.System.Tooltip">Utiliza uma tabela de cores padrão.</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.Apng">ScreenToGif</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.Apng.Tooltip">Codificador desenvolvido pelo desenvolvedor do ScreenToGif.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.System.Info">Codificador disponibilizado pelo sistema.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Ffmpeg.Info">Codificador externo, desenvolvido por FFmpeg.org.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Gifski.Info">Codificador externo, desenvolvido por Gif.ski</s:String>
+    
+    <!--Editor • Save as > FFmpeg-->
+    <s:String x:Key="S.SaveAs.Ffmpeg.UseParameters">Habilite o modo avançado.</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.UseParameters.Info">Insira manualmente os parâmetros para controlar o codificador.</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Parameters">Parâmetros:</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Parameters.Info">Lista de parâmetros que serão passados para FFmpeg.&#10;&#10;Parâmetros especiais:&#10;{I} é o caminho de entrada (os quadros).&#10;{O} é o caminho de saída (o arquivo exportado).&#10;{W} é a largura do quadro.&#10;{H} é a altura do quadro.</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Parameters.Pass">Para codificar com 2 passes, basta adicionar '-pass 2'.</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Preview">Pré-visualizar</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Preview.Info">Pré-visualize a lista de parâmetros que será passada para FFmpeg.</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Help.Code">Documentação dos codec</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Help.Format">Documentação do formato</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Help.Filters">Documentação dos filtros</s:String>
     
     <!--Editor • Save as > Gif options-->
     <s:String x:Key="S.SaveAs.GifOptions">Opções do Gif</s:String>
@@ -1353,6 +1530,10 @@
     <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">Quantidade máxima de cores (para cada quadro).</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable">Utilize uma tabela de cores global.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable.Info">May reduce the quality and/or size of the gif.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Best">Melhor</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Fastest">Rápido</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Gifski.Faster">Use um processo de codificação ainda mais rápido.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Gifski.Faster.Info">Pode reduzir a qualidade do gif.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Loop">Loop:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Looped">Gif com repetições.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Repetir para sempre.</s:String>
@@ -1366,49 +1547,112 @@
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma">Substitua esses pixels por um chroma key.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma.Info">Pixels repetidos ou não modificados serão substituídos pelo chroma key,&#10;tornando possível utilizar menos cores por quadro.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.ChromaKey">Chroma key:</s:String>
-
+    <s:String x:Key="S.SaveAs.GifOptions.Dither">Pontilhado:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Dither.Scale">Escala Bayer:</s:String>
+    
     <!--Editor • Save as > Apng options-->
     <s:String x:Key="S.SaveAs.ApngOptions">Opções do Apng</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Prediction">Predição:</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Prediction.None">Nenhum</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Prediction.Sub">Sub</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Prediction.Up">Cima</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Prediction.Average">Média</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Prediction.Mixed">Misto</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions.Looped">Apng em loop.</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions.DetectUnchanged">Detectar pixels não modificados.</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions.PaintTransparent">Pinte todos os pixels não modificados com uma cor transparente.</s:String>
     
-    <!--Editor • Save as > Video/Images/Psd/Project options-->
-    <s:String x:Key="S.SaveAs.VideoOptions">Opções do video</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.Fps">Qps:</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.FlipVertically">Inverter o vídeo (verticalmente).</s:String>
-    <s:String x:Key="S.SaveAs.ImagesOptions">Opções de Imagem</s:String>
+    <!--Editor • Save as > Webp options-->
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset">Predefinição:</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.None">Nenhum</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Default">Padrão</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Picture">Imagem</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Photo">Foto</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Drawing">Desenho</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Icon">Ícone</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Text">Texto</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.Lossless">Use o modo sem perdas.</s:String>
+    
+    <!--Editor • Save as > Video options-->
+    <s:String x:Key="S.SaveAs.VideoOptions.Mode">Modo:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Mode.Normal">Normal</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Mode.Advanced">Avançado</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Mode.Info">Método de configuração dos parâmetros do codificador:&#10;Normal: Use controles de interface do usuário padrão.&#10;Avançado: Use uma caixa de texto para digitar os parâmetros.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Codec">Codec:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Codec.Info">O codificador de vídeo, responsável por&#10;converter os pixels para o arquivo de saída.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset">Predefinição:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.None">Nenhum</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.VerySlow">Muito Lento</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Slower">Mais Lento</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Slow">Lento</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Medium">Médio</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Fast">Rápido</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Faster">Mais Rápido</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.VeryFast">Muito Rápido</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.SuperFast">Super Rápido</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.UltraFast">Ultra Rápido</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Quality">Qualidade</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Balanced">Balanceado</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Speed">Veloz</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Default">Padrão</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Lossless">Sem Perdas</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.LosslessHp">Sem Perdas (Alto Desempenho)</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Hp">Alto Desempenho</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Hq">Alta Qualidade</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Bd">Disco Bluray</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.LowLatency">Baixa Latência</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.LowLatencyHp">Baixa latência (Alto Desempenho)</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.LowLatencyHq">Baixa Latência (Alta Qualidade)</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Info">Relação entre velocidade de codificação para compressão,&#10;predefinições mais lentas podem gerar melhor compressão &#10;(qualidade por arquivo).</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration">Ac. de Hardware:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration.Off">Desligado</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration.On">Ligado</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration.Auto">Seleção automática</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration.Info">Controla o uso de hardware dedicado (gráficos de vídeo).&#10;Off: Não usa hardware dedicado.&#10;Ligado: Usa hardware dedicado e permite selecionar codificadores especiais.&#10;Auto: Usa hardware dedicado e seleciona automaticamente o codificador certo, quando possível.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.PixelFormat">Formato do pixel:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.PixelFormat.Auto">Automático</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Vsync">Vsync:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Vsync.Info">Método de sincronização de vídeo.&#10;Auto: Escolhe entre 1 e 2, dependendo dos recursos muxer (formato) .&#10;Passe: Cada quadro é passado com seus tempos para o codificador.&#10;Constante: Os quadros serão duplicados e descartados para alcançar exatamente o solicitado taxa constante de quadros.&#10;Variável: Os quadros são passados com seus cronos ou descartados de modo a evitar que 2 quadros tenham o mesmo fuso horário.&#10;Pular: Como passe, mas destrói todos os tempos, fazendo com que o codificador gere novos fusos de tempo com base na taxa de quadros.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Vsync.Passthrough">Passe</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Vsync.Cfr">Taxa de quadros constante</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Vsync.Vfr">Taxa de quadro variável</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Vsync.Drop">Pular</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Framerate">Taxa de quadros:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Framerate.Film">Filme</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Framerate.Custom">Personalizado</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Pass">Passe:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Crf.Info">Fator de taxa constante.&#10;Configuração de controle de qualidade e taxa.&#10;Deixe-o vazio se você não quiser definir esta propriedade.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.QualityLevel">Nível de qualidade:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.QualityLevel.Info">Valores menores significam melhor qualidade.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate">Taxa de bits:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Info">Taxa de bits de vídeo de destino.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Mode">Modo de taxa:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Mode.Constant">Constante</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Mode.Variable">Variável</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Minimum">Taxa mín:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Minimum.Info">Tolerância mínima de bitrate.&#10;Mais útil ao usar o modo CBR.&#10;Deixe-o vazio ou zero&#10;se você não deseja definir esta propriedade.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Maximum">Taxa max:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Maximum.Info">Tolerância máxima de bitrate.&#10;Requer que o tamanho do buffer seja definido também.&#10;Deixe-o vazio ou zero&#10;se você não deseja definir esta propriedade.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Buffer">Tamanho do buffer:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Buffer.Info">Tamanho do buffer de controle de taxa.&#10;Deixe-o vazio ou zero&#10;se você não deseja definir esta propriedade.</s:String>
+
+    <!--Editor • Save as > Image options-->
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">Compactar em um zip.</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions">Opções do Psd</s:String>
+    <s:String x:Key="S.SaveAs.ImageOptions.Zip.Info">Exporta as imagens dentro de uma pasta compactada.</s:String>
+    
+    <!--Editor • Save as > Psd options-->
     <s:String x:Key="S.SaveAs.PsdOptions.Compress">Comprimir a imagem.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Compress.Info">Comprime os dados da imagem usando o algoritmo RLE.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline">Exportar os dados da timeline.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Info">Exporta os tempos de cada frame, ao invés de exportar apenas as imagens.</s:String>
-    <s:String x:Key="S.SaveAs.ProjectOptions">Opções do projeto</s:String>
     
-    <s:String x:Key="S.SaveAs.Extras">Extras:</s:String>
-    <s:String x:Key="S.SaveAs.Presets">Perfil:</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Default">Padrão</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Add">Adicionar</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Save">Salvar</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Edit">Editar</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Remove">Remover</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Remove.Title">Remover Perfil</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Remove.Header">Você deseja remover o pefil?</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Remove.Message">Você não poderá desfazer essa operação, mas você poderá adicionar o perfil de novo depois.</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Reset">Redefinir</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Reset.Title">Redefinir Perfil</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Reset.Header">Você deseja redefinir o perfil para parâmetros padrões?</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Reset.Message">Você não poderá desfazer essa operação, mas você poderá editar o perfil de novo depois.</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Warning.NoSelection">Nenhum perfil do FFmpeg selecionado, selecione um para continuar.</s:String>
-    
-    <!--Save As • Save options-->
+    <!--Editor • Save as > Save options-->
     <s:String x:Key="S.SaveAs.SaveOptions">Opções de salvamento</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.Partial">Exporte parcialmente.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Salvar o arquivo em uma pasta de sua escolha.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Sobrescrever (caso já exista).</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Salvar como projeto também (mesma pasta, mesmo nome).</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Fazer upload do arquivo.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.UploadDestination">Destino do upload.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">Copiar para a área de transferência.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File">Arquivo</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File.Info">Copia o arquivo para a área de transferência.</s:String>
@@ -1421,7 +1665,27 @@
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Executar comandos após a codificação.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Digite comandos para serem executados após a codificação.&#x0d;Para executar multiplos comandos, escreva cada comando em linhas diferentes.&#x0d;Macros:&#x0d;{p} = Caminho do arquivo.&#x0d;{f} = Caminho da pasta.&#x0d;{u} = URL do arquivo enviado.</s:String>
     
-    <!--Save As • File-->
+    <!--Editor • Save As > Partial export-->
+    <s:String x:Key="S.SaveAs.Partial">Exportação parcial</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode">Modo:</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Info">Selecione o método de exportação parcial.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Expression">Expressão</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Expression.Info">Exporta partes da animação com base em uma expressão simples.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Frames">Faixa de quadros</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Frames.Info">Exporta apenas parte da animação dentro da faixa de quadros.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Time">Faixa de tempo</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Time.Info">Exporta apenas parte da animação dentro do tempo.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Selection">Seleção</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Selection.Info">Exporta apenas os quadros selecionados na linha do tempo.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Selection.None">Nenhum quadro selecionado.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Selection.Singular">1 quadro selecionado.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Selection.Plural">{0} quadros selecionados.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.From">De:</s:String>
+    <s:String x:Key="S.SaveAs.Partial.To">Para:</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Expression">Expressão:</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Expression.Info">Digite números de quadros separados por uma vírgula ou&#10;sequências de quadros separadas por um sinal de menos:&#10;1, 3, 4, 6 - 9</s:String>
+    
+    <!--Editor • Save as > File-->
     <s:String x:Key="S.SaveAs.File">Arquivo</s:String>
     <s:String x:Key="S.SaveAs.File.Location">Pasta de destino.</s:String>
     <s:String x:Key="S.SaveAs.File.SelectFolder">Selecione a pasta de destino</s:String>
@@ -1433,8 +1697,15 @@
     <s:String x:Key="S.SaveAs.File.Decrease">Decremente o nome do arquivo.</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">Um arquivo com o mesmo nome já existe na pasta selecionada.</s:String>
     <s:String x:Key="S.SaveAs.File.Clipboard">Salvar na área de transferência.</s:String>
+    
+    <!--Editor • Save as > Warnings-->
     <s:String x:Key="S.SaveAs.Warning.Type">Você precisa selecionar onde salvar o arquivo (em uma pasta, na área de transferência ou para fazer upload).</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Extension">Você não selecionou a extensão do arquivo.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Ffmpeg.Empty">Ao selecionar o modo avançado, você deve digitar os parâmetros no campo de parâmetros.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Ffmpeg.MissingPath">Alguns parâmetros especiais de {I} (entrada) e/ou {O} (saída) estão faltando do campo de parâmetros.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Commands.Empty">Para executar um comando após a codificação, você precisa escrever o comando na caixa de texto.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Partial.NoSelection">Você deve selecionar pelo menos um quadro quando tiver a opção de exportar apenas os quadros selecionados.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Partial.InvalidExpression">A expressão para exportar parcialmente o projeto está inválida.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Upload.None">Nenhum serviço de upload selecionado. Você precisa selecionar um destino.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Upload.NotAuthorized">Você não pode enviar para o serviço selecionado porque você não foi autorizado. Navegue até Opções > Serviços de Upload para autorizar este aplicativo.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Copy.Link">Você não pode selecionar a opção de copiar o link porque você não escolheu para fazer o upload do arquivo.</s:String>
@@ -1444,12 +1715,37 @@
     <s:String x:Key="S.SaveAs.Warning.Filename">Você precisa informar um nome para o arquivo.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Filename.Invalid">O nome do arquivo de destino contém um ou mais caracteres inválidos. Por favor, informe um nome válido para o arquivo.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Overwrite">Nome do arquivo já em uso. Habilite a opção de sobrescrever ou escolha um outro nome para o arquivo.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Overwrite.Project">Já existe um projeto com o mesmo nome de arquivo. Escolha para substituir ou escolha outro nome de arquivo ou pasta.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Canceled">A operação foi cancelada.</s:String>
     
-    <!--SaveAs • Export-->
+    <!--Editor • Save As > Upload-->
+    <s:String x:Key="S.SaveAs.Upload">Upload</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Info">Selecione a predefinição de upload, que tem detalhes sobre o serviço em uso para upload.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Limit">Este serviço de upload impõe limites.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Add">Adicione uma nova predefinição de upload.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Edit">Editar configurações de predefinição de upload.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.History">Veja o histórico de upload desta predefinição.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Remove">Remova a predefinição de upload selecionada no momento.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Select.Title">Selecione uma predefinição de upload</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Select.Description">Escolha um desta lista.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Unavailable.Title">Sem predefinição de upload disponível para este formato</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Unavailable.Description">Adicione uma predefinição usando o botão abaixo.</s:String>
+    
+    <!--Editor • Save as > Upload > Dialogs-->
+    <s:String x:Key="S.SaveAs.Upload.Ask.Delete.Title">Excluindo a Predefinição do Upload</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Ask.Delete.Instruction">Tem certeza de que deseja excluir a predefinição do upload?</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Ask.Delete.Message">Esta ação não pode ser desfeita.&#10;&#10;Você gostaria de excluir a predefinição de upload selecionada?</s:String>
+    
+    <!--Save As • Dialogs-->
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Title">Exportar Quadros</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">Tem certeza de que deseja exportar os quadros?</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">Essa ação exportará {0} quadros diretamente para a pasta selecionada.</s:String>
+    
+    <!--Command Preview-->
+    <s:String x:Key="S.CommandPreviewer.Title">Visualizador de comando</s:String>
+    <s:String x:Key="S.CommandPreviewer.Command">Comando</s:String>
+    <s:String x:Key="S.CommandPreviewer.Input">Caminho de entrada</s:String>
+    <s:String x:Key="S.CommandPreviewer.Output">Caminho de saída</s:String>
     
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">Comentários</s:String>
@@ -1520,4 +1816,17 @@
     <!--Orientation-->
     <s:String x:Key="S.Orientation.Horizontal">Horizontal</s:String>
     <s:String x:Key="S.Orientation.Vertical">Vertical</s:String>
+    
+    <!--TextAlignment-->
+    <s:String x:Key="S.TextAlignment.Left">Esquerda</s:String>
+    <s:String x:Key="S.TextAlignment.Right">Direita</s:String>
+    <s:String x:Key="S.TextAlignment.Center">Centro</s:String>
+    <s:String x:Key="S.TextAlignment.Justify">Justificado</s:String>
+    
+    <!--TextDecoration-->
+    <s:String x:Key="S.TextDecorations.None">Nenhum</s:String>
+    <s:String x:Key="S.TextDecorations.Underline">Sublinhado</s:String>
+    <s:String x:Key="S.TextDecorations.Strikethrough">Tachado</s:String>
+    <s:String x:Key="S.TextDecorations.OverLine">Linha do topo</s:String>
+    <s:String x:Key="S.TextDecorations.Baseline">Linha de base</s:String>
 </ResourceDictionary>
