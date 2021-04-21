@@ -126,9 +126,10 @@ namespace ScreenToGif.Util
         /// Writes the details to the error log on disk.
         /// </summary>
         /// <param name="title">The name of the error</param>
-        /// <param name="aditional">Aditional information.</param>
+        /// <param name="aditional">Additional information.</param>
+        /// <param name="secondAdditional">Additional information.</param>
         /// <param name="isFallback">Fallbacks to the Documents folder.</param>
-        public static void Log(string title, object aditional = null, bool isFallback = false)
+        public static void Log(string title, object aditional = null, object secondAdditional = null, bool isFallback = false)
         {
             try
             {
@@ -175,6 +176,9 @@ namespace ScreenToGif.Util
 
                         if (aditional != null)
                             writer.WriteLine($"◄ Aditional - {Environment.NewLine}\t{aditional}");
+
+                        if (secondAdditional != null)
+                            writer.WriteLine($"◄ Second Aditional - {Environment.NewLine}\t{secondAdditional}");
                         
                         writer.WriteLine();
                         writer.WriteLine("----------------------------------");
@@ -188,7 +192,7 @@ namespace ScreenToGif.Util
             {
                 //One last trial.
                 if (!isFallback)
-                    Log(title, aditional, true);
+                    Log(title, aditional, secondAdditional, true);
             }
         }
     }

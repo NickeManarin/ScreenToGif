@@ -352,6 +352,10 @@ namespace ScreenToGif.Model.ExportPresets
 
         [IgnoreMember]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string ResolvedFilename { get; set; }
+
+        [IgnoreMember]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string FullPath { get; set; }
 
 
@@ -388,10 +392,12 @@ namespace ScreenToGif.Model.ExportPresets
                 if (string.IsNullOrWhiteSpace(OutputFilename))
                     return Task.FromResult(new ValidatedEventArgs("S.SaveAs.Warning.Filename", StatusReasons.EmptyProperty));
 
-                if (OutputFilename.ToCharArray().Any(x => Path.GetInvalidFileNameChars().Contains(x)))
+                ResolvedFilename = PathHelper.ReplaceRegexInName(OutputFilename);
+
+                if (ResolvedFilename.ToCharArray().Any(x => Path.GetInvalidFileNameChars().Contains(x)))
                     return Task.FromResult(new ValidatedEventArgs("S.SaveAs.Warning.Filename.Invalid", StatusReasons.InvalidState));
 
-                if (!OverwriteOnSave && File.Exists(Path.Combine(OutputFolder, OutputFilename + Extension)))
+                if (!OverwriteOnSave && File.Exists(Path.Combine(OutputFolder, ResolvedFilename + Extension)))
                     return Task.FromResult(new ValidatedEventArgs("S.SaveAs.Warning.Overwrite", StatusReasons.FileAlreadyExists));
             }
 

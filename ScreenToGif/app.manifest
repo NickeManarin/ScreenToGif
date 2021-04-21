@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <assembly manifestVersion="1.0" xmlns="urn:schemas-microsoft-com:asm.v1">
-  <assemblyIdentity version="2.28.1.0" name="ScreenToGif" processorArchitecture="msil"/>
+  <assemblyIdentity version="2.28.2.0" name="ScreenToGif" processorArchitecture="msil"/>
   
   <trustInfo xmlns="urn:schemas-microsoft-com:asm.v2">
     <security>
