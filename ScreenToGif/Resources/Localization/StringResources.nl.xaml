@@ -19,6 +19,7 @@
     <s:String x:Key="S.Title">Titel</s:String>
     <s:String x:Key="S.Description">Omschrijving</s:String>
     <s:String x:Key="S.SelectColor">Klik hier om de kleur te kiezen.</s:String>
+    <s:String x:Key="S.Documentation">Klik om naar de documentatie te gaan.</s:String>
     <s:String x:Key="S.Suppress">Onderdrukken</s:String>
     <s:String x:Key="S.Preview">Voorvertoning</s:String>
     <s:String x:Key="S.Size">Grootte</s:String>
@@ -42,6 +43,11 @@
     <s:String x:Key="S.Warning.Single.Title">Slechts één instantie toegestaan</s:String>
     <s:String x:Key="S.Warning.Single.Header">De app is al actief</s:String>
     <s:String x:Key="S.Warning.Single.Message">ScreenToGif draait al, maar blijkbaar is er geen raam open. Controleer je systeemvak, er moet een ScreenToGif-pictogram zijn.</s:String>
+    
+    <s:String x:Key="S.SavingSettings.Title">Instellingen opslaan</s:String>
+    <s:String x:Key="S.SavingSettings.Instruction">Wil je het opnieuw proberen op te slaan?</s:String>
+    <s:String x:Key="S.SavingSettings.Message">Het lijkt erop dat ScreenToGif niet genoeg rechten heeft om de instellingen op de schijf op te slaan.&#10;&#10; Wil je het opnieuw proberen, maar deze keer met beheerdersrechten?</s:String>
+    
     <s:String x:Key="S.Exiting.Title">ScreenToGif afsluiten</s:String>
     <s:String x:Key="S.Exiting.Instruction">Weet je zeker dat je wilt afsluiten?</s:String>
     <s:String x:Key="S.Exiting.Message">Alle schermen worden gesloten en het pictogram wordt van de taakbalk verwijderd.</s:String>
@@ -124,6 +130,7 @@
     <s:String x:Key="S.Command.Edit">Het geselecteerde item bewerken</s:String>
     <s:String x:Key="S.Command.Save">Geselecteerd item opslaan</s:String>
     <s:String x:Key="S.Command.Remove">Geselecteerd iten verwijderen</s:String>
+    <s:String x:Key="S.Command.ViewHistory">Geschiedenis bekijken</s:String>
     
     <!--StartUp-->
     <s:String x:Key="S.StartUp.Title">ScreenToGif - Startscherm</s:String>
@@ -345,6 +352,9 @@
     <s:String x:Key="S.Options.Editor.General.NotifyWhileClosingEditor">Bevestiging vragen bij het afsluiten van de editor (als er een project geopend is).</s:String>
     <s:String x:Key="S.Options.Editor.General.TripleClickSelection">Driedubbel-klik gebruiken om tekst te selecteren.</s:String>
     <s:String x:Key="S.Options.Editor.General.DrawOutlineOutside">Contouren van tekstkaders tekenen.</s:String>
+    <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind">Verminder frames als dat nodig is.</s:String>
+    <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind.Info">(Sla een frame over als de voorbeeldweergave het niet op tijd kan weergeven)</s:String>
+    <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind.Tooltip">Sla een frame over als de voorbeeldweergave het niet op tijd kan weergeven.</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory">Leg een limiet op aan de geschiedenis van ongedaan maken/opnieuw uitvoeren.</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Info">(Oudere acties worden verwijderd wanneer de limiet is bereikt)</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Maximum">(Maximaal aantal opgeslagen acties)</s:String>
@@ -357,6 +367,7 @@
     <s:String x:Key="S.Options.Tasks.List.Enabled">Geactiveerd</s:String>
     <s:String x:Key="S.Options.Tasks.Enable">Deze taak activeren.</s:String>
     <s:String x:Key="S.Options.Tasks.SelectType">(Kies een taak)</s:String>
+    <s:String x:Key="S.Options.Tasks.SelectType.Info">Kies hierboven een taak</s:String>
     <s:String x:Key="S.Options.Tasks.Info">Deze taken worden opeenvolgend uitgevoerd vanaf de bovenkant van de lijst aan de bodem.&#10;Dit gebeurt wanneer u voor het eerst een project opent met behulp van de editor.</s:String>
   
     <!--Options • Shortcuts-->
@@ -431,6 +442,8 @@
     <s:String x:Key="S.Options.Storage.RemoveSettings">Instellingenbestand verwijderen.</s:String>
     <s:String x:Key="S.Options.Storage.OpenSettingsFolder">Open de map waar het instellngenbestand is opgeslagen. &#10;Houd Ctrl ingedrukt bij het openen van het bestand bestand.</s:String>
     <s:String x:Key="S.Options.Storage.SettingsInfo">• Instellingen laden: Standaard ◄ AppData ◄ Lokaal. &#10;• Als de lokale map geen instellingenbestand bevat dan zoekt de applicatie in de AppData map. Indien geen instellingenbestand gevonden wordt, komen de standaardinstellingen van kracht&#10;• Als er geen lokale instellingenbestand gevonden wordt, worden alle instellingen in AppData opgeslagen.</s:String>
+    <s:String x:Key="S.Options.Storage.DeleteEverything">Verwijder alle bestanden uit de cache bij het sluiten van de app.</s:String>
+    <s:String x:Key="S.Options.Storage.AskDeleteEverything">Vraag het me voordat je alle bestanden uit de cache verwijdert.</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemoval">Oude projecten automatisch verwijderen.</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemoval.Info">Bij de start zal een achtergrondtaak van het programma alle gesloten projecten wissen die ouder zijn dan een ingestelde tijd.</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemovalDays.Info">(in dagen, oudere projecten worden verwijderd bij het openen van de Editor)</s:String>
@@ -455,34 +468,83 @@
     <s:String x:Key="S.Options.Upload.Proxy.Port">Poort:</s:String>
     <s:String x:Key="S.Options.Upload.Proxy.User">Gebruikersnaam:</s:String>
     <s:String x:Key="S.Options.Upload.Proxy.Password">Wachtwoord:</s:String>
-    <s:String x:Key="S.Options.Upload.Get">OAuth token ophalen</s:String>
-    <s:String x:Key="S.Options.Upload.PasteToken">Plak hier de autorisatiesleutel</s:String>
+    
+    <s:String x:Key="S.Options.Upload.Presets">Voorinstellingen uploaden</s:String>
+    <s:String x:Key="S.Options.Upload.Presets.Service">Dienst</s:String>
+    <s:String x:Key="S.Options.Upload.Presets.Title">Titel</s:String>
+    <s:String x:Key="S.Options.Upload.Presets.Description">Omschrijving</s:String>
+    <s:String x:Key="S.Options.Upload.Presets.Enabled">Ingeschakeld</s:String>
+    
+     <!--Options • Upload > Preset-->
+    <s:String x:Key="S.Options.Upload.Preset.Title">Uploadservice</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Select">Kies een dienst:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Select.Info">Kies hierboven een uploadservice</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Custom">Aangepast</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Enable">Deze voorinstelling gebruiken</s:String>
+    
+    <s:String x:Key="S.Options.Upload.Preset.Details">Details</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Name">Naam:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Description">Omschrijving:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Mode">Modus:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Mode.Anonymous">Anoniem</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Mode.Authenticated">Geverifieerd</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Authorization">Autorisatie</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.GetToken">Token krijgen</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Token">Plak hier het OAuth-token</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Username">Gebruikersnaam:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Password">Wachtwoord:</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Authorize">Autoriseren</s:String>
-    <s:String x:Key="S.Options.Upload.Refresh">Verversen</s:String>
-    <s:String x:Key="S.Options.Upload.Clear">Wissen</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Imgur.Anonymous">Imgur (Anoniem)</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.NotStored">De gebruikersnaam en het wachtwoord worden niet opgeslagen.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Options">Opties</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Direct">Gebruik directe links.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Album">Album</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Title">Je moet deze voorinstelling een unieke naam geven.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Repeated">De naam wordt al gebruikt door een andere uploadvoorinstelling.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Authenticate">In de geauthenticeerde modus moet je het authenticatieproces voltooien.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Credentials">Je moet je gebruikersnaam en wachtwoord opgeven om deze app te autoriseren.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.GetToken">Het was niet mogelijk om het autorisatietoken op te halen.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Token">Voordat deze applicatie geautoriseerd kan worden, dien je een geldige autorisatiesleutel op te geven.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.AuthError">Autorisatie mislukt. Controleer of alles klopt en probeer het over een paar seconden opnieuw.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.AlbumLoad">Het album kon niet worden geladen.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Authorized">Autorisatie voltooid.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.NotAuthorized">Niet geautoriseerd.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Expired">Autorisatie loopt af in {0}.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Valid">Autorisatie geldig tot {0}.</s:String>
+    
     <s:String x:Key="S.Options.Upload.Preset.Imgur.Gifv">Links verkrijgen met de Gifv extensie in plaats van Gif.</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Imgur.ToAlbum">Gifs naar geselecteerd album uploaden.</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Imgur.Album">Album:</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Imgur.AskMe">Bevestiging vragen voor uploaden</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.NotPossible">Het was niet mogelijk om een pagina te openen om de Imgur autorisatiesleutel op te halen.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Warning.Token">Voordat deze applicatie geautoriseerd kan worden, dien je een geldige autorisatiesleutel op te geven.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Completed">Imgur-autorisate voltooid.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Error">Imgur-autorisatie mislukt. Probeer het opnieuw or vraag een nieuwe sleutel aan.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Header">De app kon niet worden geautoriseerd</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Message">Controleer of je het juiste token hebt opgegeven en of je een internetverbinding hebt.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Imgur.Refresh.None">Voordat de autorisatie vernieuwd kan worden, moet eerst het autorisatieproces worden afgerond.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Info.NotAuthorized">Niet geautoriseerd.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Info.Expired">Autorisatie loopt af in {0}.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Info.Valid">Autorisatie geldig tot {0}.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Info.Removed">Imgur-autorisatie verwijderd.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Warning.AlbumLoad">Het album kon niet worden geladen.</s:String>
-    <s:String x:Key="S.Options.Upload.Gfycat.Anonymous">Gfycat (Anoniem)</s:String>
-    <s:String x:Key="S.Options.Upload.Yandex.Token">OAuth token:</s:String>
-    <s:String x:Key="S.Options.Upload.Pick.Destination">Selecteer bestemming</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Reload">Albumlijst opnieuw laden.</s:String>
+    
+    <s:String x:Key="S.Options.Upload.Preset.Gfycat.Defaults">Standaardwaarden</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Gfycat.AskMe">Vraag me om de details van de upload in te vullen.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Gfycat.UrlType">Url-type:</s:String>
+    
+    <!--Options • Upload > Album-->
     <s:String x:Key="S.Options.Upload.Pick.Album">Selecteer een album (optioneel)</s:String>
     <s:String x:Key="S.Options.Upload.Pick.Album.Info">Selecteer desgewenst een doelalbum:</s:String>
+    
+    <!--Options • Upload > Details-->
+    <s:String x:Key="S.Options.Upload.Pick.Details">Uploaddetails (optioneel)</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Info">Upload details</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Title">Titel:</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Description">Omschrijving:</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Tags">Labels:</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Tags.Info">Labels scheiden een puntkomma (;)</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Private">Alleen weergeven voor degenen die toegang hebben via een directe link.</s:String>
+    
+    <!--Options • Upload > History-->
+    <s:String x:Key="S.Options.Upload.History.Title">Uploadgeschiedenis</s:String>
+    <s:String x:Key="S.Options.Upload.History.Date">Datum</s:String>
+    <s:String x:Key="S.Options.Upload.History.Preset">Voorinstelling</s:String>
+    <s:String x:Key="S.Options.Upload.History.Successful">Geslaagd?</s:String>
+    <s:String x:Key="S.Options.Upload.History.Remove">Geschiedenis-item verwijderen.</s:String>
+    <s:String x:Key="S.Options.Upload.History.Detail.Link">Koppeling:</s:String>
+    <s:String x:Key="S.Options.Upload.History.Detail.LowerQuality">Lagere kwaliteit:</s:String>
+    <s:String x:Key="S.Options.Upload.History.Detail.DeleteLink">Verwijderingskoppeling:</s:String>
+    <s:String x:Key="S.Options.Upload.History.Delete.Instruction">Weet je zeker dat je het geschiedenisitem wilt verwijderen?</s:String>
+    <s:String x:Key="S.Options.Upload.History.Delete.Message">Deze actie kan niet ongedaan worden gemaakt.&#10;&#10;Wil je het geselecteerde geschiedenisitem verwijderen?</s:String>
     
     <!--Options • Extras-->
     <s:String x:Key="S.Options.Extras.External">Beschikbare externe applicaties</s:String>
@@ -674,15 +736,59 @@
     <s:String x:Key="S.ErrorDialog.Observation">Er is iets fout gegaan.</s:String>
     <s:String x:Key="S.ErrorDialog.Send">Rapport verzenden</s:String>
 
-    <!--FFmpeg preset-->
-    <s:String x:Key="S.FfmpegPreset.Title">FFmpeg-voorinstelling</s:String>
-    <s:String x:Key="S.FfmpegPreset.Name">Naam</s:String>
-    <s:String x:Key="S.FfmpegPreset.Parameters">Parameters</s:String>
-    <s:String x:Key="S.FfmpegPreset.Info.SecondPass">Om te coderen met 2-pass, moet '-pass 2' aan de opdracht. worden toegevoegd</s:String>
-    <s:String x:Key="S.FfmpegPreset.Warning.Name">Je moet deze voorinstelling een naam geven.</s:String>
-    <s:String x:Key="S.FfmpegPreset.Warning.Parameter">Je moet enkele parameters typen voor deze voorinstelling.</s:String>
-    <s:String x:Key="S.FfmpegPreset.Warning.SameName">Er is al een voorinstelling met dezelfde naam.</s:String>
+    <!--Presets-->
+    <s:String x:Key="S.Preset.Title">Voorinstelling</s:String>
+    <s:String x:Key="S.Preset.Encoder">Encoder</s:String>
+    <s:String x:Key="S.Preset.Name">Naam</s:String>
+    <s:String x:Key="S.Preset.Description">Omschrijving</s:String>
+    <s:String x:Key="S.Preset.Other">Overig</s:String>
+    <s:String x:Key="S.Preset.AutoSave">Automatisch opslaan wanneer een optie wordt gewijzigd.</s:String>
+    <s:String x:Key="S.Preset.Info.Manual">Alle wijzigingen aan deze voorinstellingen (instellingen voor coderen en exporteren) moeten handmatig worden opgeslagen door op de knop Opslaan te drukken.</s:String>
+    <s:String x:Key="S.Preset.Info.Automatic">Alle wijzigingen aan deze voorinstellingen (instellingen voor coderen en exporteren) worden automatisch opgeslagen.</s:String>
+    <s:String x:Key="S.Preset.Warning.Readonly">Sommige eigenschappen van een standaardvoorinstelling zijn alleen-lezen.</s:String>
+    <s:String x:Key="S.Preset.Warning.Name">Je moet deze voorinstelling een naam geven.</s:String>
+    <s:String x:Key="S.Preset.Warning.SameName">Er is al een preset met dezelfde naam.</s:String>
+    
+    <!--Presets • Listing-->
+    <s:String x:Key="S.Preset.Autosave">Automatisch opslaan</s:String>
+    <s:String x:Key="S.Preset.Autosave.Info">Wijzigingen in deze voorinstelling worden automatisch opgeslagen.</s:String>
+    <s:String x:Key="S.Preset.Default.Title">Standaard ({0})</s:String>
+    <s:String x:Key="S.Preset.Default.Description">Standaardinstelling voor de encoder.</s:String>
+    <s:String x:Key="S.Preset.Hevc.Title">HEVC ({0})</s:String>
+    <s:String x:Key="S.Preset.Hevc.Description">High Efficiency Video Coding.</s:String>
+    <s:String x:Key="S.Preset.Vp8.Title">VP8 ({0})</s:String>
+    <s:String x:Key="S.Preset.Vp8.Description">Oudere en beter bekende codec.</s:String>
+    <s:String x:Key="S.Preset.Filename.Animation">Animatie</s:String>
+    <s:String x:Key="S.Preset.Filename.Video">Video</s:String>
+    <s:String x:Key="S.Preset.Filename.Image">Afbeelding</s:String>
+    <s:String x:Key="S.Preset.Filename.Project">Project</s:String>
 
+    <s:String x:Key="S.Preset.Gif.Embedded.High.Title">Hoge kwaliteit</s:String>
+    <s:String x:Key="S.Preset.Gif.Embedded.High.Description">Beter geschikt voor opnames met meer kleuren en verlopen.</s:String>
+    <s:String x:Key="S.Preset.Gif.Embedded.Transparent.Title">Hoge kwaliteit • Transparante achtergrond</s:String>
+    <s:String x:Key="S.Preset.Gif.Embedded.Transparent.Description">Ondersteunt het opslaan van de animatie met een transparante achtergrond.</s:String>
+    <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Title">Hoge kwaliteit • Grafische afbeeldingen</s:String>
+    <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Description">Beter voor opnames met een kleinere hoeveelheid kleuren.</s:String>
+    <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Title">FFmpeg - Hogere kwaliteit</s:String>
+    <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Description">Hogere beeldkwaliteit, maar met een grotere bestandsgrootte.</s:String>
+    <s:String x:Key="S.Preset.Gif.Ffmpeg.Low.Title">FFmpeg - Lagere kwaliteit</s:String>
+    <s:String x:Key="S.Preset.Gif.Ffmpeg.Low.Description">Lagere beeldkwaliteit, maar met een kleinere bestandsgrootte.</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.High.Title">Gifski - Hoge kwaliteit</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.High.Description">Hogere beeldkwaliteit, maar met een grotere bestandsgrootte.</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.Low.Title">Gifski - Lage kwaliteit</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.Low.Description">Lagere beeldkwaliteit, maar met een kleinere bestandsgrootte.</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.Fast.Title">Gifski - Lagere kwaliteit en snellere codering</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.Fast.Description">Nog lagere beeldkwaliteit, met een snellere codering, maar met een kleinere bestandsgrootte.</s:String>
+    <s:String x:Key="S.Preset.Gif.System.Low.Title">Systeem - Lage kwaliteit</s:String>
+    <s:String x:Key="S.Preset.Gif.System.Low.Description">Lage kwaliteit, maar snellere codering.</s:String>
+    
+    <s:String x:Key="S.Preset.Apng.Ffmpeg.High.Title">FFmpeg - Hoge kwaliteit</s:String>
+    <s:String x:Key="S.Preset.Apng.Ffmpeg.High.Description">Hoge beeldkwaliteit en kleine bestandsgrootte, maar langzamere codering.</s:String>
+    <s:String x:Key="S.Preset.Apng.Ffmpeg.Low.Title">FFmpeg - Lagere kwaliteit</s:String>
+    <s:String x:Key="S.Preset.Apng.Ffmpeg.Low.Description">Lagere beeldkwaliteit, kleine bestandsgrootte en snellere codering.</s:String>
+    <s:String x:Key="S.Preset.Webp.Ffmpeg.High.Title">Hoge kwaliteit</s:String>
+    <s:String x:Key="S.Preset.Webp.Ffmpeg.High.Description">Hoge beeldkwaliteit en kleine bestandsgrootte.</s:String>
+    
     <!--Insert frames-->
     <s:String x:Key="S.InsertFrames.Title">Frames toevoegen</s:String>
     <s:String x:Key="S.InsertFrames.Info">Beide kanten moeten dezelfde grootte hebben. In dit scherm kan je de afbeelding ten opzichte van canvas herpositioneren of veranderen qua grootte. Klik op afbeelding om te selecteren.</s:String>
@@ -801,16 +907,23 @@
     <s:String x:Key="S.Editor.File.All">Alle ondersteunde bestanden</s:String>
     <s:String x:Key="S.Editor.File.Image">Afbeelding</s:String>
     <s:String x:Key="S.Editor.File.Video">Video</s:String>
-    <s:String x:Key="S.Editor.File.Project">ScreenToGif project</s:String>
-    <s:String x:Key="S.Editor.File.Gif">Gif-animatie</s:String>
+
     <s:String x:Key="S.Editor.File.Apng">Animated Png</s:String>
+    <s:String x:Key="S.Editor.File.Gif">Gif-animatie</s:String>
+    <s:String x:Key="S.Editor.File.Webp">Webp-video</s:String>
+    
     <s:String x:Key="S.Editor.File.Avi">Avi-video</s:String>
     <s:String x:Key="S.Editor.File.Mkv">Matroska-video</s:String>
+    <s:String x:Key="S.Editor.File.Mov">Mov-video</s:String>
     <s:String x:Key="S.Editor.File.Mp4">Mp4-video</s:String>
     <s:String x:Key="S.Editor.File.Webm">Webm-video</s:String>
-    <s:String x:Key="S.Editor.File.Wmv">Windows media-video</s:String>
-    <s:String x:Key="S.Editor.File.Image.Zip">Zip-bestand, alle geselecteerde bestanden</s:String>
-    <s:String x:Key="S.Editor.File.Image.Png">Png-afbeelding, alle geselecteerde afbeeldingen</s:String>
+    
+    <s:String x:Key="S.Editor.File.Image.Bmp">Bmp-afbeelding</s:String>
+    <s:String x:Key="S.Editor.File.Image.Jpeg">Jpeg-afbeelding</s:String>
+    <s:String x:Key="S.Editor.File.Image.Png">Png-afbeelding</s:String>
+    <s:String x:Key="S.Editor.File.Image.Zip">Zip-bestand, incl. afbeeldingen</s:String>
+    
+    <s:String x:Key="S.Editor.File.Project">ScreenToGif project</s:String>
     <s:String x:Key="S.Editor.File.Project.Zip">ScreenToGif project (zip)</s:String>
     <s:String x:Key="S.Editor.File.Psd">Psd-bestand</s:String>
     
@@ -1023,7 +1136,6 @@
     <s:String x:Key="S.Editor.List.Frame">Frame:</s:String>
     <s:String x:Key="S.Editor.List.OpenImage">Afbeelding openen</s:String>
     <s:String x:Key="S.Editor.List.ExploreFolder">Map verkennen</s:String>
-    <s:String x:Key="S.Editor.List.ExportImage">Afbeelding exporteren</s:String>
     
     <!--Editor • Go to-->
     <s:String x:Key="S.GoTo.Title">Ga naar frame</s:String>
@@ -1170,6 +1282,8 @@
     <s:String x:Key="S.Caption.Layout">Opmaak</s:String>
     <s:String x:Key="S.Caption.Vertical">Verticaal:</s:String>
     <s:String x:Key="S.Caption.Horizontal">Horizontaal:</s:String>
+    <s:String x:Key="S.Caption.TextAlignment">Uitlijning:</s:String>
+    <s:String x:Key="S.Caption.TextDecoration">Decoratie:</s:String>
 
     <!--Editor • Key strokes-->
     <s:String x:Key="S.KeyStrokes">Toetsaanslagen</s:String>
@@ -1178,6 +1292,8 @@
     <s:String x:Key="S.KeyStrokes.Edit">Toetsaanslagen bewerken</s:String>
     <s:String x:Key="S.KeyStrokes.IgnoreModifiers">Ctrl, Alt, Shift en Windows-toetsen negeren als deze geen doel hadden.</s:String>
     <s:String x:Key="S.KeyStrokes.IgnoreModifiers.Info">Met deze optie worden losse toetsaanslagen zoals "Control" genegeerd, maar "Control + C" wordt niet genegeerd.</s:String>
+    <s:String x:Key="S.KeyStrokes.IgnoreInjected">Negeer door software gesimuleerde toetsaanslagen.</s:String>
+    <s:String x:Key="S.KeyStrokes.IgnoreInjected.Info">Neem alleen toetsaanslagen van gebruikersinvoer op.</s:String>
     <s:String x:Key="S.KeyStrokes.Extend">Weergave van de toetsaanslagen uitbreiden.</s:String>
     <s:String x:Key="S.KeyStrokes.Earlier">Weergave van de toetsaanslagen eerder starten.</s:String>
     <s:String x:Key="S.KeyStrokes.By">Per (ms):</s:String>
@@ -1315,23 +1431,84 @@
 
     <!--Editor • Save as-->
     <s:String x:Key="S.SaveAs.Type">Bestandsformaat</s:String>
-    <s:String x:Key="S.SaveAs.Gif">Gif</s:String>
+    <s:String x:Key="S.SaveAs.Type.Format">Het formaat van het uitvoerbestand.</s:String>
+    <s:String x:Key="S.SaveAs.Type.Preset">De exportvoorinstelling die alle momenteel weergegeven instellingen bevat. &#10;Beheer je exportvoorinstellingen via de onderstaande knoppen.</s:String>
+    <s:String x:Key="S.SaveAs.Type.Animated">Geanimeerde afbeelding</s:String>
+    <s:String x:Key="S.SaveAs.Type.Video">Video</s:String>
+    <s:String x:Key="S.SaveAs.Type.Frames">Frames</s:String>
+    <s:String x:Key="S.SaveAs.Type.Other">Overige</s:String>
+    
     <s:String x:Key="S.SaveAs.Apng">Apng</s:String>
-    <s:String x:Key="S.SaveAs.Images">Afbeeldingen (frames)</s:String>
+    <s:String x:Key="S.SaveAs.Apng.Info">Animated Portable Network Graphics</s:String>
+    <s:String x:Key="S.SaveAs.Gif">Gif</s:String>
+    <s:String x:Key="S.SaveAs.Gif.Info">Graphics Interchange Format</s:String>
+    <s:String x:Key="S.SaveAs.Webp">Webp</s:String>
+    <s:String x:Key="S.SaveAs.Webp.Info">Web-afbeelding</s:String>
+    
+    <s:String x:Key="S.SaveAs.Avi">Avi</s:String>
+    <s:String x:Key="S.SaveAs.Avi.Info">Audio Video Interleave</s:String>
+    <s:String x:Key="S.SaveAs.Mkv">Mkv</s:String>
+    <s:String x:Key="S.SaveAs.Mkv.Info">Matroska</s:String>
+    <s:String x:Key="S.SaveAs.Mov">Mov</s:String>
+    <s:String x:Key="S.SaveAs.Mov.Info">QuickTime bestandsformaat</s:String>
+    <s:String x:Key="S.SaveAs.Mp4">Mp4</s:String>
+    <s:String x:Key="S.SaveAs.Mp4.Info">Mpeg-4</s:String>
+    <s:String x:Key="S.SaveAs.Webm">Webm</s:String>
+    <s:String x:Key="S.SaveAs.Webm.Info">Web Movie</s:String>
+    
+    <s:String x:Key="S.SaveAs.Bmp">Bmp</s:String>
+    <s:String x:Key="S.SaveAs.Bmp.Info">Bitmap</s:String>
+    <s:String x:Key="S.SaveAs.Jpeg">Jpeg</s:String>
+    <s:String x:Key="S.SaveAs.Jpeg.Info">Joint Photographic Experts Group</s:String>
+    <s:String x:Key="S.SaveAs.Png">Png</s:String>
+    <s:String x:Key="S.SaveAs.Png.Info">Portable Network Graphics</s:String>
+    
     <s:String x:Key="S.SaveAs.Project">Project</s:String>
+    <s:String x:Key="S.SaveAs.Project.Info">ScreenToGif project</s:String>
     <s:String x:Key="S.SaveAs.Psd">PSD</s:String>
-    <s:String x:Key="S.SaveAs.Video">Video</s:String>
+    <s:String x:Key="S.SaveAs.Psd.Info">Photoshop-bestand</s:String>
+    
+    <!--Editor • Save as > Presets-->
+    <s:String x:Key="S.SaveAs.Presets">Voorinstellingen:</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Default">Standaard</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Add">Toevoegen</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Save">Opslaan</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Edit">Bewerken</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Remove">Verwijderen</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Reset">Herstellen</s:String>
+    
+    <!--Editor • Save as > Presets > Dialogs-->
+    <s:String x:Key="S.SaveAs.Presets.Ask.Delete.Title">De voorinstelling wordt verwijderd</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Ask.Delete.Instruction">Weet je zeker dat je de voorinstelling wilt verwijderen?</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Ask.Delete.Message">Deze actie kan niet ongedaan worden gemaakt. &#10; &#10; Wil je de geselecteerde voorinstelling verwijderen?</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Ask.Reset.Title">Voorinstelling opnieuw instellen</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Ask.Reset.Instruction">Weet je zeker dat je de voorinstelling opnieuw wilt instellen?</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Ask.Reset.Message">Deze actie kan niet ongedaan worden gemaakt. &#10; &#10; Wil je de geselecteerde voorinstelling terugzetten naar de standaardinstellingen?</s:String>
     
     <!--Editor • Save as > Encoder-->
     <s:String x:Key="S.SaveAs.Encoder">Encoder</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Quantizer">Encoder en kwantiseerder</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Info">Encoder die verantwoordelijk is voor het genereren van het uitvoerbestand.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">ScreenToGif</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Tooltip">Gebruikt de ingebouwde encoder, met de onderstaande methode voor kleurreductie.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Info">Ingebouwde encoder</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System">Systeem</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.System.Tooltip">Gebruikt een standaard-palet.</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.Apng">ScreenToGif</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.Apng.Tooltip">Encoder ontwikkeld door ScreenToGif.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.System.Info">Encoder ter beschikking gesteld door het systeem.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Ffmpeg.Info">Externe encoder, gemaakt door FFmpeg.org.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Gifski.Info">Externe encoder, gemaakt door Gif.ski.</s:String>
+    
+    <!--Editor • Save as > FFmpeg-->
+    <s:String x:Key="S.SaveAs.Ffmpeg.UseParameters">Schakel de geavanceerde modus in.</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.UseParameters.Info">Voer handmatig de parameters in om de encoder te besturen.</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Parameters">Parameters:</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Parameters.Info">Lijst met parameters die worden doorgegeven aan FFmpeg. &#10; &#10; Speciale parameters: &#10; {I} is het invoerpad (de frames). &#10; {O} is het uitvoerpad (het geëxporteerd bestand). &#10; {W} is de breedte van het frame. &#10; {H} is de hoogte van het frame.</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Parameters.Pass">Om te coderen met 2-pass, voeg je eenvoudig '-pass 2' toe.</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Preview">Voorbeeld</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Preview.Info">Bekijk een voorbeeld van de parameterlijst die zal worden doorgegeven aan FFmpeg.</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Help.Code">Codecdocumentatie</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Help.Format">Formaatdocumentatie</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Help.Filters">Filterdocumentatie</s:String>
     
     <!--Editor • Save as > Gif options-->
     <s:String x:Key="S.SaveAs.GifOptions">Gif-opties</s:String>
@@ -1353,6 +1530,10 @@
     <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">Maximum aantal kleuren (voor elke frame)</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable">Gebruik een globale kleurentabel.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable.Info">Kan de kwaliteit en/of grootte van het gif verminderen.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Best">Beste</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Fastest">Snelste</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Gifski.Faster">Gebruik een nog sneller coderingsproces.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Gifski.Faster.Info">Kan de kwaliteit van de gif verminderen.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Loop">Lus:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Looped">Gif met herhaling.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Oneindig herhalen.</s:String>
@@ -1366,49 +1547,112 @@
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma">Vervang deze pixels door een chromasleutel.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma.Info">Herhaalde/ongewijzigde pixels worden vervangen door deze chromasleutel, &#10;waardoor het mogelijk is om minder kleuren per frame te gebruiken.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.ChromaKey">Chroma sleutel:</s:String>
-
+    <s:String x:Key="S.SaveAs.GifOptions.Dither">Dither:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Dither.Scale">Bayer-schaal:</s:String>
+    
     <!--Editor • Save as > Apng options-->
     <s:String x:Key="S.SaveAs.ApngOptions">Apng-opties</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Prediction">Voorspelling:</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Prediction.None">Geen</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Prediction.Sub">Sub</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Prediction.Up">Omhoog</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Prediction.Average">Gemiddeld</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Prediction.Mixed">Gemengd</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions.Looped">Apng met herhaling.</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions.DetectUnchanged">Ongewijzigde pixels detecteren.</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions.PaintTransparent">Kleur alle ongewijzigde pixels transparant.</s:String>
     
-    <!--Editor • Save as > Video/Images/Psd/Project options-->
-    <s:String x:Key="S.SaveAs.VideoOptions">Video-opties</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.Fps">Fps:</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.FlipVertically">Video spiegelen (verticaal)</s:String>
-    <s:String x:Key="S.SaveAs.ImagesOptions">Afbeeldingsopties</s:String>
+    <!--Editor • Save as > Webp options-->
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset">Voorinstelling:</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.None">Geen</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Default">Standaard</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Picture">Afbeelding</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Photo">Foto</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Drawing">Tekening</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Icon">Pictogram</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Text">Tekst</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.Lossless">Verliesloze modus gebruiken</s:String>
+    
+    <!--Editor • Save as > Video options-->
+    <s:String x:Key="S.SaveAs.VideoOptions.Mode">Modus:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Mode.Normal">Normaal</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Mode.Advanced">Geavanceerd</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Mode.Info">Configuratiemethode van de encoderparameters:&#10;Normaal: Gebruik standaard UI-besturingselementen.&#10;Geavanceerd: gebruik een tekstvak om de parameters in te voeren.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Codec">Codec:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Codec.Info">De video-encoder, verantwoordelijk voor &#10; het converteren van de onbewerkte pixels naar het uitvoerbestand.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset">Voorinstelling:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.None">Geen</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.VerySlow">Zeer traag</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Slower">Langzamer</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Slow">Langzaam</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Medium">Medium</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Fast">Snel</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Faster">Sneller</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.VeryFast">Zeer snel</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.SuperFast">Supersnel</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.UltraFast">Ultrasnel</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Quality">Kwaliteit</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Balanced">Gebalanceerd</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Speed">Snelheid</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Default">Standaard</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Lossless">Verliesloos</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.LosslessHp">Lossless (hoge prestaties)</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Hp">Hoge prestaties</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Hq">Hoge kwaliteit</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Bd">Bluray Disk</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.LowLatency">Lage latentie</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.LowLatencyHp">Lage latentie (hoge prestaties)</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.LowLatencyHq">Lage latentie (hoge kwaliteit)</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Info">Verhouding Coderingssnelheid/compressieverhouding, &#10; langzamere instellingen kunnen een betere compressie geven &#10; (kwaliteit bij bestandsgrootte).</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration">Hardwareversn.:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration.Off">Uit</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration.On">Aan</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration.Auto">Automatisch selecteren</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration.Info">Regelt het gebruik van speciale hardware (videobeelden).&#10;Uit: gebruikt geen speciale hardware.& 10;Aan: gebruikt speciale hardware en laat je speciale encoders selecteren.&#10;Auto: gebruikt speciale hardware en automatisch selecteert de juiste encoder, indien mogelijk.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.PixelFormat">Pixel-formaat:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.PixelFormat.Auto">Automatisch</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Vsync">Vsync:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Vsync.Info">Videosynchronisatiemethode.&#10;Auto: Kiest tussen 1 en 2 afhankelijk van de mogelijkheden van muxer (formaat).&#10;Passthrough: elk frame wordt met zijn tijdstempels doorgegeven aan de encoder.&#10;Constant: frames worden gedupliceerd en laten vallen om precies de gevraagde constante framesnelheid te bereiken. &#10; Variabel: frames worden doorgelaten met hun tijdstempel of worden verwijderd om te voorkomen dat 2 frames dezelfde tijdstempel hebben.&#10;Drop: als doorvoer maar vernietigt alle tijdstempels , waardoor de encoder nieuwe tijdstempels genereert op basis van framerate.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Vsync.Passthrough">Passthrough</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Vsync.Cfr">Constante framerate</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Vsync.Vfr">Variabele framerate</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Vsync.Drop">Drop</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Framerate">Frame rate:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Framerate.Film">Film</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Framerate.Custom">Aangepast</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Pass">Ronde:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Crf.Info">Constante-snelheidsfactor. &#10; Instelling voor kwaliteits- en tariefcontrole. &#10; Laat het veld leeg als je deze eigenschap niet wilt instellen.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.QualityLevel">Kwaliteitsniveau:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.QualityLevel.Info">Kleinere waarden betekenen hogere kwaliteit.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate">Bitrate:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Info">Doelvideo-bitsnelheid.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Mode">Bitrate modus:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Mode.Constant">Constant</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Mode.Variable">Variabel</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Minimum">Min rate:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Minimum.Info">Minimale bitrate-tolerantie. &#10; Het handigst bij gebruik van de CBR-modus. &#10; Laat het leeg of stel het in op nul &#10; als je deze eigenschap niet wilt instellen.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Maximum">Max rate:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Maximum.Info">Maximale bitrate-tolerantie. &#10; Vereist dat ook de buffergrootte wordt ingesteld. &#10; Laat het leeg of stel het in op nul &#10; als je deze eigenschap niet wilt instellen.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Buffer">Buffergrootte:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Buffer.Info">De buffergrootte van de rate-controle. &#10; Laat het leeg of stel het in op nul &#10; als je deze eigenschap niet wilt instellen.</s:String>
+
+    <!--Editor • Save as > Image options-->
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">De afbeeldingen in zip inpakken.</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions">Psd-opties</s:String>
+    <s:String x:Key="S.SaveAs.ImageOptions.Zip.Info">Exporteert de afbeeldingen in een gecomprimeerde map.</s:String>
+    
+    <!--Editor • Save as > Psd options-->
     <s:String x:Key="S.SaveAs.PsdOptions.Compress">Afbeelding comprimeren.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Compress.Info">De afbeelding comprimeren met het RLE-algoritme.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline">Tijdlijngegevens opslaan.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Info">Exporteert de tijden van de frames, in plaats van alleen de frames.</s:String>
-    <s:String x:Key="S.SaveAs.ProjectOptions">Projectopties</s:String>
     
-    <s:String x:Key="S.SaveAs.Extras">Extra's:</s:String>
-    <s:String x:Key="S.SaveAs.Presets">Voorinstellingen:</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Default">Standaard</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Add">Toevoegen</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Save">Opslaan</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Edit">Bewerken</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Remove">Verwijderen</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Remove.Title">Voorinstelling verwijderen</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Remove.Header">Wilt je de voorinstelling verwijderen?</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Remove.Message">Je kunt deze bewerking niet ongedaan maken, maar je kunt de voorinstelling later opnieuw toevoegen.</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Reset">Herstellen</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Reset.Title">Voorinstelling herstellen</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Reset.Header">Wil je de voorinstelling herstellen naar de standaardparameters?</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Reset.Message">Je kunt deze bewerking niet ongedaan maken, maar je kunt de voorinstelling later opnieuw bewerken.</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Warning.NoSelection">Geen FFmpeg-voorinstelling geselecteerd, selecteer er een.</s:String>
-    
-    <!--Save As • Save options-->
+    <!--Editor • Save as > Save options-->
     <s:String x:Key="S.SaveAs.SaveOptions">Opties opslaan</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.Partial">Gedeeltelijk exporteren.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Sla het bestand op in een map naar keuze.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Overschrijven (indien bestand al bestaat).</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Project ook opslaan (dezelfde map, dezelfde bestandsnaam).</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Bestand uploaden.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.UploadDestination">Uploaden-bestemming.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">Naar klembord kopiëren.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File">Bestand</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File.Info">Kopieert het resultaatbestand naar het klembord.</s:String>
@@ -1421,7 +1665,27 @@
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Aanvullende opdrachten uitvoeren.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Voer de opdrachten in die na de codering moeten worden uitgevoerd.&#10; Om meerdere opdrachten uit te voeren, typt u elk op een gescheiden regel.&#10;Macro's: &#10;{p} = bestandsuitvoer-pad.&#10;{f} = uitvoermap-pad.&#x0d;{u} = URL of the uploaded file.</s:String>
     
-    <!--Save As • File-->
+    <!--Editor • Save As > Partial export-->
+    <s:String x:Key="S.SaveAs.Partial">Gedeeltelijke export</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode">Modus:</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Info">Selecteer de gedeeltelijke exportmethode.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Expression">Expressie</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Expression.Info">Exporteert delen van de animatie op basis van een eenvoudige uitdrukking.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Frames">Frame bereik</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Frames.Info">Exporteert slechts een deel van de animatie binnen het framebereik.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Time">Tijdspanne</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Time.Info">Exporteert slechts een deel van de animatie binnen het tijdsbestek.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Selection">Selectie</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Selection.Info">Exporteert alleen de frames die in de tijdlijn zijn geselecteerd.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Selection.None">Geen frame geselecteerd.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Selection.Singular">1 frame geselecteerd.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Selection.Plural">{0} frames geselecteerd.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.From">Van:</s:String>
+    <s:String x:Key="S.SaveAs.Partial.To">Aan:</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Expression">Expressie:</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Expression.Info">Typ framenummers gescheiden door een komma of &#10;framereeksen gescheiden door een minteken: &#10;1, 3, 4, 6 - 9</s:String>
+    
+    <!--Editor • Save as > File-->
     <s:String x:Key="S.SaveAs.File">Bestand</s:String>
     <s:String x:Key="S.SaveAs.File.Location">Doelmap.</s:String>
     <s:String x:Key="S.SaveAs.File.SelectFolder">Selecteer de uitvoermap</s:String>
@@ -1433,8 +1697,15 @@
     <s:String x:Key="S.SaveAs.File.Decrease">Nummer in bestandsnaam verminderen</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">Een bestand met dezelfde naam bestaat al.</s:String>
     <s:String x:Key="S.SaveAs.File.Clipboard">Op klembord bewaren.</s:String>
+    
+    <!--Editor • Save as > Warnings-->
     <s:String x:Key="S.SaveAs.Warning.Type">Geef aan waar het uitvoerbestand moet worden opgeslagen (map, klembord of uploadlocatie).</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Extension">Je hebt de bestandsextensie niet geselecteerd.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Ffmpeg.Empty">Bij het selecteren van de geavanceerde modus, moet je de parameters in het veld parameters typen.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Ffmpeg.MissingPath">De speciale parameters {I} (invoer) en/of {O} (uitvoer) ontbreken in het parameterveld.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Commands.Empty">Om na codering opdrachten uit te laten voeren, zul je iets in het opdrachten-tekstveld moeten noteren.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Partial.NoSelection">Je moet ten minste één frame selecteren als je de optie hebt om alleen geselecteerde frames te exporteren.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Partial.InvalidExpression">De uitdrukking om het project gedeeltelijk te exporteren is ongeldig.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Upload.None">Geen upload-dienst geselecteerd. Geef een een bestemming op.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Upload.NotAuthorized">Uploaden naar de geselecteerde dienst is niet beschikbaar, want deze dienst was nog niet geautoriseerd. Ga naar Instellingen --> Upload-diensten om deze dienst te autoriseren</s:String>
     <s:String x:Key="S.SaveAs.Warning.Copy.Link">De optie link kopiëren is niet beschikbaar, omdat er nog geen bestand voor uploaden is geselecteerd.</s:String>
@@ -1444,12 +1715,37 @@
     <s:String x:Key="S.SaveAs.Warning.Filename">Kies een bestandsnaam.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Filename.Invalid">De bestandsnaam van het exportbestand bevat een of meer ongeldige tekens. Corrigeer de bestandsnaam.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Overwrite">Bestandsnaam bestaat al. Wijzig de optie om het bestand te overschrijven of kies andere bestandsnaam.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Overwrite.Project">Er is al een project met dezelfde bestandsnaam. Stel in om te overschrijven of kies een andere bestandsnaam of map.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Canceled">De actie is afgebroken.</s:String>
     
-    <!--SaveAs • Export-->
+    <!--Editor • Save As > Upload-->
+    <s:String x:Key="S.SaveAs.Upload">Uploaden</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Info">Selecteer de uploadvoorinstelling, die details bevat over de service die wordt gebruikt voor het uploaden.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Limit">Deze uploadservice legt limieten op.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Add">Voeg een nieuwe uploadvoorinstelling toe.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Edit">Uploadvoorinstelling bewerken</s:String>
+    <s:String x:Key="S.SaveAs.Upload.History">Bekijk de uploadgeschiedenis van deze voorinstelling.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Remove">Verwijder de geselecteerde uploadvoorinstelling.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Select.Title">Selecteer een uploadvoorinstelling</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Select.Description">Kies er een uit deze lijst.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Unavailable.Title">Geen uploadvoorinstelling beschikbaar voor dit formaat</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Unavailable.Description">Voeg een voorinstelling toe met behulp van de onderstaande knop.</s:String>
+    
+    <!--Editor • Save as > Upload > Dialogs-->
+    <s:String x:Key="S.SaveAs.Upload.Ask.Delete.Title">De uploadvoorinstelling verwijderen</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Ask.Delete.Instruction">Weet je zeker dat je de uploadvoorinstelling wilt verwijderen?</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Ask.Delete.Message">Deze actie kan niet ongedaan worden gemaakt.&#10;&#10;Wil je de geselecteerde uploadvoorinstelling verwijderen?</s:String>
+    
+    <!--Save As • Dialogs-->
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Title">Frames exporteren</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">Weet je zeker dat je de frames wilt exporteren?</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">Deze actie zal {0} frames direct in geselecteerde map exporteren</s:String>
+    
+    <!--Command Preview-->
+    <s:String x:Key="S.CommandPreviewer.Title">Opdrachtweergave</s:String>
+    <s:String x:Key="S.CommandPreviewer.Command">Opdracht</s:String>
+    <s:String x:Key="S.CommandPreviewer.Input">Bronmap</s:String>
+    <s:String x:Key="S.CommandPreviewer.Output">Doelmap</s:String>
     
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">Reacties</s:String>
@@ -1520,4 +1816,17 @@
     <!--Orientation-->
     <s:String x:Key="S.Orientation.Horizontal">Horizontaal</s:String>
     <s:String x:Key="S.Orientation.Vertical">Verticaal</s:String>
+    
+    <!--TextAlignment-->
+    <s:String x:Key="S.TextAlignment.Left">Links</s:String>
+    <s:String x:Key="S.TextAlignment.Right">Rechts</s:String>
+    <s:String x:Key="S.TextAlignment.Center">Gecentreerd</s:String>
+    <s:String x:Key="S.TextAlignment.Justify">Uitlijnen</s:String>
+    
+    <!--TextDecoration-->
+    <s:String x:Key="S.TextDecorations.None">Geen</s:String>
+    <s:String x:Key="S.TextDecorations.Underline">Understrepen</s:String>
+    <s:String x:Key="S.TextDecorations.Strikethrough">Doorhalen</s:String>
+    <s:String x:Key="S.TextDecorations.OverLine">Overstrepen</s:String>
+    <s:String x:Key="S.TextDecorations.Baseline">Basis</s:String>
 </ResourceDictionary>
