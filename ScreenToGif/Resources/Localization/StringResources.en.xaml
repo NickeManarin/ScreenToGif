@@ -1496,7 +1496,7 @@
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg.Info">External encoder, made by FFmpeg.org.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.Gifski.Info">External encoder, made by Gifski.com.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Gifski.Info">External encoder, made by Gif.ski.</s:String>
     
     <!--Editor • Save as > FFmpeg-->
     <s:String x:Key="S.SaveAs.Ffmpeg.UseParameters">Enable the advanced mode.</s:String>
@@ -1702,7 +1702,7 @@
     <s:String x:Key="S.SaveAs.Warning.Type">You need to select where to save the file (to a folder, to the clipboard or upload somewhere else).</s:String>
     <s:String x:Key="S.SaveAs.Warning.Extension">You didn't select the file extension.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Ffmpeg.Empty">When selecting the advanced mode, you must type the parameters in the parameters field.</s:String>
-    <s:String x:Key="S.SaveAs.Warning.Ffmpeg.MissingPath">Missing special parameters {I} (input) and/or {O} (output) from the parameters field.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Ffmpeg.MissingPath">The special parameters {I} (input) and/or {O} (output) are missing from the parameters field.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Commands.Empty">To execute a post encoding command, you need to type something on the commands text field.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Partial.NoSelection">You must select at least one frame when having the option to export only selected frames.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Partial.InvalidExpression">The expression to partially export the project is invalid.</s:String>
