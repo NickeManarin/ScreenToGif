@@ -1497,6 +1497,7 @@
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg.Info">External encoder, made by FFmpeg.org.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski.Info">External encoder, made by Gif.ski.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Options">Encoder options</s:String>
     
     <!--Editor • Save as > FFmpeg-->
     <s:String x:Key="S.SaveAs.Ffmpeg.UseParameters">Enable the advanced mode.</s:String>
@@ -1647,7 +1648,7 @@
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Info">Exports the timings of the frames, instead of just the frames.</s:String>
     
     <!--Editor • Save as > Save options-->
-    <s:String x:Key="S.SaveAs.SaveOptions">Save options</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions">Export options</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.Partial">Export partially.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Save the file to a folder of your choice.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Overwrite (if already exists).</s:String>

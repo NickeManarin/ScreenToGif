@@ -196,7 +196,7 @@
             </Grid>
         </Expander>
 
-        <Expander Grid.Row="2" x:Name="EncoderOptionsExpander" Header="Encoder options" IsExpanded="{Binding IsEncoderOptionsExpanded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        <Expander Grid.Row="2" x:Name="EncoderOptionsExpander" Header="{DynamicResource S.SaveAs.Encoder.Options}" IsExpanded="{Binding IsEncoderOptionsExpanded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <Grid x:Name="EncoderGrid">
                 <!--Apng-->
                 <Grid x:Name="EmbeddedApngOptionsGrid" Margin="10,0,0,0" Visibility="Collapsed">
@@ -1173,7 +1173,7 @@
             </Grid>
         </Expander>
 
-        <Expander Grid.Row="3" x:Name="SaveOptionsExpander" Header="Export options" IsExpanded="{Binding IsExportOptionsExpanded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        <Expander Grid.Row="3" x:Name="SaveOptionsExpander" Header="{DynamicResource S.SaveAs.SaveOptions}" IsExpanded="{Binding IsExportOptionsExpanded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <Grid x:Name="SaveGrid">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -1330,7 +1330,7 @@
             </Grid>
         </Expander>
 
-        <Expander Grid.Row="5" x:Name="OutputExpander" Header="File" IsExpanded="{Binding IsOutputExpanded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        <Expander Grid.Row="5" x:Name="OutputExpander" Header="{DynamicResource S.SaveAs.File}" IsExpanded="{Binding IsOutputExpanded, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   Visibility="{Binding ElementName=SaveFileCheckBox, Path=IsChecked, Converter={StaticResource Bool2Visibility}}">
             <Grid>
                 <Grid.RowDefinitions>

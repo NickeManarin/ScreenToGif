@@ -1497,6 +1497,7 @@
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg.Info">Codificador externo, desenvolvido por FFmpeg.org.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski.Info">Codificador externo, desenvolvido por Gif.ski</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Options">Opções do codificador</s:String>
     
     <!--Editor • Save as > FFmpeg-->
     <s:String x:Key="S.SaveAs.Ffmpeg.UseParameters">Habilite o modo avançado.</s:String>
@@ -1647,11 +1648,11 @@
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Info">Exporta os tempos de cada frame, ao invés de exportar apenas as imagens.</s:String>
     
     <!--Editor • Save as > Save options-->
-    <s:String x:Key="S.SaveAs.SaveOptions">Opções de salvamento</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions">Opções de exportação</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.Partial">Exporte parcialmente.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Salvar o arquivo em uma pasta de sua escolha.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Exporte o arquivo em uma pasta de sua escolha.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Sobrescrever (caso já exista).</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Salvar como projeto também (mesma pasta, mesmo nome).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Exportar como projeto também (mesma pasta, mesmo nome).</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Fazer upload do arquivo.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">Copiar para a área de transferência.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File">Arquivo</s:String>
