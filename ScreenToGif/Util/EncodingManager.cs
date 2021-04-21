@@ -497,7 +497,7 @@ namespace ScreenToGif.Util
                                 {
                                     var frameCount = project.FramesFiles.Count(x => x.HasArea);
 
-                                    using (var encoder = new Apng(stream, frameCount, embApngPreset.RepeatCount))
+                                    using (var encoder = new Apng(stream, frameCount, embApngPreset.Looped && project.FrameCount > 1 ? (embApngPreset.RepeatForever ? 0 : embApngPreset.RepeatCount) : 1))
                                     {
                                         for (var i = 0; i < project.FramesFiles.Count; i++)
                                         {
@@ -598,7 +598,7 @@ namespace ScreenToGif.Util
                                 {
                                     using (var encoder = new GifFile(stream))
                                     {
-                                        encoder.RepeatCount = project.FrameCount > 1 ? embGifPreset.RepeatCount : -1;
+                                        encoder.RepeatCount = embGifPreset.Looped && project.FrameCount > 1 ? (embGifPreset.RepeatForever ? 0 : embGifPreset.RepeatCount) : -1;
                                         encoder.UseGlobalColorTable = embGifPreset.UseGlobalColorTable;
                                         encoder.TransparentColor = embGifPreset.PaintTransparent || embGifPreset.EnableTransparency ?
                                             System.Windows.Media.Color.FromArgb(0, embGifPreset.ChromaKey.R, embGifPreset.ChromaKey.G, embGifPreset.ChromaKey.B) : new System.Windows.Media.Color?();
@@ -665,7 +665,7 @@ namespace ScreenToGif.Util
 
                                 using (var stream = new MemoryStream())
                                 {
-                                    using (var encoder = new GifEncoder(stream, null, null, systemGifPreset.RepeatCount))
+                                    using (var encoder = new GifEncoder(stream, null, null, systemGifPreset.Looped && project.FrameCount > 1 ? (systemGifPreset.RepeatForever ? 0 : systemGifPreset.RepeatCount) : -1))
                                     {
                                         for (var i = 0; i < project.FramesFiles.Count; i++)
                                         {

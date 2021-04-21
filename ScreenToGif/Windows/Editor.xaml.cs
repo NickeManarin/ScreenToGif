@@ -225,23 +225,6 @@ namespace ScreenToGif.Windows
                 WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
             #endregion
-
-            #region UWP restrictions
-
-#if UWP
-
-            CustomCommandsCheckBox.Visibility = Visibility.Collapsed;
-            CustomCommandsTextBox.Visibility = Visibility.Collapsed;
-            CustomCommandsApngCheckBox.Visibility = Visibility.Collapsed;
-            CustomCommandsApngTextBox.Visibility = Visibility.Collapsed;
-            CustomCommandsVideoCheckBox.Visibility = Visibility.Collapsed;
-            CustomCommandsVideoTextBox.Visibility = Visibility.Collapsed;
-            CustomCommandsPsdCheckBox.Visibility = Visibility.Collapsed;
-            CustomCommandsPsdTextBox.Visibility = Visibility.Collapsed;
-
-#endif
-
-            #endregion
         }
 
         #region Main Events
@@ -4815,6 +4798,16 @@ namespace ScreenToGif.Windows
             //Too much to the bottom.
             if (closest.WorkingArea.Bottom < top + 100)
                 top = closest.WorkingArea.Bottom - height;
+
+            if (top > int.MaxValue || top < int.MinValue || left > int.MaxValue || left < int.MinValue ||
+                width > int.MaxValue || width < int.MinValue || height > int.MaxValue || height < int.MinValue)
+            {
+                var desc = $"On load: {onLoad}\nScale: {this.Scale()}\n\n" +
+                           $"Screen: {closest.AdapterName}\nBounds: {closest.Bounds}\n\nTopLeft: {top}x{left}\nWidthHeight: {width}x{height}\n\n" +
+                           $"TopLeft Settings: {UserSettings.All.EditorTop}x{UserSettings.All.EditorLeft}\nWidthHeight Settings: {UserSettings.All.EditorWidth}x{UserSettings.All.EditorHeight}";
+                LogWriter.Log("Wrong Editor window sizing", desc);
+                return false;
+            }
 
             Top = top;
             Left = left;
