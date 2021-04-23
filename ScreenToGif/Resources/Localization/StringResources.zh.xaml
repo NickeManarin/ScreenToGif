@@ -40,17 +40,17 @@
     <s:String x:Key="S.Warning.Net.Title">缺少依赖项</s:String>
     <s:String x:Key="S.Warning.Net.Header">Net Framework 4.8 不存在</s:String>
     <s:String x:Key="S.Warning.Net.Message">为了正确使用此应用程序，您需要下载正确版本的 .Net Framework。
-您要打开网页进行下载吗?</s:String>
+您要打开网页进行下载吗？</s:String>
     <s:String x:Key="S.Warning.Single.Title">允许一个实例</s:String>
     <s:String x:Key="S.Warning.Single.Header">该应用程序已在运行</s:String>
     <s:String x:Key="S.Warning.Single.Message">ScreenToGif 已经在运行，但是显然没有打开任何窗口。 检查系统托盘，其中必须有一个 ScreenToGif 图标。</s:String>
     
     <s:String x:Key="S.SavingSettings.Title">保存设置</s:String>
-    <s:String x:Key="S.SavingSettings.Instruction">您想再次尝试保存它吗?</s:String>
-    <s:String x:Key="S.SavingSettings.Message">似乎 ScreenToGif 没有足够的特权将设置保存到磁盘。&#10;&#10;您想重试一次，但是这次使用管理特权吗?</s:String>
+    <s:String x:Key="S.SavingSettings.Instruction">您想再次尝试保存它吗？</s:String>
+    <s:String x:Key="S.SavingSettings.Message">似乎 ScreenToGif 没有足够的特权将设置保存到磁盘。&#10;&#10;您想以管理员权限重试一次吗？</s:String>
     
     <s:String x:Key="S.Exiting.Title">退出 ScreenToGif</s:String>
-    <s:String x:Key="S.Exiting.Instruction">你确定要退出吗?</s:String>
+    <s:String x:Key="S.Exiting.Instruction">你确定要退出吗？</s:String>
     <s:String x:Key="S.Exiting.Message">所有窗口将被关闭，托盘图标将被移除。</s:String>
     
     <!--Keys-->
@@ -158,7 +158,7 @@
     <s:String x:Key="S.Updater.Info.WhatsNew">新功能</s:String>
     <s:String x:Key="S.Updater.Info.BugFixes">错误修复：</s:String>
     <s:String x:Key="S.Updater.Info.NewVersionAvailable">您可以下载新版本。
-您要打开浏览器进行下载吗?</s:String>
+您要打开浏览器进行下载吗？</s:String>
     <s:String x:Key="S.Updater.RunAfter">更新后执行该应用程序。</s:String>
     <s:String x:Key="S.Updater.Download">下载</s:String>
     <s:String x:Key="S.Updater.Install">安装</s:String>
@@ -276,8 +276,8 @@
     <s:String x:Key="S.Options.Recorder.Frequency.Interval">每帧将以 {0} 的间隔进行捕获。</s:String>
     
     <s:String x:Key="S.Options.Recorder.Mode">捕获模式</s:String>
-    <s:String x:Key="S.Options.Recorder.Bitblt.Info">使用较旧的捕获方法，该方法比较慢，可能无法捕获游戏，但不需要其他插件。</s:String>
-    <s:String x:Key="S.Options.Recorder.DirectX.Info">使用桌面复制 API 捕获方法，该方法更快并且可以捕获全屏游戏，但是需要 SharpDx 插件和 Windows 8 或更高版本。</s:String>
+    <s:String x:Key="S.Options.Recorder.Bitblt.Info">使用较旧的捕获方法，该方法较慢，可能无法捕获游戏，但不需要其他插件。</s:String>
+    <s:String x:Key="S.Options.Recorder.DirectX.Info">使用桌面复制 API 捕获方法，该方法更快，并且可以捕获全屏游戏，但是需要 SharpDx 插件和 Windows 8 或更高版本系统。</s:String>
     <s:String x:Key="S.Options.Recorder.File">保存到文件</s:String>
     <s:String x:Key="S.Options.Recorder.File.Info">捕获的每一帧将直接作为图像保存在磁盘上。</s:String>
     <s:String x:Key="S.Options.Recorder.Cache">内存缓存</s:String>
@@ -464,9 +464,9 @@
     
     <!--Options • Storage > Clear cache-->
     <s:String x:Key="S.Options.Storage.Cache.Title">ScreenToGif - 清除缓存</s:String>
-    <s:String x:Key="S.Options.Storage.Cache.Header">您要清除缓存文件夹吗?</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.Header">您要清除缓存文件夹吗？</s:String>
     <s:String x:Key="S.Options.Storage.Cache.Info">创建录制或打开要编辑的内容时，将创建一个项目并将其存储在缓存文件夹中。</s:String>
-    <s:String x:Key="S.Options.Storage.Cache.Question">您要从缓存文件夹中删除这些项目吗?</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.Question">您要从缓存文件夹中删除这些项目吗？</s:String>
     <s:String x:Key="S.Options.Storage.Cache.IgnoreRecent">不要删除最近的项目。</s:String>
     <s:String x:Key="S.Options.Storage.Cache.IgnoreRecent.Yes">（仅会删除 {0} 天之前尚未使用的项目）</s:String>
     <s:String x:Key="S.Options.Storage.Cache.IgnoreRecent.No">（所有当前未使用的项目将被删除）</s:String>
@@ -511,7 +511,7 @@
     <s:String x:Key="S.Options.Upload.Preset.NotStored">用户名和密码将不会被存储。</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Options">选项</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Direct">使用直接链接</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Album">专辑</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Album">相册</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Warning.Title">您必须给此预设一个唯一的名称。</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Warning.Repeated">该名称已被另一个上传预设使用。</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Warning.Authenticate">在身份验证模式下，您必须完成身份验证过程。</s:String>
@@ -519,7 +519,7 @@
     <s:String x:Key="S.Options.Upload.Preset.Warning.GetToken">无法获得授权令牌。</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Warning.Token">为了授权此应用程序，您需要提供授权令牌凭证。</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Warning.AuthError">授权失败。 检查一切是否正确，然后在几秒钟后重试。</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Warning.AlbumLoad">无法加载专辑列表。</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.AlbumLoad">无法加载相册列表。</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Info.Authorized">授权完成。</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Info.NotAuthorized">未授权。</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Info.Expired">授权已在 {0} 中过期。</s:String>
@@ -536,8 +536,8 @@
     <s:String x:Key="S.Options.Upload.Preset.Gfycat.UrlType">URL 类型：</s:String>
     
     <!--Options • Upload > Album-->
-    <s:String x:Key="S.Options.Upload.Pick.Album">选择一个专辑（可选）</s:String>
-    <s:String x:Key="S.Options.Upload.Pick.Album.Info">如果您愿意，可以选择目标专辑：</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Album">选择一个相册（可选）</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Album.Info">如果您愿意，可以选择目标相册：</s:String>
     
     <!--Options • Upload > Details-->
     <s:String x:Key="S.Options.Upload.Pick.Details">上传详细信息（可选）</s:String>
@@ -552,13 +552,13 @@
     <s:String x:Key="S.Options.Upload.History.Title">上传历史</s:String>
     <s:String x:Key="S.Options.Upload.History.Date">日期</s:String>
     <s:String x:Key="S.Options.Upload.History.Preset">预设</s:String>
-    <s:String x:Key="S.Options.Upload.History.Successful">成功?</s:String>
+    <s:String x:Key="S.Options.Upload.History.Successful">成功？</s:String>
     <s:String x:Key="S.Options.Upload.History.Remove">删除历史记录条目。</s:String>
     <s:String x:Key="S.Options.Upload.History.Detail.Link">链接：</s:String>
     <s:String x:Key="S.Options.Upload.History.Detail.LowerQuality">较低质量：</s:String>
     <s:String x:Key="S.Options.Upload.History.Detail.DeleteLink">删除链接：</s:String>
-    <s:String x:Key="S.Options.Upload.History.Delete.Instruction">您确定要删除历史记录条目吗?</s:String>
-    <s:String x:Key="S.Options.Upload.History.Delete.Message">此操作无法撤消。&#10;&#10;您要删除所选的历史记录条目吗?</s:String>
+    <s:String x:Key="S.Options.Upload.History.Delete.Instruction">您确定要删除历史记录条目吗？</s:String>
+    <s:String x:Key="S.Options.Upload.History.Delete.Message">此操作无法撤消。&#10;&#10;您要删除所选的历史记录条目吗？</s:String>
     
     <!--Options • Extras-->
     <s:String x:Key="S.Options.Extras.External">可用的外部工具</s:String>
@@ -576,15 +576,15 @@
     <s:String x:Key="S.Options.Extras.GifskiLocation">Gifski 位置</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.Select">选择 Gifski 可执行文件的位置</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.File">Gifski 库</s:String>
-    <s:String x:Key="S.Options.Extras.GifskiLocation.Invalid">Gifski 可执行文件的路径包含一个或多个无效字符。请为该可执行文件选择一个有效的位置。</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation">SharpDx 文件夹（SharpDX.dll，SharpDX.Direct3D11.dll 和 SharpDX.DXGI.dll）</s:String>
+    <s:String x:Key="S.Options.Extras.GifskiLocation.Invalid">Gifski 可执行文件的路径中包含一个或多个无效字符。请为该可执行文件选择一个有效位置。</s:String>
+    <s:String x:Key="S.Options.Extras.SharpDxLocation">SharpDx 位置（SharpDX.dll，SharpDX.Direct3D11.dll 和 SharpDX.DXGI.dll）</s:String>
     <s:String x:Key="S.Options.Extras.SharpDxLocation.Select">选择 SharpDx 库的位置</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation.Invalid">SharpDx 库的路径包含一个或多个无效字符。 请为这些库选择一个有效的文件夹。</s:String>
+    <s:String x:Key="S.Options.Extras.SharpDxLocation.Invalid">SharpDx 库的路径中包含一个或多个无效字符。 请为这些库选择一个有效位置。</s:String>
     <s:String x:Key="S.Options.Extras.License.Ffmpeg">FFmpeg 许可证</s:String>
     <s:String x:Key="S.Options.Extras.License.Gifski">Gifski 许可证</s:String>
     <s:String x:Key="S.Options.Extras.License.SharpDx">SharpDx 许可证</s:String>
     <s:String x:Key="S.Options.Extras.Permission.Header">文件夹中缺少写入权限</s:String>
-    <s:String x:Key="S.Options.Extras.Permission.Observation">由于缺乏写入权限，无法将下载内容保存在文件夹中。&#10;&#10;您是否要以管理权限启动下载程序以完成下载?</s:String>
+    <s:String x:Key="S.Options.Extras.Permission.Observation">由于缺少写入权限，无法将下载内容保存在文件夹中。&#10;&#10;您是否要以管理员权限启动下载程序以完成下载？</s:String>
     
     <!--Options • Donations-->
     <s:String x:Key="S.Options.Donate.Donate">捐赠</s:String>
@@ -634,7 +634,7 @@
     <s:String x:Key="S.Localization.File.Resource">资源字典</s:String>
     <s:String x:Key="S.Localization.Importing">正在导入资源...</s:String>
     <s:String x:Key="S.Localization.Warning.Name">文件名没有遵循有效的格式</s:String>
-    <s:String x:Key="S.Localization.Warning.Name.Info">尝试重命名为：StringResources.en.xaml，其中“ en”应替换为您的语言代码。</s:String>
+    <s:String x:Key="S.Localization.Warning.Name.Info">尝试重命名为：StringResources.en.xaml，其中“en”应替换为您的语言代码。</s:String>
     <s:String x:Key="S.Localization.Warning.Repeated">您不能添加相同名称的资源</s:String>
     <s:String x:Key="S.Localization.Warning.Repeated.Info">尝试删除重复的资源或使用其他语言代码。</s:String>
     <s:String x:Key="S.Localization.Warning.Redundant">冗余语言代码</s:String>
@@ -793,22 +793,22 @@
     <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Title">高质量 • 图形</s:String>
     <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Description">更适合于使用较少数量的颜色进行录制。</s:String>
     <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Title">FFmpeg - 高质量</s:String>
-    <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Description">较高的图像质量，但文件较大。</s:String>
+    <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Description">图像质量较高，但文件较大。</s:String>
     <s:String x:Key="S.Preset.Gif.Ffmpeg.Low.Title">FFmpeg - 低质量</s:String>
-    <s:String x:Key="S.Preset.Gif.Ffmpeg.Low.Description">图像质量较低，但文件尺寸较小。</s:String>
+    <s:String x:Key="S.Preset.Gif.Ffmpeg.Low.Description">图像质量较低，但文件较小。</s:String>
     <s:String x:Key="S.Preset.Gif.Gifski.High.Title">Gifski - 高质量</s:String>
-    <s:String x:Key="S.Preset.Gif.Gifski.High.Description">较高的图像质量，但文件较大。</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.High.Description">图像质量较高，但文件较大。</s:String>
     <s:String x:Key="S.Preset.Gif.Gifski.Low.Title">Gifski - 质量较低</s:String>
-    <s:String x:Key="S.Preset.Gif.Gifski.Low.Description">图像质量较低，但文件尺寸较小。</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.Low.Description">图像质量较低，但文件较小。</s:String>
     <s:String x:Key="S.Preset.Gif.Gifski.Fast.Title">Gifski - 较低的质量和更快的编码</s:String>
     <s:String x:Key="S.Preset.Gif.Gifski.Fast.Description">图像质量更低，编码速度更快，但文件尺寸更小。</s:String>
     <s:String x:Key="S.Preset.Gif.System.Low.Title">系统 - 低质量</s:String>
     <s:String x:Key="S.Preset.Gif.System.Low.Description">质量低下但编码速度更快。</s:String>
     
     <s:String x:Key="S.Preset.Apng.Ffmpeg.High.Title">FFmpeg - 高质量</s:String>
-    <s:String x:Key="S.Preset.Apng.Ffmpeg.High.Description">较高的图像质量和较小的文件大小，但编码速度较慢。</s:String>
+    <s:String x:Key="S.Preset.Apng.Ffmpeg.High.Description">图像质量较高，文件大小较小，但编码速度较慢。</s:String>
     <s:String x:Key="S.Preset.Apng.Ffmpeg.Low.Title">FFmpeg - 低质量</s:String>
-    <s:String x:Key="S.Preset.Apng.Ffmpeg.Low.Description">较低的图像质量，较小的文件大小和更快的编码。</s:String>
+    <s:String x:Key="S.Preset.Apng.Ffmpeg.Low.Description">图像质量较低，文件大小较小，但编码速度较快。</s:String>
     <s:String x:Key="S.Preset.Webp.Ffmpeg.High.Title">高质量</s:String>
     <s:String x:Key="S.Preset.Webp.Ffmpeg.High.Description">高图像质量和小文件大小。</s:String>
     
@@ -933,13 +933,13 @@
     <s:String x:Key="S.Editor.File.Image">图像</s:String>
     <s:String x:Key="S.Editor.File.Video">视频</s:String>
 
-    <s:String x:Key="S.Editor.File.Apng">动画 PNG</s:String>
+    <s:String x:Key="S.Editor.File.Apng">PNG 动画</s:String>
     <s:String x:Key="S.Editor.File.Gif">Gif 动画</s:String>
     <s:String x:Key="S.Editor.File.Webp">Webp 动画</s:String>
     
     <s:String x:Key="S.Editor.File.Avi">AVI 视频</s:String>
     <s:String x:Key="S.Editor.File.Mkv">Matroska 视频</s:String>
-    <s:String x:Key="S.Editor.File.Mov">Mov 视频</s:String>
+    <s:String x:Key="S.Editor.File.Mov">MOV 视频</s:String>
     <s:String x:Key="S.Editor.File.Mp4">MP4 视频</s:String>
     <s:String x:Key="S.Editor.File.Webm">Webm 视频</s:String>
     
@@ -959,7 +959,7 @@
     <s:String x:Key="S.Editor.Welcome.Size">帧率越低，颜色数或帧之间的变化越小，尺寸越小</s:String>
     <s:String x:Key="S.Editor.Welcome.Contact">你希望联系我们？打开“选项 > 关于”可以找到联系方式</s:String>
     <s:String x:Key="S.Editor.Welcome.Trouble">遇到问题了？请通过“反馈”工具联系我</s:String>
-    <s:String x:Key="S.Editor.Welcome.NewRecorder">你想试试新版录像机界面吗？转到“选项 > 应用程序”可以启用</s:String>
+    <s:String x:Key="S.Editor.Welcome.NewRecorder">你想试试新版录像机界面吗？转到“选项 > 应用程序”以启用</s:String>
     
     <!--Editor • File tab • New-->
     <s:String x:Key="S.Editor.File.New.Recording">录制</s:String>
@@ -1140,9 +1140,9 @@
     <!--Editor • Warnings-->
     <s:String x:Key="S.Editor.Warning.Selection">您必须至少选择一帧才能应用叠加层。</s:String>
     <s:String x:Key="S.Editor.Warning.Ffmpeg">找不到 FFmpeg。将其添加到 PATH 环境变量或在设置中配置其路径。</s:String>
-    <s:String x:Key="S.Editor.Warning.Gifski">Gifski 不存在。将其添加到 PATH 环境变量或在设置上设置位置。</s:String>
+    <s:String x:Key="S.Editor.Warning.Gifski">找不到 Gifski。将其添加到 PATH 环境变量或在设置中配置其路径。</s:String>
     <s:String x:Key="S.Editor.Warning.LowSpace">驱动器上没有足够的空间供应用程序存储缓存（{0}% 左右）。单击此处打开“选项” > “临时文件”，以释放一些空间。</s:String>
-    <s:String x:Key="S.Editor.Warning.DifferentDpi">您尝试使用不支持的 DPI 导入多个图像。 其中一些是导入的，其他一些则需要单独导入。</s:String>
+    <s:String x:Key="S.Editor.Warning.DifferentDpi">您尝试使用不支持的 DPI 导入多个图像。 其中一些已导入，另一些则需要单独导入。</s:String>
     
     <!--Editor • Status-->
     <s:String x:Key="S.Editor.RetrievingFromCache">从缓存中检索帧</s:String>
@@ -1518,11 +1518,11 @@
     
     <!--Editor • Save as > Presets > Dialogs-->
     <s:String x:Key="S.SaveAs.Presets.Ask.Delete.Title">删除预设</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Ask.Delete.Instruction">您确定要删除预设吗?</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Ask.Delete.Message">此操作无法撤消。&#10;&#10;您要删除所选的预设吗?</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Ask.Delete.Instruction">您确定要删除预设吗？</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Ask.Delete.Message">此操作无法撤消。&#10;&#10;您要删除所选的预设吗？</s:String>
     <s:String x:Key="S.SaveAs.Presets.Ask.Reset.Title">重置预设</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Ask.Reset.Instruction">您确定要重置预设吗?</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Ask.Reset.Message">此操作无法撤消。&#10;&#10;是否要将所选预设重置为其默认设置?</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Ask.Reset.Instruction">您确定要重置预设吗？</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Ask.Reset.Message">此操作无法撤消。&#10;&#10;是否要将所选预设重置为其默认设置？</s:String>
     
     <!--Editor • Save as > Encoder-->
     <s:String x:Key="S.SaveAs.Encoder">编码器</s:String>
@@ -1686,7 +1686,7 @@
     <s:String x:Key="S.SaveAs.ImageOptions.Zip.Info">导出压缩文件夹中的图像。</s:String>
     
     <!--Editor • Save as > Psd options-->
-    <s:String x:Key="S.SaveAs.PsdOptions.Compress">压缩图像。</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress">压缩图像</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Compress.Info">使用 RLE 算法压缩图像数据。</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline">保存时间轴数据。</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Info">导出帧的时间，而不仅仅是帧。</s:String>
@@ -1704,7 +1704,7 @@
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FolderPath">文件夹路径</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FolderPath.Info">将输出文件的文件夹路径复制到剪贴板</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath">文件路径</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath.Info">将输出文件路径复制到剪贴板</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath.Info">将输出文件的文件路径复制到剪贴板</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">链接</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">将上传服务生成的链接复制到剪贴板</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">执行编码后置命令</s:String>
@@ -1713,7 +1713,7 @@
 宏:
 {p} = 输出文件路径。
 {f} = 输出文件夹路径。
-{u} = URL of the uploaded file.</s:String>
+{u} = 上传文件的 URL 地址。</s:String>
     
     <!--Editor • Save As > Partial export-->
     <s:String x:Key="S.SaveAs.Partial">部分导出</s:String>
@@ -1741,7 +1741,7 @@
     <s:String x:Key="S.SaveAs.File.SelectFolder">选择输出目录</s:String>
     <s:String x:Key="S.SaveAs.File.Choose">选择位置</s:String>
     <s:String x:Key="S.SaveAs.File.Format">格式</s:String>
-    <s:String x:Key="S.SaveAs.File.Name">文件名。</s:String>
+    <s:String x:Key="S.SaveAs.File.Name">文件名</s:String>
     <s:String x:Key="S.SaveAs.File.Animation">动画</s:String>
     <s:String x:Key="S.SaveAs.File.Increase">增加文件编号</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">减小文件编号</s:String>
@@ -1756,7 +1756,7 @@
     <s:String x:Key="S.SaveAs.Warning.Commands.Empty">您需要在命令文本框中输入编码后置命令才能执行他们。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Partial.NoSelection">如果可以选择仅导出选定的帧，则必须至少选择一帧。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Partial.InvalidExpression">部分导出项目的表达式无效。</s:String>
-    <s:String x:Key="S.SaveAs.Warning.Upload.None">没有选择上传服务。你需要选择一个目的地。</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Upload.None">没有选择上传服务。你需要选择一个服务。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Upload.NotAuthorized">您无法上传到选定的服务，因为它没有被授权。 转到选项>云服务授权此应用程序。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Copy.Link">您不能选择复制链接的选项，因为您没有设置上传文件。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">您需要选择输出文件夹。</s:String>
@@ -1783,8 +1783,8 @@
     
     <!--Editor • Save as > Upload > Dialogs-->
     <s:String x:Key="S.SaveAs.Upload.Ask.Delete.Title">删除上传预设</s:String>
-    <s:String x:Key="S.SaveAs.Upload.Ask.Delete.Instruction">您确定要删除上传预设吗?</s:String>
-    <s:String x:Key="S.SaveAs.Upload.Ask.Delete.Message">此操作无法撤消。&#10;&#10;您要删除所选的上传预设吗?</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Ask.Delete.Instruction">您确定要删除上传预设吗？</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Ask.Delete.Message">此操作无法撤消。&#10;&#10;您要删除所选的上传预设吗？</s:String>
     
     <!--Save As • Dialogs-->
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Title">导出帧</s:String>
@@ -1804,7 +1804,7 @@
     <s:String x:Key="S.Feedback.Header">发送反馈</s:String>
     <s:String x:Key="S.Feedback.Title">标题</s:String>
     <s:String x:Key="S.Feedback.Message">信息</s:String>
-    <s:String x:Key="S.Feedback.Message.Info">如果您遇到错误，请别忘了一步一步地向我解释如何出现错误的原因。</s:String>
+    <s:String x:Key="S.Feedback.Message.Info">如果您遇到错误，请别忘了一步一步地向我说明复现错误的步骤。</s:String>
     <s:String x:Key="S.Feedback.Type">反馈类型</s:String>
     <s:String x:Key="S.Feedback.Suggestion">建议</s:String>
     <s:String x:Key="S.Feedback.IssueBug">问题/Bug</s:String>
@@ -1822,7 +1822,7 @@
     
     <!--Troubleshoot-->
     <s:String x:Key="S.Troubleshoot.Title">疑难解答</s:String>
-    <s:String x:Key="S.Troubleshoot.Windows">是否有任何窗口不见了?</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows">是否有任何窗口不见了？</s:String>
     <s:String x:Key="S.Troubleshoot.Windows.Info">如果缺少任何窗口（屏幕外），
 使用下面的选项重置其当前和启动位置。</s:String>
     <s:String x:Key="S.Troubleshoot.Windows.Current">这是每个窗口当前所在的位置：</s:String>
