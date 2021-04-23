@@ -1,4 +1,5 @@
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
 
@@ -52,3 +53,5 @@ using System.Windows;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("2.28.2.0")]
 [assembly: AssemblyFileVersion("2.28.2.0")]
+
+[assembly: InternalsVisibleTo("ScreenToGif.Tests")]
