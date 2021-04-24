@@ -865,7 +865,7 @@
     <s:String x:Key="S.Encoder.ExploreFolder">Обзор папки</s:String>
     <s:String x:Key="S.Encoder.Remove">Удалить из списка</s:String>
     <s:String x:Key="S.Encoder.Details">Показать детали</s:String>
-    <s:String x:Key="S.Encoder.Dismiss">Отклонить все готовые кодировки</s:String>
+    <s:String x:Key="S.Encoder.Dismiss">Очистить готовые</s:String>
 
     <s:String x:Key="S.Encoder.Copy.Image">Копировать как изображение</s:String>
     <s:String x:Key="S.Encoder.Copy.Filename">Скопировать имя файла</s:String>
@@ -878,7 +878,7 @@
     
     <!--Notifications-->
     <s:String x:Key="S.Notifications">Уведомления</s:String>
-    <s:String x:Key="S.Notifications.Dismiss">Отклонить все</s:String>
+    <s:String x:Key="S.Notifications.Dismiss">Отменить все</s:String>
     
     <!--Editor-->
     <s:String x:Key="S.Editor.Title">ScreenToGif - Редактор</s:String>
@@ -1076,7 +1076,7 @@
     <s:String x:Key="S.Editor.Exiting.Title">Выход из редактора</s:String>
     <s:String x:Key="S.Editor.Exiting.Instruction">Вы уверены, что хотите выйти?</s:String>
     <s:String x:Key="S.Editor.Exiting.Message">Проект, над которым вы работаете, может быть открыт заново через меню "Недавние проекты"</s:String>
-    <s:String x:Key="S.Editor.Exiting.Message2">Проект, над которым вы работали, можно снова открыть с помощью "Недавние проекты", но не забывайте, что через несколько дней он будет удален.</s:String>
+    <s:String x:Key="S.Editor.Exiting.Message2">Проект, над которым вы работали, можно снова открыть с помощью "Недавние проекты", но не забывайте, что, в зависимости от настроек, он будет удален через несколько дней или при перезагрузке ПК.</s:String>
     <s:String x:Key="S.Editor.DragDrop.Invalid.Title">Ошибка перетаскивания</s:String>
     <s:String x:Key="S.Editor.DragDrop.MultipleFiles.Instruction">Нельзя импортировать несколько файлов за раз</s:String>
     <s:String x:Key="S.Editor.DragDrop.MultipleFiles.Message">Выберите только один файл.</s:String>
@@ -1430,7 +1430,7 @@
     <s:String x:Key="S.Transitions.Info">Переход будет создан между выбранным кадром и следующим, добавлением новых кадров.</s:String>
 
     <!--Editor • Save as-->
-    <s:String x:Key="S.SaveAs.Type">Тип файла и пресет</s:String>
+    <s:String x:Key="S.SaveAs.Type">Предустановки форматов</s:String>
     <s:String x:Key="S.SaveAs.Type.Format">Формат выходного файла.</s:String>
     <s:String x:Key="S.SaveAs.Type.Preset">Пресет экспорта, содержащий все отображаемые настройки.&#10;Управляйте пресетами экспорта кнопками ниже.</s:String>
     <s:String x:Key="S.SaveAs.Type.Animated">Анимация</s:String>
@@ -1497,6 +1497,7 @@
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg.Info">Внешний кодировщик, созданный FFmpeg.org.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski.Info">Внешний кодировщик, созданный Gif.ski.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Options">Параметры кодировщика</s:String>
     
     <!--Editor • Save as > FFmpeg-->
     <s:String x:Key="S.SaveAs.Ffmpeg.UseParameters">Включить расширенный режим.</s:String>
@@ -1531,7 +1532,7 @@
     <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable">Использовать глобальную таблицу цветов.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable.Info">Может уменьшить качество и/или размер GIF.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Best">Лучший</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Fastest">Самый быстрый</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Fastest">Быстрейший</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Gifski.Faster">Более быстрый процесс кодирования.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Gifski.Faster.Info">Может привести к снижению качества gif.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Loop">Циклы:</s:String>
@@ -1542,7 +1543,7 @@
     <s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable.Info">Включает режим полной прозрачности фона GIF.&#10;Если включен, то хромакей будет проигнорирован.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Transparency.Pick">Выберите, какой цвет отображать как прозрачный.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Transparency.Pick.Info">Если цвет выбран, он будет преобразован в прозрачный и отображаться как прозрачный в созданном GIF.&#10;Если цвет не выбран, все прозрачные цвета (Альфа = 0%) будут отображаться как прозрачные.</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">Определять неизменные пиксели</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">Определять неизменные пиксели.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged.Info">Обнаружив неизменные пиксели между кадрами, можно будет&#10;пересохранять в gif только изменяемые части изображений.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma">Заменить неизменные хромакеем.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma.Info">Повторяющиеся/неизмененные пиксели будут заменены этим&#10;хромакеем, что позволит использовать меньше цветов на кадр.</s:String>
@@ -1647,13 +1648,13 @@
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Info">Экспортирует еще и время кадров, а не только кадры.</s:String>
     
     <!--Editor • Save as > Save options-->
-    <s:String x:Key="S.SaveAs.SaveOptions">Сохранить параметры</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions">Параметры сохранения</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.Partial">Частичный экспорт.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Сохраните файл в папку по вашему выбору.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Перезаписать (если существует).</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Проект тоже сохранить (те же имя и папка).</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Загрузить файл.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">Копировать в буфер обмена</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">Копировать в буфер обмена.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File">Файл</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File.Info">Копировать файл вывода в буфер обмена.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FolderPath">Путь к папке</s:String>
@@ -1686,7 +1687,7 @@
     <s:String x:Key="S.SaveAs.Partial.Expression.Info">Введите номера кадров, разделенные запятой,&#10;или диапазоны кадров, разделенные дефисом:&#10;1, 3, 4, 6 - 9</s:String>
     
     <!--Editor • Save as > File-->
-    <s:String x:Key="S.SaveAs.File">Файл</s:String>
+    <s:String x:Key="S.SaveAs.File">Файл вывода</s:String>
     <s:String x:Key="S.SaveAs.File.Location">Папка назначения.</s:String>
     <s:String x:Key="S.SaveAs.File.SelectFolder">Выберите папку вывода</s:String>
     <s:String x:Key="S.SaveAs.File.Choose">Выберите расположение.</s:String>
