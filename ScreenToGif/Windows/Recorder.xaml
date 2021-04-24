@@ -122,7 +122,8 @@
         </Grid.RowDefinitions>
         
         <!--Hollow part-->
-        <Border BorderBrush="{Binding ElementName=RecorderLightWindow, Path=BorderBrush}" BorderThickness="{Binding ElementName=RecorderLightWindow, Path=BorderThickness}">
+        <!--BorderBrush="{Binding ElementName=RecorderLightWindow, Path=BorderBrush}" BorderThickness="{Binding ElementName=RecorderLightWindow, Path=BorderThickness}"-->
+        <Border BorderBrush="{Binding ElementName=RecorderLightWindow, Path=BorderBrush}" BorderThickness="{Binding ElementName=RecorderLightWindow, Path=BorderThickness}" >
             <Grid x:Name="GuidelinesGrid">
                 <Grid Visibility="{Binding Source={x:Static t:UserSettings.All}, Path=DisplayThirdsGuideline, Converter={StaticResource Bool2Visibility}}">
                     <Grid.RowDefinitions>

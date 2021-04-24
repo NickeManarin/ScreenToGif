@@ -22,7 +22,7 @@
                 <ResourceDictionary Source="/Themes/Colors/Dark.xaml"/>
                 <ResourceDictionary Source="/Themes/Colors/Medium.xaml"/>
                 <ResourceDictionary Source="/Themes/Colors/Light.xaml"/>
-                
+
                 <ResourceDictionary Source="/Themes/DataGrid.xaml"/>
                 <ResourceDictionary Source="/Themes/Button.xaml"/>
                 <ResourceDictionary Source="/Themes/Common.xaml"/>
@@ -51,9 +51,9 @@
                 <ResourceDictionary Source="/Resources/Localization/StringResources.tr.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.uk.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.vi.xaml"/>
-                <ResourceDictionary Source="/Resources/Localization/StringResources.zh.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.zh-Hant.xaml"/>
                 <ResourceDictionary Source="/Resources/Localization/StringResources.en.xaml"/>
+                <ResourceDictionary Source="/Resources/Localization/StringResources.zh.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <m:ApplicationViewModel x:Key="AppViewModel"/>
@@ -75,7 +75,7 @@
             <c:InvertedEnumToBool x:Key="InvertedEnumToBool"/>
             <c:BoolAndToVisibility x:Key="BoolAndToVisibility"/>
             <c:ContentToVisibility x:Key="ContentToVisibility"/>
-            
+
             <!--Effects-->
             <DropShadowEffect x:Key="Shadow.Invariant" ShadowDepth="0" Color="Transparent" Opacity="0" BlurRadius="0" RenderingBias="Performance"/>
 
@@ -375,7 +375,7 @@
                                 <RepeatButton Grid.Row="2" x:Name="PART_LineDownButton" Command="{x:Static ScrollBar.LineDownCommand}" IsEnabled="{TemplateBinding IsMouseOver}" Style="{StaticResource ScrollBar.Button}" 
                                               Content="M 0,2.5 C0,2.5 0,0.5 0,0.5 0,0.5 3.5,4 3.5,4 3.5,4 7,0.5 7,0.5 7,0.5 7,2.5 7,2.5 7,2.5 3.5,6 3.5,6 3.5,6 0,2.5 0,2.5 z"/>
                             </Grid>
-                            
+
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsEnabled" Value="False">
                                     <Setter TargetName="Bg" Property="Opacity" Value="0.6"/>
