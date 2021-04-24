@@ -619,7 +619,7 @@
     <s:String x:Key="S.Options.About.Technical.SourceCode">源代码：</s:String>
     <s:String x:Key="S.Options.About.Technical.Privacy">隐私政策：</s:String>
     <s:String x:Key="S.Options.About.ABigThanksTo">非常感谢</s:String>
-    <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">所有支持过我和提供反馈及捐助的人 - 简体中文翻译 BY 大眼仔~旭（Anan）2021（www.dayanzai.me）</s:String>
+    <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">所有支持过我和提供反馈及捐助的人</s:String>
     
     <!--Localization-->
     <s:String x:Key="S.Localization">本地化</s:String>
