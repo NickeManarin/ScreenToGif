@@ -445,6 +445,7 @@
     <Compile Include="Util\Converters\StringToDoubleArray.cs" />
     <Compile Include="Util\Converters\TimeSpanToTotalMilliseconds.cs" />
     <Compile Include="Util\DirectoryHelper.cs" />
+    <Compile Include="Util\Exceptions\GraphicsConfigurationException.cs" />
     <Compile Include="Util\InputHook\CustomKeyEventArgs.cs" />
     <Compile Include="Util\InputHook\CustomKeyPressEventArgs.cs" />
     <Compile Include="Util\InputHook\SimpleMouseGesture.cs" />
@@ -596,6 +597,9 @@
     <Compile Include="Webcam\DirectX\Filters.cs" />
     <Compile Include="Windows\EditorEx.xaml.cs">
       <DependentUpon>EditorEx.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Other\GraphicsConfigurationDialog.xaml.cs">
+      <DependentUpon>GraphicsConfigurationDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Other\UploadDetailsDialog.xaml.cs">
       <DependentUpon>UploadDetailsDialog.xaml</DependentUpon>
@@ -941,6 +945,10 @@
     <Page Include="Windows\EditorEx.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Other\GraphicsConfigurationDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\Other\UploadDetailsDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
