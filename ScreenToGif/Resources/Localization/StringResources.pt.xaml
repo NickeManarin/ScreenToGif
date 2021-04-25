@@ -34,7 +34,7 @@
     <s:String x:Key="S.MinHeight">Altura mínima:</s:String>
     <s:String x:Key="S.AndOr">e/ou</s:String>
     
-    <!--Warning messages-->
+    <!--Warnings-->
     <s:String x:Key="S.Crash">Oh não, o aplicativo parou de funcionar :(</s:String>
     <s:String x:Key="S.Required">Preenchimento obrigatório.</s:String>
     <s:String x:Key="S.Warning.Net.Title">Dependência Ausente</s:String>
@@ -51,6 +51,14 @@
     <s:String x:Key="S.Exiting.Title">Fechando ScreenToGif</s:String>
     <s:String x:Key="S.Exiting.Instruction">Você tem certeza que deseja fechar?</s:String>
     <s:String x:Key="S.Exiting.Message">Todas as janela do ScreenToGif serão fechadas e o ícone da área de notificação será removido.</s:String>
+
+    <!--Warnings • Graphics engine-->
+    <s:String x:Key="S.Warning.Graphics.Title">Trocar Adaptador Gráfico</s:String>
+    <s:String x:Key="S.Warning.Graphics.Instruction">Mude para o adaptador gráfico correto para capturar a tela selecionada</s:String>
+    <s:String x:Key="S.Warning.Graphics.Message">Devido a uma limitação no DirectX, ScreenToGif deve estar executando no mesmo adaptador gráfico que a tela que está sendo capturada.</s:String>
+    <s:String x:Key="S.Warning.Graphics.Action">Troque o adaptador gráfico definido para ScreenToGif abrindo Configurações do Windows > Sistema > Vídeo > Configurações Gráficas ou clicando no link abaixo.</s:String>
+    <s:String x:Key="S.Warning.Graphics.Action.Legacy">Troque o adaptador gráfico para ScreenToGif abrindo as configurações gráficas do seu adaptador gráfico.</s:String>
+    <s:String x:Key="S.Warning.Graphics.Switch">Abra as Configurações do Windows</s:String>
     
     <!--Keys-->
     <s:String x:Key="S.Keys.Space">Espaço</s:String>
