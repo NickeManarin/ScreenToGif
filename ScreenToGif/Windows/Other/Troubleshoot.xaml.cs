@@ -13,6 +13,11 @@ namespace ScreenToGif.Windows.Other
 {
     public partial class Troubleshoot : Window
     {
+        private double _minLeft = SystemParameters.VirtualScreenLeft;
+        private double _minTop = SystemParameters.VirtualScreenTop;
+        private double _maxRight = SystemParameters.VirtualScreenWidth;
+        private double _maxBottom = SystemParameters.VirtualScreenHeight;
+
         public Troubleshoot()
         {
             InitializeComponent();
@@ -31,6 +36,14 @@ namespace ScreenToGif.Windows.Other
         private void SystemEvents_DisplaySettingsChanged(object sender, EventArgs e)
         {
             DetectMonitors();
+        }
+
+        private void MainCanvas_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (!IsLoaded)
+                return;
+
+            SetViewPort(_minLeft, _maxRight, _minTop, _maxBottom);
         }
 
         private void KindRadioButton_Checked(object sender, RoutedEventArgs e)
@@ -130,10 +143,10 @@ namespace ScreenToGif.Windows.Other
         private void DetectMonitors()
         {
             var monitors = Monitor.AllMonitorsGranular();
-            var minLeft = monitors.Min(m => m.NativeBounds.Left);
-            var minTop = monitors.Min(m => m.NativeBounds.Top);
-            var maxRight = monitors.Max(m => m.NativeBounds.Right);
-            var maxBottom = monitors.Max(m => m.NativeBounds.Bottom);
+            _minLeft = monitors.Min(m => m.NativeBounds.Left);
+            _minTop = monitors.Min(m => m.NativeBounds.Top);
+            _maxRight = monitors.Max(m => m.NativeBounds.Right);
+            _maxBottom = monitors.Max(m => m.NativeBounds.Bottom);
 
             MainCanvas.Children.Clear();
 
@@ -152,10 +165,10 @@ namespace ScreenToGif.Windows.Other
                     if (window is Recorder || window is NewRecorder || window is RegionSelection)
                         title = LocalizationHelper.Get("S.StartUp.Recorder");
                     
-                    minLeft = Math.Min(minLeft, left);
-                    minTop = Math.Min(minTop, top);
-                    maxRight = Math.Max(maxRight, left + width);
-                    maxBottom = Math.Max(maxBottom, top + height);
+                    _minLeft = Math.Min(_minLeft, left);
+                    _minTop = Math.Min(_minTop, top);
+                    _maxRight = Math.Max(_maxRight, left + width);
+                    _maxBottom = Math.Max(_maxBottom, top + height);
 
                     var rect = new Border
                     {
@@ -190,10 +203,10 @@ namespace ScreenToGif.Windows.Other
 
                 if (!double.IsNaN(UserSettings.All.RecorderTop) && !double.IsNaN(UserSettings.All.RecorderLeft))
                 {
-                    minLeft = Math.Min(minLeft, UserSettings.All.RecorderLeft);
-                    minTop = Math.Min(minTop, UserSettings.All.RecorderTop);
-                    maxRight = Math.Max(maxRight, UserSettings.All.RecorderLeft + UserSettings.All.RecorderWidth);
-                    maxBottom = Math.Max(maxBottom, UserSettings.All.RecorderTop + UserSettings.All.RecorderHeight);
+                    _minLeft = Math.Min(_minLeft, UserSettings.All.RecorderLeft);
+                    _minTop = Math.Min(_minTop, UserSettings.All.RecorderTop);
+                    _maxRight = Math.Max(_maxRight, UserSettings.All.RecorderLeft + UserSettings.All.RecorderWidth);
+                    _maxBottom = Math.Max(_maxBottom, UserSettings.All.RecorderTop + UserSettings.All.RecorderHeight);
 
                     var rect = new Border
                     {
@@ -222,10 +235,10 @@ namespace ScreenToGif.Windows.Other
 
                 if (!UserSettings.All.SelectedRegion.IsEmpty)
                 {
-                    minLeft = Math.Min(minLeft, UserSettings.All.SelectedRegion.Left + SystemParameters.VirtualScreenLeft);
-                    minTop = Math.Min(minTop, UserSettings.All.SelectedRegion.Top + SystemParameters.VirtualScreenTop);
-                    maxRight = Math.Max(maxRight, UserSettings.All.SelectedRegion.Right + SystemParameters.VirtualScreenLeft);
-                    maxBottom = Math.Max(maxBottom, UserSettings.All.SelectedRegion.Bottom + SystemParameters.VirtualScreenTop);
+                    _minLeft = Math.Min(_minLeft, UserSettings.All.SelectedRegion.Left + SystemParameters.VirtualScreenLeft);
+                    _minTop = Math.Min(_minTop, UserSettings.All.SelectedRegion.Top + SystemParameters.VirtualScreenTop);
+                    _maxRight = Math.Max(_maxRight, UserSettings.All.SelectedRegion.Right + SystemParameters.VirtualScreenLeft);
+                    _maxBottom = Math.Max(_maxBottom, UserSettings.All.SelectedRegion.Bottom + SystemParameters.VirtualScreenTop);
 
                     var rect = new Border
                     {
@@ -257,10 +270,10 @@ namespace ScreenToGif.Windows.Other
 
                 if (!double.IsNaN(UserSettings.All.EditorTop) && !double.IsNaN(UserSettings.All.EditorLeft))
                 {
-                    minLeft = Math.Min(minLeft, UserSettings.All.EditorLeft);
-                    minTop = Math.Min(minTop, UserSettings.All.EditorTop);
-                    maxRight = Math.Max(maxRight, UserSettings.All.EditorLeft + UserSettings.All.EditorWidth);
-                    maxBottom = Math.Max(maxBottom, UserSettings.All.EditorTop + UserSettings.All.EditorHeight);
+                    _minLeft = Math.Min(_minLeft, UserSettings.All.EditorLeft);
+                    _minTop = Math.Min(_minTop, UserSettings.All.EditorTop);
+                    _maxRight = Math.Max(_maxRight, UserSettings.All.EditorLeft + UserSettings.All.EditorWidth);
+                    _maxBottom = Math.Max(_maxBottom, UserSettings.All.EditorTop + UserSettings.All.EditorHeight);
 
                     var rect = new Border
                     {
@@ -290,10 +303,10 @@ namespace ScreenToGif.Windows.Other
 
                 if (!double.IsNaN(UserSettings.All.StartupTop) && !double.IsNaN(UserSettings.All.StartupLeft))
                 {
-                    minLeft = Math.Min(minLeft, UserSettings.All.StartupLeft);
-                    minTop = Math.Min(minTop, UserSettings.All.StartupTop);
-                    maxRight = Math.Max(maxRight, UserSettings.All.StartupLeft + UserSettings.All.StartupWidth);
-                    maxBottom = Math.Max(maxBottom, UserSettings.All.StartupTop + UserSettings.All.StartupHeight);
+                    _minLeft = Math.Min(_minLeft, UserSettings.All.StartupLeft);
+                    _minTop = Math.Min(_minTop, UserSettings.All.StartupTop);
+                    _maxRight = Math.Max(_maxRight, UserSettings.All.StartupLeft + UserSettings.All.StartupWidth);
+                    _maxBottom = Math.Max(_maxBottom, UserSettings.All.StartupTop + UserSettings.All.StartupHeight);
 
                     var rect = new Border
                     {
@@ -321,7 +334,7 @@ namespace ScreenToGif.Windows.Other
                     Canvas.SetTop(rect, UserSettings.All.StartupTop);
                 }
 
-                int index = 1;
+                var index = 1;
                 foreach (var border in MainCanvas.Children.OfType<Border>().OrderBy(o => o.ActualWidth).ThenBy(t => t.ActualHeight))
                     Panel.SetZIndex(border, index++);
             }
@@ -333,12 +346,12 @@ namespace ScreenToGif.Windows.Other
             {
                 var rect = new Rectangle
                 {
-                    Stroke = TryFindResource("Element.Foreground") as SolidColorBrush ??  Brushes.Black,
-                    Fill = monitor.IsPrimary ? TryFindResource("Element.Background.Checked") as SolidColorBrush ?? Brushes.LightBlue : TryFindResource("Element.Background.Hover") as SolidColorBrush ?? Brushes.LightGray,
                     Width = monitor.NativeBounds.Width,
                     Height = monitor.NativeBounds.Height,
-                    StrokeThickness = 6,
+                    StrokeThickness = 6
                 };
+                rect.SetResourceReference(Shape.StrokeProperty, "Element.Foreground");
+                rect.SetResourceReference(Shape.FillProperty, monitor.IsPrimary ? "Element.Background.Checked" : "Element.Background.Hover");
 
                 MainCanvas.Children.Add(rect);
 
@@ -347,22 +360,21 @@ namespace ScreenToGif.Windows.Other
                 Panel.SetZIndex(rect, 1);
             }
 
-            MainCanvas.SizeChanged += (args, o) => SetViewPort(MainCanvas, minLeft, maxRight, minTop, maxBottom);
-            MainCanvas.Width = Math.Abs(minLeft) + Math.Abs(maxRight);
-            MainCanvas.Height = Math.Abs(minTop) + Math.Abs(maxBottom);
+            MainCanvas.Width = Math.Abs(_minLeft) + Math.Abs(_maxRight);
+            MainCanvas.Height = Math.Abs(_minTop) + Math.Abs(_maxBottom);
 
-            SetViewPort(MainCanvas, minLeft, maxRight, minTop, maxBottom);
+            SetViewPort(_minLeft, _maxRight, _minTop, _maxBottom);
         }
 
-        public static void SetViewPort(Canvas canvas, double minX, double maxX, double minY, double maxY)
+        public void SetViewPort(double minX, double maxX, double minY, double maxY)
         {
             var width = maxX - minX;
             var height = maxY - minY;
 
             var group = new TransformGroup();
             group.Children.Add(new TranslateTransform(-minX, -minY));
-            group.Children.Add(new ScaleTransform(canvas.ActualWidth / width, canvas.ActualHeight / height));
-            canvas.RenderTransform = group;
+            group.Children.Add(new ScaleTransform(MainCanvas.ActualWidth / width, MainCanvas.ActualHeight / height));
+            MainCanvas.RenderTransform = group;
         }
     }
 }
