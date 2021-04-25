@@ -16,6 +16,7 @@ using ScreenToGif.Model;
 using ScreenToGif.Native;
 using ScreenToGif.Settings;
 using ScreenToGif.Util;
+using ScreenToGif.Util.Exceptions;
 using ScreenToGif.Util.InputHook;
 using ScreenToGif.ViewModel;
 using ScreenToGif.Windows.Other;
@@ -1080,7 +1081,7 @@ namespace ScreenToGif.Windows
                         _keyList.Clear();
                         FrameCount = 0;
 
-                        await PrepareNewCapture();
+                        await PrepareCapture();
 
                         FrequencyIntegerUpDown.IsEnabled = false;
 
@@ -1188,6 +1189,7 @@ namespace ScreenToGif.Windows
                         if (UserSettings.All.CaptureFrequency == CaptureFrequency.Interaction)
                             return;
 
+                        await PrepareCapture(false);
                         FrequencyIntegerUpDown.IsEnabled = false;
 
                         //Detects a possible intersection of capture region and capture controls.
@@ -1203,6 +1205,11 @@ namespace ScreenToGif.Windows
 
                         #endregion
                 }
+            }
+            catch (GraphicsConfigurationException g)
+            {
+                LogWriter.Log(g, "Impossible to start the recording due to wrong graphics adapter.");
+                GraphicsConfigurationDialog.Ok(g, _viewModel.CurrentMonitor);
             }
             catch (Exception e)
             {
@@ -1240,7 +1247,7 @@ namespace ScreenToGif.Windows
                 {
                     Project = new ProjectInfo().CreateProjectFolder(ProjectByType.ScreenRecorder);
 
-                    await PrepareNewCapture();
+                    await PrepareCapture();
 
                     _keyList.Clear();
                     IsRecording = true;
@@ -1386,9 +1393,6 @@ namespace ScreenToGif.Windows
 
         private async Task Discard()
         {
-            if (_capture == null)
-                return;
-
             Pause();
 
             if (UserSettings.All.NotifyRecordingDiscard && !Dialog.Ask(LocalizationHelper.Get("S.Recorder.Discard.Title"), 
@@ -1405,7 +1409,8 @@ namespace ScreenToGif.Windows
             SetTaskbarButtonOverlay();
 
             //Frame capture (and disk write) must be stopped before trying to discard.
-            await _capture.Stop();
+            if (_capture != null)
+                await _capture.Stop();
 
             await Task.Run(() =>
             {
@@ -1461,10 +1466,17 @@ namespace ScreenToGif.Windows
             SetTaskbarButtonOverlay();
         }
 
-        private async Task PrepareNewCapture()
+        private async Task PrepareCapture(bool isNew = true)
         {
-            if (_capture != null)
+            if (isNew && _capture != null)
+            {
                 await _capture.Dispose();
+                _capture = null;
+            }
+
+            //If the capture helper was initialized already, ignore this.
+            if (_capture != null)
+                return;
 
             if (UserSettings.All.UseDesktopDuplication)
             {
@@ -1493,7 +1505,13 @@ namespace ScreenToGif.Windows
                 //Pause the recording and show the error.  
                 _viewModel.PauseCommand.Execute(null, null);
 
-                ErrorDialog.Ok("ScreenToGif", LocalizationHelper.Get("S.Recorder.Warning.CaptureNotPossible"), exception.Message, exception);
+                if (exception is GraphicsConfigurationException)
+                    GraphicsConfigurationDialog.Ok(exception, _viewModel.CurrentMonitor);
+                else
+                    ErrorDialog.Ok("ScreenToGif", LocalizationHelper.Get("S.Recorder.Warning.CaptureNotPossible"), exception.Message, exception);
+
+                _capture.Dispose();
+                _capture = null;
             };
 
             _capture.Start(GetCaptureInterval(), (int)CaptureRegion.X, (int)CaptureRegion.Y, (int)CaptureRegion.Width, (int)CaptureRegion.Height, _regionSelection.Scale, Project);
