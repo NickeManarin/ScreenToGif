@@ -16,6 +16,7 @@ using ScreenToGif.Controls;
 using ScreenToGif.Model;
 using ScreenToGif.Settings;
 using ScreenToGif.Util;
+using ScreenToGif.Util.Exceptions;
 using ScreenToGif.Util.InputHook;
 using ScreenToGif.ViewModel;
 using ScreenToGif.Windows.Other;
@@ -943,7 +944,7 @@ namespace ScreenToGif.Windows
                         FrameCount = 0;
 
                         await Task.Factory.StartNew(UpdateScreenDpi);
-                        await PrepareNewCapture();
+                        await PrepareCapture();
                         HideGuidelines();
 
                         HeightIntegerBox.IsEnabled = false;
@@ -1040,6 +1041,7 @@ namespace ScreenToGif.Windows
                         Title = "ScreenToGif";
                         
                         SetTaskbarButtonOverlay();
+                        await PrepareCapture(false);
                         HideGuidelines();
                         AutoFitButtons();
                         
@@ -1058,6 +1060,11 @@ namespace ScreenToGif.Windows
 
                         #endregion
                 }
+            }
+            catch (GraphicsConfigurationException g)
+            {
+                LogWriter.Log(g, "Impossible to start the recording due to wrong graphics adapter.");
+                GraphicsConfigurationDialog.Ok(g, _viewModel.CurrentMonitor);
             }
             catch (Exception e)
             {
@@ -1086,7 +1093,7 @@ namespace ScreenToGif.Windows
                 {
                     Project = new ProjectInfo().CreateProjectFolder(ProjectByType.ScreenRecorder);
 
-                    await PrepareNewCapture();
+                    await PrepareCapture();
 
                     IsRecording = true;
                 }
@@ -1237,9 +1244,6 @@ namespace ScreenToGif.Windows
 
         private async Task Discard()
         {
-            if (_capture == null)
-                return;
-
             Pause();
 
             if (UserSettings.All.NotifyRecordingDiscard && !Dialog.Ask(LocalizationHelper.Get("S.Recorder.Discard.Title"),
@@ -1256,7 +1260,8 @@ namespace ScreenToGif.Windows
             SetTaskbarButtonOverlay();
 
             //Frame capture (and disk write) must be stopped before trying to discard.
-            await _capture.Stop();
+            if (_capture != null)
+                await _capture.Stop();
 
             await Task.Run(() =>
             {
@@ -1619,10 +1624,17 @@ namespace ScreenToGif.Windows
             _followTimer.Stop();
         }
 
-        private async Task PrepareNewCapture()
+        private async Task PrepareCapture(bool isNew = true)
         {
-            if (_capture != null)
+            if (isNew && _capture != null)
+            {
                 await _capture.Dispose();
+                _capture = null;
+            }
+
+            //If the capture helper was initialized already, ignore this.
+            if (_capture != null)
+                return;
 
             if (UserSettings.All.UseDesktopDuplication)
             {
@@ -1652,7 +1664,13 @@ namespace ScreenToGif.Windows
                     //Pause the recording and show the error.  
                     Pause();
 
-                    ErrorDialog.Ok("ScreenToGif", LocalizationHelper.Get("S.Recorder.Warning.CaptureNotPossible"), exception.Message, exception);
+                    if (exception is GraphicsConfigurationException)
+                        GraphicsConfigurationDialog.Ok(exception, _viewModel.CurrentMonitor);
+                    else
+                        ErrorDialog.Ok("ScreenToGif", LocalizationHelper.Get("S.Recorder.Warning.CaptureNotPossible"), exception.Message, exception);
+
+                    _capture.Dispose();
+                    _capture = null;
                 });
             };
 
@@ -1663,6 +1681,9 @@ namespace ScreenToGif.Windows
 
         private ICapture GetDirectCapture()
         {
+            if (UserSettings.All.OnlyCaptureChanges)
+                return UserSettings.All.UseMemoryCache ? (ICapture)new DirectChangedCachedCapture() : new DirectChangedImageCapture();
+
             return UserSettings.All.UseMemoryCache ? new DirectCachedCapture() : new DirectImageCapture();
         }
 
