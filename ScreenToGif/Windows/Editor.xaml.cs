@@ -1516,14 +1516,14 @@ namespace ScreenToGif.Windows
 
         private void DeletePrevious_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = FrameListView != null && FrameListView.SelectedItem != null && !IsLoading &&
-                FrameListView.SelectedIndex > 0;
+            e.CanExecute = FrameListView?.SelectedItem != null && !IsLoading &&
+                FrameListView.SelectedItems.OfType<FrameListBoxItem>().Min(s => s.FrameNumber) > 0;
         }
 
         private void DeleteNext_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = FrameListView != null && FrameListView.SelectedItem != null && !IsLoading &&
-                FrameListView.SelectedIndex < FrameListView.Items.Count - 1;
+            e.CanExecute = FrameListView?.SelectedItem != null && !IsLoading &&
+                FrameListView.SelectedItems.OfType<FrameListBoxItem>().Max(s => s.FrameNumber) < FrameListView.Items.Count - 1;
         }
 
         private void Reduce_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -1595,8 +1595,7 @@ namespace ScreenToGif.Windows
         {
             Pause();
 
-            var selectedFrames = FrameListView.SelectedItems.OfType<FrameListBoxItem>().ToList();
-            var firstFrame = selectedFrames.Min(x => x.FrameNumber);
+            var firstFrame = FrameListView.SelectedItems.OfType<FrameListBoxItem>().Min(x => x.FrameNumber);
 
             if (UserSettings.All.NotifyFrameDeletion)
             {
@@ -1622,8 +1621,7 @@ namespace ScreenToGif.Windows
         {
             Pause();
 
-            var selectedFrames = FrameListView.SelectedItems.OfType<FrameListBoxItem>().ToList();
-            var lastFrame = selectedFrames.Max(x => x.FrameNumber);
+            var lastFrame = FrameListView.SelectedItems.OfType<FrameListBoxItem>().Max(m => m.FrameNumber);
             var count = FrameListView.Items.Count - lastFrame - 1;
 
             if (UserSettings.All.NotifyFrameDeletion)
@@ -1633,15 +1631,14 @@ namespace ScreenToGif.Windows
                     return;
             }
 
-            var countList = FrameListView.Items.Count - 1; //So we have a fixed value.
+            var countList = FrameListView.Items.Count - 1;
 
             ActionStack.SaveState(ActionStack.EditAction.Remove, Project.Frames, Util.Other.ListOfIndexes(lastFrame + 1, count));
 
-            for (var i = countList; i > lastFrame; i--) //From the end to the middle.
-            {
+            //From the end to the start.
+            for (var i = countList; i > lastFrame; i--)
                 DeleteFrame(i);
-            }
-
+            
             SelectNear(lastFrame - 1);
 
             Project.Persist();
@@ -4898,10 +4895,7 @@ namespace ScreenToGif.Windows
             if (HintTextBlock.Visibility == Visibility.Visible)
                 BeginStoryboard(this.FindStoryboard("HideHintStoryboard"), HandoffBehavior.Compose);
 
-            if (values.Length == 0)
-                HintTextBlock.Text = TryFindResource(hint) + "";
-            else
-                HintTextBlock.Text = string.Format(TryFindResource(hint) + "", values);
+            HintTextBlock.Text = values.Length == 0 ? LocalizationHelper.Get(hint) : LocalizationHelper.GetWithFormat(hint, values);
 
             BeginStoryboard(this.FindStoryboard(isPermanent ? "ShowPermanentHintStoryboard" : "ShowHintStoryboard"), HandoffBehavior.Compose);
         }
