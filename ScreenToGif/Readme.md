@@ -11,6 +11,10 @@ _VS 2019 and .Net 4.8 or newer required._
 ### Fixed:
 
 ♦ Delete all previous/next frames: Now multiple frame selection is taken into account (thanks to @pawlos).  
+♦ DirectX capture: The cursor was not being correctly captured in non-primary monitors.  
+♦ DirectX capture: A crash message was not displaying its details when capturing in async mode.  
+♦ DirectX capture: Adjusted message when trying to capture in a screen rendered by another graphics adapter.  
+♦ DirectX capture: The legacy recorder was not able to capture using the option to just capture when something changes on screen.  
 
 ### Known Bugs:
   
