@@ -34,7 +34,7 @@
     <s:String x:Key="S.MinHeight">Min height:</s:String>
     <s:String x:Key="S.AndOr">and/or</s:String>
     
-    <!--Warning messages-->
+    <!--Warnings-->
     <s:String x:Key="S.Crash">Oh no, the app crashed :(</s:String>
     <s:String x:Key="S.Required">Required field</s:String>
     <s:String x:Key="S.Warning.Net.Title">Missing Dependency</s:String>
@@ -51,6 +51,14 @@
     <s:String x:Key="S.Exiting.Title">Exiting ScreenToGif</s:String>
     <s:String x:Key="S.Exiting.Instruction">Are you sure that you want to exit?</s:String>
     <s:String x:Key="S.Exiting.Message">All windows will be closed and the tray icon will be removed.</s:String>  
+
+    <!--Warnings • Graphics engine-->
+    <s:String x:Key="S.Warning.Graphics.Title">Switch Graphics Adapter</s:String>
+    <s:String x:Key="S.Warning.Graphics.Instruction">Switch to the correct graphics adapter to capture the selected screen</s:String>
+    <s:String x:Key="S.Warning.Graphics.Message">Due to a limitation in DirectX, ScreenToGif must be running on the same graphics adapter as the screen being captured.</s:String>
+    <s:String x:Key="S.Warning.Graphics.Action">Switch the graphics adapter set for ScreenToGif by opening Windows Settings > System > Display > Graphics Settings, or by clicking on the link below.</s:String>
+    <s:String x:Key="S.Warning.Graphics.Action.Legacy">Switch the graphics adapter for ScreenToGif by opening the graphics settings of your graphics adapter.</s:String>
+    <s:String x:Key="S.Warning.Graphics.Switch">Open Windows Settings</s:String>
     
     <!--Keys-->
     <s:String x:Key="S.Keys.Space">Space</s:String>  
