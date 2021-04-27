@@ -6,7 +6,7 @@ _VS 2019 and .Net 4.8 or newer required._
 
 ## What's new? (Version 2.28.3)
 
-• 
+• Improved performance of duplicate frame remover feature (thanks to @DarkOoze).  
 
 ### Fixed:
 
@@ -15,6 +15,7 @@ _VS 2019 and .Net 4.8 or newer required._
 ♦ DirectX capture: A crash message was not displaying its details when capturing in async mode.  
 ♦ DirectX capture: Adjusted message when trying to capture in a screen rendered by another graphics adapter.  
 ♦ DirectX capture: The legacy recorder was not able to capture using the option to just capture when something changes on screen.  
+♦ Remove duplicates: The last frame was not being compared, so it was not being removed when needed (thanks to @DarkOoze).  
 
 ### Known Bugs:
   
