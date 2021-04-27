@@ -4,7 +4,7 @@ This is the current project of ScreenToGif.
 
 _VS 2019 and .Net 4.8 or newer required._
 
-## What's new? (Version 2.28.3)
+## What's new? (Version 2.29)
 
 • Improved performance of duplicate frame remover feature (thanks to @DarkOoze).  
 
@@ -16,6 +16,7 @@ _VS 2019 and .Net 4.8 or newer required._
 ♦ DirectX capture: Adjusted message when trying to capture in a screen rendered by another graphics adapter.  
 ♦ DirectX capture: The legacy recorder was not able to capture using the option to just capture when something changes on screen.  
 ♦ Remove duplicates: The last frame was not being compared, so it was not being removed when needed (thanks to @DarkOoze).  
+♦ Save as project too: Filename was getting ignored (saving as ".stg") and the export could fail depending on the configuration of the default preset.  
 
 ### Known Bugs:
   
