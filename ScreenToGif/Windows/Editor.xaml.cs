@@ -5219,9 +5219,15 @@ namespace ScreenToGif.Windows
                 var copiedAux = Project.CopyToExport(indexes, true);
 
                 //Get default project encoder settings.
-                var projectPreset = UserSettings.All.ExportPresets.OfType<StgPreset>().FirstOrDefault(f => f.IsSelectedForEncoder) ?? UserSettings.All.ExportPresets.OfType<StgPreset>().FirstOrDefault() ?? StgPreset.Default;
+                var projectPreset = (UserSettings.All.ExportPresets.OfType<StgPreset>().FirstOrDefault(f => f.IsSelectedForEncoder) ?? UserSettings.All.ExportPresets.OfType<StgPreset>().FirstOrDefault() ?? StgPreset.Default).ShallowCopy();
                 projectPreset.OutputFolder = preset.OutputFolder;
-                projectPreset.OutputFilename = preset.ResolvedFilename;
+                projectPreset.OutputFilename = preset.OutputFilename;
+                projectPreset.ResolvedFilename = preset.ResolvedFilename;
+                projectPreset.ExportPartially = false;
+                projectPreset.PickLocation = true;
+                projectPreset.UploadFile = false;
+                projectPreset.SaveToClipboard = false;
+                projectPreset.ExecuteCustomCommands = false;
 
                 EncodingManager.StartEncoding(copiedAux, projectPreset); 
             }
