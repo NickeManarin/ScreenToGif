@@ -166,6 +166,7 @@
     <Compile Include="Controls\AdornerControl.cs" />
     <Compile Include="Controls\AttachmentListBoxItem.cs" />
     <Compile Include="Controls\AwareTabItem.cs" />
+    <Compile Include="Controls\BaseScreenRecorder.cs" />
     <Compile Include="Controls\BaseWindow.cs" />
     <Compile Include="Controls\CircularProgressBar.cs" />
     <Compile Include="Controls\ColorBox.cs" />
@@ -201,7 +202,7 @@
     <Compile Include="Controls\NotificationBox.cs" />
     <Compile Include="Controls\NotifyIcon.cs" />
     <Compile Include="Controls\Items\QuantizationMethodItem.cs" />
-    <Compile Include="Controls\RecorderWindow.cs" />
+    <Compile Include="Controls\BaseRecorder.cs" />
     <Compile Include="Controls\Ribbon\GroupSizeDefinition.cs" />
     <Compile Include="Controls\Ribbon\ItemSizeDefinition.cs" />
     <Compile Include="Controls\Ribbon\Ribbon.cs" />
@@ -403,9 +404,11 @@
     <Compile Include="Model\UploadPresets\Yandex\YandexPreset.cs" />
     <Compile Include="Model\VideoSource.cs" />
     <Compile Include="Native\Monitor.cs" />
+    <Compile Include="Native\TimerResolution.cs" />
     <Compile Include="Native\Windows.cs" />
-    <Compile Include="Settings\Migrations\Migration0to2_28_0.cs" />
+    <Compile Include="Settings\Migrations\Migration0To2_28_0.cs" />
     <Compile Include="Settings\Migrations.cs" />
+    <Compile Include="Settings\Migrations\Migration2_28_0To2_29_0.cs" />
     <Compile Include="Settings\Property.cs" />
     <Compile Include="Settings\UserSettings.cs" />
     <Compile Include="UserControls\GfycatPanel.xaml.cs">

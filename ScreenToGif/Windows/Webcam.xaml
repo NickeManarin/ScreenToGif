@@ -1,4 +1,4 @@
-<n:RecorderWindow xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<n:BaseRecorder xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                   xmlns:n="clr-namespace:ScreenToGif.Controls"
                   xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
@@ -165,4 +165,4 @@
             </Border>
         </Popup>
     </Grid>
-</n:RecorderWindow>
+</n:BaseRecorder>

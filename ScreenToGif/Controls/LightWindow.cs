@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
@@ -14,7 +14,7 @@ namespace ScreenToGif.Controls
     /// <summary>
     /// Light Window used by some recorder windows.
     /// </summary>
-    public class LightWindow : RecorderWindow
+    public class LightWindow : BaseScreenRecorder
     {
         private HwndSource _hwndSource;
 

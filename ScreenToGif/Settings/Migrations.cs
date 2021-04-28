@@ -10,13 +10,13 @@ namespace ScreenToGif.Settings
             switch (version)
             {
                 case "0.0": //2.27.3 or older to 2.28.
-                    Migration0to2_28_0.Up(properties);
+                    Migration0To2_28_0.Up(properties);
                     goto case "2.28";
 
                 case "2.28": //To 2.29
                 case "2.28.1":
                 case "2.28.2":
-                    //Migration0to2_28_0.Up(properties);
+                    Migration2_28_0To2_29_0.Up(properties);
                     goto default;
 
                 default:

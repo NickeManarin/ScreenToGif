@@ -1086,6 +1086,12 @@ namespace ScreenToGif.Settings
             set => SetValue(value);
         }
 
+        public bool SelectionImprovement
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
         public bool FallThroughOtherScreens
         {
             get => (bool)GetValue();
@@ -1236,7 +1242,7 @@ namespace ScreenToGif.Settings
             set => SetValue(value);
         }
 
-        public bool AsyncRecording
+        public bool ForceGarbageCollection
         {
             get => (bool)GetValue();
             set => SetValue(value);

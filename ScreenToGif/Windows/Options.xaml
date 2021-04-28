@@ -394,6 +394,7 @@
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
@@ -427,6 +428,10 @@
 
                                 <n:ExtendedCheckBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Text="{DynamicResource S.Options.Recorder.DisplayDiscard}" 
                                                     Info="{DynamicResource S.Options.Recorder.DisplayDiscard.Info}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=RecorderDisplayDiscard, Mode=TwoWay}"/>
+                                
+                                <n:ExtendedCheckBox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Text="{DynamicResource S.Options.Recorder.SelectionImprovement}" 
+                                                    Info="{DynamicResource S.Options.Recorder.SelectionImprovement.Info}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=SelectionImprovement, Mode=TwoWay}"
+                                                    Visibility="{Binding Path=NewRecorder, Mode=OneWay, Converter={StaticResource Bool2Visibility}}"/>
                             </Grid>
                         </Expander>
 
@@ -567,8 +572,8 @@
                                 
                                 <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.RecordMouse}" Margin="5,3" IsChecked="{Binding Path=ShowCursor, Mode=TwoWay}"/>
 
-                                <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.AsyncRecording}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=AsyncRecording, Mode=TwoWay}"
-                                                    Info="{DynamicResource S.Options.Recorder.AsyncRecording.Info}"/>
+                                <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.ForceGarbageCollection}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=ForceGarbageCollection, Mode=TwoWay}"
+                                                    Info="{DynamicResource S.Options.Recorder.ForceGarbageCollection.Info}"/>
 
                                 <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.RemoteImprovement}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=RemoteImprovement, Mode=TwoWay}"
                                                     Info="{DynamicResource S.Options.Recorder.RemoteImprovement.Info}" Visibility="{Binding Path=UseDesktopDuplication, Mode=OneWay, Converter={StaticResource InvertedBoolToVisibility}}"/>

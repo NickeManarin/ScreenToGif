@@ -302,7 +302,7 @@
     <s:String x:Key="S.Options.Recorder.CaptureChanges.Info">(A frame will only be captured when something is changed within the capture region)</s:String>
     <s:String x:Key="S.Options.Recorder.RemoteImprovement">Improve the capture performance on a remote desktop connection.</s:String>
     <s:String x:Key="S.Options.Recorder.RemoteImprovement.Info">(Disables layered window capture)</s:String>
-    <s:String x:Key="S.Options.Recorder.ForceGarbageCollection">Forces memory clearing during capture.</s:String>
+    <s:String x:Key="S.Options.Recorder.ForceGarbageCollection">Force memory cleanup during capture.</s:String>
     <s:String x:Key="S.Options.Recorder.ForceGarbageCollection.Info">(Reduces memory usage during capture, but decreases performance)</s:String>
     
     <s:String x:Key="S.Options.Recorder.Guidelines">Guidelines</s:String>

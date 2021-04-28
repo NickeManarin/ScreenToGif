@@ -1,16 +1,16 @@
-<n:RecorderWindow x:Class="ScreenToGif.Windows.NewRecorder"
-                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                  xmlns:n="clr-namespace:ScreenToGif.Controls"
-                  xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
-                  xmlns:u="clr-namespace:ScreenToGif.Util"
-                  xmlns:t="clr-namespace:ScreenToGif.Settings"
-                  x:Name="RecorderWindow" Title="ScreenToGif" SnapsToDevicePixels="True" UseLayoutRounding="True" AllowsTransparency="False"
-                  WindowStyle="None" Topmost="True" Icon="../Resources/Logo.ico" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize" MinWidth="220"
-                  FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}" WindowStartupLocation="Manual"
-                  Loaded="Window_Loaded" Activated="Window_Activated" KeyDown="Window_KeyDown" StateChanged="Window_StateChanged" Closing="Window_Closing">
+<n:BaseScreenRecorder x:Class="ScreenToGif.Windows.NewRecorder"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:n="clr-namespace:ScreenToGif.Controls"
+                      xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
+                      xmlns:u="clr-namespace:ScreenToGif.Util"
+                      xmlns:t="clr-namespace:ScreenToGif.Settings"
+                      x:Name="RecorderWindow" Title="ScreenToGif" SnapsToDevicePixels="True" UseLayoutRounding="True" AllowsTransparency="False"
+                      WindowStyle="None" Topmost="True" Icon="../Resources/Logo.ico" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize" MinWidth="220"
+                      FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}" WindowStartupLocation="Manual"
+                      Loaded="Window_Loaded" Activated="Window_Activated" KeyDown="Window_KeyDown" StateChanged="Window_StateChanged" Closing="Window_Closing">
 
-    <n:RecorderWindow.TaskbarItemInfo>
+    <n:BaseRecorder.TaskbarItemInfo>
         <TaskbarItemInfo>
             <TaskbarItemInfo.ThumbButtonInfos>
                 <ThumbButtonInfoCollection>
@@ -65,7 +65,7 @@
                 </ThumbButtonInfoCollection>
             </TaskbarItemInfo.ThumbButtonInfos>
         </TaskbarItemInfo>
-    </n:RecorderWindow.TaskbarItemInfo>
+    </n:BaseRecorder.TaskbarItemInfo>
     
     <Border Background="{DynamicResource Panel.Background}" BorderThickness="1" BorderBrush="{DynamicResource Element.Border.Weak}">
         <Grid>
@@ -112,7 +112,8 @@
                     </TextBlock.Visibility>
                 </TextBlock>
 
-                <n:DisplayTimer Grid.Column="2" x:Name="DisplayTimer" Margin="5" CornerRadius="3" Padding="5,0" CapturedCount="{Binding ElementName=RecorderWindow, Path=FrameCount}"/>
+                <n:DisplayTimer Grid.Column="2" x:Name="DisplayTimer" Margin="5" CornerRadius="3" Padding="5,0" CapturedCount="{Binding ElementName=RecorderWindow, Path=FrameCount}"
+                                IsImpreciseCapture="{Binding ElementName=RecorderWindow, Path=HasImpreciseCapture}"/>
 
                 <Grid Grid.Column="3" Background="{StaticResource Vector.Cursor}" Margin="3,5" ToolTip="{DynamicResource S.Recorder.CursorFollowing}" Width="16"
                       Visibility="{Binding ElementName=RecorderWindow, Path=IsFollowing, Converter={StaticResource Bool2Visibility}}"/>
@@ -443,4 +444,4 @@
             </Grid>
         </Grid>
     </Border>
-</n:RecorderWindow>
+</n:BaseScreenRecorder>

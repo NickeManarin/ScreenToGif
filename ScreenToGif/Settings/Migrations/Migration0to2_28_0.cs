@@ -4,7 +4,7 @@ using System.Linq;
 namespace ScreenToGif.Settings.Migrations
 {
     // ReSharper disable once InconsistentNaming
-    public static class Migration0to2_28_0
+    public static class Migration0To2_28_0
     {
         public static bool Up(List<Property> properties)
         {
