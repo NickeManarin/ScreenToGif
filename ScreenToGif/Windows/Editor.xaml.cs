@@ -9,6 +9,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Runtime.Serialization.Json;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -37,7 +38,6 @@ using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 using ListViewItem = System.Windows.Controls.ListViewItem;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 using Size = System.Windows.Size;
-using System.Text.RegularExpressions;
 using System.Windows.Data;
 using System.Windows.Media.Effects;
 using ScreenToGif.ImageUtil.Apng;
@@ -47,6 +47,7 @@ using ScreenToGif.Model.ExportPresets.Other;
 using ScreenToGif.Native;
 using ScreenToGif.Settings;
 using ScreenToGif.UserControls;
+using Monitor = ScreenToGif.Native.Monitor;
 using VideoSource = ScreenToGif.Windows.Other.VideoSource;
 
 namespace ScreenToGif.Windows
@@ -65,6 +66,7 @@ namespace ScreenToGif.Windows
         public static readonly DependencyProperty AverageDelayProperty = DependencyProperty.Register(nameof(AverageDelay), typeof(double), typeof(Editor));
         public static readonly DependencyProperty FrameDpiProperty = DependencyProperty.Register(nameof(FrameDpi), typeof(double), typeof(Editor));
         public static readonly DependencyProperty IsCancelableProperty = DependencyProperty.Register(nameof(IsCancelable), typeof(bool), typeof(Editor), new FrameworkPropertyMetadata(false));
+        public static readonly DependencyProperty HasImprecisePlaybackProperty = DependencyProperty.Register(nameof(HasImprecisePlayback), typeof(bool), typeof(Editor), new FrameworkPropertyMetadata(false));
 
         /// <summary>
         /// True if there is a value inside the list of frames.
@@ -156,6 +158,15 @@ namespace ScreenToGif.Windows
             set => SetValue(IsCancelableProperty, value);
         }
 
+        /// <summary>
+        /// True if the system can't playback the animation at the correct speed.
+        /// </summary>
+        public bool HasImprecisePlayback
+        {
+            get => (bool)GetValue(HasImprecisePlaybackProperty);
+            set => SetValue(HasImprecisePlaybackProperty, value);
+        }
+
         #endregion
 
         #region Variables
@@ -195,8 +206,7 @@ namespace ScreenToGif.Windows
         /// </summary>
         public bool IsEncoderWindow { get; } = false;
 
-        private System.Threading.CancellationTokenSource _timerPreview;
-        private readonly DispatcherTimer _searchTimer;
+        private System.Threading.CancellationTokenSource _previewToken;
 
         private Action<object, RoutedEventArgs> _applyAction = null;
 
@@ -322,7 +332,7 @@ namespace ScreenToGif.Windows
                     RibbonTabControl.UpdateVisual(false);
 
                     //Pauses the recording preview.
-                    if (_timerPreview != null)
+                    if (_previewToken != null)
                     {
                         WasPreviewing = true;
                         Pause();
@@ -453,7 +463,7 @@ namespace ScreenToGif.Windows
         private void ZoomBoxControl_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             //Perhaps ignore when the mouse up happened because of a drag?
-            if (_timerPreview != null || !NotPreviewing)
+            if (_previewToken != null || !NotPreviewing)
                 (FindResource("Command.Play") as RoutedUICommand)?.Execute(null, this);
         }
         
@@ -502,12 +512,12 @@ namespace ScreenToGif.Windows
 
             #endregion
 
-            if (LastSelected == -1 || _timerPreview != null || WasChangingSelection || LastSelected >= FrameListView.Items.Count || (e.AddedItems.Count > 0 && e.RemovedItems.Count > 0))
+            if (LastSelected == -1 || _previewToken != null || WasChangingSelection || LastSelected >= FrameListView.Items.Count || (e.AddedItems.Count > 0 && e.RemovedItems.Count > 0))
                 LastSelected = FrameListView.SelectedIndex;
 
             FrameListBoxItem current;
 
-            if (_timerPreview != null || WasChangingSelection)
+            if (_previewToken != null || WasChangingSelection)
             {
                 current = FrameListView.Items[FrameListView.SelectedIndex] as FrameListBoxItem;
             }
@@ -537,7 +547,7 @@ namespace ScreenToGif.Windows
 
             if (current != null)
             {
-                if (!current.IsFocused && _timerPreview == null)// && !WasChangingSelection)
+                if (!current.IsFocused && _previewToken == null)// && !WasChangingSelection)
                     current.Focus();
 
                 var currentIndex = FrameListView.Items.IndexOf(current);
@@ -549,7 +559,7 @@ namespace ScreenToGif.Windows
                 }
             }
 
-            if (_timerPreview == null)
+            if (_previewToken == null)
                 UpdateOtherStatistics();
 
             WasChangingSelection = false;
@@ -573,7 +583,7 @@ namespace ScreenToGif.Windows
 
         private void NewRecording_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = !IsLoading && !e.Handled && Application.Current.Windows.OfType<Window>().All(a => !(a is RecorderWindow));
+            e.CanExecute = !IsLoading && !e.Handled && Application.Current.Windows.OfType<Window>().All(a => !(a is BaseRecorder));
         }
 
         private void NewProject_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -674,7 +684,7 @@ namespace ScreenToGif.Windows
 
         private void Insert_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = Project != null && Project.Frames.Count > 0 && FrameListView.SelectedIndex != -1 && !IsLoading && !e.Handled && Application.Current.Windows.OfType<Window>().All(a => !(a is RecorderWindow));
+            e.CanExecute = Project != null && Project.Frames.Count > 0 && FrameListView.SelectedIndex != -1 && !IsLoading && !e.Handled && Application.Current.Windows.OfType<Window>().All(a => !(a is BaseRecorder));
         }
 
         private void InsertFromMedia_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -3015,7 +3025,8 @@ namespace ScreenToGif.Windows
         {
             if (e.Key == Key.Space)
             {
-                PlayPause();
+                if (PlayButton.IsEnabled)
+                    PlayPause();
 
                 //Avoids the selection of the frame by using the Space key.
                 e.Handled = true;
@@ -3036,63 +3047,78 @@ namespace ScreenToGif.Windows
 
         #endregion
 
-        private void TimerPreview_Tick(int selectedIndex)
+        private void PreviewLoop(int selectedIndex)
         {
-            var sw = new Stopwatch();
-
-            while (_timerPreview != null && !_timerPreview.IsCancellationRequested)
+            using (var resolution = new TimerResolution(1))
             {
-                sw.Restart();
-                long frameDelay = Project.Frames[selectedIndex].Delay;
-
-                // Change active frame
-                Dispatcher.Invoke(() => FrameListView.SelectedIndex = selectedIndex);
-
-                // Wait for application UI to render changes (there is no point in ordering change of next frame if the previous one is not displayed yet)
-                // Loaded priority could be used but input can become laggy
-                Dispatcher.Invoke(() => { }, DispatcherPriority.Background);
-
-                int pass = 0;
-                do
+                if (!resolution.SuccessfullySetTargetResolution)
                 {
-                    pass++;
+                    LogWriter.Log($"Imprecise timer resolution... Target: {resolution.TargetResolution}, Current: {resolution.CurrentResolution}");
+                    Dispatcher.Invoke(() => HasImprecisePlayback = true);
+                }
 
-                    if (Project.Frames.Count - 1 == selectedIndex)
+                #region Preview loop
+
+                var sw = new Stopwatch();
+
+                while (_previewToken != null && !_previewToken.IsCancellationRequested)
+                {
+                    sw.Restart();
+
+                    long frameDelay = Project.Frames[selectedIndex].Delay;
+
+                    // Change active frame
+                    Dispatcher.Invoke(() => FrameListView.SelectedIndex = selectedIndex);
+
+                    // Wait for application UI to render changes (there is no point in ordering change of next frame if the previous one is not displayed yet)
+                    // Loaded priority could be used but input can become laggy
+                    Dispatcher.Invoke(() => { }, DispatcherPriority.Background);
+
+                    var pass = 0;
+                    do
                     {
-                        //If the playback should not loop, it will stop at the latest frame.
-                        if (!UserSettings.All.LoopedPlayback)
+                        pass++;
+
+                        if (Project.Frames.Count - 1 == selectedIndex)
                         {
-                            Dispatcher.Invoke(() => Pause());
-                            return;
+                            //If the playback should not loop, it will stop at the latest frame.
+                            if (!UserSettings.All.LoopedPlayback)
+                            {
+                                Dispatcher.Invoke(Pause);
+                                return;
+                            }
+
+                            selectedIndex = 0;
+                        }
+                        else
+                        {
+                            selectedIndex++;
                         }
 
-                        selectedIndex = 0;
-                    }
-                    else
-                    {
-                        selectedIndex++;
-                    }
+                        if (!UserSettings.All.DropFramesDuringPreviewIfBehind)
+                            break;
 
-                    if (!UserSettings.All.DropFramesDuringPreviewIfBehind)
-                    {
-                        break;
+                        if (pass >= 2)
+                            frameDelay += Project.Frames[selectedIndex].Delay;
                     }
+                    while (sw.ElapsedMilliseconds >= frameDelay);
 
-                    if (pass >= 2)
-                    {
-                        frameDelay += Project.Frames[selectedIndex].Delay;
-                    }
+                    if (Project.Frames[selectedIndex].Delay == 0)
+                        Project.Frames[selectedIndex].Delay = 10;
+
+                    //Wait rest of actual frame delay time
+                    if (sw.ElapsedMilliseconds >= frameDelay)
+                        continue;
+
+                    while (sw.Elapsed.TotalMilliseconds < frameDelay)
+                        Thread.Sleep(1);
+
+                    //SpinWait.SpinUntil(() => sw.ElapsedMilliseconds >= frameDelay);
                 }
-                while (sw.ElapsedMilliseconds >= frameDelay);
 
-                if (Project.Frames[selectedIndex].Delay == 0)
-                    Project.Frames[selectedIndex].Delay = 10;
+                sw.Stop();
 
-                if (sw.ElapsedMilliseconds < frameDelay)
-                {
-                    // Wait rest of actual frame delay time
-                    System.Threading.SpinWait.SpinUntil(() => sw.ElapsedMilliseconds >= frameDelay);
-                }
+                #endregion
             }
         }
 
@@ -4265,13 +4291,13 @@ namespace ScreenToGif.Windows
         {
             lock (UserSettings.Lock)
             {
-                if (_timerPreview != null || !NotPreviewing)
+                if (_previewToken != null || !NotPreviewing)
                 {
-                    if (_timerPreview != null)
+                    if (_previewToken != null)
                     {
-                        _timerPreview.Cancel();
-                        _timerPreview.Dispose();
-                        _timerPreview = null;
+                        _previewToken.Cancel();
+                        _previewToken.Dispose();
+                        _previewToken = null;
                     }
 
                     NotPreviewing = true;
@@ -4307,24 +4333,24 @@ namespace ScreenToGif.Windows
                     if (Project.Frames[FrameListView.SelectedIndex].Delay == 0)
                         Project.Frames[FrameListView.SelectedIndex].Delay = 10;
 
-                    _timerPreview = new System.Threading.CancellationTokenSource();
-                    int selectedIndex = FrameListView.SelectedIndex;
+                    _previewToken = new System.Threading.CancellationTokenSource();
+                    var selectedIndex = FrameListView.SelectedIndex;
 
-                    Task.Run(() => TimerPreview_Tick(selectedIndex), _timerPreview.Token);
+                    Task.Run(() => PreviewLoop(selectedIndex), _previewToken.Token);
                 }
             }
         }
 
         private void Pause()
         {
-            if (_timerPreview == null && NotPreviewing)
+            if (_previewToken == null && NotPreviewing)
                 return;
 
-            if (_timerPreview != null)
+            if (_previewToken != null)
             {
-                _timerPreview.Cancel();
-                _timerPreview.Dispose();
-                _timerPreview = null;
+                _previewToken.Cancel();
+                _previewToken.Dispose();
+                _previewToken = null;
             }
 
             NotPreviewing = true;

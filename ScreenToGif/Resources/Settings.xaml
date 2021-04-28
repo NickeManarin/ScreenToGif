@@ -79,6 +79,7 @@
     <s:Boolean x:Key="EnableSelectionPanning">True</s:Boolean>
     <s:Boolean x:Key="RecorderCompactMode">False</s:Boolean>
     <s:Boolean x:Key="RecorderDisplayDiscard">False</s:Boolean>
+    <s:Boolean x:Key="SelectionImprovement">True</s:Boolean>
     <s:Boolean x:Key="FallThroughOtherScreens">False</s:Boolean>
     <u:CaptureFrequency x:Key="CaptureFrequency">PerSecond</u:CaptureFrequency>
     <s:Int32 x:Key="PlaybackDelayManual">1000</s:Int32>
@@ -102,7 +103,7 @@
     <s:Boolean x:Key="ShowCursor">True</s:Boolean>
     <s:Boolean x:Key="UsePreStart">False</s:Boolean>
     <s:Int32 x:Key="PreStartValue">3</s:Int32>
-    <s:Boolean x:Key="AsyncRecording">False</s:Boolean>
+    <s:Boolean x:Key="ForceGarbageCollection">True</s:Boolean>
     <s:Boolean x:Key="RemoteImprovement">True</s:Boolean>
 
     <s:Boolean x:Key="DisplayThirdsGuideline">False</s:Boolean>

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -63,27 +62,9 @@ namespace ScreenToGif.Windows
         private readonly InputHook _actHook;
 
         /// <summary>
-        /// Deals with all screen capture methods.
-        /// </summary>
-        private ICapture _capture;
-
-
-        private Task<int> _captureTask;
-
-        /// <summary>
-        /// Lists of pressed keys.
-        /// </summary>
-        private readonly List<SimpleKeyGesture> _keyList = new List<SimpleKeyGesture>();
-
-        /// <summary>
         /// The amount of seconds of the pre start delay, plus 1 (1+1=2);
         /// </summary>
         private int _preStartCount = 1;
-
-        /// <summary>
-        /// True when the user stop the recording. 
-        /// </summary>
-        private bool _stopRequested;
 
         /// <summary>
         /// The DPI of the current screen.
@@ -94,15 +75,6 @@ namespace ScreenToGif.Windows
         /// The last window handle saved.
         /// </summary>
         private IntPtr _lastHandle;
-
-        #region Flags
-
-        /// <summary>
-        /// Indicates when the user is mouse-clicking.
-        /// </summary>
-        private bool _recordClicked = false;
-
-        #endregion
 
         #region Mouse cursor follow up
 
@@ -141,10 +113,6 @@ namespace ScreenToGif.Windows
         #endregion
 
         #region Timer
-
-        private Timer _captureTimer = new Timer();
-
-        private readonly System.Timers.Timer _garbageTimer = new System.Timers.Timer();
 
         private readonly Timer _preStartTimer = new Timer();
 
@@ -208,10 +176,6 @@ namespace ScreenToGif.Windows
             AutoFitButtons(true);
 
             #region Timers
-
-            _garbageTimer.Interval = 3000;
-            _garbageTimer.Elapsed += GarbageTimer_Tick;
-            _garbageTimer.Start();
 
             _showBorderTimer.Interval = 500;
             _showBorderTimer.Tick += ShowBorderTimer_Tick;
@@ -449,19 +413,18 @@ namespace ScreenToGif.Windows
                 _preStartTimer.Stop();
                 _preStartTimer.Dispose();
 
-                _captureTimer.Stop();
-                _captureTimer.Dispose();
+                await StopCapture();
             }
 
             //Garbage Collector Timer.
-            _garbageTimer?.Stop();
+            GarbageTimer?.Stop();
             _followTimer?.Stop();
 
             #endregion
 
             //Clean all capture resources.
-            if (_capture != null)
-                await _capture.Dispose();
+            if (Capture != null)
+                await Capture.Dispose();
 
             GC.Collect();
         }
@@ -511,7 +474,7 @@ namespace ScreenToGif.Windows
             else if (Keyboard.Modifiers.HasFlag(UserSettings.All.FollowModifiers) && e.Key == UserSettings.All.FollowShortcut)
                 UserSettings.All.CursorFollowing = IsFollowing = !IsFollowing;
             else
-                _keyList.Add(new SimpleKeyGesture(e.Key, Keyboard.Modifiers, e.IsUppercase, e.IsInjected));
+                KeyList.Add(new SimpleKeyGesture(e.Key, Keyboard.Modifiers, e.IsUppercase, e.IsInjected));
         }
 
         /// <summary>
@@ -525,7 +488,7 @@ namespace ScreenToGif.Windows
                     return;
 
                 //In the future, store each mouse event, with a timestamp, independently of the capture.
-                _recordClicked = args.LeftButton == MouseButtonState.Pressed || args.RightButton == MouseButtonState.Pressed || args.MiddleButton == MouseButtonState.Pressed;
+                RecordClicked = args.LeftButton == MouseButtonState.Pressed || args.RightButton == MouseButtonState.Pressed || args.MiddleButton == MouseButtonState.Pressed;
 
                 _posX = args.PosX;
                 _posY = args.PosY;
@@ -645,99 +608,12 @@ namespace ScreenToGif.Windows
             _preStartTimer.Stop();
             Title = "ScreenToGif";
             IsRecording = true;
-            DisplayTimer.Start();
-            FrameRate.Start(HasFixedDelay(), GetFixedDelay());
 
-            if (UserSettings.All.ShowCursor)
-            {
-                #region If Show Cursor
+            StartCapture();
 
-                if (UserSettings.All.AsyncRecording)
-                {
-                    _captureTimer.Tick += CursorAsync_Elapsed;
-                    CursorAsync_Elapsed(null, null);
-                }
-                else
-                {
-                    _captureTimer.Tick += Cursor_Elapsed;
-                    Cursor_Elapsed(null, null);
-                }
-
-                _captureTimer.Start();
-
-                Stage = Stage.Recording;
-                AutoFitButtons();
-
-                #endregion
-            }
-            else
-            {
-                #region If Not
-
-                if (UserSettings.All.AsyncRecording)
-                {
-                    _captureTimer.Tick += NormalAsync_Elapsed;
-                    NormalAsync_Elapsed(null, null);
-                }
-                else
-                {
-                    _captureTimer.Tick += Normal_Elapsed;
-                    Normal_Elapsed(null, null);
-                }
-
-                _captureTimer.Start();
-
-                Stage = Stage.Recording;
-                AutoFitButtons();
-
-                #endregion
-            }
+            Stage = Stage.Recording;
+            AutoFitButtons();
         }
-
-
-        private async void NormalAsync_Elapsed(object sender, EventArgs e)
-        {
-            if (_stopRequested)
-                return;
-
-            var frame = new FrameInfo(_recordClicked, _keyList);
-            _keyList.Clear();
-            _captureTask = _capture.CaptureAsync(frame);
-            FrameCount = await _captureTask;
-        }
-
-        private async void CursorAsync_Elapsed(object sender, EventArgs e)
-        {
-            if (_stopRequested)
-                return;
-
-            var frame = new FrameInfo(_recordClicked, _keyList);
-            _keyList.Clear();
-            _captureTask = _capture.CaptureWithCursorAsync(frame);
-            FrameCount = await _captureTask;
-
-        }
-
-        private void Normal_Elapsed(object sender, EventArgs e)
-        {
-            FrameCount = _capture.Capture(new FrameInfo(false, _keyList));
-
-            _keyList.Clear();
-        }
-
-        private void Cursor_Elapsed(object sender, EventArgs e)
-        {
-            var frame = new FrameInfo(_recordClicked, _keyList);
-            _keyList.Clear();
-            FrameCount = _capture.CaptureWithCursor(frame);
-        }
-
-
-        private void GarbageTimer_Tick(object sender, EventArgs e)
-        {
-            GC.Collect(UserSettings.All.LatestFps > 30 ? 6 : 2);
-        }
-
 
         private void FollowTimer_Tick(object sender, EventArgs e)
         {
@@ -935,12 +811,9 @@ namespace ScreenToGif.Windows
 
                         #region To record
 
-                        //Take into account the frequency mode.
-                        _captureTimer = new Timer { Interval = GetCaptureInterval() };
-
                         Project = new ProjectInfo().CreateProjectFolder(ProjectByType.ScreenRecorder);
 
-                        _keyList.Clear();
+                        KeyList.Clear();
                         FrameCount = 0;
 
                         await Task.Factory.StartNew(UpdateScreenDpi);
@@ -953,8 +826,6 @@ namespace ScreenToGif.Windows
 
                         IsRecording = true;
                         Topmost = true;
-
-                        UnregisterEvents();
 
                         #region Start
 
@@ -970,62 +841,11 @@ namespace ScreenToGif.Windows
                             return;
                         }
 
-                        DisplayTimer.Start();
-                        FrameRate.Start(HasFixedDelay(), GetFixedDelay());
-
-                        if (UserSettings.All.ShowCursor)
-                        {
-                            #region Show the cursor
-
-                            if (UserSettings.All.AsyncRecording)
-                                _captureTimer.Tick += CursorAsync_Elapsed;
-                            else
-                                _captureTimer.Tick += Cursor_Elapsed;
-
-                            _captureTimer.Start();
-
-                            //Manually capture the first frame on timelapse mode.
-                            if (UserSettings.All.CaptureFrequency == CaptureFrequency.PerMinute || UserSettings.All.CaptureFrequency == CaptureFrequency.PerHour)
-                            {
-                                if (UserSettings.All.AsyncRecording)
-                                    CursorAsync_Elapsed(null, null);
-                                else
-                                    Cursor_Elapsed(null, null);
-                            }
-
-                            Stage = Stage.Recording;
-                            AutoFitButtons();
-                            SetTaskbarButtonOverlay();
-
-                            #endregion
-
-                            return;
-                        }
-
-                        #region Don't show the cursor
-
-                        if (UserSettings.All.AsyncRecording)
-                            _captureTimer.Tick += NormalAsync_Elapsed;
-                        else
-                            _captureTimer.Tick += Normal_Elapsed;
-
-                        _captureTimer.Start();
-
-                        //Manually capture the first frame on timelapse mode.
-                        if (UserSettings.All.CaptureFrequency == CaptureFrequency.PerMinute ||
-                            UserSettings.All.CaptureFrequency == CaptureFrequency.PerHour)
-                        {
-                            if (UserSettings.All.AsyncRecording)
-                                NormalAsync_Elapsed(null, null);
-                            else
-                                Normal_Elapsed(null, null);
-                        }
-
+                        StartCapture();
+                        
                         Stage = Stage.Recording;
                         AutoFitButtons();
                         SetTaskbarButtonOverlay();
-
-                        #endregion
 
                         break;
 
@@ -1050,12 +870,8 @@ namespace ScreenToGif.Windows
                             return;
 
                         FrequencyIntegerUpDown.IsEnabled = false;
-                        
-                        DisplayTimer.Start();
-                        FrameRate.Start(HasFixedDelay(), GetFixedDelay());
-                        
-                        _captureTimer.Interval = GetCaptureInterval();
-                        _captureTimer.Start();
+
+                        StartCapture();
                         break;
 
                         #endregion
@@ -1112,7 +928,7 @@ namespace ScreenToGif.Windows
                 var limit = 0;
                 do
                 {
-                    FrameCount = await _capture.ManualCaptureAsync(new FrameInfo(_recordClicked, _keyList), UserSettings.All.ShowCursor);
+                    FrameCount = await Capture.ManualCaptureAsync(new FrameInfo(RecordClicked, KeyList), UserSettings.All.ShowCursor);
 
                     if (limit > 5)
                         throw new Exception("Impossible to capture the manual screenshot.");
@@ -1121,10 +937,17 @@ namespace ScreenToGif.Windows
                 }
                 while (FrameCount == 0);
 
-                _keyList.Clear();
+                KeyList.Clear();
 
                 DisplayTimer.ManuallyCapturedCount++;
                 CommandManager.InvalidateRequerySuggested();
+            }
+            catch (GraphicsConfigurationException g)
+            {
+                IsRecording = false;
+
+                LogWriter.Log(g, "Impossible to start the recording due to wrong graphics adapter.");
+                GraphicsConfigurationDialog.Ok(g, _viewModel.CurrentMonitor);
             }
             catch (Exception e)
             {
@@ -1146,12 +969,10 @@ namespace ScreenToGif.Windows
 
                 Stage = Stage.Paused;
                 Title = "ScreenToGif";
+                
+                PauseCapture();
+
                 FrequencyIntegerUpDown.IsEnabled = true;
-
-                _captureTimer.Stop();
-                DisplayTimer.Pause();
-                FrameRate.Stop();
-
                 DisplayGuidelines();
                 AutoFitButtons();
                 SetTaskbarButtonOverlay();
@@ -1174,19 +995,11 @@ namespace ScreenToGif.Windows
                 Title = "ScreenToGif - " + LocalizationHelper.Get("S.Recorder.Stopping");
                 Cursor = Cursors.AppStarting;
 
-                _captureTimer.Stop();
-                DisplayTimer.Stop();
-                FrameRate.Stop();
+                await StopCapture();
                 
-                if (_capture != null)
-                    await _capture.Stop();
-
                 if ((Stage == Stage.Recording || Stage == Stage.Paused) && Project?.Any == true)
                 {
                     #region Finishes if it's recording and it has any frames
-
-                    if (UserSettings.All.AsyncRecording)
-                        _stopRequested = true;
 
                     await Task.Delay(100);
 
@@ -1219,12 +1032,6 @@ namespace ScreenToGif.Windows
 
                 #endregion
             }
-            catch (NullReferenceException nll)
-            {
-                LogWriter.Log(nll, "NullPointer on the Stop function");
-
-                ErrorDialog.Ok("ScreenToGif", "Error while stopping", nll.Message, nll);
-            }
             catch (Exception ex)
             {
                 LogWriter.Log(ex, "Error on the Stop function");
@@ -1250,18 +1057,13 @@ namespace ScreenToGif.Windows
                 LocalizationHelper.Get("S.Recorder.Discard.Instruction"), LocalizationHelper.Get("S.Recorder.Discard.Message"), false))
                 return;
 
-            _captureTimer.Stop();
-            DisplayTimer.Stop();
-            FrameRate.Stop();
+            await StopCapture();
+
             FrameCount = 0;
             Stage = Stage.Discarding;
             OutterGrid.IsEnabled = false;
             Cursor = Cursors.AppStarting;
             SetTaskbarButtonOverlay();
-
-            //Frame capture (and disk write) must be stopped before trying to discard.
-            if (_capture != null)
-                await _capture.Stop();
 
             await Task.Run(() =>
             {
@@ -1351,14 +1153,6 @@ namespace ScreenToGif.Windows
             }
         }
 
-        private void UnregisterEvents()
-        {
-            _captureTimer.Tick -= Normal_Elapsed;
-            _captureTimer.Tick -= NormalAsync_Elapsed;
-
-            _captureTimer.Tick -= Cursor_Elapsed;
-            _captureTimer.Tick -= CursorAsync_Elapsed;
-        }
 
         private void UpdateScreenDpi()
         {
@@ -1398,10 +1192,10 @@ namespace ScreenToGif.Windows
 
             _viewModel.Region = new Rect(_viewModel.Region.TopLeft, new Size(_width, _height));
 
-            if (_capture != null)
+            if (Capture != null)
             {
-                _capture.Width = _width;
-                _capture.Height = _height;
+                Capture.Width = _width;
+                Capture.Height = _height;
             }
 
             DetectMonitorChanges(true);
@@ -1414,11 +1208,11 @@ namespace ScreenToGif.Windows
 
             _viewModel.Region = new Rect(new Point(_left, _top), _viewModel.Region.BottomRight);
 
-            if (_capture == null)
+            if (Capture == null)
                 return;
 
-            _capture.Left = _left;
-            _capture.Top = _top;
+            Capture.Left = _left;
+            Capture.Top = _top;
 
             DetectMonitorChanges(true);
         }
@@ -1439,8 +1233,8 @@ namespace ScreenToGif.Windows
                 {
                     Pause();
 
-                    _capture.DeviceName = _viewModel.CurrentMonitor.Name;
-                    _capture?.ResetConfiguration();
+                    Capture.DeviceName = _viewModel.CurrentMonitor.Name;
+                    Capture?.ResetConfiguration();
 
                     await Record();
                 }
@@ -1626,14 +1420,14 @@ namespace ScreenToGif.Windows
 
         private async Task PrepareCapture(bool isNew = true)
         {
-            if (isNew && _capture != null)
+            if (isNew && Capture != null)
             {
-                await _capture.Dispose();
-                _capture = null;
+                await Capture.Dispose();
+                Capture = null;
             }
 
             //If the capture helper was initialized already, ignore this.
-            if (_capture != null)
+            if (Capture != null)
                 return;
 
             if (UserSettings.All.UseDesktopDuplication)
@@ -1646,18 +1440,18 @@ namespace ScreenToGif.Windows
                 if (!Util.Other.IsSharpDxPresent())
                     throw new Exception(LocalizationHelper.Get("S.Recorder.Warning.MissingSharpDx"));
 
-                _capture = GetDirectCapture();
-                _capture.DeviceName = _viewModel.CurrentMonitor.Name;
+                Capture = GetDirectCapture();
+                Capture.DeviceName = _viewModel.CurrentMonitor.Name;
                 _viewModel.IsDirectMode = true;
             }
             else
             {
                 //Capture with BitBlt.
-                _capture = UserSettings.All.UseMemoryCache ? new CachedCapture() : new ImageCapture();
+                Capture = UserSettings.All.UseMemoryCache ? new CachedCapture() : new ImageCapture();
                 _viewModel.IsDirectMode = true;
             }
 
-            _capture.OnError += exception =>
+            Capture.OnError += exception =>
             {
                 Dispatcher?.Invoke(() =>
                 {
@@ -1669,22 +1463,14 @@ namespace ScreenToGif.Windows
                     else
                         ErrorDialog.Ok("ScreenToGif", LocalizationHelper.Get("S.Recorder.Warning.CaptureNotPossible"), exception.Message, exception);
 
-                    _capture.Dispose();
-                    _capture = null;
+                    Capture.Dispose();
+                    Capture = null;
                 });
             };
 
             var dpi = Monitor.AllMonitors.FirstOrDefault(f => f.IsPrimary)?.Dpi ?? 96d;
 
-            _capture.Start(GetCaptureInterval(), _left, _top, _width, _height, dpi / 96d, Project);
-        }
-
-        private ICapture GetDirectCapture()
-        {
-            if (UserSettings.All.OnlyCaptureChanges)
-                return UserSettings.All.UseMemoryCache ? (ICapture)new DirectChangedCachedCapture() : new DirectChangedImageCapture();
-
-            return UserSettings.All.UseMemoryCache ? new DirectCachedCapture() : new DirectImageCapture();
+            Capture.Start(GetCaptureInterval(), _left, _top, _width, _height, dpi / 96d, Project);
         }
 
         private void DetectCaptureFrequency()
@@ -1762,60 +1548,27 @@ namespace ScreenToGif.Windows
 
             AutoFitButtons();
             DisplayGuidelines();
-
-            UnregisterEvents();
-
-            if (UserSettings.All.ShowCursor)
-            {
-                if (UserSettings.All.AsyncRecording)
-                    _captureTimer.Tick += CursorAsync_Elapsed;
-                else
-                    _captureTimer.Tick += Cursor_Elapsed;
-            }
-            else
-            {
-                if (UserSettings.All.AsyncRecording)
-                    _captureTimer.Tick += NormalAsync_Elapsed;
-                else
-                    _captureTimer.Tick += Normal_Elapsed;
-            }
         }
 
-        private int GetCaptureInterval()
+        internal override void StartCapture()
         {
-            switch (UserSettings.All.CaptureFrequency)
-            {
-                case CaptureFrequency.PerHour: //15 frames per hour = 240,000 ms (240 sec, 4 min).
-                    return (1000 * 60 * 60) / FrequencyIntegerUpDown.Value;
+            DisplayTimer.Start();
 
-                case CaptureFrequency.PerMinute: //15 frames per minute = 4,000 ms (4 sec).
-                    return (1000 * 60) / FrequencyIntegerUpDown.Value;
-
-                default: //PerSecond. 15 frames per second = 66 ms.
-                    return 1000 / FrequencyIntegerUpDown.Value;
-            }
+            base.StartCapture();
         }
 
-        private bool HasFixedDelay()
+        internal override void PauseCapture()
         {
-            return UserSettings.All.CaptureFrequency != CaptureFrequency.PerSecond || UserSettings.All.FixedFrameRate;
+            DisplayTimer.Pause();
+
+            base.PauseCapture();
         }
 
-        private int GetFixedDelay()
+        internal override async Task StopCapture()
         {
-            switch (UserSettings.All.CaptureFrequency)
-            {
-                case CaptureFrequency.Manual:
-                    return UserSettings.All.PlaybackDelayManual;
-                case CaptureFrequency.Interaction:
-                    return UserSettings.All.PlaybackDelayInteraction;
-                case CaptureFrequency.PerMinute:
-                    return UserSettings.All.PlaybackDelayMinute;
-                case CaptureFrequency.PerHour:
-                    return UserSettings.All.PlaybackDelayHour;
-                default: //When the capture is 'PerSecond', the fixed delay is set to use the current framerate.
-                    return 1000 / FrequencyIntegerUpDown.Value;
-            }
+            DisplayTimer.Stop();
+
+            await base.StopCapture();
         }
 
         private void DetectThinMode()

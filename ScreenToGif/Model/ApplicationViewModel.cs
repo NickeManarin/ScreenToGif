@@ -63,7 +63,7 @@ namespace ScreenToGif.Model
                     CanExecutePredicate = o =>
                     {
                         //True if all windows are not Recorders.
-                        return Application.Current?.Windows.OfType<Window>().All(a => !(a is RecorderWindow)) ?? false;
+                        return Application.Current?.Windows.OfType<Window>().All(a => !(a is BaseRecorder)) ?? false;
                     },
                     ExecuteAction = a =>
                     {
@@ -151,7 +151,7 @@ namespace ScreenToGif.Model
                     CanExecutePredicate = o =>
                     {
                         //True if all windows are not Recorders.
-                        return Application.Current?.Windows.OfType<Window>().All(a => !(a is RecorderWindow)) ?? false;
+                        return Application.Current?.Windows.OfType<Window>().All(a => !(a is BaseRecorder)) ?? false;
                     },
                     ExecuteAction = a =>
                     {
@@ -204,7 +204,7 @@ namespace ScreenToGif.Model
                     CanExecutePredicate = o =>
                     {
                         //True if all windows are not Recorders.
-                        return Application.Current?.Windows.OfType<Window>().All(a => !(a is RecorderWindow)) ?? false;
+                        return Application.Current?.Windows.OfType<Window>().All(a => !(a is BaseRecorder)) ?? false;
                     },
                     ExecuteAction = a =>
                     {
@@ -455,7 +455,7 @@ namespace ScreenToGif.Model
                     CanExecutePredicate = o =>
                     {
                         //TODO: Check if there's anything open or anything happening with editors.
-                        return Application.Current?.Windows.OfType<RecorderWindow>().All(a => a.Stage != Stage.Recording) ?? false;
+                        return Application.Current?.Windows.OfType<BaseRecorder>().All(a => a.Stage != Stage.Recording) ?? false;
                     },
                     ExecuteAction = a =>
                     {
@@ -537,7 +537,7 @@ namespace ScreenToGif.Model
                         {
                             if (!OpenRecorder.CanExecute(null))
                             {
-                                var rec = Application.Current.Windows.OfType<RecorderWindow>().FirstOrDefault();
+                                var rec = Application.Current.Windows.OfType<BaseRecorder>().FirstOrDefault();
 
                                 if (rec != null)
                                 {
@@ -557,7 +557,7 @@ namespace ScreenToGif.Model
                         {
                             if (!OpenWebcamRecorder.CanExecute(null))
                             {
-                                var rec = Application.Current.Windows.OfType<RecorderWindow>().FirstOrDefault();
+                                var rec = Application.Current.Windows.OfType<BaseRecorder>().FirstOrDefault();
 
                                 if (rec != null)
                                 {
@@ -577,7 +577,7 @@ namespace ScreenToGif.Model
                         {
                             if (!OpenBoardRecorder.CanExecute(null))
                             {
-                                var rec = Application.Current.Windows.OfType<RecorderWindow>().FirstOrDefault();
+                                var rec = Application.Current.Windows.OfType<BaseRecorder>().FirstOrDefault();
 
                                 if (rec != null)
                                 {
