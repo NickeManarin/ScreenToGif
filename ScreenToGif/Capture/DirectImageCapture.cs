@@ -507,7 +507,7 @@ namespace ScreenToGif.Capture
                 }
 
                 //Copy the captured desktop texture into a staging texture, in order to show the mouse cursor and not make the captured texture dirty with it.
-                if (info.TotalMetadataBufferSize > 0)
+                if (info.TotalMetadataBufferSize > 0 || info.LastMouseUpdateTime > 0)
                     Device.ImmediateContext.CopyResource(BackingTexture, StagingTexture);
 
                 //Gets the cursor image and merges with the staging texture.
