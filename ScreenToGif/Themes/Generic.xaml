@@ -90,7 +90,7 @@
                                         </TextBlock.Visibility>
                                     </TextBlock>
 
-                                    <n:DisplayTimer Grid.Column="2" x:Name="DisplayTimer" Margin="5" CornerRadius="3" Padding="5,0" CapturedCount="{TemplateBinding FrameCount}"/>
+                                    <n:DisplayTimer Grid.Column="2" x:Name="DisplayTimer" Margin="5" CornerRadius="3" Padding="5,0" CapturedCount="{TemplateBinding FrameCount}" IsImpreciseCapture="{TemplateBinding HasImpreciseCapture}"/>
 
                                     <n:ExtendedButton Grid.Column="3" x:Name="MinimizeButton" Style="{DynamicResource Style.Button.NoText}" Icon="{DynamicResource Vector.Minimize}" 
                                                       Width="30" Padding="6" ContentWidth="14" ContentHeight="14" TabIndex="9"/>
@@ -3248,7 +3248,8 @@
                                     <Run Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ManuallyCapturedCount, StringFormat={}{0:N0}}"/>
                                 </TextBlock>
 
-                                <TextBlock Grid.Row="3" x:Name="PausedTooltipTextBlock" Text="{DynamicResource S.Recorder.Timer.Paused}" Visibility="Collapsed"/>
+                                <TextBlock Grid.Row="3" x:Name="PausedTooltipTextBlock" Text="{DynamicResource S.Recorder.Timer.Paused}" Margin="0,3,0,0" Visibility="Collapsed"/>
+                                <TextBlock Grid.Row="3" x:Name="ImpreciseTooltipTextBlock" Text="{DynamicResource S.Recorder.Timer.Imprecise}" Margin="0,3,0,0" FontWeight="SemiBold" Visibility="Collapsed"/>
                             </Grid>
                         </Border.ToolTip>
                         
@@ -3258,14 +3259,16 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
+                            
+                            <Border Grid.Column="0" x:Name="ImpreciseBorder" Background="{DynamicResource Vector.Warning}" Height="12" Width="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <Border Grid.Column="1" x:Name="PauseBorder" Background="{DynamicResource Vector.Pause.Color}" Height="12" Width="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-                            <Border Grid.Column="0" x:Name="PauseBorder" Background="{DynamicResource Vector.Pause.Color}" Height="12" Width="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Column="2" x:Name="NegativeTextBlock" FontSize="14" Padding="0" Margin="0" Text="-" Visibility="Collapsed"/>
+                            <TextBlock Grid.Column="3" x:Name="ElapsedTextBlock" FontSize="14" Padding="0" Margin="0" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Elapsed, StringFormat={}{0:mm\\:ss}}"/>
 
-                            <TextBlock Grid.Column="1" x:Name="NegativeTextBlock" FontSize="14" Padding="0" Margin="0" Text="-" Visibility="Collapsed"/>
-                            <TextBlock Grid.Column="2" x:Name="ElapsedTextBlock" FontSize="14" Padding="0" Margin="0" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Elapsed, StringFormat={}{0:mm\\:ss}}"/>
-
-                            <TextBlock Grid.Column="3" x:Name="ManualTextBlock" FontSize="14" Padding="0" Margin="2,0,0,0" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ManuallyCapturedCount, StringFormat={}+{0:0}}"/>
+                            <TextBlock Grid.Column="4" x:Name="ManualTextBlock" FontSize="14" Padding="0" Margin="2,0,0,0" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ManuallyCapturedCount, StringFormat={}+{0:0}}"/>
                         </Grid>
                     </Border>
 
@@ -3294,6 +3297,28 @@
                             </Trigger.ExitActions>
                             
                             <Setter TargetName="PausedTooltipTextBlock" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+
+                        <Trigger Property="IsImpreciseCapture" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard TargetName="ImpreciseBorder">
+                                        <DoubleAnimation Storyboard.TargetProperty="Width" Duration="0:0:0.1" From="0" To="12"/>
+                                        <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.1" From="0" To="0,0,3,0"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard TargetName="ImpreciseBorder">
+                                        <DoubleAnimation Storyboard.TargetProperty="Width" Duration="0:0:0.1" From="12"/>
+                                        <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.1" From="0,0,3,0"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+
+                            <Setter TargetName="ImpreciseTooltipTextBlock" Property="Visibility" Value="Visible"/>
                         </Trigger>
 
                         <Trigger Property="IsNegative" Value="True">
