@@ -430,7 +430,7 @@ namespace ScreenToGif.Controls
         {
             foreach (var item in EncodingManager.Encodings.Where(item => item.Status == Status.Completed || item.Status == Status.FileDeletedOrMoved))
             {
-                if (!File.Exists(item.OutputFilename))
+                if (!File.Exists(item.OutputFilename) && !item.AreMultipleFiles)
                     EncodingManager.Update(item.Id, Status.FileDeletedOrMoved);
                 else if (item.Status == Status.FileDeletedOrMoved)
                     EncodingManager.Update(item.Id, Status.Completed, item.OutputFilename);
