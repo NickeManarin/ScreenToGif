@@ -539,11 +539,11 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.SaveAs.Ffmpeg.Parameters}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.SaveAs.Ffmpeg.Parameters}" VerticalAlignment="Top" Padding="0" Margin="0,6,0,0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                         <n:ExtendedTextBox Grid.Row="0" Grid.Column="1" x:Name="FfmpegGifParameterTextBox" MinHeight="23" Margin="5,3,3,3" VerticalContentAlignment="Top" TextWrapping="Wrap"
                                            AcceptsReturn="True" Text="{Binding Parameters}" ToolTip="{DynamicResource S.SaveAs.Ffmpeg.Parameters.Info}"/>
 
-                        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center" TextAlignment="Center" Margin="3,0">
+                        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Center" Margin="3,0">
                             <Hyperlink NavigateUri="http://bing.com" RequestNavigate="PreviewCommand_RequestNavigate" ToolTip="{DynamicResource S.SaveAs.Ffmpeg.Preview.Info}">
                                 <Run Text="{DynamicResource S.SaveAs.Ffmpeg.Preview}"/>
                             </Hyperlink>
@@ -775,7 +775,7 @@
                         <n:ExtendedTextBox Grid.Row="0" Grid.Column="1" x:Name="FfmpegWebpParameterTextBox" MinHeight="23" Margin="5,3,3,3" VerticalContentAlignment="Top" TextWrapping="Wrap"
                                            AcceptsReturn="True" Text="{Binding Parameters}" ToolTip="{DynamicResource S.SaveAs.Ffmpeg.Parameters.Info}"/>
 
-                        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center" TextAlignment="Center" Margin="3,0">
+                        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Center" Margin="3,0">
                             <Hyperlink NavigateUri="http://bing.com" RequestNavigate="PreviewCommand_RequestNavigate" ToolTip="{DynamicResource S.SaveAs.Ffmpeg.Preview.Info}">
                                 <Run Text="{DynamicResource S.SaveAs.Ffmpeg.Preview}"/>
                             </Hyperlink>
@@ -953,7 +953,7 @@
                         <n:ExtendedTextBox Grid.Row="0" Grid.Column="1" x:Name="FfmpegVideoParameterTextBox" MinHeight="23" Margin="5,3,3,3" VerticalContentAlignment="Top" TextWrapping="Wrap"
                                            AcceptsReturn="True" Text="{Binding Parameters, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="{DynamicResource S.SaveAs.Ffmpeg.Parameters.Info}"/>
 
-                        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center" TextAlignment="Center" Margin="3,0">
+                        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Center" Margin="3,0">
                             <Hyperlink NavigateUri="http://bing.com" RequestNavigate="PreviewCommand_RequestNavigate" ToolTip="{DynamicResource S.SaveAs.Ffmpeg.Preview.Info}">
                                 <Run Text="{DynamicResource S.SaveAs.Ffmpeg.Preview}"/>
                             </Hyperlink>
