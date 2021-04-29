@@ -44,7 +44,7 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0" Margin="3" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Hyperlink RequestNavigate="TokenHyperlink_RequestNavigate">
+                    <Hyperlink NavigateUri="www.yandex.com" RequestNavigate="TokenHyperlink_RequestNavigate">
                         <Run Text="{DynamicResource S.Options.Upload.Preset.GetToken}"/>
                     </Hyperlink>
                 </TextBlock>
