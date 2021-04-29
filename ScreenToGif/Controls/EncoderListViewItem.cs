@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -63,6 +63,9 @@ namespace ScreenToGif.Controls
                 new FrameworkPropertyMetadata(OutputFilename_PropertyChanged));
 
         public static readonly DependencyProperty SavedToDiskProperty = DependencyProperty.Register(nameof(SavedToDisk), typeof(bool), typeof(EncoderListViewItem),
+                new FrameworkPropertyMetadata(false));
+
+        public static readonly DependencyProperty AreMultipleFilesProperty = DependencyProperty.Register(nameof(AreMultipleFiles), typeof(bool), typeof(EncoderListViewItem),
                 new FrameworkPropertyMetadata(false));
 
         public static readonly DependencyProperty ExceptionProperty = DependencyProperty.Register(nameof(Exception), typeof(Exception), typeof(EncoderListViewItem),
@@ -268,6 +271,16 @@ namespace ScreenToGif.Controls
         {
             get => (bool)GetValue(SavedToDiskProperty);
             set => SetCurrentValue(SavedToDiskProperty, value);
+        }
+
+        /// <summary>
+        /// True if the exporter exported multiple files.
+        /// </summary>
+        [Description("True if the exporter exported multiple files.")]
+        public bool AreMultipleFiles
+        {
+            get => (bool)GetValue(AreMultipleFilesProperty);
+            set => SetCurrentValue(AreMultipleFilesProperty, value);
         }
 
         /// <summary>

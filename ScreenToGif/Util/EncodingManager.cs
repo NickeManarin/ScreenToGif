@@ -216,16 +216,19 @@ namespace ScreenToGif.Util
             {
                 case Status.Completed:
                 {
-                    if (fileName != null)
-                        if (File.Exists(fileName))
-                        {
-                            var fileInfo = new FileInfo(fileName);
-                            fileInfo.Refresh();
+                    if (fileName == null)
+                        break;
 
-                            item.SizeInBytes = fileInfo.Length;
-                            item.OutputFilename = fileName;
-                            item.SavedToDisk = true;
-                        }
+                    if (File.Exists(fileName))
+                    {
+                        var fileInfo = new FileInfo(fileName);
+                        fileInfo.Refresh();
+
+                        item.SizeInBytes = fileInfo.Length;
+                        item.OutputFilename = fileName;
+                        item.SavedToDisk = true;
+                    }
+
                     break;
                 }
                 case Status.Error:
@@ -237,7 +240,39 @@ namespace ScreenToGif.Util
 
             Application.Current.Dispatcher.BeginInvoke(new Action(() => EncodingUpdated(item, wasStatusUpdated)));
         }
-        
+
+        internal static void Update(int id, Status status, List<string> fileNames, bool isIndeterminate = false)
+        {
+            var item = Encodings.FirstOrDefault(x => x.Id == id);
+
+            if (item == null)
+                return;
+
+            var wasStatusUpdated = item.Status != status;
+
+            item.Status = status;
+            item.IsIndeterminate = isIndeterminate;
+            item.AreMultipleFiles = true;
+
+            if (status == Status.Completed && fileNames?.Any() == true)
+            {
+                foreach (var fileInfo in fileNames.Where(File.Exists).Select(fileName => new FileInfo(fileName)))
+                {
+                    fileInfo.Refresh();
+
+                    item.SizeInBytes += fileInfo.Length;
+                }
+
+                if (item.SizeInBytes > 0)
+                {
+                    item.OutputFilename = fileNames.FirstOrDefault();
+                    item.SavedToDisk = true;
+                }
+            }
+            
+            Application.Current.Dispatcher.BeginInvoke(new Action(() => EncodingUpdated(item, wasStatusUpdated)));
+        }
+
 
         private static void SetUpload(int id, bool uploaded, string link, string deleteLink = null, Exception exception = null)
         {
@@ -363,6 +398,7 @@ namespace ScreenToGif.Util
                 item.SizeInBytes = current.SizeInBytes;
                 item.OutputFilename = current.OutputFilename;
                 item.SavedToDisk = current.SavedToDisk;
+                item.AreMultipleFiles = current.AreMultipleFiles;
                 item.Exception = current.Exception;
 
                 item.Uploaded = current.Uploaded;
@@ -850,6 +886,8 @@ namespace ScreenToGif.Util
 
                         if (!imagePreset.ZipFiles)
                         {
+                            var frameList = new List<string>();
+
                             foreach (var frame in project.FramesFiles)
                             {
                                 var path = Path.Combine(preset.OutputFolder, $"{preset.ResolvedFilename} {frame.Index.ToString().PadLeft(padLength, '0')}{preset.Extension ?? preset.DefaultExtension}");
@@ -857,7 +895,9 @@ namespace ScreenToGif.Util
                                 if (File.Exists(path))
                                     File.Delete(path);
 
-                                switch(preset.Type)
+                                Update(id, frame.Index, string.Format(processing, frame.Index));
+
+                                switch (preset.Type)
                                 {
                                     case Export.Bmp:
                                     {
@@ -887,7 +927,12 @@ namespace ScreenToGif.Util
                                         break;
                                     }
                                 }
+
+                                frameList.Add(path);
                             }
+
+                            Update(id, Status.Completed, frameList);
+                            return;
                         }
                         else
                         {
@@ -1718,6 +1763,8 @@ namespace ScreenToGif.Util
         public string OutputFilename { get; set; }
         
         public bool SavedToDisk { get; set; }
+
+        public bool AreMultipleFiles { get; set; }
 
 
         public bool CopiedToClipboard { get; set; }

@@ -898,9 +898,8 @@ namespace ScreenToGif.Windows
                 preset.Height = size.Height;
                 preset.Scale = this.Scale();
 
-                await Task.Run(() => SaveAsync(preset));
-
-                ClosePanel();
+                if (await Task.Run(() => SaveAsync(preset)))
+                    ClosePanel();
             }
             catch (Exception ex)
             {
@@ -5100,7 +5099,7 @@ namespace ScreenToGif.Windows
 
         #region Async Save
 
-        private void SaveAsync(ExportPreset preset)
+        private bool SaveAsync(ExportPreset preset)
         {
             ShowProgress(LocalizationHelper.Get("S.Editor.PreparingSaving"), 1, true);
 
@@ -5219,17 +5218,17 @@ namespace ScreenToGif.Windows
                 var output = Path.Combine(preset.OutputFolder, preset.ResolvedFilename);
                 var padSize = (Project.Frames.Count - 1).ToString().Length;
 
-                if (indexes.Count > 1 ? indexes.Any(a => File.Exists($"{output} ({(a + "").PadLeft(padSize, '0')})" + preset.Extension)) : File.Exists(output + preset.Extension))
+                if (!preset.OverwriteOnSave && indexes.Count > 1 ? indexes.Any(a => File.Exists($"{output} {(a + "").PadLeft(padSize, '0')}" + preset.Extension)) : File.Exists(output + preset.Extension))
                 {
-                    Dispatcher.Invoke(() => StatusList.Warning("S.SaveAs.Warning.Overwrite"));
-                    return;
+                    Dispatcher.Invoke(() => StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Overwrite")));
+                    return false;
                 }
 
                 if (indexes.Count > 1 && !Dispatcher.Invoke(() => Dialog.Ask(LocalizationHelper.Get("S.SaveAs.Dialogs.Multiple.Title"), 
                     LocalizationHelper.Get("S.SaveAs.Dialogs.Multiple.Instruction"), LocalizationHelper.GetWithFormat("S.SaveAs.Dialogs.Multiple.Message", indexes.Count))))
                 {
                     Dispatcher.Invoke(() => StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Canceled")));
-                    return;
+                    return false;
                 }
             }
 
@@ -5257,6 +5256,8 @@ namespace ScreenToGif.Windows
 
                 EncodingManager.StartEncoding(copiedAux, projectPreset); 
             }
+
+            return true;
         }
 
         #endregion
