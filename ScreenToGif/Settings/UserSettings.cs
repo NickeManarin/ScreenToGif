@@ -202,11 +202,11 @@ namespace ScreenToGif.Settings
                     case "Boolean":
                         return Convert.ToBoolean(property.Value);
                     case "Int32":
-                        return Convert.ToInt32(property.Value);
+                        return Convert.ToInt32(property.Value, CultureInfo.InvariantCulture);
                     case "Double":
-                        return Convert.ToDouble(property.Value);
+                        return Convert.ToDouble(property.Value, CultureInfo.InvariantCulture);
                     case "Decimal":
-                        return Convert.ToDecimal(property.Value);
+                        return Convert.ToDecimal(property.Value, CultureInfo.InvariantCulture);
 
                     case "Export":
                         return Enum.Parse(typeof(Export), property.Value);
