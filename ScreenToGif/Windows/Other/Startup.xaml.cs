@@ -112,6 +112,16 @@ namespace ScreenToGif.Windows.Other
             if (closest.WorkingArea.Bottom < top + 100)
                 top = closest.WorkingArea.Bottom - height;
 
+            if (top > int.MaxValue || top < int.MinValue || left > int.MaxValue || left < int.MinValue ||
+                width > int.MaxValue || width < int.MinValue || height > int.MaxValue || height < int.MinValue)
+            {
+                var desc = $"On load: {onLoad}\nScale: {this.Scale()}\n\n" +
+                           $"Screen: {closest.AdapterName}\nBounds: {closest.Bounds}\n\nTopLeft: {top}x{left}\nWidthHeight: {width}x{height}\n\n" +
+                           $"TopLeft Settings: {UserSettings.All.StartupTop}x{UserSettings.All.StartupLeft}\nWidthHeight Settings: {UserSettings.All.StartupWidth}x{UserSettings.All.StartupHeight}";
+                LogWriter.Log("Wrong Startup window sizing", desc);
+                return false;
+            }
+
             Top = top;
             Left = left;
             Width = width;
