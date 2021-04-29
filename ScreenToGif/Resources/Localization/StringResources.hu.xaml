@@ -19,6 +19,7 @@
     <s:String x:Key="S.Title">Cím</s:String>
     <s:String x:Key="S.Description">Leírás</s:String>
     <s:String x:Key="S.SelectColor">Kattints ide a szín kiválasztásához.</s:String>
+    <s:String x:Key="S.Documentation">Kattints a dokumentációhoz való navigáláshoz.</s:String>
     <s:String x:Key="S.Suppress">Elrejt</s:String>
     <s:String x:Key="S.Preview">Előnézet</s:String>
     <s:String x:Key="S.Size">Méret</s:String>
@@ -42,6 +43,11 @@
     <s:String x:Key="S.Warning.Single.Title">Csak egy példány engedélyezett</s:String>
     <s:String x:Key="S.Warning.Single.Header">Az alkalmazás már fut</s:String>
     <s:String x:Key="S.Warning.Single.Message">A ScreenToGif már fut, de úgy tűnik, nincs ablak nyitva. Ellenőrizd a rendszertálcán, a ScreenToGif ikonnak ott kell lennie.</s:String>
+    
+    <s:String x:Key="S.SavingSettings.Title">Beállítások mentése</s:String>
+    <s:String x:Key="S.SavingSettings.Instruction">Megpróbálná újra menteni?</s:String>
+    <s:String x:Key="S.SavingSettings.Message">Úgy tűnik, hogy a ScreenToGif nem rendelkezik elég jogosultsággal ahhoz, hogy a beállításokat a lemezre mentse.&#10;&#10;Szeretnéd újra megpróbálni, de ezúttal rendszergazdai jogosultságokkal?</s:String>
+    
     <s:String x:Key="S.Exiting.Title">ScreenToGif bezárása</s:String>
     <s:String x:Key="S.Exiting.Instruction">Biztos vagy benne, hogy ki akarsz lépni?</s:String>
     <s:String x:Key="S.Exiting.Message">Minden ablak bezárul, és a tálca ikonja eltávolításra kerül.</s:String>
@@ -124,6 +130,7 @@
     <s:String x:Key="S.Command.Edit">Kijelölt elem szerkesztése</s:String>
     <s:String x:Key="S.Command.Save">Kijelölt elem mentése</s:String>
     <s:String x:Key="S.Command.Remove">Kijelölt elem eltávolítása</s:String>
+    <s:String x:Key="S.Command.ViewHistory">Előzmények megtekintése</s:String>
     
     <!--StartUp-->
     <s:String x:Key="S.StartUp.Title">ScreenToGif - Indítás</s:String>
@@ -157,6 +164,12 @@
     <s:String x:Key="S.Updater.Downloading">Letöltés...</s:String>
     <s:String x:Key="S.Updater.Warning.Show">A letöltés részleteit nem lehetett megjeleníteni.</s:String>
     <s:String x:Key="S.Updater.Warning.Download">A frissítés letöltése nem volt lehetséges.</s:String>
+    <s:String x:Key="S.Updater.Warning.Encoding">A frissítés előtt meg kell várni, amíg az összes kódolás befejeződik.</s:String>
+    
+    <!--Downloader-->
+    <s:String x:Key="S.Downloader.Title">ScreenToGif - Letöltő</s:String>
+    <s:String x:Key="S.Downloader.Header">Letöltő</s:String>
+    <s:String x:Key="S.Downloader.Size">{0} / {1}</s:String>
     
     <!--Options-->
     <s:String x:Key="S.Options.Title">ScreenToGif - Beállítások</s:String>
@@ -339,6 +352,9 @@
     <s:String x:Key="S.Options.Editor.General.NotifyWhileClosingEditor">Kérdés a szerkesztő bezárása előtt (ha van egy megnyitott projekt).</s:String>
     <s:String x:Key="S.Options.Editor.General.TripleClickSelection">A szöveg kijelöléséhez engedélyezze a tripla kattintást.</s:String>
     <s:String x:Key="S.Options.Editor.General.DrawOutlineOutside">A feliratok körvonalát rajzolja a betűkön kívülre.</s:String>
+    <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind">Képkockák eldobása szükség esetén.</s:String>
+    <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind.Info">(Kihagy egy képkockát, ha az előnézet nem tudja időben megjeleníteni.)</s:String>
+    <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind.Tooltip">Kihagy egy képkockát, ha az előnézet nem tudja időben megjeleníteni.</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory">A visszavonási / ismétlési előzmények korlátozása.</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Info">(A régebbi műveletek a korlát elérésekor törlődnek)</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Maximum">(A tárolt műveletek maximális száma)</s:String>
@@ -351,6 +367,7 @@
     <s:String x:Key="S.Options.Tasks.List.Enabled">Engedélyezve</s:String>
     <s:String x:Key="S.Options.Tasks.Enable">Engedélyezze ezt a feladatot.</s:String>
     <s:String x:Key="S.Options.Tasks.SelectType">(Válassz ki egy feladatot)</s:String>
+    <s:String x:Key="S.Options.Tasks.SelectType.Info">Válassz ki fent egy feladatot</s:String>
     <s:String x:Key="S.Options.Tasks.Info">Ezeket a feladatokat a program egymás után hajtja végre a lista tetejétől az aljáig.&#x0d;Ez akkor történik, amikor először nyitsz meg egy projektet a szerkesztő használatával.</s:String>
   
     <!--Options • Shortcuts-->
@@ -425,6 +442,8 @@
     <s:String x:Key="S.Options.Storage.RemoveSettings">A beállításfájl eltávolítása.</s:String>
     <s:String x:Key="S.Options.Storage.OpenSettingsFolder">Nyisd meg azt a mappát, amelyben a beállításfájl található.&#x0d;Tartsd lenyomva a Ctrl billentyűt, miközben kattintva megnyitod a fájlt, ha lehetséges.</s:String>
     <s:String x:Key="S.Options.Storage.SettingsInfo">• Beállítások betöltési mintája: Alapértelmezett ◄ AppData ◄ Helyi.&#x0d;• Ha nincs beállításfájl a Helyi mappában, az alkalmazás az AppData mappában keres, az Alapértelmezett értéket használja, ha nincs beállításfájl jelen.&#x0d;• Ha nincs helyi beállítás, akkor az összes beállítás az AppData beállításfájlba kerül.</s:String>
+    <s:String x:Key="S.Options.Storage.DeleteEverything">Törölje az összes fájlt a gyorsítótárból az alkalmazás bezárásakor.</s:String>
+    <s:String x:Key="S.Options.Storage.AskDeleteEverything">Kérdezzen meg, mielőtt törli az összes fájlt a gyorsítótárból.</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemoval">A régi projektek automatikus eltávolítása.</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemoval.Info">Az alkalmazás megnyitásakor a háttérfeladat törli a beállítottnál régebbi lezárt projekteket.</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemovalDays.Info">(napokban, az ennél régebbi lezárt projektek törlődnek / elvetésre kerülnek&#x0d;az alkalmazás megnyitása után)</s:String>
@@ -449,34 +468,83 @@
     <s:String x:Key="S.Options.Upload.Proxy.Port">Port:</s:String>
     <s:String x:Key="S.Options.Upload.Proxy.User">Felhasználónév:</s:String>
     <s:String x:Key="S.Options.Upload.Proxy.Password">Jelszó:</s:String>
-    <s:String x:Key="S.Options.Upload.Get">OAuth token beszerzése</s:String>
-    <s:String x:Key="S.Options.Upload.PasteToken">A jogosultsági token beillesztése ide</s:String>
+    
+    <s:String x:Key="S.Options.Upload.Presets">Feltöltési előbeállítások</s:String>
+    <s:String x:Key="S.Options.Upload.Presets.Service">Szolgáltatás</s:String>
+    <s:String x:Key="S.Options.Upload.Presets.Title">Cím</s:String>
+    <s:String x:Key="S.Options.Upload.Presets.Description">Leírás</s:String>
+    <s:String x:Key="S.Options.Upload.Presets.Enabled">Engedélyezve</s:String>
+    
+     <!--Options • Upload > Preset-->
+    <s:String x:Key="S.Options.Upload.Preset.Title">Feltöltési szolgáltatás</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Select">Szolgáltatás kiválasztása</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Select.Info">Válassz ki fent egy feltöltési szolgáltatást</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Custom">Egyéni</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Enable">Engedélyezze ezt az előbeállítást.</s:String>
+    
+    <s:String x:Key="S.Options.Upload.Preset.Details">Részletek</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Name">Név:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Description">Leírás:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Mode">Mód:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Mode.Anonymous">Névtelen</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Mode.Authenticated">Hitelesített</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Authorization">Engedélyezés</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.GetToken">Token beszerzése</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Token">OAuth token beillesztése ide</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Username">Felhasználónév:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Password">Jelszó:</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Authorize">Engedélyez</s:String>
-    <s:String x:Key="S.Options.Upload.Refresh">Frissít</s:String>
-    <s:String x:Key="S.Options.Upload.Clear">Töröl</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Imgur.Anonymous">Imgur (Névtelen)</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Direct">Direkt linkek használata.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Imgur.Gifv">Szerezz hivatkozásokat Gifv kiterjesztéssel a Gif helyett.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Imgur.ToAlbum">Gifek feltöltése egy kiválasztott albumba.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Imgur.Album">Album:</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Imgur.AskMe">Kérdés a feltöltés előtt</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.NotPossible">Az Imgur engedélyezési token beszerzéséhez nem lehetett megnyitni a lapot.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.NotStored">A felhasználónév és a jelszó nem kerül tárolásra.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Options">Beállítások</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Direct">Direkt hivatkozások használata.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Album">Album</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Title">Ennek az előbeállításnak egyedi nevet kell adnod.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Repeated">A nevet már egy másik feltöltési előbeállítás használja.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Authenticate">Ha hitelesített módban vagy, be kell fejezned a hitelesítési folyamatot.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Credentials">Az alkalmazás engedélyezéséhez meg kell adnod a felhasználónevedet és jelszavadat.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.GetToken">Nem volt lehetséges az engedélyezési token megszerzése.</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Warning.Token">Az alkalmazás engedélyezéséhez meg kell adnod az engedélyezési tokent.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Completed">Az Imgur engedélyezés befejeződött.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Error">Az Imgur engedélyezés nem sikerült. Próbálkozz újra néhány másodpercen belül, vagy szerezz be egy új tokent.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Header">Nem lehetett engedélyezni az alkalmazást</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Failed.Message">Ellenőrizd, hogy a megfelelő tokent adta-e meg, és van-e internetkapcsolata.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Imgur.Refresh.None">Az alkalmazás engedélyezésének frissítéséhez először be kell fejezned az engedélyezési folyamatot.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.AuthError">Az engedélyezés sikertelen. Ellenőrizze, hogy minden rendben van-e, és néhány másodperc múlva próbálja meg újra.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.AlbumLoad">Nem sikerült betölteni az albumlistát.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Authorized">Az engedélyezés befejeződött.</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Info.NotAuthorized">Nem engedélyezett.</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Info.Expired">Az engedély lejárt {0}.</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Info.Valid">Az engedély {0}-ig érvényes.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Info.Removed">Imgur engedélyezés eltávolítva.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Warning.AlbumLoad">Nem sikerült betölteni az albumlistát.</s:String>
-    <s:String x:Key="S.Options.Upload.Gfycat.Anonymous">Gfycat (névtelen)</s:String>
-    <s:String x:Key="S.Options.Upload.Yandex.Token">OAuth token:</s:String>
-    <s:String x:Key="S.Options.Upload.Pick.Destination">Válassz ki egy célt</s:String>
+    
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Gifv">Hivatkozások Gifv kiterjesztéssel a Gif helyett.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.ToAlbum">Gifek feltöltése egy kiválasztott albumba.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Album">Album:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.AskMe">Kérdés a feltöltés előtt</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Reload">Az albumlista újratöltése.</s:String>
+    
+    <s:String x:Key="S.Options.Upload.Preset.Gfycat.Defaults">Alapértelmezések</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Gfycat.AskMe">Kérjen meg, hogy töltsem ki a feltöltés részleteit.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Gfycat.UrlType">Url típusa:</s:String>
+    
+    <!--Options • Upload > Album-->
     <s:String x:Key="S.Options.Upload.Pick.Album">Válassz ki egy albumot (nem kötelező)</s:String>
     <s:String x:Key="S.Options.Upload.Pick.Album.Info">Ha szeretnéd, kiválaszthatod a célalbumot:</s:String>
+    
+    <!--Options • Upload > Details-->
+    <s:String x:Key="S.Options.Upload.Pick.Details">Feltöltési részletek (opcionális)</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Info">Feltöltési részletek</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Title">Cím:</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Description">Leírás:</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Tags">Címkék:</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Tags.Info">A címkéket pontosvesszővel ( ; ) válaszd el egymástól.</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Private">Csak azok számára jelenik meg, akik közvetlen linken keresztül férnek hozzá. </s:String>
+    
+    <!--Options • Upload > History-->
+    <s:String x:Key="S.Options.Upload.History.Title">Feltöltési előzmények</s:String>
+    <s:String x:Key="S.Options.Upload.History.Date">Dátum</s:String>
+    <s:String x:Key="S.Options.Upload.History.Preset">Előbeállítás</s:String>
+    <s:String x:Key="S.Options.Upload.History.Successful">Sikeres?</s:String>
+    <s:String x:Key="S.Options.Upload.History.Remove">Előzménybejegyzés törlése.</s:String>
+    <s:String x:Key="S.Options.Upload.History.Detail.Link">Hivatkozás:</s:String>
+    <s:String x:Key="S.Options.Upload.History.Detail.LowerQuality">Alacsonybb minőség</s:String>
+    <s:String x:Key="S.Options.Upload.History.Detail.DeleteLink">Törlési hivatkozás:</s:String>
+    <s:String x:Key="S.Options.Upload.History.Delete.Instruction">Biztos, hogy törölni szeretnéd az előzménybejegyzést?</s:String>
+    <s:String x:Key="S.Options.Upload.History.Delete.Message">Ez a művelet nem vonható vissza.&#10;&#10;Szeretnéd törölni a kiválasztott előzménybejegyzést?</s:String>
     
     <!--Options • Extras-->
     <s:String x:Key="S.Options.Extras.External">Rendelkezésre álló külső eszközök</s:String>
@@ -499,7 +567,9 @@
     <s:String x:Key="S.Options.Extras.License.Ffmpeg">FFmpeg licenc</s:String>
     <s:String x:Key="S.Options.Extras.License.Gifski">Gifski licenc</s:String>
     <s:String x:Key="S.Options.Extras.License.SharpDx">SharpDx licenc</s:String>
-
+    <s:String x:Key="S.Options.Extras.Permission.Header">Hiányzó írási engedély a mappában</s:String>
+    <s:String x:Key="S.Options.Extras.Permission.Observation">A letöltést nem lehet elmenteni a mappába az írási jogosultság hiánya miatt.&#10;&#10;Szeretnéd a letöltőprogramot rendszergazdai jogokkal elindítani, hogy befejezze a letöltést?</s:String>
+    
     <!--Options • Donations-->
     <s:String x:Key="S.Options.Donate.Donate">Adományozz</s:String>
     <s:String x:Key="S.Options.Donate.Donate.Dollar">Adományozz US$</s:String>
@@ -531,7 +601,7 @@
     <s:String x:Key="S.Options.About.Technical.License">Licenc:</s:String>
     <s:String x:Key="S.Options.About.Technical.Free">(Ez egy teljesen ingyenes alkalmazás)</s:String>
     <s:String x:Key="S.Options.About.Technical.SourceCode">Forráskód: </s:String>
-    <s:String x:Key="S.Options.About.Technical.Privacy">Adatvédelmi házirend:</s:String>
+    <s:String x:Key="S.Options.About.Technical.Privacy">Adatvédelmi szabályzat:</s:String>
     <s:String x:Key="S.Options.About.ABigThanksTo">Nagy köszönet:</s:String>
     <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">Minden támogatómnak, akik visszajelzést és/vagy adományokat adtak.</s:String>
     
@@ -666,15 +736,59 @@
     <s:String x:Key="S.ErrorDialog.Observation">Valami rossz történt.</s:String>
     <s:String x:Key="S.ErrorDialog.Send">Jelentés küldése</s:String>
 
-    <!--FFmpeg preset-->
-    <s:String x:Key="S.FfmpegPreset.Title">FFmpeg előbeállítás</s:String>
-    <s:String x:Key="S.FfmpegPreset.Name">Név</s:String>
-    <s:String x:Key="S.FfmpegPreset.Parameters">Paraméterek</s:String>
-    <s:String x:Key="S.FfmpegPreset.Info.SecondPass">A 2 menetes kódoláshoz egyszerűen add hozzá a "-pass 2"-t a parancshoz.</s:String>
-    <s:String x:Key="S.FfmpegPreset.Warning.Name">Nevet kell adnod ennek az előbeállításnak.</s:String>
-    <s:String x:Key="S.FfmpegPreset.Warning.Parameter">Ehhez az előbeállításhoz be kell írnod néhány paramétert.</s:String>
-    <s:String x:Key="S.FfmpegPreset.Warning.SameName">Már van egy előbeállítás ugyanezzel a névvel.</s:String>
+    <!--Presets-->
+    <s:String x:Key="S.Preset.Title">Előbeállítás</s:String>
+    <s:String x:Key="S.Preset.Encoder">Kódoló</s:String>
+    <s:String x:Key="S.Preset.Name">Név</s:String>
+    <s:String x:Key="S.Preset.Description">Leírás</s:String>
+    <s:String x:Key="S.Preset.Other">Egyéb</s:String>
+    <s:String x:Key="S.Preset.AutoSave">Automatikus mentés, amikor egy beállítás módosul.</s:String>
+    <s:String x:Key="S.Preset.Info.Manual">Az előre beállított beállítások (kódolási és exportálási beállítások) minden módosítását manuálisan kell elmenteni a mentés gomb megnyomásával.</s:String>
+    <s:String x:Key="S.Preset.Info.Automatic">Az előre beállított beállítások (kódolási és exportálási beállítások) minden módosítása automatikusan mentésre kerül.</s:String>
+    <s:String x:Key="S.Preset.Warning.Readonly">Az alapértelmezett előbeállítás néhány tulajdonsága csak olvasható.</s:String>
+    <s:String x:Key="S.Preset.Warning.Name">Az előbeállításnak nevet kell adnod.</s:String>
+    <s:String x:Key="S.Preset.Warning.SameName">Már van egy ugyanilyen nevű előbeállítás.</s:String>
+    
+    <!--Presets • Listing-->
+    <s:String x:Key="S.Preset.Autosave">Automatikus mentések</s:String>
+    <s:String x:Key="S.Preset.Autosave.Info">Ennek az előbeállításnak a módosításai automatikusan elmentésre kerülnek.</s:String>
+    <s:String x:Key="S.Preset.Default.Title">Alapértelmezett ({0})</s:String>
+    <s:String x:Key="S.Preset.Default.Description">A kódoló alapértelmezett beállítása.</s:String>
+    <s:String x:Key="S.Preset.Hevc.Title">HEVC ({0})</s:String>
+    <s:String x:Key="S.Preset.Hevc.Description">Nagy hatékonyságú videókódolás.</s:String>
+    <s:String x:Key="S.Preset.Vp8.Title">VP8 ({0})</s:String>
+    <s:String x:Key="S.Preset.Vp8.Description">Régebbi és ismertebb kodek.</s:String>
+    <s:String x:Key="S.Preset.Filename.Animation">Animáció</s:String>
+    <s:String x:Key="S.Preset.Filename.Video">Videó</s:String>
+    <s:String x:Key="S.Preset.Filename.Image">Kép</s:String>
+    <s:String x:Key="S.Preset.Filename.Project">Projekt</s:String>
 
+    <s:String x:Key="S.Preset.Gif.Embedded.High.Title">Kiváló minőség</s:String>
+    <s:String x:Key="S.Preset.Gif.Embedded.High.Description">Inkább alkalmas a több színnel és színátmenettel rendelkező felvételekhez.</s:String>
+    <s:String x:Key="S.Preset.Gif.Embedded.Transparent.Title">Kiváló minőség • Átlátszó háttér</s:String>
+    <s:String x:Key="S.Preset.Gif.Embedded.Transparent.Description">Támogatja az animáció mentését átlátszó háttérrel.</s:String>
+    <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Title">Kiváló minőség • Grafika</s:String>
+    <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Description">Jobb a kisebb színmennyiségű felvételekhez.</s:String>
+    <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Title">FFmpeg - Magasabb minőség</s:String>
+    <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Description">Magasabb képminőség, de nagyobb fájlméret.</s:String>
+    <s:String x:Key="S.Preset.Gif.Ffmpeg.Low.Title">FFmpeg - Alacsonyabb minőség</s:String>
+    <s:String x:Key="S.Preset.Gif.Ffmpeg.Low.Description">Alacsonyabb képminőség, de kisebb fájlméret.</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.High.Title">Gifski - Magasabb minőség</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.High.Description">Magasabb képminőség, de nagyobb fájlméret.</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.Low.Title">Gifski - Alacsonyabb minőség</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.Low.Description">Alacsonyabb képminőség, de kisebb fájlméret.</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.Fast.Title">Gifski - Alacsonyabb minőség és gyorsabb kódolás</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.Fast.Description">Még alacsonyabb képminőség, gyorsabb kódolással, de kisebb fájlmérettel.</s:String>
+    <s:String x:Key="S.Preset.Gif.System.Low.Title">Rendszer - Alacsony minőség</s:String>
+    <s:String x:Key="S.Preset.Gif.System.Low.Description">Alacsony minőség, de gyorsabb kódolás.</s:String>
+    
+    <s:String x:Key="S.Preset.Apng.Ffmpeg.High.Title">FFmpeg - Kiváló minőség</s:String>
+    <s:String x:Key="S.Preset.Apng.Ffmpeg.High.Description">Magas képminőség és kis fájlméret, de lassabb kódolás.</s:String>
+    <s:String x:Key="S.Preset.Apng.Ffmpeg.Low.Title">FFmpeg - Alacsonyabb minőség</s:String>
+    <s:String x:Key="S.Preset.Apng.Ffmpeg.Low.Description">Alacsonyabb képminőség, kis fájlméret és gyorsabb kódolás.</s:String>
+    <s:String x:Key="S.Preset.Webp.Ffmpeg.High.Title">Kiváló minőség</s:String>
+    <s:String x:Key="S.Preset.Webp.Ffmpeg.High.Description">Magas képminőség és kis fájlméret.</s:String>
+    
     <!--Insert frames-->
     <s:String x:Key="S.InsertFrames.Title">Képkockák beszúrása</s:String>
     <s:String x:Key="S.InsertFrames.Info">Mindkét oldalnak azonos méretűnek kell lennie, ez az ablak lehetővé teszi a kép és a vászon áthelyezését és átméretezését. Kattints a kijelöléshez és átméretezéshez.</s:String>
@@ -793,21 +907,28 @@
     <s:String x:Key="S.Editor.File.All">Minden támogatott fájl</s:String>
     <s:String x:Key="S.Editor.File.Image">Kép</s:String>
     <s:String x:Key="S.Editor.File.Video">Videó</s:String>
-    <s:String x:Key="S.Editor.File.Project">ScreenToGif projekt</s:String>
-    <s:String x:Key="S.Editor.File.Gif">Gif animáció</s:String>
+
     <s:String x:Key="S.Editor.File.Apng">Animált Png</s:String>
+    <s:String x:Key="S.Editor.File.Gif">Gif animáció</s:String>
+    <s:String x:Key="S.Editor.File.Webp">Webp animáció</s:String>
+    
     <s:String x:Key="S.Editor.File.Avi">Avi videó</s:String>
     <s:String x:Key="S.Editor.File.Mkv">Matroska videó</s:String>
+    <s:String x:Key="S.Editor.File.Mov">Mov videó</s:String>
     <s:String x:Key="S.Editor.File.Mp4">Mp4 videó</s:String>
     <s:String x:Key="S.Editor.File.Webm">Webm videó</s:String>
-    <s:String x:Key="S.Editor.File.Wmv">Windows média videó</s:String>
-    <s:String x:Key="S.Editor.File.Image.Zip">Zip fájl, az összes kijelölt kép</s:String>
+    
+    <s:String x:Key="S.Editor.File.Image.Bmp">Bmp kép</s:String>
+    <s:String x:Key="S.Editor.File.Image.Jpeg">Jpeg kép</s:String>
     <s:String x:Key="S.Editor.File.Image.Png">Png kép, az összes kijelölt kép</s:String>
+    <s:String x:Key="S.Editor.File.Image.Zip">Zip fájl, az összes kijelölt kép</s:String>
+    
+    <s:String x:Key="S.Editor.File.Project">ScreenToGif projekt</s:String>
     <s:String x:Key="S.Editor.File.Project.Zip">ScreenToGif projekt Zip-ként</s:String>
     <s:String x:Key="S.Editor.File.Psd">Psd fájl</s:String>
     
     <!--Editor • Welcome-->
-    <s:String x:Key="S.Editor.Welcome.New">Új felvétel indításához menj a "Fájl – Új" részhez</s:String>
+    <s:String x:Key="S.Editor.Welcome.New">Új felvétel indításához menj a "Fájl > Új" részhez</s:String>
     <s:String x:Key="S.Editor.Welcome.Import">Képek, videók és projektek importálása "fogd és vidd" használatával.</s:String>
     <s:String x:Key="S.Editor.Welcome.ThankYou">Nagyon köszönöm, hogy az alkalmazásomat használod!</s:String>
     <s:String x:Key="S.Editor.Welcome.Size">Minél alacsonyabb a képkockasebesség, a színszám vagy a képkockák közötti változások mennyisége, annál kisebb a méret</s:String>
@@ -831,7 +952,7 @@
     
     <!--Editor • File tab • Save/Discard-->
     <s:String x:Key="S.Editor.File.Save">Mentés másként</s:String>
-    <s:String x:Key="S.Editor.File.Load">Betölt</s:String>
+    <s:String x:Key="S.Editor.File.Load">Betöltés</s:String>
     <s:String x:Key="S.Editor.File.LoadRecent">Legutóbbi&#x0d;projektek</s:String>
     <s:String x:Key="S.Editor.File.SaveProject">Mentés mint&#x0d;Projekt</s:String>
     <s:String x:Key="S.Editor.File.Discard">Projekt&#10;elvetése</s:String>
@@ -1015,7 +1136,6 @@
     <s:String x:Key="S.Editor.List.Frame">Képkocka:</s:String>
     <s:String x:Key="S.Editor.List.OpenImage">Kép megnyitása</s:String>
     <s:String x:Key="S.Editor.List.ExploreFolder">Mappa felfedezése</s:String>
-    <s:String x:Key="S.Editor.List.ExportImage">Kép exportálása</s:String>
     
     <!--Editor • Go to-->
     <s:String x:Key="S.GoTo.Title">Ugrás képkockára</s:String>
@@ -1162,6 +1282,8 @@
     <s:String x:Key="S.Caption.Layout">Elrendezés</s:String>
     <s:String x:Key="S.Caption.Vertical">Függőleges:</s:String>
     <s:String x:Key="S.Caption.Horizontal">Vízszintes:</s:String>
+    <s:String x:Key="S.Caption.TextAlignment">Igazítás:</s:String>
+    <s:String x:Key="S.Caption.TextDecoration">Dekoráció:</s:String>
 
     <!--Editor • Key strokes-->
     <s:String x:Key="S.KeyStrokes">Billentyűleütések</s:String>
@@ -1170,6 +1292,8 @@
     <s:String x:Key="S.KeyStrokes.Edit">Billentyűleütések szerkesztése</s:String>
     <s:String x:Key="S.KeyStrokes.IgnoreModifiers">Hagyja figyelmen kívül a Ctrl, az Alt, a Shift és a Windows billentyűket, ha nincs módosítóként használva.</s:String>
     <s:String x:Key="S.KeyStrokes.IgnoreModifiers.Info">Figyelmen kívül hagyja az olyan magányos billentyűleütéseket, mint a "Control", de a "Control + C"-t nem.</s:String>
+    <s:String x:Key="S.KeyStrokes.IgnoreInjected">A szoftver által szimulált billentyűleütések figyelmen kívül hagyása.</s:String>
+    <s:String x:Key="S.KeyStrokes.IgnoreInjected.Info">Csak a felhasználó által beírt billentyűleütéseket rögzíti.</s:String>
     <s:String x:Key="S.KeyStrokes.Extend">A billentyűleütések kiállításának kibővítése.</s:String>
     <s:String x:Key="S.KeyStrokes.Earlier">A billentyűleütések kiállítását korábban indítsa el.</s:String>
     <s:String x:Key="S.KeyStrokes.By">Ennyivel (ms):</s:String>
@@ -1306,24 +1430,86 @@
     <s:String x:Key="S.Transitions.Info">Az áttűnés a kiválasztott képkocka és a következő képkocka között lesz alkalmazva.</s:String>
 
     <!--Editor • Save as-->
-    <s:String x:Key="S.SaveAs.Type">Fájltípus</s:String>
-    <s:String x:Key="S.SaveAs.Gif">Gif</s:String>
+    <s:String x:Key="S.SaveAs.Type">Fájltípus és előbeállítás</s:String>
+    <s:String x:Key="S.SaveAs.Type.Format">A kimeneti fájl formátuma.</s:String>
+    <s:String x:Key="S.SaveAs.Type.Preset">Az exportálási előbeállítás, amely az összes aktuálisan megjelenített beállítást tartalmazza.&#10;Kezeld az exportálási előbeállításokat az alábbi gombok segítségével.</s:String>
+    <s:String x:Key="S.SaveAs.Type.Animated">Animált kép</s:String>
+    <s:String x:Key="S.SaveAs.Type.Video">Videó</s:String>
+    <s:String x:Key="S.SaveAs.Type.Frames">Képkockák</s:String>
+    <s:String x:Key="S.SaveAs.Type.Other">Egyéb</s:String>
+    
     <s:String x:Key="S.SaveAs.Apng">Apng</s:String>
-    <s:String x:Key="S.SaveAs.Images">Képek (képkockák)</s:String>
+    <s:String x:Key="S.SaveAs.Apng.Info">Animated Portable Network Graphics</s:String>
+    <s:String x:Key="S.SaveAs.Gif">Gif</s:String>
+    <s:String x:Key="S.SaveAs.Gif.Info">Graphics Interchange Format</s:String>
+    <s:String x:Key="S.SaveAs.Webp">Webp</s:String>
+    <s:String x:Key="S.SaveAs.Webp.Info">Web kép</s:String>
+    
+    <s:String x:Key="S.SaveAs.Avi">Avi</s:String>
+    <s:String x:Key="S.SaveAs.Avi.Info">Audio Video Interleave</s:String>
+    <s:String x:Key="S.SaveAs.Mkv">Mkv</s:String>
+    <s:String x:Key="S.SaveAs.Mkv.Info">Matroska</s:String>
+    <s:String x:Key="S.SaveAs.Mov">Mov</s:String>
+    <s:String x:Key="S.SaveAs.Mov.Info">QuickTime fájlformátum</s:String>
+    <s:String x:Key="S.SaveAs.Mp4">Mp4</s:String>
+    <s:String x:Key="S.SaveAs.Mp4.Info">Mpeg-4</s:String>
+    <s:String x:Key="S.SaveAs.Webm">Webm</s:String>
+    <s:String x:Key="S.SaveAs.Webm.Info">Web Film</s:String>
+    
+    <s:String x:Key="S.SaveAs.Bmp">Bmp</s:String>
+    <s:String x:Key="S.SaveAs.Bmp.Info">Bittérkép</s:String>
+    <s:String x:Key="S.SaveAs.Jpeg">Jpeg</s:String>
+    <s:String x:Key="S.SaveAs.Jpeg.Info">Joint Photographic Experts Group</s:String>
+    <s:String x:Key="S.SaveAs.Png">Png</s:String>
+    <s:String x:Key="S.SaveAs.Png.Info">Portable Network Graphics</s:String>
+    
     <s:String x:Key="S.SaveAs.Project">Projekt</s:String>
+    <s:String x:Key="S.SaveAs.Project.Info">ScreenToGif projekt</s:String>
     <s:String x:Key="S.SaveAs.Psd">PSD</s:String>
-    <s:String x:Key="S.SaveAs.Video">Videó</s:String>
+    <s:String x:Key="S.SaveAs.Psd.Info">Photoshop fájl</s:String>
+    
+    <!--Editor • Save as > Presets-->
+    <s:String x:Key="S.SaveAs.Presets">Előbeállítások:</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Default">Alapértelmezett</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Add">Hozzáadás</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Save">Mentés</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Edit">Szerkesztés</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Remove">Eltávolítás</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Reset">Visszaállítás</s:String>
+    
+    <!--Editor • Save as > Presets > Dialogs-->
+    <s:String x:Key="S.SaveAs.Presets.Ask.Delete.Title">Előbeállítás törlése</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Ask.Delete.Instruction">Biztos, hogy törölni szeretné az előbeállítást?</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Ask.Delete.Message">Ez a művelet nem vonható vissza.&#10;&#10;Szeretnéd törölni a kiválasztott előbeállítást?</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Ask.Reset.Title">Az előbeállítás visszaállítása</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Ask.Reset.Instruction">Biztos, hogy vissza akarod állítani az előbeállítást?</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Ask.Reset.Message">Ez a művelet nem vonható vissza.&#10;&#10;Szeretnéd visszaállítani a kiválasztott előbeállításokat az alapértelmezett beállításaikra?</s:String>
     
     <!--Editor • Save as > Encoder-->
     <s:String x:Key="S.SaveAs.Encoder">Kódoló</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Quantizer">Kódoló és kvantáló</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Info">A kimeneti fájl létrehozásáért felelős kódoló.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">ScreenToGif</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Tooltip">A beépített kódolót használja az alábbi színcsökkentési módszerrel.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Info">Beépített kódoló.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System">Rendszer</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.System.Tooltip">Alapértelmezett palettát használ.</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.Apng">ScreenToGif</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.Apng.Tooltip">A kódolót a ScreenToGif fejlesztője készítette.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.System.Info">A rendszer által rendelkezésre álló kódoló.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Ffmpeg.Info">Külső kódoló, melyet az FFmpeg.org készített.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Gifski.Info">Külső kódoló, amelyet a Gif.ski készített.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Options">Kódoló beállítások</s:String>
+    
+    <!--Editor • Save as > FFmpeg-->
+    <s:String x:Key="S.SaveAs.Ffmpeg.UseParameters">Haladó mód engedélyezése</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.UseParameters.Info">Kézzel add meg a paramétereket a kódoló vezérléséhez.</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Parameters">Paraméterek:</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Parameters.Info">Az FFmpeg-nek átadott paraméterek listája.&#10;&#10;Speciális paraméterek:&#10;{I} a bemeneti elérési útvonal (a képkockáké).&#10;{O} a kimeneti elérési útvonal (az exportált fájlé).&#10;{W} a képkocka szélessége.&#10;{H} a képkocka magassága.</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Parameters.Pass">A 2-pass kódoláshoz egyszerűen add hozzá a '-pass 2'-t.</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Preview">Előnézet</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Preview.Info">Az FFmpeg-nek átadásra kerülő paraméterlista előnézete.</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Help.Code">Kodek dokumentáció</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Help.Format">Formátum dokumentáció</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Help.Filters">Szűrő dokumentáció</s:String>
     
     <!--Editor • Save as > Gif options-->
     <s:String x:Key="S.SaveAs.GifOptions">Gif beállítások</s:String>
@@ -1345,6 +1531,10 @@
     <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">Színek maximális száma (minden egyes képkockához).</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable">Használjon globális színtáblázatot.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable.Info">Csökkentheti a gif minőségét és/vagy méretét.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Best">Legjobb</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Fastest">Leggyorsabb</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Gifski.Faster">Használjon még gyorsabb kódolási eljárást.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Gifski.Faster.Info">Csökkentheti a gif minőségét.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Loop">Végtelenítés:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Looped">Végtelenített Gif.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Ismétlés örökké</s:String>
@@ -1358,49 +1548,112 @@
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma">Cserélje le ezeket a képpontokat egy chroma kulcsra.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma.Info">Az ismétlődő/változatlan képpontokat a rendszer lecseréli ezzel a chroma kulccsal,&#10;lehetővé téve kevesebb szín használatát képkockánként.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.ChromaKey">Chroma kulcs:</s:String>
-
+    <s:String x:Key="S.SaveAs.GifOptions.Dither">Árnyalás:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Dither.Scale">Bayer-skála:</s:String>
+    
     <!--Editor • Save as > Apng options-->
     <s:String x:Key="S.SaveAs.ApngOptions">Apng beállítások</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Prediction">Előrejelzés:</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Prediction.None">Nincs</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Prediction.Sub">Sub</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Prediction.Up">Fel</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Prediction.Average">Átlag</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Prediction.Mixed">Kevert</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions.Looped">Végtelenített Apng.</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions.DetectUnchanged">A változatlan képpontok észlelése.</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions.PaintTransparent">Az összes változatlan képpontot átlátszó színnel fesse.</s:String>
     
-    <!--Editor • Save as > Video/Images/Psd/Project options-->
-    <s:String x:Key="S.SaveAs.VideoOptions">Videó beállítások</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.Fps">Képkocka/másodperc:</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.FlipVertically">A videó tükrözése (függőlegesen)</s:String>
-    <s:String x:Key="S.SaveAs.ImagesOptions">Kép beállítások</s:String>
+    <!--Editor • Save as > Webp options-->
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset">Előbeállítás:</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.None">Nincs</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Default">Alapértelmezett</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Picture">Kép</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Photo">Fotó</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Drawing">Rajzolás</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Icon">Ikon</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Text">Szöveg</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.Lossless">Veszteségmentes mód használata.</s:String>
+    
+    <!--Editor • Save as > Video options-->
+    <s:String x:Key="S.SaveAs.VideoOptions.Mode">Mód:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Mode.Normal">Normál</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Mode.Advanced">Haladó</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Mode.Info">A kódoló paramétereinek konfigurálási módja:&#10;Normál: A szabványos UI-vezérlők használata.&#10;Haladó: Szövegdoboz használata a paraméterek beírásához.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Codec">Kodek:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Codec.Info">A videó kódoló, amely a nyers pixelek&#10;kimeneti fájlba való átalakításáért felel.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset">Előbeállítás:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.None">Nincs</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.VerySlow">Nagyon lassú</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Slower">Lassabb</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Slow">Lassú</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Medium">Közepes</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Fast">Gyors</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Faster">Gyorsabb</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.VeryFast">Nagyon gyors</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.SuperFast">Szuper gyors</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.UltraFast">Ultra gyors</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Quality">Minőség</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Balanced">Kiegyensúlyozott</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Speed">Sebesség</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Default">Alapértelmezett</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Lossless">Veszteségmentes</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.LosslessHp">Veszteségmentes (nagy teljesítményű)</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Hp">Nagy teljesítmény</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Hq">Kiváló minőség</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Bd">Bluray lemez</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.LowLatency">Alacsony késleltetés</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.LowLatencyHp">Alacsony késleltetés (nagy teljesítmény)</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.LowLatencyHq">Alacsony késleltetés (magas minőség)</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Info">Kódolási sebesség a tömörítési arányhoz&#10;a lassabb előbeállítások jobb tömörítést adhatnak&#10;(minőség / fájlméret).</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration">Hardveres gyorsítás:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration.Off">Ki</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration.On">Be</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration.Auto">Automatikus kiválasztás</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration.Info">A dedikált hardver (videógrafika) használatát szabályozza.&#10;Ki: Nem használ dedikált hardvert.&#10;Be: Dedikált hardvert használ, és lehetővé teszi a speciális kódolók kiválasztását.&#10;Auto: Dedikált hardvert használ, és lehetőség szerint automatikusan kiválasztja a megfelelő kódolót.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.PixelFormat">Pixelformátum:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.PixelFormat.Auto">Automatikus</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Vsync">Virt. szinkron.:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Vsync.Info">Videószinkronizálási módszer.&#10;Automatikus: 1 és 2 között választ a muxer (formátum) képességeitől függően.&#10;Passthrough: Minden egyes képkocka az időbélyegekkel együtt kerül át a kódolóhoz.&#10;Állandó: A képkockák duplikálódnak és kiesnek, hogy pontosan a kért állandó képkockasebességet érjék el.&#10;Változó: A képkockák az időbélyegzőjükkel együtt kerülnek átadásra vagy elhagyásra, hogy megakadályozza, hogy 2 képkockának ugyanaz legyen az időbélyege.&#10;Eldobás: Mint a passthrough, de az összes időbélyegzőt megsemmisíti, így a kódoló a képkockasebesség alapján új időbélyegzőket generál.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Vsync.Passthrough">Passthrough</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Vsync.Cfr">Állandó képkockasebesség</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Vsync.Vfr">Változó képkockasebesség</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Vsync.Drop">Eldobás</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Framerate">Képkockasebesség:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Framerate.Film">Film</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Framerate.Custom">Egyéni</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Pass">Lépés:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Crf.Info">Állandó sebességtényező.&#10;Minőség- és sebességszabályozási beállítás.&#10;Hagyd üresen, ha nem kívánod beállítani ezt a tulajdonságot.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.QualityLevel">Minőségi szint:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.QualityLevel.Info">A kisebb értékek jobb minőséget jelentenek.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate">Bitráta:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Info">Cél videó bitráta.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Mode">Bitráta mód:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Mode.Constant">Állandó</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Mode.Variable">Változó</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Minimum">Minimális ráta:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Minimum.Info">Minimális bitráta-tolerancia.&#10;Leghasznosabb az állandó bitráta mód használatakor.&#10;Hagyd üresen vagy állítsd nullára, ha nem kívánod beállítani ezt a tulajdonságot.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Maximum">Maximális ráta:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Maximum.Info">Maximális bitráta tolerancia.&#10;A puffer méretét is be kell állítani.&#10;Hagyd üresen vagy állítsd nullára, ha nem kívánod beállítani ezt a tulajdonságot.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Buffer">Puffer mérete:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Buffer.Info">A sebességszabályozó puffer mérete.&#10;Hagyd üresen vagy állítsd nullára &#10;ha nem kívánod beállítani ezt a tulajdonságot.</s:String>
+
+    <!--Editor • Save as > Image options-->
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">Kép becsomagolása Zip-be.</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions">Psd beállítások</s:String>
+    <s:String x:Key="S.SaveAs.ImageOptions.Zip.Info">A képeket egy becsomagolt mappába exportálja.</s:String>
+    
+    <!--Editor • Save as > Psd options-->
     <s:String x:Key="S.SaveAs.PsdOptions.Compress">A kép tömörítése.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Compress.Info">Tömörítse a képadatokat a RLE algoritmus segítségével.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline">Az idővonal adatainak mentése.</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Info">A képkockák időzítését exportálja, ahelyett, hogy csak a képkocákat.</s:String>
-    <s:String x:Key="S.SaveAs.ProjectOptions">Projekt beállítások</s:String>
     
-    <s:String x:Key="S.SaveAs.Extras">Extrák:</s:String>
-    <s:String x:Key="S.SaveAs.Presets">Előbeállítások:</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Default">Alapértelmezett</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Add">Hozzáadás</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Save">Mentés</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Edit">Szerkesztés</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Remove">Eltávolítás</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Remove.Title">Előbeállítás eltávolítása</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Remove.Header">El kívánod távolítani az előbeállítást?</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Remove.Message">Ez a művelet nem vonható vissza, de később újra hozzáadhatod az előbeállítást.</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Reset">Visszaállítás</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Reset.Title">Előbeállítás visszaállítása</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Reset.Header">Visszaállítod az előbeállítást az alapértelmezett paraméterekre?</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Reset.Message">Ez a művelet nem vonható vissza, de később újra szerkesztheted az előbeállítást.</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Warning.NoSelection">Nincs FFmpeg előbeállítás kiválasztva, kérlek, válassz egyet.</s:String>
-    
-    <!--Save As • Save options-->
+    <!--Editor • Save as > Save options-->
     <s:String x:Key="S.SaveAs.SaveOptions">Mentés beállítások</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.Partial">Részleges exportálás.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">A fájl mentése egy kiválasztott mappába.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Felülírás (ha már létezik).</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Mentés projektként is (ugyanaz a mappa, ugyanaz a fájlnév).</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Fájl feltöltése.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.UploadDestination">Feltöltési cél</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">Másolás a vágólapra.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File">Fájl</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File.Info">A kimeneti fájlt a vágólapra másolja.</s:String>
@@ -1413,9 +1666,30 @@
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Kódolás utáni parancsok végrehajtása.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Írd be a kódolás után végrehajtandó parancsokat.&#x0d;Több parancs végrehajtásához írd be mindegyiket egy különálló sorba.&#x0d;Makrók:&#x0d;{p} = Kimeneti fájl elérési útja.&#x0d;{f} = Kimeneti mappa elérési útja.&#x0d;{u} = A feltöltött fájl URL-címe.</s:String>
     
-    <!--Save As • File-->
+    <!--Editor • Save As > Partial export-->
+    <s:String x:Key="S.SaveAs.Partial">Részleges exportálás</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode">Mód:</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Info">Válaszd ki a részleges exportálási módszert.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Expression">Kifejezés</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Expression.Info">Az animáció egyes részeinek exportálása egy egyszerű kifejezés alapján.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Frames">Képkocka tartomány</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Frames.Info">Az animációnak csak egy részét exportálja a képkockatartományon belül.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Time">Időintervallum</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Time.Info">Az animációnak csak egy részét exportálja az időkereten belül.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Selection">Kiválasztás</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Selection.Info">Csak az idővonalon kijelölt képkockákat exportálja.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Selection.None">Nincs képkocka kiválasztva.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Selection.Singular">1 képkocka kiválasztva.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Selection.Plural">{0} képkocka kiválasztva.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.From">Kezdet:</s:String>
+    <s:String x:Key="S.SaveAs.Partial.To">Vég:</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Expression">Kifejezés:</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Expression.Info">Írd be a képkockaszámokat vesszővel elválasztva vagy&#10;a képkockasorozatokat mínusz jellel elválasztva:&#10;1, 3, 4, 6 - 9</s:String>
+    
+    <!--Editor • Save as > File-->
     <s:String x:Key="S.SaveAs.File">Fájl</s:String>
     <s:String x:Key="S.SaveAs.File.Location">Cél mappa.</s:String>
+    <s:String x:Key="S.SaveAs.File.SelectFolder">Válaszd ki a kimeneti mappát</s:String>
     <s:String x:Key="S.SaveAs.File.Choose">Válaszd ki a helyet.&#x0d;Nyomd le a Shift billentyűt és kattints,&#x0d;hogy a fájlnevet is kiválaszd.</s:String>
     <s:String x:Key="S.SaveAs.File.Format">Fájl formátuma</s:String>
     <s:String x:Key="S.SaveAs.File.Name">A fájl neve. Dátum/idő formátum beszúrása '?' közé </s:String>
@@ -1424,8 +1698,15 @@
     <s:String x:Key="S.SaveAs.File.Decrease">A fájlszám csökkentése</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">Egy azonos nevű fájl már létezik.</s:String>
     <s:String x:Key="S.SaveAs.File.Clipboard">Mentés a vágólapra.</s:String>
+    
+    <!--Editor • Save as > Warnings-->
     <s:String x:Key="S.SaveAs.Warning.Type">Ki kell választanod, hogy hová szeretnéd menteni a fájlt (egy mappába, a vágólapra vagy máshová feltölteni).</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Extension">Nem választottad ki a fájlkiterjesztést.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Ffmpeg.Empty">A haladó mód kiválasztásakor a paramétereket a paraméterek mezőbe kell beírnod.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Ffmpeg.MissingPath">A paraméterek mezőből hiányoznak a {I} (bemenet) és/vagy {O} (kimenet) speciális paraméterek.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Commands.Empty">A kódolás utáni parancs végrehajtásához be kell valamit írnod a Parancsok szövegmezőbe.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Partial.NoSelection">Legalább egy képkockát ki kell választanod, ha csak a kiválasztott képkockák exportálására van lehetőség.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Partial.InvalidExpression">A projekt részleges exportálására vonatkozó kifejezés érvénytelen.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Upload.None">Nincs kijelölt feltöltési szolgáltatás. Ki kell választanod egy célt.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Upload.NotAuthorized">Nem lehet feltölteni a kijelölt szolgáltatásba, mert nem volt engedélyezve. Az alkalmazás engedélyezéséhez látogass el az Beállítások > Feltöltési szolgáltatások részhez.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Copy.Link">A hivatkozás másolásának lehetősége nem választható ki, mert nem állítottad be a fájl feltöltését.</s:String>
@@ -1435,12 +1716,37 @@
     <s:String x:Key="S.SaveAs.Warning.Filename">Ki kell választanod egy fájlnevet.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Filename.Invalid">A kimeneti fájlnév egy vagy több érvénytelen karaktert tartalmaz. Válassz egy érvényes fájlnevet.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Overwrite">A fájlnév már használatban van. Állítsd be, hogy felülírja vagy válassz egy másik fájlnevet.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Overwrite.Project">Már van egy projekt ugyanezzel a fájlnévvel. Állítsd be a felülírást, vagy válassz másik fájlnevet vagy mappát.</s:String>
     <s:String x:Key="S.SaveAs.Warning.Canceled">A művelet megszakadt.</s:String>
     
-    <!--SaveAs • Export-->
+    <!--Editor • Save As > Upload-->
+    <s:String x:Key="S.SaveAs.Upload">Feltöltés</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Info">Válaszd ki a feltöltési előbeállítást, amely a feltöltéshez használt szolgáltatás adatait tartalmazza.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Limit">Ez a feltöltési szolgáltatás korlátokat szab.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Add">Új feltöltési előbeállítás hozzáadása.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Edit">Feltöltési előbeállítások szerkesztése.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.History">A feltöltési előbeállítás előzményeinek megtekintése.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Remove">Az aktuálisan kiválasztott feltöltési előbeállítás eltávolítása.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Select.Title">Válassz ki egy feltöltési előbeállítást</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Select.Description">Válassz egyet a listáról.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Unavailable.Title">Ehhez a formátumhoz nem áll rendelkezésre feltöltési előbeállítás</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Unavailable.Description">Egy előbeállítás hozzáadása az alábbi gomb használatával.</s:String>
+    
+    <!--Editor • Save as > Upload > Dialogs-->
+    <s:String x:Key="S.SaveAs.Upload.Ask.Delete.Title">A feltöltési előbeállítás törlése</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Ask.Delete.Instruction">Biztos, hogy törölni szeretnéd a feltöltési előbeállítást?</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Ask.Delete.Message">Ez a művelet nem vonható vissza.&#10;&#10;Szeretnéd törölni a kiválasztott feltöltési előbeállítást?</s:String>
+    
+    <!--Save As • Dialogs-->
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Title">Képkockák exportálása</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">Biztos vagy benne, hogy exportálni akarod a képkockákat?</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">Ez a művelet {0} képkockát közvetlenül a kijelölt mappába exportál.</s:String>
+    
+    <!--Command Preview-->
+    <s:String x:Key="S.CommandPreviewer.Title">Parancs előnézet</s:String>
+    <s:String x:Key="S.CommandPreviewer.Command">Parancs</s:String>
+    <s:String x:Key="S.CommandPreviewer.Input">Bemeneti elérési útvonal</s:String>
+    <s:String x:Key="S.CommandPreviewer.Output">Kimeneti elérési útvonal</s:String>
     
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">Visszajelzés</s:String>
@@ -1511,4 +1817,17 @@
     <!--Orientation-->
     <s:String x:Key="S.Orientation.Horizontal">Vízszintes</s:String>
     <s:String x:Key="S.Orientation.Vertical">Függőleges</s:String>
+    
+    <!--TextAlignment-->
+    <s:String x:Key="S.TextAlignment.Left">Balra</s:String>
+    <s:String x:Key="S.TextAlignment.Right">Jobbra</s:String>
+    <s:String x:Key="S.TextAlignment.Center">Középre</s:String>
+    <s:String x:Key="S.TextAlignment.Justify">Sorkizárt</s:String>
+    
+    <!--TextDecoration-->
+    <s:String x:Key="S.TextDecorations.None">Nincs</s:String>
+    <s:String x:Key="S.TextDecorations.Underline">Aláhúzás</s:String>
+    <s:String x:Key="S.TextDecorations.Strikethrough">Áthúzás</s:String>
+    <s:String x:Key="S.TextDecorations.OverLine">Felső vonal</s:String>
+    <s:String x:Key="S.TextDecorations.Baseline">Alsó vonal</s:String>
 </ResourceDictionary>
