@@ -525,7 +525,7 @@
     <s:String x:Key="S.Options.Upload.Preset.Imgur.ToAlbum">将 Gif 上传到所选的相册</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Imgur.Album">相册：</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Imgur.AskMe">上传前询问我</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Imgur.Reload">重新加载专辑列表。</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Reload">重新加载相册列表。</s:String>
     
     <s:String x:Key="S.Options.Upload.Preset.Gfycat.Defaults">默认</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Gfycat.AskMe">询问我填写上传的详细信息。</s:String>
