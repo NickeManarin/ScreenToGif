@@ -34,24 +34,31 @@
     <s:String x:Key="S.MinHeight">最小高度：</s:String>
     <s:String x:Key="S.AndOr">和/或</s:String>
     
-    <!--Warning messages-->
+    <!--Warnings-->
     <s:String x:Key="S.Crash">哦，不，应用程序崩溃了 :(</s:String>
-    <s:String x:Key="S.Required">必填字段。</s:String>
+    <s:String x:Key="S.Required">必填字段</s:String>
     <s:String x:Key="S.Warning.Net.Title">缺少依赖项</s:String>
     <s:String x:Key="S.Warning.Net.Header">Net Framework 4.8 不存在</s:String>
-    <s:String x:Key="S.Warning.Net.Message">为了正确使用此应用程序，您需要下载正确版本的 .Net Framework。
-您要打开网页进行下载吗？</s:String>
-    <s:String x:Key="S.Warning.Single.Title">允许一个实例</s:String>
+    <s:String x:Key="S.Warning.Net.Message">为了正确使用此应用程序，您需要下载正确版本的 .Net Framework。&#10;您要打开网页进行下载吗？</s:String>
+    <s:String x:Key="S.Warning.Single.Title">仅允许一个实例</s:String>
     <s:String x:Key="S.Warning.Single.Header">该应用程序已在运行</s:String>
-    <s:String x:Key="S.Warning.Single.Message">ScreenToGif 已经在运行，但是显然没有打开任何窗口。 检查系统托盘，其中必须有一个 ScreenToGif 图标。</s:String>
+    <s:String x:Key="S.Warning.Single.Message">ScreenToGif 已经在运行，但显然没有打开任何窗口。检查系统托盘，其中一定有一个 ScreenToGif 图标。</s:String>
     
     <s:String x:Key="S.SavingSettings.Title">保存设置</s:String>
     <s:String x:Key="S.SavingSettings.Instruction">您想再次尝试保存它吗？</s:String>
-    <s:String x:Key="S.SavingSettings.Message">似乎 ScreenToGif 没有足够的特权将设置保存到磁盘。&#10;&#10;您想以管理员权限重试一次吗？</s:String>
+    <s:String x:Key="S.SavingSettings.Message">ScreenToGif 似乎没有足够的特权将设置保存到磁盘。&#10;&#10;您想以管理员权限重试一次吗？</s:String>
     
     <s:String x:Key="S.Exiting.Title">退出 ScreenToGif</s:String>
     <s:String x:Key="S.Exiting.Instruction">你确定要退出吗？</s:String>
     <s:String x:Key="S.Exiting.Message">所有窗口将被关闭，托盘图标将被移除。</s:String>
+    
+    <!--Warnings • Graphics engine-->
+    <s:String x:Key="S.Warning.Graphics.Title">切换图形适配器</s:String>
+    <s:String x:Key="S.Warning.Graphics.Instruction">切换到正确的图形适配器，以捕获所选的屏幕</s:String>
+    <s:String x:Key="S.Warning.Graphics.Message">由于DirectX的限制，ScreenToGif必须与被捕获的屏幕在同一个图形适配器上运行。</s:String>
+    <s:String x:Key="S.Warning.Graphics.Action">打开 Windows设置 > 系统 > 显示 > 图形设置，或点击下面的链接，为ScreenToGif切换图形适配器设置。</s:String>
+    <s:String x:Key="S.Warning.Graphics.Action.Legacy">打开你的图形适配器的图形设置，为ScreenToGif切换图形适配器。</s:String>
+    <s:String x:Key="S.Warning.Graphics.Switch">打开 Windows 设置</s:String>
     
     <!--Keys-->
     <s:String x:Key="S.Keys.Space">空格键</s:String>
@@ -72,13 +79,13 @@
     <s:String x:Key="S.Command.InsertBoardRecording">插入白板录制</s:String>
     <s:String x:Key="S.Command.InsertFromMedia">从媒体插入（图像和视频）</s:String>
     <s:String x:Key="S.Command.SaveAs">另存为...</s:String>
-    <s:String x:Key="S.Command.Load">加载文件（图像，视频和项目）</s:String>
+    <s:String x:Key="S.Command.Load">加载文件（图像、视频和项目）</s:String>
     <s:String x:Key="S.Command.LoadRecent">加载最近的项目</s:String>
     <s:String x:Key="S.Command.DiscardProject">放弃当前项目</s:String>
     <s:String x:Key="S.Command.OverrideDelay">覆盖帧延迟</s:String>
     <s:String x:Key="S.Command.IncreaseDecreaseDelay">增加/减少帧延迟</s:String>
     <s:String x:Key="S.Command.ScaleDelay">帧缩放延迟</s:String>
-    <s:String x:Key="S.Command.Zoom100">设置缩放到 100％</s:String>
+    <s:String x:Key="S.Command.Zoom100">设置缩放到 100%</s:String>
     <s:String x:Key="S.Command.SizeToContent">调整窗口到帧大小</s:String>
     <s:String x:Key="S.Command.FitImage">使图像适合可用的窗口大小</s:String>
     <s:String x:Key="S.Command.FirstFrame">选择第一帧</s:String>
@@ -151,14 +158,13 @@
     <s:String x:Key="S.Updater.Title">更新</s:String>
     <s:String x:Key="S.Updater.Header">一个新的更新可用</s:String>
     <s:String x:Key="S.Updater.NewRelease">新版本发布！</s:String>
-    <s:String x:Key="S.Updater.NewRelease.Info">新版本 {0} 可用！点击此处查看。</s:String>
+    <s:String x:Key="S.Updater.NewRelease.Info">新版本 {0} 可用！&#x0d;点击此处查看。</s:String>
     <s:String x:Key="S.Updater.Version">版本</s:String>
     <s:String x:Key="S.Updater.Portable">便携版</s:String>
     <s:String x:Key="S.Updater.Installer">安装程序</s:String>
     <s:String x:Key="S.Updater.Info.WhatsNew">新功能</s:String>
     <s:String x:Key="S.Updater.Info.BugFixes">错误修复：</s:String>
-    <s:String x:Key="S.Updater.Info.NewVersionAvailable">您可以下载新版本。
-您要打开浏览器进行下载吗？</s:String>
+    <s:String x:Key="S.Updater.Info.NewVersionAvailable">您可以下载新版本。&#x0d;您要打开浏览器进行下载吗？</s:String>
     <s:String x:Key="S.Updater.RunAfter">更新后执行该应用程序。</s:String>
     <s:String x:Key="S.Updater.Download">下载</s:String>
     <s:String x:Key="S.Updater.Install">安装</s:String>
@@ -171,7 +177,7 @@
     <!--Downloader-->
     <s:String x:Key="S.Downloader.Title">ScreenToGif - 下载器</s:String>
     <s:String x:Key="S.Downloader.Header">下载器</s:String>
-    <s:String x:Key="S.Downloader.Size">{0} of {1}</s:String>
+    <s:String x:Key="S.Downloader.Size">已下载 {0}，共计 {1}</s:String>
     
     <!--Options-->
     <s:String x:Key="S.Options.Title">ScreenToGif - 选项</s:String>
@@ -182,7 +188,7 @@
     <s:String x:Key="S.Options.Shortcuts">键盘快捷键</s:String>
     <s:String x:Key="S.Options.Language">语言</s:String>
     <s:String x:Key="S.Options.Storage">临时文件</s:String>
-    <s:String x:Key="S.Options.Extras">额外</s:String>
+    <s:String x:Key="S.Options.Extras">附加功能</s:String>
     <s:String x:Key="S.Options.Upload">上传服务</s:String>
     <s:String x:Key="S.Options.Donate">捐赠</s:String>
     <s:String x:Key="S.Options.About">关于</s:String>
@@ -200,9 +206,7 @@
     <s:String x:Key="S.Options.App.Startup.Mode.Automatic.Info">Windows 启动后将执行该应用程序。</s:String>
     <s:String x:Key="S.Options.App.Startup.Mode.Warning">无法在启动模式之间交替。</s:String>
     <s:String x:Key="S.Options.App.Startup.Instance.Single">仅允许一个实例</s:String>
-    <s:String x:Key="S.Options.App.Startup.Instance.Single.Info">您将可以为每个用户和可执行文件运行一次该应用程序，
-意味着不同的用户或可执行实例可以共存。
-当再次尝试执行该应用程序时，第二个实例将尝试将焦点放在第一个实例上并自行结束。</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Single.Info">您将可以为每个用户和可执行文件运行一次该应用程序，&#10;意味着不同的用户或可执行实例可以共存。&#10;当再次尝试执行该应用程序时，第二个实例将尝试将焦点放在第一个实例上并自行结束。</s:String>
     <s:String x:Key="S.Options.App.Startup.Instance.Multiple">允许多个实例</s:String>
     <s:String x:Key="S.Options.App.Startup.Instance.Multiple.Info">您可以无限制地同时运行该应用程序多次。</s:String>
     <s:String x:Key="S.Options.App.Startup.Tray">启动最小化到系统托盘</s:String>
@@ -239,8 +243,8 @@
     <s:String x:Key="S.Options.App.Tray.Interactions.Else">否则，打开：</s:String>
     <s:String x:Key="S.Options.App.General">常规</s:String>
     <s:String x:Key="S.Options.App.General.WorkaroundQuota">解决“配额不足...”崩溃的方法</s:String>
-    <s:String x:Key="S.Options.App.General.WorkaroundQuota.Info">（实验）</s:String>
-    <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">关闭应用程序之前询问我（通过'退出'命令）</s:String>
+    <s:String x:Key="S.Options.App.General.WorkaroundQuota.Info">（实验性）</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">关闭应用程序之前询问我（通过“退出”命令）</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">禁用硬件加速</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">（用户界面将通过软件模式呈现）</s:String>
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">检查翻译更新</s:String>
@@ -263,14 +267,11 @@
     <s:String x:Key="S.Options.Recorder.Frequency.Interaction">用户交互</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Interaction.Info">每次单击或键入内容时，都会捕获帧。</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Second">每秒</s:String>
-    <s:String x:Key="S.Options.Recorder.Frequency.Second.Info">基于录像机屏幕上设置的帧率分母，
-将以“每秒”为基础捕获帧。</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Second.Info">基于录像机屏幕上设置的帧率分母，&#10;将以“每秒”为基础捕获帧。</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Minute">每分钟</s:String>
-    <s:String x:Key="S.Options.Recorder.Frequency.Minute.Info">基于录像机屏幕上设置的帧率分母，
-将以“每分钟”（间隔）的时间捕获帧。</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Minute.Info">基于录像机屏幕上设置的帧率分母，&#10;将以“每分钟”（间隔）的时间捕获帧。</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Hour">每小时</s:String>
-    <s:String x:Key="S.Options.Recorder.Frequency.Hour.Info">基于录像机屏幕上设置的帧速率分母，
-将以“每小时”为基础（延时）捕获帧。</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Hour.Info">基于录像机屏幕上设置的帧速率分母，&#10;将以“每小时”为基础（延时）捕获帧。</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Playback">播放延迟：</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Playback.Info">（以毫秒为单位，每个捕获的帧将设置为此延迟）</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Interval">每帧将以 {0} 的间隔进行捕获。</s:String>
@@ -301,8 +302,8 @@
     <s:String x:Key="S.Options.Recorder.CaptureChanges.Info">（仅当在捕获区域内进行了某些更改时，才会捕获帧）</s:String>
     <s:String x:Key="S.Options.Recorder.RemoteImprovement">提高远程桌面连接上的捕获性能</s:String>
     <s:String x:Key="S.Options.Recorder.RemoteImprovement.Info">（禁用分层窗口捕获）</s:String>
-    <s:String x:Key="S.Options.Recorder.AsyncRecording">启用异步录制</s:String>
-    <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">（有助于减少录制时界面卡顿）</s:String>
+    <s:String x:Key="S.Options.Recorder.ForceGarbageCollection">在捕获过程中强制清理内存。</s:String>
+    <s:String x:Key="S.Options.Recorder.ForceGarbageCollection.Info">（减少捕捉过程中的内存使用，但降低了性能）</s:String>
     
     <s:String x:Key="S.Options.Recorder.Guidelines">指导方针</s:String>
     <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds">三分法则</s:String>
@@ -322,6 +323,8 @@
     <s:String x:Key="S.Options.Recorder.Compact.Info">（显示录制器命令面板的较小版本）</s:String>
     <s:String x:Key="S.Options.Recorder.DisplayDiscard">显示放弃按钮也同时录制</s:String>
     <s:String x:Key="S.Options.Recorder.DisplayDiscard.Info">（通常，仅在暂停状态下可见）</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionImprovement">提高屏幕选择性能。 </s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionImprovement.Info">（通过显示屏幕的静态视图，减少屏幕选择时的延迟）</s:String>
     
     <s:String x:Key="S.Options.Recorder.RememberSize">记住录制区域的先前大小</s:String>
     <s:String x:Key="S.Options.Recorder.RememberPosition">记住录制区域的先前位置</s:String>
@@ -375,8 +378,7 @@
     <s:String x:Key="S.Options.Tasks.Enable">启用此任务</s:String>
     <s:String x:Key="S.Options.Tasks.SelectType">（选择一个任务）</s:String>
     <s:String x:Key="S.Options.Tasks.SelectType.Info">在上方选择一个任务</s:String>
-    <s:String x:Key="S.Options.Tasks.Info">这些任务从列表顶部到底部顺序执行。
-当您第一次使用编辑器打开项目时会发生这种情况。</s:String>
+    <s:String x:Key="S.Options.Tasks.Info">这些任务从列表顶部到底部顺序执行。&#10;当您第一次使用编辑器打开项目时会发生这种情况。</s:String>
   
     <!--Options • Shortcuts-->
     <s:String x:Key="S.Options.Shortcuts.Global">全局</s:String>
@@ -403,8 +405,7 @@
     <s:String x:Key="S.Options.Shortcuts.Recorders.Follow.Info">（根据光标的位置切换记录区域的调整）</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.DisableFollow">禁用以下内容：</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.DisableFollow.Info">（暂时禁用基于光标位置的记录区域调整，仅接受修饰键）</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Info">单击以设置键盘焦点，然后按所需的键和修饰符。
-一些按键组合是不允许的。</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Info">单击以设置键盘焦点，然后按所需的键和修饰符。&#10;一些按键组合是不允许的。</s:String>
     
     <!--Options • Language-->
     <s:String x:Key="S.Options.Language.AppLanguage">应用程序语言</s:String>
@@ -425,10 +426,9 @@
     <!--Options • Storage-->
     <s:String x:Key="S.Options.Storage.Status">状态</s:String>
     <s:String x:Key="S.Options.Storage.Status.Volume">卷：</s:String>
-    <s:String x:Key="S.Options.Storage.Status.FreeSpace">{1} 可用  {0}</s:String>
+    <s:String x:Key="S.Options.Storage.Status.FreeSpace">共计 {1}  可用 {0}</s:String>
     <s:String x:Key="S.Options.Storage.Status.Check">再次检查剩余的空间。</s:String>
-    <s:String x:Key="S.Options.Storage.Status.Clear">清除缓存文件夹。
-您将可以决定是否要保留最近的项目。</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Clear">清除缓存文件夹。&#10;您将可以决定是否要保留最近的项目。</s:String>
     <s:String x:Key="S.Options.Storage.Status.LowSpace">当前配置的硬盘驱动器上空间不足。请清理临时缓存文件夹或更改位置。</s:String>
     <s:String x:Key="S.Options.Storage.Status.Error">无法检索驱动器详细信息。</s:String>
     <s:String x:Key="S.Options.Storage.Status.Files.None">没有文件</s:String>
@@ -450,12 +450,8 @@
     <s:String x:Key="S.Options.Storage.NotExists">不存在</s:String>
     <s:String x:Key="S.Options.Storage.CreateSettings">创建一个空的本地设置文件</s:String>
     <s:String x:Key="S.Options.Storage.RemoveSettings">删除设置文件</s:String>
-    <s:String x:Key="S.Options.Storage.OpenSettingsFolder">打开设置文件所在的文件夹。
-在按住 Ctrl 键的同时，单击打开文件（如果可能）。</s:String>
-    <s:String x:Key="S.Options.Storage.SettingsInfo">• 设置加载模式：默认 ◄ AppData ◄ 本地。
-• 如果本地文件夹中没有设置文件，此应用将在 AppData 文件夹中进行搜索。
-• 如果没有设置文件，则使用默认值。
-• 如果没有本地设置，保存所有设置将到 AppData 设置文件中。</s:String>
+    <s:String x:Key="S.Options.Storage.OpenSettingsFolder">打开设置文件所在的文件夹。&#x0d;在按住 Ctrl 键的同时，单击打开文件（如果可能）。</s:String>
+    <s:String x:Key="S.Options.Storage.SettingsInfo">• 设置加载模式：默认 ◄ AppData ◄ 本地。&#x0d;• 如果本地文件夹中没有设置文件，此应用将在 AppData 文件夹中进行搜索。&#x0d;• 如果没有设置文件，则使用默认值。&#x0d;• 如果没有本地设置，保存所有设置将到 AppData 设置文件中。</s:String>
     <s:String x:Key="S.Options.Storage.DeleteEverything">关闭应用程序时从缓存中删除所有文件</s:String>
     <s:String x:Key="S.Options.Storage.AskDeleteEverything">在从缓存中删除所有文件之前询问我。</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemoval">自动删除旧项目</s:String>
@@ -526,8 +522,8 @@
     <s:String x:Key="S.Options.Upload.Preset.Info.Valid">授权有效期至 {0}。</s:String>
     
     <s:String x:Key="S.Options.Upload.Preset.Imgur.Gifv">使用 Gifv 扩展名而不是 Gif 获取链接</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Imgur.ToAlbum">将 Gif 上传到所选的专辑</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Imgur.Album">专辑：</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.ToAlbum">将 Gif 上传到所选的相册</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Album">相册：</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Imgur.AskMe">上传前询问我</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Imgur.Reload">重新加载专辑列表。</s:String>
     
@@ -545,7 +541,7 @@
     <s:String x:Key="S.Options.Upload.Pick.Details.Title">标题：</s:String>
     <s:String x:Key="S.Options.Upload.Pick.Details.Description">描述：</s:String>
     <s:String x:Key="S.Options.Upload.Pick.Details.Tags">标签：</s:String>
-    <s:String x:Key="S.Options.Upload.Pick.Details.Tags.Info">使用分号（;）分隔标签</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Tags.Info">使用分号（ ; ）分隔标签</s:String>
     <s:String x:Key="S.Options.Upload.Pick.Details.Private">仅显示那些通过直接链接访问的用户。</s:String>
     
     <!--Options • Upload > History-->
@@ -562,11 +558,9 @@
     
     <!--Options • Extras-->
     <s:String x:Key="S.Options.Extras.External">可用的外部工具</s:String>
-    <s:String x:Key="S.Options.Extras.Download">点击此处下载
-{0}</s:String>
+    <s:String x:Key="S.Options.Extras.Download">点击此处下载&#x0d;{0}</s:String>
     <s:String x:Key="S.Options.Extras.Downloading">下载中...</s:String>
-    <s:String x:Key="S.Options.Extras.Ready">已下载
-{0}</s:String>
+    <s:String x:Key="S.Options.Extras.Ready">已下载&#x0d;{0}</s:String>
     <s:String x:Key="S.Options.Extras.Ready.Info">点击这里打开文件的属性。</s:String>
     <s:String x:Key="S.Options.Extras.DownloadRestriction">Microsoft Store 分发的应用程序无法下载其他应用程序。 您必须手动下载它。</s:String>
     <s:String x:Key="S.Options.Extras.FfmpegLocation">FFmpeg 位置</s:String>
@@ -619,7 +613,7 @@
     <s:String x:Key="S.Options.About.Technical.SourceCode">源代码：</s:String>
     <s:String x:Key="S.Options.About.Technical.Privacy">隐私政策：</s:String>
     <s:String x:Key="S.Options.About.ABigThanksTo">非常感谢</s:String>
-    <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">所有支持过我和提供反馈及捐助的人 - 简体中文翻译 BY 大眼仔~旭（Anan）2021（www.dayanzai.me）</s:String>
+    <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">所有支持过我和提供反馈及捐助的人</s:String>
     
     <!--Localization-->
     <s:String x:Key="S.Localization">本地化</s:String>
@@ -659,16 +653,13 @@
     <s:String x:Key="S.Recorder.Interaction.Short">交互</s:String>
     <s:String x:Key="S.Recorder.Fps">每秒最大帧数</s:String>
     <s:String x:Key="S.Recorder.Fps.Short">fps</s:String>
-    <s:String x:Key="S.Recorder.Fps.Range">范围从 1 到 60 fps，更高的值表示将捕获更多帧。
-每个增量代表 16 毫秒的差异。</s:String>
+    <s:String x:Key="S.Recorder.Fps.Range">范围从 1 到 60 fps，更高的值表示将捕获更多帧。&#10;每个增量代表 16 毫秒的差异。</s:String>
     <s:String x:Key="S.Recorder.Fpm">每分钟最大帧数</s:String>
     <s:String x:Key="S.Recorder.Fpm.Short">fpm</s:String>
-    <s:String x:Key="S.Recorder.Fpm.Range">范围从 1 到 60 fpm，更高的值表示将捕获更多帧。
-每个增量代表 1 秒的差异。</s:String>
+    <s:String x:Key="S.Recorder.Fpm.Range">范围从 1 到 60 fpm，更高的值表示将捕获更多帧。&#10;每个增量代表 1 秒的差异。</s:String>
     <s:String x:Key="S.Recorder.Fph">每小时最大帧数</s:String>
     <s:String x:Key="S.Recorder.Fph.Short">fph</s:String>
-    <s:String x:Key="S.Recorder.Fph.Range">范围从 1 到 60 fph，更高的值表示将捕获更多帧。
-每个增量代表 1 分钟的差异。</s:String>
+    <s:String x:Key="S.Recorder.Fph.Range">范围从 1 到 60 fph，更高的值表示将捕获更多帧。&#10;每个增量代表 1 分钟的差异。</s:String>
     
     <s:String x:Key="S.Recorder.ClickOrPress">单击或按键捕获</s:String>
     <s:String x:Key="S.Recorder.SnapToWindow">对齐窗口（拖拽到目标窗口上进行捕捉）</s:String>
@@ -681,12 +672,13 @@
     <s:String x:Key="S.Recorder.Timer.Total">总帧数：</s:String>
     <s:String x:Key="S.Recorder.Timer.Manual">手动捕获：</s:String>
     <s:String x:Key="S.Recorder.Timer.Paused">捕获已暂停。</s:String>
+    <s:String x:Key="S.Recorder.Timer.Imprecise">你的电脑不支持精确的捕捉模式，&#10;这意味着可能永远无法达到目标帧率。</s:String>
     
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible">无法捕获屏幕</s:String>
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">无法捕获屏幕。5 次尝试后，捕获方法未返回任何帧。</s:String>
     <s:String x:Key="S.Recorder.Warning.StartPauseNotPossible">无法开始/暂停捕获屏幕</s:String>
     <s:String x:Key="S.Recorder.Warning.Windows8">使用桌面复制 Desktop Duplication API 捕获屏幕需要 Windows 8 或更高版本。</s:String>
-    <s:String x:Key="S.Recorder.Warning.MissingSharpDx">为了使用 Desktop Duplication API 捕获屏幕，需要 SharpDx 库。 进入选项>其他下载。</s:String>
+    <s:String x:Key="S.Recorder.Warning.MissingSharpDx">为了使用 Desktop Duplication API 捕获屏幕，需要 SharpDx 库。 进入 选项 > 附加功能 下载。</s:String>
     
     <!--New recorder-->
     <s:String x:Key="S.Recorder.Area">区域</s:String>
@@ -712,13 +704,11 @@
     <s:String x:Key="S.Recorder.SelectScreen">单击此处选择此屏幕</s:String>
     <s:String x:Key="S.Recorder.EscToCancel">按 Esc 键取消</s:String>
     <s:String x:Key="S.Recorder.Splash.Title">按 {0} 停止录制</s:String>
-    <s:String x:Key="S.Recorder.Splash.Subtitle">录像机窗口最小化，
-恢复它或按 {0} 暂停捕获</s:String>
+    <s:String x:Key="S.Recorder.Splash.Subtitle">录像机窗口最小化，&#10;恢复它或按 {0} 暂停捕获</s:String>
     
     <s:String x:Key="S.Recorder.Discard.Title">放弃录制</s:String>
     <s:String x:Key="S.Recorder.Discard.Instruction">您确定要放弃该录制吗？</s:String>
-    <s:String x:Key="S.Recorder.Discard.Message">此操作将放弃录制并删除所有帧。
-您无法撤消此操作。</s:String>
+    <s:String x:Key="S.Recorder.Discard.Message">此操作将放弃录制并删除所有帧。&#x0d;您无法撤消此操作。</s:String>
     
     <!--Webcam recorder-->
     <s:String x:Key="S.Webcam.Title">ScreenToGif - 摄像头录像机</s:String>
@@ -744,10 +734,8 @@
     <s:String x:Key="S.ColorSelector.Initial">初始颜色</s:String>
     <s:String x:Key="S.ColorSelector.Current">当前颜色</s:String>
     <s:String x:Key="S.ColorSelector.Latest">最新颜色</s:String>
-    <s:String x:Key="S.ColorSelector.Sample">拖放到
-示例颜色</s:String>
-    <s:String x:Key="S.ColorSelector.Sample.Info">单击并拖动以从屏幕
-上选择颜色。</s:String>
+    <s:String x:Key="S.ColorSelector.Sample">拖放到&#x0d;示例颜色</s:String>
+    <s:String x:Key="S.ColorSelector.Sample.Info">单击并拖动以从屏幕上选择颜色。</s:String>
     
     <!--Exception/Error viewers-->
     <s:String x:Key="S.ExceptionViewer.Title">异常查看器</s:String>
@@ -806,18 +794,17 @@
     <s:String x:Key="S.Preset.Gif.System.Low.Description">质量低下但编码速度更快。</s:String>
     
     <s:String x:Key="S.Preset.Apng.Ffmpeg.High.Title">FFmpeg - 高质量</s:String>
-    <s:String x:Key="S.Preset.Apng.Ffmpeg.High.Description">图像质量较高，文件大小较小，但编码速度较慢。</s:String>
+    <s:String x:Key="S.Preset.Apng.Ffmpeg.High.Description">图像质量较高，文件尺寸较小，但编码速度较慢。</s:String>
     <s:String x:Key="S.Preset.Apng.Ffmpeg.Low.Title">FFmpeg - 低质量</s:String>
-    <s:String x:Key="S.Preset.Apng.Ffmpeg.Low.Description">图像质量较低，文件大小较小，但编码速度较快。</s:String>
+    <s:String x:Key="S.Preset.Apng.Ffmpeg.Low.Description">图像质量较低，文件尺寸较小，但编码速度较快。</s:String>
     <s:String x:Key="S.Preset.Webp.Ffmpeg.High.Title">高质量</s:String>
-    <s:String x:Key="S.Preset.Webp.Ffmpeg.High.Description">高图像质量和小文件大小。</s:String>
+    <s:String x:Key="S.Preset.Webp.Ffmpeg.High.Description">图像质量高，文件尺寸小。</s:String>
     
     <!--Insert frames-->
     <s:String x:Key="S.InsertFrames.Title">插入帧</s:String>
     <s:String x:Key="S.InsertFrames.Info">两侧应具有相同的大小，此窗口允许您重新定位和调整图像和画布的大小。点击选择并调整大小。</s:String>
     <s:String x:Key="S.InsertFrames.CanvasSize">画布大小：</s:String>
-    <s:String x:Key="S.InsertFrames.FitCanvas">调整画布
-以适合图像</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas">调整画布以适合图像</s:String>
     <s:String x:Key="S.InsertFrames.FitCanvas.Info">调整画布大小以装下两个图像（左上角）</s:String>
     <s:String x:Key="S.InsertFrames.DifferentSizes">两者帧大小不同。您需要在插入帧之前解决此问题。</s:String>
     <s:String x:Key="S.InsertFrames.InsertedFrames">新建帧</s:String>
@@ -848,8 +835,7 @@
     <s:String x:Key="S.ImportVideo.Frames">帧数：</s:String>
     <s:String x:Key="S.ImportVideo.Duration">持续时间：</s:String>
     <s:String x:Key="S.ImportVideo.Error">无法加载视频。</s:String>
-    <s:String x:Key="S.ImportVideo.Error.Detail">预览器无法启动。 请尝试与其他硬件开发商联系或检查视频是否未损坏。
-如果您使用的是 MediaPlayer，请检查 Windows 功能“ Media Features/Windows Media Player”是否已打开，并确保您具有必需的视频编解码器。</s:String>
+    <s:String x:Key="S.ImportVideo.Error.Detail">预览器无法启动。 请尝试与其他硬件开发商联系或检查视频是否未损坏。&#x0d;如果您使用的是 MediaPlayer，请检查 Windows 功能“ Media Features/Windows Media Player”是否已打开，并确保您具有必需的视频编解码器。</s:String>
     <s:String x:Key="S.ImportVideo.Timeout">获取帧预览超时。</s:String>
     <s:String x:Key="S.ImportVideo.Nothing">没有选择的帧将被导入。</s:String>
     
@@ -865,7 +851,7 @@
     <s:String x:Key="S.Encoder.Completed.Command.Output">显示输出命令。</s:String>
     <s:String x:Key="S.Encoder.Completed.Command.Fail">无法执行命令</s:String>
     <s:String x:Key="S.Encoder.Completed.Upload.Fail">无法上传</s:String>
-    <s:String x:Key="S.Encoder.Completed.Upload.Delete">Ctrl + 单击以打开页面以删除图像（如果可用）。</s:String>
+    <s:String x:Key="S.Encoder.Completed.Upload.Delete">Ctrl + 单击 以打开页面以删除图像（如果可用）。</s:String>
     
     <s:String x:Key="S.Encoder.Completed.Elapsed">已用时间（以分钟为单位）：</s:String>
     <s:String x:Key="S.Encoder.Completed.Elapsed.Analysis">分析：</s:String>
@@ -934,22 +920,22 @@
     <s:String x:Key="S.Editor.File.Video">视频</s:String>
 
     <s:String x:Key="S.Editor.File.Apng">PNG 动画</s:String>
-    <s:String x:Key="S.Editor.File.Gif">Gif 动画</s:String>
-    <s:String x:Key="S.Editor.File.Webp">Webp 动画</s:String>
+    <s:String x:Key="S.Editor.File.Gif">GIF 动画</s:String>
+    <s:String x:Key="S.Editor.File.Webp">WebP 动画</s:String>
     
     <s:String x:Key="S.Editor.File.Avi">AVI 视频</s:String>
     <s:String x:Key="S.Editor.File.Mkv">Matroska 视频</s:String>
     <s:String x:Key="S.Editor.File.Mov">MOV 视频</s:String>
     <s:String x:Key="S.Editor.File.Mp4">MP4 视频</s:String>
-    <s:String x:Key="S.Editor.File.Webm">Webm 视频</s:String>
+    <s:String x:Key="S.Editor.File.Webm">WebM 视频</s:String>
     
-    <s:String x:Key="S.Editor.File.Image.Bmp">Bmp 图像</s:String>
-    <s:String x:Key="S.Editor.File.Image.Jpeg">Jpeg 图像</s:String>
+    <s:String x:Key="S.Editor.File.Image.Bmp">BMP 图像</s:String>
+    <s:String x:Key="S.Editor.File.Image.Jpeg">JPEG 图像</s:String>
     <s:String x:Key="S.Editor.File.Image.Png">PNG 图像，所有选择图像</s:String>
     <s:String x:Key="S.Editor.File.Image.Zip">ZIP 文件，所有选择图像</s:String>
     
     <s:String x:Key="S.Editor.File.Project">ScreenToGif 项目</s:String>
-    <s:String x:Key="S.Editor.File.Project.Zip">ScreenToGif 项目为 Zip</s:String>
+    <s:String x:Key="S.Editor.File.Project.Zip">ScreenToGif 项目（Zip）</s:String>
     <s:String x:Key="S.Editor.File.Psd">PSD 文件</s:String>
     
     <!--Editor • Welcome-->
@@ -963,25 +949,21 @@
     
     <!--Editor • File tab • New-->
     <s:String x:Key="S.Editor.File.New.Recording">录制</s:String>
-    <s:String x:Key="S.Editor.File.New.Webcam">摄像头
-录制</s:String>
+    <s:String x:Key="S.Editor.File.New.Webcam">摄像头&#x0d;录制</s:String>
     <s:String x:Key="S.Editor.File.New.Board">画板录制</s:String>
     <s:String x:Key="S.Editor.File.Blank">空白动画</s:String>
     <s:String x:Key="S.Editor.File.New">新建</s:String>
     
     <!--Editor • File tab • Insert-->
     <s:String x:Key="S.Editor.File.Insert.Recording">录制</s:String>
-    <s:String x:Key="S.Editor.File.Insert.Webcam">摄像头
-录制</s:String>
-    <s:String x:Key="S.Editor.File.Insert.Board">白板
-录制</s:String>
+    <s:String x:Key="S.Editor.File.Insert.Webcam">摄像头&#x0d;录制</s:String>
+    <s:String x:Key="S.Editor.File.Insert.Board">白板&#x0d;录制</s:String>
     <s:String x:Key="S.Editor.File.Insert.Media">媒体</s:String>
     <s:String x:Key="S.Editor.File.Insert">插入</s:String>
     
     <!--Editor • File tab • Save/Discard-->
     <s:String x:Key="S.Editor.File.Save">另存为</s:String>
-    <s:String x:Key="S.Editor.File.Load">媒体或
-项目</s:String>
+    <s:String x:Key="S.Editor.File.Load">媒体或&#x0d;项目</s:String>
     <s:String x:Key="S.Editor.File.LoadRecent">最近项目</s:String>
     <s:String x:Key="S.Editor.File.SaveProject">另存为项目</s:String>
     <s:String x:Key="S.Editor.File.Discard">放弃项目</s:String>
@@ -1001,8 +983,7 @@
     
     <!--Editor • Home tab • Zoom-->
     <s:String x:Key="S.Editor.Home.Zoom">缩放</s:String>
-    <s:String x:Key="S.Editor.Home.SizeToContent">根据内容
-调整窗口</s:String>
+    <s:String x:Key="S.Editor.Home.SizeToContent">根据内容&#x0d;调整窗口</s:String>
     <s:String x:Key="S.Editor.Home.FitImage">适合图像</s:String>
     
     <!--Editor • Home tab • Select-->
@@ -1024,9 +1005,7 @@
     <!--Editor • Playback tab • Playback Options-->
     <s:String x:Key="S.Editor.PlaybackOptions.Header">播放选项</s:String>
     <s:String x:Key="S.Editor.PlaybackOptions.Loop">播放期间循环播放</s:String>
-    <s:String x:Key="S.Editor.PlaybackOptions.Loop.Info">仅在播放期间使用。
-如果要更改用于导出Gif和Apng的循环设置，
-某些编码器的“另存为”面板中将提供该循环设置。</s:String>
+    <s:String x:Key="S.Editor.PlaybackOptions.Loop.Info">仅在播放期间使用。&#x0d;如果要更改用于导出GIF和APNG的循环设置，&#x0d;某些编码器的“另存为”面板中将提供该循环设置。</s:String>
     
     <!--Editor • Edit tab • Frames-->  
     <s:String x:Key="S.Editor.Edit.Frames">帧</s:String>
@@ -1299,8 +1278,7 @@
     <s:String x:Key="S.RemoveDuplicates.Delay.NoAdjustment">不调整</s:String>
     <s:String x:Key="S.RemoveDuplicates.Delay.Average">使用平均值</s:String>
     <s:String x:Key="S.RemoveDuplicates.Delay.Sum">使用总和</s:String>
-    <s:String x:Key="S.RemoveDuplicates.Info">此操作会分析每个帧（逐个像素），并删除至少为{0} %的类似于其最近邻的帧。
-您可以选择是否要调整帧的延迟（显示持续时间）。</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Info">此操作会分析每个帧（逐个像素），并删除至少为 {0} %的类似于其最近邻的帧。&#x0d;您可以选择是否要调整帧的延迟（显示持续时间）。</s:String>
     
     <!--Editor • Captions-->
     <s:String x:Key="S.Caption.Text">文本</s:String>
@@ -1361,9 +1339,7 @@
     <s:String x:Key="S.Shapes.Shapes">形状</s:String>
     <s:String x:Key="S.Shapes.Shapes.Radius">半径：</s:String>
     <s:String x:Key="S.Shapes.Shapes.Dashes">破折号：</s:String>
-    <s:String x:Key="S.Shapes.Shapes.Dashes.Info">控制虚线的大小和间隙的大小。
-您可以设置多个大小来创建精致的破折号样式。
-默认值为“ 1 0”或为空，表示没有间隙的破折号。</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Dashes.Info">控制虚线的大小和间隙的大小。&#10;您可以设置多个大小来创建精致的破折号样式。&#10;默认值为“1 0”或为空，表示没有间隙的破折号。</s:String>
     <s:String x:Key="S.Shapes.Shapes.ResetRotatio">重置旋转</s:String>
     <s:String x:Key="S.Shapes.Shapes.Remove">移除</s:String>
     <s:String x:Key="S.Shapes.Fill">填充</s:String>
@@ -1383,8 +1359,7 @@
     
     <!--Editor • Border-->
     <s:String x:Key="S.Border.Appearance">外观</s:String>
-    <s:String x:Key="S.Border.Info">使用负值使边框扩大图像。 这样做时，边框将应用于所有帧。
-如果不使用负值，则边框将仅应用于选定的帧。</s:String>
+    <s:String x:Key="S.Border.Info">使用负值使边框扩大图像。这样做时，边框将应用于所有帧。&#10;如果不使用负值，则边框将仅应用于选定的帧。</s:String>
 
     <!--Editor • Shadow-->
     <s:String x:Key="S.Shadow.ShadowColor">阴影颜色：</s:String>
@@ -1432,8 +1407,7 @@
     <s:String x:Key="S.Progress.Format.FrameNumber">$f = 帧数</s:String>
     <s:String x:Key="S.Progress.Format.Totals">总计：</s:String>
     <s:String x:Key="S.Progress.Format.Examples">示例：</s:String>
-    <s:String x:Key="S.Progress.Format.Date">您可以使用 .Net Framework 中的日期和时间格式。
-该规范可在下面的两个链接中找到。</s:String>
+    <s:String x:Key="S.Progress.Format.Date">您可以使用 .Net Framework 中的日期和时间格式。&#x0d;该规范可在下面的两个链接中找到。</s:String>
     <s:String x:Key="S.Progress.Format.Date.Standard">标准格式</s:String>
     <s:String x:Key="S.Progress.Format.Date.Custom">自定义格式</s:String>
     <s:String x:Key="S.Progress.Precision.StartNumber">从字数：</s:String>
@@ -1445,16 +1419,14 @@
     <s:String x:Key="S.Delay.Mode">延迟模式：</s:String>
     <s:String x:Key="S.Delay.Mode.Override">覆盖（以毫秒为单位）</s:String>
     <s:String x:Key="S.Delay.Mode.IncreaseDecrease">增加或减少（以毫秒为单位）</s:String>
-    <s:String x:Key="S.Delay.Mode.Scale">缩放（在 %）</s:String>
+    <s:String x:Key="S.Delay.Mode.Scale">缩放（以 % 为单位）</s:String>
     <s:String x:Key="S.Delay.NewValue">新值</s:String>
     <s:String x:Key="S.Delay.Minimum10Ms">每帧最少 10ms。</s:String>
     <s:String x:Key="S.Delay.DecreaseIncrease">增加或减少值</s:String>
     <s:String x:Key="S.Delay.Scale">缩放值</s:String>
     <s:String x:Key="S.Delay.Override.Info">此新值将替换所有选定帧的持续时间（延时）。该值应保持在 10ms 和 25500ms 之间。</s:String>
-    <s:String x:Key="S.Delay.IncreaseDecrease.Info">该值将增加或减少所选每帧的持续时间（延时）。
-您可以增加或减少介于 -10.000ms 和 10.000ms 之间的值，但每帧的持续时间将介于 10ms 和 25.500ms 之间</s:String>
-    <s:String x:Key="S.Delay.Scale.Info">通过百分比值缩放每个选定帧的持续时间（延迟）。
-您可以通过在 1％ 和 1000％ 之间选择一个值来缩放每个帧的持续时间，但每个帧的最终持续时间将限制在 10ms 到 25500ms 之间</s:String>
+    <s:String x:Key="S.Delay.IncreaseDecrease.Info">该值将增加或减少所选每帧的持续时间（延时）。&#x0d;您可以增加或减少介于 -10.000ms 和 10.000ms 之间的值，但每帧的持续时间将介于 10ms 和 25.500ms 之间</s:String>
+    <s:String x:Key="S.Delay.Scale.Info">通过百分比值缩放每个选定帧的持续时间（延迟）。&#x0d;您可以通过在 1% 和 1000% 之间选择一个值来缩放每个帧的持续时间，但每个帧的最终持续时间将限制在 10ms 到 25500ms 之间</s:String>
 
     <!--Editor • Cinemagraph-->
     <s:String x:Key="S.Cinemagraph.Info">使用笔在不应保持静态（即在不同帧之间变化）的像素上描画来进行选择</s:String>
@@ -1481,25 +1453,25 @@
     <s:String x:Key="S.SaveAs.Apng.Info">动画便携式网络图形</s:String>
     <s:String x:Key="S.SaveAs.Gif">Gif</s:String>
     <s:String x:Key="S.SaveAs.Gif.Info">图形交换格式</s:String>
-    <s:String x:Key="S.SaveAs.Webp">Webp</s:String>
+    <s:String x:Key="S.SaveAs.Webp">WebP</s:String>
     <s:String x:Key="S.SaveAs.Webp.Info">Web 图片</s:String>
     
     <s:String x:Key="S.SaveAs.Avi">Avi</s:String>
     <s:String x:Key="S.SaveAs.Avi.Info">音频视频交错</s:String>
-    <s:String x:Key="S.SaveAs.Mkv">Mkv</s:String>
+    <s:String x:Key="S.SaveAs.Mkv">MKV</s:String>
     <s:String x:Key="S.SaveAs.Mkv.Info">Matroska</s:String>
-    <s:String x:Key="S.SaveAs.Mov">Mov</s:String>
+    <s:String x:Key="S.SaveAs.Mov">MOV</s:String>
     <s:String x:Key="S.SaveAs.Mov.Info">QuickTime 文件格式</s:String>
-    <s:String x:Key="S.SaveAs.Mp4">Mp4</s:String>
+    <s:String x:Key="S.SaveAs.Mp4">MP4</s:String>
     <s:String x:Key="S.SaveAs.Mp4.Info">Mpeg-4</s:String>
-    <s:String x:Key="S.SaveAs.Webm">Webm</s:String>
+    <s:String x:Key="S.SaveAs.Webm">WebM</s:String>
     <s:String x:Key="S.SaveAs.Webm.Info">Web 影片</s:String>
     
-    <s:String x:Key="S.SaveAs.Bmp">Bmp</s:String>
+    <s:String x:Key="S.SaveAs.Bmp">BMP</s:String>
     <s:String x:Key="S.SaveAs.Bmp.Info">位图</s:String>
-    <s:String x:Key="S.SaveAs.Jpeg">Jpeg</s:String>
+    <s:String x:Key="S.SaveAs.Jpeg">JPEG</s:String>
     <s:String x:Key="S.SaveAs.Jpeg.Info">联合图像专家组</s:String>
-    <s:String x:Key="S.SaveAs.Png">Png</s:String>
+    <s:String x:Key="S.SaveAs.Png">PNG</s:String>
     <s:String x:Key="S.SaveAs.Png.Info">便携式网络图形</s:String>
     
     <s:String x:Key="S.SaveAs.Project">项目</s:String>
@@ -1531,7 +1503,7 @@
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">ScreenToGif</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Info">内置编码器。</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System">系统</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.System.Info">编码器由系统提供。</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.System.Info">由系统提供的编码器。</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg.Info">外部编码器，由 FFmpeg.org 开发。</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
@@ -1564,33 +1536,28 @@
     <s:String x:Key="S.SaveAs.GifOptions.Quantizer.MostUsed">最常用的颜色</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Quantizer.MostUsed.Info">只是需要在选择帧中最常用的颜色。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Sampling">采样：</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Sampling.Info">采样因子：
-值为 1 会产生更好的 GIF 效果，但渲染速度会较慢。</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Sampling.Info">采样因子：&#10;值为 1 会产生更好的 GIF 效果，但渲染速度会较慢。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Quality">质量：</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors">颜色：</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">最大颜色数（每帧）</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable">使用全局色表。</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable">使用全局色表</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable.Info">可能会降低 GIF 的质量和/或大小。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Best">最好</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Fastest">最快</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Gifski.Faster">使用更快的编码过程。</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Gifski.Faster.Info">可能会降低 gif 的质量。</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Gifski.Faster.Info">可能会降低 GIF 的质量。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Loop">循环：</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Looped">循环 Gif</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Looped">循环 GIF</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">永远重复</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">重复计数</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable">启用透明度。</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable.Info">启用完全透明模式，使 GIF 的背景完全透明。
-如果启用此选项，则色键替换过程将被忽略。</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable">启用透明度</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable.Info">启用完全透明模式，使 GIF 的背景完全透明。&#10;如果启用此选项，则色键替换过程将被忽略。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Transparency.Pick">选择显示为透明的颜色。</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Transparency.Pick.Info">如果选择了一种颜色，它将被转换为透明的，并且在生成的 GIF 中将显示为透明。
-如果未选择颜色，则所有透明颜色（Alpha = 0％）将正常显示为透明。rmally.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Transparency.Pick.Info">如果选择了一种颜色，它将被转换为透明的，并且在生成的 GIF 中将显示为透明。&#10;如果未选择颜色，则所有透明颜色（Alpha = 0%）将正常显示为透明。rmally.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">检测未更改的像素</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged.Info">通过分析和检测帧之间未更改的像素，
-可以将仅必要的部分保存到 GIF。</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged.Info">通过分析和检测帧之间未更改的像素，&#10;可以将仅必要的部分保存到 GIF。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma">用色度键替换这些像素。</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma.Info">重复/不变的像素将被此色度键替换，
-从而可以减少每帧使用的颜色。</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma.Info">重复/不变的像素将被此色度键替换，&#10;从而可以减少每帧使用的颜色。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.ChromaKey">色度键：</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Dither">抖动：</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Dither.Scale">Bayer 缩放：</s:String>
@@ -1657,7 +1624,7 @@
     <s:String x:Key="S.SaveAs.VideoOptions.PixelFormat">像素格式：</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.PixelFormat.Auto">自动</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Vsync">垂直同步：</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.Vsync.Info">视频同步方法。&#10;自动：根据多路复用器（格式）功能在 1 和 2 之间进行选择。&#10;直通：将每个帧及其时间戳传递给编码器。&#10;常数：将复制帧。&#10;变量：将帧以其时间戳传递或丢弃，以防止 2 个帧具有相同的时间戳。&#10;丢弃：与传递相同，但会破坏所有时间戳。 ，使编码器根据帧频生成新的时间戳。</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Vsync.Info">视频同步方法。&#10;自动：根据多路复用器（格式）功能在 1 和 2 之间进行选择。&#10;直通：将每个帧及其时间戳传递给编码器。&#10;常数：将复制帧。&#10;变量：将帧以其时间戳传递或丢弃，以防止 2 个帧具有相同的时间戳。&#10;丢弃：与传递相同，但会丢弃所有时间戳，使编码器根据帧频生成新的时间戳。</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Vsync.Passthrough">直通</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Vsync.Cfr">恒定帧率</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.Vsync.Vfr">可变帧率</s:String>
@@ -1693,7 +1660,7 @@
     
     <!--Editor • Save as > Save options-->
     <s:String x:Key="S.SaveAs.SaveOptions">保存选项</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.Partial">部分导出。</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.Partial">部分导出</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">将文件保存到你选择的文件夹</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">覆盖（若已存在）</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">同时另存为项目（相同文件夹与文件名）</s:String>
@@ -1708,12 +1675,7 @@
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">链接</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">将上传服务生成的链接复制到剪贴板</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">执行编码后置命令</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">输入在编码后执行的命令。
-若要执行多条命令，请在不同行内输入不同命令，一行输入一条。
-宏:
-{p} = 输出文件路径。
-{f} = 输出文件夹路径。
-{u} = 上传文件的 URL 地址。</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">输入在编码后执行的命令。&#x0d;若要执行多条命令，请在不同行内输入不同命令，一行输入一条。&#x0d;宏：&#x0d;{p} = 输出文件路径。&#x0d;{f} = 输出文件夹路径。&#x0d;{u} = 上传文件的 URL 地址。</s:String>
     
     <!--Editor • Save As > Partial export-->
     <s:String x:Key="S.SaveAs.Partial">部分导出</s:String>
@@ -1739,9 +1701,9 @@
     <s:String x:Key="S.SaveAs.File">文件</s:String>
     <s:String x:Key="S.SaveAs.File.Location">目标文件夹</s:String>
     <s:String x:Key="S.SaveAs.File.SelectFolder">选择输出目录</s:String>
-    <s:String x:Key="S.SaveAs.File.Choose">选择位置</s:String>
+    <s:String x:Key="S.SaveAs.File.Choose">选择位置。&#x0d;按Shift键并点击，&#x0d;也可选择文件名。</s:String>
     <s:String x:Key="S.SaveAs.File.Format">格式</s:String>
-    <s:String x:Key="S.SaveAs.File.Name">文件名</s:String>
+    <s:String x:Key="S.SaveAs.File.Name">文件名。在"?"之间插入日期/时间格式</s:String>
     <s:String x:Key="S.SaveAs.File.Animation">动画</s:String>
     <s:String x:Key="S.SaveAs.File.Increase">增加文件编号</s:String>
     <s:String x:Key="S.SaveAs.File.Decrease">减小文件编号</s:String>
@@ -1823,8 +1785,7 @@
     <!--Troubleshoot-->
     <s:String x:Key="S.Troubleshoot.Title">疑难解答</s:String>
     <s:String x:Key="S.Troubleshoot.Windows">是否有任何窗口不见了？</s:String>
-    <s:String x:Key="S.Troubleshoot.Windows.Info">如果缺少任何窗口（屏幕外），
-使用下面的选项重置其当前和启动位置。</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Info">如果缺少任何窗口（屏幕外），&#x0d;使用下面的选项重置其当前和启动位置。</s:String>
     <s:String x:Key="S.Troubleshoot.Windows.Current">这是每个窗口当前所在的位置：</s:String>
     <s:String x:Key="S.Troubleshoot.Windows.Next">以下是每个窗口下次打开的位置：</s:String>
     <s:String x:Key="S.Troubleshoot.Windows.BringBack">将所有窗口移动到主屏幕。</s:String>
