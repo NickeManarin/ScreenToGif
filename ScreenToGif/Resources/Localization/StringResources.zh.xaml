@@ -56,7 +56,7 @@
     <s:String x:Key="S.Warning.Graphics.Title">切换图形适配器</s:String>
     <s:String x:Key="S.Warning.Graphics.Instruction">切换到正确的图形适配器，以捕获所选的屏幕</s:String>
     <s:String x:Key="S.Warning.Graphics.Message">由于DirectX的限制，ScreenToGif必须与被捕获的屏幕在同一个图形适配器上运行。</s:String>
-    <s:String x:Key="S.Warning.Graphics.Action">打开 Windows设置 > 系统 > 显示 > 图形设置，或点击下面的链接，为ScreenToGif切换图形适配器设置。</s:String>
+    <s:String x:Key="S.Warning.Graphics.Action">打开 Windows 设置 > 系统 > 显示 > 图形设置，或点击下面的链接，为ScreenToGif切换图形适配器设置。</s:String>
     <s:String x:Key="S.Warning.Graphics.Action.Legacy">打开你的图形适配器的图形设置，为ScreenToGif切换图形适配器。</s:String>
     <s:String x:Key="S.Warning.Graphics.Switch">打开 Windows 设置</s:String>
     
