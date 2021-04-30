@@ -442,6 +442,8 @@ namespace ScreenToGif.Windows
             _regionSelection.Close();
 
             //Save Settings
+            UserSettings.All.SelectedRegion = _viewModel?.Region ?? UserSettings.All.SelectedRegion;
+            UserSettings.All.SelectedRegionScale = _viewModel?.CurrentMonitor?.Scale ?? UserSettings.All.SelectedRegionScale;
             UserSettings.Save();
 
             #region Remove Hooks
