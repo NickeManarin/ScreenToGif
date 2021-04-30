@@ -942,7 +942,7 @@
     <s:String x:Key="S.Editor.Welcome.Size">Quanto menor a taxa de quadros, a quantidade de cores ou a quantidade de mudanças entre quadros, menor o tamanho do arquivo</s:String>
     <s:String x:Key="S.Editor.Welcome.Contact">Você quer conversar? Abra "Opções > Sobre" para encontrar métodos de contato</s:String>
     <s:String x:Key="S.Editor.Welcome.Trouble">Algum problema? Entre em contato via a ferramenta de Comentários</s:String>
-    <s:String x:Key="S.Editor.Welcome.NewRecorder">Você gostaria de provar o novo gravador de tela? Navegue até "Opções > Aplicativo" para habilitá-lo</s:String>
+    <s:String x:Key="S.Editor.Welcome.NewRecorder">Você gostaria de provar o novo gravador de tela? Navegue até "Opções > Gravador" para habilitá-lo</s:String>
     
     <!--Editor • File tab • New-->
     <s:String x:Key="S.Editor.File.New.Recording">Gravação</s:String>
