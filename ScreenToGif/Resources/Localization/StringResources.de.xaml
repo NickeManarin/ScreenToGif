@@ -819,7 +819,7 @@
     <s:String x:Key="S.Editor.Welcome.Size">Je kleiner die Bildwiederholrate, die Anzahl der Farben und die Anzahl der Änderungen zwischen den Frames, desto kleiner die Dateigröße</s:String>
     <s:String x:Key="S.Editor.Welcome.Contact">Möchten Sie mit mir Kontakt aufnehmen? Gehen Sie zu „Einstellungen” ➜ „Über” für weitere Infos</s:String>
     <s:String x:Key="S.Editor.Welcome.Trouble">Haben Sie Probleme? Kontaktieren Sie mich via Feedback-Option</s:String>
-    <s:String x:Key="S.Editor.Welcome.NewRecorder">Möchten Sie den neuen Rekorder ausprobieren? Gehen Sie zu „Einstellungen” ➜ „Allgemein”, um ihn zu aktivieren.</s:String>
+    <s:String x:Key="S.Editor.Welcome.NewRecorder">Möchten Sie den neuen Rekorder ausprobieren? Gehen Sie zu „Einstellungen” ➜ „Rekorder”, um ihn zu aktivieren.</s:String>
     
     <!--Editor • File tab • New-->
     <s:String x:Key="S.Editor.File.New.Recording">Bildschirm&#10;Aufnahme</s:String>

@@ -934,7 +934,7 @@
     <s:String x:Key="S.Editor.Welcome.Size">Чем меньше частота кадров, кол-во цветов и\или число изменений между кадрами, тем меньше размер файла.</s:String>
     <s:String x:Key="S.Editor.Welcome.Contact">Хотите поговорить? Откройте "Настройки > О программе" чтобы узнать мои контакты.</s:String>
     <s:String x:Key="S.Editor.Welcome.Trouble">Нашли ошибку? Свяжитесь со мной через Feedback tool.</s:String>
-    <s:String x:Key="S.Editor.Welcome.NewRecorder">Хотите попробовать новый рекордер? Перейдите в "Настройки > Программа" и активируйте его.</s:String>
+    <s:String x:Key="S.Editor.Welcome.NewRecorder">Хотите попробовать новый рекордер? Перейдите в "Настройки > Захват экрана" и активируйте его.</s:String>
     
     <!--Editor • File tab • New-->
     <s:String x:Key="S.Editor.File.New.Recording">Запись&#x0d;с экрана</s:String>
