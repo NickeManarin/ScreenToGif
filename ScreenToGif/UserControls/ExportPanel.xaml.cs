@@ -1072,6 +1072,15 @@ namespace ScreenToGif.UserControls
             }
         }
 
+        private void EnableTransparencyCheckBox_CheckedChanged(object sender, RoutedEventArgs e)
+        {
+            if (!IsLoaded || !(CurrentPreset is EmbeddedGifPreset preset))
+                return;
+
+            if (!DetectCheckBox.IsEnabled)
+                preset.DetectUnchanged = false;
+        }
+
         private void PredictionHelpButton_Click(object sender, RoutedEventArgs e)
         {
             try
