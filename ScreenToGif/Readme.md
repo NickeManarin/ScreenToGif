@@ -19,11 +19,12 @@ _VS 2019 and .Net 4.8 or newer required._
 ♦ DirectX capture: The legacy recorder was not able to capture using the option to just capture when something changes on screen.  
 ♦ Screen/window selector: Reduced lag when displaying the screen/window selector for the new recorder UI.  
 ♦ Remove duplicates: The last frame was not being compared, so it was not being removed when needed (thanks to @DarkOoze).  
-♦ Save as project too: Filename was getting ignored (saving as ".stg") and the export could fail depending on the configuration of the default preset.
+♦ Save as project too: Filename was getting ignored (saving as ".stg") and the export could fail depending on the configuration of the default preset.  
 ♦ Export as images: Files were being overwritten without confirmation.  
-♦ Export as images: The notification of the encoder was not displaying correctly the encoding of multiple files.
+♦ Export as images: The notification of the encoder was not displaying correctly the encoding of multiple files.  
 ♦ New recorder: The new sizing values input in the text boxes were not being saved when closing the window.  
 ♦ Transparency: The transparency options and unchanged pixel detection were not working well together.  
+♦ Cache purge: Fixed the message not appearing correctly when closing the app.  
 ♦ Yandex: Link to get token was not working.  
 
 ### Known Bugs:

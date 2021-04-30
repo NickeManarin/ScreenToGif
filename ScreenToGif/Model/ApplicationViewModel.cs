@@ -462,6 +462,9 @@ namespace ScreenToGif.Model
                         if (UserSettings.All.NotifyWhileClosingApp && !Dialog.Ask(LocalizationHelper.Get("S.Exiting.Title"), LocalizationHelper.Get("S.Exiting.Instruction"), LocalizationHelper.Get("S.Exiting.Message")))
                             return;
 
+                        if (UserSettings.All.DeleteCacheWhenClosing)
+                            StorageUtils.PurgeCache();
+
                         Application.Current.Shutdown(69);
                     }
                 };
@@ -514,6 +517,9 @@ namespace ScreenToGif.Model
                     //Install the available update on closing.
                     if (UserSettings.All.InstallUpdates)
                         InstallUpdate();
+
+                    if (UserSettings.All.DeleteCacheWhenClosing)
+                        StorageUtils.PurgeCache();
 
                     Application.Current.Shutdown(2);
                 }
