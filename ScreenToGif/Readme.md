@@ -22,6 +22,8 @@ _VS 2019 and .Net 4.8 or newer required._
 ♦ Save as project too: Filename was getting ignored (saving as ".stg") and the export could fail depending on the configuration of the default preset.
 ♦ Export as images: Files were being overwritten without confirmation.  
 ♦ Export as images: The notification of the encoder was not displaying correctly the encoding of multiple files.
+♦ New recorder: The new sizing values input in the text boxes were not being saved when closing the window.  
+♦ Transparency: The transparency options and unchanged pixel detection were not working well together.  
 ♦ Yandex: Link to get token was not working.  
 
 ### Known Bugs:

@@ -34,6 +34,7 @@ using ScreenToGif.Model.ExportPresets.Video;
 using ScreenToGif.Model.UploadPresets;
 using ScreenToGif.Settings;
 using ScreenToGif.Windows.Other;
+using Color = System.Windows.Media.Color;
 using Encoder = ScreenToGif.Windows.Other.Encoder;
 
 namespace ScreenToGif.Util
@@ -607,7 +608,7 @@ namespace ScreenToGif.Util
 
                                 if (embGifPreset.EnableTransparency)
                                 {
-                                    ImageMethods.PaintAndCutForTransparency(project, embGifPreset.TransparencyColor, embGifPreset.ChromaKey, id, tokenSource);
+                                    ImageMethods.PaintAndCutForTransparency(project, embGifPreset.SelectTransparencyColor ? embGifPreset.TransparencyColor : new Color?(), embGifPreset.ChromaKey, id, tokenSource);
                                 }
                                 else if (embGifPreset.DetectUnchanged)
                                 {
@@ -636,8 +637,9 @@ namespace ScreenToGif.Util
                                     {
                                         encoder.RepeatCount = embGifPreset.Looped && project.FrameCount > 1 ? (embGifPreset.RepeatForever ? 0 : embGifPreset.RepeatCount) : -1;
                                         encoder.UseGlobalColorTable = embGifPreset.UseGlobalColorTable;
-                                        encoder.TransparentColor = embGifPreset.PaintTransparent || embGifPreset.EnableTransparency ?
-                                            System.Windows.Media.Color.FromArgb(0, embGifPreset.ChromaKey.R, embGifPreset.ChromaKey.G, embGifPreset.ChromaKey.B) : new System.Windows.Media.Color?();
+                                        encoder.TransparentColor = embGifPreset.EnableTransparency && embGifPreset.SelectTransparencyColor ? Color.FromArgb(0, embGifPreset.TransparencyColor.R, embGifPreset.TransparencyColor.G, embGifPreset.TransparencyColor.B) :
+                                            (embGifPreset.DetectUnchanged && embGifPreset.PaintTransparent) || embGifPreset.EnableTransparency ? Color.FromArgb(0, embGifPreset.ChromaKey.R, embGifPreset.ChromaKey.G, embGifPreset.ChromaKey.B) :
+                                            new Color?();
                                         encoder.MaximumNumberColor = embGifPreset.MaximumColorCount;
                                         encoder.UseFullTransparency = embGifPreset.EnableTransparency;
                                         encoder.QuantizationType = embGifPreset.Quantizer;

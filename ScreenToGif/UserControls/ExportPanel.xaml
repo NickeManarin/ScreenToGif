@@ -459,7 +459,7 @@
 
                     <!--Transparency-->
                     <n:ExtendedCheckBox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" x:Name="EnableTransparencyCheckBox" Margin="0,3,3,3" Text="{DynamicResource S.SaveAs.GifOptions.Transparency.Enable}" 
-                                        IsChecked="{Binding EnableTransparency}" ToolTip="{DynamicResource S.SaveAs.GifOptions.Transparency.Enable.Info}"/>
+                                        IsChecked="{Binding EnableTransparency}" ToolTip="{DynamicResource S.SaveAs.GifOptions.Transparency.Enable.Info}" CheckedChanged="EnableTransparencyCheckBox_CheckedChanged"/>
 
                     <Grid Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Margin="10,0,0,0" Visibility="{Binding ElementName=EnableTransparencyCheckBox, Path=IsChecked, Converter={StaticResource Bool2Visibility}}">
                         <Grid.RowDefinitions>
@@ -484,7 +484,8 @@
 
                     <!--Detect unchanged pixels-->
                     <n:ExtendedCheckBox Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" x:Name="DetectCheckBox" Margin="0,3,3,3" Text="{DynamicResource S.SaveAs.GifOptions.DetectUnchanged}" 
-                                        IsChecked="{Binding DetectUnchanged}" ToolTip="{DynamicResource S.SaveAs.GifOptions.DetectUnchanged.Info}"/>
+                                        IsChecked="{Binding DetectUnchanged}" ToolTip="{DynamicResource S.SaveAs.GifOptions.DetectUnchanged.Info}"
+                                        IsEnabled="{Binding EnableTransparency, Converter={StaticResource InvertedBool}}"/>
 
                     <Grid Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Margin="10,0,0,0" Visibility="{Binding ElementName=DetectCheckBox, Path=IsChecked, Converter={StaticResource Bool2Visibility}}">
                         <Grid.RowDefinitions>
