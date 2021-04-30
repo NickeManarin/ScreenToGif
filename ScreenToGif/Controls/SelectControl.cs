@@ -1167,33 +1167,6 @@ namespace ScreenToGif.Controls
                         }
                     };
 
-                    var viewBox = new Viewbox
-                    {
-                        Height = window.Bounds.Height,
-                        Width = window.Bounds.Width,
-                        Stretch = Stretch.Uniform,
-                        StretchDirection = StretchDirection.Both,
-                        Tag = "T",
-                        ClipToBounds = true,
-                        IsHitTestVisible = false,
-                        VerticalAlignment = VerticalAlignment.Center,
-                        Child = new TextPath
-                        {
-                            IsHitTestVisible = false,
-                            Text = window.Bounds.Width < 400 || window.Bounds.Height < 100 ? "👆" : "👆 " + LocalizationHelper.Get("S.Recorder.SelectWindow"),
-                            Fill = new SolidColorBrush(Color.FromArgb(200, 0, 0, 0)),
-                            Stroke = new SolidColorBrush(Color.FromArgb(200, 255, 255, 255)),
-                            StrokeThickness = 3,
-                            FontFamily = new FontFamily("Segoe UI"),
-                            FontSize = 80,
-                            FontWeight = FontWeights.SemiBold,
-                            Margin = new Thickness(20),
-                            VerticalAlignment = VerticalAlignment.Stretch,
-                            HorizontalAlignment = HorizontalAlignment.Stretch,
-                            ClipToBounds = true,
-                        }
-                    };
-
                     border.UpdateLayout();
 
                     var top = Windows.Where(x => x.Order < window.Order).Select(x => x.Bounds).ToList();
@@ -1204,7 +1177,7 @@ namespace ScreenToGif.Controls
                         foreach (var region in top)
                         {
                             geo = Geometry.Combine(geo, new RectangleGeometry { Rect = new Rect(new Point(region.X - window.Bounds.X, region.Y - window.Bounds.Y), new Size(region.Width, region.Height)) },
-                                GeometryCombineMode.Exclude, viewBox.RenderTransform);
+                                GeometryCombineMode.Exclude, Transform.Identity);
                         }
 
                         border.Clip = geo;
@@ -1255,6 +1228,9 @@ namespace ScreenToGif.Controls
             AdjustSelection();
 
             _ready = true;
+
+            //Triggers the mouse event to detect the mouse hit at start.
+            OnMouseMove(new MouseButtonEventArgs(Mouse.PrimaryDevice, 0, MouseButton.Left));
         }
 
         private void SystemEvents_DisplaySettingsChanged(object o, EventArgs eventArgs)

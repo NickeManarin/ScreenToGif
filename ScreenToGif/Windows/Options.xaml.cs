@@ -2305,7 +2305,8 @@ namespace ScreenToGif.Windows
 
             try
             {
-                ProxyPasswordBox.Password = WebHelper.Unprotect(UserSettings.All.ProxyPassword);
+                if (!string.IsNullOrWhiteSpace(UserSettings.All.ProxyPassword))
+                    ProxyPasswordBox.Password = WebHelper.Unprotect(UserSettings.All.ProxyPassword);
             }
             catch (Exception ex)
             {
@@ -2354,7 +2355,9 @@ namespace ScreenToGif.Windows
             BaseCompatibilityPreferences.HandleDispatcherRequestProcessingFailure = UserSettings.All.WorkaroundQuota ? BaseCompatibilityPreferences.HandleDispatcherRequestProcessingFailureOptions.Reset : BaseCompatibilityPreferences.HandleDispatcherRequestProcessingFailureOptions.Continue;
             RenderOptions.ProcessRenderMode = UserSettings.All.DisableHardwareAcceleration ? RenderMode.SoftwareOnly : RenderMode.Default;
 
-            UserSettings.All.ProxyPassword = WebHelper.Protect(ProxyPasswordBox.Password);
+            if (!string.IsNullOrWhiteSpace(ProxyPasswordBox.Password))
+                UserSettings.All.ProxyPassword = WebHelper.Protect(ProxyPasswordBox.Password);
+
             UserSettings.Save();
         }
 

@@ -934,7 +934,7 @@
     <s:String x:Key="S.Editor.Welcome.Size">Hoe lager de framerate, aantal gebruikte kleuren of aantal veranderingen tussen frames, hoe kleiner de bestandsgrootte</s:String>
     <s:String x:Key="S.Editor.Welcome.Contact">Wil je praten? Open "Instellingen > Over" voor contactmogelijkheden</s:String>
     <s:String x:Key="S.Editor.Welcome.Trouble">Problemen? Neem contact op met de Feedback tool</s:String>
-    <s:String x:Key="S.Editor.Welcome.NewRecorder">Wil je de nieuwe opnamemethode gebruiken? Ga naar "Instellingen --> Applicatie" om deze te activeren</s:String>
+    <s:String x:Key="S.Editor.Welcome.NewRecorder">Wil je de nieuwe opnamemethode gebruiken? Ga naar "Instellingen > Opname" om deze te activeren</s:String>
     
     <!--Editor • File tab • New-->
     <s:String x:Key="S.Editor.File.New.Recording">Opname</s:String>

@@ -1,8 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using ScreenToGif.Native;
+using ScreenToGif.Settings;
 using ScreenToGif.Util;
 
 namespace ScreenToGif.Windows.Other
@@ -46,10 +48,17 @@ namespace ScreenToGif.Windows.Other
             SelectControl.ParentLeft = Left;
             SelectControl.ParentTop = Top;
             SelectControl.Mode = mode;
-            SelectControl.BackImage = CaptureBackground();
 
             if (mode == ModeType.Region)
             {
+                SelectControl.BackImage = CaptureBackground();
+
+                if (UserSettings.All.SelectionImprovement)
+                {
+                    AllowsTransparency = false;
+                    Background = new ImageBrush(CaptureBackground(false));
+                }
+
                 //Since each region selector is attached to a single screen, the selection must be translated.
                 SelectControl.Selected = previousRegion.Translate(monitor.Bounds.Left * -1, monitor.Bounds.Top * -1);
                 SelectControl.Windows.Clear();
@@ -115,19 +124,16 @@ namespace ScreenToGif.Windows.Other
             }
         }
 
-        private BitmapSource CaptureBackground()
+        private BitmapSource CaptureBackground(bool addPadding = true)
         {
             //A 7 pixel offset is added to allow the crop by the magnifying glass.
-            //var left = Math.Round((Left - 8d) * _scale, MidpointRounding.AwayFromZero);
-            //var top = Math.Round((Top - 8d) * _scale, MidpointRounding.AwayFromZero);
+            if (addPadding)
+                return Util.Native.CaptureBitmapSource((int)Math.Round((Width + 14 + 1) * _scale), (int)Math.Round((Height + 14 + 1) * _scale),
+                    (int)Math.Round((Left - 7) * _scale), (int)Math.Round((Top - 7) * _scale));
 
-            //return Util.Native.CaptureBitmapSource((int)Math.Round((Width + 16) * _scale), (int)Math.Round((Height + 16) * _scale),
-            //    (int)left, (int)top);
-
-            return Util.Native.CaptureBitmapSource((int)Math.Round((Width + 14 + 1) * _scale), (int)Math.Round((Height + 14 + 1) * _scale),
-                (int)Math.Round((Left - 7) * _scale), (int)Math.Round((Top - 7) * _scale));
+            return Util.Native.CaptureBitmapSource((int)Math.Round(Width * _scale), (int)Math.Round(Height * _scale),
+                (int)Math.Round(Left * _scale), (int)Math.Round(Top * _scale));
         }
-
 
         private void SelectControl_MouseHovering(object sender, RoutedEventArgs e)
         {

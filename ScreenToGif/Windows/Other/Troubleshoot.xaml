@@ -1,4 +1,4 @@
-﻿<Window x:Class="ScreenToGif.Windows.Other.Troubleshoot"
+<Window x:Class="ScreenToGif.Windows.Other.Troubleshoot"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:n="clr-namespace:ScreenToGif.Controls"
@@ -42,7 +42,7 @@
         </Grid>
 
         <Viewbox Grid.Row="2" Stretch="Uniform" StretchDirection="Both" Margin="3" VerticalAlignment="Center">
-            <Canvas x:Name="MainCanvas"/>
+            <Canvas x:Name="MainCanvas" SizeChanged="MainCanvas_SizeChanged"/>
         </Viewbox>
         
         <Grid Grid.Row="3">

@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:s="clr-namespace:System;assembly=mscorlib"
                     xml:space="preserve">
@@ -959,7 +959,7 @@
     <s:String x:Key="S.Editor.Welcome.Size">帧率越低，颜色数或帧之间的变化越小，尺寸越小</s:String>
     <s:String x:Key="S.Editor.Welcome.Contact">你希望联系我们？打开“选项 > 关于”可以找到联系方式</s:String>
     <s:String x:Key="S.Editor.Welcome.Trouble">遇到问题了？请通过“反馈”工具联系我</s:String>
-    <s:String x:Key="S.Editor.Welcome.NewRecorder">你想试试新版录像机界面吗？转到“选项 > 应用程序”以启用</s:String>
+    <s:String x:Key="S.Editor.Welcome.NewRecorder">你想试试新版录像机界面吗？转到“选项 > 录像机”以启用</s:String>
     
     <!--Editor • File tab • New-->
     <s:String x:Key="S.Editor.File.New.Recording">录制</s:String>

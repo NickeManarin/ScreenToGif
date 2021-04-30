@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:s="clr-namespace:System;assembly=mscorlib"
                     xml:space="preserve">
@@ -821,7 +821,7 @@
     <s:String x:Key="S.Editor.Welcome.Size">影格率越低，色彩計數或影格之間的變化量越小，則大小越小</s:String>
     <s:String x:Key="S.Editor.Welcome.Contact">您想談談嗎？連絡方式請打開 [選項 > 關於]</s:String>
     <s:String x:Key="S.Editor.Welcome.Trouble">遇到麻煩？請透過意見反應工具與我聯繫</s:String>
-    <s:String x:Key="S.Editor.Welcome.NewRecorder">你想試試新版錄製界面嗎？可以從 [選項 > 應用程式] 來啟用</s:String>
+    <s:String x:Key="S.Editor.Welcome.NewRecorder">你想試試新版錄製界面嗎？可以從 [選項 > 錄製] 來啟用</s:String>
     
     <!--Editor • File tab • New-->
     <s:String x:Key="S.Editor.File.New.Recording">錄製</s:String>

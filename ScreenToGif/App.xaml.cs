@@ -329,9 +329,6 @@ namespace ScreenToGif
 
         private void App_Exit(object sender, ExitEventArgs e)
         {
-            if (UserSettings.All.DeleteCacheWhenClosing)
-                StorageUtils.PurgeCache();
-            
             try
             {
                 MutexList.RemoveAll();

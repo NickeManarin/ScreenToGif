@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -35,6 +35,8 @@ namespace ScreenToGif.Controls
 
         public static readonly DependencyProperty ManuallyCapturedCountProperty = DependencyProperty.Register(nameof(ManuallyCapturedCount), typeof(int), typeof(DisplayTimer), new PropertyMetadata(0));
 
+        public static readonly DependencyProperty IsImpreciseCaptureProperty = DependencyProperty.Register(nameof(IsImpreciseCapture), typeof(bool), typeof(DisplayTimer), new PropertyMetadata(false));
+
 
         public TimeSpan Elapsed
         {
@@ -61,6 +63,13 @@ namespace ScreenToGif.Controls
         }
 
 
+
+        public CornerRadius CornerRadius
+        {
+            get => (CornerRadius)GetValue(CornerRadiusProperty);
+            set => SetValue(CornerRadiusProperty, value);
+        }
+
         public int CapturedCount
         {
             get => (int)GetValue(CapturedCountProperty);
@@ -72,11 +81,11 @@ namespace ScreenToGif.Controls
             get => (int)GetValue(ManuallyCapturedCountProperty);
             set => SetValue(ManuallyCapturedCountProperty, value);
         }
-
-        public CornerRadius CornerRadius
+        
+        public bool IsImpreciseCapture
         {
-            get => (CornerRadius)GetValue(CornerRadiusProperty);
-            set => SetValue(CornerRadiusProperty, value);
+            get => (bool)GetValue(IsImpreciseCaptureProperty);
+            set => SetValue(IsImpreciseCaptureProperty, value);
         }
 
 

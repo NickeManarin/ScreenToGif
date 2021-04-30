@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:s="clr-namespace:System;assembly=mscorlib"
                     xml:space="preserve">
@@ -805,9 +805,9 @@
     <s:String x:Key="S.Editor.Welcome.Import">이미지, 비디오, 프로젝트를 드래그 앤 드롭으로 불러오세요</s:String>
     <s:String x:Key="S.Editor.Welcome.ThankYou">이 프로그램을 사용해주셔서 감사합니다!</s:String>
     <s:String x:Key="S.Editor.Welcome.Size">프레임레이트가 낮을수록, 색상과 프레임 수가 적을수록 용량은 작아집니다</s:String>
-    <s:String x:Key="S.Editor.Welcome.Contact">개발자한테 전할 말이 있나요? "설정 > 정보"에서 연락처를 확인하세요</s:String>
+    <s:String x:Key="S.Editor.Welcome.Contact">개발자한테 전할 말이 있나요? "설정 > 정보" 에서 연락처를 확인하세요</s:String>
     <s:String x:Key="S.Editor.Welcome.Trouble">문제가 있나요? 피드백을 통해 연락해주세요</s:String>
-    <s:String x:Key="S.Editor.Welcome.NewRecorder">새 녹화 UI를 시도해보고 싶나요? "설정 > 프로그램"에서 활성화할 수 있습니다</s:String>
+    <s:String x:Key="S.Editor.Welcome.NewRecorder">새 녹화 UI를 시도해보고 싶나요? "설정 > 녹화기" 에서 활성화할 수 있습니다</s:String>
     
     <!--Editor • File tab • New-->
     <s:String x:Key="S.Editor.File.New.Recording">녹화</s:String>
