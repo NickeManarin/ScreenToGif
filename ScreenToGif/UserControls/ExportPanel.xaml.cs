@@ -795,7 +795,7 @@ namespace ScreenToGif.UserControls
 
         public ExportPreset GetPreset()
         {
-            return CurrentPreset ?? PresetComboBox.SelectedItem as ExportPreset;
+            return (CurrentPreset ?? PresetComboBox.SelectedItem as ExportPreset)?.ShallowCopy();
         }
 
         #endregion
