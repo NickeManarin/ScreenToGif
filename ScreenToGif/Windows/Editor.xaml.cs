@@ -5215,13 +5215,20 @@ namespace ScreenToGif.Windows
             //Validates each file name when saving multiple images (if more than one image, that will not be zipped).
             if (preset is ImagePreset imagePreset && !imagePreset.ZipFiles)
             {
-                var output = Path.Combine(preset.OutputFolder, preset.ResolvedFilename);
-                var padSize = (Project.Frames.Count - 1).ToString().Length;
-
-                if (!preset.OverwriteOnSave && indexes.Count > 1 ? indexes.Any(a => File.Exists($"{output} {(a + "").PadLeft(padSize, '0')}" + preset.Extension)) : File.Exists(output + preset.Extension))
+                if (!preset.OverwriteOnSave)
                 {
-                    Dispatcher.Invoke(() => StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Overwrite")));
-                    return false;
+                    var output = Path.Combine(preset.OutputFolder, preset.ResolvedFilename);
+                    var padSize = (Project.Frames.Count - 1).ToString().Length;
+
+                    //With or without exporting it partially.
+                    var any = preset.ExportPartially ? indexes.Any(a => File.Exists($"{output} {(a + "").PadLeft(padSize, '0')}" + preset.Extension)) :
+                        Project.Frames.Any(a => File.Exists($"{output} {(a.Index + "").PadLeft(padSize, '0')}" + preset.Extension));
+
+                    if (any)
+                    {
+                        Dispatcher.Invoke(() => StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Overwrite")));
+                        return false;
+                    }
                 }
 
                 if (indexes.Count > 1 && !Dispatcher.Invoke(() => Dialog.Ask(LocalizationHelper.Get("S.SaveAs.Dialogs.Multiple.Title"), 
