@@ -12,6 +12,7 @@ _VS 2019 and .Net 4.8 or newer required._
 
 ♦ When exporting as images the warning message about existing files would not appear.  
 ♦ DirectX capture: When the cursor was idle, it was not appearing in the recording.  
+♦ When exporting multiple times (near the same time) with the same preset, the first encoding was using the filename of the second one.  
 
 ### Known Bugs:
   
