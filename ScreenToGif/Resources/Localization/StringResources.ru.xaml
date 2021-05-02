@@ -246,7 +246,7 @@
     <s:String x:Key="S.Options.App.General.WorkaroundQuota.Info">(Эксперимент)</s:String>
     <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">Подтверждать закрытие (по команде 'Выход').</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">Отключить аппаратное ускорение.</s:String>
-    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(Программная орисовка интерфейса)</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(Программная отрисовка интерфейса)</s:String>
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">Проверять обновления перевода.</s:String>
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(Автозагрузка и автоустановка)</s:String>
     <s:String x:Key="S.Options.App.General.CheckForUpdates">Проверять обновления при запуске.</s:String>
