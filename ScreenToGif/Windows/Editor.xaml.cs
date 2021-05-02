@@ -3083,6 +3083,10 @@ namespace ScreenToGif.Windows
                             //If the playback should not loop, it will stop at the latest frame.
                             if (!UserSettings.All.LoopedPlayback)
                             {
+                                // This will ensure that latest frame will be shown if drops frames behind is enabled
+                                if (UserSettings.All.DropFramesDuringPreviewIfBehind && pass > 1)
+                                    break;
+
                                 Dispatcher.Invoke(Pause);
                                 return;
                             }
