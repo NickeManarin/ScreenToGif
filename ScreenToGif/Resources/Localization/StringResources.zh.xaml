@@ -322,7 +322,7 @@
     <s:String x:Key="S.Options.Recorder.Compact">紧凑模式</s:String>
     <s:String x:Key="S.Options.Recorder.Compact.Info">（显示录制器命令面板的较小版本）</s:String>
     <s:String x:Key="S.Options.Recorder.DisplayDiscard">显示放弃按钮也同时录制</s:String>
-    <s:String x:Key="S.Options.Recorder.DisplayDiscard.Info">（通常，仅在暂停状态下可见）</s:String>
+    <s:String x:Key="S.Options.Recorder.DisplayDiscard.Info">（通常情况下，仅在暂停状态下可见）</s:String>
     <s:String x:Key="S.Options.Recorder.SelectionImprovement">提高屏幕选择性能</s:String>
     <s:String x:Key="S.Options.Recorder.SelectionImprovement.Info">（通过显示屏幕的静态视图，减少屏幕选择时的延迟）</s:String>
     
@@ -396,9 +396,9 @@
     <s:String x:Key="S.Options.Shortcuts.Global.Exit.Info">（关闭所有窗口并从系统托盘中删除应用程序）</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders">录像机</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause">开始/暂停：</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause.Info">（它启动或暂停录制，如果快照模式已激活，则用于拍摄快照）</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause.Info">（启动或暂停录制，如果快照模式已激活，则用于拍摄快照）</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Stop">停止：</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Recorders.Stop.Info">（它会停止录制并打开编辑器）</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Stop.Info">（停止录制并打开编辑器）</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Discard">放弃：</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Discard.Info">（暂停时放弃活动录制）</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Follow">光标跟随：</s:String>
@@ -437,7 +437,7 @@
     <s:String x:Key="S.Options.Storage.Status.Folders.None">没有文件夹</s:String>
     <s:String x:Key="S.Options.Storage.Status.Folders.Singular">{0:##,##0} 个文件夹</s:String>
     <s:String x:Key="S.Options.Storage.Status.Folders.Plural">{0:##,##0} 个文件夹</s:String>
-    <s:String x:Key="S.Options.Storage.Status.InUse">{0} 在使用</s:String>
+    <s:String x:Key="S.Options.Storage.Status.InUse">{0} 正在使用</s:String>
     <s:String x:Key="S.Options.Storage.Paths">路径</s:String>
     <s:String x:Key="S.Options.Storage.Paths.Cache">缓存：</s:String>
     <s:String x:Key="S.Options.Storage.Paths.Cache.Choose">选择临时文件位置</s:String>
