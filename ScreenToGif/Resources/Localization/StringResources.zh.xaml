@@ -851,7 +851,7 @@
     <s:String x:Key="S.Encoder.Completed.Command.Output">显示输出命令。</s:String>
     <s:String x:Key="S.Encoder.Completed.Command.Fail">无法执行命令</s:String>
     <s:String x:Key="S.Encoder.Completed.Upload.Fail">无法上传</s:String>
-    <s:String x:Key="S.Encoder.Completed.Upload.Delete">Ctrl + 单击 以打开页面以删除图像（如果可用）。</s:String>
+    <s:String x:Key="S.Encoder.Completed.Upload.Delete">Ctrl + 单击 打开页面以删除图像（如果可用）。</s:String>
     
     <s:String x:Key="S.Encoder.Completed.Elapsed">已用时间（以分钟为单位）：</s:String>
     <s:String x:Key="S.Encoder.Completed.Elapsed.Analysis">分析：</s:String>
@@ -876,7 +876,7 @@
     <s:String x:Key="S.Encoder.ExploreFolder">显示文件夹</s:String>
     <s:String x:Key="S.Encoder.Remove">从列表中移除</s:String>
     <s:String x:Key="S.Encoder.Details">显示详细信息</s:String>
-    <s:String x:Key="S.Encoder.Dismiss">关闭所有已完成编码</s:String>
+    <s:String x:Key="S.Encoder.Dismiss">关闭所有已完成编码的通知</s:String>
 
     <s:String x:Key="S.Encoder.Copy.Image">复制静止图片</s:String>
     <s:String x:Key="S.Encoder.Copy.Filename">复制文件名</s:String>
