@@ -866,9 +866,9 @@
     <s:String x:Key="S.Encoder.Error.Info">点击此处显示此错误的详细信息。</s:String>
     <s:String x:Key="S.Encoder.Uploading">上传中</s:String>
     <s:String x:Key="S.Encoder.Executing">执行命令</s:String>
-    <s:String x:Key="S.Encoder.Processing">正在处理 {0}</s:String>
+    <s:String x:Key="S.Encoder.Processing">正在处理第 {0} 帧</s:String>
     <s:String x:Key="S.Encoder.Analyzing.Second">准备第二次</s:String>
-    <s:String x:Key="S.Encoder.Processing.Second">正在处理 {0} - 第二次</s:String>
+    <s:String x:Key="S.Encoder.Processing.Second">正在处理第 {0} 帧 - 第二次</s:String>
     <s:String x:Key="S.Encoder.CreatingFile">创建文件</s:String>
     <s:String x:Key="S.Encoder.Analyzing">分析不变的像素</s:String>
     <s:String x:Key="S.Encoder.SavingAnalysis">保存分析结果</s:String>
