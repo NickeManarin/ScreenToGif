@@ -302,8 +302,8 @@
     <s:String x:Key="S.Options.Recorder.CaptureChanges.Info">（仅当在捕获区域内进行了某些更改时，才会捕获帧）</s:String>
     <s:String x:Key="S.Options.Recorder.RemoteImprovement">提高远程桌面连接上的捕获性能</s:String>
     <s:String x:Key="S.Options.Recorder.RemoteImprovement.Info">（禁用分层窗口捕获）</s:String>
-    <s:String x:Key="S.Options.Recorder.ForceGarbageCollection">在捕获过程中强制清理内存。</s:String>
-    <s:String x:Key="S.Options.Recorder.ForceGarbageCollection.Info">（减少捕捉过程中的内存使用，但降低了性能）</s:String>
+    <s:String x:Key="S.Options.Recorder.ForceGarbageCollection">在捕获过程中强制清理内存</s:String>
+    <s:String x:Key="S.Options.Recorder.ForceGarbageCollection.Info">（减少捕捉过程中的内存使用，但会降低性能）</s:String>
     
     <s:String x:Key="S.Options.Recorder.Guidelines">指导方针</s:String>
     <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds">三分法则</s:String>
@@ -315,15 +315,15 @@
     <s:String x:Key="S.Options.Recorder.HideTitleBar">隐藏标题栏（精简模式）</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier">启用屏幕放大镜</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier.Info">（在选择录制区域时启用放大镜）</s:String>
-    <s:String x:Key="S.Options.Recorder.AnimateBorder">在选择期间对屏幕区域边框进行动画处理。</s:String>
+    <s:String x:Key="S.Options.Recorder.AnimateBorder">在选择期间对屏幕区域边框进行动画处理</s:String>
     <s:String x:Key="S.Options.Recorder.AnimateBorder.Info">（使用“行军蚁”样式制作动画）</s:String>
     <s:String x:Key="S.Options.Recorder.SelectionPanning">启用选择平移</s:String>
     <s:String x:Key="S.Options.Recorder.SelectionPanning.Info">（在选择的一角附近显示一个装饰物，允许移动录制区域）</s:String>
     <s:String x:Key="S.Options.Recorder.Compact">紧凑模式</s:String>
     <s:String x:Key="S.Options.Recorder.Compact.Info">（显示录制器命令面板的较小版本）</s:String>
     <s:String x:Key="S.Options.Recorder.DisplayDiscard">显示放弃按钮也同时录制</s:String>
-    <s:String x:Key="S.Options.Recorder.DisplayDiscard.Info">（通常，仅在暂停状态下可见）</s:String>
-    <s:String x:Key="S.Options.Recorder.SelectionImprovement">提高屏幕选择性能。 </s:String>
+    <s:String x:Key="S.Options.Recorder.DisplayDiscard.Info">（通常情况下，仅在暂停状态下可见）</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionImprovement">提高屏幕选择性能</s:String>
     <s:String x:Key="S.Options.Recorder.SelectionImprovement.Info">（通过显示屏幕的静态视图，减少屏幕选择时的延迟）</s:String>
     
     <s:String x:Key="S.Options.Recorder.RememberSize">记住录制区域的先前大小</s:String>
@@ -396,9 +396,9 @@
     <s:String x:Key="S.Options.Shortcuts.Global.Exit.Info">（关闭所有窗口并从系统托盘中删除应用程序）</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders">录像机</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause">开始/暂停：</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause.Info">（它启动或暂停录制，如果快照模式已激活，则用于拍摄快照）</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause.Info">（启动或暂停录制，如果快照模式已激活，则用于拍摄快照）</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Stop">停止：</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Recorders.Stop.Info">（它会停止录制并打开编辑器）</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Stop.Info">（停止录制并打开编辑器）</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Discard">放弃：</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Discard.Info">（暂停时放弃活动录制）</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Follow">光标跟随：</s:String>
@@ -437,7 +437,7 @@
     <s:String x:Key="S.Options.Storage.Status.Folders.None">没有文件夹</s:String>
     <s:String x:Key="S.Options.Storage.Status.Folders.Singular">{0:##,##0} 个文件夹</s:String>
     <s:String x:Key="S.Options.Storage.Status.Folders.Plural">{0:##,##0} 个文件夹</s:String>
-    <s:String x:Key="S.Options.Storage.Status.InUse">{0} 在使用</s:String>
+    <s:String x:Key="S.Options.Storage.Status.InUse">{0} 正在使用</s:String>
     <s:String x:Key="S.Options.Storage.Paths">路径</s:String>
     <s:String x:Key="S.Options.Storage.Paths.Cache">缓存：</s:String>
     <s:String x:Key="S.Options.Storage.Paths.Cache.Choose">选择临时文件位置</s:String>
@@ -851,7 +851,7 @@
     <s:String x:Key="S.Encoder.Completed.Command.Output">显示输出命令。</s:String>
     <s:String x:Key="S.Encoder.Completed.Command.Fail">无法执行命令</s:String>
     <s:String x:Key="S.Encoder.Completed.Upload.Fail">无法上传</s:String>
-    <s:String x:Key="S.Encoder.Completed.Upload.Delete">Ctrl + 单击 以打开页面以删除图像（如果可用）。</s:String>
+    <s:String x:Key="S.Encoder.Completed.Upload.Delete">Ctrl + 单击 打开页面以删除图像（如果可用）。</s:String>
     
     <s:String x:Key="S.Encoder.Completed.Elapsed">已用时间（以分钟为单位）：</s:String>
     <s:String x:Key="S.Encoder.Completed.Elapsed.Analysis">分析：</s:String>
@@ -866,9 +866,9 @@
     <s:String x:Key="S.Encoder.Error.Info">点击此处显示此错误的详细信息。</s:String>
     <s:String x:Key="S.Encoder.Uploading">上传中</s:String>
     <s:String x:Key="S.Encoder.Executing">执行命令</s:String>
-    <s:String x:Key="S.Encoder.Processing">正在处理 {0}</s:String>
+    <s:String x:Key="S.Encoder.Processing">正在处理第 {0} 帧</s:String>
     <s:String x:Key="S.Encoder.Analyzing.Second">准备第二次</s:String>
-    <s:String x:Key="S.Encoder.Processing.Second">正在处理 {0} - 第二次</s:String>
+    <s:String x:Key="S.Encoder.Processing.Second">正在处理第 {0} 帧 - 第二次</s:String>
     <s:String x:Key="S.Encoder.CreatingFile">创建文件</s:String>
     <s:String x:Key="S.Encoder.Analyzing">分析不变的像素</s:String>
     <s:String x:Key="S.Encoder.SavingAnalysis">保存分析结果</s:String>
@@ -876,7 +876,7 @@
     <s:String x:Key="S.Encoder.ExploreFolder">显示文件夹</s:String>
     <s:String x:Key="S.Encoder.Remove">从列表中移除</s:String>
     <s:String x:Key="S.Encoder.Details">显示详细信息</s:String>
-    <s:String x:Key="S.Encoder.Dismiss">关闭所有已完成编码</s:String>
+    <s:String x:Key="S.Encoder.Dismiss">关闭所有已完成编码的通知</s:String>
 
     <s:String x:Key="S.Encoder.Copy.Image">复制静止图片</s:String>
     <s:String x:Key="S.Encoder.Copy.Filename">复制文件名</s:String>
@@ -1451,12 +1451,12 @@
     
     <s:String x:Key="S.SaveAs.Apng">Apng</s:String>
     <s:String x:Key="S.SaveAs.Apng.Info">动画便携式网络图形</s:String>
-    <s:String x:Key="S.SaveAs.Gif">Gif</s:String>
+    <s:String x:Key="S.SaveAs.Gif">GIF</s:String>
     <s:String x:Key="S.SaveAs.Gif.Info">图形交换格式</s:String>
     <s:String x:Key="S.SaveAs.Webp">WebP</s:String>
     <s:String x:Key="S.SaveAs.Webp.Info">Web 图片</s:String>
     
-    <s:String x:Key="S.SaveAs.Avi">Avi</s:String>
+    <s:String x:Key="S.SaveAs.Avi">AVI</s:String>
     <s:String x:Key="S.SaveAs.Avi.Info">音频视频交错</s:String>
     <s:String x:Key="S.SaveAs.Mkv">MKV</s:String>
     <s:String x:Key="S.SaveAs.Mkv.Info">Matroska</s:String>
@@ -1534,7 +1534,7 @@
     <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Grayscale">灰度</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Grayscale.Info">使用固定的灰度调色板，因此速度更快。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Quantizer.MostUsed">最常用的颜色</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.MostUsed.Info">只是需要在选择帧中最常用的颜色。</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.MostUsed.Info">只需在选择帧中提取最常用的颜色。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Sampling">采样：</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Sampling.Info">采样因子：&#10;值为 1 会产生更好的 GIF 效果，但渲染速度会较慢。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Quality">质量：</s:String>
@@ -1556,7 +1556,7 @@
     <s:String x:Key="S.SaveAs.GifOptions.Transparency.Pick.Info">如果选择了一种颜色，它将被转换为透明的，并且在生成的 GIF 中将显示为透明。&#10;如果未选择颜色，则所有透明颜色（Alpha = 0%）将正常显示为透明。rmally.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">检测未更改的像素</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged.Info">通过分析和检测帧之间未更改的像素，&#10;可以将仅必要的部分保存到 GIF。</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma">用色度键替换这些像素。</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma">用色度键替换这些像素</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma.Info">重复/不变的像素将被此色度键替换，&#10;从而可以减少每帧使用的颜色。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.ChromaKey">色度键：</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Dither">抖动：</s:String>
