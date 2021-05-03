@@ -4435,17 +4435,7 @@ namespace ScreenToGif.Windows
         {
             var focusFirstVisibleChild = true;
 
-            #region Hide all visible grids
-
-            foreach (var child in ActionInternalGrid.Children.OfType<Grid>().Where(x => x.Visibility == Visibility.Visible))
-                child.Visibility = Visibility.Collapsed;
-
-            CustomContentControl.Content = null;
-            CustomContentControl.Visibility = Visibility.Collapsed;
-
-            ShapeDrawingCanvas.DeselectAll();
-
-            #endregion
+            HideAllVisibleGrids();
 
             #region Overlay
 
@@ -4730,7 +4720,18 @@ namespace ScreenToGif.Windows
 
             CommandManager.InvalidateRequerySuggested();
         }
-        
+
+        private void HideAllVisibleGrids()
+        {
+            foreach (var child in ActionInternalGrid.Children.OfType<Grid>().Where(x => x.Visibility == Visibility.Visible))
+                child.Visibility = Visibility.Collapsed;
+
+            CustomContentControl.Content = null;
+            CustomContentControl.Visibility = Visibility.Collapsed;
+
+            ShapeDrawingCanvas.DeselectAll();
+        }
+
         private void ClosePanel(bool isCancel = false, bool removeEvent = false)
         {
             StatusList.Remove(StatusType.Warning);
@@ -4749,8 +4750,7 @@ namespace ScreenToGif.Windows
             BeginStoryboard(this.FindStoryboard("HidePanelStoryboard"), HandoffBehavior.Compose);
             BeginStoryboard(this.FindStoryboard("HideOverlayGridStoryboard"), HandoffBehavior.Compose);
 
-            CustomContentControl.Content = null;
-            CustomContentControl.Visibility = Visibility.Collapsed;
+            HideAllVisibleGrids();
         }
 
         private List<int> SelectedFramesIndex()
