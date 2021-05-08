@@ -1619,7 +1619,7 @@ namespace ScreenToGif.Windows
                 DeleteFrame(index);
 
             AdjustFrameNumbers(0);
-            SelectNear(0);
+            FrameListView.ScrollIntoView(0);
 
             Project.Persist();
             UpdateStatistics();
@@ -1647,8 +1647,8 @@ namespace ScreenToGif.Windows
             //From the end to the start.
             for (var i = countList; i > lastFrame; i--)
                 DeleteFrame(i);
-            
-            SelectNear(lastFrame - 1);
+
+            FrameListView.ScrollIntoView(FrameListView.SelectedItem);
 
             Project.Persist();
             UpdateStatistics();
