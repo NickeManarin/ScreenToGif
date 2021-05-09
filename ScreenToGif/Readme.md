@@ -7,6 +7,7 @@ _VS 2019 and .Net 4.8 or newer required._
 ## What's new? (Version 2.30)
 
 • Added presets for exporting Mp4 and Mov for Twitter.    
+• Improved performance in previewing animations (thanks to @mabakay).    
 
 ### Fixed:
 
