@@ -4,9 +4,9 @@ This is the current project of ScreenToGif.
 
 _VS 2019 and .Net 4.8 or newer required._
 
-## What's new? (Version 2.29.2)
+## What's new? (Version 2.30)
 
-• Just bug fixes.  
+• Added presets for exporting Mp4 and Mov for Twitter.    
 
 ### Fixed:
 
