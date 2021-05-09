@@ -3999,9 +3999,22 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
 
-                                <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="TransitionImage" 
-                                       Source="{Binding ElementName=ZoomBoxControl, Path=ImageSource, Converter={StaticResource UriToBitmapConverter}}" Stretch="Uniform"
-                                       Effect="{StaticResource Shadow.Border.Large}"/>
+                                <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="TransitionImage"
+                                       Source="{Binding Path=ImageSource, Converter={StaticResource UriToBitmapConverter}}" Stretch="Uniform"
+                                       Effect="{StaticResource Shadow.Border.Large}">
+                                    <Image.Style>
+                                        <Style TargetType="FrameworkElement">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=FadeGrid, Path=Visibility}" Value="Visible">
+                                                    <Setter Property="DataContext" Value="{Binding ElementName=ZoomBoxControl}"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                            <Style.Setters>
+                                                <Setter Property="DataContext" Value="{x:Null}"/>
+                                            </Style.Setters>
+                                        </Style>
+                                    </Image.Style>
+                                </Image>
 
                                 <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding ElementName=FadeSlider, Path=Value, StringFormat='{} {0}x'}" 
                                            FontSize="16" Padding="2,0" Foreground="{DynamicResource Element.Foreground.Detail}" VerticalAlignment="Center"/>
@@ -4068,9 +4081,22 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
 
-                                <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="TransitionImage2" 
-                                       Source="{Binding ElementName=ZoomBoxControl, Path=ImageSource, Converter={StaticResource UriToBitmapConverter}}" Stretch="Uniform"
-                                       Effect="{StaticResource Shadow.Border.Large}"/>
+                                <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="TransitionImage2"
+                                       Source="{Binding Path=ImageSource, Converter={StaticResource UriToBitmapConverter}}" Stretch="Uniform"
+                                       Effect="{StaticResource Shadow.Border.Large}">
+                                    <Image.Style>
+                                        <Style TargetType="FrameworkElement">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=SlideGrid, Path=Visibility}" Value="Visible">
+                                                    <Setter Property="DataContext" Value="{Binding ElementName=ZoomBoxControl}"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                            <Style.Setters>
+                                                <Setter Property="DataContext" Value="{x:Null}"/>
+                                            </Style.Setters>
+                                        </Style>
+                                    </Image.Style>
+                                </Image>
 
                                 <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding ElementName=SlideSlider, Path=Value, StringFormat='{} {0}x'}" 
                                            FontSize="16" Padding="2,0" Foreground="{DynamicResource Element.Foreground.Detail}" VerticalAlignment="Center"/>
