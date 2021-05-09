@@ -242,7 +242,7 @@ namespace ScreenToGif.Util
             Application.Current.Dispatcher.BeginInvoke(new Action(() => EncodingUpdated(item, wasStatusUpdated)));
         }
 
-        internal static void Update(int id, Status status, List<string> fileNames, bool isIndeterminate = false)
+        internal static void UpdateMultiple(int id, Status status, List<string> fileNames, bool isIndeterminate = false)
         {
             var item = Encodings.FirstOrDefault(x => x.Id == id);
 
@@ -933,7 +933,7 @@ namespace ScreenToGif.Util
                                 frameList.Add(path);
                             }
 
-                            Update(id, Status.Completed, frameList);
+                            UpdateMultiple(id, Status.Completed, frameList);
                             return;
                         }
                         else

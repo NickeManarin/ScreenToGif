@@ -11,6 +11,8 @@ _VS 2019 and .Net 4.8 or newer required._
 ### Fixed:
 
 ♦ #873 - The multi-frame selection was getting lost after removing all previous/next frames (thanks to @pawlos).  
+♦ #883 - Cancelling the media insertion by pressing the cancel button was causing a crash (thanks to @pawlos).  
+♦ #885 - The button to open the file after encoding was not appearing.    
 
 ### Known Bugs:
   
