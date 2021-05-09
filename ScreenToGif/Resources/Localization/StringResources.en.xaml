@@ -765,6 +765,8 @@
     <s:String x:Key="S.Preset.Autosave.Info">Changes to this preset are automatically saved.</s:String>
     <s:String x:Key="S.Preset.Default.Title">Default ({0})</s:String>
     <s:String x:Key="S.Preset.Default.Description">Default preset for the encoder.</s:String>
+    <s:String x:Key="S.Preset.Twitter.Title">For Twitter ({0})</s:String>
+    <s:String x:Key="S.Preset.Twitter.Description">Respects Twitter upload limits (except size and resolution).</s:String>
     <s:String x:Key="S.Preset.Hevc.Title">HEVC ({0})</s:String>
     <s:String x:Key="S.Preset.Hevc.Description">High Efficiency Video Coding.</s:String>
     <s:String x:Key="S.Preset.Vp8.Title">VP8 ({0})</s:String>
