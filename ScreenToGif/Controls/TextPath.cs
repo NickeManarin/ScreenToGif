@@ -137,9 +137,6 @@ namespace ScreenToGif.Controls
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
-            if (!(e.Property.DefaultMetadata is FrameworkPropertyMetadata frame) || !frame.AffectsRender)
-                return;
-
             try
             {
                 _textGeometry = new FormattedText(Text ?? "", Thread.CurrentThread.CurrentUICulture, FlowDirection.LeftToRight,
