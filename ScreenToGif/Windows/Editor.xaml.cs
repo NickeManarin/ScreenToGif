@@ -227,7 +227,10 @@ namespace ScreenToGif.Windows
         public Editor()
         {
             InitializeComponent();
-            
+
+            // Hide last displayed panel after the panel closing animation is complete.
+            this.FindStoryboard("HideOverlayGridStoryboard").Completed += HideLastDisplayedPanel;
+
             #region Adjust the position
 
             //Tries to adjust the position/size of the window, centers on screen otherwise.
@@ -1619,7 +1622,7 @@ namespace ScreenToGif.Windows
                 DeleteFrame(index);
 
             AdjustFrameNumbers(0);
-            SelectNear(0);
+            FrameListView.ScrollIntoView(0);
 
             Project.Persist();
             UpdateStatistics();
@@ -1647,8 +1650,8 @@ namespace ScreenToGif.Windows
             //From the end to the start.
             for (var i = countList; i > lastFrame; i--)
                 DeleteFrame(i);
-            
-            SelectNear(lastFrame - 1);
+
+            FrameListView.ScrollIntoView(FrameListView.SelectedItem);
 
             Project.Persist();
             UpdateStatistics();
@@ -3083,6 +3086,10 @@ namespace ScreenToGif.Windows
                             //If the playback should not loop, it will stop at the latest frame.
                             if (!UserSettings.All.LoopedPlayback)
                             {
+                                // This will ensure that latest frame will be shown if drops frames behind is enabled
+                                if (UserSettings.All.DropFramesDuringPreviewIfBehind && pass > 1)
+                                    break;
+
                                 Dispatcher.Invoke(Pause);
                                 return;
                             }
@@ -4435,17 +4442,7 @@ namespace ScreenToGif.Windows
         {
             var focusFirstVisibleChild = true;
 
-            #region Hide all visible grids
-
-            foreach (var child in ActionInternalGrid.Children.OfType<Grid>().Where(x => x.Visibility == Visibility.Visible))
-                child.Visibility = Visibility.Collapsed;
-
-            CustomContentControl.Content = null;
-            CustomContentControl.Visibility = Visibility.Collapsed;
-
-            ShapeDrawingCanvas.DeselectAll();
-
-            #endregion
+            HideAllVisibleGrids();
 
             #region Overlay
 
@@ -4730,7 +4727,23 @@ namespace ScreenToGif.Windows
 
             CommandManager.InvalidateRequerySuggested();
         }
-        
+
+        private void HideAllVisibleGrids()
+        {
+            foreach (var child in ActionInternalGrid.Children.OfType<Grid>().Where(x => x.Visibility == Visibility.Visible))
+                child.Visibility = Visibility.Collapsed;
+
+            CustomContentControl.Content = null;
+            CustomContentControl.Visibility = Visibility.Collapsed;
+
+            ShapeDrawingCanvas.DeselectAll();
+        }
+
+        private void HideLastDisplayedPanel(object sender, EventArgs e)
+        {
+            HideAllVisibleGrids();
+        }
+
         private void ClosePanel(bool isCancel = false, bool removeEvent = false)
         {
             StatusList.Remove(StatusType.Warning);
@@ -4748,9 +4761,6 @@ namespace ScreenToGif.Windows
 
             BeginStoryboard(this.FindStoryboard("HidePanelStoryboard"), HandoffBehavior.Compose);
             BeginStoryboard(this.FindStoryboard("HideOverlayGridStoryboard"), HandoffBehavior.Compose);
-
-            CustomContentControl.Content = null;
-            CustomContentControl.Visibility = Visibility.Collapsed;
         }
 
         private List<int> SelectedFramesIndex()

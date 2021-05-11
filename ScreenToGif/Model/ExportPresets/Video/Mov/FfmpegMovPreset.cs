@@ -44,6 +44,32 @@ namespace ScreenToGif.Model.ExportPresets.Video.Mov
 
             new FfmpegMovPreset
             {
+                TitleKey = "S.Preset.Twitter.Title",
+                DescriptionKey = "S.Preset.Twitter.Description",
+                HasAutoSave = true,
+                IsDefault = true,
+                CreationDate = new DateTime(2021, 05, 09),
+
+                VideoCodec = VideoCodecs.X264,
+                CodecPreset = VideoCodecPresets.Fast,
+                HardwareAcceleration = HardwareAcceleration.Auto,
+                Pass = 2,
+                ConstantRateFactor = null,
+                PixelFormat = VideoPixelFormats.Yuv420p,
+                Vsync = Vsyncs.Vfr,
+                Framerate = Framerates.Custom,
+                CustomFramerate = 40,
+                BitRate = 15,
+                BitRateUnit = RateUnit.Megabits,
+                MaximumBitRate = 25,
+                MaximumBitRateUnit = RateUnit.Megabits,
+                RateControlBuffer = 8,
+                RateControlBufferUnit = RateUnit.Megabits,
+                Parameters = "-vsync passthrough \n-hwaccel auto \n{I} \n-c:v libx264 \n-preset fast \n-pix_fmt yuv420p \n-vf \"scale=trunc(iw/2)*2:trunc(ih/2)*2\" \n-b:v 15M \n-maxrate 25M \n-bufsize 8M \n-pass 2 \n-f mov \n{O}"
+            },
+
+            new FfmpegMovPreset
+            {
                 TitleKey = "S.Preset.Hevc.Title",
                 DescriptionKey = "S.Preset.Hevc.Description",
                 HasAutoSave = true,

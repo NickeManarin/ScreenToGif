@@ -261,7 +261,7 @@
             <n:ExtendedButton x:Name="OkButton" Grid.Column="2" Text="{DynamicResource S.Ok}" Padding="5,0" MinWidth="90" Margin="5" 
                               ContentWidth="18" ContentHeight="18" Icon="{StaticResource Vector.Ok}" Click="OkButton_Click"/>
             <n:ExtendedButton x:Name="CancelButton" Grid.Column="3" Text="{DynamicResource S.Cancel}" Padding="5,0" MinWidth="90" Margin="5" 
-                              ContentWidth="18" ContentHeight="18" Icon="{StaticResource Vector.Cancel}" IsCancel="True" Click="CancelButton_Click"/>
+                              ContentWidth="18" ContentHeight="18" Icon="{StaticResource Vector.Cancel}" Click="CancelButton_Click"/>
         </Grid>
     </Grid>
 </Window>
