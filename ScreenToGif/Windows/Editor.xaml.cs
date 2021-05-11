@@ -228,9 +228,6 @@ namespace ScreenToGif.Windows
         {
             InitializeComponent();
 
-            // Hide last displayed panel after the panel closing animation is complete.
-            this.FindStoryboard("HideOverlayGridStoryboard").Completed += HideLastDisplayedPanel;
-
             #region Adjust the position
 
             //Tries to adjust the position/size of the window, centers on screen otherwise.
@@ -4531,9 +4528,6 @@ namespace ScreenToGif.Windows
                     CustomContentControl.Content = grid;
                     CustomContentControl.Visibility = Visibility.Visible;
 
-                    //Focus the filename text box instead of automatically focusing the first child control in the panel.
-                    grid.InitialFocus();
-                    
                     focusFirstVisibleChild = false;
                     break;
                 case PanelType.LoadRecent:
@@ -4739,11 +4733,6 @@ namespace ScreenToGif.Windows
             ShapeDrawingCanvas.DeselectAll();
         }
 
-        private void HideLastDisplayedPanel(object sender, EventArgs e)
-        {
-            HideAllVisibleGrids();
-        }
-
         private void ClosePanel(bool isCancel = false, bool removeEvent = false)
         {
             StatusList.Remove(StatusType.Warning);
@@ -4761,6 +4750,8 @@ namespace ScreenToGif.Windows
 
             BeginStoryboard(this.FindStoryboard("HidePanelStoryboard"), HandoffBehavior.Compose);
             BeginStoryboard(this.FindStoryboard("HideOverlayGridStoryboard"), HandoffBehavior.Compose);
+
+            HideAllVisibleGrids();
         }
 
         private List<int> SelectedFramesIndex()

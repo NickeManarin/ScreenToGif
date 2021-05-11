@@ -19,6 +19,11 @@ namespace ScreenToGif.Settings
                     Migration2_28_0To2_29_0.Up(properties);
                     goto default;
 
+                //2.29
+                //2.29.1
+                //2.30
+                //2.30.1
+
                 default:
                 {
                     properties.RemoveAll(p => p.Key == "Version");

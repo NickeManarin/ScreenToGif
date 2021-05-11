@@ -4,17 +4,14 @@ This is the current project of ScreenToGif.
 
 _VS 2019 and .Net 4.8 or newer required._
 
-## What's new? (Version 2.30)
+## What's new? (Version 2.30.1)
 
-• Added presets for exporting Mp4 and Mov for Twitter.    
-• Improved performance in previewing animations (thanks to @mabakay).    
+• 
 
 ### Fixed:
 
-♦ #873 - The multi-frame selection was getting lost after removing all previous/next frames (thanks to @pawlos).  
-♦ #883 - Cancelling the media insertion by pressing the cancel button was causing a crash (thanks to @pawlos).  
-♦ #885 - The button to open the file after encoding was not appearing.    
-♦ #887 - The Caption was not being rendered correctly.   
+♦ #891 - The focus was not being set to the file name text box when opening the export panel.  
+♦ 
 
 ### Known Bugs:
   
