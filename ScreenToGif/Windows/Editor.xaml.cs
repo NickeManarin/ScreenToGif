@@ -1456,7 +1456,7 @@ namespace ScreenToGif.Windows
 
         private void Playback_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = Project != null && Project.Frames.Count > 1 && !IsLoading && _applyAction == null;
+            e.CanExecute = Project != null && Project.Frames.Count > 1 && !IsLoading;
         }
 
         private void FirstFrame_Executed(object sender, ExecutedRoutedEventArgs e)
