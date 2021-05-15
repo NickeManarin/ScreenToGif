@@ -765,6 +765,8 @@
     <s:String x:Key="S.Preset.Autosave.Info">对该预设的更改将自动保存。</s:String>
     <s:String x:Key="S.Preset.Default.Title">默认 ({0})</s:String>
     <s:String x:Key="S.Preset.Default.Description">编码器的默认预设。</s:String>
+    <s:String x:Key="S.Preset.Twitter.Title">用于 Twitter ({0})</s:String>
+    <s:String x:Key="S.Preset.Twitter.Description">遵守 Twitter 上传限制 (大小和分辨率除外)。</s:String> 
     <s:String x:Key="S.Preset.Hevc.Title">HEVC ({0})</s:String>
     <s:String x:Key="S.Preset.Hevc.Description">高效视频编码。</s:String>
     <s:String x:Key="S.Preset.Vp8.Title">VP8 ({0})</s:String>
