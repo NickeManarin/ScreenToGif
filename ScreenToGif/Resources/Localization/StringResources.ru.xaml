@@ -765,6 +765,8 @@
     <s:String x:Key="S.Preset.Autosave.Info">Изменения в этом пресете сохраняются автоматически.</s:String>
     <s:String x:Key="S.Preset.Default.Title">По умолчанию ({0})</s:String>
     <s:String x:Key="S.Preset.Default.Description">Пресет по умолчанию для кодеровщика.</s:String>
+    <s:String x:Key="S.Preset.Twitter.Title">Для Twitter ({0})</s:String>
+    <s:String x:Key="S.Preset.Twitter.Description">Соблюдает ограничения Twitter (кроме размера и разрешения).</s:String>
     <s:String x:Key="S.Preset.Hevc.Title">HEVC ({0})</s:String>
     <s:String x:Key="S.Preset.Hevc.Description">High Efficiency Video Coding.</s:String>
     <s:String x:Key="S.Preset.Vp8.Title">VP8 ({0})</s:String>
