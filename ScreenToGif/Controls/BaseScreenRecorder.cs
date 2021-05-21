@@ -23,7 +23,7 @@ namespace ScreenToGif.Controls
         /// <summary>
         /// Indicates when the user is mouse-clicking.
         /// </summary>
-        internal bool RecordClicked = false;
+        internal MouseButtonType RecordClicked = MouseButtonType.None;
 
         /// <summary>
         /// Deals with all screen capture methods.

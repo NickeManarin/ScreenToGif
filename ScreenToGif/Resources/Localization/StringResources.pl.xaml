@@ -1103,6 +1103,9 @@
     <s:String x:Key="S.Caption.Horizontal">Poziomy:</s:String>
     <s:String x:Key="S.Caption.TextAlignment">Położenie:</s:String>
     <s:String x:Key="S.Caption.TextDecoration">Dekoracja:</s:String>
+    <s:String x:Key="S.Caption.LeftButton.Color">Kolor dla lewego przycisku:</s:String>
+    <s:String x:Key="S.Caption.MiddleButton.Color">Kolor dla środkowego przycisku:</s:String>
+    <s:String x:Key="S.Caption.RightButton.Color">Kolor dla prawego przycisku:</s:String>
     
     <!--Editor • Key strokes-->
     <s:String x:Key="S.KeyStrokes">Wciśnięcia klawiszy</s:String>

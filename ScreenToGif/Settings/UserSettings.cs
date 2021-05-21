@@ -2470,7 +2470,19 @@ namespace ScreenToGif.Settings
 
         #region Editor • Mouse Clicks
 
-        public Color MouseClicksColor
+        public Color LeftMouseButtonClicksColor
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color RightMouseButtonClicksColor
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color MiddleMouseButtonClicksColor
         {
             get => (Color)GetValue();
             set => SetValue(value);

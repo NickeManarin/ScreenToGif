@@ -1297,6 +1297,9 @@
     <s:String x:Key="S.Caption.Horizontal">Horizontal:</s:String>
     <s:String x:Key="S.Caption.TextAlignment">Alignment:</s:String>
     <s:String x:Key="S.Caption.TextDecoration">Decoration:</s:String>
+    <s:String x:Key="S.Caption.LeftButton.Color">Left button color:</s:String>
+    <s:String x:Key="S.Caption.MiddleButton.Color">Middle button color:</s:String>
+    <s:String x:Key="S.Caption.RightButton.Color">Right button color:</s:String>
 
     <!--Editor • Key strokes-->
     <s:String x:Key="S.KeyStrokes">Key Strokes</s:String>

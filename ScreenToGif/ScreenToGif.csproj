@@ -548,6 +548,7 @@
     <Compile Include="Model\UpdateAvailable.cs" />
     <Compile Include="Util\InterProcessChannel\InstanceSwitcherChannel.cs" />
     <Compile Include="Util\InterProcessChannel\SettingsPersistenceChannel.cs" />
+    <Compile Include="Util\MouseButtonType.cs" />
     <Compile Include="Util\MutexList.cs" />
     <Compile Include="Util\NotificationManager.cs" />
     <Compile Include="Capture\ImageCapture.cs" />

@@ -6,7 +6,9 @@ namespace ScreenToGif.Model
 {
     public class MouseClicksModel : DefaultTaskModel
     {
-        private Color _foregroundColor;
+        private Color _leftButtonForegroundColor;
+        private Color _rightButtonForegroundColor;
+        private Color _middleButtonForegroundColor;
         private double _width;
         private double _height;
 
@@ -15,10 +17,22 @@ namespace ScreenToGif.Model
             TaskType = TaskTypeEnum.MouseClicks;
         }
 
-        public Color ForegroundColor
+        public Color LeftButtonForegroundColor
         {
-            get => _foregroundColor;
-            set => SetProperty(ref _foregroundColor, value);
+            get => _leftButtonForegroundColor;
+            set => SetProperty(ref _leftButtonForegroundColor, value);
+        }
+
+        public Color RightButtonForegroundColor
+        {
+            get => _rightButtonForegroundColor;
+            set => SetProperty(ref _rightButtonForegroundColor, value);
+        }
+
+        public Color MiddleButtonForegroundColor
+        {
+            get => _middleButtonForegroundColor;
+            set => SetProperty(ref _middleButtonForegroundColor, value);
         }
 
         public double Width
@@ -35,14 +49,19 @@ namespace ScreenToGif.Model
 
         public override string ToString()
         {
-            return $"{LocalizationHelper.Get("S.Caption.Color")} #{ForegroundColor.A:X2}{ForegroundColor.R:X2}{ForegroundColor.G:X2}{ForegroundColor.B:X2}, {LocalizationHelper.Get("S.FreeDrawing.Width")} {Width}, {LocalizationHelper.Get("S.FreeDrawing.Height")} {Height}";
+            return $"{LocalizationHelper.Get("S.Caption.LeftButton.Color")} #{LeftButtonForegroundColor.A:X2}{LeftButtonForegroundColor.R:X2}{LeftButtonForegroundColor.G:X2}{LeftButtonForegroundColor.B:X2}, "+
+                   $"{LocalizationHelper.Get("S.Caption.MiddleButton.Color")} #{MiddleButtonForegroundColor.A:X2}{MiddleButtonForegroundColor.R:X2}{MiddleButtonForegroundColor.G:X2}{MiddleButtonForegroundColor.B:X2}, "+
+                   $"{LocalizationHelper.Get("S.Caption.RightButton.Color")} #{RightButtonForegroundColor.A:X2}{RightButtonForegroundColor.R:X2}{RightButtonForegroundColor.G:X2}{RightButtonForegroundColor.B:X2}, "+
+                   $"{LocalizationHelper.Get("S.FreeDrawing.Width")} {Width}, {LocalizationHelper.Get("S.FreeDrawing.Height")} {Height}";
         }
 
         public static MouseClicksModel Default()
         {
             return new MouseClicksModel
             {
-                ForegroundColor = Color.FromArgb(120, 255, 255, 0),
+                LeftButtonForegroundColor = Color.FromArgb(120, 255, 255, 0),
+                RightButtonForegroundColor = Color.FromArgb(120, 255, 0, 0),
+                MiddleButtonForegroundColor = Color.FromArgb(120, 0, 255,255),
                 Height = 12,
                 Width = 12
             };
@@ -52,7 +71,9 @@ namespace ScreenToGif.Model
         {
             return new MouseClicksModel
             {
-                ForegroundColor = UserSettings.All.MouseClicksColor,
+                LeftButtonForegroundColor = UserSettings.All.LeftMouseButtonClicksColor,
+                MiddleButtonForegroundColor = UserSettings.All.MiddleMouseButtonClicksColor,
+                RightButtonForegroundColor = UserSettings.All.RightMouseButtonClicksColor,
                 Height = UserSettings.All.MouseClicksHeight,
                 Width = UserSettings.All.MouseClicksWidth
             };

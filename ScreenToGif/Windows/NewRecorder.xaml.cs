@@ -559,8 +559,14 @@ namespace ScreenToGif.Windows
                 if (RegionSelectHelper.IsSelecting || Stage == Stage.Discarding)
                     return;
 
+                RecordClicked = MouseButtonType.None;
                 //In the future, store each mouse event, with a timestamp, independently of the capture.
-                RecordClicked = args.LeftButton == MouseButtonState.Pressed || args.RightButton == MouseButtonState.Pressed || args.MiddleButton == MouseButtonState.Pressed;
+                if (args.LeftButton == MouseButtonState.Pressed)
+                    RecordClicked = MouseButtonType.Left;
+                else if (args.RightButton == MouseButtonState.Pressed)
+                    RecordClicked = MouseButtonType.Right;
+                else if (args.MiddleButton == MouseButtonState.Pressed)
+                    RecordClicked = MouseButtonType.Middle;
 
                 _posX = (int)Math.Round(args.PosX / _regionSelection.Scale, MidpointRounding.AwayFromZero);
                 _posY = (int)Math.Round(args.PosY / _regionSelection.Scale, MidpointRounding.AwayFromZero);
