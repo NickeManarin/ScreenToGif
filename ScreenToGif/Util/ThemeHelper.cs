@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Windows;
+using Microsoft.Win32;
 using ScreenToGif.Settings;
 
 namespace ScreenToGif.Util
@@ -9,8 +10,25 @@ namespace ScreenToGif.Util
     /// </summary>
     internal static class ThemeHelper
     {
+        private static bool SystemUsesDarkTheme()
+        {
+            using (var sub = RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Registry32)
+                .OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize"))
+            {
+                if (sub?.GetValue("AppsUseLightTheme") is int key)
+                {
+                    return key == 0;
+                }
+            }
+            return false;
+        }
         public static void SelectTheme(AppTheme theme = AppTheme.Light)
         {
+            if (theme == AppTheme.FollowSystem)
+            {
+                theme = SystemUsesDarkTheme() ? AppTheme.Dark : AppTheme.Light;
+            }
+
             //Checks if the theme is already the current in use.
             var last = Application.Current.Resources.MergedDictionaries.LastOrDefault(l => l.Source != null && l.Source.ToString().Contains("Colors/"));
 

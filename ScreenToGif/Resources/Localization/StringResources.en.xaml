@@ -225,6 +225,7 @@
     <s:String x:Key="S.Options.App.Theme.Scheme.Medium">Medium</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Dark">Dark</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.VeryDark">Very Dark</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.FollowSystem">Follow system</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Custom">Custom</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Example">Example colors.</s:String>
     <s:String x:Key="S.Options.App.Tray">System tray icon</s:String>

@@ -199,6 +199,7 @@
     <s:String x:Key="S.Options.App.Theme.Scheme.Medium">Średni</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Dark">Ciemny</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.VeryDark">Bardzo ciemny</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.FollowSystem">Jak systemowy</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Custom">Niestandardowy...</s:String>
     <!--<s:String x:Key="S.Options.App.Theme.Scheme.Example">Example colors.</s:String>-->
     <!--<s:String x:Key="S.Options.App.Tray">System tray icon</s:String>-->
