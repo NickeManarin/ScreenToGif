@@ -246,6 +246,7 @@ namespace ScreenToGif.Windows
         {
             SystemEvents.PowerModeChanged += System_PowerModeChanged;
             SystemEvents.DisplaySettingsChanged += System_DisplaySettingsChanged;
+            SystemEvents.UserPreferenceChanged += System_UserPreferenceChanged;
             SystemParameters.StaticPropertyChanged += SystemParameters_StaticPropertyChanged;
 
             #region Adjust the position
@@ -400,6 +401,7 @@ namespace ScreenToGif.Windows
 
             SystemEvents.PowerModeChanged -= System_PowerModeChanged;
             SystemEvents.DisplaySettingsChanged -= System_DisplaySettingsChanged;
+            SystemEvents.UserPreferenceChanged -= System_UserPreferenceChanged;
             SystemParameters.StaticPropertyChanged -= SystemParameters_StaticPropertyChanged;
         }
 
@@ -481,6 +483,11 @@ namespace ScreenToGif.Windows
             }
 
             Slept = false;
+        }
+
+        private void System_UserPreferenceChanged(object sender, UserPreferenceChangedEventArgs e)
+        {
+            ThemeHelper.SelectTheme(UserSettings.All.MainTheme);
         }
 
         private void System_DisplaySettingsChanged(object sender, EventArgs e)

@@ -33,7 +33,7 @@ namespace ScreenToGif.Windows.Other
         private void Startup_Loaded(object sender, RoutedEventArgs e)
         {
             SystemEvents.DisplaySettingsChanged += System_DisplaySettingsChanged;
-
+            SystemEvents.UserPreferenceChanged += System_UserPreferenceChanged;
             #region Adjust the position
 
             //Tries to adjust the position/size of the window, centers on screen otherwise.
@@ -60,9 +60,15 @@ namespace ScreenToGif.Windows.Other
             UpdatePositioning(false);
         }
 
+        private void System_UserPreferenceChanged(object sender, UserPreferenceChangedEventArgs e)
+        {
+            ThemeHelper.SelectTheme(UserSettings.All.MainTheme);
+        }
+
         private void Startup_Closing(object sender, CancelEventArgs e)
         {
             SystemEvents.DisplaySettingsChanged -= System_DisplaySettingsChanged;
+            SystemEvents.UserPreferenceChanged -= System_UserPreferenceChanged;
 
             //Manually get the position/size of the window, so it's possible opening multiple instances.
             UserSettings.All.StartupTop = Top;
