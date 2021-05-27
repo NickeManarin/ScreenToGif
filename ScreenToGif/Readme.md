@@ -10,8 +10,10 @@ _VS 2019 and .Net 4.8 or newer required._
 
 ### Fixed:
 
-♦ #891 - The focus was not being set to the file name text box when opening the export panel.  
-♦ 
+♦ The installer could leave a registry for older installations on the same folder.
+♦ The option to run after the update was not being respected.  
+♦ The focus was not being set to the file name text box when opening the export panel.  
+♦ The playback buttons were getting disabled after exporting.  
 
 ### Known Bugs:
   

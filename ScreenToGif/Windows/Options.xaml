@@ -1285,7 +1285,7 @@
                             <n:ExtendedListBoxItem Image="{StaticResource Flag.France}" Tag="fr" Content="French / Français" Author="Largo, Sébastien 'Tr4ncer' Villemain, Adrick"
                                                    ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=fr, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Germany}" Tag="de" Content="German / Deutsch" Author="Andy Kleinert, PeterK., Christoph Voigt, Michael Reukauff"
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Germany}" Tag="de" Content="German / Deutsch" Author="Mr-Update, Andy Kleinert, PeterK., Christoph Voigt, Michael Reukauff"
                                                    ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=de, Converter={StaticResource TagToSelection}}"/>
 
                             <n:ExtendedListBoxItem Image="{StaticResource Flag.Greece}" Tag="el" Content="Greek / Ελληνικά" Author="Χρήστος Μητσιάρης"
