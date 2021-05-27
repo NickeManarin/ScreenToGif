@@ -1031,6 +1031,8 @@ namespace ScreenToGif.Model
 
                 //TODO: Check if Windows is not turning off.
 
+                var runAfterwards = false;
+
                 //Prompt if:
                 //Not configured to download the update automatically OR
                 //Configured to download but set to prompt anyway OR
@@ -1042,6 +1044,8 @@ namespace ScreenToGif.Model
 
                     if (!result.HasValue || !result.Value)
                         return false;
+
+                    runAfterwards = download.RunAfterwards;
                 }
 
                 //Only try to install if the update was downloaded.
@@ -1055,12 +1059,15 @@ namespace ScreenToGif.Model
                     return true;
                 }
 
+                //Detect installed components.
                 var files = Directory.EnumerateFiles(AppDomain.CurrentDomain.BaseDirectory).ToList();
                 var isInstaller = files.Any(x => x.ToLowerInvariant().EndsWith("screentogif.visualelementsmanifest.xml"));
                 var hasSharpDx = files.Any(x => x.ToLowerInvariant().EndsWith("sharpdx.dll"));
                 var hasGifski = files.Any(x => x.ToLowerInvariant().EndsWith("gifski.dll"));
-                var hasMenuShortcut = File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Microsoft", "Windows", "Start Menu", "Programs", "ScreenToGif.lnk"));
-                var hasDesktopShortcut = File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Desktop", "ScreenToGif.lnk"));
+                var hasDesktopShortcut = File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "ScreenToGif.lnk")) ||
+                    File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonDesktopDirectory), "ScreenToGif.lnk"));
+                var hasMenuShortcut = File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Microsoft", "Windows", "Start Menu", "Programs", "ScreenToGif.lnk")) ||
+                    File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Microsoft", "Windows", "Start Menu", "Programs", "ScreenToGif.lnk"));
 
                 //MsiExec does not like relative paths.
                 var isRelative = !string.IsNullOrWhiteSpace(Global.UpdateAvailable.InstallerPath) && !Path.IsPathRooted(Global.UpdateAvailable.InstallerPath);
@@ -1068,14 +1075,14 @@ namespace ScreenToGif.Model
 
                 //msiexec /i PATH INSTALLDIR="" INSTALLAUTOMATICALLY=yes INSTALLPORTABLE=No ADDLOCAL=Binary
                 //msiexec /a PATH TARGETDIR="" INSTALLAUTOMATICALLY=yes INSTALLPORTABLE=yes ADDLOCAL=Binary
-
+                
                 var startInfo = new ProcessStartInfo
                 {
                     FileName = "msiexec",
                     Arguments = $" {(isInstaller ? "/i" : "/a")} \"{nonRoot}\"" +
                                 $" {(isInstaller ? "INSTALLDIR" : "TARGETDIR")}=\"{AppDomain.CurrentDomain.BaseDirectory}\" INSTALLAUTOMATICALLY=yes INSTALLPORTABLE={(isInstaller ? "no" : "yes")}" +
                                 $" ADDLOCAL=Binary{(isInstaller ? ",Auxiliar" : "")}{(hasSharpDx ? ",SharpDX" : "")}{(hasGifski ? ",Gifski" : "")}" +
-                                $" {(wasPromptedManually ? "RUNAFTER=yes" : "")}" +
+                                $" {(wasPromptedManually && runAfterwards ? "RUNAFTER=yes" : "")}" +
                                 (isInstaller ? $" INSTALLDESKTOPSHORTCUT={(hasDesktopShortcut ? "yes" : "no")} INSTALLSHORTCUT={(hasMenuShortcut ? "yes" : "no")}" : ""),
                     Verb = UserSettings.All.ForceUpdateAsAdmin ? "runas" : ""
                 };
