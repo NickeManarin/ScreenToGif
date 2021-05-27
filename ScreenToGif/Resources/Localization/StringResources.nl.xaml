@@ -765,6 +765,8 @@
     <s:String x:Key="S.Preset.Autosave.Info">Wijzigingen in deze voorinstelling worden automatisch opgeslagen.</s:String>
     <s:String x:Key="S.Preset.Default.Title">Standaard ({0})</s:String>
     <s:String x:Key="S.Preset.Default.Description">Standaardinstelling voor de encoder.</s:String>
+    <s:String x:Key="S.Preset.Twitter.Title">Voor Twitter ({0})</s:String>
+    <s:String x:Key="S.Preset.Twitter.Description">Respecteert de uploadlimieten van Twitter (behalve grootte en resolutie).</s:String>
     <s:String x:Key="S.Preset.Hevc.Title">HEVC ({0})</s:String>
     <s:String x:Key="S.Preset.Hevc.Description">High Efficiency Video Coding.</s:String>
     <s:String x:Key="S.Preset.Vp8.Title">VP8 ({0})</s:String>
