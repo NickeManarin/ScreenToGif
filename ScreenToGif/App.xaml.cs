@@ -14,6 +14,7 @@ using System.Windows.Interop;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Threading;
+using Microsoft.Win32;
 using ScreenToGif.Controls;
 using ScreenToGif.Model;
 using ScreenToGif.Settings;
@@ -61,6 +62,9 @@ namespace ScreenToGif
 
             LocalizationHelper.SelectCulture(UserSettings.All.LanguageCode);
             ThemeHelper.SelectTheme(UserSettings.All.MainTheme);
+
+            //Listen to changes in theme.
+            SystemEvents.UserPreferenceChanged += SystemEvents_UserPreferenceChanged;
 
             #region Download mode
 
@@ -327,8 +331,16 @@ namespace ScreenToGif
             }
         }
 
+        private void SystemEvents_UserPreferenceChanged(object sender, UserPreferenceChangedEventArgs e)
+        {
+            if (e.Category == UserPreferenceCategory.General)
+                ThemeHelper.SelectTheme(UserSettings.All.MainTheme);
+        }
+
         private void App_Exit(object sender, ExitEventArgs e)
         {
+            SystemEvents.UserPreferenceChanged -= SystemEvents_UserPreferenceChanged;
+
             try
             {
                 MutexList.RemoveAll();

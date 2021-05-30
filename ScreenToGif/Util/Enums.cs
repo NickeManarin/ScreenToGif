@@ -13,6 +13,7 @@ namespace ScreenToGif.Util
         Medium,
         Dark,
         VeryDark,
+        FollowSystem
     }
 
     /// <summary>

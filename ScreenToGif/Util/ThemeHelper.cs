@@ -1,5 +1,7 @@
+using System;
 using System.Linq;
 using System.Windows;
+using Microsoft.Win32;
 using ScreenToGif.Settings;
 
 namespace ScreenToGif.Util
@@ -11,6 +13,9 @@ namespace ScreenToGif.Util
     {
         public static void SelectTheme(AppTheme theme = AppTheme.Light)
         {
+            if (theme == AppTheme.FollowSystem)
+                theme = IsSystemUsingDarkTheme() ? AppTheme.Dark : AppTheme.Light;
+
             //Checks if the theme is already the current in use.
             var last = Application.Current.Resources.MergedDictionaries.LastOrDefault(l => l.Source != null && l.Source.ToString().Contains("Colors/"));
 
@@ -36,6 +41,25 @@ namespace ScreenToGif.Util
             Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary { Source = new System.Uri("Resources/Glyphs.xaml", System.UriKind.RelativeOrAbsolute) });
 
             RefreshNotificationIcon();
+        }
+
+        private static bool IsSystemUsingDarkTheme()
+        {
+            try
+            {
+                using (var sub = RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Registry32)
+                .OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize"))
+                {
+                    if (sub?.GetValue("AppsUseLightTheme") is int key)
+                        return key == 0;
+                }
+            }
+            catch (Exception e)
+            {
+                LogWriter.Log(e, "Not possible to get system's theme setting.");
+            }
+
+            return false;
         }
 
         private static void RefreshNotificationIcon()
