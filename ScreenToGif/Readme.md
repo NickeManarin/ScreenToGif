@@ -6,7 +6,7 @@ _VS 2019 and .Net 4.8 or newer required._
 
 ## What's new? (Version 2.31)
 
-• 
+• Added option for theme to follow the system's one (thanks to @pawlos).  
 
 ### Fixed:
 
