@@ -1,4 +1,4 @@
-﻿using System.Runtime.Serialization;
+using System.Runtime.Serialization;
 
 namespace ScreenToGif.Cloud.Imgur
 {
@@ -73,5 +73,8 @@ namespace ScreenToGif.Cloud.Imgur
 
         [DataMember(Name = "comment_preview")]
         public string CommentPreview { get; set; }
+
+        [DataMember(Name = "error")]
+        public string Error { get; set; }
     }
 }

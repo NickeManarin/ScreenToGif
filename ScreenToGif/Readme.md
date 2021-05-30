@@ -4,16 +4,14 @@ This is the current project of ScreenToGif.
 
 _VS 2019 and .Net 4.8 or newer required._
 
-## What's new? (Version 2.30.1)
+## What's new? (Version 2.31)
 
 • 
 
 ### Fixed:
 
-♦ The installer could leave a registry for older installations on the same folder.
-♦ The option to run after the update was not being respected.  
-♦ The focus was not being set to the file name text box when opening the export panel.  
-♦ The playback buttons were getting disabled after exporting.  
+♦ The updater now waits for files being blocked by other processes before continuing.  
+♦ Imgur upload was not working properly unless sending in authenticated mode and selecting an album.  
 
 ### Known Bugs:
   
