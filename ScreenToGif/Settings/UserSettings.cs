@@ -203,6 +203,8 @@ namespace ScreenToGif.Settings
                         return Convert.ToBoolean(property.Value);
                     case "Int32":
                         return Convert.ToInt32(property.Value, CultureInfo.InvariantCulture);
+                    case "Int64":
+                        return Convert.ToInt64(property.Value, CultureInfo.InvariantCulture);
                     case "Double":
                         return Convert.ToDouble(property.Value, CultureInfo.InvariantCulture);
                     case "Decimal":
@@ -373,6 +375,14 @@ namespace ScreenToGif.Settings
                 {
                     if (bool.TryParse(att.Value, out var boolValue))
                         info.SetValue(instance, boolValue, null);
+
+                    continue;
+                }
+
+                if (info.PropertyType == typeof(TimeSpan?))
+                {
+                    if (TimeSpan.TryParse(att.Value, out var timeValue))
+                        info.SetValue(instance, timeValue, null);
 
                     continue;
                 }
