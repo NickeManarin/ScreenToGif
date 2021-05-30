@@ -34,7 +34,7 @@
     <s:String x:Key="S.MinHeight">Min. hoogte:</s:String>
     <s:String x:Key="S.AndOr">en/of</s:String>
     
-    <!--Warning messages-->
+    <!--Warnings-->
     <s:String x:Key="S.Crash">O nee, het programma is vastgelopen :(</s:String>
     <s:String x:Key="S.Required">Verplicht veld.</s:String>
     <s:String x:Key="S.Warning.Net.Title">Ontbrekende afhankelijkheid</s:String>
@@ -51,6 +51,14 @@
     <s:String x:Key="S.Exiting.Title">ScreenToGif afsluiten</s:String>
     <s:String x:Key="S.Exiting.Instruction">Weet je zeker dat je wilt afsluiten?</s:String>
     <s:String x:Key="S.Exiting.Message">Alle schermen worden gesloten en het pictogram wordt van de taakbalk verwijderd.</s:String>
+
+    <!--Warnings • Graphics engine-->
+    <s:String x:Key="S.Warning.Graphics.Title">Grafische adapter wisselen</s:String>
+    <s:String x:Key="S.Warning.Graphics.Instruction">Schakel over naar de juiste grafische adapter om het geselecteerde scherm vast te leggen</s:String>
+    <s:String x:Key="S.Warning.Graphics.Message">Vanwege een beperking in DirectX moet ScreenToGif worden uitgevoerd op dezelfde grafische adapter als het scherm dat wordt vastgelegd.</s:String>
+    <s:String x:Key="S.Warning.Graphics.Action">Verander de grafische adapter set voor ScreenToGif door Windows Instellingen> Systeem> Beeldscherm> Grafische instellingen te openen, of door op de onderstaande link te klikken.</s:String>
+    <s:String x:Key="S.Warning.Graphics.Action.Legacy">Verwissel de grafische adapter voor ScreenToGif door de grafische instellingen van uw grafische adapter te openen.</s:String>
+    <s:String x:Key="S.Warning.Graphics.Switch">Windows Instellingen openen</s:String>
     
     <!--Keys-->
     <s:String x:Key="S.Keys.Space">Spatie</s:String>
@@ -294,8 +302,8 @@
     <s:String x:Key="S.Options.Recorder.CaptureChanges.Info">(Er wordt alleen een frame vastgelegd als er iets is gewijzigd binnen het opnamegebied)</s:String>
     <s:String x:Key="S.Options.Recorder.RemoteImprovement">Verbeter de opnameprestaties bij een externe desktopverbinding.</s:String>
     <s:String x:Key="S.Options.Recorder.RemoteImprovement.Info">(Schakelt gelaagde vensteropname uit)</s:String>
-    <s:String x:Key="S.Options.Recorder.AsyncRecording">Asynchrone opnamemodus inschakelen.</s:String>
-    <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(Deze optie vermindert vertragingen in de opname)</s:String>
+    <s:String x:Key="S.Options.Recorder.ForceGarbageCollection">Geheugenopruiming forceren tijdens de opname.</s:String>
+    <s:String x:Key="S.Options.Recorder.ForceGarbageCollection.Info">(Vermindert geheugengebruik tijdens de opname, maar verlaagt de prestaties)</s:String>
     
     <s:String x:Key="S.Options.Recorder.Guidelines">Richtlijnen</s:String>
     <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds">Regel van derden</s:String>
@@ -315,6 +323,8 @@
     <s:String x:Key="S.Options.Recorder.Compact.Info">(Toont een kleinere versie van het opdrachtpaneel van de recorder)</s:String>
     <s:String x:Key="S.Options.Recorder.DisplayDiscard">De knop Annuleren ook weergeven tijdens de opname.</s:String>
     <s:String x:Key="S.Options.Recorder.DisplayDiscard.Info">(Normaal gesproken alleen zichtbaar wanneer de opname is gepauzeerd)</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionImprovement">Prestaties van de schermselectie verbeteren.</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionImprovement.Info">(Vermindert de vertraging tijdens schermselectie door een statische weergave van het scherm weer te geven)</s:String>
     
     <s:String x:Key="S.Options.Recorder.RememberSize">Onthoud de vorige grootte van het opnamegebied.</s:String>
     <s:String x:Key="S.Options.Recorder.RememberPosition">Onthoud de vorige locatie van het opnamegebied.</s:String>
@@ -662,6 +672,7 @@
     <s:String x:Key="S.Recorder.Timer.Total">Totaal aantal frames:</s:String>
     <s:String x:Key="S.Recorder.Timer.Manual">Handmatige opgenomen:</s:String>
     <s:String x:Key="S.Recorder.Timer.Paused">De opname is gepauzeerd.</s:String>
+    <s:String x:Key="S.Recorder.Timer.Imprecise">Uw computer ondersteunt geen nauwkeurige opnamemodus.&#10; De beoogde framesnelheid wordt mogelijk niet bereikt.</s:String>
     
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible">Het was niet mogelijk om het scherm vast te leggen</s:String>
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">Het was niet mogelijk om het scherm vast te leggen. De opnamemethode heeft na 5 pogingen geen frame geretourneerd.</s:String>
@@ -934,7 +945,7 @@
     <s:String x:Key="S.Editor.Welcome.Size">Hoe lager de framerate, aantal gebruikte kleuren of aantal veranderingen tussen frames, hoe kleiner de bestandsgrootte</s:String>
     <s:String x:Key="S.Editor.Welcome.Contact">Wil je praten? Open "Instellingen > Over" voor contactmogelijkheden</s:String>
     <s:String x:Key="S.Editor.Welcome.Trouble">Problemen? Neem contact op met de Feedback tool</s:String>
-    <s:String x:Key="S.Editor.Welcome.NewRecorder">Wil je de nieuwe opnamemethode gebruiken? Ga naar "Instellingen --> Applicatie" om deze te activeren</s:String>
+    <s:String x:Key="S.Editor.Welcome.NewRecorder">Wil je de nieuwe opnamemethode gebruiken? Ga naar "Instellingen > Opname" om deze te activeren</s:String>
     
     <!--Editor • File tab • New-->
     <s:String x:Key="S.Editor.File.New.Recording">Opname</s:String>
@@ -1497,6 +1508,7 @@
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg.Info">Externe encoder, gemaakt door FFmpeg.org.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski.Info">Externe encoder, gemaakt door Gif.ski.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Options">Encoderopties</s:String>
     
     <!--Editor • Save as > FFmpeg-->
     <s:String x:Key="S.SaveAs.Ffmpeg.UseParameters">Schakel de geavanceerde modus in.</s:String>

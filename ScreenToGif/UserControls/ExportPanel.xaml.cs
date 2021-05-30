@@ -795,7 +795,7 @@ namespace ScreenToGif.UserControls
 
         public ExportPreset GetPreset()
         {
-            return CurrentPreset ?? PresetComboBox.SelectedItem as ExportPreset;
+            return (CurrentPreset ?? PresetComboBox.SelectedItem as ExportPreset)?.ShallowCopy();
         }
 
         #endregion
@@ -1070,6 +1070,15 @@ namespace ScreenToGif.UserControls
                     GlobalColorTableCheckBox.Visibility = Visibility.Visible;
                     break;
             }
+        }
+
+        private void EnableTransparencyCheckBox_CheckedChanged(object sender, RoutedEventArgs e)
+        {
+            if (!IsLoaded || !(CurrentPreset is EmbeddedGifPreset preset))
+                return;
+
+            if (!DetectCheckBox.IsEnabled)
+                preset.DetectUnchanged = false;
         }
 
         private void PredictionHelpButton_Click(object sender, RoutedEventArgs e)

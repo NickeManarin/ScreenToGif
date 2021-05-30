@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:s="clr-namespace:System;assembly=mscorlib"
                     xml:space="preserve">
@@ -47,17 +47,17 @@
     
     <!--Tray icon-->
     <s:String x:Key="S.NewRecording">Nowe nagranie ekranu</s:String>
-    <s:String x:Key="S.NewWebcamRecording">Nowe nagranie kamerki</s:String>
+    <s:String x:Key="S.NewWebcamRecording">Nowe nagranie z kamery</s:String>
     <s:String x:Key="S.NewBoardRecording">Nowe nagranie tablicy</s:String>
     <s:String x:Key="S.Exit">Wyjście</s:String>
     
     <!--Commands-->
     <s:String x:Key="S.Command.NewRecording">Nowe nagranie ekranu</s:String>
-    <s:String x:Key="S.Command.NewWebcamRecording">Nowe nagranie z kamery internetowej</s:String>
+    <s:String x:Key="S.Command.NewWebcamRecording">Nowe nagranie z kamery</s:String>
     <!--<s:String x:Key="S.Command.NewBoardRecording">New board recording</s:String>-->
     <s:String x:Key="S.Command.NewAnimation">Nowa animacja</s:String>
     <s:String x:Key="S.Command.InsertRecording">Dodaj nagranie ekranu</s:String>
-    <s:String x:Key="S.Command.InsertWebcamRecording">Dodaj nagranie z kamery internetowej</s:String>
+    <s:String x:Key="S.Command.InsertWebcamRecording">Dodaj nagranie z kamery</s:String>
     <!--<s:String x:Key="S.Command.InsertBoardRecording">Insert board recording</s:String>-->
     <!--<s:String x:Key="S.Command.InsertFromMedia">Insert from media (images and videos)</s:String>-->
     <s:String x:Key="S.Command.SaveAs">Zapisz jako...</s:String>
@@ -70,7 +70,7 @@
     <s:String x:Key="S.Command.Zoom100">Ustaw zoom na 100%</s:String>
     <!--<s:String x:Key="S.Command.SizeToContent">Adjust the window to the frame size</s:String>-->
     <!--<s:String x:Key="S.Command.FitImage">Fit image to the available window size</s:String>-->
-    <s:String x:Key="S.Command.FirstFrame">Wybierz pierwszą ramkę</s:String>
+    <s:String x:Key="S.Command.FirstFrame">Wybierz pierwszą klatkę</s:String>
     <s:String x:Key="S.Command.PreviousFrame">Wybierz poprzednią klatkę</s:String>
     <s:String x:Key="S.Command.Play">Odtwórz animację</s:String>
     <s:String x:Key="S.Command.NextFrame">Wybierz następną klatkę</s:String>
@@ -112,12 +112,12 @@
     <s:String x:Key="S.Command.Unselect">Odznacz wszystkie klatki</s:String>
     <!--<s:String x:Key="S.Command.Fade">Fade transition</s:String>-->
     <!--<s:String x:Key="S.Command.Slide">Slide transition</s:String>-->
-    <s:String x:Key="S.Command.ClearAll">Usuń wszystkie skończone enkodowania.</s:String>
+    <s:String x:Key="S.Command.ClearAll">Usuń wszystkie skończone zadania.</s:String>
     <s:String x:Key="S.Command.MoveUp">Przesuń w góre</s:String>
     <s:String x:Key="S.Command.MoveDown">Przesuń w dół</s:String>
     <s:String x:Key="S.Command.Add">Dodaj</s:String>
     <s:String x:Key="S.Command.Open">Otwórz</s:String>
-    <s:String x:Key="S.Command.Edit">Edytuj wybrany przedmiot</s:String>
+    <s:String x:Key="S.Command.Edit">Edytuj wybrany element</s:String>
     <s:String x:Key="S.Command.Save">Zapisz wybrany element</s:String>
     <s:String x:Key="S.Command.Remove">Usuń wybrany element</s:String>
     
@@ -125,8 +125,8 @@
     <s:String x:Key="S.StartUp.Title">ScreenToGif - uruchomienie</s:String>
     <s:String x:Key="S.StartUp.Recorder">Nagrywanie</s:String>
     <s:String x:Key="S.StartUp.Recorder.Tooltip">Otwiera nagrywanie ekranu, gdzie łatwo możesz rozpocząć przechwytywanie swojego monitora.</s:String>
-    <s:String x:Key="S.StartUp.Webcam">Kamerka</s:String>
-    <s:String x:Key="S.StartUp.Webcam.Tooltip">Otwiera nagrywanie z kamerki.</s:String>
+    <s:String x:Key="S.StartUp.Webcam">Kamera</s:String>
+    <s:String x:Key="S.StartUp.Webcam.Tooltip">Otwiera nagrywanie z kamery.</s:String>
     <s:String x:Key="S.StartUp.Board">Tablica</s:String>
     <s:String x:Key="S.StartUp.Board.Tooltip">Otwiera tablicę, gdzie możesz nagrywać swoje rysunki.</s:String>
     <s:String x:Key="S.StartUp.Editor">Edytor</s:String>
@@ -156,7 +156,7 @@
     <!--Options-->
     <s:String x:Key="S.Options.Title">ScreenToGif - Opcje</s:String>
     <s:String x:Key="S.Options.App">Aplikacja</s:String>
-    <!--<s:String x:Key="S.Options.Recorder">Recorder</s:String>-->
+    <s:String x:Key="S.Options.Recorder">Rejestrator</s:String>
     <!--<s:String x:Key="S.Options.Editor">Editor</s:String>-->
     <s:String x:Key="S.Options.Tasks">Zautomatyzowane zadania</s:String>
     <s:String x:Key="S.Options.Shortcuts">Skróty klawiszowe</s:String>
@@ -188,7 +188,7 @@
     <!--<s:String x:Key="S.Options.App.Startup.Window">Start with:</s:String>-->
     <s:String x:Key="S.Options.App.Startup.Window.Startup">Okno uruchomienia</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Recorder">Nagrywanie ekranu</s:String>
-    <s:String x:Key="S.Options.App.Startup.Window.Webcam">Nagrywanie z kamerki</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Webcam">Nagrywanie z kamery</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Board">Tablica</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Editor">Okno edytora</s:String>
     <!--<s:String x:Key="S.Options.App.Startup.Window.Info">(Window which shows up first when the app starts)</s:String>-->
@@ -218,7 +218,7 @@
     <!--<s:String x:Key="S.Options.App.General">General</s:String>-->
     <!--<s:String x:Key="S.Options.App.General.WorkaroundQuota">Workaround for the 'Not enough quota...' crash.</s:String>-->
     <!--<s:String x:Key="S.Options.App.General.WorkaroundQuota.Info">(Experimental)</s:String>-->
-    <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">Potwierdź przed zamknięciem aplikacji (poprzez komende 'Wyjdź').</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">Potwierdź przed zamknięciem aplikacji (poprzez komendę 'Wyjdź').</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">Wyłącz akcelerację sprzętową.</s:String>
     <!--<s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(The user interface will be rendered via software mode)</s:String>-->
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">Sprawdź dostępność aktualizacji.</s:String>
@@ -265,7 +265,7 @@
     <s:String x:Key="S.Options.Recorder.RecordMouse">Pokaż kursor myszy na nagraniu.</s:String>
     <s:String x:Key="S.Options.Recorder.SelectCursorColor">Wybierz kolor kursora</s:String>
     <s:String x:Key="S.Options.Recorder.PreStart">Użyj odliczania przed startem.</s:String>
-    <s:String x:Key="S.Options.Recorder.PreStart.Info">(w sekundach, czeka przed zaczynaniem nagrywania)</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart.Info">(w sekundach, czeka przed rozpoczęciem nagrywania)</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate">Stała częstotliwość klatek.</s:String>
     <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(Stałe opóźnienie, które nie zmienia się podczas opóźnienia nagrywania)</s:String>
     <!--<s:String x:Key="S.Options.Recorder.RemoteImprovement">Improve the capture performance on a remote desktop connection.</s:String>-->
@@ -293,7 +293,7 @@
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.Custom">Niestandardowy</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.Height">Wysokość</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.GridSize.Width">Szerokość</s:String>
-    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Apply">Apply</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Apply">Zastosuj</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.BaseColor">Podstawowy kolor</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.EvenColor">Kolor</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.OddColor">Dziwny kolor</s:String>
@@ -327,8 +327,8 @@
     <s:String x:Key="S.Options.Shortcuts.Global">Globalne</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.ScreenRecorder">Nagrywanie ekranu:</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.ScreenRecorder.Info">(Otwiera domyślne nagrywanie ekranu)</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Global.WebcamRecorder">Nagrywanie kamerki:</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Global.WebcamRecorder.Info">(Otwiera nagrywanie kamerki)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.WebcamRecorder">Nagrywanie kamery:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.WebcamRecorder.Info">(Otwiera nagrywanie kamery)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.BoardRecorder">Nagrywanie tablicy:</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.BoardRecorder.Info">(Otwiera nagrywanie tablicy, gdzie możesz nagrywać swoje rysunki)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.OpenEditor">Edytor:</s:String>
@@ -390,7 +390,7 @@
     <s:String x:Key="S.Options.Storage.Settings">Lokalizacja ustawień</s:String>
     <s:String x:Key="S.Options.Storage.AppDataPath">AppData:</s:String>
     <s:String x:Key="S.Options.Storage.LocalPath">Local:</s:String>
-    <s:String x:Key="S.Options.Storage.NotExists">To nie istnieje</s:String>
+    <s:String x:Key="S.Options.Storage.NotExists">Nie istnieje</s:String>
     <s:String x:Key="S.Options.Storage.CreateSettings">Utwórz pusty plik z ustawieniami lokalnymi.</s:String>
     <s:String x:Key="S.Options.Storage.RemoveSettings">Usuń plik z ustawieniami.</s:String>
     <s:String x:Key="S.Options.Storage.OpenSettingsFolder">Otwórz folder z plikiem ustawień.&#x0d;Przytrzymaj Ctrl podczas kliknięcia w plik, jeżeli to możliwe.</s:String>
@@ -539,7 +539,7 @@
 
     <!--<s:String x:Key="S.Recorder.SwitchFrequency">Click to switch among capture frequency modes.</s:String>-->
     <!--<s:String x:Key="S.Recorder.Manual.Short">manual</s:String>-->
-    <s:String x:Key="S.Recorder.Fps">Maksymalna ilość klatek na sekundę</s:String>
+    <s:String x:Key="S.Recorder.Fps">Maksymalna liczba klatek na sekundę</s:String>
     <s:String x:Key="S.Recorder.Fps.Short">fps</s:String>
     <!--<s:String x:Key="S.Recorder.Fps.Range">Ranges from 1 to 60 fps, with higher values meaning more frames will be captured.&#10;Each increment represents 16 milliseconds of difference.</s:String>-->
     <!--<s:String x:Key="S.Recorder.Fpm">Maximum frames per minute</s:String>-->
@@ -575,7 +575,7 @@
     <s:String x:Key="S.Recorder.EscToCancel">Naciśnij ESC, aby anulować</s:String>
     
     <!--Webcam recorder-->
-    <s:String x:Key="S.Webcam.Title">ScreenToGif - Nagrywanie z kamerki</s:String>
+    <s:String x:Key="S.Webcam.Title">ScreenToGif - Nagrywanie z kamery</s:String>
     <s:String x:Key="S.Webcam.NoVideo">Nie znaleziono urządzeń wideo :c</s:String>
     <s:String x:Key="S.Webcam.CheckVideoDevices">Sprawdzanie urządzeń wideo.</s:String>
     <s:String x:Key="S.Webcam.Scale">Skala: x{0:0.##}</s:String>
@@ -599,7 +599,7 @@
     <s:String x:Key="S.ColorSelector.Current">Aktualny kolor</s:String>
     <s:String x:Key="S.ColorSelector.Latest">Ostatni kolor</s:String>
     <!--<s:String x:Key="S.ColorSelector.Sample">Drag this to&#x0d;sample colors</s:String>-->
-    <s:String x:Key="S.ColorSelector.Sample.Info">Kliknij i przeciągnij&#x0d;kolory ze swojego ekranu</s:String>
+    <s:String x:Key="S.ColorSelector.Sample.Info">Kliknij i przeciągnij&#x0d;aby wybrać kolory ze swojego ekranu</s:String>
     
     <!--Exception/Error viewers-->
     <s:String x:Key="S.ExceptionViewer.Title">Podgląd wyjątków</s:String>
@@ -608,12 +608,12 @@
     <!--<s:String x:Key="S.ExceptionViewer.Message">Message</s:String>-->
     <!--<s:String x:Key="S.ExceptionViewer.Stack">Stack</s:String>-->
     <!--<s:String x:Key="S.ExceptionViewer.Source">Source</s:String>-->
-    <s:String x:Key="S.ErrorDialog.Observation">Coś złego się stało.</s:String>
+    <s:String x:Key="S.ErrorDialog.Observation">Stało się coś złego.</s:String>
     <s:String x:Key="S.ErrorDialog.Send">Zgłoś</s:String>
 
     <!--FFmpeg preset-->
     <s:String x:Key="S.FfmpegPreset.Title">Ustawienia FFmpeg</s:String>
-    <s:String x:Key="S.FfmpegPreset.Name">Imię</s:String>
+    <s:String x:Key="S.FfmpegPreset.Name">Nazwa</s:String>
     <s:String x:Key="S.FfmpegPreset.Parameters">Parametry</s:String>
     <!--<s:String x:Key="S.FfmpegPreset.Info.SecondPass">To encode with 2-pass, simply add '-pass 2' to the command.</s:String>-->
     <s:String x:Key="S.FfmpegPreset.Warning.Name">Musisz nadać nazwę dla tych ustawień.</s:String>
@@ -758,26 +758,26 @@
     <s:String x:Key="S.Editor.Welcome.Size">Im mniejsza częstotliwość klatek, liczba kolorów lub liczba zmian pomiędzy klatkami, tym mniejszy rozmiar</s:String>
     <s:String x:Key="S.Editor.Welcome.Contact">Chcesz porozmawiać? Otwórz "Opcje > O programie", żeby zobaczyć metody kontaktu</s:String>
     <s:String x:Key="S.Editor.Welcome.Trouble">Potrzebujesz pomocy? Skontaktuj się ze mną przez "Wsparcie"</s:String>
-    <s:String x:Key="S.Editor.Welcome.NewRecorder">Chciałbyś wypróbować nowe nagrywanie? Przejdź do "Opcje > Aplikacja", żeby je włączyć</s:String>
+    <s:String x:Key="S.Editor.Welcome.NewRecorder">Chciałbyś wypróbować nowe nagrywanie? Przejdź do "Opcje > Rejestrator", żeby je włączyć</s:String>
     
     <!--Editor • File tab • New-->
     <s:String x:Key="S.Editor.File.New.Recording">Nowa &#x0d;nagranie</s:String>
-    <s:String x:Key="S.Editor.File.New.Webcam">Nagranie z&#x0d;kamerki</s:String>
+    <s:String x:Key="S.Editor.File.New.Webcam">Nagranie z&#x0d;kamery</s:String>
     <s:String x:Key="S.Editor.File.New.Board">Tablica</s:String>
-    <s:String x:Key="S.Editor.File.Blank">Czysta&#x0d;animacja</s:String>
+    <s:String x:Key="S.Editor.File.Blank">Nowa&#x0d;animacja</s:String>
     <s:String x:Key="S.Editor.File.New">Nowy</s:String>
     
     <!--Editor • File tab • Insert-->
     <s:String x:Key="S.Editor.File.Insert.Recording">Wstaw nowe&#x0d;nagranie</s:String>
-    <s:String x:Key="S.Editor.File.Insert.Webcam">Nagranie z &#x0d;kamerki</s:String>
+    <s:String x:Key="S.Editor.File.Insert.Webcam">Nagranie z &#x0d;kamery</s:String>
     <!--<s:String x:Key="S.Editor.File.Insert.Board">Board&#x0d;Recording</s:String>-->
     <s:String x:Key="S.Editor.File.Insert.Media">Media</s:String>
     <s:String x:Key="S.Editor.File.Insert">Wstaw</s:String>
     
     <!--Editor • File tab • Save/Discard-->
     <s:String x:Key="S.Editor.File.Save">Zapisz jako</s:String>
-    <s:String x:Key="S.Editor.File.Load">Załaduj</s:String>
-    <s:String x:Key="S.Editor.File.LoadRecent">Niedawne&#x0d;projekty</s:String>
+    <s:String x:Key="S.Editor.File.Load">Otwórz</s:String>
+    <s:String x:Key="S.Editor.File.LoadRecent">Ostatnie&#x0d;projekty</s:String>
     <s:String x:Key="S.Editor.File.SaveProject">Zapisz jako&#x0d;projekt</s:String>
     <s:String x:Key="S.Editor.File.Discard">Odrzuć&#x0d;projekt</s:String>
     
@@ -796,12 +796,12 @@
     
     <!--Editor • Home tab • Zoom-->
     <s:String x:Key="S.Editor.Home.Zoom">Powiększ</s:String>
-    <s:String x:Key="S.Editor.Home.SizeToContent">Dopasuj do&#x0d;Zawartości</s:String>
+    <s:String x:Key="S.Editor.Home.SizeToContent">Dopasuj do&#x0d;zawartości</s:String>
     <s:String x:Key="S.Editor.Home.FitImage">Dopasuj obraz</s:String>
     
     <!--Editor • Home tab • Select-->
-    <s:String x:Key="S.Editor.Home.Select">Wybierz</s:String>
-    <s:String x:Key="S.Editor.Home.SelectAll">Wybierz&#x0d;wszystko</s:String>
+    <s:String x:Key="S.Editor.Home.Select">Zaznacz</s:String>
+    <s:String x:Key="S.Editor.Home.SelectAll">Zaznacz&#x0d;wszystko</s:String>
     <s:String x:Key="S.Editor.Home.GoTo">Idź do</s:String>
     <s:String x:Key="S.Editor.Home.Inverse">Odwróć</s:String>
     <s:String x:Key="S.Editor.Home.Deselect">Odznacz</s:String>
@@ -817,14 +817,14 @@
     
     <!--Editor • Playback tab • Playback Options-->
     <s:String x:Key="S.Editor.PlaybackOptions.Header">Opcje odtwarzania</s:String>
-    <s:String x:Key="S.Editor.PlaybackOptions.Loop">Pętla podczas odtwarzania.</s:String>
+    <s:String x:Key="S.Editor.PlaybackOptions.Loop">Zapętl podczas odtwarzania.</s:String>
     <s:String x:Key="S.Editor.PlaybackOptions.Loop.Info">Używane tylko podczas odtwarzania.&#x0d;Jeżeli chcesz zmienić ustawienia pętli dla exportu Gif i Apngs,&#x0d;ustawienie będzie dostępne wewnątrz panelu 'Zapisz jako' dla niektórych enkoderów.</s:String>
     
     <!--Editor • Edit tab • Frames-->  
     <s:String x:Key="S.Editor.Edit.Frames">Klatki</s:String>
     <s:String x:Key="S.Editor.Edit.Delete">Usuń</s:String>
     <s:String x:Key="S.Editor.Edit.Frames.Duplicates">Usuń&#x0d;Duplikaty</s:String>
-    <s:String x:Key="S.Editor.Edit.Frames.Reduce">Zmniejsz&#x0d;ilość klatek</s:String>
+    <s:String x:Key="S.Editor.Edit.Frames.Reduce">Zmniejsz&#x0d;liczbę klatek</s:String>
     <s:String x:Key="S.Editor.Edit.DeletePrevious">Usuń wszystkie poprzednie klatki</s:String>
     <s:String x:Key="S.Editor.Edit.DeleteNext">Usuń wszystkie następne klatki</s:String>
     
@@ -873,7 +873,7 @@
     
     <!--Editor • Statistics tab-->
     <s:String x:Key="S.Editor.Statistics.General">Ogólne</s:String>
-    <s:String x:Key="S.Editor.Statistics.FrameCount">Ilość klatek</s:String>
+    <s:String x:Key="S.Editor.Statistics.FrameCount">Liczba klatek</s:String>
     <s:String x:Key="S.Editor.Statistics.TotalDuration">Całkowity czas trwania</s:String>
     <s:String x:Key="S.Editor.Statistics.FrameSize">Rozmiar klatki</s:String>
     <s:String x:Key="S.Editor.Statistics.AverageDuration">Średni czas trwania (opóźnienie)</s:String>
@@ -893,14 +893,14 @@
     <s:String x:Key="S.Editor.DiscardProject.Instruction">Czy na pewno chcesz usunąć wszystkie klatki?</s:String>
     <s:String x:Key="S.Editor.DiscardProject.Message">Próbujesz usunąć wszystkie klatki.&#x0d;\rNie możesz cofnąć tej operacji.</s:String>
     <s:String x:Key="S.Editor.DiscardPreviousProject.Instruction">Czy chcesz odrzucić poprzedni projekt?</s:String>
-    <s:String x:Key="S.Editor.DiscardPreviousProject.Message">Jeżeli wybierzesz nie, poprzedni projekt będzie dostępny w Niedawnych Projektach.</s:String>
+    <s:String x:Key="S.Editor.DiscardPreviousProject.Message">Jeżeli wybierzesz nie, poprzedni projekt będzie dostępny w Ostatnich Projektach.</s:String>
     <s:String x:Key="S.Editor.DeleteFrames.Title">Usuń klatki</s:String>
     <s:String x:Key="S.Editor.DeleteFrames.Instruction">Na pewno chcesz usunąć?</s:String>
     <s:String x:Key="S.Editor.DeleteFrames.Message">To polecenie usunie {0} klatek.\n\rOperację można cofnąć.</s:String>
     <s:String x:Key="S.Editor.Exiting.Title">Opuszczanie edytora</s:String>
     <s:String x:Key="S.Editor.Exiting.Instruction">Czy na pewno chcesz wyjść?</s:String>
-    <s:String x:Key="S.Editor.Exiting.Message">Projekt nad którym aktualnie pracowałeś może zostać otwarty przez 'Niedawne projekty'.</s:String>
-    <s:String x:Key="S.Editor.Exiting.Message2">Projekt nad którym aktualnie pracowałeś może zostać ponownie otwarty przez 'Niedawne projekty', ale pamiętaj, że po 5 dniach zostanie automatycznie usunięty.</s:String>
+    <s:String x:Key="S.Editor.Exiting.Message">Projekt nad którym aktualnie pracowałeś może zostać otwarty przez 'Ostatnie projekty'.</s:String>
+    <s:String x:Key="S.Editor.Exiting.Message2">Projekt nad którym aktualnie pracowałeś może zostać ponownie otwarty przez 'Ostatnie projekty', ale pamiętaj, że po 5 dniach zostanie automatycznie usunięty.</s:String>
     <s:String x:Key="S.Editor.DragDrop.Invalid.Title">Nieprawidłowe "Przeciągnij i upuść"</s:String>
     <s:String x:Key="S.Editor.DragDrop.MultipleFiles.Instruction">Nie możesz importować kilku plików na raz</s:String>
     <s:String x:Key="S.Editor.DragDrop.MultipleFiles.Message">Spróbuj wybrać tylko jeden plik.</s:String>
@@ -969,28 +969,28 @@
     <s:String x:Key="S.Context.SaveAs">Zapisz jako</s:String>
     <s:String x:Key="S.Context.RemoveFrames">Usuń wybrane klatki</s:String>
     <s:String x:Key="S.Context.NewRecording">Nowe nagranie</s:String>
-    <s:String x:Key="S.Context.NewWebcamRecording">Nowe nagranie z kamerki</s:String>
+    <s:String x:Key="S.Context.NewWebcamRecording">Nowe nagranie z kamery</s:String>
     <s:String x:Key="S.Context.NewBoardRecording">Nowe nagranie tablicy</s:String>
     <s:String x:Key="S.Context.NewBlankAnimation">Nowa animacja</s:String>
     <s:String x:Key="S.Context.NewFromMediaProject">Nowy plik z Media lub projektu</s:String>
    
     <!--Editor • Hints-->
     <s:String x:Key="S.Hint.NewRecording">Nowe nagranie utworzone</s:String>
-    <s:String x:Key="S.Hint.NewWebcamRecording">Nowe nagranie z kamerki utworzone</s:String>
+    <s:String x:Key="S.Hint.NewWebcamRecording">Nowe nagranie z kamery utworzone</s:String>
     <s:String x:Key="S.Hint.NewBoardRecording">Nowe nagranie tablicy utworzone</s:String>
     <s:String x:Key="S.Hint.NewAnimation">Nowy projekt utworzony</s:String>
     <s:String x:Key="S.Hint.Undo">Cofnięto</s:String>
     <s:String x:Key="S.Hint.Reset">Zresetowano</s:String>
     <s:String x:Key="S.Hint.Redo">Ponowiono</s:String>
-    <s:String x:Key="S.Hint.Cut">Ilość wyciętych klatek: {0}</s:String>
-    <s:String x:Key="S.Hint.Copy">Ilość skopiowanych klatek: {0}</s:String>
-    <s:String x:Key="S.Hint.Paste">Ilość wklejonych klatek: {0}</s:String>
+    <s:String x:Key="S.Hint.Cut">Liczba wyciętych klatek: {0}</s:String>
+    <s:String x:Key="S.Hint.Copy">Liczba skopiowanych klatek: {0}</s:String>
+    <s:String x:Key="S.Hint.Paste">Liczba wklejonych klatek: {0}</s:String>
     <s:String x:Key="S.Hint.Zoom">Powiększenie: {0}%</s:String>
     <s:String x:Key="S.Hint.SelectAll">Wszystkie klatki zostały zaznaczone</s:String>
     <s:String x:Key="S.Hint.SelectSingle">Klatka #{0} zaznaczona</s:String>
     <s:String x:Key="S.Hint.SelectInverse">Zaznaczenie odwrócone</s:String>
     <s:String x:Key="S.Hint.Deselect">Wszystkie klatki zostały odznaczone</s:String>
-    <s:String x:Key="S.Hint.DeleteFrames">Ilość odznaczonych klatek: {0}</s:String>
+    <s:String x:Key="S.Hint.DeleteFrames">Liczba odznaczonych klatek: {0}</s:String>
     <s:String x:Key="S.Hint.Reverse">Lista klatek odwrócona</s:String>
     <s:String x:Key="S.Hint.Yoyo">Zastosowano efekt Yoyo</s:String>
     <s:String x:Key="S.Hint.MoveLeft">Klatki przeniesione do lewej strony</s:String>
@@ -1008,7 +1008,7 @@
     <s:String x:Key="S.Hint.TitleFrame2">Klatka tytułowa będzie wstawiona przed zaznaczoną klatką</s:String>
     <s:String x:Key="S.Hint.Delay">Zmieniono czas trwania (opóźnienie)</s:String>
     <s:String x:Key="S.Hint.Transition">Wstawiono przejście</s:String>
-    <s:String x:Key="S.Hint.Reduce">Zmniejszono ilość klatek na sekundę</s:String>
+    <s:String x:Key="S.Hint.Reduce">Zmniejszono liczbę klatek na sekundę</s:String>
     <s:String x:Key="S.Hint.Duplicates">Duplikaty usunięte</s:String>
     
     <!--Editor • Action panel-->
@@ -1019,13 +1019,13 @@
     <s:String x:Key="S.Action.Cancel">Anuluj</s:String>
 
     <!--Editor • Recent projects-->
-    <s:String x:Key="S.Recent.Projects">Niedawne projekty</s:String>
-    <s:String x:Key="S.Recent.Searching">Szukam niedawnych projektów...</s:String>
+    <s:String x:Key="S.Recent.Projects">Ostatnie projekty</s:String>
+    <s:String x:Key="S.Recent.Searching">Szukam ostatnich projektów...</s:String>
     <s:String x:Key="S.Recent.Date">Data utworzenia</s:String>
     <s:String x:Key="S.Recent.Frames">Liczba klatek</s:String>
     <s:String x:Key="S.Recent.Warning.NoSelection">Żaden projekt nie jest wybrany. Zaznacz projekt z listy, żeby go załadować.</s:String>
     <!--<s:String x:Key="S.Recent.Warning.SameProject">This project is already being displayed by this editor instance.</s:String>-->
-    <s:String x:Key="S.Recent.Warning.AnotherEditor">Projekt jest już otwarty w innej instacji edytora. Projekt nie może być otwarty drugi raz, jeżeli jest już otwart w innym edytorze.</s:String>
+    <s:String x:Key="S.Recent.Warning.AnotherEditor">Projekt jest już otwarty w innej instacji edytora. Projekt nie może być otwarty drugi raz, jeżeli jest już otwarty w innym edytorze.</s:String>
     
     <!--Editor • Clipboard-->
     <s:String x:Key="S.Clipboard.Entries">Wpisy ze schowka</s:String>
@@ -1062,9 +1062,9 @@
     <s:String x:Key="S.FlipRotate.RotateRight">Obróć o 90º w prawo</s:String>
     
     <!--Editor • Reduce framerate-->
-    <s:String x:Key="S.Reduce.Header">Zmniejsz ilość klatek na sekundę</s:String>
+    <s:String x:Key="S.Reduce.Header">Zmniejsz liczbę klatek na sekundę</s:String>
     <s:String x:Key="S.Reduce.Factor">Okres:</s:String>
-    <s:String x:Key="S.Reduce.Count">Ilość do usunięcia:</s:String>
+    <s:String x:Key="S.Reduce.Count">Liczba do usunięcia:</s:String>
     <!--<s:String x:Key="S.Reduce.Delay">Delay adjustment:</s:String>-->
     <!--<s:String x:Key="S.Reduce.Delay.NoAdjustment">Don't adjust</s:String>-->
     <!--<s:String x:Key="S.Reduce.Delay.Previous">Sum with the previous frame</s:String>-->
@@ -1105,7 +1105,7 @@
     <s:String x:Key="S.Caption.TextDecoration">Dekoracja:</s:String>
     
     <!--Editor • Key strokes-->
-    <s:String x:Key="S.KeyStrokes">Uderzenia klawiszy</s:String>
+    <s:String x:Key="S.KeyStrokes">Wciśnięcia klawiszy</s:String>
     <s:String x:Key="S.KeyStrokes.Keys">Klawisze</s:String>
     <s:String x:Key="S.KeyStrokes.Separator">Separator</s:String>
     <s:String x:Key="S.KeyStrokes.Edit">Edytuj twoje wciśnięcia klawiszy</s:String>
@@ -1278,7 +1278,7 @@
     <s:String x:Key="S.SaveAs.GifOptions.Loop">Pętla:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Looped">Zapętlony GIF.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">Powtarzaj w nieskończoność.</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Ilość powtórzeń.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">Liczba powtórzeń.</s:String>
     <!--<s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable">Enable transparency.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable.Info">Enables the full transparency mode, which makes the background of the gif to be fully transparent.&#10;The chroma key replacement process will be ignored if this option is enabled.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.GifOptions.Transparency.Pick">Select which color to display as transparent.</s:String>-->
@@ -1297,7 +1297,7 @@
     
     <!--Editor • Save as > Video/Images/Psd/Project options-->
     <s:String x:Key="S.SaveAs.VideoOptions">Opcje wideo</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.Fps">Ilość klatek na sekundę:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Fps">Liczba klatek na sekundę:</s:String>
     <s:String x:Key="S.SaveAs.VideoOptions.FlipVertically">Odwróć wideo (pionowo).</s:String>
     <s:String x:Key="S.SaveAs.ImagesOptions">Opcje obrazu</s:String>
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">Zarchiwizuj obrazy.</s:String>
@@ -1398,7 +1398,7 @@
     <!--Troubleshoot-->
     <s:String x:Key="S.Troubleshoot.Title">Rozwiązywanie problemów</s:String>
     <s:String x:Key="S.Troubleshoot.Windows">Czy brakuje jakiegoś okna?</s:String>
-    <s:String x:Key="S.Troubleshoot.Windows.Info">Jeżeli brakuje któregokolwiek z oknien (są po za ekranem),&#x0d;użyj opcji poniżej aby resetować aktualną pozycję do pozycji domyślnej.</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Info">Jeżeli brakuje któregokolwiek z oknien (są poza ekranem),&#x0d;użyj opcji poniżej aby resetować aktualną pozycję do pozycji domyślnej.</s:String>
     <s:String x:Key="S.Troubleshoot.Windows.Current">Oto gdzie każde okno jest aktualnie położone:</s:String>
     <s:String x:Key="S.Troubleshoot.Windows.Next">Oto gdzie każde okno zostanie otwarte następnym razem:</s:String>
     <s:String x:Key="S.Troubleshoot.Windows.BringBack">Przenieś wszystkie okna do ekranu głównego.</s:String>

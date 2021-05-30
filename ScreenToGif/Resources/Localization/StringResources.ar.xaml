@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:s="clr-namespace:System;assembly=mscorlib"
                     xml:space="preserve">
@@ -156,8 +156,8 @@
     <!--Options-->
     <s:String x:Key="S.Options.Title">خيارات - ScreenToGif </s:String>
     <s:String x:Key="S.Options.App">التطبيق</s:String>
-    <!--<s:String x:Key="S.Options.Recorder">Recorder</s:String>-->
-    <!--<s:String x:Key="S.Options.Editor">Editor</s:String>-->
+    <s:String x:Key="S.Options.Recorder">مسجل</s:String>
+    <s:String x:Key="S.Options.Editor">المحرر</s:String>
     <s:String x:Key="S.Options.Tasks">مهمة تلقائية</s:String>
     <s:String x:Key="S.Options.Shortcuts">اختصارات</s:String>
     <s:String x:Key="S.Options.Language">اللغة</s:String>
@@ -755,7 +755,7 @@
     <s:String x:Key="S.Editor.Welcome.Size">وكلما انخفضت framerate ، وعدد الوان او مقدار التغييرات بين الاطارات ، واصغر حجم</s:String>
     <s:String x:Key="S.Editor.Welcome.Contact">هل تريد التحدث ؟ فتح  "خيارات > حول " لطرق الاتصال</s:String>
     <s:String x:Key="S.Editor.Welcome.Trouble">هل لديك مشكله ؟ الاتصال بي عبر اداه الملاحظات</s:String>
-    <s:String x:Key="S.Editor.Welcome.NewRecorder">هل تريد تجربه المسجل الجديد ؟ رئيس لاكثر من  "خيارات > تطبيق " لتمكينه</s:String>
+    <s:String x:Key="S.Editor.Welcome.NewRecorder">هل تريد تجربه المسجل الجديد ؟ رئيس لاكثر من  "خيارات > مسجل " لتمكينه</s:String>
     
     <!--Editor • File tab • New-->
     <s:String x:Key="S.Editor.File.New.Recording">تسجيل</s:String>

@@ -3,8 +3,10 @@ using System.Drawing.Imaging;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using System.Windows;
 using ScreenToGif.Model;
 using ScreenToGif.Util;
+using ScreenToGif.Util.Exceptions;
 using SharpDX;
 using SharpDX.Direct3D;
 using SharpDX.Direct3D11;
@@ -186,15 +188,15 @@ namespace ScreenToGif.Capture
                     }
                     catch (SharpDXException e) when (e.Descriptor == SharpDX.DXGI.ResultCode.Unsupported)
                     {
-                        throw new NotSupportedException("The Desktop Duplication API is not supported on this computer. If you have multiple graphic cards, try running ScreenToGif on integrated graphics.", e);
+                        throw new GraphicsConfigurationException("The Desktop Duplication API is not supported on this computer.", e);
                     }
                     catch (SharpDXException e) when (e.Descriptor == SharpDX.DXGI.ResultCode.InvalidCall)
                     {
-                        throw new NotSupportedException("The Desktop Duplication API is not supported on this screen. If you have multiple screens, try capturing content on the first one (main screen connected to the integrated video graphics processor).", e);
+                        throw new GraphicsConfigurationException("The Desktop Duplication API is not supported on this screen.", e);
                     }
                     catch (SharpDXException e) when (e.Descriptor.NativeApiCode == "E_INVALIDARG")
                     {
-                        throw new NotSupportedException("Looks like that the Desktop Duplication API is not supported on this screen. If you have multiple screens, try capturing content on the first one (main screen connected to the integrated video graphics processor).", e);
+                        throw new GraphicsConfigurationException("Looks like that the Desktop Duplication API is not supported on this screen.", e);
                     }
                 }
             }
@@ -398,7 +400,8 @@ namespace ScreenToGif.Capture
             {
                 LogWriter.Log(ex, "It was not possible to finish capturing the frame with DirectX.");
 
-                OnError.Invoke(ex);
+                MajorCrashHappened = true;
+                Application.Current.Dispatcher.Invoke(() => OnError.Invoke(ex));
                 return FrameCount;
             }
             finally
@@ -503,12 +506,15 @@ namespace ScreenToGif.Capture
                     }
                 }
 
-                //Copy the captured desktop texture into a staging texture, in order to show the mouse cursor and not make the captured texture dirty with it.
-                Device.ImmediateContext.CopyResource(BackingTexture, StagingTexture);
+                if (info.TotalMetadataBufferSize > 0 || info.LastMouseUpdateTime > 0)
+                {
+                    //Copy the captured desktop texture into a staging texture, in order to show the mouse cursor and not make the captured texture dirty with it.
+                    Device.ImmediateContext.CopyResource(BackingTexture, StagingTexture);
 
-                //Gets the cursor image and merges with the staging texture.
-                GetCursor(StagingTexture, info, frame);
-
+                    //Gets the cursor image and merges with the staging texture.
+                    GetCursor(StagingTexture, info, frame);
+                }
+                
                 //Saves the most recent capture time.
                 LastProcessTime = Math.Max(info.LastPresentTime, info.LastMouseUpdateTime);
 
@@ -578,7 +584,7 @@ namespace ScreenToGif.Capture
                 LogWriter.Log(ex, "It was not possible to finish capturing the frame with DirectX.");
 
                 MajorCrashHappened = true;
-                OnError.Invoke(ex);
+                Application.Current.Dispatcher.Invoke(() => OnError.Invoke(ex));
                 return FrameCount;
             }
             finally
@@ -774,8 +780,8 @@ namespace ScreenToGif.Capture
 
             //TODO: In a future version, don't merge the cursor image in here, let the editor do that.
             //Saves the position of the cursor, so the editor can add the mouse clicks overlay later.
-            frame.CursorX = PreviousPosition.Position.X - Left;
-            frame.CursorY = PreviousPosition.Position.Y - Top;
+            frame.CursorX = PreviousPosition.Position.X - (Left - OffsetLeft);
+            frame.CursorY = PreviousPosition.Position.Y - (Top - OffsetTop);
 
             //If the method is supposed to simply the get the cursor shape no shape was loaded before, there's nothing else to do.
             //if (CursorShapeBuffer?.Length == 0 || (info.LastPresentTime == 0 && info.LastMouseUpdateTime == 0) || !info.PointerPosition.Visible)
@@ -793,7 +799,7 @@ namespace ScreenToGif.Capture
             var rightCut = screenTexture.Description.Width - (frame.CursorX + CursorShapeInfo.Width);
             var bottomCut = screenTexture.Description.Height - (frame.CursorY + CursorShapeInfo.Height);
 
-            //Adjust the offset, so it's possible to add the highlight correctly later.
+            //Adjust to the hotspot offset, so it's possible to add the highlight correctly later.
             frame.CursorX += CursorShapeInfo.HotSpot.X;
             frame.CursorY += CursorShapeInfo.HotSpot.Y;
 
@@ -992,6 +998,9 @@ namespace ScreenToGif.Capture
         internal void DisposeInternal()
         {
             Device.Dispose();
+
+            if (MajorCrashHappened)
+                return;
 
             BackingTexture.Dispose();
             StagingTexture.Dispose();

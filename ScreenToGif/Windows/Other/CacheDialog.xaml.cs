@@ -26,7 +26,7 @@ namespace ScreenToGif.Windows.Other
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            if (DisplayOptions)
+            if (!DisplayOptions)
             {
                 OptionsGrid.Visibility = Visibility.Collapsed;
                 return;

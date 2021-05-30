@@ -34,7 +34,7 @@
     <s:String x:Key="S.MinHeight">Altura mínima:</s:String>
     <s:String x:Key="S.AndOr">e/ou</s:String>
     
-    <!--Warning messages-->
+    <!--Warnings-->
     <s:String x:Key="S.Crash">Oh não, o aplicativo parou de funcionar :(</s:String>
     <s:String x:Key="S.Required">Preenchimento obrigatório.</s:String>
     <s:String x:Key="S.Warning.Net.Title">Dependência Ausente</s:String>
@@ -51,6 +51,14 @@
     <s:String x:Key="S.Exiting.Title">Fechando ScreenToGif</s:String>
     <s:String x:Key="S.Exiting.Instruction">Você tem certeza que deseja fechar?</s:String>
     <s:String x:Key="S.Exiting.Message">Todas as janela do ScreenToGif serão fechadas e o ícone da área de notificação será removido.</s:String>
+
+    <!--Warnings • Graphics engine-->
+    <s:String x:Key="S.Warning.Graphics.Title">Trocar Adaptador Gráfico</s:String>
+    <s:String x:Key="S.Warning.Graphics.Instruction">Mude para o adaptador gráfico correto para capturar a tela selecionada</s:String>
+    <s:String x:Key="S.Warning.Graphics.Message">Devido a uma limitação no DirectX, ScreenToGif deve estar executando no mesmo adaptador gráfico que a tela que está sendo capturada.</s:String>
+    <s:String x:Key="S.Warning.Graphics.Action">Troque o adaptador gráfico definido para ScreenToGif abrindo Configurações do Windows > Sistema > Vídeo > Configurações Gráficas ou clicando no link abaixo.</s:String>
+    <s:String x:Key="S.Warning.Graphics.Action.Legacy">Troque o adaptador gráfico para ScreenToGif abrindo as configurações gráficas do seu adaptador gráfico.</s:String>
+    <s:String x:Key="S.Warning.Graphics.Switch">Abra as Configurações do Windows</s:String>
     
     <!--Keys-->
     <s:String x:Key="S.Keys.Space">Espaço</s:String>
@@ -294,8 +302,8 @@
     <s:String x:Key="S.Options.Recorder.CaptureChanges.Info">(Um quadro será capturado somente quando alguma coisa mudar dentro da região de captura)</s:String>
     <s:String x:Key="S.Options.Recorder.RemoteImprovement">Melhora a performance captura em uma conexão remota.</s:String>
     <s:String x:Key="S.Options.Recorder.RemoteImprovement.Info">(Disabilita a captura de janelas em camadas)</s:String>
-    <s:String x:Key="S.Options.Recorder.AsyncRecording">Ativar gravação assíncrona.</s:String>
-    <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(Isso ajuda reduzir os travamentos da interface durante a gravação)</s:String>
+    <s:String x:Key="S.Options.Recorder.ForceGarbageCollection">Forçar limpeza de memória durante a captura.</s:String>
+    <s:String x:Key="S.Options.Recorder.ForceGarbageCollection.Info">(Reduz o uso de memória durante a captura, mas diminui a performance)</s:String>
     
     <s:String x:Key="S.Options.Recorder.Guidelines">Guias</s:String>
     <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds">Regra de terços</s:String>
@@ -315,6 +323,8 @@
     <s:String x:Key="S.Options.Recorder.Compact.Info">(Exibe uma versão menor do painel de controles de gravação)</s:String>
     <s:String x:Key="S.Options.Recorder.DisplayDiscard">Exibe o botão de descartar também durante a gravação.</s:String>
     <s:String x:Key="S.Options.Recorder.DisplayDiscard.Info">(Normalmente, o botão só fica visível durante a pausa)</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionImprovement">Melhore a performance da seleção de tela.</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionImprovement.Info">(Reduz os travamentos durante a seleção de região de captura ao exibir uma visão estática da tela)</s:String>
     
     <s:String x:Key="S.Options.Recorder.RememberSize">Lembre-se do tamanho anterior da área de gravação.</s:String>
     <s:String x:Key="S.Options.Recorder.RememberPosition">Lembrar da localização anterior da área de gravação.</s:String>
@@ -662,6 +672,7 @@
     <s:String x:Key="S.Recorder.Timer.Total">Quantidade total de quadros:</s:String>
     <s:String x:Key="S.Recorder.Timer.Manual">Capturados manualmente:</s:String>
     <s:String x:Key="S.Recorder.Timer.Paused">A captura está em pausa.</s:String>
+    <s:String x:Key="S.Recorder.Timer.Imprecise">Seu computador não suporta um modo de captura preciso,&#10;significando que a taxa de captura poderá nunca ser atingida.</s:String>
     
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible">Não foi possível capturar a tela</s:String>
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">Não foi possível capturar a tela. O método de captura não retornou quadros após 5 tentativas.</s:String>
@@ -754,6 +765,8 @@
     <s:String x:Key="S.Preset.Autosave.Info">As alterações nesta predefinição são automaticamente salvas.</s:String>
     <s:String x:Key="S.Preset.Default.Title">Padrão ({0})</s:String>
     <s:String x:Key="S.Preset.Default.Description">Predefinição padrão para o codificador.</s:String>
+    <s:String x:Key="S.Preset.Twitter.Title">Para Twitter ({0})</s:String>
+    <s:String x:Key="S.Preset.Twitter.Description">Respeita os limites de upload do Twitter (exceto tamanho e resolução).</s:String>
     <s:String x:Key="S.Preset.Hevc.Title">HEVC ({0})</s:String>
     <s:String x:Key="S.Preset.Hevc.Description">High Efficiency Video Coding.</s:String>
     <s:String x:Key="S.Preset.Vp8.Title">VP8 ({0})</s:String>
@@ -934,7 +947,7 @@
     <s:String x:Key="S.Editor.Welcome.Size">Quanto menor a taxa de quadros, a quantidade de cores ou a quantidade de mudanças entre quadros, menor o tamanho do arquivo</s:String>
     <s:String x:Key="S.Editor.Welcome.Contact">Você quer conversar? Abra "Opções > Sobre" para encontrar métodos de contato</s:String>
     <s:String x:Key="S.Editor.Welcome.Trouble">Algum problema? Entre em contato via a ferramenta de Comentários</s:String>
-    <s:String x:Key="S.Editor.Welcome.NewRecorder">Você gostaria de provar o novo gravador de tela? Navegue até "Opções > Aplicativo" para habilitá-lo</s:String>
+    <s:String x:Key="S.Editor.Welcome.NewRecorder">Você gostaria de provar o novo gravador de tela? Navegue até "Opções > Gravador" para habilitá-lo</s:String>
     
     <!--Editor • File tab • New-->
     <s:String x:Key="S.Editor.File.New.Recording">Gravação</s:String>
