@@ -1152,6 +1152,9 @@
 
     <!--Editor • Mouse clicks-->
     <s:String x:Key="S.MouseClicks">Kliknięcia myszy</s:String>
+    <s:String x:Key="S.MouseClicks.Color.Left">Kolor dla lewego przycisku:</s:String>
+    <s:String x:Key="S.MouseClicks.Color.Middle">Kolor dla środkowego przycisku:</s:String>
+    <s:String x:Key="S.MouseClicks.Color.Right">Kolor dla prawego przycisku:</s:String>
     <s:String x:Key="S.MouseClicks.Warning.None">Nie wykryto kliknięć myszy w Twoim projekcie.</s:String>
     
     <!--Editor • Watermark-->

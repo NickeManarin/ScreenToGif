@@ -1349,6 +1349,9 @@
 
     <!--Editor • Mouse clicks-->
     <s:String x:Key="S.MouseClicks">Mouse Clicks</s:String>
+    <s:String x:Key="S.MouseClicks.Color.Left">Left button color:</s:String>
+    <s:String x:Key="S.MouseClicks.Color.Middle">Middle button color:</s:String>
+    <s:String x:Key="S.MouseClicks.Color.Right">Right button color:</s:String>
     <s:String x:Key="S.MouseClicks.Warning.None">There's no detected mouse clicks on your project.</s:String>
     
     <!--Editor • Watermark-->
