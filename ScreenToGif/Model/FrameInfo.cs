@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.Serialization;
 using System.Windows;
@@ -45,11 +45,11 @@ namespace ScreenToGif.Model
         /// <summary>
         /// Initialises a FrameInfo instance.
         /// </summary>
-        /// <param name="clicked">True if the user clicked with the mouse.</param>
+        /// <param name="button">Type of mouse button clicked with the mouse.</param>
         /// <param name="keyList">The list of pressed keys.</param>
-        public FrameInfo(bool clicked, List<SimpleKeyGesture> keyList)
+        public FrameInfo(MouseButtonType button, List<SimpleKeyGesture> keyList)
         {
-            WasClicked = clicked;
+            ButtonClicked = button;
             KeyList = keyList != null ? new List<SimpleKeyGesture>(keyList) : new List<SimpleKeyGesture>();
         }
 
@@ -58,12 +58,12 @@ namespace ScreenToGif.Model
         /// </summary>
         /// <param name="path">The Bitmap.</param>
         /// <param name="delay">The delay.</param>
-        /// <param name="clicked">True if the user clicked with the mouse.</param>
+        /// <param name="button">Type of mouse button the user clicked with the mouse.</param>
         /// <param name="keyList">The list of pressed keys.</param>
         /// <param name="index">The index of the frame.</param>
-        public FrameInfo(string path, int delay, bool clicked, List<SimpleKeyGesture> keyList = null, int index = 0) : this(path, delay)
+        public FrameInfo(string path, int delay, MouseButtonType button, List<SimpleKeyGesture> keyList = null, int index = 0) : this(path, delay)
         {
-            WasClicked = clicked;
+            ButtonClicked = button;
             KeyList = keyList != null ? new List<SimpleKeyGesture>(keyList) : new List<SimpleKeyGesture>();
             Index = index;
         }
@@ -74,15 +74,15 @@ namespace ScreenToGif.Model
         /// <param name="path">The Bitmap.</param>
         /// <param name="delay">The delay.</param>
         /// <param name="cursorX">Cursor X position.</param>
-        /// <param name="cursorY">Cursor Y positiob</param>
-        /// <param name="clicked">True if the user clicked with the mouse.</param>
+        /// <param name="cursorY">Cursor Y position</param>
+        /// <param name="button">Type of mouse button user clicked with the mouse.</param>
         /// <param name="keyList">The list of pressed keys.</param>
         /// <param name="index">The index of the frame.</param>
-        public FrameInfo(string path, int delay, int cursorX, int cursorY, bool clicked, List<SimpleKeyGesture> keyList = null, int index = 0) : this(path, delay)
+        public FrameInfo(string path, int delay, int cursorX, int cursorY, MouseButtonType button, List<SimpleKeyGesture> keyList = null, int index = 0) : this(path, delay)
         {
             CursorX = cursorX;
             CursorY = cursorY;
-            WasClicked = clicked;
+            ButtonClicked = button;
             KeyList = keyList != null ? new List<SimpleKeyGesture>(keyList) : new List<SimpleKeyGesture>();
             Index = index;
         }
@@ -128,9 +128,15 @@ namespace ScreenToGif.Model
         public int CursorY { get; set; } = int.MinValue;
 
         /// <summary>
-        /// True if was clicked.
+        /// Type of the button that was clicked.
         /// </summary>
-        [DataMember(EmitDefaultValue = false, Name = "Clicked")]
+        [DataMember(EmitDefaultValue = false, Name = "ButtonClicked")]
+        public MouseButtonType ButtonClicked { get; set; }
+
+        /// <summary>
+        /// If the button was clicked (legacy projects)
+        /// </summary>
+        [DataMember(Name = "Clicked")]
         public bool WasClicked { get; set; }
 
         /// <summary>
@@ -189,6 +195,20 @@ namespace ScreenToGif.Model
         /// </summary>
         [IgnoreDataMember]
         public Image Image { get; set; }
+
+
+        /// <summary>
+        /// This works as a migration method for mouse clicks. Before storing the button
+        /// type only bool was stored to mark the clicks. During opening old project it will
+        /// be converted to Left mouse button click loosing some info unfortunately.
+        /// </summary>
+        /// <param name="context"></param>
+        [OnDeserialized]
+        void MigrateData(StreamingContext context)
+        {
+            if (ButtonClicked == MouseButtonType.None)
+                ButtonClicked = WasClicked ? MouseButtonType.Left : MouseButtonType.None;
+        }
 
         #endregion
     }

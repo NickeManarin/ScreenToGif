@@ -441,7 +441,15 @@ namespace ScreenToGif.Settings
 
                     continue;
                 }
+                
+                if (info.PropertyType == typeof(TimeSpan?))
+                {
+                    if (TimeSpan.TryParse(child.Value, out var timeValue))
+                        info.SetValue(instance, timeValue, null);
 
+                    continue;
+                }
+                
                 if (child.Type.StartsWith("Nullable"))
                 {
                     LogWriter.Log("Property not identified in children.", child, property);
@@ -2480,7 +2488,19 @@ namespace ScreenToGif.Settings
 
         #region Editor • Mouse Clicks
 
-        public Color MouseClicksColor
+        public Color LeftMouseButtonClicksColor
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color RightMouseButtonClicksColor
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color MiddleMouseButtonClicksColor
         {
             get => (Color)GetValue();
             set => SetValue(value);

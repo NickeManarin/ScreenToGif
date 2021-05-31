@@ -2508,7 +2508,7 @@ namespace ScreenToGif.Windows
 
         private void ApplyMouseClicksButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!Project.Frames.Any(x => x.WasClicked))
+            if (Project.Frames.All(x => x.ButtonClicked == MouseButtonType.None))
             {
                 StatusList.Warning(LocalizationHelper.Get("S.MouseClicks.Warning.None"));
                 return;
@@ -6891,10 +6891,17 @@ namespace ScreenToGif.Windows
 
             var auxList = Project.Frames.CopyList();
 
+            var leftClickSolidColorBrush = new SolidColorBrush(model.LeftButtonForegroundColor);
+            leftClickSolidColorBrush.Freeze();
+            var rightClickSolidColorBrush = new SolidColorBrush(model.RightButtonForegroundColor);
+            rightClickSolidColorBrush.Freeze();
+            var middleClickSolidColorBrush = new SolidColorBrush(model.MiddleButtonForegroundColor);
+            middleClickSolidColorBrush.Freeze();
+
             var count = 0;
             foreach (var frame in auxList)
             {
-                if (!frame.WasClicked || frame.CursorX == int.MinValue)
+                if (frame.ButtonClicked == MouseButtonType.None || frame.CursorX == int.MinValue)
                 {
                     UpdateProgress(count++);
                     continue;
@@ -6907,7 +6914,22 @@ namespace ScreenToGif.Windows
                 using (var drawingContext = drawingVisual.RenderOpen())
                 {
                     drawingContext.DrawImage(image, new Rect(0, 0, image.Width, image.Height)); // - UserSettings.All.MouseClicksWidth/2d   // - UserSettings.All.MouseClicksHeight/2d
-                    drawingContext.DrawEllipse(new SolidColorBrush(model.ForegroundColor), null, new Point(frame.CursorX / scale, frame.CursorY / scale), model.Width, model.Height);
+
+                    SolidColorBrush brush = null;
+                    switch (frame.ButtonClicked)
+                    {
+                        case MouseButtonType.Left:
+                            brush = leftClickSolidColorBrush;
+                            break;
+                        case MouseButtonType.Right:
+                            brush = rightClickSolidColorBrush;
+                            break;
+                        case MouseButtonType.Middle:
+                            brush = middleClickSolidColorBrush;
+                            break;
+                    }
+
+                    drawingContext.DrawEllipse(brush, null, new Point(frame.CursorX / scale, frame.CursorY / scale), model.Width, model.Height);
                 }
 
                 //KeyStrokesOverlayGrid.GetScaledRender(ZoomBoxControl.ScaleDiff, ZoomBoxControl.ImageDpi, ZoomBoxControl.GetImageSize());

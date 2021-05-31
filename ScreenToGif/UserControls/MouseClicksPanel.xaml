@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ScreenToGif.UserControls.MouseClicksPanel"
+<UserControl x:Class="ScreenToGif.UserControls.MouseClicksPanel"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -18,6 +18,8 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -25,15 +27,21 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Caption.Color}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-            <n:ColorBox Grid.Row="0" Grid.Column="1" SelectedColor="{Binding ForegroundColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10,5"/>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.MouseClicks.Color.Left}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+            <n:ColorBox Grid.Row="0" Grid.Column="1" SelectedColor="{Binding LeftButtonForegroundColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10,5"/>
 
-            <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.FreeDrawing.Width}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-            <n:DoubleUpDown Grid.Row="1" Grid.Column="1" x:Name="ClickWidthDoubleUpDown" Minimum="1" Maximum="1000" Margin="10,5" MinWidth="70" 
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.MouseClicks.Color.Middle}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+            <n:ColorBox Grid.Row="1" Grid.Column="1" SelectedColor="{Binding MiddleButtonForegroundColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10,5"/>
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.MouseClicks.Color.Right}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+            <n:ColorBox Grid.Row="2" Grid.Column="1" SelectedColor="{Binding RightButtonForegroundColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="10,5"/>
+
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource S.FreeDrawing.Width}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+            <n:DoubleUpDown Grid.Row="3" Grid.Column="1" x:Name="ClickWidthDoubleUpDown" Minimum="1" Maximum="1000" Margin="10,5" MinWidth="70"
                             Value="{Binding Width, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-            <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.FreeDrawing.Height}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-            <n:DoubleUpDown Grid.Row="2" Grid.Column="1" x:Name="ClickHeightDoubleUpDown" Minimum="1" Maximum="1000" Margin="10,5" MinWidth="70"
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="{DynamicResource S.FreeDrawing.Height}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+            <n:DoubleUpDown Grid.Row="4" Grid.Column="1" x:Name="ClickHeightDoubleUpDown" Minimum="1" Maximum="1000" Margin="10,5" MinWidth="70"
                             Value="{Binding Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
     </Grid>

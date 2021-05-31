@@ -409,6 +409,7 @@
     <Compile Include="Settings\Migrations\Migration0To2_28_0.cs" />
     <Compile Include="Settings\Migrations.cs" />
     <Compile Include="Settings\Migrations\Migration2_28_0To2_29_0.cs" />
+    <Compile Include="Settings\Migrations\Migration2_29_0To2_31_0.cs" />
     <Compile Include="Settings\Property.cs" />
     <Compile Include="Settings\UserSettings.cs" />
     <Compile Include="UserControls\GfycatPanel.xaml.cs">
@@ -548,6 +549,7 @@
     <Compile Include="Model\UpdateAvailable.cs" />
     <Compile Include="Util\InterProcessChannel\InstanceSwitcherChannel.cs" />
     <Compile Include="Util\InterProcessChannel\SettingsPersistenceChannel.cs" />
+    <Compile Include="Util\MouseButtonType.cs" />
     <Compile Include="Util\MutexList.cs" />
     <Compile Include="Util\NotificationManager.cs" />
     <Compile Include="Capture\ImageCapture.cs" />
