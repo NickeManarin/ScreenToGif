@@ -225,6 +225,7 @@
     <s:String x:Key="S.Options.App.Theme.Scheme.Medium">中等</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Dark">深色</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.VeryDark">非常暗</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.FollowSystem">跟随系统</s:String> 
     <s:String x:Key="S.Options.App.Theme.Scheme.Custom">自定义</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Example">示例颜色</s:String>
     <s:String x:Key="S.Options.App.Tray">系统托盘图标</s:String>
@@ -1348,6 +1349,9 @@
 
     <!--Editor • Mouse clicks-->
     <s:String x:Key="S.MouseClicks">鼠标点击</s:String>
+    <s:String x:Key="S.MouseClicks.Color.Left">左键颜色：</s:String>
+    <s:String x:Key="S.MouseClicks.Color.Middle">中键颜色：</s:String>
+    <s:String x:Key="S.MouseClicks.Color.Right">右键颜色：</s:String>
     <s:String x:Key="S.MouseClicks.Warning.None">您的项目没有检测到鼠标点击。</s:String>
     
     <!--Editor • Watermark-->
