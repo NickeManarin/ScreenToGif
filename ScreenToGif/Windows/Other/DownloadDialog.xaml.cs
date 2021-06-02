@@ -28,6 +28,8 @@ namespace ScreenToGif.Windows.Other
 
         public bool WasPromptedManually { get; set; }
 
+        public bool RunAfterwards { get; set; }
+
         #endregion
 
 
@@ -163,6 +165,8 @@ namespace ScreenToGif.Windows.Other
 
             DownloadButton.IsEnabled = false;
             StatusBand.Info(LocalizationHelper.Get("S.Updater.Downloading"));
+
+            RunAfterwards = RunAfterwardsCheckBox.IsChecked == true;
 
             //If it's still downloading, wait for it to finish.
             if (Global.UpdateAvailable.IsDownloading)

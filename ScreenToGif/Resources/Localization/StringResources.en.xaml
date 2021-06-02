@@ -225,6 +225,7 @@
     <s:String x:Key="S.Options.App.Theme.Scheme.Medium">Medium</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Dark">Dark</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.VeryDark">Very Dark</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.FollowSystem">Follow system</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Custom">Custom</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Example">Example colors.</s:String>
     <s:String x:Key="S.Options.App.Tray">System tray icon</s:String>
@@ -1348,6 +1349,9 @@
 
     <!--Editor • Mouse clicks-->
     <s:String x:Key="S.MouseClicks">Mouse Clicks</s:String>
+    <s:String x:Key="S.MouseClicks.Color.Left">Left button color:</s:String>
+    <s:String x:Key="S.MouseClicks.Color.Middle">Middle button color:</s:String>
+    <s:String x:Key="S.MouseClicks.Color.Right">Right button color:</s:String>
     <s:String x:Key="S.MouseClicks.Warning.None">There's no detected mouse clicks on your project.</s:String>
     
     <!--Editor • Watermark-->

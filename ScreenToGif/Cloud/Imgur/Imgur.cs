@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -34,7 +34,7 @@ namespace ScreenToGif.Cloud.Imgur
 
                 if (imgurPreset.UploadToAlbum)
                 {
-                    var album = string.IsNullOrWhiteSpace(imgurPreset.SelectedAlbum) || imgurPreset.SelectedAlbum == "♥♦♣♠" ? 
+                    var album = string.IsNullOrWhiteSpace(imgurPreset.SelectedAlbum) || imgurPreset.SelectedAlbum == "♥♦♣♠" ?
                         await AskForAlbum(imgurPreset) : imgurPreset.SelectedAlbum;
 
                     if (!string.IsNullOrEmpty(album))
@@ -45,19 +45,19 @@ namespace ScreenToGif.Cloud.Imgur
             {
                 headers.Add("Authorization", "Client-ID " + Secret.ImgurId);
             }
-            
+
             if (cancellationToken.IsCancellationRequested)
                 return null;
 
             return await Upload(imgurPreset, path, args, headers);
         }
-        
+
 
         public static string GetAuthorizationAdress()
         {
             var args = new Dictionary<string, string>
             {
-                {"client_id", Secret.ImgurId}, 
+                {"client_id", Secret.ImgurId},
                 {"response_type", "pin"}
             };
 
@@ -165,24 +165,33 @@ namespace ScreenToGif.Cloud.Imgur
 
                 //Error when sending video.
                 //{"data":{"errorCode":null,"ticket":"7234557b"},"success":true,"status":200}
+                //{"data":{"error":"No image data was sent to the upload api","request":"\/3\/image","method":"POST"},"success":false,"status":400}
 
                 if (response == null || (!response.Success && response.Status != 200))
+                {
+                    LogWriter.Log("It was not possible to upload to Imgur", result);
+
                     return new ImgurHistory
                     {
                         PresetName = preset.Title,
                         DateInUtc = DateTime.UtcNow,
                         Result = 400,
-                        Message = response?.Status.ToString() ?? result
+                        Message = response?.Status + " - " + (response?.Data?.Error ?? result)
                     };
+                }
 
                 if (string.IsNullOrEmpty(response.Data?.Link))
-                     return new ImgurHistory
-                     {
-                         PresetName = preset.Title,
-                         DateInUtc = DateTime.UtcNow,
-                         Result = 400,
-                         Message = "Upload failed. The link was not provided."
-                     };
+                {
+                    LogWriter.Log("It was not possible to upload to Imgur", result);
+
+                    return new ImgurHistory
+                    {
+                        PresetName = preset.Title,
+                        DateInUtc = DateTime.UtcNow,
+                        Result = 400,
+                        Message = "Upload failed. The link was not provided."
+                    };
+                }
 
                 var history = new ImgurHistory
                 {

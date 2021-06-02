@@ -203,6 +203,8 @@ namespace ScreenToGif.Settings
                         return Convert.ToBoolean(property.Value);
                     case "Int32":
                         return Convert.ToInt32(property.Value, CultureInfo.InvariantCulture);
+                    case "Int64":
+                        return Convert.ToInt64(property.Value, CultureInfo.InvariantCulture);
                     case "Double":
                         return Convert.ToDouble(property.Value, CultureInfo.InvariantCulture);
                     case "Decimal":
@@ -377,6 +379,14 @@ namespace ScreenToGif.Settings
                     continue;
                 }
 
+                if (info.PropertyType == typeof(TimeSpan?))
+                {
+                    if (TimeSpan.TryParse(att.Value, out var timeValue))
+                        info.SetValue(instance, timeValue, null);
+
+                    continue;
+                }
+
                 if (att.Type.StartsWith("Nullable"))
                 {
                     LogWriter.Log("Property not identified.", att, property);
@@ -431,7 +441,15 @@ namespace ScreenToGif.Settings
 
                     continue;
                 }
+                
+                if (info.PropertyType == typeof(TimeSpan?))
+                {
+                    if (TimeSpan.TryParse(child.Value, out var timeValue))
+                        info.SetValue(instance, timeValue, null);
 
+                    continue;
+                }
+                
                 if (child.Type.StartsWith("Nullable"))
                 {
                     LogWriter.Log("Property not identified in children.", child, property);
@@ -2470,7 +2488,19 @@ namespace ScreenToGif.Settings
 
         #region Editor • Mouse Clicks
 
-        public Color MouseClicksColor
+        public Color LeftMouseButtonClicksColor
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color RightMouseButtonClicksColor
+        {
+            get => (Color)GetValue();
+            set => SetValue(value);
+        }
+
+        public Color MiddleMouseButtonClicksColor
         {
             get => (Color)GetValue();
             set => SetValue(value);

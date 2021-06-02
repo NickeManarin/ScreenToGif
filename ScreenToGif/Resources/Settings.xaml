@@ -141,7 +141,7 @@
     
     <!--Options • Automated Tasks-->
     <c:ArrayList Capacity="1" x:Key="AutomatedTasksList">
-        <m:MouseClicksModel ForegroundColor="#78FFFF00" Width="12" Height="12" TaskType="MouseClicks"/>
+        <m:MouseClicksModel LeftButtonForegroundColor="#78FFFF00" RightButtonForegroundColor="#78FF0000" MiddleButtonForegroundColor="#7800FFFF" Width="12" Height="12" TaskType="MouseClicks"/>
     </c:ArrayList>
 
     <!--Options • Shortcuts-->
@@ -337,7 +337,9 @@
     <Orientation x:Key="ProgressOrientation">Horizontal</Orientation>
 
     <!--Editor • Mouse Clicks-->
-    <Color x:Key="MouseClicksColor">#78FFFF00</Color>
+    <Color x:Key="LeftMouseButtonClicksColor">#78FFFF00</Color>
+    <Color x:Key="MiddleMouseButtonClicksColor">#7800FFFF</Color>
+    <Color x:Key="RightMouseButtonClicksColor">#78FF0000</Color>
     <s:Double x:Key="MouseClicksWidth">12</s:Double>
     <s:Double x:Key="MouseClicksHeight">12</s:Double>
     

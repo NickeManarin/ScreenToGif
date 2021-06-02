@@ -663,11 +663,6 @@ namespace ScreenToGif.UserControls
             return true;
         }
 
-        public void InitialFocus()
-        {
-            FilenameTextBox.Focus();
-        }
-
         public async Task<bool> IsValid()
         {
             #region Validate preset specific properties
@@ -804,6 +799,8 @@ namespace ScreenToGif.UserControls
 
         private void Panel_Loaded(object sender, RoutedEventArgs e)
         {
+            PresetComboBox.Focus();
+
             //If a default file type was not selected, it picks 'Gif' as default.
             if (!(TypeComboBox.SelectedValue is Export type))
                 TypeComboBox.SelectedValue = type = Export.Gif;
@@ -829,6 +826,8 @@ namespace ScreenToGif.UserControls
         {
             if (!(PresetComboBox.SelectedItem is ExportPreset selected))
                 return;
+
+            var firstLoad = CurrentPreset == null;
 
             //Hide all other grids.
             foreach (var grid in EncoderGrid.Children.OfType<Grid>())
@@ -882,7 +881,7 @@ namespace ScreenToGif.UserControls
                             break;
                     }
 
-                    return;
+                    break;
                 }
                 case Export.Gif:
                 {
@@ -905,7 +904,7 @@ namespace ScreenToGif.UserControls
                             break;
                     }
 
-                    return;
+                    break;
                 }
                 case Export.Webp:
                     FfmpegWebpOptionsGrid.Visibility = Visibility.Visible;
@@ -935,6 +934,17 @@ namespace ScreenToGif.UserControls
                 case Export.Psd:
                     EmbeddedPsdOptionsGrid.Visibility = Visibility.Visible;
                     break;
+            }
+
+            if (firstLoad)
+            {
+                Dispatcher.InvokeAsync(() =>
+                {
+                    if (CurrentPreset.PickLocation)
+                        FilenameTextBox.Focus();
+                    else if (CurrentPreset.UploadFile)
+                        UploadPresetComboBox.Focus();
+                }, DispatcherPriority.Loaded);
             }
         }
 

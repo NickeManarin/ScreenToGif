@@ -228,9 +228,6 @@ namespace ScreenToGif.Windows
         {
             InitializeComponent();
 
-            // Hide last displayed panel after the panel closing animation is complete.
-            this.FindStoryboard("HideOverlayGridStoryboard").Completed += HideLastDisplayedPanel;
-
             #region Adjust the position
 
             //Tries to adjust the position/size of the window, centers on screen otherwise.
@@ -1459,7 +1456,7 @@ namespace ScreenToGif.Windows
 
         private void Playback_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = Project != null && Project.Frames.Count > 1 && !IsLoading && _applyAction == null;
+            e.CanExecute = Project != null && Project.Frames.Count > 1 && !IsLoading;
         }
 
         private void FirstFrame_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -2511,7 +2508,7 @@ namespace ScreenToGif.Windows
 
         private void ApplyMouseClicksButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!Project.Frames.Any(x => x.WasClicked))
+            if (Project.Frames.All(x => x.ButtonClicked == MouseButtonType.None))
             {
                 StatusList.Warning(LocalizationHelper.Get("S.MouseClicks.Warning.None"));
                 return;
@@ -4531,9 +4528,6 @@ namespace ScreenToGif.Windows
                     CustomContentControl.Content = grid;
                     CustomContentControl.Visibility = Visibility.Visible;
 
-                    //Focus the filename text box instead of automatically focusing the first child control in the panel.
-                    grid.InitialFocus();
-                    
                     focusFirstVisibleChild = false;
                     break;
                 case PanelType.LoadRecent:
@@ -4739,11 +4733,6 @@ namespace ScreenToGif.Windows
             ShapeDrawingCanvas.DeselectAll();
         }
 
-        private void HideLastDisplayedPanel(object sender, EventArgs e)
-        {
-            HideAllVisibleGrids();
-        }
-
         private void ClosePanel(bool isCancel = false, bool removeEvent = false)
         {
             StatusList.Remove(StatusType.Warning);
@@ -4761,6 +4750,8 @@ namespace ScreenToGif.Windows
 
             BeginStoryboard(this.FindStoryboard("HidePanelStoryboard"), HandoffBehavior.Compose);
             BeginStoryboard(this.FindStoryboard("HideOverlayGridStoryboard"), HandoffBehavior.Compose);
+
+            HideAllVisibleGrids();
         }
 
         private List<int> SelectedFramesIndex()
@@ -6900,10 +6891,17 @@ namespace ScreenToGif.Windows
 
             var auxList = Project.Frames.CopyList();
 
+            var leftClickSolidColorBrush = new SolidColorBrush(model.LeftButtonForegroundColor);
+            leftClickSolidColorBrush.Freeze();
+            var rightClickSolidColorBrush = new SolidColorBrush(model.RightButtonForegroundColor);
+            rightClickSolidColorBrush.Freeze();
+            var middleClickSolidColorBrush = new SolidColorBrush(model.MiddleButtonForegroundColor);
+            middleClickSolidColorBrush.Freeze();
+
             var count = 0;
             foreach (var frame in auxList)
             {
-                if (!frame.WasClicked || frame.CursorX == int.MinValue)
+                if (frame.ButtonClicked == MouseButtonType.None || frame.CursorX == int.MinValue)
                 {
                     UpdateProgress(count++);
                     continue;
@@ -6916,7 +6914,22 @@ namespace ScreenToGif.Windows
                 using (var drawingContext = drawingVisual.RenderOpen())
                 {
                     drawingContext.DrawImage(image, new Rect(0, 0, image.Width, image.Height)); // - UserSettings.All.MouseClicksWidth/2d   // - UserSettings.All.MouseClicksHeight/2d
-                    drawingContext.DrawEllipse(new SolidColorBrush(model.ForegroundColor), null, new Point(frame.CursorX / scale, frame.CursorY / scale), model.Width, model.Height);
+
+                    SolidColorBrush brush = null;
+                    switch (frame.ButtonClicked)
+                    {
+                        case MouseButtonType.Left:
+                            brush = leftClickSolidColorBrush;
+                            break;
+                        case MouseButtonType.Right:
+                            brush = rightClickSolidColorBrush;
+                            break;
+                        case MouseButtonType.Middle:
+                            brush = middleClickSolidColorBrush;
+                            break;
+                    }
+
+                    drawingContext.DrawEllipse(brush, null, new Point(frame.CursorX / scale, frame.CursorY / scale), model.Width, model.Height);
                 }
 
                 //KeyStrokesOverlayGrid.GetScaledRender(ZoomBoxControl.ScaleDiff, ZoomBoxControl.ImageDpi, ZoomBoxControl.GetImageSize());

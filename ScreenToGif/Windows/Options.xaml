@@ -252,6 +252,29 @@
                                         <Label Content="{DynamicResource S.Options.App.Theme.Scheme.VeryDark}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" 
                                                Foreground="{DynamicResource Element.Foreground}"/>
                                     </StackPanel>
+                                    
+                                    <StackPanel Orientation="Horizontal" Tag="FollowSystem">
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="#FFFFFFFF" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                            <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFFAFAFA" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                            <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FFF5F5F5" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                            <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF222120" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                            <TextBlock Text="Aa" Foreground="#FF696969" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,0,1" Background="#FF222222" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                            <TextBlock Text="Aa" Foreground="#FF696969" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FF242424" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
+                                            <TextBlock Text="Aa" Foreground="#FF696969" HorizontalAlignment="Center"/>
+                                        </Border>
+                                        <Label Content="{DynamicResource S.Options.App.Theme.Scheme.FollowSystem}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"
+                                               Foreground="{DynamicResource Element.Foreground}"/>
+                                    </StackPanel>
                                 </ComboBox>
                             </Grid>
                         </Expander>
@@ -1285,7 +1308,7 @@
                             <n:ExtendedListBoxItem Image="{StaticResource Flag.France}" Tag="fr" Content="French / Français" Author="Largo, Sébastien 'Tr4ncer' Villemain, Adrick"
                                                    ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=fr, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Germany}" Tag="de" Content="German / Deutsch" Author="Andy Kleinert, PeterK., Christoph Voigt, Michael Reukauff"
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Germany}" Tag="de" Content="German / Deutsch" Author="Mr-Update, Andy Kleinert, PeterK., Christoph Voigt, Michael Reukauff"
                                                    ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=de, Converter={StaticResource TagToSelection}}"/>
 
                             <n:ExtendedListBoxItem Image="{StaticResource Flag.Greece}" Tag="el" Content="Greek / Ελληνικά" Author="Χρήστος Μητσιάρης"

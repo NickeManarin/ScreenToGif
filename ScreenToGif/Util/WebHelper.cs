@@ -142,7 +142,9 @@ namespace ScreenToGif.Util
         private static Stream GetMultipartStream(string border, Dictionary<string, string> args, string filename, Stream data, string streamName = "file")
         {
             var stream = new MemoryStream();
-            stream.WriteStringUtf8("Content-Type: text/plain; charset=utf-8");
+
+            if (args.Any(w => !string.IsNullOrEmpty(w.Key) && !string.IsNullOrEmpty(w.Value)))
+                stream.WriteStringUtf8("Content-Type: text/plain; charset=utf-8");
 
             foreach (var content in args.Where(w => !string.IsNullOrEmpty(w.Key) && !string.IsNullOrEmpty(w.Value)))
                 stream.WriteStringUtf8($"--{border}\r\nContent-Disposition: form-data; name=\"{content.Key}\"\r\n\r\n{content.Value}\r\n");
