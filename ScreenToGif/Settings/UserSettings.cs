@@ -1236,6 +1236,12 @@ namespace ScreenToGif.Settings
             set => SetValue(value);
         }
 
+        public bool GridColorsFollowSystem
+        {
+            get => (bool) GetValue(defaultValue: false);
+            set => SetValue(value);
+        }
+
         public Rect BoardGridSize
         {
             get => (Rect)GetValue();

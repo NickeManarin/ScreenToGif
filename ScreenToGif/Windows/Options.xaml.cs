@@ -332,22 +332,6 @@ namespace ScreenToGif.Windows
 
         private void CheckScheme(bool schemePicked = true)
         {
-            #region Colors
-
-            var veryLightEven = Color.FromArgb(255, 245, 245, 245);
-            var veryLightOdd = Color.FromArgb(255, 240, 240, 240);
-
-            var lightEven = Color.FromArgb(255, 255, 255, 255);
-            var lightOdd = Color.FromArgb(255, 211, 211, 211);
-
-            var mediumEven = Color.FromArgb(255, 153, 153, 153);
-            var mediumOdd = Color.FromArgb(255, 102, 102, 102);
-
-            var darkEven = Color.FromArgb(255, 45, 45, 45);
-            var darkOdd = Color.FromArgb(255, 50, 50, 50);
-
-            #endregion
-
             try
             {
                 EvenColorBox.IgnoreEvent = true;
@@ -360,20 +344,30 @@ namespace ScreenToGif.Windows
                     switch (ColorSchemesComboBox.SelectedIndex)
                     {
                         case 0:
-                            UserSettings.All.GridColor1 = veryLightEven;
-                            UserSettings.All.GridColor2 = veryLightOdd;
+                            UserSettings.All.GridColorsFollowSystem = false;
+                            UserSettings.All.GridColor1 = Constants.VeryLightEven;
+                            UserSettings.All.GridColor2 = Constants.VeryLightOdd;
                             break;
                         case 1:
-                            UserSettings.All.GridColor1 = lightEven;
-                            UserSettings.All.GridColor2 = lightOdd;
+                            UserSettings.All.GridColorsFollowSystem = false;
+                            UserSettings.All.GridColor1 = Constants.LightEven;
+                            UserSettings.All.GridColor2 = Constants.LightOdd;
                             break;
                         case 2:
-                            UserSettings.All.GridColor1 = mediumEven;
-                            UserSettings.All.GridColor2 = mediumOdd;
+                            UserSettings.All.GridColorsFollowSystem = false;
+                            UserSettings.All.GridColor1 = Constants.MediumEven;
+                            UserSettings.All.GridColor2 = Constants.MediumOdd;
                             break;
                         case 3:
-                            UserSettings.All.GridColor1 = darkEven;
-                            UserSettings.All.GridColor2 = darkOdd;
+                            UserSettings.All.GridColorsFollowSystem = false;
+                            UserSettings.All.GridColor1 = Constants.DarkEven;
+                            UserSettings.All.GridColor2 = Constants.DarkOdd;
+                            break;
+                        case 4:
+                            UserSettings.All.GridColorsFollowSystem = true;
+                            var isSystemUsingDark = ThemeHelper.IsSystemUsingDarkTheme();
+                            UserSettings.All.GridColor1 = isSystemUsingDark ? Constants.DarkEven : Constants.VeryLightEven;
+                            UserSettings.All.GridColor2 = isSystemUsingDark ? Constants.DarkOdd : Constants.VeryLightOdd;
                             break;
                     }
 
@@ -383,17 +377,26 @@ namespace ScreenToGif.Windows
                 }
 
                 #region If Color Picked
-
-                if (UserSettings.All.GridColor1.Equals(veryLightEven) && UserSettings.All.GridColor2.Equals(veryLightOdd))
+                if (UserSettings.All.GridColor1.Equals(Constants.VeryLightEven) && UserSettings.All.GridColor2.Equals(Constants.VeryLightOdd) &&
+                    !UserSettings.All.GridColorsFollowSystem)
                     ColorSchemesComboBox.SelectedIndex = 0;
-                else if (UserSettings.All.GridColor1.Equals(lightEven) && UserSettings.All.GridColor2.Equals(lightOdd))
+                else if (UserSettings.All.GridColor1.Equals(Constants.LightEven) && UserSettings.All.GridColor2.Equals(Constants.LightOdd))
                     ColorSchemesComboBox.SelectedIndex = 1;
-                else if (UserSettings.All.GridColor1.Equals(mediumEven) && UserSettings.All.GridColor2.Equals(mediumOdd))
+                else if (UserSettings.All.GridColor1.Equals(Constants.MediumEven) &&
+                         UserSettings.All.GridColor2.Equals(Constants.MediumOdd))
                     ColorSchemesComboBox.SelectedIndex = 2;
-                else if (UserSettings.All.GridColor1.Equals(darkEven) && UserSettings.All.GridColor2.Equals(darkOdd))
+                else if (UserSettings.All.GridColor1.Equals(Constants.DarkEven) && UserSettings.All.GridColor2.Equals(Constants.DarkOdd) &&
+                         !UserSettings.All.GridColorsFollowSystem)
                     ColorSchemesComboBox.SelectedIndex = 3;
+                else if (UserSettings.All.GridColorsFollowSystem &&
+                         (UserSettings.All.GridColor1.Equals(Constants.VeryLightEven) || UserSettings.All.GridColor1.Equals(Constants.DarkEven))
+                         && (UserSettings.All.GridColor2.Equals(Constants.VeryLightOdd) || UserSettings.All.GridColor2.Equals(Constants.DarkOdd)))
+                    ColorSchemesComboBox.SelectedIndex = 4;
                 else
-                    ColorSchemesComboBox.SelectedIndex = 5;
+                {
+                    UserSettings.All.GridColorsFollowSystem = false;
+                    ColorSchemesComboBox.SelectedIndex = 6;
+                }
 
                 #endregion
             }
