@@ -130,7 +130,7 @@
     <s:String x:Key="S.Command.Unselect">Alle Frames abwählen</s:String>
     <s:String x:Key="S.Command.Fade">Überblendung</s:String>
     <s:String x:Key="S.Command.Slide">Schwenken</s:String>
-    <s:String x:Key="S.Command.ClearAll">Alle beendeten Codierungen löschen</s:String>
+    <s:String x:Key="S.Command.ClearAll">Alle beendeten Umwandlungen entfernen</s:String>
     <s:String x:Key="S.Command.MoveUp">Nach oben bewegen</s:String>
     <s:String x:Key="S.Command.MoveDown">Nach unten bewegen</s:String>
     <s:String x:Key="S.Command.Add">Hinzufügen</s:String>
@@ -172,7 +172,7 @@
     <s:String x:Key="S.Updater.Downloading">Wird heruntergeladen …</s:String>
     <s:String x:Key="S.Updater.Warning.Show">Das Anzeigen der Downloaddetails ist fehlgeschlagen.</s:String>
     <s:String x:Key="S.Updater.Warning.Download">Das Herunterladen der Aktualisierung ist fehlgeschlagen.</s:String>
-    <s:String x:Key="S.Updater.Warning.Encoding">Sie müssen warten, bis alle Codierungen abgeschlossen sind, bevor Sie die Aktualisierung durchführen.</s:String>
+    <s:String x:Key="S.Updater.Warning.Encoding">Sie müssen warten, bis alle Umwandlungen abgeschlossen sind, bevor Sie die Aktualisierung durchführen.</s:String>
     
     <!--Downloader-->
     <s:String x:Key="S.Downloader.Title">ScreenToGif • Downloader</s:String>
@@ -225,6 +225,7 @@
     <s:String x:Key="S.Options.App.Theme.Scheme.Medium">Mittel</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Dark">Dunkel</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.VeryDark">Sehr dunkel</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.FollowSystem">Von System übernehmen</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Custom">Benutzerdefiniert</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Example">Beispielfarben</s:String>
     <s:String x:Key="S.Options.App.Tray">Programmsymbol</s:String>
@@ -353,7 +354,7 @@
     <s:String x:Key="S.Options.Editor.Previewer.BaseColor">Grundfarbe</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.EvenColor">1. Farbe</s:String>
     <s:String x:Key="S.Options.Editor.Previewer.OddColor">2. Farbe</s:String>
-    <s:String x:Key="S.Options.Editor.Interface.DisplayEncoder">Codierungen in einem separaten Fenster anzeigen</s:String>
+    <s:String x:Key="S.Options.Editor.Interface.DisplayEncoder">Umwandlungen in einem separaten Fenster anzeigen</s:String>
     <s:String x:Key="S.Options.Editor.Interface.ExtendChrome">Titelleiste erweitern</s:String>
     <s:String x:Key="S.Options.Editor.Interface.AutomaticallySizeOnContent">Programm-Fenstergröße an Framegröße automatisch anpassen</s:String>
     <s:String x:Key="S.Options.Editor.Interface.AutomaticallyFitImage">Framegröße an Programm-Fenstergröße automatisch anpassen</s:String>
@@ -842,7 +843,7 @@
     <s:String x:Key="S.ImportVideo.Nothing">Keine Frames ausgewählt.</s:String>
     
     <!--Encoder-->
-    <s:String x:Key="S.Encoder.Title">Codieren</s:String>
+    <s:String x:Key="S.Encoder.Title">Umwandeln</s:String>
     <s:String x:Key="S.Encoder.Encoding">Wird umgewandelt …</s:String>
     <s:String x:Key="S.Encoder.Starting">Wird gestartet</s:String>
     
@@ -857,7 +858,7 @@
     
     <s:String x:Key="S.Encoder.Completed.Elapsed">Verstrichene Zeit (in Minuten):</s:String>
     <s:String x:Key="S.Encoder.Completed.Elapsed.Analysis">Auswertung:</s:String>
-    <s:String x:Key="S.Encoder.Completed.Elapsed.Encoding">Codierung:</s:String>
+    <s:String x:Key="S.Encoder.Completed.Elapsed.Encoding">Umwandlung:</s:String>
     <s:String x:Key="S.Encoder.Completed.Elapsed.Upload">Hochladen:</s:String>
     <s:String x:Key="S.Encoder.Completed.Elapsed.Copy">Kopieren:</s:String>
     <s:String x:Key="S.Encoder.Completed.Elapsed.Commands">Befehle:</s:String>
@@ -878,7 +879,7 @@
     <s:String x:Key="S.Encoder.ExploreFolder">Ordner durchsuchen</s:String>
     <s:String x:Key="S.Encoder.Remove">Aus Liste entfernen</s:String>
     <s:String x:Key="S.Encoder.Details">Details anzeigen</s:String>
-    <s:String x:Key="S.Encoder.Dismiss">Alle fertigen Codierungen verwerfen</s:String>
+    <s:String x:Key="S.Encoder.Dismiss">Alle abgeschlossenen Umwandlungen verwerfen</s:String>
 
     <s:String x:Key="S.Encoder.Copy.Image">Als Grafik kopieren</s:String>
     <s:String x:Key="S.Encoder.Copy.Filename">Dateinamen kopieren</s:String>
@@ -1348,6 +1349,9 @@
 
     <!--Editor • Mouse clicks-->
     <s:String x:Key="S.MouseClicks">Mausklicks</s:String>
+    <s:String x:Key="S.MouseClicks.Color.Left">Farbe der linken Maustaste:</s:String>
+    <s:String x:Key="S.MouseClicks.Color.Middle">Farbe der mittleren Maustaste::</s:String>
+    <s:String x:Key="S.MouseClicks.Color.Right">Farbe der rechten Maustaste:</s:String>
     <s:String x:Key="S.MouseClicks.Warning.None">Keine erkennbaren Mausklicks in Ihrem Projekt.</s:String>
     
     <!--Editor • Watermark-->
@@ -1676,8 +1680,8 @@
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath.Info">Kopiert Dateipfad der Ausgabedatei in Zwischenablage</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">Link</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">Kopiert den durch Upload-Service erzeugten Link in Zwischenablage</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Weitere Codierungsbefehle ausführen</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Befehle eingeben, die nach dem Codieren ausgeführt werden sollen.&#x0a;Falls mehrere Befehle ausgeführt werden sollen, bitte einen Befehl pro Zeile eingeben.&#x0a;Makros:&#x0a;{p} = Dateiausgabepfad&#x0a;{f} = Ordnerausgabepfad&#x0d;{u} = URL der hochgeladenen Datei</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">Weitere Umwandlungsbefehle ausführen</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">Befehle eingeben, die nach dem Umwandeln ausgeführt werden sollen.&#x0a;Falls mehrere Befehle ausgeführt werden sollen, bitte einen Befehl pro Zeile eingeben.&#x0a;Makros:&#x0a;{p} = Dateiausgabepfad&#x0a;{f} = Ordnerausgabepfad&#x0d;{u} = URL der hochgeladenen Datei</s:String>
     
     <!--Editor • Save as > Partial export-->
     <s:String x:Key="S.SaveAs.Partial">Teilweise exportieren</s:String>
