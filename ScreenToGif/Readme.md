@@ -4,14 +4,13 @@ This is the current project of ScreenToGif.
 
 _VS 2019 and .Net 4.8 or newer required._
 
-## What's new? (Version 2.31)
+## What's new? (Version 2.31.1)
 
-• Added option for theme to follow the system's one (thanks to @pawlos).  
+• 
 
 ### Fixed:
 
-♦ The updater now waits for files being blocked by other processes before continuing.  
-♦ Imgur upload was not working properly unless sending in authenticated mode and selecting an album.  
+♦ The selection adorner could appear in the recording if the region was previously left close to the right corner of the screen.  
 
 ### Known Bugs:
   
