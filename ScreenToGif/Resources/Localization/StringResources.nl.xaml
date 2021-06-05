@@ -42,7 +42,7 @@
     <s:String x:Key="S.Warning.Net.Message">Om deze app correct te gebruiken, moet je de juiste versie van .Net Framework downloaden.&#10;Wilt u de webpagina openen om deze te downloaden?</s:String>
     <s:String x:Key="S.Warning.Single.Title">Slechts één instantie toegestaan</s:String>
     <s:String x:Key="S.Warning.Single.Header">De app is al actief</s:String>
-    <s:String x:Key="S.Warning.Single.Message">ScreenToGif draait al, maar blijkbaar is er geen raam open. Controleer je systeemvak, er moet een ScreenToGif-pictogram zijn.</s:String>
+    <s:String x:Key="S.Warning.Single.Message">ScreenToGif draait al, maar blijkbaar zonder venster geopend. Controleer het systeemvak, er moet een ScreenToGif-pictogram zijn.</s:String>
     
     <s:String x:Key="S.SavingSettings.Title">Instellingen opslaan</s:String>
     <s:String x:Key="S.SavingSettings.Instruction">Wil je het opnieuw proberen op te slaan?</s:String>
@@ -50,7 +50,7 @@
     
     <s:String x:Key="S.Exiting.Title">ScreenToGif afsluiten</s:String>
     <s:String x:Key="S.Exiting.Instruction">Weet je zeker dat je wilt afsluiten?</s:String>
-    <s:String x:Key="S.Exiting.Message">Alle schermen worden gesloten en het pictogram wordt van de taakbalk verwijderd.</s:String>
+    <s:String x:Key="S.Exiting.Message">Alle vensters worden gesloten en het pictogram wordt van de taakbalk verwijderd.</s:String>
 
     <!--Warnings • Graphics engine-->
     <s:String x:Key="S.Warning.Graphics.Title">Grafische adapter wisselen</s:String>
@@ -225,11 +225,12 @@
     <s:String x:Key="S.Options.App.Theme.Scheme.Medium">Gemiddeld</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Dark">Donker</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.VeryDark">Zeer donker</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.FollowSystem">Systeem</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Custom">Aangepast</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Example">Voorbeeldkleuren.</s:String>
     <s:String x:Key="S.Options.App.Tray">Systeemvakpictogram</s:String>
     <s:String x:Key="S.Options.App.Tray.Show">Pictogram in het systeemvak van de taakbalk (meldingencentrum) weergeven.</s:String>
-    <s:String x:Key="S.Options.App.Tray.LeaveOpen">Houd de toepassing open, zelfs als alle schermen gesloten zijn.</s:String>
+    <s:String x:Key="S.Options.App.Tray.LeaveOpen">Houd de toepassing open, zelfs als alle vensters gesloten zijn.</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Nothing">Doe niets</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Open">Open een venster</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Open.None">Geen venster</s:String>
@@ -393,7 +394,7 @@
     <s:String x:Key="S.Options.Shortcuts.Global.OpenOptions">Opties:</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.OpenOptions.Info">(Opent het Instellingenvenster)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.Exit">Afsluiten:</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Global.Exit.Info">(Sluit alle schermen en verwijdert het programma uit de taakbalk)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.Exit.Info">(Sluit alle vensters en verwijdert het programma uit de taakbalk)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders">Opname</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause">Start/Pauze:</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause.Info">(Start/pauzeert de opname. In Foto-modus wordt een enkele opname genomen)</s:String>
@@ -804,7 +805,7 @@
     
     <!--Insert frames-->
     <s:String x:Key="S.InsertFrames.Title">Frames toevoegen</s:String>
-    <s:String x:Key="S.InsertFrames.Info">Beide kanten moeten dezelfde grootte hebben. In dit scherm kan je de afbeelding ten opzichte van canvas herpositioneren of veranderen qua grootte. Klik op afbeelding om te selecteren.</s:String>
+    <s:String x:Key="S.InsertFrames.Info">Beide kanten moeten dezelfde grootte hebben. In dit venster kan je de afbeelding ten opzichte van canvas herpositioneren of veranderen qua grootte. Klik op afbeelding om te selecteren.</s:String>
     <s:String x:Key="S.InsertFrames.CanvasSize">Canvasgrootte:</s:String>
     <s:String x:Key="S.InsertFrames.FitCanvas">Afbeelding aanpassen aan canvas</s:String>
     <s:String x:Key="S.InsertFrames.FitCanvas.Info">Canvasgrootte aanpassen om beide afbeeldingen passend te maken (t.o.v. linkerbovenhoek).</s:String>
@@ -1348,6 +1349,9 @@
 
     <!--Editor • Mouse clicks-->
     <s:String x:Key="S.MouseClicks">Muisklikken</s:String>
+    <s:String x:Key="S.MouseClicks.Color.Left">Kleur middenknop</s:String>
+    <s:String x:Key="S.MouseClicks.Color.Middle">Kleur rechterknop</s:String>
+    <s:String x:Key="S.MouseClicks.Color.Right">Kleur linkerknop</s:String>
     <s:String x:Key="S.MouseClicks.Warning.None">Er zijn geen muisklikken gedetecteerd in dit project.</s:String>
     
     <!--Editor • Watermark-->
@@ -1776,7 +1780,7 @@
     <s:String x:Key="S.Feedback.Warning.Title">Geef je bericht een onderwerp.</s:String>
     <s:String x:Key="S.Feedback.Warning.Message">Je moet een bericht typen in de feedback.</s:String>
     <s:String x:Key="S.Feedback.Warning.Email">Je moet uw e-mailadres typen om een antwoord van de ontwikkelaar te ontvangen.</s:String>
-    <s:String x:Key="S.Feedback.Sending">Verzending in de achtergrond… Dit scherm sluit binnenkort.</s:String>
+    <s:String x:Key="S.Feedback.Sending">Verzending in de achtergrond… Dit venster sluit binnenkort.</s:String>
     <s:String x:Key="S.Feedback.Attachments">Bijlagen (optioneel, 20MB maximum)</s:String>
     <s:String x:Key="S.Feedback.AddAttachments">Bijlagen toevoegen</s:String>
     <s:String x:Key="S.Feedback.RemoveAttachments">Alle bijlagen verwijderen</s:String>
