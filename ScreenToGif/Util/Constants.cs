@@ -1,3 +1,4 @@
+using System.Windows.Media;
 using ScreenToGif.Settings;
 
 namespace ScreenToGif.Util
@@ -42,6 +43,22 @@ namespace ScreenToGif.Util
         public static int HorizontalBoardOffset => LeftBoardOffset + RightBoardOffset;
 
         public static int VerticalBoardOffset => TopBoardOffset + BottomBoardOffset;
+
+        #endregion
+
+        #region Colors
+
+        public static Color VeryLightEven = Color.FromArgb(255, 245, 245, 245);
+        public static Color VeryLightOdd = Color.FromArgb(255, 240, 240, 240);
+
+        public static Color LightEven = Color.FromArgb(255, 255, 255, 255);
+        public static Color LightOdd = Color.FromArgb(255, 211, 211, 211);
+
+        public static Color MediumEven = Color.FromArgb(255, 153, 153, 153);
+        public static Color MediumOdd = Color.FromArgb(255, 102, 102, 102);
+
+        public static Color DarkEven = Color.FromArgb(255, 45, 45, 45);
+        public static Color DarkOdd = Color.FromArgb(255, 50, 50, 50);
 
         #endregion
     }

@@ -43,7 +43,7 @@ namespace ScreenToGif.Util
             RefreshNotificationIcon();
         }
 
-        private static bool IsSystemUsingDarkTheme()
+        internal static bool IsSystemUsingDarkTheme()
         {
             try
             {

@@ -755,6 +755,11 @@
                                                 <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FF2D2D2D" Width="20" Height="20"/>
                                                 <Label Content="{DynamicResource S.Options.App.Theme.Scheme.Dark}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
                                             </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="#FFF5F5F5" Width="20" Height="20"/>
+                                                <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="0,1,1,1" Background="#FF2D2D2D" Width="20" Height="20"/>
+                                                <Label Content="{DynamicResource S.Options.App.Theme.Scheme.FollowSystem}" Foreground="{DynamicResource Element.Foreground}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0"/>
+                                            </StackPanel>
                                             <Separator Height="1"/>
                                             <StackPanel Orientation="Horizontal">
                                                 <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Width="20" Height="20">
