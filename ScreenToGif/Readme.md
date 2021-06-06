@@ -11,7 +11,9 @@ _VS 2019 and .Net 4.8 or newer required._
 ### Fixed:
 
 ♦ The selection adorner could appear in the recording if the region was previously left close to the right corner of the screen.
-♦ The new recorder UI command panel was getting in the way of the capture when positioned to the left of the capture region.  
+♦ The new recorder UI command panel was getting in the way of the capture when positioned to the left of the capture region.
+♦ The insert window was reporting wrong sizing information about the images and canvas.  
+♦ The new recorder UI was width and height text boxes were not displaying the correct scaled size based on the screen DPI.
 
 ### Known Bugs:
   

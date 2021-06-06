@@ -190,6 +190,13 @@ namespace ScreenToGif.Windows
 
             if (UserSettings.All.CursorFollowing)
                 Follow();
+            else
+            {
+                await Task.Delay(TimeSpan.FromMilliseconds(500));
+
+                CommandManager.InvalidateRequerySuggested();
+                MoveCommandPanel();
+            }
         }
 
         private void Window_Activated(object sender, EventArgs e)
@@ -359,6 +366,9 @@ namespace ScreenToGif.Windows
 
             WidthIntegerBox.IgnoreValueChanged = false;
             HeightIntegerBox.IgnoreValueChanged = false;
+
+            WidthIntegerBox.Scale = _regionSelection.Scale;
+            HeightIntegerBox.Scale = _regionSelection.Scale;
 
             if (Capture != null)
             {
@@ -811,6 +821,10 @@ namespace ScreenToGif.Windows
 
                 #endregion
             }
+
+            //Change the scale of the sizing controls.
+            WidthIntegerBox.Scale = UserSettings.All.SelectedRegionScale;
+            HeightIntegerBox.Scale = UserSettings.All.SelectedRegionScale;
 
             #region Adjust the position of the main controls
 
