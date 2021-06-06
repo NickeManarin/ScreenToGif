@@ -629,7 +629,7 @@
     <s:String x:Key="S.InsertFrames.ImageSize">Kích thước ảnh:</s:String>
     <s:String x:Key="S.InsertFrames.ImagePosition">Vị trí ảnh:</s:String>
     <s:String x:Key="S.InsertFrames.ResetImageSizePosition">Đặt lại kích thước hình ảnh&#x0d;và vị trí</s:String>
-    <s:String x:Key="S.InsertFrames.Info2">Các khung hình mới sẽ được chèn vào vị trí hiện thời của danh sách khung hình:</s:String>
+    <s:String x:Key="S.InsertFrames.Info2">Các khung hình mới sẽ được chèn vào vị&#10;trí hiện thời của danh sách khung hình:</s:String>
     <s:String x:Key="S.InsertFrames.Before">Trước</s:String>
     <s:String x:Key="S.InsertFrames.After">Sau</s:String>
     <s:String x:Key="S.InsertFrames.Frame">Khung hình</s:String>

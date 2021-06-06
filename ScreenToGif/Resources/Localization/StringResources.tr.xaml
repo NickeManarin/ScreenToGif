@@ -629,7 +629,7 @@
     <s:String x:Key="S.InsertFrames.ImageSize">Görüntü Boyutu:</s:String>
     <s:String x:Key="S.InsertFrames.ImagePosition">Görüntü Pozisyonu:</s:String>
     <s:String x:Key="S.InsertFrames.ResetImageSizePosition">Görüntü Boyutu&#x0d;ve Posizyonunu Sıfırla</s:String>
-    <s:String x:Key="S.InsertFrames.Info2">Yeni kareler geçerli kareler listesine eklenecek:</s:String>
+    <s:String x:Key="S.InsertFrames.Info2">Yeni kareler geçerli kareler&#10;listesine eklenecek:</s:String>
     <s:String x:Key="S.InsertFrames.Before">Önce</s:String>
     <s:String x:Key="S.InsertFrames.After">Sonra</s:String>
     <s:String x:Key="S.InsertFrames.Frame">Kare</s:String>

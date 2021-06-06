@@ -801,7 +801,7 @@
     <s:String x:Key="S.InsertFrames.ImageSize">Kép mérete:</s:String>
     <s:String x:Key="S.InsertFrames.ImagePosition">Kép helyzete:</s:String>
     <s:String x:Key="S.InsertFrames.ResetImageSizePosition">Képméret és pozíció&#x0d;visszaállítása</s:String>
-    <s:String x:Key="S.InsertFrames.Info2">Az új képkockák a jelenlegi képkockalistába kerülnek beszúrásra a következő helyen:</s:String>
+    <s:String x:Key="S.InsertFrames.Info2">Az új képkockák a jelenlegi képkockalistába&#10;kerülnek beszúrásra a következő helyen:</s:String>
     <s:String x:Key="S.InsertFrames.Before">Előtte</s:String>
     <s:String x:Key="S.InsertFrames.After">Utána</s:String>
     <s:String x:Key="S.InsertFrames.Frame">Képkocka</s:String>

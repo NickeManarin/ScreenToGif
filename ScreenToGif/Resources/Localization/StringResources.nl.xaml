@@ -815,7 +815,7 @@
     <s:String x:Key="S.InsertFrames.ImageSize">Afbeeldinggrootte:</s:String>
     <s:String x:Key="S.InsertFrames.ImagePosition">Afbeeldingpositie:</s:String>
     <s:String x:Key="S.InsertFrames.ResetImageSizePosition">Afbeeldingsgrootte &#10;en -positie herstellen</s:String>
-    <s:String x:Key="S.InsertFrames.Info2">Nieuwe frames worden toegevoegd in de huidige lijst van frames op de positie:</s:String>
+    <s:String x:Key="S.InsertFrames.Info2">Nieuwe frames worden toegevoegd in de huidige&#10;lijst van frames op de positie:</s:String>
     <s:String x:Key="S.InsertFrames.Before">Voor</s:String>
     <s:String x:Key="S.InsertFrames.After">Na</s:String>
     <s:String x:Key="S.InsertFrames.Frame">Frame</s:String>

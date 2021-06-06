@@ -705,7 +705,7 @@ couleurs de votre écran.</s:String>
     <s:String x:Key="S.InsertFrames.ImagePosition">Position de l'image:</s:String>
     <s:String x:Key="S.InsertFrames.ResetImageSizePosition">Réinitialiser la taille
 et la position de l'image</s:String>
-    <s:String x:Key="S.InsertFrames.Info2">De nouvelles images seront insérées dans la liste actuelle des images à cette position:</s:String>
+    <s:String x:Key="S.InsertFrames.Info2">De nouvelles images seront insérées dans la&#10;liste actuelle des images à cette position:</s:String>
     <s:String x:Key="S.InsertFrames.Before">Avant</s:String>
     <s:String x:Key="S.InsertFrames.After">Après</s:String>
     <s:String x:Key="S.InsertFrames.Frame">Image</s:String>

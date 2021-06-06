@@ -629,7 +629,7 @@
     <s:String x:Key="S.InsertFrames.ImageSize">Ukubwa wa picha</s:String>
     <s:String x:Key="S.InsertFrames.ImagePosition">Sehemu ya picha</s:String>
     <s:String x:Key="S.InsertFrames.ResetImageSizePosition">Seti ukubwa wa picha upya&#x0d;na nafasi</s:String>
-    <s:String x:Key="S.InsertFrames.Info2">Fremu mpya zitaingizwa kwenye orodha ya sasa ya fremu kwenye nafasi:</s:String>
+    <s:String x:Key="S.InsertFrames.Info2">Fremu mpya zitaingizwa kwenye orodha&#10;ya sasa ya fremu kwenye nafasi:</s:String>
     <s:String x:Key="S.InsertFrames.Before">Kabla</s:String>
     <s:String x:Key="S.InsertFrames.After">Baada</s:String>
     <s:String x:Key="S.InsertFrames.Frame">Fremu</s:String>
