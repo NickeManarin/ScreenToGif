@@ -10,7 +10,8 @@ _VS 2019 and .Net 4.8 or newer required._
 
 ### Fixed:
 
-♦ The selection adorner could appear in the recording if the region was previously left close to the right corner of the screen.  
+♦ The selection adorner could appear in the recording if the region was previously left close to the right corner of the screen.
+♦ The new recorder UI command panel was getting in the way of the capture when positioned to the left of the capture region.  
 
 ### Known Bugs:
   
