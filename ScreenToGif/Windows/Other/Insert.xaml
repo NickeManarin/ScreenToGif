@@ -61,7 +61,7 @@
 
                 <Label Grid.Row="0" Grid.Column="1" Content="{DynamicResource S.InsertFrames.CanvasSize}" VerticalAlignment="Center" Padding="2" Foreground="{DynamicResource Element.Foreground.Medium}"/>
 
-                <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}">
+                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="CanvasSizeTextBlock" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}">
                     <TextBlock.Text>
                         <MultiBinding StringFormat="{}{0} × {1}">
                             <Binding ElementName="LeftCanvas" Path="ActualWidth"/>
@@ -94,7 +94,7 @@
                           Background="{StaticResource Checker.DrawingBrush}" BorderThickness="1,1,0,1" BorderBrush="{DynamicResource Element.Border}" PanningMode="Both"
                           PreviewMouseWheel="ScrollViewer_MouseWheel" PreviewMouseRightButtonDown="ScrollViewer_PreviewMouseRightButtonDown">
                 <Canvas x:Name="LeftCanvas" Background="{Binding InsertFillColor, Source={x:Static t:UserSettings.All}, Converter={StaticResource ColorToBrushConverter}, Mode=TwoWay}">
-                    <Image Canvas.Left="0" Canvas.Top="0" x:Name="LeftImage" Stretch="Fill"/>
+                    <Image Canvas.Left="0" Canvas.Top="0" x:Name="LeftImage" Stretch="Fill" SizeChanged="LeftImage_SizeChanged"/>
                 </Canvas>
             </ScrollViewer>
 
@@ -104,7 +104,7 @@
                           Background="{StaticResource Checker.DrawingBrush}" BorderThickness="0,1,1,1" BorderBrush="{DynamicResource Element.Border}" PanningMode="Both"
                           PreviewMouseWheel="ScrollViewer_MouseWheel" PreviewMouseRightButtonDown="ScrollViewer_PreviewMouseRightButtonDown">
                 <Canvas x:Name="RightCanvas" Background="{Binding InsertFillColor, Source={x:Static t:UserSettings.All}, Converter={StaticResource ColorToBrushConverter}, Mode=TwoWay}">
-                    <Image Canvas.Left="0" Canvas.Top="0" x:Name="RightImage" Stretch="Fill"/>
+                    <Image Canvas.Left="0" Canvas.Top="0" x:Name="RightImage" Stretch="Fill" SizeChanged="RightImage_SizeChanged"/>
                 </Canvas>
             </ScrollViewer>
 
@@ -133,14 +133,8 @@
                 <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Margin="5" Background="{StaticResource Vector.WidthHeight}" Opacity="{DynamicResource Element.Opacity}"/>
                 <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource S.InsertFrames.ImageSize}" Padding="3,0" Foreground="{DynamicResource Element.Foreground}"/>
 
-                <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{DynamicResource Element.Foreground}">
-                    <TextBlock.Text>
-                        <MultiBinding StringFormat="{}{0:0.#} × {1:0.#}">
-                            <Binding ElementName="LeftImage" Path="ActualWidth" Mode="OneWay"/>
-                            <Binding ElementName="LeftImage" Path="ActualHeight" Mode="OneWay"/>
-                        </MultiBinding>
-                    </TextBlock.Text>
-                </TextBlock>
+                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="LeftImageSizeTextBlock" VerticalAlignment="Center" HorizontalAlignment="Center"
+                           Margin="0,0,3,0" Foreground="{DynamicResource Element.Foreground}"/>
 
                 <Separator Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Width="1"/>
 
@@ -177,14 +171,8 @@
                 <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Margin="5" Background="{StaticResource Vector.WidthHeight}" Opacity="{DynamicResource Element.Opacity}"/>
                 <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource S.InsertFrames.ImageSize}" Padding="3,0" Foreground="{DynamicResource Element.Foreground}"/>
 
-                <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{DynamicResource Element.Foreground}">
-                    <TextBlock.Text>
-                        <MultiBinding StringFormat="{}{0:0.#} × {1:0.#}">
-                            <Binding ElementName="RightImage" Path="ActualWidth" Mode="OneWay"/>
-                            <Binding ElementName="RightImage" Path="ActualHeight" Mode="OneWay"/>
-                        </MultiBinding>
-                    </TextBlock.Text>
-                </TextBlock>
+                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="RightImageSizeTextBlock" VerticalAlignment="Center" HorizontalAlignment="Center"
+                           Margin="0,0,3,0" Foreground="{DynamicResource Element.Foreground}"/>
 
                 <Separator Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Width="1"/>
 
@@ -203,31 +191,11 @@
                 <n:ExtendedButton Grid.Row="0" Grid.Column="5" Grid.RowSpan="2" x:Name="ResetRightButton" Text="{DynamicResource S.InsertFrames.ResetImageSizePosition}" Icon="{StaticResource Vector.Repeat}" 
                                   ContentWidth="20" ContentHeight="20" Style="{StaticResource Style.Button.Horizontal}" Click="ResetRightButton_Click" Margin="10,0,0,0"/>
             </Grid>
-
-            <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Height="30" Background="{DynamicResource Panel.Background.Level4}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Grid.Column="1" Text="{DynamicResource S.InsertFrames.Info2}" FontSize="13" Foreground="{DynamicResource Element.Foreground.Medium}" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"/>
-
-                <RadioButton Grid.Column="2" x:Name="BeforeRadioButton" Content="{DynamicResource S.InsertFrames.Before}" VerticalContentAlignment="Center" Margin="10,0,0,0" IsChecked="True"/>
-                <RadioButton  Grid.Column="3" x:Name="AfterRadioButton" Content="{DynamicResource S.InsertFrames.After}" Margin="10,0,00,0"/>
-
-                <Label Grid.Column="4" Content="{DynamicResource S.InsertFrames.Frame}" Padding="0" Margin="20,0,0,0" Foreground="{DynamicResource Element.Foreground.Detail}" VerticalContentAlignment="Center"/>
-                <Label Grid.Column="5" x:Name="FrameNumberLabel" Content="0" Margin="10,0,0,0" Foreground="{DynamicResource Element.Foreground.Detail}" FontSize="14" Padding="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            </Grid>
         </Grid>
 
         <Grid Grid.Row="4" Background="{DynamicResource Panel.Background.Level3}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition/>
                 <ColumnDefinition Width="Auto" MinWidth="150"/>
                 <ColumnDefinition Width="Auto" MinWidth="100"/>
                 <ColumnDefinition Width="Auto" MinWidth="100"/>
@@ -241,6 +209,30 @@
 
                 <Label x:Name="StatusLabel" Content="{DynamicResource S.InsertFrames.Importing}" Margin="5,0,0,0" Foreground="{DynamicResource Element.Foreground.Medium}" VerticalAlignment="Center"/>
                 <ProgressBar x:Name="InsertProgressBar" Grid.Column="1" Height="4" Margin="5,0"/>
+            </Grid>
+
+            <Grid Grid.Column="0" x:Name="InsertionGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Text="{DynamicResource S.InsertFrames.Info2}" FontSize="13" Margin="5,3"
+                           Foreground="{DynamicResource Element.Foreground.Medium}" VerticalAlignment="Center" TextWrapping="Wrap"/>
+
+                <RadioButton Grid.Row="0" Grid.Column="1" x:Name="BeforeRadioButton" Content="{DynamicResource S.InsertFrames.Before}" VerticalContentAlignment="Center" Margin="10,0,0,0" IsChecked="True"/>
+                <RadioButton Grid.Row="1" Grid.Column="1" x:Name="AfterRadioButton" Content="{DynamicResource S.InsertFrames.After}" VerticalContentAlignment="Center" Margin="10,0,00,0"/>
+
+                <TextBlock Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" Text="{DynamicResource S.InsertFrames.Frame}" Padding="0" Margin="20,0,0,0" Foreground="{DynamicResource Element.Foreground.Detail}" FontSize="14" VerticalAlignment="Center"/>
+                <TextBlock  Grid.Row="0" Grid.Column="4" Grid.RowSpan="2" x:Name="FrameNumberTextBlock" Text="0" Margin="10,0,0,0" Foreground="{DynamicResource Element.Foreground.Detail}" FontSize="14" VerticalAlignment="Center"/>
             </Grid>
 
             <n:ExtendedButton Grid.Column="1" x:Name="FillColorButton" Text="{DynamicResource S.InsertFrames.SelectColorFill}" 
