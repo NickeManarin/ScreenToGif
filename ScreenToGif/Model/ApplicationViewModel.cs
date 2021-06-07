@@ -25,6 +25,72 @@ namespace ScreenToGif.Model
     {
         #region Commands
 
+        public IExtendedCommand<int, bool> Open
+        {
+            get
+            {
+                return new AdvancedRelayCommand<int, bool>
+                {
+                    ExecuteAction = (startup, fromConsole) =>
+                    {
+                        if (!fromConsole && UserSettings.All.StartMinimized)
+                            startup = -1;
+
+                        //If files are being sent via parameter, force the editor to open.
+                        if (!fromConsole && Arguments.FileNames.Any())
+                            startup = 4;
+
+                        switch (startup)
+                        {
+                            case -1: //Minimized.
+                            {
+                                return;
+                            }
+
+                            case 1: //Screen recorder.
+                            {
+                                if (OpenRecorder.CanExecute(null))
+                                    OpenRecorder.Execute(null);
+                                return;
+                            }
+
+                            case 2: //Webcam recorder.
+                            {
+                                if (OpenWebcamRecorder.CanExecute(null))
+                                    OpenWebcamRecorder.Execute(null);
+                                return;
+                            }
+
+                            case 3: //Board recorder.
+                            {
+                                if (OpenBoardRecorder.CanExecute(null))
+                                    OpenBoardRecorder.Execute(null);
+                                return;
+                            }
+
+                            case 4: //Editor.
+                            {
+                                OpenEditor.Execute(null);
+                                return;
+                            }
+
+                            case 5: //Options.
+                            {
+                                OpenOptions.Execute(null);
+                                return;
+                            }
+
+                            default: //Startup.
+                            {
+                                OpenLauncher.Execute(null);
+                                return;
+                            }
+                        }
+                    }
+                };
+            }
+        }
+
         public ICommand OpenLauncher
         {
             get
@@ -1112,6 +1178,15 @@ namespace ScreenToGif.Model
         #endregion
     }
 
+    internal interface IExtendedCommand<in T, in TR>
+    {
+        event EventHandler CanExecuteChanged;
+
+        bool CanExecute(object parameter);
+
+        void Execute(T parameter, TR secondParameter = default);
+    }
+
     internal class RelayCommand : ICommand
     {
         public Predicate<object> CanExecutePredicate { get; set; }
@@ -1143,15 +1218,46 @@ namespace ScreenToGif.Model
         }
     }
 
-    internal class AdvancedRelayCommand : RoutedUICommand, ICommand
+    internal class AdvancedRelayCommand<T, TR> : IExtendedCommand<T, TR>
     {
         public Predicate<object> CanExecutePredicate { get; set; }
-        public Action<object> ExecuteAction { get; set; }
+        public Action<T, TR> ExecuteAction { get; set; }
+
+        public AdvancedRelayCommand(Predicate<object> canExecute, Action<T, TR> execute)
+        {
+            CanExecutePredicate = canExecute;
+            ExecuteAction = execute;
+        }
 
         public AdvancedRelayCommand()
         { }
 
-        public AdvancedRelayCommand(string text, string name, Type ownerType, InputGestureCollection inputGestures) : base(text, name, ownerType, inputGestures)
+        public event EventHandler CanExecuteChanged
+        {
+            add => CommandManager.RequerySuggested += value;
+            remove => CommandManager.RequerySuggested -= value;
+        }
+
+        public bool CanExecute(object parameter)
+        {
+            return CanExecutePredicate == null || CanExecutePredicate(parameter);
+        }
+
+        public void Execute(T parameter, TR secondParamater = default)
+        {
+            ExecuteAction(parameter, secondParamater);
+        }
+    }
+
+    internal class ObsoleteAdvancedRelayCommand : RoutedUICommand, ICommand
+    {
+        public Predicate<object> CanExecutePredicate { get; set; }
+        public Action<object> ExecuteAction { get; set; }
+
+        public ObsoleteAdvancedRelayCommand()
+        { }
+
+        public ObsoleteAdvancedRelayCommand(string text, string name, Type ownerType, InputGestureCollection inputGestures) : base(text, name, ownerType, inputGestures)
         { }
 
         bool ICommand.CanExecute(object parameter)

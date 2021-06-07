@@ -454,7 +454,7 @@
     <Compile Include="Util\InputHook\CustomKeyPressEventArgs.cs" />
     <Compile Include="Util\InputHook\SimpleMouseGesture.cs" />
     <Compile Include="Util\InputHook\InputHook.cs" />
-    <Compile Include="Util\Argument.cs" />
+    <Compile Include="Util\Arguments.cs" />
     <Compile Include="Util\BitHelper.cs" />
     <Compile Include="Util\BrushAnimation.cs" />
     <Compile Include="Capture\BaseCapture.cs" />
