@@ -280,6 +280,7 @@ namespace ScreenToGif.Windows
 
             //Open with...
             LoadFromArguments();
+            Arguments.ClearAutomationArgs();
 
             RibbonTabControl.SelectedIndex = 0;
 
@@ -3214,12 +3215,12 @@ namespace ScreenToGif.Windows
 
         internal void LoadFromArguments()
         {
-            if (!Argument.FileNames.Any())
+            if (!Arguments.FileNames.Any())
                 return;
 
             #region Validation
 
-            var extensionList = Argument.FileNames.Select(Path.GetExtension).ToList();
+            var extensionList = Arguments.FileNames.Select(Path.GetExtension).ToList();
 
             var media = new[] { "jpg", "jpeg", "gif", "bmp", "png", "apng", "avi", "mkv", "mp4", "webp", "webm", "wmv" };
 
@@ -3243,7 +3244,7 @@ namespace ScreenToGif.Windows
             #endregion
 
             _importFramesDel = ImportFrom;
-            _importFramesDel.BeginInvoke(Argument.FileNames, ImportFromCallback, null);
+            _importFramesDel.BeginInvoke(Arguments.FileNames, ImportFromCallback, null);
         }
 
         #region Async Loading

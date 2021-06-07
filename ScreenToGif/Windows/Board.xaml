@@ -9,7 +9,7 @@
                Width="{Binding BoardWidth, Source={x:Static t:UserSettings.All}, Mode=TwoWay}" Height="{Binding BoardHeight, Source={x:Static t:UserSettings.All},  Mode=TwoWay}"
                IsThin="{Binding RecorderThinMode, Source={x:Static t:UserSettings.All}}" Icon="../Resources/Logo.ico" 
                AllowsTransparency="True" WindowStyle="None" SnapsToDevicePixels="True" UseLayoutRounding="True" 
-               SizeChanged="LightWindow_SizeChanged" Loaded="Board_OnLoaded" KeyDown="Board_KeyDown" 
+               SizeChanged="LightWindow_SizeChanged" Loaded="Board_Loaded" KeyDown="Board_KeyDown" 
                KeyUp="Board_KeyUp" Deactivated="Board_Deactivated" Closing="LightWindow_Closing">
 
     <n:LightWindow.Resources>
