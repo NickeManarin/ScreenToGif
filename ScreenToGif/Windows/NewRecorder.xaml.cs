@@ -54,6 +54,7 @@ namespace ScreenToGif.Windows
         private readonly Timer _preStartTimer = new Timer();
         private readonly Timer _followTimer = new Timer();
         private readonly Timer _showBorderTimer = new Timer();
+        private readonly Timer _limitTimer = new Timer();
 
         #region Mouse cursor follow up
 
@@ -196,6 +197,34 @@ namespace ScreenToGif.Windows
 
                 CommandManager.InvalidateRequerySuggested();
                 MoveCommandPanel();
+            }
+
+            //Automation arguments were passed by command line.
+            if (Arguments.Open)
+            {
+                if (Arguments.FrequencyType.HasValue)
+                {
+                    UserSettings.All.CaptureFrequency = Arguments.FrequencyType.Value;
+                    UserSettings.All.LatestFps = Arguments.Frequency;
+                    DetectCaptureFrequency();
+
+                    Arguments.FrequencyType = null;
+                }
+
+                if (Arguments.StartCapture && UserSettings.All.CaptureFrequency >= CaptureFrequency.PerSecond)
+                {
+                    if (Arguments.Limit > TimeSpan.Zero)
+                    {
+                        _limitTimer.Tick += Limit_Elapsed;
+                        _limitTimer.Interval = (int) Math.Min(int.MaxValue, Arguments.Limit.TotalMilliseconds);
+                    }
+
+                    await Record();
+                }
+                else
+                {
+                    Arguments.ClearAutomationArgs();
+                }
             }
         }
 
@@ -484,9 +513,9 @@ namespace ScreenToGif.Windows
                 await StopCapture();
             }
 
-            //Garbage Collector Timer.
             GarbageTimer?.Stop();
             _followTimer?.Stop();
+            _limitTimer?.Stop();
 
             #endregion
 
@@ -624,6 +653,9 @@ namespace ScreenToGif.Windows
 
             StartCapture();
 
+            if (Arguments.StartCapture && Arguments.Limit > TimeSpan.Zero)
+                _limitTimer.Start();
+
             Stage = Stage.Recording;
         }
 
@@ -680,6 +712,16 @@ namespace ScreenToGif.Windows
             MoveCommandPanel();
 
             Visibility = Visibility.Visible;
+        }
+
+        private async void Limit_Elapsed(object sender, EventArgs e)
+        {
+            _limitTimer.Stop();
+
+            if (!IsLoaded || (Stage != Stage.Recording && Stage == Stage.PreStarting))
+                return;
+            
+            await Stop();
         }
 
         #endregion
@@ -791,9 +833,16 @@ namespace ScreenToGif.Windows
 
                 #endregion
 
+                //Command line arguments were sent.
+                if (Arguments.Open && Arguments.Region.Width > 0 && Arguments.Region.Height > 0)
+                {
+                    UserSettings.All.SelectedRegion = Arguments.Region;
+                    Arguments.Region = Rect.Empty;
+                }
+
                 #region Previously selected region
 
-                //If a region was previously selected.
+                    //If a region was previously selected.
                 if (!UserSettings.All.SelectedRegion.IsEmpty)
                 {
                     //Check if the previous selection can be positioned inside a screen.
@@ -1017,7 +1066,10 @@ namespace ScreenToGif.Windows
 
                         Stage = Stage.Recording;
                         SetTaskbarButtonOverlay();
-                        
+
+                        if (Arguments.StartCapture && Arguments.Limit > TimeSpan.Zero)
+                            _limitTimer.Start();
+
                         #endregion
 
                         #endregion
@@ -1069,6 +1121,8 @@ namespace ScreenToGif.Windows
             }
             finally
             {
+                Arguments.ClearAutomationArgs();
+
                 //Wait a bit, then refresh the commands. Some of the commands are dependant of the FrameCount property.
                 await Task.Delay(TimeSpan.FromMilliseconds(200));
 
@@ -1162,8 +1216,9 @@ namespace ScreenToGif.Windows
                 Stage = Stage.Paused;
                 Title = "ScreenToGif";
 
+                _limitTimer.Stop();
                 PauseCapture();
-
+                
                 FrequencyIntegerUpDown.IsEnabled = true;
                 _regionSelection.DisplayGuidelines();
                 SetTaskbarButtonOverlay();
@@ -1183,6 +1238,7 @@ namespace ScreenToGif.Windows
                 Title = "ScreenToGif - " + LocalizationHelper.Get("S.Recorder.Stopping");
                 Cursor = Cursors.AppStarting;
 
+                _limitTimer.Stop();
                 await StopCapture();
 
                 if ((Stage == Stage.Recording || Stage == Stage.Paused) && Project?.Any == true)

@@ -118,6 +118,7 @@ namespace ScreenToGif.Windows
 
         private readonly Timer _followTimer = new Timer();
         private readonly Timer _showBorderTimer = new Timer();
+        private readonly Timer _limitTimer = new Timer();
 
         #endregion
 
@@ -192,6 +193,34 @@ namespace ScreenToGif.Windows
             SizeChanged += Window_SizeChanged;
             DpiChanged += Window_DpiChanged;
             LocationChanged += Window_LocationChanged;
+
+            //Automation arguments were passed by command line.
+            if (Arguments.Open)
+            {
+                if (Arguments.FrequencyType.HasValue)
+                {
+                    UserSettings.All.CaptureFrequency = Arguments.FrequencyType.Value;
+                    UserSettings.All.LatestFps = Arguments.Frequency;
+                    DetectCaptureFrequency();
+
+                    Arguments.FrequencyType = null;
+                }
+
+                if (Arguments.StartCapture && UserSettings.All.CaptureFrequency >= CaptureFrequency.PerSecond)
+                {
+                    if (Arguments.Limit > TimeSpan.Zero)
+                    {
+                        _limitTimer.Tick += Limit_Elapsed;
+                        _limitTimer.Interval = (int)Math.Min(int.MaxValue, Arguments.Limit.TotalMilliseconds);
+                    }
+
+                    await Record();
+                }
+                else
+                {
+                    Arguments.ClearAutomationArgs();
+                }
+            }
         }
 
         private void Window_Activated(object sender, EventArgs e)
@@ -620,6 +649,9 @@ namespace ScreenToGif.Windows
 
             Stage = Stage.Recording;
             AutoFitButtons();
+
+            if (Arguments.StartCapture && Arguments.Limit > TimeSpan.Zero)
+                _limitTimer.Start();
         }
 
         private void FollowTimer_Tick(object sender, EventArgs e)
@@ -682,6 +714,16 @@ namespace ScreenToGif.Windows
             ShowInternals();
 
             BeginStoryboard(this.FindStoryboard("ShowWindowStoryboard"), HandoffBehavior.Compose);
+        }
+
+        private async void Limit_Elapsed(object sender, EventArgs e)
+        {
+            _limitTimer.Stop();
+
+            if (!IsLoaded || (Stage != Stage.Recording && Stage == Stage.PreStarting))
+                return;
+
+            await Stop();
         }
 
         #endregion
@@ -854,6 +896,9 @@ namespace ScreenToGif.Windows
                         AutoFitButtons();
                         SetTaskbarButtonOverlay();
 
+                        if (Arguments.StartCapture && Arguments.Limit > TimeSpan.Zero)
+                            _limitTimer.Start();
+
                         break;
 
                     #endregion
@@ -896,6 +941,8 @@ namespace ScreenToGif.Windows
             }
             finally
             {
+                Arguments.ClearAutomationArgs();
+
                 //Wait a bit, then refresh the commands. Some of the commands are dependant of the FrameCount property.
                 await Task.Delay(TimeSpan.FromMilliseconds(GetCaptureInterval() + 200));
 
@@ -978,6 +1025,7 @@ namespace ScreenToGif.Windows
                 Title = "ScreenToGif";
                 
                 PauseCapture();
+                _limitTimer.Stop();
 
                 FrequencyIntegerUpDown.IsEnabled = true;
                 DisplayGuidelines();
@@ -1002,6 +1050,7 @@ namespace ScreenToGif.Windows
                 Title = "ScreenToGif - " + LocalizationHelper.Get("S.Recorder.Stopping");
                 Cursor = Cursors.AppStarting;
 
+                _limitTimer.Stop();
                 await StopCapture();
                 
                 if ((Stage == Stage.Recording || Stage == Stage.Paused) && Project?.Any == true)
@@ -1341,6 +1390,16 @@ namespace ScreenToGif.Windows
                         UserSettings.All.RecorderWidth = 518;
                         UserSettings.All.RecorderHeight = 269;
                     }
+                }
+
+                //Command line arguments were sent.
+                if (Arguments.Open && Arguments.Region.Width > 0 && Arguments.Region.Height > 0)
+                {
+                    UserSettings.All.RecorderLeft = Arguments.Region.Left - Constants.LeftOffset;
+                    UserSettings.All.RecorderTop = Arguments.Region.Top - Constants.TopOffset;
+                    UserSettings.All.RecorderWidth = (int)Arguments.Region.Width + Constants.HorizontalOffset;
+                    UserSettings.All.RecorderHeight = (int)Arguments.Region.Height + Constants.VerticalOffset;
+                    Arguments.Region = Rect.Empty;
                 }
             }
 
