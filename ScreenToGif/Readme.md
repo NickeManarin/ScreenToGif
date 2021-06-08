@@ -4,9 +4,9 @@ This is the current project of ScreenToGif.
 
 _VS 2019 and .Net 4.8 or newer required._
 
-## What's new? (Version 2.31.1)
+## What's new? (Version 2.32)
 
-• 
+• You can now open the app and start recording by using command line arguments (read the wiki for more details).
 
 ### Fixed:
 
@@ -24,4 +24,4 @@ _VS 2019 and .Net 4.8 or newer required._
 ♠ When using the capture option "Capture a frame only when something changes on screen" and moving the recording window, the recording will glitch.  
 ♠ The Previous/Next repeat buttons are only triggering the events once (because of the command).   
 ♠ Holding the side arrows to seek the frames for a long period makes the scrubing act jump frames.  
-♠ Capturing with DirectX using a screen not in landscaped mode results in a rotated frame.  
+♠ Capturing with DirectX using a screen not in landscaped mode results in a rotated frame.
