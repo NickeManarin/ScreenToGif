@@ -7,6 +7,7 @@ _VS 2019 and .Net 4.8 or newer required._
 ## What's new? (Version 2.32)
 
 • You can now open the app and start recording by using command line arguments (read the wiki for more details).
+• Added option to set the background of the editor to follow the OS color theme (thanks to @pawlos).
 
 ### Fixed:
 
