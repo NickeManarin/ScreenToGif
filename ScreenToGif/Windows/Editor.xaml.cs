@@ -3263,7 +3263,7 @@ namespace ScreenToGif.Windows
         {
             Cursor = Cursors.AppStarting;
             IsLoading = true;
-
+            LastSelected = -1;  //lastSelected need clear when new porject loaded
             FrameListView.Items.Clear();
             ZoomBoxControl.Zoom = 1;
 
