@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace ScreenToGif.Util
 {
@@ -32,6 +32,52 @@ namespace ScreenToGif.Util
                 return (percentage.Value * total.Value) / 100d;
 
             return 0;
+        }
+
+        /// <summary>
+        /// Gets the third value based on the other 2 parameters.
+        /// Total       =   100 %
+        /// Variable    =   percentage
+        /// </summary>
+        /// <returns>The value that was not filled.</returns>
+        public static decimal CrossMultiplication(decimal? total, decimal? variable, decimal? percentage)
+        {
+            #region Validation
+
+            //Only one of the parameters can bee null.
+            var amount = (total.HasValue ? 0 : 1) + (variable.HasValue ? 0 : 1) + (percentage.HasValue ? 0 : 1);
+
+            if (amount != 1)
+                throw new ArgumentException("Only one of the parameters can bee null");
+
+            #endregion
+
+            if (!total.HasValue && percentage.HasValue && variable.HasValue)
+                return (percentage.Value * 100m) / variable.Value;
+
+            if (!percentage.HasValue && total.HasValue && variable.HasValue)
+                return total > 0 || total < 0 ? (variable.Value * 100m) / total.Value : 0;
+
+            if (!variable.HasValue && total.HasValue && percentage.HasValue)
+                return (percentage.Value * total.Value) / 100m;
+
+            return 0;
+        }
+
+        /// <summary>
+        /// The Greater Common Divisor.
+        /// </summary>
+        public static double Gcd(double a, double b)
+        {
+            return b == 0 ? a : Gcd(b, a % b);
+        }
+
+        /// <summary>
+        /// The Greater Common Divisor.
+        /// </summary>
+        public static decimal Gcd(decimal a, decimal b)
+        {
+            return b == 0 ? a : Gcd(b, a % b);
         }
 
         public static bool NearlyEquals(this float a, float b, float epsilon = 0.0001F)

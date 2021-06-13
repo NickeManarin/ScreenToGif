@@ -1087,7 +1087,7 @@ namespace ScreenToGif.ImageUtil
         /// <param name="first">The first frame to compare.</param>
         /// <param name="second">The second frame to compare.</param>
         /// <returns>The similarity between the two frames in percentage.</returns>
-        public static double CalculateDifference(FrameInfo first, FrameInfo second)
+        public static decimal CalculateDifference(FrameInfo first, FrameInfo second)
         {
             using (var imageAux1 = first.Path.From())
             using (var imageAux2 = second.Path.From())
@@ -1104,7 +1104,7 @@ namespace ScreenToGif.ImageUtil
                     .AsParallel()
                     .Count();
 
-                return MathHelper.CrossMultiplication(pixelCount, pixelCount - changedPixelCount, null);
+                return MathHelper.CrossMultiplication((decimal)pixelCount, pixelCount - changedPixelCount, null);
             }
         }
 
