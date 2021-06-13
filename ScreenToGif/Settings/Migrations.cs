@@ -24,6 +24,10 @@ namespace ScreenToGif.Settings
                 case "2.30":
                 case "2.30.1":
                     Migration2_29_0To2_31_0.Up(properties);
+                    goto case "2.31";
+
+                case "2.31":
+                    Migration2_31_0To2_32_0.Up(properties);
                     goto default;
 
                 default:

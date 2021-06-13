@@ -3,8 +3,8 @@
                     xmlns:s="clr-namespace:System;assembly=mscorlib"
                     xmlns:u="clr-namespace:ScreenToGif.Util"
                     xmlns:c="clr-namespace:System.Collections;assembly=mscorlib"
-                    xmlns:m="clr-namespace:ScreenToGif.Model"
-                    xmlns:i="clr-namespace:System.IO.Compression;assembly=System">
+                    xmlns:i="clr-namespace:System.IO.Compression;assembly=System"
+                    xmlns:t="clr-namespace:ScreenToGif.ViewModel.Tasks">
 
     <!--ScreenToGif default configuration resource dictionary-->
     <!--Empty String values are suppressed to avoid exceptions-->
@@ -141,7 +141,7 @@
     
     <!--Options • Automated Tasks-->
     <c:ArrayList Capacity="1" x:Key="AutomatedTasksList">
-        <m:MouseClicksModel LeftButtonForegroundColor="#78FFFF00" RightButtonForegroundColor="#78FF0000" MiddleButtonForegroundColor="#7800FFFF" Width="12" Height="12" TaskType="MouseClicks"/>
+        <t:MouseClicksViewModel LeftButtonForegroundColor="#78FFFF00" RightButtonForegroundColor="#78FF0000" MiddleButtonForegroundColor="#7800FFFF" Width="12" Height="12" TaskType="MouseClicks"/>
     </c:ArrayList>
 
     <!--Options • Shortcuts-->
@@ -225,6 +225,11 @@
     <s:Int32 x:Key="OverrideDelay">66</s:Int32>
     <s:Int32 x:Key="IncrementDecrementDelay">10</s:Int32>
     <s:Int32 x:Key="ScaleDelay">100</s:Int32>
+
+    <!--Editor • Resize-->
+    <u:SizeUnits x:Key="SizeUnit">Pixels</u:SizeUnits>
+    <s:Boolean x:Key="KeepAspectRatio">True</s:Boolean>
+    <BitmapScalingMode x:Key="ScalingMode">Linear</BitmapScalingMode>
 
     <!--Editor • Caption-->
     <s:String x:Key="CaptionText">Text</s:String>

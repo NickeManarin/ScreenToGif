@@ -17,9 +17,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Xml;
 using System.Xml.Linq;
-using ScreenToGif.Model;
 using ScreenToGif.Util;
 using ScreenToGif.Util.InterProcessChannel;
+using ScreenToGif.ViewModel.Tasks;
 using ScreenToGif.Windows.Other;
 using XamlWriter = System.Windows.Markup.XamlWriter;
 
@@ -249,7 +249,7 @@ namespace ScreenToGif.Settings
                     case "CompressionLevel":
                         return Enum.Parse(typeof(CompressionLevel), property.Value);
                     case "TaskTypeEnum":
-                        return Enum.Parse(typeof(DefaultTaskModel.TaskTypeEnum), property.Value);
+                        return Enum.Parse(typeof(BaseTaskViewModel.TaskTypeEnum), property.Value);
                     case "DelayUpdateType":
                         return Enum.Parse(typeof(DelayUpdateType), property.Value);
                     case "UploadType":
@@ -278,10 +278,12 @@ namespace ScreenToGif.Settings
                         return Enum.Parse(typeof(Framerates), property.Value);
                     case "Vsyncs":
                         return Enum.Parse(typeof(Vsyncs), property.Value);
-                    case "ScalingMethod":
-                        return Enum.Parse(typeof(ScalingMethod), property.Value);
+                    case "BitmapScalingMode":
+                        return Enum.Parse(typeof(BitmapScalingMode), property.Value);
                     case "ColorQuantizationType":
                         return Enum.Parse(typeof(ColorQuantizationType), property.Value);
+                    case "SizeUnits":
+                        return Enum.Parse(typeof(SizeUnits), property.Value);
 
                     case "FontWeight":
                         return new FontWeightConverter().ConvertFrom(property.Value);
@@ -1884,6 +1886,28 @@ namespace ScreenToGif.Settings
         public int ScaleDelay
         {
             get => (int)GetValue();
+            set => SetValue(value);
+        }
+
+        #endregion
+
+        #region Editor • Resize
+
+        public SizeUnits SizeUnit
+        {
+            get => (SizeUnits)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool KeepAspectRatio
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public BitmapScalingMode ScalingMode
+        {
+            get => (BitmapScalingMode)GetValue();
             set => SetValue(value);
         }
 
