@@ -16,6 +16,7 @@ _VS 2019 and .Net 4.8 or newer required._
 ♦ The new recorder UI command panel was getting in the way of the capture when positioned to the left of the capture region.
 ♦ The insert window was reporting wrong sizing information about the images and canvas.  
 ♦ The new recorder UI was width and height text boxes were not displaying the correct scaled size based on the screen DPI.
+♦ When exporting and not selecting a file path, the filename of the temporary file was not using the extension (thanks to @pawlos).  
 
 ### Known Bugs:
   
