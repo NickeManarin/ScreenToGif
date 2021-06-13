@@ -314,6 +314,7 @@
     <Compile Include="Interfaces\IExportPreset.cs" />
     <Compile Include="Interfaces\IFfmpegPreset.cs" />
     <Compile Include="Interfaces\IPanel.cs" />
+    <Compile Include="Interfaces\IPersistent.cs" />
     <Compile Include="Interfaces\IPreset.cs" />
     <Compile Include="ModelEx\Project.cs" />
     <Compile Include="ModelEx\Sequence.cs" />
@@ -384,15 +385,17 @@
     <Compile Include="Model\ExportPresets\Video\VideoPreset.cs" />
     <Compile Include="Model\ExportPresets\Video\Webm\FfmpegWebmPreset.cs" />
     <Compile Include="Model\ExportPresets\Video\Webm\WebmPreset.cs" />
-    <Compile Include="Model\ShadowModel.cs" />
-    <Compile Include="Model\DefaultTaskModel.cs" />
+    <Compile Include="Settings\Migrations\Migration2_31_0To2_32_0.cs" />
+    <Compile Include="ViewModel\Tasks\ResizeViewModel.cs" />
+    <Compile Include="ViewModel\Tasks\ShadowViewModel.cs" />
+    <Compile Include="ViewModel\Tasks\BaseTaskViewModel.cs" />
     <Compile Include="Model\FfmpegPreset.cs" />
-    <Compile Include="Model\BorderModel.cs" />
-    <Compile Include="Model\ProgressModel.cs" />
-    <Compile Include="Model\KeyStrokesModel.cs" />
+    <Compile Include="ViewModel\Tasks\BorderViewModel.cs" />
+    <Compile Include="ViewModel\Tasks\ProgressViewModel.cs" />
+    <Compile Include="ViewModel\Tasks\KeyStrokesViewModel.cs" />
     <Compile Include="Model\ManipulatedEventArgs.cs" />
-    <Compile Include="Model\DelayModel.cs" />
-    <Compile Include="Model\MouseClicksModel.cs" />
+    <Compile Include="ViewModel\Tasks\DelayViewModel.cs" />
+    <Compile Include="ViewModel\Tasks\MouseClicksViewModel.cs" />
     <Compile Include="Model\UploadPresets\Custom\CustomPreset.cs" />
     <Compile Include="Model\UploadPresets\History\GfycatHistory.cs" />
     <Compile Include="Model\UploadPresets\History\History.cs" />
@@ -414,6 +417,9 @@
     <Compile Include="Settings\UserSettings.cs" />
     <Compile Include="UserControls\GfycatPanel.xaml.cs">
       <DependentUpon>GfycatPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ResizePanel.xaml.cs">
+      <DependentUpon>ResizePanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\YandexPanel.xaml.cs">
       <DependentUpon>YandexPanel.xaml</DependentUpon>
@@ -910,6 +916,10 @@
     <Page Include="UserControls\GfycatPanel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\ResizePanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\YandexPanel.xaml">
       <Generator>MSBuild:Compile</Generator>

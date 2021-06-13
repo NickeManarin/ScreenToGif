@@ -41,12 +41,14 @@ using Size = System.Windows.Size;
 using System.Windows.Data;
 using System.Windows.Media.Effects;
 using ScreenToGif.ImageUtil.Apng;
+using ScreenToGif.Interfaces;
 using ScreenToGif.Model.ExportPresets;
 using ScreenToGif.Model.ExportPresets.Image;
 using ScreenToGif.Model.ExportPresets.Other;
 using ScreenToGif.Native;
 using ScreenToGif.Settings;
 using ScreenToGif.UserControls;
+using ScreenToGif.ViewModel.Tasks;
 using Monitor = ScreenToGif.Native.Monitor;
 using VideoSource = ScreenToGif.Windows.Other.VideoSource;
 
@@ -1667,7 +1669,7 @@ namespace ScreenToGif.Windows
             Cursor = Cursors.AppStarting;
 
             _removeDuplicatesDel = RemoveDuplicatesAsync;
-            _removeDuplicatesDel.BeginInvoke(UserSettings.All.DuplicatesSimilarity, UserSettings.All.DuplicatesRemoval, UserSettings.All.DuplicatesDelay, RemoveDuplicatesCallback, null);
+            _removeDuplicatesDel.BeginInvoke((decimal)UserSettings.All.DuplicatesSimilarity, UserSettings.All.DuplicatesRemoval, UserSettings.All.DuplicatesDelay, RemoveDuplicatesCallback, null);
 
             ClosePanel();
         }
@@ -1901,7 +1903,7 @@ namespace ScreenToGif.Windows
             Cursor = Cursors.AppStarting;
 
             _delayFramesDel = DelayAsync;
-            _delayFramesDel.BeginInvoke(DelayModel.FromSettings(DelayUpdateType.Override), false, false, DelayCallback, null); //NewDelayIntegerUpDown.Value
+            _delayFramesDel.BeginInvoke(DelayViewModel.FromSettings(DelayUpdateType.Override), false, false, DelayCallback, null); //NewDelayIntegerUpDown.Value
 
             ClosePanel();
         }
@@ -1926,7 +1928,7 @@ namespace ScreenToGif.Windows
             Cursor = Cursors.AppStarting;
 
             _delayFramesDel = DelayAsync;
-            _delayFramesDel.BeginInvoke(DelayModel.FromSettings(DelayUpdateType.IncreaseDecrease), false, false, DelayCallback, null); //IncreaseDecreaseDelayIntegerUpDown.Value
+            _delayFramesDel.BeginInvoke(DelayViewModel.FromSettings(DelayUpdateType.IncreaseDecrease), false, false, DelayCallback, null); //IncreaseDecreaseDelayIntegerUpDown.Value
 
             ClosePanel();
         }
@@ -1950,7 +1952,7 @@ namespace ScreenToGif.Windows
             Cursor = Cursors.AppStarting;
 
             _delayFramesDel = DelayAsync;
-            _delayFramesDel.BeginInvoke(DelayModel.FromSettings(DelayUpdateType.Scale), false, false, DelayCallback, null); //ScaleDelayIntegerUpDown.Value
+            _delayFramesDel.BeginInvoke(DelayViewModel.FromSettings(DelayUpdateType.Scale), false, false, DelayCallback, null); //ScaleDelayIntegerUpDown.Value
 
             ClosePanel();
         }
@@ -1970,75 +1972,7 @@ namespace ScreenToGif.Windows
 
         private void Resize_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            WidthResizeNumericUpDown.ValueChanged -= WidthResizeIntegerUpDown_ValueChanged;
-            HeightResizeNumericUpDown.ValueChanged -= HeightResizeIntegerUpDown_ValueChanged;
-
-            #region Info
-
-            var image = Project.Frames[0].Path.SourceFrom();
-            CurrentDpiRun.Text = (DpiNumericUpDown.Value = (int)Math.Round(image.DpiX, MidpointRounding.AwayFromZero)).ToString();
-            CurrentWidthRun.Text = (WidthResizeNumericUpDown.Value = image.PixelWidth).ToString();
-            CurrentHeightRun.Text = (HeightResizeNumericUpDown.Value = image.PixelHeight).ToString();
-
-            #endregion
-
-            #region Resize Attributes
-
-            var gcd = Util.Other.Gcd(image.PixelHeight, image.PixelWidth);
-
-            _widthRatio = image.PixelWidth / gcd;
-            _heightRatio = image.PixelHeight / gcd;
-
-            #endregion
-
-            WidthResizeNumericUpDown.ValueChanged += WidthResizeIntegerUpDown_ValueChanged;
-            HeightResizeNumericUpDown.ValueChanged += HeightResizeIntegerUpDown_ValueChanged;
-
             ShowPanel(PanelType.Resize, LocalizationHelper.Get("S.Editor.Image.Resize", true), "Vector.Resize", ApplyResizeButton_Click);
-        }
-
-        private double _imageWidth;
-        private double _imageHeight;
-        private double _widthRatio = -1;
-        private double _heightRatio = -1;
-
-        private void KeepAspectCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            #region Resize Attributes
-
-            var gcd = Util.Other.Gcd(HeightResizeNumericUpDown.Value, WidthResizeNumericUpDown.Value);
-
-            _widthRatio = WidthResizeNumericUpDown.Value / gcd;
-            _heightRatio = HeightResizeNumericUpDown.Value / gcd;
-
-            #endregion
-
-            _imageHeight = HeightResizeNumericUpDown.Value;
-            _imageWidth = WidthResizeNumericUpDown.Value;
-        }
-
-        private void WidthResizeIntegerUpDown_ValueChanged(object sender, RoutedEventArgs e)
-        {
-            if (KeepAspectCheckBox.IsChecked.HasValue && !KeepAspectCheckBox.IsChecked.Value)
-                return;
-
-            _imageWidth = WidthResizeNumericUpDown.Value;
-
-            HeightResizeNumericUpDown.ValueChanged -= HeightResizeIntegerUpDown_ValueChanged;
-            _imageHeight = Math.Round(_heightRatio * _imageWidth / _widthRatio);
-            HeightResizeNumericUpDown.Value = (int)_imageHeight;
-            HeightResizeNumericUpDown.ValueChanged += HeightResizeIntegerUpDown_ValueChanged;
-        }
-
-        private void HeightResizeIntegerUpDown_ValueChanged(object sender, RoutedEventArgs e)
-        {
-            if (KeepAspectCheckBox.IsChecked.HasValue && !KeepAspectCheckBox.IsChecked.Value)
-                return;
-
-            WidthResizeNumericUpDown.ValueChanged -= WidthResizeIntegerUpDown_ValueChanged;
-            _imageWidth = Math.Round(_widthRatio * HeightResizeNumericUpDown.Value / _heightRatio);
-            WidthResizeNumericUpDown.Value = (int)_imageWidth;
-            WidthResizeNumericUpDown.ValueChanged += WidthResizeIntegerUpDown_ValueChanged;
         }
 
         private void ApplyResizeButton_Click(object sender, RoutedEventArgs e)
@@ -2047,8 +1981,9 @@ namespace ScreenToGif.Windows
 
             //Checks with the non scaled size.
             var size = Project.Frames[0].Path.ScaledSize();
+            var settings = ResizePanel.DataContext as ResizeViewModel;
 
-            if (Math.Abs(size.Width - WidthResizeNumericUpDown.Value) < 0.1 && Math.Abs(size.Height - HeightResizeNumericUpDown.Value) < 0.1 && (int)Math.Round(Project.Frames[0].Path.DpiOf()) == DpiNumericUpDown.Value)
+            if (settings == null || Math.Abs(size.Width - settings.Width) < 0.1 && Math.Abs(size.Height - settings.Height) < 0.1 && (int)Math.Round(Project.Frames[0].Path.DpiOf()) == (int)Math.Round(settings.Dpi))
             {
                 StatusList.Warning(LocalizationHelper.Get("S.Resize.Warning"));
                 return;
@@ -2058,10 +1993,8 @@ namespace ScreenToGif.Windows
 
             Cursor = Cursors.AppStarting;
 
-            Enum.TryParse<ScalingMethod>((ResizeScalingQuality.SelectedItem as ComboBoxItem).Tag.ToString(), out var scalingQuality);
-
             _resizeFramesDel = Resize;
-            _resizeFramesDel.BeginInvoke(WidthResizeNumericUpDown.Value, HeightResizeNumericUpDown.Value, DpiNumericUpDown.Value, (BitmapScalingMode)scalingQuality, ResizeCallback, null);
+            _resizeFramesDel.BeginInvoke(settings.Width, settings.Height, settings.Dpi, settings.ScalingMode, ResizeCallback, null);
 
             ClosePanel();
 
@@ -2382,7 +2315,7 @@ namespace ScreenToGif.Windows
             Cursor = Cursors.AppStarting;
 
             _keyStrokesDelegate = KeyStrokesAsync;
-            _keyStrokesDelegate.BeginInvoke(KeyStrokesModel.FromSettings(), KeyStrokesCallback, null);
+            _keyStrokesDelegate.BeginInvoke(KeyStrokesViewModel.FromSettings(), KeyStrokesCallback, null);
 
             ClosePanel();
         }
@@ -2520,7 +2453,7 @@ namespace ScreenToGif.Windows
             Cursor = Cursors.AppStarting;
 
             _mouseClicksDelegate = MouseClicksAsync;
-            _mouseClicksDelegate.BeginInvoke(MouseClicksModel.FromSettings(), MouseClicksCallback, null);
+            _mouseClicksDelegate.BeginInvoke(MouseClicksViewModel.FromSettings(), MouseClicksCallback, null);
 
             ClosePanel();
         }
@@ -2648,7 +2581,7 @@ namespace ScreenToGif.Windows
 
         private void ApplyBorderButton_Click(object sender, RoutedEventArgs e)
         {
-            var model = BorderModel.FromSettings(true);
+            var model = BorderViewModel.FromSettings(true);
 
             if (Math.Abs(model.LeftThickness) < 0.001 && Math.Abs(model.TopThickness) < 0.001 && Math.Abs(model.RightThickness) < 0.001 && Math.Abs(model.BottomThickness) < 0.001)
             {
@@ -2724,7 +2657,7 @@ namespace ScreenToGif.Windows
 
         private void ApplyShadowButton_Click(object sender, RoutedEventArgs e)
         {
-            var model = ShadowModel.FromSettings();
+            var model = ShadowViewModel.FromSettings();
 
             if (Math.Abs(model.Depth) < 0.1 && Math.Abs(model.BlurRadius) < 0.1)
             {
@@ -2882,7 +2815,7 @@ namespace ScreenToGif.Windows
             ActionStack.SaveState(ActionStack.EditAction.ImageAndProperties, Project.Frames, Util.Other.ListOfIndexes(0, Project.Frames.Count));
 
             _progressDelegateDel = ProgressAsync;
-            _progressDelegateDel.BeginInvoke(ProgressModel.FromSettings(), ProgressCallback, null);
+            _progressDelegateDel.BeginInvoke(ProgressViewModel.FromSettings(), ProgressCallback, null);
 
             ClosePanel();
         }
@@ -3439,7 +3372,7 @@ namespace ScreenToGif.Windows
                     Project.Persist();
 
                     //Get enabled tasks.
-                    var tasks = UserSettings.All.AutomatedTasksList?.Cast<DefaultTaskModel>().Where(w => w.IsEnabled).ToList() ?? new List<DefaultTaskModel>();
+                    var tasks = UserSettings.All.AutomatedTasksList?.Cast<BaseTaskViewModel>().Where(w => w.IsEnabled).ToList() ?? new List<BaseTaskViewModel>();
 
                     if (tasks.Any())
                     {
@@ -3483,50 +3416,50 @@ namespace ScreenToGif.Windows
                                 //TODO: Abort loading from inside the tasks too.
                                 switch (task.TaskType)
                                 {
-                                    case DefaultTaskModel.TaskTypeEnum.MouseClicks:
+                                    case BaseTaskViewModel.TaskTypeEnum.MouseClicks:
                                     {
                                         if (Project.CreatedBy == ProjectByType.ScreenRecorder)
-                                            MouseClicksAsync(task as MouseClicksModel ?? MouseClicksModel.FromSettings());
+                                            MouseClicksAsync(task as MouseClicksViewModel ?? MouseClicksViewModel.FromSettings());
 
                                         break;
                                     }
 
-                                    case DefaultTaskModel.TaskTypeEnum.KeyStrokes:
+                                    case BaseTaskViewModel.TaskTypeEnum.KeyStrokes:
                                     {
                                         if (Project.CreatedBy == ProjectByType.ScreenRecorder)
-                                            KeyStrokesAsync(task as KeyStrokesModel ?? KeyStrokesModel.FromSettings());
+                                            KeyStrokesAsync(task as KeyStrokesViewModel ?? KeyStrokesViewModel.FromSettings());
 
                                         break;
                                     }
 
-                                    case DefaultTaskModel.TaskTypeEnum.Delay:
+                                    case BaseTaskViewModel.TaskTypeEnum.Delay:
                                     {
                                         if (Project.CreatedBy != ProjectByType.Editor && Project.CreatedBy != ProjectByType.Unknown)
-                                            DelayAsync(task as DelayModel ?? DelayModel.FromSettings(), true, true);
+                                            DelayAsync(task as DelayViewModel ?? DelayViewModel.FromSettings(), true, true);
 
                                         break;
                                     }
 
-                                    case DefaultTaskModel.TaskTypeEnum.Progress:
+                                    case BaseTaskViewModel.TaskTypeEnum.Progress:
                                     {
                                         if (Project.CreatedBy != ProjectByType.Editor && Project.CreatedBy != ProjectByType.Unknown)
-                                            ProgressAsync(task as ProgressModel ?? ProgressModel.FromSettings());
+                                            ProgressAsync(task as ProgressViewModel ?? ProgressViewModel.FromSettings());
 
                                         break;
                                     }
 
-                                    case DefaultTaskModel.TaskTypeEnum.Border:
+                                    case BaseTaskViewModel.TaskTypeEnum.Border:
                                     {
                                         if (Project.CreatedBy != ProjectByType.Editor && Project.CreatedBy != ProjectByType.Unknown)
-                                            BorderAsync(task as BorderModel ?? BorderModel.FromSettings());
+                                            BorderAsync(task as BorderViewModel ?? BorderViewModel.FromSettings());
 
                                         break;
                                     }
 
-                                    case DefaultTaskModel.TaskTypeEnum.Shadow:
+                                    case BaseTaskViewModel.TaskTypeEnum.Shadow:
                                     {
                                         if (Project.CreatedBy != ProjectByType.Editor && Project.CreatedBy != ProjectByType.Unknown)
-                                            ShadowAsync(task as ShadowModel ?? ShadowModel.FromSettings());
+                                            ShadowAsync(task as ShadowViewModel ?? ShadowViewModel.FromSettings());
 
                                         break;
                                     }
@@ -4544,9 +4477,17 @@ namespace ScreenToGif.Windows
                     ClipboardGrid.Visibility = Visibility.Visible;
                     break;
                 case PanelType.Resize:
-                    ResizeGrid.Visibility = Visibility.Visible;
+                {
+                    var image = Project.Frames[0].Path.SourceFrom();
+
+                    ResizePanel.DataContext = ResizeViewModel.FromSettings(image.PixelWidth, image.PixelHeight, image.DpiX);
+                    ResizePanel.Visibility = Visibility.Visible;
+
                     ShowHint("S.Hint.ApplyAll", true);
+
                     break;
+                }
+                
                 case PanelType.FlipRotate:
                     FlipRotateGrid.Visibility = Visibility.Visible;
                     ShowHint("S.Hint.FlipRotate2", true);
@@ -4725,11 +4666,16 @@ namespace ScreenToGif.Windows
 
         private void HideAllVisibleGrids()
         {
-            foreach (var child in ActionInternalGrid.Children.OfType<Grid>().Where(x => x.Visibility == Visibility.Visible))
+            foreach (var child in ActionInternalGrid.Children.OfType<FrameworkElement>().Where(x => x.Visibility == Visibility.Visible))
+            {
                 child.Visibility = Visibility.Collapsed;
 
+                //Persist the latest settings if the panel has any to be saved.
+                if (child.DataContext is IPersistent per)
+                    per.Persist();
+            }
+
             CustomContentControl.Content = null;
-            CustomContentControl.Visibility = Visibility.Collapsed;
 
             ShapeDrawingCanvas.DeselectAll();
         }
@@ -5445,11 +5391,11 @@ namespace ScreenToGif.Windows
 
         #region Async Progress
 
-        private delegate void ProgressDelegate(ProgressModel model);
+        private delegate void ProgressDelegate(ProgressViewModel model);
 
         private ProgressDelegate _progressDelegateDel;
 
-        private void ProgressAsync(ProgressModel model)
+        private void ProgressAsync(ProgressViewModel model)
         {
             Dispatcher.Invoke(() =>
             {
@@ -5739,11 +5685,11 @@ namespace ScreenToGif.Windows
 
         #region Async Keystrokes
 
-        private delegate void KeyStrokesDelegate(KeyStrokesModel model);
+        private delegate void KeyStrokesDelegate(KeyStrokesViewModel model);
 
         private KeyStrokesDelegate _keyStrokesDelegate;
 
-        private void KeyStrokesAsync(KeyStrokesModel model)
+        private void KeyStrokesAsync(KeyStrokesViewModel model)
         {
             Dispatcher?.Invoke(() =>
             {
@@ -6015,11 +5961,11 @@ namespace ScreenToGif.Windows
 
         #region Async Border
 
-        private delegate void BorderDelegate(BorderModel model);
+        private delegate void BorderDelegate(BorderViewModel model);
 
         private BorderDelegate _borderDelegate;
 
-        private void BorderAsync(BorderModel model)
+        private void BorderAsync(BorderViewModel model)
         {
             Dispatcher?.Invoke(() =>
             {
@@ -6125,11 +6071,11 @@ namespace ScreenToGif.Windows
 
         #region Async Shadow
 
-        private delegate void ShadowDelegate(ShadowModel model);
+        private delegate void ShadowDelegate(ShadowViewModel model);
 
         private ShadowDelegate _shadowDelegate;
 
-        private void ShadowAsync(ShadowModel model)
+        private void ShadowAsync(ShadowViewModel model)
         {
             Dispatcher?.Invoke(() =>
             {
@@ -6414,11 +6360,11 @@ namespace ScreenToGif.Windows
 
         #region Async Remove Duplicates
 
-        private delegate int RemoveDuplicates(double similarity, DuplicatesRemovalType removal, DuplicatesDelayType delay);
+        private delegate int RemoveDuplicates(decimal similarity, DuplicatesRemovalType removal, DuplicatesDelayType delay);
 
         private RemoveDuplicates _removeDuplicatesDel;
 
-        private int RemoveDuplicatesAsync(double similarity, DuplicatesRemovalType removal, DuplicatesDelayType delay)
+        private int RemoveDuplicatesAsync(decimal similarity, DuplicatesRemovalType removal, DuplicatesDelayType delay)
         {
             Dispatcher.Invoke(() =>
             {
@@ -6435,7 +6381,7 @@ namespace ScreenToGif.Windows
                 .Select(i => { UpdateProgress(i + 1); return i; })
                 .Select(i => (First: Project.Frames[i], Last: Project.Frames[i + 1]))
                 .AsParallel()
-                .Where((t) => ImageMethods.CalculateDifference(t.First, t.Last) >= similarity);
+                .Where(t => ImageMethods.CalculateDifference(t.First, t.Last) >= similarity);
 
             foreach (var (firstFrame, lastFrame) in similarFramePairs)
             {
@@ -6546,11 +6492,11 @@ namespace ScreenToGif.Windows
 
         #region Async Delay
 
-        private delegate void DelayFrames(DelayModel model, bool forAll = false, bool ignoreUi = false);
+        private delegate void DelayFrames(DelayViewModel model, bool forAll = false, bool ignoreUi = false);
 
         private DelayFrames _delayFramesDel;
 
-        private void DelayAsync(DelayModel model, bool forAll = false, bool ignoreUi = false)
+        private void DelayAsync(DelayViewModel model, bool forAll = false, bool ignoreUi = false)
         {
             var frameList = forAll ? Project.Frames : SelectedFrames();
 
@@ -6877,11 +6823,11 @@ namespace ScreenToGif.Windows
 
         #region Async Mouse Clicks
 
-        private delegate void MouseClicksDelegate(MouseClicksModel model);
+        private delegate void MouseClicksDelegate(MouseClicksViewModel model);
 
         private MouseClicksDelegate _mouseClicksDelegate;
 
-        private void MouseClicksAsync(MouseClicksModel model)
+        private void MouseClicksAsync(MouseClicksViewModel model)
         {
             Dispatcher.Invoke(() =>
             {

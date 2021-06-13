@@ -18,15 +18,14 @@ using System.Windows.Navigation;
 using System.Windows.Threading;
 using Microsoft.Win32;
 using ScreenToGif.Controls;
-using ScreenToGif.Model;
 using ScreenToGif.Model.ExportPresets;
 using ScreenToGif.Model.UploadPresets;
 using ScreenToGif.Settings;
 using ScreenToGif.Util;
 using ScreenToGif.Util.InterProcessChannel;
+using ScreenToGif.ViewModel.Tasks;
 using ScreenToGif.Windows.Other;
 using Application = System.Windows.Application;
-using ComboBox = System.Windows.Controls.ComboBox;
 using Localization = ScreenToGif.Windows.Other.Localization;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 using Path = System.IO.Path;
@@ -78,7 +77,7 @@ namespace ScreenToGif.Windows
         /// <summary>
         /// List of tasks.
         /// </summary>
-        private ObservableCollection<DefaultTaskModel> _effectList;
+        private ObservableCollection<BaseTaskViewModel> _effectList;
 
         /// <summary>
         /// List of upload presets.
@@ -510,9 +509,9 @@ namespace ScreenToGif.Windows
 
         private void TasksPanel_Loaded(object sender, RoutedEventArgs e)
         {
-            var list = UserSettings.All.AutomatedTasksList?.Cast<DefaultTaskModel>().ToList() ?? new List<DefaultTaskModel>();
+            var list = UserSettings.All.AutomatedTasksList?.Cast<BaseTaskViewModel>().ToList() ?? new List<BaseTaskViewModel>();
 
-            TasksDataGrid.ItemsSource = _effectList = new ObservableCollection<DefaultTaskModel>(list);
+            TasksDataGrid.ItemsSource = _effectList = new ObservableCollection<BaseTaskViewModel>(list);
         }
 
         private void MoveUp_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -616,7 +615,7 @@ namespace ScreenToGif.Windows
 
             if (e.Key == Key.Space)
             {
-                if (!(TasksDataGrid.SelectedItem is DefaultTaskModel selected))
+                if (!(TasksDataGrid.SelectedItem is BaseTaskViewModel selected))
                     return;
                 
                 selected.IsEnabled = !selected.IsEnabled;

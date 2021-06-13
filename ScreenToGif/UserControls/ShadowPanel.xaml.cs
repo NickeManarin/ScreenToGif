@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Windows;
 using System.Windows.Controls;
-using ScreenToGif.Model;
 using ScreenToGif.Util;
+using ScreenToGif.ViewModel.Tasks;
 
 namespace ScreenToGif.UserControls
 {
@@ -17,7 +17,7 @@ namespace ScreenToGif.UserControls
         {
             try
             {
-                if (!(DataContext is ShadowModel model) || PreviewViewBox.Width < 0)
+                if (!(DataContext is ShadowViewModel model) || PreviewViewBox.Width < 0)
                     return;
 
                 //Converts the direction in degrees to radians.

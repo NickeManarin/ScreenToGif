@@ -9,6 +9,7 @@
         xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
         xmlns:h="clr-namespace:ScreenToGif.Controls.Shapes" 
         xmlns:t="clr-namespace:ScreenToGif.Settings"
+        xmlns:o="clr-namespace:ScreenToGif.UserControls"
         x:Name="EditorWindow" Title="{DynamicResource S.Editor.Title}" MinHeight="500" MinWidth="700" 
         Background="{DynamicResource Panel.Background.Level3}" UseLayoutRounding="True" Icon="/Resources/Logo.ico"
         FocusManager.FocusedElement="{Binding RelativeSource={x:Static RelativeSource.Self}, Mode=OneTime}"
@@ -424,7 +425,7 @@
         <n:HideableTabControl Grid.Row="0" x:Name="RibbonTabControl" Effect="{StaticResource Shadow.Border.Tiny}" FontSize="13" IsTabStop="False" Focusable="False"
                               OptionsCommand="{Binding Source={StaticResource AppViewModel}, Path=OpenOptions}" FeedbackCommand="{Binding Source={StaticResource AppViewModel}, Path=OpenFeedback}"
                               TroubleshootCommand="{Binding Source={StaticResource AppViewModel}, Path=OpenTroubleshoot}" HelpCommand="{Binding Source={StaticResource AppViewModel}, Path=OpenHelp}">
-            
+
             <n:AwareTabItem Header="{DynamicResource S.Editor.File}" Icon="{StaticResource Vector.Save}">
                 <Grid Height="94" Margin="2" Background="{DynamicResource Panel.Background.Level2}" Effect="{StaticResource Shadow.Invariant}">
                     <Grid.ColumnDefinitions>
@@ -1722,7 +1723,7 @@
                 <ScrollViewer Grid.Row="1" x:Name="ActionScrollViewer" VerticalScrollBarVisibility="Auto">
                     <Grid x:Name="ActionInternalGrid">
                         <ContentControl x:Name="CustomContentControl" Visibility="Collapsed" Focusable="False" IsTabStop="False"/>
-                        
+
                         <Grid x:Name="NewGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
@@ -1767,7 +1768,7 @@
                                 <n:ColorBox Grid.Row="1" Grid.Column="1" SelectedColor="{Binding NewAnimationColor, Source={x:Static t:UserSettings.All}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5,3"/>
                             </Grid>
                         </Grid>
-                        
+
                         <Grid x:Name="LoadRecentGrid" Visibility="Collapsed" Height="{Binding ElementName=ActionScrollViewer, Path=ActualHeight, FallbackValue=100}">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
@@ -1806,7 +1807,7 @@
                                         <n:ExtendedMenuItem Header="{DynamicResource S.Clipboard.Remove}" Icon="{StaticResource Vector.Remove}" ContentHeight="16" ContentWidth="16" Command="{StaticResource Command.RemoveClipboardEntry}"/>
                                     </ContextMenu>
                                 </ListBox.Resources>
-                                
+
                                 <ListBox.ItemContainerStyle>
                                     <Style TargetType="ListBoxItem">
                                         <Setter Property="ContextMenu" Value="{StaticResource ClipboardContextMenu}"/>
@@ -1821,74 +1822,8 @@
                                          IsChecked="{Binding PasteBehavior, Source={x:Static t:UserSettings.All}, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:PasteBehavior.AfterSelected}}"/>
                         </Grid>
 
-                        <Grid x:Name="ResizeGrid" Visibility="Collapsed">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="27"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="27"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="27"/>
-                                <RowDefinition Height="Auto"/>                                
-                            </Grid.RowDefinitions>
-
-                            <n:LabelSeparator Grid.Row="0" Text="{DynamicResource S.Resize.CurrentProperties}"/>
-                            <TextBlock Grid.Row="1" Margin="10,0,0,0" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}">
-                                <Run x:Name="CurrentWidthRun" Text="100"/>
-                                <Run Text=" x "/>
-                                <Run x:Name="CurrentHeightRun" Text="100"/>
-                                <Run Text=" • "/>
-                                <Run x:Name="CurrentDpiRun" Text="100"/>
-                                <Run Text="{DynamicResource S.Resize.Dpi}"/>
-                            </TextBlock>
-
-                            <n:LabelSeparator Grid.Row="2" Text="{DynamicResource S.Resize.NewProperties}"/>
-                            <Grid Grid.Row="3" Margin="10,0,0,0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-
-                                <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Resize.Dpi2}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                                <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="DpiNumericUpDown" Minimum="72" Maximum="1000" Margin="10,5" MinWidth="70"/>
-
-                                <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.ImportVideo.Width}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                                <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="WidthResizeNumericUpDown" Minimum="1" Maximum="5000" Margin="10,5" 
-                                                 MinWidth="70" ValueChanged="WidthResizeIntegerUpDown_ValueChanged"/>
-
-                                <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.ImportVideo.Height}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                                <n:IntegerUpDown Grid.Row="2" Grid.Column="1" x:Name="HeightResizeNumericUpDown" Minimum="1" Maximum="5000" Margin="10,5" 
-                                                 MinWidth="70" ValueChanged="HeightResizeIntegerUpDown_ValueChanged"/>
-
-                                <Border Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" Background="{StaticResource Vector.Lock}" Height="25" Width="25"
-                                        Visibility="{Binding ElementName=KeepAspectCheckBox, Path=IsChecked, Converter={StaticResource Bool2Visibility}}"/>
-                            </Grid>
-
-                            <n:ExtendedCheckBox Grid.Row="4" x:Name="KeepAspectCheckBox" Text="{DynamicResource S.Resize.KeepAspect}" Margin="10,5" IsChecked="True" Checked="KeepAspectCheckBox_Checked"/>
-
-                            <n:LabelSeparator Grid.Row="5" Text="{DynamicResource S.Resize.Options}"/>
-                            <Grid Grid.Row="6" Margin="10,0,0,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                
-                                <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Resize.ScalingQuality}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                                <ComboBox Grid.Row="0" Grid.Column="1" x:Name="ResizeScalingQuality" Margin="10,5" MaxWidth="150" SelectedValuePath="Tag">
-                                    <ComboBoxItem Tag="{x:Static u:ScalingMethod.Fant}" Content="{DynamicResource S.Resize.ScalingQuality.Fant}" />
-                                    <ComboBoxItem Tag="{x:Static u:ScalingMethod.Linear}" Content="{DynamicResource S.Resize.ScalingQuality.Linear}" IsSelected="True"/>
-                                    <ComboBoxItem Tag="{x:Static u:ScalingMethod.NearestNeighbor}" Content="{DynamicResource S.Resize.ScalingQuality.NearestNeighbor}"/>
-                                </ComboBox>
-                            </Grid>
-                        </Grid>
-
+                        <o:ResizePanel x:Name="ResizePanel" Visibility="Collapsed"/>
+                        
                         <Grid x:Name="CropGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
@@ -2304,7 +2239,7 @@
                                     <n:DoubleUpDown Grid.Row="4" Grid.Column="1" Minimum="0" Maximum="100" Margin="10,5" StepValue="0.5" Value="{Binding Source={x:Static t:UserSettings.All}, Path=FreeTextShadowDepth, Mode=TwoWay}"/>
                                 </Grid>
                             </Expander>
-                            
+
                             <n:LabelSeparator Grid.Row="4" Text="{DynamicResource S.Caption.Layout}"/>
                             <Grid Grid.Row="5" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
@@ -2981,7 +2916,7 @@
 
                                 <!--Format(rectangle, circle, perforated circle), edit clicks? -->
                                 <!--Cursor highlight option, always on-->
-                                
+
                                 <!--<TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Caption.Style}" VerticalAlignment="Center"/>
                                 <ComboBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="10,5" MinWidth="100" SelectedValuePath="FontStyle" 
                                           SelectedValue="{Binding Source={x:Static t:UserSettings.All}, Path=KeyStrokesFontStyle}">
@@ -3340,7 +3275,7 @@
                                                        IsChecked="{Binding ObfuscationMode, Source={x:Static t:UserSettings.All}, Converter={StaticResource EnumToBool}, 
                                                        ConverterParameter={x:Static u:ObfuscationMode.Lighten}}" Margin="0,2" Padding="2" MinHeight="30"/>
                             </Grid>
-                            
+
                             <n:LabelSeparator Grid.Row="2" Text="{DynamicResource S.Obfuscate.Options}"/>
                             <Grid Grid.Row="3" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
@@ -3359,7 +3294,7 @@
                                 <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="PixelSizeIntegerUpDown" Minimum="2" Maximum="100" Margin="10,5" MinWidth="80" 
                                                  Value="{Binding Source={x:Static t:UserSettings.All}, Path=PixelSize, Mode=TwoWay}"
                                                  Visibility="{Binding ElementName=PixelationRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}"/>
-                                
+
                                 <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.Obfuscate.BlurLevel}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"
                                            Visibility="{Binding ElementName=BlurSizeIntegerUpDown, Path=Visibility}"/>
                                 <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="BlurSizeIntegerUpDown" Minimum="2" Maximum="5" Margin="10,5" MinWidth="80" 
@@ -3377,8 +3312,8 @@
                                 <n:DoubleUpDown Grid.Row="0" Grid.Column="1" x:Name="LightnessDoubleUpDown" Minimum="2" Maximum="100" Margin="10,5" MinWidth="80" 
                                                 Value="{Binding Source={x:Static t:UserSettings.All}, Path=LightenLevel, Mode=TwoWay}"
                                                 Visibility="{Binding ElementName=LightenRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}"/>
-                                
-                                
+
+
                                 <n:ExtendedCheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" x:Name="UseMedianCheckBox" Text="{DynamicResource S.Obfuscate.UseAverage}"
                                                     IsChecked="{Binding Source={x:Static t:UserSettings.All}, Path=UseMedian}" Margin="3,5"
                                                     Visibility="{Binding ElementName=PixelationRadioButton, Path=IsChecked, Converter={StaticResource Bool2Visibility}}"/>
@@ -3403,13 +3338,13 @@
                                 <n:IntegerUpDown Grid.Row="0" Grid.Column="1" Minimum="0" Maximum="100" Margin="10,5" MinWidth="80" 
                                                  Value="{Binding Source={x:Static t:UserSettings.All}, Path=ObfuscationSmoothnessRadius, Mode=TwoWay}"/>
                                 <TextBlock Grid.Row="0" Grid.Column="2" Text="px" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                                
+
                                 <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.Watermark.Opacity}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                                 <n:DoubleUpDown Grid.Row="1" Grid.Column="1" Minimum="0" Maximum="100" Margin="10,5" MinWidth="80" 
                                                 Value="{Binding Source={x:Static t:UserSettings.All}, Path=ObfuscationSmoothnessOpacity, Mode=TwoWay}"/>
                                 <TextBlock Grid.Row="1" Grid.Column="2" Text="%" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="{DynamicResource Element.Foreground.Medium}"/>
                             </Grid>
-                            
+
                             <Grid Grid.Row="6" Grid.Column="0" Margin="10,10,5,0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -3419,8 +3354,8 @@
                                 <Border Grid.Column="0" Width="15" Height="15" Background="{StaticResource Vector.Info}" Opacity="{DynamicResource Element.Opacity}"/>
                                 <TextBlock Grid.Column="1" Text="{DynamicResource S.Obfuscate.Info}" Foreground="{DynamicResource Element.Foreground.Detail}" 
                                            FontStyle="Italic" FontSize="12" Padding="3" TextWrapping="WrapWithOverflow"
-                                           Visibility="{Binding Source={x:Static t:UserSettings.All}, Path=ObfuscationInvertedSelection, Converter={StaticResource InvertedBoolToVisibility}}"/>                                
-                                
+                                           Visibility="{Binding Source={x:Static t:UserSettings.All}, Path=ObfuscationInvertedSelection, Converter={StaticResource InvertedBoolToVisibility}}"/>
+
                                 <TextBlock Grid.Column="1" Text="{DynamicResource S.Obfuscate.Info2}" Foreground="{DynamicResource Element.Foreground.Detail}" 
                                            FontStyle="Italic" FontSize="12" Padding="3" TextWrapping="WrapWithOverflow" 
                                            Visibility="{Binding Source={x:Static t:UserSettings.All}, Path=ObfuscationInvertedSelection, Converter={StaticResource Bool2Visibility}}"/>
@@ -4189,7 +4124,7 @@
                                     <ComboBoxItem Content="{DynamicResource S.Reduce.Delay.Previous}"/>
                                     <ComboBoxItem Content="{DynamicResource S.Reduce.Delay.Evenly}"/>
                                 </ComboBox>
-                                
+
                                 <n:ExtendedCheckBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Text="{DynamicResource S.Reduce.ApplyToAll}" Margin="0,5"
                                                     IsChecked="{Binding Source={x:Static t:UserSettings.All}, Path=ReduceApplyToAll, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                     ToolTip="{DynamicResource S.Reduce.ApplyToAll.Info}"/>

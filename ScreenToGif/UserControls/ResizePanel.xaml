@@ -1,0 +1,137 @@
+<UserControl x:Class="ScreenToGif.UserControls.ResizePanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:n="clr-namespace:ScreenToGif.Controls"
+             xmlns:u="clr-namespace:ScreenToGif.Util"
+             mc:Ignorable="d" d:DesignHeight="250" d:DesignWidth="300"
+             DataContext="{x:Null}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Expander Grid.Row="0" Header="{DynamicResource S.Resize.Difference}" IsExpanded="True">
+            <Grid Margin="10,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!--Original-->
+                <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}" Margin="3" HorizontalAlignment="Center">
+                    <Run x:Name="CurrentWidthRun" Text="{Binding OriginalWidth, StringFormat={}{0:0}}"/>
+                    <Run Text=" × "/>
+                    <Run x:Name="CurrentHeightRun" Text="{Binding OriginalHeight, StringFormat={}{0:0}}"/>
+                    <Run Text="px"/>
+                </TextBlock>
+
+                <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}" Margin="3" HorizontalAlignment="Center">
+                    <Run x:Name="CurrentDpiRun" Text="{Binding OriginalDpi, StringFormat={}{0:0}}"/>
+                    <Run Text="{DynamicResource S.Resize.Dpi}"/>
+                </TextBlock>
+                
+                <Border Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Center" Background="{StaticResource Vector.MoveRight}" Width="15" Height="15" Margin="5"/>
+
+                <!--Current-->
+                <TextBlock Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}" Margin="3" HorizontalAlignment="Center">
+                    <Run Text="{Binding Width, Mode=OneWay, StringFormat={}{0:0}}"/>
+                    <Run Text=" × "/>
+                    <Run Text="{Binding Height, Mode=OneWay, StringFormat={}{0:0}}"/>
+                    <Run Text="px"/>
+                </TextBlock>
+
+                <TextBlock Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}" Margin="3" HorizontalAlignment="Center">
+                    <Run Text="{Binding Dpi, Mode=OneWay, StringFormat={}{0:0}}"/>
+                    <Run Text="{DynamicResource S.Resize.Dpi}"/>
+                </TextBlock>
+
+                <!--Change-->
+                <TextBlock Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Gray112}" Margin="3"
+                           Text="{Binding SizeDiff, Mode=OneWay, StringFormat={}{0:(+0 '%');(-0 '%');''}}" FontStyle="Italic">
+                    <TextBlock.ToolTip>
+                        <TextBlock VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Gray112}" Margin="3">
+                            <Run Text="{Binding WidthDiff, Mode=OneWay, StringFormat={}{0:(+# '%');(-# '%');'~ 0 %'}}" FontStyle="Italic"/>
+                            <Run Text=" × "/>
+                            <Run Text="{Binding HeightDiff, Mode=OneWay, StringFormat={}{0:(+# '%');(-# '%');'~ 0 %'}}" FontStyle="Italic"/>
+                        </TextBlock>
+                    </TextBlock.ToolTip>
+                </TextBlock>
+
+                <TextBlock Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Gray112}" Margin="3"
+                           Text="{Binding DpiDiff, Mode=OneWay, StringFormat={}{0:(+# '%');(-# '%');''}}" FontStyle="Italic"/>
+            </Grid>
+        </Expander>
+
+        <Expander Grid.Row="1" Header="{DynamicResource S.Resize.Options}" IsExpanded="True">
+            <Grid Margin="10,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.ImportVideo.Width}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="WidthResizeIntegerUpDown" Minimum="1" Maximum="5000" Margin="5,3" Height="25" MinWidth="70"
+                                 Value="{Binding Width, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Visibility="{Binding DisplayInPixels}"/>
+                <n:DecimalUpDown Grid.Row="0" Grid.Column="1" x:Name="WidthResizeDecimalUpDown" Minimum="1" Maximum="5000" Margin="5,3" Height="25" MinWidth="70"
+                                 Value="{Binding WidthInPercent, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Visibility="{Binding DisplayInPercents, FallbackValue={x:Static Visibility.Collapsed}}"/>
+
+                <ComboBox Grid.Row="0" Grid.Column="2" Margin="0,3,5,3" SelectedValuePath="Tag" MinWidth="80" SelectedValue="{Binding SizeUnit}">
+                    <ComboBoxItem Tag="{x:Static u:SizeUnits.Pixels}" Content="{DynamicResource S.Resize.Pixels}"/>
+                    <ComboBoxItem Tag="{x:Static u:SizeUnits.Percent}" Content="{DynamicResource S.Resize.Percent}"/>
+                </ComboBox>
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.ImportVideo.Height}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="HeightResizeIntegerUpDown" Minimum="1" Maximum="5000" Margin="5,3" Height="25" MinWidth="70"
+                                 Value="{Binding Height, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Visibility="{Binding DisplayInPixels}"/>
+                <n:DecimalUpDown Grid.Row="1" Grid.Column="1" x:Name="HeightResizeDecimalUpDown" Minimum="1" Maximum="5000" Margin="5,3" Height="25" MinWidth="70"
+                                 Value="{Binding HeightInPercent, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                 Visibility="{Binding DisplayInPercents, FallbackValue={x:Static Visibility.Collapsed}}"/>
+
+                <ComboBox Grid.Row="1" Grid.Column="2" Margin="0,3,5,3" SelectedValuePath="Tag" MinWidth="80" SelectedValue="{Binding SizeUnit}">
+                    <ComboBoxItem Tag="{x:Static u:SizeUnits.Pixels}" Content="{DynamicResource S.Resize.Pixels}"/>
+                    <ComboBoxItem Tag="{x:Static u:SizeUnits.Percent}" Content="{DynamicResource S.Resize.Percent}"/>
+                </ComboBox>
+
+                <n:ExtendedCheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" x:Name="KeepAspectCheckBox" Text="{DynamicResource S.Resize.KeepAspect}"
+                                    Margin="5,5" IsChecked="{Binding KeepAspectRatio}"/>
+
+                <Border Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" Background="{StaticResource Vector.Lock}" Height="15" Width="15" Margin="0,0,3,0"
+                        Visibility="{Binding ElementName=KeepAspectCheckBox, Path=IsChecked, Converter={StaticResource Bool2Visibility}}"/>
+
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource S.Resize.Dpi2}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                <n:IntegerUpDown Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" x:Name="DpiNumericUpDown" Minimum="1" Maximum="1000" Margin="5,3" Width="80" HorizontalAlignment="Left"
+                                 Value="{Binding Dpi, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="{DynamicResource S.Resize.ScalingQuality}" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                <ComboBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" x:Name="ResizeScalingQualityComboBox" Margin="5,3" SelectedValuePath="Tag"
+                          SelectedValue="{Binding ScalingMode}">
+                    <ComboBoxItem Tag="{x:Static BitmapScalingMode.Fant}" Content="{DynamicResource S.Resize.ScalingQuality.Fant}"/>
+                    <ComboBoxItem Tag="{x:Static BitmapScalingMode.Linear}" Content="{DynamicResource S.Resize.ScalingQuality.Linear}"/>
+                    <ComboBoxItem Tag="{x:Static BitmapScalingMode.NearestNeighbor}" Content="{DynamicResource S.Resize.ScalingQuality.NearestNeighbor}"/>
+                </ComboBox>
+
+                <!--<n:ExtendedToggleButton Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" Style="{StaticResource Style.ToggleButton.NoText}" Icon="{StaticResource Vector.Lock}"
+                                            ContentWidth="15" ContentHeight="15" Margin="3" ToolTip="{DynamicResource S.Resize.KeepAspect}"/>-->
+            </Grid>
+        </Expander>
+    </Grid>
+</UserControl>

@@ -2,9 +2,9 @@ using System.Windows.Media;
 using ScreenToGif.Settings;
 using ScreenToGif.Util;
 
-namespace ScreenToGif.Model
+namespace ScreenToGif.ViewModel.Tasks
 {
-    public class MouseClicksModel : DefaultTaskModel
+    public class MouseClicksViewModel : BaseTaskViewModel
     {
         private Color _leftButtonForegroundColor;
         private Color _rightButtonForegroundColor;
@@ -12,7 +12,7 @@ namespace ScreenToGif.Model
         private double _width;
         private double _height;
 
-        public MouseClicksModel()
+        public MouseClicksViewModel()
         {
             TaskType = TaskTypeEnum.MouseClicks;
         }
@@ -55,9 +55,9 @@ namespace ScreenToGif.Model
                    $"{LocalizationHelper.Get("S.FreeDrawing.Width")} {Width}, {LocalizationHelper.Get("S.FreeDrawing.Height")} {Height}";
         }
 
-        public static MouseClicksModel Default()
+        public static MouseClicksViewModel Default()
         {
-            return new MouseClicksModel
+            return new MouseClicksViewModel
             {
                 LeftButtonForegroundColor = Color.FromArgb(120, 255, 255, 0),
                 RightButtonForegroundColor = Color.FromArgb(120, 255, 0, 0),
@@ -67,9 +67,9 @@ namespace ScreenToGif.Model
             };
         }
 
-        public static MouseClicksModel FromSettings()
+        public static MouseClicksViewModel FromSettings()
         {
-            return new MouseClicksModel
+            return new MouseClicksViewModel
             {
                 LeftButtonForegroundColor = UserSettings.All.LeftMouseButtonClicksColor,
                 MiddleButtonForegroundColor = UserSettings.All.MiddleMouseButtonClicksColor,

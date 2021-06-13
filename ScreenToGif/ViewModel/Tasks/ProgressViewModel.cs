@@ -4,9 +4,9 @@ using System.Windows.Media;
 using ScreenToGif.Settings;
 using ScreenToGif.Util;
 
-namespace ScreenToGif.Model
+namespace ScreenToGif.ViewModel.Tasks
 {
-    public class ProgressModel : DefaultTaskModel
+    public class ProgressViewModel : BaseTaskViewModel
     {
         #region Variables
 
@@ -29,7 +29,7 @@ namespace ScreenToGif.Model
 
         #endregion
 
-        public ProgressModel()
+        public ProgressViewModel()
         {
             TaskType = TaskTypeEnum.Progress;
         }
@@ -138,9 +138,9 @@ namespace ScreenToGif.Model
                    $"{(Type == ProgressType.Text ? ", " + LocalizationHelper.GetWithIndex(Precision, "S.Progress.Precision.", "Minutes", "Seconds", "Milliseconds", "Percentage", "Count", "DateOfRecording", "Custom") : "")}";
         }
 
-        public static ProgressModel Default()
+        public static ProgressViewModel Default()
         {
-            return new ProgressModel
+            return new ProgressViewModel
             {
                 Type = ProgressType.Text,
                 FontFamily = new FontFamily("Segoe UI"),
@@ -161,9 +161,9 @@ namespace ScreenToGif.Model
             };
         }
 
-        public static ProgressModel FromSettings()
+        public static ProgressViewModel FromSettings()
         {
-            return new ProgressModel
+            return new ProgressViewModel
             {
                 Type = UserSettings.All.ProgressType,
                 FontFamily = UserSettings.All.ProgressFontFamily,

@@ -2,9 +2,9 @@ using System.Windows.Media;
 using ScreenToGif.Settings;
 using ScreenToGif.Util;
 
-namespace ScreenToGif.Model
+namespace ScreenToGif.ViewModel.Tasks
 {
-    public class BorderModel : DefaultTaskModel
+    public class BorderViewModel : BaseTaskViewModel
     {
         #region Variables
 
@@ -16,7 +16,7 @@ namespace ScreenToGif.Model
         
         #endregion
 
-        public BorderModel()
+        public BorderViewModel()
         {
             TaskType = TaskTypeEnum.Border;
         }
@@ -57,9 +57,9 @@ namespace ScreenToGif.Model
                    $"{(LocalizationHelper.Get("S.Caption.Thickness"))} ({LeftThickness}, {TopThickness}, {LeftThickness}, {BottomThickness})";
         }
 
-        public static BorderModel Default()
+        public static BorderViewModel Default()
         {
-            return new BorderModel
+            return new BorderViewModel
             {
                 Color = Color.FromArgb(255, 0, 0, 0),
                 LeftThickness = 1,
@@ -69,9 +69,9 @@ namespace ScreenToGif.Model
             };
         }
 
-        public static BorderModel FromSettings(bool isManual = false)
+        public static BorderViewModel FromSettings(bool isManual = false)
         {
-            return new BorderModel
+            return new BorderViewModel
             {
                 Color = UserSettings.All.BorderColor,
                 LeftThickness = UserSettings.All.BorderLeftThickness,
