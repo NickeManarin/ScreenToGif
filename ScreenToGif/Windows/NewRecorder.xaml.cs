@@ -602,10 +602,9 @@ namespace ScreenToGif.Windows
             }
 
             _preStartTimer.Stop();
-            
+            Splash.Dismiss();
             if (IsRegionIntersected())
             {
-                Splash.Dismiss();
                 WindowState = WindowState.Minimized;
             }
 
