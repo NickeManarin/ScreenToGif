@@ -187,7 +187,6 @@
     <Compile Include="Controls\ExtendedSlider.cs" />
     <Compile Include="Controls\ExtendedTextBox.cs" />
     <Compile Include="Controls\FolderSelector.cs" />
-    <Compile Include="Controls\FrameListBoxItem.cs" />
     <Compile Include="Controls\FrameViewer.cs" />
     <Compile Include="Controls\FrameworkElementAdorner.cs" />
     <Compile Include="Controls\HeaderedTooltip.cs" />
@@ -386,6 +385,7 @@
     <Compile Include="Model\ExportPresets\Video\Webm\FfmpegWebmPreset.cs" />
     <Compile Include="Model\ExportPresets\Video\Webm\WebmPreset.cs" />
     <Compile Include="Settings\Migrations\Migration2_31_0To2_32_0.cs" />
+    <Compile Include="ViewModel\FrameViewModel.cs" />
     <Compile Include="ViewModel\Tasks\ResizeViewModel.cs" />
     <Compile Include="ViewModel\Tasks\ShadowViewModel.cs" />
     <Compile Include="ViewModel\Tasks\BaseTaskViewModel.cs" />

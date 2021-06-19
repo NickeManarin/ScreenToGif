@@ -2101,7 +2101,7 @@
                             <n:LabelSeparator Grid.Row="0" Text="{DynamicResource S.Caption.Text}"/>
                             <n:ExtendedTextBox Grid.Row="1" x:Name="FreeTextTextBox"  Margin="10,5,5,5" AcceptsReturn="True" AcceptsTab="True"
                                                Text="{Binding Source={x:Static t:UserSettings.All}, Path=FreeTextText, Mode=TwoWay}"
-                                               TextChanged="FreeTextTextBox_OnTextChanged"/>
+                                               TextChanged="FreeTextTextBox_TextChanged"/>
 
                             <Expander Grid.Row="2" Header="{DynamicResource S.Caption.Font}" IsExpanded="{Binding IsFreeTextFontGroupExpanded, Source={x:Static t:UserSettings.All}}">
                                 <Grid Margin="10,0,0,0">
@@ -4229,9 +4229,9 @@
 
         <!--Lower part of the Window-->
         <ListView Grid.Row="2" x:Name="FrameListView" BorderThickness="0,1,0,0" IsTabStop="False" Focusable="False" Style="{StaticResource Style.ListView.Frames}"
-                  IsEnabled="{Binding Path=IsLoading, ElementName=EditorWindow, Converter={StaticResource InvertedBoolConverter}}"
+                  ItemsSource="{Binding Path=Frames, ElementName=EditorWindow}" IsEnabled="{Binding Path=IsLoading, ElementName=EditorWindow, Converter={StaticResource InvertedBoolConverter}}"
                   Visibility="{Binding RelativeSource={RelativeSource Self}, Path=HasItems, Converter={StaticResource Bool2Visibility}}"
-                  SelectionChanged="FrameListView_SelectionChanged" PreviewKeyDown="FrameListView_OnPreviewKeyDown">
+                  SelectionChanged="FrameListView_SelectionChanged" PreviewKeyDown="FrameListView_PreviewKeyDown">
 
             <ListView.Resources>
                 <ContextMenu x:Key="FrameListContextMenu">
