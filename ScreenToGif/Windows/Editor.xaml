@@ -602,12 +602,12 @@
                             </Grid.RowDefinitions>
 
                             <n:ExtendedButton x:Name="ResetButton" Grid.Row="0" Text="{DynamicResource S.Editor.Home.Reset}" Icon="{StaticResource Vector.Repeat}"
-                                              Padding="2" MinWidth="60" ContentWidth="25" ContentHeight="25" Style="{StaticResource Style.Button.Horizontal}" Command="{StaticResource Command.Reset}"
+                                              Padding="3" MinWidth="60" ContentWidth="25" ContentHeight="25" Style="{StaticResource Style.Button.Horizontal}" Command="{StaticResource Command.Reset}"
                                               ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
                                               ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
                             <n:ExtendedButton x:Name="RedoButton" Grid.Row="1" Text="{DynamicResource S.Editor.Home.Redo}" Icon="{StaticResource Vector.Redo}"
-                                              Padding="2" MinWidth="60" ContentWidth="25" ContentHeight="25" Style="{StaticResource Style.Button.Horizontal}" Command="{StaticResource Command.Redo}"
+                                              Padding="3" MinWidth="60" ContentWidth="25" ContentHeight="25" Style="{StaticResource Style.Button.Horizontal}" Command="{StaticResource Command.Redo}"
                                               ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
                                               ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                         </Grid>
@@ -706,7 +706,7 @@
                             </StackPanel>
 
                             <n:ExtendedButton Grid.Column="0" Grid.Row="1" x:Name="FitButton" Text="{DynamicResource S.Editor.Home.FitImage}" Icon="{StaticResource Vector.PictureFit}" 
-							                  Margin="0" Padding="2" MinWidth="60" ContentWidth="30" ContentHeight="25" VerticalContentAlignment="Center"
+							                  Padding="3" MinWidth="60" ContentWidth="30" ContentHeight="25" VerticalContentAlignment="Center"
 							                  Style="{StaticResource Style.Button.Horizontal}" Command="{StaticResource Command.FitImage}" 
                                               ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
                                               ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
@@ -748,12 +748,12 @@
                             </Grid.RowDefinitions>
 
                             <n:ExtendedButton x:Name="InverseSelectionButton" Grid.Row="0" Text="{DynamicResource S.Editor.Home.Inverse}" Icon="{StaticResource Vector.InverseSelection}"
-                                              Padding="2" MinWidth="60" ContentWidth="25" ContentHeight="25" Style="{StaticResource Style.Button.Horizontal}" Command="{StaticResource Command.InverseSelection}"
+                                              Padding="3" MinWidth="60" ContentWidth="25" ContentHeight="25" Style="{StaticResource Style.Button.Horizontal}" Command="{StaticResource Command.InverseSelection}"
                                               ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
                                               ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
                             <n:ExtendedButton x:Name="DeselectButton" Grid.Row="1" Text="{DynamicResource S.Editor.Home.Deselect}" Icon="{StaticResource Vector.Unselect}"
-                                              Padding="2" MinWidth="60" ContentWidth="25" ContentHeight="25" Style="{StaticResource Style.Button.Horizontal}" Command="{StaticResource Command.Unselect}"
+                                              Padding="3" MinWidth="60" ContentWidth="25" ContentHeight="25" Style="{StaticResource Style.Button.Horizontal}" Command="{StaticResource Command.Unselect}"
                                               ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
                                               ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                         </Grid>
@@ -894,12 +894,12 @@
                             </Grid.RowDefinitions>
 
                             <n:ExtendedButton x:Name="DeleteBeforeButton" Grid.Row="0" Text="{DynamicResource S.Editor.Edit.DeletePrevious}" Icon="{StaticResource Vector.Delete.Before}"
-						                      Padding="3,3,3,0" MinWidth="60" ContentWidth="30" ContentHeight="25" Style="{StaticResource Style.Button.Horizontal}" Command="{StaticResource Command.DeletePrevious}"
+						                      Padding="3" MinWidth="60" ContentHeight="30" ContentWidth="25" Style="{StaticResource Style.Button.Horizontal}" Command="{StaticResource Command.DeletePrevious}"
                                               ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
                                               ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
                             <n:ExtendedButton x:Name="DeleteAfterButton" Grid.Row="1" Text="{DynamicResource S.Editor.Edit.DeleteNext}" Icon="{StaticResource Vector.Delete.After}"
-                                              Padding="3,3,3,0" MinWidth="60" ContentWidth="30" ContentHeight="25" Style="{StaticResource Style.Button.Horizontal}" Command="{StaticResource Command.DeleteNext}"
+                                              Padding="3" MinWidth="60" ContentHeight="30" ContentWidth="25" Style="{StaticResource Style.Button.Horizontal}" Command="{StaticResource Command.DeleteNext}"
                                               ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
                                               ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                         </Grid>
@@ -929,12 +929,12 @@
                             </Grid.RowDefinitions>
 
                             <n:ExtendedButton x:Name="ReverseOrderButton" Grid.Row="0" Text="{DynamicResource S.Editor.Edit.Reverse}" Icon="{StaticResource Vector.Invert}"
-						                      Padding="3,3,3,0" ContentWidth="30" ContentHeight="25" Style="{StaticResource Style.Button.Horizontal}" Command="{StaticResource Command.Reverse}"
+						                      Padding="3" ContentHeight="30" ContentWidth="25" Style="{StaticResource Style.Button.Horizontal}" Command="{StaticResource Command.Reverse}"
                                               ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
                                               ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
                             <n:ExtendedButton x:Name="YoyoOrderButton" Grid.Row="1" Text="{DynamicResource S.Editor.Edit.Yoyo}" Icon="{StaticResource Vector.Yoyo}"
-						                      Padding="3,3,3,0" ContentWidth="30" ContentHeight="25" Style="{StaticResource Style.Button.Horizontal}" Command="{StaticResource Command.Yoyo}"
+						                      Padding="3" ContentHeight="30" ContentWidth="25" Style="{StaticResource Style.Button.Horizontal}" Command="{StaticResource Command.Yoyo}"
                                               ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
                                               ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                         </Grid>
@@ -1025,12 +1025,12 @@
                             </Grid.RowDefinitions>
 
                             <n:ExtendedButton x:Name="CropButton" Grid.Row="0" Text="{DynamicResource S.Editor.Image.Crop}" Icon="{StaticResource Vector.Crop}"
-                                              Padding="2" MinWidth="60" ContentWidth="25" ContentHeight="25"  Style="{StaticResource Style.Button.Horizontal}" Command="{StaticResource Command.Crop}"
+                                              Padding="3" MinWidth="60" ContentWidth="25" ContentHeight="25" Style="{StaticResource Style.Button.Horizontal}" Command="{StaticResource Command.Crop}"
                                               ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
                                               ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
                             <n:ExtendedButton x:Name="FlipRotateButton" Grid.Row="1" Text="{DynamicResource S.Editor.Image.FlipRotate}" Icon="{StaticResource Vector.FlipHorizontal}"
-                                              Padding="2" MinWidth="60" ContentWidth="25" ContentHeight="25" Style="{StaticResource Style.Button.Horizontal}" Command="{StaticResource Command.FlipRotate}"
+                                              Padding="3" MinWidth="60" ContentWidth="25" ContentHeight="25" Style="{StaticResource Style.Button.Horizontal}" Command="{StaticResource Command.FlipRotate}"
                                               ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
                                               ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                         </Grid>
@@ -1070,12 +1070,12 @@
                             </Grid.RowDefinitions>
 
                             <n:ExtendedButton x:Name="FreeTextButton" Grid.Row="0" Text="{DynamicResource S.Editor.Image.FreeText}" Icon="{StaticResource Vector.FreeText}"
-                                              Padding="2" MinWidth="60" ContentWidth="25" ContentHeight="25" Command="{StaticResource Command.FreeText}" Style="{StaticResource Style.Button.Horizontal}"
+                                              Padding="3" MinWidth="60" ContentWidth="25" ContentHeight="25" Command="{StaticResource Command.FreeText}" Style="{StaticResource Style.Button.Horizontal}"
                                               ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
                                               ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
                             <n:ExtendedButton x:Name="TitleFrameButton" Grid.Row="1" Text="{DynamicResource S.Editor.Image.TitleFrame}" Icon="{StaticResource Vector.TitleFrame}"
-                                              Padding="2" MinWidth="60" ContentWidth="25" ContentHeight="25" Command="{StaticResource Command.TitleFrame}" Style="{StaticResource Style.Button.Horizontal}"
+                                              Padding="3" MinWidth="60" ContentWidth="25" ContentHeight="25" Command="{StaticResource Command.TitleFrame}" Style="{StaticResource Style.Button.Horizontal}"
                                               ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
                                               ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                         </Grid>
@@ -1145,12 +1145,12 @@
                             </Grid.RowDefinitions>
 
                             <n:ExtendedButton x:Name="WatermarkButton" Grid.Row="0" Text="{DynamicResource S.Editor.Image.Watermark}" Icon="{StaticResource Vector.Watermark}"
-                                              Padding="2" MinWidth="60" ContentWidth="25" ContentHeight="25" Command="{StaticResource Command.Watermark}" Style="{StaticResource Style.Button.Horizontal}"
+                                              Padding="3" MinWidth="60" ContentWidth="25" ContentHeight="25" Command="{StaticResource Command.Watermark}" Style="{StaticResource Style.Button.Horizontal}"
                                               ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
                                               ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5"/>
 
                             <n:ExtendedButton x:Name="CinemagraphButton" Grid.Row="1" Text="{DynamicResource S.Editor.Image.Cinemagraph}" Icon="{StaticResource Vector.Cinemagraph}"
-						                      Padding="2" MinWidth="60" ContentWidth="25" ContentHeight="25" Command="{StaticResource Command.Cinemagraph}" Style="{StaticResource Style.Button.Horizontal}"
+						                      Padding="3" MinWidth="60" ContentWidth="25" ContentHeight="25" Command="{StaticResource Command.Cinemagraph}" Style="{StaticResource Style.Button.Horizontal}"
                                               ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
                                               ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
                         </Grid>
