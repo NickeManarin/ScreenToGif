@@ -6,6 +6,7 @@ _VS 2019 and .Net 4.8 or newer required._
 
 ## What's new? (Version 2.32)
 
+• Memory usage improvements with the frame list inside the editor.  
 • You can now open the app and start recording by using command line arguments (read the wiki for more details).
 • Added option to set the background of the editor to follow the OS color theme (thanks to @pawlos).
 • Added option to resize the frames by setting a percentage.  
