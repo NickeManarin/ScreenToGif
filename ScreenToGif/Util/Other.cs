@@ -159,17 +159,6 @@ namespace ScreenToGif.Util
             return text.Length <= size ? text : text.Substring(0, size);
         }
 
-        /// <summary>
-        /// The Greater Common Divisor.
-        /// </summary>
-        /// <param name="a">Size a</param>
-        /// <param name="b">Size b</param>
-        /// <returns>The GCD number.</returns>
-        public static double Gcd(double a, double b)
-        {
-            return b == 0 ? a : Gcd(b, a % b);
-        }
-
         public static int DivisibleByTwo(this int number)
         {
             return number % 2 == 0 ? number : number + 1;

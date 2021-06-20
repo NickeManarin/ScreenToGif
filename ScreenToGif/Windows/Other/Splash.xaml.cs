@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 
 namespace ScreenToGif.Windows.Other
 {
@@ -52,6 +52,12 @@ namespace ScreenToGif.Windows.Other
         public static void Dismiss()
         {
             _splash?.Close();
+            _splash = null;
+        }
+
+        public static bool IsBeingDisplayed()
+        {
+            return _splash != null;
         }
     }
 }

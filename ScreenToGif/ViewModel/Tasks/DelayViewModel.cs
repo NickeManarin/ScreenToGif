@@ -1,16 +1,16 @@
 using ScreenToGif.Settings;
 using ScreenToGif.Util;
 
-namespace ScreenToGif.Model
+namespace ScreenToGif.ViewModel.Tasks
 {
-    public class DelayModel : DefaultTaskModel
+    public class DelayViewModel : BaseTaskViewModel
     {
         private DelayUpdateType _type;
         private int _delay;
         private int _increaseDecreaseDelay;
         private decimal _percent;
 
-        public DelayModel()
+        public DelayViewModel()
         {
             TaskType = TaskTypeEnum.Delay;
         }
@@ -68,9 +68,9 @@ namespace ScreenToGif.Model
             return $"{LocalizationHelper.Get("S.Delay")}: {DelayType}, {DelayTypeKind} {DelayTypeUnitValue}";
         }
 
-        public static DelayModel Default()
+        public static DelayViewModel Default()
         {
-            return new DelayModel
+            return new DelayViewModel
             {
                 Type = DelayUpdateType.Override,
                 NewDelay = 33,
@@ -79,9 +79,9 @@ namespace ScreenToGif.Model
             };
         }
 
-        public static DelayModel FromSettings(DelayUpdateType type = DelayUpdateType.Override)
+        public static DelayViewModel FromSettings(DelayUpdateType type = DelayUpdateType.Override)
         {
-            return new DelayModel
+            return new DelayViewModel
             {
                 Type = type,
                 NewDelay = UserSettings.All.OverrideDelay,

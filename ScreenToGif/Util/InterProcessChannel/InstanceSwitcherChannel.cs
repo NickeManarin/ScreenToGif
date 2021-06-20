@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Runtime.Remoting.Channels.Ipc;
 using System.Windows;
+using ScreenToGif.Settings;
 
 namespace ScreenToGif.Util.InterProcessChannel
 {
@@ -86,9 +87,11 @@ namespace ScreenToGif.Util.InterProcessChannel
                 try
                 {
                     if (args?.Length > 0)
-                        Argument.Prepare(args);
+                        Arguments.Prepare(args);
 
-                    Application.Current.Dispatcher.BeginInvoke(new Action(() => App.MainViewModel.OpenEditor.Execute(args)));
+                    Application.Current.Dispatcher.BeginInvoke(Arguments.Open
+                        ? () => App.MainViewModel.Open.Execute(Arguments.WindownToOpen, true)
+                        : new Action(() => App.MainViewModel.Open.Execute(UserSettings.All.StartUp)));
 
                     return true;
                 }

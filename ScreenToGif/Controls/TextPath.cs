@@ -137,6 +137,12 @@ namespace ScreenToGif.Controls
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
+            if (!IsVisible)
+            {
+                base.OnPropertyChanged(e);
+                return;
+            }
+
             try
             {
                 _textGeometry = new FormattedText(Text ?? "", Thread.CurrentThread.CurrentUICulture, FlowDirection.LeftToRight,

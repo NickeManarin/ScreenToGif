@@ -225,6 +225,19 @@ namespace ScreenToGif.Windows.Other
 
             #region Position the thumbs
 
+            //Visibility as hidden, to have the size available.
+            if (_horizontalAlignment != HorizontalAlignment.Right)
+            {
+                HorizontalBorder.Visibility = Visibility.Hidden;
+                HorizontalBorder.Refresh();
+            }
+
+            if (_verticalAlignment != VerticalAlignment.Bottom)
+            {
+                VerticalBorder.Visibility = Visibility.Hidden;
+                VerticalBorder.Refresh();
+            }
+            
             //Offset.
             Left = (Rect.Left - (_horizontalAlignment == HorizontalAlignment.Right ? 0 : HorizontalBorder.ActualWidth)) / (this.Scale() / Monitor.Scale);
             Top = (Rect.Top - (_verticalAlignment == VerticalAlignment.Bottom ? 0 : VerticalBorder.ActualHeight)) / (this.Scale() / Monitor.Scale); 

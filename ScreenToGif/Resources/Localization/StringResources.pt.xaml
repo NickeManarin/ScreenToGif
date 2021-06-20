@@ -815,7 +815,7 @@
     <s:String x:Key="S.InsertFrames.ImageSize">Tamanho da imagem:</s:String>
     <s:String x:Key="S.InsertFrames.ImagePosition">Posição da imagem:</s:String>
     <s:String x:Key="S.InsertFrames.ResetImageSizePosition">Redefinir o tamanho da&#x0d;imagem e a posição</s:String>
-    <s:String x:Key="S.InsertFrames.Info2">Novos quadros serão inseridos na lista atual de quadros na posição:</s:String>
+    <s:String x:Key="S.InsertFrames.Info2">Novos quadros serão inseridos na lista&#10;atual de quadros na posição:</s:String>
     <s:String x:Key="S.InsertFrames.Before">Antes</s:String>
     <s:String x:Key="S.InsertFrames.After">Depois</s:String>
     <s:String x:Key="S.InsertFrames.Frame">Quadro</s:String>
@@ -1229,18 +1229,20 @@
     <s:String x:Key="S.Clipboard.After">Após quadro selecionado</s:String>
     
     <!--Editor • Resize-->
-    <s:String x:Key="S.Resize.CurrentProperties">Propriedades Atuais</s:String>
+    <s:String x:Key="S.Resize.Difference">Diferença</s:String>
     <s:String x:Key="S.Resize.Dpi">Ppp</s:String>
-    <s:String x:Key="S.Resize.NewProperties">Nova Propriedades</s:String>
-    <s:String x:Key="S.Resize.Dpi2">PPP:</s:String>
-    <s:String x:Key="S.Resize.KeepAspect">Manter aspecto.</s:String>
     <s:String x:Key="S.Resize.Options">Opções</s:String>
-    <s:String x:Key="S.Resize.ScalingQuality">Qualidade de escala:</s:String>
-    <s:String x:Key="S.Resize.ScalingQuality.Fant">Fant (alta qualidade)</s:String>
-    <s:String x:Key="S.Resize.ScalingQuality.Linear">Linear (baixa qualidade)</s:String>
-    <s:String x:Key="S.Resize.ScalingQuality.NearestNeighbor">Vizinho mais próximo (qualidade baixa e mais rápido)</s:String>
+    <s:String x:Key="S.Resize.Pixels">Pixels (px)</s:String>
+    <s:String x:Key="S.Resize.Percent">Porcento (%)</s:String>
+    <s:String x:Key="S.Resize.Dpi2">PPP:</s:String>
+    <s:String x:Key="S.Resize.KeepAspect">Manter a proporção do aspecto.</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality">Qualidade:</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Fant">Fant • Alta qualidade</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Linear">Linear • Baixa qualidade</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.NearestNeighbor">Vizinho mais próximo • Baixa qualidade e mais rápido</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Info">Qualidade de escala de pixels.</s:String>
     <s:String x:Key="S.Resize.Warning">Você precisa selecionar algum valor diferente para aplicar o redimensionamento.</s:String>
-    
+   
     <!--Editor • Crop-->
     <s:String x:Key="S.Crop.Points">Pontos</s:String>
     <s:String x:Key="S.Crop.Top">Topo:</s:String>

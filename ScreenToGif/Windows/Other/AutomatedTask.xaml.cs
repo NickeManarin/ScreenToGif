@@ -1,15 +1,15 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using ScreenToGif.Model;
 using ScreenToGif.UserControls;
 using ScreenToGif.Util;
+using ScreenToGif.ViewModel.Tasks;
 
 namespace ScreenToGif.Windows.Other
 {
     public partial class AutomatedTask : Window
     {
-        public DefaultTaskModel CurrentTask { get; set; }
+        public BaseTaskViewModel CurrentTask { get; set; }
 
         public bool IsEditing { get; set; }
 
@@ -26,7 +26,7 @@ namespace ScreenToGif.Windows.Other
             {
                 MainBorder.Background = TryFindResource("Vector.Pen") as Brush;
                 TypeTextBlock.Text = LocalizationHelper.Get("S.Edit");
-                TypeComboBox.SelectedIndex = (int)(CurrentTask?.TaskType ?? DefaultTaskModel.TaskTypeEnum.NotDeclared);
+                TypeComboBox.SelectedIndex = (int)(CurrentTask?.TaskType ?? BaseTaskViewModel.TaskTypeEnum.NotDeclared);
                 TypeComboBox.IsEnabled = false;
                 EnabledCheckBox.Visibility = Visibility.Visible;
 
@@ -48,47 +48,47 @@ namespace ScreenToGif.Windows.Other
             if (!IsEditing)
             {
                 //Create a new model.
-                switch ((DefaultTaskModel.TaskTypeEnum)TypeComboBox.SelectedIndex)
+                switch ((BaseTaskViewModel.TaskTypeEnum)TypeComboBox.SelectedIndex)
                 {
-                    case DefaultTaskModel.TaskTypeEnum.MouseClicks:
-                        CurrentTask = MouseClicksModel.Default();
+                    case BaseTaskViewModel.TaskTypeEnum.MouseClicks:
+                        CurrentTask = MouseClicksViewModel.Default();
                         break;
-                    case DefaultTaskModel.TaskTypeEnum.KeyStrokes:
-                        CurrentTask = KeyStrokesModel.Default();
+                    case BaseTaskViewModel.TaskTypeEnum.KeyStrokes:
+                        CurrentTask = KeyStrokesViewModel.Default();
                         break;
-                    case DefaultTaskModel.TaskTypeEnum.Delay:
-                        CurrentTask = DelayModel.Default();
+                    case BaseTaskViewModel.TaskTypeEnum.Delay:
+                        CurrentTask = DelayViewModel.Default();
                         break;
-                    case DefaultTaskModel.TaskTypeEnum.Progress:
-                        CurrentTask = ProgressModel.Default();
+                    case BaseTaskViewModel.TaskTypeEnum.Progress:
+                        CurrentTask = ProgressViewModel.Default();
                         break;
-                    case DefaultTaskModel.TaskTypeEnum.Border:
-                        CurrentTask = BorderModel.Default();
+                    case BaseTaskViewModel.TaskTypeEnum.Border:
+                        CurrentTask = BorderViewModel.Default();
                         break;
-                    case DefaultTaskModel.TaskTypeEnum.Shadow:
-                        CurrentTask = ShadowModel.Default();
+                    case BaseTaskViewModel.TaskTypeEnum.Shadow:
+                        CurrentTask = ShadowViewModel.Default();
                         break;
                 }
             }
 
-            switch ((DefaultTaskModel.TaskTypeEnum)TypeComboBox.SelectedIndex)
+            switch ((BaseTaskViewModel.TaskTypeEnum)TypeComboBox.SelectedIndex)
             {
-                case DefaultTaskModel.TaskTypeEnum.MouseClicks:
+                case BaseTaskViewModel.TaskTypeEnum.MouseClicks:
                     MainPresenter.Content = new MouseClicksPanel { DataContext = CurrentTask };
                     break;
-                case DefaultTaskModel.TaskTypeEnum.KeyStrokes:
+                case BaseTaskViewModel.TaskTypeEnum.KeyStrokes:
                     MainPresenter.Content = new KeyStrokesPanel { DataContext = CurrentTask };
                     break;
-                case DefaultTaskModel.TaskTypeEnum.Delay:
+                case BaseTaskViewModel.TaskTypeEnum.Delay:
                     MainPresenter.Content = new DelayPanel { DataContext = CurrentTask };
                     break;
-                case DefaultTaskModel.TaskTypeEnum.Progress:
+                case BaseTaskViewModel.TaskTypeEnum.Progress:
                     MainPresenter.Content = new ProgressPanel { DataContext = CurrentTask };
                     break;
-                case DefaultTaskModel.TaskTypeEnum.Border:
+                case BaseTaskViewModel.TaskTypeEnum.Border:
                     MainPresenter.Content = new BorderPanel { DataContext = CurrentTask };
                     break;
-                case DefaultTaskModel.TaskTypeEnum.Shadow:
+                case BaseTaskViewModel.TaskTypeEnum.Shadow:
                     MainPresenter.Content = new ShadowPanel { DataContext = CurrentTask };
                     break;
             }

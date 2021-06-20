@@ -3,9 +3,9 @@ using System.Windows.Media;
 using ScreenToGif.Settings;
 using ScreenToGif.Util;
 
-namespace ScreenToGif.Model
+namespace ScreenToGif.ViewModel.Tasks
 {
-    public class KeyStrokesModel : DefaultTaskModel
+    public class KeyStrokesViewModel : BaseTaskViewModel
     {
         #region Variables
 
@@ -32,7 +32,7 @@ namespace ScreenToGif.Model
 
         #endregion
 
-        public KeyStrokesModel()
+        public KeyStrokesViewModel()
         {
             TaskType = TaskTypeEnum.KeyStrokes;
         }
@@ -182,9 +182,9 @@ namespace ScreenToGif.Model
                    $"{LocalizationHelper.Get("S.Padding")} {KeyStrokesPadding}";
         }
 
-        public static KeyStrokesModel Default()
+        public static KeyStrokesViewModel Default()
         {
-            return new KeyStrokesModel
+            return new KeyStrokesViewModel
             {
                 KeyStrokesIgnoreNonModifiers = true,
                 KeyStrokesIgnoreInjected = false,
@@ -209,9 +209,9 @@ namespace ScreenToGif.Model
             };
         }
 
-        public static KeyStrokesModel FromSettings()
+        public static KeyStrokesViewModel FromSettings()
         {
-            return new KeyStrokesModel
+            return new KeyStrokesViewModel
             {
                 KeyStrokesIgnoreNonModifiers = UserSettings.All.KeyStrokesIgnoreNonModifiers,
                 KeyStrokesIgnoreInjected = UserSettings.All.KeyStrokesIgnoreInjected,

@@ -36,11 +36,17 @@ namespace ScreenToGif.Windows.Other
         private double _zoom = 1;
         UIElement _selectedElement = null;
 
+        private double _leftDpi = 0;
+        private double _leftScale = 0;
         private double _leftWidth = 0;
         private double _leftHeight = 0;
+        private double _leftScaleDiff = 0;
 
+        private double _rightDpi = 0;
+        private double _rightScale = 0;
         private double _rightWidth = 0;
         private double _rightHeight = 0;
+        private double _rightScaleDiff = 0;
 
         #endregion
 
@@ -59,7 +65,7 @@ namespace ScreenToGif.Windows.Other
             NewList = newList;
             _insertIndex = insertAt;
 
-            FrameNumberLabel.Content = insertAt;
+            FrameNumberTextBlock.Text = insertAt.ToString();
         }
 
 
@@ -153,6 +159,8 @@ namespace ScreenToGif.Windows.Other
                     #endregion
                 }
             }
+
+            CanvasSizeTextBlock.Text = $"{RightCanvas.ActualWidth * _rightScaleDiff * _rightScale} × {RightCanvas.ActualHeight * _rightScaleDiff * _rightScale} • {Math.Round(_rightDpi, 0)} {LocalizationHelper.Get("S.Resize.Dpi")}";
 
             LeftCanvas.SizeChanged += Canvas_SizeChanged;
             RightCanvas.SizeChanged += Canvas_SizeChanged;
@@ -273,20 +281,27 @@ namespace ScreenToGif.Windows.Other
             RightImage.Source = right;
 
             //The image should be displayed based on the scale of the screen.
-            var scaleLeft = Math.Round(left.DpiX / 96d, 2);
-            var scaleRight = Math.Round(right.DpiX / 96d, 2);
+            _leftScale = Math.Round(left.DpiX / 96d, 2);
+            _rightScale = Math.Round(right.DpiX / 96d, 2);
             var scale = this.Scale();
 
-            var scaleDiffLeft = Math.Round(scale / scaleLeft, 2);
-            var scaleDiffRight = Math.Round(scale / scaleRight, 2);
+            _leftDpi = left.DpiX;
+            _rightDpi = right.DpiX;
 
-            LeftImage.Width = _leftWidth = left.Width / scaleDiffLeft;
-            LeftImage.Height = _leftHeight = left.Height / scaleDiffLeft;
+            _leftScaleDiff = Math.Round(scale / _leftScale, 2);
+            _rightScaleDiff = Math.Round(scale / _rightScale, 2);
 
-            RightImage.Width = _rightWidth = right.Width / scaleDiffRight;
-            RightImage.Height = _rightHeight = right.Height / scaleDiffRight;
+            LeftImage.Width = _leftWidth = left.Width / _leftScaleDiff;
+            LeftImage.Height = _leftHeight = left.Height / _leftScaleDiff;
+
+            RightImage.Width = _rightWidth = right.Width / _rightScaleDiff;
+            RightImage.Height = _rightHeight = right.Height / _rightScaleDiff;
 
             #endregion
+
+            CanvasSizeTextBlock.Text = $"{right.PixelWidth} × {right.PixelHeight} • {Math.Round(left.DpiX, 0)} {LocalizationHelper.Get("S.Resize.Dpi")}";
+            LeftImageSizeTextBlock.Text = $"{left.PixelWidth} × {left.PixelHeight} • {Math.Round(left.DpiX, 0)} {LocalizationHelper.Get("S.Resize.Dpi")}";
+            RightImageSizeTextBlock.Text = $"{right.PixelWidth} × {right.PixelHeight} • {Math.Round(right.DpiX, 0)} {LocalizationHelper.Get("S.Resize.Dpi")}";
 
             #region Initial sizing
 
@@ -329,6 +344,16 @@ namespace ScreenToGif.Windows.Other
 
             if (result.HasValue && result.Value)
                 UserSettings.All.InsertFillColor = colorDialog.SelectedColor;
+        }
+
+        private void LeftImage_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            LeftImageSizeTextBlock.Text = $"{LeftImage.ActualWidth * _leftScaleDiff * _leftScale} × {LeftImage.ActualHeight * _leftScaleDiff * _leftScale} • {Math.Round(_leftDpi, 0)} {LocalizationHelper.Get("S.Resize.Dpi")}";
+        }
+
+        private void RightImage_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            RightImageSizeTextBlock.Text = $"{RightImage.ActualWidth * _rightScaleDiff * _rightScale} × {RightImage.ActualHeight * _rightScaleDiff * _rightScale} • {Math.Round(_rightDpi, 0)} {LocalizationHelper.Get("S.Resize.Dpi")}";
         }
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
@@ -602,6 +627,7 @@ namespace ScreenToGif.Windows.Other
         {
             Dispatcher.Invoke(() =>
             {
+                InsertionGrid.Visibility = Visibility.Collapsed;
                 ProgressGrid.Visibility = Visibility.Visible;
 
                 InsertProgressBar.Maximum = maximum;
@@ -624,7 +650,9 @@ namespace ScreenToGif.Windows.Other
             Dispatcher.Invoke(() =>
             {
                 InsertProgressBar.Value = 0;
+
                 ProgressGrid.Visibility = Visibility.Hidden;
+                InsertionGrid.Visibility = Visibility.Visible;
             });
         }
 

@@ -629,7 +629,7 @@
     <s:String x:Key="S.InsertFrames.ImageSize">Velikost obrázku:</s:String>
     <s:String x:Key="S.InsertFrames.ImagePosition">Umístění obrázku:</s:String>
     <s:String x:Key="S.InsertFrames.ResetImageSizePosition">Obnovit velikost obrázku&#x0d;a jeho pozici</s:String>
-    <s:String x:Key="S.InsertFrames.Info2">Nové snímky bude vloženy do aktuálního listu snímků na pozici:</s:String>
+    <s:String x:Key="S.InsertFrames.Info2">Nové snímky bude vloženy do aktuálního&#10;listu snímků na pozici:</s:String>
     <s:String x:Key="S.InsertFrames.Before">Za</s:String>
     <s:String x:Key="S.InsertFrames.After">Před</s:String>
     <s:String x:Key="S.InsertFrames.Frame">Snímek</s:String>

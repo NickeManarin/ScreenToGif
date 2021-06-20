@@ -75,6 +75,7 @@
             <c:InvertedEnumToBool x:Key="InvertedEnumToBool"/>
             <c:BoolAndToVisibility x:Key="BoolAndToVisibility"/>
             <c:ContentToVisibility x:Key="ContentToVisibility"/>
+            <c:UriToBitmap x:Key="UriToBitmapConverter"/>
             
             <!--Effects-->
             <DropShadowEffect x:Key="Shadow.Invariant" ShadowDepth="0" Color="Transparent" Opacity="0" BlurRadius="0" RenderingBias="Performance"/>
@@ -1119,6 +1120,91 @@
                     </Setter.Value>
                 </Setter>
 
+                <Setter Property="ItemContainerStyle">
+                    <Setter.Value>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="SnapsToDevicePixels" Value="True"/>
+                            <Setter Property="Padding" Value="4,1"/>
+                            <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+                            <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+                            <Setter Property="FocusVisualStyle" Value="{DynamicResource Style.FocusVisual.NoMargin}"/>
+
+                            <Style.Triggers>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                    </MultiTrigger.Conditions>
+
+                                    <Setter Property="Background" Value="{DynamicResource Item.MouseOver.Background}"/>
+                                    <Setter Property="BorderBrush" Value="{DynamicResource Item.MouseOver.Border}"/>
+                                </MultiTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="Selector.IsSelectionActive" Value="False"/>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+
+                                    <Setter Property="Background" Value="{DynamicResource Item.SelectedInactive.Background}"/>
+                                    <Setter Property="BorderBrush" Value="{DynamicResource Item.SelectedInactive.Border}"/>
+                                </MultiTrigger>
+
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="Selector.IsSelectionActive" Value="True"/>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+
+                                    <Setter Property="Background" Value="{DynamicResource Item.SelectedActive.Background}"/>
+                                    <Setter Property="BorderBrush" Value="{DynamicResource Item.SelectedActive.Border}"/>
+                                </MultiTrigger>
+
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Opacity" Value="0.7"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Setter.Value>
+                </Setter>
+                
+                <Setter Property="ItemTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <Border x:Name="Bd" BorderBrush="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Path=BorderBrush}"
+                                    BorderThickness="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Path=BorderThickness}"
+                                    Background="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Path=Background}" MinWidth="80"
+                                    Padding="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem}, Path=Padding}" SnapsToDevicePixels="True">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Viewbox x:Name="ViewBoxInternal" VerticalAlignment="Center" HorizontalAlignment="Center" Stretch="Uniform" StretchDirection="Both" MaxWidth="100" MaxHeight="100" Effect="{x:Null}">
+                                        <Image Source="{Binding Image, Converter={StaticResource UriToBitmapConverter}, ConverterParameter=100}" Width="Auto" Height="Auto" Effect="{DynamicResource Shadow.Border.Large}"/>
+                                    </Viewbox>
+
+                                    <Grid Grid.Row="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock x:Name="NumberLabel" Text="{Binding Number, StringFormat={}{0:0}}" Foreground="{DynamicResource Element.Foreground.Gray112}" 
+                                                   HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" Padding="0"/>
+
+                                        <TextBlock x:Name="DelayLabel" Grid.Column="1" Text="{Binding Delay, StringFormat={}{0:0 'ms'}}" Foreground="{DynamicResource Element.Foreground.Gray112}"
+                                                   HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" Padding="0" FontSize="11" FontWeight="Normal" FontStyle="Italic"/>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+                
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ListView}">

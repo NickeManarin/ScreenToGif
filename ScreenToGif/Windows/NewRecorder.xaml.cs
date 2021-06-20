@@ -54,6 +54,7 @@ namespace ScreenToGif.Windows
         private readonly Timer _preStartTimer = new Timer();
         private readonly Timer _followTimer = new Timer();
         private readonly Timer _showBorderTimer = new Timer();
+        private readonly Timer _limitTimer = new Timer();
 
         #region Mouse cursor follow up
 
@@ -190,6 +191,41 @@ namespace ScreenToGif.Windows
 
             if (UserSettings.All.CursorFollowing)
                 Follow();
+            else
+            {
+                await Task.Delay(TimeSpan.FromMilliseconds(500));
+
+                CommandManager.InvalidateRequerySuggested();
+                MoveCommandPanel();
+            }
+
+            //Automation arguments were passed by command line.
+            if (Arguments.Open)
+            {
+                if (Arguments.FrequencyType.HasValue)
+                {
+                    UserSettings.All.CaptureFrequency = Arguments.FrequencyType.Value;
+                    UserSettings.All.LatestFps = Arguments.Frequency;
+                    DetectCaptureFrequency();
+
+                    Arguments.FrequencyType = null;
+                }
+
+                if (Arguments.StartCapture && UserSettings.All.CaptureFrequency >= CaptureFrequency.PerSecond)
+                {
+                    if (Arguments.Limit > TimeSpan.Zero)
+                    {
+                        _limitTimer.Tick += Limit_Elapsed;
+                        _limitTimer.Interval = (int) Math.Min(int.MaxValue, Arguments.Limit.TotalMilliseconds);
+                    }
+
+                    await Record();
+                }
+                else
+                {
+                    Arguments.ClearAutomationArgs();
+                }
+            }
         }
 
         private void Window_Activated(object sender, EventArgs e)
@@ -360,6 +396,9 @@ namespace ScreenToGif.Windows
             WidthIntegerBox.IgnoreValueChanged = false;
             HeightIntegerBox.IgnoreValueChanged = false;
 
+            WidthIntegerBox.Scale = _regionSelection.Scale;
+            HeightIntegerBox.Scale = _regionSelection.Scale;
+
             if (Capture != null)
             {
                 Capture.Left = (int)CaptureRegion.Left;
@@ -474,9 +513,9 @@ namespace ScreenToGif.Windows
                 await StopCapture();
             }
 
-            //Garbage Collector Timer.
             GarbageTimer?.Stop();
             _followTimer?.Stop();
+            _limitTimer?.Stop();
 
             #endregion
 
@@ -602,17 +641,20 @@ namespace ScreenToGif.Windows
             }
 
             _preStartTimer.Stop();
-            
-            if (IsRegionIntersected())
-            {
-                Splash.Dismiss();
-                WindowState = WindowState.Minimized;
-            }
 
+            if (Splash.IsBeingDisplayed())
+                Splash.Dismiss();
+
+            if (IsRegionIntersected())
+                WindowState = WindowState.Minimized;
+            
             Title = "ScreenToGif";
             IsRecording = true;
 
             StartCapture();
+
+            if (Arguments.StartCapture && Arguments.Limit > TimeSpan.Zero)
+                _limitTimer.Start();
 
             Stage = Stage.Recording;
         }
@@ -670,6 +712,16 @@ namespace ScreenToGif.Windows
             MoveCommandPanel();
 
             Visibility = Visibility.Visible;
+        }
+
+        private async void Limit_Elapsed(object sender, EventArgs e)
+        {
+            _limitTimer.Stop();
+
+            if (!IsLoaded || (Stage != Stage.Recording && Stage == Stage.PreStarting))
+                return;
+            
+            await Stop();
         }
 
         #endregion
@@ -781,9 +833,16 @@ namespace ScreenToGif.Windows
 
                 #endregion
 
+                //Command line arguments were sent.
+                if (Arguments.Open && Arguments.Region.Width > 0 && Arguments.Region.Height > 0)
+                {
+                    UserSettings.All.SelectedRegion = Arguments.Region;
+                    Arguments.Region = Rect.Empty;
+                }
+
                 #region Previously selected region
 
-                //If a region was previously selected.
+                    //If a region was previously selected.
                 if (!UserSettings.All.SelectedRegion.IsEmpty)
                 {
                     //Check if the previous selection can be positioned inside a screen.
@@ -811,6 +870,10 @@ namespace ScreenToGif.Windows
 
                 #endregion
             }
+
+            //Change the scale of the sizing controls.
+            WidthIntegerBox.Scale = UserSettings.All.SelectedRegionScale;
+            HeightIntegerBox.Scale = UserSettings.All.SelectedRegionScale;
 
             #region Adjust the position of the main controls
 
@@ -949,6 +1012,7 @@ namespace ScreenToGif.Windows
                         {
                             Stage = Stage.Recording;
                             SetTaskbarButtonOverlay();
+                            Hide();
                             return;
                         }
 
@@ -968,6 +1032,9 @@ namespace ScreenToGif.Windows
                         _regionSelection.HideGuidelines();
                         IsRecording = true;
                         Topmost = true;
+
+                        //Tries to move the command pannel away from the recording area.
+                        MoveCommandPanel(true);
 
                         //Detects a possible intersection of capture region and capture controls.
                         var isIntersecting = IsRegionIntersected();
@@ -994,10 +1061,14 @@ namespace ScreenToGif.Windows
                             return;
                         }
 
+                        Hide();
                         StartCapture();
 
                         Stage = Stage.Recording;
                         SetTaskbarButtonOverlay();
+
+                        if (Arguments.StartCapture && Arguments.Limit > TimeSpan.Zero)
+                            _limitTimer.Start();
 
                         #endregion
 
@@ -1014,6 +1085,9 @@ namespace ScreenToGif.Windows
                         Title = "ScreenToGif";
                         _regionSelection.HideGuidelines();
                         SetTaskbarButtonOverlay();
+
+                        //Tries to move the command pannel away from the recording area.
+                        MoveCommandPanel(true);
 
                         //If it's interaction mode, the capture is done via Snap().
                         if (UserSettings.All.CaptureFrequency == CaptureFrequency.Interaction)
@@ -1047,10 +1121,13 @@ namespace ScreenToGif.Windows
             }
             finally
             {
+                Arguments.ClearAutomationArgs();
+
                 //Wait a bit, then refresh the commands. Some of the commands are dependant of the FrameCount property.
-                await Task.Delay(TimeSpan.FromMilliseconds(GetCaptureInterval() + 200));
+                await Task.Delay(TimeSpan.FromMilliseconds(200));
 
                 CommandManager.InvalidateRequerySuggested();
+                AdjustForWidthChange();
             }
         }
 
@@ -1139,8 +1216,9 @@ namespace ScreenToGif.Windows
                 Stage = Stage.Paused;
                 Title = "ScreenToGif";
 
+                _limitTimer.Stop();
                 PauseCapture();
-
+                
                 FrequencyIntegerUpDown.IsEnabled = true;
                 _regionSelection.DisplayGuidelines();
                 SetTaskbarButtonOverlay();
@@ -1160,6 +1238,7 @@ namespace ScreenToGif.Windows
                 Title = "ScreenToGif - " + LocalizationHelper.Get("S.Recorder.Stopping");
                 Cursor = Cursors.AppStarting;
 
+                _limitTimer.Stop();
                 await StopCapture();
 
                 if ((Stage == Stage.Recording || Stage == Stage.Paused) && Project?.Any == true)
@@ -1212,6 +1291,12 @@ namespace ScreenToGif.Windows
                     Title = "ScreenToGif";
                     Cursor = Cursors.Arrow;
                     RecordControlsGrid.IsEnabled = true;
+
+                    //Wait a bit, then refresh the commands.
+                    await Task.Delay(TimeSpan.FromMilliseconds(200));
+
+                    CommandManager.InvalidateRequerySuggested();
+                    MoveCommandPanel(true);
                 }
             }
         }
@@ -1284,6 +1369,12 @@ namespace ScreenToGif.Windows
 
             DetectCaptureFrequency();
             SetTaskbarButtonOverlay();
+
+            //Wait a bit, then refresh the commands.
+            await Task.Delay(TimeSpan.FromMilliseconds(200));
+
+            CommandManager.InvalidateRequerySuggested();
+            MoveCommandPanel(true);
         }
 
         private async Task PrepareCapture(bool isNew = true)
@@ -1457,8 +1548,9 @@ namespace ScreenToGif.Windows
 
         /// <summary>
         /// Repositions the capture controls near the selected region, in order to stay away from the capture. If no space available on the nearest screen, try others.
+        /// <param name="ignoreCenter">If there's no space left, don't move the panel to the middle.</param>
         /// </summary>
-        private void MoveCommandPanel()
+        private void MoveCommandPanel(bool ignoreCenter = false)
         {
             if (_viewModel.Region.Width < 25 || _viewModel.Region.Height < 25)
                 return;
@@ -1514,6 +1606,16 @@ namespace ScreenToGif.Windows
             if (rightSpace > ActualWidth + 20)
             {
                 MovePanelTo(_viewModel.CurrentMonitor, _viewModel.Region.Right + 10, _viewModel.Region.Top + _viewModel.Region.Height / 2 - ActualHeight / 2);
+                return;
+            }
+
+            if (ignoreCenter)
+            {
+                //If no space left, move the control more to the left (if there's more space available to the left).
+                //This is useful when the command panel is to the left of the recording, but there's no enough space.
+                if (leftSpace > rightSpace && leftSpace > (ActualWidth * 0.6))
+                    MovePanelTo(_viewModel.CurrentMonitor, _viewModel.Region.Left - ActualWidth - 10, _viewModel.Region.Top + _viewModel.Region.Height / 2 - ActualHeight / 2);
+
                 return;
             }
 
@@ -1582,7 +1684,6 @@ namespace ScreenToGif.Windows
         /// <returns></returns>
         private bool IsRegionIntersected()
         {
-            //TODO: It would be best to try to move the record controls away from the capture region before trying to hide it.
             return IsVisible && CaptureRegion.IntersectsWith(new Rect(Left, Top, Width, Height).Scale(_regionSelection.Scale));
         }
 
@@ -1813,6 +1914,12 @@ namespace ScreenToGif.Windows
             {
                 LogWriter.Log(e, "Impossible to set the taskbar button overlay");
             }
+        }
+
+        private void AdjustForWidthChange()
+        {
+            MoveCommandPanel(true);
+            Show();
         }
 
         #endregion

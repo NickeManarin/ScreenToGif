@@ -52,12 +52,14 @@ namespace ScreenToGif.Windows
             _capture.Tick += Normal_Elapsed;
         }
 
-        private void Board_OnLoaded(object sender, RoutedEventArgs e)
+        private void Board_Loaded(object sender, RoutedEventArgs e)
         {
             _dpi = this.Dpi();
 
             WidthIntegerBox.Scale = _dpi / 96d;
             HeightIntegerBox.Scale = _dpi / 96d;
+
+            Arguments.ClearAutomationArgs();
         }
 
         #endregion

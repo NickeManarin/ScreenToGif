@@ -1,10 +1,12 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 using System.Runtime.Serialization;
+using ScreenToGif.Interfaces;
+using ScreenToGif.Model;
 using ScreenToGif.Util;
 
-namespace ScreenToGif.Model
+namespace ScreenToGif.ViewModel.Tasks
 {
-    public class DefaultTaskModel : BindableBase
+    public class BaseTaskViewModel : BindableBase, IPersistent
     {
         #region Variables
 
@@ -54,6 +56,8 @@ namespace ScreenToGif.Model
                         return LocalizationHelper.Get("S.Editor.Image.Border", true);
                     case TaskTypeEnum.Shadow:
                         return LocalizationHelper.Get("S.Editor.Image.Shadow", true);
+                    case TaskTypeEnum.Resize:
+                        return LocalizationHelper.Get("S.Editor.Image.Resize", true);
                     default:
                         return LocalizationHelper.Get("S.Options.Tasks.SelectType");
                 }
@@ -68,7 +72,7 @@ namespace ScreenToGif.Model
 
         public string Details => ToString();
 
-        [IgnoreDataMember] //This attribute is getting ignored.
+        [DataMember(EmitDefaultValue = false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsManual
         {
@@ -76,7 +80,7 @@ namespace ScreenToGif.Model
             set => SetProperty(ref _isManual, value);
         }
 
-        [IgnoreDataMember] //This attribute is getting ignored.
+        [DataMember(EmitDefaultValue = false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Image
         {
@@ -85,9 +89,12 @@ namespace ScreenToGif.Model
         }
 
 
-        public DefaultTaskModel ShallowCopy()
+        public BaseTaskViewModel ShallowCopy()
         {
-            return (DefaultTaskModel) MemberwiseClone();
+            return (BaseTaskViewModel) MemberwiseClone();
         }
+
+        public virtual void Persist()
+        { }
     }
 }

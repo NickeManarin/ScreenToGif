@@ -807,7 +807,7 @@
     <s:String x:Key="S.InsertFrames.Title">Insert Frames</s:String>
     <s:String x:Key="S.InsertFrames.Info">Both sides should have the same size, this window allows you to reposition and resize the image and the canvas. Click to select and resize.</s:String>
     <s:String x:Key="S.InsertFrames.CanvasSize">Canvas size:</s:String>
-    <s:String x:Key="S.InsertFrames.FitCanvas">Fit Image on Canvas</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas">Fit Image&#10;on Canvas</s:String>
     <s:String x:Key="S.InsertFrames.FitCanvas.Info">Resizes the canvas to fit both images inside (from the top left corner).</s:String>
     <s:String x:Key="S.InsertFrames.DifferentSizes">There is a difference between frame sizes. You need to solve this before inserting the frames.</s:String>
     <s:String x:Key="S.InsertFrames.InsertedFrames">New Frame(s)</s:String>
@@ -815,7 +815,7 @@
     <s:String x:Key="S.InsertFrames.ImageSize">Image size:</s:String>
     <s:String x:Key="S.InsertFrames.ImagePosition">Image position:</s:String>
     <s:String x:Key="S.InsertFrames.ResetImageSizePosition">Reset Image Size&#x0d;and Position</s:String>
-    <s:String x:Key="S.InsertFrames.Info2">New frames will be inserted into the current list of frames at the position:</s:String>
+    <s:String x:Key="S.InsertFrames.Info2">New frames will be inserted into the&#10;current list of frames at the position:</s:String>
     <s:String x:Key="S.InsertFrames.Before">Before</s:String>
     <s:String x:Key="S.InsertFrames.After">After</s:String>
     <s:String x:Key="S.InsertFrames.Frame">Frame</s:String>
@@ -1229,16 +1229,18 @@
     <s:String x:Key="S.Clipboard.After">After selected frame</s:String>
     
     <!--Editor • Resize-->
-    <s:String x:Key="S.Resize.CurrentProperties">Current Properties</s:String>
+    <s:String x:Key="S.Resize.Difference">Difference</s:String>
     <s:String x:Key="S.Resize.Dpi">Dpi</s:String>
-    <s:String x:Key="S.Resize.NewProperties">New Properties</s:String>
+    <s:String x:Key="S.Resize.Options">Options</s:String>
+    <s:String x:Key="S.Resize.Pixels">Pixels (px)</s:String>
+    <s:String x:Key="S.Resize.Percent">Percent (%)</s:String>
     <s:String x:Key="S.Resize.Dpi2">DPI:</s:String>
     <s:String x:Key="S.Resize.KeepAspect">Keep the aspect ratio.</s:String>
-    <s:String x:Key="S.Resize.Options">Options</s:String>
-    <s:String x:Key="S.Resize.ScalingQuality">Scaling Quality:</s:String>
-    <s:String x:Key="S.Resize.ScalingQuality.Fant">Fant (higher quality)</s:String>
-    <s:String x:Key="S.Resize.ScalingQuality.Linear">Linear (lower quality)</s:String>
-    <s:String x:Key="S.Resize.ScalingQuality.NearestNeighbor">Nearest neighbor (lower quality and faster)</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality">Quality:</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Fant">Fant • Higher quality</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Linear">Linear • Lower quality</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.NearestNeighbor">Nearest neighbor • Lower quality and faster</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Info">Scaling quality.</s:String>
     <s:String x:Key="S.Resize.Warning">You have to select a different value to apply the Resize action to.</s:String>
     
     <!--Editor • Crop-->

@@ -2,9 +2,9 @@ using System.Windows.Media;
 using ScreenToGif.Settings;
 using ScreenToGif.Util;
 
-namespace ScreenToGif.Model
+namespace ScreenToGif.ViewModel.Tasks
 {
-    public class ShadowModel : DefaultTaskModel
+    public class ShadowViewModel : BaseTaskViewModel
     {
         #region Variables
 
@@ -17,7 +17,7 @@ namespace ScreenToGif.Model
 
         #endregion
 
-        public ShadowModel()
+        public ShadowViewModel()
         {
             TaskType = TaskTypeEnum.Shadow;
         }
@@ -67,9 +67,9 @@ namespace ScreenToGif.Model
                    $"{LocalizationHelper.Get("S.Shadow.Depth")} {Depth}";
         }
 
-        public static ShadowModel Default()
+        public static ShadowViewModel Default()
         {
-            return new ShadowModel
+            return new ShadowViewModel
             {
                 Color = Color.FromArgb(255, 0, 0, 0),
                 BackgroundColor = Color.FromArgb(255, 255, 255, 255),
@@ -80,9 +80,9 @@ namespace ScreenToGif.Model
             };
         }
 
-        public static ShadowModel FromSettings()
+        public static ShadowViewModel FromSettings()
         {
-            return new ShadowModel
+            return new ShadowViewModel
             {
                 Color = UserSettings.All.ShadowColor,
                 BackgroundColor = UserSettings.All.ShadowBackgroundColor,

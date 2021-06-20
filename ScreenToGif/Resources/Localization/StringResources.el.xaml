@@ -695,7 +695,7 @@
     <s:String x:Key="S.InsertFrames.ImageSize">Μέγεθος εικόνας:</s:String>
     <s:String x:Key="S.InsertFrames.ImagePosition">Θέση εικόνας:</s:String>
     <s:String x:Key="S.InsertFrames.ResetImageSizePosition">Επαναφορά μεγέθους εικόνας&#x0d;και θέσης</s:String>
-    <s:String x:Key="S.InsertFrames.Info2">Νέα καρέ θα εισαχθούν στην τρέχουσα λίστα καρέ στη θέση:</s:String>
+    <s:String x:Key="S.InsertFrames.Info2">Νέα καρέ θα εισαχθούν στην τρέχουσα&#10;λίστα καρέ στη θέση:</s:String>
     <s:String x:Key="S.InsertFrames.Before">Πριν</s:String>
     <s:String x:Key="S.InsertFrames.After">Μετά</s:String>
     <s:String x:Key="S.InsertFrames.Frame">Καρέ</s:String>

@@ -155,6 +155,8 @@ namespace ScreenToGif.Windows
         {
             SystemEvents.PowerModeChanged += System_PowerModeChanged;
 
+            Arguments.ClearAutomationArgs();
+
             #region DPI
 
             var source = PresentationSource.FromVisual(this);

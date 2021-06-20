@@ -56,9 +56,9 @@ namespace ScreenToGif
 
             if (version > new Version(4, 7, 2))
                 SetSecurityProtocol();
-            
+
             //Parse arguments.
-            Argument.Prepare(e.Args);
+            Arguments.Prepare(e.Args);
 
             LocalizationHelper.SelectCulture(UserSettings.All.LanguageCode);
             ThemeHelper.SelectTheme(UserSettings.All.MainTheme);
@@ -68,12 +68,12 @@ namespace ScreenToGif
 
             #region Download mode
 
-            if (Argument.IsInDownloadMode)
+            if (Arguments.IsInDownloadMode)
             {
                 var downloader = new Downloader
                 {
-                    DownloadMode = Argument.DownloadMode,
-                    DestinationPath = Argument.DownloadPath
+                    DownloadMode = Arguments.DownloadMode,
+                    DestinationPath = Arguments.DownloadPath
                 };
                 downloader.ShowDialog();
 
@@ -85,7 +85,7 @@ namespace ScreenToGif
 
             #region Settings persistence mode
 
-            if (Argument.IsInSettingsMode)
+            if (Arguments.IsInSettingsMode)
             {
                 SettingsPersistenceChannel.RegisterServer();
                 return;
@@ -98,7 +98,7 @@ namespace ScreenToGif
             //The singleton works on a per-user and per-executable mode.
             //Meaning that a different user and/or a different executable intances can co-exist.
             //Part of this code wont work on debug mode, since the SetForegroundWindow() needs focus on the foreground window calling the method.
-            if (UserSettings.All.SingleInstance)
+            if (UserSettings.All.SingleInstance && !Arguments.NewInstance)
             {
                 try
                 {
@@ -240,36 +240,10 @@ namespace ScreenToGif
 
             #region Startup
 
-            //When starting minimized, the 
-            if (UserSettings.All.StartMinimized)
-                return;
-
-            if (UserSettings.All.StartUp == 4 || Argument.FileNames.Any())
-            {
-                MainViewModel.OpenEditor.Execute(null);
-                return;
-            }
-
-            if (UserSettings.All.StartUp < 1 || UserSettings.All.StartUp > 4)
-            {
-                MainViewModel.OpenLauncher.Execute(null);
-                return;
-            }
-
-            if (UserSettings.All.StartUp == 1)
-            {
-                MainViewModel.OpenRecorder.Execute(null);
-                return;
-            }
-
-            if (UserSettings.All.StartUp == 2)
-            {
-                MainViewModel.OpenWebcamRecorder.Execute(null);
-                return;
-            }
-
-            if (UserSettings.All.StartUp == 3)
-                MainViewModel.OpenBoardRecorder.Execute(null);
+            if (Arguments.Open)
+                MainViewModel.Open.Execute(Arguments.WindownToOpen, true);
+            else
+                MainViewModel.Open.Execute(UserSettings.All.StartUp);
 
             #endregion
         }
@@ -334,7 +308,12 @@ namespace ScreenToGif
         private void SystemEvents_UserPreferenceChanged(object sender, UserPreferenceChangedEventArgs e)
         {
             if (e.Category == UserPreferenceCategory.General)
+            {
                 ThemeHelper.SelectTheme(UserSettings.All.MainTheme);
+                var isSystemUsingDark = ThemeHelper.IsSystemUsingDarkTheme();
+                UserSettings.All.GridColor1 = isSystemUsingDark ? Constants.DarkEven : Constants.VeryLightEven;
+                UserSettings.All.GridColor2 = isSystemUsingDark ? Constants.DarkOdd : Constants.VeryLightOdd;
+            }
         }
 
         private void App_Exit(object sender, ExitEventArgs e)

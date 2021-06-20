@@ -480,14 +480,14 @@ namespace ScreenToGif.Util
                 else
                 {
                     preset.OutputFolder = Path.GetTempPath(); //Get path where the cache is stored instead.
-                    preset.OutputFilename = Guid.NewGuid() + "";
-                    preset.FullPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+                    preset.OutputFilename = Guid.NewGuid() + preset.Extension;
+                    preset.FullPath = Path.Combine(preset.OutputFolder, preset.OutputFilename);
 
                     //If somehow this happens, try again. TODO: File should be created on the spot, to properly prevent this issue.
                     if (File.Exists(Path.Combine(preset.OutputFilename, preset.OutputFilename)))
                     {
-                        preset.OutputFilename = Guid.NewGuid() + "";
-                        preset.FullPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+                        preset.OutputFilename = Guid.NewGuid() + preset.Extension;
+                        preset.FullPath = Path.Combine(preset.OutputFolder, preset.OutputFilename);
                     }
                 }
 

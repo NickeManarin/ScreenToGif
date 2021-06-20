@@ -815,7 +815,7 @@
     <s:String x:Key="S.InsertFrames.ImageSize">Abmessungen:</s:String>
     <s:String x:Key="S.InsertFrames.ImagePosition">Bildposition:</s:String>
     <s:String x:Key="S.InsertFrames.ResetImageSizePosition">Bildgröße und &#10;-position zurücksetzen</s:String>
-    <s:String x:Key="S.InsertFrames.Info2">Neue Frames zu aktueller Bildsequenz bei folgender Position hinzufügen:</s:String>
+    <s:String x:Key="S.InsertFrames.Info2">Neue Frames zu aktueller Bildsequenz&#10;bei folgender Position hinzufügen:</s:String>
     <s:String x:Key="S.InsertFrames.Before">Vor</s:String>
     <s:String x:Key="S.InsertFrames.After">Nach</s:String>
     <s:String x:Key="S.InsertFrames.Frame">Frame</s:String>

@@ -629,7 +629,7 @@
     <s:String x:Key="S.InsertFrames.ImageSize">Bildstorlek:</s:String>
     <s:String x:Key="S.InsertFrames.ImagePosition">Bildposition:</s:String>
     <s:String x:Key="S.InsertFrames.ResetImageSizePosition">Återställ bildstorlek&#10;och position</s:String>
-    <s:String x:Key="S.InsertFrames.Info2">Nya bildrutor vill bli infogade i dn nuvarande listan av bildrutor på den utvalda platsen:	</s:String>
+    <s:String x:Key="S.InsertFrames.Info2">Nya bildrutor vill bli infogade i dn nuvarande&#10;listan av bildrutor på den utvalda platsen:	</s:String>
     <s:String x:Key="S.InsertFrames.Before">Före</s:String>
     <s:String x:Key="S.InsertFrames.After">Efter</s:String>
     <s:String x:Key="S.InsertFrames.Frame">Bildruta</s:String>

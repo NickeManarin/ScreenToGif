@@ -629,7 +629,7 @@
     <s:String x:Key="S.InsertFrames.ImageSize">Tamaño de la imagen:</s:String>
     <s:String x:Key="S.InsertFrames.ImagePosition">Posición de la imagen:</s:String>
     <s:String x:Key="S.InsertFrames.ResetImageSizePosition">Restablecer tamaño&#x0d;y posición de la imagen</s:String>
-    <s:String x:Key="S.InsertFrames.Info2">Los nuevos fotogramas serán insertados en la lista actual de fotogramas en la posición:</s:String>
+    <s:String x:Key="S.InsertFrames.Info2">Los nuevos fotogramas serán insertados en&#10;la lista actual de fotogramas en la posición:</s:String>
     <s:String x:Key="S.InsertFrames.Before">Antes</s:String>
     <s:String x:Key="S.InsertFrames.After">Después</s:String>
     <s:String x:Key="S.InsertFrames.Frame">Fotograma</s:String>

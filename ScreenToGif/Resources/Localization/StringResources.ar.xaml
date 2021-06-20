@@ -629,7 +629,7 @@
     <s:String x:Key="S.InsertFrames.ImageSize">حجم الصورة:</s:String>
     <s:String x:Key="S.InsertFrames.ImagePosition">موقع الصورة:</s:String>
     <s:String x:Key="S.InsertFrames.ResetImageSizePosition">اعاده حجم الصورة&#x0d;والموقع</s:String>
-    <s:String x:Key="S.InsertFrames.Info2">سيتم ادراج اطارات جديده في القائمة الحالية للاطارات في الموقع:</s:String>
+    <s:String x:Key="S.InsertFrames.Info2">سيتم ادراج اطارات جديده في&#10;القائمة الحالية للاطارات في الموقع:</s:String>
     <s:String x:Key="S.InsertFrames.Before">قبل</s:String>
     <s:String x:Key="S.InsertFrames.After">بعد</s:String>
     <s:String x:Key="S.InsertFrames.Frame">اطار</s:String>

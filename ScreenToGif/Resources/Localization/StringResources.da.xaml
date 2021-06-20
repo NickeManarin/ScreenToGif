@@ -629,7 +629,7 @@
     <s:String x:Key="S.InsertFrames.ImageSize">Billedstørrelse:</s:String>
     <s:String x:Key="S.InsertFrames.ImagePosition">Billedposition:</s:String>
     <s:String x:Key="S.InsertFrames.ResetImageSizePosition">Nulstil billede&#10;og placering</s:String>
-    <s:String x:Key="S.InsertFrames.Info2">Nye rammer indsættes i den aktuelle rammeliste på positionen:</s:String>
+    <s:String x:Key="S.InsertFrames.Info2">Nye rammer indsættes i den aktuelle&#10;rammeliste på positionen:</s:String>
     <s:String x:Key="S.InsertFrames.Before">Før</s:String>
     <s:String x:Key="S.InsertFrames.After">Efter</s:String>
     <s:String x:Key="S.InsertFrames.Frame">Ramme</s:String>

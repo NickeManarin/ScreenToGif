@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:n="clr-namespace:ScreenToGif.Controls"
                     xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
@@ -185,15 +185,16 @@
         <Setter Property="Foreground" Value="{DynamicResource Element.Foreground}"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Padding" Value="5,0"/>
 
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type n:ExtendedButton}">
                     <Border x:Name="MainBorder" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" BorderThickness="0">
-                        <Grid x:Name="InnerGrid" Margin="{TemplateBinding Padding}">
+                        <Grid x:Name="InnerGrid">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition Height="Auto"/>
@@ -203,15 +204,15 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Background="{TemplateBinding Icon}" Margin="2" Opacity="{DynamicResource Element.Opacity}"
+                            <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Background="{TemplateBinding Icon}" Margin="3,0,0,0" Opacity="{DynamicResource Element.Opacity}"
                                     Height="{TemplateBinding ContentHeight}" Width="{TemplateBinding ContentWidth}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             
                             <TextBlock Grid.Row="0" Grid.Column="1" x:Name="TextBlockInternal" MaxWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" 
-                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="2,0" Foreground="{TemplateBinding Foreground}"
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" Foreground="{TemplateBinding Foreground}"
                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Text="{TemplateBinding Text}" 
                                        TextWrapping="{TemplateBinding TextWrapping}" Effect="{TemplateBinding Effect}"/>
 
-                            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="KeyGestureTextBlock" Text="{TemplateBinding KeyGesture}" Margin="0,-10,2,0" Padding="0" Height="13"
+                            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="KeyGestureTextBlock" Text="{TemplateBinding KeyGesture}" Margin="0,-10,5,0" Padding="0" Height="13"
                                        Foreground="{DynamicResource Element.Foreground.Gray112}" FontSize="10" HorizontalAlignment="Right"/>
                         </Grid>
                     </Border>
@@ -1200,7 +1201,7 @@
                         <n:ExtendedButton Grid.Column="0" x:Name="ActionButton" Icon="{TemplateBinding Icon}" Text="{TemplateBinding Text}" TextWrapping="{TemplateBinding TextWrapping}"
                                           ContentWidth="{TemplateBinding ContentWidth}" ContentHeight="{TemplateBinding ContentHeight}" Style="{StaticResource Style.Button.Horizontal}"
                                           VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                          Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}"/>
+                                          Padding="{TemplateBinding Padding}" Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}"/>
                         
                         <Separator Grid.Column="1" x:Name="Separator" BorderBrush="{TemplateBinding BorderBrush}" Width="1" Margin="0" Visibility="Hidden"/>
                         

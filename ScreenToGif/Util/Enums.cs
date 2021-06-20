@@ -713,6 +713,12 @@ namespace ScreenToGif.Util
         NearestNeighbor = System.Windows.Media.BitmapScalingMode.NearestNeighbor
     }
 
+    public enum SizeUnits
+    {
+        Pixels,
+        Percent
+    }
+
     /// <summary>
     /// The type of capture area selection.
     /// </summary>

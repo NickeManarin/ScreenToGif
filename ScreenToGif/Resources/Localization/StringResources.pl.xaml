@@ -633,7 +633,7 @@
     <s:String x:Key="S.InsertFrames.ImageSize">Rozmiar obrazu:</s:String>
     <s:String x:Key="S.InsertFrames.ImagePosition">Położenie obrazu:</s:String>
     <s:String x:Key="S.InsertFrames.ResetImageSizePosition">Resetuj rozmiar&#x0d;i położenie obrazu</s:String>
-    <s:String x:Key="S.InsertFrames.Info2">Nowe klatki będą wstawione do obecnej listy klatek w położeniu:</s:String>
+    <s:String x:Key="S.InsertFrames.Info2">Nowe klatki będą wstawione do obecnej&#10;listy klatek w położeniu:</s:String>
     <s:String x:Key="S.InsertFrames.Before">Przed</s:String>
     <s:String x:Key="S.InsertFrames.After">Po</s:String>
     <s:String x:Key="S.InsertFrames.Frame">Klatka</s:String>
