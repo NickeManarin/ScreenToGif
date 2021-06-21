@@ -767,7 +767,7 @@
     <s:String x:Key="S.Preset.Default.Title">默认 ({0})</s:String>
     <s:String x:Key="S.Preset.Default.Description">编码器的默认预设。</s:String>
     <s:String x:Key="S.Preset.Twitter.Title">用于 Twitter ({0})</s:String>
-    <s:String x:Key="S.Preset.Twitter.Description">遵守 Twitter 上传限制 (大小和分辨率除外)。</s:String> 
+    <s:String x:Key="S.Preset.Twitter.Description">遵守 Twitter 上传限制 （大小和分辨率除外）。</s:String> 
     <s:String x:Key="S.Preset.Hevc.Title">HEVC ({0})</s:String>
     <s:String x:Key="S.Preset.Hevc.Description">高效视频编码。</s:String>
     <s:String x:Key="S.Preset.Vp8.Title">VP8 ({0})</s:String>
@@ -1229,16 +1229,18 @@
     <s:String x:Key="S.Clipboard.After">所选帧之后</s:String>
     
     <!--Editor • Resize-->
-    <s:String x:Key="S.Resize.CurrentProperties">当前属性</s:String>
+    <s:String x:Key="S.Resize.Difference">差异</s:String>
     <s:String x:Key="S.Resize.Dpi">DPI</s:String>
-    <s:String x:Key="S.Resize.NewProperties">新属性</s:String>
+    <s:String x:Key="S.Resize.Options">选项</s:String>
+    <s:String x:Key="S.Resize.Pixels">像素 (px)</s:String>
+    <s:String x:Key="S.Resize.Percent">百分率 (%)</s:String>
     <s:String x:Key="S.Resize.Dpi2">DPI：</s:String>
     <s:String x:Key="S.Resize.KeepAspect">保持长宽比</s:String>
-    <s:String x:Key="S.Resize.Options">选项</s:String>
-    <s:String x:Key="S.Resize.ScalingQuality">缩放质量：</s:String>
-    <s:String x:Key="S.Resize.ScalingQuality.Fant">高档（更高质量）</s:String>
-    <s:String x:Key="S.Resize.ScalingQuality.Linear">线性（较低质量）</s:String>
-    <s:String x:Key="S.Resize.ScalingQuality.NearestNeighbor">最近邻（低质量和更快）</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality">质量：</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Fant">高档 • 最高质量</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Linear">线性 • 较低质量</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.NearestNeighbor">最近邻 • 质量更低，速度更快</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Info">缩放质量</s:String>
     <s:String x:Key="S.Resize.Warning">您必须选择其他值以应用“调整大小”操作。</s:String>
     
     <!--Editor • Crop-->
