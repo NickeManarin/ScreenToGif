@@ -1229,16 +1229,18 @@
     <s:String x:Key="S.Clipboard.After">Na geselecteerde frame</s:String>
     
     <!--Editor • Resize-->
-    <s:String x:Key="S.Resize.CurrentProperties">Huidige eigenschappen</s:String>
+    <s:String x:Key="S.Resize.Difference">Verschil</s:String>
     <s:String x:Key="S.Resize.Dpi">Dpi</s:String>
-    <s:String x:Key="S.Resize.NewProperties">Nieuwe eigenschappen</s:String>
+    <s:String x:Key="S.Resize.Options">Options</s:String>
+    <s:String x:Key="S.Resize.Pixels">Pixels (px)</s:String>
+    <s:String x:Key="S.Resize.Percent">Procent (%)</s:String>
     <s:String x:Key="S.Resize.Dpi2">DPI:</s:String>
     <s:String x:Key="S.Resize.KeepAspect">Beeldverhouding behouden.</s:String>
-    <s:String x:Key="S.Resize.Options">Options</s:String>
     <s:String x:Key="S.Resize.ScalingQuality">Schaalkwaliteit:</s:String>
     <s:String x:Key="S.Resize.ScalingQuality.Fant">Fant (hogere kwaliteit)</s:String>
     <s:String x:Key="S.Resize.ScalingQuality.Linear">Lineair (lagere kwaliteit)</s:String>
     <s:String x:Key="S.Resize.ScalingQuality.NearestNeighbor">Naaste buur (lagere kwaliteit en sneller)</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Info">Schaalkwaliteit.</s:String>
     <s:String x:Key="S.Resize.Warning">Kies een andere waarde om de grootte aan te passen.</s:String>
     
     <!--Editor • Crop-->
