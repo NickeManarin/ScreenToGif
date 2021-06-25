@@ -34,7 +34,7 @@
     <s:String x:Key="S.MinHeight">Minimális magasság:</s:String>
     <s:String x:Key="S.AndOr">és / vagy</s:String>
     
-    <!--Warning messages-->
+    <!--Warnings-->
     <s:String x:Key="S.Crash">Ó ne, az alkalmazás összeomlott :(</s:String>
     <s:String x:Key="S.Required">Kötelező mező.</s:String>
     <s:String x:Key="S.Warning.Net.Title">Hiányzó függőség</s:String>
@@ -51,6 +51,14 @@
     <s:String x:Key="S.Exiting.Title">ScreenToGif bezárása</s:String>
     <s:String x:Key="S.Exiting.Instruction">Biztos vagy benne, hogy ki akarsz lépni?</s:String>
     <s:String x:Key="S.Exiting.Message">Minden ablak bezárul, és a tálca ikonja eltávolításra kerül.</s:String>
+
+    <!--Warnings • Graphics engine-->
+    <s:String x:Key="S.Warning.Graphics.Title">Grafikus adapter váltás</s:String>
+    <s:String x:Key="S.Warning.Graphics.Instruction">Válts a megfelelő grafikus adapterre a kiválasztott képernyő rögzítéséhez</s:String>
+    <s:String x:Key="S.Warning.Graphics.Message">A DirectX egyik korlátozása miatt a ScreenToGif-nek ugyanazon a grafikus adapteren kell futnia, mint a rögzítendő képernyőnek.</s:String>
+    <s:String x:Key="S.Warning.Graphics.Action">Váltsd át a ScreenToGif számára beállított grafikus adaptert a Gépház > Rendszer > Kijelző > Grafikai beállítások résznél, vagy az alábbi linkre kattintva.</s:String>
+    <s:String x:Key="S.Warning.Graphics.Action.Legacy">Válts grafikus adaptert a ScreenToGif számára a grafikus adapter grafikai beállításainak megnyitásával.</s:String>
+    <s:String x:Key="S.Warning.Graphics.Switch">Gépház megnyitása</s:String>
     
     <!--Keys-->
     <s:String x:Key="S.Keys.Space">Szóköz</s:String>
@@ -217,6 +225,7 @@
     <s:String x:Key="S.Options.App.Theme.Scheme.Medium">Közepes</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Dark">Sötét</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.VeryDark">Nagyon sötét</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.FollowSystem">Rendszerbeállítás használata</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Custom">Egyéni</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Example">Példa színek.</s:String>
     <s:String x:Key="S.Options.App.Tray">Tálcaikon</s:String>
@@ -294,8 +303,8 @@
     <s:String x:Key="S.Options.Recorder.CaptureChanges.Info">(Egy képkocka csak akkor lesz rögzítve, ha valami módosul a rögzítési területen belül)</s:String>
     <s:String x:Key="S.Options.Recorder.RemoteImprovement">A rögzítési teljesítmény javítása távoli asztali kapcsolaton.</s:String>
     <s:String x:Key="S.Options.Recorder.RemoteImprovement.Info">(Letiltja a réteges ablakrögzítést)</s:String>
-    <s:String x:Key="S.Options.Recorder.AsyncRecording">Engedélyezze az aszinkron felvételt.</s:String>
-    <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(Ez segít csökkenteni a felület akadozását a felvétel közben)</s:String>
+    <s:String x:Key="S.Options.Recorder.ForceGarbageCollection">Memóriatisztítás kikényszerítése rögzítés közben.</s:String>
+    <s:String x:Key="S.Options.Recorder.ForceGarbageCollection.Info">(Csökkenti a memóriahasználatot a rögzítés során, de csökkenti a teljesítményt)</s:String>
     
     <s:String x:Key="S.Options.Recorder.Guidelines">Segédvonalak</s:String>
     <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds">Harmadszabály</s:String>
@@ -315,6 +324,8 @@
     <s:String x:Key="S.Options.Recorder.Compact.Info">(A felvevő vezérlőpanel egy kisebb verzióját jeleníti meg)</s:String>
     <s:String x:Key="S.Options.Recorder.DisplayDiscard">Az elvetés gomb megjelenítése felvétel közben is.</s:String>
     <s:String x:Key="S.Options.Recorder.DisplayDiscard.Info">(Normál esetben csak szüneteltetés alatt látható)</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionImprovement">A képernyőválasztás teljesítményének javítása.</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionImprovement.Info">(Csökkenti az akadozást a képernyőválasztás során a képernyő statikus nézetének megjelenítésével)</s:String>
     
     <s:String x:Key="S.Options.Recorder.RememberSize">A felvételi terület előző méretének megjegyzése.</s:String>
     <s:String x:Key="S.Options.Recorder.RememberPosition">Emlékezzen a felvételi terület előző helyére.</s:String>
@@ -662,6 +673,7 @@
     <s:String x:Key="S.Recorder.Timer.Total">Teljes képkockaszám:</s:String>
     <s:String x:Key="S.Recorder.Timer.Manual">Captured manually:</s:String>
     <s:String x:Key="S.Recorder.Timer.Paused">A rögzítés szünetel.</s:String>
+    <s:String x:Key="S.Recorder.Timer.Imprecise">A számítógéped nem támogatja a pontos rögzítési módot,&#10;ami azt jelenti, hogy a megcélzott képkockasebesség soha nem érhető el.</s:String>
     
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible">Nem lehetett rögzíteni a képernyőt</s:String>
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">Nem lehetett rögzíteni a képernyőt. A rögzítési módszer 5 próbálkozás után nem adott vissza képkockát.</s:String>
@@ -754,6 +766,8 @@
     <s:String x:Key="S.Preset.Autosave.Info">Ennek az előbeállításnak a módosításai automatikusan elmentésre kerülnek.</s:String>
     <s:String x:Key="S.Preset.Default.Title">Alapértelmezett ({0})</s:String>
     <s:String x:Key="S.Preset.Default.Description">A kódoló alapértelmezett beállítása.</s:String>
+    <s:String x:Key="S.Preset.Twitter.Title">Twitterhez ({0})</s:String>
+    <s:String x:Key="S.Preset.Twitter.Description">Tiszteletben tartja a Twitter feltöltési korlátait (kivéve a méret és a felbontás).</s:String>
     <s:String x:Key="S.Preset.Hevc.Title">HEVC ({0})</s:String>
     <s:String x:Key="S.Preset.Hevc.Description">Nagy hatékonyságú videókódolás.</s:String>
     <s:String x:Key="S.Preset.Vp8.Title">VP8 ({0})</s:String>
@@ -764,7 +778,7 @@
     <s:String x:Key="S.Preset.Filename.Project">Projekt</s:String>
 
     <s:String x:Key="S.Preset.Gif.Embedded.High.Title">Kiváló minőség</s:String>
-    <s:String x:Key="S.Preset.Gif.Embedded.High.Description">Inkább alkalmas a több színnel és színátmenettel rendelkező felvételekhez.</s:String>
+    <s:String x:Key="S.Preset.Gif.Embedded.High.Description">Inkább a több színnel és színátmenettel rendelkező felvételekhez alkalmas.</s:String>
     <s:String x:Key="S.Preset.Gif.Embedded.Transparent.Title">Kiváló minőség • Átlátszó háttér</s:String>
     <s:String x:Key="S.Preset.Gif.Embedded.Transparent.Description">Támogatja az animáció mentését átlátszó háttérrel.</s:String>
     <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Title">Kiváló minőség • Grafika</s:String>
@@ -1335,6 +1349,9 @@
 
     <!--Editor • Mouse clicks-->
     <s:String x:Key="S.MouseClicks">Egérkattintások</s:String>
+    <s:String x:Key="S.MouseClicks.Color.Left">Bal gomb színe:</s:String>
+    <s:String x:Key="S.MouseClicks.Color.Middle">Középső gomb színe:</s:String>
+    <s:String x:Key="S.MouseClicks.Color.Right">Jobb gomb színe:</s:String>
     <s:String x:Key="S.MouseClicks.Warning.None">Nincs észlelhető egérkattintás a projekten.</s:String>
     
     <!--Editor • Watermark-->
