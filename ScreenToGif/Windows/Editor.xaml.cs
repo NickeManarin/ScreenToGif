@@ -4688,8 +4688,7 @@ namespace ScreenToGif.Windows
             if (closest.WorkingArea.Bottom < top + 100)
                 top = closest.WorkingArea.Bottom - height;
 
-            if (top > int.MaxValue || top < int.MinValue || left > int.MaxValue || left < int.MinValue ||
-                width > int.MaxValue || width < int.MinValue || height > int.MaxValue || height < int.MinValue)
+            if (top > int.MaxValue || top < int.MinValue || left > int.MaxValue || left < int.MinValue || width > int.MaxValue || width < 0 || height > int.MaxValue || height < 0)
             {
                 var desc = $"On load: {onLoad}\nScale: {this.Scale()}\n\n" +
                            $"Screen: {closest.AdapterName}\nBounds: {closest.Bounds}\n\nTopLeft: {top}x{left}\nWidthHeight: {width}x{height}\n\n" +
