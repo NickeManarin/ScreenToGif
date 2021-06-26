@@ -225,6 +225,7 @@
     <s:String x:Key="S.Options.App.Theme.Scheme.Medium">Средняя</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Dark">Темная</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.VeryDark">Очень темная</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.FollowSystem">Системная</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Custom">Своя</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Example">Пример цвета.</s:String>
     <s:String x:Key="S.Options.App.Tray">Значок в системном трее</s:String>
@@ -1228,16 +1229,18 @@
     <s:String x:Key="S.Clipboard.After">После текущего кадра</s:String>
     
     <!--Editor • Resize-->
-    <s:String x:Key="S.Resize.CurrentProperties">Текущие свойства</s:String>
+    <s:String x:Key="S.Resize.Difference">Разница</s:String>
     <s:String x:Key="S.Resize.Dpi">DPI</s:String>
-    <s:String x:Key="S.Resize.NewProperties">Новые свойства</s:String>
+    <s:String x:Key="S.Resize.Options">Настройки</s:String>
+    <s:String x:Key="S.Resize.Pixels">Пмксели (px)</s:String>
+    <s:String x:Key="S.Resize.Percent">Проценты (%)</s:String>
     <s:String x:Key="S.Resize.Dpi2">DPI:</s:String>
     <s:String x:Key="S.Resize.KeepAspect">Сохранить пропорции.</s:String>
-    <s:String x:Key="S.Resize.Options">Настройки</s:String>
-    <s:String x:Key="S.Resize.ScalingQuality">Качество масштабирования:</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality">Качество:</s:String>
     <s:String x:Key="S.Resize.ScalingQuality.Fant">Fant (высокое качество)</s:String>
     <s:String x:Key="S.Resize.ScalingQuality.Linear">Linear (низкое качество)</s:String>
     <s:String x:Key="S.Resize.ScalingQuality.NearestNeighbor">Nearest neighbor (низкое качество, быстрее)</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Info">Качество масштабирования.</s:String>
     <s:String x:Key="S.Resize.Warning">Необходимо выбрать другое значение, чтобы применить размер.</s:String>
     
     <!--Editor • Crop-->
@@ -1348,6 +1351,9 @@
 
     <!--Editor • Mouse clicks-->
     <s:String x:Key="S.MouseClicks">Нажатия мыши</s:String>
+    <s:String x:Key="S.MouseClicks.Color.Left">Цвет левой кнопки:</s:String>
+    <s:String x:Key="S.MouseClicks.Color.Middle">Цвет средней кнопки:</s:String>
+    <s:String x:Key="S.MouseClicks.Color.Right">Цвет правой кнопки:</s:String>
     <s:String x:Key="S.MouseClicks.Warning.None">В вашем проекте не обнаружено щелчков мыши.</s:String>
     
     <!--Editor • Watermark-->
