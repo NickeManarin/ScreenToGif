@@ -807,7 +807,7 @@
     <s:String x:Key="S.InsertFrames.Title">Frames hinzufügen</s:String>
     <s:String x:Key="S.InsertFrames.Info">Beide Seiten müssen gleiche Höhe/Breite haben. Dieses Fenster erlaubt es Ihnen, den Arbeitsbereich und die Grafik neu zu positionieren und dessen Größe ändern. Klicken Sie zum Auswählen und Ändern der Größe.</s:String>
     <s:String x:Key="S.InsertFrames.CanvasSize">Arbeitsbereichgröße:</s:String>
-    <s:String x:Key="S.InsertFrames.FitCanvas">Grafik in den Arbeitsbereich einpassen</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas">Grafik in den&#10;Arbeitsbereich einpassen</s:String>
     <s:String x:Key="S.InsertFrames.FitCanvas.Info">Ändert die Größe des Arbeitsbereichs so, dass beide Bilder hineinpassen (von der linken oberen Ecke aus).</s:String>
     <s:String x:Key="S.InsertFrames.DifferentSizes">Unterschiedliche Framegrößen. Passen Sie Framegrößen an, bevor Sie Bildsequenzen hinzufügen.</s:String>
     <s:String x:Key="S.InsertFrames.InsertedFrames">Neue Frames</s:String>
@@ -1229,16 +1229,18 @@
     <s:String x:Key="S.Clipboard.After">Nach dem markierten Frame</s:String>
     
     <!--Editor • Resize-->
-    <s:String x:Key="S.Resize.CurrentProperties">Aktuelle Vorgaben</s:String>
+    <s:String x:Key="S.Resize.Difference">Unterschied</s:String>
     <s:String x:Key="S.Resize.Dpi">DPI</s:String>
-    <s:String x:Key="S.Resize.NewProperties">Neue Vorgabe</s:String>
+    <s:String x:Key="S.Resize.Options">Optionen</s:String>
+    <s:String x:Key="S.Resize.Pixels">Pixel (px)</s:String>
+    <s:String x:Key="S.Resize.Percent">Prozent (%)</s:String>
     <s:String x:Key="S.Resize.Dpi2">DPI:</s:String>
     <s:String x:Key="S.Resize.KeepAspect">Seitenverhältnis beibehalten</s:String>
-    <s:String x:Key="S.Resize.Options">Einstellungen</s:String>
-    <s:String x:Key="S.Resize.ScalingQuality">Qualität skalieren:</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality">Qualität:</s:String>
     <s:String x:Key="S.Resize.ScalingQuality.Fant">Fant (höhere Qualität)</s:String>
     <s:String x:Key="S.Resize.ScalingQuality.Linear">Linear (geringere Qualität)</s:String>
     <s:String x:Key="S.Resize.ScalingQuality.NearestNeighbor">Nächster Nachbar (geringere Qualität und schneller)</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Info">Qualität verringern/erhöhen</s:String>
     <s:String x:Key="S.Resize.Warning">Sie müssen einen anderen Wert auswählen, um die Größe zu ändern.</s:String>
     
     <!--Editor • Crop-->
