@@ -1778,7 +1778,7 @@ namespace ScreenToGif.Windows
             }
 
             //Since each frame has a number, upon reordering the numbers must be updated.
-            AdjustFrameNumbers(selection.Select(s => s.NextIndex).Min());
+            AdjustFrameNumbers(selection.Select(s => Math.Min(s.CurrentIndex, s.NextIndex)).Min());
 
             FocusOnSelectedFrames();
             ShowHint("S.Hint.MoveLeft");
@@ -1808,7 +1808,7 @@ namespace ScreenToGif.Windows
             }
 
             //Since each frame has a number, upon reordering the numbers must be updated.
-            AdjustFrameNumbers(selection.Select(s => s.NextIndex).Min());
+            AdjustFrameNumbers(selection.Select(s => Math.Min(s.CurrentIndex, s.NextIndex)).Min());
 
             FocusOnSelectedFrames();
             ShowHint("S.Hint.MoveRight");
