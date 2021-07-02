@@ -415,11 +415,6 @@ namespace ScreenToGif.Util
             var item = list[oldIndex];
 
             list.RemoveAt(oldIndex);
-
-            //The actual index could have shifted due to the removal.
-            if (newIndex > oldIndex)
-                newIndex--;
-
             list.Insert(newIndex, item);
 
             return list;

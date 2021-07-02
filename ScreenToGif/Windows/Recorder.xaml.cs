@@ -1459,8 +1459,19 @@ namespace ScreenToGif.Windows
 
             var regionLeft = (int)Math.Round((Math.Round(Left, MidpointRounding.AwayFromZero) + Constants.LeftOffset) * _viewModel.CurrentMonitor.Scale);
             var regionTop = (int)Math.Round((Math.Round(Top, MidpointRounding.AwayFromZero) + Constants.TopOffset) * _viewModel.CurrentMonitor.Scale);
-            var regionWidth = (int)Math.Round((UserSettings.All.RecorderWidth- Constants.HorizontalOffset) * _viewModel.CurrentMonitor.Scale);
+            var regionWidth = (int)Math.Round((UserSettings.All.RecorderWidth - Constants.HorizontalOffset) * _viewModel.CurrentMonitor.Scale);
             var regionHeight = (int)Math.Round((UserSettings.All.RecorderHeight - Constants.VerticalOffset) * _viewModel.CurrentMonitor.Scale);
+
+            if (regionWidth < 0 || regionHeight < 0)
+            {
+                var desc = $"Scale: {this.Scale()}\n\nScreen: {closest.AdapterName}\nBounds: {closest.Bounds}\n\nTopLeft: {top}x{left}\nWidthHeight: {regionWidth}x{regionHeight}";
+
+                LogWriter.Log("Wrong recorder window sizing", desc);
+
+                Height = UserSettings.All.RecorderHeight = 500;
+                Width = UserSettings.All.RecorderWidth = 250;
+                return;
+            }
 
             _viewModel.Region = new Rect(regionLeft, regionTop, regionWidth, regionHeight);
         }
