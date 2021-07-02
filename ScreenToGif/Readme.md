@@ -10,7 +10,8 @@ _VS 2019 and .Net 4.8 or newer required._
 
 ### Fixed:
 
-♦ The recorder window could crash because of a sizing issue.  
+♦ The recorder window could crash because of a sizing issue.
+♦ It was not possible to properly move frames in the timeline.  
 
 ### Known Bugs:
   
