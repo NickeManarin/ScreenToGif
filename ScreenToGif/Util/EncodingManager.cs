@@ -914,7 +914,7 @@ namespace ScreenToGif.Util
                                     }
                                     case Export.Jpeg:
                                     {
-                                        using (var fileStream = new FileStream(frame.Path, FileMode.Create))
+                                        using (var fileStream = new FileStream(path, FileMode.Create))
                                         {
                                             var jpgEncoder = new JpegBitmapEncoder { QualityLevel = 100 };
                                             jpgEncoder.Frames.Add(BitmapFrame.Create(frame.Path.SourceFrom()));
