@@ -61,7 +61,12 @@
     <s:String x:Key="S.Warning.Graphics.Switch">Abra as Configurações do Windows</s:String>
     
     <!--Keys-->
-    <s:String x:Key="S.Keys.Space">Espaço</s:String>
+    <s:String x:Key="S.Keys.Enter">Enter</s:String>  
+    <s:String x:Key="S.Keys.Esc">Esc</s:String>  
+    <s:String x:Key="S.Keys.Space">Espaço</s:String>  
+
+    <!--Mouse-->
+    <s:String x:Key="S.Mouse.Right">Botão direito</s:String>  
     
     <!--Tray icon-->
     <s:String x:Key="S.NewRecording">Nova gravação de tela</s:String>
