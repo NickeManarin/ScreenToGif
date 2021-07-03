@@ -10,7 +10,7 @@ _VS 2019 and .Net 4.8 or newer required._
 
 ### Fixed:
 
-♦ 
+♦ Some texts were not localizable.  
 
 ### Known Bugs:
   

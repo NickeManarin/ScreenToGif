@@ -61,7 +61,12 @@
     <s:String x:Key="S.Warning.Graphics.Switch">Open Windows Settings</s:String>
     
     <!--Keys-->
+    <s:String x:Key="S.Keys.Enter">Enter</s:String>  
+    <s:String x:Key="S.Keys.Esc">Esc</s:String>  
     <s:String x:Key="S.Keys.Space">Space</s:String>  
+
+    <!--Mouse-->
+    <s:String x:Key="S.Mouse.Right">Right-Click</s:String>  
     
     <!--Tray icon-->
     <s:String x:Key="S.NewRecording">New screen recording</s:String>
