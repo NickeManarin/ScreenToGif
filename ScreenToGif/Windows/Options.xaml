@@ -896,6 +896,17 @@
                                     <TextBlock Text="{DynamicResource S.Options.Editor.General.LimitHistory.Maximum}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="Wrap" 
                                                Foreground="{DynamicResource Element.Foreground.Gray150}"/>
                                 </WrapPanel>
+
+                                <n:ExtendedCheckBox Text="{DynamicResource S.Options.Editor.General.SyncPath.Folder}" Margin="0,3" VerticalAlignment="Top" IsChecked="{Binding Path=SyncPathFolder, Mode=TwoWay}"
+                                                    Info="{DynamicResource S.Options.Editor.General.SyncPath.Folder.Info}"/>
+
+                                <StackPanel Margin="10,0,5,0" IsEnabled="{Binding SyncPathFolder, Mode=OneWay}">
+                                    <n:ExtendedCheckBox Text="{DynamicResource S.Options.Editor.General.SyncPath.Filename}" Margin="0,3" VerticalAlignment="Top" IsChecked="{Binding Path=SyncPathFilename, Mode=TwoWay}"
+                                                        Info="{DynamicResource S.Options.Editor.General.SyncPath.Filename.Info}"/>
+
+                                    <n:ExtendedCheckBox Text="{DynamicResource S.Options.Editor.General.SyncPath.SameType}" Margin="0,3" VerticalAlignment="Top" IsChecked="{Binding Path=SyncPathForSameType, Mode=TwoWay}"
+                                                        Info="{DynamicResource S.Options.Editor.General.SyncPath.SameType.Info}"/>
+                                </StackPanel>
                             </StackPanel>
                         </Expander>
                     </StackPanel>

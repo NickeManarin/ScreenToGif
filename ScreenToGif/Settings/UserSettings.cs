@@ -1460,6 +1460,24 @@ namespace ScreenToGif.Settings
             set => SetValue(value);
         }
 
+        public bool SyncPathFolder
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool SyncPathFilename
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
+        public bool SyncPathForSameType
+        {
+            get => (bool)GetValue();
+            set => SetValue(value);
+        }
+
         #endregion
 
         #region Options • Automated Tasks
