@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:s="clr-namespace:System;assembly=mscorlib"
                     xml:space="preserve">
@@ -19,6 +19,7 @@
     <s:String x:Key="S.Title">タイトル</s:String>
     <s:String x:Key="S.Description">説明</s:String>
     <s:String x:Key="S.SelectColor">色を選択するには、ここをクリックしてください。</s:String>
+    <s:String x:Key="S.Documentation">クリックしてドキュメントへ移動</s:String>
     <s:String x:Key="S.Suppress">(表示を)抑制</s:String>
     <s:String x:Key="S.Preview">プレビュー</s:String>
     <s:String x:Key="S.Size">サイズ</s:String>
@@ -33,7 +34,7 @@
     <s:String x:Key="S.MinHeight">最小高さ:</s:String>
     <s:String x:Key="S.AndOr">および/もしくは</s:String>
     
-    <!--Warning messages-->
+    <!--Warnings-->
     <s:String x:Key="S.Crash">アプリのクラッシュ(・へ・)</s:String>
     <s:String x:Key="S.Required">必須フィールド</s:String>
     <s:String x:Key="S.Warning.Net.Title">依存ソフトが見当たりません。</s:String>
@@ -42,9 +43,22 @@
     <s:String x:Key="S.Warning.Single.Title">単一インスタンスのみ許可</s:String>
     <s:String x:Key="S.Warning.Single.Header">アプリは既に起動しています。</s:String>
     <s:String x:Key="S.Warning.Single.Message">ScreenToGifは既に起動しています。ウィンドウが見当たらないなら、システムトレイを見てください。ScreenToGifのアイコンがそこにあるはずです。</s:String>
+    
+    <!--<s:String x:Key="S.SavingSettings.Title">Saving the settings</s:String>-->
+    <!--<s:String x:Key="S.SavingSettings.Instruction">Would you like to try to save it again?</s:String>-->
+    <s:String x:Key="S.SavingSettings.Message">ScreenToGifには、設定をディスクに保存するための十分な権限がないようです。 &#10;&#10;管理者権限でもう一度試してみますか？</s:String>
+    
     <s:String x:Key="S.Exiting.Title">ScreenToGifを終了中</s:String>
     <s:String x:Key="S.Exiting.Instruction">アプリを終了したいですか？</s:String>
     <s:String x:Key="S.Exiting.Message">すべてのウィンドウは閉じられ、トレイアイコンは削除されます。</s:String>
+
+    <!--Warnings • Graphics engine-->
+    <!--<s:String x:Key="S.Warning.Graphics.Title">Switch Graphics Adapter</s:String>-->
+    <s:String x:Key="S.Warning.Graphics.Instruction">適切なグラフィックスアダプターに切り替えて、選択した画面をキャプチャする</s:String>
+    <s:String x:Key="S.Warning.Graphics.Message">DirectX の制限により、ScreenToGif はキャプチャされる画面と同じグラフィックアダプター上で実行される必要があります。</s:String>
+    <s:String x:Key="S.Warning.Graphics.Action">Windowsの「設定」→「システム」→「ディスプレイ」→「グラフィックス設定」を開くか、以下のリンクをクリックして、ScreenToGifに設定されているグラフィックスアダプターを切り替えます。</s:String>
+    <s:String x:Key="S.Warning.Graphics.Action.Legacy">グラフィックアダプターのグラフィック設定を開いて、ScreenToGif用のグラフィックアダプターを切り替えます。</s:String>
+    <s:String x:Key="S.Warning.Graphics.Switch">Windowsの設定を開く</s:String>
     
     <!--Keys-->
     <s:String x:Key="S.Keys.Space">スペース</s:String>
@@ -124,6 +138,7 @@
     <s:String x:Key="S.Command.Edit">選択項目を編集</s:String>
     <s:String x:Key="S.Command.Save">選択項目を保存</s:String>
     <s:String x:Key="S.Command.Remove">選択項目を削除</s:String>
+    <s:String x:Key="S.Command.ViewHistory">履歴表示</s:String>
     
     <!--StartUp-->
     <s:String x:Key="S.StartUp.Title">ScreenToGif - 起動画面</s:String>
@@ -210,6 +225,7 @@
     <s:String x:Key="S.Options.App.Theme.Scheme.Medium">中間</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Dark">暗い</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.VeryDark">とても暗い</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.FollowSystem">システム設定に準ずる</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Custom">カスタム</s:String>
     <s:String x:Key="S.Options.App.Theme.Scheme.Example">色の例</s:String>
     <s:String x:Key="S.Options.App.Tray">システムトレイアイコン</s:String>
@@ -287,8 +303,8 @@
     <s:String x:Key="S.Options.Recorder.CaptureChanges.Info">キャプチャー領域内で変化があった場合にのみ、フレームがキャプチャーされます。</s:String>
     <s:String x:Key="S.Options.Recorder.RemoteImprovement">リモートデスクトップ接続中のキャプチャ性能を改善</s:String>
     <s:String x:Key="S.Options.Recorder.RemoteImprovement.Info">(レイヤー化したウィンドウのキャプチャを無効)</s:String>
-    <s:String x:Key="S.Options.Recorder.AsyncRecording">非同期録画</s:String>
-    <s:String x:Key="S.Options.Recorder.AsyncRecording.Info">(録画時のラグ低減に有効)</s:String>
+    <!--<s:String x:Key="S.Options.Recorder.ForceGarbageCollection">Force memory cleanup during capture.</s:String>-->
+    <!--<s:String x:Key="S.Options.Recorder.ForceGarbageCollection.Info">(Reduces memory usage during capture, but decreases performance)</s:String>-->
     
     <s:String x:Key="S.Options.Recorder.Guidelines">ガイドライン</s:String>
     <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds">三分割法</s:String>
@@ -308,6 +324,8 @@
     <s:String x:Key="S.Options.Recorder.Compact.Info">(レコーダーのコマンドパネルが小さく表示されます)</s:String>
     <s:String x:Key="S.Options.Recorder.DisplayDiscard">録画中にも廃棄ボタンを表示</s:String>
     <s:String x:Key="S.Options.Recorder.DisplayDiscard.Info">(通常は一時停止中のみ表示されます)</s:String>
+    <!--<s:String x:Key="S.Options.Recorder.SelectionImprovement">Improve screen selection performance.</s:String>-->
+    <!--<s:String x:Key="S.Options.Recorder.SelectionImprovement.Info">(Reduces the lag during screen selection by displaying a static view of the screen)</s:String>-->
     
     <s:String x:Key="S.Options.Recorder.RememberSize">記録領域の大きさを記憶</s:String>
     <s:String x:Key="S.Options.Recorder.RememberPosition">記録領域の位置を記憶</s:String>
@@ -345,6 +363,9 @@
     <s:String x:Key="S.Options.Editor.General.NotifyWhileClosingEditor">エディターを閉じる前に確認 (プロジェクトが開かれている場合)</s:String>
     <s:String x:Key="S.Options.Editor.General.TripleClickSelection">テキスト選択をトリプルクリックにする</s:String>
     <s:String x:Key="S.Options.Editor.General.DrawOutlineOutside">文字の外側にキャプションのアウトラインを描く</s:String>
+    <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind">必要に応じてフレームを間引く</s:String>
+    <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind.Info">(プレビューワーの表示が間に合わない時にフレームを飛ばします)</s:String>
+    <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind.Tooltip">プレビューワーの表示が間に合わない時にフレームを飛ばします</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory">元に戻す/やり直しの履歴を制限する</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Info">(古いアクションは上限に達すると削除されます)</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Maximum">(保持するアクションの最大数)</s:String>
@@ -357,6 +378,7 @@
     <s:String x:Key="S.Options.Tasks.List.Enabled">有効</s:String>
     <s:String x:Key="S.Options.Tasks.Enable">このタスクを有効にします。</s:String>
     <s:String x:Key="S.Options.Tasks.SelectType">タスクを選択</s:String>
+    <s:String x:Key="S.Options.Tasks.SelectType.Info">上からタスクを選択</s:String>
     <s:String x:Key="S.Options.Tasks.Info">タスクは一覧の上から下へ順番に実行されます。&#10;エディターでプロジェクトを開いたときにタスクが実行されます。</s:String>
   
     <!--Options • Shortcuts-->
@@ -431,6 +453,8 @@
     <s:String x:Key="S.Options.Storage.RemoveSettings">設定ファイル削除</s:String>
     <s:String x:Key="S.Options.Storage.OpenSettingsFolder">設定ファイルの保存先フォルダーを開きます。&#10;Ctrlキーを押しながらだと設定ファイルを開きます。(可能であれば)</s:String>
     <s:String x:Key="S.Options.Storage.SettingsInfo">・ 設定ファイル検索順: ローカル ▶ アプリデータ ▶ 標準設定&#10;　・ローカル、アプリデータに設定ファイルがなければ標準設定が使用されます。&#10;　・標準設定が使用された場合、設定ファイルはアプリデータに保存されます。</s:String>
+    <!--<s:String x:Key="S.Options.Storage.DeleteEverything">Delete all files from cache when closing the app.</s:String>-->
+    <!--<s:String x:Key="S.Options.Storage.AskDeleteEverything">Ask me before deleting all files from cache.</s:String>-->
     <s:String x:Key="S.Options.Storage.AutomaticRemoval">古いプロジェクトを自動削除</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemoval.Info">アプリを起動時に 「オプション」 - 「一時ファイル」で設定した日数を経過したプロジェクトは消去されます。</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemovalDays.Info">(この日数を経過した古いプロジェクトは、アプリ起動時に消去/破棄されます)</s:String>
@@ -455,32 +479,83 @@
     <s:String x:Key="S.Options.Upload.Proxy.Port">ポート番号:</s:String>
     <s:String x:Key="S.Options.Upload.Proxy.User">ユーザー名:</s:String>
     <s:String x:Key="S.Options.Upload.Proxy.Password">パスワード:</s:String>
-    <s:String x:Key="S.Options.Upload.Get">OAuthトークン取得</s:String>
-    <s:String x:Key="S.Options.Upload.PasteToken">ここに認証トークンを貼り付けます</s:String>
+    
+    <!--<s:String x:Key="S.Options.Upload.Presets">Upload presets</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Presets.Service">Service</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Presets.Title">Title</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Presets.Description">Description</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Presets.Enabled">Enabled</s:String>-->
+    
+     <!--Options • Upload > Preset-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Title">Upload Service</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Select">Select a service</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Select.Info">Select an upload service above</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Custom">Custom</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Enable">Enable this preset.</s:String>-->
+    
+    <!--<s:String x:Key="S.Options.Upload.Preset.Details">Details</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Name">Name:</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Description">Description:</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Mode">Mode:</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Mode.Anonymous">Anonymous</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Mode.Authenticated">Authenticated</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Authorization">Authorization</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.GetToken">Get token</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Token">Paste the OAuth token here</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Username">Username:</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Password">Password:</s:String>-->
     <s:String x:Key="S.Options.Upload.Preset.Authorize">承認</s:String>
-    <s:String x:Key="S.Options.Upload.Refresh">更新</s:String>
-    <s:String x:Key="S.Options.Upload.Clear">クリア</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Imgur.Anonymous">Imgur(匿名)</s:String>
+    <!--<s:String x:Key="S.Options.Upload.Preset.NotStored">The username and password will not be stored.</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Options">Options</s:String>-->
     <s:String x:Key="S.Options.Upload.Preset.Direct">直接リンクを使用</s:String>
+    <!--<s:String x:Key="S.Options.Upload.Preset.Album">Album</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Warning.Title">You must give this preset an unique name.</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Warning.Repeated">The name is already in use by another upload preset.</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Warning.Authenticate">When in authenticated mode, you must finish the authentication process.</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Warning.Credentials">You must provide your username and password to authorize this app.</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Warning.GetToken">It was not possible to get the authorization token.</s:String>-->
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Token">このアプリを承認するには、認証トークンが必要です。</s:String>
+    <!--<s:String x:Key="S.Options.Upload.Preset.Warning.AuthError">Authorization failed. Check if everything is right and try again in a few seconds.</s:String>-->
+    <s:String x:Key="S.Options.Upload.Preset.Warning.AlbumLoad">アルバムリストを読み込むことができませんでした。</s:String>
+    <!--<s:String x:Key="S.Options.Upload.Preset.Info.Authorized">Authorization completed.</s:String>-->
+    <s:String x:Key="S.Options.Upload.Preset.Info.NotAuthorized">未承認</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Expired">{0}で承認の期限が切れます。</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Valid">承認は{0}まで有効</s:String>
+    
     <s:String x:Key="S.Options.Upload.Preset.Imgur.Gifv">Gifの代わりにGifvリンクを取得</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Imgur.ToAlbum">選択したアルバムにgifをアップロード</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Imgur.Album">アルバム:</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Imgur.AskMe">アップロードの前に確認</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.NotPossible">Imgurの認証トークン取得ページを開けませんでした。</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Warning.Token">このアプリを承認するには、認証トークンが必要です。</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Completed">Imgur承認完了</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Imgur.Auth.Error">Imgurの承認に失敗しました。 間をおいて再試行するか、新しいトークンを取得してください。</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Imgur.Refresh.None">このアプリの承認を更新するには、先に承認プロセスを完了する必要があります。</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Info.NotAuthorized">未承認</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Info.Expired">{0}で承認の期限が切れます。</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Info.Valid">承認は{0}まで有効</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Info.Removed">Imgurの承認が削除されました。</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Warning.AlbumLoad">アルバムリストを読み込むことができませんでした。</s:String>
-    <s:String x:Key="S.Options.Upload.Gfycat.Anonymous">Gfycat(匿名)</s:String>
-    <s:String x:Key="S.Options.Upload.Yandex.Token">OAuth トークン:</s:String>
-    <s:String x:Key="S.Options.Upload.Pick.Destination">宛先選択</s:String>
+    <!--<s:String x:Key="S.Options.Upload.Preset.Imgur.Reload">Reload album list.</s:String>-->
+    
+    <!--<s:String x:Key="S.Options.Upload.Preset.Gfycat.Defaults">Defaults</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Gfycat.AskMe">Ask me to fill out the details of the upload.</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Gfycat.UrlType">Url type:</s:String>-->
+    
+    <!--Options • Upload > Album-->
     <s:String x:Key="S.Options.Upload.Pick.Album">アルバム選択(オプション)</s:String>
     <s:String x:Key="S.Options.Upload.Pick.Album.Info">必要に応じて目的のアルバムを選択することができます:</s:String>
+    
+    <!--Options • Upload > Details-->
+    <!--<s:String x:Key="S.Options.Upload.Pick.Details">Upload details (optional)</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Pick.Details.Info">Upload details</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Pick.Details.Title">Title:</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Pick.Details.Description">Description:</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Pick.Details.Tags">Tags:</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Pick.Details.Tags.Info">Separate tags by using a semi-colon ( ; )</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Pick.Details.Private">Only display for those accessing via direct link.</s:String>-->
+    
+    <!--Options • Upload > History-->
+    <!--<s:String x:Key="S.Options.Upload.History.Title">Upload history</s:String>-->
+    <s:String x:Key="S.Options.Upload.History.Date">日付</s:String>
+    <!--<s:String x:Key="S.Options.Upload.History.Preset">Preset</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.History.Successful">Successful?</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.History.Remove">Delete history entry.</s:String>-->
+    <s:String x:Key="S.Options.Upload.History.Detail.Link">リンク:</s:String>
+    <!--<s:String x:Key="S.Options.Upload.History.Detail.LowerQuality">Lower quality:</s:String>-->
+    <s:String x:Key="S.Options.Upload.History.Detail.DeleteLink">削除リンク:</s:String>
+    <s:String x:Key="S.Options.Upload.History.Delete.Instruction">本当に履歴エントリーを削除してもよろしいですか？</s:String>
+    <s:String x:Key="S.Options.Upload.History.Delete.Message">この操作は元に戻すことができません。 &#10;&#10;選択した履歴エントリを削除しますか？</s:String>
     
     <!--Options • Extras-->
     <s:String x:Key="S.Options.Extras.External">利用可能な外部ツール</s:String>
@@ -598,6 +673,7 @@
     <s:String x:Key="S.Recorder.Timer.Total">総フレーム数:</s:String>
     <s:String x:Key="S.Recorder.Timer.Manual">マニュアル録画:</s:String>
     <s:String x:Key="S.Recorder.Timer.Paused">録画は一時停止されました</s:String>
+    <!--<s:String x:Key="S.Recorder.Timer.Imprecise">Your computer does not support an accurate capture mode,&#10;which means that the target frame rate may never be achieved.</s:String>-->
     
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible">スクリーンをキャプチャすることができませんでした。</s:String>
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">スクリーンをキャプチャすることができませんでした。このキャプチャ方法で5回試行しましたが、フレームを取得できませんでした。</s:String>
@@ -672,15 +748,61 @@
     <s:String x:Key="S.ErrorDialog.Observation">不具合が発生しました。</s:String>
     <s:String x:Key="S.ErrorDialog.Send">レポート送信</s:String>
 
-    <!--FFmpeg preset-->
-    <s:String x:Key="S.FfmpegPreset.Title">FFmpegプリセット</s:String>
-    <s:String x:Key="S.FfmpegPreset.Name">名称</s:String>
-    <s:String x:Key="S.FfmpegPreset.Parameters">パラメータ</s:String>
-    <s:String x:Key="S.FfmpegPreset.Info.SecondPass">2パスでエンコードすると、コマンドのオプションに'-pass 2'が追加されます。</s:String>
-    <s:String x:Key="S.FfmpegPreset.Warning.Name">このプリセットの名称は必須入力です。</s:String>
-    <s:String x:Key="S.FfmpegPreset.Warning.Parameter">このプリセットは、パラメータの入力が必須です。</s:String>
-    <s:String x:Key="S.FfmpegPreset.Warning.SameName">同名のプリセットが既にあります。</s:String>
+    <!--Presets-->
+    <!--<s:String x:Key="S.Preset.Title">Preset</s:String>-->
+    <!--<s:String x:Key="S.Preset.Encoder">Encoder</s:String>-->
+    <!--<s:String x:Key="S.Preset.Name">Name</s:String>-->
+    <!--<s:String x:Key="S.Preset.Description">Description</s:String>-->
+    <!--<s:String x:Key="S.Preset.Other">Other</s:String>-->
+    <!--<s:String x:Key="S.Preset.AutoSave">Automatically save when an option gets modified.</s:String>-->
+    <!--<s:String x:Key="S.Preset.Info.Manual">All changes to this preset settings (encoding and exporting settings) need to be saved manually by pressing the save button.</s:String>-->
+    <!--<s:String x:Key="S.Preset.Info.Automatic">All changes to this preset settings (encoding and exporting settings) will be saved automatically.</s:String>-->
+    <!--<s:String x:Key="S.Preset.Warning.Readonly">Some of the properties of a default preset are read-only.</s:String>-->
+    <!--<s:String x:Key="S.Preset.Warning.Name">You must give a name to this preset.</s:String>-->
+    <!--<s:String x:Key="S.Preset.Warning.SameName">There's already a preset with the same name.</s:String>-->
+    
+    <!--Presets • Listing-->
+    <!--<s:String x:Key="S.Preset.Autosave">Autosaves</s:String>-->
+    <!--<s:String x:Key="S.Preset.Autosave.Info">Changes to this preset are automatically saved.</s:String>-->
+    <!--<s:String x:Key="S.Preset.Default.Title">Default ({0})</s:String>-->
+    <!--<s:String x:Key="S.Preset.Default.Description">Default preset for the encoder.</s:String>-->
+    <!--<s:String x:Key="S.Preset.Twitter.Title">For Twitter ({0})</s:String>-->
+    <!--<s:String x:Key="S.Preset.Twitter.Description">Respects Twitter upload limits (except size and resolution).</s:String>-->
+    <!--<s:String x:Key="S.Preset.Hevc.Title">HEVC ({0})</s:String>-->
+    <!--<s:String x:Key="S.Preset.Hevc.Description">High Efficiency Video Coding.</s:String>-->
+    <!--<s:String x:Key="S.Preset.Vp8.Title">VP8 ({0})</s:String>-->
+    <!--<s:String x:Key="S.Preset.Vp8.Description">Older and better known codec.</s:String>-->
+    <!--<s:String x:Key="S.Preset.Filename.Animation">Animation</s:String>-->
+    <!--<s:String x:Key="S.Preset.Filename.Video">Video</s:String>-->
+    <!--<s:String x:Key="S.Preset.Filename.Image">Image</s:String>-->
+    <!--<s:String x:Key="S.Preset.Filename.Project">Project</s:String>-->
 
+    <!--<s:String x:Key="S.Preset.Gif.Embedded.High.Title">High quality</s:String>-->
+    <!--<s:String x:Key="S.Preset.Gif.Embedded.High.Description">Better suited for recordings with more colors and gradients.</s:String>-->
+    <!--<s:String x:Key="S.Preset.Gif.Embedded.Transparent.Title">High quality • Transparent background</s:String>-->
+    <!--<s:String x:Key="S.Preset.Gif.Embedded.Transparent.Description">Supports saving the animation with a transparent background.</s:String>-->
+    <!--<s:String x:Key="S.Preset.Gif.Embedded.Graphics.Title">High quality • Graphics</s:String>-->
+    <!--<s:String x:Key="S.Preset.Gif.Embedded.Graphics.Description">Better for recordings with a lower quantity of colors.</s:String>-->
+    <!--<s:String x:Key="S.Preset.Gif.Ffmpeg.High.Title">FFmpeg - Higher quality</s:String>-->
+    <!--<s:String x:Key="S.Preset.Gif.Ffmpeg.High.Description">Higher image quality, but with a greater file size.</s:String>-->
+    <!--<s:String x:Key="S.Preset.Gif.Ffmpeg.Low.Title">FFmpeg - Lower quality</s:String>-->
+    <!--<s:String x:Key="S.Preset.Gif.Ffmpeg.Low.Description">Lower image quality, but with a smaller file size.</s:String>-->
+    <!--<s:String x:Key="S.Preset.Gif.Gifski.High.Title">Gifski - Higher quality</s:String>-->
+    <!--<s:String x:Key="S.Preset.Gif.Gifski.High.Description">Higher image quality, but with a greater file size.</s:String>-->
+    <!--<s:String x:Key="S.Preset.Gif.Gifski.Low.Title">Gifski - Lower quality</s:String>-->
+    <!--<s:String x:Key="S.Preset.Gif.Gifski.Low.Description">Lower image quality, but with a smaller file size.</s:String>-->
+    <!--<s:String x:Key="S.Preset.Gif.Gifski.Fast.Title">Gifski - Lower quality and faster encoding</s:String>-->
+    <!--<s:String x:Key="S.Preset.Gif.Gifski.Fast.Description">Even lower image quality, with a faster encoding, but with a smaller file size.</s:String>-->
+    <!--<s:String x:Key="S.Preset.Gif.System.Low.Title">System - Low quality</s:String>-->
+    <!--<s:String x:Key="S.Preset.Gif.System.Low.Description">Low quality but faster encoding.</s:String>-->
+    
+    <!--<s:String x:Key="S.Preset.Apng.Ffmpeg.High.Title">FFmpeg - High quality</s:String>-->
+    <!--<s:String x:Key="S.Preset.Apng.Ffmpeg.High.Description">High image quality and small file size, but slower encoding.</s:String>-->
+    <!--<s:String x:Key="S.Preset.Apng.Ffmpeg.Low.Title">FFmpeg - Lower quality</s:String>-->
+    <!--<s:String x:Key="S.Preset.Apng.Ffmpeg.Low.Description">Lower image quality, small file size and faster encoding.</s:String>-->
+    <!--<s:String x:Key="S.Preset.Webp.Ffmpeg.High.Title">High quality</s:String>-->
+    <!--<s:String x:Key="S.Preset.Webp.Ffmpeg.High.Description">High image quality and small file size.</s:String>-->
+    
     <!--Insert frames-->
     <s:String x:Key="S.InsertFrames.Title">フレームを挿入</s:String>
     <s:String x:Key="S.InsertFrames.Info">両方のサイズが同じである必要があるため、このウィンドウでは画像とキャンバスそれぞれの位置やサイズを変更します。</s:String>
@@ -799,16 +921,23 @@
     <s:String x:Key="S.Editor.File.All">すべての対応ファイル</s:String>
     <s:String x:Key="S.Editor.File.Image">画像</s:String>
     <s:String x:Key="S.Editor.File.Video">動画</s:String>
-    <s:String x:Key="S.Editor.File.Project">ScreenToGifプロジェクト</s:String>
-    <s:String x:Key="S.Editor.File.Gif">Gifアニメーション</s:String>
+
     <s:String x:Key="S.Editor.File.Apng">アニメーションPng</s:String>
+    <s:String x:Key="S.Editor.File.Gif">Gifアニメーション</s:String>
+    <s:String x:Key="S.Editor.File.Webp">Webp形式</s:String>
+    
     <s:String x:Key="S.Editor.File.Avi">Avi形式</s:String>
     <s:String x:Key="S.Editor.File.Mkv">Matroska形式</s:String>
+    <s:String x:Key="S.Editor.File.Mov">Mov形式</s:String>
     <s:String x:Key="S.Editor.File.Mp4">Mp4形式</s:String>
     <s:String x:Key="S.Editor.File.Webm">Webm形式</s:String>
-    <s:String x:Key="S.Editor.File.Wmv">Windows Media Video形式</s:String>
-    <s:String x:Key="S.Editor.File.Image.Zip">zipファイル、選択したすべてのイメージ</s:String>
+    
+    <s:String x:Key="S.Editor.File.Image.Bmp">Bmp形式</s:String>
+    <s:String x:Key="S.Editor.File.Image.Jpeg">Jpeg形式</s:String>
     <s:String x:Key="S.Editor.File.Image.Png">Png画像/全選択画像</s:String>
+    <s:String x:Key="S.Editor.File.Image.Zip">zipファイル、選択したすべてのイメージ</s:String>
+    
+    <s:String x:Key="S.Editor.File.Project">ScreenToGifプロジェクト</s:String>
     <s:String x:Key="S.Editor.File.Project.Zip">Zip形式のScreenToGifプロジェクト</s:String>
     <s:String x:Key="S.Editor.File.Psd">Psd形式</s:String>
     
@@ -1021,7 +1150,6 @@
     <s:String x:Key="S.Editor.List.Frame">フレーム:</s:String>
     <s:String x:Key="S.Editor.List.OpenImage">イメージを開く</s:String>
     <s:String x:Key="S.Editor.List.ExploreFolder">フォルダーを表示</s:String>
-    <s:String x:Key="S.Editor.List.ExportImage">イメージをエクスポート</s:String>
     
     <!--Editor • Go to-->
     <s:String x:Key="S.GoTo.Title">フレームへ移動</s:String>
@@ -1101,16 +1229,18 @@
     <s:String x:Key="S.Clipboard.After">選択されたフレームの後</s:String>
     
     <!--Editor • Resize-->
-    <s:String x:Key="S.Resize.CurrentProperties">現在のプロパティ</s:String>
+    <!--<s:String x:Key="S.Resize.Difference">Difference</s:String>-->
     <s:String x:Key="S.Resize.Dpi">DPI</s:String>
-    <s:String x:Key="S.Resize.NewProperties">新しいプロパティ</s:String>
+    <s:String x:Key="S.Resize.Options">設定</s:String>
+    <!--<s:String x:Key="S.Resize.Pixels">Pixels (px)</s:String>-->
+    <!--<s:String x:Key="S.Resize.Percent">Percent (%)</s:String>-->
     <s:String x:Key="S.Resize.Dpi2">DPI:</s:String>
     <s:String x:Key="S.Resize.KeepAspect">アスペクト比を維持する</s:String>
-    <s:String x:Key="S.Resize.Options">設定</s:String>
     <s:String x:Key="S.Resize.ScalingQuality">スケーリング品質:</s:String>
     <s:String x:Key="S.Resize.ScalingQuality.Fant">ファンタ(高画質)</s:String>
     <s:String x:Key="S.Resize.ScalingQuality.Linear">リニア(低画質)</s:String>
     <s:String x:Key="S.Resize.ScalingQuality.NearestNeighbor">ニアレストネイバー(低画質・高速)</s:String>
+    <!--<s:String x:Key="S.Resize.ScalingQuality.Info">Scaling quality.</s:String>-->
     <s:String x:Key="S.Resize.Warning">リサイズ処理を適用するには、別の値を選択する必要があります。</s:String>
     
     <!--Editor • Crop-->
@@ -1221,6 +1351,9 @@
 
     <!--Editor • Mouse clicks-->
     <s:String x:Key="S.MouseClicks">マウスクリック</s:String>
+    <s:String x:Key="S.MouseClicks.Color.Left">左クリックの色：</s:String>
+    <s:String x:Key="S.MouseClicks.Color.Middle">中クリックの色：</s:String>
+    <s:String x:Key="S.MouseClicks.Color.Right">右クリックの色：</s:String>
     <s:String x:Key="S.MouseClicks.Warning.None">本プロジェクトでマウスのクリックは検出されませんでした。</s:String>
     
     <!--Editor • Watermark-->
@@ -1317,23 +1450,85 @@
 
     <!--Editor • Save as-->
     <s:String x:Key="S.SaveAs.Type">ファイルタイプ</s:String>
-    <s:String x:Key="S.SaveAs.Gif">Gif</s:String>
+    <!--<s:String x:Key="S.SaveAs.Type.Format">The format of the output file.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Type.Preset">The export preset that holds all currently displayed settings.&#10;Manage your export presets via the buttons below.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Type.Animated">Animated image</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Type.Video">Video</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Type.Frames">Frames</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Type.Other">Other</s:String>-->
+    
     <s:String x:Key="S.SaveAs.Apng">Apng</s:String>
-    <s:String x:Key="S.SaveAs.Images">画像 (フレーム)</s:String>
+    <!--<s:String x:Key="S.SaveAs.Apng.Info">Animated Portable Network Graphics</s:String>-->
+    <s:String x:Key="S.SaveAs.Gif">Gif</s:String>
+    <!--<s:String x:Key="S.SaveAs.Gif.Info">Graphics Interchange Format</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Webp">Webp</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Webp.Info">Web Picture</s:String>-->
+    
+    <!--<s:String x:Key="S.SaveAs.Avi">Avi</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Avi.Info">Audio Video Interleave</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Mkv">Mkv</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Mkv.Info">Matroska</s:String> -->
+    <!--<s:String x:Key="S.SaveAs.Mov">Mov</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Mov.Info">QuickTime File Format</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Mp4">Mp4</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Mp4.Info">Mpeg-4</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Webm">Webm</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Webm.Info">Web Movie</s:String>-->
+    
+    <!--<s:String x:Key="S.SaveAs.Bmp">Bmp</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Bmp.Info">Bitmap</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Jpeg">Jpeg</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Jpeg.Info">Joint Photographic Experts Group</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Png">Png</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Png.Info">Portable Network Graphics</s:String>-->
+    
     <s:String x:Key="S.SaveAs.Project">プロジェクト</s:String>
+    <!--<s:String x:Key="S.SaveAs.Project.Info">ScreenToGif project</s:String>-->
     <s:String x:Key="S.SaveAs.Psd">PSD</s:String>
-    <s:String x:Key="S.SaveAs.Video">ビデオ</s:String>
+    <!--<s:String x:Key="S.SaveAs.Psd.Info">Photoshop file</s:String>-->
+    
+    <!--Editor • Save as > Presets-->
+    <s:String x:Key="S.SaveAs.Presets">プリセット:</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Default">デフォルト</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Add">追加</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Save">保存</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Edit">編集</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Remove">削除</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Reset">リセット</s:String>
+    
+    <!--Editor • Save as > Presets > Dialogs-->
+    <!--<s:String x:Key="S.SaveAs.Presets.Ask.Delete.Title">Deleting the Preset</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Presets.Ask.Delete.Instruction">Are you sure that you want to delete the preset?</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Presets.Ask.Delete.Message">This action cannot be undone.&#10;&#10;Would you like to delete the selected preset?</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Presets.Ask.Reset.Title">Reseting the Preset</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Presets.Ask.Reset.Instruction">Are you sure that you want to reset the preset?</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Presets.Ask.Reset.Message">This action cannot be undone.&#10;&#10;Would you like to reset the selected preset to its default settings?</s:String>-->
     
     <!--Editor • Save as > Encoder-->
     <s:String x:Key="S.SaveAs.Encoder">エンコーダー</s:String>
+    <!--<s:String x:Key="S.SaveAs.Encoder.Quantizer">Encoder and quantizer</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Encoder.Info">Encoder responsible for generating the output file.</s:String>-->
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">ScreenToGif</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Tooltip">内蔵エンコーダーでは、以下の減色方法が利用可能です。</s:String>
+    <!--<s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Info">Built-in encoder.</s:String>-->
     <s:String x:Key="S.SaveAs.Encoder.System">システム</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.System.Tooltip">標準のパレットを使用</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.Apng">ScreenToGif</s:String>
-    <s:String x:Key="S.SaveAs.Encoder.Apng.Tooltip">エンコーダーはScreenToGifの開発者により作成されました。</s:String>
+    <!--<s:String x:Key="S.SaveAs.Encoder.System.Info">Encoder made available by the system.</s:String>-->
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
+    <!--<s:String x:Key="S.SaveAs.Encoder.Ffmpeg.Info">External encoder, made by FFmpeg.org.</s:String>-->
     <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
+    <!--<s:String x:Key="S.SaveAs.Encoder.Gifski.Info">External encoder, made by Gif.ski.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Encoder.Options">Encoder options</s:String>-->
+    
+    <!--Editor • Save as > FFmpeg-->
+    <!--<s:String x:Key="S.SaveAs.Ffmpeg.UseParameters">Enable the advanced mode.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Ffmpeg.UseParameters.Info">Manually input the parameters to control the encoder.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Ffmpeg.Parameters">Parameters:</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Ffmpeg.Parameters.Info">List of parameters that will be passed to FFmpeg.&#10;&#10;Special parameters:&#10;{I} is the input path (the frames).&#10;{O} is the output path (the exported file).&#10;{W} is the width of the frame.&#10;{H} is the height of the frame.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Ffmpeg.Parameters.Pass">To encode with 2-pass, simply add '-pass 2'.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Ffmpeg.Preview">Preview</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Ffmpeg.Preview.Info">Preview the parameter list that will be passed to FFmpeg.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Ffmpeg.Help.Code">Codec docs</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Ffmpeg.Help.Format">Format docs</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Ffmpeg.Help.Filters">Filter docs</s:String>-->
     
     <!--Editor • Save as > Gif options-->
     <s:String x:Key="S.SaveAs.GifOptions">Gif オプション</s:String>
@@ -1355,6 +1550,10 @@
     <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">最大色数 (フレーム毎)</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable">グローバルカラーテーブルを使用</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable.Info">画質やサイズが低下する場合があります。</s:String>
+    <!--<s:String x:Key="S.SaveAs.GifOptions.Best">Best</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.GifOptions.Fastest">Fastest</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.GifOptions.Gifski.Faster">Use an even faster encoding process.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.GifOptions.Gifski.Faster.Info">May reduce the quality of the gif.</s:String>-->
     <s:String x:Key="S.SaveAs.GifOptions.Loop">繰り返し:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Looped">ループ型 Gif</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">無限ループ</s:String>
@@ -1368,49 +1567,112 @@
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma">画質やサイズが低下する場合があります。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma.Info">クロマキーを使って、繰り返される画素や変化する画素を置き換えることで、&#10;1フレームあたりの使用色数を減らすことができます。</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.ChromaKey">クロマキー:</s:String>
-
+    <!--<s:String x:Key="S.SaveAs.GifOptions.Dither">Dither:</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.GifOptions.Dither.Scale">Bayer scale:</s:String>-->
+    
     <!--Editor • Save as > Apng options-->
     <s:String x:Key="S.SaveAs.ApngOptions">Apng オプション</s:String>
+    <!--<s:String x:Key="S.SaveAs.ApngOptions.Prediction">Prediction:</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.ApngOptions.Prediction.None">None</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.ApngOptions.Prediction.Sub">Sub</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.ApngOptions.Prediction.Up">Up</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.ApngOptions.Prediction.Average">Average</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.ApngOptions.Prediction.Mixed">Mixed</s:String>-->
     <s:String x:Key="S.SaveAs.ApngOptions.Looped">ループ型 Apng</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions.DetectUnchanged">変更されていないピクセルを検出</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions.PaintTransparent">変更されていないすべてのピクセルを透明色でペイントします。</s:String>
     
-    <!--Editor • Save as > Video/Images/Psd/Project options-->
-    <s:String x:Key="S.SaveAs.VideoOptions">ビデオオプション</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.Fps">Fps:</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.FlipVertically">ビデオを上下反転</s:String>
-    <s:String x:Key="S.SaveAs.ImagesOptions">画像オプション</s:String>
+    <!--Editor • Save as > Webp options-->
+    <!--<s:String x:Key="S.SaveAs.WebpOptions.CodecPreset">Preset:</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.None">None</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Default">Default</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Picture">Picture</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Photo">Photo</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Drawing">Drawing</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Icon">Icon</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Text">Text</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.WebpOptions.Lossless">Use lossless mode.</s:String>-->
+    
+    <!--Editor • Save as > Video options-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Mode">Mode:</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Mode.Normal">Normal</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Mode.Advanced">Advanced</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Mode.Info">Method of configuring the encoder parameters:&#10;Normal: Use standard UI controls.&#10;Advanced: Use a text box to type the parameters.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Codec">Codec:</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Codec.Info">The video encoder, responsible for&#10;converting the raw pixels to the output file.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset">Preset:</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.None">None</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.VerySlow">Very Slow</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Slower">Slower</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Slow">Slow</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Medium">Medium</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Fast">Fast</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Faster">Faster</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.VeryFast">Very Fast</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.SuperFast">Super Fast</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.UltraFast">Ultra Fast</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Quality">Quality</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Balanced">Balanced</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Speed">Speed</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Default">Default</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Lossless">Lossless</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.LosslessHp">Lossless (High Performance)</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Hp">High Performance</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Hq">High Quality</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Bd">Bluray Disk</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.LowLatency">Low Latency</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.LowLatencyHp">Low Latency (High Performance)</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.LowLatencyHq">Low Latency (Hight Quality)</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Info">Encoding speed to compression ratio,&#10;slower presets may give you better compression&#10;(quality per filesize).</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration">Hardware Acc.:</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration.Off">Off</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration.On">On</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration.Auto">Automatic selection</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration.Info">Controls the usage of dedicated hardware (video graphics).&#10;Off: Doesn't use dedicated hardware.&#10;On: Uses dedicated hardware and lets you select special encoders.&#10;Auto: Uses dedicated hardware and automatic selects the right encoder, when possible.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.PixelFormat">Pixel format:</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.PixelFormat.Auto">Automatic</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Vsync">Vsync:</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Vsync.Info">Video sync method.&#10;Auto: Chooses between 1 and 2 depending on muxer (format) capabilities.&#10;Passthrough: Each frame is passed with its timestamps to the encoder.&#10;Constant: Frames will be duplicated and dropped to achieve exactly the requested constant frame rate.&#10;Variable: Frames are passed through with their timestamp or dropped so as to prevent 2 frames from having the same timestamp.&#10;Drop: As passthrough but destroys all timestamps, making the encoder generate fresh timestamps based on framerate.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Vsync.Passthrough">Passthrough</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Vsync.Cfr">Constant framerate</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Vsync.Vfr">Variable framerate</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Vsync.Drop">Drop</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Framerate">Framerate:</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Framerate.Film">Film</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Framerate.Custom">Custom</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Pass">Pass:</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Crf.Info">Constant Rate Factor.&#10;Quality and rate control setting.&#10;Leave it empty if you don't wish to set this property.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.QualityLevel">Quality level:</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.QualityLevel.Info">Smaller values means better quality.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Bitrate">Bitrate:</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Info">Target video bit rate.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Mode">Bitrate mode:</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Mode.Constant">Constant</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Mode.Variable">Variable</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Minimum">Min Rate:</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Minimum.Info">Minimum bitrate tolerance.&#10;Most useful when using CBR mode.&#10;Leave it empty or set to zero &#10;if you don't wish to set this property.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Maximum">Max Rate:</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Maximum.Info">Maximum bitrate tolerance.&#10;Requires the buffer size to be set too.&#10;Leave it empty or set to zero &#10;if you don't wish to set this property.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Buffer">Buffer size:</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Buffer.Info">Rate control buffer size.&#10;Leave it empty or set to zero &#10;if you don't wish to set this property.</s:String>-->
+
+    <!--Editor • Save as > Image options-->
     <s:String x:Key="S.SaveAs.ImageOptions.Zip">画像を圧縮</s:String>
-    <s:String x:Key="S.SaveAs.PsdOptions">PSDオプション</s:String>
+    <!--<s:String x:Key="S.SaveAs.ImageOptions.Zip.Info">Exports the images inside a zipped folder.</s:String>-->
+    
+    <!--Editor • Save as > Psd options-->
     <s:String x:Key="S.SaveAs.PsdOptions.Compress">画像を圧縮</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Compress.Info">ランレングス圧縮アルゴリズムで画像データを圧縮</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline">タイムラインデータを保存</s:String>
     <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Info">時間調整してエクスポート</s:String>
-    <s:String x:Key="S.SaveAs.ProjectOptions">プロジェクトオプション</s:String>
     
-    <s:String x:Key="S.SaveAs.Extras">追加:</s:String>
-    <s:String x:Key="S.SaveAs.Presets">プリセット:</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Default">デフォルト</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Add">追加</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Save">保存</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Edit">編集</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Remove">削除</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Remove.Title">プリセットを削除</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Remove.Header">プリセットを削除したいですか？</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Remove.Message">この操作をアンドゥ(取り消し)できませんが、またあとでプリセットを追加することができます。</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Reset">リセット</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Reset.Title">プリセットをリセット</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Reset.Header">プリセットを初期パラメータにリセットしたいですか？</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Reset.Message">この操作をアンドゥ(取り消し)できませんが、またあとでプリセットを編集しなおすことができます。</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Warning.NoSelection">FFmpegプリセットが選択されていません。一つ選択してください。</s:String>
-    
-    <!--Save As • Save options-->
+    <!--Editor • Save as > Save options-->
     <s:String x:Key="S.SaveAs.SaveOptions">保存オプション</s:String>
+    <!--<s:String x:Key="S.SaveAs.SaveOptions.Partial">Export partially.</s:String>-->
     <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">選択フォルダーにファイルを保存</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">上書き (存在していたら)</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">プロジェクトとしても保存(同フォルダー、同ファイル名)</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">ファイルアップロード</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.UploadDestination">アップロード先</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">クリップボードにコピー</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File">ファイル</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File.Info">出力ファイルをクリップボードにコピー</s:String>
@@ -1423,7 +1685,27 @@
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">エンコード後コマンド実行</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">エンコード後に実行するコマンドを入力します。&#10;複数コマンドを実行するには行を分けて入力します。&#10;{p} = 出力ファイルパス&#10;{f} = 出力フォルダーパス&#x0d;{u} = URL of the uploaded file.</s:String>
     
-    <!--Save As • File-->
+    <!--Editor • Save As > Partial export-->
+    <!--<s:String x:Key="S.SaveAs.Partial">Partial export</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Partial.Mode">Mode:</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Partial.Mode.Info">Select the partial export method.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Partial.Mode.Expression">Expression</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Partial.Mode.Expression.Info">Exports parts of the animation based on a simple expression.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Partial.Mode.Frames">Frame range</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Partial.Mode.Frames.Info">Exports only part of the animation within the frame range.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Partial.Mode.Time">Time range</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Partial.Mode.Time.Info">Exports only part of the animation within the timeframe.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Partial.Mode.Selection">Selection</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Partial.Mode.Selection.Info">Exports only the frames selected in the timeline.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Partial.Mode.Selection.None">No frame selected.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Partial.Mode.Selection.Singular">1 frame selected.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Partial.Mode.Selection.Plural">{0} frames selected.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Partial.From">From:</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Partial.To">To:</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Partial.Expression">Expression:</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Partial.Expression.Info">Type frame numbers separated by a comma or&#10;frame sequences separated by a minus sign:&#10;1, 3, 4, 6 - 9</s:String>-->
+    
+    <!--Editor • Save as > File-->
     <s:String x:Key="S.SaveAs.File">保存先 *</s:String>
     <s:String x:Key="S.SaveAs.File.Location">保存先フォルダー</s:String>
     <s:String x:Key="S.SaveAs.File.SelectFolder">出力フォルダを選択</s:String>
@@ -1435,8 +1717,15 @@
     <s:String x:Key="S.SaveAs.File.Decrease">ファイル番号減少</s:String>
     <s:String x:Key="S.SaveAs.File.Exists">同名ファイルが存在します。</s:String>
     <s:String x:Key="S.SaveAs.File.Clipboard">クリップボードへ保存</s:String>
+    
+    <!--Editor • Save as > Warnings-->
     <s:String x:Key="S.SaveAs.Warning.Type">ファイルの保存先(フォルダー、クリップボード、アップロード先)を選択する必要があります。</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Extension">ファイルの拡張子が選択されていません。</s:String>
+    <!--<s:String x:Key="S.SaveAs.Warning.Ffmpeg.Empty">When selecting the advanced mode, you must type the parameters in the parameters field.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Warning.Ffmpeg.MissingPath">The special parameters {I} (input) and/or {O} (output) are missing from the parameters field.</s:String>-->
     <s:String x:Key="S.SaveAs.Warning.Commands.Empty">エンコード後コマンド実行には、フィールドに何か入力する必要があります。</s:String>
+    <!--<s:String x:Key="S.SaveAs.Warning.Partial.NoSelection">You must select at least one frame when having the option to export only selected frames.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Warning.Partial.InvalidExpression">The expression to partially export the project is invalid.</s:String>-->
     <s:String x:Key="S.SaveAs.Warning.Upload.None">アップロードサービスが選択されていません。対象を選択する必要があります。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Upload.NotAuthorized">未承認のため、選択したサービスにアップロードすることはできません。 「オプション」 - 「アップロードサービス」でアプリを承認してください。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Copy.Link">ファイルをアップロードするように設定していないため、リンクをコピーするオプションを選択することはできません。</s:String>
@@ -1446,12 +1735,37 @@
     <s:String x:Key="S.SaveAs.Warning.Filename">ファイル名を選択する必要があります。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Filename.Invalid">出力ファイル名に無効な文字が含まれています。有効なファイル名を選択してください。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Overwrite">ファイルが存在します。上書きを選択するか別の名前を使ってください。</s:String>
+    <!--<s:String x:Key="S.SaveAs.Warning.Overwrite.Project">There's already a project with the same filename. Set to overwrite or pick another filename or folder.</s:String>-->
     <s:String x:Key="S.SaveAs.Warning.Canceled">操作はキャンセルされました。</s:String>
     
-    <!--SaveAs • Export-->
+    <!--Editor • Save As > Upload-->
+    <!--<s:String x:Key="S.SaveAs.Upload">Upload</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Upload.Info">Select the upload preset, which has details about the service in use for upload.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Upload.Limit">This upload service imposes limits.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Upload.Add">Add a new upload preset.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Upload.Edit">Edit upload preset settings.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Upload.History">View the upload history of this preset.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Upload.Remove">Remove the currently selected upload preset.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Upload.Select.Title">Select an upload preset</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Upload.Select.Description">Pick one from this list.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Upload.Unavailable.Title">No upload preset available for this format</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Upload.Unavailable.Description">Add a preset by using the button bellow.</s:String>-->
+    
+    <!--Editor • Save as > Upload > Dialogs-->
+    <!--<s:String x:Key="S.SaveAs.Upload.Ask.Delete.Title">Deleting the Upload Preset</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Upload.Ask.Delete.Instruction">Are you sure that you want to delete the upload preset?</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Upload.Ask.Delete.Message">This action cannot be undone.&#10;&#10;Would you like to delete the selected upload preset?</s:String>-->
+    
+    <!--Save As • Dialogs-->
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Title">フレームをエクスポート</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">フレームをエクスポートしますか？</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">この操作は、{0}個のフレームを選択したフォルダーに直接エクスポートします。</s:String>
+    
+    <!--Command Preview-->
+    <!--<s:String x:Key="S.CommandPreviewer.Title">Command Previewer</s:String>-->
+    <!--<s:String x:Key="S.CommandPreviewer.Command">Command</s:String>-->
+    <s:String x:Key="S.CommandPreviewer.Input">入力ディレクトリ</s:String>
+    <s:String x:Key="S.CommandPreviewer.Output">出力ディレクトリ</s:String>
     
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">フィードバック</s:String>
