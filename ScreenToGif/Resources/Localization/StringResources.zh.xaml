@@ -55,13 +55,18 @@
     <!--Warnings • Graphics engine-->
     <s:String x:Key="S.Warning.Graphics.Title">切换图形适配器</s:String>
     <s:String x:Key="S.Warning.Graphics.Instruction">切换到正确的图形适配器，以捕获所选的屏幕</s:String>
-    <s:String x:Key="S.Warning.Graphics.Message">由于DirectX的限制，ScreenToGif必须与被捕获的屏幕在同一个图形适配器上运行。</s:String>
-    <s:String x:Key="S.Warning.Graphics.Action">打开 Windows 设置 > 系统 > 显示 > 图形设置，或点击下面的链接，为ScreenToGif切换图形适配器设置。</s:String>
+    <s:String x:Key="S.Warning.Graphics.Message">由于 DirectX 的限制，ScreenToGif 必须与被捕获的屏幕在同一个图形适配器上运行。</s:String>
+    <s:String x:Key="S.Warning.Graphics.Action">打开 Windows 设置 > 系统 > 显示 > 图形设置，或点击下面的链接，为 ScreenToGif 切换图形适配器设置。</s:String>
     <s:String x:Key="S.Warning.Graphics.Action.Legacy">打开你的图形适配器的图形设置，为ScreenToGif切换图形适配器。</s:String>
     <s:String x:Key="S.Warning.Graphics.Switch">打开 Windows 设置</s:String>
     
     <!--Keys-->
     <s:String x:Key="S.Keys.Space">空格键</s:String>
+    <s:String x:Key="S.Keys.Enter">回车键</s:String>
+    <s:String x:Key="S.Keys.Esc">Esc键</s:String>
+    
+    <!--Mouse-->
+    <s:String x:Key="S.Mouse.Right">右键单击</s:String>
     
     <!--Tray icon-->
     <s:String x:Key="S.NewRecording">新建屏幕录制</s:String>
@@ -369,6 +374,12 @@
     <s:String x:Key="S.Options.Editor.General.LimitHistory">对撤消/重做历史记录添加限制</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Info">（达到限制后，较旧的操作将被删除）</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Maximum">（存储的最大操作数量）</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Folder">在预设之间同步输出文件夹</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Folder.Info">（预设将使用相同的输出路径）</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Filename">同时同步文件名</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Filename.Info">（预设也将使用相同的文件名）</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.SameType">仅在相同文件类型的预设之间同步</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.SameType.Info">（只有相同文件类型的预设才会同步）</s:String>
     
     <!--Options • Tasks-->
     <s:String x:Key="S.Options.Tasks.Title">自动化任务</s:String>
