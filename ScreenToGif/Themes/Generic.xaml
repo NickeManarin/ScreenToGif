@@ -2863,13 +2863,13 @@
 
                         <n:ExtendedUniformGrid x:Name="StatusControlGrid" Columns="3" Cursor="Arrow" Visibility="Hidden" Grid.ZIndex="9" Background="{DynamicResource Element.Background}">
                             <n:ExtendedButton x:Name="AcceptButton" Text="{DynamicResource S.Recorder.Accept}" ContentWidth="22" ContentHeight="22" Style="{DynamicResource Style.Button.Horizontal.White}" 
-                                              Icon="{DynamicResource Vector.Ok}" ToolTip="Enter" ToolTipService.Placement="Bottom" Height="30" Padding="4"/>
+                                              Icon="{DynamicResource Vector.Ok}" ToolTip="{DynamicResource S.Keys.Enter}" ToolTipService.Placement="Bottom" Height="30" Padding="4"/>
 
                             <n:ExtendedButton x:Name="RetryButton" Text="{DynamicResource S.Recorder.Retry}" ContentWidth="22" ContentHeight="22" Style="{DynamicResource Style.Button.Horizontal.White}" 
-                                              Icon="{DynamicResource Vector.Synchronize}" ToolTip="Right-Click" ToolTipService.Placement="Bottom" Height="30" Padding="4"/>
+                                              Icon="{DynamicResource Vector.Synchronize}" ToolTip="{DynamicResource S.Mouse.Right}" ToolTipService.Placement="Bottom" Height="30" Padding="4"/>
 
                             <n:ExtendedButton x:Name="CancelButton" Text="{DynamicResource S.Cancel}" ContentWidth="22" ContentHeight="22" Style="{DynamicResource Style.Button.Horizontal.White}" 
-                                              Icon="{DynamicResource Vector.Cancel}" ToolTip="Esc" ToolTipService.Placement="Bottom" Height="30" Padding="4"/>
+                                              Icon="{DynamicResource Vector.Cancel}" ToolTip="{DynamicResource S.Keys.Esc}" ToolTipService.Placement="Bottom" Height="30" Padding="4"/>
                         </n:ExtendedUniformGrid>
 
                         <Grid x:Name="SizeGrid" Grid.ZIndex="1" Background="#75000000" Visibility="Hidden">

@@ -61,7 +61,12 @@
     <s:String x:Key="S.Warning.Graphics.Switch">Open Windows Settings</s:String>
     
     <!--Keys-->
+    <s:String x:Key="S.Keys.Enter">Enter</s:String>  
+    <s:String x:Key="S.Keys.Esc">Esc</s:String>  
     <s:String x:Key="S.Keys.Space">Space</s:String>  
+
+    <!--Mouse-->
+    <s:String x:Key="S.Mouse.Right">Right-Click</s:String>  
     
     <!--Tray icon-->
     <s:String x:Key="S.NewRecording">New screen recording</s:String>
@@ -369,6 +374,12 @@
     <s:String x:Key="S.Options.Editor.General.LimitHistory">Impose a limit to the undo/redo history.</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Info">(Older actions will be removed when the limit is reached)</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Maximum">(Maximum number of actions stored)</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Folder">Sync the output folder among presets.</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Folder.Info">(Presets will use the same output path)</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Filename">Also sync the filename.</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Filename.Info">(Presets will also use the same filename)</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.SameType">Only sync among presets of the same file type.</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.SameType.Info">(Only presets of the same file type will be in sync)</s:String>
     
     <!--Options • Tasks-->
     <s:String x:Key="S.Options.Tasks.Title">Automated Task</s:String>

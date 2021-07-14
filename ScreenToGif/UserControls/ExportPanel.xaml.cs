@@ -663,6 +663,25 @@ namespace ScreenToGif.UserControls
             return true;
         }
 
+        private void SyncPath()
+        {
+            if (CurrentPreset == null || !UserSettings.All.SyncPathFolder)
+                return;
+
+            foreach (var preset in UserSettings.All.ExportPresets?.OfType<ExportPreset>() ?? new List<ExportPreset>())
+            {
+                if (UserSettings.All.SyncPathForSameType && preset.Type != CurrentPreset.Type)
+                    continue;
+
+                preset.OutputFolder = CurrentPreset.OutputFolder;
+
+                if (!UserSettings.All.SyncPathFilename)
+                    continue;
+
+                preset.OutputFilename = CurrentPreset.OutputFilename;
+            }
+        }
+
         public async Task<bool> IsValid()
         {
             #region Validate preset specific properties
@@ -834,6 +853,7 @@ namespace ScreenToGif.UserControls
                 grid.Visibility = Visibility.Collapsed;
 
             SetPresetAsLastSelected(selected);
+            SyncPath();
 
             //Set encoder.
             EncoderComboBox.SelectedValue = selected.Encoder;
@@ -1565,6 +1585,8 @@ namespace ScreenToGif.UserControls
 
         private void ExportPanel_Unloaded(object sender, RoutedEventArgs e)
         {
+            SyncPath();
+
             UserSettings.Save();
         }
 

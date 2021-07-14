@@ -138,6 +138,9 @@
     <s:Boolean x:Key="DropFramesDuringPreviewIfBehind">False</s:Boolean>
     <s:Boolean x:Key="SetHistoryLimit">True</s:Boolean>
     <s:Int32 x:Key="HistoryLimit">50</s:Int32>
+    <s:Boolean x:Key="SyncPathFolder">True</s:Boolean>
+    <s:Boolean x:Key="SyncPathFilename">True</s:Boolean>
+    <s:Boolean x:Key="SyncPathForSameType">True</s:Boolean>
     
     <!--Options • Automated Tasks-->
     <c:ArrayList Capacity="1" x:Key="AutomatedTasksList">

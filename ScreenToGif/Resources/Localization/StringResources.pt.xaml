@@ -61,7 +61,12 @@
     <s:String x:Key="S.Warning.Graphics.Switch">Abra as Configurações do Windows</s:String>
     
     <!--Keys-->
-    <s:String x:Key="S.Keys.Space">Espaço</s:String>
+    <s:String x:Key="S.Keys.Enter">Enter</s:String>  
+    <s:String x:Key="S.Keys.Esc">Esc</s:String>  
+    <s:String x:Key="S.Keys.Space">Espaço</s:String>  
+
+    <!--Mouse-->
+    <s:String x:Key="S.Mouse.Right">Botão direito</s:String>  
     
     <!--Tray icon-->
     <s:String x:Key="S.NewRecording">Nova gravação de tela</s:String>
@@ -369,6 +374,12 @@
     <s:String x:Key="S.Options.Editor.General.LimitHistory">Impor um limite para o histórico de desfazer/refazer.</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Info">(Ações mais antigas serão removidas quando o limite for alcançado)</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Maximum">(Número máximo de ações armazenadas)</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Folder">Sincronize a pasta de exportação entre os perfis.</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Folder.Info">(Os perfis usarão a mesma pasta de exportação)</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Filename">Sincronize também o nome do arquivo.</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Filename.Info">(Os perfis também usarão o mesmo nome de arquivo)</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.SameType">Sincronize apenas entre perfis do mesmo tipo de arquivo.</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.SameType.Info">(Apenas perfis do mesmo tipo de arquivo estarão em sincronia)</s:String>
     
     <!--Options • Tasks-->
     <s:String x:Key="S.Options.Tasks.Title">Tarefas Automáticas</s:String>

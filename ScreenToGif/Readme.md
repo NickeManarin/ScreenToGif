@@ -4,14 +4,13 @@ This is the current project of ScreenToGif.
 
 _VS 2019 and .Net 4.8 or newer required._
 
-## What's new? (Version 2.32.1)
+## What's new? (Version 2.33)
 
-• Nothing yet.
+• Added options to sync output folder and filename among presets (enabled by default).  
 
 ### Fixed:
 
-♦ The recorder window could crash because of a sizing issue.
-♦ It was not possible to properly move frames in the timeline.  
+♦ Some texts were not localizable.  
 
 ### Known Bugs:
   
