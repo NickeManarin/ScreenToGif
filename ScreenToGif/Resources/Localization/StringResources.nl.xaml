@@ -61,7 +61,12 @@
     <s:String x:Key="S.Warning.Graphics.Switch">Windows Instellingen openen</s:String>
     
     <!--Keys-->
+    <s:String x:Key="S.Keys.Enter">Enter</s:String>
+    <s:String x:Key="S.Keys.Esc">Esc</s:String>
     <s:String x:Key="S.Keys.Space">Spatie</s:String>
+
+    <!--Mouse-->
+    <s:String x:Key="S.Mouse.Right">Rechtermuisklik</s:String>
     
     <!--Tray icon-->
     <s:String x:Key="S.NewRecording">Nieuwe Schermopname</s:String>
@@ -369,6 +374,12 @@
     <s:String x:Key="S.Options.Editor.General.LimitHistory">Leg een limiet op aan de geschiedenis van ongedaan maken/opnieuw uitvoeren.</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Info">(Oudere acties worden verwijderd wanneer de limiet is bereikt)</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Maximum">(Maximaal aantal opgeslagen acties)</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Folder">De uitvoermap met de voorinstellingen synchroniseren.</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Folder.Info">(Voorinstellingen gebruiken hetzelfde uitvoerpad)</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Filename">Bestandsnaam ook synchroniseren.</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Filename.Info">(Voorinstellingen gebruiken ook dezelfde bestandsnaam)</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.SameType">Alleen voorinstellingen van hetzelfde bestandstype synchroniseren.</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.SameType.Info">(Alleen voorinstellingen van hetzelfde bestandstype worden gesynchroniseerd)</s:String>
     
     <!--Options • Tasks-->
     <s:String x:Key="S.Options.Tasks.Title">Taak</s:String>
