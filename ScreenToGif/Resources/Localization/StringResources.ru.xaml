@@ -61,7 +61,12 @@
     <s:String x:Key="S.Warning.Graphics.Switch">Открыть настройки Windows</s:String>
     
     <!--Keys-->
-    <s:String x:Key="S.Keys.Space">Пробел</s:String>  
+    <s:String x:Key="S.Keys.Enter">Enter</s:String>  
+    <s:String x:Key="S.Keys.Esc">Esc</s:String>  
+    <s:String x:Key="S.Keys.Space">Space</s:String>  
+
+    <!--Mouse-->
+    <s:String x:Key="S.Mouse.Right">Щелчок  ПКМ</s:String>  
     
     <!--Tray icon-->
     <s:String x:Key="S.NewRecording">Новая запись с экрана</s:String>
@@ -369,6 +374,12 @@
     <s:String x:Key="S.Options.Editor.General.LimitHistory">Лимит истории отмен/повторов,</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Info">будут удаляться более старые действия.</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Maximum">Максимум сохраненных действий.</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Folder">Синхронизировать папку вывода в пресетах.</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Folder.Info">(В пресетах будет одинаковый путь вывода)</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Filename">Также синхронизировать имя файла.</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Filename.Info">(В пресетах будет одинаковое имя файла)</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.SameType">Синхронизировать только пресеты с одинаковыми типами файла.</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.SameType.Info">(Синхронизировать только пресеты с одинаковыми типами файла)</s:String>
     
     <!--Options • Tasks-->
     <s:String x:Key="S.Options.Tasks.Title">Автозадача</s:String>
