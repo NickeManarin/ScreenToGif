@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Threading.Tasks;
 using System.Windows;
+
 using ScreenToGif.Model;
 
 namespace ScreenToGif.Capture
@@ -15,7 +16,7 @@ namespace ScreenToGif.Capture
         public bool WasStarted { get; set; }
         public int FrameCount { get; set; }
         public int MinimumDelay { get; set; }
-        
+
         public int Left { get; set; }
         public int Top { get; set; }
 
@@ -66,9 +67,16 @@ namespace ScreenToGif.Capture
 
         #endregion
 
+        /// <summary>
+        /// This destructor is only for someone who forgets to release
+        /// managed things when generating lots of them. When the destructor
+        /// function is called, this object will never be useful, so we don't
+        /// need to care about when/how it is released or block the finalizer
+        /// thread from doing anything else behind.
+        /// </summary>
         ~BaseCapture()
         {
-            Dispose().Wait();
+            Dispose(false);
         }
 
         public virtual void Start(int delay, int left, int top, int width, int height, double scale, ProjectInfo project)
@@ -95,12 +103,14 @@ namespace ScreenToGif.Capture
             {
                 try
                 {
-                    while (true)
-                        Save(BlockingCollection.Take());
-                }
-                catch (InvalidOperationException)
-                {
-                    //It means that Take() was called on a completed collection.
+                    FrameInfo fi = null;
+
+                    // Try to fetch the next FrameInfo until
+                    // it's empty
+                    while (BlockingCollection.TryTake(out fi))
+                    {
+                        Save(fi);
+                    }
                 }
                 catch (Exception e)
                 {
@@ -147,23 +157,51 @@ namespace ScreenToGif.Capture
             return showCursor ? CaptureWithCursorAsync(frame) : CaptureAsync(frame);
         }
 
+        /// <summary>
+        /// Safely release all the managed things.
+        /// </summary>
         public virtual async Task Stop()
         {
             if (!WasStarted)
                 return;
 
-            //Stop the consumer thread.
-            BlockingCollection.CompleteAdding();
-
-            await Task.WhenAll(_task);
+            using (_task)
+            {
+                // Stop adding things into the BlockingCollection
+                // and mark it finished
+                BlockingCollection.CompleteAdding();
+                await _task;
+                using (BlockingCollection) { }
+            }
 
             WasStarted = false;
         }
 
-        public virtual async Task Dispose()
+        /// <summary>
+        /// The function is used to make sure whether you're calling to
+        /// release the managed sources or not.
+        /// If yes, after releasing managed things, DON'T let GC call
+        /// destructor again, directly GC them.
+        /// If not, this means the destructor function will call it at
+        /// some time, we should let the destructor function executed first
+        /// to help us release managed things first and then release the whole
+        /// object of this itself.
+        /// </summary>
+        /// <param name="isManualReleased">
+        /// A flag to notify whether you're calling it manually or
+        /// called by the destructor.
+        /// </param>
+        protected virtual async Task Dispose(bool isManualReleased)
         {
             if (WasStarted)
                 await Stop();
+
+            if (isManualReleased)
+                GC.SuppressFinalize(this);
+        }
+        public virtual async Task Dispose()
+        {
+            await Dispose(true);
         }
     }
 }
