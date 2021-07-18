@@ -61,7 +61,12 @@
     <s:String x:Key="S.Warning.Graphics.Switch">開啟 Windows 設定</s:String>
     
     <!--Keys-->
+    <s:String x:Key="S.Keys.Enter">Enter 鍵</s:String>
+    <s:String x:Key="S.Keys.Esc">退出鍵</s:String>
     <s:String x:Key="S.Keys.Space">空白鍵</s:String>
+
+    <!--Mouse-->
+    <s:String x:Key="S.Mouse.Right">右鍵單擊</s:String>
     
     <!--Tray icon-->
     <s:String x:Key="S.NewRecording">新增螢幕錄製</s:String>
@@ -369,6 +374,12 @@
     <s:String x:Key="S.Options.Editor.General.LimitHistory">對還原/重做歷史記錄添加上限</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Info">（達到上限後，較舊的操作將被刪除）</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Maximum">（儲存的最大操作數量）</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Folder">在預置設定之間同步輸出資料夾</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Folder.Info">（預置設定將使用相同的輸出路徑）</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Filename">同時同步檔案名稱</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Filename.Info">（預置設定將使用相同檔案名稱）</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.SameType">僅在相同檔案類型的預置設定之間同步</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.SameType.Info">（只有相同檔案類型的預置設定才會同步）</s:String>
     
     <!--Options • Tasks-->
     <s:String x:Key="S.Options.Tasks.Title">自動化任務</s:String>
