@@ -61,7 +61,12 @@
     <s:String x:Key="S.Warning.Graphics.Switch">Windows-Einstellungen öffnen</s:String>
     
     <!--Keys-->
+    <s:String x:Key="S.Keys.Enter">Enter</s:String>  
+    <s:String x:Key="S.Keys.Esc">ESC</s:String>  
     <s:String x:Key="S.Keys.Space">Leertaste</s:String>  
+
+    <!--Mouse-->
+    <s:String x:Key="S.Mouse.Right">Rechtsklick</s:String>  
     
     <!--Tray icon-->
     <s:String x:Key="S.NewRecording">Neue Bildschirmaufnahme</s:String>
@@ -369,6 +374,12 @@
     <s:String x:Key="S.Options.Editor.General.LimitHistory">Begrenzt den Verlauf der Widerrufen-/Wiederherstellungsschritte</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Info">(Ältere Aktionen werden entfernt, wenn das Limit erreicht ist)</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Maximum">(Maximale Anzahl der gespeicherten Aktionen)</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Folder">Ausgabeordner entsprechend den Voreinstellungen synchronisieren.</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Folder.Info">(Die Voreinstellungen verwenden den gleichen Ausgabepfad)</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Filename">Dateinamen ebenfalls synchronisieren.</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Filename.Info">(Voreinstellungen verwenden ebenfalls denselben Dateinamen)</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.SameType">Synchronisieren Sie nur zwischen den Voreinstellungen desselben Dateityps.</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.SameType.Info">(Nur Voreinstellungen desselben Dateityps werden synchronisiert)</s:String>
     
     <!--Options • Tasks-->
     <s:String x:Key="S.Options.Tasks.Title">Automatisierte Aufgaben</s:String>
