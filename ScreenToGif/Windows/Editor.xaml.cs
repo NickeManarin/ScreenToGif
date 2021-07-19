@@ -685,6 +685,7 @@ namespace ScreenToGif.Windows
 
         public void RecorderCallback(ProjectInfo project)
         {
+            Activate();
             if (project?.Any == true)
             {
                 LoadProject(project);
