@@ -101,10 +101,8 @@ namespace ScreenToGif.Windows
             InitializeComponent();
 
 #if UWP
-            //PaypalLabel.Visibility = Visibility.Collapsed;
             UpdatesCheckBox.Visibility = Visibility.Collapsed;
             StoreTextBlock.Visibility = Visibility.Visible;
-            TaiwanListBoxItem.Image = LanguagePanel.TryFindResource("Flag.White") as Canvas;
 #endif
         }
 
