@@ -4,13 +4,14 @@ This is the current project of ScreenToGif.
 
 _VS 2019 and .Net 4.8 or newer required._
 
-## What's new? (Version 2.33)
+## What's new? (Version 2.33.1)
 
-• Added options to sync output folder and filename among presets (enabled by default).  
+• Nothing yet.
 
 ### Fixed:
 
-♦ Some texts were not localizable.  
+♦ The option to change the editor's background based on the system's theme was not working properly (it was behaving as if it was always on).
+♦ When stopping a recording by using a keyboars shortcut, the confirmation dialog to delete the previous project was not getting focus.  
 
 ### Known Bugs:
   

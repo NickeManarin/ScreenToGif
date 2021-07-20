@@ -307,9 +307,13 @@ namespace ScreenToGif
 
         private void SystemEvents_UserPreferenceChanged(object sender, UserPreferenceChangedEventArgs e)
         {
-            if (e.Category == UserPreferenceCategory.General)
+            if (e.Category != UserPreferenceCategory.General)
+                return;
+
+            ThemeHelper.SelectTheme(UserSettings.All.MainTheme);
+
+            if (UserSettings.All.GridColorsFollowSystem)
             {
-                ThemeHelper.SelectTheme(UserSettings.All.MainTheme);
                 var isSystemUsingDark = ThemeHelper.IsSystemUsingDarkTheme();
                 UserSettings.All.GridColor1 = isSystemUsingDark ? Constants.DarkEven : Constants.VeryLightEven;
                 UserSettings.All.GridColor2 = isSystemUsingDark ? Constants.DarkOdd : Constants.VeryLightOdd;
