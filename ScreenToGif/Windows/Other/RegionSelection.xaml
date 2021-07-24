@@ -4,7 +4,7 @@
         xmlns:t="clr-namespace:ScreenToGif.Settings"
         x:Name="ThisWindow" Title="ScreenToGif" WindowStyle="None" AllowsTransparency="True" Topmost="True" ResizeMode="NoResize" SizeToContent="WidthAndHeight"
         UseLayoutRounding="True" SnapsToDevicePixels="True" Background="{x:Null}" ShowInTaskbar="False"
-        DpiChanged="Window_DpiChanged">
+        DpiChanged="Window_DpiChanged" StateChanged="Window_StateChanged">
 
     <Grid>
         <Grid.RowDefinitions>

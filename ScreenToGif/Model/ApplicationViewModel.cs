@@ -687,9 +687,15 @@ namespace ScreenToGif.Model
 
                     if (all.Any(n => n.WindowState != WindowState.Minimized))
                     {
-                        //Minimize all windows.
-                        foreach (var window in all)
-                            window.WindowState = WindowState.Minimized;
+                        //Minimize all windows, disabling before to prevent some behaviors.
+                        foreach (var f in all)
+                            f.IsEnabled = false;
+
+                        foreach (var f in all)
+                            f.WindowState = WindowState.Minimized;
+
+                        foreach (var f in all)
+                            f.IsEnabled = true;
                     }
                     else
                     {

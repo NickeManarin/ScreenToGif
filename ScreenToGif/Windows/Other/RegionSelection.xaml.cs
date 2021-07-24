@@ -96,7 +96,12 @@ namespace ScreenToGif.Windows.Other
             Scale = e.NewDpi.DpiScaleX;
             Dpi = e.NewDpi.PixelsPerInchX;
         }
-        
+
+        private void Window_StateChanged(object sender, EventArgs e)
+        {
+            Opacity = WindowState == WindowState.Minimized ? 0 : 1;
+        }
+
         private void Thumb_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (IsStatic || !(sender is Border border))
