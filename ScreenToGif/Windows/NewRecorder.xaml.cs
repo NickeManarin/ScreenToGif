@@ -232,7 +232,7 @@ namespace ScreenToGif.Windows
         {
             lock (Lock)
             {
-                if (_regionSelection.WindowState == WindowState.Minimized)
+                if (_regionSelection.IsEnabled && _regionSelection.WindowState == WindowState.Minimized)
                     _regionSelection.WindowState = WindowState.Normal;
 
                 IsFollowing = UserSettings.All.CursorFollowing;
