@@ -240,14 +240,6 @@ namespace ScreenToGif.Windows
         public Editor()
         {
             InitializeComponent();
-
-            #region Adjust the position
-
-            //Tries to adjust the position/size of the window, centers on screen otherwise.
-            if (!UpdatePositioning())
-                WindowStartupLocation = WindowStartupLocation.CenterScreen;
-
-            #endregion
         }
 
         #region Main Events
@@ -685,6 +677,7 @@ namespace ScreenToGif.Windows
 
         public void RecorderCallback(ProjectInfo project)
         {
+            Activate();
             if (project?.Any == true)
             {
                 LoadProject(project);
@@ -4696,6 +4689,9 @@ namespace ScreenToGif.Windows
                 LogWriter.Log("Wrong Editor window sizing", desc);
                 return false;
             }
+
+            //First move the window to the final monitor, so that the UI scale can be adjusted.
+            this.MoveToScreen(closest);
 
             Top = top;
             Left = left;
