@@ -190,7 +190,7 @@
                 </Grid.ColumnDefinitions>
 
                 <n:ExtendedButton Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="CloseButton" Icon="{StaticResource Vector.Close}" Style="{StaticResource Style.Button.NoText}"
-                                  ContentHeight="10" ContentWidth="10" Padding="4,1" TabIndex="1" Click="CloseButton_Click"/>
+                                  ContentHeight="10" ContentWidth="10" Padding="4,1" Click="CloseButton_Click"/>
 
                 <TextBlock Grid.Row="0" Grid.Column="1" x:Name="CaptionText" Text="{Binding Title, ElementName=RecorderLightWindow}" FontFamily="Segoe UI" FontSize="12"
                            FontWeight="Regular" Margin="5,0,0,0" Foreground="{DynamicResource Element.Foreground}"/>
@@ -207,12 +207,12 @@
                       Visibility="{Binding ElementName=RecorderLightWindow, Path=IsFollowing, Converter={StaticResource Bool2Visibility}, FallbackValue={x:Static Visibility.Collapsed}}"/>
 
                 <n:ExtendedButton x:Name="SnapWindowButton" Icon="{StaticResource Vector.Crosshair}" Margin="0" Style="{StaticResource Style.Button.NoText}" 
-                                  HorizontalContentAlignment="Center" ContentHeight="20" ContentWidth="20" Command="{Binding SnapToWindowCommand}" Padding="3" TabIndex="2" 
+                                  HorizontalContentAlignment="Center" ContentHeight="20" ContentWidth="20" Command="{Binding SnapToWindowCommand}" Padding="3"
                                   ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource S.Recorder.SnapToWindow}" 
                                   PreviewMouseDown="SnapWindowButton_PreviewMouseDown"/>
 
                 <n:ExtendedButton x:Name="OptionsButton" Icon="{DynamicResource Vector.Options}" Margin="0" Padding="3" 
-                                  Style="{DynamicResource Style.Button.NoText}" ContentHeight="20" ContentWidth="20" Command="{Binding OptionsCommand}" TabIndex="0"
+                                  Style="{DynamicResource Style.Button.NoText}" ContentHeight="20" ContentWidth="20" Command="{Binding OptionsCommand}"
                                   ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource S.StartUp.Options}"/>
                 
                 <Separator Width="1" Margin="5,2"/>
@@ -231,12 +231,12 @@
                     </Grid>
                 </Viewbox>
 
-                <n:IntegerUpDown x:Name="FrequencyIntegerUpDown" Margin="1,3" StepValue="1" Minimum="1" Maximum="60" MinWidth="45" TabIndex="4"
+                <n:IntegerUpDown x:Name="FrequencyIntegerUpDown" Margin="1,3" StepValue="1" Minimum="1" Maximum="60" MinWidth="45"
                                  Value="{Binding Source={x:Static t:UserSettings.All}, Path=LatestFps, Mode=TwoWay}"
                                  ToolTip="{DynamicResource S.Recorder.Fps}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
                 <n:ExtendedButton x:Name="FrequencyButton" Style="{StaticResource Style.Button.Horizontal.NoImage}" Margin="1,0,0,0" VerticalContentAlignment="Center" Padding="0" 
-                                  UseLayoutRounding="True" TabIndex="5" Text="{DynamicResource S.Recorder.Fps.Short}" FontSize="12" TextWrapping="NoWrap"
+                                  UseLayoutRounding="True" Text="{DynamicResource S.Recorder.Fps.Short}" FontSize="12" TextWrapping="NoWrap"
                                   ToolTip="{DynamicResource S.Recorder.SwitchFrequency}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"
                                   Command="{Binding SwitchFrequencyCommand}" CommandParameter="Switch">
                     <n:ExtendedButton.ContextMenu>
@@ -290,7 +290,7 @@
                     </Grid.IsEnabled>
 
                     <n:IntegerBox Grid.Column="0" x:Name="WidthIntegerBox" Value="{Binding ElementName=RecorderLightWindow, Path=Width, Mode=TwoWay}"
-                                  Offset="{x:Static u:Constants.HorizontalOffset}" Minimum="100" Maximum="3000" TabIndex="6" Height="Auto" Padding="4,0" Margin="1,3"
+                                  Offset="{x:Static u:Constants.HorizontalOffset}" Minimum="100" Maximum="3000" Height="Auto" Padding="4,0" Margin="1,3"
                                   ToolTip="{DynamicResource S.Recorder.Width}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"
                                   PropagateWheelEvent="True" MouseWheel="SizeIntegerBox_MouseWheel"/>
 
@@ -298,7 +298,7 @@
                            Foreground="{Binding ElementName=RecorderLightWindow, Path=Foreground}"/>
 
                     <n:IntegerBox Grid.Column="2" x:Name="HeightIntegerBox" Value="{Binding ElementName=RecorderLightWindow, Path=Height, Mode=TwoWay}"
-                                  Offset="{x:Static u:Constants.VerticalOffset}" Minimum="100" Maximum="3000" TabIndex="7" Height="Auto" Padding="4,0" Margin="1,3"
+                                  Offset="{x:Static u:Constants.VerticalOffset}" Minimum="100" Maximum="3000" Height="Auto" Padding="4,0" Margin="1,3"
                                   ToolTip="{DynamicResource S.Recorder.Height}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"
                                   PropagateWheelEvent="True" MouseWheel="SizeIntegerBox_MouseWheel"/>
 
@@ -309,31 +309,31 @@
                 <Separator Width="1" Margin="5,2"/>
 
                 <!--Discard-->
-                <n:ExtendedButton x:Name="DiscardButton" Icon="{DynamicResource Vector.Remove}" ContentHeight="18" ContentWidth="18" TabIndex="5" Text="{DynamicResource S.Recorder.Discard}"
+                <n:ExtendedButton x:Name="DiscardButton" Icon="{DynamicResource Vector.Remove}" ContentHeight="18" ContentWidth="18" Text="{DynamicResource S.Recorder.Discard}"
                                   MinWidth="31" Style="{Binding ButtonStyle, FallbackValue={StaticResource Style.Button.Horizontal}}" ToolTip="{DynamicResource S.Recorder.Discard}" 
                                   Command="{Binding DiscardCommand}" KeyGesture="{Binding DiscardKeyGesture, Converter={StaticResource KeyGestureToString}, UpdateSourceTrigger=PropertyChanged}" 
                                   Visibility="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled, Converter={StaticResource Bool2Visibility}}"/>
                 
                 <!--Snap-->
-                <n:ExtendedButton x:Name="SnapButton" Icon="{StaticResource Vector.Camera.Add}" ContentHeight="18" ContentWidth="18" TabIndex="6" Text="{DynamicResource S.Recorder.Snap}"
+                <n:ExtendedButton x:Name="SnapButton" Icon="{StaticResource Vector.Camera.Add}" ContentHeight="18" ContentWidth="18" Text="{DynamicResource S.Recorder.Snap}"
                                   MinWidth="31" Style="{Binding ButtonStyle, FallbackValue={StaticResource Style.Button.Horizontal}}" ToolTip="{DynamicResource S.Recorder.Snap}" 
                                   Command="{Binding SnapCommand}" KeyGesture="{Binding RecordKeyGesture, Converter={StaticResource KeyGestureToString}, UpdateSourceTrigger=PropertyChanged}"
                                   Visibility="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled, Converter={StaticResource Bool2Visibility}}"/>
 
                 <!--Record-->
-                <n:ExtendedButton x:Name="RecordButton" Icon="{StaticResource Vector.Record}" ContentHeight="18" ContentWidth="18" TabIndex="6" Text="{DynamicResource S.Recorder.Record}"
+                <n:ExtendedButton x:Name="RecordButton" Icon="{StaticResource Vector.Record}" ContentHeight="18" ContentWidth="18" Text="{DynamicResource S.Recorder.Record}"
                                   MinWidth="31" Style="{Binding ButtonStyle, FallbackValue={StaticResource Style.Button.Horizontal}}" ToolTip="{DynamicResource S.Recorder.Record}"
                                   Command="{Binding RecordCommand}" KeyGesture="{Binding RecordKeyGesture, Converter={StaticResource KeyGestureToString}, UpdateSourceTrigger=PropertyChanged}" 
                                   Visibility="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled, Converter={StaticResource Bool2Visibility}}"/>
 
                 <!--Pause-->
-                <n:ExtendedButton x:Name="PauseButton" Icon="{StaticResource Vector.Pause}" ContentHeight="18" ContentWidth="18" TabIndex="6" Text="{DynamicResource S.Recorder.Pause}"
+                <n:ExtendedButton x:Name="PauseButton" Icon="{StaticResource Vector.Pause}" ContentHeight="18" ContentWidth="18" Text="{DynamicResource S.Recorder.Pause}"
                                   MinWidth="31" Style="{Binding ButtonStyle, FallbackValue={StaticResource Style.Button.Horizontal}}" ToolTip="{DynamicResource S.Recorder.Pause}"
                                   Command="{Binding PauseCommand}" KeyGesture="{Binding RecordKeyGesture, Converter={StaticResource KeyGestureToString}, UpdateSourceTrigger=PropertyChanged}"
                                   Visibility="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled, Converter={StaticResource Bool2Visibility}}"/>
 
                 <!--Stop-->
-                <n:ExtendedButton x:Name="StopButton" Icon="{DynamicResource Vector.Stop}" ContentHeight="18" ContentWidth="18" TabIndex="7" Text="{DynamicResource S.Recorder.Stop}"
+                <n:ExtendedButton x:Name="StopButton" Icon="{DynamicResource Vector.Stop}" ContentHeight="18" ContentWidth="18" Text="{DynamicResource S.Recorder.Stop}"
                                   MinWidth="31" Style="{Binding ButtonStyle, FallbackValue={StaticResource Style.Button.Horizontal}}" ToolTip="{DynamicResource S.Recorder.Stop}"
                                   Command="{Binding StopCommand}" KeyGesture="{Binding StopKeyGesture, Converter={StaticResource KeyGestureToString}, UpdateSourceTrigger=PropertyChanged}"
                                   Visibility="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled, Converter={StaticResource Bool2Visibility}}"/>
