@@ -33,7 +33,7 @@
 </p>
 
 <p align="center">
-<g-emoji ios-version="6.0" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a0.png" alias="warning">⚠️</g-emoji> Attention, it requires <a href="http://go.microsoft.com/fwlink/?LinkId=2085155">.Net Framework 4.8</a> (or above). 
+<g-emoji ios-version="6.0" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a0.png" alias="warning">⚠️</g-emoji> Attention, it requires <a href="https://go.microsoft.com/fwlink/?LinkId=2085155">.Net Framework 4.8</a> (or above). 
  <g-emoji ios-version="6.0" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a0.png" alias="warning">⚠️</g-emoji>
 </p>
 
@@ -62,7 +62,7 @@
  * Ko-fi donation: [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B7Y5Z9)
  * Flattr subscription: https://flattr.com/@NickeManarin/domain/screentogif.com 
  * Steam wishlist: [![Steam wishlist](https://img.shields.io/badge/donate-Steam-171a21.svg)](http://steamcommunity.com/id/nickesm/wishlist)
- * GOG Galaxy wishlist: www.gog.com/u/Nickesm/wishlist
+ * GOG Galaxy wishlist: https://www.gog.com/u/Nickesm/wishlist
  * Amazon wishlist: https://www.amazon.com/hz/wishlist/ls/2S54SRWY2K8KF?ref_=wl_share
  * Feedback (reporting bugs, ideas, etc) [![Author's Twitter](https://img.shields.io/badge/Twitter-%40NickeManarin-blue.svg)](https://twitter.com/NickeManarin)
  * [Anyone can still contribute to the localization of the app/website/installer](https://github.com/NickeManarin/ScreenToGif/blob/master/LOCALIZATION.md)
@@ -98,10 +98,10 @@ That's not why I'm sharing the source code, at all.
 		<th>Website</th>
 	<tr>
 	<tr>
-		<td><a href="http://www.chip.de/downloads/Screen-To-Gif_65993193.html">Chip</a></td>
+		<td><a href="https://www.chip.de/downloads/Screen-To-Gif_65993193.html">Chip</a></td>
 	</tr>
 	<tr>
-		<td><a href="http://www.softpedia.com/get/Multimedia/Graphic/Graphic-Others/Screen-to-Gif.shtml">Softpedia</a></td>
+		<td><a href="https://www.softpedia.com/get/Multimedia/Graphic/Graphic-Others/Screen-to-Gif.shtml">Softpedia</a></td>
 	</tr>
 	<tr>
 		<td><a href="https://www.portablefreeware.com/index.php?id=2895">PortableFreeware</a></td>
