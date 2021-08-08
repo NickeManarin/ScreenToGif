@@ -11,6 +11,7 @@ _VS 2019 and .Net 4.8 or newer required._
 ### Fixed:
 
 ♦ The keyboard navigation of the screen recorder (newer or older variants) was out of order (@pawlos).    
+♦ Some shortcut key were not working for the screen recorder actions (@pawlos).   
 
 ### Known Bugs:
   

@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -286,9 +286,9 @@ namespace ScreenToGif.Controls
                 //If any modifier.
                 if (IsControlDown || IsAltDown || IsShiftDown || IsWindowsDown)
                 {
-                    if ((int)key > 33 && (int)key < 114)
+                    if (((int)key > 33 && (int)key < 114) || ((int)key >139 && (int)key < 155))
                     {
-                        //D0 to F24. Valid combinations.
+                        //D0 to F24 and Oem1 to OemBackslash. Valid combinations.
                         ModifierKeys = Keyboard.Modifiers;
                         MainKey = key;
                         _finished = true;
