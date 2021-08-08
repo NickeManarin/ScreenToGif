@@ -16,13 +16,14 @@ namespace ScreenToGif.Util
         [StructLayout(LayoutKind.Sequential)]
         internal struct GifskiSettings
         {
-            public GifskiSettings(uint width, uint height, byte quality, bool looped, bool fast)
+            //fixed the order of settings (according to gifski's code)
+            public GifskiSettings(uint width, uint height, byte quality, bool fast, bool looped)
             {
                 Width = width;
                 Height = height;
                 Quality = quality;
-                Once = !looped;
                 Fast = fast;
+                Once = !looped;
             }
 
             /// <summary>
@@ -165,6 +166,7 @@ namespace ScreenToGif.Util
             info.Refresh();
 
             //I really need another way to differentiate gifski versions.
+            //Since version 1.4.0 had been pubulished, set it to be default.(dll files'length built by different persons can be different, I got 606720bytes by version 1.4.0 x64) 
             switch (info.Length)
             {
                 case 524_752:
@@ -180,7 +182,7 @@ namespace ScreenToGif.Util
                     break;
 
                 default:
-                    Version = new Version(0, 0);
+                    Version = new Version(1, 4, 0);
                     break;
             }
 
@@ -216,7 +218,8 @@ namespace ScreenToGif.Util
 
         internal IntPtr Start(uint width, uint height, int quality, bool looped = true, bool fast = false)
         {
-            return _new(new GifskiSettings(width, height, (byte)quality, looped, fast));
+            //fixed the order of settings (according to gifski's code)
+            return _new(new GifskiSettings(width, height, (byte)quality, fast, looped));
         }
 
         internal GifskiError AddFrame(IntPtr handle, uint index, string path, int delay, double lastTimestamp = 0, bool isLast = false)
@@ -243,7 +246,8 @@ namespace ScreenToGif.Util
             if (Version > new Version(0, 10, 4))
             {
                 //First frame receives the delay set of the last frame.
-                result = AddFrame2Pixels(handle, index, (uint)util.Width, (uint)bytesPerRow, (uint)util.Height, address, index == 0 ? lastTimestamp : _timeStamp);
+                //No need to set up lastTimestamp, it can be auto-calc. 
+                result = AddFrame2Pixels(handle, index, (uint)util.Width, (uint)bytesPerRow, (uint)util.Height, address, index == 0 ? 0 : _timeStamp);
 
                 _timeStamp += (delay / 1000d);
             }
