@@ -199,7 +199,7 @@ namespace ScreenToGif.UserControls
                 case Export.Gif:
                     EncoderScreenToGifItem.IsEnabled = true;
                     EncoderFfmpegItem.IsEnabled = true;
-                    EncoderGifskiItem.IsEnabled = true;
+                    EncoderGifskiItem.IsEnabled = Environment.Is64BitProcess;
                     EncoderSystemItem.IsEnabled = true;
                     ExtensionComboBox.ItemsSource = new List<string> { ".gif" };
                     break;
@@ -298,7 +298,13 @@ namespace ScreenToGif.UserControls
         private void LoadPresets(Export type, ExportPreset toLoad = null, bool firstLoad = false)
         {
             //Get all presets of given type. It's possible that there's none available.
-            var list = UserSettings.All.ExportPresets?.OfType<ExportPreset>().Where(w => w.Type == type).ToList() ?? new List<ExportPreset>();
+            var search = UserSettings.All.ExportPresets?.OfType<ExportPreset>().Where(w => w.Type == type) ?? new List<ExportPreset>();
+
+            //Ignore unsupported profiles.
+            if (!Environment.Is64BitProcess)
+                search = search.Where(tp => !(tp is GifskiGifPreset));
+
+            var list = search.ToList();
 
             //Get the missing default presets.
             GeneratePresets(type, list);
@@ -364,7 +370,11 @@ namespace ScreenToGif.UserControls
                 {
                     AddDistinct(presets, EmbeddedGifPreset.Defaults);
                     AddDistinct(presets, FfmpegGifPreset.Defaults);
-                    AddDistinct(presets, GifskiGifPreset.Defaults);
+
+                    //Gifski only runs on x64.
+                    if (Environment.Is64BitProcess)
+                        AddDistinct(presets, GifskiGifPreset.Defaults);
+                    
                     AddDistinct(presets, SystemGifPreset.Default);
                     break;
                 }
@@ -823,6 +833,9 @@ namespace ScreenToGif.UserControls
             //If a default file type was not selected, it picks 'Gif' as default.
             if (!(TypeComboBox.SelectedValue is Export type))
                 TypeComboBox.SelectedValue = type = Export.Gif;
+
+            //Gifski is only supported in x64.
+            EncoderGifskiItem.IsEnabled = Environment.Is64BitProcess;
 
             AdjustPresentation(type);
             LoadPresets(type, null, true);

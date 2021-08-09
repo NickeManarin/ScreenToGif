@@ -1276,6 +1276,9 @@ namespace ScreenToGif.Windows
         private void ExtrasGrid_Loaded(object sender, RoutedEventArgs e)
         {
             CheckTools();
+
+            //Gifski is only supported in x64.
+            GifskiImageCard.IsEnabled = Environment.Is64BitProcess;
         }
 
         private async void FfmpegImageCard_Click(object sender, RoutedEventArgs e)

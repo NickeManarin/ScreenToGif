@@ -180,7 +180,7 @@ namespace ScreenToGif.Util
                     break;
 
                 default:
-                    Version = new Version(0, 0);
+                    Version = new Version(1, 2, 0);
                     break;
             }
 
@@ -188,27 +188,27 @@ namespace ScreenToGif.Util
 
             #region Load functions
 
-            _new = (NewDelegate)FunctionLoader.LoadFunction<NewDelegate>(UserSettings.All.GifskiLocation, "gifski_new");
-            _addPngFrame = (AddPngFrameDelegate)FunctionLoader.LoadFunction<AddPngFrameDelegate>(UserSettings.All.GifskiLocation, "gifski_add_frame_png_file");
+            _new = FunctionLoader.LoadFunction<NewDelegate>(UserSettings.All.GifskiLocation, "gifski_new");
+            _addPngFrame = FunctionLoader.LoadFunction<AddPngFrameDelegate>(UserSettings.All.GifskiLocation, "gifski_add_frame_png_file");
             //_addRgbaFrame = (AddRgbaFrameDelegate)FunctionLoader.LoadFunction<AddRgbaFrameDelegate>(UserSettings.All.GifskiLocation, "gifski_add_frame_rgba");
 
             if (Version.Major == 0 && Version.Minor < 10)
-                _addRgbFrame = (AddRgbFrameDelegate)FunctionLoader.LoadFunction<AddRgbFrameDelegate>(UserSettings.All.GifskiLocation, "gifski_add_frame_rgb");
+                _addRgbFrame = FunctionLoader.LoadFunction<AddRgbFrameDelegate>(UserSettings.All.GifskiLocation, "gifski_add_frame_rgb");
             else
-                _addRgb2Frame = (AddRgb2FrameDelegate)FunctionLoader.LoadFunction<AddRgb2FrameDelegate>(UserSettings.All.GifskiLocation, "gifski_add_frame_rgb");
+                _addRgb2Frame = FunctionLoader.LoadFunction<AddRgb2FrameDelegate>(UserSettings.All.GifskiLocation, "gifski_add_frame_rgb");
 
             if (Version.Major == 0 && Version.Minor < 9)
             {
                 //Older versions of the library.
-                _endAddingFrames = (EndAddingFramesDelegate)FunctionLoader.LoadFunction<EndAddingFramesDelegate>(UserSettings.All.GifskiLocation, "gifski_end_adding_frames");
-                _write = (WriteDelegate)FunctionLoader.LoadFunction<WriteDelegate>(UserSettings.All.GifskiLocation, "gifski_write");
-                _drop = (DropDelegate)FunctionLoader.LoadFunction<DropDelegate>(UserSettings.All.GifskiLocation, "gifski_drop");
+                _endAddingFrames = FunctionLoader.LoadFunction<EndAddingFramesDelegate>(UserSettings.All.GifskiLocation, "gifski_end_adding_frames");
+                _write = FunctionLoader.LoadFunction<WriteDelegate>(UserSettings.All.GifskiLocation, "gifski_write");
+                _drop = FunctionLoader.LoadFunction<DropDelegate>(UserSettings.All.GifskiLocation, "gifski_drop");
             }
             else
             {
                 //Newer versions.
-                _setFileOutput = (SetFileOutputDelegate)FunctionLoader.LoadFunction<SetFileOutputDelegate>(UserSettings.All.GifskiLocation, "gifski_set_file_output");
-                _finish = (FinishDelegate)FunctionLoader.LoadFunction<FinishDelegate>(UserSettings.All.GifskiLocation, "gifski_finish");
+                _setFileOutput = FunctionLoader.LoadFunction<SetFileOutputDelegate>(UserSettings.All.GifskiLocation, "gifski_set_file_output");
+                _finish = FunctionLoader.LoadFunction<FinishDelegate>(UserSettings.All.GifskiLocation, "gifski_finish");
             }
 
             #endregion
@@ -245,7 +245,7 @@ namespace ScreenToGif.Util
                 //First frame receives the delay set of the last frame.
                 result = AddFrame2Pixels(handle, index, (uint)util.Width, (uint)bytesPerRow, (uint)util.Height, address, index == 0 ? lastTimestamp : _timeStamp);
 
-                _timeStamp += (delay / 1000d);
+                _timeStamp += delay / 1000d;
             }
             else if (Version.Major == 0 && Version.Minor >= 10)
             {
@@ -259,7 +259,7 @@ namespace ScreenToGif.Util
                 }
 
                 //Frames can't be more than 1 second apart. TODO: Add support for dealing with this issue.
-                _timeStamp += (delay / 1000d);
+                _timeStamp += delay / 1000d;
             }
             else
             {
