@@ -1838,6 +1838,11 @@
                             <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal">
                                 <Label Content="{DynamicResource S.Options.About.Version}" FontSize="18" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground}"/>
                                 <Label Content="{Binding Source={x:Static t:UserSettings.All}, Path=VersionText}" FontSize="18" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground}"/>
+                                 <Label VerticalContentAlignment ="Center">
+                                    <Hyperlink Click="Hyperlink_OnCheckUpdate" Cursor="Hand">
+                                        <Run Text="{DynamicResource S.Options.About.UpdateCheck}"/>
+                                    </Hyperlink>
+                                </Label>
                             </StackPanel>
 
                             <Label Grid.Row="1" Grid.Column="1" FontSize="16" HorizontalAlignment="Right" Cursor="Hand" Padding="3,5" VerticalContentAlignment="Center">

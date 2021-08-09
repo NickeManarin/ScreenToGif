@@ -233,7 +233,7 @@ namespace ScreenToGif
             #region Tasks
 
             Task.Factory.StartNew(MainViewModel.ClearTemporaryFiles, TaskCreationOptions.LongRunning);
-            Task.Factory.StartNew(MainViewModel.CheckForUpdates, TaskCreationOptions.LongRunning);
+            Task.Factory.StartNew(MainViewModel.CheckForUpdates,true,TaskCreationOptions.LongRunning);
             Task.Factory.StartNew(MainViewModel.SendFeedback, TaskCreationOptions.LongRunning);
 
             #endregion
