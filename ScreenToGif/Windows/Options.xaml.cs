@@ -18,6 +18,7 @@ using System.Windows.Navigation;
 using System.Windows.Threading;
 using Microsoft.Win32;
 using ScreenToGif.Controls;
+using ScreenToGif.Model;
 using ScreenToGif.Model.ExportPresets;
 using ScreenToGif.Model.UploadPresets;
 using ScreenToGif.Settings;
@@ -741,7 +742,6 @@ namespace ScreenToGif.Windows
                 LogWriter.Log(ex, "Open MailTo");
             }
         }
-
         #endregion
 
         #region Storage
@@ -2071,6 +2071,22 @@ namespace ScreenToGif.Windows
             }
         }
 
+        private async void Hyperlink_OnCheckUpdate(object sender, RoutedEventArgs e)
+        {
+            await App.MainViewModel.CheckForUpdates(false);
+
+            if (Global.UpdateAvailable == null)
+            {
+                Dialog.Ok(LocalizationHelper.Get("S.Options.About.UpdateCheck"),
+                        LocalizationHelper.Get("S.Options.About.UpdateCheck"),
+                        LocalizationHelper.Get("S.Options.About.UpdateCheckForNothing"),
+                        Icons.Info);
+            }
+            else
+            {
+                App.MainViewModel.PromptUpdate.Execute(null);
+            }
+        }
         #endregion
 
         #region Other

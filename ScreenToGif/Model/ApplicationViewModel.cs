@@ -878,16 +878,18 @@ namespace ScreenToGif.Model
             }
         }
 
-        internal async void CheckForUpdates()
+        internal async Task CheckForUpdates(object obj)
         {
             Global.UpdateAvailable = null;
 
 #if UWP
             return;
 #endif
-
-            if (!UserSettings.All.CheckForUpdates)
-                return;
+            if (obj is bool flag && flag)
+            {
+                if (!UserSettings.All.CheckForUpdates)
+                    return;
+            }
 
             //Try checking for the update on Github first then fallbacks to Fosshub.
             if (!await CheckOnGithub())
