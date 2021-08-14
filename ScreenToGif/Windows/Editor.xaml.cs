@@ -3249,14 +3249,15 @@ namespace ScreenToGif.Windows
                 ShowProgress(LocalizationHelper.Get("S.Editor.LoadingFrames"), Project.Frames.Count);
 
                 #region Check if there's any missing frames (and remove them)
-
+                int processedFrame = 0;
                 foreach (var frame in Project.Frames)
                 {
                     if (_abortLoading)
                         break;
-
                     if (!File.Exists(frame.Path))
                         corruptedList.Add(frame);
+
+                    UpdateProgress(processedFrame++);
                 }
 
                 if (_abortLoading)
@@ -5357,6 +5358,8 @@ namespace ScreenToGif.Windows
 
             foreach (var frame in Project.Frames)
             {
+                if (_abortLoading)
+                    return;
                 var image = frame.Path.SourceFrom();
 
                 var drawingVisual = new DrawingVisual();
@@ -5730,6 +5733,8 @@ namespace ScreenToGif.Windows
             var count = 0;
             foreach (var frame in auxList)
             {
+                if (_abortLoading)
+                    return;
                 if (!frame.KeyList.Any())
                 {
                     UpdateProgress(count++);
@@ -5931,6 +5936,8 @@ namespace ScreenToGif.Windows
             var count = 0;
             foreach (var frame in frames)
             {
+                if (_abortLoading)
+                    return;
                 var image = frame.Path.SourceFrom();
                 var drawingVisual = new DrawingVisual();
 
@@ -6035,6 +6042,8 @@ namespace ScreenToGif.Windows
             var count = 0;
             foreach (var frame in Project.Frames)
             {
+                if (_abortLoading)
+                    return;
                 var image = frame.Path.SourceFrom();
                 var drawingVisual = new DrawingVisual();
 
@@ -6455,6 +6464,8 @@ namespace ScreenToGif.Windows
             var count = 0;
             foreach (var frameInfo in frameList)
             {
+                if (_abortLoading)
+                    return;
                 switch (model.Type)
                 {
                     case DelayUpdateType.Override:
@@ -6792,6 +6803,8 @@ namespace ScreenToGif.Windows
             var count = 0;
             foreach (var frame in auxList)
             {
+                if (_abortLoading)
+                    return;
                 if (frame.ButtonClicked == MouseButtonType.None || frame.CursorX == int.MinValue)
                 {
                     UpdateProgress(count++);
