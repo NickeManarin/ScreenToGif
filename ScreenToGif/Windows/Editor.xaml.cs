@@ -3177,6 +3177,11 @@ namespace ScreenToGif.Windows
         {
             try
             {
+                Dispatcher.Invoke(() =>
+                {
+                    IsCancelable = true;
+                });
+
                 if (!Project.IsNew)
                     Project.Persist();
 
@@ -3198,10 +3203,7 @@ namespace ScreenToGif.Windows
                             foreach (var frame in Project.Frames)
                             {
                                 if (_abortLoading)
-                                {
-                                    _abortLoading = false;
                                     return false;
-                                }
 
                                 Dispatcher.Invoke(() => { UpdateProgress(number++); });
                                 BitmapSource source;
@@ -3250,6 +3252,8 @@ namespace ScreenToGif.Windows
 
                 #region Check if there's any missing frames (and remove them)
 
+                var processedFrame = 0;
+
                 foreach (var frame in Project.Frames)
                 {
                     if (_abortLoading)
@@ -3257,13 +3261,12 @@ namespace ScreenToGif.Windows
 
                     if (!File.Exists(frame.Path))
                         corruptedList.Add(frame);
+
+                    UpdateProgress(processedFrame++);
                 }
 
                 if (_abortLoading)
-                {
-                    _abortLoading = false;
                     return false;
-                }
 
                 //Remove the corrupted frames.
                 foreach (var frame in corruptedList)
@@ -3323,13 +3326,11 @@ namespace ScreenToGif.Windows
                                     OverlayGrid.Opacity = 0;
                                 });
 
-                                _abortLoading = false;
                                 return false;
                             }
 
                             try
                             {
-                                //TODO: Abort loading from inside the tasks too.
                                 switch (task.TaskType)
                                 {
                                     case BaseTaskViewModel.TaskTypeEnum.MouseClicks:
@@ -3429,11 +3430,8 @@ namespace ScreenToGif.Windows
                 }
 
                 if (_abortLoading)
-                {
-                    _abortLoading = false;
                     return false;
-                }
-
+                
                 if (corruptedList.Any())
                 {
                     Dispatcher.InvokeAsync(() =>
@@ -3453,6 +3451,10 @@ namespace ScreenToGif.Windows
                 Dispatcher.Invoke(() => ErrorDialog.Ok(Title, "Error loading frames", "It was not possible to load all the frames.", ex));
 
                 return false;
+            }
+            finally
+            {
+                _abortLoading = false;
             }
         }
 
@@ -5357,6 +5359,9 @@ namespace ScreenToGif.Windows
 
             foreach (var frame in Project.Frames)
             {
+                if (_abortLoading)
+                    return;
+
                 var image = frame.Path.SourceFrom();
 
                 var drawingVisual = new DrawingVisual();
@@ -5730,6 +5735,9 @@ namespace ScreenToGif.Windows
             var count = 0;
             foreach (var frame in auxList)
             {
+                if (_abortLoading)
+                    return;
+
                 if (!frame.KeyList.Any())
                 {
                     UpdateProgress(count++);
@@ -5931,6 +5939,9 @@ namespace ScreenToGif.Windows
             var count = 0;
             foreach (var frame in frames)
             {
+                if (_abortLoading)
+                    return;
+
                 var image = frame.Path.SourceFrom();
                 var drawingVisual = new DrawingVisual();
 
@@ -6035,6 +6046,9 @@ namespace ScreenToGif.Windows
             var count = 0;
             foreach (var frame in Project.Frames)
             {
+                if (_abortLoading)
+                    return;
+
                 var image = frame.Path.SourceFrom();
                 var drawingVisual = new DrawingVisual();
 
@@ -6455,6 +6469,9 @@ namespace ScreenToGif.Windows
             var count = 0;
             foreach (var frameInfo in frameList)
             {
+                if (_abortLoading)
+                    return;
+
                 switch (model.Type)
                 {
                     case DelayUpdateType.Override:
@@ -6792,6 +6809,9 @@ namespace ScreenToGif.Windows
             var count = 0;
             foreach (var frame in auxList)
             {
+                if (_abortLoading)
+                    return;
+
                 if (frame.ButtonClicked == MouseButtonType.None || frame.CursorX == int.MinValue)
                 {
                     UpdateProgress(count++);

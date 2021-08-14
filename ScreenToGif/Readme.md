@@ -4,7 +4,7 @@ This is the current project of ScreenToGif.
 
 _VS 2019 and .Net 4.8 or newer required._
 
-## What's new? (Version 2.33.2)
+## What's new? (Version 2.34)
 
 • Added option to manually check for updates (@MaledongGit).  
 
@@ -13,6 +13,8 @@ _VS 2019 and .Net 4.8 or newer required._
 ♦ The keyboard navigation of the screen recorder (newer or older variants) was out of order (@pawlos).    
 ♦ Some shortcut key were not working for the screen recorder actions (@pawlos).   
 ♦ Disabled Gifski on x86, since it's unsupported (@MaledongGit).
+♦ Added progress info when processing frames at start and made it possible to cancel during a task (@pawlos).
+♦ The option to cancel a frame altering process was not appearing if the editor already loaded something before.  
 
 ### Known Bugs:
   
