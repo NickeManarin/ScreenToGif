@@ -206,7 +206,7 @@ namespace ScreenToGif.Windows.Other
             DownloadProgressBar.Visibility = Visibility.Visible;
             RunAfterwardsCheckBox.Visibility = Visibility.Collapsed;
 
-            var result = await Task.Run(async () => await App.MainViewModel.DownloadUpdate());
+            var result = await App.MainViewModel.DownloadUpdate();
 
             //If cancelled.
             if (!IsLoaded)

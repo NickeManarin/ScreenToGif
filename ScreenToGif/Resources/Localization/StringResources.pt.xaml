@@ -613,6 +613,8 @@
     
     <!--Options • About-->
     <s:String x:Key="S.Options.About.Version">Versão:</s:String>
+    <s:String x:Key="S.Options.About.UpdateCheck">Verifique se há atualizações </s:String>
+    <s:String x:Key="S.Options.About.UpdateCheck.Nothing">Você já tem a versão mais recente.</s:String>
     <s:String x:Key="S.Options.About.Author">Autor: Nicke Manarin</s:String>
     <s:String x:Key="S.Options.About.StoreVersion">Versão da Microsoft Store. Alguns recursos estão desabilitadas devido a politicas aplicadas.</s:String>
     <s:String x:Key="S.Options.About.Contact">Contato</s:String>

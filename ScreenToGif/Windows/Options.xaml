@@ -126,7 +126,7 @@
 
                                 <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.Startup.Tray}" Info="{DynamicResource S.Options.App.Startup.Tray.Info}"
                                                     Margin="15,3,5,3" VerticalAlignment="Top" IsChecked="{Binding Path=StartMinimized, Mode=TwoWay}" Checked="StartCheckBox_Checked"/>
-                                
+
                                 <Grid Margin="15,0,5,5" Visibility="{Binding StartMinimized, Converter={StaticResource InvertedBoolToVisibility}}">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
@@ -252,7 +252,7 @@
                                         <Label Content="{DynamicResource S.Options.App.Theme.Scheme.VeryDark}" VerticalAlignment="Center" VerticalContentAlignment="Center" Padding="10,0,5,0" 
                                                Foreground="{DynamicResource Element.Foreground}"/>
                                     </StackPanel>
-                                    
+
                                     <StackPanel Orientation="Horizontal" Tag="FollowSystem">
                                         <Border BorderBrush="{DynamicResource Element.Border}" BorderThickness="1,1,0,1" Background="#FFFFFFFF" Width="20" Height="20" ToolTip="{DynamicResource S.Options.App.Theme.Scheme.Example}">
                                             <TextBlock Text="Aa" Foreground="Black" HorizontalAlignment="Center"/>
@@ -378,7 +378,7 @@
                         <Expander Grid.Row="3" Header="{DynamicResource S.Options.App.General}" IsExpanded="True">
                             <StackPanel>
                                 <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.WorkaroundQuota}" Info="{DynamicResource S.Options.App.General.WorkaroundQuota.Info}"
-                                                    Margin="15,3,5,3" VerticalAlignment="Top" IsChecked="{Binding Path=WorkaroundQuota, Mode=TwoWay}"/>                                
+                                                    Margin="15,3,5,3" VerticalAlignment="Top" IsChecked="{Binding Path=WorkaroundQuota, Mode=TwoWay}"/>
                                 <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.NotifyWhileClosingApp}" Margin="15,3,5,3" IsChecked="{Binding Path=NotifyWhileClosingApp, Mode=TwoWay}"/>
                                 <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.DisableHardwareAcceleration}" Info="{DynamicResource S.Options.App.General.DisableHardwareAcceleration.Info}"
                                                     Margin="15,3,5,3" VerticalAlignment="Top" IsChecked="{Binding Path=DisableHardwareAcceleration, Mode=TwoWay}"/>
@@ -451,7 +451,7 @@
 
                                 <n:ExtendedCheckBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Text="{DynamicResource S.Options.Recorder.DisplayDiscard}" 
                                                     Info="{DynamicResource S.Options.Recorder.DisplayDiscard.Info}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=RecorderDisplayDiscard, Mode=TwoWay}"/>
-                                
+
                                 <n:ExtendedCheckBox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Text="{DynamicResource S.Options.Recorder.SelectionImprovement}" 
                                                     Info="{DynamicResource S.Options.Recorder.SelectionImprovement.Info}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=SelectionImprovement, Mode=TwoWay}"
                                                     Visibility="{Binding Path=NewRecorder, Mode=OneWay, Converter={StaticResource Bool2Visibility}}"/>
@@ -528,7 +528,7 @@
                                 </Grid>
                             </Grid>
                         </Expander>
-                        
+
                         <Expander Grid.Row="2" Header="{DynamicResource S.Options.Recorder.Mode}" IsExpanded="True">
                             <StackPanel Margin="10,0,0,0">
                                 <WrapPanel Margin="0,0,5,5" HorizontalAlignment="Center">
@@ -592,7 +592,7 @@
                                         </MultiBinding>
                                     </n:ExtendedCheckBox.Visibility>
                                 </n:ExtendedCheckBox>
-                                
+
                                 <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.RecordMouse}" Margin="5,3" IsChecked="{Binding Path=ShowCursor, Mode=TwoWay}"/>
 
                                 <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.ForceGarbageCollection}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=ForceGarbageCollection, Mode=TwoWay}"
@@ -646,7 +646,7 @@
                                            Text="{DynamicResource S.AndOr}" Foreground="{DynamicResource Element.Foreground.Medium}"/>
 
                                 <Separator Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Width="1" HorizontalAlignment="Center"/>
-                                
+
                                 <n:ExtendedToggleButton Grid.Row="0" Grid.Column="1" x:Name="GuidelineCrosshairToggleButton" ContentHeight="30" ContentWidth="40" Style="{StaticResource Style.ToggleButton.NoBorder}"
                                                         Text="{DynamicResource S.Options.Recorder.Guidelines.Crosshair}" Padding="10" Margin="0,0,0,5" HorizontalAlignment="Center" Icon="{StaticResource Vector.Guideline.Crosshair}"
                                                         IsChecked="{Binding DisplayCrosshairGuideline, Mode=TwoWay}" ToolTip="{DynamicResource S.Options.Recorder.Guidelines.Crosshair.Info}"/>
@@ -686,13 +686,13 @@
                                 </Grid>
                             </Grid>
                         </Expander>
-                        
+
                         <Expander Grid.Row="4" Header="{DynamicResource S.Options.Other}" IsExpanded="True">
                             <StackPanel Margin="10,0,0,0">
                                 <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.RememberSize}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=RecorderRememberSize, Mode=TwoWay}"/>
                                 <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.RememberPosition}" Margin="25,3,5,3" VerticalAlignment="Top" IsChecked="{Binding Path=RecorderRememberPosition, Mode=TwoWay}"
                                                     IsEnabled="{Binding RecorderRememberSize, Mode=OneWay}" UncheckOnDisable="True"/>
-                                
+
                                 <n:ExtendedCheckBox Text="{DynamicResource S.Options.Recorder.PreStart}" Margin="5,3" IsChecked="{Binding Path=UsePreStart, Mode=TwoWay}"/>
                                 <WrapPanel Margin="20,3,5,3" Visibility="{Binding UsePreStart, Converter={StaticResource Bool2Visibility}}">
                                     <n:IntegerUpDown Minimum="2" Maximum="15" MinWidth="50" Value="{Binding Source={x:Static t:UserSettings.All}, Path=PreStartValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -948,7 +948,7 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                
+
                                 <DataGridTextColumn Header="{DynamicResource S.Options.Tasks.List.Task}" Width="Auto" MinWidth="110" IsReadOnly="True" Binding="{Binding Kind, UpdateSourceTrigger=PropertyChanged}"/>
                                 <DataGridTextColumn Header="{DynamicResource S.Options.Tasks.List.Details}" Width="*" IsReadOnly="True" Binding="{Binding Details, UpdateSourceTrigger=PropertyChanged}"/>
                             </DataGrid.Columns>
@@ -1149,7 +1149,7 @@
 
                             <n:ExtendedListBoxItem Image="{StaticResource Flag.Greece}" Tag="el" Content="Greek / Ελληνικά" Author="Χρήστος Μητσιάρης"
                                                    ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=el, Converter={StaticResource TagToSelection}}"/>
-                            
+
                             <n:ExtendedListBoxItem Image="{StaticResource Flag.Hungary}" Tag="hu" Content="Hungarian / Magyar" Author="László Földes"
                                                    ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=hu, Converter={StaticResource TagToSelection}}"/>
 
@@ -1182,7 +1182,7 @@
 
                             <n:ExtendedListBoxItem Image="{StaticResource Flag.EastAfricanCommunity}" Tag="sw" Content="Swahili / Kiswahili" Author="Mara Gati Lucky"
                                                    ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=sw, Converter={StaticResource TagToSelection}}"/>
-                            
+
                             <n:ExtendedListBoxItem Image="{StaticResource Flag.Sweden}" Tag="sv" Content="Swedish / Svenska" Author="Sopor, Andreas Johansson"
                                                    ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=sv, Converter={StaticResource TagToSelection}}"/>
 
@@ -1361,7 +1361,7 @@
                                 <n:ExtendedCheckBox Text="{DynamicResource S.Options.Storage.AskDeleteEverything}" Margin="30,3,5,3"
                                                     IsChecked="{Binding Source={x:Static t:UserSettings.All}, Path=AskDeleteCacheWhenClosing, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                     Visibility="{Binding Source={x:Static t:UserSettings.All}, Path=DeleteCacheWhenClosing, Converter={StaticResource Bool2Visibility}}"/>
-                                
+
                                 <n:ExtendedCheckBox Text="{DynamicResource S.Options.Storage.AutomaticRemoval}" Margin="10,3,5,3"
                                                     IsChecked="{Binding Source={x:Static t:UserSettings.All}, Path=AutomaticCleanUp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                     ToolTip="{DynamicResource S.Options.Storage.AutomaticRemoval.Info}"/>
@@ -1388,7 +1388,7 @@
                             <CommandBinding Command="{StaticResource Command.Remove}" CanExecute="Upload_CanExecute" Executed="RemoveUpload_Executed"/>
                             <CommandBinding Command="{StaticResource Command.ViewHistory}" CanExecute="Upload_CanExecute" Executed="HistoryUpload_Executed"/>
                         </Grid.CommandBindings>
-                        
+
                         <Expander Grid.Row="0" Header="{DynamicResource S.Options.Upload.Proxy}" IsExpanded="True">
                             <DockPanel>
                                 <Grid DockPanel.Dock="Top">
@@ -1838,6 +1838,11 @@
                             <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal">
                                 <Label Content="{DynamicResource S.Options.About.Version}" FontSize="18" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground}"/>
                                 <Label Content="{Binding Source={x:Static t:UserSettings.All}, Path=VersionText}" FontSize="18" VerticalContentAlignment="Center" Foreground="{DynamicResource Element.Foreground}"/>
+                                <Label x:Name="CheckForUpdatesLabel" VerticalContentAlignment="Center">
+                                    <Hyperlink Click="CheckForUpdatesLabel_Click">
+                                        <Run Text="{DynamicResource S.Options.About.UpdateCheck}"/>
+                                    </Hyperlink>
+                                </Label>
                             </StackPanel>
 
                             <Label Grid.Row="1" Grid.Column="1" FontSize="16" HorizontalAlignment="Right" Cursor="Hand" Padding="3,5" VerticalContentAlignment="Center">
