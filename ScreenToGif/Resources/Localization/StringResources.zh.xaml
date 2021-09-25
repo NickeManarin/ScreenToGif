@@ -614,7 +614,7 @@
     <!--Options • About-->
     <s:String x:Key="S.Options.About.Version">版本：</s:String>
     <s:String x:Key="S.Options.About.UpdateCheck">检查更新</s:String>
-    <s:String x:Key="S.Options.About.UpdateCheckForNothing">你已经更新到最新版本，无需更新。</s:String>
+    <s:String x:Key="S.Options.About.UpdateCheck.Nothing">你已经更新到最新版本，无需更新。</s:String>
     <s:String x:Key="S.Options.About.Author">作者：Nicke Manarin</s:String>
     <s:String x:Key="S.Options.About.StoreVersion">Microsoft Store 版本。 某些功能由于强制策略而被禁用。</s:String>
     <s:String x:Key="S.Options.About.Contact">联系</s:String>
