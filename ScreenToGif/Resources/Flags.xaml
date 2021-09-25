@@ -40,9 +40,7 @@
     </Canvas>
 
     <Canvas x:Shared="False" x:Key="Flag.Taiwan" HorizontalAlignment="Center" Height="144" UseLayoutRounding="False" VerticalAlignment="Center" Width="216">
-        <TextBlock FontSize="75" FontWeight="Black" FontFamily="Arial" FontStyle="normal" Canvas.Top="50">
-            <Span FontSize="75" FontWeight="Black" FontFamily="Arial" FontStyle="normal">zh-TW</Span>
-        </TextBlock>
+        <TextBlock Canvas.Top="50" FontSize="75" FontWeight="SemiBold" Text="zh-TW"/>
     </Canvas>
 
     <Canvas x:Shared="False" x:Key="Flag.Japan" HorizontalAlignment="Center" Height="144" UseLayoutRounding="False" VerticalAlignment="Center" Width="206">
@@ -51,9 +49,7 @@
     </Canvas>
 
     <Canvas x:Shared="False" x:Key="Flag.China" HorizontalAlignment="Center" Height="144" UseLayoutRounding="False" VerticalAlignment="Center" Width="216">
-        <TextBlock FontSize="75" FontWeight="Black" FontFamily="Arial" FontStyle="normal" Canvas.Top="50">
-            <Span FontSize="75" FontWeight="Black" FontFamily="Arial" FontStyle="normal">zh-CN</Span>
-        </TextBlock>
+        <TextBlock Canvas.Top="50" FontSize="75" FontWeight="SemiBold" Text="zh-CN"/>
     </Canvas>
 
     <Canvas x:Shared="False" x:Key="Flag.Italy" HorizontalAlignment="Center" Height="144" UseLayoutRounding="False" VerticalAlignment="Center" Width="215">
