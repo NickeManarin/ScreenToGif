@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Runtime.InteropServices;
 
 namespace ScreenToGif.Util
@@ -14,12 +14,12 @@ namespace ScreenToGif.Util
         [DllImport("Kernel32.dll")]
         private static extern IntPtr GetProcAddress(IntPtr hModule, string procName);
 
-        internal static Delegate LoadFunction<T>(string dllPath, string functionName)
+        internal static T LoadFunction<T>(string dllPath, string functionName) where T : Delegate
         {
             var hModule = LoadLibrary(dllPath);
             var functionAddress = GetProcAddress(hModule, functionName);
 
-            return Marshal.GetDelegateForFunctionPointer(functionAddress, typeof(T));
+            return (T)Marshal.GetDelegateForFunctionPointer(functionAddress, typeof(T));
         }
     }
 }
