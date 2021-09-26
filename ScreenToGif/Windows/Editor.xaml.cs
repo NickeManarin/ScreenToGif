@@ -59,7 +59,6 @@ namespace ScreenToGif.Windows
     {
         #region Properties
 
-        public static readonly DependencyProperty FramesProperty = DependencyProperty.Register(nameof(Frames), typeof(ObservableCollection<FrameViewModel>), typeof(Editor), new FrameworkPropertyMetadata(new ObservableCollection<FrameViewModel>()));
         public static readonly DependencyProperty FilledListProperty = DependencyProperty.Register(nameof(FilledList), typeof(bool), typeof(Editor), new FrameworkPropertyMetadata(false));
         public static readonly DependencyProperty NotPreviewingProperty = DependencyProperty.Register(nameof(NotPreviewing), typeof(bool), typeof(Editor), new FrameworkPropertyMetadata(true));
         public static readonly DependencyProperty IsLoadingProperty = DependencyProperty.Register(nameof(IsLoading), typeof(bool), typeof(Editor), new FrameworkPropertyMetadata(false));
@@ -71,15 +70,6 @@ namespace ScreenToGif.Windows
         public static readonly DependencyProperty FrameDpiProperty = DependencyProperty.Register(nameof(FrameDpi), typeof(double), typeof(Editor));
         public static readonly DependencyProperty IsCancelableProperty = DependencyProperty.Register(nameof(IsCancelable), typeof(bool), typeof(Editor), new FrameworkPropertyMetadata(false));
         public static readonly DependencyProperty HasImprecisePlaybackProperty = DependencyProperty.Register(nameof(HasImprecisePlayback), typeof(bool), typeof(Editor), new FrameworkPropertyMetadata(false));
-
-        /// <summary>
-        /// The list of frames.
-        /// </summary>
-        public ObservableCollection<FrameViewModel> Frames
-        {
-            get => (ObservableCollection<FrameViewModel>)GetValue(FramesProperty);
-            set => SetValue(FramesProperty, value);
-        }
 
         /// <summary>
         /// True if there is a value inside the list of frames.
@@ -219,6 +209,8 @@ namespace ScreenToGif.Windows
         /// </summary>
         public bool IsEncoderWindow { get; } = false;
 
+        private readonly EditorViewModel _viewModel; 
+
         private CancellationTokenSource _previewToken;
 
         private Action<object, RoutedEventArgs> _applyAction = null;
@@ -240,6 +232,8 @@ namespace ScreenToGif.Windows
         public Editor()
         {
             InitializeComponent();
+
+            DataContext = _viewModel = new EditorViewModel();
         }
 
         #region Main Events
@@ -444,7 +438,7 @@ namespace ScreenToGif.Windows
 
             if (e.Delta > 0)
             {
-                if (FrameListView.SelectedIndex == -1 || FrameListView.SelectedIndex == Frames.Count - 1)
+                if (FrameListView.SelectedIndex == -1 || FrameListView.SelectedIndex == _viewModel.Frames.Count - 1)
                 {
                     FrameListView.SelectedIndex = 0;
                     return;
@@ -457,7 +451,7 @@ namespace ScreenToGif.Windows
             {
                 if (FrameListView.SelectedIndex == -1 || FrameListView.SelectedIndex == 0)
                 {
-                    FrameListView.SelectedIndex = Frames.Count - 1;
+                    FrameListView.SelectedIndex = _viewModel.Frames.Count - 1;
                     return;
                 }
 
@@ -518,41 +512,41 @@ namespace ScreenToGif.Windows
 
             #endregion
 
-            if (LastSelected == -1 || _previewToken != null || WasChangingSelection || LastSelected >= Frames.Count || (e.AddedItems.Count > 0 && e.RemovedItems.Count > 0))
+            if (LastSelected == -1 || _previewToken != null || WasChangingSelection || LastSelected >= _viewModel.Frames.Count || (e.AddedItems.Count > 0 && e.RemovedItems.Count > 0))
                 LastSelected = FrameListView.SelectedIndex;
 
             FrameViewModel current;
 
             if (_previewToken != null || WasChangingSelection)
             {
-                current = Frames[FrameListView.SelectedIndex];
+                current = _viewModel.Frames[FrameListView.SelectedIndex];
             }
             else
             {
                 //TODO: Test with other key shortcuts, because Ctrl + Z/Y was breaking this code.
 
-                //current = Frames.GetItemAt(LastSelected) as FrameListBoxItem;
+                //current = _viewModel.Frames.GetItemAt(LastSelected) as FrameListBoxItem;
                 if (Keyboard.FocusedElement is ListViewItem focused && focused.IsVisible && (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift) || Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
                     current = FrameListView.ItemContainerGenerator.ItemFromContainer(focused) as FrameViewModel;
                 else
-                    current = Frames.FirstOrDefault(x => FrameListView.ItemContainerGenerator.ContainerFromItem(x) is ListViewItem container && (container.IsFocused || container.IsSelected));
+                    current = _viewModel.Frames.FirstOrDefault(x => FrameListView.ItemContainerGenerator.ContainerFromItem(x) is ListViewItem container && (container.IsFocused || container.IsSelected));
             }
 
             //If there's no focused item.
             if (current == null)
             {
-                if (Frames.Count - 1 > LastSelected)
+                if (_viewModel.Frames.Count - 1 > LastSelected)
                     FrameListView.SelectedIndex = LastSelected;
                 else
-                    FrameListView.SelectedIndex = LastSelected = Frames.Count - 1;
+                    FrameListView.SelectedIndex = LastSelected = _viewModel.Frames.Count - 1;
 
                 if (FrameListView.SelectedIndex > -1)
-                    current = Frames[FrameListView.SelectedIndex];
+                    current = _viewModel.Frames[FrameListView.SelectedIndex];
             }
 
             if (current != null)
             {
-                var index = Frames.IndexOf(current);
+                var index = _viewModel.Frames.IndexOf(current);
 
                 if (index > -1 && Project.Frames.Count > index)
                 {
@@ -678,6 +672,7 @@ namespace ScreenToGif.Windows
         public void RecorderCallback(ProjectInfo project)
         {
             Activate();
+
             if (project?.Any == true)
             {
                 LoadProject(project);
@@ -1117,7 +1112,7 @@ namespace ScreenToGif.Windows
 
             #region Validation
 
-            if (FrameListView.SelectedItems.Count == Frames.Count)
+            if (FrameListView.SelectedItems.Count == _viewModel.Frames.Count)
             {
                 Dialog.Ok(FindResource("S.Editor.Clipboard.InvalidCut.Title").ToString(),
                     FindResource("S.Editor.Clipboard.InvalidCut.Instruction").ToString(),
@@ -1147,7 +1142,7 @@ namespace ScreenToGif.Windows
             }
 
             selected.OrderByDescending(x => x.Number).ToList().ForEach(x => Project.Frames.RemoveAt(x.Number));
-            selected.OrderByDescending(x => x.Number).ToList().ForEach(x => Frames.Remove(x));
+            selected.OrderByDescending(x => x.Number).ToList().ForEach(x => _viewModel.Frames.Remove(x));
 
             AdjustFrameNumbers(index);
             SelectNear(index);
@@ -1435,7 +1430,7 @@ namespace ScreenToGif.Windows
         {
             Pause();
 
-            foreach (var item in Frames)
+            foreach (var item in _viewModel.Frames)
             {
                 if (FrameListView.ItemContainerGenerator.ContainerFromItem(item) is ListViewItem element)
                     element.IsSelected = !element.IsSelected;
@@ -1481,7 +1476,7 @@ namespace ScreenToGif.Windows
 
             if (FrameListView.SelectedIndex == -1 || FrameListView.SelectedIndex == 0)
             {
-                FrameListView.SelectedIndex = Frames.Count - 1;
+                FrameListView.SelectedIndex = _viewModel.Frames.Count - 1;
                 return;
             }
 
@@ -1500,7 +1495,7 @@ namespace ScreenToGif.Windows
 
             WasChangingSelection = true;
 
-            if (FrameListView.SelectedIndex == -1 || FrameListView.SelectedIndex == Frames.Count - 1)
+            if (FrameListView.SelectedIndex == -1 || FrameListView.SelectedIndex == _viewModel.Frames.Count - 1)
             {
                 FrameListView.SelectedIndex = 0;
                 return;
@@ -1515,7 +1510,7 @@ namespace ScreenToGif.Windows
             Pause();
 
             WasChangingSelection = true;
-            FrameListView.SelectedIndex = Frames.Count - 1;
+            FrameListView.SelectedIndex = _viewModel.Frames.Count - 1;
         }
 
         #endregion
@@ -1538,17 +1533,17 @@ namespace ScreenToGif.Windows
         private void DeleteNext_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = FrameListView?.SelectedItem != null && !IsLoading &&
-                FrameListView.SelectedItems.OfType<FrameViewModel>().Max(s => s.Number) < Frames.Count - 1;
+                FrameListView.SelectedItems.OfType<FrameViewModel>().Max(s => s.Number) < _viewModel.Frames.Count - 1;
         }
 
         private void Reduce_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = FrameListView != null && !IsLoading && Frames.Count > 5;
+            e.CanExecute = FrameListView != null && !IsLoading && _viewModel.Frames.Count > 5;
         }
 
         private void RemoveDuplicates_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = FrameListView != null && !IsLoading && Frames.Count > 1;
+            e.CanExecute = FrameListView != null && !IsLoading && _viewModel.Frames.Count > 1;
         }
 
         private void Delete_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -1588,7 +1583,7 @@ namespace ScreenToGif.Windows
 
                 list.ForEach(x => File.Delete(x.Path));
                 selectedOrdered.ForEach(x => Project.Frames.RemoveAt(x.Number));
-                selectedOrdered.ForEach(x => Frames.Remove(x));
+                selectedOrdered.ForEach(x => _viewModel.Frames.Remove(x));
 
                 AdjustFrameNumbers(selectedOrdered.Last().Number);
 
@@ -1637,7 +1632,7 @@ namespace ScreenToGif.Windows
             Pause();
 
             var lastFrame = FrameListView.SelectedItems.OfType<FrameViewModel>().Max(m => m.Number);
-            var count = Frames.Count - lastFrame - 1;
+            var count = _viewModel.Frames.Count - lastFrame - 1;
 
             if (UserSettings.All.NotifyFrameDeletion)
             {
@@ -1646,7 +1641,7 @@ namespace ScreenToGif.Windows
                     return;
             }
 
-            var countList = Frames.Count - 1;
+            var countList = _viewModel.Frames.Count - 1;
 
             ActionStack.SaveState(ActionStack.EditAction.Remove, Project.Frames, Util.Other.ListOfIndexes(lastFrame + 1, count));
 
@@ -1720,7 +1715,7 @@ namespace ScreenToGif.Windows
 
         private void Reordering_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = FrameListView?.SelectedItem != null && !IsLoading && Frames.Count > 1;
+            e.CanExecute = FrameListView?.SelectedItem != null && !IsLoading && _viewModel.Frames.Count > 1;
         }
 
         private void Reverse_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -1756,17 +1751,17 @@ namespace ScreenToGif.Windows
 
             var selection = FrameListView.SelectedItems.OfType<FrameViewModel>().Select(s =>
             {
-                var index = Frames.IndexOf(s);
-                return (Current: s, CurrentIndex: index, NextIndex: index > 0 ? index - 1 : Frames.Count - 1);
+                var index = _viewModel.Frames.IndexOf(s);
+                return (Current: s, CurrentIndex: index, NextIndex: index > 0 ? index - 1 : _viewModel.Frames.Count - 1);
             }).ToList();
 
             //Reorder the frames.
             foreach (var item in selection.OrderBy(o => o.CurrentIndex))
             {
-                if (Frames.IndexOf(item.Current) == item.NextIndex)
+                if (_viewModel.Frames.IndexOf(item.Current) == item.NextIndex)
                     continue;
 
-                Frames.Move(item.CurrentIndex, item.NextIndex);
+                _viewModel.Frames.Move(item.CurrentIndex, item.NextIndex);
                 Project.Frames.Move(item.CurrentIndex, item.NextIndex);
             }
 
@@ -1786,17 +1781,17 @@ namespace ScreenToGif.Windows
 
             var selection = FrameListView.SelectedItems.OfType<FrameViewModel>().Select(s =>
             {
-                var index = Frames.IndexOf(s);
-                return (Current: s, CurrentIndex: index, NextIndex: index < Frames.Count - 1 ? index + 1 : 0);
+                var index = _viewModel.Frames.IndexOf(s);
+                return (Current: s, CurrentIndex: index, NextIndex: index < _viewModel.Frames.Count - 1 ? index + 1 : 0);
             }).ToList();
 
             //Reorder the frames.
             foreach (var item in selection.OrderByDescending(o => o.CurrentIndex))
             {
-                if (Frames.IndexOf(item.Current) == item.NextIndex)
+                if (_viewModel.Frames.IndexOf(item.Current) == item.NextIndex)
                     continue;
 
-                Frames.Move(item.CurrentIndex, item.NextIndex);
+                _viewModel.Frames.Move(item.CurrentIndex, item.NextIndex);
                 Project.Frames.Move(item.CurrentIndex, item.NextIndex);
             }
 
@@ -2877,25 +2872,47 @@ namespace ScreenToGif.Windows
 
         private void FrameListView_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Space)
+            switch (e.Key)
             {
-                if (PlayButton.IsEnabled)
-                    PlayPause();
+                case Key.Space:
+                {
+                    if (PlayButton.IsEnabled)
+                        PlayPause();
 
-                //Avoids the selection of the frame by using the Space key.
-                e.Handled = true;
-            }
+                    //Avoids the selection of the frame by using the Space key.
+                    e.Handled = true;
+                    break;
+                }
 
-            if (e.Key == Key.PageDown)
-            {
-                NextFrame_Executed(sender, null);
-                e.Handled = true;
-            }
+                case Key.Right:
+                case Key.PageDown:
+                {
+                    NextFrame_Executed(sender, null);
+                    e.Handled = true;
+                    break;
+                }
 
-            if (e.Key == Key.PageUp)
-            {
-                PreviousFrame_Executed(sender, null);
-                e.Handled = true;
+                case Key.Left:
+                case Key.PageUp:
+                {
+                    PreviousFrame_Executed(sender, null);
+                    e.Handled = true;
+                    break;
+                }
+
+                case Key.Home:
+                {
+                    FirstFrame_Executed(sender, null);
+                    e.Handled = true;
+                    break;
+                }
+
+                case Key.End:
+                {
+                    LastFrame_Executed(sender, null);
+                    e.Handled = true;
+                    break;
+                }
             }
         }
 
@@ -3119,7 +3136,7 @@ namespace ScreenToGif.Windows
             Cursor = Cursors.AppStarting;
             IsLoading = true;
 
-            Frames.Clear();
+            _viewModel.Frames.Clear();
             ZoomBoxControl.Zoom = 1;
 
             #region Discard
@@ -3405,7 +3422,7 @@ namespace ScreenToGif.Windows
 
                 #region Load frames into the ListView
 
-                Dispatcher.Invoke(() => Frames.Clear());
+                Dispatcher.Invoke(() => _viewModel.Frames.Clear());
 
                 foreach (var frame in Project.Frames)
                 {
@@ -3423,7 +3440,7 @@ namespace ScreenToGif.Windows
                             Delay = frame.Delay
                         };
 
-                        Frames.Add(item);
+                        _viewModel.Frames.Add(item);
 
                         UpdateProgress(item.Number);
                     });
@@ -3543,11 +3560,11 @@ namespace ScreenToGif.Windows
                     for (var index = start; index <= end; index++)
                     {
                         //Check if within limits.
-                        if (index <= Frames.Count - 1)
+                        if (index <= _viewModel.Frames.Count - 1)
                         {
                             #region Edit the existing frame
 
-                            var frame = Frames[index];
+                            var frame = _viewModel.Frames[index];
                             frame.Number = index;
                             frame.Delay = Project.Frames[index].Delay;
                             frame.Image = null; //To update the image.
@@ -3561,7 +3578,7 @@ namespace ScreenToGif.Windows
                         {
                             #region Create another frame
 
-                            Frames.Add(new FrameViewModel
+                            _viewModel.Frames.Add(new FrameViewModel
                             {
                                 Number = index,
                                 Image = Project.Frames[index].Path,
@@ -3615,7 +3632,7 @@ namespace ScreenToGif.Windows
                         ZoomBoxControl.PixelSize = Project.Frames[0].Path.ScaledSize();
                         ZoomBoxControl.ImageScale = Project.Frames[0].Path.ScaleOf();
                         ZoomBoxControl.RefreshImage();
-                        FrameListView.ScrollIntoView(Frames[valid]);
+                        FrameListView.ScrollIntoView(_viewModel.Frames[valid]);
                     }
                 }
 
@@ -3850,7 +3867,7 @@ namespace ScreenToGif.Windows
                     ZoomBoxControl.ImageSource = null;
                     ZoomBoxControl.ImageSource = Project.Frames[LastSelected].Path;
 
-                    FrameListView.ScrollIntoView(Frames[LastSelected]);
+                    FrameListView.ScrollIntoView(_viewModel.Frames[LastSelected]);
                 }
 
                 #region Enabled the UI
@@ -4260,9 +4277,9 @@ namespace ScreenToGif.Windows
 
         private void SelectNear(int index)
         {
-            if (Frames.Count - 1 < index)
+            if (_viewModel.Frames.Count - 1 < index)
             {
-                SelectFrame(Frames.Count - 1, true);
+                SelectFrame(_viewModel.Frames.Count - 1, true);
                 return;
             }
 
@@ -4282,7 +4299,7 @@ namespace ScreenToGif.Windows
 
                 if (forceScroll)
                 {
-                    FrameListView.ScrollIntoView(Frames[FrameListView.SelectedIndex]);
+                    FrameListView.ScrollIntoView(_viewModel.Frames[FrameListView.SelectedIndex]);
 
                     SetFocusOnCurrentFrame();
                 }
@@ -4291,10 +4308,10 @@ namespace ScreenToGif.Windows
 
         private void AdjustFrameNumbers(int startIndex)
         {
-            for (var index = startIndex; index < Frames.Count; index++)
+            for (var index = startIndex; index < _viewModel.Frames.Count; index++)
             {
                 Project.Frames[index].Index = index;
-                Frames[index].Number = index;
+                _viewModel.Frames[index].Number = index;
             }
         }
 
@@ -4644,7 +4661,7 @@ namespace ScreenToGif.Windows
 
         private List<int> SelectedFramesIndex()
         {
-            return FrameListView.SelectedItems.OfType<FrameViewModel>().Select(x => Frames.IndexOf(x)).OrderBy(y => y).ToList();
+            return FrameListView.SelectedItems.OfType<FrameViewModel>().Select(x => _viewModel.Frames.IndexOf(x)).OrderBy(y => y).ToList();
         }
 
         private bool UpdatePositioning(bool onLoad = true)
@@ -4760,7 +4777,7 @@ namespace ScreenToGif.Windows
             FrameListView.SelectedIndex = -1;
             FrameListView.SelectionChanged -= FrameListView_SelectionChanged;
 
-            Frames.Clear();
+            _viewModel.Frames.Clear();
             ClipboardListBox.Items.Clear();
             Util.Clipboard.Items.Clear();
             ZoomBoxControl.Clear();
@@ -4780,7 +4797,7 @@ namespace ScreenToGif.Windows
 
             //Remove from the list.
             Project.Frames.RemoveAt(index);
-            Frames.RemoveAt(index);
+            _viewModel.Frames.RemoveAt(index);
         }
 
         private List<FrameInfo> SelectedFrames()
@@ -6301,8 +6318,8 @@ namespace ScreenToGif.Windows
 
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                for (var i = Frames.Count - 1; i >= Project.Frames.Count; i--)
-                    Frames.RemoveAt(i);
+                for (var i = _viewModel.Frames.Count - 1; i >= Project.Frames.Count; i--)
+                    _viewModel.Frames.RemoveAt(i);
 
                 SelectNear(LastSelected);
                 Project.Persist();
@@ -6434,8 +6451,8 @@ namespace ScreenToGif.Windows
 
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                for (var i = Frames.Count - 1; i >= Project.Frames.Count; i--)
-                    Frames.RemoveAt(i);
+                for (var i = _viewModel.Frames.Count - 1; i >= Project.Frames.Count; i--)
+                    _viewModel.Frames.RemoveAt(i);
 
                 SelectNear(LastSelected);
                 Project.Persist();
@@ -6502,7 +6519,7 @@ namespace ScreenToGif.Windows
                 if (!ignoreUi)
                 {
                     var index = Project.Frames.IndexOf(frameInfo);
-                    Dispatcher.Invoke(() => Frames[index].Delay = frameInfo.Delay);
+                    Dispatcher.Invoke(() => _viewModel.Frames[index].Delay = frameInfo.Delay);
                 }
 
                 #endregion

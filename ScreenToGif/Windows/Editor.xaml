@@ -4229,7 +4229,7 @@
 
         <!--Lower part of the Window-->
         <ListView Grid.Row="2" x:Name="FrameListView" BorderThickness="0,1,0,0" IsTabStop="False" Focusable="False" Style="{StaticResource Style.ListView.Frames}"
-                  ItemsSource="{Binding Path=Frames, ElementName=EditorWindow}" IsEnabled="{Binding Path=IsLoading, ElementName=EditorWindow, Converter={StaticResource InvertedBoolConverter}}"
+                  ItemsSource="{Binding Path=DataContext.Frames, ElementName=EditorWindow}" IsEnabled="{Binding Path=IsLoading, ElementName=EditorWindow, Converter={StaticResource InvertedBoolConverter}}"
                   Visibility="{Binding RelativeSource={RelativeSource Self}, Path=HasItems, Converter={StaticResource Bool2Visibility}}"
                   SelectionChanged="FrameListView_SelectionChanged" PreviewKeyDown="FrameListView_PreviewKeyDown">
 
