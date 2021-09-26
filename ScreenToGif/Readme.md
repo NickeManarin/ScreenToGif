@@ -10,10 +10,12 @@ _VS 2019 and .Net 4.8 or newer required._
 
 ### Fixed:
 
-♦ The keyboard navigation of the screen recorder (newer or older variants) was out of order (@pawlos).    
+♦ The frame navigation using keyboard arrows and home/end buttons was not working.  
+♦ If you loaded two editors with a project, the frame list of the first one was being overwritten.  
+♦ The keyboard navigation of the screen recorder (newer or older variants) was out of order (@pawlos).  
 ♦ Some shortcut key were not working for the screen recorder actions (@pawlos).   
-♦ Disabled Gifski on x86, since it's unsupported (@MaledongGit).
-♦ Added progress info when processing frames at start and made it possible to cancel during a task (@pawlos).
+♦ Disabled Gifski on x86, since it's unsupported (@MaledongGit).  
+♦ Added progress info when processing frames at start and made it possible to cancel during a task (@pawlos).  
 ♦ The option to cancel a frame altering process was not appearing if the editor already loaded something before.  
 
 ### Known Bugs:
@@ -24,5 +26,4 @@ _VS 2019 and .Net 4.8 or newer required._
 ♠ The newer recorder doesn't let you move the selected region to other windows.  
 ♠ When using the capture option "Capture a frame only when something changes on screen" and moving the recording window, the recording will glitch.  
 ♠ The Previous/Next repeat buttons are only triggering the events once (because of the command).   
-♠ Holding the side arrows to seek the frames for a long period makes the scrubing act jump frames.  
 ♠ Capturing with DirectX using a screen not in landscaped mode results in a rotated frame.
