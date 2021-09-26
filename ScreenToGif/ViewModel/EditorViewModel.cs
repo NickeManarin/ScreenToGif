@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -15,6 +16,8 @@ namespace ScreenToGif.ViewModel
         private int _currentIndex = -1;
         private WriteableBitmap _renderedImage = null;
         private double _zoom = 1d;
+
+        private ObservableCollection<FrameViewModel> _frames = new ObservableCollection<FrameViewModel>();
 
         #endregion
 
@@ -57,9 +60,20 @@ namespace ScreenToGif.ViewModel
         }
 
 
+        //In use for Version < 3.0
+
+
+        /// <summary>
+        /// The list of frames.
+        /// </summary>
+        public ObservableCollection<FrameViewModel> Frames
+        {
+            get => _frames;
+            set => SetProperty(ref _frames, value);
+        }
 
         #endregion
-        
+
         public EditorViewModel()
         {
             
