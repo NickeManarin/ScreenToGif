@@ -156,7 +156,7 @@
     <s:String x:Key="S.StartUp.Editor">Editor</s:String>
     <s:String x:Key="S.StartUp.Editor.Tooltip">Opent het Editorscherm, de centrale plek van deze applicatie. Hier kunnen nieuwe opnames worden gestart en bestaande opnames bewerkt.</s:String>
     <s:String x:Key="S.StartUp.Options">Instellingen</s:String>
-    <s:String x:Key="S.StartUp.NewRelease">Een nieuwe uitgave is beschikbaar • {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">Een nieuwe uitgave is beschikbaar</s:String>
     <s:String x:Key="S.StartUp.NewRelease.Tooltip">Download de nieuwste versie van ScreenToGif.</s:String>
 
     <!--Updater-->

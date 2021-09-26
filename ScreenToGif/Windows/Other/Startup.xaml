@@ -1,4 +1,4 @@
-﻿<Window x:Class="ScreenToGif.Windows.Other.Startup"
+<Window x:Class="ScreenToGif.Windows.Other.Startup"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:n="clr-namespace:ScreenToGif.Controls"
@@ -37,6 +37,8 @@
             <TextBlock Grid.Column="1" Name="UpdateTextBlock" VerticalAlignment="Center" Visibility="Hidden" Effect="{StaticResource Shadow.Border.Small}">
                 <Hyperlink Command="{StaticResource Command.Update}" ToolTip="{DynamicResource S.StartUp.NewRelease.Tooltip}" Cursor="Hand">
                     <Run Name="UpdateRun" Text="{DynamicResource S.StartUp.NewRelease}"/>
+                    <Run Text="•"/>
+                    <Run Name="VersionRun" Text="0.00"/>
                 </Hyperlink>
             </TextBlock>
 

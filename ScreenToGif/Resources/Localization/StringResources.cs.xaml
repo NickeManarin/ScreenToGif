@@ -132,7 +132,7 @@
     <s:String x:Key="S.StartUp.Editor">Editor</s:String>
     <s:String x:Key="S.StartUp.Editor.Tooltip">Otevře okno editoru, centrální bod aplikace, ve kterém lze editovat nové záznamy.</s:String>
     <s:String x:Key="S.StartUp.Options">Nastavení</s:String>
-    <s:String x:Key="S.StartUp.NewRelease">K dispozici je nová verze • {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">K dispozici je nová verze</s:String>
     <s:String x:Key="S.StartUp.NewRelease.Tooltip">Stáhnout nejnovější verzi ScreenToGif.</s:String>
 
     <!--Updater-->

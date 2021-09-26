@@ -151,7 +151,7 @@
     <s:String x:Key="S.StartUp.Editor">エディター</s:String>
     <s:String x:Key="S.StartUp.Editor.Tooltip">エディターウィンドウで新しい録画を開始したり編集したりできます。</s:String>
     <s:String x:Key="S.StartUp.Options">オプション</s:String>
-    <s:String x:Key="S.StartUp.NewRelease">新しいリリースがあります ( {0} )</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">新しいリリースがあります</s:String>
     <s:String x:Key="S.StartUp.NewRelease.Tooltip">ScreenToGifの最新バージョンをダウンロードします。</s:String>
 
     <!--Updater-->

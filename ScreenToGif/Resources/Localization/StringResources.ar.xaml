@@ -132,7 +132,7 @@
     <s:String x:Key="S.StartUp.Editor">المحرر</s:String>
     <s:String x:Key="S.StartUp.Editor.Tooltip">يفتح نافذه المحرر ، النقطة المركزية لهذا التطبيق ، حيث يمكنك بدء وتحرير تسجيل جديد.</s:String>
     <s:String x:Key="S.StartUp.Options">الخيارات</s:String>
-    <s:String x:Key="S.StartUp.NewRelease">يتوفر اصدار جديد • {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">يتوفر اصدار جديد</s:String>
     <s:String x:Key="S.StartUp.NewRelease.Tooltip"> ScreenToGif.تحميل اخر اصدار</s:String>
 
     <!--Updater-->

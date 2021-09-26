@@ -151,7 +151,7 @@
     <s:String x:Key="S.StartUp.Editor">Szerkesztő</s:String>
     <s:String x:Key="S.StartUp.Editor.Tooltip">Megnyitja a szerkesztő ablakot, az alkalmazás központi pontját, ahol új felvételt indíthatsz és szerkesztheted.</s:String>
     <s:String x:Key="S.StartUp.Options">Beállítások</s:String>
-    <s:String x:Key="S.StartUp.NewRelease">Új kiadás érhető el • {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">Új kiadás érhető el</s:String>
     <s:String x:Key="S.StartUp.NewRelease.Tooltip">Letölti a ScreenToGif legújabb verzióját.</s:String>
 
     <!--Updater-->

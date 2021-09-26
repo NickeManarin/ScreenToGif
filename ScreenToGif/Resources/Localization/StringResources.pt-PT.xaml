@@ -132,7 +132,7 @@
     <s:String x:Key="S.StartUp.Editor">Editor</s:String>
     <s:String x:Key="S.StartUp.Editor.Tooltip">Abre o editor. O local central desta aplicação.</s:String>
     <s:String x:Key="S.StartUp.Options">Opções</s:String>
-    <!--<s:String x:Key="S.StartUp.NewRelease">New release available • {0}</s:String>-->
+    <!--<s:String x:Key="S.StartUp.NewRelease">New version available</s:String>-->
     <!--<s:String x:Key="S.StartUp.NewRelease.Tooltip">Downloads the latest version of ScreenToGif.</s:String>-->
 
     <!--Updater-->
