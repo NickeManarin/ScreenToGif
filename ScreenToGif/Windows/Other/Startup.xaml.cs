@@ -138,7 +138,7 @@ namespace ScreenToGif.Windows.Other
                 return;
             }
 
-            UpdateRun.Text = string.Format(LocalizationHelper.Get("S.StartUp.NewRelease") ?? "New release available • {0}", Global.UpdateAvailable.Version.ToStringShort());
+            VersionRun.Text = Global.UpdateAvailable.Version.ToStringShort();
             UpdateTextBlock.Visibility = Visibility.Visible;
 
             CommandManager.InvalidateRequerySuggested();

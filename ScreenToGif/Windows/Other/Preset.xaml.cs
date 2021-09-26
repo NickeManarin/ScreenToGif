@@ -42,7 +42,7 @@ namespace ScreenToGif.Windows.Other
                 case Export.Gif:
                     EncoderScreenToGifItem.IsEnabled = true;
                     EncoderFfmpegItem.IsEnabled = true;
-                    EncoderGifskiItem.IsEnabled = true;
+                    EncoderGifskiItem.IsEnabled = Environment.Is64BitProcess;
                     EncoderSystemItem.IsEnabled = true;
                     break;
                 case Export.Apng:

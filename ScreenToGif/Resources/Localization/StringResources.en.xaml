@@ -156,7 +156,7 @@
     <s:String x:Key="S.StartUp.Editor">Editor</s:String>
     <s:String x:Key="S.StartUp.Editor.Tooltip">Opens the editor window, the central point of this app,&#10;where you can start and edit a new recording.</s:String>
     <s:String x:Key="S.StartUp.Options">Options</s:String>
-    <s:String x:Key="S.StartUp.NewRelease">New release available • {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">New version available</s:String>
     <s:String x:Key="S.StartUp.NewRelease.Tooltip">Downloads the latest version of ScreenToGif.</s:String>
 
     <!--Updater-->
@@ -613,6 +613,8 @@
     
     <!--Options • About-->
     <s:String x:Key="S.Options.About.Version">Version:</s:String>
+    <s:String x:Key="S.Options.About.UpdateCheck">Check for Updates</s:String>
+    <s:String x:Key="S.Options.About.UpdateCheck.Nothing">You already have the latest version.</s:String>
     <s:String x:Key="S.Options.About.Author">Author: Nicke Manarin</s:String>
     <s:String x:Key="S.Options.About.StoreVersion">Microsoft Store version. Some features are disabled due to enforced policies.</s:String>
     <s:String x:Key="S.Options.About.Contact">Contact</s:String>

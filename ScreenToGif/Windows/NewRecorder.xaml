@@ -119,9 +119,9 @@
                       Visibility="{Binding ElementName=RecorderWindow, Path=IsFollowing, Converter={StaticResource Bool2Visibility}}"/>
 
                 <n:ExtendedButton Grid.Column="4" x:Name="MinimizeButton" Style="{StaticResource Style.Button.NoText}" Icon="{DynamicResource Vector.Minimize}" 
-                                  Width="30" Padding="6" TabIndex="9" ContentHeight="14" ContentWidth="14" UseLayoutRounding="True" Click="MinimizeButton_Click"/>
+                                  Width="30" Padding="6" ContentHeight="14" ContentWidth="14" UseLayoutRounding="True" Click="MinimizeButton_Click"/>
                 <n:ExtendedButton Grid.Column="5" x:Name="CloseButton" Style="{StaticResource Style.Button.NoText}" Icon="{DynamicResource Vector.Close}" 
-                                  Width="30" Padding="6" TabIndex="10" ContentHeight="14" ContentWidth="14" UseLayoutRounding="True" Command="{Binding CloseCommand}"/>
+                                  Width="30" Padding="6" ContentHeight="14" ContentWidth="14" UseLayoutRounding="True" Command="{Binding CloseCommand}"/>
             </Grid>
 
             
@@ -143,7 +143,7 @@
                 </Grid.ColumnDefinitions>
 
                 <!--Options-->
-                <n:ExtendedButton Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" ContentHeight="24" ContentWidth="24" TabIndex="0" MinWidth="65" 
+                <n:ExtendedButton Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" ContentHeight="24" ContentWidth="24" MinWidth="65"
                                   Text="{DynamicResource S.StartUp.Options}" Icon="{StaticResource Vector.Options}" Style="{StaticResource Style.Button.Vertical}" 
                                   Command="{Binding OptionsCommand}" KeyGesture="{Binding OptionsCommand, Converter={StaticResource CommandToKeyGesture}}"/>
 
@@ -184,7 +184,7 @@
                             </Grid>
                         </Viewbox>
 
-                        <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="FrequencyIntegerUpDown" Margin="1,3" MinWidth="45" TabIndex="1"
+                        <n:IntegerUpDown Grid.Row="0" Grid.Column="1" x:Name="FrequencyIntegerUpDown" Margin="1,3" MinWidth="45"
                                          StepValue="1" Minimum="1" Maximum="60" Value="{Binding Source={x:Static t:UserSettings.All}, Path=LatestFps, Mode=TwoWay}" 
                                          ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource S.Recorder.Fps}"/>
 
@@ -201,7 +201,7 @@
                         </TextBlock.Visibility>
                     </TextBlock>
 
-                    <n:SplitButton Grid.Row="1" Grid.Column="0" ContentHeight="20" Padding="3" TabIndex="2"
+                    <n:SplitButton Grid.Row="1" Grid.Column="0" ContentHeight="20" Padding="3"
                                    Style="{StaticResource Style.SplitButton.NoBorder}" IsEnabled="{Binding ElementName=FrequencyIntegerUpDown, Path=IsEnabled, Mode=OneWay}"
                                    SelectedIndex="{Binding Source={x:Static t:UserSettings.All}, Path=CaptureFrequency, Converter={StaticResource EnumToInt}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                    ToolTip="{DynamicResource S.Recorder.SwitchFrequency}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"
@@ -265,14 +265,14 @@
                         </Grid.ColumnDefinitions>
 
                         <n:IntegerBox Grid.Column="0" x:Name="WidthIntegerBox" Value="{Binding RegionWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Center"
-                                      Offset="2" Minimum="25" Maximum="4096" TabIndex="3" Height="Auto" Padding="4,0" Margin="1,3"
+                                      Offset="2" Minimum="25" Maximum="4096" Height="Auto" Padding="4,0" Margin="1,3"
                                       ToolTip="{DynamicResource S.Recorder.Width}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"
                                       PropagateWheelEvent="True" ValueChanged="SizeIntegerBox_ValueChanged" MouseWheel="SizeIntegerBox_MouseWheel"/>
 
                         <TextBlock Grid.Column="1" Text="×" FontSize="16" FontFamily="Segoe Script" Margin="1" VerticalAlignment="Center" Padding="0" Foreground="{DynamicResource Element.Foreground}"/>
 
                         <n:IntegerBox Grid.Column="2" x:Name="HeightIntegerBox" Value="{Binding RegionHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Center"
-                                      Offset="2" Minimum="25" Maximum="4096" TabIndex="4" Height="Auto" Padding="4,0" Margin="1,3"
+                                      Offset="2" Minimum="25" Maximum="4096" Height="Auto" Padding="4,0" Margin="1,3"
                                       ToolTip="{DynamicResource S.Recorder.Height}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"
                                       PropagateWheelEvent="True" ValueChanged="SizeIntegerBox_ValueChanged" MouseWheel="SizeIntegerBox_MouseWheel"/>
 
@@ -282,7 +282,7 @@
                     <TextBlock Grid.Row="0" x:Name="SizeTextBlock" Text="..." TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                Foreground="{DynamicResource Element.Foreground.Gray112}"/>
 
-                    <n:SplitButton Grid.Row="1" ContentHeight="20" Padding="3" TabIndex="5" Style="{StaticResource Style.SplitButton.NoBorder}"
+                    <n:SplitButton Grid.Row="1" ContentHeight="20" Padding="3" Style="{StaticResource Style.SplitButton.NoBorder}"
                                    SelectedIndex="{Binding Source={x:Static t:UserSettings.All}, Path=RecorderModeIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                    Foreground="{Binding Source={x:Static t:UserSettings.All}, Path=RecorderForeground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}">
                         <n:ExtendedMenuItem Icon="{StaticResource Vector.Crop}" Header="{DynamicResource S.Recorder.Area.Select}" Tag="S.Recorder.Area" ContentHeight="16" ContentWidth="16" Click="RegionButton_Click"/>
@@ -294,37 +294,37 @@
                 <Separator Grid.Row="0" Grid.Column="5" Grid.RowSpan="2" Width="1" Margin="3,2"/>
 
                 <!--Snap-->
-                <n:ExtendedButton Grid.Row="0" Grid.Column="6" Grid.RowSpan="2" x:Name="SnapButton" ContentHeight="24" ContentWidth="24" TabIndex="6" MinWidth="65" 
+                <n:ExtendedButton Grid.Row="0" Grid.Column="6" Grid.RowSpan="2" x:Name="SnapButton" ContentHeight="24" ContentWidth="24" MinWidth="65"
                                   Text="{DynamicResource S.Recorder.Snap}" Icon="{StaticResource Vector.Camera.Add}" Style="{StaticResource Style.Button.Vertical}" 
                                   Command="{Binding SnapCommand}" KeyGesture="{Binding RecordKeyGesture, Converter={StaticResource KeyGestureToString}, UpdateSourceTrigger=PropertyChanged}"
                                   Visibility="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled, Converter={StaticResource Bool2Visibility}}"/>
 
                 <!--Record-->
-                <n:ExtendedButton Grid.Row="0" Grid.Column="6" Grid.RowSpan="2" x:Name="RecordButton" ContentHeight="24" ContentWidth="24" TabIndex="6" MinWidth="65"
+                <n:ExtendedButton Grid.Row="0" Grid.Column="6" Grid.RowSpan="2" x:Name="RecordButton" ContentHeight="24" ContentWidth="24" MinWidth="65"
                                   Text="{DynamicResource S.Recorder.Record}" Icon="{StaticResource Vector.Record}" Style="{StaticResource Style.Button.Vertical}" 
                                   Command="{Binding RecordCommand}" KeyGesture="{Binding RecordKeyGesture, Converter={StaticResource KeyGestureToString}, UpdateSourceTrigger=PropertyChanged}"
                                   Visibility="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled, Converter={StaticResource Bool2Visibility}}"/>
 
                 <!--Pause-->
-                <n:ExtendedButton Grid.Row="0" Grid.Column="6" Grid.RowSpan="2" x:Name="PauseButton" ContentHeight="24" ContentWidth="24" TabIndex="6" MinWidth="65"
+                <n:ExtendedButton Grid.Row="0" Grid.Column="6" Grid.RowSpan="2" x:Name="PauseButton" ContentHeight="24" ContentWidth="24" MinWidth="65"
                                   Text="{DynamicResource S.Recorder.Pause}" Icon="{StaticResource Vector.Pause}" Style="{StaticResource Style.Button.Vertical}" 
                                   Command="{Binding PauseCommand}" KeyGesture="{Binding RecordKeyGesture, Converter={StaticResource KeyGestureToString}, UpdateSourceTrigger=PropertyChanged}"
                                   Visibility="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled, Converter={StaticResource Bool2Visibility}}"/>
 
                 <!--Discard-->
-                <n:ExtendedButton Grid.Row="0" Grid.Column="7" x:Name="DiscardButton" ContentHeight="16" ContentWidth="16" TabIndex="7" MinWidth="65"
+                <n:ExtendedButton Grid.Row="0" Grid.Column="7" x:Name="DiscardButton" ContentHeight="16" ContentWidth="16" MinWidth="65"
                                   Text="{DynamicResource S.Recorder.Discard}" Icon="{StaticResource Vector.Remove}" Style="{StaticResource Style.Button.Horizontal}" 
                                   Command="{Binding DiscardCommand}" KeyGesture="{Binding DiscardKeyGesture, Converter={StaticResource KeyGestureToString}, UpdateSourceTrigger=PropertyChanged}"
                                   Visibility="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled, Converter={StaticResource Bool2Visibility}, FallbackValue={x:Static Visibility.Collapsed}}"/>
 
                 <!--Stop (when recording)-->
-                <n:ExtendedButton Grid.Row="0" Grid.Column="7" Grid.RowSpan="2" x:Name="StopLargeButton" ContentHeight="24" ContentWidth="24" TabIndex="8" MinWidth="65"
+                <n:ExtendedButton Grid.Row="0" Grid.Column="7" Grid.RowSpan="2" x:Name="StopLargeButton" ContentHeight="24" ContentWidth="24" MinWidth="65"
                                   Text="{DynamicResource S.Recorder.Stop}" Icon="{StaticResource Vector.Stop}" Style="{StaticResource Style.Button.Vertical}" 
                                   Command="{Binding StopLargeCommand}" KeyGesture="{Binding StopKeyGesture, Converter={StaticResource KeyGestureToString}, UpdateSourceTrigger=PropertyChanged}"
                                   Visibility="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled, Converter={StaticResource Bool2Visibility}, FallbackValue={x:Static Visibility.Collapsed}}"/>
 
                 <!--Stop (when paused/manual capture)-->
-                <n:ExtendedButton Grid.Row="1" Grid.Column="7" x:Name="StopSmallButton" ContentHeight="16" ContentWidth="16" TabIndex="8" MinWidth="65"
+                <n:ExtendedButton Grid.Row="1" Grid.Column="7" x:Name="StopSmallButton" ContentHeight="16" ContentWidth="16" MinWidth="65"
                                   Text="{DynamicResource S.Recorder.Stop}" Icon="{StaticResource Vector.Stop}" Style="{StaticResource Style.Button.Horizontal}" 
                                   Command="{Binding StopCommand}" KeyGesture="{Binding StopKeyGesture, Converter={StaticResource KeyGestureToString}, UpdateSourceTrigger=PropertyChanged}"
                                   Visibility="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled, Converter={StaticResource Bool2Visibility}, FallbackValue={x:Static Visibility.Collapsed}}"/>
@@ -346,7 +346,7 @@
                 </Grid.ColumnDefinitions>
 
                 <n:ExtendedButton Grid.Column="1" x:Name="OptionsButton" Icon="{DynamicResource Vector.Options}" Margin="0" Padding="3" 
-                                  Style="{DynamicResource Style.Button.NoText}" ContentHeight="22" ContentWidth="22" Command="{Binding OptionsCommand}" TabIndex="0"
+                                  Style="{DynamicResource Style.Button.NoText}" ContentHeight="22" ContentWidth="22" Command="{Binding OptionsCommand}"
                                   ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom" ToolTip="{DynamicResource S.StartUp.Options}"/>
 
                 <Viewbox Grid.Column="2" Stretch="UniformToFill" ClipToBounds="True" Focusable="False" Opacity="{DynamicResource Element.Opacity}"
@@ -364,13 +364,13 @@
                     </Grid>
                 </Viewbox>
 
-                <n:IntegerUpDown Grid.Column="3" Margin="1,3" StepValue="1" Minimum="1" Maximum="60" MinWidth="45" TabIndex="1"
+                <n:IntegerUpDown Grid.Column="3" Margin="1,3" StepValue="1" Minimum="1" Maximum="60" MinWidth="45"
                                  Value="{Binding Source={x:Static t:UserSettings.All}, Path=LatestFps, Mode=TwoWay}" IsEnabled="{Binding ElementName=FrequencyIntegerUpDown, Path=IsEnabled, Mode=OneWay}"
                                  ToolTip="{Binding ElementName=FrequencyIntegerUpDown, Path=ToolTip, Mode=OneWay}" ToolTipService.HorizontalOffset="-5" ToolTipService.Placement="Bottom"
                                  Visibility="{Binding ElementName=FrequencyGrid, Path=Visibility, Mode=OneWay}"/>
 
                 <n:ExtendedButton Grid.Column="4" Style="{StaticResource Style.Button.Horizontal.NoImage}" Margin="1,0,0,0" VerticalContentAlignment="Center" Padding="0"
-                                  UseLayoutRounding="True" TabIndex="3" Text="{Binding ElementName=FrequencyTextBlock, Path=Text, Mode=OneWay}" FontSize="12" TextWrapping="NoWrap"
+                                  UseLayoutRounding="True" Text="{Binding ElementName=FrequencyTextBlock, Path=Text, Mode=OneWay}" FontSize="12" TextWrapping="NoWrap"
                                   ToolTip="{DynamicResource S.Recorder.SwitchFrequency}" ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"
                                   Command="{Binding SwitchFrequencyCommand}" CommandParameter="Switch">
                     <n:ExtendedButton.ContextMenu>
@@ -408,7 +408,7 @@
 
                 <Separator Grid.Column="5" Width="1" Margin="5,2" HorizontalAlignment="Left"/>
 
-                <n:SplitButton Grid.Column="6" x:Name="ReselectSplitButton" Style="{StaticResource Style.SplitButton.NoBorder.NoText}" ContentHeight="20" Padding="3" TabIndex="4"
+                <n:SplitButton Grid.Column="6" x:Name="ReselectSplitButton" Style="{StaticResource Style.SplitButton.NoBorder.NoText}" ContentHeight="20" Padding="3"
                                SelectedIndex="{Binding Source={x:Static t:UserSettings.All}, Path=RecorderModeIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                Foreground="{Binding Source={x:Static t:UserSettings.All}, Path=RecorderForeground, Mode=TwoWay, Converter={StaticResource ColorToBrush}}"
                                Visibility="{Binding ElementName=RegionGrid, Path=IsEnabled, Converter={StaticResource Bool2Visibility}}">
@@ -418,27 +418,27 @@
                 </n:SplitButton>
 
                 <!--Discard-->
-                <n:ExtendedButton Grid.Column="7" Icon="{DynamicResource Vector.Remove}" ContentHeight="20" ContentWidth="20" Padding="3" TabIndex="5"
+                <n:ExtendedButton Grid.Column="7" Icon="{DynamicResource Vector.Remove}" ContentHeight="20" ContentWidth="20" Padding="3"
                                   Style="{StaticResource Style.Button.NoText}" Command="{Binding DiscardCommand}" KeyGesture="{Binding DiscardCommand, Converter={StaticResource CommandToKeyGesture}}" 
                                   ToolTip="{DynamicResource S.Recorder.Discard}" Visibility="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled, Converter={StaticResource Bool2Visibility}}"/>
 
                 <!--Snap-->
-                <n:ExtendedButton Grid.Column="8" Icon="{StaticResource Vector.Camera.Add}" ContentHeight="20" ContentWidth="20" Padding="3" TabIndex="6"
+                <n:ExtendedButton Grid.Column="8" Icon="{StaticResource Vector.Camera.Add}" ContentHeight="20" ContentWidth="20" Padding="3"
                                   Style="{StaticResource Style.Button.NoText}" Command="{Binding SnapCommand}" KeyGesture="{Binding SnapCommand, Converter={StaticResource CommandToKeyGesture}}" 
                                   ToolTip="{DynamicResource S.Recorder.Snap}" Visibility="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled, Converter={StaticResource Bool2Visibility}}"/>
 
                 <!--Record-->
-                <n:ExtendedButton Grid.Column="8" Icon="{StaticResource Vector.Record}" ContentHeight="20" ContentWidth="20" Padding="3" TabIndex="6" 
+                <n:ExtendedButton Grid.Column="8" Icon="{StaticResource Vector.Record}" ContentHeight="20" ContentWidth="20" Padding="3" 
                                   Style="{StaticResource Style.Button.NoText}" Command="{Binding RecordCommand}" KeyGesture="{Binding RecordCommand, Converter={StaticResource CommandToKeyGesture}}" 
                                   ToolTip="{DynamicResource S.Recorder.Record}" Visibility="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled, Converter={StaticResource Bool2Visibility}}"/>
 
                 <!--Pause-->
-                <n:ExtendedButton Grid.Column="8" Icon="{StaticResource Vector.Pause}" ContentHeight="20" ContentWidth="20" Padding="3" TabIndex="6" 
+                <n:ExtendedButton Grid.Column="8" Icon="{StaticResource Vector.Pause}" ContentHeight="20" ContentWidth="20" Padding="3" 
                                   Style="{StaticResource Style.Button.NoText}" Command="{Binding PauseCommand}" KeyGesture="{Binding PauseCommand, Converter={StaticResource CommandToKeyGesture}}" 
                                   ToolTip="{DynamicResource S.Recorder.Pause}" Visibility="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled, Converter={StaticResource Bool2Visibility}}"/>
 
                 <!--Stop-->
-                <n:ExtendedButton Grid.Column="9" Icon="{DynamicResource Vector.Stop}" ContentHeight="20" ContentWidth="20" Padding="3" TabIndex="7"
+                <n:ExtendedButton Grid.Column="9" Icon="{DynamicResource Vector.Stop}" ContentHeight="20" ContentWidth="20" Padding="3"
                                   Style="{StaticResource Style.Button.NoText}" Command="{Binding StopCommand}" KeyGesture="{Binding StopCommand, Converter={StaticResource CommandToKeyGesture}}" 
                                   ToolTip="{DynamicResource S.Recorder.Stop}" Visibility="{Binding RelativeSource={RelativeSource Self}, Path=IsEnabled, Converter={StaticResource Bool2Visibility}}"/>
             </Grid>

@@ -101,10 +101,9 @@ namespace ScreenToGif.Windows
             InitializeComponent();
 
 #if UWP
-            //PaypalLabel.Visibility = Visibility.Collapsed;
             UpdatesCheckBox.Visibility = Visibility.Collapsed;
+            CheckForUpdatesLabel.Visibility = Visibility.Collapsed;
             StoreTextBlock.Visibility = Visibility.Visible;
-            TaiwanListBoxItem.Image = LanguagePanel.TryFindResource("Flag.White") as Canvas;
 #endif
         }
 
@@ -617,7 +616,7 @@ namespace ScreenToGif.Windows
             {
                 if (!(TasksDataGrid.SelectedItem is BaseTaskViewModel selected))
                     return;
-                
+
                 selected.IsEnabled = !selected.IsEnabled;
                 e.Handled = true;
 
@@ -741,7 +740,6 @@ namespace ScreenToGif.Windows
                 LogWriter.Log(ex, "Open MailTo");
             }
         }
-
         #endregion
 
         #region Storage
@@ -943,7 +941,7 @@ namespace ScreenToGif.Windows
             //It's only a relative path if not null/empty and there's no root folder declared.
             var isRelative = !string.IsNullOrWhiteSpace(path) && !Path.IsPathRooted(path);
             var notAlt = !string.IsNullOrWhiteSpace(path) && UserSettings.All.LogsFolder.Contains(Path.DirectorySeparatorChar);
-            
+
             path = Util.Other.AdjustPath(path);
 
             var initial = Directory.Exists(path) ? path : Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
@@ -961,11 +959,11 @@ namespace ScreenToGif.Windows
             {
                 var selected = new Uri(folderDialog.SelectedPath);
                 var baseFolder = new Uri(AppDomain.CurrentDomain.BaseDirectory);
-                var relativeFolder = selected.AbsolutePath.TrimEnd(Path.DirectorySeparatorChar).TrimEnd(Path.AltDirectorySeparatorChar) == baseFolder.AbsolutePath.TrimEnd(Path.DirectorySeparatorChar).TrimEnd(Path.AltDirectorySeparatorChar) ? 
+                var relativeFolder = selected.AbsolutePath.TrimEnd(Path.DirectorySeparatorChar).TrimEnd(Path.AltDirectorySeparatorChar) == baseFolder.AbsolutePath.TrimEnd(Path.DirectorySeparatorChar).TrimEnd(Path.AltDirectorySeparatorChar) ?
                     "." : Uri.UnescapeDataString(baseFolder.MakeRelativeUri(selected).ToString());
 
                 //This app even returns you the correct slashes/backslashes.
-                UserSettings.All.LogsFolder = notAlt ? relativeFolder.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar) : 
+                UserSettings.All.LogsFolder = notAlt ? relativeFolder.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar) :
                     relativeFolder.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
             }
             else
@@ -1139,9 +1137,9 @@ namespace ScreenToGif.Windows
                 {
                     App.MainViewModel.CheckDiskSpace();
 
-                    FilesRun.Text = _fileCount == 0 ? LocalizationHelper.Get("S.Options.Storage.Status.Files.None") : 
+                    FilesRun.Text = _fileCount == 0 ? LocalizationHelper.Get("S.Options.Storage.Status.Files.None") :
                     LocalizationHelper.GetWithFormat("S.Options.Storage.Status.Files." + (_fileCount > 1 ? "Plural" : "Singular"), "{0} files", _fileCount);
-                    FoldersRun.Text = _folderList.Count == 0 ? LocalizationHelper.Get("S.Options.Storage.Status.Folders.None") : 
+                    FoldersRun.Text = _folderList.Count == 0 ? LocalizationHelper.Get("S.Options.Storage.Status.Folders.None") :
                     LocalizationHelper.GetWithFormat("S.Options.Storage.Status.Folders." + (_folderList.Count > 1 ? "Plural" : "Singular"), "{0} folders", _folderList.Count);
                     UsedSpaceRun.Text = LocalizationHelper.GetWithFormat("S.Options.Storage.Status.InUse", "{0} in use", Humanizer.BytesToString(_cacheSize));
                     FilesTextBlock.Visibility = Visibility.Visible;
@@ -1278,6 +1276,9 @@ namespace ScreenToGif.Windows
         private void ExtrasGrid_Loaded(object sender, RoutedEventArgs e)
         {
             CheckTools();
+
+            //Gifski is only supported in x64.
+            GifskiImageCard.IsEnabled = Environment.Is64BitProcess;
         }
 
         private async void FfmpegImageCard_Click(object sender, RoutedEventArgs e)
@@ -1352,7 +1353,7 @@ namespace ScreenToGif.Windows
 
                 using (var client = new WebClient { Proxy = WebHelper.GetProxy() })
                     await client.DownloadFileTaskAsync(new Uri(string.Format("https://www.screentogif.com/downloads/FFmpeg-4.3.1-x{0}.zip", Environment.Is64BitProcess ? "64" : "86")), temp);
-                
+
                 using (var zip = ZipFile.Open(temp, ZipArchiveMode.Read))
                 {
                     var entry = zip.Entries.FirstOrDefault(x => x.Name.Contains("ffmpeg.exe"));
@@ -1552,7 +1553,7 @@ namespace ScreenToGif.Windows
                 Cursor = Cursors.Arrow;
                 return;
             }
-            
+
             #endregion
 
             #region Download
@@ -1601,7 +1602,7 @@ namespace ScreenToGif.Windows
         private void LocationTextBox_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             var box = sender as TextBox;
-            
+
             CheckTools(box?.Tag?.Equals("FFmpeg") ?? false, box?.Tag?.Equals("Gifski") ?? false, box?.Tag?.Equals("SharpDX") ?? false);
         }
 
@@ -2071,6 +2072,28 @@ namespace ScreenToGif.Windows
             }
         }
 
+        private async void CheckForUpdatesLabel_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                CheckForUpdatesLabel.IsEnabled = false;
+
+                await App.MainViewModel.CheckForUpdates(true);
+
+                if (Global.UpdateAvailable != null)
+                {
+                    App.MainViewModel.PromptUpdate.Execute(null);
+                    return;
+                }
+
+                StatusBand.Info(LocalizationHelper.Get("S.Options.About.UpdateCheck.Nothing"));
+            }
+            finally
+            {
+                CheckForUpdatesLabel.IsEnabled = true;
+            }
+        }
+
         #endregion
 
         #region Other
@@ -2127,7 +2150,7 @@ namespace ScreenToGif.Windows
             #endregion
 
             Global.IgnoreHotKeys = false;
-            
+
             BaseCompatibilityPreferences.HandleDispatcherRequestProcessingFailure = UserSettings.All.WorkaroundQuota ? BaseCompatibilityPreferences.HandleDispatcherRequestProcessingFailureOptions.Reset : BaseCompatibilityPreferences.HandleDispatcherRequestProcessingFailureOptions.Continue;
             RenderOptions.ProcessRenderMode = UserSettings.All.DisableHardwareAcceleration ? RenderMode.SoftwareOnly : RenderMode.Default;
 

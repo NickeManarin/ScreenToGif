@@ -156,7 +156,7 @@
     <s:String x:Key="S.StartUp.Editor">Редактор</s:String>
     <s:String x:Key="S.StartUp.Editor.Tooltip">Редактор, здесь можно начать новую запись или редактировать существующую.</s:String>
     <s:String x:Key="S.StartUp.Options">Настройки</s:String>
-    <s:String x:Key="S.StartUp.NewRelease">Доступна новая версия: {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">Доступна новая версия</s:String>
     <s:String x:Key="S.StartUp.NewRelease.Tooltip">Загрузка последней версии программы.</s:String>
 
     <!--Updater-->

@@ -136,7 +136,7 @@
     <s:String x:Key="S.StartUp.Editor">Πρόγραμμα Επεξεργασίας</s:String>
     <s:String x:Key="S.StartUp.Editor.Tooltip">Ανοίγει το παράθυρο του προγράμματος επεξεργασίας, το κεντρικό σημείο αυτής της εφαρμογής, όπου μπορείτε να ξεκινήσετε και να επεξεργαστείτε μια νέα εγγραφή.</s:String>
     <s:String x:Key="S.StartUp.Options">Ρυθμίσεις</s:String>
-    <s:String x:Key="S.StartUp.NewRelease">Διατίθεται νέα έκδοση • {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">Διατίθεται νέα έκδοση</s:String>
     <s:String x:Key="S.StartUp.NewRelease.Tooltip">Λήψη της τελευταίας έκδοσης του ScreenToGif.</s:String>
 
     <!--Updater-->

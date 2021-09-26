@@ -137,7 +137,7 @@ Voulez-vous ouvrir la page web pour la télécharger?</s:String>
     <s:String x:Key="S.StartUp.Editor">Éditeur</s:String>
     <s:String x:Key="S.StartUp.Editor.Tooltip">Ouvre l'éditeur principal, le point central de cette application, où vous pouvez démarrer et éditer un nouvel enregistrement</s:String>
     <s:String x:Key="S.StartUp.Options">Options</s:String>
-    <s:String x:Key="S.StartUp.NewRelease">Nouvelle version disponible • {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">Nouvelle version disponible</s:String>
     <s:String x:Key="S.StartUp.NewRelease.Tooltip">Télécharger la dernière version de ScreenToGif.</s:String>
 
     <!--Updater-->

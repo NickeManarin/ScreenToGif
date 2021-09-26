@@ -156,7 +156,7 @@
     <s:String x:Key="S.StartUp.Editor">Editor</s:String>
     <s:String x:Key="S.StartUp.Editor.Tooltip">Abre o editor. O local central deste aplicativo.</s:String>
     <s:String x:Key="S.StartUp.Options">Opções</s:String>
-    <s:String x:Key="S.StartUp.NewRelease">Nova versão disponível • {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">Nova versão disponível</s:String>
     <s:String x:Key="S.StartUp.NewRelease.Tooltip">Exibe a tela de download da versão mais recente do ScreenToGif.</s:String>
 
     <!--Updater-->
@@ -613,6 +613,8 @@
     
     <!--Options • About-->
     <s:String x:Key="S.Options.About.Version">Versão:</s:String>
+    <s:String x:Key="S.Options.About.UpdateCheck">Verifique se há atualizações </s:String>
+    <s:String x:Key="S.Options.About.UpdateCheck.Nothing">Você já tem a versão mais recente.</s:String>
     <s:String x:Key="S.Options.About.Author">Autor: Nicke Manarin</s:String>
     <s:String x:Key="S.Options.About.StoreVersion">Versão da Microsoft Store. Alguns recursos estão desabilitadas devido a politicas aplicadas.</s:String>
     <s:String x:Key="S.Options.About.Contact">Contato</s:String>

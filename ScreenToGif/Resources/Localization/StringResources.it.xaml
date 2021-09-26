@@ -132,7 +132,7 @@
     <s:String x:Key="S.StartUp.Editor">Editor</s:String>
     <s:String x:Key="S.StartUp.Editor.Tooltip">Apre la finestra dell'editor, la parte principale di questa app, tramite la quale è possibile avviare e modificare una nuova registrazione.</s:String>
     <s:String x:Key="S.StartUp.Options">Impostazioni</s:String>
-    <s:String x:Key="S.StartUp.NewRelease">Nuova versione disponibile • {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">Nuova versione disponibile</s:String>
     <s:String x:Key="S.StartUp.NewRelease.Tooltip">Scarica l'ultima versione di ScreenToGif.</s:String>
 
     <!--Updater-->

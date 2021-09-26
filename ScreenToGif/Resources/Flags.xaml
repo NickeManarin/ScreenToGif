@@ -1,9 +1,5 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-
-    <Canvas x:Shared="False" x:Key="Flag.White" HorizontalAlignment="Center" Height="12.5" UseLayoutRounding="False" VerticalAlignment="Center" Width="20">
-        <Path Data="F1M0,12.5 L20,12.5 20,0 0,0z" Fill="#FFFEFEFE" Height="12.5" Canvas.Left="0" Canvas.Top="0" Width="20"/>
-    </Canvas>
 
     <Canvas x:Shared="False" x:Key="Flag.Brazil" Height="147" UseLayoutRounding="False" Width="207"  HorizontalAlignment="Center" VerticalAlignment="Center">
         <Path Data="F1M205.827,144.117L205.827,0.125 0.125,0.125 0.125,144.117z" Fill="#FF3DB84E" Height="144.241" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="2.379" Width="205.952"/>
@@ -44,9 +40,7 @@
     </Canvas>
 
     <Canvas x:Shared="False" x:Key="Flag.Taiwan" HorizontalAlignment="Center" Height="144" UseLayoutRounding="False" VerticalAlignment="Center" Width="216">
-        <Path Data="F1M216.133,144.131L216.133,0.125 0.125,0.125 0.125,144.131z" Fill="#FFEC1248" Height="144.255" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="0" Width="216.259"/>
-        <Path Data="F1M108.129,72.128L108.129,0.125 0.125,0.125 0.125,72.128z" Fill="#FF1064A6" Height="72.253" Canvas.Left="0" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="0" Width="108.254"/>
-        <Path Data="F1M13.458,26.914C20.89,26.914 26.915,20.889 26.915,13.457 26.915,6.025 20.89,0 13.458,0 6.025,0 0,6.025 0,13.457 0,20.889 6.025,26.914 13.458,26.914z" Fill="White" Height="26.914" Canvas.Left="40.652" Canvas.Top="22.035" Width="26.914"/>
+        <TextBlock Canvas.Top="50" FontSize="75" FontWeight="SemiBold" Text="zh-TW"/>
     </Canvas>
 
     <Canvas x:Shared="False" x:Key="Flag.Japan" HorizontalAlignment="Center" Height="144" UseLayoutRounding="False" VerticalAlignment="Center" Width="206">
@@ -55,12 +49,7 @@
     </Canvas>
 
     <Canvas x:Shared="False" x:Key="Flag.China" HorizontalAlignment="Center" Height="144" UseLayoutRounding="False" VerticalAlignment="Center" Width="216">
-        <Path Data="F1M216.125,144.125L216.125,0.125 0.125,0.125 0.125,144.125z" Fill="#FFEC192D" Height="144.25" Canvas.Left="0.248" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="-0.481" Width="216.25"/>
-        <Path Data="F1M20.497,0.203L15.763,14.915 0.193,14.915 12.837,24.07 7.979,38.768 20.497,29.635 33.015,38.768 28.222,23.945 40.801,14.977 25.293,14.977z" Fill="#FFFCE136" Height="38.934" Canvas.Left="16.128" Stroke="Black" StrokeThickness="0.125" StrokeMiterLimit="4" Canvas.Top="16.266" Width="40.997"/>
-        <Path Data="F1M0.973,2.029L3.635,6.494 0.174,10.424 5.295,9.267 7.926,13.76 8.402,8.571 13.49,7.441 8.683,5.356 9.215,0.188 5.768,4.102z" Fill="#FFFCE136" Height="13.96" Canvas.Left="66.28" Stroke="Black" StrokeThickness="0.125" StrokeMiterLimit="4" Canvas.Top="9.491" Width="13.692"/>
-        <Path Data="F1M4.176,0.183L4.91,5.328 0.201,7.62 5.372,8.527 6.066,13.687 8.508,9.083 13.637,10.003 10.006,6.225 12.49,1.662 7.801,3.944z" Fill="#FFFCE136" Height="13.888" Canvas.Left="79.817" Stroke="Black" StrokeThickness="0.125" StrokeMiterLimit="4" Canvas.Top="23.882" Width="13.816"/>
-        <Path Data="F1M0.195,5.338L4.485,8.272 2.995,13.292 7.156,10.091 11.431,13.064 9.684,8.154 13.827,4.992 8.589,5.119 6.901,0.205 5.417,5.205z" Fill="#FFFCE136" Height="13.459" Canvas.Left="79.817" Stroke="Black" StrokeThickness="0.125" StrokeMiterLimit="4" Canvas.Top="42.77" Width="14.018"/>
-        <Path Data="F1M0.594,2.398L3.452,6.74 0.169,10.82 5.234,9.436 8.061,13.808 8.307,8.602 13.339,7.247 8.444,5.379 8.746,0.191 5.477,4.255z" Fill="#FFFCE136" Height="14.005" Canvas.Left="66.202" Stroke="Black" StrokeThickness="0.125" StrokeMiterLimit="4" Canvas.Top="57.51" Width="13.542"/>
+        <TextBlock Canvas.Top="50" FontSize="75" FontWeight="SemiBold" Text="zh-CN"/>
     </Canvas>
 
     <Canvas x:Shared="False" x:Key="Flag.Italy" HorizontalAlignment="Center" Height="144" UseLayoutRounding="False" VerticalAlignment="Center" Width="215">

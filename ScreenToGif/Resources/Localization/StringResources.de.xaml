@@ -156,7 +156,7 @@
     <s:String x:Key="S.StartUp.Editor">Editor</s:String>
     <s:String x:Key="S.StartUp.Editor.Tooltip">Öffnet den Editor, mit dem Sie Ihre Aufnahmen bearbeiten können.</s:String>
     <s:String x:Key="S.StartUp.Options">Einstellungen</s:String>
-    <s:String x:Key="S.StartUp.NewRelease">Neue Version verfügbar • {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">Neue Version verfügbar</s:String>
     <s:String x:Key="S.StartUp.NewRelease.Tooltip">Lädt die neueste Version von ScreenToGif herunter.</s:String>
 
     <!--Updater-->

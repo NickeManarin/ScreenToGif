@@ -132,7 +132,7 @@
     <s:String x:Key="S.StartUp.Editor">Kihariri</s:String>
     <s:String x:Key="S.StartUp.Editor.Tooltip">Inafungua kidirisha cha kihariri, sehemu kati ya app hii, unapoweza anza na kuhariri rekodi mpya.</s:String>
     <s:String x:Key="S.StartUp.Options">Chaguo</s:String>
-    <s:String x:Key="S.StartUp.NewRelease">Toleo jipya linapatikana • {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">Toleo jipya linapatikana</s:String>
     <s:String x:Key="S.StartUp.NewRelease.Tooltip">Inapakua toleo la mwisho la ScreenToGif</s:String>
 
     <!--Updater-->
