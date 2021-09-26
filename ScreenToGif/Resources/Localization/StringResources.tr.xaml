@@ -132,7 +132,7 @@
     <s:String x:Key="S.StartUp.Editor">Editör</s:String>
     <s:String x:Key="S.StartUp.Editor.Tooltip">Düzenleme penceresini açar, bu uygulamanın merkezi, yeni kayıt başlatıp düzenleyebileceğiniz bir yer.</s:String>
     <s:String x:Key="S.StartUp.Options">Ayarlar</s:String>
-    <s:String x:Key="S.StartUp.NewRelease">Yeni sürüm mevcut • {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">Yeni sürüm mevcut</s:String>
     <s:String x:Key="S.StartUp.NewRelease.Tooltip">ScreenToGif'in en son versiyonunu indirin.</s:String>
 
     <!--Updater-->

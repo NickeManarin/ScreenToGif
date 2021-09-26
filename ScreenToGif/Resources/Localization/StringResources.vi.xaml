@@ -132,7 +132,7 @@
     <s:String x:Key="S.StartUp.Editor">Chỉnh sửa</s:String>
     <s:String x:Key="S.StartUp.Editor.Tooltip">Mở cửa sổ chỉnh sửa, trung tâm của ứng dụng này, nơi bạn có thể bắt đầu và chỉnh sửa quay màn hình mới.</s:String>
     <s:String x:Key="S.StartUp.Options">Các tùy chọn</s:String>
-    <s:String x:Key="S.StartUp.NewRelease">Phát hành mới đã sẵn sàng • {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">Phát hành mới đã sẵn sàng</s:String>
     <s:String x:Key="S.StartUp.NewRelease.Tooltip">Tải về phiên bản mới nhất của ScreenToGif.</s:String>
 
     <!--Updater-->

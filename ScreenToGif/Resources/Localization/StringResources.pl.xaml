@@ -132,7 +132,7 @@
     <s:String x:Key="S.StartUp.Editor">Edytor</s:String>
     <s:String x:Key="S.StartUp.Editor.Tooltip">Otwiera okno edytora, głównego narzędzia tej aplikacji, gdzie łatwo możesz nagrywać i edytować.</s:String>
     <s:String x:Key="S.StartUp.Options">Opcje</s:String>
-    <s:String x:Key="S.StartUp.NewRelease">Nowa wersja dostępna • {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">Nowa wersja dostępna</s:String>
     <s:String x:Key="S.StartUp.NewRelease.Tooltip">Pobiera najnowszą wersję ScreenToGif.</s:String>
 
     <!--Updater-->

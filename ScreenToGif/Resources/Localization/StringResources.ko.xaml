@@ -136,7 +136,7 @@
     <s:String x:Key="S.StartUp.Editor">편집기</s:String>
     <s:String x:Key="S.StartUp.Editor.Tooltip">편집기를 시작합니다.</s:String>
     <s:String x:Key="S.StartUp.Options">설정</s:String>
-    <s:String x:Key="S.StartUp.NewRelease">사용 가능한 새 릴리스 • {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">사용 가능한 새 릴리스</s:String>
     <s:String x:Key="S.StartUp.NewRelease.Tooltip">ScreenToGif의 최신 버전을 다운로드합니다.</s:String>
 
     <!--Updater-->

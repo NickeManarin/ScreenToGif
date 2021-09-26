@@ -132,7 +132,7 @@
     <s:String x:Key="S.StartUp.Editor">Redigerare</s:String>
     <s:String x:Key="S.StartUp.Editor.Tooltip">Öppnar redigeringsfönstret, den centrala punkten i denna applikation, där du kan starta och redigera en ny inspelning.</s:String>
     <s:String x:Key="S.StartUp.Options">Alternativ</s:String>
-    <s:String x:Key="S.StartUp.NewRelease">Ny version tillgänglig • {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">Ny version tillgänglig</s:String>
     <s:String x:Key="S.StartUp.NewRelease.Tooltip">Laddar ner den senaste versionen av ScreenToGif.</s:String>
 
     <!--Updater-->

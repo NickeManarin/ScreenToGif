@@ -156,7 +156,7 @@
     <s:String x:Key="S.StartUp.Editor">编辑器</s:String>
     <s:String x:Key="S.StartUp.Editor.Tooltip">打开编辑器窗口，您可以在其中开始或编辑新的录制视频。</s:String>
     <s:String x:Key="S.StartUp.Options">选项</s:String>
-    <s:String x:Key="S.StartUp.NewRelease">新版本可用 • {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">新版本可用</s:String>
     <s:String x:Key="S.StartUp.NewRelease.Tooltip">下载最新版本的 ScreenToGif。</s:String>
 
     <!--Updater-->

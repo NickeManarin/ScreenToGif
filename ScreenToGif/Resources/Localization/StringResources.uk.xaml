@@ -132,7 +132,7 @@
     <s:String x:Key="S.StartUp.Editor">Редактор</s:String>
     <s:String x:Key="S.StartUp.Editor.Tooltip">Відкрити вікно редактора, головна частина програми, де ви можете почати і редагувати новий запис.</s:String>
     <s:String x:Key="S.StartUp.Options">Налаштування</s:String>
-    <s:String x:Key="S.StartUp.NewRelease">Доступна нова версія • {0}</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">Доступна нова версія</s:String>
     <!--<s:String x:Key="S.StartUp.NewRelease.Tooltip">Downloads the latest version of ScreenToGif.</s:String>-->
 
     <!--Updater-->
