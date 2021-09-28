@@ -614,7 +614,7 @@
     <!--Options • About-->
     <s:String x:Key="S.Options.About.Version">Version:</s:String>
     <s:String x:Key="S.Options.About.Author">Autor: Nicke Manarin</s:String>
-    <s:String x:Key="S.Options.About.StoreVersion">Microsoft Store Version. Einige Einstellungen sind aufgrund verstärkter Richtlinie deaktiviert.</s:String>
+    <s:String x:Key="S.Options.About.StoreVersion">Microsoft Store Version. Einige Einstellungen sind aufgrund auferlegter Maßnahmen deaktiviert.</s:String>
     <s:String x:Key="S.Options.About.Contact">Kontakt</s:String>
     <s:String x:Key="S.Options.About.Contact.Discord">Treten Sie Discord bei!</s:String>
     <s:String x:Key="S.Options.About.Contact.Facebook">Besuchen Sie unsere Facebook-Seite!</s:String>
