@@ -244,7 +244,7 @@
     <s:String x:Key="S.Options.App.Tray.Interactions.Restore">Alle vensters herstellen</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Left">Linkermuisknop:</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.DoubleLeft">Linkermuisknop (x2):</s:String>
-    <s:String x:Key="S.Options.App.Tray.Interactions.Middle">Middelste klik:</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Middle">Middenmuisknop:</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Window">Venster:</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Else">Of anders, opent:</s:String>
     <s:String x:Key="S.Options.App.General">Algemeen</s:String>
@@ -253,7 +253,7 @@
     <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">Bevestiging vragen bij het sluiten van het programa (d.m.v. 'Afsluiten').</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">Hardwareversnelling uitschakelen.</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(De gebruikersinterface wordt weergegeven via softwaremodus)</s:String>
-    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">Controleren op nieuw vertalingen.</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">Controleren op nieuwe vertalingen.</s:String>
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(Bijgewerkte vertalingen worden automatisch gedownload en geïnstalleerd)</s:String>
     <s:String x:Key="S.Options.App.General.CheckForUpdates">Controleer op updates bij het opstarten.</s:String>
     <s:String x:Key="S.Options.App.General.UpdateOnClose">Updates automatisch installeren na het sluiten van de app.</s:String>
@@ -613,6 +613,8 @@
     
     <!--Options • About-->
     <s:String x:Key="S.Options.About.Version">Versie:</s:String>
+    <s:String x:Key="S.Options.About.UpdateCheck">Controleren op updates</s:String>
+    <s:String x:Key="S.Options.About.UpdateCheck.Nothing">Je gebruikt al de jongste versie.</s:String>
     <s:String x:Key="S.Options.About.Author">Auteur: Nicke Manarin</s:String>
     <s:String x:Key="S.Options.About.StoreVersion">Microsoft Store versie. Sommige functies zijn niet beschikbaar door opgelegde beperkingen.</s:String>
     <s:String x:Key="S.Options.About.Contact">Contact</s:String>
