@@ -614,7 +614,7 @@
     <!--Options • About-->
     <s:String x:Key="S.Options.About.Version">Versie:</s:String>
     <s:String x:Key="S.Options.About.UpdateCheck">Controleren op updates</s:String>
-    <s:String x:Key="S.Options.About.UpdateCheck.Nothing">Je gebruikt al de jongste versie.</s:String>
+    <s:String x:Key="S.Options.About.UpdateCheck.Nothing">Dit is al de jongste versie.</s:String>
     <s:String x:Key="S.Options.About.Author">Auteur: Nicke Manarin</s:String>
     <s:String x:Key="S.Options.About.StoreVersion">Microsoft Store versie. Sommige functies zijn niet beschikbaar door opgelegde beperkingen.</s:String>
     <s:String x:Key="S.Options.About.Contact">Contact</s:String>
