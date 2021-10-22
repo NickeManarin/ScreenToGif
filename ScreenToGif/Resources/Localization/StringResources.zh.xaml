@@ -259,7 +259,7 @@
     <s:String x:Key="S.Options.App.General.UpdateOnClose">关闭应用程序后自动安装更新</s:String>
     <s:String x:Key="S.Options.App.General.PortableUpdate">强制下载便携版本</s:String>
     <s:String x:Key="S.Options.App.General.PortableUpdate.Info">（需要通过解压缩和替换可执行文件来进行手动安装）</s:String>
-    <s:String x:Key="S.Options.App.General.ForceUpdateAsAdmin">强制更新以提升特权运行</s:String>
+    <s:String x:Key="S.Options.App.General.ForceUpdateAsAdmin">强制更新时提升特权</s:String>
     <s:String x:Key="S.Options.App.General.PromptToInstall">在安装开始之前提示我</s:String>
 
     <!--Options • Recorder-->
@@ -297,7 +297,7 @@
     <s:String x:Key="S.Options.Recorder.Compression.NoCompression">无压缩</s:String>
     <s:String x:Key="S.Options.Recorder.Compression.NoCompression.Info">（捕获帧时不应执行压缩）</s:String>
     <s:String x:Key="S.Options.Recorder.CacheSize">缓存大小：</s:String>
-    <s:String x:Key="S.Options.Recorder.CacheSize.Info">（以MB为单位。达到此大小后，数据将被写入/丢弃到磁盘上）</s:String>
+    <s:String x:Key="S.Options.Recorder.CacheSize.Info">（以 MB 为单位。达到此大小后，数据将被写入/丢弃到磁盘上）</s:String>
     <s:String x:Key="S.Options.Recorder.PreventBlackFrames">防止捕获全黑帧。</s:String>
     <s:String x:Key="S.Options.Recorder.PreventBlackFrames.Info">（防止具有内存缓存的 BitBlt 错误地导致所有像素均为黑色的帧）</s:String>
     <s:String x:Key="S.Options.Recorder.RecordMouse">录制时显示鼠标光标</s:String>
@@ -311,12 +311,12 @@
     <s:String x:Key="S.Options.Recorder.ForceGarbageCollection">在捕获过程中强制清理内存</s:String>
     <s:String x:Key="S.Options.Recorder.ForceGarbageCollection.Info">（减少捕捉过程中的内存使用，但会降低性能）</s:String>
     
-    <s:String x:Key="S.Options.Recorder.Guidelines">指导方针</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines">辅助线</s:String>
     <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds">三分法则</s:String>
     <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds.Info">单击切换三分法则准线的显示。</s:String>
     <s:String x:Key="S.Options.Recorder.Guidelines.Crosshair">十字准线</s:String>
     <s:String x:Key="S.Options.Recorder.Guidelines.Crosshair.Info">点击切换十字准线的显示。</s:String>
-    <s:String x:Key="S.Options.Recorder.Guidelines.Info">指南仅在录像机暂停或停止时显示。</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.Info">辅助线仅在录像机暂停或停止时显示。</s:String>
     
     <s:String x:Key="S.Options.Recorder.HideTitleBar">隐藏标题栏（精简模式）</s:String>
     <s:String x:Key="S.Options.Recorder.Magnifier">启用屏幕放大镜</s:String>
@@ -335,7 +335,7 @@
     <s:String x:Key="S.Options.Recorder.RememberSize">记住录制区域的先前大小</s:String>
     <s:String x:Key="S.Options.Recorder.RememberPosition">记住录制区域的先前位置</s:String>
     <s:String x:Key="S.Options.Recorder.PreStart">在开始前倒计时</s:String>
-    <s:String x:Key="S.Options.Recorder.PreStart.Info">（秒，开始录制前延时）</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart.Info">（以秒为单位，开始录制前延时）</s:String>
     <s:String x:Key="S.Options.Recorder.CursorFollowing">启用光标跟随</s:String>
     <s:String x:Key="S.Options.Recorder.CursorFollowing.Info">（录制区域将根据光标的位置重新定位）</s:String>
     <s:String x:Key="S.Options.Recorder.FollowMargin.Info">（录制区域开始重新定位缓冲区边距）</s:String>
@@ -467,8 +467,8 @@
     <s:String x:Key="S.Options.Storage.DeleteEverything">关闭应用程序时从缓存中删除所有文件</s:String>
     <s:String x:Key="S.Options.Storage.AskDeleteEverything">在从缓存中删除所有文件之前询问我。</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemoval">自动删除旧项目</s:String>
-    <s:String x:Key="S.Options.Storage.AutomaticRemoval.Info">当打开应用程序时，超过配置时间的已关闭项目将被后台任务删除。</s:String>
-    <s:String x:Key="S.Options.Storage.AutomaticRemovalDays.Info">（在几天之内，打开编辑器后，任何旧项目都将被删除/丢弃）</s:String>
+    <s:String x:Key="S.Options.Storage.AutomaticRemoval.Info">打开应用程序时，超过配置时间的已关闭项目将被后台任务删除。</s:String>
+    <s:String x:Key="S.Options.Storage.AutomaticRemovalDays.Info">（天数，在打开应用程序后，任何超过这个时间的已关闭项目将被删除/丢弃）</s:String>
     
     <!--Options • Storage > Clear cache-->
     <s:String x:Key="S.Options.Storage.Cache.Title">ScreenToGif - 清除缓存</s:String>
