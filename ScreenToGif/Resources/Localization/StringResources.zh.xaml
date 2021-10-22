@@ -1740,7 +1740,7 @@
     <s:String x:Key="S.SaveAs.Warning.Partial.NoSelection">如果可以选择仅导出选定的帧，则必须至少选择一帧。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Partial.InvalidExpression">部分导出项目的表达式无效。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Upload.None">没有选择上传服务。您需要选择一个服务。</s:String>
-    <s:String x:Key="S.SaveAs.Warning.Upload.NotAuthorized">您无法上传到选定的服务，因为它没有被授权。 转到 选项 > 云服务 授权此应用程序。</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Upload.NotAuthorized">您无法上传到选定的服务，因为它没有被授权。 转到 选项 > 上传服务 授权此应用程序。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Copy.Link">您不能选择复制链接的选项，因为您没有设置上传文件。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder">您需要选择输出文件夹。</s:String>
     <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">输出目录不存在。</s:String>
