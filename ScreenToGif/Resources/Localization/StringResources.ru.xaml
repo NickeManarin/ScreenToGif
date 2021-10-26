@@ -613,6 +613,8 @@
     
     <!--Options • About-->
     <s:String x:Key="S.Options.About.Version">Версия:</s:String>
+    <s:String x:Key="S.Options.About.UpdateCheck">Проверить обновления</s:String>
+    <s:String x:Key="S.Options.About.UpdateCheck.Nothing">У вас последняя версия.</s:String>
     <s:String x:Key="S.Options.About.Author">Автор: Nicke Manarin</s:String>
     <s:String x:Key="S.Options.About.StoreVersion">Версия магазина Microsoft. Некоторые функции отключены из-за принудительных политик.</s:String>
     <s:String x:Key="S.Options.About.Contact">Контакты</s:String>
@@ -1819,7 +1821,7 @@
     <s:String x:Key="S.FontWeights.Black">Жирный</s:String>
     <s:String x:Key="S.FontWeights.Bold">Полужирный</s:String>
     <s:String x:Key="S.FontWeights.DemiBold">Почти полужирный</s:String>
-    <s:String x:Key="S.FontWeights.ExtraBlack">Экстра-жирный</s:String>
+    <s:String x:Key="S.FontWeights.ExtraBlack">Еще жирнее</s:String>
     <s:String x:Key="S.FontWeights.ExtraBold">Экстра-полужирный</s:String>
     <s:String x:Key="S.FontWeights.ExtraLight">Экстра-светлый</s:String>
     <s:String x:Key="S.FontWeights.Heavy">Более жирный</s:String>
@@ -1829,8 +1831,8 @@
     <s:String x:Key="S.FontWeights.Regular">Нормальный</s:String>
     <s:String x:Key="S.FontWeights.SemiBold">Полу-полужирный</s:String>
     <s:String x:Key="S.FontWeights.Thin">Тонкий</s:String>
-    <s:String x:Key="S.FontWeights.UltraBlack">Сверх-жирный</s:String>
-    <s:String x:Key="S.FontWeights.UltraBold">Сверх-полужирный</s:String>
+    <s:String x:Key="S.FontWeights.UltraBlack">Супер-жирный</s:String>
+    <s:String x:Key="S.FontWeights.UltraBold">Ультра-жирный</s:String>
     <s:String x:Key="S.FontWeights.UltraLight">Сверх-светлый</s:String>
     
     <!--VerticalAlignment-->
@@ -1858,6 +1860,6 @@
     <s:String x:Key="S.TextDecorations.None">Нет</s:String>
     <s:String x:Key="S.TextDecorations.Underline">Подчеркнутый</s:String>
     <s:String x:Key="S.TextDecorations.Strikethrough">Зачеркнутый</s:String>
-    <s:String x:Key="S.TextDecorations.OverLine">OverLine</s:String>
-    <s:String x:Key="S.TextDecorations.Baseline">Baseline</s:String>
+    <s:String x:Key="S.TextDecorations.OverLine">Линия сверху</s:String>
+    <s:String x:Key="S.TextDecorations.Baseline">На линии</s:String>
 </ResourceDictionary>
