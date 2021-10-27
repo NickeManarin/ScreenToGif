@@ -1150,6 +1150,9 @@
                             <n:ExtendedListBoxItem Image="{StaticResource Flag.Greece}" Tag="el" Content="Greek / Ελληνικά" Author="Χρήστος Μητσιάρης"
                                                    ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=el, Converter={StaticResource TagToSelection}}"/>
 
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Israel}" Tag="he" Content="Hebrew / עברי" Author="Elishy"
+                                                   ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=he, Converter={StaticResource TagToSelection}}"/>
+
                             <n:ExtendedListBoxItem Image="{StaticResource Flag.Hungary}" Tag="hu" Content="Hungarian / Magyar" Author="László Földes"
                                                    ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=hu, Converter={StaticResource TagToSelection}}"/>
 

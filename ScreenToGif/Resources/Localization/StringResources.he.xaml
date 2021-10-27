@@ -1,0 +1,1865 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="clr-namespace:System;assembly=mscorlib"
+                    xml:space="preserve">
+    
+    <!--To use a new line: &#x0d; or CarriageReturn + NewLine: &#x0d;&#x0a; or &#10;--> 
+    <!--You can use the zero-width-divider to suggest where the word should be divided when there's no space &#8203;-->
+    <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
+    
+    <!--General-->
+    <s:String x:Key="S.Ok">אישור</s:String>
+    <s:String x:Key="S.Back">חזור</s:String>
+    <s:String x:Key="S.Cancel">ביטול</s:String>
+    <s:String x:Key="S.Yes">כן</s:String>
+    <s:String x:Key="S.No">לא</s:String>
+    <s:String x:Key="S.Add">הוסף</s:String>
+    <s:String x:Key="S.Edit">עריכה</s:String>
+    <s:String x:Key="S.Id">פריט</s:String>
+    <s:String x:Key="S.Title">כותרת</s:String>
+    <s:String x:Key="S.Description">תיאור</s:String>
+    <s:String x:Key="S.SelectColor">לחץ כאן כדי לבחור צבע</s:String>
+    <s:String x:Key="S.Documentation">לחץ כדי לנווט אל התיעוד</s:String>
+    <s:String x:Key="S.Suppress">דיכוי</s:String>
+    <s:String x:Key="S.Preview">תצוגה מקדימה</s:String>
+    <s:String x:Key="S.Size">גודל</s:String>
+    <s:String x:Key="S.Background">רקע</s:String>
+    <s:String x:Key="S.Color">צבע:</s:String>
+    <s:String x:Key="S.Delay">עיכוב</s:String>
+    <s:String x:Key="S.DelayMs">עיכוב:</s:String>
+    <s:String x:Key="S.ValueMs">ערך -+:</s:String>
+    <s:String x:Key="S.ScaleValue">ערך קנה מידה:</s:String>
+    <s:String x:Key="S.Margin">שולים:</s:String>
+    <s:String x:Key="S.Padding">ריפוד:</s:String>
+    <s:String x:Key="S.MinHeight">גובה מינימלי:</s:String>
+    <s:String x:Key="S.AndOr">ו/או</s:String>
+    
+    <!--Warnings-->
+    <s:String x:Key="S.Crash">אוי רק זה לא, האפליקציה קרסה :(</s:String>
+    <s:String x:Key="S.Required">שדה חובה</s:String>
+    <s:String x:Key="S.Warning.Net.Title">תלות חסרה</s:String>
+    <s:String x:Key="S.Warning.Net.Header">אינו קיים Net Framework 4.8 </s:String>
+    <s:String x:Key="S.Warning.Net.Message">על מנת להשתמש באפליקציה כראוי, עליך להוריד את הגירסה הנכונה של .Net Framework. &#10; האם ברצונך לפתוח את דף האינטרנט להורדתו?</s:String>
+    <s:String x:Key="S.Warning.Single.Title">מותר רק מופע אחד</s:String>
+    <s:String x:Key="S.Warning.Single.Header">האפליקציה כבר פועלת</s:String>
+    <s:String x:Key="S.Warning.Single.Message">אמור להיות שם ScreenToGif כבר פועל, אך כנראה שאין חלון פתוח. בדוק את מגש המערכת, סמל ScreenToGif </s:String>
+    
+    <s:String x:Key="S.SavingSettings.Title">שמירת ההגדרות</s:String>
+    <s:String x:Key="S.SavingSettings.Instruction">האם תרצה לנסות לשמור אותו שוב?</s:String>
+    <s:String x:Key="S.SavingSettings.Message">נראה של ScreenToGif אין מספיק הרשאות לשמירת ההגדרות בדיסק. &#10; &#10; האם תרצה לנסות שוב, אך הפעם באמצעות הרשאות ניהול?</s:String>
+    
+    <s:String x:Key="S.Exiting.Title">יציאה מ- ScreenToGif</s:String>
+    <s:String x:Key="S.Exiting.Instruction">האם אתה בטוח שאתה רוצה לצאת?</s:String>
+    <s:String x:Key="S.Exiting.Message">כל החלונות ייסגרו וסמל המגש יוסר.</s:String>
+
+    <!--Warnings • Graphics engine-->
+    <s:String x:Key="S.Warning.Graphics.Title">מתג גרפיקה מתג</s:String>
+    <s:String x:Key="S.Warning.Graphics.Instruction">עבור למתאם הגרפיקה הנכון כדי ללכוד את המסך שנבחר</s:String>
+    <s:String x:Key="S.Warning.Graphics.Message">עקב מגבלה ב- DirectX, ScreenToGif חייב להיות פועל על אותו מתאם גרפי כמו המסך שצולם.</s:String>
+    <s:String x:Key="S.Warning.Graphics.Action">החלף את ערכת המתאם הגרפי עבור ScreenToGif על ידי פתיחת הגדרות Windows>מערכת>תצוגה>הגדרות גרפיקה, או על ידי לחיצה על הקישור למטה.</s:String>
+    <s:String x:Key="S.Warning.Graphics.Action.Legacy">החלף את מתאם הגרפיקה עבור ScreenToGif על ידי פתיחת הגדרות הגרפיקה של מתאם הגרפיקה שלך.</s:String>
+    <s:String x:Key="S.Warning.Graphics.Switch">פתח את הגדרות Windows</s:String>
+    
+    <!--Keys-->
+    <s:String x:Key="S.Keys.Enter">Enter</s:String>
+    <s:String x:Key="S.Keys.Esc">Esc</s:String>
+    <s:String x:Key="S.Keys.Space">מרחב</s:String>
+
+    <!--Mouse-->
+    <s:String x:Key="S.Mouse.Right">לחצן ימיני</s:String>
+    
+    <!--Tray icon-->
+    <s:String x:Key="S.NewRecording">הקלטת מסך חדשה</s:String>
+    <s:String x:Key="S.NewWebcamRecording">הקלטת מצלמת רשת חדשה</s:String>
+    <s:String x:Key="S.NewBoardRecording">הקלטת לוח חדשה</s:String>
+    <s:String x:Key="S.Exit">יציאה</s:String>
+    
+    <!--Commands-->
+    <s:String x:Key="S.Command.NewRecording">הקלטת מסך חדשה</s:String>
+    <s:String x:Key="S.Command.NewWebcamRecording">הקלטת מצלמת רשת חדשה</s:String>
+    <s:String x:Key="S.Command.NewBoardRecording">הקלטת לוח חדשה</s:String>
+    <s:String x:Key="S.Command.NewAnimation">אנימציה חדשה</s:String>
+    <s:String x:Key="S.Command.InsertRecording">הכנס הקלטת מסך</s:String>
+    <s:String x:Key="S.Command.InsertWebcamRecording">הכנס הקלטת מצלמת רשת</s:String>
+    <s:String x:Key="S.Command.InsertBoardRecording">הכנס הקלטת לוח</s:String>
+    <s:String x:Key="S.Command.InsertFromMedia">הכנס ממדיה (תמונות וסרטונים)</s:String>
+    <s:String x:Key="S.Command.SaveAs">שמור כ ...</s:String>
+    <s:String x:Key="S.Command.Load">טען קבצים (תמונות, סרטונים ופרויקטים)</s:String>
+    <s:String x:Key="S.Command.LoadRecent">טען פרויקטים אחרונים</s:String>
+    <s:String x:Key="S.Command.DiscardProject">מחק את הפרויקט הנוכחי</s:String>
+    <s:String x:Key="S.Command.OverrideDelay">ביטול עיכוב של מסגרות</s:String>
+    <s:String x:Key="S.Command.IncreaseDecreaseDelay">הגדל/הקטן עיכוב של מסגרות</s:String>
+    <s:String x:Key="S.Command.ScaleDelay">עיכוב קנה מידה של מסגרות</s:String>
+    <s:String x:Key="S.Command.Zoom100">הגדר זום ל 100%</s:String>
+    <s:String x:Key="S.Command.SizeToContent">התאם את החלון לגודל המסגרת</s:String>
+    <s:String x:Key="S.Command.FitImage">התאם את התמונה לגודל החלון הזמין</s:String>
+    <s:String x:Key="S.Command.FirstFrame">בחר את המסגרת הראשונה</s:String>
+    <s:String x:Key="S.Command.PreviousFrame">בחר את המסגרת הקודמת</s:String>
+    <s:String x:Key="S.Command.Play">הפעל את האנימציה</s:String>
+    <s:String x:Key="S.Command.NextFrame">בחר את המסגרת הבאה</s:String>
+    <s:String x:Key="S.Command.LastFrame">בחר את המסגרת האחרונה</s:String>
+    <s:String x:Key="S.Command.Undo">ביטול הפעולות</s:String>
+    <s:String x:Key="S.Command.Redo">בצע מחדש</s:String>
+    <s:String x:Key="S.Command.Reset">בטל את כל השינויים בפרויקט</s:String>
+    <s:String x:Key="S.Command.Copy">העתק את המסגרות שנבחרו ושמור אותן בלוח</s:String>
+    <s:String x:Key="S.Command.Cut">גזור את המסגרות שנבחרו ושמור אותן בלוח</s:String>
+    <s:String x:Key="S.Command.Paste">הדבק את המסגרות מהלוח</s:String>
+    <s:String x:Key="S.Command.Delete">מחק את כל המסגרות שנבחרו</s:String>
+    <s:String x:Key="S.Command.DeletePrevious">מחק את כל המסגרות הקודמות</s:String>
+    <s:String x:Key="S.Command.DeleteNext">מחק את כל המסגרות הבאות</s:String>
+    <s:String x:Key="S.Command.RemoveDuplicates">הסר כפילויות</s:String>
+    <s:String x:Key="S.Command.Reduce">הפחת את מספר המסגרות</s:String>
+    <s:String x:Key="S.Command.Reverse">אנימציה הפוכה</s:String>
+    <s:String x:Key="S.Command.Yoyo">גורם לאנימציה ללכת קדימה ואחורה</s:String>
+    <s:String x:Key="S.Command.MoveLeft">העבר את המסגרת שנבחרה שמאלה</s:String>
+    <s:String x:Key="S.Command.MoveRight">העבר את המסגרת שנבחרה ימינה</s:String>
+    <s:String x:Key="S.Command.Resize">שנה את גודל כל המסגרות</s:String>
+    <s:String x:Key="S.Command.Crop">חיתוך כל המסגרות</s:String>
+    <s:String x:Key="S.Command.FlipRotate">הפוך או סובב את המסגרות</s:String>
+    <s:String x:Key="S.Command.Caption">הוסף כיתוב</s:String>
+    <s:String x:Key="S.Command.FreeText">הוסף טקסט צף חופשי</s:String>
+    <s:String x:Key="S.Command.TitleFrame">הוסף מסגרת עם כותרת עליה</s:String>
+    <s:String x:Key="S.Command.KeyStrokes">מוסיף מקשים שנלחצו במהלך ההקלטה</s:String>
+    <s:String x:Key="S.Command.FreeDrawing">צייר טפסים בחינם</s:String>
+    <s:String x:Key="S.Command.Shapes">הוסף צורות</s:String>
+    <s:String x:Key="S.Command.MouseClicks">לחיצות עכבר</s:String>
+    <s:String x:Key="S.Command.Watermark">בחר תמונה והוסף כסימן מים</s:String>
+    <s:String x:Key="S.Command.Border">הוסף גבולות</s:String>
+    <s:String x:Key="S.Command.Shadow">הוסף צל טיפה</s:String>
+    <s:String x:Key="S.Command.Obfuscate">הסתר חלקים רגישים במסגרות שלך</s:String>
+    <s:String x:Key="S.Command.Cinemagraph">השתמש בכלי הציור כדי לבחור אילו חלקים של המסגרת לא אמורים להישאר סטטיים לאורך האנימציה</s:String>
+    <s:String x:Key="S.Command.Progress">סרגל התקדמות או טקסט עם פרטי הפעלה</s:String>
+    <s:String x:Key="S.Command.SelectAll">בחר את כל המסגרות</s:String>
+    <s:String x:Key="S.Command.GoTo">נווט למסגרת לפי אינדקס</s:String>
+    <s:String x:Key="S.Command.InverseSelection">הפוך את בחירת המסגרות</s:String>
+    <s:String x:Key="S.Command.Unselect">בטל את הבחירה בכל המסגרות</s:String>
+    <s:String x:Key="S.Command.Fade">מעבר דהייה</s:String>
+    <s:String x:Key="S.Command.Slide">מעבר שקופיות</s:String>
+    <s:String x:Key="S.Command.ClearAll">נקה את כל הקידודים שהושלמו</s:String>
+    <s:String x:Key="S.Command.MoveUp">העבר למעלה</s:String>
+    <s:String x:Key="S.Command.MoveDown">זז למטה</s:String>
+    <s:String x:Key="S.Command.Add">הוסף</s:String>
+    <s:String x:Key="S.Command.Open">פתח</s:String>
+    <s:String x:Key="S.Command.Edit">ערוך את הפריט שנבחר</s:String>
+    <s:String x:Key="S.Command.Save">שמור את הפריט שנבחר</s:String>
+    <s:String x:Key="S.Command.Remove">הסר את הפריט שנבחר</s:String>
+    <s:String x:Key="S.Command.ViewHistory">הצג הסטוריה</s:String>
+    
+    <!--StartUp-->
+    <s:String x:Key="S.StartUp.Title">ScreenToGif - הפעלת</s:String>
+    <s:String x:Key="S.StartUp.Recorder">הקלטה</s:String>
+    <s:String x:Key="S.StartUp.Recorder.Tooltip">פותח את מקליט המסך &#10; שם תוכל להתחיל בקלות להקליט את המסך שלך.</s:String>
+    <s:String x:Key="S.StartUp.Webcam">מצלמת רשת</s:String>
+    <s:String x:Key="S.StartUp.Webcam.Tooltip">פותח את מקליט מצלמת האינטרנט.</s:String>
+    <s:String x:Key="S.StartUp.Board">לוח</s:String>
+    <s:String x:Key="S.StartUp.Board.Tooltip">פותח את מקליט הלוח, &#10; שבו תוכל להתחיל להקליט את הציורים שלך.</s:String>
+    <s:String x:Key="S.StartUp.Editor">עריכה</s:String>
+    <s:String x:Key="S.StartUp.Editor.Tooltip">פותח את חלון העורך, הנקודה המרכזית של יישום זה, &#10; שבו תוכל להתחיל ולערוך הקלטה חדשה.</s:String>
+    <s:String x:Key="S.StartUp.Options">אפשרויות</s:String>
+    <s:String x:Key="S.StartUp.NewRelease">קיימת גרסה חדשה</s:String>
+    <s:String x:Key="S.StartUp.NewRelease.Tooltip">מוריד את הגרסה האחרונה של ScreenToGif.</s:String>
+
+    <!--Updater-->
+    <s:String x:Key="S.Updater.Title">ScreenToGif - עדכוני</s:String>
+    <s:String x:Key="S.Updater.Header">קיים עדכון חדש</s:String>
+    <s:String x:Key="S.Updater.NewRelease">מהדורה חדשה!</s:String>
+    <s:String x:Key="S.Updater.NewRelease.Info">גרסה חדשה זמינה, גרסה {0}! &#x0d; לחץ כאן לפרטים נוספים.</s:String>
+    <s:String x:Key="S.Updater.Version">גירסא</s:String>
+    <s:String x:Key="S.Updater.Portable">נייד</s:String>
+    <s:String x:Key="S.Updater.Installer">מתקין</s:String>
+    <s:String x:Key="S.Updater.Info.WhatsNew">מה חדש?</s:String>
+    <s:String x:Key="S.Updater.Info.BugFixes">תיקוני באגים:</s:String>
+    <s:String x:Key="S.Updater.Info.NewVersionAvailable">גרסה חדשה זמינה להורדה. &#x0d; האם תרצה לפתוח את הדפדפן כדי להוריד אותו?</s:String>
+    <s:String x:Key="S.Updater.RunAfter">הפעל את האפליקציה לאחר העדכון.</s:String>
+    <s:String x:Key="S.Updater.Download">הורדה</s:String>
+    <s:String x:Key="S.Updater.Install">התקן</s:String>
+    <s:String x:Key="S.Updater.InstallManually">התקן ידנית</s:String>
+    <s:String x:Key="S.Updater.Downloading">מורדן ...</s:String>
+    <s:String x:Key="S.Updater.Warning.Show">לא ניתן היה להציג את פרטי ההורדה.</s:String>
+    <s:String x:Key="S.Updater.Warning.Download">לא ניתן היה להוריד את העדכון.</s:String>
+    <s:String x:Key="S.Updater.Warning.Encoding">עליך להמתין לסיום כל הקידודים לפני העדכון.</s:String>
+    
+    <!--Downloader-->
+    <s:String x:Key="S.Downloader.Title">ScreenToGif - הורדת</s:String>
+    <s:String x:Key="S.Downloader.Header">הורדה</s:String>
+    <s:String x:Key="S.Downloader.Size">{0} מתוך {1}</s:String>
+    
+    <!--Options-->
+    <s:String x:Key="S.Options.Title">ScreenToGif - אפשרויות</s:String>
+    <s:String x:Key="S.Options.App">יישום</s:String>
+    <s:String x:Key="S.Options.Recorder">הקלטה</s:String>
+    <s:String x:Key="S.Options.Editor">עריכה</s:String>
+    <s:String x:Key="S.Options.Tasks">משימות</s:String>
+    <s:String x:Key="S.Options.Shortcuts">קיצורי דרך</s:String>
+    <s:String x:Key="S.Options.Language">שפה</s:String>
+    <s:String x:Key="S.Options.Storage">אחסון</s:String>
+    <s:String x:Key="S.Options.Extras">תוספות</s:String>
+    <s:String x:Key="S.Options.Upload">ענן</s:String>
+    <s:String x:Key="S.Options.Donate">לתרום</s:String>
+    <s:String x:Key="S.Options.About">אודות</s:String>
+    <s:String x:Key="S.Options.Other">אחר</s:String>
+    <s:String x:Key="S.Options.Warning.Follow.Header">מקש קיצור חסר להמשך הסמן</s:String>
+    <s:String x:Key="S.Options.Warning.Follow.Message">כדי להשתמש בתכונה הבאה של סמן העכבר, עליך להגדיר מקש קיצור כדי להחליף אותו בעת הצורך.</s:String>
+    <s:String x:Key="S.Options.Warning.DesktopDuplication.Header">תלות חסרות ללכידת מסך</s:String>
+    <s:String x:Key="S.Options.Warning.DesktopDuplication.Message">כדי ללכוד את המסך באמצעות ממשק ה- API לשכפול שולחני, עליך להוריד את ספריות SharpDx.</s:String>
+    
+    <!--Options • Application-->
+    <s:String x:Key="S.Options.App.Startup">הפעלה</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Manual">התחל &#10; ידנית</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Manual.Info">האפליקציה תתבצע רק כאשר תעשה זאת באופן ידני.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Automatic">התחל עם &#10; Windows</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Automatic.Info">האפליקציה תבוצע לאחר הפעלת Windows.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Mode.Warning">אי אפשר להחליף בין מצבי אתחול.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Single">אפשר רק מופע יחיד &#10;</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Single.Info">תוכל להפעיל את האפליקציה פעם אחת לכל משתמש ולהפעלה, &#10; כלומר, מופעי משתמש או הפעלה שונים יכולים להתקיים במקביל. &#10; כאשר מנסים לבצע את האפליקציה שוב, המופע השני ינסה לתת פוקוס לראשון ולסיים את עצמו.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Multiple">אפשר מספר מופעים &#10;</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Multiple.Info">תוכל להפעיל את האפליקציה מספר פעמים בו זמנית, ללא הגבלה.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Tray">התחל ממוזער למגש המערכת.</s:String>
+    <s:String x:Key="S.Options.App.Startup.Tray.Info">(סמל מגש המערכת יהיה גלוי בזמן שאפשרות זו תהיה פעילה)</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window">התחל שימוש:</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Startup">חלון אתחול</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Recorder">מקליט מסך</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Webcam">מקליט מצלמת אינטרנט</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Board">מקליט לוח</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Editor">חלון העורך</s:String>
+    <s:String x:Key="S.Options.App.Startup.Window.Info">(חלון שמופיע לראשונה כאשר האפליקציה מתחילה)</s:String>
+    <s:String x:Key="S.Options.App.Theme">נושא</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme">ערכת צבעים:</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.VeryLight">קל מאוד</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Light">אור</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Medium">בינוני</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Dark">אפל</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.VeryDark">כהה מאוד</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.FollowSystem">עקוב אחר המערכת</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Custom">מותאם אישית</s:String>
+    <s:String x:Key="S.Options.App.Theme.Scheme.Example">צבעים לדוגמא.</s:String>
+    <s:String x:Key="S.Options.App.Tray">סמל מגש המערכת</s:String>
+    <s:String x:Key="S.Options.App.Tray.Show">הצג את האפליקציה במגש המערכת (אזור הודעות).</s:String>
+    <s:String x:Key="S.Options.App.Tray.LeaveOpen">שמור את האפליקציה פתוחה גם אם כל החלונות סגורים.</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Nothing">אל תעשה כלום</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Open">פתח חלון</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Open.None">אין חלון</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Toggle">מזעור/שחזור כל החלונות</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Minimize">מזעור כל החלונות</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Restore">שחזר את כל החלונות</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Left">קליק שמאלי:</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.DoubleLeft">קליק שמאלי (x2):</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Middle">קליק אמצעי:</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Window">חלון:</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Else">אחרת, נפתח:</s:String>
+    <s:String x:Key="S.Options.App.General">כללי</s:String>
+    <s:String x:Key="S.Options.App.General.WorkaroundQuota">פתרון לעקיפת התאונה 'לא מספיק מכסה ...'.</s:String>
+    <s:String x:Key="S.Options.App.General.WorkaroundQuota.Info">(ניסיוני)</s:String>
+    <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">שאל אותי לפני סגירת האפליקציה (באמצעות הפקודה 'יציאה').</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">השבת האצת חומרה.</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(ממשק המשתמש יוצג באמצעות מצב תוכנה)</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">בדוק אם קיימים עדכוני תרגום.</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(תרגומים מעודכנים יורדו ויתקינו באופן אוטומטי)</s:String>
+    <s:String x:Key="S.Options.App.General.CheckForUpdates">בדוק אם קיימים עדכונים בעת ההפעלה.</s:String>
+    <s:String x:Key="S.Options.App.General.UpdateOnClose">התקן עדכונים באופן אוטומטי לאחר סגירת האפליקציה.</s:String>
+    <s:String x:Key="S.Options.App.General.PortableUpdate">כפה על הורדת הגרסה הניידת.</s:String>
+    <s:String x:Key="S.Options.App.General.PortableUpdate.Info">(דורש התקנה ידנית על ידי ביטול רוכסן והחלפת קובץ ההפעלה)</s:String>
+    <s:String x:Key="S.Options.App.General.ForceUpdateAsAdmin">אילץ את העדכון לפעול עם הרשאות גבוהות.</s:String>
+    <s:String x:Key="S.Options.App.General.PromptToInstall">בקש ממני לפני תחילת ההתקנה.</s:String>
+
+    <!--Options • Recorder-->
+    <s:String x:Key="S.Options.Recorder.Interface">ממשק</s:String>
+    <s:String x:Key="S.Options.Recorder.Interface.Old">ישן</s:String>
+    <s:String x:Key="S.Options.Recorder.Interface.New">חדש</s:String>
+    
+    <s:String x:Key="S.Options.Recorder.Frequency">תדירות לכידה</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Manual">ידני</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Manual.Info">כל מסגרת תילכד ידנית על ידך על ידי לחיצה על כפתור הלכידה או קיצור מקשים מקביל.</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Interaction">אינטראקציה של משתמשים</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Interaction.Info">מסגרות יתפסו בכל פעם שאתה לוחץ או מקליד משהו.</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Second">לשנייה</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Second.Info">מסגרות יתפסו על בסיס 'לשנייה', &#10; בהתחשב במכנה המסגרת המוגדר במסך המקליט.</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Minute">לדקה</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Minute.Info">מסגרות יתפסו על בסיס 'לדקה' (timelapse), &#10; בהתחשב במכנה המסגרות המוגדר על מסך המקליט.</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Hour">לשעה</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Hour.Info">מסגרות יתפסו על בסיס 'לשעה' (timelapse), &#10; בהתחשב במכנה המסגרת המוגדר במסך המקליט.</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Playback">עיכוב ההפעלה:</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Playback.Info">(ב- ms, כל מסגרת שצולמה תוגדר לעיכוב זה)</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Interval">כל מסגרת תצלם במרווח של {0}.</s:String>
+    
+    <s:String x:Key="S.Options.Recorder.Mode">מצב לכידה</s:String>
+    <s:String x:Key="S.Options.Recorder.Bitblt.Info">השתמש בשיטת הלכידה הישנה יותר, שהיא איטית יותר וייתכן שאינה פועלת ללכידת משחקים, &#10; אך אינה דורשת תוספים נוספים.</s:String>
+    <s:String x:Key="S.Options.Recorder.DirectX.Info">השתמש בשיטת לכידת API לשכפול שולחן העבודה, שהיא מהירה יותר &#10; מסוגלת ללכוד משחקים במסך מלא, אך דורשת את התוסף של SharpDx ו- Windows 8 ומעלה.</s:String>
+    <s:String x:Key="S.Options.Recorder.File">שמור בקובץ &#10;</s:String>
+    <s:String x:Key="S.Options.Recorder.File.Info">כל מסגרת שצולמה תישמר ישירות כתמונה בדיסק.</s:String>
+    <s:String x:Key="S.Options.Recorder.Cache">זיכרון ומטמון</s:String>
+    <s:String x:Key="S.Options.Recorder.Cache.Info">כל פריים שצולמו יאוחסנו כמערך פיקסלים בזיכרון תחילה (עשוי להיות דחוס לפני).</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression">דחיסה:</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.Optimal">אופטימלי</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.Optimal.Info">(דחיסה איטית יותר אך סביר יותר אופטימלית)</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.Fastest">המהיר ביותר</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.Fastest.Info">(דחיסה מהירה יותר אך כנראה פחות אופטימלית)</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.NoCompression">אין דחיסה</s:String>
+    <s:String x:Key="S.Options.Recorder.Compression.NoCompression.Info">(אין לבצע דחיסה בעת לכידת מסגרות)</s:String>
+    <s:String x:Key="S.Options.Recorder.CacheSize">גודל מטמון:</s:String>
+    <s:String x:Key="S.Options.Recorder.CacheSize.Info">(ב- MB. לאחר שהגיע לגודל זה, הנתונים ייכתבו/ישטפו לדיסק)</s:String>
+    <s:String x:Key="S.Options.Recorder.PreventBlackFrames">מנע צילום של מסגרות שחורות מלאות.</s:String>
+    <s:String x:Key="S.Options.Recorder.PreventBlackFrames.Info">(מונע מ- BitBlt עם מטמון זיכרון לגרום לתוצאה של מסגרות עם כל הפיקסלים בשחור)</s:String>
+    <s:String x:Key="S.Options.Recorder.RecordMouse">הצג את סמן העכבר בהקלטה.</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectCursorColor">בחר את צבע הסמן</s:String>
+    <s:String x:Key="S.Options.Recorder.FixedFramerate">קצב פריימים קבוע.</s:String>
+    <s:String x:Key="S.Options.Recorder.FixedFramerate.Info">(עיכוב מתמיד שאינו משתנה עם השהיית הקלטה)</s:String>
+    <s:String x:Key="S.Options.Recorder.CaptureChanges">ללכוד רק כאשר משהו משתנה.</s:String>
+    <s:String x:Key="S.Options.Recorder.CaptureChanges.Info">(מסגרת תתפס רק כאשר משהו ישתנה בתוך אזור הלכידה)</s:String>
+    <s:String x:Key="S.Options.Recorder.RemoteImprovement">שפר את ביצועי הלכידה בחיבור שולחן עבודה מרוחק.</s:String>
+    <s:String x:Key="S.Options.Recorder.RemoteImprovement.Info">(מבטל לכידת חלון בשכבות)</s:String>
+    <s:String x:Key="S.Options.Recorder.ForceGarbageCollection">כפה על ניקוי הזיכרון במהלך הלכידה.</s:String>
+    <s:String x:Key="S.Options.Recorder.ForceGarbageCollection.Info">(מפחית את השימוש בזיכרון במהלך הצילום, אך מפחית את הביצועים)</s:String>
+    
+    <s:String x:Key="S.Options.Recorder.Guidelines">הנחיות</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds">כלל השלישים</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds.Info">לחץ כדי להחליף את התצוגה &#10; של כלל ההנחיה של שליש.</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.Crosshair">שערה</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.Crosshair.Info">לחץ כדי להחליף את התצוגה &#10; של קו מנחה על שער השיער.</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.Info">ההנחיות יוצגו רק כשהמקליט מושהה או מופסק.</s:String>
+    
+    <s:String x:Key="S.Options.Recorder.HideTitleBar">הסתר את שורת הכותרת (מצב דק).</s:String>
+    <s:String x:Key="S.Options.Recorder.Magnifier">הפעל את זכוכית מגדלת המסך.</s:String>
+    <s:String x:Key="S.Options.Recorder.Magnifier.Info">(הוא מאפשר זכוכית מגדלת בעת בחירת אזור ההקלטה)</s:String>
+    <s:String x:Key="S.Options.Recorder.AnimateBorder">הפעל את גבול אזור המסך במהלך הבחירה.</s:String>
+    <s:String x:Key="S.Options.Recorder.AnimateBorder.Info">(הנפשה באמצעות סגנון 'הנמלים הצועדות')</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionPanning">הפעל את חלונית הבחירה.</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionPanning.Info">(מציג מעטר ליד פינת הבחירה, ומאפשר את תנועת אזור ההקלטה)</s:String>
+    <s:String x:Key="S.Options.Recorder.Compact">מצב קומפקטי.</s:String>
+    <s:String x:Key="S.Options.Recorder.Compact.Info">(מציג גרסה קטנה יותר של לוח הפקודות של המקליט)</s:String>
+    <s:String x:Key="S.Options.Recorder.DisplayDiscard">הצג את כפתור המחיקה גם בזמן ההקלטה.</s:String>
+    <s:String x:Key="S.Options.Recorder.DisplayDiscard.Info">(בדרך כלל הוא גלוי רק בזמן ההשהיה)</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionImprovement">שפר את ביצועי בחירת המסך.</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionImprovement.Info">(מפחית את הפיגור במהלך בחירת המסך על ידי הצגת תצוגה סטטית של המסך)</s:String>
+    
+    <s:String x:Key="S.Options.Recorder.RememberSize">זכור את הגודל הקודם של אזור ההקלטה.</s:String>
+    <s:String x:Key="S.Options.Recorder.RememberPosition">זכור את המיקום הקודם של אזור ההקלטה.</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart">השתמש בספירה לאחור לפני התחלה.</s:String>
+    <s:String x:Key="S.Options.Recorder.PreStart.Info">(תוך שניות הוא ממתין לפני שמתחילים ללכוד)</s:String>
+    <s:String x:Key="S.Options.Recorder.CursorFollowing">הפעל את הסמן הבא.</s:String>
+    <s:String x:Key="S.Options.Recorder.CursorFollowing.Info">(אזור ההקלטה ימקם את עצמו מחדש על סמך מיקום הסמן)</s:String>
+    <s:String x:Key="S.Options.Recorder.FollowMargin.Info">(שולי מאגר בפיקסלים, כאשר אזור ההקלטה מתחיל להתמקם מחדש)</s:String>
+    <s:String x:Key="S.Options.Recorder.FollowMarginInvisible.Info">(שולי חיץ נוספים בפיקסלים, שם ממשק המשתמש מתחיל להסתיר)</s:String>
+    <s:String x:Key="S.Options.Recorder.NotifyRecordingDiscard">שאל אותי לפני מחיקת ההקלטה.</s:String>
+
+    <!--Options • Editor-->
+    <s:String x:Key="S.Options.Editor.Previewer">רקע תצוגה מקדימה</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize">גודל רשת:</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.VerySmall">קטן מאוד</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Small">קטן</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Medium">בינוני</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Large">גדול</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.VeryLarge">גדול מאוד</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.ILikeBigSquares">אני אוהב ריבועים גדולים</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.ImBlind">אני עיוור</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Custom">מותאם אישית</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Height">גובה:</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Width">רוחב:</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.GridSize.Apply">הגשת בקשה</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.BaseColor">צבע בסיס</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.EvenColor">אפילו צבע</s:String>
+    <s:String x:Key="S.Options.Editor.Previewer.OddColor">צבע מוזר</s:String>
+    <s:String x:Key="S.Options.Editor.Interface.DisplayEncoder">הצג את הקידודים בחלון מופרד.</s:String>
+    <s:String x:Key="S.Options.Editor.Interface.ExtendChrome">הרחב את שורת הכותרת (כרום חלון).</s:String>
+    <s:String x:Key="S.Options.Editor.Interface.AutomaticallySizeOnContent">התאם אוטומטית את גודל החלון בהתאם לגודל המסגרת, מיד לאחר הטעינה.</s:String>
+    <s:String x:Key="S.Options.Editor.Interface.AutomaticallyFitImage">התאם אוטומטית את זום המסגרת בהתאם לגודל החלון, מיד לאחר הטעינה.</s:String>
+    <s:String x:Key="S.Options.Editor.General.NotifyFrameDeletion">שאל אותי לפני מחיקת מסגרות.</s:String>
+    <s:String x:Key="S.Options.Editor.General.NotifyProjectDiscard">שאל אותי לפני שאתה זורק פרויקט.</s:String>
+    <s:String x:Key="S.Options.Editor.General.NotifyWhileClosingEditor">שאל אותי לפני סגירת העורך (אם יש פרויקט שנפתח).</s:String>
+    <s:String x:Key="S.Options.Editor.General.TripleClickSelection">אפשר לחיצה משולשת לבחירת הטקסט.</s:String>
+    <s:String x:Key="S.Options.Editor.General.DrawOutlineOutside">צייר את קווי המתאר של הכיתובים מחוץ לאותיות.</s:String>
+    <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind">זרוק מסגרות במידת הצורך.</s:String>
+    <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind.Info">(דלג על מסגרת אם התצוגה המקדימה לא מצליחה להציג אותה בזמן)</s:String>
+    <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind.Tooltip">דלג על מסגרת אם התצוגה המקדימה לא מצליחה להציג אותה בזמן.</s:String>
+    <s:String x:Key="S.Options.Editor.General.LimitHistory">הטיל גבול להיסטוריה של ביטול/חזרה.</s:String>
+    <s:String x:Key="S.Options.Editor.General.LimitHistory.Info">(פעולות ישנות יותר יוסרו כשיגיעו למגבלה)</s:String>
+    <s:String x:Key="S.Options.Editor.General.LimitHistory.Maximum">(מספר הפעולות המרבי המאוחסן)</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Folder">סנכרן את תיקיית הפלט בין הגדרות קבועות מראש.</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Folder.Info">(הגדרות קבועות מראש ישתמשו באותו נתיב פלט)</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Filename">סנכרן גם את שם הקובץ.</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Filename.Info">(הגדרות קבועות מראש ישתמשו גם באותו קובץ)</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.SameType">סנכרן רק בין הגדרות קבועות מראש של אותו סוג קובץ.</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.SameType.Info">(רק סנכרון מראש של אותו סוג קובץ יהיה מסונכרן)</s:String>
+    
+    <!--Options • Tasks-->
+    <s:String x:Key="S.Options.Tasks.Title">משימה אוטומטית</s:String>
+    <s:String x:Key="S.Options.Tasks.List">רשימת משימות אוטומטיות</s:String>
+    <s:String x:Key="S.Options.Tasks.List.Task">משימה</s:String>
+    <s:String x:Key="S.Options.Tasks.List.Details">פרטים</s:String>
+    <s:String x:Key="S.Options.Tasks.List.Enabled">מופעל</s:String>
+    <s:String x:Key="S.Options.Tasks.Enable">הפעל משימה זו.</s:String>
+    <s:String x:Key="S.Options.Tasks.SelectType">בחר משימה</s:String>
+    <s:String x:Key="S.Options.Tasks.SelectType.Info">בחר משימה למעלה</s:String>
+    <s:String x:Key="S.Options.Tasks.Info">משימות אלה מבוצעות ברצף מראש הרשימה לתחתית.&#10;זה קורה כאשר אתה פותח פרוייקט לראשונה באמצעות העורך.</s:String>
+  
+    <!--Options • Shortcuts-->
+    <s:String x:Key="S.Options.Shortcuts.Global">גלובלית</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.ScreenRecorder">מקליט מסך:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.ScreenRecorder.Info">(פותח את מקליט המסך המוגדר כברירת מחדל)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.WebcamRecorder">מקליט מצלמת רשת:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.WebcamRecorder.Info">(פותח את מקליט מצלמת האינטרנט)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.BoardRecorder">מקליט לוח:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.BoardRecorder.Info">(פותח את מקליט הלוח כך שתוכל להקליט את הציורים שלך)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.OpenEditor">עורך:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.OpenEditor.Info">(פותח חלון עורך נוסף)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.OpenOptions">אפשרויות:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.OpenOptions.Info">(פותח את חלון האפשרויות. ניתן לפתוח אחת בכל פעם)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.Exit">יציאה:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.Exit.Info">(סוגר את כל החלונות ומסיר את האפליקציה ממגש המערכת)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders">הקלטות</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause">התחל/השהה:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause.Info">(הוא מתחיל או מושהה את ההקלטה. הוא משמש לצילום תמונות אם מצב הצילום מופעל)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Stop">עצור:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Stop.Info">(זה עוצר את ההקלטה ופותח את העורך)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Discard">מחק:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Discard.Info">(מבטל את ההקלטה הפעילה כשהיא מושהית)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Follow">הסמן הבא:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Follow.Info">(החלפת ההתאמה של אזור ההקלטה בהתאם למיקום הסמן)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.DisableFollow">השבת את הדברים הבאים:</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.DisableFollow.Info">(משבית באופן זמני את התאמת אזור ההקלטה על סמך מיקום הסמן, מתקבלים רק מקשי שינוי)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Info">לחץ כדי להגדיר את המיקוד של המקלדת ולאחר מכן הקש על המקשים והשינויים הרצויים.&#10; שילובי מקשים מסוימים אינם מותרים.</s:String>
+    
+    <!--Options • Language-->
+    <s:String x:Key="S.Options.Language.AppLanguage">שפת האפליקציה</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.AutoDetect">זיהוי אוטומטי</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.AutoDetect.Author">שפת מערכת ההפעלה הנוכחית (אם קיימת)</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence1.1">האם תרצה לתרגם את האפליקציה שלי?</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence1.2">לחץ כאן לקריאת הנחיות התרגום והורדת אפליקציית המתרגם.</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence2.1">לאחר מכן,</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence2.2">לחץ כאן כדי לייבא</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence2.3">ובדוק את התרגום שלך.</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence3.1">שלח לי אותו באמצעות</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence3.2">דוא"ל (nicke@outlook.com.br)</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.Sentence3.3">כשתסיים לתרגם אותו.</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.ResourceLink.Tooltip">לחץ כדי לפתוח דף אינטרנט עם ההנחיות.</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.ImportLink.Tooltip">פותח את דף הייבוא</s:String>
+    <s:String x:Key="S.Options.Language.AppLanguage.Translate.EmailLink.Tooltip">פותח את אפליקציית הדוא"ל שלך</s:String>
+    
+    <!--Options • Storage-->
+    <s:String x:Key="S.Options.Storage.Status">סטטוס</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Volume">עוצמת הקול:</s:String>
+    <s:String x:Key="S.Options.Storage.Status.FreeSpace">{0} ללא {1}</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Check">בדוק שוב כמה מקום נותר.</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Clear">נקה את תיקיית המטמון. &#10; תוכל להחליט אם ברצונך לשמור על פרויקטים אחרונים או לא.</s:String>
+    <s:String x:Key="S.Options.Storage.Status.LowSpace">שטח פנוי בכונן הקשיח שנבחר כעת. אנא, נקה את תיקיית המטמון או שנה את המיקום.</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Error">אי אפשר לאחזר את פרטי הכונן.</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Files.None">אין קובץ</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Files.Singular">קובץ {0: ##, ## 0}</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Files.Plural">{0: ##, ## 0} קבצים</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Folders.None">אין תיקיות</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Folders.Singular">{0: ##, ## 0} תיקייה</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Folders.Plural">{0: ##, ## 0} תיקיות</s:String>
+    <s:String x:Key="S.Options.Storage.Status.InUse">{0} בשימוש</s:String>
+    <s:String x:Key="S.Options.Storage.Paths">נתיב</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Cache">מטמון:</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Cache.Choose">בחר את המיקום של המטמון עבור קבצים זמניים</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Logs">יומנים:</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Logs.Choose">בחר את המיקום של קבצי יומן השגיאות.</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Browse">עיון בתיקיה שנבחרה.</s:String>
+    <s:String x:Key="S.Options.Storage.Settings">מיקום ההגדרות</s:String>
+    <s:String x:Key="S.Options.Storage.AppDataPath">נתוני אפליקציה:</s:String>
+    <s:String x:Key="S.Options.Storage.LocalPath">מקומי:</s:String>
+    <s:String x:Key="S.Options.Storage.NotExists">זה לא קיים</s:String>
+    <s:String x:Key="S.Options.Storage.CreateSettings">צור קובץ הגדרות מקומי ריק.</s:String>
+    <s:String x:Key="S.Options.Storage.RemoveSettings">הסר את קובץ ההגדרות.</s:String>
+    <s:String x:Key="S.Options.Storage.OpenSettingsFolder">פתח את התיקיה שבה נמצא קובץ ההגדרות. &#x0d; החזק Ctrl תוך לחיצה כדי לפתוח את הקובץ, במידת האפשר.</s:String>
+    <s:String x:Key="S.Options.Storage.SettingsInfo">• דפוס טעינת הגדרות: ברירת מחדל ◄ AppData ◄ Local.&#x0d;• אם אין קובץ הגדרות בתיקייה Local, האפליקציה מחפשת בתוך תיקיית AppData, ברירת המחדל משמשת אם אין קובץ הגדרות. &#x0d;• אם אין הגדרות מקומיות, כל ההגדרות נשמרות בקובץ ההגדרות של AppData.</s:String>
+    <s:String x:Key="S.Options.Storage.DeleteEverything">מחק את כל הקבצים מהמטמון בעת סגירת האפליקציה.</s:String>
+    <s:String x:Key="S.Options.Storage.AskDeleteEverything">שאל אותי לפני מחיקת כל הקבצים מהמטמון.</s:String>
+    <s:String x:Key="S.Options.Storage.AutomaticRemoval">הסר באופן אוטומטי פרויקטים ישנים.</s:String>
+    <s:String x:Key="S.Options.Storage.AutomaticRemoval.Info">בעת פתיחת האפליקציה, משימת רקע תמחק את כל הפרויקטים הסגורים הישנים מכמות הזמן שהוגדרה.</s:String>
+    <s:String x:Key="S.Options.Storage.AutomaticRemovalDays.Info">(בימים, כל פרויקט סגור הישן מזה יימחק לאחר פתיחת האפליקציה)</s:String>
+    
+    <!--Options • Storage > Clear cache-->
+    <s:String x:Key="S.Options.Storage.Cache.Title">ScreenToGif - נקה מטמון</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.Header">האם ברצונך לנקות את תיקיית המטמון?</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.Info">כאשר אתה יוצר הקלטה או פותח משהו לעריכה, פרויקט נוצר ומאוחסן בתוך תיקיית המטמון.</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.Question">האם ברצונך להסיר פרויקטים אלה מתיקיית המטמון?</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.IgnoreRecent">אל תסיר פרויקטים אחרונים.</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.IgnoreRecent.Yes">(רק הפרויקטים הישנים מ- {0} ימים, שאינם בשימוש כרגע, יוסרו)</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.IgnoreRecent.No">(כל הפרויקטים, שאינם בשימוש כרגע, יוסרו)</s:String>
+    
+    <!--Options • Upload-->
+    <s:String x:Key="S.Options.Upload.Proxy">פרוקסי</s:String>
+    <s:String x:Key="S.Options.Upload.Proxy.Mode">מצב:</s:String>
+    <s:String x:Key="S.Options.Upload.Proxy.Mode.Disabled">נכה</s:String>
+    <s:String x:Key="S.Options.Upload.Proxy.Mode.Manual">ידני</s:String>
+    <s:String x:Key="S.Options.Upload.Proxy.Mode.System">מערכת</s:String>
+    <s:String x:Key="S.Options.Upload.Proxy.Mode.System.Info">(משתמש בפרוקסי המערכת)</s:String>
+    <s:String x:Key="S.Options.Upload.Proxy.Host">מארח:</s:String>
+    <s:String x:Key="S.Options.Upload.Proxy.Port">נמל:</s:String>
+    <s:String x:Key="S.Options.Upload.Proxy.User">שם משתמש:</s:String>
+    <s:String x:Key="S.Options.Upload.Proxy.Password">סיסמא:</s:String>
+    
+    <s:String x:Key="S.Options.Upload.Presets">העלה הגדרות קבועות מראש</s:String>
+    <s:String x:Key="S.Options.Upload.Presets.Service">שירות</s:String>
+    <s:String x:Key="S.Options.Upload.Presets.Title">כותרת</s:String>
+    <s:String x:Key="S.Options.Upload.Presets.Description">תיאור</s:String>
+    <s:String x:Key="S.Options.Upload.Presets.Enabled">מופעל</s:String>
+    
+     <!--Options • Upload > Preset-->
+    <s:String x:Key="S.Options.Upload.Preset.Title">שירות העלאה</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Select">בחר שירות</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Select.Info">בחר שירות העלאה למעלה</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Custom">מותאם אישית</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Enable">הפעל הגדרה מוקדמת זו.</s:String>
+    
+    <s:String x:Key="S.Options.Upload.Preset.Details">פרטים</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Name">שם:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Description">תיאור:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Mode">מצב:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Mode.Anonymous">אנונימי</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Mode.Authenticated">מאומת</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Authorization">הרשאה</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.GetToken">קבל אסימון</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Token">הדבק כאן את אסימון OAuth</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Username">שם משתמש:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Password">סיסמא:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Authorize">אישור</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.NotStored">שם המשתמש והסיסמה לא יישמרו.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Options">אפשרויות</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Direct">השתמש בקישורים ישירים.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Album">אלבום</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Title">עליך לתת להגדרה זו שם ייחודי.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Repeated">השם כבר בשימוש על ידי הגדרה מוקדמת נוספת להעלאה.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Authenticate">במצב אימות, עליך לסיים את תהליך האימות.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Credentials">עליך לספק את שם המשתמש והסיסמה שלך כדי לאשר יישום זה.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.GetToken">לא ניתן היה לקבל את אסימון ההרשאה.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.Token">כדי לאשר יישום זה, עליך לספק את אסימון ההרשאה.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.AuthError">ההרשאה נכשלה. בדוק אם הכל תקין ונסה שוב בעוד מספר שניות.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Warning.AlbumLoad">לא ניתן היה לטעון את רשימת האלבומים.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Authorized">ההרשאה הושלמה.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.NotAuthorized">לא מורשה.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Expired">תוקף האישור פג ב- {0}.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Info.Valid">הרשאה תקפה עד {0}.</s:String>
+    
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Gifv">קבל קישורים עם סיומת Gifv במקום Gif.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.ToAlbum">העלה קבצי GIF לאלבום שנבחר.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Album">אלבום:</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.AskMe">שאל אותי לפני העלאה</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Imgur.Reload">טען מחדש את רשימת האלבומים.</s:String>
+    
+    <s:String x:Key="S.Options.Upload.Preset.Gfycat.Defaults">ברירות מחדל</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Gfycat.AskMe">בקש ממני למלא את פרטי ההעלאה.</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Gfycat.UrlType">סוג כתובת אתר:</s:String>
+    
+    <!--Options • Upload > Album-->
+    <s:String x:Key="S.Options.Upload.Pick.Album">בחר אלבום (אופציונלי)</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Album.Info">אם תרצה, תוכל לבחור באלבום היעד:</s:String>
+    
+    <!--Options • Upload > Details-->
+    <s:String x:Key="S.Options.Upload.Pick.Details">פרטי העלאה (אופציונלי)</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Info">העלה פרטים</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Title">כותרת:</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Description">תיאור:</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Tags">תגים:</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Tags.Info">הפרד תגים באמצעות חצי נקודתיים (;)</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Details.Private">הצג רק לאנשים המגיעים באמצעות קישור ישיר.</s:String>
+    
+    <!--Options • Upload > History-->
+    <s:String x:Key="S.Options.Upload.History.Title">היסטוריית העלאות</s:String>
+    <s:String x:Key="S.Options.Upload.History.Date">תאריך</s:String>
+    <s:String x:Key="S.Options.Upload.History.Preset">קבוע מראש</s:String>
+    <s:String x:Key="S.Options.Upload.History.Successful">הצלחת?</s:String>
+    <s:String x:Key="S.Options.Upload.History.Remove">מחק ערך היסטוריה.</s:String>
+    <s:String x:Key="S.Options.Upload.History.Detail.Link">קישור:</s:String>
+    <s:String x:Key="S.Options.Upload.History.Detail.LowerQuality">איכות נמוכה יותר:</s:String>
+    <s:String x:Key="S.Options.Upload.History.Detail.DeleteLink">קישור מחיקה:</s:String>
+    <s:String x:Key="S.Options.Upload.History.Delete.Instruction">האם אתה בטוח שברצונך למחוק את ערך ההיסטוריה?</s:String>
+    <s:String x:Key="S.Options.Upload.History.Delete.Message">לא ניתן לבטל פעולה זו. &#10; &#10; האם ברצונך למחוק את ערך ההיסטוריה שנבחר?</s:String>
+    
+    <!--Options • Extras-->
+    <s:String x:Key="S.Options.Extras.External">כלים חיצוניים זמינים</s:String>
+    <s:String x:Key="S.Options.Extras.Download">לחץ כאן כדי להוריד &#x0d; {0}</s:String>
+    <s:String x:Key="S.Options.Extras.Downloading">מוריד ...</s:String>
+    <s:String x:Key="S.Options.Extras.Ready">הורדת &#x0d; {0}</s:String>
+    <s:String x:Key="S.Options.Extras.Ready.Info">לחץ כאן כדי לפתוח את המאפיינים של הקובץ.</s:String>
+    <s:String x:Key="S.Options.Extras.DownloadRestriction">אפליקציות שמופצות על ידי חנות Microsoft לא יכולות להוריד אפליקציות אחרות. יהיה עליך להוריד אותן באופן ידני.</s:String>
+    <s:String x:Key="S.Options.Extras.FfmpegLocation">מיקום FFmpeg</s:String>
+    <s:String x:Key="S.Options.Extras.FfmpegLocation.Select"> FFmpeg בחר את המיקום של קובץ ההפעלה</s:String>
+    <s:String x:Key="S.Options.Extras.FfmpegLocation.File">הפעלה של FFmpeg</s:String>
+    <s:String x:Key="S.Options.Extras.FfmpegLocation.Invalid">הנתיב של קובץ ההפעלה FFMpeg מכיל תו אחד או יותר לא חוקיים. אנא בחר מיקום חוקי עבור קובץ ההפעלה.</s:String>
+    <s:String x:Key="S.Options.Extras.GifskiLocation">מיקום גיפסקי</s:String>
+    <s:String x:Key="S.Options.Extras.GifskiLocation.Select">Gifski בחר את המיקום של ספריית </s:String>
+    <s:String x:Key="S.Options.Extras.GifskiLocation.File">ספריית גיפסקי</s:String>
+    <s:String x:Key="S.Options.Extras.GifskiLocation.Invalid">הנתיב של ספריית Gifski מכיל תו אחד או יותר לא חוקיים. אנא בחר מיקום חוקי עבור הספרייה הזו.</s:String>
+    <s:String x:Key="S.Options.Extras.SharpDxLocation">תיקיית SharpDx (SharpDX.dll, SharpDX.Direct3D11.dll ו- SharpDX.DXGI.dll)</s:String>
+    <s:String x:Key="S.Options.Extras.SharpDxLocation.Select"> SharpDx בחר את המיקום של ספריות</s:String>
+    <s:String x:Key="S.Options.Extras.SharpDxLocation.Invalid">הנתיב של ספריות SharpDx מכיל תו אחד או יותר לא חוקיים. אנא בחר תיקייה תקפה עבור ספריות אלה.</s:String>
+    <s:String x:Key="S.Options.Extras.License.Ffmpeg">רישיון FFmpeg</s:String>
+    <s:String x:Key="S.Options.Extras.License.Gifski">רישיון גיפסקי</s:String>
+    <s:String x:Key="S.Options.Extras.License.SharpDx">רישיון SharpDx</s:String>
+    <s:String x:Key="S.Options.Extras.Permission.Header">חסרה הרשאת כתיבה בתיקייה</s:String>
+    <s:String x:Key="S.Options.Extras.Permission.Observation">לא ניתן לשמור את ההורדה בתיקייה בגלל היעדר הרשאת כתיבה. &#10; &#10; האם ברצונך להפעיל את ההורדה עם זכויות ניהול כדי לסיים את ההורדה?</s:String>
+    
+    <!--Options • Donations-->
+    <s:String x:Key="S.Options.Donate.Donate">לתרום</s:String>
+    <s:String x:Key="S.Options.Donate.Donate.Dollar">לתרום $</s:String>
+    <s:String x:Key="S.Options.Donate.Donate.Euro">לתרום €</s:String>
+    <s:String x:Key="S.Options.Donate.Paypal.Dollar">פותח את אתר Paypal. מטבע נבחר: דולר</s:String>
+    <s:String x:Key="S.Options.Donate.Paypal.Euro">פותח את אתר Paypal. מטבע נבחר: יורו</s:String>
+    <s:String x:Key="S.Options.Donate.Paypal.OwnCurrency">פותח את אתר Paypal. עליך לבחור את המטבע.</s:String>
+    <s:String x:Key="S.Options.Donate.Subscribe">הירשם</s:String>
+    <s:String x:Key="S.Options.Donate.Subscribe.Patreon">לתרום מדי חודש באמצעות Patreon.</s:String>
+    <s:String x:Key="S.Options.Donate.Subscribe.Flattr">לתרום מדי חודש באמצעות Flattr.</s:String>
+    <s:String x:Key="S.Options.Donate.Gift">משחקי מתנה</s:String>
+    <s:String x:Key="S.Options.Donate.Gift.Steam">משחקי מתנה באמצעות Steam.</s:String>
+    <s:String x:Key="S.Options.Donate.Gift.Gog">משחקי מתנה באמצעות GOG.</s:String>
+    <s:String x:Key="S.Options.Donate.Kofi">שלם על קפה באמצעות קו-פי.</s:String>
+    <s:String x:Key="S.Options.Donate.Crypto">מטבעות קריפטו</s:String>
+    <s:String x:Key="S.Options.Donate.Crypto.BitcoinCash">העתק את כתובת BitcoinCash.</s:String>
+    <s:String x:Key="S.Options.Donate.Support">תמיכה</s:String>
+    <s:String x:Key="S.Options.Donate.Support.Visit">אם ברצונך לתמוך בפרויקט :)</s:String>
+    
+    <!--Options • About-->
+    <s:String x:Key="S.Options.About.Version">גרסה:</s:String>
+    <s:String x:Key="S.Options.About.UpdateCheck">בדוק אם קיימים עדכונים</s:String>
+    <s:String x:Key="S.Options.About.UpdateCheck.Nothing">כבר יש לך את הגירסה העדכנית ביותר.</s:String>
+    <s:String x:Key="S.Options.About.Author">מחבר: ניק מנרין</s:String>
+    <s:String x:Key="S.Options.About.StoreVersion">גירסת חנות Microsoft. חלק מהתכונות מושבתות עקב מדיניות שנאכפה.</s:String>
+    <s:String x:Key="S.Options.About.Contact">איש קשר</s:String>
+    <s:String x:Key="S.Options.About.Contact.Discord">הצטרף לשרת</s:String>
+    <s:String x:Key="S.Options.About.Contact.Facebook">דף ביקור</s:String>
+    <s:String x:Key="S.Options.About.Contact.Gitter">חדר הצטרפות</s:String>
+    <s:String x:Key="S.Options.About.Technical">טכני</s:String>
+    <s:String x:Key="S.Options.About.Technical.License">רישיון:</s:String>
+    <s:String x:Key="S.Options.About.Technical.Free">(זוהי אפליקציה בחינם לחלוטין)</s:String>
+    <s:String x:Key="S.Options.About.Technical.SourceCode">קוד מקור:</s:String>
+    <s:String x:Key="S.Options.About.Technical.Privacy">מדיניות פרטיות:</s:String>
+    <s:String x:Key="S.Options.About.ABigThanksTo">תודה גדולה ל</s:String>
+    <s:String x:Key="S.Options.About.ABigThanksTo.Everyone">כל התומכים שלי, אנשים שסיפקו משוב ו/או תרומות.</s:String>
+    
+    <!--Localization-->
+    <s:String x:Key="S.Localization">לוקליזציה</s:String>
+    <s:String x:Key="S.Localization.GettingCodes">קבלת קודי שפה ...</s:String>
+    <s:String x:Key="S.Localization.Recognized">מוכר כ- {0}</s:String>
+    <s:String x:Key="S.Localization.NotRecognized">לא מזוהה</s:String>
+    <s:String x:Key="S.Localization.Usage.First">המשאב התחתון ביותר הוא המשמש הנוכחי.</s:String>
+    <s:String x:Key="S.Localization.Usage.Second">כדי להחיל את המשאב המותאם אישית שלך, העבר אותו לתחתית הרשימה.</s:String>
+    <s:String x:Key="S.Localization.Exporting">מייצא משאבים ...</s:String>
+    <s:String x:Key="S.Localization.SaveResource">שמור את מילון המשאבים</s:String>
+    <s:String x:Key="S.Localization.OpenResource">פתח מילון משאבים</s:String>
+    <s:String x:Key="S.Localization.File.Resource">מילון משאבים</s:String>
+    <s:String x:Key="S.Localization.Importing">מייבא משאב ...</s:String>
+    <s:String x:Key="S.Localization.Warning.Name">שם הקובץ אינו פועל לפי תבנית תקפה</s:String>
+    <s:String x:Key="S.Localization.Warning.Name.Info">נסה לשנות שם כמו: StringResources.en.xaml, שם 'en' צריך להיות מוחלף בקוד השפה שלך.</s:String>
+    <s:String x:Key="S.Localization.Warning.Repeated">לא ניתן להוסיף משאב בעל אותו שם</s:String>
+    <s:String x:Key="S.Localization.Warning.Repeated.Info">נסה להסיר את המשאב החוזר או השתמש בקוד שפה אחר.</s:String>
+    <s:String x:Key="S.Localization.Warning.Redundant">קוד שפה מיותר</s:String>
+    <s:String x:Key="S.Localization.Warning.Redundant.Info">הקוד" {0} "מיותר. נסה להשתמש במקום זאת ב-" {1} ".</s:String>
+    <s:String x:Key="S.Localization.Warning.Unknown">שפה לא ידועה</s:String>
+    <s:String x:Key="S.Localization.Warning.Unknown.Info">" {0} " ומשפחתו לא זוהו כקודי שפה תקפים.</s:String>
+    <s:String x:Key="S.Localization.Warning.NotPossible">לא ניתן היה לייבא את משאב הלוקליזציה.</s:String>
+
+    <!--Recorder-->
+    <s:String x:Key="S.Recorder.Record">הקלט</s:String>
+    <s:String x:Key="S.Recorder.Pause">השהה</s:String>
+    <s:String x:Key="S.Recorder.Continue">המשך</s:String>
+    <s:String x:Key="S.Recorder.Stop">עצור</s:String>
+    <s:String x:Key="S.Recorder.Discard">מחק</s:String>
+    <s:String x:Key="S.Recorder.Snap">הצמד</s:String>
+    <s:String x:Key="S.Recorder.Height">גובה</s:String>
+    <s:String x:Key="S.Recorder.Width">רוחב</s:String>
+    <s:String x:Key="S.Recorder.CursorFollowing">מעקב הסמן מופעל.</s:String>
+
+    <s:String x:Key="S.Recorder.SwitchFrequency">לחץ כדי לעבור בין מצבי תדירות הלכידה.</s:String>
+    <s:String x:Key="S.Recorder.Manual.Short">ידני</s:String>
+    <s:String x:Key="S.Recorder.Interaction.Short">אינטראקציות</s:String>
+    <s:String x:Key="S.Recorder.Fps">מקסימום פריימים לשנייה</s:String>
+    <s:String x:Key="S.Recorder.Fps.Short">fps</s:String>
+    <s:String x:Key="S.Recorder.Fps.Range">נע בין 1 ל -60 פריימים לשנייה, עם ערכים גבוהים יותר כלומר יותר מסגרות יתפסו. &#10; כל תוספת מייצגת 16 הפרש של אלפיות השנייה.</s:String>
+    <s:String x:Key="S.Recorder.Fpm">מסגרות מקסימליות לדקה</s:String>
+    <s:String x:Key="S.Recorder.Fpm.Short">fpm</s:String>
+    <s:String x:Key="S.Recorder.Fpm.Range">נע בין 1 ל -60 סל"ד, עם ערכים גבוהים יותר כלומר יותר מסגרות יתפסו. &#10; כל תוספת מייצגת שנייה אחת של הפרש.</s:String>
+    <s:String x:Key="S.Recorder.Fph">מסגרות מקסימליות לשעה</s:String>
+    <s:String x:Key="S.Recorder.Fph.Short">fph</s:String>
+    <s:String x:Key="S.Recorder.Fph.Range">נע בין 1 ל 60 קמ"ש, עם ערכים גבוהים יותר כלומר יותר מסגרות יתפסו. &#10; כל תוספת מייצגת דקת הבדל אחת.</s:String>
+    
+    <s:String x:Key="S.Recorder.ClickOrPress">לחץ או הקש על מקשים כדי ללכוד</s:String>
+    <s:String x:Key="S.Recorder.SnapToWindow">הצמד לחלון (גרור ושחרר לצלם)</s:String>
+    <s:String x:Key="S.Recorder.PreStart">טרום התחלה:</s:String>
+    <s:String x:Key="S.Recorder.Paused">ScreenToGif (מושהה)</s:String>
+    <s:String x:Key="S.Recorder.Stopping">מפסיק ...</s:String>
+    <s:String x:Key="S.Recorder.PreStarting">התחלה מוקדמת ...</s:String>
+    
+    <s:String x:Key="S.Recorder.Timer.Elapsed">זמן הלכידה שחלף.</s:String>
+    <s:String x:Key="S.Recorder.Timer.Total">ספירת המסגרות הכוללת:</s:String>
+    <s:String x:Key="S.Recorder.Timer.Manual">נלכד באופן ידני:</s:String>
+    <s:String x:Key="S.Recorder.Timer.Paused">הלכידה מושהית.</s:String>
+    <s:String x:Key="S.Recorder.Timer.Imprecise">המחשב שלך אינו תומך במצב לכידה מדויק, &#10; מה שאומר שלעולם לא ניתן להשיג את קצב מסגרות היעד.</s:String>
+    
+    <s:String x:Key="S.Recorder.Warning.CaptureNotPossible">לא ניתן היה לצלם את המסך</s:String>
+    <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">לא ניתן היה ללכוד את המסך. שיטת הלכידה לא החזירה מסגרת לאחר 5 ניסיונות.</s:String>
+    <s:String x:Key="S.Recorder.Warning.StartPauseNotPossible">לא ניתן היה להתחיל/להשהות את צילום המסך</s:String>
+    <s:String x:Key="S.Recorder.Warning.Windows8">Windows 8 ואילך נדרש לצילום המסך באמצעות ממשק ה- API של שכפול שולחן העבודה.</s:String>
+    <s:String x:Key="S.Recorder.Warning.MissingSharpDx">ספריות SharpDx נדרשות על מנת ללכוד את המסך באמצעות ממשק ה- API של שכפול שולחני. עבור לאפשרויות>תוספות להורדתו.</s:String>
+    
+    <!--New recorder-->
+    <s:String x:Key="S.Recorder.Area">אזור</s:String>
+    <s:String x:Key="S.Recorder.Area.Select">בחר אזור</s:String>
+    <s:String x:Key="S.Recorder.Window">חלון</s:String>
+    <s:String x:Key="S.Recorder.Window.Select">בחר חלון</s:String>
+    <s:String x:Key="S.Recorder.Screen">מסך</s:String>
+    <s:String x:Key="S.Recorder.Screen.Select">בחר מסך</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Internal">מסך פנימי</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Generic">מסך כללי</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Info1">מתאם גרפי: {0}</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Info2">רזולוציה: {0} x {1}</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Info3">רזולוציה מקורית: {0} x {1}</s:String>
+    <s:String x:Key="S.Recorder.Screen.Name.Info4">DPI: {0} ({1: 0. ##}%)</s:String>
+    <s:String x:Key="S.Recorder.Move">גרור כדי להזיז &#10; הבחירה.</s:String>
+    <s:String x:Key="S.Recorder.Accept">קבל</s:String>
+    <s:String x:Key="S.Recorder.Retry">נסה שוב</s:String>
+    <s:String x:Key="S.Recorder.Retry.Shortcut">קליק ימני</s:String>
+    <s:String x:Key="S.Recorder.CancelSelection">בטל את הבחירה (Esc)</s:String>
+    <s:String x:Key="S.Recorder.SelectArea">לחץ וגרור כדי לבחור אזור במסך זה</s:String>
+    <s:String x:Key="S.Recorder.SelectArea.Embedded">לחץ וגרור כדי לבחור אזור</s:String>
+    <s:String x:Key="S.Recorder.SelectWindow">לחץ כאן לבחירת חלון זה</s:String>
+    <s:String x:Key="S.Recorder.SelectScreen">לחץ כאן לבחירת מסך זה</s:String>
+    <s:String x:Key="S.Recorder.EscToCancel">הקש Esc כדי לבטל</s:String>
+    <s:String x:Key="S.Recorder.Splash.Title">לחץ על {0} כדי לעצור את ההקלטה</s:String>
+    <s:String x:Key="S.Recorder.Splash.Subtitle">חלון המקליט יהיה ממוזער, &#10; תשחזר אותו או הקש על {0} כדי להשהות את הצילום</s:String>
+    
+    <s:String x:Key="S.Recorder.Discard.Title">מחק את ההקלטה</s:String>
+    <s:String x:Key="S.Recorder.Discard.Instruction">האם אתה בטוח שאתה רוצה למחוק את ההקלטה?</s:String>
+    <s:String x:Key="S.Recorder.Discard.Message"> לא ניתן לבטל פעולה זו, פעולה זו תבטל את ההקלטה, ותסיר את כל הפריימים..</s:String>
+    
+    <!--Webcam recorder-->
+    <s:String x:Key="S.Webcam.Title">ScreenToGif - מקליט מצלמות אינטרנט</s:String>
+    <s:String x:Key="S.Webcam.NoVideo">לא זוהה מכשיר וידיאו :(</s:String>
+    <s:String x:Key="S.Webcam.CheckVideoDevices">בדוק אם קיימים מכשירי וידאו.</s:String>
+    <s:String x:Key="S.Webcam.Scale">קנה מידה: {0: 0. ##} x</s:String>
+    <s:String x:Key="S.Webcam.ChangeScale">שנה את קנה המידה של הסרטון.</s:String>
+    
+    <!--Board recorder-->
+    <s:String x:Key="S.Board.Title">ScreenToGif - מקליט לוח</s:String>
+    <s:String x:Key="S.Board.AutoRecord">הקלטה אוטמטית</s:String>
+    <s:String x:Key="S.Board.AutoRecordToolTip">מאפשר הקלטה בזמן ציור.</s:String>
+    <s:String x:Key="S.Board.CtrlHold">Ctrl [החזק]</s:String>
+    
+    <!--Color selector-->
+    <s:String x:Key="S.ColorSelector.Title">בחירת צבע</s:String>
+    <s:String x:Key="S.ColorSelector.Select">בחר צבע</s:String>
+    <s:String x:Key="S.ColorSelector.Red">אדום</s:String>
+    <s:String x:Key="S.ColorSelector.Green">ירוק</s:String>
+    <s:String x:Key="S.ColorSelector.Blue">כחול</s:String>
+    <s:String x:Key="S.ColorSelector.Alpha">אלפא</s:String>
+    <s:String x:Key="S.ColorSelector.Hexadecimal">משושה</s:String>
+    <s:String x:Key="S.ColorSelector.Initial">צבע ראשוני</s:String>
+    <s:String x:Key="S.ColorSelector.Current">צבע נוכחי</s:String>
+    <s:String x:Key="S.ColorSelector.Latest">הצבע האחרון</s:String>
+    <s:String x:Key="S.ColorSelector.Sample">גרור את זה לצבעים לדוגמא &#x0d;</s:String>
+    <s:String x:Key="S.ColorSelector.Sample.Info">לחץ וגרור כדי לבחור &#x0d; צבעים מהמסך שלך.</s:String>
+    
+    <!--Exception/Error viewers-->
+    <s:String x:Key="S.ExceptionViewer.Title">מציג חריגים</s:String>
+    <s:String x:Key="S.ExceptionViewer.OpenInner">פתוח חריג פנימי</s:String>
+    <s:String x:Key="S.ExceptionViewer.Type">סוג חריג</s:String>
+    <s:String x:Key="S.ExceptionViewer.Message">הודעה</s:String>
+    <s:String x:Key="S.ExceptionViewer.Stack">מחסנית</s:String>
+    <s:String x:Key="S.ExceptionViewer.Source">מקור</s:String>
+    <s:String x:Key="S.ErrorDialog.Observation">קרה משהו לא בסדר.</s:String>
+    <s:String x:Key="S.ErrorDialog.Send">שלח דוח</s:String>
+
+    <!--Presets-->
+    <s:String x:Key="S.Preset.Title">קבוע מראש</s:String>
+    <s:String x:Key="S.Preset.Encoder">מקודד</s:String>
+    <s:String x:Key="S.Preset.Name">שם</s:String>
+    <s:String x:Key="S.Preset.Description">תיאור</s:String>
+    <s:String x:Key="S.Preset.Other">אחר</s:String>
+    <s:String x:Key="S.Preset.AutoSave">שמור אוטומטית כאשר אפשרות משתנה.</s:String>
+    <s:String x:Key="S.Preset.Info.Manual">כל השינויים בהגדרות המוגדרות מראש אלה (הגדרות קידוד ויצוא) צריכות להישמר באופן ידני על ידי לחיצה על כפתור השמירה.</s:String>
+    <s:String x:Key="S.Preset.Info.Automatic">כל השינויים בהגדרות שנקבעו מראש (הגדרות קידוד ויצוא) יישמרו באופן אוטומטי.</s:String>
+    <s:String x:Key="S.Preset.Warning.Readonly">חלק מהמאפיינים של ברירת מחדל המוגדרת כברירת מחדל הם לקריאה בלבד.</s:String>
+    <s:String x:Key="S.Preset.Warning.Name">עליך לתת שם לקביעה מוגדרת מראש זו.</s:String>
+    <s:String x:Key="S.Preset.Warning.SameName">יש כבר הגדרה מוקדמת עם אותו שם.</s:String>
+    
+    <!--Presets • Listing-->
+    <s:String x:Key="S.Preset.Autosave">שמירה אוטומטית</s:String>
+    <s:String x:Key="S.Preset.Autosave.Info">שינויים בהגדרה מוקדמת זו נשמרים אוטומטית.</s:String>
+    <s:String x:Key="S.Preset.Default.Title">ברירת מחדל ({0})</s:String>
+    <s:String x:Key="S.Preset.Default.Description">הגדרת ברירת מחדל מראש עבור המקודד.</s:String>
+    <s:String x:Key="S.Preset.Twitter.Title">לטוויטר ({0})</s:String>
+    <s:String x:Key="S.Preset.Twitter.Description">מכבד את גבולות העלאת הטוויטר (למעט גודל ורזולוציה).</s:String>
+    <s:String x:Key="S.Preset.Hevc.Title">HEVC ({0})</s:String>
+    <s:String x:Key="S.Preset.Hevc.Description">קידוד וידאו ביעילות גבוהה.</s:String>
+    <s:String x:Key="S.Preset.Vp8.Title">סמנכ"ל 8 ({0})</s:String>
+    <s:String x:Key="S.Preset.Vp8.Description">קודק ישן ומוכר יותר.</s:String>
+    <s:String x:Key="S.Preset.Filename.Animation">אנימציה</s:String>
+    <s:String x:Key="S.Preset.Filename.Video">סרטון</s:String>
+    <s:String x:Key="S.Preset.Filename.Image">תמונה</s:String>
+    <s:String x:Key="S.Preset.Filename.Project">פרויקט</s:String>
+
+    <s:String x:Key="S.Preset.Gif.Embedded.High.Title">באיכות גבוהה</s:String>
+    <s:String x:Key="S.Preset.Gif.Embedded.High.Description">מתאים יותר להקלטות עם יותר צבעים ושיפועים.</s:String>
+    <s:String x:Key="S.Preset.Gif.Embedded.Transparent.Title">איכות גבוהה • רקע שקוף</s:String>
+    <s:String x:Key="S.Preset.Gif.Embedded.Transparent.Description">תומך בשמירת האנימציה עם רקע שקוף.</s:String>
+    <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Title">איכות גבוהה • גרפיקה</s:String>
+    <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Description">טוב יותר להקלטות עם כמות צבעים נמוכה יותר.</s:String>
+    <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Title">FFmpeg - איכות גבוהה יותר</s:String>
+    <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Description">איכות תמונה גבוהה יותר, אך עם גודל קובץ גדול יותר.</s:String>
+    <s:String x:Key="S.Preset.Gif.Ffmpeg.Low.Title">FFmpeg - איכות נמוכה יותר</s:String>
+    <s:String x:Key="S.Preset.Gif.Ffmpeg.Low.Description">איכות תמונה נמוכה יותר, אך עם גודל קובץ קטן יותר.</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.High.Title">גיפסקי - איכות גבוהה יותר</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.High.Description">איכות תמונה גבוהה יותר, אך עם גודל קובץ גדול יותר.</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.Low.Title">גיפסקי - איכות נמוכה יותר</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.Low.Description">איכות תמונה נמוכה יותר, אך עם גודל קובץ קטן יותר.</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.Fast.Title">גיפסקי - קידוד באיכות נמוכה ומהירה יותר</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.Fast.Description">אפילו איכות תמונה נמוכה יותר, עם קידוד מהיר יותר, אך עם גודל קובץ קטן יותר.</s:String>
+    <s:String x:Key="S.Preset.Gif.System.Low.Title">מערכת - באיכות נמוכה</s:String>
+    <s:String x:Key="S.Preset.Gif.System.Low.Description">קידוד באיכות נמוכה אך מהירה יותר.</s:String>
+    
+    <s:String x:Key="S.Preset.Apng.Ffmpeg.High.Title">FFmpeg - באיכות גבוהה</s:String>
+    <s:String x:Key="S.Preset.Apng.Ffmpeg.High.Description">איכות תמונה גבוהה וגודל קובץ קטן, אך קידוד איטי יותר.</s:String>
+    <s:String x:Key="S.Preset.Apng.Ffmpeg.Low.Title">FFmpeg - איכות נמוכה יותר</s:String>
+    <s:String x:Key="S.Preset.Apng.Ffmpeg.Low.Description">איכות תמונה נמוכה יותר, גודל קובץ קטן וקידוד מהיר יותר.</s:String>
+    <s:String x:Key="S.Preset.Webp.Ffmpeg.High.Title">באיכות גבוהה</s:String>
+    <s:String x:Key="S.Preset.Webp.Ffmpeg.High.Description">איכות תמונה גבוהה וגודל קובץ קטן.</s:String>
+    
+    <!--Insert frames-->
+    <s:String x:Key="S.InsertFrames.Title">הכנס מסגרות</s:String>
+    <s:String x:Key="S.InsertFrames.Info">שני הצדדים צריכים להיות באותו גודל, חלון זה מאפשר לך למקם את גודל התמונה ואת הקנבס ולשנות אותו. לחץ כדי לבחור ולשנות את הגודל.</s:String>
+    <s:String x:Key="S.InsertFrames.CanvasSize">גודל קנבס:</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas">התאמת תמונה &#10; על בד</s:String>
+    <s:String x:Key="S.InsertFrames.FitCanvas.Info">משנה את גודל הקנבס כך שיתאים לשתי התמונות בפנים (מהפינה השמאלית העליונה).</s:String>
+    <s:String x:Key="S.InsertFrames.DifferentSizes">יש הבדל בין גדלי מסגרות. עליך לפתור זאת לפני הכנסת המסגרות.</s:String>
+    <s:String x:Key="S.InsertFrames.InsertedFrames">מסגרות חדשות</s:String>
+    <s:String x:Key="S.InsertFrames.CurrentFrames">מסגרות נוכחיות</s:String>
+    <s:String x:Key="S.InsertFrames.ImageSize">גודל התמונה:</s:String>
+    <s:String x:Key="S.InsertFrames.ImagePosition">מיקום התמונה:</s:String>
+    <s:String x:Key="S.InsertFrames.ResetImageSizePosition">אפס גודל תמונה ומיקום</s:String>
+    <s:String x:Key="S.InsertFrames.Info2">מסגרות חדשות יוכנסו לרשימת המסגרות הנוכחית של &#10;</s:String>
+    <s:String x:Key="S.InsertFrames.Before">לפני</s:String>
+    <s:String x:Key="S.InsertFrames.After">אחרי</s:String>
+    <s:String x:Key="S.InsertFrames.Frame">מסגרת</s:String>
+    <s:String x:Key="S.InsertFrames.Importing">מייבא ...</s:String>
+    <s:String x:Key="S.InsertFrames.SelectColorFill">בחר את צבע מילוי הבד</s:String>
+
+    <!--Import frames from video-->
+    <s:String x:Key="S.ImportVideo.Title">ייבא מסגרות מסרטון</s:String>
+    <s:String x:Key="S.ImportVideo.Importer">יבואן:</s:String>
+    <s:String x:Key="S.ImportVideo.Loading">טוען ...</s:String>
+    <s:String x:Key="S.ImportVideo.Scale">קנה מידה:</s:String>
+    <s:String x:Key="S.ImportVideo.Size">גודל:</s:String>
+    <s:String x:Key="S.ImportVideo.Height">גובה:</s:String>
+    <s:String x:Key="S.ImportVideo.Width">רוחב:</s:String>
+    <s:String x:Key="S.ImportVideo.Framerate">קצב מסגרות:</s:String>
+    <s:String x:Key="S.ImportVideo.Fps">fps</s:String>
+    <s:String x:Key="S.ImportVideo.Start">התחל:</s:String>
+    <s:String x:Key="S.ImportVideo.End">סוף:</s:String>
+    <s:String x:Key="S.ImportVideo.Selection">בחירה:</s:String>
+    <s:String x:Key="S.ImportVideo.Frames">מסגרות:</s:String>
+    <s:String x:Key="S.ImportVideo.Duration">משך הזמן:</s:String>
+    <s:String x:Key="S.ImportVideo.Error">לא ניתן היה לטעון את הסרטון</s:String>
+    <s:String x:Key="S.ImportVideo.Error.Detail">לא ניתן היה להתחיל את התצוגה המקדימה. נסה עם יבואן אחר או בדוק אם הסרטון אינו פגום. &#x0d; אם אתה משתמש ב- MediaPlayer, בדוק אם תכונת Windows בשם" תכונות מדיה / Windows Media Player "מופעלת וודא שיש ברשותך את רכיב ה- Codec הנדרש.</s:String>
+    <s:String x:Key="S.ImportVideo.Timeout">פסק זמן לקבלת התצוגה המקדימה של המסגרת.</s:String>
+    <s:String x:Key="S.ImportVideo.Nothing">לא נבחרה מסגרת לייבוא.</s:String>
+    
+    <!--Encoder-->
+    <s:String x:Key="S.Encoder.Title">מקודד</s:String>
+    <s:String x:Key="S.Encoder.Encoding">קידוד ...</s:String>
+    <s:String x:Key="S.Encoder.Starting">מתחיל</s:String>
+    
+    <s:String x:Key="S.Encoder.Completed">הושלם</s:String>
+    <s:String x:Key="S.Encoder.Completed.Clipboard">הועתק ללוח</s:String>
+    <s:String x:Key="S.Encoder.Completed.Clipboard.Fail">ההעתקה נכשלה</s:String>
+    <s:String x:Key="S.Encoder.Completed.Command">הפקודה בוצעה</s:String>
+    <s:String x:Key="S.Encoder.Completed.Command.Output">הצג את הפלט של הפקודות.</s:String>
+    <s:String x:Key="S.Encoder.Completed.Command.Fail">נכשל בביצוע הפקודה</s:String>
+    <s:String x:Key="S.Encoder.Completed.Upload.Fail">ההעלאה נכשלה</s:String>
+    <s:String x:Key="S.Encoder.Completed.Upload.Delete">Ctrl + לחץ כדי לפתוח את הדף למחיקת התמונה (אם קיים).</s:String>
+    
+    <s:String x:Key="S.Encoder.Completed.Elapsed">הזמן שחלף, בדקות:</s:String>
+    <s:String x:Key="S.Encoder.Completed.Elapsed.Analysis">ניתוח:</s:String>
+    <s:String x:Key="S.Encoder.Completed.Elapsed.Encoding">קידוד:</s:String>
+    <s:String x:Key="S.Encoder.Completed.Elapsed.Upload">העלה:</s:String>
+    <s:String x:Key="S.Encoder.Completed.Elapsed.Copy">העתק:</s:String>
+    <s:String x:Key="S.Encoder.Completed.Elapsed.Commands">פקודות:</s:String>
+    
+    <s:String x:Key="S.Encoder.DeletedMoved">הקובץ נמחק או הועבר</s:String>
+    <s:String x:Key="S.Encoder.Canceled">בוטל</s:String>
+    <s:String x:Key="S.Encoder.Error">שגיאה</s:String>
+    <s:String x:Key="S.Encoder.Error.Info">לחץ כאן להצגת פרטי שגיאה זו.</s:String>
+    <s:String x:Key="S.Encoder.Uploading">מעלה</s:String>
+    <s:String x:Key="S.Encoder.Executing">ביצוע פקודות</s:String>
+    <s:String x:Key="S.Encoder.Processing">עיבוד {0}</s:String>
+    <s:String x:Key="S.Encoder.Analyzing.Second">מתכוננים למעבר שני</s:String>
+    <s:String x:Key="S.Encoder.Processing.Second">עיבוד {0} - מעבר שני</s:String>
+    <s:String x:Key="S.Encoder.CreatingFile">יצירת קובץ</s:String>
+    <s:String x:Key="S.Encoder.Analyzing">ניתוח פיקסלים ללא שינוי</s:String>
+    <s:String x:Key="S.Encoder.SavingAnalysis">שמירת תוצאת ניתוח</s:String>
+    <s:String x:Key="S.Encoder.OpenFile">פתח קובץ</s:String>
+    <s:String x:Key="S.Encoder.ExploreFolder">חקור תיקייה</s:String>
+    <s:String x:Key="S.Encoder.Remove">הסר מהרשימה</s:String>
+    <s:String x:Key="S.Encoder.Details">הצג פרטים</s:String>
+    <s:String x:Key="S.Encoder.Dismiss">דחה את כל הקידודים המוגמרים</s:String>
+
+    <s:String x:Key="S.Encoder.Copy.Image">העתק כתמונה</s:String>
+    <s:String x:Key="S.Encoder.Copy.Filename">העתק את שם הקובץ</s:String>
+    <s:String x:Key="S.Encoder.Copy.Folder">העתק נתיב תיקיה</s:String>
+    <s:String x:Key="S.Encoder.Copy.Link">העתק קישור</s:String>
+    
+    <!--Command output-->
+    <s:String x:Key="S.Encoder.Command.Title">ScreenToGif - פלט פקודה</s:String>
+    <s:String x:Key="S.Encoder.Command.Header">פלט פקודה</s:String>
+    
+    <!--Notifications-->
+    <s:String x:Key="S.Notifications">הודעות</s:String>
+    <s:String x:Key="S.Notifications.Dismiss">דחה את כל ההתראות</s:String>
+    
+    <!--Editor-->
+    <s:String x:Key="S.Editor.Title">ScreenToGif - עורך</s:String>
+    <s:String x:Key="S.Editor.File">קובץ</s:String>
+    <s:String x:Key="S.Editor.Home">בית</s:String>
+    <s:String x:Key="S.Editor.Playback">הפעלה</s:String>
+    <s:String x:Key="S.Editor.Edit">עריכה</s:String>
+    <s:String x:Key="S.Editor.Image">תמונה</s:String>
+    <s:String x:Key="S.Editor.Transitions">מעברים</s:String>
+    <s:String x:Key="S.Editor.Statistics">סטטיסטיקה</s:String>
+    <s:String x:Key="S.Editor.Options">אפשרויות</s:String>
+    <s:String x:Key="S.Editor.Help">עזרה</s:String>
+    <s:String x:Key="S.Editor.Extras">תוספות</s:String>
+    <s:String x:Key="S.Editor.UpdateAvailable">יש עדכון חדש!</s:String>
+    <s:String x:Key="S.Editor.UpdateAvailable.Info">לחץ כאן כדי לקרוא עוד על כך.</s:String>
+    <s:String x:Key="S.Editor.FrameNumbersInfo">ספירה כוללת, ספירת בחירה, אינדקס בחירה</s:String>
+    
+    <!--Editor • Loading-->
+    <s:String x:Key="S.Editor.Preparing">הכנת מסגרות</s:String>
+    <s:String x:Key="S.Editor.InvalidLoadingFiles">טעינה לא חוקית - לא ניתן לייבא מספר קבצים בבת אחת. נסה לבחור קובץ אחד בלבד.</s:String>
+    <s:String x:Key="S.Editor.InvalidLoadingProjects">טעינה לא חוקית - לא ניתן לטעון מספר פרויקטים בו זמנית. נסה לבחור רק פרויקט אחד.</s:String>
+    
+    <!--Editor • File dialogs (does not work with new line characters)-->
+    <s:String x:Key="S.Editor.File.OpenMedia">פתח קובץ מדיה (תמונה או וידאו)</s:String>
+    <s:String x:Key="S.Editor.File.OpenMediaProject">פתח מדיה (תמונה או וידאו) או קובץ פרוייקט</s:String>
+    <s:String x:Key="S.Editor.File.All">כל הקבצים הנתמכים</s:String>
+    <s:String x:Key="S.Editor.File.Image">תמונה</s:String>
+    <s:String x:Key="S.Editor.File.Video">סרטון</s:String>
+
+    <s:String x:Key="S.Editor.File.Apng">הנפשת png</s:String>
+    <s:String x:Key="S.Editor.File.Gif">הנפשת GIF</s:String>
+    <s:String x:Key="S.Editor.File.Webp">הנפשת אינטרנט</s:String>
+    
+    <s:String x:Key="S.Editor.File.Avi">סרטון אבי</s:String>
+    <s:String x:Key="S.Editor.File.Mkv">סרטון מטרוסקה</s:String>
+    <s:String x:Key="S.Editor.File.Mov">סרטון Mov</s:String>
+    <s:String x:Key="S.Editor.File.Mp4">סרטון Mp4</s:String>
+    <s:String x:Key="S.Editor.File.Webm">סרטון Webm</s:String>
+    
+    <s:String x:Key="S.Editor.File.Image.Bmp">תמונת Bmp</s:String>
+    <s:String x:Key="S.Editor.File.Image.Jpeg">תמונת Jpeg</s:String>
+    <s:String x:Key="S.Editor.File.Image.Png">תמונת Png</s:String>
+    <s:String x:Key="S.Editor.File.Image.Zip">קובץ Zip, עם תמונות</s:String>
+    
+    <s:String x:Key="S.Editor.File.Project">פרויקט ScreenToGif</s:String>
+    <s:String x:Key="S.Editor.File.Project.Zip">פרויקט ScreenToGif כ- Zip</s:String>
+    <s:String x:Key="S.Editor.File.Psd">קובץ PSD</s:String>
+    
+    <!--Editor • Welcome-->
+    <s:String x:Key="S.Editor.Welcome.New">עבור אל" קובץ>חדש "כדי להתחיל הקלטה חדשה</s:String>
+    <s:String x:Key="S.Editor.Welcome.Import">גרור ושחרר תמונות, סרטונים או פרויקטים לייבוא</s:String>
+    <s:String x:Key="S.Editor.Welcome.ThankYou">תודה רבה על השימוש באפליקציה שלי!</s:String>
+    <s:String x:Key="S.Editor.Welcome.Size">ככל שמספר המסגרות נמוך יותר, ספירת הצבעים או כמות השינויים בין המסגרות, הגודל קטן יותר</s:String>
+    <s:String x:Key="S.Editor.Welcome.Contact">האם אתה רוצה לדבר? פתח את" אפשרויות>אודות "לשיטות יצירת קשר</s:String>
+    <s:String x:Key="S.Editor.Welcome.Trouble">נתקלת בבעיות? צור איתי קשר באמצעות כלי המשוב</s:String>
+    <s:String x:Key="S.Editor.Welcome.NewRecorder">האם ברצונך לנסות את המקליט החדש? &#x0d; עבור אל" אפשרויות>מקליט "כדי להפעיל אותו.</s:String>
+    
+    <!--Editor • File tab • New-->
+    <s:String x:Key="S.Editor.File.New.Recording">הקלטה</s:String>
+    <s:String x:Key="S.Editor.File.New.Webcam">מצלמת אינטרנט והקלטה</s:String>
+    <s:String x:Key="S.Editor.File.New.Board">הקלטה לוח</s:String>
+    <s:String x:Key="S.Editor.File.Blank">פרויקט ריק</s:String>
+    <s:String x:Key="S.Editor.File.New">חדש</s:String>
+    
+    <!--Editor • File tab • Insert-->
+    <s:String x:Key="S.Editor.File.Insert.Recording">הקלטה</s:String>
+    <s:String x:Key="S.Editor.File.Insert.Webcam">מצלמת אינטרנט והקלטה</s:String>
+    <s:String x:Key="S.Editor.File.Insert.Board">הקלטה לוח</s:String>
+    <s:String x:Key="S.Editor.File.Insert.Media">מדיה</s:String>
+    <s:String x:Key="S.Editor.File.Insert">הכנס</s:String>
+    
+    <!--Editor • File tab • Save/Discard-->
+    <s:String x:Key="S.Editor.File.Save">שמור בשם</s:String>
+    <s:String x:Key="S.Editor.File.Load">טען</s:String>
+    <s:String x:Key="S.Editor.File.LoadRecent">פרויקטים&#x0d;אחרונים</s:String>
+    <s:String x:Key="S.Editor.File.SaveProject">שמור פרויקט בשם</s:String>
+    <s:String x:Key="S.Editor.File.Discard">מחק פרויקט</s:String>
+    
+    <!--Editor • Home tab • Action Stack-->
+    <s:String x:Key="S.Editor.Home.ActionStack">מחסנית פעולה</s:String>
+    <s:String x:Key="S.Editor.Home.Undo">בטל</s:String>
+    <s:String x:Key="S.Editor.Home.Redo">בצע מחדש</s:String>
+    <s:String x:Key="S.Editor.Home.Reset">אפס</s:String>
+    
+    <!--Editor • Home tab • Clipboard-->
+    <s:String x:Key="S.Editor.Home.Clipboard">לוח</s:String>
+    <s:String x:Key="S.Editor.Home.Clipboard.Show">הצג את הלוח</s:String>
+    <s:String x:Key="S.Editor.Home.Paste">הדבק</s:String>
+    <s:String x:Key="S.Editor.Home.Cut">גזור</s:String>
+    <s:String x:Key="S.Editor.Home.Copy">העתק</s:String>
+    
+    <!--Editor • Home tab • Zoom-->
+    <s:String x:Key="S.Editor.Home.Zoom">זום</s:String>
+    <s:String x:Key="S.Editor.Home.SizeToContent">התאם לתוכן &#x0d;</s:String>
+    <s:String x:Key="S.Editor.Home.FitImage">תמונה מתאימה</s:String>
+    
+    <!--Editor • Home tab • Select-->
+    <s:String x:Key="S.Editor.Home.Select">בחירה</s:String>
+    <s:String x:Key="S.Editor.Home.SelectAll">בחר &#x0d; הכל</s:String>
+    <s:String x:Key="S.Editor.Home.GoTo">עבור אל</s:String>
+    <s:String x:Key="S.Editor.Home.Inverse">הפוך</s:String>
+    <s:String x:Key="S.Editor.Home.Deselect">בטל את הבחירה</s:String>
+    
+    <!--Editor • Playback tab • Playback-->
+    <s:String x:Key="S.Editor.Playback.Playback">הפעלה</s:String>
+    <s:String x:Key="S.Editor.Playback.First">ראשית</s:String>
+    <s:String x:Key="S.Editor.Playback.Previous">הקודם</s:String>
+    <s:String x:Key="S.Editor.Playback.Play">שחק</s:String>
+    <s:String x:Key="S.Editor.Playback.Pause">השהה</s:String>
+    <s:String x:Key="S.Editor.Playback.Next">הבא</s:String>
+    <s:String x:Key="S.Editor.Playback.Last">אחרון</s:String>
+    
+    <!--Editor • Playback tab • Playback Options-->
+    <s:String x:Key="S.Editor.PlaybackOptions.Header">אפשרויות השמעה</s:String>
+    <s:String x:Key="S.Editor.PlaybackOptions.Loop">לולאה במהלך ההפעלה.</s:String>
+    <s:String x:Key="S.Editor.PlaybackOptions.Loop.Info">נעשה שימוש רק במהלך ההפעלה. &#x0d; אם ברצונך לשנות את הגדרות הלולאה לייצוא Gifs ו- Apngs, &#x0d; הוא יהיה זמין בחלונית 'שמירה בשם' עבור כמה מקודדים.</s:String>
+    
+    <!--Editor • Edit tab • Frames-->  
+    <s:String x:Key="S.Editor.Edit.Frames">מסגרות</s:String>
+    <s:String x:Key="S.Editor.Edit.Delete">מחק</s:String>
+    <s:String x:Key="S.Editor.Edit.Frames.Duplicates">הסר &#x0d; כפילויות</s:String>
+    <s:String x:Key="S.Editor.Edit.Frames.Reduce">צמצם &#x0d; מספר המסגרות</s:String>
+    <s:String x:Key="S.Editor.Edit.DeletePrevious">מחק את כל הקודם</s:String>
+    <s:String x:Key="S.Editor.Edit.DeleteNext">מחק הכל הבא</s:String>
+    
+    <!--Editor • Edit tab • Reordering-->
+    <s:String x:Key="S.Editor.Edit.Reordering">סידור מחדש</s:String>
+    <s:String x:Key="S.Editor.Edit.Reverse">הפוך</s:String>
+    <s:String x:Key="S.Editor.Edit.Yoyo">יו-יו</s:String>
+    <s:String x:Key="S.Editor.Edit.MoveLeft">הזז &#x0d; שמאלה</s:String>
+    <s:String x:Key="S.Editor.Edit.MoveRight">הזז &#x0d; ימינה</s:String>
+    
+    <!--Editor • Edit tab • Delay/Duration-->
+    <s:String x:Key="S.Editor.Edit.Delay">עיכוב (משך הזמן)</s:String>
+    <s:String x:Key="S.Editor.Edit.Delay.Override">ביטול</s:String>
+    <s:String x:Key="S.Editor.Edit.Delay.IncreaseDecrease">הגדל או &#x0d; הפחת</s:String>
+    <s:String x:Key="S.Editor.Edit.Delay.Scale">קנה מידה</s:String>
+    
+    <!--Editor • Image • Size and Rotation-->
+    <s:String x:Key="S.Editor.Image.SizePosition">גודל וסיבוב</s:String>
+    <s:String x:Key="S.Editor.Image.Resize">שינוי גודל</s:String>
+    <s:String x:Key="S.Editor.Image.Crop">חיתוך</s:String>
+    <s:String x:Key="S.Editor.Image.FlipRotate">הפוך/סובב</s:String>
+    
+    <!--Editor • Image tab • Text-->
+    <s:String x:Key="S.Editor.Image.Text">טקסט</s:String>
+    <s:String x:Key="S.Editor.Image.Caption">כיתוב</s:String>
+    <s:String x:Key="S.Editor.Image.FreeText">טקסט חופשי</s:String>
+    <s:String x:Key="S.Editor.Image.TitleFrame">מסגרת כותרת</s:String>
+    <!--<s:String x:Key="S.Editor.Image.KeyStrokes">Key&#x0d;Strokes</s:String>-->
+    
+    <!--Editor • Image tab • Overlay-->
+    <s:String x:Key="S.Editor.Image.Overlay">כסוי</s:String>
+    <s:String x:Key="S.Editor.Image.FreeDrawing">חינם&#x0d;ציור</s:String>
+    <s:String x:Key="S.Editor.Image.Shape">צורות</s:String>
+    <s:String x:Key="S.Editor.Image.Clicks">לחיצות&#x0d;עכבר</s:String>
+    <s:String x:Key="S.Editor.Image.Watermark">סימן מים</s:String>
+    <s:String x:Key="S.Editor.Image.Cinemagraph">Cinemagraph</s:String>
+    <s:String x:Key="S.Editor.Image.Border">גבול</s:String>
+    <s:String x:Key="S.Editor.Image.Shadow">צל</s:String>
+    <s:String x:Key="S.Editor.Image.Progress">התקדמות</s:String>
+    <s:String x:Key="S.Editor.Image.Obfuscate">לערפל</s:String>
+
+    <!--Editor • Transitions tab • Styles-->
+    <s:String x:Key="S.Editor.Transitions.Styles">סגנונות</s:String>
+    <s:String x:Key="S.Editor.Transitions.Fade">דעוך</s:String>
+    <s:String x:Key="S.Editor.Transitions.Slide">שקופית</s:String>
+    
+    <!--Editor • Statistics tab-->
+    <s:String x:Key="S.Editor.Statistics.General">כללי</s:String>
+    <s:String x:Key="S.Editor.Statistics.FrameCount">ספירת מסגרות</s:String>
+    <s:String x:Key="S.Editor.Statistics.TotalDuration">משך הזמן הכולל</s:String>
+    <s:String x:Key="S.Editor.Statistics.FrameSize">גודל מסגרת</s:String>
+    <s:String x:Key="S.Editor.Statistics.AverageDuration">משך זמן ממוצע (עיכוב)</s:String>
+    <s:String x:Key="S.Editor.Statistics.CurrentTime">השעה הנוכחית</s:String>
+    <s:String x:Key="S.Editor.Statistics.CurrentTime.Info">הזמן הנוכחי (מצטבר) בהתבסס על המסגרת הנוכחית המוצגת.</s:String>
+    <s:String x:Key="S.Editor.Statistics.FrameDpi">מסגרת DPI וסולם</s:String>
+    <s:String x:Key="S.Editor.Statistics.SelectedFrame">מסגרת שנבחרה</s:String>
+    
+    <!--Editor • Messages-->
+    <s:String x:Key="S.Editor.Clipboard.InvalidCut.Title">פעולת חיתוך</s:String>
+    <s:String x:Key="S.Editor.Clipboard.InvalidCut.Instruction">אי אפשר לחתוך את כל המסגרות.</s:String>
+    <s:String x:Key="S.Editor.Clipboard.InvalidCut.Message">ההקלטה זקוקה לפחות למסגרת אחת.</s:String>
+    <s:String x:Key="S.Editor.DeleteAll.Title">הסר הכל</s:String>
+    <s:String x:Key="S.Editor.DeleteAll.Instruction">האם אתה בטוח שברצונך להסיר את כל המסגרות?</s:String>
+    <s:String x:Key="S.Editor.DeleteAll.Message">פעולה זו תבטל את הפרויקט הפתוח הנוכחי ואינה ניתנת לביטול. האם ברצונך להמשיך?</s:String>
+    <s:String x:Key="S.Editor.DiscardProject.Title">פרויקט המחיקה</s:String>
+    <s:String x:Key="S.Editor.DiscardProject.Instruction">האם אתה בטוח שאתה רוצה למחוק את הפרויקט?</s:String>
+    <s:String x:Key="S.Editor.DiscardProject.Message">פעולה זו תבטל את הפרויקט ותסיר את כל המסגרות. לא ניתן לבטל פעולה זו.</s:String>
+    <s:String x:Key="S.Editor.DiscardPreviousProject.Instruction">האם אתה רוצה למחוק את הפרויקט הקודם?</s:String>
+    <s:String x:Key="S.Editor.DiscardPreviousProject.Message">אם תבחר לא לעשות זאת, הפרויקט הקודם יהיה זמין לפתיחה באמצעות פרויקטים אחרונים.</s:String>
+    <s:String x:Key="S.Editor.DeleteFrames.Title">מחק מסגרות</s:String>
+    <s:String x:Key="S.Editor.DeleteFrames.Instruction">האם אתה בטוח שאתה רוצה למחוק?</s:String>
+    <s:String x:Key="S.Editor.DeleteFrames.Message">פעולה זו תמחק {0} מסגרות.&#x0d;תוכל לבטל זאת מאוחר יותר.</s:String>
+    <s:String x:Key="S.Editor.Exiting.Title">יציאה מהעורך</s:String>
+    <s:String x:Key="S.Editor.Exiting.Instruction">האם אתה בטוח שאתה רוצה לצאת?</s:String>
+    <s:String x:Key="S.Editor.Exiting.Message">ניתן לפתוח את הפרויקט הנוכחי שעבדת עליו שוב באמצעות 'פרויקטים אחרונים'.</s:String>
+    <s:String x:Key="S.Editor.Exiting.Message2">ניתן לפתוח את הפרויקט הנוכחי שעבדת עליו שוב באמצעות 'פרויקטים אחרונים', אך אל תשכח שאחרי כמה ימים הוא יימחק אוטומטית.</s:String>
+    <s:String x:Key="S.Editor.DragDrop.Invalid.Title">גרירה ושחרור לא חוקיים</s:String>
+    <s:String x:Key="S.Editor.DragDrop.MultipleFiles.Instruction">לא ניתן לייבא קבצים מרובים בבת אחת</s:String>
+    <s:String x:Key="S.Editor.DragDrop.MultipleFiles.Message">נסה לבחור קובץ אחד בלבד.</s:String>
+    <s:String x:Key="S.Editor.DragDrop.Invalid.Instruction">לא ניתן לטעון קובץ</s:String>
+    <s:String x:Key="S.Editor.DragDrop.Invalid.Message">לא ניתן היה לטעון את הקובץ מכיוון שיש לו פורמט לא חוקי.</s:String>
+    <s:String x:Key="S.Editor.DragDrop.InvalidProject.Instruction">לא ניתן לייבא מספר פרויקטים בבת אחת</s:String>
+    <s:String x:Key="S.Editor.DragDrop.InvalidProject.Message">נסה לבחור רק פרויקט אחד.</s:String>
+
+    <s:String x:Key="S.Editor.Caption.WarningNoText">אין להחיל טקסט.</s:String>
+    <s:String x:Key="S.Editor.Caption.WarningSelection">עליך לבחור לפחות מסגרת אחת להחיל עליה את הכיתוב.</s:String>
+    <s:String x:Key="S.Editor.FreeText.WarningSelection">עליך לבחור לפחות מסגרת אחת להחיל עליה את הטקסט.</s:String>
+    <s:String x:Key="S.Editor.TitleFrame.WarningSelection">עליך לבחור מסגרת אחת לפחות כדי להחיל את מסגרת הכותרת שלידה.</s:String>
+    <s:String x:Key="S.Editor.Border.WarningThickness">עליך לבחור עובי גבול גדול מאפס בצד אחד לפחות.</s:String>
+    <s:String x:Key="S.Editor.Border.WarningSelection">עליך לבחור לפחות מסגרת אחת להחיל עליה את הגבול.</s:String>
+    <s:String x:Key="S.Editor.Shadow.Warning.Invisible">האטימות חייבת להיות גדולה מאפס כדי לעשות הבדל במסגרת.</s:String>
+    <s:String x:Key="S.Editor.Shadow.Warning.Behind">כשמשתמשים בעומק הצל וברדיוס הטשטוש כאפס, זה לא ישנה משום שהוא יוסתר מאחורי המסגרת.</s:String>
+    <s:String x:Key="S.Editor.Cinemagraph.WarningNoDrawing">עליך לבחור לפחות פיקסל אחד כדי להחיל עליו את ה- Cinemagraph. בחר את הפיקסלים על ידי ציור מעליהם.</s:String>
+    <s:String x:Key="S.Editor.Fade.Title">מעבר דהייה</s:String>
+    <s:String x:Key="S.Editor.Fade.WarningSelection">עליך לבחור לפחות מסגרת אחת עליה להחיל את מעבר דהייה.</s:String>
+    <s:String x:Key="S.Editor.Fade.WarningColor">צבע שקוף לחלוטין לא יוצר שום השפעה על המעבר הזה.</s:String>
+    <s:String x:Key="S.Editor.Slide.Title">מעבר שקופיות</s:String>
+    <s:String x:Key="S.Editor.Slide.WarningSelection">עליך לבחור לפחות מסגרת אחת ליישום עליה.</s:String>
+    <s:String x:Key="S.Editor.LoadingFrames">טעינת מסגרות</s:String>
+    <s:String x:Key="S.Editor.LoadingFrames.ProjectCorrupted.Instruction">פרויקט בלתי אפשרי לטעון</s:String>
+    <s:String x:Key="S.Editor.LoadingFrames.ProjectCorrupted.Message">לא ניתן היה לטעון את המסגרות מכיוון שכולן פגומות או שהתמונות אינן נוכחות במקום הצפוי להן.</s:String>
+    <s:String x:Key="S.Editor.LoadingFrames.FramesCorrupted.Instruction">לא ניתן היה לטעון כמה מסגרות</s:String>
+    <s:String x:Key="S.Editor.LoadingFrames.FramesCorrupted.Message">לא ניתן היה לטעון את המסגרות מכיוון שלא ניתן היה למצוא אותן או משום שהן פגומות.</s:String>
+    
+    <!--Editor • Warnings-->
+    <s:String x:Key="S.Editor.Warning.Selection">עליך לבחור לפחות מסגרת אחת עליה להחיל את שכבת העל.</s:String>
+    <s:String x:Key="S.Editor.Warning.Ffmpeg">FFmpeg לא קיים. הוסף אותו למשתני סביבת הנתיב או לחץ כאן כדי לפתוח אפשרויות>תוספות להגדרת המיקום.</s:String>
+    <s:String x:Key="S.Editor.Warning.Gifski">גיפסקי לא קיים. הוסף אותו למשתני סביבת הנתיב או לחץ כאן כדי לפתוח אפשרויות>תוספות להגדרת המיקום.</s:String>
+    <s:String x:Key="S.Editor.Warning.LowSpace">לא נשאר מספיק מקום בכונן שבו האפליקציה הזו מאחסן את המטמון שלה ({0}% נותרו). לחץ כאן כדי לפתוח אפשרויות>קבצים זמניים כדי לפנות מקום.</s:String>
+    <s:String x:Key="S.Editor.Warning.DifferentDpi">ניסית לייבא תמונות מרובות עם DPI שונים, וזה לא נתמך. חלקן יובאו, את האחרים יש לייבא בנפרד.</s:String>
+    
+    <!--Editor • Status-->
+    <s:String x:Key="S.Editor.RetrievingFromCache">אחזור מסגרות מהמטמון</s:String>
+    <s:String x:Key="S.Editor.UpdatingFrames">עדכון מסגרות</s:String>
+    <s:String x:Key="S.Editor.PreparingImport">מתכונן לייבא</s:String>
+    <s:String x:Key="S.Editor.ImportingFrames">ייבוא ??מסגרות</s:String>
+    <s:String x:Key="S.Editor.AnalyzingDuplicates">ניתוח כפילויות</s:String>
+    <s:String x:Key="S.Editor.AdjustingDuplicatesDelay">התאמת העיכוב</s:String>
+    <s:String x:Key="S.Editor.DiscardingDuplicates">מחיקת כפילויות</s:String>
+    <s:String x:Key="S.Editor.DiscardingFrames">מחיקת מסגרות</s:String>
+    <s:String x:Key="S.Editor.DiscardingFolders">מחיקת תיקיות</s:String>
+    <s:String x:Key="S.Editor.ResizingFrames">שינוי גודל המסגרות</s:String>
+    <s:String x:Key="S.Editor.CroppingFrames">חיתוך מסגרות</s:String>
+    <s:String x:Key="S.Editor.ApplyingOverlay">החלת שכבת -על על מסגרות</s:String>
+    <s:String x:Key="S.Editor.CreatingTitleFrame">יצירת מסגרת כותרת</s:String>
+    <s:String x:Key="S.Editor.ApplyingFlipRotate">החלת הפוך/סובב על מסגרות</s:String>
+    <s:String x:Key="S.Editor.ChangingDelay">שינוי העיכוב</s:String>
+    <s:String x:Key="S.Editor.ApplyingTransition">החלת אפקט המעבר</s:String>
+    <s:String x:Key="S.Editor.PreparingSaving">מתכונן לשמור</s:String>
+    <s:String x:Key="S.Editor.CancelDiscard">בטל את הטעינה והמחיקה.</s:String>
+
+    <!--Editor • Frame list-->
+    <s:String x:Key="S.Editor.List.Frame">מסגרת:</s:String>
+    <s:String x:Key="S.Editor.List.OpenImage">תמונה פתוחה</s:String>
+    <s:String x:Key="S.Editor.List.ExploreFolder">חקור תיקייה</s:String>
+    
+    <!--Editor • Go to-->
+    <s:String x:Key="S.GoTo.Title">עבור למסגרת</s:String>
+    <s:String x:Key="S.GoTo.Instruction">עבור למסגרת (0 עד {0})</s:String>
+    
+    <!--Editor • Context menu-->
+    <s:String x:Key="S.Context.SaveAs">שמור כ ...</s:String>
+    <s:String x:Key="S.Context.RemoveFrames">הסר מסגרות שנבחרו</s:String>
+    <s:String x:Key="S.Context.NewRecording">הקלטת מסך חדשה</s:String>
+    <s:String x:Key="S.Context.NewWebcamRecording">הקלטת מצלמת רשת חדשה</s:String>
+    <s:String x:Key="S.Context.NewBoardRecording">הקלטת לוח חדשה</s:String>
+    <s:String x:Key="S.Context.NewBlankAnimation">פרויקט חדש</s:String>
+    <s:String x:Key="S.Context.NewFromMediaProject">חדש ממדיה או מפרויקט</s:String>
+   
+    <!--Editor • Hints-->
+    <s:String x:Key="S.Hint.NewRecording">הקלטה חדשה נוצרה</s:String>
+    <s:String x:Key="S.Hint.NewWebcamRecording">נוצרה הקלטה חדשה של מצלמת רשת</s:String>
+    <s:String x:Key="S.Hint.NewBoardRecording">נוצרה הקלטת לוח חדשה</s:String>
+    <s:String x:Key="S.Hint.NewAnimation">נוצר פרויקט חדש</s:String>
+    <s:String x:Key="S.Hint.Undo">בטל ביצוע</s:String>
+    <s:String x:Key="S.Hint.Reset">איפוס בוצע</s:String>
+    <s:String x:Key="S.Hint.Redo">בצע מחדש</s:String>
+    <s:String x:Key="S.Hint.Cut">{0} גזרות מסגרות</s:String>
+    <s:String x:Key="S.Hint.Copy">{0} מסגרות הועתקו</s:String>
+    <s:String x:Key="S.Hint.Paste">{0} מסגרות הודבקו</s:String>
+    <s:String x:Key="S.Hint.Zoom">זום מוגדר ל- {0}%</s:String>
+    <s:String x:Key="S.Hint.SelectAll">כל המסגרות נבחרו</s:String>
+    <s:String x:Key="S.Hint.SelectSingle">מסגרת מס '{0} נבחרה</s:String>
+    <s:String x:Key="S.Hint.SelectInverse">הבחירה הפוכה</s:String>
+    <s:String x:Key="S.Hint.Deselect">כל המסגרות בוטלו</s:String>
+    <s:String x:Key="S.Hint.DeleteFrames">{0} מסגרות נמחקו</s:String>
+    <s:String x:Key="S.Hint.Reverse">רשימת המסגרות הפוכה</s:String>
+    <s:String x:Key="S.Hint.Yoyo">אפקט יו-יו מיושם</s:String>
+    <s:String x:Key="S.Hint.MoveLeft">מסגרות הועברו שמאלה</s:String>
+    <s:String x:Key="S.Hint.MoveRight">מסגרות הועברו ימינה</s:String>
+    <s:String x:Key="S.Hint.Resize">גודל המסגרות השתנה</s:String>
+    <s:String x:Key="S.Hint.Crop">מסגרות קצוצות</s:String>
+    <s:String x:Key="S.Hint.FlipRotate">מסגרות התהפכו/הסתובבו</s:String>
+    <s:String x:Key="S.Hint.FlipRotate2">פעולת ההפעלה חלה על המסגרות שנבחרו והסיבוב חל על כל המסגרות</s:String>
+    <s:String x:Key="S.Hint.ApplyAll">פעולה זו חלה על כל המסגרות</s:String>
+    <s:String x:Key="S.Hint.ApplySelected">פעולה זו חלה על מסגרות שנבחרו</s:String>
+    <s:String x:Key="S.Hint.ApplySelectedOrAll">פעולה זו חלה על כל המסגרות או המסגרות שנבחרו, בהתאם להגדרות שלך</s:String>
+    <s:String x:Key="S.Hint.Cinemagraph">סרט הקולנוע חל על כל הפריימים המבוססים על המסגרת הראשונה</s:String>
+    <s:String x:Key="S.Hint.Overlay">הוחל שכבת על</s:String>
+    <s:String x:Key="S.Hint.TitleFrame">מסגרת כותרת נוצרה</s:String>
+    <s:String x:Key="S.Hint.TitleFrame2">מסגרת הכותרת תתווסף לפני המסגרת שנבחרה</s:String>
+    <s:String x:Key="S.Hint.Delay">משך הזמן (עיכוב) השתנה</s:String>
+    <s:String x:Key="S.Hint.Transition">הוכנס מעבר</s:String>
+    <s:String x:Key="S.Hint.Reduce">מספר המספרים מופחת</s:String>
+    <s:String x:Key="S.Hint.Duplicates">כפילויות הוסרו</s:String>
+    
+    <!--Editor • Action panel-->
+    <s:String x:Key="S.Action.Hide">הסתר</s:String>
+    <s:String x:Key="S.Action.Apply">החל</s:String>
+    <s:String x:Key="S.Action.Open">פתח</s:String>
+    <s:String x:Key="S.Action.Save">שמור</s:String>
+    <s:String x:Key="S.Action.Cancel">ביטול</s:String>
+
+    <!--Editor • Recent projects-->
+    <s:String x:Key="S.Recent.Projects">פרויקטים אחרונים</s:String>
+    <s:String x:Key="S.Recent.Searching">מחפש פרויקטים אחרונים ...</s:String>
+    <s:String x:Key="S.Recent.Date">תאריך יצירה</s:String>
+    <s:String x:Key="S.Recent.Frames">ספירת מסגרות</s:String>
+    <s:String x:Key="S.Recent.Warning.NoSelection">לא נבחר פרוייקט. בחר פרויקט מהרשימה שתטען.</s:String>
+    <s:String x:Key="S.Recent.Warning.SameProject">פרויקט זה כבר מוצג על ידי מופע עורך זה.</s:String>
+    <s:String x:Key="S.Recent.Warning.AnotherEditor">פרויקט זה כבר נפתח על ידי מופע עורך אחר. לא ניתן לפתוח פרויקט בפעם השנייה אם הוא כבר פתוח בעורך אחר.</s:String>
+    
+    <!--Editor • Clipboard-->
+    <s:String x:Key="S.Clipboard.Entries">ערכי הלוח</s:String>
+    <s:String x:Key="S.Clipboard.Entry">ערך הלוח:</s:String>
+    <s:String x:Key="S.Clipboard.Entry.Image">{0} תמונה</s:String>
+    <s:String x:Key="S.Clipboard.Entry.Images">{0} תמונות</s:String>
+    <s:String x:Key="S.Clipboard.Explore">חקור תוכן</s:String>
+    <s:String x:Key="S.Clipboard.Remove">הסר</s:String>
+    <s:String x:Key="S.Clipboard.Behavior">הדבק התנהגות</s:String>
+    <s:String x:Key="S.Clipboard.Before">לפני מסגרת שנבחרה</s:String>
+    <s:String x:Key="S.Clipboard.After">לאחר מסגרת שנבחרה</s:String>
+    
+    <!--Editor • Resize-->
+    <s:String x:Key="S.Resize.Difference">הבדל</s:String>
+    <s:String x:Key="S.Resize.Dpi">Dpi</s:String>
+    <s:String x:Key="S.Resize.Options">אפשרויות</s:String>
+    <s:String x:Key="S.Resize.Pixels">פיקסלים (פיקסלים)</s:String>
+    <s:String x:Key="S.Resize.Percent">אחוז (%)</s:String>
+    <s:String x:Key="S.Resize.Dpi2">DPI:</s:String>
+    <s:String x:Key="S.Resize.KeepAspect">שמור על יחס הממדים.</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality">איכות:</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Fant">פנט • איכות גבוהה יותר</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Linear">לינארית • איכות נמוכה יותר</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.NearestNeighbor">השכן הקרוב ביותר • איכות נמוכה ומהירה יותר</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Info">איכות קנה מידה.</s:String>
+    <s:String x:Key="S.Resize.Warning">עליך לבחור ערך אחר כדי להחיל עליו את פעולת הגודל.</s:String>
+    
+    <!--Editor • Crop-->
+    <s:String x:Key="S.Crop.Points">נקודות</s:String>
+    <s:String x:Key="S.Crop.Top">למעלה:</s:String>
+    <s:String x:Key="S.Crop.Left">שמאל:</s:String>
+    <s:String x:Key="S.Crop.Bottom">תחתון:</s:String>
+    <s:String x:Key="S.Crop.Right">נכון:</s:String>
+    <s:String x:Key="S.Crop.Warning">בחירת החיתוך צריכה להיות קטנה יותר מגודל המסגרת הנוכחי.</s:String>
+    <s:String x:Key="S.Crop.Warning.Bigger">בחירת החיתוך צריכה להיות גדולה מ- 10x10 פיקסלים.</s:String>
+    
+    <!--Editor • Flip/rotate-->
+    <s:String x:Key="S.FlipRotate.FlipHorizontal">הפוך אופקי</s:String>
+    <s:String x:Key="S.FlipRotate.FlipVertical">הפוך אנכי</s:String>
+    <s:String x:Key="S.FlipRotate.RotateLeft">סובב שמאלה 90?</s:String>
+    <s:String x:Key="S.FlipRotate.RotateRight">סובב ימינה 90?</s:String>
+    
+    <!--Editor • Reduce framerate-->
+    <s:String x:Key="S.Reduce.Header">הפחת את מספר המסגרות</s:String>
+    <s:String x:Key="S.Reduce.Factor">גורם:</s:String>
+    <s:String x:Key="S.Reduce.Count">הסר ספירה:</s:String>
+    <s:String x:Key="S.Reduce.Delay">התאמת עיכוב:</s:String>
+    <s:String x:Key="S.Reduce.Delay.NoAdjustment">אל תתאים</s:String>
+    <s:String x:Key="S.Reduce.Delay.Previous">סכום עם המסגרת הקודמת</s:String>
+    <s:String x:Key="S.Reduce.Delay.Evenly">סכום שווה עם המסגרות הנותרות</s:String>
+    <s:String x:Key="S.Reduce.ApplyToAll">צמצם את מספר המסגרות של הפרויקט כולו.</s:String>
+    <s:String x:Key="S.Reduce.ApplyToAll.Info">אם האפשרות אינה מסומנת, עליך לבחור מספר מסגרות עוקבות, גדולות יותר מגורם ההסרה.</s:String>
+    <s:String x:Key="S.Reduce.Info">היא תסיר {0} מסגרות לאחר כל {1} פריים, מבלי לספור את המסגרות שהוסרו.</s:String>
+    <s:String x:Key="S.Reduce.Warning.NoSelection">עליך לבחור את המסגרות ליישום הפחתת מספר המסגרות (או סמן את האפשרות להחיל על הפרויקט כולו).</s:String>
+    <s:String x:Key="S.Reduce.Warning.NonConsecutive">רשימת המסגרות שנבחרו חייבת להיות עוקבת. לא ניתן להשאיר חלק מהמסגרות מבחירות בין המסגרות שנבחרו.</s:String>
+    <s:String x:Key="S.Reduce.Warning.SmallerThanFactor">מבחר המסגרות חייב להיות גדול יותר מגורם ההסרה, על מנת שהתכונה תוכל להסיר כל דבר.</s:String>
+    
+    <!--Editor • Remove duplicates-->
+    <s:String x:Key="S.RemoveDuplicates.Header">הסר כפילויות</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Similarity">דמיון (%):</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal">הסרת מסגרת:</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal.First">הסר את המסגרת הראשונה</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Removal.Last">הסר את המסגרת האחרונה</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay">התאמת עיכוב:</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.NoAdjustment">אל תתאים</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.Average">השתמש בממוצע</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Delay.Sum">השתמש בסכום</s:String>
+    <s:String x:Key="S.RemoveDuplicates.Info">פעולה זו מנתחת כל מסגרת (פיקסל על פיקסל) ומסירה את אלה שדומים לפחות ל- {0} % לשכנה הקרוב. &#x0d; תוכל לבחור אם ברצונך להתאים את העיכוב (משך התערוכה) של המסגרות.</s:String>
+    
+    <!--Editor • Captions-->
+    <s:String x:Key="S.Caption.Text">טקסט</s:String>
+    <s:String x:Key="S.Caption.Font">גופן</s:String>
+    <s:String x:Key="S.Caption.Family">משפחה:</s:String>
+    <s:String x:Key="S.Caption.Style">סגנון:</s:String>
+    <s:String x:Key="S.Caption.Weight">משקל:</s:String>
+    <s:String x:Key="S.Caption.Size">גודל:</s:String>
+    <s:String x:Key="S.Caption.Color">צבע:</s:String>
+    <s:String x:Key="S.Caption.Outline">מתאר</s:String>
+    <s:String x:Key="S.Caption.Thickness">עובי:</s:String>
+    <s:String x:Key="S.Caption.Layout">פריסה</s:String>
+    <s:String x:Key="S.Caption.Vertical">אנכי:</s:String>
+    <s:String x:Key="S.Caption.Horizontal">אופקי:</s:String>
+    <s:String x:Key="S.Caption.TextAlignment">יישור:</s:String>
+    <s:String x:Key="S.Caption.TextDecoration">קישוט:</s:String>
+
+    <!--Editor • Key strokes-->
+    <s:String x:Key="S.KeyStrokes">קיצורי מקשים</s:String>
+    <s:String x:Key="S.KeyStrokes.Keys">מפתחות</s:String>
+    <s:String x:Key="S.KeyStrokes.Separator">מפריד:</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit">ערוך את קיצורי המקשים שלך</s:String>
+    <s:String x:Key="S.KeyStrokes.IgnoreModifiers">התעלם ממפתחות Ctrl, Alt, Shift ו- Windows מבלי להשתמש בהם כמשנים.</s:String>
+    <s:String x:Key="S.KeyStrokes.IgnoreModifiers.Info">הוא יתעלם מלחיצות מקשים בודדות כגון" Control ", אך הוא לא יתעלם מ-" Control + C ".</s:String>
+    <s:String x:Key="S.KeyStrokes.IgnoreInjected">התעלם מתוכנות הדמיות הקשות.</s:String>
+    <s:String x:Key="S.KeyStrokes.IgnoreInjected.Info">הקלט רק הקשות קלט של משתמשים.</s:String>
+    <s:String x:Key="S.KeyStrokes.Extend">הארך את התערוכה של קיצורי המפתח.</s:String>
+    <s:String x:Key="S.KeyStrokes.Earlier">התחל את תערוכת קיצורי המפתח מוקדם יותר.</s:String>
+    <s:String x:Key="S.KeyStrokes.By">לפי (ms):</s:String>
+    <s:String x:Key="S.KeyStrokes.Warning.None">אין הקשות על ההקלטה שלך.</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Title">ScreenToGif - עורך קיצורי מקשים</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Number">מספר מסגרת</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Keys">זוהו מקשי מפתח</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Remove">הסר את צירוף המקשים</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Add">הוסף קו מפתח:</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Lower">אותיות קטנות.</s:String>
+    <s:String x:Key="S.KeyStrokes.Edit.Lower.Info">היא מאפשרת לך להוסיף אותיות בודדות באותיות קטנות.</s:String>
+
+    <!--Editor • Free drawing-->
+    <s:String x:Key="S.FreeDrawing.Mode">מצב</s:String>
+    <s:String x:Key="S.FreeDrawing.Pen">עט</s:String>
+    <s:String x:Key="S.FreeDrawing.Eraser">מחק</s:String>
+    <s:String x:Key="S.FreeDrawing.Select">בחירה</s:String>
+    <s:String x:Key="S.FreeDrawing.StrokeEraser">מחק שבץ</s:String>
+    <s:String x:Key="S.FreeDrawing.Width">רוחב:</s:String>
+    <s:String x:Key="S.FreeDrawing.Height">גובה:</s:String>
+    <s:String x:Key="S.FreeDrawing.Tip">טיפ:</s:String>
+    <s:String x:Key="S.FreeDrawing.Rectangle">מלבן</s:String>
+    <s:String x:Key="S.FreeDrawing.Ellipse">אליפסה</s:String>
+    <s:String x:Key="S.FreeDrawing.Other">אחר:</s:String>
+    <s:String x:Key="S.FreeDrawing.Highlighter">סימון.</s:String>
+    <s:String x:Key="S.FreeDrawing.FitToCurve">Fit To Curve.</s:String>
+    <s:String x:Key="S.FreeDrawing.Warning.NoDrawing">אין להחיל ציורים על המסגרות שבחרת.</s:String>
+    <s:String x:Key="S.FreeDrawing.WarningSelection">עליך לבחור לפחות מסגרת אחת ליישום הציור החופשי.</s:String>
+    
+    <!--Editor • Shapes-->
+    <s:String x:Key="S.Shapes.Mode.Insert">הכנס</s:String>
+    <s:String x:Key="S.Shapes.Shapes">צורות</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Radius">רדיוס:</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Dashes">מקפים:</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Dashes.Info">שולט על גודל המקפים וגודל הפערים. &#10; ניתן להגדיר מספר גדלים ליצירת סגנון מקף משוכלל. &#10; ברירת המחדל היא" 1 0 "או ריק, כלומר מקף. ללא פערים.</s:String>
+    <s:String x:Key="S.Shapes.Shapes.ResetRotatio">אפס את הסיבוב</s:String>
+    <s:String x:Key="S.Shapes.Shapes.Remove">הסר</s:String>
+    <s:String x:Key="S.Shapes.Fill">מילוי</s:String>
+
+    <!--Editor • Mouse clicks-->
+    <s:String x:Key="S.MouseClicks">לחיצות עכבר</s:String>
+    <s:String x:Key="S.MouseClicks.Color.Left">צבע הלחצן השמאלי:</s:String>
+    <s:String x:Key="S.MouseClicks.Color.Middle">צבע הכפתור האמצעי:</s:String>
+    <s:String x:Key="S.MouseClicks.Color.Right">צבע הלחצן הימני:</s:String>
+    <s:String x:Key="S.MouseClicks.Warning.None">לא זוהו קליקים על העכבר על הפרויקט שלך.</s:String>
+    
+    <!--Editor • Watermark-->
+    <s:String x:Key="S.Watermark.Image">תמונה</s:String>
+    <s:String x:Key="S.Watermark.File">קובץ:</s:String>
+    <s:String x:Key="S.Watermark.File.Nothing">אף אחד לא נבחר</s:String>
+    <s:String x:Key="S.Watermark.Opacity">אטימות:</s:String>
+    <s:String x:Key="S.Watermark.Select">בחר תמונה</s:String>
+    <s:String x:Key="S.Watermark.WarningNoImage">עליך לבחור תמונה להחיל על המסגרות שנבחרו.</s:String>
+    <s:String x:Key="S.Watermark.WarningSelection">עליך לבחור לפחות מסגרת אחת ליישום סימן המים עליה.</s:String>
+    
+    <!--Editor • Border-->
+    <s:String x:Key="S.Border.Appearance">מראה</s:String>
+    <s:String x:Key="S.Border.Info">השתמש בערכים שליליים כדי לגרום לגבול להרחיב את התמונה. כאשר תעשה זאת, הגבול יחול על כל המסגרות. &#10; אם לא נעשה שימוש בערך שלילי, הגבול יוחל רק על המסגרות שנבחרו.</s:String>
+
+    <!--Editor • Shadow-->
+    <s:String x:Key="S.Shadow.ShadowColor">צבע צל:</s:String>
+    <s:String x:Key="S.Shadow.BackgroundColor">צבע רקע:</s:String>
+    <s:String x:Key="S.Shadow.Direction">כיוון:</s:String>
+    <s:String x:Key="S.Shadow.BlurRadius">רדיוס טשטוש:</s:String>
+    <s:String x:Key="S.Shadow.Depth">עומק:</s:String>
+    
+    <!--Editor • Obfuscate-->
+    <s:String x:Key="S.Obfuscate.Type.Pixelate">פיקסלט</s:String>
+    <s:String x:Key="S.Obfuscate.Type.Blur">טשטוש</s:String>
+    <s:String x:Key="S.Obfuscate.Type.Darken">להחשיך</s:String>
+    <s:String x:Key="S.Obfuscate.Type.Lighten">להבהיר</s:String>
+    <s:String x:Key="S.Obfuscate.Options">אפשרויות ערפול</s:String>
+    <s:String x:Key="S.Obfuscate.PixelSize">גודל פיקסל:</s:String>
+    <s:String x:Key="S.Obfuscate.BlurLevel">רמת טשטוש:</s:String>
+    <s:String x:Key="S.Obfuscate.DarkenLevel">רמת החשיכה:</s:String>
+    <s:String x:Key="S.Obfuscate.LightenLevel">רמת הבהרה:</s:String>
+    <s:String x:Key="S.Obfuscate.UseAverage">חשב את הצבע הממוצע לכל בלוק מפוקסל.</s:String>
+    <s:String x:Key="S.Obfuscate.Invert">החל את הערפול על ההפוך של הבחירה.</s:String>
+    <s:String x:Key="S.Obfuscate.Smoothness">חלקות</s:String>
+    <s:String x:Key="S.Obfuscate.Info">השתמש בכלי הבחירה כדי לבחור את החלק של המסגרת שצריך להסתיר.</s:String>
+    <s:String x:Key="S.Obfuscate.Info2">השתמש בכלי הבחירה כדי לבחור את החלק של המסגרת שאסור להסתיר.</s:String>
+    <s:String x:Key="S.Obfuscate.Warning">לא בחרת כלום. אנא השתמש בכלי הבחירה כדי לבחור את המלבן שאמור להסתיר.</s:String>
+    
+    <!--Editor • Progress-->
+    <s:String x:Key="S.Progress.Type">סוג</s:String>
+    <s:String x:Key="S.Progress.Type.Bar">בר</s:String>
+    <s:String x:Key="S.Progress.Type.Text">טקסט</s:String>
+    <s:String x:Key="S.Progress.Precision">דיוק:</s:String>
+    <s:String x:Key="S.Progress.Precision.Minutes">דקות</s:String>
+    <s:String x:Key="S.Progress.Precision.Seconds">שניות</s:String>
+    <s:String x:Key="S.Progress.Precision.Milliseconds">מילי שניות</s:String>
+    <s:String x:Key="S.Progress.Precision.Percentage">אחוז</s:String>
+    <s:String x:Key="S.Progress.Precision.Count">מספר מסגרת</s:String>
+    <s:String x:Key="S.Progress.Precision.DateOfRecording">תאריך/שעה בפועל</s:String>
+    <s:String x:Key="S.Progress.Precision.Custom">מותאם אישית</s:String>
+    <s:String x:Key="S.Progress.Precision.ShowTotal">הצג את הסכום הכולל.</s:String>
+    <s:String x:Key="S.Progress.Format">פורמט:</s:String>
+    <s:String x:Key="S.Progress.Format.Header">פורמט</s:String>
+    <s:String x:Key="S.Progress.Format.Milliseconds">$ ms = מילי שניות</s:String>
+    <s:String x:Key="S.Progress.Format.Seconds">$ s = שניות</s:String>
+    <s:String x:Key="S.Progress.Format.Minutes">$ m = דקות</s:String>
+    <s:String x:Key="S.Progress.Format.Percentage">$ p = אחוזים</s:String>
+    <s:String x:Key="S.Progress.Format.FrameNumber">$ f = מספר מסגרת</s:String>
+    <s:String x:Key="S.Progress.Format.Totals">סך הכל:</s:String>
+    <s:String x:Key="S.Progress.Format.Examples">דוגמאות:</s:String>
+    <s:String x:Key="S.Progress.Format.Date">תוכל להשתמש בפורמט התאריך והשעה מתוך .Net Framework. המפרט זמין בשני הקישורים הבאים.</s:String>
+    <s:String x:Key="S.Progress.Format.Date.Standard">פורמטים סטנדרטיים</s:String>
+    <s:String x:Key="S.Progress.Format.Date.Custom">פורמטים מותאמים אישית</s:String>
+    <s:String x:Key="S.Progress.Precision.StartNumber">ספירה מתוך:</s:String>
+    <s:String x:Key="S.Progress.Precision.StartNumber.ToolTip">מתחיל לספור את מספר המסגרת מהמספר הנבחר הזה.</s:String>
+    <s:String x:Key="S.Progress.Orientation">התמצאות:</s:String>
+    
+    <!--Editor • Delay-->
+    <s:String x:Key="S.Delay.Update">עיכוב עדכון</s:String>
+    <s:String x:Key="S.Delay.Mode">מצב עיכוב:</s:String>
+    <s:String x:Key="S.Delay.Mode.Override">(ביטול (במסרים</s:String>
+    <s:String x:Key="S.Delay.Mode.IncreaseDecrease">הגדל או הקטן (ב- ms)</s:String>
+    <s:String x:Key="S.Delay.Mode.Scale">קנה מידה (באחוזים)</s:String>
+    <s:String x:Key="S.Delay.NewValue">ערך חדש</s:String>
+    <s:String x:Key="S.Delay.Minimum10Ms">מינימום 10ms למסגרת.</s:String>
+    <s:String x:Key="S.Delay.DecreaseIncrease">הפחת/הגדלת ערך</s:String>
+    <s:String x:Key="S.Delay.Scale">ערך קנה מידה</s:String>
+    <s:String x:Key="S.Delay.Override.Info">ערך חדש זה יחליף את משך הזמן (העיכוב) של כל המסגרות שנבחרו. הערך יכול להיות בין 10ms ל -25500ms.</s:String>
+    <s:String x:Key="S.Delay.IncreaseDecrease.Info">ערך זה יקטין/יגדיל את משך הזמן (העיכוב) של כל מסגרת שנבחרה. &#x0d; תוכל להקטין/להגדיל על ידי בחירת ערך בין -10000ms ל -10000ms, אך משך הזמן הסופי של כל פריים יוגבל בין 10ms ו- 25500ms</s:String>
+    <s:String x:Key="S.Delay.Scale.Info">קנה מידה את משך הזמן (עיכוב) של כל מסגרת שנבחרה לפי הערך באחוזים. &#x0d; תוכל לשנות את משך כל פריים על ידי בחירת ערך בין 1% ל -1000%, אך משך הזמן הסופי של כל מסגרת יוגבל ל בין 10ms ל 25500ms</s:String>
+
+    <!--Editor • Cinemagraph-->
+    <s:String x:Key="S.Cinemagraph.Info">השתמש בעט כדי לבחור את הפיקסלים שלא אמורים להישאר סטטיים (שצריכים להשתנות בין המסגרות), על ידי ציור מעליהם.</s:String>
+
+    <!--Editor • Transitions-->
+    <s:String x:Key="S.Transitions.Length">אורך המעבר</s:String>
+    <s:String x:Key="S.Transitions.Delay">עיכוב מעבר</s:String>
+    <s:String x:Key="S.Transitions.FadeTo">לדעוך ל ...</s:String>
+    <s:String x:Key="S.Transitions.FadeTo.Frame">המסגרת הבאה</s:String>
+    <s:String x:Key="S.Transitions.FadeTo.Color">צבע</s:String>
+    <s:String x:Key="S.Transitions.Color">צבע</s:String>
+    <s:String x:Key="S.Transitions.Info">המעבר יוחל בין המסגרת שנבחרה למסגרת הבאה.</s:String>
+
+    <!--Editor • Save as-->
+    <s:String x:Key="S.SaveAs.Type">סוג קובץ והגדרות קבועות מראש</s:String>
+    <s:String x:Key="S.SaveAs.Type.Format">הפורמט של קובץ הפלט.</s:String>
+    <s:String x:Key="S.SaveAs.Type.Preset">הגדרת מראש לייצוא המכילה את כל ההגדרות המוצגות כעת. &#10; נהל את הגדרות היצוא מראש שלך באמצעות הכפתורים למטה.</s:String>
+    <s:String x:Key="S.SaveAs.Type.Animated">תמונה מונפשת</s:String>
+    <s:String x:Key="S.SaveAs.Type.Video">סרטון</s:String>
+    <s:String x:Key="S.SaveAs.Type.Frames">מסגרות</s:String>
+    <s:String x:Key="S.SaveAs.Type.Other">אחר</s:String>
+    
+    <s:String x:Key="S.SaveAs.Apng">Apng</s:String>
+    <s:String x:Key="S.SaveAs.Apng.Info">גרפיקת רשת ניידת מונפשת</s:String>
+    <s:String x:Key="S.SaveAs.Gif">גיף</s:String>
+    <s:String x:Key="S.SaveAs.Gif.Info">פורמט החלפת גרפיקה</s:String>
+    <s:String x:Key="S.SaveAs.Webp">Webp</s:String>
+    <s:String x:Key="S.SaveAs.Webp.Info">תמונת אינטרנט</s:String>
+    
+    <s:String x:Key="S.SaveAs.Avi">Avi</s:String>
+    <s:String x:Key="S.SaveAs.Avi.Info">Interleave Video Audio</s:String>
+    <s:String x:Key="S.SaveAs.Mkv">Mkv</s:String>
+    <s:String x:Key="S.SaveAs.Mkv.Info">מטרוסקה</s:String>
+    <s:String x:Key="S.SaveAs.Mov">Mov</s:String>
+    <s:String x:Key="S.SaveAs.Mov.Info">פורמט קובץ QuickTime</s:String>
+    <s:String x:Key="S.SaveAs.Mp4">Mp4</s:String>
+    <s:String x:Key="S.SaveAs.Mp4.Info">Mpeg-4</s:String>
+    <s:String x:Key="S.SaveAs.Webm">Webm</s:String>
+    <s:String x:Key="S.SaveAs.Webm.Info">סרט אינטרנט</s:String>
+    
+    <s:String x:Key="S.SaveAs.Bmp">Bmp</s:String>
+    <s:String x:Key="S.SaveAs.Bmp.Info">מפת סיביות</s:String>
+    <s:String x:Key="S.SaveAs.Jpeg">Jpeg</s:String>
+    <s:String x:Key="S.SaveAs.Jpeg.Info">קבוצת המומחים לצילום משותף</s:String>
+    <s:String x:Key="S.SaveAs.Png">Png</s:String>
+    <s:String x:Key="S.SaveAs.Png.Info">גרפיקת רשת ניידת</s:String>
+    
+    <s:String x:Key="S.SaveAs.Project">פרויקט</s:String>
+    <s:String x:Key="S.SaveAs.Project.Info">פרויקט ScreenToGif</s:String>
+    <s:String x:Key="S.SaveAs.Psd">פסד</s:String>
+    <s:String x:Key="S.SaveAs.Psd.Info">קובץ פוטושופ</s:String>
+    
+    <!--Editor • Save as > Presets-->
+    <s:String x:Key="S.SaveAs.Presets">הגדרות קבועות מראש:</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Default">ברירת מחדל</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Add">הוסף הגדרה מוקדמת חדשה לייצוא.</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Save">שמור את ההגדרות הנוכחיות להגדרה מוקדמת ייצוא זו.</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Edit">ערוך הגדרות בסיסיות מוגדרות מראש לייצוא.</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Remove">הסר את הגדרת הייצוא המוגדרת כרגע.</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Reset">אפס את ההגדרות של ייצוא מוגדר מראש זה לברירות המחדל שלו.</s:String>
+    
+    <!--Editor • Save as > Presets > Dialogs-->
+    <s:String x:Key="S.SaveAs.Presets.Ask.Delete.Title">מחיקת ההגדרה המוגדרת מראש</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Ask.Delete.Instruction">האם אתה בטוח שברצונך למחוק את ההגדרה המוגדרת מראש?</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Ask.Delete.Message">לא ניתן לבטל פעולה זו. &#10; &#10; האם ברצונך למחוק את ההגדרה המוגדרת מראש שנבחרה?</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Ask.Reset.Title">איפוס ההגדרה המוגדרת מראש</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Ask.Reset.Instruction">האם אתה בטוח שברצונך לאפס את ההגדרה המוגדרת מראש?</s:String>
+    <s:String x:Key="S.SaveAs.Presets.Ask.Reset.Message">לא ניתן לבטל פעולה זו. &#10; &#10; האם ברצונך לאפס את ההגדרה המוגדרת מראש שנבחרה להגדרות ברירת המחדל שלה?</s:String>
+    
+    <!--Editor • Save as > Encoder-->
+    <s:String x:Key="S.SaveAs.Encoder">מקודד</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Quantizer">מקודד ומכמת</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Info">מקודד האחראי ליצירת קובץ הפלט.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">ScreenToGif</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Info">מקודד מובנה.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.System">מערכת</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.System.Info">מקודד זמין על ידי המערכת.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Ffmpeg.Info">מקודד חיצוני, מתוצרת FFmpeg.org.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Gifski">גיפסקי</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Gifski.Info">מקודד חיצוני, תוצרת Gif.ski.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.Options">אפשרויות מקודד</s:String>
+    
+    <!--Editor • Save as > FFmpeg-->
+    <s:String x:Key="S.SaveAs.Ffmpeg.UseParameters">הפעל את המצב המתקדם.</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.UseParameters.Info">הזן ידנית את הפרמטרים לשליטה על המקודד.</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Parameters">פרמטרים:</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Parameters.Info">רשימת פרמטרים שיועברו ל- FFmpeg. &#10; &#10; פרמטרים מיוחדים: &#10; {I} היא נתיב הקלט (המסגרות). &#10; {O} הוא נתיב הפלט (הקובץ המיוצא). &#10; {W} הוא רוחב המסגרת. &#10; {H} הוא גובה המסגרת.</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Parameters.Pass">כדי לקודד עם 2-pass, פשוט הוסף '-pass 2'.</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Preview">תצוגה מקדימה</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Preview.Info">תצוגה מקדימה של רשימת הפרמטרים שתועבר ל- FFmpeg.</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Help.Code">מסמכי Codec</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Help.Format">עיצוב מסמכים</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Help.Filters">מסנני מסמכים</s:String>
+    
+    <!--Editor • Save as > Gif options-->
+    <s:String x:Key="S.SaveAs.GifOptions">אפשרויות GIF</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Info">אלגוריתם הפחתת צבעים (כימות).</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Neural">רשת עצבית</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Neural.Info">כימות נאמנות גבוהה. איטית יותר, אך טובה לכמות צבעים גבוהה יותר.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Octree">אוקטובר</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Octree.Info">טוב לאנימציות עם פחות צבעים. מהיר יותר, אך עשוי לייצר חיבורי צבע.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.MedianCut">חתך חציוני</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.MedianCut.Info">פחות טוב מאוקטובר ואיטי יותר.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Grayscale">גווני אפור</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.Grayscale.Info">משתמש בלוח גוונים אפור קבוע, כך שזה הרבה יותר מהיר.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.MostUsed">הצבעים הנפוצים ביותר</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quantizer.MostUsed.Info">פשוט לוקח את הצבעים הנפוצים ביותר במסגרות.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Sampling">דגימה:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Sampling.Info">גורם דגימה: &#10; ערך 1 יביא ל- GIF למראה טוב יותר, אך העיבוד יהיה איטי יותר.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Quality">איכות:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Colors">צבעים:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Colors.Info">מספר הצבעים המרבי (לכל מסגרת).</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable">השתמש בטבלת צבעים גלובלית.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.GlobalColorTable.Info">עשוי להפחית את האיכות ו/או את גודל ה- GIF.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Best">הכי טוב</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Fastest">המהיר ביותר</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Gifski.Faster">השתמש בתהליך קידוד מהיר עוד יותר.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Gifski.Faster.Info">עשוי להפחית את איכות ה- gif.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Loop">לולאה:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Looped">גיף משולב.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.RepeatForever">חזור לנצח.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.RepeatCount">ספירה חוזרת.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable">אפשר שקיפות.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Transparency.Enable.Info">מאפשר את מצב השקיפות המלא, מה שהופך את הרקע של ה- gif לשקוף לגמרי. &#10; תהליך החלפת מפתחות chroma יתעלם אם אפשרות זו מופעלת.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Transparency.Pick">בחר את הצבע המוצג כשקוף.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Transparency.Pick.Info">אם נבחר צבע, הוא יומר לשקוף והוא יופיע כשקוף ב- gif שנוצר. &#10; אם לא נבחר צבע, כל הצבעים השקופים (אלפא = 0%) יופיעו כשקופים בדרך כלל .</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged">זיהוי פיקסלים ללא שינוי.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.DetectUnchanged.Info">על ידי ניתוח וגילוי פיקסלים ללא שינוי בין המסגרות, &#10; ניתן יהיה לשמור רק את החלקים הדרושים ב- gif.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma">החלף את הפיקסלים האלה במפתח chroma.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma.Info">פיקסלים שחוזרים על עצמם/ללא שינוי יוחלפו במפתח chroma זה, &#10; מה שיאפשר שימוש בפחות צבעים לכל מסגרת.</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.ChromaKey">מפתח Chroma:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Dither">הפעלה:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Dither.Scale">סולם באייר:</s:String>
+    
+    <!--Editor • Save as > Apng options-->
+    <s:String x:Key="S.SaveAs.ApngOptions">אפשרויות Apng</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Prediction">תחזית:</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Prediction.None">ללא</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Prediction.Sub">תת</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Prediction.Up">למעלה</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Prediction.Average">ממוצע</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Prediction.Mixed">מעורבב</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.Looped">אפליקציה לולאה.</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.DetectUnchanged">זיהוי פיקסלים ללא שינוי.</s:String>
+    <s:String x:Key="S.SaveAs.ApngOptions.PaintTransparent">צייר את כל הפיקסלים ללא שינוי בצבע שקוף.</s:String>
+    
+    <!--Editor • Save as > Webp options-->
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset">קבוע מראש:</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.None">ללא</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Default">ברירת מחדל</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Picture">תמונה</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Photo">תמונה</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Drawing">ציור</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Icon">אייקון</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Text">טקסט</s:String>
+    <s:String x:Key="S.SaveAs.WebpOptions.Lossless">השתמש במצב ללא הפסדים.</s:String>
+    
+    <!--Editor • Save as > Video options-->
+    <s:String x:Key="S.SaveAs.VideoOptions.Mode">מצב:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Mode.Normal">רגיל</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Mode.Advanced">מתקדם</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Mode.Info">שיטת הגדרת הפרמטרים של המקודד: &#10; רגיל: השתמש בפקדי UI רגילים. &#10; מתקדם: השתמש בתיבת טקסט כדי להקליד את הפרמטרים.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Codec">קודק:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Codec.Info">מקודד הווידיאו, האחראי על המרת הפיקסלים הגולמיים לקובץ הפלט.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset">קבוע מראש:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.None">ללא</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.VerySlow">איטי מאוד</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Slower">איטי יותר</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Slow">איטי</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Medium">בינוני</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Fast">מהיר</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Faster">מהר יותר</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.VeryFast">מהר מאוד</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.SuperFast">סופר מהיר</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.UltraFast">מהיר במיוחד</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Quality">איכות</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Balanced">מאוזן</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Speed">מהירות</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Default">ברירת מחדל</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Lossless">ללא הפסד</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.LosslessHp">ללא הפסד (ביצועים גבוהים)</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Hp">ביצועים גבוהים</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Hq">באיכות גבוהה</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Bd">דיסק בלורי</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.LowLatency">איחורים נמוכים</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.LowLatencyHp">איחורים נמוכים (ביצועים גבוהים)</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.LowLatencyHq">איחורים נמוכים (איכות גבוהה)</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Info">יחס קידוד מהירות לדחיסה, והגדרות קבועות מראש איטיות יותר עשויות לתת לך דחיסה טובה יותר (איכות לפי גודל קבצים).</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration">התאמת חומרה:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration.Off">כבוי</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration.On">מופעל</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration.Auto">בחירה אוטומטית</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration.Info">שולט על השימוש בחומרה ייעודית (גרפיקת וידאו). &#10; כבוי: אינו משתמש בחומרה ייעודית. &#10; מופעל: משתמש בחומרה ייעודית ומאפשר לך לבחור מקודדים מיוחדים. &#10; אוטומטי : משתמש בחומרה ייעודית ובוחר אוטומטית את המקודד הנכון, במידת האפשר.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.PixelFormat">פורמט פיקסל:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.PixelFormat.Auto">אוטומטי</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Vsync">Vsync:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Vsync.Info">שיטת סנכרון וידאו. &#10; אוטומטי: בוחר בין 1 ל -2 בהתאם ליכולות muxer (פורמט). &#10; מעבר פסח: כל פריים מועבר עם חותמות הזמן שלו למקודד. &#10; קבוע : מסגרות יוכפלו ויורדו כדי להשיג בדיוק את קצב המסגרות הקבוע המבוקש. משתנה: מסגרות עוברות עם חותמת הזמן שלהן או נשמטות כדי למנוע משתי מסגרות את אותה חותמת זמן. &#10; ירידה : כמעבר אך הורס את כל חותמות הזמן, מה שהופך את המקודד לייצר חותמות זמן חדשות המבוססות על מסגרת.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Vsync.Passthrough">מעבר</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Vsync.Cfr">מסגרת קבועה</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Vsync.Vfr">מסגרת משתנה</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Vsync.Drop">זרוק</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Framerate">מספר מסגרות:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Framerate.Film">סרט</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Framerate.Custom">מותאם אישית</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Pass">תעודה:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Crf.Info">גורם שיעור קבוע. &#10; הגדרת בקרת איכות ושיעור. &#10; השאר אותו ריק אם אינך מעוניין להגדיר נכס זה.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.QualityLevel">רמת איכות:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.QualityLevel.Info">ערכים קטנים יותר פירושם איכות טובה יותר.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate">קצב סיביות:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Info">קצב סיביות וידאו.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Mode">מצב קצב סיביות:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Mode.Constant">קבוע</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Mode.Variable">משתנה</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Minimum">שיעור מינימלי:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Minimum.Info">סובלנות קצב סיביות מינימלית. &#10; שימושי ביותר בעת שימוש במצב CBR. &#10; השאר אותו ריק או הגדר לאפס &#10; אם אינך רוצה להגדיר מאפיין זה.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Maximum">שיעור מקסימלי:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Maximum.Info">סובלנות קצב סיביות מרבית. &#10; דורש גם הגדרת גודל המאגר. &#10; השאר אותו ריק או הגדר לאפס &#10; אם אינך רוצה להגדיר נכס זה.</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Buffer">גודל מאגר:</s:String>
+    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Buffer.Info">גודל מאגר בקרת התעריפים. &#10; השאר אותו ריק או הגדר לאפס &#10; אם אינך מעוניין להגדיר נכס זה.</s:String>
+
+    <!--Editor • Save as > Image options-->
+    <s:String x:Key="S.SaveAs.ImageOptions.Zip">רכזו את התמונות.</s:String>
+    <s:String x:Key="S.SaveAs.ImageOptions.Zip.Info">מייצא את התמונות בתוך תיקיה מכווצת.</s:String>
+    
+    <!--Editor • Save as > Psd options-->
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress">דחוס את התמונה.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Compress.Info">דחוס נתוני התמונה באמצעות אלגוריתם RLE.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Timeline">שמור את נתוני ציר הזמן.</s:String>
+    <s:String x:Key="S.SaveAs.PsdOptions.Timeline.Info">מייצא את תזמוני המסגרות, במקום רק את המסגרות.</s:String>
+    
+    <!--Editor • Save as > Save options-->
+    <s:String x:Key="S.SaveAs.SaveOptions">אפשרויות ייצוא</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.Partial">ייצוא חלקי.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">שמור את הקובץ בתיקיה שתבחר.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">החלף (אם כבר קיים).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">שמור גם כפרויקט (אותה תיקיה, אותו שם קובץ).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">העלה את הקובץ.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">העתק ללוח.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File">קובץ</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File.Info">מעתיק את קובץ הפלט ללוח.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FolderPath">נתיב תיקיה</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FolderPath.Info">מעתיק את נתיב התיקיה של קובץ הפלט ללוח.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath">נתיב קובץ</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.FilePath.Info">מעתיק את הנתיב של קובץ הפלט ללוח.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link">קישור</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.Link.Info">מעתיק את הקישור שנוצר על ידי שירות ההעלאה ללוח.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands">בצע פקודות קידוד פוסטים.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.ExecuteCommands.Info">הקלד פקודות שיש לבצע לאחר הקידוד. &#x0d; לביצוע פקודות מרובות, הקלד כל אחת מהן בשורה נפרדת. &#x0d; פקודות מאקרו: &#x0d; {p} = נתיב קובץ פלט. &#x0d; {f} = נתיב תיקיית פלט. &#x0d; {u} = כתובת URL של הקובץ שהועלה.</s:String>
+    
+    <!--Editor • Save As > Partial export-->
+    <s:String x:Key="S.SaveAs.Partial">ייצוא חלקי</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode">מצב:</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Info">בחר את שיטת הייצוא החלקי.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Expression">ביטוי</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Expression.Info">מייצא חלקים מהאנימציה המבוססים על ביטוי פשוט.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Frames">טווח מסגרות</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Frames.Info">מייצא רק חלק מהאנימציה בטווח המסגרות.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Time">טווח זמן</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Time.Info">מייצא רק חלק מהאנימציה במסגרת הזמן.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Selection">בחירה</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Selection.Info">מייצא רק את המסגרות שנבחרו בציר הזמן.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Selection.None">לא נבחרה מסגרת.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Selection.Singular">מסגרת אחת נבחרה.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Mode.Selection.Plural">{0} מסגרות נבחרו.</s:String>
+    <s:String x:Key="S.SaveAs.Partial.From">מאת:</s:String>
+    <s:String x:Key="S.SaveAs.Partial.To">ל:</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Expression">ביטוי:</s:String>
+    <s:String x:Key="S.SaveAs.Partial.Expression.Info">הקלד מספרי מסגרות המופרדים באמצעות פסיק או רצפי מסגרות המופרדים בסימן מינוס: &#10; 1, 3, 4, 6 - 9</s:String>
+    
+    <!--Editor • Save as > File-->
+    <s:String x:Key="S.SaveAs.File">קובץ</s:String>
+    <s:String x:Key="S.SaveAs.File.Location">תיקיית יעד.</s:String>
+    <s:String x:Key="S.SaveAs.File.SelectFolder">בחר את תיקיית הפלט</s:String>
+    <s:String x:Key="S.SaveAs.File.Choose">בחר את המיקום. &#x0d; הקש Shift ולחץ על &#x0d; בחר גם את שם הקובץ.</s:String>
+    <s:String x:Key="S.SaveAs.File.Format">פורמט קובץ</s:String>
+    <s:String x:Key="S.SaveAs.File.Name">שם הקובץ. הכנס תבנית תאריך/שעה בין '?'</s:String>
+    <s:String x:Key="S.SaveAs.File.Animation">אנימציה</s:String>
+    <s:String x:Key="S.SaveAs.File.Increase">הגדל את מספר הקובץ</s:String>
+    <s:String x:Key="S.SaveAs.File.Decrease">הקטן את מספר הקובץ</s:String>
+    <s:String x:Key="S.SaveAs.File.Exists">קובץ בשם זהה כבר קיים.</s:String>
+    <s:String x:Key="S.SaveAs.File.Clipboard">שמור בלוח.</s:String>
+    
+    <!--Editor • Save as > Warnings-->
+    <s:String x:Key="S.SaveAs.Warning.Type">עליך לבחור היכן לשמור את הקובץ (בתיקייה, ללוח או להעלות למקום אחר).</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Extension">לא בחרת את סיומת הקובץ.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Ffmpeg.Empty">בעת בחירת המצב המתקדם, עליך להקליד את הפרמטרים בשדה הפרמטרים.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Ffmpeg.MissingPath">הפרמטרים המיוחדים {I} (קלט) ו/או {O} (פלט) חסרים בשדה הפרמטרים.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Commands.Empty">כדי לבצע פקודה לקידוד פוסטים, עליך להקליד משהו בשדה הטקסט של הפקודות.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Partial.NoSelection">עליך לבחור לפחות מסגרת אחת כשיש לך אפשרות לייצא מסגרות נבחרות בלבד.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Partial.InvalidExpression">הביטוי לייצוא חלקי של הפרויקט אינו חוקי.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Upload.None">לא נבחר שירות העלאה. עליך לבחור יעד.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Upload.NotAuthorized">אינך יכול להעלות לשירות שנבחר מכיוון שהוא לא היה מורשה. עבור לאפשרויות>שירותי העלאה כדי לאשר יישום זה.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Copy.Link">אינך יכול לבחור באפשרות להעתיק את הקישור מכיוון שלא הגדרת להעלות את הקובץ.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Folder">עליך לבחור תיקיית פלט.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Folder.NotExists">תיקיית הפלט אינה קיימת.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Folder.Invalid">תיקיית הפלט מכילה תו לא חוקי אחד או יותר. אנא בחר תיקייה חוקית.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Filename">עליך לבחור שם קובץ.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Filename.Invalid">שם קובץ הפלט מכיל תו אחד או יותר לא חוקיים. אנא בחר שם קובץ חוקי.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Overwrite">שם קבצים כבר בשימוש. הגדר להחליף או לבחור שם קובץ או תיקיה אחרת.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Overwrite.Project">יש כבר פרויקט עם אותו שם קובץ. הגדר להחליף או לבחור שם קובץ או תיקיה אחרת.</s:String>
+    <s:String x:Key="S.SaveAs.Warning.Canceled">הפעולה בוטלה.</s:String>
+    
+    <!--Editor • Save As > Upload-->
+    <s:String x:Key="S.SaveAs.Upload">העלה</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Info">בחר את ההגדרה המוגדרת מראש להעלאה, הכוללת פרטים אודות השירות המשמש להעלאה.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Limit">שירות העלאה זה מטיל גבולות.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Add">הוסף הגדרה מוקדמת חדשה להעלאה.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Edit">ערוך הגדרות קבועות מראש להעלאה.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.History">הצג את היסטוריית ההעלאות של הגדרה מוקדמת זו.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Remove">הסר את ההגדרה המוגדרת מראש להעלאה הנוכחית.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Select.Title">בחר הגדרה מוקדמת להעלאה</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Select.Description">בחר אחד מהרשימה הזו.</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Unavailable.Title">אין אפשרות קבועה מראש להעלות לפורמט זה</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Unavailable.Description">הוסף קביעה מוגדרת מראש באמצעות הכפתור שלהלן.</s:String>
+    
+    <!--Editor • Save as > Upload > Dialogs-->
+    <s:String x:Key="S.SaveAs.Upload.Ask.Delete.Title">מחיקת הגדרות קבועות מראש להעלאה</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Ask.Delete.Instruction">האם אתה בטוח שברצונך למחוק את ההגדרה המוגדרת מראש להעלאה?</s:String>
+    <s:String x:Key="S.SaveAs.Upload.Ask.Delete.Message">לא ניתן לבטל פעולה זו. &#10; &#10; האם ברצונך למחוק את הגדרת ההגדרה המוקדמת להעלאה?</s:String>
+    
+    <!--Save As • Dialogs-->
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Title">ייצוא מסגרות</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">האם אתה בטוח שאתה רוצה לייצא את המסגרות?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">פעולה זו תייצא {0} מסגרות ישירות לתיקייה שנבחרה.</s:String>
+    
+    <!--Command Preview-->
+    <s:String x:Key="S.CommandPreviewer.Title">תצוגה מקדימה של פקודות</s:String>
+    <s:String x:Key="S.CommandPreviewer.Command">פקודה</s:String>
+    <s:String x:Key="S.CommandPreviewer.Input">נתיב קלט</s:String>
+    <s:String x:Key="S.CommandPreviewer.Output">נתיב פלט</s:String>
+    
+    <!--Feedback-->
+    <s:String x:Key="S.Feedback.Feedback">משוב</s:String>
+    <s:String x:Key="S.Feedback.Send">שלח</s:String>
+    <s:String x:Key="S.Feedback.Preview">תצוגה מקדימה</s:String>
+    <s:String x:Key="S.Feedback.Header">שלח משוב</s:String>
+    <s:String x:Key="S.Feedback.Title">כותרת</s:String>
+    <s:String x:Key="S.Feedback.Message">הודעה</s:String>
+    <s:String x:Key="S.Feedback.Message.Info">אם אתה נתקל בבאג, אל תשכח להסביר לי איך הגעת לזה, צעד אחר צעד.</s:String>
+    <s:String x:Key="S.Feedback.Type">סוג המשוב</s:String>
+    <s:String x:Key="S.Feedback.Suggestion">הצעה</s:String>
+    <s:String x:Key="S.Feedback.IssueBug">גיליון/באג</s:String>
+    <s:String x:Key="S.Feedback.YourEmail">הדוא"ל שלך</s:String>
+    <s:String x:Key="S.Feedback.Warning.Title">עליך להקליד כותרת למשוב.</s:String>
+    <s:String x:Key="S.Feedback.Warning.Message">עליך להקליד הודעה במשוב.</s:String>
+    <s:String x:Key="S.Feedback.Warning.Email">עליך להקליד את הדוא"ל שלך כדי לקבל תשובה מהמפתח.</s:String>
+    <s:String x:Key="S.Feedback.Sending">שולח ברקע. חלון זה ייסגר בקרוב.</s:String>
+    <s:String x:Key="S.Feedback.Attachments">קבצים מצורפים (אופציונלי, 20MB לכל היותר)</s:String>
+    <s:String x:Key="S.Feedback.AddAttachments">הוסף קבצים מצורפים</s:String>
+    <s:String x:Key="S.Feedback.RemoveAttachments">הסר את כל הקבצים המצורפים</s:String>
+    <s:String x:Key="S.Feedback.LanguageInfo1">אני יכול להבין אנגלית</s:String>
+    <s:String x:Key="S.Feedback.LanguageInfo2">ופורטוגזית (ברזילאית ואירופאית).</s:String>
+    <s:String x:Key="S.Feedback.Preview.Info">זה מה שתשלח, בתוספת כל הקבצים המצורפים.</s:String>
+    
+    <!--Troubleshoot-->
+    <s:String x:Key="S.Troubleshoot.Title">פתרון בעיות</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows">חסר חלון כלשהו?</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Info">אם חסר אחד מהחלונות (מחוץ למסך), &#x0d; השתמש באפשרויות שלהלן כדי לאפס את מיקומו הנוכחי וההפעלה.</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Current">הנה המקום שבו נמצא כל חלון כרגע:</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Next">כאן ייפתח כל חלון בפעם הבאה:</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.BringBack">העבר את כל החלונות למסך הראשי.</s:String>
+    <s:String x:Key="S.Troubleshoot.Windows.Reset">אפס את מיקום ההפעלה של כל החלונות.</s:String>
+   
+    <!--FontStyles-->
+    <s:String x:Key="S.FontStyles.Normal">רגיל</s:String>
+    <s:String x:Key="S.FontStyles.Italic">נטוי</s:String>
+    <s:String x:Key="S.FontStyles.Oblique">אלכסוני</s:String>
+    
+    <!--FontWeight-->
+    <s:String x:Key="S.FontWeights.Black">שחור</s:String>
+    <s:String x:Key="S.FontWeights.Bold">נועז</s:String>
+    <s:String x:Key="S.FontWeights.DemiBold">דמי בולד</s:String>
+    <s:String x:Key="S.FontWeights.ExtraBlack">שחור במיוחד</s:String>
+    <s:String x:Key="S.FontWeights.ExtraBold">מודגש במיוחד</s:String>
+    <s:String x:Key="S.FontWeights.ExtraLight">אור נוסף</s:String>
+    <s:String x:Key="S.FontWeights.Heavy">כבד</s:String>
+    <s:String x:Key="S.FontWeights.Light">אור</s:String>
+    <s:String x:Key="S.FontWeights.Medium">בינוני</s:String>
+    <s:String x:Key="S.FontWeights.Normal">רגיל</s:String>
+    <s:String x:Key="S.FontWeights.Regular">רגיל</s:String>
+    <s:String x:Key="S.FontWeights.SemiBold">חצי מודגש</s:String>
+    <s:String x:Key="S.FontWeights.Thin">דק</s:String>
+    <s:String x:Key="S.FontWeights.UltraBlack">אולטרה שחור</s:String>
+    <s:String x:Key="S.FontWeights.UltraBold">מודגש במיוחד</s:String>
+    <s:String x:Key="S.FontWeights.UltraLight">אולטרה לייט</s:String>
+    
+    <!--VerticalAlignment-->
+    <s:String x:Key="S.VerticalAlignment.Top">למעלה</s:String>
+    <s:String x:Key="S.VerticalAlignment.Center">מרכז</s:String>
+    <s:String x:Key="S.VerticalAlignment.Bottom">תחתון</s:String>
+    <s:String x:Key="S.Alignment.Stretch">מתיחה</s:String>
+
+    <!--HorizontalAlignment-->
+    <s:String x:Key="S.HorizontalAlignment.Left">שמאל</s:String>
+    <s:String x:Key="S.HorizontalAlignment.Center">מרכז</s:String>
+    <s:String x:Key="S.HorizontalAlignment.Right">נכון</s:String>
+    
+    <!--Orientation-->
+    <s:String x:Key="S.Orientation.Horizontal">אופקי</s:String>
+    <s:String x:Key="S.Orientation.Vertical">אנכי</s:String>
+    
+    <!--TextAlignment-->
+    <s:String x:Key="S.TextAlignment.Left">שמאל</s:String>
+    <s:String x:Key="S.TextAlignment.Right">נכון</s:String>
+    <s:String x:Key="S.TextAlignment.Center">מרכז</s:String>
+    <s:String x:Key="S.TextAlignment.Justify">הצדיק</s:String>
+    
+    <!--TextDecoration-->
+    <s:String x:Key="S.TextDecorations.None">ללא</s:String>
+    <s:String x:Key="S.TextDecorations.Underline">קו תחתון</s:String>
+    <s:String x:Key="S.TextDecorations.Strikethrough">חבטה</s:String>
+    <s:String x:Key="S.TextDecorations.OverLine">קו יתר</s:String>
+    <s:String x:Key="S.TextDecorations.Baseline">בסיס</s:String>
+</ResourceDictionary>

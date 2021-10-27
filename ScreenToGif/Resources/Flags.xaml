@@ -58,6 +58,20 @@
         <Path Data="F1M0.125,144.125L0.125,0.125 72.123,0.125 72.123,144.125z" Fill="White" Height="144.25" Canvas.Left="71.999" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="2.5" Width="72.249"/>
     </Canvas>
 
+    <Canvas x:Shared="False" x:Key="Flag.Israel" HorizontalAlignment="Center" Width="40.000" Height="29.159">
+        <Path Fill="#ffffffff" Data="F1 M 40.000,29.159 L 40.000,0.000 L 0.000,0.000 L 0.000,29.159 L 40.000,29.159 Z"/>
+        <Path Fill="#ff003875" Data="F1 M 25.888,11.154 L 21.922,11.154 L 19.997,7.832 L 18.073,11.154 L 14.107,11.154 C 14.107,11.154 16.074,14.578 16.090,14.578 C 16.074,14.578 14.107,18.001 14.107,18.001 L 18.073,18.001 L 19.997,21.323 L 21.922,18.001 L 25.888,18.001 C 25.888,18.001 23.921,14.578 23.905,14.578 C 23.921,14.578 25.888,11.154 25.888,11.154 Z"/>
+        <Path Fill="#ffffffff" Data="F1 M 21.309,16.928 L 18.687,16.928 L 17.333,14.578 L 18.687,12.227 L 21.309,12.227 L 22.662,14.578 L 21.309,16.928 Z"/>
+        <Path Fill="#ff003875" Data="F1 M 40.000,7.352 L 0.000,7.352 L 0.000,2.835 L 40.000,2.835 L 40.000,7.352 Z"/>
+        <Path Fill="#ff003875" Data="F1 M 40.000,21.803 L 0.000,21.803 L 0.000,26.320 L 40.000,26.320 L 40.000,21.803 Z"/>
+        <Path Fill="#ffffffff" Data="F1 M 16.710,13.507 L 15.969,12.227 L 17.450,12.227 L 16.710,13.507 Z"/>
+        <Path Fill="#ffffffff" Data="F1 M 17.450,16.928 L 15.969,16.928 L 16.710,15.647 L 17.450,16.928 Z"/>
+        <Path Fill="#ffffffff" Data="F1 M 24.026,16.928 L 22.545,16.928 L 23.285,15.647 L 24.026,16.928 Z"/>
+        <Path Fill="#ffffffff" Data="F1 M 20.680,11.154 L 19.315,11.154 L 19.997,9.975 L 20.680,11.154 Z"/>
+        <Path Fill="#ffffffff" Data="F1 M 23.285,13.507 L 22.545,12.227 L 24.026,12.227 L 23.285,13.507 Z"/>
+        <Path Fill="#ffffffff" Data="F1 M 19.997,19.180 L 19.315,18.001 L 20.680,18.001 L 19.997,19.180 Z"/>
+    </Canvas>
+    
     <Canvas x:Shared="False" x:Key="Flag.Germany" HorizontalAlignment="Center" Height="144" UseLayoutRounding="False" VerticalAlignment="Center" Width="240">
         <Path Data="F1M240.083,48.115L0.125,48.115 0.125,0.125 240.083,0.125z" Fill="Black" Height="48.241" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Width="240"/>
         <Path Data="F1M240.083,48.118L0.125,48.118 0.125,0.125 240.083,0.125z" Fill="#FFF8A81E" Height="48.243" Stroke="Black" StrokeThickness="0.25" StrokeMiterLimit="4" Canvas.Top="95.981" Width="240"/>
