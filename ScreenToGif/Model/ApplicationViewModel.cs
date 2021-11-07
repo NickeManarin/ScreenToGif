@@ -935,11 +935,8 @@ namespace ScreenToGif.Model
 
                 var response = (HttpWebResponse)await request.GetResponseAsync();
 
-                using (var resultStream = response.GetResponseStream())
+                await using (var resultStream = response.GetResponseStream())
                 {
-                    if (resultStream == null)
-                        return false;
-
                     using (var reader = new StreamReader(resultStream))
                     {
                         var result = await reader.ReadToEndAsync();
