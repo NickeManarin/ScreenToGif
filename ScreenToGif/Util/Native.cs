@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -229,6 +229,24 @@ namespace ScreenToGif.Util
             public System.Windows.Rect ToRect(double offset = 0, double scale = 1d)
             {
                 return new System.Windows.Rect((Left - offset) / scale, (Top - offset) / scale, (Right - Left + offset * 2) / scale, (Bottom - Top + offset * 2) / scale);
+            }
+
+            public System.Windows.Rect TryToRect(double offset = 0, double scale = 1d)
+            {
+                var left = (Left - offset) / scale;
+                var top = (Top - offset) / scale;
+                var width = (Right - Left + offset * 2) / scale;
+                var height = (Bottom - Top + offset * 2) / scale;
+
+                if (double.IsNaN(left) || double.IsNaN(top) ||  width < 0 || height < 0)
+                    return System.Windows.Rect.Empty;
+
+                return new System.Windows.Rect(left, top, width, height);
+            }
+
+            public bool IsValid()
+            {
+                return Right - Left > 0 && Bottom - Top > 0;
             }
         }
 
@@ -2112,7 +2130,12 @@ namespace ScreenToGif.Util
 
                 DwmGetWindowAttribute(handle, (int)DwmWindowAttribute.ExtendedFrameBounds, out Rect frameBounds, Marshal.SizeOf(typeof(Rect)));
 
-                windows.Add(new DetectedRegion(handle, frameBounds.ToRect(Util.Other.RoundUpValue(scale), scale), builder.ToString(), GetZOrder(handle)));
+                var bounds = frameBounds.TryToRect(Util.Other.RoundUpValue(scale), scale);
+
+                if (bounds.IsEmpty)
+                    return true;
+
+                windows.Add(new DetectedRegion(handle, bounds, builder.ToString(), GetZOrder(handle)));
 
                 return true;
             }, IntPtr.Zero);
@@ -2190,15 +2213,21 @@ namespace ScreenToGif.Util
 
                 DwmGetWindowAttribute(handle, (int)DwmWindowAttribute.ExtendedFrameBounds, out Rect frameBounds, Marshal.SizeOf(typeof(Rect)));
 
-                var bounds = frameBounds.ToRect(Util.Other.RoundUpValue(monitor.Scale), monitor.Scale);
+                var bounds = frameBounds.TryToRect(Util.Other.RoundUpValue(monitor.Scale), monitor.Scale);
+
+                if (bounds.IsEmpty)
+                    return true;
 
                 var place = WindowPlacement.Default;
                 GetWindowPlacement(handle, ref place);
 
                 //Hack for detecting the correct size of VisualStudio when it's maximized.
                 if (place.ShowCmd == ShowWindowCommands.Maximize && title.Contains("Microsoft Visual Studio"))
-                    bounds = frameBounds.ToRect(-info.cxWindowBorders, monitor.Scale);
+                    bounds = frameBounds.TryToRect(-info.cxWindowBorders, monitor.Scale);
                 //bounds = new System.Windows.Rect(new Point(monitor.Bounds.Left / monitor.Scale, monitor.Bounds.Top / monitor.Scale), new Size(info.rcClient.Right / monitor.Scale, info.rcClient.Bottom / monitor.Scale));
+
+                if (bounds.IsEmpty)
+                    return true;
 
                 //Windows to the left are not being detected as inside the bounds.
                 if (!bounds.IntersectsWith(monitor.Bounds))

@@ -11,7 +11,8 @@ _VS 2019 and .Net 4.8 or newer required._
 ### Fixed:
 
 ♦ Added support for the new distributition system for v2.35 and newer releases. It's important to download this version if you want to properly update to newer versions afterwards.
-♦ Numerical fields will now only react to the scroll if they have focus.  
+♦ Numerical fields will now only react to the scroll if they have focus.
+♦ The window selection mode could crash because of a wrongly sized window.  
 
 ### Known Bugs:
   
