@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Globalization;
 using System.Text.RegularExpressions;
@@ -367,6 +367,9 @@ namespace ScreenToGif.Controls
         {
             base.OnMouseWheel(e);
 
+            if (!IsKeyboardFocusWithin)
+                return;
+            
             var step = Keyboard.Modifiers == (ModifierKeys.Shift | ModifierKeys.Control)
                 ? 50 : Keyboard.Modifiers == ModifierKeys.Shift
                     ? 10 : Keyboard.Modifiers == ModifierKeys.Control

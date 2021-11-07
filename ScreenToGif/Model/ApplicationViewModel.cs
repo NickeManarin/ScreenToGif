@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
@@ -950,18 +951,52 @@ namespace ScreenToGif.Model
                         if (version.Major == 0 || version <= Assembly.GetExecutingAssembly().GetName().Version)
                            return true;
 
+                        var moniker = RuntimeInformation.OSArchitecture == Architecture.X64 ? "x64" : RuntimeInformation.OSArchitecture == Architecture.X86 ? "x86" : "arm64";
+
+                        //Try getting a release asset named as:
+                        //ScreenToGif.2.35.Portable.x64.zip
+                        //ScreenToGif.2.35.Setup.x64.msi
+                        var portable = release.Element("assets")?.Elements().FirstOrDefault(f =>
+                        {
+                            var name = (f.Element("name")?.Value ?? "").ToLower();
+
+                            return name.Contains("portable") && name.Contains(moniker);
+                        });
+
+                        var installer = release.Element("assets")?.Elements().FirstOrDefault(f =>
+                        {
+                            var name = (f.Element("name")?.Value ?? "").ToLower();
+
+                            return name.Contains("setup") && name.Contains(moniker);
+                        });
+
+                        if (installer == null)
+                        {
+                            //Try getting a release asset named as:
+                            //ScreenToGif.2.35.Portable.zip
+                            //ScreenToGif.2.35.Setup.msi
+                            portable = release.Element("assets")?.Elements().FirstOrDefault(f => (f.Element("name")?.Value ?? "").ToLower().Contains("portable"));
+                            installer = release.Element("assets")?.Elements().FirstOrDefault(f => (f.Element("name")?.Value ?? "").ToLower().Contains("setup"));
+
+                            if (installer == null)
+                            {
+                                Application.Current.Dispatcher?.Invoke(() => NotificationManager.AddNotification(LocalizationHelper.Get("S.Updater.NoNewRelease.Info"), StatusType.Warning, "update-warning", null));
+                                return false;
+                            }
+                        }
+                        
                         Global.UpdateAvailable = new UpdateAvailable
                         {
                             Version = version,
                             Description = release.XPathSelectElement("body")?.Value ?? "",
 
-                            PortableDownloadUrl = release.XPathSelectElement("assets/item[1]/browser_download_url")?.Value ?? "",
-                            PortableSize = Convert.ToInt64(release.XPathSelectElement("assets/item[1]/size")?.Value ?? "0"),
-                            PortableName = release.XPathSelectElement("assets/item[1]/name")?.Value ?? "ScreenToGif.zip",
+                            PortableDownloadUrl = portable?.Element("browser_download_url")?.Value ?? "",
+                            PortableSize = Convert.ToInt64(portable?.Element("size")?.Value ?? "0"),
+                            PortableName = portable?.Element("name")?.Value ?? "ScreenToGif.zip",
 
-                            InstallerDownloadUrl = release.XPathSelectElement("assets/item[2]/browser_download_url")?.Value ?? "",
-                            InstallerSize = Convert.ToInt64(release.XPathSelectElement("assets/item[2]/size")?.Value ?? "0"),
-                            InstallerName = release.XPathSelectElement("assets/item[2]/name")?.Value ?? "ScreenToGif.Setup.msi",
+                            InstallerDownloadUrl = installer.Element("browser_download_url")?.Value ?? "",
+                            InstallerSize = Convert.ToInt64(installer.Element("size")?.Value ?? "0"),
+                            InstallerName = installer.Element("name")?.Value ?? "ScreenToGif.Setup.msi"
                         };
 
                         Application.Current.Dispatcher?.BeginInvoke(new Action(() => NotificationManager.AddNotification(string.Format(LocalizationHelper.Get("S.Updater.NewRelease.Info"), 
@@ -1016,12 +1051,46 @@ namespace ScreenToGif.Model
                             if (version.Major == 0 || version <= Assembly.GetExecutingAssembly().GetName().Version)
                                 return;
 
+                            var moniker = RuntimeInformation.OSArchitecture == Architecture.X64 ? "x64" : RuntimeInformation.OSArchitecture == Architecture.X86 ? "x86" : "arm64";
+
+                            //Try getting a release asset named as:
+                            //ScreenToGif2.35Portablex64.zip
+                            //ScreenToGif2.35Setupx64.msi
+                            var portable = obj.Release.Items.FirstOrDefault(f =>
+                            {
+                                var name = (f.Title ?? "").ToLower();
+
+                                return name.Contains("portable") && name.Contains(moniker);
+                            });
+
+                            var installer = obj.Release.Items.FirstOrDefault(f =>
+                            {
+                                var name = (f.Title ?? "").ToLower();
+
+                                return name.Contains("setup") && name.Contains(moniker);
+                            });
+
+                            if (installer == null)
+                            {
+                                //Try getting a release asset named as:
+                                //ScreenToGif2.35Portable.zip
+                                //ScreenToGif2.35Setup.msi
+                                portable = obj.Release.Items.FirstOrDefault(f => (f.Title ?? "").ToLower().Contains("portable"));
+                                installer = obj.Release.Items.FirstOrDefault(f => (f.Title ?? "").ToLower().Contains("setup"));
+
+                                if (installer == null)
+                                {
+                                    Application.Current.Dispatcher?.Invoke(() => NotificationManager.AddNotification(LocalizationHelper.Get("S.Updater.NoNewRelease.Info"), StatusType.Warning, "update-warning", null));
+                                    return;
+                                }
+                            }
+
                             Global.UpdateAvailable = new UpdateAvailable
                             {
                                 IsFromGithub = false,
                                 Version = version,
-                                PortableDownloadUrl = obj.Release.Items.FirstOrDefault(f => f.Title.EndsWith(".zip"))?.Link,
-                                InstallerDownloadUrl = obj.Release.Items.FirstOrDefault(f => f.Title.EndsWith(".msi"))?.Link,
+                                PortableDownloadUrl = portable?.Link,
+                                InstallerDownloadUrl = installer.Link,
                             };
 
                             //With Fosshub, the download must be manual. 
