@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
@@ -330,6 +330,9 @@ namespace ScreenToGif.Controls
         protected override void OnMouseWheel(MouseWheelEventArgs e)
         {
             base.OnMouseWheel(e);
+
+            if (!IsKeyboardFocusWithin)
+                return;
 
             var step = Keyboard.Modifiers == (ModifierKeys.Shift | ModifierKeys.Control)
                 ? 50 : Keyboard.Modifiers == ModifierKeys.Shift
