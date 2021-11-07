@@ -2,7 +2,6 @@ using System;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Management.Instrumentation;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using ScreenToGif.Interfaces;
@@ -93,7 +92,7 @@ namespace ScreenToGif.Model.ExportPresets
             set => SetProperty(ref _descriptionKey, value);
         }
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ImageId
         {
@@ -201,7 +200,7 @@ namespace ScreenToGif.Model.ExportPresets
             set => SetProperty(ref _partialExport, value);
         }
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public TimeSpan PartialExportTimeStart
         {
@@ -209,7 +208,7 @@ namespace ScreenToGif.Model.ExportPresets
             set => SetProperty(ref _partialExportTimeStart, value);
         }
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public TimeSpan PartialExportTimeEnd
         {
@@ -217,7 +216,7 @@ namespace ScreenToGif.Model.ExportPresets
             set => SetProperty(ref _partialExportTimeEnd, value);
         }
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int PartialExportFrameStart
         {
@@ -225,7 +224,7 @@ namespace ScreenToGif.Model.ExportPresets
             set => SetProperty(ref _partialExportFrameStart, value);
         }
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int PartialExportFrameEnd
         {
@@ -233,7 +232,7 @@ namespace ScreenToGif.Model.ExportPresets
             set => SetProperty(ref _partialExportFrameEnd, value);
         }
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string PartialExportFrameExpression
         {
@@ -326,35 +325,35 @@ namespace ScreenToGif.Model.ExportPresets
             set => SetProperty(ref _extension, value);
         }
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool CanExportMultipleFiles { get; set; }
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool RequiresFfmpeg { get; set; }
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool RequiresGifski { get; set; }
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int Width { get; set; }
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int Height { get; set; }
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double Scale { get; set; }
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ResolvedFilename { get; set; }
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string FullPath { get; set; }
 

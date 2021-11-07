@@ -34,7 +34,7 @@ namespace ScreenToGif.UserControls
             try
             {
                 StatusBand.Hide();
-                Process.Start(YandexDisk.GetAuthorizationAdress());
+                ProcessHelper.StartWithShell(YandexDisk.GetAuthorizationAdress());
             }
             catch (Exception ex)
             {

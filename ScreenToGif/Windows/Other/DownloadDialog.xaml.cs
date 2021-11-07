@@ -191,7 +191,7 @@ namespace ScreenToGif.Windows.Other
             {
                 try
                 {
-                    Process.Start(Global.UpdateAvailable.ActiveDownloadUrl);
+                    ProcessHelper.StartWithShell(Global.UpdateAvailable.ActiveDownloadUrl);
                 }
                 catch (Exception ex)
                 {

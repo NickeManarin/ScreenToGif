@@ -1128,7 +1128,7 @@ namespace ScreenToGif.UserControls
         {
             try
             {
-                Process.Start("https://www.w3.org/TR/PNG-Filters.html");
+                ProcessHelper.StartWithShell("https://www.w3.org/TR/PNG-Filters.html");
             }
             catch (Exception ex)
             {
@@ -1493,7 +1493,7 @@ namespace ScreenToGif.UserControls
             try
             {
                 //If the file name template result changed, it will be imposible to open the previous file. The user should simple try to save it again.
-                Process.Start(Path.Combine(preset.OutputFolder, PathHelper.ReplaceRegexInName(preset.OutputFilename) + preset.Extension));
+                ProcessHelper.StartWithShell(Path.Combine(preset.OutputFolder, PathHelper.ReplaceRegexInName(preset.OutputFilename) + preset.Extension));
             }
             catch (Exception ex)
             {
@@ -1505,7 +1505,7 @@ namespace ScreenToGif.UserControls
         {
             try
             {
-                Process.Start(e.Uri.AbsoluteUri);
+                ProcessHelper.StartWithShell(e.Uri.AbsoluteUri);
             }
             catch (Exception ex)
             {

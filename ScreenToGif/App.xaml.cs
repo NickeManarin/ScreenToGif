@@ -130,7 +130,7 @@ namespace ScreenToGif
                                     Util.Native.SetForegroundWindow(handles.Count > 0 ? handles[0] : process.Handle);
                                     warning = false;
 
-                                    InstanceSwitcherChannel.SendMessage(e.Args);
+                                    InstanceSwitcherChannel.SendMessage(process.Id, e.Args);
                                 }
                             }
 
@@ -165,7 +165,7 @@ namespace ScreenToGif
 
                 if (ask)
                 {
-                    Process.Start("http://go.microsoft.com/fwlink/?LinkId=2085155");
+                    ProcessHelper.StartWithShell("http://go.microsoft.com/fwlink/?LinkId=2085155");
                     return;
                 }
             }
@@ -465,13 +465,13 @@ namespace ScreenToGif
                 //Adding to the list, so a second exception with the same name won't be displayed.
                 _exceptionList.Add(exception);
 
-                Current.Dispatcher.BeginInvoke(new Action(() =>
+                Current.Dispatcher.Invoke(() =>
                 {
                     if (Global.IsHotFix4055002Installed && exception is XamlParseException && exception.InnerException is TargetInvocationException)
                         ExceptionDialog.Ok(exception, "ScreenToGif", "Error while rendering visuals", exception.Message);
                     else
                         ExceptionDialog.Ok(exception, "ScreenToGif", "Unhandled exception", exception.Message);
-                }));
+                });
 
                 //By removing the exception, the same exception can be displayed later.  
                 _exceptionList.Remove(exception);

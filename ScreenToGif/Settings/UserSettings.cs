@@ -545,14 +545,10 @@ namespace ScreenToGif.Settings
                 };
 
                 //Serialize the settings and pass to the new instance via IPC.
-                using (var stream = new StringWriter())
-                {
-                    using (var writer = XmlWriter.Create(stream, settings))
-                    {
-                        XamlWriter.Save(dic, writer);
-                        SettingsPersistenceChannel.SendMessage(stream.ToString(), isLocal);
-                    }
-                }
+                await using var stream = new StringWriter();
+                await using var writer = XmlWriter.Create(stream, settings);
+                XamlWriter.Save(dic, writer);
+                SettingsPersistenceChannel.SendMessage(process.Id, stream.ToString(), isLocal);
 
                 //Since the other instance only exists to save the settings (no interface is displayed), the process must be stopped.
                 process.Kill();

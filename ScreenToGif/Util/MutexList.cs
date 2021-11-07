@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.AccessControl;
@@ -8,7 +8,7 @@ namespace ScreenToGif.Util
 {
     internal static class MutexList
     {
-        private static Dictionary<string, Mutex> All { get; set; } = new Dictionary<string, Mutex>();
+        private static Dictionary<string, Mutex> All { get; set; } = new();
 
         internal static bool IsInUse(string key)
         {
@@ -22,10 +22,12 @@ namespace ScreenToGif.Util
             if (All.ContainsKey(key))
                 Remove(key);
 
+            var mutex = new Mutex(false, @"Global\ScreenToGif" + key.Remove("\\"), out var _);
+
             var sec = new MutexSecurity();
             sec.AddAccessRule(new MutexAccessRule(Environment.UserDomainName + "\\" + Environment.UserName, MutexRights.FullControl, AccessControlType.Allow));
 
-            var mutex = new Mutex(false, @"Global\ScreenToGif" + key.Remove("\\"), out bool created, sec);
+            mutex.SetAccessControl(sec);
 
             All.Add(key, mutex);
         }

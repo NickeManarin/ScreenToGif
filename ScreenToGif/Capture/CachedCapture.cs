@@ -53,8 +53,6 @@ namespace ScreenToGif.Capture
         {
             try
             {
-                new System.Security.Permissions.UIPermission(System.Security.Permissions.UIPermissionWindow.AllWindows).Demand();
-
                 //var success = Native.BitBlt(CompatibleDeviceContext, 0, 0, Width, Height, WindowDeviceContext, Left, Top, Native.CopyPixelOperation.SourceCopy | Native.CopyPixelOperation.CaptureBlt);
                 var success = Util.Native.StretchBlt(CompatibleDeviceContext, 0, 0, StartWidth, StartHeight, WindowDeviceContext, Left, Top, Width, Height, Util.Native.CopyPixelOperation.SourceCopy | Util.Native.CopyPixelOperation.CaptureBlt);
 
@@ -73,7 +71,7 @@ namespace ScreenToGif.Capture
 
                 BlockingCollection.Add(frame);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //LogWriter.Log(ex, "Impossible to get screenshot of the screen");
             }
@@ -85,8 +83,6 @@ namespace ScreenToGif.Capture
         {
             try
             {
-                new System.Security.Permissions.UIPermission(System.Security.Permissions.UIPermissionWindow.AllWindows).Demand();
-
                 //var success = Native.BitBlt(CompatibleDeviceContext, 0, 0, Width, Height, WindowDeviceContext, Left, Top, Native.CopyPixelOperation.SourceCopy | Native.CopyPixelOperation.CaptureBlt);
                 var success = Util.Native.StretchBlt(CompatibleDeviceContext, 0, 0, StartWidth, StartHeight, WindowDeviceContext, Left, Top, Width, Height, Util.Native.CopyPixelOperation.SourceCopy | Util.Native.CopyPixelOperation.CaptureBlt);
 
@@ -206,13 +202,13 @@ namespace ScreenToGif.Capture
 
             //Then close the streams.
             //_compressStream.Flush();
-            _compressStream.Dispose();
+            await _compressStream.DisposeAsync();
 
             _bufferedStream.Flush();
             _fileStream.Flush();
-            
-            _bufferedStream.Dispose();
-            _fileStream.Dispose();
+
+            await _bufferedStream.DisposeAsync();
+            await _fileStream.DisposeAsync();
         }
 
         [Obsolete("Only for test")]

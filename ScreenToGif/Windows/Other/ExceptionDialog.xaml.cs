@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
@@ -85,7 +85,7 @@ namespace ScreenToGif.Windows.Other
         {
             try
             {
-                Process.Start("https://github.com/dotnet/announcements/issues/53");
+                ProcessHelper.StartWithShell("https://github.com/dotnet/announcements/issues/53");
             }
             catch (Exception e)
             {

@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Management.Instrumentation;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using System.Windows;
@@ -63,7 +62,7 @@ namespace ScreenToGif.Model.UploadPresets
             set => SetProperty(ref _description, value);
         }
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ImageId
         {
@@ -88,7 +87,7 @@ namespace ScreenToGif.Model.UploadPresets
             set => SetProperty(ref _history, value);
         }
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<Export> AllowedTypes
         {
@@ -96,7 +95,7 @@ namespace ScreenToGif.Model.UploadPresets
             set => SetProperty(ref _allowedTypes, value);
         }
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string TypeName
         {
@@ -118,40 +117,40 @@ namespace ScreenToGif.Model.UploadPresets
             }
         }
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool HasLimit => HasSizeLimit || HasDurationLimit || HasResolutionLimit;
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool HasSizeLimit => _sizeLimit != null;
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool HasDurationLimit => _durationLimit != null;
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool HasResolutionLimit => _resolutionLimit != null;
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public long? SizeLimit => _sizeLimit;
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public TimeSpan? DurationLimit => _durationLimit;
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Size? ResolutionLimit => _resolutionLimit;
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Limit => (HasLimit ? "▼ " : "") + (HasSizeLimit ? Humanizer.BytesToString(SizeLimit ?? 0L) : "") + (HasSizeLimit && (HasDurationLimit || HasResolutionLimit) ? " • " : "") +
             (HasDurationLimit ? $"{DurationLimit:mm\':\'ss} m" : "") + (HasDurationLimit && HasResolutionLimit ? " • " : "") + (HasResolutionLimit ? $"{ResolutionLimit?.Width}x{ResolutionLimit?.Height}" : "");
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Mode => IsAnonymous ? LocalizationHelper.Get("S.Options.Upload.Preset.Mode.Anonymous") : LocalizationHelper.Get("S.Options.Upload.Preset.Mode.Authenticated");
 

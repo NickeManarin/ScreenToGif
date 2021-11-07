@@ -39,7 +39,7 @@ namespace ScreenToGif.UserControls
             try
             {
                 StatusBand.Hide();
-                Process.Start(Imgur.GetAuthorizationAdress());
+                ProcessHelper.StartWithShell(Imgur.GetAuthorizationAdress());
             }
             catch (Exception ex)
             {

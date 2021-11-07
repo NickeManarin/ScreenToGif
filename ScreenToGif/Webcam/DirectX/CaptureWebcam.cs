@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // ------------------------------------------------------------------
 // Adapted work from DirectX.Capture
@@ -246,7 +246,7 @@ namespace ScreenToGif.Webcam.DirectX
                 //Get the Capture Graph Builder.
                 var clsid = Uuid.Clsid.CaptureGraphBuilder2;
                 var riid = typeof(ExtendStreaming.ICaptureGraphBuilder2).GUID;
-                CaptureGraphBuilder = (ExtendStreaming.ICaptureGraphBuilder2)Workaround.CreateDsInstance(ref clsid, ref riid);
+                CaptureGraphBuilder = (ExtendStreaming.ICaptureGraphBuilder2)Activator.CreateInstance(Type.GetTypeFromCLSID(clsid, true));
 
                 //Link the CaptureGraphBuilder to the filter graph
                 var hr = CaptureGraphBuilder.SetFiltergraph(GraphBuilder);

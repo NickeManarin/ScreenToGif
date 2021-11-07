@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -387,9 +386,9 @@ namespace ScreenToGif.Controls
 
             #region Thousands
 
-            var thousands = Thread.CurrentThread.CurrentCulture.NumberFormat.NumberGroupSeparator;
+            var thousands = CultureInfo.CurrentCulture.NumberFormat.NumberGroupSeparator;
             var thousandsChar = thousands.ToCharArray().FirstOrDefault();
-            var decimals = Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator;
+            var decimals = CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
             var decimalsChar = decimals.ToCharArray().FirstOrDefault();
 
             if (next.Equals(thousands))

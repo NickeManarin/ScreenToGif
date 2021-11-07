@@ -128,12 +128,12 @@ namespace ScreenToGif.Capture
             Device = new Device(DriverType.Hardware, DeviceCreationFlags.Debug);
 
             var debug = SharpDX.DXGI.InfoQueue.TryCreate();
-            debug.SetBreakOnSeverity(DebugId.All, InformationQueueMessageSeverity.Corruption, true);
-            debug.SetBreakOnSeverity(DebugId.All, InformationQueueMessageSeverity.Error, true);
-            debug.SetBreakOnSeverity(DebugId.All, InformationQueueMessageSeverity.Warning, true);
+            debug?.SetBreakOnSeverity(DebugId.All, InformationQueueMessageSeverity.Corruption, true);
+            debug?.SetBreakOnSeverity(DebugId.All, InformationQueueMessageSeverity.Error, true);
+            debug?.SetBreakOnSeverity(DebugId.All, InformationQueueMessageSeverity.Warning, true);
 
             var debug2 = DXGIDebug.TryCreate();
-            debug2.ReportLiveObjects(DebugId.Dx, DebugRloFlags.Summary | DebugRloFlags.Detail);
+            debug2?.ReportLiveObjects(DebugId.Dx, DebugRloFlags.Summary | DebugRloFlags.Detail);
 
 #else
             Device = new Device(DriverType.Hardware, DeviceCreationFlags.VideoSupport);

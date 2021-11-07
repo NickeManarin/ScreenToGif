@@ -7,7 +7,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using ScreenToGif.Model;
 using ScreenToGif.Settings;
@@ -56,18 +55,46 @@ namespace ScreenToGif.Windows
         /// </summary>
         private int _offsetY;
 
-        /// <summary>
-        /// True if the BackButton should be hidden.
-        /// </summary>
-        private readonly bool _hideBackButton;
-
         #endregion
 
         #region Async Load
 
-        public delegate List<string> Load();
+        private async Task LoadWebcams()
+        {
+            var result = await Task.Run(LoadVideoDevices);
 
-        private Load _loadDel;
+            #region If no devices detected
+
+            if (result.Count == 0)
+            {
+                RecordPauseButton.IsEnabled = false;
+                FpsNumericUpDown.IsEnabled = false;
+                VideoDevicesComboBox.IsEnabled = false;
+
+                WebcamControl.Visibility = Visibility.Collapsed;
+                NoVideoLabel.Visibility = Visibility.Visible;
+
+                return;
+            }
+
+            #endregion
+
+            #region Detected at least one device
+
+            VideoDevicesComboBox.ItemsSource = result;
+            VideoDevicesComboBox.SelectedIndex = 0;
+
+            RecordPauseButton.IsEnabled = true;
+            FpsNumericUpDown.IsEnabled = true;
+            VideoDevicesComboBox.IsEnabled = true;
+
+            WebcamControl.Visibility = Visibility.Visible;
+            NoVideoLabel.Visibility = Visibility.Collapsed;
+
+            _actHook.Start(false, true); //false for the mouse, true for the keyboard.
+
+            #endregion
+        }
 
         /// <summary>
         /// Loads the list of video devices.
@@ -78,54 +105,9 @@ namespace ScreenToGif.Windows
             _filters = new Filters();
 
             for (var i = 0; i < _filters.VideoInputDevices.Count; i++)
-            {
                 devicesList.Add(_filters.VideoInputDevices[i].Name);
-            }
-
+            
             return devicesList;
-        }
-
-        private void LoadCallBack(IAsyncResult r)
-        {
-            var result = _loadDel.EndInvoke(r);
-
-            #region If no devices detected
-
-            if (result.Count == 0)
-            {
-                Dispatcher.Invoke(() =>
-                {
-                    RecordPauseButton.IsEnabled = false;
-                    FpsNumericUpDown.IsEnabled = false;
-                    VideoDevicesComboBox.IsEnabled = false;
-
-                    WebcamControl.Visibility = Visibility.Collapsed;
-                    NoVideoLabel.Visibility = Visibility.Visible;
-                });
-
-                return;
-            }
-
-            #endregion
-
-            #region Detected at least one device
-
-            Dispatcher.Invoke(() =>
-            {
-                VideoDevicesComboBox.ItemsSource = result;
-                VideoDevicesComboBox.SelectedIndex = 0;
-
-                RecordPauseButton.IsEnabled = true;
-                FpsNumericUpDown.IsEnabled = true;
-                VideoDevicesComboBox.IsEnabled = true;
-
-                WebcamControl.Visibility = Visibility.Visible;
-                NoVideoLabel.Visibility = Visibility.Collapsed;
-
-                _actHook.Start(false, true); //false for the mouse, true for the keyboard.
-            });
-
-            #endregion
         }
 
         #endregion
@@ -151,7 +133,7 @@ namespace ScreenToGif.Windows
             #endregion
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             SystemEvents.PowerModeChanged += System_PowerModeChanged;
 
@@ -174,8 +156,7 @@ namespace ScreenToGif.Windows
 
             #endregion
 
-            _loadDel = LoadVideoDevices;
-            _loadDel.BeginInvoke(LoadCallBack, null);
+            await LoadWebcams();
         }
 
         #endregion
@@ -281,48 +262,15 @@ namespace ScreenToGif.Windows
 
         #region Record Async
 
-        /// <summary>
-        /// Saves the Bitmap to the disk and adds the filename in the list of frames.
-        /// </summary>
-        /// <param name="filename">The final filename of the Bitmap.</param>
-        /// <param name="bitmap">The Bitmap to save in the disk.</param>
-        public delegate void AddFrame(string filename, Bitmap bitmap);
-
-        private AddFrame _addDel;
-
         private void AddFrames(string filename, Bitmap bitmap)
         {
             bitmap.Save(filename);
             bitmap.Dispose();
         }
 
-        public delegate void AddRenderFrame(string filename, RenderTargetBitmap bitmap);
-
-        private AddRenderFrame _addRenderDel;
-
-        private void AddRenderFrames(string filename, RenderTargetBitmap bitmap)
-        {
-            var bitmapEncoder = new BmpBitmapEncoder();
-            bitmapEncoder.Frames.Add(BitmapFrame.Create(bitmap));
-
-            using (var filestream = new FileStream(filename, FileMode.Create))
-                bitmapEncoder.Save(filestream);
-        }
-
-        private void CallBack(IAsyncResult r)
-        {
-            //if (!this.IsLoaded) return;
-
-            _addDel.EndInvoke(r);
-        }
-
         #endregion
 
         #region Discard Async
-
-        private delegate void DiscardFrames();
-
-        private DiscardFrames _discardFramesDel;
 
         private void Discard()
         {
@@ -352,40 +300,6 @@ namespace ScreenToGif.Windows
             Project.Frames.Clear();
         }
 
-        private void DiscardCallback(IAsyncResult ar)
-        {
-            _discardFramesDel.EndInvoke(ar);
-
-            Dispatcher.Invoke(() =>
-            {
-                //Enables the controls that are disabled while recording;
-                FpsNumericUpDown.IsEnabled = true;
-                RefreshButton.IsEnabled = true;
-                VideoDevicesComboBox.IsEnabled = true;
-                LowerGrid.IsEnabled = true;
-
-                DiscardButton.BeginStoryboard(FindResource("HideDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
-
-                Cursor = Cursors.Arrow;
-
-                //if (!UserSettings.All.SnapshotMode)
-                {
-                    //Only display the Record text when not in snapshot mode. 
-                    Title = "ScreenToGif";
-                    Stage = Stage.Stopped;
-                }
-                //else
-                {
-                    //Stage = Stage.Snapping;
-                    //EnableSnapshot_Executed(null, null);
-                }
-
-                GC.Collect();
-            });
-
-            GC.Collect();
-        }
-
         #endregion
 
         #region Timer
@@ -403,11 +317,8 @@ namespace ScreenToGif.Windows
             var bt = Util.Native.Capture((int)Math.Round(WebcamControl.ActualWidth * _scale, MidpointRounding.AwayFromZero),
                 (int)Math.Round(WebcamControl.ActualHeight * _scale, MidpointRounding.AwayFromZero), lefttop.X, lefttop.Y);
 
-            _addDel.BeginInvoke(fileName, new Bitmap(bt), null, null); //CallBack
-            //_addDel.BeginInvoke(fileName, new Bitmap(WebcamControl.Capture.GetFrame()), CallBack, null);
-            //_addRenderDel.BeginInvoke(fileName, WebcamControl.GetRender(this.Dpi(), new System.Windows.Size()), CallBack, null);
-
-            //ThreadPool.QueueUserWorkItem(delegate { AddFrames(fileName, new Bitmap(_capture.GetFrame())); });
+            //await Task.Run(() => AddFrames(fileName, new Bitmap(bt)));
+            AddFrames(fileName, new Bitmap(bt));
 
             Dispatcher.Invoke(() => Title = $"ScreenToGif • {_frameCount}");
 
@@ -441,8 +352,6 @@ namespace ScreenToGif.Windows
                 FpsNumericUpDown.IsEnabled = false;
                 Topmost = true;
 
-                _addDel = AddFrames;
-                _addRenderDel = AddRenderFrames;
                 //WebcamControl.Capture.GetFrame();
 
                 #region Start - Normal or Snap
@@ -531,7 +440,7 @@ namespace ScreenToGif.Windows
             }
         }
 
-        private void DiscardButton_Click(object sender, RoutedEventArgs e)
+        private async void DiscardButton_Click(object sender, RoutedEventArgs e)
         {
             Pause();
 
@@ -546,8 +455,31 @@ namespace ScreenToGif.Windows
             Cursor = Cursors.AppStarting;
             LowerGrid.IsEnabled = false;
 
-            _discardFramesDel = Discard;
-            _discardFramesDel.BeginInvoke(DiscardCallback, null);
+            await Task.Run(Discard);
+
+            //Enables the controls that are disabled while recording;
+            FpsNumericUpDown.IsEnabled = true;
+            RefreshButton.IsEnabled = true;
+            VideoDevicesComboBox.IsEnabled = true;
+            LowerGrid.IsEnabled = true;
+
+            DiscardButton.BeginStoryboard(FindResource("HideDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
+
+            Cursor = Cursors.Arrow;
+
+            //if (!UserSettings.All.SnapshotMode)
+            {
+                //Only display the Record text when not in snapshot mode. 
+                Title = "ScreenToGif";
+                Stage = Stage.Stopped;
+            }
+            //else
+            {
+                //Stage = Stage.Snapping;
+                //EnableSnapshot_Executed(null, null);
+            }
+
+            GC.Collect();
         }
 
         private void Stop_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -615,15 +547,14 @@ namespace ScreenToGif.Windows
             Topmost = true;
         }
 
-        private void CheckVideoDevices_Executed(object sender, ExecutedRoutedEventArgs e)
+        private async void CheckVideoDevices_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             RecordPauseButton.IsEnabled = false;
 
             VideoDevicesComboBox.ItemsSource = null;
 
             //Check again for video devices.
-            _loadDel = LoadVideoDevices;
-            _loadDel.BeginInvoke(LoadCallBack, null);
+            await LoadWebcams();
         }
 
         #endregion

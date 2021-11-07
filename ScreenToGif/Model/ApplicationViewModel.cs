@@ -450,7 +450,7 @@ namespace ScreenToGif.Model
                     {
                         try
                         {
-                            Process.Start("https://github.com/NickeManarin/ScreenToGif/wiki/Help");
+                            ProcessHelper.StartWithShell("https://github.com/NickeManarin/ScreenToGif/wiki/Help");
                         }
                         catch (Exception ex)
                         {
@@ -999,8 +999,8 @@ namespace ScreenToGif.Model
                             InstallerName = installer.Element("name")?.Value ?? "ScreenToGif.Setup.msi"
                         };
 
-                        Application.Current.Dispatcher?.BeginInvoke(new Action(() => NotificationManager.AddNotification(string.Format(LocalizationHelper.Get("S.Updater.NewRelease.Info"), 
-                            Global.UpdateAvailable.Version), StatusType.Update, "update", PromptUpdate)));
+                        Application.Current.Dispatcher?.Invoke(() => NotificationManager.AddNotification(string.Format(LocalizationHelper.Get("S.Updater.NewRelease.Info"), 
+                            Global.UpdateAvailable.Version), StatusType.Update, "update", PromptUpdate));
 
                         //Download update to be installed when the app closes.
                         if (UserSettings.All.InstallUpdates && !string.IsNullOrEmpty(Global.UpdateAvailable.InstallerDownloadUrl))
@@ -1094,7 +1094,8 @@ namespace ScreenToGif.Model
                             };
 
                             //With Fosshub, the download must be manual. 
-                            Application.Current.Dispatcher?.BeginInvoke(new Action(() => NotificationManager.AddNotification(string.Format(LocalizationHelper.Get("S.Updater.NewRelease.Info"), Global.UpdateAvailable.Version), StatusType.Update, "update", PromptUpdate)));
+                            Application.Current.Dispatcher?.Invoke(() => NotificationManager.AddNotification(string.Format(LocalizationHelper.Get("S.Updater.NewRelease.Info"), Global.UpdateAvailable.Version),
+                                StatusType.Update, "update", PromptUpdate));
                         }
                     }
                 }
@@ -1195,7 +1196,7 @@ namespace ScreenToGif.Model
                 if (UserSettings.All.PortableUpdate)
                 {
                     //In portable mode, simply open the Zip file and close ScreenToGif.
-                    Process.Start(Global.UpdateAvailable.PortablePath);
+                    ProcessHelper.StartWithShell(Global.UpdateAvailable.PortablePath);
                     return true;
                 }
 

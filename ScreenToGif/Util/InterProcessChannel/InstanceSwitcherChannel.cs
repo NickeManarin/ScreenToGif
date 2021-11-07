@@ -1,30 +1,37 @@
 using System;
-using System.Runtime.Remoting.Channels.Ipc;
-using System.Windows;
+using System.Diagnostics;
+using System.IO.Pipes;
+using System.Text.Json;
 using ScreenToGif.Settings;
 
 namespace ScreenToGif.Util.InterProcessChannel
 {
+    internal struct InstanceSwitcherMessage
+    {
+        public string[] Args { get; set; }
+    }
+
     /// <summary>
     /// Interprocess channel that is responsible for passing to another instance the parameters of this instance (in cases of when just one instance is allowed).
     /// </summary>
     public static class InstanceSwitcherChannel
     {
-        internal static IpcChannel ServerChannel { get; private set; }
-        
-        
+        private const string PipeName = "ScreenToGit.InstanceSwitcher";
+
+        private static PipeServer<InstanceSwitcherMessage> _server;
+
+
         internal static void RegisterServer()
         {
             try
             {
-                if (ServerChannel != null)
+                if (_server != null)
                     return;
 
-                ServerChannel = new IpcChannel("localhost:9192");
-                System.Runtime.Remoting.Channels.ChannelServices.RegisterChannel(ServerChannel, true);
-
-                //Expose an object for remote calls.
-                System.Runtime.Remoting.RemotingConfiguration.RegisterWellKnownServiceType(typeof(InterProcessRemoteObject), "ScreenToGifRemoteObject.rem", System.Runtime.Remoting.WellKnownObjectMode.Singleton);
+                using (var process = Process.GetCurrentProcess())
+                    _server = new PipeServer<InstanceSwitcherMessage>(PipeName + process.Id);
+                
+                _server.MessageReceived += ServerOnMessageReceived;
             }
             catch (Exception e)
             {
@@ -36,35 +43,27 @@ namespace ScreenToGif.Util.InterProcessChannel
         {
             try
             {
-                if (ServerChannel == null)
-                    return;
-
-                System.Runtime.Remoting.Channels.ChannelServices.UnregisterChannel(ServerChannel);
-
-                ServerChannel = null;
+                _server.Stop();
+                _server.MessageReceived -= ServerOnMessageReceived;
+                _server = null;
             }
             catch (Exception e)
             {
-                LogWriter.Log(e, "It was not possible to unregister the IPC server.");   
+                LogWriter.Log(e, "It was not possible to unregister the IPC server.");
             }
         }
 
-        internal static void SendMessage(string[] args)
+        internal static void SendMessage(int processId, string[] args)
         {
             try
             {
-                var channel = new IpcChannel();
+                using var pipe = new NamedPipeClientStream(".", PipeName + processId, PipeDirection.Out);
+                pipe.Connect();
 
-                System.Runtime.Remoting.Channels.ChannelServices.RegisterChannel(channel, true);
+                var message = new InstanceSwitcherMessage { Args = args };
+                var buffer = JsonSerializer.SerializeToUtf8Bytes(message);
 
-                //Register as client for remote object.
-                var remoteType = new System.Runtime.Remoting.WellKnownClientTypeEntry(typeof(InterProcessRemoteObject), "ipc://localhost:9192/ScreenToGifRemoteObject.rem");
-                System.Runtime.Remoting.RemotingConfiguration.RegisterWellKnownClientType(remoteType);
-
-                var service = new InterProcessRemoteObject();
-                service.SendArguments(args);
-
-                System.Runtime.Remoting.Channels.ChannelServices.UnregisterChannel(channel);
+                pipe.Write(buffer, 0, buffer.Length);
             }
             catch (Exception e)
             {
@@ -72,34 +71,23 @@ namespace ScreenToGif.Util.InterProcessChannel
             }
         }
 
-
-        /// <summary>
-        /// Object that is used as the inter process bag.
-        /// </summary>
-        public class InterProcessRemoteObject : MarshalByRefObject
+        private static void ServerOnMessageReceived(object sender, InstanceSwitcherMessage message)
         {
-            /// <summary>
-            /// Method used to receive arguments from another instance.
-            /// </summary>
-            /// <param name="args">The arguments to be passed to the other instance.</param>
-            public bool SendArguments(string[] args)
+            try
             {
-                try
-                {
-                    if (args?.Length > 0)
-                        Arguments.Prepare(args);
+                var args = message.Args;
 
-                    Application.Current.Dispatcher.BeginInvoke(Arguments.Open
-                        ? () => App.MainViewModel.Open.Execute(Arguments.WindownToOpen, true)
-                        : new Action(() => App.MainViewModel.Open.Execute(UserSettings.All.StartUp)));
+                if (args?.Length > 0)
+                    Arguments.Prepare(args);
 
-                    return true;
-                }
-                catch (Exception e)
-                {
-                    LogWriter.Log(e, "Impossible to send/receive arguments via IPC.");
-                    return false;
-                }
+                if (Arguments.Open) 
+                    App.MainViewModel.Open.Execute(Arguments.WindownToOpen, true);
+                else
+                    App.MainViewModel.Open.Execute(UserSettings.All.StartUp);
+            }
+            catch (Exception e)
+            {
+                LogWriter.Log(e, "Unable to execute arguments from IPC.");
             }
         }
     }

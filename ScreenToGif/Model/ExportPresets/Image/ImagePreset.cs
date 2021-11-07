@@ -1,5 +1,5 @@
 using System.ComponentModel;
-using System.Management.Instrumentation;
+using System.Runtime.Serialization;
 using ScreenToGif.Util;
 
 namespace ScreenToGif.Model.ExportPresets.Image
@@ -24,7 +24,7 @@ namespace ScreenToGif.Model.ExportPresets.Image
         /// <summary>
         /// Internal accessor for controlling the switch of the ZipFiles property without altering the extension. 
         /// </summary>
-        [IgnoreMember]
+        [IgnoreDataMember]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         internal bool ZipFilesInternal
         {

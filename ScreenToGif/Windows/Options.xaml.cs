@@ -384,7 +384,7 @@ namespace ScreenToGif.Windows
             GridSizeGrid.Visibility = Visibility.Visible;
             _latestGridSize = UserSettings.All.GridSize;
 
-            Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => GridHeightIntegerUpDown.Focus()));
+            Dispatcher.Invoke(DispatcherPriority.Background, new Action(() => GridHeightIntegerUpDown.Focus()));
 
             GridWidthIntegerUpDown.ValueChanged += GridSizeIntegerUpDown_ValueChanged;
             GridHeightIntegerUpDown.ValueChanged += GridSizeIntegerUpDown_ValueChanged;
@@ -409,7 +409,7 @@ namespace ScreenToGif.Windows
 
         private void ApplySizeButton_Click(object sender, RoutedEventArgs e)
         {
-            Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => GridSizeBorder.Focus()));
+            Dispatcher.Invoke(DispatcherPriority.Background, new Action(() => GridSizeBorder.Focus()));
             GridSizeGrid.Visibility = Visibility.Collapsed;
 
             GridSizeIntegerUpDown_ValueChanged(sender, e);
@@ -417,7 +417,7 @@ namespace ScreenToGif.Windows
 
         private void CancelSizeButton_Click(object sender, RoutedEventArgs e)
         {
-            Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() => GridSizeBorder.Focus()));
+            Dispatcher.Invoke(DispatcherPriority.Background, new Action(() => GridSizeBorder.Focus()));
             GridSizeGrid.Visibility = Visibility.Collapsed;
             UserSettings.All.GridSize = _latestGridSize;
 
@@ -699,7 +699,7 @@ namespace ScreenToGif.Windows
         {
             try
             {
-                Process.Start("https://github.com/NickeManarin/ScreenToGif/wiki/Localization");
+                ProcessHelper.StartWithShell("https://github.com/NickeManarin/ScreenToGif/wiki/Localization");
             }
             catch (Exception ex)
             {
@@ -733,13 +733,14 @@ namespace ScreenToGif.Windows
         {
             try
             {
-                Process.Start("mailto:nicke@outlook.com.br");
+                ProcessHelper.StartWithShell("mailto:nicke@outlook.com.br");
             }
             catch (Exception ex)
             {
                 LogWriter.Log(ex, "Open MailTo");
             }
         }
+
         #endregion
 
         #region Storage
@@ -923,7 +924,7 @@ namespace ScreenToGif.Windows
         {
             try
             {
-                Process.Start(UserSettings.All.TemporaryFolderResolved);
+                ProcessHelper.StartWithShell(UserSettings.All.TemporaryFolderResolved);
             }
             catch (Exception ex)
             {
@@ -976,7 +977,7 @@ namespace ScreenToGif.Windows
         {
             try
             {
-                Process.Start(UserSettings.All.LogsFolder);
+                ProcessHelper.StartWithShell(UserSettings.All.LogsFolder);
             }
             catch (Exception ex)
             {
@@ -990,7 +991,7 @@ namespace ScreenToGif.Windows
             try
             {
                 if (Keyboard.Modifiers == ModifierKeys.Control)
-                    Process.Start(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ScreenToGif", "Settings.xaml"));
+                    ProcessHelper.StartWithShell(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ScreenToGif", "Settings.xaml"));
                 else
                     Process.Start("explorer.exe", $"/select,\"{Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ScreenToGif", "Settings.xaml")}\"");
             }
@@ -1037,7 +1038,7 @@ namespace ScreenToGif.Windows
             try
             {
                 if (Keyboard.Modifiers == ModifierKeys.Control)
-                    Process.Start(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Settings.xaml"));
+                    ProcessHelper.StartWithShell(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Settings.xaml"));
                 else
                     Process.Start("explorer.exe", $"/select,\"{Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Settings.xaml")}\"");
             }
@@ -1065,7 +1066,7 @@ namespace ScreenToGif.Windows
         }
 
 
-        private void CheckSpace(bool force = false)
+        private async void CheckSpace(bool force = false)
         {
             if (_isBusy && !force)
                 return;
@@ -1099,13 +1100,27 @@ namespace ScreenToGif.Windows
             #endregion
 
             //Calculates the quantity of files and folders.
-            _checkDrive = CheckDrive;
-            _checkDrive.BeginInvoke(CheckDriveCallBack, null);
+            await Task.Run(CheckDrive);
+
+            try
+            {
+                App.MainViewModel.CheckDiskSpace();
+
+                FilesRun.Text = _fileCount == 0 ? LocalizationHelper.Get("S.Options.Storage.Status.Files.None") :
+                LocalizationHelper.GetWithFormat("S.Options.Storage.Status.Files." + (_fileCount > 1 ? "Plural" : "Singular"), "{0} files", _fileCount);
+                FoldersRun.Text = _folderList.Count == 0 ? LocalizationHelper.Get("S.Options.Storage.Status.Folders.None") :
+                LocalizationHelper.GetWithFormat("S.Options.Storage.Status.Folders." + (_folderList.Count > 1 ? "Plural" : "Singular"), "{0} folders", _folderList.Count);
+                UsedSpaceRun.Text = LocalizationHelper.GetWithFormat("S.Options.Storage.Status.InUse", "{0} in use", Humanizer.BytesToString(_cacheSize));
+                FilesTextBlock.Visibility = Visibility.Visible;
+                StatusProgressBar.IsIndeterminate = false;
+            }
+            catch (Exception)
+            { }
+            finally
+            {
+                _isBusy = false;
+            }
         }
-
-        private delegate void CheckDriveDelegate();
-
-        private CheckDriveDelegate _checkDrive;
 
         private void CheckDrive()
         {
@@ -1125,33 +1140,6 @@ namespace ScreenToGif.Windows
             _folderList = Directory.GetDirectories(cache).Select(x => new DirectoryInfo(x)).ToList();
             _fileCount = _folderList.Sum(folder => Directory.EnumerateFiles(folder.FullName).Count());
             _cacheSize = _folderList.Sum(s => s.EnumerateFiles("*.*", SearchOption.AllDirectories).Sum(fi => fi.Length));
-        }
-
-        private void CheckDriveCallBack(IAsyncResult r)
-        {
-            try
-            {
-                _checkDrive.EndInvoke(r);
-
-                Dispatcher.Invoke(() =>
-                {
-                    App.MainViewModel.CheckDiskSpace();
-
-                    FilesRun.Text = _fileCount == 0 ? LocalizationHelper.Get("S.Options.Storage.Status.Files.None") :
-                    LocalizationHelper.GetWithFormat("S.Options.Storage.Status.Files." + (_fileCount > 1 ? "Plural" : "Singular"), "{0} files", _fileCount);
-                    FoldersRun.Text = _folderList.Count == 0 ? LocalizationHelper.Get("S.Options.Storage.Status.Folders.None") :
-                    LocalizationHelper.GetWithFormat("S.Options.Storage.Status.Folders." + (_folderList.Count > 1 ? "Plural" : "Singular"), "{0} folders", _folderList.Count);
-                    UsedSpaceRun.Text = LocalizationHelper.GetWithFormat("S.Options.Storage.Status.InUse", "{0} in use", Humanizer.BytesToString(_cacheSize));
-                    FilesTextBlock.Visibility = Visibility.Visible;
-                    StatusProgressBar.IsIndeterminate = false;
-                });
-            }
-            catch (Exception)
-            { }
-            finally
-            {
-                _isBusy = false;
-            }
         }
 
         #endregion
@@ -1777,7 +1765,7 @@ namespace ScreenToGif.Windows
                 if (string.IsNullOrWhiteSpace(folder))
                     return;
 
-                Process.Start(folder);
+                ProcessHelper.StartWithShell(folder);
             }
             catch (Exception ex)
             {
@@ -1799,7 +1787,7 @@ namespace ScreenToGif.Windows
                 if (string.IsNullOrWhiteSpace(folder))
                     return;
 
-                Process.Start(folder);
+                ProcessHelper.StartWithShell(folder);
             }
             catch (Exception ex)
             {
@@ -1816,7 +1804,7 @@ namespace ScreenToGif.Windows
                 if (string.IsNullOrWhiteSpace(folder))
                     return;
 
-                Process.Start(folder);
+                ProcessHelper.StartWithShell(folder);
             }
             catch (Exception ex)
             {
@@ -1829,7 +1817,7 @@ namespace ScreenToGif.Windows
         {
             try
             {
-                Process.Start(e.Uri.AbsoluteUri);
+                ProcessHelper.StartWithShell(e.Uri.AbsoluteUri);
             }
             catch (Exception ex)
             {
@@ -1928,7 +1916,7 @@ namespace ScreenToGif.Windows
         {
             try
             {
-                Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=JCY2BGLULSWVJ&lc=US&item_name=ScreenToGif&item_number=screentogif&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted");
+                ProcessHelper.StartWithShell("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=JCY2BGLULSWVJ&lc=US&item_name=ScreenToGif&item_number=screentogif&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted");
             }
             catch (Exception ex)
             {
@@ -1941,7 +1929,7 @@ namespace ScreenToGif.Windows
         {
             try
             {
-                Process.Start("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=JCY2BGLULSWVJ&lc=US&item_name=ScreenToGif&item_number=screentogif&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted");
+                ProcessHelper.StartWithShell("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=JCY2BGLULSWVJ&lc=US&item_name=ScreenToGif&item_number=screentogif&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted");
             }
             catch (Exception ex)
             {
@@ -1957,7 +1945,7 @@ namespace ScreenToGif.Windows
             {
                 var currency = CurrencyComboBox.Text.Substring(0, 3);
 
-                Process.Start($"https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=JCY2BGLULSWVJ&lc=US&item_name=ScreenToGif&item_number=screentogif&currency_code={currency}&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted");
+                ProcessHelper.StartWithShell($"https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=JCY2BGLULSWVJ&lc=US&item_name=ScreenToGif&item_number=screentogif&currency_code={currency}&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted");
             }
             catch (Exception ex)
             {
@@ -1971,7 +1959,7 @@ namespace ScreenToGif.Windows
         {
             try
             {
-                Process.Start("https://www.patreon.com/nicke");
+                ProcessHelper.StartWithShell("https://www.patreon.com/nicke");
             }
             catch (Exception ex)
             {
@@ -1984,7 +1972,7 @@ namespace ScreenToGif.Windows
         {
             try
             {
-                Process.Start("https://flattr.com/@NickeManarin/domain/screentogif.com");
+                ProcessHelper.StartWithShell("https://flattr.com/@NickeManarin/domain/screentogif.com");
             }
             catch (Exception ex)
             {
@@ -1998,7 +1986,7 @@ namespace ScreenToGif.Windows
         {
             try
             {
-                Process.Start("https://steamcommunity.com/id/nickesm/wishlist");
+                ProcessHelper.StartWithShell("https://steamcommunity.com/id/nickesm/wishlist");
             }
             catch (Exception ex)
             {
@@ -2011,7 +1999,7 @@ namespace ScreenToGif.Windows
         {
             try
             {
-                Process.Start("https://www.gog.com/u/Nickesm/wishlist");
+                ProcessHelper.StartWithShell("https://www.gog.com/u/Nickesm/wishlist");
             }
             catch (Exception ex)
             {
@@ -2024,7 +2012,7 @@ namespace ScreenToGif.Windows
         {
             try
             {
-                Process.Start("https://ko-fi.com/nickemanarin");
+                ProcessHelper.StartWithShell("https://ko-fi.com/nickemanarin");
             }
             catch (Exception ex)
             {
@@ -2047,7 +2035,7 @@ namespace ScreenToGif.Windows
         {
             try
             {
-                Process.Start("https://www.screentogif.com/donate");
+                ProcessHelper.StartWithShell("https://www.screentogif.com/donate");
             }
             catch (Exception ex)
             {
@@ -2064,7 +2052,7 @@ namespace ScreenToGif.Windows
         {
             try
             {
-                Process.Start(e.Uri.AbsoluteUri);
+                ProcessHelper.StartWithShell(e.Uri.AbsoluteUri);
             }
             catch (Exception ex)
             {
@@ -2164,7 +2152,7 @@ namespace ScreenToGif.Windows
         {
             UserSettings.Save();
 
-            Process.Start(Application.ResourceAssembly.Location);
+            ProcessHelper.StartWithShell(Application.ResourceAssembly.Location);
             Application.Current.Shutdown();
         }
 

@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using ScreenToGif.Model;
 
 namespace ScreenToGif.Capture
 {
-    internal interface ICapture
+    internal interface ICapture : IAsyncDisposable, IDisposable
     {
         bool WasStarted { get; set; }
         int FrameCount { get; set; }
@@ -28,6 +28,5 @@ namespace ScreenToGif.Capture
         Task<int> ManualCaptureAsync(FrameInfo frame, bool showCursor = false);
         void Save(FrameInfo info);
         Task Stop();
-        Task Dispose();
     }
 }

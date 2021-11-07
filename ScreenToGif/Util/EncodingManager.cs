@@ -66,7 +66,7 @@ namespace ScreenToGif.Util
         {
             //If the user still wants an encoder window, here's when it should be opened.
             if (UserSettings.All.DisplayEncoder)
-                Application.Current.Dispatcher?.BeginInvoke(new Action(() => Encoder.Start(preset.Scale)));
+                Application.Current.Dispatcher?.Invoke(() => Encoder.Start(preset.Scale));
 
             //Creates the Cancellation Token
             var cancellationTokenSource = new CancellationTokenSource();
@@ -120,7 +120,7 @@ namespace ScreenToGif.Util
             }
 
             //Application.Current.Dispatcher.Invoke(() => Refresh(taskId));
-            Application.Current.Dispatcher?.BeginInvoke(new Action(() => EncodingAdded(taskId)));
+            Application.Current.Dispatcher?.Invoke(() => EncodingAdded(taskId));
         }
 
         #region Encoding manipulation
@@ -136,7 +136,7 @@ namespace ScreenToGif.Util
             item.Text = text;
             item.IsIndeterminate = false;
 
-            Application.Current.Dispatcher.BeginInvoke(new Action(() => EncodingUpdated(item)));
+            Application.Current.Dispatcher.Invoke(() => EncodingUpdated(item));
         }
 
         internal static void Update(int id, int currentFrame)
@@ -148,7 +148,7 @@ namespace ScreenToGif.Util
 
             item.CurrentFrame = currentFrame;
             
-            Application.Current.Dispatcher.BeginInvoke(new Action(() => EncodingUpdated(item)));
+            Application.Current.Dispatcher.Invoke(() => EncodingUpdated(item));
         }
 
         internal static void Update(int id, int type, TimeSpan elapsed)
@@ -177,7 +177,7 @@ namespace ScreenToGif.Util
                     break;
             }
 
-            Application.Current.Dispatcher.BeginInvoke(new Action(() => EncodingUpdated(item)));
+            Application.Current.Dispatcher.Invoke(() => EncodingUpdated(item));
         }
 
         internal static void Update(int id, string text, bool isIndeterminate = false, bool findText = false)
@@ -190,7 +190,7 @@ namespace ScreenToGif.Util
             item.Text = !findText ? text : LocalizationHelper.Get(text);
             item.IsIndeterminate = isIndeterminate;
 
-            Application.Current.Dispatcher.BeginInvoke(new Action(() => EncodingUpdated(item)));
+            Application.Current.Dispatcher.Invoke(() => EncodingUpdated(item));
         }
 
         /// <summary>
@@ -239,7 +239,7 @@ namespace ScreenToGif.Util
                 }
             }
 
-            Application.Current.Dispatcher.BeginInvoke(new Action(() => EncodingUpdated(item, wasStatusUpdated)));
+            Application.Current.Dispatcher.Invoke(() => EncodingUpdated(item, wasStatusUpdated));
         }
 
         internal static void UpdateMultiple(int id, Status status, List<string> fileNames, bool isIndeterminate = false)
@@ -271,7 +271,7 @@ namespace ScreenToGif.Util
                 }
             }
             
-            Application.Current.Dispatcher.BeginInvoke(new Action(() => EncodingUpdated(item, wasStatusUpdated)));
+            Application.Current.Dispatcher.Invoke(() => EncodingUpdated(item, wasStatusUpdated));
         }
 
 
@@ -288,7 +288,7 @@ namespace ScreenToGif.Util
             item.DeletionLink = deleteLink;
             item.UploadTaskException = exception;
 
-            Application.Current.Dispatcher.BeginInvoke(new Action(() => EncodingUpdated(item)));
+            Application.Current.Dispatcher.Invoke(() => EncodingUpdated(item));
         }
 
         private static void SetCopy(int id, bool copied, Exception exception = null)
@@ -301,7 +301,7 @@ namespace ScreenToGif.Util
             item.CopiedToClipboard = copied;
             item.CopyTaskException = exception;
 
-            Application.Current.Dispatcher.BeginInvoke(new Action(() => EncodingUpdated(item)));
+            Application.Current.Dispatcher.Invoke(() => EncodingUpdated(item));
         }
 
         private static void SetCommand(int id, bool executed, string command, string output, Exception exception = null)
@@ -316,7 +316,7 @@ namespace ScreenToGif.Util
             item.CommandOutput = output;
             item.CommandTaskException = exception;
 
-            Application.Current.Dispatcher.BeginInvoke(new Action(() => EncodingUpdated(item)));
+            Application.Current.Dispatcher.Invoke(() => EncodingUpdated(item));
         }
 
 

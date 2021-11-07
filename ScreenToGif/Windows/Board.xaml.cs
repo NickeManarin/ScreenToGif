@@ -93,10 +93,6 @@ namespace ScreenToGif.Windows
 
         #region Discard Async
 
-        private delegate void DiscardFrames();
-
-        private DiscardFrames _discardFramesDel;
-
         private void Discard()
         {
             try
@@ -138,43 +134,6 @@ namespace ScreenToGif.Windows
                 Dispatcher.Invoke(() => Dialog.Ok("Discard Error", "Error while trying to discard the recording", ex.Message));
                 LogWriter.Log(ex, "Error while trying to Discard the Recording");
             }
-        }
-
-        private void DiscardCallback(IAsyncResult ar)
-        {
-            _discardFramesDel.EndInvoke(ar);
-
-            Dispatcher.Invoke(() =>
-            {
-                //Enables the controls that are disabled while recording;
-                FpsNumericUpDown.IsEnabled = true;
-                HeightIntegerBox.IsEnabled = true;
-                WidthIntegerBox.IsEnabled = true;
-                MainGrid.IsEnabled = true;
-
-                Cursor = Cursors.Arrow;
-                IsRecording = false;
-
-                DiscardButton.BeginStoryboard(FindResource("HideDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
-
-                //Removes the current drawings.
-                MainInkCanvas.Strokes.Clear();
-
-                //if (!Settings.Default.Snapshot)
-                //{
-                //Only display the Record text when not in snapshot mode. 
-                Title = LocalizationHelper.Get("S.Board.Title");
-                //}
-                //else
-                //{
-                //    Stage = Stage.Snapping;
-                //    EnableSnapshot_Executed(null, null);
-                //}
-
-                AutoFitButtons();
-            });
-
-            GC.Collect();
         }
 
         #endregion
@@ -384,7 +343,7 @@ namespace ScreenToGif.Windows
 
         #region Buttons
 
-        private void DiscardButton_Click(object sender, RoutedEventArgs e)
+        private async void DiscardButton_Click(object sender, RoutedEventArgs e)
         {
             if (UserSettings.All.NotifyRecordingDiscard && !Dialog.Ask(LocalizationHelper.Get("S.Recorder.Discard.Title"),
                 LocalizationHelper.Get("S.Recorder.Discard.Instruction"), LocalizationHelper.Get("S.Recorder.Discard.Message"), false))
@@ -398,8 +357,34 @@ namespace ScreenToGif.Windows
             MainGrid.IsEnabled = false;
             Cursor = Cursors.AppStarting;
 
-            _discardFramesDel = Discard;
-            _discardFramesDel.BeginInvoke(DiscardCallback, null);
+            await Task.Run(Discard);
+
+            //Enables the controls that are disabled while recording;
+            FpsNumericUpDown.IsEnabled = true;
+            HeightIntegerBox.IsEnabled = true;
+            WidthIntegerBox.IsEnabled = true;
+            MainGrid.IsEnabled = true;
+
+            Cursor = Cursors.Arrow;
+            IsRecording = false;
+
+            DiscardButton.BeginStoryboard(FindResource("HideDiscardStoryboard") as Storyboard, HandoffBehavior.Compose);
+
+            //Removes the current drawings.
+            MainInkCanvas.Strokes.Clear();
+
+            //if (!Settings.Default.Snapshot)
+            //{
+            //Only display the Record text when not in snapshot mode. 
+            Title = LocalizationHelper.Get("S.Board.Title");
+            //}
+            //else
+            //{
+            //    Stage = Stage.Snapping;
+            //    EnableSnapshot_Executed(null, null);
+            //}
+
+            AutoFitButtons();
         }
 
         private void StopButton_Click(object sender, RoutedEventArgs e)
@@ -423,11 +408,6 @@ namespace ScreenToGif.Windows
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
-        private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }

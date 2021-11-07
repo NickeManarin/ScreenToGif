@@ -61,14 +61,7 @@
 
                 <Label Grid.Row="0" Grid.Column="1" Content="{DynamicResource S.InsertFrames.CanvasSize}" VerticalAlignment="Center" Padding="2" Foreground="{DynamicResource Element.Foreground.Medium}"/>
 
-                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="CanvasSizeTextBlock" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}">
-                    <TextBlock.Text>
-                        <MultiBinding StringFormat="{}{0} × {1}">
-                            <Binding ElementName="LeftCanvas" Path="ActualWidth"/>
-                            <Binding ElementName="LeftCanvas" Path="ActualHeight"/>
-                        </MultiBinding>
-                    </TextBlock.Text>
-                </TextBlock>
+                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="CanvasSizeTextBlock" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}" Text="0 × 0"/>
 
                 <n:ExtendedButton Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" x:Name="ResetCanvasButton" Margin="10,0,0,0" TextWrapping="Wrap"
                                   Text="{DynamicResource S.InsertFrames.FitCanvas}" Icon="{StaticResource Vector.PictureFit}" ContentWidth="40" ContentHeight="40" 
@@ -134,7 +127,7 @@
                 <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource S.InsertFrames.ImageSize}" Padding="3,0" Foreground="{DynamicResource Element.Foreground}"/>
 
                 <TextBlock Grid.Row="1" Grid.Column="1" x:Name="LeftImageSizeTextBlock" VerticalAlignment="Center" HorizontalAlignment="Center"
-                           Margin="0,0,3,0" Foreground="{DynamicResource Element.Foreground}"/>
+                           Margin="0,0,3,0" Foreground="{DynamicResource Element.Foreground}" Text="0 × 0"/>
 
                 <Separator Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Width="1"/>
 
@@ -172,7 +165,7 @@
                 <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource S.InsertFrames.ImageSize}" Padding="3,0" Foreground="{DynamicResource Element.Foreground}"/>
 
                 <TextBlock Grid.Row="1" Grid.Column="1" x:Name="RightImageSizeTextBlock" VerticalAlignment="Center" HorizontalAlignment="Center"
-                           Margin="0,0,3,0" Foreground="{DynamicResource Element.Foreground}"/>
+                           Margin="0,0,3,0" Foreground="{DynamicResource Element.Foreground}" Text="0 × 0"/>
 
                 <Separator Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Width="1"/>
 

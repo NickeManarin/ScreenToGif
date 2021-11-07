@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 /*
     Adapted work from:
@@ -374,7 +374,7 @@ namespace ScreenToGif.Webcam.DirectShow
             public const int OAFALSE = 0;
 
             [DllImport("quartz.dll", CharSet = CharSet.Unicode, ExactSpelling = true, EntryPoint = "AMGetErrorTextW"), SuppressUnmanagedCodeSecurity]
-            public static extern int AMGetErrorText(int hr, StringBuilder buf, int max);
+            private static extern int AMGetErrorText(int hr, StringBuilder buf, int max);
         }
     }
 }

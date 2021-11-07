@@ -8,7 +8,6 @@ using System.Net;
 using System.Reflection;
 using System.Runtime.Serialization.Json;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Markup;
@@ -25,21 +24,22 @@ namespace ScreenToGif.Util
     public static class LocalizationHelper
     {
         public static string CurrentCulture { get; set; }
+
+        public static CultureInfo CurrentCultureInfo { get; set; }
         
         public static void SelectCulture(string culture)
         {
+            CurrentCultureInfo ??= CultureInfo.CurrentUICulture;
+
             #region Validation
 
-            //If none selected, fallback to english.
+                //If none selected, fallback to english.
             if (string.IsNullOrEmpty(culture))
                 culture = "en";
 
             if (culture.Equals("auto") || culture.Length < 2)
-            {
-                var ci = CultureInfo.InstalledUICulture;
-                culture = ci.Name;
-            }
-
+                culture = CurrentCultureInfo.Name;
+            
             #endregion
 
             //Copy all MergedDictionarys into a auxiliar list.
@@ -81,11 +81,14 @@ namespace ScreenToGif.Util
             //Then this language will be our current string table.
             Application.Current.Resources.MergedDictionaries.Remove(requestedResource);
             Application.Current.Resources.MergedDictionaries.Add(requestedResource);
+
             CurrentCulture = culture;
 
             //Inform the threads of the new culture.
-            Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
+            CultureInfo.CurrentCulture = new CultureInfo(culture);
+            CultureInfo.CurrentUICulture = CultureInfo.CurrentCulture;
+            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CurrentCulture;
+            CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.CurrentCulture;
 
             #region English Fallback of the Current Language
 
@@ -175,18 +178,17 @@ namespace ScreenToGif.Util
                     Application.Current.Resources.MergedDictionaries.Remove(rem);
 
                 //Load the resource from the file, not replacing the current resource, but putting right after it.
-                using (var fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))
-                {
-                    if (fs.Length == 0)
-                        throw new InvalidDataException("File is empty");
+                using var fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read);
 
-                    //Reads the ResourceDictionary file
-                    var dictionary = (ResourceDictionary)XamlReader.Load(fs);
-                    dictionary.Source = new Uri(Path.Combine(file));
+                if (fs.Length == 0)
+                    throw new InvalidDataException("File is empty");
 
-                    //Add in newly loaded Resource Dictionary.
-                    Application.Current.Resources.MergedDictionaries.Add(dictionary);
-                }
+                //Reads the ResourceDictionary file
+                var dictionary = (ResourceDictionary)XamlReader.Load(fs);
+                dictionary.Source = new Uri(Path.Combine(file));
+
+                //Add in newly loaded Resource Dictionary.
+                Application.Current.Resources.MergedDictionaries.Add(dictionary);
             }
             catch (WebException)
             {
@@ -212,28 +214,22 @@ namespace ScreenToGif.Util
 
             var res = (HttpWebResponse)req.GetResponse();
 
-            using (var resultStream = res.GetResponseStream())
-            {
-                if (resultStream == null)
-                    return null;
+            using var resultStream = res.GetResponseStream();
+            using var reader = new StreamReader(resultStream);
 
-                using (var reader = new StreamReader(resultStream))
-                {
-                    var result = reader.ReadToEnd();
-                    var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(result), new XmlDictionaryReaderQuotas());
-                    var release = XElement.Load(jsonReader);
+            var result = reader.ReadToEnd();
+            var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(result), new XmlDictionaryReaderQuotas());
+            var release = XElement.Load(jsonReader);
 
-                    //Gets the date of of the last commit that changed the translation file.
-                    var dateText = release.FirstNode.XPathSelectElement("commit")?.XPathSelectElement("committer")?.XPathSelectElement("date")?.Value;
+            //Gets the date of of the last commit that changed the translation file.
+            var dateText = release.FirstNode.XPathSelectElement("commit")?.XPathSelectElement("committer")?.XPathSelectElement("date")?.Value;
 
-                    //If was not possible to convert the time, keep using the current resource.
-                    if (!DateTime.TryParse(dateText, out DateTime modificationDate))
-                        return null;
+            //If was not possible to convert the time, keep using the current resource.
+            if (!DateTime.TryParse(dateText, out DateTime modificationDate))
+                return null;
 
-                    //If the current resource is newer then the available one, keep using the current.
-                    return modificationDate;
-                }
-            }
+            //If the current resource is newer then the available one, keep using the current.
+            return modificationDate;
         }
 
         /// <summary>
@@ -249,29 +245,23 @@ namespace ScreenToGif.Util
 
             var response = (HttpWebResponse)request.GetResponse();
 
-            using (var resultStream = response.GetResponseStream())
-            {
-                if (resultStream == null)
-                    return;
+            using var resultStream = response.GetResponseStream();
+            using var reader = new StreamReader(resultStream);
 
-                using (var reader = new StreamReader(resultStream))
-                {
-                    var result = reader.ReadToEnd();
-                    var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(result), new XmlDictionaryReaderQuotas());
-                    var release = XElement.Load(jsonReader);
+            var result = reader.ReadToEnd();
+            var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(result), new XmlDictionaryReaderQuotas());
+            var release = XElement.Load(jsonReader);
 
-                    //When creating a GET request with a direct path, the 'content' element is available as a base64 string.
-                    var contentBase64 = release.XPathSelectElement("content")?.Value;
+            //When creating a GET request with a direct path, the 'content' element is available as a base64 string.
+            var contentBase64 = release.XPathSelectElement("content")?.Value;
 
-                    if (string.IsNullOrWhiteSpace(contentBase64))
-                        return;
+            if (string.IsNullOrWhiteSpace(contentBase64))
+                return;
 
-                    if (File.Exists(file))
-                        File.Delete(file);
+            if (File.Exists(file))
+                File.Delete(file);
 
-                    File.WriteAllText(file, Encoding.UTF8.GetString(Convert.FromBase64String(contentBase64)).Replace("&#x0d;", "\r"));
-                }
-            }
+            File.WriteAllText(file, Encoding.UTF8.GetString(Convert.FromBase64String(contentBase64)).Replace("&#x0d;", "\r"));
         }
 
         public static void SaveDefaultResource(string path)
@@ -317,18 +307,17 @@ namespace ScreenToGif.Util
 
                 File.WriteAllText(destination, File.ReadAllText(path).Replace("&#x0d;", "\r"));
 
-                using (var fs = new FileStream(destination, FileMode.Open, FileAccess.Read, FileShare.Read))
-                {
-                    if (fs.Length == 0)
-                        throw new InvalidDataException("File is empty");
+                using var fs = new FileStream(destination, FileMode.Open, FileAccess.Read, FileShare.Read);
 
-                    //Reads the ResourceDictionary file
-                    var dictionary = (ResourceDictionary)XamlReader.Load(fs);
-                    dictionary.Source = new Uri(destination);
+                if (fs.Length == 0)
+                    throw new InvalidDataException("File is empty");
 
-                    //Add in newly loaded Resource Dictionary.
-                    Application.Current.Resources.MergedDictionaries.Add(dictionary);
-                }
+                //Reads the ResourceDictionary file
+                var dictionary = (ResourceDictionary)XamlReader.Load(fs);
+                dictionary.Source = new Uri(destination);
+
+                //Add in newly loaded Resource Dictionary.
+                Application.Current.Resources.MergedDictionaries.Add(dictionary);
             }
             catch (Exception ex)
             {
@@ -411,8 +400,8 @@ namespace ScreenToGif.Util
 
                 var settings = new XmlWriterSettings { Indent = true };
 
-                using (var writer = XmlWriter.Create(path, settings))
-                    System.Windows.Markup.XamlWriter.Save(Application.Current.Resources.MergedDictionaries[selectedIndex], writer);
+                using var writer = XmlWriter.Create(path, settings);
+                XamlWriter.Save(Application.Current.Resources.MergedDictionaries[selectedIndex], writer);
             }
             catch (Exception ex)
             {
@@ -467,7 +456,7 @@ namespace ScreenToGif.Util
         /// <returns>A string resource, usually a localized string.</returns>
         public static string GetWithFormat(string key, params object[] values)
         {
-            return string.Format(Thread.CurrentThread.CurrentUICulture, Application.Current.TryFindResource(key) as string ?? "", values);
+            return string.Format(CultureInfo.CurrentUICulture, Application.Current.TryFindResource(key) as string ?? "", values);
         }
 
         /// <summary>
@@ -494,7 +483,7 @@ namespace ScreenToGif.Util
         /// <returns>A string resource, usually a localized string.</returns>
         public static string GetWithFormat(string key, string defaultValue, params object[] values)
         {
-            return string.Format(Thread.CurrentThread.CurrentUICulture, Application.Current.TryFindResource(key) as string ?? defaultValue, values);
+            return string.Format(CultureInfo.CurrentUICulture, Application.Current.TryFindResource(key) as string ?? defaultValue, values);
         }
 
         /// <summary>

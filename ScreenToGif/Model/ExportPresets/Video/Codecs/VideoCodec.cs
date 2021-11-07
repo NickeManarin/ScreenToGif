@@ -1,39 +1,39 @@
-﻿using System.Collections.Generic;
-using System.Management.Instrumentation;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
 using ScreenToGif.Util;
 
 namespace ScreenToGif.Model.ExportPresets.Video.Codecs
 {
     public class VideoCodec : BindableBase
     {
-        [IgnoreMember]
+        [IgnoreDataMember]
         public VideoCodecs Type { get; internal set; }
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         public string Name { get; internal set; }
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         public string Command { get; internal set; }
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         public string Parameters { get; internal set; }
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         public bool IsHardwareAccelerated { get; internal set; }
         
-        [IgnoreMember]
+        [IgnoreDataMember]
         public bool CanSetCrf { get; internal set; }
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         public int MinimumCrf { get; internal set; }
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         public int MaximumCrf { get; internal set; }
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         public List<EnumItem<VideoCodecPresets>> CodecPresets { get; internal set; }
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         public List<EnumItem<VideoPixelFormats>> PixelFormats { get; internal set; }
     }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -356,7 +357,7 @@ namespace ScreenToGif.Windows.Other
             RightImageSizeTextBlock.Text = $"{RightImage.ActualWidth * _rightScaleDiff * _rightScale} × {RightImage.ActualHeight * _rightScaleDiff * _rightScale} • {Math.Round(_rightDpi, 0)} {LocalizationHelper.Get("S.Resize.Dpi")}";
         }
 
-        private void OkButton_Click(object sender, RoutedEventArgs e)
+        private async void OkButton_Click(object sender, RoutedEventArgs e)
         {
             _isRunning = true;
 
@@ -370,8 +371,34 @@ namespace ScreenToGif.Windows.Other
 
             #endregion
 
-            _insertDel = InsertFrames;
-            _insertDel.BeginInvoke(AfterRadioButton.IsChecked == true, this.Scale(), InsertCallback, null);
+            var after = AfterRadioButton.IsChecked == true;
+            var scale = this.Scale();
+            var result = await Task.Run(() => InsertFrames(after, scale));
+
+            if (result)
+            {
+                GC.Collect();
+
+                Dispatcher.Invoke(() => DialogResult = true);
+                return;
+            }
+
+            _isCancelled = false;
+            GC.Collect();
+
+            #region Update UI
+
+            Cursor = Cursors.Arrow;
+
+            LeftScrollViewer.IsEnabled = true;
+            RightScrollViewer.IsEnabled = true;
+            OkButton.IsEnabled = true;
+
+            DialogResult = false;
+
+            HideProgress();
+
+            #endregion
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -392,10 +419,6 @@ namespace ScreenToGif.Windows.Other
         #endregion
 
         #region Async Insert
-
-        private delegate bool InsertDelegate(bool after, double screenScale);
-
-        private InsertDelegate _insertDel;
 
         private bool InsertFrames(bool after, double screenScale)
         {
@@ -582,39 +605,6 @@ namespace ScreenToGif.Windows.Other
 
                 return false;
             }
-        }
-
-        private void InsertCallback(IAsyncResult r)
-        {
-            var result = _insertDel.EndInvoke(r);
-
-            if (result)
-            {
-                GC.Collect();
-
-                Dispatcher.Invoke(() => DialogResult = true);
-                return;
-            }
-
-            _isCancelled = false;
-            GC.Collect();
-
-            #region Update UI
-
-            Dispatcher.Invoke(() =>
-            {
-                Cursor = Cursors.Arrow;
-
-                LeftScrollViewer.IsEnabled = true;
-                RightScrollViewer.IsEnabled = true;
-                OkButton.IsEnabled = true;
-
-                DialogResult = false;
-            });
-
-            HideProgress();
-
-            #endregion
         }
 
         #endregion

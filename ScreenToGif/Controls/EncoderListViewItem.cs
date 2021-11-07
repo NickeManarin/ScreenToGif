@@ -611,7 +611,7 @@ namespace ScreenToGif.Controls
                         if (string.IsNullOrWhiteSpace(UploadLink))
                             return;
 
-                        Process.Start(Keyboard.Modifiers != ModifierKeys.Control || string.IsNullOrWhiteSpace(DeletionLink) ? UploadLink : DeletionLink);
+                        ProcessHelper.StartWithShell(Keyboard.Modifiers != ModifierKeys.Control || string.IsNullOrWhiteSpace(DeletionLink) ? UploadLink : DeletionLink);
                     }
                     catch (Exception e)
                     {
@@ -638,7 +638,7 @@ namespace ScreenToGif.Controls
                     try
                     {
                         if (!string.IsNullOrWhiteSpace(OutputFilename) && File.Exists(OutputFilename))
-                            Process.Start(OutputFilename);
+                            ProcessHelper.StartWithShell(OutputFilename);
                     }
                     catch (Exception ex)
                     {

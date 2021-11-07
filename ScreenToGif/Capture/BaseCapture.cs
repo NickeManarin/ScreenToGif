@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Threading.Tasks;
 using System.Windows;
@@ -62,13 +62,13 @@ namespace ScreenToGif.Capture
         public ProjectInfo Project { get; set; }
         public Action<Exception> OnError { get; set; }
 
-        protected BlockingCollection<FrameInfo> BlockingCollection { get; private set; } = new BlockingCollection<FrameInfo>();
+        protected BlockingCollection<FrameInfo> BlockingCollection { get; private set; } = new();
 
         #endregion
 
         ~BaseCapture()
         {
-            Dispose().Wait();
+            Dispose();
         }
 
         public virtual void Start(int delay, int left, int top, int width, int height, double scale, ProjectInfo project)
@@ -90,6 +90,8 @@ namespace ScreenToGif.Capture
             Project.Height = height;
             Project.Dpi = 96 * scale;
 
+            BlockingCollection ??= new BlockingCollection<FrameInfo>();
+
             //Spin up a Task to consume the BlockingCollection.
             _task = Task.Factory.StartNew(() =>
             {
@@ -104,7 +106,7 @@ namespace ScreenToGif.Capture
                 }
                 catch (Exception e)
                 {
-                    Application.Current.Dispatcher.BeginInvoke(new Action(() => OnError?.Invoke(e)));
+                    Application.Current.Dispatcher.Invoke(() => OnError?.Invoke(e));
                 }
             });
 
@@ -160,10 +162,29 @@ namespace ScreenToGif.Capture
             WasStarted = false;
         }
 
-        public virtual async Task Dispose()
+
+        private async Task DisposeInternal()
         {
             if (WasStarted)
                 await Stop();
+
+            _task?.Dispose();
+            _task = null;
+
+            BlockingCollection?.Dispose();
+            BlockingCollection = null;
+        }
+
+        public virtual async ValueTask DisposeAsync()
+        {
+            await DisposeInternal();
+            GC.SuppressFinalize(this);
+        }
+        
+        public void Dispose()
+        {
+            DisposeInternal().Wait();
+            GC.SuppressFinalize(this);
         }
     }
 }

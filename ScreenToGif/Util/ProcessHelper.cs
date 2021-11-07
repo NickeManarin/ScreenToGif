@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -7,6 +7,17 @@ namespace ScreenToGif.Util
 {
     internal static class ProcessHelper
     {
+        internal static void StartWithShell(string filename)
+        {
+            var info = new ProcessStartInfo
+            {
+                FileName = filename,
+                UseShellExecute = true
+            };
+
+            Process.Start(info);
+        }
+
         internal static async Task<bool> RestartAsAdmin(string arguments = "", bool waitToClose = false)
         {
             try

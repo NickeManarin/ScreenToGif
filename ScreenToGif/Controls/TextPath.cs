@@ -1,6 +1,6 @@
 using System;
 using System.ComponentModel;
-using System.Threading;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
@@ -145,7 +145,7 @@ namespace ScreenToGif.Controls
 
             try
             {
-                _textGeometry = new FormattedText(Text ?? "", Thread.CurrentThread.CurrentUICulture, FlowDirection.LeftToRight,
+                _textGeometry = new FormattedText(Text ?? "", CultureInfo.CurrentUICulture, FlowDirection.LeftToRight,
                     new Typeface(FontFamily, FontStyle, FontWeight, FontStretch), FontSize, Brushes.Black, VisualTreeHelper.GetDpi(this).PixelsPerDip).BuildGeometry(Origin);
             }
             catch (Exception ex)
@@ -154,7 +154,7 @@ namespace ScreenToGif.Controls
 
                 try
                 {
-                    _textGeometry = new FormattedText(Text ?? "", Thread.CurrentThread.CurrentUICulture, FlowDirection.LeftToRight,
+                    _textGeometry = new FormattedText(Text ?? "", CultureInfo.CurrentUICulture, FlowDirection.LeftToRight,
                         new Typeface(new FontFamily("Arial"), FontStyle, FontWeight, FontStretch), FontSize, Brushes.Black, VisualTreeHelper.GetDpi(this).PixelsPerDip).BuildGeometry(Origin);
                 }
                 catch (Exception ex2)

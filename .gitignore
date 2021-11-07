@@ -19,3 +19,8 @@ ScreenToGif/Util/Secret.cs
 /packages
 obj
 bin
+/ScreenToGif.backup
+/log.txt
+/ScreenToGif/Properties/PublishProfiles/Publish as x86.pubxml.user
+/ScreenToGif/Properties/PublishProfiles/Publish as x64.pubxml.user
+/ScreenToGif/Properties/PublishProfiles/Publish as ARM.pubxml.user

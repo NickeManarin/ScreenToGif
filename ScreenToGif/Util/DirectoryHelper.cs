@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Security.AccessControl;
@@ -36,7 +36,9 @@ namespace ScreenToGif.Util
             try
             {
                 var principal = new WindowsPrincipal(WindowsIdentity.GetCurrent());
-                var rules = Directory.GetAccessControl(directoryPath).GetAccessRules(true, true, typeof(SecurityIdentifier)).OfType<FileSystemAccessRule>().OrderBy(o => o.AccessControlType == AccessControlType.Deny);
+                var rules = new DirectorySecurity(directoryPath, AccessControlSections.Access | AccessControlSections.Owner | AccessControlSections.Group)
+                    .GetAccessRules(true, true, typeof(SecurityIdentifier)).OfType<FileSystemAccessRule>().OrderBy(o => o.AccessControlType == AccessControlType.Deny);
+                //var rules = Directory.GetAccessControl(directoryPath).GetAccessRules(true, true, typeof(SecurityIdentifier)).OfType<FileSystemAccessRule>().OrderBy(o => o.AccessControlType == AccessControlType.Deny);
 
                 foreach (var rule in rules)
                 {

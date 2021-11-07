@@ -198,8 +198,7 @@ namespace ScreenToGif.Windows.Other
 
         private void CapturePlayer_Changed(object sender, EventArgs e)
         {
-            //ImportAndSeek();
-            Dispatcher?.BeginInvoke(new Action(ImportAndSeek));
+            Dispatcher?.Invoke(ImportAndSeek);
         }
 
         private async void OkButton_Click(object sender, RoutedEventArgs e)
@@ -776,13 +775,13 @@ namespace ScreenToGif.Windows.Other
             {
                 //Seek to next position.
                 //_lowerPlayer.Position = _positions.Dequeue();
-                Dispatcher?.BeginInvoke(new Action(() =>
+                Dispatcher?.Invoke(() =>
                 {
                     //_lowerPlayer.Changed -= CapturePlayer_Changed;
                     //_lowerPlayer.Position = TimeSpan.Zero;
                     //_lowerPlayer.Changed += CapturePlayer_Changed;
                     _lowerPlayer.Position = _positions.Dequeue();
-                }));
+                });
 
                 UpdateProgressBar(_positions.Count);
                 return;
@@ -828,8 +827,6 @@ namespace ScreenToGif.Windows.Other
                 _process = new Process();
                 _process.OutputDataReceived += (sender, e) =>
                 {
-                    Debug.WriteLine(e.Data);
-
                     if (string.IsNullOrEmpty(e.Data))
                         return;
 
@@ -838,13 +835,12 @@ namespace ScreenToGif.Windows.Other
                     switch (parsed[0])
                     {
                         case "frame":
-                            Dispatcher?.InvokeAsync(() => { CaptureProgressBar.Value = Convert.ToDouble(parsed[1]); });
+                            Dispatcher?.Invoke(() => { CaptureProgressBar.Value = Convert.ToDouble(parsed[1]); });
                             break;
 
                         case "progress":
                             if (parsed[1] == "end")
                                 GetFiles(folder);
-
                             break;
                     }
                 };
@@ -859,7 +855,7 @@ namespace ScreenToGif.Windows.Other
                 _process.Start();
                 _process.BeginOutputReadLine();
 
-                await Task.Factory.StartNew(() => _process.WaitForExit());
+                await _process.WaitForExitAsync();
             }
             catch (Exception e)
             {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.Windows.Controls;
 using ScreenToGif.Util;
@@ -16,7 +16,7 @@ namespace ScreenToGif.UserControls
         {
             try
             {
-                Process.Start(e.Uri.AbsoluteUri);
+                ProcessHelper.StartWithShell(e.Uri.AbsoluteUri);
             }
             catch (Exception ex)
             {

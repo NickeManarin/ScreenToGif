@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Documents;
@@ -26,7 +26,7 @@ namespace ScreenToGif.Extensions
             {
                 try
                 {
-                    Process.Start(args.Uri.AbsoluteUri);
+                    ProcessHelper.StartWithShell(args.Uri.AbsoluteUri);
                 }
                 catch (Exception e)
                 {

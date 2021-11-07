@@ -9,7 +9,6 @@ using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 using ScreenToGif.Settings;
 
 namespace ScreenToGif.Util
@@ -42,7 +41,7 @@ namespace ScreenToGif.Util
             if (args == null)
                 return url;
 
-            var suffix = args.Select(s => s.Key + "=" + HttpUtility.UrlEncode(s.Value)).Aggregate((p, n) => p + "&" + n);
+            var suffix = args.Select(s => s.Key + "=" + WebUtility.UrlEncode(s.Value)).Aggregate((p, n) => p + "&" + n);
 
             return url + (string.IsNullOrWhiteSpace(suffix) ? "" : "?" + suffix);
         }

@@ -1,5 +1,4 @@
 using System.ComponentModel;
-using System.Management.Instrumentation;
 using System.Runtime.Serialization;
 using System.Windows;
 using System.Windows.Documents;
@@ -95,7 +94,7 @@ namespace ScreenToGif.Model.UploadPresets.History
             set => SetProperty(ref _gifSize, value);
         }
 
-        [IgnoreMember]
+        [IgnoreDataMember]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public override FlowDocument Content
         {

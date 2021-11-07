@@ -453,7 +453,7 @@ namespace ScreenToGif.Windows
 
             //Clean all capture resources.
             if (Capture != null)
-                await Capture.Dispose();
+                await Capture.DisposeAsync();
 
             GC.Collect();
         }
@@ -1499,7 +1499,7 @@ namespace ScreenToGif.Windows
         {
             if (isNew && Capture != null)
             {
-                await Capture.Dispose();
+                await Capture.DisposeAsync();
                 Capture = null;
             }
 
