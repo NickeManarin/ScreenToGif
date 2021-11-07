@@ -1476,6 +1476,9 @@ namespace ScreenToGif.Windows
 
             if (FrameListView.SelectedIndex == -1 || FrameListView.SelectedIndex == 0)
             {
+                if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+                    return;
+
                 FrameListView.SelectedIndex = _viewModel.Frames.Count - 1;
                 return;
             }
@@ -1497,6 +1500,9 @@ namespace ScreenToGif.Windows
 
             if (FrameListView.SelectedIndex == -1 || FrameListView.SelectedIndex == _viewModel.Frames.Count - 1)
             {
+                if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+                    return;
+
                 FrameListView.SelectedIndex = 0;
                 return;
             }
