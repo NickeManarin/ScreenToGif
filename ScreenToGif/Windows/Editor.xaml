@@ -34,6 +34,7 @@
         <c:BoolAndToVisibility x:Key="BoolAndToVisibility"/>
         <c:IntToBool x:Key="IntToBool"/>
         <c:BoolAndOrOrToVisibility x:Key="BoolAndOrOrToVisibility"/>
+        <c:DoubleToNotNanDouble x:Key="DoubleToNotNanDouble"/>
 
         <Storyboard x:Key="ShowPanelStoryboard">
             <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ActionGrid" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >
@@ -1335,8 +1336,8 @@
                     <Grid x:Name="BorderPreviewGrid" VerticalAlignment="Center" HorizontalAlignment="Center"
                           Visibility="{Binding ElementName=BorderGrid, Path=Visibility}" Background="White">
                         <Border x:Name="BorderBehindOverlayBorder" VerticalAlignment="Center" HorizontalAlignment="Center"
-                                MinWidth="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0}" 
-                                MinHeight="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0}"
+                                MinWidth="{Binding ElementName=CaptionOverlayGrid, Path=Width, FallbackValue=0, Converter={StaticResource DoubleToNotNanDouble}}" 
+                                MinHeight="{Binding ElementName=CaptionOverlayGrid, Path=Height, FallbackValue=0, Converter={StaticResource DoubleToNotNanDouble}}"
                                 BorderBrush="{Binding ElementName=BorderColorBox, Path=SelectedBrush}">
                             <Border.BorderThickness>
                                 <MultiBinding Converter="{StaticResource DoubleToThicknessConverter}" ConverterParameter="-">
