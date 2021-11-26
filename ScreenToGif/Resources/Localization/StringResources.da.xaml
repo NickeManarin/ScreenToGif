@@ -8,7 +8,7 @@
     <!--Special texts like {0}, are place holders for dynamic values, such as numbers.-->
     
     <!--General-->
-    <s:String x:Key="S.Ok">Ok</s:String>
+    <s:String x:Key="S.Ok">OK</s:String>
     <s:String x:Key="S.Back">Tilbage</s:String>
     <s:String x:Key="S.Cancel">Annuller</s:String>
     <s:String x:Key="S.Yes">Ja</s:String>
@@ -273,11 +273,11 @@
     <s:String x:Key="S.Options.Recorder.Frequency.Interaction">Brugerbestemt</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Interaction.Info">Rammer optages når du klikker eller taster.</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Second">Pr. sekund</s:String>
-    <s:String x:Key="S.Options.Recorder.Frequency.Second.Info">Rammer optages pr. sekund.&#x0d;Rammeraten angives i optagebonben.</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Second.Info">Rammer optages pr. sekund.&#x0d;Rammeraten angives i optageboksen.</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Minute">Pr. minut</s:String>
-    <s:String x:Key="S.Options.Recorder.Frequency.Minute.Info">Rammer optages pr. minut (timelapse).&#x0d;Rammeraten angives i optagebonben.</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Minute.Info">Rammer optages pr. minut (timelapse).&#x0d;Rammeraten angives i optageboksen.</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Hour">Pr. time</s:String>
-    <s:String x:Key="S.Options.Recorder.Frequency.Hour.Info">Rammer optages pr. time (timelapse).&#x0d;Rammeraten angives i optagebonben.</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Hour.Info">Rammer optages pr. time (timelapse).&#x0d;Rammeraten angives i optageboksen.</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Playback">Afspilning:</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Playback.Info">(De enkelte rammers varighed (i ms) ved afspilning</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Interval">Rammer optages hvert {0}.</s:String>
@@ -504,7 +504,7 @@
     <s:String x:Key="S.Options.Upload.Preset.Custom">Tilpas</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Enable">Aktivér profilen.</s:String>
     
-    <s:String x:Key="S.Options.Upload.Preset.Details">Detaijer</s:String>
+    <s:String x:Key="S.Options.Upload.Preset.Details">Detaljer</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Name">Navn:</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Description">Beskriv:</s:String>
     <s:String x:Key="S.Options.Upload.Preset.Mode">Upload:</s:String>
@@ -1464,7 +1464,7 @@
     <!--Editor • Save as-->
     <s:String x:Key="S.SaveAs.Type">Filtype</s:String>
     <s:String x:Key="S.SaveAs.Type.Format">Resultatets filtype.</s:String>
-    <s:String x:Key="S.SaveAs.Type.Preset">Eksportindstilling med alle de aktuelt viste indstillinger.&#x0d;Tilpas dine eksportindstillinger med ikonerne heruder.</s:String>
+    <s:String x:Key="S.SaveAs.Type.Preset">Eksportindstilling med alle de aktuelt viste indstillinger.&#x0d;Tilpas dine eksportindstillinger med ikonerne herunder.</s:String>
     <s:String x:Key="S.SaveAs.Type.Animated">Animeret billede</s:String>
     <s:String x:Key="S.SaveAs.Type.Video">Video</s:String>
     <s:String x:Key="S.SaveAs.Type.Frames">Rammer</s:String>
