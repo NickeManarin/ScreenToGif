@@ -4,20 +4,13 @@ This is the current project of ScreenToGif.
 
 _VS 2019 and .Net 4.8 or newer required._
 
-## What's new? (Version 2.34)
+## What's new? (Version 2.35)
 
-• Added Hebrew localization.  
+• Migration to .NET 6 and project restructuring.  
 
 ### Fixed:
 
-♦ Added support for the new distributition system for v2.35 and newer releases. It's important to download this version if you want to properly update to newer versions afterwards.
-♦ Numerical fields will now only react to the scroll if they have focus.
-♦ The window selection mode could crash because of a wrongly sized window.
-♦ When in frame selection mode, the frame list was allowing the loop between start and end selection to happen.  
-♦ Disabled Gifski on x86, since it's unsupported (@MaledongGit).  
-♦ Added progress info when processing frames at start and made it possible to cancel during a task (@pawlos).  
-♦ The option to cancel a frame altering process was not appearing if the editor already loaded something before.
-♦ The text displayed at startup when an update was available was not being updated when the application language had changed.    
+♦ 
 
 ### Known Bugs:
   

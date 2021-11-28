@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:n="clr-namespace:ScreenToGif.Controls"
-             xmlns:u="clr-namespace:ScreenToGif.Util"
+             xmlns:e="clr-namespace:ScreenToGif.Domain.Enums;assembly=ScreenToGif.Domain"
              mc:Ignorable="d" d:DesignHeight="250" d:DesignWidth="300"
              DataContext="{x:Null}">
 
@@ -95,8 +95,8 @@
                                  Value="{Binding WidthInPercent, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Visibility="{Binding DisplayInPercents, FallbackValue={x:Static Visibility.Collapsed}}"/>
 
                 <ComboBox Grid.Row="0" Grid.Column="2" Margin="0,3,5,3" SelectedValuePath="Tag" MinWidth="80" SelectedValue="{Binding SizeUnit}">
-                    <ComboBoxItem Tag="{x:Static u:SizeUnits.Pixels}" Content="{DynamicResource S.Resize.Pixels}"/>
-                    <ComboBoxItem Tag="{x:Static u:SizeUnits.Percent}" Content="{DynamicResource S.Resize.Percent}"/>
+                    <ComboBoxItem Tag="{x:Static e:SizeUnits.Pixels}" Content="{DynamicResource S.Resize.Pixels}"/>
+                    <ComboBoxItem Tag="{x:Static e:SizeUnits.Percent}" Content="{DynamicResource S.Resize.Percent}"/>
                 </ComboBox>
 
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.ImportVideo.Height}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
@@ -107,8 +107,8 @@
                                  Visibility="{Binding DisplayInPercents, FallbackValue={x:Static Visibility.Collapsed}}"/>
 
                 <ComboBox Grid.Row="1" Grid.Column="2" Margin="0,3,5,3" SelectedValuePath="Tag" MinWidth="80" SelectedValue="{Binding SizeUnit}">
-                    <ComboBoxItem Tag="{x:Static u:SizeUnits.Pixels}" Content="{DynamicResource S.Resize.Pixels}"/>
-                    <ComboBoxItem Tag="{x:Static u:SizeUnits.Percent}" Content="{DynamicResource S.Resize.Percent}"/>
+                    <ComboBoxItem Tag="{x:Static e:SizeUnits.Pixels}" Content="{DynamicResource S.Resize.Pixels}"/>
+                    <ComboBoxItem Tag="{x:Static e:SizeUnits.Percent}" Content="{DynamicResource S.Resize.Percent}"/>
                 </ComboBox>
 
                 <n:ExtendedCheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" x:Name="KeepAspectCheckBox" Text="{DynamicResource S.Resize.KeepAspect}"

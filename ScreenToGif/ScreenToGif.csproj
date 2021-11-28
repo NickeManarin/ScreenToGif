@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <OutputType>WinExe</OutputType>
     <ExpressionBlendVersion>12.0.51020.0</ExpressionBlendVersion>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -15,10 +15,9 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationVersion>2.35.0.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
     <UseWindowsForms>True</UseWindowsForms>
     <UseWPF>true</UseWPF>
@@ -111,22 +110,42 @@
     <Copy SourceFiles="@(Win32Binaries)" DestinationFolder="$(TargetUWP)" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>
-      if exist "$(DevEnvDir)..\..\VC\Auxiliary\Build\vsvars32.bat" (
-      call "$(DevEnvDir)..\..\VC\Auxiliary\Build\vsvars32.bat"
-      editbin /largeaddressaware "$(TargetPath)"
-      )
-    </PostBuildEvent>
+    <PostBuildEvent>if exist "$(DevEnvDir)..\..\VC\Auxiliary\Build\vsvars32.bat" (
+call "$(DevEnvDir)..\..\VC\Auxiliary\Build\vsvars32.bat"
+editbin /largeaddressaware "$(TargetPath)"
+)    </PostBuildEvent>
     <MinimumPlatformVersion>7.0</MinimumPlatformVersion>
     <Nullable>disable</Nullable>
     <DebugType>embedded</DebugType>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <Company>Nicke Manarin</Company>
+    <Authors>Nicke Manarin</Authors>
+    <Version>2.35.0</Version>
+    <Copyright>Copyright© Nicke Manarin 2021</Copyright>
+    <PackageProjectUrl>https://www.screentogif.com</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/nickemanarin/screentogif</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>gif; recorder; editor; screen-recorder; gif-editor</PackageTags>
+    <PackageLicenseExpression>MS-PL</PackageLicenseExpression>
+    <Description>Screen, webcam and sketchboard recorder, with integrated editor!</Description>
+    <SignAssembly>False</SignAssembly>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <PlatformTarget>ARM64</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ScreenToGif.Native\ScreenToGif.Native.csproj" />
+    <ProjectReference Include="..\ScreenToGif.ViewModel\ScreenToGif.ViewModel.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="app.manifest">

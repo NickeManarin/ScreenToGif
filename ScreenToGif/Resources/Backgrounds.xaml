@@ -1,8 +1,7 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
-                    xmlns:u="clr-namespace:ScreenToGif.Util"
-                    xmlns:t="clr-namespace:ScreenToGif.Settings">
+                    xmlns:t="clr-namespace:ScreenToGif.Util.Settings;assembly=ScreenToGif.Util"
+                    xmlns:c="clr-namespace:ScreenToGif.Util.Converters;assembly=ScreenToGif.Util">
 
     <c:ColorToBrush x:Key="ColorToBrush"/>
 

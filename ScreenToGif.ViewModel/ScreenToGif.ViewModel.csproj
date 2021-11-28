@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ScreenToGif.Model\ScreenToGif.Domain.csproj" />
+    <ProjectReference Include="..\ScreenToGif.Util\ScreenToGif.Util.csproj" />
+  </ItemGroup>
+
+</Project>

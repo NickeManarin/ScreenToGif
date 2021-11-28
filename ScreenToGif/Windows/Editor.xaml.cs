@@ -23,7 +23,6 @@ using System.Windows.Threading;
 using Microsoft.Win32;
 using ScreenToGif.Controls;
 using ScreenToGif.ImageUtil;
-using ScreenToGif.ImageUtil.Gif.Decoder;
 using ScreenToGif.Model;
 using ScreenToGif.Util;
 using ScreenToGif.Windows.Other;
@@ -40,18 +39,20 @@ using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 using Size = System.Windows.Size;
 using System.Windows.Data;
 using System.Windows.Media.Effects;
-using ScreenToGif.ImageUtil.Apng;
-using ScreenToGif.Interfaces;
-using ScreenToGif.Model.ExportPresets;
-using ScreenToGif.Model.ExportPresets.Image;
-using ScreenToGif.Model.ExportPresets.Other;
-using ScreenToGif.Native;
-using ScreenToGif.Settings;
+using ScreenToGif.Domain.Enums;
+using ScreenToGif.Domain.Interfaces;
 using ScreenToGif.UserControls;
 using ScreenToGif.ViewModel;
 using ScreenToGif.ViewModel.Tasks;
-using Monitor = ScreenToGif.Native.Monitor;
 using VideoSource = ScreenToGif.Windows.Other.VideoSource;
+using ScreenToGif.Native.Helpers;
+using ScreenToGif.Util.Codification.Apng;
+using ScreenToGif.Util.Codification.Gif.Decoder;
+using ScreenToGif.Util.Extensions;
+using ScreenToGif.Util.Settings;
+using ScreenToGif.ViewModel.ExportPresets;
+using ScreenToGif.ViewModel.ExportPresets.Image;
+using ScreenToGif.ViewModel.ExportPresets.Other;
 
 namespace ScreenToGif.Windows
 {
@@ -211,12 +212,7 @@ namespace ScreenToGif.Windows
         private Action<object, RoutedEventArgs> _applyAction = null;
 
         private bool _abortLoading;
-
-        /// <summary>
-        /// True if the window chrome was exended into the application area.
-        /// </summary>
-        private bool _chromeWasExtended = false;
-
+        
         /// <summary>
         /// Lock used to prevent firing multiple times (at the same time) both the Activated/Deactivated events.
         /// </summary>
@@ -287,23 +283,6 @@ namespace ScreenToGif.Windows
         {
             lock (ActivateLock)
             {
-                //Debug.WriteLine("Activated");
-
-                if (UserSettings.All.EditorExtendChrome)
-                {
-                    //Only extends the title bar again when needed.
-                    if (!_chromeWasExtended)
-                    {
-                        Glass.ExtendGlassFrame(this, new Thickness(0, 126, 0, 0));
-                        _chromeWasExtended = true;
-                    }
-                }
-                else
-                {
-                    Glass.RetractGlassFrame(this);
-                    _chromeWasExtended = false;
-                }
-
                 RibbonTabControl.UpdateVisual();
 
                 //Returns the preview if was playing before the deactivation of the window.
@@ -1335,8 +1314,8 @@ namespace ScreenToGif.Windows
             if (height < 575)
                 height = 575;
 
-            var screen = Monitor.AllMonitorsScaled(scale).FirstOrDefault(x => x.Bounds.Contains(new Point(Left, Top))) ??
-                         Monitor.AllMonitorsScaled(scale).FirstOrDefault(x => x.IsPrimary);
+            var screen = MonitorHelper.AllMonitorsScaled(scale).FirstOrDefault(x => x.Bounds.Contains(new Point(Left, Top))) ??
+                         MonitorHelper.AllMonitorsScaled(scale).FirstOrDefault(x => x.IsPrimary);
 
             if (screen != null)
             {
@@ -1852,7 +1831,7 @@ namespace ScreenToGif.Windows
 
             Cursor = Cursors.AppStarting;
 
-            await Task.Run(() => DelayAsync(DelayViewModel.FromSettings(DelayUpdateType.Override), false, false));
+            await Task.Run(() => DelayAsync(DelayViewModel.FromSettings(DelayUpdateModes.Override), false, false));
 
             Cursor = Cursors.Arrow;
 
@@ -1887,7 +1866,7 @@ namespace ScreenToGif.Windows
 
             Cursor = Cursors.AppStarting;
 
-            await Task.Run(() => DelayAsync(DelayViewModel.FromSettings(DelayUpdateType.IncreaseDecrease), false, false));
+            await Task.Run(() => DelayAsync(DelayViewModel.FromSettings(DelayUpdateModes.IncreaseDecrease), false, false));
 
             Cursor = Cursors.Arrow;
 
@@ -1921,7 +1900,7 @@ namespace ScreenToGif.Windows
 
             Cursor = Cursors.AppStarting;
 
-            await Task.Run(() => DelayAsync(DelayViewModel.FromSettings(DelayUpdateType.Scale), false, false));
+            await Task.Run(() => DelayAsync(DelayViewModel.FromSettings(DelayUpdateModes.Scale), false, false));
 
             Cursor = Cursors.Arrow;
 
@@ -2289,7 +2268,7 @@ namespace ScreenToGif.Windows
             ActionStack.SaveState(ActionStack.EditAction.Properties, Project.Frames, Util.Other.ListOfIndexes(0, Project.Frames.Count));
 
             for (var i = 0; i < keyStrokes.InternalList.Count; i++)
-                Project.Frames[i].KeyList = new List<SimpleKeyGesture>(keyStrokes.InternalList[i].KeyList);
+                Project.Frames[i].KeyList = new List<IKeyGesture>(keyStrokes.InternalList[i].KeyList);
         }
 
         private async void ApplyKeyStrokesButton_Click(object sender, RoutedEventArgs e)
@@ -2439,7 +2418,7 @@ namespace ScreenToGif.Windows
 
         private async void ApplyMouseClicksButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Project.Frames.All(x => x.ButtonClicked == MouseButtonType.None))
+            if (Project.Frames.All(x => x.ButtonClicked == MouseButtons.None))
             {
                 StatusList.Warning(LocalizationHelper.Get("S.MouseClicks.Warning.None"));
                 return;
@@ -2857,7 +2836,7 @@ namespace ScreenToGif.Windows
                 return;
             }
 
-            if (UserSettings.All.FadeToType == FadeToType.Color && UserSettings.All.FadeToColor.A == 0)
+            if (UserSettings.All.FadeToType == FadeModes.Color && UserSettings.All.FadeToColor.A == 0)
             {
                 StatusList.Warning(LocalizationHelper.Get("S.Editor.Fade.WarningColor"));
                 return;
@@ -2899,7 +2878,7 @@ namespace ScreenToGif.Windows
 
             var index = FrameListView.SelectedIndex;
             var value = (int)SlideSlider.Value;
-            var selected = await Task.Run(() => Slide(index, value, SlideFrom.Right));
+            var selected = await Task.Run(() => Slide(index, value, SlideFromType.Right));
 
             await LoadSelectedStarter(selected, Project.Frames.Count - 1);
 
@@ -3462,7 +3441,7 @@ namespace ScreenToGif.Windows
                             {
                                 switch (task.TaskType)
                                 {
-                                    case BaseTaskViewModel.TaskTypeEnum.MouseClicks:
+                                    case TaskTypes.MouseClicks:
                                     {
                                         if (Project.CreatedBy == ProjectByType.ScreenRecorder)
                                             MouseClicksAsync(task as MouseClicksViewModel ?? MouseClicksViewModel.FromSettings());
@@ -3470,7 +3449,7 @@ namespace ScreenToGif.Windows
                                         break;
                                     }
 
-                                    case BaseTaskViewModel.TaskTypeEnum.KeyStrokes:
+                                    case TaskTypes.KeyStrokes:
                                     {
                                         if (Project.CreatedBy == ProjectByType.ScreenRecorder)
                                             KeyStrokesAsync(task as KeyStrokesViewModel ?? KeyStrokesViewModel.FromSettings());
@@ -3478,7 +3457,7 @@ namespace ScreenToGif.Windows
                                         break;
                                     }
 
-                                    case BaseTaskViewModel.TaskTypeEnum.Delay:
+                                    case TaskTypes.Delay:
                                     {
                                         if (Project.CreatedBy != ProjectByType.Editor && Project.CreatedBy != ProjectByType.Unknown)
                                             DelayAsync(task as DelayViewModel ?? DelayViewModel.FromSettings(), true, true);
@@ -3486,7 +3465,7 @@ namespace ScreenToGif.Windows
                                         break;
                                     }
 
-                                    case BaseTaskViewModel.TaskTypeEnum.Progress:
+                                    case TaskTypes.Progress:
                                     {
                                         if (Project.CreatedBy != ProjectByType.Editor && Project.CreatedBy != ProjectByType.Unknown)
                                             ProgressAsync(task as ProgressViewModel ?? ProgressViewModel.FromSettings());
@@ -3494,7 +3473,7 @@ namespace ScreenToGif.Windows
                                         break;
                                     }
 
-                                    case BaseTaskViewModel.TaskTypeEnum.Border:
+                                    case TaskTypes.Border:
                                     {
                                         if (Project.CreatedBy != ProjectByType.Editor && Project.CreatedBy != ProjectByType.Unknown)
                                             BorderAsync(task as BorderViewModel ?? BorderViewModel.FromSettings());
@@ -3502,7 +3481,7 @@ namespace ScreenToGif.Windows
                                         break;
                                     }
 
-                                    case BaseTaskViewModel.TaskTypeEnum.Shadow:
+                                    case TaskTypes.Shadow:
                                     {
                                         if (Project.CreatedBy != ProjectByType.Editor && Project.CreatedBy != ProjectByType.Unknown)
                                             ShadowAsync(task as ShadowViewModel ?? ShadowViewModel.FromSettings());
@@ -3925,7 +3904,7 @@ namespace ScreenToGif.Windows
                 return false;
             }
 
-            var list = Dispatcher.Invoke(() =>
+            var list = Dispatcher.Invoke<List<FrameInfo>>(() =>
             {
                 #region Insert
 
@@ -4205,7 +4184,7 @@ namespace ScreenToGif.Windows
         private List<FrameInfo> ImportFromVideo(string source, string pathTemp)
         {
             //Get frames from video.
-            return Dispatcher?.Invoke(() =>
+            return Dispatcher?.Invoke<List<FrameInfo>>(() =>
             {
                 var vid = new VideoSource
                 {
@@ -4327,7 +4306,7 @@ namespace ScreenToGif.Windows
             Dispatcher.Invoke(() =>
             {
                 TaskbarItemInfo.ProgressState = TaskbarItemProgressState.Normal;
-                TaskbarItemInfo.ProgressValue = MathHelper.CrossMultiplication(StatusProgressBar.Maximum, value, null) / 100d;
+                TaskbarItemInfo.ProgressValue = MathExtensions.CrossMultiplication(StatusProgressBar.Maximum, value, null) / 100d;
 
                 StatusProgressBar.IsIndeterminate = false;
                 StatusProgressBar.Value = value;
@@ -4754,7 +4733,7 @@ namespace ScreenToGif.Windows
                 return false;
 
             //The catch here is to get the closest monitor from current Top/Left point. 
-            var monitors = Monitor.AllMonitorsScaled(this.Scale());
+            var monitors = MonitorHelper.AllMonitorsScaled(this.Scale());
             var closest = monitors.FirstOrDefault(x => x.Bounds.Contains(new Point((int)left, (int)top))) ?? monitors.FirstOrDefault(x => x.IsPrimary);
 
             if (closest == null)
@@ -5092,7 +5071,7 @@ namespace ScreenToGif.Windows
             {
                 switch (preset.PartialExport)
                 {
-                    case PartialExportType.FrameExpression:
+                    case PartialExportModes.FrameExpression:
                     {
                         var blocks = preset.PartialExportFrameExpression.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
@@ -5135,13 +5114,13 @@ namespace ScreenToGif.Windows
                         break;
                     }
 
-                    case PartialExportType.FrameRange:
+                    case PartialExportModes.FrameRange:
                     {
                         indexes = Enumerable.Range(preset.PartialExportFrameStart, preset.PartialExportFrameEnd - preset.PartialExportFrameStart).ToList();
                         break;
                     }
 
-                    case PartialExportType.TimeRange:
+                    case PartialExportModes.TimeRange:
                     {
                         var span = TimeSpan.Zero;
 
@@ -5181,7 +5160,7 @@ namespace ScreenToGif.Windows
                         break;
                     }
 
-                    case PartialExportType.Selection:
+                    case PartialExportModes.Selection:
                     {
                         indexes = Dispatcher.Invoke(SelectedFramesIndex);
                         break;
@@ -5212,7 +5191,7 @@ namespace ScreenToGif.Windows
                     }
                 }
 
-                if (indexes.Count > 1 && !Dispatcher.Invoke(() => Dialog.Ask(LocalizationHelper.Get("S.SaveAs.Dialogs.Multiple.Title"),
+                if (indexes.Count > 1 && !Dispatcher.Invoke<bool>(() => Dialog.Ask(LocalizationHelper.Get("S.SaveAs.Dialogs.Multiple.Title"),
                     LocalizationHelper.Get("S.SaveAs.Dialogs.Multiple.Instruction"), LocalizationHelper.GetWithFormat("S.SaveAs.Dialogs.Multiple.Message", indexes.Count))))
                 {
                     Dispatcher.Invoke(() => StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Canceled")));
@@ -5223,7 +5202,7 @@ namespace ScreenToGif.Windows
             #endregion
 
             //Copy the frames, so it can be manipulated without problem.
-            var copied = Project.CopyToExport(indexes, preset.Type == Export.Stg, preset.Type == Export.Gif && preset.Encoder == EncoderType.ScreenToGif);
+            var copied = Project.CopyToExport(indexes, preset.Type == ExportFormats.Stg, preset.Type == ExportFormats.Gif && preset.Encoder == EncoderTypes.ScreenToGif);
 
             EncodingManager.StartEncoding(copied, preset);
 
@@ -5364,7 +5343,7 @@ namespace ScreenToGif.Windows
                     drawingContext.DrawImage(image, new Rect(0, 0, image.Width, image.Height));
 
                     //TODO: Test with high dpi.
-                    if (model.Type == ProgressType.Bar)
+                    if (model.Type == ProgressTypes.Bar)
                     {
                         #region Bar
 
@@ -5446,7 +5425,7 @@ namespace ScreenToGif.Windows
         private List<int> OverlayAsync(RenderTargetBitmap render, bool forAll = false)
         {
             var frameList = forAll ? Project.Frames : SelectedFrames();
-            var selectedList = Dispatcher.Invoke(() =>
+            var selectedList = Dispatcher.Invoke<List<int>>(() =>
             {
                 IsLoading = true;
 
@@ -5573,7 +5552,7 @@ namespace ScreenToGif.Windows
                     {
                         var listA = auxList[0].KeyList.TakeWhile((_, i) => !auxList[0].KeyList.Skip(i).SequenceEqual(auxList[1].KeyList.Take(auxList[0].KeyList.Count - i))).Concat(auxList[1].KeyList);
 
-                        auxList[1].KeyList = new List<SimpleKeyGesture>(listA);
+                        auxList[1].KeyList = new List<IKeyGesture>(listA);
                     }
 
                     //Check previous itens.
@@ -5587,7 +5566,7 @@ namespace ScreenToGif.Windows
                         {
                             var listA = auxList[inner].KeyList.TakeWhile((_, i) => !auxList[inner].KeyList.Skip(i).SequenceEqual(auxList[outer].KeyList.Take(auxList[inner].KeyList.Count - i))).Concat(auxList[outer].KeyList);
 
-                            auxList[outer].KeyList = new List<SimpleKeyGesture>(listA);
+                            auxList[outer].KeyList = new List<IKeyGesture>(listA);
                         }
 
                         //Stops veryfying the previous frames if the delay sum is greater than the maximum.
@@ -5622,7 +5601,7 @@ namespace ScreenToGif.Windows
 
                 #region Removes any duplicated modifier key
 
-                var keyList = new List<SimpleKeyGesture>();
+                var keyList = new List<IKeyGesture>();
                 for (var i = 0; i < frame.KeyList.Count; i++)
                 {
                     if (model.KeyStrokesIgnoreInjected && frame.KeyList[i].IsInjected)
@@ -5670,7 +5649,7 @@ namespace ScreenToGif.Windows
 
                 #region Prepare the text
 
-                var text = keyList.Select(x => "" + Util.Native.GetSelectKeyText(x.Key, x.Modifiers, x.IsUppercase)).Aggregate((p, n) => p + model.KeyStrokesSeparator + n);
+                var text = keyList.Select(x => "" + Native.Helpers.Other.GetSelectKeyText(x.Key, x.Modifiers, x.IsUppercase)).Aggregate((p, n) => p + model.KeyStrokesSeparator + n);
 
                 if (string.IsNullOrEmpty(text))
                 {
@@ -6040,7 +6019,7 @@ namespace ScreenToGif.Windows
             }
         }
 
-        private void ReduceFrameCount(List<int> selection, int factor, int removeCount, ReduceDelayType mode)
+        private void ReduceFrameCount(List<int> selection, int factor, int removeCount, ReduceDelayModes mode)
         {
             var removeList = new List<int>();
 
@@ -6051,8 +6030,8 @@ namespace ScreenToGif.Windows
             //Only allow removing frames within the possible range.
             removeList = removeList.Where(x => x < Project.Frames.Count).ToList();
 
-            var alterList = mode == ReduceDelayType.Evenly ? Util.Other.ListOfIndexes(0, Project.Frames.Count).Where(w => !removeList.Contains(w)).ToList() :
-                mode == ReduceDelayType.Previous ? (from item in removeList where item - 1 >= 0 select item - 1).ToList() : //.Union(removeList)
+            var alterList = mode == ReduceDelayModes.Evenly ? Util.Other.ListOfIndexes(0, Project.Frames.Count).Where(w => !removeList.Contains(w)).ToList() :
+                mode == ReduceDelayModes.Previous ? (from item in removeList where item - 1 >= 0 select item - 1).ToList() : //.Union(removeList)
                 new List<int>(); //No other frame will be altered if the delay is not adjusted.
 
             if (alterList.Any())
@@ -6065,12 +6044,12 @@ namespace ScreenToGif.Windows
             {
                 var removeIndex = removeList[i];
 
-                if (mode == ReduceDelayType.Previous || factor == 1)
+                if (mode == ReduceDelayModes.Previous || factor == 1)
                 {
                     //Simply stacks the delay of the removed frames to the previous frame;
                     Project.Frames[removeIndex - 1].Delay += Project.Frames[removeIndex].Delay;
                 }
-                else if (mode == ReduceDelayType.Evenly)
+                else if (mode == ReduceDelayModes.Evenly)
                 {
                     if (i == removeList.Count - 1 || removeList[i] + 1 == removeList[i + 1])
                     {
@@ -6099,7 +6078,7 @@ namespace ScreenToGif.Windows
             }
         }
 
-        private int RemoveDuplicatesAsync(decimal similarity, DuplicatesRemovalType removal, DuplicatesDelayType delay)
+        private int RemoveDuplicatesAsync(decimal similarity, DuplicatesRemovalModes removal, DuplicatesDelayModes delay)
         {
             Dispatcher.Invoke(() =>
             {
@@ -6122,11 +6101,11 @@ namespace ScreenToGif.Windows
             {
                 switch (removal)
                 {
-                    case DuplicatesRemovalType.First:
+                    case DuplicatesRemovalModes.First:
                         removeList.Add(firstFrame.Index);
                         alterList.Add(lastFrame.Index);
                         break;
-                    case DuplicatesRemovalType.Last:
+                    case DuplicatesRemovalModes.Last:
                         alterList.Add(firstFrame.Index);
                         removeList.Add(lastFrame.Index);
                         break;
@@ -6146,23 +6125,23 @@ namespace ScreenToGif.Windows
             alterList.Sort();
 
             var count = 0;
-            if (delay != DuplicatesDelayType.DontAdjust)
+            if (delay != DuplicatesDelayModes.DontAdjust)
             {
                 ShowProgress(LocalizationHelper.Get("S.Editor.AdjustingDuplicatesDelay"), removeList.Count);
 
                 //Gets the list of frames that will be altered (if the delay will be adjusted).
-                var mode = removal == DuplicatesRemovalType.First ? 1 : -1;
+                var mode = removal == DuplicatesRemovalModes.First ? 1 : -1;
 
                 ActionStack.SaveState(ActionStack.EditAction.RemoveAndAlter, Project.Frames, removeList, alterList);
 
-                if (removal == DuplicatesRemovalType.Last)
+                if (removal == DuplicatesRemovalModes.Last)
                 {
                     for (var i = alterList.Count - 1; i >= 0; i--)
                     {
                         var index = alterList[i];
 
                         //Sum or average of the delays.
-                        if (delay == DuplicatesDelayType.Sum)
+                        if (delay == DuplicatesDelayModes.Sum)
                             Project.Frames[index].Delay += Project.Frames[index - mode].Delay;
                         else
                             Project.Frames[index].Delay = (Project.Frames[index - mode].Delay + Project.Frames[index].Delay) / 2;
@@ -6175,7 +6154,7 @@ namespace ScreenToGif.Windows
                     foreach (var index in alterList)
                     {
                         //Sum or average of the delays.
-                        if (delay == DuplicatesDelayType.Sum)
+                        if (delay == DuplicatesDelayModes.Sum)
                             Project.Frames[index].Delay += Project.Frames[index - mode].Delay;
                         else
                             Project.Frames[index].Delay = (Project.Frames[index - mode].Delay + Project.Frames[index].Delay) / 2;
@@ -6225,12 +6204,12 @@ namespace ScreenToGif.Windows
 
                 switch (model.Type)
                 {
-                    case DelayUpdateType.Override:
+                    case DelayUpdateModes.Override:
                     {
                         frameInfo.Delay = model.NewDelay;
                         break;
                     }
-                    case DelayUpdateType.IncreaseDecrease:
+                    case DelayUpdateModes.IncreaseDecrease:
                     {
                         frameInfo.Delay += model.IncreaseDecreaseDelay;
 
@@ -6271,7 +6250,7 @@ namespace ScreenToGif.Windows
             Dispatcher.Invoke(() => IsLoading = true);
 
             //Calculate opacity increment. When fading to a color, it will add a frame with a 100% opacity at the end. 
-            var increment = 1F / (frameCount + (UserSettings.All.FadeToType == FadeToType.NextFrame ? 1 : 0));
+            var increment = 1F / (frameCount + (UserSettings.All.FadeToType == FadeModes.NextFrame ? 1 : 0));
             var previousName = Path.GetFileNameWithoutExtension(Project.Frames[selected].Path);
             var previousFolder = Path.GetDirectoryName(Project.Frames[selected].Path);
 
@@ -6281,7 +6260,7 @@ namespace ScreenToGif.Windows
             var dpi = Dispatcher.Invoke(this.Dpi);
 
             var previousImage = Project.Frames[selected].Path.SourceFrom();
-            var nextImage = UserSettings.All.FadeToType == FadeToType.NextFrame ? Project.Frames[Project.Frames.Count - 1 == selected ? 0 : selected + 1].Path.SourceFrom() :
+            var nextImage = UserSettings.All.FadeToType == FadeModes.NextFrame ? Project.Frames[Project.Frames.Count - 1 == selected ? 0 : selected + 1].Path.SourceFrom() :
                 ImageMethods.CreateEmtpyBitmapSource(UserSettings.All.FadeToColor, previousImage.PixelWidth, previousImage.PixelHeight, dpi, PixelFormats.Indexed1);
 
             var nextBrush = new ImageBrush
@@ -6411,7 +6390,7 @@ namespace ScreenToGif.Windows
         private List<int> ObfuscateAsync(Rect rect, double screenScale, bool forAll = false)
         {
             var frameList = forAll ? Project.Frames : SelectedFrames();
-            var selectedList = Dispatcher.Invoke(() =>
+            var selectedList = Dispatcher.Invoke<List<int>>(() =>
             {
                 IsLoading = true;
 
@@ -6432,19 +6411,19 @@ namespace ScreenToGif.Windows
 
                 switch (UserSettings.All.ObfuscationMode)
                 {
-                    case ObfuscationMode.Blur:
+                    case ObfuscationModes.Blur:
                     {
                         render = ImageMethods.Blur(image, (int)rect.X, (int)rect.Y, (int)rect.Width, (int)rect.Height,
                             UserSettings.All.BlurLevel, UserSettings.All.ObfuscationSmoothnessOpacity, UserSettings.All.ObfuscationSmoothnessRadius, UserSettings.All.ObfuscationInvertedSelection);
                         break;
                     }
-                    case ObfuscationMode.Darken:
+                    case ObfuscationModes.Darken:
                     {
                         render = ImageMethods.Lightness(image, (int)rect.X, (int)rect.Y, (int)rect.Width, (int)rect.Height, true,
                             UserSettings.All.DarkenLevel, UserSettings.All.ObfuscationSmoothnessOpacity, UserSettings.All.ObfuscationSmoothnessRadius, UserSettings.All.ObfuscationInvertedSelection);
                         break;
                     }
-                    case ObfuscationMode.Lighten:
+                    case ObfuscationModes.Lighten:
                     {
                         render = ImageMethods.Lightness(image, (int)rect.X, (int)rect.Y, (int)rect.Width, (int)rect.Height, false,
                             UserSettings.All.LightenLevel, UserSettings.All.ObfuscationSmoothnessOpacity, UserSettings.All.ObfuscationSmoothnessRadius, UserSettings.All.ObfuscationInvertedSelection);
@@ -6496,7 +6475,7 @@ namespace ScreenToGif.Windows
                 if (_abortLoading)
                     return;
 
-                if (frame.ButtonClicked == MouseButtonType.None || frame.CursorX == int.MinValue)
+                if (frame.ButtonClicked == MouseButtons.None || frame.CursorX == int.MinValue)
                 {
                     UpdateProgress(count++);
                     continue;
@@ -6513,13 +6492,13 @@ namespace ScreenToGif.Windows
                     SolidColorBrush brush = null;
                     switch (frame.ButtonClicked)
                     {
-                        case MouseButtonType.Left:
+                        case MouseButtons.Left:
                             brush = leftClickSolidColorBrush;
                             break;
-                        case MouseButtonType.Right:
+                        case MouseButtons.Right:
                             brush = rightClickSolidColorBrush;
                             break;
-                        case MouseButtonType.Middle:
+                        case MouseButtons.Middle:
                             brush = middleClickSolidColorBrush;
                             break;
                     }
