@@ -128,7 +128,7 @@
     <s:String x:Key="S.Command.Shadow">Tilføj skygge</s:String>
     <s:String x:Key="S.Command.Obfuscate">Censurer følsomme områder</s:String>
     <s:String x:Key="S.Command.Cinemagraph">Brug pennen til at vælge hvilke dele af rammen der ikke er konstant gennem hele animationen</s:String>
-    <s:String x:Key="S.Command.Progress">Statuslinie/-tekst med afspilningstid</s:String>
+    <s:String x:Key="S.Command.Progress">Statuslinie/tekst med afspilningstid</s:String>
     <s:String x:Key="S.Command.SelectAll">Vælg alle rammer</s:String>
     <s:String x:Key="S.Command.GoTo">Gå til rammenummer...</s:String>
     <s:String x:Key="S.Command.InverseSelection">Inverter rammevalg</s:String>
@@ -315,7 +315,7 @@
     <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds">Det gyldne snit</s:String>
     <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds.Info">Vis/skjul det gyldne snit.</s:String>
     <s:String x:Key="S.Options.Recorder.Guidelines.Crosshair">Kryds</s:String>
-    <s:String x:Key="S.Options.Recorder.Guidelines.Crosshair.Info">Vis/skjul krydsets hjælpelinier.</s:String>-
+    <s:String x:Key="S.Options.Recorder.Guidelines.Crosshair.Info">Vis/skjul krydsets hjælpelinier.</s:String>
     <s:String x:Key="S.Options.Recorder.Guidelines.Info">Hjælpelinier vises kun når optagelsen er stoppet/på  pause.</s:String>
     
     <s:String x:Key="S.Options.Recorder.HideTitleBar">Skjul titellinie (tynd).</s:String>
@@ -1249,11 +1249,11 @@
     <s:String x:Key="S.Resize.Percent">Procent (%)</s:String>
     <s:String x:Key="S.Resize.Dpi2">DPI:</s:String>
     <s:String x:Key="S.Resize.KeepAspect">Bevar størrelsesforhold.</s:String>
-    -<s:String x:Key="S.Resize.ScalingQuality">Kvalitet:</s:String>
-    -<s:String x:Key="S.Resize.ScalingQuality.Fant">Fant • Høj kvalitet</s:String>
-    -<s:String x:Key="S.Resize.ScalingQuality.Linear">Lineær • Lav kvalitet</s:String>
-    -<s:String x:Key="S.Resize.ScalingQuality.NearestNeighbor">Nærmeste nabo• Lav kvalitet og hurtig</s:String>
-    -<s:String x:Key="S.Resize.ScalingQuality.Info">Kvalitet.</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality">Kvalitet:</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Fant">Fant • Høj kvalitet</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Linear">Lineær • Lav kvalitet</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.NearestNeighbor">Nærmeste nabo• Lav kvalitet og hurtig</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Info">Kvalitet.</s:String>
     <s:String x:Key="S.Resize.Warning">Vælg en anden værdi, for at ændre størrelse.</s:String>
     
     <!--Editor • Crop-->
@@ -1428,7 +1428,7 @@
     <s:String x:Key="S.Progress.Format.FrameNumber">$f = rammenummer</s:String>
     <s:String x:Key="S.Progress.Format.Totals">Totaler:</s:String>
     <s:String x:Key="S.Progress.Format.Examples">Eksempler:</s:String>
-    <s:String x:Key="S.Progress.Format.Date">Du kan bruge dato-/tidsformat fra .Net Framework.&#x0d;Link herunder viser specifikationerne.</s:String>
+    <s:String x:Key="S.Progress.Format.Date">Du kan bruge dato/tidsformat fra .Net Framework.&#x0d;Link herunder viser specifikationerne.</s:String>
     <s:String x:Key="S.Progress.Format.Date.Standard">Standardformats</s:String>
     <s:String x:Key="S.Progress.Format.Date.Custom">Tilpassede formater</s:String>
     <s:String x:Key="S.Progress.Precision.StartNumber">Tæl fra:</s:String>
@@ -1446,7 +1446,7 @@
     <s:String x:Key="S.Delay.DecreaseIncrease">Tilpas værdi</s:String>
     <s:String x:Key="S.Delay.Scale">Værdi</s:String>
     <s:String x:Key="S.Delay.Override.Info">Denne værdi erstatter varigheden af alle valgte rammer. Værdien bør være mellem 10ms og 25.500ms.</s:String>
-    <s:String x:Key="S.Delay.IncreaseDecrease.Info">Værdien øger/mindsker varigheden af hver enkelt valgt ramme.&#x0d;Du kan vælge en værdi mellem -10.000ms og 10.000ms, men varigheden af de enkelt rammer vil være mellem 10ms og 25.500ms</s:String>
+    <s:String x:Key="S.Delay.IncreaseDecrease.Info">Værdien øger/mindsker varigheden af hver enkelt valgt ramme.&#x0d;Du kan vælge en værdi mellem -10000ms og 10000ms, men varigheden af de enkelt rammer vil være mellem 10ms og 25500ms</s:String>
     <s:String x:Key="S.Delay.Scale.Info">Tilpas længde (forsinkelse) af hver valgt ramme med denne procent.&#x0d;Du kan vælge fra 1% til 1000%, men resultatet begrænses til mellem 10ms og 25500ms</s:String>
 
     <!--Editor • Cinemagraph-->
@@ -1774,7 +1774,7 @@
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">Vil du eksportere rammerne?</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">Dette eksporterer {0} rammer til valgte mappe.</s:String>
     
-    Command Preview-->
+    <!--Command Preview-->
     <s:String x:Key="S.CommandPreviewer.Title">Vis kommando</s:String>
     <s:String x:Key="S.CommandPreviewer.Command">Kommando</s:String>
     <s:String x:Key="S.CommandPreviewer.Input">Kildesti</s:String>
