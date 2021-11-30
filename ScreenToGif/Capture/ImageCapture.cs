@@ -68,7 +68,8 @@ internal class ImageCapture : BaseCapture
             frame.Delay = FrameRate.GetMilliseconds();
             frame.Image = Image.FromHbitmap(CompatibleBitmap);
 
-            BlockingCollection.Add(frame);
+            if (IsAcceptingFrames)
+                BlockingCollection.Add(frame);
         }
         catch (Exception)
         {
@@ -150,7 +151,8 @@ internal class ImageCapture : BaseCapture
             frame.Delay = FrameRate.GetMilliseconds();
             frame.Image = Image.FromHbitmap(CompatibleBitmap);
 
-            BlockingCollection.Add(frame);
+            if (IsAcceptingFrames)
+                BlockingCollection.Add(frame);
         }
         catch (Exception)
         {
@@ -180,6 +182,8 @@ internal class ImageCapture : BaseCapture
         if (!WasStarted)
             return;
 
+        await base.Stop();
+
         try
         {
             Gdi32.SelectObject(CompatibleDeviceContext, _oldBitmap);
@@ -191,7 +195,5 @@ internal class ImageCapture : BaseCapture
         {
             LogWriter.Log(e, "Impossible to stop and clean resources used by the recording.");
         }
-
-        await base.Stop();
     }
 }

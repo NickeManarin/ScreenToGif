@@ -10,7 +10,8 @@ _VS 2019 and .Net 4.8 or newer required._
 
 ### Fixed:
 
-♦ 
+♦ Reduced the change for a crash when stopping the recording when using DirectX.
+♦ Discarding when in manual or interaction capture modes, but cancelling in the recorder was creating a block scenario.  
 
 ### Known Bugs:
   

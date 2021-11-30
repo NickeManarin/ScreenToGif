@@ -149,11 +149,12 @@ internal class DirectCachedCapture : DirectImageCapture
                 Marshal.Copy(new IntPtr(stream.DataPointer.ToInt64() + height * data.RowPitch), frame.Data, height * Width * 4, Width * 4);
             }
 
-            BlockingCollection.Add(frame);
+            if (IsAcceptingFrames)
+                BlockingCollection.Add(frame);
 
             #endregion
 
-            Device.ImmediateContext.UnmapSubresource(StagingTexture, 0);
+            Device.ImmediateContext?.UnmapSubresource(StagingTexture, 0);
 
             resource?.Dispose();
             return FrameCount;
@@ -174,7 +175,11 @@ internal class DirectCachedCapture : DirectImageCapture
         {
             LogWriter.Log(ex, "It was not possible to finish capturing the frame with DirectX.");
 
-            Application.Current.Dispatcher.Invoke(() => OnError.Invoke(ex));
+            MajorCrashHappened = true;
+
+            if (IsAcceptingFrames)
+                Application.Current.Dispatcher.Invoke(() => OnError.Invoke(ex));
+
             return FrameCount;
         }
         finally
@@ -230,7 +235,7 @@ internal class DirectCachedCapture : DirectImageCapture
                     DuplicatedOutput.GetFrameMoveRects(movedRectangles.Length, movedRectangles, out var movedRegionsLength);
 
                     for (var movedIndex = 0; movedIndex < movedRegionsLength / Marshal.SizeOf(typeof(OutputDuplicateMoveRectangle)); movedIndex++)
-                    {                            
+                    {
                         //Crop the destination rectangle to the screen area rectangle.
                         var left = Math.Max(movedRectangles[movedIndex].DestinationRect.Left, Left - OffsetLeft);
                         var right = Math.Min(movedRectangles[movedIndex].DestinationRect.Right, Left + Width - OffsetLeft);
@@ -256,7 +261,7 @@ internal class DirectCachedCapture : DirectImageCapture
 
                     var dirtyRectangles = new RawRectangle[info.TotalMetadataBufferSize];
                     DuplicatedOutput.GetFrameDirtyRects(dirtyRectangles.Length, dirtyRectangles, out var dirtyRegionsLength);
-                        
+
                     for (var dirtyIndex = 0; dirtyIndex < dirtyRegionsLength / Marshal.SizeOf(typeof(RawRectangle)); dirtyIndex++)
                     {
                         //Crop screen positions and size to frame sizes.
@@ -293,7 +298,7 @@ internal class DirectCachedCapture : DirectImageCapture
                         //        bottom = Math.Max(dirtyRectangles[dirtyIndex].Left + OffsetLeft, Left); 
                         //        break;
                         //    }
-                                
+
                         //    default:
                         //    {
                         //        //In this context, the screen positions are relative to the current screen, not to the whole set of screens (virtual space).
@@ -304,7 +309,7 @@ internal class DirectCachedCapture : DirectImageCapture
                         //        break;
                         //    }
                         //}
-                            
+
                         //Copies from the screen texture only the area which the user wants to capture.
                         if (right > left && bottom > top)
                             Device.ImmediateContext.CopySubresourceRegion(screenTexture, 0, new ResourceRegion(left, top, 0, right, bottom, 1), BackingTexture, 0, left - (Left - OffsetLeft), top - (Top - OffsetTop));
@@ -354,12 +359,13 @@ internal class DirectCachedCapture : DirectImageCapture
                 stream.Position = height * data.RowPitch;
                 Marshal.Copy(new IntPtr(stream.DataPointer.ToInt64() + height * data.RowPitch), frame.Data, height * Width * 4, Width * 4);
             }
-                
-            BlockingCollection.Add(frame);
+
+            if (IsAcceptingFrames)
+                BlockingCollection.Add(frame);
 
             #endregion
 
-            Device.ImmediateContext.UnmapSubresource(StagingTexture, 0);
+            Device.ImmediateContext?.UnmapSubresource(StagingTexture, 0);
             stream.Dispose();
             resource?.Dispose();
 
@@ -382,7 +388,10 @@ internal class DirectCachedCapture : DirectImageCapture
             LogWriter.Log(ex, "It was not possible to finish capturing the frame with DirectX.");
 
             MajorCrashHappened = true;
-            Application.Current.Dispatcher.Invoke(() => OnError.Invoke(ex));
+
+            if (IsAcceptingFrames)
+                Application.Current.Dispatcher.Invoke(() => OnError.Invoke(ex));
+
             return FrameCount;
         }
         finally
@@ -526,13 +535,16 @@ internal class DirectCachedCapture : DirectImageCapture
 
     public override void Save(FrameInfo info)
     {
+        System.Diagnostics.Debug.WriteLine("Length:" + info.Data.Length + " " + _fileStream.Length);
+
         _compressStream.WriteBytes(info.Data);
+        _compressStream.Flush();
 
         info.Data = null;
 
         Project.Frames.Add(info);
     }
-        
+
     public override async Task Stop()
     {
         if (!WasStarted)
@@ -542,14 +554,14 @@ internal class DirectCachedCapture : DirectImageCapture
         await base.Stop();
 
         //Then close the streams.
-        //_compressStream.Flush();
-        _compressStream.Dispose();
+        //await _compressStream.FlushAsync();
+        await _compressStream.DisposeAsync();
 
-        _bufferedStream.Flush();
-        _fileStream.Flush();
+        await _bufferedStream.FlushAsync();
+        await _fileStream.FlushAsync();
 
-        _bufferedStream.Dispose();
-        _fileStream.Dispose();
+        await _bufferedStream.DisposeAsync();
+        await _fileStream.DisposeAsync();
     }
 
 

@@ -73,7 +73,7 @@ public class ProjectInfo
     /// 24 is RGB
     /// </summary>
     [DataMember(Order = 8)]
-    public double BitDepth { get; set; } = 32;
+    public int BitDepth { get; set; } = 32;
 
 
     /// <summary>

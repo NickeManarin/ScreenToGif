@@ -102,6 +102,16 @@ public static class StreamHelpers
         return buffer;
     }
 
+    public static async Task<byte[]> ReadBytesAsync(this Stream ms, int count)
+    {
+        var buffer = new byte[count];
+
+        if (await ms.ReadAsync(buffer, 0, count) != count)
+            throw new EndOfStreamException("End reached.");
+
+        return buffer;
+    }
+
     public static byte[] ReadBytes(this Stream ms, uint count)
     {
         var buffer = new byte[count];
@@ -110,6 +120,25 @@ public static class StreamHelpers
             throw new Exception("End reached.");
 
         return buffer;
+    }
+
+    public static byte[] ReadBytesUntilFull(this Stream stream, int count)
+    {
+        var innerBuffer = new byte[count];
+        var buffer = new Span<byte>(innerBuffer);
+
+        var totalRead = 0;
+        while (totalRead < buffer.Length)
+        {
+            var bytesRead = stream.Read(buffer.Slice(totalRead));
+
+            if (bytesRead == 0)
+                break;
+
+            totalRead += bytesRead;
+        }
+
+        return buffer.ToArray();
     }
 
     public static char ReadChar(this Stream ms)

@@ -201,8 +201,6 @@
     <s:String x:Key="S.Options.Other">Outras configurações</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Header">Atalho de teclado ausente para a gravação via cursor</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Message">Em ordem para usar o cursor do mouse como guia para mover a área de gravação, você deve definir uma tecla de atalho para poder desabilitar quando necessário.</s:String>
-    <s:String x:Key="S.Options.Warning.DesktopDuplication.Header">Dependências ausentes para a gravação de tela</s:String>
-    <s:String x:Key="S.Options.Warning.DesktopDuplication.Message">Para capturar a tela utilizando a API de duplicação de área de trabalho, é necessário fazer o download da biblioteca de código SharpDx.</s:String>
     
     <!--Options • Application-->
     <s:String x:Key="S.Options.App.Startup">Inicialização</s:String>
@@ -285,7 +283,7 @@
     
     <s:String x:Key="S.Options.Recorder.Mode">Modo de captura</s:String>
     <s:String x:Key="S.Options.Recorder.Bitblt.Info">Use o modo de captura antigo, que é mais devagar e pode não funcionar para capturar jogos,&#10;mas não requer download the ferramentas ou plug-ins externos.</s:String>
-    <s:String x:Key="S.Options.Recorder.DirectX.Info">Use o modo de captura por duplicação de área de trabalho, que é mais rápido e&#10;pode capturar jogos em tela cheia, mas requer a biblioteca SharpDx e Windows 8 ou superior.</s:String>
+    <s:String x:Key="S.Options.Recorder.DirectX.Info">Use o modo de captura por duplicação de área de trabalho, que é mais rápido e&#10;pode capturar jogos em tela cheia, mas requer Windows 8 ou superior.</s:String>
     <s:String x:Key="S.Options.Recorder.File">Salvar para&#10;arquivo</s:String>
     <s:String x:Key="S.Options.Recorder.File.Info">Cada quadro é capturado e salvo diretamente como um arquivo de imagem em disco.</s:String>
     <s:String x:Key="S.Options.Recorder.Cache">Cache de&#10;memória</s:String>
@@ -584,9 +582,6 @@
     <s:String x:Key="S.Options.Extras.GifskiLocation.Select">Selecione a localização da biblioteca Gifski</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.File">Biblioteca Gifski</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.Invalid">O caminho da biblioteca Gifski contém um ou mais caracteres inválidos. Por favor, selecione um caminho válido para o executável.</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation">Pasta do SharpDx (SharpDX.dll, SharpDX.Direct3D11.dll e SharpDX.DXGI.dll)</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation.Select">Selecione a pasta onde fica as bibliotecas do SharpDx</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation.Invalid">O caminho para a pasta das bibliotecas do SharpDx contém um ou mais caracteres inválidos. Por favor, selecione uma pasta válida para essas bibliotecas.</s:String>
     <s:String x:Key="S.Options.Extras.License.Ffmpeg">Licença do FFmpeg</s:String>
     <s:String x:Key="S.Options.Extras.License.Gifski">Licença do Gifski</s:String>
     <s:String x:Key="S.Options.Extras.License.SharpDx">Licença do SharpDx</s:String>
@@ -693,7 +688,6 @@
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">Não foi possível capturar a tela. O método de captura não retornou quadros após 5 tentativas.</s:String>
     <s:String x:Key="S.Recorder.Warning.StartPauseNotPossible">Não foi possível começar/pausar a captura de tela</s:String>
     <s:String x:Key="S.Recorder.Warning.Windows8">Windows 8 ou superior é necessário para capturar a tela utilizando a API de duplicação de área de trabalho.</s:String>
-    <s:String x:Key="S.Recorder.Warning.MissingSharpDx">As bibliotecas do SharpDx são necessárias para se capturar a tela usando a API de duplicação de área de trabalho. Navegue até Opções > Extras para baixar SharpDx.</s:String>
     
     <!--New recorder-->
     <s:String x:Key="S.Recorder.Area">Área</s:String>

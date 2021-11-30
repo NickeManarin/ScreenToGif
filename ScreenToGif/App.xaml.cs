@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Management;
 using System.Net;
 using System.Reflection;
 using System.Text;
@@ -24,17 +23,16 @@ using ScreenToGif.Util.InterProcessChannel;
 using ScreenToGif.Util.Settings;
 using ScreenToGif.ViewModel;
 using ScreenToGif.Windows.Other;
-using Other = ScreenToGif.Util.Other;
 
 namespace ScreenToGif;
 
-public partial class App
+public partial class App : IDisposable
 {
     #region Properties
 
     internal static NotifyIcon NotifyIcon { get; private set; }
 
-    internal static ApplicationViewModel MainViewModel { get; set; }
+    internal static ApplicationViewModel MainViewModel { get; private set; }
 
     private Mutex _mutex;
     private bool _accepted;
@@ -51,15 +49,11 @@ public partial class App
 
         //Unhandled Exceptions.
         AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-        AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
 
         //Increases the duration of the tooltip display.
         ToolTipService.ShowDurationProperty.OverrideMetadata(typeof(DependencyObject), new FrameworkPropertyMetadata(int.MaxValue));
 
-        var version = FrameworkHelper.GetFrameworkVersion();
-
-        if (version > new Version(4, 7, 2))
-            SetSecurityProtocol();
+        SetSecurityProtocol();
 
         //Parse arguments.
         Arguments.Prepare(e.Args);
@@ -161,44 +155,7 @@ public partial class App
         //Render mode.
         RenderOptions.ProcessRenderMode = UserSettings.All.DisableHardwareAcceleration ? RenderMode.SoftwareOnly : RenderMode.Default;
 
-        #region Net Framework
-
-        if (version < new Version(4, 8))
-        {
-            var ask = Dialog.Ask(LocalizationHelper.Get("S.Warning.Net.Title"), LocalizationHelper.Get("S.Warning.Net.Header"), LocalizationHelper.Get("S.Warning.Net.Message"));
-
-            if (ask)
-            {
-                ProcessHelper.StartWithShell("http://go.microsoft.com/fwlink/?LinkId=2085155");
-                return;
-            }
-        }
-
-        #endregion
-
-        if (version > new Version(4, 7))
-            SetWorkaroundForDispatcher();
-
-        #region Net Framework HotFixes
-
-        //Only runs on Windows 7 SP1.
-        if (Environment.OSVersion.Version.Major == 6 && Environment.OSVersion.Version.Minor == 1)
-        {
-            Task.Factory.StartNew(() =>
-            {
-                try
-                {
-                    var search = new ManagementObjectSearcher("SELECT HotFixID FROM Win32_QuickFixEngineering WHERE HotFixID = 'KB4055002'").Get();
-                    Global.IsHotFix4055002Installed = search.Count > 0;
-                }
-                catch (Exception ex)
-                {
-                    LogWriter.Log(ex, "Error while trying to know if a hot fix was installed.");
-                }
-            });
-        }
-
-        #endregion
+        SetWorkaroundForDispatcher();
 
         #region Tray icon and view model
 
@@ -293,7 +250,8 @@ public partial class App
 
     private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
     {
-        if (!(e.ExceptionObject is Exception exception)) return;
+        if (e.ExceptionObject is not Exception exception)
+            return;
 
         LogWriter.Log(exception, "Current domain unhandled exception - Unknown");
 
@@ -304,28 +262,6 @@ public partial class App
         catch (Exception)
         {
             //Ignored.
-        }
-    }
-
-    private static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
-    {
-        try
-        {
-            //This is used when trying to load missing assemblies, which are not located in same folder as the main executable.
-
-            var name = args.Name.Split(',').First();
-
-            if (!name.StartsWith("SharpDX"))
-                return null;
-
-            var path = Other.AdjustPath(UserSettings.All.SharpDxLocationFolder ?? "");
-
-            return Assembly.LoadFrom(System.IO.Path.Combine(path, $"{name}.dll"));
-        }
-        catch (Exception e)
-        {
-            LogWriter.Log(e, "Error loading assemblies");
-            return null;
         }
     }
 
@@ -500,6 +436,17 @@ public partial class App
             //By removing the exception, the same exception can be displayed later.  
             _exceptionList.Remove(exception);
         }
+    }
+
+    public void Dispose()
+    {
+        if (_mutex != null && _accepted)
+        {
+            _mutex.ReleaseMutex();
+            _accepted = false;
+        }
+
+        _mutex?.Dispose();
     }
 
     #endregion

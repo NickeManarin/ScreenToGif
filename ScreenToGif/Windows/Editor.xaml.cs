@@ -3308,8 +3308,10 @@ namespace ScreenToGif.Windows
                         {
                             var number = 0;
 
-                            foreach (var frame in Project.Frames)
+                            for (var index = 0; index < Project.Frames.Count; index++)
                             {
+                                var frame = Project.Frames[index];
+
                                 if (_abortLoading)
                                     return false;
 
@@ -3318,7 +3320,7 @@ namespace ScreenToGif.Windows
 
                                 try
                                 {
-                                    var array = deflateStream.ReadBytes((int)frame.DataLength);
+                                    var array = deflateStream.ReadBytesUntilFull((int)frame.DataLength);
 
                                     if (Project.BitDepth == 24)
                                     {
@@ -4178,13 +4180,13 @@ namespace ScreenToGif.Windows
 
             #endregion
 
-            return new List<FrameInfo> { new FrameInfo(fileName, 66) };
+            return new List<FrameInfo> { new(fileName, 66) };
         }
 
         private List<FrameInfo> ImportFromVideo(string source, string pathTemp)
         {
             //Get frames from video.
-            return Dispatcher?.Invoke<List<FrameInfo>>(() =>
+            return Dispatcher?.Invoke(() =>
             {
                 var vid = new VideoSource
                 {
@@ -4258,24 +4260,27 @@ namespace ScreenToGif.Windows
 
         private void Pause()
         {
-            if (_previewToken == null && NotPreviewing)
-                return;
-
-            if (_previewToken != null)
+            lock (UserSettings.Lock)
             {
-                _previewToken.Cancel();
-                _previewToken.Dispose();
-                _previewToken = null;
+                if (_previewToken == null && NotPreviewing)
+                    return;
+
+                if (_previewToken != null)
+                {
+                    _previewToken.Cancel();
+                    _previewToken.Dispose();
+                    _previewToken = null;
+                }
+
+                NotPreviewing = true;
+                PlayButton.Text = LocalizationHelper.Get("S.Editor.Playback.Play");
+                PlayButton.Icon = FindResource("Vector.Play") as Brush;
+                PlayPauseButton.Icon = FindResource("Vector.Play") as Brush;
+
+                PlayMenuItem.Header = LocalizationHelper.Get("S.Editor.Playback.Play");
+                PlayMenuItem.Icon = FindResource("Vector.Play") as Brush;
             }
-
-            NotPreviewing = true;
-            PlayButton.Text = LocalizationHelper.Get("S.Editor.Playback.Play");
-            PlayButton.Icon = FindResource("Vector.Play") as Brush;
-            PlayPauseButton.Icon = FindResource("Vector.Play") as Brush;
-
-            PlayMenuItem.Header = LocalizationHelper.Get("S.Editor.Playback.Play");
-            PlayMenuItem.Icon = FindResource("Vector.Play") as Brush;
-
+            
             SetFocusOnCurrentFrame();
             UpdateOtherStatistics();
         }

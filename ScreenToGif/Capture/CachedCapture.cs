@@ -57,7 +57,7 @@ internal class CachedCapture : ImageCapture
         try
         {
             //var success = Native.BitBlt(CompatibleDeviceContext, 0, 0, Width, Height, WindowDeviceContext, Left, Top, Native.CopyPixelOperation.SourceCopy | Native.CopyPixelOperation.CaptureBlt);
-            var success = Native.External.Gdi32.StretchBlt(CompatibleDeviceContext, 0, 0, StartWidth, StartHeight, WindowDeviceContext, Left, Top, Width, Height, CopyPixelOperations.SourceCopy | CopyPixelOperations.CaptureBlt);
+            var success = Gdi32.StretchBlt(CompatibleDeviceContext, 0, 0, StartWidth, StartHeight, WindowDeviceContext, Left, Top, Width, Height, CopyPixelOperations.SourceCopy | CopyPixelOperations.CaptureBlt);
 
             if (!success)
                 return FrameCount;
@@ -69,10 +69,11 @@ internal class CachedCapture : ImageCapture
             frame.DataLength = _byteLength;
             frame.Data = new byte[_byteLength];
 
-            if (Native.External.Gdi32.GetDIBits(WindowDeviceContext, CompatibleBitmap, 0, (uint)StartHeight, frame.Data, ref _infoHeader, DibColorModes.RgbColors) == 0)
+            if (Gdi32.GetDIBits(WindowDeviceContext, CompatibleBitmap, 0, (uint)StartHeight, frame.Data, ref _infoHeader, DibColorModes.RgbColors) == 0)
                 frame.FrameSkipped = true;
 
-            BlockingCollection.Add(frame);
+            if (IsAcceptingFrames)
+                BlockingCollection.Add(frame);
         }
         catch (Exception)
         {
@@ -87,7 +88,7 @@ internal class CachedCapture : ImageCapture
         try
         {
             //var success = Native.BitBlt(CompatibleDeviceContext, 0, 0, Width, Height, WindowDeviceContext, Left, Top, Native.CopyPixelOperation.SourceCopy | Native.CopyPixelOperation.CaptureBlt);
-            var success = Native.External.Gdi32.StretchBlt(CompatibleDeviceContext, 0, 0, StartWidth, StartHeight, WindowDeviceContext, Left, Top, Width, Height, CopyPixelOperations.SourceCopy | CopyPixelOperations.CaptureBlt);
+            var success = Gdi32.StretchBlt(CompatibleDeviceContext, 0, 0, StartWidth, StartHeight, WindowDeviceContext, Left, Top, Width, Height, CopyPixelOperations.SourceCopy | CopyPixelOperations.CaptureBlt);
 
             if (!success)
                 return FrameCount;
@@ -156,10 +157,11 @@ internal class CachedCapture : ImageCapture
             frame.DataLength = _byteLength;
             frame.Data = new byte[_byteLength];
 
-            if (Native.External.Gdi32.GetDIBits(WindowDeviceContext, CompatibleBitmap, 0, (uint)StartHeight, frame.Data, ref _infoHeader, DibColorModes.RgbColors) == 0)
+            if (Gdi32.GetDIBits(WindowDeviceContext, CompatibleBitmap, 0, (uint)StartHeight, frame.Data, ref _infoHeader, DibColorModes.RgbColors) == 0)
                 frame.FrameSkipped = true;
 
-            BlockingCollection.Add(frame);
+            if (IsAcceptingFrames)
+                BlockingCollection.Add(frame);
         }
         catch (Exception e)
         {
@@ -207,8 +209,8 @@ internal class CachedCapture : ImageCapture
         //_compressStream.Flush();
         await _compressStream.DisposeAsync();
 
-        _bufferedStream.Flush();
-        _fileStream.Flush();
+        await _bufferedStream.FlushAsync();
+        await _fileStream.FlushAsync();
 
         await _bufferedStream.DisposeAsync();
         await _fileStream.DisposeAsync();

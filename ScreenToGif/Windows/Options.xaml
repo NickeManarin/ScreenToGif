@@ -25,7 +25,6 @@
 
         <CommandBinding Command="{StaticResource Command.BrowseFfmpeg}" CanExecute="BrowseFfmpeg_CanExecute" Executed="BrowseFfmpeg_Execute"/>
         <CommandBinding Command="{StaticResource Command.BrowseGifski}" CanExecute="BrowseGifski_CanExecute" Executed="BrowseGifski_Execute"/>
-        <CommandBinding Command="{StaticResource Command.BrowseSharpDx}" CanExecute="BrowseSharpDx_CanExecute" Executed="BrowseSharpDx_Execute"/>
     </Window.CommandBindings>
 
     <Window.Resources>
@@ -1526,7 +1525,6 @@
 
                             <n:Card Grid.Column="0" x:Name="FfmpegImageCard" Header="FFmpeg" Margin="0" Click="FfmpegImageCard_Click"/>
                             <n:Card Grid.Column="1" x:Name="GifskiImageCard" Header="Gifski" Margin="0" Click="GifskiImageCard_Click"/>
-                            <n:Card Grid.Column="2" x:Name="SharpDxImageCard" Header="SharpDx" Margin="0" Click="SharpDxImageCard_Click"/>
                         </Grid>
 
                         <n:LabelSeparator Grid.Row="2" Text="{DynamicResource S.Options.Extras.FfmpegLocation}"/>
@@ -1563,24 +1561,6 @@
 
                             <n:ExtendedButton Grid.Column="2" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Forward}" ContentWidth="20" ContentHeight="20"
                                               ToolTip="{DynamicResource S.Options.Storage.Paths.Browse}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{StaticResource Command.BrowseGifski}"/>
-                        </Grid>
-
-                        <n:LabelSeparator Grid.Row="6" Text="{DynamicResource S.Options.Extras.SharpDxLocation}"/>
-                        <Grid Grid.Row="7">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="30"/>
-                                <ColumnDefinition Width="30"/>
-                            </Grid.ColumnDefinitions>
-
-                            <n:ExtendedTextBox Grid.Column="0" x:Name="SharpDxLocationTextBox" Margin="10,3,0,3" Text="{Binding SharpDxLocationFolder, Source={x:Static t:UserSettings.All}, UpdateSourceTrigger=PropertyChanged}" 
-                                               Tag="SharpDX" LostKeyboardFocus="LocationTextBox_LostKeyboardFocus"/>
-
-                            <n:ExtendedButton Grid.Column="1" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Open}" ContentWidth="20" ContentHeight="20"
-                                              ToolTip="{DynamicResource S.Options.Extras.SharpDxLocation.Select}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Click="SelectSharpDx_Click"/>
-
-                            <n:ExtendedButton Grid.Column="2" Style="{StaticResource Style.Button.NoText}" Icon="{StaticResource Vector.Forward}" ContentWidth="20" ContentHeight="20"
-                                              ToolTip="{DynamicResource S.Options.Storage.Paths.Browse}" ToolTipService.Placement="Top" ToolTipService.HorizontalOffset="-5" Command="{StaticResource Command.BrowseSharpDx}"/>
                         </Grid>
 
                         <StackPanel Grid.Row="9" Orientation="Horizontal">

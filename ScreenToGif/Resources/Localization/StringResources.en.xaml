@@ -201,9 +201,7 @@
     <s:String x:Key="S.Options.Other">Other</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Header">Missing shortcut key for cursor following</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Message">In order to use the mouse cursor following feature, you must set a shortcut key to toggle it when needed.</s:String>
-    <s:String x:Key="S.Options.Warning.DesktopDuplication.Header">Missing dependencies for screen capture</s:String>
-    <s:String x:Key="S.Options.Warning.DesktopDuplication.Message">In order to capture the screen with the Desktop Duplication API, you must download the SharpDx libraries.</s:String>
-    
+
     <!--Options • Application-->
     <s:String x:Key="S.Options.App.Startup">Startup</s:String>
     <s:String x:Key="S.Options.App.Startup.Mode.Manual">Start&#10;manually</s:String>
@@ -285,7 +283,7 @@
     
     <s:String x:Key="S.Options.Recorder.Mode">Capture mode</s:String>
     <s:String x:Key="S.Options.Recorder.Bitblt.Info">Use the older capture method, which is slower and may not work capturing games,&#10;but requires no additional plug-ins.</s:String>
-    <s:String x:Key="S.Options.Recorder.DirectX.Info">Use the Desktop Duplication API capture method, which is faster and&#10;is able to capture fullscreen games, but requires the SharpDx plug-in and Windows 8 or newer.</s:String>
+    <s:String x:Key="S.Options.Recorder.DirectX.Info">Use the Desktop Duplication API capture method, which is faster and&#10;is able to capture fullscreen games, but requires Windows 8 or newer.</s:String>
     <s:String x:Key="S.Options.Recorder.File">Save to&#10;file</s:String>
     <s:String x:Key="S.Options.Recorder.File.Info">Each frame captured will be saved directly as an image on disk.</s:String>
     <s:String x:Key="S.Options.Recorder.Cache">Memory&#10;cache</s:String>
@@ -584,9 +582,6 @@
     <s:String x:Key="S.Options.Extras.GifskiLocation.Select">Select the location of the Gifski library</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.File">Gifski library</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.Invalid">The path of Gifski library contains one or more invalid characters. Please, select a valid location for that library.</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation">SharpDx folder (SharpDX.dll, SharpDX.Direct3D11.dll and SharpDX.DXGI.dll)</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation.Select">Select the location of the SharpDx libraries</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation.Invalid">The path for the SharpDx libraries contains one or more invalid characters. Please, select a valid folder for those libraries.</s:String>
     <s:String x:Key="S.Options.Extras.License.Ffmpeg">FFmpeg license</s:String>
     <s:String x:Key="S.Options.Extras.License.Gifski">Gifski license</s:String>
     <s:String x:Key="S.Options.Extras.License.SharpDx">SharpDx license</s:String>
@@ -693,8 +688,7 @@
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">It was not possible to capture the screen. The capture method returned no frame after 5 tries.</s:String>
     <s:String x:Key="S.Recorder.Warning.StartPauseNotPossible">It was not possible to start/pause capturing the screen</s:String>
     <s:String x:Key="S.Recorder.Warning.Windows8">Windows 8 or newer is required for capturing the screen using the Desktop Duplication API.</s:String>
-    <s:String x:Key="S.Recorder.Warning.MissingSharpDx">The SharpDx libraries are required in order to capture the screen using the Desktop Duplication API. Go to Options > Extras to download it.</s:String>
-    
+
     <!--New recorder-->
     <s:String x:Key="S.Recorder.Area">Area</s:String>
     <s:String x:Key="S.Recorder.Area.Select">Select an area</s:String>

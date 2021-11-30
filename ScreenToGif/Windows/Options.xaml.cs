@@ -1281,7 +1281,7 @@ public partial class Options : Window, INotification
 
     private async void FfmpegImageCard_Click(object sender, RoutedEventArgs e)
     {
-        CheckTools(true, false, false);
+        CheckTools(true, false);
 
         var adjusted = Util.Other.AdjustPath(UserSettings.All.FfmpegLocation);
 
@@ -1380,7 +1380,7 @@ public partial class Options : Window, INotification
 
     private async void GifskiImageCard_Click(object sender, RoutedEventArgs e)
     {
-        CheckTools(false, true, false);
+        CheckTools(false, true);
 
         var adjusted = Util.Other.AdjustPath(UserSettings.All.GifskiLocation);
 
@@ -1476,132 +1476,12 @@ public partial class Options : Window, INotification
         #endregion
 #endif
     }
-
-    private async void SharpDxImageCard_Click(object sender, RoutedEventArgs e)
-    {
-        CheckTools(false, false, true);
-
-        var adjusted = Util.Other.AdjustPath(string.IsNullOrWhiteSpace(UserSettings.All.SharpDxLocationFolder) ? "." + Path.DirectorySeparatorChar : UserSettings.All.SharpDxLocationFolder);
-
-        if (!string.IsNullOrWhiteSpace(adjusted) && File.Exists(Path.Combine(adjusted, "SharpDX.dll")))
-        {
-            Native.Helpers.Other.ShowFileProperties(Path.GetFullPath(Path.Combine(adjusted, "SharpDX.dll")));
-            return;
-        }
-
-#if UWP
-            StatusBand.Warning(LocalizationHelper.Get("S.Options.Extras.DownloadRestriction"));
-            return;
-#else
-        #region Save as
-
-        var output = UserSettings.All.SharpDxLocationFolder ?? "";
-
-        if (output.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
-            output = "";
-
-        //It's only a relative path if not null/empty and there's no root folder declared.
-        var isRelative = !string.IsNullOrWhiteSpace(output) && !Path.IsPathRooted(output);
-        var notAlt = !string.IsNullOrWhiteSpace(output) && output.Contains(Path.DirectorySeparatorChar);
-
-        var directory = !string.IsNullOrWhiteSpace(output) ? Path.GetDirectoryName(output) : "";
-        var initial = Directory.Exists(directory) ? directory : AppDomain.CurrentDomain.BaseDirectory;
-
-        var fbd = new FolderSelector
-        {
-            Description = LocalizationHelper.Get("S.Options.Extras.SharpDxLocation.Select"),
-            SelectedPath = isRelative ? Path.GetFullPath(initial) : initial
-        };
-
-        if (!fbd.ShowDialog())
-            return;
-
-        UserSettings.All.SharpDxLocationFolder = fbd.SelectedPath;
-
-        //Converts to a relative path again.
-        if (isRelative && !string.IsNullOrWhiteSpace(UserSettings.All.SharpDxLocationFolder))
-        {
-            var selected = new Uri(UserSettings.All.SharpDxLocationFolder);
-            var baseFolder = new Uri(AppDomain.CurrentDomain.BaseDirectory);
-            var relativeFolder = Uri.UnescapeDataString(baseFolder.MakeRelativeUri(selected).ToString());
-
-            //This app even returns you the correct slashes/backslashes.
-            UserSettings.All.SharpDxLocationFolder = notAlt ? relativeFolder : relativeFolder.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
-        }
-
-        #endregion
-
-        #region Check for permissions
-
-        if (!DirectoryHelper.HasWriteRights(UserSettings.All.SharpDxLocationFolder))
-        {
-            if (!Dialog.Ask(Title, LocalizationHelper.Get("S.Options.Extras.Permission.Header"), LocalizationHelper.Get("S.Options.Extras.Permission.Observation")))
-                return;
-
-            ExtrasGrid.IsEnabled = false;
-            Cursor = Cursors.AppStarting;
-            SharpDxImageCard.Status = ExtrasStatus.Processing;
-            SharpDxImageCard.Description = LocalizationHelper.Get("S.Options.Extras.Downloading");
-
-            //If the app has no permission to write to the selected folder, it should ask to restart the process 
-            await ProcessHelper.RestartAsAdmin($"-d sharpdx \"{UserSettings.All.SharpDxLocationFolder}\"", true);
-
-            CheckTools();
-            ExtrasGrid.IsEnabled = true;
-            Cursor = Cursors.Arrow;
-            return;
-        }
-
-        #endregion
-
-        #region Download
-
-        ExtrasGrid.IsEnabled = false;
-        Cursor = Cursors.AppStarting;
-        SharpDxImageCard.Status = ExtrasStatus.Processing;
-        SharpDxImageCard.Description = LocalizationHelper.Get("S.Options.Extras.Downloading");
-
-        try
-        {
-            //Save to a temp folder.
-            var temp = Path.Combine(Path.GetTempPath(), Path.GetTempFileName());
-
-            using (var client = new WebClient { Proxy = WebHelper.GetProxy() })
-                await client.DownloadFileTaskAsync(new Uri("https://www.screentogif.com/downloads/SharpDx.zip", UriKind.Absolute), temp);
-
-            using (var zip = ZipFile.Open(temp, ZipArchiveMode.Read))
-            {
-                foreach (var entry in zip.Entries)
-                {
-                    if (File.Exists(Path.Combine(UserSettings.All.SharpDxLocationFolder, entry.Name)))
-                        File.Delete(Path.Combine(UserSettings.All.SharpDxLocationFolder, entry.Name));
-
-                    entry?.ExtractToFile(Path.Combine(UserSettings.All.SharpDxLocationFolder, entry.Name), true);
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            LogWriter.Log(ex, "Error while downloading SharpDx");
-            ErrorDialog.Ok("Downloading SharpDx", "It was not possible to download SharpDx", ex.Message, ex);
-        }
-        finally
-        {
-            ExtrasGrid.IsEnabled = true;
-            Cursor = Cursors.Arrow;
-            CheckTools();
-        }
-
-        #endregion
-#endif
-    }
-
-
+    
     private void LocationTextBox_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
     {
         var box = sender as TextBox;
 
-        CheckTools(box?.Tag?.Equals("FFmpeg") ?? false, box?.Tag?.Equals("Gifski") ?? false, box?.Tag?.Equals("SharpDX") ?? false);
+        CheckTools(box?.Tag?.Equals("FFmpeg") ?? false, box?.Tag?.Equals("Gifski") ?? false);
     }
 
 
@@ -1650,7 +1530,7 @@ public partial class Options : Window, INotification
             UserSettings.All.FfmpegLocation = notAlt ? relativeFolder : relativeFolder.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
         }
 
-        CheckTools(true, false, false);
+        CheckTools(true, false);
     }
 
     private void SelectGifski_Click(object sender, RoutedEventArgs e)
@@ -1698,53 +1578,9 @@ public partial class Options : Window, INotification
             UserSettings.All.GifskiLocation = notAlt ? relativeFolder : relativeFolder.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
         }
 
-        CheckTools(false, true, false);
+        CheckTools(false, true);
     }
-
-    private void SelectSharpDx_Click(object sender, RoutedEventArgs e)
-    {
-        var output = UserSettings.All.SharpDxLocationFolder ?? "";
-
-        if (output.ToCharArray().Any(x => Path.GetInvalidPathChars().Contains(x)))
-            output = "";
-
-        //It's only a relative path if not null/empty and there's no root folder declared.
-        var isRelative = !string.IsNullOrWhiteSpace(output) && !Path.IsPathRooted(output);
-        var notAlt = !string.IsNullOrWhiteSpace(output) && (UserSettings.All.SharpDxLocationFolder ?? "").Contains(Path.DirectorySeparatorChar);
-
-        //Gets the current directory folder, where the file is located. If empty, it means that the path is relative.
-        var directory = !string.IsNullOrWhiteSpace(output) ? Path.GetDirectoryName(output) : "";
-
-        if (!string.IsNullOrWhiteSpace(output) && string.IsNullOrWhiteSpace(directory))
-            directory = AppDomain.CurrentDomain.BaseDirectory;
-
-        var initial = Directory.Exists(directory) ? directory : Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-
-        var fbd = new FolderSelector
-        {
-            Description = LocalizationHelper.Get("S.Options.Extras.SharpDxLocation.Select"),
-            SelectedPath = isRelative ? Path.GetFullPath(initial) : initial
-        };
-
-        if (!fbd.ShowDialog())
-            return;
-
-        UserSettings.All.SharpDxLocationFolder = fbd.SelectedPath;
-
-        //Converts to a relative path again.
-        if (isRelative && !string.IsNullOrWhiteSpace(UserSettings.All.SharpDxLocationFolder))
-        {
-            var selected = new Uri(UserSettings.All.SharpDxLocationFolder);
-            var baseFolder = new Uri(AppDomain.CurrentDomain.BaseDirectory);
-            var relativeFolder = Uri.UnescapeDataString(baseFolder.MakeRelativeUri(selected).ToString());
-
-            //This app even returns you the correct slashes/backslashes.
-            UserSettings.All.SharpDxLocationFolder = notAlt ? relativeFolder : relativeFolder.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
-        }
-
-        CheckTools(false, false, true);
-    }
-
+    
 
     private void BrowseFfmpeg_CanExecute(object sender, CanExecuteRoutedEventArgs e)
     {
@@ -1755,12 +1591,7 @@ public partial class Options : Window, INotification
     {
         e.CanExecute = IsLoaded && GifskiImageCard.Status == ExtrasStatus.Ready;
     }
-
-    private void BrowseSharpDx_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-    {
-        e.CanExecute = IsLoaded && SharpDxImageCard.Status == ExtrasStatus.Ready;
-    }
-
+    
     private void BrowseFfmpeg_Execute(object sender, ExecutedRoutedEventArgs e)
     {
         try
@@ -1804,24 +1635,7 @@ public partial class Options : Window, INotification
             LogWriter.Log(ex, "Error while trying to browse the Gifski folder.");
         }
     }
-
-    private void BrowseSharpDx_Execute(object sender, ExecutedRoutedEventArgs e)
-    {
-        try
-        {
-            var folder = Util.Other.AdjustPath(string.IsNullOrWhiteSpace(UserSettings.All.SharpDxLocationFolder) ? "." + Path.DirectorySeparatorChar : UserSettings.All.SharpDxLocationFolder);
-
-            if (string.IsNullOrWhiteSpace(folder))
-                return;
-
-            ProcessHelper.StartWithShell(folder);
-        }
-        catch (Exception ex)
-        {
-            LogWriter.Log(ex, "Error while trying to browse the SharpDx folder.");
-        }
-    }
-
+    
 
     private void ExtrasHyperlink_OnRequestNavigate(object sender, RequestNavigateEventArgs e)
     {
@@ -1835,7 +1649,7 @@ public partial class Options : Window, INotification
         }
     }
 
-    private void CheckTools(bool ffmpeg = true, bool gifski = true, bool sharpdx = true)
+    private void CheckTools(bool ffmpeg = true, bool gifski = true)
     {
         if (!IsLoaded)
             return;
@@ -1879,33 +1693,6 @@ public partial class Options : Window, INotification
                 {
                     GifskiImageCard.Status = ExtrasStatus.Available;
                     GifskiImageCard.Description = string.Format(LocalizationHelper.Get("S.Options.Extras.Download", "{0}"), "~ 512 KB");
-                }
-
-                #endregion
-            }
-
-            if (sharpdx)
-            {
-                #region SharpDX
-
-                if (Util.Other.IsSharpDxPresent(true, true))
-                {
-                    var folder = Util.Other.AdjustPath(string.IsNullOrWhiteSpace(UserSettings.All.SharpDxLocationFolder) ? "." + Path.DirectorySeparatorChar : UserSettings.All.SharpDxLocationFolder);
-
-                    var info1 = new FileInfo(Path.Combine(folder, "SharpDX.dll"));
-                    info1.Refresh();
-                    var info2 = new FileInfo(Path.Combine(folder, "SharpDX.DXGI.dll"));
-                    info2.Refresh();
-                    var info3 = new FileInfo(Path.Combine(folder, "SharpDX.Direct3D11.dll"));
-                    info3.Refresh();
-
-                    SharpDxImageCard.Status = ExtrasStatus.Ready;
-                    SharpDxImageCard.Description = string.Format(LocalizationHelper.Get("S.Options.Extras.Ready", "{0}"), Humanizer.BytesToString(info1.Length + info2.Length + info3.Length));
-                }
-                else
-                {
-                    SharpDxImageCard.Status = ExtrasStatus.Available;
-                    SharpDxImageCard.Description = string.Format(LocalizationHelper.Get("S.Options.Extras.Download", "{0}"), "~ 242 KB");
                 }
 
                 #endregion
@@ -2132,19 +1919,7 @@ public partial class Options : Window, INotification
             e.Cancel = true;
             return;
         }
-
-        if (UserSettings.All.UseDesktopDuplication && !Util.Other.IsSharpDxPresent())
-        {
-            Dialog.Ok(LocalizationHelper.Get("S.Options.Title"), LocalizationHelper.Get("S.Options.Warning.DesktopDuplication.Header"),
-                LocalizationHelper.Get("S.Options.Warning.DesktopDuplication.Message"), Icons.Warning);
-
-            ExtrasRadioButton.IsChecked = true;
-            SharpDxLocationTextBox.Focus();
-
-            e.Cancel = true;
-            return;
-        }
-
+        
         #endregion
 
         Global.IgnoreHotKeys = false;

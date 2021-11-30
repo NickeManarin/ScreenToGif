@@ -918,14 +918,14 @@ public partial class NewRecorder
         CommandBindings.Clear();
         CommandBindings.AddRange(new CommandBindingCollection
         {
-            new CommandBinding(_viewModel.CloseCommand, (sender, args) => Close(),
-                (sender, args) => args.CanExecute = Stage == RecorderStages.Stopped || ((UserSettings.All.CaptureFrequency == CaptureFrequencies.Manual || UserSettings.All.CaptureFrequency == CaptureFrequencies.Interaction) && (Project == null || !Project.Any))),
+            new CommandBinding(_viewModel.CloseCommand, (_, _) => Close(),
+                (_, args) => args.CanExecute = Stage == RecorderStages.Stopped || (UserSettings.All.CaptureFrequency is CaptureFrequencies.Manual or CaptureFrequencies.Interaction && (Project == null || !Project.Any))),
 
             new CommandBinding(_viewModel.OptionsCommand, ShowOptions,
-                (sender, args) => args.CanExecute = (Stage != RecorderStages.Recording || UserSettings.All.CaptureFrequency == CaptureFrequencies.Manual || UserSettings.All.CaptureFrequency == CaptureFrequencies.Interaction) && Stage != RecorderStages.PreStarting),
+                (_, args) => args.CanExecute = (Stage != RecorderStages.Recording || UserSettings.All.CaptureFrequency is CaptureFrequencies.Manual or CaptureFrequencies.Interaction) && Stage != RecorderStages.PreStarting),
 
             new CommandBinding(_viewModel.SwitchFrequencyCommand, SwitchFrequency,
-                (sender, args) =>
+                (_, args) =>
                 {
                     if (args.Parameter != null && !args.Parameter.Equals("Switch"))
                     {
@@ -933,40 +933,39 @@ public partial class NewRecorder
                         return;
                     }
 
-                    args.CanExecute = ((Stage != RecorderStages.Recording || Project == null) || UserSettings.All.CaptureFrequency == CaptureFrequencies.Manual || UserSettings.All.CaptureFrequency == CaptureFrequencies.Interaction) && Stage != RecorderStages.PreStarting;
+                    args.CanExecute = ((Stage != RecorderStages.Recording || Project == null) || UserSettings.All.CaptureFrequency is CaptureFrequencies.Manual or CaptureFrequencies.Interaction) && Stage != RecorderStages.PreStarting;
                 }),
 
-            new CommandBinding(_viewModel.RecordCommand, async (sender, args) => await Record(),
-                (sender, args) => args.CanExecute = (Stage == RecorderStages.Stopped || Stage == RecorderStages.Paused) && UserSettings.All.CaptureFrequency != CaptureFrequencies.Manual),
+            new CommandBinding(_viewModel.RecordCommand, async (_, _) => await Record(),
+                (_, args) => args.CanExecute = Stage is RecorderStages.Stopped or RecorderStages.Paused && UserSettings.All.CaptureFrequency != CaptureFrequencies.Manual),
 
-            new CommandBinding(_viewModel.PauseCommand, (sender, args) => Pause(),
-                (sender, args) => args.CanExecute = Stage == RecorderStages.Recording && UserSettings.All.CaptureFrequency != CaptureFrequencies.Manual),
+            new CommandBinding(_viewModel.PauseCommand, (_, _) => Pause(),
+                (_, args) => args.CanExecute = Stage == RecorderStages.Recording && UserSettings.All.CaptureFrequency != CaptureFrequencies.Manual),
 
-            new CommandBinding(_viewModel.SnapCommand, async (sender, args) => await Snap(),
-                (sender, args) => args.CanExecute = Stage == RecorderStages.Recording && UserSettings.All.CaptureFrequency == CaptureFrequencies.Manual),
+            new CommandBinding(_viewModel.SnapCommand, async (_, _) => await Snap(),
+                (_, args) => args.CanExecute = Stage == RecorderStages.Recording && UserSettings.All.CaptureFrequency == CaptureFrequencies.Manual),
 
-            new CommandBinding(_viewModel.StopLargeCommand, async (sender, args) => await Stop(),
-                (sender, args) => args.CanExecute = (Stage == RecorderStages.Recording && UserSettings.All.CaptureFrequency != CaptureFrequencies.Manual && UserSettings.All.CaptureFrequency != CaptureFrequencies.Interaction && 
-                                                     !UserSettings.All.RecorderDisplayDiscard) || Stage == RecorderStages.PreStarting),
+            new CommandBinding(_viewModel.StopLargeCommand, async (_, _) => await Stop(),
+                (_, args) => args.CanExecute = (Stage == RecorderStages.Recording && UserSettings.All.CaptureFrequency != CaptureFrequencies.Manual && UserSettings.All.CaptureFrequency != CaptureFrequencies.Interaction &&
+                    !UserSettings.All.RecorderDisplayDiscard) || Stage == RecorderStages.PreStarting),
 
-            new CommandBinding(_viewModel.StopCommand, async (sender, args) => await Stop(),
-                (sender, args) =>
+            new CommandBinding(_viewModel.StopCommand, async (_, _) => await Stop(),
+                (_, args) =>
                 {
                     if (UserSettings.All.RecorderCompactMode)
                     {
                         args.CanExecute = Stage == RecorderStages.Recording && ((UserSettings.All.CaptureFrequency != CaptureFrequencies.Manual && UserSettings.All.CaptureFrequency != CaptureFrequencies.Interaction && 
-                            !UserSettings.All.RecorderDisplayDiscard) || FrameCount > 0) || Stage == RecorderStages.Paused || Stage == RecorderStages.PreStarting;
+                            !UserSettings.All.RecorderDisplayDiscard) || FrameCount > 0) || Stage is RecorderStages.Paused or RecorderStages.PreStarting;
                         return;
                     }
 
-                    args.CanExecute = (Stage == RecorderStages.Recording && (UserSettings.All.CaptureFrequency == CaptureFrequencies.Manual || UserSettings.All.CaptureFrequency == CaptureFrequencies.Interaction || 
-                                                                            UserSettings.All.RecorderDisplayDiscard) && FrameCount > 0) || (Stage == RecorderStages.Paused && FrameCount > 0);
+                    args.CanExecute = (Stage == RecorderStages.Recording && (UserSettings.All.CaptureFrequency is CaptureFrequencies.Manual or CaptureFrequencies.Interaction || UserSettings.All.RecorderDisplayDiscard) && FrameCount > 0) ||
+                        (Stage == RecorderStages.Paused && FrameCount > 0);
                 }),
 
-            new CommandBinding(_viewModel.DiscardCommand, async (sender, args) => await Discard(),
-                (sender, args) => args.CanExecute = (Stage == RecorderStages.Paused && FrameCount > 0) || (Stage == RecorderStages.Recording && (UserSettings.All.CaptureFrequency == CaptureFrequencies.Manual || 
-                    UserSettings.All.CaptureFrequency == CaptureFrequencies.Interaction || UserSettings.All.RecorderDisplayDiscard) && FrameCount > 0)),
-        });
+            new CommandBinding(_viewModel.DiscardCommand, async (_, _) => await Discard(),
+                (_, args) => args.CanExecute = (Stage == RecorderStages.Paused && FrameCount > 0) || (Stage == RecorderStages.Recording && (UserSettings.All.CaptureFrequency is CaptureFrequencies.Manual or CaptureFrequencies.Interaction ||
+                    UserSettings.All.RecorderDisplayDiscard) && FrameCount > 0))});
 
         _viewModel.RefreshKeyGestures();
     }
@@ -1216,7 +1215,7 @@ public partial class NewRecorder
     {
         try
         {
-            if (Stage != RecorderStages.Recording)
+            if (Stage != RecorderStages.Recording || UserSettings.All.CaptureFrequency is CaptureFrequencies.Manual or CaptureFrequencies.Interaction)
                 return;
 
             Stage = RecorderStages.Paused;
@@ -1247,7 +1246,7 @@ public partial class NewRecorder
             _limitTimer.Stop();
             await StopCapture();
 
-            if ((Stage == RecorderStages.Recording || Stage == RecorderStages.Paused) && Project?.Any == true)
+            if (Stage is RecorderStages.Recording or RecorderStages.Paused && Project?.Any == true)
             {
                 #region Finishes if it's recording and it has any frames
 
@@ -1401,10 +1400,6 @@ public partial class NewRecorder
             if (!OperationalSystemHelper.IsWin8OrHigher())
                 throw new Exception(LocalizationHelper.Get("S.Recorder.Warning.Windows8"));
 
-            //Check if SharpDx is available.
-            if (!Util.Other.IsSharpDxPresent())
-                throw new Exception(LocalizationHelper.Get("S.Recorder.Warning.MissingSharpDx"));
-
             Capture = GetDirectCapture();
             Capture.DeviceName = _viewModel.CurrentMonitor.Name;
             _viewModel.IsDirectMode = true;
@@ -1525,8 +1520,7 @@ public partial class NewRecorder
                     LocalizationHelper.GetWithFormat("S.Recorder.Screen.Name.Info1", "Graphics adapter: {0}", _viewModel.CurrentMonitor.AdapterName) +
                     Environment.NewLine +
                     LocalizationHelper.GetWithFormat("S.Recorder.Screen.Name.Info2", "Resolution: {0} x {1}", _viewModel.CurrentMonitor.Bounds.Width, _viewModel.CurrentMonitor.Bounds.Height) +
-                    (Math.Abs(_viewModel.CurrentMonitor.Scale - 1) > 0.001 ? Environment.NewLine +
-                                                                             LocalizationHelper.GetWithFormat("S.Recorder.Screen.Name.Info3", "Native resolution: {0} x {1}", _viewModel.CurrentMonitor.NativeBounds.Width, _viewModel.CurrentMonitor.NativeBounds.Height) : "")  +
+                    (Math.Abs(_viewModel.CurrentMonitor.Scale - 1) > 0.001 ? Environment.NewLine + LocalizationHelper.GetWithFormat("S.Recorder.Screen.Name.Info3", "Native resolution: {0} x {1}", _viewModel.CurrentMonitor.NativeBounds.Width, _viewModel.CurrentMonitor.NativeBounds.Height) : "")  +
                     Environment.NewLine +
                     LocalizationHelper.GetWithFormat("S.Recorder.Screen.Name.Info4", "DPI: {0} ({1:0.##}%)", _viewModel.CurrentMonitor.Dpi, _viewModel.CurrentMonitor.Scale * 100d);
                     

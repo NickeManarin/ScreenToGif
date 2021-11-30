@@ -11,7 +11,8 @@ internal class Migration2_32_0To2_35_0
         //Remove deprecated properties.
         var removeKeys = new List<string>
         {
-            "EditorExtendChrome"
+            "EditorExtendChrome",
+            "SharpDxLocationFolder"
         };
         properties.RemoveAll(r => removeKeys.Contains(r.Key));
 
@@ -24,29 +25,6 @@ internal class Migration2_32_0To2_35_0
         {
             switch (child.Type)
             {
-                case "Double": //Delete later.
-                case "WindowState":
-                case "Int32":
-                case "Rect":
-                case "Color":
-                case "BoardStylusTip":
-                case "StylusTip":
-                case "Boolean":
-                case "CompressionLevel":
-                case "DoubleCollection":
-                case "String":
-                case "Key":
-                case "ModifierKeys":
-                case "BitmapScalingMode":
-                case "FontFamily":
-                case "FontStyle":
-                case "FontWeight":
-                case "VerticalAlignment":
-                case "HorizontalAlignment":
-                case "TextAlignment":
-                case "Orientation":
-                    break;
-
                 case "ArrayList":
                 {
                     UpdateNamespaces(child.Children);

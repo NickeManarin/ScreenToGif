@@ -13,6 +13,7 @@ public abstract class BaseCapture : ICapture
     #region Properties
 
     public bool WasStarted { get; set; }
+    public bool IsAcceptingFrames { get; set; }
     public int FrameCount { get; set; }
     public int MinimumDelay { get; set; }
         
@@ -111,6 +112,7 @@ public abstract class BaseCapture : ICapture
         });
 
         WasStarted = true;
+        IsAcceptingFrames = true;
     }
 
     public virtual void ResetConfiguration()
@@ -154,10 +156,12 @@ public abstract class BaseCapture : ICapture
         if (!WasStarted)
             return;
 
+        IsAcceptingFrames = false;
+
         //Stop the consumer thread.
         BlockingCollection.CompleteAdding();
 
-        await Task.WhenAll(_task);
+        await _task;
 
         WasStarted = false;
     }

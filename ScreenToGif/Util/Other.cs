@@ -475,56 +475,5 @@ public static class Other
         return false;
     }
 
-    public static bool IsSharpDxPresent(bool ignoreEnvironment = false, bool ignoreEmpty = false)
-    {
-        //So, in order to get the correct location, I need to combine the current base directory with the relative path.
-        var realPath = AdjustPath(string.IsNullOrWhiteSpace(UserSettings.All.SharpDxLocationFolder) ? "." + Path.DirectorySeparatorChar : UserSettings.All.SharpDxLocationFolder);
-
-        //All these libraries should exist:
-        //SharpDX.dll
-        //SharpDX.DXGI.dll
-        //SharpDX.Direct3D11.dll
-
-        //File location already choosen or detected.
-        if (realPath != null && File.Exists(Path.Combine(realPath, "SharpDX.dll")) && File.Exists(Path.Combine(realPath, "SharpDX.DXGI.dll")) && File.Exists(Path.Combine(realPath, "SharpDX.Direct3D11.dll")))
-        {
-            //The path was not selected, but the file exists inside the same folder.
-            if (!ignoreEmpty && string.IsNullOrWhiteSpace(UserSettings.All.SharpDxLocationFolder))
-                UserSettings.All.SharpDxLocationFolder = "." + Path.DirectorySeparatorChar;
-
-            return true;
-        }
-
-        //If not found by direct/relative path, ignore the environment variables.
-        if (ignoreEnvironment)
-            return false;
-
-        #region Check Environment Variables
-
-        var variable = Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.Machine) + ";" +
-                       Environment.GetEnvironmentVariable("Path", EnvironmentVariableTarget.User);
-
-        foreach (var path in variable.Split(';').Where(w => !string.IsNullOrWhiteSpace(w)))
-        {
-            try
-            {
-                if (!File.Exists(Path.Combine(path, "SharpDX.dll")) || !File.Exists(Path.Combine(path, "SharpDX.DXGI.dll")) || !File.Exists(Path.Combine(path, "SharpDX.Direct3D11.dll")))
-                    continue;
-            }
-            catch (Exception ex)
-            {
-                //LogWriter.Log(ex, "Checking the path variables", path);
-                continue;
-            }
-
-            UserSettings.All.GifskiLocation = path;
-            return true;
-        }
-
-        #endregion
-
-        return false;
-    }
-
     #endregion
 }

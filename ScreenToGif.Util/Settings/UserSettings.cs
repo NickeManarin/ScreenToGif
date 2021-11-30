@@ -1731,13 +1731,7 @@ public class UserSettings : INotifyPropertyChanged
         get => (string)GetValue();
         set => SetValue(value);
     }
-
-    public string SharpDxLocationFolder
-    {
-        get => (string)GetValue();
-        set => SetValue(value);
-    }
-
+    
     #endregion
 
 

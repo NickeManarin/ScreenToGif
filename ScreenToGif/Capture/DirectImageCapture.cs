@@ -378,7 +378,9 @@ internal class DirectImageCapture : BaseCapture
             frame.Path = $"{Project.FullPath}{FrameCount}.png";
             frame.Delay = FrameRate.GetMilliseconds();
             frame.Image = bitmap;
-            BlockingCollection.Add(frame);
+
+            if (IsAcceptingFrames)
+                BlockingCollection.Add(frame);
 
             #endregion
 
@@ -404,7 +406,10 @@ internal class DirectImageCapture : BaseCapture
             LogWriter.Log(ex, "It was not possible to finish capturing the frame with DirectX.");
 
             MajorCrashHappened = true;
-            Application.Current.Dispatcher.Invoke(() => OnError.Invoke(ex));
+
+            if (IsAcceptingFrames)
+                Application.Current.Dispatcher.Invoke(() => OnError.Invoke(ex));
+
             return FrameCount;
         }
         finally
@@ -561,11 +566,13 @@ internal class DirectImageCapture : BaseCapture
             frame.Path = $"{Project.FullPath}{FrameCount}.png";
             frame.Delay = FrameRate.GetMilliseconds();
             frame.Image = bitmap;
-            BlockingCollection.Add(frame);
+
+            if (IsAcceptingFrames)
+                BlockingCollection.Add(frame);
 
             #endregion
 
-            Device.ImmediateContext.UnmapSubresource(StagingTexture, 0);
+            Device.ImmediateContext?.UnmapSubresource(StagingTexture, 0);
 
             resource?.Dispose();
             return FrameCount;
@@ -587,7 +594,10 @@ internal class DirectImageCapture : BaseCapture
             LogWriter.Log(ex, "It was not possible to finish capturing the frame with DirectX.");
 
             MajorCrashHappened = true;
-            Application.Current.Dispatcher.Invoke(() => OnError.Invoke(ex));
+
+            if (IsAcceptingFrames)
+                Application.Current.Dispatcher.Invoke(() => OnError.Invoke(ex));
+
             return FrameCount;
         }
         finally
