@@ -1,0 +1,187 @@
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+using ScreenToGif.Domain.Enums;
+using ScreenToGif.Util;
+using ScreenToGif.Util.Settings;
+
+namespace ScreenToGif.ViewModel.Tasks;
+
+public class ProgressViewModel : BaseTaskViewModel
+{
+    #region Variables
+
+    private ProgressTypes _type;
+    private FontFamily _fontFamily;
+    private FontStyle _fontStyle;
+    private FontWeight _fontWeight;
+    private double _fontSize;
+    private Color _fontColor;
+    private Color _color;
+    private int _precision;
+    private int _startNumber;
+    private bool _showTotal;
+    private string _format;
+    private string _dateFormat;
+    private double _thickness;
+    private VerticalAlignment _verticalAlignment;
+    private HorizontalAlignment _horizontalAlignment;
+    private Orientation _orientation;
+
+    #endregion
+
+    public ProgressViewModel()
+    {
+        TaskType = TaskTypes.Progress;
+    }
+
+
+    public ProgressTypes Type
+    {
+        get => _type;
+        set => SetProperty(ref _type, value);
+    }
+
+    public FontFamily FontFamily
+    {
+        get => _fontFamily;
+        set => SetProperty(ref _fontFamily, value);
+    }
+
+    public FontStyle FontStyle
+    {
+        get => _fontStyle;
+        set => SetProperty(ref _fontStyle, value);
+    }
+
+    public FontWeight FontWeight
+    {
+        get => _fontWeight;
+        set => SetProperty(ref _fontWeight, value);
+    }
+
+    public double FontSize
+    {
+        get => _fontSize;
+        set => SetProperty(ref _fontSize, value);
+    }
+
+    public Color FontColor
+    {
+        get => _fontColor;
+        set => SetProperty(ref _fontColor, value);
+    }
+
+    public Color Color
+    {
+        get => _color;
+        set => SetProperty(ref _color, value);
+    }
+
+    public int Precision
+    {
+        get => _precision;
+        set => SetProperty(ref _precision, value);
+    }
+
+    public int StartNumber
+    {
+        get => _startNumber;
+        set => SetProperty(ref _startNumber, value);
+    }
+
+    public bool ShowTotal
+    {
+        get => _showTotal;
+        set => SetProperty(ref _showTotal, value);
+    }
+
+    public string Format
+    {
+        get => _format;
+        set => SetProperty(ref _format, value);
+    }
+
+    public string DateFormat
+    {
+        get => _dateFormat;
+        set => SetProperty(ref _dateFormat, value);
+    }
+
+    public double Thickness
+    {
+        get => _thickness;
+        set => SetProperty(ref _thickness, value);
+    }
+
+    public VerticalAlignment VerticalAlignment
+    {
+        get => _verticalAlignment;
+        set => SetProperty(ref _verticalAlignment, value);
+    }
+
+    public HorizontalAlignment HorizontalAlignment
+    {
+        get => _horizontalAlignment;
+        set => SetProperty(ref _horizontalAlignment, value);
+    }
+
+    public Orientation Orientation
+    {
+        get => _orientation;
+        set => SetProperty(ref _orientation, value);
+    }
+
+    public override string ToString()
+    {
+        return $"{(Type == ProgressTypes.Bar ? LocalizationHelper.Get("S.Progress.Type.Bar") : LocalizationHelper.Get("S.Progress.Type.Text"))}, " +
+               $"{LocalizationHelper.Get("S.Color")} #{Color.A:X2}{Color.R:X2}{Color.G:X2}{Color.B:X2}" +
+               $"{(Type == ProgressTypes.Text ? ", " + LocalizationHelper.GetWithIndex(Precision, "S.Progress.Precision.", "Minutes", "Seconds", "Milliseconds", "Percentage", "Count", "DateOfRecording", "Custom") : "")}";
+    }
+
+    public static ProgressViewModel Default()
+    {
+        return new ProgressViewModel
+        {
+            Type = ProgressTypes.Text,
+            FontFamily = new FontFamily("Segoe UI"),
+            FontStyle = FontStyles.Normal,
+            FontWeight = FontWeights.Normal,
+            FontSize = 14,
+            FontColor = Color.FromArgb(255, 255, 255, 255),
+            Color = Color.FromArgb(255, 0, 0, 0),
+            Precision = 0,
+            StartNumber = 0,
+            ShowTotal = true,
+            Format = " $s/@s s",
+            DateFormat = "G",
+            Thickness = 10,
+            VerticalAlignment = VerticalAlignment.Bottom,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            Orientation = Orientation.Horizontal
+        };
+    }
+
+    public static ProgressViewModel FromSettings()
+    {
+        return new ProgressViewModel
+        {
+            Type = UserSettings.All.ProgressType,
+            FontFamily = UserSettings.All.ProgressFontFamily,
+            FontStyle = UserSettings.All.ProgressFontStyle,
+            FontWeight = UserSettings.All.ProgressFontWeight,
+            FontSize = UserSettings.All.ProgressFontSize,
+            FontColor = UserSettings.All.ProgressFontColor,
+            Color = UserSettings.All.ProgressColor,
+            Precision = UserSettings.All.ProgressPrecision,
+            StartNumber = UserSettings.All.ProgressStartNumber,
+            ShowTotal = UserSettings.All.ProgressShowTotal,
+            Format = UserSettings.All.ProgressFormat,
+            DateFormat = UserSettings.All.ProgressDateFormat,
+            Thickness = UserSettings.All.ProgressThickness,
+            VerticalAlignment = UserSettings.All.ProgressVerticalAligment,
+            HorizontalAlignment = UserSettings.All.ProgressHorizontalAligment,
+            Orientation = UserSettings.All.ProgressOrientation
+        };
+    }
+}

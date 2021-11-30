@@ -1,27 +1,26 @@
 using System;
 using System.IO;
-using ScreenToGif.Settings;
+using ScreenToGif.Util.Settings;
 using ScreenToGif.Windows.Other;
 
-namespace ScreenToGif.Util
+namespace ScreenToGif.Util;
+
+internal static class StorageUtils
 {
-    internal static class StorageUtils
+    internal static void PurgeCache()
     {
-        internal static void PurgeCache()
+        if (UserSettings.All.AskDeleteCacheWhenClosing && !CacheDialog.Ask(false, out _))
+            return;
+
+        try
         {
-            if (UserSettings.All.AskDeleteCacheWhenClosing && !CacheDialog.Ask(false, out _))
-                return;
+            var cache = Other.AdjustPath(UserSettings.All.TemporaryFolderResolved);
 
-            try
-            {
-                var cache = Other.AdjustPath(UserSettings.All.TemporaryFolderResolved);
-
-                Directory.Delete(cache, true);
-            }
-            catch (Exception e)
-            {
-                LogWriter.Log(e, "Purging cache");
-            }
+            Directory.Delete(cache, true);
+        }
+        catch (Exception e)
+        {
+            LogWriter.Log(e, "Purging cache");
         }
     }
 }

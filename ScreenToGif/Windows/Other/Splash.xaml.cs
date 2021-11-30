@@ -1,63 +1,62 @@
 using System.Windows;
 
-namespace ScreenToGif.Windows.Other
+namespace ScreenToGif.Windows.Other;
+
+public partial class Splash : Window
 {
-    public partial class Splash : Window
+    private static Splash _splash;
+
+    #region Properties
+
+    public static readonly DependencyProperty SubtitleProperty = DependencyProperty.Register(nameof(Subtitle), typeof(string), typeof(Splash), new PropertyMetadata(default(string)));
+
+    public static readonly DependencyProperty SecondsLeftProperty = DependencyProperty.Register(nameof(SecondsLeft), typeof(int), typeof(Splash), new PropertyMetadata(default(int)));
+
+    public string Subtitle
     {
-        private static Splash _splash;
+        get => (string) GetValue(SubtitleProperty);
+        set => SetValue(SubtitleProperty, value);
+    }
 
-        #region Properties
+    public int SecondsLeft
+    {
+        get => (int)GetValue(SecondsLeftProperty);
+        set => SetValue(SecondsLeftProperty, value);
+    }
 
-        public static readonly DependencyProperty SubtitleProperty = DependencyProperty.Register(nameof(Subtitle), typeof(string), typeof(Splash), new PropertyMetadata(default(string)));
+    #endregion
 
-        public static readonly DependencyProperty SecondsLeftProperty = DependencyProperty.Register(nameof(SecondsLeft), typeof(int), typeof(Splash), new PropertyMetadata(default(int)));
+    public Splash()
+    {
+        InitializeComponent();
+    }
 
-        public string Subtitle
+    public static void Display(string title, string subtitle = null)
+    {
+        _splash?.Close();
+
+        _splash = new Splash
         {
-            get => (string) GetValue(SubtitleProperty);
-            set => SetValue(SubtitleProperty, value);
-        }
+            Title = title,
+            Subtitle = subtitle
+        };
+        _splash.Show();
+    }
 
-        public int SecondsLeft
-        {
-            get => (int)GetValue(SecondsLeftProperty);
-            set => SetValue(SecondsLeftProperty, value);
-        }
+    public static void SetTime(int seconds)
+    {
+        if (_splash != null)
+            _splash.SecondsLeft = seconds;
+    }
 
-        #endregion
+    public static void Dismiss()
+    {
+        _splash?.Close();
+        _splash = null;
+    }
 
-        public Splash()
-        {
-            InitializeComponent();
-        }
-
-        public static void Display(string title, string subtitle = null)
-        {
-            _splash?.Close();
-
-            _splash = new Splash
-            {
-                Title = title,
-                Subtitle = subtitle
-            };
-            _splash.Show();
-        }
-
-        public static void SetTime(int seconds)
-        {
-            if (_splash != null)
-                _splash.SecondsLeft = seconds;
-        }
-
-        public static void Dismiss()
-        {
-            _splash?.Close();
-            _splash = null;
-        }
-
-        public static bool IsBeingDisplayed()
-        {
-            return _splash != null;
-        }
+    public static bool IsBeingDisplayed()
+    {
+        return _splash != null;
     }
 }

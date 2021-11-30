@@ -1,17 +1,16 @@
-﻿using System.Windows;
-using ScreenToGif.Util;
+using System.Windows;
+using ScreenToGif.Domain.Enums;
 
-namespace ScreenToGif.Controls.Items
+namespace ScreenToGif.Controls.Items;
+
+public class QuantizationMethodItem : GenericItem
 {
-    public class QuantizationMethodItem : GenericItem
-    {
-        public static readonly DependencyProperty QuantizationTypeProperty = DependencyProperty.Register(nameof(QuantizationType), typeof(ColorQuantizationType), typeof(QuantizationMethodItem), 
-            new PropertyMetadata(default(ColorQuantizationType)));
+    public static readonly DependencyProperty QuantizationTypeProperty = DependencyProperty.Register(nameof(QuantizationType), typeof(ColorQuantizationTypes), typeof(QuantizationMethodItem), 
+        new PropertyMetadata(default(ColorQuantizationTypes)));
         
-        public ColorQuantizationType QuantizationType
-        {
-            get => (ColorQuantizationType) GetValue(QuantizationTypeProperty);
-            set => SetValue(QuantizationTypeProperty, value);
-        }
+    public ColorQuantizationTypes QuantizationType
+    {
+        get => (ColorQuantizationTypes) GetValue(QuantizationTypeProperty);
+        set => SetValue(QuantizationTypeProperty, value);
     }
 }

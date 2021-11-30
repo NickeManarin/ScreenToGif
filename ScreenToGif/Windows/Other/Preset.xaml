@@ -1,9 +1,9 @@
-﻿<Window x:Class="ScreenToGif.Windows.Other.Preset"
+<Window x:Class="ScreenToGif.Windows.Other.Preset"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:n="clr-namespace:ScreenToGif.Controls"
         xmlns:i="clr-namespace:ScreenToGif.Controls.Items"
-        xmlns:u="clr-namespace:ScreenToGif.Util"
+        xmlns:e="clr-namespace:ScreenToGif.Domain.Enums;assembly=ScreenToGif.Domain"
         Title="{DynamicResource S.Preset.Title}" Width="400" Height="390" MinWidth="300" MinHeight="390" SizeToContent="Height"
         WindowStartupLocation="CenterScreen" SnapsToDevicePixels="True" Background="{DynamicResource Panel.Background}" Loaded="Window_Loaded">
 
@@ -65,16 +65,16 @@
                 </ComboBox.ItemContainerStyle>
 
                 <i:GenericItem x:Name="EncoderScreenToGifItem" Title="ScreenToGif" Description="{DynamicResource S.SaveAs.Encoder.ScreenToGif.Info}"
-                               Value="{x:Static u:EncoderType.ScreenToGif}" ImageId="Vector.Logo"/>
+                               Value="{x:Static e:EncoderTypes.ScreenToGif}" ImageId="Vector.Logo"/>
 
                 <i:GenericItem x:Name="EncoderFfmpegItem" Title="FFmpeg" Description="{DynamicResource S.SaveAs.Encoder.Ffmpeg.Info}"
-                               Value="{x:Static u:EncoderType.FFmpeg}" ImageId="Vector.Ffmpeg"/>
+                               Value="{x:Static e:EncoderTypes.FFmpeg}" ImageId="Vector.Ffmpeg"/>
 
                 <i:GenericItem x:Name="EncoderGifskiItem" Title="Gifski" Description="{DynamicResource S.SaveAs.Encoder.Gifski.Info}"
-                               Value="{x:Static u:EncoderType.Gifski}" ImageId="Vector.Gifski"/>
+                               Value="{x:Static e:EncoderTypes.Gifski}" ImageId="Vector.Gifski"/>
 
                 <i:GenericItem x:Name="EncoderSystemItem" Title="System" Description="{DynamicResource S.SaveAs.Encoder.System.Info}"
-                               Value="{x:Static u:EncoderType.System}" ImageId="Vector.Net"/>
+                               Value="{x:Static e:EncoderTypes.System}" ImageId="Vector.Net"/>
             </ComboBox>
             
             <n:LabelSeparator Grid.Row="2" Text="{DynamicResource S.Preset.Name}"/>

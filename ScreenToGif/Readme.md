@@ -4,16 +4,14 @@ This is the current project of ScreenToGif.
 
 _VS 2019 and .Net 4.8 or newer required._
 
-## What's new? (Version 2.34)
+## What's new? (Version 2.35)
 
-• Added Hebrew localization.  
+• Migration to .NET 6 and project restructuring.  
 
 ### Fixed:
 
-♦ Added support for the new distributition system for v2.35 and newer releases. It's important to download this version if you want to properly update to newer versions afterwards.
-♦ Numerical fields will now only react to the scroll if they have focus.
-♦ The window selection mode could crash because of a wrongly sized window.
-♦ When in frame selection mode, the frame list was allowing the loop between start and end selection to happen.  
+♦ Reduced the change for a crash when stopping the recording when using DirectX.
+♦ Discarding when in manual or interaction capture modes, but cancelling in the recorder was creating a block scenario.  
 
 ### Known Bugs:
   

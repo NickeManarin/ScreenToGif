@@ -1,9 +1,10 @@
 <Application x:Class="ScreenToGif.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
+             xmlns:c="clr-namespace:ScreenToGif.Util.Converters;assembly=ScreenToGif.Util"
+             xmlns:cx="clr-namespace:ScreenToGif.Util.Converters"
              xmlns:n="clr-namespace:ScreenToGif.Controls"
-             xmlns:m="clr-namespace:ScreenToGif.Model"
+             xmlns:viewModel="clr-namespace:ScreenToGif.ViewModel"
              ShutdownMode="OnExplicitShutdown" Startup="App_Startup" Exit="App_Exit" 
              DispatcherUnhandledException="App_DispatcherUnhandledException">
 
@@ -57,7 +58,7 @@
                 <ResourceDictionary Source="/Resources/Localization/StringResources.en.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <m:ApplicationViewModel x:Key="AppViewModel"/>
+            <viewModel:ApplicationViewModel x:Key="AppViewModel"/>
 
             <!--Converter-->
             <BooleanToVisibilityConverter x:Key="Bool2Visibility"/>
@@ -71,7 +72,7 @@
             <c:InvertedIntToVisibility x:Key="InvertedIntToVisibility"/>
             <c:EnumToVisibility x:Key="EnumToVisibility"/>
             <c:InvertedBool x:Key="InvertedBool"/>
-            <c:CommandToInputGestureText x:Key="CommandToInputGestureText"/>
+            <cx:CommandToInputGestureText x:Key="CommandToInputGestureText"/>
             <c:EnumToBool x:Key="EnumToBool"/>
             <c:InvertedEnumToBool x:Key="InvertedEnumToBool"/>
             <c:BoolAndToVisibility x:Key="BoolAndToVisibility"/>
