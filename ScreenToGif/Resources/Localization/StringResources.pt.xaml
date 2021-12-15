@@ -109,11 +109,12 @@
     <s:String x:Key="S.Command.DeleteNext">Remover todos os próximos quadros</s:String>
     <s:String x:Key="S.Command.RemoveDuplicates">Remover quadros duplicados</s:String>
     <s:String x:Key="S.Command.Reduce">Reduzir a quantidade de quadros</s:String>
-    <s:String x:Key="S.Command.Reverse">Reverse animation</s:String>
-    <s:String x:Key="S.Command.Yoyo">Yoyo, makes the animation go forward and backwards</s:String>
-    <s:String x:Key="S.Command.MoveLeft">Move the selected frame to the left</s:String>
-    <s:String x:Key="S.Command.MoveRight">Move the selected frame to the right</s:String>
-    <s:String x:Key="S.Command.Resize">Resize all frames</s:String>
+    <s:String x:Key="S.Command.SmoothLoop">Criar um animação com loop suave</s:String>
+    <s:String x:Key="S.Command.Reverse">Reverter a animação</s:String>
+    <s:String x:Key="S.Command.Yoyo">Transformar a animação em ioiô, indo para frente e para trás</s:String>
+    <s:String x:Key="S.Command.MoveLeft">Mover o quadro selecionado para a esquerda</s:String>
+    <s:String x:Key="S.Command.MoveRight">Mover o quadro selecionado para a direita</s:String>
+    <s:String x:Key="S.Command.Resize">Redimensionar todos os quadros</s:String>
     <s:String x:Key="S.Command.Crop">Cortar todos os quadros</s:String>
     <s:String x:Key="S.Command.FlipRotate">Girar ou rotacionar os quadros</s:String>
     <s:String x:Key="S.Command.Caption">Adicionar uma legenda</s:String>
@@ -1023,6 +1024,7 @@
     <s:String x:Key="S.Editor.Edit.Delete">Remover</s:String>
     <s:String x:Key="S.Editor.Edit.Frames.Duplicates">Remover&#x0d;Duplicados</s:String>
     <s:String x:Key="S.Editor.Edit.Frames.Reduce">Reduzir&#x0d;Quant. de Quadros</s:String>
+    <s:String x:Key="S.Editor.Edit.Frames.SmoothLoop">Loop&#x0d;Suave</s:String>
     <s:String x:Key="S.Editor.Edit.DeletePrevious">Remover Todos Anteriores</s:String>
     <s:String x:Key="S.Editor.Edit.DeleteNext">Remover Todos Próximos</s:String>
     
@@ -1153,7 +1155,9 @@
     <s:String x:Key="S.Editor.ApplyingTransition">Aplicando efeito de transição</s:String>
     <s:String x:Key="S.Editor.PreparingSaving">Preparando para salvar</s:String>
     <s:String x:Key="S.Editor.CancelDiscard">Cancelar carregamento e descartar projeto.</s:String>
-
+    <s:String x:Key="S.Editor.FindingLoop">Procurando loop perfeito</s:String>
+    <s:String x:Key="S.Editor.DiscardingLoop">Descartando quadros não usados no loop</s:String>
+    
     <!--Editor • Frame list-->
     <s:String x:Key="S.Editor.List.Frame">Quadro:</s:String>
     <s:String x:Key="S.Editor.List.OpenImage">Abrir Imagem</s:String>
@@ -1292,6 +1296,16 @@
     <s:String x:Key="S.RemoveDuplicates.Delay.Average">Utilize a média</s:String>
     <s:String x:Key="S.RemoveDuplicates.Delay.Sum">Utilize a soma</s:String>
     <s:String x:Key="S.RemoveDuplicates.Info">Esta ação analiza cada quadro (pixel por pixel) e remove aqueles que são no mínimo {0} % similares ao seu vizinho imediato.&#x0d;Você pode escolher para ajustar a duração da exibição dos quadros.</s:String>
+
+    <!--Editor • Smooth Loop-->
+    <s:String x:Key="S.SmoothLoop.Header">Criar loop suave</s:String>
+    <s:String x:Key="S.SmoothLoop.StartThreshold">Ignorar primeiros:</s:String>
+    <s:String x:Key="S.SmoothLoop.From">Comparar do:</s:String>
+    <s:String x:Key="S.SmoothLoop.From.Last">Fim</s:String>
+    <s:String x:Key="S.SmoothLoop.From.First">Início</s:String>
+    <s:String x:Key="S.SmoothLoop.Info">Tenta encontrar um quadro com no mínimo {0} % de similaridade do quadro inicial e deleta todos os próximos quadros.&#x0d;Você pode escolher se você quer ignorar alguns quadros iniciais e/ou executar a verificação do início (depois dos quadros ignorados) ou do fim.</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.Threshold">O número de quadros para serem ignorados precisa ser menor que o número de quadros totais.</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.NoLoopFound">Não foi posssível criar um loop suave com as configurações atuais.</s:String>
     
     <!--Editor • Captions-->
     <s:String x:Key="S.Caption.Text">Texto</s:String>

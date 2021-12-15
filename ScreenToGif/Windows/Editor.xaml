@@ -264,6 +264,7 @@
         <CommandBinding Command="{StaticResource Command.DeleteNext}" CanExecute="DeleteNext_CanExecute" Executed="DeleteNext_Executed"/>
         <CommandBinding Command="{StaticResource Command.RemoveDuplicates}" CanExecute="RemoveDuplicates_CanExecute" Executed="RemoveDuplicates_Executed"/>
         <CommandBinding Command="{StaticResource Command.Reduce}" CanExecute="Reduce_CanExecute" Executed="Reduce_Executed"/>
+        <CommandBinding Command="{StaticResource Command.SmoothLoop}" CanExecute="RemoveDuplicates_CanExecute" Executed="SmoothLoop_Executed"/>
 
         <!--Reordering-->
         <CommandBinding Command="{StaticResource Command.Reverse}" CanExecute="Reordering_CanExecute" Executed="Reverse_Executed"/>
@@ -862,13 +863,14 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition Height="16"/>
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4" Content="{DynamicResource S.Editor.Edit.Frames}" 
+                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5" Content="{DynamicResource S.Editor.Edit.Frames}" 
 						       HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0" 
 						       FontSize="12" Foreground="{DynamicResource Element.Foreground.Gray112}"/>
 
@@ -887,7 +889,12 @@
                                           ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
                                           ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                        <Grid Grid.Row="0" Grid.Column="3">
+                        <n:ExtendedButton Grid.Row="0" Grid.Column="3" x:Name="SmoothLoopButton" Text="{DynamicResource S.Editor.Edit.Frames.SmoothLoop}" Icon="{StaticResource Vector.Repeat}"
+                                          MinWidth="55" ContentHeight="28" ContentWidth="28" Style="{StaticResource Style.Button.Vertical}" Command="{StaticResource Command.SmoothLoop}"
+                                          ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
+                                          ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
+
+                        <Grid Grid.Row="0" Grid.Column="4">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition/>
@@ -4203,6 +4210,61 @@
                                         <MultiBinding Converter="{StaticResource FormatConverter}">
                                             <Binding ElementName="DuplicatesTextBlock" Path="Tag"/>
                                             <Binding Source="{x:Static t:UserSettings.All}" Path="DuplicatesSimilarity"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </Grid>
+                        </Grid>
+
+                        <Grid x:Name="SmoothLoopGrid" Visibility="Collapsed">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="27"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <n:LabelSeparator Grid.Row="0" Text="{DynamicResource S.SmoothLoop.Header}"/>
+                            <Grid Grid.Row="1" Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource S.RemoveDuplicates.Similarity}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <n:DoubleUpDown Grid.Row="0" Grid.Column="1" x:Name="SmoothLoopSimilarityDoubleUpDown" Minimum="0.1" Maximum="100" Margin="10,5" MinWidth="80" 
+                                                Value="{Binding Source={x:Static t:UserSettings.All}, Path=SmoothLoopSimilarity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.SmoothLoop.StartThreshold}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <n:IntegerUpDown Grid.Row="1" Grid.Column="1" x:Name="SmoothLoopThresholdDoubleUpDown" Minimum="1" Margin="10,5" MinWidth="80" 
+                                                 Value="{Binding Source={x:Static t:UserSettings.All}, Path=SmoothLoopStartThreshold, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.SmoothLoop.From}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <ComboBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="10,5" 
+                                          SelectedIndex="{Binding Source={x:Static t:UserSettings.All}, Path=SmoothLoopFrom, Converter={StaticResource EnumToInt}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    <ComboBoxItem Content="{DynamicResource S.SmoothLoop.From.Last}"/>
+                                    <ComboBoxItem Content="{DynamicResource S.SmoothLoop.From.First}"/>
+                                </ComboBox>
+                            </Grid>
+
+                            <Grid Grid.Row="2" Grid.Column="0" Margin="10,10,5,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Border Grid.Column="0" Width="15" Height="15" Background="{StaticResource Vector.Info}" Opacity="{DynamicResource Element.Opacity}"/>
+                                <TextBlock Grid.Column="1" x:Name="SmoothLoopTextBlock" Foreground="{DynamicResource Element.Foreground.Detail}" Tag="{DynamicResource S.SmoothLoop.Info}"
+                                           FontStyle="Italic" FontSize="12" Padding="3" TextWrapping="WrapWithOverflow">
+                                    <TextBlock.Text>
+                                        <MultiBinding Converter="{StaticResource FormatConverter}">
+                                            <Binding ElementName="SmoothLoopTextBlock" Path="Tag"/>
+                                            <Binding Source="{x:Static t:UserSettings.All}" Path="SmoothLoopSimilarity"/>
                                         </MultiBinding>
                                     </TextBlock.Text>
                                 </TextBlock>

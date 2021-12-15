@@ -109,6 +109,7 @@
     <s:String x:Key="S.Command.DeleteNext">Delete all next frames</s:String>
     <s:String x:Key="S.Command.RemoveDuplicates">Remove duplicates</s:String>
     <s:String x:Key="S.Command.Reduce">Reduce frame count</s:String>
+    <s:String x:Key="S.Command.SmoothLoop">Create a smooth loop</s:String>
     <s:String x:Key="S.Command.Reverse">Reverse animation</s:String>
     <s:String x:Key="S.Command.Yoyo">Makes the animation go forward and backwards</s:String>
     <s:String x:Key="S.Command.MoveLeft">Move the selected frame to the left</s:String>
@@ -1023,6 +1024,7 @@
     <s:String x:Key="S.Editor.Edit.Delete">Delete</s:String>
     <s:String x:Key="S.Editor.Edit.Frames.Duplicates">Remove&#x0d;Duplicates</s:String>
     <s:String x:Key="S.Editor.Edit.Frames.Reduce">Reduce&#x0d;Frame Count</s:String>
+    <s:String x:Key="S.Editor.Edit.Frames.SmoothLoop">Smooth&#x0d;Loop</s:String>
     <s:String x:Key="S.Editor.Edit.DeletePrevious">Delete All Previous</s:String>
     <s:String x:Key="S.Editor.Edit.DeleteNext">Delete All Next</s:String>
     
@@ -1153,6 +1155,8 @@
     <s:String x:Key="S.Editor.ApplyingTransition">Applying the transition effect</s:String>
     <s:String x:Key="S.Editor.PreparingSaving">Preparing to save</s:String>
     <s:String x:Key="S.Editor.CancelDiscard">Cancel loading and discard project.</s:String>
+    <s:String x:Key="S.Editor.FindingLoop">Finding perfect loop</s:String>
+    <s:String x:Key="S.Editor.DiscardingLoop">Discarding frames not used in loop</s:String>
 
     <!--Editor • Frame list-->
     <s:String x:Key="S.Editor.List.Frame">Frame:</s:String>
@@ -1292,6 +1296,16 @@
     <s:String x:Key="S.RemoveDuplicates.Delay.Average">Use the average</s:String>
     <s:String x:Key="S.RemoveDuplicates.Delay.Sum">Use the sum</s:String>
     <s:String x:Key="S.RemoveDuplicates.Info">This action analyzes each frame (pixel by pixel) and removes the ones that are at least {0} % similar to its immediate neighbor.&#x0d;You can choose if you want to adjust the delay (duration of exhibition) of the frames.</s:String>
+
+    <!--Editor • Smooth Loop-->
+    <s:String x:Key="S.SmoothLoop.Header">Create smooth loop</s:String>
+    <s:String x:Key="S.SmoothLoop.StartThreshold">Ignore first:</s:String>
+    <s:String x:Key="S.SmoothLoop.From">Compare from:</s:String>
+    <s:String x:Key="S.SmoothLoop.From.Last">End</s:String>
+    <s:String x:Key="S.SmoothLoop.From.First">Start</s:String>
+    <s:String x:Key="S.SmoothLoop.Info">Tries to find a frame at least {0} % similar to the start frame and deletes all later frames.&#x0d;You can choose if you want to ignore some initial frames and initiate the comparison from the start (after the threshold) or the end.</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.Threshold">The number of frames to ignore needs to be smaller than the total number of frames.</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.NoLoopFound">It was not possible to create a smooth loop with the selected settings.</s:String>
     
     <!--Editor • Captions-->
     <s:String x:Key="S.Caption.Text">Text</s:String>

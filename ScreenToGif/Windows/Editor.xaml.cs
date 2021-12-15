@@ -544,7 +544,7 @@ namespace ScreenToGif.Windows
 
         private void Item_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (!(sender is FrameViewModel item)) // && !WasChangingSelection)
+            if (sender is not FrameViewModel item) // && !WasChangingSelection)
                 return;
 
             LastSelected = item.Number;
@@ -603,7 +603,7 @@ namespace ScreenToGif.Windows
         private void NewProject_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.NewAnimation, LocalizationHelper.Get("S.Editor.File.Blank", true), "Vector.File.New", ApplyNewProjectButton_Click);
+            ShowPanel(PanelTypes.NewAnimation, LocalizationHelper.Get("S.Editor.File.Blank", true), "Vector.File.New", ApplyNewProjectButton_Click);
         }
 
         private void ApplyNewProjectButton_Click(object sender, RoutedEventArgs e)
@@ -864,7 +864,7 @@ namespace ScreenToGif.Windows
         {
             Pause();
 
-            ShowPanel(PanelType.SaveAs, LocalizationHelper.Get("S.Editor.File.Save", true), "Vector.Save", SaveAsButton_Click);
+            ShowPanel(PanelTypes.SaveAs, LocalizationHelper.Get("S.Editor.File.Save", true), "Vector.Save", SaveAsButton_Click);
         }
 
         private async void SaveAsButton_Click(object sender, RoutedEventArgs e)
@@ -873,7 +873,7 @@ namespace ScreenToGif.Windows
 
             try
             {
-                if (!(CustomContentControl.Content is ExportPanel panel))
+                if (CustomContentControl.Content is not ExportPanel panel)
                     return;
 
                 //Lock UI.
@@ -900,7 +900,7 @@ namespace ScreenToGif.Windows
             }
             finally
             {
-                //Workaround for not disdabling the CanExecute of the panel.
+                //Workaround for not disabling the CanExecute of the panel.
                 _applyAction = SaveAsButton_Click;
 
                 //Return state of UI.
@@ -968,7 +968,7 @@ namespace ScreenToGif.Windows
             e.Handled = true;
             Pause();
 
-            ShowPanel(PanelType.LoadRecent, LocalizationHelper.Get("S.Editor.File.LoadRecent", true), "Vector.Project", LoadRecentButton_Click);
+            ShowPanel(PanelTypes.LoadRecent, LocalizationHelper.Get("S.Editor.File.LoadRecent", true), "Vector.Project", LoadRecentButton_Click);
         }
 
         private void RecentDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -978,7 +978,7 @@ namespace ScreenToGif.Windows
 
         private void RecentDataGrid_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Return || e.Key == Key.Enter)
+            if (e.Key is Key.Return or Key.Enter)
             {
                 LoadRecentButton_Click(sender, e);
                 e.Handled = true;
@@ -995,7 +995,7 @@ namespace ScreenToGif.Windows
 
             try
             {
-                if (!(RecentDataGrid.SelectedItem is ProjectInfo project))
+                if (RecentDataGrid.SelectedItem is not ProjectInfo project)
                     throw new Exception("Nothing selected");
 
                 if (Project != null && Project.RelativePath == project.RelativePath)
@@ -1162,7 +1162,7 @@ namespace ScreenToGif.Windows
 
             ShowHint("S.Hint.Cut", false, selected.Count);
 
-            ShowPanel(PanelType.Clipboard, LocalizationHelper.Get("S.Editor.Home.Clipboard", true), "Vector.Paste");
+            ShowPanel(PanelTypes.Clipboard, LocalizationHelper.Get("S.Editor.Home.Clipboard", true), "Vector.Paste");
         }
 
         private void Copy_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -1206,7 +1206,7 @@ namespace ScreenToGif.Windows
 
             ShowHint("S.Hint.Copy", false, selected.Count);
 
-            ShowPanel(PanelType.Clipboard, LocalizationHelper.Get("S.Editor.Home.Clipboard", true), "Vector.Paste");
+            ShowPanel(PanelTypes.Clipboard, LocalizationHelper.Get("S.Editor.Home.Clipboard", true), "Vector.Paste");
         }
 
         private void Paste_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -1236,7 +1236,7 @@ namespace ScreenToGif.Windows
 
         private void ShowClipboardButton_Click(object sender, RoutedEventArgs e)
         {
-            ShowPanel(PanelType.Clipboard, LocalizationHelper.Get("S.Editor.Home.Clipboard", true), "Vector.Paste");
+            ShowPanel(PanelTypes.Clipboard, LocalizationHelper.Get("S.Editor.Home.Clipboard", true), "Vector.Paste");
         }
 
 
@@ -1653,7 +1653,7 @@ namespace ScreenToGif.Windows
         private void RemoveDuplicates_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.RemoveDuplicates, LocalizationHelper.Get("S.Editor.Edit.Frames.Duplicates", true), "Vector.RemoveImage", ApplyRemoveDuplicatesCountButton_Click);
+            ShowPanel(PanelTypes.RemoveDuplicates, LocalizationHelper.Get("S.Editor.Edit.Frames.Duplicates", true), "Vector.RemoveImage", ApplyRemoveDuplicatesCountButton_Click);
         }
 
         private async void ApplyRemoveDuplicatesCountButton_Click(object sender, RoutedEventArgs e)
@@ -1678,7 +1678,7 @@ namespace ScreenToGif.Windows
         private void Reduce_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.ReduceFrames, LocalizationHelper.Get("S.Editor.Edit.Frames.Reduce", true), "Vector.RemoveImage", ApplyReduceFrameCountButton_Click);
+            ShowPanel(PanelTypes.ReduceFrames, LocalizationHelper.Get("S.Editor.Edit.Frames.Reduce", true), "Vector.RemoveImage", ApplyReduceFrameCountButton_Click);
         }
 
         private async void ApplyReduceFrameCountButton_Click(object sender, RoutedEventArgs e)
@@ -1718,6 +1718,52 @@ namespace ScreenToGif.Windows
             await LoadSelectedStarter(ReduceFactorIntegerUpDown.Value - 1, Project.Frames.Count - 1);
 
             ShowHint("S.Hint.Reduce");
+
+            ClosePanel();
+        }
+
+        private void SmoothLoop_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Pause();
+            ShowPanel(PanelTypes.SmoothLoop, LocalizationHelper.Get("S.Editor.Edit.Frames.SmoothLoop", true), "Vector.Repeat", ApplySmoothLoopButton_Click);
+        }
+
+        private async void ApplySmoothLoopButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (UserSettings.All.SmoothLoopStartThreshold > Project.Frames.Count - 1)
+            {
+                StatusList.Warning(LocalizationHelper.Get("S.SmoothLoop.Warning.Threshold"));
+                return;
+            }
+
+            Cursor = Cursors.AppStarting;
+
+            var index = await Task.Run(() => SmoothLoopAsync((decimal)UserSettings.All.SmoothLoopSimilarity, UserSettings.All.SmoothLoopStartThreshold, UserSettings.All.SmoothLoopFrom));
+
+            if (index == 1 || index == Project.Frames.Count)
+            {
+                StatusList.Warning(LocalizationHelper.Get("S.SmoothLoop.Warning.NoLoopFound"));
+
+                //Workaround for not disabling the CanExecute of the panel.
+                _applyAction = ApplySmoothLoopButton_Click;
+
+                //Return state of UI.
+                Cursor = Cursors.Arrow;
+                IsLoading = false;
+
+                HideProgress();
+
+                CommandManager.InvalidateRequerySuggested();
+                return;
+            }
+
+            for (var i = _viewModel.Frames.Count - 1; i >= Project.Frames.Count; i--)
+                _viewModel.Frames.RemoveAt(i);
+
+            SelectNear(LastSelected);
+            await Task.Run(() => Project.Persist());
+
+            await LoadSelectedStarter(index, Project.Frames.Count - 1);
 
             ClosePanel();
         }
@@ -1822,7 +1868,7 @@ namespace ScreenToGif.Windows
         private void OverrideDelay_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.OverrideDelay, LocalizationHelper.Get("S.Editor.Edit.Delay.Override", true), "Vector.OverrideDelay", ApplyOverrideDelayButton_Click);
+            ShowPanel(PanelTypes.OverrideDelay, LocalizationHelper.Get("S.Editor.Edit.Delay.Override", true), "Vector.OverrideDelay", ApplyOverrideDelayButton_Click);
         }
 
         private async void ApplyOverrideDelayButton_Click(object sender, RoutedEventArgs e)
@@ -1851,7 +1897,7 @@ namespace ScreenToGif.Windows
         private void IncreaseDecreaseDelay_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.IncreaseDecreaseDelay, LocalizationHelper.Get("S.Editor.Edit.Delay.IncreaseDecrease", true), "Vector.IncreaseDecreaseDelay", ApplyIncreaseDecreaseDelayButtonClick);
+            ShowPanel(PanelTypes.IncreaseDecreaseDelay, LocalizationHelper.Get("S.Editor.Edit.Delay.IncreaseDecrease", true), "Vector.IncreaseDecreaseDelay", ApplyIncreaseDecreaseDelayButtonClick);
         }
 
         private async void ApplyIncreaseDecreaseDelayButtonClick(object sender, RoutedEventArgs e)
@@ -1885,7 +1931,7 @@ namespace ScreenToGif.Windows
         private void ScaleDelay_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.ScaleDelay, LocalizationHelper.Get("S.Editor.Edit.Delay.Scale", true), "Vector.ScaleDelay", ApplyScaleDelayButtonClick);
+            ShowPanel(PanelTypes.ScaleDelay, LocalizationHelper.Get("S.Editor.Edit.Delay.Scale", true), "Vector.ScaleDelay", ApplyScaleDelayButtonClick);
         }
 
         private async void ApplyScaleDelayButtonClick(object sender, RoutedEventArgs e)
@@ -1931,7 +1977,7 @@ namespace ScreenToGif.Windows
 
         private void Resize_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            ShowPanel(PanelType.Resize, LocalizationHelper.Get("S.Editor.Image.Resize", true), "Vector.Resize", ApplyResizeButton_Click);
+            ShowPanel(PanelTypes.Resize, LocalizationHelper.Get("S.Editor.Image.Resize", true), "Vector.Resize", ApplyResizeButton_Click);
         }
 
         private async void ApplyResizeButton_Click(object sender, RoutedEventArgs e)
@@ -1965,7 +2011,7 @@ namespace ScreenToGif.Windows
         private void Crop_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.Crop, LocalizationHelper.Get("S.Editor.Image.Crop", true), "Vector.Crop", ApplyCropButton_Click);
+            ShowPanel(PanelTypes.Crop, LocalizationHelper.Get("S.Editor.Image.Crop", true), "Vector.Crop", ApplyCropButton_Click);
         }
 
         private CroppingAdorner _cropAdorner;
@@ -2098,7 +2144,7 @@ namespace ScreenToGif.Windows
         private void FlipRotate_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.FlipRotate, LocalizationHelper.Get("S.Editor.Image.FlipRotate", true), "Vector.FlipHorizontal", ApplyFlipRotateButton_Click);
+            ShowPanel(PanelTypes.FlipRotate, LocalizationHelper.Get("S.Editor.Image.FlipRotate", true), "Vector.FlipHorizontal", ApplyFlipRotateButton_Click);
         }
 
         private async void ApplyFlipRotateButton_Click(object sender, RoutedEventArgs e)
@@ -2134,7 +2180,7 @@ namespace ScreenToGif.Windows
         private void Caption_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.Caption, LocalizationHelper.Get("S.Editor.Image.Caption", true), "Vector.Caption", ApplyCaptionButton_Click);
+            ShowPanel(PanelTypes.Caption, LocalizationHelper.Get("S.Editor.Image.Caption", true), "Vector.Caption", ApplyCaptionButton_Click);
         }
 
         private async void ApplyCaptionButton_Click(object sender, RoutedEventArgs e)
@@ -2170,7 +2216,7 @@ namespace ScreenToGif.Windows
         private void FreeText_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.FreeText, LocalizationHelper.Get("S.Editor.Image.FreeText", true), "Vector.FreeText", ApplyFreeTextButton_Click);
+            ShowPanel(PanelTypes.FreeText, LocalizationHelper.Get("S.Editor.Image.FreeText", true), "Vector.FreeText", ApplyFreeTextButton_Click);
         }
 
         private void FreeTextTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -2220,7 +2266,7 @@ namespace ScreenToGif.Windows
         private void TitleFrame_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.TitleFrame, LocalizationHelper.Get("S.Editor.Image.TitleFrame", true), "Vector.TitleFrame", ApplyTitleFrameButton_Click);
+            ShowPanel(PanelTypes.TitleFrame, LocalizationHelper.Get("S.Editor.Image.TitleFrame", true), "Vector.TitleFrame", ApplyTitleFrameButton_Click);
         }
 
         private async void ApplyTitleFrameButton_Click(object sender, RoutedEventArgs e)
@@ -2250,7 +2296,7 @@ namespace ScreenToGif.Windows
         private void KeyStrokes_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.KeyStrokes, LocalizationHelper.Get("S.Editor.Image.KeyStrokes", true), "Vector.Keyboard", ApplyKeyStrokesButton_Click);
+            ShowPanel(PanelTypes.KeyStrokes, LocalizationHelper.Get("S.Editor.Image.KeyStrokes", true), "Vector.Keyboard", ApplyKeyStrokesButton_Click);
         }
 
         private void EditKeyStrokesButton_Click(object sender, RoutedEventArgs e)
@@ -2297,7 +2343,7 @@ namespace ScreenToGif.Windows
         private void FreeDrawing_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.FreeDrawing, LocalizationHelper.Get("S.Editor.Image.FreeDrawing", true), "Vector.FreeDrawing", ApplyFreeDrawingButton_Click);
+            ShowPanel(PanelTypes.FreeDrawing, LocalizationHelper.Get("S.Editor.Image.FreeDrawing", true), "Vector.FreeDrawing", ApplyFreeDrawingButton_Click);
         }
 
         private async void ApplyFreeDrawingButton_Click(object sender, RoutedEventArgs e)
@@ -2335,7 +2381,7 @@ namespace ScreenToGif.Windows
         private void Shapes_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.Shapes, LocalizationHelper.Get("S.Editor.Image.Shape", true), "Vector.Ellipse", ApplyShapesButton_Click);
+            ShowPanel(PanelTypes.Shapes, LocalizationHelper.Get("S.Editor.Image.Shape", true), "Vector.Ellipse", ApplyShapesButton_Click);
         }
 
         private void ShapeModes_Checked(object sender, RoutedEventArgs e)
@@ -2413,7 +2459,7 @@ namespace ScreenToGif.Windows
         private void MouseClicks_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.MouseClicks, LocalizationHelper.Get("S.Editor.Image.Clicks", true), "Vector.Cursor", ApplyMouseClicksButton_Click);
+            ShowPanel(PanelTypes.MouseClicks, LocalizationHelper.Get("S.Editor.Image.Clicks", true), "Vector.Cursor", ApplyMouseClicksButton_Click);
         }
 
         private async void ApplyMouseClicksButton_Click(object sender, RoutedEventArgs e)
@@ -2439,7 +2485,7 @@ namespace ScreenToGif.Windows
         private void Watermark_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.Watermark, LocalizationHelper.Get("S.Editor.Image.Watermark", true), "Vector.Watermark", ApplyWatermarkButton_Click);
+            ShowPanel(PanelTypes.Watermark, LocalizationHelper.Get("S.Editor.Image.Watermark", true), "Vector.Watermark", ApplyWatermarkButton_Click);
 
             TopWatermarkDoubleUpDown.Scale = LeftWatermarkDoubleUpDown.Scale = this.Scale();
             TopWatermarkDoubleUpDown.Value = UserSettings.All.WatermarkTop;
@@ -2531,7 +2577,7 @@ namespace ScreenToGif.Windows
         private void Border_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.Border, LocalizationHelper.Get("S.Editor.Image.Border", true), "Vector.Border", ApplyBorderButton_Click);
+            ShowPanel(PanelTypes.Border, LocalizationHelper.Get("S.Editor.Image.Border", true), "Vector.Border", ApplyBorderButton_Click);
         }
 
         private void BorderProperties_ValueChanged(object sender, RoutedEventArgs e)
@@ -2593,7 +2639,7 @@ namespace ScreenToGif.Windows
         private void Shadow_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.Shadow, LocalizationHelper.Get("S.Editor.Image.Shadow", true), "Vector.Shadow", ApplyShadowButton_Click);
+            ShowPanel(PanelTypes.Shadow, LocalizationHelper.Get("S.Editor.Image.Shadow", true), "Vector.Shadow", ApplyShadowButton_Click);
         }
 
         private void ShadowProperties_ValueChanged(object sender, RoutedEventArgs e)
@@ -2667,7 +2713,7 @@ namespace ScreenToGif.Windows
         private void Obfuscate_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.Obfuscate, LocalizationHelper.Get("S.Editor.Image.Obfuscate", true), "Vector.Obfuscate", ApplyObfuscateButton_Click);
+            ShowPanel(PanelTypes.Obfuscate, LocalizationHelper.Get("S.Editor.Image.Obfuscate", true), "Vector.Obfuscate", ApplyObfuscateButton_Click);
         }
 
         private async void ApplyObfuscateButton_Click(object sender, RoutedEventArgs e)
@@ -2697,7 +2743,7 @@ namespace ScreenToGif.Windows
         private void Cinemagraph_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.Cinemagraph, LocalizationHelper.Get("S.Editor.Image.Cinemagraph", true), "Vector.Cinemagraph", ApplyCinemagraphButton_Click);
+            ShowPanel(PanelTypes.Cinemagraph, LocalizationHelper.Get("S.Editor.Image.Cinemagraph", true), "Vector.Cinemagraph", ApplyCinemagraphButton_Click);
         }
 
         private async void ApplyCinemagraphButton_Click(object sender, RoutedEventArgs e)
@@ -2759,7 +2805,7 @@ namespace ScreenToGif.Windows
             ProgressHorizontalRectangle.Width = size.Width / 2;
             ProgressVerticalRectangle.Height = size.Height / 2;
 
-            ShowPanel(PanelType.Progress, LocalizationHelper.Get("S.Editor.Image.Progress", true), "Vector.Progress", ApplyProgressButton_Click);
+            ShowPanel(PanelTypes.Progress, LocalizationHelper.Get("S.Editor.Image.Progress", true), "Vector.Progress", ApplyProgressButton_Click);
         }
 
         private void ProgressPrecisionComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -2825,7 +2871,7 @@ namespace ScreenToGif.Windows
         private void Fade_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.Fade, LocalizationHelper.Get("S.Editor.Fade.Title", true), "Vector.Fade", ApplyFadeButtonButton_Click);
+            ShowPanel(PanelTypes.Fade, LocalizationHelper.Get("S.Editor.Fade.Title", true), "Vector.Fade", ApplyFadeButtonButton_Click);
         }
 
         private async void ApplyFadeButtonButton_Click(object sender, RoutedEventArgs e)
@@ -2861,7 +2907,7 @@ namespace ScreenToGif.Windows
         private void Slide_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelType.Slide, LocalizationHelper.Get("S.Editor.Slide.Title", true), "Vector.Slide", ApplySlideButtonButton_Click);
+            ShowPanel(PanelTypes.Slide, LocalizationHelper.Get("S.Editor.Slide.Title", true), "Vector.Slide", ApplySlideButtonButton_Click);
         }
 
         private async void ApplySlideButtonButton_Click(object sender, RoutedEventArgs e)
@@ -3095,7 +3141,7 @@ namespace ScreenToGif.Windows
         {
             Pause();
 
-            if (!(e.Data.GetData(DataFormats.FileDrop) is string[] fileNames) || fileNames.Length == 0)
+            if (e.Data.GetData(DataFormats.FileDrop) is not string[] fileNames || fileNames.Length == 0)
                 return;
 
             #region Validation
@@ -3156,7 +3202,7 @@ namespace ScreenToGif.Windows
 
         private void InkCanvas_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key != Key.Escape || !(sender is InkCanvas canvas))
+            if (e.Key != Key.Escape || sender is not InkCanvas canvas)
                 return;
 
             //This event only exists because the InkPanel eats the Esc key used in Commands.
@@ -4381,7 +4427,7 @@ namespace ScreenToGif.Windows
             SetFocusOnCurrentFrame();
         }
 
-        private async void ShowPanel(PanelType type, string title, string vector, Action<object, RoutedEventArgs> apply = null)
+        private async void ShowPanel(PanelTypes type, string title, string vector, Action<object, RoutedEventArgs> apply = null)
         {
             var focusFirstVisibleChild = true;
 
@@ -4428,10 +4474,10 @@ namespace ScreenToGif.Windows
 
             switch (type)
             {
-                case PanelType.NewAnimation:
+                case PanelTypes.NewAnimation:
                     NewGrid.Visibility = Visibility.Visible;
                     break;
-                case PanelType.SaveAs:
+                case PanelTypes.SaveAs:
                     ApplyButton.SetResourceReference(ExtendedButton.TextProperty, "S.Action.Save");
                     ApplyButton.Icon = FindResource("Vector.Save") as Brush;
 
@@ -4476,7 +4522,7 @@ namespace ScreenToGif.Windows
 
                     focusFirstVisibleChild = false;
                     break;
-                case PanelType.LoadRecent:
+                case PanelTypes.LoadRecent:
                     ApplyButton.SetResourceReference(ExtendedButton.TextProperty, "S.Action.Open");
                     ApplyButton.Icon = FindResource("Vector.Open") as Brush;
                     LoadRecentGrid.Visibility = Visibility.Visible;
@@ -4491,10 +4537,10 @@ namespace ScreenToGif.Windows
                     CommandManager.InvalidateRequerySuggested();
 
                     break;
-                case PanelType.Clipboard:
+                case PanelTypes.Clipboard:
                     ClipboardGrid.Visibility = Visibility.Visible;
                     break;
-                case PanelType.Resize:
+                case PanelTypes.Resize:
                 {
                     var image = Project.Frames[0].Path.SourceFrom();
 
@@ -4506,11 +4552,11 @@ namespace ScreenToGif.Windows
                     break;
                 }
 
-                case PanelType.FlipRotate:
+                case PanelTypes.FlipRotate:
                     FlipRotateGrid.Visibility = Visibility.Visible;
                     ShowHint("S.Hint.FlipRotate2", true);
                     break;
-                case PanelType.Crop:
+                case PanelTypes.Crop:
 
                     #region Crop
 
@@ -4531,35 +4577,35 @@ namespace ScreenToGif.Windows
                     #endregion
 
                     break;
-                case PanelType.Caption:
+                case PanelTypes.Caption:
                     CaptionGrid.Visibility = Visibility.Visible;
                     ShowHint("S.Hint.ApplySelected", true);
                     break;
-                case PanelType.FreeText:
+                case PanelTypes.FreeText:
                     FreeTextGrid.Visibility = Visibility.Visible;
                     ShowHint("S.Hint.ApplySelected", true);
                     break;
-                case PanelType.TitleFrame:
+                case PanelTypes.TitleFrame:
                     TitleFrameGrid.Visibility = Visibility.Visible;
                     ShowHint("S.Hint.TitleFrame2", true);
                     break;
-                case PanelType.KeyStrokes:
+                case PanelTypes.KeyStrokes:
                     KeyStrokesLabel.Text = "Ctrl + C";
                     KeyStrokesGrid.Visibility = Visibility.Visible;
                     ShowHint("S.Hint.ApplyAll", true);
                     break;
-                case PanelType.FreeDrawing:
+                case PanelTypes.FreeDrawing:
                     FreeDrawingGrid.Visibility = Visibility.Visible;
                     ShowHint("S.Hint.ApplySelected", true);
                     break;
-                case PanelType.Shapes:
+                case PanelTypes.Shapes:
                     ShapesGrid.Visibility = Visibility.Visible;
                     ShowHint("S.Hint.ApplySelected", true);
 
                     ShapeProperties_Changed(this, null);
                     ShapeType_SelectionChanged(ShapesListBox, null);
                     break;
-                case PanelType.Watermark:
+                case PanelTypes.Watermark:
 
                     #region Watermark
 
@@ -4585,61 +4631,65 @@ namespace ScreenToGif.Windows
                     #endregion
 
                     break;
-                case PanelType.Border:
+                case PanelTypes.Border:
                     BorderProperties_ValueChanged(null, null);
                     BorderGrid.Visibility = Visibility.Visible;
                     ShowHint("S.Hint.ApplySelectedOrAll", true);
                     break;
-                case PanelType.Obfuscate:
+                case PanelTypes.Obfuscate:
                     ObfuscateOverlaySelectControl.Scale = this.Scale();
                     ObfuscateOverlaySelectControl.Retry();
                     ObfuscateGrid.Visibility = Visibility.Visible;
                     ShowHint("S.Hint.ApplySelected", true);
                     break;
-                case PanelType.Progress:
+                case PanelTypes.Progress:
                     ProgressGrid.Visibility = Visibility.Visible;
                     ChangeProgressTextToCurrent();
                     ShowHint("S.Hint.ApplyAll", true);
                     break;
-                case PanelType.Shadow:
+                case PanelTypes.Shadow:
                     ShadowProperties_ValueChanged(null, null);
                     ShadowGrid.Visibility = Visibility.Visible;
                     ShowHint("S.Hint.ApplyAll", true);
                     break;
-                case PanelType.OverrideDelay:
+                case PanelTypes.OverrideDelay:
                     OverrideDelayGrid.Visibility = Visibility.Visible;
                     ShowHint("S.Hint.ApplySelected", true);
                     break;
-                case PanelType.IncreaseDecreaseDelay:
+                case PanelTypes.IncreaseDecreaseDelay:
                     IncreaseDecreaseDelayGrid.Visibility = Visibility.Visible;
                     ShowHint("S.Hint.ApplySelected", true);
                     break;
-                case PanelType.ScaleDelay:
+                case PanelTypes.ScaleDelay:
                     ScaleDelayGrid.Visibility = Visibility.Visible;
                     ShowHint("S.Hint.ApplySelected", true);
                     break;
-                case PanelType.Cinemagraph:
+                case PanelTypes.Cinemagraph:
                     CinemagraphGrid.Visibility = Visibility.Visible;
                     ShowHint("S.Hint.Cinemagraph", true);
                     break;
-                case PanelType.Fade:
+                case PanelTypes.Fade:
                     FadeGrid.Visibility = Visibility.Visible;
                     ShowHint("S.Transitions.Info", true);
                     break;
-                case PanelType.Slide:
+                case PanelTypes.Slide:
                     SlideGrid.Visibility = Visibility.Visible;
                     ShowHint("S.Transitions.Info", true);
                     break;
-                case PanelType.ReduceFrames:
+                case PanelTypes.ReduceFrames:
                     ReduceGrid.Visibility = Visibility.Visible;
                     ShowHint("S.Hint.ApplySelectedOrAll", true);
                     break;
-                case PanelType.RemoveDuplicates:
+                case PanelTypes.RemoveDuplicates:
                     RemoveDuplicatesGrid.Visibility = Visibility.Visible;
                     ShowHint("S.Hint.ApplyAll", true);
                     break;
-                case PanelType.MouseClicks:
+                case PanelTypes.MouseClicks:
                     MouseClicksGrid.Visibility = Visibility.Visible;
+                    ShowHint("S.Hint.ApplyAll", true);
+                    break;
+                case PanelTypes.SmoothLoop:
+                    SmoothLoopGrid.Visibility = Visibility.Visible;
                     ShowHint("S.Hint.ApplyAll", true);
                     break;
             }
@@ -4663,9 +4713,9 @@ namespace ScreenToGif.Windows
 
             #region Animate
 
-            if ((type == PanelType.SaveAs || type == PanelType.LoadRecent) && ActionGrid.Width < 300)
+            if (type is PanelTypes.SaveAs or PanelTypes.LoadRecent && ActionGrid.Width < 300)
                 ActionGrid.BeginStoryboard(this.FindStoryboard("ShowExtendedPanelStoryboard"), HandoffBehavior.Compose);
-            else if (type != PanelType.SaveAs && type != PanelType.LoadRecent && (ActionGrid.Width < 5 || ActionGrid.Width > 280))
+            else if (type != PanelTypes.SaveAs && type != PanelTypes.LoadRecent && ActionGrid.Width is < 5 or > 280)
                 ActionGrid.BeginStoryboard(this.FindStoryboard("ShowPanelStoryboard"), HandoffBehavior.Compose);
 
             #endregion
@@ -4924,7 +4974,7 @@ namespace ScreenToGif.Windows
         {
             FrameListView.Focus();
 
-            if (!(FrameListView.SelectedItem is FrameViewModel current))
+            if (FrameListView.SelectedItem is not FrameViewModel current)
                 return;
 
             if (FrameListView.ItemContainerGenerator.ContainerFromItem(current) is ListViewItem container)
@@ -5032,10 +5082,9 @@ namespace ScreenToGif.Windows
                     using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(json)))
                     {
                         var ser = new DataContractJsonSerializer(typeof(ProjectInfo));
-                        var project = ser.ReadObject(ms) as ProjectInfo;
 
                         //Ignore empty projects.
-                        if (project == null || project.Frames.Count == 0 || !project.Frames.Any(x => File.Exists(x.Path)))
+                        if (ser.ReadObject(ms) is not ProjectInfo project || project.Frames.Count == 0 || !project.Frames.Any(x => File.Exists(x.Path)))
                             continue;
 
                         list.Add(project);
@@ -5178,7 +5227,7 @@ namespace ScreenToGif.Windows
             #region Last minute validation
 
             //Validates each file name when saving multiple images (if more than one image, that will not be zipped).
-            if (preset is ImagePreset imagePreset && !imagePreset.ZipFiles)
+            if (preset is ImagePreset { ZipFiles: false })
             {
                 if (!preset.OverwriteOnSave)
                 {
@@ -5430,7 +5479,7 @@ namespace ScreenToGif.Windows
         private List<int> OverlayAsync(RenderTargetBitmap render, bool forAll = false)
         {
             var frameList = forAll ? Project.Frames : SelectedFrames();
-            var selectedList = Dispatcher.Invoke<List<int>>(() =>
+            var selectedList = Dispatcher.Invoke(() =>
             {
                 IsLoading = true;
 
@@ -5613,7 +5662,7 @@ namespace ScreenToGif.Windows
                         continue;
 
                     //Ignore Control, Shift, Alt and Windows keys if not acting as modifiers.
-                    if (model.KeyStrokesIgnoreNonModifiers && (frame.KeyList[i].Key >= Key.LeftShift && frame.KeyList[i].Key <= Key.RightAlt || frame.KeyList[i].Key == Key.LWin || frame.KeyList[i].Key == Key.RWin))
+                    if (model.KeyStrokesIgnoreNonModifiers && frame.KeyList[i].Key is >= Key.LeftShift and <= Key.RightAlt or Key.LWin or Key.RWin)
                         continue;
 
                     //If there's another key ahead on the same frame.
@@ -5626,16 +5675,16 @@ namespace ScreenToGif.Windows
                         //TODO: If there's a key between the current key and the one that is repeated, they are going to be shown.
 
                         //If this frame being added will be repeated within the next key presses as a modifier, ignore.
-                        if ((frame.KeyList[i].Key == Key.LeftCtrl || frame.KeyList[i].Key == Key.RightCtrl) && (frame.KeyList[i + 1].Modifiers & ModifierKeys.Control) != 0)
+                        if (frame.KeyList[i].Key is Key.LeftCtrl or Key.RightCtrl && (frame.KeyList[i + 1].Modifiers & ModifierKeys.Control) != 0)
                             continue;
 
-                        if ((frame.KeyList[i].Key == Key.LeftShift || frame.KeyList[i].Key == Key.RightShift) && (frame.KeyList[i + 1].Modifiers & ModifierKeys.Shift) != 0)
+                        if (frame.KeyList[i].Key is Key.LeftShift or Key.RightShift && (frame.KeyList[i + 1].Modifiers & ModifierKeys.Shift) != 0)
                             continue;
 
-                        if ((frame.KeyList[i].Key == Key.LeftAlt || frame.KeyList[i].Key == Key.RightAlt) && (frame.KeyList[i + 1].Modifiers & ModifierKeys.Alt) != 0)
+                        if (frame.KeyList[i].Key is Key.LeftAlt or Key.RightAlt && (frame.KeyList[i + 1].Modifiers & ModifierKeys.Alt) != 0)
                             continue;
 
-                        if ((frame.KeyList[i].Key == Key.LWin || frame.KeyList[i].Key == Key.RWin) && (frame.KeyList[i + 1].Modifiers & ModifierKeys.Windows) != 0)
+                        if (frame.KeyList[i].Key is Key.LWin or Key.RWin && (frame.KeyList[i + 1].Modifiers & ModifierKeys.Windows) != 0)
                             continue;
                     }
 
@@ -5979,8 +6028,7 @@ namespace ScreenToGif.Windows
         {
             ShowProgress(LocalizationHelper.Get("S.Editor.ApplyingFlipRotate"), Project.Frames.Count);
 
-            var frameList = type == FlipRotateType.RotateLeft90 ||
-                type == FlipRotateType.RotateRight90 ? Project.Frames : SelectedFrames();
+            var frameList = type is FlipRotateType.RotateLeft90 or FlipRotateType.RotateRight90 ? Project.Frames : SelectedFrames();
 
             Dispatcher.Invoke(() => IsLoading = true);
 
@@ -6189,6 +6237,61 @@ namespace ScreenToGif.Windows
             return alterList.Concat(removeList).Min();
         }
 
+        private int SmoothLoopAsync(decimal similarity, int threshold, SmoothLoopFromModes from)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                IsLoading = true;
+                Cursor = Cursors.AppStarting;
+            });
+
+            ShowProgress(LocalizationHelper.Get("S.Editor.FindingLoop"), Project.Frames.Count - threshold);
+
+            var start = from == SmoothLoopFromModes.Start ? threshold : Project.Frames.Count - 1;
+            var end = from == SmoothLoopFromModes.Start ? Project.Frames.Count - 1 : threshold;
+            var step = from == SmoothLoopFromModes.Start ? 1 : -1;
+
+            var found = -1;
+            var count = 0;
+            var max = Math.Abs(start - end) + 1;
+            
+            while (count < max)
+            {
+                UpdateProgress(count++);
+
+                if (ImageMethods.CalculateDifference(Project.Frames[0], Project.Frames[start]) >= similarity)
+                {
+                    found = start;
+                    break;
+                }
+
+                count++;
+                start += step;
+            }
+            
+            if (found == -1)
+                return Project.Frames.Count;
+
+            var removeList = Project.Frames.GetRange(found + 1, Project.Frames.Count - 1 - found).Select(s => s.Index).ToList();
+
+            ActionStack.SaveState(ActionStack.EditAction.Remove, Project.Frames, removeList);
+
+            ShowProgress(LocalizationHelper.Get("S.Editor.DiscardingLoop"), removeList.Count);
+
+            var removeFrames = removeList.Select(i => Project.Frames[i]).ToArray();
+            count = 0;
+
+            foreach (var frame in removeFrames)
+            {
+                File.Delete(frame.Path);
+                Project.Frames.Remove(frame);
+
+                UpdateProgress(count++);
+            }
+
+            return Project.Frames.Count - 1;
+        }
+
         private void DelayAsync(DelayViewModel model, bool forAll = false, bool ignoreUi = false)
         {
             var frameList = forAll ? Project.Frames : SelectedFrames();
@@ -6395,7 +6498,7 @@ namespace ScreenToGif.Windows
         private List<int> ObfuscateAsync(Rect rect, double screenScale, bool forAll = false)
         {
             var frameList = forAll ? Project.Frames : SelectedFrames();
-            var selectedList = Dispatcher.Invoke<List<int>>(() =>
+            var selectedList = Dispatcher.Invoke(() =>
             {
                 IsLoading = true;
 

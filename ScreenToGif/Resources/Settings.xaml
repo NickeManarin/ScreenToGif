@@ -223,6 +223,11 @@
     <s:Double x:Key="DuplicatesSimilarity">90</s:Double>
     <e:DuplicatesRemovalModes x:Key="DuplicatesRemoval">First</e:DuplicatesRemovalModes>
     <e:DuplicatesDelayModes x:Key="DuplicatesDelay">DontAdjust</e:DuplicatesDelayModes>
+
+    <!--Editor • Smooth Loop-->
+    <s:Double x:Key="SmoothLoopSimilarity">100</s:Double>
+    <s:Int32 x:Key="SmoothLoopStartThreshold">1</s:Int32>
+    <e:SmoothLoopFromModes x:Key="SmoothLoopFrom">End</e:SmoothLoopFromModes>
     
     <!--Editor • Delay/Duration-->
     <s:Int32 x:Key="OverrideDelay">66</s:Int32>

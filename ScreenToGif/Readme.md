@@ -2,11 +2,12 @@
 
 This is the current project of ScreenToGif.  
 
-_VS 2019 and .Net 4.8 or newer required._
+_VS 2022 and .NET 6 or newer required._
 
 ## What's new? (Version 2.35)
 
-• Migration to .NET 6 and project restructuring.  
+• Migration to .NET 6 and project restructuring.
+• Smooth loop: Creates a smooth loop by analyzing frames, comparing with the start one.  
 
 ### Fixed:
 
