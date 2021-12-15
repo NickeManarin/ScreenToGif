@@ -215,7 +215,7 @@
     <s:String x:Key="S.Options.App.Startup.Instance.Multiple">Tillad flere&#x0d;instanser</s:String>
     <s:String x:Key="S.Options.App.Startup.Instance.Multiple.Info">Programmet kan køre flere gange samtidigt.</s:String>
     <s:String x:Key="S.Options.App.Startup.Tray">Start ved uret.</s:String>
-    <s:String x:Key="S.Options.App.Startup.Tray.Info">(Starter minimeret til et ikon nede ved uret)</s:String>
+    <s:String x:Key="S.Options.App.Startup.Tray.Info">(starter minimeret til et ikon nede ved uret)</s:String>
     <s:String x:Key="S.Options.App.Startup.Window">Start med:</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Startup">Startvindue</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Recorder">Optager</s:String>
@@ -249,10 +249,10 @@
     <s:String x:Key="S.Options.App.Tray.Interactions.Else">ellers åbnes:</s:String>
     <s:String x:Key="S.Options.App.General">Generelt</s:String>
     <s:String x:Key="S.Options.App.General.WorkaroundQuota">Løsning på 'Ikke nok kvote...' fejlen.</s:String>
-    <s:String x:Key="S.Options.App.General.WorkaroundQuota.Info">(Eksperimentel)</s:String>
+    <s:String x:Key="S.Options.App.General.WorkaroundQuota.Info">(eksperimentel)</s:String>
     <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">Bekræft programlukning.</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">Deaktivér hardwareacceleration.</s:String>
-    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(Brugerfladen behandles af software)</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(brugerfladen behandles af software)</s:String>
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">Søg efter sprogopdatering.</s:String>
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(opdateringer hentes og installeres automatisk)</s:String>
     <s:String x:Key="S.Options.App.General.CheckForUpdates">Søg efter opdatering.</s:String>
@@ -307,7 +307,7 @@
     <s:String x:Key="S.Options.Recorder.CaptureChanges">Optag kun ved ændringer.</s:String>
     <s:String x:Key="S.Options.Recorder.CaptureChanges.Info">(optager kun når noget ændres i optageområdet)</s:String>
     <s:String x:Key="S.Options.Recorder.RemoteImprovement">Optimér ydelsen på fjernskrivebord.</s:String>
-    <s:String x:Key="S.Options.Recorder.RemoteImprovement.Info">(Deaktiverer optagelse af vinduer i lag)</s:String>
+    <s:String x:Key="S.Options.Recorder.RemoteImprovement.Info">(deaktiverer optagelse af vinduer i lag)</s:String>
     <s:String x:Key="S.Options.Recorder.ForceGarbageCollection">Rens hukommelse under optagelse.</s:String>
     <s:String x:Key="S.Options.Recorder.ForceGarbageCollection.Info">(reducerer hukommelsesforbrug, men forringer ydelsen)</s:String>
     
@@ -330,7 +330,7 @@
     <s:String x:Key="S.Options.Recorder.DisplayDiscard">Vis også Kassér knap under optagelse.</s:String>
     <s:String x:Key="S.Options.Recorder.DisplayDiscard.Info">(normalt synlig ved pause)</s:String>
     <s:String x:Key="S.Options.Recorder.SelectionImprovement">Optimér områdevalg.</s:String>
-    <s:String x:Key="S.Options.Recorder.SelectionImprovement.Info">(Reducerer flimmer)</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionImprovement.Info">(reducerer flimmer)</s:String>
     
     <s:String x:Key="S.Options.Recorder.RememberSize">Husk sidste områdestørrelse</s:String>
     <s:String x:Key="S.Options.Recorder.RememberPosition">Husk placering.</s:String>
@@ -395,24 +395,24 @@
     <!--Options • Shortcuts-->
     <s:String x:Key="S.Options.Shortcuts.Global">Globalt</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.ScreenRecorder">Skærmoptager:</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Global.ScreenRecorder.Info">(Åbner standard skærmoptager)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.ScreenRecorder.Info">(åbner standard skærmoptager)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.WebcamRecorder">Webcamoptager:</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Global.WebcamRecorder.Info">(Åbner webcamoptager)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.WebcamRecorder.Info">(åbner webcamoptager)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.BoardRecorder">Tavleoptager:</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Global.BoardRecorder.Info">(Åbner tavleoptageren)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.BoardRecorder.Info">(åbner tavleoptageren)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.OpenEditor">Redigering:</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Global.OpenEditor.Info">(Åbner et redigeringsvindue mere)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.OpenEditor.Info">(åbner et redigeringsvindue mere)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.OpenOptions">Indstillinger:</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Global.OpenOptions.Info">(Åbner indstillinger.)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.OpenOptions.Info">(åbner indstillinger.)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.Exit">Luk:</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Global.Exit.Info">(Lukker alle vinduer, og fjerner ikonet ved uret)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.Exit.Info">(lukker alle vinduer, og fjerner ikonet ved uret)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders">Optagere</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause">Start/pause:</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause.Info">(Starter/stopper optagelsen. Bruges til snapshot, hvis aktiveret)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause.Info">(starter/stopper optagelsen. Bruges til snapshot, hvis aktiveret)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Stop">Stop:</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Recorders.Stop.Info">(Stopper optagelsen og åbner redigering)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Stop.Info">(stopper optagelsen og åbner redigering)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Discard">Kassér:</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Recorders.Discard.Info">(Kasserer den aktive optagelse, når den pauses)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Discard.Info">(kasserer den aktive optagelse, når den pauses)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Follow">Følg mus:</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Follow.Info">(slår Følg mus til eller fra)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.DisableFollow">Deaktiver:</s:String>
@@ -670,10 +670,10 @@
     <s:String x:Key="S.Recorder.Fps.Range">Fra 1 til 60 fps. Højere værdi optager flere rammer.&#x0d;Forøger med 16 ms pr. trin.</s:String>
     <s:String x:Key="S.Recorder.Fpm">Maks. rammer pr. minut</s:String>
     <s:String x:Key="S.Recorder.Fpm.Short">fpm</s:String>
-    <s:String x:Key="S.Recorder.Fps.Range">Fra 1 til 60 fps. Højere værdi optager flere rammer.&#x0d;Forøger med 1 sekund pr. trin.</s:String>
+    <s:String x:Key="S.Recorder.Fpm.Range">Fra 1 til 60 fps. Højere værdi optager flere rammer.&#x0d;Forøger med 1 sekund pr. trin.</s:String>
     <s:String x:Key="S.Recorder.Fph">Maks. rammer pr. time</s:String>
     <s:String x:Key="S.Recorder.Fph.Short">fph</s:String>
-    <s:String x:Key="S.Recorder.Fps.Range">Fra 1 til 60 fps. Højere værdi optager flere rammer.&#x0d;Forøger med 1 minut pr. trin.</s:String>
+    <s:String x:Key="S.Recorder.Fph.Range">Fra 1 til 60 fps. Højere værdi optager flere rammer.&#x0d;Forøger med 1 minut pr. trin.</s:String>
     
     <s:String x:Key="S.Recorder.ClickOrPress">Klik eller tast for at starte</s:String>
     <s:String x:Key="S.Recorder.SnapToWindow">Snap til vindue (træk til vindue og slip)</s:String>
@@ -770,7 +770,7 @@
     <s:String x:Key="S.Preset.AutoSave">Gem automatisk ved ændringer.</s:String>
     <s:String x:Key="S.Preset.Info.Manual">Profilændringer skal gemmes manuelt med Gem ikonet.</s:String>
     <s:String x:Key="S.Preset.Info.Automatic">Profilændringer gemmes automatisk.</s:String>
-    <s:String x:Key="S.Preset.Warning.Readonly">Standardprofiler er delvist skrivebeskyttet.</s:String>
+    <s:String x:Key="S.Preset.Warning.Readonly">Standardprofiler er delvist skrivebeskyttede.</s:String>
     <s:String x:Key="S.Preset.Warning.Name">Navngiv profilen.</s:String>
     <s:String x:Key="S.Preset.Warning.SameName">Profilnavnet findes allerede.</s:String>
     
