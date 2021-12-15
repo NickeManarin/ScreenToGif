@@ -4,6 +4,8 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>True</UseWPF>
+    <DebugType>embedded</DebugType>
+    <Platforms>AnyCPU;ARM64;x64;x86</Platforms>
     <!--<UseWindowsForms>True</UseWindowsForms>-->
   </PropertyGroup>
 

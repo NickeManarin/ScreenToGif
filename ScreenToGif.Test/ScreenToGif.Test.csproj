@@ -5,6 +5,10 @@
     <Nullable>disable</Nullable>
 
     <IsPackable>false</IsPackable>
+
+    <DebugType>embedded</DebugType>
+
+    <Platforms>AnyCPU;ARM64;x64;x86</Platforms>
   </PropertyGroup>
 
   <ItemGroup>

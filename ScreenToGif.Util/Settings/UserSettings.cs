@@ -243,6 +243,8 @@ public class UserSettings : INotifyPropertyChanged
                     return Enum.Parse(typeof(DuplicatesRemovalModes), property.Value);
                 case "DuplicatesDelayModes":
                     return Enum.Parse(typeof(DuplicatesDelayModes), property.Value);
+                case "SmoothLoopFromModes":
+                    return Enum.Parse(typeof(SmoothLoopFromModes), property.Value);
                 case "Orientation":
                     return Enum.Parse(typeof(Orientation), property.Value);
                 case "ObfuscationModes":
@@ -521,19 +523,6 @@ public class UserSettings : INotifyPropertyChanged
                 ConformanceLevel = ConformanceLevel.Fragment,
                 Encoding = Encoding.UTF8
             };
-
-            //TODO: Remove later.
-            var result = "";
-            foreach (DictionaryEntry entry in _appData)
-            {
-                result += entry.Key + " = " + entry.Value + Environment.NewLine;
-
-                if (entry.Value is System.Collections.ArrayList list)
-                    foreach (var item in list)
-                    {
-                        result += "\t" + item + Environment.NewLine;
-                    }
-            }
 
             //Serialize and save to disk.
             using (var fileStream = new FileStream(filename, FileMode.Create, FileAccess.Write, FileShare.None))
@@ -1870,6 +1859,28 @@ public class UserSettings : INotifyPropertyChanged
     public DuplicatesDelayModes DuplicatesDelay
     {
         get => (DuplicatesDelayModes)GetValue();
+        set => SetValue(value);
+    }
+
+    #endregion
+
+    #region Editor • Smooth Loop
+
+    public double SmoothLoopSimilarity
+    {
+        get => (double)GetValue();
+        set => SetValue(value);
+    }
+
+    public int SmoothLoopStartThreshold
+    {
+        get => (int)GetValue();
+        set => SetValue(value);
+    }
+
+    public SmoothLoopFromModes SmoothLoopFrom
+    {
+        get => (SmoothLoopFromModes)GetValue();
         set => SetValue(value);
     }
 

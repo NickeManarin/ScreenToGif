@@ -4,7 +4,7 @@ namespace ScreenToGif.Domain.Enums;
 /// The types of Panel of the Editor window.
 /// Positive values means that there's no preview overlay.
 /// </summary>
-public enum PanelType
+public enum PanelTypes
 {
     /// <summary>
     /// Save As Panel.
@@ -72,6 +72,11 @@ public enum PanelType
     /// Mouse Clicks Panel.
     /// </summary>
     MouseClicks = 14,
+
+    /// <summary>
+    /// Smooth Loop Panel.
+    /// </summary>
+    SmoothLoop = 15,
 
     /// <summary>
     /// Crop Panel.
