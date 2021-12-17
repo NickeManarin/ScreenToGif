@@ -20,17 +20,17 @@ public partial class VideoSource : Window
 {
     #region Variables
 
-    private readonly object _lock = new object();
+    private readonly object _lock = new();
     private bool _cancelled;
     private bool _isDisplayingError;
     private int _previewerReady = 0;
     private bool _wasPreviewChangedRegistered;
     private bool _wasCaptureChangedRegistered;
-    private MediaPlayer _lowerPlayer = new MediaPlayer { Volume = 0, ScrubbingEnabled = true };
-    private MediaPlayer _upperPlayer = new MediaPlayer { Volume = 0, ScrubbingEnabled = true };
+    private MediaPlayer _lowerPlayer = new() { Volume = 0, ScrubbingEnabled = true };
+    private MediaPlayer _upperPlayer = new() { Volume = 0, ScrubbingEnabled = true };
     private RenderTargetBitmap _lowerRenderTargetBitmap;
     private RenderTargetBitmap _upperRenderTargetBitmap;
-    private readonly Queue<TimeSpan> _positions = new Queue<TimeSpan>();
+    private readonly Queue<TimeSpan> _positions = new();
     private Process _process;
 
     /// <summary>

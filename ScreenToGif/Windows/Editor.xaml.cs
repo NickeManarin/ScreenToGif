@@ -6269,7 +6269,7 @@ namespace ScreenToGif.Windows
                 start += step;
             }
             
-            if (found == -1)
+            if (found == -1 || found == Project.Frames.Count - 1)
                 return Project.Frames.Count;
 
             var removeList = Project.Frames.GetRange(found + 1, Project.Frames.Count - 1 - found).Select(s => s.Index).ToList();
