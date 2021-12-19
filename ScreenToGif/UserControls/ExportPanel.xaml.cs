@@ -31,6 +31,7 @@ using ScreenToGif.Model.ExportPresets.Video.Webm;
 using ScreenToGif.Model.UploadPresets;
 using ScreenToGif.Settings;
 using ScreenToGif.Util;
+using ScreenToGif.ViewModel;
 using ScreenToGif.Windows;
 using ScreenToGif.Windows.Other;
 
@@ -50,6 +51,7 @@ namespace ScreenToGif.UserControls
 
         public static readonly DependencyProperty TotalTimeProperty = DependencyProperty.Register(nameof(TotalTime), typeof(TimeSpan), typeof(ExportPanel), new PropertyMetadata(default(TimeSpan)));
 
+        public static readonly DependencyProperty CurrentFrameProperty = DependencyProperty.Register(nameof(CurrentFrame), typeof(FrameViewModel), typeof(ExportPanel), new PropertyMetadata(default(FrameViewModel)));
 
         public ExportPreset CurrentPreset
         {
@@ -73,6 +75,12 @@ namespace ScreenToGif.UserControls
         {
             get => (TimeSpan)GetValue(TotalTimeProperty);
             set => SetValue(TotalTimeProperty, value);
+        }
+
+        public FrameViewModel CurrentFrame
+        {
+            get => (FrameViewModel)GetValue(CurrentFrameProperty);
+            set => SetValue(CurrentFrameProperty, value);
         }
 
         #endregion
@@ -191,6 +199,7 @@ namespace ScreenToGif.UserControls
             {
                 case Export.Apng:
                     EncoderScreenToGifItem.IsEnabled = true;
+                    EncoderKGySoftItem.IsEnabled = false;
                     EncoderFfmpegItem.IsEnabled = true;
                     EncoderGifskiItem.IsEnabled = false;
                     EncoderSystemItem.IsEnabled = false;
@@ -198,6 +207,7 @@ namespace ScreenToGif.UserControls
                     break;
                 case Export.Gif:
                     EncoderScreenToGifItem.IsEnabled = true;
+                    EncoderKGySoftItem.IsEnabled = true;
                     EncoderFfmpegItem.IsEnabled = true;
                     EncoderGifskiItem.IsEnabled = Environment.Is64BitProcess;
                     EncoderSystemItem.IsEnabled = true;
@@ -205,6 +215,7 @@ namespace ScreenToGif.UserControls
                     break;
                 case Export.Webp:
                     EncoderScreenToGifItem.IsEnabled = false;
+                    EncoderKGySoftItem.IsEnabled = false;
                     EncoderFfmpegItem.IsEnabled = true;
                     EncoderGifskiItem.IsEnabled = false;
                     EncoderSystemItem.IsEnabled = false;
@@ -214,6 +225,7 @@ namespace ScreenToGif.UserControls
 
                 case Export.Avi:
                     EncoderScreenToGifItem.IsEnabled = false;
+                    EncoderKGySoftItem.IsEnabled = false;
                     EncoderFfmpegItem.IsEnabled = true;
                     EncoderGifskiItem.IsEnabled = false;
                     EncoderSystemItem.IsEnabled = false;
@@ -221,6 +233,7 @@ namespace ScreenToGif.UserControls
                     break;
                 case Export.Mkv:
                     EncoderScreenToGifItem.IsEnabled = false;
+                    EncoderKGySoftItem.IsEnabled = false;
                     EncoderFfmpegItem.IsEnabled = true;
                     EncoderGifskiItem.IsEnabled = false;
                     EncoderSystemItem.IsEnabled = false;
@@ -228,6 +241,7 @@ namespace ScreenToGif.UserControls
                     break;
                 case Export.Mov:
                     EncoderScreenToGifItem.IsEnabled = false;
+                    EncoderKGySoftItem.IsEnabled = false;
                     EncoderFfmpegItem.IsEnabled = true;
                     EncoderGifskiItem.IsEnabled = false;
                     EncoderSystemItem.IsEnabled = false;
@@ -235,6 +249,7 @@ namespace ScreenToGif.UserControls
                     break;
                 case Export.Mp4:
                     EncoderScreenToGifItem.IsEnabled = false;
+                    EncoderKGySoftItem.IsEnabled = false;
                     EncoderFfmpegItem.IsEnabled = true;
                     EncoderGifskiItem.IsEnabled = false;
                     EncoderSystemItem.IsEnabled = false;
@@ -242,6 +257,7 @@ namespace ScreenToGif.UserControls
                     break;
                 case Export.Webm:
                     EncoderScreenToGifItem.IsEnabled = false;
+                    EncoderKGySoftItem.IsEnabled = false;
                     EncoderFfmpegItem.IsEnabled = true;
                     EncoderGifskiItem.IsEnabled = false;
                     EncoderSystemItem.IsEnabled = false;
@@ -251,6 +267,7 @@ namespace ScreenToGif.UserControls
 
                 case Export.Jpeg:
                     EncoderScreenToGifItem.IsEnabled = true;
+                    EncoderKGySoftItem.IsEnabled = false;
                     EncoderFfmpegItem.IsEnabled = false;
                     EncoderGifskiItem.IsEnabled = false;
                     EncoderSystemItem.IsEnabled = false;
@@ -258,6 +275,7 @@ namespace ScreenToGif.UserControls
                     break;
                 case Export.Png:
                     EncoderScreenToGifItem.IsEnabled = true;
+                    EncoderKGySoftItem.IsEnabled = false;
                     EncoderFfmpegItem.IsEnabled = false;
                     EncoderGifskiItem.IsEnabled = false;
                     EncoderSystemItem.IsEnabled = false;
@@ -265,6 +283,7 @@ namespace ScreenToGif.UserControls
                     break;
                 case Export.Bmp:
                     EncoderScreenToGifItem.IsEnabled = true;
+                    EncoderKGySoftItem.IsEnabled = false;
                     EncoderFfmpegItem.IsEnabled = false;
                     EncoderGifskiItem.IsEnabled = false;
                     EncoderSystemItem.IsEnabled = false;
@@ -274,6 +293,7 @@ namespace ScreenToGif.UserControls
 
                 case Export.Stg:
                     EncoderScreenToGifItem.IsEnabled = true;
+                    EncoderKGySoftItem.IsEnabled = false;
                     EncoderFfmpegItem.IsEnabled = false;
                     EncoderGifskiItem.IsEnabled = false;
                     EncoderSystemItem.IsEnabled = false;
@@ -281,6 +301,7 @@ namespace ScreenToGif.UserControls
                     break;
                 case Export.Psd:
                     EncoderScreenToGifItem.IsEnabled = true;
+                    EncoderKGySoftItem.IsEnabled = false;
                     EncoderFfmpegItem.IsEnabled = false;
                     EncoderGifskiItem.IsEnabled = false;
                     EncoderSystemItem.IsEnabled = false;
@@ -369,6 +390,7 @@ namespace ScreenToGif.UserControls
                 case Export.Gif:
                 {
                     AddDistinct(presets, EmbeddedGifPreset.Defaults);
+                    AddDistinct(presets, KGySoftGifPreset.Defaults);
                     AddDistinct(presets, FfmpegGifPreset.Defaults);
 
                     //Gifski only runs on x64.
@@ -862,7 +884,7 @@ namespace ScreenToGif.UserControls
             var firstLoad = CurrentPreset == null;
 
             //Hide all other grids.
-            foreach (var grid in EncoderGrid.Children.OfType<Grid>())
+            foreach (var grid in EncoderGrid.Children.Cast<UIElement>())
                 grid.Visibility = Visibility.Collapsed;
 
             SetPresetAsLastSelected(selected);
@@ -925,6 +947,9 @@ namespace ScreenToGif.UserControls
                     {
                         case EncoderType.ScreenToGif:
                             EmbeddedGifOptionsGrid.Visibility = Visibility.Visible;
+                            break;
+                        case EncoderType.KGySoft:
+                            KGySoftGifOptionsPanel.Visibility = Visibility.Visible;
                             break;
                         case EncoderType.System:
                             SystemGifOptionsGrid.Visibility = Visibility.Visible;
@@ -1064,7 +1089,7 @@ namespace ScreenToGif.UserControls
 
         private void EncoderComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (!IsLoaded || EncoderGrid.Children.OfType<Grid>().All(a => a.Visibility == Visibility.Collapsed))
+            if (!IsLoaded || EncoderGrid.Children.Cast<UIElement>().All(a => a.Visibility == Visibility.Collapsed))
                 return;
 
             if (!(EncoderComboBox.SelectedValue is EncoderType encoder) || encoder == CurrentPreset?.Encoder)

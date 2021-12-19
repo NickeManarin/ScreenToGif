@@ -4423,6 +4423,14 @@ namespace ScreenToGif.Windows
                     selectionCountBinding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
                     BindingOperations.SetBinding(grid, ExportPanel.SelectionCountProperty, selectionCountBinding);
 
+                    var currentFrameBinding = new Binding
+                    {
+                        //Path = new PropertyPath("Frames[CurrentIndex]"), // I don't really get why data context is already a FrameViewModel here instead of the EditorViewModel but it means we need no Path
+                        Mode = BindingMode.OneWay,
+                        UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+                    };
+                    BindingOperations.SetBinding(grid, ExportPanel.CurrentFrameProperty, currentFrameBinding);
+
                     CustomContentControl.Content = grid;
                     CustomContentControl.Visibility = Visibility.Visible;
 

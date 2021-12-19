@@ -329,7 +329,7 @@ namespace ScreenToGif.Settings
         {
             //This is not good... :(
             var nameSpace = string.IsNullOrWhiteSpace(property.NameSpace) ? "" : Regex.Match(property.NameSpace, "(?<=namespace:)[a-zA-Z0-9\\.]*((?=;assembly)?)").Value;
-            var type = Type.GetType((string.IsNullOrWhiteSpace(nameSpace) ? "System.Windows." : (nameSpace + ".")) + property.Type, true);
+            var type = Type.GetType((string.IsNullOrWhiteSpace(nameSpace) ? "System." : (nameSpace + ".")) + property.Type, true);
 
             //Does not work with enums.
             

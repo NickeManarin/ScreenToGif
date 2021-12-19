@@ -13,6 +13,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Resources;
+using KGySoft.Drawing.Imaging;
 using ScreenToGif.ImageUtil.Gif.Decoder;
 using ScreenToGif.ImageUtil.Gif.Encoder;
 using ScreenToGif.Util;
@@ -20,6 +21,7 @@ using Image = System.Drawing.Image;
 using PixelFormat = System.Windows.Media.PixelFormat;
 using Size = System.Drawing.Size;
 using ScreenToGif.ImageUtil.Gif.LegacyEncoder;
+using ScreenToGif.ImageUtil.Imaging;
 using ScreenToGif.Model;
 using Color = System.Windows.Media.Color;
 using GifFile = ScreenToGif.ImageUtil.Gif.Decoder.GifFile;
@@ -1997,6 +1999,13 @@ namespace ScreenToGif.ImageUtil
             var distance2 = new[] { left2, top2, right2, bottom2 }.OrderBy(o => o).First();
             return distance2 <= opacityDistance ? opacityPower / 100d * ((distance2 * 100d) / opacityDistance) / 100d : 1d;
         }
+
+        /// <summary>
+        /// Gets a managed read-write accessor for a <see cref="WriteableBitmapData"/> instance.
+        /// </summary>
+        /// <param name="bitmap">The bitmap to get the managed accessor.</param>
+        /// <returns>An <see cref="IReadWriteBitmapData"/> instance that provides managed access to the specified <see cref="bitmap"/>.</returns>
+        public static IReadWriteBitmapData GetReadWriteBitmapData(this WriteableBitmap bitmap) => new WriteableBitmapData(bitmap);
 
         #endregion
 

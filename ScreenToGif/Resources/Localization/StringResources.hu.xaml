@@ -1510,6 +1510,7 @@
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Info">Beépített kódoló.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System">Rendszer</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System.Info">A rendszer által rendelkezésre álló kódoló.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.KGySoft.Info">KGy SOFT GIF kódoló.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg.Info">Külső kódoló, melyet az FFmpeg.org készített.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>

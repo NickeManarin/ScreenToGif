@@ -796,6 +796,12 @@
     <s:String x:Key="S.Preset.Gif.Embedded.Transparent.Description">Supports saving the animation with a transparent background.</s:String>
     <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Title">High quality • Graphics</s:String>
     <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Description">Better for recordings with a lower quantity of colors.</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Title">Balanced quality and performance</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Description">Good average quality for natural images using optimized Wu quantizer without dithering.</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.High.Title">Hight quality and slower encoding speed</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.High.Description">High quality for images with many shades using optimized Octree quantizer with Floyd-Steinberg error diffusion dithering.</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Fast.Title">Lower quality and better performance</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Fast.Description">Quantizing all frames with the same predefined 'web-safe' palette for all frames with Bayer 8x8 ordered dithering.</s:String>
     <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Title">FFmpeg - Higher quality</s:String>
     <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Description">Higher image quality, but with a greater file size.</s:String>
     <s:String x:Key="S.Preset.Gif.Ffmpeg.Low.Title">FFmpeg - Lower quality</s:String>
@@ -1523,6 +1529,8 @@
     <s:String x:Key="S.SaveAs.Encoder.Info">Encoder responsible for generating the output file.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">ScreenToGif</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Info">Built-in encoder.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.KGySoft">KGy SOFT</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.KGySoft.Info">KGy SOFT GIF Encoder.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System">System</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System.Info">Encoder made available by the system.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
@@ -1530,7 +1538,7 @@
     <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski.Info">External encoder, made by Gif.ski.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Options">Encoder options</s:String>
-    
+
     <!--Editor • Save as > FFmpeg-->
     <s:String x:Key="S.SaveAs.Ffmpeg.UseParameters">Enable the advanced mode.</s:String>
     <s:String x:Key="S.SaveAs.Ffmpeg.UseParameters.Info">Manually input the parameters to control the encoder.</s:String>
@@ -1582,7 +1590,46 @@
     <s:String x:Key="S.SaveAs.GifOptions.ChromaKey">Chroma key:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Dither">Dither:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Dither.Scale">Bayer scale:</s:String>
-    
+
+    <!--Editor • Save as > KGy SOFT options-->
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer">Quantizer</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.BackColor">Background Color:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.BackColor.Info">Pixels with alpha (transparency) that are considered opaque by the selected quantizer will be blended with this color before getting the quantized color.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.AlphaThreshold">Alpha Threshold:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.AlphaThreshold.Info">Determines the input alpha value under which the quantized color will be transparent.&#x0d;&#x0a;If 0, then the result will never have transparency.&#x0d;&#x0a;If 255, then only fully transparent pixels are considered transparent.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.WhiteThreshold">White Threshold:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.WhiteThreshold.Info">Determines the lowest input brightness to consider the result color white.&#x0d;&#x0a;It affects the brightness of the result. An error diffusion ditherer may compensate the value of this parameter though.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.DirectMapping">Direct Mapping</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.DirectMapping.Info">When checked, the quantized color is determined by a direct mapping rather than looking up the nearest palette entry.&#x0d;&#x0a;It speeds up quantization but may end up in a higher contrast result. An error diffusion ditherer may compensate the value of this parameter though.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PaletteSize">Palette Size:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PaletteSize.Info">Determines the maximum size of the palette per frame.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.BlackAndWhite">Black and White</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.BlackAndWhite.Info">Fixed 1 bpp palette with the black and white colors.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale4">Grayscale 4 colors</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale4.Info">Fixed 2 bpp palette with 4 grayscale entries.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale16">Grayscale 16 colors</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale16.Info">Fixed 4 bpp palette with 16 grayscale entries.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale">Grayscale 256 colors</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale.Info">Fixed 8 bpp palette with 256 grayscale entries.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.SystemDefault4BppPalette">System default 4 bpp palette</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.SystemDefault4BppPalette.Info">Fixed 4 bpp palette using the standard 16 sRGB colors.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.SystemDefault8BppPalette">System default 8 bpp palette</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.SystemDefault8BppPalette.Info">Fixed 8 bpp palette including the 'web-safe' colors and transparency.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Rgb332">RGB 332 palette</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Rgb332.Info">Fixed 8 bpp palette using the RGB 332 color space.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.Octree">Octree Quantizer</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.Octree.Info">Optimizing palette for each frame with the Octree algorithm.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.MedianCut">Median Cut Quantizer</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.MedianCut.Info">Optimizing palette for each frame with the Median Cut algorithm.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.Wu">Wu Quantizer</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.Wu.Info">Optimizing palette for each frame with Xiaolin Wu's algorithm.</s:String>
+
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer">Ditherer</s:String>
+
+    <s:String x:Key="S.SaveAs.KGySoft.Preview">Preview</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Preview.ShowCurrentFrame">Show Current Frame</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Preview.ShowCurrentFrame.Info">When checked, the preview shows the current frame instead of a standard image example.</s:String>
+
     <!--Editor • Save as > Apng options-->
     <s:String x:Key="S.SaveAs.ApngOptions">Apng options</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions.Prediction">Prediction:</s:String>

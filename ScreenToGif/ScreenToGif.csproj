@@ -44,6 +44,7 @@
     <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
     <UseVSHostingProcess>true</UseVSHostingProcess>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -57,6 +58,7 @@
     <DocumentationFile>
     </DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>ScreenToGif.App</StartupObject>
@@ -79,6 +81,7 @@
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
@@ -87,6 +90,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -97,6 +101,7 @@
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -105,8 +110,15 @@
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="KGySoft.CoreLibraries, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b45eba277439ddfe, processorArchitecture=MSIL">
+      <HintPath>..\packages\KGySoft.CoreLibraries.6.0.0\lib\net472\KGySoft.CoreLibraries.dll</HintPath>
+    </Reference>
+    <Reference Include="KGySoft.Drawing, Version=6.1.0.0, Culture=neutral, PublicKeyToken=b45eba277439ddfe, processorArchitecture=MSIL">
+      <HintPath>..\packages\KGySoft.Drawing.6.1.0\lib\net45\KGySoft.Drawing.dll</HintPath>
+    </Reference>
     <Reference Include="SharpDX, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpDX.4.2.0\lib\net45\SharpDX.dll</HintPath>
     </Reference>
@@ -257,6 +269,7 @@
     <Compile Include="ImageUtil\Apng\Chunks\FdatChunk.cs" />
     <Compile Include="ImageUtil\Apng\Chunks\IdatChunk.cs" />
     <Compile Include="ImageUtil\Apng\Chunks\IhdrChunk.cs" />
+    <Compile Include="ImageUtil\Imaging\WriteableBitmapData.cs" />
     <Compile Include="ImageUtil\Gif\Encoder\GifFile.cs" />
     <Compile Include="ImageUtil\Gif\Encoder\Quantization\MostUsedQuantizer.cs" />
     <Compile Include="ImageUtil\Gif\Encoder\Quantization\NeuralQuantizer.cs" />
@@ -336,6 +349,7 @@
     <Compile Include="Model\Events\SaveEventArgs.cs" />
     <Compile Include="Model\Events\ValidatedEventArgs.cs" />
     <Compile Include="Model\ExportFrame.cs" />
+    <Compile Include="Model\ExportPresets\AnimatedImage\Gif\KGySoftGifPreset.cs" />
     <Compile Include="Model\ExportPresets\Video\Codecs\HevcQsv.cs" />
     <Compile Include="Model\ExportPresets\Video\Codecs\HevcNvenc.cs" />
     <Compile Include="Model\ExportPresets\Video\Codecs\HevcAmf.cs" />
@@ -385,7 +399,13 @@
     <Compile Include="Model\ExportPresets\Video\Webm\FfmpegWebmPreset.cs" />
     <Compile Include="Model\ExportPresets\Video\Webm\WebmPreset.cs" />
     <Compile Include="Settings\Migrations\Migration2_31_0To2_32_0.cs" />
+    <Compile Include="UserControls\KGySoftGifOptionsPanel.xaml.cs">
+      <DependentUpon>KGySoftGifOptionsPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Util\Converters\PresetToViewModelConverter.cs" />
     <Compile Include="ViewModel\FrameViewModel.cs" />
+    <Compile Include="ViewModel\KGySoftGifOptionsViewModel.cs" />
+    <Compile Include="ViewModel\QuantizerDescriptor.cs" />
     <Compile Include="ViewModel\Tasks\ResizeViewModel.cs" />
     <Compile Include="ViewModel\Tasks\ShadowViewModel.cs" />
     <Compile Include="ViewModel\Tasks\BaseTaskViewModel.cs" />
@@ -920,6 +940,10 @@
     <Page Include="UserControls\GfycatPanel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\KGySoftGifOptionsPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\ResizePanel.xaml">
       <SubType>Designer</SubType>

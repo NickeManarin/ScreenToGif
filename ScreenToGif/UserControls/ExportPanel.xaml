@@ -6,14 +6,17 @@
              xmlns:n="clr-namespace:ScreenToGif.Controls"
              xmlns:u="clr-namespace:ScreenToGif.Util"
              xmlns:i="clr-namespace:ScreenToGif.Controls.Items"
-             xmlns:c="clr-namespace:ScreenToGif.Util.Converters" xmlns:p="clr-namespace:ScreenToGif.Model.UploadPresets"
+             xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
+             xmlns:p="clr-namespace:ScreenToGif.Model.UploadPresets"
              xmlns:t="clr-namespace:ScreenToGif.Settings"
+             xmlns:uc="clr-namespace:ScreenToGif.UserControls"
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="300" Focusable="False" IsTabStop="False"
              x:Name="ThisPanel" Loaded="Panel_Loaded" Unloaded="ExportPanel_Unloaded">
     
     <UserControl.Resources>
         <c:SelectionCountToDescription x:Key="SelectionCountToDescription"/>
         <c:ContentToVisibility x:Key="ContentToVisibility"/>
+        <c:PresetToViewModelConverter x:Key="PresetToViewModel"/>
         
         <x:Array x:Key="ExportItemArray" Type="{x:Type i:ExportItem}">
             <!--Animated Image-->
@@ -163,6 +166,9 @@
 
                     <i:GenericItem x:Name="EncoderScreenToGifItem" Title="ScreenToGif" Description="{DynamicResource S.SaveAs.Encoder.ScreenToGif.Info}"
                                    Value="{x:Static u:EncoderType.ScreenToGif}" ImageId="Vector.Logo"/>
+
+                    <i:GenericItem x:Name="EncoderKGySoftItem" Title="KGy SOFT" Description="{DynamicResource S.SaveAs.Encoder.KGySoft.Info}"
+                                   Value="{x:Static u:EncoderType.KGySoft}" ImageId="Vector.KGySoft"/>
 
                     <i:GenericItem x:Name="EncoderFfmpegItem" Title="FFmpeg" Description="{DynamicResource S.SaveAs.Encoder.Ffmpeg.Info}"
                                    Value="{x:Static u:EncoderType.FFmpeg}" ImageId="Vector.Ffmpeg"/>
@@ -507,6 +513,10 @@
                                     Visibility="{Binding IsChecked, ElementName=PaintWithChromaCheckBox, Converter={StaticResource Bool2Visibility}, Mode=OneWay}"/>
                     </Grid>
                 </Grid>
+
+                <uc:KGySoftGifOptionsPanel x:Name="KGySoftGifOptionsPanel" Margin="10,0,0,0" Visibility="Collapsed"
+                                           DataContext="{Binding Converter={StaticResource PresetToViewModel}}"
+                                           CurrentFrame="{Binding ElementName=ThisPanel, Path=CurrentFrame, Mode=OneWay}"/>
 
                 <Grid x:Name="FfmpegGifOptionsGrid" Margin="10,0,0,0" Visibility="Collapsed" IsSharedSizeScope="True">
                     <Grid.RowDefinitions>

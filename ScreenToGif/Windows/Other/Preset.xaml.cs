@@ -44,12 +44,14 @@ namespace ScreenToGif.Windows.Other
                     EncoderFfmpegItem.IsEnabled = true;
                     EncoderGifskiItem.IsEnabled = Environment.Is64BitProcess;
                     EncoderSystemItem.IsEnabled = true;
+                    EncoderKGySoftItem.IsEnabled = true;
                     break;
                 case Export.Apng:
                     EncoderScreenToGifItem.IsEnabled = true;
                     EncoderFfmpegItem.IsEnabled = true;
                     EncoderGifskiItem.IsEnabled = false;
                     EncoderSystemItem.IsEnabled = false;
+                    EncoderKGySoftItem.IsEnabled = false;
                     break;
                 case Export.Webp:
                 case Export.Bpg:
@@ -62,6 +64,7 @@ namespace ScreenToGif.Windows.Other
                     EncoderFfmpegItem.IsEnabled = true;
                     EncoderGifskiItem.IsEnabled = false;
                     EncoderSystemItem.IsEnabled = false;
+                    EncoderKGySoftItem.IsEnabled = false;
                     break;
 
                 case Export.Jpeg:
@@ -73,6 +76,7 @@ namespace ScreenToGif.Windows.Other
                     EncoderFfmpegItem.IsEnabled = false;
                     EncoderGifskiItem.IsEnabled = false;
                     EncoderSystemItem.IsEnabled = false;
+                    EncoderKGySoftItem.IsEnabled = false;
                     break;
             }
 
@@ -152,6 +156,14 @@ namespace ScreenToGif.Windows.Other
                                 embeddedGifPreset.Encoder = EncoderType.ScreenToGif;
                                 embeddedGifPreset.ImageId = "Vector.Logo";
                                 Current = embeddedGifPreset;
+                                break;
+                            case EncoderType.KGySoft:
+                                var kgySoftGifPreset = new KGySoftGifPreset();
+
+                                Current.CopyPropertiesTo(kgySoftGifPreset);
+                                kgySoftGifPreset.Encoder = EncoderType.KGySoft;
+                                kgySoftGifPreset.ImageId = "Vector.KGySoft";
+                                Current = kgySoftGifPreset;
                                 break;
                             case EncoderType.FFmpeg:
                                 var ffmpegGifPreset = new FfmpegGifPreset();
