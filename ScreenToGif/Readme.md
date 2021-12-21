@@ -7,12 +7,12 @@ _VS 2022 and .NET 6 or newer required._
 ## What's new? (Version 2.35)
 
 • Migration to .NET 6 and project restructuring.
-• Smooth loop: Creates a smooth loop by analyzing frames, comparing with the start one.  
+• Smooth loop: Creates a smooth loop by analyzing frames, which is done by comparing to the first/starting one.  
 
 ### Fixed:
 
-♦ Reduced the change for a crash when stopping the recording when using DirectX.
-♦ Discarding when in manual or interaction capture modes, but cancelling in the recorder was creating a block scenario.  
+♦ Reduced the chance for a crash when stopping a recording (with DirectX).
+♦ Discarding when in manual or interaction capture modes could cause a block scenario.  
 
 ### Known Bugs:
   
