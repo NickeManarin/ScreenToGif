@@ -23,7 +23,7 @@
                           Height="38"
                           SelectedValue="{Binding QuantizerId}"
                           SelectedValuePath="Id"
-                          ItemTemplate="{StaticResource Template.ComboBox.Simple}"/>
+                          ItemTemplate="{StaticResource Template.ComboBox.SimpleNoIcon}"/>
 
                 <!--Quantizers Options-->
                 <Grid Margin ="10,0,0,0">
@@ -47,7 +47,7 @@
                     <c:ColorBox Grid.Row="0" Grid.Column="1"
                                 Margin="10,5"
                                 AllowTransparency="False"
-                                SelectedColor="{Binding BackColor}"
+                                SelectedColor="{Binding BackColor, Mode=TwoWay}"
                                 ToolTip="{DynamicResource S.SaveAs.KGySoft.Quantizer.BackColor.Info}"/>
 
                     <!--Alpha Threshold-->
@@ -107,8 +107,75 @@
         <!--Ditherer-->
         <GroupBox>
             <GroupBox.Header>
-                <CheckBox Content="{DynamicResource S.SaveAs.KGySoft.Ditherer}"/>
+                <CheckBox Content="{DynamicResource S.SaveAs.KGySoft.Ditherer}"
+                          IsChecked="{Binding UseDitherer}"/>
             </GroupBox.Header>
+            <StackPanel IsEnabled="{Binding UseDitherer}">
+
+                <!--Selectable ditherers-->
+                <ComboBox Name="Ditherers"
+                          ItemsSource="{Binding Ditherers}"
+                          Height="38"
+                          SelectedValue="{Binding DithererId}"
+                          SelectedValuePath="Id"
+                          ItemTemplate="{StaticResource Template.ComboBox.SimpleNoIcon}"/>
+
+                <!--Ditherer Options-->
+                <Grid Margin ="10,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="40"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--Strength-->
+                    <TextBlock Grid.Row="0" Grid.Column="0"
+                               VerticalAlignment="Center" Margin="10,0,0,0"
+                               Foreground="{DynamicResource Element.Foreground.Medium}"
+                               Text="{DynamicResource S.SaveAs.KGySoft.Ditherer.Strength}"
+                               Visibility="{Binding ElementName=Ditherers, Path=SelectedItem.(vm:DithererDescriptor.HasStrength), Converter={StaticResource Bool2Visibility}}"/>
+                    <Slider Grid.Row="0" Grid.Column="1"
+                            Margin="10,5"
+                            TickPlacement="BottomRight"
+                            Minimum="0" Maximum="1" TickFrequency="0.1"
+                            Value="{Binding Strength}" 
+                            SmallChange="0.01" LargeChange="0.25"
+                            ToolTip="{DynamicResource S.SaveAs.KGySoft.Ditherer.Strength.Info}"
+                            Visibility="{Binding ElementName=Ditherers, Path=SelectedItem.(vm:DithererDescriptor.HasStrength), Converter={StaticResource Bool2Visibility}}"/>
+                    <!--Issue: StringFormat cannot be a DynamicResource-->
+                    <TextBlock Grid.Row="0" Grid.Column="2"
+                               VerticalAlignment="Center"
+                               Foreground="{DynamicResource Element.Foreground.Medium}"
+                               Text="{Binding Strength, StringFormat=#0.##%;;Auto}"
+                               Visibility="{Binding ElementName=Ditherers, Path=SelectedItem.(vm:DithererDescriptor.HasStrength), Converter={StaticResource Bool2Visibility}}"/>
+
+                    <!--Seed-->
+                    <TextBlock Grid.Row="1" Grid.Column="0"
+                               VerticalAlignment="Center" Margin="10,0,0,0"
+                               Foreground="{DynamicResource Element.Foreground.Medium}"
+                               Text="{DynamicResource S.SaveAs.KGySoft.Ditherer.Seed}"
+                               Visibility="{Binding ElementName=Ditherers, Path=SelectedItem.(vm:DithererDescriptor.HasSeed), Converter={StaticResource Bool2Visibility}}"/>
+                    <TextBox Grid.Row="1" Grid.Column="1"
+                                     Margin="10,5"
+                                     Text="{Binding Seed, Mode=TwoWay, TargetNullValue=''}"
+                                     ToolTip="{DynamicResource S.SaveAs.KGySoft.Ditherer.Seed.Info}"
+                                     Visibility="{Binding ElementName=Ditherers, Path=SelectedItem.(vm:DithererDescriptor.HasSeed), Converter={StaticResource Bool2Visibility}}"/>
+
+                    <!--Serpentine Processing-->
+                    <c:ExtendedCheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                               Margin="10,3,3,3"
+                               Text="{DynamicResource S.SaveAs.KGySoft.Ditherer.IsSerpentineProcessing}"
+                               ToolTip="{DynamicResource S.SaveAs.KGySoft.Ditherer.IsSerpentineProcessing.Info}"
+                               IsChecked="{Binding IsSerpentineProcessing}"
+                               Visibility="{Binding ElementName=Ditherers, Path=SelectedItem.(vm:DithererDescriptor.HasSerpentineProcessing), Converter={StaticResource Bool2Visibility}}"/>
+                </Grid>
+
+            </StackPanel>
         </GroupBox>
 
         <!--Preview-->
@@ -126,13 +193,14 @@
                                     IsChecked="{Binding ShowCurrentFrame}"/>
 
                 <!--Tried to use ZoomBox and FrameViewer, none of them worked well. Some zoomable solution would be preferable-->
-                <Image Grid.Row="1" Source="{Binding PreviewImage, Mode=OneWay}"/>
+                <Image Grid.Row="1"
+                       Source="{Binding PreviewImage, Mode=OneWay}"
+                       RenderOptions.BitmapScalingMode="HighQuality"/>
                 <ProgressBar Grid.Row="1" IsIndeterminate="True" MaxHeight="16" Margin="10, 0"
                              Foreground="{DynamicResource Brush.ProgressBar.Info}"
                              Visibility="{Binding IsGenerating, Converter={StaticResource Bool2Visibility}}"/>
             </Grid>
         </GroupBox>
-
 
     </StackPanel>
 </UserControl>

@@ -403,6 +403,7 @@
       <DependentUpon>KGySoftGifOptionsPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Util\Converters\PresetToViewModelConverter.cs" />
+    <Compile Include="ViewModel\DithererDescriptor.cs" />
     <Compile Include="ViewModel\FrameViewModel.cs" />
     <Compile Include="ViewModel\KGySoftGifOptionsViewModel.cs" />
     <Compile Include="ViewModel\QuantizerDescriptor.cs" />

@@ -1,11 +1,9 @@
 #region Usings
 
 using System;
-using System.Reflection;
 using System.Windows.Media;
 
 using KGySoft.Drawing.Imaging;
-using KGySoft.Reflection;
 
 using ScreenToGif.Util;
 
@@ -27,6 +25,9 @@ namespace ScreenToGif.Model.ExportPresets.AnimatedImage.Gif
         private byte _whiteThreshold = 128;
         private bool _directMapping;
         private int _paletteSize = 256;
+        private float _strength;
+        private int? _seed;
+        private bool _serpentine;
         private bool _previewCurrentFrame;
 
         #endregion
@@ -81,22 +82,15 @@ namespace ScreenToGif.Model.ExportPresets.AnimatedImage.Gif
 
         #region Instance Properties
 
+        #region Quantizer Settings
+
         /// <summary>
-        /// Gets or sets the quantizer identifier in {TypeName}.{MemberName} format.
+        /// Gets or sets the quantizer identifier in {TypeName}.{MethodName} format.
         /// </summary>
         public string QuantizerId
         {
             get => _quantizerId;
             set => SetProperty(ref _quantizerId, value);
-        }
-
-        /// <summary>
-        /// Gets or sets the ditherer identifier in {TypeName}.{MemberName} format.
-        /// </summary>
-        public string DithererId
-        {
-            get => _dithererId;
-            set => SetProperty(ref _dithererId, value);
         }
 
         /// <summary>
@@ -148,6 +142,53 @@ namespace ScreenToGif.Model.ExportPresets.AnimatedImage.Gif
             set => SetProperty(ref _paletteSize, value);
         }
 
+        #endregion
+
+        #region Ditherer Settings
+
+        /// <summary>
+        /// Gets or sets the ditherer identifier in {TypeName}[.{PropertyName}] format.
+        /// </summary>
+        public string DithererId
+        {
+            get => _dithererId;
+            set => SetProperty(ref _dithererId, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the strength of the ditherer.
+        /// This property is ignored by error diffusion ditherers.
+        /// </summary>
+        public float Strength
+        {
+            get => _strength;
+            set => SetProperty(ref _strength, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the seed of ditherer.
+        /// This property is ignored by non-randomized ditherers.
+        /// </summary>
+        public int? Seed
+        {
+            get => _seed;
+            set => SetProperty(ref _seed, value);
+        }
+
+        /// <summary>
+        /// Gets or sets whether the ditherer uses serpentine processing.
+        /// This property is used only by error diffusion ditherers.
+        /// </summary>
+        public bool IsSerpentineProcessing
+        {
+            get => _serpentine;
+            set => SetProperty(ref _serpentine, value);
+        }
+
+        #endregion
+
+        #region Preview Settings
+
         /// <summary>
         /// Gets or sets whether the preview of the configuration should use the current frame instead of a fix image.
         /// </summary>
@@ -156,6 +197,8 @@ namespace ScreenToGif.Model.ExportPresets.AnimatedImage.Gif
             get => _previewCurrentFrame;
             set => SetProperty(ref _previewCurrentFrame, value);
         }
+
+        #endregion
 
         #endregion
 
@@ -170,53 +213,6 @@ namespace ScreenToGif.Model.ExportPresets.AnimatedImage.Gif
         {
             Encoder = EncoderType.KGySoft;
             ImageId = "Vector.KGySoft";
-        }
-
-        #endregion
-
-        #region Methods
-
-        public IQuantizer CreateQuantizer()
-        {
-            if (QuantizerId == null)
-                throw new InvalidOperationException("QuantizerId is null");
-            string[] parts = QuantizerId.Split('.');
-            if (parts.Length != 2)
-                throw new InvalidOperationException("QuantizerId is expected to be in TypeName.MethodName format");
-            Type type = Reflector.ResolveType(typeof(IQuantizer).Assembly, $"{typeof(IQuantizer).Namespace}.{parts[0]}", ResolveTypeOptions.ThrowError);
-            MethodInfo method = type.GetMethod(parts[1]) ?? throw new InvalidOperationException($"Invalid quantizer name: {parts[1]}");
-            ParameterInfo[] parameters = method.GetParameters();
-            object[] args = new object[parameters.Length];
-            for (int i = 0; i < parameters.Length; i++)
-            {
-                switch (parameters[i].Name)
-                {
-                    case "backColor":
-                        args[i] = BackColor.ToDrawingColor();
-                        break;
-                    case "alphaThreshold":
-                        args[i] = AlphaThreshold;
-                        break;
-                    case "whiteThreshold":
-                        args[i] = WhiteThreshold;
-                        break;
-                    case "directMapping":
-                        args[i] = DirectMapping;
-                        break;
-                    case "maxColors":
-                        args[i] = PaletteSize;
-                        break;
-                    default:
-                        throw new InvalidOperationException($"Unexpected parameter: {parameters[i]}");
-                }
-            }
-
-            return (IQuantizer)MethodAccessor.GetAccessor(method).Invoke(null, args);
-        }
-
-        public IDitherer CreateDitherer()
-        {
-            return null;
         }
 
         #endregion
