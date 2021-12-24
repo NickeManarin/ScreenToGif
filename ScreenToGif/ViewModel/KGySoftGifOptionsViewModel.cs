@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
 
@@ -233,7 +232,7 @@ namespace ScreenToGif.ViewModel
             // - It copied copy the pixels one more time (BitmapImage->WriteableBitmap because WriteableBitmap cannot be created from an image file directly)
             // - In WPF nothing is disposable so we can't get rid of the temporarily allocated memory immediately
             // Therefore we use a disposable GDI+ Bitmap to create a managed clone of the image as simply as possible
-            using (var bmp = ShowCurrentFrame && CurrentFramePath != null ? new Bitmap(CurrentFramePath) : KGySoft.Drawing.Icons.Shield.ExtractBitmap(new Size(256, 256)))
+            using (var bmp = ShowCurrentFrame && CurrentFramePath != null ? new Bitmap(CurrentFramePath) : Icons.Shield.ExtractBitmap(new Size(256, 256)))
             using (var nativeBitmapData = bmp.GetReadableBitmapData())
                 _currentFrame = nativeBitmapData.Clone(nativeBitmapData.PixelFormat);
 
@@ -256,10 +255,8 @@ namespace ScreenToGif.ViewModel
             if (_previewBitmap == null)
                 _previewBitmap = new WriteableBitmap(_currentFrame.Width, _currentFrame.Height, 96, 96, PixelFormats.Bgra32, null);
 
-            IQuantizer quantizer = GetQuantizer();
-            using (IReadWriteBitmapData quantizedClone = _currentFrame.Clone(quantizer.PixelFormatHint, quantizer, GetDitherer()))
             using (IReadWriteBitmapData previewBitmapData = _previewBitmap.GetReadWriteBitmapData())
-                quantizedClone.CopyTo(previewBitmapData);
+                _currentFrame.CopyTo(previewBitmapData, Point.Empty, GetQuantizer(), GetDitherer());
 
             // TODO: or canceled
             if (IsDisposed)
