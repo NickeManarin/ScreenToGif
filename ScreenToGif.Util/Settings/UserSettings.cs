@@ -127,7 +127,7 @@ public class UserSettings : INotifyPropertyChanged
             {
                 var value = ParseProperty(property);
 
-                if (value != null)
+                if (value != null && !resource.Contains(property.Key))
                     resource.Add(property.Key, value);
             }
 
@@ -308,6 +308,8 @@ public class UserSettings : INotifyPropertyChanged
                     return DateTime.Parse(property.Value);
                 case "TimeSpan":
                     return TimeSpan.Parse(property.Value);
+                case "TextAlignment":
+                    return Enum.Parse(typeof(TextAlignment), property.Value);
 
                 case "ArrayList":
                     {

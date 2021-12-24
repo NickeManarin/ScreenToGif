@@ -90,16 +90,32 @@ internal class Migration2_32_0To2_35_0
                 case "ImgurPreset":
                 {
                     child.NameSpace = "clr-namespace:ScreenToGif.ViewModel.UploadPresets.Imgur;assembly=ScreenToGif.ViewModel";
+
+                    UpdateNamespaces(child.Children);
                     break;
                 }
                 case "GfycatPreset":
                 {
                     child.NameSpace = "clr-namespace:ScreenToGif.ViewModel.UploadPresets.Gfycat;assembly=ScreenToGif.ViewModel";
+
+                    UpdateNamespaces(child.Children);
                     break;
                 }
                 case "YandexPreset":
                 {
                     child.NameSpace = "clr-namespace:ScreenToGif.ViewModel.UploadPresets.Yandex;assembly=ScreenToGif.ViewModel";
+
+                    UpdateNamespaces(child.Children);
+                    break;
+                }
+                case "ImgurAlbum":
+                {
+                    child.NameSpace = "clr-namespace:ScreenToGif.ViewModel.UploadPresets.Imgur;assembly=ScreenToGif.ViewModel";
+                    break;
+                }
+                case "History":
+                {
+                    child.NameSpace = "clr-namespace:ScreenToGif.ViewModel.UploadPresets.History;assembly=ScreenToGif.ViewModel";
                     break;
                 }
                 case "MouseClicksViewModel":
