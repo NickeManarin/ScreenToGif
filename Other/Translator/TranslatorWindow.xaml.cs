@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,659 +19,653 @@ using System.Windows.Navigation;
 using System.Windows.Threading;
 using System.Xml.Linq;
 using System.Xml.XPath;
+using Translator.Util;
 using XamlReader = System.Windows.Markup.XamlReader;
 
-namespace Translator
+namespace Translator;
+
+public partial class TranslatorWindow : Window
 {
-    public partial class TranslatorWindow : Window
+    private static string TempPath => Path.Combine(".", "ScreenToGif", "Resources");
+
+    private readonly List<ResourceDictionary> _resourceList = new();
+    private IEnumerable<string> _cultures;
+    private ObservableCollection<Translation> _translationList = new();
+    private string _resourceTemplate;
+
+    public TranslatorWindow()
     {
-        private string TempPath => Path.Combine(".", "ScreenToGif", "Resources");
+        InitializeComponent();
+    }
 
-        private readonly List<ResourceDictionary> _resourceList = new List<ResourceDictionary>();
-        private IEnumerable<string> _cultures;
-        private ObservableCollection<Translation> _translationList = new ObservableCollection<Translation>();
-        private string _resourceTemplate;
+    #region Events
 
-        public TranslatorWindow()
-        {
-            InitializeComponent();
-        }
+    private async void Window_Loaded(object sender, RoutedEventArgs e)
+    {
+        if (!Directory.Exists(TempPath))
+            Directory.CreateDirectory(TempPath);
 
-        #region Events
+        OpenButton.IsEnabled = false;
+        RefreshButton.IsEnabled = false;
+        ToComboBox.IsEnabled = false;
 
-        private async void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (!Directory.Exists(TempPath))
-                Directory.CreateDirectory(TempPath);
+        #region Languages
 
-            OpenButton.IsEnabled = false;
-            RefreshButton.IsEnabled = false;
-            ToComboBox.IsEnabled = false;
+        FromComboBox.Text = "Loading...";
+        ToComboBox.Text = "Loading...";
 
-            #region Languages
+        StatusBand.Info("Downloading English resource file...");
 
-            FromComboBox.Text = "Loading...";
-            ToComboBox.Text = "Loading...";
+        //We have to get english resource first in case we import first without refreshing
+        await DownloadSingleResourceAsync("en");
 
-            StatusBand.Info("Downloading English resource file...");
+        StatusBand.Info("Loading language codes...");
 
-            //We have to get english resource first in case we import first without refreshing
-            await DownloadSingleResourceAsync("en");
+        _cultures = await GetProperCulturesAsync();
+        var languageList = await Task.Factory.StartNew(() => _cultures.Select(x => new Culture { Code = x, Name = CultureInfo.GetCultureInfo(x).DisplayName }).ToList());
+        //var languageList = CultureInfo.GetCultures(CultureTypes.AllCultures).Select(x => new Culture { Code = x.IetfLanguageTag, Name = x.EnglishName }).ToList();
 
-            StatusBand.Info("Loading language codes...");
+        FromComboBox.ItemsSource = languageList;
+        ToComboBox.ItemsSource = languageList;
+        ToComboBox.Text = null;
+        FromComboBox.SelectedIndex = languageList.FindIndex(x => x.Code == "en");
 
-            _cultures = await GetProperCulturesAsync();
-            var languageList = await Task.Factory.StartNew(() => _cultures.Select(x => new Culture { Code = x, Name = CultureInfo.GetCultureInfo(x).DisplayName }).ToList());
-            //var languageList = CultureInfo.GetCultures(CultureTypes.AllCultures).Select(x => new Culture { Code = x.IetfLanguageTag, Name = x.EnglishName }).ToList();
-
-            FromComboBox.ItemsSource = languageList;
-            ToComboBox.ItemsSource = languageList;
-            ToComboBox.Text = null;
-            FromComboBox.SelectedIndex = languageList.FindIndex(x => x.Code == "en");
-
-            StatusBand.Hide();
-
-            #endregion
-
-            OpenButton.IsEnabled = true;
-            RefreshButton.IsEnabled = true;
-            ToComboBox.IsEnabled = true;
-
-            ToComboBox.Focus();
-        }
-
-        private void TutorialHyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
-        {
-            try
-            {
-                Process.Start("https://github.com/NickeManarin/ScreenToGif/wiki/Localization");
-            }
-            catch (Exception ex)
-            {
-                Dialog.Ok("Translator", "Tutorial", "Error while trying to open the tutorial link");
-            }
-        }
-
-        private void NewLineHyperlink_Click(object sender, RoutedEventArgs e)
-        {
-            Clipboard.SetText("&#10;");
-        }
-
-        private void ComboBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Return || e.Key == Key.Enter)
-            {
-                e.Handled = true;
-                RefreshButton.Focus();
-            }
-        }
-
-        private async void Refresh_Click(object sender, RoutedEventArgs e)
-        {
-            var baseCulture = FromComboBox.SelectedValue as string;
-            var specificCulture = ToComboBox.SelectedValue as string;
-
-            if (specificCulture == null)
-            {
-                StatusBand.Info("You need to select a target language to load the translations.");
-                return;
-            }
-
-            HeaderLabel.Content = "Downloading resources...";
-            StatusBand.Info("Dowloading selected translations...");
-
-            await DownloadResourcesAsync(baseCulture, specificCulture);
-            ShowTranslations(baseCulture, specificCulture);
-
-            HeaderLabel.Content = "Translator";
-            BaseDataGrid.IsEnabled = true;
-            StatusBand.Hide();
-        }
-
-        private void Itens_GotFocus(object sender, RoutedEventArgs e)
-        {
-            var ue = e.OriginalSource as TextBox;
-            if (ue == null) return;
-
-            ue.Dispatcher.BeginInvoke(DispatcherPriority.Send, (Action)(() => ue.SelectAll()));
-
-            BaseDataGrid.SelectedItem = ((FrameworkElement)sender).DataContext;
-        }
-
-        private void Item_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            var source = e.OriginalSource as TextBox;
-
-            if (source == null)
-                return;
-
-            //Back, up.
-            if (e.Key == Key.Up || (e.Key == Key.Enter || e.Key == Key.Return) && (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)))
-            {
-                source.MoveFocus(new TraversalRequest(FocusNavigationDirection.Up));
-                BaseDataGrid.BeginEdit();
-
-                var current = DataGridHelper.GetDataGridCell(BaseDataGrid.CurrentCell);
-
-                current?.MoveFocus(new TraversalRequest(FocusNavigationDirection.Up));
-
-                e.Handled = true;
-                return;
-            }
-
-            //Back, left.
-            if ((e.Key == Key.Left && (source.CaretIndex == 0 || source.IsReadOnly)) || (e.Key == Key.Tab && (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))))
-            {
-                source.MoveFocus(new TraversalRequest(FocusNavigationDirection.Left));
-                BaseDataGrid.BeginEdit();
-
-                var current = DataGridHelper.GetDataGridCell(BaseDataGrid.CurrentCell);
-
-                current?.MoveFocus(new TraversalRequest(FocusNavigationDirection.Left));
-
-                e.Handled = true;
-                return;
-            }
-
-            //Next, down.
-            if (e.Key == Key.Down || e.Key == Key.Enter || e.Key == Key.Return)
-            {
-                source.MoveFocus(new TraversalRequest(FocusNavigationDirection.Down));
-                BaseDataGrid.BeginEdit();
-
-                var current = DataGridHelper.GetDataGridCell(BaseDataGrid.CurrentCell);
-
-                current?.MoveFocus(new TraversalRequest(FocusNavigationDirection.Down));
-
-                e.Handled = true;
-                return;
-            }
-
-            //Next, right. OLD (e.Key == Key.Right && (source.CaretIndex == source.Text.Length - 1 || source.IsReadOnly)) ||
-            if (e.Key == Key.Tab)
-            {
-                source.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
-                BaseDataGrid.BeginEdit();
-
-                var current = DataGridHelper.GetDataGridCell(BaseDataGrid.CurrentCell);
-
-                current?.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
-
-                e.Handled = true;
-                return;
-            }
-        }
-
-        private void Load_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
-        }
-
-        private void Export_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = BaseDataGrid.IsEnabled && ToComboBox.SelectedValue != null && BaseDataGrid.Items.Count > 0;
-        }
-
-        private async void Load_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            var ofd = new OpenFileDialog
-            {
-                AddExtension = true,
-                CheckFileExists = true,
-                Title = "Open a Resource Dictionary",
-                Filter = "Resource Dictionay (*.xaml)|*.xaml;",
-                InitialDirectory = Path.GetFullPath(TempPath)
-            };
-
-            var result = ofd.ShowDialog();
-
-            if (!result.HasValue || !result.Value) return;
-
-            //Will save the file to other folder.
-            var tempFile = Path.Combine(TempPath, "Temp", Path.GetFileName(ofd.FileName));
-
-            Directory.CreateDirectory(Path.Combine(TempPath, "Temp"));
-
-            //Replaces the special chars.
-            var text = await Task.Factory.StartNew(() => File.ReadAllText(ofd.FileName, Encoding.UTF8).Replace("&#", "&amp;#").Replace("<!--<!--", "<!--").Replace("-->-->", "-->"));
-            await Task.Factory.StartNew(() => File.WriteAllText(tempFile, text, Encoding.UTF8));
-
-            var dictionary = await Task.Factory.StartNew(() => new ResourceDictionary { Source = new Uri(Path.GetFullPath(tempFile), UriKind.Absolute) });
-            _resourceList.Add(dictionary);
-
-            var baseCulture = FromComboBox.SelectedValue as string;
-            var specificCulture = Path.GetFileName(ofd.FileName).Replace("StringResources.", "").Replace(".xaml", "");
-
-            string properCulture;
-
-            //Catching here, because we can access UI thread easily here to show dialogs
-            try
-            {
-                properCulture = await Task.Factory.StartNew(() => CheckSupportedCulture(specificCulture));
-            }
-            catch (CultureNotFoundException)
-            {
-                Dialog.Ok("Action Denied", "Unknown Language.",
-                    $"The \"{specificCulture}\" and its family were not recognized as a valid language codes.");
-
-                return;
-            }
-            catch (Exception ex)
-            {
-                Dialog.Ok("Action Denied", "Error checking culture.", ex.Message);
-
-                return;
-            }
-
-            if (properCulture != specificCulture)
-            {
-                Dialog.Ok("Action Denied", "Redundant Language Code.",
-                    $"The \"{specificCulture}\" code is redundant. Try using \'{properCulture}\" instead");
-
-                return;
-            }
-
-            ToComboBox.SelectedValue = specificCulture;
-
-            ShowTranslations(baseCulture, specificCulture);
-
-            BaseDataGrid.IsEnabled = true;
-        }
-
-        private async void Export_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            var sfd = new SaveFileDialog
-            {
-                AddExtension = true,
-                Filter = "Resource Dictionary (*.xaml)|*.xaml",
-                Title = "Save Resource Dictionary",
-                FileName = $"StringResources.{ToComboBox.SelectedValue}.xaml"
-            };
-
-            var result = sfd.ShowDialog();
-
-            if (!result.HasValue || !result.Value) return;
-
-            BaseDataGrid.IsEnabled = false;
-            StatusBand.Info("Exporting translation...");
-
-            var fileName = sfd.FileName;
-            var saved = await Task.Factory.StartNew(() => ExportTranslation(fileName));
-
-            BaseDataGrid.IsEnabled = true;
-
-            if (saved)
-                StatusBand.Info("Translation saved!");
-            else
-                StatusBand.Hide();
-        }
-
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
-        private void Window_Closing(object sender, CancelEventArgs e)
-        {
-            if (BaseDataGrid.Items.Count > 0 && !Dialog.Ask("Translator", "Do you really wish to close?", "Don't forget to export your translation, if you started translating but not exported yet."))
-                e.Cancel = true;
-        }
+        StatusBand.Hide();
 
         #endregion
 
-        #region Methods
+        OpenButton.IsEnabled = true;
+        RefreshButton.IsEnabled = true;
+        ToComboBox.IsEnabled = true;
 
-        private async Task DownloadSingleResourceAsync(string culture)
+        ToComboBox.Focus();
+    }
+
+    private void TutorialHyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+    {
+        try
         {
-            try
+            Process.Start("https://github.com/NickeManarin/ScreenToGif/wiki/Localization");
+        }
+        catch (Exception ex)
+        {
+            Dialog.Ok("Translator", "Tutorial", "Error while trying to open the tutorial link");
+        }
+    }
+
+    private void NewLineHyperlink_Click(object sender, RoutedEventArgs e)
+    {
+        Clipboard.SetText("&#10;");
+    }
+
+    private void ComboBox_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.Key == Key.Return || e.Key == Key.Enter)
+        {
+            e.Handled = true;
+            RefreshButton.Focus();
+        }
+    }
+
+    private async void Refresh_Click(object sender, RoutedEventArgs e)
+    {
+        var baseCulture = FromComboBox.SelectedValue as string;
+
+        if (ToComboBox.SelectedValue is not string specificCulture)
+        {
+            StatusBand.Info("You need to select a target language to load the translations.");
+            return;
+        }
+
+        HeaderLabel.Content = "Downloading resources...";
+        StatusBand.Info("Dowloading selected translations...");
+
+        await DownloadResourcesAsync(baseCulture, specificCulture);
+        ShowTranslations(baseCulture, specificCulture);
+
+        HeaderLabel.Content = "Translator";
+        BaseDataGrid.IsEnabled = true;
+        StatusBand.Hide();
+    }
+
+    private void Itens_GotFocus(object sender, RoutedEventArgs e)
+    {
+        if (e.OriginalSource is not TextBox ue)
+            return;
+
+        ue.Dispatcher.BeginInvoke(DispatcherPriority.Send, () => ue.SelectAll());
+
+        BaseDataGrid.SelectedItem = ((FrameworkElement)sender).DataContext;
+    }
+
+    private void Item_PreviewKeyDown(object sender, KeyEventArgs e)
+    {
+        var source = e.OriginalSource as TextBox;
+
+        if (source == null)
+            return;
+
+        //Back, up.
+        if (e.Key == Key.Up || e.Key is Key.Enter or Key.Return && (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)))
+        {
+            source.MoveFocus(new TraversalRequest(FocusNavigationDirection.Up));
+            BaseDataGrid.BeginEdit();
+
+            var current = DataGridHelper.GetDataGridCell(BaseDataGrid.CurrentCell);
+
+            current?.MoveFocus(new TraversalRequest(FocusNavigationDirection.Up));
+
+            e.Handled = true;
+            return;
+        }
+
+        //Back, left.
+        if ((e.Key == Key.Left && (source.CaretIndex == 0 || source.IsReadOnly)) || (e.Key == Key.Tab && (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))))
+        {
+            source.MoveFocus(new TraversalRequest(FocusNavigationDirection.Left));
+            BaseDataGrid.BeginEdit();
+
+            var current = DataGridHelper.GetDataGridCell(BaseDataGrid.CurrentCell);
+
+            current?.MoveFocus(new TraversalRequest(FocusNavigationDirection.Left));
+
+            e.Handled = true;
+            return;
+        }
+
+        //Next, down.
+        if (e.Key == Key.Down || e.Key == Key.Enter || e.Key == Key.Return)
+        {
+            source.MoveFocus(new TraversalRequest(FocusNavigationDirection.Down));
+            BaseDataGrid.BeginEdit();
+
+            var current = DataGridHelper.GetDataGridCell(BaseDataGrid.CurrentCell);
+
+            current?.MoveFocus(new TraversalRequest(FocusNavigationDirection.Down));
+
+            e.Handled = true;
+            return;
+        }
+
+        //Next, right. OLD (e.Key == Key.Right && (source.CaretIndex == source.Text.Length - 1 || source.IsReadOnly)) ||
+        if (e.Key == Key.Tab)
+        {
+            source.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+            BaseDataGrid.BeginEdit();
+
+            var current = DataGridHelper.GetDataGridCell(BaseDataGrid.CurrentCell);
+
+            current?.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+
+            e.Handled = true;
+            return;
+        }
+    }
+
+    private void Load_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+    {
+        e.CanExecute = true;
+    }
+
+    private void Export_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+    {
+        e.CanExecute = BaseDataGrid.IsEnabled && ToComboBox.SelectedValue != null && BaseDataGrid.Items.Count > 0;
+    }
+
+    private async void Load_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        var ofd = new OpenFileDialog
+        {
+            AddExtension = true,
+            CheckFileExists = true,
+            Title = "Open a Resource Dictionary",
+            Filter = "Resource Dictionay (*.xaml)|*.xaml;",
+            InitialDirectory = Path.GetFullPath(TempPath)
+        };
+
+        var result = ofd.ShowDialog();
+
+        if (!result.HasValue || !result.Value) return;
+
+        //Will save the file to other folder.
+        var tempFile = Path.Combine(TempPath, "Temp", Path.GetFileName(ofd.FileName));
+
+        Directory.CreateDirectory(Path.Combine(TempPath, "Temp"));
+
+        //Replaces the special chars.
+        var text = await Task.Factory.StartNew(() => File.ReadAllText(ofd.FileName, Encoding.UTF8).Replace("&#", "&amp;#").Replace("<!--<!--", "<!--").Replace("-->-->", "-->"));
+        await Task.Factory.StartNew(() => File.WriteAllText(tempFile, text, Encoding.UTF8));
+
+        var dictionary = await Task.Factory.StartNew(() => new ResourceDictionary { Source = new Uri(Path.GetFullPath(tempFile), UriKind.Absolute) });
+        _resourceList.Add(dictionary);
+
+        var baseCulture = FromComboBox.SelectedValue as string;
+        var specificCulture = Path.GetFileName(ofd.FileName).Replace("StringResources.", "").Replace(".xaml", "");
+
+        string properCulture;
+
+        //Catching here, because we can access UI thread easily here to show dialogs
+        try
+        {
+            properCulture = await Task.Factory.StartNew(() => CheckSupportedCulture(specificCulture));
+        }
+        catch (CultureNotFoundException)
+        {
+            Dialog.Ok("Action Denied", "Unknown Language.",
+                $"The \"{specificCulture}\" and its family were not recognized as a valid language codes.");
+
+            return;
+        }
+        catch (Exception ex)
+        {
+            Dialog.Ok("Action Denied", "Error checking culture.", ex.Message);
+
+            return;
+        }
+
+        if (properCulture != specificCulture)
+        {
+            Dialog.Ok("Action Denied", "Redundant Language Code.",
+                $"The \"{specificCulture}\" code is redundant. Try using \'{properCulture}\" instead");
+
+            return;
+        }
+
+        ToComboBox.SelectedValue = specificCulture;
+
+        ShowTranslations(baseCulture, specificCulture);
+
+        BaseDataGrid.IsEnabled = true;
+    }
+
+    private async void Export_Executed(object sender, ExecutedRoutedEventArgs e)
+    {
+        var sfd = new SaveFileDialog
+        {
+            AddExtension = true,
+            Filter = "Resource Dictionary (*.xaml)|*.xaml",
+            Title = "Save Resource Dictionary",
+            FileName = $"StringResources.{ToComboBox.SelectedValue}.xaml"
+        };
+
+        var result = sfd.ShowDialog();
+
+        if (!result.HasValue || !result.Value) return;
+
+        BaseDataGrid.IsEnabled = false;
+        StatusBand.Info("Exporting translation...");
+
+        var fileName = sfd.FileName;
+        var saved = await Task.Factory.StartNew(() => ExportTranslation(fileName));
+
+        BaseDataGrid.IsEnabled = true;
+
+        if (saved)
+            StatusBand.Info("Translation saved!");
+        else
+            StatusBand.Hide();
+    }
+
+    private void CancelButton_Click(object sender, RoutedEventArgs e)
+    {
+        Close();
+    }
+
+    private void Window_Closing(object sender, CancelEventArgs e)
+    {
+        if (BaseDataGrid.Items.Count > 0 && !Dialog.Ask("Translator", "Do you really wish to close?", "Don't forget to export your translation, if you started translating but not exported yet."))
+            e.Cancel = true;
+    }
+
+    #endregion
+
+    #region Methods
+
+    private async Task DownloadSingleResourceAsync(string culture)
+    {
+        try
+        {
+            var request = (HttpWebRequest)WebRequest.Create("https://api.github.com/repos/NickeManarin/ScreenToGif/contents/ScreenToGif/Resources/Localization");
+            request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
+
+            var response = (HttpWebResponse)await request.GetResponseAsync();
+
+            await using (var resultStream = response.GetResponseStream())
             {
-                var request = (HttpWebRequest)WebRequest.Create("https://api.github.com/repos/NickeManarin/ScreenToGif/contents/ScreenToGif/Resources/Localization");
-                request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
-
-                var response = (HttpWebResponse)await request.GetResponseAsync();
-
-                using (var resultStream = response.GetResponseStream())
+                using (var reader = new StreamReader(resultStream))
                 {
-                    if (resultStream == null)
-                        return;
+                    var result = await reader.ReadToEndAsync();
 
-                    using (var reader = new StreamReader(resultStream))
+                    var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(result),
+                        new System.Xml.XmlDictionaryReaderQuotas());
+
+                    var json = await Task<XElement>.Factory.StartNew(() => XElement.Load(jsonReader));
+
+                    var element = json.XPathSelectElement("/").Elements().FirstOrDefault(x => x.XPathSelectElement("name").Value.EndsWith(culture + ".xaml"));
+
+                    if (element == null)
+                        throw new WebException("File not found");
+
+                    var name = element.XPathSelectElement("name").Value;
+                    var downloadUrl = element.XPathSelectElement("download_url").Value;
+
+                    await DownloadFileAsync(new Uri(downloadUrl), name);
+
+                    CommandManager.InvalidateRequerySuggested();
+                }
+            }
+        }
+        catch (WebException web)
+        {
+            Dispatcher.Invoke(() => Dialog.Ok("Translator", "Translator - Downloading Single Resource", web.Message +
+                Environment.NewLine + "Trying to load files already downloaded."));
+
+            await LoadFilesAsync();
+        }
+        catch (Exception ex)
+        {
+            Dispatcher.Invoke(() => Dialog.Ok("Translator", "Translator - Downloading Single Resource", ex.Message));
+        }
+
+        GC.Collect();
+    }
+
+    private async Task DownloadResourcesAsync(string baseCulture, string specificCulture)
+    {
+        try
+        {
+            var request = (HttpWebRequest)WebRequest.Create("https://api.github.com/repos/NickeManarin/ScreenToGif/contents/ScreenToGif/Resources/Localization");
+            request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
+
+            var response = (HttpWebResponse)await request.GetResponseAsync();
+
+            await using (var resultStream = response.GetResponseStream())
+            {
+                using (var reader = new StreamReader(resultStream))
+                {
+                    var result = await reader.ReadToEndAsync();
+
+                    var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(result),
+                        new System.Xml.XmlDictionaryReaderQuotas());
+
+                    var json = await Task<XElement>.Factory.StartNew(() => XElement.Load(jsonReader));
+
+                    foreach (var element in json.XPathSelectElement("/").Elements())
                     {
-                        var result = await reader.ReadToEndAsync();
-
-                        var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(result),
-                            new System.Xml.XmlDictionaryReaderQuotas());
-
-                        var json = await Task<XElement>.Factory.StartNew(() => XElement.Load(jsonReader));
-
-                        var element = json.XPathSelectElement("/").Elements().FirstOrDefault(x => x.XPathSelectElement("name").Value.EndsWith(culture + ".xaml"));
-
-                        if (element == null)
-                            throw new WebException("File not found");
-
                         var name = element.XPathSelectElement("name").Value;
+
+                        if (string.IsNullOrEmpty(name) || (!name.EndsWith(baseCulture + ".xaml") && !name.EndsWith(specificCulture + ".xaml")))
+                            continue;
+
                         var downloadUrl = element.XPathSelectElement("download_url").Value;
 
                         await DownloadFileAsync(new Uri(downloadUrl), name);
-
-                        CommandManager.InvalidateRequerySuggested();
                     }
+
+                    CommandManager.InvalidateRequerySuggested();
                 }
             }
-            catch (WebException web)
-            {
-                Dispatcher.Invoke(() => Dialog.Ok("Translator", "Translator - Downloading Single Resource", web.Message +
-                    Environment.NewLine + "Trying to load files already downloaded."));
+        }
+        catch (WebException web)
+        {
+            Dispatcher.Invoke(() => Dialog.Ok("Translator", "Translator - Downloading Resources", web.Message +
+                Environment.NewLine + "Trying to load files already downloaded."));
 
-                await LoadFilesAsync();
-            }
-            catch (Exception ex)
-            {
-                Dispatcher.Invoke(() => Dialog.Ok("Translator", "Translator - Downloading Single Resource", ex.Message));
-            }
-
-            GC.Collect();
+            await LoadFilesAsync();
+        }
+        catch (Exception ex)
+        {
+            Dispatcher.Invoke(() => Dialog.Ok("Translator", "Translator - Downloading Resources", ex.Message));
         }
 
-        private async Task DownloadResourcesAsync(string baseCulture, string specificCulture)
+        GC.Collect();
+    }
+
+    private async Task DownloadFileAsync2(Uri uri, string name)
+    {
+        try
         {
-            try
+            var file = Path.Combine(Dispatcher.Invoke<string>(() => TempPath), name);
+
+            if (File.Exists(file))
+                File.Delete(file);
+
+            using (var webClient = new WebClient { Credentials = CredentialCache.DefaultNetworkCredentials })
+                await webClient.DownloadFileTaskAsync(uri, file);
+
+            //Saves the template for later, when exporting the translation.
+            if (name.EndsWith("en.xaml"))
             {
-                var request = (HttpWebRequest)WebRequest.Create("https://api.github.com/repos/NickeManarin/ScreenToGif/contents/ScreenToGif/Resources/Localization");
-                request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
-
-                var response = (HttpWebResponse)await request.GetResponseAsync();
-
-                using (var resultStream = response.GetResponseStream())
+                using (var sr = new StreamReader(file, Encoding.UTF8))
                 {
-                    if (resultStream == null)
-                        return;
-
-                    using (var reader = new StreamReader(resultStream))
-                    {
-                        var result = await reader.ReadToEndAsync();
-
-                        var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(result),
-                            new System.Xml.XmlDictionaryReaderQuotas());
-
-                        var json = await Task<XElement>.Factory.StartNew(() => XElement.Load(jsonReader));
-
-                        foreach (var element in json.XPathSelectElement("/").Elements())
-                        {
-                            var name = element.XPathSelectElement("name").Value;
-
-                            if (string.IsNullOrEmpty(name) || (!name.EndsWith(baseCulture + ".xaml") && !name.EndsWith(specificCulture + ".xaml")))
-                                continue;
-
-                            var downloadUrl = element.XPathSelectElement("download_url").Value;
-
-                            await DownloadFileAsync(new Uri(downloadUrl), name);
-                        }
-
-                        CommandManager.InvalidateRequerySuggested();
-                    }
+                    _resourceTemplate = await sr.ReadToEndAsync();
                 }
             }
-            catch (WebException web)
+
+            await using (var fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
-                Dispatcher.Invoke(() => Dialog.Ok("Translator", "Translator - Downloading Resources", web.Message +
-                    Environment.NewLine + "Trying to load files already downloaded."));
+                var dictionary = await Task.Factory.StartNew(() => (ResourceDictionary)XamlReader.Load(fs, new ParserContext { XmlSpace = "preserve" }));
+                //var dictionary = new ResourceDictionary();
+                dictionary.Source = await Task.Factory.StartNew(() => new Uri(Path.GetFullPath(file), UriKind.Absolute));
 
-                await LoadFilesAsync();
-            }
-            catch (Exception ex)
-            {
-                Dispatcher.Invoke(() => Dialog.Ok("Translator", "Translator - Downloading Resources", ex.Message));
-            }
+                _resourceList.Add(dictionary);
 
-            GC.Collect();
-        }
-
-        private async Task DownloadFileAsync2(Uri uri, string name)
-        {
-            try
-            {
-                var file = Path.Combine(Dispatcher.Invoke(() => TempPath), name);
-
-                if (File.Exists(file))
-                    File.Delete(file);
-
-                using (var webClient = new WebClient { Credentials = CredentialCache.DefaultNetworkCredentials })
-                    await webClient.DownloadFileTaskAsync(uri, file);
-
-                //Saves the template for later, when exporting the translation.
                 if (name.EndsWith("en.xaml"))
-                {
-                    using (var sr = new StreamReader(file, Encoding.UTF8))
-                    {
-                        _resourceTemplate = await sr.ReadToEndAsync();
-                    }
-                }
-
-                using (var fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read))
-                {
-                    var dictionary = await Task.Factory.StartNew(() => (ResourceDictionary)XamlReader.Load(fs, new ParserContext { XmlSpace = "preserve" }));
-                    //var dictionary = new ResourceDictionary();
-                    dictionary.Source = await Task.Factory.StartNew(() => new Uri(Path.GetFullPath(file), UriKind.Absolute));
-
-                    _resourceList.Add(dictionary);
-
-                    if (name.EndsWith("en.xaml"))
-                        Application.Current.Resources.MergedDictionaries.Add(dictionary);
-                }
-            }
-            catch (Exception ex)
-            {
-                Dispatcher.Invoke(() => Dialog.Ok("Translator", "Translator - Downloading File", ex.Message));
+                    Application.Current.Resources.MergedDictionaries.Add(dictionary);
             }
         }
-
-        private async Task DownloadFileAsync(Uri uri, string name)
+        catch (Exception ex)
         {
-            try
+            Dispatcher.Invoke(() => Dialog.Ok("Translator", "Translator - Downloading File", ex.Message));
+        }
+    }
+
+    private async Task DownloadFileAsync(Uri uri, string name)
+    {
+        try
+        {
+            var file = Path.Combine(Dispatcher.Invoke<string>(() => TempPath), name);
+
+            if (File.Exists(file))
+                File.Delete(file);
+
+            using (var webClient = new WebClient { Credentials = CredentialCache.DefaultNetworkCredentials })
+                await webClient.DownloadFileTaskAsync(uri, file);
+
+            //Replaces the special chars.
+            var text = await Task.Factory.StartNew(() => File.ReadAllText(file, Encoding.UTF8).Replace("&#", "&amp;#"));
+            await Task.Factory.StartNew(() => File.WriteAllText(file, text, Encoding.UTF8));
+
+
+            //Saves the template for later, when exporting the translation.
+            if (name.EndsWith("en.xaml"))
+                _resourceTemplate = text;
+
+            var dictionary = await Task.Factory.StartNew(() => new ResourceDictionary { Source = new Uri(Path.GetFullPath(file), UriKind.Absolute) });
+
+            _resourceList.Add(dictionary);
+
+            //if (name.EndsWith("en.xaml"))
+            //    Application.Current.Resources.MergedDictionaries.Add(dictionary);
+
+            //using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(text)))
+            //{
+            //    var dictionary = (ResourceDictionary)System.Windows.Markup.XamlReader.Load(stream, new ParserContext { XmlSpace = "preserve" });
+            //}
+        }
+        catch (Exception ex)
+        {
+            Dispatcher.Invoke(() => Dialog.Ok("Translator", "Translator - Downloading File", ex.Message));
+        }
+    }
+
+    private async Task LoadFilesAsync()
+    {
+        try
+        {
+            var files = await Task.Factory.StartNew(() => Directory.EnumerateFiles(TempPath, "*.xaml"));
+
+            foreach (var file in files)
             {
-                var file = Path.Combine(Dispatcher.Invoke(() => TempPath), name);
-
-                if (File.Exists(file))
-                    File.Delete(file);
-
-                using (var webClient = new WebClient { Credentials = CredentialCache.DefaultNetworkCredentials })
-                    await webClient.DownloadFileTaskAsync(uri, file);
-
                 //Replaces the special chars.
                 var text = await Task.Factory.StartNew(() => File.ReadAllText(file, Encoding.UTF8).Replace("&#", "&amp;#"));
                 await Task.Factory.StartNew(() => File.WriteAllText(file, text, Encoding.UTF8));
 
-
                 //Saves the template for later, when exporting the translation.
-                if (name.EndsWith("en.xaml"))
+                if (file.EndsWith("en.xaml"))
                     _resourceTemplate = text;
 
                 var dictionary = await Task.Factory.StartNew(() => new ResourceDictionary { Source = new Uri(Path.GetFullPath(file), UriKind.Absolute) });
 
                 _resourceList.Add(dictionary);
-
-                //if (name.EndsWith("en.xaml"))
-                //    Application.Current.Resources.MergedDictionaries.Add(dictionary);
-
-                //using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(text)))
-                //{
-                //    var dictionary = (ResourceDictionary)System.Windows.Markup.XamlReader.Load(stream, new ParserContext { XmlSpace = "preserve" });
-                //}
-            }
-            catch (Exception ex)
-            {
-                Dispatcher.Invoke(() => Dialog.Ok("Translator", "Translator - Downloading File", ex.Message));
             }
         }
-
-        private async Task LoadFilesAsync()
+        catch (Exception ex)
         {
-            try
-            {
-                var files = await Task.Factory.StartNew(() => Directory.EnumerateFiles(TempPath, "*.xaml"));
+            Dispatcher.Invoke(() => Dialog.Ok("Translator", "Translator - Loading Offline File", ex.Message));
+        }
+    }
 
-                foreach (var file in files)
-                {
-                    //Replaces the special chars.
-                    var text = await Task.Factory.StartNew(() => File.ReadAllText(file, Encoding.UTF8).Replace("&#", "&amp;#"));
-                    await Task.Factory.StartNew(() => File.WriteAllText(file, text, Encoding.UTF8));
+    private void ShowTranslations(string baseCulture, string specificCulture)
+    {
+        //var baseCulture = FromComboBox.SelectionBoxItem as Culture;
+        //var specificCulture = ToComboBox.SelectionBoxItem as Culture;
 
-                    //Saves the template for later, when exporting the translation.
-                    if (file.EndsWith("en.xaml"))
-                        _resourceTemplate = text;
-
-                    var dictionary = await Task.Factory.StartNew(() => new ResourceDictionary { Source = new Uri(Path.GetFullPath(file), UriKind.Absolute) });
-
-                    _resourceList.Add(dictionary);
-                }
-            }
-            catch (Exception ex)
-            {
-                Dispatcher.Invoke(() => Dialog.Ok("Translator", "Translator - Loading Offline File", ex.Message));
-            }
+        if (baseCulture == null)
+        {
+            _translationList = null;
+            BaseDataGrid.ItemsSource = null;
+            return;
         }
 
-        private void ShowTranslations(string baseCulture, string specificCulture)
+        var baseResource = _resourceList.FirstOrDefault(x => x.Source?.OriginalString.EndsWith(baseCulture + ".xaml") ?? false);
+        //var baseResource = Application.Current.Resources.MergedDictionaries.FirstOrDefault(x => x.Source?.OriginalString.EndsWith(baseCulture + ".xaml") ?? false);
+
+        if (baseResource == null)
+            return;
+
+        if (specificCulture == null)
         {
-            //var baseCulture = FromComboBox.SelectionBoxItem as Culture;
-            //var specificCulture = ToComboBox.SelectionBoxItem as Culture;
-
-            if (baseCulture == null)
-            {
-                _translationList = null;
-                BaseDataGrid.ItemsSource = null;
-                return;
-            }
-
-            var baseResource = _resourceList.FirstOrDefault(x => x.Source?.OriginalString.EndsWith(baseCulture + ".xaml") ?? false);
-            //var baseResource = Application.Current.Resources.MergedDictionaries.FirstOrDefault(x => x.Source?.OriginalString.EndsWith(baseCulture + ".xaml") ?? false);
-
-            if (baseResource == null)
-                return;
-
-            if (specificCulture == null)
-            {
-                _translationList = new ObservableCollection<Translation>(baseResource.Keys.Cast<string>().Select(y => new Translation
-                {
-                    Key = y,
-                    BaseText = (string)baseResource[y]
-                }).OrderBy(o => o.Key).ToList());
-
-                BaseDataGrid.ItemsSource = _translationList;
-                return;
-            }
-
-            var specificResource = _resourceList.LastOrDefault(x => x.Source?.OriginalString.EndsWith(specificCulture + ".xaml") ?? false);
-
-            if (specificResource == null)
-            {
-                _translationList = new ObservableCollection<Translation>(baseResource.Keys.Cast<string>().Select(y => new Translation
-                {
-                    Key = y,
-                    BaseText = (string)baseResource[y]
-                }).OrderBy(o => o.Key).ToList());
-
-                BaseDataGrid.ItemsSource = _translationList;
-                return;
-            }
-
             _translationList = new ObservableCollection<Translation>(baseResource.Keys.Cast<string>().Select(y => new Translation
             {
                 Key = y,
-                BaseText = (string)baseResource[y],
-                SpecificText = (string)specificResource[y]
+                BaseText = (string)baseResource[y]
             }).OrderBy(o => o.Key).ToList());
 
             BaseDataGrid.ItemsSource = _translationList;
+            return;
         }
 
-        private bool ExportTranslation(string path)
+        var specificResource = _resourceList.LastOrDefault(x => x.Source?.OriginalString.EndsWith(specificCulture + ".xaml") ?? false);
+
+        if (specificResource == null)
         {
-            try
+            _translationList = new ObservableCollection<Translation>(baseResource.Keys.Cast<string>().Select(y => new Translation
             {
-                var lines = _resourceTemplate.Split('\n');
+                Key = y,
+                BaseText = (string)baseResource[y]
+            }).OrderBy(o => o.Key).ToList());
 
-                for (var i = 0; i < lines.Length; i++)
-                {
-                    var keyIndex = lines[i].IndexOf(":Key=", StringComparison.Ordinal);
-
-                    if (lines[i].TrimStart().StartsWith("<!--") || keyIndex == -1)
-                        continue;
-
-                    var keyAux = lines[i].Substring(keyIndex + 6);
-                    var key = keyAux.Substring(0, keyAux.IndexOf("\"", StringComparison.Ordinal));
-
-                    var translated = _translationList.FirstOrDefault(x => x.Key == key);
-
-                    //"    <s:String x:Key=\"Size\">Size</s:String>"
-                    if (string.IsNullOrWhiteSpace(translated?.SpecificText))
-                        lines[i] = $"    <!--{lines[i].TrimStart()}-->"; //Comment the line.
-                    else
-                        lines[i] = $"    <s:String x:Key=\"{key}\">{translated.SpecificText}</s:String>";
-                }
-
-                if (File.Exists(path))
-                    File.Delete(path);
-
-                File.WriteAllText(path, string.Join(Environment.NewLine, lines).Replace("&amp;#", "&#"), Encoding.UTF8);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Dispatcher.Invoke(() => Dialog.Ok("Translator", "Translator - Saving Translation", ex.Message));
-                return false;
-            }
+            BaseDataGrid.ItemsSource = _translationList;
+            return;
         }
 
-        private string CheckSupportedCulture(string cultureName)
+        _translationList = new ObservableCollection<Translation>(baseResource.Keys.Cast<string>().Select(y => new Translation
         {
-            //Using HashSet, because we can check if it contains string in O(1) time
-            //Only creating it takes some time,
-            //but it's better than performing Contains multiple times on the list in the loop below
-            var cultureHash = new HashSet<string>(_cultures);
+            Key = y,
+            BaseText = (string)baseResource[y],
+            SpecificText = (string)specificResource[y]
+        }).OrderBy(o => o.Key).ToList());
 
-            if (cultureHash.Contains(cultureName))
-                return cultureName;
+        BaseDataGrid.ItemsSource = _translationList;
+    }
 
-            var t = CultureInfo.GetCultureInfo(cultureName);
+    private bool ExportTranslation(string path)
+    {
+        try
+        {
+            var lines = _resourceTemplate.Split('\n');
 
-            while (t != CultureInfo.InvariantCulture)
+            for (var i = 0; i < lines.Length; i++)
             {
-                if (cultureHash.Contains(t.Name))
-                    return t.Name;
+                var keyIndex = lines[i].IndexOf(":Key=", StringComparison.Ordinal);
 
-                t = t.Parent;
+                if (lines[i].TrimStart().StartsWith("<!--") || keyIndex == -1)
+                    continue;
+
+                var keyAux = lines[i].Substring(keyIndex + 6);
+                var key = keyAux.Substring(0, keyAux.IndexOf("\"", StringComparison.Ordinal));
+
+                var translated = _translationList.FirstOrDefault(x => x.Key == key);
+
+                //"    <s:String x:Key=\"Size\">Size</s:String>"
+                if (string.IsNullOrWhiteSpace(translated?.SpecificText))
+                    lines[i] = $"    <!--{lines[i].TrimStart()}-->"; //Comment the line.
+                else
+                    lines[i] = $"    <s:String x:Key=\"{key}\">{translated.SpecificText}</s:String>";
             }
 
-            throw new CultureNotFoundException();
+            if (File.Exists(path))
+                File.Delete(path);
+
+            File.WriteAllText(path, string.Join(Environment.NewLine, lines).Replace("&amp;#", "&#"), Encoding.UTF8);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Dispatcher.Invoke(() => Dialog.Ok("Translator", "Translator - Saving Translation", ex.Message));
+            return false;
+        }
+    }
+
+    private string CheckSupportedCulture(string cultureName)
+    {
+        //Using HashSet, because we can check if it contains string in O(1) time
+        //Only creating it takes some time,
+        //but it's better than performing Contains multiple times on the list in the loop below
+        var cultureHash = new HashSet<string>(_cultures);
+
+        if (cultureHash.Contains(cultureName))
+            return cultureName;
+
+        var t = CultureInfo.GetCultureInfo(cultureName);
+
+        while (t != CultureInfo.InvariantCulture)
+        {
+            if (cultureHash.Contains(t.Name))
+                return t.Name;
+
+            t = t.Parent;
         }
 
-        private async Task<IEnumerable<string>> GetProperCulturesAsync()
-        {
-            var allCodes = await Task.Factory.StartNew(() => CultureInfo.GetCultures(CultureTypes.AllCultures).Where(x => !string.IsNullOrEmpty(x.Name)).Select(x => x.Name));
+        throw new CultureNotFoundException();
+    }
 
-            try
-            {
-                var downloadedCodes = GetLanguageCodesOffline();
-                var properCodes = await Task.Factory.StartNew(() => allCodes.Where(x => downloadedCodes.Contains(x)));
+    private async Task<IEnumerable<string>> GetProperCulturesAsync()
+    {
+        var allCodes = await Task.Factory.StartNew(() => CultureInfo.GetCultures(CultureTypes.AllCultures).Where(x => !string.IsNullOrEmpty(x.Name)).Select(x => x.Name));
+
+        try
+        {
+            var downloadedCodes = GetLanguageCodesOffline();
+            var properCodes = await Task.Factory.StartNew(() => allCodes.Where(x => downloadedCodes.Contains(x)));
                 
-                return properCodes ?? allCodes;
-            }
-            catch (Exception ex)
-            {
-                Dispatcher.Invoke(() => Dialog.Ok("Translator", "Translator - Getting Language Codes", ex.Message +
-                    Environment.NewLine + "Loading all local language codes."));
-            }
-
-            GC.Collect();
-            return allCodes;
+            return properCodes ?? allCodes;
+        }
+        catch (Exception ex)
+        {
+            Dispatcher.Invoke(() => Dialog.Ok("Translator", "Translator - Getting Language Codes", ex.Message +
+                Environment.NewLine + "Loading all local language codes."));
         }
 
-        private List<string> GetLanguageCodesOffline()
-        {
-            //I'm taking a shortcut in here.
-            return ("af;af-NA;agq;ak;am;ar;ar-AE;ar-BH;ar-DJ;ar-DZ;ar-EG;ar-ER;ar-IL;ar-IQ;ar-JO;ar-KM;ar-KW;ar-LB;ar-LY;ar-MA;ar-MR;ar-OM;ar-PS;ar-QA;ar-SA;ar-SD;ar-SO;" +
+        GC.Collect();
+        return allCodes;
+    }
+
+    private List<string> GetLanguageCodesOffline()
+    {
+        //I'm taking a shortcut in here.
+        return ("af;af-NA;agq;ak;am;ar;ar-AE;ar-BH;ar-DJ;ar-DZ;ar-EG;ar-ER;ar-IL;ar-IQ;ar-JO;ar-KM;ar-KW;ar-LB;ar-LY;ar-MA;ar-MR;ar-OM;ar-PS;ar-QA;ar-SA;ar-SD;ar-SO;" +
                 "ar-SS;ar-SY;ar-TD;ar-TN;ar-YE;as;asa;ast;az;az-Cyrl;bas;be;bem;bez;bg;bm;bn;bn-IN;bo;bo-IN;br;brx;bs;bs-Cyrl;ca;ca-FR;ccp;ce;ceb;cgg;chr;cs;cu;cy;da;" +
                 "dav;de;de-AT;de-CH;de-IT;de-LI;de-LU;dje;dsb;dua;dyo;dz;ebu;ee;ee-TG;el;en;en-001;en-150;en-AE;en-AG;en-AI;en-AT;en-AU;en-BB;en-BE;en-BI;en-BM;en-BS;" +
                 "en-BW;en-BZ;en-CA;en-CC;en-CH;en-CK;en-CM;en-CX;en-DE;en-DK;en-DM;en-ER;en-FI;en-FJ;en-FK;en-GB;en-GD;en-GG;en-GH;en-GI;en-GM;en-GU;en-GY;en-HK;en-IE;" +
@@ -687,80 +681,79 @@ namespace Translator
                 "shi-Latn;si;sk;sl;smn;sn;so;so-DJ;so-ET;so-KE;sq;sq-MK;sq-XK;sr;sr-Cyrl-BA;sr-Cyrl-ME;sr-Cyrl-XK;sr-Latn;sr-Latn-BA;sr-Latn-ME;sr-Latn-XK;sv;sv-FI;sw;sw-CD;sw-KE;" +
                 "sw-UG;ta;ta-LK;ta-MY;ta-SG;te;teo;teo-KE;tg;th;ti;ti-ER;tk;to;tr;tr-CY;tt;twq;tzm;ug;uk;ur;ur-IN;uz;uz-Arab;uz-Cyrl;vai;vai-Latn;vi;vo;vun;wae;wo;xh;xog;yav;yi;yo;" +
                 "yo-BJ;zgh;zh;zh-Hans-HK;zh-Hans-MO;zh-Hant;zu").Split(';').ToList();
-        }
+    }
 
-        private async Task<IEnumerable<string>> GetLanguageCodesAsync()
+    private async Task<IEnumerable<string>> GetLanguageCodesAsync()
+    {
+        var path = await GetLanguageCodesPathAsync();
+
+        if (string.IsNullOrEmpty(path))
+            throw new WebException("Can't get language codes. Path to language codes is null");
+
+        var request = (HttpWebRequest)WebRequest.Create(path);
+        request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
+
+        var response = (HttpWebResponse)await request.GetResponseAsync();
+
+        using (var resultStream = response.GetResponseStream())
         {
-            var path = await GetLanguageCodesPathAsync();
+            if (resultStream == null)
+                throw new WebException("Empty response from server when getting language codes");
 
-            if (string.IsNullOrEmpty(path))
-                throw new WebException("Can't get language codes. Path to language codes is null");
-
-            var request = (HttpWebRequest)WebRequest.Create(path);
-            request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
-
-            var response = (HttpWebResponse)await request.GetResponseAsync();
-
-            using (var resultStream = response.GetResponseStream())
+            using (var reader = new StreamReader(resultStream))
             {
-                if (resultStream == null)
-                    throw new WebException("Empty response from server when getting language codes");
+                var result = await reader.ReadToEndAsync();
 
-                using (var reader = new StreamReader(resultStream))
-                {
-                    var result = await reader.ReadToEndAsync();
+                var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(result),
+                    new System.Xml.XmlDictionaryReaderQuotas());
 
-                    var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(result),
-                        new System.Xml.XmlDictionaryReaderQuotas());
+                var json = await Task<XElement>.Factory.StartNew(() => XElement.Load(jsonReader));
+                var languages = json.Elements();
 
-                    var json = await Task<XElement>.Factory.StartNew(() => XElement.Load(jsonReader));
-                    var languages = json.Elements();
-
-                    return await Task.Factory.StartNew(() => languages.Where(x => x.XPathSelectElement("defs").Value != "0").Select(x => x.XPathSelectElement("lang").Value));
-                }
+                return await Task.Factory.StartNew(() => languages.Where(x => x.XPathSelectElement("defs").Value != "0").Select(x => x.XPathSelectElement("lang").Value));
             }
         }
+    }
 
-        private async Task<string> GetLanguageCodesPathAsync()
+    private async Task<string> GetLanguageCodesPathAsync()
+    {
+        var request = (HttpWebRequest)WebRequest.Create("https://datahub.io/core/language-codes/datapackage.json");
+        request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
+
+        var response = (HttpWebResponse)await request.GetResponseAsync();
+
+        using (var resultStream = response.GetResponseStream())
         {
-            var request = (HttpWebRequest)WebRequest.Create("https://datahub.io/core/language-codes/datapackage.json");
-            request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
+            if (resultStream == null)
+                throw new WebException("Empty response from server when getting language codes path");
 
-            var response = (HttpWebResponse)await request.GetResponseAsync();
-
-            using (var resultStream = response.GetResponseStream())
+            using (var reader = new StreamReader(resultStream))
             {
-                if (resultStream == null)
-                    throw new WebException("Empty response from server when getting language codes path");
+                var result = await reader.ReadToEndAsync();
 
-                using (var reader = new StreamReader(resultStream))
-                {
-                    var result = await reader.ReadToEndAsync();
+                var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(result),
+                    new System.Xml.XmlDictionaryReaderQuotas());
 
-                    var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(result),
-                        new System.Xml.XmlDictionaryReaderQuotas());
+                var json = await Task<XElement>.Factory.StartNew(() => XElement.Load(jsonReader));
 
-                    var json = await Task<XElement>.Factory.StartNew(() => XElement.Load(jsonReader));
-
-                    return await Task.Factory.StartNew(() => json.XPathSelectElement("resources").Elements().First(x => x.XPathSelectElement("name").Value == "ietf-language-tags_json").XPathSelectElement("path").Value);
-                }
+                return await Task.Factory.StartNew(() => json.XPathSelectElement("resources").Elements().First(x => x.XPathSelectElement("name").Value == "ietf-language-tags_json").XPathSelectElement("path").Value);
             }
         }
-
-        #endregion
     }
 
-    internal class Culture
-    {
-        public string Code { get; set; }
-        public string Name { get; set; }
-        public string CodeName => Code.PadRight(3) + " - " + Name;
-    }
+    #endregion
+}
 
-    internal class Translation
-    {
-        public string Key { get; set; }
-        public string BaseText { get; set; }
-        public string SpecificText { get; set; }
-    }
+internal class Culture
+{
+    public string Code { get; set; }
+    public string Name { get; set; }
+    public string CodeName => Code.PadRight(3) + " - " + Name;
+}
+
+internal class Translation
+{
+    public string Key { get; set; }
+    public string BaseText { get; set; }
+    public string SpecificText { get; set; }
 }

@@ -2,18 +2,17 @@
 
 This is the current project of ScreenToGif.  
 
-_VS 2019 and .Net 4.8 or newer required._
+_VS 2022 and .NET 6 or newer required._
 
-## What's new? (Version 2.34)
+## What's new? (Version 2.35)
 
-• Added Hebrew localization.  
+• Migration to .NET 6 and project restructuring.
+• Smooth loop: Creates a smooth loop by analyzing frames, which is done by comparing to the first/starting one.  
 
 ### Fixed:
 
-♦ Added support for the new distributition system for v2.35 and newer releases. It's important to download this version if you want to properly update to newer versions afterwards.
-♦ Numerical fields will now only react to the scroll if they have focus.
-♦ The window selection mode could crash because of a wrongly sized window.
-♦ When in frame selection mode, the frame list was allowing the loop between start and end selection to happen.  
+♦ Reduced the chance for a crash when stopping a recording (with DirectX).
+♦ Discarding when in manual or interaction capture modes could cause a block scenario.  
 
 ### Known Bugs:
   

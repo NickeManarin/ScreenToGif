@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <assembly manifestVersion="1.0" xmlns="urn:schemas-microsoft-com:asm.v1">
-  <assemblyIdentity version="2.34.0.0" name="ScreenToGif" processorArchitecture="msil"/>
-  
   <trustInfo xmlns="urn:schemas-microsoft-com:asm.v2">
     <security>
       <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
@@ -29,7 +27,7 @@
            automatically selected the most compatible environment. -->
 
       <!-- Windows Vista -->
-      <supportedOS Id="{e2011457-1546-43c5-a5fe-008deee3d3f0}" />
+      <!--<supportedOS Id="{e2011457-1546-43c5-a5fe-008deee3d3f0}" />-->
 
       <!-- Windows 7 -->
       <supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a2440225f93a}" />

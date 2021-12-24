@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>True</UseWPF>
+    <UseWindowsForms>True</UseWindowsForms>
+    <DebugType>embedded</DebugType>
+    <Platforms>AnyCPU;ARM64;x64;x86</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ScreenToGif.Model\ScreenToGif.Domain.csproj" />
+    <ProjectReference Include="..\ScreenToGif.Util\ScreenToGif.Util.csproj" />
+  </ItemGroup>
+</Project>

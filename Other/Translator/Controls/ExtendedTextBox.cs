@@ -1,30 +1,29 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Translator.Controls
+namespace Translator.Controls;
+
+public class ExtendedTextBox : TextBox
 {
-    public class ExtendedTextBox : TextBox
+    static ExtendedTextBox()
     {
-        static ExtendedTextBox()
-        {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(ExtendedTextBox), new FrameworkPropertyMetadata(typeof(ExtendedTextBox)));
-        }
+        DefaultStyleKeyProperty.OverrideMetadata(typeof(ExtendedTextBox), new FrameworkPropertyMetadata(typeof(ExtendedTextBox)));
+    }
 
-        protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
+    protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
+    {
+        if (!IsKeyboardFocusWithin)
         {
-            if (!IsKeyboardFocusWithin)
-            {
-                e.Handled = true;
-                Focus();
-            }
+            e.Handled = true;
+            Focus();
         }
+    }
 
-        protected override void OnGotFocus(RoutedEventArgs e)
-        {
-            base.OnGotFocus(e);
+    protected override void OnGotFocus(RoutedEventArgs e)
+    {
+        base.OnGotFocus(e);
 
-            SelectAll();
-        }
+        SelectAll();
     }
 }

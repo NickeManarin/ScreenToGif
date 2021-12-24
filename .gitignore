@@ -5,17 +5,16 @@
 /GifRecorder.v12.suo
 /.vs
 /GifRecorder
-/ScreenToGif/ScreenToGif.csproj.user
 /GifRecorder.v12-Notebook-Nicke.suo
 /GifRecorder.suo
-/GifRecorder.sln.DotSettings.user
 /GifRecorder.sdf
 /GifRecorder.sln.DotSettings
 ScreenToGif/Util/Secret.cs
 /ScreenToGif/Util/Secret.cs
 
-/Other/Translator/Translator.csproj.user
 /ScreenToGif.UWP
 /packages
 obj
 bin
+/log.txt
+*.user

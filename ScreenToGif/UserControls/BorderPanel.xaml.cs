@@ -1,12 +1,11 @@
-﻿using System.Windows.Controls;
+using System.Windows.Controls;
 
-namespace ScreenToGif.UserControls
+namespace ScreenToGif.UserControls;
+
+public partial class BorderPanel : UserControl
 {
-    public partial class BorderPanel : UserControl
+    public BorderPanel()
     {
-        public BorderPanel()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

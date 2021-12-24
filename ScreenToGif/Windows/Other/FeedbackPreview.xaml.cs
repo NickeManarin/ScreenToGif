@@ -1,35 +1,34 @@
-﻿using System;
+using System;
 using System.Windows;
 using ScreenToGif.Util;
 
-namespace ScreenToGif.Windows.Other
+namespace ScreenToGif.Windows.Other;
+
+public partial class FeedbackPreview : Window
 {
-    public partial class FeedbackPreview : Window
+    public string Html { get; set; }
+
+    public FeedbackPreview()
     {
-        public string Html { get; set; }
+        InitializeComponent();
+    }
 
-        public FeedbackPreview()
+    private void FeedbackPreview_Loaded(object sender, RoutedEventArgs e)
+    {
+        try
         {
-            InitializeComponent();
+            MainBrowser.NavigateToString(Html);
         }
-
-        private void FeedbackPreview_Loaded(object sender, RoutedEventArgs e)
+        catch (Exception ex)
         {
-            try
-            {
-                MainBrowser.NavigateToString(Html);
-            }
-            catch (Exception ex)
-            {
-                LogWriter.Log(ex, "Displaying the preview");
+            LogWriter.Log(ex, "Displaying the preview");
 
-                Dialog.Ok("Feedback Preview", "It was not possible to display the content", ex.Message);
-            }
+            Dialog.Ok("Feedback Preview", "It was not possible to display the content", ex.Message);
         }
+    }
 
-        private void OkButton_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
+    private void OkButton_Click(object sender, RoutedEventArgs e)
+    {
+        Close();
     }
 }

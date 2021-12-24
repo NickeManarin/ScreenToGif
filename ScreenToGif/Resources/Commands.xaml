@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <RoutedUICommand x:Key="Command.NewRecording" Text="S.Command.NewRecording">
@@ -209,6 +209,12 @@
     <RoutedUICommand x:Key="Command.Reduce" Text="S.Command.Reduce">
         <RoutedUICommand.InputGestures>
             <KeyGesture>Ctrl + Shift + Delete</KeyGesture>
+        </RoutedUICommand.InputGestures>
+    </RoutedUICommand>
+
+    <RoutedUICommand x:Key="Command.SmoothLoop" Text="S.Command.SmoothLoop">
+        <RoutedUICommand.InputGestures>
+            <KeyGesture>Ctrl + Shift + H</KeyGesture>
         </RoutedUICommand.InputGestures>
     </RoutedUICommand>
 
