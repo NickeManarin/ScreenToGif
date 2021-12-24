@@ -210,7 +210,7 @@
     <s:String x:Key="S.Options.App.Startup.Mode.Automatic">Automatisk</s:String>
     <s:String x:Key="S.Options.App.Startup.Mode.Automatic.Info">Programmet starter med Windows.</s:String>
     <s:String x:Key="S.Options.App.Startup.Mode.Warning">Ikke muligt at vælge startmetode.</s:String>
-    <s:String x:Key="S.Options.App.Startup.Instance.Single">Tillad kun en&#x0d;instans</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Single">Tillad kun&#x0d;en instans</s:String>
     <s:String x:Key="S.Options.App.Startup.Instance.Single.Info">Du kan kun køre  en udgave af programmet pr. bruger.&#x0d;D.v.s. at flere brugere og programudgaver kan eksistere sammen.&#x0d;Prøver du at starte igen, fokuseres det allerede kørende, og den 2. instans lukkes.</s:String>
     <s:String x:Key="S.Options.App.Startup.Instance.Multiple">Tillad flere&#x0d;instanser</s:String>
     <s:String x:Key="S.Options.App.Startup.Instance.Multiple.Info">Programmet kan køre flere gange samtidigt.</s:String>
@@ -239,8 +239,8 @@
     <s:String x:Key="S.Options.App.Tray.Interactions.Nothing">Ingenting</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Open">Åben vindue</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Open.None">Intet vindue</s:String>
-    <s:String x:Key="S.Options.App.Tray.Interactions.Toggle">Minimer/gendan alle vinduer</s:String>
-    <s:String x:Key="S.Options.App.Tray.Interactions.Minimize">Minimer alle vinduer</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Toggle">Minimér/gendan alle vinduer</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Minimize">Minimér alle vinduer</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Restore">Gendan alle vinduer</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Left">Venstreklik:</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.DoubleLeft">Dobbeltklik:</s:String>
@@ -248,8 +248,8 @@
     <s:String x:Key="S.Options.App.Tray.Interactions.Window">Vindue:</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Else">ellers åbnes:</s:String>
     <s:String x:Key="S.Options.App.General">Generelt</s:String>
-    <s:String x:Key="S.Options.App.General.WorkaroundQuota">Løsning på 'Ikke nok kvote...' fejlen.</s:String>
-    <s:String x:Key="S.Options.App.General.WorkaroundQuota.Info">(eksperimentel)</s:String>
+    <s:String x:Key="S.Options.App.General.WorkaroundQuota">Løsning på fejlen "Ikke kvote nok...".</s:String>
+    <s:String x:Key="S.Options.App.General.WorkaroundQuota.Info">(eksperimentelt)</s:String>
     <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">Bekræft programlukning.</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">Deaktivér hardwareacceleration.</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(brugerfladen behandles af software)</s:String>
@@ -316,18 +316,18 @@
     <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds.Info">Vis/skjul det gyldne snit.</s:String>
     <s:String x:Key="S.Options.Recorder.Guidelines.Crosshair">Kryds</s:String>
     <s:String x:Key="S.Options.Recorder.Guidelines.Crosshair.Info">Vis/skjul krydsets hjælpelinier.</s:String>
-    <s:String x:Key="S.Options.Recorder.Guidelines.Info">Hjælpelinier vises kun når optagelsen er stoppet/på  pause.</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.Info">Hjælpelinier vises kun når optagelse er på  pause/stoppet.</s:String>
     
     <s:String x:Key="S.Options.Recorder.HideTitleBar">Skjul titellinie (tynd).</s:String>
-    <s:String x:Key="S.Options.Recorder.Magnifier">Aktiver lup.</s:String>
-    <s:String x:Key="S.Options.Recorder.Magnifier.Info">(viser forstørrelsesglas ved valg af område)</s:String>
+    <s:String x:Key="S.Options.Recorder.Magnifier">Aktivér lup.</s:String>
+    <s:String x:Key="S.Options.Recorder.Magnifier.Info">(viser forstørrelsesglas ved områdevalg)</s:String>
     <s:String x:Key="S.Options.Recorder.AnimateBorder">Animér kanten ved valg af område.</s:String>
     <s:String x:Key="S.Options.Recorder.AnimateBorder.Info">(marcherende myrer)</s:String>
-    <s:String x:Key="S.Options.Recorder.SelectionPanning">Aktiver områdeflytning.</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionPanning">Aktivér områdeflytning.</s:String>
     <s:String x:Key="S.Options.Recorder.SelectionPanning.Info">(viser håndtag i hjørnet, så området kan flyttes)</s:String>
     <s:String x:Key="S.Options.Recorder.Compact">Kompakt.</s:String>
-    <s:String x:Key="S.Options.Recorder.Compact.Info">(mindre udgave af optagekontrollerne)</s:String>
-    <s:String x:Key="S.Options.Recorder.DisplayDiscard">Vis også Kassér knap under optagelse.</s:String>
+    <s:String x:Key="S.Options.Recorder.Compact.Info">(mindre udgave af optagekontroller)</s:String>
+    <s:String x:Key="S.Options.Recorder.DisplayDiscard">Vis også "Kassér" under optagelse.</s:String>
     <s:String x:Key="S.Options.Recorder.DisplayDiscard.Info">(normalt synlig ved pause)</s:String>
     <s:String x:Key="S.Options.Recorder.SelectionImprovement">Optimér områdevalg.</s:String>
     <s:String x:Key="S.Options.Recorder.SelectionImprovement.Info">(reducerer flimmer)</s:String>
@@ -366,12 +366,12 @@
     <s:String x:Key="S.Options.Editor.General.NotifyFrameDeletion">Bekræft sletning af rammer.</s:String>
     <s:String x:Key="S.Options.Editor.General.NotifyProjectDiscard">Spørg før projekt kasseres.</s:String>
     <s:String x:Key="S.Options.Editor.General.NotifyWhileClosingEditor">Bekræft lukning af redigering (ved åbne projekter).</s:String>
-    <s:String x:Key="S.Options.Editor.General.TripleClickSelection">Aktiver trippelklik vælger tekst.</s:String>
+    <s:String x:Key="S.Options.Editor.General.TripleClickSelection">Aktivér trippelklik vælger tekst.</s:String>
     <s:String x:Key="S.Options.Editor.General.DrawOutlineOutside">Tegn omkreds på titelbogstaver.</s:String>
     <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind">Spring unødvendige rammer over.</s:String>
     <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind.Info">(hvis de ikke kan forhåndsvises korrekt)</s:String>
     <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind.Tooltip">Spring unødvendige rammer over&#x0d;hvis de ikke kan forhåndsvises korrekt.</s:String>
-    <s:String x:Key="S.Options.Editor.General.LimitHistory">Antal Fortryd/Gendan.</s:String>
+    <s:String x:Key="S.Options.Editor.General.LimitHistory">Antal Fortryd/gendan.</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Info">(de ældste handlinger fjernes når grænsen er nået)</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Maximum">(maksimalt antal)</s:String>
     <s:String x:Key="S.Options.Editor.General.SyncPath.Folder">Synk profilers destinationsmappe.</s:String>
@@ -387,7 +387,7 @@
     <s:String x:Key="S.Options.Tasks.List.Task">Opgave</s:String>
     <s:String x:Key="S.Options.Tasks.List.Details">Detaljer</s:String>
     <s:String x:Key="S.Options.Tasks.List.Enabled">Aktiveret</s:String>
-    <s:String x:Key="S.Options.Tasks.Enable">Aktiver denne opgave.</s:String>
+    <s:String x:Key="S.Options.Tasks.Enable">Aktivér denne opgave.</s:String>
     <s:String x:Key="S.Options.Tasks.SelectType">(Vælg)</s:String>
     <s:String x:Key="S.Options.Tasks.SelectType.Info">Vælg opgave herover</s:String>
     <s:String x:Key="S.Options.Tasks.Info">Opgaverne udføres i rækkefølge fra toppen, ved første projektredigering.</s:String>
@@ -406,17 +406,17 @@
     <s:String x:Key="S.Options.Shortcuts.Global.OpenOptions.Info">(åbner indstillinger.)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.Exit">Luk:</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.Exit.Info">(lukker alle vinduer, og fjerner ikonet ved uret)</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Recorders">Optagere</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders">Optagelse</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause">Start/pause:</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause.Info">(starter/stopper optagelsen. Bruges til snapshot, hvis aktiveret)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Stop">Stop:</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Recorders.Stop.Info">(stopper optagelsen og åbner redigering)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Stop.Info">(stopper optagelse og åbner redigering)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Discard">Kassér:</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Discard.Info">(kasserer den aktive optagelse, når den pauses)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Follow">Følg mus:</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Recorders.Follow.Info">(slår Følg mus til eller fra)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Follow.Info">(slår "Følg mus" til eller fra)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.DisableFollow">Deaktiver:</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Recorders.DisableFollow.Info">(deaktiver Følg mus midlertidigt. Kun ændringstaster (Ctrl, Alt...etc.))</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.DisableFollow.Info">(deaktivér "Følg mus" midlertidigt. Kun ændringstaster (Ctrl, Alt...etc.))</s:String>
     <s:String x:Key="S.Options.Shortcuts.Info">Klik og tast den ønskede genvej (visse kombinationer er ikke tilladt).</s:String>
     
     <!--Options • Language-->
@@ -974,7 +974,7 @@
     <s:String x:Key="S.Editor.File.Insert.Recording">Optagelse</s:String>
     <s:String x:Key="S.Editor.File.Insert.Webcam">Fra&#x0d;webcam</s:String>
     <s:String x:Key="S.Editor.File.Insert.Board">Tavle&#x0d;optager</s:String>
-    <s:String x:Key="S.Editor.File.Insert.Media">Medie</s:String>
+    <s:String x:Key="S.Editor.File.Insert.Media">Fra&#x0d;medie</s:String>
     <s:String x:Key="S.Editor.File.Insert">Indsæt</s:String>
     
     <!--Editor • File tab • Save/Discard-->
@@ -1102,8 +1102,8 @@
     <s:String x:Key="S.Editor.DeleteFrames.Message">Dette sletter {0} ramme(r).&#x0d;Du kan fortryde senere.</s:String>
     <s:String x:Key="S.Editor.Exiting.Title">Lukker Redigering</s:String>
     <s:String x:Key="S.Editor.Exiting.Instruction">Vil du lukke?</s:String>
-    <s:String x:Key="S.Editor.Exiting.Message">Projektet du arbejder på, kan åbnes igen via 'Seneste projekter'.</s:String>
-    <s:String x:Key="S.Editor.Exiting.Message2">Projektet du arbejder på, kan åbnes igen via 'Seneste projekter', men slettes automatisk efter få dage.</s:String>
+    <s:String x:Key="S.Editor.Exiting.Message">Projektet kan åbnes igen via "Seneste projekter".</s:String>
+    <s:String x:Key="S.Editor.Exiting.Message2">Projektet kan åbnes igen via "Seneste projekter",&#x0d;men slettes automatisk efter få dage.</s:String>
     <s:String x:Key="S.Editor.DragDrop.Invalid.Title">Ugyldig træk og slip</s:String>
     <s:String x:Key="S.Editor.DragDrop.MultipleFiles.Instruction">Du kan ikke importere flere filer samtidigt</s:String>
     <s:String x:Key="S.Editor.DragDrop.MultipleFiles.Message">Prøv kun at vælge en enkelt.</s:String>
@@ -1135,7 +1135,7 @@
     <!--Editor • Warnings-->
     <s:String x:Key="S.Editor.Warning.Selection">Du skal vælge mindst en ramme til overlægget.</s:String>
     <s:String x:Key="S.Editor.Warning.Ffmpeg">FFmpeg findes ikke. Føj det til miljøvariabler eller angiv placeringen i indstillinger.</s:String>
-    <s:String x:Key="S.Editor.Warning.Gifski">Gifski findes ikke. Føj det til miljøvariablerne eller angiv placeringen i 'Indstillinger'.</s:String>
+    <s:String x:Key="S.Editor.Warning.Gifski">Gifski findes ikke. Føj det til miljøvariablerne eller angiv placeringen i "Indstillinger".</s:String>
     <s:String x:Key="S.Editor.Warning.LowSpace">Der er ikke plads nok til programmets midlertidige filer ({0}% tilbage). Gå til Indstillinger > Midlertidige filer og frigør plads.</s:String>
     <s:String x:Key="S.Editor.Warning.DifferentDpi">Import af flere billeder med forskellig DPI er ikke tilladt. Der blev importeret nogen, men resten skal importeres separat.</s:String>
     
@@ -1536,7 +1536,7 @@
     <s:String x:Key="S.SaveAs.Ffmpeg.UseParameters.Info">Sæt selv parametrene for kodningen.</s:String>
     <s:String x:Key="S.SaveAs.Ffmpeg.Parameters">Parametre:</s:String>
     <s:String x:Key="S.SaveAs.Ffmpeg.Parameters.Info">Liste med FFmpeg parametre.&#x0d;&#x0d;Specielle parametre:&#x0d;{I} = Kildesti (rammerne).&#x0d;{O} = Resultatsti (resultatfilen).&#x0d;{W} = Rammebredden.&#x0d;{H} = Rammehøjden.</s:String>
-    <s:String x:Key="S.SaveAs.Ffmpeg.Parameters.Pass">Tilføj '-pass 2' for at bruge to trin.</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Parameters.Pass">Tilføj "-pass 2" for at bruge to trin.</s:String>
     <s:String x:Key="S.SaveAs.Ffmpeg.Preview">Vis</s:String>
     <s:String x:Key="S.SaveAs.Ffmpeg.Preview.Info">Vis anvendte parametre.</s:String>
     <s:String x:Key="S.SaveAs.Ffmpeg.Help.Code">Codec ?</s:String>
@@ -1853,7 +1853,7 @@
     <!--TextAlignment-->
     <s:String x:Key="S.TextAlignment.Left">Venstre</s:String>
     <s:String x:Key="S.TextAlignment.Right">Højre</s:String>
-    <s:String x:Key="S.TextAlignment.Center">Centrer</s:String>
+    <s:String x:Key="S.TextAlignment.Center">Centrér</s:String>
     <s:String x:Key="S.TextAlignment.Justify">Fordel</s:String>
     
     <!--TextDecoration-->
