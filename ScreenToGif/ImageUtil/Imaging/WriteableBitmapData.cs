@@ -32,12 +32,13 @@ namespace ScreenToGif.ImageUtil.Imaging
     {
         #region Nested classes
 
-        private sealed unsafe class Row32 : IReadWriteBitmapDataRow
+        private sealed class Row32 : IReadWriteBitmapDataRow
         {
             #region Fields
 
             private readonly WriteableBitmapData _bitmapData;
-            private readonly Color32* _address;
+
+            private unsafe Color32* _address;
 
             #endregion
 
@@ -53,7 +54,7 @@ namespace ScreenToGif.ImageUtil.Imaging
 
             #region Indexers
 
-            public Color32 this[int x]
+            public unsafe Color32 this[int x]
             {
                 [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 get
@@ -77,7 +78,7 @@ namespace ScreenToGif.ImageUtil.Imaging
 
             #region Constructors
 
-            internal Row32(WriteableBitmapData bitmapData, int y)
+            internal unsafe Row32(WriteableBitmapData bitmapData, int y)
             {
                 _bitmapData = bitmapData;
                 Index = y;
@@ -88,21 +89,24 @@ namespace ScreenToGif.ImageUtil.Imaging
 
             #region Methods
 
-            public bool MoveNextRow()
+            public unsafe bool MoveNextRow()
             {
                 if (Index == _bitmapData.Height - 1)
                     return false;
                 Index += 1;
+                _address += Width;
                 return true;
             }
 
+            // Note: Alpha is handled as a non-premultiplied one even for Pbgra32.
+            // It's fine in this internal implementation because it is used only for quantizing where pixels are always 100% opaque or transparent.
             public Color GetColor(int x) => this[x].ToColor();
             public void SetColor(int x, Color color) => this[x] = new Color32(color);
             public int GetColorIndex(int x) => throw new NotSupportedException("Not an indexed bitmap data");
             public void SetColorIndex(int x, int colorIndex) => throw new NotSupportedException("Not an indexed bitmap data");
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public T ReadRaw<T>(int x) where T : unmanaged
+            public unsafe T ReadRaw<T>(int x) where T : unmanaged
             {
                 if ((x + 1) * sizeof(T) > Size)
                     ThrowXOutOfRange();
@@ -110,7 +114,7 @@ namespace ScreenToGif.ImageUtil.Imaging
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public void WriteRaw<T>(int x, T data) where T : unmanaged
+            public unsafe void WriteRaw<T>(int x, T data) where T : unmanaged
             {
                 if ((x + 1) * sizeof(T) > Size)
                     ThrowXOutOfRange();
@@ -132,7 +136,7 @@ namespace ScreenToGif.ImageUtil.Imaging
         /// The cached lastly accessed row. Though may be accessed from multiple threads it is intentionally not volatile
         /// so it has a bit higher chance that every thread sees the last value was set by itself and no recreation is needed.
         /// </summary>
-        private Row32 lastRow;
+        private Row32 _lastRow;
 
         #endregion
 
@@ -179,12 +183,12 @@ namespace ScreenToGif.ImageUtil.Imaging
                     ThrowYOutOfRange();
 
                 // If the same row is accessed repeatedly we return the cached last row.
-                var result = lastRow;
+                var result = _lastRow;
                 if (result?.Index == y)
                     return result;
 
                 // Otherwise, we create and cache the result.
-                return lastRow = new Row32(this, y);
+                return _lastRow = new Row32(this, y);
             }
         }
 
