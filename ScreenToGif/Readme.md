@@ -4,9 +4,9 @@ This is the current project of ScreenToGif.
 
 _VS 2022 and .NET 6 or newer required._
 
-## What's new? (Version 2.35.1)
+## What's new? (Version 2.35.2)
 
-• Just a quick bug fix for the installer.  
+• Just bug fixes.  
 
 ### Fixed:
 

@@ -1740,7 +1740,7 @@ namespace ScreenToGif.Windows
 
             var index = await Task.Run(() => SmoothLoopAsync((decimal)UserSettings.All.SmoothLoopSimilarity, UserSettings.All.SmoothLoopStartThreshold, UserSettings.All.SmoothLoopFrom));
 
-            if (index == 1 || index == Project.Frames.Count)
+            if (index == Project.Frames.Count)
             {
                 StatusList.Warning(LocalizationHelper.Get("S.SmoothLoop.Warning.NoLoopFound"));
 
@@ -6269,7 +6269,7 @@ namespace ScreenToGif.Windows
                 start += step;
             }
             
-            if (found == -1 || found == Project.Frames.Count - 1)
+            if (found == -1 || found == threshold || found == Project.Frames.Count - 1)
                 return Project.Frames.Count;
 
             var removeList = Project.Frames.GetRange(found + 1, Project.Frames.Count - 1 - found).Select(s => s.Index).ToList();

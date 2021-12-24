@@ -119,7 +119,7 @@ editbin /largeaddressaware "$(TargetPath)"
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
     <Company>Nicke Manarin</Company>
     <Authors>Nicke Manarin</Authors>
-    <Version>2.35.1</Version>
+    <Version>2.35.2</Version>
     <Copyright>Copyright© Nicke Manarin 2021</Copyright>
     <PackageProjectUrl>https://www.screentogif.com</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
