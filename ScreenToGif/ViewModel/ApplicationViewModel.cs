@@ -1202,7 +1202,6 @@ internal class ApplicationViewModel : ApplicationBaseViewModel
             //Detect installed components.
             var files = Directory.EnumerateFiles(AppDomain.CurrentDomain.BaseDirectory).ToList();
             var isInstaller = files.Any(x => x.ToLowerInvariant().EndsWith("screentogif.visualelementsmanifest.xml"));
-            var hasSharpDx = files.Any(x => x.ToLowerInvariant().EndsWith("sharpdx.dll"));
             var hasGifski = files.Any(x => x.ToLowerInvariant().EndsWith("gifski.dll"));
             var hasDesktopShortcut = File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "ScreenToGif.lnk")) ||
                                      File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonDesktopDirectory), "ScreenToGif.lnk"));
@@ -1221,7 +1220,7 @@ internal class ApplicationViewModel : ApplicationBaseViewModel
                 FileName = "msiexec",
                 Arguments = $" {(isInstaller ? "/i" : "/a")} \"{nonRoot}\"" +
                             $" {(isInstaller ? "INSTALLDIR" : "TARGETDIR")}=\"{AppDomain.CurrentDomain.BaseDirectory}\" INSTALLAUTOMATICALLY=yes INSTALLPORTABLE={(isInstaller ? "no" : "yes")}" +
-                            $" ADDLOCAL=Binary{(isInstaller ? ",Auxiliar" : "")}{(hasSharpDx ? ",SharpDX" : "")}{(hasGifski ? ",Gifski" : "")}" +
+                            $" ADDLOCAL=Binary{(isInstaller ? ",Auxiliar" : "")}{(hasGifski ? ",Gifski" : "")}" +
                             $" {(wasPromptedManually && runAfterwards ? "RUNAFTER=yes" : "")}" +
                             (isInstaller ? $" INSTALLDESKTOPSHORTCUT={(hasDesktopShortcut ? "yes" : "no")} INSTALLSHORTCUT={(hasMenuShortcut ? "yes" : "no")}" : ""),
                 Verb = UserSettings.All.ForceUpdateAsAdmin ? "runas" : ""

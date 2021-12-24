@@ -4,15 +4,13 @@ This is the current project of ScreenToGif.
 
 _VS 2022 and .NET 6 or newer required._
 
-## What's new? (Version 2.35)
+## What's new? (Version 2.35.1)
 
-• Migration to .NET 6 and project restructuring.
-• Smooth loop: Creates a smooth loop by analyzing frames, which is done by comparing to the first/starting one.  
+• Just a quick bug fix for the installer.  
 
 ### Fixed:
 
-♦ Reduced the chance for a crash when stopping a recording (with DirectX).
-♦ Discarding when in manual or interaction capture modes could cause a block scenario.  
+♦ The install process was failling if you had SharpDx set up (error 2711).  
 
 ### Known Bugs:
   
