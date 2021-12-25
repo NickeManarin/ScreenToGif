@@ -1398,7 +1398,7 @@ public partial class Recorder
             }
 
             //Command line arguments were sent.
-            if (Arguments.Open && Arguments.Region.Width > 0 && Arguments.Region.Height > 0)
+            if (Arguments.Region != Rect.Empty)
             {
                 UserSettings.All.RecorderLeft = Arguments.Region.Left - Constants.LeftOffset;
                 UserSettings.All.RecorderTop = Arguments.Region.Top - Constants.TopOffset;
