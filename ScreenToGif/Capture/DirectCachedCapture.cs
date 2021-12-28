@@ -514,7 +514,10 @@ internal class DirectCachedCapture : DirectImageCapture
             LogWriter.Log(ex, "It was not possible to finish capturing the frame with DirectX.");
 
             MajorCrashHappened = true;
-            Application.Current.Dispatcher.Invoke(() => OnError.Invoke(ex));
+
+            if (IsAcceptingFrames)
+                Application.Current.Dispatcher.Invoke(() => OnError.Invoke(ex));
+
             return FrameCount;
         }
         finally
