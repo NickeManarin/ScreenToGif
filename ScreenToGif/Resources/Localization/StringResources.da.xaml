@@ -10,9 +10,9 @@
     <!--General-->
     <s:String x:Key="S.Ok">OK</s:String>
     <s:String x:Key="S.Back">Tilbage</s:String>
-    <s:String x:Key="S.Cancel">Annuller</s:String>
+    <s:String x:Key="S.Cancel">Annullér</s:String>
     <s:String x:Key="S.Yes">OK</s:String>
-    <s:String x:Key="S.No">Annuller</s:String>
+    <s:String x:Key="S.No">Annullér</s:String>
     <s:String x:Key="S.Add">Tilføj</s:String>
     <s:String x:Key="S.Edit">Tilpas</s:String>
     <s:String x:Key="S.Id">ID</s:String>
