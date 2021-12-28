@@ -16,7 +16,7 @@
 </p>
 <h1 align="center">ScreenToGif 🎬 <a href="http://www.screentogif.com/" target="_blank">screentogif.com</a></h1>
 
-<p align="center">This tool allows you to record a selected area of your <strong>screen</strong>, live feed from your <strong>webcam</strong> or live drawings from a <strong>sketchboard</strong>. Afterwards, you can edit and save the animation as a gif, apng, video, psd or png images.</p>
+<p align="center">This tool allows you to record a selected area of your <strong>screen</strong>, live feed from your <strong>webcam</strong> or live drawings from a <strong>sketchboard</strong>. Afterward, you can edit and save the animation as a gif, apng, video, psd or png image.</p>
 
 <p align="center">
     <a href="https://github.com/NickeManarin/ScreenToGif/releases" target="_blank">
