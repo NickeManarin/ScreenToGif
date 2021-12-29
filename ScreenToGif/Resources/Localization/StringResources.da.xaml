@@ -10,9 +10,9 @@
     <!--General-->
     <s:String x:Key="S.Ok">OK</s:String>
     <s:String x:Key="S.Back">Tilbage</s:String>
-    <s:String x:Key="S.Cancel">Annuller</s:String>
-    <s:String x:Key="S.Yes">Ja</s:String>
-    <s:String x:Key="S.No">Nej</s:String>
+    <s:String x:Key="S.Cancel">Annullér</s:String>
+    <s:String x:Key="S.Yes">OK</s:String>
+    <s:String x:Key="S.No">Annullér</s:String>
     <s:String x:Key="S.Add">Tilføj</s:String>
     <s:String x:Key="S.Edit">Tilpas</s:String>
     <s:String x:Key="S.Id">ID</s:String>
@@ -90,7 +90,7 @@
     <s:String x:Key="S.Command.OverrideDelay">Tilpas rammetid</s:String>
     <s:String x:Key="S.Command.IncreaseDecreaseDelay">Forøg/formindsk rammetid</s:String>
     <s:String x:Key="S.Command.ScaleDelay">Skalér rammetid</s:String>
-    <s:String x:Key="S.Command.Zoom100">Sæt zoom til 100%</s:String>
+    <s:String x:Key="S.Command.Zoom100">100% zoom</s:String>
     <s:String x:Key="S.Command.SizeToContent">Pas vindue til rammestørrelse</s:String>
     <s:String x:Key="S.Command.FitImage">Pas billede til vinduesstørrelse</s:String>
     <s:String x:Key="S.Command.FirstFrame">Vælg første ramme</s:String>
@@ -109,6 +109,7 @@
     <s:String x:Key="S.Command.DeleteNext">Slet alt efter</s:String>
     <s:String x:Key="S.Command.RemoveDuplicates">Fjern duplikater</s:String>
     <s:String x:Key="S.Command.Reduce">Reducér rammeantal</s:String>
+    <s:String x:Key="S.Command.SmoothLoop">Opret glat gentagelse</s:String>
     <s:String x:Key="S.Command.Reverse">Vend animation</s:String>
     <s:String x:Key="S.Command.Yoyo">Spiller animationen forlæns og baglæns</s:String>
     <s:String x:Key="S.Command.MoveLeft">Flyt valgte ramme til venstre</s:String>
@@ -127,11 +128,11 @@
     <s:String x:Key="S.Command.Border">Tilføj kanter</s:String>
     <s:String x:Key="S.Command.Shadow">Tilføj skygge</s:String>
     <s:String x:Key="S.Command.Obfuscate">Censurer følsomme områder</s:String>
-    <s:String x:Key="S.Command.Cinemagraph">Brug pennen til at vælge hvilke dele af rammen der ikke er konstant gennem hele animationen</s:String>
+    <s:String x:Key="S.Command.Cinemagraph">Brug pennen til at vælge hvilke dele af rammen&#x0d;der ikke er konstante gennem hele animationen</s:String>
     <s:String x:Key="S.Command.Progress">Statuslinie/tekst med afspilningstid</s:String>
     <s:String x:Key="S.Command.SelectAll">Vælg alle rammer</s:String>
     <s:String x:Key="S.Command.GoTo">Gå til rammenummer...</s:String>
-    <s:String x:Key="S.Command.InverseSelection">Inverter rammevalg</s:String>
+    <s:String x:Key="S.Command.InverseSelection">Invertér rammevalg</s:String>
     <s:String x:Key="S.Command.Unselect">Fravælg alt</s:String>
     <s:String x:Key="S.Command.Fade">Udton overgang</s:String>
     <s:String x:Key="S.Command.Slide">Glidende overgang</s:String>
@@ -164,6 +165,7 @@
     <s:String x:Key="S.Updater.Header">Ny udgave tilgængelig</s:String>
     <s:String x:Key="S.Updater.NewRelease">Ny udgave!</s:String>
     <s:String x:Key="S.Updater.NewRelease.Info">Version {0} er udkommet! Klik her for detaljer.</s:String>
+    <s:String x:Key="S.Updater.NoNewRelease.Info">Dit system er tilsyneladende ikke længere understøttet.&#x0d;Prøv at programmet fra hjemmesiden.</s:String>
     <s:String x:Key="S.Updater.Version">Version</s:String>
     <s:String x:Key="S.Updater.Portable">Portable</s:String>
     <s:String x:Key="S.Updater.Installer">Installering</s:String>
@@ -200,9 +202,6 @@
     <s:String x:Key="S.Options.Other">Andet</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Header">Følg markør mangler en genvej</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Message">Der skal knyttes en genvej til Følg markør, så du kan slå funktionen til/fra efter behov.</s:String>
-    <s:String x:Key="S.Options.Warning.DesktopDuplication.Header">Optagelse mangler en afhængighed</s:String>
-    <s:String x:Key="S.Options.Warning.DesktopDuplication.Message">For at optage med skrivebords API, skal du hente SharpDx.</s:String>
-    
     <!--Options • Application-->
     <s:String x:Key="S.Options.App.Startup">Start</s:String>
     <s:String x:Key="S.Options.App.Startup.Mode.Manual">Manuelt</s:String>
@@ -210,12 +209,12 @@
     <s:String x:Key="S.Options.App.Startup.Mode.Automatic">Automatisk</s:String>
     <s:String x:Key="S.Options.App.Startup.Mode.Automatic.Info">Programmet starter med Windows.</s:String>
     <s:String x:Key="S.Options.App.Startup.Mode.Warning">Ikke muligt at vælge startmetode.</s:String>
-    <s:String x:Key="S.Options.App.Startup.Instance.Single">Tillad kun en&#x0d;instans</s:String>
+    <s:String x:Key="S.Options.App.Startup.Instance.Single">Tillad kun&#x0d;en instans</s:String>
     <s:String x:Key="S.Options.App.Startup.Instance.Single.Info">Du kan kun køre  en udgave af programmet pr. bruger.&#x0d;D.v.s. at flere brugere og programudgaver kan eksistere sammen.&#x0d;Prøver du at starte igen, fokuseres det allerede kørende, og den 2. instans lukkes.</s:String>
     <s:String x:Key="S.Options.App.Startup.Instance.Multiple">Tillad flere&#x0d;instanser</s:String>
     <s:String x:Key="S.Options.App.Startup.Instance.Multiple.Info">Programmet kan køre flere gange samtidigt.</s:String>
     <s:String x:Key="S.Options.App.Startup.Tray">Start ved uret.</s:String>
-    <s:String x:Key="S.Options.App.Startup.Tray.Info">(Starter minimeret til et ikon nede ved uret)</s:String>
+    <s:String x:Key="S.Options.App.Startup.Tray.Info">(starter minimeret til et ikon nede ved uret)</s:String>
     <s:String x:Key="S.Options.App.Startup.Window">Start med:</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Startup">Startvindue</s:String>
     <s:String x:Key="S.Options.App.Startup.Window.Recorder">Optager</s:String>
@@ -239,8 +238,8 @@
     <s:String x:Key="S.Options.App.Tray.Interactions.Nothing">Ingenting</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Open">Åben vindue</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Open.None">Intet vindue</s:String>
-    <s:String x:Key="S.Options.App.Tray.Interactions.Toggle">Minimer/gendan alle vinduer</s:String>
-    <s:String x:Key="S.Options.App.Tray.Interactions.Minimize">Minimer alle vinduer</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Toggle">Minimér/gendan alle vinduer</s:String>
+    <s:String x:Key="S.Options.App.Tray.Interactions.Minimize">Minimér alle vinduer</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Restore">Gendan alle vinduer</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Left">Venstreklik:</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.DoubleLeft">Dobbeltklik:</s:String>
@@ -248,30 +247,30 @@
     <s:String x:Key="S.Options.App.Tray.Interactions.Window">Vindue:</s:String>
     <s:String x:Key="S.Options.App.Tray.Interactions.Else">ellers åbnes:</s:String>
     <s:String x:Key="S.Options.App.General">Generelt</s:String>
-    <s:String x:Key="S.Options.App.General.WorkaroundQuota">Løsning på 'Ikke nok kvote...' fejlen.</s:String>
-    <s:String x:Key="S.Options.App.General.WorkaroundQuota.Info">(Eksperimentel)</s:String>
+    <s:String x:Key="S.Options.App.General.WorkaroundQuota">Løsning på fejlen "Ikke kvote nok...".</s:String>
+    <s:String x:Key="S.Options.App.General.WorkaroundQuota.Info">(eksperimentelt)</s:String>
     <s:String x:Key="S.Options.App.General.NotifyWhileClosingApp">Bekræft programlukning.</s:String>
     <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration">Deaktivér hardwareacceleration.</s:String>
-    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(Brugerfladen behandles af software)</s:String>
+    <s:String x:Key="S.Options.App.General.DisableHardwareAcceleration.Info">(brugerfladen behandles af software)</s:String>
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates">Søg efter sprogopdatering.</s:String>
     <s:String x:Key="S.Options.App.General.CheckForTranslationUpdates.Info">(opdateringer hentes og installeres automatisk)</s:String>
     <s:String x:Key="S.Options.App.General.CheckForUpdates">Søg efter opdatering.</s:String>
     <s:String x:Key="S.Options.App.General.UpdateOnClose">Opdatér automatisk efter programlukning.</s:String>
     <s:String x:Key="S.Options.App.General.PortableUpdate">Hent portable versionen.</s:String>
-    <s:String x:Key="S.Options.App.General.PortableUpdate.Info">(Udpak selv, og erstat den eksisterende fil)</s:String>
+    <s:String x:Key="S.Options.App.General.PortableUpdate.Info">(pak ud og erstat den eksisterende fil)</s:String>
     <s:String x:Key="S.Options.App.General.ForceUpdateAsAdmin">Opdatér som administrator.</s:String>
     <s:String x:Key="S.Options.App.General.PromptToInstall">Spørg før opdatering.</s:String>
 
-     <!--Options • Recorder-->
+    <!--Options • Recorder-->
     <s:String x:Key="S.Options.Recorder.Interface">Brugerflade</s:String>
     <s:String x:Key="S.Options.Recorder.Interface.Old">Gammel</s:String>
     <s:String x:Key="S.Options.Recorder.Interface.New">Ny</s:String>
     
     <s:String x:Key="S.Options.Recorder.Frequency">Optagefrekvens</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Manual">Manuel</s:String>
-    <s:String x:Key="S.Options.Recorder.Frequency.Manual.Info">Rammer optages enkeltvis med optageknappen eller genvejstast.</s:String>
-    <s:String x:Key="S.Options.Recorder.Frequency.Interaction">Brugerbestemt</s:String>
-    <s:String x:Key="S.Options.Recorder.Frequency.Interaction.Info">Rammer optages når du klikker eller taster.</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Manual.Info">Rammer optages enkeltvis med optageknap eller genvejstast.</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Interaction">Bruger</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Interaction.Info">Rammer optages når du klikker/taster.</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Second">Pr. sekund</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Second.Info">Rammer optages pr. sekund.&#x0d;Rammeraten angives i optageboksen.</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Minute">Pr. minut</s:String>
@@ -307,7 +306,7 @@
     <s:String x:Key="S.Options.Recorder.CaptureChanges">Optag kun ved ændringer.</s:String>
     <s:String x:Key="S.Options.Recorder.CaptureChanges.Info">(optager kun når noget ændres i optageområdet)</s:String>
     <s:String x:Key="S.Options.Recorder.RemoteImprovement">Optimér ydelsen på fjernskrivebord.</s:String>
-    <s:String x:Key="S.Options.Recorder.RemoteImprovement.Info">(Deaktiverer optagelse af vinduer i lag)</s:String>
+    <s:String x:Key="S.Options.Recorder.RemoteImprovement.Info">(deaktiverer optagelse af vinduer i lag)</s:String>
     <s:String x:Key="S.Options.Recorder.ForceGarbageCollection">Rens hukommelse under optagelse.</s:String>
     <s:String x:Key="S.Options.Recorder.ForceGarbageCollection.Info">(reducerer hukommelsesforbrug, men forringer ydelsen)</s:String>
     
@@ -316,21 +315,21 @@
     <s:String x:Key="S.Options.Recorder.Guidelines.RuleOfThirds.Info">Vis/skjul det gyldne snit.</s:String>
     <s:String x:Key="S.Options.Recorder.Guidelines.Crosshair">Kryds</s:String>
     <s:String x:Key="S.Options.Recorder.Guidelines.Crosshair.Info">Vis/skjul krydsets hjælpelinier.</s:String>
-    <s:String x:Key="S.Options.Recorder.Guidelines.Info">Hjælpelinier vises kun når optagelsen er stoppet/på  pause.</s:String>
+    <s:String x:Key="S.Options.Recorder.Guidelines.Info">Hjælpelinier vises kun når optagelse er på  pause/stoppet.</s:String>
     
     <s:String x:Key="S.Options.Recorder.HideTitleBar">Skjul titellinie (tynd).</s:String>
-    <s:String x:Key="S.Options.Recorder.Magnifier">Aktiver lup.</s:String>
-    <s:String x:Key="S.Options.Recorder.Magnifier.Info">(viser forstørrelsesglas ved valg af område)</s:String>
-    <s:String x:Key="S.Options.Recorder.AnimateBorder">Animér kanten ved valg af område.</s:String>
+    <s:String x:Key="S.Options.Recorder.Magnifier">Aktivér lup.</s:String>
+    <s:String x:Key="S.Options.Recorder.Magnifier.Info">(forstørrer ved ved valg af område)</s:String>
+    <s:String x:Key="S.Options.Recorder.AnimateBorder">Animér kanter ved valg af område.</s:String>
     <s:String x:Key="S.Options.Recorder.AnimateBorder.Info">(marcherende myrer)</s:String>
-    <s:String x:Key="S.Options.Recorder.SelectionPanning">Aktiver områdeflytning.</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionPanning">Aktivér områdeflytning.</s:String>
     <s:String x:Key="S.Options.Recorder.SelectionPanning.Info">(viser håndtag i hjørnet, så området kan flyttes)</s:String>
     <s:String x:Key="S.Options.Recorder.Compact">Kompakt.</s:String>
-    <s:String x:Key="S.Options.Recorder.Compact.Info">(mindre udgave af optagekontrollerne)</s:String>
-    <s:String x:Key="S.Options.Recorder.DisplayDiscard">Vis også Kassér knap under optagelse.</s:String>
+    <s:String x:Key="S.Options.Recorder.Compact.Info">(mindre udgave af optagekontroller)</s:String>
+    <s:String x:Key="S.Options.Recorder.DisplayDiscard">Vis også "Kassér" under optagelse.</s:String>
     <s:String x:Key="S.Options.Recorder.DisplayDiscard.Info">(normalt synlig ved pause)</s:String>
     <s:String x:Key="S.Options.Recorder.SelectionImprovement">Optimér områdevalg.</s:String>
-    <s:String x:Key="S.Options.Recorder.SelectionImprovement.Info">(Reducerer flimmer)</s:String>
+    <s:String x:Key="S.Options.Recorder.SelectionImprovement.Info">(reducerer flimmer)</s:String>
     
     <s:String x:Key="S.Options.Recorder.RememberSize">Husk sidste områdestørrelse</s:String>
     <s:String x:Key="S.Options.Recorder.RememberPosition">Husk placering.</s:String>
@@ -361,17 +360,17 @@
     <s:String x:Key="S.Options.Editor.Previewer.OddColor">Ulige farve</s:String>
     <s:String x:Key="S.Options.Editor.Interface.DisplayEncoder">Vis kodninger i separat vindue.</s:String>
     <s:String x:Key="S.Options.Editor.Interface.ExtendChrome">Udvid titellinie (window chrome).</s:String>
-    <s:String x:Key="S.Options.Editor.Interface.AutomaticallySizeOnContent">Sæt automatisk vinduesstørrelsen til rammestørrelse.</s:String>
+    <s:String x:Key="S.Options.Editor.Interface.AutomaticallySizeOnContent">Pas automatisk vinduesstørrelse til rammestørrelse.</s:String>
     <s:String x:Key="S.Options.Editor.Interface.AutomaticallyFitImage">Pas automatisk rammer til vinduesstørrelse.</s:String>
     <s:String x:Key="S.Options.Editor.General.NotifyFrameDeletion">Bekræft sletning af rammer.</s:String>
     <s:String x:Key="S.Options.Editor.General.NotifyProjectDiscard">Spørg før projekt kasseres.</s:String>
     <s:String x:Key="S.Options.Editor.General.NotifyWhileClosingEditor">Bekræft lukning af redigering (ved åbne projekter).</s:String>
-    <s:String x:Key="S.Options.Editor.General.TripleClickSelection">Aktiver trippelklik vælger tekst.</s:String>
+    <s:String x:Key="S.Options.Editor.General.TripleClickSelection">Aktivér trippelklik vælger tekst.</s:String>
     <s:String x:Key="S.Options.Editor.General.DrawOutlineOutside">Tegn omkreds på titelbogstaver.</s:String>
     <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind">Spring unødvendige rammer over.</s:String>
     <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind.Info">(hvis de ikke kan forhåndsvises korrekt)</s:String>
     <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind.Tooltip">Spring unødvendige rammer over&#x0d;hvis de ikke kan forhåndsvises korrekt.</s:String>
-    <s:String x:Key="S.Options.Editor.General.LimitHistory">Antal Fortryd/Gendan.</s:String>
+    <s:String x:Key="S.Options.Editor.General.LimitHistory">Antal fortryd/gendan.</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Info">(de ældste handlinger fjernes når grænsen er nået)</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Maximum">(maksimalt antal)</s:String>
     <s:String x:Key="S.Options.Editor.General.SyncPath.Folder">Synk profilers destinationsmappe.</s:String>
@@ -387,7 +386,7 @@
     <s:String x:Key="S.Options.Tasks.List.Task">Opgave</s:String>
     <s:String x:Key="S.Options.Tasks.List.Details">Detaljer</s:String>
     <s:String x:Key="S.Options.Tasks.List.Enabled">Aktiveret</s:String>
-    <s:String x:Key="S.Options.Tasks.Enable">Aktiver denne opgave.</s:String>
+    <s:String x:Key="S.Options.Tasks.Enable">Aktivér denne opgave.</s:String>
     <s:String x:Key="S.Options.Tasks.SelectType">(Vælg)</s:String>
     <s:String x:Key="S.Options.Tasks.SelectType.Info">Vælg opgave herover</s:String>
     <s:String x:Key="S.Options.Tasks.Info">Opgaverne udføres i rækkefølge fra toppen, ved første projektredigering.</s:String>
@@ -395,28 +394,28 @@
     <!--Options • Shortcuts-->
     <s:String x:Key="S.Options.Shortcuts.Global">Globalt</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.ScreenRecorder">Skærmoptager:</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Global.ScreenRecorder.Info">(Åbner standard skærmoptager)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.ScreenRecorder.Info">(åbner standard skærmoptager)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.WebcamRecorder">Webcamoptager:</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Global.WebcamRecorder.Info">(Åbner webcamoptager)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.WebcamRecorder.Info">(åbner webcamoptager)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.BoardRecorder">Tavleoptager:</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Global.BoardRecorder.Info">(Åbner tavleoptageren)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.BoardRecorder.Info">(åbner tavleoptageren)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.OpenEditor">Redigering:</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Global.OpenEditor.Info">(Åbner et redigeringsvindue mere)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.OpenEditor.Info">(åbner et redigeringsvindue mere)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.OpenOptions">Indstillinger:</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Global.OpenOptions.Info">(Åbner indstillinger.)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.OpenOptions.Info">(åbner indstillinger.)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Global.Exit">Luk:</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Global.Exit.Info">(Lukker alle vinduer, og fjerner ikonet ved uret)</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Recorders">Optagere</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Global.Exit.Info">(lukker alle vinduer, og fjerner ikonet ved uret)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders">Optagelse</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause">Start/pause:</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause.Info">(Starter/stopper optagelsen. Bruges til snapshot, hvis aktiveret)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.StartPause.Info">(starter/stopper optagelsen. Bruges til snapshot, hvis aktiveret)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Stop">Stop:</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Recorders.Stop.Info">(Stopper optagelsen og åbner redigering)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Stop.Info">(stopper optagelse og åbner redigering)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Discard">Kassér:</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Recorders.Discard.Info">(Kasserer den aktive optagelse, når den pauses)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Discard.Info">(kasserer den aktive optagelse, når den pauses)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.Follow">Følg mus:</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Recorders.Follow.Info">(slår Følg mus til eller fra)</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.Follow.Info">(slår "Følg mus" til eller fra)</s:String>
     <s:String x:Key="S.Options.Shortcuts.Recorders.DisableFollow">Deaktiver:</s:String>
-    <s:String x:Key="S.Options.Shortcuts.Recorders.DisableFollow.Info">(deaktiver Følg mus midlertidigt. Kun ændringstaster (Ctrl, Alt...etc.))</s:String>
+    <s:String x:Key="S.Options.Shortcuts.Recorders.DisableFollow.Info">(deaktivér "Følg mus" midlertidigt. Kun ændringstaster (Ctrl, Alt...etc.))</s:String>
     <s:String x:Key="S.Options.Shortcuts.Info">Klik og tast den ønskede genvej (visse kombinationer er ikke tilladt).</s:String>
     
     <!--Options • Language-->
@@ -583,9 +582,6 @@
     <s:String x:Key="S.Options.Extras.GifskiLocation.Select">Vælg Gifski placering</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.File">Gifski bibliotek</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.Invalid">Stien til Gifski er ugyldig. Vælg en anden placering.</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation">SharpDx mappe (SharpDX.dll, SharpDX.Direct3D11.dll ogSharpDX.DXGI.dll)</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation.Select">Vælg SharpDx placering</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation.Invalid">Stien til SharpDx er ugyldig. Flyt SharpDX til en gyldig mappe.</s:String>
     <s:String x:Key="S.Options.Extras.License.Ffmpeg">FFmpeg licens</s:String>
     <s:String x:Key="S.Options.Extras.License.Gifski">Gifski licens</s:String>
     <s:String x:Key="S.Options.Extras.License.SharpDx">SharpDx licens</s:String>
@@ -692,8 +688,7 @@
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">Skærmen kunne ikke optages. Optagemetoden opgav efter 5 forsøg.</s:String>
     <s:String x:Key="S.Recorder.Warning.StartPauseNotPossible">Kunne ikke starte/pause optagelsen</s:String>
     <s:String x:Key="S.Recorder.Warning.Windows8"> Optagelse med Desktop API kræver mindst Windows 8.</s:String>
-    <s:String x:Key="S.Recorder.Warning.MissingSharpDx">Desktop API kræver SharpDx. Gå til indstillinger > Ekstra for at hente den.</s:String>
-    
+
     <!--New recorder-->
     <s:String x:Key="S.Recorder.Area">Område</s:String>
     <s:String x:Key="S.Recorder.Area.Select">Vælg område</s:String>
@@ -770,7 +765,7 @@
     <s:String x:Key="S.Preset.AutoSave">Gem automatisk ved ændringer.</s:String>
     <s:String x:Key="S.Preset.Info.Manual">Profilændringer skal gemmes manuelt med Gem ikonet.</s:String>
     <s:String x:Key="S.Preset.Info.Automatic">Profilændringer gemmes automatisk.</s:String>
-    <s:String x:Key="S.Preset.Warning.Readonly">Standardprofiler er delvist skrivebeskyttet.</s:String>
+    <s:String x:Key="S.Preset.Warning.Readonly">Standardprofiler er delvist skrivebeskyttede.</s:String>
     <s:String x:Key="S.Preset.Warning.Name">Navngiv profilen.</s:String>
     <s:String x:Key="S.Preset.Warning.SameName">Profilnavnet findes allerede.</s:String>
     
@@ -964,7 +959,7 @@
     <s:String x:Key="S.Editor.Welcome.NewRecorder">Vil du prøve den nye optager? Så gå til "Indstillinger > Optager" og aktiver den</s:String>
     
     <!--Editor • File tab • New-->
-    <s:String x:Key="S.Editor.File.New.Recording">Optagelse</s:String>
+    <s:String x:Key="S.Editor.File.New.Recording">Optag</s:String>
     <s:String x:Key="S.Editor.File.New.Webcam">Webcam</s:String>
     <s:String x:Key="S.Editor.File.New.Board">Tavle</s:String>
     <s:String x:Key="S.Editor.File.Blank">Blank</s:String>
@@ -974,7 +969,7 @@
     <s:String x:Key="S.Editor.File.Insert.Recording">Optagelse</s:String>
     <s:String x:Key="S.Editor.File.Insert.Webcam">Fra&#x0d;webcam</s:String>
     <s:String x:Key="S.Editor.File.Insert.Board">Tavle&#x0d;optager</s:String>
-    <s:String x:Key="S.Editor.File.Insert.Media">Medie</s:String>
+    <s:String x:Key="S.Editor.File.Insert.Media">Fra&#x0d;medie</s:String>
     <s:String x:Key="S.Editor.File.Insert">Indsæt</s:String>
     
     <!--Editor • File tab • Save/Discard-->
@@ -1021,13 +1016,14 @@
     <!--Editor • Playback tab • Playback Options-->
     <s:String x:Key="S.Editor.PlaybackOptions.Header">Indstillinger</s:String>
     <s:String x:Key="S.Editor.PlaybackOptions.Loop">Gentag.</s:String>
-    <s:String x:Key="S.Editor.PlaybackOptions.Loop.Info">Kun ved afspilning.&#x0d;Resultatet indstilles i Gem som... dialogen.</s:String>
+    <s:String x:Key="S.Editor.PlaybackOptions.Loop.Info">Kun ved afspilning.&#x0d;Resultatet indstilles i "Gem som...".</s:String>
     
     <!--Editor • Edit tab • Frames-->  
     <s:String x:Key="S.Editor.Edit.Frames">Rammer</s:String>
     <s:String x:Key="S.Editor.Edit.Delete">Slet</s:String>
     <s:String x:Key="S.Editor.Edit.Frames.Duplicates">Fjern&#x0d;duplikater</s:String>
     <s:String x:Key="S.Editor.Edit.Frames.Reduce">Reducér&#x0d;rammeantal</s:String>
+    <s:String x:Key="S.Editor.Edit.Frames.SmoothLoop">Gentag&#x0d;glat</s:String>
     <s:String x:Key="S.Editor.Edit.DeletePrevious">Slet før</s:String>
     <s:String x:Key="S.Editor.Edit.DeleteNext">Slet efter</s:String>
     
@@ -1040,9 +1036,9 @@
     
     <!--Editor • Edit tab • Delay/Duration-->
     <s:String x:Key="S.Editor.Edit.Delay">Rammetid</s:String>
-    <s:String x:Key="S.Editor.Edit.Delay.Override">Sæt</s:String>
+    <s:String x:Key="S.Editor.Edit.Delay.Override">Sæt&#x0d;tid</s:String>
     <s:String x:Key="S.Editor.Edit.Delay.IncreaseDecrease">Forøg&#x0d;formindsk</s:String>
-    <s:String x:Key="S.Editor.Edit.Delay.Scale">Skalér</s:String>
+    <s:String x:Key="S.Editor.Edit.Delay.Scale">Skalér&#x0d;tid</s:String>
     
     <!--Editor • Image • Size and Rotation-->
     <s:String x:Key="S.Editor.Image.SizePosition">Størrelse og placering</s:String>
@@ -1102,8 +1098,8 @@
     <s:String x:Key="S.Editor.DeleteFrames.Message">Dette sletter {0} ramme(r).&#x0d;Du kan fortryde senere.</s:String>
     <s:String x:Key="S.Editor.Exiting.Title">Lukker Redigering</s:String>
     <s:String x:Key="S.Editor.Exiting.Instruction">Vil du lukke?</s:String>
-    <s:String x:Key="S.Editor.Exiting.Message">Projektet du arbejder på, kan åbnes igen via 'Seneste projekter'.</s:String>
-    <s:String x:Key="S.Editor.Exiting.Message2">Projektet du arbejder på, kan åbnes igen via 'Seneste projekter', men slettes automatisk efter få dage.</s:String>
+    <s:String x:Key="S.Editor.Exiting.Message">Projektet kan åbnes igen via "Seneste projekter".</s:String>
+    <s:String x:Key="S.Editor.Exiting.Message2">Projektet kan åbnes igen via "Seneste projekter",&#x0d;men slettes automatisk efter få dage.</s:String>
     <s:String x:Key="S.Editor.DragDrop.Invalid.Title">Ugyldig træk og slip</s:String>
     <s:String x:Key="S.Editor.DragDrop.MultipleFiles.Instruction">Du kan ikke importere flere filer samtidigt</s:String>
     <s:String x:Key="S.Editor.DragDrop.MultipleFiles.Message">Prøv kun at vælge en enkelt.</s:String>
@@ -1135,7 +1131,7 @@
     <!--Editor • Warnings-->
     <s:String x:Key="S.Editor.Warning.Selection">Du skal vælge mindst en ramme til overlægget.</s:String>
     <s:String x:Key="S.Editor.Warning.Ffmpeg">FFmpeg findes ikke. Føj det til miljøvariabler eller angiv placeringen i indstillinger.</s:String>
-    <s:String x:Key="S.Editor.Warning.Gifski">Gifski findes ikke. Føj det til miljøvariablerne eller angiv placeringen i 'Indstillinger'.</s:String>
+    <s:String x:Key="S.Editor.Warning.Gifski">Gifski findes ikke. Føj det til miljøvariablerne eller angiv placeringen i "Indstillinger".</s:String>
     <s:String x:Key="S.Editor.Warning.LowSpace">Der er ikke plads nok til programmets midlertidige filer ({0}% tilbage). Gå til Indstillinger > Midlertidige filer og frigør plads.</s:String>
     <s:String x:Key="S.Editor.Warning.DifferentDpi">Import af flere billeder med forskellig DPI er ikke tilladt. Der blev importeret nogen, men resten skal importeres separat.</s:String>
     
@@ -1158,6 +1154,8 @@
     <s:String x:Key="S.Editor.ApplyingTransition">Anvender overgang</s:String>
     <s:String x:Key="S.Editor.PreparingSaving">Forbereder gem</s:String>
     <s:String x:Key="S.Editor.CancelDiscard">Annuller og kassér projekt.</s:String>
+    <s:String x:Key="S.Editor.FindingLoop">Finder perfekt gentagelse</s:String>
+    <s:String x:Key="S.Editor.DiscardingLoop">Kasserer unødvendige rammer</s:String>
 
     <!--Editor • Frame list-->
     <s:String x:Key="S.Editor.List.Frame">Ramme:</s:String>
@@ -1297,6 +1295,16 @@
     <s:String x:Key="S.RemoveDuplicates.Delay.Average">Brug gennemsnit</s:String>
     <s:String x:Key="S.RemoveDuplicates.Delay.Sum">Brug sum</s:String>
     <s:String x:Key="S.RemoveDuplicates.Info">Analyserer rammerne, og fjerner dem der er mindst {0} % ens med nærmeste nabo.&#x0d;Du kan vælge at tilpasse rammetiden.</s:String>
+
+    <!--Editor • Smooth Loop-->
+    <s:String x:Key="S.SmoothLoop.Header">Indstillinger</s:String>
+    <s:String x:Key="S.SmoothLoop.StartThreshold">Ignorér første:</s:String>
+    <s:String x:Key="S.SmoothLoop.From">Fra:</s:String>
+    <s:String x:Key="S.SmoothLoop.From.Last">Slutningen</s:String>
+    <s:String x:Key="S.SmoothLoop.From.First">Starten</s:String>
+    <s:String x:Key="S.SmoothLoop.Info">Find rammer der er mindst {0} % identiske med startrammen og slet alle efterfølgende.&#x0d;Du kan evt. ignorere indledende rammer, og sammenligne fra starten eller slutningen.</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.Threshold">Antal ignorerede rammer, skal være mindre end det samlede rammeantal.</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.NoLoopFound">Glat gentagelse kan ikke oprettes med de valgte indstillinger.</s:String>
     
     <!--Editor • Captions-->
     <s:String x:Key="S.Caption.Text">Tekst</s:String>
@@ -1428,7 +1436,7 @@
     <s:String x:Key="S.Progress.Format.FrameNumber">$f = rammenummer</s:String>
     <s:String x:Key="S.Progress.Format.Totals">Totaler:</s:String>
     <s:String x:Key="S.Progress.Format.Examples">Eksempler:</s:String>
-    <s:String x:Key="S.Progress.Format.Date">Du kan bruge dato/tidsformat fra .Net Framework.&#x0d;Link herunder viser specifikationerne.</s:String>
+    <s:String x:Key="S.Progress.Format.Date">Du kan bruge dato/tidsformat fra .Net Framework.&#x0d;Link herunder viser specifikationer.</s:String>
     <s:String x:Key="S.Progress.Format.Date.Standard">Standardformats</s:String>
     <s:String x:Key="S.Progress.Format.Date.Custom">Tilpassede formater</s:String>
     <s:String x:Key="S.Progress.Precision.StartNumber">Tæl fra:</s:String>
@@ -1450,7 +1458,7 @@
     <s:String x:Key="S.Delay.Scale.Info">Tilpas længde (forsinkelse) af hver valgt ramme med denne procent.&#x0d;Du kan vælge fra 1% til 1000%, men resultatet begrænses til mellem 10ms og 25500ms</s:String>
 
     <!--Editor • Cinemagraph-->
-    <s:String x:Key="S.Cinemagraph.Info">Brug pennen til at vælge de pixel der ikke skal være statiske (ænders fra ramme til ramme), ved at tegne på dem.</s:String>
+    <s:String x:Key="S.Cinemagraph.Info">"Mal" dele af rammen der ikke bevares&#x0d;konstante gennem hele animationen.</s:String>
 
     <!--Editor • Transitions-->
     <s:String x:Key="S.Transitions.Length">Overgangslængde</s:String>
@@ -1536,7 +1544,7 @@
     <s:String x:Key="S.SaveAs.Ffmpeg.UseParameters.Info">Sæt selv parametrene for kodningen.</s:String>
     <s:String x:Key="S.SaveAs.Ffmpeg.Parameters">Parametre:</s:String>
     <s:String x:Key="S.SaveAs.Ffmpeg.Parameters.Info">Liste med FFmpeg parametre.&#x0d;&#x0d;Specielle parametre:&#x0d;{I} = Kildesti (rammerne).&#x0d;{O} = Resultatsti (resultatfilen).&#x0d;{W} = Rammebredden.&#x0d;{H} = Rammehøjden.</s:String>
-    <s:String x:Key="S.SaveAs.Ffmpeg.Parameters.Pass">Tilføj '-pass 2' for at bruge to trin.</s:String>
+    <s:String x:Key="S.SaveAs.Ffmpeg.Parameters.Pass">Tilføj "-pass 2" for at bruge to trin.</s:String>
     <s:String x:Key="S.SaveAs.Ffmpeg.Preview">Vis</s:String>
     <s:String x:Key="S.SaveAs.Ffmpeg.Preview.Info">Vis anvendte parametre.</s:String>
     <s:String x:Key="S.SaveAs.Ffmpeg.Help.Code">Codec ?</s:String>
@@ -1853,7 +1861,7 @@
     <!--TextAlignment-->
     <s:String x:Key="S.TextAlignment.Left">Venstre</s:String>
     <s:String x:Key="S.TextAlignment.Right">Højre</s:String>
-    <s:String x:Key="S.TextAlignment.Center">Centrer</s:String>
+    <s:String x:Key="S.TextAlignment.Center">Centrér</s:String>
     <s:String x:Key="S.TextAlignment.Justify">Fordel</s:String>
     
     <!--TextDecoration-->
