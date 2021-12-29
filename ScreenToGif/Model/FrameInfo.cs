@@ -1,5 +1,6 @@
 using ScreenToGif.Domain.Enums;
 using ScreenToGif.Domain.Interfaces;
+using ScreenToGif.Util;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.Serialization;
@@ -9,6 +10,7 @@ using Color = System.Windows.Media.Color;
 namespace ScreenToGif.Model;
 
 [DataContract]
+[KnownType(typeof(SimpleKeyGesture))]
 public class FrameInfo : IFrame
 {
     #region Constructors
