@@ -19,14 +19,14 @@
     <s:String x:Key="S.Title">Titel</s:String>
     <s:String x:Key="S.Description">Beschreibung</s:String>
     <s:String x:Key="S.SelectColor">Hier klicken, um Farbe auszuwählen.</s:String>
-    <s:String x:Key="S.Documentation">Klicken, um zur Dokumentation zu navigieren.</s:String>
+    <s:String x:Key="S.Documentation">Hier klicken, um Dokumentation zu öffnen.</s:String>
     <s:String x:Key="S.Suppress">Schließen</s:String>
     <s:String x:Key="S.Preview">Vorschau</s:String>
     <s:String x:Key="S.Size">Abmessungen</s:String>
     <s:String x:Key="S.Background">Hintergrund:</s:String>
     <s:String x:Key="S.Color">Farbe:</s:String>
-    <s:String x:Key="S.Delay">Dauer</s:String>
-    <s:String x:Key="S.DelayMs">Zeitangabe:</s:String>
+    <s:String x:Key="S.Delay">Verzögerung</s:String>
+    <s:String x:Key="S.DelayMs">Verzögern um:</s:String>
     <s:String x:Key="S.ValueMs">Wert:</s:String>
     <s:String x:Key="S.ScaleValue">Skalierung:</s:String>
     <s:String x:Key="S.Margin">Seitenrand:</s:String>
@@ -54,7 +54,7 @@
 
     <!--Warnings • Graphics engine-->
     <s:String x:Key="S.Warning.Graphics.Title">Grafikkarte wechseln</s:String>
-    <s:String x:Key="S.Warning.Graphics.Instruction">Umschalten auf die richtige Grafikkarte, um den ausgewählten Bildschirm zu erfassen</s:String>
+    <s:String x:Key="S.Warning.Graphics.Instruction">Auf die richtige Grafikkarte umschalten, um den ausgewählten Bildschirm erfassen zu können</s:String>
     <s:String x:Key="S.Warning.Graphics.Message">Aufgrund einer Einschränkung in DirectX muss ScreenToGif die gleiche Grafikkarte verwenden wie der zu erfassende Bildschirm.</s:String>
     <s:String x:Key="S.Warning.Graphics.Action">Wechseln Sie die für ScreenToGif eingestellte Grafikkarte, indem Sie Windows-Einstellungen ➜ „System” ➜ „Anzeige” ➜ „”Grafikeinstellungen” öffnen, oder indem Sie auf den nachfolgenden Link klicken.</s:String>
     <s:String x:Key="S.Warning.Graphics.Action.Legacy">Wechseln Sie die Grafikkarte für ScreenToGif, indem Sie die Grafikeinstellungen Ihrer Grafikkarte öffnen.</s:String>
@@ -100,7 +100,7 @@
     <s:String x:Key="S.Command.LastFrame">Letzten Frame auswählen</s:String>
     <s:String x:Key="S.Command.Undo">Widerrufen</s:String>
     <s:String x:Key="S.Command.Redo">Wiederherstellen</s:String>
-    <s:String x:Key="S.Command.Reset">Alle Änderungen im Projekt rückgängig machen</s:String>
+    <s:String x:Key="S.Command.Reset">Alle Änderungen im Projekt widerrufen</s:String>
     <s:String x:Key="S.Command.Copy">Ausgewählte Frames kopieren und in Zwischenablage speichern</s:String>
     <s:String x:Key="S.Command.Cut">Ausgewählte Frames ausschneiden und in Zwischenablage speichern</s:String>
     <s:String x:Key="S.Command.Paste">Frames aus Zwischenablage hinzufügen</s:String>
@@ -389,7 +389,7 @@
     <s:String x:Key="S.Options.Tasks.List.Enabled">Aktiviert</s:String>
     <s:String x:Key="S.Options.Tasks.Enable">Diese Aufgabe aktivieren</s:String>
     <s:String x:Key="S.Options.Tasks.SelectType">Aufgabe auswählen</s:String>
-    <s:String x:Key="S.Options.Tasks.SelectType.Info">Eine Aufgabe oben auswählen</s:String>
+    <s:String x:Key="S.Options.Tasks.SelectType.Info">Eine vorgenannte Aufgabe auswählen</s:String>
     <s:String x:Key="S.Options.Tasks.Info">Aufgaben werden nacheinander von oben nach unten ausgeführt.&#10;Sie werden beim Öffnen des Editors gestartet.</s:String>
   
     <!--Options • Shortcuts-->
@@ -442,7 +442,7 @@
     <s:String x:Key="S.Options.Storage.Status.Check">Erneut prüfen, wie viel Platz noch vorhanden ist.</s:String>
     <s:String x:Key="S.Options.Storage.Status.Clear">Cache-Ordner leeren.&#10;Sie können dabei entscheiden, ob Sie aktuelle Projekte behalten möchten oder nicht.</s:String>
     <s:String x:Key="S.Options.Storage.Status.LowSpace">Nicht genügend Speicherplatz auf dem gewählten Laufwerk vorhanden. Bitte Speicherplatz freigeben oder anderes Laufwerk verwenden.</s:String>
-    <s:String x:Key="S.Options.Storage.Status.Error">Abrufen der Laufwerksdetails fehlgeschlagen.</s:String>
+    <s:String x:Key="S.Options.Storage.Status.Error">Abrufen der Laufwerksdetails fehlgeschlagen</s:String>
     <s:String x:Key="S.Options.Storage.Status.Files.None">Keine Dateien</s:String>
     <s:String x:Key="S.Options.Storage.Status.Files.Singular">{0:##,##0} Datei</s:String>
     <s:String x:Key="S.Options.Storage.Status.Files.Plural">{0:##,##0} Dateien</s:String>
@@ -451,7 +451,7 @@
     <s:String x:Key="S.Options.Storage.Status.Folders.Plural">{0:##,##0} Ordner</s:String>
     <s:String x:Key="S.Options.Storage.Status.InUse">{0} werden verwendet</s:String>
     <s:String x:Key="S.Options.Storage.Paths">Pfad</s:String>
-    <s:String x:Key="S.Options.Storage.Paths.Cache">Cache:</s:String>
+    <s:String x:Key="S.Options.Storage.Paths.Cache">Zwischenspeicher:</s:String>
     <s:String x:Key="S.Options.Storage.Paths.Cache.Choose">Ordner für temporäre Dateien auswählen</s:String>
     <s:String x:Key="S.Options.Storage.Paths.Logs">Protokolle:</s:String>
     <s:String x:Key="S.Options.Storage.Paths.Logs.Choose">Speicherort für Fehlerprotokolldateien auswählen</s:String>
@@ -471,7 +471,7 @@
     <s:String x:Key="S.Options.Storage.AutomaticRemovalDays.Info">(in Tagen. Jedes Projekt älter als diese Angabe wird beim Öffnen des Editors gelöscht)</s:String>
     
     <!--Options • Storage > Clear cache-->
-    <s:String x:Key="S.Options.Storage.Cache.Title">ScreenToGif - Cache leeren</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.Title">ScreenToGif • Zwischenspeicher leeren</s:String>
     <s:String x:Key="S.Options.Storage.Cache.Header">Möchten Sie den Cache-Ordner leeren?</s:String>
     <s:String x:Key="S.Options.Storage.Cache.Info">Wenn Sie eine Aufnahme erstellen oder etwas zur Bearbeitung öffnen, wird ein Projekt erstellt und im Cache-Ordner gespeichert.</s:String>
     <s:String x:Key="S.Options.Storage.Cache.Question">Möchten Sie diese Projekte aus dem Cache-Ordner entfernen?</s:String>
@@ -491,7 +491,7 @@
     <s:String x:Key="S.Options.Upload.Proxy.User">Benutzername:</s:String>
     <s:String x:Key="S.Options.Upload.Proxy.Password">Passwort:</s:String>
 
-    <s:String x:Key="S.Options.Upload.Presets">Upload-Voreinstellungen</s:String>
+    <s:String x:Key="S.Options.Upload.Presets">Voreinstellungen hochladen</s:String>
     <s:String x:Key="S.Options.Upload.Presets.Service">Dienst</s:String>
     <s:String x:Key="S.Options.Upload.Presets.Title">Titel</s:String>
     <s:String x:Key="S.Options.Upload.Presets.Description">Beschreibung</s:String>
@@ -545,7 +545,7 @@
     
     <!--Options • Upload > Album-->
     <s:String x:Key="S.Options.Upload.Pick.Album">Album wählen (optional)</s:String>
-    <s:String x:Key="S.Options.Upload.Pick.Album.Info">Sie können ein Album auswählen:</s:String>
+    <s:String x:Key="S.Options.Upload.Pick.Album.Info">Wenn gewünscht, können Sie das Zielalbum auswählen:</s:String>
     
     <!--Options • Upload > Details-->
     <s:String x:Key="S.Options.Upload.Pick.Details">Details hochladen (optional)</s:String>
@@ -984,7 +984,7 @@
     
     <!--Editor • Home tab • Action Stack-->
     <s:String x:Key="S.Editor.Home.ActionStack">Aktionsliste</s:String>
-    <s:String x:Key="S.Editor.Home.Undo">Rückgängig</s:String>
+    <s:String x:Key="S.Editor.Home.Undo">Widerrufen</s:String>
     <s:String x:Key="S.Editor.Home.Redo">Wiederherstellen</s:String>
     <s:String x:Key="S.Editor.Home.Reset">Auf Anfang zurücksetzen</s:String>
     
@@ -1030,23 +1030,23 @@
     <s:String x:Key="S.Editor.Edit.DeleteNext">Alle folgenden&#10;entfernen</s:String>
     
     <!--Editor • Edit tab • Reordering-->
-    <s:String x:Key="S.Editor.Edit.Reordering">Aufstellung</s:String>
+    <s:String x:Key="S.Editor.Edit.Reordering">Reihenfolge ändern</s:String>
     <s:String x:Key="S.Editor.Edit.Reverse">Reihenfolge&#10;umkehren</s:String>
     <s:String x:Key="S.Editor.Edit.Yoyo">Jo-Jo-Effekt</s:String>
     <s:String x:Key="S.Editor.Edit.MoveLeft">Nach links&#10;verschieben</s:String>
     <s:String x:Key="S.Editor.Edit.MoveRight">Nach rechts&#10;verschieben</s:String>
     
     <!--Editor • Edit tab • Delay/Duration-->
-    <s:String x:Key="S.Editor.Edit.Delay">Frame-Dauer</s:String>
+    <s:String x:Key="S.Editor.Edit.Delay">Verzögerung (Dauer)</s:String>
     <s:String x:Key="S.Editor.Edit.Delay.Override">Überschreiben</s:String>
     <s:String x:Key="S.Editor.Edit.Delay.IncreaseDecrease">Erhöhen oder&#10;verringern</s:String>
     <s:String x:Key="S.Editor.Edit.Delay.Scale">Prozentual&#10;skalieren</s:String>
     
     <!--Editor • Image • Size and Rotation-->
-    <s:String x:Key="S.Editor.Image.SizePosition">Größe und Rotation</s:String>
+    <s:String x:Key="S.Editor.Image.SizePosition">Größe und Drehung</s:String>
     <s:String x:Key="S.Editor.Image.Resize">Bildgröße ändern</s:String>
     <s:String x:Key="S.Editor.Image.Crop">Zuschneiden</s:String>
-    <s:String x:Key="S.Editor.Image.FlipRotate">Drehen</s:String>
+    <s:String x:Key="S.Editor.Image.FlipRotate">Spiegeln/Drehen</s:String>
     
     <!--Editor • Image tab • Text-->
     <s:String x:Key="S.Editor.Image.Text">Text</s:String>
@@ -1089,15 +1089,15 @@
     <s:String x:Key="S.Editor.Clipboard.InvalidCut.Message">Bildsequenz muss mindestens einen Frame beinhalten.</s:String>
     <s:String x:Key="S.Editor.DeleteAll.Title">Alle Frames entfernen</s:String>
     <s:String x:Key="S.Editor.DeleteAll.Instruction">Möchten Sie alle Frames wirklich entfernen?</s:String>
-    <s:String x:Key="S.Editor.DeleteAll.Message">Sie sind dabei, alle Frames zu löschen.&#10;\rDiese Aktion kann nicht rückgängig gemacht werden.&#10;\rMöchten Sie fortfahren?</s:String>
+    <s:String x:Key="S.Editor.DeleteAll.Message">Sie sind dabei, alle Frames zu löschen.&#10;\rDiese Aktion kann nicht widerrufen werden.&#10;\rMöchten Sie fortfahren?</s:String>
     <s:String x:Key="S.Editor.DiscardProject.Title">Projekt verwerfen</s:String>
     <s:String x:Key="S.Editor.DiscardProject.Instruction">Möchten Sie dieses Projekt wirklich verwerfen?</s:String>
-    <s:String x:Key="S.Editor.DiscardProject.Message">Sie sind dabei, das Projekt zu verwerfen und alle Frames zu entfernen.&#10;\rDiese Aktion kann nicht rückgängig gemacht werden.&#10;\rMöchten Sie fortfahren?</s:String>
+    <s:String x:Key="S.Editor.DiscardProject.Message">Sie sind dabei, das Projekt zu verwerfen und alle Frames zu entfernen.&#10;\rDiese Aktion kann nicht widerrufen werden.&#10;\rMöchten Sie fortfahren?</s:String>
     <s:String x:Key="S.Editor.DiscardPreviousProject.Instruction">Möchten Sie das bisherige Projekt verwerfen?</s:String>
     <s:String x:Key="S.Editor.DiscardPreviousProject.Message">Wenn Sie sich entscheiden, dies nicht zu tun, so wird das aktuelle Projekt immer noch unter "Kürzlich erstellte Projekte" verfügbar sein.</s:String>
     <s:String x:Key="S.Editor.DeleteFrames.Title">Frames löschen</s:String>
     <s:String x:Key="S.Editor.DeleteFrames.Instruction">Möchten Sie wirklich Frames löschen?</s:String>
-    <s:String x:Key="S.Editor.DeleteFrames.Message">Diese Aktion wird {0} Frame(s) löschen.\n\rSie können das Löschen später rückgängig machen.&#10;\rMöchten Sie fortfahren?</s:String>
+    <s:String x:Key="S.Editor.DeleteFrames.Message">Diese Aktion wird {0} Frame(s) löschen.\n\rSie können das Löschen später widerrufen.&#10;\rMöchten Sie fortfahren?</s:String>
     <s:String x:Key="S.Editor.Exiting.Title">Editor beenden</s:String>
     <s:String x:Key="S.Editor.Exiting.Instruction">Möchten Sie den Editor wirklich schließen?</s:String>
     <s:String x:Key="S.Editor.Exiting.Message">Das aktuelle Projekt kann später unter "Kürzlich erstellte Projekte" wieder geöffnet werden.</s:String>
@@ -1180,9 +1180,9 @@
     <s:String x:Key="S.Hint.NewWebcamRecording">Neue Webcam-Aufnahme erstellt.</s:String>
     <s:String x:Key="S.Hint.NewBoardRecording">Neue Handzeichnung erstellt.</s:String>
     <s:String x:Key="S.Hint.NewAnimation">Neue Animation erstellt.</s:String>
-    <s:String x:Key="S.Hint.Undo">Rückgängig-Aktion ausgeführt.</s:String>
-    <s:String x:Key="S.Hint.Reset">Zurücksetzen-Aktion ausgeführt.</s:String>
-    <s:String x:Key="S.Hint.Redo">Wiederherstellen-Aktion ausgeführt.</s:String>
+    <s:String x:Key="S.Hint.Undo">Widerrufen wurde ausgeführt.</s:String>
+    <s:String x:Key="S.Hint.Reset">Zurücksetzen wurde ausgeführt.</s:String>
+    <s:String x:Key="S.Hint.Redo">Wiederherstellen wurde ausgeführt.</s:String>
     <s:String x:Key="S.Hint.Cut">{0} Frame(s) ausgeschnitten.</s:String>
     <s:String x:Key="S.Hint.Copy">{0} Frame(s) kopiert.</s:String>
     <s:String x:Key="S.Hint.Paste">{0} Frame(s) eingefügt.</s:String>
@@ -1229,13 +1229,13 @@
     <s:String x:Key="S.Recent.Warning.AnotherEditor">Dieses Projekt wurde bereits in einem anderen Editor-Fenster geöffnet. Ein und dasselbe Projekt kann nicht mehrmals geöffnet werden.</s:String>
     
     <!--Editor • Clipboard-->
-    <s:String x:Key="S.Clipboard.Entries">Zwischenablage-Inhalt</s:String>
-    <s:String x:Key="S.Clipboard.Entry">Zwischenablage-Eintrag:</s:String>
+    <s:String x:Key="S.Clipboard.Entries">Elemente der Zwischenablage</s:String>
+    <s:String x:Key="S.Clipboard.Entry">Element der Zwischenablage:</s:String>
     <s:String x:Key="S.Clipboard.Entry.Image">{0} Grafik</s:String>
     <s:String x:Key="S.Clipboard.Entry.Images">{0} Grafiken</s:String>
     <s:String x:Key="S.Clipboard.Explore">Dateipfad öffnen</s:String>
     <s:String x:Key="S.Clipboard.Remove">Entfernen</s:String>
-    <s:String x:Key="S.Clipboard.Behavior">Einfügen-Standardschema</s:String>
+    <s:String x:Key="S.Clipboard.Behavior">Verhalten beim Einfügen</s:String>
     <s:String x:Key="S.Clipboard.Before">Vor dem markierten Frame</s:String>
     <s:String x:Key="S.Clipboard.After">Nach dem markierten Frame</s:String>
     
@@ -1398,7 +1398,7 @@
     <s:String x:Key="S.Obfuscate.DarkenLevel">Grad der Verdunklung:</s:String>
     <s:String x:Key="S.Obfuscate.LightenLevel">Grad der Aufhellung:</s:String>
     <s:String x:Key="S.Obfuscate.UseAverage">Durchschnittsfarbe für jeden verpixelten Bereich berechnen</s:String>
-    <s:String x:Key="S.Obfuscate.Invert">Verdunklung auf die Umkehrung der Auswahl anwenden</s:String>
+    <s:String x:Key="S.Obfuscate.Invert">Abdunkeln auf die Umkehrung der Auswahl anwenden</s:String>
     <s:String x:Key="S.Obfuscate.Smoothness">Glätte</s:String>
     <s:String x:Key="S.Obfuscate.Info">Verwenden Sie das Auswahlwerkzeug, um den Teil des Rahmens auszuwählen, der unkenntlich gemacht werden soll.</s:String>
     <s:String x:Key="S.Obfuscate.Info2">Verwenden Sie das Auswahlwerkzeug, um den Teil des Rahmens auszuwählen, der nicht unkenntlich gemacht werden soll.</s:String>
@@ -1578,7 +1578,7 @@
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma">Ersetzt diese Pixel durch einen Chroma-Key.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.PaintWithChroma.Info">Wiederholte/unveränderte Pixel werden durch diesen Chroma-Key ersetzt,&#10;wodurch es möglich ist, weniger Farben pro Einzelbild zu verwenden.</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.ChromaKey">Chroma-Key:</s:String>
-    <s:String x:Key="S.SaveAs.GifOptions.Dither">Schwankung:</s:String>
+    <s:String x:Key="S.SaveAs.GifOptions.Dither">Farbmischung:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Dither.Scale">Bayer Scale:</s:String>
 
     <!--Editor • Save as > Apng options-->
@@ -1683,7 +1683,7 @@
     <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Datei in ausgewählten Ordner speichern</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Überschreiben (falls bereits vorhanden)</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Auch als Projekt speichern (gleicher Ordner, gleicher Dateiname)</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Datei hochladen (experimentelle Option)</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Datei hochladen</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">In Zwischenablage kopieren</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File">Datei</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard.File.Info">Kopiert Ausgabedatei in Zwischenablage</s:String>

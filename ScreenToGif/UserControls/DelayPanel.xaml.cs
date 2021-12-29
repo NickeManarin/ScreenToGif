@@ -1,12 +1,11 @@
-﻿using System.Windows.Controls;
+using System.Windows.Controls;
 
-namespace ScreenToGif.UserControls
+namespace ScreenToGif.UserControls;
+
+public partial class DelayPanel : UserControl
 {
-    public partial class DelayPanel : UserControl
+    public DelayPanel()
     {
-        public DelayPanel()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

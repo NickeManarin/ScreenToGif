@@ -1,88 +1,87 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using ScreenToGif.Util;
+using ScreenToGif.Domain.Enums;
 
-namespace ScreenToGif.Controls
+namespace ScreenToGif.Controls;
+
+public class StatusList : StackPanel
 {
-    public class StatusList : StackPanel
+    #region Dependency Properties/Events
+
+    public static readonly DependencyProperty MaxBandsProperty = DependencyProperty.Register("MaxBands", typeof(int), typeof(StatusBand),
+        new FrameworkPropertyMetadata(5));
+
+    #endregion
+
+    #region Properties
+
+    [Bindable(true), Category("Common")]
+    public int MaxBands
     {
-        #region Dependency Properties/Events
+        get => (int)GetValue(MaxBandsProperty);
+        set => SetValue(MaxBandsProperty, value);
+    }
 
-        public static readonly DependencyProperty MaxBandsProperty = DependencyProperty.Register("MaxBands", typeof(int), typeof(StatusBand),
-            new FrameworkPropertyMetadata(5));
+    #endregion
 
-        #endregion
+    private void Add(StatusType type, string text, StatusReasons reason, Action action = null)
+    {
+        var current = Children.OfType<StatusBand>().FirstOrDefault(x => x.Type == type && x.Text == text);
 
-        #region Properties
+        if (current != null)
+            Children.Remove(current);
 
-        [Bindable(true), Category("Common")]
-        public int MaxBands
+        var band = new StatusBand();
+        band.Reason = reason;
+        band.Dismissed += (sender, args) => Children.Remove(band);
+
+        if (Children.Count >= MaxBands)
+            Children.RemoveAt(0);
+
+        Children.Add(band);
+
+        switch (type)
         {
-            get => (int)GetValue(MaxBandsProperty);
-            set => SetValue(MaxBandsProperty, value);
+            case StatusType.Info:
+                band.Info(text, action);
+                break;
+            case StatusType.Warning:
+                band.Warning(text, action);
+                break;
+            case StatusType.Error:
+                band.Error(text, action);
+                break;
         }
+    }
 
-        #endregion
+    public void Info(string text, StatusReasons reason, Action action = null)
+    {
+        Add(StatusType.Info, text, reason, action);
+    }
 
-        private void Add(StatusType type, string text, StatusReasons reason, Action action = null)
-        {
-            var current = Children.OfType<StatusBand>().FirstOrDefault(x => x.Type == type && x.Text == text);
+    public void Warning(string text, StatusReasons reason = StatusReasons.InvalidState, Action action = null)
+    {
+        Add(StatusType.Warning, text, reason, action);
+    }
 
-            if (current != null)
-                Children.Remove(current);
+    public void Error(string text, StatusReasons reason, Action action = null)
+    {
+        Add(StatusType.Error, text, reason, action);
+    }
 
-            var band = new StatusBand();
-            band.Reason = reason;
-            band.Dismissed += (sender, args) => Children.Remove(band);
+    public void Remove(StatusType type, StatusReasons? reason = null)
+    {
+        var list = Children.OfType<StatusBand>().Where(x => x.Type == type && (!reason.HasValue || x.Reason == reason)).ToList();
 
-            if (Children.Count >= MaxBands)
-                Children.RemoveAt(0);
+        foreach (var band in list)
+            Children.Remove(band);
+    }
 
-            Children.Add(band);
-
-            switch (type)
-            {
-                case StatusType.Info:
-                    band.Info(text, action);
-                    break;
-                case StatusType.Warning:
-                    band.Warning(text, action);
-                    break;
-                case StatusType.Error:
-                    band.Error(text, action);
-                    break;
-            }
-        }
-
-        public void Info(string text, StatusReasons reason, Action action = null)
-        {
-            Add(StatusType.Info, text, reason, action);
-        }
-
-        public void Warning(string text, StatusReasons reason = StatusReasons.InvalidState, Action action = null)
-        {
-            Add(StatusType.Warning, text, reason, action);
-        }
-
-        public void Error(string text, StatusReasons reason, Action action = null)
-        {
-            Add(StatusType.Error, text, reason, action);
-        }
-
-        public void Remove(StatusType type, StatusReasons? reason = null)
-        {
-            var list = Children.OfType<StatusBand>().Where(x => x.Type == type && (!reason.HasValue || x.Reason == reason)).ToList();
-
-            foreach (var band in list)
-                Children.Remove(band);
-        }
-
-        public void Clear()
-        {
-            Children.Clear();
-        }
+    public void Clear()
+    {
+        Children.Clear();
     }
 }

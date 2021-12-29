@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:n="clr-namespace:ScreenToGif.Controls"
-             xmlns:u="clr-namespace:ScreenToGif.Util"
+             xmlns:e="clr-namespace:ScreenToGif.Domain.Enums;assembly=ScreenToGif.Domain"
              mc:Ignorable="d" d:DesignHeight="500" d:DesignWidth="320"
              x:Name="ThisPanel" Loaded="Panel_Loaded">
 
@@ -104,9 +104,9 @@
                            Visibility="{Binding ElementName=UrlComboBox, Path=Visibility}"/>
                 <ComboBox Grid.Row="1" Grid.Column="1" x:Name="UrlComboBox" Margin="5,3,3,3" Height="23" SelectedValuePath="Tag" SelectedValue="{Binding UrlType, Mode=TwoWay}"
                           Visibility="{Binding UseDirectLinks, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource Bool2Visibility}}">
-                    <ComboBoxItem Tag="{x:Static u:Export.Mp4}" Content="Mp4"/>
-                    <ComboBoxItem Tag="{x:Static u:Export.Webm}" Content="Webm"/>
-                    <ComboBoxItem Tag="{x:Static u:Export.Gif}" Content="Gif"/>
+                    <ComboBoxItem Tag="{x:Static e:ExportFormats.Mp4}" Content="Mp4"/>
+                    <ComboBoxItem Tag="{x:Static e:ExportFormats.Webm}" Content="Webm"/>
+                    <ComboBoxItem Tag="{x:Static e:ExportFormats.Gif}" Content="Gif"/>
                 </ComboBox>
 
                 <n:ExtendedCheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" x:Name="AskMeCheckBox" Text="{DynamicResource S.Options.Upload.Preset.Gfycat.AskMe}" Margin="5,5,5,3"

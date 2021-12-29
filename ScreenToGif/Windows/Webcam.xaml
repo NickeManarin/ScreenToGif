@@ -1,18 +1,19 @@
 <n:BaseRecorder xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                  xmlns:n="clr-namespace:ScreenToGif.Controls"
-                  xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
-                  xmlns:t="clr-namespace:ScreenToGif.Settings"
-                  x:Class="ScreenToGif.Windows.Webcam" x:Name="WebcamWindow" 
-                  Title="{DynamicResource S.Webcam.Title}" Height="400" Width="600" MinWidth="200" MinHeight="200" 
-                  Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" Background="{DynamicResource Panel.Background}"
-                  Loaded="Window_Loaded" LocationChanged="Window_LocationChanged" Closing="Window_Closing">
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:n="clr-namespace:ScreenToGif.Controls"
+                xmlns:c="clr-namespace:ScreenToGif.Util.Converters;assembly=ScreenToGif.Util"
+                xmlns:cx="clr-namespace:ScreenToGif.Util.Converters"
+                xmlns:t="clr-namespace:ScreenToGif.Util.Settings;assembly=ScreenToGif.Util"
+                x:Class="ScreenToGif.Windows.Webcam" x:Name="WebcamWindow" 
+                Title="{DynamicResource S.Webcam.Title}" Height="400" Width="600" MinWidth="200" MinHeight="200" 
+                Icon="/Resources/Logo.ico" WindowStartupLocation="CenterScreen" Background="{DynamicResource Panel.Background}"
+                Loaded="Window_Loaded" LocationChanged="Window_LocationChanged" Closing="Window_Closing">
 
     <Window.Resources>
         <c:StageToButtonString x:Key="StageToButtonStringConverter"/>
         <c:StageToCanvas x:Key="StageToCanvasConverter"/>
         <c:KeysToString x:Key="KeysToStringConverter"/>
-        <c:ShortcutKeys x:Key="ShortcutKeys"/>
+        <cx:ShortcutKeys x:Key="ShortcutKeys"/>
 
         <Storyboard x:Key="ShowDiscardStoryboard">
             <BooleanAnimationUsingKeyFrames Storyboard.TargetName="DiscardButton" Storyboard.TargetProperty="IsHitTestVisible" Duration="0:0:0" >

@@ -1,114 +1,114 @@
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using ScreenToGif.Domain.Enums;
 using ScreenToGif.UserControls;
 using ScreenToGif.Util;
 using ScreenToGif.ViewModel.Tasks;
 
-namespace ScreenToGif.Windows.Other
+namespace ScreenToGif.Windows.Other;
+
+public partial class AutomatedTask : Window
 {
-    public partial class AutomatedTask : Window
+    public BaseTaskViewModel CurrentTask { get; set; }
+
+    public bool IsEditing { get; set; }
+
+    public AutomatedTask()
     {
-        public BaseTaskViewModel CurrentTask { get; set; }
+        InitializeComponent();
+    }
 
-        public bool IsEditing { get; set; }
+    private void Window_Loaded(object sender, RoutedEventArgs e)
+    {
+        TypeComboBox.Focus();
 
-        public AutomatedTask()
+        if (IsEditing)
         {
-            InitializeComponent();
+            MainBorder.Background = TryFindResource("Vector.Pen") as Brush;
+            TypeTextBlock.Text = LocalizationHelper.Get("S.Edit");
+            TypeComboBox.SelectedIndex = (int)(CurrentTask?.TaskType ?? TaskTypes.NotDeclared);
+            TypeComboBox.IsEnabled = false;
+            EnabledCheckBox.Visibility = Visibility.Visible;
+
+            TypeComboBox.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+        }
+    }
+
+    private void TypeComboBox_Selected(object sender, RoutedEventArgs e)
+    {
+        if (!IsLoaded)
+            return;
+
+        if (TypeComboBox.SelectedIndex < 1)
+        {
+            MainPresenter.Content = null;
+            return;
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        if (!IsEditing)
         {
-            TypeComboBox.Focus();
-
-            if (IsEditing)
+            //Create a new model.
+            switch ((TaskTypes)TypeComboBox.SelectedIndex)
             {
-                MainBorder.Background = TryFindResource("Vector.Pen") as Brush;
-                TypeTextBlock.Text = LocalizationHelper.Get("S.Edit");
-                TypeComboBox.SelectedIndex = (int)(CurrentTask?.TaskType ?? BaseTaskViewModel.TaskTypeEnum.NotDeclared);
-                TypeComboBox.IsEnabled = false;
-                EnabledCheckBox.Visibility = Visibility.Visible;
-
-                TypeComboBox.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
-            }
-        }
-
-        private void TypeComboBox_Selected(object sender, RoutedEventArgs e)
-        {
-            if (!IsLoaded)
-                return;
-
-            if (TypeComboBox.SelectedIndex < 1)
-            {
-                MainPresenter.Content = null;
-                return;
-            }
-
-            if (!IsEditing)
-            {
-                //Create a new model.
-                switch ((BaseTaskViewModel.TaskTypeEnum)TypeComboBox.SelectedIndex)
-                {
-                    case BaseTaskViewModel.TaskTypeEnum.MouseClicks:
-                        CurrentTask = MouseClicksViewModel.Default();
-                        break;
-                    case BaseTaskViewModel.TaskTypeEnum.KeyStrokes:
-                        CurrentTask = KeyStrokesViewModel.Default();
-                        break;
-                    case BaseTaskViewModel.TaskTypeEnum.Delay:
-                        CurrentTask = DelayViewModel.Default();
-                        break;
-                    case BaseTaskViewModel.TaskTypeEnum.Progress:
-                        CurrentTask = ProgressViewModel.Default();
-                        break;
-                    case BaseTaskViewModel.TaskTypeEnum.Border:
-                        CurrentTask = BorderViewModel.Default();
-                        break;
-                    case BaseTaskViewModel.TaskTypeEnum.Shadow:
-                        CurrentTask = ShadowViewModel.Default();
-                        break;
-                }
-            }
-
-            switch ((BaseTaskViewModel.TaskTypeEnum)TypeComboBox.SelectedIndex)
-            {
-                case BaseTaskViewModel.TaskTypeEnum.MouseClicks:
-                    MainPresenter.Content = new MouseClicksPanel { DataContext = CurrentTask };
+                case TaskTypes.MouseClicks:
+                    CurrentTask = MouseClicksViewModel.Default();
                     break;
-                case BaseTaskViewModel.TaskTypeEnum.KeyStrokes:
-                    MainPresenter.Content = new KeyStrokesPanel { DataContext = CurrentTask };
+                case TaskTypes.KeyStrokes:
+                    CurrentTask = KeyStrokesViewModel.Default();
                     break;
-                case BaseTaskViewModel.TaskTypeEnum.Delay:
-                    MainPresenter.Content = new DelayPanel { DataContext = CurrentTask };
+                case TaskTypes.Delay:
+                    CurrentTask = DelayViewModel.Default();
                     break;
-                case BaseTaskViewModel.TaskTypeEnum.Progress:
-                    MainPresenter.Content = new ProgressPanel { DataContext = CurrentTask };
+                case TaskTypes.Progress:
+                    CurrentTask = ProgressViewModel.Default();
                     break;
-                case BaseTaskViewModel.TaskTypeEnum.Border:
-                    MainPresenter.Content = new BorderPanel { DataContext = CurrentTask };
+                case TaskTypes.Border:
+                    CurrentTask = BorderViewModel.Default();
                     break;
-                case BaseTaskViewModel.TaskTypeEnum.Shadow:
-                    MainPresenter.Content = new ShadowPanel { DataContext = CurrentTask };
+                case TaskTypes.Shadow:
+                    CurrentTask = ShadowViewModel.Default();
                     break;
             }
         }
 
-        private void Ok_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        switch ((TaskTypes)TypeComboBox.SelectedIndex)
         {
-            e.CanExecute = IsLoaded && TypeComboBox.SelectedIndex > 0;
+            case TaskTypes.MouseClicks:
+                MainPresenter.Content = new MouseClicksPanel { DataContext = CurrentTask };
+                break;
+            case TaskTypes.KeyStrokes:
+                MainPresenter.Content = new KeyStrokesPanel { DataContext = CurrentTask };
+                break;
+            case TaskTypes.Delay:
+                MainPresenter.Content = new DelayPanel { DataContext = CurrentTask };
+                break;
+            case TaskTypes.Progress:
+                MainPresenter.Content = new ProgressPanel { DataContext = CurrentTask };
+                break;
+            case TaskTypes.Border:
+                MainPresenter.Content = new BorderPanel { DataContext = CurrentTask };
+                break;
+            case TaskTypes.Shadow:
+                MainPresenter.Content = new ShadowPanel { DataContext = CurrentTask };
+                break;
         }
+    }
 
-        private void Ok_Executed(object sender, RoutedEventArgs e)
-        {
-            OkButton.Focus();
+    private void Ok_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+    {
+        e.CanExecute = IsLoaded && TypeComboBox.SelectedIndex > 0;
+    }
 
-            DialogResult = true;
-        }
+    private void Ok_Executed(object sender, RoutedEventArgs e)
+    {
+        OkButton.Focus();
 
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
+        DialogResult = true;
+    }
+
+    private void CancelButton_Click(object sender, RoutedEventArgs e)
+    {
+        Close();
     }
 }

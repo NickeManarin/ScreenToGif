@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 /*
     Adapted work from:
@@ -22,44 +22,47 @@
 #endregion
 
 using System;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace ScreenToGif.Webcam.DirectShow
+namespace ScreenToGif.Webcam.DirectShow;
+
+public class Workaround
 {
-    public class Workaround
+    /*
+    works:
+        CoCreateInstance( CLSID_CaptureGraphBuilder2, ..., IID_ICaptureGraphBuilder2, ...);
+    doesn't (E_NOTIMPL):
+        CoCreateInstance( CLSID_CaptureGraphBuilder2, ..., IID_IUnknown, ...);
+    thus .NET 'Activator.CreateInstance' fails
+    */
+
+    [MethodImpl(MethodImplOptions.InternalCall)]
+    internal static extern object InternalWrapIUnknownWithComObject(IntPtr i);
+
+    public static object CreateDsInstance(ref Guid clsid, ref Guid riid)
     {
-        /*
-        works:
-            CoCreateInstance( CLSID_CaptureGraphBuilder2, ..., IID_ICaptureGraphBuilder2, ...);
-        doesn't (E_NOTIMPL):
-            CoCreateInstance( CLSID_CaptureGraphBuilder2, ..., IID_IUnknown, ...);
-        thus .NET 'Activator.CreateInstance' fails
-        */
+        var hr = CoCreateInstance(ref clsid, IntPtr.Zero, CLSCTX.Inproc, ref riid, out var ptrIf);
 
-        public static object CreateDsInstance(ref Guid clsid, ref Guid riid)
-        {
-            var hr = CoCreateInstance(ref clsid, IntPtr.Zero, CLSCTX.Inproc, ref riid, out var ptrIf);
+        if (hr != 0 || ptrIf == IntPtr.Zero)
+            Marshal.ThrowExceptionForHR(hr);
 
-            if (hr != 0 || ptrIf == IntPtr.Zero)
-                Marshal.ThrowExceptionForHR(hr);
+        var iu = new Guid("00000000-0000-0000-C000-000000000046");
+        hr = Marshal.QueryInterface(ptrIf, ref iu, out _);
 
-            var iu = new Guid("00000000-0000-0000-C000-000000000046");
-            hr = Marshal.QueryInterface(ptrIf, ref iu, out _);
-
-            var ooo = System.Runtime.Remoting.Services.EnterpriseServicesHelper.WrapIUnknownWithComObject(ptrIf);
-            var ct = Marshal.Release(ptrIf);
-            return ooo;
-        }
-
-        [DllImport("ole32.dll")]
-        private static extern int CoCreateInstance(ref Guid clsid, IntPtr pUnkOuter, CLSCTX dwClsContext, ref Guid iid, out IntPtr ptrIf);
+        var ooo = InternalWrapIUnknownWithComObject(ptrIf); //System.Runtime.Remoting.Services.EnterpriseServicesHelper.WrapIUnknownWithComObject(ptrIf);
+        var ct = Marshal.Release(ptrIf);
+        return ooo;
     }
 
-    [Flags]
-    internal enum CLSCTX
-    {
-        Inproc = 0x03,
-        Server = 0x15,
-        All = 0x17,
-    }
+    [DllImport("ole32.dll")]
+    private static extern int CoCreateInstance(ref Guid clsid, IntPtr pUnkOuter, CLSCTX dwClsContext, ref Guid iid, out IntPtr ptrIf);
+}
+
+[Flags]
+internal enum CLSCTX
+{
+    Inproc = 0x03,
+    Server = 0x15,
+    All = 0x17,
 }

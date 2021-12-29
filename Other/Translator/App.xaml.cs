@@ -1,68 +1,68 @@
-﻿using System;
+using System;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Threading;
 using Translator.Util;
 
-namespace Translator
+namespace Translator;
+
+public partial class App : Application
 {
-    public partial class App : Application
+    private void App_Startup(object sender, StartupEventArgs e)
     {
-        private void App_Startup(object sender, StartupEventArgs e)
+        //Unhandled Exceptions.
+        AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+    }
+
+    private void App_OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+    {
+        LogWriter.Log(e.Exception, "On Dispacher Unhandled Exception - Unknown");
+
+        try
         {
-            //Unhandled Exceptions.
-            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            ExceptionDialog.Ok(e.Exception, "ScreenToGif - Translator", "Unhandled exception", e.Exception.Message);
+        }
+        catch (Exception ex)
+        {
+            LogWriter.Log(ex, "Error while displaying the error.");
+            //Ignored.
         }
 
-        private void App_OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        e.Handled = true;
+    }
+
+    private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+    {
+        if (e.ExceptionObject is not Exception exception)
+            return;
+
+        LogWriter.Log(exception, "Current Domain Unhandled Exception - Unknown");
+
+        try
         {
-            LogWriter.Log(e.Exception, "On Dispacher Unhandled Exception - Unknown");
-
-            try
-            {
-                ExceptionDialog.Ok(e.Exception, "ScreenToGif - Translator", "Unhandled exception", e.Exception.Message);
-            }
-            catch (Exception ex)
-            {
-                LogWriter.Log(ex, "Error while displaying the error.");
-                //Ignored.
-            }
-
-            e.Handled = true;
+            ExceptionDialog.Ok(exception, "ScreenToGif - Translator", "Unhandled exception", exception.Message);
         }
-
-        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        catch (Exception)
         {
-            if (!(e.ExceptionObject is Exception exception)) return;
-
-            LogWriter.Log(exception, "Current Domain Unhandled Exception - Unknown");
-
-            try
-            {
-                ExceptionDialog.Ok(exception, "ScreenToGif - Translator", "Unhandled exception", exception.Message);
-            }
-            catch (Exception)
-            {
-                //Ignored.
-            }
+            //Ignored.
         }
+    }
 
-        public static string Version => ToStringShort(Assembly.GetEntryAssembly()?.GetName().Version) ?? "0.0";
+    public static string Version => ToStringShort(Assembly.GetEntryAssembly()?.GetName().Version) ?? "0.0";
 
-        internal static string ToStringShort(Version version)
-        {
-            if (version == null)
-                return null;
+    internal static string ToStringShort(Version version)
+    {
+        if (version == null)
+            return null;
 
-            var result = $"{version.Major}.{version.Minor}";
+        var result = $"{version.Major}.{version.Minor}";
 
-            if (version.Build > 0)
-                result += $".{version.Build}";
+        if (version.Build > 0)
+            result += $".{version.Build}";
 
-            if (version.Revision > 0)
-                result += $".{version.Revision}";
+        if (version.Revision > 0)
+            result += $".{version.Revision}";
 
-            return result;
-        }
+        return result;
     }
 }

@@ -109,11 +109,12 @@
     <s:String x:Key="S.Command.DeleteNext">Remover todos os próximos quadros</s:String>
     <s:String x:Key="S.Command.RemoveDuplicates">Remover quadros duplicados</s:String>
     <s:String x:Key="S.Command.Reduce">Reduzir a quantidade de quadros</s:String>
-    <s:String x:Key="S.Command.Reverse">Reverse animation</s:String>
-    <s:String x:Key="S.Command.Yoyo">Yoyo, makes the animation go forward and backwards</s:String>
-    <s:String x:Key="S.Command.MoveLeft">Move the selected frame to the left</s:String>
-    <s:String x:Key="S.Command.MoveRight">Move the selected frame to the right</s:String>
-    <s:String x:Key="S.Command.Resize">Resize all frames</s:String>
+    <s:String x:Key="S.Command.SmoothLoop">Criar um animação com loop suave</s:String>
+    <s:String x:Key="S.Command.Reverse">Reverter a animação</s:String>
+    <s:String x:Key="S.Command.Yoyo">Transformar a animação em ioiô, indo para frente e para trás</s:String>
+    <s:String x:Key="S.Command.MoveLeft">Mover o quadro selecionado para a esquerda</s:String>
+    <s:String x:Key="S.Command.MoveRight">Mover o quadro selecionado para a direita</s:String>
+    <s:String x:Key="S.Command.Resize">Redimensionar todos os quadros</s:String>
     <s:String x:Key="S.Command.Crop">Cortar todos os quadros</s:String>
     <s:String x:Key="S.Command.FlipRotate">Girar ou rotacionar os quadros</s:String>
     <s:String x:Key="S.Command.Caption">Adicionar uma legenda</s:String>
@@ -164,6 +165,7 @@
     <s:String x:Key="S.Updater.Header">Uma nova atualização está disponível</s:String>
     <s:String x:Key="S.Updater.NewRelease">Nova versão!</s:String>
     <s:String x:Key="S.Updater.NewRelease.Info">Nova versão disponível, Versão {0}!&#x0d;Clique aqui para mais detalhes.</s:String>
+    <s:String x:Key="S.Updater.NoNewRelease.Info">Aparentemente seu sistema não é mais suportado ou algo mudou no sistema de atualização. Tente fazer o download manual a partir da página web.</s:String>
     <s:String x:Key="S.Updater.Version">Versão</s:String>
     <s:String x:Key="S.Updater.Portable">Portátil</s:String>
     <s:String x:Key="S.Updater.Installer">Instalador</s:String>
@@ -200,8 +202,6 @@
     <s:String x:Key="S.Options.Other">Outras configurações</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Header">Atalho de teclado ausente para a gravação via cursor</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Message">Em ordem para usar o cursor do mouse como guia para mover a área de gravação, você deve definir uma tecla de atalho para poder desabilitar quando necessário.</s:String>
-    <s:String x:Key="S.Options.Warning.DesktopDuplication.Header">Dependências ausentes para a gravação de tela</s:String>
-    <s:String x:Key="S.Options.Warning.DesktopDuplication.Message">Para capturar a tela utilizando a API de duplicação de área de trabalho, é necessário fazer o download da biblioteca de código SharpDx.</s:String>
     
     <!--Options • Application-->
     <s:String x:Key="S.Options.App.Startup">Inicialização</s:String>
@@ -284,7 +284,7 @@
     
     <s:String x:Key="S.Options.Recorder.Mode">Modo de captura</s:String>
     <s:String x:Key="S.Options.Recorder.Bitblt.Info">Use o modo de captura antigo, que é mais devagar e pode não funcionar para capturar jogos,&#10;mas não requer download the ferramentas ou plug-ins externos.</s:String>
-    <s:String x:Key="S.Options.Recorder.DirectX.Info">Use o modo de captura por duplicação de área de trabalho, que é mais rápido e&#10;pode capturar jogos em tela cheia, mas requer a biblioteca SharpDx e Windows 8 ou superior.</s:String>
+    <s:String x:Key="S.Options.Recorder.DirectX.Info">Use o modo de captura por duplicação de área de trabalho, que é mais rápido e&#10;pode capturar jogos em tela cheia, mas requer Windows 8 ou superior.</s:String>
     <s:String x:Key="S.Options.Recorder.File">Salvar para&#10;arquivo</s:String>
     <s:String x:Key="S.Options.Recorder.File.Info">Cada quadro é capturado e salvo diretamente como um arquivo de imagem em disco.</s:String>
     <s:String x:Key="S.Options.Recorder.Cache">Cache de&#10;memória</s:String>
@@ -583,9 +583,6 @@
     <s:String x:Key="S.Options.Extras.GifskiLocation.Select">Selecione a localização da biblioteca Gifski</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.File">Biblioteca Gifski</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.Invalid">O caminho da biblioteca Gifski contém um ou mais caracteres inválidos. Por favor, selecione um caminho válido para o executável.</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation">Pasta do SharpDx (SharpDX.dll, SharpDX.Direct3D11.dll e SharpDX.DXGI.dll)</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation.Select">Selecione a pasta onde fica as bibliotecas do SharpDx</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation.Invalid">O caminho para a pasta das bibliotecas do SharpDx contém um ou mais caracteres inválidos. Por favor, selecione uma pasta válida para essas bibliotecas.</s:String>
     <s:String x:Key="S.Options.Extras.License.Ffmpeg">Licença do FFmpeg</s:String>
     <s:String x:Key="S.Options.Extras.License.Gifski">Licença do Gifski</s:String>
     <s:String x:Key="S.Options.Extras.License.SharpDx">Licença do SharpDx</s:String>
@@ -692,7 +689,6 @@
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">Não foi possível capturar a tela. O método de captura não retornou quadros após 5 tentativas.</s:String>
     <s:String x:Key="S.Recorder.Warning.StartPauseNotPossible">Não foi possível começar/pausar a captura de tela</s:String>
     <s:String x:Key="S.Recorder.Warning.Windows8">Windows 8 ou superior é necessário para capturar a tela utilizando a API de duplicação de área de trabalho.</s:String>
-    <s:String x:Key="S.Recorder.Warning.MissingSharpDx">As bibliotecas do SharpDx são necessárias para se capturar a tela usando a API de duplicação de área de trabalho. Navegue até Opções > Extras para baixar SharpDx.</s:String>
     
     <!--New recorder-->
     <s:String x:Key="S.Recorder.Area">Área</s:String>
@@ -1028,6 +1024,7 @@
     <s:String x:Key="S.Editor.Edit.Delete">Remover</s:String>
     <s:String x:Key="S.Editor.Edit.Frames.Duplicates">Remover&#x0d;Duplicados</s:String>
     <s:String x:Key="S.Editor.Edit.Frames.Reduce">Reduzir&#x0d;Quant. de Quadros</s:String>
+    <s:String x:Key="S.Editor.Edit.Frames.SmoothLoop">Loop&#x0d;Suave</s:String>
     <s:String x:Key="S.Editor.Edit.DeletePrevious">Remover Todos Anteriores</s:String>
     <s:String x:Key="S.Editor.Edit.DeleteNext">Remover Todos Próximos</s:String>
     
@@ -1158,7 +1155,9 @@
     <s:String x:Key="S.Editor.ApplyingTransition">Aplicando efeito de transição</s:String>
     <s:String x:Key="S.Editor.PreparingSaving">Preparando para salvar</s:String>
     <s:String x:Key="S.Editor.CancelDiscard">Cancelar carregamento e descartar projeto.</s:String>
-
+    <s:String x:Key="S.Editor.FindingLoop">Procurando loop perfeito</s:String>
+    <s:String x:Key="S.Editor.DiscardingLoop">Descartando quadros não usados no loop</s:String>
+    
     <!--Editor • Frame list-->
     <s:String x:Key="S.Editor.List.Frame">Quadro:</s:String>
     <s:String x:Key="S.Editor.List.OpenImage">Abrir Imagem</s:String>
@@ -1297,6 +1296,16 @@
     <s:String x:Key="S.RemoveDuplicates.Delay.Average">Utilize a média</s:String>
     <s:String x:Key="S.RemoveDuplicates.Delay.Sum">Utilize a soma</s:String>
     <s:String x:Key="S.RemoveDuplicates.Info">Esta ação analiza cada quadro (pixel por pixel) e remove aqueles que são no mínimo {0} % similares ao seu vizinho imediato.&#x0d;Você pode escolher para ajustar a duração da exibição dos quadros.</s:String>
+
+    <!--Editor • Smooth Loop-->
+    <s:String x:Key="S.SmoothLoop.Header">Criar loop suave</s:String>
+    <s:String x:Key="S.SmoothLoop.StartThreshold">Ignorar primeiros:</s:String>
+    <s:String x:Key="S.SmoothLoop.From">Comparar do:</s:String>
+    <s:String x:Key="S.SmoothLoop.From.Last">Fim</s:String>
+    <s:String x:Key="S.SmoothLoop.From.First">Início</s:String>
+    <s:String x:Key="S.SmoothLoop.Info">Tenta encontrar um quadro com no mínimo {0} % de similaridade do quadro inicial e deleta todos os próximos quadros.&#x0d;Você pode escolher se você quer ignorar alguns quadros iniciais e/ou executar a verificação do início (depois dos quadros ignorados) ou do fim.</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.Threshold">O número de quadros para serem ignorados precisa ser menor que o número de quadros totais.</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.NoLoopFound">Não foi posssível criar um loop suave com as configurações atuais.</s:String>
     
     <!--Editor • Captions-->
     <s:String x:Key="S.Caption.Text">Texto</s:String>

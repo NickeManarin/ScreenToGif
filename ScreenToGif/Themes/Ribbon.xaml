@@ -1,8 +1,8 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:r="clr-namespace:ScreenToGif.Controls.Ribbon"
                     xmlns:c="clr-namespace:ScreenToGif.Controls"
-                    xmlns:v="clr-namespace:ScreenToGif.Util.Converters">
+                    xmlns:v="clr-namespace:ScreenToGif.Util.Converters;assembly=ScreenToGif.Util">
 
     <v:ColorToAlpha x:Key="ColorToAlphaConverter"/>
     <v:InvertedBool x:Key="InvertedBool"/>

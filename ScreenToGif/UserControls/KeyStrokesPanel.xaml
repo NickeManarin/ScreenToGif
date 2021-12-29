@@ -4,10 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:n="clr-namespace:ScreenToGif.Controls"
-             xmlns:u="clr-namespace:ScreenToGif.Util"
              xmlns:cm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
-             xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
-             xmlns:t="clr-namespace:ScreenToGif.Settings"
+             xmlns:c="clr-namespace:ScreenToGif.Util.Converters;assembly=ScreenToGif.Util"
+             xmlns:t="clr-namespace:ScreenToGif.Util.Settings;assembly=ScreenToGif.Util"
              mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="300"
              SnapsToDevicePixels="True">
     
