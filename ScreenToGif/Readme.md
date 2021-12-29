@@ -2,18 +2,15 @@
 
 This is the current project of ScreenToGif.  
 
-_VS 2019 and .Net 4.8 or newer required._
+_VS 2022 and .NET 6 or newer required._
 
-## What's new? (Version 2.34)
+## What's new? (Version 2.35.2)
 
-• Added Hebrew localization.  
+• Just bug fixes.  
 
 ### Fixed:
 
-♦ Added support for the new distributition system for v2.35 and newer releases. It's important to download this version if you want to properly update to newer versions afterwards.
-♦ Numerical fields will now only react to the scroll if they have focus.
-♦ The window selection mode could crash because of a wrongly sized window.
-♦ When in frame selection mode, the frame list was allowing the loop between start and end selection to happen.  
+♦ The install process was failling if you had SharpDx set up (error 2711).  
 
 ### Known Bugs:
   

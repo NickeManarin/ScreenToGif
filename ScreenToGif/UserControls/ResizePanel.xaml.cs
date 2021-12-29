@@ -1,12 +1,11 @@
 using System.Windows.Controls;
 
-namespace ScreenToGif.UserControls
+namespace ScreenToGif.UserControls;
+
+public partial class ResizePanel : UserControl
 {
-    public partial class ResizePanel : UserControl
+    public ResizePanel()
     {
-        public ResizePanel()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

@@ -4,10 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:n="clr-namespace:ScreenToGif.Controls"
-             xmlns:u="clr-namespace:ScreenToGif.Util"
              xmlns:cm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
-             xmlns:c="clr-namespace:ScreenToGif.Util.Converters"
-             xmlns:t="clr-namespace:ScreenToGif.Settings"
+             xmlns:c="clr-namespace:ScreenToGif.Util.Converters;assembly=ScreenToGif.Util"
+             xmlns:e="clr-namespace:ScreenToGif.Domain.Enums;assembly=ScreenToGif.Domain"
+             xmlns:t="clr-namespace:ScreenToGif.Util.Settings;assembly=ScreenToGif.Util"
              mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="300"
              SnapsToDevicePixels="True">
     
@@ -50,10 +50,10 @@
             </Grid.ColumnDefinitions>
 
             <n:ExtendedRadioButton Grid.Column="0" x:Name="BarRadioButton" Icon="{StaticResource Vector.Progress}" Text="{DynamicResource S.Progress.Type.Bar}" 
-                                   IsChecked="{Binding Type, Mode=TwoWay, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:ProgressType.Bar}}"/>
+                                   IsChecked="{Binding Type, Mode=TwoWay, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static e:ProgressTypes.Bar}}"/>
 
             <n:ExtendedRadioButton Grid.Column="1" x:Name="TextRadioButton" Icon="{StaticResource Vector.FreeText}" Text="{StaticResource S.Progress.Type.Text}"
-                                   IsChecked="{Binding Type, Mode=TwoWay, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static u:ProgressType.Text}}"/>
+                                   IsChecked="{Binding Type, Mode=TwoWay, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static e:ProgressTypes.Text}}"/>
         </Grid>
 
         <Expander Grid.Row="2" Header="{DynamicResource S.Caption.Font}" IsExpanded="{Binding IsProgressFontGroupExpanded, Source={x:Static t:UserSettings.All}}"

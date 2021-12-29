@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <DebugType>embedded</DebugType>
+    <UseWPF>True</UseWPF>
+    <PlatformTarget>x64</PlatformTarget>
+    <Platforms>AnyCPU;ARM64;x64;x86</Platforms>
+  </PropertyGroup>
+
+</Project>

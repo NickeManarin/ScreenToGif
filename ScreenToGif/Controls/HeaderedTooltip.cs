@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
@@ -7,130 +7,129 @@ using System.Windows.Documents;
 using System.Windows.Markup;
 using System.Windows.Media;
 
-namespace ScreenToGif.Controls
+namespace ScreenToGif.Controls;
+
+[ContentProperty("Inlines")]
+[TemplatePart(Name = "PART_InlinesPresenter", Type = typeof(TextBlock))]
+public class HeaderedTooltip : ToolTip
 {
-    [ContentProperty("Inlines")]
-    [TemplatePart(Name = "PART_InlinesPresenter", Type = typeof(TextBlock))]
-    public class HeaderedTooltip : ToolTip
+    #region Variables
+
+    public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(nameof(Header), typeof(string), typeof(HeaderedTooltip), new FrameworkPropertyMetadata("Header"));
+
+    public static readonly DependencyProperty TextProperty = DependencyProperty.Register(nameof(Text), typeof(string), typeof(HeaderedTooltip), new FrameworkPropertyMetadata(""));
+
+    public static readonly DependencyProperty TextAlignmentProperty = DependencyProperty.Register(nameof(TextAlignment), typeof(TextAlignment),
+        typeof(HeaderedTooltip), new FrameworkPropertyMetadata(TextAlignment.Left));
+
+    public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon), typeof(Brush), typeof(HeaderedTooltip));
+
+    public static readonly DependencyProperty MaxSizeProperty = DependencyProperty.Register(nameof(MaxSize), typeof(double), typeof(HeaderedTooltip), new FrameworkPropertyMetadata(14.0));
+
+    private Collection<Inline> _inlines = new Collection<Inline>();
+    private TextBlock _inlinesPresenter = null;
+
+    #endregion
+
+    #region Properties
+
+    /// <summary>
+    /// The header of the tooltip.
+    /// </summary>
+    [Description("The header of the tooltip.")]
+    public string Header
     {
-        #region Variables
+        get => (string)GetValue(HeaderProperty);
+        set => SetCurrentValue(HeaderProperty, value);
+    }
 
-        public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(nameof(Header), typeof(string), typeof(HeaderedTooltip), new FrameworkPropertyMetadata("Header"));
+    /// <summary>
+    /// The text of the description.
+    /// </summary>
+    [Description("The text of the description.")]
+    public string Text
+    {
+        get => (string)GetValue(TextProperty);
+        set => SetCurrentValue(TextProperty, value);
+    }
 
-        public static readonly DependencyProperty TextProperty = DependencyProperty.Register(nameof(Text), typeof(string), typeof(HeaderedTooltip), new FrameworkPropertyMetadata(""));
+    /// <summary>
+    /// The text alignment of the description.
+    /// </summary>
+    [Description("The text alignment of the description.")]
+    public TextAlignment TextAlignment
+    {
+        get => (TextAlignment)GetValue(TextAlignmentProperty);
+        set => SetCurrentValue(TextAlignmentProperty, value);
+    }
 
-        public static readonly DependencyProperty TextAlignmentProperty = DependencyProperty.Register(nameof(TextAlignment), typeof(TextAlignment),
-            typeof(HeaderedTooltip), new FrameworkPropertyMetadata(TextAlignment.Left));
+    /// <summary>
+    /// The icon of the Tooltip.
+    /// </summary>
+    [Description("The icon of the Tooltip.")]
+    public Brush Icon
+    {
+        get => (Brush)GetValue(IconProperty);
+        set => SetCurrentValue(IconProperty, value);
+    }
 
-        public static readonly DependencyProperty IconProperty = DependencyProperty.Register(nameof(Icon), typeof(Brush), typeof(HeaderedTooltip));
+    /// <summary>
+    /// The maximum size of the image.
+    /// </summary>
+    [Description("The maximum size of the image.")]
+    public double MaxSize
+    {
+        get => (double)GetValue(MaxSizeProperty);
+        set => SetCurrentValue(MaxSizeProperty, value);
+    }
 
-        public static readonly DependencyProperty MaxSizeProperty = DependencyProperty.Register(nameof(MaxSize), typeof(double), typeof(HeaderedTooltip), new FrameworkPropertyMetadata(14.0));
-
-        private Collection<Inline> _inlines = new Collection<Inline>();
-        private TextBlock _inlinesPresenter = null;
-
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        /// The header of the tooltip.
-        /// </summary>
-        [Description("The header of the tooltip.")]
-        public string Header
+    public Collection<Inline> Inlines
+    {
+        get => _inlines;
+        set
         {
-            get => (string)GetValue(HeaderProperty);
-            set => SetCurrentValue(HeaderProperty, value);
+            _inlines = value;
+
+            UpdateInlines();
         }
+    }
 
-        /// <summary>
-        /// The text of the description.
-        /// </summary>
-        [Description("The text of the description.")]
-        public string Text
-        {
-            get => (string)GetValue(TextProperty);
-            set => SetCurrentValue(TextProperty, value);
-        }
+    #endregion
 
-        /// <summary>
-        /// The text alignment of the description.
-        /// </summary>
-        [Description("The text alignment of the description.")]
-        public TextAlignment TextAlignment
-        {
-            get => (TextAlignment)GetValue(TextAlignmentProperty);
-            set => SetCurrentValue(TextAlignmentProperty, value);
-        }
+    static HeaderedTooltip()
+    {
+        DefaultStyleKeyProperty.OverrideMetadata(typeof(HeaderedTooltip), new FrameworkPropertyMetadata(typeof(HeaderedTooltip)));
+    }
 
-        /// <summary>
-        /// The icon of the Tooltip.
-        /// </summary>
-        [Description("The icon of the Tooltip.")]
-        public Brush Icon
-        {
-            get => (Brush)GetValue(IconProperty);
-            set => SetCurrentValue(IconProperty, value);
-        }
+    public override void OnApplyTemplate()
+    {
+        base.ApplyTemplate();
 
-        /// <summary>
-        /// The maximum size of the image.
-        /// </summary>
-        [Description("The maximum size of the image.")]
-        public double MaxSize
-        {
-            get => (double)GetValue(MaxSizeProperty);
-            set => SetCurrentValue(MaxSizeProperty, value);
-        }
+        _inlinesPresenter = GetTemplateChild("PART_InlinesPresenter") as TextBlock;
 
-        public Collection<Inline> Inlines
-        {
-            get => _inlines;
-            set
-            {
-                _inlines = value;
+        if (_inlinesPresenter == null || !Inlines.Any())
+            return;
 
-                UpdateInlines();
-            }
-        }
+        Text = "";
 
-        #endregion
+        var targetInlines = _inlinesPresenter.Inlines;
 
-        static HeaderedTooltip()
-        {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(HeaderedTooltip), new FrameworkPropertyMetadata(typeof(HeaderedTooltip)));
-        }
+        foreach (var inline in Inlines) 
+            targetInlines.Add(inline);
+    }
 
-        public override void OnApplyTemplate()
-        {
-            base.ApplyTemplate();
+    public void Clear()
+    {
+        Text = "";
+        Inlines.Clear();
+    }
 
-            _inlinesPresenter = GetTemplateChild("PART_InlinesPresenter") as TextBlock;
+    public void UpdateInlines()
+    {
+        if (_inlinesPresenter == null)
+            return;
 
-            if (_inlinesPresenter == null || !Inlines.Any())
-                return;
-
-            Text = "";
-
-            var targetInlines = _inlinesPresenter.Inlines;
-
-            foreach (var inline in Inlines) 
-                targetInlines.Add(inline);
-        }
-
-        public void Clear()
-        {
-            Text = "";
-            Inlines.Clear();
-        }
-
-        public void UpdateInlines()
-        {
-            if (_inlinesPresenter == null)
-                return;
-
-            _inlinesPresenter.Inlines.Clear();
-            _inlinesPresenter.Inlines.AddRange(Inlines);
-        }
+        _inlinesPresenter.Inlines.Clear();
+        _inlinesPresenter.Inlines.AddRange(Inlines);
     }
 }

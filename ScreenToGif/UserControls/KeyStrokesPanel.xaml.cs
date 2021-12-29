@@ -1,12 +1,11 @@
-﻿using System.Windows.Controls;
+using System.Windows.Controls;
 
-namespace ScreenToGif.UserControls
+namespace ScreenToGif.UserControls;
+
+public partial class KeyStrokesPanel : UserControl
 {
-    public partial class KeyStrokesPanel : UserControl
+    public KeyStrokesPanel()
     {
-        public KeyStrokesPanel()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }
