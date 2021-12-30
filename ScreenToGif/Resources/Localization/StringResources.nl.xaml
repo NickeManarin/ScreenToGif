@@ -109,6 +109,7 @@
     <s:String x:Key="S.Command.DeleteNext">Verwijder alle volgende frames</s:String>
     <s:String x:Key="S.Command.RemoveDuplicates">Duplicaten verwijderen</s:String>
     <s:String x:Key="S.Command.Reduce">Verminder het aantal frames</s:String>
+    <s:String x:Key="S.Command.SmoothLoop">Een vloeiende lus aanmaken</s:String>
     <s:String x:Key="S.Command.Reverse">Animatie omkeren</s:String>
     <s:String x:Key="S.Command.Yoyo">Laat de animatie vooruit en achteruit gaan</s:String>
     <s:String x:Key="S.Command.MoveLeft">Verplaats het geselecteerde frame naar links</s:String>
@@ -164,6 +165,7 @@
     <s:String x:Key="S.Updater.Header">Er is een nieuwe update beschikbaar</s:String>
     <s:String x:Key="S.Updater.NewRelease">Nieuwe uitgave!</s:String>
     <s:String x:Key="S.Updater.NewRelease.Info">Nieuwe uitgave beschikbaar, Versie {0}!&#10;Klik hier voor meer details.</s:String>
+    <s:String x:Key="S.Updater.NoNewRelease.Info">Het lijkt erop dat jouw systeem niet langer wordt ondersteund of dat er iets is veranderd in het updatesysteem. Probeer het handmatig te downloaden van de website.</s:String>
     <s:String x:Key="S.Updater.Version">Versie</s:String>
     <s:String x:Key="S.Updater.Portable">Portable</s:String>
     <s:String x:Key="S.Updater.Installer">Installatieprogramma</s:String>
@@ -200,9 +202,7 @@
     <s:String x:Key="S.Options.Other">Overige</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Header">Geen sneltoets voor het volgen van de cursor</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Message">Om de functie voor het volgen van de muiscursor te gebruiken, moet je een sneltoets instellen om deze indien nodig te wisselen.</s:String>
-    <s:String x:Key="S.Options.Warning.DesktopDuplication.Header">Ontbrekende afhankelijkheden voor schermopname</s:String>
-    <s:String x:Key="S.Options.Warning.DesktopDuplication.Message">Om het scherm vast te leggen met de Desktop Duplication API, moet je de SharpDx-bibliotheken downloaden.</s:String>
-    
+
     <!--Options • Application-->
     <s:String x:Key="S.Options.App.Startup">Opstarten</s:String>
     <s:String x:Key="S.Options.App.Startup.Mode.Manual">Handmatig&#10;starten</s:String>
@@ -583,9 +583,6 @@
     <s:String x:Key="S.Options.Extras.GifskiLocation.Select">Locatie van Gifski selecteren</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.File">Gifski-bibliotheek</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.Invalid">Het pad van Gifski bevat een of meer ongeldige tekens. Selecteer de juiste locatie van het bestand.</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation">SharpDx-map (SharpDX.dll, SharpDX.Direct3D11.dll en SharpDX.DXGI.dll)</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation.Select">Selecteer de locatie van de SharpDx-bibliotheken</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation.Invalid">Het pad voor de SharpDx-bibliotheken bevat een of meer ongeldige tekens. Selecteer alstublieft een geldige map voor die bibliotheken.</s:String>
     <s:String x:Key="S.Options.Extras.License.Ffmpeg">FFmpeg licentie</s:String>
     <s:String x:Key="S.Options.Extras.License.Gifski">Gifski licentie</s:String>
     <s:String x:Key="S.Options.Extras.License.SharpDx">SharpDx-licentie</s:String>
@@ -692,8 +689,7 @@
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">Het was niet mogelijk om het scherm vast te leggen. De opnamemethode heeft na 5 pogingen geen frame geretourneerd.</s:String>
     <s:String x:Key="S.Recorder.Warning.StartPauseNotPossible">Het vastleggen/pauzeren van het scherm was niet mogelijk</s:String>
     <s:String x:Key="S.Recorder.Warning.Windows8">Windows 8 of nieuwer is vereist om het scherm vast te leggen met de Desktop Duplication API.</s:String>
-    <s:String x:Key="S.Recorder.Warning.MissingSharpDx">De SharpDx-bibliotheken zijn vereist om het scherm vast te leggen met de Desktop Duplication API. Ga naar Opties > Extra's om het te downloaden.</s:String>
-    
+
     <!--New recorder-->
     <s:String x:Key="S.Recorder.Area">Gebied</s:String>
     <s:String x:Key="S.Recorder.Area.Select">Selecteer een gebied</s:String>
@@ -1028,6 +1024,7 @@
     <s:String x:Key="S.Editor.Edit.Delete">Verwijderen</s:String>
     <s:String x:Key="S.Editor.Edit.Frames.Duplicates">Duplicaten&#10;verwijderen</s:String>
     <s:String x:Key="S.Editor.Edit.Frames.Reduce">Frames&#10;verminderen</s:String>
+    <s:String x:Key="S.Editor.Edit.Frames.SmoothLoop">Vloeiende&#x0d;Lus</s:String>
     <s:String x:Key="S.Editor.Edit.DeletePrevious">Alles hiervoor verwijderen</s:String>
     <s:String x:Key="S.Editor.Edit.DeleteNext">Alles hierna verwijderen</s:String>
     
@@ -1158,6 +1155,8 @@
     <s:String x:Key="S.Editor.ApplyingTransition">Overgangseffect toepassen</s:String>
     <s:String x:Key="S.Editor.PreparingSaving">Opslaan voorbereiden</s:String>
     <s:String x:Key="S.Editor.CancelDiscard">Annuleer het laden en gooi het project weg.</s:String>
+    <s:String x:Key="S.Editor.FindingLoop">De perfecte lus zoeken</s:String>
+    <s:String x:Key="S.Editor.DiscardingLoop">Ongebruikte frames verwijderen</s:String>
 
     <!--Editor • Frame list-->
     <s:String x:Key="S.Editor.List.Frame">Frame:</s:String>
@@ -1297,6 +1296,16 @@
     <s:String x:Key="S.RemoveDuplicates.Delay.Average">Gemiddelde gebruiken</s:String>
     <s:String x:Key="S.RemoveDuplicates.Delay.Sum">Totaal gebruiken</s:String>
     <s:String x:Key="S.RemoveDuplicates.Info">Deze actie analyseert elk frame (pixel per pixel) en verwijderd alle frames die op zijn minst {0} % gelijk zijn aan frame ervoor of erna.&#10;U kunt kiezen of de vertraging van de frames (duur van de vertoningen) aangepast moet worden.</s:String>
+
+    <!--Editor • Smooth Loop-->
+    <s:String x:Key="S.SmoothLoop.Header">Vloeiende lus maken</s:String>
+    <s:String x:Key="S.SmoothLoop.StartThreshold">Eerste negeren:</s:String>
+    <s:String x:Key="S.SmoothLoop.From">Vergelijken met:</s:String>
+    <s:String x:Key="S.SmoothLoop.From.Last">Einde</s:String>
+    <s:String x:Key="S.SmoothLoop.From.First">Begin</s:String>
+    <s:String x:Key="S.SmoothLoop.Info">Probeert een frame te vinden dat minstens {0}% lijkt op het startframe en verwijdert alle latere frames.&#x0d; Je kunt kiezen of je enkele initiële frames wilt negeren en de vergelijking vanaf het begin (na de drempel) of het einde wilt starten.</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.Threshold">Het aantal te negeren frames moet kleiner zijn dan het totale aantal frames.</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.NoLoopFound">Met de geselecteerde instellingen was het niet mogelijk om een vloeiende lus te maken.</s:String>
     
     <!--Editor • Captions-->
     <s:String x:Key="S.Caption.Text">Tekst</s:String>
