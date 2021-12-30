@@ -4,13 +4,15 @@ This is the current project of ScreenToGif.
 
 _VS 2022 and .NET 6 or newer required._
 
-## What's new? (Version 2.35.2)
+## What's new? (Version 2.35.3)
 
-• Just bug fixes.  
+• Updated the Danish and Dutch localizations.  
 
 ### Fixed:
 
-♦ The install process was failling if you had SharpDx set up (error 2711).  
+♦ The ARM64 variant was not loading correctly.  
+♦ It was not possible to export the app as a project.  
+♦ The region CLI parameter was being ignored when not set to open a screen recorder.  
 
 ### Known Bugs:
   
