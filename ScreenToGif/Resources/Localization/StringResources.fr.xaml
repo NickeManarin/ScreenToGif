@@ -19,14 +19,14 @@
     <s:String x:Key="S.Title">Titre</s:String>
     <s:String x:Key="S.Description">Description</s:String>
     <s:String x:Key="S.SelectColor">Cliquez ici pour choisir la couleur</s:String>
-    <s:String x:Key="S.Documentation">Cliquer afin de parcourir la documentation.</s:String>
+    <!--<s:String x:Key="S.Documentation">Click to navigate to the documentation.</s:String>-->
     <s:String x:Key="S.Suppress">Supprimer</s:String>
     <s:String x:Key="S.Preview">Aperçu</s:String>
     <s:String x:Key="S.Size">Taille</s:String>
     <s:String x:Key="S.Background">Fond</s:String>
-    <s:String x:Key="S.Color">Couleur :</s:String>
+    <s:String x:Key="S.Color">Couleur:</s:String>
     <s:String x:Key="S.Delay">Délai</s:String>
-    <s:String x:Key="S.DelayMs">Délai (ms) :</s:String>
+    <s:String x:Key="S.DelayMs">Délai (ms):</s:String>
     <s:String x:Key="S.ValueMs">Valeur - + (ms):</s:String>
     <s:String x:Key="S.ScaleValue">Valeur d'échelle:</s:String>
     <s:String x:Key="S.Margin">Marge:</s:String>
@@ -49,7 +49,7 @@ Voulez-vous ouvrir la page web pour la télécharger?</s:String>
     <!--<s:String x:Key="S.SavingSettings.Instruction">Would you like to try to save it again?</s:String>-->
     <!--<s:String x:Key="S.SavingSettings.Message">Looks like ScreenToGif does not have enough privileges to save the settings to the disk.&#10;&#10;Would you like to try again, but this time using administrative privileges?</s:String>-->
     
-    <s:String x:Key="S.Exiting.Title">Quitter ScreenToGif</s:String>
+    <s:String x:Key="S.Exiting.Title">Sortir de ScreenToGif</s:String>
     <s:String x:Key="S.Exiting.Instruction">Êtes-vous sûr de vouloir quitter?</s:String>
     <s:String x:Key="S.Exiting.Message">Toutes les fenêtres seront fermées et l'icône de la barre des tâches sera supprimée.</s:String>
 
@@ -62,8 +62,8 @@ Voulez-vous ouvrir la page web pour la télécharger?</s:String>
     <!--<s:String x:Key="S.Warning.Graphics.Switch">Open Windows Settings</s:String>-->
     
     <!--Keys-->
-    <s:String x:Key="S.Keys.Enter">Entrée</s:String>
-    <s:String x:Key="S.Keys.Esc">Echap</s:String>
+    <!--<s:String x:Key="S.Keys.Enter">Enter</s:String>  -->
+    <!--<s:String x:Key="S.Keys.Esc">Esc</s:String>  -->
     <s:String x:Key="S.Keys.Space">Espace</s:String>
 
     <!--Mouse-->
@@ -78,7 +78,7 @@ Voulez-vous ouvrir la page web pour la télécharger?</s:String>
     <!--Commands-->
     <s:String x:Key="S.Command.NewRecording">Nouvel enregistrement d'écran</s:String>
     <s:String x:Key="S.Command.NewWebcamRecording">Nouvel enregistrement webcam</s:String>
-    <s:String x:Key="S.Command.NewBoardRecording">Nouvel enregistrement de tableau</s:String>
+    <s:String x:Key="S.Command.NewBoardRecording">Nouvel enregistrement planche</s:String>
     <s:String x:Key="S.Command.NewAnimation">Nouvelle animation</s:String>
     <s:String x:Key="S.Command.InsertRecording">Insérer un enregistrement d'écran</s:String>
     <s:String x:Key="S.Command.InsertWebcamRecording">Insérer enregistrement de la webcam</s:String>
@@ -87,15 +87,15 @@ Voulez-vous ouvrir la page web pour la télécharger?</s:String>
     <s:String x:Key="S.Command.SaveAs">Sauvegarder sous…</s:String>
     <s:String x:Key="S.Command.Load">Charger des fichiers (images, vidéos et projets)</s:String>
     <s:String x:Key="S.Command.LoadRecent">Charger les projets récents</s:String>
-    <s:String x:Key="S.Command.DiscardProject">Annuler le projet en cours</s:String>
-    <s:String x:Key="S.Command.OverrideDelay">Annuler le retard des images</s:String>
+    <s:String x:Key="S.Command.DiscardProject">Jeter projet en cours</s:String>
+    <s:String x:Key="S.Command.OverrideDelay">Annuler retard des images</s:String>
     <s:String x:Key="S.Command.IncreaseDecreaseDelay">Augmenter/diminuer le retard des images</s:String>
     <s:String x:Key="S.Command.ScaleDelay">Délai d'échelle des images</s:String>
     <s:String x:Key="S.Command.Zoom100">Définir le zoom à 100%</s:String>
-    <s:String x:Key="S.Command.SizeToContent">Ajuster la fenêtre à la taille du cadre</s:String>
-    <s:String x:Key="S.Command.FitImage">Adapter l'image à la taille de la fenêtre disponible</s:String>
-    <s:String x:Key="S.Command.FirstFrame">Sélectionnez la première image</s:String>
-    <s:String x:Key="S.Command.PreviousFrame">Sélectionner l'image précédente</s:String>
+    <s:String x:Key="S.Command.SizeToContent">Ajustez la fenêtre à la taille du cadre</s:String>
+    <s:String x:Key="S.Command.FitImage">Adapter image à taille de la fenêtre disponible</s:String>
+    <s:String x:Key="S.Command.FirstFrame">Sélectionnez première image</s:String>
+    <s:String x:Key="S.Command.PreviousFrame">Sélectionnez l'image précédente</s:String>
     <s:String x:Key="S.Command.Play">Jouer l'animation</s:String>
     <s:String x:Key="S.Command.NextFrame">Sélectionnez l'image suivante</s:String>
     <s:String x:Key="S.Command.LastFrame">Sélectionnez la dernière image</s:String>
@@ -105,9 +105,9 @@ Voulez-vous ouvrir la page web pour la télécharger?</s:String>
     <s:String x:Key="S.Command.Copy">Copiez les images sélectionnées et stockez-les vers presse-papiers</s:String>
     <s:String x:Key="S.Command.Cut">Coupez les images sélectionnées et stockez-les dans le presse-papiers</s:String>
     <s:String x:Key="S.Command.Paste">Coller les images du presse-papiers</s:String>
-    <s:String x:Key="S.Command.Delete">Supprimer toutes les images sélectionnées</s:String>
-    <s:String x:Key="S.Command.DeletePrevious">Supprimer toutes les images précédentes</s:String>
-    <s:String x:Key="S.Command.DeleteNext">Supprimer toutes les  images suivantes</s:String>
+    <s:String x:Key="S.Command.Delete">Supprimer toutes images sélectionnées</s:String>
+    <s:String x:Key="S.Command.DeletePrevious">Supprimer toutes images précédentes</s:String>
+    <s:String x:Key="S.Command.DeleteNext">Supprimer toutes images suivantes</s:String>
     <s:String x:Key="S.Command.RemoveDuplicates">Retirer les doublons</s:String>
     <s:String x:Key="S.Command.Reduce">Réduisez le nombre d'images</s:String>
     <!--<s:String x:Key="S.Command.SmoothLoop">Create a smooth loop</s:String>-->
@@ -119,16 +119,16 @@ Voulez-vous ouvrir la page web pour la télécharger?</s:String>
     <s:String x:Key="S.Command.Crop">Recadrer toutes les images</s:String>
     <s:String x:Key="S.Command.FlipRotate">Retournez ou faites pivoter les images</s:String>
     <s:String x:Key="S.Command.Caption">Ajouter une légende</s:String>
-    <s:String x:Key="S.Command.FreeText">Ajouter un texte libre</s:String>
+    <s:String x:Key="S.Command.FreeText">Ajouter un texte flottant gratuit</s:String>
     <s:String x:Key="S.Command.TitleFrame">Ajouter un cadre avec un titre</s:String>
     <s:String x:Key="S.Command.KeyStrokes">Insère les touches pressées pendant l'enregistrement</s:String>
-    <s:String x:Key="S.Command.FreeDrawing">Dessinez des formes libres</s:String>
+    <s:String x:Key="S.Command.FreeDrawing">Dessinez des formulaires gratuits</s:String>
     <s:String x:Key="S.Command.Shapes">Ajouter des formes</s:String>
     <s:String x:Key="S.Command.MouseClicks">Clics de souris</s:String>
     <s:String x:Key="S.Command.Watermark">Sélectionnez une image et ajoutez-la en filigrane</s:String>
     <s:String x:Key="S.Command.Border">Ajouter Bordures</s:String>
     <s:String x:Key="S.Command.Shadow">Ajouter une ombre portée</s:String>
-    <s:String x:Key="S.Command.Obfuscate">Masquer les parties sensibles sur vos images</s:String>
+    <s:String x:Key="S.Command.Obfuscate">Masquer parties sensibles sur vos images</s:String>
     <s:String x:Key="S.Command.Cinemagraph">Utilisez les outils de dessin pour sélectionner les parties de l'image qui ne doivent pas rester statiques pendant l'animation</s:String>
     <s:String x:Key="S.Command.Progress">Barre de progression ou texte avec détails de lecture</s:String>
     <s:String x:Key="S.Command.SelectAll">Sélectionner toutes les images</s:String>
@@ -138,13 +138,13 @@ Voulez-vous ouvrir la page web pour la télécharger?</s:String>
     <s:String x:Key="S.Command.Fade">Transition en fondu</s:String>
     <s:String x:Key="S.Command.Slide">Transition des diapositives</s:String>
     <s:String x:Key="S.Command.ClearAll">Effacer tous les encodages complétés</s:String>
-    <s:String x:Key="S.Command.MoveUp">Vers le haut</s:String>
+    <s:String x:Key="S.Command.MoveUp">Vers lhaut</s:String>
     <s:String x:Key="S.Command.MoveDown">Descendre</s:String>
     <s:String x:Key="S.Command.Add">Ajouter</s:String>
     <s:String x:Key="S.Command.Open">Ouvrir</s:String>
-    <s:String x:Key="S.Command.Edit">Éditer l'élément sélectionné</s:String>
+    <s:String x:Key="S.Command.Edit">Éditer élément sélectionné</s:String>
     <s:String x:Key="S.Command.Save">Sauvegarder élément sélectionné</s:String>
-    <s:String x:Key="S.Command.Remove">Retirer l'élément sélectionné</s:String>
+    <s:String x:Key="S.Command.Remove">Retirer élément sélectionné</s:String>
     <!--<s:String x:Key="S.Command.ViewHistory">View history</s:String>-->
     
     <!--StartUp-->
@@ -185,9 +185,9 @@ Souhaitez-vous ouvrir le navigateur pour télécharger?</s:String>
     <!--<s:String x:Key="S.Updater.Warning.Encoding">You need to wait for all encodings to finish before updating.</s:String>-->
     
     <!--Downloader-->
-    <s:String x:Key="S.Downloader.Title">ScreenToGif - Téléchargement</s:String>
-    <s:String x:Key="S.Downloader.Header">Téléchargement</s:String>
-    <s:String x:Key="S.Downloader.Size">{0} sur {1}</s:String>
+    <!--<s:String x:Key="S.Downloader.Title">ScreenToGif - Downloader</s:String>-->
+    <!--<s:String x:Key="S.Downloader.Header">Downloader</s:String>-->
+    <!--<s:String x:Key="S.Downloader.Size">{0} of {1}</s:String>-->
     
     <!--Options-->
     <s:String x:Key="S.Options.Title">ScreenToGif - Options</s:String>
@@ -483,7 +483,7 @@ Vous pourrez décider si vous souhaitez conserver les projets récents ou non.</
     <s:String x:Key="S.Options.Storage.SettingsInfo">• Modèle de chargement des paramètres: Par défaut ◄ AppData ◄ Local. 
  • Si aucun fichier de paramètres n'est présent dans le dossier 'Local', l'application effectue une recherche dans le dossier contenant les 'données d'applications' (AppData), 'Par défaut' est utilisé si aucun fichier de paramètres n'est présent. 
  • Si il n'y a pas de paramètres locaux, tous les paramètres sont enregistrés dans le dossier contenant les 'données d'applications'.</s:String>
-    <s:String x:Key="S.Options.Storage.DeleteEverything">Supprimer tous les fichiers du cache à la fermeture de l'application.</s:String>
+    <!--<s:String x:Key="S.Options.Storage.DeleteEverything">Delete all files from cache when closing the app.</s:String>-->
     <!--<s:String x:Key="S.Options.Storage.AskDeleteEverything">Ask me before deleting all files from cache.</s:String>-->
     <s:String x:Key="S.Options.Storage.AutomaticRemoval">Supprime automatiquement les anciens projets.</s:String>
     <s:String x:Key="S.Options.Storage.AutomaticRemoval.Info">Lors de l'ouverture de l'application, une tâche en arrière-plan effacera tous les projets fermés plus anciens que la durée configurée.</s:String>
@@ -493,7 +493,7 @@ Vous pourrez décider si vous souhaitez conserver les projets récents ou non.</
     <s:String x:Key="S.Options.Storage.Cache.Title">ScreenToGif - Effacer le cache</s:String>
     <s:String x:Key="S.Options.Storage.Cache.Header">Voulez-vous effacer le dossier cache?</s:String>
     <s:String x:Key="S.Options.Storage.Cache.Info">Lorsque vous créez un enregistrement ou ouvrez quelque chose à éditer, un projet est créé et stocké dans dossier cache.</s:String>
-    <s:String x:Key="S.Options.Storage.Cache.Question">Souhaitez-vous retirer ces projets du dossier de cache ?</s:String>
+    <s:String x:Key="S.Options.Storage.Cache.Question">Souhaitez-vous retirer ces projets du dossier cache?</s:String>
     <s:String x:Key="S.Options.Storage.Cache.IgnoreRecent">Ne pas retirer les projets récents.</s:String>
     <s:String x:Key="S.Options.Storage.Cache.IgnoreRecent.Yes">(Seuls projets datant de plus de {0} jours, qui ne sont pas utilisés actuellement, seront retirés)</s:String>
     <s:String x:Key="S.Options.Storage.Cache.IgnoreRecent.No">(Tous projets, qui ne sont pas actuellement utilisés, seront retirés)</s:String>
@@ -510,42 +510,42 @@ Vous pourrez décider si vous souhaitez conserver les projets récents ou non.</
     <s:String x:Key="S.Options.Upload.Proxy.User">Nom d'utilisateur:</s:String>
     <s:String x:Key="S.Options.Upload.Proxy.Password">Mot de passe:</s:String>
     
-    <s:String x:Key="S.Options.Upload.Presets">Téléverser les présélections</s:String>
-    <s:String x:Key="S.Options.Upload.Presets.Service">Service</s:String>
-    <s:String x:Key="S.Options.Upload.Presets.Title">Titre</s:String>
-    <s:String x:Key="S.Options.Upload.Presets.Description">Description</s:String>
-    <s:String x:Key="S.Options.Upload.Presets.Enabled">Activé</s:String>
+    <!--<s:String x:Key="S.Options.Upload.Presets">Upload presets</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Presets.Service">Service</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Presets.Title">Title</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Presets.Description">Description</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Presets.Enabled">Enabled</s:String>-->
     
      <!--Options • Upload > Preset-->
-    <s:String x:Key="S.Options.Upload.Preset.Title">Service de téléversement</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Select">Sélectionner un service</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Select.Info">Sélectionner l'un des service de téléversement ci-dessus</s:String>
+    <!--<s:String x:Key="S.Options.Upload.Preset.Title">Upload Service</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Select">Select a service</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Select.Info">Select an upload service above</s:String>-->
     <!--<s:String x:Key="S.Options.Upload.Preset.Custom">Custom</s:String>-->
     <!--<s:String x:Key="S.Options.Upload.Preset.Enable">Enable this preset.</s:String>-->
     
-    <s:String x:Key="S.Options.Upload.Preset.Details">Détails</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Name">Nom :</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Description">Description :</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Mode">Mode :</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Mode.Anonymous">Anonyme</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Mode.Authenticated">Authentifié</s:String>
+    <!--<s:String x:Key="S.Options.Upload.Preset.Details">Details</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Name">Name:</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Description">Description:</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Mode">Mode:</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Mode.Anonymous">Anonymous</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Mode.Authenticated">Authenticated</s:String>-->
     <!--<s:String x:Key="S.Options.Upload.Preset.Authorization">Authorization</s:String>-->
     <!--<s:String x:Key="S.Options.Upload.Preset.GetToken">Get token</s:String>-->
-    <s:String x:Key="S.Options.Upload.Preset.Token">Collez le jeton OAuth ici</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Username">Nom d'utilisateur :</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Password">Mot de passe :</s:String>
+    <!--<s:String x:Key="S.Options.Upload.Preset.Token">Paste the OAuth token here</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Username">Username:</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Password">Password:</s:String>-->
     <s:String x:Key="S.Options.Upload.Preset.Authorize">Autoriser</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.NotStored">Le nom d'utilisateur et le mot de passe ne seront pas conservés.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Options">Options</s:String>
+    <!--<s:String x:Key="S.Options.Upload.Preset.NotStored">The username and password will not be stored.</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Options">Options</s:String>-->
     <s:String x:Key="S.Options.Upload.Preset.Direct">Utilisez des liens directs.</s:String>
     <!--<s:String x:Key="S.Options.Upload.Preset.Album">Album</s:String>-->
-    <s:String x:Key="S.Options.Upload.Preset.Warning.Title">Vous devez donner un nom unique à cette présélection.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Warning.Repeated">Le nom est déjà utilisé par une autre présélection de téléversement.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Warning.Authenticate">En mode authentifié, vous devez terminer le processus d'authentification.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Warning.Credentials">Vous devez fournir votre nom d'utilisateur et votre mot de passe pour autoriser cette application.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Warning.GetToken">Il n'a pas été possible d'obtenir le jeton d'autorisation.</s:String>
+    <!--<s:String x:Key="S.Options.Upload.Preset.Warning.Title">You must give this preset an unique name.</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Warning.Repeated">The name is already in use by another upload preset.</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Warning.Authenticate">When in authenticated mode, you must finish the authentication process.</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Warning.Credentials">You must provide your username and password to authorize this app.</s:String>-->
+    <!--<s:String x:Key="S.Options.Upload.Preset.Warning.GetToken">It was not possible to get the authorization token.</s:String>-->
     <s:String x:Key="S.Options.Upload.Preset.Warning.Token">Pour autoriser cette application, vous devez fournir le jeton d'autorisation.</s:String>
-    <s:String x:Key="S.Options.Upload.Preset.Warning.AuthError">L'autorisation a échoué. Vérifiez si tout est correct et réessayez dans quelques secondes.</s:String>
+    <!--<s:String x:Key="S.Options.Upload.Preset.Warning.AuthError">Authorization failed. Check if everything is right and try again in a few seconds.</s:String>-->
     <s:String x:Key="S.Options.Upload.Preset.Warning.AlbumLoad">Impossible de charger la liste des albums.</s:String>
     <!--<s:String x:Key="S.Options.Upload.Preset.Info.Authorized">Authorization completed.</s:String>-->
     <s:String x:Key="S.Options.Upload.Preset.Info.NotAuthorized">Non autorisé.</s:String>
@@ -571,19 +571,19 @@ Vous pourrez décider si vous souhaitez conserver les projets récents ou non.</
     <!--<s:String x:Key="S.Options.Upload.Pick.Details.Info">Upload details</s:String>-->
     <!--<s:String x:Key="S.Options.Upload.Pick.Details.Title">Title:</s:String>-->
     <!--<s:String x:Key="S.Options.Upload.Pick.Details.Description">Description:</s:String>-->
-    <s:String x:Key="S.Options.Upload.Pick.Details.Tags">Etiquettes :</s:String>
+    <!--<s:String x:Key="S.Options.Upload.Pick.Details.Tags">Tags:</s:String>-->
     <!--<s:String x:Key="S.Options.Upload.Pick.Details.Tags.Info">Separate tags by using a semi-colon ( ; )</s:String>-->
     <!--<s:String x:Key="S.Options.Upload.Pick.Details.Private">Only display for those accessing via direct link.</s:String>-->
     
     <!--Options • Upload > History-->
     <!--<s:String x:Key="S.Options.Upload.History.Title">Upload history</s:String>-->
-    <s:String x:Key="S.Options.Upload.History.Date">Date</s:String>
+    <!--<s:String x:Key="S.Options.Upload.History.Date">Date</s:String>-->
     <!--<s:String x:Key="S.Options.Upload.History.Preset">Preset</s:String>-->
-    <s:String x:Key="S.Options.Upload.History.Successful">Réussi ?</s:String>
+    <!--<s:String x:Key="S.Options.Upload.History.Successful">Successful?</s:String>-->
     <!--<s:String x:Key="S.Options.Upload.History.Remove">Delete history entry.</s:String>-->
-    <s:String x:Key="S.Options.Upload.History.Detail.Link">Lien :</s:String>
+    <!--<s:String x:Key="S.Options.Upload.History.Detail.Link">Link:</s:String>-->
     <!--<s:String x:Key="S.Options.Upload.History.Detail.LowerQuality">Lower quality:</s:String>-->
-    <s:String x:Key="S.Options.Upload.History.Detail.DeleteLink">Lien de suppression :</s:String>
+    <!--<s:String x:Key="S.Options.Upload.History.Detail.DeleteLink">Deletion link:</s:String>-->
     <!--<s:String x:Key="S.Options.Upload.History.Delete.Instruction">Are you sure that you want to delete the history entry?</s:String>-->
     <!--<s:String x:Key="S.Options.Upload.History.Delete.Message">This action cannot be undone.&#10;&#10;Would you like to delete the selected history entry?</s:String>-->
     
@@ -631,7 +631,7 @@ Téléchargé</s:String>
     
     <!--Options • About-->
     <s:String x:Key="S.Options.About.Version">Version:</s:String>
-    <s:String x:Key="S.Options.About.UpdateCheck">Vérifier la présence de mises à jour</s:String>
+    <!--<s:String x:Key="S.Options.About.UpdateCheck">Check for Updates</s:String>-->
     <!--<s:String x:Key="S.Options.About.UpdateCheck.Nothing">You already have the latest version.</s:String>-->
     <s:String x:Key="S.Options.About.Author">Auteur: Nicke Manarin</s:String>
     <s:String x:Key="S.Options.About.StoreVersion">Version Microsoft Store. Certaines fonctionnalités sont désactivées en raison de stratégies appliquées.</s:String>
@@ -751,7 +751,7 @@ Téléchargé</s:String>
     <!--Board recorder-->
     <s:String x:Key="S.Board.Title">ScreenToGif - Planche à dessin</s:String>
     <s:String x:Key="S.Board.AutoRecord">Enregistrement automatique</s:String>
-    <s:String x:Key="S.Board.AutoRecordToolTip">Activer l'enregistrement pendant le dessin.</s:String>
+    <s:String x:Key="S.Board.AutoRecordToolTip">Activer l'enregistrement pendant le dessin</s:String>
     <s:String x:Key="S.Board.CtrlHold">Ctrl [Maintenir]</s:String>
     
     <!--Color selector-->
@@ -783,29 +783,29 @@ couleurs de votre écran.</s:String>
     <!--Presets-->
     <!--<s:String x:Key="S.Preset.Title">Preset</s:String>-->
     <!--<s:String x:Key="S.Preset.Encoder">Encoder</s:String>-->
-    <s:String x:Key="S.Preset.Name">Nom</s:String>
+    <!--<s:String x:Key="S.Preset.Name">Name</s:String>-->
     <!--<s:String x:Key="S.Preset.Description">Description</s:String>-->
-    <s:String x:Key="S.Preset.Other">Autre</s:String>
+    <!--<s:String x:Key="S.Preset.Other">Other</s:String>-->
     <!--<s:String x:Key="S.Preset.AutoSave">Automatically save when an option gets modified.</s:String>-->
     <!--<s:String x:Key="S.Preset.Info.Manual">All changes to this preset settings (encoding and exporting settings) need to be saved manually by pressing the save button.</s:String>-->
     <!--<s:String x:Key="S.Preset.Info.Automatic">All changes to this preset settings (encoding and exporting settings) will be saved automatically.</s:String>-->
     <!--<s:String x:Key="S.Preset.Warning.Readonly">Some of the properties of a default preset are read-only.</s:String>-->
-    <s:String x:Key="S.Preset.Warning.Name">Vous devez donner un nom à cette présélection.</s:String>
+    <!--<s:String x:Key="S.Preset.Warning.Name">You must give a name to this preset.</s:String>-->
     <!--<s:String x:Key="S.Preset.Warning.SameName">There's already a preset with the same name.</s:String>-->
     
     <!--Presets • Listing-->
-    <s:String x:Key="S.Preset.Autosave">Sauvegarde automatique</s:String>
+    <!--<s:String x:Key="S.Preset.Autosave">Autosaves</s:String>-->
     <!--<s:String x:Key="S.Preset.Autosave.Info">Changes to this preset are automatically saved.</s:String>-->
-    <s:String x:Key="S.Preset.Default.Title">Par défaut ({0})</s:String>
+    <!--<s:String x:Key="S.Preset.Default.Title">Default ({0})</s:String>-->
     <!--<s:String x:Key="S.Preset.Default.Description">Default preset for the encoder.</s:String>-->
-    <s:String x:Key="S.Preset.Twitter.Title">Pour Twitter ({0})</s:String>
+    <!--<s:String x:Key="S.Preset.Twitter.Title">For Twitter ({0})</s:String>-->
     <!--<s:String x:Key="S.Preset.Twitter.Description">Respects Twitter upload limits (except size and resolution).</s:String>-->
-    <s:String x:Key="S.Preset.Hevc.Title">HEVC ({0})</s:String>
+    <!--<s:String x:Key="S.Preset.Hevc.Title">HEVC ({0})</s:String>-->
     <!--<s:String x:Key="S.Preset.Hevc.Description">High Efficiency Video Coding.</s:String>-->
     <!--<s:String x:Key="S.Preset.Vp8.Title">VP8 ({0})</s:String>-->
     <!--<s:String x:Key="S.Preset.Vp8.Description">Older and better known codec.</s:String>-->
     <!--<s:String x:Key="S.Preset.Filename.Animation">Animation</s:String>-->
-    <s:String x:Key="S.Preset.Filename.Video">Vidéo</s:String>
+    <!--<s:String x:Key="S.Preset.Filename.Video">Video</s:String>-->
     <!--<s:String x:Key="S.Preset.Filename.Image">Image</s:String>-->
     <!--<s:String x:Key="S.Preset.Filename.Project">Project</s:String>-->
 
@@ -825,14 +825,14 @@ couleurs de votre écran.</s:String>
     <!--<s:String x:Key="S.Preset.Gif.Gifski.Low.Description">Lower image quality, but with a smaller file size.</s:String>-->
     <!--<s:String x:Key="S.Preset.Gif.Gifski.Fast.Title">Gifski - Lower quality and faster encoding</s:String>-->
     <!--<s:String x:Key="S.Preset.Gif.Gifski.Fast.Description">Even lower image quality, with a faster encoding, but with a smaller file size.</s:String>-->
-    <s:String x:Key="S.Preset.Gif.System.Low.Title">Système - Qualité basse</s:String>
+    <!--<s:String x:Key="S.Preset.Gif.System.Low.Title">System - Low quality</s:String>-->
     <!--<s:String x:Key="S.Preset.Gif.System.Low.Description">Low quality but faster encoding.</s:String>-->
     
     <!--<s:String x:Key="S.Preset.Apng.Ffmpeg.High.Title">FFmpeg - High quality</s:String>-->
     <!--<s:String x:Key="S.Preset.Apng.Ffmpeg.High.Description">High image quality and small file size, but slower encoding.</s:String>-->
     <!--<s:String x:Key="S.Preset.Apng.Ffmpeg.Low.Title">FFmpeg - Lower quality</s:String>-->
     <!--<s:String x:Key="S.Preset.Apng.Ffmpeg.Low.Description">Lower image quality, small file size and faster encoding.</s:String>-->
-    <s:String x:Key="S.Preset.Webp.Ffmpeg.High.Title">Haute qualité</s:String>
+    <!--<s:String x:Key="S.Preset.Webp.Ffmpeg.High.Title">High quality</s:String>-->
     <!--<s:String x:Key="S.Preset.Webp.Ffmpeg.High.Description">High image quality and small file size.</s:String>-->
     
     <!--Insert frames-->
@@ -958,16 +958,16 @@ Si vous utilisez le MediaPlayer, vérifiez si la fonction Windows appelée 'Fonc
 
     <s:String x:Key="S.Editor.File.Apng">Png animé</s:String>
     <s:String x:Key="S.Editor.File.Gif">Animation Gif</s:String>
-    <s:String x:Key="S.Editor.File.Webp">Animation Webp</s:String>
+    <!--<s:String x:Key="S.Editor.File.Webp">Webp animation</s:String>-->
     
     <s:String x:Key="S.Editor.File.Avi">Vidéo Avi</s:String>
     <s:String x:Key="S.Editor.File.Mkv">Vidéo Matroska</s:String>
-    <s:String x:Key="S.Editor.File.Mov">Vidéo Mov</s:String>
+    <!--<s:String x:Key="S.Editor.File.Mov">Mov video</s:String>-->
     <s:String x:Key="S.Editor.File.Mp4">Vidéo Mp4</s:String>
     <s:String x:Key="S.Editor.File.Webm">Vidéo Webm</s:String>
     
-    <s:String x:Key="S.Editor.File.Image.Bmp">Image Bmp</s:String>
-    <s:String x:Key="S.Editor.File.Image.Jpeg">Image Jpeg</s:String>
+    <!--<s:String x:Key="S.Editor.File.Image.Bmp">Bmp image</s:String>-->
+    <!--<s:String x:Key="S.Editor.File.Image.Jpeg">Jpeg image</s:String>-->
     <s:String x:Key="S.Editor.File.Image.Png">Image Png, toutes images sélectionnées</s:String>
     <s:String x:Key="S.Editor.File.Image.Zip">Fichier Zip, toutes images sélectionnées</s:String>
     
@@ -1056,7 +1056,7 @@ il sera disponible dans le panneau 'Enregistrer sous' pour certains encodeurs.</
 les doublons</s:String>
     <s:String x:Key="S.Editor.Edit.Frames.Reduce">Réduire
 le nombre d'images</s:String>
-    <s:String x:Key="S.Editor.Edit.Frames.SmoothLoop">Boucle lisse</s:String>
+    <!--<s:String x:Key="S.Editor.Edit.Frames.SmoothLoop">Smooth&#x0d;Loop</s:String>-->
     <s:String x:Key="S.Editor.Edit.DeletePrevious">Supprimer toutes les précédentes</s:String>
     <s:String x:Key="S.Editor.Edit.DeleteNext">Supprimer toutes les suivantes</s:String>
     
@@ -1117,9 +1117,9 @@ souris</s:String>
     <s:String x:Key="S.Editor.Statistics.SelectedFrame">Image sélectionnée</s:String>
     
     <!--Editor • Messages-->
-    <s:String x:Key="S.Editor.Clipboard.InvalidCut.Title">Action Couper</s:String>
-    <s:String x:Key="S.Editor.Clipboard.InvalidCut.Instruction">Vous ne pouvez pas couper toutes les images.</s:String>
-    <s:String x:Key="S.Editor.Clipboard.InvalidCut.Message">L'enregistrement nécessite au moins une image.</s:String>
+    <s:String x:Key="S.Editor.Clipboard.InvalidCut.Title">Action coupé</s:String>
+    <s:String x:Key="S.Editor.Clipboard.InvalidCut.Instruction">Vous ne pouvez pas couper toutes les images</s:String>
+    <s:String x:Key="S.Editor.Clipboard.InvalidCut.Message">L'enregistrement nécessite au moins une image</s:String>
     <s:String x:Key="S.Editor.DeleteAll.Title">Supprimer tout</s:String>
     <s:String x:Key="S.Editor.DeleteAll.Instruction">Êtes-vous sûr de vouloir supprimer tous les images ?</s:String>
     <s:String x:Key="S.Editor.DeleteAll.Message">Cette action supprimera le projet actuellement ouvert et ne pourra pas être annulée. Voulez-vous continuer ?</s:String>
@@ -1145,15 +1145,15 @@ Vous pourrez annuler cette opération ultérieurement.</s:String>
     <s:String x:Key="S.Editor.DragDrop.InvalidProject.Instruction">Vous ne pouvez pas importer plusieurs projets à la fois</s:String>
     <s:String x:Key="S.Editor.DragDrop.InvalidProject.Message">Essayez de choisir un seul projet</s:String>
 
-    <s:String x:Key="S.Editor.Caption.WarningNoText">Il n'y a pas de texte à appliquer.</s:String>
-    <s:String x:Key="S.Editor.Caption.WarningSelection">Vous devez sélectionner au moins une image pour lui appliquer une légende.</s:String>
+    <s:String x:Key="S.Editor.Caption.WarningNoText">Il n'y a pas de texte à appliquer</s:String>
+    <s:String x:Key="S.Editor.Caption.WarningSelection">Vous devez sélectionner au moins une image pour lui appliquer une légende</s:String>
     <s:String x:Key="S.Editor.FreeText.WarningSelection">Vous devez sélectionner au moins une image auquelle appliquer le texte.</s:String>
     <s:String x:Key="S.Editor.TitleFrame.WarningSelection">Vous devez sélectionner au moins une image pour appliquer le titre de l'image précédente.</s:String>
-    <s:String x:Key="S.Editor.Border.WarningThickness">Vous devez sélectionner une épaisseur de bordure supérieure à zéro sur au moins un côté.</s:String>
+    <s:String x:Key="S.Editor.Border.WarningThickness">Vous devez sélectionner une épaisseur de bordure supérieure à zéro sur au moins un côté</s:String>
     <s:String x:Key="S.Editor.Border.WarningSelection">Vous devez sélectionner au moins une image pour appliquer la bordure</s:String>
     <s:String x:Key="S.Editor.Shadow.Warning.Invisible">L'opacité doit être supérieure à zéro afin de faire la différence dans le cadre.</s:String>
     <s:String x:Key="S.Editor.Shadow.Warning.Behind">Lorsque vous utilisez la profondeur d'ombre et le rayon de flou à zéro, cela ne fera aucune différence car il sera caché derrière le cadre.</s:String>
-    <s:String x:Key="S.Editor.Cinemagraph.WarningNoDrawing">Vous devez sélectionner au moins un pixel auquel appliquer la Cinémagraphie. Sélectionner les pixels en dessinant dessus.</s:String>
+    <s:String x:Key="S.Editor.Cinemagraph.WarningNoDrawing">Vous devez sélectionner au moins un pixel auquel appliquer le Cinemagraph. Sélectionnez les pixels en dessinant dessus.</s:String>
     <s:String x:Key="S.Editor.Fade.Title">Transition en fondu</s:String>
     <s:String x:Key="S.Editor.Fade.WarningSelection">Vous devez sélectionner au moins une image auquelle appliquer la transition de fondu.</s:String>
     <s:String x:Key="S.Editor.Fade.WarningColor">Une couleur entièrement transparente ne créera aucun effet sur cette transition.</s:String>
@@ -1190,9 +1190,9 @@ Vous pourrez annuler cette opération ultérieurement.</s:String>
     <s:String x:Key="S.Editor.ChangingDelay">Changer le délai</s:String>
     <s:String x:Key="S.Editor.ApplyingTransition">Appliquer un effet de transition</s:String>
     <s:String x:Key="S.Editor.PreparingSaving">Préparation de la sauvegarde</s:String>
-    <s:String x:Key="S.Editor.CancelDiscard">Annuler le chargement et abandonner le projet.</s:String>
-    <s:String x:Key="S.Editor.FindingLoop">Trouver la boucle parfaite</s:String>
-    <s:String x:Key="S.Editor.DiscardingLoop">Rejeter les images inutilisées dans la boucle</s:String>
+    <s:String x:Key="S.Editor.CancelDiscard">Annulez le chargement et abandonnez le projet.</s:String>
+    <!--<s:String x:Key="S.Editor.FindingLoop">Finding perfect loop</s:String>-->
+    <!--<s:String x:Key="S.Editor.DiscardingLoop">Discarding frames not used in loop</s:String>-->
 
     <!--Editor • Frame list-->
     <s:String x:Key="S.Editor.List.Frame">Image:</s:String>
@@ -1208,7 +1208,7 @@ Vous pourrez annuler cette opération ultérieurement.</s:String>
     <s:String x:Key="S.Context.RemoveFrames">Supprimer les images sélectionnées</s:String>
     <s:String x:Key="S.Context.NewRecording">Nouvelle capture d'écran</s:String>
     <s:String x:Key="S.Context.NewWebcamRecording">Nouvelle capture de la Webcam</s:String>
-    <s:String x:Key="S.Context.NewBoardRecording">Nouveau tableau à dessin</s:String>
+    <s:String x:Key="S.Context.NewBoardRecording">Nouvelle planche à dessin</s:String>
     <s:String x:Key="S.Context.NewBlankAnimation">Nouveau projet</s:String>
     <s:String x:Key="S.Context.NewFromMediaProject">Nouveau projet à partir d'un média ou d'un autre projet</s:String>
    
@@ -1267,7 +1267,7 @@ Vous pourrez annuler cette opération ultérieurement.</s:String>
     
     <!--Editor • Clipboard-->
     <s:String x:Key="S.Clipboard.Entries">Entrées du Presse-papiers</s:String>
-    <s:String x:Key="S.Clipboard.Entry">Entrée du Presse-papiers :</s:String>
+    <s:String x:Key="S.Clipboard.Entry">Entrée du Presse-papiers:</s:String>
     <s:String x:Key="S.Clipboard.Entry.Image">{0} image</s:String>
     <s:String x:Key="S.Clipboard.Entry.Images">{0} images</s:String>
     <s:String x:Key="S.Clipboard.Explore">Explorer le contenu</s:String>
@@ -1277,11 +1277,11 @@ Vous pourrez annuler cette opération ultérieurement.</s:String>
     <s:String x:Key="S.Clipboard.After">Après l'image sélectionnée</s:String>
     
     <!--Editor • Resize-->
-    <s:String x:Key="S.Resize.Difference">Différence</s:String>
+    <!--<s:String x:Key="S.Resize.Difference">Difference</s:String>-->
     <s:String x:Key="S.Resize.Dpi">Dpi</s:String>
     <s:String x:Key="S.Resize.Options">Options</s:String>
-    <s:String x:Key="S.Resize.Pixels">Pixels (px)</s:String>
-    <s:String x:Key="S.Resize.Percent">Pourcent (%)</s:String>
+    <!--<s:String x:Key="S.Resize.Pixels">Pixels (px)</s:String>-->
+    <!--<s:String x:Key="S.Resize.Percent">Percent (%)</s:String>-->
     <s:String x:Key="S.Resize.Dpi2">DPI:</s:String>
     <s:String x:Key="S.Resize.KeepAspect">Conserver les proportions</s:String>
     <s:String x:Key="S.Resize.ScalingQuality">Mise à l'échelle Qualité:</s:String>
@@ -1293,10 +1293,10 @@ Vous pourrez annuler cette opération ultérieurement.</s:String>
     
     <!--Editor • Crop-->
     <s:String x:Key="S.Crop.Points">Points</s:String>
-    <s:String x:Key="S.Crop.Top">En haut :</s:String>
-    <s:String x:Key="S.Crop.Left">À gauche :</s:String>
-    <s:String x:Key="S.Crop.Bottom">Bas :</s:String>
-    <s:String x:Key="S.Crop.Right">À droite :</s:String>
+    <s:String x:Key="S.Crop.Top">En haut:</s:String>
+    <s:String x:Key="S.Crop.Left">À gauche:</s:String>
+    <s:String x:Key="S.Crop.Bottom">Bas:</s:String>
+    <s:String x:Key="S.Crop.Right">À droite:</s:String>
     <s:String x:Key="S.Crop.Warning">La sélection de recadrage doit être inférieure à la taille de l'image actuelle</s:String>
     <s:String x:Key="S.Crop.Warning.Bigger">La sélection du recadrage doit être supérieure à 10 x 10 pixels</s:String>
     
@@ -1338,7 +1338,7 @@ Vous pouvez choisir si vous souhaitez ajuster le délai (durée d'enregistrement
     <!--Editor • Smooth Loop-->
     <!--<s:String x:Key="S.SmoothLoop.Header">Create smooth loop</s:String>-->
     <!--<s:String x:Key="S.SmoothLoop.StartThreshold">Ignore first:</s:String>-->
-    <s:String x:Key="S.SmoothLoop.From">Comparer avec :</s:String>
+    <!--<s:String x:Key="S.SmoothLoop.From">Compare from:</s:String>-->
     <!--<s:String x:Key="S.SmoothLoop.From.Last">End</s:String>-->
     <!--<s:String x:Key="S.SmoothLoop.From.First">Start</s:String>-->
     <!--<s:String x:Key="S.SmoothLoop.Info">Tries to find a frame at least {0} % similar to the start frame and deletes all later frames.&#x0d;You can choose if you want to ignore some initial frames and initiate the comparison from the start (after the threshold) or the end.</s:String>-->
@@ -1348,18 +1348,18 @@ Vous pouvez choisir si vous souhaitez ajuster le délai (durée d'enregistrement
     <!--Editor • Captions-->
     <s:String x:Key="S.Caption.Text">Texte</s:String>
     <s:String x:Key="S.Caption.Font">Police</s:String>
-    <s:String x:Key="S.Caption.Family">Famille :</s:String>
-    <s:String x:Key="S.Caption.Style">Style :</s:String>
-    <s:String x:Key="S.Caption.Weight">Poids :</s:String>
-    <s:String x:Key="S.Caption.Size">Taille :</s:String>
-    <s:String x:Key="S.Caption.Color">Couleur :</s:String>
+    <s:String x:Key="S.Caption.Family">Famille:</s:String>
+    <s:String x:Key="S.Caption.Style">Style:</s:String>
+    <s:String x:Key="S.Caption.Weight">Bordure:</s:String>
+    <s:String x:Key="S.Caption.Size">Taille:</s:String>
+    <s:String x:Key="S.Caption.Color">Couleur:</s:String>
     <s:String x:Key="S.Caption.Outline">Contour</s:String>
-    <s:String x:Key="S.Caption.Thickness">Épaisseur :</s:String>
+    <s:String x:Key="S.Caption.Thickness">Épaisseur:</s:String>
     <s:String x:Key="S.Caption.Layout">Disposition</s:String>
-    <s:String x:Key="S.Caption.Vertical">Vertical :</s:String>
-    <s:String x:Key="S.Caption.Horizontal">Horizontal :</s:String>
-    <s:String x:Key="S.Caption.TextAlignment">Alignement</s:String>
-    <s:String x:Key="S.Caption.TextDecoration">Décoration :</s:String>
+    <s:String x:Key="S.Caption.Vertical">Verticale:</s:String>
+    <s:String x:Key="S.Caption.Horizontal">Horizontale:</s:String>
+    <!--<s:String x:Key="S.Caption.TextAlignment">Alignment:</s:String>-->
+    <!--<s:String x:Key="S.Caption.TextDecoration">Decoration:</s:String>-->
 
     <!--Editor • Key strokes-->
     <s:String x:Key="S.KeyStrokes">Touches</s:String>
@@ -1368,8 +1368,8 @@ Vous pouvez choisir si vous souhaitez ajuster le délai (durée d'enregistrement
     <s:String x:Key="S.KeyStrokes.Edit">Modifier vos touches</s:String>
     <s:String x:Key="S.KeyStrokes.IgnoreModifiers">Ignorer les touches Ctrl, Alt, Maj et Windows lorsqu'ils ne sont pas utilisés comme modificateur.</s:String>
     <s:String x:Key="S.KeyStrokes.IgnoreModifiers.Info">Cela va ignorer les touches de modification telles que "Ctrl", mais cela n'ignore pas "Ctrl + C".</s:String>
-    <s:String x:Key="S.KeyStrokes.IgnoreInjected">Ignorer les frappes simulées par le logiciel.</s:String>
-    <s:String x:Key="S.KeyStrokes.IgnoreInjected.Info">Enregistrez uniquement les frappes de l'utilisateur.</s:String>
+    <!--<s:String x:Key="S.KeyStrokes.IgnoreInjected">Ignore software simulated keystrokes.</s:String>-->
+    <!--<s:String x:Key="S.KeyStrokes.IgnoreInjected.Info">Only record user input keystrokes.</s:String>-->
     <s:String x:Key="S.KeyStrokes.Extend">Prolongez l'enregistrement des touches.</s:String>
     <s:String x:Key="S.KeyStrokes.Earlier">Commencez l’enregistrement des touches plus tôt.</s:String>
     <s:String x:Key="S.KeyStrokes.By">Par (ms):</s:String>
@@ -1486,12 +1486,12 @@ La spécification est disponible dans ces deux liens ci-dessous.</s:String>
     
     <!--Editor • Delay-->
     <s:String x:Key="S.Delay.Update">Retarder la mise à jour</s:String>
-    <s:String x:Key="S.Delay.Mode">Mode retard :</s:String>
+    <s:String x:Key="S.Delay.Mode">Mode retard:</s:String>
     <s:String x:Key="S.Delay.Mode.Override">Passer outre (en ms)</s:String>
     <s:String x:Key="S.Delay.Mode.IncreaseDecrease">Augmenter ou diminuer (en ms)</s:String>
-    <s:String x:Key="S.Delay.Mode.Scale">Échelle (en %)</s:String>
+    <s:String x:Key="S.Delay.Mode.Scale">Échelle (en%)</s:String>
     <s:String x:Key="S.Delay.NewValue">Nouvelle valeur de délai</s:String>
-    <s:String x:Key="S.Delay.Minimum10Ms">Minimum de 10ms par image.</s:String>
+    <s:String x:Key="S.Delay.Minimum10Ms">Minimum de 10ms par image</s:String>
     <s:String x:Key="S.Delay.DecreaseIncrease">Valeur à diminuer ou augmenter</s:String>
     <s:String x:Key="S.Delay.Scale">Valeur de mise à l'échelle</s:String>
     <s:String x:Key="S.Delay.Override.Info">Cette nouvelle valeur remplacera la durée (délai) de toutes les images sélectionnées. La valeur peut être comprise entre 10 ms et 25500 ms.</s:String>
@@ -1501,7 +1501,7 @@ Vous pouvez décrémenter/incrémenter en sélectionnant une valeur comprise ent
  Vous pouvez mettre à l’échelle la durée de chaque image en sélectionnant une valeur comprise entre 1% et 1000%, mais la durée finale de chaque image sera limitée entre 10 ms et 25500ms.</s:String>
 
     <!--Editor • Cinemagraph-->
-    <s:String x:Key="S.Cinemagraph.Info">Utilisez le stylo pour sélectionner les pixels qui ne doivent pas rester statiques (qui doivent changer d’une image à l’autre), en les peignant par dessus.</s:String>
+    <s:String x:Key="S.Cinemagraph.Info">Utilisez le stylo pour sélectionner les pixels qui ne doivent pas rester statiques (qui doivent changer d’une image à l’autre), en les peignant par dessus</s:String>
 
     <!--Editor • Transitions-->
     <s:String x:Key="S.Transitions.Length">Longueur de transition</s:String>
@@ -1515,41 +1515,41 @@ Vous pouvez décrémenter/incrémenter en sélectionnant une valeur comprise ent
     <!--Editor • Save as-->
     <s:String x:Key="S.SaveAs.Type">Type de fichier</s:String>
     <!--<s:String x:Key="S.SaveAs.Type.Format">The format of the output file.</s:String>-->
-    <s:String x:Key="S.SaveAs.Type.Preset">La présélection d'exportation qui contient tous les paramètres actuellement affichés.&#10;Gérez vos présélections d'exportation à l'aide des boutons ci-dessous.</s:String>
+    <!--<s:String x:Key="S.SaveAs.Type.Preset">The export preset that holds all currently displayed settings.&#10;Manage your export presets via the buttons below.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Type.Animated">Animated image</s:String>-->
-    <s:String x:Key="S.SaveAs.Type.Video">Vidéo</s:String>
+    <!--<s:String x:Key="S.SaveAs.Type.Video">Video</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Type.Frames">Frames</s:String>-->
-    <s:String x:Key="S.SaveAs.Type.Other">Autre</s:String>
+    <!--<s:String x:Key="S.SaveAs.Type.Other">Other</s:String>-->
     
     <s:String x:Key="S.SaveAs.Apng">Apng</s:String>
     <!--<s:String x:Key="S.SaveAs.Apng.Info">Animated Portable Network Graphics</s:String>-->
     <s:String x:Key="S.SaveAs.Gif">Gif</s:String>
     <!--<s:String x:Key="S.SaveAs.Gif.Info">Graphics Interchange Format</s:String>-->
-    <s:String x:Key="S.SaveAs.Webp">Webp</s:String>
+    <!--<s:String x:Key="S.SaveAs.Webp">Webp</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Webp.Info">Web Picture</s:String>-->
     
-    <s:String x:Key="S.SaveAs.Avi">Avi</s:String>
-    <s:String x:Key="S.SaveAs.Avi.Info">Entrelacement audio-vidéo</s:String>
-    <s:String x:Key="S.SaveAs.Mkv">Mkv</s:String>
-    <s:String x:Key="S.SaveAs.Mkv.Info">Matroska</s:String>
-    <s:String x:Key="S.SaveAs.Mov">Mov</s:String>
+    <!--<s:String x:Key="S.SaveAs.Avi">Avi</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Avi.Info">Audio Video Interleave</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Mkv">Mkv</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Mkv.Info">Matroska</s:String> -->
+    <!--<s:String x:Key="S.SaveAs.Mov">Mov</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Mov.Info">QuickTime File Format</s:String>-->
-    <s:String x:Key="S.SaveAs.Mp4">Mp4</s:String>
-    <s:String x:Key="S.SaveAs.Mp4.Info">Mpeg-4</s:String>
-    <s:String x:Key="S.SaveAs.Webm">Webm</s:String>
+    <!--<s:String x:Key="S.SaveAs.Mp4">Mp4</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Mp4.Info">Mpeg-4</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Webm">Webm</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Webm.Info">Web Movie</s:String>-->
     
-    <s:String x:Key="S.SaveAs.Bmp">Bmp</s:String>
-    <s:String x:Key="S.SaveAs.Bmp.Info">Bitmap</s:String>
-    <s:String x:Key="S.SaveAs.Jpeg">Jpeg</s:String>
-    <s:String x:Key="S.SaveAs.Jpeg.Info">Groupe conjoint d'experts photographiques</s:String>
-    <s:String x:Key="S.SaveAs.Png">Png</s:String>
-    <s:String x:Key="S.SaveAs.Png.Info">Portable Network Graphics</s:String>
+    <!--<s:String x:Key="S.SaveAs.Bmp">Bmp</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Bmp.Info">Bitmap</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Jpeg">Jpeg</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Jpeg.Info">Joint Photographic Experts Group</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Png">Png</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Png.Info">Portable Network Graphics</s:String>-->
     
     <s:String x:Key="S.SaveAs.Project">Projet</s:String>
-    <s:String x:Key="S.SaveAs.Project.Info">Projet ScreenToGif</s:String>
+    <!--<s:String x:Key="S.SaveAs.Project.Info">ScreenToGif project</s:String>-->
     <s:String x:Key="S.SaveAs.Psd">PSD</s:String>
-    <s:String x:Key="S.SaveAs.Psd.Info">Fichier Photoshop</s:String>
+    <!--<s:String x:Key="S.SaveAs.Psd.Info">Photoshop file</s:String>-->
     
     <!--Editor • Save as > Presets-->
     <s:String x:Key="S.SaveAs.Presets">Préréglages:</s:String>
@@ -1561,12 +1561,12 @@ Vous pouvez décrémenter/incrémenter en sélectionnant une valeur comprise ent
     <s:String x:Key="S.SaveAs.Presets.Reset">Réinitialiser</s:String>
     
     <!--Editor • Save as > Presets > Dialogs-->
-    <s:String x:Key="S.SaveAs.Presets.Ask.Delete.Title">Suppression de la présélection</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Ask.Delete.Instruction">Êtes-vous sûr de vouloir supprimer la présélection ?</s:String>
+    <!--<s:String x:Key="S.SaveAs.Presets.Ask.Delete.Title">Deleting the Preset</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Presets.Ask.Delete.Instruction">Are you sure that you want to delete the preset?</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Presets.Ask.Delete.Message">This action cannot be undone.&#10;&#10;Would you like to delete the selected preset?</s:String>-->
-    <s:String x:Key="S.SaveAs.Presets.Ask.Reset.Title">Réinitialisation de la présélection</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Ask.Reset.Instruction">Êtes-vous sûr de vouloir réinitialiser la présélection ?</s:String>
-    <s:String x:Key="S.SaveAs.Presets.Ask.Reset.Message">Cette action ne peut être annulée.&#10;&#10;Souhaitez-vous rétablir les paramètres à leur configuration d'origine ?</s:String>
+    <!--<s:String x:Key="S.SaveAs.Presets.Ask.Reset.Title">Reseting the Preset</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Presets.Ask.Reset.Instruction">Are you sure that you want to reset the preset?</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Presets.Ask.Reset.Message">This action cannot be undone.&#10;&#10;Would you like to reset the selected preset to its default settings?</s:String>-->
     
     <!--Editor • Save as > Encoder-->
     <s:String x:Key="S.SaveAs.Encoder">Encodage</s:String>
@@ -1583,12 +1583,12 @@ Vous pouvez décrémenter/incrémenter en sélectionnant une valeur comprise ent
     <!--<s:String x:Key="S.SaveAs.Encoder.Options">Encoder options</s:String>-->
     
     <!--Editor • Save as > FFmpeg-->
-    <s:String x:Key="S.SaveAs.Ffmpeg.UseParameters">Activer le mode avancé.</s:String>
-    <s:String x:Key="S.SaveAs.Ffmpeg.UseParameters.Info">Entrez manuellement les paramètres pour contrôler l'encodeur.</s:String>
-    <s:String x:Key="S.SaveAs.Ffmpeg.Parameters">Paramètres :</s:String>
+    <!--<s:String x:Key="S.SaveAs.Ffmpeg.UseParameters">Enable the advanced mode.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Ffmpeg.UseParameters.Info">Manually input the parameters to control the encoder.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Ffmpeg.Parameters">Parameters:</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Ffmpeg.Parameters.Info">List of parameters that will be passed to FFmpeg.&#10;&#10;Special parameters:&#10;{I} is the input path (the frames).&#10;{O} is the output path (the exported file).&#10;{W} is the width of the frame.&#10;{H} is the height of the frame.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Ffmpeg.Parameters.Pass">To encode with 2-pass, simply add '-pass 2'.</s:String>-->
-    <s:String x:Key="S.SaveAs.Ffmpeg.Preview">Prévisualisation</s:String>
+    <!--<s:String x:Key="S.SaveAs.Ffmpeg.Preview">Preview</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Ffmpeg.Preview.Info">Preview the parameter list that will be passed to FFmpeg.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Ffmpeg.Help.Code">Codec docs</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Ffmpeg.Help.Format">Format docs</s:String>-->
@@ -1637,9 +1637,9 @@ Vous pouvez décrémenter/incrémenter en sélectionnant une valeur comprise ent
     <!--Editor • Save as > Apng options-->
     <s:String x:Key="S.SaveAs.ApngOptions">Options Apng</s:String>
     <!--<s:String x:Key="S.SaveAs.ApngOptions.Prediction">Prediction:</s:String>-->
-    <s:String x:Key="S.SaveAs.ApngOptions.Prediction.None">Aucun</s:String>
+    <!--<s:String x:Key="S.SaveAs.ApngOptions.Prediction.None">None</s:String>-->
     <!--<s:String x:Key="S.SaveAs.ApngOptions.Prediction.Sub">Sub</s:String>-->
-    <s:String x:Key="S.SaveAs.ApngOptions.Prediction.Up">Haut</s:String>
+    <!--<s:String x:Key="S.SaveAs.ApngOptions.Prediction.Up">Up</s:String>-->
     <!--<s:String x:Key="S.SaveAs.ApngOptions.Prediction.Average">Average</s:String>-->
     <!--<s:String x:Key="S.SaveAs.ApngOptions.Prediction.Mixed">Mixed</s:String>-->
     <s:String x:Key="S.SaveAs.ApngOptions.Looped">Boucle Apng.</s:String>
@@ -1649,56 +1649,56 @@ Vous pouvez décrémenter/incrémenter en sélectionnant une valeur comprise ent
     <!--Editor • Save as > Webp options-->
     <!--<s:String x:Key="S.SaveAs.WebpOptions.CodecPreset">Preset:</s:String>-->
     <!--<s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.None">None</s:String>-->
-    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Default">Par défaut</s:String>
+    <!--<s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Default">Default</s:String>-->
     <!--<s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Picture">Picture</s:String>-->
     <!--<s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Photo">Photo</s:String>-->
     <!--<s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Drawing">Drawing</s:String>-->
-    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Icon">Icône</s:String>
-    <s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Text">Texte</s:String>
+    <!--<s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Icon">Icon</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.WebpOptions.CodecPreset.Text">Text</s:String>-->
     <!--<s:String x:Key="S.SaveAs.WebpOptions.Lossless">Use lossless mode.</s:String>-->
     
     <!--Editor • Save as > Video options-->
     <!--<s:String x:Key="S.SaveAs.VideoOptions.Mode">Mode:</s:String>-->
-    <s:String x:Key="S.SaveAs.VideoOptions.Mode.Normal">Normal</s:String>
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Mode.Normal">Normal</s:String>-->
     <!--<s:String x:Key="S.SaveAs.VideoOptions.Mode.Advanced">Advanced</s:String>-->
     <!--<s:String x:Key="S.SaveAs.VideoOptions.Mode.Info">Method of configuring the encoder parameters:&#10;Normal: Use standard UI controls.&#10;Advanced: Use a text box to type the parameters.</s:String>-->
-    <s:String x:Key="S.SaveAs.VideoOptions.Codec">Codec :</s:String>
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Codec">Codec:</s:String>-->
     <!--<s:String x:Key="S.SaveAs.VideoOptions.Codec.Info">The video encoder, responsible for&#10;converting the raw pixels to the output file.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset">Preset:</s:String>-->
-    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.None">Aucun</s:String>
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.None">None</s:String>-->
     <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.VerySlow">Very Slow</s:String>-->
-    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Slower">Plus lent</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Slow">Lent</s:String>
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Slower">Slower</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Slow">Slow</s:String>-->
     <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Medium">Medium</s:String>-->
-    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Fast">Rapide</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Faster">Plus rapide</s:String>
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Fast">Fast</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Faster">Faster</s:String>-->
     <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.VeryFast">Very Fast</s:String>-->
-    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.SuperFast">Super rapide</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.UltraFast">Ultra rapide</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Quality">Qualité</s:String>
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.SuperFast">Super Fast</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.UltraFast">Ultra Fast</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Quality">Quality</s:String>-->
     <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Balanced">Balanced</s:String>-->
-    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Speed">Vitesse</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Default">Par défaut</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Lossless">Sans perte</s:String>
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Speed">Speed</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Default">Default</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Lossless">Lossless</s:String>-->
     <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.LosslessHp">Lossless (High Performance)</s:String>-->
     <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Hp">High Performance</s:String>-->
-    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Hq">Haute qualité</s:String>
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Hq">High Quality</s:String>-->
     <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Bd">Bluray Disk</s:String>-->
-    <s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.LowLatency">Basse qualité</s:String>
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.LowLatency">Low Latency</s:String>-->
     <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.LowLatencyHp">Low Latency (High Performance)</s:String>-->
     <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.LowLatencyHq">Low Latency (Hight Quality)</s:String>-->
     <!--<s:String x:Key="S.SaveAs.VideoOptions.CodecPreset.Info">Encoding speed to compression ratio,&#10;slower presets may give you better compression&#10;(quality per filesize).</s:String>-->
     <!--<s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration">Hardware Acc.:</s:String>-->
     <!--<s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration.Off">Off</s:String>-->
-    <s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration.On">On</s:String>
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration.On">On</s:String>-->
     <!--<s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration.Auto">Automatic selection</s:String>-->
     <!--<s:String x:Key="S.SaveAs.VideoOptions.HardwareAcceleration.Info">Controls the usage of dedicated hardware (video graphics).&#10;Off: Doesn't use dedicated hardware.&#10;On: Uses dedicated hardware and lets you select special encoders.&#10;Auto: Uses dedicated hardware and automatic selects the right encoder, when possible.</s:String>-->
-    <s:String x:Key="S.SaveAs.VideoOptions.PixelFormat">Format de pixel :</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.PixelFormat.Auto">Automatique</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.Vsync">Vsync :</s:String>
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.PixelFormat">Pixel format:</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.PixelFormat.Auto">Automatic</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Vsync">Vsync:</s:String>-->
     <!--<s:String x:Key="S.SaveAs.VideoOptions.Vsync.Info">Video sync method.&#10;Auto: Chooses between 1 and 2 depending on muxer (format) capabilities.&#10;Passthrough: Each frame is passed with its timestamps to the encoder.&#10;Constant: Frames will be duplicated and dropped to achieve exactly the requested constant frame rate.&#10;Variable: Frames are passed through with their timestamp or dropped so as to prevent 2 frames from having the same timestamp.&#10;Drop: As passthrough but destroys all timestamps, making the encoder generate fresh timestamps based on framerate.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.VideoOptions.Vsync.Passthrough">Passthrough</s:String>-->
-    <s:String x:Key="S.SaveAs.VideoOptions.Vsync.Cfr">Fréquence d'images constante</s:String>
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Vsync.Cfr">Constant framerate</s:String>-->
     <!--<s:String x:Key="S.SaveAs.VideoOptions.Vsync.Vfr">Variable framerate</s:String>-->
     <!--<s:String x:Key="S.SaveAs.VideoOptions.Vsync.Drop">Drop</s:String>-->
     <!--<s:String x:Key="S.SaveAs.VideoOptions.Framerate">Framerate:</s:String>-->
@@ -1706,18 +1706,18 @@ Vous pouvez décrémenter/incrémenter en sélectionnant une valeur comprise ent
     <!--<s:String x:Key="S.SaveAs.VideoOptions.Framerate.Custom">Custom</s:String>-->
     <!--<s:String x:Key="S.SaveAs.VideoOptions.Pass">Pass:</s:String>-->
     <!--<s:String x:Key="S.SaveAs.VideoOptions.Crf.Info">Constant Rate Factor.&#10;Quality and rate control setting.&#10;Leave it empty if you don't wish to set this property.</s:String>-->
-    <s:String x:Key="S.SaveAs.VideoOptions.QualityLevel">Niveau de qualité :</s:String>
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.QualityLevel">Quality level:</s:String>-->
     <!--<s:String x:Key="S.SaveAs.VideoOptions.QualityLevel.Info">Smaller values means better quality.</s:String>-->
-    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate">Débit binaire :</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Info">Débit binaire vidéo cible.</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Mode">Mode de débit binaire :</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Mode.Constant">Constant</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Mode.Variable">Variable</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Minimum">Taux minimum :</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Minimum.Info">Tolérance du débit binaire minimum. Plus utile lorsque vous utilisez le mode CBR. Laissez-le vide ou mettez-le à zéro si vous ne souhaitez pas définir cette propriété.</s:String>
-    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Maximum">Taux maximum :</s:String>
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Bitrate">Bitrate:</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Info">Target video bit rate.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Mode">Bitrate mode:</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Mode.Constant">Constant</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Mode.Variable">Variable</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Minimum">Min Rate:</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Minimum.Info">Minimum bitrate tolerance.&#10;Most useful when using CBR mode.&#10;Leave it empty or set to zero &#10;if you don't wish to set this property.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Maximum">Max Rate:</s:String>-->
     <!--<s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Maximum.Info">Maximum bitrate tolerance.&#10;Requires the buffer size to be set too.&#10;Leave it empty or set to zero &#10;if you don't wish to set this property.</s:String>-->
-    <s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Buffer">Taille de la mémoire tampon :</s:String>
+    <!--<s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Buffer">Buffer size:</s:String>-->
     <!--<s:String x:Key="S.SaveAs.VideoOptions.Bitrate.Buffer.Info">Rate control buffer size.&#10;Leave it empty or set to zero &#10;if you don't wish to set this property.</s:String>-->
 
     <!--Editor • Save as > Image options-->
@@ -1755,23 +1755,23 @@ Vous pouvez décrémenter/incrémenter en sélectionnant une valeur comprise ent
 {u} = URL of the uploaded file.</s:String>
     
     <!--Editor • Save As > Partial export-->
-    <s:String x:Key="S.SaveAs.Partial">Export partiel</s:String>
-    <s:String x:Key="S.SaveAs.Partial.Mode">Mode :</s:String>
-    <s:String x:Key="S.SaveAs.Partial.Mode.Info">Sélectionner la méthode d'exportation partielle.</s:String>
-    <s:String x:Key="S.SaveAs.Partial.Mode.Expression">Expression</s:String>
-    <s:String x:Key="S.SaveAs.Partial.Mode.Expression.Info">Exporte des parties de l'animation en fonction d'une expression simple.</s:String>
-    <s:String x:Key="S.SaveAs.Partial.Mode.Frames">Gamme d'images</s:String>
-    <s:String x:Key="S.SaveAs.Partial.Mode.Frames.Info">N'exporte qu'une partie de l'animation dans la plage d'images.</s:String>
+    <!--<s:String x:Key="S.SaveAs.Partial">Partial export</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Partial.Mode">Mode:</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Partial.Mode.Info">Select the partial export method.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Partial.Mode.Expression">Expression</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Partial.Mode.Expression.Info">Exports parts of the animation based on a simple expression.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Partial.Mode.Frames">Frame range</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Partial.Mode.Frames.Info">Exports only part of the animation within the frame range.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Partial.Mode.Time">Time range</s:String>-->
-    <s:String x:Key="S.SaveAs.Partial.Mode.Time.Info">Exporte seulement une partie de l'animation dans cette période de temps.</s:String>
-    <s:String x:Key="S.SaveAs.Partial.Mode.Selection">Sélection</s:String>
-    <s:String x:Key="S.SaveAs.Partial.Mode.Selection.Info">Exporte uniquement les images sélectionnées dans la ligne de temps</s:String>
-    <s:String x:Key="S.SaveAs.Partial.Mode.Selection.None">Aucun cadre sélectionné.</s:String>
+    <!--<s:String x:Key="S.SaveAs.Partial.Mode.Time.Info">Exports only part of the animation within the timeframe.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Partial.Mode.Selection">Selection</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Partial.Mode.Selection.Info">Exports only the frames selected in the timeline.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Partial.Mode.Selection.None">No frame selected.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Partial.Mode.Selection.Singular">1 frame selected.</s:String>-->
-    <s:String x:Key="S.SaveAs.Partial.Mode.Selection.Plural">{0} cadre(s) sélectionné(s)</s:String>
-    <s:String x:Key="S.SaveAs.Partial.From">De :</s:String>
-    <s:String x:Key="S.SaveAs.Partial.To">À :</s:String>
-    <s:String x:Key="S.SaveAs.Partial.Expression">Expression :</s:String>
+    <!--<s:String x:Key="S.SaveAs.Partial.Mode.Selection.Plural">{0} frames selected.</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Partial.From">From:</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Partial.To">To:</s:String>-->
+    <!--<s:String x:Key="S.SaveAs.Partial.Expression">Expression:</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Partial.Expression.Info">Type frame numbers separated by a comma or&#10;frame sequences separated by a minus sign:&#10;1, 3, 4, 6 - 9</s:String>-->
     
     <!--Editor • Save as > File-->
@@ -1812,11 +1812,11 @@ Vous pouvez décrémenter/incrémenter en sélectionnant une valeur comprise ent
     <!--<s:String x:Key="S.SaveAs.Upload.Info">Select the upload preset, which has details about the service in use for upload.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Upload.Limit">This upload service imposes limits.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Upload.Add">Add a new upload preset.</s:String>-->
-    <s:String x:Key="S.SaveAs.Upload.Edit">Modifier les paramètres prédéfinis de téléversement.</s:String>
+    <!--<s:String x:Key="S.SaveAs.Upload.Edit">Edit upload preset settings.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Upload.History">View the upload history of this preset.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Upload.Remove">Remove the currently selected upload preset.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Upload.Select.Title">Select an upload preset</s:String>-->
-    <s:String x:Key="S.SaveAs.Upload.Select.Description">Choisissez-en un dans cette liste.</s:String>
+    <!--<s:String x:Key="S.SaveAs.Upload.Select.Description">Pick one from this list.</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Upload.Unavailable.Title">No upload preset available for this format</s:String>-->
     <!--<s:String x:Key="S.SaveAs.Upload.Unavailable.Description">Add a preset by using the button bellow.</s:String>-->
     
@@ -1831,10 +1831,10 @@ Vous pouvez décrémenter/incrémenter en sélectionnant une valeur comprise ent
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">Cette action exportera {0} images directement dans le dossier sélectionné.</s:String>
     
     <!--Command Preview-->
-    <s:String x:Key="S.CommandPreviewer.Title">Aperçu de la commabde</s:String>
-    <s:String x:Key="S.CommandPreviewer.Command">Commande</s:String>
-    <s:String x:Key="S.CommandPreviewer.Input">Chemin de l'entrée</s:String>
-    <s:String x:Key="S.CommandPreviewer.Output">Chemin de la sortie</s:String>
+    <!--<s:String x:Key="S.CommandPreviewer.Title">Command Previewer</s:String>-->
+    <!--<s:String x:Key="S.CommandPreviewer.Command">Command</s:String>-->
+    <s:String x:Key="S.CommandPreviewer.Input">Chemin d'entrée</s:String>
+    <s:String x:Key="S.CommandPreviewer.Output">Chemin de sortie</s:String>
     
     <!--Feedback-->
     <s:String x:Key="S.Feedback.Feedback">Retour d'information</s:String>
@@ -1896,7 +1896,7 @@ utilisez les options ci-dessous pour réinitialiser sa position actuelle et sa p
     <s:String x:Key="S.VerticalAlignment.Top">Haut</s:String>
     <s:String x:Key="S.VerticalAlignment.Center">Centré</s:String>
     <s:String x:Key="S.VerticalAlignment.Bottom">Bas</s:String>
-    <s:String x:Key="S.Alignment.Stretch">Étendre</s:String>
+    <s:String x:Key="S.Alignment.Stretch">Étendue</s:String>
 
     <!--HorizontalAlignment-->
     <s:String x:Key="S.HorizontalAlignment.Left">À gauche</s:String>
@@ -1908,13 +1908,13 @@ utilisez les options ci-dessous pour réinitialiser sa position actuelle et sa p
     <s:String x:Key="S.Orientation.Vertical">Verticale</s:String>
     
     <!--TextAlignment-->
-    <s:String x:Key="S.TextAlignment.Left">Gauche</s:String>
-    <s:String x:Key="S.TextAlignment.Right">Droite</s:String>
-    <s:String x:Key="S.TextAlignment.Center">Centré</s:String>
-    <s:String x:Key="S.TextAlignment.Justify">Justifier</s:String>
+    <!--<s:String x:Key="S.TextAlignment.Left">Left</s:String>-->
+    <!--<s:String x:Key="S.TextAlignment.Right">Right</s:String>-->
+    <!--<s:String x:Key="S.TextAlignment.Center">Center</s:String>-->
+    <!--<s:String x:Key="S.TextAlignment.Justify">Justify</s:String>-->
     
     <!--TextDecoration-->
-    <s:String x:Key="S.TextDecorations.None">Aucune</s:String>
+    <!--<s:String x:Key="S.TextDecorations.None">None</s:String>-->
     <!--<s:String x:Key="S.TextDecorations.Underline">Underline</s:String>-->
     <!--<s:String x:Key="S.TextDecorations.Strikethrough">Strikethrough</s:String>-->
     <!--<s:String x:Key="S.TextDecorations.OverLine">OverLine</s:String>-->
