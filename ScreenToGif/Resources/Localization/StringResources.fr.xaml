@@ -1358,8 +1358,8 @@ Vous pouvez choisir si vous souhaitez ajuster le délai (durée d'enregistrement
     <s:String x:Key="S.Caption.Layout">Disposition</s:String>
     <s:String x:Key="S.Caption.Vertical">Verticale:</s:String>
     <s:String x:Key="S.Caption.Horizontal">Horizontale:</s:String>
-    <!--<s:String x:Key="S.Caption.TextAlignment">Alignment:</s:String>-->
-    <!--<s:String x:Key="S.Caption.TextDecoration">Decoration:</s:String>-->
+    <s:String x:Key="S.Caption.TextAlignment">Alignement :</s:String>
+    <s:String x:Key="S.Caption.TextDecoration">Décoration :</s:String>
 
     <!--Editor • Key strokes-->
     <s:String x:Key="S.KeyStrokes">Touches</s:String>
