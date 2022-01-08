@@ -2,9 +2,9 @@ using System.Windows.Controls;
 
 namespace ScreenToGif.UserControls;
 
-public partial class MouseClicksPanel : UserControl
+public partial class MouseEventsPanel : UserControl
 {
-    public MouseClicksPanel()
+    public MouseEventsPanel()
     {
         InitializeComponent();
     }

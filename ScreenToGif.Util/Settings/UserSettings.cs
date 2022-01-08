@@ -2538,7 +2538,13 @@ public class UserSettings : INotifyPropertyChanged
 
     #endregion
 
-    #region Editor • Mouse Clicks
+    #region Editor • Mouse Events
+
+    public Color MouseHighlightColor
+    {
+        get => (Color)GetValue();
+        set => SetValue(value);
+    }
 
     public Color LeftMouseButtonClicksColor
     {
@@ -2558,13 +2564,13 @@ public class UserSettings : INotifyPropertyChanged
         set => SetValue(value);
     }
 
-    public double MouseClicksWidth
+    public double MouseEventsWidth
     {
         get => (double)GetValue();
         set => SetValue(value);
     }
 
-    public double MouseClicksHeight
+    public double MouseEventsHeight
     {
         get => (double)GetValue();
         set => SetValue(value);

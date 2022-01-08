@@ -297,7 +297,7 @@
         </RoutedUICommand.InputGestures>
     </RoutedUICommand>
 
-    <RoutedUICommand x:Key="Command.MouseClicks" Text="S.Command.MouseClicks">
+    <RoutedUICommand x:Key="Command.MouseEvents" Text="S.Command.MouseEvents">
         <RoutedUICommand.InputGestures>
             <KeyGesture>Alt + I</KeyGesture>
         </RoutedUICommand.InputGestures>

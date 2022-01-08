@@ -1058,7 +1058,7 @@
     <s:String x:Key="S.Editor.Image.Overlay">Overlay</s:String>
     <s:String x:Key="S.Editor.Image.FreeDrawing">Free&#x0d;Drawing</s:String>
     <s:String x:Key="S.Editor.Image.Shape">Shapes</s:String>
-    <s:String x:Key="S.Editor.Image.Clicks">Mouse&#x0d;Clicks</s:String>
+    <s:String x:Key="S.Editor.Image.MouseEvents">Mouse&#x0d;Events</s:String>
     <s:String x:Key="S.Editor.Image.Watermark">Watermark</s:String>
     <s:String x:Key="S.Editor.Image.Cinemagraph">Cinemagraph</s:String>
     <s:String x:Key="S.Editor.Image.Border">Border</s:String>
@@ -1373,12 +1373,12 @@
     <s:String x:Key="S.Shapes.Shapes.Remove">Remove</s:String>
     <s:String x:Key="S.Shapes.Fill">Fill</s:String>
 
-    <!--Editor • Mouse clicks-->
-    <s:String x:Key="S.MouseClicks">Mouse Clicks</s:String>
+    <!--Editor • Mouse events-->
+    <s:String x:Key="S.MouseEvents">Mouse Events</s:String>
+    <s:String x:Key="S.MouseHighlight.Color">Mouse Highlight Color:</s:String>
     <s:String x:Key="S.MouseClicks.Color.Left">Left button color:</s:String>
     <s:String x:Key="S.MouseClicks.Color.Middle">Middle button color:</s:String>
     <s:String x:Key="S.MouseClicks.Color.Right">Right button color:</s:String>
-    <s:String x:Key="S.MouseClicks.Warning.None">There's no detected mouse clicks on your project.</s:String>
     
     <!--Editor • Watermark-->
     <s:String x:Key="S.Watermark.Image">Image</s:String>

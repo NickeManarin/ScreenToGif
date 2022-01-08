@@ -73,7 +73,7 @@
                 </u:ComboBoxItemTemplateSelector.DropDownTemplate>
 
                 <t:BaseTaskViewModel Image="Vector.Info"/>
-                <t:MouseClicksViewModel Image="Vector.Cursor"/>
+                <t:MouseEventsViewModel Image="Vector.Cursor"/>
                 <t:KeyStrokesViewModel Image="Vector.Keyboard"/>
                 <t:DelayViewModel Image="Vector.Clock"/>
                 <t:ProgressViewModel Image="Vector.Progress"/>

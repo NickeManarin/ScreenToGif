@@ -144,7 +144,7 @@
     
     <!--Options • Automated Tasks-->
     <c:ArrayList Capacity="1" x:Key="AutomatedTasksList">
-        <t:MouseClicksViewModel LeftButtonForegroundColor="#78FFFF00" RightButtonForegroundColor="#78FF0000" MiddleButtonForegroundColor="#7800FFFF" Width="12" Height="12" TaskType="MouseClicks"/>
+        <t:MouseEventsViewModel HighlightForegroundColor="#000000FF"  LeftButtonForegroundColor="#78FFFF00" RightButtonForegroundColor="#78FF0000" MiddleButtonForegroundColor="#7800FFFF" Width="12" Height="12" TaskType="MouseEvents"/>
     </c:ArrayList>
 
     <!--Options • Shortcuts-->
@@ -349,12 +349,13 @@
     <VerticalAlignment x:Key="ProgressVerticalAligment">Bottom</VerticalAlignment>
     <Orientation x:Key="ProgressOrientation">Horizontal</Orientation>
 
-    <!--Editor • Mouse Clicks-->
+    <!--Editor • Mouse Events -->
+    <Color x:Key="MouseHighlightColor">#000000FF</Color>
     <Color x:Key="LeftMouseButtonClicksColor">#78FFFF00</Color>
     <Color x:Key="MiddleMouseButtonClicksColor">#7800FFFF</Color>
     <Color x:Key="RightMouseButtonClicksColor">#78FF0000</Color>
-    <s:Double x:Key="MouseClicksWidth">12</s:Double>
-    <s:Double x:Key="MouseClicksHeight">12</s:Double>
+    <s:Double x:Key="MouseEventsWidth">12</s:Double>
+    <s:Double x:Key="MouseEventsHeight">12</s:Double>
     
     <!--Editor • Border-->
     <Color x:Key="BorderColor">#FF000000</Color>
