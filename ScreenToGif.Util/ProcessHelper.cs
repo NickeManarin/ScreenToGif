@@ -1,10 +1,26 @@
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 
 namespace ScreenToGif.Util;
 
 public static class ProcessHelper
 {
+    public static string GetEntryAssemblyPath()
+    {
+        try
+        {
+            return Process.GetCurrentProcess().MainModule?.FileName ??
+                System.Reflection.Assembly.GetEntryAssembly()?.GetName().CodeBase?.Replace("/ScreenToGif.dll", "/ScreenToGif.exe") ??
+                Path.Combine(AppContext.BaseDirectory, "ScreenToGif.exe");
+        }
+        catch (Exception e)
+        {
+            LogWriter.Log(e, "Not possible to get current executing assembly path.");
+            return Path.Combine(AppContext.BaseDirectory, "ScreenToGif.exe");
+        }
+    }
+
     public static void StartWithShell(string filename)
     {
         var info = new ProcessStartInfo
@@ -20,9 +36,7 @@ public static class ProcessHelper
     {
         try
         {
-            var fileName = Process.GetCurrentProcess().MainModule?.FileName ?? System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase;
-
-            var info = new ProcessStartInfo(fileName)
+            var info = new ProcessStartInfo(GetEntryAssemblyPath())
             {
                 UseShellExecute = true, 
                 Verb = "runas", 
@@ -68,9 +82,7 @@ public static class ProcessHelper
     {
         try
         {
-            var fileName = Process.GetCurrentProcess().MainModule?.FileName ?? System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase;
-
-            var info = new ProcessStartInfo(fileName)
+            var info = new ProcessStartInfo(GetEntryAssemblyPath())
             {
                 UseShellExecute = true,
                 Verb = "runas",

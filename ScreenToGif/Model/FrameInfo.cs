@@ -3,6 +3,7 @@ using ScreenToGif.Domain.Interfaces;
 using ScreenToGif.Util;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Windows;
 using Color = System.Windows.Media.Color;
@@ -166,10 +167,14 @@ public class FrameInfo : IFrame
     [IgnoreDataMember]
     public bool HasArea => Rect.HasArea;
 
+    //Temporary.
+    [DataMember(EmitDefaultValue = false, Name = "Keys")]
+    public List<SimpleKeyGesture> TemporaryKeyList { get; set; }
+
     /// <summary>
     /// List of keys pressed during the recording of this frame.
     /// </summary>
-    [DataMember(EmitDefaultValue = false, Name = "Keys")]
+    [IgnoreDataMember]
     public List<IKeyGesture> KeyList { get; set; }
 
     /// <summary>
@@ -207,10 +212,20 @@ public class FrameInfo : IFrame
     /// </summary>
     /// <param name="context"></param>
     [OnDeserialized]
-    void MigrateData(StreamingContext context)
+    private void OnDeserialized(StreamingContext context)
     {
         if (ButtonClicked == MouseButtons.None)
             ButtonClicked = WasClicked ? MouseButtons.Left : MouseButtons.None;
+
+        if (TemporaryKeyList?.Count > 0 && KeyList == null)
+            KeyList = new List<IKeyGesture>(TemporaryKeyList);
+    }
+
+    [OnSerializing]
+    private void OnSerializing(StreamingContext context)
+    {
+        if (KeyList != null)
+            TemporaryKeyList = KeyList?.OfType<SimpleKeyGesture>().ToList();
     }
 
     #endregion
