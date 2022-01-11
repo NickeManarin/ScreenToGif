@@ -840,7 +840,7 @@ public partial class NewRecorder
             #endregion
 
             //Command line arguments were sent.
-            if (Arguments.Open && Arguments.Region.Width > 0 && Arguments.Region.Height > 0)
+            if (Arguments.Region != Rect.Empty)
             {
                 UserSettings.All.SelectedRegion = Arguments.Region;
                 Arguments.Region = Rect.Empty;

@@ -4,13 +4,15 @@ This is the current project of ScreenToGif.
 
 _VS 2022 and .NET 6 or newer required._
 
-## What's new? (Version 2.35.2)
+## What's new? (Version 2.35.4)
 
-• Just bug fixes.  
+• Updated the French localization.  
 
 ### Fixed:
 
-♦ The install process was failling if you had SharpDx set up (error 2711).  
+♦ It was not possible to load projects from the recent prtojects list.  
+♦ It was possible to import images with multiple sizes, which would end up in crashes during encoding.
+♦ The translation updater was not working for portable releases.  
 
 ### Known Bugs:
   

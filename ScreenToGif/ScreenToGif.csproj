@@ -24,19 +24,6 @@
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
     <Platforms>AnyCPU;ARM64;x64;x86</Platforms>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
-    <UseVSHostingProcess>true</UseVSHostingProcess>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DefineConstants>
-    </DefineConstants>
-    <DocumentationFile>
-    </DocumentationFile>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-  </PropertyGroup>
   <PropertyGroup>
     <StartupObject>ScreenToGif.App</StartupObject>
   </PropertyGroup>
@@ -46,23 +33,46 @@
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <OutputPath>bin\x64\Debug\</OutputPath>
+    <PlatformTarget>x64</PlatformTarget>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>bin\x64\Release\</OutputPath>
+    <PlatformTarget>x64</PlatformTarget>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <OutputPath>bin\x86\Debug\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <OutputPath>bin\x86\Release\</OutputPath>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <PlatformTarget>x86</PlatformTarget>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+    <PlatformTarget>ARM64</PlatformTarget>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+    <PlatformTarget>ARM64</PlatformTarget>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <AppDesigner Include="Properties\" />
@@ -109,17 +119,19 @@
     <Copy SourceFiles="@(Win32Binaries)" DestinationFolder="$(TargetUWP)" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>if exist "$(DevEnvDir)..\..\VC\Auxiliary\Build\vsvars32.bat" (
-call "$(DevEnvDir)..\..\VC\Auxiliary\Build\vsvars32.bat"
-editbin /largeaddressaware "$(TargetPath)"
-)    </PostBuildEvent>
+    <PostBuildEvent>
+      if exist "$(DevEnvDir)..\..\VC\Auxiliary\Build\vsvars32.bat" (
+      call "$(DevEnvDir)..\..\VC\Auxiliary\Build\vsvars32.bat"
+      editbin /largeaddressaware "$(TargetPath)"
+      )
+    </PostBuildEvent>
     <MinimumPlatformVersion>7.0</MinimumPlatformVersion>
     <Nullable>disable</Nullable>
     <DebugType>embedded</DebugType>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
     <Company>Nicke Manarin</Company>
     <Authors>Nicke Manarin</Authors>
-    <Version>2.35.2</Version>
+    <Version>2.35.4</Version>
     <Copyright>Copyright© Nicke Manarin 2021</Copyright>
     <PackageProjectUrl>https://www.screentogif.com</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -129,9 +141,7 @@ editbin /largeaddressaware "$(TargetPath)"
     <PackageLicenseExpression>MS-PL</PackageLicenseExpression>
     <Description>Screen, webcam and sketchboard recorder, with integrated editor!</Description>
     <SignAssembly>False</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
-    <PlatformTarget>ARM64</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <None Include="..\README.md">

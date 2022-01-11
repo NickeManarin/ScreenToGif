@@ -10,9 +10,9 @@
     <!--General-->
     <s:String x:Key="S.Ok">OK</s:String>
     <s:String x:Key="S.Back">Tilbage</s:String>
-    <s:String x:Key="S.Cancel">Annuller</s:String>
+    <s:String x:Key="S.Cancel">Annullér</s:String>
     <s:String x:Key="S.Yes">OK</s:String>
-    <s:String x:Key="S.No">Annuller</s:String>
+    <s:String x:Key="S.No">Annullér</s:String>
     <s:String x:Key="S.Add">Tilføj</s:String>
     <s:String x:Key="S.Edit">Tilpas</s:String>
     <s:String x:Key="S.Id">ID</s:String>
@@ -202,7 +202,7 @@
     <s:String x:Key="S.Options.Other">Andet</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Header">Følg markør mangler en genvej</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Message">Der skal knyttes en genvej til Følg markør, så du kan slå funktionen til/fra efter behov.</s:String>
-
+  
     <!--Options • Application-->
     <s:String x:Key="S.Options.App.Startup">Start</s:String>
     <s:String x:Key="S.Options.App.Startup.Mode.Manual">Manuelt</s:String>
@@ -371,7 +371,7 @@
     <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind">Spring unødvendige rammer over.</s:String>
     <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind.Info">(hvis de ikke kan forhåndsvises korrekt)</s:String>
     <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind.Tooltip">Spring unødvendige rammer over&#x0d;hvis de ikke kan forhåndsvises korrekt.</s:String>
-    <s:String x:Key="S.Options.Editor.General.LimitHistory">Antal Fortryd/gendan.</s:String>
+    <s:String x:Key="S.Options.Editor.General.LimitHistory">Antal fortryd/gendan.</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Info">(de ældste handlinger fjernes når grænsen er nået)</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Maximum">(maksimalt antal)</s:String>
     <s:String x:Key="S.Options.Editor.General.SyncPath.Folder">Synk profilers destinationsmappe.</s:String>
