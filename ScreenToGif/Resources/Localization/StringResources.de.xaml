@@ -109,6 +109,7 @@
     <s:String x:Key="S.Command.DeleteNext">Alle nachfolgenden Frames löschen</s:String>
     <s:String x:Key="S.Command.RemoveDuplicates">Duplikate entfernen</s:String>
     <s:String x:Key="S.Command.Reduce">Bildwiederholrate reduzieren</s:String>
+    <s:String x:Key="S.Command.SmoothLoop">Eine glatte Schleife erstellen</s:String>
     <s:String x:Key="S.Command.Reverse">Animation rückwärts abspielen</s:String>
     <s:String x:Key="S.Command.Yoyo">Animation vorwärts bis zum Ende und dann rückwärts abspielen</s:String>
     <s:String x:Key="S.Command.MoveLeft">Ausgewählten Frame nach links verschieben</s:String>
@@ -164,6 +165,7 @@
     <s:String x:Key="S.Updater.Header">Ein neue Version ist verfügbar</s:String>
     <s:String x:Key="S.Updater.NewRelease">Neue Version!</s:String>
     <s:String x:Key="S.Updater.NewRelease.Info">Neue Version {0} kann heruntergeladen werden! Für weitere Details bitte hier klicken.</s:String>
+    <s:String x:Key="S.Updater.NoNewRelease.Info">Es scheint, dass Ihr System nicht mehr unterstützt wird oder dass sich etwas am Aktualisierungssystem geändert hat. Versuchen Sie, die Aktualisierung manuell von der Website herunterzuladen.</s:String>
     <s:String x:Key="S.Updater.Version">Version</s:String>
     <s:String x:Key="S.Updater.Portable">Portabel</s:String>
     <s:String x:Key="S.Updater.Installer">Installation</s:String>
@@ -199,8 +201,6 @@
     <s:String x:Key="S.Options.About">Über</s:String>
     <s:String x:Key="S.Options.Other">Sonstiges</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Header">Fehlendes Tastenkürzel für das Verfolgen des Mauszeigers</s:String>
-    <s:String x:Key="S.Options.Warning.Follow.Message">Um die Option Mauszeiger-Verfolgung zu nutzen, müssen Sie zuerst ein Tastenkürzel bestimmen, dass Sie zum Umschalten verwenden können.</s:String>
-    <s:String x:Key="S.Options.Warning.DesktopDuplication.Header">Fehlende Abhängigkeiten für Bildschirmaufnahme</s:String>
     <s:String x:Key="S.Options.Warning.DesktopDuplication.Message">Um die Bildschirmaufnahme mittels Desktop Duplication API durchzuführen, müssen Sie zuerst SharpDx-Bibliotheken herunterladen.</s:String>
     
     <!--Options • Application-->
@@ -583,9 +583,6 @@
     <s:String x:Key="S.Options.Extras.GifskiLocation.Select">Gifski-Programmpfad öffnen</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.File">Gifski-Bibliothek</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.Invalid">Programmpfad beinhaltet mindestens ein ungültiges Zeichen. Bitte wählen Sie korrekte Adresse aus.</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation">Speicherort für SharpDx (SharpDX.dll, SharpDX.Direct3D11.dll und SharpDX.DXGI.dll)</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation.Select">Pfad für SharpDx-Bibliotheken auswählen</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation.Invalid">Pfadname für SharpDx-Bibliotheken beinhaltet mindestens ein ungültiges Zeichen. Bitte wählen Sie einen gültigen Ordnernamen aus.</s:String>
     <s:String x:Key="S.Options.Extras.License.Ffmpeg">FFmpeg-Lizenz</s:String>
     <s:String x:Key="S.Options.Extras.License.Gifski">Gifski-Lizenz</s:String>
     <s:String x:Key="S.Options.Extras.License.SharpDx">SharpDx-Lizenz</s:String>
@@ -613,6 +610,8 @@
     
     <!--Options • About-->
     <s:String x:Key="S.Options.About.Version">Version:</s:String>
+    <s:String x:Key="S.Options.About.UpdateCheck">Auf Aktualisierungen prüfen</s:String>
+    <s:String x:Key="S.Options.About.UpdateCheck.Nothing">Sie verwenden bereits die neueste Version.</s:String>
     <s:String x:Key="S.Options.About.Author">Autor: Nicke Manarin</s:String>
     <s:String x:Key="S.Options.About.StoreVersion">Microsoft Store Version. Einige Einstellungen sind aufgrund auferlegter Maßnahmen deaktiviert.</s:String>
     <s:String x:Key="S.Options.About.Contact">Kontakt</s:String>
@@ -690,7 +689,6 @@
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">Bildschirmaufnahme fehlgeschlagen. Aufnahmemethode lieferte nach fünf Versuchen keine Frames.</s:String>
     <s:String x:Key="S.Recorder.Warning.StartPauseNotPossible">Starten/Pausieren der Bildschirmaufnahme fehlgeschlagen</s:String>
     <s:String x:Key="S.Recorder.Warning.Windows8">Verwendung von Desktop Duplication API für Bildschirmaufnahme setzt Windows 8 oder höher voraus.</s:String>
-    <s:String x:Key="S.Recorder.Warning.MissingSharpDx">Die SharpDx-Bibliotheken werden benötigt, um den Bildschirm mit Hilfe der Desktop Duplication API zu erfassen. Öffnen Sie die „Einstellungen” ➜ „Extras”, um sie herunterzuladen.</s:String>
     
     <!--New recorder-->
     <s:String x:Key="S.Recorder.Area">Bereich</s:String>
@@ -1026,6 +1024,7 @@
     <s:String x:Key="S.Editor.Edit.Delete">Frames&#10;entfernen</s:String>
     <s:String x:Key="S.Editor.Edit.Frames.Duplicates">Duplikate&#10;entfernen</s:String>
     <s:String x:Key="S.Editor.Edit.Frames.Reduce">Frame-Anzahl&#10;reduzieren</s:String>
+    <s:String x:Key="S.Editor.Edit.Frames.SmoothLoop">Glatte&#x0d;Schleife</s:String>
     <s:String x:Key="S.Editor.Edit.DeletePrevious">Alle vorherigen&#10;entfernen</s:String>
     <s:String x:Key="S.Editor.Edit.DeleteNext">Alle folgenden&#10;entfernen</s:String>
     
@@ -1135,6 +1134,7 @@
     <s:String x:Key="S.Editor.Warning.Ffmpeg">FFmpeg ist nicht verfügbar. Fügen Sie es Umgebungsvariablen hinzu oder wählen Sie den Speicherort in „Einstellungen” ➜ „Extras” aus.</s:String>
     <s:String x:Key="S.Editor.Warning.Gifski">Gifski ist nicht verfügbar. Fügen Sie es Umgebungsvariablen hinzu oder wählen Sie den Speicherort in „Einstellungen” ➜ „Extras” aus.</s:String>
     <s:String x:Key="S.Editor.Warning.LowSpace">Der vom Programm verwendete Speicherplatz ist fast belegt ({0}% übrig). Gehen Sie zu „Einstellungen” ➜ „Temporäre Dateien”, um Speicherplatz frei zu geben.</s:String>
+    <s:String x:Key="S.Editor.Warning.DifferentDpi">Sie haben versucht, mehrere Bilder mit unterschiedlichen Auflösungen (DPIs) zu importieren, was jedoch nicht unterstützt wird. Einige von diesen wurden importiert, andere müssen separat importiert werden.</s:String>
     <s:String x:Key="S.Editor.Warning.DifferentDpi">Sie haben versucht, mehrere Grafiken mit unterschiedlichen Auflösungen (dpi) zu importieren, was nicht unterstützt wird. Einige von ihnen wurden importiert, die anderen müssen separat importiert werden.</s:String>
     
     <!--Editor • Status-->
@@ -1156,6 +1156,8 @@
     <s:String x:Key="S.Editor.ApplyingTransition">Übergang wird angewendet</s:String>
     <s:String x:Key="S.Editor.PreparingSaving">Speichern wird vorbereitet</s:String>
     <s:String x:Key="S.Editor.CancelDiscard">Laden abbrechen und Projekt verwerfen.</s:String>
+    <s:String x:Key="S.Editor.FindingLoop">Perfekte Schleife finden</s:String>
+    <s:String x:Key="S.Editor.DiscardingLoop">In Schleife nicht verwendeten Frames werden verworfen</s:String>
 
     <!--Editor • Frame list-->
     <s:String x:Key="S.Editor.List.Frame">Frame:</s:String>
@@ -1295,6 +1297,16 @@
     <s:String x:Key="S.RemoveDuplicates.Delay.Average">Durchschnitt verwenden</s:String>
     <s:String x:Key="S.RemoveDuplicates.Delay.Sum">Summe verwenden</s:String>
     <s:String x:Key="S.RemoveDuplicates.Info">Diese Aktion analysiert jedes einzelne Pixel und entfernt denjenigen, der gegenüber dem direkten Nachbarn eine {0}%ige Ähnlichkeit aufweist.&#10;Wenn Sie möchten, können Sie die Dauer der Frame-Anzeige einstellen.</s:String>
+
+    <!--Editor • Smooth Loop-->
+    <s:String x:Key="S.SmoothLoop.Header">Glatte Schleife erstellen</s:String>
+    <s:String x:Key="S.SmoothLoop.StartThreshold">Zuerst ignorieren:</s:String>
+    <s:String x:Key="S.SmoothLoop.From">Vergleichen von:</s:String>
+    <s:String x:Key="S.SmoothLoop.From.Last">Ende</s:String>
+    <s:String x:Key="S.SmoothLoop.From.First">Anfang</s:String>
+    <s:String x:Key="S.SmoothLoop.Info">Versucht, einen Frame zu finden, der dem Startframe zu mindestens {0} % ähnlich ist, und löscht alle späteren Frames.&#x0d;Sie können wählen, ob Sie einige anfängliche Frames ignorieren und den Vergleich vom Beginn (nach dem Schwellenwert) oder vom Ende aus starten möchten.</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.Threshold">Die Anzahl der zu ignorierenden Grafiken muss kleiner sein als die Gesamtzahl der Grafiken.</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.NoLoopFound">Mit den gewählten Einstellungen war es nicht möglich, eine glatte Schleife zu erstellen.</s:String>
     
     <!--Editor • Captions-->
     <s:String x:Key="S.Caption.Text">Text</s:String>
