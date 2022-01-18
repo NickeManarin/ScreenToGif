@@ -27,9 +27,6 @@ internal static class PresetExtensions
 
     public static async Task<ValidatedEventArgs> IsValid(UploadPreset preset)
     {
-        if (!preset.IsAnonymous && !await Gfycat.IsAuthorized(preset))
-            return new ValidatedEventArgs("S.SaveAs.Warning.Upload.NotAuthorized", StatusReasons.UploadServiceUnauthorized, () => App.MainViewModel.OpenOptions.Execute(Options.UploadIndex));
-
         switch (preset)
         {
             case GfycatPreset gfycat:
