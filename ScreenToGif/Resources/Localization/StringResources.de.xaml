@@ -109,7 +109,7 @@
     <s:String x:Key="S.Command.DeleteNext">Alle nachfolgenden Frames löschen</s:String>
     <s:String x:Key="S.Command.RemoveDuplicates">Duplikate entfernen</s:String>
     <s:String x:Key="S.Command.Reduce">Bildwiederholrate reduzieren</s:String>
-    <s:String x:Key="S.Command.SmoothLoop">Eine glatte Schleife erzeugen</s:String>
+    <s:String x:Key="S.Command.SmoothLoop">Eine glatte Schleife erstellen</s:String>
     <s:String x:Key="S.Command.Reverse">Animation rückwärts abspielen</s:String>
     <s:String x:Key="S.Command.Yoyo">Animation vorwärts bis zum Ende und dann rückwärts abspielen</s:String>
     <s:String x:Key="S.Command.MoveLeft">Ausgewählten Frame nach links verschieben</s:String>
@@ -165,7 +165,7 @@
     <s:String x:Key="S.Updater.Header">Ein neue Version ist verfügbar!</s:String>
     <s:String x:Key="S.Updater.NewRelease">Neue Version!</s:String>
     <s:String x:Key="S.Updater.NewRelease.Info">Neue Version {0} kann heruntergeladen werden! Für weitere Details bitte hier klicken.</s:String>
-    <s:String x:Key="S.Updater.NoNewRelease.Info">Es scheint, dass Ihr System nicht mehr unterstützt wird. Versuchen Sie, das Update manuell von der Webseite herunterzuladen.</s:String>
+    <s:String x:Key="S.Updater.NoNewRelease.Info">Es scheint, dass Ihr System nicht mehr unterstützt wird oder dass sich etwas am Aktualisierungssystem geändert hat. Versuchen Sie, die Aktualisierung manuell von der Website herunterzuladen.</s:String>
     <s:String x:Key="S.Updater.Version">Version</s:String>
     <s:String x:Key="S.Updater.Portable">Portabel</s:String>
     <s:String x:Key="S.Updater.Installer">Installation</s:String>
@@ -610,8 +610,8 @@
     
     <!--Options • About-->
     <s:String x:Key="S.Options.About.Version">Version:</s:String>
-    <s:String x:Key="S.Options.About.UpdateCheck">Nach Updates suchen</s:String>
-    <s:String x:Key="S.Options.About.UpdateCheck.Nothing">Sie haben bereits die neueste Version.</s:String>
+    <s:String x:Key="S.Options.About.UpdateCheck">Auf Aktualisierungen prüfen</s:String>
+    <s:String x:Key="S.Options.About.UpdateCheck.Nothing">Sie verwenden bereits die neueste Version.</s:String>
     <s:String x:Key="S.Options.About.Author">Autor: Nicke Manarin</s:String>
     <s:String x:Key="S.Options.About.StoreVersion">Microsoft Store Version. Einige Einstellungen sind aufgrund auferlegter Maßnahmen deaktiviert.</s:String>
     <s:String x:Key="S.Options.About.Contact">Kontakt</s:String>
@@ -1133,8 +1133,8 @@
     <s:String x:Key="S.Editor.Warning.Selection">Sie müssen mindestens einen Frame auswählen, um Übergang anwenden zu können.</s:String>
     <s:String x:Key="S.Editor.Warning.Ffmpeg">FFmpeg ist nicht verfügbar. Fügen Sie es Umgebungsvariablen hinzu oder wählen Sie den Speicherort in „Einstellungen” ➜ „Extras” aus.</s:String>
     <s:String x:Key="S.Editor.Warning.Gifski">Gifski ist nicht verfügbar. Fügen Sie es Umgebungsvariablen hinzu oder wählen Sie den Speicherort in „Einstellungen” ➜ „Extras” aus.</s:String>
-    <s:String x:Key="S.Editor.Warning.LowSpace">Der vom Programm verwendete Speicherplatz ist fast belegt ({0} % übrig). Gehen Sie zu „Einstellungen” ➜ „Temporäre Dateien”, um Speicherplatz frei zu geben.</s:String>
-    <s:String x:Key="S.Editor.Warning.DifferentDpi">Sie haben versucht, mehrere Grafiken mit unterschiedlichen Auflösungen (dpi) zu importieren, was nicht unterstützt wird. Einige von ihnen wurden importiert, die anderen müssen separat importiert werden.</s:String>
+    <s:String x:Key="S.Editor.Warning.LowSpace">Der vom Programm verwendete Speicherplatz ist fast belegt ({0}% übrig). Gehen Sie zu „Einstellungen” ➜ „Temporäre Dateien”, um Speicherplatz frei zu geben.</s:String>
+    <s:String x:Key="S.Editor.Warning.DifferentDpi">Sie haben versucht, mehrere Bilder mit unterschiedlichen Auflösungen (DPIs) zu importieren, was jedoch nicht unterstützt wird. Einige von diesen wurden importiert, andere müssen separat importiert werden.</s:String>
     <s:String x:Key="S.Editor.Warning.DifferentSize">Sie haben versucht, mehrere Bilder mit unterschiedlichen Größen zu importieren, was nicht unterstützt wird. Einige von ihnen wurden importiert, andere müssen separat importiert werden.</s:String>
     
     <!--Editor • Status-->
@@ -1157,7 +1157,7 @@
     <s:String x:Key="S.Editor.PreparingSaving">Speichern wird vorbereitet</s:String>
     <s:String x:Key="S.Editor.CancelDiscard">Laden abbrechen und Projekt verwerfen.</s:String>
     <s:String x:Key="S.Editor.FindingLoop">Perfekte Schleife finden</s:String>
-    <s:String x:Key="S.Editor.DiscardingLoop">In der Schleife nicht verwendete Frames verwerfen</s:String>
+    <s:String x:Key="S.Editor.DiscardingLoop">In Schleife nicht verwendeten Frames werden verworfen</s:String>
 
     <!--Editor • Frame list-->
     <s:String x:Key="S.Editor.List.Frame">Frame:</s:String>
@@ -1297,15 +1297,15 @@
     <s:String x:Key="S.RemoveDuplicates.Delay.Average">Durchschnitt verwenden</s:String>
     <s:String x:Key="S.RemoveDuplicates.Delay.Sum">Summe verwenden</s:String>
     <s:String x:Key="S.RemoveDuplicates.Info">Diese Aktion analysiert jedes einzelne Pixel und entfernt denjenigen, der gegenüber dem direkten Nachbarn eine {0}%ige Ähnlichkeit aufweist.&#10;Wenn Sie möchten, können Sie die Dauer der Frame-Anzeige einstellen.</s:String>
-    
+
     <!--Editor • Smooth Loop-->
-    <s:String x:Key="S.SmoothLoop.Header">Glatte Schleife erzeugen</s:String>
+    <s:String x:Key="S.SmoothLoop.Header">Glatte Schleife erstellen</s:String>
     <s:String x:Key="S.SmoothLoop.StartThreshold">Zuerst ignorieren:</s:String>
     <s:String x:Key="S.SmoothLoop.From">Vergleichen von:</s:String>
     <s:String x:Key="S.SmoothLoop.From.Last">Ende</s:String>
-    <s:String x:Key="S.SmoothLoop.From.First">Start</s:String>
-    <s:String x:Key="S.SmoothLoop.Info">Versucht, einen Frame zu finden, der dem Start-Frame mindestens {0} % ähnlich ist, und löscht alle späteren Frames.&#x0d;Sie können wählen, ob Sie einige anfängliche Frames ignorieren und den Vergleich ab dem Start (nach dem Schwellenwert) oder dem Ende beginnen möchten.</s:String>
-    <s:String x:Key="S.SmoothLoop.Warning.Threshold">Die Anzahl der zu ignorierenden Frames muss kleiner sein als die Gesamtzahl der Frames.</s:String>
+    <s:String x:Key="S.SmoothLoop.From.First">Anfang</s:String>
+    <s:String x:Key="S.SmoothLoop.Info">Versucht, einen Frame zu finden, der dem Startframe zu mindestens {0} % ähnlich ist, und löscht alle späteren Frames.&#x0d;Sie können wählen, ob Sie einige anfängliche Frames ignorieren und den Vergleich vom Beginn (nach dem Schwellenwert) oder vom Ende aus starten möchten.</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.Threshold">Die Anzahl der zu ignorierenden Grafiken muss kleiner sein als die Gesamtzahl der Grafiken.</s:String>
     <s:String x:Key="S.SmoothLoop.Warning.NoLoopFound">Mit den gewählten Einstellungen war es nicht möglich, eine glatte Schleife zu erstellen.</s:String>
     
     <!--Editor • Captions-->
