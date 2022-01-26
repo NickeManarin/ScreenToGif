@@ -126,7 +126,7 @@ public partial class Options : Window, INotification
             //Detect if this app is set to start with windows.
             var sub = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", false);
             var key = sub?.GetValue("ScreenToGif");
-            var name = Assembly.GetEntryAssembly()?.Location ?? Process.GetCurrentProcess().MainModule?.FileName;
+            var name = ProcessHelper.GetEntryAssemblyPath();
 
             if (key == null || key as string != name)
             {
@@ -199,7 +199,7 @@ public partial class Options : Window, INotification
             _ignoreStartup = true;
 
             var sub = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-            var name = Assembly.GetEntryAssembly()?.Location ?? Process.GetCurrentProcess().MainModule?.FileName;
+            var name = ProcessHelper.GetEntryAssemblyPath();
 
             if (string.IsNullOrWhiteSpace(name) || sub == null)
             {
@@ -232,7 +232,7 @@ public partial class Options : Window, INotification
             _ignoreStartup = true;
 
             var sub = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-            var name = Assembly.GetEntryAssembly()?.Location ?? Process.GetCurrentProcess().MainModule?.FileName;
+            var name = ProcessHelper.GetEntryAssemblyPath();
 
             if (string.IsNullOrWhiteSpace(name) || sub == null)
             {
