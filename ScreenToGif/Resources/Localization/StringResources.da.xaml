@@ -202,6 +202,7 @@
     <s:String x:Key="S.Options.Other">Andet</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Header">Følg markør mangler en genvej</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Message">Der skal knyttes en genvej til Følg markør, så du kan slå funktionen til/fra efter behov.</s:String>
+  
     <!--Options • Application-->
     <s:String x:Key="S.Options.App.Startup">Start</s:String>
     <s:String x:Key="S.Options.App.Startup.Mode.Manual">Manuelt</s:String>
@@ -1133,7 +1134,8 @@
     <s:String x:Key="S.Editor.Warning.Ffmpeg">FFmpeg findes ikke. Føj det til miljøvariabler eller angiv placeringen i indstillinger.</s:String>
     <s:String x:Key="S.Editor.Warning.Gifski">Gifski findes ikke. Føj det til miljøvariablerne eller angiv placeringen i "Indstillinger".</s:String>
     <s:String x:Key="S.Editor.Warning.LowSpace">Der er ikke plads nok til programmets midlertidige filer ({0}% tilbage). Gå til Indstillinger > Midlertidige filer og frigør plads.</s:String>
-    <s:String x:Key="S.Editor.Warning.DifferentDpi">Import af flere billeder med forskellig DPI er ikke tilladt. Der blev importeret nogen, men resten skal importeres separat.</s:String>
+    <s:String x:Key="S.Editor.Warning.DifferentDpi">Import af flere billeder med forskellig DPI er ikke tilladt. Nogle blev importeret, andre skal importeres separat.</s:String>
+    <s:String x:Key="S.Editor.Warning.DifferentSize">Import af flere billeder med forskellig størrelse er ikke tilladt. Nogle blev importeret, andre skal importeres separat.</s:String>
     
     <!--Editor • Status-->
     <s:String x:Key="S.Editor.RetrievingFromCache">Henter rammer fra cache</s:String>

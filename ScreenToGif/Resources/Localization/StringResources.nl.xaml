@@ -1135,6 +1135,7 @@
     <s:String x:Key="S.Editor.Warning.Gifski">Gifski is niet beschikbaar. Voeg deze toe aan de PATH systeemvariabele of stel de locatie in bij Instellingen.</s:String>
     <s:String x:Key="S.Editor.Warning.LowSpace">Er is niet onvoldoende ruimte beschikbaar op de harde schijf ({0}% over). Klik hier om Instellingen > Tijdelijke bestanden te openen en extra vrije ruimte te maken.</s:String>
     <s:String x:Key="S.Editor.Warning.DifferentDpi">Je hebt geprobeerd meerdere afbeeldingen met verschillende DPI's te importeren, wat niet wordt ondersteund. Sommige zijn geïmporteerd, de andere moeten apart worden geïmporteerd.</s:String>
+    <s:String x:Key="S.Editor.Warning.DifferentSize">U heeft geprobeerd meerdere afbeeldingen met verschillende formaten te importeren, wat niet wordt ondersteund. Sommige afbeeldingen zijn ingelezen, anderen moeten afzonderlijk worden geïmporteerd.</s:String>
     
     <!--Editor • Status-->
     <s:String x:Key="S.Editor.RetrievingFromCache">Frames ophalen uit de tijdelijke opslag</s:String>
