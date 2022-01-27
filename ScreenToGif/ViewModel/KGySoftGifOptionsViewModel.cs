@@ -1,7 +1,5 @@
 #region Usings
 
-using ScreenToGif.Util.Extensions;
-
 #region Used Namespaces
 
 using System;
@@ -16,6 +14,7 @@ using KGySoft.Drawing;
 using KGySoft.Drawing.Imaging;
 
 using ScreenToGif.ViewModel.ExportPresets.AnimatedImage.Gif;
+using ScreenToGif.Util.Extensions;
 
 #endregion
 
@@ -251,7 +250,7 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
 
         // We don't care about DPI here, the preview is stretched anyway
         if (_previewBitmap == null)
-            _previewBitmap = new WriteableBitmap(_currentFrame.Width, _currentFrame.Height, 96, 96, PixelFormats.Bgra32, null);
+            _previewBitmap = new WriteableBitmap(_currentFrame.Width, _currentFrame.Height, 96, 96, PixelFormats.Pbgra32, null);
 
         using (IReadWriteBitmapData previewBitmapData = _previewBitmap.GetReadWriteBitmapData())
             _currentFrame.CopyTo(previewBitmapData, Point.Empty, GetQuantizer(), GetDitherer());
