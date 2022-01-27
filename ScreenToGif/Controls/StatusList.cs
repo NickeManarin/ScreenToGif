@@ -34,9 +34,8 @@ public class StatusList : StackPanel
         if (current != null)
             Children.Remove(current);
 
-        var band = new StatusBand();
-        band.Reason = reason;
-        band.Dismissed += (sender, args) => Children.Remove(band);
+        var band = new StatusBand { Reason = reason };
+        band.Dismissed += (_, _) => Children.Remove(band);
 
         if (Children.Count >= MaxBands)
             Children.RemoveAt(0);
@@ -57,7 +56,7 @@ public class StatusList : StackPanel
         }
     }
 
-    public void Info(string text, StatusReasons reason, Action action = null)
+    public void Info(string text, StatusReasons reason = StatusReasons.None, Action action = null)
     {
         Add(StatusType.Info, text, reason, action);
     }

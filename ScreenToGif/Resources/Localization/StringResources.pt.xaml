@@ -1307,6 +1307,7 @@
     <s:String x:Key="S.SmoothLoop.Info">Tenta encontrar um quadro com no mínimo {0} % de similaridade do quadro inicial e deleta todos os próximos quadros.&#x0d;Você pode escolher se você quer ignorar alguns quadros iniciais e/ou executar a verificação do início (depois dos quadros ignorados) ou do fim.</s:String>
     <s:String x:Key="S.SmoothLoop.Warning.Threshold">O número de quadros para serem ignorados precisa ser menor que o número de quadros totais.</s:String>
     <s:String x:Key="S.SmoothLoop.Warning.NoLoopFound">Não foi posssível criar um loop suave com as configurações atuais.</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.AlreadySmoothLoop">Você já tem um loop suave baseando-se nas configurações atuais.</s:String>
     
     <!--Editor • Captions-->
     <s:String x:Key="S.Caption.Text">Texto</s:String>

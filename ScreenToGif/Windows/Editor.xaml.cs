@@ -1732,12 +1732,18 @@ namespace ScreenToGif.Windows
             }
 
             Cursor = Cursors.AppStarting;
+            var initialCount = Project.Frames.Count;
 
             var index = await Task.Run(() => SmoothLoopAsync((decimal)UserSettings.All.SmoothLoopSimilarity, UserSettings.All.SmoothLoopStartThreshold, UserSettings.All.SmoothLoopFrom));
 
-            if (index == Project.Frames.Count)
+            //If nothing changed, it means that no frame was removed.
+            if (Project.Frames.Count == initialCount)
             {
-                StatusList.Warning(LocalizationHelper.Get("S.SmoothLoop.Warning.NoLoopFound"));
+                //The reason could be for no loop found or loop already smooth.
+                if (index == Project.Frames.Count - 1)
+                    StatusList.Info(LocalizationHelper.Get("S.SmoothLoop.Warning.AlreadySmoothLoop"));
+                else
+                    StatusList.Warning(LocalizationHelper.Get("S.SmoothLoop.Warning.NoLoopFound"));
 
                 //Workaround for not disabling the CanExecute of the panel.
                 _applyAction = ApplySmoothLoopButton_Click;
@@ -6291,12 +6297,11 @@ namespace ScreenToGif.Windows
                     break;
                 }
 
-                count++;
                 start += step;
             }
             
-            if (found == -1 || found == threshold || found == Project.Frames.Count - 1)
-                return Project.Frames.Count;
+            if (found == -1 || found == threshold - 1 || found == Project.Frames.Count - 1)
+                return found;
 
             var removeList = Project.Frames.GetRange(found + 1, Project.Frames.Count - 1 - found).Select(s => s.Index).ToList();
 
