@@ -57,7 +57,7 @@ public static class Arguments
     /// <summary>
     /// The capture region.
     /// </summary>
-    public static Rect Region { get; set; }
+    public static Rect Region { get; set; } = Rect.Empty;
 
     /// <summary>
     /// The capture frequency multiplier.

@@ -16,7 +16,7 @@
 </p>
 <h1 align="center">ScreenToGif 🎬 <a href="http://www.screentogif.com/" target="_blank">screentogif.com</a></h1>
 
-<p align="center">This tool allows you to record a selected area of your <strong>screen</strong>, live feed from your <strong>webcam</strong> or live drawings from a <strong>sketchboard</strong>. Afterwards, you can edit and save the animation as a gif, apng, video, psd or png images.</p>
+<p align="center">This tool allows you to record a selected area of your <strong>screen</strong>, live feed from your <strong>webcam</strong> or live drawings from a <strong>sketchboard</strong>. Afterward, you can edit and save the animation as a gif, apng, video, psd or png image.</p>
 
 <p align="center">
     <a href="https://github.com/NickeManarin/ScreenToGif/releases" target="_blank">
@@ -33,7 +33,7 @@
 </p>
 
 <p align="center">
-<g-emoji ios-version="6.0" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a0.png" alias="warning">⚠️</g-emoji> Attention, it requires <a href="https://go.microsoft.com/fwlink/?LinkId=2085155">.Net Framework 4.8</a> (or above). 
+<g-emoji ios-version="6.0" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a0.png" alias="warning">⚠️</g-emoji> Attention, it requires <a href="https://dotnet.microsoft.com/en-us/download/dotnet/6.0/runtime">.NET 6 Desktop Runtime</a> (or above). 
  <g-emoji ios-version="6.0" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a0.png" alias="warning">⚠️</g-emoji>
 </p>
 

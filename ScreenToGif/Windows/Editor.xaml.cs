@@ -952,13 +952,8 @@ namespace ScreenToGif.Windows
 
             if (result.HasValue && result.Value)
             {
-                ClosePanel();
-
-                //DiscardProject_Executed(null, null);
-
                 await Task.Run(() => ImportFrom(ofd.FileNames.ToList()));
 
-                ClosePanel(removeEvent: true);
                 CommandManager.InvalidateRequerySuggested();
             }
         }
@@ -3780,7 +3775,7 @@ namespace ScreenToGif.Windows
 
         #region Async Import
 
-        private List<FrameInfo> InsertInternal(string fileName, string pathTemp, ref double previousDpi, ref bool warn)
+        private List<FrameInfo> InsertInternal(string fileName, string pathTemp, ref Size previousSize, ref double previousDpi, ref bool warn, ref bool warnSize)
         {
             List<FrameInfo> listFrames;
 
@@ -3815,13 +3810,13 @@ namespace ScreenToGif.Windows
                     case "apng":
                     case "png":
                     {
-                        listFrames = ImportFromPng(fileName, pathTemp, ref previousDpi, ref warn);
+                        listFrames = ImportFromPng(fileName, pathTemp, ref previousSize, ref previousDpi, ref warn, ref warnSize);
                         break;
                     }
 
                     default:
                     {
-                        listFrames = ImportFromImage(fileName, pathTemp, ref previousDpi, ref warn);
+                        listFrames = ImportFromImage(fileName, pathTemp, ref previousSize, ref previousDpi, ref warn, ref warnSize);
                         break;
                     }
                 }
@@ -3852,7 +3847,9 @@ namespace ScreenToGif.Windows
 
             var project = new ProjectInfo().CreateProjectFolder(ProjectByType.Editor);
             var currentDpi = 0D;
+            var currentSize = Size.Empty;
             var wasWarned = false;
+            var wasWarnedSized = false;
 
             //Adds each image to a list.
             foreach (var file in fileList)
@@ -3861,17 +3858,26 @@ namespace ScreenToGif.Windows
                     return false;
 
                 var warn = false;
-                var frame = InsertInternal(file, project.FullPath, ref currentDpi, ref warn);
+                var warnSize = false;
+                var frame = InsertInternal(file, project.FullPath, ref currentSize, ref currentDpi, ref warn, ref warnSize);
 
-                if (frame != null)
-                    project.Frames.AddRange(frame);
+                //Size and DPI validations.
+                if (warnSize && !wasWarnedSized)
+                {
+                    wasWarnedSized = true;
+                    Dispatcher.Invoke(() => StatusList.Warning(LocalizationHelper.Get("S.Editor.Warning.DifferentSize")));
+                    continue;
+                }
 
-                //Warn that it's not allowed to import images with multiple DPI's at the same time.
-                if (currentDpi > 0 && warn && !wasWarned)
+                if (warn && !wasWarned)
                 {
                     wasWarned = true;
                     Dispatcher.Invoke(() => StatusList.Warning(LocalizationHelper.Get("S.Editor.Warning.DifferentDpi")));
+                    continue;
                 }
+
+                if (frame != null)
+                    project.Frames.AddRange(frame);
             }
 
             if (project.Frames.Count == 0)
@@ -3917,7 +3923,9 @@ namespace ScreenToGif.Windows
 
             var project = new ProjectInfo().CreateProjectFolder(ProjectByType.Editor);
             var currentDpi = 0D;
+            var currentSize = Size.Empty;
             var wasWarned = false;
+            var wasWarnedSized = false;
 
             //Adds each image to a list.
             foreach (var file in fileList)
@@ -3926,17 +3934,26 @@ namespace ScreenToGif.Windows
                     return false;
 
                 var warn = false;
-                var frame = InsertInternal(file, project.FullPath, ref currentDpi, ref warn);
+                var warnSize = false;
+                var frame = InsertInternal(file, project.FullPath, ref currentSize, ref currentDpi, ref warn, ref warnSize);
 
-                if (frame != null)
-                    project.Frames.AddRange(frame);
+                //Size and DPI validations.
+                if (warnSize && !wasWarnedSized)
+                {
+                    wasWarnedSized = true;
+                    Dispatcher.Invoke(() => StatusList.Warning(LocalizationHelper.Get("S.Editor.Warning.DifferentSize")));
+                    continue;
+                }
 
-                //Warn that it's not allowed to import images with multiple DPI's at the same time.
-                if (currentDpi > 0 && warn && !wasWarned)
+                if (warn && !wasWarned)
                 {
                     wasWarned = true;
                     Dispatcher.Invoke(() => StatusList.Warning(LocalizationHelper.Get("S.Editor.Warning.DifferentDpi")));
+                    continue;
                 }
+
+                if (frame != null)
+                    project.Frames.AddRange(frame);
             }
 
             if (!project.Any)
@@ -3952,7 +3969,7 @@ namespace ScreenToGif.Windows
                 return false;
             }
 
-            var list = Dispatcher.Invoke<List<FrameInfo>>(() =>
+            var list = Dispatcher.Invoke(() =>
             {
                 #region Insert
 
@@ -4126,7 +4143,7 @@ namespace ScreenToGif.Windows
             return listFrames;
         }
 
-        private List<FrameInfo> ImportFromPng(string source, string pathTemp, ref double previousDpi, ref bool warn)
+        private List<FrameInfo> ImportFromPng(string source, string pathTemp, ref Size previousSize, ref double previousDpi, ref bool warn, ref bool warnSize)
         {
             ShowProgress(LocalizationHelper.Get("S.Editor.ImportingFrames"), 50, true);
 
@@ -4136,7 +4153,7 @@ namespace ScreenToGif.Windows
                 var success = apng.ReadFrames();
 
                 if (!success)
-                    return ImportFromImage(source, pathTemp, ref previousDpi, ref warn);
+                    return ImportFromImage(source, pathTemp, ref previousSize, ref previousDpi, ref warn, ref warnSize);
 
                 var fullSize = new System.Drawing.Size((int)apng.Ihdr.Width, (int)apng.Ihdr.Height);
                 var list = new List<FrameInfo>();
@@ -4193,7 +4210,7 @@ namespace ScreenToGif.Windows
             }
         }
 
-        private List<FrameInfo> ImportFromImage(string source, string pathTemp, ref double previousDpi, ref bool warn)
+        private List<FrameInfo> ImportFromImage(string source, string pathTemp, ref Size previousSize, ref double previousDpi, ref bool warn, ref bool warnSize)
         {
             var fileName = Path.Combine(pathTemp, $"{0} {DateTime.Now:hh-mm-ss-ffff}.png");
 
@@ -4208,9 +4225,18 @@ namespace ScreenToGif.Windows
                 return null;
             }
 
+            if (!previousSize.IsEmpty && (bitmap.PixelHeight != (int)previousSize.Height || bitmap.PixelWidth != (int)previousSize.Width))
+            {
+                warnSize = true;
+                return null;
+            }
+
             if (Math.Abs(previousDpi) < 0.01)
                 previousDpi = bitmap.DpiX;
 
+            if (bitmap.PixelHeight != (int)previousSize.Height || bitmap.PixelWidth != (int)previousSize.Width)
+                previousSize = new Size(bitmap.PixelWidth, bitmap.PixelHeight);
+            
             if (bitmap.Format != PixelFormats.Bgra32)
                 bitmap = new FormatConvertedBitmap(bitmap, PixelFormats.Bgra32, null, 0);
 

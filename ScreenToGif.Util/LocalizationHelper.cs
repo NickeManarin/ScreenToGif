@@ -143,14 +143,14 @@ public static class LocalizationHelper
             var updated = GetWhenResourceWasUpdated(culture);
 
             //If resource available is older than assembly.
-            if (!updated.HasValue || updated <= File.GetLastWriteTime(Assembly.GetExecutingAssembly().Location))
+            if (!updated.HasValue || updated <= File.GetLastWriteTime(ProcessHelper.GetEntryAssemblyPath()))
             {
                 if (File.Exists(file))
                     File.Delete(file);
 
                 return;
             }
-
+            
             //If a translation was previously downloaded.
             if (File.Exists(file))
             {

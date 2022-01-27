@@ -1135,6 +1135,7 @@
     <s:String x:Key="S.Editor.Warning.Gifski">Gifski não está presente no seu sistema ou não foi encontrado. Adicione-o para as variáveis do sistema (Path) ou clique aqui para abrir Opções > Extras para configurar a localização.</s:String>
     <s:String x:Key="S.Editor.Warning.LowSpace">Não há espaço suficiente na unidade de armazenamento em que este aplicativo guarda seu cache ({0}% restantes). Clique aqui para abrir Opções > Arquivos Temporarios para liberar algum espaço.</s:String>
     <s:String x:Key="S.Editor.Warning.DifferentDpi">Você tentou importar múltiplas imagens com DPIs diferentes, o que não é suportado. Algumas delas foram importadas, outras precisam ser importadas separadamente.</s:String>
+    <s:String x:Key="S.Editor.Warning.DifferentSize">Você tentou importar múltiplas imagens com tamanhos diferentes, o que não é suportado. Algumas delas foram importadas, outras precisam ser importadas separadamente.</s:String>
     
     <!--Editor • Status-->
     <s:String x:Key="S.Editor.RetrievingFromCache">Buscando quadros do cache</s:String>
