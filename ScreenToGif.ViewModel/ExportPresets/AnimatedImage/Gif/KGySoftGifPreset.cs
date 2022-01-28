@@ -61,8 +61,9 @@ public class KGySoftGifPreset : GifPreset
             IsDefault = true,
             IsSelectedForEncoder = true,
             CreationDate = new DateTime(2021, 12, 15),
-            QuantizerId = $"{nameof(OptimizedPaletteQuantizer)}.{nameof(OptimizedPaletteQuantizer.Octree)}",
+            QuantizerId = $"{nameof(OptimizedPaletteQuantizer)}.{nameof(OptimizedPaletteQuantizer.Wu)}",
             DithererId = $"{nameof(ErrorDiffusionDitherer)}.{nameof(ErrorDiffusionDitherer.FloydSteinberg)}",
+            BitLevel = 7,
         },
         new KGySoftGifPreset
         {
@@ -76,7 +77,18 @@ public class KGySoftGifPreset : GifPreset
             QuantizerId = $"{nameof(PredefinedColorsQuantizer)}.{nameof(PredefinedColorsQuantizer.SystemDefault8BppPalette)}",
             DithererId = $"{nameof(OrderedDitherer)}.{nameof(OrderedDitherer.Bayer8x8)}",
         },
-    };
+        new KGySoftGifPreset
+        {
+            TitleKey = "S.Preset.Gif.KGySoft.Fastest.Title",
+            DescriptionKey = "S.Preset.Gif.KGySoft.Fastest.Description",
+            HasAutoSave = true,
+            IsSelected = true,
+            IsDefault = true,
+            IsSelectedForEncoder = true,
+            CreationDate = new DateTime(2021, 12, 15),
+            QuantizerId = $"{nameof(PredefinedColorsQuantizer)}.{nameof(PredefinedColorsQuantizer.Grayscale)}",
+        },
+   };
 
     #endregion
 
