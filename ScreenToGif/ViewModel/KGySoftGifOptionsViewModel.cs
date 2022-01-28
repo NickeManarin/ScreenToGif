@@ -2,7 +2,6 @@
 
 #region Used Namespaces
 
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -37,53 +36,10 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
 
     #region Static Fields
 
-    private static readonly QuantizerDescriptor[] _quantizers =
-    {
-        new(typeof(PredefinedColorsQuantizer), nameof(PredefinedColorsQuantizer.BlackAndWhite)),
-        new(typeof(PredefinedColorsQuantizer), nameof(PredefinedColorsQuantizer.Grayscale4)),
-        new(typeof(PredefinedColorsQuantizer), nameof(PredefinedColorsQuantizer.Grayscale16)),
-        new(typeof(PredefinedColorsQuantizer), nameof(PredefinedColorsQuantizer.Grayscale)),
-        new(typeof(PredefinedColorsQuantizer), nameof(PredefinedColorsQuantizer.SystemDefault4BppPalette)),
-        new(typeof(PredefinedColorsQuantizer), nameof(PredefinedColorsQuantizer.SystemDefault8BppPalette)),
-        new(typeof(PredefinedColorsQuantizer), nameof(PredefinedColorsQuantizer.Rgb332)),
-
-        new(typeof(OptimizedPaletteQuantizer), nameof(OptimizedPaletteQuantizer.Octree)),
-        new(typeof(OptimizedPaletteQuantizer), nameof(OptimizedPaletteQuantizer.MedianCut)),
-        new(typeof(OptimizedPaletteQuantizer), nameof(OptimizedPaletteQuantizer.Wu)),
-    };
-
-    private static readonly DithererDescriptor[] _ditherers =
-    {
-        new(null),
-
-        new(typeof(OrderedDitherer), nameof(OrderedDitherer.Bayer2x2)),
-        new(typeof(OrderedDitherer), nameof(OrderedDitherer.Bayer3x3)),
-        new(typeof(OrderedDitherer), nameof(OrderedDitherer.Bayer4x4)),
-        new(typeof(OrderedDitherer), nameof(OrderedDitherer.Bayer8x8)),
-        new(typeof(OrderedDitherer), nameof(OrderedDitherer.DottedHalftone)),
-        new(typeof(OrderedDitherer), nameof(OrderedDitherer.BlueNoise)),
-
-        new(typeof(ErrorDiffusionDitherer), nameof(ErrorDiffusionDitherer.Atkinson)),
-        new(typeof(ErrorDiffusionDitherer), nameof(ErrorDiffusionDitherer.Burkes)),
-        new(typeof(ErrorDiffusionDitherer), nameof(ErrorDiffusionDitherer.FloydSteinberg)),
-        new(typeof(ErrorDiffusionDitherer), nameof(ErrorDiffusionDitherer.JarvisJudiceNinke)),
-        new(typeof(ErrorDiffusionDitherer), nameof(ErrorDiffusionDitherer.Sierra3)),
-        new(typeof(ErrorDiffusionDitherer), nameof(ErrorDiffusionDitherer.Sierra2)),
-        new(typeof(ErrorDiffusionDitherer), nameof(ErrorDiffusionDitherer.SierraLite)),
-        new(typeof(ErrorDiffusionDitherer), nameof(ErrorDiffusionDitherer.StevensonArce)),
-        new(typeof(ErrorDiffusionDitherer), nameof(ErrorDiffusionDitherer.Stucki)),
-
-        new(typeof(RandomNoiseDitherer).GetConstructor(new[] { typeof(float), typeof(int?) })),
-        new(typeof(InterleavedGradientNoiseDitherer).GetConstructor(new[] { typeof(float) })),
-    };
-        
-    private static readonly Dictionary<string, QuantizerDescriptor> _quantizersById = _quantizers.ToDictionary(d => d.Id);
-    private static readonly Dictionary<string, DithererDescriptor> _ditherersById = _ditherers.Where(d => d.Id != null).ToDictionary(d => d.Id);
-
     private static readonly HashSet<string> _affectsPreview = new()
     {
         // quantizer settings
-        nameof(QuantizerId), nameof(BackColor), nameof(AlphaThreshold), nameof(WhiteThreshold), nameof(DirectMapping), nameof(PaletteSize),
+        nameof(QuantizerId), nameof(BackColor), nameof(AlphaThreshold), nameof(WhiteThreshold), nameof(DirectMapping), nameof(PaletteSize), nameof(BitLevel),
 
         // ditherer settings
         nameof(DithererId), nameof(Strength), nameof(Seed), nameof(IsSerpentineProcessing),
@@ -109,8 +65,8 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
     #region Properties
 
     // Quantizer
-    public QuantizerDescriptor[] Quantizers => _quantizers;
-    public string QuantizerId { get => Get(_preset.QuantizerId ?? _quantizers[0].Id); set => Set(value); }
+    public QuantizerDescriptor[] Quantizers => QuantizerDescriptor.Quantizers;
+    public string QuantizerId { get => Get(_preset.QuantizerId ?? QuantizerDescriptor.Quantizers[0].Id); set => Set(value); }
     public Color BackColor { get => Get(_preset.BackColor); set => Set(value); }
     public byte AlphaThreshold { get => Get(_preset.AlphaThreshold); set => Set(value); }
     public byte WhiteThreshold { get => Get(_preset.WhiteThreshold); set => Set(value); }
@@ -118,10 +74,12 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
     public int PaletteSize { get => Get(_preset.PaletteSize); set => Set(value); }
     public string CurrentFramePath { get => Get<string>(); set => Set(value); }
     public bool ShowCurrentFrame { get => Get(_preset.PreviewCurrentFrame); set => Set(value); }
+    public byte? BitLevel { get => Get(_preset.BitLevel); set => Set(value); }
+    public bool IsCustomBitLevel { get => Get<bool>(); set => Set(value); }
 
     // Ditherer
     public bool UseDitherer { get => Get(_preset.DithererId != null); set => Set(value); }
-    public DithererDescriptor[] Ditherers => _ditherers;
+    public DithererDescriptor[] Ditherers => DithererDescriptor.Ditherers;
     public string DithererId { get => Get(_preset.DithererId); set => Set(value); }
     public float Strength { get => Get(_preset.Strength); set => Set(value); }
     public int? Seed { get => Get(_preset.Seed); set => Set(value); }
@@ -139,6 +97,7 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
     {
         _preset = preset;
         _lastDitherer = preset.DithererId;
+        IsCustomBitLevel = preset.BitLevel.HasValue;
     }
 
     #endregion
@@ -173,9 +132,22 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
             case nameof(PaletteSize):
                 _preset.PaletteSize = PaletteSize;
                 break;
+            case nameof(BitLevel):
+                _preset.BitLevel = BitLevel;
+                IsCustomBitLevel = BitLevel.HasValue;
+                break;
+            case nameof(IsCustomBitLevel):
+                if (IsCustomBitLevel)
+                {
+                    if (BitLevel is null or < 1 or > 8)
+                        BitLevel = 5;
+                }
+                else
+                    BitLevel = null;
+                break;
 
             case nameof(UseDitherer):
-                DithererId = e.NewValue is true ? _lastDitherer ?? _ditherers.First(d => d.Id != null).Id : null;
+                DithererId = e.NewValue is true ? _lastDitherer ?? Ditherers.First(d => d.Id != null).Id : null;
                 break;
             case nameof(DithererId):
                 _preset.DithererId = DithererId;
@@ -253,7 +225,7 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
             _previewBitmap = new WriteableBitmap(_currentFrame.Width, _currentFrame.Height, 96, 96, PixelFormats.Pbgra32, null);
 
         using (IReadWriteBitmapData previewBitmapData = _previewBitmap.GetReadWriteBitmapData())
-            _currentFrame.CopyTo(previewBitmapData, Point.Empty, GetQuantizer(), GetDitherer());
+            _currentFrame.CopyTo(previewBitmapData, Point.Empty, QuantizerDescriptor.Create(QuantizerId, _preset), DithererDescriptor.Create(DithererId, _preset));
 
         // TODO: or canceled
         if (IsDisposed)
@@ -261,26 +233,6 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
 
         PreviewImage = _previewBitmap;
         OnPropertyChanged(new PropertyChangedExtendedEventArgs(null, _previewBitmap, nameof(PreviewImage)));
-    }
-
-    private IQuantizer GetQuantizer()
-    {
-        string id = QuantizerId;
-        if (id == null)
-            throw new InvalidOperationException($"{nameof(QuantizerId)} is null");
-
-        QuantizerDescriptor descriptor = _quantizersById.GetValueOrDefault(id) ?? throw new InvalidOperationException($"Invalid {QuantizerId}");
-        return descriptor.Create(_preset);
-    }
-
-    private IDitherer GetDitherer()
-    {
-        string id = DithererId;
-        if (id == null)
-            return null;
-
-        DithererDescriptor descriptor = _ditherersById.GetValueOrDefault(id) ?? throw new InvalidOperationException($"Invalid {DithererId}");
-        return descriptor.Create(_preset);
     }
 
     #endregion

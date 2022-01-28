@@ -1,6 +1,7 @@
 #region Usings
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -22,12 +23,45 @@ public class QuantizerDescriptor
 {
     #region Fields
 
+    #region Static Fields
+
+    private static readonly QuantizerDescriptor[] _quantizers =
+    {
+        new(typeof(PredefinedColorsQuantizer), nameof(PredefinedColorsQuantizer.BlackAndWhite)),
+        new(typeof(PredefinedColorsQuantizer), nameof(PredefinedColorsQuantizer.Grayscale4)),
+        new(typeof(PredefinedColorsQuantizer), nameof(PredefinedColorsQuantizer.Grayscale16)),
+        new(typeof(PredefinedColorsQuantizer), nameof(PredefinedColorsQuantizer.Grayscale)),
+        new(typeof(PredefinedColorsQuantizer), nameof(PredefinedColorsQuantizer.SystemDefault4BppPalette)),
+        new(typeof(PredefinedColorsQuantizer), nameof(PredefinedColorsQuantizer.SystemDefault8BppPalette)),
+        new(typeof(PredefinedColorsQuantizer), nameof(PredefinedColorsQuantizer.Rgb332)),
+
+        new(typeof(OptimizedPaletteQuantizer), nameof(OptimizedPaletteQuantizer.Octree)),
+        new(typeof(OptimizedPaletteQuantizer), nameof(OptimizedPaletteQuantizer.MedianCut)),
+        new(typeof(OptimizedPaletteQuantizer), nameof(OptimizedPaletteQuantizer.Wu)),
+    };
+
+    private static readonly Dictionary<string, QuantizerDescriptor> _quantizersById = _quantizers.ToDictionary(d => d.Id);
+
+    #endregion
+
+    #region Instance Fields
+
     private readonly MethodAccessor _method;
     private readonly ParameterInfo[] _parameters;
 
     #endregion
 
+    #endregion
+
     #region Properties
+
+    #region Static Properties
+
+    internal static QuantizerDescriptor[] Quantizers => _quantizers;
+
+    #endregion
+
+    #region Instance Properties
 
     public string Id { get; }
     public string Title => LocalizationHelper.Get($"S.SaveAs.KGySoft.Quantizer.{Id}");
@@ -36,16 +70,19 @@ public class QuantizerDescriptor
     public bool HasWhiteThreshold { get; }
     public bool HasDirectMapping { get; }
     public bool HasMaxColors { get; }
+    public bool HasBitLevel { get; }
+
+    #endregion
 
     #endregion
 
     #region Constructors
 
-    internal QuantizerDescriptor(Type type, string methodName) : this(type.GetMethod(methodName))
+    private QuantizerDescriptor(Type type, string methodName) : this(type.GetMethod(methodName))
     {
     }
 
-    internal QuantizerDescriptor(MethodInfo method)
+    private QuantizerDescriptor(MethodInfo method)
     {
         _method = MethodAccessor.GetAccessor(method);
         Id = $"{method.DeclaringType.Name}.{method.Name}";
@@ -54,18 +91,21 @@ public class QuantizerDescriptor
         HasWhiteThreshold = _parameters.Any(p => p.Name == "whiteThreshold");
         HasDirectMapping = _parameters.Any(p => p.Name == "directMapping");
         HasMaxColors = _parameters.Any(p => p.Name == "maxColors");
+        HasBitLevel = method.DeclaringType == typeof(OptimizedPaletteQuantizer);
     }
 
     #endregion
 
     #region Methods
 
-    internal IQuantizer Create(KGySoftGifPreset preset)
+    internal static IQuantizer Create(string id, KGySoftGifPreset preset)
     {
-        object[] args = new object[_parameters.Length];
-        for (int i = 0; i < _parameters.Length; i++)
+        QuantizerDescriptor descriptor = _quantizersById.GetValueOrDefault(id ?? _quantizers[0].Id) ?? throw new ArgumentException($"Invalid {id}", nameof(id));
+
+        object[] args = new object[descriptor._parameters.Length];
+        for (int i = 0; i < descriptor._parameters.Length; i++)
         {
-            switch (_parameters[i].Name)
+            switch (descriptor._parameters[i].Name)
             {
                 case "backColor":
                     args[i] = preset.BackColor.ToDrawingColor();
@@ -83,11 +123,14 @@ public class QuantizerDescriptor
                     args[i] = preset.PaletteSize;
                     break;
                 default:
-                    throw new InvalidOperationException($"Unexpected parameter: {_parameters[i]}");
+                    throw new InvalidOperationException($"Unexpected parameter: {descriptor._parameters[i]}");
             }
         }
 
-        return (IQuantizer)_method.Invoke(null, args);
+        IQuantizer result = (IQuantizer)descriptor._method.Invoke(null, args);
+        if (result is OptimizedPaletteQuantizer opt && preset.BitLevel != 0)
+            result = opt.ConfigureBitLevel(preset.BitLevel);
+        return result;
     }
 
     #endregion

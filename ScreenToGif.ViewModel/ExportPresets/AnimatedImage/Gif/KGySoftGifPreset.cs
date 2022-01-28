@@ -24,6 +24,7 @@ public class KGySoftGifPreset : GifPreset
     private byte _whiteThreshold = 128;
     private bool _directMapping;
     private int _paletteSize = 256;
+    private byte? _bitLevel;
     private float _strength;
     private int? _seed;
     private bool _serpentine;
@@ -139,6 +140,16 @@ public class KGySoftGifPreset : GifPreset
     {
         get => _paletteSize;
         set => SetProperty(ref _paletteSize, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the bit level used by an optimized quantizer.
+    /// This property is ignored by predefined colors quantizers.
+    /// </summary>
+    public byte? BitLevel
+    {
+        get => _bitLevel;
+        set => SetProperty(ref _bitLevel, value);
     }
 
     #endregion

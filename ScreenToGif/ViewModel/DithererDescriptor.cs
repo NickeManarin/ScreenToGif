@@ -1,6 +1,7 @@
 #region Usings
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
@@ -23,13 +24,56 @@ public class DithererDescriptor
 {
     #region Fields
 
+    #region Static Fields
+
+    private static readonly DithererDescriptor[] _ditherers =
+    {
+        new(null),
+
+        new(typeof(OrderedDitherer), nameof(OrderedDitherer.Bayer2x2)),
+        new(typeof(OrderedDitherer), nameof(OrderedDitherer.Bayer3x3)),
+        new(typeof(OrderedDitherer), nameof(OrderedDitherer.Bayer4x4)),
+        new(typeof(OrderedDitherer), nameof(OrderedDitherer.Bayer8x8)),
+        new(typeof(OrderedDitherer), nameof(OrderedDitherer.DottedHalftone)),
+        new(typeof(OrderedDitherer), nameof(OrderedDitherer.BlueNoise)),
+
+        new(typeof(ErrorDiffusionDitherer), nameof(ErrorDiffusionDitherer.Atkinson)),
+        new(typeof(ErrorDiffusionDitherer), nameof(ErrorDiffusionDitherer.Burkes)),
+        new(typeof(ErrorDiffusionDitherer), nameof(ErrorDiffusionDitherer.FloydSteinberg)),
+        new(typeof(ErrorDiffusionDitherer), nameof(ErrorDiffusionDitherer.JarvisJudiceNinke)),
+        new(typeof(ErrorDiffusionDitherer), nameof(ErrorDiffusionDitherer.Sierra3)),
+        new(typeof(ErrorDiffusionDitherer), nameof(ErrorDiffusionDitherer.Sierra2)),
+        new(typeof(ErrorDiffusionDitherer), nameof(ErrorDiffusionDitherer.SierraLite)),
+        new(typeof(ErrorDiffusionDitherer), nameof(ErrorDiffusionDitherer.StevensonArce)),
+        new(typeof(ErrorDiffusionDitherer), nameof(ErrorDiffusionDitherer.Stucki)),
+
+        new(typeof(RandomNoiseDitherer).GetConstructor(new[] { typeof(float), typeof(int?) })),
+        new(typeof(InterleavedGradientNoiseDitherer).GetConstructor(new[] { typeof(float) })),
+    };
+
+    private static readonly Dictionary<string, DithererDescriptor> _ditherersById = _ditherers.Where(d => d.Id != null).ToDictionary(d => d.Id);
+
+    #endregion
+
+    #region Instance Fields
+
     private readonly CreateInstanceAccessor _ctor;
     private readonly ParameterInfo[] _parameters;
     private readonly PropertyAccessor _property;
 
     #endregion
 
+    #endregion
+
     #region Properties
+
+    #region Static Properties
+
+    internal static DithererDescriptor[] Ditherers => _ditherers;
+
+    #endregion
+
+    #region Instance Properties
 
     public string Id { get; }
     public string Title => LocalizationHelper.Get($"S.SaveAs.KGySoft.Ditherer.{Id ?? "None"}");
@@ -40,13 +84,15 @@ public class DithererDescriptor
 
     #endregion
 
+    #endregion
+
     #region Constructors
 
-    internal DithererDescriptor(Type type, string propertyName) : this(type.GetProperty(propertyName))
+    private DithererDescriptor(Type type, string propertyName) : this(type.GetProperty(propertyName))
     {
     }
 
-    internal DithererDescriptor(MemberInfo member)
+    private DithererDescriptor(MemberInfo member)
     {
         switch (member)
         {
@@ -77,15 +123,20 @@ public class DithererDescriptor
 
     #region Methods
 
-    internal IDitherer Create(KGySoftGifPreset preset)
+    internal static IDitherer Create(string id, KGySoftGifPreset preset)
     {
+        if (id == null)
+            return null;
+
+        DithererDescriptor descriptor = _ditherersById.GetValueOrDefault(id) ?? throw new ArgumentException($"Invalid {id}", nameof(id));
+
         // by constructor
-        if (_ctor != null)
+        if (descriptor._ctor != null)
         {
-            object[] args = new object[_parameters.Length];
-            for (int i = 0; i < _parameters.Length; i++)
+            object[] args = new object[descriptor._parameters.Length];
+            for (int i = 0; i < descriptor._parameters.Length; i++)
             {
-                switch (_parameters[i].Name)
+                switch (descriptor._parameters[i].Name)
                 {
                     case "strength":
                         args[i] = preset.Strength;
@@ -94,16 +145,16 @@ public class DithererDescriptor
                         args[i] = preset.Seed;
                         break;
                     default:
-                        throw new InvalidOperationException($"Unexpected parameter: {_parameters[i]}");
+                        throw new InvalidOperationException($"Unexpected parameter: {descriptor._parameters[i]}");
                 }
             }
 
-            return (IDitherer)_ctor.CreateInstance(args);
+            return (IDitherer)descriptor._ctor.CreateInstance(args);
         }
 
         // by property
-        Debug.Assert(_property != null);
-        IDitherer result = (IDitherer)_property.Get(null);
+        Debug.Assert(descriptor._property != null);
+        IDitherer result = (IDitherer)descriptor._property.Get(null);
         switch (result)
         {
             case OrderedDitherer ordered when preset.Strength > 0f:

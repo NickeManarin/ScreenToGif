@@ -33,6 +33,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -99,6 +100,22 @@
                                      Minimum="2" Maximum="256" StepValue="1"
                                      Value="{Binding PaletteSize, Mode=TwoWay}"
                                      Visibility="{Binding ElementName=Quantizers, Path=SelectedItem.(vm:QuantizerDescriptor.HasMaxColors), Converter={StaticResource Bool2Visibility}}"/>
+
+                    <!--Bit Level-->
+                    <c:ExtendedCheckBox Grid.Row="5" Grid.Column="0"
+                                        Margin="10,10,3,10"
+                                        Text="{DynamicResource S.SaveAs.KGySoft.Quantizer.CustomBitLevel}"
+                                        ToolTip="{DynamicResource S.SaveAs.KGySoft.Quantizer.CustomBitLevel.Info}"
+                                        IsChecked="{Binding IsCustomBitLevel}"
+                                        Visibility="{Binding ElementName=Quantizers, Path=SelectedItem.(vm:QuantizerDescriptor.HasBitLevel), Converter={StaticResource Bool2Visibility}}"/>
+                    <Slider Grid.Row="5" Grid.Column="1"
+                            Margin="10,5"
+                            TickPlacement="BottomRight" AutoToolTipPlacement="TopLeft"
+                            Minimum="1" Maximum="8" TickFrequency="1"
+                            Value="{Binding BitLevel}" 
+                            SmallChange="1" LargeChange="32"
+                            ToolTip="{DynamicResource S.SaveAs.KGySoft.Quantizer.BitLevel.Info}"
+                            Visibility="{Binding IsCustomBitLevel, Converter={StaticResource Bool2Visibility}}"/>
 
                 </Grid>
             </StackPanel>
