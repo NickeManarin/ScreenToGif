@@ -109,7 +109,7 @@
     <s:String x:Key="S.Command.DeleteNext">删除所有下一帧</s:String>
     <s:String x:Key="S.Command.RemoveDuplicates">删除重复项</s:String>
     <s:String x:Key="S.Command.Reduce">减少帧数</s:String>
-    <s:String x:Key="S.Command.SmoothLoop">创建一个平滑的循环</s:String>
+    <s:String x:Key="S.Command.SmoothLoop">创建平滑循环</s:String>
     <s:String x:Key="S.Command.Reverse">反向动画</s:String>
     <s:String x:Key="S.Command.Yoyo">溜溜球，使动画前进和后退</s:String>
     <s:String x:Key="S.Command.MoveLeft">移动所选择帧到左侧</s:String>
