@@ -219,9 +219,11 @@
                 <Image Grid.Row="1"
                        Source="{Binding PreviewImage, Mode=OneWay}"
                        RenderOptions.BitmapScalingMode="HighQuality"/>
-                <ProgressBar Grid.Row="1" IsIndeterminate="True" MaxHeight="16" Margin="10, 0"
-                             Foreground="{DynamicResource Brush.ProgressBar.Info}"
-                             Visibility="{Binding IsGenerating, Converter={StaticResource Bool2Visibility}}"/>
+                <DockPanel Grid.Row="1" LastChildFill="False">
+                    <ProgressBar DockPanel.Dock="Bottom" Height="4" Margin="10, 0"
+                                 IsIndeterminate="True"
+                                 Visibility="{Binding IsGenerating, Converter={StaticResource Bool2Visibility}}"/>
+                </DockPanel>
             </Grid>
         </GroupBox>
 

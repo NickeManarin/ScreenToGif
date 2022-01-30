@@ -794,7 +794,7 @@
     <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Description">Better for recordings with a lower quantity of colors.</s:String>
     <s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Title">Balanced quality and performance</s:String>
     <s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Description">Good average quality for natural images using optimized Wu quantizer without dithering.</s:String>
-    <s:String x:Key="S.Preset.Gif.KGySoft.High.Title">Hight quality and slower encoding speed</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.High.Title">High quality and slower encoding speed</s:String>
     <s:String x:Key="S.Preset.Gif.KGySoft.High.Description">High quality for images with many shades using optimized Wu quantizer with higher bit level Floyd-Steinberg error diffusion dithering.</s:String>
     <s:String x:Key="S.Preset.Gif.KGySoft.Fast.Title">Lower quality and better performance</s:String>
     <s:String x:Key="S.Preset.Gif.KGySoft.Fast.Description">Quantizing all frames with the same predefined 'web-safe' palette for all frames with Bayer 8x8 ordered dithering.</s:String>

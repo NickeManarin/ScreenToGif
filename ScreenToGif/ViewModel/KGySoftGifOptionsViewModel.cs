@@ -189,6 +189,8 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
                 break;
         }
 
+        if (IsDisposed)
+            return;
         if (_affectsPreview.Contains(e.PropertyName) || e.PropertyName == nameof(CurrentFramePath) && (ShowCurrentFrame || _previewBitmap == null))
             await GeneratePreviewAsync();
     }
@@ -223,6 +225,8 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
 
             _currentFrame = null;
             currentFrame.Dispose();
+            if (IsDisposed)
+                return;
         }
 
         // Note: we could use WPF images to open current frame: new WriteableBitmap(new BitmapImage(new Uri(CurrentFramePath))).GetReadWriteBitmapData();
@@ -268,6 +272,8 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
         }
 
         Debug.Assert(_generatePreviewTask == null);
+        if (IsDisposed)
+            return;
 
         // We don't care about DPI here, the preview is stretched anyway.
         // The instance is created only for the first time or when resolution changes (eg. when toggling built-in/current frame preview)
@@ -287,10 +293,12 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
         }
         catch (Exception e)
         {
+            if (IsDisposed)
+                return;
             if (!token.IsCancellationRequested)
             {
                 LogWriter.Log(e, "Failed to generate preview.");
-                PreviewImage = null;
+                    PreviewImage = null;
             }
         }
         finally

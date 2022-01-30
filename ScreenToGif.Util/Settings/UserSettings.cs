@@ -360,7 +360,7 @@ public class UserSettings : INotifyPropertyChanged
 
         //Does not work with enums.
         if (property.Children.Count == 0 && property.Attributes.Count(w => w.Key != "Key") == 0)
-            return Convert.ChangeType(property.Value, type);
+            return Convert.ChangeType(property.Value, type, CultureInfo.InvariantCulture);
 
         var instance = Activator.CreateInstance(type);
 
