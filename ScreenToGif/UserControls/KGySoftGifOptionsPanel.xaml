@@ -114,8 +114,14 @@
                             Minimum="1" Maximum="8" TickFrequency="1"
                             Value="{Binding BitLevel}" 
                             SmallChange="1" LargeChange="32"
-                            ToolTip="{DynamicResource S.SaveAs.KGySoft.Quantizer.BitLevel.Info}"
-                            Visibility="{Binding IsCustomBitLevel, Converter={StaticResource Bool2Visibility}}"/>
+                            ToolTip="{DynamicResource S.SaveAs.KGySoft.Quantizer.BitLevel.Info}">
+                        <Slider.Visibility>
+                            <MultiBinding Converter="{StaticResource BoolAndToVisibility}">
+                                <Binding ElementName="Quantizers" Path="SelectedItem.(vm:QuantizerDescriptor.HasBitLevel)"/>
+                                <Binding Path="IsCustomBitLevel"/>
+                            </MultiBinding>
+                        </Slider.Visibility>
+                    </Slider>
 
                 </Grid>
             </StackPanel>
