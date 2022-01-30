@@ -2,18 +2,23 @@
 
 #region Used Namespaces
 
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
+using System.Threading;
+using System.Threading.Tasks;
 
 using KGySoft.ComponentModel;
 using KGySoft.Drawing;
 using KGySoft.Drawing.Imaging;
 
-using ScreenToGif.ViewModel.ExportPresets.AnimatedImage.Gif;
+using ScreenToGif.Util;
 using ScreenToGif.Util.Extensions;
+using ScreenToGif.ViewModel.ExportPresets.AnimatedImage.Gif;
 
 #endregion
 
@@ -39,10 +44,19 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
     private static readonly HashSet<string> _affectsPreview = new()
     {
         // quantizer settings
-        nameof(QuantizerId), nameof(BackColor), nameof(AlphaThreshold), nameof(WhiteThreshold), nameof(DirectMapping), nameof(PaletteSize), nameof(BitLevel),
+        nameof(QuantizerId),
+        nameof(BackColor),
+        nameof(AlphaThreshold),
+        nameof(WhiteThreshold),
+        nameof(DirectMapping),
+        nameof(PaletteSize),
+        nameof(BitLevel),
 
         // ditherer settings
-        nameof(DithererId), nameof(Strength), nameof(Seed), nameof(IsSerpentineProcessing),
+        nameof(DithererId),
+        nameof(Strength),
+        nameof(Seed),
+        nameof(IsSerpentineProcessing),
 
         // preview settings
         nameof(ShowCurrentFrame)
@@ -52,11 +66,12 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
 
     #region Instance Fields
 
-    private readonly KGySoftGifPreset _preset;
-
-    private IReadableBitmapData _currentFrame;
-    private WriteableBitmap _previewBitmap;
+    private KGySoftGifPreset _preset;
     private string _lastDitherer;
+    private WriteableBitmap _previewBitmap;
+    private IReadableBitmapData _currentFrame;
+    private CancellationTokenSource _cancelGeneratingPreview;
+    private Task _generatePreviewTask;
 
     #endregion
 
@@ -86,8 +101,8 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
     public bool IsSerpentineProcessing { get => Get(_preset.IsSerpentineProcessing); set => Set(value); }
 
     // Preview
-    public bool IsGenerating { get=> Get<bool>(); set => Set(value); }
-    public WriteableBitmap PreviewImage { get=> Get<WriteableBitmap>(); set => Set(value); }
+    public bool IsGenerating { get => Get<bool>(); set => Set(value); }
+    public WriteableBitmap PreviewImage { get => Get<WriteableBitmap>(); set => Set(value); }
 
     #endregion
 
@@ -106,7 +121,7 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
 
     #region Protected Methods
 
-    protected override void OnPropertyChanged(PropertyChangedExtendedEventArgs e)
+    protected override async void OnPropertyChanged(PropertyChangedExtendedEventArgs e)
     {
         base.OnPropertyChanged(e);
         if (IsDisposed)
@@ -165,22 +180,32 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
                 break;
 
             case nameof(CurrentFramePath):
-            case nameof(ShowCurrentFrame):
-                UpdateCurrentFrame();
+                if (ShowCurrentFrame)
+                    await UpdateCurrentFrameAsync();
                 break;
 
+            case nameof(ShowCurrentFrame):
+                await UpdateCurrentFrameAsync();
+                break;
         }
 
         if (_affectsPreview.Contains(e.PropertyName) || e.PropertyName == nameof(CurrentFramePath) && (ShowCurrentFrame || _previewBitmap == null))
-            GeneratePreview();
+            await GeneratePreviewAsync();
     }
 
     protected override void Dispose(bool disposing)
     {
         if (IsDisposed)
             return;
-        _previewBitmap = null;
-        _currentFrame?.Dispose();
+        if (disposing)
+        {
+            // Canceling possible pending task but not awaiting it in Dispose, which is intended. GetAwaiter is just to suppress CS4014.
+            CancelRunningGenerate();
+            WaitForPendingGenerate().GetAwaiter();
+            _previewBitmap = null;
+            _currentFrame?.Dispose();
+        }
+
         base.Dispose(disposing);
     }
 
@@ -188,51 +213,133 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
 
     #region Private Methods
 
-    private void UpdateCurrentFrame()
+    private async Task UpdateCurrentFrameAsync()
     {
-        if (_currentFrame != null)
+        while (_currentFrame != null)
         {
-            _currentFrame.Dispose();
+            var currentFrame = _currentFrame;
+            CancelRunningGenerate();
+            await WaitForPendingGenerate();
+
             _currentFrame = null;
+            currentFrame.Dispose();
         }
 
         // Note: we could use WPF images to open current frame: new WriteableBitmap(new BitmapImage(new Uri(CurrentFramePath))).GetReadWriteBitmapData();
         // but it has serious drawbacks:
-        // - It copied copy the pixels one more time (BitmapImage->WriteableBitmap because WriteableBitmap cannot be created from an image file directly)
+        // - It copies the pixels one more time (BitmapImage->WriteableBitmap because WriteableBitmap cannot be created from an image file directly)
         // - In WPF nothing is disposable so we can't get rid of the temporarily allocated memory immediately
         // Therefore we use a disposable GDI+ Bitmap to create a managed clone of the image as simply as possible
         using (var bmp = ShowCurrentFrame && CurrentFramePath != null ? new Bitmap(CurrentFramePath) : Icons.Shield.ExtractBitmap(new Size(256, 256)))
         using (var nativeBitmapData = bmp.GetReadableBitmapData())
             _currentFrame = nativeBitmapData.Clone(nativeBitmapData.PixelFormat);
 
+        // Since WritebleBitmap is not disposable we try to re-use it as much as possible.
+        // It is nullified only when the resolution changes (as frames have the same resolution it happens only when toggling built-in/current frame preview)
         if (_previewBitmap != null && (_previewBitmap.PixelWidth != _currentFrame.Width || _previewBitmap.PixelHeight != _currentFrame.Height))
             _previewBitmap = null;
     }
 
-    private void GeneratePreview()
+    private async Task GeneratePreviewAsync()
     {
-        // TODO: cancellation
+        // Considering that the caller method is async void this is basically a fire-and-forget operation.
+        // To avoid parallel generating tasks we cancel the lastly launched possibly unfinished process.
+        CancelRunningGenerate();
+        Debug.Assert(_cancelGeneratingPreview == null);
 
         if (_currentFrame == null)
         {
-            UpdateCurrentFrame();
+            await UpdateCurrentFrameAsync();
             if (_currentFrame == null)
                 return;
         }
 
-        // We don't care about DPI here, the preview is stretched anyway
-        if (_previewBitmap == null)
-            _previewBitmap = new WriteableBitmap(_currentFrame.Width, _currentFrame.Height, 96, 96, PixelFormats.Pbgra32, null);
+        // Awaiting the possibly unfinished canceled task. Now it should finish quickly.
+        await WaitForPendingGenerate();
 
-        using (IReadWriteBitmapData previewBitmapData = _previewBitmap.GetReadWriteBitmapData())
-            _currentFrame.CopyTo(previewBitmapData, Point.Empty, QuantizerDescriptor.Create(QuantizerId, _preset), DithererDescriptor.Create(DithererId, _preset));
+        // Workaround: The awaits make this method reentrant, and a continuation can be spawn after any await at any time.
+        // Therefore it is possible that despite of the line above _generatePreviewTask is not null here.
+        // It could not happen after a synchronous Wait but that could cause a slight lagging (for a short period because the task is already canceled here)
+        while (_generatePreviewTask != null)
+        {
+            Debug.Assert(_cancelGeneratingPreview != null, "A new task is not expected to be spawned without a new cancellation");
+            CancelRunningGenerate();
+            await WaitForPendingGenerate();
+        }
 
-        // TODO: or canceled
-        if (IsDisposed)
+        Debug.Assert(_generatePreviewTask == null);
+
+        // We don't care about DPI here, the preview is stretched anyway.
+        // The instance is created only for the first time or when resolution changes (eg. when toggling built-in/current frame preview)
+        _previewBitmap ??= new WriteableBitmap(_currentFrame.Width, _currentFrame.Height, 96, 96, PixelFormats.Pbgra32, null);
+
+        // Storing the task and cancellation source to a field so it can be canceled/awaited on re-entrancing, disposing, etc.
+        var tokenSource = _cancelGeneratingPreview = new CancellationTokenSource();
+        CancellationToken token = tokenSource.Token;
+
+        IsGenerating = true;
+        IReadWriteBitmapData bitmapData = _previewBitmap.GetReadWriteBitmapData();
+        try
+        {
+            // Awaiting just because of the UI thread continuation below.
+            // The caller method itself is async void so it cannot be awaited but storing the task as a field (see also the comments above)
+            await (_generatePreviewTask = CreateGenerateTask(bitmapData, token));
+        }
+        catch (Exception e)
+        {
+            if (!token.IsCancellationRequested)
+            {
+                LogWriter.Log(e, "Failed to generate preview.");
+                PreviewImage = null;
+            }
+        }
+        finally
+        {
+            bitmapData.Dispose();
+            if (!IsDisposed)
+                IsGenerating = false;
+        }
+
+        if (token.IsCancellationRequested)
             return;
 
         PreviewImage = _previewBitmap;
         OnPropertyChanged(new PropertyChangedExtendedEventArgs(null, _previewBitmap, nameof(PreviewImage)));
+    }
+
+    private Task CreateGenerateTask(IReadWriteBitmapData bitmapData, CancellationToken cancellationToken) => _currentFrame.CopyToAsync(
+            bitmapData,
+            new Rectangle(Point.Empty, new Size(_currentFrame.Width, _currentFrame.Height)),
+            Point.Empty,
+            QuantizerDescriptor.Create(QuantizerId, _preset),
+            DithererDescriptor.Create(DithererId, _preset),
+            new TaskConfig { CancellationToken = cancellationToken, ThrowIfCanceled = false });
+
+    private void CancelRunningGenerate()
+    {
+        var tokenSource = _cancelGeneratingPreview;
+        if (tokenSource == null)
+            return;
+        tokenSource.Cancel();
+        tokenSource.Dispose();
+        _cancelGeneratingPreview = null;
+    }
+
+    private async Task WaitForPendingGenerate()
+    {
+        var runningTask = _generatePreviewTask;
+        if (runningTask == null)
+            return;
+        Debug.Assert(_cancelGeneratingPreview == null, "Only already canceled tasks are expected to be awaited here");
+        _generatePreviewTask = null;
+        try
+        {
+            await runningTask;
+        }
+        catch (Exception)
+        {
+            // pending generate is always awaited after cancellation so ignoring everything from here
+        }
     }
 
     #endregion
