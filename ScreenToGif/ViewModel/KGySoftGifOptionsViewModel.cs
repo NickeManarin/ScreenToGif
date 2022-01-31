@@ -90,9 +90,7 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
     public byte WhiteThreshold { get => Get(_preset.WhiteThreshold); set => Set(_preset.WhiteThreshold = value); }
     public bool DirectMapping { get => Get(_preset.DirectMapping); set => Set(_preset.DirectMapping = value); }
     public int PaletteSize { get => Get(_preset.PaletteSize); set => Set(_preset.PaletteSize = value); }
-    public byte? BitLevel {
-        get => Get(_preset.BitLevel);
-        set => Set(_preset.BitLevel = value); }
+    public byte? BitLevel { get => Get(_preset.BitLevel); set => Set(_preset.BitLevel = value); }
     public bool IsCustomBitLevel { get => Get<bool>(); set => Set(value); }
 
     // Ditherer
