@@ -334,7 +334,7 @@ public class UserSettings : INotifyPropertyChanged
 
     private static Type ParseType(Property property)
     {
-        if (string.IsNullOrWhiteSpace(property.NameSpace))
+        if (string.IsNullOrWhiteSpace(property.NameSpace) || property.NameSpace.StartsWith("http", StringComparison.Ordinal))
             return Type.GetType("System." + property.Type) ?? Type.GetType("System.Windows." + property.Type, true);
 
         var namespaceIndex = property.NameSpace?.IndexOf("clr-namespace:", StringComparison.Ordinal) ?? -1;
@@ -387,6 +387,14 @@ public class UserSettings : INotifyPropertyChanged
             {
                 if (int.TryParse(att.Value, out var intValue))
                     info.SetValue(instance, intValue, null);
+
+                continue;
+            }
+
+            if (info.PropertyType == typeof(byte?))
+            {
+                if (Byte.TryParse(att.Value, out var byteValue))
+                    info.SetValue(instance, byteValue, null);
 
                 continue;
             }
@@ -450,6 +458,14 @@ public class UserSettings : INotifyPropertyChanged
             {
                 if (int.TryParse(child.Value, out var intValue))
                     info.SetValue(instance, intValue, null);
+
+                continue;
+            }
+
+            if (info.PropertyType == typeof(byte?))
+            {
+                if (Byte.TryParse(child.Value, out var byteValue))
+                    info.SetValue(instance, byteValue, null);
 
                 continue;
             }
