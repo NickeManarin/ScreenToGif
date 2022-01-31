@@ -91,7 +91,7 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
     public bool DirectMapping { get => Get(_preset.DirectMapping); set => Set(_preset.DirectMapping = value); }
     public int PaletteSize { get => Get(_preset.PaletteSize); set => Set(_preset.PaletteSize = value); }
     public byte? BitLevel { get => Get(_preset.BitLevel); set => Set(_preset.BitLevel = value); }
-    public bool IsCustomBitLevel { get => Get<bool>(); set => Set(value); }
+    public bool IsCustomBitLevel { get => Get(_preset.BitLevel.HasValue); set => Set(value); }
 
     // Ditherer
     public bool UseDitherer { get => Get(_preset.DithererId != null); set => Set(value); }
@@ -109,7 +109,7 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
 
     // Animation Settings
     public int RepeatCount { get => Get(_preset.RepeatCount); set => Set(_preset.RepeatCount = value); }
-    public bool EndlessLoop { get => Get(_preset.RepeatCount == 0); set => Set(value); }
+    public bool EndlessLoop { get => Get(_preset.RepeatCount <= 0); set => Set(value); }
     public bool PingPong { get => Get(_preset.RepeatCount < 0); set => Set(value); }
     public bool AllowDeltaFrames { get => Get(_preset.AllowDeltaFrames); set => Set(_preset.AllowDeltaFrames = value); }
     public bool AllowClippedFrames { get => Get(_preset.AllowClippedFrames); set => Set(_preset.AllowClippedFrames = value); }
@@ -123,12 +123,21 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
     {
         _preset = preset;
         _lastDitherer = preset.DithererId;
-        IsCustomBitLevel = preset.BitLevel.HasValue;
     }
 
     #endregion
 
     #region Methods
+
+    #region Internal Methods
+
+    internal async void Apply()
+    {
+        if (_previewBitmap == null)
+            await GeneratePreviewAsync();
+    }
+
+    #endregion
 
     #region Protected Methods
 
@@ -190,7 +199,7 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
         // As there are some awaits among the cases above we need to re-check if we are already disposed.
         if (IsDisposed)
             return;
-        if (_affectsPreview.Contains(e.PropertyName) || e.PropertyName == nameof(CurrentFramePath) && (ShowCurrentFrame || _previewBitmap == null))
+        if (_affectsPreview.Contains(e.PropertyName) || e.PropertyName == nameof(CurrentFramePath) && ShowCurrentFrame)
             await GeneratePreviewAsync();
     }
 

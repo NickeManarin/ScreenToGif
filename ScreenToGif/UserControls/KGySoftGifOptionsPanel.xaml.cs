@@ -55,7 +55,10 @@ namespace ScreenToGif.UserControls
         {
             (e.OldValue as KGySoftGifOptionsViewModel)?.Dispose();
             if (e.NewValue is KGySoftGifOptionsViewModel vm)
+            {
                 vm.CurrentFramePath = CurrentFrame?.Image;
+                vm.Apply();
+            }
         }
 
         #endregion
