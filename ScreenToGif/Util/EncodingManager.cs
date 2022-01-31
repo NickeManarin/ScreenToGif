@@ -1341,6 +1341,11 @@ internal class EncodingManager
 
         var config = new AnimatedGifConfiguration(FramesIterator(), frames.Select(f => TimeSpan.FromMilliseconds(f.Delay)))
         {
+            AllowDeltaFrames = preset.AllowDeltaFrames,
+            EncodeTransparentBorders = !preset.AllowClippedFrames,
+            AnimationMode = (AnimationMode)preset.RepeatCount,
+            DeltaTolerance = preset.DeltaTolerance,
+            SizeHandling = AnimationFramesSizeHandling.Center,
             Quantizer = QuantizerDescriptor.Create(preset.QuantizerId, preset),
             Ditherer = DithererDescriptor.Create(preset.DithererId, preset),
         };

@@ -28,7 +28,9 @@ public class KGySoftGifPreset : GifPreset
     private float _strength;
     private int? _seed;
     private bool _serpentine;
-    private bool _previewCurrentFrame;
+    private bool _allowDeltaFrames;
+    private bool _allowClippedFrames;
+    private byte _deltaTolerance;
 
     #endregion
 
@@ -51,6 +53,8 @@ public class KGySoftGifPreset : GifPreset
             IsSelectedForEncoder = true,
             CreationDate = new DateTime(2021, 12, 15),
             QuantizerId = $"{nameof(OptimizedPaletteQuantizer)}.{nameof(OptimizedPaletteQuantizer.Wu)}",
+            AllowDeltaFrames = true,
+            AllowClippedFrames = true,
         },
         new KGySoftGifPreset
         {
@@ -64,6 +68,8 @@ public class KGySoftGifPreset : GifPreset
             QuantizerId = $"{nameof(OptimizedPaletteQuantizer)}.{nameof(OptimizedPaletteQuantizer.Wu)}",
             DithererId = $"{nameof(ErrorDiffusionDitherer)}.{nameof(ErrorDiffusionDitherer.FloydSteinberg)}",
             BitLevel = 7,
+            AllowDeltaFrames = true,
+            AllowClippedFrames = true,
         },
         new KGySoftGifPreset
         {
@@ -76,6 +82,8 @@ public class KGySoftGifPreset : GifPreset
             CreationDate = new DateTime(2021, 12, 15),
             QuantizerId = $"{nameof(PredefinedColorsQuantizer)}.{nameof(PredefinedColorsQuantizer.SystemDefault8BppPalette)}",
             DithererId = $"{nameof(OrderedDitherer)}.{nameof(OrderedDitherer.Bayer8x8)}",
+            AllowDeltaFrames = true,
+            AllowClippedFrames = true,
         },
         new KGySoftGifPreset
         {
@@ -209,15 +217,33 @@ public class KGySoftGifPreset : GifPreset
 
     #endregion
 
-    #region Preview Settings
+    #region Animation Settings
 
     /// <summary>
-    /// Gets or sets whether the preview of the configuration should use the current frame instead of a fix image.
+    /// Gets or sets whether the encoder is allowed to save the changed image parts.
     /// </summary>
-    public bool PreviewCurrentFrame
+    public bool AllowDeltaFrames
     {
-        get => _previewCurrentFrame;
-        set => SetProperty(ref _previewCurrentFrame, value);
+        get => _allowDeltaFrames;
+        set => SetProperty(ref _allowDeltaFrames, value);
+    }
+
+    /// <summary>
+    /// Gets or sets whether the encoder is allowed clip the transparent border of the frames.
+    /// </summary>
+    public bool AllowClippedFrames
+    {
+        get => _allowClippedFrames;
+        set => SetProperty(ref _allowClippedFrames, value);
+    }
+
+    /// <summary>
+    /// If <see cref="AllowDeltaFrames"/> is <see langword="true"/>, then gets or sets the allowed maximum tolerance when detecting changes.
+    /// </summary>
+    public byte DeltaTolerance
+    {
+        get => _deltaTolerance;
+        set => SetProperty(ref _deltaTolerance, value);
     }
 
     #endregion
@@ -235,6 +261,7 @@ public class KGySoftGifPreset : GifPreset
     {
         Encoder = EncoderTypes.KGySoft;
         ImageId = "Vector.KGySoft";
+        RepeatCount = 0;
     }
 
     #endregion
