@@ -210,7 +210,8 @@ internal class EncodingManager
     /// <param name="fileName">The name of the output file.</param>
     /// <param name="isIndeterminate">The state of the progress bar.</param>
     /// <param name="exception">The exception details of the error.</param>
-    internal static void Update(int id, EncodingStatus status, string fileName = null, bool isIndeterminate = false, Exception exception = null)
+    /// <param name="maxSteps">Optionally sets the maximum steps of the processing if (<paramref name="status"/> is <see cref="EncodingStatus.Processing"/>).</param>
+    internal static void Update(int id, EncodingStatus status, string fileName = null, bool isIndeterminate = false, Exception exception = null, int? maxSteps = null)
     {
         var item = Encodings.FirstOrDefault(x => x.Id == id);
 
@@ -226,6 +227,8 @@ internal class EncodingManager
         {
             case EncodingStatus.Processing:
                 item.Text = String.Format(LocalizationHelper.Get("S.Encoder.Processing"), fileName == null ? String.Empty : Path.GetFileName(fileName));
+                if (maxSteps.HasValue)
+                    item.FrameCount = maxSteps.Value;
                 break;
             case EncodingStatus.Completed:
             {
@@ -405,6 +408,7 @@ internal class EncodingManager
         foreach (var item in ViewList.Where(w => w.Id == current.Id))
         {
             item.Status = current.Status;
+            item.FrameCount = current.FrameCount;
             item.CurrentFrame = current.CurrentFrame;
             item.Text = current.Text;
             item.IsIndeterminate = current.IsIndeterminate;
@@ -1322,8 +1326,6 @@ internal class EncodingManager
 
     private static async Task EncodeKGySoftGif(KGySoftGifPreset preset, IList<IFrame> frames, int id, CancellationToken cancellationToken)
     {
-        Update(id, EncodingStatus.Processing);
-
         #region Local Methods
 
         IEnumerable<IReadableBitmapData> FramesIterator()
@@ -1339,11 +1341,22 @@ internal class EncodingManager
 
         #endregion
 
+        // A little cheating for PingPong mode: though the encoder could handle it, we convert it explicitly to a simple forward loop so
+        // we can update the progress in FramesIterator and don't need to pass a DrawingProgress implementation to TaskConfig.Progress
+        var animationMode = (AnimationMode)preset.RepeatCount;
+        if (animationMode == AnimationMode.PingPong)
+        {
+            animationMode = AnimationMode.Repeat;
+            for (int i = frames.Count - 2; i > 0; i--)
+                frames.Add(frames[i]);
+        }
+
+        Update(id, EncodingStatus.Processing, maxSteps: frames.Count);
         var config = new AnimatedGifConfiguration(FramesIterator(), frames.Select(f => TimeSpan.FromMilliseconds(f.Delay)))
         {
             AllowDeltaFrames = preset.AllowDeltaFrames,
             EncodeTransparentBorders = !preset.AllowClippedFrames,
-            AnimationMode = (AnimationMode)preset.RepeatCount,
+            AnimationMode = animationMode,
             DeltaTolerance = preset.DeltaTolerance,
             SizeHandling = AnimationFramesSizeHandling.Center,
             Quantizer = QuantizerDescriptor.Create(preset.QuantizerId, preset),
