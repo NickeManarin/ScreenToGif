@@ -1208,7 +1208,7 @@ internal class EncodingManager
 
             #region Execute commands
 
-#if !UWP
+#if !FULL_MULTI_MSIX_STORE
 
             if (preset.ExecuteCustomCommands && !string.IsNullOrWhiteSpace(preset.CustomCommands))
             {

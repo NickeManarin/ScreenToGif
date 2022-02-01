@@ -3448,7 +3448,7 @@ namespace ScreenToGif.Windows
                     Project.Persist();
 
                     //Get enabled tasks.
-                    var tasks = UserSettings.All.AutomatedTasksList?.Cast<BaseTaskViewModel>().Where(w => w.IsEnabled).ToList() ?? new List<BaseTaskViewModel>();
+                    var tasks = UserSettings.All.AutomatedTasksList?.Cast<BaseTaskViewModel>().Where(w => w != null && w.IsEnabled).ToList() ?? new List<BaseTaskViewModel>();
 
                     if (tasks.Any())
                     {

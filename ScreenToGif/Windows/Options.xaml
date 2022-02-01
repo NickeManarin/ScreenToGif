@@ -386,9 +386,9 @@
 
                                 <n:ExtendedCheckBox x:Name="UpdatesCheckBox" Text="{DynamicResource S.Options.App.General.CheckForUpdates}" Margin="15,3,5,3" IsChecked="{Binding Path=CheckForUpdates, Mode=TwoWay}"/>
                                 <StackPanel Visibility="{Binding CheckForUpdates, Converter={StaticResource Bool2Visibility}}">
-                                    <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.PortableUpdate}" Info="{DynamicResource S.Options.App.General.PortableUpdate.Info}" 
+                                    <n:ExtendedCheckBox x:Name="PortableUpdateCheckBox" Text="{DynamicResource S.Options.App.General.PortableUpdate}" Info="{DynamicResource S.Options.App.General.PortableUpdate.Info}" 
                                                         Margin="30,3,5,3" IsChecked="{Binding Path=PortableUpdate, Mode=TwoWay}"/>
-                                    <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.ForceUpdateAsAdmin}" Margin="30,3,5,3" IsChecked="{Binding Path=ForceUpdateAsAdmin, Mode=TwoWay}"/>
+                                    <n:ExtendedCheckBox x:Name="AdminUpdateCheckBox" Text="{DynamicResource S.Options.App.General.ForceUpdateAsAdmin}" Margin="30,3,5,3" IsChecked="{Binding Path=ForceUpdateAsAdmin, Mode=TwoWay}"/>
                                     <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.UpdateOnClose}" Margin="30,3,5,3" IsChecked="{Binding Path=InstallUpdates, Mode=TwoWay}"/>
                                     <n:ExtendedCheckBox Text="{DynamicResource S.Options.App.General.PromptToInstall}" Margin="45,3,5,3" IsChecked="{Binding Path=PromptToInstall, Mode=TwoWay}"
                                                         Visibility="{Binding InstallUpdates, Converter={StaticResource Bool2Visibility}}"/>

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -885,25 +884,54 @@ internal class ApplicationViewModel : ApplicationBaseViewModel
     {
         Global.UpdateAvailable = null;
 
-#if UWP
+#if FULL_MULTI_MSIX_STORE
             return;
 #endif
+
         if (!forceCheck && !UserSettings.All.CheckForUpdates)
             return;
-            
+
+        //If the app was installed by Chocolatey, avoid updating via normal means.
+        if (await IsChocolateyPackage())
+            return;
+
         //Try checking for the update on Github first then fallbacks to Fosshub.
         if (!await CheckOnGithub())
             await CheckOnFosshub();
+    }
+
+    private async Task<bool> IsChocolateyPackage()
+    {
+        try
+        {
+            //Binaries distributed via Chocolatey are of Installer or Portable types.
+            if (IdentityHelper.ApplicationType != ApplicationTypes.FullSingle && IdentityHelper.ApplicationType != ApplicationTypes.DependantSingle)
+                return false;
+
+            //If Chocolatey is installed and ScreenToGif was installed via its service, it will be listed.
+            var choco = await ProcessHelper.Start("choco list -l screentogif");
+
+            if (!choco.Contains("screentogif"))
+                return false;
+
+            //The Portable package gets shimmed when installing via choco.
+            //As for the Installer package, I'm letting it to be updated via normal means too (for now).
+            var shim = await ProcessHelper.Start("$a='path to executable: '; (ScreenToGif.exe --shimgen-noop | Select-String $a) -split $a | ForEach-Object Trim");
+            var path = ProcessHelper.GetEntryAssemblyPath();
+
+            return shim.Contains(path);
+        }
+        catch (Exception e)
+        {
+            LogWriter.Log(e, "Not possible to detect Chocolatey package.");
+            return false;
+        }
     }
 
     private async Task<bool> CheckOnGithub()
     {
         try
         {
-            //If the app was installed by Chocolatey, avoid this.
-            if (AppDomain.CurrentDomain.BaseDirectory.EndsWith(@"Chocolatey\lib\screentogif\content\"))
-                return true;
-
             #region GraphQL equivalent
 
             //query {
@@ -931,81 +959,34 @@ internal class ApplicationViewModel : ApplicationBaseViewModel
 
             #endregion
 
-            var request = (HttpWebRequest)WebRequest.Create("https://api.github.com/repos/NickeManarin/ScreenToGif/releases/latest");
-            request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
-            request.Proxy = WebHelper.GetProxy();
-
-            var response = (HttpWebResponse)await request.GetResponseAsync();
-
-            await using (var resultStream = response.GetResponseStream())
+            var proxy = WebHelper.GetProxy();
+            var handler = new HttpClientHandler
             {
-                using (var reader = new StreamReader(resultStream))
-                {
-                    var result = await reader.ReadToEndAsync();
-                    var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(result), new System.Xml.XmlDictionaryReaderQuotas());
-                    var release = XElement.Load(jsonReader);
+                Proxy = proxy,
+                UseProxy = proxy != null
+            };
 
-                    var version = Version.Parse(release.XPathSelectElement("tag_name")?.Value ?? "0.1");
+            using var client = new HttpClient(handler);
+            client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393");
+            using var response = await client.GetAsync("https://api.github.com/repos/NickeManarin/ScreenToGif/releases/latest");
+            var result = await response.Content.ReadAsStringAsync();
 
-                    if (version.Major == 0 || version <= Assembly.GetExecutingAssembly().GetName().Version)
-                        return true;
+            var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(result), new System.Xml.XmlDictionaryReaderQuotas());
+            var release = XElement.Load(jsonReader);
 
-                    var moniker = RuntimeInformation.OSArchitecture == Architecture.X64 ? "x64" : RuntimeInformation.OSArchitecture == Architecture.X86 ? "x86" : "arm64";
+            var version = Version.Parse(release.XPathSelectElement("tag_name")?.Value ?? "0.1");
 
-                    //Try getting a release asset named as:
-                    //ScreenToGif.2.35.Portable.x64.zip
-                    //ScreenToGif.2.35.Setup.x64.msi
-                    var portable = release.Element("assets")?.Elements().FirstOrDefault(f =>
-                    {
-                        var name = (f.Element("name")?.Value ?? "").ToLower();
+            if (version.Major == 0 || version <= Assembly.GetExecutingAssembly().GetName().Version)
+                return true;
 
-                        return name.Contains("portable") && name.Contains(moniker);
-                    });
+            ParseDownloadUrls(release, version);
 
-                    var installer = release.Element("assets")?.Elements().FirstOrDefault(f =>
-                    {
-                        var name = (f.Element("name")?.Value ?? "").ToLower();
+            Application.Current.Dispatcher?.Invoke(() => NotificationManager.AddNotification(string.Format(LocalizationHelper.Get("S.Updater.NewRelease.Info"), 
+                Global.UpdateAvailable.Version), StatusType.Update, "update", PromptUpdate));
 
-                        return name.Contains("setup") && name.Contains(moniker);
-                    });
-
-                    if (installer == null)
-                    {
-                        //Try getting a release asset named as:
-                        //ScreenToGif.2.35.Portable.zip
-                        //ScreenToGif.2.35.Setup.msi
-                        portable = release.Element("assets")?.Elements().FirstOrDefault(f => (f.Element("name")?.Value ?? "").ToLower().Contains("portable"));
-                        installer = release.Element("assets")?.Elements().FirstOrDefault(f => (f.Element("name")?.Value ?? "").ToLower().Contains("setup"));
-
-                        if (installer == null)
-                        {
-                            Application.Current.Dispatcher?.Invoke(() => NotificationManager.AddNotification(LocalizationHelper.Get("S.Updater.NoNewRelease.Info"), StatusType.Warning, "update-warning", null));
-                            return false;
-                        }
-                    }
-                        
-                    Global.UpdateAvailable = new UpdateAvailable
-                    {
-                        Version = version,
-                        Description = release.XPathSelectElement("body")?.Value ?? "",
-
-                        PortableDownloadUrl = portable?.Element("browser_download_url")?.Value ?? "",
-                        PortableSize = Convert.ToInt64(portable?.Element("size")?.Value ?? "0"),
-                        PortableName = portable?.Element("name")?.Value ?? "ScreenToGif.zip",
-
-                        InstallerDownloadUrl = installer.Element("browser_download_url")?.Value ?? "",
-                        InstallerSize = Convert.ToInt64(installer.Element("size")?.Value ?? "0"),
-                        InstallerName = installer.Element("name")?.Value ?? "ScreenToGif.Setup.msi"
-                    };
-
-                    Application.Current.Dispatcher?.Invoke(() => NotificationManager.AddNotification(string.Format(LocalizationHelper.Get("S.Updater.NewRelease.Info"), 
-                        Global.UpdateAvailable.Version), StatusType.Update, "update", PromptUpdate));
-
-                    //Download update to be installed when the app closes.
-                    if (UserSettings.All.InstallUpdates && !string.IsNullOrEmpty(Global.UpdateAvailable.InstallerDownloadUrl))
-                        await DownloadUpdate();
-                }
-            }
+            //Download update to be installed when the app closes.
+            if (UserSettings.All.InstallUpdates && Global.UpdateAvailable.HasDownloadLink)
+                await DownloadUpdate();
 
             return true;
         }
@@ -1020,6 +1001,145 @@ internal class ApplicationViewModel : ApplicationBaseViewModel
         }
     }
 
+    private bool ParseDownloadUrls(XElement release, Version version, bool fromGithub = true)
+    {
+        var moniker = RuntimeInformation.OSArchitecture switch
+        {
+            Architecture.X64 => "x64",
+            Architecture.X86 => "x86",
+            _ => "arm64"
+        };
+
+        switch (IdentityHelper.ApplicationType)
+        {
+            case ApplicationTypes.FullMultiMsix:
+            {
+                //Only get Msix files.
+                //ScreenToGif.2.36.Package.x64.msix
+                //ScreenToGif.2.36.Package.msix
+
+                var package = (release.Element("assets") ?? release.Element("items"))?.Elements().FirstOrDefault(f =>
+                {
+                    var name = (f.Element("name")?.Value ?? f.Element("title")?.Value ?? "").ToLower();
+
+                    return name.EndsWith(".package." + moniker + ".msix") || name.EndsWith("package.msix");
+                });
+
+                return SetDownloadDetails(fromGithub, version, release, package);
+            }
+            case ApplicationTypes.DependantSingle:
+            {
+                //Get portable or installer packages, light or not.
+                //ScreenToGif.2.36.Light.Portable.x64.zip
+                //ScreenToGif.2.36.Light.Portable.zip
+                //Or
+                //ScreenToGif.2.36.Light.Setup.x64.msi
+                //ScreenToGif.2.36.Light.Setup.msi
+
+                var portable = (release.Element("assets") ?? release.Element("items"))?.Elements().FirstOrDefault(f =>
+                {
+                    var name = (f.Element("name")?.Value ?? f.Element("title")?.Value ?? "").ToLower();
+
+                    return name.EndsWith(".light.portable." + moniker + ".zip") || name.EndsWith(".light.portable.zip");
+                });
+                var installer = (release.Element("assets") ?? release.Element("items"))?.Elements().FirstOrDefault(f =>
+                {
+                    var name = (f.Element("name")?.Value ?? f.Element("title")?.Value ?? "").ToLower();
+
+                    return name.EndsWith(".light.setup." + moniker + ".msi") || name.EndsWith(".light.setup.msi");
+                });
+
+                //If missing light (framework dependant) variant, download full package.
+                if (installer == null)
+                {
+                    portable = (release.Element("assets") ?? release.Element("items"))?.Elements().FirstOrDefault(f =>
+                    {
+                        var name = (f.Element("name")?.Value ?? f.Element("title")?.Value ?? "").ToLower();
+
+                        return name.EndsWith(".portable." + moniker + ".zip") || name.EndsWith(".portable.zip");
+                    });
+                    installer = (release.Element("assets") ?? release.Element("items"))?.Elements().FirstOrDefault(f =>
+                    {
+                        var name = (f.Element("name")?.Value ?? f.Element("title")?.Value ?? "").ToLower();
+
+                        return name.EndsWith(".setup." + moniker + ".msi") || name.EndsWith(".setup.msi");
+                    });
+                }
+
+                return SetDownloadDetails(fromGithub, version, release, installer, portable);
+            }
+            default:
+            {
+                //Get portable or installer packages, light or not.
+                //ScreenToGif.2.36.Portable.x64.zip
+                //ScreenToGif.2.36.Portable.zip
+                //Or
+                //ScreenToGif.2.36.Setup.x64.msi
+                //ScreenToGif.2.36.Setup.msi
+
+                var portable = (release.Element("assets") ?? release.Element("items"))?.Elements().FirstOrDefault(f =>
+                {
+                    var name = (f.Element("name")?.Value ?? f.Element("title")?.Value ?? "").ToLower();
+
+                    return (name.EndsWith(".portable." + moniker + ".zip") || name.EndsWith("portable.zip")) && !name.Contains(".light.");
+                });
+                var installer = (release.Element("assets") ?? release.Element("items"))?.Elements().FirstOrDefault(f =>
+                {
+                    var name = (f.Element("name")?.Value ?? f.Element("title")?.Value ?? "").ToLower();
+
+                    return (name.EndsWith(".setup." + moniker + ".msi") || name.EndsWith("setup.msi")) && !name.Contains(".light.");
+                });
+
+                return SetDownloadDetails(fromGithub, version, release, installer, portable);
+            }
+        }
+    }
+
+    private bool SetDownloadDetails(bool fromGithub, Version version, XElement release, XElement installer, XElement portable = null)
+    {
+        if (installer == null)
+        {
+            Global.UpdateAvailable = new UpdateAvailable
+            {
+                IsFromGithub = fromGithub,
+                Version = version,
+                Description = release.XPathSelectElement("body")?.Value ?? "",
+                MustDownloadManually = true
+            };
+
+            return false;
+        }
+
+        if (fromGithub)
+        {
+            Global.UpdateAvailable = new UpdateAvailable
+            {
+                Version = version,
+                Description = release.XPathSelectElement("body")?.Value ?? "",
+
+                PortableDownloadUrl = portable?.Element("browser_download_url")?.Value ?? "",
+                PortableSize = Convert.ToInt64(portable?.Element("size")?.Value ?? "0"),
+                PortableName = portable?.Element("name")?.Value ?? "ScreenToGif.zip",
+
+                InstallerDownloadUrl = installer.Element("browser_download_url")?.Value ?? "",
+                InstallerSize = Convert.ToInt64(installer.Element("size")?.Value ?? "0"),
+                InstallerName = installer.Element("name")?.Value ?? "ScreenToGif.Setup.msi"
+            };
+
+            return true;
+        }
+
+        Global.UpdateAvailable = new UpdateAvailable
+        {
+            IsFromGithub = false,
+            Version = version,
+            PortableDownloadUrl = portable?.Element("link")?.Value ?? "",
+            InstallerDownloadUrl = installer.Element("link")?.Value ?? "",
+        };
+
+        return true;
+    }
+
     private async Task CheckOnFosshub()
     {
         try
@@ -1031,73 +1151,24 @@ internal class ApplicationViewModel : ApplicationBaseViewModel
                 UseProxy = proxy != null,
             };
 
-            using (var client = new HttpClient(handler) { BaseAddress = new Uri("https://www.fosshub.com") })
-            {
-                using (var response = await client.GetAsync("/feed/5bfc6fce8c9fe8186f809d24.json"))
-                {
-                    var result = await response.Content.ReadAsStringAsync();
+            using var client = new HttpClient(handler);
+            client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393");
+            using var response = await client.GetAsync("https://www.fosshub.com/feed/5bfc6fce8c9fe8186f809d24.json");
+            var result = await response.Content.ReadAsStringAsync();
 
-                    using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(result)))
-                    {
-                        var ser = new DataContractJsonSerializer(typeof(FosshubResponse));
-                        var obj = ser.ReadObject(ms) as FosshubResponse;
+            var jsonReader = JsonReaderWriterFactory.CreateJsonReader(Encoding.UTF8.GetBytes(result), new System.Xml.XmlDictionaryReaderQuotas());
+            var release = XElement.Load(jsonReader);
 
-                        if (obj?.Release == null)
-                            return;
+            var version = Version.Parse(release.XPathSelectElement("release/items")?.FirstNode?.XPathSelectElement("version")?.Value ?? "0.1");
 
-                        var version = Version.Parse(obj.Release.Items[0].Version ?? "0.1");
+            if (version.Major == 0 || version <= Assembly.GetExecutingAssembly().GetName().Version)
+                return;
 
-                        if (version.Major == 0 || version <= Assembly.GetExecutingAssembly().GetName().Version)
-                            return;
+            ParseDownloadUrls(release, version);
 
-                        var moniker = RuntimeInformation.OSArchitecture == Architecture.X64 ? "x64" : RuntimeInformation.OSArchitecture == Architecture.X86 ? "x86" : "arm64";
-
-                        //Try getting a release asset named as:
-                        //ScreenToGif2.35Portablex64.zip
-                        //ScreenToGif2.35Setupx64.msi
-                        var portable = obj.Release.Items.FirstOrDefault(f =>
-                        {
-                            var name = (f.Title ?? "").ToLower();
-
-                            return name.Contains("portable") && name.Contains(moniker);
-                        });
-
-                        var installer = obj.Release.Items.FirstOrDefault(f =>
-                        {
-                            var name = (f.Title ?? "").ToLower();
-
-                            return name.Contains("setup") && name.Contains(moniker);
-                        });
-
-                        if (installer == null)
-                        {
-                            //Try getting a release asset named as:
-                            //ScreenToGif2.35Portable.zip
-                            //ScreenToGif2.35Setup.msi
-                            portable = obj.Release.Items.FirstOrDefault(f => (f.Title ?? "").ToLower().Contains("portable"));
-                            installer = obj.Release.Items.FirstOrDefault(f => (f.Title ?? "").ToLower().Contains("setup"));
-
-                            if (installer == null)
-                            {
-                                Application.Current.Dispatcher?.Invoke(() => NotificationManager.AddNotification(LocalizationHelper.Get("S.Updater.NoNewRelease.Info"), StatusType.Warning, "update-warning", null));
-                                return;
-                            }
-                        }
-
-                        Global.UpdateAvailable = new UpdateAvailable
-                        {
-                            IsFromGithub = false,
-                            Version = version,
-                            PortableDownloadUrl = portable?.Link,
-                            InstallerDownloadUrl = installer.Link,
-                        };
-
-                        //With Fosshub, the download must be manual. 
-                        Application.Current.Dispatcher?.Invoke(() => NotificationManager.AddNotification(string.Format(LocalizationHelper.Get("S.Updater.NewRelease.Info"), Global.UpdateAvailable.Version),
-                            StatusType.Update, "update", PromptUpdate));
-                    }
-                }
-            }
+            //With Fosshub, the download must be manual. 
+            Application.Current.Dispatcher?.Invoke(() => NotificationManager.AddNotification(string.Format(LocalizationHelper.Get("S.Updater.NewRelease.Info"), Global.UpdateAvailable.Version),
+                StatusType.Update, "update", PromptUpdate));
         }
         catch (Exception ex)
         {
@@ -1137,21 +1208,45 @@ internal class ApplicationViewModel : ApplicationBaseViewModel
 
                 Global.UpdateAvailable.IsDownloading = true;
             }
-                
-            using (var webClient = new WebClient())
-            {
-                webClient.Credentials = CredentialCache.DefaultNetworkCredentials;
-                webClient.Proxy = WebHelper.GetProxy();
 
-                await webClient.DownloadFileTaskAsync(new Uri(Global.UpdateAvailable.ActiveDownloadUrl), Global.UpdateAvailable.ActivePath);
+            var proxy = WebHelper.GetProxy();
+            var handler = new HttpClientHandler
+            {
+                Proxy = proxy,
+                UseProxy = proxy != null,
+            };
+
+            //TODO: Use HttpClientFactory
+            //https://www.aspnetmonsters.com/2016/08/2016-08-27-httpclientwrong/
+            //https://marcominerva.wordpress.com/2019/03/13/using-httpclientfactory-with-wpf-on-net-core-3-0/
+
+            using (var client = new HttpClient(handler))
+            {
+                client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393");
+
+                var response = await client.GetAsync(Global.UpdateAvailable.ActiveDownloadUrl);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var stream = await response.Content.ReadAsStreamAsync();
+                    var fileInfo = new FileInfo(Global.UpdateAvailable.ActivePath);
+                    await using var fileStream = fileInfo.OpenWrite();
+                    await stream.CopyToAsync(fileStream);
+                }
+                else
+                {
+                    throw new FileNotFoundException("Impossible to download update.");
+                }
             }
 
+            Global.UpdateAvailable.MustDownloadManually = false;
             Global.UpdateAvailable.TaskCompletionSource?.TrySetResult(true);
             return true;
         }
         catch (Exception ex)
         {
             LogWriter.Log(ex, "Impossible to automatically download update");
+            Global.UpdateAvailable.MustDownloadManually = true;
             Global.UpdateAvailable.TaskCompletionSource?.TrySetResult(false);
             return false;
         }
@@ -1170,14 +1265,15 @@ internal class ApplicationViewModel : ApplicationBaseViewModel
                 return false;
 
             //TODO: Check if Windows is not turning off.
-
+            
             var runAfterwards = false;
 
             //Prompt if:
             //Not configured to download the update automatically OR
             //Configured to download but set to prompt anyway OR
+            //Update binary detection failed (manual update required) OR
             //Download not completed (perharps because the notification was triggered by a query on Fosshub).
-            if (UserSettings.All.PromptToInstall || !UserSettings.All.InstallUpdates || string.IsNullOrWhiteSpace(Global.UpdateAvailable.ActivePath))
+            if (UserSettings.All.PromptToInstall || !UserSettings.All.InstallUpdates || string.IsNullOrWhiteSpace(Global.UpdateAvailable.ActivePath) || Global.UpdateAvailable.MustDownloadManually)
             {
                 var download = new DownloadDialog { WasPromptedManually = wasPromptedManually };
                 var result = download.ShowDialog();
@@ -1192,10 +1288,10 @@ internal class ApplicationViewModel : ApplicationBaseViewModel
             if (!File.Exists(Global.UpdateAvailable.ActivePath))
                 return false;
 
-            if (UserSettings.All.PortableUpdate)
+            if (UserSettings.All.PortableUpdate || IdentityHelper.ApplicationType == ApplicationTypes.FullMultiMsix)
             {
-                //In portable mode, simply open the Zip file and close ScreenToGif.
-                ProcessHelper.StartWithShell(Global.UpdateAvailable.PortablePath);
+                //In portable or Msix mode, simply open the zip/msix file and close ScreenToGif.
+                ProcessHelper.StartWithShell(Global.UpdateAvailable.ActivePath);
                 return true;
             }
 

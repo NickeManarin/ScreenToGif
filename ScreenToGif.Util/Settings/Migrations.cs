@@ -28,7 +28,7 @@ public static class Migration
 
             case "2.31": //To 2.32
                 Migration2_31_0To2_32_0.Up(properties);
-                goto default;
+                goto case "2.32";
 
             case "2.32": //To 2.35
             case "2.32.1":
