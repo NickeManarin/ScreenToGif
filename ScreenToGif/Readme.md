@@ -6,13 +6,16 @@ _VS 2022 and .NET 6 or newer required._
 
 ## What's new? (Version 2.35.5)
 
-• Updated the French, German, Russian, Norwegian and Danish localization.  
+• New installer and portable versions with the full package (no .NET 6 download required) along with light versions which still require the installation of .NET 6 desktop runtime.  
+• New installer package (MSIX), older installer installer (MSI) available.  
+• Updated the French, German, Russian, Polish, Norwegian and Danish localization.  
 
 ### Fixed:
 
 ♦ The smooth loop feature was not working properly.
 ♦ A new message will be displayed if you already have a smooth loop based on current settings instead of a warning.
-♦ It was not possible to set the app to start with Windows.  
+♦ It was not possible to set the app to start with Windows.
+♦ A settings migration issue from 2.31 to newer version was fixed.  
 
 ### Known Bugs:
   

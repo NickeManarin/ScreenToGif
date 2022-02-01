@@ -163,9 +163,9 @@ public partial class ExportPanel : UserControl, IPanel
 
         #endregion
 
-        #region UWP restrictions
+        #region Store restrictions
 
-#if UWP
+#if FULL_MULTI_MSIX_STORE
 
             CustomCommandsCheckBox.IsEnabled = false;
             CustomCommandsTextBox.IsEnabled = false;
