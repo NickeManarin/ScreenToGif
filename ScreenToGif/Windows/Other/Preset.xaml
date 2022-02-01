@@ -64,19 +64,19 @@
                     </Style>
                 </ComboBox.ItemContainerStyle>
 
-                <i:GenericItem x:Name="EncoderScreenToGifItem" Title="ScreenToGif" Description="{DynamicResource S.SaveAs.Encoder.ScreenToGif.Info}"
+                <i:GenericItem x:Name="EncoderScreenToGifItem" Title="{DynamicResource S.SaveAs.Encoder.ScreenToGif}" Description="{DynamicResource S.SaveAs.Encoder.ScreenToGif.Info}"
                                Value="{x:Static e:EncoderTypes.ScreenToGif}" ImageId="Vector.Logo"/>
 
-                <i:GenericItem x:Name="EncoderFfmpegItem" Title="FFmpeg" Description="{DynamicResource S.SaveAs.Encoder.Ffmpeg.Info}"
+                <i:GenericItem x:Name="EncoderFfmpegItem" Title="{DynamicResource S.SaveAs.Encoder.Ffmpeg}" Description="{DynamicResource S.SaveAs.Encoder.Ffmpeg.Info}"
                                Value="{x:Static e:EncoderTypes.FFmpeg}" ImageId="Vector.Ffmpeg"/>
 
-                <i:GenericItem x:Name="EncoderGifskiItem" Title="Gifski" Description="{DynamicResource S.SaveAs.Encoder.Gifski.Info}"
+                <i:GenericItem x:Name="EncoderGifskiItem" Title="{DynamicResource S.SaveAs.Encoder.Gifski}" Description="{DynamicResource S.SaveAs.Encoder.Gifski.Info}"
                                Value="{x:Static e:EncoderTypes.Gifski}" ImageId="Vector.Gifski"/>
 
-                <i:GenericItem x:Name="EncoderSystemItem" Title="System" Description="{DynamicResource S.SaveAs.Encoder.System.Info}"
+                <i:GenericItem x:Name="EncoderSystemItem" Title="{DynamicResource S.SaveAs.Encoder.System}" Description="{DynamicResource S.SaveAs.Encoder.System.Info}"
                                Value="{x:Static e:EncoderTypes.System}" ImageId="Vector.Net"/>
 
-                <i:GenericItem x:Name="EncoderKGySoftItem" Title="System" Description="{DynamicResource S.SaveAs.Encoder.KGySoft.Info}"
+                <i:GenericItem x:Name="EncoderKGySoftItem" Title="{DynamicResource S.SaveAs.Encoder.KGySoft}" Description="{DynamicResource S.SaveAs.Encoder.KGySoft.Info}"
                                Value="{x:Static e:EncoderTypes.KGySoft}" ImageId="Vector.KGySoft"/>
             </ComboBox>
             
