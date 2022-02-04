@@ -142,7 +142,7 @@
     <Version>2.36.0</Version>
     <Copyright>Copyright© Nicke Manarin 2022</Copyright>
     <PackageProjectUrl>https://www.screentogif.com</PackageProjectUrl>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReadmeFile>Readme.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/nickemanarin/screentogif</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>gif; recorder; editor; screen-recorder; gif-editor</PackageTags>
@@ -152,18 +152,16 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="..\README.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\ScreenToGif.Native\ScreenToGif.Native.csproj" />
     <ProjectReference Include="..\ScreenToGif.ViewModel\ScreenToGif.ViewModel.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="app.manifest">
       <SubType>Designer</SubType>
+    </None>
+    <None Update="Readme.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
 </Project>

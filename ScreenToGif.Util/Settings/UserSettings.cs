@@ -289,6 +289,8 @@ public class UserSettings : INotifyPropertyChanged
                     return Enum.Parse(typeof(ColorQuantizationTypes), property.Value);
                 case "SizeUnits":
                     return Enum.Parse(typeof(SizeUnits), property.Value);
+                case "OverwriteModes":
+                    return Enum.Parse(typeof(OverwriteModes), property.Value);
 
                 case "FontWeight":
                     return new FontWeightConverter().ConvertFrom(property.Value);
