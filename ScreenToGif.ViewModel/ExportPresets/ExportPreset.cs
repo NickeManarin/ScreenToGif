@@ -37,7 +37,7 @@ public abstract class ExportPreset : BindableBase, IExportPreset
     private int _partialExportFrameEnd = 0;
     private string _partialExportFrameExpression;
     private bool _pickLocation = true;
-    private bool _overwriteOnSave;
+    private OverwriteModes _overwriteMode;
     private bool _exportAsProjectToo;
     private bool _uploadFile;
     private string _uploadService;
@@ -245,10 +245,10 @@ public abstract class ExportPreset : BindableBase, IExportPreset
         set => SetProperty(ref _pickLocation, value);
     }
 
-    public bool OverwriteOnSave
+    public OverwriteModes OverwriteMode
     {
-        get => _overwriteOnSave;
-        set => SetProperty(ref _overwriteOnSave, value);
+        get => _overwriteMode;
+        set => SetProperty(ref _overwriteMode, value);
     }
 
     public bool ExportAsProjectToo
@@ -393,9 +393,6 @@ public abstract class ExportPreset : BindableBase, IExportPreset
 
             if (ResolvedFilename.ToCharArray().Any(x => Path.GetInvalidFileNameChars().Contains(x)))
                 return Task.FromResult(new ValidatedEventArgs("S.SaveAs.Warning.Filename.Invalid", StatusReasons.InvalidState));
-
-            if (!OverwriteOnSave && File.Exists(Path.Combine(OutputFolder, ResolvedFilename + Extension)))
-                return Task.FromResult(new ValidatedEventArgs("S.SaveAs.Warning.Overwrite", StatusReasons.FileAlreadyExists));
         }
 
         //Upload set, but no service selected.

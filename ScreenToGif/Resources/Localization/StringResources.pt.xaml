@@ -1694,7 +1694,13 @@
     <s:String x:Key="S.SaveAs.SaveOptions">Opções de exportação</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.Partial">Exporte parcialmente.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Exporte o arquivo em uma pasta de sua escolha.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Sobrescrever (caso já exista).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode">Sobrescrever?</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Warn">Avisar</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Warn.Info">Apenas avisa que existe um arquivo com o mesmo nome.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Prompt">Perguntar</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Prompt.Info">Pergunta se o usuário quer sobrescrever o arquivo.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Allow">Permitir</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Allow.Info">Simplesmente sobrescreve o arquivo.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Exportar como projeto também (mesma pasta, mesmo nome).</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Fazer upload do arquivo.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">Copiar para a área de transferência.</s:String>
@@ -1784,6 +1790,11 @@
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Title">Exportar Quadros</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">Tem certeza de que deseja exportar os quadros?</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">Essa ação exportará {0} quadros diretamente para a pasta selecionada.</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Title">Sobrescrever</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Instruction">Você deseja sobrescrever o arquivo?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Message">Um arquivo com o nome '{0}' já existe naquela pasta.\r\nVocê gostaria de sobrescrevê-lo?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.OverwriteMultiple.Instruction">Você deseja sobrescrever os arquivos?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.OverwriteMultiple.Message">Já existe um ou mais arquivos com o mesmo nome nessa pasta.\r\nVocê gostaria de sobrescrevê-los?</s:String>
     
     <!--Command Preview-->
     <s:String x:Key="S.CommandPreviewer.Title">Visualizador de comando</s:String>

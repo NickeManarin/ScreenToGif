@@ -1,5 +1,6 @@
 using ScreenToGif.Domain.Models;
 using ScreenToGif.Settings.Migrations;
+using ScreenToGif.Util.Settings.Migrations;
 
 namespace ScreenToGif.Util.Settings;
 
@@ -37,6 +38,14 @@ public static class Migration
             case "2.34":
             case "2.34.1":
                 Migration2_32_0To2_35_0.Up(properties);
+                goto case "2.35";
+
+            case "2.35": //To 2.36
+            case "2.35.1":
+            case "2.35.2":
+            case "2.35.3":
+            case "2.35.4":
+                Migration2_35_0To2_36_0.Up(properties);
                 goto default;
 
             default:

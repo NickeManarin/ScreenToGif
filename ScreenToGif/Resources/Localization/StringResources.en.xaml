@@ -1694,7 +1694,13 @@
     <s:String x:Key="S.SaveAs.SaveOptions">Export options</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.Partial">Export partially.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Save the file to a folder of your choice.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Overwrite (if already exists).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode">Overwrite?</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Warn">Warn</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Warn.Info">Only warns that another file exists with the same name.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Prompt">Prompt</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Prompt.Info">Asks if the user wants to overwrite the file.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Allow">Allow</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Allow.Info">Simply overwrites the file.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Save as project too (same folder, same filename).</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Upload the file.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">Copy to the clipboard.</s:String>
@@ -1784,6 +1790,11 @@
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Title">Export Frames</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">Are you sure that you want to export the frames?</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">This action will export {0} frames directly into the selected folder.</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Title">Overwrite</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Instruction">Would you like to overwrite the file?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Message">A file with the name '{0}' already exists in that folder.\r\nWould you like to overwrite it?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.OverwriteMultiple.Instruction">Would you like to overwrite the files?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.OverwriteMultiple.Message">One or more files with the same name already exist in that folder.\r\nWould you like to overwrite them?</s:String>
     
     <!--Command Preview-->
     <s:String x:Key="S.CommandPreviewer.Title">Command Previewer</s:String>

@@ -7,7 +7,8 @@ _VS 2022 and .NET 6 or newer required._
 ## What's new? (Version 2.36)
 
 • New installer and portable versions with the full package (no .NET 6 download required) along with light versions which still require the installation of .NET 6 desktop runtime.  
-• New installer package (MSIX), older installer installer (MSI) available.  
+• New installer package (MSIX), the older installer package (MSI) is still available.
+• Added option to prompt to overwrite when saving (enabled by default).  
 • Updated the French, German, Russian, Polish, Norwegian and Danish localization.  
 
 ### Fixed:

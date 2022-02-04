@@ -5261,7 +5261,7 @@ namespace ScreenToGif.Windows
             //Validates each file name when saving multiple images (if more than one image, that will not be zipped).
             if (preset is ImagePreset { ZipFiles: false })
             {
-                if (!preset.OverwriteOnSave)
+                if (preset.OverwriteMode != OverwriteModes.Allow)
                 {
                     var output = Path.Combine(preset.OutputFolder, preset.ResolvedFilename);
                     var padSize = (Project.Frames.Count - 1).ToString().Length;
@@ -5272,12 +5272,24 @@ namespace ScreenToGif.Windows
 
                     if (any)
                     {
-                        Dispatcher.Invoke(() => StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Overwrite")));
-                        return false;
+                        if (preset.OverwriteMode == OverwriteModes.Prompt)
+                        {
+                            if (Dispatcher.Invoke(() => !Dialog.Ask(LocalizationHelper.Get("S.SaveAs.Dialogs.Overwrite.Title"), LocalizationHelper.Get("S.SaveAs.Dialogs.OverwriteMultiple.Instruction"),
+                                LocalizationHelper.Get("S.SaveAs.Dialogs.OverwriteMultiple.Message"))))
+                            {
+                                Dispatcher.Invoke(() => StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Overwrite")));
+                                return false;
+                            }
+                        }
+                        else
+                        {
+                            Dispatcher.Invoke(() => StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Overwrite")));
+                            return false;
+                        }
                     }
                 }
 
-                if (indexes.Count > 1 && !Dispatcher.Invoke<bool>(() => Dialog.Ask(LocalizationHelper.Get("S.SaveAs.Dialogs.Multiple.Title"),
+                if (indexes.Count > 1 && !Dispatcher.Invoke(() => Dialog.Ask(LocalizationHelper.Get("S.SaveAs.Dialogs.Multiple.Title"),
                     LocalizationHelper.Get("S.SaveAs.Dialogs.Multiple.Instruction"), LocalizationHelper.GetWithFormat("S.SaveAs.Dialogs.Multiple.Message", indexes.Count))))
                 {
                     Dispatcher.Invoke(() => StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Canceled")));
