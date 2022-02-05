@@ -1134,7 +1134,7 @@
     <s:String x:Key="S.Editor.Warning.Ffmpeg">找不到 FFmpeg。将其添加到 PATH 环境变量或在设置中配置其路径。</s:String>
     <s:String x:Key="S.Editor.Warning.Gifski">找不到 Gifski。将其添加到 PATH 环境变量或在设置中配置其路径。</s:String>
     <s:String x:Key="S.Editor.Warning.LowSpace">驱动器上没有足够的空间供应用程序存储缓存（{0}% 左右）。单击此处打开“选项” > “临时文件”，以释放一些空间。</s:String>
-    <s:String x:Key="S.Editor.Warning.DifferentDpi">您试图导入多张不同 DPI 的图片，这不被支持。其中一些图片被导入，其他的则需要单独导入。/s:String>
+    <s:String x:Key="S.Editor.Warning.DifferentDpi">您试图导入多张不同 DPI 的图片，这不被支持。其中一些图片被导入，其他的则需要单独导入。</s:String>
     <s:String x:Key="S.Editor.Warning.DifferentSize">您试图导入多张不同尺寸的图片，这不被支持。其中一些图片被导入，其他的则需要单独导入。</s:String>
     
     <!--Editor • Status-->
