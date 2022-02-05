@@ -109,6 +109,7 @@
     <s:String x:Key="S.Command.DeleteNext">删除所有下一帧</s:String>
     <s:String x:Key="S.Command.RemoveDuplicates">删除重复项</s:String>
     <s:String x:Key="S.Command.Reduce">减少帧数</s:String>
+    <s:String x:Key="S.Command.SmoothLoop">创建平滑循环</s:String>
     <s:String x:Key="S.Command.Reverse">反向动画</s:String>
     <s:String x:Key="S.Command.Yoyo">溜溜球，使动画前进和后退</s:String>
     <s:String x:Key="S.Command.MoveLeft">移动所选择帧到左侧</s:String>
@@ -164,6 +165,7 @@
     <s:String x:Key="S.Updater.Header">一个新的更新可用</s:String>
     <s:String x:Key="S.Updater.NewRelease">新版本发布！</s:String>
     <s:String x:Key="S.Updater.NewRelease.Info">新版本 {0} 可用！&#x0d;点击此处查看。</s:String>
+    <s:String x:Key="S.Updater.NoNewRelease.Info">看来您的系统不再被支持，或者更新系统时发生了一些变化。尝试从网站上手动下载它。</s:String>
     <s:String x:Key="S.Updater.Version">版本</s:String>
     <s:String x:Key="S.Updater.Portable">便携版</s:String>
     <s:String x:Key="S.Updater.Installer">安装程序</s:String>
@@ -200,8 +202,6 @@
     <s:String x:Key="S.Options.Other">其它</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Header">光标后缺少快捷键</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Message">为了使用鼠标光标跟随功能，必须设置一个快捷键，以便在需要时进行切换。</s:String>
-    <s:String x:Key="S.Options.Warning.DesktopDuplication.Header">缺少屏幕捕获的依赖项</s:String>
-    <s:String x:Key="S.Options.Warning.DesktopDuplication.Message">为了使用 Desktop Duplication API 捕获屏幕，必须下载 SharpDx 库。</s:String>
     
     <!--Options • Application-->
     <s:String x:Key="S.Options.App.Startup">启动</s:String>
@@ -284,7 +284,7 @@
     
     <s:String x:Key="S.Options.Recorder.Mode">捕获模式</s:String>
     <s:String x:Key="S.Options.Recorder.Bitblt.Info">使用较旧的捕获方法，该方法较慢，可能无法捕获游戏，但不需要其他插件。</s:String>
-    <s:String x:Key="S.Options.Recorder.DirectX.Info">使用桌面复制 API 捕获方法，该方法更快，并且可以捕获全屏游戏，但是需要 SharpDx 插件和 Windows 8 或更高版本系统。</s:String>
+    <s:String x:Key="S.Options.Recorder.DirectX.Info">使用桌面复制 API 捕获方法，该方法更快，并且可以捕获全屏游戏，但是需要 Windows 8 或更高版本系统。</s:String>
     <s:String x:Key="S.Options.Recorder.File">保存到文件</s:String>
     <s:String x:Key="S.Options.Recorder.File.Info">捕获的每一帧将直接作为图像保存在磁盘上。</s:String>
     <s:String x:Key="S.Options.Recorder.Cache">内存缓存</s:String>
@@ -585,9 +585,6 @@
     <s:String x:Key="S.Options.Extras.GifskiLocation.Invalid">Gifski 可执行文件的路径中包含一个或多个无效字符。请为该可执行文件选择一个有效位置。</s:String>
     <s:String x:Key="S.Options.Extras.SharpDxLocation">SharpDx 位置（SharpDX.dll，SharpDX.Direct3D11.dll 和 SharpDX.DXGI.dll）</s:String>
     <s:String x:Key="S.Options.Extras.SharpDxLocation.Select">选择 SharpDx 库的位置</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation.Invalid">SharpDx 库的路径中包含一个或多个无效字符。 请为这些库选择一个有效位置。</s:String>
-    <s:String x:Key="S.Options.Extras.License.Ffmpeg">FFmpeg 许可证</s:String>
-    <s:String x:Key="S.Options.Extras.License.Gifski">Gifski 许可证</s:String>
     <s:String x:Key="S.Options.Extras.License.SharpDx">SharpDx 许可证</s:String>
     <s:String x:Key="S.Options.Extras.Permission.Header">文件夹中缺少写入权限</s:String>
     <s:String x:Key="S.Options.Extras.Permission.Observation">由于缺少写入权限，无法将下载内容保存在文件夹中。&#10;&#10;您是否要以管理员权限启动下载程序以完成下载？</s:String>
@@ -692,7 +689,6 @@
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">无法捕获屏幕。5 次尝试后，捕获方法未返回任何帧。</s:String>
     <s:String x:Key="S.Recorder.Warning.StartPauseNotPossible">无法开始/暂停捕获屏幕</s:String>
     <s:String x:Key="S.Recorder.Warning.Windows8">使用桌面复制 Desktop Duplication API 捕获屏幕需要 Windows 8 或更高版本。</s:String>
-    <s:String x:Key="S.Recorder.Warning.MissingSharpDx">为了使用 Desktop Duplication API 捕获屏幕，需要 SharpDx 库。 进入 选项 > 附加功能 下载。</s:String>
     
     <!--New recorder-->
     <s:String x:Key="S.Recorder.Area">区域</s:String>
@@ -1028,6 +1024,7 @@
     <s:String x:Key="S.Editor.Edit.Delete">删除</s:String>
     <s:String x:Key="S.Editor.Edit.Frames.Duplicates">移除重复</s:String>
     <s:String x:Key="S.Editor.Edit.Frames.Reduce">减少帧数</s:String>
+    <s:String x:Key="S.Editor.Edit.Frames.SmoothLoop">平滑循环</s:String>
     <s:String x:Key="S.Editor.Edit.DeletePrevious">删除之前所有</s:String>
     <s:String x:Key="S.Editor.Edit.DeleteNext">删除之后所有</s:String>
     
@@ -1137,7 +1134,8 @@
     <s:String x:Key="S.Editor.Warning.Ffmpeg">找不到 FFmpeg。将其添加到 PATH 环境变量或在设置中配置其路径。</s:String>
     <s:String x:Key="S.Editor.Warning.Gifski">找不到 Gifski。将其添加到 PATH 环境变量或在设置中配置其路径。</s:String>
     <s:String x:Key="S.Editor.Warning.LowSpace">驱动器上没有足够的空间供应用程序存储缓存（{0}% 左右）。单击此处打开“选项” > “临时文件”，以释放一些空间。</s:String>
-    <s:String x:Key="S.Editor.Warning.DifferentDpi">您尝试使用不支持的 DPI 导入多个图像。 其中一些已导入，另一些则需要单独导入。</s:String>
+    <s:String x:Key="S.Editor.Warning.DifferentDpi">您试图导入多张不同 DPI 的图片，这不被支持。其中一些图片被导入，其他的则需要单独导入。/s:String>
+    <s:String x:Key="S.Editor.Warning.DifferentSize">您试图导入多张不同尺寸的图片，这不被支持。其中一些图片被导入，其他的则需要单独导入。</s:String>
     
     <!--Editor • Status-->
     <s:String x:Key="S.Editor.RetrievingFromCache">从缓存中检索帧</s:String>
@@ -1158,6 +1156,8 @@
     <s:String x:Key="S.Editor.ApplyingTransition">正在应用过渡效果</s:String>
     <s:String x:Key="S.Editor.PreparingSaving">正在准备保存</s:String>
     <s:String x:Key="S.Editor.CancelDiscard">取消载入并放弃项目。</s:String>
+    <s:String x:Key="S.Editor.FindingLoop">寻找完美循环</s:String>
+    <s:String x:Key="S.Editor.DiscardingLoop">丢弃循环中未使用的帧</s:String>
 
     <!--Editor • Frame list-->
     <s:String x:Key="S.Editor.List.Frame">帧：</s:String>
@@ -1297,6 +1297,16 @@
     <s:String x:Key="S.RemoveDuplicates.Delay.Average">使用平均值</s:String>
     <s:String x:Key="S.RemoveDuplicates.Delay.Sum">使用总和</s:String>
     <s:String x:Key="S.RemoveDuplicates.Info">此操作会分析每个帧（逐个像素），并删除至少为 {0} %的类似于其最近邻的帧。&#x0d;您可以选择是否要调整帧的延迟（显示持续时间）。</s:String>
+
+    <!--Editor • Smooth Loop-->
+    <s:String x:Key="S.SmoothLoop.Header">创建平滑循环</s:String>
+    <s:String x:Key="S.SmoothLoop.StartThreshold">先忽略：</s:String>
+    <s:String x:Key="S.SmoothLoop.From">比较自：</s:String>
+    <s:String x:Key="S.SmoothLoop.From.Last">结束</s:String>
+    <s:String x:Key="S.SmoothLoop.From.First">开始</s:String>
+    <s:String x:Key="S.SmoothLoop.Info">尝试查找至少 {0} % 类似于开始帧的帧，并删除所有后续帧。&#x0d;您可以选择是否要忽略一些初始帧，并从开始（阈值之后）或结束开始比较。</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.Threshold">忽略的帧数需要小于总帧数。</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.NoLoopFound">无法使用所选设置创建平滑循环。</s:String>
     
     <!--Editor • Captions-->
     <s:String x:Key="S.Caption.Text">文本</s:String>
