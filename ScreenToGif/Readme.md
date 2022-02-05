@@ -17,7 +17,8 @@ _VS 2022 and .NET 6 or newer required._
 ♦ A new message will be displayed if you already have a smooth loop based on current settings instead of a warning.
 ♦ It was not possible to set the app to start with Windows.
 ♦ A settings migration issue from 2.31 to newer version was fixed.
-♦ It was not possible to export as PSD.  
+♦ It was not possible to export as PSD.
+♦ When not having permission to save the settings to the installation location, the app would not try to save to AppData.  
 
 ### Known Bugs:
   
