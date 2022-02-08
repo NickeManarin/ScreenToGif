@@ -28,8 +28,8 @@ public class KGySoftGifPreset : GifPreset
     private float _strength;
     private int? _seed;
     private bool _serpentine;
-    private bool _allowDeltaFrames;
-    private bool _allowClippedFrames;
+    private bool _allowDeltaFrames = true;
+    private bool _allowClippedFrames = true;
     private byte _deltaTolerance;
 
     #endregion
@@ -53,8 +53,6 @@ public class KGySoftGifPreset : GifPreset
             IsSelectedForEncoder = true,
             CreationDate = new DateTime(2021, 12, 15),
             QuantizerId = $"{nameof(OptimizedPaletteQuantizer)}.{nameof(OptimizedPaletteQuantizer.Wu)}",
-            AllowDeltaFrames = true,
-            AllowClippedFrames = true,
         },
         new KGySoftGifPreset
         {
@@ -68,8 +66,6 @@ public class KGySoftGifPreset : GifPreset
             QuantizerId = $"{nameof(OptimizedPaletteQuantizer)}.{nameof(OptimizedPaletteQuantizer.Wu)}",
             DithererId = $"{nameof(ErrorDiffusionDitherer)}.{nameof(ErrorDiffusionDitherer.FloydSteinberg)}",
             BitLevel = 7,
-            AllowDeltaFrames = true,
-            AllowClippedFrames = true,
         },
         new KGySoftGifPreset
         {
@@ -82,19 +78,6 @@ public class KGySoftGifPreset : GifPreset
             CreationDate = new DateTime(2021, 12, 15),
             QuantizerId = $"{nameof(PredefinedColorsQuantizer)}.{nameof(PredefinedColorsQuantizer.SystemDefault8BppPalette)}",
             DithererId = $"{nameof(OrderedDitherer)}.{nameof(OrderedDitherer.Bayer8x8)}",
-            AllowDeltaFrames = true,
-            AllowClippedFrames = true,
-        },
-        new KGySoftGifPreset
-        {
-            TitleKey = "S.Preset.Gif.KGySoft.Fastest.Title",
-            DescriptionKey = "S.Preset.Gif.KGySoft.Fastest.Description",
-            HasAutoSave = true,
-            IsSelected = true,
-            IsDefault = true,
-            IsSelectedForEncoder = true,
-            CreationDate = new DateTime(2021, 12, 15),
-            QuantizerId = $"{nameof(PredefinedColorsQuantizer)}.{nameof(PredefinedColorsQuantizer.Grayscale)}",
         },
    };
 

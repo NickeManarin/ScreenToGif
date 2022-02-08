@@ -798,8 +798,6 @@
     <s:String x:Key="S.Preset.Gif.KGySoft.High.Description">High quality for photo-like images using Wu's quantizer with higher bit level and Floyd-Steinberg error diffusion dithering.</s:String>
     <s:String x:Key="S.Preset.Gif.KGySoft.Fast.Title">KGy SOFT • Low quality, faster</s:String>
     <s:String x:Key="S.Preset.Gif.KGySoft.Fast.Description">Quantizing all frames with the same predefined 'web-safe' palette and Bayer 8x8 ordered dithering.</s:String>
-    <s:String x:Key="S.Preset.Gif.KGySoft.Fastest.Title">KGy SOFT • Monochrome, fastest</s:String>
-    <s:String x:Key="S.Preset.Gif.KGySoft.Fastest.Description">Grayscale result with really fast encoding time. No delta frames so the result can be quite large.</s:String>
     <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Title">FFmpeg - Higher quality</s:String>
     <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Description">Higher image quality, but with a greater file size.</s:String>
     <s:String x:Key="S.Preset.Gif.Ffmpeg.Low.Title">FFmpeg - Lower quality</s:String>
