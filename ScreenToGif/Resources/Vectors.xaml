@@ -595,6 +595,12 @@
         </DrawingBrush.Drawing>
     </DrawingBrush>
 
+    <DrawingBrush x:Key="Vector.Error" Stretch="Uniform" AlignmentX="Center" AlignmentY="Center">
+        <DrawingBrush.Drawing>
+            <GeometryDrawing Brush="#FFD75B34" Geometry="M31.428,12.143L23.573,19.286 23.573,20.714 31.428,27.859 31.428,29.288 29.286,31.429 27.858,31.429 20.713,23.572 19.285,23.572 12.143,31.429 10.715,31.429 8.571,29.288 8.571,27.859 16.428,20.714 16.428,19.286 8.571,12.143 8.571,10.715 10.715,8.571 12.143,8.571 19.285,16.429 20.713,16.429 27.858,8.571 29.286,8.571 31.428,10.715z M20,0C8.954,0 0,8.954 0,20 0,31.045 8.954,40 20,40 31.045,40 40,31.045 40,20 40,8.954 31.045,0 20,0"/>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+
     <DrawingBrush x:Key="Vector.Expression" Stretch="Uniform" AlignmentX="Center" AlignmentY="Center">
         <DrawingBrush.Drawing>
             <DrawingGroup>

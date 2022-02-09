@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!--Office RepeatButton Style-->
@@ -91,5 +91,72 @@
                 <Setter Property="BorderBrush" Value="{DynamicResource Element.Border.Pressed}"/>
             </Trigger>
         </ControlTemplate.Triggers>
+    </ControlTemplate
+
+    >
+
+    <!--Info/Warning/Error Labels (cannot be TextBlocks because it has no Template property)-->
+    <ControlTemplate x:Key="InfoLabel" TargetType="Label">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0"
+                    Width="15" Height="15"
+                    Background="{StaticResource Vector.Info}"
+                    Opacity="{DynamicResource Element.Opacity}"/>
+            <TextBlock Grid.Column="1" Padding="3"
+                       FontStyle="Italic" FontSize="11" TextWrapping="Wrap"
+                       HorizontalAlignment="Left" VerticalAlignment="Center">
+                <Hyperlink>
+                    <Run Text="{TemplateBinding Content}"/>
+                </Hyperlink>
+            </TextBlock>
+        </Grid>
     </ControlTemplate>
+
+    <ControlTemplate x:Key="WarningLabel" TargetType="Label">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0"
+                    Width="15" Height="15"
+                    Background="{StaticResource Vector.Warning}"
+                    Opacity="{DynamicResource Element.Opacity}"/>
+            <TextBlock Grid.Column="1" Padding="3"
+                       FontStyle="Italic" FontSize="11" TextWrapping="Wrap"
+                       HorizontalAlignment="Left" VerticalAlignment="Center">
+                <Hyperlink>
+                    <Run Text="{TemplateBinding Content}"/>
+                </Hyperlink>
+            </TextBlock>
+        </Grid>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="ErrorLabel" TargetType="Label">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0"
+                    Width="15" Height="15"
+                    Background="{StaticResource Vector.Error}"
+                    Opacity="{DynamicResource Element.Opacity}"/>
+            <TextBlock Grid.Column="1" Padding="3"
+                       FontStyle="Italic" FontSize="11" TextWrapping="Wrap"
+                       HorizontalAlignment="Left" VerticalAlignment="Center">
+                <Hyperlink>
+                    <Run Text="{TemplateBinding Content}"/>
+                </Hyperlink>
+            </TextBlock>
+        </Grid>
+    </ControlTemplate>
+
 </ResourceDictionary>
