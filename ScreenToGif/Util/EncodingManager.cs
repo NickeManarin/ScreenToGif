@@ -1355,7 +1355,7 @@ internal class EncodingManager
         var config = new AnimatedGifConfiguration(FramesIterator(), frames.Select(f => TimeSpan.FromMilliseconds(f.Delay)))
         {
             AllowDeltaFrames = preset.AllowDeltaFrames,
-            EncodeTransparentBorders = !preset.AllowClippedFrames,
+            AllowClippedFrames = preset.AllowClippedFrames,
             AnimationMode = animationMode,
             DeltaTolerance = preset.DeltaTolerance,
             SizeHandling = AnimationFramesSizeHandling.Center,
