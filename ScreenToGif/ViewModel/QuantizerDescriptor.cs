@@ -98,6 +98,8 @@ public class QuantizerDescriptor
 
     #region Methods
 
+    internal static QuantizerDescriptor GetById(string id) => _quantizersById.GetValueOrDefault(id);
+
     internal static IQuantizer Create(string id, KGySoftGifPreset preset)
     {
         QuantizerDescriptor descriptor = _quantizersById.GetValueOrDefault(id ?? _quantizers[0].Id) ?? throw new ArgumentException($"Invalid {id}", nameof(id));

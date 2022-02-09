@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 
 using ScreenToGif.ViewModel;
+using System.Windows.Input;
 
 #endregion
 
@@ -49,6 +50,10 @@ namespace ScreenToGif.UserControls
 
         #region Event Handlers
 
+        private void RefreshPreview_Click(object sender, MouseButtonEventArgs e) => ViewModel.RefreshPreview();
+        private void AllowDeltaIgnoredLabel_Click(object sender, MouseButtonEventArgs e) => ViewModel.AllowClippedFrames = true;
+        private void AllowClippedIgnoredLabel_Click(object sender, MouseButtonEventArgs e) => ViewModel.AllowDeltaFrames = true;
+        private void HighDeltaToleranceLabel_Click(object sender, MouseButtonEventArgs e) => ViewModel.DeltaTolerance = 0;
         private void KGySoftGifOptionsPanel_OnUnloaded(object sender, RoutedEventArgs e) => ViewModel?.Dispose();
 
         private void KGySoftGifOptionsPanel_OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -64,5 +69,6 @@ namespace ScreenToGif.UserControls
         #endregion
 
         #endregion
+
     }
 }

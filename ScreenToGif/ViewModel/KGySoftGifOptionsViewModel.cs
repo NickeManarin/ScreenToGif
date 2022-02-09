@@ -62,6 +62,15 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
         nameof(ShowCurrentFrame)
     };
 
+    private static readonly HashSet<string> _affectsNotifications = new()
+    {
+        nameof(QuantizerId),
+        nameof(AlphaThreshold),
+        nameof(AllowDeltaFrames),
+        nameof(AllowClippedFrames),
+        nameof(DeltaTolerance),
+    };
+    
     private static bool _lastShowCurrentFrame;
     private static string _lastDitherer;
 
@@ -106,6 +115,8 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
     public string CurrentFramePath { get => Get<string>(); set => Set(value); }
     public bool IsGenerating { get => Get<bool>(); set => Set(value); }
     public WriteableBitmap PreviewImage { get => Get<WriteableBitmap>(); set => Set(value); }
+    public bool ShowRefreshPreview { get => Get<bool>(); set => Set(value); }
+    public string PreviewError { get => Get<string>(); set => Set(value); }
 
     // Animation Settings
     public int RepeatCount { get => Get(_preset.RepeatCount); set => Set(_preset.RepeatCount = value); }
@@ -114,6 +125,9 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
     public bool AllowDeltaFrames { get => Get(_preset.AllowDeltaFrames); set => Set(_preset.AllowDeltaFrames = value); }
     public bool AllowClippedFrames { get => Get(_preset.AllowClippedFrames); set => Set(_preset.AllowClippedFrames = value); }
     public byte DeltaTolerance { get => Get(_preset.DeltaTolerance); set => Set(_preset.DeltaTolerance = value); }
+    public bool IsAllowDeltaIgnored { get => Get<bool>(); set => Set(value); }
+    public bool IsAllowClippedIgnored { get => Get<bool>(); set => Set(value); }
+    public bool IsHighTolerance { get => Get<bool>(); set => Set(value); }
 
     #endregion
 
@@ -133,8 +147,20 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
 
     internal async void Apply()
     {
-        if (_previewBitmap == null)
+        AdjustNotifications();
+        if (_previewBitmap != null)
+            return;
+
+        if (IsExpensivePreview())
+            ShowRefreshPreview = true;
+        else
             await GeneratePreviewAsync();
+    }
+
+    internal async void RefreshPreview()
+    {
+        ShowRefreshPreview = false;
+        await GeneratePreviewAsync();
     }
 
     #endregion
@@ -199,8 +225,23 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
         // As there are some awaits among the cases above we need to re-check if we are already disposed.
         if (IsDisposed)
             return;
+
+        if (_affectsNotifications.Contains(e.PropertyName))
+            AdjustNotifications();
+
         if (_affectsPreview.Contains(e.PropertyName) || e.PropertyName == nameof(CurrentFramePath) && ShowCurrentFrame)
-            await GeneratePreviewAsync();
+        {
+            if (PreviewError != null)
+                return;
+
+            if (IsExpensivePreview())
+            {
+                PreviewImage = null;
+                ShowRefreshPreview = true;
+            }
+            else
+                await GeneratePreviewAsync();
+        }
     }
 
     protected override void Dispose(bool disposing)
@@ -222,6 +263,14 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
     #endregion
 
     #region Private Methods
+
+    private void AdjustNotifications()
+    {
+        bool hasAlpha = QuantizerDescriptor.GetById(QuantizerId)?.HasAlphaThreshold is true && AlphaThreshold > 0;
+        IsAllowDeltaIgnored = !hasAlpha && AllowDeltaFrames && !AllowClippedFrames;
+        IsAllowClippedIgnored = !hasAlpha && !AllowDeltaFrames && AllowClippedFrames;
+        IsHighTolerance = DeltaTolerance > 64;
+    }
 
     private async Task UpdateCurrentFrameAsync()
     {
@@ -291,6 +340,8 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
         var tokenSource = _cancelGeneratingPreview = new CancellationTokenSource();
         CancellationToken token = tokenSource.Token;
 
+        ShowRefreshPreview = false;
+        PreviewError = null;
         IsGenerating = true;
         IReadWriteBitmapData bitmapData = _previewBitmap.GetReadWriteBitmapData();
         try
@@ -301,13 +352,13 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
         }
         catch (Exception e)
         {
-            if (IsDisposed)
+            if (IsDisposed || token.IsCancellationRequested)
                 return;
-            if (!token.IsCancellationRequested)
-            {
-                LogWriter.Log(e, "Failed to generate preview.");
-                    PreviewImage = null;
-            }
+
+            LogWriter.Log(e, "Failed to generate preview.");
+            PreviewImage = null;
+            PreviewError = LocalizationHelper.GetWithFormat("S.SaveAs.KGySoft.Preview.Error", "Failed to generate preview: {0}", e.Message);
+            return;
         }
         finally
         {
@@ -316,7 +367,7 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
                 IsGenerating = false;
         }
 
-        if (token.IsCancellationRequested)
+        if (token.IsCancellationRequested || ShowRefreshPreview)
             return;
 
         // Triggering preview update. Since we try to reuse always the same WriteableBitmap instance it might need a little trick:
@@ -360,6 +411,8 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
             // pending generate is always awaited after cancellation so ignoring everything from here
         }
     }
+
+    private bool IsExpensivePreview() => BitLevel == 8 && QuantizerId == $"{nameof(OptimizedPaletteQuantizer)}.{nameof(OptimizedPaletteQuantizer.Wu)}";
 
     #endregion
 

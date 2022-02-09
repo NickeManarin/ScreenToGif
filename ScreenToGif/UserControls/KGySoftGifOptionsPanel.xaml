@@ -231,6 +231,16 @@
                                  IsIndeterminate="True"
                                  Visibility="{Binding IsGenerating, Converter={StaticResource Bool2Visibility}}"/>
                 </DockPanel>
+                <Label Grid.Row="1"
+                       Template="{StaticResource WarningLabel}"
+                       Content="{DynamicResource S.SaveAs.KGySoft.Preview.Refresh}"
+                       PreviewMouseLeftButtonUp="RefreshPreview_Click"
+                       Visibility="{Binding ShowRefreshPreview, Converter={StaticResource Bool2Visibility}}"/>
+                <Label Grid.Row="1"
+                       Template="{StaticResource ErrorLabel}"
+                       Content="{Binding PreviewError}"
+                       PreviewMouseLeftButtonUp="RefreshPreview_Click"
+                       Visibility="{Binding PreviewError, Converter={StaticResource ContentToVisibility}}"/>
             </Grid>
         </GroupBox>
 
@@ -240,6 +250,8 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="28"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -296,13 +308,31 @@
                             SmallChange="1" LargeChange="32"
                             ToolTip="{DynamicResource S.SaveAs.KGySoft.Animation.DeltaTolerance.Info}"
                             Visibility="{Binding AllowDeltaFrames, Converter={StaticResource Bool2Visibility}}"/>
+                <Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+                       Margin="20, 3, 10, 3"
+                       Template="{StaticResource WarningLabel}"
+                       Content="{DynamicResource S.SaveAs.KGySoft.Animation.HighDeltaTolerance}"
+                       PreviewMouseLeftButtonUp="HighDeltaToleranceLabel_Click"
+                       Visibility="{Binding IsHighTolerance, Converter={StaticResource Bool2Visibility}}"/>
 
                 <!--Allow Clipped Frames-->
-                <CheckBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+                <CheckBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
                           Margin="3"
                           Content="{DynamicResource S.SaveAs.KGySoft.Animation.AllowClippedFrames}"
                           ToolTip="{DynamicResource S.SaveAs.KGySoft.Animation.AllowClippedFrames.Info}"
                           IsChecked="{Binding AllowClippedFrames}"/>
+                <Label Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
+                       Margin="3"
+                       Template="{StaticResource InfoLabel}"
+                       Content="{DynamicResource S.SaveAs.KGySoft.Animation.AllowDeltaIgnored}"
+                       PreviewMouseLeftButtonUp="AllowDeltaIgnoredLabel_Click"
+                       Visibility="{Binding IsAllowDeltaIgnored, Converter={StaticResource Bool2Visibility}}"/>
+                <Label Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
+                       Margin="3"
+                       Template="{StaticResource InfoLabel}"
+                       Content="{DynamicResource S.SaveAs.KGySoft.Animation.AllowClippedIgnored}"
+                       PreviewMouseLeftButtonUp="AllowClippedIgnoredLabel_Click"
+                       Visibility="{Binding IsAllowClippedIgnored, Converter={StaticResource Bool2Visibility}}"/>
             </Grid>
         </GroupBox>
 
