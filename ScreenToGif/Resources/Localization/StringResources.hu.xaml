@@ -1666,7 +1666,7 @@
     <s:String x:Key="S.SaveAs.KGySoft.Animation.EndlessLoop">Végtelen ismétlés</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.EndlessLoop.Info">Ha ki van jelölve, az animáció vég nélkül fog ismétlődni.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.PingPong">Oda-vissza</s:String>
-    <s:String x:Key="S.SaveAs.KGySoft.Animation.PingPong.Info">Ha ki van jelölve, az animáció oda-vissza fog ismétlődni.&#x0d;&#x0a;Mivel ezzel duplázódik a kódolt képkockák száma, ez nagyobb végeredménnyel és hosszabb kódolási idővel jár.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.PingPong.Info">Ha ki van jelölve, az animáció oda-vissza fog ismétlődni.&#x0d;&#x0a;Mivel ezzel közel duplázódik a kódolt képkockák száma, ez nagyobb fájlmérettel és hosszabb kódolási idővel jár.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.LoopCount">Ismétlések száma:</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.LoopCount.Info">Meghatározza, hányszor legyen az animáció lejátszva.</s:String>
     <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames">Delta képkockák engedélyezése</s:String>
