@@ -1201,9 +1201,24 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <n:ExtendedCheckBox Grid.Row="0" Text="{DynamicResource S.SaveAs.SaveOptions.Overwrite}" Margin="20,3,3,3" 
-                                        IsChecked="{Binding OverwriteOnSave, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+                        <TextBlock Text="{DynamicResource S.SaveAs.SaveOptions.OverwriteMode}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="0" VerticalAlignment="Center"/>
 
+                        <WrapPanel Margin="5,0,0,0">
+                            <n:ExtendedRadioButton x:Name="OverwriteWarnRadioButton" ContentWidth="0" ContentHeight="0" Padding="0,2,2,2" Text="{DynamicResource S.SaveAs.SaveOptions.OverwriteMode.Warn}" 
+                                           IsChecked="{Binding OverwriteMode, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static e:OverwriteModes.Warn}}"
+                                           ToolTip="{DynamicResource S.SaveAs.SaveOptions.OverwriteMode.Warn.Info}"/>
+                            <Separator Width="1"/>
+                            <n:ExtendedRadioButton x:Name="OverwritePromptRadioButton" ContentWidth="0" ContentHeight="0" Padding="0,2,2,2" Text="{DynamicResource S.SaveAs.SaveOptions.OverwriteMode.Prompt}" 
+                                           IsChecked="{Binding OverwriteMode, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static e:OverwriteModes.Prompt}}"
+                                           ToolTip="{DynamicResource S.SaveAs.SaveOptions.OverwriteMode.Prompt.Info}"/>
+                            <Separator Width="1"/>
+                            <n:ExtendedRadioButton x:Name="OverwriteAllowRadioButton" ContentWidth="0" ContentHeight="0" Padding="0,2,2,2" Text="{DynamicResource S.SaveAs.SaveOptions.OverwriteMode.Allow}" 
+                                           IsChecked="{Binding OverwriteMode, Converter={StaticResource EnumToBool}, ConverterParameter={x:Static e:OverwriteModes.Allow}}"
+                                           ToolTip="{DynamicResource S.SaveAs.SaveOptions.OverwriteMode.Allow.Info}"/>
+                        </WrapPanel>
+                    </StackPanel>
+                    
                     <n:ExtendedCheckBox Grid.Row="1" x:Name="SaveAsProjectTooCheckBox" Text="{DynamicResource S.SaveAs.SaveOptions.ProjectToo}" Margin="20,3,3,3"
                                         IsChecked="{Binding ExportAsProjectToo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </Grid>
