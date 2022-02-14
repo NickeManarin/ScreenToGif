@@ -163,9 +163,9 @@ public partial class ExportPanel : UserControl, IPanel
 
         #endregion
 
-        #region UWP restrictions
+        #region Store restrictions
 
-#if UWP
+#if FULL_MULTI_MSIX_STORE
 
             CustomCommandsCheckBox.IsEnabled = false;
             CustomCommandsTextBox.IsEnabled = false;
@@ -712,9 +712,27 @@ public partial class ExportPanel : UserControl, IPanel
 
         if (CurrentPreset.PickLocation)
         {
+            if (CurrentPreset.OverwriteMode != OverwriteModes.Allow && File.Exists(Path.Combine(CurrentPreset.OutputFolder, CurrentPreset.ResolvedFilename + CurrentPreset.Extension)))
+            {
+                if (CurrentPreset.OverwriteMode == OverwriteModes.Prompt)
+                {
+                    if (!Dialog.Ask(LocalizationHelper.Get("S.SaveAs.Dialogs.Overwrite.Title"), LocalizationHelper.Get("S.SaveAs.Dialogs.Overwrite.Instruction"),
+                        LocalizationHelper.GetWithFormat("S.SaveAs.Dialogs.Overwrite.Message", "A file with the name '{0}' already exists in that folder.\r\nWould you like to overwrite it?", CurrentPreset.ResolvedFilename + CurrentPreset.Extension)))
+                    {
+                        RaiseValidatedEvent("S.SaveAs.Warning.Overwrite", StatusReasons.FileAlreadyExists);
+                        return false;
+                    }
+                }
+                else
+                {
+                    RaiseValidatedEvent("S.SaveAs.Warning.Overwrite", StatusReasons.FileAlreadyExists);
+                    return false;
+                }
+            }
+
             if (CurrentPreset.ExportAsProjectToo)
             {
-                if (!CurrentPreset.OverwriteOnSave)
+                if (CurrentPreset.OverwriteMode != OverwriteModes.Allow)
                 {
                     //Get the project extension in use.
                     var extension = UserSettings.All.ExportPresets.OfType<StgPreset>().OrderBy(o => o.IsSelectedForEncoder).Select(s => s.Extension ?? s.DefaultExtension).FirstOrDefault() ?? ".stg";
@@ -1366,7 +1384,7 @@ public partial class ExportPanel : UserControl, IPanel
 
                 preset.OutputFolder = Path.GetDirectoryName(sfd.FileName);
                 preset.OutputFilename = Path.GetFileNameWithoutExtension(sfd.FileName);
-                preset.OverwriteOnSave = File.Exists(sfd.FileName);
+                preset.OverwriteMode = File.Exists(sfd.FileName) ? OverwriteModes.Prompt : OverwriteModes.Warn;
                 preset.Extension = Path.GetExtension(sfd.FileName);
 
                 RaiseSaveEvent();

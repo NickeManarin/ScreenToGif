@@ -4,15 +4,21 @@ This is the current project of ScreenToGif.
 
 _VS 2022 and .NET 6 or newer required._
 
-## What's new? (Version 2.35.4)
+## What's new? (Version 2.36)
 
-• Updated the French localization.  
+• New installer and portable versions with the full package (no .NET 6 download required) are available alongside with the lighter versions, which still require the installation of .NET 6 desktop runtime.  
+• New installer package (MSIX) available.  
+• Added an option to prompt to overwrite when saving (enabled by default).  
+• Updated the Danish, French, German, Hungarian, Polish, Norwegian, Russian, and Simplified Chinese localizations.  
 
 ### Fixed:
 
-♦ It was not possible to load projects from the recent prtojects list.  
-♦ It was possible to import images with multiple sizes, which would end up in crashes during encoding.
-♦ The translation updater was not working for portable releases.  
+♦ The smooth loop feature was not working properly.
+♦ A new message will be displayed if you already have a smooth loop based on current settings instead of a warning.
+♦ It was not possible to set the app to start at Windows startup.
+♦ A settings migration issue from 2.31 to newer versions was fixed.
+♦ It was not possible to export as PSD.
+♦ When not having permission to save the settings to the installation location, the app would not try to save to AppData.  
 
 ### Known Bugs:
   

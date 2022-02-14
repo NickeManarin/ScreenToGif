@@ -8,7 +8,7 @@ namespace ScreenToGif.Domain.Interfaces
         string DescriptionKey { get; set; }
         ExportFormats Type { get; set; }
         bool PickLocation { get; set; }
-        bool OverwriteOnSave { get; set; }
+        OverwriteModes OverwriteMode { get; set; }
         bool ExportAsProjectToo { get; set; }
         bool UploadFile { get; set; }
         string UploadService { get; set; }

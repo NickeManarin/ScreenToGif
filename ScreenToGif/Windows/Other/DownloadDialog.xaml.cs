@@ -49,6 +49,9 @@ public partial class DownloadDialog : Window
             return;
         }
 
+        if (Global.UpdateAvailable.MustDownloadManually)
+            StatusBand.Warning(LocalizationHelper.Get("S.Updater.NoNewRelease.Info"));
+        
         #endregion
 
         try
@@ -156,6 +159,13 @@ public partial class DownloadDialog : Window
     private async void DownloadButton_Click(object sender, RoutedEventArgs e)
     {
         StatusBand.Hide();
+
+        if (Global.UpdateAvailable.MustDownloadManually)
+        {
+            ProcessHelper.StartWithShell("https://www.screentogif.com");
+            DialogResult = false;
+            return;
+        }
 
         if (EncodingManager.Encodings.Any(a => a.Status == EncodingStatus.Processing))
         {

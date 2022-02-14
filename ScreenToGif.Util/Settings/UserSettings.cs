@@ -289,6 +289,8 @@ public class UserSettings : INotifyPropertyChanged
                     return Enum.Parse(typeof(ColorQuantizationTypes), property.Value);
                 case "SizeUnits":
                     return Enum.Parse(typeof(SizeUnits), property.Value);
+                case "OverwriteModes":
+                    return Enum.Parse(typeof(OverwriteModes), property.Value);
 
                 case "FontWeight":
                     return new FontWeightConverter().ConvertFrom(property.Value);
@@ -494,7 +496,7 @@ public class UserSettings : INotifyPropertyChanged
     }
 
 
-    public static void Save(bool canForce = false)
+    public static void Save(bool canForce = false, bool saveToAppData = false)
     {
         //Only writes if non-default values were created. Should not write the default dictionary.
         if (_local == null && _appData == null)
@@ -503,17 +505,14 @@ public class UserSettings : INotifyPropertyChanged
         try
         {
             //Filename (Local or AppData).
-            var folder = _local != null ? AppDomain.CurrentDomain.BaseDirectory : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ScreenToGif");
+            var folder = !saveToAppData && _local != null ? AppDomain.CurrentDomain.BaseDirectory : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ScreenToGif");
             var filename = Path.Combine(folder, "Settings.xaml");
-            var backup = filename + ".bak";
-
+            
             //Create folder.
             if (!string.IsNullOrWhiteSpace(folder) && !Directory.Exists(folder))
                 Directory.CreateDirectory(folder);
 
-            //Create the backup, in case the save operation fails.
-            if (File.Exists(filename))
-                File.Copy(filename, backup, true);
+            var backup = File.Exists(filename) ? File.ReadAllText(filename) : null;
 
             var settings = new XmlWriterSettings
             {
@@ -532,17 +531,21 @@ public class UserSettings : INotifyPropertyChanged
                 XamlWriter.Save(_local ?? _appData, writer);
 
             CheckIfSavedCorrectly(filename, backup, true);
-
-            File.Delete(backup);
         }
         catch (UnauthorizedAccessException u)
         {
-            LogWriter.Log(u, "Unauthorized to save the settings.");
-
-            if (canForce)
+            //Try saving to AppData first, then try harder.
+            if (!saveToAppData)
+            {
+                Save(canForce, true);
+            }
+            else if (canForce)
+            {
+                LogWriter.Log(u, "Unauthorized to save the settings.");
                 throw new SettingsPersistenceException(_local ?? _appData, _local != null);
+            }
         }
-        catch (Exception e)
+        catch (Exception e) when (e is not SettingsPersistenceException)
         {
             LogWriter.Log(e, "Impossible to save the settings.");
         }
@@ -589,7 +592,7 @@ public class UserSettings : INotifyPropertyChanged
             if (content.All(x => x == '\0'))
             {
                 LogWriter.Log("Settings disk persistence failed.", content);
-                File.Copy(backup, filename, true);
+                File.WriteAllText(filename, backup);
 
                 if (throwException)
                     throw new UnauthorizedAccessException("The file had garbage inside it.");
@@ -597,7 +600,7 @@ public class UserSettings : INotifyPropertyChanged
         }
         catch (Exception e)
         {
-            LogWriter.Log(e, "Impossible to check if the settings file was saved correctly.");
+            LogWriter.Log(e, "Impossible to check if the settings file was saved correctly or impossible to restore backup.");
         }
     }
 
