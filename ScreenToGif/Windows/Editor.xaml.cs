@@ -1732,12 +1732,18 @@ namespace ScreenToGif.Windows
             }
 
             Cursor = Cursors.AppStarting;
+            var initialCount = Project.Frames.Count;
 
             var index = await Task.Run(() => SmoothLoopAsync((decimal)UserSettings.All.SmoothLoopSimilarity, UserSettings.All.SmoothLoopStartThreshold, UserSettings.All.SmoothLoopFrom));
 
-            if (index == Project.Frames.Count)
+            //If nothing changed, it means that no frame was removed.
+            if (Project.Frames.Count == initialCount)
             {
-                StatusList.Warning(LocalizationHelper.Get("S.SmoothLoop.Warning.NoLoopFound"));
+                //The reason could be for no loop found or loop already smooth.
+                if (index == Project.Frames.Count - 1)
+                    StatusList.Info(LocalizationHelper.Get("S.SmoothLoop.Warning.AlreadySmoothLoop"));
+                else
+                    StatusList.Warning(LocalizationHelper.Get("S.SmoothLoop.Warning.NoLoopFound"));
 
                 //Workaround for not disabling the CanExecute of the panel.
                 _applyAction = ApplySmoothLoopButton_Click;
@@ -3442,7 +3448,7 @@ namespace ScreenToGif.Windows
                     Project.Persist();
 
                     //Get enabled tasks.
-                    var tasks = UserSettings.All.AutomatedTasksList?.Cast<BaseTaskViewModel>().Where(w => w.IsEnabled).ToList() ?? new List<BaseTaskViewModel>();
+                    var tasks = UserSettings.All.AutomatedTasksList?.Cast<BaseTaskViewModel>().Where(w => w != null && w.IsEnabled).ToList() ?? new List<BaseTaskViewModel>();
 
                     if (tasks.Any())
                     {
@@ -5263,7 +5269,7 @@ namespace ScreenToGif.Windows
             //Validates each file name when saving multiple images (if more than one image, that will not be zipped).
             if (preset is ImagePreset { ZipFiles: false })
             {
-                if (!preset.OverwriteOnSave)
+                if (preset.OverwriteMode != OverwriteModes.Allow)
                 {
                     var output = Path.Combine(preset.OutputFolder, preset.ResolvedFilename);
                     var padSize = (Project.Frames.Count - 1).ToString().Length;
@@ -5274,12 +5280,24 @@ namespace ScreenToGif.Windows
 
                     if (any)
                     {
-                        Dispatcher.Invoke(() => StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Overwrite")));
-                        return false;
+                        if (preset.OverwriteMode == OverwriteModes.Prompt)
+                        {
+                            if (Dispatcher.Invoke(() => !Dialog.Ask(LocalizationHelper.Get("S.SaveAs.Dialogs.Overwrite.Title"), LocalizationHelper.Get("S.SaveAs.Dialogs.OverwriteMultiple.Instruction"),
+                                LocalizationHelper.Get("S.SaveAs.Dialogs.OverwriteMultiple.Message"))))
+                            {
+                                Dispatcher.Invoke(() => StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Overwrite")));
+                                return false;
+                            }
+                        }
+                        else
+                        {
+                            Dispatcher.Invoke(() => StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Overwrite")));
+                            return false;
+                        }
                     }
                 }
 
-                if (indexes.Count > 1 && !Dispatcher.Invoke<bool>(() => Dialog.Ask(LocalizationHelper.Get("S.SaveAs.Dialogs.Multiple.Title"),
+                if (indexes.Count > 1 && !Dispatcher.Invoke(() => Dialog.Ask(LocalizationHelper.Get("S.SaveAs.Dialogs.Multiple.Title"),
                     LocalizationHelper.Get("S.SaveAs.Dialogs.Multiple.Instruction"), LocalizationHelper.GetWithFormat("S.SaveAs.Dialogs.Multiple.Message", indexes.Count))))
                 {
                     Dispatcher.Invoke(() => StatusList.Warning(LocalizationHelper.Get("S.SaveAs.Warning.Canceled")));
@@ -6299,12 +6317,11 @@ namespace ScreenToGif.Windows
                     break;
                 }
 
-                count++;
                 start += step;
             }
             
-            if (found == -1 || found == threshold || found == Project.Frames.Count - 1)
-                return Project.Frames.Count;
+            if (found == -1 || found == threshold - 1 || found == Project.Frames.Count - 1)
+                return found;
 
             var removeList = Project.Frames.GetRange(found + 1, Project.Frames.Count - 1 - found).Select(s => s.Index).ToList();
 

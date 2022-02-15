@@ -242,12 +242,6 @@ public static class StreamHelpers
         ms.Write(bytes, 0, bytes.Length);
     }
 
-    public static void WriteString1252(this Stream ms, string value)
-    {
-        var bytes = Encoding.GetEncoding(1252).GetBytes(value);
-        ms.Write(bytes, 0, bytes.Length);
-    }
-
     public static byte[] GetPascalStringAsBytes(byte[] bytes, bool padded = true, int byteLimit = 31)
     {
         using (var ms = new MemoryStream())
@@ -267,7 +261,7 @@ public static class StreamHelpers
 
     public static void WritePascalString(this Stream ms, string value, bool padded = true)
     {
-        var bytes = Encoding.GetEncoding(1252).GetBytes(value);
+        var bytes = Encoding.Unicode.GetBytes(value);
 
         ms.WriteByte((byte)bytes.Length); //String size, 1 byte.
         ms.Write(bytes, 0, bytes.Length); //String, XX bytes.

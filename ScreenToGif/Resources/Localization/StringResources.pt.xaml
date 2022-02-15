@@ -1307,6 +1307,7 @@
     <s:String x:Key="S.SmoothLoop.Info">Tenta encontrar um quadro com no mínimo {0} % de similaridade do quadro inicial e deleta todos os próximos quadros.&#x0d;Você pode escolher se você quer ignorar alguns quadros iniciais e/ou executar a verificação do início (depois dos quadros ignorados) ou do fim.</s:String>
     <s:String x:Key="S.SmoothLoop.Warning.Threshold">O número de quadros para serem ignorados precisa ser menor que o número de quadros totais.</s:String>
     <s:String x:Key="S.SmoothLoop.Warning.NoLoopFound">Não foi posssível criar um loop suave com as configurações atuais.</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.AlreadySmoothLoop">Você já tem um loop suave baseando-se nas configurações atuais.</s:String>
     
     <!--Editor • Captions-->
     <s:String x:Key="S.Caption.Text">Texto</s:String>
@@ -1693,7 +1694,13 @@
     <s:String x:Key="S.SaveAs.SaveOptions">Opções de exportação</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.Partial">Exporte parcialmente.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Exporte o arquivo em uma pasta de sua escolha.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Sobrescrever (caso já exista).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode">Sobrescrever?</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Warn">Avisar</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Warn.Info">Apenas avisa que existe um arquivo com o mesmo nome.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Prompt">Perguntar</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Prompt.Info">Pergunta se o usuário quer sobrescrever o arquivo.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Allow">Permitir</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Allow.Info">Simplesmente sobrescreve o arquivo.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Exportar como projeto também (mesma pasta, mesmo nome).</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Fazer upload do arquivo.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">Copiar para a área de transferência.</s:String>
@@ -1783,6 +1790,11 @@
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Title">Exportar Quadros</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">Tem certeza de que deseja exportar os quadros?</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">Essa ação exportará {0} quadros diretamente para a pasta selecionada.</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Title">Sobrescrever</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Instruction">Você deseja sobrescrever o arquivo?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Message">Um arquivo com o nome '{0}' já existe naquela pasta.\r\nVocê gostaria de sobrescrevê-lo?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.OverwriteMultiple.Instruction">Você deseja sobrescrever os arquivos?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.OverwriteMultiple.Message">Já existe um ou mais arquivos com o mesmo nome nessa pasta.\r\nVocê gostaria de sobrescrevê-los?</s:String>
     
     <!--Command Preview-->
     <s:String x:Key="S.CommandPreviewer.Title">Visualizador de comando</s:String>

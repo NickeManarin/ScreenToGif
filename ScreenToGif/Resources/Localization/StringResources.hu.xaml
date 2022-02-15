@@ -1,4 +1,4 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:s="clr-namespace:System;assembly=mscorlib"
                     xml:space="preserve">
@@ -61,7 +61,12 @@
     <s:String x:Key="S.Warning.Graphics.Switch">Gépház megnyitása</s:String>
     
     <!--Keys-->
+    <s:String x:Key="S.Keys.Enter">Enter</s:String>
+    <s:String x:Key="S.Keys.Esc">Esc</s:String>
     <s:String x:Key="S.Keys.Space">Szóköz</s:String>
+
+    <!--Mouse-->
+    <s:String x:Key="S.Mouse.Right">Jobb kattintás</s:String>
     
     <!--Tray icon-->
     <s:String x:Key="S.NewRecording">Új képernyőfelvétel</s:String>
@@ -104,6 +109,7 @@
     <s:String x:Key="S.Command.DeleteNext">Az összes következő képkocka törlése</s:String>
     <s:String x:Key="S.Command.RemoveDuplicates">Ismétlődések eltávolítása</s:String>
     <s:String x:Key="S.Command.Reduce">A képkockaszám csökkentése</s:String>
+    <s:String x:Key="S.Command.SmoothLoop">Egy egyenletes ciklus létrehozása</s:String>
     <s:String x:Key="S.Command.Reverse">Fordított animáció</s:String>
     <s:String x:Key="S.Command.Yoyo">Az animációt előre-hátra mozgóvá teszi</s:String>
     <s:String x:Key="S.Command.MoveLeft">A kijelölt képkocka mozgatása balra</s:String>
@@ -159,6 +165,7 @@
     <s:String x:Key="S.Updater.Header">Egy új frissítés érhető el</s:String>
     <s:String x:Key="S.Updater.NewRelease">Új kiadás!</s:String>
     <s:String x:Key="S.Updater.NewRelease.Info">Új kiadás áll rendelkezésre, Verzió {0}!&#x0d;Kattints ide további részletekért.</s:String>
+    <s:String x:Key="S.Updater.NoNewRelease.Info">Úgy tűnik, hogy a rendszered már nem támogatott, vagy valami megváltozott a frissítési rendszerben. Próbáld meg manuálisan letölteni a weboldalról.</s:String>
     <s:String x:Key="S.Updater.Version">Verzió</s:String>
     <s:String x:Key="S.Updater.Portable">Hordozható</s:String>
     <s:String x:Key="S.Updater.Installer">Telepítő</s:String>
@@ -195,9 +202,7 @@
     <s:String x:Key="S.Options.Other">Egyéb</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Header">Hiányzik a billentyűparancs a kurzor követéséhez</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Message">Az egérmutató követési funkciójának használatához be kell állítanod egy billentyűparancsot, amely szükség esetén bekapcsolja azt.</s:String>
-    <s:String x:Key="S.Options.Warning.DesktopDuplication.Header">Hiányoznak a képernyőfelvétel függőségei</s:String>
-    <s:String x:Key="S.Options.Warning.DesktopDuplication.Message">A képernyő rögzítésének érdekében (a Desktop Duplication API-val), le kell töltened a SharpDx könyvtárakat.</s:String>
-    
+
     <!--Options • Application-->
     <s:String x:Key="S.Options.App.Startup">Indítás</s:String>
     <s:String x:Key="S.Options.App.Startup.Mode.Manual">Indítás&#x0d;manuálisan</s:String>
@@ -369,6 +374,12 @@
     <s:String x:Key="S.Options.Editor.General.LimitHistory">A visszavonási / ismétlési előzmények korlátozása.</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Info">(A régebbi műveletek a korlát elérésekor törlődnek)</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Maximum">(A tárolt műveletek maximális száma)</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Folder">A kimeneti mappa szinkronizálása az előbeállítások között.</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Folder.Info">(Az előbeállítások ugyanazt a kimeneti útvonalat használják)</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Filename">Szinkronizálja a fájlnevet is.</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.Filename.Info">(Az előbeállítások is ugyanazt a fájlnevet fogják használni)</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.SameType">Csak az azonos fájltípusú előbeállítások szinkronizálása.</s:String>
+    <s:String x:Key="S.Options.Editor.General.SyncPath.SameType.Info">(Csak az azonos fájltípusú előbeállítások lesznek szinkronban)</s:String>
     
     <!--Options • Tasks-->
     <s:String x:Key="S.Options.Tasks.Title">Automatizált feladat</s:String>
@@ -572,9 +583,6 @@
     <s:String x:Key="S.Options.Extras.GifskiLocation.Select">Válaszd ki a Gifski könyvtár helyét</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.File">Gifski könyvtár</s:String>
     <s:String x:Key="S.Options.Extras.GifskiLocation.Invalid">A Gifski könyvtár elérési útja egy vagy több érvénytelen karaktert tartalmaz. Válassz érvényes helyet a könyvtárhoz.</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation">SharpDx mappa (SharpDX.dll, SharpDX.Direct3D11.dll és SharpDX.DXGI.dll)</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation.Select">Válaszd ki a SharpDx-könyvtárak helyét</s:String>
-    <s:String x:Key="S.Options.Extras.SharpDxLocation.Invalid">A SharpDx-tárak elérési útja egy vagy több érvénytelen karaktert tartalmaz. Jelölj ki egy érvényes mappát ezekhez a könyvtárakhoz.</s:String>
     <s:String x:Key="S.Options.Extras.License.Ffmpeg">FFmpeg licenc</s:String>
     <s:String x:Key="S.Options.Extras.License.Gifski">Gifski licenc</s:String>
     <s:String x:Key="S.Options.Extras.License.SharpDx">SharpDx licenc</s:String>
@@ -602,6 +610,8 @@
     
     <!--Options • About-->
     <s:String x:Key="S.Options.About.Version">Verzió:</s:String>
+    <s:String x:Key="S.Options.About.UpdateCheck">Frissítések keresése</s:String>
+    <s:String x:Key="S.Options.About.UpdateCheck.Nothing">A legfrissebb verzióval rendelkezel.</s:String>
     <s:String x:Key="S.Options.About.Author">Szerző: Nicke Manarin</s:String>
     <s:String x:Key="S.Options.About.StoreVersion">A Microsoft Store verzió. Egyes szolgáltatások a kényszerített házirendek miatt le vannak tiltva.</s:String>
     <s:String x:Key="S.Options.About.Contact">Kapcsolat</s:String>
@@ -679,8 +689,7 @@
     <s:String x:Key="S.Recorder.Warning.CaptureNotPossible.Info">Nem lehetett rögzíteni a képernyőt. A rögzítési módszer 5 próbálkozás után nem adott vissza képkockát.</s:String>
     <s:String x:Key="S.Recorder.Warning.StartPauseNotPossible">A képernyő rögzítését nem lehetett elindítani / szüneteltetni</s:String>
     <s:String x:Key="S.Recorder.Warning.Windows8">Windows 8 vagy újabb szükséges a képernyő rögzítéséhez (Desktop Duplication API használatával).</s:String>
-    <s:String x:Key="S.Recorder.Warning.MissingSharpDx">A SharpDx könyvtárak szükségesek ahhoz, hogy rögzítsd a képernyőt a Desktop Duplication API-val. A letöltéshez nyisd meg az Beállítások > Extrák lehetőséget.</s:String>
-    
+
     <!--New recorder-->
     <s:String x:Key="S.Recorder.Area">Terület</s:String>
     <s:String x:Key="S.Recorder.Area.Select">Egy terület kijelölése</s:String>
@@ -1021,6 +1030,7 @@
     <s:String x:Key="S.Editor.Edit.Delete">Törlés</s:String>
     <s:String x:Key="S.Editor.Edit.Frames.Duplicates">Ismétlődések&#10;eltávolítása</s:String>
     <s:String x:Key="S.Editor.Edit.Frames.Reduce">Képkockaszám&#x0d;csökkentése</s:String>
+    <s:String x:Key="S.Editor.Edit.Frames.SmoothLoop">Egyenletes&#x0d;ciklus</s:String>
     <s:String x:Key="S.Editor.Edit.DeletePrevious">Az összes előző törlése</s:String>
     <s:String x:Key="S.Editor.Edit.DeleteNext">Az összes következő törlése</s:String>
     
@@ -1131,6 +1141,7 @@
     <s:String x:Key="S.Editor.Warning.Gifski">Gifski nincs jelen. Add hozzá a Path környezeti változókhoz, vagy kattints ide a Beállítások > Extrák megnyitásához és a hely beállításához.</s:String>
     <s:String x:Key="S.Editor.Warning.LowSpace">Nincs elég hely a meghajtón, ahol ez az alkalmazás tárolja a gyorsítótárat ({0}% maradt). Kattints ide a Beállítások > Ideiglenes fájlok megnyitásához, hogy helyet szabadítson fel.</s:String>
     <s:String x:Key="S.Editor.Warning.DifferentDpi">Több különböző DPI-vel rendelkező képet próbáltál importálni, ami nem támogatott. Néhány importálva lett, a többit külön kell importálni.</s:String>
+    <s:String x:Key="S.Editor.Warning.DifferentSize">Több különböző méretű képet próbáltál importálni, ami nem támogatott. Néhányat sikerült importálni, másokat külön-külön kell importálni.</s:String>
     
     <!--Editor • Status-->
     <s:String x:Key="S.Editor.RetrievingFromCache">Képkockák visszanyerése a gyorsítótárból.</s:String>
@@ -1151,6 +1162,8 @@
     <s:String x:Key="S.Editor.ApplyingTransition">Az áttűnési hatás alkalmazása</s:String>
     <s:String x:Key="S.Editor.PreparingSaving">Mentés előkészítése</s:String>
     <s:String x:Key="S.Editor.CancelDiscard">A betöltés megszakítása és a projekt elvetése.</s:String>
+    <s:String x:Key="S.Editor.FindingLoop">A tökéletes ciklus megtalálása</s:String>
+    <s:String x:Key="S.Editor.DiscardingLoop">A ciklusban fel nem használt képkockák elvetése</s:String>
 
     <!--Editor • Frame list-->
     <s:String x:Key="S.Editor.List.Frame">Képkocka:</s:String>
@@ -1235,16 +1248,18 @@
     <s:String x:Key="S.Clipboard.After">A kiválasztott képkocka után</s:String>
     
     <!--Editor • Resize-->
-    <s:String x:Key="S.Resize.CurrentProperties">Jelenlegi tulajdonságok</s:String>
+    <s:String x:Key="S.Resize.Difference">Különbség</s:String>
     <s:String x:Key="S.Resize.Dpi">Dpi</s:String>
-    <s:String x:Key="S.Resize.NewProperties">Új tulajdonságok</s:String>
+    <s:String x:Key="S.Resize.Options">Beállítások</s:String>
+    <s:String x:Key="S.Resize.Pixels">Pixelek (px)</s:String>
+    <s:String x:Key="S.Resize.Percent">Százalék (%)</s:String>
     <s:String x:Key="S.Resize.Dpi2">DPI:</s:String>
     <s:String x:Key="S.Resize.KeepAspect">Képarány megtartása.</s:String>
-    <s:String x:Key="S.Resize.Options">Beállítások</s:String>
     <s:String x:Key="S.Resize.ScalingQuality">Méretezés minősége:</s:String>
     <s:String x:Key="S.Resize.ScalingQuality.Fant">Fant (jobb minőségű)</s:String>
     <s:String x:Key="S.Resize.ScalingQuality.Linear">Lineáris (gyengébb minőség)</s:String>
     <s:String x:Key="S.Resize.ScalingQuality.NearestNeighbor">Legközelebbi szomszéd (gyengébb minőségű és gyorsabb)</s:String>
+    <s:String x:Key="S.Resize.ScalingQuality.Info">Méretezési minőség.</s:String>
     <s:String x:Key="S.Resize.Warning">Az Átméretezés művelet alkalmazásához másik értéket kell választanod.</s:String>
     
     <!--Editor • Crop-->
@@ -1288,6 +1303,16 @@
     <s:String x:Key="S.RemoveDuplicates.Delay.Average">Átlag használata</s:String>
     <s:String x:Key="S.RemoveDuplicates.Delay.Sum">Az összeg használata</s:String>
     <s:String x:Key="S.RemoveDuplicates.Info">Ez a művelet elemzi az egyes képkockákat (képpontról képpontra), és eltávolítja azokat, amelyek legalább {0} %-ban hasonlítanak a közvetlen szomszédjára.&#x0d;Kiválaszthatod, hogy módosítani szeretnéd-e a képkockák késleltetését (kiállítási időtartamát).</s:String>
+
+    <!--Editor • Smooth Loop-->
+    <s:String x:Key="S.SmoothLoop.Header">Egyenletes ciklus létrehozása</s:String>
+    <s:String x:Key="S.SmoothLoop.StartThreshold">Az első figyelmen kívül hagyása: </s:String>
+    <s:String x:Key="S.SmoothLoop.From">Összehasonlítás innen:</s:String>
+    <s:String x:Key="S.SmoothLoop.From.Last">Vége</s:String>
+    <s:String x:Key="S.SmoothLoop.From.First">Eleje</s:String>
+    <s:String x:Key="S.SmoothLoop.Info">Megpróbál egy olyan képkockát találni, amely legalább {0} %-ban hasonlít a kezdő képkockára, és törli az összes későbbi képkockát.&#x0d; Kiválaszthatod, hogy figyelmen kívül akarsz-e hagyni néhány kezdeti képkockát, és az összehasonlítást az elejétől (a küszöbérték után) vagy a végétől kezded.</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.Threshold">A figyelmen kívül hagyandó képkockák számának kisebbnek kell lennie, mint a képkockák teljes száma.</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.NoLoopFound">A kiválasztott beállításokkal nem lehetett egyenletes ciklust létrehozni.</s:String>
     
     <!--Editor • Captions-->
     <s:String x:Key="S.Caption.Text">Szöveg</s:String>

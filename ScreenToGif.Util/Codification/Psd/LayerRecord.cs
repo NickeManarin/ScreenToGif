@@ -49,7 +49,7 @@ internal class LayerRecord : IPsdContent
                 stream.WriteByte(0); //Flags, Visible = true, 1 byte. (For invisible, try using 10)
                 stream.WriteByte(0); //Filler, 1 byte
 
-                var name = StreamHelpers.GetPascalStringAsBytes(Encoding.GetEncoding(1252).GetBytes(Name));
+                var name = StreamHelpers.GetPascalStringAsBytes(Encoding.Unicode.GetBytes(Name));
                 var aditionalLayerInfo = AditionalInfo.SelectMany(s => s.Content).ToArray();
 
                 stream.WriteUInt32(BitHelper.ConvertEndian((uint)(4 + 4 + name.Length + aditionalLayerInfo.Length))); //Extra data length, 4 bytes.

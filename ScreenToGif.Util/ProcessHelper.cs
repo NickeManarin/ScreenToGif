@@ -21,6 +21,34 @@ public static class ProcessHelper
         }
     }
 
+    public static async Task<string> Start(string arguments, bool runWithPowershell = true)
+    {
+        var info = new ProcessStartInfo(runWithPowershell ? "Powershell.exe" : "cmd.exe")
+        {
+            Arguments = (!runWithPowershell ? "/c " : "") + arguments,
+            RedirectStandardOutput = true,
+            CreateNoWindow = true
+        };
+
+        try
+        {
+            using var process = new Process();
+            process.StartInfo = info;
+            process.Start();
+
+            var message = await process.StandardOutput.ReadToEndAsync();
+
+            await process.WaitForExitAsync();
+
+            return message;
+        }
+        catch (Exception e)
+        {
+            LogWriter.Log(e, "It was not possible to run the command");
+            return "";
+        }
+    }
+
     public static void StartWithShell(string filename)
     {
         var info = new ProcessStartInfo
@@ -31,7 +59,7 @@ public static class ProcessHelper
 
         Process.Start(info);
     }
-
+    
     public static async Task<bool> RestartAsAdmin(string arguments = "", bool waitToClose = false)
     {
         try

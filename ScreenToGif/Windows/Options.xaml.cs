@@ -7,7 +7,6 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Net;
-using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -101,10 +100,13 @@ public partial class Options : Window, INotification
     {
         InitializeComponent();
 
-#if UWP
-            UpdatesCheckBox.Visibility = Visibility.Collapsed;
-            CheckForUpdatesLabel.Visibility = Visibility.Collapsed;
-            StoreTextBlock.Visibility = Visibility.Visible;
+#if FULL_MULTI_MSIX_STORE
+        UpdatesCheckBox.Visibility = Visibility.Collapsed;
+        CheckForUpdatesLabel.Visibility = Visibility.Collapsed;
+        StoreTextBlock.Visibility = Visibility.Visible;
+#elif FULL_MULTI_MSIX
+        PortableUpdateCheckBox.Visibility = Visibility.Collapsed;
+        AdminUpdateCheckBox.Visibility = Visibility.Collapsed;     
 #endif
     }
 
@@ -126,7 +128,7 @@ public partial class Options : Window, INotification
             //Detect if this app is set to start with windows.
             var sub = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", false);
             var key = sub?.GetValue("ScreenToGif");
-            var name = Assembly.GetEntryAssembly()?.Location ?? Process.GetCurrentProcess().MainModule?.FileName;
+            var name = ProcessHelper.GetEntryAssemblyPath();
 
             if (key == null || key as string != name)
             {
@@ -199,7 +201,7 @@ public partial class Options : Window, INotification
             _ignoreStartup = true;
 
             var sub = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-            var name = Assembly.GetEntryAssembly()?.Location ?? Process.GetCurrentProcess().MainModule?.FileName;
+            var name = ProcessHelper.GetEntryAssemblyPath();
 
             if (string.IsNullOrWhiteSpace(name) || sub == null)
             {
@@ -232,7 +234,7 @@ public partial class Options : Window, INotification
             _ignoreStartup = true;
 
             var sub = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-            var name = Assembly.GetEntryAssembly()?.Location ?? Process.GetCurrentProcess().MainModule?.FileName;
+            var name = ProcessHelper.GetEntryAssemblyPath();
 
             if (string.IsNullOrWhiteSpace(name) || sub == null)
             {
@@ -1291,7 +1293,7 @@ public partial class Options : Window, INotification
             return;
         }
 
-#if UWP
+#if FULL_MULTI_MSIX_STORE
             StatusBand.Warning(LocalizationHelper.Get("S.Options.Extras.DownloadRestriction"));
             return;
 #else
@@ -1390,7 +1392,7 @@ public partial class Options : Window, INotification
             return;
         }
 
-#if UWP
+#if FULL_MULTI_MSIX_STORE
             StatusBand.Warning(LocalizationHelper.Get("S.Options.Extras.DownloadRestriction"));
             return;
 #else
@@ -1515,7 +1517,8 @@ public partial class Options : Window, INotification
 
         var result = ofd.ShowDialog();
 
-        if (!result.HasValue || !result.Value) return;
+        if (!result.HasValue || !result.Value)
+            return;
 
         UserSettings.All.FfmpegLocation = ofd.FileName;
 
@@ -1563,7 +1566,8 @@ public partial class Options : Window, INotification
 
         var result = ofd.ShowDialog();
 
-        if (!result.HasValue || !result.Value) return;
+        if (!result.HasValue || !result.Value)
+            return;
 
         UserSettings.All.GifskiLocation = ofd.FileName;
 
