@@ -31,7 +31,7 @@ namespace ScreenToGif.Util.Settings;
 public class UserSettings : INotifyPropertyChanged
 {
     #region Variables
-        
+
     public event PropertyChangedEventHandler PropertyChanged;
 
     public static readonly object Lock = new();
@@ -47,7 +47,7 @@ public class UserSettings : INotifyPropertyChanged
     private static readonly ResourceDictionary Default;
 
     #endregion
-        
+
     static UserSettings()
     {
         if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
@@ -314,14 +314,14 @@ public class UserSettings : INotifyPropertyChanged
                     return Enum.Parse(typeof(TextAlignment), property.Value);
 
                 case "ArrayList":
-                    {
-                        var array = new ArrayList();
+                {
+                    var array = new ArrayList();
 
-                        foreach (var child in property.Children)
-                            array.Add(ParseProperty(child));
+                    foreach (var child in property.Children)
+                        array.Add(ParseProperty(child));
 
-                        return array;
-                    }
+                    return array;
+                }
 
                 default:
                     return DeserializeProperty(property);
@@ -507,7 +507,7 @@ public class UserSettings : INotifyPropertyChanged
             //Filename (Local or AppData).
             var folder = !saveToAppData && _local != null ? AppDomain.CurrentDomain.BaseDirectory : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ScreenToGif");
             var filename = Path.Combine(folder, "Settings.xaml");
-            
+
             //Create folder.
             if (!string.IsNullOrWhiteSpace(folder) && !Directory.Exists(folder))
                 Directory.CreateDirectory(folder);
@@ -525,10 +525,15 @@ public class UserSettings : INotifyPropertyChanged
                 Encoding = Encoding.UTF8
             };
 
+            var dic = RemoveInvalidEntries(_local ?? _appData);
+
+            if (dic == null)
+                return;
+
             //Serialize and save to disk.
             using (var fileStream = new FileStream(filename, FileMode.Create, FileAccess.Write, FileShare.None))
             using (var writer = XmlWriter.Create(fileStream, settings))
-                XamlWriter.Save(_local ?? _appData, writer);
+                XamlWriter.Save(dic, writer);
 
             CheckIfSavedCorrectly(filename, backup, true);
         }
@@ -602,6 +607,22 @@ public class UserSettings : INotifyPropertyChanged
         {
             LogWriter.Log(e, "Impossible to check if the settings file was saved correctly or impossible to restore backup.");
         }
+    }
+
+    private static ResourceDictionary RemoveInvalidEntries(ResourceDictionary dictionary)
+    {
+        if (dictionary == null)
+            return null;
+
+        var toRemove = dictionary.Cast<DictionaryEntry>().Where(entry => entry.Value == null).ToList();
+
+        foreach (var entry in toRemove)
+        {
+            LogWriter.Log("Setting removed: " + entry.Key);
+            dictionary.Remove(entry.Key);
+        }
+        
+        return dictionary;
     }
 
 
@@ -1725,7 +1746,7 @@ public class UserSettings : INotifyPropertyChanged
         get => (string)GetValue();
         set => SetValue(value);
     }
-    
+
     #endregion
 
 
