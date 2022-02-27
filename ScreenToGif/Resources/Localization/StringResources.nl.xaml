@@ -1307,6 +1307,7 @@
     <s:String x:Key="S.SmoothLoop.Info">Probeert een frame te vinden dat minstens {0}% lijkt op het startframe en verwijdert alle latere frames.&#x0d; Je kunt kiezen of je enkele initiële frames wilt negeren en de vergelijking vanaf het begin (na de drempel) of het einde wilt starten.</s:String>
     <s:String x:Key="S.SmoothLoop.Warning.Threshold">Het aantal te negeren frames moet kleiner zijn dan het totale aantal frames.</s:String>
     <s:String x:Key="S.SmoothLoop.Warning.NoLoopFound">Met de geselecteerde instellingen was het niet mogelijk om een vloeiende lus te maken.</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.AlreadySmoothLoop">Er is al een vloeiende lus op basis van geselecteerde instellingen.</s:String>
     
     <!--Editor • Captions-->
     <s:String x:Key="S.Caption.Text">Tekst</s:String>
@@ -1693,7 +1694,13 @@
     <s:String x:Key="S.SaveAs.SaveOptions">Opties opslaan</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.Partial">Gedeeltelijk exporteren.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Sla het bestand op in een map naar keuze.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Overschrijven (indien bestand al bestaat).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode">Overschrijven?</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Warn">Waarschuwen</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Warn.Info">Alleen waarschuwen als er al een bestand met dezelfde naam bestaat.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Prompt">Vragen</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Prompt.Info">Vraagt of de gebruiker wil dat het bestand wordt overschreven.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Allow">Toestaan</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Allow.Info">Overschrijft gewoon het bestand.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Project ook opslaan (dezelfde map, dezelfde bestandsnaam).</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Bestand uploaden.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">Naar klembord kopiëren.</s:String>
@@ -1783,6 +1790,11 @@
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Title">Frames exporteren</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">Weet je zeker dat je de frames wilt exporteren?</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">Deze actie zal {0} frames direct in geselecteerde map exporteren</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Title">Overschrijven</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Instruction">Mag het bestand overschreven worden?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Message">Een bestand met de naam '{0}' bestaat al in deze map.\r\nMag dit overschreven worden?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.OverwriteMultiple.Instruction">Mogen deze bestanden overschreven worden?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.OverwriteMultiple.Message">Een of meer bestanden met dezelfde naam staan al in deze map.\r\nMogen deze overschreven worden?</s:String>
     
     <!--Command Preview-->
     <s:String x:Key="S.CommandPreviewer.Title">Opdrachtweergave</s:String>
