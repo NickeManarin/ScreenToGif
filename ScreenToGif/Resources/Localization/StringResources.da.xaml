@@ -10,9 +10,9 @@
     <!--General-->
     <s:String x:Key="S.Ok">OK</s:String>
     <s:String x:Key="S.Back">Tilbage</s:String>
-    <s:String x:Key="S.Cancel">Annullér</s:String>
+    <s:String x:Key="S.Cancel">Annuller</s:String>
     <s:String x:Key="S.Yes">OK</s:String>
-    <s:String x:Key="S.No">Annullér</s:String>
+    <s:String x:Key="S.No">Annuller</s:String>
     <s:String x:Key="S.Add">Tilføj</s:String>
     <s:String x:Key="S.Edit">Tilpas</s:String>
     <s:String x:Key="S.Id">ID</s:String>
@@ -202,7 +202,7 @@
     <s:String x:Key="S.Options.Other">Andet</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Header">Følg markør mangler en genvej</s:String>
     <s:String x:Key="S.Options.Warning.Follow.Message">Der skal knyttes en genvej til Følg markør, så du kan slå funktionen til/fra efter behov.</s:String>
-  
+
     <!--Options • Application-->
     <s:String x:Key="S.Options.App.Startup">Start</s:String>
     <s:String x:Key="S.Options.App.Startup.Mode.Manual">Manuelt</s:String>
@@ -371,7 +371,7 @@
     <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind">Spring unødvendige rammer over.</s:String>
     <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind.Info">(hvis de ikke kan forhåndsvises korrekt)</s:String>
     <s:String x:Key="S.Options.Editor.General.DropFramesDuringPreviewIfBehind.Tooltip">Spring unødvendige rammer over&#x0d;hvis de ikke kan forhåndsvises korrekt.</s:String>
-    <s:String x:Key="S.Options.Editor.General.LimitHistory">Antal fortryd/gendan.</s:String>
+    <s:String x:Key="S.Options.Editor.General.LimitHistory">Antal Fortryd/gendan.</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Info">(de ældste handlinger fjernes når grænsen er nået)</s:String>
     <s:String x:Key="S.Options.Editor.General.LimitHistory.Maximum">(maksimalt antal)</s:String>
     <s:String x:Key="S.Options.Editor.General.SyncPath.Folder">Synk profilers destinationsmappe.</s:String>
@@ -1307,6 +1307,7 @@
     <s:String x:Key="S.SmoothLoop.Info">Find rammer der er mindst {0} % identiske med startrammen og slet alle efterfølgende.&#x0d;Du kan evt. ignorere indledende rammer, og sammenligne fra starten eller slutningen.</s:String>
     <s:String x:Key="S.SmoothLoop.Warning.Threshold">Antal ignorerede rammer, skal være mindre end det samlede rammeantal.</s:String>
     <s:String x:Key="S.SmoothLoop.Warning.NoLoopFound">Glat gentagelse kan ikke oprettes med de valgte indstillinger.</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.AlreadySmoothLoop">Du har allerede en glat gentagelse med disse indstillinger.</s:String>
     
     <!--Editor • Captions-->
     <s:String x:Key="S.Caption.Text">Tekst</s:String>
@@ -1693,7 +1694,13 @@
     <s:String x:Key="S.SaveAs.SaveOptions">Eksportvalg</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.Partial">Delvis eksport.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Gem til valgt mappe.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Overskriv eksisterende.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode">Overskriv?</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Warn">Advar</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Warn.Info">Advarer om at filnavnet allerede findes.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Prompt">Spørg</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Prompt.Info">Spørger om du vil overskrive.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Allow">Tillad</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Allow.Info">Overskriver direkte.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Gem projekt (samme mappe/filnavn).</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Upload filen (beta).</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">Kopiér.</s:String>
@@ -1783,6 +1790,11 @@
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Title">Eksporter rammer</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">Vil du eksportere rammerne?</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">Dette eksporterer {0} rammer til valgte mappe.</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Title">Overskriv</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Instruction">Vil du overskrive?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Message">Filen '{0}' findes allerede.\r\nVil du erstatte den?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.OverwriteMultiple.Instruction">Vil du overskrive?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.OverwriteMultiple.Message">En eller flere filer findes allerede.\r\nVil du erstatte dem?</s:String>
     
     <!--Command Preview-->
     <s:String x:Key="S.CommandPreviewer.Title">Vis kommando</s:String>
