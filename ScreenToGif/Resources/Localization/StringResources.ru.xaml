@@ -1307,6 +1307,7 @@
     <s:String x:Key="S.SmoothLoop.Info">Пытатся найти кадр, хотя бы на {0} % похожий на начальный кадр, и удалить все последующие кадры.&#x0d;Вы можете выбрать, хотите ли вы игнорировать некоторые начальные кадры и начать ли сравнение с начала (после порога) или с конца.</s:String>
     <s:String x:Key="S.SmoothLoop.Warning.Threshold">Количество игнорируемых кадров должно быть меньше, чем общее количество кадров.</s:String>
     <s:String x:Key="S.SmoothLoop.Warning.NoLoopFound">Не удалось создать плавную петлю с этими настройками.</s:String>
+    <s:String x:Key="S.SmoothLoop.Warning.AlreadySmoothLoop">У вас уже есть плавная петля на основе выбранных настроек.</s:String>
     
     <!--Editor • Captions-->
     <s:String x:Key="S.Caption.Text">Текст</s:String>
@@ -1693,7 +1694,13 @@
     <s:String x:Key="S.SaveAs.SaveOptions">Параметры сохранения</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.Partial">Частичный экспорт.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.PickFolder">Сохраните файл в папку по вашему выбору.</s:String>
-    <s:String x:Key="S.SaveAs.SaveOptions.Overwrite">Перезаписать (если существует).</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode">Перезаписать?</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Warn">Предупреждение</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Warn.Info">Предупреждать, что существует другой файл с таким же именем.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Prompt">Запрос</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Prompt.Info">Запрос, хочет ли пользователь перезаписать файл.</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Allow">Разрешить</s:String>
+    <s:String x:Key="S.SaveAs.SaveOptions.OverwriteMode.Allow.Info">Просто перезапишет файл.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.ProjectToo">Проект тоже сохранить (те же имя и папка).</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.UploadFile">Загрузить файл.</s:String>
     <s:String x:Key="S.SaveAs.SaveOptions.CopyToClipboard">Копировать в буфер обмена.</s:String>
@@ -1783,6 +1790,11 @@
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Title">Экспорт кадров</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Instruction">Вы уверены что хотите выполнить экспорт кадров?</s:String>
     <s:String x:Key="S.SaveAs.Dialogs.Multiple.Message">Данное действие выполнит экспорт {0} кадров в выбранную папку.</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Title">Перезапись</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Instruction">Хотите перезаписать файл?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.Overwrite.Message">Файл с именем '{0}' уже существует в этой папке.\r\nХотите перезаписать его?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.OverwriteMultiple.Instruction">Хотите перезаписать файлы?</s:String>
+    <s:String x:Key="S.SaveAs.Dialogs.OverwriteMultiple.Message">Один или несколько файлов с таким же именем уже существуют в этой папке.\r\nХотите перезаписать их?</s:String>
     
     <!--Command Preview-->
     <s:String x:Key="S.CommandPreviewer.Title">Предпросмотр команд</s:String>
