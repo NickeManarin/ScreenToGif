@@ -318,7 +318,12 @@ public class UserSettings : INotifyPropertyChanged
                     var array = new ArrayList();
 
                     foreach (var child in property.Children)
-                        array.Add(ParseProperty(child));
+                    {
+                        var prop = ParseProperty(child);
+
+                        if (prop != null)
+                            array.Add(prop);
+                    }
 
                     return array;
                 }
@@ -621,7 +626,13 @@ public class UserSettings : INotifyPropertyChanged
             LogWriter.Log("Setting removed: " + entry.Key);
             dictionary.Remove(entry.Key);
         }
-        
+
+        for (var i = 0; i < dictionary.Count; i++)
+        {
+            if (dictionary[i] is DictionaryEntry { Value: ArrayList list } entry)
+                entry.Value = list.OfType<object>().Where(w => w != null);
+        }
+
         return dictionary;
     }
 
