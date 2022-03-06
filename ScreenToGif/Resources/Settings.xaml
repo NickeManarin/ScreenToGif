@@ -350,7 +350,7 @@
     <Orientation x:Key="ProgressOrientation">Horizontal</Orientation>
 
     <!--Editor • Mouse Events -->
-    <Color x:Key="MouseHighlightColor">#000000FF</Color>
+    <Color x:Key="MouseHighlightColor">#00000000</Color>
     <Color x:Key="LeftMouseButtonClicksColor">#78FFFF00</Color>
     <Color x:Key="MiddleMouseButtonClicksColor">#7800FFFF</Color>
     <Color x:Key="RightMouseButtonClicksColor">#78FF0000</Color>

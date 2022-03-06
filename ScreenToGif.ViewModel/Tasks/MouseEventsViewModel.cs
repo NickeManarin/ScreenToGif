@@ -68,7 +68,7 @@ public class MouseEventsViewModel : BaseTaskViewModel
     {
         return new MouseEventsViewModel
         {
-            HighlightForegroundColor = Color.FromArgb(0, 0, 0, 255),
+            HighlightForegroundColor = Color.FromArgb(0, 0, 0, 0),
             LeftButtonForegroundColor = Color.FromArgb(120, 255, 255, 0),
             RightButtonForegroundColor = Color.FromArgb(120, 255, 0, 0),
             MiddleButtonForegroundColor = Color.FromArgb(120, 0, 255, 255),
