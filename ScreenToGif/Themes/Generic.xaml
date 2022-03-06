@@ -35,6 +35,7 @@
     <c:IntToBool x:Key="IntToBool"/>
     <c:EnumToBool x:Key="EnumToBool"/>
     <c:TimeSpanToTotalMilliseconds x:Key="TimeSpanToTotalMilliseconds"/>
+    <c:TimeSpanToString x:Key="TimeSpanToString"/>
 
     <!--Window Style -->
     <Style TargetType="{x:Type n:LightWindow}">
@@ -3190,7 +3191,7 @@
                             <Border Grid.Column="1" x:Name="PauseBorder" Background="{DynamicResource Vector.Pause.Color}" Height="12" Width="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
                             <TextBlock Grid.Column="2" x:Name="NegativeTextBlock" FontSize="14" Padding="0" Margin="0" Text="-" Visibility="Collapsed"/>
-                            <TextBlock Grid.Column="3" x:Name="ElapsedTextBlock" FontSize="14" Padding="0" Margin="0" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Elapsed, StringFormat={}{0:mm\\:ss}}"/>
+                            <TextBlock Grid.Column="3" x:Name="ElapsedTextBlock" FontSize="14" Padding="0" Margin="0" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Elapsed, Converter={StaticResource TimeSpanToString}}"/>
 
                             <TextBlock Grid.Column="4" x:Name="ManualTextBlock" FontSize="14" Padding="0" Margin="2,0,0,0" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ManuallyCapturedCount, StringFormat={}+{0:0}}"/>
                         </Grid>
