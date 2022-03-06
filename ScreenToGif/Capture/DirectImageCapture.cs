@@ -792,7 +792,7 @@ internal class DirectImageCapture : BaseCapture
             PreviousPosition = info.PointerPosition;
 
         //TODO: In a future version, don't merge the cursor image in here, let the editor do that.
-        //Saves the position of the cursor, so the editor can add the mouse clicks overlay later.
+        //Saves the position of the cursor, so the editor can add the mouse events overlay later.
         frame.CursorX = PreviousPosition.Position.X - (Left - OffsetLeft);
         frame.CursorY = PreviousPosition.Position.Y - (Top - OffsetTop);
 

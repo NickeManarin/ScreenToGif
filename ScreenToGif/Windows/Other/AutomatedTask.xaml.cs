@@ -51,8 +51,8 @@ public partial class AutomatedTask : Window
             //Create a new model.
             switch ((TaskTypes)TypeComboBox.SelectedIndex)
             {
-                case TaskTypes.MouseClicks:
-                    CurrentTask = MouseClicksViewModel.Default();
+                case TaskTypes.MouseEvents:
+                    CurrentTask = MouseEventsViewModel.Default();
                     break;
                 case TaskTypes.KeyStrokes:
                     CurrentTask = KeyStrokesViewModel.Default();
@@ -74,8 +74,8 @@ public partial class AutomatedTask : Window
 
         switch ((TaskTypes)TypeComboBox.SelectedIndex)
         {
-            case TaskTypes.MouseClicks:
-                MainPresenter.Content = new MouseClicksPanel { DataContext = CurrentTask };
+            case TaskTypes.MouseEvents:
+                MainPresenter.Content = new MouseEventsPanel { DataContext = CurrentTask };
                 break;
             case TaskTypes.KeyStrokes:
                 MainPresenter.Content = new KeyStrokesPanel { DataContext = CurrentTask };

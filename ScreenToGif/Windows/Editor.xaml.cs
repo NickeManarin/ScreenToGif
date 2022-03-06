@@ -2457,25 +2457,19 @@ namespace ScreenToGif.Windows
         }
 
 
-        private void MouseClicks_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void MouseEvents_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelTypes.MouseClicks, LocalizationHelper.Get("S.Editor.Image.Clicks", true), "Vector.Cursor", ApplyMouseClicksButton_Click);
+            ShowPanel(PanelTypes.MouseEvents, LocalizationHelper.Get("S.Editor.Image.MouseEvents", true), "Vector.Cursor", ApplyMouseEventsButton_Click);
         }
 
-        private async void ApplyMouseClicksButton_Click(object sender, RoutedEventArgs e)
+        private async void ApplyMouseEventsButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Project.Frames.All(x => x.ButtonClicked == MouseButtons.None))
-            {
-                StatusList.Warning(LocalizationHelper.Get("S.MouseClicks.Warning.None"));
-                return;
-            }
-
             ActionStack.SaveState(ActionStack.EditAction.ImageAndProperties, Project.Frames, Util.Other.ListOfIndexes(0, Project.Frames.Count));
 
             Cursor = Cursors.AppStarting;
 
-            await Task.Run(() => MouseClicksAsync(MouseClicksViewModel.FromSettings()));
+            await Task.Run(() => MouseEventsAsync(MouseEventsViewModel.FromSettings()));
             
             await LoadSelectedStarter(0, Project.Frames.Count - 1);
 
@@ -3490,10 +3484,10 @@ namespace ScreenToGif.Windows
                             {
                                 switch (task.TaskType)
                                 {
-                                    case TaskTypes.MouseClicks:
+                                    case TaskTypes.MouseEvents:
                                     {
                                         if (Project.CreatedBy == ProjectByType.ScreenRecorder)
-                                            MouseClicksAsync(task as MouseClicksViewModel ?? MouseClicksViewModel.FromSettings());
+                                            MouseEventsAsync(task as MouseEventsViewModel ?? MouseEventsViewModel.FromSettings());
 
                                         break;
                                     }
@@ -4716,8 +4710,8 @@ namespace ScreenToGif.Windows
                     RemoveDuplicatesGrid.Visibility = Visibility.Visible;
                     ShowHint("S.Hint.ApplyAll", true);
                     break;
-                case PanelTypes.MouseClicks:
-                    MouseClicksGrid.Visibility = Visibility.Visible;
+                case PanelTypes.MouseEvents:
+                    MouseEventsGrid.Visibility = Visibility.Visible;
                     ShowHint("S.Hint.ApplyAll", true);
                     break;
                 case PanelTypes.SmoothLoop:
@@ -6602,7 +6596,7 @@ namespace ScreenToGif.Windows
             return selectedList;
         }
 
-        private void MouseClicksAsync(MouseClicksViewModel model)
+        private void MouseEventsAsync(MouseEventsViewModel model)
         {
             Dispatcher.Invoke(() =>
             {
@@ -6613,12 +6607,36 @@ namespace ScreenToGif.Windows
 
             var auxList = Project.Frames.CopyList();
 
-            var leftClickSolidColorBrush = new SolidColorBrush(model.LeftButtonForegroundColor);
-            leftClickSolidColorBrush.Freeze();
-            var rightClickSolidColorBrush = new SolidColorBrush(model.RightButtonForegroundColor);
-            rightClickSolidColorBrush.Freeze();
-            var middleClickSolidColorBrush = new SolidColorBrush(model.MiddleButtonForegroundColor);
-            middleClickSolidColorBrush.Freeze();
+            // Initialize brushes.
+            var brushesByMouseButton = new Dictionary<MouseButtons, SolidColorBrush>();
+
+            if (model.HighlightForegroundColor.A != 0)
+            {
+                var highlightSolidBrush = new SolidColorBrush(model.HighlightForegroundColor);
+                highlightSolidBrush.Freeze();
+                brushesByMouseButton.Add(MouseButtons.None, highlightSolidBrush);
+            }
+
+            if (model.LeftButtonForegroundColor.A != 0)
+            {
+                var leftClickSolidColorBrush = new SolidColorBrush(model.LeftButtonForegroundColor);
+                leftClickSolidColorBrush.Freeze();
+                brushesByMouseButton.Add(MouseButtons.Left, leftClickSolidColorBrush);
+            }
+
+            if (model.RightButtonForegroundColor.A != 0)
+            {
+                var rightClickSolidColorBrush = new SolidColorBrush(model.RightButtonForegroundColor);
+                rightClickSolidColorBrush.Freeze();
+                brushesByMouseButton.Add(MouseButtons.Right, rightClickSolidColorBrush);
+            }
+
+            if (model.MiddleButtonForegroundColor.A != 0)
+            {
+                var middleClickSolidColorBrush = new SolidColorBrush(model.MiddleButtonForegroundColor);
+                middleClickSolidColorBrush.Freeze();
+                brushesByMouseButton.Add(MouseButtons.Middle, middleClickSolidColorBrush);
+            }
 
             var count = 0;
             foreach (var frame in auxList)
@@ -6629,35 +6647,22 @@ namespace ScreenToGif.Windows
                 if (frame.ButtonClicked == MouseButtons.None || frame.CursorX == int.MinValue)
                 {
                     UpdateProgress(count++);
+                }
+
+                SolidColorBrush brush = null;
+                if (!brushesByMouseButton.TryGetValue(frame.ButtonClicked, out brush))
+                {
                     continue;
                 }
 
                 var image = frame.Path.SourceFrom();
                 var scale = Math.Round(image.DpiX / 96d, 2);
-
                 var drawingVisual = new DrawingVisual();
                 using (var drawingContext = drawingVisual.RenderOpen())
                 {
-                    drawingContext.DrawImage(image, new Rect(0, 0, image.Width, image.Height)); // - UserSettings.All.MouseClicksWidth/2d   // - UserSettings.All.MouseClicksHeight/2d
-
-                    SolidColorBrush brush = null;
-                    switch (frame.ButtonClicked)
-                    {
-                        case MouseButtons.Left:
-                            brush = leftClickSolidColorBrush;
-                            break;
-                        case MouseButtons.Right:
-                            brush = rightClickSolidColorBrush;
-                            break;
-                        case MouseButtons.Middle:
-                            brush = middleClickSolidColorBrush;
-                            break;
-                    }
-
+                    drawingContext.DrawImage(image, new Rect(0, 0, image.Width, image.Height));
                     drawingContext.DrawEllipse(brush, null, new Point(frame.CursorX / scale, frame.CursorY / scale), model.Width, model.Height);
                 }
-
-                //KeyStrokesOverlayGrid.GetScaledRender(ZoomBoxControl.ScaleDiff, ZoomBoxControl.ImageDpi, ZoomBoxControl.GetImageSize());
 
                 //Converts the Visual (DrawingVisual) into a BitmapSource.
                 var bmp = new RenderTargetBitmap(image.PixelWidth, image.PixelHeight, image.DpiX, image.DpiY, PixelFormats.Pbgra32);
