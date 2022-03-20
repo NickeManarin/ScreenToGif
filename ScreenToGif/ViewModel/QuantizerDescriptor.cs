@@ -79,8 +79,7 @@ public class QuantizerDescriptor
     #region Constructors
 
     private QuantizerDescriptor(Type type, string methodName) : this(type.GetMethod(methodName))
-    {
-    }
+    {}
 
     private QuantizerDescriptor(MethodInfo method)
     {
@@ -102,10 +101,10 @@ public class QuantizerDescriptor
 
     internal static IQuantizer Create(string id, KGySoftGifPreset preset)
     {
-        QuantizerDescriptor descriptor = _quantizersById.GetValueOrDefault(id ?? _quantizers[0].Id) ?? throw new ArgumentException($"Invalid {id}", nameof(id));
+        var descriptor = _quantizersById.GetValueOrDefault(id ?? _quantizers[0].Id) ?? throw new ArgumentException($"Invalid {id}", nameof(id));
 
-        object[] args = new object[descriptor._parameters.Length];
-        for (int i = 0; i < descriptor._parameters.Length; i++)
+        var args = new object[descriptor._parameters.Length];
+        for (var i = 0; i < descriptor._parameters.Length; i++)
         {
             switch (descriptor._parameters[i].Name)
             {
@@ -129,9 +128,11 @@ public class QuantizerDescriptor
             }
         }
 
-        IQuantizer result = (IQuantizer)descriptor._method.Invoke(null, args);
+        var result = (IQuantizer)descriptor._method.Invoke(null, args);
+
         if (result is OptimizedPaletteQuantizer opt && preset.BitLevel != 0)
             result = opt.ConfigureBitLevel(preset.BitLevel);
+
         return result;
     }
 

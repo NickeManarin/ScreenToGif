@@ -11,17 +11,12 @@ public class TimeSpanToString : IValueConverter
             return Binding.DoNothing;
 
         if (time.Days > 0)
-        {
             return time.ToString("d\\:hh\\:mm\\:ss", culture);
-        }
-        else if (time.Hours > 0)
-        {
+
+        if (time.Hours > 0)
             return time.ToString("h\\:mm\\:ss", culture);
-        }
-        else
-        {
-            return time.ToString("mm\\:ss", culture);
-        }
+
+        return time.ToString("mm\\:ss", culture);
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

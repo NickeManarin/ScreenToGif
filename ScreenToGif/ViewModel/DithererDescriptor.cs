@@ -76,8 +76,8 @@ public class DithererDescriptor
     #region Instance Properties
 
     public string Id { get; }
-    public string Title => LocalizationHelper.Get($"S.SaveAs.KGySoft.Ditherer.{Id ?? "None"}");
-    public string Description => LocalizationHelper.Get($"S.SaveAs.KGySoft.Ditherer.{Id ?? "None"}.Info");
+    public string Title => LocalizationHelper.Get($"S.SaveAs.KGySoft.Ditherer.{Id?.Replace("x", "X") ?? "None"}");
+    public string Description => LocalizationHelper.Get($"S.SaveAs.KGySoft.Ditherer.{Id?.Replace("x", "X") ?? "None"}.Info");
     public bool HasStrength { get; }
     public bool HasSeed { get; }
     public bool HasSerpentineProcessing { get; }
@@ -89,8 +89,7 @@ public class DithererDescriptor
     #region Constructors
 
     private DithererDescriptor(Type type, string propertyName) : this(type.GetProperty(propertyName))
-    {
-    }
+    {}
 
     private DithererDescriptor(MemberInfo member)
     {
@@ -128,13 +127,14 @@ public class DithererDescriptor
         if (id == null)
             return null;
 
-        DithererDescriptor descriptor = _ditherersById.GetValueOrDefault(id) ?? throw new ArgumentException($"Invalid {id}", nameof(id));
+        var descriptor = _ditherersById.GetValueOrDefault(id) ?? throw new ArgumentException($"Invalid {id}", nameof(id));
 
-        // by constructor
+        //By constructor
         if (descriptor._ctor != null)
         {
-            object[] args = new object[descriptor._parameters.Length];
-            for (int i = 0; i < descriptor._parameters.Length; i++)
+            var args = new object[descriptor._parameters.Length];
+
+            for (var i = 0; i < descriptor._parameters.Length; i++)
             {
                 switch (descriptor._parameters[i].Name)
                 {
@@ -152,9 +152,10 @@ public class DithererDescriptor
             return (IDitherer)descriptor._ctor.CreateInstance(args);
         }
 
-        // by property
+        //By property
         Debug.Assert(descriptor._property != null);
-        IDitherer result = (IDitherer)descriptor._property.Get(null);
+        var result = (IDitherer)descriptor._property.Get(null);
+
         switch (result)
         {
             case OrderedDitherer ordered when preset.Strength > 0f:

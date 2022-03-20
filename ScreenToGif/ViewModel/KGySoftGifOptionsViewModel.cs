@@ -266,7 +266,7 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
 
     private void AdjustNotifications()
     {
-        bool hasAlpha = QuantizerDescriptor.GetById(QuantizerId)?.HasAlphaThreshold is true && AlphaThreshold > 0;
+        var hasAlpha = QuantizerDescriptor.GetById(QuantizerId)?.HasAlphaThreshold is true && AlphaThreshold > 0;
         IsAllowDeltaIgnored = !hasAlpha && AllowDeltaFrames && !AllowClippedFrames;
         IsAllowClippedIgnored = !hasAlpha && !AllowDeltaFrames && AllowClippedFrames;
         IsHighTolerance = DeltaTolerance > 64;
@@ -338,12 +338,12 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
 
         // Storing the task and cancellation source to a field so it can be canceled/awaited on reentering, disposing, etc.
         var tokenSource = _cancelGeneratingPreview = new CancellationTokenSource();
-        CancellationToken token = tokenSource.Token;
+        var token = tokenSource.Token;
 
         ShowRefreshPreview = false;
         PreviewError = null;
         IsGenerating = true;
-        IReadWriteBitmapData bitmapData = _previewBitmap.GetReadWriteBitmapData();
+        var bitmapData = _previewBitmap.GetReadWriteBitmapData();
         try
         {
             // Awaiting just because of the UI thread continuation below.
@@ -400,8 +400,10 @@ public class KGySoftGifOptionsViewModel : ObservableObjectBase
         var runningTask = _generatePreviewTask;
         if (runningTask == null)
             return;
+
         Debug.Assert(_cancelGeneratingPreview == null, "Only already canceled tasks are expected to be awaited here");
         _generatePreviewTask = null;
+
         try
         {
             await runningTask;

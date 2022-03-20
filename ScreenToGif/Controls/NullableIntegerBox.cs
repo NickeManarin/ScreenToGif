@@ -39,8 +39,8 @@ public class NullableIntegerBox : ExtendedTextBox
     public static readonly DependencyProperty UpdateOnInputProperty = DependencyProperty.Register(nameof(UpdateOnInput), typeof(bool), typeof(NullableIntegerBox),
         new FrameworkPropertyMetadata(false, OnUpdateOnInputPropertyChanged));
 
-    public static readonly DependencyProperty DefaultValueIfEmptyProperty = DependencyProperty.Register(nameof(DefaultValueIfEmpty), typeof(int), typeof(NullableIntegerBox),
-        new FrameworkPropertyMetadata(0));
+    public static readonly DependencyProperty DefaultValueIfEmptyProperty = DependencyProperty.Register(nameof(DefaultValueIfEmpty), typeof(int?), typeof(NullableIntegerBox),
+        new FrameworkPropertyMetadata(null));
 
     public static readonly DependencyProperty PropagateWheelEventProperty = DependencyProperty.Register(nameof(PropagateWheelEvent), typeof(bool), typeof(NullableIntegerBox), new PropertyMetadata(default(bool)));
         
@@ -87,9 +87,9 @@ public class NullableIntegerBox : ExtendedTextBox
     }
 
     [Bindable(true), Category("Common")]
-    public int DefaultValueIfEmpty
+    public int? DefaultValueIfEmpty
     {
-        get => (int)GetValue(DefaultValueIfEmptyProperty);
+        get => (int?)GetValue(DefaultValueIfEmptyProperty);
         set => SetValue(DefaultValueIfEmptyProperty, value);
     }
 
@@ -117,7 +117,7 @@ public class NullableIntegerBox : ExtendedTextBox
 
     private static void OnValuePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (!(d is NullableIntegerBox box) || _ignore) 
+        if (d is not NullableIntegerBox box || _ignore) 
             return;
 
         _ignore = true;
@@ -221,14 +221,14 @@ public class NullableIntegerBox : ExtendedTextBox
     protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
     {
         //Only sets the focus if not clicking on the Up/Down buttons of a IntegerUpDown.
-        if (e.OriginalSource is TextBlock || e.OriginalSource is Border)
+        if (e.OriginalSource is TextBlock or Border)
             return;
 
-        if (!IsKeyboardFocusWithin)
-        {
-            e.Handled = true;
-            Focus();
-        }
+        if (IsKeyboardFocusWithin)
+            return;
+
+        e.Handled = true;
+        Focus();
     }
 
     protected override void OnPreviewTextInput(TextCompositionEventArgs e)
@@ -253,7 +253,7 @@ public class NullableIntegerBox : ExtendedTextBox
         if (!UpdateOnInput || string.IsNullOrEmpty(Text) || !IsTextAllowed(Text))
             return;
             
-        Value = int.TryParse(Text, out int value) ? value : new int?();
+        Value = int.TryParse(Text, out var value) ? value : new int?();
 
         base.OnTextChanged(e);
     }
@@ -270,7 +270,7 @@ public class NullableIntegerBox : ExtendedTextBox
                 return;
             }
 
-            Value = int.TryParse(Text, out int value) ? value : new int?();
+            Value = int.TryParse(Text, out var value) ? value : new int?();
             return;
         }
             
@@ -279,7 +279,7 @@ public class NullableIntegerBox : ExtendedTextBox
 
     protected override void OnKeyDown(KeyEventArgs e)
     {
-        if (e.Key == Key.Enter || e.Key == Key.Return)
+        if (e.Key is Key.Enter or Key.Return)
         {
             e.Handled = true;
             MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
@@ -292,10 +292,13 @@ public class NullableIntegerBox : ExtendedTextBox
     {
         base.OnMouseWheel(e);
 
-        var step = Keyboard.Modifiers == (ModifierKeys.Shift | ModifierKeys.Control)
-            ? 50 : Keyboard.Modifiers == ModifierKeys.Shift
-                ? 10 : Keyboard.Modifiers == ModifierKeys.Control
-                    ? 5 : StepValue;
+        var step = Keyboard.Modifiers switch
+        {
+            ModifierKeys.Shift | ModifierKeys.Control => 50,
+            ModifierKeys.Shift => 10,
+            ModifierKeys.Control => 5,
+            _ => StepValue
+        };
 
         Value = e.Delta > 0 ? 
             Math.Min(Maximum, (Value ?? 0) + step) : 
