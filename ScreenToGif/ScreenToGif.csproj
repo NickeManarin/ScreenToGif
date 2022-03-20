@@ -104,6 +104,7 @@
     <EmbeddedResource Include="Resources\Style.css" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="KGySoft.Drawing" Version="6.3.2" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.2.222702">
       <PrivateAssets>all</PrivateAssets>

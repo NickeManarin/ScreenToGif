@@ -1,3 +1,4 @@
+using KGySoft.Drawing;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -15,6 +16,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+
+using KGySoft.Drawing.Imaging;
+
 using ScreenToGif.Cloud;
 using ScreenToGif.Controls;
 using ScreenToGif.Domain.Enums;
@@ -23,10 +27,10 @@ using ScreenToGif.Domain.Models;
 using ScreenToGif.ImageUtil;
 using ScreenToGif.Util.Codification.Apng;
 using ScreenToGif.Util.Codification.Gif.Encoder;
-using ScreenToGif.Util.Codification.Gif.LegacyEncoder;
 using ScreenToGif.Util.Codification.Psd;
 using ScreenToGif.Util.Extensions;
 using ScreenToGif.Util.Settings;
+using ScreenToGif.ViewModel;
 using ScreenToGif.ViewModel.ExportPresets;
 using ScreenToGif.ViewModel.ExportPresets.AnimatedImage.Apng;
 using ScreenToGif.ViewModel.ExportPresets.AnimatedImage.Gif;
@@ -36,8 +40,11 @@ using ScreenToGif.ViewModel.ExportPresets.Other;
 using ScreenToGif.ViewModel.ExportPresets.Video;
 using ScreenToGif.ViewModel.UploadPresets;
 using ScreenToGif.Windows.Other;
+
 using Color = System.Windows.Media.Color;
 using Encoder = ScreenToGif.Windows.Other.Encoder;
+using LegacyGifEncoder = ScreenToGif.Util.Codification.Gif.LegacyEncoder.GifEncoder;
+using KGySoftGifEncoder = KGySoft.Drawing.Imaging.GifEncoder;
 
 namespace ScreenToGif.Util;
 
@@ -203,7 +210,8 @@ internal class EncodingManager
     /// <param name="fileName">The name of the output file.</param>
     /// <param name="isIndeterminate">The state of the progress bar.</param>
     /// <param name="exception">The exception details of the error.</param>
-    internal static void Update(int id, EncodingStatus status, string fileName = null, bool isIndeterminate = false, Exception exception = null)
+    /// <param name="maxSteps">Optionally sets the maximum steps of the processing if (<paramref name="status"/> is <see cref="EncodingStatus.Processing"/>).</param>
+    internal static void Update(int id, EncodingStatus status, string fileName = null, bool isIndeterminate = false, Exception exception = null, int? maxSteps = null)
     {
         var item = Encodings.FirstOrDefault(x => x.Id == id);
 
@@ -217,6 +225,11 @@ internal class EncodingManager
 
         switch (status)
         {
+            case EncodingStatus.Processing:
+                item.Text = String.Format(LocalizationHelper.Get("S.Encoder.Processing"), fileName == null ? String.Empty : Path.GetFileName(fileName));
+                if (maxSteps.HasValue)
+                    item.FrameCount = maxSteps.Value;
+                break;
             case EncodingStatus.Completed:
             {
                 if (fileName == null)
@@ -395,6 +408,7 @@ internal class EncodingManager
         foreach (var item in ViewList.Where(w => w.Id == current.Id))
         {
             item.Status = current.Status;
+            item.FrameCount = current.FrameCount;
             item.CurrentFrame = current.CurrentFrame;
             item.Text = current.Text;
             item.IsIndeterminate = current.IsIndeterminate;
@@ -696,6 +710,14 @@ internal class EncodingManager
                             #endregion
 
                             break;
+
+                        case EncoderTypes.KGySoft:
+                            if (preset is not KGySoftGifPreset kgySoftGifPreset)
+                                return;
+
+                            await EncodeKGySoftGif(kgySoftGifPreset, project.FramesFiles, id, tokenSource.Token);
+                            break;
+
                         case EncoderTypes.System:
 
                             #region System encoding
@@ -705,7 +727,7 @@ internal class EncodingManager
 
                             using (var stream = new MemoryStream())
                             {
-                                using (var encoder = new GifEncoder(stream, null, null, systemGifPreset.Looped && project.FrameCount > 1 ? (systemGifPreset.RepeatForever ? 0 : systemGifPreset.RepeatCount) : -1))
+                                using (var encoder = new LegacyGifEncoder(stream, null, null, systemGifPreset.Looped && project.FrameCount > 1 ? (systemGifPreset.RepeatForever ? 0 : systemGifPreset.RepeatCount) : -1))
                                 {
                                     for (var i = 0; i < project.FramesFiles.Count; i++)
                                     {
@@ -1300,6 +1322,56 @@ internal class EncodingManager
 
             GC.Collect();
         }
+    }
+
+    private static async Task EncodeKGySoftGif(KGySoftGifPreset preset, IList<IFrame> frames, int id, CancellationToken cancellationToken)
+    {
+        #region Local Methods
+
+        IEnumerable<IReadableBitmapData> FramesIterator()
+        {
+            for (int i = 0; i < frames.Count; i++)
+            {
+                Update(id, i);
+                using var bitmap = new Bitmap(frames[i].Path);
+                using var bitmapData = bitmap.GetReadableBitmapData();
+                yield return bitmapData;
+            }
+        }
+
+        #endregion
+
+        // A little cheating for PingPong mode: though the encoder could handle it, we convert it explicitly to a simple forward loop so
+        // we can update the progress in FramesIterator and don't need to pass a DrawingProgress implementation to TaskConfig.Progress
+        var animationMode = (AnimationMode)preset.RepeatCount;
+        if (animationMode == AnimationMode.PingPong)
+        {
+            animationMode = AnimationMode.Repeat;
+            for (int i = frames.Count - 2; i > 0; i--)
+                frames.Add(frames[i]);
+        }
+
+        Update(id, EncodingStatus.Processing, maxSteps: frames.Count);
+        var config = new AnimatedGifConfiguration(FramesIterator(), frames.Select(f => TimeSpan.FromMilliseconds(f.Delay)))
+        {
+            AllowDeltaFrames = preset.AllowDeltaFrames,
+            AllowClippedFrames = preset.AllowClippedFrames,
+            AnimationMode = animationMode,
+            DeltaTolerance = preset.DeltaTolerance,
+            SizeHandling = AnimationFramesSizeHandling.Center,
+            Quantizer = QuantizerDescriptor.Create(preset.QuantizerId, preset),
+            Ditherer = DithererDescriptor.Create(preset.DithererId, preset),
+        };
+
+        await using var stream = File.Create(preset.FullPath, Constants.BufferSize);
+        await KGySoftGifEncoder.EncodeAnimationAsync(config, stream, new TaskConfig
+        {
+            CancellationToken = cancellationToken,
+            ThrowIfCanceled = false
+        });
+
+        if (!cancellationToken.IsCancellationRequested)
+            await stream.FlushAsync(cancellationToken);
     }
 
     private static void EncodeWithFfmpeg(ExportPreset preset, List<IFrame> listFrames, int id, CancellationTokenSource tokenSource, string processing)

@@ -21,10 +21,10 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Resources;
-using Color = System.Windows.Media.Color;
 using Image = System.Drawing.Image;
 using PixelFormat = System.Windows.Media.PixelFormat;
 using Size = System.Drawing.Size;
+using Color = System.Windows.Media.Color;
 
 namespace ScreenToGif.ImageUtil;
 

@@ -7,6 +7,7 @@ using ScreenToGif.Domain.Interfaces;
 using ScreenToGif.Util;
 using ScreenToGif.Util.Extensions;
 using ScreenToGif.Util.Settings;
+using ScreenToGif.ViewModel;
 using ScreenToGif.ViewModel.ExportPresets;
 using ScreenToGif.ViewModel.ExportPresets.AnimatedImage.Apng;
 using ScreenToGif.ViewModel.ExportPresets.AnimatedImage.Gif;
@@ -51,6 +52,7 @@ public partial class ExportPanel : UserControl, IPanel
 
     public static readonly DependencyProperty TotalTimeProperty = DependencyProperty.Register(nameof(TotalTime), typeof(TimeSpan), typeof(ExportPanel), new PropertyMetadata(default(TimeSpan)));
 
+    public static readonly DependencyProperty CurrentFrameProperty = DependencyProperty.Register(nameof(CurrentFrame), typeof(FrameViewModel), typeof(ExportPanel), new PropertyMetadata(default(FrameViewModel)));
 
     public ExportPreset CurrentPreset
     {
@@ -74,6 +76,12 @@ public partial class ExportPanel : UserControl, IPanel
     {
         get => (TimeSpan)GetValue(TotalTimeProperty);
         set => SetValue(TotalTimeProperty, value);
+    }
+
+    public FrameViewModel CurrentFrame
+    {
+        get => (FrameViewModel)GetValue(CurrentFrameProperty);
+        set => SetValue(CurrentFrameProperty, value);
     }
 
     #endregion
@@ -192,6 +200,7 @@ public partial class ExportPanel : UserControl, IPanel
         {
             case ExportFormats.Apng:
                 EncoderScreenToGifItem.IsEnabled = true;
+                EncoderKGySoftItem.IsEnabled = false;
                 EncoderFfmpegItem.IsEnabled = true;
                 EncoderGifskiItem.IsEnabled = false;
                 EncoderSystemItem.IsEnabled = false;
@@ -199,6 +208,7 @@ public partial class ExportPanel : UserControl, IPanel
                 break;
             case ExportFormats.Gif:
                 EncoderScreenToGifItem.IsEnabled = true;
+                EncoderKGySoftItem.IsEnabled = true;
                 EncoderFfmpegItem.IsEnabled = true;
                 EncoderGifskiItem.IsEnabled = Environment.Is64BitProcess;
                 EncoderSystemItem.IsEnabled = true;
@@ -206,6 +216,7 @@ public partial class ExportPanel : UserControl, IPanel
                 break;
             case ExportFormats.Webp:
                 EncoderScreenToGifItem.IsEnabled = false;
+                EncoderKGySoftItem.IsEnabled = false;
                 EncoderFfmpegItem.IsEnabled = true;
                 EncoderGifskiItem.IsEnabled = false;
                 EncoderSystemItem.IsEnabled = false;
@@ -215,6 +226,7 @@ public partial class ExportPanel : UserControl, IPanel
 
             case ExportFormats.Avi:
                 EncoderScreenToGifItem.IsEnabled = false;
+                EncoderKGySoftItem.IsEnabled = false;
                 EncoderFfmpegItem.IsEnabled = true;
                 EncoderGifskiItem.IsEnabled = false;
                 EncoderSystemItem.IsEnabled = false;
@@ -222,6 +234,7 @@ public partial class ExportPanel : UserControl, IPanel
                 break;
             case ExportFormats.Mkv:
                 EncoderScreenToGifItem.IsEnabled = false;
+                EncoderKGySoftItem.IsEnabled = false;
                 EncoderFfmpegItem.IsEnabled = true;
                 EncoderGifskiItem.IsEnabled = false;
                 EncoderSystemItem.IsEnabled = false;
@@ -229,6 +242,7 @@ public partial class ExportPanel : UserControl, IPanel
                 break;
             case ExportFormats.Mov:
                 EncoderScreenToGifItem.IsEnabled = false;
+                EncoderKGySoftItem.IsEnabled = false;
                 EncoderFfmpegItem.IsEnabled = true;
                 EncoderGifskiItem.IsEnabled = false;
                 EncoderSystemItem.IsEnabled = false;
@@ -236,6 +250,7 @@ public partial class ExportPanel : UserControl, IPanel
                 break;
             case ExportFormats.Mp4:
                 EncoderScreenToGifItem.IsEnabled = false;
+                EncoderKGySoftItem.IsEnabled = false;
                 EncoderFfmpegItem.IsEnabled = true;
                 EncoderGifskiItem.IsEnabled = false;
                 EncoderSystemItem.IsEnabled = false;
@@ -243,6 +258,7 @@ public partial class ExportPanel : UserControl, IPanel
                 break;
             case ExportFormats.Webm:
                 EncoderScreenToGifItem.IsEnabled = false;
+                EncoderKGySoftItem.IsEnabled = false;
                 EncoderFfmpegItem.IsEnabled = true;
                 EncoderGifskiItem.IsEnabled = false;
                 EncoderSystemItem.IsEnabled = false;
@@ -252,6 +268,7 @@ public partial class ExportPanel : UserControl, IPanel
 
             case ExportFormats.Jpeg:
                 EncoderScreenToGifItem.IsEnabled = true;
+                EncoderKGySoftItem.IsEnabled = false;
                 EncoderFfmpegItem.IsEnabled = false;
                 EncoderGifskiItem.IsEnabled = false;
                 EncoderSystemItem.IsEnabled = false;
@@ -259,6 +276,7 @@ public partial class ExportPanel : UserControl, IPanel
                 break;
             case ExportFormats.Png:
                 EncoderScreenToGifItem.IsEnabled = true;
+                EncoderKGySoftItem.IsEnabled = false;
                 EncoderFfmpegItem.IsEnabled = false;
                 EncoderGifskiItem.IsEnabled = false;
                 EncoderSystemItem.IsEnabled = false;
@@ -266,6 +284,7 @@ public partial class ExportPanel : UserControl, IPanel
                 break;
             case ExportFormats.Bmp:
                 EncoderScreenToGifItem.IsEnabled = true;
+                EncoderKGySoftItem.IsEnabled = false;
                 EncoderFfmpegItem.IsEnabled = false;
                 EncoderGifskiItem.IsEnabled = false;
                 EncoderSystemItem.IsEnabled = false;
@@ -275,6 +294,7 @@ public partial class ExportPanel : UserControl, IPanel
 
             case ExportFormats.Stg:
                 EncoderScreenToGifItem.IsEnabled = true;
+                EncoderKGySoftItem.IsEnabled = false;
                 EncoderFfmpegItem.IsEnabled = false;
                 EncoderGifskiItem.IsEnabled = false;
                 EncoderSystemItem.IsEnabled = false;
@@ -282,6 +302,7 @@ public partial class ExportPanel : UserControl, IPanel
                 break;
             case ExportFormats.Psd:
                 EncoderScreenToGifItem.IsEnabled = true;
+                EncoderKGySoftItem.IsEnabled = false;
                 EncoderFfmpegItem.IsEnabled = false;
                 EncoderGifskiItem.IsEnabled = false;
                 EncoderSystemItem.IsEnabled = false;
@@ -370,6 +391,7 @@ public partial class ExportPanel : UserControl, IPanel
             case ExportFormats.Gif:
             {
                 AddDistinct(presets, EmbeddedGifPreset.Defaults);
+                AddDistinct(presets, KGySoftGifPreset.Defaults);
                 AddDistinct(presets, FfmpegGifPreset.Defaults);
 
                 //Gifski only runs on x64.
@@ -881,7 +903,7 @@ public partial class ExportPanel : UserControl, IPanel
         var firstLoad = CurrentPreset == null;
 
         //Hide all other grids.
-        foreach (var grid in EncoderGrid.Children.OfType<Grid>())
+        foreach (var grid in EncoderGrid.Children.Cast<UIElement>())
             grid.Visibility = Visibility.Collapsed;
 
         SetPresetAsLastSelected(selected);
@@ -944,6 +966,9 @@ public partial class ExportPanel : UserControl, IPanel
                 {
                     case EncoderTypes.ScreenToGif:
                         EmbeddedGifOptionsGrid.Visibility = Visibility.Visible;
+                        break;
+                    case EncoderTypes.KGySoft:
+                        KGySoftGifOptionsPanel.Visibility = Visibility.Visible;
                         break;
                     case EncoderTypes.System:
                         SystemGifOptionsGrid.Visibility = Visibility.Visible;
@@ -1083,7 +1108,7 @@ public partial class ExportPanel : UserControl, IPanel
 
     private void EncoderComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (!IsLoaded || EncoderGrid.Children.OfType<Grid>().All(a => a.Visibility == Visibility.Collapsed))
+        if (!IsLoaded || EncoderGrid.Children.Cast<UIElement>().All(a => a.Visibility == Visibility.Collapsed))
             return;
 
         if (EncoderComboBox.SelectedValue is not EncoderTypes encoder || encoder == CurrentPreset?.Encoder)
