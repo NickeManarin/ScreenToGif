@@ -293,7 +293,7 @@ public class UserSettings : INotifyPropertyChanged
             //Serialize and save to disk.
             using (var fileStream = new FileStream(filename, FileMode.Create, FileAccess.Write, FileShare.None))
             using (var writer = XmlWriter.Create(fileStream, settings))
-                XamlWriter.Save(_local ?? _appData, writer);
+                XamlWriter.Save(dic, writer);
 
             CheckIfSavedCorrectly(filename, backup, true);
         }
@@ -2661,4 +2661,3 @@ public class UserSettings : INotifyPropertyChanged
 
     #endregion
 }
-
