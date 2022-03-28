@@ -102,13 +102,13 @@ public class UserSettings : INotifyPropertyChanged
             #region Load settings from disk
 
             var doc = XDocument.Parse(File.ReadAllText(path));
-            var properties = (doc.Root?.Descendants() ?? doc.Descendants()).Where(w => w.Parent == doc.Root).Select(GetProperty).ToList();
+            var properties = doc.Root?.Elements().Select(GetProperty).ToList();
 
             #endregion
 
             #region Migrate
 
-            var version = properties.FirstOrDefault(f => f.Key == "Version")?.Value ?? "0.0";
+            var version = properties?.FirstOrDefault(f => f.Key == "Version")?.Value ?? "0.0";
 
             Migration.Migrate(properties, version);
 
@@ -143,7 +143,10 @@ public class UserSettings : INotifyPropertyChanged
 
     public static Property GetProperty(XElement node)
     {
-        var attributes = node.Attributes().Where(a => a.Name.LocalName != "Key").Select(s => new Property { Key = s.Name.LocalName, Value = s.Value }).ToList();
+        var attributes = node.Attributes()
+            .Where(a => a.Name.LocalName != "Key" && !(a.Name.Namespace == XNamespace.Xml && a.Name.LocalName == "space"))
+            .Select(s => new Property { Key = s.Name.LocalName, Value = s.Value })
+            .ToList();
 
         var prop = new Property
         {
@@ -171,6 +174,7 @@ public class UserSettings : INotifyPropertyChanged
                 prop.Type = inner.Type;
                 prop.NameSpace = inner.NameSpace;
                 prop.Children = inner.Children;
+                prop.Attributes = inner.Attributes;
                 return prop;
             }
         }
@@ -178,9 +182,14 @@ public class UserSettings : INotifyPropertyChanged
         foreach (var element in node.Elements())
         {
             var innerElement = GetProperty(element);
-
             if (innerElement != null)
-                prop.Children.Add(innerElement);
+            {
+                // Adding collection elements to Children and properties to Attributes
+                if (innerElement.Key == null)
+                    prop.Children.Add(innerElement);
+                else
+                    prop.Attributes.Add(innerElement);
+            }
         }
 
         return prop;
@@ -190,29 +199,27 @@ public class UserSettings : INotifyPropertyChanged
     {
         try
         {
-            // List (must be an ArrayList due to ResourceDictionary)
-            if (property.Children.Count != 0)
-            {
-                Debug.Assert(property.Type == "ArrayList");
-                var array = new ArrayList();
-                foreach (Property child in property.Children)
-                    array.Add(ParseProperty(child));
-
-                return array;
-            }
-
             Type type = ParseType(property);
 
             // Primitive/simple type, enum or type with TypeConverter
             if (property.Attributes.Count == 0)
                 return ParseValue(property.Value, type);
 
-            // Object with properties
+            // Complex object with properties/items
             var instance = Activator.CreateInstance(type);
+
+            // Restoring properties
             foreach (Property prop in property.Attributes)
             {
                 PropertyInfo info = type.GetProperty(prop.Key) ?? throw new ArgumentException($"Property not found: {type.Name}.{prop.Key}", nameof(property));
-                PropertyAccessor.GetAccessor(info).Set(instance, ParseValue(prop.Value, info.PropertyType));
+                PropertyAccessor.GetAccessor(info).Set(instance, prop.Type != null ? ParseProperty(prop) : ParseValue(prop.Value, info.PropertyType));
+            }
+
+            // Restoring collection items (in fact, list is always an ArrayList due to WPF serialization but in theory we support others, too)
+            if (instance is IList list)
+            {
+                foreach (Property child in property.Children)
+                    list.Add(ParseProperty(child));
             }
 
             return instance;
@@ -233,7 +240,9 @@ public class UserSettings : INotifyPropertyChanged
         if (property.NameSpace.StartsWith("http", StringComparison.Ordinal))
             return Reflector.ResolveType("System.Windows." + property.Type, ResolveTypeOptions.None)
                 ?? Reflector.ResolveType("System.Windows.Media." + property.Type, ResolveTypeOptions.None)
-                ?? Reflector.ResolveType("System.Windows.Ink." + property.Type, ResolveTypeOptions.ThrowError);
+                ?? Reflector.ResolveType("System.Windows.Ink." + property.Type, ResolveTypeOptions.None)
+                ?? Reflector.ResolveType("System.Windows.Input." + property.Type, ResolveTypeOptions.None)
+                ?? Reflector.ResolveType("System.Windows.Controls." + property.Type, ResolveTypeOptions.ThrowError);
 
         var namespaceIndex = property.NameSpace.IndexOf("clr-namespace:", StringComparison.Ordinal);
         var space = property.NameSpace.Substring(namespaceIndex + 14);
@@ -253,9 +262,16 @@ public class UserSettings : INotifyPropertyChanged
             return null;
         if (type == typeof(string))
             return value.StartsWith("{}", StringComparison.Ordinal) ? value[2..] : value;
-        return value.Parse(type, CultureInfo.InvariantCulture);
+
+        // This works for primitive types, enums, and types with TypeConverters
+        if (value.TryParse(type, CultureInfo.InvariantCulture, out object result))
+            return result;
+
+        // [Try]Parse fails for enums that should be parsed by TypeConverters rather than from their ToString value (eg. ModifierKeys)
+        // We could just use Convert even instead of the Parse above but it is faster to use this only as a fallback
+        return value.Convert(type, CultureInfo.InvariantCulture);
     }
-    
+
     public static void Save(bool canForce = false, bool saveToAppData = false)
     {
         //Only writes if non-default values were created. Should not write the default dictionary.
