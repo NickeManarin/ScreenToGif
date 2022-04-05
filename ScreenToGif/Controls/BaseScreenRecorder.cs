@@ -79,6 +79,16 @@ public class BaseScreenRecorder : BaseRecorder
                 return 1000 / UserSettings.All.LatestFps;
         }
     }
+    internal int GetTriggerDelay()
+    {
+        switch (UserSettings.All.CaptureFrequency)
+        {
+            case CaptureFrequencies.Interaction:
+                return UserSettings.All.TriggerDelayInteraction;
+            default:
+                return 0;
+        }
+    }
 
     internal int GetCaptureInterval()
     {
