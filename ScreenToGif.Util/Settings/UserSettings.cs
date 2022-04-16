@@ -182,6 +182,7 @@ public class UserSettings : INotifyPropertyChanged
         foreach (var element in node.Elements())
         {
             var innerElement = GetProperty(element);
+
             if (innerElement != null)
             {
                 // Adding collection elements to Children and properties to Attributes
@@ -199,7 +200,7 @@ public class UserSettings : INotifyPropertyChanged
     {
         try
         {
-            Type type = ParseType(property);
+            var type = ParseType(property);
 
             // Primitive/simple type, enum or type with TypeConverter
             if (property.Attributes.Count == 0)
@@ -209,16 +210,16 @@ public class UserSettings : INotifyPropertyChanged
             var instance = Activator.CreateInstance(type);
 
             // Restoring properties
-            foreach (Property prop in property.Attributes)
+            foreach (var prop in property.Attributes)
             {
-                PropertyInfo info = type.GetProperty(prop.Key) ?? throw new ArgumentException($"Property not found: {type.Name}.{prop.Key}", nameof(property));
+                var info = type.GetProperty(prop.Key) ?? throw new ArgumentException($"Property not found: {type.Name}.{prop.Key}", nameof(property));
                 PropertyAccessor.GetAccessor(info).Set(instance, prop.Type != null ? ParseProperty(prop) : ParseValue(prop.Value, info.PropertyType));
             }
 
             // Restoring collection items (in fact, list is always an ArrayList due to WPF serialization but in theory we support others, too)
             if (instance is IList list)
             {
-                foreach (Property child in property.Children)
+                foreach (var child in property.Children)
                     list.Add(ParseProperty(child));
             }
 
@@ -247,6 +248,7 @@ public class UserSettings : INotifyPropertyChanged
         var namespaceIndex = property.NameSpace.IndexOf("clr-namespace:", StringComparison.Ordinal);
         var space = property.NameSpace.Substring(namespaceIndex + 14);
         var assemblyIndex = space.IndexOf(";assembly=", StringComparison.Ordinal);
+
         if (assemblyIndex == -1)
             return Reflector.ResolveType(space + "." + property.Type, ResolveTypeOptions.ThrowError);
 
@@ -260,11 +262,12 @@ public class UserSettings : INotifyPropertyChanged
     {
         if (value is null or "{x:Null}")
             return null;
+
         if (type == typeof(string))
             return value.StartsWith("{}", StringComparison.Ordinal) ? value[2..] : value;
 
         // This works for primitive types, enums, and types with TypeConverters
-        if (value.TryParse(type, CultureInfo.InvariantCulture, out object result))
+        if (value.TryParse(type, CultureInfo.InvariantCulture, out var result))
             return result;
 
         // [Try]Parse fails for enums that should be parsed by TypeConverters rather than from their ToString value (eg. ModifierKeys)

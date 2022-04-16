@@ -88,7 +88,7 @@
         <!--Ditherer-->
         <GroupBox>
             <GroupBox.Header>
-                <c:ExtendedCheckBox Text="{DynamicResource S.SaveAs.KGySoft.Ditherer}" IsChecked="{Binding UseDitherer}"/>
+                <c:ExtendedCheckBox Text="{DynamicResource S.SaveAs.KGySoft.Ditherer}" IsChecked="{Binding UseDitherer}" Margin="0,0,-10,0"/>
             </GroupBox.Header>
             
             <StackPanel IsEnabled="{Binding UseDitherer}">
