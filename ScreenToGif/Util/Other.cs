@@ -389,11 +389,24 @@ public static class Other
         if (!string.IsNullOrWhiteSpace(realPath) && File.Exists(realPath))
             return true;
 
-        //The path was not selected, but the file exists inside the same folder.
-        if (!ignoreEmpty && string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation) && File.Exists(AdjustPath("ffmpeg.exe")))
+        //The path was not selected, it may be located inside a common folder.
+        if (!ignoreEmpty && string.IsNullOrWhiteSpace(UserSettings.All.FfmpegLocation))
         {
-            UserSettings.All.FfmpegLocation = "ffmpeg.exe";
-            return true;
+            //Same path as application.
+            if (File.Exists(AdjustPath("ffmpeg.exe")))
+            {
+                UserSettings.All.FfmpegLocation = "ffmpeg.exe";
+                return true;
+            }
+
+            //Program Data folder.
+            var expandedPath = Environment.ExpandEnvironmentVariables(@"%ProgramData%\ScreenToGif\ffmpeg.exe");
+
+            if (File.Exists(expandedPath))
+            {
+                UserSettings.All.FfmpegLocation = expandedPath;
+                return true;
+            }
         }
 
         //If not found by direct/relative path, ignore the environment variables.
