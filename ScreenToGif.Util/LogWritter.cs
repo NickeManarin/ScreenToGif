@@ -8,6 +8,35 @@ namespace ScreenToGif.Util;
 /// </summary>
 public static class LogWriter
 {
+    private static void WriteDetails(TextWriter writer, Exception ex, int level)
+    {
+        writer.WriteLine(new string('▬', level) + $" Message - {Environment.NewLine}\t{ex.Message}");
+        writer.WriteLine(new string('○', level) + $" Type - {Environment.NewLine}\t{ex.GetType()}");
+        writer.WriteLine(new string('▲', level) + $" Source - {Environment.NewLine}\t{ex.Source}");
+        writer.WriteLine(new string('▼', level) + $" TargetSite - {Environment.NewLine}\t{ex.TargetSite}");
+
+        if (ex is BadImageFormatException bad)
+        {
+            writer.WriteLine(new string('☼', level) + $" Filename - {Environment.NewLine}\t{bad.FileName}");
+            writer.WriteLine(new string('►', level) + $" Fuslog - {Environment.NewLine}\t{bad.FusionLog}");
+        }
+        else if (ex is ArgumentException arg)
+        {
+            writer.WriteLine(new string('☼', level) + $" ParamName - {Environment.NewLine}\t{arg.ParamName}");
+        }
+        
+        if (ex.HelpLink != null)
+            writer.WriteLine(new string('◘', level) + $" Other - {Environment.NewLine}\t{ex.HelpLink}");
+
+        writer.WriteLine(new string('♠', level) + $" StackTrace - {Environment.NewLine}{ex.StackTrace}");
+
+        if (ex.InnerException == null || level >= 6)
+            return;
+
+        writer.WriteLine();
+        WriteDetails(writer, ex.InnerException, level + 1);
+    }
+
     /// <summary>
     /// Writes the exception details to the error log on disk.
     /// </summary>
@@ -58,52 +87,12 @@ public static class LogWriter
                 using (var writer = new StreamWriter(fileStream))
                 {
                     writer.WriteLine($"► Title - {Environment.NewLine}\t{title}");
-                    writer.WriteLine($"▬ Message - {Environment.NewLine}\t{ex.Message}");
-                    writer.WriteLine($"○ Type - {Environment.NewLine}\t{ex.GetType()}");
                     writer.WriteLine(FormattableString.Invariant($"♦ [Version] Date/Hour - {Environment.NewLine}\t[{UserSettings.All?.VersionText}] {DateTime.Now}"));
-                    writer.WriteLine($"▲ Source - {Environment.NewLine}\t{ex.Source}");
-                    writer.WriteLine($"▼ TargetSite - {Environment.NewLine}\t{ex.TargetSite}");
-
-                    if (ex is BadImageFormatException bad)
-                        writer.WriteLine($"► Fuslog - {Environment.NewLine}\t{bad.FusionLog}");
 
                     if (aditional != null)
                         writer.WriteLine($"◄ Aditional - {Environment.NewLine}\t{aditional}");
 
-                    if (ex.HelpLink != null)
-                        writer.WriteLine($"◘ Other - {Environment.NewLine}\t{ex.HelpLink}");
-
-                    writer.WriteLine($"♠ StackTrace - {Environment.NewLine}{ex.StackTrace}");
-
-                    if (ex.InnerException != null)
-                    {
-                        writer.WriteLine();
-                        writer.WriteLine($"▬▬ Message - {Environment.NewLine}\t{ex.InnerException.Message}");
-                        writer.WriteLine($"○○ Type - {Environment.NewLine}\t{ex.InnerException.GetType()}");
-                        writer.WriteLine($"▲▲ Source - {Environment.NewLine}\t{ex.InnerException.Source}");
-                        writer.WriteLine($"▼▼ TargetSite - {Environment.NewLine}\t{ex.InnerException.TargetSite}");
-                        writer.WriteLine($"♠♠ StackTrace - {Environment.NewLine}{ex.InnerException.StackTrace}");
-
-                        if (ex.InnerException.InnerException != null)
-                        {
-                            writer.WriteLine();
-                            writer.WriteLine($"▬▬▬ Message - {Environment.NewLine}\t{ex.InnerException.InnerException.Message}");
-                            writer.WriteLine($"○○○ Type - {Environment.NewLine}\t{ex.InnerException.InnerException.GetType()}");
-                            writer.WriteLine($"▲▲▲ Source - {Environment.NewLine}\t{ex.InnerException.InnerException.Source}");
-                            writer.WriteLine($"▼▼▼ TargetSite - {Environment.NewLine}\t{ex.InnerException.InnerException.TargetSite}");
-                            writer.WriteLine($"♠♠♠ StackTrace - {Environment.NewLine}\t{ex.InnerException.InnerException.StackTrace}");
-
-                            if (ex.InnerException.InnerException.InnerException != null)
-                            {
-                                writer.WriteLine();
-                                writer.WriteLine($"▬▬▬▬ Message - {Environment.NewLine}\t{ex.InnerException.InnerException.InnerException.Message}");
-                                writer.WriteLine($"○○○○ Type - {Environment.NewLine}\t{ex.InnerException.InnerException.InnerException.GetType()}");
-                                writer.WriteLine($"▲▲▲▲ Source - {Environment.NewLine}\t{ex.InnerException.InnerException.InnerException.Source}");
-                                writer.WriteLine($"▼▼▼▼ TargetSite - {Environment.NewLine}\t{ex.InnerException.InnerException.InnerException.TargetSite}");
-                                writer.WriteLine($"♠♠♠♠ StackTrace - {Environment.NewLine}\t{ex.InnerException.InnerException.InnerException.StackTrace}");
-                            }
-                        }
-                    }
+                    WriteDetails(writer, ex, 1);
 
                     writer.WriteLine();
                     writer.WriteLine("----------------------------------");
