@@ -26,11 +26,10 @@ namespace Translator;
 
 public partial class TranslatorWindow : Window
 {
-    private static string TempPath => Path.Combine(".", "ScreenToGif", "Resources");
-
     private readonly List<ResourceDictionary> _resourceList = new();
     private IEnumerable<string> _cultures;
     private ObservableCollection<Translation> _translationList = new();
+    private string _tempPath;
     private string _resourceTemplate;
 
     public TranslatorWindow()
@@ -42,8 +41,7 @@ public partial class TranslatorWindow : Window
 
     private async void Window_Loaded(object sender, RoutedEventArgs e)
     {
-        if (!Directory.Exists(TempPath))
-            Directory.CreateDirectory(TempPath);
+        PrepareTempPath();
 
         OpenButton.IsEnabled = false;
         RefreshButton.IsEnabled = false;
@@ -220,17 +218,18 @@ public partial class TranslatorWindow : Window
             CheckFileExists = true,
             Title = "Open a Resource Dictionary",
             Filter = "Resource Dictionay (*.xaml)|*.xaml;",
-            InitialDirectory = Path.GetFullPath(TempPath)
+            InitialDirectory = Path.GetFullPath(_tempPath)
         };
 
         var result = ofd.ShowDialog();
 
-        if (!result.HasValue || !result.Value) return;
+        if (!result.HasValue || !result.Value)
+            return;
 
         //Will save the file to other folder.
-        var tempFile = Path.Combine(TempPath, "Temp", Path.GetFileName(ofd.FileName));
+        var tempFile = Path.Combine(_tempPath, "Temp", Path.GetFileName(ofd.FileName));
 
-        Directory.CreateDirectory(Path.Combine(TempPath, "Temp"));
+        Directory.CreateDirectory(Path.Combine(_tempPath, "Temp"));
 
         //Replaces the special chars.
         var text = await Task.Factory.StartNew(() => File.ReadAllText(ofd.FileName, Encoding.UTF8).Replace("&#", "&amp;#").Replace("<!--<!--", "<!--").Replace("-->-->", "-->"));
@@ -290,7 +289,8 @@ public partial class TranslatorWindow : Window
 
         var result = sfd.ShowDialog();
 
-        if (!result.HasValue || !result.Value) return;
+        if (!result.HasValue || !result.Value)
+            return;
 
         BaseDataGrid.IsEnabled = false;
         StatusBand.Info("Exporting translation...");
@@ -320,6 +320,14 @@ public partial class TranslatorWindow : Window
     #endregion
 
     #region Methods
+
+    private void PrepareTempPath()
+    {
+        _tempPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ScreenToGif", "Resources");
+
+        if (!Directory.Exists(_tempPath))
+            Directory.CreateDirectory(_tempPath);
+    }
 
     private async Task DownloadSingleResourceAsync(string culture)
     {
@@ -425,7 +433,7 @@ public partial class TranslatorWindow : Window
     {
         try
         {
-            var file = Path.Combine(Dispatcher.Invoke<string>(() => TempPath), name);
+            var file = Path.Combine(Dispatcher.Invoke<string>(() => _tempPath), name);
 
             if (File.Exists(file))
                 File.Delete(file);
@@ -464,7 +472,7 @@ public partial class TranslatorWindow : Window
     {
         try
         {
-            var file = Path.Combine(Dispatcher.Invoke<string>(() => TempPath), name);
+            var file = Path.Combine(Dispatcher.Invoke<string>(() => _tempPath), name);
 
             if (File.Exists(file))
                 File.Delete(file);
@@ -503,7 +511,7 @@ public partial class TranslatorWindow : Window
     {
         try
         {
-            var files = await Task.Factory.StartNew(() => Directory.EnumerateFiles(TempPath, "*.xaml"));
+            var files = await Task.Factory.StartNew(() => Directory.EnumerateFiles(_tempPath, "*.xaml"));
 
             foreach (var file in files)
             {
