@@ -1,6 +1,6 @@
-using ScreenToGif.Domain.Enums;
 using System.Collections;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.IO.Compression;
@@ -13,16 +13,15 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Xml;
 using System.Xml.Linq;
+
+using KGySoft.CoreLibraries;
+using KGySoft.Reflection;
+
+using ScreenToGif.Domain.Enums;
 using ScreenToGif.Domain.Exceptions;
 using ScreenToGif.Domain.Models;
 using ScreenToGif.Util.Extensions;
-using Application = System.Windows.Application;
-using Color = System.Windows.Media.Color;
-using ColorConverter = System.Windows.Media.ColorConverter;
-using FontFamily = System.Windows.Media.FontFamily;
-using FontStyle = System.Windows.FontStyle;
-using HorizontalAlignment = System.Windows.HorizontalAlignment;
-using VerticalAlignment = System.Windows.VerticalAlignment;
+
 using Orientation = System.Windows.Controls.Orientation;
 using XamlWriter = System.Windows.Markup.XamlWriter;
 
@@ -103,13 +102,13 @@ public class UserSettings : INotifyPropertyChanged
             #region Load settings from disk
 
             var doc = XDocument.Parse(File.ReadAllText(path));
-            var properties = (doc.Root?.Descendants() ?? doc.Descendants()).Where(w => w.Parent == doc.Root).Select(GetProperty).ToList();
+            var properties = doc.Root?.Elements().Select(GetProperty).ToList();
 
             #endregion
 
             #region Migrate
 
-            var version = properties.FirstOrDefault(f => f.Key == "Version")?.Value ?? "0.0";
+            var version = properties?.FirstOrDefault(f => f.Key == "Version")?.Value ?? "0.0";
 
             Migration.Migrate(properties, version);
 
@@ -144,13 +143,16 @@ public class UserSettings : INotifyPropertyChanged
 
     public static Property GetProperty(XElement node)
     {
-        var attributes = node.Attributes().Select(s => new Property { Key = s.Name.LocalName, Value = s.Value }).ToList();
+        var attributes = node.Attributes()
+            .Where(a => a.Name.LocalName != "Key" && !(a.Name.Namespace == XNamespace.Xml && a.Name.LocalName == "space"))
+            .Select(s => new Property { Key = s.Name.LocalName, Value = s.Value })
+            .ToList();
 
         var prop = new Property
         {
             NameSpace = node.Name.NamespaceName,
             Type = node.Name.LocalName,
-            Key = attributes.FirstOrDefault(f => f.Key == "Key")?.Value,
+            Key = node.Attributes().FirstOrDefault(a => a.Name.LocalName == "Key")?.Value,
             Attributes = attributes,
             Value = node.Value
         };
@@ -172,6 +174,7 @@ public class UserSettings : INotifyPropertyChanged
                 prop.Type = inner.Type;
                 prop.NameSpace = inner.NameSpace;
                 prop.Children = inner.Children;
+                prop.Attributes = inner.Attributes;
                 return prop;
             }
         }
@@ -179,9 +182,14 @@ public class UserSettings : INotifyPropertyChanged
         foreach (var element in node.Elements())
         {
             var innerElement = GetProperty(element);
-
             if (innerElement != null)
-                prop.Children.Add(innerElement);
+            {
+                // Adding collection elements to Children and properties to Attributes
+                if (innerElement.Key == null)
+                    prop.Children.Add(innerElement);
+                else
+                    prop.Attributes.Add(innerElement);
+            }
         }
 
         return prop;
@@ -191,146 +199,30 @@ public class UserSettings : INotifyPropertyChanged
     {
         try
         {
-            //Do you know any other way to achieve this? Contact me via Github.
+            Type type = ParseType(property);
 
-            switch (property.Type)
+            // Primitive/simple type, enum or type with TypeConverter
+            if (property.Attributes.Count == 0)
+                return ParseValue(property.Value, type);
+
+            // Complex object with properties/items
+            var instance = Activator.CreateInstance(type);
+
+            // Restoring properties
+            foreach (Property prop in property.Attributes)
             {
-                case "String":
-                    property.Value = property.Value.StartsWith("{}") ? property.Value.Substring(2) : property.Value;
-
-                    if (property.Value == "{x:Null}")
-                        return null;
-
-                    return property.Value;
-                case "Boolean":
-                    return Convert.ToBoolean(property.Value);
-                case "Int32":
-                    return Convert.ToInt32(property.Value, CultureInfo.InvariantCulture);
-                case "Int64":
-                    return Convert.ToInt64(property.Value, CultureInfo.InvariantCulture);
-                case "Double":
-                    return Convert.ToDouble(property.Value, CultureInfo.InvariantCulture);
-                case "Decimal":
-                    return Convert.ToDecimal(property.Value, CultureInfo.InvariantCulture);
-
-                case "ExportFormats":
-                    return Enum.Parse(typeof(ExportFormats), property.Value);
-                case "Key":
-                    return (property.Value ?? "").Length == 0 ? null : Enum.Parse(typeof(Key), property.Value);
-                case "ProgressTypes":
-                    return Enum.Parse(typeof(ProgressTypes), property.Value);
-                case "StylusTip":
-                    return Enum.Parse(typeof(StylusTip), property.Value);
-                case "AppThemes":
-                    return Enum.Parse(typeof(AppThemes), property.Value);
-                case "WindowState":
-                    return Enum.Parse(typeof(WindowState), property.Value);
-                case "CopyModes":
-                    return Enum.Parse(typeof(CopyModes), property.Value);
-                case "HorizontalAlignment":
-                    return Enum.Parse(typeof(HorizontalAlignment), property.Value);
-                case "VerticalAlignment":
-                    return Enum.Parse(typeof(VerticalAlignment), property.Value);
-                case "CaptureFrequencies":
-                    return Enum.Parse(typeof(CaptureFrequencies), property.Value);
-                case "ProxyTypes":
-                    return Enum.Parse(typeof(ProxyTypes), property.Value);
-                case "PasteBehaviors":
-                    return Enum.Parse(typeof(PasteBehaviors), property.Value);
-                case "ReduceDelayModes":
-                    return Enum.Parse(typeof(ReduceDelayModes), property.Value);
-                case "DuplicatesRemovalModes":
-                    return Enum.Parse(typeof(DuplicatesRemovalModes), property.Value);
-                case "DuplicatesDelayModes":
-                    return Enum.Parse(typeof(DuplicatesDelayModes), property.Value);
-                case "SmoothLoopFromModes":
-                    return Enum.Parse(typeof(SmoothLoopFromModes), property.Value);
-                case "Orientation":
-                    return Enum.Parse(typeof(Orientation), property.Value);
-                case "ObfuscationModes":
-                    return Enum.Parse(typeof(ObfuscationModes), property.Value);
-                case "FadeModes":
-                    return Enum.Parse(typeof(FadeModes), property.Value);
-                case "CompressionLevel":
-                    return Enum.Parse(typeof(CompressionLevel), property.Value);
-                case "TaskTypes":
-                    return Enum.Parse(typeof(TaskTypes), property.Value);
-                case "DelayUpdateModes":
-                    return Enum.Parse(typeof(DelayUpdateModes), property.Value);
-                case "UploadDestinations":
-                    return Enum.Parse(typeof(UploadDestinations), property.Value);
-                case "EncoderTypes":
-                    return Enum.Parse(typeof(EncoderTypes), property.Value);
-                case "PartialExportModes":
-                    return Enum.Parse(typeof(PartialExportModes), property.Value);
-                case "VideoSettingsModes":
-                    return Enum.Parse(typeof(VideoSettingsModes), property.Value);
-                case "VideoCodecs":
-                    return Enum.Parse(typeof(VideoCodecs), property.Value);
-                case "DitherMethods":
-                    return Enum.Parse(typeof(DitherMethods), property.Value);
-                case "PredictionMethods":
-                    return Enum.Parse(typeof(PredictionMethods), property.Value);
-                case "VideoCodecPresets":
-                    return Enum.Parse(typeof(VideoCodecPresets), property.Value);
-                case "HardwareAccelerationModes":
-                    return Enum.Parse(typeof(HardwareAccelerationModes), property.Value);
-                case "RateUnits":
-                    return Enum.Parse(typeof(RateUnits), property.Value);
-                case "VideoPixelFormats":
-                    return Enum.Parse(typeof(VideoPixelFormats), property.Value);
-                case "Framerates":
-                    return Enum.Parse(typeof(Framerates), property.Value);
-                case "Vsyncs":
-                    return Enum.Parse(typeof(Vsyncs), property.Value);
-                case "BitmapScalingMode":
-                    return Enum.Parse(typeof(BitmapScalingMode), property.Value);
-                case "ColorQuantizationTypes":
-                    return Enum.Parse(typeof(ColorQuantizationTypes), property.Value);
-                case "SizeUnits":
-                    return Enum.Parse(typeof(SizeUnits), property.Value);
-                case "OverwriteModes":
-                    return Enum.Parse(typeof(OverwriteModes), property.Value);
-
-                case "FontWeight":
-                    return new FontWeightConverter().ConvertFrom(property.Value);
-                case "FontFamily":
-                    return new FontFamilyConverter().ConvertFrom(property.Value);
-                case "FontStyle":
-                    return new FontStyleConverter().ConvertFrom(property.Value);
-                case "ModifierKeys":
-                    return new ModifierKeysConverter().ConvertFrom(property.Value);
-                case "Color":
-                    return ColorConverter.ConvertFromString(property.Value);
-                case "DoubleCollection":
-                    return DoubleCollection.Parse(property.Value);
-                case "Rect":
-                    return Rect.Parse(property.Value);
-                case "DateTime":
-                    return DateTime.Parse(property.Value);
-                case "TimeSpan":
-                    return TimeSpan.Parse(property.Value);
-                case "TextAlignment":
-                    return Enum.Parse(typeof(TextAlignment), property.Value);
-
-                case "ArrayList":
-                {
-                    var array = new ArrayList();
-
-                    foreach (var child in property.Children)
-                    {
-                        var prop = ParseProperty(child);
-
-                        if (prop != null)
-                            array.Add(prop);
-                    }
-
-                    return array;
-                }
-
-                default:
-                    return DeserializeProperty(property);
+                PropertyInfo info = type.GetProperty(prop.Key) ?? throw new ArgumentException($"Property not found: {type.Name}.{prop.Key}", nameof(property));
+                PropertyAccessor.GetAccessor(info).Set(instance, prop.Type != null ? ParseProperty(prop) : ParseValue(prop.Value, info.PropertyType));
             }
+
+            // Restoring collection items (in fact, list is always an ArrayList due to WPF serialization but in theory we support others, too)
+            if (instance is IList list)
+            {
+                foreach (Property child in property.Children)
+                    list.Add(ParseProperty(child));
+            }
+
+            return instance;
         }
         catch (Exception e)
         {
@@ -341,181 +233,44 @@ public class UserSettings : INotifyPropertyChanged
 
     private static Type ParseType(Property property)
     {
-        if (string.IsNullOrWhiteSpace(property.NameSpace) || property.NameSpace.StartsWith("http", StringComparison.Ordinal))
-            return Type.GetType("System." + property.Type) ?? Type.GetType("System.Windows." + property.Type, true);
+        if (property.NameSpace is "clr-namespace:System;assembly=System.Private.CoreLib" or "clr-namespace:System;assembly=mscorlib")
+            return Type.GetType("System." + property.Type, true);
 
-        var namespaceIndex = property.NameSpace?.IndexOf("clr-namespace:", StringComparison.Ordinal) ?? -1;
+        // Using Reflector instead of Type.GetType because without an assembly Type.GetType works only for mscorlib/System.Private.CoreLib types
+        if (property.NameSpace.StartsWith("http", StringComparison.Ordinal))
+            return Reflector.ResolveType("System.Windows." + property.Type, ResolveTypeOptions.None)
+                ?? Reflector.ResolveType("System.Windows.Media." + property.Type, ResolveTypeOptions.None)
+                ?? Reflector.ResolveType("System.Windows.Ink." + property.Type, ResolveTypeOptions.None)
+                ?? Reflector.ResolveType("System.Windows.Input." + property.Type, ResolveTypeOptions.None)
+                ?? Reflector.ResolveType("System.Windows.Controls." + property.Type, ResolveTypeOptions.ThrowError);
 
-        if (namespaceIndex == -1)
-            throw new Exception("Namespace not expected");
-
+        var namespaceIndex = property.NameSpace.IndexOf("clr-namespace:", StringComparison.Ordinal);
         var space = property.NameSpace.Substring(namespaceIndex + 14);
         var assemblyIndex = space.IndexOf(";assembly=", StringComparison.Ordinal);
-
         if (assemblyIndex == -1)
-            return Type.GetType(space + "." + property.Type, true);
+            return Reflector.ResolveType(space + "." + property.Type, ResolveTypeOptions.ThrowError);
 
+        // Alert: ResolveTypeOptions.TryToLoadAssemblies is a security risk but this is the compatible behavior with Type.GetType(assemblyQualifiedName), which also would happily load any assembly.
         var assembly = space.Substring(assemblyIndex + 10);
         space = space.Substring(0, space.Length - assembly.Length - 10);
-
-        return Type.GetType(space + "." + property.Type + ", " + assembly, true);
+        return Reflector.ResolveType(space + "." + property.Type + ", " + assembly, ResolveTypeOptions.AllowPartialAssemblyMatch | ResolveTypeOptions.TryToLoadAssemblies | ResolveTypeOptions.ThrowError);
     }
 
-    private static object DeserializeProperty(Property property)
+    private static object ParseValue(string value, Type type)
     {
-        var type = ParseType(property);
+        if (value is null or "{x:Null}")
+            return null;
+        if (type == typeof(string))
+            return value.StartsWith("{}", StringComparison.Ordinal) ? value[2..] : value;
 
-        //Does not work with enums.
-        if (property.Children.Count == 0 && property.Attributes.Count(w => w.Key != "Key") == 0)
-            return Convert.ChangeType(property.Value, type, CultureInfo.InvariantCulture);
+        // This works for primitive types, enums, and types with TypeConverters
+        if (value.TryParse(type, CultureInfo.InvariantCulture, out object result))
+            return result;
 
-        var instance = Activator.CreateInstance(type);
-
-        //Sub-properties.
-        foreach (var att in property.Attributes.Where(w => w.Key != "Key"))
-        {
-            if (string.IsNullOrEmpty(att.Key))
-            {
-                LogWriter.Log("Property not identified in children", att, property);
-                continue;
-            }
-
-            var info = type.GetProperty(att.Key);
-
-            if (info == null)
-            {
-                LogWriter.Log("Property not available in object", att, property);
-                continue;
-            }
-
-            att.Type = info.PropertyType.Name;
-
-            if (info.PropertyType == typeof(int?))
-            {
-                if (int.TryParse(att.Value, out var intValue))
-                    info.SetValue(instance, intValue, null);
-
-                continue;
-            }
-
-            if (info.PropertyType == typeof(byte?))
-            {
-                if (Byte.TryParse(att.Value, out var byteValue))
-                    info.SetValue(instance, byteValue, null);
-
-                continue;
-            }
-
-            if (info.PropertyType == typeof(DateTime?))
-            {
-                if (DateTime.TryParse(att.Value, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out var deteTimeValue))
-                    info.SetValue(instance, deteTimeValue, null);
-
-                continue;
-            }
-
-            if (info.PropertyType == typeof(bool?))
-            {
-                if (bool.TryParse(att.Value, out var boolValue))
-                    info.SetValue(instance, boolValue, null);
-
-                continue;
-            }
-
-            if (info.PropertyType == typeof(TimeSpan?))
-            {
-                if (TimeSpan.TryParse(att.Value, out var timeValue))
-                    info.SetValue(instance, timeValue, null);
-
-                continue;
-            }
-
-            if (att.Type.StartsWith("Nullable"))
-            {
-                LogWriter.Log("Property not identified.", att, property);
-                continue;
-            }
-
-            var value = ParseProperty(att);
-
-            if (value != null)
-                info.SetValue(instance, value, null);
-        }
-
-        //Sub-properties that are in expanded tags.
-        foreach (var child in property.Children)
-        {
-            if (string.IsNullOrEmpty(child.Key))
-            {
-                LogWriter.Log("Property not identified in children", child, property);
-                continue;
-            }
-
-            var info = type.GetProperty(child.Key);
-
-            if (info == null)
-            {
-                LogWriter.Log("Property not available in object in children", child, property);
-                continue;
-            }
-
-            child.Type = info.PropertyType.Name;
-
-            if (info.PropertyType == typeof(int?))
-            {
-                if (int.TryParse(child.Value, out var intValue))
-                    info.SetValue(instance, intValue, null);
-
-                continue;
-            }
-
-            if (info.PropertyType == typeof(byte?))
-            {
-                if (Byte.TryParse(child.Value, out var byteValue))
-                    info.SetValue(instance, byteValue, null);
-
-                continue;
-            }
-
-            if (info.PropertyType == typeof(DateTime?))
-            {
-                if (DateTime.TryParse(child.Value, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out var deteTimeValue))
-                    info.SetValue(instance, deteTimeValue, null);
-
-                continue;
-            }
-
-            if (info.PropertyType == typeof(bool?))
-            {
-                if (bool.TryParse(child.Value, out var boolValue))
-                    info.SetValue(instance, boolValue, null);
-
-                continue;
-            }
-
-            if (info.PropertyType == typeof(TimeSpan?))
-            {
-                if (TimeSpan.TryParse(child.Value, out var timeValue))
-                    info.SetValue(instance, timeValue, null);
-
-                continue;
-            }
-
-            if (child.Type.StartsWith("Nullable"))
-            {
-                LogWriter.Log("Property not identified in children.", child, property);
-                continue;
-            }
-
-            var innerChild = ParseProperty(child);
-
-            if (innerChild != null)
-                info.SetValue(instance, innerChild, null);
-        }
-
-        return instance;
+        // [Try]Parse fails for enums that should be parsed by TypeConverters rather than from their ToString value (eg. ModifierKeys)
+        // We could just use Convert even instead of the Parse above but it is faster to use this only as a fallback
+        return value.Convert(type, CultureInfo.InvariantCulture);
     }
-
 
     public static void Save(bool canForce = false, bool saveToAppData = false)
     {
