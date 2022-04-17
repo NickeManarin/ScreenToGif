@@ -1583,7 +1583,12 @@ internal class EncodingManager
 
                     //Codec preset.
                     if (videoPreset.CodecPreset != VideoCodecPresets.Default && videoPreset.CodecPreset != VideoCodecPresets.None && videoPreset.CodecPreset != VideoCodecPresets.NotSelected)
-                        firstPass += $"-preset {videoPreset.CodecPreset.GetLowerDescription()} ";
+                    {
+                        if (videoPreset.VideoCodec is VideoCodecs.SvtAv1 or VideoCodecs.Rav1E)
+                            firstPass += $"-preset {(int) videoPreset.CodecPreset} ";
+                        else
+                            firstPass += $"-preset {videoPreset.CodecPreset.GetLowerDescription()} ";
+                    }
 
                     //Pixel format.
                     if (videoPreset.PixelFormat != VideoPixelFormats.Auto)
