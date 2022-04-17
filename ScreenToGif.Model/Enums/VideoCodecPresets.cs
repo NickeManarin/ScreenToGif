@@ -5,6 +5,7 @@ namespace ScreenToGif.Domain.Enums;
 [SuppressMessage("ReSharper", "InconsistentNaming")]
 public enum VideoCodecPresets
 {
+    Auto = -1,
     NotSelected,
     None,
 

@@ -324,7 +324,7 @@ public partial class ExportPanel : UserControl, IPanel
 
         //Ignore unsupported profiles.
         if (!Environment.Is64BitProcess)
-            search = search.Where(tp => !(tp is GifskiGifPreset));
+            search = search.Where(tp => tp is not GifskiGifPreset);
 
         var list = search.ToList();
 
@@ -524,7 +524,7 @@ public partial class ExportPanel : UserControl, IPanel
 
     private void AdjustCodecs(ExportPreset preset)
     {
-        if (!(preset is VideoPreset videoPreset))
+        if (preset is not VideoPreset videoPreset)
             return;
 
         FfmpegCodecComboBox.SelectionChanged -= FfmpegCodecComboBox_SelectionChanged;
@@ -557,7 +557,10 @@ public partial class ExportPanel : UserControl, IPanel
                         new HevcNvenc(),
                         new HevcQsv(),
                         new Vp8(),
-                        new Vp9()
+                        new Vp9(),
+                        new LibAom(),
+                        new SvtAv1(),
+                        new Rav1E()
                     };
                 }
                 else
@@ -567,7 +570,10 @@ public partial class ExportPanel : UserControl, IPanel
                         new X264(),
                         new X265(),
                         new Vp8(),
-                        new Vp9()
+                        new Vp9(),
+                        new LibAom(),
+                        new SvtAv1(),
+                        new Rav1E()
                     };
                 }
 
@@ -606,7 +612,10 @@ public partial class ExportPanel : UserControl, IPanel
                 FfmpegCodecComboBox.ItemsSource = new List<VideoCodec>
                 {
                     new Vp8(),
-                    new Vp9()
+                    new Vp9(),
+                    new LibAom(),
+                    new SvtAv1(),
+                    new Rav1E()
                 };
 
                 break;
@@ -942,7 +951,7 @@ public partial class ExportPanel : UserControl, IPanel
             //Animated images.
             case ExportFormats.Apng:
             {
-                if (!(selected is ApngPreset apngPreset))
+                if (selected is not ApngPreset apngPreset)
                     break;
 
                 switch (apngPreset.Encoder)
@@ -959,7 +968,7 @@ public partial class ExportPanel : UserControl, IPanel
             }
             case ExportFormats.Gif:
             {
-                if (!(selected is GifPreset gifPreset))
+                if (selected is not GifPreset gifPreset)
                     break;
 
                 switch (gifPreset.Encoder)
@@ -1091,7 +1100,7 @@ public partial class ExportPanel : UserControl, IPanel
     private void ResetPreset_Click(object sender, RoutedEventArgs e)
     {
         //Ask if the user really wants to reset the preset to its default settings.
-        if (!(PresetComboBox.SelectedItem is ExportPreset preset) || !Dialog.Ask(LocalizationHelper.Get("S.SaveAs.Presets.Ask.Reset.Title"), LocalizationHelper.Get("S.SaveAs.Presets.Ask.Reset.Instruction"),
+        if (PresetComboBox.SelectedItem is not ExportPreset preset || !Dialog.Ask(LocalizationHelper.Get("S.SaveAs.Presets.Ask.Reset.Title"), LocalizationHelper.Get("S.SaveAs.Presets.Ask.Reset.Instruction"),
                 LocalizationHelper.Get("S.SaveAs.Presets.Ask.Reset.Message")))
             return;
 
@@ -1258,6 +1267,18 @@ public partial class ExportPanel : UserControl, IPanel
                 videoPreset.PixelFormat = containsFormat ? pixelFormat : VideoPixelFormats.Yuv420p;
                 break;
             case VideoCodecs.Vp9:
+                videoPreset.CodecPreset = containsPreset ? codecPreset : VideoCodecPresets.Medium;
+                videoPreset.PixelFormat = containsFormat ? pixelFormat : VideoPixelFormats.Yuv420p;
+                break;
+            case VideoCodecs.LibAom:
+                videoPreset.CodecPreset = containsPreset ? codecPreset : VideoCodecPresets.None;
+                videoPreset.PixelFormat = containsFormat ? pixelFormat : VideoPixelFormats.Yuv420p;
+                break;
+            case VideoCodecs.SvtAv1:
+                videoPreset.CodecPreset = containsPreset ? codecPreset : VideoCodecPresets.Medium;
+                videoPreset.PixelFormat = containsFormat ? pixelFormat : VideoPixelFormats.Yuv420p;
+                break;
+            case VideoCodecs.Rav1E:
                 videoPreset.CodecPreset = containsPreset ? codecPreset : VideoCodecPresets.Medium;
                 videoPreset.PixelFormat = containsFormat ? pixelFormat : VideoPixelFormats.Yuv420p;
                 break;

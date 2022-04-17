@@ -24,6 +24,7 @@ public enum VideoPixelFormats
     Gbrp12Le,
     Gray,
     Gray10Le,
+    Gray12Le,
     Gray16Be,
     MonoB,
     Nv12,
