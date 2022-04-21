@@ -758,16 +758,16 @@
     <s:String x:Key="S.Editor.Welcome.NewRecorder">¿Te gustaria probar la nueva grabadora?, Ve a "Opciones > Grabador", para activarlo.</s:String>
     
     <!--Editor • File tab • New-->
-    <s:String x:Key="S.Editor.File.New.Recording">Grabando</s:String>
-    <s:String x:Key="S.Editor.File.New.Webcam">Webcam&#x0d;Grabando</s:String>
-    <s:String x:Key="S.Editor.File.New.Board">Pizarra&#x0d;Grabando</s:String>
+    <s:String x:Key="S.Editor.File.New.Recording">Grabanción</s:String>
+    <s:String x:Key="S.Editor.File.New.Webcam">Grabación de&#x0d;Webcam</s:String>
+    <s:String x:Key="S.Editor.File.New.Board">Grabación de&#x0d;Pizarra</s:String>
     <s:String x:Key="S.Editor.File.Blank">En Blanco</s:String>
     <s:String x:Key="S.Editor.File.New">Nuevo</s:String>
     
     <!--Editor • File tab • Insert-->
-    <s:String x:Key="S.Editor.File.Insert.Recording">Grabando</s:String>
-    <s:String x:Key="S.Editor.File.Insert.Webcam">Webcam&#x0d;Grabando</s:String>
-    <s:String x:Key="S.Editor.File.Insert.Board">Pizarra&#x0d;Grabando</s:String>
+    <s:String x:Key="S.Editor.File.Insert.Recording">Grabación</s:String>
+    <s:String x:Key="S.Editor.File.Insert.Webcam">Grabación de&#x0d;Webcam</s:String>
+    <s:String x:Key="S.Editor.File.Insert.Board">Grabación de&#x0d;Pizarra</s:String>
     <s:String x:Key="S.Editor.File.Insert.Media">Media</s:String>
     <s:String x:Key="S.Editor.File.Insert">Insertar</s:String>
     
