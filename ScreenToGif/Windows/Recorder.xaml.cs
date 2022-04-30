@@ -961,6 +961,7 @@ public partial class Recorder
     private async Task Snap()
     {
         var snapTriggerDelay = GetTriggerDelay();
+
         if (snapTriggerDelay != 0)
             await Task.Delay(snapTriggerDelay);
 

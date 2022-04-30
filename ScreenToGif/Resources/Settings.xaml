@@ -83,6 +83,7 @@
     <s:Boolean x:Key="FallThroughOtherScreens">False</s:Boolean>
     <e:CaptureFrequencies x:Key="CaptureFrequency">PerSecond</e:CaptureFrequencies>
     <s:Int32 x:Key="PlaybackDelayManual">1000</s:Int32>
+    <s:Int32 x:Key="TriggerDelayManual">0</s:Int32>
     <s:Int32 x:Key="PlaybackDelayInteraction">500</s:Int32>
     <s:Int32 x:Key="TriggerDelayInteraction">0</s:Int32>
     <s:Int32 x:Key="PlaybackDelayMinute">66</s:Int32>
