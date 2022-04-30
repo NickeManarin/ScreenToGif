@@ -6143,32 +6143,35 @@ namespace ScreenToGif.Windows
             {
                 var removeIndex = removeList[i];
 
-                if (mode == ReduceDelayModes.Previous || factor == 1)
+                if (mode != ReduceDelayModes.DontAdjust)
                 {
-                    //Simply stacks the delay of the removed frames to the previous frame;
-                    Project.Frames[removeIndex - 1].Delay += Project.Frames[removeIndex].Delay;
-                }
-                else if (mode == ReduceDelayModes.Evenly)
-                {
-                    if (i == removeList.Count - 1 || removeList[i] + 1 == removeList[i + 1])
+                    if (mode == ReduceDelayModes.Previous || factor == 1)
                     {
-                        //Store the delay of the frames being removed.
-                        delayRemoved += Project.Frames[removeIndex].Delay;
+                        //Simply stacks the delay of the removed frames to the previous frame;
+                        Project.Frames[removeIndex - 1].Delay += Project.Frames[removeIndex].Delay;
                     }
-                    else
+                    else if (mode == ReduceDelayModes.Evenly)
                     {
-                        if (delayRemoved > 0)
+                        if (i == removeList.Count - 1 || removeList[i] + 1 == removeList[i + 1])
                         {
-                            //Calculate the size of the remaining section (this is the factor, the number of frames not being removed in each section).
-                            var size = removeList[i + 1] - removeList[i] - 1;
-
-                            //Spread evenly the accumulated delay among the remaining frames.
-                            for (var r = removeList[i + 1] - 1; r > removeList[i]; r--)
-                                Project.Frames[r].Delay += delayRemoved / size; //Some information may be lost due to rounding.
+                            //Store the delay of the frames being removed.
+                            delayRemoved += Project.Frames[removeIndex].Delay;
                         }
+                        else
+                        {
+                            if (delayRemoved > 0)
+                            {
+                                //Calculate the size of the remaining section (this is the factor, the number of frames not being removed in each section).
+                                var size = removeList[i + 1] - removeList[i] - 1;
 
-                        //Start again the accumulation for this block of frames being removed.
-                        delayRemoved = Project.Frames[removeIndex].Delay;
+                                //Spread evenly the accumulated delay among the remaining frames.
+                                for (var r = removeList[i + 1] - 1; r > removeList[i]; r--)
+                                    Project.Frames[r].Delay += delayRemoved / size; //Some information may be lost due to rounding.
+                            }
+
+                            //Start again the accumulation for this block of frames being removed.
+                            delayRemoved = Project.Frames[removeIndex].Delay;
+                        }
                     }
                 }
 
