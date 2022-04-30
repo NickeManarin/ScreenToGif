@@ -280,6 +280,8 @@
     <s:String x:Key="S.Options.Recorder.Frequency.Hour.Info">Frames will be captured in a 'per hour' basis (timelapse),&#10;given the framerate denominator set on the recorder screen.</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Playback">Playback delay:</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Playback.Info">(In ms, each captured frame will be set to this delay)</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Trigger">Trigger delay:</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Trigger.Info">(In ms, each trigged captured fram will wait this long after trigger before capture)</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Interval">Each frame will be captured in interval of {0}.</s:String>
     
     <s:String x:Key="S.Options.Recorder.Mode">Capture mode</s:String>

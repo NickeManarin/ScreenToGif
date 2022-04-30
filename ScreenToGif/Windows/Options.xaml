@@ -507,6 +507,11 @@
                                     <n:IntegerUpDown Minimum="10" Maximum="25000" Value="{Binding Path=PlaybackDelayHour, Mode=TwoWay}" MinWidth="80" Visibility="{Binding ElementName=PerHourRadioButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource Bool2Visibility}}"/>
                                     <TextBlock Text="{DynamicResource S.Options.Recorder.Frequency.Playback.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="WrapWithOverflow" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
                                 </WrapPanel>
+                                <WrapPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="7" Visibility="{Binding ElementName=InteractionRadioButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource Bool2Visibility}, FallbackValue=Collapsed}">
+                                    <TextBlock Text="{DynamicResource S.Options.Recorder.Frequency.Trigger}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,0" VerticalAlignment="Center"/>
+                                    <n:IntegerUpDown Minimum="0" Maximum="25000" Value="{Binding Path=TriggerDelayInteraction, Mode=TwoWay}" MinWidth="80" />
+                                    <TextBlock Text="{DynamicResource S.Options.Recorder.Frequency.Trigger.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="WrapWithOverflow" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                                </WrapPanel>
 
                                 <n:ExtendedCheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="7" Text="{DynamicResource S.Options.Recorder.FixedFramerate}" 
                                                     Info="{DynamicResource S.Options.Recorder.FixedFramerate.Info}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=FixedFrameRate, Mode=TwoWay}"

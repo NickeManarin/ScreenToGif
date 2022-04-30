@@ -935,6 +935,15 @@ public class UserSettings : INotifyPropertyChanged
         get => (int)GetValue();
         set => SetValue(value);
     }
+    /// <summary>
+    /// The delay after trigger speed of the capture frame, in the "interaction" mode.
+    /// </summary>
+    public int TriggerDelayInteraction
+    {
+        get => (int)GetValue();
+        set => SetValue(value);
+    }
+    
 
     /// <summary>
     /// The placyback speed of the capture frame, in the "per minute" mode.
