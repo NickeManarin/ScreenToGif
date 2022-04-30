@@ -960,6 +960,11 @@ public partial class Recorder
     /// </summary>
     private async Task Snap()
     {
+        var snapTriggerDelay = GetTriggerDelay();
+
+        if (snapTriggerDelay != 0)
+            await Task.Delay(snapTriggerDelay);
+
         HideGuidelines();
 
         if (Project == null || Project.Frames.Count == 0)

@@ -280,6 +280,8 @@
     <s:String x:Key="S.Options.Recorder.Frequency.Hour.Info">Quadros serão capturados em base de 'por hora' (timelapse),&#10;considerando o denominador de taxa de captura definido na tela do gravador.</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Playback">Duração de reprodução:</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Playback.Info">(Em ms, cada quadro capturado receberá essa duração)</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Trigger">Atraso:</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Trigger.Info">(Em ms, tempo aguardado antes da captura de cada quadro)</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Interval">Cada quadro será capturado em intervalos de {0}.</s:String>
     
     <s:String x:Key="S.Options.Recorder.Mode">Modo de captura</s:String>

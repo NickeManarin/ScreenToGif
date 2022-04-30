@@ -928,9 +928,27 @@ public class UserSettings : INotifyPropertyChanged
     }
 
     /// <summary>
+    /// The synthetic delay after trigger, in the "manual" capture mode.
+    /// </summary>
+    public int TriggerDelayManual
+    {
+        get => (int)GetValue();
+        set => SetValue(value);
+    }
+
+    /// <summary>
     /// The placyback speed of the capture frame, in the "manual" mode.
     /// </summary>
     public int PlaybackDelayInteraction
+    {
+        get => (int)GetValue();
+        set => SetValue(value);
+    }
+
+    /// <summary>
+    /// The synthetic delay after trigger, in the "interaction" capture mode.
+    /// </summary>
+    public int TriggerDelayInteraction
     {
         get => (int)GetValue();
         set => SetValue(value);

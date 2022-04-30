@@ -1138,6 +1138,11 @@ public partial class NewRecorder
 
     private async Task Snap()
     {
+        var snapTriggerDelay = GetTriggerDelay();
+
+        if (snapTriggerDelay != 0)
+            await Task.Delay(snapTriggerDelay);
+
         #region If region not yet selected
 
         if (_viewModel.Region.IsEmpty)
