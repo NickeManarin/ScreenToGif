@@ -1,0 +1,221 @@
+<UserControl x:Class="ScreenToGif.UserControls.KGySoftGifOptionsPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:ScreenToGif.ViewModel"
+             xmlns:c="clr-namespace:ScreenToGif.Controls"
+             mc:Ignorable="d"
+             Name="This" d:DataContext="{d:DesignInstance vm:KGySoftGifOptionsViewModel, IsDesignTimeCreatable=False}"
+             Unloaded="KGySoftGifOptionsPanel_OnUnloaded" DataContextChanged="KGySoftGifOptionsPanel_OnDataContextChanged">
+
+    <StackPanel Margin="0,0,3,0">
+        <!--Quantizer-->
+        <GroupBox Header="{DynamicResource S.SaveAs.KGySoft.Quantizer}">
+            <StackPanel>
+                <!--Selectable quantizers-->
+                <ComboBox x:Name="QuantizersComboBox" Height="38" Margin="3" ItemsSource="{Binding Quantizers}" SelectedValue="{Binding QuantizerId}"
+                          SelectedValuePath="Id" ItemTemplate="{StaticResource Template.ComboBox.SimpleNoIcon}"/>
+
+                <!--Quantizers Options-->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--Back Color-->
+                    <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="3,0,5,0" Foreground="{DynamicResource Element.Foreground.Medium}"
+                               Text="{DynamicResource S.SaveAs.KGySoft.Quantizer.BackColor}" ToolTip="{DynamicResource S.SaveAs.KGySoft.Quantizer.BackColor.Info}"/>
+                    <c:ColorBox Grid.Row="0" Grid.Column="1" Margin="3" AllowTransparency="False" SelectedColor="{Binding BackColor, Mode=TwoWay}"
+                                ToolTip="{DynamicResource S.SaveAs.KGySoft.Quantizer.BackColor.Info}"/>
+
+                    <!--Alpha Threshold-->
+                    <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="3,0,5,0" Foreground="{DynamicResource Element.Foreground.Medium}"
+                               Text="{DynamicResource S.SaveAs.KGySoft.Quantizer.AlphaThreshold}" ToolTip="{DynamicResource S.SaveAs.KGySoft.Quantizer.AlphaThreshold.Info}"
+                               Visibility="{Binding ElementName=QuantizersComboBox, Path=SelectedItem.(vm:QuantizerDescriptor.HasAlphaThreshold), Converter={StaticResource Bool2Visibility}}"/>
+                    <Slider Grid.Row="1" Grid.Column="1" Margin="0,3" TickPlacement="BottomRight" AutoToolTipPlacement="TopLeft" Minimum="0" Maximum="255" TickFrequency="32"
+                            Value="{Binding AlphaThreshold}" SmallChange="1" LargeChange="32" ToolTip="{DynamicResource S.SaveAs.KGySoft.Quantizer.AlphaThreshold.Info}"
+                            Visibility="{Binding ElementName=QuantizersComboBox, Path=SelectedItem.(vm:QuantizerDescriptor.HasAlphaThreshold), Converter={StaticResource Bool2Visibility}}"/>
+
+                    <!--White Threshold-->
+                    <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="3,0,5,0" Foreground="{DynamicResource Element.Foreground.Medium}"
+                               Text="{DynamicResource S.SaveAs.KGySoft.Quantizer.WhiteThreshold}" ToolTip="{DynamicResource S.SaveAs.KGySoft.Quantizer.WhiteThreshold.Info}"
+                               Visibility="{Binding ElementName=QuantizersComboBox, Path=SelectedItem.(vm:QuantizerDescriptor.HasWhiteThreshold), Converter={StaticResource Bool2Visibility}}"/>
+                    <Slider Grid.Row="2" Grid.Column="1" Margin="0,3" TickPlacement="BottomRight" AutoToolTipPlacement="TopLeft" Minimum="0" Maximum="255" TickFrequency="32"
+                            Value="{Binding WhiteThreshold}" SmallChange="1" LargeChange="32" ToolTip="{DynamicResource S.SaveAs.KGySoft.Quantizer.WhiteThreshold.Info}"
+                            Visibility="{Binding ElementName=QuantizersComboBox, Path=SelectedItem.(vm:QuantizerDescriptor.HasWhiteThreshold), Converter={StaticResource Bool2Visibility}}"/>
+
+                    <!--Direct Mapping-->
+                    <c:ExtendedCheckBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="3" Text="{DynamicResource S.SaveAs.KGySoft.Quantizer.DirectMapping}"
+                                        ToolTip="{DynamicResource S.SaveAs.KGySoft.Quantizer.DirectMapping.Info}" IsChecked="{Binding DirectMapping}"
+                                        Visibility="{Binding ElementName=QuantizersComboBox, Path=SelectedItem.(vm:QuantizerDescriptor.HasDirectMapping), Converter={StaticResource Bool2Visibility}}"/>
+
+                    <!--Palette Size-->
+                    <TextBlock Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="3,0,5,0" Foreground="{DynamicResource Element.Foreground.Medium}"
+                               Text="{DynamicResource S.SaveAs.KGySoft.Quantizer.PaletteSize}" ToolTip="{DynamicResource S.SaveAs.KGySoft.Quantizer.PaletteSize.Info}"
+                               Visibility="{Binding ElementName=QuantizersComboBox, Path=SelectedItem.(vm:QuantizerDescriptor.HasMaxColors), Converter={StaticResource Bool2Visibility}}"/>
+                    <c:IntegerUpDown Grid.Row="4" Grid.Column="1" Margin="3" TextAlignment="Right" Minimum="2" Maximum="256" StepValue="1" Value="{Binding PaletteSize, Mode=TwoWay}"
+                                     ToolTip="{DynamicResource S.SaveAs.KGySoft.Quantizer.PaletteSize.Info}"
+                                     Visibility="{Binding ElementName=QuantizersComboBox, Path=SelectedItem.(vm:QuantizerDescriptor.HasMaxColors), Converter={StaticResource Bool2Visibility}}"/>
+
+                    <!--Bit Level-->
+                    <c:ExtendedCheckBox Grid.Row="5" Grid.Column="0" Margin="3,8,5,8" Text="{DynamicResource S.SaveAs.KGySoft.Quantizer.CustomBitLevel}"
+                                        ToolTip="{DynamicResource S.SaveAs.KGySoft.Quantizer.CustomBitLevel.Info}" IsChecked="{Binding IsCustomBitLevel}"
+                                        Visibility="{Binding ElementName=QuantizersComboBox, Path=SelectedItem.(vm:QuantizerDescriptor.HasBitLevel), Converter={StaticResource Bool2Visibility}}"/>
+                    <Slider Grid.Row="5" Grid.Column="1" Margin="0,3" TickPlacement="BottomRight" AutoToolTipPlacement="TopLeft"
+                            Minimum="1" Maximum="8" TickFrequency="1" Value="{Binding BitLevel}" SmallChange="1" LargeChange="32"
+                            ToolTip="{DynamicResource S.SaveAs.KGySoft.Quantizer.BitLevel.Info}">
+                        <Slider.Visibility>
+                            <MultiBinding Converter="{StaticResource BoolAndToVisibility}">
+                                <Binding ElementName="QuantizersComboBox" Path="SelectedItem.(vm:QuantizerDescriptor.HasBitLevel)"/>
+                                <Binding Path="IsCustomBitLevel"/>
+                            </MultiBinding>
+                        </Slider.Visibility>
+                    </Slider>
+                </Grid>
+            </StackPanel>
+        </GroupBox>
+
+        <!--Ditherer-->
+        <GroupBox>
+            <GroupBox.Header>
+                <c:ExtendedCheckBox Text="{DynamicResource S.SaveAs.KGySoft.Ditherer}" IsChecked="{Binding UseDitherer}" Margin="0,0,-10,0"/>
+            </GroupBox.Header>
+            
+            <StackPanel IsEnabled="{Binding UseDitherer}">
+                <!--Selectable ditherers-->
+                <ComboBox Name="DithererComboBox" Height="38" Margin="3" ItemsSource="{Binding Ditherers}"
+                          SelectedValue="{Binding DithererId}" SelectedValuePath="Id" ItemTemplate="{StaticResource Template.ComboBox.SimpleNoIcon}"/>
+
+                <!--Ditherer Options-->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="45"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--Strength-->
+                    <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="3,0,5,0" Foreground="{DynamicResource Element.Foreground.Medium}"
+                               Text="{DynamicResource S.SaveAs.KGySoft.Ditherer.Strength}" ToolTip="{DynamicResource S.SaveAs.KGySoft.Ditherer.Strength.Info}"
+                               Visibility="{Binding ElementName=DithererComboBox, Path=SelectedItem.(vm:DithererDescriptor.HasStrength), Converter={StaticResource Bool2Visibility}}"/>
+                    <Slider Grid.Row="0" Grid.Column="1" Margin="0,3" TickPlacement="BottomRight" Minimum="0" Maximum="1" TickFrequency="0.1"
+                            Value="{Binding Strength}" SmallChange="0.01" LargeChange="0.25" ToolTip="{DynamicResource S.SaveAs.KGySoft.Ditherer.Strength.Info}"
+                            Visibility="{Binding ElementName=DithererComboBox, Path=SelectedItem.(vm:DithererDescriptor.HasStrength), Converter={StaticResource Bool2Visibility}}"/>
+                    <!--Issue: StringFormat cannot be a DynamicResource-->
+                    <TextBlock Grid.Row="0" Grid.Column="2" Margin="0,0,3,0" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}" Text="{Binding Strength, StringFormat=#0.##%;;Auto}"
+                               Visibility="{Binding ElementName=DithererComboBox, Path=SelectedItem.(vm:DithererDescriptor.HasStrength), Converter={StaticResource Bool2Visibility}}"/>
+
+                    <!--Seed-->
+                    <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="3,0,5,0" Foreground="{DynamicResource Element.Foreground.Medium}"
+                               ToolTip="{DynamicResource S.SaveAs.KGySoft.Ditherer.Seed.Info}" Text="{DynamicResource S.SaveAs.KGySoft.Ditherer.Seed}"
+                               Visibility="{Binding ElementName=DithererComboBox, Path=SelectedItem.(vm:DithererDescriptor.HasSeed), Converter={StaticResource Bool2Visibility}}"/>
+                    <c:NullableIntegerBox Grid.Row="1" Grid.Column="1" Margin="5,3" Value="{Binding Seed, Mode=TwoWay}" ToolTip="{DynamicResource S.SaveAs.KGySoft.Ditherer.Seed.Info}"
+                                          Visibility="{Binding ElementName=DithererComboBox, Path=SelectedItem.(vm:DithererDescriptor.HasSeed), Converter={StaticResource Bool2Visibility}}"/>
+
+                    <!--Serpentine Processing-->
+                    <c:ExtendedCheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="5,3,3,3" Text="{DynamicResource S.SaveAs.KGySoft.Ditherer.IsSerpentineProcessing}"
+                                        ToolTip="{DynamicResource S.SaveAs.KGySoft.Ditherer.IsSerpentineProcessing.Info}" IsChecked="{Binding IsSerpentineProcessing}"
+                                        Visibility="{Binding ElementName=DithererComboBox, Path=SelectedItem.(vm:DithererDescriptor.HasSerpentineProcessing), Converter={StaticResource Bool2Visibility}}"/>
+                </Grid>
+            </StackPanel>
+        </GroupBox>
+
+        <!--Preview-->
+        <GroupBox Header="{DynamicResource S.SaveAs.KGySoft.Preview}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" MinHeight="16"/>
+                </Grid.RowDefinitions>
+
+                <c:ExtendedCheckBox Grid.Row="0" Margin="3" Text="{DynamicResource S.SaveAs.KGySoft.Preview.ShowCurrentFrame}"
+                                    ToolTip="{DynamicResource S.SaveAs.KGySoft.Preview.ShowCurrentFrame.Info}" IsChecked="{Binding ShowCurrentFrame}"/>
+
+                <!--Tried to use ZoomBox and FrameViewer, none of them worked well. Some zoomable solution would be preferable-->
+                <Image Grid.Row="1" Source="{Binding PreviewImage, Mode=OneWay}" RenderOptions.BitmapScalingMode="HighQuality"/>
+                <DockPanel Grid.Row="1" LastChildFill="False">
+                    <ProgressBar DockPanel.Dock="Bottom" Height="4" Margin="10,0" IsIndeterminate="True"
+                                 Visibility="{Binding IsGenerating, Converter={StaticResource Bool2Visibility}}"/>
+                </DockPanel>
+                
+                <Label Grid.Row="1" Template="{StaticResource WarningLabel}" Content="{DynamicResource S.SaveAs.KGySoft.Preview.Refresh}"
+                       Visibility="{Binding ShowRefreshPreview, Converter={StaticResource Bool2Visibility}}" PreviewMouseLeftButtonUp="RefreshPreview_Click"/>
+                <Label Grid.Row="1" Template="{StaticResource ErrorLabel}" Content="{Binding PreviewError}"
+                       Visibility="{Binding PreviewError, Converter={StaticResource ContentToVisibility}}" PreviewMouseLeftButtonUp="RefreshPreview_Click"/>
+            </Grid>
+        </GroupBox>
+
+        <!--Animation Settings-->
+        <GroupBox Header="{DynamicResource S.SaveAs.KGySoft.Animation}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!--Repeat Count-->
+                <c:ExtendedCheckBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="3" Text="{DynamicResource S.SaveAs.KGySoft.Animation.EndlessLoop}"
+                                    ToolTip="{DynamicResource S.SaveAs.KGySoft.Animation.EndlessLoop.Info}" IsChecked="{Binding EndlessLoop}"/>
+                <c:ExtendedCheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalContentAlignment="Center" Margin="15,3,5,3"
+                                    Text="{DynamicResource S.SaveAs.KGySoft.Animation.PingPong}" ToolTip="{DynamicResource S.SaveAs.KGySoft.Animation.PingPong.Info}"
+                                    IsChecked="{Binding PingPong}" Visibility="{Binding EndlessLoop, Converter={StaticResource Bool2Visibility}}"/>
+                
+                <TextBlock Grid.Row="1" Grid.Column="0" Margin="15,5,3,5" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"
+                           Text="{DynamicResource S.SaveAs.KGySoft.Animation.LoopCount}" ToolTip="{DynamicResource S.SaveAs.KGySoft.Animation.LoopCount.Info}"
+                           Visibility="{Binding EndlessLoop, Converter={StaticResource InvertedBoolToVisibility}}"/>
+                <c:IntegerUpDown Grid.Row="1" Grid.Column="1" Margin="5,3" TextAlignment="Right" Minimum="1" Maximum="65535" StepValue="1"
+                                 ToolTip="{DynamicResource S.SaveAs.KGySoft.Animation.LoopCount.Info}" Visibility="{Binding EndlessLoop, Converter={StaticResource InvertedBoolToVisibility}}"/>
+
+                <!--Allow Delta Frames-->
+                <c:ExtendedCheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="3" Text="{DynamicResource S.SaveAs.KGySoft.Animation.AllowDeltaFrames}"
+                                    ToolTip="{DynamicResource S.SaveAs.KGySoft.Animation.AllowDeltaFrames.Info}" IsChecked="{Binding AllowDeltaFrames}"/>
+                <TextBlock Grid.Row="3" Grid.Column="0" Margin="15,5,3,5" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"
+                           Text="{DynamicResource S.SaveAs.KGySoft.Animation.DeltaTolerance}" ToolTip="{DynamicResource S.SaveAs.KGySoft.Animation.DeltaTolerance.Info}"
+                           Visibility="{Binding AllowDeltaFrames, Converter={StaticResource Bool2Visibility}}"/>
+                
+                <Slider Grid.Row="3" Grid.Column="1" Margin="5,3" TickPlacement="BottomRight" AutoToolTipPlacement="TopLeft"
+                        Minimum="0" Maximum="255" TickFrequency="32" Value="{Binding DeltaTolerance}" SmallChange="1" LargeChange="32"
+                        ToolTip="{DynamicResource S.SaveAs.KGySoft.Animation.DeltaTolerance.Info}" Visibility="{Binding AllowDeltaFrames, Converter={StaticResource Bool2Visibility}}"/>
+                <Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="20,3,10,3" Template="{StaticResource WarningLabel}"
+                       Content="{DynamicResource S.SaveAs.KGySoft.Animation.HighDeltaTolerance}"
+                       PreviewMouseLeftButtonUp="HighDeltaToleranceLabel_Click"
+                       Visibility="{Binding IsHighTolerance, Converter={StaticResource Bool2Visibility}}"/>
+
+                <!--Allow Clipped Frames-->
+                <c:ExtendedCheckBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="3" Text="{DynamicResource S.SaveAs.KGySoft.Animation.AllowClippedFrames}"
+                                    ToolTip="{DynamicResource S.SaveAs.KGySoft.Animation.AllowClippedFrames.Info}" IsChecked="{Binding AllowClippedFrames}"/> 
+                <Label Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Margin="3" Template="{StaticResource InfoLabel}"
+                       Content="{DynamicResource S.SaveAs.KGySoft.Animation.AllowDeltaIgnored}" Visibility="{Binding IsAllowDeltaIgnored, Converter={StaticResource Bool2Visibility}}"
+                       PreviewMouseLeftButtonUp="AllowDeltaIgnoredLabel_Click"/>
+                <Label Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Margin="3" Template="{StaticResource InfoLabel}"
+                       Content="{DynamicResource S.SaveAs.KGySoft.Animation.AllowClippedIgnored}"
+                       Visibility="{Binding IsAllowClippedIgnored, Converter={StaticResource Bool2Visibility}}"
+                       PreviewMouseLeftButtonUp="AllowClippedIgnoredLabel_Click"/>
+            </Grid>
+        </GroupBox>
+    </StackPanel>
+</UserControl>

@@ -80,6 +80,19 @@ public class BaseScreenRecorder : BaseRecorder
         }
     }
 
+    internal int GetTriggerDelay()
+    {
+        switch (UserSettings.All.CaptureFrequency)
+        {
+            case CaptureFrequencies.Interaction:
+                return UserSettings.All.TriggerDelayInteraction;
+            case CaptureFrequencies.Manual:
+                return UserSettings.All.TriggerDelayManual;
+            default:
+                return 0;
+        }
+    }
+
     internal int GetCaptureInterval()
     {
         switch (UserSettings.All.CaptureFrequency)

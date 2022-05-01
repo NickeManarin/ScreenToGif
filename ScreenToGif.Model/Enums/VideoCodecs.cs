@@ -40,5 +40,14 @@ public enum VideoCodecs
     Vp8,
 
     [Description("libvpx-vp9")]
-    Vp9
+    Vp9,
+
+    [Description("libaom-av1")]
+    LibAom,
+
+    [Description("libsvtav1")]
+    SvtAv1,
+
+    [Description("librav1e")]
+    Rav1E,
 }

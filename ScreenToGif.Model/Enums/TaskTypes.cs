@@ -3,7 +3,7 @@ namespace ScreenToGif.Domain.Enums;
 public enum TaskTypes
 {
     NotDeclared = 0,
-    MouseClicks = 1,
+    MouseEvents = 1,
     KeyStrokes = 2,
     Delay = 3,
     Progress = 4,

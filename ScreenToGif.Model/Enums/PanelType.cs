@@ -69,9 +69,9 @@ public enum PanelTypes
     RemoveDuplicates = 13,
 
     /// <summary>
-    /// Mouse Clicks Panel.
+    /// Mouse Events Panel.
     /// </summary>
-    MouseClicks = 14,
+    MouseEvents = 14,
 
     /// <summary>
     /// Smooth Loop Panel.

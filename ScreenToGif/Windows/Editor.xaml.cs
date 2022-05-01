@@ -2457,25 +2457,19 @@ namespace ScreenToGif.Windows
         }
 
 
-        private void MouseClicks_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void MouseEvents_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             Pause();
-            ShowPanel(PanelTypes.MouseClicks, LocalizationHelper.Get("S.Editor.Image.Clicks", true), "Vector.Cursor", ApplyMouseClicksButton_Click);
+            ShowPanel(PanelTypes.MouseEvents, LocalizationHelper.Get("S.Editor.Image.MouseEvents", true), "Vector.Cursor", ApplyMouseEventsButton_Click);
         }
 
-        private async void ApplyMouseClicksButton_Click(object sender, RoutedEventArgs e)
+        private async void ApplyMouseEventsButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Project.Frames.All(x => x.ButtonClicked == MouseButtons.None))
-            {
-                StatusList.Warning(LocalizationHelper.Get("S.MouseClicks.Warning.None"));
-                return;
-            }
-
             ActionStack.SaveState(ActionStack.EditAction.ImageAndProperties, Project.Frames, Util.Other.ListOfIndexes(0, Project.Frames.Count));
 
             Cursor = Cursors.AppStarting;
 
-            await Task.Run(() => MouseClicksAsync(MouseClicksViewModel.FromSettings()));
+            await Task.Run(() => MouseEventsAsync(MouseEventsViewModel.FromSettings()));
             
             await LoadSelectedStarter(0, Project.Frames.Count - 1);
 
@@ -3490,10 +3484,10 @@ namespace ScreenToGif.Windows
                             {
                                 switch (task.TaskType)
                                 {
-                                    case TaskTypes.MouseClicks:
+                                    case TaskTypes.MouseEvents:
                                     {
                                         if (Project.CreatedBy == ProjectByType.ScreenRecorder)
-                                            MouseClicksAsync(task as MouseClicksViewModel ?? MouseClicksViewModel.FromSettings());
+                                            MouseEventsAsync(task as MouseEventsViewModel ?? MouseEventsViewModel.FromSettings());
 
                                         break;
                                     }
@@ -4549,6 +4543,14 @@ namespace ScreenToGif.Windows
                     selectionCountBinding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
                     BindingOperations.SetBinding(grid, ExportPanel.SelectionCountProperty, selectionCountBinding);
 
+                    var currentFrameBinding = new Binding
+                    {
+                        //Path = new PropertyPath("Frames[CurrentIndex]"), // I don't really get why data context is already a FrameViewModel here instead of the EditorViewModel but it means we need no Path
+                        Mode = BindingMode.OneWay,
+                        UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged,
+                    };
+                    BindingOperations.SetBinding(grid, ExportPanel.CurrentFrameProperty, currentFrameBinding);
+
                     CustomContentControl.Content = grid;
                     CustomContentControl.Visibility = Visibility.Visible;
 
@@ -4716,8 +4718,8 @@ namespace ScreenToGif.Windows
                     RemoveDuplicatesGrid.Visibility = Visibility.Visible;
                     ShowHint("S.Hint.ApplyAll", true);
                     break;
-                case PanelTypes.MouseClicks:
-                    MouseClicksGrid.Visibility = Visibility.Visible;
+                case PanelTypes.MouseEvents:
+                    MouseEventsGrid.Visibility = Visibility.Visible;
                     ShowHint("S.Hint.ApplyAll", true);
                     break;
                 case PanelTypes.SmoothLoop:
@@ -6141,32 +6143,35 @@ namespace ScreenToGif.Windows
             {
                 var removeIndex = removeList[i];
 
-                if (mode == ReduceDelayModes.Previous || factor == 1)
+                if (mode != ReduceDelayModes.DontAdjust)
                 {
-                    //Simply stacks the delay of the removed frames to the previous frame;
-                    Project.Frames[removeIndex - 1].Delay += Project.Frames[removeIndex].Delay;
-                }
-                else if (mode == ReduceDelayModes.Evenly)
-                {
-                    if (i == removeList.Count - 1 || removeList[i] + 1 == removeList[i + 1])
+                    if (mode == ReduceDelayModes.Previous || factor == 1)
                     {
-                        //Store the delay of the frames being removed.
-                        delayRemoved += Project.Frames[removeIndex].Delay;
+                        //Simply stacks the delay of the removed frames to the previous frame;
+                        Project.Frames[removeIndex - 1].Delay += Project.Frames[removeIndex].Delay;
                     }
-                    else
+                    else if (mode == ReduceDelayModes.Evenly)
                     {
-                        if (delayRemoved > 0)
+                        if (i == removeList.Count - 1 || removeList[i] + 1 == removeList[i + 1])
                         {
-                            //Calculate the size of the remaining section (this is the factor, the number of frames not being removed in each section).
-                            var size = removeList[i + 1] - removeList[i] - 1;
-
-                            //Spread evenly the accumulated delay among the remaining frames.
-                            for (var r = removeList[i + 1] - 1; r > removeList[i]; r--)
-                                Project.Frames[r].Delay += delayRemoved / size; //Some information may be lost due to rounding.
+                            //Store the delay of the frames being removed.
+                            delayRemoved += Project.Frames[removeIndex].Delay;
                         }
+                        else
+                        {
+                            if (delayRemoved > 0)
+                            {
+                                //Calculate the size of the remaining section (this is the factor, the number of frames not being removed in each section).
+                                var size = removeList[i + 1] - removeList[i] - 1;
 
-                        //Start again the accumulation for this block of frames being removed.
-                        delayRemoved = Project.Frames[removeIndex].Delay;
+                                //Spread evenly the accumulated delay among the remaining frames.
+                                for (var r = removeList[i + 1] - 1; r > removeList[i]; r--)
+                                    Project.Frames[r].Delay += delayRemoved / size; //Some information may be lost due to rounding.
+                            }
+
+                            //Start again the accumulation for this block of frames being removed.
+                            delayRemoved = Project.Frames[removeIndex].Delay;
+                        }
                     }
                 }
 
@@ -6602,7 +6607,7 @@ namespace ScreenToGif.Windows
             return selectedList;
         }
 
-        private void MouseClicksAsync(MouseClicksViewModel model)
+        private void MouseEventsAsync(MouseEventsViewModel model)
         {
             Dispatcher.Invoke(() =>
             {
@@ -6613,12 +6618,36 @@ namespace ScreenToGif.Windows
 
             var auxList = Project.Frames.CopyList();
 
-            var leftClickSolidColorBrush = new SolidColorBrush(model.LeftButtonForegroundColor);
-            leftClickSolidColorBrush.Freeze();
-            var rightClickSolidColorBrush = new SolidColorBrush(model.RightButtonForegroundColor);
-            rightClickSolidColorBrush.Freeze();
-            var middleClickSolidColorBrush = new SolidColorBrush(model.MiddleButtonForegroundColor);
-            middleClickSolidColorBrush.Freeze();
+            // Initialize brushes.
+            var brushesByMouseButton = new Dictionary<MouseButtons, SolidColorBrush>();
+
+            if (model.HighlightForegroundColor.A != 0)
+            {
+                var highlightSolidBrush = new SolidColorBrush(model.HighlightForegroundColor);
+                highlightSolidBrush.Freeze();
+                brushesByMouseButton.Add(MouseButtons.None, highlightSolidBrush);
+            }
+
+            if (model.LeftButtonForegroundColor.A != 0)
+            {
+                var leftClickSolidColorBrush = new SolidColorBrush(model.LeftButtonForegroundColor);
+                leftClickSolidColorBrush.Freeze();
+                brushesByMouseButton.Add(MouseButtons.Left, leftClickSolidColorBrush);
+            }
+
+            if (model.RightButtonForegroundColor.A != 0)
+            {
+                var rightClickSolidColorBrush = new SolidColorBrush(model.RightButtonForegroundColor);
+                rightClickSolidColorBrush.Freeze();
+                brushesByMouseButton.Add(MouseButtons.Right, rightClickSolidColorBrush);
+            }
+
+            if (model.MiddleButtonForegroundColor.A != 0)
+            {
+                var middleClickSolidColorBrush = new SolidColorBrush(model.MiddleButtonForegroundColor);
+                middleClickSolidColorBrush.Freeze();
+                brushesByMouseButton.Add(MouseButtons.Middle, middleClickSolidColorBrush);
+            }
 
             var count = 0;
             foreach (var frame in auxList)
@@ -6629,35 +6658,22 @@ namespace ScreenToGif.Windows
                 if (frame.ButtonClicked == MouseButtons.None || frame.CursorX == int.MinValue)
                 {
                     UpdateProgress(count++);
+                }
+
+                SolidColorBrush brush = null;
+                if (!brushesByMouseButton.TryGetValue(frame.ButtonClicked, out brush))
+                {
                     continue;
                 }
 
                 var image = frame.Path.SourceFrom();
                 var scale = Math.Round(image.DpiX / 96d, 2);
-
                 var drawingVisual = new DrawingVisual();
                 using (var drawingContext = drawingVisual.RenderOpen())
                 {
-                    drawingContext.DrawImage(image, new Rect(0, 0, image.Width, image.Height)); // - UserSettings.All.MouseClicksWidth/2d   // - UserSettings.All.MouseClicksHeight/2d
-
-                    SolidColorBrush brush = null;
-                    switch (frame.ButtonClicked)
-                    {
-                        case MouseButtons.Left:
-                            brush = leftClickSolidColorBrush;
-                            break;
-                        case MouseButtons.Right:
-                            brush = rightClickSolidColorBrush;
-                            break;
-                        case MouseButtons.Middle:
-                            brush = middleClickSolidColorBrush;
-                            break;
-                    }
-
+                    drawingContext.DrawImage(image, new Rect(0, 0, image.Width, image.Height));
                     drawingContext.DrawEllipse(brush, null, new Point(frame.CursorX / scale, frame.CursorY / scale), model.Width, model.Height);
                 }
-
-                //KeyStrokesOverlayGrid.GetScaledRender(ZoomBoxControl.ScaleDiff, ZoomBoxControl.ImageDpi, ZoomBoxControl.GetImageSize());
 
                 //Converts the Visual (DrawingVisual) into a BitmapSource.
                 var bmp = new RenderTargetBitmap(image.PixelWidth, image.PixelHeight, image.DpiX, image.DpiY, PixelFormats.Pbgra32);

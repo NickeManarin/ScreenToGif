@@ -434,6 +434,19 @@
         </Grid>
     </DataTemplate>
 
+    <DataTemplate x:Key="Template.ComboBox.SimpleNoIcon">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="{Binding Title}" Margin="10,0,2,0" Foreground="{DynamicResource Element.Foreground.Medium}" VerticalAlignment="Center"/>
+            <TextBlock Grid.Row="1" Text="{Binding Description}" Margin="10,0,2,0" Foreground="{DynamicResource Element.Foreground.Gray112}" 
+                       TextTrimming="CharacterEllipsis" FontSize="11" VerticalAlignment="Center"/>
+        </Grid>
+    </DataTemplate>
+
     <DataTemplate x:Key="Template.ComboBox.Item">
         <Grid>
             <Grid.ColumnDefinitions>

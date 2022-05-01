@@ -7,6 +7,7 @@ using ScreenToGif.Domain.Interfaces;
 using ScreenToGif.Util;
 using ScreenToGif.Util.Extensions;
 using ScreenToGif.Util.Settings;
+using ScreenToGif.ViewModel;
 using ScreenToGif.ViewModel.ExportPresets;
 using ScreenToGif.ViewModel.ExportPresets.AnimatedImage.Apng;
 using ScreenToGif.ViewModel.ExportPresets.AnimatedImage.Gif;
@@ -51,6 +52,7 @@ public partial class ExportPanel : UserControl, IPanel
 
     public static readonly DependencyProperty TotalTimeProperty = DependencyProperty.Register(nameof(TotalTime), typeof(TimeSpan), typeof(ExportPanel), new PropertyMetadata(default(TimeSpan)));
 
+    public static readonly DependencyProperty CurrentFrameProperty = DependencyProperty.Register(nameof(CurrentFrame), typeof(FrameViewModel), typeof(ExportPanel), new PropertyMetadata(default(FrameViewModel)));
 
     public ExportPreset CurrentPreset
     {
@@ -74,6 +76,12 @@ public partial class ExportPanel : UserControl, IPanel
     {
         get => (TimeSpan)GetValue(TotalTimeProperty);
         set => SetValue(TotalTimeProperty, value);
+    }
+
+    public FrameViewModel CurrentFrame
+    {
+        get => (FrameViewModel)GetValue(CurrentFrameProperty);
+        set => SetValue(CurrentFrameProperty, value);
     }
 
     #endregion
@@ -192,6 +200,7 @@ public partial class ExportPanel : UserControl, IPanel
         {
             case ExportFormats.Apng:
                 EncoderScreenToGifItem.IsEnabled = true;
+                EncoderKGySoftItem.IsEnabled = false;
                 EncoderFfmpegItem.IsEnabled = true;
                 EncoderGifskiItem.IsEnabled = false;
                 EncoderSystemItem.IsEnabled = false;
@@ -199,6 +208,7 @@ public partial class ExportPanel : UserControl, IPanel
                 break;
             case ExportFormats.Gif:
                 EncoderScreenToGifItem.IsEnabled = true;
+                EncoderKGySoftItem.IsEnabled = true;
                 EncoderFfmpegItem.IsEnabled = true;
                 EncoderGifskiItem.IsEnabled = Environment.Is64BitProcess;
                 EncoderSystemItem.IsEnabled = true;
@@ -206,6 +216,7 @@ public partial class ExportPanel : UserControl, IPanel
                 break;
             case ExportFormats.Webp:
                 EncoderScreenToGifItem.IsEnabled = false;
+                EncoderKGySoftItem.IsEnabled = false;
                 EncoderFfmpegItem.IsEnabled = true;
                 EncoderGifskiItem.IsEnabled = false;
                 EncoderSystemItem.IsEnabled = false;
@@ -215,6 +226,7 @@ public partial class ExportPanel : UserControl, IPanel
 
             case ExportFormats.Avi:
                 EncoderScreenToGifItem.IsEnabled = false;
+                EncoderKGySoftItem.IsEnabled = false;
                 EncoderFfmpegItem.IsEnabled = true;
                 EncoderGifskiItem.IsEnabled = false;
                 EncoderSystemItem.IsEnabled = false;
@@ -222,6 +234,7 @@ public partial class ExportPanel : UserControl, IPanel
                 break;
             case ExportFormats.Mkv:
                 EncoderScreenToGifItem.IsEnabled = false;
+                EncoderKGySoftItem.IsEnabled = false;
                 EncoderFfmpegItem.IsEnabled = true;
                 EncoderGifskiItem.IsEnabled = false;
                 EncoderSystemItem.IsEnabled = false;
@@ -229,6 +242,7 @@ public partial class ExportPanel : UserControl, IPanel
                 break;
             case ExportFormats.Mov:
                 EncoderScreenToGifItem.IsEnabled = false;
+                EncoderKGySoftItem.IsEnabled = false;
                 EncoderFfmpegItem.IsEnabled = true;
                 EncoderGifskiItem.IsEnabled = false;
                 EncoderSystemItem.IsEnabled = false;
@@ -236,6 +250,7 @@ public partial class ExportPanel : UserControl, IPanel
                 break;
             case ExportFormats.Mp4:
                 EncoderScreenToGifItem.IsEnabled = false;
+                EncoderKGySoftItem.IsEnabled = false;
                 EncoderFfmpegItem.IsEnabled = true;
                 EncoderGifskiItem.IsEnabled = false;
                 EncoderSystemItem.IsEnabled = false;
@@ -243,6 +258,7 @@ public partial class ExportPanel : UserControl, IPanel
                 break;
             case ExportFormats.Webm:
                 EncoderScreenToGifItem.IsEnabled = false;
+                EncoderKGySoftItem.IsEnabled = false;
                 EncoderFfmpegItem.IsEnabled = true;
                 EncoderGifskiItem.IsEnabled = false;
                 EncoderSystemItem.IsEnabled = false;
@@ -252,6 +268,7 @@ public partial class ExportPanel : UserControl, IPanel
 
             case ExportFormats.Jpeg:
                 EncoderScreenToGifItem.IsEnabled = true;
+                EncoderKGySoftItem.IsEnabled = false;
                 EncoderFfmpegItem.IsEnabled = false;
                 EncoderGifskiItem.IsEnabled = false;
                 EncoderSystemItem.IsEnabled = false;
@@ -259,6 +276,7 @@ public partial class ExportPanel : UserControl, IPanel
                 break;
             case ExportFormats.Png:
                 EncoderScreenToGifItem.IsEnabled = true;
+                EncoderKGySoftItem.IsEnabled = false;
                 EncoderFfmpegItem.IsEnabled = false;
                 EncoderGifskiItem.IsEnabled = false;
                 EncoderSystemItem.IsEnabled = false;
@@ -266,6 +284,7 @@ public partial class ExportPanel : UserControl, IPanel
                 break;
             case ExportFormats.Bmp:
                 EncoderScreenToGifItem.IsEnabled = true;
+                EncoderKGySoftItem.IsEnabled = false;
                 EncoderFfmpegItem.IsEnabled = false;
                 EncoderGifskiItem.IsEnabled = false;
                 EncoderSystemItem.IsEnabled = false;
@@ -275,6 +294,7 @@ public partial class ExportPanel : UserControl, IPanel
 
             case ExportFormats.Stg:
                 EncoderScreenToGifItem.IsEnabled = true;
+                EncoderKGySoftItem.IsEnabled = false;
                 EncoderFfmpegItem.IsEnabled = false;
                 EncoderGifskiItem.IsEnabled = false;
                 EncoderSystemItem.IsEnabled = false;
@@ -282,6 +302,7 @@ public partial class ExportPanel : UserControl, IPanel
                 break;
             case ExportFormats.Psd:
                 EncoderScreenToGifItem.IsEnabled = true;
+                EncoderKGySoftItem.IsEnabled = false;
                 EncoderFfmpegItem.IsEnabled = false;
                 EncoderGifskiItem.IsEnabled = false;
                 EncoderSystemItem.IsEnabled = false;
@@ -303,7 +324,7 @@ public partial class ExportPanel : UserControl, IPanel
 
         //Ignore unsupported profiles.
         if (!Environment.Is64BitProcess)
-            search = search.Where(tp => !(tp is GifskiGifPreset));
+            search = search.Where(tp => tp is not GifskiGifPreset);
 
         var list = search.ToList();
 
@@ -370,6 +391,7 @@ public partial class ExportPanel : UserControl, IPanel
             case ExportFormats.Gif:
             {
                 AddDistinct(presets, EmbeddedGifPreset.Defaults);
+                AddDistinct(presets, KGySoftGifPreset.Defaults);
                 AddDistinct(presets, FfmpegGifPreset.Defaults);
 
                 //Gifski only runs on x64.
@@ -502,7 +524,7 @@ public partial class ExportPanel : UserControl, IPanel
 
     private void AdjustCodecs(ExportPreset preset)
     {
-        if (!(preset is VideoPreset videoPreset))
+        if (preset is not VideoPreset videoPreset)
             return;
 
         FfmpegCodecComboBox.SelectionChanged -= FfmpegCodecComboBox_SelectionChanged;
@@ -535,7 +557,10 @@ public partial class ExportPanel : UserControl, IPanel
                         new HevcNvenc(),
                         new HevcQsv(),
                         new Vp8(),
-                        new Vp9()
+                        new Vp9(),
+                        new LibAom(),
+                        new SvtAv1(),
+                        new Rav1E()
                     };
                 }
                 else
@@ -545,7 +570,10 @@ public partial class ExportPanel : UserControl, IPanel
                         new X264(),
                         new X265(),
                         new Vp8(),
-                        new Vp9()
+                        new Vp9(),
+                        new LibAom(),
+                        new SvtAv1(),
+                        new Rav1E()
                     };
                 }
 
@@ -584,7 +612,10 @@ public partial class ExportPanel : UserControl, IPanel
                 FfmpegCodecComboBox.ItemsSource = new List<VideoCodec>
                 {
                     new Vp8(),
-                    new Vp9()
+                    new Vp9(),
+                    new LibAom(),
+                    new SvtAv1(),
+                    new Rav1E()
                 };
 
                 break;
@@ -881,7 +912,7 @@ public partial class ExportPanel : UserControl, IPanel
         var firstLoad = CurrentPreset == null;
 
         //Hide all other grids.
-        foreach (var grid in EncoderGrid.Children.OfType<Grid>())
+        foreach (var grid in EncoderGrid.Children.Cast<UIElement>())
             grid.Visibility = Visibility.Collapsed;
 
         SetPresetAsLastSelected(selected);
@@ -920,7 +951,7 @@ public partial class ExportPanel : UserControl, IPanel
             //Animated images.
             case ExportFormats.Apng:
             {
-                if (!(selected is ApngPreset apngPreset))
+                if (selected is not ApngPreset apngPreset)
                     break;
 
                 switch (apngPreset.Encoder)
@@ -937,13 +968,16 @@ public partial class ExportPanel : UserControl, IPanel
             }
             case ExportFormats.Gif:
             {
-                if (!(selected is GifPreset gifPreset))
+                if (selected is not GifPreset gifPreset)
                     break;
 
                 switch (gifPreset.Encoder)
                 {
                     case EncoderTypes.ScreenToGif:
                         EmbeddedGifOptionsGrid.Visibility = Visibility.Visible;
+                        break;
+                    case EncoderTypes.KGySoft:
+                        KGySoftGifOptionsPanel.Visibility = Visibility.Visible;
                         break;
                     case EncoderTypes.System:
                         SystemGifOptionsGrid.Visibility = Visibility.Visible;
@@ -1066,7 +1100,7 @@ public partial class ExportPanel : UserControl, IPanel
     private void ResetPreset_Click(object sender, RoutedEventArgs e)
     {
         //Ask if the user really wants to reset the preset to its default settings.
-        if (!(PresetComboBox.SelectedItem is ExportPreset preset) || !Dialog.Ask(LocalizationHelper.Get("S.SaveAs.Presets.Ask.Reset.Title"), LocalizationHelper.Get("S.SaveAs.Presets.Ask.Reset.Instruction"),
+        if (PresetComboBox.SelectedItem is not ExportPreset preset || !Dialog.Ask(LocalizationHelper.Get("S.SaveAs.Presets.Ask.Reset.Title"), LocalizationHelper.Get("S.SaveAs.Presets.Ask.Reset.Instruction"),
                 LocalizationHelper.Get("S.SaveAs.Presets.Ask.Reset.Message")))
             return;
 
@@ -1083,7 +1117,7 @@ public partial class ExportPanel : UserControl, IPanel
 
     private void EncoderComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (!IsLoaded || EncoderGrid.Children.OfType<Grid>().All(a => a.Visibility == Visibility.Collapsed))
+        if (!IsLoaded || EncoderGrid.Children.Cast<UIElement>().All(a => a.Visibility == Visibility.Collapsed))
             return;
 
         if (EncoderComboBox.SelectedValue is not EncoderTypes encoder || encoder == CurrentPreset?.Encoder)
@@ -1233,6 +1267,18 @@ public partial class ExportPanel : UserControl, IPanel
                 videoPreset.PixelFormat = containsFormat ? pixelFormat : VideoPixelFormats.Yuv420p;
                 break;
             case VideoCodecs.Vp9:
+                videoPreset.CodecPreset = containsPreset ? codecPreset : VideoCodecPresets.Medium;
+                videoPreset.PixelFormat = containsFormat ? pixelFormat : VideoPixelFormats.Yuv420p;
+                break;
+            case VideoCodecs.LibAom:
+                videoPreset.CodecPreset = containsPreset ? codecPreset : VideoCodecPresets.None;
+                videoPreset.PixelFormat = containsFormat ? pixelFormat : VideoPixelFormats.Yuv420p;
+                break;
+            case VideoCodecs.SvtAv1:
+                videoPreset.CodecPreset = containsPreset ? codecPreset : VideoCodecPresets.Medium;
+                videoPreset.PixelFormat = containsFormat ? pixelFormat : VideoPixelFormats.Yuv420p;
+                break;
+            case VideoCodecs.Rav1E:
                 videoPreset.CodecPreset = containsPreset ? codecPreset : VideoCodecPresets.Medium;
                 videoPreset.PixelFormat = containsFormat ? pixelFormat : VideoPixelFormats.Yuv420p;
                 break;

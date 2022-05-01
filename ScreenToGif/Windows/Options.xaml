@@ -63,8 +63,8 @@
                     </Style>
                 </StackPanel.Resources>
 
-                <n:ExtendedRadioButton x:Name="AppRadio" Text="{DynamicResource S.Options.App}" Icon="{StaticResource Vector.Application}" IsChecked="True"/>
-                <n:ExtendedRadioButton x:Name="RecorderRadio" Text="{DynamicResource S.Options.Recorder}" Icon="{StaticResource Vector.Record}"/>
+                <n:ExtendedRadioButton x:Name="AppRadio" Text="{DynamicResource S.Options.App}" Icon="{StaticResource Vector.Application}"/>
+                <n:ExtendedRadioButton x:Name="RecorderRadio" Text="{DynamicResource S.Options.Recorder}" Icon="{StaticResource Vector.Record}" IsChecked="True"/>
                 <n:ExtendedRadioButton x:Name="EditorRadio" Text="{DynamicResource S.Options.Editor}" Icon="{StaticResource Vector.Editor}"/>
                 <n:ExtendedRadioButton x:Name="AutomaticRadio" Text="{DynamicResource S.Options.Tasks}" Icon="{StaticResource Vector.Encoder}"/>
                 <n:ExtendedRadioButton x:Name="ShortcutsRadio" Text="{DynamicResource S.Options.Shortcuts}" Icon="{StaticResource Vector.Keyboard}"/>
@@ -507,7 +507,23 @@
                                     <n:IntegerUpDown Minimum="10" Maximum="25000" Value="{Binding Path=PlaybackDelayHour, Mode=TwoWay}" MinWidth="80" Visibility="{Binding ElementName=PerHourRadioButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource Bool2Visibility}}"/>
                                     <TextBlock Text="{DynamicResource S.Options.Recorder.Frequency.Playback.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center" TextWrapping="WrapWithOverflow" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
                                 </WrapPanel>
+                                
+                                <WrapPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="7" Margin="0,5,0,0"
+                                           Visibility="{Binding ElementName=InteractionRadioButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource Bool2Visibility}, FallbackValue=Collapsed}">
+                                    <TextBlock Text="{DynamicResource S.Options.Recorder.Frequency.Trigger}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,0" VerticalAlignment="Center"/>
+                                    <n:IntegerUpDown Minimum="0" Maximum="25000" Value="{Binding Path=TriggerDelayInteraction, Mode=TwoWay}" MinWidth="80" />
+                                    <TextBlock Text="{DynamicResource S.Options.Recorder.Frequency.Trigger.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center"
+                                               TextWrapping="WrapWithOverflow" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                                </WrapPanel>
 
+                                <WrapPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="7" Margin="0,5,0,0"
+                                           Visibility="{Binding ElementName=ManualRadioButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource Bool2Visibility}, FallbackValue=Collapsed}">
+                                    <TextBlock Text="{DynamicResource S.Options.Recorder.Frequency.Trigger}" Foreground="{DynamicResource Element.Foreground.Medium}" Padding="5,0" VerticalAlignment="Center"/>
+                                    <n:IntegerUpDown Minimum="0" Maximum="25000" Value="{Binding Path=TriggerDelayManual, Mode=TwoWay}" MinWidth="80" />
+                                    <TextBlock Text="{DynamicResource S.Options.Recorder.Frequency.Trigger.Info}" Padding="0" Margin="5,0,0,0" VerticalAlignment="Center"
+                                               TextWrapping="WrapWithOverflow" Foreground="{DynamicResource Element.Foreground.Gray150}"/>
+                                </WrapPanel>
+                                
                                 <n:ExtendedCheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="7" Text="{DynamicResource S.Options.Recorder.FixedFramerate}" 
                                                     Info="{DynamicResource S.Options.Recorder.FixedFramerate.Info}" Margin="5,3" VerticalAlignment="Top" IsChecked="{Binding Path=FixedFrameRate, Mode=TwoWay}"
                                                     Visibility="{Binding ElementName=PerSecondRadioButton, Path=IsChecked, Mode=OneWay, Converter={StaticResource Bool2Visibility}, FallbackValue=Collapsed}"/>
@@ -1152,7 +1168,7 @@
                             <n:ExtendedListBoxItem Image="{StaticResource Flag.Israel}" Tag="he" Content="Hebrew / עברי" Author="Elishy"
                                                    ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=he, Converter={StaticResource TagToSelection}}"/>
 
-                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Hungary}" Tag="hu" Content="Hungarian / Magyar" Author="László Földes"
+                            <n:ExtendedListBoxItem Image="{StaticResource Flag.Hungary}" Tag="hu" Content="Hungarian / Magyar" Author="László Földes, György Kőszeg"
                                                    ContentWidth="25" ContentHeight="25" IsSelected="{Binding LanguageCode, ConverterParameter=hu, Converter={StaticResource TagToSelection}}"/>
 
                             <n:ExtendedListBoxItem Image="{StaticResource Flag.Italy}" Tag="it" Content="Italian / Italiano" Author="HispidaBytes, Michele Locati, Giovanni Rinaldin"

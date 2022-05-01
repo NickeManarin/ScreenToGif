@@ -34,9 +34,10 @@ public partial class Downloader : Window
             case "gifski":
                 return "https://www.screentogif.com/downloads/Gifski.zip";
             case "ffmpeg":
-                return $"https://www.screentogif.com/downloads/FFmpeg-4.3.1-x{(Environment.Is64BitProcess ? "64" : "86")}.zip";
-            case "sharpdx":
-                return "https://www.screentogif.com/downloads/SharpDx.zip";
+            {
+                return Environment.Is64BitProcess ? "https://www.screentogif.com/downloads/FFmpeg-4.4.1-x64.zip" :
+                    "https://www.screentogif.com/downloads/FFmpeg-4.3.1-x86.zip";
+            }
         }
 
         return null;
@@ -114,6 +115,7 @@ public partial class Downloader : Window
 
                             entry?.ExtractToFile(Path.Combine(DestinationPath, entry.Name), true);
                         }
+
                         break;
                     }
                 }

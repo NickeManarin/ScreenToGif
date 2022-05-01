@@ -206,7 +206,7 @@ public class FrameInfo : IFrame
 
 
     /// <summary>
-    /// This works as a migration method for mouse clicks. Before storing the button
+    /// This works as a migration method for mouse events. Before storing the button
     /// type only bool was stored to mark the clicks. During opening old project it will
     /// be converted to Left mouse button click loosing some info unfortunately.
     /// </summary>

@@ -1351,8 +1351,11 @@ public partial class Options : Window, INotification
             //Save to a temp folder.
             var temp = Path.Combine(Path.GetTempPath(), Path.GetTempFileName());
 
+            var url = Environment.Is64BitProcess ? "https://www.screentogif.com/downloads/FFmpeg-4.4.1-x64.zip" :
+                    "https://www.screentogif.com/downloads/FFmpeg-4.3.1-x86.zip";
+
             using (var client = new WebClient { Proxy = WebHelper.GetProxy() })
-                await client.DownloadFileTaskAsync(new Uri(string.Format("https://www.screentogif.com/downloads/FFmpeg-4.3.1-x{0}.zip", Environment.Is64BitProcess ? "64" : "86")), temp);
+                await client.DownloadFileTaskAsync(new Uri(url), temp);
 
             using (var zip = ZipFile.Open(temp, ZipArchiveMode.Read))
             {
@@ -1675,7 +1678,7 @@ public partial class Options : Window, INotification
                 else
                 {
                     FfmpegImageCard.Status = ExtrasStatus.Available;
-                    FfmpegImageCard.Description = string.Format(LocalizationHelper.Get("S.Options.Extras.Download", "{0}"), "~ 24,6 MB");
+                    FfmpegImageCard.Description = string.Format(LocalizationHelper.Get("S.Options.Extras.Download", "{0}"), Environment.Is64BitProcess ? "~ 43 MB" : "~ 24,6 MB");
                 }
 
                 #endregion

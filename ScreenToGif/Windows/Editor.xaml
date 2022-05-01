@@ -289,7 +289,7 @@
 
         <CommandBinding Command="{StaticResource Command.FreeDrawing}" CanExecute="Image_CanExecute" Executed="FreeDrawing_Executed"/>
         <CommandBinding Command="{StaticResource Command.Shapes}" CanExecute="Image_CanExecute" Executed="Shapes_Executed"/>
-        <CommandBinding Command="{StaticResource Command.MouseClicks}" CanExecute="Image_CanExecute" Executed="MouseClicks_Executed"/>
+        <CommandBinding Command="{StaticResource Command.MouseEvents}" CanExecute="Image_CanExecute" Executed="MouseEvents_Executed"/>
         <CommandBinding Command="{StaticResource Command.Watermark}" CanExecute="Image_CanExecute" Executed="Watermark_Executed"/>
         <CommandBinding Command="{StaticResource Command.Border}" CanExecute="Image_CanExecute" Executed="Border_Executed"/>
         <CommandBinding Command="{StaticResource Command.Shadow}" CanExecute="Image_CanExecute" Executed="Shadow_Executed"/>
@@ -1125,8 +1125,8 @@
                                           ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
                                           ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
-                        <n:ExtendedButton Grid.Row="0" Grid.Column="3" Text="{DynamicResource S.Editor.Image.Clicks}" Icon="{StaticResource Vector.Cursor}"
-                                          MinWidth="55" ContentHeight="28" ContentWidth="32" Command="{StaticResource Command.MouseClicks}" Style="{StaticResource Style.Button.Vertical}"
+                        <n:ExtendedButton Grid.Row="0" Grid.Column="3" Text="{DynamicResource S.Editor.Image.MouseEvents}" Icon="{StaticResource Vector.Cursor}"
+                                          MinWidth="55" ContentHeight="28" ContentWidth="32" Command="{StaticResource Command.MouseEvents}" Style="{StaticResource Style.Button.Vertical}"
                                           ToolTip="{Binding Command, RelativeSource={RelativeSource Self}, Converter={StaticResource CommandToInputGestureText}}" 
                                           ToolTipService.Placement="Bottom" ToolTipService.HorizontalOffset="-5"/>
 
@@ -2897,7 +2897,7 @@
                             </Grid>
                         </Grid>
 
-                        <Grid x:Name="MouseClicksGrid" Visibility="Collapsed">
+                        <Grid x:Name="MouseEventsGrid" Visibility="Collapsed">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="27"/>
                                 <RowDefinition Height="Auto"/>
@@ -2908,6 +2908,7 @@
                             <n:LabelSeparator Grid.Row="0" Text="{DynamicResource S.Border.Appearance}"/>
                             <Grid Grid.Row="1" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
@@ -2948,40 +2949,44 @@
                                     <TextBlock Text="Rectangle" Tag="{StaticResource Vector.Rectangle}"/>
                                 </ComboBox>-->
 
-                                <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.MouseClicks.Color.Left}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                                <n:ColorBox Grid.Row="1" Grid.Column="1" x:Name="LeftButtonClickColor" Margin="10,5"
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource S.MouseHighlight.Color}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <n:ColorBox Grid.Row="1" Grid.Column="1" x:Name="MouseHighlightColor" Margin="10,5"
+                                            SelectedColor="{Binding Source={x:Static t:UserSettings.All}, Path=MouseHighlightColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.MouseClicks.Color.Left}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <n:ColorBox Grid.Row="2" Grid.Column="1" x:Name="LeftButtonClickColor" Margin="10,5"
                                             SelectedColor="{Binding Source={x:Static t:UserSettings.All}, Path=LeftMouseButtonClicksColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                                <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource S.MouseClicks.Color.Middle}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                                <n:ColorBox Grid.Row="2" Grid.Column="1" x:Name="MiddleButtonClickColor" Margin="10,5"
+                                <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource S.MouseClicks.Color.Middle}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <n:ColorBox Grid.Row="3" Grid.Column="1" x:Name="MiddleButtonClickColor" Margin="10,5"
                                             SelectedColor="{Binding Source={x:Static t:UserSettings.All}, Path=MiddleMouseButtonClicksColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                                <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource S.MouseClicks.Color.Right}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                                <n:ColorBox Grid.Row="3" Grid.Column="1" x:Name="RightButtonClickColor" Margin="10,5"
+                                <TextBlock Grid.Row="4" Grid.Column="0" Text="{DynamicResource S.MouseClicks.Color.Right}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <n:ColorBox Grid.Row="4" Grid.Column="1" x:Name="RightButtonClickColor" Margin="10,5"
                                             SelectedColor="{Binding Source={x:Static t:UserSettings.All}, Path=RightMouseButtonClicksColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                                <TextBlock Grid.Row="4" Grid.Column="0" Text="{DynamicResource S.FreeDrawing.Width}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                                <n:DoubleUpDown Grid.Row="4" Grid.Column="1" x:Name="ClickWidthDoubleUpDown" Minimum="1" Maximum="1000" Margin="10,5" MinWidth="70"
-                                                Value="{Binding Source={x:Static t:UserSettings.All}, Path=MouseClicksWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBlock Grid.Row="5" Grid.Column="0" Text="{DynamicResource S.FreeDrawing.Width}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <n:DoubleUpDown Grid.Row="5" Grid.Column="1" x:Name="ClickWidthDoubleUpDown" Minimum="1" Maximum="1000" Margin="10,5" MinWidth="70"
+                                                Value="{Binding Source={x:Static t:UserSettings.All}, Path=MouseEventsWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                                <TextBlock Grid.Row="5" Grid.Column="0" Text="{DynamicResource S.FreeDrawing.Height}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
-                                <n:DoubleUpDown Grid.Row="5" Grid.Column="1" x:Name="ClickHeightDoubleUpDown" Minimum="1" Maximum="1000" Margin="10,5" MinWidth="70"
-                                                Value="{Binding Source={x:Static t:UserSettings.All}, Path=MouseClicksHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBlock Grid.Row="6" Grid.Column="0" Text="{DynamicResource S.FreeDrawing.Height}" VerticalAlignment="Center" Foreground="{DynamicResource Element.Foreground.Medium}"/>
+                                <n:DoubleUpDown Grid.Row="6" Grid.Column="1" x:Name="ClickHeightDoubleUpDown" Minimum="1" Maximum="1000" Margin="10,5" MinWidth="70"
+                                                Value="{Binding Source={x:Static t:UserSettings.All}, Path=MouseEventsHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             </Grid>
                             <!--<n:LabelSeparator Grid.Row="2" Text="{DynamicResource S.Preview}"/>
                             <Grid Grid.Row="3" x:Name="PreviewGrid" Margin="10,5">
                                 <Viewbox x:Name="PreviewViewBox" Child="{StaticResource Vector.Cursor}" Height="20" Width="20" Stretch="Uniform">
                                     <Viewbox.Margin>
                                         <MultiBinding Converter="{StaticResource DoubleToThicknessConverter}">
-                                            <Binding Source="{x:Static t:UserSettings.All}" Path="MouseClicksWidth"/>
-                                            <Binding Source="{x:Static t:UserSettings.All}" Path="MouseClicksHeight"/>
+                                            <Binding Source="{x:Static t:UserSettings.All}" Path="MouseEventsWidth"/>
+                                            <Binding Source="{x:Static t:UserSettings.All}" Path="MouseEventsHeight"/>
                                         </MultiBinding>
                                     </Viewbox.Margin>
                                 </Viewbox>
 
                                 <Ellipse Fill="{Binding ElementName=MouseBackgroundColor, Path=SelectedBrush, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                         Width="{Binding Source={x:Static t:UserSettings.All}, Path=MouseClicksWidth, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                         Height="{Binding Source={x:Static t:UserSettings.All}, Path=MouseClicksHeight, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                         Width="{Binding Source={x:Static t:UserSettings.All}, Path=MouseEventsWidth, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                         Height="{Binding Source={x:Static t:UserSettings.All}, Path=MouseEventsHeight, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                          HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"/>
                             </Grid>-->
                         </Grid>

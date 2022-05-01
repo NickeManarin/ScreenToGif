@@ -458,4 +458,6 @@ internal static class ColorExtensions
 
         return colorsList;
     }
+
+    public static System.Drawing.Color ToDrawingColor(this Color color) => System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
 }

@@ -30,8 +30,8 @@ public class BaseTaskViewModel : BindableBase, IPersistent
         {
             switch (TaskType)
             {
-                case TaskTypes.MouseClicks:
-                    return LocalizationHelper.Get("S.Editor.Image.Clicks", true);
+                case TaskTypes.MouseEvents:
+                    return LocalizationHelper.Get("S.Editor.Image.MouseEvents", true);
                 case TaskTypes.KeyStrokes:
                     return LocalizationHelper.Get("S.Editor.Image.KeyStrokes", true);
                 case TaskTypes.Delay:

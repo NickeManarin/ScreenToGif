@@ -15,7 +15,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>2.36.0.0</ApplicationVersion>
+    <ApplicationVersion>2.37.0.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
@@ -104,11 +104,12 @@
     <EmbeddedResource Include="Resources\Style.css" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="KGySoft.Drawing" Version="6.3.2" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.2.222702">
+    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.3.310801">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Windows.Compatibility" Version="5.0.2" />
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="6.0.0" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="SharpDX.Direct3D11" Version="4.2.0" />
@@ -139,7 +140,7 @@
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
     <Company>Nicke Manarin</Company>
     <Authors>Nicke Manarin</Authors>
-    <Version>2.36.0</Version>
+    <Version>2.37.0</Version>
     <Copyright>Copyright© Nicke Manarin 2022</Copyright>
     <PackageProjectUrl>https://www.screentogif.com</PackageProjectUrl>
     <PackageReadmeFile>Readme.md</PackageReadmeFile>
