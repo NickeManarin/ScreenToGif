@@ -280,6 +280,8 @@
     <s:String x:Key="S.Options.Recorder.Frequency.Hour.Info">Кадры будут захватываться столько раз "в час",&#10;сколько установлено в окне рекордера.</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Playback">Задержка кадра:</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Playback.Info">(В мс, каждому кадру будет установлена эта задержка)</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Trigger">Задержка запуска:</s:String>
+    <s:String x:Key="S.Options.Recorder.Frequency.Trigger.Info">(Задержка захвата каждого кадра, в мс)</s:String>
     <s:String x:Key="S.Options.Recorder.Frequency.Interval">Каждый кадр будет захвачен с интервалом {0}.</s:String>
     
     <s:String x:Key="S.Options.Recorder.Mode">Режим захвата</s:String>
@@ -792,22 +794,28 @@
     <s:String x:Key="S.Preset.Gif.Embedded.Transparent.Description">Поддерживает сохранение анимации с прозрачным фоном.</s:String>
     <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Title">Высокое качество • Графика</s:String>
     <s:String x:Key="S.Preset.Gif.Embedded.Graphics.Description">Для записей с малым количеством цветов.</s:String>
-    <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Title">FFmpeg - Более высокое качество</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Title">KGy SOFT • Сбалансированный</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Balanced.Description">Хорошее качество, для фотоподобных, исп. квантователь Wu без искажений.</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.High.Title">KGy SOFT • Высокое качество</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.High.Description">Высокое качество, для фотоподобных, исп. квантователь Wu с более высоким битовым уровнем и рассеиванием ошибок Floyd-Steinberg.</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Fast.Title">KGy SOFT • Низкое качество, более быстрое кодирование</s:String>
+    <s:String x:Key="S.Preset.Gif.KGySoft.Fast.Description">Квантование всех кадров с одной предопределенной палитрой "web-safe" и упорядоченным сглаживанием Bayer 8x8.</s:String>
+    <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Title">FFmpeg • Более высокое качество</s:String>
     <s:String x:Key="S.Preset.Gif.Ffmpeg.High.Description">Более высокое качество, но с большим размером файла.</s:String>
-    <s:String x:Key="S.Preset.Gif.Ffmpeg.Low.Title">FFmpeg - Более низкое качество</s:String>
+    <s:String x:Key="S.Preset.Gif.Ffmpeg.Low.Title">FFmpeg • Более низкое качество</s:String>
     <s:String x:Key="S.Preset.Gif.Ffmpeg.Low.Description">Более низкое качество, но с меньшим размером файла.</s:String>
-    <s:String x:Key="S.Preset.Gif.Gifski.High.Title">Gifski - Более высокое качество</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.High.Title">Gifski • Более высокое качество</s:String>
     <s:String x:Key="S.Preset.Gif.Gifski.High.Description">Более высокое качество, но с большим размером файла.</s:String>
-    <s:String x:Key="S.Preset.Gif.Gifski.Low.Title">Gifski - Более низкое качество</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.Low.Title">Gifski • Более низкое качество</s:String>
     <s:String x:Key="S.Preset.Gif.Gifski.Low.Description">Более низкое качество, но с меньшим размером файла.</s:String>
-    <s:String x:Key="S.Preset.Gif.Gifski.Fast.Title">Gifski - Более низкое качество с быстрым кодирование</s:String>
+    <s:String x:Key="S.Preset.Gif.Gifski.Fast.Title">Gifski • Более низкое качество с быстрым кодирование</s:String>
     <s:String x:Key="S.Preset.Gif.Gifski.Fast.Description">Еще более низкое качество, но более быстрое кодирование и меньший размер файла.</s:String>
-    <s:String x:Key="S.Preset.Gif.System.Low.Title">System - Низкое качество</s:String>
+    <s:String x:Key="S.Preset.Gif.System.Low.Title">System • Низкое качество</s:String>
     <s:String x:Key="S.Preset.Gif.System.Low.Description">Низкое качество, но более быстрое кодирование.</s:String>
     
-    <s:String x:Key="S.Preset.Apng.Ffmpeg.High.Title">FFmpeg - Высокое качество</s:String>
+    <s:String x:Key="S.Preset.Apng.Ffmpeg.High.Title">FFmpeg • Высокое качество</s:String>
     <s:String x:Key="S.Preset.Apng.Ffmpeg.High.Description">Высокое качество, небольшой размер файла, но более медленное кодирование.</s:String>
-    <s:String x:Key="S.Preset.Apng.Ffmpeg.Low.Title">FFmpeg - Более низкое качество</s:String>
+    <s:String x:Key="S.Preset.Apng.Ffmpeg.Low.Title">FFmpeg • Более низкое качество</s:String>
     <s:String x:Key="S.Preset.Apng.Ffmpeg.Low.Description">Более низкое качество, небольшой размер файла и более быстрое кодирование.</s:String>
     <s:String x:Key="S.Preset.Webp.Ffmpeg.High.Title">Высокое качество</s:String>
     <s:String x:Key="S.Preset.Webp.Ffmpeg.High.Description">Высокое качество и небольшой размер файла.</s:String>
@@ -1058,7 +1066,7 @@
     <s:String x:Key="S.Editor.Image.Overlay">Наложение</s:String>
     <s:String x:Key="S.Editor.Image.FreeDrawing">Рисование</s:String>
     <s:String x:Key="S.Editor.Image.Shape">Фигуры</s:String>
-    <s:String x:Key="S.Editor.Image.Clicks">Клики</s:String>
+    <s:String x:Key="S.Editor.Image.MouseEvents">События&#x0d;мыши</s:String>
     <s:String x:Key="S.Editor.Image.Watermark">Водяной знак</s:String>
     <s:String x:Key="S.Editor.Image.Cinemagraph">Синемаграф</s:String>
     <s:String x:Key="S.Editor.Image.Border">Рамка</s:String>
@@ -1373,12 +1381,12 @@
     <s:String x:Key="S.Shapes.Shapes.Remove">Убрать</s:String>
     <s:String x:Key="S.Shapes.Fill">Заливка</s:String>
 
-    <!--Editor • Mouse clicks-->
-    <s:String x:Key="S.MouseClicks">Нажатия мыши</s:String>
+    <!--Editor • Mouse events-->
+    <s:String x:Key="S.MouseEvents">События мыши</s:String>
+    <s:String x:Key="S.MouseHighlight.Color">Цвет подсветки курсора:</s:String>
     <s:String x:Key="S.MouseClicks.Color.Left">Цвет левой кнопки:</s:String>
     <s:String x:Key="S.MouseClicks.Color.Middle">Цвет средней кнопки:</s:String>
     <s:String x:Key="S.MouseClicks.Color.Right">Цвет правой кнопки:</s:String>
-    <s:String x:Key="S.MouseClicks.Warning.None">В вашем проекте не обнаружено щелчков мыши.</s:String>
     
     <!--Editor • Watermark-->
     <s:String x:Key="S.Watermark.Image">Изображение</s:String>
@@ -1534,6 +1542,8 @@
     <s:String x:Key="S.SaveAs.Encoder.Info">Кодировщик, ответственный за генерацию выходного файла.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif">ScreenToGif</s:String>
     <s:String x:Key="S.SaveAs.Encoder.ScreenToGif.Info">Встроенный кодировщик.</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.KGySoft">KGy SOFT</s:String>
+    <s:String x:Key="S.SaveAs.Encoder.KGySoft.Info">KGy SOFT кодировщик.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System">Системный</s:String>
     <s:String x:Key="S.SaveAs.Encoder.System.Info">Кодировщик, доступный в системе.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Ffmpeg">FFmpeg</s:String>
@@ -1541,7 +1551,7 @@
     <s:String x:Key="S.SaveAs.Encoder.Gifski">Gifski</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Gifski.Info">Внешний кодировщик, созданный Gif.ski.</s:String>
     <s:String x:Key="S.SaveAs.Encoder.Options">Параметры кодировщика</s:String>
-    
+
     <!--Editor • Save as > FFmpeg-->
     <s:String x:Key="S.SaveAs.Ffmpeg.UseParameters">Включить расширенный режим.</s:String>
     <s:String x:Key="S.SaveAs.Ffmpeg.UseParameters.Info">Введите параметры кодировщика.</s:String>
@@ -1593,7 +1603,110 @@
     <s:String x:Key="S.SaveAs.GifOptions.ChromaKey">Хромакей:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Dither">Тряска:</s:String>
     <s:String x:Key="S.SaveAs.GifOptions.Dither.Scale">Шкала Байера:</s:String>
-    
+
+    <!--Editor • Save as > KGy SOFT options-->
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer">Quantizer</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.BackColor">Background Color:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.BackColor.Info">Pixels with alpha (transparency) that are considered opaque by the selected quantizer will be blended with this color before getting the quantized color.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.AlphaThreshold">Alpha Threshold:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.AlphaThreshold.Info">Determines the input alpha value under which the quantized color will be transparent.&#x0d;&#x0a;If 0, then the result will never have transparency.&#x0d;&#x0a;If 255, then only fully transparent pixels are considered transparent.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.WhiteThreshold">White Threshold:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.WhiteThreshold.Info">Determines the lowest input brightness to consider the result color white.&#x0d;&#x0a;It affects the brightness of the result. An error diffusion dithering may compensate for the value of this parameter though.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.DirectMapping">Direct Mapping</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.DirectMapping.Info">When checked, the quantized color is determined by a direct mapping rather than looking up the nearest palette entry.&#x0d;&#x0a;It speeds up quantization but may end up in a higher contrast result. An error diffusion dithering may compensate for the value of this parameter though.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PaletteSize">Palette Size:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PaletteSize.Info">Determines the maximum size of the palette per frame.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.CustomBitLevel">Custom bit level.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.CustomBitLevel.Info">When checked, the bit level can be configured manually.&#x0d;&#x0a;⚠️ Warning: The highest bit level might require a LOT of memory!</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.BitLevel.Info">Higher value means more accuracy, larger target color space, slower processing and larger memory usage.&#x0d;&#x0a;For example, if 1, then the result can have no more than 8 colors, or when 2, no more than 64 colors.&#x0d;&#x0a;For Octree and Wu quantizers it affects also maximum number of monochromatic shades.&#x0d;&#x0a;For example, if 5 (which is the default for Wu quantizer), only 32 monochromatic shades can be differentiated.&#x0d;&#x0a;⚠️ Caution: The Wu quantizer consumes at least 650 MB with the highest value.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.BlackAndWhite">Black and White</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.BlackAndWhite.Info">Fixed 1 bpp palette with the black and white colors.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale4">Grayscale 4 colors</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale4.Info">Fixed 2 bpp palette with 4 grayscale entries.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale16">Grayscale 16 colors</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale16.Info">Fixed 4 bpp palette with 16 grayscale entries.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale">Grayscale 256 colors</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Grayscale.Info">Fixed 8 bpp palette with 256 grayscale entries.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.SystemDefault4BppPalette">System default 4 bpp palette</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.SystemDefault4BppPalette.Info">Fixed 4 bpp palette using the standard 16 sRGB colors.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.SystemDefault8BppPalette">System default 8 bpp palette</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.SystemDefault8BppPalette.Info">Fixed 8 bpp palette including the 'web-safe' colors and transparency.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Rgb332">RGB 332 palette</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.PredefinedColorsQuantizer.Rgb332.Info">Fixed 8 bpp palette using the RGB 332 color space.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.Octree">Octree Quantizer</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.Octree.Info">Optimizing palette for each frame with the Octree algorithm.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.MedianCut">Median Cut Quantizer</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.MedianCut.Info">Optimizing palette for each frame with the Median Cut algorithm.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.Wu">Wu Quantizer</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Quantizer.OptimizedPaletteQuantizer.Wu.Info">Optimizing palette for each frame with Xiaolin Wu's algorithm.</s:String>
+
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer">Ditherer</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.Strength">Strength:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.Strength.Info">The strength of the ditherer, or 0 to auto calibrate strength.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.Seed">Seed:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.Seed.Info">An integer seed to be used to produce a specific random dithering pattern.&#x0d;&#x0a;Leave empty to use a random seed for every frame.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.None">None</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.None.Info">Frames are quantized without dithering.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.IsSerpentineProcessing">Serpentine Processing</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.IsSerpentineProcessing.Info">When checked, the error propagation direction is altered from line to line.&#x0d;&#x0a;This helps to reduce the ripple effect of the error diffusion dithering.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer2X2">Bayer 2x2 (Ordered)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer2X2.Info">The 2x2 Bayer matrix pattern.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer3X3">Bayer 3x3 (Ordered)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer3X3.Info">The 3x3 Bayer matrix pattern.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer4X4">Bayer 4x4 (Ordered)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer4X4.Info">The 4x4 Bayer matrix pattern.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer8X8">Bayer 8x8 (Ordered)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.Bayer8X8.Info">The 8x8 Bayer matrix pattern.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.DottedHalftone">Dotted Halftone (Ordered)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.DottedHalftone.Info">A 8x8 matrix with a dotted halftone pattern.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.BlueNoise">Blue Noise (Ordered)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.OrderedDitherer.BlueNoise.Info">A 64x64 matrix with a blue noise pattern.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Atkinson">Atkinson (Error Diffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Atkinson.Info">Bill Atkinson's 4x3 matrix with 6 effective values.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Burkes">Burkes (Error Diffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Burkes.Info">D. Burkes' 5x2 matrix.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.FloydSteinberg">Floyd-Steinberg (Error Diffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.FloydSteinberg.Info">The original 3x2 matrix by Floyd and Steinberg.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.JarvisJudiceNinke">Jarvis-Judice-Ninke (Error Diffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.JarvisJudiceNinke.Info">An 5x3 matrix by Jarvis, Judice and Ninke.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Sierra3">Sierra 3 (Error Diffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Sierra3.Info">Frankie Sierra's 5x3 matrix.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Sierra2">Sierra 2 (Error Diffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Sierra2.Info">Frankie Sierra's 5x2 matrix.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.SierraLite">Sierra Lite (Error Diffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.SierraLite.Info">Frankie Sierra's 3x2 matrix.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.StevensonArce">Stevenson-Arce (Error Diffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.StevensonArce.Info">A 7x4 hexagonal matrix by Stevenson and Arce.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Stucki">Stucki (Error Diffusion)</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.ErrorDiffusionDitherer.Stucki.Info">Stucki's 5x3 matrix.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.RandomNoiseDitherer">Random Noise</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.RandomNoiseDitherer.Info">Random white noise.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.InterleavedGradientNoiseDitherer">Interleaved Gradient Noise</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Ditherer.InterleavedGradientNoiseDitherer.Info">Nonrandom gradient noise generated by a formula.</s:String>
+
+    <s:String x:Key="S.SaveAs.KGySoft.Preview">Preview</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Preview.ShowCurrentFrame">Show current frame.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Preview.ShowCurrentFrame.Info">When checked, the preview shows the current frame instead of a standard image example.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Preview.Refresh">Auto preview is disabled due to the high memory requirement of the current settings. Click to refresh the preview.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Preview.Error">Failed to generate preview: {0}&#x0d;&#x0a;Click to try to generate it again.</s:String>
+
+    <s:String x:Key="S.SaveAs.KGySoft.Animation">Animation Settings</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.EndlessLoop">Endless loop.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.EndlessLoop.Info">When checked, the animation will be looped indefinitely.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.PingPong">Back and forth.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.PingPong.Info">When checked, the animation will be played back and forth.&#x0d;&#x0a;This is achieved by duplicating the frames meaning larger file size and longer encoding time.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.LoopCount">Repeat Count:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.LoopCount.Info">Specifies how many times the animation will be played.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames">Allow delta frames.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaFrames.Info">When checked, unchanged pixels are attempted to be detected during the encoding.&#x0d;&#x0a;When using with an optimized quantizer, this option makes possible for a frame to have more than 256 colors.&#x0d;&#x0a;This option is ignored if the quantizer does not use transparency and Allow Clipped Frames is unchecked.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.DeltaTolerance">Delta Tolerance:</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.DeltaTolerance.Info">Specifies the maximum tolerance when detecting changed pixels.&#x0d;&#x0a;If 0, then no difference is tolerated at all.&#x0d;&#x0a;If 255, then there might be frames (or even all of them) that are added with no content.&#x0d;&#x0a;Reasonable range is between 0 and 16 for an optimized quantizer. The ones with fixed colors can be used with somewhat larger values with dithering.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.HighDeltaTolerance">If Delta Tolerance is too high the result might have poor quality. Click to reset delta tolerance.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedFrames">Allow clipped frames.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedFrames.Info">When checked, the encoder is allowed to add smaller frames than the actual resolution.&#x0d;&#x0a;If Allow Delta Frames is unchecked, then allows only clipping possible transparent borders.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowDeltaIgnored">Allow Delta Frames is ignored because the current configuration does not use alpha and Allow Clipped Frames is unchecked. Click to enable clipped frames.</s:String>
+    <s:String x:Key="S.SaveAs.KGySoft.Animation.AllowClippedIgnored">Allow Clipped Frames has no effect because the current configuration does not use alpha and Allow Delta Frames is unchecked. Click to enable delta frames.</s:String>
+
     <!--Editor • Save as > Apng options-->
     <s:String x:Key="S.SaveAs.ApngOptions">Настройки Apng</s:String>
     <s:String x:Key="S.SaveAs.ApngOptions.Prediction">Упреждение:</s:String>
